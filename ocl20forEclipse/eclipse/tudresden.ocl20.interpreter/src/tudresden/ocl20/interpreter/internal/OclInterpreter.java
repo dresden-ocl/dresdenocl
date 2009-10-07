@@ -100,9 +100,7 @@ import tudresden.ocl20.pivot.pivotmodel.Operation;
 import tudresden.ocl20.pivot.pivotmodel.Parameter;
 import tudresden.ocl20.pivot.pivotmodel.Property;
 import tudresden.ocl20.pivot.pivotmodel.Type;
-import tudresden.ocl20.pivot.standardlibrary.java.exceptions.InvalidException;
-import tudresden.ocl20.pivot.standardlibrary.java.factory.JavaStandardLibraryFactory;
-import tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclModelInstanceObject;
+import tudresden.ocl20.pivot.standardlibrary.java.JavaStandardlibraryPlugin;
 
 /**
  * <p>
@@ -126,9 +124,11 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 	private static final Logger LOGGER =
 			OclInterpreterPlugin.getLogger(OclInterpreter.class);
 
-	// /** The {@link IStandardLibraryFactory} of this {@link IOclInterpreter}. */
-	// private IStandardLibraryFactory myStandardLibraryFactory =
-	// JavaStandardlibraryPlugin.getStandardLibraryFactory();
+	// TODO: in future versions, this hard-coded reference should be replaced by
+	// something dynamic (registry lookup, etc.)
+	/** The {@link IStandardLibraryFactory} of this {@link IOclInterpreter}. */
+	private IStandardLibraryFactory myStandardLibraryFactory =
+			JavaStandardlibraryPlugin.getStandardLibraryFactory();
 
 	/** Specifies if model access was needed to interpret result. */
 	private boolean isModelAccessNeeded = false;
@@ -229,8 +229,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 		/* Try to get the modelObject as OCL object. */
 		if (aModelObject != null) {
-			oclModelObject =
-					JavaStandardLibraryFactory.INSTANCE.createOclAny(aModelObject);
+			oclModelObject = myStandardLibraryFactory.createOclAny(aModelObject);
 		}
 
 		else {
@@ -492,7 +491,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		/* Set the result variable to null or its result. */
 		if (resultValue != null) {
 			OclAny oclResult;
-			oclResult = JavaStandardLibraryFactory.INSTANCE.createOclAny(resultValue);
+			oclResult = myStandardLibraryFactory.createOclAny(resultValue);
 
 			this.setEnviromentVariable(RESULT_VARIABLE_NAME, oclResult);
 		}
@@ -674,8 +673,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 			/* Try to get the modelObject as OCL object. */
 			if (modelObject != null) {
-				oclModelObject =
-						JavaStandardLibraryFactory.INSTANCE.createOclAny(modelObject);
+				oclModelObject = myStandardLibraryFactory.createOclAny(modelObject);
 			}
 
 			else {
@@ -943,7 +941,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 		OclAny oclValue;
 
-		oclValue = JavaStandardLibraryFactory.INSTANCE.createOclAny(value);
+		oclValue = myStandardLibraryFactory.createOclAny(value);
 		this.myEnvironment.addVar(name, oclValue);
 
 		/* Eventually log the exit of this method. */
@@ -1052,12 +1050,12 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 				&& myEnvironment.getCachedResult(booleanLiteralExp) != null) {
 			result = myEnvironment.getCachedResult(booleanLiteralExp);
 		}
-
 		/* Else compute the result. */
 		else {
+
 			result =
-					JavaStandardLibraryFactory.INSTANCE
-							.createOclBoolean(booleanLiteralExp.isBooleanSymbol());
+					myStandardLibraryFactory.createOclBoolean(booleanLiteralExp
+							.isBooleanSymbol());
 
 			/* Eventually cache the result. */
 			if (isCachingEnabled && !isModelAccessNeeded) {
@@ -1204,7 +1202,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 					while (currentElement.isLessEqual(lastElement).isTrue()) {
 						resultParts.add(currentElement);
 						currentElement =
-								currentElement.add(JavaStandardLibraryFactory.INSTANCE
+								currentElement.add(myStandardLibraryFactory
 										.createOclInteger(1L));
 					}
 				}
@@ -1226,7 +1224,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 					// no else.
 				}
 
-				result = JavaStandardLibraryFactory.INSTANCE.createOclSet(tempList);
+				result = myStandardLibraryFactory.createOclSet(tempList);
 			}
 
 			else if (collectionKind.equals(CollectionKind.ORDERED_SET)) {
@@ -1246,27 +1244,32 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 				 * FIXME Michael: Interface does not recognise that U is an OclAny; for
 				 * better performance: let interpreter create collections of OclAnys?
 				 */
-				result =
-						JavaStandardLibraryFactory.INSTANCE.createOclOrderedSet(tempList);
+				result = myStandardLibraryFactory.createOclOrderedSet(tempList);
 			}
 
 			else if (collectionKind.equals(CollectionKind.SEQUENCE)) {
-				result =
-						JavaStandardLibraryFactory.INSTANCE.createOclSequence(resultParts);
+				result = myStandardLibraryFactory.createOclSequence(resultParts);
 			}
 
 			else if (collectionKind.equals(CollectionKind.BAG)) {
-				result = JavaStandardLibraryFactory.INSTANCE.createOclBag(resultParts);
+				result = myStandardLibraryFactory.createOclBag(resultParts);
 			}
 
 			else {
-				// FIXME Michael: what is the type of this?
 				String msg;
 
 				msg =
 						"UnknownKind of collection in CollectionLiteralExp. Kind was "
 								+ collectionKind;
-				result = JavaStandardLibraryFactory.INSTANCE.createOclInvalid(msg);
+
+				if (LOGGER.isInfoEnabled()) {
+					LOGGER.warn(msg);
+				}
+				// no else.
+
+				result =
+						myStandardLibraryFactory.createOclInvalid(collectionLiteralExp
+								.getType(), new IllegalArgumentException(msg));
 			}
 
 			/* Eventually cache the result. */
@@ -1314,15 +1317,10 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 		/* Else compute the result. */
 		else {
-			IModelInstanceEnumerationLiteral miEnumerationLiteral;
-
-			miEnumerationLiteral =
-					myEnvironment.getModelInstance().findEnumerationLiteral(
-							anEnumLiteralExp.getReferredEnumLiteral());
 
 			result =
-					this.myOclInstanceAdapterFactory
-							.createOclEnumLiteral(miEnumerationLiteral);
+					myStandardLibraryFactory.createOclEnumLiteral(anEnumLiteralExp
+							.getReferredEnumLiteral());
 
 			/* Eventually cache the result. */
 			if (isCachingEnabled && !isModelAccessNeeded) {
@@ -1477,10 +1475,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 			intValue = intLiteralExp.getIntegerSymbol();
 
-			// FIXME Michael: IntegerLiteralExp only works with integers, not Longs!
-			result =
-					JavaStandardLibraryFactory.INSTANCE.createOclInteger(new Long(
-							intValue));
+			result = myStandardLibraryFactory.createOclInteger(new Long(intValue));
 
 			/* Eventually cache the result. */
 			if (isCachingEnabled && !isModelAccessNeeded) {
@@ -1527,10 +1522,9 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 		OclAny result = null;
 
-		// FIXME Michael: hmm... instance of InvalidType seems to be needed
 		result =
-				JavaStandardLibraryFactory.INSTANCE.createOclInvalid(invalidLiteralExp
-						.getType(), new Exception());
+				myStandardLibraryFactory.createOclInvalid(invalidLiteralExp.getType(),
+						new Exception());
 
 		/* Eventually log the exit of this method. */
 		if (LOGGER.isDebugEnabled()) {
@@ -1700,8 +1694,9 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 					}
 					// no else.
 
-					// TODO Michael: invalid or undefined?
-					result = JavaStandardLibraryFactory.INSTANCE.createOclInvalid(msg);
+					result =
+							myStandardLibraryFactory.createOclInvalid(
+									anIteratorExp.getType(), new IllegalArgumentException(msg));
 				}
 
 				else {
@@ -1728,7 +1723,9 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 					}
 					// no else.
 
-					result = JavaStandardLibraryFactory.INSTANCE.createOclInvalid(msg);
+					result =
+							myStandardLibraryFactory.createOclInvalid(
+									anIteratorExp.getType(), new IllegalArgumentException(msg));
 				}
 
 				else {
@@ -1749,7 +1746,9 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 					}
 					// no else.
 
-					result = JavaStandardLibraryFactory.INSTANCE.createOclInvalid(msg);
+					result =
+							myStandardLibraryFactory.createOclInvalid(
+									anIteratorExp.getType(), new IllegalArgumentException(msg));
 				}
 
 				else {
@@ -1771,7 +1770,9 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 					}
 					// no else.
 
-					result = JavaStandardLibraryFactory.INSTANCE.createOclInvalid(msg);
+					result =
+							myStandardLibraryFactory.createOclInvalid(
+									anIteratorExp.getType(), new IllegalArgumentException(msg));
 				}
 
 				else {
@@ -1791,7 +1792,9 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 					}
 					// no else.
 
-					result = JavaStandardLibraryFactory.INSTANCE.createOclInvalid(msg);
+					result =
+							myStandardLibraryFactory.createOclInvalid(
+									anIteratorExp.getType(), new IllegalArgumentException(msg));
 				}
 
 				else {
@@ -1813,7 +1816,9 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 					}
 					// no else.
 
-					result = JavaStandardLibraryFactory.INSTANCE.createOclInvalid(msg);
+					result =
+							myStandardLibraryFactory.createOclInvalid(
+									anIteratorExp.getType(), new IllegalArgumentException(msg));
 				}
 
 				else {
@@ -1835,7 +1840,9 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 					}
 					// no else.
 
-					result = JavaStandardLibraryFactory.INSTANCE.createOclInvalid(msg);
+					result =
+							myStandardLibraryFactory.createOclInvalid(
+									anIteratorExp.getType(), new IllegalArgumentException(msg));
 				}
 
 				else {
@@ -1852,7 +1859,15 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 					String msg;
 
 					msg = "collect() may have at most one iterator variable";
-					result = JavaStandardLibraryFactory.INSTANCE.createOclInvalid(msg);
+
+					if (LOGGER.isInfoEnabled()) {
+						LOGGER.warn(msg);
+					}
+					// no else.
+
+					result =
+							myStandardLibraryFactory.createOclInvalid(
+									anIteratorExp.getType(), new IllegalArgumentException(msg));
 				}
 
 				else {
@@ -2006,14 +2021,6 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			/* Else get the referred operation's name. */
 			else {
 				opName = referredOperation.getName();
-				/*
-				 * Eventually map the operation name from the name of essential OCL to
-				 * the name of the standard library.
-				 */
-				// TODO Michael: this happens in the SL now -> remove?
-				opName =
-						this.myEnvironment.getModelInstance().getOperationName(opName,
-								parameters.length + 1);
 			}
 
 			source = null;
@@ -2025,34 +2032,8 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			/* Get the source type for static operations. */
 			if (referredOperation != null && referredOperation.isStatic()) {
 
-				/* Find the source type. */
-				IModelInstanceTypeObject modelInstanceTypeObject;
-				modelInstanceTypeObject =
-						this.myEnvironment.getModelInstance().findModelTypeObject(
-								anOperationCallExp.getSourceType());
-
-				if (modelInstanceTypeObject != null) {
-					source =
-							this.myOclInstanceAdapterFactory
-									.createOclType(modelInstanceTypeObject);
-				}
-
-				else {
-					// FIXME Michael: OclInvalid instead? -> is this part needed anyway?
-					String msg;
-
-					msg = "The Type " + anOperationCallExp.getSourceType();
-					msg += " was not adapted by the IModelInstance. ";
-
-					if (LOGGER.isInfoEnabled()) {
-						LOGGER.warn(msg);
-					}
-					// no else.
-
-					source =
-							JavaStandardLibraryFactory.INSTANCE.createOclUndefined(
-									anOperationCallExp.getSourceType(), msg);
-				}
+				myEnvironment.getModelInstance().invokeStaticOperation(
+						referredOperation, args);
 			}
 
 			/* Compute the source type for non-static operations. */
@@ -2127,8 +2108,8 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 					msg = "@Pre is not available during constraint preparation.";
 					result =
-							JavaStandardLibraryFactory.INSTANCE.createOclUndefined(
-									anOperationCallExp.getType(), msg);
+							myStandardLibraryFactory.createOclUndefined(anOperationCallExp
+									.getType(), msg);
 				}
 
 				else {
@@ -2140,8 +2121,8 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 								"@Pre value of " + anOperationCallExp + " has not been found.";
 
 						result =
-								JavaStandardLibraryFactory.INSTANCE.createOclUndefined(
-										anOperationCallExp.getType(), msg);
+								myStandardLibraryFactory.createOclUndefined(anOperationCallExp
+										.getType(), msg);
 					}
 				}
 			}
@@ -2156,13 +2137,13 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 					String msg;
 
 					this.myEnvironment.savePostconditionValue(anOperationCallExp,
-							JavaStandardLibraryFactory.INSTANCE.createOclBoolean(source
+							myStandardLibraryFactory.createOclBoolean(source
 									.getInvalidReason() == null));
 
 					msg = "oclIsNew() is not available during preparation.";
 					result =
-							JavaStandardLibraryFactory.INSTANCE.createOclUndefined(
-									anOperationCallExp.getType(), msg);
+							myStandardLibraryFactory.createOclUndefined(anOperationCallExp
+									.getType(), msg);
 				}
 
 				else {
@@ -2176,52 +2157,13 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			 * used.
 			 */
 			else if (opName.equals("allInstances")) {
-				// List<String> typePath;
-				// String typeName;
-				//
-				// List<IModelInstanceElement> objectInstances;
-				//
-				// List<OclAny> instances;
-				//
-				// typeName = anOperationCallExp.getSourceType().getQualifiedName();
-				//
-				// /*
-				// * Split the canonical name of the source type into its packages.
-				// */
-				// if (StringUtils.isEmpty(typeName)) {
-				// typePath = Collections.emptyList();
-				// }
-				// else {
-				// typePath = Arrays.asList(typeName.split("::"));
-				// }
-				//
-				// objectInstances =
-				// new ArrayList<IModelInstanceElement>(this.myEnvironment
-				// .getModelInstance().getObjectsOfType(typePath));
-				//
-				// instances = new ArrayList<OclAny>(objectInstances.size());
-				//
-				// /*
-				// * Iterate through the instances and add them to the instances list.
-				// */
-				// for (IModelInstanceElement anInstance : objectInstances) {
-				// instances.add(this.myOclInstanceAdapterFactory
-				// .createOclRoot(anInstance));
-				// }
-				//
-				// result = JavaStandardLibraryFactory.INSTANCE.createOclSet(instances);
-				// TODO Michael: use IMInstance instead
+
 				Type type = anOperationCallExp.getSourceType();
 
 				Set<IModelInstanceObject> imiResult =
 						this.myEnvironment.getModelInstance().getAllInstances(type);
 
-				/*
-				 * FIXME Michael: the SL does not have any method to create an OclSet
-				 * out of IMIElements; should return IMICollection!
-				 */
-
-				result = null;
+				result = myStandardLibraryFactory.createOclSet(imiResult);
 			}
 
 			/* The standard case. Invoke the operation and compute the result. */
@@ -2231,8 +2173,8 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 					if (source.oclIsUndefined().isTrue()) {
 						result =
-								JavaStandardLibraryFactory.INSTANCE.createOclUndefined(
-										anOperationCallExp.getType(), source.getUndefinedreason());
+								myStandardLibraryFactory.createOclUndefined(anOperationCallExp
+										.getType(), source.getUndefinedreason());
 					}
 
 					else {
@@ -2336,63 +2278,42 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 							this.myEnvironment.getModelInstance().getStaticProperty(
 									referredProperty);
 
-					result = JavaStandardLibraryFactory.INSTANCE.createOclAny(imiElement);
+					result = myStandardLibraryFactory.createOclAny(imiElement);
 
 				} catch (PropertyNotFoundException e) {
-					// TODO Michael: OK? referredProperty.getType() or
-					// propertyCallExp.getType()?
+					if (LOGGER.isInfoEnabled()) {
+						LOGGER.warn(e);
+					}
+					// no else.
+
 					result =
-							JavaStandardLibraryFactory.INSTANCE.createOclInvalid(
-									propertyCallExp.getType(), e);
+							myStandardLibraryFactory.createOclInvalid(propertyCallExp
+									.getType(), e);
 				} catch (PropertyAccessException e) {
+					if (LOGGER.isInfoEnabled()) {
+						LOGGER.warn(e);
+					}
+					// no else.
+
 					result =
-							JavaStandardLibraryFactory.INSTANCE.createOclInvalid(
-									propertyCallExp.getType(), e);
+							myStandardLibraryFactory.createOclInvalid(propertyCallExp
+									.getType(), e);
 				}
 
-				// /* Find the source type. */
-				// IModelInstanceTypeObject modelInstanceTypeObject;
-				// modelInstanceTypeObject =
-				// this.myEnvironment.getModelInstance().findModelTypeObject(
-				// propertyCallExp.getSourceType());
-				//
-				// if (modelInstanceTypeObject != null) {
-				// sourceObject =
-				// this.myOclInstanceAdapterFactory
-				// .createOclType(modelInstanceTypeObject);
-				// }
-				//
-				// else {
-				// String msg;
-				//
-				// msg = "The Type " + propertyCallExp.getSourceType();
-				// msg += " was not adapted by the IModelInstance. ";
-				//
-				// if (LOGGER.isInfoEnabled()) {
-				// LOGGER.warn(msg);
-				// }
-				// // no else.
-				//
-				// sourceObject =
-				// JavaStandardLibraryFactory.INSTANCE.createOclUndefined(
-				// propertyCallExp.getSourceType(), msg);
-				// }
 			}
 
 			/* Else interpret the sourceExp. */
 			else {
 				OclAny source = doSwitch((EObject) propertyCallExp.getSource());
-				// TODO Michael: necessary?
 				try {
 					sourceObject = (OclModelInstanceObject) source;
 				} catch (ClassCastException e) {
 					result =
-							JavaStandardLibraryFactory.INSTANCE.createOclInvalid(
-									propertyCallExp.getType(), e);
+							myStandardLibraryFactory.createOclInvalid(propertyCallExp
+									.getType(), e);
 				}
 			}
 
-			// TODO Michael: what kind of hack is this?
 			qualifiedPropertyName = referredProperty.getQualifiedName();
 			propertyName = referredProperty.getName();
 
@@ -2438,68 +2359,8 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 			/* Else the property value must be set in the model instance. */
 			else {
-				// TODO Michael: result should already be invalid
-				// try {
-				Type propertyType;
+				result = sourceObject.getProperty(referredProperty);
 
-				propertyType = propertyCallExp.getType();
-
-				// TODO Michael: are those methods needed anymore? Adaption in the
-				// factories should take care of this
-				if (propertyType instanceof OrderedSetType) {
-					result = sourceObject.getPropertyValueAsOrderedSet(propertyName);
-				}
-
-				else if (propertyType instanceof SequenceType) {
-					result = sourceObject.getPropertyValueAsSequence(propertyName);
-				}
-
-				else if (propertyType instanceof SetType) {
-					result = sourceObject.getPropertyValueAsSet(propertyName);
-				}
-
-				else if (propertyType instanceof BagType) {
-					result = sourceObject.getPropertyValueAsBag(propertyName);
-				}
-
-				else {
-					result = sourceObject.getProperty(referredProperty);
-				}
-				// }
-
-				//				
-				// catch (NoSuchFieldException e) {
-				// // String msg;
-				// //
-				// // msg =
-				// "Field not found during interpretation of propertyCallExp. ";
-				// // msg += "The fields name was " + propertyName + ". ";
-				// // msg += "The source object was " + sourceObject + ". ";
-				// //
-				// // LOGGER.error(msg, e);
-				// //
-				// // result =
-				// JavaStandardLibraryFactory.INSTANCE.createOclInvalid(msg);
-				// result =
-				// JavaStandardLibraryFactory.INSTANCE.createOclInvalid(
-				// propertyCallExp.getType(), e);
-				// }
-				//
-				// catch (IllegalAccessException e) {
-				// // String msg;
-				// //
-				// // msg =
-				// //
-				// "Field could not accessed during interpretation of propertyCallExp. ";
-				// // msg += "The fields name was " + propertyName + ". ";
-				// // msg += "The source object was " + sourceObject + ". ";
-				// //
-				// // LOGGER.error(msg, e);
-				// //
-				// result =
-				// JavaStandardLibraryFactory.INSTANCE.createOclInvalid(
-				// propertyCallExp.getType(), e);
-				// }
 			}
 
 			/* If the result is an OclObject, the result can not be cached. */
@@ -2565,8 +2426,8 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		/* Else compute the result. */
 		else {
 			result =
-					JavaStandardLibraryFactory.INSTANCE.createOclReal(realLiteralExp
-							.getRealSymbol());
+					myStandardLibraryFactory
+							.createOclReal(realLiteralExp.getRealSymbol());
 
 			/* Eventually cache the result. */
 			if (isCachingEnabled && !isModelAccessNeeded) {
@@ -2620,7 +2481,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		/* Else compute the result. */
 		else {
 			result =
-					JavaStandardLibraryFactory.INSTANCE.createOclString(aStringLiteralExp
+					myStandardLibraryFactory.createOclString(aStringLiteralExp
 							.getStringSymbol());
 
 			/* Eventually cache the result. */
@@ -2687,9 +2548,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 				partValues.add(doSwitch((EObject) aLiteralPart));
 			}
 
-			result =
-					JavaStandardLibraryFactory.INSTANCE.createOclTuple(partNames,
-							partValues);
+			result = myStandardLibraryFactory.createOclTuple(partNames, partValues);
 
 			/* Eventually cache the result. */
 			if (isCachingEnabled && !isModelAccessNeeded) {
@@ -2799,7 +2658,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 			// FIXME Michael: how is "T" bound?
 			result =
-					JavaStandardLibraryFactory.INSTANCE.createOclType(typeLiteralExp
+					myStandardLibraryFactory.createOclType(typeLiteralExp
 							.getReferredType());
 
 			/* Eventually cache the result. */
@@ -2892,8 +2751,8 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 					// no else.
 
 					result =
-							JavaStandardLibraryFactory.INSTANCE.createOclUndefined(aVariable
-									.getType(), msg);
+							myStandardLibraryFactory.createOclUndefined(aVariable.getType(),
+									msg);
 				}
 			}
 
@@ -3012,7 +2871,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			resultType = undefinedLiteralExp.getType();
 
 			result =
-					JavaStandardLibraryFactory.INSTANCE.createOclUndefined(resultType,
+					myStandardLibraryFactory.createOclUndefined(resultType,
 							"UndefinedLiteralExp");
 
 			/* Eventually cache the result. */
@@ -3062,10 +2921,8 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		for (Variable aVariable : oclExpression.getParameter()) {
 
 			if (parameters[index] != null) {
-				this
-						.setEnviromentVariable(aVariable.getName(),
-								JavaStandardLibraryFactory.INSTANCE
-										.createOclAny(parameters[index]));
+				this.setEnviromentVariable(aVariable.getName(),
+						myStandardLibraryFactory.createOclAny(parameters[index]));
 			}
 
 			else {
@@ -3075,8 +2932,8 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 				msg = "Parameter " + aVariable.getName() + " was undefined";
 
 				value =
-						JavaStandardLibraryFactory.INSTANCE.createOclUndefined(aVariable
-								.getType(), msg);
+						myStandardLibraryFactory.createOclUndefined(aVariable.getType(),
+								msg);
 
 				this.setEnviromentVariable(aVariable.getName(), value);
 			}
@@ -3156,9 +3013,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			String msg;
 
 			msg = "Iterator any() resulted in undefined.";
-			result =
-					JavaStandardLibraryFactory.INSTANCE.createOclUndefined(resultType,
-							msg);
+			result = myStandardLibraryFactory.createOclUndefined(resultType, msg);
 		}
 		// no else.
 
@@ -3243,12 +3098,11 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 		/* Compute the result type depending on the given result type. */
 		if (resultType instanceof BagType) {
-			result = JavaStandardLibraryFactory.INSTANCE.createOclBag(resultList);
+			result = myStandardLibraryFactory.createOclBag(resultList);
 		}
 
 		else if (resultType instanceof SequenceType) {
-			result =
-					JavaStandardLibraryFactory.INSTANCE.createOclSequence(resultList);
+			result = myStandardLibraryFactory.createOclSequence(resultList);
 		}
 
 		else {
@@ -3262,7 +3116,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			}
 			// no else.
 
-			result = JavaStandardLibraryFactory.INSTANCE.createOclInvalid(msg);
+			result = myStandardLibraryFactory.createOclInvalid(msg);
 		}
 
 		/* Eventually log the exit of this method. */
@@ -3318,7 +3172,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		OclAny result;
 
 		/* By default the result is false. */
-		result = JavaStandardLibraryFactory.INSTANCE.createOclBoolean(false);
+		result = myStandardLibraryFactory.createOclBoolean(false);
 
 		/*
 		 * Iterate over the collection and check if at least one element fulfills
@@ -3362,7 +3216,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 			/* If the body result is true, result in true. */
 			if (bodyResult.isTrue()) {
-				result = JavaStandardLibraryFactory.INSTANCE.createOclBoolean(true);
+				result = myStandardLibraryFactory.createOclBoolean(true);
 				break;
 			}
 			// no else.
@@ -3422,7 +3276,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		OclAny result;
 
 		/* By default the result is true. */
-		result = JavaStandardLibraryFactory.INSTANCE.createOclBoolean(true);
+		result = myStandardLibraryFactory.createOclBoolean(true);
 
 		/* Iterate through the collection. */
 		while (it.hasNext().isTrue()) {
@@ -3465,7 +3319,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 			/* If the body result is false, return false. */
 			if (!bodyResult.isTrue()) {
-				result = JavaStandardLibraryFactory.INSTANCE.createOclBoolean(false);
+				result = myStandardLibraryFactory.createOclBoolean(false);
 				break;
 			}
 		}
@@ -3528,7 +3382,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		resultList = new ArrayList<OclAny>();
 
 		/* By default, the result is true. */
-		result = JavaStandardLibraryFactory.INSTANCE.createOclBoolean(true);
+		result = myStandardLibraryFactory.createOclBoolean(true);
 
 		/* Iterate over the collection and check if every element is unique. */
 		while (sourceIt.hasNext().isTrue()) {
@@ -3550,7 +3404,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			}
 
 			else {
-				result = JavaStandardLibraryFactory.INSTANCE.createOclBoolean(false);
+				result = myStandardLibraryFactory.createOclBoolean(false);
 				break;
 			}
 		}
@@ -3753,8 +3607,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		}
 
 		if (result == null) {
-			result =
-					JavaStandardLibraryFactory.INSTANCE.createOclBoolean(oneFoundElement);
+			result = myStandardLibraryFactory.createOclBoolean(oneFoundElement);
 		}
 		// no else.
 
@@ -3993,13 +3846,13 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 				/* Compare the two objects. */
 				oclResult = oclComparable2.compareTo(oclComparable2);
 
-				if (oclResult.isEqualTo(
-						JavaStandardLibraryFactory.INSTANCE.createOclInteger(-1L)).isTrue()) {
+				if (oclResult.isEqualTo(myStandardLibraryFactory.createOclInteger(-1L))
+						.isTrue()) {
 					result = -1;
 				}
 
 				else if (oclResult.isEqualTo(
-						JavaStandardLibraryFactory.INSTANCE.createOclInteger(1L)).isTrue()) {
+						myStandardLibraryFactory.createOclInteger(1L)).isTrue()) {
 					result = 1;
 				}
 
@@ -4058,7 +3911,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 				}
 				// no else.
 
-				result = JavaStandardLibraryFactory.INSTANCE.createOclInvalid(msg);
+				result = myStandardLibraryFactory.createOclInvalid(msg);
 			}
 		}
 		// end while.
@@ -4067,13 +3920,11 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 		/* Check which type of collection the result shall have. */
 		if (resultType instanceof SequenceType) {
-			result =
-					JavaStandardLibraryFactory.INSTANCE.createOclSequence(resultList);
+			result = myStandardLibraryFactory.createOclSequence(resultList);
 		}
 
 		else if (resultType instanceof OrderedSetType) {
-			result =
-					JavaStandardLibraryFactory.INSTANCE.createOclOrderedSet(resultList);
+			result = myStandardLibraryFactory.createOclOrderedSet(resultList);
 		}
 
 		else {
@@ -4087,7 +3938,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			}
 			// no else.
 
-			result = JavaStandardLibraryFactory.INSTANCE.createOclInvalid(msg);
+			result = myStandardLibraryFactory.createOclInvalid(msg);
 		}
 
 		/* Eventually log the exit of this method. */
@@ -4124,28 +3975,26 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 		/* Check which type of collection shall be returned. */
 		if (resultType instanceof SetType) {
-			result = JavaStandardLibraryFactory.INSTANCE.createOclSet(resultList);
+			result = myStandardLibraryFactory.createOclSet(resultList);
 		}
 
 		else if (resultType instanceof BagType) {
-			result = JavaStandardLibraryFactory.INSTANCE.createOclBag(resultList);
+			result = myStandardLibraryFactory.createOclBag(resultList);
 		}
 
 		else if (resultType instanceof SequenceType) {
-			result =
-					JavaStandardLibraryFactory.INSTANCE.createOclSequence(resultList);
+			result = myStandardLibraryFactory.createOclSequence(resultList);
 		}
 
 		else if (resultType instanceof OrderedSetType) {
-			result =
-					JavaStandardLibraryFactory.INSTANCE.createOclOrderedSet(resultList);
+			result = myStandardLibraryFactory.createOclOrderedSet(resultList);
 		}
 
 		else {
 			String msg;
 
 			msg = "Unknown Type of Collection. Type was " + resultType.getName();
-			result = JavaStandardLibraryFactory.INSTANCE.createOclInvalid(msg);
+			result = myStandardLibraryFactory.createOclInvalid(msg);
 		}
 
 		return result;
