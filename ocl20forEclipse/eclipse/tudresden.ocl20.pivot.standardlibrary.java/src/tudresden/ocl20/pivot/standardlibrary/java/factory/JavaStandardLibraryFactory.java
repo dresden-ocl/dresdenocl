@@ -20,7 +20,6 @@ package tudresden.ocl20.pivot.standardlibrary.java.factory;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -57,6 +56,7 @@ import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceInteger;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceObject;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceReal;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceString;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceTuple;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.base.BasisJavaModelInstanceFactory;
 import tudresden.ocl20.pivot.modelbus.util.OclCollectionTypeKind;
 import tudresden.ocl20.pivot.pivotmodel.Enumeration;
@@ -184,18 +184,32 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 	 * @seetudresden.ocl20.pivot.essentialocl.standardlibrary.factory.
 	 * IStandardLibraryFactory#createOclBag(java.util.List)
 	 */
-	public <T extends OclAny> OclBag<T> createOclBag(
-			final Collection<IModelInstanceElement> elements) {
+	public <T extends OclAny> OclBag<T> createOclBag(final List<?> elements) {
 
-		OclBag<T> result;
+		List<IModelInstanceElement> imiElements;
+		imiElements = new ArrayList<IModelInstanceElement>();
+
+		for (Object element : elements) {
+
+			if (element instanceof IModelInstanceElement) {
+
+				imiElements.add((IModelInstanceElement) element);
+			}
+			else if (element instanceof OclAny) {
+
+				imiElements.add(((OclAny) element).getModelInstanceElement());
+			}
+			else {
+				throw new IllegalArgumentException("Cannot create JavaOclSet for "
+						+ elements);
+			}
+		}
 
 		IModelInstanceCollection<IModelInstanceElement> imiCollection =
-				basisJavaModelInstanceFactory.createModelInstanceCollection(elements,
-						OclCollectionTypeKind.BAG);
+				basisJavaModelInstanceFactory.createModelInstanceCollection(
+						imiElements, OclCollectionTypeKind.BAG);
 
-		result = new JavaOclBag<T>(imiCollection);
-
-		return result;
+		return new JavaOclBag<T>(imiCollection);
 	}
 
 	public <T extends OclAny> OclBag<T> createOclBag(
@@ -343,17 +357,32 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 	 * IStandardLibraryFactory#createOclOrderedSet(java.util.List)
 	 */
 	public <T extends OclAny> OclOrderedSet<T> createOclOrderedSet(
-			final List<IModelInstanceElement> elements) {
+			final List<?> elements) {
 
-		OclOrderedSet<T> result;
+		List<IModelInstanceElement> imiElements;
+		imiElements = new UniqueEList<IModelInstanceElement>();
+
+		for (Object element : elements) {
+
+			if (element instanceof IModelInstanceElement) {
+
+				imiElements.add((IModelInstanceElement) element);
+			}
+			else if (element instanceof OclAny) {
+
+				imiElements.add(((OclAny) element).getModelInstanceElement());
+			}
+			else {
+				throw new IllegalArgumentException("Cannot create JavaOclSet for "
+						+ elements);
+			}
+		}
 
 		IModelInstanceCollection<IModelInstanceElement> imiCollection =
-				basisJavaModelInstanceFactory.createModelInstanceCollection(elements,
-						OclCollectionTypeKind.ORDEREDSET);
+				basisJavaModelInstanceFactory.createModelInstanceCollection(
+						imiElements, OclCollectionTypeKind.ORDEREDSET);
 
-		result = new JavaOclOrderedSet<T>(imiCollection);
-
-		return result;
+		return new JavaOclOrderedSet<T>(imiCollection);
 	}
 
 	public <T extends OclAny> OclOrderedSet<T> createOclOrderedSet(
@@ -409,17 +438,32 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 	 * IStandardLibraryFactory#createOclSequence(java.util.List)
 	 */
 	public <T extends OclAny> OclSequence<T> createOclSequence(
-			final List<IModelInstanceElement> elements) {
+			final List<?> elements) {
 
-		OclSequence<T> result;
+		List<IModelInstanceElement> imiElements;
+		imiElements = new ArrayList<IModelInstanceElement>();
+
+		for (Object element : elements) {
+
+			if (element instanceof IModelInstanceElement) {
+
+				imiElements.add((IModelInstanceElement) element);
+			}
+			else if (element instanceof OclAny) {
+
+				imiElements.add(((OclAny) element).getModelInstanceElement());
+			}
+			else {
+				throw new IllegalArgumentException("Cannot create JavaOclSet for "
+						+ elements);
+			}
+		}
 
 		IModelInstanceCollection<IModelInstanceElement> imiCollection =
-				basisJavaModelInstanceFactory.createModelInstanceCollection(elements,
-						OclCollectionTypeKind.SEQUENCE);
+				basisJavaModelInstanceFactory.createModelInstanceCollection(
+						imiElements, OclCollectionTypeKind.SEQUENCE);
 
-		result = new JavaOclSequence<T>(imiCollection);
-
-		return result;
+		return new JavaOclSequence<T>(imiCollection);
 	}
 
 	public <T extends OclAny> OclSequence<T> createOclSequence(
@@ -449,18 +493,32 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 	 * @seetudresden.ocl20.pivot.essentialocl.standardlibrary.factory.
 	 * IStandardLibraryFactory#createOclSet(java.util.List)
 	 */
-	public <T extends OclAny> OclSet<T> createOclSet(
-			final Set<IModelInstanceElement> elements) {
+	public <T extends OclAny> OclSet<T> createOclSet(final Set<?> elements) {
 
-		OclSet<T> result;
+		Set<IModelInstanceElement> imiElements;
+		imiElements = new HashSet<IModelInstanceElement>();
+
+		for (Object element : elements) {
+
+			if (element instanceof IModelInstanceElement) {
+
+				imiElements.add((IModelInstanceElement) element);
+			}
+			else if (element instanceof OclAny) {
+
+				imiElements.add(((OclAny) element).getModelInstanceElement());
+			}
+			else {
+				throw new IllegalArgumentException("Cannot create JavaOclSet for "
+						+ elements);
+			}
+		}
 
 		IModelInstanceCollection<IModelInstanceElement> imiCollection =
-				basisJavaModelInstanceFactory.createModelInstanceCollection(elements,
-						OclCollectionTypeKind.SET);
+				basisJavaModelInstanceFactory.createModelInstanceCollection(
+						imiElements, OclCollectionTypeKind.SET);
 
-		result = new JavaOclSet<T>(imiCollection);
-
-		return result;
+		return new JavaOclSet<T>(imiCollection);
 	}
 
 	public <T extends OclAny> OclSet<T> createOclSet(
@@ -516,45 +574,15 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 	 * IStandardLibraryFactory#createOclTuple(java.util.List, java.util.List)
 	 */
 	public OclTuple createOclTuple(final List<IModelInstanceString> names,
-			final List<IModelInstanceElement> values) {
+			final List<IModelInstanceElement> values, Type type) {
 
 		OclTuple result;
-		Map<IModelInstanceString, IModelInstanceElement> elements =
-				new HashMap<IModelInstanceString, IModelInstanceElement>();
 
-		for (int index = 0; index < Math.min(names.size(), values.size()); index++) {
-			elements.put(names.get(index), values.get(index));
-		}
+		IModelInstanceTuple imiTuple =
+				basisJavaModelInstanceFactory.createModelInstanceTuple(names, values,
+						type);
 
-		result = new JavaOclTuple(elements);
-
-		return result;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @seetudresden.ocl20.pivot.essentialocl.standardlibrary.factory.
-	 * IStandardLibraryFactory#createOclTupleObject(java.util.List,
-	 * java.util.List)
-	 */
-	public OclTuple createOclTupleObject(final List<String> names,
-			final List<Object> values) {
-
-		OclTuple result;
-		Map<IModelInstanceString, IModelInstanceElement> elements =
-				new HashMap<IModelInstanceString, IModelInstanceElement>();
-
-		for (int index = 0; index < Math.min(names.size(), values.size()); index++) {
-			IModelInstanceString imiString =
-					BasisJavaModelInstanceFactory.createModelInstanceString(names
-							.get(index));
-			IModelInstanceElement imiElement =
-					basisJavaModelInstanceFactory.createModelInstanceElement(values
-							.get(index));
-			elements.put(imiString, imiElement);
-		}
-
-		result = new JavaOclTuple(elements);
+		result = new JavaOclTuple(imiTuple);
 
 		return result;
 	}

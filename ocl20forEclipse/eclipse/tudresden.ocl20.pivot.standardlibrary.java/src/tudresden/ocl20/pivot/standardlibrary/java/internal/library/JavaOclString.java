@@ -30,12 +30,16 @@
  */
 package tudresden.ocl20.pivot.standardlibrary.java.internal.library;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBoolean;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclReal;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSet;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclString;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceInteger;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceString;
 import tudresden.ocl20.pivot.standardlibrary.java.exceptions.InvalidException;
@@ -65,12 +69,14 @@ public class JavaOclString extends JavaOclLibraryObject implements OclString {
 		super(imiString);
 		this.imiString = imiString;
 	}
-	
+
 	public JavaOclString(String undefinedReason) {
+
 		super(undefinedReason);
 	}
-	
+
 	public JavaOclString(Throwable invalidReason) {
+
 		super(invalidReason);
 	}
 
@@ -225,10 +231,22 @@ public class JavaOclString extends JavaOclLibraryObject implements OclString {
 		return result;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny#asSet()
+	 */
 	public <T extends OclAny> OclSet<T> asSet() {
 
-		// TODO Michael: implement this!
-		return null;
+		checkUndefinedAndInvalid(this);
+
+		OclSet<T> result;
+
+		Set<IModelInstanceElement> imiSet = new HashSet<IModelInstanceElement>();
+		imiSet.add(imiString);
+
+		result = JavaStandardLibraryFactory.INSTANCE.createOclSet(imiSet);
+
+		return result;
 	}
 
 }

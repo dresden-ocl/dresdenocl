@@ -42,6 +42,6 @@ package tudresden.ocl20.pivot.essentialocl.standardlibrary;
  */
 public interface OclTuple extends OclAny {
 
-	public OclAny getPropertyValue(String pathname);
+	public OclAny getPropertyValue(OclString pathname);
 	
 }

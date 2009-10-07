@@ -292,6 +292,10 @@ public class JavaOclBoolean extends JavaOclLibraryObject implements OclBoolean {
 		return result;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny#asSet()
+	 */
 	public <T extends OclAny> OclSet<T> asSet() {
 
 		checkUndefinedAndInvalid(this);

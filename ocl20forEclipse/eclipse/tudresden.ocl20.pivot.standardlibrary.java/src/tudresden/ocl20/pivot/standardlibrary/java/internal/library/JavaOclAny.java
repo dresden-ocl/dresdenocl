@@ -225,6 +225,7 @@ public abstract class JavaOclAny implements OclAny {
 		return JavaOclBoolean.getInstance(false);
 	}
 
+	@SuppressWarnings("unchecked")
 	public <T extends OclAny> T oclAsType(OclType<T> type) {
 
 		checkUndefinedAndInvalid(this, type);
@@ -241,6 +242,12 @@ public abstract class JavaOclAny implements OclAny {
 
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny#oclIsKindOf(tudresden
+	 * .ocl20.pivot.essentialocl.standardlibrary.OclType)
+	 */
 	public <T extends OclAny> OclBoolean oclIsKindOf(OclType<T> typespec) {
 
 		checkUndefinedAndInvalid(this, typespec);
@@ -249,6 +256,12 @@ public abstract class JavaOclAny implements OclAny {
 		return JavaStandardLibraryFactory.INSTANCE.createOclBoolean(isKindOf);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny#oclIsTypeOf(tudresden
+	 * .ocl20.pivot.essentialocl.standardlibrary.OclType)
+	 */
 	public <T extends OclAny> OclBoolean oclIsTypeOf(OclType<T> typespec) {
 
 		checkUndefinedAndInvalid(this, typespec);
@@ -257,6 +270,11 @@ public abstract class JavaOclAny implements OclAny {
 		return JavaStandardLibraryFactory.INSTANCE.createOclBoolean(isTypeOf);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @seetudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny#
+	 * getModelInstanceElement()
+	 */
 	public IModelInstanceElement getModelInstanceElement() {
 
 		return imiElement;

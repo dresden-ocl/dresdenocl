@@ -44,18 +44,35 @@ public class JavaOclVoid extends JavaOclAny implements OclVoid {
 		super(invalidReason);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny#asSet()
+	 */
 	public <T extends OclAny> OclSet<T> asSet() {
 
 		throw new InvalidException(new UnsupportedOperationException(
 				"asSet() is not defined on OclVoid."));
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny#invokeOperation
+	 * (tudresden.ocl20.pivot.pivotmodel.Operation,
+	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny[])
+	 */
 	public OclAny invokeOperation(Operation operation, OclAny... parameters) {
 
 		throw new InvalidException(new UnsupportedOperationException(
 				"invokeOperation(Operation, OclAny...) is not defined on OclVoid."));
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny#isEqualTo(tudresden
+	 * .ocl20.pivot.essentialocl.standardlibrary.OclAny)
+	 */
 	public OclBoolean isEqualTo(OclAny object2) {
 
 		// FIXME Michael: or is null == null allowed? in OCL one should use

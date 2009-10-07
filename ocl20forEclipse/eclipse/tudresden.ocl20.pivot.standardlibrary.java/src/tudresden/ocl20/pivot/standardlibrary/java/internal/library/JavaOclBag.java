@@ -32,6 +32,7 @@ package tudresden.ocl20.pivot.standardlibrary.java.internal.library;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBag;
@@ -151,7 +152,7 @@ public class JavaOclBag<T extends OclAny> extends JavaOclUnsortedCollection<T>
 
 		/* Else try to remove the given Object. */
 
-		Collection<IModelInstanceElement> resultCollection;
+		List<IModelInstanceElement> resultCollection;
 
 		resultCollection =
 				new ArrayList<IModelInstanceElement>(imiCollection.getCollection());
@@ -174,7 +175,7 @@ public class JavaOclBag<T extends OclAny> extends JavaOclUnsortedCollection<T>
 
 		OclBag<T2> result;
 
-		Collection<IModelInstanceElement> flat =
+		List<IModelInstanceElement> flat =
 				new ArrayList<IModelInstanceElement>();
 
 		checkUndefinedAndInvalid(this);
@@ -214,7 +215,7 @@ public class JavaOclBag<T extends OclAny> extends JavaOclUnsortedCollection<T>
 
 		OclBag<T> result;
 
-		Collection<IModelInstanceElement> include =
+		List<IModelInstanceElement> include =
 				new ArrayList<IModelInstanceElement>();
 
 		checkUndefinedAndInvalid(this);
@@ -236,12 +237,12 @@ public class JavaOclBag<T extends OclAny> extends JavaOclUnsortedCollection<T>
 
 		OclBag<T> result;
 
-		Collection<IModelInstanceElement> intersection =
+		List<IModelInstanceElement> intersection =
 				new ArrayList<IModelInstanceElement>();
 
 		checkUndefinedAndInvalid(this, that);
 
-		Collection<IModelInstanceElement> otherCollectionCopy =
+		List<IModelInstanceElement> otherCollectionCopy =
 				new ArrayList<IModelInstanceElement>(((IModelInstanceCollection) that
 						.getModelInstanceElement()).getCollection());
 
@@ -271,7 +272,7 @@ public class JavaOclBag<T extends OclAny> extends JavaOclUnsortedCollection<T>
 
 		OclBag<T> result;
 
-		Collection<IModelInstanceElement> union =
+		List<IModelInstanceElement> union =
 				new ArrayList<IModelInstanceElement>();
 
 		checkUndefinedAndInvalid(this, that);

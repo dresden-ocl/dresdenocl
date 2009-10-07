@@ -126,7 +126,7 @@ public interface IStandardLibraryFactory {
 	 * @return the created {@link OclBag}.
 	 */
 	<T extends OclAny> OclBag<T> createOclBag(
-			final Collection<IModelInstanceElement> elements);
+			final List<?> elements);
 
 	/**
 	 * <p>
@@ -248,7 +248,7 @@ public interface IStandardLibraryFactory {
 	 * @return the created {@link OclOrderedSet}.
 	 */
 	<T extends OclAny> OclOrderedSet<T> createOclOrderedSet(
-			final List<IModelInstanceElement> elements);
+			final List<?> elements);
 
 	/**
 	 * <p>
@@ -303,7 +303,7 @@ public interface IStandardLibraryFactory {
 	 * @return the created {@link OclSequence}.
 	 */
 	<T extends OclAny> OclSequence<T> createOclSequence(
-			final List<IModelInstanceElement> elements);
+			final List<?> elements);
 
 	/**
 	 * <p>
@@ -332,7 +332,7 @@ public interface IStandardLibraryFactory {
 	 * @return the created {@link OclSet}.
 	 */
 	<T extends OclAny> OclSet<T> createOclSet(
-			final Set<IModelInstanceElement> elements);
+			final Set<?> elements);
 
 	/**
 	 * <p>
@@ -383,25 +383,7 @@ public interface IStandardLibraryFactory {
 	 * @return the created {@link OclTuple}.
 	 */
 	OclTuple createOclTuple(final List<IModelInstanceString> names,
-			final List<IModelInstanceElement> values);
-
-	/**
-	 * <p>
-	 * Creates a new OclTuple for a given {@link List} of {@link String}s as the
-	 * elements' names and a given {@link List} of {@link Object}s as the
-	 * element's values.
-	 * </p>
-	 * 
-	 * @param names
-	 *          the names of the elements as an {@link List} of {@link String}s.
-	 * @param values
-	 *          the values have to be wrapped by appropriate
-	 *          {@link IModelInstanceElement}s; then, these elements are wrapped
-	 *          by appropriate {@link OclAny} objects
-	 * @return the created {@link OclTuple}.
-	 */
-	OclTuple createOclTupleObject(final List<String> names,
-			final List<Object> values);
+			final List<IModelInstanceElement> values, Type type);
 
 	/**
 	 * <p>

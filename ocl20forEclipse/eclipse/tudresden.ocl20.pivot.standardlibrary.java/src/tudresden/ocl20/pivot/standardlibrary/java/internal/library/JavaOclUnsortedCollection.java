@@ -33,6 +33,7 @@ package tudresden.ocl20.pivot.standardlibrary.java.internal.library;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
@@ -84,7 +85,7 @@ public abstract class JavaOclUnsortedCollection<T extends OclAny> extends
 		checkUndefinedAndInvalid(this, aBag);
 
 		/* Else compute the result. */
-		Collection<IModelInstanceElement> union =
+		List<IModelInstanceElement> union =
 				new ArrayList<IModelInstanceElement>();
 
 		union.addAll(this.imiCollection.getCollection());

@@ -30,15 +30,18 @@
  */
 package tudresden.ocl20.pivot.standardlibrary.java.internal.library;
 
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBoolean;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSet;
+import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclString;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclTuple;
-import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceCollection;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceString;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceTuple;
+import tudresden.ocl20.pivot.standardlibrary.java.exceptions.InvalidException;
 import tudresden.ocl20.pivot.standardlibrary.java.factory.JavaStandardLibraryFactory;
 
 /**
@@ -47,32 +50,24 @@ import tudresden.ocl20.pivot.standardlibrary.java.factory.JavaStandardLibraryFac
  * </p>
  * 
  * @author Ronny Brandt
+ * @author Michael Thiele
  */
 public class JavaOclTuple extends JavaOclLibraryObject implements OclTuple {
 
-	protected IModelInstanceCollection<IModelInstanceString> names;
-	protected IModelInstanceCollection<IModelInstanceElement> values;
+	protected IModelInstanceTuple imiTuple;
 
 	/**
 	 * <p>
 	 * Instantiates a new {@link JavaOclTuple}.
 	 * </p>
 	 * 
-	 * @param names
-	 *          The adapted names for the {@link OclTuple}.
-	 * @param values
-	 *          The adaped values for the {@link OclTuple}.
+	 * @param imiTuple
+	 *          the {@link IModelInstanceTuple} to adapt
 	 */
-	public JavaOclTuple(IModelInstanceCollection<IModelInstanceString> names,
-			IModelInstanceCollection<IModelInstanceElement> values) {
+	public JavaOclTuple(IModelInstanceTuple imiTuple) {
 
-		// FIXME Michael: is this a problem, if the names are not in the super
-		// class?
-		super(values);
-		// TODO Michael: check if collections are Lists and have same size
-
-		this.names = names;
-		this.values = values;
+		super(imiTuple);
+		this.imiTuple = imiTuple;
 	}
 
 	public JavaOclTuple(String undefinedReason) {
@@ -90,7 +85,6 @@ public class JavaOclTuple extends JavaOclLibraryObject implements OclTuple {
 	 * @see tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclAny
 	 * #isEqualTo(tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot)
 	 */
-	// FIXME Michael: Does not work, since only values are known of "that".
 	public OclBoolean isEqualTo(OclAny that) {
 
 		OclBoolean result;
@@ -103,9 +97,10 @@ public class JavaOclTuple extends JavaOclLibraryObject implements OclTuple {
 		}
 
 		else {
-			IModelInstanceCollection<IModelInstanceString> m;
 
-			result = JavaOclBoolean.getInstance(false);
+			result =
+					JavaOclBoolean.getInstance(imiTuple.equals(that
+							.getModelInstanceElement()));
 		}
 
 		return result;
@@ -117,26 +112,41 @@ public class JavaOclTuple extends JavaOclLibraryObject implements OclTuple {
 	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclTuple#getPropertyValue
 	 * (java.lang.String)
 	 */
-	public OclAny getPropertyValue(String pathname) {
+	public OclAny getPropertyValue(OclString pathname) {
 
 		OclAny result;
 
 		checkUndefinedAndInvalid(this);
 
-		int indexOf =
-				((List<IModelInstanceString>) names.getCollection()).indexOf(pathname);
-		IModelInstanceElement imiResult =
-				((List<IModelInstanceElement>) values.getCollection()).get(indexOf);
-		// FIXME Michael: imiResult can be undefined; if key exists, then undefined;
-		// else invalid
-		result = JavaStandardLibraryFactory.INSTANCE.createOclAny(imiResult);
+		try {
+
+			IModelInstanceElement imiResult =
+					imiTuple.get((IModelInstanceString) pathname
+							.getModelInstanceElement());
+			result = JavaStandardLibraryFactory.INSTANCE.createOclAny(imiResult);
+
+		} catch (IllegalArgumentException e) {
+			throw new InvalidException(e);
+		}
 
 		return result;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny#asSet()
+	 */
 	public <T extends OclAny> OclSet<T> asSet() {
 
-		// TODO Michael: implement
-		return null;
+		checkUndefinedAndInvalid(this);
+
+		OclSet<T> result;
+
+		Set<IModelInstanceElement> imiSet = new HashSet<IModelInstanceElement>();
+		imiSet.add(imiTuple);
+
+		result = JavaStandardLibraryFactory.INSTANCE.createOclSet(imiSet);
+
+		return result;
 	}
 }

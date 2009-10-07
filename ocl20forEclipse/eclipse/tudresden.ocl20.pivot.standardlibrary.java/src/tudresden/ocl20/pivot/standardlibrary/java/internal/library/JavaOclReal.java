@@ -31,7 +31,9 @@
 package tudresden.ocl20.pivot.standardlibrary.java.internal.library;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBoolean;
@@ -39,6 +41,7 @@ import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclComparable;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclReal;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSet;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceReal;
 import tudresden.ocl20.pivot.standardlibrary.java.exceptions.InvalidException;
 import tudresden.ocl20.pivot.standardlibrary.java.factory.JavaStandardLibraryFactory;
@@ -486,8 +489,16 @@ public class JavaOclReal extends JavaOclLibraryObject implements OclReal,
 	 */
 	public <T extends OclAny> OclSet<T> asSet() {
 
-		// TODO Michael: implement this method
-		return null;
+		checkUndefinedAndInvalid(this);
+
+		OclSet<T> result;
+
+		Set<IModelInstanceElement> imiSet = new HashSet<IModelInstanceElement>();
+		imiSet.add(imiReal);
+
+		result = JavaStandardLibraryFactory.INSTANCE.createOclSet(imiSet);
+
+		return result;
 	}
 
 	/*
