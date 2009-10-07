@@ -9,6 +9,8 @@ import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclLibraryObject;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
 import tudresden.ocl20.pivot.pivotmodel.Operation;
+import tudresden.ocl20.pivot.standardlibrary.java.exceptions.InvalidException;
+import tudresden.ocl20.pivot.standardlibrary.java.exceptions.UndefinedException;
 import tudresden.ocl20.pivot.standardlibrary.java.factory.JavaStandardLibraryFactory;
 
 /**
@@ -95,7 +97,30 @@ public abstract class JavaOclLibraryObject extends JavaOclAny implements
 			result =
 					JavaStandardLibraryFactory.INSTANCE.createOclInvalid(operation
 							.getType(), e);
-		} catch (ClassCastException e) {
+		}
+		/*
+		 * In case, an operation has a problem and throws an exception, it has to be
+		 * an InvalidException. At this point, it is known, which type OclInvalid
+		 * should have.
+		 */
+		catch (InvalidException e) {
+			result =
+					JavaStandardLibraryFactory.INSTANCE.createOclInvalid(operation
+							.getType(), e.getCause());
+		}
+		/*
+		 * This happens, if an element involved in the invocation of the method is
+		 * undefined.
+		 */
+		catch (UndefinedException e) {
+			result =
+					JavaStandardLibraryFactory.INSTANCE.createOclUndefined(operation
+							.getType(), e.getUndefinedReason());
+		}
+		/*
+		 * Just in case, if the return type is not an instance of OclAny.
+		 */
+		catch (ClassCastException e) {
 			result =
 					JavaStandardLibraryFactory.INSTANCE.createOclInvalid(operation
 							.getType(), e);
