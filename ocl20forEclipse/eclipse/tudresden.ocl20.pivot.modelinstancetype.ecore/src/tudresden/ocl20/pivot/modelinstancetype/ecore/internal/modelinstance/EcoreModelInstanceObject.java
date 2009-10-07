@@ -18,16 +18,22 @@ with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
 package tudresden.ocl20.pivot.modelinstancetype.ecore.internal.modelinstance;
 
+import java.lang.reflect.Array;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
+import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
+import org.eclipse.emf.common.util.BasicEList;
+import org.eclipse.emf.common.util.UniqueEList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.osgi.util.NLS;
 
@@ -38,10 +44,17 @@ import tudresden.ocl20.pivot.modelbus.modelinstance.exception.OperationAccessExc
 import tudresden.ocl20.pivot.modelbus.modelinstance.exception.OperationNotFoundException;
 import tudresden.ocl20.pivot.modelbus.modelinstance.exception.PropertyAccessException;
 import tudresden.ocl20.pivot.modelbus.modelinstance.exception.PropertyNotFoundException;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceBoolean;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceCollection;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceEnumerationLiteral;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceFactory;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceInteger;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceObject;
-import tudresden.ocl20.pivot.modelbus.modelinstance.types.base.AbstractModelInstanceElement;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstancePrimitiveType;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceReal;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceString;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.base.AbstractModelInstanceObject;
 import tudresden.ocl20.pivot.modelinstancetype.ecore.EcoreModelInstanceTypePlugin;
 import tudresden.ocl20.pivot.modelinstancetype.ecore.internal.msg.EcoreModelInstanceTypeMessages;
 import tudresden.ocl20.pivot.modelinstancetype.ecore.internal.provider.EcoreModelInstanceProvider;
@@ -59,7 +72,7 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
  * 
  * @author Claas Wilke
  */
-public class EcoreModelInstanceObject extends AbstractModelInstanceElement
+public class EcoreModelInstanceObject extends AbstractModelInstanceObject
 		implements IModelInstanceObject {
 
 	/** The {@link Logger} for this class. */
@@ -70,8 +83,8 @@ public class EcoreModelInstanceObject extends AbstractModelInstanceElement
 	private EObject myEObject;
 
 	/**
-	 * The Java {@link Class} this {@link JavaModelInstanceObject} is casted to.
-	 * This is required to access the right {@link Property}s and
+	 * The Java {@link Class} this {@link AbstractModelInstanceObject} is casted
+	 * to. This is required to access the right {@link Property}s and
 	 * {@link Operation}s.
 	 */
 	private Class<?> myAdaptedType;
@@ -189,39 +202,6 @@ public class EcoreModelInstanceObject extends AbstractModelInstanceElement
 			LOGGER.debug(msg);
 		}
 		// no else.
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement
-	 * #getName()
-	 */
-	public String getName() {
-
-		StringBuffer resultBuffer;
-		resultBuffer = new StringBuffer();
-
-		/* Probably return the element's name. */
-		if (this.myName != null) {
-			resultBuffer.append(this.myName);
-		}
-
-		/* Else probably return the element's id. */
-		else if (this.myId != null) {
-			resultBuffer.append(this.myId);
-		}
-
-		/* Else construct a name of all implemented types. */
-		else {
-			resultBuffer.append(this.getClass().getSimpleName());
-			resultBuffer.append("[");
-			resultBuffer.append(this.myEObject.toString());
-			resultBuffer.append("]");
-		}
-		// end else.
-
-		return resultBuffer.toString();
 	}
 
 	/*
@@ -375,46 +355,6 @@ public class EcoreModelInstanceObject extends AbstractModelInstanceElement
 
 	/*
 	 * (non-Javadoc)
-	 * @seetudresden.ocl20.pivot.modelbus.modelinstance.types.base.
-	 * AbstractModelInstanceElement#equals(java.lang.Object)
-	 */
-	@Override
-	public boolean equals(Object object) {
-
-		boolean result;
-
-		if (object == null) {
-			result = false;
-		}
-
-		else if (object instanceof EcoreModelInstanceObject) {
-
-			EcoreModelInstanceObject other;
-			other = (EcoreModelInstanceObject) object;
-
-			/* FIXME Claas: Ask Micha if this is right. */
-			if (this.isUndefined() || other.isUndefined()) {
-				result = false;
-			}
-
-			else {
-				/* Check if both objects adapt the same object. */
-				result = this.myEObject == other.myEObject;
-
-				/* Check if both objects have the same type(s). */
-				result &= this.myTypes.equals(other.myTypes);
-			}
-		}
-
-		else {
-			result = false;
-		}
-
-		return result;
-	}
-
-	/*
-	 * (non-Javadoc)
 	 * @see
 	 * tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceObject
 	 * #getObject()
@@ -532,40 +472,6 @@ public class EcoreModelInstanceObject extends AbstractModelInstanceElement
 
 	/*
 	 * (non-Javadoc)
-	 * @seetudresden.ocl20.pivot.modelbus.modelinstance.types.base.
-	 * AbstractModelInstanceElement#hashCode()
-	 */
-	@Override
-	public int hashCode() {
-
-		int result;
-
-		if (this.isUndefined()) {
-			result = 0;
-		}
-
-		else {
-			result = 31 * this.myEObject.hashCode();
-
-			result = 31 * result + this.myTypes.hashCode();
-		}
-
-		return result;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement
-	 * #isUndefined()
-	 */
-	public boolean isUndefined() {
-
-		return this.myEObject == null;
-	}
-
-	/*
-	 * (non-Javadoc)
 	 * @see
 	 * tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceObject
 	 * #invokeOperation(tudresden.ocl20.pivot.pivotmodel.Operation,
@@ -609,8 +515,7 @@ public class EcoreModelInstanceObject extends AbstractModelInstanceElement
 			for (int index = 0; index < argSize; index++) {
 
 				argumentValues[index] =
-						EcoreModelInstance.createAdaptedElement(args.get(index),
-								argumentTypes[index]);
+						this.createAdaptedElement(args.get(index), argumentTypes[index]);
 				index++;
 			}
 
@@ -872,6 +777,751 @@ public class EcoreModelInstanceObject extends AbstractModelInstanceElement
 
 	/**
 	 * <p>
+	 * Returns or creates the element that is adapted by a given
+	 * {@link IModelInstanceElement}. E.g., if the given
+	 * {@link IModelInstanceElement} is an {@link IModelInstanceObject}, the
+	 * adapted {@link Object} is simply returned. For
+	 * {@link IModelInstancePrimitiveType}, a newly created primitive is returned.
+	 * </p>
+	 * 
+	 * @param modelInstanceElement
+	 *          The {@link IModelInstanceElement} those adapted {@link Object}
+	 *          shall be returned or created.
+	 * @param typeClass
+	 *          The {@link Class} the recreated element should be an instance of.
+	 *          This could be required for {@link IModelInstancePrimitiveType}s or
+	 *          for {@link IModelInstanceCollection}s.
+	 * @return The created or adapted value ({@link Object}).
+	 */
+	@SuppressWarnings("unchecked")
+	protected Object createAdaptedElement(
+			IModelInstanceElement modelInstanceElement, Class<?> typeClass) {
+
+		Object result;
+
+		/* Check for null values. */
+		if (modelInstanceElement == null) {
+			result = null;
+		}
+
+		/* Else check if the given element is a primitive type. */
+		else if (modelInstanceElement instanceof IModelInstancePrimitiveType) {
+
+			/* Probably recreate a boolean value. */
+			if (modelInstanceElement instanceof IModelInstanceBoolean) {
+
+				result = ((IModelInstanceBoolean) modelInstanceElement).getBoolean();
+			}
+
+			/* Else probably recreate an integer value. */
+			else if (modelInstanceElement instanceof IModelInstanceInteger) {
+
+				result =
+						createAdaptedIntegerValue(
+								(IModelInstanceInteger) modelInstanceElement, typeClass);
+			}
+
+			/* Else probably recreate a real value. */
+			else if (modelInstanceElement instanceof IModelInstanceReal) {
+
+				result =
+						createAdaptedRealValue((IModelInstanceReal) modelInstanceElement,
+								typeClass);
+			}
+
+			/* Else probably recreate an String value. */
+			else if (modelInstanceElement instanceof IModelInstanceString) {
+
+				result =
+						createAdaptedStringValue(
+								(IModelInstanceString) modelInstanceElement, typeClass);
+			}
+
+			else {
+				/* Other primitive types are not supported. Return null. */
+				result = null;
+			}
+		}
+
+		/* Else check if the given element is an enumeration literal. */
+		else if (modelInstanceElement instanceof IModelInstanceEnumerationLiteral) {
+
+			result =
+					createAdaptedEnumerationLiteral(
+							(IModelInstanceEnumerationLiteral) modelInstanceElement,
+							typeClass);
+		}
+
+		/* Else check if the given element is a collection. */
+		else if (modelInstanceElement instanceof IModelInstanceCollection) {
+
+			/* Eventually adapt to an array. */
+			if (typeClass.isArray()) {
+				result = createAdaptedArray(modelInstanceElement, typeClass);
+			}
+
+			/* Else use the collection. */
+			else if (Collection.class.isAssignableFrom(typeClass)) {
+				result =
+						createAdaptedCollection(
+								(IModelInstanceCollection<IModelInstanceElement>) modelInstanceElement,
+								typeClass);
+			}
+
+			/* Else throw an exception. */
+			else {
+				String msg;
+				msg =
+						EcoreModelInstanceTypeMessages.EcoreModelInstance_CannotRecreateCollection;
+
+				throw new IllegalArgumentException(msg);
+			}
+		}
+
+		/* Else check if the given element is an adapted object. */
+		else if (modelInstanceElement instanceof IModelInstanceObject) {
+
+			result = ((IModelInstanceObject) modelInstanceElement).getObject();
+		}
+
+		/* Other types are not known. */
+		else {
+			result = null;
+		}
+
+		return result;
+	}
+
+	/**
+	 * <p>
+	 * A helper method the converts a given {@link IModelInstanceElement} into an
+	 * Array value of a given {@link Class}.
+	 * </p>
+	 * 
+	 * @param modelInstanceElement
+	 *          The {@link IModelInstanceElement} that shall be converted.
+	 * @param type
+	 *          The {@link Class} to that the given {@link IModelInstanceElement}
+	 *          shall be converted.
+	 * @return The converted {@link Object}.
+	 */
+	@SuppressWarnings("unchecked")
+	private Object createAdaptedArray(IModelInstanceElement modelInstanceElement,
+			Class<?> type) {
+
+		Object result;
+
+		if (modelInstanceElement instanceof IModelInstanceCollection) {
+
+			IModelInstanceCollection<IModelInstanceElement> modelInstanceCollection;
+			Collection<IModelInstanceElement> adaptedCollection;
+
+			Class<?> componentType;
+			int index;
+
+			componentType = type.getComponentType();
+
+			modelInstanceCollection =
+					(IModelInstanceCollection<IModelInstanceElement>) modelInstanceElement;
+			adaptedCollection = modelInstanceCollection.getCollection();
+
+			if (componentType.isPrimitive()) {
+
+				/* Probably create an array of boolean. */
+				if (boolean.class.isAssignableFrom(componentType)) {
+
+					boolean[] array;
+					array = new boolean[adaptedCollection.size()];
+
+					index = 0;
+
+					for (IModelInstanceElement anElement : adaptedCollection) {
+						array[index] =
+								((IModelInstanceBoolean) anElement).getBoolean().booleanValue();
+					}
+
+					result = array;
+				}
+
+				/* Probably create an array of byte. */
+				else if (byte.class.isAssignableFrom(componentType)) {
+
+					byte[] array;
+					array = new byte[adaptedCollection.size()];
+
+					index = 0;
+
+					for (IModelInstanceElement anElement : adaptedCollection) {
+						array[index] =
+								((IModelInstanceInteger) anElement).getLong().byteValue();
+					}
+
+					result = array;
+				}
+
+				/* Probably create an array of char. */
+				else if (char.class.isAssignableFrom(componentType)) {
+
+					char[] array;
+					array = new char[adaptedCollection.size()];
+
+					index = 0;
+
+					for (IModelInstanceElement anElement : adaptedCollection) {
+						array[index] =
+								((IModelInstanceString) anElement).getString().charAt(0);
+					}
+
+					result = array;
+				}
+
+				/* Probably create an array of double. */
+				else if (double.class.isAssignableFrom(componentType)) {
+
+					double[] array;
+					array = new double[adaptedCollection.size()];
+
+					index = 0;
+
+					for (IModelInstanceElement anElement : adaptedCollection) {
+						array[index] =
+								((IModelInstanceReal) anElement).getDouble().doubleValue();
+					}
+
+					result = array;
+				}
+
+				/* Probably create an array of float. */
+				else if (float.class.isAssignableFrom(componentType)) {
+
+					float[] array;
+					array = new float[adaptedCollection.size()];
+
+					index = 0;
+
+					for (IModelInstanceElement anElement : adaptedCollection) {
+						array[index] =
+								((IModelInstanceReal) anElement).getDouble().floatValue();
+					}
+
+					result = array;
+				}
+
+				/* Probably create an array of int. */
+				else if (int.class.isAssignableFrom(componentType)) {
+
+					int[] array;
+					array = new int[adaptedCollection.size()];
+
+					index = 0;
+
+					for (IModelInstanceElement anElement : adaptedCollection) {
+						array[index] =
+								((IModelInstanceInteger) anElement).getLong().intValue();
+					}
+
+					result = array;
+				}
+
+				/* Probably create an array of long. */
+				else if (long.class.isAssignableFrom(componentType)) {
+
+					long[] array;
+					array = new long[adaptedCollection.size()];
+
+					index = 0;
+
+					for (IModelInstanceElement anElement : adaptedCollection) {
+						array[index] =
+								((IModelInstanceInteger) anElement).getLong().longValue();
+					}
+
+					result = array;
+				}
+
+				/* Probably create an array of short. */
+				else if (short.class.isAssignableFrom(componentType)) {
+
+					short[] array;
+					array = new short[adaptedCollection.size()];
+
+					index = 0;
+
+					for (IModelInstanceElement anElement : adaptedCollection) {
+						array[index] =
+								((IModelInstanceInteger) anElement).getLong().shortValue();
+					}
+
+					result = array;
+				}
+
+				/* Else throw an exception. */
+				else {
+					throw new IllegalArgumentException(
+							EcoreModelInstanceTypeMessages.EcoreModelInstance_CannotRecreateArray);
+				}
+			}
+
+			else {
+				Object[] array;
+
+				/* Create a new array of the given type. */
+				array =
+						(Object[]) Array.newInstance(componentType, adaptedCollection
+								.size());
+
+				index = 0;
+
+				/* Fill the array with elements. */
+				for (IModelInstanceElement anElement : adaptedCollection) {
+					array[index] = createAdaptedElement(anElement, componentType);
+				}
+				// end for.
+
+				result = array;
+			}
+			// end else.
+		}
+
+		else {
+			throw new IllegalArgumentException(
+					EcoreModelInstanceTypeMessages.EcoreModelInstance_CannotRecreateArray);
+		}
+
+		return result;
+	}
+
+	/**
+	 * <p>
+	 * A helper method that converts a given {@link IModelInstanceElement} into an
+	 * {@link Collection} of a given {@link Class} type.
+	 * </p>
+	 * 
+	 * @param modelInstanceCollection
+	 *          The {@link IModelInstanceCollection} that shall be converted.
+	 * @param type
+	 *          The {@link Collection} {@link Class} to that the given
+	 *          {@link IModelInstanceElement} shall be converted.
+	 * @return The converted {@link Collection}.
+	 */
+	@SuppressWarnings("unchecked")
+	private Collection<?> createAdaptedCollection(
+			IModelInstanceCollection<IModelInstanceElement> modelInstanceCollection,
+			Class<?> clazzType) {
+
+		Collection<Object> result;
+
+		if (Collection.class.isAssignableFrom(clazzType)) {
+
+			/*
+			 * Try to initialize the collection using the an empty constructor found
+			 * via reflections.
+			 */
+			try {
+				Constructor<?> collectionConstructor;
+
+				collectionConstructor = clazzType.getConstructor(new Class[0]);
+				result =
+						(Collection<Object>) collectionConstructor
+								.newInstance(new Object[0]);
+			}
+
+			/* Catch all possible exceptions and probably initialize with null. */
+			catch (SecurityException e) {
+				result = null;
+			}
+
+			catch (NoSuchMethodException e) {
+				result = null;
+			}
+
+			catch (IllegalArgumentException e) {
+				result = null;
+			}
+
+			catch (InstantiationException e) {
+				result = null;
+			}
+
+			catch (IllegalAccessException e) {
+				result = null;
+			}
+
+			catch (InvocationTargetException e) {
+				result = null;
+			}
+
+			/*
+			 * This could be implemented for other existing implementations of EList.
+			 * For generated EMF Ecore without hacks and extendes ELists this should
+			 * work.
+			 */
+			if (result == null) {
+
+				if (UniqueEList.class.isAssignableFrom(clazzType)) {
+					result = new UniqueEList<Object>();
+				}
+
+				else if (List.class.isAssignableFrom(clazzType)) {
+					result = new BasicEList<Object>();
+				}
+
+				else if (Set.class.isAssignableFrom(clazzType)) {
+					result = new HashSet<Object>();
+				}
+				// no else.
+			}
+
+			/* Probably create the contained elements. */
+			if (result != null) {
+
+				Class<?> elementClassType;
+
+				/*
+				 * TODO: The question how to retrieve the generic type of a List (if any
+				 * exists) should be investigated very soon.
+				 */
+				/* Try to get the elements class. */
+				if (clazzType.getTypeParameters().length == 1
+						&& clazzType.getTypeParameters()[0].getBounds().length == 1
+						&& clazzType.getTypeParameters()[0].getBounds()[0] instanceof Class) {
+					elementClassType =
+							(Class<?>) clazzType.getTypeParameters()[0].getBounds()[0];
+				}
+
+				else {
+					elementClassType = Object.class;
+				}
+
+				/* Create the value for all elements. */
+				for (IModelInstanceElement anElement : modelInstanceCollection
+						.getCollection()) {
+					result.add(createAdaptedElement(anElement, elementClassType));
+				}
+				// end for.
+			}
+
+			/* Else throw an exception. */
+			else {
+				String msg;
+				msg =
+						EcoreModelInstanceTypeMessages.EcoreModelInstance_CannotRecreateCollection;
+
+				throw new IllegalArgumentException(msg);
+			}
+		}
+
+		/* Else throw an exception. */
+		else {
+			String msg;
+			msg =
+					EcoreModelInstanceTypeMessages.EcoreModelInstance_CannotRecreateCollection;
+
+			throw new IllegalArgumentException(msg);
+		}
+
+		return result;
+	}
+
+	/**
+	 * <p>
+	 * A helper method the converts a given
+	 * {@link IModelInstanceEnumerationLiteral} into an {@link Object} value of a
+	 * given {@link Class}. If the given {@link Class} does not represents an
+	 * {@link Enum}, a {@link IllegalArgumentException} is thrown.
+	 * </p>
+	 * 
+	 * @param modelInstanceEnumerationLiteral
+	 *          The {@link IModelInstanceEnumerationLiteral} that shall be
+	 *          converted.
+	 * @param type
+	 *          The {@link Class} to that the given
+	 *          {@link IModelInstanceEnumerationLiteral} shall be converted.
+	 * @return The converted {@link Object}.
+	 */
+	private Object createAdaptedEnumerationLiteral(
+			IModelInstanceEnumerationLiteral modelInstanceEnumerationLiteral,
+			Class<?> typeClass) {
+	
+		Object result;
+	
+		/* Check if the given class represents an enumeration. */
+		if (typeClass.isEnum()) {
+	
+			result = null;
+	
+			/*
+			 * Try to find an enum constant having the same name as the enumeration
+			 * literal.
+			 */
+			for (Object anEnumConstant : typeClass.getEnumConstants()) {
+				if (anEnumConstant.toString().equals(
+						modelInstanceEnumerationLiteral.getLiteral().getName())) {
+	
+					result = anEnumConstant;
+					break;
+				}
+				// no else.
+			}
+			// end for.
+	
+			if (result == null) {
+				String msg;
+	
+				msg =
+						EcoreModelInstanceTypeMessages.EcoreModelInstance_EnumerationLiteralNotFound;
+				msg =
+						NLS
+								.bind(
+										modelInstanceEnumerationLiteral.getLiteral()
+												.getQualifiedName(),
+										"The enumeration literal could not be adapted to any constant of the given Enum class.");
+	
+				throw new IllegalArgumentException(msg);
+			}
+			// no else.
+		}
+	
+		/*
+		 * Else check if the given class represents a super class of an Enum
+		 * represented by this literal.
+		 */
+		else {
+	
+			List<String> enumerationQualifiedName;
+			String enumClassName;
+	
+			enumerationQualifiedName =
+					modelInstanceEnumerationLiteral.getLiteral().getQualifiedNameList();
+			/* Remove the name of the literal. */
+			enumerationQualifiedName.remove(enumerationQualifiedName.size() - 1);
+	
+			enumClassName =
+					EcoreModelInstanceTypeUtility
+							.toCanonicalName(enumerationQualifiedName);
+	
+			try {
+				Class<?> enumClass;
+				enumClass = this.loadJavaClass(enumClassName);
+	
+				/* Check if the found class represents an enumeration. */
+				if (enumClass.isEnum()) {
+	
+					result = null;
+	
+					/*
+					 * Try to find an enum constant having the same name as the
+					 * enumeration literal.
+					 */
+					for (Object anEnumConstant : enumClass.getEnumConstants()) {
+						if (anEnumConstant.toString().equals(
+								modelInstanceEnumerationLiteral.getLiteral().getName())) {
+	
+							result = anEnumConstant;
+							break;
+						}
+					}
+					// end for.
+	
+					if (result == null) {
+						String msg;
+	
+						msg =
+								EcoreModelInstanceTypeMessages.EcoreModelInstance_EnumerationLiteralNotFound;
+						msg =
+								NLS
+										.bind(
+												modelInstanceEnumerationLiteral.getLiteral()
+														.getQualifiedName(),
+												"The enumeration literal could not be adapted to any constant of the given Enum class.");
+	
+						throw new IllegalArgumentException(msg);
+					}
+					// no else.
+				}
+	
+				else {
+					String msg;
+	
+					msg =
+							EcoreModelInstanceTypeMessages.EcoreModelInstance_EnumerationLiteralNotFound;
+					msg =
+							NLS.bind(modelInstanceEnumerationLiteral.getLiteral()
+									.getQualifiedName(), "The found class " + enumClass
+									+ " is not an Enum.");
+	
+					throw new IllegalArgumentException(msg);
+				}
+			}
+	
+			catch (ClassNotFoundException e) {
+				String msg;
+	
+				msg =
+						EcoreModelInstanceTypeMessages.EcoreModelInstance_EnumerationLiteralNotFound;
+				msg =
+						NLS.bind(modelInstanceEnumerationLiteral.getLiteral()
+								.getQualifiedName(), e.getMessage());
+	
+				throw new IllegalArgumentException(msg, e);
+			}
+		}
+	
+		return result;
+	}
+
+	/**
+	 * <p>
+	 * A helper method the converts a given {@link IModelInstanceInteger} into an
+	 * Integer value of a given {@link Class}. If the given {@link Class}
+	 * represents an unknown integer {@link Class}, a {@link Long} is returned.
+	 * </p>
+	 * 
+	 * @param modelInstanceInteger
+	 *          The {@link IModelInstanceElement} that shall be converted.
+	 * @param type
+	 *          The {@link Class} to that the given {@link IModelInstanceElement}
+	 *          shall be converted.
+	 * @return The converted {@link Object}.
+	 */
+	private Object createAdaptedIntegerValue(
+			IModelInstanceInteger modelInstanceInteger, Class<?> type) {
+
+		Object result;
+
+		/* Probably recreate a BigDecimal value. */
+		if (type.equals(BigDecimal.class)) {
+			result = new BigDecimal(modelInstanceInteger.getLong());
+		}
+
+		/* Else probably recreate a BigInteger value. */
+		else if (type.equals(BigInteger.class)) {
+			result = BigInteger.valueOf(modelInstanceInteger.getLong());
+		}
+
+		/* Else probably recreate a Byte value. */
+		else if (type.equals(byte.class) || type.equals(Byte.class)) {
+			result = modelInstanceInteger.getLong().byteValue();
+		}
+
+		/* Else probably recreate an Integer value. */
+		else if (type.equals(int.class) || type.equals(Integer.class)) {
+			result = modelInstanceInteger.getLong().intValue();
+		}
+
+		/* Else probably recreate a Long value. */
+		else if (type.equals(long.class) || type.equals(Long.class)) {
+			result = modelInstanceInteger.getLong();
+		}
+
+		/* Else probably recreate a Short value. */
+		else if (type.equals(short.class) || type.equals(Short.class)) {
+			result = modelInstanceInteger.getLong().shortValue();
+		}
+
+		else {
+			/* Other integer types are not supported. Return the Long value. */
+			result = modelInstanceInteger.getLong();
+		}
+
+		return result;
+	}
+
+	/**
+	 * <p>
+	 * A helper method the converts a given {@link IModelInstanceReal} into a Real
+	 * value of a given {@link Class}. If the given {@link Class} represents an
+	 * unknown real {@link Class}, a {@link Number} is returned.
+	 * </p>
+	 * 
+	 * @param modelInstanceReal
+	 *          The {@link IModelInstanceReal} that shall be converted.
+	 * @param type
+	 *          The {@link Class} to that the given {@link IModelInstanceReal}
+	 *          shall be converted.
+	 * @return The converted {@link Object}.
+	 */
+	private Object createAdaptedRealValue(IModelInstanceReal modelInstanceReal,
+			Class<?> type) {
+
+		Object result;
+
+		/* Probably recreate a Double value. */
+		if (type.equals(double.class) || type.equals(BigInteger.class)) {
+			result = modelInstanceReal.getDouble();
+		}
+
+		/* Else probably recreate a Float value. */
+		else if (type.equals(float.class) || type.equals(Float.class)) {
+			result = modelInstanceReal.getDouble().floatValue();
+		}
+
+		else {
+			/* Other integer types are not supported. Return the Double value. */
+			result = modelInstanceReal.getDouble();
+		}
+
+		return result;
+	}
+
+	/**
+	 * <p>
+	 * A helper method the converts a given {@link IModelInstanceString} into a
+	 * String value of a given {@link Class}. If the given {@link Class}
+	 * represents an unknown String {@link Class}, a {@link String} is returned.
+	 * </p>
+	 * 
+	 * @param modelInstanceString
+	 *          The {@link IModelInstanceString} that shall be converted.
+	 * @param type
+	 *          The {@link Class} to that the given {@link IModelInstanceString}
+	 *          shall be converted.
+	 * @return The converted {@link Object}.
+	 */
+	private Object createAdaptedStringValue(
+			IModelInstanceString modelInstanceString, Class<?> type) {
+
+		Object result;
+		String stringValue;
+
+		stringValue = modelInstanceString.getString();
+
+		/* Probably recreate a char value. */
+		if (type.equals(char.class) || type.equals(BigInteger.class)) {
+
+			if (stringValue.length() > 0) {
+				result = stringValue.toCharArray()[0];
+			}
+
+			else {
+				result = null;
+			}
+		}
+
+		/* Else probably recreate a Character value. */
+		else if (type.equals(float.class) || type.equals(Float.class)) {
+			if (stringValue.length() > 0) {
+				result = new Character(stringValue.toCharArray()[0]);
+			}
+
+			else {
+				result = null;
+			}
+		}
+
+		else {
+			/*
+			 * Other integer types are not supported (except of String). Return the
+			 * String value.
+			 */
+			result = stringValue;
+		}
+
+		return result;
+	}
+
+	/**
+	 * <p>
 	 * A helper {@link Method} used to find a {@link Method} of the adapted
 	 * {@link Object} of this {@link EcoreModelInstanceObject} that conforms to a
 	 * given {@link Operation}.
@@ -970,6 +1620,30 @@ public class EcoreModelInstanceObject extends AbstractModelInstanceElement
 			throw new OperationNotFoundException(msg);
 		}
 		// no else.
+
+		return result;
+	}
+
+	/**
+	 * <p>
+	 * A helper method that tries to load a {@link Class} for a given canonical
+	 * name using all {@link ClassLoader}s of this {@link JavaModelInstance}.
+	 * </p>
+	 * 
+	 * @param canonicalName
+	 *          The canonical name of the {@link Class} that shall be loaded.
+	 * @return
+	 * @throws ClassNotFoundException
+	 *           Thrown, if the {@link Class} cannot be found by any
+	 *           {@link ClassLoader} of this {@link JavaModelInstance}.
+	 */
+	private Class<?> loadJavaClass(String canonicalName)
+			throws ClassNotFoundException {
+
+		Class<?> result;
+		result = null;
+
+		result = this.myAdaptedType.getClassLoader().loadClass(canonicalName);
 
 		return result;
 	}

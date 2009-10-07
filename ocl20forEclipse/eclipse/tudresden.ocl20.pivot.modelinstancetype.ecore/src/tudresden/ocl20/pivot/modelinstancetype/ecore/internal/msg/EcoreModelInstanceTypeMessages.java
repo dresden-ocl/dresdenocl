@@ -44,6 +44,7 @@ public class EcoreModelInstanceTypeMessages extends NLS {
 	public static String EcoreModelInstance_CannotCastTypeClassNotFound;
 	public static String EcoreModelInstance_CannotRecreateArray;
 	public static String EcoreModelInstance_CannotRecreateCollection;
+	public static String EcoreModelInstance_ClassNotFound;
 
 	public static String EcoreModelInstanceFactory_AdapteeIsNoEObjectInstance;
 	public static String EcoreModelInstanceFactory_TypeNotFoundInModel;
