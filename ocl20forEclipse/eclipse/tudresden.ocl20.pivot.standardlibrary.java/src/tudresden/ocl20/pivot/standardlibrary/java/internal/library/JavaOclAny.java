@@ -225,15 +225,20 @@ public abstract class JavaOclAny implements OclAny {
 		return JavaOclBoolean.getInstance(false);
 	}
 
-	// TODO Michael: catch exception in invokeOperation
-	@SuppressWarnings("unchecked")
-	public <T extends OclAny> T oclAsType(OclType<T> type)
-			throws AsTypeCastException {
+	public <T extends OclAny> T oclAsType(OclType<T> type) {
 
 		checkUndefinedAndInvalid(this, type);
 
-		final IModelInstanceElement castedTo = imiElement.asType(type.getType());
-		return (T) JavaStandardLibraryFactory.INSTANCE.createOclAny(castedTo);
+		IModelInstanceElement castedTo;
+		try {
+
+			castedTo = imiElement.asType(type.getType());
+			return (T) JavaStandardLibraryFactory.INSTANCE.createOclAny(castedTo);
+
+		} catch (AsTypeCastException e) {
+			throw new InvalidException(e);
+		}
+
 	}
 
 	public <T extends OclAny> OclBoolean oclIsKindOf(OclType<T> typespec) {
@@ -247,7 +252,7 @@ public abstract class JavaOclAny implements OclAny {
 	public <T extends OclAny> OclBoolean oclIsTypeOf(OclType<T> typespec) {
 
 		checkUndefinedAndInvalid(this, typespec);
-		
+
 		final boolean isTypeOf = imiElement.isTypeOf(typespec.getType());
 		return JavaStandardLibraryFactory.INSTANCE.createOclBoolean(isTypeOf);
 	}

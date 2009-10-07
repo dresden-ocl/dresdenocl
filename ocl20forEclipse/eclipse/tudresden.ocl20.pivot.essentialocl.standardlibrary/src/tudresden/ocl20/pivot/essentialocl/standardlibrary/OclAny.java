@@ -32,7 +32,6 @@
  */
 package tudresden.ocl20.pivot.essentialocl.standardlibrary;
 
-import tudresden.ocl20.pivot.modelbus.modelinstance.exception.AsTypeCastException;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
 import tudresden.ocl20.pivot.pivotmodel.Operation;
 
@@ -89,9 +88,8 @@ public interface OclAny {
 	 * @param typespec
 	 * @return <code>this</code>, where <code>this</code> is of the type
 	 *         identified by <code>typespec</code>.
-	 * @throws AsTypeCastException
 	 */
-	<T extends OclAny> T oclAsType(OclType<T> type) throws AsTypeCastException;
+	<T extends OclAny> T oclAsType(OclType<T> type);
 
 	/**
 	 * 
