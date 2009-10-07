@@ -29,6 +29,7 @@ import tudresden.ocl20.pivot.metamodels.java.internal.msg.JavaMetaModelMessages;
 import tudresden.ocl20.pivot.modelbus.IModel;
 import tudresden.ocl20.pivot.modelbus.IModelProvider;
 import tudresden.ocl20.pivot.modelbus.ModelAccessException;
+import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
 import tudresden.ocl20.pivot.modelbus.base.AbstractModelProvider;
 
 /**
@@ -52,7 +53,7 @@ public class JavaModelProvider extends AbstractModelProvider implements
 	 */
 	public IModel getModel(URL modelURL) throws ModelAccessException {
 
-		/* Eventually debug the entry of this method. */
+		/* Probably debug the entry of this method. */
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("getModel(modelURL=" + modelURL + ") - enter");
 		}
@@ -114,7 +115,13 @@ public class JavaModelProvider extends AbstractModelProvider implements
 			// no else.
 
 			try {
-				aClassLoader = new URLClassLoader(new URL[] { folderURLs[index] });
+				/*
+				 * The parent class loader from the model bus plug-in is required to
+				 * find types from EMF Ecore like EObject.
+				 */
+				aClassLoader =
+						new URLClassLoader(new URL[] { folderURLs[index] },
+								ModelBusPlugin.class.getClassLoader());
 
 				modelClass = Class.forName(aClassName, true, aClassLoader);
 
@@ -151,7 +158,7 @@ public class JavaModelProvider extends AbstractModelProvider implements
 		}
 		// no else.
 
-		/* Eventually debug the exit of this method. */
+		/* Probably debug the exit of this method. */
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("getModel() - exit - return value=" + result); //$NON-NLS-1$
 		}
@@ -173,7 +180,7 @@ public class JavaModelProvider extends AbstractModelProvider implements
 	 */
 	public IModel getModel(Class<?> modelClass) throws ModelAccessException {
 
-		/* Eventually debug the entry of this method. */
+		/* Probably debug the entry of this method. */
 		if (LOGGER.isDebugEnabled()) {
 			String msg;
 
@@ -189,7 +196,7 @@ public class JavaModelProvider extends AbstractModelProvider implements
 
 		result = new JavaModel(modelClass);
 
-		/* Eventually debug the exit of this method. */
+		/* Probably debug the exit of this method. */
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("getModel() - exit - return value=" + result); //$NON-NLS-1$
 		}
