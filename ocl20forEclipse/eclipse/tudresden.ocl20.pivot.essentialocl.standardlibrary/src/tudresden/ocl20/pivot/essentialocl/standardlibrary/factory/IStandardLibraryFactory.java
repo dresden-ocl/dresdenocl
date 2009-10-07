@@ -36,7 +36,6 @@ import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclString;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclTuple;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclType;
 import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance;
-import tudresden.ocl20.pivot.modelbus.modelinstance.exception.TypeNotFoundInModelException;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceBoolean;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceCollection;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
@@ -51,6 +50,7 @@ import tudresden.ocl20.pivot.modelbus.modelinstance.types.base.JavaModelInstance
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.base.JavaModelInstanceInteger;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.base.JavaModelInstanceReal;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.base.JavaModelInstanceString;
+import tudresden.ocl20.pivot.pivotmodel.EnumerationLiteral;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 
 /**
@@ -118,18 +118,15 @@ public interface IStandardLibraryFactory {
 	 * 
 	 * @param <T>
 	 *          The generic Type of the created {@link OclBag}.
-	 * @param <U>
-	 *          The type of the adapted {@link Collection}.
 	 * @param elements
-	 *          the {@link List} to be wrapped by the
+	 *          the {@link Collection} to be wrapped by the
 	 *          {@link JavaModelInstanceCollection} that is created by this method
 	 *          and is wrapped by the {@link OclBag} that is created as the return
 	 *          value.
 	 * @return the created {@link OclBag}.
-	 * @throws TypeNotFoundInModelException
 	 */
-	<T extends OclAny, U> OclBag<T> createOclBag(final Collection<U> elements)
-			throws TypeNotFoundInModelException;
+	<T extends OclAny> OclBag<T> createOclBag(
+			final Collection<IModelInstanceElement> elements);
 
 	/**
 	 * <p>
@@ -183,7 +180,7 @@ public interface IStandardLibraryFactory {
 	 *          created as the return value
 	 * @return the created {@link OclEnumLiteral}.
 	 */
-	OclEnumLiteral createOclEnumLiteral(final Enum<?> value);
+	OclEnumLiteral createOclEnumLiteral(final EnumerationLiteral value);
 
 	/**
 	 * <p>
@@ -243,18 +240,15 @@ public interface IStandardLibraryFactory {
 	 * 
 	 * @param <T>
 	 *          The generic Type of the created {@link OclOrderedSet}.
-	 * @param <U>
-	 *          The type of the adapted {@link List}.
 	 * @param elements
 	 *          the {@link List} to be wrapped by the
 	 *          {@link JavaModelInstanceCollection} that is created by this method
 	 *          and is wrapped by the {@link OclOrderedSet} that is created as the
 	 *          return value.
 	 * @return the created {@link OclOrderedSet}.
-	 * @throws TypeNotFoundInModelException
 	 */
-	<T extends OclAny, U> OclOrderedSet<T> createOclOrderedSet(
-			final List<U> elements) throws TypeNotFoundInModelException;
+	<T extends OclAny> OclOrderedSet<T> createOclOrderedSet(
+			final List<IModelInstanceElement> elements);
 
 	/**
 	 * <p>
@@ -301,18 +295,15 @@ public interface IStandardLibraryFactory {
 	 * 
 	 * @param <T>
 	 *          The generic Type of the created {@link OclSequence}.
-	 * @param <U>
-	 *          The type of the adapted {@link List}.
 	 * @param elements
 	 *          the {@link List} to be wrapped by the
 	 *          {@link JavaModelInstanceCollection} that is created by this method
 	 *          and is wrapped by the {@link OclSequence} that is created as the
 	 *          return value.
 	 * @return the created {@link OclSequence}.
-	 * @throws TypeNotFoundInModelException
 	 */
-	<T extends OclAny, U> OclSequence<T> createOclSequence(final List<U> elements)
-			throws TypeNotFoundInModelException;
+	<T extends OclAny> OclSequence<T> createOclSequence(
+			final List<IModelInstanceElement> elements);
 
 	/**
 	 * <p>
@@ -333,18 +324,15 @@ public interface IStandardLibraryFactory {
 	 * 
 	 * @param <T>
 	 *          The generic Type of the created {@link OclSet}.
-	 * @param <U>
-	 *          The type of the adapted {@link Set}.
 	 * @param elements
 	 *          the {@link List} to be wrapped by the
 	 *          {@link JavaModelInstanceCollection} that is created by this method
 	 *          and is wrapped by the {@link OclSet} that is created as the return
 	 *          value.
 	 * @return the created {@link OclSet}.
-	 * @throws TypeNotFoundInModelException
 	 */
-	<T extends OclAny, U> OclSet<T> createOclSet(final Set<U> elements)
-			throws TypeNotFoundInModelException;
+	<T extends OclAny> OclSet<T> createOclSet(
+			final Set<IModelInstanceElement> elements);
 
 	/**
 	 * <p>
@@ -428,8 +416,7 @@ public interface IStandardLibraryFactory {
 	 *          returned.
 	 * @return The created {@link OclType}.
 	 */
-	public <T extends OclAny> OclType<T> createOclType(final Type type,
-			final T oclAny);
+	public <T extends OclAny> OclType<T> createOclType(final Type type);
 
 	/**
 	 * <p>
@@ -442,7 +429,21 @@ public interface IStandardLibraryFactory {
 	 *          created.
 	 * @param reason
 	 *          The reason why this {@link OclAny} is undefined.
-	 * @return The creates undefined {@link OclAny}.
+	 * @return The created undefined {@link OclAny}.
 	 */
 	OclAny createOclUndefined(final Type type, final String reason);
+
+	/**
+	 * <p>
+	 * Creates an invalid instance of an {@link OclAny} of the given {@link Type}.
+	 * </p>
+	 * 
+	 * @param type
+	 *          The {@link Type} of the undefined {@link OclAny} that shall be
+	 *          created.
+	 * @param cause
+	 *          The {@link Throwable} that caused this to be invalid
+	 * @return The created invalid {@link OclAny}.
+	 */
+	OclAny createOclInvalid(final Type type, final Throwable cause);
 }

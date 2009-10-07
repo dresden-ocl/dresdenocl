@@ -54,8 +54,7 @@ public interface OclAny {
 	 *          the parameters of the invoked operation
 	 * @return the return value of the invoked operation
 	 */
-	OclAny invokeOperation(Operation operation, OclAny... parameters)
-			throws NoSuchMethodException;
+	OclAny invokeOperation(Operation operation, OclAny... parameters);
 
 	/**
 	 * 
@@ -118,27 +117,11 @@ public interface OclAny {
 	String getUndefinedreason();
 
 	/**
-	 * Sets the reason for undefined object.
-	 * 
-	 * @param undefinedreason
-	 *          the new undefinedreason
-	 */
-	void setUndefinedreason(String undefinedreason);
-
-	/**
 	 * Gets the reason for invalid object.
 	 * 
 	 * @return the {@link Throwable} that caused this element to be invalid.
 	 */
 	public Throwable getInvalidReason();
-
-	/**
-	 * Make this element invalid.
-	 * 
-	 * @param invalidReason
-	 *          the {@link Throwable} that caused invalidity.
-	 */
-	public void setInvalidReason(Throwable invalidReason);
 
 	/**
 	 * OCL operation asSet()
