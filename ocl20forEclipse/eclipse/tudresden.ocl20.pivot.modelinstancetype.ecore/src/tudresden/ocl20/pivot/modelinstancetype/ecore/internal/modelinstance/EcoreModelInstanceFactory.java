@@ -113,7 +113,7 @@ public class EcoreModelInstanceFactory extends BasisJavaModelInstanceFactory
 		if (result == null) {
 
 			/* Check if the given Object is an EnumerationLiteral. */
-			if (adapted instanceof Enum) {
+			if (adapted instanceof Enum<?>) {
 
 				result =
 						this.createEcoreModelInstanceEnumerationLiteral((Enum<?>) adapted);

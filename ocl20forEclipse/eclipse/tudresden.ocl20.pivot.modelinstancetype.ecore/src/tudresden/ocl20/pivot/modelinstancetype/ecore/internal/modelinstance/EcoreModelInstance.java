@@ -248,7 +248,7 @@ public class EcoreModelInstance extends AbstractModelInstance implements
 		IModelInstanceElement result;
 
 		result = this.myModelInstanceFactory.createModelInstanceElement(anObject);
-
+		
 		/* If no type of the object has been found, throw an exception. */
 		if (result == null) {
 			String msg;
@@ -267,6 +267,16 @@ public class EcoreModelInstance extends AbstractModelInstance implements
 			this.myModelInstanceObjects.add((IModelInstanceObject) result);
 		}
 		// no else.
+		
+		if (anObject instanceof EObject) {
+			EObject anEObject;
+			anEObject = (EObject) anObject;
+			
+			/* Probably add contained elements as well. */
+			for (EObject anElement : anEObject.eContents()) {
+				this.addObject(anElement);
+			}
+		}
 
 		return result;
 	}
