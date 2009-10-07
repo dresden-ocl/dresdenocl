@@ -39,7 +39,7 @@ import tudresden.ocl20.pivot.modelbus.modelinstance.exception.PropertyAccessExce
 import tudresden.ocl20.pivot.modelbus.modelinstance.exception.PropertyNotFoundException;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceObject;
-import tudresden.ocl20.pivot.modelbus.modelinstance.types.base.AbstractModelInstanceElement;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.base.AbstractModelInstanceObject;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.base.JavaModelInstanceCollection;
 import tudresden.ocl20.pivot.modelinstancetype.java.JavaModelInstanceTypePlugin;
 import tudresden.ocl20.pivot.modelinstancetype.java.internal.msg.JavaModelInstanceTypeMessages;
@@ -56,7 +56,7 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
  * 
  * @author Claas Wilke
  */
-public class JavaModelInstanceObject extends AbstractModelInstanceElement
+public class JavaModelInstanceObject extends AbstractModelInstanceObject
 		implements IModelInstanceObject {
 
 	/** The {@link Logger} for this class. */
@@ -183,40 +183,6 @@ public class JavaModelInstanceObject extends AbstractModelInstanceElement
 			LOGGER.debug(msg);
 		}
 		// no else.
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @seetudresden.ocl20.pivot.modelbus.modelinstance.types.base.
-	 * AbstractModelInstanceElement#getName()
-	 */
-	public String getName() {
-
-		StringBuffer resultBuffer;
-		resultBuffer = new StringBuffer();
-
-		/* Probably return the element's name. */
-		if (this.myName != null) {
-			resultBuffer.append(this.myName);
-		}
-
-		/* Else probably return the element's id. */
-		else if (this.myId != null) {
-			resultBuffer.append(this.myId);
-		}
-
-		/* Else construct a name of all implemented types. */
-		else {
-			resultBuffer.append(JavaModelInstanceObject.class.getSimpleName());
-			resultBuffer.append("[");
-			resultBuffer.append(this.getTypes().toString());
-			resultBuffer.append(", ");
-			resultBuffer.append(this.myAdaptedObject);
-			resultBuffer.append("]");
-		}
-		// end else.
-
-		return resultBuffer.toString();
 	}
 
 	/*
@@ -371,75 +337,12 @@ public class JavaModelInstanceObject extends AbstractModelInstanceElement
 
 	/*
 	 * (non-Javadoc)
-	 * @seetudresden.ocl20.pivot.modelbus.modelinstance.types.base.
-	 * AbstractModelInstanceElement#equals(java.lang.Object)
-	 */
-	@Override
-	public boolean equals(Object object) {
-
-		boolean result;
-
-		if (object == null) {
-			result = false;
-		}
-
-		else if (object instanceof JavaModelInstanceObject) {
-
-			JavaModelInstanceObject other;
-			other = (JavaModelInstanceObject) object;
-
-			/* This should not happen. But anyway, null == null results in false. */
-			if (this.isUndefined() || other.isUndefined()) {
-				result = false;
-			}
-
-			else {
-				/* Check if both objects adapt the same object. */
-				result = this.myAdaptedObject == other.myAdaptedObject;
-
-				/* Check if both objects have the same type(s). */
-				result &= this.myTypes.equals(other.myTypes);
-			}
-		}
-
-		else {
-			result = false;
-		}
-
-		return result;
-	}
-
-	/*
-	 * (non-Javadoc)
 	 * @seetudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceObject#
 	 * getAdaptedObject()
 	 */
 	public Object getObject() {
 
 		return this.myAdaptedObject;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @seetudresden.ocl20.pivot.modelbus.modelinstance.types.base.
-	 * AbstractModelInstanceElement#hashCode()
-	 */
-	@Override
-	public int hashCode() {
-
-		int result;
-
-		if (this.isUndefined()) {
-			result = 0;
-		}
-
-		else {
-			result = 31 * this.myAdaptedObject.hashCode();
-
-			result = 31 * result + this.myTypes.hashCode();
-		}
-
-		return result;
 	}
 
 	/*
@@ -485,9 +388,12 @@ public class JavaModelInstanceObject extends AbstractModelInstanceElement
 			/* Adapt the argument values. */
 			for (int index = 0; index < argSize; index++) {
 
+				Set<ClassLoader> classLoaders = new HashSet<ClassLoader>();
+				classLoaders.add(this.myAdaptedType.getClassLoader());
+
 				argumentValues[index] =
 						JavaModelInstance.createAdaptedElement(args.get(index),
-								argumentTypes[index]);
+								argumentTypes[index], classLoaders);
 				index++;
 			}
 
@@ -538,17 +444,6 @@ public class JavaModelInstanceObject extends AbstractModelInstanceElement
 		// end else.
 
 		return result;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement
-	 * #isUndefined()
-	 */
-	public boolean isUndefined() {
-
-		return this.myAdaptedObject == null;
 	}
 
 	/*
