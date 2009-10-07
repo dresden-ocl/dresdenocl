@@ -40,7 +40,6 @@ import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBoolean;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclOrderedSet;
-import tudresden.ocl20.pivot.modelbus.modelinstance.exception.TypeNotFoundInModelException;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceCollection;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceInteger;
@@ -70,22 +69,16 @@ public class JavaOclOrderedSet<T extends OclAny> extends
 			IModelInstanceCollection<IModelInstanceElement> imiCollection) {
 
 		super(imiCollection);
-		// TODO Michael: do this for all specific collections; this is already been
-		// checked by the factory; how to prevent calls to this constructor?
-		// the method now includes a directly visible dependency to BJMIF
-
-		// if (!imiCollection.isUnique() || !imiCollection.isOrdered())
-		// this.imiCollection =
-		// BasisJavaModelInstanceFactory.createModelInstanceCollection(imiCollection.getCollection(),
-		// PrimitiveAndCollectionTypeConstants.MODEL_TYPE_ORDERED_SET);
 
 	}
-	
+
 	public JavaOclOrderedSet(String undefinedReason) {
+
 		super(undefinedReason);
 	}
-	
+
 	public JavaOclOrderedSet(Throwable invalidReason) {
+
 		super(invalidReason);
 	}
 
@@ -105,15 +98,9 @@ public class JavaOclOrderedSet<T extends OclAny> extends
 		checkUndefinedAndInvalid(this, that);
 
 		append.addAll(imiCollection.getCollection());
-		// FIXME Michael: the standard does not define this
 		append.add(that.getModelInstanceElement());
 
-		try {
-			result = JavaStandardLibraryFactory.INSTANCE.createOclOrderedSet(append);
-		} catch (TypeNotFoundInModelException e) {
-			// TODO: OK? -> can this happen here?
-			throw new InvalidException(e);
-		}
+		result = JavaStandardLibraryFactory.INSTANCE.createOclOrderedSet(append);
 
 		return result;
 	}
@@ -136,12 +123,7 @@ public class JavaOclOrderedSet<T extends OclAny> extends
 		exclude.addAll(imiCollection.getCollection());
 		exclude.remove(that.getModelInstanceElement());
 
-		try {
-			result = JavaStandardLibraryFactory.INSTANCE.createOclOrderedSet(exclude);
-		} catch (TypeNotFoundInModelException e) {
-			// TODO: OK? -> can this happen here?
-			throw new InvalidException(e);
-		}
+		result = JavaStandardLibraryFactory.INSTANCE.createOclOrderedSet(exclude);
 
 		return result;
 	}
@@ -151,7 +133,6 @@ public class JavaOclOrderedSet<T extends OclAny> extends
 	 * @see
 	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection#flatten ()
 	 */
-	// FIXME Michael: not mentioned in the Standard
 	public <T2 extends OclAny> OclOrderedSet<T2> flatten() {
 
 		OclOrderedSet<T2> result;
@@ -184,12 +165,7 @@ public class JavaOclOrderedSet<T extends OclAny> extends
 			}
 		}
 
-		try {
-			result = JavaStandardLibraryFactory.INSTANCE.createOclOrderedSet(flat);
-		} catch (TypeNotFoundInModelException e) {
-			// TODO: OK?
-			throw new InvalidException(e);
-		}
+		result = JavaStandardLibraryFactory.INSTANCE.createOclOrderedSet(flat);
 
 		return result;
 	}
@@ -228,12 +204,12 @@ public class JavaOclOrderedSet<T extends OclAny> extends
 		insertAt.addAll(imiCollection.getCollection());
 
 		try {
-			// FIXME Michael: the standard does not define this part
 			insertAt.add(intIndex, anElement.getModelInstanceElement());
 
 			result =
 					JavaStandardLibraryFactory.INSTANCE.createOclOrderedSet(insertAt);
-		} catch (Exception e) {
+
+		} catch (IndexOutOfBoundsException e) {
 			throw new InvalidException(e);
 		}
 
@@ -312,17 +288,10 @@ public class JavaOclOrderedSet<T extends OclAny> extends
 
 		checkUndefinedAndInvalid(this, that);
 
-		// FIXME Michael: the standard does not define this part
-		if (!imiCollection.getCollection().contains(that.getModelInstanceElement()))
-			prepend.add(that.getModelInstanceElement());
 		prepend.addAll(imiCollection.getCollection());
+		prepend.add(0, that.getModelInstanceElement());
 
-		try {
-			result = JavaStandardLibraryFactory.INSTANCE.createOclOrderedSet(prepend);
-		} catch (TypeNotFoundInModelException e) {
-			// TODO: OK? -> can this happen here?
-			throw new InvalidException(e);
-		}
+		result = JavaStandardLibraryFactory.INSTANCE.createOclOrderedSet(prepend);
 
 		return result;
 	}
@@ -362,10 +331,6 @@ public class JavaOclOrderedSet<T extends OclAny> extends
 		} catch (IndexOutOfBoundsException e) {
 
 			throw new InvalidException(e);
-		} catch (TypeNotFoundInModelException e) {
-
-			// TODO: OK? -> can this happen here?
-			throw new InvalidException(e);
 		}
 
 		return result;
@@ -376,7 +341,6 @@ public class JavaOclOrderedSet<T extends OclAny> extends
 	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclOrderedSet#union
 	 * (tudresden.ocl20.pivot.essentialocl.standardlibrary.OclOrderedSet)
 	 */
-	// FIXME Michael: not in standard
 	public OclOrderedSet<T> union(OclOrderedSet<T> that) {
 
 		OclOrderedSet<T> result;
@@ -395,12 +359,7 @@ public class JavaOclOrderedSet<T extends OclAny> extends
 			union.add(element);
 		}
 
-		try {
-			result = JavaStandardLibraryFactory.INSTANCE.createOclOrderedSet(union);
-		} catch (TypeNotFoundInModelException e) {
-			// TODO: OK? -> can this happen here?
-			throw new InvalidException(e);
-		}
+		result = JavaStandardLibraryFactory.INSTANCE.createOclOrderedSet(union);
 
 		return result;
 	}

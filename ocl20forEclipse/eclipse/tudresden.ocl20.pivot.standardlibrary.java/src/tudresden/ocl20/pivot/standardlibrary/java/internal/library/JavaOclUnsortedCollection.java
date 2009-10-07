@@ -39,10 +39,8 @@ import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBag;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSet;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclUnsortedCollection;
-import tudresden.ocl20.pivot.modelbus.modelinstance.exception.TypeNotFoundInModelException;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceCollection;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
-import tudresden.ocl20.pivot.standardlibrary.java.exceptions.InvalidException;
 import tudresden.ocl20.pivot.standardlibrary.java.factory.JavaStandardLibraryFactory;
 
 /**
@@ -62,12 +60,14 @@ public abstract class JavaOclUnsortedCollection<T extends OclAny> extends
 
 		super(imiCollection);
 	}
-	
+
 	public JavaOclUnsortedCollection(String undefinedReason) {
+
 		super(undefinedReason);
 	}
-	
+
 	public JavaOclUnsortedCollection(Throwable invalidReason) {
+
 		super(invalidReason);
 	}
 
@@ -88,14 +88,10 @@ public abstract class JavaOclUnsortedCollection<T extends OclAny> extends
 				new ArrayList<IModelInstanceElement>();
 
 		union.addAll(this.imiCollection.getCollection());
-		union.addAll(((IModelInstanceCollection) aBag
-				.getModelInstanceElement()).getCollection());
+		union.addAll(((IModelInstanceCollection) aBag.getModelInstanceElement())
+				.getCollection());
 
-		try {
-			result = JavaStandardLibraryFactory.INSTANCE.createOclBag(union);
-		} catch (TypeNotFoundInModelException e) {
-			throw new InvalidException(e);
-		}
+		result = JavaStandardLibraryFactory.INSTANCE.createOclBag(union);
 
 		return result;
 	}
@@ -128,12 +124,7 @@ public abstract class JavaOclUnsortedCollection<T extends OclAny> extends
 			}
 		}
 
-		try {
-			result = JavaStandardLibraryFactory.INSTANCE.createOclSet(intersection);
-		} catch (TypeNotFoundInModelException e) {
-			// TODO Michael: OK?
-			throw new InvalidException(e);
-		}
+		result = JavaStandardLibraryFactory.INSTANCE.createOclSet(intersection);
 
 		return result;
 	}

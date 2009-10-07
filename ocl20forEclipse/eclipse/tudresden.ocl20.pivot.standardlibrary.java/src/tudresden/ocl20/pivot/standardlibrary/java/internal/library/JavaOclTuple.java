@@ -39,7 +39,6 @@ import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclTuple;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceCollection;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceString;
-import tudresden.ocl20.pivot.pivotmodel.Operation;
 import tudresden.ocl20.pivot.standardlibrary.java.factory.JavaStandardLibraryFactory;
 
 /**
@@ -49,7 +48,7 @@ import tudresden.ocl20.pivot.standardlibrary.java.factory.JavaStandardLibraryFac
  * 
  * @author Ronny Brandt
  */
-public class JavaOclTuple extends JavaOclAny implements OclTuple {
+public class JavaOclTuple extends JavaOclLibraryObject implements OclTuple {
 
 	protected IModelInstanceCollection<IModelInstanceString> names;
 	protected IModelInstanceCollection<IModelInstanceElement> values;
@@ -70,17 +69,19 @@ public class JavaOclTuple extends JavaOclAny implements OclTuple {
 		// FIXME Michael: is this a problem, if the names are not in the super
 		// class?
 		super(values);
-		//TODO Michael: check if collections are Lists and have same size
+		// TODO Michael: check if collections are Lists and have same size
 
 		this.names = names;
 		this.values = values;
 	}
-	
+
 	public JavaOclTuple(String undefinedReason) {
+
 		super(undefinedReason);
 	}
-	
+
 	public JavaOclTuple(Throwable invalidReason) {
+
 		super(invalidReason);
 	}
 
@@ -126,6 +127,8 @@ public class JavaOclTuple extends JavaOclAny implements OclTuple {
 				((List<IModelInstanceString>) names.getCollection()).indexOf(pathname);
 		IModelInstanceElement imiResult =
 				((List<IModelInstanceElement>) values.getCollection()).get(indexOf);
+		// FIXME Michael: imiResult can be undefined; if key exists, then undefined;
+		// else invalid
 		result = JavaStandardLibraryFactory.INSTANCE.createOclAny(imiResult);
 
 		return result;
@@ -136,12 +139,4 @@ public class JavaOclTuple extends JavaOclAny implements OclTuple {
 		// TODO Michael: implement
 		return null;
 	}
-
-	public OclAny invokeOperation(Operation operation, OclAny... parameters)
-			throws NoSuchMethodException {
-
-		// TODO Michael: implement
-		return null;
-	}
-
 }

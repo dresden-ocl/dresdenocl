@@ -38,10 +38,8 @@ import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBag;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBoolean;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSet;
-import tudresden.ocl20.pivot.modelbus.modelinstance.exception.TypeNotFoundInModelException;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceCollection;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
-import tudresden.ocl20.pivot.standardlibrary.java.exceptions.InvalidException;
 import tudresden.ocl20.pivot.standardlibrary.java.factory.JavaStandardLibraryFactory;
 
 /**
@@ -61,12 +59,14 @@ public class JavaOclBag<T extends OclAny> extends JavaOclUnsortedCollection<T>
 
 		super(imiCollection);
 	}
-	
+
 	public JavaOclBag(String undefinedReason) {
+
 		super(undefinedReason);
 	}
-	
+
 	public JavaOclBag(Throwable invalidReason) {
+
 		super(invalidReason);
 	}
 
@@ -160,13 +160,7 @@ public class JavaOclBag<T extends OclAny> extends JavaOclUnsortedCollection<T>
 			/* Remove the given object as often as possible. */
 		}
 
-		try {
-			result =
-					JavaStandardLibraryFactory.INSTANCE.createOclBag(resultCollection);
-		} catch (TypeNotFoundInModelException e) {
-			// TODO Michael: OK? -> new OclCollection instead of this required?
-			throw new InvalidException(e);
-		}
+		result = JavaStandardLibraryFactory.INSTANCE.createOclBag(resultCollection);
 
 		return result;
 	}
@@ -205,12 +199,7 @@ public class JavaOclBag<T extends OclAny> extends JavaOclUnsortedCollection<T>
 			}
 		}
 
-		try {
-			result = JavaStandardLibraryFactory.INSTANCE.createOclBag(flat);
-		} catch (TypeNotFoundInModelException e) {
-			// TODO: OK?
-			throw new InvalidException(e);
-		}
+		result = JavaStandardLibraryFactory.INSTANCE.createOclBag(flat);
 
 		return result;
 	}
@@ -233,12 +222,7 @@ public class JavaOclBag<T extends OclAny> extends JavaOclUnsortedCollection<T>
 		include.addAll(imiCollection.getCollection());
 		include.add(anObject.getModelInstanceElement());
 
-		try {
-			result = JavaStandardLibraryFactory.INSTANCE.createOclBag(include);
-		} catch (TypeNotFoundInModelException e) {
-			// TODO: OK? -> can this happen here?
-			throw new InvalidException(e);
-		}
+		result = JavaStandardLibraryFactory.INSTANCE.createOclBag(include);
 
 		return result;
 	}
@@ -272,12 +256,7 @@ public class JavaOclBag<T extends OclAny> extends JavaOclUnsortedCollection<T>
 			}
 		}
 
-		try {
-			result = JavaStandardLibraryFactory.INSTANCE.createOclBag(intersection);
-		} catch (TypeNotFoundInModelException e) {
-			// TODO: OK?
-			throw new InvalidException(e);
-		}
+		result = JavaStandardLibraryFactory.INSTANCE.createOclBag(intersection);
 
 		return result;
 	}
@@ -304,12 +283,7 @@ public class JavaOclBag<T extends OclAny> extends JavaOclUnsortedCollection<T>
 		union.addAll(imiCollection.getCollection());
 		union.addAll(otherCollection);
 
-		try {
-			result = JavaStandardLibraryFactory.INSTANCE.createOclBag(union);
-		} catch (TypeNotFoundInModelException e) {
-			// TODO: OK?
-			throw new InvalidException(e);
-		}
+		result = JavaStandardLibraryFactory.INSTANCE.createOclBag(union);
 
 		return result;
 	}

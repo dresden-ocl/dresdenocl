@@ -30,11 +30,16 @@
  */
 package tudresden.ocl20.pivot.standardlibrary.java.internal.library;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBoolean;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSet;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceBoolean;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.base.BasisJavaModelInstanceFactory;
+import tudresden.ocl20.pivot.standardlibrary.java.factory.JavaStandardLibraryFactory;
 
 /**
  * <p>
@@ -47,7 +52,7 @@ import tudresden.ocl20.pivot.modelbus.modelinstance.types.base.BasisJavaModelIns
 public class JavaOclBoolean extends JavaOclLibraryObject implements OclBoolean {
 
 	private IModelInstanceBoolean imiBoolean;
-	
+
 	/* The false instance. */
 	private static OclBoolean FALSE =
 			new JavaOclBoolean(BasisJavaModelInstanceFactory
@@ -67,19 +72,27 @@ public class JavaOclBoolean extends JavaOclLibraryObject implements OclBoolean {
 	 *          the {@link IModelInstanceBoolean} to be adapted
 	 */
 	private JavaOclBoolean(IModelInstanceBoolean imiBoolean) {
+
 		super(imiBoolean);
-		
+
 		this.imiBoolean = imiBoolean;
 	}
-	
+
+	/**
+	 * The constructors for invalid and undefined {@link OclBoolean}s have to
+	 * create a new instance of {@link OclBoolean}, as they may have different
+	 * invalid and undefined reasons.
+	 */
 	public JavaOclBoolean(String undefinedReason) {
+
 		super(undefinedReason);
 	}
 
 	public JavaOclBoolean(Throwable invalidReason) {
+
 		super(invalidReason);
 	}
-	
+
 	/**
 	 * <p>
 	 * Gets the single instance of JavaOclBoolean which is true, or the other
@@ -255,9 +268,8 @@ public class JavaOclBoolean extends JavaOclLibraryObject implements OclBoolean {
 
 		OclBoolean result;
 
-		// TODO Michael: Is an equality test on undefined objects undefined or false?
 		checkUndefinedAndInvalid(this, that);
-		
+
 		/* Check if the given Object is not a boolean. */
 		if (!(that instanceof OclBoolean)) {
 			result = FALSE;
@@ -282,8 +294,16 @@ public class JavaOclBoolean extends JavaOclLibraryObject implements OclBoolean {
 
 	public <T extends OclAny> OclSet<T> asSet() {
 
-		// TODO Auto-generated method stub
-		return null;
+		checkUndefinedAndInvalid(this);
+
+		OclSet<T> result;
+
+		Set<IModelInstanceElement> imiSet = new HashSet<IModelInstanceElement>();
+		imiSet.add(imiBoolean);
+
+		result = JavaStandardLibraryFactory.INSTANCE.createOclSet(imiSet);
+
+		return result;
 	}
 
 }

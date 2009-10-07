@@ -30,9 +30,13 @@
  */
 package tudresden.ocl20.pivot.standardlibrary.java.internal.library;
 
+import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
+import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBoolean;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclEnumLiteral;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclType;
+import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSet;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceEnumerationLiteral;
+import tudresden.ocl20.pivot.pivotmodel.Operation;
+import tudresden.ocl20.pivot.standardlibrary.java.exceptions.InvalidException;
 
 /**
  * <p>
@@ -41,28 +45,64 @@ import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceEnumerat
  * 
  * @author Ronny Brandt
  */
-// FIXME Michael: Should inherit from OclAny/OclModelInstanceObject/OclLibraryObject?
+// FIXME Michael: Should inherit from
+// OclAny/OclModelInstanceObject/OclLibraryObject?
 public class JavaOclEnumLiteral extends JavaOclAny implements OclEnumLiteral {
 
+	private IModelInstanceEnumerationLiteral imiEnumerationLiteral;
+	
 	/**
 	 * <p>
 	 * Instantiates a new {@link JavaOclEnumLiteral}.
 	 * </p>
 	 * 
 	 * @param adaptee
-	 *            The adapted element of this {@link JavaOclEnumLiteral}.
+	 *          The adapted element of this {@link JavaOclEnumLiteral}.
 	 */
-	public JavaOclEnumLiteral(IModelInstanceEnumerationLiteral imiEnumerationLiteral) {
+	public JavaOclEnumLiteral(
+			IModelInstanceEnumerationLiteral imiEnumerationLiteral) {
+
 		super(imiEnumerationLiteral);
+		this.imiEnumerationLiteral = imiEnumerationLiteral;
 	}
-	
-	
+
 	public JavaOclEnumLiteral(String undefinedReason) {
+
 		super(undefinedReason);
 	}
-	
+
 	public JavaOclEnumLiteral(Throwable invalidReason) {
+
 		super(invalidReason);
+	}
+
+	public <T extends OclAny> OclSet<T> asSet() {
+
+		// TODO Michael: implement
+		return null;
+	}
+
+	public OclAny invokeOperation(Operation operation, OclAny... parameters) {
+
+		throw new InvalidException(new UnsupportedOperationException(
+				"Cannot invoke a method on an enumeration literal."));
+	}
+
+	public OclBoolean isEqualTo(OclAny that) {
+
+		OclBoolean result;
+		
+		checkUndefinedAndInvalid(this, that);
+		
+		if (that instanceof JavaOclEnumLiteral) {
+			JavaOclEnumLiteral enumLiteral = (JavaOclEnumLiteral) that;
+			boolean boolResult = imiEnumerationLiteral.equals(enumLiteral.imiEnumerationLiteral);
+			result = JavaOclBoolean.getInstance(boolResult);
+		} else {
+			result = JavaOclBoolean.getInstance(false);
+		}
+		
+		return result;
 	}
 
 }

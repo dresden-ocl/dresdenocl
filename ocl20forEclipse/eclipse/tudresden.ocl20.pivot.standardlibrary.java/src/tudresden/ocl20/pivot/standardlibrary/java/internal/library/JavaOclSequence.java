@@ -40,7 +40,6 @@ import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclOrderedSet;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSequence;
-import tudresden.ocl20.pivot.modelbus.modelinstance.exception.TypeNotFoundInModelException;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceCollection;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceInteger;
@@ -71,12 +70,14 @@ public class JavaOclSequence<T extends OclAny> extends
 
 		super(imiCollection);
 	}
-	
+
 	public JavaOclSequence(String undefinedReason) {
+
 		super(undefinedReason);
 	}
-	
+
 	public JavaOclSequence(Throwable invalidReason) {
+
 		super(invalidReason);
 	}
 
@@ -96,12 +97,7 @@ public class JavaOclSequence<T extends OclAny> extends
 		append.addAll(imiCollection.getCollection());
 		append.add(that.getModelInstanceElement());
 
-		try {
-			result = JavaStandardLibraryFactory.INSTANCE.createOclSequence(append);
-		} catch (TypeNotFoundInModelException e) {
-			// TODO: OK? -> can this happen here?
-			throw new InvalidException(e);
-		}
+		result = JavaStandardLibraryFactory.INSTANCE.createOclSequence(append);
 
 		return result;
 	}
@@ -124,12 +120,7 @@ public class JavaOclSequence<T extends OclAny> extends
 		exclude.addAll(imiCollection.getCollection());
 		exclude.remove(that.getModelInstanceElement());
 
-		try {
-			result = JavaStandardLibraryFactory.INSTANCE.createOclSequence(exclude);
-		} catch (TypeNotFoundInModelException e) {
-			// TODO: OK? -> can this happen here?
-			throw new InvalidException(e);
-		}
+		result = JavaStandardLibraryFactory.INSTANCE.createOclSequence(exclude);
 
 		return result;
 	}
@@ -170,12 +161,7 @@ public class JavaOclSequence<T extends OclAny> extends
 			}
 		}
 
-		try {
-			result = JavaStandardLibraryFactory.INSTANCE.createOclSequence(flat);
-		} catch (TypeNotFoundInModelException e) {
-			// TODO: OK?
-			throw new InvalidException(e);
-		}
+		result = JavaStandardLibraryFactory.INSTANCE.createOclSequence(flat);
 
 		return result;
 	}
@@ -214,12 +200,11 @@ public class JavaOclSequence<T extends OclAny> extends
 		insertAt.addAll(imiCollection.getCollection());
 
 		try {
+
 			insertAt.add(intIndex, anElement.getModelInstanceElement());
 			result = JavaStandardLibraryFactory.INSTANCE.createOclSequence(insertAt);
+
 		} catch (IndexOutOfBoundsException e) {
-			throw new InvalidException(e);
-		} catch (TypeNotFoundInModelException e) {
-			// TODO: OK? -> can this happen here?
 			throw new InvalidException(e);
 		}
 
@@ -298,12 +283,7 @@ public class JavaOclSequence<T extends OclAny> extends
 		prepend.add(that.getModelInstanceElement());
 		prepend.addAll(imiCollection.getCollection());
 
-		try {
-			result = JavaStandardLibraryFactory.INSTANCE.createOclSequence(prepend);
-		} catch (TypeNotFoundInModelException e) {
-			// TODO: OK? -> can this happen here?
-			throw new InvalidException(e);
-		}
+		result = JavaStandardLibraryFactory.INSTANCE.createOclSequence(prepend);
 
 		return result;
 	}
@@ -341,9 +321,6 @@ public class JavaOclSequence<T extends OclAny> extends
 					JavaStandardLibraryFactory.INSTANCE.createOclSequence(subSequence);
 		} catch (IndexOutOfBoundsException e) {
 			throw new InvalidException(e);
-		} catch (TypeNotFoundInModelException e) {
-			// TODO: OK? -> can this happen here?
-			throw new InvalidException(e);
 		}
 
 		return result;
@@ -369,12 +346,7 @@ public class JavaOclSequence<T extends OclAny> extends
 		union.addAll(imiCollection.getCollection());
 		union.addAll(thatCollection);
 
-		try {
-			result = JavaStandardLibraryFactory.INSTANCE.createOclSequence(union);
-		} catch (TypeNotFoundInModelException e) {
-			// TODO: OK? -> can this happen here?
-			throw new InvalidException(e);
-		}
+		result = JavaStandardLibraryFactory.INSTANCE.createOclSequence(union);
 
 		return result;
 	}

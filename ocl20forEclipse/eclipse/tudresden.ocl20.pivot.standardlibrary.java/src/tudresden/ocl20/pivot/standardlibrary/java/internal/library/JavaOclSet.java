@@ -40,10 +40,8 @@ import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBag;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBoolean;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSet;
-import tudresden.ocl20.pivot.modelbus.modelinstance.exception.TypeNotFoundInModelException;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceCollection;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
-import tudresden.ocl20.pivot.standardlibrary.java.exceptions.InvalidException;
 import tudresden.ocl20.pivot.standardlibrary.java.factory.JavaStandardLibraryFactory;
 
 /**
@@ -69,14 +67,15 @@ public class JavaOclSet<T extends OclAny> extends JavaOclUnsortedCollection<T>
 			IModelInstanceCollection<IModelInstanceElement> imiCollection) {
 
 		super(imiCollection);
-		// FIXME Michael: test, if collection is Set already?
 	}
-	
+
 	public JavaOclSet(String undefinedReason) {
+
 		super(undefinedReason);
 	}
-	
+
 	public JavaOclSet(Throwable invalidReason) {
+
 		super(invalidReason);
 	}
 
@@ -100,12 +99,7 @@ public class JavaOclSet<T extends OclAny> extends JavaOclUnsortedCollection<T>
 		complement.addAll(imiCollection.getCollection());
 		complement.removeAll(otherCollection);
 
-		try {
-			result = JavaStandardLibraryFactory.INSTANCE.createOclSet(complement);
-		} catch (TypeNotFoundInModelException e) {
-			// TODO: OK? -> can this happen here?
-			throw new InvalidException(e);
-		}
+		result = JavaStandardLibraryFactory.INSTANCE.createOclSet(complement);
 
 		return result;
 	}
@@ -127,12 +121,7 @@ public class JavaOclSet<T extends OclAny> extends JavaOclUnsortedCollection<T>
 		exclude.addAll(imiCollection.getCollection());
 		exclude.remove(that.getModelInstanceElement());
 
-		try {
-			result = JavaStandardLibraryFactory.INSTANCE.createOclSet(exclude);
-		} catch (TypeNotFoundInModelException e) {
-			// TODO: OK? -> can this happen here?
-			throw new InvalidException(e);
-		}
+		result = JavaStandardLibraryFactory.INSTANCE.createOclSet(exclude);
 
 		return result;
 	}
@@ -171,12 +160,7 @@ public class JavaOclSet<T extends OclAny> extends JavaOclUnsortedCollection<T>
 			}
 		}
 
-		try {
-			result = JavaStandardLibraryFactory.INSTANCE.createOclSet(flat);
-		} catch (TypeNotFoundInModelException e) {
-			// TODO: OK?
-			throw new InvalidException(e);
-		}
+		result = JavaStandardLibraryFactory.INSTANCE.createOclSet(flat);
 
 		return result;
 	}
@@ -198,12 +182,7 @@ public class JavaOclSet<T extends OclAny> extends JavaOclUnsortedCollection<T>
 		include.addAll(imiCollection.getCollection());
 		include.add(that.getModelInstanceElement());
 
-		try {
-			result = JavaStandardLibraryFactory.INSTANCE.createOclSet(include);
-		} catch (TypeNotFoundInModelException e) {
-			// TODO: OK? -> can this happen here?
-			throw new InvalidException(e);
-		}
+		result = JavaStandardLibraryFactory.INSTANCE.createOclSet(include);
 
 		return result;
 	}
@@ -307,13 +286,8 @@ public class JavaOclSet<T extends OclAny> extends JavaOclUnsortedCollection<T>
 		/* add the other collection that is already without intersection elements */
 		symmetricDifference.addAll(otherCollectionCopy);
 
-		try {
-			result =
-					JavaStandardLibraryFactory.INSTANCE.createOclSet(symmetricDifference);
-		} catch (TypeNotFoundInModelException e) {
-			// TODO: OK?
-			throw new InvalidException(e);
-		}
+		result =
+				JavaStandardLibraryFactory.INSTANCE.createOclSet(symmetricDifference);
 
 		return result;
 	}
@@ -339,12 +313,7 @@ public class JavaOclSet<T extends OclAny> extends JavaOclUnsortedCollection<T>
 		union.addAll(imiCollection.getCollection());
 		union.addAll(otherCollection);
 
-		try {
-			result = JavaStandardLibraryFactory.INSTANCE.createOclSet(union);
-		} catch (TypeNotFoundInModelException e) {
-			// TODO: OK?
-			throw new InvalidException(e);
-		}
+		result = JavaStandardLibraryFactory.INSTANCE.createOclSet(union);
 
 		return result;
 	}

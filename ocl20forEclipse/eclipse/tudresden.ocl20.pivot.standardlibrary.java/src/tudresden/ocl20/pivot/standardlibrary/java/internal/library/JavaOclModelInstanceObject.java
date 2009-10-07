@@ -43,7 +43,6 @@ import tudresden.ocl20.pivot.modelbus.modelinstance.exception.OperationAccessExc
 import tudresden.ocl20.pivot.modelbus.modelinstance.exception.OperationNotFoundException;
 import tudresden.ocl20.pivot.modelbus.modelinstance.exception.PropertyAccessException;
 import tudresden.ocl20.pivot.modelbus.modelinstance.exception.PropertyNotFoundException;
-import tudresden.ocl20.pivot.modelbus.modelinstance.exception.TypeNotFoundInModelException;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceObject;
 import tudresden.ocl20.pivot.pivotmodel.Operation;
@@ -77,12 +76,14 @@ public class JavaOclModelInstanceObject extends JavaOclAny implements
 		super(imiObject);
 		this.imiObject = imiObject;
 	}
-	
+
 	public JavaOclModelInstanceObject(String undefinedReason) {
+
 		super(undefinedReason);
 	}
-	
+
 	public JavaOclModelInstanceObject(Throwable invalidReason) {
+
 		super(invalidReason);
 	}
 
@@ -90,24 +91,46 @@ public class JavaOclModelInstanceObject extends JavaOclAny implements
 
 		OclAny result;
 
-		checkUndefinedAndInvalid(this);
-
-		IModelInstanceElement imiResult;
-		try {
-			imiResult = imiObject.getProperty(property);
-		} catch (PropertyNotFoundException e) {
-
-			throw new InvalidException(e);
-		} catch (PropertyAccessException e) {
-
-			throw new InvalidException(e);
+		if (this.oclIsInvalid().isTrue()) {
+			result =
+					JavaStandardLibraryFactory.INSTANCE.createOclInvalid(property
+							.getType(), this.getInvalidReason());
 		}
+		else if (this.oclIsUndefined().isTrue()) {
+			result =
+					JavaStandardLibraryFactory.INSTANCE.createOclUndefined(property
+							.getType(), this.getUndefinedreason());
+		}
+		else {
+			IModelInstanceElement imiResult;
+			try {
+				imiResult = imiObject.getProperty(property);
 
-		result = JavaStandardLibraryFactory.INSTANCE.createOclAny(imiResult);
+				if (imiResult.isUndefined()) {
+					result =
+							JavaStandardLibraryFactory.INSTANCE.createOclUndefined(property
+									.getType(), imiResult.getName() + " is null.");
+				}
+				else {
+					result = JavaStandardLibraryFactory.INSTANCE.createOclAny(imiResult);
+				}
+			} catch (PropertyNotFoundException e) {
 
+				result =
+						JavaStandardLibraryFactory.INSTANCE.createOclInvalid(property
+								.getType(), e);
+			} catch (PropertyAccessException e) {
+
+				result =
+						JavaStandardLibraryFactory.INSTANCE.createOclInvalid(property
+								.getType(), e);
+			}
+
+		}
 		return result;
 	}
 
+	// FIXME Michael: analogous to above
 	public OclAny invokeOperation(Operation operation, OclAny... args) {
 
 		OclAny result;
@@ -144,15 +167,10 @@ public class JavaOclModelInstanceObject extends JavaOclAny implements
 
 		checkUndefinedAndInvalid(this);
 
-		Set<IModelInstanceObject> resultSet = new HashSet<IModelInstanceObject>();
+		Set<IModelInstanceElement> resultSet = new HashSet<IModelInstanceElement>();
 		resultSet.add(this.imiObject);
 
-		try {
-			result = JavaStandardLibraryFactory.INSTANCE.createOclSet(resultSet);
-		} catch (TypeNotFoundInModelException e) {
-			// TODO Michael: can this happen?
-			throw new InvalidException(e);
-		}
+		result = JavaStandardLibraryFactory.INSTANCE.createOclSet(resultSet);
 
 		return result;
 

@@ -63,7 +63,6 @@ public abstract class JavaOclAny implements OclAny {
 
 	private IModelInstanceElement imiElement;
 
-	// TODO Michael: how to enforce this constraint?
 	/**
 	 * <p>
 	 * Constructor for null elements. These elements can provide a reason for
@@ -80,6 +79,9 @@ public abstract class JavaOclAny implements OclAny {
 	 *          the reason why this element is undefined
 	 */
 	public JavaOclAny(String undefinedReason) {
+
+		if (undefinedReason == null)
+			throw new IllegalArgumentException("Undefined reason cannot be null.");
 
 		this.undefinedreason = undefinedReason;
 	}
@@ -102,6 +104,9 @@ public abstract class JavaOclAny implements OclAny {
 	 */
 	public JavaOclAny(Throwable invalidReason) {
 
+		if (invalidReason == null)
+			throw new IllegalArgumentException("Invalid reason cannot be null.");
+
 		this.invalidReason = invalidReason;
 	}
 
@@ -114,9 +119,16 @@ public abstract class JavaOclAny implements OclAny {
 	 */
 	public JavaOclAny(IModelInstanceElement imiElement) {
 
+		if (imiElement == null)
+			throw new IllegalArgumentException(
+					"IModelInstanceElement cannot be null.");
+
 		this.imiElement = imiElement;
 	}
 
+	// FIXME Michael: Bad smell! Each class should have its own static map -> what
+	// to do with getOperationNames; operations of supertypes have to be
+	// considered
 	/**
 	 * Contains the operation names which are different in the standard library
 	 * than in the OCL specification. The names are separated in sub maps
@@ -132,9 +144,6 @@ public abstract class JavaOclAny implements OclAny {
 		binaryOperations = new HashMap<String, String>();
 		binaryOperations.put("=", "isEqualTo");
 		binaryOperations.put("<>", "isNotEqualTo");
-		binaryOperations.put("->", "asSet");
-		// FIXME Michael: do we need this? Who should map this?
-		binaryOperations.put(".", "getPropertyValue");
 		operationNames.put(2, binaryOperations);
 	}
 
@@ -216,6 +225,7 @@ public abstract class JavaOclAny implements OclAny {
 		return JavaOclBoolean.getInstance(false);
 	}
 
+	// TODO Michael: catch exception in invokeOperation
 	@SuppressWarnings("unchecked")
 	public <T extends OclAny> T oclAsType(OclType<T> type)
 			throws AsTypeCastException {
@@ -230,13 +240,13 @@ public abstract class JavaOclAny implements OclAny {
 
 		checkUndefinedAndInvalid(this, typespec);
 
-		final boolean contains = imiElement.getTypes().contains(typespec.getType());
+		final boolean contains = imiElement.isKindOf(typespec.getType());
 		return JavaStandardLibraryFactory.INSTANCE.createOclBoolean(contains);
 	}
 
 	public <T extends OclAny> OclBoolean oclIsTypeOf(OclType<T> typespec) {
 
-		// FIXME Michael: How to determine this?
+		// TODO Michael: Implement, when Claas' implementation of isTypeOf is ready.
 		return null;
 	}
 

@@ -49,8 +49,10 @@ import tudresden.ocl20.pivot.standardlibrary.java.factory.JavaStandardLibraryFac
  * </p>
  * 
  * @author Ronny Brandt
+ * @author Michael Thiele
  */
-public class JavaOclReal extends JavaOclLibraryObject implements OclReal {
+public class JavaOclReal extends JavaOclLibraryObject implements OclReal,
+		IAddableElement {
 
 	private IModelInstanceReal imiReal;
 
@@ -67,12 +69,14 @@ public class JavaOclReal extends JavaOclLibraryObject implements OclReal {
 		super(imiReal);
 		this.imiReal = imiReal;
 	}
-	
+
 	public JavaOclReal(String undefinedReason) {
+
 		super(undefinedReason);
 	}
-	
+
 	public JavaOclReal(Throwable invalidReason) {
+
 		super(invalidReason);
 	}
 
@@ -476,10 +480,47 @@ public class JavaOclReal extends JavaOclLibraryObject implements OclReal {
 		return result.toString();
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny#asSet()
+	 */
 	public <T extends OclAny> OclSet<T> asSet() {
 
 		// TODO Michael: implement this method
 		return null;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.IAddableElement
+	 * #add(tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny)
+	 */
+	public OclAny add(OclAny that) {
+
+		OclAny result;
+
+		try {
+
+			result = add((OclReal) that);
+
+		} catch (ClassCastException e) {
+
+			throw new InvalidException(e);
+		}
+
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.IAddableElement
+	 * #getNeutralElement()
+	 */
+	public OclAny getNeutralElement() {
+
+		return JavaStandardLibraryFactory.INSTANCE.createOclReal(0);
 	}
 
 }

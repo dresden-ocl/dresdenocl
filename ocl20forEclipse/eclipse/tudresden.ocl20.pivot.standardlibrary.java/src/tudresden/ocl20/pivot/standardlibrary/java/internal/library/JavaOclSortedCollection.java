@@ -37,7 +37,6 @@ import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSequence;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSortedCollection;
-import tudresden.ocl20.pivot.modelbus.modelinstance.exception.TypeNotFoundInModelException;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceCollection;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceInteger;
@@ -51,6 +50,7 @@ import tudresden.ocl20.pivot.standardlibrary.java.factory.JavaStandardLibraryFac
  * </p>
  * 
  * @author Ronny Brandt
+ * @author Michael Thiele
  */
 @SuppressWarnings("unchecked")
 public abstract class JavaOclSortedCollection<T extends OclAny> extends
@@ -69,14 +69,15 @@ public abstract class JavaOclSortedCollection<T extends OclAny> extends
 			IModelInstanceCollection<IModelInstanceElement> imiCollection) {
 
 		super(imiCollection);
-		// TODO Michael: conversions of the imiCollection to List?
 	}
-	
+
 	public JavaOclSortedCollection(String undefinedReason) {
+
 		super(undefinedReason);
 	}
-	
+
 	public JavaOclSortedCollection(Throwable invalidReason) {
+
 		super(invalidReason);
 	}
 
@@ -99,22 +100,14 @@ public abstract class JavaOclSortedCollection<T extends OclAny> extends
 
 		/* Try to get the element of the given index. */
 		try {
+
 			IModelInstanceElement element =
 					((List<IModelInstanceElement>) imiCollection.getCollection())
 							.get(intIndex - 1);
 			result = (T) JavaStandardLibraryFactory.INSTANCE.createOclAny(element);
-		}
-		// TODO Michael: is this OclInvalid? -> yes
-		catch (IndexOutOfBoundsException e) {
 
-//			String msg;
-//
-//			msg = "Index for at() out of bounds for Collection ";
-//			msg += this.toString();
-//
-//			result = (T) JavaStandardLibraryFactory.INSTANCE.createOclAny(null);
-//			result.setUndefinedreason(msg);
-			
+		} catch (IndexOutOfBoundsException e) {
+
 			throw new InvalidException(e);
 		}
 
@@ -131,8 +124,7 @@ public abstract class JavaOclSortedCollection<T extends OclAny> extends
 		IModelInstanceInteger imiInteger =
 				BasisJavaModelInstanceFactory.createModelInstanceInteger(1L);
 
-		return this.at(JavaStandardLibraryFactory.INSTANCE
-				.createOclInteger(imiInteger));
+		return this.at(new JavaOclInteger(imiInteger));
 	}
 
 	/*
@@ -191,14 +183,8 @@ public abstract class JavaOclSortedCollection<T extends OclAny> extends
 				.addAll((Collection<? extends IModelInstanceElement>) aCollection
 						.getModelInstanceElement());
 
-		try {
-			result =
-					JavaStandardLibraryFactory.INSTANCE
-							.createOclSequence(resultCollection);
-		} catch (TypeNotFoundInModelException e) {
-			// TODO Michael: can this happen?
-			throw new InvalidException(e);
-		}
+		result =
+				JavaStandardLibraryFactory.INSTANCE.createOclSequence(resultCollection);
 
 		return result;
 	}
