@@ -44,7 +44,7 @@ public class JavaModelInstanceTypeUtility {
 		boolean result;
 
 		/* If the reflective type is a class, compare the qualified names. */
-		if (reflectionType instanceof Class) {
+		if (reflectionType instanceof Class<?>) {
 			Class<?> clazz;
 			clazz = (Class<?>) reflectionType;
 
@@ -89,7 +89,7 @@ public class JavaModelInstanceTypeUtility {
 			}
 		}
 
-		else if (reflectionType instanceof TypeVariable) {
+		else if (reflectionType instanceof TypeVariable<?>) {
 
 			/*
 			 * A TypeVariable can contain more than one classes. Thus, the result is

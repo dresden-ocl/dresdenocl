@@ -30,6 +30,7 @@ import org.eclipse.osgi.util.NLS;
 
 import tudresden.ocl20.pivot.modelbus.IModel;
 import tudresden.ocl20.pivot.modelbus.ModelAccessException;
+import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
 import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance;
 import tudresden.ocl20.pivot.modelbus.modelinstance.base.AbstractModelInstanceProvider;
 import tudresden.ocl20.pivot.modelbus.modelinstance.exception.TypeNotFoundInModelException;
@@ -154,7 +155,13 @@ public class JavaModelInstanceProvider extends AbstractModelInstanceProvider {
 			// no else.
 
 			try {
-				aClassLoader = new URLClassLoader(new URL[] { folderURLs[index] });
+				/*
+				 * The parent class loader from the model bus plug-in is required to
+				 * find types from EMF Ecore like EObject.
+				 */
+				aClassLoader =
+						new URLClassLoader(new URL[] { folderURLs[index] },
+								ModelBusPlugin.class.getClassLoader());
 
 				modelInstanceClass = Class.forName(aClassName, true, aClassLoader);
 
