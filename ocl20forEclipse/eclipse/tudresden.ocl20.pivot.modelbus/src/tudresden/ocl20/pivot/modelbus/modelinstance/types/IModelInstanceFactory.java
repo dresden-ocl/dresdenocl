@@ -19,10 +19,12 @@ with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
 package tudresden.ocl20.pivot.modelbus.modelinstance.types;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.WeakHashMap;
 
 import tudresden.ocl20.pivot.modelbus.IModel;
 import tudresden.ocl20.pivot.modelbus.modelinstance.exception.TypeNotFoundInModelException;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.base.ModelInstanceTuple;
 import tudresden.ocl20.pivot.modelbus.util.OclCollectionTypeKind;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 
@@ -34,6 +36,25 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
  * @author Michael Thiele
  */
 public interface IModelInstanceFactory {
+
+	/**
+	 * <p>
+	 * Creates an {@link IModelInstanceCollection} for a given {@link Collection}
+	 * and a given {@link OclCollectionTypeKind}, the created
+	 * {@link IModelInstanceCollection} shall belong to.
+	 * </p>
+	 * 
+	 * @param collection
+	 *          The {@link Collection} for that a {@link IModelInstanceCollection}
+	 *          shall be created.
+	 * @param kind
+	 *          The {@link OclCollectionTypeKind}, the created
+	 *          {@link IModelInstanceCollection} shall belong to.
+	 * 
+	 * @return The created {@link IModelInstanceCollection}.
+	 */
+	<T extends IModelInstanceElement> IModelInstanceCollection<T> createModelInstanceCollection(
+			Collection<T> collection, OclCollectionTypeKind kind);
 
 	/**
 	 * <p>
@@ -74,20 +95,24 @@ public interface IModelInstanceFactory {
 
 	/**
 	 * <p>
-	 * Creates an {@link IModelInstanceCollection} for a given {@link Collection}
-	 * and a given {@link OclCollectionTypeKind}, the created
-	 * {@link IModelInstanceCollection} shall belong to.
+	 * Creates an {@link IModelInstanceTuple} for a given {@link List} of keys and
+	 * a given {@link List} of values.
 	 * </p>
 	 * 
-	 * @param collection
-	 *          The {@link Collection} for that a {@link IModelInstanceCollection}
-	 *          shall be created.
-	 * @param kind
-	 *          The {@link OclCollectionTypeKind}, the created
-	 *          {@link IModelInstanceCollection} shall belong to.
+	 * <p>
+	 * <strong>Please note that the {@link List}s of keys and values must have the
+	 * same size.</strong> Otherwise, an {@link IllegalArgumentException} is
+	 * thrown.
+	 * </p>
 	 * 
-	 * @return The created {@link IModelInstanceCollection}.
+	 * @param keys
+	 *          The keys of the {@link ModelInstanceTuple}.
+	 * @param values
+	 *          The values of the {@link ModelInstanceTuple}
+	 * @param type
+	 *          The {@link Type} of this {@link ModelInstanceTuple}.
+	 * @return The created {@link IModelInstanceTuple}.
 	 */
-	<T extends IModelInstanceElement> IModelInstanceCollection<T> createModelInstanceCollection(
-			Collection<T> collection, OclCollectionTypeKind kind);
+	IModelInstanceTuple createModelInstanceTuple(List<IModelInstanceString> keys,
+			List<IModelInstanceElement> values, Type type);
 }

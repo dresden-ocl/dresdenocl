@@ -51,7 +51,7 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
  * @author Claas Wilke
  */
 public class JavaModelInstanceCollection<T extends IModelInstanceElement>
-		extends AbstractModelInstanceElement implements IModelInstanceCollection<T> {
+		extends AbstractModelInstanceCollection<T> implements IModelInstanceCollection<T> {
 
 	/** The {@link Logger} for this class. */
 	private static final Logger LOGGER =
@@ -155,39 +155,6 @@ public class JavaModelInstanceCollection<T extends IModelInstanceElement>
 
 		this.myContainedObjects = containedObjects;
 		this.myTypes = new HashSet<Type>();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @seetudresden.ocl20.pivot.modelbus.modelinstance.types.impl.
-	 * AbstractModelInstanceElement#getName()
-	 */
-	public String getName() {
-
-		StringBuffer resultBuffer;
-		resultBuffer = new StringBuffer();
-
-		/* Probably return the element's name. */
-		if (this.myName != null) {
-			resultBuffer.append(this.myName);
-		}
-
-		/* Else probably return the element's id. */
-		else if (this.myId != null) {
-			resultBuffer.append(this.myId);
-		}
-
-		/* Else construct a name of all implemented types. */
-		else {
-			resultBuffer.append(JavaModelInstanceCollection.class.getSimpleName());
-			resultBuffer.append("[");
-			resultBuffer.append("types = " + this.getTypes() + ", ");
-			resultBuffer.append("content = " + this.myContainedObjects.toString());
-			resultBuffer.append("]");
-		}
-		// end else.
-
-		return resultBuffer.toString();
 	}
 
 	/*
@@ -296,58 +263,6 @@ public class JavaModelInstanceCollection<T extends IModelInstanceElement>
 
 	/*
 	 * (non-Javadoc)
-	 * @seetudresden.ocl20.pivot.modelbus.modelinstance.types.base.
-	 * AbstractModelInstanceElement#equals(java.lang.Object)
-	 */
-	@Override
-	public boolean equals(Object object) {
-	
-		boolean result;
-	
-		if (object == null) {
-			result = false;
-		}
-	
-		else if (this == object) {
-			result = true;
-		}
-	
-		if (object instanceof JavaModelInstanceCollection) {
-	
-			JavaModelInstanceCollection<?> other;
-			other = (JavaModelInstanceCollection<?>) object;
-	
-			/* This should not happen. But anyway, null == null results in false. */
-			if (this.isUndefined() || other.isUndefined()) {
-				result = false;
-			}
-	
-			else {
-				result = true;
-	
-				/* Check if both collections are ordered. */
-				result &= this.isOrdered() == other.isOrdered();
-	
-				/* Check if both collections are unique. */
-				result &= this.isUnique() == other.isUnique();
-	
-				/* Check if both collections have the same type(s). */
-				result &= this.getTypes().equals(other.getTypes());
-	
-				/* Check if both collections have the same elements. */
-				result &= this.getCollection().equals(other.getCollection());
-			}
-		}
-	
-		else {
-			result = false;
-		}
-	
-		return result;
-	}
-
-	/*
-	 * (non-Javadoc)
 	 * @see
 	 * tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceCollection
 	 * #getCollection()
@@ -355,119 +270,5 @@ public class JavaModelInstanceCollection<T extends IModelInstanceElement>
 	public Collection<T> getCollection() {
 
 		return this.myContainedObjects;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @seetudresden.ocl20.pivot.modelbus.modelinstance.types.base.
-	 * AbstractModelInstanceElement#hashCode()
-	 */
-	@Override
-	public int hashCode() {
-
-		int result;
-		int prime = 31;
-
-		result = 0;
-
-		if (this.isOrdered()) {
-			result += 1231;
-		}
-
-		else {
-			result += 1237;
-		}
-
-		if (this.isUnique()) {
-			result = prime * result + 1231;
-		}
-
-		else {
-			result = prime * result + 1237;
-		}
-
-		if (this.myContainedObjects == null) {
-			result = prime * result;
-		}
-
-		else {
-			result = prime * result + this.myContainedObjects.hashCode();
-		}
-
-		if (this.myTypes == null) {
-			result = prime * result;
-		}
-
-		else {
-			result = prime * result + this.myTypes.hashCode();
-		}
-
-		return result;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @seetudresden.ocl20.pivot.modelbus.modelinstance.types.base.
-	 * AbstractModelInstanceElement#hashCode()
-	 */
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceCollection
-	 * #isOrdered()
-	 */
-	public boolean isOrdered() {
-
-		boolean result;
-
-		/* Only ordered sets and sequences are ordered. */
-		if (this
-				.isKindOf(PrimitiveAndCollectionTypeConstants.MODEL_TYPE_ORDERED_SET)
-				|| this
-						.isKindOf(PrimitiveAndCollectionTypeConstants.MODEL_TYPE_SEQUENCE)) {
-			result = true;
-		}
-
-		else {
-			result = false;
-		}
-
-		return result;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement
-	 * #isUndefined()
-	 */
-	public boolean isUndefined() {
-
-		return (this.myContainedObjects == null);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceCollection
-	 * #isUnique()
-	 */
-	public boolean isUnique() {
-
-		boolean result;
-
-		/* Only ordered sets and sets are unique. */
-		if (this
-				.isKindOf(PrimitiveAndCollectionTypeConstants.MODEL_TYPE_ORDERED_SET)
-				|| this
-						.isKindOf(PrimitiveAndCollectionTypeConstants.MODEL_TYPE_SET)) {
-			result = true;
-		}
-
-		else {
-			result = false;
-		}
-
-		return result;
 	}
 }

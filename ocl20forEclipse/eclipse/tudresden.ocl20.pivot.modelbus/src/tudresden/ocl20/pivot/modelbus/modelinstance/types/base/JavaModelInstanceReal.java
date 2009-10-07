@@ -45,8 +45,8 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
  * 
  * @author Claas Wilke
  */
-public class JavaModelInstanceReal extends AbstractModelInstanceElement
-		implements IModelInstanceReal {
+public class JavaModelInstanceReal extends AbstractModelInstanceReal implements
+		IModelInstanceReal {
 
 	/** The {@link Logger} for this class. */
 	private static final Logger LOGGER =
@@ -93,38 +93,6 @@ public class JavaModelInstanceReal extends AbstractModelInstanceElement
 			LOGGER.debug(msg);
 		}
 		// no else.
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @seetudresden.ocl20.pivot.modelbus.modelinstance.types.impl.
-	 * AbstractModelInstanceElement#getName()
-	 */
-	public String getName() {
-
-		StringBuffer resultBuffer;
-		resultBuffer = new StringBuffer();
-
-		/* Probably return the element's name. */
-		if (this.myName != null) {
-			resultBuffer.append(this.myName);
-		}
-
-		/* Else probably return the element's id. */
-		else if (this.myId != null) {
-			resultBuffer.append(this.myId);
-		}
-
-		/* Else construct a name of all implemented types. */
-		else {
-			resultBuffer.append(JavaModelInstanceReal.class.getSimpleName());
-			resultBuffer.append("[");
-			resultBuffer.append(this.myNumber);
-			resultBuffer.append("]");
-		}
-		// no else.
-
-		return resultBuffer.toString();
 	}
 
 	/*
@@ -199,42 +167,6 @@ public class JavaModelInstanceReal extends AbstractModelInstanceElement
 
 	/*
 	 * (non-Javadoc)
-	 * @seetudresden.ocl20.pivot.modelbus.modelinstance.types.base.
-	 * AbstractModelInstanceElement#equals(java.lang.Object)
-	 */
-	@Override
-	public boolean equals(Object object) {
-
-		boolean result;
-
-		if (object == null) {
-			result = false;
-		}
-
-		else if (object instanceof JavaModelInstanceReal) {
-
-			JavaModelInstanceReal other;
-			other = (JavaModelInstanceReal) object;
-
-			/* This should not happen. But anyway, null == null results in false. */
-			if (this.isUndefined() || other.isUndefined()) {
-				result = false;
-			}
-
-			else {
-				result = this.getDouble().equals(other.getDouble());
-			}
-		}
-
-		else {
-			result = false;
-		}
-
-		return result;
-	}
-
-	/*
-	 * (non-Javadoc)
 	 * @see
 	 * tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceReal#getReal()
 	 */
@@ -252,37 +184,5 @@ public class JavaModelInstanceReal extends AbstractModelInstanceElement
 		}
 
 		return result;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @seetudresden.ocl20.pivot.modelbus.modelinstance.types.base.
-	 * AbstractModelInstanceElement#hashCode()
-	 */
-	@Override
-	public int hashCode() {
-
-		int result;
-
-		if (this.getDouble() == null) {
-			result = 0;
-		}
-
-		else {
-			result = this.getDouble().hashCode();
-		}
-
-		return result;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement
-	 * #isUndefined()
-	 */
-	public boolean isUndefined() {
-
-		return (this.myNumber == null);
 	}
 }

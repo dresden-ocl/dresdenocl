@@ -47,6 +47,7 @@ import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceFactory;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceInteger;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceReal;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceString;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceTuple;
 import tudresden.ocl20.pivot.modelbus.util.OclCollectionTypeKind;
 import tudresden.ocl20.pivot.pivotmodel.EnumerationLiteral;
 import tudresden.ocl20.pivot.pivotmodel.PrimitiveType;
@@ -483,6 +484,43 @@ public class BasisJavaModelInstanceFactory implements IModelInstanceFactory {
 		// no else.
 
 		return result;
+	}
+
+	public IModelInstanceTuple createModelInstanceTuple(
+			List<IModelInstanceString> keys, List<IModelInstanceElement> values,
+			Type type) {
+
+		IModelInstanceTuple result;
+
+		/* Probably debug the entry of this method. */
+		if (LOGGER.isDebugEnabled()) {
+			String msg;
+
+			msg = "createModelInstanceTuple("; //$NON-NLS-1$
+			msg += "keys = " + keys; //$NON-NLS-1$
+			msg += "values = " + values; //$NON-NLS-1$
+			msg += "type = " + type; //$NON-NLS-1$
+			msg += ")"; //$NON-NLS-1$
+
+			LOGGER.debug(msg);
+		}
+		// no else.
+
+		result = new ModelInstanceTuple(keys, values, type);
+
+		/* Probably debug the exit of this method. */
+		if (LOGGER.isDebugEnabled()) {
+			String msg;
+
+			msg = "createModelInstanceTuple(List<IModelInstanceString>, ";
+			msg += "List<IModelInstanceElement>, Type) - exit"; //$NON-NLS-1$
+			msg += " - result = " + result;
+
+			LOGGER.debug(msg);
+		}
+		// no else.
+
+		return null;
 	}
 
 	/**

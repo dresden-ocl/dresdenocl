@@ -45,7 +45,7 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
  * 
  * @author Claas Wilke
  */
-public class JavaModelInstanceInteger extends AbstractModelInstanceElement
+public class JavaModelInstanceInteger extends AbstractModelInstanceInteger
 		implements IModelInstanceInteger {
 
 	/** The {@link Logger} for this class. */
@@ -93,37 +93,6 @@ public class JavaModelInstanceInteger extends AbstractModelInstanceElement
 			LOGGER.debug(msg);
 		}
 		// no else.
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @seetudresden.ocl20.pivot.modelbus.modelinstance.types.impl.
-	 * AbstractModelInstanceElement#getName()
-	 */
-	public String getName() {
-
-		StringBuffer resultBuffer;
-		resultBuffer = new StringBuffer();
-
-		/* Probably return the element's name. */
-		if (this.myName != null) {
-			resultBuffer.append(this.myName);
-		}
-
-		/* Else probably return the element's id. */
-		else if (this.myId != null) {
-			resultBuffer.append(this.myId);
-		}
-
-		/* Else construct a name of all implemented types. */
-		else {
-			resultBuffer.append(this.getClass().getSimpleName());
-			resultBuffer.append("[");
-			resultBuffer.append(this.myLong.toString());
-			resultBuffer.append("]");
-		}
-
-		return resultBuffer.toString();
 	}
 
 	/*
@@ -198,42 +167,6 @@ public class JavaModelInstanceInteger extends AbstractModelInstanceElement
 
 	/*
 	 * (non-Javadoc)
-	 * @seetudresden.ocl20.pivot.modelbus.modelinstance.types.base.
-	 * AbstractModelInstanceElement#equals(java.lang.Object)
-	 */
-	@Override
-	public boolean equals(Object object) {
-
-		boolean result;
-
-		if (object == null) {
-			result = false;
-		}
-
-		else if (object instanceof JavaModelInstanceInteger) {
-
-			JavaModelInstanceInteger other;
-			other = (JavaModelInstanceInteger) object;
-
-			/* This should not happen. But anyway, null == null results in false. */
-			if (this.isUndefined() || other.isUndefined()) {
-				result = false;
-			}
-
-			else {
-				result = this.getLong().equals(other.getLong());
-			}
-		}
-
-		else {
-			result = false;
-		}
-
-		return result;
-	}
-
-	/*
-	 * (non-Javadoc)
 	 * @see
 	 * tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceInteger#getInteger
 	 * ()
@@ -241,37 +174,5 @@ public class JavaModelInstanceInteger extends AbstractModelInstanceElement
 	public Long getLong() {
 
 		return this.myLong;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @seetudresden.ocl20.pivot.modelbus.modelinstance.types.base.
-	 * AbstractModelInstanceElement#hashCode()
-	 */
-	@Override
-	public int hashCode() {
-
-		int result;
-
-		if (this.getLong() == null) {
-			result = 0;
-		}
-
-		else {
-			result = this.getLong().hashCode();
-		}
-
-		return result;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement
-	 * #isUndefined()
-	 */
-	public boolean isUndefined() {
-
-		return (this.myLong == null);
 	}
 }

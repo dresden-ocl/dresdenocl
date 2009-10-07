@@ -42,7 +42,8 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
  * @author Claas Wilke
  */
 public class ModelInstanceEnumerationLiteral extends
-		AbstractModelInstanceElement implements IModelInstanceEnumerationLiteral {
+		AbstractModelInstanceEnumerationLiteral implements
+		IModelInstanceEnumerationLiteral {
 
 	/** The {@link Logger} for this class. */
 	private static final Logger LOGGER =
@@ -100,39 +101,6 @@ public class ModelInstanceEnumerationLiteral extends
 	 * (non-Javadoc)
 	 * @see
 	 * tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement
-	 * #getName()
-	 */
-	public String getName() {
-
-		StringBuffer resultBuffer;
-		resultBuffer = new StringBuffer();
-
-		/* Probably return the element's name. */
-		if (this.myName != null) {
-			resultBuffer.append(this.myName);
-		}
-
-		/* Else probably return the element's id. */
-		else if (this.myId != null) {
-			resultBuffer.append(this.myId);
-		}
-
-		/* Else construct a name of all implemented types. */
-		else {
-			resultBuffer.append(this.getClass().getSimpleName());
-			resultBuffer.append("[");
-			resultBuffer.append(this.myLiteral.toString());
-			resultBuffer.append("]");
-		}
-		// end else.
-
-		return resultBuffer.toString();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement
 	 * #asType(tudresden.ocl20.pivot.pivotmodel.Type)
 	 */
 	public IModelInstanceElement asType(Type type) throws AsTypeCastException {
@@ -180,44 +148,6 @@ public class ModelInstanceEnumerationLiteral extends
 
 	/*
 	 * (non-Javadoc)
-	 * @seetudresden.ocl20.pivot.modelbus.modelinstance.types.base.
-	 * AbstractModelInstanceElement#equals(java.lang.Object)
-	 */
-	@Override
-	public boolean equals(Object object) {
-
-		boolean result;
-
-		if (object == null) {
-			result = false;
-		}
-
-		else if (object instanceof ModelInstanceEnumerationLiteral) {
-
-			ModelInstanceEnumerationLiteral other;
-			other = (ModelInstanceEnumerationLiteral) object;
-
-			/* This should not happen. But anyway, null == null results in false. */
-			if (this.isUndefined() || other.isUndefined()) {
-				result = false;
-			}
-
-			else {
-				result =
-						this.getLiteral().getQualifiedName().equals(
-								other.getLiteral().getQualifiedName());
-			}
-		}
-
-		else {
-			result = false;
-		}
-
-		return result;
-	}
-
-	/*
-	 * (non-Javadoc)
 	 * @see
 	 * tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceEnumerationLiteral
 	 * #getLiteral()
@@ -225,37 +155,5 @@ public class ModelInstanceEnumerationLiteral extends
 	public EnumerationLiteral getLiteral() {
 
 		return this.myLiteral;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @seetudresden.ocl20.pivot.modelbus.modelinstance.types.base.
-	 * AbstractModelInstanceElement#hashCode()
-	 */
-	@Override
-	public int hashCode() {
-
-		int result;
-
-		if (this.isUndefined()) {
-			result = 0;
-		}
-
-		else {
-			result = 31 * this.getLiteral().getQualifiedName().hashCode();
-		}
-
-		return result;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement
-	 * #isUndefined()
-	 */
-	public boolean isUndefined() {
-
-		return this.myLiteral == null;
 	}
 }
