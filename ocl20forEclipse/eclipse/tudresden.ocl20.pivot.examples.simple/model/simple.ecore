@@ -13,8 +13,16 @@
             <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
             <eStructuralFeatures xsi:type="ecore:EAttribute" name="age" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"/>
           </eClassifiers>
-          <eClassifiers xsi:type="ecore:EClass" name="Student" eSuperTypes="#//ocl20/pivot/examples/simple/Person"/>
           <eClassifiers xsi:type="ecore:EClass" name="Professor" eSuperTypes="#//ocl20/pivot/examples/simple/Person"/>
+          <eClassifiers xsi:type="ecore:EClass" name="Student" eSuperTypes="#//ocl20/pivot/examples/simple/Person"/>
+          <eClassifiers xsi:type="ecore:EClass" name="ModelProviderClass">
+            <eStructuralFeatures xsi:type="ecore:EReference" name="persons" upperBound="-1"
+                eType="#//ocl20/pivot/examples/simple/Person" containment="true"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="professors" upperBound="-1"
+                eType="#//ocl20/pivot/examples/simple/Professor" containment="true"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="students" upperBound="-1"
+                eType="#//ocl20/pivot/examples/simple/Student" containment="true"/>
+          </eClassifiers>
         </eSubpackages>
       </eSubpackages>
     </eSubpackages>

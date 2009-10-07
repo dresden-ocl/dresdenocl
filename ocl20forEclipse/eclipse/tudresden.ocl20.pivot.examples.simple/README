@@ -1,24 +1,40 @@
-This plug-in contains a simple UML model which can be used with 
-Dresden OCL2 for Eclipse using the meta models UML 1.5 or UML 2.0. 
+SIMPLE EXAMPLE PROVIDED WITH DRESDEN OCL2 FOR ECLIPSE
+=====================================================
+
+This plug-in contains the Simple example that is provided with Dresden OCL2
+for Eclipse. The Simple example provides an EMF Ecore or MDT UML2 Model
+and a Java or EMF Ecore Model Instance.
+
+Further details how to import models, model instances and constraints into
+Dresden OCL2 for Eclipse can be found in the manual, available in the 'doc'
+directory of your distribution or online at
+http://dresden-ocl.sourceforge.net/4eclipse_usage.html
 
 
-With meta model UML 1.5
------------------------
-- Load model/simple.xmi as model
-- Load constraints/inv01.ocl as OCL Expression
-- Load bin/tudresden/ocl20/pivot/examples/simple/ModelProviderClass.class 
-  as model instance.
-  
-  
-With meta model UML 2.0
------------------------
-- Load model/simple.uml as model
-- Load constraints/inv01.ocl as OCL Expression
-- Load bin/tudresden/ocl20/pivot/examples/simple/ModelProviderClass.class 
-  as model instance.
-  
-  
-Further Information
--------------------
-Further information about this example and the use of Dresden OCL2 for Eclipse
-can be found in the tutorial provide inside the doc folder of this release.
+Provided Model(s)
+=================
+The model provided by this example exists as Java model, EMF Ecore Model and
+MDT UML2 Model.
+
+* To import the MDT UML2 Model use the file
+  /model/simple.uml
+
+* To import the EMF Ecore Model use the file
+  /model/simple.ecore
+
+Provided Model Instance
+=======================
+The model instance provided by this exists as an EMF Ecore and a Java Model
+Instance. 
+
+* To import the EMF Ecore Model Instance use the file 
+  /modelinstance/instance.simple
+
+* To import the Java Model Instance use the file 
+  /bin/tudresden/ocl20/pivot/examples/simple/instance/ModelInstanceProvider.class
+
+
+Provided OCL Constraints
+========================
+OCL Constraints that are provided by this example are located in the directory
+/constraints

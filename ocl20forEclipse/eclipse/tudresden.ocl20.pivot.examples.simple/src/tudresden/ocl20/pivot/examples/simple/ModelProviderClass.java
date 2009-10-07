@@ -1,44 +1,94 @@
+/**
+ * Copyright (C) 2009 by Claas Wilke (info@claaswilke.de)
+ * 
+ * This file is part of the Simple Examples of Dresden OCL2 for Eclipse.
+ * 
+ * Dresden OCL2 for Eclipse is free software: you can redistribute it and/or modify 
+ * it under the terms of the GNU Lesser General Public License as published by the 
+ * Free Software Foundation, either version 3 of the License, or (at your option)
+ * any later version.
+ * 
+ * Dresden OCL2 for Eclipse is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License 
+ * for more details.
+ * 
+ * You should have received a copy of the GNU Lesser General Public License along 
+ * with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
+ *
+ * $Id$
+ */
 package tudresden.ocl20.pivot.examples.simple;
 
-import java.util.ArrayList;
-import java.util.List;
+import org.eclipse.emf.common.util.EList;
+
+import org.eclipse.emf.ecore.EObject;
 
 /**
+ * <!-- begin-user-doc -->
+ * A representation of the model object '<em><b>Model Provider Class</b></em>'.
+ * <!-- end-user-doc -->
+ *
  * <p>
- * A class which creates a simple model instance of the simple UML model.
+ * The following features are supported:
+ * <ul>
+ *   <li>{@link tudresden.ocl20.pivot.examples.simple.ModelProviderClass#getPersons <em>Persons</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.examples.simple.ModelProviderClass#getProfessors <em>Professors</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.examples.simple.ModelProviderClass#getStudents <em>Students</em>}</li>
+ * </ul>
  * </p>
- * 
- * @author Claas Wilke
+ *
+ * @see tudresden.ocl20.pivot.examples.simple.SimplePackage#getModelProviderClass()
+ * @model
+ * @generated
  */
-public class ModelProviderClass {
+public interface ModelProviderClass extends EObject {
+	/**
+	 * Returns the value of the '<em><b>Persons</b></em>' containment reference list.
+	 * The list contents are of type {@link tudresden.ocl20.pivot.examples.simple.Person}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Persons</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Persons</em>' containment reference list.
+	 * @see tudresden.ocl20.pivot.examples.simple.SimplePackage#getModelProviderClass_Persons()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<Person> getPersons();
 
 	/**
-	 * @return A simple model instance of the simple UML model.
+	 * Returns the value of the '<em><b>Professors</b></em>' containment reference list.
+	 * The list contents are of type {@link tudresden.ocl20.pivot.examples.simple.Professor}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Professors</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Professors</em>' containment reference list.
+	 * @see tudresden.ocl20.pivot.examples.simple.SimplePackage#getModelProviderClass_Professors()
+	 * @model containment="true"
+	 * @generated
 	 */
-	public static List<Object> getModelObjects() {
-		List<Object> result;
+	EList<Professor> getProfessors();
 
-		Person person1;
-		Person person2;
-		Person person3;
+	/**
+	 * Returns the value of the '<em><b>Students</b></em>' containment reference list.
+	 * The list contents are of type {@link tudresden.ocl20.pivot.examples.simple.Student}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Students</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Students</em>' containment reference list.
+	 * @see tudresden.ocl20.pivot.examples.simple.SimplePackage#getModelProviderClass_Students()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<Student> getStudents();
 
-		result = new ArrayList<Object>();
-
-		person1 = new Student();
-		person1.setName("Student Work-a-lot");
-		person1.setAge(22);
-		result.add(person1);
-
-		person2 = new Professor();
-		person2.setName("Prof. Invalid");
-		person2.setAge(-42);
-		result.add(person2);
-
-		person3 = new Person();
-		person3.setName("Person Unspecific");
-		person3.setAge(25);
-		result.add(person3);
-
-		return result;
-	}
-}
+} // ModelProviderClass

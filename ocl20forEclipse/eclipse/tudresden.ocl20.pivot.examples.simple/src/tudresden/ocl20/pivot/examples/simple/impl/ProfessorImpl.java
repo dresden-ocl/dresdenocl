@@ -18,18 +18,40 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.examples.simple;
+package tudresden.ocl20.pivot.examples.simple.impl;
 
+import org.eclipse.emf.ecore.EClass;
+
+import tudresden.ocl20.pivot.examples.simple.Professor;
+import tudresden.ocl20.pivot.examples.simple.SimplePackage;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Student</b></em>'.
+ * An implementation of the model object '<em><b>Professor</b></em>'.
  * <!-- end-user-doc -->
+ * <p>
+ * </p>
  *
- *
- * @see tudresden.ocl20.pivot.examples.simple.SimplePackage#getStudent()
- * @model
  * @generated
  */
-public interface Student extends Person {
-} // Student
+public class ProfessorImpl extends PersonImpl implements Professor {
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected ProfessorImpl() {
+		super();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected EClass eStaticClass() {
+		return SimplePackage.Literals.PROFESSOR;
+	}
+
+} //ProfessorImpl

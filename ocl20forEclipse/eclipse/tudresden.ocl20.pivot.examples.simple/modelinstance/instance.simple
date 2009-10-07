@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<simple:ModelProviderClass xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:simple="http://www.tu-dresden.de/ocl20/pivot/examples/simple">
+  <persons name="Person Unspecific" age="25"/>
+  <professors name="Prof. Invalid" age="-42"/>
+  <students name="Student Work-a-lot" age="22"/>
+</simple:ModelProviderClass>

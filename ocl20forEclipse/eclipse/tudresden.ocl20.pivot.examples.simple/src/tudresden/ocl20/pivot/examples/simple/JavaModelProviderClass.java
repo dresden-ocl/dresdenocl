@@ -20,16 +20,40 @@
  */
 package tudresden.ocl20.pivot.examples.simple;
 
-
 /**
- * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Student</b></em>'.
- * <!-- end-user-doc -->
- *
- *
- * @see tudresden.ocl20.pivot.examples.simple.SimplePackage#getStudent()
- * @model
- * @generated
+ * <p>
+ * This class provides a model representation for the Java Meta Model.
+ * </p>
+ * 
+ * @author Claas Wilke
  */
-public interface Student extends Person {
-} // Student
+public class JavaModelProviderClass {
+
+	/**
+	 * <p>
+	 * The class {@link ModelProviderClass} belongs to the model.
+	 * </p>
+	 */
+	protected ModelProviderClass modelProviderClass;
+
+	/**
+	 * <p>
+	 * The class {@link Person} belongs to the model.
+	 * </p>
+	 */
+	protected Person person;
+
+	/**
+	 * <p>
+	 * The class {@link Professor} belongs to the model.
+	 * </p>
+	 */
+	protected Professor professor;
+
+	/**
+	 * <p>
+	 * The class {@link Student} belongs to the model.
+	 * </p>
+	 */
+	protected Student student;
+}
