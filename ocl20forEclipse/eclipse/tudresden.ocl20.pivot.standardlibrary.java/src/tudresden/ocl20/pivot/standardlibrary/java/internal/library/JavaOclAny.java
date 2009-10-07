@@ -240,14 +240,16 @@ public abstract class JavaOclAny implements OclAny {
 
 		checkUndefinedAndInvalid(this, typespec);
 
-		final boolean contains = imiElement.isKindOf(typespec.getType());
-		return JavaStandardLibraryFactory.INSTANCE.createOclBoolean(contains);
+		final boolean isKindOf = imiElement.isKindOf(typespec.getType());
+		return JavaStandardLibraryFactory.INSTANCE.createOclBoolean(isKindOf);
 	}
 
 	public <T extends OclAny> OclBoolean oclIsTypeOf(OclType<T> typespec) {
 
-		// TODO Michael: Implement, when Claas' implementation of isTypeOf is ready.
-		return null;
+		checkUndefinedAndInvalid(this, typespec);
+		
+		final boolean isTypeOf = imiElement.isTypeOf(typespec.getType());
+		return JavaStandardLibraryFactory.INSTANCE.createOclBoolean(isTypeOf);
 	}
 
 	public IModelInstanceElement getModelInstanceElement() {
