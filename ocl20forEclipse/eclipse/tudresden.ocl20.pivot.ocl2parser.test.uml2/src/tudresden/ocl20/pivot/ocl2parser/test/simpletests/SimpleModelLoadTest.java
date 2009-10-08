@@ -16,44 +16,45 @@
     You should have received a copy of the GNU Lesser General Public License
     along with the OCL parser.  If not, see <http://www.gnu.org/licenses/>.
 .
-*/
+ */
 package tudresden.ocl20.pivot.ocl2parser.test.simpletests;
 
 import junit.framework.TestCase;
-import tudresden.ocl20.logging.LoggingPlugin;
 import tudresden.ocl20.pivot.modelbus.IMetamodel;
 import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
 
 /**
- * This is a little experimental class. It shows how we can access the
- * metamodel registry. This class list only all available metamodels. * 
- * In a manner of speaking this class is useless, for a beginner it can be
- * right usefull.
+ * This is a little experimental class. It shows how we can access the metamodel
+ * registry. This class list only all available metamodels. * In a manner of
+ * speaking this class is useless, for a beginner it can be right usefull.
+ * 
  * @author Nils
- *
+ * 
  */
 public class SimpleModelLoadTest extends TestCase {
+
 	public void testSimpleModelLoad() {
+
 		try {
 			System.out.println("SimpleModeLoadTest was started....");
-						
+
 			ModelBusPlugin plugin = ModelBusPlugin.getDefault();
 			IMetamodel[] metamodels = plugin.getMetamodelRegistry().getMetamodels();
 			System.out.println("Availabe metamodels");
-			for(IMetamodel metaModel : metamodels) {
+			for (IMetamodel metaModel : metamodels) {
 				System.out.println(metaModel.getName());
 				System.out.println("ID: " + metaModel.getId());
-				
+
 			}
 			System.out.println("SimpleModelLoadTest has finished ....");
-		}
-		catch(Exception ex) {
+		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
 	}
-	
+
 	@Override
 	public void runTest() throws Throwable {
+
 		testSimpleModelLoad();
 	}
 }

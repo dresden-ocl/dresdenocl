@@ -15,12 +15,14 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package tudresden.ocl20.pivot.ocl2parser.test.uml2.parsertests;
+package tudresden.ocl20.pivot.ocl2parser.test;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.eclipse.core.runtime.Platform;
 
@@ -36,20 +38,19 @@ import tudresden.ocl20.pivot.ocl2parser.parser.exceptions.ParsingException;
 import tudresden.ocl20.pivot.ocl2parser.parser.exceptions.SemanticException;
 
 /**
- * This class is a singleton. It loads the metamodel repository with the uml
- * metamodel. Also it loads the model file <i>LoyalRoyalOCL2Parser_4.xmi</i>.
- * With the <i>parse</i>-method an ocl file can be parsed against the loaded ocl
- * model. With the the method <i>getLoyaltyProgramModel</i> the model instance
- * can be received.
+ * TODO obsolete JavaDoc This class is a singleton. It loads the metamodel
+ * repository with the uml metamodel. Also it loads the model file
+ * <i>LoyalRoyalOCL2Parser_4.xmi</i>. With the <i>parse</i>-method an ocl file
+ * can be parsed against the loaded ocl model. With the the method
+ * <i>getLoyaltyProgramModel</i> the model instance can be received.
  * 
  * @author Nils
  * 
  */
 public class TestPerformer {
 
-	protected static final String MODEL_BUNDLE =
-			"tudresden.ocl20.pivot.examples.royalandloyal";
-	protected static final String MODEL_BUNDLE_PATH = "model/";
+	protected String model_bundle;
+	protected String model_bundle_path;
 	protected IMetamodel metaModel = null;
 	protected IModelProvider modelProvider = null;
 	protected IModel model = null;
@@ -66,7 +67,10 @@ public class TestPerformer {
 	 * The path to the customized, locally (in this project) saved Model Files.
 	 */
 	protected String localModelFileDirectory = "./src/testData/";
-	static protected TestPerformer self = null;
+	/**
+	 * TestPerformer Cache
+	 */
+	protected static Map<String, TestPerformer> theInstances = null;
 
 	/**
 	 * This constructor loads the uml metamodel.
@@ -75,30 +79,11 @@ public class TestPerformer {
 	 *           is thrown if any error occurred while loading the model or the
 	 *           metamodel
 	 */
-	private TestPerformer() {
+	private TestPerformer(String model_bundle, String model_bundle_path) {
 
 		super();
-
-		// initializeMetamodel();
-
-	}
-
-	/**
-	 * With this method the singleton instance can be received. This instance is
-	 * initialized with the NetBeans UML Metamodel.
-	 * 
-	 * @return the singleton instance
-	 * @throws MetaModelNotFoundException
-	 *           is thrown if any error occurred
-	 */
-	static public TestPerformer getDefault() throws MetaModelNotFoundException {
-
-		if (self == null)
-			self = new TestPerformer();
-		// TODO why
-		// self.initializeMetamodel(tudresden.ocl20.pivot.metamodels.uml2.UML2MetamodelPlugin.ID);
-		self.initializeMetamodel("tudresden.ocl20.pivot.metamodels.uml2");
-		return self;
+		this.model_bundle = model_bundle;
+		this.model_bundle_path = model_bundle_path;
 	}
 
 	/**
@@ -112,16 +97,28 @@ public class TestPerformer {
 	 * @throws MetaModelNotFoundException
 	 *           if metaModelName is invalid
 	 */
-	static public TestPerformer getDefault(String metamodelName)
+	public static TestPerformer getInstance(String metamodelName,
+			String model_bundle, String model_bundle_path)
 			throws MetaModelNotFoundException {
 
-		// TODO insert Propper Exception Handling
-		if (self == null)
-			self = new TestPerformer();
-
-		self.initializeMetamodel(metamodelName);
-
-		return self;
+		TestPerformer currentTestPerformer = null;
+		if (theInstances == null) {
+			theInstances = new HashMap<String, TestPerformer>();
+		}
+		else {
+			currentTestPerformer =
+					theInstances.get(metamodelName + model_bundle + model_bundle_path);
+		}
+		if (currentTestPerformer == null) {
+			// initialize TestPerformer
+			currentTestPerformer = new TestPerformer(model_bundle, model_bundle_path);
+			// TODO insert proper Exception Handling
+			currentTestPerformer.initializeMetamodel(metamodelName);
+			// add TestPerformer to Cache
+			theInstances.put(metamodelName + model_bundle_path + model_bundle_path,
+					currentTestPerformer);
+		}
+		return currentTestPerformer;
 	}
 
 	/**
@@ -167,10 +164,13 @@ public class TestPerformer {
 			pathToModel = localModelFileDirectory;
 		else {
 			/* Get the bundle location for the model files. */
-			pathToModel = Platform.getBundle(MODEL_BUNDLE).getLocation();
+			pathToModel = Platform.getBundle(model_bundle).getLocation();
 
-			/* Remove the 'reference:file:' from the beginning and add path in remote location. */
-			pathToModel = pathToModel.substring(15) + MODEL_BUNDLE_PATH;
+			/*
+			 * Remove the 'reference:file:' from the beginning and add path in remote
+			 * location.
+			 */
+			pathToModel = pathToModel.substring(15) + model_bundle_path;
 		}
 
 		setModel(modelName, pathToModel);
@@ -250,7 +250,7 @@ public class TestPerformer {
 	private void initializeMetamodel(String metamodelName)
 			throws MetaModelNotFoundException {
 
-		// TODO insert propper Exception Handling
+		// TODO insert proper Exception Handling
 		// umlMetaModel =
 		// ModelBusPlugin.getMetamodelRegistry().getMetamodel("tudresden.ocl20.pivot.metamodels.uml");
 		metaModel =

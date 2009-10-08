@@ -15,7 +15,7 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-package tudresden.ocl20.pivot.ocl2parser.test.uml2;
+package tudresden.ocl20.pivot.ocl2parser.test;
 
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;

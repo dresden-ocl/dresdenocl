@@ -1,7 +1,7 @@
 /**
  * 
  */
-package tudresden.ocl20.pivot.ocl2parser.test.uml2.parsertests;
+package tudresden.ocl20.pivot.ocl2parser.test.uml2;
 
 import static org.junit.Assert.*;
 
@@ -9,6 +9,8 @@ import java.io.FileNotFoundException;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import tudresden.ocl20.pivot.ocl2parser.test.AllUML2Tests;
+import tudresden.ocl20.pivot.ocl2parser.test.TestPerformer;
 
 /**
  * @author uni
@@ -27,7 +29,9 @@ public class CollectionRangeTest {
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 
-		testPerformer = TestPerformer.getDefault();
+		testPerformer =
+				TestPerformer.getInstance(AllUML2Tests.META_MODEL_NAME,
+						AllUML2Tests.MODEL_BUNDLE, AllUML2Tests.MODEL_BUNDLE_PATH);
 		testPerformer.setModel("royalsandloyals.uml");
 	}
 

@@ -17,22 +17,25 @@
     along with the OCL parser.  If not, see <http://www.gnu.org/licenses/>.
 .
  */
-package tudresden.ocl20.pivot.ocl2parser.test.uml2.parsertests;
+package tudresden.ocl20.pivot.ocl2parser.test.uml2;
 
 import static org.junit.Assert.*;
 import org.junit.Test;
 
+import tudresden.ocl20.pivot.ocl2parser.test.AllUML2Tests;
+import tudresden.ocl20.pivot.ocl2parser.test.TestPerformer;
 
-public class IncludesAllTest {
+public class LetExpTest {
 
 	@Test
-	public void testIncludesAll() {
+	public void testLetExp() {
 
-		String fileName = "oclTestFiles/includesAll.ocl";
+		String fileName = "oclTestFiles/letExpTest.ocl";
 		try {
-			TestPerformer test = TestPerformer.getDefault();
-			// (...)_includeAll.xmi
-			test.setModel("royalsandloyals_includesAll.uml", true);
+			TestPerformer test =
+					TestPerformer.getInstance(AllUML2Tests.META_MODEL_NAME,
+							AllUML2Tests.MODEL_BUNDLE, AllUML2Tests.MODEL_BUNDLE_PATH);
+			test.setModel("royalsandloyals.uml");
 			test.parseFile(fileName);
 		} catch (Throwable ex) {
 			String message = " This error occured for file " + fileName + ".";

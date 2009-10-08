@@ -15,12 +15,14 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package tudresden.ocl20.pivot.ocl2parser.test.uml2.parsertests;
+package tudresden.ocl20.pivot.ocl2parser.test.uml2;
 
 import static org.junit.Assert.*;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import tudresden.ocl20.pivot.ocl2parser.test.AllUML2Tests;
+import tudresden.ocl20.pivot.ocl2parser.test.TestPerformer;
 
 /**
  * This testcase tests the parser by letting the parser parse all test data
@@ -40,7 +42,9 @@ public class OclFilesTest {
 
 		try {
 			if (testPerformer == null) {
-				testPerformer = TestPerformer.getDefault();
+				testPerformer =
+						TestPerformer.getInstance(AllUML2Tests.META_MODEL_NAME,
+								AllUML2Tests.MODEL_BUNDLE, AllUML2Tests.MODEL_BUNDLE_PATH);
 				testPerformer.setModel("royalsandloyals.uml");
 			}
 		} catch (Exception ex) {

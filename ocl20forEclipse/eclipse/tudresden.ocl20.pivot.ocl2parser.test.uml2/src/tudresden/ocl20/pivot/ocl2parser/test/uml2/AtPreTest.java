@@ -17,7 +17,7 @@
     along with the OCL parser.  If not, see <http://www.gnu.org/licenses/>.
 .
  */
-package tudresden.ocl20.pivot.ocl2parser.test.uml2.parsertests;
+package tudresden.ocl20.pivot.ocl2parser.test.uml2;
 
 import static org.junit.Assert.*;
 
@@ -31,6 +31,9 @@ import tudresden.ocl20.pivot.ocl2parser.parser.exceptions.BuildingASTException;
 import tudresden.ocl20.pivot.ocl2parser.parser.exceptions.LexException;
 import tudresden.ocl20.pivot.ocl2parser.parser.exceptions.ParsingException;
 import tudresden.ocl20.pivot.ocl2parser.parser.exceptions.SemanticException;
+import tudresden.ocl20.pivot.ocl2parser.test.AllUML2Tests;
+import tudresden.ocl20.pivot.ocl2parser.test.MetaModelNotFoundException;
+import tudresden.ocl20.pivot.ocl2parser.test.TestPerformer;
 
 public class AtPreTest {
 
@@ -41,7 +44,9 @@ public class AtPreTest {
 
 		TestPerformer test;
 		try {
-			test = TestPerformer.getDefault();
+			test =
+					TestPerformer.getInstance(AllUML2Tests.META_MODEL_NAME,
+							AllUML2Tests.MODEL_BUNDLE, AllUML2Tests.MODEL_BUNDLE_PATH);
 			test.setModel("royalsandloyals.uml");
 
 			try {

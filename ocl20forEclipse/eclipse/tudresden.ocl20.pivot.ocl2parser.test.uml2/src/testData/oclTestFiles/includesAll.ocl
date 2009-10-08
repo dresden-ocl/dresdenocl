@@ -1,6 +1,6 @@
 package tudresden::ocl20::pivot::examples::royalsandloyals
 
 context LoyaltyProgram
-inv knownServiceLevel: levels->includesALL(membership.currentLevel)
+inv knownServiceLevel: levels->includesAll(membership.currentLevel)
 
 endpackage
