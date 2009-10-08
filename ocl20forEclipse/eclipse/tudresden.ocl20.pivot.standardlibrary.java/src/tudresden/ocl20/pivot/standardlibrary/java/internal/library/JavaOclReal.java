@@ -30,9 +30,7 @@
  */
 package tudresden.ocl20.pivot.standardlibrary.java.internal.library;
 
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
 
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
@@ -81,27 +79,6 @@ public class JavaOclReal extends JavaOclLibraryObject implements OclReal,
 	public JavaOclReal(Throwable invalidReason) {
 
 		super(invalidReason);
-	}
-
-	/* operation names mapping for OclReal */
-	static {
-		Map<String, String> unaryOperations;
-		Map<String, String> binaryOperations;
-
-		unaryOperations = new HashMap<String, String>();
-		unaryOperations.put("-", "negative");
-		operationNames.put(1, unaryOperations);
-
-		binaryOperations = new HashMap<String, String>();
-		binaryOperations.put("<=", "isLessEqual");
-		binaryOperations.put("<", "isLessThan");
-		binaryOperations.put(">=", "isGreaterEqual");
-		binaryOperations.put(">", "isGreaterThan");
-		binaryOperations.put("-", "subtract");
-		binaryOperations.put("+", "add");
-		binaryOperations.put("*", "multiply");
-		binaryOperations.put("/", "divide");
-		operationNames.put(2, binaryOperations);
 	}
 
 	/*
@@ -454,7 +431,7 @@ public class JavaOclReal extends JavaOclLibraryObject implements OclReal,
 			Double double1 = this.imiReal.getDouble();
 			Double double2 =
 					((IModelInstanceReal) that.getModelInstanceElement()).getDouble();
-			result = JavaOclBoolean.getInstance(double1 == double2);
+			result = JavaOclBoolean.getInstance(double1.equals(double2));
 		}
 		return result;
 	}

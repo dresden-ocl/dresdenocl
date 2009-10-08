@@ -484,7 +484,6 @@ public abstract class JavaOclCollection<T extends OclAny> extends
 	
 	public OclIterator<T> getIterator() {
 	
-		// TODO Auto-generated method stub
-		return null;
+		return new JavaOclIterator<T>(this);
 	}
 }

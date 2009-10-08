@@ -37,7 +37,6 @@ import java.util.List;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBag;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBoolean;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSet;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceCollection;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
@@ -175,8 +174,7 @@ public class JavaOclBag<T extends OclAny> extends JavaOclUnsortedCollection<T>
 
 		OclBag<T2> result;
 
-		List<IModelInstanceElement> flat =
-				new ArrayList<IModelInstanceElement>();
+		List<IModelInstanceElement> flat = new ArrayList<IModelInstanceElement>();
 
 		checkUndefinedAndInvalid(this);
 
@@ -187,12 +185,10 @@ public class JavaOclBag<T extends OclAny> extends JavaOclUnsortedCollection<T>
 			 * nested collections are flattened, i.e. their elements are added to the
 			 * result
 			 */
-			if (element instanceof OclCollection<?>) {
-				OclCollection<OclAny> collection = ((OclCollection<OclAny>) element);
-				Collection<IModelInstanceElement> collectionElements =
-						((IModelInstanceCollection<IModelInstanceElement>) collection
-								.getModelInstanceElement()).getCollection();
-				flat.addAll(collectionElements);
+			if (element instanceof IModelInstanceCollection<?>) {
+				IModelInstanceCollection<IModelInstanceElement> collection =
+						((IModelInstanceCollection<IModelInstanceElement>) element);
+				flat.addAll(collection.getCollection());
 			}
 			/* other elements are simply added */
 			else {
@@ -272,8 +268,7 @@ public class JavaOclBag<T extends OclAny> extends JavaOclUnsortedCollection<T>
 
 		OclBag<T> result;
 
-		List<IModelInstanceElement> union =
-				new ArrayList<IModelInstanceElement>();
+		List<IModelInstanceElement> union = new ArrayList<IModelInstanceElement>();
 
 		checkUndefinedAndInvalid(this, that);
 

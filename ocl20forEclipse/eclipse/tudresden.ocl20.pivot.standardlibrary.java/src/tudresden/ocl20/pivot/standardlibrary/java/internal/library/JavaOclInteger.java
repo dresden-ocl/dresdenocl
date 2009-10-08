@@ -33,7 +33,6 @@ package tudresden.ocl20.pivot.standardlibrary.java.internal.library;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclReal;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceInteger;
-import tudresden.ocl20.pivot.modelbus.modelinstance.types.base.BasisJavaModelInstanceFactory;
 import tudresden.ocl20.pivot.standardlibrary.java.exceptions.InvalidException;
 import tudresden.ocl20.pivot.standardlibrary.java.factory.JavaStandardLibraryFactory;
 
@@ -59,8 +58,7 @@ public class JavaOclInteger extends JavaOclReal implements OclInteger {
 	 */
 	public JavaOclInteger(IModelInstanceInteger imiInteger) {
 
-		super(BasisJavaModelInstanceFactory.createModelInstanceReal(imiInteger
-				.getLong()));
+		super(imiInteger);
 		this.imiInteger = imiInteger;
 	}
 	

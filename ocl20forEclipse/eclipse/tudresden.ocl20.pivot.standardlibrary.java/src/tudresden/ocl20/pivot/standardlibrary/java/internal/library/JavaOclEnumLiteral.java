@@ -39,8 +39,6 @@ import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclEnumLiteral;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSet;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceEnumerationLiteral;
-import tudresden.ocl20.pivot.pivotmodel.Operation;
-import tudresden.ocl20.pivot.standardlibrary.java.exceptions.InvalidException;
 import tudresden.ocl20.pivot.standardlibrary.java.factory.JavaStandardLibraryFactory;
 
 /**
@@ -49,10 +47,9 @@ import tudresden.ocl20.pivot.standardlibrary.java.factory.JavaStandardLibraryFac
  * </p>
  * 
  * @author Ronny Brandt
+ * @author Michael Thiele
  */
-// FIXME Michael: Should inherit from
-// OclAny/OclModelInstanceObject/OclLibraryObject?
-public class JavaOclEnumLiteral extends JavaOclAny implements OclEnumLiteral {
+public class JavaOclEnumLiteral extends JavaOclLibraryObject implements OclEnumLiteral {
 
 	private IModelInstanceEnumerationLiteral imiEnumerationLiteral;
 	
@@ -79,12 +76,6 @@ public class JavaOclEnumLiteral extends JavaOclAny implements OclEnumLiteral {
 	public JavaOclEnumLiteral(Throwable invalidReason) {
 
 		super(invalidReason);
-	}
-
-	public OclAny invokeOperation(Operation operation, OclAny... parameters) {
-
-		throw new InvalidException(new UnsupportedOperationException(
-				"Cannot invoke a method on an enumeration literal."));
 	}
 
 	public OclBoolean isEqualTo(OclAny that) {

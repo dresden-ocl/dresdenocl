@@ -776,8 +776,7 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 
 		public String getUndefinedreason() {
 
-			throw new InvalidException(new UnsupportedOperationException(
-					"getUndefinedreason() is not supported on meta-type OclType"));
+			return null;
 		}
 
 		public OclAny invokeOperation(Operation operation, OclAny... parameters) {
@@ -805,8 +804,7 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 
 		public OclBoolean oclIsUndefined() {
 
-			throw new InvalidException(new UnsupportedOperationException(
-					"isOclUndefined() is not supported on meta-type OclType"));
+			return JavaOclBoolean.getInstance(false);
 		}
 
 		public <T extends OclAny> T oclAsType(OclType<T> type) {
@@ -817,8 +815,7 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 
 		public OclBoolean oclIsInvalid() {
 
-			throw new InvalidException(new UnsupportedOperationException(
-					"oclIsInvalid() is not supported on meta-type OclType"));
+			return JavaOclBoolean.getInstance(false);
 		}
 
 		public <T extends OclAny> OclBoolean oclIsKindOf(OclType<T> typespec) {
@@ -833,13 +830,6 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 			throw new InvalidException(
 					new UnsupportedOperationException(
 							"oclIsTypeOf(OclType<T> typespec) is not supported on meta-type OclType"));
-		}
-
-		public void setUndefinedreason(String undefinedreason) {
-
-			throw new InvalidException(
-					new UnsupportedOperationException(
-							"setUndefinedreason(String undefinedreason) is not supported on meta-type OclType"));
 		}
 
 		public OclBoolean isEqualTo(OclAny object2) {
@@ -862,15 +852,8 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 
 		public Throwable getInvalidReason() {
 
-			throw new InvalidException(new UnsupportedOperationException(
-					"getInvalidReason() is not supported on meta-type OclType"));
+			return null;
 		}
 
-		public void setInvalidReason(Throwable cause) {
-
-			throw new InvalidException(
-					new UnsupportedOperationException(
-							"setInvalidReason(Throwable cause) is not supported on meta-type OclType"));
-		}
 	}
 }

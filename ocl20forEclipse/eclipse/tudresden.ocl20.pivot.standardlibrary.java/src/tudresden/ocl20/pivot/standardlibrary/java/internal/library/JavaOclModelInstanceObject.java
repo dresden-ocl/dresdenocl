@@ -47,7 +47,6 @@ import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceObject;
 import tudresden.ocl20.pivot.pivotmodel.Operation;
 import tudresden.ocl20.pivot.pivotmodel.Property;
-import tudresden.ocl20.pivot.standardlibrary.java.exceptions.InvalidException;
 import tudresden.ocl20.pivot.standardlibrary.java.factory.JavaStandardLibraryFactory;
 
 /**
@@ -130,7 +129,6 @@ public class JavaOclModelInstanceObject extends JavaOclAny implements
 		return result;
 	}
 
-	// FIXME Michael: analogous to above
 	public OclAny invokeOperation(Operation operation, OclAny... args) {
 
 		OclAny result;
@@ -146,16 +144,22 @@ public class JavaOclModelInstanceObject extends JavaOclAny implements
 
 		IModelInstanceElement imiResult;
 		try {
+
 			imiResult = imiObject.invokeOperation(operation, imiArgs);
+			result = JavaStandardLibraryFactory.INSTANCE.createOclAny(imiResult);
+
 		} catch (OperationNotFoundException e) {
 
-			throw new InvalidException(e);
+			/*
+			 * If the operation is not defined on the model element, it may be an
+			 * operation on OclAny.
+			 */
+			result = super.invokeOperation(operation, args);
+
 		} catch (OperationAccessException e) {
 
-			throw new InvalidException(e);
+			result = super.invokeOperation(operation, args);
 		}
-
-		result = JavaStandardLibraryFactory.INSTANCE.createOclAny(imiResult);
 
 		return result;
 	}
