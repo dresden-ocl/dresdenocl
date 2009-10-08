@@ -302,10 +302,10 @@ public abstract class JavaOclAny implements OclAny {
 
 		for (OclAny object : objects) {
 
-			if (object.oclIsInvalid().isTrue())
+			if (object.getInvalidReason() != null)
 				throw new InvalidException(object.getInvalidReason());
 
-			if (object.oclIsUndefined().isTrue())
+			if (object.getUndefinedreason() != null)
 				throw new UndefinedException(object.getUndefinedreason());
 
 		}
