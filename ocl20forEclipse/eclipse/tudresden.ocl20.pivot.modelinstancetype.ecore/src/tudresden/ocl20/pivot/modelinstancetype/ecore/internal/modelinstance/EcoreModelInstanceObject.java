@@ -61,6 +61,8 @@ import tudresden.ocl20.pivot.modelinstancetype.ecore.internal.provider.EcoreMode
 import tudresden.ocl20.pivot.modelinstancetype.ecore.internal.util.EcoreModelInstanceTypeUtility;
 import tudresden.ocl20.pivot.pivotmodel.Operation;
 import tudresden.ocl20.pivot.pivotmodel.Parameter;
+import tudresden.ocl20.pivot.pivotmodel.PrimitiveType;
+import tudresden.ocl20.pivot.pivotmodel.PrimitiveTypeKind;
 import tudresden.ocl20.pivot.pivotmodel.Property;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 
@@ -375,9 +377,6 @@ public class EcoreModelInstanceObject extends AbstractModelInstanceObject
 
 		IModelInstanceElement result;
 
-		Class<?> propertySourceClass;
-		Field propertyField;
-
 		/* Check if this object is undefined. */
 		if (this.myEObject == null) {
 			Set<Type> types;
@@ -385,85 +384,73 @@ public class EcoreModelInstanceObject extends AbstractModelInstanceObject
 			types = new HashSet<Type>();
 			types.add(property.getType());
 
+			/* The result will be undefined as well. */
 			result = new EcoreModelInstanceObject(null, types, this.myFactory);
 		}
 
-		/*
-		 * Try to find a field with the property's name in the class the adapted
-		 * object is currently casted to.
-		 */
+		/* Else find a getter method of the property that can be invoked. */
 		else {
-			propertyField = null;
 
 			/*
-			 * Search through all super classes as well. Until the field has been
-			 * found, or no more super classes exist.
+			 * In Ecore, all properties are accessed by getters and setters. This way,
+			 * also properties can be accessed on generated interfaces.
 			 */
-			propertySourceClass = this.myAdaptedType;
+			Method getterMethod;
 
-			while (propertySourceClass != null && propertyField == null) {
+			/* Try to find and invoke a getter method. */
+			try {
+				getterMethod = this.findGetterMethodOfProperty(property);
 
-				try {
-					propertyField =
-							propertySourceClass.getDeclaredField(property.getName());
-				}
+				Object adapteeResult;
+				getterMethod.setAccessible(true);
 
-				catch (NoSuchFieldException e) {
-					/* Try to find the field again in super class. */
-					propertySourceClass = propertySourceClass.getSuperclass();
-				}
+				adapteeResult = getterMethod.invoke(this.myEObject, new Object[0]);
+
+				/* Adapt the result to the expected result type. */
+				result =
+						AbstractModelInstance.adaptInvocationResult(adapteeResult, property
+								.getType(), property, this.myFactory);
 			}
-			// end while.
 
-			/* Check if the field has been found. */
-			if (propertyField != null) {
-				Object propertyValue;
+			catch (IllegalArgumentException e) {
+				String msg;
 
-				propertyValue = null;
-				propertyField.setAccessible(true);
+				msg =
+						EcoreModelInstanceTypeMessages.EcoreModelInstanceObject_PropertyAccessFailed;
+				msg = NLS.bind(msg, property, e.getMessage());
 
-				/* Try to get the field's value. */
-				try {
-					propertyValue = propertyField.get(this.myEObject);
-
-					result =
-							EcoreModelInstance.adaptInvocationResult(propertyValue, property
-									.getType(), property, this.myFactory);
-				}
-
-				catch (IllegalArgumentException e) {
-					String msg;
-
-					msg =
-							EcoreModelInstanceTypeMessages.EcoreModelInstanceObject_PropertyAccessFailed;
-					msg = NLS.bind(msg, property, e.getMessage());
-
-					throw new PropertyAccessException(msg, e);
-				}
-
-				catch (IllegalAccessException e) {
-					String msg;
-
-					msg =
-							EcoreModelInstanceTypeMessages.EcoreModelInstanceObject_PropertyAccessFailed;
-					msg = NLS.bind(msg, property, e.getMessage());
-
-					throw new PropertyAccessException(msg, e);
-				}
+				throw new PropertyAccessException(msg, e);
 			}
-			// no else.
 
-			/* Else throw an exception. */
-			else {
+			catch (IllegalAccessException e) {
+				String msg;
+
+				msg =
+						EcoreModelInstanceTypeMessages.EcoreModelInstanceObject_PropertyAccessFailed;
+				msg = NLS.bind(msg, property, e.getMessage());
+
+				throw new PropertyAccessException(msg, e);
+			}
+
+			catch (InvocationTargetException e) {
+				String msg;
+
+				msg =
+						EcoreModelInstanceTypeMessages.EcoreModelInstanceObject_PropertyAccessFailed;
+				msg = NLS.bind(msg, property, e.getMessage());
+
+				throw new PropertyAccessException(msg, e);
+			}
+
+			catch (OperationNotFoundException e) {
 				String msg;
 
 				msg =
 						EcoreModelInstanceTypeMessages.EcoreModelInstanceObject_PropertyNotFoundInModelInstanceElement;
-				msg = NLS.bind(msg, property, this.myEObject.getClass());
+				msg = NLS.bind(msg, property, this.myAdaptedType);
 
-				throw new PropertyNotFoundException(msg);
+				throw new PropertyNotFoundException(msg, e);
 			}
-			// end else.
 		}
 		// end else.
 
@@ -1242,14 +1229,14 @@ public class EcoreModelInstanceObject extends AbstractModelInstanceObject
 	private Object createAdaptedEnumerationLiteral(
 			IModelInstanceEnumerationLiteral modelInstanceEnumerationLiteral,
 			Class<?> typeClass) {
-	
+
 		Object result;
-	
+
 		/* Check if the given class represents an enumeration. */
 		if (typeClass.isEnum()) {
-	
+
 			result = null;
-	
+
 			/*
 			 * Try to find an enum constant having the same name as the enumeration
 			 * literal.
@@ -1257,17 +1244,17 @@ public class EcoreModelInstanceObject extends AbstractModelInstanceObject
 			for (Object anEnumConstant : typeClass.getEnumConstants()) {
 				if (anEnumConstant.toString().equals(
 						modelInstanceEnumerationLiteral.getLiteral().getName())) {
-	
+
 					result = anEnumConstant;
 					break;
 				}
 				// no else.
 			}
 			// end for.
-	
+
 			if (result == null) {
 				String msg;
-	
+
 				msg =
 						EcoreModelInstanceTypeMessages.EcoreModelInstance_EnumerationLiteralNotFound;
 				msg =
@@ -1276,39 +1263,39 @@ public class EcoreModelInstanceObject extends AbstractModelInstanceObject
 										modelInstanceEnumerationLiteral.getLiteral()
 												.getQualifiedName(),
 										"The enumeration literal could not be adapted to any constant of the given Enum class.");
-	
+
 				throw new IllegalArgumentException(msg);
 			}
 			// no else.
 		}
-	
+
 		/*
 		 * Else check if the given class represents a super class of an Enum
 		 * represented by this literal.
 		 */
 		else {
-	
+
 			List<String> enumerationQualifiedName;
 			String enumClassName;
-	
+
 			enumerationQualifiedName =
 					modelInstanceEnumerationLiteral.getLiteral().getQualifiedNameList();
 			/* Remove the name of the literal. */
 			enumerationQualifiedName.remove(enumerationQualifiedName.size() - 1);
-	
+
 			enumClassName =
 					EcoreModelInstanceTypeUtility
 							.toCanonicalName(enumerationQualifiedName);
-	
+
 			try {
 				Class<?> enumClass;
 				enumClass = this.loadJavaClass(enumClassName);
-	
+
 				/* Check if the found class represents an enumeration. */
 				if (enumClass.isEnum()) {
-	
+
 					result = null;
-	
+
 					/*
 					 * Try to find an enum constant having the same name as the
 					 * enumeration literal.
@@ -1316,16 +1303,16 @@ public class EcoreModelInstanceObject extends AbstractModelInstanceObject
 					for (Object anEnumConstant : enumClass.getEnumConstants()) {
 						if (anEnumConstant.toString().equals(
 								modelInstanceEnumerationLiteral.getLiteral().getName())) {
-	
+
 							result = anEnumConstant;
 							break;
 						}
 					}
 					// end for.
-	
+
 					if (result == null) {
 						String msg;
-	
+
 						msg =
 								EcoreModelInstanceTypeMessages.EcoreModelInstance_EnumerationLiteralNotFound;
 						msg =
@@ -1334,39 +1321,39 @@ public class EcoreModelInstanceObject extends AbstractModelInstanceObject
 												modelInstanceEnumerationLiteral.getLiteral()
 														.getQualifiedName(),
 												"The enumeration literal could not be adapted to any constant of the given Enum class.");
-	
+
 						throw new IllegalArgumentException(msg);
 					}
 					// no else.
 				}
-	
+
 				else {
 					String msg;
-	
+
 					msg =
 							EcoreModelInstanceTypeMessages.EcoreModelInstance_EnumerationLiteralNotFound;
 					msg =
 							NLS.bind(modelInstanceEnumerationLiteral.getLiteral()
 									.getQualifiedName(), "The found class " + enumClass
 									+ " is not an Enum.");
-	
+
 					throw new IllegalArgumentException(msg);
 				}
 			}
-	
+
 			catch (ClassNotFoundException e) {
 				String msg;
-	
+
 				msg =
 						EcoreModelInstanceTypeMessages.EcoreModelInstance_EnumerationLiteralNotFound;
 				msg =
 						NLS.bind(modelInstanceEnumerationLiteral.getLiteral()
 								.getQualifiedName(), e.getMessage());
-	
+
 				throw new IllegalArgumentException(msg, e);
 			}
 		}
-	
+
 		return result;
 	}
 
@@ -1516,6 +1503,99 @@ public class EcoreModelInstanceObject extends AbstractModelInstanceObject
 			 */
 			result = stringValue;
 		}
+
+		return result;
+	}
+
+	/**
+	 * <p>
+	 * A helper {@link Method} used to find a getter {@link Method} of the adapted
+	 * {@link Object} of this {@link EcoreModelInstanceObject} that is a getter
+	 * for a given {@link Property}.
+	 * </p>
+	 * 
+	 * @param property
+	 *          The {@link Property} for that a getter {@link Method} shall be
+	 *          found.
+	 * @return The found getter {@link Method}.
+	 * @throws OperationNotFoundException
+	 *           If no matching getter {@link Method} for the given
+	 *           {@link Property} can be found.
+	 */
+	private Method findGetterMethodOfProperty(Property property)
+			throws OperationNotFoundException {
+
+		Method result;
+
+		String getterMethodName;
+		Class<?> methodSourceClass;
+
+		result = null;
+		methodSourceClass = this.myAdaptedType;
+
+		/* Compute the getter method's name. */
+		if (property.getType() instanceof PrimitiveType
+				&& ((PrimitiveType) property.getType()).getKind().equals(
+						PrimitiveTypeKind.BOOLEAN) && !property.isMultiple()) {
+			getterMethodName = "is";
+		}
+
+		else {
+			getterMethodName = "get";
+		}
+
+		getterMethodName += property.getName();
+
+		/*
+		 * Try to find an according method in the adapted objects class, or one of
+		 * its super classes.
+		 */
+		while (methodSourceClass != null && result == null) {
+
+			for (Method aMethod : methodSourceClass.getDeclaredMethods()) {
+
+				boolean nameIsEqual;
+				boolean resultTypeIsConform;
+				boolean argumentSizeIsEqual;
+
+				/* Check if the name matches to the given getter method name. */
+				nameIsEqual = aMethod.getName().equalsIgnoreCase(getterMethodName);
+
+				/* Check if the return type matches to the given operation's type. */
+				resultTypeIsConform =
+						EcoreModelInstanceTypeUtility.conformsTypeToType(aMethod
+								.getGenericReturnType(), property.getType());
+
+				/*
+				 * Check if the method has the same size of arguments as the given
+				 * operation.
+				 */
+				argumentSizeIsEqual = aMethod.getParameterTypes().length == 0;
+
+				if (nameIsEqual && resultTypeIsConform && argumentSizeIsEqual) {
+
+					result = aMethod;
+					break;
+				}
+				// no else.
+			}
+			// end for.
+
+			methodSourceClass = methodSourceClass.getSuperclass();
+		}
+		// end while.
+
+		/* Probably throw an exception. */
+		if (result == null) {
+			String msg;
+
+			msg =
+					EcoreModelInstanceTypeMessages.EcoreModelInstanceObject_OperationNotFound;
+			msg = NLS.bind(msg, getterMethodName, this.myEObject.getClass());
+
+			throw new OperationNotFoundException(msg);
+		}
+		// no else.
 
 		return result;
 	}
