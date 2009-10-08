@@ -17,9 +17,6 @@ import tudresden.ocl20.pivot.examples.simple.Student;
 public class ModelInstanceProviderClass {
 
 	/**
-	 * FIXME Claas: Test interpretation of the provided instances when the
-	 * interpreter has been refactored.
-	 * 
 	 * <p>
 	 * Returns a {@link List} of {@link Object}s that are part of the
 	 * {@link IModelInstance}.

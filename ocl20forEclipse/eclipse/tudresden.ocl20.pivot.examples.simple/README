@@ -2,8 +2,8 @@ SIMPLE EXAMPLE PROVIDED WITH DRESDEN OCL2 FOR ECLIPSE
 =====================================================
 
 This plug-in contains the Simple example that is provided with Dresden OCL2
-for Eclipse. The Simple example provides an EMF Ecore or MDT UML2 Model
-and a Java or EMF Ecore Model Instance.
+for Eclipse. The Simple example provides a Java or MDT UML2 Model
+and a Java Model Instance.
 
 Further details how to import models, model instances and constraints into
 Dresden OCL2 for Eclipse can be found in the manual, available in the 'doc'
