@@ -2,14 +2,11 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Simple Example Plug-in
 Bundle-SymbolicName: tudresden.ocl20.pivot.examples.simple;singleton:=true
-Bundle-Version: 1.2.0
+Bundle-Version: 2.0.0
 Bundle-ClassPath: .
 Bundle-Vendor: TU Dresden, Sofware Technology Group
-Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
-Export-Package: tudresden.ocl20.pivot.examples.simple,
- tudresden.ocl20.pivot.examples.simple.impl,
- tudresden.ocl20.pivot.examples.simple.util
+Export-Package: tudresden.ocl20.pivot.examples.simple
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore;visibility:=reexport
 Bundle-ActivationPolicy: lazy

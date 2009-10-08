@@ -20,16 +20,12 @@
  */
 package tudresden.ocl20.pivot.examples.simple;
 
-
 /**
- * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Professor</b></em>'.
- * <!-- end-user-doc -->
- *
- *
- * @see tudresden.ocl20.pivot.examples.simple.SimplePackage#getProfessor()
- * @model
- * @generated
+ *<p>
+ * A {@link Professor} is a special {@link Person}.
+ * </p>
+ * 
+ *@author Claas Wilke
  */
-public interface Professor extends Person {
-} // Professor
+public class Professor extends Person {
+}

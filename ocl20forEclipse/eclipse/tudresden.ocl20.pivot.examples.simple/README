@@ -13,22 +13,18 @@ http://dresden-ocl.sourceforge.net/4eclipse_usage.html
 
 Provided Model(s)
 =================
-The model provided by this example exists as Java model, EMF Ecore Model and
+The model provided by this example exists as Java model and
 MDT UML2 Model.
 
 * To import the MDT UML2 Model use the file
   /model/simple.uml
 
-* To import the EMF Ecore Model use the file
-  /model/simple.ecore
+* To import the Java Model use the file
+  /bin/tudresden/ocl20/pivot/examples/simple/ModelProvider.class
 
 Provided Model Instance
 =======================
-The model instance provided by this exists as an EMF Ecore and a Java Model
-Instance. 
-
-* To import the EMF Ecore Model Instance use the file 
-  /modelinstance/instance.simple
+The model instance provided by this exists as a Java Model Instance. 
 
 * To import the Java Model Instance use the file 
   /bin/tudresden/ocl20/pivot/examples/simple/instance/ModelInstanceProvider.class

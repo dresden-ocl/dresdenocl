@@ -20,76 +20,44 @@
  */
 package tudresden.ocl20.pivot.examples.simple;
 
-import org.eclipse.emf.ecore.EObject;
-
 /**
- * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Person</b></em>'.
- * <!-- end-user-doc -->
- *
- * <p>
- * The following features are supported:
- * <ul>
- *   <li>{@link tudresden.ocl20.pivot.examples.simple.Person#getName <em>Name</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.examples.simple.Person#getAge <em>Age</em>}</li>
- * </ul>
+ *<p>
+ * A person has a name and an age.
  * </p>
- *
- * @see tudresden.ocl20.pivot.examples.simple.SimplePackage#getPerson()
- * @model
- * @generated
+ * 
+ *@author Claas Wilke
  */
-public interface Person extends EObject {
+public class Person {
+
+	/** The name of this {@link Person}. */
+	protected String name;
+
+	/** The age of this {@link Person}. */
+	protected int age;
+
 	/**
-	 * Returns the value of the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Name</em>' attribute isn't clear,
-	 * there really should be more of a description here...
+	 * Sets the age of this {@link Person}.
 	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Name</em>' attribute.
-	 * @see #setName(String)
-	 * @see tudresden.ocl20.pivot.examples.simple.SimplePackage#getPerson_Name()
-	 * @model
-	 * @generated
+	 * 
+	 * @param age
+	 *          The age of this {@link Person}.
 	 */
-	String getName();
+	public void setAge(int age) {
+
+		this.age = age;
+	}
 
 	/**
-	 * Sets the value of the '{@link tudresden.ocl20.pivot.examples.simple.Person#getName <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Name</em>' attribute.
-	 * @see #getName()
-	 * @generated
-	 */
-	void setName(String value);
-
-	/**
-	 * Returns the value of the '<em><b>Age</b></em>' attribute.
-	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Age</em>' attribute isn't clear,
-	 * there really should be more of a description here...
+	 * Sets the name of this {@link Person}.
 	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Age</em>' attribute.
-	 * @see #setAge(Integer)
-	 * @see tudresden.ocl20.pivot.examples.simple.SimplePackage#getPerson_Age()
-	 * @model
-	 * @generated
+	 * 
+	 * @param name
+	 *          The name of this {@link Person}.
 	 */
-	Integer getAge();
+	public void setName(String name) {
 
-	/**
-	 * Sets the value of the '{@link tudresden.ocl20.pivot.examples.simple.Person#getAge <em>Age</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Age</em>' attribute.
-	 * @see #getAge()
-	 * @generated
-	 */
-	void setAge(Integer value);
-
-} // Person
+		this.name = name;
+	}
+}

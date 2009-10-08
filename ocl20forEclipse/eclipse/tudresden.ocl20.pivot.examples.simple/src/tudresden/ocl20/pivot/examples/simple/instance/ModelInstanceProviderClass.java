@@ -4,7 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import tudresden.ocl20.pivot.examples.simple.Person;
-import tudresden.ocl20.pivot.examples.simple.SimpleFactory;
+import tudresden.ocl20.pivot.examples.simple.Professor;
+import tudresden.ocl20.pivot.examples.simple.Student;
 
 /**
  * <p>
@@ -16,7 +17,8 @@ import tudresden.ocl20.pivot.examples.simple.SimpleFactory;
 public class ModelInstanceProviderClass {
 
 	/**
-	 * FIXME Claas: Test interpretation of the provided instances when the interpreter has been refactored.
+	 * FIXME Claas: Test interpretation of the provided instances when the
+	 * interpreter has been refactored.
 	 * 
 	 * <p>
 	 * Returns a {@link List} of {@link Object}s that are part of the
@@ -27,6 +29,7 @@ public class ModelInstanceProviderClass {
 	 *         {@link IModelInstance}.
 	 */
 	public static List<Object> getModelObjects() {
+
 		List<Object> result;
 
 		Person person1;
@@ -35,17 +38,17 @@ public class ModelInstanceProviderClass {
 
 		result = new ArrayList<Object>();
 
-		person1 = SimpleFactory.eINSTANCE.createPerson();
+		person1 = new Person();
 		person1.setName("Student Work-a-lot");
 		person1.setAge(22);
 		result.add(person1);
 
-		person2 = SimpleFactory.eINSTANCE.createProfessor();
+		person2 = new Professor();
 		person2.setName("Prof. Invalid");
 		person2.setAge(-42);
 		result.add(person2);
 
-		person3 = SimpleFactory.eINSTANCE.createStudent();
+		person3 = new Student();
 		person3.setName("Person Unspecific");
 		person3.setAge(25);
 		result.add(person3);
