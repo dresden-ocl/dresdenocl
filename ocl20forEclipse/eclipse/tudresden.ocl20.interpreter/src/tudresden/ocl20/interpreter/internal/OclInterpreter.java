@@ -35,6 +35,7 @@ import java.util.Collection;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.Map;
@@ -88,6 +89,8 @@ import tudresden.ocl20.pivot.essentialocl.types.OrderedSetType;
 import tudresden.ocl20.pivot.essentialocl.types.SequenceType;
 import tudresden.ocl20.pivot.essentialocl.types.SetType;
 import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance;
+import tudresden.ocl20.pivot.modelbus.modelinstance.exception.OperationAccessException;
+import tudresden.ocl20.pivot.modelbus.modelinstance.exception.OperationNotFoundException;
 import tudresden.ocl20.pivot.modelbus.modelinstance.exception.PropertyAccessException;
 import tudresden.ocl20.pivot.modelbus.modelinstance.exception.PropertyNotFoundException;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
@@ -190,9 +193,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 	 */
 	public IStandardLibraryFactory getStandardLibraryFactory() {
 
-		// FIXME Michael: JSLF has INSTANCE method; do not need this
-		return null;
-		// return this.myStandardLibraryFactory;
+		return this.myStandardLibraryFactory;
 	}
 
 	/*
@@ -1240,10 +1241,6 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 					// no else.
 				}
 
-				/*
-				 * FIXME Michael: Interface does not recognise that U is an OclAny; for
-				 * better performance: let interpreter create collections of OclAnys?
-				 */
 				result = myStandardLibraryFactory.createOclOrderedSet(tempList);
 			}
 
@@ -1586,7 +1583,6 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			/* Reset the accumulator variable in the environment. */
 			myEnvironment.addVar(interateExp.getResult().getQualifiedName(), null);
 
-			// TODO Michael: the OclIterator does not exist any more
 			result =
 					evaluateIterate(interateExp.getBody(), col,
 							interateExp.getIterator(), col.getIterator(), interateExp
@@ -2025,22 +2021,6 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 			source = null;
 
-			/*
-			 * TODO Michael: this part is superfluous now, since static operations are
-			 * executed in the IMInstance
-			 */
-			/* Get the source type for static operations. */
-			if (referredOperation != null && referredOperation.isStatic()) {
-
-				myEnvironment.getModelInstance().invokeStaticOperation(
-						referredOperation, args);
-			}
-
-			/* Compute the source type for non-static operations. */
-			else {
-				source = doSwitch((EObject) anOperationCallExp.getSource());
-			}
-
 			body = null;
 
 			/*
@@ -2063,40 +2043,43 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			}
 			// no else.
 
-			argIterator = anOperationCallExp.getArgument().listIterator();
+			/* Get the source type for static operations. */
+			if (referredOperation != null && referredOperation.isStatic()) {
 
-			if (referredOperation != null) {
-				opParams = referredOperation.getInputParameter();
-			}
-
-			else {
-				opParams = null;
-			}
-
-			/* Iterate through the arguments and compute the parameter values. */
-			while (argIterator.hasNext()) {
-
-				OclExpression exp;
-				OclAny param;
-				String parameterName;
-
-				exp = argIterator.next();
-				param = doSwitch((EObject) exp);
-				parameters[argIterator.previousIndex()] = param;
-
-				parameterName = opParams.get(argIterator.previousIndex()).getName();
-
-				/*
-				 * Eventually add the variables to the local interpreter if a body
-				 * expression or definition has been defined.
-				 */
-				if (body != null) {
-					this.setEnviromentVariable(parameterName, param);
+				parameters =
+						computeArguments(anOperationCallExp, body, referredOperation);
+				List<IModelInstanceElement> args =
+						new LinkedList<IModelInstanceElement>();
+				for (OclAny parameter : parameters) {
+					args.add(parameter.getModelInstanceElement());
 				}
-				// no else.
+
+				try {
+					
+					myEnvironment.getModelInstance().invokeStaticOperation(
+							referredOperation, args);
+					
+				} catch (OperationAccessException e) {
+					result =
+							myStandardLibraryFactory.createOclInvalid(anOperationCallExp
+									.getType(), e);
+				} catch (OperationNotFoundException e) {
+					result =
+							myStandardLibraryFactory.createOclInvalid(anOperationCallExp
+									.getType(), e);
+				}
 			}
+
+			/* Compute the source type for non-static operations. */
+			else {
+				source = doSwitch((EObject) anOperationCallExp.getSource());
+			}
+
+			parameters =
+					computeArguments(anOperationCallExp, body, referredOperation);
 
 			/* Handle special operations. */
+			// FIXME: in own operation
 
 			/* The operation atPre has to store the atPre value. */
 			if (opName.equals("atPre")) {
@@ -2178,8 +2161,6 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 					}
 
 					else {
-						// TODO Michael: can referredOperation be null? -> body
-						// expression?
 						result = source.invokeOperation(referredOperation, parameters);
 					}
 				}
@@ -2222,6 +2203,55 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			LOGGER.debug(log);
 		}
 		// no else.
+
+		return result;
+	}
+
+	/**
+	 * @param anOperationCallExp
+	 * @param parameters
+	 * @param body
+	 * @param referredOperation
+	 */
+	private OclAny[] computeArguments(OperationCallExp anOperationCallExp,
+			Constraint body, Operation referredOperation) {
+
+		OclAny[] result = new OclAny[anOperationCallExp.getArgument().size()];
+
+		ListIterator<OclExpression> argIterator;
+		List<Parameter> opParams;
+		argIterator = anOperationCallExp.getArgument().listIterator();
+
+		if (referredOperation != null) {
+			opParams = referredOperation.getInputParameter();
+		}
+
+		else {
+			opParams = null;
+		}
+
+		/* Iterate through the arguments and compute the parameter values. */
+		while (argIterator.hasNext()) {
+
+			OclExpression exp;
+			OclAny param;
+			String parameterName;
+
+			exp = argIterator.next();
+			param = doSwitch((EObject) exp);
+			result[argIterator.previousIndex()] = param;
+
+			parameterName = opParams.get(argIterator.previousIndex()).getName();
+
+			/*
+			 * Eventually add the variables to the local interpreter if a body
+			 * expression or definition has been defined.
+			 */
+			if (body != null) {
+				this.setEnviromentVariable(parameterName, param);
+			}
+			// no else.
+		}
 
 		return result;
 	}
@@ -3116,8 +3146,6 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			}
 			// no else.
 
-			// TODO Michael: is resultType the right type here, since it was tested
-			// before and not right
 			result =
 					myStandardLibraryFactory.createOclInvalid(resultType,
 							new IllegalArgumentException(msg));
@@ -3944,8 +3972,6 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			}
 			// no else.
 
-			// TODO Michael: is resultType the right type here, since it was tested
-			// before and not right
 			result =
 					myStandardLibraryFactory.createOclInvalid(resultType,
 							new IllegalArgumentException(msg));
@@ -4005,8 +4031,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			String msg;
 
 			msg = "Unknown Type of Collection. Type was " + resultType.getName();
-			// TODO Michael: what return type should be used? Is this really
-			// OclInvalid or rather a real exception?
+
 			result =
 					myStandardLibraryFactory.createOclInvalid(resultType,
 							new IllegalArgumentException(msg));

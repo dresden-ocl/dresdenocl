@@ -47,9 +47,11 @@ import tudresden.ocl20.pivot.examples.royalsandloyals.ProgramPartner;
 import tudresden.ocl20.pivot.examples.royalsandloyals.Service;
 import tudresden.ocl20.pivot.examples.royalsandloyals.ServiceLevel;
 import tudresden.ocl20.pivot.examples.royalsandloyals.Transaction;
+import tudresden.ocl20.pivot.modelbus.modelinstance.exception.OperationNotFoundException;
 import tudresden.ocl20.pivot.modelbus.modelinstance.exception.TypeNotFoundInModelException;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
 import tudresden.ocl20.pivot.pivotmodel.Constraint;
+import tudresden.ocl20.pivot.pivotmodel.Operation;
 import tudresden.ocl20.pivot.standardlibrary.java.JavaStandardlibraryPlugin;
 
 /**
@@ -68,7 +70,8 @@ public class TestInterpretation {
 	protected static TestPerformer testPerformer;
 
 	/**
-	 * The {@link IModelInstanceElement}s which shall be interpreted during a test case.
+	 * The {@link IModelInstanceElement}s which shall be interpreted during a test
+	 * case.
 	 */
 	private List<IModelInstanceElement> objectList;
 
@@ -78,13 +81,14 @@ public class TestInterpretation {
 	private List<OclAny> results;
 
 	/**
-	 * The global {@link IInterpretationEnvironment} of the used {@link IOclInterpreter}.
+	 * The global {@link IInterpretationEnvironment} of the used
+	 * {@link IOclInterpreter}.
 	 */
 	private IInterpretationEnvironment globalEnvironment;
 
 	/**
-	 * The current {@link IModelInstanceElement} for that a {@link Constraint} shall be
-	 * interpreted.
+	 * The current {@link IModelInstanceElement} for that a {@link Constraint}
+	 * shall be interpreted.
 	 */
 	private IModelInstanceElement modelObject;
 
@@ -1889,17 +1893,22 @@ public class TestInterpretation {
 		 * Add the values needed as parameters of the operation call constrained by
 		 * this postcondition to the environment.
 		 */
-		testPerformer.setEnvironmentVariable("c", customer);
+		try {
+			testPerformer.setEnvironmentVariable("c", customer);
+		} catch (TypeNotFoundInModelException e1) {
+			fail(e1.getMessage());
+		}
 
 		/* Prepare the selected model objects. */
 		testPerformer.prepareRemainingConstraints(modelObject, false);
 
 		/* Try to invoke the tested operation. */
 		try {
-			loyaltyProgramInOcl.invokeOperation("enroll", customerInOcl);
+			Operation operation = testPerformer.findOperation(modelObject, "enroll");
+			loyaltyProgramInOcl.invokeOperation(operation, customerInOcl);
 		}
 
-		catch (NoSuchMethodException e) {
+		catch (OperationNotFoundException e) {
 			fail("The tested operation could not be invoked. Test failed.");
 		}
 
@@ -1951,8 +1960,10 @@ public class TestInterpretation {
 		loyaltyProgram.addLevel(serviceLevel);
 
 		modelObject = testPerformer.addModelObject(loyaltyProgram);
-		IModelInstanceElement imiProgramPartner = testPerformer.addModelObject(programPartner);
-		IModelInstanceElement imiServiceLevel = testPerformer.addModelObject(serviceLevel);
+		IModelInstanceElement imiProgramPartner =
+				testPerformer.addModelObject(programPartner);
+		IModelInstanceElement imiServiceLevel =
+				testPerformer.addModelObject(serviceLevel);
 		IModelInstanceElement imiService = testPerformer.addModelObject(service);
 
 		loyaltyProgramInOcl =
@@ -1992,10 +2003,12 @@ public class TestInterpretation {
 			parameters[1] = serviceLevelInOcl;
 			parameters[2] = serviceInOcl;
 
-			loyaltyProgramInOcl.invokeOperation("addService", parameters);
+			Operation operation =
+					testPerformer.findOperation(modelObject, "addService");
+			loyaltyProgramInOcl.invokeOperation(operation, parameters);
 		}
 
-		catch (NoSuchMethodException e) {
+		catch (OperationNotFoundException e) {
 			fail("The tested operation could not be invoked. Test failed.");
 		}
 
@@ -2049,8 +2062,10 @@ public class TestInterpretation {
 		loyaltyProgram.addLevel(serviceLevel);
 
 		modelObject = testPerformer.addModelObject(loyaltyProgram);
-		IModelInstanceElement imiProgramPartner = testPerformer.addModelObject(programPartner);
-		IModelInstanceElement imiServiceLevel = testPerformer.addModelObject(serviceLevel);
+		IModelInstanceElement imiProgramPartner =
+				testPerformer.addModelObject(programPartner);
+		IModelInstanceElement imiServiceLevel =
+				testPerformer.addModelObject(serviceLevel);
 		IModelInstanceElement imiService = testPerformer.addModelObject(service);
 
 		loyaltyProgramInOcl =
@@ -2089,10 +2104,12 @@ public class TestInterpretation {
 			parameters[1] = serviceLevelInOcl;
 			parameters[2] = serviceInOcl;
 
-			loyaltyProgramInOcl.invokeOperation("addService", parameters);
+			Operation operation =
+					testPerformer.findOperation(modelObject, "addService");
+			loyaltyProgramInOcl.invokeOperation(operation, parameters);
 		}
 
-		catch (NoSuchMethodException e) {
+		catch (OperationNotFoundException e) {
 			fail("The tested operation could not be invoked. Test failed.");
 		}
 
@@ -2146,8 +2163,10 @@ public class TestInterpretation {
 		loyaltyProgram.addLevel(serviceLevel);
 
 		modelObject = testPerformer.addModelObject(loyaltyProgram);
-		IModelInstanceElement imiProgramPartner = testPerformer.addModelObject(programPartner);
-		IModelInstanceElement imiServiceLevel = testPerformer.addModelObject(serviceLevel);
+		IModelInstanceElement imiProgramPartner =
+				testPerformer.addModelObject(programPartner);
+		IModelInstanceElement imiServiceLevel =
+				testPerformer.addModelObject(serviceLevel);
 		IModelInstanceElement imiService = testPerformer.addModelObject(service);
 
 		loyaltyProgramInOcl =
@@ -2187,10 +2206,12 @@ public class TestInterpretation {
 			parameters[1] = serviceLevelInOcl;
 			parameters[2] = serviceInOcl;
 
-			loyaltyProgramInOcl.invokeOperation("addService", parameters);
+			Operation operation =
+					testPerformer.findOperation(modelObject, "addService");
+			loyaltyProgramInOcl.invokeOperation(operation, parameters);
 		}
 
-		catch (NoSuchMethodException e) {
+		catch (OperationNotFoundException e) {
 			fail("The tested operation could not be invoked. Test failed.");
 		}
 
@@ -2243,12 +2264,13 @@ public class TestInterpretation {
 
 			parameters = new OclAny[0];
 
-			opResult = loyaltyAccountInOcl.invokeOperation("isEmpty", parameters);
+			Operation operation = testPerformer.findOperation(modelObject, "isEmpty");
+			opResult = loyaltyAccountInOcl.invokeOperation(operation, parameters);
 
 			testPerformer.setEnvironmentVariable("result", opResult);
 		}
 
-		catch (NoSuchMethodException e) {
+		catch (OperationNotFoundException e) {
 			fail("The tested operation could not be invoked. Test failed.");
 		}
 
@@ -2299,12 +2321,13 @@ public class TestInterpretation {
 
 			parameters = new OclAny[0];
 
-			opResult = loyaltyAccountInOcl.invokeOperation("isEmpty", parameters);
+			Operation operation = testPerformer.findOperation(modelObject, "isEmpty");
+			opResult = loyaltyAccountInOcl.invokeOperation(operation, parameters);
 
 			testPerformer.setEnvironmentVariable("result", opResult);
 		}
 
-		catch (NoSuchMethodException e) {
+		catch (OperationNotFoundException e) {
 			fail("The tested operation could not be invoked. Test failed.");
 		}
 
@@ -2353,10 +2376,12 @@ public class TestInterpretation {
 
 			parameters = new OclAny[0];
 
-			customerInOcl.invokeOperation("birthdayHappens", parameters);
+			Operation operation =
+					testPerformer.findOperation(modelObject, "birthdayHappens");
+			customerInOcl.invokeOperation(operation, parameters);
 		}
 
-		catch (NoSuchMethodException e) {
+		catch (OperationNotFoundException e) {
 			fail("The tested operation could not be invoked. Test failed.");
 		}
 
@@ -2408,7 +2433,11 @@ public class TestInterpretation {
 		 * Add the values needed as parameters of the operation call constrained by
 		 * this postcondition to the environment.
 		 */
-		testPerformer.setEnvironmentVariable("amount", integer);
+		try {
+			testPerformer.setEnvironmentVariable("amount", integer);
+		} catch (TypeNotFoundInModelException e1) {
+			fail(e1.getMessage());
+		}
 
 		/* Prepare the selected model objects. */
 		testPerformer.prepareRemainingConstraints(modelObject, false);
@@ -2420,10 +2449,12 @@ public class TestInterpretation {
 			parameters = new OclAny[1];
 			parameters[0] = integerInOcl;
 
-			serviceInOcl.invokeOperation("upgradePointsEarned", parameters);
+			Operation operation =
+					testPerformer.findOperation(modelObject, "upgradePointsEarned");
+			serviceInOcl.invokeOperation(operation, parameters);
 		}
 
-		catch (NoSuchMethodException e) {
+		catch (OperationNotFoundException e) {
 			fail("The tested operation could not be invoked. Test failed.");
 		}
 
@@ -2492,12 +2523,14 @@ public class TestInterpretation {
 			OclAny opResult;
 
 			parameters = new OclAny[0];
-			opResult = transactionInOcl.invokeOperation("getProgram", parameters);
+			Operation operation =
+					testPerformer.findOperation(modelObject, "getProgram");
+			opResult = transactionInOcl.invokeOperation(operation, parameters);
 
 			testPerformer.setEnvironmentVariable("result", opResult);
 		}
 
-		catch (NoSuchMethodException e) {
+		catch (OperationNotFoundException e) {
 			fail("The tested operation could not be invoked. Test failed.");
 		}
 
@@ -2566,12 +2599,14 @@ public class TestInterpretation {
 			OclAny opResult;
 
 			parameters = new OclAny[0];
-			opResult = transactionInOcl.invokeOperation("getProgram", parameters);
+			Operation operation =
+					testPerformer.findOperation(modelObject, "getProgram");
+			opResult = transactionInOcl.invokeOperation(operation, parameters);
 
 			testPerformer.setEnvironmentVariable("result", opResult);
 		}
 
-		catch (NoSuchMethodException e) {
+		catch (OperationNotFoundException e) {
 			fail("The tested operation could not be invoked. Test failed.");
 		}
 
@@ -2639,10 +2674,11 @@ public class TestInterpretation {
 
 		/* Try to invoke the tested operation. */
 		try {
-			loyaltyProgramInOcl.invokeOperation("enroll", customerInOcl);
+			Operation operation = testPerformer.findOperation(modelObject, "enroll");
+			loyaltyProgramInOcl.invokeOperation(operation, customerInOcl);
 		}
 
-		catch (NoSuchMethodException e) {
+		catch (OperationNotFoundException e) {
 			fail("The tested operation could not be invoked. Test failed.");
 		}
 
@@ -2694,12 +2730,13 @@ public class TestInterpretation {
 			OclAny opResult;
 
 			parameters = new OclAny[0];
-			opResult = dateInOcl.invokeOperation("now", parameters);
+			Operation operation = testPerformer.findOperation(modelObject, "now");
+			opResult = dateInOcl.invokeOperation(operation, parameters);
 
 			testPerformer.setEnvironmentVariable("result", opResult);
 		}
 
-		catch (NoSuchMethodException e) {
+		catch (OperationNotFoundException e) {
 			fail("The tested operation could not be invoked. Test failed.");
 		}
 
@@ -2741,7 +2778,11 @@ public class TestInterpretation {
 		 */
 		customer = new Customer(23);
 		customer.setName("Testman");
-		testPerformer.setEnvironmentVariable("c", customer);
+		try {
+			testPerformer.setEnvironmentVariable("c", customer);
+		} catch (TypeNotFoundInModelException e1) {
+			fail(e1.getMessage());
+		}
 
 		/* Interpret the selected combinations. */
 		results = testPerformer.interpretRemainingConstraints(modelObject);
@@ -2758,7 +2799,11 @@ public class TestInterpretation {
 
 		/* Set new parameters as preparation. */
 		customer.setName("");
-		testPerformer.setEnvironmentVariable("c", customer);
+		try {
+			testPerformer.setEnvironmentVariable("c", customer);
+		} catch (TypeNotFoundInModelException e) {
+			fail(e.getMessage());
+		}
 
 		/* Interpret the selected combinations. */
 		results = testPerformer.interpretRemainingConstraints(modelObject);
@@ -2820,37 +2865,37 @@ public class TestInterpretation {
 		 */
 		service = new Service();
 
-		// FIXME: is this exception handling OK?
 		try {
 			testPerformer.setEnvironmentVariable("aPartner", programPartner);
 			testPerformer.setEnvironmentVariable("aLevel", serviceLevel);
 			testPerformer.setEnvironmentVariable("aService", service);
 
-			/* Interpret the selected combinations. */
-			results = testPerformer.interpretRemainingConstraints(objectList);
-
-			/* Compare with expected results. */
-			result_Boolean = (OclBoolean) results.get(0);
-			assertFalse(result_Boolean.oclIsUndefined().isTrue());
-			assertTrue(result_Boolean.isTrue());
-
-			/* Compare with expected results. */
-			result_Boolean = (OclBoolean) results.get(1);
-			assertFalse(result_Boolean.oclIsUndefined().isTrue());
-			assertTrue(result_Boolean.isTrue());
-
-			/* Compare with expected results. */
-			result_Boolean = (OclBoolean) results.get(2);
-			assertFalse(result_Boolean.oclIsUndefined().isTrue());
-			assertFalse(result_Boolean.isTrue());
-
-			/* Remove the added values from the environment. */
-			testPerformer.resetEnvironmentVariable("aPartner");
-			testPerformer.resetEnvironmentVariable("aLevel");
-			testPerformer.resetEnvironmentVariable("aServices");
 		} catch (TypeNotFoundInModelException e) {
 			fail(e.getMessage());
 		}
+
+		/* Interpret the selected combinations. */
+		results = testPerformer.interpretRemainingConstraints(objectList);
+
+		/* Compare with expected results. */
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
+		assertTrue(result_Boolean.isTrue());
+
+		/* Compare with expected results. */
+		result_Boolean = (OclBoolean) results.get(1);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
+		assertTrue(result_Boolean.isTrue());
+
+		/* Compare with expected results. */
+		result_Boolean = (OclBoolean) results.get(2);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
+		assertFalse(result_Boolean.isTrue());
+
+		/* Remove the added values from the environment. */
+		testPerformer.resetEnvironmentVariable("aPartner");
+		testPerformer.resetEnvironmentVariable("aLevel");
+		testPerformer.resetEnvironmentVariable("aServices");
 
 	}
 
@@ -2902,9 +2947,13 @@ public class TestInterpretation {
 		 */
 		service = new Service();
 
-		testPerformer.setEnvironmentVariable("aPartner", programPartner);
-		testPerformer.setEnvironmentVariable("aLevel", serviceLevel);
-		testPerformer.setEnvironmentVariable("aService", service);
+		try {
+			testPerformer.setEnvironmentVariable("aPartner", programPartner);
+			testPerformer.setEnvironmentVariable("aLevel", serviceLevel);
+			testPerformer.setEnvironmentVariable("aService", service);
+		} catch (TypeNotFoundInModelException e) {
+			fail(e.getMessage());
+		}
 
 		/* Interpret the selected combinations. */
 		results = testPerformer.interpretRemainingConstraints(objectList);
@@ -2978,9 +3027,13 @@ public class TestInterpretation {
 		 */
 		service = new Service();
 
-		testPerformer.setEnvironmentVariable("aPartner", programPartner);
-		testPerformer.setEnvironmentVariable("aLevel", serviceLevel);
-		testPerformer.setEnvironmentVariable("aService", service);
+		try {
+			testPerformer.setEnvironmentVariable("aPartner", programPartner);
+			testPerformer.setEnvironmentVariable("aLevel", serviceLevel);
+			testPerformer.setEnvironmentVariable("aService", service);
+		} catch (TypeNotFoundInModelException e) {
+			fail(e.getMessage());
+		}
 
 		/* Interpret the selected combinations. */
 		results = testPerformer.interpretRemainingConstraints(objectList);
@@ -3467,19 +3520,19 @@ public class TestInterpretation {
 	 */
 	@Test
 	public void testCollection01() {
-	
+
 		Service service;
-	
+
 		/* Load OCL file. */
 		testPerformer.loadOCLFile("expressions/test/collection01.ocl");
-	
+
 		/* Create the model objects which shall be interpreted. */
 		service = new Service();
 		modelObject = testPerformer.addModelObject(service);
-	
+
 		/* Interpret the selected combinations. */
 		results = testPerformer.interpretRemainingConstraints(modelObject);
-	
+
 		/* Compare with expected results. */
 		result_Boolean = (OclBoolean) results.get(0);
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
@@ -3494,19 +3547,19 @@ public class TestInterpretation {
 	 */
 	@Test
 	public void testCollection02() {
-	
+
 		Service service;
-	
+
 		/* Load OCL file. */
 		testPerformer.loadOCLFile("expressions/test/collection02.ocl");
-	
+
 		/* Create the model objects which shall be interpreted. */
 		service = new Service();
 		modelObject = testPerformer.addModelObject(service);
-	
+
 		/* Interpret the selected combinations. */
 		results = testPerformer.interpretRemainingConstraints(modelObject);
-	
+
 		/* Compare with expected results. */
 		result_Boolean = (OclBoolean) results.get(0);
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
@@ -3521,19 +3574,19 @@ public class TestInterpretation {
 	 */
 	@Test
 	public void testCollection03() {
-	
+
 		Service service;
-	
+
 		/* Load OCL file. */
 		testPerformer.loadOCLFile("expressions/test/collection03.ocl");
-	
+
 		/* Create the model objects which shall be interpreted. */
 		service = new Service();
 		modelObject = testPerformer.addModelObject(service);
-	
+
 		/* Interpret the selected combinations. */
 		results = testPerformer.interpretRemainingConstraints(modelObject);
-	
+
 		/* Compare with expected results. */
 		result_Boolean = (OclBoolean) results.get(0);
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
@@ -3548,19 +3601,19 @@ public class TestInterpretation {
 	 */
 	@Test
 	public void testCollection04() {
-	
+
 		Service service;
-	
+
 		/* Load OCL file. */
 		testPerformer.loadOCLFile("expressions/test/collection04.ocl");
-	
+
 		/* Create the model objects which shall be interpreted. */
 		service = new Service();
 		modelObject = testPerformer.addModelObject(service);
-	
+
 		/* Interpret the selected combinations. */
 		results = testPerformer.interpretRemainingConstraints(modelObject);
-	
+
 		/* Compare with expected results. */
 		result_Boolean = (OclBoolean) results.get(0);
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
@@ -3575,19 +3628,19 @@ public class TestInterpretation {
 	 */
 	@Test
 	public void testCollection05() {
-	
+
 		Service service;
-	
+
 		/* Load OCL file. */
 		testPerformer.loadOCLFile("expressions/test/collection05.ocl");
-	
+
 		/* Create the model objects which shall be interpreted. */
 		service = new Service();
 		modelObject = testPerformer.addModelObject(service);
-	
+
 		/* Interpret the selected combinations. */
 		results = testPerformer.interpretRemainingConstraints(modelObject);
-	
+
 		/* Compare with expected results. */
 		result_Boolean = (OclBoolean) results.get(0);
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
@@ -3602,19 +3655,19 @@ public class TestInterpretation {
 	 */
 	@Test
 	public void testCollection06() {
-	
+
 		Service service;
-	
+
 		/* Load OCL file. */
 		testPerformer.loadOCLFile("expressions/test/collection06.ocl");
-	
+
 		/* Create the model objects which shall be interpreted. */
 		service = new Service();
 		modelObject = testPerformer.addModelObject(service);
-	
+
 		/* Interpret the selected combinations. */
 		results = testPerformer.interpretRemainingConstraints(modelObject);
-	
+
 		/* Compare with expected results. */
 		result_Boolean = (OclBoolean) results.get(0);
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
@@ -3629,20 +3682,20 @@ public class TestInterpretation {
 	 */
 	@Test
 	public void testCollection07() {
-	
+
 		Service service;
-	
+
 		/* Load OCL file. */
 		testPerformer.loadOCLFile("expressions/test/collection07.ocl");
-	
+
 		/* Select the model objects which shall be interpreted. */
 		/* Create the model objects which shall be interpreted. */
 		service = new Service();
 		modelObject = testPerformer.addModelObject(service);
-	
+
 		/* Interpret the selected combinations. */
 		results = testPerformer.interpretRemainingConstraints(modelObject);
-	
+
 		/* Compare with expected results. */
 		result_Boolean = (OclBoolean) results.get(0);
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
@@ -3657,20 +3710,20 @@ public class TestInterpretation {
 	 */
 	@Test
 	public void testCollection08() {
-	
+
 		Service service;
-	
+
 		/* Load OCL file. */
 		testPerformer.loadOCLFile("expressions/test/collection08.ocl");
-	
+
 		/* Select the model objects which shall be interpreted. */
 		/* Create the model objects which shall be interpreted. */
 		service = new Service();
 		modelObject = testPerformer.addModelObject(service);
-	
+
 		/* Interpret the selected combinations. */
 		results = testPerformer.interpretRemainingConstraints(modelObject);
-	
+
 		/* Compare with expected results. */
 		result_Boolean = (OclBoolean) results.get(0);
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
@@ -3685,19 +3738,19 @@ public class TestInterpretation {
 	 */
 	@Test
 	public void testCollection09() {
-	
+
 		Service service;
-	
+
 		/* Load OCL file. */
 		testPerformer.loadOCLFile("expressions/test/collection09.ocl");
-	
+
 		/* Create the model objects which shall be interpreted. */
 		service = new Service();
 		modelObject = testPerformer.addModelObject(service);
-	
+
 		/* Interpret the selected combinations. */
 		results = testPerformer.interpretRemainingConstraints(modelObject);
-	
+
 		/* Compare with expected results. */
 		result_Boolean = (OclBoolean) results.get(0);
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
@@ -3712,37 +3765,37 @@ public class TestInterpretation {
 	 */
 	@Test
 	public void testCollection10() {
-	
+
 		LoyaltyProgram loyaltyProgram1;
 		LoyaltyProgram loyaltyProgram2;
-		
+
 		Customer customer;
-	
+
 		/* Load OCL file. */
 		testPerformer.loadOCLFile("expressions/test/collection10.ocl");
-	
+
 		/* Select the model objects which shall be interpreted. */
 		customer = new Customer(19);
-		
+
 		loyaltyProgram1 = new LoyaltyProgram();
 		loyaltyProgram1.enroll(customer);
-		
+
 		loyaltyProgram2 = new LoyaltyProgram();
-		
+
 		testPerformer.addModelObject(customer);
-	
+
 		objectList = new ArrayList<IModelInstanceElement>();
 		objectList.add(testPerformer.addModelObject(loyaltyProgram1));
 		objectList.add(testPerformer.addModelObject(loyaltyProgram2));
-	
+
 		/* Interpret the selected combinations. */
 		results = testPerformer.interpretRemainingConstraints(objectList);
-	
+
 		/* Compare with expected results. */
 		result_Boolean = (OclBoolean) results.get(0);
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
-	
+
 		/* Compare with expected results. */
 		result_Boolean = (OclBoolean) results.get(1);
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
@@ -3757,37 +3810,37 @@ public class TestInterpretation {
 	 */
 	@Test
 	public void testCollection11() {
-	
+
 		Membership membership1;
 		Membership membership2;
-		
+
 		LoyaltyAccount loyaltyAccount;
-	
+
 		/* Load OCL file. */
 		testPerformer.loadOCLFile("expressions/test/collection11.ocl");
-	
+
 		/* Create the model objects which shall be interpreted. */
 		loyaltyAccount = new LoyaltyAccount();
-		
+
 		membership1 = new Membership();
 		membership1.addAccount(loyaltyAccount);
-		
+
 		membership2 = new Membership();
-		
+
 		testPerformer.addModelObject(loyaltyAccount);
-	
+
 		objectList = new ArrayList<IModelInstanceElement>();
 		objectList.add(testPerformer.addModelObject(membership1));
 		objectList.add(testPerformer.addModelObject(membership2));
-	
+
 		/* Interpret the selected combinations. */
 		results = testPerformer.interpretRemainingConstraints(objectList);
-	
+
 		/* Compare with expected results. */
 		result_Boolean = (OclBoolean) results.get(0);
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertFalse(result_Boolean.isTrue());
-	
+
 		/* Compare with expected results. */
 		result_Boolean = (OclBoolean) results.get(1);
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
@@ -3802,19 +3855,19 @@ public class TestInterpretation {
 	 */
 	@Test
 	public void testCollection12() {
-	
+
 		Membership membership;
-	
+
 		/* Load OCL file. */
 		testPerformer.loadOCLFile("expressions/test/collection12.ocl");
-	
+
 		/* Create the model objects which shall be interpreted. */
 		membership = new Membership();
 		modelObject = testPerformer.addModelObject(membership);
-	
+
 		/* Interpret the selected combinations. */
 		results = testPerformer.interpretRemainingConstraints(modelObject);
-	
+
 		/* Compare with expected results. */
 		result_Boolean = (OclBoolean) results.get(0);
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
@@ -3829,19 +3882,19 @@ public class TestInterpretation {
 	 */
 	@Test
 	public void testCollection13() {
-	
+
 		Membership membership;
-	
+
 		/* Load OCL file. */
 		testPerformer.loadOCLFile("expressions/test/collection13.ocl");
-	
+
 		/* Create the model objects which shall be interpreted. */
 		membership = new Membership();
 		modelObject = testPerformer.addModelObject(membership);
-	
+
 		/* Interpret the selected combinations. */
 		results = testPerformer.interpretRemainingConstraints(modelObject);
-	
+
 		/* Compare with expected results. */
 		result_Boolean = (OclBoolean) results.get(0);
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
@@ -3866,17 +3919,17 @@ public class TestInterpretation {
 
 		/* Select the model objects which shall be interpreted. */
 		serviceLevel = new ServiceLevel();
-		
+
 		loyaltyProgram = new LoyaltyProgram();
 		loyaltyProgram.addLevel(serviceLevel);
-		
+
 		membership = new Membership();
 		membership.setCurrentLevel(serviceLevel);
 		membership.setProgram(loyaltyProgram);
-		
+
 		testPerformer.addModelObject(serviceLevel);
 		testPerformer.addModelObject(loyaltyProgram);
-		
+
 		modelObject = testPerformer.addModelObject(membership);
 
 		/* Interpret the selected combinations. */
@@ -3899,9 +3952,9 @@ public class TestInterpretation {
 
 		Membership membership1;
 		Membership membership2;
-		
+
 		LoyaltyProgram loyaltyProgram;
-		
+
 		ServiceLevel serviceLevel1;
 		ServiceLevel serviceLevel2;
 
@@ -3911,22 +3964,22 @@ public class TestInterpretation {
 		/* Select the model objects which shall be interpreted. */
 		serviceLevel1 = new ServiceLevel();
 		serviceLevel2 = new ServiceLevel();
-		
+
 		loyaltyProgram = new LoyaltyProgram();
 		loyaltyProgram.addLevel(serviceLevel1);
-		
+
 		membership1 = new Membership();
 		membership1.setCurrentLevel(serviceLevel1);
 		membership1.setProgram(loyaltyProgram);
-		
+
 		membership2 = new Membership();
 		membership2.setCurrentLevel(serviceLevel2);
 		membership2.setProgram(loyaltyProgram);
-		
+
 		testPerformer.addModelObject(serviceLevel1);
 		testPerformer.addModelObject(serviceLevel2);
 		testPerformer.addModelObject(loyaltyProgram);
-		
+
 		objectList = new ArrayList<IModelInstanceElement>();
 		objectList.add(testPerformer.addModelObject(membership1));
 		objectList.add(testPerformer.addModelObject(membership2));
@@ -3956,9 +4009,9 @@ public class TestInterpretation {
 
 		Membership membership1;
 		Membership membership2;
-		
+
 		LoyaltyProgram loyaltyProgram;
-		
+
 		ServiceLevel serviceLevel1;
 		ServiceLevel serviceLevel2;
 
@@ -3968,22 +4021,22 @@ public class TestInterpretation {
 		/* Select the model objects which shall be interpreted. */
 		serviceLevel1 = new ServiceLevel();
 		serviceLevel2 = new ServiceLevel();
-		
+
 		loyaltyProgram = new LoyaltyProgram();
 		loyaltyProgram.addLevel(serviceLevel1);
-		
+
 		membership1 = new Membership();
 		membership1.setCurrentLevel(serviceLevel1);
 		membership1.setProgram(loyaltyProgram);
-		
+
 		membership2 = new Membership();
 		membership2.setCurrentLevel(serviceLevel2);
 		membership2.setProgram(loyaltyProgram);
-		
+
 		testPerformer.addModelObject(serviceLevel1);
 		testPerformer.addModelObject(serviceLevel2);
 		testPerformer.addModelObject(loyaltyProgram);
-		
+
 		objectList = new ArrayList<IModelInstanceElement>();
 		objectList.add(testPerformer.addModelObject(membership1));
 		objectList.add(testPerformer.addModelObject(membership2));
@@ -4013,10 +4066,10 @@ public class TestInterpretation {
 
 		Membership membership1;
 		Membership membership2;
-		
+
 		LoyaltyProgram loyaltyProgram1;
 		LoyaltyProgram loyaltyProgram2;
-		
+
 		ServiceLevel serviceLevel1;
 		ServiceLevel serviceLevel2;
 
@@ -4026,25 +4079,25 @@ public class TestInterpretation {
 		/* Select the model objects which shall be interpreted. */
 		serviceLevel1 = new ServiceLevel();
 		serviceLevel2 = new ServiceLevel();
-		
+
 		loyaltyProgram1 = new LoyaltyProgram();
 		loyaltyProgram1.addLevel(serviceLevel1);
-		
+
 		loyaltyProgram2 = new LoyaltyProgram();
 
 		membership1 = new Membership();
 		membership1.setCurrentLevel(serviceLevel1);
 		membership1.setProgram(loyaltyProgram1);
-		
+
 		membership2 = new Membership();
 		membership2.setCurrentLevel(serviceLevel2);
 		membership2.setProgram(loyaltyProgram2);
-		
+
 		testPerformer.addModelObject(serviceLevel1);
 		testPerformer.addModelObject(serviceLevel2);
 		testPerformer.addModelObject(loyaltyProgram1);
 		testPerformer.addModelObject(loyaltyProgram2);
-		
+
 		objectList = new ArrayList<IModelInstanceElement>();
 		objectList.add(testPerformer.addModelObject(membership1));
 		objectList.add(testPerformer.addModelObject(membership2));

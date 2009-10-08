@@ -59,7 +59,7 @@ public class InterpretationEnvironment implements IInterpretationEnvironment {
 	protected IModelInstance modelInstance;
 
 	/** Special values for postcondition constraints. */
-	protected HashMap<Object, HashMap<OperationCallExp, OclAny>> postconditionValues;
+	protected HashMap<OclAny, HashMap<OperationCallExp, OclAny>> postconditionValues;
 
 	/** Saved constraints for body, def, initial and derive. */
 	protected HashMap<String, Constraint> savedConstraints;
@@ -207,7 +207,7 @@ public class InterpretationEnvironment implements IInterpretationEnvironment {
 	public OclAny getPostconditionValue(OperationCallExp operationCallExp) {
 
 		OclAny result;
-		Object selfObject;
+		OclAny contextObject;
 
 		result = null;
 
@@ -215,17 +215,10 @@ public class InterpretationEnvironment implements IInterpretationEnvironment {
 		if (this.postconditionValues != null) {
 			HashMap<OperationCallExp, OclAny> objectSpecificValues;
 
-			// FIXME Michael: what happens here?
 			/* Get the object for which the value is stored. */
-			selfObject = this.getVar(IOclInterpreter.SELF_VARIABLE_NAME).getAdaptee();
+			contextObject = this.getVar(IOclInterpreter.SELF_VARIABLE_NAME);
 
-			/* If the adapted object is null, use the adaptation IModelInstanceElement instead. */
-			if (selfObject == null) {
-				this.getVar(IOclInterpreter.SELF_VARIABLE_NAME);
-			}
-			// no else.
-
-			objectSpecificValues = this.postconditionValues.get(selfObject);
+			objectSpecificValues = this.postconditionValues.get(contextObject);
 
 			if (objectSpecificValues != null) {
 				/* Try to get the value for the given expression. */
@@ -262,25 +255,19 @@ public class InterpretationEnvironment implements IInterpretationEnvironment {
 			OclAny aSource) {
 
 		HashMap<OperationCallExp, OclAny> objectSpecificValues;
-		Object selfObject;
+		OclAny contextObject;
 
 		/* Check if the postcondition values have been initialized at all. */
 		if (this.postconditionValues == null) {
 			this.postconditionValues =
-					new HashMap<Object, HashMap<OperationCallExp, OclAny>>();
+					new HashMap<OclAny, HashMap<OperationCallExp, OclAny>>();
 		}
 		// no else.
 
 		/* Get the object for which the value is stored. */
-		selfObject = this.getVar(IOclInterpreter.SELF_VARIABLE_NAME).getAdaptee();
+		contextObject = this.getVar(IOclInterpreter.SELF_VARIABLE_NAME);
 
-		/* If the adapted object is null, use the adaptation IModelInstanceElement instead. */
-		if (selfObject == null) {
-			this.getVar(IOclInterpreter.SELF_VARIABLE_NAME);
-		}
-		// no else.
-
-		objectSpecificValues = this.postconditionValues.get(selfObject);
+		objectSpecificValues = this.postconditionValues.get(contextObject);
 
 		/* Eventually initialize the specific values. */
 		if (objectSpecificValues == null) {
@@ -292,7 +279,7 @@ public class InterpretationEnvironment implements IInterpretationEnvironment {
 		objectSpecificValues.put(anOperationCallExp, aSource);
 
 		/* Store the specific values. */
-		this.postconditionValues.put(selfObject, objectSpecificValues);
+		this.postconditionValues.put(contextObject, objectSpecificValues);
 	}
 
 	/*

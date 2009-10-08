@@ -49,6 +49,7 @@ import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
 import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance;
 import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceProvider;
 import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceRegistry;
+import tudresden.ocl20.pivot.modelbus.modelinstance.exception.OperationNotFoundException;
 import tudresden.ocl20.pivot.modelbus.modelinstance.exception.TypeNotFoundInModelException;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
 import tudresden.ocl20.pivot.modelinstancetype.java.internal.provider.JavaModelInstanceProvider;
@@ -58,6 +59,7 @@ import tudresden.ocl20.pivot.pivotmodel.NamedElement;
 import tudresden.ocl20.pivot.pivotmodel.Namespace;
 import tudresden.ocl20.pivot.pivotmodel.Operation;
 import tudresden.ocl20.pivot.pivotmodel.Property;
+import tudresden.ocl20.pivot.pivotmodel.Type;
 import tudresden.ocl20.pivot.standardlibrary.java.JavaStandardlibraryPlugin;
 
 /**
@@ -363,6 +365,22 @@ public class TestPerformer {
 		// end for.
 
 		return result;
+	}
+
+	// TODO JavaDoc
+	public Operation findOperation(IModelInstanceElement imiElement, String name) throws OperationNotFoundException {
+
+		for (Type type : imiElement.getTypes()) {
+			
+			for (Operation ownedOperation : type.getOwnedOperation()) {
+
+				if (ownedOperation.getName().equals(name)) {
+					return ownedOperation;
+				}
+			}
+		}
+		
+		throw new OperationNotFoundException("Cannot find operation " + name + " on " + imiElement);
 	}
 
 	/**
