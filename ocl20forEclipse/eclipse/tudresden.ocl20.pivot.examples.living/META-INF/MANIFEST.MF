@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Living Plug-in
 Bundle-SymbolicName: tudresden.ocl20.pivot.examples.living
-Bundle-Version: 1.2.0
+Bundle-Version: 2.0.0
 Export-Package: tudresden.ocl20.pivot.examples.living
 Require-Bundle: tudresden.ocl20.pivot.modelbus
 Bundle-ClassPath: src/,
