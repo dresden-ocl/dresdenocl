@@ -192,6 +192,8 @@ public class JavaOclBoolean extends JavaOclLibraryObject implements OclBoolean {
 	 */
 	public boolean isTrue() {
 
+		checkUndefinedAndInvalid(this);
+		
 		return imiBoolean.getBoolean();
 	}
 

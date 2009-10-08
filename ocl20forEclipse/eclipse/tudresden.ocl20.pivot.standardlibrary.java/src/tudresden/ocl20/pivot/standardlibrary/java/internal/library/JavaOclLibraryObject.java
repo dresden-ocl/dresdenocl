@@ -69,7 +69,8 @@ public abstract class JavaOclLibraryObject extends JavaOclAny implements
 		/* try to invoke the operation */
 		try {
 			Method methodToInvoke =
-					thisClass.getMethod(opName, argClasses.toArray(new Class[0]));
+					findMethod(operation.getName(), thisClass, argClasses
+							.toArray(new Class[0]));
 
 			Object invocationResult = methodToInvoke.invoke(this, (Object[]) args);
 
@@ -124,6 +125,100 @@ public abstract class JavaOclLibraryObject extends JavaOclAny implements
 			result =
 					JavaStandardLibraryFactory.INSTANCE.createOclInvalid(operation
 							.getType(), e);
+		}
+
+		return result;
+	}
+
+	/**
+	 * <p>
+	 * Tries to find a method with a given name and a given array of
+	 * parameterTypes.
+	 * </p>
+	 * 
+	 * @param methodName
+	 *          The name of the method to search for.
+	 * @param sourceType
+	 *          The source type on which the operation shall be invoked.
+	 * @param parameterTypes
+	 *          An Array representing the number and types of parameters to look
+	 *          for in the method's signature. A null array is treated as a
+	 *          zero-length array.
+	 * @param isModelMethod
+	 *          Specifies whether or not the method which shall be found is an OCL
+	 *          defined method or a model defined method.
+	 * @return Method object satisfying the given conditions.
+	 * @throws NoSuchMethodException
+	 *           Thrown if no methods match the criteria, or if the reflective
+	 *           call is ambiguous based on the parameter types, or if methodName
+	 *           is null.
+	 */
+	private Method findMethod(String methodName,
+			Class<? extends JavaOclLibraryObject> sourceType,
+			Class<? extends OclAny>... parameterTypes) throws NoSuchMethodException {
+
+		Method result;
+		Method[] allMethods;
+
+		allMethods = sourceType.getMethods();
+
+		result = null;
+
+		/* Iterate through all methods. */
+		for (int index = 0; index < allMethods.length; index++) {
+
+			/* Check if the name match. */
+			if (allMethods[index].getName().equals(methodName)) {
+
+				/* Check if the parameters match. */
+				Class<?>[] aMethodsParams;
+				aMethodsParams = allMethods[index].getParameterTypes();
+
+				/* Check the count of parameters. */
+				if (aMethodsParams.length == parameterTypes.length) {
+
+					boolean isConform;
+
+					isConform = true;
+
+					/* Check the conformance of all parameters. */
+					for (int index2 = 0; index2 < aMethodsParams.length; index2++) {
+
+						if (!aMethodsParams[index2]
+								.isAssignableFrom(parameterTypes[index2])) {
+							isConform = false;
+							break;
+						}
+						// no else.
+					}
+
+					if (isConform) {
+						result = allMethods[index];
+						break;
+					}
+				}
+				// no else.
+			}
+			// no else.
+		}
+
+		if (result == null) {
+			String msg;
+
+			msg = "No method " + methodName + "(";
+
+			for (int index = 0; index < parameterTypes.length; index++) {
+				msg += parameterTypes[index];
+
+				if (index > 0) {
+					msg += ", ";
+				}
+				// no else.
+			}
+
+			msg += ") found.";
+
+			throw new NoSuchMethodException(msg);
 		}
 
 		return result;
