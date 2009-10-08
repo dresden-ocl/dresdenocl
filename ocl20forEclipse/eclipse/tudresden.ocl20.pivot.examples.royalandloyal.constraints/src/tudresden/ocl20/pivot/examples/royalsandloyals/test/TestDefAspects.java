@@ -45,22 +45,22 @@ public class TestDefAspects {
 		Transaction transaction3;
 
 		anAccount = new LoyaltyAccount();
-		assertEquals(0, anAccount.getTurnover());
+		assertEquals(new Float(0), (Float) anAccount.getTurnover());
 
 		transaction1 = new Transaction();
 		transaction1.setAmount(1);
 		anAccount.addTransaction(transaction1);
-		assertEquals(1.0, anAccount.getTurnover());
+		assertEquals(new Float(1.0), (Float) anAccount.getTurnover());
 
 		transaction2 = new Transaction();
 		transaction2.setAmount((float) 1.5);
 		anAccount.addTransaction(transaction2);
-		assertEquals(2.5, anAccount.getTurnover());
+		assertEquals(new Float(2.5), (Float) anAccount.getTurnover());
 
 		transaction3 = new Transaction();
 		transaction3.setAmount((float) -2.5);
 		anAccount.addTransaction(transaction3);
-		assertEquals(0, anAccount.getTurnover());
+		assertEquals(new Float(0), (Float) anAccount.getTurnover());
 	}
 
 	/**
@@ -202,21 +202,21 @@ public class TestDefAspects {
 		card1 = new CustomerCard();
 		date1 = new Date(2008, 12, 1);
 
-		assertEquals(0, card1.getTotalPoints(date1));
+		assertEquals(new Integer(0), (Integer) card1.getTotalPoints(date1));
 
 		transaction1 = new Transaction();
 		transaction1.setDate(new Date(2008, 12, 2));
 		transaction1.setPoints(100);
 		card1.addTransaction(transaction1);
 
-		assertEquals(100, card1.getTotalPoints(date1));
+		assertEquals(new Integer(100), (Integer) card1.getTotalPoints(date1));
 
 		transaction2 = new Transaction();
 		transaction2.setDate(new Date(2008, 11, 2));
 		transaction2.setPoints(100);
 		card1.addTransaction(transaction2);
 
-		assertEquals(100, card1.getTotalPoints(date1));
+		assertEquals(new Integer(100), (Integer) card1.getTotalPoints(date1));
 	}
 
 	/**
@@ -251,46 +251,47 @@ public class TestDefAspects {
 	 * <p>
 	 * Tests the generated Aspect {@link DefAspect8}.
 	 * 
-	 * context ProgramPartner
-     *       def: getBurningTransactions = self[].deliveredServices[].transaction[] -> iterate (t:Transaction ; resultSet:Set( Transaction )=Set{} | if t[].oclIsTypeOf( Burning[]) then resultSet[].including( t[]) else resultSet[] )
+	 * context ProgramPartner def: getBurningTransactions =
+	 * self[].deliveredServices[].transaction[] -> iterate (t:Transaction ;
+	 * resultSet:Set( Transaction )=Set{} | if t[].oclIsTypeOf( Burning[]) then
+	 * resultSet[].including( t[]) else resultSet[] )
 	 * </p>
 	 */
 	@Test
 	public void testDefAspect8() {
-		
+
 		ProgramPartner programPartner1;
-		
+
 		Service service1;
 		Service service2;
-		
+
 		Transaction transaction1;
 		Transaction transaction2;
-		
+
 		Set<Transaction> burningTransactions;
-		
+
 		programPartner1 = new ProgramPartner();
-		
-		burningTransactions = programPartner1.getBurningTransactions();		
+
+		burningTransactions = programPartner1.getBurningTransactions();
 		assertEquals(0, burningTransactions.size());
-		
-		service1 = new Service();		
+
+		service1 = new Service();
 		programPartner1.addDeliveredService(service1);
 		transaction1 = new Burning();
 		service1.setTransaction(transaction1);
 
-		burningTransactions = programPartner1.getBurningTransactions();		
+		burningTransactions = programPartner1.getBurningTransactions();
 		assertEquals(1, burningTransactions.size());
 		assertTrue(burningTransactions.contains(transaction1));
 
-		service2 = new Service();		
+		service2 = new Service();
 		programPartner1.addDeliveredService(service2);
 		transaction2 = new Earning();
 		service2.setTransaction(transaction2);
 
-		burningTransactions = programPartner1.getBurningTransactions();		
+		burningTransactions = programPartner1.getBurningTransactions();
 		assertEquals(1, burningTransactions.size());
 		assertTrue(burningTransactions.contains(transaction1));
 		assertFalse(burningTransactions.contains(transaction2));
 	}
-
 }

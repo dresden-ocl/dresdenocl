@@ -1,9 +1,11 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Constraints
-Bundle-SymbolicName: tudresden.ocl20.pivot.examples.royalandloyal.constraints
+Bundle-SymbolicName: tudresden.ocl20.pivot.examples.royalandloyal.ocl22javacode
 Bundle-Version: 1.2.0
-Export-Package: tudresden.ocl20.pivot.examples.royalsandloyals.test
+Export-Package: tudresden.ocl20.pivot.examples.royalsandloyals.constraints,
+ tudresden.ocl20.pivot.examples.royalsandloyals.test
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
-Require-Bundle: org.junit4,
+Require-Bundle: org.aspectj.runtime,
+ org.junit4,
  tudresden.ocl20.pivot.examples.royalandloyal
