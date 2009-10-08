@@ -1,32 +1,20 @@
 /**
- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
- * Copyright (C) 2007 Matthias Braeuer (braeuer.matthias@web.de).            *
- * All rights reserved.                                                      *
- *                                                                           *
- * This work was done as a project at the Chair for Software Technology      *
- * Dresden University Of Technology, Germany (http://st.inf.tu-dresden.de).  *
- * It is understood that any modification not identified as such is not      *
- * covered by the preceding statement.                                       *
- *                                                                           *
- * This work is free software; you can redistribute it and/or modify it      *
- * under the terms of the GNU Library General Public License as published    *
- * by the Free Software Foundation; either version 2 of the License, or      *
- * (at your option) any later version.                                       *
- *                                                                           *
- * This work is distributed in the hope that it will be useful, but WITHOUT  *
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or     *
- * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Library General Public     *
- * License for more details.                                                 *
- *                                                                           *
- * You should have received a copy of the GNU Library General Public License *
- * along with this library; if not, you can view it online at                *
- * http://www.fsf.org/licensing/licenses/gpl.html.                           *
- *                                                                           *
- * To submit a bug report, send a comment, or get the latest news on this    *
- * project, please visit the website: http://dresden-ocl.sourceforge.net.    *
- * For more information on OCL and related projects visit the OCL Portal:    *
- * http://st.inf.tu-dresden.de/ocl                                           *
- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * Copyright (C) 2009 by Claas Wilke (info@claaswilke.de)
+ * 
+ * This file is part of the PML Example of Dresden OCL2 for Eclipse.
+ * 
+ * Dresden OCL2 for Eclipse is free software: you can redistribute it and/or modify 
+ * it under the terms of the GNU Lesser General Public License as published by the 
+ * Free Software Foundation, either version 3 of the License, or (at your option)
+ * any later version.
+ * 
+ * Dresden OCL2 for Eclipse is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License 
+ * for more details.
+ * 
+ * You should have received a copy of the GNU Lesser General Public License along 
+ * with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  *
  * $Id$
  */
@@ -51,12 +39,11 @@ import org.eclipse.emf.ecore.EObject;
  * </ul>
  * </p>
  *
- * @see tudresden.ocl20.pivot.examples.pml.PMLPackage#getFeature()
+ * @see tudresden.ocl20.pivot.examples.pml.PmlPackage#getFeature()
  * @model
  * @generated
  */
 public interface Feature extends EObject {
-
 	/**
 	 * Returns the value of the '<em><b>Id</b></em>' attribute.
 	 * <!-- begin-user-doc -->
@@ -67,7 +54,7 @@ public interface Feature extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Id</em>' attribute.
 	 * @see #setId(String)
-	 * @see tudresden.ocl20.pivot.examples.pml.PMLPackage#getFeature_Id()
+	 * @see tudresden.ocl20.pivot.examples.pml.PmlPackage#getFeature_Id()
 	 * @model
 	 * @generated
 	 */
@@ -93,7 +80,7 @@ public interface Feature extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Name</em>' attribute.
 	 * @see #setName(String)
-	 * @see tudresden.ocl20.pivot.examples.pml.PMLPackage#getFeature_Name()
+	 * @see tudresden.ocl20.pivot.examples.pml.PmlPackage#getFeature_Name()
 	 * @model
 	 * @generated
 	 */
@@ -119,7 +106,7 @@ public interface Feature extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Version</em>' attribute.
 	 * @see #setVersion(String)
-	 * @see tudresden.ocl20.pivot.examples.pml.PMLPackage#getFeature_Version()
+	 * @see tudresden.ocl20.pivot.examples.pml.PmlPackage#getFeature_Version()
 	 * @model
 	 * @generated
 	 */
@@ -146,7 +133,7 @@ public interface Feature extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Plugins</em>' containment reference list.
-	 * @see tudresden.ocl20.pivot.examples.pml.PMLPackage#getFeature_Plugins()
+	 * @see tudresden.ocl20.pivot.examples.pml.PmlPackage#getFeature_Plugins()
 	 * @see tudresden.ocl20.pivot.examples.pml.Plugin#getFeature
 	 * @model opposite="feature" containment="true"
 	 * @generated

@@ -1,32 +1,20 @@
 /**
- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
- * Copyright (C) 2007 Matthias Braeuer (braeuer.matthias@web.de).            *
- * All rights reserved.                                                      *
- *                                                                           *
- * This work was done as a project at the Chair for Software Technology      *
- * Dresden University Of Technology, Germany (http://st.inf.tu-dresden.de).  *
- * It is understood that any modification not identified as such is not      *
- * covered by the preceding statement.                                       *
- *                                                                           *
- * This work is free software; you can redistribute it and/or modify it      *
- * under the terms of the GNU Library General Public License as published    *
- * by the Free Software Foundation; either version 2 of the License, or      *
- * (at your option) any later version.                                       *
- *                                                                           *
- * This work is distributed in the hope that it will be useful, but WITHOUT  *
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or     *
- * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Library General Public     *
- * License for more details.                                                 *
- *                                                                           *
- * You should have received a copy of the GNU Library General Public License *
- * along with this library; if not, you can view it online at                *
- * http://www.fsf.org/licensing/licenses/gpl.html.                           *
- *                                                                           *
- * To submit a bug report, send a comment, or get the latest news on this    *
- * project, please visit the website: http://dresden-ocl.sourceforge.net.    *
- * For more information on OCL and related projects visit the OCL Portal:    *
- * http://st.inf.tu-dresden.de/ocl                                           *
- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * Copyright (C) 2009 by Claas Wilke (info@claaswilke.de)
+ * 
+ * This file is part of the PML Example of Dresden OCL2 for Eclipse.
+ * 
+ * Dresden OCL2 for Eclipse is free software: you can redistribute it and/or modify 
+ * it under the terms of the GNU Lesser General Public License as published by the 
+ * Free Software Foundation, either version 3 of the License, or (at your option)
+ * any later version.
+ * 
+ * Dresden OCL2 for Eclipse is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License 
+ * for more details.
+ * 
+ * You should have received a copy of the GNU Lesser General Public License along 
+ * with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  *
  * $Id$
  */
@@ -34,7 +22,6 @@ package tudresden.ocl20.pivot.examples.pml;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 
@@ -49,19 +36,18 @@ import org.eclipse.emf.ecore.EReference;
  *   <li>and each data type</li>
  * </ul>
  * <!-- end-user-doc -->
- * @see tudresden.ocl20.pivot.examples.pml.PMLFactory
+ * @see tudresden.ocl20.pivot.examples.pml.PmlFactory
  * @model kind="package"
  * @generated
  */
-public interface PMLPackage extends EPackage {
-
+public interface PmlPackage extends EPackage {
 	/**
 	 * The package name.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String eNAME = "pml"; //$NON-NLS-1$
+	String eNAME = "pml";
 
 	/**
 	 * The package namespace URI.
@@ -69,7 +55,7 @@ public interface PMLPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String eNS_URI = "http://www.tu-dresden.de/ocl20/pivot/2007/pml"; //$NON-NLS-1$
+	String eNS_URI = "http://www.tu-dresden.de/ocl20/pivot/examples/pml";
 
 	/**
 	 * The package namespace name.
@@ -77,7 +63,7 @@ public interface PMLPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String eNS_PREFIX = "pml"; //$NON-NLS-1$
+	String eNS_PREFIX = "pml";
 
 	/**
 	 * The singleton instance of the package.
@@ -85,15 +71,14 @@ public interface PMLPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	PMLPackage eINSTANCE = tudresden.ocl20.pivot.examples.pml.impl.PMLPackageImpl
-			.init();
+	PmlPackage eINSTANCE = tudresden.ocl20.pivot.examples.pml.impl.PmlPackageImpl.init();
 
 	/**
 	 * The meta object id for the '{@link tudresden.ocl20.pivot.examples.pml.impl.PluginImpl <em>Plugin</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see tudresden.ocl20.pivot.examples.pml.impl.PluginImpl
-	 * @see tudresden.ocl20.pivot.examples.pml.impl.PMLPackageImpl#getPlugin()
+	 * @see tudresden.ocl20.pivot.examples.pml.impl.PmlPackageImpl#getPlugin()
 	 * @generated
 	 */
 	int PLUGIN = 0;
@@ -171,29 +156,20 @@ public interface PMLPackage extends EPackage {
 	int PLUGIN__ACTIVATOR = 7;
 
 	/**
-	 * The feature id for the '<em><b>Value</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PLUGIN__VALUE = 8;
-
-	/**
 	 * The number of structural features of the '<em>Plugin</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PLUGIN_FEATURE_COUNT = 9;
+	int PLUGIN_FEATURE_COUNT = 8;
 
 	/**
 	 * The meta object id for the '{@link tudresden.ocl20.pivot.examples.pml.impl.FeatureImpl <em>Feature</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see tudresden.ocl20.pivot.examples.pml.impl.FeatureImpl
-	 * @see tudresden.ocl20.pivot.examples.pml.impl.PMLPackageImpl#getFeature()
+	 * @see tudresden.ocl20.pivot.examples.pml.impl.PmlPackageImpl#getFeature()
 	 * @generated
 	 */
 	int FEATURE = 1;
@@ -248,7 +224,7 @@ public interface PMLPackage extends EPackage {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see tudresden.ocl20.pivot.examples.pml.impl.ExtensionPointImpl
-	 * @see tudresden.ocl20.pivot.examples.pml.impl.PMLPackageImpl#getExtensionPoint()
+	 * @see tudresden.ocl20.pivot.examples.pml.impl.PmlPackageImpl#getExtensionPoint()
 	 * @generated
 	 */
 	int EXTENSION_POINT = 2;
@@ -294,7 +270,7 @@ public interface PMLPackage extends EPackage {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see tudresden.ocl20.pivot.examples.pml.impl.JavaTypeImpl
-	 * @see tudresden.ocl20.pivot.examples.pml.impl.PMLPackageImpl#getJavaType()
+	 * @see tudresden.ocl20.pivot.examples.pml.impl.PmlPackageImpl#getJavaType()
 	 * @generated
 	 */
 	int JAVA_TYPE = 3;
@@ -322,7 +298,7 @@ public interface PMLPackage extends EPackage {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see tudresden.ocl20.pivot.examples.pml.impl.ServiceImpl
-	 * @see tudresden.ocl20.pivot.examples.pml.impl.PMLPackageImpl#getService()
+	 * @see tudresden.ocl20.pivot.examples.pml.impl.PmlPackageImpl#getService()
 	 * @generated
 	 */
 	int SERVICE = 4;
@@ -377,7 +353,7 @@ public interface PMLPackage extends EPackage {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see tudresden.ocl20.pivot.examples.pml.impl.ServiceParameterImpl
-	 * @see tudresden.ocl20.pivot.examples.pml.impl.PMLPackageImpl#getServiceParameter()
+	 * @see tudresden.ocl20.pivot.examples.pml.impl.PmlPackageImpl#getServiceParameter()
 	 * @generated
 	 */
 	int SERVICE_PARAMETER = 5;
@@ -423,7 +399,7 @@ public interface PMLPackage extends EPackage {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see tudresden.ocl20.pivot.examples.pml.impl.PluginPackageImpl
-	 * @see tudresden.ocl20.pivot.examples.pml.impl.PMLPackageImpl#getPluginPackage()
+	 * @see tudresden.ocl20.pivot.examples.pml.impl.PmlPackageImpl#getPluginPackage()
 	 * @generated
 	 */
 	int PLUGIN_PACKAGE = 6;
@@ -464,15 +440,6 @@ public interface PMLPackage extends EPackage {
 	 */
 	int PLUGIN_PACKAGE_FEATURE_COUNT = 3;
 
-	/**
-	 * The meta object id for the '{@link tudresden.ocl20.pivot.examples.pml.SampleEnum <em>Sample Enum</em>}' enum.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see tudresden.ocl20.pivot.examples.pml.SampleEnum
-	 * @see tudresden.ocl20.pivot.examples.pml.impl.PMLPackageImpl#getSampleEnum()
-	 * @generated
-	 */
-	int SAMPLE_ENUM = 7;
 
 	/**
 	 * Returns the meta object for class '{@link tudresden.ocl20.pivot.examples.pml.Plugin <em>Plugin</em>}'.
@@ -571,17 +538,6 @@ public interface PMLPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getPlugin_Activator();
-
-	/**
-	 * Returns the meta object for the attribute '{@link tudresden.ocl20.pivot.examples.pml.Plugin#getValue <em>Value</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Value</em>'.
-	 * @see tudresden.ocl20.pivot.examples.pml.Plugin#getValue()
-	 * @see #getPlugin()
-	 * @generated
-	 */
-	EAttribute getPlugin_Value();
 
 	/**
 	 * Returns the meta object for class '{@link tudresden.ocl20.pivot.examples.pml.Feature <em>Feature</em>}'.
@@ -842,23 +798,13 @@ public interface PMLPackage extends EPackage {
 	EReference getPluginPackage_Features();
 
 	/**
-	 * Returns the meta object for enum '{@link tudresden.ocl20.pivot.examples.pml.SampleEnum <em>Sample Enum</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for enum '<em>Sample Enum</em>'.
-	 * @see tudresden.ocl20.pivot.examples.pml.SampleEnum
-	 * @generated
-	 */
-	EEnum getSampleEnum();
-
-	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the factory that creates the instances of the model.
 	 * @generated
 	 */
-	PMLFactory getPMLFactory();
+	PmlFactory getPmlFactory();
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -873,13 +819,12 @@ public interface PMLPackage extends EPackage {
 	 * @generated
 	 */
 	interface Literals {
-
 		/**
 		 * The meta object literal for the '{@link tudresden.ocl20.pivot.examples.pml.impl.PluginImpl <em>Plugin</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @see tudresden.ocl20.pivot.examples.pml.impl.PluginImpl
-		 * @see tudresden.ocl20.pivot.examples.pml.impl.PMLPackageImpl#getPlugin()
+		 * @see tudresden.ocl20.pivot.examples.pml.impl.PmlPackageImpl#getPlugin()
 		 * @generated
 		 */
 		EClass PLUGIN = eINSTANCE.getPlugin();
@@ -930,8 +875,7 @@ public interface PMLPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference PLUGIN__EXTENSION_POINTS = eINSTANCE
-				.getPlugin_ExtensionPoints();
+		EReference PLUGIN__EXTENSION_POINTS = eINSTANCE.getPlugin_ExtensionPoints();
 
 		/**
 		 * The meta object literal for the '<em><b>Services</b></em>' containment reference list feature.
@@ -950,19 +894,11 @@ public interface PMLPackage extends EPackage {
 		EReference PLUGIN__ACTIVATOR = eINSTANCE.getPlugin_Activator();
 
 		/**
-		 * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute PLUGIN__VALUE = eINSTANCE.getPlugin_Value();
-
-		/**
 		 * The meta object literal for the '{@link tudresden.ocl20.pivot.examples.pml.impl.FeatureImpl <em>Feature</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @see tudresden.ocl20.pivot.examples.pml.impl.FeatureImpl
-		 * @see tudresden.ocl20.pivot.examples.pml.impl.PMLPackageImpl#getFeature()
+		 * @see tudresden.ocl20.pivot.examples.pml.impl.PmlPackageImpl#getFeature()
 		 * @generated
 		 */
 		EClass FEATURE = eINSTANCE.getFeature();
@@ -1004,7 +940,7 @@ public interface PMLPackage extends EPackage {
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @see tudresden.ocl20.pivot.examples.pml.impl.ExtensionPointImpl
-		 * @see tudresden.ocl20.pivot.examples.pml.impl.PMLPackageImpl#getExtensionPoint()
+		 * @see tudresden.ocl20.pivot.examples.pml.impl.PmlPackageImpl#getExtensionPoint()
 		 * @generated
 		 */
 		EClass EXTENSION_POINT = eINSTANCE.getExtensionPoint();
@@ -1023,8 +959,7 @@ public interface PMLPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference EXTENSION_POINT__PLUGIN = eINSTANCE
-				.getExtensionPoint_Plugin();
+		EReference EXTENSION_POINT__PLUGIN = eINSTANCE.getExtensionPoint_Plugin();
 
 		/**
 		 * The meta object literal for the '<em><b>Type</b></em>' reference feature.
@@ -1039,7 +974,7 @@ public interface PMLPackage extends EPackage {
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @see tudresden.ocl20.pivot.examples.pml.impl.JavaTypeImpl
-		 * @see tudresden.ocl20.pivot.examples.pml.impl.PMLPackageImpl#getJavaType()
+		 * @see tudresden.ocl20.pivot.examples.pml.impl.PmlPackageImpl#getJavaType()
 		 * @generated
 		 */
 		EClass JAVA_TYPE = eINSTANCE.getJavaType();
@@ -1050,15 +985,14 @@ public interface PMLPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute JAVA_TYPE__FULLY_QUALIFIED_NAME = eINSTANCE
-				.getJavaType_FullyQualifiedName();
+		EAttribute JAVA_TYPE__FULLY_QUALIFIED_NAME = eINSTANCE.getJavaType_FullyQualifiedName();
 
 		/**
 		 * The meta object literal for the '{@link tudresden.ocl20.pivot.examples.pml.impl.ServiceImpl <em>Service</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @see tudresden.ocl20.pivot.examples.pml.impl.ServiceImpl
-		 * @see tudresden.ocl20.pivot.examples.pml.impl.PMLPackageImpl#getService()
+		 * @see tudresden.ocl20.pivot.examples.pml.impl.PmlPackageImpl#getService()
 		 * @generated
 		 */
 		EClass SERVICE = eINSTANCE.getService();
@@ -1100,7 +1034,7 @@ public interface PMLPackage extends EPackage {
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @see tudresden.ocl20.pivot.examples.pml.impl.ServiceParameterImpl
-		 * @see tudresden.ocl20.pivot.examples.pml.impl.PMLPackageImpl#getServiceParameter()
+		 * @see tudresden.ocl20.pivot.examples.pml.impl.PmlPackageImpl#getServiceParameter()
 		 * @generated
 		 */
 		EClass SERVICE_PARAMETER = eINSTANCE.getServiceParameter();
@@ -1111,8 +1045,7 @@ public interface PMLPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute SERVICE_PARAMETER__NAME = eINSTANCE
-				.getServiceParameter_Name();
+		EAttribute SERVICE_PARAMETER__NAME = eINSTANCE.getServiceParameter_Name();
 
 		/**
 		 * The meta object literal for the '<em><b>Type</b></em>' reference feature.
@@ -1120,8 +1053,7 @@ public interface PMLPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference SERVICE_PARAMETER__TYPE = eINSTANCE
-				.getServiceParameter_Type();
+		EReference SERVICE_PARAMETER__TYPE = eINSTANCE.getServiceParameter_Type();
 
 		/**
 		 * The meta object literal for the '<em><b>Service</b></em>' container reference feature.
@@ -1129,15 +1061,14 @@ public interface PMLPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference SERVICE_PARAMETER__SERVICE = eINSTANCE
-				.getServiceParameter_Service();
+		EReference SERVICE_PARAMETER__SERVICE = eINSTANCE.getServiceParameter_Service();
 
 		/**
 		 * The meta object literal for the '{@link tudresden.ocl20.pivot.examples.pml.impl.PluginPackageImpl <em>Plugin Package</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @see tudresden.ocl20.pivot.examples.pml.impl.PluginPackageImpl
-		 * @see tudresden.ocl20.pivot.examples.pml.impl.PMLPackageImpl#getPluginPackage()
+		 * @see tudresden.ocl20.pivot.examples.pml.impl.PmlPackageImpl#getPluginPackage()
 		 * @generated
 		 */
 		EClass PLUGIN_PACKAGE = eINSTANCE.getPluginPackage();
@@ -1148,8 +1079,7 @@ public interface PMLPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference PLUGIN_PACKAGE__PLUGINS = eINSTANCE
-				.getPluginPackage_Plugins();
+		EReference PLUGIN_PACKAGE__PLUGINS = eINSTANCE.getPluginPackage_Plugins();
 
 		/**
 		 * The meta object literal for the '<em><b>Types</b></em>' containment reference list feature.
@@ -1165,19 +1095,8 @@ public interface PMLPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference PLUGIN_PACKAGE__FEATURES = eINSTANCE
-				.getPluginPackage_Features();
-
-		/**
-		 * The meta object literal for the '{@link tudresden.ocl20.pivot.examples.pml.SampleEnum <em>Sample Enum</em>}' enum.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see tudresden.ocl20.pivot.examples.pml.SampleEnum
-		 * @see tudresden.ocl20.pivot.examples.pml.impl.PMLPackageImpl#getSampleEnum()
-		 * @generated
-		 */
-		EEnum SAMPLE_ENUM = eINSTANCE.getSampleEnum();
+		EReference PLUGIN_PACKAGE__FEATURES = eINSTANCE.getPluginPackage_Features();
 
 	}
 
-} //PMLPackage
+} //PmlPackage

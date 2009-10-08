@@ -1,0 +1,14 @@
+package tudresden::ocl20::pivot::examples::pml
+
+-- The id of a plug-in must be defined.
+context Plugin::getNameOf(feature : Feature): String
+pre featureIsNotNull:
+  not feature.oclIsUndefined()
+
+
+-- The result must be the name of the given feature.
+context Plugin::getNameOf(feature : Feature): String
+post resultIsRight:
+  result = feature.name
+
+endpackage

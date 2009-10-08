@@ -1,32 +1,20 @@
 /**
- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
- * Copyright (C) 2007 Matthias Braeuer (braeuer.matthias@web.de).            *
- * All rights reserved.                                                      *
- *                                                                           *
- * This work was done as a project at the Chair for Software Technology      *
- * Dresden University Of Technology, Germany (http://st.inf.tu-dresden.de).  *
- * It is understood that any modification not identified as such is not      *
- * covered by the preceding statement.                                       *
- *                                                                           *
- * This work is free software; you can redistribute it and/or modify it      *
- * under the terms of the GNU Library General Public License as published    *
- * by the Free Software Foundation; either version 2 of the License, or      *
- * (at your option) any later version.                                       *
- *                                                                           *
- * This work is distributed in the hope that it will be useful, but WITHOUT  *
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or     *
- * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Library General Public     *
- * License for more details.                                                 *
- *                                                                           *
- * You should have received a copy of the GNU Library General Public License *
- * along with this library; if not, you can view it online at                *
- * http://www.fsf.org/licensing/licenses/gpl.html.                           *
- *                                                                           *
- * To submit a bug report, send a comment, or get the latest news on this    *
- * project, please visit the website: http://dresden-ocl.sourceforge.net.    *
- * For more information on OCL and related projects visit the OCL Portal:    *
- * http://st.inf.tu-dresden.de/ocl                                           *
- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * Copyright (C) 2009 by Claas Wilke (info@claaswilke.de)
+ * 
+ * This file is part of the PML Example of Dresden OCL2 for Eclipse.
+ * 
+ * Dresden OCL2 for Eclipse is free software: you can redistribute it and/or modify 
+ * it under the terms of the GNU Lesser General Public License as published by the 
+ * Free Software Foundation, either version 3 of the License, or (at your option)
+ * any later version.
+ * 
+ * Dresden OCL2 for Eclipse is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License 
+ * for more details.
+ * 
+ * You should have received a copy of the GNU Lesser General Public License along 
+ * with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  *
  * $Id$
  */
@@ -52,16 +40,14 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link tudresden.ocl20.pivot.examples.pml.Plugin#getExtensionPoints <em>Extension Points</em>}</li>
  *   <li>{@link tudresden.ocl20.pivot.examples.pml.Plugin#getServices <em>Services</em>}</li>
  *   <li>{@link tudresden.ocl20.pivot.examples.pml.Plugin#getActivator <em>Activator</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.examples.pml.Plugin#getValue <em>Value</em>}</li>
  * </ul>
  * </p>
  *
- * @see tudresden.ocl20.pivot.examples.pml.PMLPackage#getPlugin()
+ * @see tudresden.ocl20.pivot.examples.pml.PmlPackage#getPlugin()
  * @model
  * @generated
  */
 public interface Plugin extends EObject {
-
 	/**
 	 * Returns the value of the '<em><b>Id</b></em>' attribute.
 	 * <!-- begin-user-doc -->
@@ -72,7 +58,7 @@ public interface Plugin extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Id</em>' attribute.
 	 * @see #setId(String)
-	 * @see tudresden.ocl20.pivot.examples.pml.PMLPackage#getPlugin_Id()
+	 * @see tudresden.ocl20.pivot.examples.pml.PmlPackage#getPlugin_Id()
 	 * @model
 	 * @generated
 	 */
@@ -98,7 +84,7 @@ public interface Plugin extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Name</em>' attribute.
 	 * @see #setName(String)
-	 * @see tudresden.ocl20.pivot.examples.pml.PMLPackage#getPlugin_Name()
+	 * @see tudresden.ocl20.pivot.examples.pml.PmlPackage#getPlugin_Name()
 	 * @model
 	 * @generated
 	 */
@@ -124,7 +110,7 @@ public interface Plugin extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Version</em>' attribute.
 	 * @see #setVersion(String)
-	 * @see tudresden.ocl20.pivot.examples.pml.PMLPackage#getPlugin_Version()
+	 * @see tudresden.ocl20.pivot.examples.pml.PmlPackage#getPlugin_Version()
 	 * @model
 	 * @generated
 	 */
@@ -150,7 +136,7 @@ public interface Plugin extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Provider</em>' attribute.
 	 * @see #setProvider(String)
-	 * @see tudresden.ocl20.pivot.examples.pml.PMLPackage#getPlugin_Provider()
+	 * @see tudresden.ocl20.pivot.examples.pml.PmlPackage#getPlugin_Provider()
 	 * @model
 	 * @generated
 	 */
@@ -177,7 +163,7 @@ public interface Plugin extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Feature</em>' container reference.
 	 * @see #setFeature(Feature)
-	 * @see tudresden.ocl20.pivot.examples.pml.PMLPackage#getPlugin_Feature()
+	 * @see tudresden.ocl20.pivot.examples.pml.PmlPackage#getPlugin_Feature()
 	 * @see tudresden.ocl20.pivot.examples.pml.Feature#getPlugins
 	 * @model opposite="plugins" transient="false"
 	 * @generated
@@ -205,7 +191,7 @@ public interface Plugin extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Extension Points</em>' containment reference list.
-	 * @see tudresden.ocl20.pivot.examples.pml.PMLPackage#getPlugin_ExtensionPoints()
+	 * @see tudresden.ocl20.pivot.examples.pml.PmlPackage#getPlugin_ExtensionPoints()
 	 * @see tudresden.ocl20.pivot.examples.pml.ExtensionPoint#getPlugin
 	 * @model opposite="plugin" containment="true"
 	 * @generated
@@ -223,7 +209,7 @@ public interface Plugin extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Services</em>' containment reference list.
-	 * @see tudresden.ocl20.pivot.examples.pml.PMLPackage#getPlugin_Services()
+	 * @see tudresden.ocl20.pivot.examples.pml.PmlPackage#getPlugin_Services()
 	 * @see tudresden.ocl20.pivot.examples.pml.Service#getPlugin
 	 * @model opposite="plugin" containment="true"
 	 * @generated
@@ -240,7 +226,7 @@ public interface Plugin extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Activator</em>' reference.
 	 * @see #setActivator(JavaType)
-	 * @see tudresden.ocl20.pivot.examples.pml.PMLPackage#getPlugin_Activator()
+	 * @see tudresden.ocl20.pivot.examples.pml.PmlPackage#getPlugin_Activator()
 	 * @model required="true"
 	 * @generated
 	 */
@@ -255,59 +241,6 @@ public interface Plugin extends EObject {
 	 * @generated
 	 */
 	void setActivator(JavaType value);
-
-	/**
-	 * Returns the value of the '<em><b>Value</b></em>' attribute.
-	 * The literals are from the enumeration {@link tudresden.ocl20.pivot.examples.pml.SampleEnum}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Value</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Value</em>' attribute.
-	 * @see tudresden.ocl20.pivot.examples.pml.SampleEnum
-	 * @see #setValue(SampleEnum)
-	 * @see tudresden.ocl20.pivot.examples.pml.PMLPackage#getPlugin_Value()
-	 * @model
-	 * @generated
-	 */
-	SampleEnum getValue();
-
-	/**
-	 * Sets the value of the '{@link tudresden.ocl20.pivot.examples.pml.Plugin#getValue <em>Value</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Value</em>' attribute.
-	 * @see tudresden.ocl20.pivot.examples.pml.SampleEnum
-	 * @see #getValue()
-	 * @generated
-	 */
-	void setValue(SampleEnum value);
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model kind="operation"
-	 * @generated
-	 */
-	Plugin getSelf();
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model kind="operation"
-	 * @generated
-	 */
-	int getFive();
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model
-	 * @generated
-	 */
-	int getValue(int value);
 
 	/**
 	 * <!-- begin-user-doc -->
