@@ -107,10 +107,20 @@
 
   \textbf{Living Example} & \\
   Plug-in Package & tudresden.ocl20.pivot.examples.living\\
-  Meta-Model & TODO\\
-  Model & TODO\\
-  OCL Expressions & TODO\\
-  Model Instance & src/tudresden.ocl20.pivot.examples.living.ModelProviderClass.java\\
+  Meta-Model & Java Meta-Model\\
+  Model & bin/tudresden/ocl20/pivot/examples/living/ModelProviderClass.class \\
+  OCL Expressions & constraints/*.ocl \\
+  Model Instance Type & Java \\
+  Model Instance & bin/tudresden/ocl20/pivot/examples/living/ModelInstanceProvider\-Class.class \\
+  \hline
+
+  \textbf{Simple Example} & \\
+  Plug-in Package & tudresden.ocl20.pivot.examples.simple\\
+  Meta-Models & Java or MDT UML2\\
+  Model & src/tudresden.ocl20.pivot.examples.simple.ModelProviderClass.java, model/simple.uml\\
+  OCL Expressions & constraints/*.ocl\\
+  Model Instance Types & Java or EMF Ecore\\
+  Model Instances & src/tudresden.ocl20.pivot.examples.simple.instance.ModelInstanceProviderClass.java, modelinstance/instance.simple\\
   \hline
 
   \textbf{PML Example} & \\
@@ -127,14 +137,6 @@
   Models & model/royalsandloyals.ecore \newline  model/royalsandloyals.uml\\
   OCL Expressions & expressions/*.ocl\\
   Model Instance & src/tudresden.ocl20.pivot.examples.royalsandloyals/\newline ModelProviderClass.java\\
-  \hline
-
-  \textbf{Simple Example} & \\
-  Plug-in Package & tudresden.ocl20.pivot.examples.simple\\
-  Meta-Model & EMF Ecore or UML 2.0\\
-  Model & model/simple.ecore or model/simple.uml\\
-  OCL Expressions & constraints/*.ocl\\
-  Model Instance & src/tudresden.ocl20.pivot.examples.simple.ModelProviderClass.java\\
   \hline
 \end{tabular}
 \caption{The examples provided with Dresden OCL2 for Eclipse.}
