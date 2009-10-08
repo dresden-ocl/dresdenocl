@@ -3,8 +3,8 @@ package tudresden.ocl20.pivot.ocl2parser.test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
+import tudresden.ocl20.pivot.ocl2parser.test.ecore.*;
 import tudresden.ocl20.pivot.ocl2parser.test.simpletests.SimpleModelLoadTest;
-import tudresden.ocl20.pivot.ocl2parser.test.uml2.*;
 
 /**
  * This test wraps all others and runs them as a suite.
@@ -33,10 +33,10 @@ import tudresden.ocl20.pivot.ocl2parser.test.uml2.*;
   SimpleModelLoadTest.class
 })
 
-public class AllUML2Tests {
+public class AllECoreTests {
 	public static final String MODEL_BUNDLE =
 			"tudresden.ocl20.pivot.examples.royalandloyal";
 	public static final String MODEL_BUNDLE_PATH = "model/";
 	public static final String META_MODEL_NAME =
-			"tudresden.ocl20.pivot.metamodels.uml2";
+			"tudresden.ocl20.pivot.metamodels.ecore";
 }
