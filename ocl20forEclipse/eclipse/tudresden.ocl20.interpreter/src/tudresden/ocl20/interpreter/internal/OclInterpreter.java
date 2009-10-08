@@ -95,6 +95,7 @@ import tudresden.ocl20.pivot.modelbus.modelinstance.exception.PropertyAccessExce
 import tudresden.ocl20.pivot.modelbus.modelinstance.exception.PropertyNotFoundException;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceEnumerationLiteral;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceInteger;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceObject;
 import tudresden.ocl20.pivot.pivotmodel.Constraint;
 import tudresden.ocl20.pivot.pivotmodel.ConstraintKind;
@@ -2055,10 +2056,12 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 				}
 
 				try {
-					
-					myEnvironment.getModelInstance().invokeStaticOperation(
-							referredOperation, args);
-					
+
+					IModelInstanceElement imiResult =
+							myEnvironment.getModelInstance().invokeStaticOperation(
+									referredOperation, args);
+					result = myStandardLibraryFactory.createOclAny(imiResult);
+
 				} catch (OperationAccessException e) {
 					result =
 							myStandardLibraryFactory.createOclInvalid(anOperationCallExp
@@ -2073,119 +2076,125 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			/* Compute the source type for non-static operations. */
 			else {
 				source = doSwitch((EObject) anOperationCallExp.getSource());
-			}
 
-			parameters =
-					computeArguments(anOperationCallExp, body, referredOperation);
+				parameters =
+						computeArguments(anOperationCallExp, body, referredOperation);
 
-			/* Handle special operations. */
-			// FIXME: in own operation
+				/* Handle special operations. */
+				// FIXME: in own operation
+				/* The operation atPre has to store the atPre value. */
+				if (opName.equals("atPre")) {
 
-			/* The operation atPre has to store the atPre value. */
-			if (opName.equals("atPre")) {
-
-				if (this.isPreparation) {
-					String msg;
-
-					this.myEnvironment.savePostconditionValue(anOperationCallExp, source);
-
-					msg = "@Pre is not available during constraint preparation.";
-					result =
-							myStandardLibraryFactory.createOclUndefined(anOperationCallExp
-									.getType(), msg);
-				}
-
-				else {
-					result = this.myEnvironment.getPostconditionValue(anOperationCallExp);
-
-					if (result == null) {
+					if (this.isPreparation) {
 						String msg;
-						msg =
-								"@Pre value of " + anOperationCallExp + " has not been found.";
 
+						this.myEnvironment.savePostconditionValue(anOperationCallExp,
+								source);
+
+						msg = "@Pre is not available during constraint preparation.";
 						result =
 								myStandardLibraryFactory.createOclUndefined(anOperationCallExp
 										.getType(), msg);
 					}
-				}
-			}
 
-			/*
-			 * The operation oclIsNew has to store some values. To compute all new
-			 * values.
-			 */
-			else if (opName.equals("oclIsNew")) {
+					else {
+						result =
+								this.myEnvironment.getPostconditionValue(anOperationCallExp);
 
-				if (this.isPreparation) {
-					String msg;
+						if (result == null) {
+							String msg;
+							msg =
+									"@Pre value of " + anOperationCallExp
+											+ " has not been found.";
 
-					this.myEnvironment.savePostconditionValue(anOperationCallExp,
-							myStandardLibraryFactory.createOclBoolean(source
-									.getInvalidReason() == null));
-
-					msg = "oclIsNew() is not available during preparation.";
-					result =
-							myStandardLibraryFactory.createOclUndefined(anOperationCallExp
-									.getType(), msg);
+							result =
+									myStandardLibraryFactory.createOclUndefined(
+											anOperationCallExp.getType(), msg);
+						}
+					}
 				}
 
-				else {
-					result = this.myEnvironment.getPostconditionValue(anOperationCallExp);
-				}
-			}
+				/*
+				 * The operation oclIsNew has to store some values. To compute all new
+				 * values.
+				 */
+				else if (opName.equals("oclIsNew")) {
 
-			/*
-			 * If allInstances for some reason is not possible for standard library
-			 * null is returned. In that case modelInstance.getObjectsOfKind() is
-			 * used.
-			 */
-			else if (opName.equals("allInstances")) {
+					if (this.isPreparation) {
+						String msg;
 
-				Type type = anOperationCallExp.getSourceType();
+						this.myEnvironment.savePostconditionValue(anOperationCallExp,
+								myStandardLibraryFactory.createOclBoolean(source
+										.getInvalidReason() == null));
 
-				Set<IModelInstanceObject> imiResult =
-						this.myEnvironment.getModelInstance().getAllInstances(type);
-
-				result = myStandardLibraryFactory.createOclSet(imiResult);
-			}
-
-			/* The standard case. Invoke the operation and compute the result. */
-			else {
-
-				if (body == null) {
-
-					if (source.oclIsUndefined().isTrue()) {
+						msg = "oclIsNew() is not available during preparation.";
 						result =
 								myStandardLibraryFactory.createOclUndefined(anOperationCallExp
-										.getType(), source.getUndefinedreason());
+										.getType(), msg);
 					}
 
 					else {
-						result = source.invokeOperation(referredOperation, parameters);
+						result =
+								this.myEnvironment.getPostconditionValue(anOperationCallExp);
 					}
 				}
 
-				else {
-					result =
-							this.interpretConstraint(body, this.myCurrentModelObject)
-									.getResult();
+				/*
+				 * If allInstances for some reason is not possible for standard library
+				 * null is returned. In that case modelInstance.getObjectsOfKind() is
+				 * used.
+				 */
+				// FIXME Michael: this is a static method - handle before
+				else if (opName.equals("allInstances")) {
 
-					this.popLocalEnvironment();
+					Type type = anOperationCallExp.getSourceType();
+
+					Set<IModelInstanceObject> imiResult =
+							this.myEnvironment.getModelInstance().getAllInstances(type);
+
+					result = myStandardLibraryFactory.createOclSet(imiResult);
 				}
+
+				/* The standard case. Invoke the operation and compute the result. */
+				else {
+
+					if (body == null) {
+
+						if (source.oclIsUndefined().isTrue()) {
+							result =
+									myStandardLibraryFactory
+											.createOclUndefined(anOperationCallExp.getType(), source
+													.getUndefinedreason());
+						}
+
+						else {
+							result = source.invokeOperation(referredOperation, parameters);
+						}
+					}
+
+					else {
+						result =
+								this.interpretConstraint(body, this.myCurrentModelObject)
+										.getResult();
+
+						this.popLocalEnvironment();
+					}
+				}
+				// end else.
+
+				/*
+				 * If the result or its source is an OclModelInstanceObject, the result
+				 * cannot be cached.
+				 */
+				if ((result instanceof OclModelInstanceObject)
+						|| (source instanceof OclModelInstanceObject)) {
+					this.isModelAccessNeeded = true;
+				}
+
 			}
 			// end else.
 
-			/*
-			 * If the result or its source is an OclModelInstanceObject, the result
-			 * cannot be cached.
-			 */
-			if ((result instanceof OclModelInstanceObject)
-					|| (source instanceof OclModelInstanceObject)) {
-				this.isModelAccessNeeded = true;
-			}
-
 		}
-		// end else.
 
 		/* Eventually cache the result. */
 		if (this.isCachingEnabled && !isModelAccessNeeded) {
