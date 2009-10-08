@@ -3116,7 +3116,11 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			}
 			// no else.
 
-			result = myStandardLibraryFactory.createOclInvalid(msg);
+			// TODO Michael: is resultType the right type here, since it was tested
+			// before and not right
+			result =
+					myStandardLibraryFactory.createOclInvalid(resultType,
+							new IllegalArgumentException(msg));
 		}
 
 		/* Eventually log the exit of this method. */
@@ -3911,7 +3915,9 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 				}
 				// no else.
 
-				result = myStandardLibraryFactory.createOclInvalid(msg);
+				result =
+						myStandardLibraryFactory.createOclInvalid(resultType,
+								new IllegalStateException(msg));
 			}
 		}
 		// end while.
@@ -3938,7 +3944,11 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			}
 			// no else.
 
-			result = myStandardLibraryFactory.createOclInvalid(msg);
+			// TODO Michael: is resultType the right type here, since it was tested
+			// before and not right
+			result =
+					myStandardLibraryFactory.createOclInvalid(resultType,
+							new IllegalArgumentException(msg));
 		}
 
 		/* Eventually log the exit of this method. */
@@ -3975,7 +3985,8 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 		/* Check which type of collection shall be returned. */
 		if (resultType instanceof SetType) {
-			result = myStandardLibraryFactory.createOclSet(resultList);
+			Set<OclAny> resultSet = new HashSet<OclAny>(resultList);
+			result = myStandardLibraryFactory.createOclSet(resultSet);
 		}
 
 		else if (resultType instanceof BagType) {
@@ -3994,7 +4005,11 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			String msg;
 
 			msg = "Unknown Type of Collection. Type was " + resultType.getName();
-			result = myStandardLibraryFactory.createOclInvalid(msg);
+			// TODO Michael: what return type should be used? Is this really
+			// OclInvalid or rather a real exception?
+			result =
+					myStandardLibraryFactory.createOclInvalid(resultType,
+							new IllegalArgumentException(msg));
 		}
 
 		return result;

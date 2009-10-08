@@ -215,7 +215,7 @@ public class InterpretationEnvironment implements IInterpretationEnvironment {
 		if (this.postconditionValues != null) {
 			HashMap<OperationCallExp, OclAny> objectSpecificValues;
 
-			// TODO Michael: should be superfluous by now
+			// FIXME Michael: what happens here?
 			/* Get the object for which the value is stored. */
 			selfObject = this.getVar(IOclInterpreter.SELF_VARIABLE_NAME).getAdaptee();
 

@@ -31,8 +31,9 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import tudresden.ocl20.interpreter.IInterpretationEnvironment;
+import tudresden.ocl20.interpreter.IOclInterpreter;
+import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBoolean;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot;
 import tudresden.ocl20.pivot.examples.royalsandloyals.Burning;
 import tudresden.ocl20.pivot.examples.royalsandloyals.Color;
 import tudresden.ocl20.pivot.examples.royalsandloyals.Customer;
@@ -46,10 +47,10 @@ import tudresden.ocl20.pivot.examples.royalsandloyals.ProgramPartner;
 import tudresden.ocl20.pivot.examples.royalsandloyals.Service;
 import tudresden.ocl20.pivot.examples.royalsandloyals.ServiceLevel;
 import tudresden.ocl20.pivot.examples.royalsandloyals.Transaction;
+import tudresden.ocl20.pivot.modelbus.modelinstance.exception.TypeNotFoundInModelException;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
 import tudresden.ocl20.pivot.pivotmodel.Constraint;
 import tudresden.ocl20.pivot.standardlibrary.java.JavaStandardlibraryPlugin;
-import tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclBoolean;
 
 /**
  * <p>
@@ -74,10 +75,10 @@ public class TestInterpretation {
 	/**
 	 * The interpreted results of a test case.
 	 */
-	private List<OclRoot> results;
+	private List<OclAny> results;
 
 	/**
-	 * The global {@link IInterpretationEnvironment} of the used {@link OclInterpreter}.
+	 * The global {@link IInterpretationEnvironment} of the used {@link IOclInterpreter}.
 	 */
 	private IInterpretationEnvironment globalEnvironment;
 
@@ -166,8 +167,8 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(modelObject);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -208,8 +209,8 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(modelObject);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -260,8 +261,8 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(modelObject);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -322,8 +323,8 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(modelObject);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -369,8 +370,8 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(modelObject);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -426,8 +427,8 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(modelObject);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -469,8 +470,8 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(modelObject);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -524,8 +525,8 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(modelObject);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -566,8 +567,8 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(modelObject);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -640,8 +641,8 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(modelObject);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -689,8 +690,8 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(modelObject);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -751,8 +752,8 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(modelObject);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -793,8 +794,8 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(modelObject);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -835,8 +836,8 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(modelObject);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -877,8 +878,8 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(modelObject);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -912,18 +913,18 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(objectList);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertFalse(result_Boolean.isTrue());
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(1);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(1);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(1);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(1);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -959,13 +960,13 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(objectList);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(1);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(1);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertFalse(result_Boolean.isTrue());
 	}
 
@@ -1018,13 +1019,13 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(objectList);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(1);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(1);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertFalse(result_Boolean.isTrue());
 	}
 
@@ -1086,13 +1087,13 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(objectList);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(1);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(1);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertFalse(result_Boolean.isTrue());
 	}
 
@@ -1152,13 +1153,13 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(objectList);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(1);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(1);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertFalse(result_Boolean.isTrue());
 	}
 
@@ -1205,13 +1206,13 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(objectList);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(1);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(1);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertFalse(result_Boolean.isTrue());
 	}
 
@@ -1279,13 +1280,13 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(objectList);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(1);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(1);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertFalse(result_Boolean.isTrue());
 	}
 
@@ -1355,13 +1356,13 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(objectList);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(1);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(1);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertFalse(result_Boolean.isTrue());
 	}
 
@@ -1410,13 +1411,13 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(objectList);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(1);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(1);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertFalse(result_Boolean.isTrue());
 	}
 
@@ -1464,13 +1465,13 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(objectList);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(1);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(1);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertFalse(result_Boolean.isTrue());
 	}
 
@@ -1522,13 +1523,13 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(objectList);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(1);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(1);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertFalse(result_Boolean.isTrue());
 	}
 
@@ -1580,13 +1581,13 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(objectList);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(1);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(1);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertFalse(result_Boolean.isTrue());
 	}
 
@@ -1626,13 +1627,13 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(objectList);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(1);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(1);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertFalse(result_Boolean.isTrue());
 	}
 
@@ -1704,13 +1705,13 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(objectList);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(1);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(1);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertFalse(result_Boolean.isTrue());
 	}
 
@@ -1752,13 +1753,13 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(objectList);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(1);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(1);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertFalse(result_Boolean.isTrue());
 	}
 
@@ -1785,8 +1786,8 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(modelObject);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -1813,8 +1814,8 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(modelObject);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -1846,8 +1847,8 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(modelObject);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -1861,10 +1862,10 @@ public class TestInterpretation {
 	public void testPost01() {
 
 		LoyaltyProgram loyaltyProgram;
-		OclRoot loyaltyProgramInOcl;
+		OclAny loyaltyProgramInOcl;
 
 		Customer customer;
-		OclRoot customerInOcl;
+		OclAny customerInOcl;
 
 		/* Load the OCL file. */
 		testPerformer.loadOCLFile("expressions/post01.ocl");
@@ -1874,15 +1875,15 @@ public class TestInterpretation {
 
 		modelObject = testPerformer.addModelObject(loyaltyProgram);
 		loyaltyProgramInOcl =
-				JavaStandardlibraryPlugin.getOclInstanceAdapterFactory().createOclRoot(
+				JavaStandardlibraryPlugin.getStandardLibraryFactory().createOclAny(
 						modelObject);
 
 		customer = new Customer(25);
 
-		testPerformer.addModelObject(customer);
+		IModelInstanceElement imiCustomer = testPerformer.addModelObject(customer);
 		customerInOcl =
-				JavaStandardlibraryPlugin.getStandardLibraryFactory().createOclRoot(
-						customer);
+				JavaStandardlibraryPlugin.getStandardLibraryFactory().createOclAny(
+						imiCustomer);
 
 		/*
 		 * Add the values needed as parameters of the operation call constrained by
@@ -1906,8 +1907,8 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(modelObject);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
 		/* Remove the added values from the environment. */
@@ -1924,16 +1925,16 @@ public class TestInterpretation {
 	public void testPost02() {
 
 		LoyaltyProgram loyaltyProgram;
-		OclRoot loyaltyProgramInOcl;
+		OclAny loyaltyProgramInOcl;
 
 		ProgramPartner programPartner;
-		OclRoot programPartnerInOcl;
+		OclAny programPartnerInOcl;
 
 		ServiceLevel serviceLevel;
-		OclRoot serviceLevelInOcl;
+		OclAny serviceLevelInOcl;
 
 		Service service;
-		OclRoot serviceInOcl;
+		OclAny serviceInOcl;
 
 		/* Load the OCL file. */
 		testPerformer.loadOCLFile("expressions/post02.ocl");
@@ -1950,25 +1951,25 @@ public class TestInterpretation {
 		loyaltyProgram.addLevel(serviceLevel);
 
 		modelObject = testPerformer.addModelObject(loyaltyProgram);
-		testPerformer.addModelObject(programPartner);
-		testPerformer.addModelObject(serviceLevel);
-		testPerformer.addModelObject(service);
+		IModelInstanceElement imiProgramPartner = testPerformer.addModelObject(programPartner);
+		IModelInstanceElement imiServiceLevel = testPerformer.addModelObject(serviceLevel);
+		IModelInstanceElement imiService = testPerformer.addModelObject(service);
 
 		loyaltyProgramInOcl =
-				JavaStandardlibraryPlugin.getStandardLibraryFactory().createOclRoot(
-						loyaltyProgram);
+				JavaStandardlibraryPlugin.getStandardLibraryFactory().createOclAny(
+						modelObject);
 
 		programPartnerInOcl =
-				JavaStandardlibraryPlugin.getStandardLibraryFactory().createOclRoot(
-						programPartner);
+				JavaStandardlibraryPlugin.getStandardLibraryFactory().createOclAny(
+						imiProgramPartner);
 
 		serviceLevelInOcl =
-				JavaStandardlibraryPlugin.getStandardLibraryFactory().createOclRoot(
-						serviceLevel);
+				JavaStandardlibraryPlugin.getStandardLibraryFactory().createOclAny(
+						imiServiceLevel);
 
 		serviceInOcl =
-				JavaStandardlibraryPlugin.getStandardLibraryFactory().createOclRoot(
-						service);
+				JavaStandardlibraryPlugin.getStandardLibraryFactory().createOclAny(
+						imiService);
 
 		/*
 		 * Add the values needed as parameters of the operation call constrained by
@@ -1983,9 +1984,9 @@ public class TestInterpretation {
 
 		/* Try to invoke the tested operation. */
 		try {
-			OclRoot parameters[];
+			OclAny parameters[];
 
-			parameters = new OclRoot[3];
+			parameters = new OclAny[3];
 
 			parameters[0] = programPartnerInOcl;
 			parameters[1] = serviceLevelInOcl;
@@ -2002,8 +2003,8 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(modelObject);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
 		/* Remove the added values from the environment. */
@@ -2022,16 +2023,16 @@ public class TestInterpretation {
 	public void testPost03() {
 
 		LoyaltyProgram loyaltyProgram;
-		OclRoot loyaltyProgramInOcl;
+		OclAny loyaltyProgramInOcl;
 
 		ProgramPartner programPartner;
-		OclRoot programPartnerInOcl;
+		OclAny programPartnerInOcl;
 
 		ServiceLevel serviceLevel;
-		OclRoot serviceLevelInOcl;
+		OclAny serviceLevelInOcl;
 
 		Service service;
-		OclRoot serviceInOcl;
+		OclAny serviceInOcl;
 
 		/* Load the OCL file. */
 		testPerformer.loadOCLFile("expressions/post03.ocl");
@@ -2048,26 +2049,25 @@ public class TestInterpretation {
 		loyaltyProgram.addLevel(serviceLevel);
 
 		modelObject = testPerformer.addModelObject(loyaltyProgram);
-		testPerformer.addModelObject(programPartner);
-		testPerformer.addModelObject(serviceLevel);
-		testPerformer.addModelObject(service);
+		IModelInstanceElement imiProgramPartner = testPerformer.addModelObject(programPartner);
+		IModelInstanceElement imiServiceLevel = testPerformer.addModelObject(serviceLevel);
+		IModelInstanceElement imiService = testPerformer.addModelObject(service);
 
 		loyaltyProgramInOcl =
-				JavaStandardlibraryPlugin.getStandardLibraryFactory().createOclRoot(
-						loyaltyProgram);
+				JavaStandardlibraryPlugin.getStandardLibraryFactory().createOclAny(
+						modelObject);
 
 		programPartnerInOcl =
-				JavaStandardlibraryPlugin.getStandardLibraryFactory().createOclRoot(
-						programPartner);
+				JavaStandardlibraryPlugin.getStandardLibraryFactory().createOclAny(
+						imiProgramPartner);
 
 		serviceLevelInOcl =
-				JavaStandardlibraryPlugin.getStandardLibraryFactory().createOclRoot(
-						serviceLevel);
+				JavaStandardlibraryPlugin.getStandardLibraryFactory().createOclAny(
+						imiServiceLevel);
 
 		serviceInOcl =
-				JavaStandardlibraryPlugin.getStandardLibraryFactory().createOclRoot(
-						service);
-
+				JavaStandardlibraryPlugin.getStandardLibraryFactory().createOclAny(
+						imiService);
 		/*
 		 * Add the values needed as parameters of the operation call constrained by
 		 * this postcondition to the environment.
@@ -2081,9 +2081,9 @@ public class TestInterpretation {
 
 		/* Try to invoke the tested operation. */
 		try {
-			OclRoot parameters[];
+			OclAny parameters[];
 
-			parameters = new OclRoot[3];
+			parameters = new OclAny[3];
 
 			parameters[0] = programPartnerInOcl;
 			parameters[1] = serviceLevelInOcl;
@@ -2100,8 +2100,8 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(modelObject);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
 		/* Remove the added values from the environment. */
@@ -2120,16 +2120,16 @@ public class TestInterpretation {
 	public void testPost04() {
 
 		LoyaltyProgram loyaltyProgram;
-		OclRoot loyaltyProgramInOcl;
+		OclAny loyaltyProgramInOcl;
 
 		ProgramPartner programPartner;
-		OclRoot programPartnerInOcl;
+		OclAny programPartnerInOcl;
 
 		ServiceLevel serviceLevel;
-		OclRoot serviceLevelInOcl;
+		OclAny serviceLevelInOcl;
 
 		Service service;
-		OclRoot serviceInOcl;
+		OclAny serviceInOcl;
 
 		/* Load the OCL file. */
 		testPerformer.loadOCLFile("expressions/post04.ocl");
@@ -2146,25 +2146,25 @@ public class TestInterpretation {
 		loyaltyProgram.addLevel(serviceLevel);
 
 		modelObject = testPerformer.addModelObject(loyaltyProgram);
-		testPerformer.addModelObject(programPartner);
-		testPerformer.addModelObject(serviceLevel);
-		testPerformer.addModelObject(service);
+		IModelInstanceElement imiProgramPartner = testPerformer.addModelObject(programPartner);
+		IModelInstanceElement imiServiceLevel = testPerformer.addModelObject(serviceLevel);
+		IModelInstanceElement imiService = testPerformer.addModelObject(service);
 
 		loyaltyProgramInOcl =
-				JavaStandardlibraryPlugin.getStandardLibraryFactory().createOclRoot(
-						loyaltyProgram);
+				JavaStandardlibraryPlugin.getStandardLibraryFactory().createOclAny(
+						modelObject);
 
 		programPartnerInOcl =
-				JavaStandardlibraryPlugin.getStandardLibraryFactory().createOclRoot(
-						programPartner);
+				JavaStandardlibraryPlugin.getStandardLibraryFactory().createOclAny(
+						imiProgramPartner);
 
 		serviceLevelInOcl =
-				JavaStandardlibraryPlugin.getStandardLibraryFactory().createOclRoot(
-						serviceLevel);
+				JavaStandardlibraryPlugin.getStandardLibraryFactory().createOclAny(
+						imiServiceLevel);
 
 		serviceInOcl =
-				JavaStandardlibraryPlugin.getStandardLibraryFactory().createOclRoot(
-						service);
+				JavaStandardlibraryPlugin.getStandardLibraryFactory().createOclAny(
+						imiService);
 
 		/*
 		 * Add the values needed as parameters of the operation call constrained by
@@ -2179,9 +2179,9 @@ public class TestInterpretation {
 
 		/* Try to invoke the tested operation. */
 		try {
-			OclRoot parameters[];
+			OclAny parameters[];
 
-			parameters = new OclRoot[3];
+			parameters = new OclAny[3];
 
 			parameters[0] = programPartnerInOcl;
 			parameters[1] = serviceLevelInOcl;
@@ -2198,8 +2198,8 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(modelObject);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
 		/* Remove the added values from the environment. */
@@ -2218,7 +2218,7 @@ public class TestInterpretation {
 	public void testPost05() {
 
 		LoyaltyAccount loyaltyAccount;
-		OclRoot loyaltyAccountInOcl;
+		OclAny loyaltyAccountInOcl;
 
 		/* Load the OCL file. */
 		testPerformer.loadOCLFile("expressions/post05.ocl");
@@ -2230,18 +2230,18 @@ public class TestInterpretation {
 		modelObject = testPerformer.addModelObject(loyaltyAccount);
 
 		loyaltyAccountInOcl =
-				JavaStandardlibraryPlugin.getStandardLibraryFactory().createOclRoot(
-						loyaltyAccount);
+				JavaStandardlibraryPlugin.getStandardLibraryFactory().createOclAny(
+						modelObject);
 
 		/*
 		 * Try to invoke the tested operation and add the result variable to the
 		 * environment.
 		 */
 		try {
-			OclRoot parameters[];
-			OclRoot opResult;
+			OclAny parameters[];
+			OclAny opResult;
 
-			parameters = new OclRoot[0];
+			parameters = new OclAny[0];
 
 			opResult = loyaltyAccountInOcl.invokeOperation("isEmpty", parameters);
 
@@ -2256,8 +2256,8 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(modelObject);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
 		/* Remove the added values from the environment. */
@@ -2274,7 +2274,7 @@ public class TestInterpretation {
 	public void testPost06() {
 
 		LoyaltyAccount loyaltyAccount;
-		OclRoot loyaltyAccountInOcl;
+		OclAny loyaltyAccountInOcl;
 
 		/* Load the OCL file. */
 		testPerformer.loadOCLFile("expressions/post05.ocl");
@@ -2286,18 +2286,18 @@ public class TestInterpretation {
 		modelObject = testPerformer.addModelObject(loyaltyAccount);
 
 		loyaltyAccountInOcl =
-				JavaStandardlibraryPlugin.getStandardLibraryFactory().createOclRoot(
-						loyaltyAccount);
+				JavaStandardlibraryPlugin.getStandardLibraryFactory().createOclAny(
+						modelObject);
 
 		/*
 		 * Try to invoke the tested operation and add the result variable to the
 		 * environment.
 		 */
 		try {
-			OclRoot parameters[];
-			OclRoot opResult;
+			OclAny parameters[];
+			OclAny opResult;
 
-			parameters = new OclRoot[0];
+			parameters = new OclAny[0];
 
 			opResult = loyaltyAccountInOcl.invokeOperation("isEmpty", parameters);
 
@@ -2312,8 +2312,8 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(modelObject);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertFalse(result_Boolean.isTrue());
 
 		/* Remove the added values from the environment. */
@@ -2330,7 +2330,7 @@ public class TestInterpretation {
 	public void testPost07() {
 
 		Customer customer;
-		OclRoot customerInOcl;
+		OclAny customerInOcl;
 
 		/* Load the OCL file. */
 		testPerformer.loadOCLFile("expressions/post06.ocl");
@@ -2341,17 +2341,17 @@ public class TestInterpretation {
 		modelObject = testPerformer.addModelObject(customer);
 
 		customerInOcl =
-				JavaStandardlibraryPlugin.getStandardLibraryFactory().createOclRoot(
-						customer);
+				JavaStandardlibraryPlugin.getStandardLibraryFactory().createOclAny(
+						modelObject);
 
 		/* Prepare the selected model objects. */
 		testPerformer.prepareRemainingConstraints(modelObject, false);
 
 		/* Try to invoke the tested operation. */
 		try {
-			OclRoot parameters[];
+			OclAny parameters[];
 
-			parameters = new OclRoot[0];
+			parameters = new OclAny[0];
 
 			customerInOcl.invokeOperation("birthdayHappens", parameters);
 		}
@@ -2364,8 +2364,8 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(modelObject);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -2379,10 +2379,10 @@ public class TestInterpretation {
 	public void testPost08() {
 
 		Service service;
-		Integer integer;
+		Long integer;
 
-		OclRoot serviceInOcl;
-		OclRoot integerInOcl;
+		OclAny serviceInOcl;
+		OclAny integerInOcl;
 
 		/* Load the OCL file. */
 		testPerformer.loadOCLFile("expressions/post07.ocl");
@@ -2395,10 +2395,10 @@ public class TestInterpretation {
 		modelObject = testPerformer.addModelObject(service);
 
 		serviceInOcl =
-				JavaStandardlibraryPlugin.getOclInstanceAdapterFactory().createOclRoot(
+				JavaStandardlibraryPlugin.getStandardLibraryFactory().createOclAny(
 						modelObject);
 
-		integer = new Integer(100);
+		integer = new Long(100);
 
 		integerInOcl =
 				JavaStandardlibraryPlugin.getStandardLibraryFactory().createOclInteger(
@@ -2415,9 +2415,9 @@ public class TestInterpretation {
 
 		/* Try to invoke the tested operation. */
 		try {
-			OclRoot parameters[];
+			OclAny parameters[];
 
-			parameters = new OclRoot[1];
+			parameters = new OclAny[1];
 			parameters[0] = integerInOcl;
 
 			serviceInOcl.invokeOperation("upgradePointsEarned", parameters);
@@ -2431,8 +2431,8 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(modelObject);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
 		/* Remove the added values from the environment. */
@@ -2449,7 +2449,7 @@ public class TestInterpretation {
 	public void testPost09() {
 
 		Transaction transaction;
-		OclRoot transactionInOcl;
+		OclAny transactionInOcl;
 
 		Service service;
 		ServiceLevel serviceLevel;
@@ -2476,7 +2476,7 @@ public class TestInterpretation {
 
 		modelObject = testPerformer.addModelObject(transaction);
 		transactionInOcl =
-				JavaStandardlibraryPlugin.getOclInstanceAdapterFactory().createOclRoot(
+				JavaStandardlibraryPlugin.getStandardLibraryFactory().createOclAny(
 						modelObject);
 
 		/* Prepare the selected model objects. */
@@ -2488,10 +2488,10 @@ public class TestInterpretation {
 		 * environment.
 		 */
 		try {
-			OclRoot parameters[];
-			OclRoot opResult;
+			OclAny parameters[];
+			OclAny opResult;
 
-			parameters = new OclRoot[0];
+			parameters = new OclAny[0];
 			opResult = transactionInOcl.invokeOperation("getProgram", parameters);
 
 			testPerformer.setEnvironmentVariable("result", opResult);
@@ -2505,8 +2505,8 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(modelObject);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
 		/* Remove the added values from the environment. */
@@ -2523,7 +2523,7 @@ public class TestInterpretation {
 	public void testPost10() {
 
 		Transaction transaction;
-		OclRoot transactionInOcl;
+		OclAny transactionInOcl;
 
 		Service service;
 		ServiceLevel serviceLevel;
@@ -2550,7 +2550,7 @@ public class TestInterpretation {
 
 		modelObject = testPerformer.addModelObject(transaction);
 		transactionInOcl =
-				JavaStandardlibraryPlugin.getOclInstanceAdapterFactory().createOclRoot(
+				JavaStandardlibraryPlugin.getStandardLibraryFactory().createOclAny(
 						modelObject);
 
 		/* Prepare the selected model objects. */
@@ -2562,10 +2562,10 @@ public class TestInterpretation {
 		 * environment.
 		 */
 		try {
-			OclRoot parameters[];
-			OclRoot opResult;
+			OclAny parameters[];
+			OclAny opResult;
 
-			parameters = new OclRoot[0];
+			parameters = new OclAny[0];
 			opResult = transactionInOcl.invokeOperation("getProgram", parameters);
 
 			testPerformer.setEnvironmentVariable("result", opResult);
@@ -2579,8 +2579,8 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(modelObject);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
 		/* Remove the added values from the environment. */
@@ -2597,12 +2597,12 @@ public class TestInterpretation {
 	public void testPost11() {
 
 		LoyaltyProgram loyaltyProgram;
-		OclRoot loyaltyProgramInOcl;
+		OclAny loyaltyProgramInOcl;
 
 		Membership membership;
 
 		Customer customer;
-		OclRoot customerInOcl;
+		OclAny customerInOcl;
 
 		/* Load the OCL file. */
 		testPerformer.loadOCLFile("expressions/post11.ocl");
@@ -2617,14 +2617,14 @@ public class TestInterpretation {
 
 		modelObject = testPerformer.addModelObject(loyaltyProgram);
 		loyaltyProgramInOcl =
-				JavaStandardlibraryPlugin.getOclInstanceAdapterFactory().createOclRoot(
+				JavaStandardlibraryPlugin.getStandardLibraryFactory().createOclAny(
 						modelObject);
 
-		testPerformer.addModelObject(customer);
+		IModelInstanceElement imiCustomer = testPerformer.addModelObject(customer);
 
 		customerInOcl =
-				JavaStandardlibraryPlugin.getStandardLibraryFactory().createOclRoot(
-						customer);
+				JavaStandardlibraryPlugin.getStandardLibraryFactory().createOclAny(
+						imiCustomer);
 
 		testPerformer.addModelObject(membership);
 
@@ -2650,8 +2650,8 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(modelObject);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
 		/* Remove the added values from the environment. */
@@ -2668,7 +2668,7 @@ public class TestInterpretation {
 	public void testPost12() {
 
 		Date date;
-		OclRoot dateInOcl;
+		OclAny dateInOcl;
 
 		/* Load the OCL file. */
 		testPerformer.loadOCLFile("expressions/post12.ocl");
@@ -2679,7 +2679,7 @@ public class TestInterpretation {
 		modelObject = testPerformer.addModelObject(date);
 
 		dateInOcl =
-				JavaStandardlibraryPlugin.getOclInstanceAdapterFactory().createOclRoot(
+				JavaStandardlibraryPlugin.getStandardLibraryFactory().createOclAny(
 						modelObject);
 
 		/* Prepare the selected model objects. */
@@ -2690,10 +2690,10 @@ public class TestInterpretation {
 		 * environment.
 		 */
 		try {
-			OclRoot parameters[];
-			OclRoot opResult;
+			OclAny parameters[];
+			OclAny opResult;
 
-			parameters = new OclRoot[0];
+			parameters = new OclAny[0];
 			opResult = dateInOcl.invokeOperation("now", parameters);
 
 			testPerformer.setEnvironmentVariable("result", opResult);
@@ -2707,8 +2707,8 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(modelObject);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
 		/* Remove the added values from the environment. */
@@ -2747,8 +2747,8 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(modelObject);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
 		/* Do the same test with different values. */
@@ -2764,8 +2764,8 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(modelObject);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertFalse(result_Boolean.isTrue());
 
 		/* Remove the added values from the environment. */
@@ -2820,32 +2820,38 @@ public class TestInterpretation {
 		 */
 		service = new Service();
 
-		testPerformer.setEnvironmentVariable("aPartner", programPartner);
-		testPerformer.setEnvironmentVariable("aLevel", serviceLevel);
-		testPerformer.setEnvironmentVariable("aService", service);
+		// FIXME: is this exception handling OK?
+		try {
+			testPerformer.setEnvironmentVariable("aPartner", programPartner);
+			testPerformer.setEnvironmentVariable("aLevel", serviceLevel);
+			testPerformer.setEnvironmentVariable("aService", service);
 
-		/* Interpret the selected combinations. */
-		results = testPerformer.interpretRemainingConstraints(objectList);
+			/* Interpret the selected combinations. */
+			results = testPerformer.interpretRemainingConstraints(objectList);
 
-		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
-		assertTrue(result_Boolean.isTrue());
+			/* Compare with expected results. */
+			result_Boolean = (OclBoolean) results.get(0);
+			assertFalse(result_Boolean.oclIsUndefined().isTrue());
+			assertTrue(result_Boolean.isTrue());
 
-		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(1);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
-		assertTrue(result_Boolean.isTrue());
+			/* Compare with expected results. */
+			result_Boolean = (OclBoolean) results.get(1);
+			assertFalse(result_Boolean.oclIsUndefined().isTrue());
+			assertTrue(result_Boolean.isTrue());
 
-		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(2);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
-		assertFalse(result_Boolean.isTrue());
+			/* Compare with expected results. */
+			result_Boolean = (OclBoolean) results.get(2);
+			assertFalse(result_Boolean.oclIsUndefined().isTrue());
+			assertFalse(result_Boolean.isTrue());
 
-		/* Remove the added values from the environment. */
-		testPerformer.resetEnvironmentVariable("aPartner");
-		testPerformer.resetEnvironmentVariable("aLevel");
-		testPerformer.resetEnvironmentVariable("aServices");
+			/* Remove the added values from the environment. */
+			testPerformer.resetEnvironmentVariable("aPartner");
+			testPerformer.resetEnvironmentVariable("aLevel");
+			testPerformer.resetEnvironmentVariable("aServices");
+		} catch (TypeNotFoundInModelException e) {
+			fail(e.getMessage());
+		}
+
 	}
 
 	/**
@@ -2904,18 +2910,18 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(objectList);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(1);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(1);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertFalse(result_Boolean.isTrue());
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(2);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(2);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
 		/* Remove the added values from the environment. */
@@ -2980,18 +2986,18 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(objectList);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(1);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(1);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertFalse(result_Boolean.isTrue());
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(2);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(2);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertFalse(result_Boolean.isTrue());
 
 		/* Remove the added values from the environment. */
@@ -3022,8 +3028,8 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(modelObject);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -3049,8 +3055,8 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(modelObject);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -3076,8 +3082,8 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(modelObject);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -3103,8 +3109,8 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(modelObject);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -3130,8 +3136,8 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(modelObject);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -3157,13 +3163,13 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(modelObject);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(1);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(1);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -3189,8 +3195,8 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(modelObject);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -3227,13 +3233,13 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(objectList);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertFalse(result_Boolean.isTrue());
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(1);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(1);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -3259,8 +3265,8 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(modelObject);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertFalse(result_Boolean.isTrue());
 	}
 
@@ -3294,18 +3300,18 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(objectList);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertFalse(result_Boolean.isTrue());
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(1);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(1);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(2);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(2);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertFalse(result_Boolean.isTrue());
 	}
 
@@ -3356,13 +3362,13 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(objectList);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertFalse(result_Boolean.isTrue());
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(1);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(1);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -3399,18 +3405,18 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(objectList);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(1);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(1);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(2);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(2);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertFalse(result_Boolean.isTrue());
 	}
 
@@ -3443,13 +3449,13 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(objectList);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(1);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(1);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertFalse(result_Boolean.isTrue());
 	}
 
@@ -3475,8 +3481,8 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(modelObject);
 	
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -3502,8 +3508,8 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(modelObject);
 	
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -3529,8 +3535,8 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(modelObject);
 	
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -3556,8 +3562,8 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(modelObject);
 	
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -3583,8 +3589,8 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(modelObject);
 	
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -3610,8 +3616,8 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(modelObject);
 	
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -3638,8 +3644,8 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(modelObject);
 	
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -3666,8 +3672,8 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(modelObject);
 	
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -3693,8 +3699,8 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(modelObject);
 	
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -3733,13 +3739,13 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(objectList);
 	
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(1);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(1);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -3778,13 +3784,13 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(objectList);
 	
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertFalse(result_Boolean.isTrue());
 	
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(1);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(1);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -3810,8 +3816,8 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(modelObject);
 	
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -3837,8 +3843,8 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(modelObject);
 	
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -3877,8 +3883,8 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(modelObject);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -3929,13 +3935,13 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(objectList);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(1);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(1);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertFalse(result_Boolean.isTrue());
 	}
 
@@ -3986,13 +3992,13 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(objectList);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(1);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(1);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertFalse(result_Boolean.isTrue());
 	}
 
@@ -4047,13 +4053,13 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(objectList);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(1);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(1);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -4081,8 +4087,8 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(objectList);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -4110,8 +4116,8 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(objectList);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -4193,18 +4199,18 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(objectList);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(1);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(1);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertFalse(result_Boolean.isTrue());
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(2);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(2);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertFalse(result_Boolean.isTrue());
 	}
 
@@ -4286,18 +4292,18 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(objectList);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(1);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(1);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(2);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(2);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertFalse(result_Boolean.isTrue());
 	}
 
@@ -4325,8 +4331,8 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(objectList);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -4354,8 +4360,8 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(objectList);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -4383,8 +4389,8 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(objectList);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -4412,8 +4418,8 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(objectList);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -4441,8 +4447,8 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(objectList);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -4470,8 +4476,8 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(objectList);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -4499,8 +4505,8 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(objectList);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -4528,8 +4534,8 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(objectList);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -4557,8 +4563,8 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(objectList);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -4586,8 +4592,8 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(objectList);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -4675,13 +4681,13 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(objectList);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(1);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(1);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -4769,13 +4775,13 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(objectList);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(1);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(1);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -4863,13 +4869,13 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(objectList);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(1);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(1);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -4939,8 +4945,8 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(objectList);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -5028,13 +5034,13 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(objectList);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(1);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(1);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertFalse(result_Boolean.isTrue());
 	}
 
@@ -5122,13 +5128,13 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(objectList);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(1);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(1);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertFalse(result_Boolean.isTrue());
 	}
 
@@ -5198,8 +5204,8 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(objectList);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -5248,13 +5254,13 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(objectList);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertFalse(result_Boolean.isTrue());
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(1);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(1);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -5323,13 +5329,13 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(objectList);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(1);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(1);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -5387,13 +5393,13 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(objectList);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(1);
-		assertTrue(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(1);
+		assertTrue(result_Boolean.oclIsUndefined().isTrue());
 	}
 
 	/**
@@ -5438,13 +5444,13 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(objectList);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(1);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(1);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertFalse(result_Boolean.isTrue());
 	}
 
@@ -5490,13 +5496,13 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(objectList);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(1);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(1);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertFalse(result_Boolean.isTrue());
 	}
 
@@ -5542,13 +5548,13 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(objectList);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(1);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(1);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertFalse(result_Boolean.isTrue());
 	}
 
@@ -5618,18 +5624,18 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(objectList);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertFalse(result_Boolean.isTrue());
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(1);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(1);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(2);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(2);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertFalse(result_Boolean.isTrue());
 	}
 
@@ -5684,13 +5690,13 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(objectList);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertFalse(result_Boolean.isTrue());
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(1);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(1);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -5751,13 +5757,13 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(objectList);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertFalse(result_Boolean.isTrue());
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(1);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(1);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -5818,13 +5824,13 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(objectList);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertFalse(result_Boolean.isTrue());
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(1);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(1);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -5851,8 +5857,8 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(modelObject);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -5879,8 +5885,8 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(modelObject);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -5907,8 +5913,8 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(modelObject);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -5935,8 +5941,8 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(modelObject);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -5963,8 +5969,8 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(modelObject);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -5991,8 +5997,8 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(modelObject);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -6019,8 +6025,8 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(modelObject);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -6047,8 +6053,8 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(modelObject);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -6075,8 +6081,8 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(modelObject);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -6103,8 +6109,8 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(modelObject);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -6131,8 +6137,8 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(modelObject);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -6164,8 +6170,8 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(modelObject);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -6197,8 +6203,8 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(modelObject);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -6230,8 +6236,8 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(modelObject);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -6263,8 +6269,8 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(modelObject);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -6291,8 +6297,8 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(modelObject);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -6319,8 +6325,8 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(modelObject);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -6347,8 +6353,8 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(modelObject);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -6375,8 +6381,8 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(modelObject);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -6403,8 +6409,8 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(modelObject);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -6431,8 +6437,8 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(modelObject);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -6459,8 +6465,8 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(modelObject);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -6487,8 +6493,8 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(modelObject);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -6515,8 +6521,8 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(modelObject);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -6543,8 +6549,8 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(modelObject);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 }
