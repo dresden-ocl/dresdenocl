@@ -53,10 +53,7 @@ public abstract class AbstractModelInstanceObject extends
 
 		/* Else construct a name of all implemented types. */
 		else {
-			resultBuffer.append(AbstractModelInstanceObject.class.getSimpleName());
-			resultBuffer.append("[");
-			resultBuffer.append(this.getTypes().toString());
-			resultBuffer.append(", ");
+			resultBuffer.append("MIObject[");
 			resultBuffer.append(this.getObject());
 			resultBuffer.append("]");
 		}
