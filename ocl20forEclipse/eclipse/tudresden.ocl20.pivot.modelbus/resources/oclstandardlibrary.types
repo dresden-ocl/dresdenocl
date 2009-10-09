@@ -136,6 +136,7 @@
       <ownedTypeParameter name="T"/>
     </ownedOperation>
   </oclAny>
+  <oclVoid name="OclVoid" superType="//@oclAny"/>
   <oclType name="OclType" superType="//@oclAny">
     <ownedTypeParameter name="T"/>
     <ownedOperation name="=" type="//@oclBoolean">
@@ -854,4 +855,5 @@
       <genericType xsi:type="pivot:ParameterGenericType" typeParameter="//@oclTuple.0/@ownedTypeParameter.1"/>
     </ownedProperty>
   </oclTuple>
+  <oclTuple superType="//@oclAny" oclLibrary="/"/>
 </types:OclLibrary>

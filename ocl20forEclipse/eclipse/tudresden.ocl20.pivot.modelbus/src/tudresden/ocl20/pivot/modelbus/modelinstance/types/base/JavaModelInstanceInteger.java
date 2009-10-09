@@ -175,4 +175,10 @@ public class JavaModelInstanceInteger extends AbstractModelInstanceInteger
 
 		return this.myLong;
 	}
+
+	public Double getDouble() {
+
+		return this.myLong.doubleValue();
+
+	}
 }

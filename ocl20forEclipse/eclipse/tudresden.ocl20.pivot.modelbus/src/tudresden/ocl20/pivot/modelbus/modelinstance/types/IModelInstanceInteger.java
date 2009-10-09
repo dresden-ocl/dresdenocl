@@ -28,7 +28,7 @@ import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance;
  * 
  * @author Claas Wilke
  */
-public interface IModelInstanceInteger extends IModelInstancePrimitiveType {
+public interface IModelInstanceInteger extends IModelInstanceReal {
 
 	/**
 	 * <p>
