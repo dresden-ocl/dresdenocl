@@ -199,10 +199,12 @@ public class EcoreModelInstance extends AbstractModelInstance implements
 	 * (non-Javadoc)
 	 * @see
 	 * tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance#getStaticProperty
-	 * (tudresden.ocl20.pivot.pivotmodel.Property)
+	 * (tudresden.ocl20.pivot.pivotmodel.Type,
+	 * tudresden.ocl20.pivot.pivotmodel.Property)
 	 */
-	public IModelInstanceElement getStaticProperty(Property property)
-			throws PropertyAccessException, PropertyNotFoundException {
+	public IModelInstanceElement getStaticProperty(Type sourceType,
+			Property property) throws PropertyAccessException,
+			PropertyNotFoundException {
 
 		String msg;
 		msg =
@@ -248,7 +250,7 @@ public class EcoreModelInstance extends AbstractModelInstance implements
 		IModelInstanceElement result;
 
 		result = this.myModelInstanceFactory.createModelInstanceElement(anObject);
-		
+
 		/* If no type of the object has been found, throw an exception. */
 		if (result == null) {
 			String msg;
@@ -267,11 +269,11 @@ public class EcoreModelInstance extends AbstractModelInstance implements
 			this.myModelInstanceObjects.add((IModelInstanceObject) result);
 		}
 		// no else.
-		
+
 		if (anObject instanceof EObject) {
 			EObject anEObject;
 			anEObject = (EObject) anObject;
-			
+
 			/* Probably add contained elements as well. */
 			for (EObject anElement : anEObject.eContents()) {
 				this.addObject(anElement);
