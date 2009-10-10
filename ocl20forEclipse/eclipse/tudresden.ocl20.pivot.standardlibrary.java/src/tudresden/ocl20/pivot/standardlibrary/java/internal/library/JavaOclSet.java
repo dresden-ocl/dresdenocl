@@ -38,7 +38,6 @@ import java.util.Set;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBag;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBoolean;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSet;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceCollection;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
@@ -146,14 +145,17 @@ public class JavaOclSet<T extends OclAny> extends JavaOclUnsortedCollection<T>
 			 * nested collections are flattened, i.e. their elements are added to the
 			 * result
 			 */
-			if (element instanceof OclCollection<?>) {
-				OclCollection<OclAny> collection = ((OclCollection<OclAny>) element);
-				Collection<IModelInstanceElement> collectionElements =
-						((IModelInstanceCollection<IModelInstanceElement>) collection
-								.getModelInstanceElement()).getCollection();
+			if (element instanceof IModelInstanceCollection<?>) {
+				IModelInstanceCollection<IModelInstanceElement> collection;
+				collection =
+						((IModelInstanceCollection<IModelInstanceElement>) element);
 
-				flat.addAll(collectionElements);
+				for (IModelInstanceElement collectionElement : collection
+						.getCollection()) {
+					flat.add(collectionElement);
+				}
 			}
+
 			/* other elements are simply added */
 			else {
 				flat.add(element);

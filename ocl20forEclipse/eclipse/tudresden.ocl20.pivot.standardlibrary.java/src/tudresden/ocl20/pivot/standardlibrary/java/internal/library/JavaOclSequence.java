@@ -36,7 +36,6 @@ import java.util.List;
 
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBoolean;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclOrderedSet;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSequence;
@@ -145,16 +144,17 @@ public class JavaOclSequence<T extends OclAny> extends
 			 * nested collections are flattened, i.e. their elements are added to the
 			 * result
 			 */
-			if (element instanceof OclCollection<?>) {
-				OclCollection<OclAny> collection = ((OclCollection<OclAny>) element);
-				Collection<IModelInstanceElement> collectionElements =
-						((IModelInstanceCollection<IModelInstanceElement>) collection
-								.getModelInstanceElement()).getCollection();
+			if (element instanceof IModelInstanceCollection<?>) {
+				IModelInstanceCollection<IModelInstanceElement> collection;
+				collection =
+						((IModelInstanceCollection<IModelInstanceElement>) element);
 
-				for (IModelInstanceElement collectionElement : collectionElements) {
+				for (IModelInstanceElement collectionElement : collection
+						.getCollection()) {
 					flat.add(collectionElement);
 				}
 			}
+
 			/* other elements are simply added */
 			else {
 				flat.add(element);

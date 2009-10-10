@@ -186,10 +186,16 @@ public class JavaOclBag<T extends OclAny> extends JavaOclUnsortedCollection<T>
 			 * result
 			 */
 			if (element instanceof IModelInstanceCollection<?>) {
-				IModelInstanceCollection<IModelInstanceElement> collection =
+				IModelInstanceCollection<IModelInstanceElement> collection;
+				collection =
 						((IModelInstanceCollection<IModelInstanceElement>) element);
-				flat.addAll(collection.getCollection());
+
+				for (IModelInstanceElement collectionElement : collection
+						.getCollection()) {
+					flat.add(collectionElement);
+				}
 			}
+
 			/* other elements are simply added */
 			else {
 				flat.add(element);

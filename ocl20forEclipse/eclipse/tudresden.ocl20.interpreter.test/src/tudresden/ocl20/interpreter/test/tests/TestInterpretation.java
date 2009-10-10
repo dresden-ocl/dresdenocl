@@ -136,7 +136,7 @@ public class TestInterpretation {
 		Customer customer;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/body02.ocl");
+		testPerformer.loadOCLFile("constraints/body02.ocl");
 
 		/* Create the model objects that shall be interpreted. */
 		customer = new Customer(25);
@@ -165,7 +165,7 @@ public class TestInterpretation {
 		assertNotNull(result_Constraint);
 
 		/* Load another OCL file to verify the body preparation. */
-		testPerformer.loadOCLFile("expressions/testInterpreter/body02.ocl");
+		testPerformer.loadOCLFile("constraints/testInterpreter/body02.ocl");
 
 		/* Interpret the selected objectList. */
 		results = testPerformer.interpretRemainingConstraints(modelObject);
@@ -188,7 +188,7 @@ public class TestInterpretation {
 		Date date;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/body03.ocl");
+		testPerformer.loadOCLFile("constraints/body03.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		date = Date.now();
@@ -207,7 +207,7 @@ public class TestInterpretation {
 		assertNotNull(result_Constraint);
 
 		/* Load another OCL file to verify the body preparation. */
-		testPerformer.loadOCLFile("expressions/testInterpreter/body03.ocl");
+		testPerformer.loadOCLFile("constraints/testInterpreter/body03.ocl");
 
 		/* Interpret the selected objectList. */
 		results = testPerformer.interpretRemainingConstraints(modelObject);
@@ -232,7 +232,7 @@ public class TestInterpretation {
 		Transaction transaction2;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/define01.ocl");
+		testPerformer.loadOCLFile("constraints/define01.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		transaction1 = new Transaction();
@@ -259,7 +259,7 @@ public class TestInterpretation {
 		assertNotNull(result_Constraint);
 
 		/* Load another OCL file to verify the body preparation. */
-		testPerformer.loadOCLFile("expressions/testInterpreter/define01.ocl");
+		testPerformer.loadOCLFile("constraints/testInterpreter/define01.ocl");
 
 		/* Interpret the selected objectList. */
 		results = testPerformer.interpretRemainingConstraints(modelObject);
@@ -287,7 +287,7 @@ public class TestInterpretation {
 		Service service3;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/define02.ocl");
+		testPerformer.loadOCLFile("constraints/define02.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		service1 = new Service();
@@ -321,7 +321,7 @@ public class TestInterpretation {
 		assertNotNull(result_Constraint);
 
 		/* Load another OCL file to verify the body preparation. */
-		testPerformer.loadOCLFile("expressions/testInterpreter/define02.ocl");
+		testPerformer.loadOCLFile("constraints/testInterpreter/define02.ocl");
 
 		/* Interpret the selected objectList. */
 		results = testPerformer.interpretRemainingConstraints(modelObject);
@@ -345,7 +345,7 @@ public class TestInterpretation {
 		ServiceLevel level;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/define03.ocl");
+		testPerformer.loadOCLFile("constraints/define03.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		level = new ServiceLevel();
@@ -368,7 +368,7 @@ public class TestInterpretation {
 		assertNotNull(result_Constraint);
 
 		/* Load another OCL file to verify the body preparation. */
-		testPerformer.loadOCLFile("expressions/testInterpreter/define03.ocl");
+		testPerformer.loadOCLFile("constraints/testInterpreter/define03.ocl");
 
 		/* Interpret the selected objectList. */
 		results = testPerformer.interpretRemainingConstraints(modelObject);
@@ -395,7 +395,7 @@ public class TestInterpretation {
 		Service service2;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/define04.ocl");
+		testPerformer.loadOCLFile("constraints/define04.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		service1 = new Service();
@@ -425,7 +425,7 @@ public class TestInterpretation {
 		assertNotNull(result_Constraint);
 
 		/* Load another OCL file to verify the body preparation. */
-		testPerformer.loadOCLFile("expressions/testInterpreter/define04.ocl");
+		testPerformer.loadOCLFile("constraints/testInterpreter/define04.ocl");
 
 		/* Interpret the selected objectList. */
 		results = testPerformer.interpretRemainingConstraints(modelObject);
@@ -448,7 +448,7 @@ public class TestInterpretation {
 		Customer customer;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/define05.ocl");
+		testPerformer.loadOCLFile("constraints/define05.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		customer = new Customer(25);
@@ -468,7 +468,7 @@ public class TestInterpretation {
 		assertNotNull(result_Constraint);
 
 		/* Load another OCL file to verify the body preparation. */
-		testPerformer.loadOCLFile("expressions/testInterpreter/define05.ocl");
+		testPerformer.loadOCLFile("constraints/testInterpreter/define05.ocl");
 
 		/* Interpret the selected objectList. */
 		results = testPerformer.interpretRemainingConstraints(modelObject);
@@ -493,7 +493,7 @@ public class TestInterpretation {
 		Transaction transaction2;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/define06.ocl");
+		testPerformer.loadOCLFile("constraints/define06.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		transaction1 = new Transaction();
@@ -523,7 +523,7 @@ public class TestInterpretation {
 		assertNotNull(result_Constraint);
 
 		/* Load another OCL file to verify the body preparation. */
-		testPerformer.loadOCLFile("expressions/testInterpreter/define06.ocl");
+		testPerformer.loadOCLFile("constraints/testInterpreter/define06.ocl");
 
 		/* Interpret the selected objectList. */
 		results = testPerformer.interpretRemainingConstraints(modelObject);
@@ -546,7 +546,7 @@ public class TestInterpretation {
 		CustomerCard customerCard;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/define07.ocl");
+		testPerformer.loadOCLFile("constraints/define07.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		customerCard = new CustomerCard();
@@ -565,7 +565,7 @@ public class TestInterpretation {
 		assertNotNull(result_Constraint);
 
 		/* Load another OCL file to verify the body preparation. */
-		testPerformer.loadOCLFile("expressions/testInterpreter/define07.ocl");
+		testPerformer.loadOCLFile("constraints/testInterpreter/define07.ocl");
 
 		/* Interpret the selected objectList. */
 		results = testPerformer.interpretRemainingConstraints(modelObject);
@@ -596,7 +596,7 @@ public class TestInterpretation {
 		Transaction transaction3;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/define08.ocl");
+		testPerformer.loadOCLFile("constraints/define08.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		transaction1 = new Burning();
@@ -639,7 +639,7 @@ public class TestInterpretation {
 		assertNotNull(result_constrainedElement);
 
 		/* Load another OCL file to verify the body preparation. */
-		testPerformer.loadOCLFile("expressions/testInterpreter/define08.ocl");
+		testPerformer.loadOCLFile("constraints/testInterpreter/define08.ocl");
 
 		/* Interpret the selected objectList. */
 		results = testPerformer.interpretRemainingConstraints(modelObject);
@@ -664,7 +664,7 @@ public class TestInterpretation {
 		Customer customer;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/derive01.ocl");
+		testPerformer.loadOCLFile("constraints/derive01.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		customer = new Customer(25);
@@ -688,7 +688,7 @@ public class TestInterpretation {
 		assertNotNull(result_Constraint);
 
 		/* Load another OCL file to verify the body preparation. */
-		testPerformer.loadOCLFile("expressions/testInterpreter/derive01.ocl");
+		testPerformer.loadOCLFile("constraints/testInterpreter/derive01.ocl");
 
 		/* Interpret the selected objectList. */
 		results = testPerformer.interpretRemainingConstraints(modelObject);
@@ -715,7 +715,7 @@ public class TestInterpretation {
 		Transaction transaction3;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/derive02.ocl");
+		testPerformer.loadOCLFile("constraints/derive02.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		transaction1 = new Earning();
@@ -750,7 +750,7 @@ public class TestInterpretation {
 		assertNotNull(result_Constraint);
 
 		/* Load another OCL file to verify the body preparation. */
-		testPerformer.loadOCLFile("expressions/testInterpreter/derive02.ocl");
+		testPerformer.loadOCLFile("constraints/testInterpreter/derive02.ocl");
 
 		/* Interpret the selected objectList. */
 		results = testPerformer.interpretRemainingConstraints(modelObject);
@@ -773,7 +773,7 @@ public class TestInterpretation {
 		LoyaltyAccount loyaltyAccount;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/init01.ocl");
+		testPerformer.loadOCLFile("constraints/init01.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		loyaltyAccount = new LoyaltyAccount();
@@ -792,7 +792,7 @@ public class TestInterpretation {
 		assertNotNull(result_Constraint);
 
 		/* Load another OCL file to verify the body preparation. */
-		testPerformer.loadOCLFile("expressions/testInterpreter/init01.ocl");
+		testPerformer.loadOCLFile("constraints/testInterpreter/init01.ocl");
 
 		/* Interpret the selected objectList. */
 		results = testPerformer.interpretRemainingConstraints(modelObject);
@@ -815,7 +815,7 @@ public class TestInterpretation {
 		CustomerCard customerCard;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/init02.ocl");
+		testPerformer.loadOCLFile("constraints/init02.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		customerCard = new CustomerCard();
@@ -834,7 +834,7 @@ public class TestInterpretation {
 		assertNotNull(result_Constraint);
 
 		/* Load another OCL file to verify the body preparation. */
-		testPerformer.loadOCLFile("expressions/testInterpreter/init02.ocl");
+		testPerformer.loadOCLFile("constraints/testInterpreter/init02.ocl");
 
 		/* Interpret the selected objectList. */
 		results = testPerformer.interpretRemainingConstraints(modelObject);
@@ -857,7 +857,7 @@ public class TestInterpretation {
 		LoyaltyAccount loyaltyAccount;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/init03.ocl");
+		testPerformer.loadOCLFile("constraints/init03.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		loyaltyAccount = new LoyaltyAccount();
@@ -876,7 +876,7 @@ public class TestInterpretation {
 		assertNotNull(result_Constraint);
 
 		/* Load another OCL file to verify the body preparation. */
-		testPerformer.loadOCLFile("expressions/testInterpreter/init03.ocl");
+		testPerformer.loadOCLFile("constraints/testInterpreter/init03.ocl");
 
 		/* Interpret the selected objectList. */
 		results = testPerformer.interpretRemainingConstraints(modelObject);
@@ -901,7 +901,7 @@ public class TestInterpretation {
 		Customer customer3;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/invariant01.ocl");
+		testPerformer.loadOCLFile("constraints/invariant01.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		customer1 = new Customer(17);
@@ -945,7 +945,7 @@ public class TestInterpretation {
 		CustomerCard customerCard2;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/invariant02.ocl");
+		testPerformer.loadOCLFile("constraints/invariant02.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		customerCard1 = new CustomerCard();
@@ -992,7 +992,7 @@ public class TestInterpretation {
 		ServiceLevel serviceLevel3;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/invariant03.ocl");
+		testPerformer.loadOCLFile("constraints/invariant03.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		serviceLevel1 = new ServiceLevel();
@@ -1056,7 +1056,7 @@ public class TestInterpretation {
 		CustomerCard customerCard3;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/invariant04.ocl");
+		testPerformer.loadOCLFile("constraints/invariant04.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		customerCard1 = new CustomerCard();
@@ -1118,7 +1118,7 @@ public class TestInterpretation {
 		CustomerCard customerCard2;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/invariant05.ocl");
+		testPerformer.loadOCLFile("constraints/invariant05.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		customerCard1 = new CustomerCard();
@@ -1185,7 +1185,7 @@ public class TestInterpretation {
 		Service service;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/invariant06.ocl");
+		testPerformer.loadOCLFile("constraints/invariant06.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		service = new Service();
@@ -1247,7 +1247,7 @@ public class TestInterpretation {
 		testPerformer.resetModel();
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/invariant07.ocl");
+		testPerformer.loadOCLFile("constraints/invariant07.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		customerCard1 = new CustomerCard();
@@ -1318,7 +1318,7 @@ public class TestInterpretation {
 		LoyaltyAccount loyaltyAccount;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/invariant08.ocl");
+		testPerformer.loadOCLFile("constraints/invariant08.ocl");
 
 		/* Select the model objects which shall be interpreted. */
 		loyaltyAccount = new LoyaltyAccount();
@@ -1388,7 +1388,7 @@ public class TestInterpretation {
 		Customer customer1;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/invariant09.ocl");
+		testPerformer.loadOCLFile("constraints/invariant09.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		customer1 = new Customer(25);
@@ -1441,7 +1441,7 @@ public class TestInterpretation {
 		ServiceLevel serviceLevel2;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/invariant10.ocl");
+		testPerformer.loadOCLFile("constraints/invariant10.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		serviceLevel1 = new ServiceLevel();
@@ -1498,7 +1498,7 @@ public class TestInterpretation {
 		Transaction transaction2;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/invariant11.ocl");
+		testPerformer.loadOCLFile("constraints/invariant11.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		transaction1 = new Transaction();
@@ -1556,7 +1556,7 @@ public class TestInterpretation {
 		Transaction transaction2;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/invariant12.ocl");
+		testPerformer.loadOCLFile("constraints/invariant12.ocl");
 
 		/* Select the model objects which shall be interpreted. */
 		transaction1 = new Burning();
@@ -1608,7 +1608,7 @@ public class TestInterpretation {
 		CustomerCard customerCard2;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/invariant13.ocl");
+		testPerformer.loadOCLFile("constraints/invariant13.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		customerCard1 = new CustomerCard();
@@ -1667,7 +1667,7 @@ public class TestInterpretation {
 		Customer customer2;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/invariant14.ocl");
+		testPerformer.loadOCLFile("constraints/invariant14.ocl");
 
 		/* Select the model objects which shall be interpreted. */
 		customer1 = new Customer(25);
@@ -1734,7 +1734,7 @@ public class TestInterpretation {
 		Transaction transaction1;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/invariant15.ocl");
+		testPerformer.loadOCLFile("constraints/invariant15.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		transaction1 = new Transaction();
@@ -1779,7 +1779,7 @@ public class TestInterpretation {
 		Service service;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/invariant16.ocl");
+		testPerformer.loadOCLFile("constraints/invariant16.ocl");
 
 		/* Select the model objects which shall be interpreted. */
 		service = new Service();
@@ -1807,7 +1807,7 @@ public class TestInterpretation {
 		Service service;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/invariant17.ocl");
+		testPerformer.loadOCLFile("constraints/invariant17.ocl");
 
 		/* Select the model objects which shall be interpreted. */
 		service = new Service();
@@ -1836,7 +1836,7 @@ public class TestInterpretation {
 		Burning burning;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/invariant18.ocl");
+		testPerformer.loadOCLFile("constraints/invariant18.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		burning = new Burning();
@@ -1872,7 +1872,7 @@ public class TestInterpretation {
 		OclAny customerInOcl;
 
 		/* Load the OCL file. */
-		testPerformer.loadOCLFile("expressions/post01.ocl");
+		testPerformer.loadOCLFile("constraints/post01.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		loyaltyProgram = new LoyaltyProgram();
@@ -1946,7 +1946,7 @@ public class TestInterpretation {
 		OclAny serviceInOcl;
 
 		/* Load the OCL file. */
-		testPerformer.loadOCLFile("expressions/post02.ocl");
+		testPerformer.loadOCLFile("constraints/post02.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		service = new Service();
@@ -2048,7 +2048,7 @@ public class TestInterpretation {
 		OclAny serviceInOcl;
 
 		/* Load the OCL file. */
-		testPerformer.loadOCLFile("expressions/post03.ocl");
+		testPerformer.loadOCLFile("constraints/post03.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		service = new Service();
@@ -2149,7 +2149,7 @@ public class TestInterpretation {
 		OclAny serviceInOcl;
 
 		/* Load the OCL file. */
-		testPerformer.loadOCLFile("expressions/post04.ocl");
+		testPerformer.loadOCLFile("constraints/post04.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		service = new Service();
@@ -2242,7 +2242,7 @@ public class TestInterpretation {
 		OclAny loyaltyAccountInOcl;
 
 		/* Load the OCL file. */
-		testPerformer.loadOCLFile("expressions/post05.ocl");
+		testPerformer.loadOCLFile("constraints/post05.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		loyaltyAccount = new LoyaltyAccount();
@@ -2299,7 +2299,7 @@ public class TestInterpretation {
 		OclAny loyaltyAccountInOcl;
 
 		/* Load the OCL file. */
-		testPerformer.loadOCLFile("expressions/post05.ocl");
+		testPerformer.loadOCLFile("constraints/post05.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		loyaltyAccount = new LoyaltyAccount();
@@ -2356,7 +2356,7 @@ public class TestInterpretation {
 		OclAny customerInOcl;
 
 		/* Load the OCL file. */
-		testPerformer.loadOCLFile("expressions/post06.ocl");
+		testPerformer.loadOCLFile("constraints/post06.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		customer = new Customer(25);
@@ -2410,7 +2410,7 @@ public class TestInterpretation {
 		OclAny integerInOcl;
 
 		/* Load the OCL file. */
-		testPerformer.loadOCLFile("expressions/post07.ocl");
+		testPerformer.loadOCLFile("constraints/post07.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		service = new Service();
@@ -2487,7 +2487,7 @@ public class TestInterpretation {
 		LoyaltyProgram loyaltyProgram;
 
 		/* Load the OCL file. */
-		testPerformer.loadOCLFile("expressions/post08.ocl");
+		testPerformer.loadOCLFile("constraints/post08.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		loyaltyProgram = new LoyaltyProgram();
@@ -2563,7 +2563,7 @@ public class TestInterpretation {
 		LoyaltyProgram loyaltyProgram;
 
 		/* Load the OCL file. */
-		testPerformer.loadOCLFile("expressions/post10.ocl");
+		testPerformer.loadOCLFile("constraints/post10.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		loyaltyProgram = new LoyaltyProgram();
@@ -2640,7 +2640,7 @@ public class TestInterpretation {
 		OclAny customerInOcl;
 
 		/* Load the OCL file. */
-		testPerformer.loadOCLFile("expressions/post11.ocl");
+		testPerformer.loadOCLFile("constraints/post11.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		customer = new Customer(25);
@@ -2707,7 +2707,7 @@ public class TestInterpretation {
 		OclAny dateInOcl;
 
 		/* Load the OCL file. */
-		testPerformer.loadOCLFile("expressions/post12.ocl");
+		testPerformer.loadOCLFile("constraints/post12.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		date = Date.now();
@@ -2765,7 +2765,7 @@ public class TestInterpretation {
 		Customer customer;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/pre01.ocl");
+		testPerformer.loadOCLFile("constraints/pre01.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		loyaltyProgram = new LoyaltyProgram();
@@ -2795,7 +2795,7 @@ public class TestInterpretation {
 		/* Do the same test with different values. */
 
 		/* Reload the OCL file for another interpretation. */
-		testPerformer.loadOCLFile("expressions/pre01.ocl");
+		testPerformer.loadOCLFile("constraints/pre01.ocl");
 
 		/* Set new parameters as preparation. */
 		customer.setName("");
@@ -2835,7 +2835,7 @@ public class TestInterpretation {
 		Object service;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/pre02.ocl");
+		testPerformer.loadOCLFile("constraints/pre02.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		serviceLevel = new ServiceLevel();
@@ -2917,7 +2917,7 @@ public class TestInterpretation {
 		Object service;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/pre03.ocl");
+		testPerformer.loadOCLFile("constraints/pre03.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		serviceLevel = new ServiceLevel();
@@ -2997,7 +2997,7 @@ public class TestInterpretation {
 		Object service;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/pre04.ocl");
+		testPerformer.loadOCLFile("constraints/pre04.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		serviceLevel = new ServiceLevel();
@@ -3071,7 +3071,7 @@ public class TestInterpretation {
 		Transaction transaction;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/pre05.ocl");
+		testPerformer.loadOCLFile("constraints/pre05.ocl");
 
 		/* Select the model objects which shall be interpreted. */
 		transaction = new Transaction();
@@ -3098,7 +3098,7 @@ public class TestInterpretation {
 		Date date;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/pre06.ocl");
+		testPerformer.loadOCLFile("constraints/pre06.ocl");
 
 		/* Select the model objects which shall be interpreted. */
 		date = Date.now();
@@ -3125,7 +3125,7 @@ public class TestInterpretation {
 		Transaction transaction;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/any01.ocl");
+		testPerformer.loadOCLFile("constraints/test/any01.ocl");
 
 		/* Select the model objects which shall be interpreted. */
 		transaction = new Transaction();
@@ -3152,7 +3152,7 @@ public class TestInterpretation {
 		Transaction transaction;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/any02.ocl");
+		testPerformer.loadOCLFile("constraints/test/any02.ocl");
 
 		/* Select the model objects which shall be interpreted. */
 		transaction = new Transaction();
@@ -3179,7 +3179,7 @@ public class TestInterpretation {
 		Transaction transaction;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/any03.ocl");
+		testPerformer.loadOCLFile("constraints/test/any03.ocl");
 
 		/* Select the model objects which shall be interpreted. */
 		transaction = new Transaction();
@@ -3206,7 +3206,7 @@ public class TestInterpretation {
 		Transaction transaction;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/any04.ocl");
+		testPerformer.loadOCLFile("constraints/test/any04.ocl");
 
 		/* Select the model objects which shall be interpreted. */
 		transaction = new Transaction();
@@ -3238,7 +3238,7 @@ public class TestInterpretation {
 		Transaction transaction;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/any05.ocl");
+		testPerformer.loadOCLFile("constraints/test/any05.ocl");
 
 		/* Select the model objects which shall be interpreted. */
 		transaction = new Transaction();
@@ -3266,7 +3266,7 @@ public class TestInterpretation {
 		Service service2;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/boolean01.ocl");
+		testPerformer.loadOCLFile("constraints/test/boolean01.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		service1 = new Service();
@@ -3308,7 +3308,7 @@ public class TestInterpretation {
 		Service service;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/boolean02.ocl");
+		testPerformer.loadOCLFile("constraints/test/boolean02.ocl");
 
 		/* Select the model objects which shall be interpreted. */
 		service = new Service();
@@ -3337,7 +3337,7 @@ public class TestInterpretation {
 		Customer customer3;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/boolean03.ocl");
+		testPerformer.loadOCLFile("constraints/test/boolean03.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		customer1 = new Customer(15);
@@ -3386,7 +3386,7 @@ public class TestInterpretation {
 		CustomerCard card4;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/boolean04.ocl");
+		testPerformer.loadOCLFile("constraints/test/boolean04.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		customer1 = new Customer(11);
@@ -3439,7 +3439,7 @@ public class TestInterpretation {
 		Customer customer3;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/boolean05.ocl");
+		testPerformer.loadOCLFile("constraints/test/boolean05.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		customer1 = new Customer(25);
@@ -3486,7 +3486,7 @@ public class TestInterpretation {
 		Customer customer2;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/boolean06.ocl");
+		testPerformer.loadOCLFile("constraints/test/boolean06.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		customer1 = new Customer(25);
@@ -3524,7 +3524,7 @@ public class TestInterpretation {
 		Service service;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/collection01.ocl");
+		testPerformer.loadOCLFile("constraints/test/collection01.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		service = new Service();
@@ -3551,7 +3551,7 @@ public class TestInterpretation {
 		Service service;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/collection02.ocl");
+		testPerformer.loadOCLFile("constraints/test/collection02.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		service = new Service();
@@ -3578,7 +3578,7 @@ public class TestInterpretation {
 		Service service;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/collection03.ocl");
+		testPerformer.loadOCLFile("constraints/test/collection03.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		service = new Service();
@@ -3605,7 +3605,7 @@ public class TestInterpretation {
 		Service service;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/collection04.ocl");
+		testPerformer.loadOCLFile("constraints/test/collection04.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		service = new Service();
@@ -3632,7 +3632,7 @@ public class TestInterpretation {
 		Service service;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/collection05.ocl");
+		testPerformer.loadOCLFile("constraints/test/collection05.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		service = new Service();
@@ -3659,7 +3659,7 @@ public class TestInterpretation {
 		Service service;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/collection06.ocl");
+		testPerformer.loadOCLFile("constraints/test/collection06.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		service = new Service();
@@ -3686,7 +3686,7 @@ public class TestInterpretation {
 		Service service;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/collection07.ocl");
+		testPerformer.loadOCLFile("constraints/test/collection07.ocl");
 
 		/* Select the model objects which shall be interpreted. */
 		/* Create the model objects which shall be interpreted. */
@@ -3714,7 +3714,7 @@ public class TestInterpretation {
 		Service service;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/collection08.ocl");
+		testPerformer.loadOCLFile("constraints/test/collection08.ocl");
 
 		/* Select the model objects which shall be interpreted. */
 		/* Create the model objects which shall be interpreted. */
@@ -3742,7 +3742,7 @@ public class TestInterpretation {
 		Service service;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/collection09.ocl");
+		testPerformer.loadOCLFile("constraints/test/collection09.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		service = new Service();
@@ -3772,7 +3772,7 @@ public class TestInterpretation {
 		Customer customer;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/collection10.ocl");
+		testPerformer.loadOCLFile("constraints/test/collection10.ocl");
 
 		/* Select the model objects which shall be interpreted. */
 		customer = new Customer(19);
@@ -3817,7 +3817,7 @@ public class TestInterpretation {
 		LoyaltyAccount loyaltyAccount;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/collection11.ocl");
+		testPerformer.loadOCLFile("constraints/test/collection11.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		loyaltyAccount = new LoyaltyAccount();
@@ -3859,7 +3859,7 @@ public class TestInterpretation {
 		Membership membership;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/collection12.ocl");
+		testPerformer.loadOCLFile("constraints/test/collection12.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		membership = new Membership();
@@ -3886,7 +3886,7 @@ public class TestInterpretation {
 		Membership membership;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/collection13.ocl");
+		testPerformer.loadOCLFile("constraints/test/collection13.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		membership = new Membership();
@@ -3915,7 +3915,7 @@ public class TestInterpretation {
 		ServiceLevel serviceLevel;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/collection14.ocl");
+		testPerformer.loadOCLFile("constraints/test/collection14.ocl");
 
 		/* Select the model objects which shall be interpreted. */
 		serviceLevel = new ServiceLevel();
@@ -3959,7 +3959,7 @@ public class TestInterpretation {
 		ServiceLevel serviceLevel2;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/collection15.ocl");
+		testPerformer.loadOCLFile("constraints/test/collection15.ocl");
 
 		/* Select the model objects which shall be interpreted. */
 		serviceLevel1 = new ServiceLevel();
@@ -4016,7 +4016,7 @@ public class TestInterpretation {
 		ServiceLevel serviceLevel2;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/collection16.ocl");
+		testPerformer.loadOCLFile("constraints/test/collection16.ocl");
 
 		/* Select the model objects which shall be interpreted. */
 		serviceLevel1 = new ServiceLevel();
@@ -4074,7 +4074,7 @@ public class TestInterpretation {
 		ServiceLevel serviceLevel2;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/collection17.ocl");
+		testPerformer.loadOCLFile("constraints/test/collection17.ocl");
 
 		/* Select the model objects which shall be interpreted. */
 		serviceLevel1 = new ServiceLevel();
@@ -4128,7 +4128,7 @@ public class TestInterpretation {
 		Membership membership;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/collection18.ocl");
+		testPerformer.loadOCLFile("constraints/test/collection18.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		membership = new Membership();
@@ -4157,7 +4157,7 @@ public class TestInterpretation {
 		Membership membership;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/collection19.ocl");
+		testPerformer.loadOCLFile("constraints/test/collection19.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		membership = new Membership();
@@ -4198,7 +4198,7 @@ public class TestInterpretation {
 		ServiceLevel serviceLevel3;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/collection20.ocl");
+		testPerformer.loadOCLFile("constraints/test/collection20.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		loyaltyProgram = new LoyaltyProgram();
@@ -4291,7 +4291,7 @@ public class TestInterpretation {
 		ServiceLevel serviceLevel3;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/collection21.ocl");
+		testPerformer.loadOCLFile("constraints/test/collection21.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		loyaltyProgram = new LoyaltyProgram();
@@ -4372,7 +4372,7 @@ public class TestInterpretation {
 		Membership membership;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/collection22.ocl");
+		testPerformer.loadOCLFile("constraints/test/collection22.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		membership = new Membership();
@@ -4401,7 +4401,7 @@ public class TestInterpretation {
 		Membership membership;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/collection25.ocl");
+		testPerformer.loadOCLFile("constraints/test/collection25.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		membership = new Membership();
@@ -4430,7 +4430,7 @@ public class TestInterpretation {
 		Membership membership;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/collection26.ocl");
+		testPerformer.loadOCLFile("constraints/test/collection26.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		membership = new Membership();
@@ -4459,7 +4459,7 @@ public class TestInterpretation {
 		Membership membership;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/collection27.ocl");
+		testPerformer.loadOCLFile("constraints/test/collection27.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		membership = new Membership();
@@ -4488,7 +4488,7 @@ public class TestInterpretation {
 		Membership membership;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/collection28.ocl");
+		testPerformer.loadOCLFile("constraints/test/collection28.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		membership = new Membership();
@@ -4517,7 +4517,7 @@ public class TestInterpretation {
 		Membership membership;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/collection29.ocl");
+		testPerformer.loadOCLFile("constraints/test/collection29.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		membership = new Membership();
@@ -4546,7 +4546,7 @@ public class TestInterpretation {
 		Membership membership;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/collection30.ocl");
+		testPerformer.loadOCLFile("constraints/test/collection30.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		membership = new Membership();
@@ -4575,7 +4575,7 @@ public class TestInterpretation {
 		Membership membership;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/collection31.ocl");
+		testPerformer.loadOCLFile("constraints/test/collection31.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		membership = new Membership();
@@ -4604,7 +4604,7 @@ public class TestInterpretation {
 		Membership membership;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/collection32.ocl");
+		testPerformer.loadOCLFile("constraints/test/collection32.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		membership = new Membership();
@@ -4633,7 +4633,7 @@ public class TestInterpretation {
 		Membership membership;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/collection33.ocl");
+		testPerformer.loadOCLFile("constraints/test/collection33.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		membership = new Membership();
@@ -4676,7 +4676,7 @@ public class TestInterpretation {
 		ProgramPartner programPartner;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/iterator01.ocl");
+		testPerformer.loadOCLFile("constraints/test/iterator01.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		serviceLevel1 = new ServiceLevel();
@@ -4770,7 +4770,7 @@ public class TestInterpretation {
 		ProgramPartner programPartner;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/iterator02.ocl");
+		testPerformer.loadOCLFile("constraints/test/iterator02.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		serviceLevel1 = new ServiceLevel();
@@ -4864,7 +4864,7 @@ public class TestInterpretation {
 		ProgramPartner programPartner;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/iterator03.ocl");
+		testPerformer.loadOCLFile("constraints/test/iterator03.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		serviceLevel1 = new ServiceLevel();
@@ -4953,7 +4953,7 @@ public class TestInterpretation {
 		ProgramPartner programPartner;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/iterate01.ocl");
+		testPerformer.loadOCLFile("constraints/test/iterate01.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		serviceLevel1 = new ServiceLevel();
@@ -5029,7 +5029,7 @@ public class TestInterpretation {
 		ProgramPartner programPartner;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/iterator04.ocl");
+		testPerformer.loadOCLFile("constraints/test/iterator04.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		serviceLevel1 = new ServiceLevel();
@@ -5123,7 +5123,7 @@ public class TestInterpretation {
 		ProgramPartner programPartner;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/iterator05.ocl");
+		testPerformer.loadOCLFile("constraints/test/iterator05.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		serviceLevel1 = new ServiceLevel();
@@ -5212,7 +5212,7 @@ public class TestInterpretation {
 		ProgramPartner programPartner;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/iterator06.ocl");
+		testPerformer.loadOCLFile("constraints/test/iterator06.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		serviceLevel1 = new ServiceLevel();
@@ -5278,7 +5278,7 @@ public class TestInterpretation {
 		Transaction transaction2;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/iterator07.ocl");
+		testPerformer.loadOCLFile("constraints/test/iterator07.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		customerCard1 = new CustomerCard();
@@ -5339,7 +5339,7 @@ public class TestInterpretation {
 		LoyaltyAccount loyaltyAccount2;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/iterator08.ocl");
+		testPerformer.loadOCLFile("constraints/test/iterator08.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		customer1 = new Customer(25);
@@ -5411,7 +5411,7 @@ public class TestInterpretation {
 		LoyaltyAccount loyaltyAccount2;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/iterator09.ocl");
+		testPerformer.loadOCLFile("constraints/test/iterator09.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		loyaltyProgram1 = new LoyaltyProgram();
@@ -5471,7 +5471,7 @@ public class TestInterpretation {
 		LoyaltyProgram loyaltyProgram2;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/iterator10.ocl");
+		testPerformer.loadOCLFile("constraints/test/iterator10.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		loyaltyProgram1 = new LoyaltyProgram();
@@ -5523,7 +5523,7 @@ public class TestInterpretation {
 		LoyaltyProgram loyaltyProgram2;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/iterator11.ocl");
+		testPerformer.loadOCLFile("constraints/test/iterator11.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		loyaltyProgram1 = new LoyaltyProgram();
@@ -5575,7 +5575,7 @@ public class TestInterpretation {
 		LoyaltyProgram loyaltyProgram2;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/iterator12.ocl");
+		testPerformer.loadOCLFile("constraints/test/iterator12.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		loyaltyProgram1 = new LoyaltyProgram();
@@ -5633,7 +5633,7 @@ public class TestInterpretation {
 		Membership membership3;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/iterator13.ocl");
+		testPerformer.loadOCLFile("constraints/test/iterator13.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		loyaltyProgram1 = new LoyaltyProgram();
@@ -5709,7 +5709,7 @@ public class TestInterpretation {
 		LoyaltyAccount loyaltyAccount2;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/iterator14.ocl");
+		testPerformer.loadOCLFile("constraints/test/iterator14.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		loyaltyAccount1 = new LoyaltyAccount();
@@ -5774,7 +5774,7 @@ public class TestInterpretation {
 		Service service;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/iterator15.ocl");
+		testPerformer.loadOCLFile("constraints/test/iterator15.ocl");
 
 		/* Select the model objects which shall be interpreted. */
 		customer1 = new Customer(25);
@@ -5841,7 +5841,7 @@ public class TestInterpretation {
 		Service service;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/iterator16.ocl");
+		testPerformer.loadOCLFile("constraints/test/iterator16.ocl");
 
 		/* Select the model objects which shall be interpreted. */
 		customer1 = new Customer(25);
@@ -5899,7 +5899,7 @@ public class TestInterpretation {
 		Service service;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/numeric01.ocl");
+		testPerformer.loadOCLFile("constraints/test/numeric01.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		service = new Service();
@@ -5927,7 +5927,7 @@ public class TestInterpretation {
 		Service service;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/numeric02.ocl");
+		testPerformer.loadOCLFile("constraints/test/numeric02.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		service = new Service();
@@ -5955,7 +5955,7 @@ public class TestInterpretation {
 		Service service;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/numeric03.ocl");
+		testPerformer.loadOCLFile("constraints/test/numeric03.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		service = new Service();
@@ -5983,7 +5983,7 @@ public class TestInterpretation {
 		Service service;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/numeric04.ocl");
+		testPerformer.loadOCLFile("constraints/test/numeric04.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		service = new Service();
@@ -6011,7 +6011,7 @@ public class TestInterpretation {
 		Service service;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/numeric05.ocl");
+		testPerformer.loadOCLFile("constraints/test/numeric05.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		service = new Service();
@@ -6039,7 +6039,7 @@ public class TestInterpretation {
 		Service service;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/numeric06.ocl");
+		testPerformer.loadOCLFile("constraints/test/numeric06.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		service = new Service();
@@ -6067,7 +6067,7 @@ public class TestInterpretation {
 		Service service;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/numeric07.ocl");
+		testPerformer.loadOCLFile("constraints/test/numeric07.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		service = new Service();
@@ -6095,7 +6095,7 @@ public class TestInterpretation {
 		Service service;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/numeric08.ocl");
+		testPerformer.loadOCLFile("constraints/test/numeric08.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		service = new Service();
@@ -6123,7 +6123,7 @@ public class TestInterpretation {
 		Service service;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/numeric09.ocl");
+		testPerformer.loadOCLFile("constraints/test/numeric09.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		service = new Service();
@@ -6151,7 +6151,7 @@ public class TestInterpretation {
 		Service service;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/numeric10.ocl");
+		testPerformer.loadOCLFile("constraints/test/numeric10.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		service = new Service();
@@ -6179,7 +6179,7 @@ public class TestInterpretation {
 		Service service;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/numeric11.ocl");
+		testPerformer.loadOCLFile("constraints/test/numeric11.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		service = new Service();
@@ -6208,7 +6208,7 @@ public class TestInterpretation {
 		Date date;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/static01.ocl");
+		testPerformer.loadOCLFile("constraints/test/static01.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		transaction = new Transaction();
@@ -6241,7 +6241,7 @@ public class TestInterpretation {
 		Date date;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/static02.ocl");
+		testPerformer.loadOCLFile("constraints/test/static02.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		transaction = new Transaction();
@@ -6274,7 +6274,7 @@ public class TestInterpretation {
 		Date date;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/static03.ocl");
+		testPerformer.loadOCLFile("constraints/test/static03.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		transaction = new Transaction();
@@ -6307,7 +6307,7 @@ public class TestInterpretation {
 		Date date;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/static04.ocl");
+		testPerformer.loadOCLFile("constraints/test/static04.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		transaction = new Transaction();
@@ -6339,7 +6339,7 @@ public class TestInterpretation {
 		Service service;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/string01.ocl");
+		testPerformer.loadOCLFile("constraints/test/string01.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		service = new Service();
@@ -6367,7 +6367,7 @@ public class TestInterpretation {
 		Service service;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/string02.ocl");
+		testPerformer.loadOCLFile("constraints/test/string02.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		service = new Service();
@@ -6395,7 +6395,7 @@ public class TestInterpretation {
 		Service service;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/string03.ocl");
+		testPerformer.loadOCLFile("constraints/test/string03.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		service = new Service();
@@ -6423,7 +6423,7 @@ public class TestInterpretation {
 		Service service;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/string04.ocl");
+		testPerformer.loadOCLFile("constraints/test/string04.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		service = new Service();
@@ -6451,7 +6451,7 @@ public class TestInterpretation {
 		Service service;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/string05.ocl");
+		testPerformer.loadOCLFile("constraints/test/string05.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		service = new Service();
@@ -6479,7 +6479,7 @@ public class TestInterpretation {
 		Service service;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/string06.ocl");
+		testPerformer.loadOCLFile("constraints/test/string06.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		service = new Service();
@@ -6507,7 +6507,7 @@ public class TestInterpretation {
 		Transaction transaction;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/tuple01.ocl");
+		testPerformer.loadOCLFile("constraints/test/tuple01.ocl");
 
 		/* Select the model objects which shall be interpreted. */
 		transaction = new Transaction();
@@ -6535,7 +6535,7 @@ public class TestInterpretation {
 		Transaction transaction;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/tuple02.ocl");
+		testPerformer.loadOCLFile("constraints/test/tuple02.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		transaction = new Transaction();
@@ -6563,7 +6563,7 @@ public class TestInterpretation {
 		Transaction transaction;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/tuple03.ocl");
+		testPerformer.loadOCLFile("constraints/test/tuple03.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		transaction = new Transaction();
@@ -6591,7 +6591,7 @@ public class TestInterpretation {
 		Transaction transaction;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/tuple04.ocl");
+		testPerformer.loadOCLFile("constraints/test/tuple04.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		transaction = new Transaction();
