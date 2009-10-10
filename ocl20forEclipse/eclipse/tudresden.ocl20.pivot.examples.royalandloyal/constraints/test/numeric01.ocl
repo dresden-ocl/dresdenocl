@@ -2,7 +2,8 @@
 
 package tudresden::ocl20::pivot::examples::royalsandloyals
 
+-- Added round() operation because rounding errors can occur.
 context Service
-inv: 2654 * 4.3 + 101 = 11513.2
+inv: (2654 * 4.3 + 101).round() = 11513
 
 endpackage
