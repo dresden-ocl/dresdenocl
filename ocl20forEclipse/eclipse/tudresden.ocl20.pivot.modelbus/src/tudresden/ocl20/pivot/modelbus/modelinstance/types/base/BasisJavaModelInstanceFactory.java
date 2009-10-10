@@ -520,7 +520,7 @@ public class BasisJavaModelInstanceFactory implements IModelInstanceFactory {
 		}
 		// no else.
 
-		return null;
+		return result;
 	}
 
 	/**
@@ -759,7 +759,7 @@ public class BasisJavaModelInstanceFactory implements IModelInstanceFactory {
 
 		Collection<IModelInstanceElement> result;
 
-		if (collection instanceof Set) {
+		if (collection instanceof Set<?>) {
 			result = new HashSet<IModelInstanceElement>();
 		}
 

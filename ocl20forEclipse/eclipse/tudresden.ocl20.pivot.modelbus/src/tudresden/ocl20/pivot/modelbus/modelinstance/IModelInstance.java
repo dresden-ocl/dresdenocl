@@ -183,6 +183,8 @@ public interface IModelInstance {
 	 * Tries to fetch a static property of the given type with the given name.
 	 * </p>
 	 * 
+	 * @param sourceType
+	 *          The {@link Type} to which the static {@link Property} belongs.
 	 * @param property
 	 *          the {@link Property} is used to determine the name of the
 	 *          property, the {@link Type} providing the static property, and the
@@ -198,7 +200,7 @@ public interface IModelInstance {
 	 *           Thrown if the given {@link Property} cannot be found as a static
 	 *           {@link Property}.
 	 */
-	IModelInstanceElement getStaticProperty(Property property)
+	IModelInstanceElement getStaticProperty(Type sourceType, Property property)
 			throws PropertyAccessException, PropertyNotFoundException;
 
 	/**
