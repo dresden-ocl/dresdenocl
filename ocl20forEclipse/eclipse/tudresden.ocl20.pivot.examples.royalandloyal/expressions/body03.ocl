@@ -1,7 +1,0 @@
-package tudresden::ocl20::pivot::examples::royalsandloyals
-
--- Check static operation implementation.
-context Date::nowAsString(): String
-body: now().toString()
-
-endpackage

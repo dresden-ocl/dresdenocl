@@ -1,7 +1,0 @@
-package tudresden::ocl20::pivot::examples::royalsandloyals
-
--- Used to test the implementation of the operation OclAny.allInstances()
-context CustomerCard
-def: getAllInstances() : Set(CustomerCard) = self.allInstances()
-
-endpackage

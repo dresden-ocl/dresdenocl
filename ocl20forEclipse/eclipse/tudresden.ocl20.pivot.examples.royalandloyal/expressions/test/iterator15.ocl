@@ -1,8 +1,0 @@
--- Constraint taken from [1] page 181 and adapted.
-
-package tudresden::ocl20::pivot::examples::royalsandloyals
-
-context Customer
-inv: self.programs->collect(partners)->collect(deliveredServices)->size() > 0
-  
-endpackage

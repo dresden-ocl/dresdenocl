@@ -1,8 +1,0 @@
--- Constraint taken from [1] page 178 and adapted.
-
-package tudresden::ocl20::pivot::examples::royalsandloyals
-
-context Customer
-inv: programs.membership.accounts->select(points > 0) = programs.membership.accounts->reject(not (points > 0) )
-
-endpackage

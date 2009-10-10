@@ -1,8 +1,0 @@
--- Constraint taken from [1] page 166.
-
-package tudresden::ocl20::pivot::examples::royalsandloyals
-
-context Service
-inv: Bag {1, 3, 4, 3, 5 }->size()= 5
-
-endpackage

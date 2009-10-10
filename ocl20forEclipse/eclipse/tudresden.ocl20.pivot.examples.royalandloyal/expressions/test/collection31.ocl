@@ -1,8 +1,0 @@
--- Constraint taken from [1] page 173f.
-
-package tudresden::ocl20::pivot::examples::royalsandloyals
-
-context Membership
-inv: Sequence{'a','b','c','c','d','e'}->subSequence( 3, 5 ) = Sequence{'c','c','d'}
-  
-endpackage

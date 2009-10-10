@@ -1,7 +1,0 @@
-package tudresden::ocl20::pivot::examples::royalsandloyals
-
--- Used to test the preparation contained in '../define06.ocl'
-context CustomerCard
-inv: getTotalPoints(Date.now()) >= 0
-
-endpackage

@@ -1,8 +1,0 @@
--- Constraint taken and adapted from [1] page 184 to test disabled inheritance of constrained classes.
-
-package tudresden::ocl20::pivot::examples::royalsandloyals
-   
-context Transaction::getProgram(): LoyaltyProgram
-post: self.oclIsTypeOf(Transaction)
-                     
-endpackage

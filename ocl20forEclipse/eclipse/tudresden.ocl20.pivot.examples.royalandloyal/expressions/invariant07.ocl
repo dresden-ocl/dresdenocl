@@ -1,9 +1,0 @@
--- Constraint taken from [1] page 49.
-
-package tudresden::ocl20::pivot::examples::royalsandloyals
-   
-context Customer
-inv sizesAgree:
-    programs->size() = cards->select( valid = true )->size()
-                   
-endpackage

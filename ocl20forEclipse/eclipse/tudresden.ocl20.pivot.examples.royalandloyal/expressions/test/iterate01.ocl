@@ -1,8 +1,0 @@
--- Constraint taken from [1] page 182 and adapted.
-
-package tudresden::ocl20::pivot::examples::royalsandloyals
-
-context ProgramPartner
-inv: Set{1, 2, 3}->iterate(i: Integer; sum: Integer = 0 | sum + i) = 6
-
-endpackage

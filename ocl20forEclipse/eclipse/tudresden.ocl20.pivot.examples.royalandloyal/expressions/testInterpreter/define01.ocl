@@ -1,7 +1,0 @@
-package tudresden::ocl20::pivot::examples::royalsandloyals
-
--- Used to test the preparation contained in '../define01.ocl'
-context LoyaltyAccount
-inv: self.turnover = transactions.amount->sum()
-
-endpackage

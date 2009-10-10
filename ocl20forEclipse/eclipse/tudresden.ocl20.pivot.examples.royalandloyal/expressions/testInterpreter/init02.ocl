@@ -1,7 +1,0 @@
-package tudresden::ocl20::pivot::examples::royalsandloyals
-
--- Used to test the preparation contained in '../init02.ocl'
-context CustomerCard
-inv: not valid.oclIsUndefined()
-
-endpackage

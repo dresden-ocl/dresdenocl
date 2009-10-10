@@ -1,8 +1,0 @@
--- Constraint taken from [1] page 172f and extended.
-
-package tudresden::ocl20::pivot::examples::royalsandloyals
-
-context Membership
-inv: Set { 1, 4, 7, 10 }->symmetricDifference(Set { 4, 5, 7 }) = Set { 1, 5, 10 }
-  
-endpackage

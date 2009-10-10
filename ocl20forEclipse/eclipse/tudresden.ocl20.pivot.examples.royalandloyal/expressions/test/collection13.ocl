@@ -1,8 +1,0 @@
--- Constraints taken from [1] page 167f.
-
-package tudresden::ocl20::pivot::examples::royalsandloyals
-
-context Membership
-inv: Set { 1, 2, 3, 4, 5, 6 }->size() = 6
-
-endpackage

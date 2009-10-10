@@ -1,8 +1,0 @@
--- Constraint taken and adapted from [1] page 184.
-
-package tudresden::ocl20::pivot::examples::royalsandloyals
-   
-context Transaction::getProgram(): LoyaltyProgram
-post: not result.oclIsNew()
-                     
-endpackage

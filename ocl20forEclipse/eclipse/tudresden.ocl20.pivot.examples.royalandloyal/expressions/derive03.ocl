@@ -1,6 +1,0 @@
-package tudresden::ocl20::pivot::examples::royalsandloyals
-
-context Date::nowString
-derive: nowAsString()
-
-endpackage

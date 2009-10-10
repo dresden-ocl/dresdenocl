@@ -1,8 +1,0 @@
--- Constraint taken from [1] page 153.
-
-package tudresden::ocl20::pivot::examples::royalsandloyals
-
-context Service
-inv: 1.175 * (-8.9).abs() - 10 = 0.4574995
-
-endpackage

@@ -1,8 +1,0 @@
--- Constraints taken from [1] page 180 and adapted.
-
-package tudresden::ocl20::pivot::examples::royalsandloyals
-
-context LoyaltyProgram
-inv: self.membership.accounts->one(number < 10000)
-
-endpackage

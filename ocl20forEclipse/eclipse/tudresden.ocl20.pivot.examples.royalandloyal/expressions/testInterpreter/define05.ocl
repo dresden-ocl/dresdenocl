@@ -1,7 +1,0 @@
-package tudresden::ocl20::pivot::examples::royalsandloyals
-
--- Used to test the preparation contained in '../define05.ocl'
-context Customer
-inv: initial = name.substring(1, 1)
-
-endpackage

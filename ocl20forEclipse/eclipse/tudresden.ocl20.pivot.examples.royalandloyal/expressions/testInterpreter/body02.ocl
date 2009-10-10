@@ -1,7 +1,0 @@
-package tudresden::ocl20::pivot::examples::royalsandloyals
-
--- Used to test the preparation contained in '../body02.ocl'
-context LoyaltyAccount
-inv: self.getCustomerName() = membership.card.owner.name
-
-endpackage

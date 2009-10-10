@@ -1,8 +1,0 @@
--- Constraint taken from [1] page 55.
-
-package tudresden::ocl20::pivot::examples::royalsandloyals
-   
-context ProgramPartner
-inv totalPoints: deliveredServices.transaction.points->sum() < 10000
-                     
-endpackage
