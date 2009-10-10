@@ -94,7 +94,7 @@ public class JavaOclString extends JavaOclLibraryObject implements OclString {
 
 		checkUndefinedAndInvalid(this, aString);
 
-		concat.append(imiString);
+		concat.append(imiString.getString());
 		concat.append(((IModelInstanceString) aString.getModelInstanceElement())
 				.getString());
 
@@ -136,6 +136,10 @@ public class JavaOclString extends JavaOclLibraryObject implements OclString {
 		int intLower =
 				((IModelInstanceInteger) lower.getModelInstanceElement()).getLong()
 						.intValue();
+		
+		/* Indices in OCL are different from Java indices! */
+		intLower--;
+		
 		int intUpper =
 				((IModelInstanceInteger) upper.getModelInstanceElement()).getLong()
 						.intValue();
