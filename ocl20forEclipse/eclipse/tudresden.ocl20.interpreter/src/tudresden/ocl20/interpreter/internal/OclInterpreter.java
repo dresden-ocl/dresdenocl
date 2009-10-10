@@ -83,6 +83,7 @@ import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclComparable;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclIterator;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclModelInstanceObject;
+import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclTuple;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.factory.IStandardLibraryFactory;
 import tudresden.ocl20.pivot.essentialocl.types.BagType;
 import tudresden.ocl20.pivot.essentialocl.types.OrderedSetType;
@@ -94,9 +95,9 @@ import tudresden.ocl20.pivot.modelbus.modelinstance.exception.OperationNotFoundE
 import tudresden.ocl20.pivot.modelbus.modelinstance.exception.PropertyAccessException;
 import tudresden.ocl20.pivot.modelbus.modelinstance.exception.PropertyNotFoundException;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
-import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceEnumerationLiteral;
-import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceInteger;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceObject;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceString;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.base.BasisJavaModelInstanceFactory;
 import tudresden.ocl20.pivot.pivotmodel.Constraint;
 import tudresden.ocl20.pivot.pivotmodel.ConstraintKind;
 import tudresden.ocl20.pivot.pivotmodel.NamedElement;
@@ -2217,6 +2218,8 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 	}
 
 	/**
+	 * TODO Claas: Add Java-Doc
+	 * 
 	 * @param anOperationCallExp
 	 * @param parameters
 	 * @param body
@@ -2273,7 +2276,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 	 */
 	public OclAny casePropertyCallExp(PropertyCallExp propertyCallExp) {
 
-		/* Eventually log the entry into this method. */
+		/* Probably log the entry into this method. */
 		if (LOGGER.isDebugEnabled()) {
 			String msg;
 
@@ -2288,7 +2291,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		OclAny result;
 		result = null;
 
-		/* Eventually use a cached result. */
+		/* Probably use a cached result. */
 		if (isCachingEnabled
 				&& myEnvironment.getCachedResult(propertyCallExp) != null) {
 			result = myEnvironment.getCachedResult(propertyCallExp);
@@ -2297,110 +2300,98 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		/* Else compute the result. */
 		else {
 
-			OclModelInstanceObject sourceObject;
-
-			String qualifiedPropertyName;
-			String propertyName;
-
 			/* Switch to local environment and cache the global environment. */
 			this.pushLocalEnvironment();
 
-			sourceObject = null;
+			final Property referredProperty;
+			referredProperty = propertyCallExp.getReferredProperty();
 
-			final Property referredProperty = propertyCallExp.getReferredProperty();
+			/* Probably use a prepared property value (def, body, derive). */
+			result = getPreparedPropertyValue(referredProperty);
 
-			/* Handle static properties. */
-			if (referredProperty.isStatic()) {
+			/* Else compute the result. */
+			if (result == null) {
 
-				try {
-					IModelInstanceElement imiElement =
-							this.myEnvironment.getModelInstance().getStaticProperty(
-									referredProperty);
+				/* Handle static properties. */
+				if (referredProperty.isStatic()) {
 
-					result = myStandardLibraryFactory.createOclAny(imiElement);
+					try {
+						/*
+						 * Static properties do not have an owner. The type must be
+						 * annotated explicitly. TODO: This probably seems to be a bug in
+						 * the Parser.
+						 */
+						Type sourceType = propertyCallExp.getSourceType();
 
-				} catch (PropertyNotFoundException e) {
-					if (LOGGER.isInfoEnabled()) {
-						LOGGER.warn(e);
+						IModelInstanceElement imiElement =
+								this.myEnvironment.getModelInstance().getStaticProperty(
+										sourceType, referredProperty);
+
+						result = myStandardLibraryFactory.createOclAny(imiElement);
+
 					}
-					// no else.
 
-					result =
-							myStandardLibraryFactory.createOclInvalid(propertyCallExp
-									.getType(), e);
-				} catch (PropertyAccessException e) {
-					if (LOGGER.isInfoEnabled()) {
-						LOGGER.warn(e);
+					/* Probably result in invalid. */
+					catch (PropertyNotFoundException e) {
+						if (LOGGER.isInfoEnabled()) {
+							LOGGER.warn(e);
+						}
+						// no else.
+
+						result =
+								myStandardLibraryFactory.createOclInvalid(propertyCallExp
+										.getType(), e);
 					}
-					// no else.
 
-					result =
-							myStandardLibraryFactory.createOclInvalid(propertyCallExp
-									.getType(), e);
+					catch (PropertyAccessException e) {
+						if (LOGGER.isInfoEnabled()) {
+							LOGGER.warn(e);
+						}
+						// no else.
+
+						result =
+								myStandardLibraryFactory.createOclInvalid(propertyCallExp
+										.getType(), e);
+					}
+					// end catch.
 				}
 
-			}
+				/* Else interpret the sourceExp. */
+				else {
+					OclAny source = doSwitch((EObject) propertyCallExp.getSource());
 
-			/* Else interpret the sourceExp. */
-			else {
-				OclAny source = doSwitch((EObject) propertyCallExp.getSource());
-				try {
-					sourceObject = (OclModelInstanceObject) source;
-				} catch (ClassCastException e) {
-					result =
-							myStandardLibraryFactory.createOclInvalid(propertyCallExp
-									.getType(), e);
+					/* Check if the source is a tuple. */
+					if (source instanceof OclTuple) {
+						OclTuple sourceTuple;
+						sourceTuple = (OclTuple) source;
+
+						result =
+								sourceTuple.getPropertyValue(this.getStandardLibraryFactory()
+										.createOclString(referredProperty.getName()));
+					}
+
+					/* Else the source must be an OclModelInstanceObject. */
+					else {
+						try {
+							OclModelInstanceObject sourceObject;
+							sourceObject = (OclModelInstanceObject) source;
+
+							result = sourceObject.getProperty(referredProperty);
+						}
+
+						/* If not, result in invalid. */
+						catch (ClassCastException e) {
+							result =
+									myStandardLibraryFactory.createOclInvalid(propertyCallExp
+											.getType(), e);
+						}
+						// end catch.
+					}
+					// end else.
 				}
+				// end else.
 			}
-
-			qualifiedPropertyName = referredProperty.getQualifiedName();
-			propertyName = referredProperty.getName();
-
-			/* Check if the property is a derived one. */
-			if (myEnvironment.getConstraint(qualifiedPropertyName + "-derive") != null) {
-
-				Constraint deriveConstraint;
-
-				deriveConstraint =
-						myEnvironment.getConstraint(qualifiedPropertyName + "-derive");
-
-				result =
-						this.interpretConstraint(deriveConstraint, myCurrentModelObject)
-								.getResult();
-			}
-
-			/* Else check if the property has a initial expression. */
-			else if (myEnvironment.getConstraint(qualifiedPropertyName + "-initial") != null) {
-
-				Constraint initialConstaint;
-
-				initialConstaint =
-						myEnvironment.getConstraint(qualifiedPropertyName + "-initial");
-
-				result =
-						this.interpretConstraint(initialConstaint, myCurrentModelObject)
-								.getResult();
-				this.isModelAccessNeeded = this.isModelAccessNeeded();
-			}
-
-			/* Else check if the property has a body expression. */
-			else if (myEnvironment.getConstraint(qualifiedPropertyName) != null) {
-
-				Constraint bodyConstraint;
-
-				bodyConstraint = myEnvironment.getConstraint(qualifiedPropertyName);
-
-				result =
-						this.interpretConstraint(bodyConstraint, myCurrentModelObject)
-								.getResult();
-				this.isModelAccessNeeded = this.isModelAccessNeeded();
-			}
-
-			/* Else the property value must be set in the model instance. */
-			else {
-				result = sourceObject.getProperty(referredProperty);
-
-			}
+			// no else.
 
 			/* If the result is an OclObject, the result can not be cached. */
 			if (result instanceof OclModelInstanceObject) {
@@ -2408,7 +2399,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			}
 			// no else.
 
-			// Eventually cache the result.
+			// Probably cache the result.
 			if (this.isCachingEnabled && !this.isModelAccessNeeded) {
 				this.myEnvironment.cacheResult(propertyCallExp, result);
 			}
@@ -2419,7 +2410,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		}
 		// end else.
 
-		/* Eventually log the exit from this method. */
+		/* Probably log the exit from this method. */
 		if (LOGGER.isDebugEnabled()) {
 			String msg;
 
@@ -2576,20 +2567,28 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		/* Else compute the result. */
 		else {
 
-			List<String> partNames;
-			List<OclAny> partValues;
+			/* TODO Claas: Is it okay, that the Interpreter works on IMIEs here? */
+			List<IModelInstanceString> partNames;
+			List<IModelInstanceElement> partValues;
 
-			partNames = new ArrayList<String>(aTupleLiteralExp.getPart().size());
-			partValues = new ArrayList<OclAny>(aTupleLiteralExp.getPart().size());
+			partNames =
+					new ArrayList<IModelInstanceString>(aTupleLiteralExp.getPart().size());
+			partValues =
+					new ArrayList<IModelInstanceElement>(aTupleLiteralExp.getPart()
+							.size());
 
 			for (TupleLiteralPart aLiteralPart : aTupleLiteralExp.getPart()) {
-				partNames.add(aLiteralPart.getProperty().getName());
-				partValues.add(doSwitch((EObject) aLiteralPart));
+				partNames.add(BasisJavaModelInstanceFactory
+						.createModelInstanceString(aLiteralPart.getProperty().getName()));
+				partValues.add(doSwitch((EObject) aLiteralPart)
+						.getModelInstanceElement());
 			}
 
-			result = myStandardLibraryFactory.createOclTuple(partNames, partValues);
+			result =
+					myStandardLibraryFactory.createOclTuple(partNames, partValues,
+							aTupleLiteralExp.getType());
 
-			/* Eventually cache the result. */
+			/* Probably cache the result. */
 			if (isCachingEnabled && !isModelAccessNeeded) {
 				myEnvironment.cacheResult(aTupleLiteralExp, result);
 			}
@@ -2999,7 +2998,6 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 	 * 
 	 * @return the result of the iteration
 	 */
-	@SuppressWarnings("unchecked")
 	private OclAny evaluateAny(OclExpression body, OclCollection<OclAny> source,
 			Variable iterator, Type resultType) {
 
@@ -3090,7 +3088,6 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 	 * 
 	 * @return The result of the iteration.
 	 */
-	@SuppressWarnings("unchecked")
 	private OclAny evaluateCollectNested(OclExpression body,
 			OclCollection<OclAny> source, Variable iterator, Type resultType) {
 
@@ -3190,7 +3187,6 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 	 * 
 	 * @return the result of the iteration
 	 */
-	@SuppressWarnings("unchecked")
 	private OclAny evaluateExists(OclExpression body,
 			OclCollection<OclAny> source, List<Variable> iterators,
 			OclIterator<OclAny> it) {
@@ -3294,7 +3290,6 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 	 * 
 	 * @return the result of the iteration
 	 */
-	@SuppressWarnings("unchecked")
 	private OclAny evaluateForAll(OclExpression body,
 			OclCollection<OclAny> source, List<Variable> iterators,
 			OclIterator<OclAny> it) {
@@ -3396,7 +3391,6 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 	 * 
 	 * @return the result of the iteration
 	 */
-	@SuppressWarnings("unchecked")
 	private OclAny evaluateIsUnique(OclExpression body,
 			OclCollection<OclAny> source, Variable iterator) {
 
@@ -3484,7 +3478,6 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 	 * 
 	 * @return the result of the iteration
 	 */
-	@SuppressWarnings("unchecked")
 	private OclAny evaluateIterate(OclExpression body,
 			OclCollection<OclAny> source, List<Variable> iterators,
 			OclIterator<OclAny> it, String resultVarName) {
@@ -3573,7 +3566,6 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 	 * 
 	 * @return the result of the iteration
 	 */
-	@SuppressWarnings("unchecked")
 	private OclAny evaluateOne(OclExpression body, OclCollection<OclAny> source,
 			Variable iterator) {
 
@@ -3680,7 +3672,6 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 	 * 
 	 * @return the result of the iteration
 	 */
-	@SuppressWarnings("unchecked")
 	private OclAny evaluateReject(OclExpression body,
 			OclCollection<OclAny> source, Variable iterator, Type resultType) {
 
@@ -3761,7 +3752,6 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 	 * 
 	 * @return the result of the iteration
 	 */
-	@SuppressWarnings("unchecked")
 	private OclAny evaluateSelect(OclExpression body,
 			OclCollection<OclAny> source, Variable iterator, Type resultType) {
 
@@ -3842,7 +3832,6 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 	 * 
 	 * @return the result of the iteration
 	 */
-	@SuppressWarnings("unchecked")
 	private OclAny evaluateSortedBy(OclExpression body,
 			OclCollection<OclAny> source, Variable iterator, Type resultType) {
 
@@ -3997,6 +3986,71 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			LOGGER.debug(msg);
 		}
 		// no else.
+
+		return result;
+	}
+
+	/**
+	 * <p>
+	 * A helper method that tries to return the prepared value of a given
+	 * {@link Property}. Prepared values could be result from <code>derive</code>,
+	 * <code>body</code> or <code>init</code> expressions.
+	 * </p>
+	 * 
+	 * <p>
+	 * If no prepared value has been set, the result will be <code>null</code>.
+	 * 
+	 * @param property
+	 *          The {@link Property} whose prepared value shall be returned.
+	 * @return The prepared value (as {@link OclAny}) or <code>null</code>.
+	 */
+	private OclAny getPreparedPropertyValue(Property property) {
+
+		OclAny result;
+		String qualifiedPropertyName;
+
+		result = null;
+		qualifiedPropertyName = property.getQualifiedName();
+
+		/* Check if the property is a derived one. */
+		if (myEnvironment.getConstraint(qualifiedPropertyName + "-derive") != null) {
+
+			Constraint deriveConstraint;
+
+			deriveConstraint =
+					myEnvironment.getConstraint(qualifiedPropertyName + "-derive");
+
+			result =
+					this.interpretConstraint(deriveConstraint, myCurrentModelObject)
+							.getResult();
+		}
+
+		/* Else check if the property has a initial expression. */
+		else if (myEnvironment.getConstraint(qualifiedPropertyName + "-initial") != null) {
+
+			Constraint initialConstaint;
+
+			initialConstaint =
+					myEnvironment.getConstraint(qualifiedPropertyName + "-initial");
+
+			result =
+					this.interpretConstraint(initialConstaint, myCurrentModelObject)
+							.getResult();
+			this.isModelAccessNeeded = this.isModelAccessNeeded();
+		}
+
+		/* Else check if the property has a body expression. */
+		else if (myEnvironment.getConstraint(qualifiedPropertyName) != null) {
+
+			Constraint bodyConstraint;
+
+			bodyConstraint = myEnvironment.getConstraint(qualifiedPropertyName);
+
+			result =
+					this.interpretConstraint(bodyConstraint, myCurrentModelObject)
+							.getResult();
+			this.isModelAccessNeeded = this.isModelAccessNeeded();
+		}
 
 		return result;
 	}
