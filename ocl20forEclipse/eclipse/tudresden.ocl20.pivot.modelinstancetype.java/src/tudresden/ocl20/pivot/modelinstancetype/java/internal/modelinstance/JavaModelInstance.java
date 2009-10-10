@@ -1049,8 +1049,12 @@ public class JavaModelInstance extends AbstractModelInstance {
 		for (ClassLoader aClassLoader : classLoaders) {
 
 			try {
-				result = aClassLoader.loadClass(canonicalName);
-				break;
+
+				if (aClassLoader != null) {
+					result = aClassLoader.loadClass(canonicalName);
+					break;
+				}
+				// no else.
 			}
 
 			catch (ClassNotFoundException e) {
@@ -1101,10 +1105,12 @@ public class JavaModelInstance extends AbstractModelInstance {
 	 * (non-Javadoc)
 	 * @see
 	 * tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance#getStaticProperty
-	 * (tudresden.ocl20.pivot.pivotmodel.Property)
+	 * (tudresden.ocl20.pivot.pivotmodel.Type,
+	 * tudresden.ocl20.pivot.pivotmodel.Property)
 	 */
-	public IModelInstanceElement getStaticProperty(Property property)
-			throws PropertyAccessException, PropertyNotFoundException {
+	public IModelInstanceElement getStaticProperty(Type sourceType,
+			Property property) throws PropertyAccessException,
+			PropertyNotFoundException {
 
 		IModelInstanceElement result;
 
@@ -1117,8 +1123,8 @@ public class JavaModelInstance extends AbstractModelInstance {
 			/* Try to find the class of the static property. */
 			try {
 				propertyClassCanonicalName =
-						JavaModelInstanceTypeUtility.toCanonicalName(property
-								.getOwningType().getQualifiedNameList());
+						JavaModelInstanceTypeUtility.toCanonicalName(sourceType
+								.getQualifiedNameList());
 
 				propertyClass =
 						loadJavaClass(propertyClassCanonicalName, this.myClassLoaders);
@@ -1377,17 +1383,17 @@ public class JavaModelInstance extends AbstractModelInstance {
 
 		Method result;
 
-		String methodCanonicalName;
+		String methodSourceClassCanonicalName;
 		Class<?> methodSourceClass;
 
 		/* Try to find the operation's source class. */
-		methodCanonicalName =
+		methodSourceClassCanonicalName =
 				JavaModelInstanceTypeUtility.toCanonicalName(operation.getOwner()
 						.getQualifiedNameList());
 
 		try {
 			methodSourceClass =
-					loadJavaClass(methodCanonicalName, this.myClassLoaders);
+					loadJavaClass(methodSourceClassCanonicalName, this.myClassLoaders);
 
 			result = null;
 
