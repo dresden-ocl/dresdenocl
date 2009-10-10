@@ -1,0 +1,11 @@
+-- Constraint taken from [1] page 49.
+
+package tudresden::ocl20::pivot::examples::royalsandloyals
+   
+context LoyaltyProgram
+inv noAccounts: 
+  partners.deliveredServices
+    ->forAll(pointsEarned = 0 and pointsBurned = 0)
+    implies membership.accounts->isEmpty()
+                   
+endpackage

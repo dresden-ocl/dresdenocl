@@ -1,0 +1,8 @@
+-- Constraint taken from [1] page 153.
+
+package tudresden::ocl20::pivot::examples::royalsandloyals
+
+context Service
+inv: 2654 * 4.3 + 101 = 11513.2
+
+endpackage

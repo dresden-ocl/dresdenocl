@@ -1,0 +1,7 @@
+package tudresden::ocl20::pivot::examples::royalsandloyals
+
+-- Used to test the preparation contained in '../define03.ocl'
+context Membership
+inv: getCurrentLevelName() = currentLevel.name
+
+endpackage

@@ -1,0 +1,8 @@
+-- Constraint taken from [1] page 194.
+
+package tudresden::ocl20::pivot::examples::royalsandloyals
+
+context Burning
+inv: self.points = self.oclAsType(Transaction).points
+
+endpackage

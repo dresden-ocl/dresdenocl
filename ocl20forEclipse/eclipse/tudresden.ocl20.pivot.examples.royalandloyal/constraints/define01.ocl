@@ -1,0 +1,8 @@
+-- Constraint taken from [1] page 45.
+
+package tudresden::ocl20::pivot::examples::royalsandloyals
+
+context LoyaltyAccount
+def: turnover : Real = transactions.amount->sum()
+
+endpackage

@@ -1,0 +1,8 @@
+-- Constraint taken from [1] page 47.
+
+package tudresden::ocl20::pivot::examples::royalsandloyals
+
+context Membership
+def: getCurrentLevelName() : String = currentLevel.name
+
+endpackage

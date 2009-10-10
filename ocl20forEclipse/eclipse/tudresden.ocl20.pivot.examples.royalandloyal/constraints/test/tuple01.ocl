@@ -1,0 +1,9 @@
+-- Constraints taken and adapted from [1] page 190.
+
+package tudresden::ocl20::pivot::examples::royalsandloyals
+   
+-- An invariant to test tuple expressions
+context Transaction
+inv: Tuple {name: String = 'John', age: Integer = 10}.name = 'John'
+                     
+endpackage

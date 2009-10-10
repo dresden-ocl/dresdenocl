@@ -1,0 +1,7 @@
+package tudresden::ocl20::pivot::examples::royalsandloyals
+
+-- Used to test the preparation contained in '../derive01.ocl'
+context CustomerCard
+inv: printedName = owner.title.concat(' ').concat(owner.name)
+
+endpackage

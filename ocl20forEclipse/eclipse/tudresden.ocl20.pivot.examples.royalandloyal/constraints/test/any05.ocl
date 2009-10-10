@@ -1,0 +1,8 @@
+-- Constraint taken from [1] page 196ff.
+
+package tudresden::ocl20::pivot::examples::royalsandloyals
+
+context Transaction
+inv: 1.oclIsTypeOf(Integer)
+
+endpackage

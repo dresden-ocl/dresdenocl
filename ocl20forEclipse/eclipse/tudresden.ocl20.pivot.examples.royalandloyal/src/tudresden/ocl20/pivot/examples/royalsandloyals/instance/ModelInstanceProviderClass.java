@@ -1,9 +1,41 @@
-package tudresden.ocl20.pivot.examples.royalsandloyals;
+/**
+ * Copyright (C) 2009 by Claas Wilke (info@claaswilke.de)
+ * 
+ * This file is part of the Royal and Loyal Example of Dresden OCL2 for Eclipse.
+ * 
+ * Dresden OCL2 for Eclipse is free software: you can redistribute it and/or modify 
+ * it under the terms of the GNU Lesser General Public License as published by the 
+ * Free Software Foundation, either version 3 of the License, or (at your option)
+ * any later version.
+ * 
+ * Dresden OCL2 for Eclipse is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License 
+ * for more details.
+ * 
+ * You should have received a copy of the GNU Lesser General Public License along 
+ * with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
+ */
+package tudresden.ocl20.pivot.examples.royalsandloyals.instance;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.SpringLayout.Constraints;
+
+import tudresden.ocl20.pivot.examples.royalsandloyals.Burning;
+import tudresden.ocl20.pivot.examples.royalsandloyals.Color;
+import tudresden.ocl20.pivot.examples.royalsandloyals.Customer;
+import tudresden.ocl20.pivot.examples.royalsandloyals.CustomerCard;
+import tudresden.ocl20.pivot.examples.royalsandloyals.Date;
+import tudresden.ocl20.pivot.examples.royalsandloyals.Earning;
+import tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyAccount;
+import tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyProgram;
+import tudresden.ocl20.pivot.examples.royalsandloyals.Membership;
+import tudresden.ocl20.pivot.examples.royalsandloyals.ProgramPartner;
+import tudresden.ocl20.pivot.examples.royalsandloyals.Service;
+import tudresden.ocl20.pivot.examples.royalsandloyals.ServiceLevel;
+import tudresden.ocl20.pivot.examples.royalsandloyals.Transaction;
 
 /**
  * <p>
@@ -13,7 +45,7 @@ import javax.swing.SpringLayout.Constraints;
  * 
  * @author Claas Wilke
  */
-public class ModelProviderClass {
+public class ModelInstanceProviderClass {
 
 	private static List<Object> myModelObjects = null;
 
@@ -33,7 +65,7 @@ public class ModelProviderClass {
 		int countOfTransactions;
 		int countOfBurnings;
 
-		allObjects = ModelProviderClass.getModelObjects();
+		allObjects = ModelInstanceProviderClass.getModelObjects();
 
 		countOfCustomers = 0;
 		countOfCustomerCards = 0;
@@ -86,8 +118,7 @@ public class ModelProviderClass {
 			}
 
 			else if (anElement instanceof Transaction
-					&& !(anElement instanceof Burning)
-					&& !(anElement instanceof Earning)) {
+					&& !(anElement instanceof Burning) && !(anElement instanceof Earning)) {
 
 				countOfTransactions++;
 			}
@@ -98,8 +129,7 @@ public class ModelProviderClass {
 			// no else.
 		}
 
-		System.out.println("Example contains " + countOfCustomers
-				+ " Customers.");
+		System.out.println("Example contains " + countOfCustomers + " Customers.");
 		System.out.println("Example contains " + countOfCustomerCards
 				+ " CustomerCards.");
 		System.out.println("Example contains " + countOfDates + " Dates.");
@@ -111,14 +141,12 @@ public class ModelProviderClass {
 				+ " Memberships.");
 		System.out.println("Example contains " + countOfProgramPartners
 				+ " ProgramPartners.");
-		System.out
-				.println("Example contains " + countOfServices + " Services.");
+		System.out.println("Example contains " + countOfServices + " Services.");
 		System.out.println("Example contains " + countOfServiceLevels
 				+ " ServiceLevels.");
 		System.out.println("Example contains " + countOfTransactions
 				+ " Transactions.");
-		System.out
-				.println("Example contains " + countOfBurnings + " Burnings.");
+		System.out.println("Example contains " + countOfBurnings + " Burnings.");
 	}
 
 	/**
@@ -127,9 +155,8 @@ public class ModelProviderClass {
 	public static List<Object> getModelObjects() {
 
 		/*
-		 * PLEASE DO NOT CHANGE THE ORDERING IN WHICH THE OBJECTS ARE ADDED TO
-		 * THE RESULT. OTHERWHISE THE INTERPRETER TEST SUITE WON'T WORK
-		 * ANYMORE!!!
+		 * PLEASE DO NOT CHANGE THE ORDERING IN WHICH THE OBJECTS ARE ADDED TO THE
+		 * RESULT. OTHERWHISE THE INTERPRETER TEST SUITE WON'T WORK ANYMORE!!!
 		 */
 		Customer customer1;
 		Customer customer2;
@@ -1541,28 +1568,28 @@ public class ModelProviderClass {
 	 *         {@link Constraints} contained in the file 'post11.ocl'.
 	 */
 	private static List<Object> getModelObjectsForPost11() {
-	
+
 		List<Object> result;
-	
+
 		result = new ArrayList<Object>();
-	
+
 		LoyaltyProgram program1;
-		
+
 		Membership membership1;
-		
+
 		Customer customer1;
-		
+
 		customer1 = new Customer(25);
-		
+
 		membership1 = new Membership();
-		
+
 		program1 = new LoyaltyProgram();
 		program1.setMembership(membership1);
-	
+
 		result.add(program1);
 		result.add(customer1);
 		result.add(membership1);
-		
+
 		return result;
 	}
 
@@ -1571,17 +1598,17 @@ public class ModelProviderClass {
 	 *         {@link Constraints} contained in the file 'post11.ocl'.
 	 */
 	private static List<Object> getModelObjectsForPost12() {
-	
+
 		List<Object> result;
-	
+
 		result = new ArrayList<Object>();
-	
+
 		Date date1;
-		
+
 		date1 = Date.now();
-		
+
 		result.add(date1);
-		
+
 		return result;
 	}
 

@@ -1,0 +1,8 @@
+-- Constraint taken from [1] page 62.
+
+package tudresden::ocl20::pivot::examples::royalsandloyals
+
+context LoyaltyAccount::getCustomerName() : String
+body: membership.card.owner.name
+
+endpackage
