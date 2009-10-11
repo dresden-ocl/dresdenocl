@@ -573,6 +573,7 @@ public class TestInterpretation {
 		/* Compare with expected results. */
 		result_Boolean = (OclBoolean) results.get(0);
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
+		assertFalse(result_Boolean.oclIsInvalid().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -1917,6 +1918,7 @@ public class TestInterpretation {
 
 		/* Compare with expected results. */
 		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsInvalid().isTrue());
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
@@ -2390,6 +2392,7 @@ public class TestInterpretation {
 
 		/* Compare with expected results. */
 		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsInvalid().isTrue());
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
@@ -2463,6 +2466,7 @@ public class TestInterpretation {
 
 		/* Compare with expected results. */
 		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsInvalid().isTrue());
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
@@ -2539,6 +2543,7 @@ public class TestInterpretation {
 
 		/* Compare with expected results. */
 		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsInvalid().isTrue());
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
@@ -2687,6 +2692,7 @@ public class TestInterpretation {
 
 		/* Compare with expected results. */
 		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsInvalid().isTrue());
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
@@ -3191,6 +3197,7 @@ public class TestInterpretation {
 		/* Compare with expected results. */
 		result_Boolean = (OclBoolean) results.get(0);
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
+		assertFalse(result_Boolean.oclIsInvalid().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 

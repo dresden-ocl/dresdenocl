@@ -37,6 +37,7 @@ import tudresden.ocl20.interpreter.IOclInterpreter;
 import tudresden.ocl20.pivot.essentialocl.expressions.OperationCallExp;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
 import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
 import tudresden.ocl20.pivot.pivotmodel.Constraint;
 import tudresden.ocl20.pivot.pivotmodel.NamedElement;
 
@@ -58,8 +59,12 @@ public class InterpretationEnvironment implements IInterpretationEnvironment {
 	/** the actual model instance. */
 	protected IModelInstance modelInstance;
 
-	/** Special values for postcondition constraints. */
-	protected HashMap<OclAny, HashMap<OperationCallExp, OclAny>> postconditionValues;
+	/**
+	 * Special values for postcondition constraints. Use
+	 * {@link IModelInstanceElement}s as key instead of {@link OclAny}s to avoid
+	 * 'Object schizophrenia'.
+	 */
+	protected HashMap<IModelInstanceElement, HashMap<OperationCallExp, OclAny>> postconditionValues;
 
 	/** Saved constraints for body, def, initial and derive. */
 	protected HashMap<String, Constraint> savedConstraints;
@@ -218,7 +223,8 @@ public class InterpretationEnvironment implements IInterpretationEnvironment {
 			/* Get the object for which the value is stored. */
 			contextObject = this.getVar(IOclInterpreter.SELF_VARIABLE_NAME);
 
-			objectSpecificValues = this.postconditionValues.get(contextObject);
+			objectSpecificValues =
+					this.postconditionValues.get(contextObject.getModelInstanceElement());
 
 			if (objectSpecificValues != null) {
 				/* Try to get the value for the given expression. */
@@ -260,16 +266,17 @@ public class InterpretationEnvironment implements IInterpretationEnvironment {
 		/* Check if the postcondition values have been initialized at all. */
 		if (this.postconditionValues == null) {
 			this.postconditionValues =
-					new HashMap<OclAny, HashMap<OperationCallExp, OclAny>>();
+					new HashMap<IModelInstanceElement, HashMap<OperationCallExp, OclAny>>();
 		}
 		// no else.
 
 		/* Get the object for which the value is stored. */
 		contextObject = this.getVar(IOclInterpreter.SELF_VARIABLE_NAME);
 
-		objectSpecificValues = this.postconditionValues.get(contextObject);
+		objectSpecificValues =
+				this.postconditionValues.get(contextObject.getModelInstanceElement());
 
-		/* Eventually initialize the specific values. */
+		/* Probably initialize the specific values. */
 		if (objectSpecificValues == null) {
 			objectSpecificValues = new HashMap<OperationCallExp, OclAny>();
 		}
@@ -279,7 +286,8 @@ public class InterpretationEnvironment implements IInterpretationEnvironment {
 		objectSpecificValues.put(anOperationCallExp, aSource);
 
 		/* Store the specific values. */
-		this.postconditionValues.put(contextObject, objectSpecificValues);
+		this.postconditionValues.put(contextObject.getModelInstanceElement(),
+				objectSpecificValues);
 	}
 
 	/*

@@ -96,53 +96,68 @@ public class JavaOclModelInstanceObject extends JavaOclAny implements
 	 */
 	public OclAny invokeOperation(Operation operation, OclAny... args) {
 
-		/* Probably result in invalid or undefined. */
-		this.checkUndefinedAndInvalid(this);
-		this.checkUndefinedAndInvalid(args);
-
 		OclAny result;
-		IModelInstanceElement imiResult;
 
-		List<IModelInstanceElement> imiArguments;
+		/* Check if the source is invalid. */
+		if (this.oclIsInvalid().isTrue()) {
+			result =
+					JavaStandardLibraryFactory.INSTANCE.createOclInvalid(operation
+							.getType(), this.getInvalidReason());
+		}
 
-		imiArguments = new LinkedList<IModelInstanceElement>();
+		/* Else check if the source is undefined. */
+		else if (this.oclIsUndefined().isTrue()) {
+			result =
+					JavaStandardLibraryFactory.INSTANCE.createOclUndefined(operation
+							.getType(), this.getUndefinedreason());
+		}
 
-		/* Try to invoke the operation. */
-		try {
+		/* Else try to invoke the operation. */
+		else {
 
-			/* Get the model instance arguments. */
-			for (OclAny arg : args) {
-				imiArguments.add(arg.getModelInstanceElement());
+			IModelInstanceElement imiResult;
+
+			List<IModelInstanceElement> imiArguments;
+			imiArguments = new LinkedList<IModelInstanceElement>();
+
+			/* Try to invoke the operation. */
+			try {
+
+				/* Get the model instance arguments. */
+				for (OclAny arg : args) {
+					imiArguments.add(arg.getModelInstanceElement());
+				}
+
+				imiResult = imiObject.invokeOperation(operation, imiArguments);
+				result = JavaStandardLibraryFactory.INSTANCE.createOclAny(imiResult);
 			}
 
-			imiResult = imiObject.invokeOperation(operation, imiArguments);
-			result = JavaStandardLibraryFactory.INSTANCE.createOclAny(imiResult);
+			/*
+			 * An invalid exception can occur if a OclType object shall be adapted to
+			 * its IModelInstanceElement. OclTypes can only be arguments of operations
+			 * defined in the standard library. Thus, try to invoke a library
+			 * operation.
+			 */
+			catch (InvalidException e) {
+
+				result = super.invokeOperation(operation, args);
+			}
+
+			/*
+			 * If the operation is not defined on the model element, it may be an
+			 * operation on OclAny.
+			 */
+			catch (OperationNotFoundException e) {
+
+				result = super.invokeOperation(operation, args);
+			}
+
+			catch (OperationAccessException e) {
+
+				result = super.invokeOperation(operation, args);
+			}
+			// end catch.
 		}
-
-		/*
-		 * An invalid exception can occur if a OclType object shall be adapted to
-		 * its IModelInstanceElement. OclTypes can only be arguments of operations
-		 * defined in the standard library. Thus, try to invoke a library operation.
-		 */
-		catch (InvalidException e) {
-
-			result = super.invokeOperation(operation, args);
-		}
-
-		/*
-		 * If the operation is not defined on the model element, it may be an
-		 * operation on OclAny.
-		 */
-		catch (OperationNotFoundException e) {
-
-			result = super.invokeOperation(operation, args);
-		}
-
-		catch (OperationAccessException e) {
-
-			result = super.invokeOperation(operation, args);
-		}
-		// end catch.
 
 		return result;
 	}
@@ -177,52 +192,52 @@ public class JavaOclModelInstanceObject extends JavaOclAny implements
 	 * @return The result as an {@link OclAny}.
 	 */
 	public OclAny getProperty(Property property) {
-	
+
 		OclAny result;
-	
+
 		/* Check if the source is invalid. */
 		if (this.oclIsInvalid().isTrue()) {
 			result =
 					JavaStandardLibraryFactory.INSTANCE.createOclInvalid(property
 							.getType(), this.getInvalidReason());
 		}
-	
+
 		/* Else check if the source is undefined. */
 		else if (this.oclIsUndefined().isTrue()) {
 			result =
 					JavaStandardLibraryFactory.INSTANCE.createOclUndefined(property
 							.getType(), this.getUndefinedreason());
 		}
-	
+
 		/* Else try to get the property. */
 		else {
-	
+
 			IModelInstanceElement imiResult;
-	
+
 			try {
 				imiResult = imiObject.getProperty(property);
-	
+
 				if (imiResult.isUndefined()) {
 					result =
 							JavaStandardLibraryFactory.INSTANCE.createOclUndefined(property
 									.getType(), imiResult.getName() + " is null.");
 				}
-	
+
 				else {
 					result = JavaStandardLibraryFactory.INSTANCE.createOclAny(imiResult);
 				}
 			}
-	
+
 			/* Probably create an undefined or invalid result. */
 			catch (PropertyNotFoundException e) {
-	
+
 				result =
 						JavaStandardLibraryFactory.INSTANCE.createOclInvalid(property
 								.getType(), e);
 			}
-	
+
 			catch (PropertyAccessException e) {
-	
+
 				result =
 						JavaStandardLibraryFactory.INSTANCE.createOclInvalid(property
 								.getType(), e);
@@ -230,7 +245,7 @@ public class JavaOclModelInstanceObject extends JavaOclAny implements
 			// end catch.
 		}
 		// end else.
-	
+
 		return result;
 	}
 

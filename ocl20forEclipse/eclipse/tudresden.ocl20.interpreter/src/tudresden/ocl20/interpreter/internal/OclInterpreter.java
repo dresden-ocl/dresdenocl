@@ -2020,7 +2020,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 					 */
 					source =
 							this.myStandardLibraryFactory.createOclType(anOperationCallExp
-									.getType());
+									.getSourceType());
 				}
 
 				else {
@@ -2181,8 +2181,9 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 						 * TODO This should not happen. Anyway the parser parses the source
 						 * of static properties to null instead of a TypeLiteralExp.
 						 */
-						source = this.myStandardLibraryFactory.createOclType((Type) referredProperty
-								.getOwner());
+						source =
+								this.myStandardLibraryFactory
+										.createOclType((Type) referredProperty.getOwner());
 					}
 
 					else {
@@ -4061,6 +4062,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 							myStandardLibraryFactory.createOclUndefined(anOperationCallExp
 									.getType(), msg);
 				}
+				// no else.
 			}
 		}
 

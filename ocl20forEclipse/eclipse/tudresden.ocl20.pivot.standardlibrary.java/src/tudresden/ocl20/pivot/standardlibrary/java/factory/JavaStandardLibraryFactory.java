@@ -62,6 +62,7 @@ import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceObject;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceReal;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceString;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceTuple;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceVoid;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.base.BasisJavaModelInstanceFactory;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.base.PrimitiveAndCollectionTypeConstants;
 import tudresden.ocl20.pivot.modelbus.util.OclCollectionTypeKind;
@@ -136,6 +137,10 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 		if (modelInstanceElement == null) {
 			throw new IllegalArgumentException(
 					"Cannot create OclAny with \'null\' as given IModelInstanceElement.");
+		}
+
+		else if (modelInstanceElement instanceof IModelInstanceVoid) {
+			result = JavaOclVoid.INSTANCE;
 		}
 
 		else if (modelInstanceElement instanceof IModelInstanceInteger) {
@@ -341,18 +346,30 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 		return new JavaOclInteger(value);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @seetudresden.ocl20.pivot.essentialocl.standardlibrary.factory.
+	 * IStandardLibraryFactory
+	 * #createOclModelInstanceObject(tudresden.ocl20.pivot.modelbus
+	 * .modelinstance.types.IModelInstanceObject)
+	 */
 	public OclModelInstanceObject createOclModelInstanceObject(
 			IModelInstanceObject modelInstanceObject) {
 
 		OclModelInstanceObject result;
 
+		/* Probably use a cached result. */
 		if (myCachedAdaptedObjects.containsKey(modelInstanceObject)) {
 			result =
 					(OclModelInstanceObject) myCachedAdaptedObjects
 							.get(modelInstanceObject);
 		}
+
 		else {
 			result = new JavaOclModelInstanceObject(modelInstanceObject);
+
+			/* Cache the adapted result. */
+			this.myCachedAdaptedObjects.put(modelInstanceObject, result);
 		}
 
 		return result;
@@ -987,7 +1004,8 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 
 				imiResult =
 						BasisJavaModelInstanceFactory.createModelInstanceCollection(
-								modelInstance.getAllInstances(operation.getType()),
+								modelInstance.getAllInstances(((CollectionType) operation
+										.getType()).getElementType()),
 								PrimitiveAndCollectionTypeConstants.MODEL_TYPE_SET);
 
 				result = createOclAny(imiResult);
