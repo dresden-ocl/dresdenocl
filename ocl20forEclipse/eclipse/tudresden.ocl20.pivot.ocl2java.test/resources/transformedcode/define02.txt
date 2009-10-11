@@ -16,7 +16,7 @@ public privileged aspect DefAspect1 {
     /**
      * <p>Defines the method getServicesByLevel(String levelName) defined by the constraint
      * <code>context LoyaltyProgram
-     *       def: getServicesByLevel = levels[] -> select (  | name[].=( levelName[])).availableServices[].asSet()</code></p>
+     *       def: getServicesByLevel = levels[] -> select (  | name[].=( levelName[])).availableServices[].flatten().asSet()</code></p>
      */
     tudresden.ocl20.pivot.ocl2java.types.OclSet<tudresden.ocl20.pivot.examples.royalsandloyals.Service> around(tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyProgram aClass, String levelName): getServicesByLevelCaller(aClass, levelName) {
         tudresden.ocl20.pivot.ocl2java.types.OclOrderedSet<tudresden.ocl20.pivot.examples.royalsandloyals.ServiceLevel> result2;
@@ -37,6 +37,6 @@ public privileged aspect DefAspect1 {
             result1.addAll(anElement1.availableServices);
         }
     
-        return result1.asSet();
+        return result1.flatten().asSet();
     }
 }

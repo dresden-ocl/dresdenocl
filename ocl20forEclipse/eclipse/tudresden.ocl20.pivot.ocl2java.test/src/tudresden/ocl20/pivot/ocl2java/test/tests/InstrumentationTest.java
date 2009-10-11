@@ -83,7 +83,7 @@ public class InstrumentationTest {
 	// @Test
 	// public void testBody1() {
 	//
-	// this.constraintFileName = "expressions/body01.ocl";
+	// this.constraintFileName = "constraints/body01.ocl";
 	// this.expectedFileName = "resources/transformedcode/body01.txt";
 	//
 	// testPerformer.doDiffTest(constraintFileName, expectedFileName);
@@ -103,7 +103,7 @@ public class InstrumentationTest {
 
 		testPerformer.resetCodeGenerator();
 
-		this.constraintFileName = "expressions/body02.ocl";
+		this.constraintFileName = "constraints/body02.ocl";
 		this.expectedFileName = "resources/transformedcode/body02.txt";
 
 		testPerformer.doDiffTest(constraintFileName, expectedFileName);
@@ -121,7 +121,7 @@ public class InstrumentationTest {
 	@Test
 	public void testBody3() throws Ocl2CodeException {
 
-		this.constraintFileName = "expressions/body03.ocl";
+		this.constraintFileName = "constraints/body03.ocl";
 		this.expectedFileName = "resources/transformedcode/body03.txt";
 
 		testPerformer.doDiffTest(constraintFileName, expectedFileName);
@@ -139,7 +139,7 @@ public class InstrumentationTest {
 	@Test
 	public void testDefinition1() throws Ocl2CodeException {
 
-		this.constraintFileName = "expressions/define01.ocl";
+		this.constraintFileName = "constraints/define01.ocl";
 		this.expectedFileName = "resources/transformedcode/define01.txt";
 
 		testPerformer.doDiffTest(constraintFileName, expectedFileName);
@@ -157,7 +157,7 @@ public class InstrumentationTest {
 	@Test
 	public void testDefinition2() throws Ocl2CodeException {
 
-		this.constraintFileName = "expressions/define02.ocl";
+		this.constraintFileName = "constraints/define02.ocl";
 		this.expectedFileName = "resources/transformedcode/define02.txt";
 
 		testPerformer.doDiffTest(constraintFileName, expectedFileName);
@@ -175,7 +175,7 @@ public class InstrumentationTest {
 	@Test
 	public void testDefinition3() throws Ocl2CodeException {
 
-		this.constraintFileName = "expressions/define03.ocl";
+		this.constraintFileName = "constraints/define03.ocl";
 		this.expectedFileName = "resources/transformedcode/define03.txt";
 
 		testPerformer.doDiffTest(constraintFileName, expectedFileName);
@@ -193,7 +193,7 @@ public class InstrumentationTest {
 	@Test
 	public void testDefinition4() throws Ocl2CodeException {
 
-		this.constraintFileName = "expressions/define04.ocl";
+		this.constraintFileName = "constraints/define04.ocl";
 		this.expectedFileName = "resources/transformedcode/define04.txt";
 
 		testPerformer.doDiffTest(constraintFileName, expectedFileName);
@@ -211,7 +211,7 @@ public class InstrumentationTest {
 	@Test
 	public void testDefinition5() throws Ocl2CodeException {
 
-		this.constraintFileName = "expressions/define05.ocl";
+		this.constraintFileName = "constraints/define05.ocl";
 		this.expectedFileName = "resources/transformedcode/define05.txt";
 
 		testPerformer.doDiffTest(constraintFileName, expectedFileName);
@@ -229,7 +229,7 @@ public class InstrumentationTest {
 	@Test
 	public void testDefinition6() throws Ocl2CodeException {
 
-		this.constraintFileName = "expressions/define06.ocl";
+		this.constraintFileName = "constraints/define06.ocl";
 		this.expectedFileName = "resources/transformedcode/define06.txt";
 
 		testPerformer.doDiffTest(constraintFileName, expectedFileName);
@@ -247,7 +247,7 @@ public class InstrumentationTest {
 	@Test
 	public void testDefinition7() throws Ocl2CodeException {
 
-		this.constraintFileName = "expressions/define07.ocl";
+		this.constraintFileName = "constraints/define07.ocl";
 		this.expectedFileName = "resources/transformedcode/define07.txt";
 
 		testPerformer.doDiffTest(constraintFileName, expectedFileName);
@@ -265,7 +265,7 @@ public class InstrumentationTest {
 	@Test
 	public void testDefinition8() throws Ocl2CodeException {
 
-		this.constraintFileName = "expressions/define08.ocl";
+		this.constraintFileName = "constraints/define08.ocl";
 		this.expectedFileName = "resources/transformedcode/define08.txt";
 
 		testPerformer.doDiffTest(constraintFileName, expectedFileName);
@@ -283,7 +283,7 @@ public class InstrumentationTest {
 	@Test
 	public void testDerive1() throws Ocl2CodeException {
 
-		this.constraintFileName = "expressions/derive01.ocl";
+		this.constraintFileName = "constraints/derive01.ocl";
 		this.expectedFileName = "resources/transformedcode/derive01.txt";
 
 		testPerformer.doDiffTest(constraintFileName, expectedFileName);
@@ -301,7 +301,7 @@ public class InstrumentationTest {
 	@Test
 	public void testDerive2() throws Ocl2CodeException {
 
-		this.constraintFileName = "expressions/derive02.ocl";
+		this.constraintFileName = "constraints/derive02.ocl";
 		this.expectedFileName = "resources/transformedcode/derive02.txt";
 
 		testPerformer.doDiffTest(constraintFileName, expectedFileName);
@@ -319,7 +319,7 @@ public class InstrumentationTest {
 	@Test
 	public void testDerive3() throws Ocl2CodeException {
 
-		this.constraintFileName = "expressions/derive03.ocl";
+		this.constraintFileName = "constraints/derive03.ocl";
 		this.expectedFileName = "resources/transformedcode/derive03.txt";
 
 		testPerformer.doDiffTest(constraintFileName, expectedFileName);
@@ -337,7 +337,7 @@ public class InstrumentationTest {
 	@Test
 	public void testInitialValue1() throws Ocl2CodeException {
 
-		this.constraintFileName = "expressions/init01.ocl";
+		this.constraintFileName = "constraints/init01.ocl";
 		this.expectedFileName = "resources/transformedcode/init01.txt";
 
 		testPerformer.doDiffTest(constraintFileName, expectedFileName);
@@ -355,7 +355,7 @@ public class InstrumentationTest {
 	@Test
 	public void testInitialValue2() throws Ocl2CodeException {
 
-		this.constraintFileName = "expressions/init02.ocl";
+		this.constraintFileName = "constraints/init02.ocl";
 		this.expectedFileName = "resources/transformedcode/init02.txt";
 
 		testPerformer.doDiffTest(constraintFileName, expectedFileName);
@@ -373,7 +373,7 @@ public class InstrumentationTest {
 	@Test
 	public void testInitialValue3() throws Ocl2CodeException {
 
-		this.constraintFileName = "expressions/init03.ocl";
+		this.constraintFileName = "constraints/init03.ocl";
 		this.expectedFileName = "resources/transformedcode/init03.txt";
 
 		testPerformer.doDiffTest(constraintFileName, expectedFileName);
@@ -391,7 +391,7 @@ public class InstrumentationTest {
 	@Test
 	public void testInitialValue4() throws Ocl2CodeException {
 
-		this.constraintFileName = "expressions/init04.ocl";
+		this.constraintFileName = "constraints/init04.ocl";
 		this.expectedFileName = "resources/transformedcode/init04.txt";
 
 		testPerformer.doDiffTest(constraintFileName, expectedFileName);
@@ -409,7 +409,7 @@ public class InstrumentationTest {
 	@Test
 	public void testInvariant1() throws Ocl2CodeException {
 
-		this.constraintFileName = "expressions/invariant01.ocl";
+		this.constraintFileName = "constraints/invariant01.ocl";
 		this.expectedFileName = "resources/transformedcode/invariant01.txt";
 
 		testPerformer
@@ -432,7 +432,7 @@ public class InstrumentationTest {
 	@Test
 	public void testInvariant2() throws Ocl2CodeException {
 
-		this.constraintFileName = "expressions/invariant02.ocl";
+		this.constraintFileName = "constraints/invariant02.ocl";
 		this.expectedFileName = "resources/transformedcode/invariant02.txt";
 
 		testPerformer.doDiffTest(constraintFileName, expectedFileName, false,
@@ -451,7 +451,7 @@ public class InstrumentationTest {
 	@Test
 	public void testInvariant3() throws Ocl2CodeException {
 
-		this.constraintFileName = "expressions/invariant03.ocl";
+		this.constraintFileName = "constraints/invariant03.ocl";
 		this.expectedFileName = "resources/transformedcode/invariant03.txt";
 
 		testPerformer.doDiffTest(constraintFileName, expectedFileName, false,
@@ -470,7 +470,7 @@ public class InstrumentationTest {
 	@Test
 	public void testInvariant4() throws Ocl2CodeException {
 
-		this.constraintFileName = "expressions/invariant04.ocl";
+		this.constraintFileName = "constraints/invariant04.ocl";
 		this.expectedFileName = "resources/transformedcode/invariant04.txt";
 
 		testPerformer.doDiffTest(constraintFileName, expectedFileName, false,
@@ -489,7 +489,7 @@ public class InstrumentationTest {
 	@Test
 	public void testInvariant5() throws Ocl2CodeException {
 
-		this.constraintFileName = "expressions/invariant05.ocl";
+		this.constraintFileName = "constraints/invariant05.ocl";
 		this.expectedFileName = "resources/transformedcode/invariant05.txt";
 
 		testPerformer.doDiffTest(constraintFileName, expectedFileName, false,
@@ -508,7 +508,7 @@ public class InstrumentationTest {
 	@Test
 	public void testInvariant6() throws Ocl2CodeException {
 
-		this.constraintFileName = "expressions/invariant06.ocl";
+		this.constraintFileName = "constraints/invariant06.ocl";
 		this.expectedFileName = "resources/transformedcode/invariant06.txt";
 
 		testPerformer.doDiffTest(constraintFileName, expectedFileName, false,
@@ -527,7 +527,7 @@ public class InstrumentationTest {
 	@Test
 	public void testInvariant7() throws Ocl2CodeException {
 
-		this.constraintFileName = "expressions/invariant07.ocl";
+		this.constraintFileName = "constraints/invariant07.ocl";
 		this.expectedFileName = "resources/transformedcode/invariant07.txt";
 
 		testPerformer.doDiffTest(constraintFileName, expectedFileName, false,
@@ -546,7 +546,7 @@ public class InstrumentationTest {
 	@Test
 	public void testInvariant8() throws Ocl2CodeException {
 
-		this.constraintFileName = "expressions/invariant08.ocl";
+		this.constraintFileName = "constraints/invariant08.ocl";
 		this.expectedFileName = "resources/transformedcode/invariant08.txt";
 
 		testPerformer.doDiffTest(constraintFileName, expectedFileName, false,
@@ -565,7 +565,7 @@ public class InstrumentationTest {
 	@Test
 	public void testInvariant9() throws Ocl2CodeException {
 
-		this.constraintFileName = "expressions/invariant09.ocl";
+		this.constraintFileName = "constraints/invariant09.ocl";
 		this.expectedFileName = "resources/transformedcode/invariant09.txt";
 
 		testPerformer.doDiffTest(constraintFileName, expectedFileName, false,
@@ -584,7 +584,7 @@ public class InstrumentationTest {
 	@Test
 	public void testInvariant10() throws Ocl2CodeException {
 
-		this.constraintFileName = "expressions/invariant10.ocl";
+		this.constraintFileName = "constraints/invariant10.ocl";
 		this.expectedFileName = "resources/transformedcode/invariant10.txt";
 
 		testPerformer.doDiffTest(constraintFileName, expectedFileName, false,
@@ -603,7 +603,7 @@ public class InstrumentationTest {
 	@Test
 	public void testInvariant11() throws Ocl2CodeException {
 
-		this.constraintFileName = "expressions/invariant11.ocl";
+		this.constraintFileName = "constraints/invariant11.ocl";
 		this.expectedFileName = "resources/transformedcode/invariant11.txt";
 
 		testPerformer.doDiffTest(constraintFileName, expectedFileName, false,
@@ -622,7 +622,7 @@ public class InstrumentationTest {
 	@Test
 	public void testInvariant12() throws Ocl2CodeException {
 
-		this.constraintFileName = "expressions/invariant12.ocl";
+		this.constraintFileName = "constraints/invariant12.ocl";
 		this.expectedFileName = "resources/transformedcode/invariant12.txt";
 
 		testPerformer.doDiffTest(constraintFileName, expectedFileName, false,
@@ -641,7 +641,7 @@ public class InstrumentationTest {
 	@Test
 	public void testInvariant13() throws Ocl2CodeException {
 
-		this.constraintFileName = "expressions/invariant13.ocl";
+		this.constraintFileName = "constraints/invariant13.ocl";
 		this.expectedFileName = "resources/transformedcode/invariant13.txt";
 
 		testPerformer.doDiffTest(constraintFileName, expectedFileName, false,
@@ -660,7 +660,7 @@ public class InstrumentationTest {
 	@Test
 	public void testInvariant14() throws Ocl2CodeException {
 
-		this.constraintFileName = "expressions/invariant14.ocl";
+		this.constraintFileName = "constraints/invariant14.ocl";
 		this.expectedFileName = "resources/transformedcode/invariant14.txt";
 
 		testPerformer.doDiffTest(constraintFileName, expectedFileName, false,
@@ -679,7 +679,7 @@ public class InstrumentationTest {
 	@Test
 	public void testInvariant15() throws Ocl2CodeException {
 
-		this.constraintFileName = "expressions/invariant15.ocl";
+		this.constraintFileName = "constraints/invariant15.ocl";
 		this.expectedFileName = "resources/transformedcode/invariant15.txt";
 
 		testPerformer.doDiffTest(constraintFileName, expectedFileName, false,
@@ -698,7 +698,7 @@ public class InstrumentationTest {
 	@Test
 	public void testInvariant16() throws Ocl2CodeException {
 
-		this.constraintFileName = "expressions/invariant16.ocl";
+		this.constraintFileName = "constraints/invariant16.ocl";
 		this.expectedFileName = "resources/transformedcode/invariant16.txt";
 
 		testPerformer.doDiffTest(constraintFileName, expectedFileName, false,
@@ -717,7 +717,7 @@ public class InstrumentationTest {
 	@Test
 	public void testInvariant17() throws Ocl2CodeException {
 
-		this.constraintFileName = "expressions/invariant17.ocl";
+		this.constraintFileName = "constraints/invariant17.ocl";
 		this.expectedFileName = "resources/transformedcode/invariant17.txt";
 
 		testPerformer.doDiffTest(constraintFileName, expectedFileName, false,
@@ -736,7 +736,7 @@ public class InstrumentationTest {
 	@Test
 	public void testInvariant18() throws Ocl2CodeException {
 
-		this.constraintFileName = "expressions/invariant18.ocl";
+		this.constraintFileName = "constraints/invariant18.ocl";
 		this.expectedFileName = "resources/transformedcode/invariant18.txt";
 
 		testPerformer.doDiffTest(constraintFileName, expectedFileName, false,
@@ -755,7 +755,7 @@ public class InstrumentationTest {
 	@Test
 	public void testPostcondition1() throws Ocl2CodeException {
 
-		this.constraintFileName = "expressions/post01.ocl";
+		this.constraintFileName = "constraints/post01.ocl";
 		this.expectedFileName = "resources/transformedcode/post01.txt";
 
 		testPerformer.doDiffTest(constraintFileName, expectedFileName);
@@ -773,7 +773,7 @@ public class InstrumentationTest {
 	@Test
 	public void testPostcondition2() throws Ocl2CodeException {
 
-		this.constraintFileName = "expressions/post02.ocl";
+		this.constraintFileName = "constraints/post02.ocl";
 		this.expectedFileName = "resources/transformedcode/post02.txt";
 
 		testPerformer.doDiffTest(constraintFileName, expectedFileName);
@@ -791,7 +791,7 @@ public class InstrumentationTest {
 	@Test
 	public void testPostcondition3() throws Ocl2CodeException {
 
-		this.constraintFileName = "expressions/post03.ocl";
+		this.constraintFileName = "constraints/post03.ocl";
 		this.expectedFileName = "resources/transformedcode/post03.txt";
 
 		testPerformer.doDiffTest(constraintFileName, expectedFileName);
@@ -809,7 +809,7 @@ public class InstrumentationTest {
 	@Test
 	public void testPostcondition4() throws Ocl2CodeException {
 
-		this.constraintFileName = "expressions/post04.ocl";
+		this.constraintFileName = "constraints/post04.ocl";
 		this.expectedFileName = "resources/transformedcode/post04.txt";
 
 		testPerformer.doDiffTest(constraintFileName, expectedFileName);
@@ -827,7 +827,7 @@ public class InstrumentationTest {
 	@Test
 	public void testPostcondition5() throws Ocl2CodeException {
 
-		this.constraintFileName = "expressions/post05.ocl";
+		this.constraintFileName = "constraints/post05.ocl";
 		this.expectedFileName = "resources/transformedcode/post05.txt";
 
 		testPerformer.doDiffTest(constraintFileName, expectedFileName);
@@ -845,7 +845,7 @@ public class InstrumentationTest {
 	@Test
 	public void testPostcondition6() throws Ocl2CodeException {
 
-		this.constraintFileName = "expressions/post06.ocl";
+		this.constraintFileName = "constraints/post06.ocl";
 		this.expectedFileName = "resources/transformedcode/post06.txt";
 
 		testPerformer.doDiffTest(constraintFileName, expectedFileName);
@@ -863,7 +863,7 @@ public class InstrumentationTest {
 	@Test
 	public void testPostcondition7() throws Ocl2CodeException {
 
-		this.constraintFileName = "expressions/post07.ocl";
+		this.constraintFileName = "constraints/post07.ocl";
 		this.expectedFileName = "resources/transformedcode/post07.txt";
 
 		testPerformer.doDiffTest(constraintFileName, expectedFileName);
@@ -881,7 +881,7 @@ public class InstrumentationTest {
 	@Test
 	public void testPostcondition8() throws Ocl2CodeException {
 
-		this.constraintFileName = "expressions/post08.ocl";
+		this.constraintFileName = "constraints/post08.ocl";
 		this.expectedFileName = "resources/transformedcode/post08.txt";
 
 		testPerformer.doDiffTest(constraintFileName, expectedFileName);
@@ -899,7 +899,7 @@ public class InstrumentationTest {
 	@Test
 	public void testPostcondition9() throws Ocl2CodeException {
 
-		this.constraintFileName = "expressions/post09.ocl";
+		this.constraintFileName = "constraints/post09.ocl";
 		this.expectedFileName = "resources/transformedcode/post09.txt";
 
 		testPerformer.doDiffTest(constraintFileName, expectedFileName);
@@ -917,7 +917,7 @@ public class InstrumentationTest {
 	@Test
 	public void testPostcondition10() throws Ocl2CodeException {
 
-		this.constraintFileName = "expressions/post10.ocl";
+		this.constraintFileName = "constraints/post10.ocl";
 		this.expectedFileName = "resources/transformedcode/post10.txt";
 
 		testPerformer.doDiffTest(constraintFileName, expectedFileName, true);
@@ -935,7 +935,7 @@ public class InstrumentationTest {
 	@Test
 	public void testPostcondition11() throws Ocl2CodeException {
 
-		this.constraintFileName = "expressions/post11.ocl";
+		this.constraintFileName = "constraints/post11.ocl";
 		this.expectedFileName = "resources/transformedcode/post11.txt";
 
 		testPerformer.doDiffTest(constraintFileName, expectedFileName);
@@ -953,7 +953,7 @@ public class InstrumentationTest {
 	@Test
 	public void testPostcondition12() throws Ocl2CodeException {
 
-		this.constraintFileName = "expressions/post12.ocl";
+		this.constraintFileName = "constraints/post12.ocl";
 		this.expectedFileName = "resources/transformedcode/post12.txt";
 
 		testPerformer.doDiffTest(constraintFileName, expectedFileName);
@@ -971,7 +971,7 @@ public class InstrumentationTest {
 	@Test
 	public void testPrecondition1() throws Ocl2CodeException {
 
-		this.constraintFileName = "expressions/pre01.ocl";
+		this.constraintFileName = "constraints/pre01.ocl";
 		this.expectedFileName = "resources/transformedcode/pre01.txt";
 
 		testPerformer.doDiffTest(constraintFileName, expectedFileName);
@@ -989,7 +989,7 @@ public class InstrumentationTest {
 	@Test
 	public void testPrecondition2() throws Ocl2CodeException {
 
-		this.constraintFileName = "expressions/pre02.ocl";
+		this.constraintFileName = "constraints/pre02.ocl";
 		this.expectedFileName = "resources/transformedcode/pre02.txt";
 
 		testPerformer.doDiffTest(constraintFileName, expectedFileName);
@@ -1007,7 +1007,7 @@ public class InstrumentationTest {
 	@Test
 	public void testPrecondition3() throws Ocl2CodeException {
 
-		this.constraintFileName = "expressions/pre03.ocl";
+		this.constraintFileName = "constraints/pre03.ocl";
 		this.expectedFileName = "resources/transformedcode/pre03.txt";
 
 		testPerformer.doDiffTest(constraintFileName, expectedFileName);
@@ -1025,7 +1025,7 @@ public class InstrumentationTest {
 	@Test
 	public void testPrecondition4() throws Ocl2CodeException {
 
-		this.constraintFileName = "expressions/pre04.ocl";
+		this.constraintFileName = "constraints/pre04.ocl";
 		this.expectedFileName = "resources/transformedcode/pre04.txt";
 
 		testPerformer.doDiffTest(constraintFileName, expectedFileName);
@@ -1043,7 +1043,7 @@ public class InstrumentationTest {
 	@Test
 	public void testPrecondition5() throws Ocl2CodeException {
 
-		this.constraintFileName = "expressions/pre05.ocl";
+		this.constraintFileName = "constraints/pre05.ocl";
 		this.expectedFileName = "resources/transformedcode/pre05.txt";
 
 		testPerformer.doDiffTest(constraintFileName, expectedFileName, true);
@@ -1061,7 +1061,7 @@ public class InstrumentationTest {
 	@Test
 	public void testPrecondition6() throws Ocl2CodeException {
 
-		this.constraintFileName = "expressions/pre06.ocl";
+		this.constraintFileName = "constraints/pre06.ocl";
 		this.expectedFileName = "resources/transformedcode/pre06.txt";
 
 		testPerformer.doDiffTest(constraintFileName, expectedFileName, true);

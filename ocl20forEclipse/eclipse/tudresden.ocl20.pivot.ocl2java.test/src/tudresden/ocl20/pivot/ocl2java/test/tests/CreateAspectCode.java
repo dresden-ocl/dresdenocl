@@ -77,63 +77,63 @@ public class CreateAspectCode {
 
 	/**
 	 * <p>
-	 * Loads constraints of some Body Expressions.
+	 * Loads constraints of some Body constraints.
 	 * </p>
 	 * 
 	 * @throws Ocl2CodeException
 	 */
 	private void loadBodyConstraints() throws Ocl2CodeException {
 
-		this.testPerformer.addOCLFile("expressions/body02.ocl");
-		this.testPerformer.addOCLFile("expressions/body03.ocl");
+		this.testPerformer.addOCLFile("constraints/body02.ocl");
+		this.testPerformer.addOCLFile("constraints/body03.ocl");
 	}
 
 	/**
 	 * <p>
-	 * Loads constraints of some definition Expressions.
+	 * Loads constraints of some definition constraints.
 	 * </p>
 	 * 
 	 * @throws Ocl2CodeException
 	 */
 	private void loadDefConstraints() throws Ocl2CodeException {
 
-		this.testPerformer.addOCLFile("expressions/define01.ocl");
-		this.testPerformer.addOCLFile("expressions/define02.ocl");
-		this.testPerformer.addOCLFile("expressions/define03.ocl");
-		this.testPerformer.addOCLFile("expressions/define04.ocl");
-		this.testPerformer.addOCLFile("expressions/define05.ocl");
-		this.testPerformer.addOCLFile("expressions/define06.ocl");
-		this.testPerformer.addOCLFile("expressions/define07.ocl");
-		this.testPerformer.addOCLFile("expressions/define08.ocl");
+		this.testPerformer.addOCLFile("constraints/define01.ocl");
+		this.testPerformer.addOCLFile("constraints/define02.ocl");
+		this.testPerformer.addOCLFile("constraints/define03.ocl");
+		this.testPerformer.addOCLFile("constraints/define04.ocl");
+		this.testPerformer.addOCLFile("constraints/define05.ocl");
+		this.testPerformer.addOCLFile("constraints/define06.ocl");
+		this.testPerformer.addOCLFile("constraints/define07.ocl");
+		this.testPerformer.addOCLFile("constraints/define08.ocl");
 	}
 
 	/**
 	 * <p>
-	 * Loads constraints of some derived value Expressions.
+	 * Loads constraints of some derived value constraints.
 	 * </p>
 	 * 
 	 * @throws Ocl2CodeException
 	 */
 	private void loadDeriveConstraints() throws Ocl2CodeException {
 
-		this.testPerformer.addOCLFile("expressions/derive01.ocl");
-		this.testPerformer.addOCLFile("expressions/derive02.ocl");
-		this.testPerformer.addOCLFile("expressions/derive03.ocl");
+		this.testPerformer.addOCLFile("constraints/derive01.ocl");
+		this.testPerformer.addOCLFile("constraints/derive02.ocl");
+		this.testPerformer.addOCLFile("constraints/derive03.ocl");
 	}
 
 	/**
 	 * <p>
-	 * Loads constraints of some initial value Expressions.
+	 * Loads constraints of some initial value constraints.
 	 * </p>
 	 * 
 	 * @throws Ocl2CodeException
 	 */
 	private void loadInitConstraints() throws Ocl2CodeException {
 
-		this.testPerformer.addOCLFile("expressions/init01.ocl");
-		this.testPerformer.addOCLFile("expressions/init02.ocl");
-		this.testPerformer.addOCLFile("expressions/init03.ocl");
-		this.testPerformer.addOCLFile("expressions/init04.ocl");
+		this.testPerformer.addOCLFile("constraints/init01.ocl");
+		this.testPerformer.addOCLFile("constraints/init02.ocl");
+		this.testPerformer.addOCLFile("constraints/init03.ocl");
+		this.testPerformer.addOCLFile("constraints/init04.ocl");
 	}
 
 	/**
@@ -147,28 +147,28 @@ public class CreateAspectCode {
 
 		Constraint aConstraint;
 
-		this.testPerformer.addOCLFile("expressions/invariant01.ocl");
+		this.testPerformer.addOCLFile("constraints/invariant01.ocl");
 		aConstraint = this.testPerformer.getLastLoadedConstraint();
 		this.testPerformer
 				.setInvariantCheckMode(
 						aConstraint,
 						IOcl2CodeSettings.INVARIANT_CHECK_AFTER_CONSTRUCT_AND_PUBLIC_METHOD_EXECUTION);
 
-		this.testPerformer.addOCLFile("expressions/invariant02.ocl");
+		this.testPerformer.addOCLFile("constraints/invariant02.ocl");
 		aConstraint = this.testPerformer.getLastLoadedConstraint();
 		this.testPerformer
 				.setInvariantCheckMode(
 						aConstraint,
 						IOcl2CodeSettings.INVARIANT_CHECK_AFTER_CONSTRUCT_AND_ATTRIBUTE_CHANGE);
 
-		this.testPerformer.addOCLFile("expressions/invariant03.ocl");
+		this.testPerformer.addOCLFile("constraints/invariant03.ocl");
 		aConstraint = this.testPerformer.getLastLoadedConstraint();
 		this.testPerformer
 				.setInvariantCheckMode(
 						aConstraint,
 						IOcl2CodeSettings.INVARIANT_CHECK_AFTER_SPECIAL_METHOD_INVOCATION);
 
-		this.testPerformer.addOCLFile("expressions/invariant04.ocl");
+		this.testPerformer.addOCLFile("constraints/invariant04.ocl");
 		aConstraint = this.testPerformer.getLastLoadedConstraint();
 		this.testPerformer
 				.setInvariantCheckMode(
@@ -177,98 +177,98 @@ public class CreateAspectCode {
 		
 		/* invariant05.ocl can be found below. */
 
-		this.testPerformer.addOCLFile("expressions/invariant06.ocl");
+		this.testPerformer.addOCLFile("constraints/invariant06.ocl");
 		aConstraint = this.testPerformer.getLastLoadedConstraint();
 		this.testPerformer
 				.setInvariantCheckMode(
 						aConstraint,
 						IOcl2CodeSettings.INVARIANT_CHECK_AFTER_SPECIAL_METHOD_INVOCATION);
 
-		this.testPerformer.addOCLFile("expressions/invariant07.ocl");
+		this.testPerformer.addOCLFile("constraints/invariant07.ocl");
 		aConstraint = this.testPerformer.getLastLoadedConstraint();
 		this.testPerformer
 				.setInvariantCheckMode(
 						aConstraint,
 						IOcl2CodeSettings.INVARIANT_CHECK_AFTER_SPECIAL_METHOD_INVOCATION);
 
-		this.testPerformer.addOCLFile("expressions/invariant08.ocl");
+		this.testPerformer.addOCLFile("constraints/invariant08.ocl");
 		aConstraint = this.testPerformer.getLastLoadedConstraint();
 		this.testPerformer
 				.setInvariantCheckMode(
 						aConstraint,
 						IOcl2CodeSettings.INVARIANT_CHECK_AFTER_SPECIAL_METHOD_INVOCATION);
 
-		this.testPerformer.addOCLFile("expressions/invariant09.ocl");
+		this.testPerformer.addOCLFile("constraints/invariant09.ocl");
 		aConstraint = this.testPerformer.getLastLoadedConstraint();
 		this.testPerformer
 				.setInvariantCheckMode(
 						aConstraint,
 						IOcl2CodeSettings.INVARIANT_CHECK_AFTER_SPECIAL_METHOD_INVOCATION);
 
-		this.testPerformer.addOCLFile("expressions/invariant10.ocl");
+		this.testPerformer.addOCLFile("constraints/invariant10.ocl");
 		aConstraint = this.testPerformer.getLastLoadedConstraint();
 		this.testPerformer
 				.setInvariantCheckMode(
 						aConstraint,
 						IOcl2CodeSettings.INVARIANT_CHECK_AFTER_SPECIAL_METHOD_INVOCATION);
 
-		this.testPerformer.addOCLFile("expressions/invariant11.ocl");
+		this.testPerformer.addOCLFile("constraints/invariant11.ocl");
 		aConstraint = this.testPerformer.getLastLoadedConstraint();
 		this.testPerformer
 				.setInvariantCheckMode(
 						aConstraint,
 						IOcl2CodeSettings.INVARIANT_CHECK_AFTER_SPECIAL_METHOD_INVOCATION);
 
-		this.testPerformer.addOCLFile("expressions/invariant12.ocl");
+		this.testPerformer.addOCLFile("constraints/invariant12.ocl");
 		aConstraint = this.testPerformer.getLastLoadedConstraint();
 		this.testPerformer
 				.setInvariantCheckMode(
 						aConstraint,
 						IOcl2CodeSettings.INVARIANT_CHECK_AFTER_SPECIAL_METHOD_INVOCATION);
 
-		this.testPerformer.addOCLFile("expressions/invariant14.ocl");
+		this.testPerformer.addOCLFile("constraints/invariant14.ocl");
 		aConstraint = this.testPerformer.getLastLoadedConstraint();
 		this.testPerformer
 				.setInvariantCheckMode(
 						aConstraint,
 						IOcl2CodeSettings.INVARIANT_CHECK_AFTER_SPECIAL_METHOD_INVOCATION);
 
-		this.testPerformer.addOCLFile("expressions/invariant15.ocl");
+		this.testPerformer.addOCLFile("constraints/invariant15.ocl");
 		aConstraint = this.testPerformer.getLastLoadedConstraint();
 		this.testPerformer
 				.setInvariantCheckMode(
 						aConstraint,
 						IOcl2CodeSettings.INVARIANT_CHECK_AFTER_SPECIAL_METHOD_INVOCATION);
 
-		this.testPerformer.addOCLFile("expressions/invariant16.ocl");
+		this.testPerformer.addOCLFile("constraints/invariant16.ocl");
 		aConstraint = this.testPerformer.getLastLoadedConstraint();
 		this.testPerformer
 				.setInvariantCheckMode(
 						aConstraint,
 						IOcl2CodeSettings.INVARIANT_CHECK_AFTER_SPECIAL_METHOD_INVOCATION);
 
-		this.testPerformer.addOCLFile("expressions/invariant17.ocl");
+		this.testPerformer.addOCLFile("constraints/invariant17.ocl");
 		aConstraint = this.testPerformer.getLastLoadedConstraint();
 		this.testPerformer
 				.setInvariantCheckMode(
 						aConstraint,
 						IOcl2CodeSettings.INVARIANT_CHECK_AFTER_SPECIAL_METHOD_INVOCATION);
 
-		this.testPerformer.addOCLFile("expressions/invariant18.ocl");
+		this.testPerformer.addOCLFile("constraints/invariant18.ocl");
 		aConstraint = this.testPerformer.getLastLoadedConstraint();
 		this.testPerformer
 				.setInvariantCheckMode(
 						aConstraint,
 						IOcl2CodeSettings.INVARIANT_CHECK_AFTER_SPECIAL_METHOD_INVOCATION);
 		
-		this.testPerformer.addOCLFile("expressions/invariant05.ocl");
+		this.testPerformer.addOCLFile("constraints/invariant05.ocl");
 		aConstraint = this.testPerformer.getLastLoadedConstraint();
 		this.testPerformer
 				.setInvariantCheckMode(
 						aConstraint,
 						IOcl2CodeSettings.INVARIANT_CHECK_AFTER_SPECIAL_METHOD_INVOCATION);
 
-		this.testPerformer.addOCLFile("expressions/invariant13.ocl");
+		this.testPerformer.addOCLFile("constraints/invariant13.ocl");
 		aConstraint = this.testPerformer.getLastLoadedConstraint();
 		this.testPerformer
 				.setInvariantCheckMode(
@@ -287,17 +287,17 @@ public class CreateAspectCode {
 
 		Constraint aConstraint;
 
-		this.testPerformer.addOCLFile("expressions/post01.ocl");
-		this.testPerformer.addOCLFile("expressions/post02.ocl");
-		this.testPerformer.addOCLFile("expressions/post03.ocl");
-		this.testPerformer.addOCLFile("expressions/post04.ocl");
-		this.testPerformer.addOCLFile("expressions/post05.ocl");
-		this.testPerformer.addOCLFile("expressions/post06.ocl");
-		this.testPerformer.addOCLFile("expressions/post07.ocl");
-		this.testPerformer.addOCLFile("expressions/post08.ocl");
-		this.testPerformer.addOCLFile("expressions/post09.ocl");
+		this.testPerformer.addOCLFile("constraints/post01.ocl");
+		this.testPerformer.addOCLFile("constraints/post02.ocl");
+		this.testPerformer.addOCLFile("constraints/post03.ocl");
+		this.testPerformer.addOCLFile("constraints/post04.ocl");
+		this.testPerformer.addOCLFile("constraints/post05.ocl");
+		this.testPerformer.addOCLFile("constraints/post06.ocl");
+		this.testPerformer.addOCLFile("constraints/post07.ocl");
+		this.testPerformer.addOCLFile("constraints/post08.ocl");
+		this.testPerformer.addOCLFile("constraints/post09.ocl");
 
-		this.testPerformer.addOCLFile("expressions/post10.ocl");
+		this.testPerformer.addOCLFile("constraints/post10.ocl");
 		aConstraint = this.testPerformer.getLastLoadedConstraint();
 		this.testPerformer.disableInheritance(aConstraint);
 
@@ -305,7 +305,7 @@ public class CreateAspectCode {
 		 * Do not load post11.ocl because the Constraint can't be tested without
 		 * manual implementation of generated code.
 		 */
-		this.testPerformer.addOCLFile("expressions/post12.ocl");
+		this.testPerformer.addOCLFile("constraints/post12.ocl");
 	}
 
 	/**
@@ -319,15 +319,15 @@ public class CreateAspectCode {
 
 		Constraint aConstraint;
 
-		this.testPerformer.addOCLFile("expressions/pre01.ocl");
-		this.testPerformer.addOCLFile("expressions/pre02.ocl");
-		this.testPerformer.addOCLFile("expressions/pre03.ocl");
-		this.testPerformer.addOCLFile("expressions/pre04.ocl");
+		this.testPerformer.addOCLFile("constraints/pre01.ocl");
+		this.testPerformer.addOCLFile("constraints/pre02.ocl");
+		this.testPerformer.addOCLFile("constraints/pre03.ocl");
+		this.testPerformer.addOCLFile("constraints/pre04.ocl");
 
-		this.testPerformer.addOCLFile("expressions/pre05.ocl");
+		this.testPerformer.addOCLFile("constraints/pre05.ocl");
 		aConstraint = this.testPerformer.getLastLoadedConstraint();
 		this.testPerformer.disableInheritance(aConstraint);
 
-		this.testPerformer.addOCLFile("expressions/pre06.ocl");
+		this.testPerformer.addOCLFile("constraints/pre06.ocl");
 	}
 }

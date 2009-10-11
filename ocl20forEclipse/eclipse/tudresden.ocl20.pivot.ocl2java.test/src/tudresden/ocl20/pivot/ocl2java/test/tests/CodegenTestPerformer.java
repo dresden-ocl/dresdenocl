@@ -65,7 +65,7 @@ public final class CodegenTestPerformer {
 	private static final String MODEL_FILE_NAME = "model/royalsandloyals.uml";
 
 	/** The name of the bundle for the transformed code. */
-	private static final String OUTPUT_BUNDLE = "tudresden.ocl20.pivot.examples.royalandloyal.constraints";
+	private static final String OUTPUT_BUNDLE = "tudresden.ocl20.pivot.examples.royalandloyal.ocl22javacode";
 
 	/** The only instance of {@link CodegenTestPerformer}. */
 	private static CodegenTestPerformer myInstance;

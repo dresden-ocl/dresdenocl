@@ -1,1 +1,1 @@
-((Object) ((new Float(1.175) * java.lang.Math.abs(-(new Float(8.9)))) - new Integer(10))).equals(new Float(0.4574995))
+((Object) java.lang.Math.round(((new Float(1.175) * java.lang.Math.abs(-(new Float(8.9)))) - new Integer(10)))).equals(java.lang.Math.round(new Float(0.4574995)))
