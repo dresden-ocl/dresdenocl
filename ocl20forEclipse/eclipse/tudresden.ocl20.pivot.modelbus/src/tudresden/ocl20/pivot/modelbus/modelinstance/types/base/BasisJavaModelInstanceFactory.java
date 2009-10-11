@@ -759,10 +759,18 @@ public class BasisJavaModelInstanceFactory implements IModelInstanceFactory {
 
 		Collection<IModelInstanceElement> result;
 
-		if (collection instanceof Set<?>) {
-			result = new HashSet<IModelInstanceElement>();
+		if (collection instanceof Set<?> && collection instanceof List<?>) {
+			result = new UniqueEList<IModelInstanceElement>();
 		}
 
+		else if (collection instanceof UniqueEList<?>){
+			result = new UniqueEList<IModelInstanceElement>();
+		} 
+		
+		else if (collection instanceof Set<?>) {
+			result = new HashSet<IModelInstanceElement>();
+		}
+		
 		else {
 			result = new ArrayList<IModelInstanceElement>();
 		}
