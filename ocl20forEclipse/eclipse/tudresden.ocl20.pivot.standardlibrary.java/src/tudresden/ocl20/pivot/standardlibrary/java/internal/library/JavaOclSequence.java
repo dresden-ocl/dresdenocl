@@ -306,7 +306,7 @@ public class JavaOclSequence<T extends OclAny> extends
 
 		int intLower =
 				((IModelInstanceInteger) lower.getModelInstanceElement()).getLong()
-						.intValue();
+						.intValue() - 1;
 		int intUpper =
 				((IModelInstanceInteger) upper.getModelInstanceElement()).getLong()
 						.intValue();

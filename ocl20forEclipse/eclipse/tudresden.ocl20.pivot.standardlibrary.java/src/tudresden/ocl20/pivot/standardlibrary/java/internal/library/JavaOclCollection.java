@@ -262,7 +262,6 @@ public abstract class JavaOclCollection<T extends OclAny> extends
 	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection#includes
 	 * (java.lang.Object)
 	 */
-	@SuppressWarnings("unchecked")
 	public OclBoolean includes(T that) {
 
 		OclBoolean result;
@@ -274,11 +273,10 @@ public abstract class JavaOclCollection<T extends OclAny> extends
 
 		boolResult = false;
 
+		IModelInstanceElement imiThat = that.getModelInstanceElement();
+
 		for (IModelInstanceElement anElement : imiCollection.getCollection()) {
-			T oclElement =
-					(T) JavaStandardLibraryFactory.INSTANCE.createOclAny(anElement);
-			if (!oclElement.oclIsUndefined().isTrue()
-					&& oclElement.isEqualTo(that).isTrue()) {
+			if (!anElement.isUndefined() && anElement.equals(imiThat)) {
 				boolResult = true;
 				break;
 			}
@@ -311,7 +309,8 @@ public abstract class JavaOclCollection<T extends OclAny> extends
 		 * Check if all elements of anAdaptedCollection are contained in this
 		 * collection.
 		 */
-		for (IModelInstanceElement anElement : imiCollection.getCollection()) {
+		for (IModelInstanceElement anElement : ((IModelInstanceCollection<IModelInstanceElement>) that
+				.getModelInstanceElement()).getCollection()) {
 
 			T oclElement =
 					(T) JavaStandardLibraryFactory.INSTANCE.createOclAny(anElement);
@@ -481,9 +480,9 @@ public abstract class JavaOclCollection<T extends OclAny> extends
 
 		return result;
 	}
-	
+
 	public OclIterator<T> getIterator() {
-	
+
 		return new JavaOclIterator<T>(this);
 	}
 }

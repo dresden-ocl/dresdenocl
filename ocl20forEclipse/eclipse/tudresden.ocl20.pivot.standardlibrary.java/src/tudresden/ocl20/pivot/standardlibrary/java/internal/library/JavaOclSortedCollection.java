@@ -153,7 +153,8 @@ public abstract class JavaOclSortedCollection<T extends OclAny> extends
 
 		intResult =
 				((List<IModelInstanceElement>) imiCollection.getCollection())
-						.indexOf(anObject) + 1;
+						.indexOf(anObject.getModelInstanceElement()) + 1;
+		// FIXME Michael: -1 -> not found? -> invalid?
 
 		IModelInstanceInteger imiResult =
 				BasisJavaModelInstanceFactory.createModelInstanceInteger(new Long(
