@@ -552,6 +552,22 @@ public class JavaModelInstanceObject extends AbstractModelInstanceObject
 		return result;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	public String toString() {
+
+		String result;
+
+		result = this.getClass().getSimpleName();
+		result += "[";
+		result += this.myAdaptedObject.toString();
+		result += "]";
+
+		return result;
+	}
+
 	/**
 	 * <p>
 	 * A helper method that tries to copy the adapted object using the method
