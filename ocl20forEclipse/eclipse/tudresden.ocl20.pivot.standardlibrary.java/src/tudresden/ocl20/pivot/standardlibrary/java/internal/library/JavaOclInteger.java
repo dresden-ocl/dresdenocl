@@ -61,12 +61,14 @@ public class JavaOclInteger extends JavaOclReal implements OclInteger {
 		super(imiInteger);
 		this.imiInteger = imiInteger;
 	}
-	
+
 	public JavaOclInteger(String undefinedReason) {
+
 		super(undefinedReason);
 	}
-	
+
 	public JavaOclInteger(Throwable invalidReason) {
+
 		super(invalidReason);
 	}
 
@@ -291,4 +293,32 @@ public class JavaOclInteger extends JavaOclReal implements OclInteger {
 		return result;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclAny
+	 * #toString()
+	 */
+	public String toString() {
+
+		StringBuilder result = new StringBuilder();
+
+		result.append(this.getClass().getSimpleName());
+		result.append("[");
+
+		if (this.oclIsUndefined().isTrue()) {
+			result.append("undefined: " + this.undefinedreason);
+		}
+
+		if (this.oclIsInvalid().isTrue()) {
+			result.append("invalid: " + this.undefinedreason);
+		}
+
+		else {
+			result.append((this.imiInteger.getLong()).toString());
+		}
+
+		result.append("]");
+
+		return result.toString();
+	}
 }

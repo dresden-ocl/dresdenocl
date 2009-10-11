@@ -193,7 +193,7 @@ public class JavaOclBoolean extends JavaOclLibraryObject implements OclBoolean {
 	public boolean isTrue() {
 
 		checkUndefinedAndInvalid(this);
-		
+
 		return imiBoolean.getBoolean();
 	}
 
@@ -312,4 +312,33 @@ public class JavaOclBoolean extends JavaOclLibraryObject implements OclBoolean {
 		return result;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	public String toString() {
+
+		String result;
+
+		result = this.getClass().getSimpleName();
+		result += "[";
+
+		if (this.oclIsUndefined().isTrue()) {
+			result += "undefined: ";
+			result += this.getUndefinedreason();
+		}
+
+		else if (this.oclIsInvalid().isTrue()) {
+			result += "invalid: ";
+			result += this.getInvalidReason().getMessage();
+		}
+
+		else {
+			result += this.imiBoolean.getBoolean().toString();
+		}
+
+		result += "]";
+
+		return result;
+	}
 }

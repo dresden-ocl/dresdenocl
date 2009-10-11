@@ -446,16 +446,21 @@ public class JavaOclReal extends JavaOclLibraryObject implements OclReal,
 		StringBuilder result = new StringBuilder();
 
 		result.append(this.getClass().getSimpleName());
-		result.append("(");
+		result.append("[");
 
 		if (this.oclIsUndefined().isTrue()) {
-			result.append(this.undefinedreason);
+			result.append("undefined: " + this.undefinedreason);
+		}
+
+		if (this.oclIsInvalid().isTrue()) {
+			result.append("invalid: " + this.undefinedreason);
 		}
 
 		else {
 			result.append((imiReal.getDouble()).toString());
 		}
-		result.append(")");
+
+		result.append("]");
 
 		return result.toString();
 	}

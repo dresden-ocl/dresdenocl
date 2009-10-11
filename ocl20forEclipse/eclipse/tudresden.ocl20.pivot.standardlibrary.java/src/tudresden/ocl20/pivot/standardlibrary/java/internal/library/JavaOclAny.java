@@ -250,7 +250,7 @@ public abstract class JavaOclAny implements OclAny {
 	 */
 	public OclBoolean oclIsInvalid() {
 
-		return JavaOclBoolean.getInstance(false);
+		return JavaOclBoolean.getInstance(this.invalidReason != null);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -338,7 +338,7 @@ public abstract class JavaOclAny implements OclAny {
 
 		}
 	}
-	
+
 	/*
 	 * (non-Javadoc)
 	 * @see
@@ -371,8 +371,7 @@ public abstract class JavaOclAny implements OclAny {
 		/* try to invoke the operation */
 		try {
 			Method methodToInvoke =
-					findMethod(opName, thisClass, argClasses
-							.toArray(new Class[0]));
+					findMethod(opName, thisClass, argClasses.toArray(new Class[0]));
 
 			Object invocationResult = methodToInvoke.invoke(this, (Object[]) args);
 
@@ -525,6 +524,5 @@ public abstract class JavaOclAny implements OclAny {
 
 		return result;
 	}
-
 
 }
