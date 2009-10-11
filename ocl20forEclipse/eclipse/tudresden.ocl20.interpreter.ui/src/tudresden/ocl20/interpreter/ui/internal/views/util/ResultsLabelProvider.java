@@ -60,6 +60,10 @@ public class ResultsLabelProvider extends LabelProvider implements
 	private final static String ICON_RESULT_UNDEFINED =
 			"icons/result_undefined.gif";
 
+	/** Path to icon for undefined results. */
+	private final static String ICON_RESULT_INVALID =
+			"icons/result_invalid.gif";
+
 	/*
 	 * (non-Javadoc)
 	 * @see org.eclipse.jface.viewers.LabelProvider#getImage(java.lang.Object)
@@ -126,10 +130,17 @@ public class ResultsLabelProvider extends LabelProvider implements
 							anOclBoolean = (OclBoolean) aResult;
 
 							/* Check if the boolean is undefined. */
-							if (anOclBoolean.isOclUndefined().isTrue()) {
+							if (anOclBoolean.oclIsUndefined().isTrue()) {
 								result =
 										InterpreterUIPlugin.getImageDescriptor(
 												ICON_RESULT_UNDEFINED).createImage();
+							}
+
+							/* Else check if the boolean is invalid. */
+							else if (anOclBoolean.oclIsInvalid().isTrue()) {
+								result =
+										InterpreterUIPlugin.getImageDescriptor(
+												ICON_RESULT_INVALID).createImage();
 							}
 
 							/* Else check if the boolean is true. */

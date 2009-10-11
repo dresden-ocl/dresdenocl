@@ -39,10 +39,11 @@ import tudresden.ocl20.interpreter.IInterpretationResult;
 import tudresden.ocl20.interpreter.IOclInterpreter;
 import tudresden.ocl20.interpreter.ui.internal.msg.OclInterpreterUIMessages;
 import tudresden.ocl20.pivot.essentialocl.expressions.Variable;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot;
+import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.factory.IStandardLibraryFactory;
 import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
 import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.base.BasisJavaModelInstanceFactory;
 import tudresden.ocl20.pivot.pivotmodel.PrimitiveType;
 
 /**
@@ -68,7 +69,7 @@ public class AddVariableDialog extends Dialog implements SelectionListener {
 	 * Contains all {@link OclRoot} values that are selectable by the result
 	 * {@link Combo}.
 	 */
-	private List<OclRoot> myResultValues = new ArrayList<OclRoot>();
+	private List<OclAny> myResultValues = new ArrayList<OclAny>();
 
 	/**
 	 * The label and used to describe the <code>myResultCombo</code>.
@@ -77,7 +78,8 @@ public class AddVariableDialog extends Dialog implements SelectionListener {
 
 	/**
 	 * The {@link Combo} to select a {@link PrimitiveType} of that an instance
-	 * shall be added as a {@link Variable} to the {@link IInterpretationEnvironment}.
+	 * shall be added as a {@link Variable} to the
+	 * {@link IInterpretationEnvironment}.
 	 */
 	private Combo myTypeCombo;
 
@@ -238,7 +240,7 @@ public class AddVariableDialog extends Dialog implements SelectionListener {
 		IModelInstance modelInstance;
 
 		boolean success;
-		OclRoot result;
+		OclAny result;
 
 		modelInstance = this.myInterpreterView.getCurrentlySelectedModelInstance();
 
@@ -249,10 +251,10 @@ public class AddVariableDialog extends Dialog implements SelectionListener {
 		if (modelInstance != null) {
 
 			String value;
-			IStandardLibraryFactory slFactory;
+			IStandardLibraryFactory standardLibraryFactory;
 
 			value = this.myValueText.getText();
-			slFactory =
+			standardLibraryFactory =
 					this.myInterpreterView.getInterpreterForInstance(
 							this.myInterpreterView.getCurrentlySelectedModelInstance())
 							.getStandardLibraryFactory();
@@ -264,7 +266,11 @@ public class AddVariableDialog extends Dialog implements SelectionListener {
 
 				if (!value.equals("")) {
 					try {
-						result = slFactory.createOclInteger(Integer.parseInt(value));
+						result =
+								standardLibraryFactory
+										.createOclInteger(BasisJavaModelInstanceFactory
+												.createModelInstanceInteger(new Long(Integer
+														.parseInt(value))));
 					}
 
 					catch (NumberFormatException e) {
@@ -283,7 +289,7 @@ public class AddVariableDialog extends Dialog implements SelectionListener {
 			else if (this.myTypeCombo.getText().equals("String")) {
 
 				if (!value.equals("")) {
-					result = slFactory.createOclString(value);
+					result = standardLibraryFactory.createOclString(value);
 				}
 
 				else {
@@ -296,7 +302,8 @@ public class AddVariableDialog extends Dialog implements SelectionListener {
 
 				if (!value.equals("")) {
 					try {
-						result = slFactory.createOclReal(Float.parseFloat(value));
+						result =
+								standardLibraryFactory.createOclReal(Float.parseFloat(value));
 					} catch (NumberFormatException e) {
 						this.myInterpreterView
 								.showMessage(OclInterpreterUIMessages.InterpreterView_AddVariable_Error_NoRealValue
@@ -313,11 +320,11 @@ public class AddVariableDialog extends Dialog implements SelectionListener {
 			else if (this.myTypeCombo.getText().equals("Boolean")) {
 
 				if (value.toLowerCase().equals("true")) {
-					result = slFactory.createOclBoolean(true);
+					result = standardLibraryFactory.createOclBoolean(true);
 				}
 
 				else if (value.toLowerCase().equals("false")) {
-					result = slFactory.createOclBoolean(false);
+					result = standardLibraryFactory.createOclBoolean(false);
 				}
 
 				else {
@@ -331,8 +338,7 @@ public class AddVariableDialog extends Dialog implements SelectionListener {
 				if (this.myResultCombo.getSelectionIndex() >= 0) {
 					int index;
 					index = this.myResultCombo.getSelectionIndex();
-					result =
-							this.myResultValues.get(index);
+					result = this.myResultValues.get(index);
 				}
 
 				else {

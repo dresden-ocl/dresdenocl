@@ -106,7 +106,10 @@ public class InterpreterView extends ViewPart implements ISelectionListener,
 	/** The currently selected {@link IModelInstance}. */
 	private IModelInstance currentlySelectedModelInstance;
 
-	/** The currently selected {@link IModelInstanceElement}s that shall be interpreted. */
+	/**
+	 * The currently selected {@link IModelInstanceElement}s that shall be
+	 * interpreted.
+	 */
 	private Set<IModelInstanceElement> currentlySelectedModelInstanceElements =
 			new HashSet<IModelInstanceElement>();
 
@@ -435,7 +438,8 @@ public class InterpreterView extends ViewPart implements ISelectionListener,
 	/**
 	 * <p>
 	 * Clears the {@link IInterpretationResult} of this {@link InterpreterView}
-	 * for the currently selected {@link IModelInstanceElement}s and {@link Constraint}s.
+	 * for the currently selected {@link IModelInstanceElement}s and
+	 * {@link Constraint}s.
 	 * </p>
 	 */
 	public void clearResultsForSelection() {
@@ -613,7 +617,8 @@ public class InterpreterView extends ViewPart implements ISelectionListener,
 
 	/**
 	 * <p>
-	 * Adds a {@link IModelInstanceElement} to the current {@link IModelInstanceElement} selection.
+	 * Adds a {@link IModelInstanceElement} to the current
+	 * {@link IModelInstanceElement} selection.
 	 * </p>
 	 * 
 	 * @param modelObject
@@ -626,18 +631,18 @@ public class InterpreterView extends ViewPart implements ISelectionListener,
 
 	/**
 	 * <p>
-	 * Adds all {@link IModelInstanceElement} of a given {@link Type} to the actions that
-	 * need {@link IModelInstanceElement} selection.
+	 * Adds all {@link IModelInstanceElement} of a given {@link Type} to the
+	 * actions that need {@link IModelInstanceElement} selection.
 	 * </p>
 	 * 
 	 * @param type
-	 *          The {@link Type} whose {@link IModelInstanceElement}s shall be added.
+	 *          The {@link Type} whose {@link IModelInstanceElement}s shall be
+	 *          added.
 	 */
 	private void addModelObjectSelection(Type type) {
 
 		this.currentlySelectedModelInstanceElements
-				.addAll(this.currentlySelectedModelInstance.getObjectsOfType(type
-						.getQualifiedNameList()));
+				.addAll(this.currentlySelectedModelInstance.getAllInstances(type));
 	}
 
 	/**
@@ -653,8 +658,8 @@ public class InterpreterView extends ViewPart implements ISelectionListener,
 
 	/**
 	 * <p>
-	 * Clears the {@link IModelInstanceElement} selection for all actions which need
-	 * {@link IModelInstanceElement} selection.
+	 * Clears the {@link IModelInstanceElement} selection for all actions which
+	 * need {@link IModelInstanceElement} selection.
 	 * </p>
 	 */
 	private void clearModelObjectSelection() {

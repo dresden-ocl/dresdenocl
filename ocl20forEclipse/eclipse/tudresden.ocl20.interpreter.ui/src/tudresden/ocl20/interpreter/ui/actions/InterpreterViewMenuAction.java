@@ -250,12 +250,14 @@ public class InterpreterViewMenuAction extends Action implements IAction {
 
 	/**
 	 * <p>
-	 * Interpret selected {@link IModelInstanceElement}s and selected {@link Constraint} s.
+	 * Interpret selected {@link IModelInstanceElement}s and selected
+	 * {@link Constraint} s.
 	 * </p>
 	 * 
 	 * @param modelObjects
 	 *          The {@link IModelInstanceElement}s that shall be interpreted or
-	 *          <code>null</code> if all {@link IModelInstanceElement}s shall be used.
+	 *          <code>null</code> if all {@link IModelInstanceElement}s shall be
+	 *          used.
 	 * @param constraints
 	 *          The {@link Constraint}s that shall be interpreted or
 	 *          <code>null</code> if all {@link Constraint}s shall be used.
@@ -293,7 +295,8 @@ public class InterpreterViewMenuAction extends Action implements IAction {
 
 				else {
 					usedModelObjects =
-							new HashSet<IModelInstanceElement>(activeModelInstance.getObjects());
+							new HashSet<IModelInstanceElement>(activeModelInstance
+									.getAllModelInstanceObjects());
 				}
 
 				usedConstraints = null;
@@ -329,7 +332,7 @@ public class InterpreterViewMenuAction extends Action implements IAction {
 							 * Check if the model object is an instance of the constrained
 							 * type.
 							 */
-							if (aModelObject.isInstanceOf(constrainedType)) {
+							if (aModelObject.isKindOf(constrainedType)) {
 								this.myInterpreterView.addInterpretationResult(interpreter
 										.interpretConstraint(aConstraint, aModelObject));
 							}
@@ -349,7 +352,7 @@ public class InterpreterViewMenuAction extends Action implements IAction {
 							 * Check if the model object is an instance of the constrained
 							 * operation's type.
 							 */
-							if (aModelObject.isInstanceOf(operationsType)) {
+							if (aModelObject.isKindOf(operationsType)) {
 								this.myInterpreterView.addInterpretationResult(interpreter
 										.interpretConstraint(aConstraint, aModelObject));
 							}
@@ -430,7 +433,8 @@ public class InterpreterViewMenuAction extends Action implements IAction {
 				}
 
 				usedModelObjects =
-						new HashSet<IModelInstanceElement>(activeModelInstance.getObjects());
+						new HashSet<IModelInstanceElement>(activeModelInstance
+								.getAllModelInstanceObjects());
 
 				/* Iterate through the constraints and prepare them. */
 				for (Constraint aConstraint : usedConstraints) {
@@ -475,7 +479,7 @@ public class InterpreterViewMenuAction extends Action implements IAction {
 							/*
 							 * If the model object is an instance of the constrained element.
 							 */
-							if (aModelObject.isInstanceOf(type)) {
+							if (aModelObject.isKindOf(type)) {
 								interpreter.prepareConstraint(aConstraint, aModelObject);
 							}
 							// no else.
