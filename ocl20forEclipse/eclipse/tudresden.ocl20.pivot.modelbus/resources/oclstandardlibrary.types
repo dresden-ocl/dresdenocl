@@ -135,6 +135,14 @@
       </genericType>
       <ownedTypeParameter name="T"/>
     </ownedOperation>
+    <ownedOperation name="allInstances" static="true">
+      <genericType xsi:type="pivot:ComplexGenericType" unboundType="//@oclSet">
+        <typeArgument>
+          <genericType xsi:type="pivot:ParameterGenericType" typeParameter="//@oclAny/@ownedOperation.9/@ownedTypeParameter.0"/>
+        </typeArgument>
+      </genericType>
+      <ownedTypeParameter name="T"/>
+    </ownedOperation>
   </oclAny>
   <oclVoid name="OclVoid" superType="//@oclAny"/>
   <oclType name="OclType" superType="//@oclAny">
