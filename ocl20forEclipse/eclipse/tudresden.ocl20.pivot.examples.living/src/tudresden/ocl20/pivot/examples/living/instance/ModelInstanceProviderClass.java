@@ -29,7 +29,6 @@ import tudresden.ocl20.pivot.examples.living.Course;
 import tudresden.ocl20.pivot.examples.living.Flat;
 import tudresden.ocl20.pivot.examples.living.House;
 import tudresden.ocl20.pivot.examples.living.Student;
-import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance;
 
 /**
  * <p>
@@ -42,8 +41,6 @@ import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance;
 public class ModelInstanceProviderClass {
 
 	/**
-	 * FIXME Claas: Test interpretation of the provided instances when the interpreter has been refactored.
-	 * 
 	 * <p>
 	 * Returns a {@link List} of {@link Object}s that are part of the
 	 * {@link IModelInstance}.

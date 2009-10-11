@@ -18,8 +18,6 @@ with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
 package tudresden.ocl20.pivot.examples.living;
 
-import tudresden.ocl20.pivot.modelbus.IModel;
-
 /**
  * <p>
  * This {@link Class} can be used to load the Living example as a Java Model
