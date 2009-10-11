@@ -554,6 +554,22 @@ public class EcoreModelInstanceObject extends AbstractModelInstanceObject
 		return result;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	public String toString() {
+
+		String result;
+
+		result = this.getClass().getSimpleName();
+		result += "[";
+		result += this.myEObject.toString();
+		result += "]";
+
+		return result;
+	}
+
 	/**
 	 * <p>
 	 * A helper method that tries to copy the adapted object using the method
