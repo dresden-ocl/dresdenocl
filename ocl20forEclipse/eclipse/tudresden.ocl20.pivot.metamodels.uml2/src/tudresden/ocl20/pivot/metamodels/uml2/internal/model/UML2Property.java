@@ -7,6 +7,7 @@ import org.eclipse.uml2.uml.Element;
 import org.eclipse.uml2.uml.TypedElement;
 
 import tudresden.ocl20.pivot.metamodels.uml2.UML2MetamodelPlugin;
+import tudresden.ocl20.pivot.pivotmodel.PrimitiveType;
 import tudresden.ocl20.pivot.pivotmodel.Property;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 import tudresden.ocl20.pivot.pivotmodel.base.AbstractProperty;
@@ -91,7 +92,15 @@ public class UML2Property extends AbstractProperty implements Property {
 		result = null;
 		owner = this.dslProperty.getOwner();
 
-		if (owner instanceof TypedElement) {
+		/* PrimitiveTypes that are not adapted to primitive types in the IModel can have properties. */
+		if (owner instanceof org.eclipse.uml2.uml.PrimitiveType) {
+			org.eclipse.uml2.uml.PrimitiveType primitiveType;
+			primitiveType = (org.eclipse.uml2.uml.PrimitiveType) owner;
+			
+			result = UML2AdapterFactory.INSTANCE.createType(primitiveType);
+		}
+		
+		else if (owner instanceof TypedElement) {
 			TypedElement aTypedElement;
 
 			aTypedElement = (TypedElement) owner;
