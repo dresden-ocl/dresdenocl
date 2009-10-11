@@ -21,6 +21,7 @@ package tudresden.ocl20.pivot.ocl2java.types;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Set;
 
 /**
@@ -34,7 +35,7 @@ import java.util.Set;
  * 
  * @author Claas Wilke
  */
-public class OclOrderedSet<T> extends OclCollection<T> implements Set<T> {
+public class OclOrderedSet<T> extends OclCollection<T> implements Set<T>, List<T> {
 
 	/**
 	 * <p>
@@ -242,7 +243,7 @@ public class OclOrderedSet<T> extends OclCollection<T> implements Set<T> {
 	 *         <strong>Please pay attention that indexes in OCL starts with
 	 *         1.</strong>
 	 */
-	public int indexOf(T anObject) {
+	public int indexOf(Object anObject) {
 		int result;
 
 		result = ((List<T>) this.myCollection).indexOf(anObject) + 1;
@@ -393,6 +394,47 @@ public class OclOrderedSet<T> extends OclCollection<T> implements Set<T> {
 		}
 
 		return result;
+	}
+
+	public void add(int index, T element) {
+
+		throw new UnsupportedOperationException();
+		
+	}
+
+	public boolean addAll(int index, Collection<? extends T> c) {
+
+		throw new UnsupportedOperationException();
+	}
+
+	public int lastIndexOf(Object o) {
+
+		throw new UnsupportedOperationException();
+	}
+
+	public ListIterator<T> listIterator() {
+
+		throw new UnsupportedOperationException();
+	}
+
+	public ListIterator<T> listIterator(int index) {
+
+		throw new UnsupportedOperationException();
+	}
+
+	public T remove(int index) {
+
+		throw new UnsupportedOperationException();
+	}
+
+	public T set(int index, T element) {
+
+		throw new UnsupportedOperationException();
+	}
+
+	public List<T> subList(int fromIndex, int toIndex) {
+
+		throw new UnsupportedOperationException();
 	}
 
 }
