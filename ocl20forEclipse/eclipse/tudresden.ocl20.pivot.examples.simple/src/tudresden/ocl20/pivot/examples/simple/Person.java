@@ -60,4 +60,21 @@ public class Person {
 
 		this.name = name;
 	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	public String toString() {
+
+		String result;
+
+		result = this.getClass().getSimpleName();
+		result += "[";
+		result += "name = '" + name + "', ";
+		result += "age = " + age;
+		result += "]";
+
+		return result;
+	}
 }
