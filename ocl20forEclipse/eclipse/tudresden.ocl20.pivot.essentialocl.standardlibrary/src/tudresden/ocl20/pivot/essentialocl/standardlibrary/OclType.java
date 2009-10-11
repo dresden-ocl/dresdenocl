@@ -32,6 +32,9 @@
  */
 package tudresden.ocl20.pivot.essentialocl.standardlibrary;
 
+import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance;
+import tudresden.ocl20.pivot.pivotmodel.Operation;
+import tudresden.ocl20.pivot.pivotmodel.Property;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 
 /**
@@ -49,9 +52,42 @@ public interface OclType<T extends OclAny> extends OclAny {
 	 * @return the wrapped {@link Type} of the PivotModel
 	 */
 	Type getType();
-	
+
 	OclBoolean isEqualTo(OclType<OclAny> type2);
-	
+
 	OclBoolean isNotEqualTo(OclType<OclAny> type2);
 
+	/**
+	 * <p>
+	 * Returns the value of a given static {@link Property} defined on this
+	 * {@link OclType}.
+	 * </p>
+	 * 
+	 * @param property
+	 *          The static {@link Property} whose value shall be returned.
+	 * @param modelInstance
+	 *          The {@link IModelInstance} that shall be used to retrieve the
+	 *          {@link Property}'s value.
+	 * @return The value(as an {@link OclAny}) of the static {@link Property}.
+	 */
+	OclAny getStaticProperty(Property property, IModelInstance modelInstance);
+
+	/**
+	 * <p>
+	 * Tries to invoke a given static {@link Operation} of this {@link OclType}
+	 * and returns the invocation result.
+	 * </p>
+	 * 
+	 * @param operation
+	 *          The static {@link Operation} that shall be invoked.
+	 * @param oclAnyParameters
+	 *          The probably existing parameters of the {@link Operation} as an
+	 *          array of {@link OclAny}.
+	 * @param modelInstance
+	 *          The {@link IModelInstance} that shall be used to invoke the static
+	 *          {@link Operation}.
+	 * @return The result as an {@link OclAny}.
+	 */
+	OclAny invokeStaticOperation(Operation operation, OclAny[] oclAnyParameters,
+			IModelInstance modelInstance);
 }

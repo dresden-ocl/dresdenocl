@@ -199,12 +199,10 @@ public class EcoreModelInstance extends AbstractModelInstance implements
 	 * (non-Javadoc)
 	 * @see
 	 * tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance#getStaticProperty
-	 * (tudresden.ocl20.pivot.pivotmodel.Type,
-	 * tudresden.ocl20.pivot.pivotmodel.Property)
+	 * (tudresden.ocl20.pivot.pivotmodel.Property)
 	 */
-	public IModelInstanceElement getStaticProperty(Type sourceType,
-			Property property) throws PropertyAccessException,
-			PropertyNotFoundException {
+	public IModelInstanceElement getStaticProperty(Property property)
+			throws PropertyAccessException, PropertyNotFoundException {
 
 		String msg;
 		msg =

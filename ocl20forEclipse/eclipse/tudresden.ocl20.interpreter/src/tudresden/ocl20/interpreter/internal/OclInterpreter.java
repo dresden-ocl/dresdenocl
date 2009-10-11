@@ -35,7 +35,6 @@ import java.util.Collection;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.Map;
@@ -84,18 +83,14 @@ import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclIterator;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclModelInstanceObject;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclTuple;
+import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclType;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.factory.IStandardLibraryFactory;
 import tudresden.ocl20.pivot.essentialocl.types.BagType;
 import tudresden.ocl20.pivot.essentialocl.types.OrderedSetType;
 import tudresden.ocl20.pivot.essentialocl.types.SequenceType;
 import tudresden.ocl20.pivot.essentialocl.types.SetType;
 import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance;
-import tudresden.ocl20.pivot.modelbus.modelinstance.exception.OperationAccessException;
-import tudresden.ocl20.pivot.modelbus.modelinstance.exception.OperationNotFoundException;
-import tudresden.ocl20.pivot.modelbus.modelinstance.exception.PropertyAccessException;
-import tudresden.ocl20.pivot.modelbus.modelinstance.exception.PropertyNotFoundException;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
-import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceObject;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceString;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.base.BasisJavaModelInstanceFactory;
 import tudresden.ocl20.pivot.pivotmodel.Constraint;
@@ -1971,7 +1966,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 		OclAny result;
 
-		/* Eventually log the entry of this method. */
+		/* Probably log the entry of this method. */
 		if (LOGGER.isDebugEnabled()) {
 			String msg;
 
@@ -1985,8 +1980,8 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 		result = null;
 
-		// FIXME Michael: caching might be dangerous on model elements...
-		/* Eventually use a cached result. */
+		// TODO Michael: caching might be dangerous on model elements...
+		/* Probably use a cached result. */
 		if (isCachingEnabled
 				&& myEnvironment.getCachedResult(anOperationCallExp) != null) {
 			result = myEnvironment.getCachedResult(anOperationCallExp);
@@ -1994,191 +1989,104 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 		/* Else compute the result. */
 		else {
-			OclAny[] parameters;
 			OclAny source;
-
-			Constraint body;
-
+			Constraint definedOperationInOcl;
 			Operation referredOperation;
-			String opName;
 
-			ListIterator<OclExpression> argIterator;
-			List<Parameter> opParams;
-
-			parameters = new OclAny[anOperationCallExp.getArgument().size()];
+			source = null;
+			definedOperationInOcl = null;
 			referredOperation = anOperationCallExp.getReferredOperation();
 
 			/*
-			 * If the special operation atPre is invoked, the referred operation can
-			 * be null.
-			 */
-			if (referredOperation == null) {
-				opName = anOperationCallExp.getName();
-			}
-
-			/* Else get the referred operation's name. */
-			else {
-				opName = referredOperation.getName();
-			}
-
-			source = null;
-
-			body = null;
-
-			/*
-			 * Operations can be implemented by a body expression or a definition. Try
-			 * to get such an expression if it has been defined.
+			 * Operations can be defined in OCL (e.g., def, body). Try to get a
+			 * prepared definition in OCL.
 			 */
 			if (referredOperation != null) {
-				body =
+				definedOperationInOcl =
 						this.myEnvironment.getConstraint(referredOperation
 								.getQualifiedName());
 			}
 			// no else.
 
-			/*
-			 * If a body expression or definition has been defined, create a new local
-			 * interpreter.
-			 */
-			if (body != null) {
-				this.pushLocalEnvironment();
-			}
-			// no else.
-
-			/* Get the source type for static operations. */
+			/* Probably handle a static operation. */
 			if (referredOperation != null && referredOperation.isStatic()) {
 
-				parameters =
-						computeArguments(anOperationCallExp, body, referredOperation);
-				List<IModelInstanceElement> args =
-						new LinkedList<IModelInstanceElement>();
-				for (OclAny parameter : parameters) {
-					args.add(parameter.getModelInstanceElement());
+				/* Compute the source of the operation call. */
+				if (anOperationCallExp.getSource() == null) {
+
+					/*
+					 * TODO: This should not happen but the parser parses static
+					 * operation's source to null. Should be a TypeLiteralExp.
+					 */
+					source =
+							this.myStandardLibraryFactory.createOclType(anOperationCallExp
+									.getType());
 				}
 
-				try {
-
-					IModelInstanceElement imiResult =
-							myEnvironment.getModelInstance().invokeStaticOperation(
-									referredOperation, args);
-					result = myStandardLibraryFactory.createOclAny(imiResult);
-
-				} catch (OperationAccessException e) {
-					result =
-							myStandardLibraryFactory.createOclInvalid(anOperationCallExp
-									.getType(), e);
-				} catch (OperationNotFoundException e) {
-					result =
-							myStandardLibraryFactory.createOclInvalid(anOperationCallExp
-									.getType(), e);
+				else {
+					source = doSwitch((EObject) anOperationCallExp.getSource());
 				}
+
+				if (source instanceof OclType<?>) {
+					OclType<?> sourceType;
+
+					OclAny[] oclAnyParameters;
+
+					sourceType = (OclType<?>) source;
+					oclAnyParameters =
+							computeParameters(anOperationCallExp, definedOperationInOcl);
+
+					result =
+							sourceType.invokeStaticOperation(referredOperation,
+									oclAnyParameters, this.myEnvironment.getModelInstance());
+				}
+
+				/* Else result in invalid. */
+				else {
+					result =
+							this.myStandardLibraryFactory.createOclInvalid(referredOperation
+									.getType(), new IllegalArgumentException(
+									"Cannot invoked the static operation " + referredOperation
+											+ " on a source that is no OclType."));
+				}
+				// end else.
 			}
 
-			/* Compute the source type for non-static operations. */
+			/* Else handle a non static operation. */
 			else {
+				OclAny[] oclAnyParameters;
+				oclAnyParameters =
+						computeParameters(anOperationCallExp, definedOperationInOcl);
+
+				/* Compute the source of the operation call. */
 				source = doSwitch((EObject) anOperationCallExp.getSource());
 
-				parameters =
-						computeArguments(anOperationCallExp, body, referredOperation);
-
-				/* Handle special operations. */
-				// FIXME: in own operation
-				/* The operation atPre has to store the atPre value. */
-				if (opName.equals("atPre")) {
-
-					if (this.isPreparation) {
-						String msg;
-
-						this.myEnvironment.savePostconditionValue(anOperationCallExp,
-								source);
-
-						msg = "@Pre is not available during constraint preparation.";
-						result =
-								myStandardLibraryFactory.createOclUndefined(anOperationCallExp
-										.getType(), msg);
-					}
-
-					else {
-						result =
-								this.myEnvironment.getPostconditionValue(anOperationCallExp);
-
-						if (result == null) {
-							String msg;
-							msg =
-									"@Pre value of " + anOperationCallExp
-											+ " has not been found.";
-
-							result =
-									myStandardLibraryFactory.createOclUndefined(
-											anOperationCallExp.getType(), msg);
-						}
-					}
-				}
-
 				/*
-				 * The operation oclIsNew has to store some values. To compute all new
-				 * values.
+				 * Probably get the result from a special operation like @pre or
+				 * oclIsNew.
 				 */
-				else if (opName.equals("oclIsNew")) {
-
-					if (this.isPreparation) {
-						String msg;
-
-						this.myEnvironment.savePostconditionValue(anOperationCallExp,
-								myStandardLibraryFactory.createOclBoolean(source
-										.getInvalidReason() == null));
-
-						msg = "oclIsNew() is not available during preparation.";
-						result =
-								myStandardLibraryFactory.createOclUndefined(anOperationCallExp
-										.getType(), msg);
-					}
-
-					else {
-						result =
-								this.myEnvironment.getPostconditionValue(anOperationCallExp);
-					}
-				}
-
-				/*
-				 * If allInstances for some reason is not possible for standard library
-				 * null is returned. In that case modelInstance.getObjectsOfKind() is
-				 * used.
-				 */
-				// FIXME Michael: this is a static method - handle before
-				else if (opName.equals("allInstances")) {
-
-					Type type = anOperationCallExp.getSourceType();
-
-					Set<IModelInstanceObject> imiResult =
-							this.myEnvironment.getModelInstance().getAllInstances(type);
-
-					result = myStandardLibraryFactory.createOclSet(imiResult);
-				}
+				result = this.handleSpecialOperations(anOperationCallExp, source);
 
 				/* The standard case. Invoke the operation and compute the result. */
-				else {
+				if (result == null) {
 
-					if (body == null) {
+					/* Check if a operation definition has be prepared. */
+					if (definedOperationInOcl != null) {
 
-						if (source.oclIsUndefined().isTrue()) {
-							result =
-									myStandardLibraryFactory
-											.createOclUndefined(anOperationCallExp.getType(), source
-													.getUndefinedreason());
-						}
+						/* Interpret the defined operation in its own environment. */
+						this.pushLocalEnvironment();
+						result =
+								this.interpretConstraint(definedOperationInOcl,
+										this.myCurrentModelObject).getResult();
+						this.popLocalEnvironment();
 
-						else {
-							result = source.invokeOperation(referredOperation, parameters);
-						}
 					}
 
+					/* Else invoke the operation. */
 					else {
-						result =
-								this.interpretConstraint(body, this.myCurrentModelObject)
-										.getResult();
 
-						this.popLocalEnvironment();
+						result =
+								source.invokeOperation(referredOperation, oclAnyParameters);
 					}
 				}
 				// end else.
@@ -2193,17 +2101,17 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 				}
 
 			}
-			// end else.
+			// end else (no static operation).
 
+			/* Probably cache the result. */
+			if (this.isCachingEnabled && !isModelAccessNeeded) {
+				this.myEnvironment.cacheResult(anOperationCallExp, result);
+			}
+			// no else.
 		}
+		// end else (no cached result). */
 
-		/* Eventually cache the result. */
-		if (this.isCachingEnabled && !isModelAccessNeeded) {
-			this.myEnvironment.cacheResult(anOperationCallExp, result);
-		}
-		// no else.
-
-		/* Eventually log the exit from this method. */
+		/* Probably log the exit from this method. */
 		if (LOGGER.isDebugEnabled()) {
 			String log;
 
@@ -2213,57 +2121,6 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			LOGGER.debug(log);
 		}
 		// no else.
-
-		return result;
-	}
-
-	/**
-	 * TODO Claas: Add Java-Doc
-	 * 
-	 * @param anOperationCallExp
-	 * @param parameters
-	 * @param body
-	 * @param referredOperation
-	 */
-	private OclAny[] computeArguments(OperationCallExp anOperationCallExp,
-			Constraint body, Operation referredOperation) {
-
-		OclAny[] result = new OclAny[anOperationCallExp.getArgument().size()];
-
-		ListIterator<OclExpression> argIterator;
-		List<Parameter> opParams;
-		argIterator = anOperationCallExp.getArgument().listIterator();
-
-		if (referredOperation != null) {
-			opParams = referredOperation.getInputParameter();
-		}
-
-		else {
-			opParams = null;
-		}
-
-		/* Iterate through the arguments and compute the parameter values. */
-		while (argIterator.hasNext()) {
-
-			OclExpression exp;
-			OclAny param;
-			String parameterName;
-
-			exp = argIterator.next();
-			param = doSwitch((EObject) exp);
-			result[argIterator.previousIndex()] = param;
-
-			parameterName = opParams.get(argIterator.previousIndex()).getName();
-
-			/*
-			 * Eventually add the variables to the local interpreter if a body
-			 * expression or definition has been defined.
-			 */
-			if (body != null) {
-				this.setEnviromentVariable(parameterName, param);
-			}
-			// no else.
-		}
 
 		return result;
 	}
@@ -2312,53 +2169,50 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			/* Else compute the result. */
 			if (result == null) {
 
+				OclAny source;
+
 				/* Handle static properties. */
 				if (referredProperty.isStatic()) {
 
-					try {
+					/* Interpret the source of the property call. */
+					if (propertyCallExp.getSource() == null) {
+
 						/*
-						 * Static properties do not have an owner. The type must be
-						 * annotated explicitly. TODO: This probably seems to be a bug in
-						 * the Parser.
+						 * TODO This should not happen. Anyway the parser parses the source
+						 * of static properties to null instead of a TypeLiteralExp.
 						 */
-						Type sourceType = propertyCallExp.getSourceType();
-
-						IModelInstanceElement imiElement =
-								this.myEnvironment.getModelInstance().getStaticProperty(
-										sourceType, referredProperty);
-
-						result = myStandardLibraryFactory.createOclAny(imiElement);
-
+						source = this.myStandardLibraryFactory.createOclType((Type) referredProperty
+								.getOwner());
 					}
 
-					/* Probably result in invalid. */
-					catch (PropertyNotFoundException e) {
-						if (LOGGER.isInfoEnabled()) {
-							LOGGER.warn(e);
-						}
-						// no else.
+					else {
+						source = doSwitch((EObject) propertyCallExp.getSource());
+					}
+
+					/* Check if the source is an OclType. */
+					if (source instanceof OclType<?>) {
+						OclType<?> sourceType;
+						sourceType = (OclType<?>) source;
 
 						result =
-								myStandardLibraryFactory.createOclInvalid(propertyCallExp
-										.getType(), e);
+								sourceType.getStaticProperty(referredProperty,
+										this.myEnvironment.getModelInstance());
 					}
 
-					catch (PropertyAccessException e) {
-						if (LOGGER.isInfoEnabled()) {
-							LOGGER.warn(e);
-						}
-						// no else.
-
+					else {
 						result =
-								myStandardLibraryFactory.createOclInvalid(propertyCallExp
-										.getType(), e);
+								this.myStandardLibraryFactory.createOclInvalid(propertyCallExp
+										.getType(), new IllegalArgumentException(
+										"Cannot invoke the static property " + referredProperty
+												+ " on a non static source."));
 					}
-					// end catch.
 				}
 
-				/* Else interpret the sourceExp. */
+				/* Else try to get a non static property. */
 				else {
-					OclAny source = doSwitch((EObject) propertyCallExp.getSource());
+
+					/* Interpret the source of the property call. */
+					source = doSwitch((EObject) propertyCallExp.getSource());
 
 					/* Check if the source is a tuple. */
 					if (source instanceof OclTuple) {
@@ -2979,6 +2833,65 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			index++;
 		}
 		// end for.
+	}
+
+	/**
+	 * <p>
+	 * Computes the parameters for a given {@link OperationCallExp}.
+	 * </p>
+	 * 
+	 * @param anOperationCallExp
+	 *          The {@link OperationCallExp} whose parameters shall be computed.
+	 * @param oclDefinedOperation
+	 *          A probably existing {@link Constraint} definition of the referred
+	 *          {@link Operation}.
+	 */
+	private OclAny[] computeParameters(OperationCallExp anOperationCallExp,
+			Constraint oclDefinedOperation) {
+
+		OclAny[] result;
+		Operation referredOperation;
+
+		ListIterator<OclExpression> argIterator;
+		List<Parameter> opParams;
+
+		result = new OclAny[anOperationCallExp.getArgument().size()];
+		referredOperation = anOperationCallExp.getReferredOperation();
+
+		argIterator = anOperationCallExp.getArgument().listIterator();
+
+		if (referredOperation != null) {
+			opParams = referredOperation.getInputParameter();
+		}
+
+		else {
+			opParams = null;
+		}
+
+		/* Iterate through the arguments and compute the parameter values. */
+		while (argIterator.hasNext()) {
+
+			OclExpression exp;
+			OclAny param;
+			String parameterName;
+
+			exp = argIterator.next();
+			param = doSwitch((EObject) exp);
+			result[argIterator.previousIndex()] = param;
+
+			parameterName = opParams.get(argIterator.previousIndex()).getName();
+
+			/*
+			 * Probably add the variables to the local interpreter if a body
+			 * expression or definition has been defined.
+			 */
+			if (oclDefinedOperation != null) {
+				this.setEnviromentVariable(parameterName, param);
+			}
+			// no else.
+		}
+
+		return result;
 	}
 
 	/**
@@ -4099,6 +4012,80 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 					myStandardLibraryFactory.createOclInvalid(resultType,
 							new IllegalArgumentException(msg));
 		}
+
+		return result;
+	}
+
+	/**
+	 * <p>
+	 * A helper method that tries to retrieve the result for an
+	 * {@link OperationCallExp} by evaluation a special operation like
+	 * <code>@pre()</code> or <code>oclIsNew()</code>.
+	 * </p>
+	 * 
+	 * @param anOperationCallExp
+	 *          The {@link OperationCallExp} representing the {@link Operation} to
+	 *          be called.
+	 * @param source
+	 *          The already interpreted source of the {@link OperationCallExp}.
+	 * @return The result of a special {@link Operation} or <code>null</code>.
+	 */
+	private OclAny handleSpecialOperations(OperationCallExp anOperationCallExp,
+			OclAny source) {
+
+		OclAny result;
+		result = null;
+
+		/* Probably handle the operation atPre. */
+		if (anOperationCallExp.getName().equals("atPre")) {
+
+			if (this.isPreparation) {
+				String msg;
+
+				this.myEnvironment.savePostconditionValue(anOperationCallExp, source);
+
+				msg = "@Pre is not available during constraint preparation.";
+				result =
+						myStandardLibraryFactory.createOclUndefined(anOperationCallExp
+								.getType(), msg);
+			}
+
+			else {
+				result = this.myEnvironment.getPostconditionValue(anOperationCallExp);
+
+				if (result == null) {
+					String msg;
+					msg = "@Pre value of " + anOperationCallExp + " has not been found.";
+
+					result =
+							myStandardLibraryFactory.createOclUndefined(anOperationCallExp
+									.getType(), msg);
+				}
+			}
+		}
+
+		/* Probably handle the operation oclIsNew. */
+		else if (anOperationCallExp.getReferredOperation().getName().equals(
+				"oclIsNew")) {
+
+			if (this.isPreparation) {
+				String msg;
+
+				this.myEnvironment.savePostconditionValue(anOperationCallExp,
+						myStandardLibraryFactory
+								.createOclBoolean(source.getInvalidReason() == null));
+
+				msg = "oclIsNew() is not available during preparation.";
+				result =
+						myStandardLibraryFactory.createOclUndefined(anOperationCallExp
+								.getType(), msg);
+			}
+
+			else {
+				result = this.myEnvironment.getPostconditionValue(anOperationCallExp);
+			}
+		}
+		// no else.
 
 		return result;
 	}

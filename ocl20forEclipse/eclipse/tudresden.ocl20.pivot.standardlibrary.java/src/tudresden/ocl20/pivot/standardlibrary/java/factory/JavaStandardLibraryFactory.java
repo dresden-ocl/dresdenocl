@@ -48,6 +48,11 @@ import tudresden.ocl20.pivot.essentialocl.types.CollectionType;
 import tudresden.ocl20.pivot.essentialocl.types.OrderedSetType;
 import tudresden.ocl20.pivot.essentialocl.types.SequenceType;
 import tudresden.ocl20.pivot.essentialocl.types.SetType;
+import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance;
+import tudresden.ocl20.pivot.modelbus.modelinstance.exception.OperationAccessException;
+import tudresden.ocl20.pivot.modelbus.modelinstance.exception.OperationNotFoundException;
+import tudresden.ocl20.pivot.modelbus.modelinstance.exception.PropertyAccessException;
+import tudresden.ocl20.pivot.modelbus.modelinstance.exception.PropertyNotFoundException;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceBoolean;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceCollection;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
@@ -58,12 +63,14 @@ import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceReal;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceString;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceTuple;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.base.BasisJavaModelInstanceFactory;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.base.PrimitiveAndCollectionTypeConstants;
 import tudresden.ocl20.pivot.modelbus.util.OclCollectionTypeKind;
 import tudresden.ocl20.pivot.pivotmodel.Enumeration;
 import tudresden.ocl20.pivot.pivotmodel.EnumerationLiteral;
 import tudresden.ocl20.pivot.pivotmodel.Operation;
 import tudresden.ocl20.pivot.pivotmodel.PrimitiveType;
 import tudresden.ocl20.pivot.pivotmodel.PrimitiveTypeKind;
+import tudresden.ocl20.pivot.pivotmodel.Property;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 import tudresden.ocl20.pivot.standardlibrary.java.exceptions.InvalidException;
 import tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclBag;
@@ -599,6 +606,11 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 
 		result = new BaseOclType<T>() {
 
+			/*
+			 * (non-Javadoc)
+			 * @see
+			 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclType#getType()
+			 */
 			public Type getType() {
 
 				return type;
@@ -766,19 +778,40 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 		return result;
 	}
 
+	/**
+	 * TODO: Probably extract this type impl into its own class since today it has
+	 * several methods.
+	 */
 	private abstract class BaseOclType<U extends OclAny> implements OclType<U> {
 
+		/*
+		 * (non-Javadoc)
+		 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny#asSet()
+		 */
 		public <T extends OclAny> OclSet<T> asSet() {
 
 			throw new InvalidException(new UnsupportedOperationException(
 					"asSet() is not supported on meta-type OclType"));
 		}
 
+		/*
+		 * (non-Javadoc)
+		 * @see
+		 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny#getUndefinedreason
+		 * ()
+		 */
 		public String getUndefinedreason() {
 
 			return null;
 		}
 
+		/*
+		 * (non-Javadoc)
+		 * @see
+		 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny#invokeOperation
+		 * (tudresden.ocl20.pivot.pivotmodel.Operation,
+		 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny[])
+		 */
 		public OclAny invokeOperation(Operation operation, OclAny... parameters) {
 
 			throw new InvalidException(
@@ -802,22 +835,45 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 			return isEqualTo(type2).not();
 		}
 
+		/*
+		 * (non-Javadoc)
+		 * @see
+		 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny#oclIsUndefined
+		 * ()
+		 */
 		public OclBoolean oclIsUndefined() {
 
 			return JavaOclBoolean.getInstance(false);
 		}
 
+		/*
+		 * (non-Javadoc)
+		 * @see
+		 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny#oclAsType(tudresden
+		 * .ocl20.pivot.essentialocl.standardlibrary.OclType)
+		 */
 		public <T extends OclAny> T oclAsType(OclType<T> type) {
 
 			throw new InvalidException(new UnsupportedOperationException(
 					"oclAsType(OclType<T> type) is not supported on meta-type OclType"));
 		}
 
+		/*
+		 * (non-Javadoc)
+		 * @see
+		 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny#oclIsInvalid()
+		 */
 		public OclBoolean oclIsInvalid() {
 
 			return JavaOclBoolean.getInstance(false);
 		}
 
+		/*
+		 * (non-Javadoc)
+		 * @see
+		 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny#oclIsKindOf
+		 * (tudresden.ocl20.pivot.essentialocl.standardlibrary.OclType)
+		 */
 		public <T extends OclAny> OclBoolean oclIsKindOf(OclType<T> typespec) {
 
 			throw new InvalidException(
@@ -825,6 +881,12 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 							"oclIsKindOf(OclType<T> typespec) is not supported on meta-type OclType"));
 		}
 
+		/*
+		 * (non-Javadoc)
+		 * @see
+		 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny#oclIsTypeOf
+		 * (tudresden.ocl20.pivot.essentialocl.standardlibrary.OclType)
+		 */
 		public <T extends OclAny> OclBoolean oclIsTypeOf(OclType<T> typespec) {
 
 			throw new InvalidException(
@@ -832,28 +894,138 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 							"oclIsTypeOf(OclType<T> typespec) is not supported on meta-type OclType"));
 		}
 
+		/*
+		 * (non-Javadoc)
+		 * @see
+		 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny#isEqualTo(tudresden
+		 * .ocl20.pivot.essentialocl.standardlibrary.OclAny)
+		 */
 		public OclBoolean isEqualTo(OclAny object2) {
 
 			throw new InvalidException(new UnsupportedOperationException(
 					"isEqualTo(OclAny object2) is not supported on meta-type OclType"));
 		}
 
+		/*
+		 * (non-Javadoc)
+		 * @see
+		 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny#isNotEqualTo
+		 * (tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny)
+		 */
 		public OclBoolean isNotEqualTo(OclAny object2) {
 
 			throw new InvalidException(new UnsupportedOperationException(
 					"isNotEqualTo(OclAny object2) is not supported on meta-type OclType"));
 		}
 
+		/*
+		 * (non-Javadoc)
+		 * @seetudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny#
+		 * getModelInstanceElement()
+		 */
 		public IModelInstanceElement getModelInstanceElement() {
 
 			throw new InvalidException(new UnsupportedOperationException(
 					"getModelInstanceElement() is not supported on meta-type OclType"));
 		}
 
+		/*
+		 * (non-Javadoc)
+		 * @see
+		 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny#getInvalidReason
+		 * ()
+		 */
 		public Throwable getInvalidReason() {
 
 			return null;
 		}
 
+		/*
+		 * (non-Javadoc)
+		 * @see
+		 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclType#getStaticProperty
+		 * (tudresden.ocl20.pivot.pivotmodel.Property)
+		 */
+		public OclAny getStaticProperty(Property property,
+				IModelInstance modelInstance) {
+
+			OclAny result;
+			IModelInstanceElement imiResult;
+
+			try {
+				imiResult = modelInstance.getStaticProperty(property);
+
+				result = createOclAny(imiResult);
+			}
+
+			/* Probably result in invalid. */
+			catch (PropertyAccessException e) {
+				result = createOclInvalid(property.getType(), e);
+			}
+
+			catch (PropertyNotFoundException e) {
+				result = createOclInvalid(property.getType(), e);
+			}
+
+			return result;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * @seetudresden.ocl20.pivot.essentialocl.standardlibrary.OclType#
+		 * invokeStaticOperation(tudresden.ocl20.pivot.pivotmodel.Operation,
+		 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny[])
+		 */
+		public OclAny invokeStaticOperation(Operation operation,
+				OclAny[] oclAnyParameters, IModelInstance modelInstance) {
+
+			OclAny result;
+			IModelInstanceElement imiResult;
+
+			/* Handle the special static operation allInstances. */
+			if (operation.getName().equals("allInstances")) {
+
+				imiResult =
+						BasisJavaModelInstanceFactory.createModelInstanceCollection(
+								modelInstance.getAllInstances(operation.getType()),
+								PrimitiveAndCollectionTypeConstants.MODEL_TYPE_SET);
+
+				result = createOclAny(imiResult);
+			}
+
+			else {
+				List<IModelInstanceElement> imiParameters;
+
+				/* Adapt the parameters. */
+				imiParameters =
+						new ArrayList<IModelInstanceElement>(oclAnyParameters.length);
+
+				for (int index = 0; index < oclAnyParameters.length; index++) {
+					imiParameters.add(oclAnyParameters[index].getModelInstanceElement());
+				}
+				// end for.
+
+				try {
+					imiResult =
+							modelInstance.invokeStaticOperation(operation, imiParameters);
+					result = createOclAny(imiResult);
+				}
+
+				/* Probably result in invalid. */
+				catch (OperationAccessException e) {
+
+					result = createOclInvalid(operation.getType(), e);
+				}
+
+				catch (OperationNotFoundException e) {
+
+					result = createOclInvalid(operation.getType(), e);
+				}
+				// end catch.
+			}
+			// end else.
+
+			return result;
+		}
 	}
 }

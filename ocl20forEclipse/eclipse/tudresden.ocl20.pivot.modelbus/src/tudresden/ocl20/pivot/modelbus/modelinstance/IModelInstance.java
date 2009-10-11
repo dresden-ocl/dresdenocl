@@ -200,7 +200,7 @@ public interface IModelInstance {
 	 *           Thrown if the given {@link Property} cannot be found as a static
 	 *           {@link Property}.
 	 */
-	IModelInstanceElement getStaticProperty(Type sourceType, Property property)
+	IModelInstanceElement getStaticProperty(Property property)
 			throws PropertyAccessException, PropertyNotFoundException;
 
 	/**

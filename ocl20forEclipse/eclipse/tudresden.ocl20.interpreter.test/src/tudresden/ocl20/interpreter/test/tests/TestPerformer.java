@@ -443,7 +443,7 @@ public class TestPerformer {
 
 			e.printStackTrace();
 
-			throw new RuntimeException(msg);
+			throw new RuntimeException(msg, e);
 		}
 	}
 
