@@ -4073,9 +4073,8 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			if (this.isPreparation) {
 				String msg;
 
-				this.myEnvironment.savePostconditionValue(anOperationCallExp,
-						myStandardLibraryFactory
-								.createOclBoolean(source.getInvalidReason() == null));
+				this.myEnvironment.saveOldInstances(anOperationCallExp.getSource()
+						.getType());
 
 				msg = "oclIsNew() is not available during preparation.";
 				result =
@@ -4084,8 +4083,44 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			}
 
 			else {
-				result = this.myEnvironment.getPostconditionValue(anOperationCallExp);
+
+				if (source.oclIsInvalid().isTrue()) {
+
+					result =
+							this.myStandardLibraryFactory.createOclUndefined(
+									anOperationCallExp.getType(), source.getUndefinedreason());
+				}
+
+				else if (source.oclIsUndefined().isTrue()) {
+
+					result =
+							this.myStandardLibraryFactory.createOclInvalid(anOperationCallExp
+									.getType(), source.getInvalidReason());
+				}
+
+				else {
+
+					try {
+						OclModelInstanceObject oclModelInstanceObject;
+						oclModelInstanceObject = (OclModelInstanceObject) source;
+
+						result =
+								this.myStandardLibraryFactory
+										.createOclBoolean(this.myEnvironment
+												.isNewInstance(oclModelInstanceObject));
+					}
+
+					catch (ClassCastException e) {
+
+						result =
+								this.myStandardLibraryFactory.createOclInvalid(
+										anOperationCallExp.getType(), e);
+					}
+					// end catch.
+				}
+				// end else.
 			}
+			// end else.
 		}
 		// no else.
 

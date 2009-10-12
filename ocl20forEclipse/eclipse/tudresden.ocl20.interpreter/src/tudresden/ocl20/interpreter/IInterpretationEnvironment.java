@@ -32,9 +32,12 @@ package tudresden.ocl20.interpreter;
 
 import tudresden.ocl20.pivot.essentialocl.expressions.OperationCallExp;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
+import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclModelInstanceObject;
 import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceObject;
 import tudresden.ocl20.pivot.pivotmodel.Constraint;
 import tudresden.ocl20.pivot.pivotmodel.NamedElement;
+import tudresden.ocl20.pivot.pivotmodel.Type;
 
 /**
  * <p>
@@ -192,4 +195,35 @@ public interface IInterpretationEnvironment extends Cloneable {
 	 *          The new {@link IModelInstance}.
 	 */
 	public void setModelInstance(IModelInstance aModelInstance);
+
+	/**
+	 * <p>
+	 * Saves a set of all instances of a given {@link Type} that existed during
+	 * the preparation of a postcondition. The stored value can be used to call
+	 * the method {@link IInterpretationEnvironment#isNewInstance(OclAny)} to
+	 * interpret the <code>oclIsNew()</code> operation during the interpretation
+	 * of a postcondition.
+	 * </p>
+	 * 
+	 * @param type
+	 *          The {@link Type} for which the instances shall be stored.
+	 */
+	public void saveOldInstances(Type type);
+
+	/**
+	 * <p>
+	 * Checks whether or not a given {@link IModelInstanceObject} (represented by
+	 * an {@link OclModelInstanceObject}) existed before the execution of the
+	 * current interpreted postcondition. This method can be used to interpret the
+	 * <code>oclIsNew()</code> operation during the interpretation of a
+	 * postcondition.
+	 * 
+	 * @param source
+	 *          The {@link OclModelInstanceObject} for that the
+	 *          <code>oclIsNew()</code> operation shall be evaluated.
+	 * @return <code>true</code>, if the given {@link OclModelInstanceObject} did
+	 *         not exist before the operation invocation of the current
+	 *         interpreted postcondition.
+	 */
+	public boolean isNewInstance(OclModelInstanceObject source);
 }

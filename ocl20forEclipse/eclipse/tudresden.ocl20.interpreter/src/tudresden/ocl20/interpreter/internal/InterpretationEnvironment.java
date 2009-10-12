@@ -31,15 +31,21 @@
 package tudresden.ocl20.interpreter.internal;
 
 import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
+import java.util.WeakHashMap;
 
 import tudresden.ocl20.interpreter.IInterpretationEnvironment;
 import tudresden.ocl20.interpreter.IOclInterpreter;
 import tudresden.ocl20.pivot.essentialocl.expressions.OperationCallExp;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
+import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclModelInstanceObject;
 import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceObject;
 import tudresden.ocl20.pivot.pivotmodel.Constraint;
 import tudresden.ocl20.pivot.pivotmodel.NamedElement;
+import tudresden.ocl20.pivot.pivotmodel.Type;
 
 /**
  * <p>
@@ -68,6 +74,13 @@ public class InterpretationEnvironment implements IInterpretationEnvironment {
 
 	/** Saved constraints for body, def, initial and derive. */
 	protected HashMap<String, Constraint> savedConstraints;
+
+	/**
+	 * Saved instances of {@link Type}s existing before the current context's
+	 * invocation (required for <code>oclIsNew()</code>).
+	 */
+	protected Map<Type, Set<IModelInstanceObject>> savedInstances =
+			new WeakHashMap<Type, Set<IModelInstanceObject>>();
 
 	/** Saved variables. */
 	protected HashMap<String, OclAny> savedVariables =
@@ -253,6 +266,17 @@ public class InterpretationEnvironment implements IInterpretationEnvironment {
 	/*
 	 * (non-Javadoc)
 	 * @see
+	 * tudresden.ocl20.interpreter.IInterpretationEnvironment#saveOldInstances
+	 * (tudresden.ocl20.pivot.pivotmodel.Type)
+	 */
+	public void saveOldInstances(Type type) {
+
+		this.savedInstances.put(type, this.modelInstance.getAllInstances(type));
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see
 	 * tudresden.ocl20.interpreter.IEnvironment#savePostconditionValue(tudresden
 	 * .ocl20.pivot.essentialocl.expressions.OperationCallExp,
 	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny)
@@ -324,6 +348,37 @@ public class InterpretationEnvironment implements IInterpretationEnvironment {
 				(HashMap<String, OclAny>) this.savedVariables.clone();
 
 		result.cachedResults = this.cachedResults;
+
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * tudresden.ocl20.interpreter.IInterpretationEnvironment#isNewInstance(tudresden
+	 * .ocl20.pivot.essentialocl.standardlibrary.OclModelInstanceObject)
+	 */
+	public boolean isNewInstance(OclModelInstanceObject source) {
+
+		boolean result;
+		IModelInstanceObject imiObject;
+
+		imiObject = (IModelInstanceObject) source.getModelInstanceElement();
+		result = true;
+
+		/*
+		 * If any imiObject's type's instances contains the imiObject, return false.
+		 * Else return true.
+		 */
+		for (Type aType : imiObject.getTypes()) {
+
+			if (this.savedInstances.containsKey(aType)
+					&& this.savedInstances.get(aType).contains(imiObject)) {
+				result = false;
+				break;
+			}
+		}
+		// end for.
 
 		return result;
 	}
