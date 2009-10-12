@@ -12,7 +12,7 @@ public privileged aspect BodyAspect1 {
     /**
      * <p>Defines the body of the method nowAsString() defined by the constraint
      * <code>context Date::nowAsString(): String
-     *       body: now().toString()</code></p>
+     *       body: Date::now().toString()</code></p>
      */
     String around(): nowAsStringCaller() {
         return tudresden.ocl20.pivot.examples.royalsandloyals.Date.now().toString();
