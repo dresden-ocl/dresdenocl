@@ -16,7 +16,7 @@ public privileged aspect InvAspect4 {
     /**
      * <p><code>Checks an invariant on the class Membership defined by the constraint
      * <code>context Membership
-     *       inv: program[].participants[].cards[].includes( self[].card[])</code></p>
+     *       inv: program[].participants[].cards[].flatten().includes( self[].card[])</code></p>
      */
     after(tudresden.ocl20.pivot.examples.royalsandloyals.Membership aClass) : checkInvariantsCaller(aClass) {
         /* Disable this constraint for subclasses of Membership. */
@@ -29,7 +29,7 @@ public privileged aspect InvAspect4 {
             result1.addAll(anElement1.cards);
         }
     
-        if (!result1.contains(aClass.card)) {
+        if (!result1.flatten().contains(aClass.card)) {
         	// TODO Auto-generated code executed when constraint is violated.
         	throw new RuntimeException("Error: Constraint was violated.");
         }
