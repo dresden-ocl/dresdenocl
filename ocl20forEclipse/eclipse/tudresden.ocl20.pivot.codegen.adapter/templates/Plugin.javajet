@@ -7,6 +7,7 @@ package <%=projectName%>;
 <%genModel.addImport("org.eclipse.core.runtime.Plugin");%>
 <%genModel.addImport("org.osgi.framework.BundleContext");%>
 <%genModel.addImport("tudresden.ocl20.logging.LoggingPlugin");%>
+<%genModel.addImport("org.apache.log4j.Logger");%>
 <%genModel.markImportLocation(stringBuffer);%>
 
 /**
@@ -56,6 +57,24 @@ public class <%=className%> extends Plugin {
 	 */
 	public static <%=className%> getDefault() {
 		return plugin;
+	}
+	
+	/**
+	 * <p>
+	 * Facade method for the classes in this plug-in that hides the dependency
+	 * from the <code>tudresden.ocl20.logging</code> plug-in.
+	 * </p>
+	 * 
+	 * @param clazz
+	 *          The {@link Class} to return the {@link Logger} for.
+	 * 
+	 * @return A log4j {@link Logger}> instance.
+	 * 
+	 * @generated
+	 */
+	public static Logger getLogger(Class<?> clazz) {
+
+		return LoggingPlugin.getLogManager(plugin).getLogger(clazz);
 	}
 }
 <%genModel.emitSortedImports();%>

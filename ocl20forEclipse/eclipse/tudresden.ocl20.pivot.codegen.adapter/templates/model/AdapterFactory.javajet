@@ -1,6 +1,8 @@
 <%@ jet package="tudresden.ocl20.pivot.codegen.adapter.templates.model" class="AdapterFactory" imports="org.eclipse.emf.codegen.ecore.genmodel.* tudresden.ocl20.pivot.codegen.adapter.PivotAdapterGeneratorUtil java.util.List java.util.LinkedList"%>
 <%GenModel genModel = (GenModel)argument;
 String modelName = PivotAdapterGeneratorUtil.startWithCapitalLetter(genModel.getModelName());
+String modelNameLC = PivotAdapterGeneratorUtil.startWithLowerCaseLetter(genModel.getModelName());
+String pluginName = PivotAdapterGeneratorUtil.startWithCapitalLetter(genModel.getModelName()) + "MetamodelPlugin";
 String packageName = PivotAdapterGeneratorUtil.getAdapterPackage(genModel);
 String className = modelName + "AdapterFactory";
 
@@ -90,7 +92,7 @@ String dslTypeSuperclassName = PivotAdapterGeneratorUtil.startWithLowerCaseLette
 %>
 package <%=packageName%>;
 
-<%genModel.addImport("java.util.HashMap");
+<%genModel.addImport("java.util.WeakHashMap");
 genModel.addImport("java.util.Map");
 genModel.addImport("org.eclipse.osgi.util.NLS");
 genModel.addImport("org.apache.log4j.Logger");
@@ -162,7 +164,7 @@ public class <%=className%> {
 	 *
 	 * @generated
 	 */
-	private static final Logger LOGGER = Logger
+	private static final Logger LOGGER = tudresden.ocl20.pivot.metamodels.<%=modelNameLC%>.<%=pluginName%>
 			.getLogger(<%=className%>.class);
 
 	/**
@@ -173,7 +175,9 @@ public class <%=className%> {
 	public static <%=className%> INSTANCE = new <%=className%>();
 
 	/**
-	 * a cache for previously created adapters
+	 * A cache for previously created adapters. It is realized as a
+	 * {@link WeakHashMap} because pivot model elements which are not referenced
+	 * by any {@link IModel} anymore can be cleared by the garbage collector.
 	 *
 	 * @generated
 	 */
@@ -185,7 +189,7 @@ public class <%=className%> {
 	 * @generated
 	 */
 	private <%=className%>() {
-		adapters = new HashMap<<%=commonSuperTypeName%>, NamedElement>();
+		adapters = new WeakHashMap<<%=commonSuperTypeName%>, NamedElement>();
 	}
 
 <%for (int i = 0; i < namespaceClasses.size(); i++) {
@@ -238,7 +242,7 @@ public class <%=className%> {
 	 *
 	 * @generated
 	 */
-	public Type createType(<%=typeClass%> <%=typeName%>) {
+	private Type createType(<%=typeClass%> <%=typeName%>) {
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("createType(<%=typeName%>=" + <%=typeName%> +
 				") - enter"); //$NON-NLS-1$ //$NON-NLS-2$

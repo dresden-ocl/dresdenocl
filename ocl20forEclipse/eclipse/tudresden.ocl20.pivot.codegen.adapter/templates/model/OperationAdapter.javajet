@@ -3,6 +3,8 @@
 GenPackage genPackage = genClass.getGenPackage();
 GenModel genModel = genPackage.getGenModel();
 String modelName = PivotAdapterGeneratorUtil.startWithCapitalLetter(genModel.getModelName());
+String modelNameLC = PivotAdapterGeneratorUtil.startWithLowerCaseLetter(genModel.getModelName());
+String pluginName = PivotAdapterGeneratorUtil.startWithCapitalLetter(genModel.getModelName()) + "MetamodelPlugin";
 String adapterClass = PivotAdapterGeneratorUtil.getAdapterClassName(genModel, genClass);
 String adapteeClass = PivotAdapterGeneratorUtil.getDSLModelUniqueTypeName(genModel, genClass);
 String adapteeName = PivotAdapterGeneratorUtil.getDSLElementName(adapteeClass);
@@ -31,7 +33,7 @@ public class <%=adapterClass%> extends AbstractOperation implements Operation {
 	 *
 	 * @generated
 	 */
-	private static final Logger logger = Logger.getLogger(<%=adapterClass%>.class);
+	private static final Logger logger = tudresden.ocl20.pivot.metamodels.<%=modelNameLC%>.<%=pluginName%>.getLogger(<%=adapterClass%>.class);
 
 	/**
 	 * the adapted <%=modelName%> <%=adapteeClass%>

@@ -1,6 +1,8 @@
 <%@ jet package="tudresden.ocl20.pivot.codegen.adapter.templates.model" class="Model" imports="org.eclipse.emf.codegen.ecore.genmodel.* tudresden.ocl20.pivot.codegen.adapter.PivotAdapterGeneratorUtil java.util.List"%>
 <%GenModel genModel = (GenModel)argument;
 String modelName = PivotAdapterGeneratorUtil.startWithCapitalLetter(genModel.getModelName());
+String modelNameLC = PivotAdapterGeneratorUtil.startWithLowerCaseLetter(genModel.getModelName());
+String pluginName = PivotAdapterGeneratorUtil.startWithCapitalLetter(genModel.getModelName()) + "MetamodelPlugin";
 String packageName = PivotAdapterGeneratorUtil.getAdapterPackage(genModel);
 String className = modelName + "Model";
 List<String> namespaceClasses = PivotAdapterGeneratorUtil.getDSLModelUniqueTypeNames(genModel, "Namespace");
@@ -9,6 +11,7 @@ List<String> typeClasses = PivotAdapterGeneratorUtil.getDSLModelUniqueTypeNames(
 String typeClass = typeClasses.isEmpty() ? null : typeClasses.get(0);
 String implementThis = PivotAdapterGeneratorUtil.getImplementThis();
 String resourceType = PivotAdapterGeneratorUtil.getResourceType(genModel);
+String dslTypeSuperclass = PivotAdapterGeneratorUtil.getCommonSuperTypeForDSLTypes(genModel);
 %>
 package <%=packageName%>;
 
@@ -43,7 +46,7 @@ public class <%=className%> extends AbstractModel implements IModel {
 	 *
 	 * @generated
 	 */
-	private static final Logger logger = Logger.getLogger(<%=className%>.class);
+	private static final Logger logger = tudresden.ocl20.pivot.metamodels.<%=modelNameLC%>.<%=pluginName%>.getLogger(<%=className%>.class);
 
 	// the resource containing the corresponding <%=modelName%> model
 	private <%=resourceType%> resource;
@@ -136,10 +139,8 @@ public class <%=className%> extends AbstractModel implements IModel {
 			if (object instanceof <%=aNamespaceClass%>)
 				; // TODO: add namespace to root package
 			<%}%>
-			<%for (String aTypeClass : typeClasses) {%>
-			if (object instanceof <%=aTypeClass%>)
+			if (object instanceof <%=dslTypeSuperclass%>)
 				; // TODO: add types to root package
-			<%}%>
 		}
 
 		return <%=modelName%>AdapterFactory.INSTANCE.createNamespace(rootPackage);
