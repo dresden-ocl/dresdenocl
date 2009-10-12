@@ -59,16 +59,6 @@
                </appinfo>
             </annotation>
          </attribute>
-         <attribute name="messageProvider" type="string">
-            <annotation>
-               <documentation>
-                  
-               </documentation>
-               <appinfo>
-                  <meta.attribute kind="java" basedOn=":tudresden.ocl20.pivot.testsuite.messageProvider.IMessageProvider"/>
-               </appinfo>
-            </annotation>
-         </attribute>
       </complexType>
    </element>
 
