@@ -98,23 +98,11 @@ public class JavaOclModelInstanceObject extends JavaOclAny implements
 
 		OclAny result;
 
-		/* Check if the source is invalid. */
-		if (this.oclIsInvalid().isTrue()) {
-			result =
-					JavaStandardLibraryFactory.INSTANCE.createOclInvalid(operation
-							.getType(), this.getInvalidReason());
-		}
+		result = checkUndefinedAndInvalid(operation, args);
 
-		/* Else check if the source is undefined. */
-		else if (this.oclIsUndefined().isTrue()) {
-			result =
-					JavaStandardLibraryFactory.INSTANCE.createOclUndefined(operation
-							.getType(), this.getUndefinedreason());
-		}
+		if (result == null) {
 
-		/* Else try to invoke the operation. */
-		else {
-
+			/* Else try to invoke the operation. */
 			IModelInstanceElement imiResult;
 
 			List<IModelInstanceElement> imiArguments;
@@ -158,6 +146,7 @@ public class JavaOclModelInstanceObject extends JavaOclAny implements
 			}
 			// end catch.
 		}
+		// no else.
 
 		return result;
 	}
