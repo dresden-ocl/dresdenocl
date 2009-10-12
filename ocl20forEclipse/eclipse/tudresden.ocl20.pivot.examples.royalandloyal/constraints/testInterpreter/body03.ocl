@@ -2,6 +2,6 @@ package tudresden::ocl20::pivot::examples::royalsandloyals
 
 -- Used to test the preparation contained in '../body03.ocl'
 context Date
-inv: not nowAsString().oclIsUndefined()
+inv: not Date::nowAsString().oclIsUndefined()
 
 endpackage
