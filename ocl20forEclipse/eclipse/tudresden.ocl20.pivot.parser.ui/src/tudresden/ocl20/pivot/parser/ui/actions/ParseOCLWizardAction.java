@@ -30,10 +30,13 @@ import tudresden.ocl20.pivot.parser.ui.internal.wizards.ParseOCLWizard;
 
 /**
  * <p>
- * This class implements an action which starts the {@link ParseOCLWizard}.
+ * This {@link Class} implements an action that starts the
+ * {@link ParseOCLWizard}. The Action is required to provide the Wizard as an
+ * option in the Dresden OCL Menu.
  * </p>
  * 
  * @see IWorkbenchWindowActionDelegate
+ * @author Claas Wilke
  */
 public class ParseOCLWizardAction implements IWorkbenchWindowActionDelegate {
 
@@ -46,6 +49,32 @@ public class ParseOCLWizardAction implements IWorkbenchWindowActionDelegate {
 	 * </p>
 	 */
 	public ParseOCLWizardAction() {
+
+	}
+
+	/**
+	 * <p>
+	 * We can use this method to dispose of any system resources we previously
+	 * allocated.
+	 * </p>
+	 * 
+	 * @see IWorkbenchWindowActionDelegate#dispose
+	 */
+	public void dispose() {
+
+	}
+
+	/**
+	 * <p>
+	 * We will cache window object in order to be able to provide parent shell for
+	 * the message dialog.
+	 * </p>
+	 * 
+	 * @see IWorkbenchWindowActionDelegate#init
+	 */
+	public void init(IWorkbenchWindow window) {
+
+		this.window = window;
 	}
 
 	/**
@@ -87,36 +116,14 @@ public class ParseOCLWizardAction implements IWorkbenchWindowActionDelegate {
 
 	/**
 	 * <p>
-	 * Selection in the workbench has been changed. We can change the state of
-	 * the 'real' action here if we want, but this can only happen after the
-	 * delegate has been created.
+	 * Selection in the workbench has been changed. We can change the state of the
+	 * 'real' action here if we want, but this can only happen after the delegate
+	 * has been created.
 	 * </p>
 	 * 
 	 * @see IWorkbenchWindowActionDelegate#selectionChanged
 	 */
 	public void selectionChanged(IAction action, ISelection selection) {
-	}
 
-	/**
-	 * <p>
-	 * We can use this method to dispose of any system resources we previously
-	 * allocated.
-	 * </p>
-	 * 
-	 * @see IWorkbenchWindowActionDelegate#dispose
-	 */
-	public void dispose() {
-	}
-
-	/**
-	 * <p>
-	 * We will cache window object in order to be able to provide parent shell
-	 * for the message dialog.
-	 * </p>
-	 * 
-	 * @see IWorkbenchWindowActionDelegate#init
-	 */
-	public void init(IWorkbenchWindow window) {
-		this.window = window;
 	}
 }

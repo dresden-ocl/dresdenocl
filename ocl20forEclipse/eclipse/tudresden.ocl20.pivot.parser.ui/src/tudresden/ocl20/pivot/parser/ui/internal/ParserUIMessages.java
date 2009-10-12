@@ -38,36 +38,37 @@ import org.eclipse.osgi.util.NLS;
  * Localized messages for the Parser UI Plugin.
  * 
  * @author Matthias Braeuer
- * @version 1.0 09.05.2007
  */
 public class ParserUIMessages extends NLS {
 
-  private static final String BUNDLE_NAME = "tudresden.ocl20.pivot.parser.ui.internal.messages"; //$NON-NLS-1$
+	private static final String BUNDLE_NAME =
+			"tudresden.ocl20.pivot.parser.ui.internal.messages"; //$NON-NLS-1$
 
-  public static String ParseOCLPage_Description;
-  
-  public static String ParseOCLPage_SelectOCLFileLabel;
-  
-  public static String ParseOCLPage_Title;
+	public static String ParseOCLPage_Description;
+	public static String ParseOCLPage_SelectOCLFileLabel;
+	public static String ParseOCLPage_Title;
+	public static String ParseOCLPage_LocationLabelText;
+	public static String ParseOCLPage_BrowseWorkspaceButtonText;
+	public static String ParseOCLPage_BrowseFileSystemButtonText;
+	public static String ParseOCLPage_SelectOCLFile;
+	public static String ParseOCLPage_OCLFileInvalid;
+	public static String ParseOCLPage_FileDoesNotExist;
 
-  public static String ParseOCLWizard_CheckLog;
+	public static String ParseOCLWizard_CheckLog;
+	public static String ParseOCLWizard_ErrorMessageDialogTitle;
+	public static String ParseOCLWizard_ErrorOccuredDuringParsing;
+	public static String ParseOCLWizard_NoActiveModelErrorMessage;
+	public static String ParseOCLWizard_UnexpectedError;
+	public static String ParseOCLWizard_WindowTitle;
+	public static String ParseOCLWizard_ModelsViewActivationError;
 
-  public static String ParseOCLWizard_ErrorMessageDialogTitle;
+	static {
+		/* Initialize resource bundle. */
+		NLS.initializeMessages(BUNDLE_NAME, ParserUIMessages.class);
+	}
 
-  public static String ParseOCLWizard_ErrorOccuredDuringParsing;
+	private ParserUIMessages() {
 
-  public static String ParseOCLWizard_NoActiveModelErrorMessage;
-
-  public static String ParseOCLWizard_UnexpectedError;
-
-  public static String ParseOCLWizard_WindowTitle;
-
-  static {
-    // initialize resource bundle
-    NLS.initializeMessages(BUNDLE_NAME,ParserUIMessages.class);
-  }
-
-  private ParserUIMessages() {
-    // no implementation necessary
-  }
+		/* No implementation necessary. */
+	}
 }

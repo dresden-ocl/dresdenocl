@@ -32,6 +32,8 @@
  */
 package tudresden.ocl20.pivot.parser.ui;
 
+import java.io.File;
+
 import org.apache.log4j.Logger;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
@@ -40,73 +42,97 @@ import org.osgi.framework.BundleContext;
 import tudresden.ocl20.logging.LoggingPlugin;
 
 /**
- * The activator class controls the plug-in life cycle
+ * <p>
+ * The activator class controls the plug-in life cycle.
+ * </p>
+ * 
+ * @author Matthias Braeuer (Implementation)
+ * @author Claas Wilke (Refactoring and Java-Doc)
  */
 public class ParserUIPlugin extends AbstractUIPlugin {
 
-	// The plug-in ID
+	/** The plug-in's ID. */
 	public static final String ID = "tudresden.ocl20.pivot.parser.ui"; //$NON-NLS-1$
 
-	// The shared instance
+	/** The shared instance. */
 	private static ParserUIPlugin plugin;
 
 	/**
-	 * The constructor
+	 * <p>
+	 * Returns the shared instance.
+	 * </p>
+	 * 
+	 * @return the shared instance
+	 */
+	public static ParserUIPlugin getDefault() {
+	
+		return plugin;
+	}
+
+	/**
+	 * <p>
+	 * Returns an image descriptor for the image {@link File} at the given plug-in
+	 * relative path.
+	 * </p>
+	 * 
+	 * @param path
+	 *          The path of the image {@link File}.
+	 * @return the {@link ImageDescriptor}.
+	 */
+	public static ImageDescriptor getImageDescriptor(String path) {
+	
+		return imageDescriptorFromPlugin(ID, path);
+	}
+
+	/**
+	 *<p>
+	 * A facade method for the classes in this plug-in that hides the dependency
+	 * from the <code>tudresden.ocl20.logging</code> plug-in.
+	 * </p>
+	 * 
+	 * @param clazz
+	 *          The {@link Class} to return the {@link Logger} for.
+	 * 
+	 * @return A log4j {@link Logger} instance.
+	 */
+	public static Logger getLogger(Class<?> clazz) {
+	
+		return LoggingPlugin.getLogManager(plugin).getLogger(clazz);
+	}
+
+	/**
+	 * <p>
+	 * The constructor of the {@link ParserUIPlugin}.
+	 * </p>
 	 */
 	public ParserUIPlugin() {
-    // no implementation necessary
+
+		/* No implementation necessary. */
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * @see org.eclipse.ui.plugin.AbstractUIPlugin#start(org.osgi.framework.BundleContext)
+	 * @see
+	 * org.eclipse.ui.plugin.AbstractUIPlugin#start(org.osgi.framework.BundleContext
+	 * )
 	 */
 	@Override
-  public void start(BundleContext context) throws Exception {
+	public void start(BundleContext context) throws Exception {
+
 		super.start(context);
 		plugin = this;
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * @see org.eclipse.ui.plugin.AbstractUIPlugin#stop(org.osgi.framework.BundleContext)
+	 * @see
+	 * org.eclipse.ui.plugin.AbstractUIPlugin#stop(org.osgi.framework.BundleContext
+	 * )
 	 */
 	@Override
-  public void stop(BundleContext context) throws Exception {
-    plugin = null;
+	public void stop(BundleContext context) throws Exception {
+
+		plugin = null;
 		super.stop(context);
 	}
-
-	/**
-	 * Returns the shared instance
-	 *
-	 * @return the shared instance
-	 */
-	public static ParserUIPlugin getDefault() {
-		return plugin;
-	}
-
-  /**
-   * Returns an image descriptor for the image file at the given
-   * plug-in relative path
-   *
-   * @param path the path
-   * @return the image descriptor
-   */
-  public static ImageDescriptor getImageDescriptor(String path) {
-    return imageDescriptorFromPlugin(ID, path);
-  }
-
-  
-  /**
-   * Facade method for the classes in this plugin that hides the dependency from the
-   * <code>tudresden.ocl20.logging</code> plugin.
-   * 
-   * @param clazz the class to return the logger for
-   * 
-   * @return a log4j <code>Logger</code> instance
-   */
-  public static Logger getLogger(Class<?> clazz) {
-    return LoggingPlugin.getLogManager(plugin).getLogger(clazz);
-  }
 }
