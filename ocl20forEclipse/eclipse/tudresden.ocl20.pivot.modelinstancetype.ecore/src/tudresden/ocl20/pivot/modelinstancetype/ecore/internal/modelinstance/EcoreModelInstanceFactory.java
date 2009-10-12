@@ -373,7 +373,24 @@ public class EcoreModelInstanceFactory extends BasisJavaModelInstanceFactory
 
 		Set<Type> types;
 		types = new HashSet<Type>();
-		types.add(type);
+
+		/* Try to find the types of the given object in the model. */
+		try {
+
+			/* Search for a type that conforms to the given type. */
+			for (Type aModelType : this.findTypesOfEObjectInModel(eObject)) {
+
+				if (aModelType.conformsTo(type)) {
+					types.add(aModelType);
+					break;
+				}
+				// no else.
+			}
+		}
+
+		catch (TypeNotFoundInModelException e1) {
+			types.add(type);
+		}
 
 		result = new EcoreModelInstanceObject(eObject, types, this);
 
@@ -423,21 +440,21 @@ public class EcoreModelInstanceFactory extends BasisJavaModelInstanceFactory
 		Type type;
 
 		result = null;
-		
+
 		/* Try to find the enumeration of the enum in the model. */
 		type = this.findTypeOfClassInModel(anEnum.getClass());
 
 		/* Check if the enumeration has been found in the model. */
 		if (type != null && type instanceof Enumeration) {
-			
+
 			Enumeration enumeration;
 			enumeration = (Enumeration) type;
-			
+
 			/* Try to find a literal with the right value. */
 			for (EnumerationLiteral aLiteral : enumeration.getOwnedLiteral()) {
-				
+
 				if (aLiteral.getName().equals(anEnum.toString())) {
-					
+
 					result = createModelInstanceEnumerationLiteral(aLiteral);
 					break;
 				}
@@ -448,7 +465,8 @@ public class EcoreModelInstanceFactory extends BasisJavaModelInstanceFactory
 			if (result == null) {
 				String msg;
 
-				msg = EcoreModelInstanceTypeMessages.EcoreModelInstanceFactory_TypeNotFoundInModel;
+				msg =
+						EcoreModelInstanceTypeMessages.EcoreModelInstanceFactory_TypeNotFoundInModel;
 				msg = NLS.bind(msg, anEnum);
 
 				throw new TypeNotFoundInModelException(msg);
@@ -458,7 +476,8 @@ public class EcoreModelInstanceFactory extends BasisJavaModelInstanceFactory
 		else {
 			String msg;
 
-			msg = EcoreModelInstanceTypeMessages.EcoreModelInstanceFactory_TypeNotFoundInModel;
+			msg =
+					EcoreModelInstanceTypeMessages.EcoreModelInstanceFactory_TypeNotFoundInModel;
 			msg = NLS.bind(msg, anEnum);
 
 			throw new TypeNotFoundInModelException(msg);

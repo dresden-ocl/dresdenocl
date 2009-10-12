@@ -291,21 +291,21 @@ public class JavaModelInstanceFactory extends BasisJavaModelInstanceFactory
 		Type type;
 
 		result = null;
-		
+
 		/* Try to find the enumeration of the enum in the model. */
 		type = this.findTypeOfClassInModel(anEnum.getClass());
 
 		/* Check if the enumeration has been found in the model. */
 		if (type != null && type instanceof Enumeration) {
-			
+
 			Enumeration enumeration;
 			enumeration = (Enumeration) type;
-			
+
 			/* Try to find a literal with the right value. */
 			for (EnumerationLiteral aLiteral : enumeration.getOwnedLiteral()) {
-				
+
 				if (aLiteral.getName().equals(anEnum.toString())) {
-					
+
 					result = createModelInstanceEnumerationLiteral(aLiteral);
 					break;
 				}
@@ -316,7 +316,8 @@ public class JavaModelInstanceFactory extends BasisJavaModelInstanceFactory
 			if (result == null) {
 				String msg;
 
-				msg = JavaModelInstanceTypeMessages.JavaModelInstance_TypeNotFoundInModel;
+				msg =
+						JavaModelInstanceTypeMessages.JavaModelInstance_TypeNotFoundInModel;
 				msg = NLS.bind(msg, anEnum);
 
 				throw new TypeNotFoundInModelException(msg);
@@ -404,6 +405,8 @@ public class JavaModelInstanceFactory extends BasisJavaModelInstanceFactory
 	 *          The {@link Object} that shall be adapted.
 	 * @param The
 	 *          {@link Type} the created {@link IModelInstanceObject} shall have.
+	 *          <strong>Please note, that the adapted element could also have a
+	 *          sub-{@link Type} of the given {@link Type}!</strong>
 	 * @return The create {@link IModelInstanceObject}.
 	 */
 	private IModelInstanceObject createJavaModelInstanceObject(Object object,
@@ -428,9 +431,25 @@ public class JavaModelInstanceFactory extends BasisJavaModelInstanceFactory
 		Class<?> typeClass;
 
 		String canonicalName;
-
 		modelTypes = new HashSet<Type>();
-		modelTypes.add(type);
+
+		/* Try to find the types of the given object in the model. */
+		try {
+
+			/* Search for a type that conforms to the given type. */
+			for (Type aModelType : this.findTypesOfObjectInModel(object)) {
+
+				if (aModelType.conformsTo(type)) {
+					modelTypes.add(aModelType);
+					break;
+				}
+				// no else.
+			}
+		}
+
+		catch (TypeNotFoundInModelException e1) {
+			modelTypes.add(type);
+		}
 
 		/* Convert the type's name into a canonical name. */
 		canonicalName =
