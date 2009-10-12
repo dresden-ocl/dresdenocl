@@ -503,7 +503,6 @@ public class EcoreModelInstanceObject extends AbstractModelInstanceObject
 
 				argumentValues[index] =
 						this.createAdaptedElement(args.get(index), argumentTypes[index]);
-				index++;
 			}
 
 			/* Try to invoke the found method. */

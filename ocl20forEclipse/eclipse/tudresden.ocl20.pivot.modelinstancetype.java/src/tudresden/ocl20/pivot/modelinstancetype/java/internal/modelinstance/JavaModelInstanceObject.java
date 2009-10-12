@@ -394,7 +394,6 @@ public class JavaModelInstanceObject extends AbstractModelInstanceObject
 				argumentValues[index] =
 						JavaModelInstance.createAdaptedElement(args.get(index),
 								argumentTypes[index], classLoaders);
-				index++;
 			}
 
 			/* Try to invoke the found method. */
