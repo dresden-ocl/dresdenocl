@@ -230,7 +230,8 @@ public abstract class JavaOclCollection<T extends OclAny> extends
 
 		booleanResult = true;
 
-		for (IModelInstanceElement anElement : imiCollection.getCollection()) {
+		for (IModelInstanceElement anElement : ((IModelInstanceCollection<IModelInstanceElement>) that
+				.getModelInstanceElement()).getCollection()) {
 
 			T oclElement =
 					(T) JavaStandardLibraryFactory.INSTANCE.createOclAny(anElement);
