@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Java Meta-Model Test Plug-in
 Bundle-SymbolicName: tudresden.ocl20.pivot.metamodels.java.test;singleton:=true
-Bundle-Version: 1.0.0
+Bundle-Version: 2.0.0
 Bundle-Activator: tudresden.ocl20.pivot.metamodels.java.test.JavaMetaModelTestPlugin
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.ui,
