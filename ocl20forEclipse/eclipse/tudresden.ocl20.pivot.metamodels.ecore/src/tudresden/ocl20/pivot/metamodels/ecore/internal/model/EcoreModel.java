@@ -231,7 +231,13 @@ public class EcoreModel extends AbstractModel implements IModel {
 			else if (eObject instanceof EClassifier) {
 				rootPackage.getEClassifiers().add((EClassifier) eObject);
 			}
-			// no else.
+
+			/* Else throw an exception. */
+			else {
+				throw new ModelAccessException(
+						"Unknown kind of EObject. Expected EPackage or EClassifier but was "
+								+ eObject.getClass().getSimpleName());
+			}
 		}
 		// end for.
 
