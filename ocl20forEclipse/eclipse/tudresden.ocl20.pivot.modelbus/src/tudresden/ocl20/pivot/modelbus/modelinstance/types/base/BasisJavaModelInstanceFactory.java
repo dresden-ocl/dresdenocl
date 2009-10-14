@@ -279,107 +279,132 @@ public class BasisJavaModelInstanceFactory implements IModelInstanceFactory {
 
 			if (primitiveType.getKind().equals(PrimitiveTypeKind.BOOLEAN)) {
 
-				/* Check if the given object can be adapted as a Boolean. */
-				if (adapted instanceof Boolean) {
+				if (adapted == null) {
 					result = createModelInstanceBoolean((Boolean) adapted);
 				}
-
-				/* Else try to parse a boolean. */
 				else {
-					String adaptedAsString;
 
-					adaptedAsString = adapted.toString();
-
-					if (adaptedAsString.equalsIgnoreCase("true")) {
-						result = createModelInstanceBoolean(true);
+					/* Check if the given object can be adapted as a Boolean. */
+					if (adapted instanceof Boolean) {
+						result = createModelInstanceBoolean((Boolean) adapted);
 					}
 
-					else if (adaptedAsString.equalsIgnoreCase("false")) {
-						result = createModelInstanceBoolean(false);
-					}
-
+					/* Else try to parse a boolean. */
 					else {
-						String msg;
-						msg = ModelBusMessages.IModelInstanceElement_CannotAdaptToType;
-						msg = NLS.bind(msg, adapted, type);
+						String adaptedAsString;
 
-						throw new IllegalArgumentException(msg);
+						adaptedAsString = adapted.toString();
+
+						if (adaptedAsString.equalsIgnoreCase("true")) {
+							result = createModelInstanceBoolean(true);
+						}
+
+						else if (adaptedAsString.equalsIgnoreCase("false")) {
+							result = createModelInstanceBoolean(false);
+						}
+
+						else {
+							String msg;
+							msg = ModelBusMessages.IModelInstanceElement_CannotAdaptToType;
+							msg = NLS.bind(msg, adapted, type);
+
+							throw new IllegalArgumentException(msg);
+						}
+						// end else.
 					}
 					// end else.
 				}
-				// end else.
 			}
 
 			else if (primitiveType.getKind().equals(PrimitiveTypeKind.INTEGER)) {
 
-				/* Check if the given object can be adapted as an Integer. */
-				if (adapted instanceof Number) {
-					result = createModelInstanceInteger(((Number) adapted).longValue());
+				if (adapted == null) {
+					result = createModelInstanceInteger((Long) adapted);
 				}
-
-				/* Else try to parse a long. */
 				else {
-					try {
-						long longValue;
-						longValue = Long.parseLong(adapted.toString());
 
-						result = createModelInstanceInteger(longValue);
+					/* Check if the given object can be adapted as an Integer. */
+					if (adapted instanceof Number) {
+						result = createModelInstanceInteger(((Number) adapted).longValue());
 					}
 
-					catch (NumberFormatException e) {
-						String msg;
-						msg = ModelBusMessages.IModelInstanceElement_CannotAdaptToType;
-						msg = NLS.bind(msg, adapted, type);
+					/* Else try to parse a long. */
+					else {
+						try {
+							long longValue;
+							longValue = Long.parseLong(adapted.toString());
 
-						throw new IllegalArgumentException(msg, e);
+							result = createModelInstanceInteger(longValue);
+						}
+
+						catch (NumberFormatException e) {
+							String msg;
+							msg = ModelBusMessages.IModelInstanceElement_CannotAdaptToType;
+							msg = NLS.bind(msg, adapted, type);
+
+							throw new IllegalArgumentException(msg, e);
+						}
+						// end catch.
 					}
-					// end catch.
+					// end else.
 				}
-				// end else.
 			}
 
 			else if (primitiveType.getKind().equals(PrimitiveTypeKind.REAL)) {
 
-				/* Check if the given object can be adapted as a Real. */
-				if (adapted instanceof Number) {
+				if (adapted == null) {
 					result = createModelInstanceReal((Number) adapted);
 				}
-
-				/* Else try to parse a double. */
 				else {
-					try {
-						double doubleValue;
-						doubleValue = Double.parseDouble(adapted.toString());
 
-						result = createModelInstanceReal(doubleValue);
+					/* Check if the given object can be adapted as a Real. */
+					if (adapted instanceof Number) {
+						result = createModelInstanceReal((Number) adapted);
 					}
 
-					catch (NumberFormatException e) {
-						String msg;
-						msg = ModelBusMessages.IModelInstanceElement_CannotAdaptToType;
-						msg = NLS.bind(msg, adapted, type);
+					/* Else try to parse a double. */
+					else {
+						try {
+							double doubleValue;
+							doubleValue = Double.parseDouble(adapted.toString());
 
-						throw new IllegalArgumentException(msg, e);
+							result = createModelInstanceReal(doubleValue);
+						}
+
+						catch (NumberFormatException e) {
+							String msg;
+							msg = ModelBusMessages.IModelInstanceElement_CannotAdaptToType;
+							msg = NLS.bind(msg, adapted, type);
+
+							throw new IllegalArgumentException(msg, e);
+						}
+						// end catch.
 					}
-					// end catch.
+					// end else.
 				}
-				// end else.
 			}
 
 			else if (primitiveType.getKind().equals(PrimitiveTypeKind.STRING)) {
 
-				/* Check if the given object can be adapted as a String. */
-				if (adapted instanceof Character) {
-					result = createModelInstanceString(((Character) adapted).toString());
-				}
-
-				else if (adapted instanceof String) {
+				if (adapted == null) {
 					result = createModelInstanceString((String) adapted);
 				}
-
-				/* Else use the toString method. */
 				else {
-					result = createModelInstanceString(adapted.toString());
+
+					/* Check if the given object can be adapted as a String. */
+					if (adapted instanceof Character) {
+						result =
+								createModelInstanceString(((Character) adapted).toString());
+					}
+
+					else if (adapted instanceof String) {
+						result = createModelInstanceString((String) adapted);
+					}
+
+					/* Else use the toString method. */
+					else {
+						result = createModelInstanceString(adapted.toString());
+					}
 				}
 			}
 
@@ -763,14 +788,14 @@ public class BasisJavaModelInstanceFactory implements IModelInstanceFactory {
 			result = new UniqueEList<IModelInstanceElement>();
 		}
 
-		else if (collection instanceof UniqueEList<?>){
+		else if (collection instanceof UniqueEList<?>) {
 			result = new UniqueEList<IModelInstanceElement>();
-		} 
-		
+		}
+
 		else if (collection instanceof Set<?>) {
 			result = new HashSet<IModelInstanceElement>();
 		}
-		
+
 		else {
 			result = new ArrayList<IModelInstanceElement>();
 		}
