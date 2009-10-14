@@ -25,7 +25,7 @@ import java.util.Set;
 
 import tudresden.ocl20.interpreter.IInterpretationResult;
 import tudresden.ocl20.interpreter.ui.internal.views.util.ResultsContentProvider;
-import tudresden.ocl20.pivot.modelbus.IModelObject;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
 import tudresden.ocl20.pivot.pivotmodel.Constraint;
 
 /**
@@ -87,7 +87,7 @@ public class InterpretationResultCache {
 	/**
 	 * <p>
 	 * Removes the {@link IInterpretationResult}s for a given {@link List} of
-	 * {@link IModelObject}s and a given {@link List} of {@link Constraint}s.
+	 * {@link IModelInstanceElement}s and a given {@link List} of {@link Constraint}s.
 	 * </p>
 	 * 
 	 * @param modelObjects
@@ -95,7 +95,7 @@ public class InterpretationResultCache {
 	 * @param constraints
 	 *          The {@link Constraint}s for that results shall be removed.
 	 */
-	public void removeResults(ArrayList<IModelObject> modelObjects,
+	public void removeResults(ArrayList<IModelInstanceElement> modelObjects,
 			ArrayList<Constraint> constraints) {
 
 		Set<IInterpretationResult> newCache;

@@ -1,6 +1,6 @@
 package tudresden.ocl20.pivot.essentialocl.standardlibrary;
 
-public interface OclSortedCollection<T> extends OclCollection<T> {
+public interface OclSortedCollection<T extends OclAny> extends OclCollection<T> {
 
 	/**
 	 * 

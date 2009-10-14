@@ -38,10 +38,10 @@ import java.util.Map;
 import org.eclipse.core.runtime.ListenerList;
 
 import tudresden.ocl20.pivot.modelbus.IModel;
-import tudresden.ocl20.pivot.modelbus.IModelInstance;
-import tudresden.ocl20.pivot.modelbus.IModelInstanceRegistry;
 import tudresden.ocl20.pivot.modelbus.event.IModelInstanceRegistryListener;
 import tudresden.ocl20.pivot.modelbus.event.ModelInstanceRegistryEvent;
+import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance;
+import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceRegistry;
 
 /**
  * 

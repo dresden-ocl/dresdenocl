@@ -38,7 +38,7 @@ package tudresden.ocl20.pivot.essentialocl.standardlibrary;
  * @author Matthias Braeuer
  * @version 1.0 30.03.2007
  */
-public interface OclSequence<T> extends OclSortedCollection<T> {
+public interface OclSequence<T extends OclAny> extends OclSortedCollection<T> {
 
 	/**
 	 * 
@@ -111,5 +111,5 @@ public interface OclSequence<T> extends OclSortedCollection<T> {
 	 * 
 	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection#flatten()
 	 */
-	<T2 extends OclRoot> OclSequence<T2> flatten();
+	<T2 extends OclAny> OclSequence<T2> flatten();
 }

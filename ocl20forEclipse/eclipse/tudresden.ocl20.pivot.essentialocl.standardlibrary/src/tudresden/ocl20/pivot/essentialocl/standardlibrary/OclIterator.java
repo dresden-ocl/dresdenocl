@@ -30,7 +30,7 @@
  */
 package tudresden.ocl20.pivot.essentialocl.standardlibrary;
 
-public interface OclIterator<T> {
+public interface OclIterator<T extends OclAny> {
 
 	/**
 	 * 

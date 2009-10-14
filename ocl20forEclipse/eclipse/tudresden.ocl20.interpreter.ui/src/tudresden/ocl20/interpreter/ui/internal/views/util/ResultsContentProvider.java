@@ -28,8 +28,7 @@ import org.eclipse.jface.viewers.Viewer;
 import tudresden.ocl20.interpreter.IInterpretationResult;
 import tudresden.ocl20.interpreter.ui.internal.views.InterpretationResultCache;
 import tudresden.ocl20.interpreter.ui.internal.views.InterpreterView;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot;
-import tudresden.ocl20.pivot.modelbus.IModelObject;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
 import tudresden.ocl20.pivot.pivotmodel.Constraint;
 
 /**
@@ -37,7 +36,7 @@ import tudresden.ocl20.pivot.pivotmodel.Constraint;
  * The {@link ResultsContentProvider} is responsible for providing
  * {@link Object}s to the {@link TableViewer} of the {@link InterpreterView}.
  * The {@link ResultsContentProvider} provides elements as {@link List}
- * containing {@link Constraint}, {@link IModelObject} and {@link OclRoot}
+ * containing {@link Constraint}, {@link IModelInstanceElement} and {@link OclRoot}
  * result.
  * </p>
  * 
@@ -48,7 +47,7 @@ public class ResultsContentProvider implements IStructuredContentProvider {
 	/** The list index containing the {@link Constraint}. */
 	public static final int CONSTRAINT = 1;
 
-	/** The list index containing the {@link IModelObject}. */
+	/** The list index containing the {@link IModelInstanceElement}. */
 	public static final int MODELOBJECT = 0;
 
 	/** The list index containing the result. */
@@ -76,14 +75,14 @@ public class ResultsContentProvider implements IStructuredContentProvider {
 	/**
 	 * <p>
 	 * Provides elements as {@link List} containing {@link Constraint},
-	 * {@link IModelObject} and {@link OclRoot} result.
+	 * {@link IModelInstanceElement} and {@link OclRoot} result.
 	 * </p>
 	 * 
 	 * @param interpretationResultCache
 	 *          The {@link InterpretationResultCache} whose Elements will be
 	 *          provided.
 	 * @return An Array of {@link List}s containing {@link Constraint},
-	 *         {@link IModelObject} and {@link OclRoot} results.
+	 *         {@link IModelInstanceElement} and {@link OclRoot} results.
 	 * 
 	 * @see org.eclipse.jface.viewers.IStructuredContentProvider#getElements(java.lang.Object)
 	 */

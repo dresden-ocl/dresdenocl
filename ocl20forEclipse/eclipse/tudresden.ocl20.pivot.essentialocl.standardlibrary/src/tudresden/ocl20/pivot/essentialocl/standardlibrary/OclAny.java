@@ -32,13 +32,107 @@
  */
 package tudresden.ocl20.pivot.essentialocl.standardlibrary;
 
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
+import tudresden.ocl20.pivot.pivotmodel.Operation;
 
 /**
  * 
- *
+ * 
  * @author Matthias Braeuer
  * @version 1.0 30.03.2007
  */
-public interface OclAny extends OclObject {
+public interface OclAny {
+
+	/**
+	 * Invokes either an operation of the standard library or - if the subtype is
+	 * {@link OclModelInstanceObject} - an operation on the model object.
+	 * 
+	 * @param operationName
+	 *          the name of the invoked operation
+	 * @param parameters
+	 *          the parameters of the invoked operation
+	 * @return the return value of the invoked operation
+	 */
+	OclAny invokeOperation(Operation operation, OclAny... parameters);
+
+	/**
+	 * 
+	 * @param object2
+	 * @return true if <code>self</code> is the same object as
+	 *         <code>object2</code>.
+	 */
+	OclBoolean isEqualTo(OclAny object2);
+
+	/**
+	 * 
+	 * @param object2
+	 * @return true if <code>this</code> is a different object from
+	 *         <code>object2</code>.
+	 */
+	OclBoolean isNotEqualTo(OclAny object2);
+
+	/**
+	 * 
+	 * @return true if <code>this</code> is equal to OclInvalid or equal to null.
+	 */
+	OclBoolean oclIsUndefined();
+
+	/**
+	 * 
+	 * @return true if <code>this</code> is equal to OclInvalid.
+	 */
+	OclBoolean oclIsInvalid();
+
+	/**
+	 * 
+	 * @param typespec
+	 * @return <code>this</code>, where <code>this</code> is of the type
+	 *         identified by <code>typespec</code>.
+	 */
+	<T extends OclAny> T oclAsType(OclType<T> type);
+
+	/**
+	 * 
+	 * @param typespec
+	 * @return true if <code>this</code> is of the type identified by
+	 *         <code>typespec</code>.
+	 */
+	<T extends OclAny> OclBoolean oclIsTypeOf(OclType<T> typespec);
+
+	/**
+	 * 
+	 * @param typespec
+	 * @return true if <code>this</code> conforms to the type identified by
+	 *         <code>typespec</code>.
+	 */
+	<T extends OclAny> OclBoolean oclIsKindOf(OclType<T> typespec);
+
+	/**
+	 * Gets the reason for undefined object.
+	 * 
+	 * @return the undefinedreason
+	 */
+	String getUndefinedreason();
+
+	/**
+	 * Gets the reason for invalid object.
+	 * 
+	 * @return the {@link Throwable} that caused this element to be invalid.
+	 */
+	public Throwable getInvalidReason();
+
+	/**
+	 * OCL operation asSet()
+	 * 
+	 * @return the ocl set
+	 */
+	<T extends OclAny> OclSet<T> asSet();
+
+	/**
+	 * Returns the adapted {@link IModelInstanceElement}.
+	 * 
+	 * @return the adapted {@link IModelInstanceElement}
+	 */
+	IModelInstanceElement getModelInstanceElement();
 
 }

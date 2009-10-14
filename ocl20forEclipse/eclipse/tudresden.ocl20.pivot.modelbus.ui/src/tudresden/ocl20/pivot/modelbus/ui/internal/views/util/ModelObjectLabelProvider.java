@@ -21,8 +21,8 @@ package tudresden.ocl20.pivot.modelbus.ui.internal.views.util;
 import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.swt.graphics.Image;
 
-import tudresden.ocl20.pivot.modelbus.IModelInstance;
-import tudresden.ocl20.pivot.modelbus.IModelObject;
+import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
 import tudresden.ocl20.pivot.modelbus.ui.ModelBusUIPlugin;
 import tudresden.ocl20.pivot.modelbus.ui.internal.views.ModelInstancesView;
 import tudresden.ocl20.pivot.pivotmodel.Type;
@@ -30,7 +30,7 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
 /**
  * <p>
  * The {@link ModelObjectLabelProvider} is used by the
- * {@link ModelInstancesView} to display {@link IModelObject}s.
+ * {@link ModelInstancesView} to display {@link IModelInstanceElement}s.
  * </p>
  * 
  * @author Claas Wilke
@@ -53,15 +53,15 @@ public class ModelObjectLabelProvider extends LabelProvider {
 			result = ((IModelInstance) anObject).getDisplayName();
 		}
 
-		else if (anObject instanceof IModelObject) {
-			result = ((IModelObject) anObject).toString();
+		else if (anObject instanceof IModelInstanceElement) {
+			result = ((IModelInstanceElement) anObject).getName();
 		}
 
 		else if (anObject instanceof Type) {
 
 			Type type;
 			type = (Type) anObject;
-	
+			
 			result = type.getQualifiedName();
 		}
 
@@ -86,7 +86,7 @@ public class ModelObjectLabelProvider extends LabelProvider {
 					.createImage();
 		}
 
-		else if (anObject instanceof IModelObject) {
+		else if (anObject instanceof IModelInstanceElement) {
 			result = ModelBusUIPlugin.getImageDescriptor(ICON_OBJECT)
 					.createImage();
 		}

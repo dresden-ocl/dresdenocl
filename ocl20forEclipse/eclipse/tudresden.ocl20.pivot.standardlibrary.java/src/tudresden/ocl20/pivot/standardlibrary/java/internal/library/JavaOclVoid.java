@@ -1,167 +1,84 @@
-/**
- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
- * Copyright (C) 2007 Ronny Brandt (Ronny_Brandt@web.de).                    *
- * All rights reserved.                                                      *
- *                                                                           *
- * This work was done as a project at the Chair for Software Technology,     *
- * Dresden University Of Technology, Germany (http://st.inf.tu-dresden.de).  *
- * It is understood that any modification not identified as such is not      *
- * covered by the preceding statement.                                       *
- *                                                                           *
- * This work is free software; you can redistribute it and/or modify it      *
- * under the terms of the GNU Library General Public License as published    *
- * by the Free Software Foundation; either version 2 of the License, or      *
- * (at your option) any later version.                                       *
- *                                                                           *
- * This work is distributed in the hope that it will be useful, but WITHOUT  *
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or     *
- * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Library General Public     *
- * License for more details.                                                 *
- *                                                                           *
- * You should have received a copy of the GNU Library General Public License *
- * along with this library; if not, you can view it online at                *
- * http://www.fsf.org/licensing/licenses/gpl.html.                           *
- *                                                                           *
- * To submit a bug report, send a comment, or get the latest news on this    *
- * project, please visit the website: http://dresden-ocl.sourceforge.net.    *
- * For more information on OCL and related projects visit the OCL Portal:    *
- * http://st.inf.tu-dresden.de/ocl                                           *
- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
- */
 package tudresden.ocl20.pivot.standardlibrary.java.internal.library;
 
+import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBoolean;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclType;
+import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSet;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclVoid;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceVoid;
+import tudresden.ocl20.pivot.pivotmodel.Operation;
+import tudresden.ocl20.pivot.standardlibrary.java.exceptions.InvalidException;
 
-/**
- * <p>
- * Provides an implementation of {@link OclVoid} in Java.
- * </p>
- *
- * @author Ronny Brandt
- */
-public class JavaOclVoid extends JavaOclObject implements OclVoid {
+public class JavaOclVoid extends JavaOclAny implements OclVoid {
 
-	/** The only instance of {@link JavaOclVoid}. */
-	private static JavaOclVoid INSTANCE;
+	private static JavaOclVoid instance = null;
+
+	private static JavaOclVoid getInstance() {
+
+		if (instance == null)
+			instance = new JavaOclVoid(IModelInstanceVoid.INSTANCE);
+		return instance;
+	}
+
+	public static JavaOclVoid INSTANCE = getInstance();
 
 	/**
-	 * <p>
-	 * Instantiates a new {@link JavaOclVoid}.
-	 * </p>
-	 *
-	 * @param adaptable
-	 *            The adaptable {@link Class} of this {@link JavaOclVoid}.
+	 * Private constructor for singleton.
+	 * 
+	 * @param imiElement
 	 */
-	private JavaOclVoid(Object adaptee) {
-		super(adaptee);
+	private JavaOclVoid(IModelInstanceVoid imiElement) {
+
+		super(imiElement);
+		undefinedreason = "null value";
 	}
 
 	/**
-	 * <p>
-	 * Gets the single instance of {@link JavaOclVoid}.
-	 * </p>
-	 *
-	 * @return single instance of {@link JavaOclVoid}.
+	 * Explicit public constructor to allow <code>null</code> values to be
+	 * invalid.
+	 * 
+	 * @param invalidReason
+	 *          the {@link Throwable} that caused this element to be invalid
 	 */
-	public static JavaOclVoid getInstance() {
+	public JavaOclVoid(Throwable invalidReason) {
 
-		if (INSTANCE == null) {
-			INSTANCE = new JavaOclVoid(null);
-			INSTANCE.setUndefinedreason("JavaOclVoid");
-		}
-		// no else.
-
-		return INSTANCE;
+		super(invalidReason);
 	}
 
 	/*
 	 * (non-Javadoc)
-	 *
-	 * @see
-	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclRoot
-	 * #getPropertyValue(java.lang.String)
+	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny#asSet()
 	 */
-	@Override
-	public OclRoot getPropertyValue(String name) {
-		return this;
+	public <T extends OclAny> OclSet<T> asSet() {
+
+		throw new InvalidException(new UnsupportedOperationException(
+				"asSet() is not defined on OclVoid."));
 	}
 
 	/*
 	 * (non-Javadoc)
-	 *
 	 * @see
-	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclObject
-	 * #getType()
+	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny#invokeOperation
+	 * (tudresden.ocl20.pivot.pivotmodel.Operation,
+	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny[])
 	 */
-	@Override
-	public OclType getType() {
-		return JavaOclType.getType("OclVoid");
+	public OclAny invokeOperation(Operation operation, OclAny... parameters) {
+
+		throw new InvalidException(new UnsupportedOperationException(
+				"invokeOperation(Operation, OclAny...) is not defined on OclVoid."));
 	}
 
 	/*
 	 * (non-Javadoc)
-	 *
 	 * @see
-	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclRoot
-	 * #invokeOperation(java.lang.String,
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot[])
+	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny#isEqualTo(tudresden
+	 * .ocl20.pivot.essentialocl.standardlibrary.OclAny)
 	 */
-	@Override
-	public OclRoot invokeOperation(String operationName, OclRoot... parameters)
-			throws NoSuchMethodException {
-		return invokeLibraryOperation(operationName, parameters);
+	public OclBoolean isEqualTo(OclAny object2) {
+
+		// FIXME Michael: or is null == null allowed? in OCL one should use
+		// oclIsUndefined
+		throw new InvalidException(new UnsupportedOperationException(
+				"isEqualTo(OclAny) is not defined on OclVoid."));
 	}
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see
-	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclRoot
-	 * #isOclUndefined()
-	 */
-	@Override
-	public OclBoolean isOclUndefined() {
-		return JavaOclBoolean.getInstance(true);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see
-	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclRoot
-	 * #isEqualTo(tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot)
-	 */
-	@Override
-	public OclBoolean isEqualTo(OclRoot anObject) {
-
-		OclBoolean result;
-
-		/* Check if this OclVoid is undefined. */
-		if (isOclUndefined().isTrue()) {
-			result = JavaOclBoolean.getInstance(null);
-			result.setUndefinedreason(getUndefinedreason());
-		}
-
-		/* Else check if the given object is undefined. */
-		else if (anObject.isOclUndefined().isTrue()) {
-			result = JavaOclBoolean.getInstance(null);
-			result.setUndefinedreason(anObject.getUndefinedreason());
-		}
-
-		/* Else compute the result. */
-		else {
-			if (anObject instanceof OclVoid) {
-				result = JavaOclBoolean.getInstance(true);
-			}
-
-			else {
-				return JavaOclBoolean.getInstance(false);
-			}
-		}
-
-		return result;
-	}
 }

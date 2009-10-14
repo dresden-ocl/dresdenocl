@@ -32,13 +32,14 @@
  */
 package tudresden.ocl20.pivot.essentialocl.standardlibrary;
 
+
 /**
  * 
  * 
  * @author Matthias Braeuer
  * @version 1.0 30.03.2007
  */
-public interface OclBoolean extends OclAny {
+public interface OclBoolean extends OclLibraryObject {
 
 	/**
 	 * 
@@ -50,8 +51,8 @@ public interface OclBoolean extends OclAny {
 	/**
 	 * 
 	 * @param b
-	 * @return true if either <code>this</code> or <code>b</code> is true,
-	 *         but not both.
+	 * @return true if either <code>this</code> or <code>b</code> is true, but not
+	 *         both.
 	 */
 	OclBoolean xor(OclBoolean b);
 
@@ -72,8 +73,8 @@ public interface OclBoolean extends OclAny {
 	/**
 	 * 
 	 * @param b
-	 * @return true if <code>this</code> is false, or if <code>this</code>
-	 *         is true and <code>b</code> is true.
+	 * @return true if <code>this</code> is false, or if <code>this</code> is true
+	 *         and <code>b</code> is true.
 	 */
 	OclBoolean implies(OclBoolean b);
 
@@ -93,5 +94,6 @@ public interface OclBoolean extends OclAny {
 	 * @return thanStatement if <code>this</code> ist true, otherwise
 	 *         elseStatement
 	 */
-	OclRoot ifThenElse(OclRoot thenStatement, OclRoot elseStatement);
+	OclAny ifThenElse(OclAny thenStatement, OclAny elseStatement);
+
 }

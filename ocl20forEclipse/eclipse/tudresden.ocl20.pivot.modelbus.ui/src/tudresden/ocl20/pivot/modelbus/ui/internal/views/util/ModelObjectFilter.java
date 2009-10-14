@@ -24,8 +24,8 @@ import java.util.Set;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.viewers.ViewerFilter;
 
-import tudresden.ocl20.pivot.modelbus.IModelInstance;
-import tudresden.ocl20.pivot.modelbus.IModelObject;
+import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
 import tudresden.ocl20.pivot.modelbus.ui.internal.views.ModelInstancesView;
 import tudresden.ocl20.pivot.modelbus.ui.internal.views.ModelsView;
 import tudresden.ocl20.pivot.pivotmodel.ConstrainableElement;
@@ -38,8 +38,9 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
 /**
  * <p>
  * The {@link ModelObjectFilter} is used by the {@link ModelInstancesView} to
- * select the {@link IModelObject}s which shall be shown depending on the
- * selection of {@link Constraint}s or {@link Type}s in the {@link ModelsView}.
+ * select the {@link IModelInstanceElement}s which shall be shown depending on
+ * the selection of {@link Constraint}s or {@link Type}s in the
+ * {@link ModelsView}.
  * </p>
  * 
  * @autor Claas Wilke
@@ -59,8 +60,8 @@ public class ModelObjectFilter extends ViewerFilter {
 	 * </p>
 	 * 
 	 * @param aNamespace
-	 *          The {@link Namespace} which {@link IModelObject} that shall be
-	 *          filtered.
+	 *          The {@link Namespace} which {@link IModelInstanceElement} that
+	 *          shall be filtered.
 	 */
 	public void addFilter(Namespace aNamespace) {
 
@@ -75,13 +76,13 @@ public class ModelObjectFilter extends ViewerFilter {
 
 	/**
 	 * <p>
-	 * Adds an {@link IModelObject}'s {@link Type} that shall be shown to this
-	 * {@link ModelObjectFilter}.
+	 * Adds an {@link IModelInstanceElement}'s {@link Type} that shall be shown to
+	 * this {@link ModelObjectFilter}.
 	 * </p>
 	 * 
 	 * @param aType
-	 *          The {@link Type} of thie {@link IModelObject} that shall be
-	 *          filtered.
+	 *          The {@link Type} of thie {@link IModelInstanceElement} that shall
+	 *          be filtered.
 	 */
 	public void addFilter(Type aType) {
 
@@ -227,51 +228,31 @@ public class ModelObjectFilter extends ViewerFilter {
 		/* Else check if the parent element is an IModelInstance. */
 		else if (aParentElement instanceof IModelInstance) {
 
-			Type type;
-			type = (Type) anElement;
+			/* Convert the given element into a Type. */
+			if (anElement instanceof Type) {
 
-			result = false;
+				Type type;
+				type = (Type) anElement;
 
-			/*
-			 * Check, if the given type conforms to one type which shall be filtered.
-			 */
-			for (Type aFilteredType : this.myFilteredTypes) {
-
-				if (type.conformsTo(aFilteredType)) {
-					result = true;
-					break;
-				}
-				// no else.
+				/* Check, if the type shall be filtered. */
+				result = this.myFilteredTypes.contains(type);
 			}
 
+			else {
+				result = false;
+			}
 		}
 
-		/*
-		 * Else check if the parent element is List representing the canonical name
-		 * of a model objects type.
-		 */
+		/* Else check if the parent element is a Type. */
 		else if (aParentElement instanceof Type) {
 
-			if (anElement instanceof IModelObject) {
+			if (anElement instanceof IModelInstanceElement) {
 
-				IModelObject aModelObject;
+				Type type;				
+				type = (Type) aParentElement;
 
-				result = false;
-				aModelObject = (IModelObject) anElement;
-
-				/*
-				 * Iterate through the filtered types and check if the model object is
-				 * an instance of one of these types.
-				 */
-				for (Type aType : this.myFilteredTypes) {
-
-					if (aModelObject.isInstanceOf(aType)) {
-						result = true;
-						break;
-					}
-					// no else.
-				}
-				// end for.
+				/* Check if the type of this object shall be filtered. */
+				result = this.myFilteredTypes.contains(type);
 			}
 
 			else {

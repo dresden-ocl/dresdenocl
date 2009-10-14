@@ -30,12 +30,19 @@
  */
 package tudresden.ocl20.pivot.standardlibrary.java.internal.library;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBoolean;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclComparable;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclReal;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclType;
+import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSet;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceReal;
+import tudresden.ocl20.pivot.standardlibrary.java.exceptions.InvalidException;
+import tudresden.ocl20.pivot.standardlibrary.java.factory.JavaStandardLibraryFactory;
 
 /**
  * <p>
@@ -43,8 +50,12 @@ import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclType;
  * </p>
  * 
  * @author Ronny Brandt
+ * @author Michael Thiele
  */
-public class JavaOclReal extends JavaOclAny implements OclReal {
+public class JavaOclReal extends JavaOclLibraryObject implements OclReal,
+		IAddableElement {
+
+	private IModelInstanceReal imiReal;
 
 	/**
 	 * <p>
@@ -52,11 +63,22 @@ public class JavaOclReal extends JavaOclAny implements OclReal {
 	 * </p>
 	 * 
 	 * @param adaptee
-	 *          The adapted {@link Number}.
+	 *          The adapted {@link IModelInstanceReal}.
 	 */
-	public JavaOclReal(Number adaptee) {
+	public JavaOclReal(IModelInstanceReal imiReal) {
 
-		super(adaptee);
+		super(imiReal);
+		this.imiReal = imiReal;
+	}
+
+	public JavaOclReal(String undefinedReason) {
+
+		super(undefinedReason);
+	}
+
+	public JavaOclReal(Throwable invalidReason) {
+
+		super(invalidReason);
 	}
 
 	/*
@@ -67,16 +89,11 @@ public class JavaOclReal extends JavaOclAny implements OclReal {
 
 		OclReal result;
 
-		/* Check if this real is undefined. */
-		if (this.isOclUndefined().isTrue()) {
-			result = this;
-		}
+		checkUndefinedAndInvalid(this);
 
 		/* Else compute the result. */
-		else {
-			result =
-					new JavaOclReal(Math.abs(((Number) this.getAdaptee()).floatValue()));
-		}
+		Double doubleResult = Math.abs(imiReal.getDouble());
+		result = JavaStandardLibraryFactory.INSTANCE.createOclReal(doubleResult);
 
 		return result;
 	}
@@ -87,30 +104,18 @@ public class JavaOclReal extends JavaOclAny implements OclReal {
 	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclReal#add(tudresden
 	 * .ocl20.pivot.essentialocl.standardlibrary.OclReal)
 	 */
-	public OclReal add(OclReal aReal) {
+	public OclReal add(OclReal that) {
 
 		OclReal result;
 
-		/* Check if this real is undefined. */
-		if (this.isOclUndefined().isTrue()) {
-			result = this;
-		}
-
-		/* Else check if the given real is undefined. */
-		else if (aReal.isOclUndefined().isTrue()) {
-			result = aReal;
-		}
+		checkUndefinedAndInvalid(this, that);
 
 		/* Else compute the result. */
-		else {
-			float float1;
-			float float2;
-
-			float1 = ((Number) this.getAdaptee()).floatValue();
-			float2 = ((Number) aReal.getAdaptee()).floatValue();
-
-			result = new JavaOclReal(float1 + float2);
-		}
+		Double summand1 = this.imiReal.getDouble();
+		Double summand2 =
+				((IModelInstanceReal) that.getModelInstanceElement()).getDouble();
+		Double doubleResult = summand1 + summand2;
+		result = JavaStandardLibraryFactory.INSTANCE.createOclReal(doubleResult);
 
 		return result;
 	}
@@ -121,39 +126,32 @@ public class JavaOclReal extends JavaOclAny implements OclReal {
 	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclComparable#compareTo
 	 * (tudresden.ocl20.pivot.essentialocl.standardlibrary.OclComparable)
 	 */
-	public OclInteger compareTo(OclComparable anObject) {
+	public OclInteger compareTo(OclComparable that) {
 
 		OclInteger result;
 
-		/* Check if the given object is an OclReal. */
-		if (anObject instanceof OclReal) {
+		try {
+
 			OclReal aReal;
 
 			/* Cast the given object to real. */
-			aReal = (OclReal) anObject;
+			aReal = (OclReal) that;
+
+			checkUndefinedAndInvalid(this, aReal);
 
 			if (isGreaterThan(aReal).isTrue()) {
-				result = new JavaOclInteger(1);
+				result = JavaStandardLibraryFactory.INSTANCE.createOclInteger(1L);
 			}
 
 			else if (isLessThan(aReal).isTrue()) {
-				result = new JavaOclInteger(-1);
+				result = JavaStandardLibraryFactory.INSTANCE.createOclInteger(-1L);
 			}
 
 			else {
-				result = new JavaOclInteger(0);
+				result = JavaStandardLibraryFactory.INSTANCE.createOclInteger(0L);
 			}
-		}
-
-		else {
-			String msg;
-
-			msg = "An OclReal could not be compared with a ";
-			msg += anObject.getClass().getName() + ".";
-
-			result = new JavaOclInteger(null);
-			result.setUndefinedreason(msg);
-
+		} catch (ClassCastException e) {
+			throw new InvalidException(e);
 		}
 
 		return result;
@@ -165,29 +163,22 @@ public class JavaOclReal extends JavaOclAny implements OclReal {
 	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclReal#divide(tudresden
 	 * .ocl20.pivot.essentialocl.standardlibrary.OclReal)
 	 */
-	public OclReal divide(OclReal aReal) {
+	public OclReal divide(OclReal that) {
 
 		OclReal result;
 
-		/* Check if this real is undefined. */
-		if (this.isOclUndefined().isTrue()) {
-			result = this;
-		}
-
-		/* Else check if the given real is undefined. */
-		else if (aReal.isOclUndefined().isTrue()) {
-			result = aReal;
-		}
+		checkUndefinedAndInvalid(this, that);
 
 		/* Else compute the result. */
-		else {
-			float float1;
-			float float2;
+		Double dividend = this.imiReal.getDouble();
+		Double divisor =
+				((IModelInstanceReal) that.getModelInstanceElement()).getDouble();
 
-			float1 = ((Number) this.getAdaptee()).floatValue();
-			float2 = ((Number) aReal.getAdaptee()).floatValue();
-
-			result = new JavaOclReal(float1 / float2);
+		try {
+			Double doubleResult = dividend / divisor;
+			result = JavaStandardLibraryFactory.INSTANCE.createOclReal(doubleResult);
+		} catch (ArithmeticException e) {
+			throw new InvalidException(e);
 		}
 
 		return result;
@@ -201,18 +192,13 @@ public class JavaOclReal extends JavaOclAny implements OclReal {
 
 		OclInteger result;
 
-		/* Check if this real is undefined. */
-		if (this.isOclUndefined().isTrue()) {
-			result = new JavaOclInteger(null);
-			result.setUndefinedreason(this.getUndefinedreason());
-		}
+		checkUndefinedAndInvalid(this);
 
 		/* Else compute the result. */
-		else {
-			result =
-					new JavaOclInteger((int) Math.floor(((Number) getAdaptee())
-							.floatValue()));
-		}
+		Double doubleResult = Math.floor(imiReal.getDouble());
+		result =
+				JavaStandardLibraryFactory.INSTANCE.createOclInteger(doubleResult
+						.longValue());
 
 		return result;
 	}
@@ -223,32 +209,18 @@ public class JavaOclReal extends JavaOclAny implements OclReal {
 	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclReal#isGreaterEqual
 	 * (tudresden.ocl20.pivot.essentialocl.standardlibrary.OclReal)
 	 */
-	public OclBoolean isGreaterEqual(OclReal aReal) {
+	public OclBoolean isGreaterEqual(OclReal that) {
 
 		OclBoolean result;
 
-		/* Check if this real is undefined. */
-		if (this.isOclUndefined().isTrue()) {
-			result = JavaOclBoolean.getInstance(null);
-			result.setUndefinedreason(this.getUndefinedreason());
-		}
-
-		/* Else check if the given real is undefined. */
-		else if (aReal.isOclUndefined().isTrue()) {
-			result = JavaOclBoolean.getInstance(null);
-			result.setUndefinedreason(aReal.getUndefinedreason());
-		}
+		checkUndefinedAndInvalid(this, that);
 
 		/* Else compute the result. */
-		else {
-			float float1;
-			float float2;
+		Double double1 = imiReal.getDouble();
+		Double double2 =
+				((IModelInstanceReal) that.getModelInstanceElement()).getDouble();
 
-			float1 = ((Number) this.getAdaptee()).floatValue();
-			float2 = ((Number) aReal.getAdaptee()).floatValue();
-
-			result = JavaOclBoolean.getInstance(float1 >= float2);
-		}
+		result = JavaOclBoolean.getInstance(double1 >= double2);
 
 		return result;
 	}
@@ -259,32 +231,18 @@ public class JavaOclReal extends JavaOclAny implements OclReal {
 	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclReal#isGreaterThan
 	 * (tudresden.ocl20.pivot.essentialocl.standardlibrary.OclReal)
 	 */
-	public OclBoolean isGreaterThan(OclReal aReal) {
+	public OclBoolean isGreaterThan(OclReal that) {
 
 		OclBoolean result;
 
-		/* Check if this real is undefined. */
-		if (this.isOclUndefined().isTrue()) {
-			result = JavaOclBoolean.getInstance(null);
-			result.setUndefinedreason(this.getUndefinedreason());
-		}
-
-		/* Else check if the given real is undefined. */
-		else if (aReal.isOclUndefined().isTrue()) {
-			result = JavaOclBoolean.getInstance(null);
-			result.setUndefinedreason(aReal.getUndefinedreason());
-		}
+		checkUndefinedAndInvalid(this, that);
 
 		/* Else compute the result. */
-		else {
-			float float1;
-			float float2;
+		Double double1 = imiReal.getDouble();
+		Double double2 =
+				((IModelInstanceReal) that.getModelInstanceElement()).getDouble();
 
-			float1 = ((Number) this.getAdaptee()).floatValue();
-			float2 = ((Number) aReal.getAdaptee()).floatValue();
-
-			result = JavaOclBoolean.getInstance(float1 > float2);
-		}
+		result = JavaOclBoolean.getInstance(double1 > double2);
 
 		return result;
 	}
@@ -294,32 +252,18 @@ public class JavaOclReal extends JavaOclAny implements OclReal {
 	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclReal#isLessEqual
 	 * (tudresden.ocl20.pivot.essentialocl.standardlibrary.OclReal)
 	 */
-	public OclBoolean isLessEqual(OclReal aReal) {
+	public OclBoolean isLessEqual(OclReal that) {
 
 		OclBoolean result;
 
-		/* Check if this real is undefined. */
-		if (this.isOclUndefined().isTrue()) {
-			result = JavaOclBoolean.getInstance(null);
-			result.setUndefinedreason(this.getUndefinedreason());
-		}
-
-		/* Else check if the given real is undefined. */
-		else if (aReal.isOclUndefined().isTrue()) {
-			result = JavaOclBoolean.getInstance(null);
-			result.setUndefinedreason(aReal.getUndefinedreason());
-		}
+		checkUndefinedAndInvalid(this, that);
 
 		/* Else compute the result. */
-		else {
-			float float1;
-			float float2;
+		Double double1 = imiReal.getDouble();
+		Double double2 =
+				((IModelInstanceReal) that.getModelInstanceElement()).getDouble();
 
-			float1 = ((Number) this.getAdaptee()).floatValue();
-			float2 = ((Number) aReal.getAdaptee()).floatValue();
-
-			result = JavaOclBoolean.getInstance(float1 <= float2);
-		}
+		result = JavaOclBoolean.getInstance(double1 <= double2);
 
 		return result;
 	}
@@ -329,32 +273,18 @@ public class JavaOclReal extends JavaOclAny implements OclReal {
 	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclReal#isLessThan
 	 * (tudresden.ocl20.pivot.essentialocl.standardlibrary.OclReal)
 	 */
-	public OclBoolean isLessThan(OclReal aReal) {
+	public OclBoolean isLessThan(OclReal that) {
 
 		OclBoolean result;
 
-		/* Check if this real is undefined. */
-		if (this.isOclUndefined().isTrue()) {
-			result = JavaOclBoolean.getInstance(null);
-			result.setUndefinedreason(this.getUndefinedreason());
-		}
-
-		/* Else check if the given real is undefined. */
-		else if (aReal.isOclUndefined().isTrue()) {
-			result = JavaOclBoolean.getInstance(null);
-			result.setUndefinedreason(aReal.getUndefinedreason());
-		}
+		checkUndefinedAndInvalid(this, that);
 
 		/* Else compute the result. */
-		else {
-			float float1;
-			float float2;
+		Double double1 = imiReal.getDouble();
+		Double double2 =
+				((IModelInstanceReal) that.getModelInstanceElement()).getDouble();
 
-			float1 = ((Number) this.getAdaptee()).floatValue();
-			float2 = ((Number) aReal.getAdaptee()).floatValue();
-
-			result = JavaOclBoolean.getInstance(float1 < float2);
-		}
+		result = JavaOclBoolean.getInstance(double1 < double2);
 
 		return result;
 	}
@@ -365,30 +295,18 @@ public class JavaOclReal extends JavaOclAny implements OclReal {
 	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclReal#max(tudresden
 	 * .ocl20.pivot.essentialocl.standardlibrary.OclReal)
 	 */
-	public OclReal max(OclReal aReal) {
+	public OclReal max(OclReal that) {
 
 		OclReal result;
 
-		/* Check if this real is undefined. */
-		if (this.isOclUndefined().isTrue()) {
-			result = this;
-		}
-
-		/* Else check if the given real is undefined. */
-		else if (aReal.isOclUndefined().isTrue()) {
-			result = aReal;
-		}
+		checkUndefinedAndInvalid(this, that);
 
 		/* Else compute the result. */
-		else {
-			float float1;
-			float float2;
-
-			float1 = ((Number) this.getAdaptee()).floatValue();
-			float2 = ((Number) aReal.getAdaptee()).floatValue();
-
-			result = new JavaOclReal(Math.max(float1, float2));
-		}
+		Double double1 = this.imiReal.getDouble();
+		Double double2 =
+				((IModelInstanceReal) that.getModelInstanceElement()).getDouble();
+		Double doubleResult = Math.max(double1, double2);
+		result = JavaStandardLibraryFactory.INSTANCE.createOclReal(doubleResult);
 
 		return result;
 	}
@@ -399,30 +317,18 @@ public class JavaOclReal extends JavaOclAny implements OclReal {
 	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclReal#min(tudresden
 	 * .ocl20.pivot.essentialocl.standardlibrary.OclReal)
 	 */
-	public OclReal min(OclReal aReal) {
+	public OclReal min(OclReal that) {
 
 		OclReal result;
 
-		/* Check if this real is undefined. */
-		if (this.isOclUndefined().isTrue()) {
-			result = this;
-		}
-
-		/* Else check if the given real is undefined. */
-		else if (aReal.isOclUndefined().isTrue()) {
-			result = aReal;
-		}
+		checkUndefinedAndInvalid(this, that);
 
 		/* Else compute the result. */
-		else {
-			float float1;
-			float float2;
-
-			float1 = ((Number) this.getAdaptee()).floatValue();
-			float2 = ((Number) aReal.getAdaptee()).floatValue();
-
-			result = new JavaOclReal(Math.min(float1, float2));
-		}
+		Double double1 = this.imiReal.getDouble();
+		Double double2 =
+				((IModelInstanceReal) that.getModelInstanceElement()).getDouble();
+		Double doubleResult = Math.min(double1, double2);
+		result = JavaStandardLibraryFactory.INSTANCE.createOclReal(doubleResult);
 
 		return result;
 	}
@@ -433,30 +339,18 @@ public class JavaOclReal extends JavaOclAny implements OclReal {
 	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclReal#multiply(tudresden
 	 * .ocl20.pivot.essentialocl.standardlibrary.OclReal)
 	 */
-	public OclReal multiply(OclReal aReal) {
+	public OclReal multiply(OclReal that) {
 
 		OclReal result;
 
-		/* Check if this real is undefined. */
-		if (this.isOclUndefined().isTrue()) {
-			result = this;
-		}
-
-		/* Else check if the given real is undefined. */
-		else if (aReal.isOclUndefined().isTrue()) {
-			result = aReal;
-		}
+		checkUndefinedAndInvalid(this, that);
 
 		/* Else compute the result. */
-		else {
-			float float1;
-			float float2;
-
-			float1 = ((Number) this.getAdaptee()).floatValue();
-			float2 = ((Number) aReal.getAdaptee()).floatValue();
-
-			result = new JavaOclReal(float1 * float2);
-		}
+		Double double1 = this.imiReal.getDouble();
+		Double double2 =
+				((IModelInstanceReal) that.getModelInstanceElement()).getDouble();
+		Double doubleResult = double1 * double2;
+		result = JavaStandardLibraryFactory.INSTANCE.createOclReal(doubleResult);
 
 		return result;
 	}
@@ -469,20 +363,11 @@ public class JavaOclReal extends JavaOclAny implements OclReal {
 
 		OclReal result;
 
-		/* Check if this real is undefined. */
-		if (this.isOclUndefined().isTrue()) {
-			result = new JavaOclInteger(null);
-			result.setUndefinedreason(this.getUndefinedreason());
-		}
+		checkUndefinedAndInvalid(this);
 
 		/* Else compute the result. */
-		else {
-			float adapteeAsFloat;
-
-			adapteeAsFloat = ((Number) this.getAdaptee()).floatValue();
-
-			result = new JavaOclReal(-adapteeAsFloat);
-		}
+		Double doubleResult = -(imiReal.getDouble());
+		result = JavaStandardLibraryFactory.INSTANCE.createOclReal(doubleResult);
 
 		return result;
 	}
@@ -495,20 +380,11 @@ public class JavaOclReal extends JavaOclAny implements OclReal {
 
 		OclInteger result;
 
-		/* Check if this real is undefined. */
-		if (this.isOclUndefined().isTrue()) {
-			result = new JavaOclInteger(null);
-			result.setUndefinedreason(this.getUndefinedreason());
-		}
+		checkUndefinedAndInvalid(this);
 
 		/* Else compute the result. */
-		else {
-			float adapteeAsFloat;
-
-			adapteeAsFloat = ((Number) this.getAdaptee()).floatValue();
-
-			result = new JavaOclInteger(Math.round(adapteeAsFloat));
-		}
+		Long intResult = Math.round(imiReal.getDouble());
+		result = JavaStandardLibraryFactory.INSTANCE.createOclInteger(intResult);
 
 		return result;
 	}
@@ -519,70 +395,18 @@ public class JavaOclReal extends JavaOclAny implements OclReal {
 	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclReal#subtract(tudresden
 	 * .ocl20.pivot.essentialocl.standardlibrary.OclReal)
 	 */
-	public OclReal subtract(OclReal aReal) {
+	public OclReal subtract(OclReal that) {
 
 		OclReal result;
 
-		/* Check if this real is undefined. */
-		if (this.isOclUndefined().isTrue()) {
-			result = this;
-		}
-
-		/* Else check if the given real is undefined. */
-		else if (aReal.isOclUndefined().isTrue()) {
-			result = aReal;
-		}
+		checkUndefinedAndInvalid(this, that);
 
 		/* Else compute the result. */
-		else {
-			float float1;
-			float float2;
-
-			float1 = ((Number) this.getAdaptee()).floatValue();
-			float2 = ((Number) aReal.getAdaptee()).floatValue();
-
-			result = new JavaOclReal(float1 - float2);
-		}
-
-		return result;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclRoot
-	 * #isEqualTo(tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot)
-	 */
-	public OclBoolean isEqualTo(OclRoot aNumeric) {
-
-		OclBoolean result;
-
-		/* Check if this real is undefined. */
-		if (isOclUndefined().isTrue()) {
-			result = JavaOclBoolean.getInstance(null);
-			result.setUndefinedreason(this.getUndefinedreason());
-		}
-
-		/* Else check if the given numeric is undefined. */
-		else if (aNumeric.isOclUndefined().isTrue()) {
-			result = JavaOclBoolean.getInstance(null);
-			result.setUndefinedreason(aNumeric.getUndefinedreason());
-		}
-
-		/* Else compute the result. */
-		else {
-			Number number1;
-			Number number2;
-
-			boolean booleanResult;
-
-			number1 = ((Number) this.getAdaptee()).floatValue();
-			number2 = ((Number) aNumeric.getAdaptee()).floatValue();
-
-			booleanResult = number1.equals(number2);
-
-			result = JavaOclBoolean.getInstance(booleanResult);
-		}
+		Double double1 = this.imiReal.getDouble();
+		Double double2 =
+				((IModelInstanceReal) that.getModelInstanceElement()).getDouble();
+		Double doubleResult = double1 - double2;
+		result = JavaStandardLibraryFactory.INSTANCE.createOclReal(doubleResult);
 
 		return result;
 	}
@@ -590,51 +414,106 @@ public class JavaOclReal extends JavaOclAny implements OclReal {
 	/*
 	 * (non-Javadoc)
 	 * @see tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclAny
-	 * #getType()
+	 * #isEqualTo(tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot)
 	 */
-	@Override
-	public OclType getType() {
+	public OclBoolean isEqualTo(OclAny that) {
 
-		return JavaOclPrimitiveType.getType("Real");
+		OclBoolean result;
+
+		checkUndefinedAndInvalid(this, that);
+
+		if (!(that instanceof OclReal)) {
+			result = JavaOclBoolean.getInstance(false);
+		}
+		/* Else compute the result. */
+		else {
+
+			Double double1 = this.imiReal.getDouble();
+			Double double2 =
+					((IModelInstanceReal) that.getModelInstanceElement()).getDouble();
+			result = JavaOclBoolean.getInstance(double1.equals(double2));
+		}
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclAny
+	 * #toString()
+	 */
+	public String toString() {
+
+		StringBuilder result = new StringBuilder();
+
+		result.append(this.getClass().getSimpleName());
+		result.append("[");
+
+		if (this.oclIsUndefined().isTrue()) {
+			result.append("undefined: " + this.undefinedreason);
+		}
+
+		if (this.oclIsInvalid().isTrue()) {
+			result.append("invalid: " + this.undefinedreason);
+		}
+
+		else {
+			result.append((imiReal.getDouble()).toString());
+		}
+
+		result.append("]");
+
+		return result.toString();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny#asSet()
+	 */
+	public <T extends OclAny> OclSet<T> asSet() {
+
+		checkUndefinedAndInvalid(this);
+
+		OclSet<T> result;
+
+		Set<IModelInstanceElement> imiSet = new HashSet<IModelInstanceElement>();
+		imiSet.add(imiReal);
+
+		result = JavaStandardLibraryFactory.INSTANCE.createOclSet(imiSet);
+
+		return result;
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclRoot
-	 * #toString()
+	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.IAddableElement
+	 * #add(tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny)
 	 */
-	public String toString() {
+	public OclAny add(OclAny that) {
 
-		String result;
+		OclAny result;
 
-		result = this.getClass().getSimpleName();
-		result += "(";
+		try {
 
-		if (this.isOclUndefined().isTrue()) {
-			result += this.undefinedreason;
+			result = add((OclReal) that);
+
+		} catch (ClassCastException e) {
+
+			throw new InvalidException(e);
 		}
-
-		else {
-			result += ((Number) this.getAdaptee()).toString();
-		}
-		result += ")";
 
 		return result;
 	}
 
-	/**
-	 * <p>
-	 * Compares this {@link JavaOclReal} with a given {@link OclRoot}.
-	 * 
-	 * @param anOclRoot
-	 *          The {@link OclRoot} which shall be compare with this
-	 *          {@link JavaOclReal}.
-	 * 
-	 * @return True, if the to {@link OclReal}s have the same value.
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.IAddableElement
+	 * #getNeutralElement()
 	 */
-	public boolean equals(OclRoot anOclRoot) {
+	public OclAny getNeutralElement() {
 
-		return this.isEqualTo(anOclRoot).isTrue();
+		return JavaStandardLibraryFactory.INSTANCE.createOclReal(0);
 	}
+
 }

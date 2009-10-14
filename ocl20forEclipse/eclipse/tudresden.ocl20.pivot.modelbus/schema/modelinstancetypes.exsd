@@ -87,7 +87,7 @@
                   The name of a class that implements &lt;code&gt;IModelInstanceProvider&lt;/code&gt; and is responsible for loading instances of this model instance type.
                </documentation>
                <appinfo>
-                  <meta.attribute kind="java" basedOn=":tudresden.ocl20.pivot.modelbus.IModelInstanceProvider"/>
+                  <meta.attribute kind="java" basedOn=":tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceProvider"/>
                </appinfo>
             </annotation>
          </attribute>

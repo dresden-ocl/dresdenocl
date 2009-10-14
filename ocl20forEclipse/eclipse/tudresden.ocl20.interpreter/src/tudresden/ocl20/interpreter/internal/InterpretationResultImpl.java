@@ -20,14 +20,14 @@ with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
 package tudresden.ocl20.interpreter.internal;
 
 import tudresden.ocl20.interpreter.IInterpretationResult;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot;
-import tudresden.ocl20.pivot.modelbus.IModelObject;
+import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
 import tudresden.ocl20.pivot.pivotmodel.Constraint;
 
 /**
  * <p>
  * Represents interpretation results of Ocl {@link Constraint} associated to an
- * {@link IModelObject}.
+ * {@link IModelInstanceElement}.
  * </p>
  * 
  * @author Claas Wilke
@@ -35,11 +35,11 @@ import tudresden.ocl20.pivot.pivotmodel.Constraint;
  */
 public class InterpretationResultImpl implements IInterpretationResult {
 
-	/** The {@link IModelObject} of this {@link InterpretationResultImpl}. */
-	private IModelObject myModelObject;
+	/** The {@link IModelInstanceElement} of this {@link InterpretationResultImpl}. */
+	private IModelInstanceElement myModelObject;
 
-	/** The result of this {@link InterpretationResultImpl} as {@link OclRoot}. */
-	private OclRoot myResult;
+	/** The result of this {@link InterpretationResultImpl} as {@link OclAny}. */
+	private OclAny myResult;
 
 	/** The {@link Constraint} of this {@link InterpretationResultImpl}. */
 	private Constraint myConstraint;
@@ -50,15 +50,15 @@ public class InterpretationResultImpl implements IInterpretationResult {
 	 * </p>
 	 * 
 	 * @param modelObject
-	 *          The {@link IModelObject} of this {@link InterpretationResultImpl}.
+	 *          The {@link IModelInstanceElement} of this {@link InterpretationResultImpl}.
 	 * @param constraint
 	 *          The {@link Constraint} of this {@link InterpretationResultImpl}.
 	 * @param result
 	 *          The result of this {@link InterpretationResultImpl} as
-	 *          {@link OclRoot}.
+	 *          {@link OclAny}.
 	 */
-	public InterpretationResultImpl(IModelObject modelObject,
-			Constraint constraint, OclRoot result) {
+	public InterpretationResultImpl(IModelInstanceElement modelObject,
+			Constraint constraint, OclAny result) {
 
 		this.myConstraint = constraint;
 		this.myModelObject = modelObject;
@@ -67,12 +67,12 @@ public class InterpretationResultImpl implements IInterpretationResult {
 
 	/**
 	 * <p>
-	 * Returns the {@link IModelObject} of this {@link InterpretationResultImpl}.
+	 * Returns the {@link IModelInstanceElement} of this {@link InterpretationResultImpl}.
 	 * </p>
 	 * 
-	 * @return The {@link IModelObject} of this {@link InterpretationResultImpl}.
+	 * @return The {@link IModelInstanceElement} of this {@link InterpretationResultImpl}.
 	 */
-	public IModelObject getModelObject() {
+	public IModelInstanceElement getModelObject() {
 
 		return myModelObject;
 	}
@@ -80,13 +80,13 @@ public class InterpretationResultImpl implements IInterpretationResult {
 	/**
 	 * <p>
 	 * Returns the result of this {@link InterpretationResultImpl} as
-	 * {@link OclRoot} .
+	 * {@link OclAny} .
 	 * </p>
 	 * 
 	 * @return The result of this {@link InterpretationResultImpl} as
-	 *         {@link OclRoot} .
+	 *         {@link OclAny} .
 	 */
-	public OclRoot getResult() {
+	public OclAny getResult() {
 
 		return myResult;
 	}

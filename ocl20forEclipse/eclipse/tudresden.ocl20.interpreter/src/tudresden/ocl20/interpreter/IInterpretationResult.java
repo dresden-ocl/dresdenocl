@@ -13,14 +13,15 @@
  */
 package tudresden.ocl20.interpreter;
 
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot;
-import tudresden.ocl20.pivot.modelbus.IModelObject;
+import tudresden.ocl20.interpreter.internal.InterpretationResultImpl;
+import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
 import tudresden.ocl20.pivot.pivotmodel.Constraint;
 
 /**
  * <p>
  * Represents interpretation results of Ocl {@link Constraint} associated to an
- * {@link IModelObject}.
+ * {@link IModelInstanceElement}.
  * </p>
  * 
  * @author Claas Wilke
@@ -30,12 +31,12 @@ public interface IInterpretationResult {
 
 	/**
 	 * <p>
-	 * Returns the {@link IModelObject} of this {@link InterpretationResultImpl}.
+	 * Returns the {@link IModelInstanceElement} of this {@link InterpretationResultImpl}.
 	 * </p>
 	 * 
-	 * @return The {@link IModelObject} of this {@link InterpretationResultImpl}.
+	 * @return The {@link IModelInstanceElement} of this {@link InterpretationResultImpl}.
 	 */
-	public IModelObject getModelObject();
+	public IModelInstanceElement getModelObject();
 
 	/**
 	 * <p>
@@ -46,7 +47,7 @@ public interface IInterpretationResult {
 	 * @return The result of this {@link InterpretationResultImpl} as
 	 *         {@link OclRoot} .
 	 */
-	public OclRoot getResult();
+	public OclAny getResult();
 
 	/**
 	 * <p>

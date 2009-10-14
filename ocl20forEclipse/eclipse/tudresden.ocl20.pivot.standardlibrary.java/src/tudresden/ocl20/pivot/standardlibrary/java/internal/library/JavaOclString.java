@@ -30,12 +30,20 @@
  */
 package tudresden.ocl20.pivot.standardlibrary.java.internal.library;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBoolean;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclReal;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot;
+import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSet;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclString;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclType;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceInteger;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceString;
+import tudresden.ocl20.pivot.standardlibrary.java.exceptions.InvalidException;
+import tudresden.ocl20.pivot.standardlibrary.java.factory.JavaStandardLibraryFactory;
 
 /**
  * <p>
@@ -44,7 +52,9 @@ import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclType;
  * 
  * @author Ronny Brandt
  */
-public class JavaOclString extends JavaOclAny implements OclString {
+public class JavaOclString extends JavaOclLibraryObject implements OclString {
+
+	protected IModelInstanceString imiString;
 
 	/**
 	 * <p>
@@ -52,16 +62,26 @@ public class JavaOclString extends JavaOclAny implements OclString {
 	 * </p>
 	 * 
 	 * @param adaptee
-	 *            The adapted model instance object of this
-	 *            {@link JavaOclString}.
+	 *          The adapted model instance object of this {@link JavaOclString}.
 	 */
-	public JavaOclString(String adaptee) {
-		super(adaptee);
+	public JavaOclString(IModelInstanceString imiString) {
+
+		super(imiString);
+		this.imiString = imiString;
+	}
+
+	public JavaOclString(String undefinedReason) {
+
+		super(undefinedReason);
+	}
+
+	public JavaOclString(Throwable invalidReason) {
+
+		super(invalidReason);
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclString#concat(tudresden
 	 * .ocl20.pivot.essentialocl.standardlibrary.OclString)
@@ -70,58 +90,40 @@ public class JavaOclString extends JavaOclAny implements OclString {
 
 		OclString result;
 
-		/* Check if this string is undefined. */
-		if (this.isOclUndefined().isTrue()) {
-			result = this;
-		}
+		StringBuilder concat = new StringBuilder();
 
-		/* Else check if the given string is undefined. */
-		else if (aString.isOclUndefined().isTrue()) {
-			result = aString;
-		}
+		checkUndefinedAndInvalid(this, aString);
 
-		/* Else compute the result. */
-		else {
-			String thisString;
-			String theGivenString;
+		concat.append(imiString.getString());
+		concat.append(((IModelInstanceString) aString.getModelInstanceElement())
+				.getString());
 
-			thisString = (String) this.getAdaptee();
-			theGivenString = (String) aString.getAdaptee();
-
-			result = new JavaOclString(thisString.concat(theGivenString));
-		}
+		result =
+				JavaStandardLibraryFactory.INSTANCE.createOclString(concat.toString());
 
 		return result;
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclString#size()
 	 */
 	public OclInteger size() {
 
 		OclInteger result;
 
-		/* Check if this string is undefined. */
-		if (this.isOclUndefined().isTrue()) {
-			result = new JavaOclInteger(null);
-			result.setUndefinedreason(getUndefinedreason());
-		}
+		checkUndefinedAndInvalid(this);
 
 		/* Else compute the result. */
-		else {
-			result = new JavaOclInteger(((String) this.getAdaptee()).length());
-		}
+		Long size = new Long(imiString.getString().length());
+		result = JavaStandardLibraryFactory.INSTANCE.createOclInteger(size);
 
 		return result;
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclString#substring
+	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclString#substring
 	 * (tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger,
 	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger)
 	 */
@@ -129,46 +131,25 @@ public class JavaOclString extends JavaOclAny implements OclString {
 
 		OclString result;
 
-		/* Check if this string is undefined. */
-		if (this.isOclUndefined().isTrue()) {
-			result = this;
-		}
+		checkUndefinedAndInvalid(this, lower, upper);
 
-		/* Else check if the lower index is undefined. */
-		else if (lower.isOclUndefined().isTrue()) {
-			result = new JavaOclString(null);
-			result.setUndefinedreason(lower.getUndefinedreason());
-		}
+		int intLower =
+				((IModelInstanceInteger) lower.getModelInstanceElement()).getLong()
+						.intValue();
+		
+		/* Indices in OCL are different from Java indices! */
+		intLower--;
+		
+		int intUpper =
+				((IModelInstanceInteger) upper.getModelInstanceElement()).getLong()
+						.intValue();
 
-		/* Else check if the lower index is undefined. */
-		else if (upper.isOclUndefined().isTrue()) {
-			result = new JavaOclString(null);
-			result.setUndefinedreason(upper.getUndefinedreason());
-		}
-
-		/* Else compute the result. */
-		else {
-			try {
-				String subString;
-				String thisString;
-
-				int start;
-				int end;
-
-				thisString = (String) this.getAdaptee();
-
-				start = (Integer) lower.getAdaptee();
-				end = (Integer) upper.getAdaptee();
-
-				subString = thisString.substring(start - 1, end);
-				result = new JavaOclString(subString);
-
-			}
-
-			catch (IndexOutOfBoundsException e) {
-				result = new JavaOclString(null);
-				result.setUndefinedreason(e.toString());
-			}
+		try {
+			result =
+					JavaStandardLibraryFactory.INSTANCE.createOclString(imiString
+							.getString().substring(intLower, intUpper));
+		} catch (IndexOutOfBoundsException e) {
+			throw new InvalidException(e);
 		}
 
 		return result;
@@ -176,7 +157,6 @@ public class JavaOclString extends JavaOclAny implements OclString {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclString#toInteger()
 	 */
@@ -184,26 +164,17 @@ public class JavaOclString extends JavaOclAny implements OclString {
 
 		OclInteger result;
 
-		/* Check if this string is undefined. */
-		if (this.isOclUndefined().isTrue()) {
-			result = new JavaOclInteger(null);
-			result.setUndefinedreason(getUndefinedreason());
-		}
+		checkUndefinedAndInvalid(this);
 
 		/* Else compute the result. */
-		else {
-			try {
-				String thisString;
+		try {
+			Long toInteger = new Long(imiString.getString());
 
-				thisString = (String) this.getAdaptee();
+			result = JavaStandardLibraryFactory.INSTANCE.createOclInteger(toInteger);
+		}
 
-				result = new JavaOclInteger(new Integer(thisString));
-			}
-
-			catch (NumberFormatException e) {
-				result = new JavaOclInteger(null);
-				result.setUndefinedreason(e.toString());
-			}
+		catch (NumberFormatException e) {
+			throw new InvalidException(e);
 		}
 
 		return result;
@@ -211,34 +182,23 @@ public class JavaOclString extends JavaOclAny implements OclString {
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclString#toReal()
+	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclString#toReal()
 	 */
 	public OclReal toReal() {
 
 		OclReal result;
 
-		/* Check if this string is undefined. */
-		if (this.isOclUndefined().isTrue()) {
-			result = new JavaOclInteger(null);
-			result.setUndefinedreason(getUndefinedreason());
-		}
+		checkUndefinedAndInvalid(this);
 
 		/* Else compute the result. */
-		else {
-			try {
-				String thisString;
+		try {
+			Double toReal = new Double(imiString.getString());
 
-				thisString = (String) this.getAdaptee();
+			result = JavaStandardLibraryFactory.INSTANCE.createOclReal(toReal);
+		}
 
-				result = new JavaOclReal(new Double(thisString));
-			}
-
-			catch (NumberFormatException e) {
-				result = new JavaOclInteger(null);
-				result.setUndefinedreason(e.toString());
-			}
+		catch (NumberFormatException e) {
+			throw new InvalidException(e);
 		}
 
 		return result;
@@ -246,49 +206,29 @@ public class JavaOclString extends JavaOclAny implements OclString {
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclRoot
+	 * @see tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclAny
 	 * #isEqualTo(tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot)
 	 */
-	@Override
-	public OclBoolean isEqualTo(OclRoot anObject) {
+	public OclBoolean isEqualTo(OclAny that) {
 
 		OclBoolean result;
 
+		checkUndefinedAndInvalid(that);
+
 		/* Check if the given object is a String. */
-		if (!(anObject instanceof OclString)) {
+		if (!(that instanceof OclString)) {
 			result = JavaOclBoolean.getInstance(false);
 		}
 
 		else {
-			OclString aString;
+			String thatString =
+					((IModelInstanceString) that.getModelInstanceElement()).getString();
 
-			aString = (OclString) anObject;
-
-			/* Check if this String is undefined. */
-			if (isOclUndefined().isTrue()) {
-				result = JavaOclBoolean.getInstance(null);
-				result.setUndefinedreason(getUndefinedreason());
+			if (imiString.getString().equals(thatString)) {
+				result = JavaOclBoolean.getInstance(true);
 			}
-
-			/* Check if the given String is undefined. */
-			else if (aString.isOclUndefined().isTrue()) {
-				result = JavaOclBoolean.getInstance(null);
-				result.setUndefinedreason(aString.getUndefinedreason());
-			}
-
-			/* Else compute the result. */
 			else {
-
-				if (((String) aString.getAdaptee())
-						.equals((String) getAdaptee())) {
-					result = JavaOclBoolean.getInstance(true);
-				}
-
-				else {
-					result = JavaOclBoolean.getInstance(false);
-				}
+				result = JavaOclBoolean.getInstance(false);
 			}
 		}
 
@@ -297,13 +237,20 @@ public class JavaOclString extends JavaOclAny implements OclString {
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclAny
-	 * #getType()
+	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny#asSet()
 	 */
-	@Override
-	public OclType getType() {
-		return JavaOclPrimitiveType.getType("String");
+	public <T extends OclAny> OclSet<T> asSet() {
+
+		checkUndefinedAndInvalid(this);
+
+		OclSet<T> result;
+
+		Set<IModelInstanceElement> imiSet = new HashSet<IModelInstanceElement>();
+		imiSet.add(imiString);
+
+		result = JavaStandardLibraryFactory.INSTANCE.createOclSet(imiSet);
+
+		return result;
 	}
+
 }

@@ -18,8 +18,11 @@ with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
 package tudresden.ocl20.pivot.modelinstancetype.ecore;
 
+import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.Plugin;
 import org.osgi.framework.BundleContext;
+
+import tudresden.ocl20.logging.LoggingPlugin;
 
 /**
  * <p>
@@ -40,7 +43,38 @@ public class EcoreModelInstanceTypePlugin extends Plugin {
 	 * </p>
 	 */
 	public EcoreModelInstanceTypePlugin() {
+		/* Remains empty. */
 	}
+
+	/**
+	 * <p>
+	 * Returns the shared instance.
+	 * </p>
+	 * 
+	 * @return The shared instance.
+	 */
+	public static EcoreModelInstanceTypePlugin getDefault() {
+		return plugin;
+	}
+
+	/**
+	 * <p>
+	 * Facade method for the classes in this plug-in that hides the dependency
+	 * from the <code>tudresden.ocl20.logging</code> plug-in.
+	 * </p>
+	 * 
+	 * @param clazz
+	 *          The {@link Class} to return the {@link Logger} for.
+	 * 
+	 * @return A log4j {@link Logger}> instance.
+	 * 
+	 * @generated NOT
+	 */
+	public static Logger getLogger(Class<?> clazz) {
+
+		return LoggingPlugin.getLogManager(plugin).getLogger(clazz);
+	}
+
 
 	/*
 	 * (non-Javadoc)
@@ -62,16 +96,5 @@ public class EcoreModelInstanceTypePlugin extends Plugin {
 	public void stop(BundleContext context) throws Exception {
 		plugin = null;
 		super.stop(context);
-	}
-
-	/**
-	 * <p>
-	 * Returns the shared instance.
-	 * </p>
-	 * 
-	 * @return The shared instance.
-	 */
-	public static EcoreModelInstanceTypePlugin getDefault() {
-		return plugin;
 	}
 }

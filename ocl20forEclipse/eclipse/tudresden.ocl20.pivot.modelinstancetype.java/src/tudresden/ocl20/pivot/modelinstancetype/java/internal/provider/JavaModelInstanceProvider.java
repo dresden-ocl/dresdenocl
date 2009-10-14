@@ -29,9 +29,11 @@ import org.apache.log4j.Logger;
 import org.eclipse.osgi.util.NLS;
 
 import tudresden.ocl20.pivot.modelbus.IModel;
-import tudresden.ocl20.pivot.modelbus.IModelInstance;
 import tudresden.ocl20.pivot.modelbus.ModelAccessException;
-import tudresden.ocl20.pivot.modelbus.base.AbstractModelInstanceProvider;
+import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
+import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance;
+import tudresden.ocl20.pivot.modelbus.modelinstance.base.AbstractModelInstanceProvider;
+import tudresden.ocl20.pivot.modelbus.modelinstance.exception.TypeNotFoundInModelException;
 import tudresden.ocl20.pivot.modelinstancetype.java.JavaModelInstanceTypePlugin;
 import tudresden.ocl20.pivot.modelinstancetype.java.internal.modelinstance.JavaModelInstance;
 import tudresden.ocl20.pivot.modelinstancetype.java.internal.msg.JavaModelInstanceTypeMessages;
@@ -56,6 +58,17 @@ public class JavaModelInstanceProvider extends AbstractModelInstanceProvider {
 	 */
 	public JavaModelInstanceProvider() {
 
+		/* Remains empty. */
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @seetudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceProvider#
+	 * createEmptyModelInstance(tudresden.ocl20.pivot.modelbus.IModel)
+	 */
+	public IModelInstance createEmptyModelInstance(IModel model) {
+
+		return new JavaModelInstance(model);
 	}
 
 	/**
@@ -72,7 +85,7 @@ public class JavaModelInstanceProvider extends AbstractModelInstanceProvider {
 	public IModelInstance getModelInstance(URL instanceURL, IModel model)
 			throws ModelAccessException {
 
-		/* Eventually debug the entry of this method. */
+		/* Probably debug the entry of this method. */
 		if (LOGGER.isDebugEnabled()) {
 			String msg;
 
@@ -143,7 +156,13 @@ public class JavaModelInstanceProvider extends AbstractModelInstanceProvider {
 			// no else.
 
 			try {
-				aClassLoader = new URLClassLoader(new URL[] { folderURLs[index] });
+				/*
+				 * The parent class loader from the model bus plug-in is required to
+				 * find types from EMF Ecore like EObject.
+				 */
+				aClassLoader =
+						new URLClassLoader(new URL[] { folderURLs[index] },
+								ModelBusPlugin.class.getClassLoader());
 
 				modelInstanceClass = Class.forName(aClassName, true, aClassLoader);
 
@@ -163,6 +182,10 @@ public class JavaModelInstanceProvider extends AbstractModelInstanceProvider {
 			catch (SecurityException e) {
 				/* Do nothing, continue iteration. */
 				/* Could happen if the root package is called 'java' or 'javax'. */
+			}
+
+			catch (TypeNotFoundInModelException e) {
+				throw new ModelAccessException(e.getMessage(), e);
 			}
 
 			index++;

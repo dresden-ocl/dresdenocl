@@ -24,7 +24,6 @@ import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.widgets.FileDialog;
 
-import tudresden.ocl20.pivot.modelbus.ui.internal.wizards.AbstractModelBusPage;
 
 /**
  * <p>

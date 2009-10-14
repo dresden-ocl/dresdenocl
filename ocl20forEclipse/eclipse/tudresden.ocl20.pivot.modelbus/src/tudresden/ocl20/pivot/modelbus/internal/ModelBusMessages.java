@@ -42,18 +42,25 @@ import org.eclipse.osgi.util.NLS;
  */
 public class ModelBusMessages extends NLS {
 
-  private static final String BUNDLE_NAME = "tudresden.ocl20.pivot.modelbus.internal.messages"; //$NON-NLS-1$
+	private static final String BUNDLE_NAME =
+			"tudresden.ocl20.pivot.modelbus.internal.messages"; //$NON-NLS-1$
 
-  public static String AbstractModelProvider_LoadingModel;
-  public static String ModelRegistry_SettingActiveModel;
-  public static String OclLibraryProvider_LoadOclLibrary;
+	public static String AbstractModelProvider_LoadingModel;
+	public static String ModelRegistry_SettingActiveModel;
+	public static String OclLibraryProvider_LoadOclLibrary;
 
-  static {
-    // initialize resource bundle
-    NLS.initializeMessages(BUNDLE_NAME,ModelBusMessages.class);
-  }
+	public static String IModelInstanceElement_CannotCast;
+	public static String IModelInstanceElement_CannotConvertArray;
+	public static String IModelInstanceElement_CannotAdaptToType;
+	public static String IModelInstanceElement_CollectionHasUnknownContent;
 
-  private ModelBusMessages() {
-    // no implementaton necessary
-  }
+	static {
+		// initialize resource bundle
+		NLS.initializeMessages(BUNDLE_NAME, ModelBusMessages.class);
+	}
+
+	private ModelBusMessages() {
+
+		// no implementaton necessary
+	}
 }

@@ -29,10 +29,10 @@ import tudresden.ocl20.interpreter.ui.internal.msg.OclInterpreterUIMessages;
 import tudresden.ocl20.interpreter.ui.internal.views.AddVariableDialog;
 import tudresden.ocl20.interpreter.ui.internal.views.InterpreterView;
 import tudresden.ocl20.pivot.modelbus.IModel;
-import tudresden.ocl20.pivot.modelbus.IModelInstance;
-import tudresden.ocl20.pivot.modelbus.IModelObject;
 import tudresden.ocl20.pivot.modelbus.ModelAccessException;
 import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
+import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
 import tudresden.ocl20.pivot.pivotmodel.Constraint;
 import tudresden.ocl20.pivot.pivotmodel.ConstraintKind;
 import tudresden.ocl20.pivot.pivotmodel.NamedElement;
@@ -250,17 +250,19 @@ public class InterpreterViewMenuAction extends Action implements IAction {
 
 	/**
 	 * <p>
-	 * Interpret selected {@link IModelObject}s and selected {@link Constraint} s.
+	 * Interpret selected {@link IModelInstanceElement}s and selected
+	 * {@link Constraint} s.
 	 * </p>
 	 * 
 	 * @param modelObjects
-	 *          The {@link IModelObject}s that shall be interpreted or
-	 *          <code>null</code> if all {@link IModelObject}s shall be used.
+	 *          The {@link IModelInstanceElement}s that shall be interpreted or
+	 *          <code>null</code> if all {@link IModelInstanceElement}s shall be
+	 *          used.
 	 * @param constraints
 	 *          The {@link Constraint}s that shall be interpreted or
 	 *          <code>null</code> if all {@link Constraint}s shall be used.
 	 */
-	private void interpretSelection(Set<IModelObject> modelObjects,
+	private void interpretSelection(Set<IModelInstanceElement> modelObjects,
 			Set<Constraint> constraints) {
 
 		IModel activeModel;
@@ -278,7 +280,7 @@ public class InterpreterViewMenuAction extends Action implements IAction {
 
 				IOclInterpreter interpreter;
 
-				Set<IModelObject> usedModelObjects;
+				Set<IModelInstanceElement> usedModelObjects;
 				Set<Constraint> usedConstraints;
 
 				interpreter =
@@ -293,7 +295,8 @@ public class InterpreterViewMenuAction extends Action implements IAction {
 
 				else {
 					usedModelObjects =
-							new HashSet<IModelObject>(activeModelInstance.getObjects());
+							new HashSet<IModelInstanceElement>(activeModelInstance
+									.getAllModelInstanceObjects());
 				}
 
 				usedConstraints = null;
@@ -309,7 +312,7 @@ public class InterpreterViewMenuAction extends Action implements IAction {
 				 * Iterate through the model objects and constraints and compute their
 				 * results.
 				 */
-				for (IModelObject aModelObject : usedModelObjects) {
+				for (IModelInstanceElement aModelObject : usedModelObjects) {
 					for (Constraint aConstraint : usedConstraints) {
 
 						NamedElement constrainedElem;
@@ -329,7 +332,7 @@ public class InterpreterViewMenuAction extends Action implements IAction {
 							 * Check if the model object is an instance of the constrained
 							 * type.
 							 */
-							if (aModelObject.isInstanceOf(constrainedType)) {
+							if (aModelObject.isKindOf(constrainedType)) {
 								this.myInterpreterView.addInterpretationResult(interpreter
 										.interpretConstraint(aConstraint, aModelObject));
 							}
@@ -349,7 +352,7 @@ public class InterpreterViewMenuAction extends Action implements IAction {
 							 * Check if the model object is an instance of the constrained
 							 * operation's type.
 							 */
-							if (aModelObject.isInstanceOf(operationsType)) {
+							if (aModelObject.isKindOf(operationsType)) {
 								this.myInterpreterView.addInterpretationResult(interpreter
 										.interpretConstraint(aConstraint, aModelObject));
 							}
@@ -411,7 +414,7 @@ public class InterpreterViewMenuAction extends Action implements IAction {
 				IOclInterpreter interpreter;
 
 				Set<Constraint> usedConstraints;
-				Set<IModelObject> usedModelObjects;
+				Set<IModelInstanceElement> usedModelObjects;
 
 				interpreter =
 						this.myInterpreterView
@@ -430,7 +433,8 @@ public class InterpreterViewMenuAction extends Action implements IAction {
 				}
 
 				usedModelObjects =
-						new HashSet<IModelObject>(activeModelInstance.getObjects());
+						new HashSet<IModelInstanceElement>(activeModelInstance
+								.getAllModelInstanceObjects());
 
 				/* Iterate through the constraints and prepare them. */
 				for (Constraint aConstraint : usedConstraints) {
@@ -455,7 +459,7 @@ public class InterpreterViewMenuAction extends Action implements IAction {
 					else if (aKind.equals(ConstraintKind.POSTCONDITION)) {
 
 						/* Iterate through all model objects. */
-						for (IModelObject aModelObject : usedModelObjects) {
+						for (IModelInstanceElement aModelObject : usedModelObjects) {
 
 							NamedElement constrainedElement;
 							Type type;
@@ -475,7 +479,7 @@ public class InterpreterViewMenuAction extends Action implements IAction {
 							/*
 							 * If the model object is an instance of the constrained element.
 							 */
-							if (aModelObject.isInstanceOf(type)) {
+							if (aModelObject.isKindOf(type)) {
 								interpreter.prepareConstraint(aConstraint, aModelObject);
 							}
 							// no else.

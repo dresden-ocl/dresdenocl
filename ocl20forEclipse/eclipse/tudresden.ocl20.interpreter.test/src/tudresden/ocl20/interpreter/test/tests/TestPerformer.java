@@ -32,7 +32,7 @@ import org.eclipse.core.runtime.Platform;
 import tudresden.ocl20.interpreter.IInterpretationEnvironment;
 import tudresden.ocl20.interpreter.IOclInterpreter;
 import tudresden.ocl20.interpreter.OclInterpreterPlugin;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot;
+import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
 import tudresden.ocl20.pivot.examples.royalsandloyals.Customer;
 import tudresden.ocl20.pivot.examples.royalsandloyals.CustomerCard;
 import tudresden.ocl20.pivot.examples.royalsandloyals.Date;
@@ -43,19 +43,23 @@ import tudresden.ocl20.pivot.metamodels.uml2.UML2MetamodelPlugin;
 import tudresden.ocl20.pivot.modelbus.IMetamodel;
 import tudresden.ocl20.pivot.modelbus.IModel;
 import tudresden.ocl20.pivot.modelbus.IModelBusConstants;
-import tudresden.ocl20.pivot.modelbus.IModelInstance;
-import tudresden.ocl20.pivot.modelbus.IModelInstanceRegistry;
-import tudresden.ocl20.pivot.modelbus.IModelObject;
 import tudresden.ocl20.pivot.modelbus.IModelRegistry;
 import tudresden.ocl20.pivot.modelbus.ModelAccessException;
 import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
-import tudresden.ocl20.pivot.modelinstancetype.java.JavaModelInstanceTypePlugin;
+import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance;
+import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceProvider;
+import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceRegistry;
+import tudresden.ocl20.pivot.modelbus.modelinstance.exception.OperationNotFoundException;
+import tudresden.ocl20.pivot.modelbus.modelinstance.exception.TypeNotFoundInModelException;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
+import tudresden.ocl20.pivot.modelinstancetype.java.internal.provider.JavaModelInstanceProvider;
 import tudresden.ocl20.pivot.ocl2parser.parser.OCL2Parser;
 import tudresden.ocl20.pivot.pivotmodel.Constraint;
 import tudresden.ocl20.pivot.pivotmodel.NamedElement;
 import tudresden.ocl20.pivot.pivotmodel.Namespace;
 import tudresden.ocl20.pivot.pivotmodel.Operation;
 import tudresden.ocl20.pivot.pivotmodel.Property;
+import tudresden.ocl20.pivot.pivotmodel.Type;
 import tudresden.ocl20.pivot.standardlibrary.java.JavaStandardlibraryPlugin;
 
 /**
@@ -157,25 +161,24 @@ public class TestPerformer {
 
 	/**
 	 * <p>
-	 * Adapts a given {@link Object} as {@link IModelObject} and adds it to the
-	 * {@link IModelInstance} under test.
+	 * Adapts a given {@link Object} as {@link IModelInstanceElement} and adds it
+	 * to the {@link IModelInstance} under test.
 	 * </p>
 	 * 
 	 * @param object
 	 *          The {@link Object} that shall be adapted and added.
-	 * @return The adapted {@link IModelObject}.
+	 * @return The adapted {@link IModelInstanceElement}.
 	 */
-	public IModelObject addModelObject(Object object) {
+	public IModelInstanceElement addModelObject(Object object) {
 
-		IModelObject result;
+		IModelInstanceElement result;
 
 		try {
-			result =
-					JavaModelInstanceTypePlugin.addModelObjectToInstance(object,
-							myModelInstance);
+			result = myModelInstance.addModelInstanceElement(object);
 		}
 
-		catch (ModelAccessException e) {
+		// FIXME: Shouldn't there be a better way of handling this exception?
+		catch (TypeNotFoundInModelException e) {
 			result = null;
 		}
 
@@ -237,20 +240,21 @@ public class TestPerformer {
 	/**
 	 * <p>
 	 * Interprets all not yet interpreted {@link Constraint}s for a given
-	 * {@link IModelObject}.
+	 * {@link IModelInstanceElement}.
 	 * 
 	 * @param modelObject
-	 *          The {@link IModelObject} that shall be interpreted.
-	 * @result A {@link List} containing {@link OclRoot} results for all
+	 *          The {@link IModelInstanceElement} that shall be interpreted.
+	 * @result A {@link List} containing {@link OclAny} results for all
 	 *         interpreted combinations.
 	 */
-	public List<OclRoot> interpretRemainingConstraints(IModelObject modelObject) {
+	public List<OclAny> interpretRemainingConstraints(
+			IModelInstanceElement modelObject) {
 
-		List<OclRoot> result;
+		List<OclAny> result;
 
 		List<Constraint> uninterpretedConstraints;
 
-		result = new ArrayList<OclRoot>();
+		result = new ArrayList<OclAny>();
 
 		/* Collect all not yet interpreted constraints. */
 		uninterpretedConstraints = this.collectNotYetInterpretedConstraints();
@@ -299,21 +303,21 @@ public class TestPerformer {
 	/**
 	 * <p>
 	 * Interprets all not yet interpreted {@link Constraint}s for a given
-	 * {@link List} of {@link IModelObject}s.
+	 * {@link List} of {@link IModelInstanceElement}s.
 	 * 
 	 * @param modelObjects
-	 *          The {@link IModelObject}s that shall be interpreted.
-	 * @result A {@link List} containing {@link OclRoot} results for all
+	 *          The {@link IModelInstanceElement}s that shall be interpreted.
+	 * @result A {@link List} containing {@link OclAny} results for all
 	 *         interpreted combinations.
 	 */
-	public List<OclRoot> interpretRemainingConstraints(
-			List<IModelObject> modelObjects) {
+	public List<OclAny> interpretRemainingConstraints(
+			List<IModelInstanceElement> modelObjects) {
 
-		List<OclRoot> result;
+		List<OclAny> result;
 
 		List<Constraint> uninterpretedConstraints;
 
-		result = new ArrayList<OclRoot>();
+		result = new ArrayList<OclAny>();
 
 		/* Collect all not yet interpreted constraints. */
 		uninterpretedConstraints = this.collectNotYetInterpretedConstraints();
@@ -324,7 +328,7 @@ public class TestPerformer {
 		 */
 		for (Constraint aConstraint : uninterpretedConstraints) {
 
-			for (IModelObject anModelObject : modelObjects) {
+			for (IModelInstanceElement anModelObject : modelObjects) {
 
 				NamedElement aConstrainedElement;
 
@@ -361,6 +365,22 @@ public class TestPerformer {
 		// end for.
 
 		return result;
+	}
+
+	// TODO JavaDoc
+	public Operation findOperation(IModelInstanceElement imiElement, String name) throws OperationNotFoundException {
+
+		for (Type type : imiElement.getTypes()) {
+			
+			for (Operation ownedOperation : type.getOwnedOperation()) {
+
+				if (ownedOperation.getName().equals(name)) {
+					return ownedOperation;
+				}
+			}
+		}
+		
+		throw new OperationNotFoundException("Cannot find operation " + name + " on " + imiElement);
 	}
 
 	/**
@@ -423,23 +443,23 @@ public class TestPerformer {
 
 			e.printStackTrace();
 
-			throw new RuntimeException(msg);
+			throw new RuntimeException(msg, e);
 		}
 	}
 
 	/**
 	 * <p>
 	 * Prepares all not yet interpreted {@link Constraint}s for a given
-	 * {@link IModelObject}.
+	 * {@link IModelInstanceElement}.
 	 * 
 	 * @param modelObject
-	 *          The {@link IModelObject} for that the not yet interpreted
+	 *          The {@link IModelInstanceElement} for that the not yet interpreted
 	 *          {@link Constraint}s shall be prepared.
 	 * @return The {@link IInterpretationEnvironment} of the
-	 *         {@link OclInterpreter} containing the done preparation.
+	 *         {@link IOclInterpreter} containing the done preparation.
 	 */
 	public IInterpretationEnvironment prepareRemainingConstraints(
-			IModelObject modelObject) {
+			IModelInstanceElement modelObject) {
 
 		return this.prepareRemainingConstraints(modelObject, true);
 	}
@@ -447,20 +467,20 @@ public class TestPerformer {
 	/**
 	 * <p>
 	 * Prepares all not yet interpreted {@link Constraint}s for a given
-	 * {@link IModelObject}.
+	 * {@link IModelInstanceElement}.
 	 * 
 	 * @param modelObject
-	 *          The {@link IModelObject} for that the not yet interpreted
+	 *          The {@link IModelInstanceElement} for that the not yet interpreted
 	 *          {@link Constraint}s shall be prepared.
 	 * @param setInterpreted
 	 *          If true, the prepared {@link Constraint}s will be added to the set
 	 *          of interpreted {@link Constraint}s and thus will not be prepared
 	 *          or interpreted again.
 	 * @return The {@link IInterpretationEnvironment} of the
-	 *         {@link OclInterpreter} containing the done preparation.
+	 *         {@link IOclInterpreter} containing the done preparation.
 	 */
 	public IInterpretationEnvironment prepareRemainingConstraints(
-			IModelObject modelObject, boolean setInterpreted) {
+			IModelInstanceElement modelObject, boolean setInterpreted) {
 
 		List<Constraint> unInterpretedConstraints;
 
@@ -529,7 +549,7 @@ public class TestPerformer {
 	 * <p>
 	 * Resets the {@link IModel} used by this {@link TestPerformer} and
 	 * reinitializes it. Used to remove new defined or initialized
-	 * {@link IModelObject}s from the {@link IModel}.
+	 * {@link IModelInstanceElement}s from the {@link IModel}.
 	 * </p>
 	 */
 	public void resetModel() {
@@ -569,31 +589,38 @@ public class TestPerformer {
 	 * @param path
 	 *          The path and name of the variable which shall be set.
 	 * @param value
-	 *          The {@link IModelObject} value of the set variable as an Object.
+	 *          The {@link IModelInstanceElement} value of the set variable as an
+	 *          Object.
+	 * @throws TypeNotFoundInModelException
 	 */
-	public void setEnvironmentVariable(String path, Object value) {
+	public void setEnvironmentVariable(String path, Object value)
+			throws TypeNotFoundInModelException {
 
-		/* Convert the object into an OclRoot. */
-		OclRoot adaptedObject;
+		/* Convert the object into an OclAny. */
+		OclAny adaptedObject;
+
+		IModelInstanceElement imiElement =
+				myModelInstance.addModelInstanceElement(value);
+
 		adaptedObject =
-				JavaStandardlibraryPlugin.getStandardLibraryFactory().createOclRoot(
-						value);
+				JavaStandardlibraryPlugin.getStandardLibraryFactory().createOclAny(
+						imiElement);
 		/* Add the variable to the environment. */
 		this.myInterpreter.setEnviromentVariable(path, adaptedObject);
 	}
 
 	/**
 	 * <p>
-	 * Add a given {@link OclRoot} as a variable to the
+	 * Add a given {@link OclAny} as a variable to the
 	 * {@link IInterpretationEnvironment} used for preparation and interpretation.
 	 * </p>
 	 * 
 	 * @param path
 	 *          The path and name of the variable which shall be set.
 	 * @param value
-	 *          The {@link OclRoot} value of the set variable as an Object.
+	 *          The {@link OclAny} value of the set variable as an Object.
 	 */
-	public void setEnvironmentVariable(String path, OclRoot value) {
+	public void setEnvironmentVariable(String path, OclAny value) {
 
 		/* Add the variable to the environment. */
 		this.myInterpreter.setEnviromentVariable(path, value);
@@ -695,21 +722,10 @@ public class TestPerformer {
 			this.myModelInstance = null;
 
 			/* Load the model instance. */
-			try {
-				this.myModelInstance =
-						JavaModelInstanceTypePlugin.createEmptyModelInstance(this.myModel);
-			}
-
-			catch (ModelAccessException e) {
-
-				String msg;
-
-				msg = "An error occured when loading model '" + myModel + "'";
-
-				e.printStackTrace();
-
-				throw new RuntimeException(msg, e);
-			}
+			IModelInstanceProvider modelInstanceProvider =
+					new JavaModelInstanceProvider();
+			this.myModelInstance =
+					modelInstanceProvider.createEmptyModelInstance(this.myModel);
 
 			/*
 			 * Add the successfully loaded model instance to the model instance

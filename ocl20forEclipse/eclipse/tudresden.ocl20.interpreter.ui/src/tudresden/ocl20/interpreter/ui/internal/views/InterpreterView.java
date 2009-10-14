@@ -66,13 +66,13 @@ import tudresden.ocl20.interpreter.ui.internal.views.util.ResultsContentProvider
 import tudresden.ocl20.interpreter.ui.internal.views.util.ResultsFilter;
 import tudresden.ocl20.interpreter.ui.internal.views.util.ResultsLabelProvider;
 import tudresden.ocl20.pivot.modelbus.IModelBusConstants;
-import tudresden.ocl20.pivot.modelbus.IModelInstance;
-import tudresden.ocl20.pivot.modelbus.IModelObject;
 import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
 import tudresden.ocl20.pivot.modelbus.event.IModelInstanceRegistryListener;
 import tudresden.ocl20.pivot.modelbus.event.IModelRegistryListener;
 import tudresden.ocl20.pivot.modelbus.event.ModelInstanceRegistryEvent;
 import tudresden.ocl20.pivot.modelbus.event.ModelRegistryEvent;
+import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
 import tudresden.ocl20.pivot.pivotmodel.Constraint;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 
@@ -106,9 +106,12 @@ public class InterpreterView extends ViewPart implements ISelectionListener,
 	/** The currently selected {@link IModelInstance}. */
 	private IModelInstance currentlySelectedModelInstance;
 
-	/** The currently selected {@link IModelObject}s that shall be interpreted. */
-	private Set<IModelObject> currentlySelectedModelInstanceElements =
-			new HashSet<IModelObject>();
+	/**
+	 * The currently selected {@link IModelInstanceElement}s that shall be
+	 * interpreted.
+	 */
+	private Set<IModelInstanceElement> currentlySelectedModelInstanceElements =
+			new HashSet<IModelInstanceElement>();
 
 	/** The currently selected rows of this {@link IViewActionDelegate}. */
 	private Set<Object[]> currentlySelectedRows = new HashSet<Object[]>();
@@ -347,8 +350,8 @@ public class InterpreterView extends ViewPart implements ISelectionListener,
 					anObject = selectionIt.next();
 
 					/* Decide between given Types and IModelObjects. */
-					if (anObject instanceof IModelObject) {
-						this.addModelObjectSelection((IModelObject) anObject);
+					if (anObject instanceof IModelInstanceElement) {
+						this.addModelObjectSelection((IModelInstanceElement) anObject);
 					}
 
 					else if (anObject instanceof Type) {
@@ -435,12 +438,13 @@ public class InterpreterView extends ViewPart implements ISelectionListener,
 	/**
 	 * <p>
 	 * Clears the {@link IInterpretationResult} of this {@link InterpreterView}
-	 * for the currently selected {@link IModelObject}s and {@link Constraint}s.
+	 * for the currently selected {@link IModelInstanceElement}s and
+	 * {@link Constraint}s.
 	 * </p>
 	 */
 	public void clearResultsForSelection() {
 
-		this.myResults.removeResults(new ArrayList<IModelObject>(
+		this.myResults.removeResults(new ArrayList<IModelInstanceElement>(
 				this.currentlySelectedModelInstanceElements),
 				new ArrayList<Constraint>(this.currentlySelectedConstraints));
 
@@ -475,14 +479,14 @@ public class InterpreterView extends ViewPart implements ISelectionListener,
 
 	/**
 	 * <p>
-	 * Returns the currently selected {@link IModelObject}s that shall be
+	 * Returns the currently selected {@link IModelInstanceElement}s that shall be
 	 * interpreted.
 	 * </p>
 	 * 
-	 * @return The currently selected {@link IModelObject}s that shall be
+	 * @return The currently selected {@link IModelInstanceElement}s that shall be
 	 *         interpreted.
 	 */
-	public Set<IModelObject> getCurrentlySelectedModelInstanceElements() {
+	public Set<IModelInstanceElement> getCurrentlySelectedModelInstanceElements() {
 
 		return this.currentlySelectedModelInstanceElements;
 	}
@@ -613,31 +617,32 @@ public class InterpreterView extends ViewPart implements ISelectionListener,
 
 	/**
 	 * <p>
-	 * Adds a {@link IModelObject} to the current {@link IModelObject} selection.
+	 * Adds a {@link IModelInstanceElement} to the current
+	 * {@link IModelInstanceElement} selection.
 	 * </p>
 	 * 
 	 * @param modelObject
-	 *          The {@link IModelObject}s that shall be added.
+	 *          The {@link IModelInstanceElement}s that shall be added.
 	 */
-	private void addModelObjectSelection(IModelObject modelObject) {
+	private void addModelObjectSelection(IModelInstanceElement modelObject) {
 
 		this.currentlySelectedModelInstanceElements.add(modelObject);
 	}
 
 	/**
 	 * <p>
-	 * Adds all {@link IModelObject} of a given {@link Type} to the actions that
-	 * need {@link IModelObject} selection.
+	 * Adds all {@link IModelInstanceElement} of a given {@link Type} to the
+	 * actions that need {@link IModelInstanceElement} selection.
 	 * </p>
 	 * 
 	 * @param type
-	 *          The {@link Type} whose {@link IModelObject}s shall be added.
+	 *          The {@link Type} whose {@link IModelInstanceElement}s shall be
+	 *          added.
 	 */
 	private void addModelObjectSelection(Type type) {
 
 		this.currentlySelectedModelInstanceElements
-				.addAll(this.currentlySelectedModelInstance.getObjectsOfType(type
-						.getQualifiedNameList()));
+				.addAll(this.currentlySelectedModelInstance.getAllInstances(type));
 	}
 
 	/**
@@ -653,8 +658,8 @@ public class InterpreterView extends ViewPart implements ISelectionListener,
 
 	/**
 	 * <p>
-	 * Clears the {@link IModelObject} selection for all actions which need
-	 * {@link IModelObject} selection.
+	 * Clears the {@link IModelInstanceElement} selection for all actions which
+	 * need {@link IModelInstanceElement} selection.
 	 * </p>
 	 */
 	private void clearModelObjectSelection() {

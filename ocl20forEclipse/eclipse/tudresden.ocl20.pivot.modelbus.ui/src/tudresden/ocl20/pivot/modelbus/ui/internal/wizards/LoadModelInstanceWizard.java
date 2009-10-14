@@ -42,12 +42,12 @@ import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PartInitException;
 
 import tudresden.ocl20.pivot.modelbus.IModel;
-import tudresden.ocl20.pivot.modelbus.IModelInstance;
-import tudresden.ocl20.pivot.modelbus.IModelInstanceProvider;
-import tudresden.ocl20.pivot.modelbus.IModelInstanceRegistry;
-import tudresden.ocl20.pivot.modelbus.IModelInstanceType;
 import tudresden.ocl20.pivot.modelbus.ModelAccessException;
 import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
+import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance;
+import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceProvider;
+import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceRegistry;
+import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceType;
 import tudresden.ocl20.pivot.modelbus.ui.ModelBusUIPlugin;
 import tudresden.ocl20.pivot.modelbus.ui.internal.ModelBusUIMessages;
 import tudresden.ocl20.pivot.modelbus.ui.internal.views.ModelInstancesView;
@@ -79,6 +79,7 @@ public class LoadModelInstanceWizard extends Wizard implements IImportWizard {
 	 * </p>
 	 */
 	public LoadModelInstanceWizard() {
+
 		super();
 
 		/** Set the logo in the top right corner. */
@@ -88,7 +89,6 @@ public class LoadModelInstanceWizard extends Wizard implements IImportWizard {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see org.eclipse.jface.wizard.IWizard#addPages()
 	 */
 	@Override
@@ -101,7 +101,6 @@ public class LoadModelInstanceWizard extends Wizard implements IImportWizard {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see org.eclipse.ui.IWorkbenchWizard#init(org.eclipse.ui.IWorkbench,
 	 * org.eclipse.jface.viewers.IStructuredSelection)
 	 */
@@ -117,7 +116,6 @@ public class LoadModelInstanceWizard extends Wizard implements IImportWizard {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see org.eclipse.jface.wizard.Wizard#performFinish()
 	 */
 	public boolean performFinish() {
@@ -151,15 +149,14 @@ public class LoadModelInstanceWizard extends Wizard implements IImportWizard {
 				IModelInstanceRegistry modelInstanceRegistry;
 
 				modelInstanceFile = mainPage.getModelInstanceFile();
-				modelInstance = modelInstanceProvider.getModelInstance(
-						modelInstanceFile, model);
+				modelInstance =
+						modelInstanceProvider.getModelInstance(modelInstanceFile, model);
 
 				/*
-				 * Add the successfully loaded model instance to the model
-				 * instance registry.
+				 * Add the successfully loaded model instance to the model instance
+				 * registry.
 				 */
-				modelInstanceRegistry = ModelBusPlugin
-						.getModelInstanceRegistry();
+				modelInstanceRegistry = ModelBusPlugin.getModelInstanceRegistry();
 				modelInstanceRegistry.addModelInstance(model, modelInstance);
 
 				/* Try to activate the ModelInstanceView. */
@@ -172,9 +169,11 @@ public class LoadModelInstanceWizard extends Wizard implements IImportWizard {
 
 					workbenchPage.showView(ModelInstancesView.ID);
 
+					/* Set the active model. */
+					ModelBusPlugin.getModelRegistry().setActiveModel(model);
+
 					/* Set the active model instance. */
-					modelInstanceRegistry.setActiveModelInstance(model,
-							modelInstance);
+					modelInstanceRegistry.setActiveModelInstance(model, modelInstance);
 
 					result = true;
 				}
@@ -189,13 +188,14 @@ public class LoadModelInstanceWizard extends Wizard implements IImportWizard {
 				String dialogTitle;
 				String dialogMsg;
 
-				dialogTitle = ModelBusUIMessages.LoadModelInstanceWizard_ErrorMessageDialogTitle;
-				dialogMsg = ModelBusUIMessages.LoadModelInstanceWizard_ErrorOccured
-						+ e.getMessage();
+				dialogTitle =
+						ModelBusUIMessages.LoadModelInstanceWizard_ErrorMessageDialogTitle;
+				dialogMsg =
+						ModelBusUIMessages.LoadModelInstanceWizard_ErrorOccured
+								+ e.getMessage();
 
 				/* Show an Error Dialog. */
-				MessageDialog
-						.openError(this.getShell(), dialogTitle, dialogMsg);
+				MessageDialog.openError(this.getShell(), dialogTitle, dialogMsg);
 
 				/*
 				 * We need to throw a runtime exception or the wizard will close

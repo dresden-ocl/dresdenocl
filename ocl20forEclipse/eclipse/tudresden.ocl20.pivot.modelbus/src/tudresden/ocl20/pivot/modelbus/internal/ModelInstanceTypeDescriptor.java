@@ -23,11 +23,11 @@ import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.jface.resource.ImageDescriptor;
 
 import tudresden.ocl20.pivot.modelbus.IModelBusConstants;
-import tudresden.ocl20.pivot.modelbus.IModelInstanceType;
-import tudresden.ocl20.pivot.modelbus.IModelInstanceTypeDescriptor;
-import tudresden.ocl20.pivot.modelbus.IModelInstanceProvider;
 import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
 import tudresden.ocl20.pivot.modelbus.internal.descriptor.AbstractDescriptor;
+import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceProvider;
+import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceType;
+import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceTypeDescriptor;
 
 /**
  * <p>

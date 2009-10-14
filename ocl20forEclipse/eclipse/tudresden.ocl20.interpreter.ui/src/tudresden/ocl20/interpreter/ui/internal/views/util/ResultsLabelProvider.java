@@ -28,7 +28,7 @@ import tudresden.ocl20.interpreter.ui.InterpreterUIPlugin;
 import tudresden.ocl20.interpreter.ui.internal.msg.OclInterpreterUIMessages;
 import tudresden.ocl20.interpreter.ui.internal.views.InterpreterView;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBoolean;
-import tudresden.ocl20.pivot.modelbus.IModelObject;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
 import tudresden.ocl20.pivot.pivotmodel.Constraint;
 import tudresden.ocl20.pivot.pivotmodel.NamedElement;
 import tudresden.ocl20.pivot.pivotmodel.Operation;
@@ -47,7 +47,7 @@ public class ResultsLabelProvider extends LabelProvider implements
 	/** Path to icon for {@link Constraint}s. */
 	private final static String ICON_CONSTRAINT = "icons/constraint.gif";
 
-	/** Path to icon for {@link IModelObject}s. */
+	/** Path to icon for {@link IModelInstanceElement}s. */
 	private final static String ICON_MODEL_OBJECT = "icons/instance.gif";
 
 	/** Path to icon for true results. */
@@ -59,6 +59,10 @@ public class ResultsLabelProvider extends LabelProvider implements
 	/** Path to icon for undefined results. */
 	private final static String ICON_RESULT_UNDEFINED =
 			"icons/result_undefined.gif";
+
+	/** Path to icon for undefined results. */
+	private final static String ICON_RESULT_INVALID =
+			"icons/result_invalid.gif";
 
 	/*
 	 * (non-Javadoc)
@@ -126,10 +130,17 @@ public class ResultsLabelProvider extends LabelProvider implements
 							anOclBoolean = (OclBoolean) aResult;
 
 							/* Check if the boolean is undefined. */
-							if (anOclBoolean.isOclUndefined().isTrue()) {
+							if (anOclBoolean.oclIsUndefined().isTrue()) {
 								result =
 										InterpreterUIPlugin.getImageDescriptor(
 												ICON_RESULT_UNDEFINED).createImage();
+							}
+
+							/* Else check if the boolean is invalid. */
+							else if (anOclBoolean.oclIsInvalid().isTrue()) {
+								result =
+										InterpreterUIPlugin.getImageDescriptor(
+												ICON_RESULT_INVALID).createImage();
 							}
 
 							/* Else check if the boolean is true. */

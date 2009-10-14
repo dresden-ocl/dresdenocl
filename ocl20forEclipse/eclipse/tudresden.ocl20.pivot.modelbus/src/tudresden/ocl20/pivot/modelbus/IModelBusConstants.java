@@ -1,5 +1,8 @@
 package tudresden.ocl20.pivot.modelbus;
 
+import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceProvider;
+import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceType;
+
 /**
  * A collection of constants used by the Model Bus plugin.
  * 

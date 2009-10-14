@@ -33,7 +33,7 @@
 package tudresden.ocl20.pivot.modelbus.util;
 
 import tudresden.ocl20.pivot.essentialocl.expressions.TypeLiteralExp;
-import tudresden.ocl20.pivot.modelbus.IModelInstance;
+import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance;
 
 
 /**

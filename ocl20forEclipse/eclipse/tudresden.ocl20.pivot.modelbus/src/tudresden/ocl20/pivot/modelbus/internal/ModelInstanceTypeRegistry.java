@@ -31,10 +31,10 @@ import org.eclipse.core.runtime.dynamichelpers.IExtensionTracker;
 import org.eclipse.ui.PlatformUI;
 
 import tudresden.ocl20.pivot.modelbus.IModelBusConstants;
-import tudresden.ocl20.pivot.modelbus.IModelInstanceType;
-import tudresden.ocl20.pivot.modelbus.IModelInstanceTypeDescriptor;
-import tudresden.ocl20.pivot.modelbus.IModelInstanceTypeRegistry;
 import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
+import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceType;
+import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceTypeDescriptor;
+import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceTypeRegistry;
 
 /**
  * <p>

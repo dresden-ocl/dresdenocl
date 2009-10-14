@@ -18,16 +18,15 @@ with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
 package tudresden.ocl20.pivot.modelinstancetype.java;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
+
 import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.Plugin;
 import org.osgi.framework.BundleContext;
 
 import tudresden.ocl20.logging.LoggingPlugin;
-import tudresden.ocl20.pivot.modelbus.IModel;
-import tudresden.ocl20.pivot.modelbus.IModelInstance;
-import tudresden.ocl20.pivot.modelbus.IModelObject;
-import tudresden.ocl20.pivot.modelbus.ModelAccessException;
-import tudresden.ocl20.pivot.modelinstancetype.java.internal.modelinstance.JavaModelInstance;
+import tudresden.ocl20.pivot.pivotmodel.PrimitiveTypeKind;
 
 /**
  * <p>
@@ -42,73 +41,38 @@ public class JavaModelInstanceTypePlugin extends Plugin {
 	public static final String PLUGIN_ID =
 			"tudresden.ocl20.pivot.modelinstancetype.java";
 
+	/**
+	 * An array containing all Java {@link Class}es that can be mapped to the
+	 * {@link PrimitiveTypeKind#BOOLEAN}.
+	 */
+	public static final Class<?> BOOLEAN_CLASSES[] =
+			new Class<?>[] { boolean.class, Boolean.class };
+
+	/**
+	 * An array containing all Java {@link Class}es that can be mapped to the
+	 * {@link PrimitiveTypeKind#INTEGER}.
+	 */
+	public static final Class<?> INTEGER_CLASSES[] =
+			new Class<?>[] { BigDecimal.class, BigInteger.class, byte.class,
+					Byte.class, int.class, Integer.class, long.class, Long.class,
+					short.class, Short.class };
+
+	/**
+	 * An array containing all Java {@link Class}es that can be mapped to the
+	 * {@link PrimitiveTypeKind#REAL}.
+	 */
+	public static final Class<?> REAL_CLASSES[] =
+			new Class<?>[] { double.class, Double.class, float.class, Float.class };
+
+	/**
+	 * An array containing all Java {@link Class}es that can be mapped to the
+	 * {@link PrimitiveTypeKind#STRING}.
+	 */
+	public static final Class<?> STRING_CLASSES[] =
+			new Class<?>[] { char.class, Character.class, String.class };
+
 	/** The shared instance. */
 	private static JavaModelInstanceTypePlugin plugin;
-
-	/**
-	 * <p>
-	 * Adds a given Java {@link Object} to a given {@link IModelInstance}.
-	 * </p>
-	 * 
-	 * @param object
-	 *          The {@link Object} that shall be added.
-	 * @param modelInstance
-	 *          The {@link IModelInstance} to which the {@link Object} shall be
-	 *          added.
-	 * @return The adapted {@link Object} as {@link IModelInstance}.
-	 * @throws ModelAccessException
-	 *           Thrown, if the given {@link Object} cannot be adapted to the
-	 *           given {@link IModelInstance}.
-	 */
-	public static IModelObject addModelObjectToInstance(Object object,
-			IModelInstance modelInstance) throws ModelAccessException {
-
-		IModelObject result;
-
-		/* Check if the given IModelInstance is a JavaModelInstance. */
-		if (modelInstance instanceof JavaModelInstance) {
-			JavaModelInstance javaInstance;
-			javaInstance = (JavaModelInstance) modelInstance;
-
-			result = javaInstance.addModelObject(object);
-		}
-
-		else {
-			result = null;
-		}
-
-		return result;
-	}
-
-	/**
-	 * <p>
-	 * Creates a new {@link JavaModelInstance} containing no {@link IModelObject}
-	 * at all. Such a {@link JavaModelInstance} can be used to be filled later by
-	 * using the method
-	 * {@link JavaModelInstanceTypePlugin#addModelObjectToInstance(Object, IModelInstance)}
-	 * .
-	 * </p>
-	 * 
-	 * @param model
-	 *          The {@link IModel} for which a new {@link JavaModelInstance} shall
-	 *          be created.
-	 * @return The newly created {@link JavaModelInstance}.
-	 * @throws ModelAccessException
-	 *           Thrown if no {@link JavaModelInstance} of the given
-	 *           {@link IModel} can be created.
-	 * 
-	 * @see JavaModelInstanceTypePlugin#addModelObjectToInstance(Object,
-	 *      IModelInstance)
-	 */
-	public static IModelInstance createEmptyModelInstance(IModel model)
-			throws ModelAccessException {
-
-		IModelInstance result;
-
-		result = new JavaModelInstance(model);
-
-		return result;
-	}
 
 	/**
 	 * @return The shared instance.

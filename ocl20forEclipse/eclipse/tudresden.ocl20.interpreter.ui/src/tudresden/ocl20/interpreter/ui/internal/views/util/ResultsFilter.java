@@ -22,7 +22,7 @@ import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.viewers.ViewerFilter;
 
 import tudresden.ocl20.interpreter.ui.internal.views.InterpreterView;
-import tudresden.ocl20.pivot.modelbus.IModelObject;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
 import tudresden.ocl20.pivot.pivotmodel.Constraint;
 
 /**
@@ -75,10 +75,10 @@ public class ResultsFilter extends ViewerFilter {
 
 				if (aRow.length >= ResultsContentProvider.MODELOBJECT) {
 
-					if (aRow[ResultsContentProvider.MODELOBJECT] instanceof IModelObject) {
-						IModelObject modelObject;
+					if (aRow[ResultsContentProvider.MODELOBJECT] instanceof IModelInstanceElement) {
+						IModelInstanceElement modelObject;
 						modelObject =
-								(IModelObject) aRow[ResultsContentProvider.MODELOBJECT];
+								(IModelInstanceElement) aRow[ResultsContentProvider.MODELOBJECT];
 
 						result &= this.myInterpreterView.getCurrentlySelectedModelInstanceElements().contains(modelObject);
 					}

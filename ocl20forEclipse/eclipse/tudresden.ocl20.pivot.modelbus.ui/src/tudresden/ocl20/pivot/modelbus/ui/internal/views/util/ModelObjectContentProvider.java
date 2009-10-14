@@ -18,15 +18,15 @@ with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
 package tudresden.ocl20.pivot.modelbus.ui.internal.views.util;
 
-import java.util.List;
 import java.util.Set;
 
 import org.eclipse.jface.viewers.IStructuredContentProvider;
 import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.jface.viewers.Viewer;
 
-import tudresden.ocl20.pivot.modelbus.IModelInstance;
-import tudresden.ocl20.pivot.modelbus.IModelObject;
+import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceObject;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 
 /**
@@ -53,8 +53,16 @@ public class ModelObjectContentProvider implements IStructuredContentProvider,
 		// no else.
 	}
 
-	/*
-	 * (non-Javadoc)
+	/**
+	 * <p>
+	 * Returns the children of an {@link IModelInstance}.
+	 * </p>
+	 * 
+	 * <p>
+	 * Children of an {@link IModelInstance} are the names of the types of the
+	 * {@link IModelObject}s. Children of the names of the types of the
+	 * {@link IModelObject}s (given as List) are the {@link IModelObject}s.
+	 * 
 	 * @see org.eclipse.jface.viewers.ITreeContentProvider#getChildren(java.lang.Object)
 	 */
 	public Object[] getChildren(Object parentElement) {
@@ -65,25 +73,25 @@ public class ModelObjectContentProvider implements IStructuredContentProvider,
 		if (parentElement instanceof IModelInstance) {
 
 			IModelInstance anIModelInstance;
-			Set<Type> objectTypes;
+			Set<Type> implementedTypes;
 
 			anIModelInstance = (IModelInstance) parentElement;
-			objectTypes = anIModelInstance.getObjectTypes();
+			implementedTypes = anIModelInstance.getAllImplementedTypes();
 
-			result = objectTypes.toArray(new Type[0]);
+			result = implementedTypes.toArray(new Type[0]);
 		}
 
 		/* Else check if the given element is a Type. */
 		else if (parentElement instanceof Type) {
 
-			List<String> aQualifiedName;
-			List<IModelObject> objectsOfKind;
+			Type type;
+			Set<IModelInstanceObject> objectsOfType;
 
-			aQualifiedName = ((Type) parentElement).getQualifiedNameList();
+			type = (Type) parentElement;
+			objectsOfType = this.myModelInstance.getAllInstances(type);
 
-			objectsOfKind = myModelInstance.getObjectsOfType(aQualifiedName);
-
-			result = objectsOfKind.toArray(new IModelObject[objectsOfKind.size()]);
+			result =
+					objectsOfType.toArray(new IModelInstanceObject[objectsOfType.size()]);
 		}
 
 		/* Else return an empty array. */
@@ -117,23 +125,25 @@ public class ModelObjectContentProvider implements IStructuredContentProvider,
 		if (anElement instanceof Type) {
 
 			Type type;
-
 			type = (Type) anElement;
 
-			if (this.myModelInstance.getObjectsOfType(type.getQualifiedNameList())
-					.size() > 0) {
+			/*
+			 * Check if the type is implemented by at least one element of the current
+			 * model instance.
+			 */
+			if (this.myModelInstance.getAllInstances(type).size() > 0) {
 				result = this.myModelInstance;
 			}
-
+			
 			else {
 				result = null;
 			}
 		}
 
-		/* Else check if the given element is an IModelObject. */
-		else if (anElement instanceof IModelObject) {
+		/* Else check if the given element is an IModelInstanceElement. */
+		else if (anElement instanceof IModelInstanceElement) {
 
-			result = ((IModelObject) anElement).getName();
+			result = ((IModelInstanceElement) anElement).getTypes();
 		}
 
 		/* Else return null. */
@@ -160,7 +170,7 @@ public class ModelObjectContentProvider implements IStructuredContentProvider,
 
 			anIModelInstance = (IModelInstance) anElement;
 
-			result = (anIModelInstance.getObjectTypes().size() > 0);
+			result = (anIModelInstance.getAllImplementedTypes().size() > 0);
 		}
 
 		/* Else check if the given element is a Type. */
@@ -171,9 +181,7 @@ public class ModelObjectContentProvider implements IStructuredContentProvider,
 				Type type;
 				type = (Type) anElement;
 
-				result =
-						(this.myModelInstance.getObjectsOfType(type.getQualifiedNameList())
-								.size() > 0);
+				result = (this.myModelInstance.getAllInstances(type).size() > 0);
 			}
 
 			else {

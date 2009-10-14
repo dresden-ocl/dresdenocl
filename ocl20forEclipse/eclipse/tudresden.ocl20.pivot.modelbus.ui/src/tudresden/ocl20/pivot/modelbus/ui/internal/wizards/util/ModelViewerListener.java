@@ -23,7 +23,6 @@ import org.eclipse.jface.viewers.SelectionChangedEvent;
 
 import tudresden.ocl20.pivot.modelbus.IMetamodel;
 import tudresden.ocl20.pivot.modelbus.IModel;
-import tudresden.ocl20.pivot.modelbus.ui.internal.wizards.AbstractModelBusPage;
 import tudresden.ocl20.pivot.modelbus.ui.internal.wizards.LoadModelInstancePage;
 
 /**

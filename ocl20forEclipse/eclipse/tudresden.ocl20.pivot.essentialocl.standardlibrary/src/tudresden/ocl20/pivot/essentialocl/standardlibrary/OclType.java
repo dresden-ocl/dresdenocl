@@ -32,47 +32,62 @@
  */
 package tudresden.ocl20.pivot.essentialocl.standardlibrary;
 
+import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance;
+import tudresden.ocl20.pivot.pivotmodel.Operation;
+import tudresden.ocl20.pivot.pivotmodel.Property;
+import tudresden.ocl20.pivot.pivotmodel.Type;
+
 /**
  * 
  * 
  * @author Matthias Braeuer
  * @version 1.0 30.03.2007
  */
-public interface OclType extends OclRoot {
+public interface OclType<T extends OclAny> extends OclAny {
 
 	/**
-	 * Gets the name.
+	 * The only method valid for OclType except "=" and "<>". Returns the wrapped
+	 * {@link Type} of the PivotModel.
 	 * 
-	 * @return the name
+	 * @return the wrapped {@link Type} of the PivotModel
 	 */
-	String getName();
+	Type getType();
+
+	OclBoolean isEqualTo(OclType<OclAny> type2);
+
+	OclBoolean isNotEqualTo(OclType<OclAny> type2);
 
 	/**
-	 * Determines whether <code>this</code> is either the direct type or one
-	 * of the supertypes of <code>o</code>.
+	 * <p>
+	 * Returns the value of a given static {@link Property} defined on this
+	 * {@link OclType}.
+	 * </p>
 	 * 
-	 * @param o
-	 * 
-	 * @return true, if <code>this</code> is either the direct type or one of
-	 *         the supertypes of <code>o</code>.
+	 * @param property
+	 *          The static {@link Property} whose value shall be returned.
+	 * @param modelInstance
+	 *          The {@link IModelInstance} that shall be used to retrieve the
+	 *          {@link Property}'s value.
+	 * @return The value(as an {@link OclAny}) of the static {@link Property}.
 	 */
-	OclBoolean isOfKind(OclRoot o);
+	OclAny getStaticProperty(Property property, IModelInstance modelInstance);
 
 	/**
+	 * <p>
+	 * Tries to invoke a given static {@link Operation} of this {@link OclType}
+	 * and returns the invocation result.
+	 * </p>
 	 * 
-	 * @param o
-	 * 
-	 * @return true if <code>this</code> is the type of <code>o</code>
+	 * @param operation
+	 *          The static {@link Operation} that shall be invoked.
+	 * @param oclAnyParameters
+	 *          The probably existing parameters of the {@link Operation} as an
+	 *          array of {@link OclAny}.
+	 * @param modelInstance
+	 *          The {@link IModelInstance} that shall be used to invoke the static
+	 *          {@link Operation}.
+	 * @return The result as an {@link OclAny}.
 	 */
-	OclBoolean isOfType(OclRoot o);
-
-	/**
-	 * Creates an instance of this type from object <code>o</code>. Used for
-	 * oclAsType()
-	 * 
-	 * @param o
-	 * 
-	 * @return an instance of this type
-	 */
-	OclRoot createInstance(OclRoot o);
+	OclAny invokeStaticOperation(Operation operation, OclAny[] oclAnyParameters,
+			IModelInstance modelInstance);
 }

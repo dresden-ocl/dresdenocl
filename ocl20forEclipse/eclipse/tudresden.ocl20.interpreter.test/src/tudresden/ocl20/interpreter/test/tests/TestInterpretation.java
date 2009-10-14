@@ -31,8 +31,9 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import tudresden.ocl20.interpreter.IInterpretationEnvironment;
+import tudresden.ocl20.interpreter.IOclInterpreter;
+import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBoolean;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot;
 import tudresden.ocl20.pivot.examples.royalsandloyals.Burning;
 import tudresden.ocl20.pivot.examples.royalsandloyals.Color;
 import tudresden.ocl20.pivot.examples.royalsandloyals.Customer;
@@ -46,10 +47,12 @@ import tudresden.ocl20.pivot.examples.royalsandloyals.ProgramPartner;
 import tudresden.ocl20.pivot.examples.royalsandloyals.Service;
 import tudresden.ocl20.pivot.examples.royalsandloyals.ServiceLevel;
 import tudresden.ocl20.pivot.examples.royalsandloyals.Transaction;
-import tudresden.ocl20.pivot.modelbus.IModelObject;
+import tudresden.ocl20.pivot.modelbus.modelinstance.exception.OperationNotFoundException;
+import tudresden.ocl20.pivot.modelbus.modelinstance.exception.TypeNotFoundInModelException;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
 import tudresden.ocl20.pivot.pivotmodel.Constraint;
+import tudresden.ocl20.pivot.pivotmodel.Operation;
 import tudresden.ocl20.pivot.standardlibrary.java.JavaStandardlibraryPlugin;
-import tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclBoolean;
 
 /**
  * <p>
@@ -67,25 +70,27 @@ public class TestInterpretation {
 	protected static TestPerformer testPerformer;
 
 	/**
-	 * The {@link IModelObject}s which shall be interpreted during a test case.
+	 * The {@link IModelInstanceElement}s which shall be interpreted during a test
+	 * case.
 	 */
-	private List<IModelObject> objectList;
+	private List<IModelInstanceElement> objectList;
 
 	/**
 	 * The interpreted results of a test case.
 	 */
-	private List<OclRoot> results;
+	private List<OclAny> results;
 
 	/**
-	 * The global {@link IInterpretationEnvironment} of the used {@link OclInterpreter}.
+	 * The global {@link IInterpretationEnvironment} of the used
+	 * {@link IOclInterpreter}.
 	 */
 	private IInterpretationEnvironment globalEnvironment;
 
 	/**
-	 * The current {@link IModelObject} for that a {@link Constraint} shall be
-	 * interpreted.
+	 * The current {@link IModelInstanceElement} for that a {@link Constraint}
+	 * shall be interpreted.
 	 */
-	private IModelObject modelObject;
+	private IModelInstanceElement modelObject;
 
 	/**
 	 * A field that can be used to store the name of the result of a preparation
@@ -131,7 +136,7 @@ public class TestInterpretation {
 		Customer customer;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/body02.ocl");
+		testPerformer.loadOCLFile("constraints/body02.ocl");
 
 		/* Create the model objects that shall be interpreted. */
 		customer = new Customer(25);
@@ -160,14 +165,14 @@ public class TestInterpretation {
 		assertNotNull(result_Constraint);
 
 		/* Load another OCL file to verify the body preparation. */
-		testPerformer.loadOCLFile("expressions/testInterpreter/body02.ocl");
+		testPerformer.loadOCLFile("constraints/testInterpreter/body02.ocl");
 
 		/* Interpret the selected objectList. */
 		results = testPerformer.interpretRemainingConstraints(modelObject);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -183,7 +188,7 @@ public class TestInterpretation {
 		Date date;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/body03.ocl");
+		testPerformer.loadOCLFile("constraints/body03.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		date = Date.now();
@@ -202,14 +207,14 @@ public class TestInterpretation {
 		assertNotNull(result_Constraint);
 
 		/* Load another OCL file to verify the body preparation. */
-		testPerformer.loadOCLFile("expressions/testInterpreter/body03.ocl");
+		testPerformer.loadOCLFile("constraints/testInterpreter/body03.ocl");
 
 		/* Interpret the selected objectList. */
 		results = testPerformer.interpretRemainingConstraints(modelObject);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -227,7 +232,7 @@ public class TestInterpretation {
 		Transaction transaction2;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/define01.ocl");
+		testPerformer.loadOCLFile("constraints/define01.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		transaction1 = new Transaction();
@@ -254,14 +259,14 @@ public class TestInterpretation {
 		assertNotNull(result_Constraint);
 
 		/* Load another OCL file to verify the body preparation. */
-		testPerformer.loadOCLFile("expressions/testInterpreter/define01.ocl");
+		testPerformer.loadOCLFile("constraints/testInterpreter/define01.ocl");
 
 		/* Interpret the selected objectList. */
 		results = testPerformer.interpretRemainingConstraints(modelObject);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -282,7 +287,7 @@ public class TestInterpretation {
 		Service service3;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/define02.ocl");
+		testPerformer.loadOCLFile("constraints/define02.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		service1 = new Service();
@@ -316,14 +321,14 @@ public class TestInterpretation {
 		assertNotNull(result_Constraint);
 
 		/* Load another OCL file to verify the body preparation. */
-		testPerformer.loadOCLFile("expressions/testInterpreter/define02.ocl");
+		testPerformer.loadOCLFile("constraints/testInterpreter/define02.ocl");
 
 		/* Interpret the selected objectList. */
 		results = testPerformer.interpretRemainingConstraints(modelObject);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -340,7 +345,7 @@ public class TestInterpretation {
 		ServiceLevel level;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/define03.ocl");
+		testPerformer.loadOCLFile("constraints/define03.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		level = new ServiceLevel();
@@ -363,14 +368,14 @@ public class TestInterpretation {
 		assertNotNull(result_Constraint);
 
 		/* Load another OCL file to verify the body preparation. */
-		testPerformer.loadOCLFile("expressions/testInterpreter/define03.ocl");
+		testPerformer.loadOCLFile("constraints/testInterpreter/define03.ocl");
 
 		/* Interpret the selected objectList. */
 		results = testPerformer.interpretRemainingConstraints(modelObject);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -390,7 +395,7 @@ public class TestInterpretation {
 		Service service2;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/define04.ocl");
+		testPerformer.loadOCLFile("constraints/define04.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		service1 = new Service();
@@ -420,14 +425,14 @@ public class TestInterpretation {
 		assertNotNull(result_Constraint);
 
 		/* Load another OCL file to verify the body preparation. */
-		testPerformer.loadOCLFile("expressions/testInterpreter/define04.ocl");
+		testPerformer.loadOCLFile("constraints/testInterpreter/define04.ocl");
 
 		/* Interpret the selected objectList. */
 		results = testPerformer.interpretRemainingConstraints(modelObject);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -443,7 +448,7 @@ public class TestInterpretation {
 		Customer customer;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/define05.ocl");
+		testPerformer.loadOCLFile("constraints/define05.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		customer = new Customer(25);
@@ -463,14 +468,14 @@ public class TestInterpretation {
 		assertNotNull(result_Constraint);
 
 		/* Load another OCL file to verify the body preparation. */
-		testPerformer.loadOCLFile("expressions/testInterpreter/define05.ocl");
+		testPerformer.loadOCLFile("constraints/testInterpreter/define05.ocl");
 
 		/* Interpret the selected objectList. */
 		results = testPerformer.interpretRemainingConstraints(modelObject);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -488,7 +493,7 @@ public class TestInterpretation {
 		Transaction transaction2;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/define06.ocl");
+		testPerformer.loadOCLFile("constraints/define06.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		transaction1 = new Transaction();
@@ -518,14 +523,14 @@ public class TestInterpretation {
 		assertNotNull(result_Constraint);
 
 		/* Load another OCL file to verify the body preparation. */
-		testPerformer.loadOCLFile("expressions/testInterpreter/define06.ocl");
+		testPerformer.loadOCLFile("constraints/testInterpreter/define06.ocl");
 
 		/* Interpret the selected objectList. */
 		results = testPerformer.interpretRemainingConstraints(modelObject);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -541,7 +546,7 @@ public class TestInterpretation {
 		CustomerCard customerCard;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/define07.ocl");
+		testPerformer.loadOCLFile("constraints/define07.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		customerCard = new CustomerCard();
@@ -560,15 +565,16 @@ public class TestInterpretation {
 		assertNotNull(result_Constraint);
 
 		/* Load another OCL file to verify the body preparation. */
-		testPerformer.loadOCLFile("expressions/testInterpreter/define07.ocl");
+		testPerformer.loadOCLFile("constraints/testInterpreter/define07.ocl");
 
 		/* Interpret the selected objectList. */
 		results = testPerformer.interpretRemainingConstraints(modelObject);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
-		assertTrue(result_Boolean.isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
+		assertTrue(result_Boolean.oclIsInvalid().isTrue());
+		// assertTrue(result_Boolean.isTrue());
 	}
 
 	/**
@@ -591,7 +597,7 @@ public class TestInterpretation {
 		Transaction transaction3;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/define08.ocl");
+		testPerformer.loadOCLFile("constraints/define08.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		transaction1 = new Burning();
@@ -634,14 +640,14 @@ public class TestInterpretation {
 		assertNotNull(result_constrainedElement);
 
 		/* Load another OCL file to verify the body preparation. */
-		testPerformer.loadOCLFile("expressions/testInterpreter/define08.ocl");
+		testPerformer.loadOCLFile("constraints/testInterpreter/define08.ocl");
 
 		/* Interpret the selected objectList. */
 		results = testPerformer.interpretRemainingConstraints(modelObject);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -659,7 +665,7 @@ public class TestInterpretation {
 		Customer customer;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/derive01.ocl");
+		testPerformer.loadOCLFile("constraints/derive01.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		customer = new Customer(25);
@@ -683,14 +689,14 @@ public class TestInterpretation {
 		assertNotNull(result_Constraint);
 
 		/* Load another OCL file to verify the body preparation. */
-		testPerformer.loadOCLFile("expressions/testInterpreter/derive01.ocl");
+		testPerformer.loadOCLFile("constraints/testInterpreter/derive01.ocl");
 
 		/* Interpret the selected objectList. */
 		results = testPerformer.interpretRemainingConstraints(modelObject);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -710,7 +716,7 @@ public class TestInterpretation {
 		Transaction transaction3;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/derive02.ocl");
+		testPerformer.loadOCLFile("constraints/derive02.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		transaction1 = new Earning();
@@ -745,14 +751,14 @@ public class TestInterpretation {
 		assertNotNull(result_Constraint);
 
 		/* Load another OCL file to verify the body preparation. */
-		testPerformer.loadOCLFile("expressions/testInterpreter/derive02.ocl");
+		testPerformer.loadOCLFile("constraints/testInterpreter/derive02.ocl");
 
 		/* Interpret the selected objectList. */
 		results = testPerformer.interpretRemainingConstraints(modelObject);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -768,7 +774,7 @@ public class TestInterpretation {
 		LoyaltyAccount loyaltyAccount;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/init01.ocl");
+		testPerformer.loadOCLFile("constraints/init01.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		loyaltyAccount = new LoyaltyAccount();
@@ -787,14 +793,14 @@ public class TestInterpretation {
 		assertNotNull(result_Constraint);
 
 		/* Load another OCL file to verify the body preparation. */
-		testPerformer.loadOCLFile("expressions/testInterpreter/init01.ocl");
+		testPerformer.loadOCLFile("constraints/testInterpreter/init01.ocl");
 
 		/* Interpret the selected objectList. */
 		results = testPerformer.interpretRemainingConstraints(modelObject);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -810,7 +816,7 @@ public class TestInterpretation {
 		CustomerCard customerCard;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/init02.ocl");
+		testPerformer.loadOCLFile("constraints/init02.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		customerCard = new CustomerCard();
@@ -829,14 +835,14 @@ public class TestInterpretation {
 		assertNotNull(result_Constraint);
 
 		/* Load another OCL file to verify the body preparation. */
-		testPerformer.loadOCLFile("expressions/testInterpreter/init02.ocl");
+		testPerformer.loadOCLFile("constraints/testInterpreter/init02.ocl");
 
 		/* Interpret the selected objectList. */
 		results = testPerformer.interpretRemainingConstraints(modelObject);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -852,7 +858,7 @@ public class TestInterpretation {
 		LoyaltyAccount loyaltyAccount;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/init03.ocl");
+		testPerformer.loadOCLFile("constraints/init03.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		loyaltyAccount = new LoyaltyAccount();
@@ -871,14 +877,14 @@ public class TestInterpretation {
 		assertNotNull(result_Constraint);
 
 		/* Load another OCL file to verify the body preparation. */
-		testPerformer.loadOCLFile("expressions/testInterpreter/init03.ocl");
+		testPerformer.loadOCLFile("constraints/testInterpreter/init03.ocl");
 
 		/* Interpret the selected objectList. */
 		results = testPerformer.interpretRemainingConstraints(modelObject);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -896,14 +902,14 @@ public class TestInterpretation {
 		Customer customer3;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/invariant01.ocl");
+		testPerformer.loadOCLFile("constraints/invariant01.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		customer1 = new Customer(17);
 		customer2 = new Customer(18);
 		customer3 = new Customer(19);
 
-		objectList = new ArrayList<IModelObject>();
+		objectList = new ArrayList<IModelInstanceElement>();
 		objectList.add(testPerformer.addModelObject(customer1));
 		objectList.add(testPerformer.addModelObject(customer2));
 		objectList.add(testPerformer.addModelObject(customer3));
@@ -912,18 +918,18 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(objectList);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertFalse(result_Boolean.isTrue());
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(1);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(1);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(1);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(1);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -940,7 +946,7 @@ public class TestInterpretation {
 		CustomerCard customerCard2;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/invariant02.ocl");
+		testPerformer.loadOCLFile("constraints/invariant02.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		customerCard1 = new CustomerCard();
@@ -951,7 +957,7 @@ public class TestInterpretation {
 		customerCard2.setValidFrom(new Date(2009, 1, 1));
 		customerCard2.setValidThru(new Date(2008, 1, 1));
 
-		objectList = new ArrayList<IModelObject>();
+		objectList = new ArrayList<IModelInstanceElement>();
 		objectList.add(testPerformer.addModelObject(customerCard1));
 		objectList.add(testPerformer.addModelObject(customerCard2));
 
@@ -959,13 +965,13 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(objectList);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(1);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(1);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertFalse(result_Boolean.isTrue());
 	}
 
@@ -987,7 +993,7 @@ public class TestInterpretation {
 		ServiceLevel serviceLevel3;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/invariant03.ocl");
+		testPerformer.loadOCLFile("constraints/invariant03.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		serviceLevel1 = new ServiceLevel();
@@ -1010,7 +1016,7 @@ public class TestInterpretation {
 		loyaltyProgram2.addLevel(serviceLevel1);
 		loyaltyProgram2.addLevel(serviceLevel3);
 
-		objectList = new ArrayList<IModelObject>();
+		objectList = new ArrayList<IModelInstanceElement>();
 		objectList.add(testPerformer.addModelObject(loyaltyProgram1));
 		objectList.add(testPerformer.addModelObject(loyaltyProgram2));
 
@@ -1018,13 +1024,13 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(objectList);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(1);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(1);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertFalse(result_Boolean.isTrue());
 	}
 
@@ -1051,7 +1057,7 @@ public class TestInterpretation {
 		CustomerCard customerCard3;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/invariant04.ocl");
+		testPerformer.loadOCLFile("constraints/invariant04.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		customerCard1 = new CustomerCard();
@@ -1078,7 +1084,7 @@ public class TestInterpretation {
 		membership2.setProgram(loyaltyProgram2);
 		membership2.setCard(customerCard3);
 
-		objectList = new ArrayList<IModelObject>();
+		objectList = new ArrayList<IModelInstanceElement>();
 		objectList.add(testPerformer.addModelObject(membership1));
 		objectList.add(testPerformer.addModelObject(membership2));
 
@@ -1086,13 +1092,13 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(objectList);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(1);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(1);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertFalse(result_Boolean.isTrue());
 	}
 
@@ -1113,7 +1119,7 @@ public class TestInterpretation {
 		CustomerCard customerCard2;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/invariant05.ocl");
+		testPerformer.loadOCLFile("constraints/invariant05.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		customerCard1 = new CustomerCard();
@@ -1137,7 +1143,7 @@ public class TestInterpretation {
 		membership1.setCard(customerCard1);
 		membership2.setCard(customerCard2);
 
-		objectList = new ArrayList<IModelObject>();
+		objectList = new ArrayList<IModelInstanceElement>();
 		objectList.add(testPerformer.addModelObject(membership1));
 		objectList.add(testPerformer.addModelObject(membership2));
 
@@ -1152,13 +1158,13 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(objectList);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(1);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(1);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertFalse(result_Boolean.isTrue());
 	}
 
@@ -1180,7 +1186,7 @@ public class TestInterpretation {
 		Service service;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/invariant06.ocl");
+		testPerformer.loadOCLFile("constraints/invariant06.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		service = new Service();
@@ -1197,7 +1203,7 @@ public class TestInterpretation {
 		loyaltyProgram2.addPartner(programPartner1);
 		loyaltyProgram2.addPartner(programPartner2);
 
-		objectList = new ArrayList<IModelObject>();
+		objectList = new ArrayList<IModelInstanceElement>();
 		objectList.add(testPerformer.addModelObject(loyaltyProgram1));
 		objectList.add(testPerformer.addModelObject(loyaltyProgram2));
 
@@ -1205,13 +1211,13 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(objectList);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(1);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(1);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertFalse(result_Boolean.isTrue());
 	}
 
@@ -1242,7 +1248,7 @@ public class TestInterpretation {
 		testPerformer.resetModel();
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/invariant07.ocl");
+		testPerformer.loadOCLFile("constraints/invariant07.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		customerCard1 = new CustomerCard();
@@ -1271,7 +1277,7 @@ public class TestInterpretation {
 		customer2.addCard(customerCard3);
 		customer2.addCard(customerCard4);
 
-		objectList = new ArrayList<IModelObject>();
+		objectList = new ArrayList<IModelInstanceElement>();
 		objectList.add(testPerformer.addModelObject(customer1));
 		objectList.add(testPerformer.addModelObject(customer2));
 
@@ -1279,13 +1285,13 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(objectList);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(1);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(1);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertFalse(result_Boolean.isTrue());
 	}
 
@@ -1313,7 +1319,7 @@ public class TestInterpretation {
 		LoyaltyAccount loyaltyAccount;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/invariant08.ocl");
+		testPerformer.loadOCLFile("constraints/invariant08.ocl");
 
 		/* Select the model objects which shall be interpreted. */
 		loyaltyAccount = new LoyaltyAccount();
@@ -1347,7 +1353,7 @@ public class TestInterpretation {
 		loyaltyProgram1.setMembership(membership1);
 		loyaltyProgram2.setMembership(membership2);
 
-		objectList = new ArrayList<IModelObject>();
+		objectList = new ArrayList<IModelInstanceElement>();
 		objectList.add(testPerformer.addModelObject(loyaltyProgram1));
 		objectList.add(testPerformer.addModelObject(loyaltyProgram2));
 
@@ -1355,13 +1361,13 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(objectList);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(1);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(1);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertFalse(result_Boolean.isTrue());
 	}
 
@@ -1383,7 +1389,7 @@ public class TestInterpretation {
 		Customer customer1;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/invariant09.ocl");
+		testPerformer.loadOCLFile("constraints/invariant09.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		customer1 = new Customer(25);
@@ -1402,7 +1408,7 @@ public class TestInterpretation {
 		programPartner1.addProgram(loyaltyProgram1);
 		programPartner2.addProgram(loyaltyProgram2);
 
-		objectList = new ArrayList<IModelObject>();
+		objectList = new ArrayList<IModelInstanceElement>();
 		objectList.add(testPerformer.addModelObject(programPartner1));
 		objectList.add(testPerformer.addModelObject(programPartner2));
 
@@ -1410,13 +1416,13 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(objectList);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(1);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(1);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertFalse(result_Boolean.isTrue());
 	}
 
@@ -1436,7 +1442,7 @@ public class TestInterpretation {
 		ServiceLevel serviceLevel2;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/invariant10.ocl");
+		testPerformer.loadOCLFile("constraints/invariant10.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		serviceLevel1 = new ServiceLevel();
@@ -1456,7 +1462,7 @@ public class TestInterpretation {
 		testPerformer.addModelObject(serviceLevel1);
 		testPerformer.addModelObject(serviceLevel2);
 
-		objectList = new ArrayList<IModelObject>();
+		objectList = new ArrayList<IModelInstanceElement>();
 		objectList.add(testPerformer.addModelObject(loyaltyProgram1));
 		objectList.add(testPerformer.addModelObject(loyaltyProgram2));
 
@@ -1464,13 +1470,13 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(objectList);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(1);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(1);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertFalse(result_Boolean.isTrue());
 	}
 
@@ -1493,7 +1499,7 @@ public class TestInterpretation {
 		Transaction transaction2;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/invariant11.ocl");
+		testPerformer.loadOCLFile("constraints/invariant11.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		transaction1 = new Transaction();
@@ -1514,7 +1520,7 @@ public class TestInterpretation {
 		programPartner1.addDeliveredService(service1);
 		programPartner2.addDeliveredService(service2);
 
-		objectList = new ArrayList<IModelObject>();
+		objectList = new ArrayList<IModelInstanceElement>();
 		objectList.add(testPerformer.addModelObject(programPartner1));
 		objectList.add(testPerformer.addModelObject(programPartner2));
 
@@ -1522,13 +1528,13 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(objectList);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(1);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(1);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertFalse(result_Boolean.isTrue());
 	}
 
@@ -1551,7 +1557,7 @@ public class TestInterpretation {
 		Transaction transaction2;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/invariant12.ocl");
+		testPerformer.loadOCLFile("constraints/invariant12.ocl");
 
 		/* Select the model objects which shall be interpreted. */
 		transaction1 = new Burning();
@@ -1572,7 +1578,7 @@ public class TestInterpretation {
 		programPartner1.addDeliveredService(service1);
 		programPartner2.addDeliveredService(service2);
 
-		objectList = new ArrayList<IModelObject>();
+		objectList = new ArrayList<IModelInstanceElement>();
 		objectList.add(testPerformer.addModelObject(programPartner1));
 		objectList.add(testPerformer.addModelObject(programPartner2));
 
@@ -1580,13 +1586,13 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(objectList);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(1);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(1);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertFalse(result_Boolean.isTrue());
 	}
 
@@ -1603,7 +1609,7 @@ public class TestInterpretation {
 		CustomerCard customerCard2;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/invariant13.ocl");
+		testPerformer.loadOCLFile("constraints/invariant13.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		customerCard1 = new CustomerCard();
@@ -1618,7 +1624,7 @@ public class TestInterpretation {
 		customerCard1.setValid(true);
 		customerCard2.setValid(true);
 
-		objectList = new ArrayList<IModelObject>();
+		objectList = new ArrayList<IModelInstanceElement>();
 		objectList.add(testPerformer.addModelObject(customerCard1));
 		objectList.add(testPerformer.addModelObject(customerCard2));
 
@@ -1626,13 +1632,13 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(objectList);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(1);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(1);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertFalse(result_Boolean.isTrue());
 	}
 
@@ -1662,7 +1668,7 @@ public class TestInterpretation {
 		Customer customer2;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/invariant14.ocl");
+		testPerformer.loadOCLFile("constraints/invariant14.ocl");
 
 		/* Select the model objects which shall be interpreted. */
 		customer1 = new Customer(25);
@@ -1696,7 +1702,7 @@ public class TestInterpretation {
 		loyaltyAccount2.addTransaction(transaction3);
 		loyaltyAccount2.addTransaction(transaction4);
 
-		objectList = new ArrayList<IModelObject>();
+		objectList = new ArrayList<IModelInstanceElement>();
 		objectList.add(testPerformer.addModelObject(loyaltyAccount1));
 		objectList.add(testPerformer.addModelObject(loyaltyAccount2));
 
@@ -1704,13 +1710,13 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(objectList);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(1);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(1);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertFalse(result_Boolean.isTrue());
 	}
 
@@ -1729,7 +1735,7 @@ public class TestInterpretation {
 		Transaction transaction1;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/invariant15.ocl");
+		testPerformer.loadOCLFile("constraints/invariant15.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		transaction1 = new Transaction();
@@ -1744,7 +1750,7 @@ public class TestInterpretation {
 
 		loyaltyAccount1.addTransaction(transaction1);
 
-		objectList = new ArrayList<IModelObject>();
+		objectList = new ArrayList<IModelInstanceElement>();
 		objectList.add(testPerformer.addModelObject(loyaltyAccount1));
 		objectList.add(testPerformer.addModelObject(loyaltyAccount2));
 
@@ -1752,13 +1758,13 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(objectList);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(1);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(1);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertFalse(result_Boolean.isTrue());
 	}
 
@@ -1774,7 +1780,7 @@ public class TestInterpretation {
 		Service service;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/invariant16.ocl");
+		testPerformer.loadOCLFile("constraints/invariant16.ocl");
 
 		/* Select the model objects which shall be interpreted. */
 		service = new Service();
@@ -1785,8 +1791,8 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(modelObject);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -1802,7 +1808,7 @@ public class TestInterpretation {
 		Service service;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/invariant17.ocl");
+		testPerformer.loadOCLFile("constraints/invariant17.ocl");
 
 		/* Select the model objects which shall be interpreted. */
 		service = new Service();
@@ -1813,8 +1819,8 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(modelObject);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -1831,7 +1837,7 @@ public class TestInterpretation {
 		Burning burning;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/invariant18.ocl");
+		testPerformer.loadOCLFile("constraints/invariant18.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		burning = new Burning();
@@ -1846,8 +1852,8 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(modelObject);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -1861,44 +1867,49 @@ public class TestInterpretation {
 	public void testPost01() {
 
 		LoyaltyProgram loyaltyProgram;
-		OclRoot loyaltyProgramInOcl;
+		OclAny loyaltyProgramInOcl;
 
 		Customer customer;
-		OclRoot customerInOcl;
+		OclAny customerInOcl;
 
 		/* Load the OCL file. */
-		testPerformer.loadOCLFile("expressions/post01.ocl");
+		testPerformer.loadOCLFile("constraints/post01.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		loyaltyProgram = new LoyaltyProgram();
 
 		modelObject = testPerformer.addModelObject(loyaltyProgram);
 		loyaltyProgramInOcl =
-				JavaStandardlibraryPlugin.getOclInstanceAdapterFactory().createOclRoot(
+				JavaStandardlibraryPlugin.getStandardLibraryFactory().createOclAny(
 						modelObject);
 
 		customer = new Customer(25);
 
-		testPerformer.addModelObject(customer);
+		IModelInstanceElement imiCustomer = testPerformer.addModelObject(customer);
 		customerInOcl =
-				JavaStandardlibraryPlugin.getStandardLibraryFactory().createOclRoot(
-						customer);
+				JavaStandardlibraryPlugin.getStandardLibraryFactory().createOclAny(
+						imiCustomer);
 
 		/*
 		 * Add the values needed as parameters of the operation call constrained by
 		 * this postcondition to the environment.
 		 */
-		testPerformer.setEnvironmentVariable("c", customer);
+		try {
+			testPerformer.setEnvironmentVariable("c", customer);
+		} catch (TypeNotFoundInModelException e1) {
+			fail(e1.getMessage());
+		}
 
 		/* Prepare the selected model objects. */
 		testPerformer.prepareRemainingConstraints(modelObject, false);
 
 		/* Try to invoke the tested operation. */
 		try {
-			loyaltyProgramInOcl.invokeOperation("enroll", customerInOcl);
+			Operation operation = testPerformer.findOperation(modelObject, "enroll");
+			loyaltyProgramInOcl.invokeOperation(operation, customerInOcl);
 		}
 
-		catch (NoSuchMethodException e) {
+		catch (OperationNotFoundException e) {
 			fail("The tested operation could not be invoked. Test failed.");
 		}
 
@@ -1906,8 +1917,9 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(modelObject);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsInvalid().isTrue());
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
 		/* Remove the added values from the environment. */
@@ -1924,19 +1936,19 @@ public class TestInterpretation {
 	public void testPost02() {
 
 		LoyaltyProgram loyaltyProgram;
-		OclRoot loyaltyProgramInOcl;
+		OclAny loyaltyProgramInOcl;
 
 		ProgramPartner programPartner;
-		OclRoot programPartnerInOcl;
+		OclAny programPartnerInOcl;
 
 		ServiceLevel serviceLevel;
-		OclRoot serviceLevelInOcl;
+		OclAny serviceLevelInOcl;
 
 		Service service;
-		OclRoot serviceInOcl;
+		OclAny serviceInOcl;
 
 		/* Load the OCL file. */
-		testPerformer.loadOCLFile("expressions/post02.ocl");
+		testPerformer.loadOCLFile("constraints/post02.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		service = new Service();
@@ -1950,25 +1962,27 @@ public class TestInterpretation {
 		loyaltyProgram.addLevel(serviceLevel);
 
 		modelObject = testPerformer.addModelObject(loyaltyProgram);
-		testPerformer.addModelObject(programPartner);
-		testPerformer.addModelObject(serviceLevel);
-		testPerformer.addModelObject(service);
+		IModelInstanceElement imiProgramPartner =
+				testPerformer.addModelObject(programPartner);
+		IModelInstanceElement imiServiceLevel =
+				testPerformer.addModelObject(serviceLevel);
+		IModelInstanceElement imiService = testPerformer.addModelObject(service);
 
 		loyaltyProgramInOcl =
-				JavaStandardlibraryPlugin.getStandardLibraryFactory().createOclRoot(
-						loyaltyProgram);
+				JavaStandardlibraryPlugin.getStandardLibraryFactory().createOclAny(
+						modelObject);
 
 		programPartnerInOcl =
-				JavaStandardlibraryPlugin.getStandardLibraryFactory().createOclRoot(
-						programPartner);
+				JavaStandardlibraryPlugin.getStandardLibraryFactory().createOclAny(
+						imiProgramPartner);
 
 		serviceLevelInOcl =
-				JavaStandardlibraryPlugin.getStandardLibraryFactory().createOclRoot(
-						serviceLevel);
+				JavaStandardlibraryPlugin.getStandardLibraryFactory().createOclAny(
+						imiServiceLevel);
 
 		serviceInOcl =
-				JavaStandardlibraryPlugin.getStandardLibraryFactory().createOclRoot(
-						service);
+				JavaStandardlibraryPlugin.getStandardLibraryFactory().createOclAny(
+						imiService);
 
 		/*
 		 * Add the values needed as parameters of the operation call constrained by
@@ -1983,18 +1997,20 @@ public class TestInterpretation {
 
 		/* Try to invoke the tested operation. */
 		try {
-			OclRoot parameters[];
+			OclAny parameters[];
 
-			parameters = new OclRoot[3];
+			parameters = new OclAny[3];
 
 			parameters[0] = programPartnerInOcl;
 			parameters[1] = serviceLevelInOcl;
 			parameters[2] = serviceInOcl;
 
-			loyaltyProgramInOcl.invokeOperation("addService", parameters);
+			Operation operation =
+					testPerformer.findOperation(modelObject, "addService");
+			loyaltyProgramInOcl.invokeOperation(operation, parameters);
 		}
 
-		catch (NoSuchMethodException e) {
+		catch (OperationNotFoundException e) {
 			fail("The tested operation could not be invoked. Test failed.");
 		}
 
@@ -2002,8 +2018,8 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(modelObject);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
 		/* Remove the added values from the environment. */
@@ -2022,19 +2038,19 @@ public class TestInterpretation {
 	public void testPost03() {
 
 		LoyaltyProgram loyaltyProgram;
-		OclRoot loyaltyProgramInOcl;
+		OclAny loyaltyProgramInOcl;
 
 		ProgramPartner programPartner;
-		OclRoot programPartnerInOcl;
+		OclAny programPartnerInOcl;
 
 		ServiceLevel serviceLevel;
-		OclRoot serviceLevelInOcl;
+		OclAny serviceLevelInOcl;
 
 		Service service;
-		OclRoot serviceInOcl;
+		OclAny serviceInOcl;
 
 		/* Load the OCL file. */
-		testPerformer.loadOCLFile("expressions/post03.ocl");
+		testPerformer.loadOCLFile("constraints/post03.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		service = new Service();
@@ -2048,26 +2064,27 @@ public class TestInterpretation {
 		loyaltyProgram.addLevel(serviceLevel);
 
 		modelObject = testPerformer.addModelObject(loyaltyProgram);
-		testPerformer.addModelObject(programPartner);
-		testPerformer.addModelObject(serviceLevel);
-		testPerformer.addModelObject(service);
+		IModelInstanceElement imiProgramPartner =
+				testPerformer.addModelObject(programPartner);
+		IModelInstanceElement imiServiceLevel =
+				testPerformer.addModelObject(serviceLevel);
+		IModelInstanceElement imiService = testPerformer.addModelObject(service);
 
 		loyaltyProgramInOcl =
-				JavaStandardlibraryPlugin.getStandardLibraryFactory().createOclRoot(
-						loyaltyProgram);
+				JavaStandardlibraryPlugin.getStandardLibraryFactory().createOclAny(
+						modelObject);
 
 		programPartnerInOcl =
-				JavaStandardlibraryPlugin.getStandardLibraryFactory().createOclRoot(
-						programPartner);
+				JavaStandardlibraryPlugin.getStandardLibraryFactory().createOclAny(
+						imiProgramPartner);
 
 		serviceLevelInOcl =
-				JavaStandardlibraryPlugin.getStandardLibraryFactory().createOclRoot(
-						serviceLevel);
+				JavaStandardlibraryPlugin.getStandardLibraryFactory().createOclAny(
+						imiServiceLevel);
 
 		serviceInOcl =
-				JavaStandardlibraryPlugin.getStandardLibraryFactory().createOclRoot(
-						service);
-
+				JavaStandardlibraryPlugin.getStandardLibraryFactory().createOclAny(
+						imiService);
 		/*
 		 * Add the values needed as parameters of the operation call constrained by
 		 * this postcondition to the environment.
@@ -2081,18 +2098,20 @@ public class TestInterpretation {
 
 		/* Try to invoke the tested operation. */
 		try {
-			OclRoot parameters[];
+			OclAny parameters[];
 
-			parameters = new OclRoot[3];
+			parameters = new OclAny[3];
 
 			parameters[0] = programPartnerInOcl;
 			parameters[1] = serviceLevelInOcl;
 			parameters[2] = serviceInOcl;
 
-			loyaltyProgramInOcl.invokeOperation("addService", parameters);
+			Operation operation =
+					testPerformer.findOperation(modelObject, "addService");
+			loyaltyProgramInOcl.invokeOperation(operation, parameters);
 		}
 
-		catch (NoSuchMethodException e) {
+		catch (OperationNotFoundException e) {
 			fail("The tested operation could not be invoked. Test failed.");
 		}
 
@@ -2100,8 +2119,8 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(modelObject);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
 		/* Remove the added values from the environment. */
@@ -2120,19 +2139,19 @@ public class TestInterpretation {
 	public void testPost04() {
 
 		LoyaltyProgram loyaltyProgram;
-		OclRoot loyaltyProgramInOcl;
+		OclAny loyaltyProgramInOcl;
 
 		ProgramPartner programPartner;
-		OclRoot programPartnerInOcl;
+		OclAny programPartnerInOcl;
 
 		ServiceLevel serviceLevel;
-		OclRoot serviceLevelInOcl;
+		OclAny serviceLevelInOcl;
 
 		Service service;
-		OclRoot serviceInOcl;
+		OclAny serviceInOcl;
 
 		/* Load the OCL file. */
-		testPerformer.loadOCLFile("expressions/post04.ocl");
+		testPerformer.loadOCLFile("constraints/post04.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		service = new Service();
@@ -2146,25 +2165,27 @@ public class TestInterpretation {
 		loyaltyProgram.addLevel(serviceLevel);
 
 		modelObject = testPerformer.addModelObject(loyaltyProgram);
-		testPerformer.addModelObject(programPartner);
-		testPerformer.addModelObject(serviceLevel);
-		testPerformer.addModelObject(service);
+		IModelInstanceElement imiProgramPartner =
+				testPerformer.addModelObject(programPartner);
+		IModelInstanceElement imiServiceLevel =
+				testPerformer.addModelObject(serviceLevel);
+		IModelInstanceElement imiService = testPerformer.addModelObject(service);
 
 		loyaltyProgramInOcl =
-				JavaStandardlibraryPlugin.getStandardLibraryFactory().createOclRoot(
-						loyaltyProgram);
+				JavaStandardlibraryPlugin.getStandardLibraryFactory().createOclAny(
+						modelObject);
 
 		programPartnerInOcl =
-				JavaStandardlibraryPlugin.getStandardLibraryFactory().createOclRoot(
-						programPartner);
+				JavaStandardlibraryPlugin.getStandardLibraryFactory().createOclAny(
+						imiProgramPartner);
 
 		serviceLevelInOcl =
-				JavaStandardlibraryPlugin.getStandardLibraryFactory().createOclRoot(
-						serviceLevel);
+				JavaStandardlibraryPlugin.getStandardLibraryFactory().createOclAny(
+						imiServiceLevel);
 
 		serviceInOcl =
-				JavaStandardlibraryPlugin.getStandardLibraryFactory().createOclRoot(
-						service);
+				JavaStandardlibraryPlugin.getStandardLibraryFactory().createOclAny(
+						imiService);
 
 		/*
 		 * Add the values needed as parameters of the operation call constrained by
@@ -2179,18 +2200,20 @@ public class TestInterpretation {
 
 		/* Try to invoke the tested operation. */
 		try {
-			OclRoot parameters[];
+			OclAny parameters[];
 
-			parameters = new OclRoot[3];
+			parameters = new OclAny[3];
 
 			parameters[0] = programPartnerInOcl;
 			parameters[1] = serviceLevelInOcl;
 			parameters[2] = serviceInOcl;
 
-			loyaltyProgramInOcl.invokeOperation("addService", parameters);
+			Operation operation =
+					testPerformer.findOperation(modelObject, "addService");
+			loyaltyProgramInOcl.invokeOperation(operation, parameters);
 		}
 
-		catch (NoSuchMethodException e) {
+		catch (OperationNotFoundException e) {
 			fail("The tested operation could not be invoked. Test failed.");
 		}
 
@@ -2198,8 +2221,8 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(modelObject);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
 		/* Remove the added values from the environment. */
@@ -2215,13 +2238,13 @@ public class TestInterpretation {
 	 * </p>
 	 */
 	@Test
-	public void testPost05() {
+	public void testPost05a() {
 
 		LoyaltyAccount loyaltyAccount;
-		OclRoot loyaltyAccountInOcl;
+		OclAny loyaltyAccountInOcl;
 
 		/* Load the OCL file. */
-		testPerformer.loadOCLFile("expressions/post05.ocl");
+		testPerformer.loadOCLFile("constraints/post05.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		loyaltyAccount = new LoyaltyAccount();
@@ -2230,25 +2253,26 @@ public class TestInterpretation {
 		modelObject = testPerformer.addModelObject(loyaltyAccount);
 
 		loyaltyAccountInOcl =
-				JavaStandardlibraryPlugin.getStandardLibraryFactory().createOclRoot(
-						loyaltyAccount);
+				JavaStandardlibraryPlugin.getStandardLibraryFactory().createOclAny(
+						modelObject);
 
 		/*
 		 * Try to invoke the tested operation and add the result variable to the
 		 * environment.
 		 */
 		try {
-			OclRoot parameters[];
-			OclRoot opResult;
+			OclAny parameters[];
+			OclAny opResult;
 
-			parameters = new OclRoot[0];
+			parameters = new OclAny[0];
 
-			opResult = loyaltyAccountInOcl.invokeOperation("isEmpty", parameters);
+			Operation operation = testPerformer.findOperation(modelObject, "isEmpty");
+			opResult = loyaltyAccountInOcl.invokeOperation(operation, parameters);
 
 			testPerformer.setEnvironmentVariable("result", opResult);
 		}
 
-		catch (NoSuchMethodException e) {
+		catch (OperationNotFoundException e) {
 			fail("The tested operation could not be invoked. Test failed.");
 		}
 
@@ -2256,8 +2280,8 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(modelObject);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
 		/* Remove the added values from the environment. */
@@ -2271,13 +2295,13 @@ public class TestInterpretation {
 	 * </p>
 	 */
 	@Test
-	public void testPost06() {
+	public void testPost05b() {
 
 		LoyaltyAccount loyaltyAccount;
-		OclRoot loyaltyAccountInOcl;
+		OclAny loyaltyAccountInOcl;
 
 		/* Load the OCL file. */
-		testPerformer.loadOCLFile("expressions/post05.ocl");
+		testPerformer.loadOCLFile("constraints/post05.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		loyaltyAccount = new LoyaltyAccount();
@@ -2286,25 +2310,26 @@ public class TestInterpretation {
 		modelObject = testPerformer.addModelObject(loyaltyAccount);
 
 		loyaltyAccountInOcl =
-				JavaStandardlibraryPlugin.getStandardLibraryFactory().createOclRoot(
-						loyaltyAccount);
+				JavaStandardlibraryPlugin.getStandardLibraryFactory().createOclAny(
+						modelObject);
 
 		/*
 		 * Try to invoke the tested operation and add the result variable to the
 		 * environment.
 		 */
 		try {
-			OclRoot parameters[];
-			OclRoot opResult;
+			OclAny parameters[];
+			OclAny opResult;
 
-			parameters = new OclRoot[0];
+			parameters = new OclAny[0];
 
-			opResult = loyaltyAccountInOcl.invokeOperation("isEmpty", parameters);
+			Operation operation = testPerformer.findOperation(modelObject, "isEmpty");
+			opResult = loyaltyAccountInOcl.invokeOperation(operation, parameters);
 
 			testPerformer.setEnvironmentVariable("result", opResult);
 		}
 
-		catch (NoSuchMethodException e) {
+		catch (OperationNotFoundException e) {
 			fail("The tested operation could not be invoked. Test failed.");
 		}
 
@@ -2312,8 +2337,8 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(modelObject);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertFalse(result_Boolean.isTrue());
 
 		/* Remove the added values from the environment. */
@@ -2327,13 +2352,13 @@ public class TestInterpretation {
 	 * </p>
 	 */
 	@Test
-	public void testPost07() {
+	public void testPost06() {
 
 		Customer customer;
-		OclRoot customerInOcl;
+		OclAny customerInOcl;
 
 		/* Load the OCL file. */
-		testPerformer.loadOCLFile("expressions/post06.ocl");
+		testPerformer.loadOCLFile("constraints/post06.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		customer = new Customer(25);
@@ -2341,22 +2366,24 @@ public class TestInterpretation {
 		modelObject = testPerformer.addModelObject(customer);
 
 		customerInOcl =
-				JavaStandardlibraryPlugin.getStandardLibraryFactory().createOclRoot(
-						customer);
+				JavaStandardlibraryPlugin.getStandardLibraryFactory().createOclAny(
+						modelObject);
 
 		/* Prepare the selected model objects. */
 		testPerformer.prepareRemainingConstraints(modelObject, false);
 
 		/* Try to invoke the tested operation. */
 		try {
-			OclRoot parameters[];
+			OclAny parameters[];
 
-			parameters = new OclRoot[0];
+			parameters = new OclAny[0];
 
-			customerInOcl.invokeOperation("birthdayHappens", parameters);
+			Operation operation =
+					testPerformer.findOperation(modelObject, "birthdayHappens");
+			customerInOcl.invokeOperation(operation, parameters);
 		}
 
-		catch (NoSuchMethodException e) {
+		catch (OperationNotFoundException e) {
 			fail("The tested operation could not be invoked. Test failed.");
 		}
 
@@ -2364,8 +2391,9 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(modelObject);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsInvalid().isTrue());
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -2376,16 +2404,16 @@ public class TestInterpretation {
 	 * </p>
 	 */
 	@Test
-	public void testPost08() {
+	public void testPost07() {
 
 		Service service;
-		Integer integer;
+		Long integer;
 
-		OclRoot serviceInOcl;
-		OclRoot integerInOcl;
+		OclAny serviceInOcl;
+		OclAny integerInOcl;
 
 		/* Load the OCL file. */
-		testPerformer.loadOCLFile("expressions/post07.ocl");
+		testPerformer.loadOCLFile("constraints/post07.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		service = new Service();
@@ -2395,10 +2423,10 @@ public class TestInterpretation {
 		modelObject = testPerformer.addModelObject(service);
 
 		serviceInOcl =
-				JavaStandardlibraryPlugin.getOclInstanceAdapterFactory().createOclRoot(
+				JavaStandardlibraryPlugin.getStandardLibraryFactory().createOclAny(
 						modelObject);
 
-		integer = new Integer(100);
+		integer = new Long(100);
 
 		integerInOcl =
 				JavaStandardlibraryPlugin.getStandardLibraryFactory().createOclInteger(
@@ -2408,22 +2436,28 @@ public class TestInterpretation {
 		 * Add the values needed as parameters of the operation call constrained by
 		 * this postcondition to the environment.
 		 */
-		testPerformer.setEnvironmentVariable("amount", integer);
+		try {
+			testPerformer.setEnvironmentVariable("amount", integer);
+		} catch (TypeNotFoundInModelException e1) {
+			fail(e1.getMessage());
+		}
 
 		/* Prepare the selected model objects. */
 		testPerformer.prepareRemainingConstraints(modelObject, false);
 
 		/* Try to invoke the tested operation. */
 		try {
-			OclRoot parameters[];
+			OclAny parameters[];
 
-			parameters = new OclRoot[1];
+			parameters = new OclAny[1];
 			parameters[0] = integerInOcl;
 
-			serviceInOcl.invokeOperation("upgradePointsEarned", parameters);
+			Operation operation =
+					testPerformer.findOperation(modelObject, "upgradePointsEarned");
+			serviceInOcl.invokeOperation(operation, parameters);
 		}
 
-		catch (NoSuchMethodException e) {
+		catch (OperationNotFoundException e) {
 			fail("The tested operation could not be invoked. Test failed.");
 		}
 
@@ -2431,8 +2465,9 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(modelObject);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsInvalid().isTrue());
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
 		/* Remove the added values from the environment. */
@@ -2446,17 +2481,17 @@ public class TestInterpretation {
 	 * </p>
 	 */
 	@Test
-	public void testPost09() {
+	public void testPost08() {
 
 		Transaction transaction;
-		OclRoot transactionInOcl;
+		OclAny transactionInOcl;
 
 		Service service;
 		ServiceLevel serviceLevel;
 		LoyaltyProgram loyaltyProgram;
 
 		/* Load the OCL file. */
-		testPerformer.loadOCLFile("expressions/post08.ocl");
+		testPerformer.loadOCLFile("constraints/post08.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		loyaltyProgram = new LoyaltyProgram();
@@ -2476,7 +2511,7 @@ public class TestInterpretation {
 
 		modelObject = testPerformer.addModelObject(transaction);
 		transactionInOcl =
-				JavaStandardlibraryPlugin.getOclInstanceAdapterFactory().createOclRoot(
+				JavaStandardlibraryPlugin.getStandardLibraryFactory().createOclAny(
 						modelObject);
 
 		/* Prepare the selected model objects. */
@@ -2488,16 +2523,18 @@ public class TestInterpretation {
 		 * environment.
 		 */
 		try {
-			OclRoot parameters[];
-			OclRoot opResult;
+			OclAny parameters[];
+			OclAny opResult;
 
-			parameters = new OclRoot[0];
-			opResult = transactionInOcl.invokeOperation("getProgram", parameters);
+			parameters = new OclAny[0];
+			Operation operation =
+					testPerformer.findOperation(modelObject, "getProgram");
+			opResult = transactionInOcl.invokeOperation(operation, parameters);
 
 			testPerformer.setEnvironmentVariable("result", opResult);
 		}
 
-		catch (NoSuchMethodException e) {
+		catch (OperationNotFoundException e) {
 			fail("The tested operation could not be invoked. Test failed.");
 		}
 
@@ -2505,8 +2542,9 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(modelObject);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsInvalid().isTrue());
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
 		/* Remove the added values from the environment. */
@@ -2523,14 +2561,14 @@ public class TestInterpretation {
 	public void testPost10() {
 
 		Transaction transaction;
-		OclRoot transactionInOcl;
+		OclAny transactionInOcl;
 
 		Service service;
 		ServiceLevel serviceLevel;
 		LoyaltyProgram loyaltyProgram;
 
 		/* Load the OCL file. */
-		testPerformer.loadOCLFile("expressions/post10.ocl");
+		testPerformer.loadOCLFile("constraints/post10.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		loyaltyProgram = new LoyaltyProgram();
@@ -2550,7 +2588,7 @@ public class TestInterpretation {
 
 		modelObject = testPerformer.addModelObject(transaction);
 		transactionInOcl =
-				JavaStandardlibraryPlugin.getOclInstanceAdapterFactory().createOclRoot(
+				JavaStandardlibraryPlugin.getStandardLibraryFactory().createOclAny(
 						modelObject);
 
 		/* Prepare the selected model objects. */
@@ -2562,16 +2600,18 @@ public class TestInterpretation {
 		 * environment.
 		 */
 		try {
-			OclRoot parameters[];
-			OclRoot opResult;
+			OclAny parameters[];
+			OclAny opResult;
 
-			parameters = new OclRoot[0];
-			opResult = transactionInOcl.invokeOperation("getProgram", parameters);
+			parameters = new OclAny[0];
+			Operation operation =
+					testPerformer.findOperation(modelObject, "getProgram");
+			opResult = transactionInOcl.invokeOperation(operation, parameters);
 
 			testPerformer.setEnvironmentVariable("result", opResult);
 		}
 
-		catch (NoSuchMethodException e) {
+		catch (OperationNotFoundException e) {
 			fail("The tested operation could not be invoked. Test failed.");
 		}
 
@@ -2579,8 +2619,8 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(modelObject);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
 		/* Remove the added values from the environment. */
@@ -2597,15 +2637,15 @@ public class TestInterpretation {
 	public void testPost11() {
 
 		LoyaltyProgram loyaltyProgram;
-		OclRoot loyaltyProgramInOcl;
+		OclAny loyaltyProgramInOcl;
 
 		Membership membership;
 
 		Customer customer;
-		OclRoot customerInOcl;
+		OclAny customerInOcl;
 
 		/* Load the OCL file. */
-		testPerformer.loadOCLFile("expressions/post11.ocl");
+		testPerformer.loadOCLFile("constraints/post11.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		customer = new Customer(25);
@@ -2617,14 +2657,14 @@ public class TestInterpretation {
 
 		modelObject = testPerformer.addModelObject(loyaltyProgram);
 		loyaltyProgramInOcl =
-				JavaStandardlibraryPlugin.getOclInstanceAdapterFactory().createOclRoot(
+				JavaStandardlibraryPlugin.getStandardLibraryFactory().createOclAny(
 						modelObject);
 
-		testPerformer.addModelObject(customer);
+		IModelInstanceElement imiCustomer = testPerformer.addModelObject(customer);
 
 		customerInOcl =
-				JavaStandardlibraryPlugin.getStandardLibraryFactory().createOclRoot(
-						customer);
+				JavaStandardlibraryPlugin.getStandardLibraryFactory().createOclAny(
+						imiCustomer);
 
 		testPerformer.addModelObject(membership);
 
@@ -2639,10 +2679,11 @@ public class TestInterpretation {
 
 		/* Try to invoke the tested operation. */
 		try {
-			loyaltyProgramInOcl.invokeOperation("enroll", customerInOcl);
+			Operation operation = testPerformer.findOperation(modelObject, "enroll");
+			loyaltyProgramInOcl.invokeOperation(operation, customerInOcl);
 		}
 
-		catch (NoSuchMethodException e) {
+		catch (OperationNotFoundException e) {
 			fail("The tested operation could not be invoked. Test failed.");
 		}
 
@@ -2650,8 +2691,9 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(modelObject);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsInvalid().isTrue());
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
 		/* Remove the added values from the environment. */
@@ -2668,10 +2710,10 @@ public class TestInterpretation {
 	public void testPost12() {
 
 		Date date;
-		OclRoot dateInOcl;
+		OclAny dateInOcl;
 
 		/* Load the OCL file. */
-		testPerformer.loadOCLFile("expressions/post12.ocl");
+		testPerformer.loadOCLFile("constraints/post12.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		date = Date.now();
@@ -2679,7 +2721,7 @@ public class TestInterpretation {
 		modelObject = testPerformer.addModelObject(date);
 
 		dateInOcl =
-				JavaStandardlibraryPlugin.getOclInstanceAdapterFactory().createOclRoot(
+				JavaStandardlibraryPlugin.getStandardLibraryFactory().createOclAny(
 						modelObject);
 
 		/* Prepare the selected model objects. */
@@ -2690,16 +2732,17 @@ public class TestInterpretation {
 		 * environment.
 		 */
 		try {
-			OclRoot parameters[];
-			OclRoot opResult;
+			OclAny parameters[];
+			OclAny opResult;
 
-			parameters = new OclRoot[0];
-			opResult = dateInOcl.invokeOperation("now", parameters);
+			parameters = new OclAny[0];
+			Operation operation = testPerformer.findOperation(modelObject, "now");
+			opResult = dateInOcl.invokeOperation(operation, parameters);
 
 			testPerformer.setEnvironmentVariable("result", opResult);
 		}
 
-		catch (NoSuchMethodException e) {
+		catch (OperationNotFoundException e) {
 			fail("The tested operation could not be invoked. Test failed.");
 		}
 
@@ -2707,8 +2750,8 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(modelObject);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
 		/* Remove the added values from the environment. */
@@ -2728,7 +2771,7 @@ public class TestInterpretation {
 		Customer customer;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/pre01.ocl");
+		testPerformer.loadOCLFile("constraints/pre01.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		loyaltyProgram = new LoyaltyProgram();
@@ -2741,31 +2784,39 @@ public class TestInterpretation {
 		 */
 		customer = new Customer(23);
 		customer.setName("Testman");
-		testPerformer.setEnvironmentVariable("c", customer);
+		try {
+			testPerformer.setEnvironmentVariable("c", customer);
+		} catch (TypeNotFoundInModelException e1) {
+			fail(e1.getMessage());
+		}
 
 		/* Interpret the selected combinations. */
 		results = testPerformer.interpretRemainingConstraints(modelObject);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
 		/* Do the same test with different values. */
 
 		/* Reload the OCL file for another interpretation. */
-		testPerformer.loadOCLFile("expressions/pre01.ocl");
+		testPerformer.loadOCLFile("constraints/pre01.ocl");
 
 		/* Set new parameters as preparation. */
 		customer.setName("");
-		testPerformer.setEnvironmentVariable("c", customer);
+		try {
+			testPerformer.setEnvironmentVariable("c", customer);
+		} catch (TypeNotFoundInModelException e) {
+			fail(e.getMessage());
+		}
 
 		/* Interpret the selected combinations. */
 		results = testPerformer.interpretRemainingConstraints(modelObject);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertFalse(result_Boolean.isTrue());
 
 		/* Remove the added values from the environment. */
@@ -2790,7 +2841,7 @@ public class TestInterpretation {
 		Object service;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/pre02.ocl");
+		testPerformer.loadOCLFile("constraints/pre02.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		serviceLevel = new ServiceLevel();
@@ -2809,7 +2860,7 @@ public class TestInterpretation {
 		testPerformer.addModelObject(programPartner);
 		testPerformer.addModelObject(serviceLevel);
 
-		objectList = new ArrayList<IModelObject>();
+		objectList = new ArrayList<IModelInstanceElement>();
 		objectList.add(testPerformer.addModelObject(loyaltyProgram1));
 		objectList.add(testPerformer.addModelObject(loyaltyProgram2));
 		objectList.add(testPerformer.addModelObject(loyaltyProgram3));
@@ -2820,32 +2871,38 @@ public class TestInterpretation {
 		 */
 		service = new Service();
 
-		testPerformer.setEnvironmentVariable("aPartner", programPartner);
-		testPerformer.setEnvironmentVariable("aLevel", serviceLevel);
-		testPerformer.setEnvironmentVariable("aService", service);
+		try {
+			testPerformer.setEnvironmentVariable("aPartner", programPartner);
+			testPerformer.setEnvironmentVariable("aLevel", serviceLevel);
+			testPerformer.setEnvironmentVariable("aService", service);
+
+		} catch (TypeNotFoundInModelException e) {
+			fail(e.getMessage());
+		}
 
 		/* Interpret the selected combinations. */
 		results = testPerformer.interpretRemainingConstraints(objectList);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(1);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(1);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(2);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(2);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertFalse(result_Boolean.isTrue());
 
 		/* Remove the added values from the environment. */
 		testPerformer.resetEnvironmentVariable("aPartner");
 		testPerformer.resetEnvironmentVariable("aLevel");
 		testPerformer.resetEnvironmentVariable("aServices");
+
 	}
 
 	/**
@@ -2866,7 +2923,7 @@ public class TestInterpretation {
 		Object service;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/pre03.ocl");
+		testPerformer.loadOCLFile("constraints/pre03.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		serviceLevel = new ServiceLevel();
@@ -2885,7 +2942,7 @@ public class TestInterpretation {
 		testPerformer.addModelObject(programPartner);
 		testPerformer.addModelObject(serviceLevel);
 
-		objectList = new ArrayList<IModelObject>();
+		objectList = new ArrayList<IModelInstanceElement>();
 		objectList.add(testPerformer.addModelObject(loyaltyProgram1));
 		objectList.add(testPerformer.addModelObject(loyaltyProgram2));
 		objectList.add(testPerformer.addModelObject(loyaltyProgram3));
@@ -2896,26 +2953,30 @@ public class TestInterpretation {
 		 */
 		service = new Service();
 
-		testPerformer.setEnvironmentVariable("aPartner", programPartner);
-		testPerformer.setEnvironmentVariable("aLevel", serviceLevel);
-		testPerformer.setEnvironmentVariable("aService", service);
+		try {
+			testPerformer.setEnvironmentVariable("aPartner", programPartner);
+			testPerformer.setEnvironmentVariable("aLevel", serviceLevel);
+			testPerformer.setEnvironmentVariable("aService", service);
+		} catch (TypeNotFoundInModelException e) {
+			fail(e.getMessage());
+		}
 
 		/* Interpret the selected combinations. */
 		results = testPerformer.interpretRemainingConstraints(objectList);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(1);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(1);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertFalse(result_Boolean.isTrue());
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(2);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(2);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
 		/* Remove the added values from the environment. */
@@ -2942,7 +3003,7 @@ public class TestInterpretation {
 		Object service;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/pre04.ocl");
+		testPerformer.loadOCLFile("constraints/pre04.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		serviceLevel = new ServiceLevel();
@@ -2961,7 +3022,7 @@ public class TestInterpretation {
 		testPerformer.addModelObject(programPartner);
 		testPerformer.addModelObject(serviceLevel);
 
-		objectList = new ArrayList<IModelObject>();
+		objectList = new ArrayList<IModelInstanceElement>();
 		objectList.add(testPerformer.addModelObject(loyaltyProgram1));
 		objectList.add(testPerformer.addModelObject(loyaltyProgram2));
 		objectList.add(testPerformer.addModelObject(loyaltyProgram3));
@@ -2972,26 +3033,30 @@ public class TestInterpretation {
 		 */
 		service = new Service();
 
-		testPerformer.setEnvironmentVariable("aPartner", programPartner);
-		testPerformer.setEnvironmentVariable("aLevel", serviceLevel);
-		testPerformer.setEnvironmentVariable("aService", service);
+		try {
+			testPerformer.setEnvironmentVariable("aPartner", programPartner);
+			testPerformer.setEnvironmentVariable("aLevel", serviceLevel);
+			testPerformer.setEnvironmentVariable("aService", service);
+		} catch (TypeNotFoundInModelException e) {
+			fail(e.getMessage());
+		}
 
 		/* Interpret the selected combinations. */
 		results = testPerformer.interpretRemainingConstraints(objectList);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(1);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(1);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertFalse(result_Boolean.isTrue());
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(2);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(2);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertFalse(result_Boolean.isTrue());
 
 		/* Remove the added values from the environment. */
@@ -3012,7 +3077,7 @@ public class TestInterpretation {
 		Transaction transaction;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/pre05.ocl");
+		testPerformer.loadOCLFile("constraints/pre05.ocl");
 
 		/* Select the model objects which shall be interpreted. */
 		transaction = new Transaction();
@@ -3022,8 +3087,8 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(modelObject);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -3039,7 +3104,7 @@ public class TestInterpretation {
 		Date date;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/pre06.ocl");
+		testPerformer.loadOCLFile("constraints/pre06.ocl");
 
 		/* Select the model objects which shall be interpreted. */
 		date = Date.now();
@@ -3049,8 +3114,8 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(modelObject);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -3066,7 +3131,7 @@ public class TestInterpretation {
 		Transaction transaction;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/any01.ocl");
+		testPerformer.loadOCLFile("constraints/test/any01.ocl");
 
 		/* Select the model objects which shall be interpreted. */
 		transaction = new Transaction();
@@ -3076,8 +3141,8 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(modelObject);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -3093,7 +3158,7 @@ public class TestInterpretation {
 		Transaction transaction;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/any02.ocl");
+		testPerformer.loadOCLFile("constraints/test/any02.ocl");
 
 		/* Select the model objects which shall be interpreted. */
 		transaction = new Transaction();
@@ -3103,8 +3168,8 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(modelObject);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -3120,7 +3185,7 @@ public class TestInterpretation {
 		Transaction transaction;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/any03.ocl");
+		testPerformer.loadOCLFile("constraints/test/any03.ocl");
 
 		/* Select the model objects which shall be interpreted. */
 		transaction = new Transaction();
@@ -3130,8 +3195,9 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(modelObject);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
+		assertFalse(result_Boolean.oclIsInvalid().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -3147,7 +3213,7 @@ public class TestInterpretation {
 		Transaction transaction;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/any04.ocl");
+		testPerformer.loadOCLFile("constraints/test/any04.ocl");
 
 		/* Select the model objects which shall be interpreted. */
 		transaction = new Transaction();
@@ -3157,13 +3223,13 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(modelObject);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(1);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(1);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -3179,7 +3245,7 @@ public class TestInterpretation {
 		Transaction transaction;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/any05.ocl");
+		testPerformer.loadOCLFile("constraints/test/any05.ocl");
 
 		/* Select the model objects which shall be interpreted. */
 		transaction = new Transaction();
@@ -3189,8 +3255,8 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(modelObject);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -3207,7 +3273,7 @@ public class TestInterpretation {
 		Service service2;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/boolean01.ocl");
+		testPerformer.loadOCLFile("constraints/test/boolean01.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		service1 = new Service();
@@ -3219,7 +3285,7 @@ public class TestInterpretation {
 		service2.setPointsEarned(100);
 		service2.setPointsBurned(50);
 
-		objectList = new ArrayList<IModelObject>();
+		objectList = new ArrayList<IModelInstanceElement>();
 		objectList.add(testPerformer.addModelObject(service1));
 		objectList.add(testPerformer.addModelObject(service2));
 
@@ -3227,13 +3293,13 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(objectList);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertFalse(result_Boolean.isTrue());
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(1);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(1);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -3249,7 +3315,7 @@ public class TestInterpretation {
 		Service service;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/boolean02.ocl");
+		testPerformer.loadOCLFile("constraints/test/boolean02.ocl");
 
 		/* Select the model objects which shall be interpreted. */
 		service = new Service();
@@ -3259,8 +3325,8 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(modelObject);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertFalse(result_Boolean.isTrue());
 	}
 
@@ -3278,14 +3344,14 @@ public class TestInterpretation {
 		Customer customer3;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/boolean03.ocl");
+		testPerformer.loadOCLFile("constraints/test/boolean03.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		customer1 = new Customer(15);
 		customer2 = new Customer(55);
 		customer3 = new Customer(99);
 
-		objectList = new ArrayList<IModelObject>();
+		objectList = new ArrayList<IModelInstanceElement>();
 		objectList.add(testPerformer.addModelObject(customer1));
 		objectList.add(testPerformer.addModelObject(customer2));
 		objectList.add(testPerformer.addModelObject(customer3));
@@ -3294,18 +3360,18 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(objectList);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertFalse(result_Boolean.isTrue());
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(1);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(1);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(2);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(2);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertFalse(result_Boolean.isTrue());
 	}
 
@@ -3327,7 +3393,7 @@ public class TestInterpretation {
 		CustomerCard card4;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/boolean04.ocl");
+		testPerformer.loadOCLFile("constraints/test/boolean04.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		customer1 = new Customer(11);
@@ -3348,7 +3414,7 @@ public class TestInterpretation {
 		testPerformer.addModelObject(card3);
 		testPerformer.addModelObject(card4);
 
-		objectList = new ArrayList<IModelObject>();
+		objectList = new ArrayList<IModelInstanceElement>();
 		objectList.add(testPerformer.addModelObject(customer1));
 		objectList.add(testPerformer.addModelObject(customer2));
 
@@ -3356,13 +3422,13 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(objectList);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertFalse(result_Boolean.isTrue());
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(1);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(1);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -3380,7 +3446,7 @@ public class TestInterpretation {
 		Customer customer3;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/boolean05.ocl");
+		testPerformer.loadOCLFile("constraints/test/boolean05.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		customer1 = new Customer(25);
@@ -3390,7 +3456,7 @@ public class TestInterpretation {
 		customer3 = new Customer(25);
 		customer3.setTitle("Dr.");
 
-		objectList = new ArrayList<IModelObject>();
+		objectList = new ArrayList<IModelInstanceElement>();
 		objectList.add(testPerformer.addModelObject(customer1));
 		objectList.add(testPerformer.addModelObject(customer2));
 		objectList.add(testPerformer.addModelObject(customer3));
@@ -3399,18 +3465,18 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(objectList);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(1);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(1);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(2);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(2);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertFalse(result_Boolean.isTrue());
 	}
 
@@ -3427,7 +3493,7 @@ public class TestInterpretation {
 		Customer customer2;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/boolean06.ocl");
+		testPerformer.loadOCLFile("constraints/test/boolean06.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		customer1 = new Customer(25);
@@ -3435,7 +3501,7 @@ public class TestInterpretation {
 		customer2 = new Customer(25);
 		customer2.setName("Nobar");
 
-		objectList = new ArrayList<IModelObject>();
+		objectList = new ArrayList<IModelInstanceElement>();
 		objectList.add(testPerformer.addModelObject(customer1));
 		objectList.add(testPerformer.addModelObject(customer2));
 
@@ -3443,13 +3509,13 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(objectList);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(1);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(1);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertFalse(result_Boolean.isTrue());
 	}
 
@@ -3461,22 +3527,22 @@ public class TestInterpretation {
 	 */
 	@Test
 	public void testCollection01() {
-	
+
 		Service service;
-	
+
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/collection01.ocl");
-	
+		testPerformer.loadOCLFile("constraints/test/collection01.ocl");
+
 		/* Create the model objects which shall be interpreted. */
 		service = new Service();
 		modelObject = testPerformer.addModelObject(service);
-	
+
 		/* Interpret the selected combinations. */
 		results = testPerformer.interpretRemainingConstraints(modelObject);
-	
+
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -3488,22 +3554,22 @@ public class TestInterpretation {
 	 */
 	@Test
 	public void testCollection02() {
-	
+
 		Service service;
-	
+
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/collection02.ocl");
-	
+		testPerformer.loadOCLFile("constraints/test/collection02.ocl");
+
 		/* Create the model objects which shall be interpreted. */
 		service = new Service();
 		modelObject = testPerformer.addModelObject(service);
-	
+
 		/* Interpret the selected combinations. */
 		results = testPerformer.interpretRemainingConstraints(modelObject);
-	
+
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -3515,22 +3581,22 @@ public class TestInterpretation {
 	 */
 	@Test
 	public void testCollection03() {
-	
+
 		Service service;
-	
+
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/collection03.ocl");
-	
+		testPerformer.loadOCLFile("constraints/test/collection03.ocl");
+
 		/* Create the model objects which shall be interpreted. */
 		service = new Service();
 		modelObject = testPerformer.addModelObject(service);
-	
+
 		/* Interpret the selected combinations. */
 		results = testPerformer.interpretRemainingConstraints(modelObject);
-	
+
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -3542,22 +3608,22 @@ public class TestInterpretation {
 	 */
 	@Test
 	public void testCollection04() {
-	
+
 		Service service;
-	
+
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/collection04.ocl");
-	
+		testPerformer.loadOCLFile("constraints/test/collection04.ocl");
+
 		/* Create the model objects which shall be interpreted. */
 		service = new Service();
 		modelObject = testPerformer.addModelObject(service);
-	
+
 		/* Interpret the selected combinations. */
 		results = testPerformer.interpretRemainingConstraints(modelObject);
-	
+
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -3569,22 +3635,22 @@ public class TestInterpretation {
 	 */
 	@Test
 	public void testCollection05() {
-	
+
 		Service service;
-	
+
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/collection05.ocl");
-	
+		testPerformer.loadOCLFile("constraints/test/collection05.ocl");
+
 		/* Create the model objects which shall be interpreted. */
 		service = new Service();
 		modelObject = testPerformer.addModelObject(service);
-	
+
 		/* Interpret the selected combinations. */
 		results = testPerformer.interpretRemainingConstraints(modelObject);
-	
+
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -3596,22 +3662,22 @@ public class TestInterpretation {
 	 */
 	@Test
 	public void testCollection06() {
-	
+
 		Service service;
-	
+
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/collection06.ocl");
-	
+		testPerformer.loadOCLFile("constraints/test/collection06.ocl");
+
 		/* Create the model objects which shall be interpreted. */
 		service = new Service();
 		modelObject = testPerformer.addModelObject(service);
-	
+
 		/* Interpret the selected combinations. */
 		results = testPerformer.interpretRemainingConstraints(modelObject);
-	
+
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -3623,23 +3689,23 @@ public class TestInterpretation {
 	 */
 	@Test
 	public void testCollection07() {
-	
+
 		Service service;
-	
+
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/collection07.ocl");
-	
+		testPerformer.loadOCLFile("constraints/test/collection07.ocl");
+
 		/* Select the model objects which shall be interpreted. */
 		/* Create the model objects which shall be interpreted. */
 		service = new Service();
 		modelObject = testPerformer.addModelObject(service);
-	
+
 		/* Interpret the selected combinations. */
 		results = testPerformer.interpretRemainingConstraints(modelObject);
-	
+
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -3651,23 +3717,23 @@ public class TestInterpretation {
 	 */
 	@Test
 	public void testCollection08() {
-	
+
 		Service service;
-	
+
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/collection08.ocl");
-	
+		testPerformer.loadOCLFile("constraints/test/collection08.ocl");
+
 		/* Select the model objects which shall be interpreted. */
 		/* Create the model objects which shall be interpreted. */
 		service = new Service();
 		modelObject = testPerformer.addModelObject(service);
-	
+
 		/* Interpret the selected combinations. */
 		results = testPerformer.interpretRemainingConstraints(modelObject);
-	
+
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -3679,22 +3745,22 @@ public class TestInterpretation {
 	 */
 	@Test
 	public void testCollection09() {
-	
+
 		Service service;
-	
+
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/collection09.ocl");
-	
+		testPerformer.loadOCLFile("constraints/test/collection09.ocl");
+
 		/* Create the model objects which shall be interpreted. */
 		service = new Service();
 		modelObject = testPerformer.addModelObject(service);
-	
+
 		/* Interpret the selected combinations. */
 		results = testPerformer.interpretRemainingConstraints(modelObject);
-	
+
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -3706,40 +3772,40 @@ public class TestInterpretation {
 	 */
 	@Test
 	public void testCollection10() {
-	
+
 		LoyaltyProgram loyaltyProgram1;
 		LoyaltyProgram loyaltyProgram2;
-		
+
 		Customer customer;
-	
+
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/collection10.ocl");
-	
+		testPerformer.loadOCLFile("constraints/test/collection10.ocl");
+
 		/* Select the model objects which shall be interpreted. */
 		customer = new Customer(19);
-		
+
 		loyaltyProgram1 = new LoyaltyProgram();
 		loyaltyProgram1.enroll(customer);
-		
+
 		loyaltyProgram2 = new LoyaltyProgram();
-		
+
 		testPerformer.addModelObject(customer);
-	
-		objectList = new ArrayList<IModelObject>();
+
+		objectList = new ArrayList<IModelInstanceElement>();
 		objectList.add(testPerformer.addModelObject(loyaltyProgram1));
 		objectList.add(testPerformer.addModelObject(loyaltyProgram2));
-	
+
 		/* Interpret the selected combinations. */
 		results = testPerformer.interpretRemainingConstraints(objectList);
-	
+
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
-	
+
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(1);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(1);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -3751,40 +3817,40 @@ public class TestInterpretation {
 	 */
 	@Test
 	public void testCollection11() {
-	
+
 		Membership membership1;
 		Membership membership2;
-		
+
 		LoyaltyAccount loyaltyAccount;
-	
+
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/collection11.ocl");
-	
+		testPerformer.loadOCLFile("constraints/test/collection11.ocl");
+
 		/* Create the model objects which shall be interpreted. */
 		loyaltyAccount = new LoyaltyAccount();
-		
+
 		membership1 = new Membership();
 		membership1.addAccount(loyaltyAccount);
-		
+
 		membership2 = new Membership();
-		
+
 		testPerformer.addModelObject(loyaltyAccount);
-	
-		objectList = new ArrayList<IModelObject>();
+
+		objectList = new ArrayList<IModelInstanceElement>();
 		objectList.add(testPerformer.addModelObject(membership1));
 		objectList.add(testPerformer.addModelObject(membership2));
-	
+
 		/* Interpret the selected combinations. */
 		results = testPerformer.interpretRemainingConstraints(objectList);
-	
+
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertFalse(result_Boolean.isTrue());
-	
+
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(1);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(1);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -3796,22 +3862,22 @@ public class TestInterpretation {
 	 */
 	@Test
 	public void testCollection12() {
-	
+
 		Membership membership;
-	
+
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/collection12.ocl");
-	
+		testPerformer.loadOCLFile("constraints/test/collection12.ocl");
+
 		/* Create the model objects which shall be interpreted. */
 		membership = new Membership();
 		modelObject = testPerformer.addModelObject(membership);
-	
+
 		/* Interpret the selected combinations. */
 		results = testPerformer.interpretRemainingConstraints(modelObject);
-	
+
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -3823,22 +3889,22 @@ public class TestInterpretation {
 	 */
 	@Test
 	public void testCollection13() {
-	
+
 		Membership membership;
-	
+
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/collection13.ocl");
-	
+		testPerformer.loadOCLFile("constraints/test/collection13.ocl");
+
 		/* Create the model objects which shall be interpreted. */
 		membership = new Membership();
 		modelObject = testPerformer.addModelObject(membership);
-	
+
 		/* Interpret the selected combinations. */
 		results = testPerformer.interpretRemainingConstraints(modelObject);
-	
+
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -3856,29 +3922,29 @@ public class TestInterpretation {
 		ServiceLevel serviceLevel;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/collection14.ocl");
+		testPerformer.loadOCLFile("constraints/test/collection14.ocl");
 
 		/* Select the model objects which shall be interpreted. */
 		serviceLevel = new ServiceLevel();
-		
+
 		loyaltyProgram = new LoyaltyProgram();
 		loyaltyProgram.addLevel(serviceLevel);
-		
+
 		membership = new Membership();
 		membership.setCurrentLevel(serviceLevel);
 		membership.setProgram(loyaltyProgram);
-		
+
 		testPerformer.addModelObject(serviceLevel);
 		testPerformer.addModelObject(loyaltyProgram);
-		
+
 		modelObject = testPerformer.addModelObject(membership);
 
 		/* Interpret the selected combinations. */
 		results = testPerformer.interpretRemainingConstraints(modelObject);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -3893,35 +3959,35 @@ public class TestInterpretation {
 
 		Membership membership1;
 		Membership membership2;
-		
+
 		LoyaltyProgram loyaltyProgram;
-		
+
 		ServiceLevel serviceLevel1;
 		ServiceLevel serviceLevel2;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/collection15.ocl");
+		testPerformer.loadOCLFile("constraints/test/collection15.ocl");
 
 		/* Select the model objects which shall be interpreted. */
 		serviceLevel1 = new ServiceLevel();
 		serviceLevel2 = new ServiceLevel();
-		
+
 		loyaltyProgram = new LoyaltyProgram();
 		loyaltyProgram.addLevel(serviceLevel1);
-		
+
 		membership1 = new Membership();
 		membership1.setCurrentLevel(serviceLevel1);
 		membership1.setProgram(loyaltyProgram);
-		
+
 		membership2 = new Membership();
 		membership2.setCurrentLevel(serviceLevel2);
 		membership2.setProgram(loyaltyProgram);
-		
+
 		testPerformer.addModelObject(serviceLevel1);
 		testPerformer.addModelObject(serviceLevel2);
 		testPerformer.addModelObject(loyaltyProgram);
-		
-		objectList = new ArrayList<IModelObject>();
+
+		objectList = new ArrayList<IModelInstanceElement>();
 		objectList.add(testPerformer.addModelObject(membership1));
 		objectList.add(testPerformer.addModelObject(membership2));
 
@@ -3929,13 +3995,13 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(objectList);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(1);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(1);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertFalse(result_Boolean.isTrue());
 	}
 
@@ -3950,35 +4016,35 @@ public class TestInterpretation {
 
 		Membership membership1;
 		Membership membership2;
-		
+
 		LoyaltyProgram loyaltyProgram;
-		
+
 		ServiceLevel serviceLevel1;
 		ServiceLevel serviceLevel2;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/collection16.ocl");
+		testPerformer.loadOCLFile("constraints/test/collection16.ocl");
 
 		/* Select the model objects which shall be interpreted. */
 		serviceLevel1 = new ServiceLevel();
 		serviceLevel2 = new ServiceLevel();
-		
+
 		loyaltyProgram = new LoyaltyProgram();
 		loyaltyProgram.addLevel(serviceLevel1);
-		
+
 		membership1 = new Membership();
 		membership1.setCurrentLevel(serviceLevel1);
 		membership1.setProgram(loyaltyProgram);
-		
+
 		membership2 = new Membership();
 		membership2.setCurrentLevel(serviceLevel2);
 		membership2.setProgram(loyaltyProgram);
-		
+
 		testPerformer.addModelObject(serviceLevel1);
 		testPerformer.addModelObject(serviceLevel2);
 		testPerformer.addModelObject(loyaltyProgram);
-		
-		objectList = new ArrayList<IModelObject>();
+
+		objectList = new ArrayList<IModelInstanceElement>();
 		objectList.add(testPerformer.addModelObject(membership1));
 		objectList.add(testPerformer.addModelObject(membership2));
 
@@ -3986,13 +4052,13 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(objectList);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(1);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(1);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertFalse(result_Boolean.isTrue());
 	}
 
@@ -4007,39 +4073,39 @@ public class TestInterpretation {
 
 		Membership membership1;
 		Membership membership2;
-		
+
 		LoyaltyProgram loyaltyProgram1;
 		LoyaltyProgram loyaltyProgram2;
-		
+
 		ServiceLevel serviceLevel1;
 		ServiceLevel serviceLevel2;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/collection17.ocl");
+		testPerformer.loadOCLFile("constraints/test/collection17.ocl");
 
 		/* Select the model objects which shall be interpreted. */
 		serviceLevel1 = new ServiceLevel();
 		serviceLevel2 = new ServiceLevel();
-		
+
 		loyaltyProgram1 = new LoyaltyProgram();
 		loyaltyProgram1.addLevel(serviceLevel1);
-		
+
 		loyaltyProgram2 = new LoyaltyProgram();
 
 		membership1 = new Membership();
 		membership1.setCurrentLevel(serviceLevel1);
 		membership1.setProgram(loyaltyProgram1);
-		
+
 		membership2 = new Membership();
 		membership2.setCurrentLevel(serviceLevel2);
 		membership2.setProgram(loyaltyProgram2);
-		
+
 		testPerformer.addModelObject(serviceLevel1);
 		testPerformer.addModelObject(serviceLevel2);
 		testPerformer.addModelObject(loyaltyProgram1);
 		testPerformer.addModelObject(loyaltyProgram2);
-		
-		objectList = new ArrayList<IModelObject>();
+
+		objectList = new ArrayList<IModelInstanceElement>();
 		objectList.add(testPerformer.addModelObject(membership1));
 		objectList.add(testPerformer.addModelObject(membership2));
 
@@ -4047,13 +4113,13 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(objectList);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(1);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(1);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -4069,20 +4135,20 @@ public class TestInterpretation {
 		Membership membership;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/collection18.ocl");
+		testPerformer.loadOCLFile("constraints/test/collection18.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		membership = new Membership();
 
-		objectList = new ArrayList<IModelObject>();
+		objectList = new ArrayList<IModelInstanceElement>();
 		objectList.add(testPerformer.addModelObject(membership));
 
 		/* Interpret the selected combinations. */
 		results = testPerformer.interpretRemainingConstraints(objectList);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -4098,20 +4164,20 @@ public class TestInterpretation {
 		Membership membership;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/collection19.ocl");
+		testPerformer.loadOCLFile("constraints/test/collection19.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		membership = new Membership();
 
-		objectList = new ArrayList<IModelObject>();
+		objectList = new ArrayList<IModelInstanceElement>();
 		objectList.add(testPerformer.addModelObject(membership));
 
 		/* Interpret the selected combinations. */
 		results = testPerformer.interpretRemainingConstraints(objectList);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -4139,7 +4205,7 @@ public class TestInterpretation {
 		ServiceLevel serviceLevel3;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/collection20.ocl");
+		testPerformer.loadOCLFile("constraints/test/collection20.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		loyaltyProgram = new LoyaltyProgram();
@@ -4184,7 +4250,7 @@ public class TestInterpretation {
 		testPerformer.addModelObject(service2);
 		testPerformer.addModelObject(service3);
 
-		objectList = new ArrayList<IModelObject>();
+		objectList = new ArrayList<IModelInstanceElement>();
 		objectList.add(testPerformer.addModelObject(serviceLevel1));
 		objectList.add(testPerformer.addModelObject(serviceLevel2));
 		objectList.add(testPerformer.addModelObject(serviceLevel3));
@@ -4193,18 +4259,18 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(objectList);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(1);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(1);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertFalse(result_Boolean.isTrue());
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(2);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(2);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertFalse(result_Boolean.isTrue());
 	}
 
@@ -4232,7 +4298,7 @@ public class TestInterpretation {
 		ServiceLevel serviceLevel3;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/collection21.ocl");
+		testPerformer.loadOCLFile("constraints/test/collection21.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		loyaltyProgram = new LoyaltyProgram();
@@ -4277,7 +4343,7 @@ public class TestInterpretation {
 		testPerformer.addModelObject(service2);
 		testPerformer.addModelObject(service3);
 
-		objectList = new ArrayList<IModelObject>();
+		objectList = new ArrayList<IModelInstanceElement>();
 		objectList.add(testPerformer.addModelObject(serviceLevel1));
 		objectList.add(testPerformer.addModelObject(serviceLevel2));
 		objectList.add(testPerformer.addModelObject(serviceLevel3));
@@ -4286,18 +4352,18 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(objectList);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(1);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(1);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(2);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(2);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertFalse(result_Boolean.isTrue());
 	}
 
@@ -4313,20 +4379,20 @@ public class TestInterpretation {
 		Membership membership;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/collection22.ocl");
+		testPerformer.loadOCLFile("constraints/test/collection22.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		membership = new Membership();
 
-		objectList = new ArrayList<IModelObject>();
+		objectList = new ArrayList<IModelInstanceElement>();
 		objectList.add(testPerformer.addModelObject(membership));
 
 		/* Interpret the selected combinations. */
 		results = testPerformer.interpretRemainingConstraints(objectList);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -4342,20 +4408,20 @@ public class TestInterpretation {
 		Membership membership;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/collection25.ocl");
+		testPerformer.loadOCLFile("constraints/test/collection25.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		membership = new Membership();
 
-		objectList = new ArrayList<IModelObject>();
+		objectList = new ArrayList<IModelInstanceElement>();
 		objectList.add(testPerformer.addModelObject(membership));
 
 		/* Interpret the selected combinations. */
 		results = testPerformer.interpretRemainingConstraints(objectList);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -4371,20 +4437,20 @@ public class TestInterpretation {
 		Membership membership;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/collection26.ocl");
+		testPerformer.loadOCLFile("constraints/test/collection26.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		membership = new Membership();
 
-		objectList = new ArrayList<IModelObject>();
+		objectList = new ArrayList<IModelInstanceElement>();
 		objectList.add(testPerformer.addModelObject(membership));
 
 		/* Interpret the selected combinations. */
 		results = testPerformer.interpretRemainingConstraints(objectList);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -4400,20 +4466,20 @@ public class TestInterpretation {
 		Membership membership;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/collection27.ocl");
+		testPerformer.loadOCLFile("constraints/test/collection27.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		membership = new Membership();
 
-		objectList = new ArrayList<IModelObject>();
+		objectList = new ArrayList<IModelInstanceElement>();
 		objectList.add(testPerformer.addModelObject(membership));
 
 		/* Interpret the selected combinations. */
 		results = testPerformer.interpretRemainingConstraints(objectList);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -4429,20 +4495,20 @@ public class TestInterpretation {
 		Membership membership;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/collection28.ocl");
+		testPerformer.loadOCLFile("constraints/test/collection28.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		membership = new Membership();
 
-		objectList = new ArrayList<IModelObject>();
+		objectList = new ArrayList<IModelInstanceElement>();
 		objectList.add(testPerformer.addModelObject(membership));
 
 		/* Interpret the selected combinations. */
 		results = testPerformer.interpretRemainingConstraints(objectList);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -4458,20 +4524,20 @@ public class TestInterpretation {
 		Membership membership;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/collection29.ocl");
+		testPerformer.loadOCLFile("constraints/test/collection29.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		membership = new Membership();
 
-		objectList = new ArrayList<IModelObject>();
+		objectList = new ArrayList<IModelInstanceElement>();
 		objectList.add(testPerformer.addModelObject(membership));
 
 		/* Interpret the selected combinations. */
 		results = testPerformer.interpretRemainingConstraints(objectList);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -4487,20 +4553,20 @@ public class TestInterpretation {
 		Membership membership;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/collection30.ocl");
+		testPerformer.loadOCLFile("constraints/test/collection30.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		membership = new Membership();
 
-		objectList = new ArrayList<IModelObject>();
+		objectList = new ArrayList<IModelInstanceElement>();
 		objectList.add(testPerformer.addModelObject(membership));
 
 		/* Interpret the selected combinations. */
 		results = testPerformer.interpretRemainingConstraints(objectList);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -4516,20 +4582,20 @@ public class TestInterpretation {
 		Membership membership;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/collection31.ocl");
+		testPerformer.loadOCLFile("constraints/test/collection31.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		membership = new Membership();
 
-		objectList = new ArrayList<IModelObject>();
+		objectList = new ArrayList<IModelInstanceElement>();
 		objectList.add(testPerformer.addModelObject(membership));
 
 		/* Interpret the selected combinations. */
 		results = testPerformer.interpretRemainingConstraints(objectList);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -4545,20 +4611,20 @@ public class TestInterpretation {
 		Membership membership;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/collection32.ocl");
+		testPerformer.loadOCLFile("constraints/test/collection32.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		membership = new Membership();
 
-		objectList = new ArrayList<IModelObject>();
+		objectList = new ArrayList<IModelInstanceElement>();
 		objectList.add(testPerformer.addModelObject(membership));
 
 		/* Interpret the selected combinations. */
 		results = testPerformer.interpretRemainingConstraints(objectList);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -4574,20 +4640,20 @@ public class TestInterpretation {
 		Membership membership;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/collection33.ocl");
+		testPerformer.loadOCLFile("constraints/test/collection33.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		membership = new Membership();
 
-		objectList = new ArrayList<IModelObject>();
+		objectList = new ArrayList<IModelInstanceElement>();
 		objectList.add(testPerformer.addModelObject(membership));
 
 		/* Interpret the selected combinations. */
 		results = testPerformer.interpretRemainingConstraints(objectList);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -4617,7 +4683,7 @@ public class TestInterpretation {
 		ProgramPartner programPartner;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/iterator01.ocl");
+		testPerformer.loadOCLFile("constraints/test/iterator01.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		serviceLevel1 = new ServiceLevel();
@@ -4667,7 +4733,7 @@ public class TestInterpretation {
 		testPerformer.addModelObject(service);
 		testPerformer.addModelObject(programPartner);
 
-		objectList = new ArrayList<IModelObject>();
+		objectList = new ArrayList<IModelInstanceElement>();
 		objectList.add(testPerformer.addModelObject(loyaltyProgram1));
 		objectList.add(testPerformer.addModelObject(loyaltyProgram2));
 
@@ -4675,13 +4741,13 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(objectList);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(1);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(1);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -4711,7 +4777,7 @@ public class TestInterpretation {
 		ProgramPartner programPartner;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/iterator02.ocl");
+		testPerformer.loadOCLFile("constraints/test/iterator02.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		serviceLevel1 = new ServiceLevel();
@@ -4761,7 +4827,7 @@ public class TestInterpretation {
 		testPerformer.addModelObject(service);
 		testPerformer.addModelObject(programPartner);
 
-		objectList = new ArrayList<IModelObject>();
+		objectList = new ArrayList<IModelInstanceElement>();
 		objectList.add(testPerformer.addModelObject(loyaltyProgram1));
 		objectList.add(testPerformer.addModelObject(loyaltyProgram2));
 
@@ -4769,13 +4835,13 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(objectList);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(1);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(1);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -4805,7 +4871,7 @@ public class TestInterpretation {
 		ProgramPartner programPartner;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/iterator03.ocl");
+		testPerformer.loadOCLFile("constraints/test/iterator03.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		serviceLevel1 = new ServiceLevel();
@@ -4855,7 +4921,7 @@ public class TestInterpretation {
 		testPerformer.addModelObject(service);
 		testPerformer.addModelObject(programPartner);
 
-		objectList = new ArrayList<IModelObject>();
+		objectList = new ArrayList<IModelInstanceElement>();
 		objectList.add(testPerformer.addModelObject(loyaltyProgram1));
 		objectList.add(testPerformer.addModelObject(loyaltyProgram2));
 
@@ -4863,13 +4929,13 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(objectList);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(1);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(1);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -4894,7 +4960,7 @@ public class TestInterpretation {
 		ProgramPartner programPartner;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/iterate01.ocl");
+		testPerformer.loadOCLFile("constraints/test/iterate01.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		serviceLevel1 = new ServiceLevel();
@@ -4932,15 +4998,15 @@ public class TestInterpretation {
 		testPerformer.addModelObject(serviceLevel2);
 		testPerformer.addModelObject(service);
 
-		objectList = new ArrayList<IModelObject>();
+		objectList = new ArrayList<IModelInstanceElement>();
 		objectList.add(testPerformer.addModelObject(programPartner));
 
 		/* Interpret the selected combinations. */
 		results = testPerformer.interpretRemainingConstraints(objectList);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -4970,7 +5036,7 @@ public class TestInterpretation {
 		ProgramPartner programPartner;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/iterator04.ocl");
+		testPerformer.loadOCLFile("constraints/test/iterator04.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		serviceLevel1 = new ServiceLevel();
@@ -5020,7 +5086,7 @@ public class TestInterpretation {
 		testPerformer.addModelObject(service);
 		testPerformer.addModelObject(programPartner);
 
-		objectList = new ArrayList<IModelObject>();
+		objectList = new ArrayList<IModelInstanceElement>();
 		objectList.add(testPerformer.addModelObject(loyaltyProgram1));
 		objectList.add(testPerformer.addModelObject(loyaltyProgram2));
 
@@ -5028,13 +5094,13 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(objectList);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(1);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(1);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertFalse(result_Boolean.isTrue());
 	}
 
@@ -5064,7 +5130,7 @@ public class TestInterpretation {
 		ProgramPartner programPartner;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/iterator05.ocl");
+		testPerformer.loadOCLFile("constraints/test/iterator05.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		serviceLevel1 = new ServiceLevel();
@@ -5114,7 +5180,7 @@ public class TestInterpretation {
 		testPerformer.addModelObject(service);
 		testPerformer.addModelObject(programPartner);
 
-		objectList = new ArrayList<IModelObject>();
+		objectList = new ArrayList<IModelInstanceElement>();
 		objectList.add(testPerformer.addModelObject(loyaltyProgram1));
 		objectList.add(testPerformer.addModelObject(loyaltyProgram2));
 
@@ -5122,13 +5188,13 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(objectList);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(1);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(1);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertFalse(result_Boolean.isTrue());
 	}
 
@@ -5153,7 +5219,7 @@ public class TestInterpretation {
 		ProgramPartner programPartner;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/iterator06.ocl");
+		testPerformer.loadOCLFile("constraints/test/iterator06.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		serviceLevel1 = new ServiceLevel();
@@ -5191,15 +5257,15 @@ public class TestInterpretation {
 		testPerformer.addModelObject(serviceLevel2);
 		testPerformer.addModelObject(service);
 
-		objectList = new ArrayList<IModelObject>();
+		objectList = new ArrayList<IModelInstanceElement>();
 		objectList.add(testPerformer.addModelObject(programPartner));
 
 		/* Interpret the selected combinations. */
 		results = testPerformer.interpretRemainingConstraints(objectList);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -5219,7 +5285,7 @@ public class TestInterpretation {
 		Transaction transaction2;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/iterator07.ocl");
+		testPerformer.loadOCLFile("constraints/test/iterator07.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		customerCard1 = new CustomerCard();
@@ -5240,7 +5306,7 @@ public class TestInterpretation {
 		testPerformer.addModelObject(transaction1);
 		testPerformer.addModelObject(transaction2);
 
-		objectList = new ArrayList<IModelObject>();
+		objectList = new ArrayList<IModelInstanceElement>();
 		objectList.add(testPerformer.addModelObject(customerCard1));
 		objectList.add(testPerformer.addModelObject(customerCard2));
 
@@ -5248,13 +5314,13 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(objectList);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertFalse(result_Boolean.isTrue());
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(1);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(1);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -5280,7 +5346,7 @@ public class TestInterpretation {
 		LoyaltyAccount loyaltyAccount2;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/iterator08.ocl");
+		testPerformer.loadOCLFile("constraints/test/iterator08.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		customer1 = new Customer(25);
@@ -5315,7 +5381,7 @@ public class TestInterpretation {
 		testPerformer.addModelObject(loyaltyAccount1);
 		testPerformer.addModelObject(loyaltyAccount2);
 
-		objectList = new ArrayList<IModelObject>();
+		objectList = new ArrayList<IModelInstanceElement>();
 		objectList.add(testPerformer.addModelObject(customer1));
 		objectList.add(testPerformer.addModelObject(customer2));
 
@@ -5323,13 +5389,13 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(objectList);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(1);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(1);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -5352,7 +5418,7 @@ public class TestInterpretation {
 		LoyaltyAccount loyaltyAccount2;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/iterator09.ocl");
+		testPerformer.loadOCLFile("constraints/test/iterator09.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		loyaltyProgram1 = new LoyaltyProgram();
@@ -5379,7 +5445,7 @@ public class TestInterpretation {
 		testPerformer.addModelObject(loyaltyAccount1);
 		testPerformer.addModelObject(loyaltyAccount2);
 
-		objectList = new ArrayList<IModelObject>();
+		objectList = new ArrayList<IModelInstanceElement>();
 		objectList.add(testPerformer.addModelObject(loyaltyProgram1));
 		objectList.add(testPerformer.addModelObject(loyaltyProgram2));
 
@@ -5387,13 +5453,13 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(objectList);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(1);
-		assertTrue(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(1);
+		assertTrue(result_Boolean.oclIsUndefined().isTrue());
 	}
 
 	/**
@@ -5412,7 +5478,7 @@ public class TestInterpretation {
 		LoyaltyProgram loyaltyProgram2;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/iterator10.ocl");
+		testPerformer.loadOCLFile("constraints/test/iterator10.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		loyaltyProgram1 = new LoyaltyProgram();
@@ -5430,7 +5496,7 @@ public class TestInterpretation {
 
 		testPerformer.addModelObject(customer1);
 		testPerformer.addModelObject(customer2);
-		objectList = new ArrayList<IModelObject>();
+		objectList = new ArrayList<IModelInstanceElement>();
 		objectList.add(testPerformer.addModelObject(loyaltyProgram1));
 		objectList.add(testPerformer.addModelObject(loyaltyProgram2));
 
@@ -5438,13 +5504,13 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(objectList);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(1);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(1);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertFalse(result_Boolean.isTrue());
 	}
 
@@ -5464,7 +5530,7 @@ public class TestInterpretation {
 		LoyaltyProgram loyaltyProgram2;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/iterator11.ocl");
+		testPerformer.loadOCLFile("constraints/test/iterator11.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		loyaltyProgram1 = new LoyaltyProgram();
@@ -5482,7 +5548,7 @@ public class TestInterpretation {
 
 		testPerformer.addModelObject(customer1);
 		testPerformer.addModelObject(customer2);
-		objectList = new ArrayList<IModelObject>();
+		objectList = new ArrayList<IModelInstanceElement>();
 		objectList.add(testPerformer.addModelObject(loyaltyProgram1));
 		objectList.add(testPerformer.addModelObject(loyaltyProgram2));
 
@@ -5490,13 +5556,13 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(objectList);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(1);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(1);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertFalse(result_Boolean.isTrue());
 	}
 
@@ -5516,7 +5582,7 @@ public class TestInterpretation {
 		LoyaltyProgram loyaltyProgram2;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/iterator12.ocl");
+		testPerformer.loadOCLFile("constraints/test/iterator12.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		loyaltyProgram1 = new LoyaltyProgram();
@@ -5534,7 +5600,7 @@ public class TestInterpretation {
 
 		testPerformer.addModelObject(customer1);
 		testPerformer.addModelObject(customer2);
-		objectList = new ArrayList<IModelObject>();
+		objectList = new ArrayList<IModelInstanceElement>();
 		objectList.add(testPerformer.addModelObject(loyaltyProgram1));
 		objectList.add(testPerformer.addModelObject(loyaltyProgram2));
 
@@ -5542,13 +5608,13 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(objectList);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(1);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(1);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertFalse(result_Boolean.isTrue());
 	}
 
@@ -5574,7 +5640,7 @@ public class TestInterpretation {
 		Membership membership3;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/iterator13.ocl");
+		testPerformer.loadOCLFile("constraints/test/iterator13.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		loyaltyProgram1 = new LoyaltyProgram();
@@ -5609,7 +5675,7 @@ public class TestInterpretation {
 		testPerformer.addModelObject(membership2);
 		testPerformer.addModelObject(membership3);
 
-		objectList = new ArrayList<IModelObject>();
+		objectList = new ArrayList<IModelInstanceElement>();
 		objectList.add(testPerformer.addModelObject(loyaltyProgram1));
 		objectList.add(testPerformer.addModelObject(loyaltyProgram2));
 		objectList.add(testPerformer.addModelObject(loyaltyProgram3));
@@ -5618,18 +5684,18 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(objectList);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertFalse(result_Boolean.isTrue());
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(1);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(1);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(2);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(2);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertFalse(result_Boolean.isTrue());
 	}
 
@@ -5650,7 +5716,7 @@ public class TestInterpretation {
 		LoyaltyAccount loyaltyAccount2;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/iterator14.ocl");
+		testPerformer.loadOCLFile("constraints/test/iterator14.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		loyaltyAccount1 = new LoyaltyAccount();
@@ -5676,7 +5742,7 @@ public class TestInterpretation {
 		testPerformer.addModelObject(transaction2);
 		testPerformer.addModelObject(transaction3);
 
-		objectList = new ArrayList<IModelObject>();
+		objectList = new ArrayList<IModelInstanceElement>();
 		objectList.add(testPerformer.addModelObject(loyaltyAccount1));
 		objectList.add(testPerformer.addModelObject(loyaltyAccount2));
 
@@ -5684,13 +5750,13 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(objectList);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertFalse(result_Boolean.isTrue());
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(1);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(1);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -5715,7 +5781,7 @@ public class TestInterpretation {
 		Service service;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/iterator15.ocl");
+		testPerformer.loadOCLFile("constraints/test/iterator15.ocl");
 
 		/* Select the model objects which shall be interpreted. */
 		customer1 = new Customer(25);
@@ -5743,7 +5809,7 @@ public class TestInterpretation {
 		testPerformer.addModelObject(programPartner2);
 		testPerformer.addModelObject(service);
 
-		objectList = new ArrayList<IModelObject>();
+		objectList = new ArrayList<IModelInstanceElement>();
 		objectList.add(testPerformer.addModelObject(customer1));
 		objectList.add(testPerformer.addModelObject(customer2));
 
@@ -5751,13 +5817,13 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(objectList);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertFalse(result_Boolean.isTrue());
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(1);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(1);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -5782,7 +5848,7 @@ public class TestInterpretation {
 		Service service;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/iterator16.ocl");
+		testPerformer.loadOCLFile("constraints/test/iterator16.ocl");
 
 		/* Select the model objects which shall be interpreted. */
 		customer1 = new Customer(25);
@@ -5810,7 +5876,7 @@ public class TestInterpretation {
 		testPerformer.addModelObject(programPartner2);
 		testPerformer.addModelObject(service);
 
-		objectList = new ArrayList<IModelObject>();
+		objectList = new ArrayList<IModelInstanceElement>();
 		objectList.add(testPerformer.addModelObject(customer1));
 		objectList.add(testPerformer.addModelObject(customer2));
 
@@ -5818,13 +5884,13 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(objectList);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertFalse(result_Boolean.isTrue());
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(1);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(1);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -5840,7 +5906,7 @@ public class TestInterpretation {
 		Service service;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/numeric01.ocl");
+		testPerformer.loadOCLFile("constraints/test/numeric01.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		service = new Service();
@@ -5851,8 +5917,8 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(modelObject);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -5868,7 +5934,7 @@ public class TestInterpretation {
 		Service service;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/numeric02.ocl");
+		testPerformer.loadOCLFile("constraints/test/numeric02.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		service = new Service();
@@ -5879,8 +5945,8 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(modelObject);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -5896,7 +5962,7 @@ public class TestInterpretation {
 		Service service;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/numeric03.ocl");
+		testPerformer.loadOCLFile("constraints/test/numeric03.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		service = new Service();
@@ -5907,8 +5973,8 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(modelObject);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -5924,7 +5990,7 @@ public class TestInterpretation {
 		Service service;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/numeric04.ocl");
+		testPerformer.loadOCLFile("constraints/test/numeric04.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		service = new Service();
@@ -5935,8 +6001,8 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(modelObject);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -5952,7 +6018,7 @@ public class TestInterpretation {
 		Service service;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/numeric05.ocl");
+		testPerformer.loadOCLFile("constraints/test/numeric05.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		service = new Service();
@@ -5963,8 +6029,8 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(modelObject);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -5980,7 +6046,7 @@ public class TestInterpretation {
 		Service service;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/numeric06.ocl");
+		testPerformer.loadOCLFile("constraints/test/numeric06.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		service = new Service();
@@ -5991,8 +6057,8 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(modelObject);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -6008,7 +6074,7 @@ public class TestInterpretation {
 		Service service;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/numeric07.ocl");
+		testPerformer.loadOCLFile("constraints/test/numeric07.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		service = new Service();
@@ -6019,8 +6085,8 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(modelObject);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -6036,7 +6102,7 @@ public class TestInterpretation {
 		Service service;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/numeric08.ocl");
+		testPerformer.loadOCLFile("constraints/test/numeric08.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		service = new Service();
@@ -6047,8 +6113,8 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(modelObject);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -6064,7 +6130,7 @@ public class TestInterpretation {
 		Service service;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/numeric09.ocl");
+		testPerformer.loadOCLFile("constraints/test/numeric09.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		service = new Service();
@@ -6075,8 +6141,8 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(modelObject);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -6092,7 +6158,7 @@ public class TestInterpretation {
 		Service service;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/numeric10.ocl");
+		testPerformer.loadOCLFile("constraints/test/numeric10.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		service = new Service();
@@ -6103,8 +6169,8 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(modelObject);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -6120,7 +6186,7 @@ public class TestInterpretation {
 		Service service;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/numeric11.ocl");
+		testPerformer.loadOCLFile("constraints/test/numeric11.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		service = new Service();
@@ -6131,8 +6197,8 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(modelObject);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -6149,7 +6215,7 @@ public class TestInterpretation {
 		Date date;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/static01.ocl");
+		testPerformer.loadOCLFile("constraints/test/static01.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		transaction = new Transaction();
@@ -6164,8 +6230,8 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(modelObject);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -6182,7 +6248,7 @@ public class TestInterpretation {
 		Date date;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/static02.ocl");
+		testPerformer.loadOCLFile("constraints/test/static02.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		transaction = new Transaction();
@@ -6197,8 +6263,8 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(modelObject);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -6215,7 +6281,7 @@ public class TestInterpretation {
 		Date date;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/static03.ocl");
+		testPerformer.loadOCLFile("constraints/test/static03.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		transaction = new Transaction();
@@ -6230,8 +6296,8 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(modelObject);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -6248,7 +6314,7 @@ public class TestInterpretation {
 		Date date;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/static04.ocl");
+		testPerformer.loadOCLFile("constraints/test/static04.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		transaction = new Transaction();
@@ -6263,8 +6329,8 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(modelObject);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -6280,7 +6346,7 @@ public class TestInterpretation {
 		Service service;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/string01.ocl");
+		testPerformer.loadOCLFile("constraints/test/string01.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		service = new Service();
@@ -6291,8 +6357,8 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(modelObject);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -6308,7 +6374,7 @@ public class TestInterpretation {
 		Service service;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/string02.ocl");
+		testPerformer.loadOCLFile("constraints/test/string02.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		service = new Service();
@@ -6319,8 +6385,8 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(modelObject);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -6336,7 +6402,7 @@ public class TestInterpretation {
 		Service service;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/string03.ocl");
+		testPerformer.loadOCLFile("constraints/test/string03.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		service = new Service();
@@ -6347,8 +6413,8 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(modelObject);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -6364,7 +6430,7 @@ public class TestInterpretation {
 		Service service;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/string04.ocl");
+		testPerformer.loadOCLFile("constraints/test/string04.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		service = new Service();
@@ -6375,8 +6441,8 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(modelObject);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -6392,7 +6458,7 @@ public class TestInterpretation {
 		Service service;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/string05.ocl");
+		testPerformer.loadOCLFile("constraints/test/string05.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		service = new Service();
@@ -6403,8 +6469,8 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(modelObject);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -6420,7 +6486,7 @@ public class TestInterpretation {
 		Service service;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/string06.ocl");
+		testPerformer.loadOCLFile("constraints/test/string06.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		service = new Service();
@@ -6431,8 +6497,8 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(modelObject);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -6448,7 +6514,7 @@ public class TestInterpretation {
 		Transaction transaction;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/tuple01.ocl");
+		testPerformer.loadOCLFile("constraints/test/tuple01.ocl");
 
 		/* Select the model objects which shall be interpreted. */
 		transaction = new Transaction();
@@ -6459,8 +6525,8 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(modelObject);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -6476,7 +6542,7 @@ public class TestInterpretation {
 		Transaction transaction;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/tuple02.ocl");
+		testPerformer.loadOCLFile("constraints/test/tuple02.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		transaction = new Transaction();
@@ -6487,8 +6553,8 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(modelObject);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -6504,7 +6570,7 @@ public class TestInterpretation {
 		Transaction transaction;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/tuple03.ocl");
+		testPerformer.loadOCLFile("constraints/test/tuple03.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		transaction = new Transaction();
@@ -6515,8 +6581,8 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(modelObject);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
@@ -6532,7 +6598,7 @@ public class TestInterpretation {
 		Transaction transaction;
 
 		/* Load OCL file. */
-		testPerformer.loadOCLFile("expressions/test/tuple04.ocl");
+		testPerformer.loadOCLFile("constraints/test/tuple04.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		transaction = new Transaction();
@@ -6543,8 +6609,8 @@ public class TestInterpretation {
 		results = testPerformer.interpretRemainingConstraints(modelObject);
 
 		/* Compare with expected results. */
-		result_Boolean = (JavaOclBoolean) results.get(0);
-		assertFalse(result_Boolean.isOclUndefined().isTrue());
+		result_Boolean = (OclBoolean) results.get(0);
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 }

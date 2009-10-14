@@ -30,9 +30,16 @@
  */
 package tudresden.ocl20.pivot.standardlibrary.java.internal.library;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBoolean;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclType;
+import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSet;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceBoolean;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.base.BasisJavaModelInstanceFactory;
+import tudresden.ocl20.pivot.standardlibrary.java.factory.JavaStandardLibraryFactory;
 
 /**
  * <p>
@@ -40,26 +47,50 @@ import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclType;
  * </p>
  * 
  * @author Ronny Brandt
+ * @author Michael Thiele
  */
-public class JavaOclBoolean extends JavaOclAny implements OclBoolean {
+public class JavaOclBoolean extends JavaOclLibraryObject implements OclBoolean {
+
+	private IModelInstanceBoolean imiBoolean;
 
 	/* The false instance. */
-	private static OclBoolean FALSE = new JavaOclBoolean(false);
+	private static OclBoolean FALSE =
+			new JavaOclBoolean(BasisJavaModelInstanceFactory
+					.createModelInstanceBoolean(false));
 
 	/* The true instance. */
-	private static OclBoolean TRUE = new JavaOclBoolean(true);
+	private static OclBoolean TRUE =
+			new JavaOclBoolean(BasisJavaModelInstanceFactory
+					.createModelInstanceBoolean(true));
 
 	/**
 	 * <p>
 	 * Instantiates a new {@link OclBoolean}.
 	 * </p>
 	 * 
-	 * @param adaptee
-	 *          The adapted element of this {@link OclBoolean}.
+	 * @param imiBoolean
+	 *          the {@link IModelInstanceBoolean} to be adapted
 	 */
-	private JavaOclBoolean(Boolean adaptee) {
+	private JavaOclBoolean(IModelInstanceBoolean imiBoolean) {
 
-		super(adaptee);
+		super(imiBoolean);
+
+		this.imiBoolean = imiBoolean;
+	}
+
+	/**
+	 * The constructors for invalid and undefined {@link OclBoolean}s have to
+	 * create a new instance of {@link OclBoolean}, as they may have different
+	 * invalid and undefined reasons.
+	 */
+	public JavaOclBoolean(String undefinedReason) {
+
+		super(undefinedReason);
+	}
+
+	public JavaOclBoolean(Throwable invalidReason) {
+
+		super(invalidReason);
 	}
 
 	/**
@@ -78,7 +109,7 @@ public class JavaOclBoolean extends JavaOclAny implements OclBoolean {
 		OclBoolean result;
 
 		if (value == null) {
-			result = new JavaOclBoolean(null);
+			result = new JavaOclBoolean("The boolean value is undefined");
 		}
 
 		else if (value == true) {
@@ -102,20 +133,22 @@ public class JavaOclBoolean extends JavaOclAny implements OclBoolean {
 
 		OclBoolean result;
 
-		if (this.isOclUndefined().isTrue()) {
-			result = this;
-		}
+		checkUndefinedAndInvalid(this);
 
-		else if (aBoolean.isOclUndefined().isTrue()) {
-			result = aBoolean;
-		}
-
-		else if (!this.isTrue() || !aBoolean.isTrue()) {
+		if (!this.isTrue()) {
 			result = FALSE;
 		}
 
 		else {
-			result = TRUE;
+			checkUndefinedAndInvalid(aBoolean);
+
+			if (!this.isTrue() || !aBoolean.isTrue()) {
+				result = FALSE;
+			}
+
+			else {
+				result = TRUE;
+			}
 		}
 
 		return result;
@@ -125,19 +158,16 @@ public class JavaOclBoolean extends JavaOclAny implements OclBoolean {
 	 * (non-Javadoc)
 	 * @see
 	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBoolean#ifThenElse
-	 * (tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot,
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot)
+	 * (tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny,
+	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny)
 	 */
-	public OclRoot ifThenElse(OclRoot thenStatement, OclRoot elseStatement) {
+	public OclAny ifThenElse(OclAny thenStatement, OclAny elseStatement) {
 
-		OclRoot result;
+		OclAny result;
 
-		/* Check if this boolean is undefined. */
-		if (isOclUndefined().isTrue()) {
-			result = JavaOclInvalid.getInstance();
-		}
+		checkUndefinedAndInvalid(this);
 
-		else if (this.isTrue()) {
+		if (this.isTrue()) {
 			result = thenStatement;
 		}
 
@@ -157,14 +187,9 @@ public class JavaOclBoolean extends JavaOclAny implements OclBoolean {
 
 		OclBoolean result;
 
-		/* Check if this boolean is undefined. */
-		if (this.isOclUndefined().isTrue()) {
-			result = this;
-		}
+		checkUndefinedAndInvalid(this);
 
-		else {
-			result = this.not().or(this.and(aBoolean));
-		}
+		result = this.not().or(this.and(aBoolean));
 
 		return result;
 	}
@@ -175,7 +200,9 @@ public class JavaOclBoolean extends JavaOclAny implements OclBoolean {
 	 */
 	public boolean isTrue() {
 
-		return ((Boolean) this.getAdaptee()).booleanValue();
+		checkUndefinedAndInvalid(this);
+
+		return imiBoolean.getBoolean();
 	}
 
 	/*
@@ -186,11 +213,9 @@ public class JavaOclBoolean extends JavaOclAny implements OclBoolean {
 
 		OclBoolean result;
 
-		if (isOclUndefined().isTrue()) {
-			result = this;
-		}
+		checkUndefinedAndInvalid(this);
 
-		else if (this.isTrue()) {
+		if (this.isTrue()) {
 			result = FALSE;
 		}
 
@@ -219,24 +244,23 @@ public class JavaOclBoolean extends JavaOclAny implements OclBoolean {
 
 		OclBoolean result;
 
+		checkUndefinedAndInvalid(this);
+
 		if (this.isTrue()) {
 			result = TRUE;
 		}
 
-		else if (aBoolean.isTrue()) {
-			result = TRUE;
-		}
-
-		else if (isOclUndefined().isTrue()) {
-			result = this;
-		}
-
-		else if (aBoolean.isOclUndefined().isTrue()) {
-			result = aBoolean;
-		}
-
 		else {
-			result = FALSE;
+
+			checkUndefinedAndInvalid(aBoolean);
+
+			if (this.isTrue() || aBoolean.isTrue()) {
+				result = TRUE;
+			}
+
+			else {
+				result = FALSE;
+			}
 		}
 
 		return result;
@@ -256,33 +280,26 @@ public class JavaOclBoolean extends JavaOclAny implements OclBoolean {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclRoot
-	 * #isEqualTo(tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot)
+	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny#isEqualTo(tudresden
+	 * .ocl20.pivot.essentialocl.standardlibrary.OclAny)
 	 */
-	@Override
-	public OclBoolean isEqualTo(OclRoot anObject) {
+	public OclBoolean isEqualTo(OclAny that) {
 
 		OclBoolean result;
 
+		checkUndefinedAndInvalid(this, that);
+
 		/* Check if the given Object is not a boolean. */
-		if (!(anObject instanceof OclBoolean)) {
+		if (!(that instanceof OclBoolean)) {
 			result = FALSE;
 		}
 
 		else {
 			OclBoolean aBoolean;
 
-			aBoolean = (OclBoolean) anObject;
+			aBoolean = (OclBoolean) that;
 
-			if (this.isOclUndefined().isTrue()) {
-				result = this;
-			}
-
-			else if (aBoolean.isOclUndefined().isTrue()) {
-				result = aBoolean;
-			}
-
-			if (this == anObject) {
+			if (this == aBoolean) {
 				result = TRUE;
 			}
 
@@ -296,12 +313,49 @@ public class JavaOclBoolean extends JavaOclAny implements OclBoolean {
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclAny
-	 * #getType()
+	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny#asSet()
 	 */
-	@Override
-	public OclType getType() {
+	public <T extends OclAny> OclSet<T> asSet() {
 
-		return JavaOclPrimitiveType.getType("Boolean");
+		checkUndefinedAndInvalid(this);
+
+		OclSet<T> result;
+
+		Set<IModelInstanceElement> imiSet = new HashSet<IModelInstanceElement>();
+		imiSet.add(imiBoolean);
+
+		result = JavaStandardLibraryFactory.INSTANCE.createOclSet(imiSet);
+
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	public String toString() {
+
+		String result;
+
+		result = this.getClass().getSimpleName();
+		result += "[";
+
+		if (this.oclIsUndefined().isTrue()) {
+			result += "undefined: ";
+			result += this.getUndefinedreason();
+		}
+
+		else if (this.oclIsInvalid().isTrue()) {
+			result += "invalid: ";
+			result += this.getInvalidReason().getMessage();
+		}
+
+		else {
+			result += this.imiBoolean.getBoolean().toString();
+		}
+
+		result += "]";
+
+		return result;
 	}
 }

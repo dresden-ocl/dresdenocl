@@ -1,5 +1,7 @@
 package tudresden.ocl20.pivot.modelbus;
 
+import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance;
+
 /**
  * This is a general exception that may be thrown when an error occurs while loading, saving,
  * retrieving or otherwise accessing a {@link IMetamodel metamodel}, {@link IModel model} or

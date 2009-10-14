@@ -35,9 +35,9 @@ import java.util.List;
 
 import tudresden.ocl20.interpreter.internal.InterpretationEnvironment;
 import tudresden.ocl20.pivot.essentialocl.expressions.Variable;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot;
+import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.factory.IStandardLibraryFactory;
-import tudresden.ocl20.pivot.modelbus.IModelObject;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
 import tudresden.ocl20.pivot.pivotmodel.Constraint;
 import tudresden.ocl20.pivot.pivotmodel.ConstraintKind;
 import tudresden.ocl20.pivot.pivotmodel.Operation;
@@ -46,7 +46,7 @@ import tudresden.ocl20.pivot.pivotmodel.Parameter;
 /**
  * <p>
  * Provides an interface for interpreter which interpret {@link Constraint}s for
- * given {@link IModelObject}s.
+ * given {@link IModelInstanceElement}s.
  * </p>
  * 
  * @author Ronny Brandt
@@ -87,47 +87,47 @@ public interface IOclInterpreter {
 
 	/**
 	 * <p>
-	 * Interpret the given {@link Constraint} for the given {@link IModelObject} .
+	 * Interpret the given {@link Constraint} for the given {@link IModelInstanceElement} .
 	 * </p>
 	 * 
 	 * @param aConstraint
 	 *          The {@link Constraint} to be interpreted.
 	 * @param aModelObject
-	 *          The {@link IModelObject} representing the current object.
+	 *          The {@link IModelInstanceElement} representing the current object.
 	 * 
 	 * @return The IInterpretationResult of the interpretation as {@link OclRoot}
 	 */
 	public IInterpretationResult interpretConstraint(Constraint aConstraint,
-			IModelObject aModelObject);
+			IModelInstanceElement aModelObject);
 
 	/**
 	 * <p>
 	 * Interpret a given {@link Collection} of {@link Constraint} for the given
-	 * {@link IModelObject} .
+	 * {@link IModelInstanceElement} .
 	 * </p>
 	 * 
 	 * @param constraints
 	 *          The {@link Constraint}s to be interpreted.
 	 * @param aModelObject
-	 *          The {@link IModelObject} representing the current object.
+	 *          The {@link IModelInstanceElement} representing the current object.
 	 * 
 	 * @return A {@link List} containing the {@link IInterpretationResult} of the
 	 *         interpretation as {@link OclRoot}s.
 	 */
 	public List<IInterpretationResult> interpretConstraints(
-			Collection<Constraint> constraints, IModelObject aModelObject);
+			Collection<Constraint> constraints, IModelInstanceElement aModelObject);
 
 	/**
 	 * <p>
 	 * Interprets the {@link Constraint}s of a given {@link Collection} of
 	 * {@link Constraint}s that are of a given {@link ConstraintKind} for the
-	 * given {@link IModelObject} .
+	 * given {@link IModelInstanceElement} .
 	 * </p>
 	 * 
 	 * @param constraints
 	 *          The {@link Constraint}s to be interpreted.
 	 * @param aModelObject
-	 *          The {@link IModelObject} representing the current object.
+	 *          The {@link IModelInstanceElement} representing the current object.
 	 * @param aKind
 	 *          The {@link ConstraintKind} those {@link Constraint}s shall be
 	 *          interpreted.
@@ -136,7 +136,7 @@ public interface IOclInterpreter {
 	 *         {@link OclRoot}s.
 	 */
 	public List<IInterpretationResult> interpretConstraintsOfKind(
-			Collection<Constraint> constraints, IModelObject aModelObject,
+			Collection<Constraint> constraints, IModelInstanceElement aModelObject,
 			ConstraintKind aKind);
 
 	/**
@@ -145,13 +145,13 @@ public interface IOclInterpreter {
 	 * </p>
 	 * 
 	 * @param modelObject
-	 *          The {@link IModelObject} on that the {@link Operation} shall be
+	 *          The {@link IModelInstanceElement} on that the {@link Operation} shall be
 	 *          invoked.
 	 * @param operation
 	 *          The {@link Operation} that shall be invoked.
 	 * @param parameterValues
 	 *          The values of the {@link Operation}'s {@link Parameter}s as an
-	 *          Array {@link IModelObject} values.
+	 *          Array {@link IModelInstanceElement} values.
 	 * @param preConditions
 	 *          The preconditions that shall be interpreted. <b>Attention:</b> if
 	 *          this {@link Collection} contains {@link Constraint}s of the
@@ -160,8 +160,8 @@ public interface IOclInterpreter {
 	 * @return A {@link List} of {@link IInterpretationResult}s.
 	 */
 	public List<IInterpretationResult> interpretPreConditions(
-			IModelObject modelObject, Operation operation,
-			IModelObject[] parameterValues, Collection<Constraint> preConditions);
+			IModelInstanceElement modelObject, Operation operation,
+			IModelInstanceElement[] parameterValues, Collection<Constraint> preConditions);
 
 	/**
 	 * <p>
@@ -169,13 +169,13 @@ public interface IOclInterpreter {
 	 * </p>
 	 * 
 	 * @param modelObject
-	 *          The {@link IModelObject} on that the {@link Operation} shall be
+	 *          The {@link IModelInstanceElement} on that the {@link Operation} shall be
 	 *          invoked.
 	 * @param operation
 	 *          The {@link Operation} that shall be invoked.
 	 * @param parameterValues
 	 *          The values of the {@link Operation}'s {@link Parameter}s as an
-	 *          Array {@link IModelObject} values.
+	 *          Array {@link IModelInstanceElement} values.
 	 * @param resultValue
 	 *          The result of the {@link Operation}'s invocation or
 	 *          <code>null</code> if no result has been returned (e.g., a void
@@ -188,8 +188,8 @@ public interface IOclInterpreter {
 	 * @return A {@link List} of {@link IInterpretationResult}s.
 	 */
 	public List<IInterpretationResult> interpretPostConditions(
-			IModelObject modelObject, Operation operation,
-			IModelObject[] parameterValues, IModelObject resultValue,
+			IModelInstanceElement modelObject, Operation operation,
+			IModelInstanceElement[] parameterValues, IModelInstanceElement resultValue,
 			Collection<Constraint> postConditions);
 
 	/**
@@ -214,8 +214,8 @@ public interface IOclInterpreter {
 	/**
 	 * <p>
 	 * Prepare the given {@link Constraint} which can be prepared independently
-	 * from the context a given {@link IModelObject}. {@link Constraint}s that do
-	 * not need a {@link IModelObject} are {@link Constraint}s of the
+	 * from the context a given {@link IModelInstanceElement}. {@link Constraint}s that do
+	 * not need a {@link IModelInstanceElement} are {@link Constraint}s of the
 	 * {@link ConstraintKind#BODY}, {@link ConstraintKind#DEFINITION},
 	 * {@link ConstraintKind#DERIVED}, and {@link ConstraintKind#INITIAL}.
 	 * </p>
@@ -227,18 +227,18 @@ public interface IOclInterpreter {
 
 	/**
 	 * <p>
-	 * Prepare the given {@link Constraint} for the given {@link IModelObject}.
+	 * Prepare the given {@link Constraint} for the given {@link IModelInstanceElement}.
 	 * Used for postconditions.
 	 * </p>
 	 * 
 	 * @param aConstraint
 	 *          The {@link Constraint} to be prepared.
 	 * @param aModelObject
-	 *          The {@link IModelObject}, needed for self reference in
+	 *          The {@link IModelInstanceElement}, needed for self reference in
 	 *          postconditions.
 	 */
 	public void prepareConstraint(Constraint aConstraint,
-			IModelObject aModelObject);
+			IModelInstanceElement aModelObject);
 
 	/**
 	 * <p>
@@ -259,18 +259,18 @@ public interface IOclInterpreter {
 	 * <p>
 	 * A helper method which prepares a given {@link Collection} of
 	 * {@link Constraint}s that require a constraint preparation for a given
-	 * {@link IModelObject}.
+	 * {@link IModelInstanceElement}.
 	 * </p>
 	 * 
 	 * @param constraints
 	 *          A {@link Collection} of {@link Constraint}s which shall be
 	 *          prepared.
 	 * @param modelObject
-	 *          The {@link IModelObject} the {@link Constraint}s shall be prepared
+	 *          The {@link IModelInstanceElement} the {@link Constraint}s shall be prepared
 	 *          for.
 	 */
 	public void prepareConstraints(Collection<Constraint> constraints,
-			IModelObject modelObject);
+			IModelInstanceElement modelObject);
 
 	/**
 	 * <p>
@@ -279,21 +279,21 @@ public interface IOclInterpreter {
 	 * </p>
 	 * 
 	 * @param modelObject
-	 *          The {@link IModelObject} on that the {@link Operation} shall be
+	 *          The {@link IModelInstanceElement} on that the {@link Operation} shall be
 	 *          invoked.
 	 * @param operation
 	 *          The {@link Operation} that shall be invoked.
 	 * @param parameterValues
 	 *          The values of the {@link Operation}'s {@link Parameter}s as an
-	 *          Array {@link IModelObject} values.
+	 *          Array {@link IModelInstanceElement} values.
 	 * @param postConditions
 	 *          The postconditions that shall be prepared. <b>Attention:</b> if
 	 *          this {@link Collection} contains {@link Constraint}s of the
 	 *          {@link ConstraintKind} that is different than
 	 *          {@link ConstraintKind#POSTCONDITION} they will not be prepared.
 	 */
-	public void preparePostConditions(IModelObject modelObject,
-			Operation operation, IModelObject[] parameterValues,
+	public void preparePostConditions(IModelInstanceElement modelObject,
+			Operation operation, IModelInstanceElement[] parameterValues,
 			Collection<Constraint> postConditions);
 
 	/**
@@ -315,7 +315,7 @@ public interface IOclInterpreter {
 
 	/**
 	 * <p>
-	 * Sets a given {@link IModelObject} as value of a {@link Variable} (given as
+	 * Sets a given {@link IModelInstanceElement} as value of a {@link Variable} (given as
 	 * its name as a {@link String}) in the {@link IInterpretationEnvironment} of this
 	 * {@link IOclInterpreter}.
 	 * </p>
@@ -330,7 +330,7 @@ public interface IOclInterpreter {
 	 * @param value
 	 *          The value of the {@link Variable} that shall be set.
 	 */
-	public void setEnviromentVariable(String name, IModelObject value);
+	public void setEnviromentVariable(String name, IModelInstanceElement value);
 
 	/**
 	 * <p>
@@ -344,7 +344,7 @@ public interface IOclInterpreter {
 	 * @param value
 	 *          The value of the {@link Variable} that shall.
 	 */
-	public void setEnviromentVariable(String name, OclRoot value);
+	public void setEnviromentVariable(String name, OclAny value);
 
 	/**
 	 * <p>

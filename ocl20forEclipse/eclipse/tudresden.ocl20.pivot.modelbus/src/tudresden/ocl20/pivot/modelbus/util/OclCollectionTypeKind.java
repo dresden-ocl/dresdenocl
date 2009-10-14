@@ -33,7 +33,7 @@
 package tudresden.ocl20.pivot.modelbus.util;
 
 import tudresden.ocl20.pivot.essentialocl.expressions.CollectionKind;
-import tudresden.ocl20.pivot.modelbus.IModelInstance;
+import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance;
 
 /**
  * This enumeration contains constants that represent the various OCL collection types. It is

@@ -34,11 +34,15 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
+import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBag;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSet;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclUnsortedCollection;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceCollection;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
+import tudresden.ocl20.pivot.standardlibrary.java.factory.JavaStandardLibraryFactory;
 
 /**
  * <p>
@@ -46,27 +50,30 @@ import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclUnsortedCollection;
  * </p>
  * 
  * @author Ronny Brandt
+ * @author Michael Thiele
  */
 @SuppressWarnings("unchecked")
-public abstract class JavaOclUnsortedCollection<T extends OclRoot> extends
+public abstract class JavaOclUnsortedCollection<T extends OclAny> extends
 		JavaOclCollection<T> implements OclUnsortedCollection<T> {
 
-	/**
-	 * <p>
-	 * Instantiates a new {@link JavaOclUnsortedCollection}.
-	 * </p>
-	 * 
-	 * @param adaptee
-	 *            The adaptable {@link Collection} of this
-	 *            {@link JavaOclUnsortedCollection}.
-	 */
-	public JavaOclUnsortedCollection(Collection<T> adaptee) {
-		super(adaptee);
+	public JavaOclUnsortedCollection(
+			IModelInstanceCollection<IModelInstanceElement> imiCollection) {
+
+		super(imiCollection);
+	}
+
+	public JavaOclUnsortedCollection(String undefinedReason) {
+
+		super(undefinedReason);
+	}
+
+	public JavaOclUnsortedCollection(Throwable invalidReason) {
+
+		super(invalidReason);
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclUnsortedCollection
 	 * #union(tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBag)
@@ -75,33 +82,23 @@ public abstract class JavaOclUnsortedCollection<T extends OclRoot> extends
 
 		OclBag<T> result;
 
-		/* Check if this collection is undefined. */
-		if (this.isOclUndefined().isTrue()) {
-			result = new JavaOclBag<T>(null);
-			result.setUndefinedreason(getUndefinedreason());
-		}
-
-		/* Else check if the given bag is undefined. */
-		else if (aBag.isOclUndefined().isTrue()) {
-			result = aBag;
-		}
+		checkUndefinedAndInvalid(this, aBag);
 
 		/* Else compute the result. */
-		else {
-			ArrayList<T> resultList;
+		List<IModelInstanceElement> union =
+				new ArrayList<IModelInstanceElement>();
 
-			resultList = new ArrayList<T>((Collection<T>) this.getAdaptee());
-			resultList.addAll((Collection<T>) aBag.getAdaptee());
+		union.addAll(this.imiCollection.getCollection());
+		union.addAll(((IModelInstanceCollection) aBag.getModelInstanceElement())
+				.getCollection());
 
-			result = new JavaOclBag<T>(resultList);
-		}
+		result = JavaStandardLibraryFactory.INSTANCE.createOclBag(union);
 
 		return result;
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclUnsortedCollection
 	 * #intersection(tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSet)
@@ -110,34 +107,25 @@ public abstract class JavaOclUnsortedCollection<T extends OclRoot> extends
 
 		OclSet<T> result;
 
-		/* Check if this collection is undefined. */
-		if (isOclUndefined().isTrue()) {
-			result = new JavaOclSet<T>(null);
-			result.setUndefinedreason(getUndefinedreason());
-		}
-
-		/* Else check if the given set is undefined. */
-		if (aSet.isOclUndefined().isTrue()) {
-			result = aSet;
-		}
+		checkUndefinedAndInvalid(this, aSet);
 
 		/* Else compute the result. */
-		else {
-			List<T> thisSetAsList;
-			List<T> resultList;
+		Collection<IModelInstanceElement> otherSet;
+		Set<IModelInstanceElement> intersection;
 
-			thisSetAsList = new ArrayList<T>((Collection<T>) this.getAdaptee());
-			resultList = new ArrayList<T>();
+		otherSet =
+				((IModelInstanceCollection<IModelInstanceElement>) aSet
+						.getModelInstanceElement()).getCollection();
+		intersection = new HashSet<IModelInstanceElement>();
 
-			for (T anElement : (Collection<T>) aSet.getAdaptee()) {
-				if (thisSetAsList.contains(anElement)
-						&& !resultList.contains(anElement)) {
-					resultList.add(anElement);
-				}
+		for (IModelInstanceElement anElement : otherSet) {
+			if (this.imiCollection.getCollection().contains(anElement)
+					&& !intersection.contains(anElement)) {
+				intersection.add(anElement);
 			}
-
-			return new JavaOclSet<T>(new HashSet<T>(resultList));
 		}
+
+		result = JavaStandardLibraryFactory.INSTANCE.createOclSet(intersection);
 
 		return result;
 	}

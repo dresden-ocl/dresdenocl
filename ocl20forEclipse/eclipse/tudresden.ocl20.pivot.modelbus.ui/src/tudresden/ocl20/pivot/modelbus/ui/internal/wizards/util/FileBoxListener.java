@@ -21,7 +21,6 @@ package tudresden.ocl20.pivot.modelbus.ui.internal.wizards.util;
 import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
 
-import tudresden.ocl20.pivot.modelbus.ui.internal.wizards.AbstractModelBusPage;
 
 /**
  * <p>
