@@ -1,20 +1,6 @@
 /**
- * Copyright (C) 2009 by Claas Wilke (info@claaswilke.de)
- * 
- * This file is part of the PML Example of Dresden OCL2 for Eclipse.
- * 
- * Dresden OCL2 for Eclipse is free software: you can redistribute it and/or modify 
- * it under the terms of the GNU Lesser General Public License as published by the 
- * Free Software Foundation, either version 3 of the License, or (at your option)
- * any later version.
- * 
- * Dresden OCL2 for Eclipse is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License 
- * for more details.
- * 
- * You should have received a copy of the GNU Lesser General Public License along 
- * with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
+ * <copyright>
+ * </copyright>
  *
  * $Id$
  */
@@ -138,13 +124,22 @@ public interface PmlPackage extends EPackage {
 	int PLUGIN__EXTENSION_POINTS = 5;
 
 	/**
+	 * The feature id for the '<em><b>Extensions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PLUGIN__EXTENSIONS = 6;
+
+	/**
 	 * The feature id for the '<em><b>Services</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PLUGIN__SERVICES = 6;
+	int PLUGIN__SERVICES = 7;
 
 	/**
 	 * The feature id for the '<em><b>Activator</b></em>' reference.
@@ -153,7 +148,7 @@ public interface PmlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PLUGIN__ACTIVATOR = 7;
+	int PLUGIN__ACTIVATOR = 8;
 
 	/**
 	 * The number of structural features of the '<em>Plugin</em>' class.
@@ -162,7 +157,7 @@ public interface PmlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PLUGIN_FEATURE_COUNT = 8;
+	int PLUGIN_FEATURE_COUNT = 9;
 
 	/**
 	 * The meta object id for the '{@link tudresden.ocl20.pivot.examples.pml.impl.FeatureImpl <em>Feature</em>}' class.
@@ -248,13 +243,13 @@ public interface PmlPackage extends EPackage {
 	int EXTENSION_POINT__PLUGIN = 1;
 
 	/**
-	 * The feature id for the '<em><b>Type</b></em>' reference.
+	 * The feature id for the '<em><b>Interface</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EXTENSION_POINT__TYPE = 2;
+	int EXTENSION_POINT__INTERFACE = 2;
 
 	/**
 	 * The number of structural features of the '<em>Extension Point</em>' class.
@@ -266,6 +261,43 @@ public interface PmlPackage extends EPackage {
 	int EXTENSION_POINT_FEATURE_COUNT = 3;
 
 	/**
+	 * The meta object id for the '{@link tudresden.ocl20.pivot.examples.pml.impl.ExtensionImpl <em>Extension</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see tudresden.ocl20.pivot.examples.pml.impl.ExtensionImpl
+	 * @see tudresden.ocl20.pivot.examples.pml.impl.PmlPackageImpl#getExtension()
+	 * @generated
+	 */
+	int EXTENSION = 3;
+
+	/**
+	 * The feature id for the '<em><b>Implementation</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXTENSION__IMPLEMENTATION = 0;
+
+	/**
+	 * The feature id for the '<em><b>Extension Point</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXTENSION__EXTENSION_POINT = 1;
+
+	/**
+	 * The number of structural features of the '<em>Extension</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXTENSION_FEATURE_COUNT = 2;
+
+	/**
 	 * The meta object id for the '{@link tudresden.ocl20.pivot.examples.pml.impl.JavaTypeImpl <em>Java Type</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -273,7 +305,7 @@ public interface PmlPackage extends EPackage {
 	 * @see tudresden.ocl20.pivot.examples.pml.impl.PmlPackageImpl#getJavaType()
 	 * @generated
 	 */
-	int JAVA_TYPE = 3;
+	int JAVA_TYPE = 4;
 
 	/**
 	 * The feature id for the '<em><b>Fully Qualified Name</b></em>' attribute.
@@ -285,23 +317,41 @@ public interface PmlPackage extends EPackage {
 	int JAVA_TYPE__FULLY_QUALIFIED_NAME = 0;
 
 	/**
+	 * The feature id for the '<em><b>Implements</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JAVA_TYPE__IMPLEMENTS = 1;
+
+	/**
+	 * The feature id for the '<em><b>Operations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JAVA_TYPE__OPERATIONS = 2;
+
+	/**
 	 * The number of structural features of the '<em>Java Type</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int JAVA_TYPE_FEATURE_COUNT = 1;
+	int JAVA_TYPE_FEATURE_COUNT = 3;
 
 	/**
-	 * The meta object id for the '{@link tudresden.ocl20.pivot.examples.pml.impl.ServiceImpl <em>Service</em>}' class.
+	 * The meta object id for the '{@link tudresden.ocl20.pivot.examples.pml.impl.OperationImpl <em>Operation</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see tudresden.ocl20.pivot.examples.pml.impl.ServiceImpl
-	 * @see tudresden.ocl20.pivot.examples.pml.impl.PmlPackageImpl#getService()
+	 * @see tudresden.ocl20.pivot.examples.pml.impl.OperationImpl
+	 * @see tudresden.ocl20.pivot.examples.pml.impl.PmlPackageImpl#getOperation()
 	 * @generated
 	 */
-	int SERVICE = 4;
+	int OPERATION = 5;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -310,16 +360,7 @@ public interface PmlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SERVICE__NAME = 0;
-
-	/**
-	 * The feature id for the '<em><b>Plugin</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SERVICE__PLUGIN = 1;
+	int OPERATION__NAME = 0;
 
 	/**
 	 * The feature id for the '<em><b>Return Type</b></em>' reference.
@@ -328,7 +369,7 @@ public interface PmlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SERVICE__RETURN_TYPE = 2;
+	int OPERATION__RETURN_TYPE = 1;
 
 	/**
 	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
@@ -337,26 +378,35 @@ public interface PmlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SERVICE__PARAMETERS = 3;
+	int OPERATION__PARAMETERS = 2;
 
 	/**
-	 * The number of structural features of the '<em>Service</em>' class.
+	 * The feature id for the '<em><b>My Type</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SERVICE_FEATURE_COUNT = 4;
+	int OPERATION__MY_TYPE = 3;
 
 	/**
-	 * The meta object id for the '{@link tudresden.ocl20.pivot.examples.pml.impl.ServiceParameterImpl <em>Service Parameter</em>}' class.
+	 * The number of structural features of the '<em>Operation</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see tudresden.ocl20.pivot.examples.pml.impl.ServiceParameterImpl
-	 * @see tudresden.ocl20.pivot.examples.pml.impl.PmlPackageImpl#getServiceParameter()
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION_FEATURE_COUNT = 4;
+
+	/**
+	 * The meta object id for the '{@link tudresden.ocl20.pivot.examples.pml.impl.ParameterImpl <em>Parameter</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see tudresden.ocl20.pivot.examples.pml.impl.ParameterImpl
+	 * @see tudresden.ocl20.pivot.examples.pml.impl.PmlPackageImpl#getParameter()
 	 * @generated
 	 */
-	int SERVICE_PARAMETER = 5;
+	int PARAMETER = 6;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -365,7 +415,7 @@ public interface PmlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SERVICE_PARAMETER__NAME = 0;
+	int PARAMETER__NAME = 0;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' reference.
@@ -374,25 +424,25 @@ public interface PmlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SERVICE_PARAMETER__TYPE = 1;
+	int PARAMETER__TYPE = 1;
 
 	/**
-	 * The feature id for the '<em><b>Service</b></em>' container reference.
+	 * The feature id for the '<em><b>Operation</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SERVICE_PARAMETER__SERVICE = 2;
+	int PARAMETER__OPERATION = 2;
 
 	/**
-	 * The number of structural features of the '<em>Service Parameter</em>' class.
+	 * The number of structural features of the '<em>Parameter</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SERVICE_PARAMETER_FEATURE_COUNT = 3;
+	int PARAMETER_FEATURE_COUNT = 3;
 
 	/**
 	 * The meta object id for the '{@link tudresden.ocl20.pivot.examples.pml.impl.PluginPackageImpl <em>Plugin Package</em>}' class.
@@ -402,7 +452,7 @@ public interface PmlPackage extends EPackage {
 	 * @see tudresden.ocl20.pivot.examples.pml.impl.PmlPackageImpl#getPluginPackage()
 	 * @generated
 	 */
-	int PLUGIN_PACKAGE = 6;
+	int PLUGIN_PACKAGE = 7;
 
 	/**
 	 * The feature id for the '<em><b>Plugins</b></em>' containment reference list.
@@ -518,6 +568,17 @@ public interface PmlPackage extends EPackage {
 	EReference getPlugin_ExtensionPoints();
 
 	/**
+	 * Returns the meta object for the containment reference list '{@link tudresden.ocl20.pivot.examples.pml.Plugin#getExtensions <em>Extensions</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Extensions</em>'.
+	 * @see tudresden.ocl20.pivot.examples.pml.Plugin#getExtensions()
+	 * @see #getPlugin()
+	 * @generated
+	 */
+	EReference getPlugin_Extensions();
+
+	/**
 	 * Returns the meta object for the containment reference list '{@link tudresden.ocl20.pivot.examples.pml.Plugin#getServices <em>Services</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -626,15 +687,47 @@ public interface PmlPackage extends EPackage {
 	EReference getExtensionPoint_Plugin();
 
 	/**
-	 * Returns the meta object for the reference '{@link tudresden.ocl20.pivot.examples.pml.ExtensionPoint#getType <em>Type</em>}'.
+	 * Returns the meta object for the reference '{@link tudresden.ocl20.pivot.examples.pml.ExtensionPoint#getInterface <em>Interface</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Type</em>'.
-	 * @see tudresden.ocl20.pivot.examples.pml.ExtensionPoint#getType()
+	 * @return the meta object for the reference '<em>Interface</em>'.
+	 * @see tudresden.ocl20.pivot.examples.pml.ExtensionPoint#getInterface()
 	 * @see #getExtensionPoint()
 	 * @generated
 	 */
-	EReference getExtensionPoint_Type();
+	EReference getExtensionPoint_Interface();
+
+	/**
+	 * Returns the meta object for class '{@link tudresden.ocl20.pivot.examples.pml.Extension <em>Extension</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Extension</em>'.
+	 * @see tudresden.ocl20.pivot.examples.pml.Extension
+	 * @generated
+	 */
+	EClass getExtension();
+
+	/**
+	 * Returns the meta object for the reference '{@link tudresden.ocl20.pivot.examples.pml.Extension#getImplementation <em>Implementation</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Implementation</em>'.
+	 * @see tudresden.ocl20.pivot.examples.pml.Extension#getImplementation()
+	 * @see #getExtension()
+	 * @generated
+	 */
+	EReference getExtension_Implementation();
+
+	/**
+	 * Returns the meta object for the reference '{@link tudresden.ocl20.pivot.examples.pml.Extension#getExtensionPoint <em>Extension Point</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Extension Point</em>'.
+	 * @see tudresden.ocl20.pivot.examples.pml.Extension#getExtensionPoint()
+	 * @see #getExtension()
+	 * @generated
+	 */
+	EReference getExtension_ExtensionPoint();
 
 	/**
 	 * Returns the meta object for class '{@link tudresden.ocl20.pivot.examples.pml.JavaType <em>Java Type</em>}'.
@@ -658,101 +751,123 @@ public interface PmlPackage extends EPackage {
 	EAttribute getJavaType_FullyQualifiedName();
 
 	/**
-	 * Returns the meta object for class '{@link tudresden.ocl20.pivot.examples.pml.Service <em>Service</em>}'.
+	 * Returns the meta object for the reference list '{@link tudresden.ocl20.pivot.examples.pml.JavaType#getImplements <em>Implements</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Service</em>'.
-	 * @see tudresden.ocl20.pivot.examples.pml.Service
+	 * @return the meta object for the reference list '<em>Implements</em>'.
+	 * @see tudresden.ocl20.pivot.examples.pml.JavaType#getImplements()
+	 * @see #getJavaType()
 	 * @generated
 	 */
-	EClass getService();
+	EReference getJavaType_Implements();
 
 	/**
-	 * Returns the meta object for the attribute '{@link tudresden.ocl20.pivot.examples.pml.Service#getName <em>Name</em>}'.
+	 * Returns the meta object for the containment reference list '{@link tudresden.ocl20.pivot.examples.pml.JavaType#getOperations <em>Operations</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Operations</em>'.
+	 * @see tudresden.ocl20.pivot.examples.pml.JavaType#getOperations()
+	 * @see #getJavaType()
+	 * @generated
+	 */
+	EReference getJavaType_Operations();
+
+	/**
+	 * Returns the meta object for class '{@link tudresden.ocl20.pivot.examples.pml.Operation <em>Operation</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Operation</em>'.
+	 * @see tudresden.ocl20.pivot.examples.pml.Operation
+	 * @generated
+	 */
+	EClass getOperation();
+
+	/**
+	 * Returns the meta object for the attribute '{@link tudresden.ocl20.pivot.examples.pml.Operation#getName <em>Name</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see tudresden.ocl20.pivot.examples.pml.Service#getName()
-	 * @see #getService()
+	 * @see tudresden.ocl20.pivot.examples.pml.Operation#getName()
+	 * @see #getOperation()
 	 * @generated
 	 */
-	EAttribute getService_Name();
+	EAttribute getOperation_Name();
 
 	/**
-	 * Returns the meta object for the container reference '{@link tudresden.ocl20.pivot.examples.pml.Service#getPlugin <em>Plugin</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the container reference '<em>Plugin</em>'.
-	 * @see tudresden.ocl20.pivot.examples.pml.Service#getPlugin()
-	 * @see #getService()
-	 * @generated
-	 */
-	EReference getService_Plugin();
-
-	/**
-	 * Returns the meta object for the reference '{@link tudresden.ocl20.pivot.examples.pml.Service#getReturnType <em>Return Type</em>}'.
+	 * Returns the meta object for the reference '{@link tudresden.ocl20.pivot.examples.pml.Operation#getReturnType <em>Return Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Return Type</em>'.
-	 * @see tudresden.ocl20.pivot.examples.pml.Service#getReturnType()
-	 * @see #getService()
+	 * @see tudresden.ocl20.pivot.examples.pml.Operation#getReturnType()
+	 * @see #getOperation()
 	 * @generated
 	 */
-	EReference getService_ReturnType();
+	EReference getOperation_ReturnType();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link tudresden.ocl20.pivot.examples.pml.Service#getParameters <em>Parameters</em>}'.
+	 * Returns the meta object for the containment reference list '{@link tudresden.ocl20.pivot.examples.pml.Operation#getParameters <em>Parameters</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Parameters</em>'.
-	 * @see tudresden.ocl20.pivot.examples.pml.Service#getParameters()
-	 * @see #getService()
+	 * @see tudresden.ocl20.pivot.examples.pml.Operation#getParameters()
+	 * @see #getOperation()
 	 * @generated
 	 */
-	EReference getService_Parameters();
+	EReference getOperation_Parameters();
 
 	/**
-	 * Returns the meta object for class '{@link tudresden.ocl20.pivot.examples.pml.ServiceParameter <em>Service Parameter</em>}'.
+	 * Returns the meta object for the reference '{@link tudresden.ocl20.pivot.examples.pml.Operation#getMyType <em>My Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Service Parameter</em>'.
-	 * @see tudresden.ocl20.pivot.examples.pml.ServiceParameter
+	 * @return the meta object for the reference '<em>My Type</em>'.
+	 * @see tudresden.ocl20.pivot.examples.pml.Operation#getMyType()
+	 * @see #getOperation()
 	 * @generated
 	 */
-	EClass getServiceParameter();
+	EReference getOperation_MyType();
 
 	/**
-	 * Returns the meta object for the attribute '{@link tudresden.ocl20.pivot.examples.pml.ServiceParameter#getName <em>Name</em>}'.
+	 * Returns the meta object for class '{@link tudresden.ocl20.pivot.examples.pml.Parameter <em>Parameter</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Parameter</em>'.
+	 * @see tudresden.ocl20.pivot.examples.pml.Parameter
+	 * @generated
+	 */
+	EClass getParameter();
+
+	/**
+	 * Returns the meta object for the attribute '{@link tudresden.ocl20.pivot.examples.pml.Parameter#getName <em>Name</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see tudresden.ocl20.pivot.examples.pml.ServiceParameter#getName()
-	 * @see #getServiceParameter()
+	 * @see tudresden.ocl20.pivot.examples.pml.Parameter#getName()
+	 * @see #getParameter()
 	 * @generated
 	 */
-	EAttribute getServiceParameter_Name();
+	EAttribute getParameter_Name();
 
 	/**
-	 * Returns the meta object for the reference '{@link tudresden.ocl20.pivot.examples.pml.ServiceParameter#getType <em>Type</em>}'.
+	 * Returns the meta object for the reference '{@link tudresden.ocl20.pivot.examples.pml.Parameter#getType <em>Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Type</em>'.
-	 * @see tudresden.ocl20.pivot.examples.pml.ServiceParameter#getType()
-	 * @see #getServiceParameter()
+	 * @see tudresden.ocl20.pivot.examples.pml.Parameter#getType()
+	 * @see #getParameter()
 	 * @generated
 	 */
-	EReference getServiceParameter_Type();
+	EReference getParameter_Type();
 
 	/**
-	 * Returns the meta object for the container reference '{@link tudresden.ocl20.pivot.examples.pml.ServiceParameter#getService <em>Service</em>}'.
+	 * Returns the meta object for the container reference '{@link tudresden.ocl20.pivot.examples.pml.Parameter#getOperation <em>Operation</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the container reference '<em>Service</em>'.
-	 * @see tudresden.ocl20.pivot.examples.pml.ServiceParameter#getService()
-	 * @see #getServiceParameter()
+	 * @return the meta object for the container reference '<em>Operation</em>'.
+	 * @see tudresden.ocl20.pivot.examples.pml.Parameter#getOperation()
+	 * @see #getParameter()
 	 * @generated
 	 */
-	EReference getServiceParameter_Service();
+	EReference getParameter_Operation();
 
 	/**
 	 * Returns the meta object for class '{@link tudresden.ocl20.pivot.examples.pml.PluginPackage <em>Plugin Package</em>}'.
@@ -878,6 +993,14 @@ public interface PmlPackage extends EPackage {
 		EReference PLUGIN__EXTENSION_POINTS = eINSTANCE.getPlugin_ExtensionPoints();
 
 		/**
+		 * The meta object literal for the '<em><b>Extensions</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference PLUGIN__EXTENSIONS = eINSTANCE.getPlugin_Extensions();
+
+		/**
 		 * The meta object literal for the '<em><b>Services</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -962,12 +1085,38 @@ public interface PmlPackage extends EPackage {
 		EReference EXTENSION_POINT__PLUGIN = eINSTANCE.getExtensionPoint_Plugin();
 
 		/**
-		 * The meta object literal for the '<em><b>Type</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Interface</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference EXTENSION_POINT__TYPE = eINSTANCE.getExtensionPoint_Type();
+		EReference EXTENSION_POINT__INTERFACE = eINSTANCE.getExtensionPoint_Interface();
+
+		/**
+		 * The meta object literal for the '{@link tudresden.ocl20.pivot.examples.pml.impl.ExtensionImpl <em>Extension</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see tudresden.ocl20.pivot.examples.pml.impl.ExtensionImpl
+		 * @see tudresden.ocl20.pivot.examples.pml.impl.PmlPackageImpl#getExtension()
+		 * @generated
+		 */
+		EClass EXTENSION = eINSTANCE.getExtension();
+
+		/**
+		 * The meta object literal for the '<em><b>Implementation</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference EXTENSION__IMPLEMENTATION = eINSTANCE.getExtension_Implementation();
+
+		/**
+		 * The meta object literal for the '<em><b>Extension Point</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference EXTENSION__EXTENSION_POINT = eINSTANCE.getExtension_ExtensionPoint();
 
 		/**
 		 * The meta object literal for the '{@link tudresden.ocl20.pivot.examples.pml.impl.JavaTypeImpl <em>Java Type</em>}' class.
@@ -988,14 +1137,30 @@ public interface PmlPackage extends EPackage {
 		EAttribute JAVA_TYPE__FULLY_QUALIFIED_NAME = eINSTANCE.getJavaType_FullyQualifiedName();
 
 		/**
-		 * The meta object literal for the '{@link tudresden.ocl20.pivot.examples.pml.impl.ServiceImpl <em>Service</em>}' class.
+		 * The meta object literal for the '<em><b>Implements</b></em>' reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see tudresden.ocl20.pivot.examples.pml.impl.ServiceImpl
-		 * @see tudresden.ocl20.pivot.examples.pml.impl.PmlPackageImpl#getService()
 		 * @generated
 		 */
-		EClass SERVICE = eINSTANCE.getService();
+		EReference JAVA_TYPE__IMPLEMENTS = eINSTANCE.getJavaType_Implements();
+
+		/**
+		 * The meta object literal for the '<em><b>Operations</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference JAVA_TYPE__OPERATIONS = eINSTANCE.getJavaType_Operations();
+
+		/**
+		 * The meta object literal for the '{@link tudresden.ocl20.pivot.examples.pml.impl.OperationImpl <em>Operation</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see tudresden.ocl20.pivot.examples.pml.impl.OperationImpl
+		 * @see tudresden.ocl20.pivot.examples.pml.impl.PmlPackageImpl#getOperation()
+		 * @generated
+		 */
+		EClass OPERATION = eINSTANCE.getOperation();
 
 		/**
 		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
@@ -1003,15 +1168,7 @@ public interface PmlPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute SERVICE__NAME = eINSTANCE.getService_Name();
-
-		/**
-		 * The meta object literal for the '<em><b>Plugin</b></em>' container reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference SERVICE__PLUGIN = eINSTANCE.getService_Plugin();
+		EAttribute OPERATION__NAME = eINSTANCE.getOperation_Name();
 
 		/**
 		 * The meta object literal for the '<em><b>Return Type</b></em>' reference feature.
@@ -1019,7 +1176,7 @@ public interface PmlPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference SERVICE__RETURN_TYPE = eINSTANCE.getService_ReturnType();
+		EReference OPERATION__RETURN_TYPE = eINSTANCE.getOperation_ReturnType();
 
 		/**
 		 * The meta object literal for the '<em><b>Parameters</b></em>' containment reference list feature.
@@ -1027,17 +1184,25 @@ public interface PmlPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference SERVICE__PARAMETERS = eINSTANCE.getService_Parameters();
+		EReference OPERATION__PARAMETERS = eINSTANCE.getOperation_Parameters();
 
 		/**
-		 * The meta object literal for the '{@link tudresden.ocl20.pivot.examples.pml.impl.ServiceParameterImpl <em>Service Parameter</em>}' class.
+		 * The meta object literal for the '<em><b>My Type</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see tudresden.ocl20.pivot.examples.pml.impl.ServiceParameterImpl
-		 * @see tudresden.ocl20.pivot.examples.pml.impl.PmlPackageImpl#getServiceParameter()
 		 * @generated
 		 */
-		EClass SERVICE_PARAMETER = eINSTANCE.getServiceParameter();
+		EReference OPERATION__MY_TYPE = eINSTANCE.getOperation_MyType();
+
+		/**
+		 * The meta object literal for the '{@link tudresden.ocl20.pivot.examples.pml.impl.ParameterImpl <em>Parameter</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see tudresden.ocl20.pivot.examples.pml.impl.ParameterImpl
+		 * @see tudresden.ocl20.pivot.examples.pml.impl.PmlPackageImpl#getParameter()
+		 * @generated
+		 */
+		EClass PARAMETER = eINSTANCE.getParameter();
 
 		/**
 		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
@@ -1045,7 +1210,7 @@ public interface PmlPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute SERVICE_PARAMETER__NAME = eINSTANCE.getServiceParameter_Name();
+		EAttribute PARAMETER__NAME = eINSTANCE.getParameter_Name();
 
 		/**
 		 * The meta object literal for the '<em><b>Type</b></em>' reference feature.
@@ -1053,15 +1218,15 @@ public interface PmlPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference SERVICE_PARAMETER__TYPE = eINSTANCE.getServiceParameter_Type();
+		EReference PARAMETER__TYPE = eINSTANCE.getParameter_Type();
 
 		/**
-		 * The meta object literal for the '<em><b>Service</b></em>' container reference feature.
+		 * The meta object literal for the '<em><b>Operation</b></em>' container reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference SERVICE_PARAMETER__SERVICE = eINSTANCE.getServiceParameter_Service();
+		EReference PARAMETER__OPERATION = eINSTANCE.getParameter_Operation();
 
 		/**
 		 * The meta object literal for the '{@link tudresden.ocl20.pivot.examples.pml.impl.PluginPackageImpl <em>Plugin Package</em>}' class.

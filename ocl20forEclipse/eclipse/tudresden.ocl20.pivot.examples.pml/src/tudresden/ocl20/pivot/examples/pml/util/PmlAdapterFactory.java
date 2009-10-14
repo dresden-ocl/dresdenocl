@@ -1,20 +1,6 @@
 /**
- * Copyright (C) 2009 by Claas Wilke (info@claaswilke.de)
- * 
- * This file is part of the PML Example of Dresden OCL2 for Eclipse.
- * 
- * Dresden OCL2 for Eclipse is free software: you can redistribute it and/or modify 
- * it under the terms of the GNU Lesser General Public License as published by the 
- * Free Software Foundation, either version 3 of the License, or (at your option)
- * any later version.
- * 
- * Dresden OCL2 for Eclipse is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License 
- * for more details.
- * 
- * You should have received a copy of the GNU Lesser General Public License along 
- * with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
+ * <copyright>
+ * </copyright>
  *
  * $Id$
  */
@@ -98,16 +84,20 @@ public class PmlAdapterFactory extends AdapterFactoryImpl {
 				return createExtensionPointAdapter();
 			}
 			@Override
+			public Adapter caseExtension(Extension object) {
+				return createExtensionAdapter();
+			}
+			@Override
 			public Adapter caseJavaType(JavaType object) {
 				return createJavaTypeAdapter();
 			}
 			@Override
-			public Adapter caseService(Service object) {
-				return createServiceAdapter();
+			public Adapter caseOperation(Operation object) {
+				return createOperationAdapter();
 			}
 			@Override
-			public Adapter caseServiceParameter(ServiceParameter object) {
-				return createServiceParameterAdapter();
+			public Adapter caseParameter(Parameter object) {
+				return createParameterAdapter();
 			}
 			@Override
 			public Adapter casePluginPackage(PluginPackage object) {
@@ -176,6 +166,20 @@ public class PmlAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.examples.pml.Extension <em>Extension</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see tudresden.ocl20.pivot.examples.pml.Extension
+	 * @generated
+	 */
+	public Adapter createExtensionAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.examples.pml.JavaType <em>Java Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -190,30 +194,30 @@ public class PmlAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.examples.pml.Service <em>Service</em>}'.
+	 * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.examples.pml.Operation <em>Operation</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see tudresden.ocl20.pivot.examples.pml.Service
+	 * @see tudresden.ocl20.pivot.examples.pml.Operation
 	 * @generated
 	 */
-	public Adapter createServiceAdapter() {
+	public Adapter createOperationAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.examples.pml.ServiceParameter <em>Service Parameter</em>}'.
+	 * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.examples.pml.Parameter <em>Parameter</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see tudresden.ocl20.pivot.examples.pml.ServiceParameter
+	 * @see tudresden.ocl20.pivot.examples.pml.Parameter
 	 * @generated
 	 */
-	public Adapter createServiceParameterAdapter() {
+	public Adapter createParameterAdapter() {
 		return null;
 	}
 

@@ -1,20 +1,6 @@
 /**
- * Copyright (C) 2009 by Claas Wilke (info@claaswilke.de)
- * 
- * This file is part of the PML Example of Dresden OCL2 for Eclipse.
- * 
- * Dresden OCL2 for Eclipse is free software: you can redistribute it and/or modify 
- * it under the terms of the GNU Lesser General Public License as published by the 
- * Free Software Foundation, either version 3 of the License, or (at your option)
- * any later version.
- * 
- * Dresden OCL2 for Eclipse is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License 
- * for more details.
- * 
- * You should have received a copy of the GNU Lesser General Public License along 
- * with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
+ * <copyright>
+ * </copyright>
  *
  * $Id$
  */
@@ -67,6 +53,15 @@ public interface PmlFactory extends EFactory {
 	ExtensionPoint createExtensionPoint();
 
 	/**
+	 * Returns a new object of class '<em>Extension</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Extension</em>'.
+	 * @generated
+	 */
+	Extension createExtension();
+
+	/**
 	 * Returns a new object of class '<em>Java Type</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -76,22 +71,22 @@ public interface PmlFactory extends EFactory {
 	JavaType createJavaType();
 
 	/**
-	 * Returns a new object of class '<em>Service</em>'.
+	 * Returns a new object of class '<em>Operation</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Service</em>'.
+	 * @return a new object of class '<em>Operation</em>'.
 	 * @generated
 	 */
-	Service createService();
+	Operation createOperation();
 
 	/**
-	 * Returns a new object of class '<em>Service Parameter</em>'.
+	 * Returns a new object of class '<em>Parameter</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Service Parameter</em>'.
+	 * @return a new object of class '<em>Parameter</em>'.
 	 * @generated
 	 */
-	ServiceParameter createServiceParameter();
+	Parameter createParameter();
 
 	/**
 	 * Returns a new object of class '<em>Plugin Package</em>'.

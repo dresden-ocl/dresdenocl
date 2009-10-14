@@ -31,14 +31,21 @@
 package tudresden.ocl20.interpreter.internal;
 
 import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
+import java.util.WeakHashMap;
 
 import tudresden.ocl20.interpreter.IInterpretationEnvironment;
 import tudresden.ocl20.interpreter.IOclInterpreter;
 import tudresden.ocl20.pivot.essentialocl.expressions.OperationCallExp;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot;
-import tudresden.ocl20.pivot.modelbus.IModelInstance;
+import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
+import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclModelInstanceObject;
+import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceObject;
 import tudresden.ocl20.pivot.pivotmodel.Constraint;
 import tudresden.ocl20.pivot.pivotmodel.NamedElement;
+import tudresden.ocl20.pivot.pivotmodel.Type;
 
 /**
  * <p>
@@ -53,20 +60,31 @@ public class InterpretationEnvironment implements IInterpretationEnvironment {
 	private static IInterpretationEnvironment GLOBAL;
 
 	/** Cached results. */
-	private HashMap<NamedElement, OclRoot> cachedResults;
+	private HashMap<NamedElement, OclAny> cachedResults;
 
 	/** the actual model instance. */
 	protected IModelInstance modelInstance;
 
-	/** Special values for postcondition constraints. */
-	protected HashMap<Object, HashMap<OperationCallExp, OclRoot>> postconditionValues;
+	/**
+	 * Special values for postcondition constraints. Use
+	 * {@link IModelInstanceElement}s as key instead of {@link OclAny}s to avoid
+	 * 'Object schizophrenia'.
+	 */
+	protected HashMap<IModelInstanceElement, HashMap<OperationCallExp, OclAny>> postconditionValues;
 
 	/** Saved constraints for body, def, initial and derive. */
 	protected HashMap<String, Constraint> savedConstraints;
 
+	/**
+	 * Saved instances of {@link Type}s existing before the current context's
+	 * invocation (required for <code>oclIsNew()</code>).
+	 */
+	protected Map<Type, Set<IModelInstanceObject>> savedInstances =
+			new WeakHashMap<Type, Set<IModelInstanceObject>>();
+
 	/** Saved variables. */
-	protected HashMap<String, OclRoot> savedVariables =
-			new HashMap<String, OclRoot>();
+	protected HashMap<String, OclAny> savedVariables =
+			new HashMap<String, OclAny>();
 
 	/**
 	 * <p>
@@ -100,9 +118,9 @@ public class InterpretationEnvironment implements IInterpretationEnvironment {
 	/*
 	 * (non-Javadoc)
 	 * @see tudresden.ocl20.interpreter.IEnvironment#addVar(java.lang.String,
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot)
+	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny)
 	 */
-	public void addVar(String path, OclRoot oclRoot) {
+	public void addVar(String path, OclAny oclRoot) {
 
 		this.savedVariables.put(path, oclRoot);
 	}
@@ -111,12 +129,12 @@ public class InterpretationEnvironment implements IInterpretationEnvironment {
 	 * (non-Javadoc)
 	 * @see tudresden.ocl20.interpreter.IEnvironment#cacheResult(tudresden.ocl20.
 	 * pivot.pivotmodel.NamedElement,
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot)
+	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny)
 	 */
-	public void cacheResult(NamedElement aNamedElement, OclRoot aResult) {
+	public void cacheResult(NamedElement aNamedElement, OclAny aResult) {
 
 		if (this.cachedResults == null) {
-			this.cachedResults = new HashMap<NamedElement, OclRoot>();
+			this.cachedResults = new HashMap<NamedElement, OclAny>();
 		}
 		// no else.
 
@@ -154,9 +172,9 @@ public class InterpretationEnvironment implements IInterpretationEnvironment {
 	 * tudresden.ocl20.interpreter.IEnvironment#getCachedResult(tudresden.ocl20
 	 * .pivot.pivotmodel.NamedElement)
 	 */
-	public OclRoot getCachedResult(NamedElement aNamedElement) {
+	public OclAny getCachedResult(NamedElement aNamedElement) {
 
-		OclRoot result;
+		OclAny result;
 
 		if (this.cachedResults != null) {
 			result = cachedResults.get(aNamedElement);
@@ -204,27 +222,22 @@ public class InterpretationEnvironment implements IInterpretationEnvironment {
 	 * tudresden.ocl20.interpreter.IEnvironment#getPostconditionValue(tudresden
 	 * .ocl20.pivot.essentialocl.expressions.OperationCallExp)
 	 */
-	public OclRoot getPostconditionValue(OperationCallExp operationCallExp) {
+	public OclAny getPostconditionValue(OperationCallExp operationCallExp) {
 
-		OclRoot result;
-		Object selfObject;
+		OclAny result;
+		OclAny contextObject;
 
 		result = null;
 
 		/* Try to get the postcondition values for the current 'self' object. */
 		if (this.postconditionValues != null) {
-			HashMap<OperationCallExp, OclRoot> objectSpecificValues;
+			HashMap<OperationCallExp, OclAny> objectSpecificValues;
 
 			/* Get the object for which the value is stored. */
-			selfObject = this.getVar(IOclInterpreter.SELF_VARIABLE_NAME).getAdaptee();
+			contextObject = this.getVar(IOclInterpreter.SELF_VARIABLE_NAME);
 
-			/* If the adapted object is null, use the adaptation IModelObject instead. */
-			if (selfObject == null) {
-				this.getVar(IOclInterpreter.SELF_VARIABLE_NAME);
-			}
-			// no else.
-
-			objectSpecificValues = this.postconditionValues.get(selfObject);
+			objectSpecificValues =
+					this.postconditionValues.get(contextObject.getModelInstanceElement());
 
 			if (objectSpecificValues != null) {
 				/* Try to get the value for the given expression. */
@@ -241,9 +254,9 @@ public class InterpretationEnvironment implements IInterpretationEnvironment {
 	 * (non-Javadoc)
 	 * @see tudresden.ocl20.interpreter.IEnvironment#getVar(java.lang.String)
 	 */
-	public OclRoot getVar(String path) {
+	public OclAny getVar(String path) {
 
-		OclRoot result;
+		OclAny result;
 
 		result = savedVariables.get(path);
 
@@ -253,37 +266,43 @@ public class InterpretationEnvironment implements IInterpretationEnvironment {
 	/*
 	 * (non-Javadoc)
 	 * @see
+	 * tudresden.ocl20.interpreter.IInterpretationEnvironment#saveOldInstances
+	 * (tudresden.ocl20.pivot.pivotmodel.Type)
+	 */
+	public void saveOldInstances(Type type) {
+
+		this.savedInstances.put(type, this.modelInstance.getAllInstances(type));
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see
 	 * tudresden.ocl20.interpreter.IEnvironment#savePostconditionValue(tudresden
 	 * .ocl20.pivot.essentialocl.expressions.OperationCallExp,
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot)
+	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny)
 	 */
 	public void savePostconditionValue(OperationCallExp anOperationCallExp,
-			OclRoot aSource) {
+			OclAny aSource) {
 
-		HashMap<OperationCallExp, OclRoot> objectSpecificValues;
-		Object selfObject;
+		HashMap<OperationCallExp, OclAny> objectSpecificValues;
+		OclAny contextObject;
 
 		/* Check if the postcondition values have been initialized at all. */
 		if (this.postconditionValues == null) {
 			this.postconditionValues =
-					new HashMap<Object, HashMap<OperationCallExp, OclRoot>>();
+					new HashMap<IModelInstanceElement, HashMap<OperationCallExp, OclAny>>();
 		}
 		// no else.
 
 		/* Get the object for which the value is stored. */
-		selfObject = this.getVar(IOclInterpreter.SELF_VARIABLE_NAME).getAdaptee();
+		contextObject = this.getVar(IOclInterpreter.SELF_VARIABLE_NAME);
 
-		/* If the adapted object is null, use the adaptation IModelObject instead. */
-		if (selfObject == null) {
-			this.getVar(IOclInterpreter.SELF_VARIABLE_NAME);
-		}
-		// no else.
+		objectSpecificValues =
+				this.postconditionValues.get(contextObject.getModelInstanceElement());
 
-		objectSpecificValues = this.postconditionValues.get(selfObject);
-
-		/* Eventually initialize the specific values. */
+		/* Probably initialize the specific values. */
 		if (objectSpecificValues == null) {
-			objectSpecificValues = new HashMap<OperationCallExp, OclRoot>();
+			objectSpecificValues = new HashMap<OperationCallExp, OclAny>();
 		}
 		// no else.
 
@@ -291,7 +310,8 @@ public class InterpretationEnvironment implements IInterpretationEnvironment {
 		objectSpecificValues.put(anOperationCallExp, aSource);
 
 		/* Store the specific values. */
-		this.postconditionValues.put(selfObject, objectSpecificValues);
+		this.postconditionValues.put(contextObject.getModelInstanceElement(),
+				objectSpecificValues);
 	}
 
 	/*
@@ -325,9 +345,40 @@ public class InterpretationEnvironment implements IInterpretationEnvironment {
 		 * visible global.
 		 */
 		result.savedVariables =
-				(HashMap<String, OclRoot>) this.savedVariables.clone();
+				(HashMap<String, OclAny>) this.savedVariables.clone();
 
 		result.cachedResults = this.cachedResults;
+
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * tudresden.ocl20.interpreter.IInterpretationEnvironment#isNewInstance(tudresden
+	 * .ocl20.pivot.essentialocl.standardlibrary.OclModelInstanceObject)
+	 */
+	public boolean isNewInstance(OclModelInstanceObject source) {
+
+		boolean result;
+		IModelInstanceObject imiObject;
+
+		imiObject = (IModelInstanceObject) source.getModelInstanceElement();
+		result = true;
+
+		/*
+		 * If any imiObject's type's instances contains the imiObject, return false.
+		 * Else return true.
+		 */
+		for (Type aType : imiObject.getTypes()) {
+
+			if (this.savedInstances.containsKey(aType)
+					&& this.savedInstances.get(aType).contains(imiObject)) {
+				result = false;
+				break;
+			}
+		}
+		// end for.
 
 		return result;
 	}

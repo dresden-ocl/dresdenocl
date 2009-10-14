@@ -44,6 +44,11 @@ context ExtensionPoint
 inv extensionPointIdIsDefined:
   not self.id.oclIsUndefined()
 
+-- An extension point must provide an interface.
+context ExtensionPoint 
+inv extensionPointInterfacesAreSet:
+  not self.interface.oclIsUndefined()
+
 
 -- The name of a java type must be defined.
 context JavaType

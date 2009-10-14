@@ -1,20 +1,6 @@
 /**
- * Copyright (C) 2009 by Claas Wilke (info@claaswilke.de)
- * 
- * This file is part of the PML Example of Dresden OCL2 for Eclipse.
- * 
- * Dresden OCL2 for Eclipse is free software: you can redistribute it and/or modify 
- * it under the terms of the GNU Lesser General Public License as published by the 
- * Free Software Foundation, either version 3 of the License, or (at your option)
- * any later version.
- * 
- * Dresden OCL2 for Eclipse is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License 
- * for more details.
- * 
- * You should have received a copy of the GNU Lesser General Public License along 
- * with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
+ * <copyright>
+ * </copyright>
  *
  * $Id$
  */
@@ -119,21 +105,27 @@ public class PmlSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case PmlPackage.EXTENSION: {
+				Extension extension = (Extension)theEObject;
+				T result = caseExtension(extension);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case PmlPackage.JAVA_TYPE: {
 				JavaType javaType = (JavaType)theEObject;
 				T result = caseJavaType(javaType);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case PmlPackage.SERVICE: {
-				Service service = (Service)theEObject;
-				T result = caseService(service);
+			case PmlPackage.OPERATION: {
+				Operation operation = (Operation)theEObject;
+				T result = caseOperation(operation);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case PmlPackage.SERVICE_PARAMETER: {
-				ServiceParameter serviceParameter = (ServiceParameter)theEObject;
-				T result = caseServiceParameter(serviceParameter);
+			case PmlPackage.PARAMETER: {
+				Parameter parameter = (Parameter)theEObject;
+				T result = caseParameter(parameter);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -193,6 +185,21 @@ public class PmlSwitch<T> {
 	}
 
 	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Extension</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Extension</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseExtension(Extension object) {
+		return null;
+	}
+
+	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Java Type</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -208,32 +215,32 @@ public class PmlSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Service</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Operation</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Service</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Operation</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseService(Service object) {
+	public T caseOperation(Operation object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Service Parameter</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Parameter</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Service Parameter</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Parameter</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseServiceParameter(ServiceParameter object) {
+	public T caseParameter(Parameter object) {
 		return null;
 	}
 

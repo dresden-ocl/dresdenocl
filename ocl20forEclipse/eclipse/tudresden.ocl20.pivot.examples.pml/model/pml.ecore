@@ -9,6 +9,13 @@
           nsPrefix="examples">
         <eSubpackages name="pml" nsURI="http://www.tu-dresden.de/ocl20/pivot/examples/pml"
             nsPrefix="pml">
+          <eClassifiers xsi:type="ecore:EClass" name="Feature">
+            <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+            <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+            <eStructuralFeatures xsi:type="ecore:EAttribute" name="version" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="plugins" upperBound="-1"
+                eType="#//ocl20/pivot/examples/pml/Plugin" containment="true" eOpposite="#//ocl20/pivot/examples/pml/Plugin/feature"/>
+          </eClassifiers>
           <eClassifiers xsi:type="ecore:EClass" name="Plugin">
             <eOperations name="getNameOf" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
               <eParameters name="feature" eType="#//ocl20/pivot/examples/pml/Feature"/>
@@ -22,45 +29,47 @@
             <eStructuralFeatures xsi:type="ecore:EReference" name="extensionPoints"
                 upperBound="-1" eType="#//ocl20/pivot/examples/pml/ExtensionPoint"
                 containment="true" eOpposite="#//ocl20/pivot/examples/pml/ExtensionPoint/plugin"/>
-            <eStructuralFeatures xsi:type="ecore:EReference" name="services" upperBound="-1"
-                eType="#//ocl20/pivot/examples/pml/Service" containment="true" eOpposite="#//ocl20/pivot/examples/pml/Service/plugin"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="extensions" upperBound="-1"
+                eType="#//ocl20/pivot/examples/pml/Extension" containment="true"/>
             <eStructuralFeatures xsi:type="ecore:EReference" name="activator" lowerBound="1"
                 eType="#//ocl20/pivot/examples/pml/JavaType"/>
-          </eClassifiers>
-          <eClassifiers xsi:type="ecore:EClass" name="Feature">
-            <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-            <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-            <eStructuralFeatures xsi:type="ecore:EAttribute" name="version" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-            <eStructuralFeatures xsi:type="ecore:EReference" name="plugins" upperBound="-1"
-                eType="#//ocl20/pivot/examples/pml/Plugin" containment="true" eOpposite="#//ocl20/pivot/examples/pml/Plugin/feature"/>
           </eClassifiers>
           <eClassifiers xsi:type="ecore:EClass" name="ExtensionPoint">
             <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
             <eStructuralFeatures xsi:type="ecore:EReference" name="plugin" lowerBound="1"
                 eType="#//ocl20/pivot/examples/pml/Plugin" transient="true" eOpposite="#//ocl20/pivot/examples/pml/Plugin/extensionPoints"/>
-            <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1"
+            <eStructuralFeatures xsi:type="ecore:EReference" name="interface" lowerBound="1"
                 eType="#//ocl20/pivot/examples/pml/JavaType"/>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EClass" name="Extension">
+            <eStructuralFeatures xsi:type="ecore:EReference" name="implementation"
+                eType="#//ocl20/pivot/examples/pml/JavaType"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="extensionPoint"
+                eType="#//ocl20/pivot/examples/pml/ExtensionPoint"/>
           </eClassifiers>
           <eClassifiers xsi:type="ecore:EClass" name="JavaType">
             <eStructuralFeatures xsi:type="ecore:EAttribute" name="fullyQualifiedName"
                 eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="implements" upperBound="-1"
+                eType="#//ocl20/pivot/examples/pml/JavaType"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="operations" upperBound="-1"
+                eType="#//ocl20/pivot/examples/pml/Operation" containment="true"/>
           </eClassifiers>
-          <eClassifiers xsi:type="ecore:EClass" name="Service">
+          <eClassifiers xsi:type="ecore:EClass" name="Operation">
             <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-            <eStructuralFeatures xsi:type="ecore:EReference" name="plugin" lowerBound="1"
-                eType="#//ocl20/pivot/examples/pml/Plugin" transient="true" eOpposite="#//ocl20/pivot/examples/pml/Plugin/services"/>
             <eStructuralFeatures xsi:type="ecore:EReference" name="returnType" lowerBound="1"
                 eType="#//ocl20/pivot/examples/pml/JavaType"/>
             <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-1"
-                eType="#//ocl20/pivot/examples/pml/ServiceParameter" containment="true"
-                eOpposite="#//ocl20/pivot/examples/pml/ServiceParameter/service"/>
+                eType="#//ocl20/pivot/examples/pml/Parameter" containment="true" eOpposite="#//ocl20/pivot/examples/pml/Parameter/operation"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="myType" lowerBound="1"
+                eType="#//ocl20/pivot/examples/pml/JavaType"/>
           </eClassifiers>
-          <eClassifiers xsi:type="ecore:EClass" name="ServiceParameter">
+          <eClassifiers xsi:type="ecore:EClass" name="Parameter">
             <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
             <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1"
                 eType="#//ocl20/pivot/examples/pml/JavaType"/>
-            <eStructuralFeatures xsi:type="ecore:EReference" name="service" lowerBound="1"
-                eType="#//ocl20/pivot/examples/pml/Service" transient="true" eOpposite="#//ocl20/pivot/examples/pml/Service/parameters"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="operation" lowerBound="1"
+                eType="#//ocl20/pivot/examples/pml/Operation" transient="true" eOpposite="#//ocl20/pivot/examples/pml/Operation/parameters"/>
           </eClassifiers>
           <eClassifiers xsi:type="ecore:EClass" name="PluginPackage">
             <eStructuralFeatures xsi:type="ecore:EReference" name="plugins" upperBound="-1"

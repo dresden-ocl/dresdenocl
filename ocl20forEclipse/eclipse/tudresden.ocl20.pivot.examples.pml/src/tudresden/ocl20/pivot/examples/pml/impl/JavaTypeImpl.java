@@ -1,33 +1,30 @@
 /**
- * Copyright (C) 2009 by Claas Wilke (info@claaswilke.de)
- * 
- * This file is part of the PML Example of Dresden OCL2 for Eclipse.
- * 
- * Dresden OCL2 for Eclipse is free software: you can redistribute it and/or modify 
- * it under the terms of the GNU Lesser General Public License as published by the 
- * Free Software Foundation, either version 3 of the License, or (at your option)
- * any later version.
- * 
- * Dresden OCL2 for Eclipse is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License 
- * for more details.
- * 
- * You should have received a copy of the GNU Lesser General Public License along 
- * with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
+ * <copyright>
+ * </copyright>
  *
  * $Id$
  */
 package tudresden.ocl20.pivot.examples.pml.impl;
 
+import java.util.Collection;
+
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
+
+import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.EObjectResolvingEList;
+import org.eclipse.emf.ecore.util.InternalEList;
+
 import tudresden.ocl20.pivot.examples.pml.JavaType;
+import tudresden.ocl20.pivot.examples.pml.Operation;
 import tudresden.ocl20.pivot.examples.pml.PmlPackage;
 
 /**
@@ -38,6 +35,8 @@ import tudresden.ocl20.pivot.examples.pml.PmlPackage;
  * The following features are implemented:
  * <ul>
  *   <li>{@link tudresden.ocl20.pivot.examples.pml.impl.JavaTypeImpl#getFullyQualifiedName <em>Fully Qualified Name</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.examples.pml.impl.JavaTypeImpl#getImplements <em>Implements</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.examples.pml.impl.JavaTypeImpl#getOperations <em>Operations</em>}</li>
  * </ul>
  * </p>
  *
@@ -63,6 +62,26 @@ public class JavaTypeImpl extends EObjectImpl implements JavaType {
 	 * @ordered
 	 */
 	protected String fullyQualifiedName = FULLY_QUALIFIED_NAME_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getImplements() <em>Implements</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getImplements()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<JavaType> implements_;
+
+	/**
+	 * The cached value of the '{@link #getOperations() <em>Operations</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOperations()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Operation> operations;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -109,11 +128,53 @@ public class JavaTypeImpl extends EObjectImpl implements JavaType {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<JavaType> getImplements() {
+		if (implements_ == null) {
+			implements_ = new EObjectResolvingEList<JavaType>(JavaType.class, this, PmlPackage.JAVA_TYPE__IMPLEMENTS);
+		}
+		return implements_;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<Operation> getOperations() {
+		if (operations == null) {
+			operations = new EObjectContainmentEList<Operation>(Operation.class, this, PmlPackage.JAVA_TYPE__OPERATIONS);
+		}
+		return operations;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case PmlPackage.JAVA_TYPE__OPERATIONS:
+				return ((InternalEList<?>)getOperations()).basicRemove(otherEnd, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case PmlPackage.JAVA_TYPE__FULLY_QUALIFIED_NAME:
 				return getFullyQualifiedName();
+			case PmlPackage.JAVA_TYPE__IMPLEMENTS:
+				return getImplements();
+			case PmlPackage.JAVA_TYPE__OPERATIONS:
+				return getOperations();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -123,11 +184,20 @@ public class JavaTypeImpl extends EObjectImpl implements JavaType {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case PmlPackage.JAVA_TYPE__FULLY_QUALIFIED_NAME:
 				setFullyQualifiedName((String)newValue);
+				return;
+			case PmlPackage.JAVA_TYPE__IMPLEMENTS:
+				getImplements().clear();
+				getImplements().addAll((Collection<? extends JavaType>)newValue);
+				return;
+			case PmlPackage.JAVA_TYPE__OPERATIONS:
+				getOperations().clear();
+				getOperations().addAll((Collection<? extends Operation>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -144,6 +214,12 @@ public class JavaTypeImpl extends EObjectImpl implements JavaType {
 			case PmlPackage.JAVA_TYPE__FULLY_QUALIFIED_NAME:
 				setFullyQualifiedName(FULLY_QUALIFIED_NAME_EDEFAULT);
 				return;
+			case PmlPackage.JAVA_TYPE__IMPLEMENTS:
+				getImplements().clear();
+				return;
+			case PmlPackage.JAVA_TYPE__OPERATIONS:
+				getOperations().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -158,24 +234,31 @@ public class JavaTypeImpl extends EObjectImpl implements JavaType {
 		switch (featureID) {
 			case PmlPackage.JAVA_TYPE__FULLY_QUALIFIED_NAME:
 				return FULLY_QUALIFIED_NAME_EDEFAULT == null ? fullyQualifiedName != null : !FULLY_QUALIFIED_NAME_EDEFAULT.equals(fullyQualifiedName);
+			case PmlPackage.JAVA_TYPE__IMPLEMENTS:
+				return implements_ != null && !implements_.isEmpty();
+			case PmlPackage.JAVA_TYPE__OPERATIONS:
+				return operations != null && !operations.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
+	/*
+	 * (non-Javadoc)
+	 * @see org.eclipse.emf.ecore.impl.BasicEObjectImpl#toString()
+	 * @generated NOT
 	 */
-	@Override
 	public String toString() {
-		if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (fullyQualifiedName: ");
-		result.append(fullyQualifiedName);
-		result.append(')');
-		return result.toString();
+		String result;
+
+		result = this.getClass().getSimpleName();
+		result += "[";
+		result += "fullyQualifiedName = " + fullyQualifiedName;
+		result += ", implements = " + implements_;
+		result += ", operations = " + operations;
+		result += "]";
+
+		return result;
 	}
-
+	
 } //JavaTypeImpl

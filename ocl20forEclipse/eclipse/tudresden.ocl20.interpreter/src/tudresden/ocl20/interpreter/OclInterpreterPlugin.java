@@ -38,7 +38,7 @@ import tudresden.ocl20.interpreter.event.IInterpreterRegistryListener;
 import tudresden.ocl20.interpreter.internal.InterpreterRegistry;
 import tudresden.ocl20.interpreter.internal.OclInterpreter;
 import tudresden.ocl20.logging.LoggingPlugin;
-import tudresden.ocl20.pivot.modelbus.IModelInstance;
+import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance;
 
 /**
  * <p>

@@ -1,20 +1,6 @@
 /**
- * Copyright (C) 2009 by Claas Wilke (info@claaswilke.de)
- * 
- * This file is part of the PML Example of Dresden OCL2 for Eclipse.
- * 
- * Dresden OCL2 for Eclipse is free software: you can redistribute it and/or modify 
- * it under the terms of the GNU Lesser General Public License as published by the 
- * Free Software Foundation, either version 3 of the License, or (at your option)
- * any later version.
- * 
- * Dresden OCL2 for Eclipse is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License 
- * for more details.
- * 
- * You should have received a copy of the GNU Lesser General Public License along 
- * with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
+ * <copyright>
+ * </copyright>
  *
  * $Id$
  */
@@ -38,6 +24,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link tudresden.ocl20.pivot.examples.pml.Plugin#getProvider <em>Provider</em>}</li>
  *   <li>{@link tudresden.ocl20.pivot.examples.pml.Plugin#getFeature <em>Feature</em>}</li>
  *   <li>{@link tudresden.ocl20.pivot.examples.pml.Plugin#getExtensionPoints <em>Extension Points</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.examples.pml.Plugin#getExtensions <em>Extensions</em>}</li>
  *   <li>{@link tudresden.ocl20.pivot.examples.pml.Plugin#getServices <em>Services</em>}</li>
  *   <li>{@link tudresden.ocl20.pivot.examples.pml.Plugin#getActivator <em>Activator</em>}</li>
  * </ul>
@@ -199,9 +186,24 @@ public interface Plugin extends EObject {
 	EList<ExtensionPoint> getExtensionPoints();
 
 	/**
+	 * Returns the value of the '<em><b>Extensions</b></em>' containment reference list.
+	 * The list contents are of type {@link tudresden.ocl20.pivot.examples.pml.Extension}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Extensions</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Extensions</em>' containment reference list.
+	 * @see tudresden.ocl20.pivot.examples.pml.PmlPackage#getPlugin_Extensions()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<Extension> getExtensions();
+
+	/**
 	 * Returns the value of the '<em><b>Services</b></em>' containment reference list.
-	 * The list contents are of type {@link tudresden.ocl20.pivot.examples.pml.Service}.
-	 * It is bidirectional and its opposite is '{@link tudresden.ocl20.pivot.examples.pml.Service#getPlugin <em>Plugin</em>}'.
+	 * The list contents are of type {@link tudresden.ocl20.pivot.examples.pml.Operation}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Services</em>' containment reference list isn't clear,
@@ -210,11 +212,10 @@ public interface Plugin extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Services</em>' containment reference list.
 	 * @see tudresden.ocl20.pivot.examples.pml.PmlPackage#getPlugin_Services()
-	 * @see tudresden.ocl20.pivot.examples.pml.Service#getPlugin
-	 * @model opposite="plugin" containment="true"
+	 * @model containment="true"
 	 * @generated
 	 */
-	EList<Service> getServices();
+	EList<Operation> getServices();
 
 	/**
 	 * Returns the value of the '<em><b>Activator</b></em>' reference.

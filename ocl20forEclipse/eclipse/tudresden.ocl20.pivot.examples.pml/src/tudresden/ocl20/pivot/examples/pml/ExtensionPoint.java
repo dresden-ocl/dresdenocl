@@ -1,20 +1,6 @@
 /**
- * Copyright (C) 2009 by Claas Wilke (info@claaswilke.de)
- * 
- * This file is part of the PML Example of Dresden OCL2 for Eclipse.
- * 
- * Dresden OCL2 for Eclipse is free software: you can redistribute it and/or modify 
- * it under the terms of the GNU Lesser General Public License as published by the 
- * Free Software Foundation, either version 3 of the License, or (at your option)
- * any later version.
- * 
- * Dresden OCL2 for Eclipse is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License 
- * for more details.
- * 
- * You should have received a copy of the GNU Lesser General Public License along 
- * with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
+ * <copyright>
+ * </copyright>
  *
  * $Id$
  */
@@ -32,7 +18,7 @@ import org.eclipse.emf.ecore.EObject;
  * <ul>
  *   <li>{@link tudresden.ocl20.pivot.examples.pml.ExtensionPoint#getId <em>Id</em>}</li>
  *   <li>{@link tudresden.ocl20.pivot.examples.pml.ExtensionPoint#getPlugin <em>Plugin</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.examples.pml.ExtensionPoint#getType <em>Type</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.examples.pml.ExtensionPoint#getInterface <em>Interface</em>}</li>
  * </ul>
  * </p>
  *
@@ -96,29 +82,29 @@ public interface ExtensionPoint extends EObject {
 	void setPlugin(Plugin value);
 
 	/**
-	 * Returns the value of the '<em><b>Type</b></em>' reference.
+	 * Returns the value of the '<em><b>Interface</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Type</em>' reference isn't clear,
+	 * If the meaning of the '<em>Interface</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Type</em>' reference.
-	 * @see #setType(JavaType)
-	 * @see tudresden.ocl20.pivot.examples.pml.PmlPackage#getExtensionPoint_Type()
+	 * @return the value of the '<em>Interface</em>' reference.
+	 * @see #setInterface(JavaType)
+	 * @see tudresden.ocl20.pivot.examples.pml.PmlPackage#getExtensionPoint_Interface()
 	 * @model required="true"
 	 * @generated
 	 */
-	JavaType getType();
+	JavaType getInterface();
 
 	/**
-	 * Sets the value of the '{@link tudresden.ocl20.pivot.examples.pml.ExtensionPoint#getType <em>Type</em>}' reference.
+	 * Sets the value of the '{@link tudresden.ocl20.pivot.examples.pml.ExtensionPoint#getInterface <em>Interface</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Type</em>' reference.
-	 * @see #getType()
+	 * @param value the new value of the '<em>Interface</em>' reference.
+	 * @see #getInterface()
 	 * @generated
 	 */
-	void setType(JavaType value);
+	void setInterface(JavaType value);
 
 } // ExtensionPoint
