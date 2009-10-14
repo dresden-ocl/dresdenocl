@@ -2,8 +2,8 @@ Changes and Bugs fixed during the different Releases
 ====================================================
 
 
-Release 1.3 (Scheduled: October 2009)
-================================
+Release 2.0 (Scheduled: October 2009)
+=====================================
 * The Pivot Model do now contain the PrimitiveTypeKind Void for the adaptation
   of a void Type for Operations without return Parameter.
 
@@ -36,6 +36,9 @@ Release 1.3 (Scheduled: October 2009)
   - Constraints are now interpreted for constrained 
     sub-classes as well.
   - Local Variables are now only declared locally.
+
+* The interpreter plugins have been renamed from 
+  tudresden.ocl20.interpreter.* to tudresden.ocl20.pivot.interpreter.*
 
 * A bug in the Ocl22Java Code Generator was fixed.
   - The variables for Comparators are now right numbered.
