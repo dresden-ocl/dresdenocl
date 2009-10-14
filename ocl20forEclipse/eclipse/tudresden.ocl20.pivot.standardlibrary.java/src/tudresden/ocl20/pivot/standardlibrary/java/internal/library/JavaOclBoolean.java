@@ -133,14 +133,22 @@ public class JavaOclBoolean extends JavaOclLibraryObject implements OclBoolean {
 
 		OclBoolean result;
 
-		checkUndefinedAndInvalid(this, aBoolean);
+		checkUndefinedAndInvalid(this);
 
-		if (!this.isTrue() || !aBoolean.isTrue()) {
+		if (!this.isTrue()) {
 			result = FALSE;
 		}
 
 		else {
-			result = TRUE;
+			checkUndefinedAndInvalid(aBoolean);
+
+			if (!this.isTrue() || !aBoolean.isTrue()) {
+				result = FALSE;
+			}
+
+			else {
+				result = TRUE;
+			}
 		}
 
 		return result;
@@ -236,14 +244,23 @@ public class JavaOclBoolean extends JavaOclLibraryObject implements OclBoolean {
 
 		OclBoolean result;
 
-		checkUndefinedAndInvalid(this, aBoolean);
+		checkUndefinedAndInvalid(this);
 
-		if (this.isTrue() || aBoolean.isTrue()) {
+		if (this.isTrue()) {
 			result = TRUE;
 		}
 
 		else {
-			result = FALSE;
+
+			checkUndefinedAndInvalid(aBoolean);
+
+			if (this.isTrue() || aBoolean.isTrue()) {
+				result = TRUE;
+			}
+
+			else {
+				result = FALSE;
+			}
 		}
 
 		return result;

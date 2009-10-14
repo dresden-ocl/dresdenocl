@@ -402,88 +402,86 @@ public abstract class JavaOclAny implements OclAny {
 
 		OclAny result;
 
-		result = checkUndefinedAndInvalid(operation, args);
+		// result = checkUndefinedAndInvalid(operation, args);
 
-		if (result == null) {
+		String opName;
 
-			String opName;
+		opName = operation.getName();
+		/*
+		 * possibly map from operation name to standard library operation name
+		 * (e.g., "+" -> "add")
+		 */
+		opName = getOperationName(opName, args.length + 1);
 
-			opName = operation.getName();
-			/*
-			 * possibly map from operation name to standard library operation name
-			 * (e.g., "+" -> "add")
-			 */
-			opName = getOperationName(opName, args.length + 1);
-
-			/* translate arguments */
-			List<Class<? extends OclAny>> argClasses =
-					new LinkedList<Class<? extends OclAny>>();
-			for (OclAny arg : args) {
-				argClasses.add(arg.getClass());
-			}
-
-			Class<? extends OclAny> thisClass = this.getClass();
-
-			/* try to invoke the operation */
-			try {
-				Method methodToInvoke =
-						findMethod(opName, thisClass, argClasses.toArray(new Class[0]));
-
-				Object invocationResult = methodToInvoke.invoke(this, (Object[]) args);
-
-				result = (OclAny) invocationResult;
-
-			}
-			/* if anything goes wrong, wrap it in an InvalidException */
-			catch (SecurityException e) {
-				result =
-						JavaStandardLibraryFactory.INSTANCE.createOclInvalid(operation
-								.getType(), e);
-			} catch (NoSuchMethodException e) {
-				result =
-						JavaStandardLibraryFactory.INSTANCE.createOclInvalid(operation
-								.getType(), e);
-			} catch (IllegalArgumentException e) {
-				result =
-						JavaStandardLibraryFactory.INSTANCE.createOclInvalid(operation
-								.getType(), e);
-			} catch (IllegalAccessException e) {
-				result =
-						JavaStandardLibraryFactory.INSTANCE.createOclInvalid(operation
-								.getType(), e);
-			} catch (InvocationTargetException e) {
-				result =
-						JavaStandardLibraryFactory.INSTANCE.createOclInvalid(operation
-								.getType(), e);
-			}
-			/*
-			 * In case, an operation has a problem and throws an exception, it has to
-			 * be an InvalidException. At this point, it is known, which type
-			 * OclInvalid should have.
-			 */
-			catch (InvalidException e) {
-				result =
-						JavaStandardLibraryFactory.INSTANCE.createOclInvalid(operation
-								.getType(), e.getCause());
-			}
-			/*
-			 * This happens, if an element involved in the invocation of the method is
-			 * undefined.
-			 */
-			catch (UndefinedException e) {
-				result =
-						JavaStandardLibraryFactory.INSTANCE.createOclUndefined(operation
-								.getType(), e.getUndefinedReason());
-			}
-			/*
-			 * Just in case, if the return type is not an instance of OclAny.
-			 */
-			catch (ClassCastException e) {
-				result =
-						JavaStandardLibraryFactory.INSTANCE.createOclInvalid(operation
-								.getType(), e);
-			}
+		/* translate arguments */
+		List<Class<? extends OclAny>> argClasses =
+				new LinkedList<Class<? extends OclAny>>();
+		for (OclAny arg : args) {
+			argClasses.add(arg.getClass());
 		}
+
+		Class<? extends OclAny> thisClass = this.getClass();
+
+		/* try to invoke the operation */
+		try {
+			Method methodToInvoke =
+					findMethod(opName, thisClass, argClasses.toArray(new Class[0]));
+
+			Object invocationResult = methodToInvoke.invoke(this, (Object[]) args);
+
+			result = (OclAny) invocationResult;
+
+		}
+		/* if anything goes wrong, wrap it in an InvalidException */
+		catch (SecurityException e) {
+			result =
+					JavaStandardLibraryFactory.INSTANCE.createOclInvalid(operation
+							.getType(), e);
+		} catch (NoSuchMethodException e) {
+			result =
+					JavaStandardLibraryFactory.INSTANCE.createOclInvalid(operation
+							.getType(), e);
+		} catch (IllegalArgumentException e) {
+			result =
+					JavaStandardLibraryFactory.INSTANCE.createOclInvalid(operation
+							.getType(), e);
+		} catch (IllegalAccessException e) {
+			result =
+					JavaStandardLibraryFactory.INSTANCE.createOclInvalid(operation
+							.getType(), e);
+		} catch (InvocationTargetException e) {
+			result =
+					JavaStandardLibraryFactory.INSTANCE.createOclInvalid(operation
+							.getType(), e);
+		}
+		/*
+		 * In case, an operation has a problem and throws an exception, it has to be
+		 * an InvalidException. At this point, it is known, which type OclInvalid
+		 * should have.
+		 */
+		catch (InvalidException e) {
+			result =
+					JavaStandardLibraryFactory.INSTANCE.createOclInvalid(operation
+							.getType(), e.getCause());
+		}
+		/*
+		 * This happens, if an element involved in the invocation of the method is
+		 * undefined.
+		 */
+		catch (UndefinedException e) {
+			result =
+					JavaStandardLibraryFactory.INSTANCE.createOclUndefined(operation
+							.getType(), e.getUndefinedReason());
+		}
+		/*
+		 * Just in case, if the return type is not an instance of OclAny.
+		 */
+		catch (ClassCastException e) {
+			result =
+					JavaStandardLibraryFactory.INSTANCE.createOclInvalid(operation
+							.getType(), e);
+		}
+
 		// no else.
 
 		return result;
