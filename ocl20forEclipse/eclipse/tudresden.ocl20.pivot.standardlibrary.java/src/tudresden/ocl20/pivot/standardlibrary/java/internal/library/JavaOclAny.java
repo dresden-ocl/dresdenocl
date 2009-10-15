@@ -450,9 +450,18 @@ public abstract class JavaOclAny implements OclAny {
 					JavaStandardLibraryFactory.INSTANCE.createOclInvalid(operation
 							.getType(), e);
 		} catch (InvocationTargetException e) {
-			result =
-					JavaStandardLibraryFactory.INSTANCE.createOclInvalid(operation
-							.getType(), e);
+
+			if (e.getCause() != null && e.getCause() instanceof UndefinedException) {
+				result =
+						JavaStandardLibraryFactory.INSTANCE.createOclUndefined(operation
+								.getType(), e.getCause().getMessage());
+			}
+
+			else {
+				result =
+						JavaStandardLibraryFactory.INSTANCE.createOclInvalid(operation
+								.getType(), e);
+			}
 		}
 		/*
 		 * In case, an operation has a problem and throws an exception, it has to be
