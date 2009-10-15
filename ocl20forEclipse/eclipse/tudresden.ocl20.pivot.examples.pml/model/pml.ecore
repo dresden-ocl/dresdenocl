@@ -45,7 +45,7 @@
             <eStructuralFeatures xsi:type="ecore:EReference" name="implementation"
                 eType="#//ocl20/pivot/examples/pml/JavaType"/>
             <eStructuralFeatures xsi:type="ecore:EReference" name="extensionPoint"
-                eType="#//ocl20/pivot/examples/pml/ExtensionPoint"/>
+                lowerBound="1" eType="#//ocl20/pivot/examples/pml/ExtensionPoint"/>
           </eClassifiers>
           <eClassifiers xsi:type="ecore:EClass" name="JavaType">
             <eStructuralFeatures xsi:type="ecore:EAttribute" name="fullyQualifiedName"
