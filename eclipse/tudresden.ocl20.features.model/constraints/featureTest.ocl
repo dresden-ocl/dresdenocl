@@ -1,0 +1,18 @@
+package dresdenocl
+
+context Dresden_OCL2_for_Eclipse
+inv metamodelSupport : self.supportsDifferentMetamodels = true
+
+
+context Dresden_OCL2_for_Eclipse
+inv oclStandard : self.fullOCLStandard = true
+
+
+context Dresden_OCL2_for_Eclipse
+inv interpretationAndCodeGeneration : self.interpretationAndCodeGeneration = true
+
+
+context Dresden_OCL2_for_Eclipse
+inv modelInstanceSupport : self.supportsDifferentModelInstanceTypes = true
+
+endpackage
