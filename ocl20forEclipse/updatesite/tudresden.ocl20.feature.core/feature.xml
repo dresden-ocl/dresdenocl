@@ -2,7 +2,7 @@
 <feature
       id="tudresden.ocl20.feature.core"
       label="Dresden OCL2 for Eclipse Core"
-      version="1.2.0"
+      version="2.0.0"
       provider-name="TU Dresden">
 
    <description url="http://dresden-ocl.sourceforge.net/4eclipse_packages.html">
@@ -281,6 +281,20 @@ Library.
 
    <plugin
          id="tudresden.ocl20.logging"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="tudresden.ocl20.pivot.testsuite"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="tudresden.ocl20.pivot.examples.royalandloyal"
          download-size="0"
          install-size="0"
          version="0.0.0"

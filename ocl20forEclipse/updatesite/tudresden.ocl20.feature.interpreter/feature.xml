@@ -2,7 +2,7 @@
 <feature
       id="tudresden.ocl20.feature.interpreter"
       label="Dresden OCL2 for Eclipse Interpreter"
-      version="1.2.0"
+      version="2.0.0"
       provider-name="TU Dresden">
 
    <description url="http://dresden-ocl.sourceforge.net/4eclipse_packages.html">
@@ -192,6 +192,12 @@ Library.
       <import plugin="org.apache.commons.lang"/>
       <import plugin="org.eclipse.ui"/>
       <import plugin="tudresden.ocl20.pivot.modelbus.ui"/>
+      <import plugin="tudresden.ocl20.pivot.metamodels.uml2"/>
+      <import plugin="tudresden.ocl20.pivot.modelinstancetype.java"/>
+      <import plugin="tudresden.ocl20.pivot.examples.royalandloyal"/>
+      <import plugin="tudresden.ocl20.pivot.ocl2parser"/>
+      <import plugin="org.junit4"/>
+      <import plugin="tudresden.ocl20.pivot.testsuite"/>
    </requires>
 
    <plugin
@@ -203,6 +209,13 @@ Library.
 
    <plugin
          id="tudresden.ocl20.interpreter.ui"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="tudresden.ocl20.interpreter.test"
          download-size="0"
          install-size="0"
          version="0.0.0"

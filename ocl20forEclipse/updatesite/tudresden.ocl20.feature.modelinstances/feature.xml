@@ -2,7 +2,7 @@
 <feature
       id="tudresden.ocl20.feature.modelinstances"
       label="Dresden OCL2 for Eclipse Model Instances"
-      version="1.2.0"
+      version="2.0.0"
       provider-name="TU Dresden">
 
    <description url="http://dresden-ocl.sourceforge.net/4eclipse_intro.html">
@@ -183,12 +183,20 @@ Library.
 
    <requires>
       <import plugin="org.eclipse.core.runtime"/>
+      <import plugin="tudresden.ocl20.pivot.pivotmodel"/>
       <import plugin="tudresden.ocl20.pivot.essentialocl"/>
       <import plugin="tudresden.ocl20.pivot.essentialocl.standardlibrary"/>
       <import plugin="tudresden.ocl20.pivot.modelbus"/>
-      <import plugin="tudresden.ocl20.pivot.pivotmodel"/>
-      <import plugin="tudresden.ocl20.pivot.standardlibrary.java"/>
       <import plugin="org.eclipse.emf.ecore"/>
+      <import plugin="tudresden.ocl20.pivot.standardlibrary.java"/>
+      <import plugin="tudresden.ocl20.logging"/>
+      <import plugin="org.junit4"/>
+      <import plugin="tudresden.ocl20.pivot.pivotmodel" version="1.2.0" match="greaterOrEqual"/>
+      <import plugin="tudresden.ocl20.pivot.modelbus" version="1.2.0" match="greaterOrEqual"/>
+      <import plugin="tudresden.ocl20.pivot.modelinstancetype.ecore" version="1.2.0" match="greaterOrEqual"/>
+      <import plugin="tudresden.ocl20.pivot.testsuite" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="tudresden.ocl20.pivot.modelinstancetype.test" version="1.2.0" match="greaterOrEqual"/>
+      <import plugin="tudresden.ocl20.pivot.metamodels.uml2" version="1.2.0" match="greaterOrEqual"/>
    </requires>
 
    <plugin
@@ -200,6 +208,27 @@ Library.
 
    <plugin
          id="tudresden.ocl20.pivot.modelinstancetype.java"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="tudresden.ocl20.pivot.modelinstancetype.ecore.test"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="tudresden.ocl20.pivot.modelinstancetype.java.test"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="tudresden.ocl20.pivot.modelinstancetype.test"
          download-size="0"
          install-size="0"
          version="0.0.0"

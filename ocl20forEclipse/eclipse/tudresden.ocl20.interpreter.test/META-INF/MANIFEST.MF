@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Interpreter Test Plug-in
 Bundle-SymbolicName: tudresden.ocl20.interpreter.test;singleton:=true
-Bundle-Version: 1.2.0
+Bundle-Version: 2.0.0
 Bundle-Activator: tudresden.ocl20.interpreter.test.OclInterpreterTestPlugin
 Require-Bundle: org.eclipse.core.runtime,
  tudresden.ocl20.interpreter,
@@ -12,7 +12,6 @@ Require-Bundle: org.eclipse.core.runtime,
  tudresden.ocl20.pivot.essentialocl,
  tudresden.ocl20.pivot.essentialocl.standardlibrary,
  tudresden.ocl20.pivot.examples.royalandloyal,
- tudresden.ocl20.pivot.ocl2java.types,
  tudresden.ocl20.pivot.ocl2parser,
  tudresden.ocl20.pivot.standardlibrary.java,
  org.junit4,

@@ -2,7 +2,7 @@
 <feature
       id="tudresden.ocl20.feature.metamodels"
       label="Dresden OCL2 for Eclipse Metamodels"
-      version="1.2.0"
+      version="2.0.0"
       provider-name="TU Dresden">
 
    <description url="http://dresden-ocl.sourceforge.net/4eclipse_intro.html">
@@ -194,6 +194,10 @@ Library.
       <import plugin="org.eclipse.emf.ecore"/>
       <import plugin="org.eclipse.emf.ecore.xmi"/>
       <import plugin="org.eclipse.uml2.uml"/>
+      <import plugin="org.eclipse.ui"/>
+      <import plugin="org.junit4"/>
+      <import plugin="tudresden.ocl20.pivot.testsuite" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="tudresden.ocl20.pivot.examples.royalandloyal"/>
    </requires>
 
    <plugin
@@ -205,6 +209,41 @@ Library.
 
    <plugin
          id="tudresden.ocl20.pivot.metamodels.uml2"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="tudresden.ocl20.pivot.metamodels.ecore.test"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="tudresden.ocl20.pivot.metamodels.java"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="tudresden.ocl20.pivot.metamodels.java.test"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="tudresden.ocl20.pivot.metamodels.test"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="tudresden.ocl20.pivot.metamodels.uml2.test"
          download-size="0"
          install-size="0"
          version="0.0.0"
