@@ -1,12 +1,12 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Ui Plug-in
-Bundle-SymbolicName: tudresden.ocl20.interpreter.ui;singleton:=true
+Bundle-SymbolicName: tudresden.ocl20.pivot.interpreter.ui;singleton:=true
 Bundle-Version: 2.0.0
-Bundle-Activator: tudresden.ocl20.interpreter.ui.InterpreterUIPlugin
+Bundle-Activator: tudresden.ocl20.pivot.interpreter.ui.InterpreterUIPlugin
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
- tudresden.ocl20.interpreter,
+ tudresden.ocl20.pivot.interpreter,
  tudresden.ocl20.logging,
  tudresden.ocl20.pivot.modelbus,
  tudresden.ocl20.pivot.pivotmodel,

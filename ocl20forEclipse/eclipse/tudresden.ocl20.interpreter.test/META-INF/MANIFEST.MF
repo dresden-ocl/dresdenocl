@@ -1,11 +1,11 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Interpreter Test Plug-in
-Bundle-SymbolicName: tudresden.ocl20.interpreter.test;singleton:=true
+Bundle-SymbolicName: tudresden.ocl20.pivot.interpreter.test;singleton:=true
 Bundle-Version: 2.0.0
-Bundle-Activator: tudresden.ocl20.interpreter.test.OclInterpreterTestPlugin
+Bundle-Activator: tudresden.ocl20.pivot.interpreter.test.OclInterpreterTestPlugin
 Require-Bundle: org.eclipse.core.runtime,
- tudresden.ocl20.interpreter,
+ tudresden.ocl20.pivot.interpreter,
  tudresden.ocl20.pivot.modelbus,
  tudresden.ocl20.pivot.metamodels.uml2,
  tudresden.ocl20.pivot.modelinstancetype.java,
