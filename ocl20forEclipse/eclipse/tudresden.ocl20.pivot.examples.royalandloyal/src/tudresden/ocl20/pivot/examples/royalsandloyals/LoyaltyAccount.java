@@ -110,4 +110,30 @@ public class LoyaltyAccount {
 
 		this.transactions.add(aTransaction);
 	}
+
+	@Override
+	public String toString() {
+
+		StringBuilder builder = new StringBuilder();
+		builder.append("LoyaltyAccount [");
+		builder.append("number=");
+		builder.append(number);
+		builder.append(", points=");
+		builder.append(points);
+		builder.append(", totalPointsEarned=");
+		builder.append(totalPointsEarned);
+		builder.append(", ");
+		if (transactions != null) {
+			builder.append("transactions=");
+			builder.append("[");
+			for (Transaction transaction : transactions) {
+				builder.append(transaction.getAmount());
+				builder.append(", ");
+			}
+			builder.append("]");
+			builder.append(", ");
+		}
+		builder.append("]");
+		return builder.toString();
+	}
 }

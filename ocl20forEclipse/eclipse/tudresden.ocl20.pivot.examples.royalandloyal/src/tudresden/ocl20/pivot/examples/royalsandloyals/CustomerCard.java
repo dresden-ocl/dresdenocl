@@ -132,4 +132,50 @@ public class CustomerCard {
 
 		this.membership = membership;
 	}
+
+	@Override
+	public String toString() {
+
+		StringBuilder builder = new StringBuilder();
+		builder.append("CustomerCard [");
+		if (color != null) {
+			builder.append("color=");
+			builder.append(color);
+			builder.append(", ");
+		}
+		if (owner != null) {
+			builder.append("owner=");
+			builder.append(owner.getName());
+			builder.append(", ");
+		}
+		if (printedName != null) {
+			builder.append("printedName=");
+			builder.append(printedName);
+			builder.append(", ");
+		}
+		if (transactions != null) {
+			builder.append("transactions=");
+			builder.append("[");
+			for (Transaction transaction : transactions) {
+				builder.append(transaction.getAmount());
+				builder.append(", ");
+			}
+			builder.append("]");
+			builder.append(", ");
+		}
+		builder.append("valid=");
+		builder.append(valid);
+		builder.append(", ");
+		if (validFrom != null) {
+			builder.append("validFrom=");
+			builder.append(validFrom);
+			builder.append(", ");
+		}
+		if (validThru != null) {
+			builder.append("validThru=");
+			builder.append(validThru);
+		}
+		builder.append("]");
+		return builder.toString();
+	}
 }

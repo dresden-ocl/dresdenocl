@@ -114,4 +114,38 @@ public class Transaction {
 
 		this.service = service;
 	}
+
+	@Override
+	public String toString() {
+
+		StringBuilder builder = new StringBuilder();
+		builder.append("Transaction [");
+		if (account != null) {
+			builder.append("account=");
+			builder.append(account.getCustomerName());
+			builder.append(", ");
+		}
+		builder.append("amount=");
+		builder.append(amount);
+		builder.append(", ");
+		if (card != null) {
+			builder.append("card=");
+			builder.append(card.getPrintedName());
+			builder.append(", ");
+		}
+		if (date != null) {
+			builder.append("date=");
+			builder.append(date);
+			builder.append(", ");
+		}
+		builder.append("points=");
+		builder.append(points);
+		builder.append(", ");
+		if (service != null) {
+			builder.append("service=");
+			builder.append(service.getServiceNr());
+		}
+		builder.append("]");
+		return builder.toString();
+	}
 }

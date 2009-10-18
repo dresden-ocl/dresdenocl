@@ -77,4 +77,32 @@ public class ServiceLevel {
 
 		this.availableServices.add(anAvailableService);
 	}
+
+	@Override
+	public String toString() {
+
+		StringBuilder builder = new StringBuilder();
+		builder.append("ServiceLevel [");
+		if (availableServices != null) {
+			builder.append("availableServices=");
+			builder.append("[");
+			for (Service availableService : availableServices) {
+				builder.append(availableService.getServiceNr());
+				builder.append(", ");
+			}
+			builder.append("]");
+			builder.append(", ");
+		}
+		if (name != null) {
+			builder.append("name=");
+			builder.append(name);
+			builder.append(", ");
+		}
+		if (program != null) {
+			builder.append("program=");
+			builder.append(program.getName());
+		}
+		builder.append("]");
+		return builder.toString();
+	}
 }

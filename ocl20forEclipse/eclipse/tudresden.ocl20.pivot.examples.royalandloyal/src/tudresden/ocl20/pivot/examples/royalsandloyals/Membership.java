@@ -77,4 +77,27 @@ public class Membership {
 
 		this.currentLevel = currentLevel;
 	}
+
+	@Override
+	public String toString() {
+
+		StringBuilder builder = new StringBuilder();
+		builder.append("Membership [");
+		if (card != null) {
+			builder.append("card=");
+			builder.append(card.getPrintedName());
+			builder.append(", ");
+		}
+		if (currentLevel != null) {
+			builder.append("currentLevel=");
+			builder.append(currentLevel.getName());
+			builder.append(", ");
+		}
+		if (program != null) {
+			builder.append("program=");
+			builder.append(program.getName());
+		}
+		builder.append("]");
+		return builder.toString();
+	}
 }

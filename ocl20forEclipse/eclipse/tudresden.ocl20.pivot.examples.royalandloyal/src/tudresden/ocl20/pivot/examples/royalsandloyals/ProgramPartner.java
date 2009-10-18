@@ -78,4 +78,40 @@ public class ProgramPartner {
 		this.deliveredServices.add(aDeliveredService);
 	}
 
+	@Override
+	public String toString() {
+
+		StringBuilder builder = new StringBuilder();
+		builder.append("ProgramPartner [");
+		if (deliveredServices != null) {
+			builder.append("deliveredServices=");
+			builder.append("[");
+			for (Service deliveredService : deliveredServices) {
+				builder.append(deliveredService.getServiceNr());
+				builder.append(", ");
+			}
+			builder.append("]");
+			builder.append(", ");
+		}
+		if (name != null) {
+			builder.append("name=");
+			builder.append(name);
+			builder.append(", ");
+		}
+		builder.append("numberOfCustomers=");
+		builder.append(numberOfCustomers);
+		builder.append(", ");
+		if (programs != null) {
+			builder.append("programs=");
+			builder.append("[");
+			for (LoyaltyProgram program : programs) {
+				builder.append(program.getName());
+				builder.append(", ");
+			}
+			builder.append("]");
+		}
+		builder.append("]");
+		return builder.toString();
+	}
+
 }

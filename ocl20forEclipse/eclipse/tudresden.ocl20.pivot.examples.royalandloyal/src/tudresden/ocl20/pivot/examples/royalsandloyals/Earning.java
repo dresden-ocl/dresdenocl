@@ -28,4 +28,38 @@ package tudresden.ocl20.pivot.examples.royalsandloyals;
  */
 public class Earning extends Transaction {
 
+	@Override
+	public String toString() {
+
+		StringBuilder builder = new StringBuilder();
+		builder.append("Earning [");
+		if (account != null) {
+			builder.append("account=");
+			builder.append(account.getCustomerName());
+			builder.append(", ");
+		}
+		builder.append("amount=");
+		builder.append(amount);
+		builder.append(", ");
+		if (card != null) {
+			builder.append("card=");
+			builder.append(card.getPrintedName());
+			builder.append(", ");
+		}
+		if (date != null) {
+			builder.append("date=");
+			builder.append(date);
+			builder.append(", ");
+		}
+		builder.append("points=");
+		builder.append(points);
+		builder.append(", ");
+		if (service != null) {
+			builder.append("service=");
+			builder.append(service.getServiceNr());
+		}
+		builder.append("]");
+		return builder.toString();
+	}
+
 }

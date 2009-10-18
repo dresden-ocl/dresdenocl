@@ -133,4 +133,41 @@ public class Service {
 
 		this.level = level;
 	}
+
+	@Override
+	public String toString() {
+
+		StringBuilder builder = new StringBuilder();
+		builder.append("Service [condition=");
+		builder.append(condition);
+		builder.append(", ");
+		if (description != null) {
+			builder.append("description=");
+			builder.append(description);
+			builder.append(", ");
+		}
+		if (level != null) {
+			builder.append("level=");
+			builder.append(level.getName());
+			builder.append(", ");
+		}
+		if (partner != null) {
+			builder.append("partner=");
+			builder.append(partner.getName());
+			builder.append(", ");
+		}
+		builder.append("pointsBurned=");
+		builder.append(pointsBurned);
+		builder.append(", pointsEarned=");
+		builder.append(pointsEarned);
+		builder.append(", serviceNr=");
+		builder.append(serviceNr);
+		builder.append(", ");
+		if (transaction != null) {
+			builder.append("transaction=");
+			builder.append(transaction.getPoints());
+		}
+		builder.append("]");
+		return builder.toString();
+	}
 }

@@ -103,4 +103,47 @@ public class LoyaltyProgram {
 
 		this.levels.add(aLevel);
 	}
+
+	@Override
+	public String toString() {
+
+		StringBuilder builder = new StringBuilder();
+		builder.append("LoyaltyProgram [");
+		if (levels != null) {
+			builder.append("levels=");
+			builder.append("[");
+			for (ServiceLevel level : levels) {
+				builder.append(level.getName());
+				builder.append(", ");
+			}
+			builder.append("]");
+			builder.append(", ");
+		}
+		if (name != null) {
+			builder.append("name=");
+			builder.append(name);
+			builder.append(", ");
+		}
+		if (participants != null) {
+			builder.append("participants=");
+			builder.append("[");
+			for (Customer participant : participants) {
+				builder.append(participant.getName());
+				builder.append(", ");
+			}
+			builder.append("]");
+			builder.append(", ");
+		}
+		if (partners != null) {
+			builder.append("partners=");
+			builder.append("[");
+			for (ProgramPartner partner : partners) {
+				builder.append(partner.getName());
+				builder.append(", ");
+			}
+			builder.append("]");
+		}
+		builder.append("]");
+		return builder.toString();
+	}
 }

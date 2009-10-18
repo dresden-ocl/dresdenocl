@@ -125,4 +125,52 @@ public class Customer {
 
 		this.programs.add(aProgram);
 	}
+
+	@Override
+	public String toString() {
+
+		StringBuilder builder = new StringBuilder();
+		builder.append("Customer [age=");
+		builder.append(age);
+		builder.append(", ");
+		if (cards != null) {
+			builder.append("cards=");
+			builder.append("[");
+			for (CustomerCard card : cards) {
+				builder.append(card.getPrintedName());
+				builder.append(", ");
+			}
+			builder.append("]");
+			builder.append(", ");
+		}
+		if (dateOfBirth != null) {
+			builder.append("dateOfBirth=");
+			builder.append(dateOfBirth);
+			builder.append(", ");
+		}
+		builder.append("isMale=");
+		builder.append(isMale);
+		builder.append(", ");
+		if (name != null) {
+			builder.append("name=");
+			builder.append(name);
+			builder.append(", ");
+		}
+		if (programs != null) {
+			builder.append("programs=");
+			builder.append("[");
+			for (LoyaltyProgram program : programs) {
+				builder.append(program.getName());
+				builder.append(", ");
+			}
+			builder.append("]");
+			builder.append(", ");
+		}
+		if (title != null) {
+			builder.append("title=");
+			builder.append(title);
+		}
+		builder.append("]");
+		return builder.toString();
+	}
 }
