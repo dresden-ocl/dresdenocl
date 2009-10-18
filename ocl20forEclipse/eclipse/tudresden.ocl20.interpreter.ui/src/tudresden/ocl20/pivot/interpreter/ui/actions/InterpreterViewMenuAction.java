@@ -24,6 +24,7 @@ import java.util.Set;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.IAction;
 
+import tudresden.ocl20.pivot.interpreter.IInterpretationResult;
 import tudresden.ocl20.pivot.interpreter.IOclInterpreter;
 import tudresden.ocl20.pivot.interpreter.ui.internal.msg.OclInterpreterUIMessages;
 import tudresden.ocl20.pivot.interpreter.ui.internal.views.AddVariableDialog;
@@ -333,8 +334,10 @@ public class InterpreterViewMenuAction extends Action implements IAction {
 							 * type.
 							 */
 							if (aModelObject.isKindOf(constrainedType)) {
-								this.myInterpreterView.addInterpretationResult(interpreter
-										.interpretConstraint(aConstraint, aModelObject));
+								IInterpretationResult interpretationResult =
+										interpreter.interpretConstraint(aConstraint, aModelObject);
+								this.myInterpreterView
+										.addInterpretationResult(interpretationResult);
 							}
 							// no else.
 						}
