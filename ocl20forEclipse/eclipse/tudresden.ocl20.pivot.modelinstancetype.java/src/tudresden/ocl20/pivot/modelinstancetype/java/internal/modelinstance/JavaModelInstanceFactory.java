@@ -72,7 +72,7 @@ public class JavaModelInstanceFactory extends BasisJavaModelInstanceFactory
 
 	/**
 	 * <p>
-	 * Creates a new {@link JavaModelInstanceFactory} for a given {@link IModel}.
+	 * Creates a new {@link JavaModelInstanceFactory} for a given {@link IModel} .
 	 * </p>
 	 */
 	public JavaModelInstanceFactory(IModel model) {
@@ -83,7 +83,7 @@ public class JavaModelInstanceFactory extends BasisJavaModelInstanceFactory
 	/*
 	 * (non-Javadoc)
 	 * @seetudresden.ocl20.pivot.modelbus.modelinstance.types.impl.java.
-	 * BasisJavaModelInstanceFactory#createModelInstanceElement(java.lang.Object)
+	 * BasisJavaModelInstanceFactory #createModelInstanceElement(java.lang.Object)
 	 */
 	public IModelInstanceElement createModelInstanceElement(Object adapted)
 			throws TypeNotFoundInModelException {
@@ -154,7 +154,7 @@ public class JavaModelInstanceFactory extends BasisJavaModelInstanceFactory
 	/*
 	 * (non-Javadoc)
 	 * @seetudresden.ocl20.pivot.modelbus.modelinstance.types.base.
-	 * BasisJavaModelInstanceFactory#createModelInstanceElement(java.lang.Object,
+	 * BasisJavaModelInstanceFactory #createModelInstanceElement(java.lang.Object,
 	 * tudresden.ocl20.pivot.pivotmodel.Type)
 	 */
 	public IModelInstanceElement createModelInstanceElement(Object adapted,
@@ -194,27 +194,23 @@ public class JavaModelInstanceFactory extends BasisJavaModelInstanceFactory
 				if (type instanceof Enumeration) {
 
 					/*
-					 * Check if the object is an EnumerationLiteral and has the same type
-					 * as the given type.
+					 * If adapted == null, i.e. a PropertyCallExp or OperationCallExp
+					 * returned a null value, simply try to create an undefined value.
 					 */
-					if (adapted.getClass().isEnum()
-							&& JavaModelInstanceTypeUtility.toQualifiedNameList(
-									adapted.getClass().getCanonicalName()).equals(
-									type.getQualifiedNameList())) {
-						try {
-							result =
-									this
-											.createJavaModelInstanceEnumerationLiteral((Enum<?>) adapted);
-						}
+					if (adapted == null) {
+						result = createEnumerationLiteral(adapted, type);
+					}
 
-						catch (TypeNotFoundInModelException e) {
-							String msg;
-
-							msg =
-									JavaModelInstanceTypeMessages.JavaModelInstance_CannotAdaptToType;
-							msg = NLS.bind(msg, adapted, type);
-
-							throw new IllegalArgumentException();
+					else {
+						/*
+						 * Check if the object is an EnumerationLiteral and has the same
+						 * type as the given type.
+						 */
+						if (adapted.getClass().isEnum()
+								&& JavaModelInstanceTypeUtility.toQualifiedNameList(
+										adapted.getClass().getCanonicalName()).equals(
+										type.getQualifiedNameList())) {
+							result = createEnumerationLiteral(adapted, type);
 						}
 					}
 
@@ -255,6 +251,40 @@ public class JavaModelInstanceFactory extends BasisJavaModelInstanceFactory
 			LOGGER.debug(msg);
 		}
 		// no else.
+
+		return result;
+	}
+
+	private IModelInstanceElement createEnumerationLiteral(Object adapted,
+			Type type) {
+
+		IModelInstanceElement result;
+
+		/*
+		 * Since an enumeration literal could not be found in the model, handle this
+		 * case.
+		 */
+		if (adapted == null) {
+			result =
+					BasisJavaModelInstanceFactory
+							.createModelInstanceEnumerationLiteral(null);
+		}
+
+		else {
+			try {
+				result =
+						this.createJavaModelInstanceEnumerationLiteral((Enum<?>) adapted);
+			}
+
+			catch (TypeNotFoundInModelException e) {
+				String msg;
+
+				msg = JavaModelInstanceTypeMessages.JavaModelInstance_CannotAdaptToType;
+				msg = NLS.bind(msg, adapted, type);
+
+				throw new IllegalArgumentException();
+			}
+		}
 
 		return result;
 	}
@@ -427,64 +457,78 @@ public class JavaModelInstanceFactory extends BasisJavaModelInstanceFactory
 
 		IModelInstanceObject result;
 
-		Set<Type> modelTypes;
-		Class<?> typeClass;
+		/*
+		 * In case of an OperationCallExp or PropertyCallExp, a queried model
+		 * element can return null. Handle this case here.
+		 */
+		if (object == null) {
+			Set<Type> types = new HashSet<Type>();
+			types.add(type);
 
-		String canonicalName;
-		modelTypes = new HashSet<Type>();
+			result = new JavaModelInstanceObject(null, types, this);
+		}
 
-		/* Try to find the types of the given object in the model. */
-		try {
+		else {
+			Set<Type> modelTypes;
+			Class<?> typeClass;
 
-			/* Search for a type that conforms to the given type. */
-			for (Type aModelType : this.findTypesOfObjectInModel(object)) {
+			String canonicalName;
+			modelTypes = new HashSet<Type>();
 
-				if (aModelType.conformsTo(type)) {
-					modelTypes.add(aModelType);
-					break;
+			/* Try to find the types of the given object in the model. */
+			try {
+
+				/* Search for a type that conforms to the given type. */
+				for (Type aModelType : this.findTypesOfObjectInModel(object)) {
+
+					if (aModelType.conformsTo(type)) {
+						modelTypes.add(aModelType);
+						break;
+					}
+					// no else.
 				}
-				// no else.
 			}
-		}
 
-		catch (TypeNotFoundInModelException e1) {
-			modelTypes.add(type);
-		}
+			catch (TypeNotFoundInModelException e1) {
+				modelTypes.add(type);
+			}
 
-		/* Convert the type's name into a canonical name. */
-		canonicalName =
-				JavaModelInstanceTypeUtility.toCanonicalName(type
-						.getQualifiedNameList());
+			/* Convert the type's name into a canonical name. */
+			canonicalName =
+					JavaModelInstanceTypeUtility.toCanonicalName(type
+							.getQualifiedNameList());
 
-		/* Try to find the type's class. */
-		try {
+			/* Try to find the type's class. */
+			try {
 
-			/* Check if the object is undefined. */
-			if (object != null) {
-				typeClass = object.getClass().getClassLoader().loadClass(canonicalName);
+				/* Check if the object is undefined. */
+				if (object != null) {
+					typeClass =
+							object.getClass().getClassLoader().loadClass(canonicalName);
 
-				/* Check if the given object conforms to the found class. */
-				if (typeClass.isAssignableFrom(object.getClass())) {
-					result =
-							new JavaModelInstanceObject(object, typeClass, modelTypes, this);
+					/* Check if the given object conforms to the found class. */
+					if (typeClass.isAssignableFrom(object.getClass())) {
+						result =
+								new JavaModelInstanceObject(object, typeClass, modelTypes, this);
+					}
+
+					else {
+						/* Create an undefined instance object. */
+						result =
+								new JavaModelInstanceObject(null, typeClass, modelTypes, this);
+					}
 				}
 
+				/* Create an undefined instance object. */
 				else {
-					/* Create an undefined instance object. */
-					result =
-							new JavaModelInstanceObject(null, typeClass, modelTypes, this);
+					result = new JavaModelInstanceObject(null, modelTypes, this);
 				}
 			}
 
-			/* Create an undefined instance object. */
-			else {
+			catch (ClassNotFoundException e) {
+				/* Create an undefined instance object. */
 				result = new JavaModelInstanceObject(null, modelTypes, this);
 			}
-		}
-
-		catch (ClassNotFoundException e) {
-			/* Create an undefined instance object. */
-			result = new JavaModelInstanceObject(null, modelTypes, this);
 		}
 
 		/* Probably debug the exit of this method. */
@@ -589,7 +633,9 @@ public class JavaModelInstanceFactory extends BasisJavaModelInstanceFactory
 				result.add(this.findTypeOfClassInModel(clazz));
 			}
 
-			/* Else search for the interfaces in the model and for the super type. */
+			/*
+			 * Else search for the interfaces in the model and for the super type.
+			 */
 			catch (TypeNotFoundInModelException e) {
 
 				/* Add the types of the implemented interfaces. */
@@ -609,16 +655,22 @@ public class JavaModelInstanceFactory extends BasisJavaModelInstanceFactory
 				}
 
 				catch (TypeNotFoundInModelException e2) {
-					/* Continue probably one of the interfaces will implement a type. */
+					/*
+					 * Continue probably one of the interfaces will implement a type.
+					 */
 				}
 
-				/* Remove types, that are already represented by sub types in the model. */
+				/*
+				 * Remove types, that are already represented by sub types in the model.
+				 */
 				result = this.removeRedundantModelTypes(result);
 			}
 			// end else.
 		}
 
-		/* Check if any implemented type has been found. Else throw an exception. */
+		/*
+		 * Check if any implemented type has been found. Else throw an exception.
+		 */
 		if (result.size() == 0) {
 			String msg;
 

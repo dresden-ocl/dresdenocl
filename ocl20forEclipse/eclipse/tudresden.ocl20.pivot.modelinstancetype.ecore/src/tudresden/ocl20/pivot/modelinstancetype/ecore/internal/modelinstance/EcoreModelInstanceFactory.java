@@ -207,28 +207,40 @@ public class EcoreModelInstanceFactory extends BasisJavaModelInstanceFactory
 				if (type instanceof Enumeration) {
 
 					/*
-					 * Check if the object is an EnumerationLiteral and has the same type
-					 * as the given type.
+					 * If adapted == null, i.e. a PropertyCallExp returned a null value,
+					 * simply try to create an undefined value.
 					 */
-					if (adapted.getClass().isEnum()
+					if (adapted == null) {
+						result =
+								BasisJavaModelInstanceFactory
+										.createModelInstanceEnumerationLiteral(null);
+					}
 
-							&& EcoreModelInstanceTypeUtility.toQualifiedNameList(
-									adapted.getClass().getCanonicalName()).equals(
-									type.getQualifiedNameList())) {
-						try {
-							result =
-									this
-											.createEcoreModelInstanceEnumerationLiteral((Enum<?>) adapted);
-						}
+					else {
+						/*
+						 * Check if the object is an EnumerationLiteral and has the same
+						 * type as the given type.
+						 */
+						if (adapted.getClass().isEnum()
 
-						catch (TypeNotFoundInModelException e) {
-							String msg;
+								&& EcoreModelInstanceTypeUtility.toQualifiedNameList(
+										adapted.getClass().getCanonicalName()).equals(
+										type.getQualifiedNameList())) {
+							try {
+								result =
+										this
+												.createEcoreModelInstanceEnumerationLiteral((Enum<?>) adapted);
+							}
 
-							msg =
-									EcoreModelInstanceTypeMessages.EcoreModelInstanceFactory_CannotAdaptToType;
-							msg = NLS.bind(msg, adapted, type);
+							catch (TypeNotFoundInModelException e) {
+								String msg;
 
-							throw new IllegalArgumentException();
+								msg =
+										EcoreModelInstanceTypeMessages.EcoreModelInstanceFactory_CannotAdaptToType;
+								msg = NLS.bind(msg, adapted, type);
+
+								throw new IllegalArgumentException();
+							}
 						}
 					}
 
@@ -240,11 +252,10 @@ public class EcoreModelInstanceFactory extends BasisJavaModelInstanceFactory
 								EcoreModelInstanceTypeMessages.EcoreModelInstanceFactory_CannotAdaptToType;
 						msg = NLS.bind(msg, adapted, type);
 
-						throw new IllegalArgumentException();
+						throw new IllegalArgumentException(msg);
 					}
 					// no else.
 				}
-				// no else.
 
 				/* Else adapt to an IModelInstanceObject. */
 				else {
@@ -260,15 +271,25 @@ public class EcoreModelInstanceFactory extends BasisJavaModelInstanceFactory
 						this.myCachedAdaptedObjects.put(eObject, result);
 					}
 
-					/* Else the throw an exception. */
+					/* Else adapted is either 'null' or an exception is thrown */
 					else {
-						String msg;
 
-						msg =
-								EcoreModelInstanceTypeMessages.EcoreModelInstanceFactory_CannotAdaptToType;
-						msg = NLS.bind(msg, adapted, type);
+						if (adapted == null) {
+							Set<Type> types = new HashSet<Type>();
+							types.add(type);
+							result = new EcoreModelInstanceObject(null, types, this);
+						}
+						
+						/* Else the throw an exception. */
+						else {
+							String msg;
 
-						throw new IllegalArgumentException(msg);
+							msg =
+									EcoreModelInstanceTypeMessages.EcoreModelInstanceFactory_CannotAdaptToType;
+							msg = NLS.bind(msg, adapted, type);
+
+							throw new IllegalArgumentException(msg);
+						}
 					}
 				}
 				// end else.
