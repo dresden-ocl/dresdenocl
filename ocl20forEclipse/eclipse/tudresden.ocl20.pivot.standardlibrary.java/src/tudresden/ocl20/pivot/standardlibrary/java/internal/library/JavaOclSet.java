@@ -95,7 +95,7 @@ public class JavaOclSet<T extends OclAny> extends JavaOclUnsortedCollection<T>
 		Collection<IModelInstanceElement> otherCollection =
 				(Collection<IModelInstanceElement>) that.getModelInstanceElement();
 
-		complement.addAll(imiCollection.getCollection());
+		complement.addAll(getModelInstanceCollection().getCollection());
 		complement.removeAll(otherCollection);
 
 		result = JavaStandardLibraryFactory.INSTANCE.createOclSet(complement);
@@ -117,7 +117,7 @@ public class JavaOclSet<T extends OclAny> extends JavaOclUnsortedCollection<T>
 
 		checkUndefinedAndInvalid(this, that);
 
-		exclude.addAll(imiCollection.getCollection());
+		exclude.addAll(getModelInstanceCollection().getCollection());
 		exclude.remove(that.getModelInstanceElement());
 
 		result = JavaStandardLibraryFactory.INSTANCE.createOclSet(exclude);
@@ -139,7 +139,8 @@ public class JavaOclSet<T extends OclAny> extends JavaOclUnsortedCollection<T>
 		checkUndefinedAndInvalid(this);
 
 		/* Iterate over this set. */
-		for (IModelInstanceElement element : imiCollection.getCollection()) {
+		for (IModelInstanceElement element : getModelInstanceCollection()
+				.getCollection()) {
 
 			/*
 			 * nested collections are flattened, i.e. their elements are added to the
@@ -181,7 +182,7 @@ public class JavaOclSet<T extends OclAny> extends JavaOclUnsortedCollection<T>
 
 		checkUndefinedAndInvalid(this, that);
 
-		include.addAll(imiCollection.getCollection());
+		include.addAll(getModelInstanceCollection().getCollection());
 		include.add(that.getModelInstanceElement());
 
 		result = JavaStandardLibraryFactory.INSTANCE.createOclSet(include);
@@ -224,8 +225,8 @@ public class JavaOclSet<T extends OclAny> extends JavaOclUnsortedCollection<T>
 
 			// copy, since elements are removed later
 			Set<IModelInstanceElement> set1 =
-					new HashSet<IModelInstanceElement>(
-							(Set<IModelInstanceElement>) this.imiCollection.getCollection());
+					new HashSet<IModelInstanceElement>((Set<IModelInstanceElement>) this
+							.getModelInstanceCollection().getCollection());
 			Set<IModelInstanceElement> set2 =
 					(Set<IModelInstanceElement>) ((IModelInstanceCollection) that
 							.getModelInstanceElement()).getCollection();
@@ -271,11 +272,12 @@ public class JavaOclSet<T extends OclAny> extends JavaOclUnsortedCollection<T>
 		checkUndefinedAndInvalid(this, that);
 
 		Collection<IModelInstanceElement> otherCollectionCopy =
-				new ArrayList<IModelInstanceElement>(((IModelInstanceCollection) that
-						.getModelInstanceElement()).getCollection());
+				new ArrayList<IModelInstanceElement>(that.getModelInstanceCollection()
+						.getCollection());
 
 		/* Iterate over this bag. */
-		for (IModelInstanceElement element : imiCollection.getCollection()) {
+		for (IModelInstanceElement element : getModelInstanceCollection()
+				.getCollection()) {
 			/*
 			 * if other collection has not the same element, then it is in the
 			 * symmetric difference; remove it, so that it is not counted multiple
@@ -309,10 +311,9 @@ public class JavaOclSet<T extends OclAny> extends JavaOclUnsortedCollection<T>
 		checkUndefinedAndInvalid(this, that);
 
 		Collection<IModelInstanceElement> otherCollection =
-				((IModelInstanceCollection) that.getModelInstanceElement())
-						.getCollection();
+				that.getModelInstanceCollection().getCollection();
 
-		union.addAll(imiCollection.getCollection());
+		union.addAll(getModelInstanceCollection().getCollection());
 		union.addAll(otherCollection);
 
 		result = JavaStandardLibraryFactory.INSTANCE.createOclSet(union);

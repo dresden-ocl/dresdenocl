@@ -32,6 +32,8 @@
  */
 package tudresden.ocl20.pivot.essentialocl.standardlibrary;
 
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceReal;
+
 /**
  * 
  * 
@@ -41,10 +43,16 @@ package tudresden.ocl20.pivot.essentialocl.standardlibrary;
 public interface OclReal extends OclLibraryObject, OclComparable {
 
 	/**
+	 * Returns the adapted {@link IModelInstanceReal}.
+	 * 
+	 * @return the adapted {@link IModelInstanceReal}
+	 */
+	IModelInstanceReal getModelInstanceReal();
+
+	/**
 	 * 
 	 * @param r
-	 * @return the value of the addition of <code>this</code> and
-	 *         <code>r</code>.
+	 * @return the value of the addition of <code>this</code> and <code>r</code>.
 	 */
 	OclReal add(OclReal r);
 
@@ -73,9 +81,8 @@ public interface OclReal extends OclLibraryObject, OclComparable {
 	/**
 	 * 
 	 * @param r
-	 * @return the value of <code>this</code> divided by <code>r</code>.
-	 *         Evaluates to {@link OclInvalid} if <code>r</code> is equal to
-	 *         zero.
+	 * @return the value of <code>this</code> divided by <code>r</code>. Evaluates
+	 *         to {@link OclInvalid} if <code>r</code> is equal to zero.
 	 */
 	OclReal divide(OclReal r);
 
@@ -94,8 +101,8 @@ public interface OclReal extends OclLibraryObject, OclComparable {
 
 	/**
 	 * 
-	 * @return the {@link OclInteger} that is closest to <code>this</code>.
-	 *         When there are two such {@link OclInteger}, the largest one.
+	 * @return the {@link OclInteger} that is closest to <code>this</code>. When
+	 *         there are two such {@link OclInteger}, the largest one.
 	 */
 	OclInteger round();
 
@@ -130,8 +137,7 @@ public interface OclReal extends OclLibraryObject, OclComparable {
 	/**
 	 * 
 	 * @param r
-	 * @return true if <code>this</code> is less than or equal to
-	 *         <code>r</code>.
+	 * @return true if <code>this</code> is less than or equal to <code>r</code>.
 	 */
 	OclBoolean isLessEqual(OclReal r);
 

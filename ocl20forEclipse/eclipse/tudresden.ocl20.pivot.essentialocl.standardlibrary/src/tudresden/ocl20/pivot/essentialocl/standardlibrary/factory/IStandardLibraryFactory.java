@@ -25,6 +25,7 @@ import java.util.Set;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBag;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBoolean;
+import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclEnumLiteral;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclModelInstanceObject;
@@ -35,6 +36,7 @@ import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSet;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclString;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclTuple;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclType;
+import tudresden.ocl20.pivot.essentialocl.types.CollectionType;
 import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceBoolean;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceCollection;
@@ -125,8 +127,7 @@ public interface IStandardLibraryFactory {
 	 *          value.
 	 * @return the created {@link OclBag}.
 	 */
-	<T extends OclAny> OclBag<T> createOclBag(
-			final List<?> elements);
+	<T extends OclAny> OclBag<T> createOclBag(final List<?> elements);
 
 	/**
 	 * <p>
@@ -153,6 +154,15 @@ public interface IStandardLibraryFactory {
 	 * @return the created {@link OclBoolean}.
 	 */
 	OclBoolean createOclBoolean(final Boolean value);
+
+	/**
+	 * Creates an empty {@link OclCollection} of the given {@link CollectionType}.
+	 * 
+	 * @param collectionType
+	 *          the type of collection to create (Bag, OrderedSet, Sequence, Set).
+	 * @return an empty {@link OclCollection} of the given {@link CollectionType}
+	 */
+	OclCollection<OclAny> createOclCollection(CollectionType collectionType);
 
 	/**
 	 * <p>
@@ -247,8 +257,7 @@ public interface IStandardLibraryFactory {
 	 *          return value.
 	 * @return the created {@link OclOrderedSet}.
 	 */
-	<T extends OclAny> OclOrderedSet<T> createOclOrderedSet(
-			final List<?> elements);
+	<T extends OclAny> OclOrderedSet<T> createOclOrderedSet(final List<?> elements);
 
 	/**
 	 * <p>
@@ -302,8 +311,7 @@ public interface IStandardLibraryFactory {
 	 *          return value.
 	 * @return the created {@link OclSequence}.
 	 */
-	<T extends OclAny> OclSequence<T> createOclSequence(
-			final List<?> elements);
+	<T extends OclAny> OclSequence<T> createOclSequence(final List<?> elements);
 
 	/**
 	 * <p>
@@ -331,8 +339,7 @@ public interface IStandardLibraryFactory {
 	 *          value.
 	 * @return the created {@link OclSet}.
 	 */
-	<T extends OclAny> OclSet<T> createOclSet(
-			final Set<?> elements);
+	<T extends OclAny> OclSet<T> createOclSet(final Set<?> elements);
 
 	/**
 	 * <p>

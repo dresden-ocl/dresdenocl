@@ -32,6 +32,8 @@
  */
 package tudresden.ocl20.pivot.essentialocl.standardlibrary;
 
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceString;
+
 /**
  * 
  * 
@@ -39,6 +41,13 @@ package tudresden.ocl20.pivot.essentialocl.standardlibrary;
  * @version 1.0 30.03.2007
  */
 public interface OclString extends OclLibraryObject {
+
+	/**
+	 * Returns the adapted {@link IModelInstanceString}.
+	 * 
+	 * @return the adapted {@link IModelInstanceString}
+	 */
+	IModelInstanceString getModelInstanceString();
 
 	/**
 	 * 
@@ -57,9 +66,9 @@ public interface OclString extends OclLibraryObject {
 	 * 
 	 * @param lower
 	 * @param upper
-	 * @return the sub-string of <code>this</code> starting at character
-	 *         number <code>lower</code>, up to and including character
-	 *         number <code>upper</code>. Character numbers run from 1 to
+	 * @return the sub-string of <code>this</code> starting at character number
+	 *         <code>lower</code>, up to and including character number
+	 *         <code>upper</code>. Character numbers run from 1 to
 	 *         <code>self.size()</code>.
 	 */
 	OclString substring(OclInteger lower, OclInteger upper);

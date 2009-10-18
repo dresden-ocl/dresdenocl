@@ -28,6 +28,7 @@ import java.util.WeakHashMap;
 
 import org.eclipse.emf.common.util.UniqueEList;
 
+import tudresden.ocl20.pivot.essentialocl.expressions.CollectionKind;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBag;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBoolean;
@@ -212,7 +213,7 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 				imiElements.add(((OclAny) element).getModelInstanceElement());
 			}
 			else {
-				throw new IllegalArgumentException("Cannot create JavaOclSet for "
+				throw new IllegalArgumentException("Cannot create JavaOclBag for "
 						+ elements);
 			}
 		}
@@ -266,6 +267,50 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 	public OclBoolean createOclBoolean(final IModelInstanceBoolean value) {
 
 		return JavaOclBoolean.getInstance(value.getBoolean());
+	}
+
+	public OclCollection<OclAny> createOclCollection(CollectionType collectionType) {
+
+		OclCollection<OclAny> result;
+
+		IModelInstanceCollection<IModelInstanceElement> imiCollection;
+
+		CollectionKind collectionKind = collectionType.getKind();
+		
+		if (collectionKind.equals(CollectionKind.BAG)) {
+			imiCollection =
+					basisJavaModelInstanceFactory
+							.createModelInstanceCollection(
+									new ArrayList<IModelInstanceElement>(),
+									OclCollectionTypeKind.BAG);
+			result = createOclBag(imiCollection);
+		}
+		else if (collectionKind.equals(CollectionKind.ORDERED_SET)) {
+			imiCollection =
+					basisJavaModelInstanceFactory.createModelInstanceCollection(
+							new UniqueEList<IModelInstanceElement>(),
+							OclCollectionTypeKind.ORDEREDSET);
+			result = createOclOrderedSet(imiCollection);
+		}
+		else if (collectionKind.equals(CollectionKind.SEQUENCE)) {
+			imiCollection =
+					basisJavaModelInstanceFactory.createModelInstanceCollection(
+							new ArrayList<IModelInstanceElement>(),
+							OclCollectionTypeKind.SEQUENCE);
+			result = createOclSequence(imiCollection);
+		}
+		else if (collectionKind.equals(CollectionKind.SET)) {
+			imiCollection =
+					basisJavaModelInstanceFactory.createModelInstanceCollection(
+							new HashSet<IModelInstanceElement>(), OclCollectionTypeKind.SET);
+			result = createOclSet(imiCollection);
+		}
+		else {
+			throw new IllegalArgumentException(
+					"Cannot create OclCollection with given type " + collectionType);
+		}
+
+		return result;
 	}
 
 	protected OclCollection<OclAny> createOclCollection(
@@ -817,7 +862,7 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 		 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny#getUndefinedreason
 		 * ()
 		 */
-		public String getUndefinedreason() {
+		public String getUndefinedReason() {
 
 			return null;
 		}

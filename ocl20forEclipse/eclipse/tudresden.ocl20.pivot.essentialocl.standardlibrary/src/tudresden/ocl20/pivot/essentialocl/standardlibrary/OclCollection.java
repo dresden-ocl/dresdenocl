@@ -32,6 +32,7 @@
  */
 package tudresden.ocl20.pivot.essentialocl.standardlibrary;
 
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceCollection;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
 
 /**
@@ -41,6 +42,13 @@ import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
  * @version 1.0 30.03.2007
  */
 public interface OclCollection<T extends OclAny> extends OclLibraryObject {
+
+	/**
+	 * Returns the wrapped {@link IModelInstanceCollection}.
+	 * 
+	 * @return the wrapped {@link IModelInstanceCollection}
+	 */
+	IModelInstanceCollection<IModelInstanceElement> getModelInstanceCollection();
 
 	/**
 	 * 

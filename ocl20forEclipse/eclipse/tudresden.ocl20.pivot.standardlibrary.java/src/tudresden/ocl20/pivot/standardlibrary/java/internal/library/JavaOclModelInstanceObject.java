@@ -61,8 +61,6 @@ import tudresden.ocl20.pivot.standardlibrary.java.factory.JavaStandardLibraryFac
 public class JavaOclModelInstanceObject extends JavaOclAny implements
 		OclModelInstanceObject {
 
-	private IModelInstanceObject imiObject;
-
 	/**
 	 * <p>
 	 * Instantiates a new {@link JavaOclObject}.
@@ -74,7 +72,6 @@ public class JavaOclModelInstanceObject extends JavaOclAny implements
 	public JavaOclModelInstanceObject(IModelInstanceObject imiObject) {
 
 		super(imiObject);
-		this.imiObject = imiObject;
 	}
 
 	public JavaOclModelInstanceObject(String undefinedReason) {
@@ -85,6 +82,17 @@ public class JavaOclModelInstanceObject extends JavaOclAny implements
 	public JavaOclModelInstanceObject(Throwable invalidReason) {
 
 		super(invalidReason);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclModelInstanceObject
+	 * #getModelInstanceObject()
+	 */
+	public IModelInstanceObject getModelInstanceObject() {
+
+		return (IModelInstanceObject) this.imiElement;
 	}
 
 	/*
@@ -116,7 +124,7 @@ public class JavaOclModelInstanceObject extends JavaOclAny implements
 					imiArguments.add(arg.getModelInstanceElement());
 				}
 
-				imiResult = imiObject.invokeOperation(operation, imiArguments);
+				imiResult = getModelInstanceObject().invokeOperation(operation, imiArguments);
 				result = JavaStandardLibraryFactory.INSTANCE.createOclAny(imiResult);
 			}
 
@@ -163,7 +171,7 @@ public class JavaOclModelInstanceObject extends JavaOclAny implements
 		checkUndefinedAndInvalid(this);
 
 		Set<IModelInstanceElement> resultSet = new HashSet<IModelInstanceElement>();
-		resultSet.add(this.imiObject);
+		resultSet.add(this.getModelInstanceObject());
 
 		result = JavaStandardLibraryFactory.INSTANCE.createOclSet(resultSet);
 
@@ -195,7 +203,7 @@ public class JavaOclModelInstanceObject extends JavaOclAny implements
 		else if (this.oclIsUndefined().isTrue()) {
 			result =
 					JavaStandardLibraryFactory.INSTANCE.createOclUndefined(property
-							.getType(), this.getUndefinedreason());
+							.getType(), this.getUndefinedReason());
 		}
 
 		/* Else try to get the property. */
@@ -204,7 +212,7 @@ public class JavaOclModelInstanceObject extends JavaOclAny implements
 			IModelInstanceElement imiResult;
 
 			try {
-				imiResult = imiObject.getProperty(property);
+				imiResult = getModelInstanceObject().getProperty(property);
 
 				if (imiResult.isUndefined()) {
 					result =
@@ -258,7 +266,7 @@ public class JavaOclModelInstanceObject extends JavaOclAny implements
 			Object thatObject =
 					((IModelInstanceObject) that.getModelInstanceElement()).getObject();
 
-			if (imiObject.getObject().equals(thatObject)) {
+			if (getModelInstanceObject().getObject().equals(thatObject)) {
 				result = JavaOclBoolean.getInstance(true);
 			}
 			else {
@@ -267,5 +275,33 @@ public class JavaOclModelInstanceObject extends JavaOclAny implements
 		}
 
 		return result;
+	}
+	
+
+	@Override
+	public String toString() {
+
+		StringBuilder result = new StringBuilder();
+
+		result.append(this.getClass().getSimpleName());
+		result.append("[");
+		
+		if (this.oclIsUndefined().isTrue()) {
+			result.append("undefined: " + this.undefinedreason);
+		}
+
+		else if (this.oclIsInvalid().isTrue()) {
+			result.append("invalid: " + this.invalidReason.getMessage());
+		}
+
+		else {
+			result.append(getModelInstanceObject().getName());
+			result.append(" - ");
+			result.append(getModelInstanceObject().getObject());
+		}
+		
+		result.append("]");
+
+		return result.toString();
 	}
 }

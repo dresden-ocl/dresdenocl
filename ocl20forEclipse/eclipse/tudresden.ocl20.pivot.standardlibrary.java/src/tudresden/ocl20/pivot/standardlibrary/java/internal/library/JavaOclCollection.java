@@ -58,8 +58,6 @@ import tudresden.ocl20.pivot.standardlibrary.java.factory.JavaStandardLibraryFac
 public abstract class JavaOclCollection<T extends OclAny> extends
 		JavaOclLibraryObject implements OclCollection<T> {
 
-	protected IModelInstanceCollection<IModelInstanceElement> imiCollection;
-
 	/**
 	 * <p>
 	 * Instantiates a new {@link JavaOclCollection}.
@@ -71,8 +69,13 @@ public abstract class JavaOclCollection<T extends OclAny> extends
 	public JavaOclCollection(
 			IModelInstanceCollection<IModelInstanceElement> imiCollection) {
 
+		/*
+		 * No check for undefined values here. See standard, page 194, A.2.5.4
+		 * Constructors: "Note that constructors having element values as arguments
+		 * are deliberately defined not to be strict. A collection value therefore
+		 * may contain undefined values while still being well defined."
+		 */
 		super(imiCollection);
-		this.imiCollection = imiCollection;
 	}
 
 	public JavaOclCollection(String undefinedReason) {
@@ -87,6 +90,17 @@ public abstract class JavaOclCollection<T extends OclAny> extends
 
 	/*
 	 * (non-Javadoc)
+	 * @seetudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection#
+	 * getModelInstanceCollection()
+	 */
+	@SuppressWarnings("unchecked")
+	public IModelInstanceCollection<IModelInstanceElement> getModelInstanceCollection() {
+
+		return (IModelInstanceCollection<IModelInstanceElement>) imiElement;
+	}
+
+	/*
+	 * (non-Javadoc)
 	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny#asSet()
 	 */
 	public OclSet<T> asSet() {
@@ -97,7 +111,7 @@ public abstract class JavaOclCollection<T extends OclAny> extends
 
 		IModelInstanceCollection<IModelInstanceElement> imiCollectionResult =
 				BasisJavaModelInstanceFactory.createModelInstanceCollection(
-						imiCollection.getCollection(),
+						getModelInstanceCollection().getCollection(),
 						PrimitiveAndCollectionTypeConstants.MODEL_TYPE_SET);
 
 		result = new JavaOclSet<T>(imiCollectionResult);
@@ -118,7 +132,7 @@ public abstract class JavaOclCollection<T extends OclAny> extends
 
 		IModelInstanceCollection<IModelInstanceElement> imiCollectionResult =
 				BasisJavaModelInstanceFactory.createModelInstanceCollection(
-						imiCollection.getCollection(),
+						getModelInstanceCollection().getCollection(),
 						PrimitiveAndCollectionTypeConstants.MODEL_TYPE_BAG);
 
 		result = new JavaOclBag<T>(imiCollectionResult);
@@ -140,7 +154,7 @@ public abstract class JavaOclCollection<T extends OclAny> extends
 
 		IModelInstanceCollection<IModelInstanceElement> imiCollectionResult =
 				BasisJavaModelInstanceFactory.createModelInstanceCollection(
-						imiCollection.getCollection(),
+						getModelInstanceCollection().getCollection(),
 						PrimitiveAndCollectionTypeConstants.MODEL_TYPE_ORDERED_SET);
 
 		result = new JavaOclOrderedSet<T>(imiCollectionResult);
@@ -162,7 +176,7 @@ public abstract class JavaOclCollection<T extends OclAny> extends
 
 		IModelInstanceCollection<IModelInstanceElement> imiCollectionResult =
 				BasisJavaModelInstanceFactory.createModelInstanceCollection(
-						imiCollection.getCollection(),
+						getModelInstanceCollection().getCollection(),
 						PrimitiveAndCollectionTypeConstants.MODEL_TYPE_SEQUENCE);
 
 		result = new JavaOclSequence<T>(imiCollectionResult);
@@ -180,6 +194,8 @@ public abstract class JavaOclCollection<T extends OclAny> extends
 
 		OclInteger result;
 
+		// FIXME: non-strict evaluation (see standard, p. 195), but (p. 189):
+		// I(=t)(v1, v2) = OclUndefined, if v1 = OclUndefined OR v2 = OclUndefined
 		checkUndefinedAndInvalid(this, that);
 
 		/* Else compute the result. */
@@ -187,7 +203,8 @@ public abstract class JavaOclCollection<T extends OclAny> extends
 
 		intResult = 0L;
 
-		for (IModelInstanceElement anElement : this.imiCollection.getCollection()) {
+		for (IModelInstanceElement anElement : this.getModelInstanceCollection()
+				.getCollection()) {
 			T oclElement =
 					(T) JavaStandardLibraryFactory.INSTANCE.createOclAny(anElement);
 			if (oclElement.isEqualTo(that).isTrue()) {
@@ -230,8 +247,8 @@ public abstract class JavaOclCollection<T extends OclAny> extends
 
 		booleanResult = true;
 
-		for (IModelInstanceElement anElement : ((IModelInstanceCollection<IModelInstanceElement>) that
-				.getModelInstanceElement()).getCollection()) {
+		for (IModelInstanceElement anElement : that.getModelInstanceCollection()
+				.getCollection()) {
 
 			T oclElement =
 					(T) JavaStandardLibraryFactory.INSTANCE.createOclAny(anElement);
@@ -276,7 +293,8 @@ public abstract class JavaOclCollection<T extends OclAny> extends
 
 		IModelInstanceElement imiThat = that.getModelInstanceElement();
 
-		for (IModelInstanceElement anElement : imiCollection.getCollection()) {
+		for (IModelInstanceElement anElement : getModelInstanceCollection()
+				.getCollection()) {
 			if (!anElement.isUndefined() && anElement.equals(imiThat)) {
 				boolResult = true;
 				break;
@@ -310,8 +328,8 @@ public abstract class JavaOclCollection<T extends OclAny> extends
 		 * Check if all elements of anAdaptedCollection are contained in this
 		 * collection.
 		 */
-		for (IModelInstanceElement anElement : ((IModelInstanceCollection<IModelInstanceElement>) that
-				.getModelInstanceElement()).getCollection()) {
+		for (IModelInstanceElement anElement : that.getModelInstanceCollection()
+				.getCollection()) {
 
 			T oclElement =
 					(T) JavaStandardLibraryFactory.INSTANCE.createOclAny(anElement);
@@ -347,7 +365,7 @@ public abstract class JavaOclCollection<T extends OclAny> extends
 		/* Else compute the result. */
 		boolean adaptedResult;
 
-		adaptedResult = imiCollection.getCollection().isEmpty();
+		adaptedResult = getModelInstanceCollection().getCollection().isEmpty();
 
 		result = JavaOclBoolean.getInstance(adaptedResult);
 
@@ -429,7 +447,7 @@ public abstract class JavaOclCollection<T extends OclAny> extends
 
 		Long intResult;
 
-		intResult = new Long(imiCollection.getCollection().size());
+		intResult = new Long(getModelInstanceCollection().getCollection().size());
 
 		result = JavaStandardLibraryFactory.INSTANCE.createOclInteger(intResult);
 
@@ -458,7 +476,8 @@ public abstract class JavaOclCollection<T extends OclAny> extends
 		/* Else iterate through the collection and compute the sum. */
 		else {
 			/* Try to add the elements of this collection to a sum. */
-			for (IModelInstanceElement anElement : imiCollection.getCollection()) {
+			for (IModelInstanceElement anElement : getModelInstanceCollection()
+					.getCollection()) {
 
 				T oclElement =
 						(T) JavaStandardLibraryFactory.INSTANCE.createOclAny(anElement);
@@ -482,8 +501,48 @@ public abstract class JavaOclCollection<T extends OclAny> extends
 		return result;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection#getIterator
+	 * ()
+	 */
 	public OclIterator<T> getIterator() {
 
 		return new JavaOclIterator<T>(this);
+	}
+
+	@Override
+	public String toString() {
+
+		StringBuilder result = new StringBuilder();
+
+		result.append(this.getClass().getSimpleName());
+		result.append("[");
+
+		if (this.oclIsUndefined().isTrue()) {
+			result.append("undefined: ");
+			result.append(this.getUndefinedReason());
+		}
+
+		else if (this.oclIsInvalid().isTrue()) {
+			result.append("invalid: ");
+			result.append(this.getInvalidReason().getMessage());
+		}
+
+		else {
+			OclIterator<T> iter = getIterator();
+
+			while (iter.hasNext().isTrue()) {
+				T element = iter.next();				
+				result.append(element);
+				if (iter.hasNext().isTrue()) {
+					result.append(", ");
+				}
+			}
+		}
+		result.append("]");
+
+		return result.toString();
 	}
 }

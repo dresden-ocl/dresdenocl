@@ -7,6 +7,7 @@ import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclVoid;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceVoid;
 import tudresden.ocl20.pivot.pivotmodel.Operation;
 import tudresden.ocl20.pivot.standardlibrary.java.exceptions.InvalidException;
+import tudresden.ocl20.pivot.standardlibrary.java.factory.JavaStandardLibraryFactory;
 
 public class JavaOclVoid extends JavaOclAny implements OclVoid {
 
@@ -63,8 +64,15 @@ public class JavaOclVoid extends JavaOclAny implements OclVoid {
 	 */
 	public OclAny invokeOperation(Operation operation, OclAny... parameters) {
 
-		throw new InvalidException(new UnsupportedOperationException(
-				"invokeOperation(Operation, OclAny...) is not defined on OclVoid."));
+		OclAny result;
+
+		result =
+				JavaStandardLibraryFactory.INSTANCE.createOclUndefined(operation
+						.getType(), "Tried to invoke operation " + operation + " on "
+						+ this);
+
+		return result;
+
 	}
 
 	/*
@@ -79,6 +87,12 @@ public class JavaOclVoid extends JavaOclAny implements OclVoid {
 		// oclIsUndefined
 		throw new InvalidException(new UnsupportedOperationException(
 				"isEqualTo(OclAny) is not defined on OclVoid."));
+	}
+
+	@Override
+	public String toString() {
+
+		return "null";
 	}
 
 }

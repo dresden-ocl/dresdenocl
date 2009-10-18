@@ -52,7 +52,6 @@ import tudresden.ocl20.pivot.standardlibrary.java.factory.JavaStandardLibraryFac
  * @author Ronny Brandt
  * @author Michael Thiele
  */
-@SuppressWarnings("unchecked")
 public abstract class JavaOclUnsortedCollection<T extends OclAny> extends
 		JavaOclCollection<T> implements OclUnsortedCollection<T> {
 
@@ -85,12 +84,10 @@ public abstract class JavaOclUnsortedCollection<T extends OclAny> extends
 		checkUndefinedAndInvalid(this, aBag);
 
 		/* Else compute the result. */
-		List<IModelInstanceElement> union =
-				new ArrayList<IModelInstanceElement>();
+		List<IModelInstanceElement> union = new ArrayList<IModelInstanceElement>();
 
-		union.addAll(this.imiCollection.getCollection());
-		union.addAll(((IModelInstanceCollection) aBag.getModelInstanceElement())
-				.getCollection());
+		union.addAll(this.getModelInstanceCollection().getCollection());
+		union.addAll(aBag.getModelInstanceCollection().getCollection());
 
 		result = JavaStandardLibraryFactory.INSTANCE.createOclBag(union);
 
@@ -113,13 +110,11 @@ public abstract class JavaOclUnsortedCollection<T extends OclAny> extends
 		Collection<IModelInstanceElement> otherSet;
 		Set<IModelInstanceElement> intersection;
 
-		otherSet =
-				((IModelInstanceCollection<IModelInstanceElement>) aSet
-						.getModelInstanceElement()).getCollection();
+		otherSet = aSet.getModelInstanceCollection().getCollection();
 		intersection = new HashSet<IModelInstanceElement>();
 
 		for (IModelInstanceElement anElement : otherSet) {
-			if (this.imiCollection.getCollection().contains(anElement)
+			if (this.getModelInstanceCollection().getCollection().contains(anElement)
 					&& !intersection.contains(anElement)) {
 				intersection.add(anElement);
 			}
@@ -129,4 +124,5 @@ public abstract class JavaOclUnsortedCollection<T extends OclAny> extends
 
 		return result;
 	}
+	
 }

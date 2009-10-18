@@ -54,8 +54,6 @@ import tudresden.ocl20.pivot.standardlibrary.java.factory.JavaStandardLibraryFac
  */
 public class JavaOclTuple extends JavaOclLibraryObject implements OclTuple {
 
-	protected IModelInstanceTuple imiTuple;
-
 	/**
 	 * <p>
 	 * Instantiates a new {@link JavaOclTuple}.
@@ -67,7 +65,6 @@ public class JavaOclTuple extends JavaOclLibraryObject implements OclTuple {
 	public JavaOclTuple(IModelInstanceTuple imiTuple) {
 
 		super(imiTuple);
-		this.imiTuple = imiTuple;
 	}
 
 	public JavaOclTuple(String undefinedReason) {
@@ -78,6 +75,16 @@ public class JavaOclTuple extends JavaOclLibraryObject implements OclTuple {
 	public JavaOclTuple(Throwable invalidReason) {
 
 		super(invalidReason);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @seetudresden.ocl20.pivot.essentialocl.standardlibrary.OclTuple#
+	 * getModelInstanceTuple()
+	 */
+	public IModelInstanceTuple getModelInstanceTuple() {
+
+		return (IModelInstanceTuple) this.imiElement;
 	}
 
 	/*
@@ -99,8 +106,8 @@ public class JavaOclTuple extends JavaOclLibraryObject implements OclTuple {
 		else {
 
 			result =
-					JavaOclBoolean.getInstance(imiTuple.equals(that
-							.getModelInstanceElement()));
+					JavaOclBoolean.getInstance(getModelInstanceTuple().equals(
+							that.getModelInstanceElement()));
 		}
 
 		return result;
@@ -121,8 +128,8 @@ public class JavaOclTuple extends JavaOclLibraryObject implements OclTuple {
 		try {
 
 			IModelInstanceElement imiResult =
-					imiTuple.get((IModelInstanceString) pathname
-							.getModelInstanceElement());
+					getModelInstanceTuple().get(
+							(IModelInstanceString) pathname.getModelInstanceElement());
 			result = JavaStandardLibraryFactory.INSTANCE.createOclAny(imiResult);
 
 		} catch (IllegalArgumentException e) {
@@ -143,10 +150,37 @@ public class JavaOclTuple extends JavaOclLibraryObject implements OclTuple {
 		OclSet<T> result;
 
 		Set<IModelInstanceElement> imiSet = new HashSet<IModelInstanceElement>();
-		imiSet.add(imiTuple);
+		imiSet.add(getModelInstanceTuple());
 
 		result = JavaStandardLibraryFactory.INSTANCE.createOclSet(imiSet);
 
 		return result;
+	}
+	
+
+	@Override
+	public String toString() {
+
+		StringBuilder result = new StringBuilder();
+
+		result.append(this.getClass().getSimpleName());
+		result.append("[");
+		
+		if (this.oclIsUndefined().isTrue()) {
+			result.append("undefined: " + this.undefinedreason);
+		}
+
+		else if (this.oclIsInvalid().isTrue()) {
+			result.append("invalid: " + this.invalidReason.getMessage());
+		}
+
+		else {
+			// FIXME: print all values
+			result.append(getModelInstanceTuple().getName());
+		}
+		
+		result.append("]");
+
+		return result.toString();
 	}
 }

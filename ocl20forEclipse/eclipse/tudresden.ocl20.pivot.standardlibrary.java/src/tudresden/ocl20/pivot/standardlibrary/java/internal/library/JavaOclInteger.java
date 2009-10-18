@@ -46,8 +46,6 @@ import tudresden.ocl20.pivot.standardlibrary.java.factory.JavaStandardLibraryFac
  */
 public class JavaOclInteger extends JavaOclReal implements OclInteger {
 
-	private IModelInstanceInteger imiInteger;
-
 	/**
 	 * <p>
 	 * Instantiates a new {@link JavaOclInteger}.
@@ -59,7 +57,6 @@ public class JavaOclInteger extends JavaOclReal implements OclInteger {
 	public JavaOclInteger(IModelInstanceInteger imiInteger) {
 
 		super(imiInteger);
-		this.imiInteger = imiInteger;
 	}
 
 	public JavaOclInteger(String undefinedReason) {
@@ -70,6 +67,11 @@ public class JavaOclInteger extends JavaOclReal implements OclInteger {
 	public JavaOclInteger(Throwable invalidReason) {
 
 		super(invalidReason);
+	}
+
+	public IModelInstanceInteger getModelInstanceInteger() {
+
+		return (IModelInstanceInteger) this.imiElement;
 	}
 
 	/*
@@ -85,9 +87,8 @@ public class JavaOclInteger extends JavaOclReal implements OclInteger {
 		checkUndefinedAndInvalid(this, that);
 
 		/* Else compute the result. */
-		Long summand1 = this.imiInteger.getLong();
-		Long summand2 =
-				((IModelInstanceInteger) that.getModelInstanceElement()).getLong();
+		Long summand1 = this.getModelInstanceInteger().getLong();
+		Long summand2 = that.getModelInstanceInteger().getLong();
 		result =
 				JavaStandardLibraryFactory.INSTANCE.createOclInteger(summand1
 						+ summand2);
@@ -108,9 +109,8 @@ public class JavaOclInteger extends JavaOclReal implements OclInteger {
 		checkUndefinedAndInvalid(this, that);
 
 		/* Else compute the result. */
-		Long dividend = this.imiInteger.getLong();
-		Long divisor =
-				((IModelInstanceInteger) that.getModelInstanceElement()).getLong();
+		Long dividend = this.getModelInstanceInteger().getLong();
+		Long divisor = that.getModelInstanceInteger().getLong();
 
 		try {
 			result =
@@ -130,8 +130,7 @@ public class JavaOclInteger extends JavaOclReal implements OclInteger {
 	 */
 	public OclReal divide(OclInteger anInteger) {
 
-		Long longValue =
-				((IModelInstanceInteger) anInteger.getModelInstanceElement()).getLong();
+		Long longValue = anInteger.getModelInstanceInteger().getLong();
 
 		return super.divide(JavaStandardLibraryFactory.INSTANCE
 				.createOclReal(longValue));
@@ -150,9 +149,8 @@ public class JavaOclInteger extends JavaOclReal implements OclInteger {
 		checkUndefinedAndInvalid(this, that);
 
 		/* Else compute the result. */
-		Long int1 = this.imiInteger.getLong();
-		Long int2 =
-				((IModelInstanceInteger) that.getModelInstanceElement()).getLong();
+		Long int1 = this.getModelInstanceInteger().getLong();
+		Long int2 = that.getModelInstanceInteger().getLong();
 		result =
 				JavaStandardLibraryFactory.INSTANCE.createOclInteger(Math.max(int1,
 						int2));
@@ -173,9 +171,8 @@ public class JavaOclInteger extends JavaOclReal implements OclInteger {
 		checkUndefinedAndInvalid(this, that);
 
 		/* Else compute the result. */
-		Long int1 = this.imiInteger.getLong();
-		Long int2 =
-				((IModelInstanceInteger) that.getModelInstanceElement()).getLong();
+		Long int1 = this.getModelInstanceInteger().getLong();
+		Long int2 = that.getModelInstanceInteger().getLong();
 		result =
 				JavaStandardLibraryFactory.INSTANCE.createOclInteger(Math.min(int1,
 						int2));
@@ -196,9 +193,8 @@ public class JavaOclInteger extends JavaOclReal implements OclInteger {
 		checkUndefinedAndInvalid(this, that);
 
 		/* Else compute the result. */
-		Long dividend = this.imiInteger.getLong();
-		Long divisor =
-				((IModelInstanceInteger) that.getModelInstanceElement()).getLong();
+		Long dividend = this.getModelInstanceInteger().getLong();
+		Long divisor = that.getModelInstanceInteger().getLong();
 
 		try {
 			result =
@@ -223,9 +219,8 @@ public class JavaOclInteger extends JavaOclReal implements OclInteger {
 		checkUndefinedAndInvalid(this, that);
 
 		/* Else compute the result. */
-		Long int1 = this.imiInteger.getLong();
-		Long int2 =
-				((IModelInstanceInteger) that.getModelInstanceElement()).getLong();
+		Long int1 = this.getModelInstanceInteger().getLong();
+		Long int2 = that.getModelInstanceInteger().getLong();
 		result = JavaStandardLibraryFactory.INSTANCE.createOclInteger(int1 * int2);
 
 		return result;
@@ -243,9 +238,8 @@ public class JavaOclInteger extends JavaOclReal implements OclInteger {
 		checkUndefinedAndInvalid(this, that);
 
 		/* Else compute the result. */
-		Long int1 = this.imiInteger.getLong();
-		Long int2 =
-				((IModelInstanceInteger) that.getModelInstanceElement()).getLong();
+		Long int1 = this.getModelInstanceInteger().getLong();
+		Long int2 = that.getModelInstanceInteger().getLong();
 		result = JavaStandardLibraryFactory.INSTANCE.createOclInteger(int1 - int2);
 
 		return result;
@@ -267,7 +261,7 @@ public class JavaOclInteger extends JavaOclReal implements OclInteger {
 		/* Else compute the result. */
 		result =
 				JavaStandardLibraryFactory.INSTANCE.createOclInteger(Math
-						.abs(imiInteger.getLong()));
+						.abs(getModelInstanceInteger().getLong()));
 
 		return result;
 	}
@@ -287,8 +281,8 @@ public class JavaOclInteger extends JavaOclReal implements OclInteger {
 
 		/* Else compute the result. */
 		result =
-				JavaStandardLibraryFactory.INSTANCE.createOclInteger(-(imiInteger
-						.getLong()));
+				JavaStandardLibraryFactory.INSTANCE
+						.createOclInteger(-(getModelInstanceInteger().getLong()));
 
 		return result;
 	}
@@ -309,12 +303,12 @@ public class JavaOclInteger extends JavaOclReal implements OclInteger {
 			result.append("undefined: " + this.undefinedreason);
 		}
 
-		if (this.oclIsInvalid().isTrue()) {
-			result.append("invalid: " + this.undefinedreason);
+		else if (this.oclIsInvalid().isTrue()) {
+			result.append("invalid: " + this.invalidReason.getMessage());
 		}
 
 		else {
-			result.append((this.imiInteger.getLong()).toString());
+			result.append((this.getModelInstanceInteger().getLong()).toString());
 		}
 
 		result.append("]");

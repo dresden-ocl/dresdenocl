@@ -96,7 +96,7 @@ public class JavaOclOrderedSet<T extends OclAny> extends
 
 		checkUndefinedAndInvalid(this, that);
 
-		append.addAll(imiCollection.getCollection());
+		append.addAll(getModelInstanceCollection().getCollection());
 		append.add(that.getModelInstanceElement());
 
 		result = JavaStandardLibraryFactory.INSTANCE.createOclOrderedSet(append);
@@ -119,7 +119,7 @@ public class JavaOclOrderedSet<T extends OclAny> extends
 
 		checkUndefinedAndInvalid(this, that);
 
-		exclude.addAll(imiCollection.getCollection());
+		exclude.addAll(getModelInstanceCollection().getCollection());
 		exclude.remove(that.getModelInstanceElement());
 
 		result = JavaStandardLibraryFactory.INSTANCE.createOclOrderedSet(exclude);
@@ -141,7 +141,8 @@ public class JavaOclOrderedSet<T extends OclAny> extends
 		checkUndefinedAndInvalid(this);
 
 		/* Iterate over this ordered set. */
-		for (IModelInstanceElement element : imiCollection.getCollection()) {
+		for (IModelInstanceElement element : getModelInstanceCollection()
+				.getCollection()) {
 
 			/*
 			 * nested collections are flattened, i.e. their elements are added to the
@@ -200,7 +201,7 @@ public class JavaOclOrderedSet<T extends OclAny> extends
 				((IModelInstanceInteger) index.getModelInstanceElement()).getLong()
 						.intValue();
 
-		insertAt.addAll(imiCollection.getCollection());
+		insertAt.addAll(getModelInstanceCollection().getCollection());
 
 		try {
 			insertAt.add(intIndex, anElement.getModelInstanceElement());
@@ -238,7 +239,7 @@ public class JavaOclOrderedSet<T extends OclAny> extends
 			boolean booleanResult;
 
 			Collection<IModelInstanceElement> orderedSetList1 =
-					this.imiCollection.getCollection();
+					this.getModelInstanceCollection().getCollection();
 			Collection<IModelInstanceElement> orderedSetList2 =
 					((IModelInstanceCollection) that.getModelInstanceElement())
 							.getCollection();
@@ -287,7 +288,7 @@ public class JavaOclOrderedSet<T extends OclAny> extends
 
 		checkUndefinedAndInvalid(this, that);
 
-		prepend.addAll(imiCollection.getCollection());
+		prepend.addAll(getModelInstanceCollection().getCollection());
 		prepend.add(0, that.getModelInstanceElement());
 
 		result = JavaStandardLibraryFactory.INSTANCE.createOclOrderedSet(prepend);
@@ -319,7 +320,8 @@ public class JavaOclOrderedSet<T extends OclAny> extends
 						.intValue();
 
 		final List<IModelInstanceElement> thisCollection =
-				(List<IModelInstanceElement>) imiCollection.getCollection();
+				(List<IModelInstanceElement>) getModelInstanceCollection()
+						.getCollection();
 
 		try {
 			subOrderedSet.addAll(thisCollection.subList(intLower, intUpper));
@@ -349,10 +351,10 @@ public class JavaOclOrderedSet<T extends OclAny> extends
 
 		checkUndefinedAndInvalid(this, that);
 
-		union.addAll(imiCollection.getCollection());
+		union.addAll(getModelInstanceCollection().getCollection());
 		List<IModelInstanceElement> thatList =
-				(List<IModelInstanceElement>) ((IModelInstanceCollection) that
-						.getModelInstanceElement()).getCollection();
+				(List<IModelInstanceElement>) that.getModelInstanceCollection()
+						.getCollection();
 
 		for (IModelInstanceElement element : thatList) {
 			union.add(element);

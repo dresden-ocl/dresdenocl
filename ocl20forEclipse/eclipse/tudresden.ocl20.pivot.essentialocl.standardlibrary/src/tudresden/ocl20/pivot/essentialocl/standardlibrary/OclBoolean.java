@@ -32,6 +32,7 @@
  */
 package tudresden.ocl20.pivot.essentialocl.standardlibrary;
 
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceBoolean;
 
 /**
  * 
@@ -40,6 +41,13 @@ package tudresden.ocl20.pivot.essentialocl.standardlibrary;
  * @version 1.0 30.03.2007
  */
 public interface OclBoolean extends OclLibraryObject {
+
+	/**
+	 * Returns the adated {@link IModelInstanceBoolean}.
+	 * 
+	 * @return the adated {@link IModelInstanceBoolean}
+	 */
+	IModelInstanceBoolean getModelInstanceBoolean();
 
 	/**
 	 * 

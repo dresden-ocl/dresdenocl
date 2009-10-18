@@ -6,7 +6,6 @@ import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBoolean;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclIterator;
-import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceCollection;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
 import tudresden.ocl20.pivot.standardlibrary.java.factory.JavaStandardLibraryFactory;
 
@@ -21,12 +20,10 @@ public class JavaOclIterator<T extends OclAny> implements OclIterator<T> {
 
 	protected Iterator<IModelInstanceElement> iterator;
 
-	@SuppressWarnings("unchecked")
 	public JavaOclIterator(OclCollection<? extends OclAny> collection) {
 
 		this.iterator =
-				((IModelInstanceCollection<IModelInstanceElement>) collection
-						.getModelInstanceElement()).getCollection().iterator();
+				collection.getModelInstanceCollection().getCollection().iterator();
 	}
 
 	public OclBoolean hasNext() {

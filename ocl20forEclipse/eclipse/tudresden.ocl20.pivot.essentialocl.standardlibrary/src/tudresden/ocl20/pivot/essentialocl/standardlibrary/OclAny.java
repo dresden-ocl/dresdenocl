@@ -112,7 +112,7 @@ public interface OclAny {
 	 * 
 	 * @return the undefinedreason
 	 */
-	String getUndefinedreason();
+	String getUndefinedReason();
 
 	/**
 	 * Gets the reason for invalid object.

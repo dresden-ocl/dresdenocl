@@ -30,7 +30,6 @@
  */
 package tudresden.ocl20.pivot.standardlibrary.java.internal.library;
 
-import java.util.Collection;
 import java.util.List;
 
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
@@ -102,8 +101,8 @@ public abstract class JavaOclSortedCollection<T extends OclAny> extends
 		try {
 
 			IModelInstanceElement element =
-					((List<IModelInstanceElement>) imiCollection.getCollection())
-							.get(intIndex - 1);
+					((List<IModelInstanceElement>) getModelInstanceCollection()
+							.getCollection()).get(intIndex - 1);
 			result = (T) JavaStandardLibraryFactory.INSTANCE.createOclAny(element);
 
 		} catch (IndexOutOfBoundsException e) {
@@ -152,8 +151,8 @@ public abstract class JavaOclSortedCollection<T extends OclAny> extends
 		int intResult;
 
 		intResult =
-				((List<IModelInstanceElement>) imiCollection.getCollection())
-						.indexOf(anObject.getModelInstanceElement()) + 1;
+				((List<IModelInstanceElement>) getModelInstanceCollection()
+						.getCollection()).indexOf(anObject.getModelInstanceElement()) + 1;
 		// FIXME Michael: -1 -> not found? -> invalid?
 
 		IModelInstanceInteger imiResult =
@@ -179,10 +178,10 @@ public abstract class JavaOclSortedCollection<T extends OclAny> extends
 		List<IModelInstanceElement> resultCollection;
 
 		resultCollection =
-				(List<IModelInstanceElement>) imiCollection.getCollection();
-		resultCollection
-				.addAll((Collection<? extends IModelInstanceElement>) aCollection
-						.getModelInstanceElement());
+				(List<IModelInstanceElement>) getModelInstanceCollection()
+						.getCollection();
+		resultCollection.addAll(aCollection.getModelInstanceCollection()
+				.getCollection());
 
 		result =
 				JavaStandardLibraryFactory.INSTANCE.createOclSequence(resultCollection);

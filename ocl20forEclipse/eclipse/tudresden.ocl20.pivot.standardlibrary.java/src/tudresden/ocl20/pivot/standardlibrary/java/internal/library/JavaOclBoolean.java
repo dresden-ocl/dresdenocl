@@ -51,8 +51,6 @@ import tudresden.ocl20.pivot.standardlibrary.java.factory.JavaStandardLibraryFac
  */
 public class JavaOclBoolean extends JavaOclLibraryObject implements OclBoolean {
 
-	private IModelInstanceBoolean imiBoolean;
-
 	/* The false instance. */
 	private static OclBoolean FALSE =
 			new JavaOclBoolean(BasisJavaModelInstanceFactory
@@ -74,8 +72,6 @@ public class JavaOclBoolean extends JavaOclLibraryObject implements OclBoolean {
 	private JavaOclBoolean(IModelInstanceBoolean imiBoolean) {
 
 		super(imiBoolean);
-
-		this.imiBoolean = imiBoolean;
 	}
 
 	/**
@@ -91,6 +87,16 @@ public class JavaOclBoolean extends JavaOclLibraryObject implements OclBoolean {
 	public JavaOclBoolean(Throwable invalidReason) {
 
 		super(invalidReason);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @seetudresden.ocl20.pivot.essentialocl.standardlibrary.OclBoolean#
+	 * getModelInstanceBoolean()
+	 */
+	public IModelInstanceBoolean getModelInstanceBoolean() {
+
+		return (IModelInstanceBoolean) imiElement;
 	}
 
 	/**
@@ -202,7 +208,7 @@ public class JavaOclBoolean extends JavaOclLibraryObject implements OclBoolean {
 
 		checkUndefinedAndInvalid(this);
 
-		return imiBoolean.getBoolean();
+		return getModelInstanceBoolean().getBoolean();
 	}
 
 	/*
@@ -322,7 +328,7 @@ public class JavaOclBoolean extends JavaOclLibraryObject implements OclBoolean {
 		OclSet<T> result;
 
 		Set<IModelInstanceElement> imiSet = new HashSet<IModelInstanceElement>();
-		imiSet.add(imiBoolean);
+		imiSet.add(getModelInstanceBoolean());
 
 		result = JavaStandardLibraryFactory.INSTANCE.createOclSet(imiSet);
 
@@ -342,7 +348,7 @@ public class JavaOclBoolean extends JavaOclLibraryObject implements OclBoolean {
 
 		if (this.oclIsUndefined().isTrue()) {
 			result += "undefined: ";
-			result += this.getUndefinedreason();
+			result += this.getUndefinedReason();
 		}
 
 		else if (this.oclIsInvalid().isTrue()) {
@@ -351,7 +357,7 @@ public class JavaOclBoolean extends JavaOclLibraryObject implements OclBoolean {
 		}
 
 		else {
-			result += this.imiBoolean.getBoolean().toString();
+			result += this.getModelInstanceBoolean().getBoolean().toString();
 		}
 
 		result += "]";

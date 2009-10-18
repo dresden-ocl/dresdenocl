@@ -32,16 +32,31 @@
  */
 package tudresden.ocl20.pivot.essentialocl.standardlibrary;
 
-
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceTuple;
 
 /**
  * 
- *
+ * 
  * @author Matthias Braeuer
  * @version 1.0 30.03.2007
  */
 public interface OclTuple extends OclAny {
 
+	/**
+	 * Returns the adapted {@link IModelInstanceTuple}.
+	 * 
+	 * @return the adapted {@link IModelInstanceTuple}
+	 */
+	public IModelInstanceTuple getModelInstanceTuple();
+
+	/**
+	 * Returns the value associated by the given key/pathname. If the key does not
+	 * exist, return OclUndefined.
+	 * 
+	 * @param pathname
+	 *          a key of the {@link OclTuple}.
+	 * @return the value associated by the given key/pathname
+	 */
 	public OclAny getPropertyValue(OclString pathname);
-	
+
 }

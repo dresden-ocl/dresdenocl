@@ -54,8 +54,6 @@ import tudresden.ocl20.pivot.standardlibrary.java.factory.JavaStandardLibraryFac
  */
 public class JavaOclString extends JavaOclLibraryObject implements OclString {
 
-	protected IModelInstanceString imiString;
-
 	/**
 	 * <p>
 	 * Instantiates a new {@link JavaOclString}.
@@ -67,7 +65,6 @@ public class JavaOclString extends JavaOclLibraryObject implements OclString {
 	public JavaOclString(IModelInstanceString imiString) {
 
 		super(imiString);
-		this.imiString = imiString;
 	}
 
 	public JavaOclString(String undefinedReason) {
@@ -78,6 +75,11 @@ public class JavaOclString extends JavaOclLibraryObject implements OclString {
 	public JavaOclString(Throwable invalidReason) {
 
 		super(invalidReason);
+	}
+
+	public IModelInstanceString getModelInstanceString() {
+
+		return (IModelInstanceString) this.imiElement;
 	}
 
 	/*
@@ -94,9 +96,8 @@ public class JavaOclString extends JavaOclLibraryObject implements OclString {
 
 		checkUndefinedAndInvalid(this, aString);
 
-		concat.append(imiString.getString());
-		concat.append(((IModelInstanceString) aString.getModelInstanceElement())
-				.getString());
+		concat.append(getModelInstanceString().getString());
+		concat.append(aString.getModelInstanceString().getString());
 
 		result =
 				JavaStandardLibraryFactory.INSTANCE.createOclString(concat.toString());
@@ -115,7 +116,7 @@ public class JavaOclString extends JavaOclLibraryObject implements OclString {
 		checkUndefinedAndInvalid(this);
 
 		/* Else compute the result. */
-		Long size = new Long(imiString.getString().length());
+		Long size = new Long(getModelInstanceString().getString().length());
 		result = JavaStandardLibraryFactory.INSTANCE.createOclInteger(size);
 
 		return result;
@@ -136,18 +137,19 @@ public class JavaOclString extends JavaOclLibraryObject implements OclString {
 		int intLower =
 				((IModelInstanceInteger) lower.getModelInstanceElement()).getLong()
 						.intValue();
-		
+
 		/* Indices in OCL are different from Java indices! */
 		intLower--;
-		
+
 		int intUpper =
 				((IModelInstanceInteger) upper.getModelInstanceElement()).getLong()
 						.intValue();
 
 		try {
 			result =
-					JavaStandardLibraryFactory.INSTANCE.createOclString(imiString
-							.getString().substring(intLower, intUpper));
+					JavaStandardLibraryFactory.INSTANCE
+							.createOclString(getModelInstanceString().getString().substring(
+									intLower, intUpper));
 		} catch (IndexOutOfBoundsException e) {
 			throw new InvalidException(e);
 		}
@@ -168,7 +170,7 @@ public class JavaOclString extends JavaOclLibraryObject implements OclString {
 
 		/* Else compute the result. */
 		try {
-			Long toInteger = new Long(imiString.getString());
+			Long toInteger = new Long(getModelInstanceString().getString());
 
 			result = JavaStandardLibraryFactory.INSTANCE.createOclInteger(toInteger);
 		}
@@ -192,7 +194,7 @@ public class JavaOclString extends JavaOclLibraryObject implements OclString {
 
 		/* Else compute the result. */
 		try {
-			Double toReal = new Double(imiString.getString());
+			Double toReal = new Double(getModelInstanceString().getString());
 
 			result = JavaStandardLibraryFactory.INSTANCE.createOclReal(toReal);
 		}
@@ -224,7 +226,7 @@ public class JavaOclString extends JavaOclLibraryObject implements OclString {
 			String thatString =
 					((IModelInstanceString) that.getModelInstanceElement()).getString();
 
-			if (imiString.getString().equals(thatString)) {
+			if (getModelInstanceString().getString().equals(thatString)) {
 				result = JavaOclBoolean.getInstance(true);
 			}
 			else {
@@ -246,11 +248,39 @@ public class JavaOclString extends JavaOclLibraryObject implements OclString {
 		OclSet<T> result;
 
 		Set<IModelInstanceElement> imiSet = new HashSet<IModelInstanceElement>();
-		imiSet.add(imiString);
+		imiSet.add(getModelInstanceString());
 
 		result = JavaStandardLibraryFactory.INSTANCE.createOclSet(imiSet);
 
 		return result;
+	}
+	
+
+	@Override
+	public String toString() {
+
+		StringBuilder result = new StringBuilder();
+
+		result.append(this.getClass().getSimpleName());
+		result.append("[");
+		
+		if (this.oclIsUndefined().isTrue()) {
+			result.append("undefined: ");
+			result.append(this.undefinedreason);
+		}
+
+		else if (this.oclIsInvalid().isTrue()) {
+			result.append("invalid: ");
+			result.append(this.invalidReason.getMessage());
+		}
+
+		else {
+			result.append(getModelInstanceString().getString());
+		}
+		
+		result.append("]");
+
+		return result.toString();
 	}
 
 }

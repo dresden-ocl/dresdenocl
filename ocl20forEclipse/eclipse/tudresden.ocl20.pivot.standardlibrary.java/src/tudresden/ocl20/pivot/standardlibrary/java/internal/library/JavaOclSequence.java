@@ -93,7 +93,7 @@ public class JavaOclSequence<T extends OclAny> extends
 
 		checkUndefinedAndInvalid(this, that);
 
-		append.addAll(imiCollection.getCollection());
+		append.addAll(getModelInstanceCollection().getCollection());
 		append.add(that.getModelInstanceElement());
 
 		result = JavaStandardLibraryFactory.INSTANCE.createOclSequence(append);
@@ -116,7 +116,7 @@ public class JavaOclSequence<T extends OclAny> extends
 
 		checkUndefinedAndInvalid(this, that);
 
-		exclude.addAll(imiCollection.getCollection());
+		exclude.addAll(getModelInstanceCollection().getCollection());
 		exclude.remove(that.getModelInstanceElement());
 
 		result = JavaStandardLibraryFactory.INSTANCE.createOclSequence(exclude);
@@ -138,7 +138,8 @@ public class JavaOclSequence<T extends OclAny> extends
 		checkUndefinedAndInvalid(this);
 
 		/* Iterate over this ordered set. */
-		for (IModelInstanceElement element : imiCollection.getCollection()) {
+		for (IModelInstanceElement element : getModelInstanceCollection()
+				.getCollection()) {
 
 			/*
 			 * nested collections are flattened, i.e. their elements are added to the
@@ -197,7 +198,7 @@ public class JavaOclSequence<T extends OclAny> extends
 				((IModelInstanceInteger) index.getModelInstanceElement()).getLong()
 						.intValue();
 
-		insertAt.addAll(imiCollection.getCollection());
+		insertAt.addAll(getModelInstanceCollection().getCollection());
 
 		try {
 
@@ -234,7 +235,8 @@ public class JavaOclSequence<T extends OclAny> extends
 			boolean booleanResult;
 
 			List<IModelInstanceElement> sequence1 =
-					(List<IModelInstanceElement>) this.imiCollection.getCollection();
+					(List<IModelInstanceElement>) this.getModelInstanceCollection()
+							.getCollection();
 			List<IModelInstanceElement> sequence2 =
 					(List<IModelInstanceElement>) ((IModelInstanceCollection) that
 							.getModelInstanceElement()).getCollection();
@@ -281,7 +283,7 @@ public class JavaOclSequence<T extends OclAny> extends
 		checkUndefinedAndInvalid(this, that);
 
 		prepend.add(that.getModelInstanceElement());
-		prepend.addAll(imiCollection.getCollection());
+		prepend.addAll(getModelInstanceCollection().getCollection());
 
 		result = JavaStandardLibraryFactory.INSTANCE.createOclSequence(prepend);
 
@@ -312,7 +314,8 @@ public class JavaOclSequence<T extends OclAny> extends
 						.intValue();
 
 		final List<IModelInstanceElement> thisCollection =
-				(List<IModelInstanceElement>) imiCollection.getCollection();
+				(List<IModelInstanceElement>) getModelInstanceCollection()
+						.getCollection();
 
 		try {
 			subSequence.addAll(thisCollection.subList(intLower, intUpper));
@@ -340,10 +343,9 @@ public class JavaOclSequence<T extends OclAny> extends
 		checkUndefinedAndInvalid(this, that);
 
 		Collection<IModelInstanceElement> thatCollection =
-				((IModelInstanceCollection) that.getModelInstanceElement())
-						.getCollection();
+				that.getModelInstanceCollection().getCollection();
 
-		union.addAll(imiCollection.getCollection());
+		union.addAll(getModelInstanceCollection().getCollection());
 		union.addAll(thatCollection);
 
 		result = JavaStandardLibraryFactory.INSTANCE.createOclSequence(union);

@@ -32,6 +32,8 @@
  */
 package tudresden.ocl20.pivot.essentialocl.standardlibrary;
 
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceEnumerationLiteral;
+
 // TODO Michael: needed?
 /**
  * 
@@ -41,4 +43,6 @@ package tudresden.ocl20.pivot.essentialocl.standardlibrary;
  */
 public interface OclEnumLiteral extends OclAny {
 
+	IModelInstanceEnumerationLiteral getModelInstanceEnumerationLiteral();
+	
 }

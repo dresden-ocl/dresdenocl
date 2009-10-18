@@ -94,8 +94,8 @@ public class JavaOclBag<T extends OclAny> extends JavaOclUnsortedCollection<T>
 
 			// bagList needs to be a copy
 			Collection<IModelInstanceElement> bagList1 =
-					new ArrayList<IModelInstanceElement>(this.imiCollection
-							.getCollection());
+					new ArrayList<IModelInstanceElement>(this
+							.getModelInstanceCollection().getCollection());
 			Collection<IModelInstanceElement> bagList2 =
 					((IModelInstanceCollection) that.getModelInstanceElement())
 							.getCollection();
@@ -154,7 +154,8 @@ public class JavaOclBag<T extends OclAny> extends JavaOclUnsortedCollection<T>
 		List<IModelInstanceElement> resultCollection;
 
 		resultCollection =
-				new ArrayList<IModelInstanceElement>(imiCollection.getCollection());
+				new ArrayList<IModelInstanceElement>(getModelInstanceCollection()
+						.getCollection());
 
 		while (resultCollection.remove(that.getModelInstanceElement())) {
 			/* Remove the given object as often as possible. */
@@ -179,7 +180,8 @@ public class JavaOclBag<T extends OclAny> extends JavaOclUnsortedCollection<T>
 		checkUndefinedAndInvalid(this);
 
 		/* Iterate over this bag. */
-		for (IModelInstanceElement element : imiCollection.getCollection()) {
+		for (IModelInstanceElement element : getModelInstanceCollection()
+				.getCollection()) {
 
 			/*
 			 * nested collections are flattened, i.e. their elements are added to the
@@ -222,7 +224,7 @@ public class JavaOclBag<T extends OclAny> extends JavaOclUnsortedCollection<T>
 
 		checkUndefinedAndInvalid(this);
 
-		include.addAll(imiCollection.getCollection());
+		include.addAll(getModelInstanceCollection().getCollection());
 		include.add(anObject.getModelInstanceElement());
 
 		result = JavaStandardLibraryFactory.INSTANCE.createOclBag(include);
@@ -245,11 +247,12 @@ public class JavaOclBag<T extends OclAny> extends JavaOclUnsortedCollection<T>
 		checkUndefinedAndInvalid(this, that);
 
 		List<IModelInstanceElement> otherCollectionCopy =
-				new ArrayList<IModelInstanceElement>(((IModelInstanceCollection) that
-						.getModelInstanceElement()).getCollection());
+				new ArrayList<IModelInstanceElement>(that.getModelInstanceCollection()
+						.getCollection());
 
 		/* Iterate over this bag. */
-		for (IModelInstanceElement element : imiCollection.getCollection()) {
+		for (IModelInstanceElement element : getModelInstanceCollection()
+				.getCollection()) {
 			/*
 			 * if other collection has the same element, then it is in the
 			 * intersection; remove it, so that it is not counted multiple times
@@ -279,10 +282,9 @@ public class JavaOclBag<T extends OclAny> extends JavaOclUnsortedCollection<T>
 		checkUndefinedAndInvalid(this, that);
 
 		Collection<IModelInstanceElement> otherCollection =
-				((IModelInstanceCollection) that.getModelInstanceElement())
-						.getCollection();
+				that.getModelInstanceCollection().getCollection();
 
-		union.addAll(imiCollection.getCollection());
+		union.addAll(getModelInstanceCollection().getCollection());
 		union.addAll(otherCollection);
 
 		result = JavaStandardLibraryFactory.INSTANCE.createOclBag(union);

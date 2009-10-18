@@ -32,6 +32,8 @@
  */
 package tudresden.ocl20.pivot.essentialocl.standardlibrary;
 
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceInteger;
+
 /**
  * 
  * 
@@ -39,6 +41,13 @@ package tudresden.ocl20.pivot.essentialocl.standardlibrary;
  * @version 1.0 30.03.2007
  */
 public interface OclInteger extends OclReal {
+
+	/**
+	 * Returns the adapted {@link IModelInstanceInteger}.
+	 * 
+	 * @return the adapted {@link IModelInstanceInteger}
+	 */
+	IModelInstanceInteger getModelInstanceInteger();
 
 	/**
 	 * 
@@ -58,8 +67,7 @@ public interface OclInteger extends OclReal {
 	/**
 	 * 
 	 * @param i
-	 * @return the value of the addition of <code>this</code> and
-	 *         <code>i</code>.
+	 * @return the value of the addition of <code>this</code> and <code>i</code>.
 	 */
 	OclInteger add(OclInteger i);
 
@@ -73,7 +81,6 @@ public interface OclInteger extends OclReal {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclReal#negative()
 	 */
 	OclInteger negative();
@@ -105,7 +112,6 @@ public interface OclInteger extends OclReal {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclReal#abs()
 	 */
 	OclInteger abs();

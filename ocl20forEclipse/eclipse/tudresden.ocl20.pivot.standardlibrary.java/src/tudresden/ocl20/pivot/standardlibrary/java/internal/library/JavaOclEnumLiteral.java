@@ -49,10 +49,9 @@ import tudresden.ocl20.pivot.standardlibrary.java.factory.JavaStandardLibraryFac
  * @author Ronny Brandt
  * @author Michael Thiele
  */
-public class JavaOclEnumLiteral extends JavaOclLibraryObject implements OclEnumLiteral {
+public class JavaOclEnumLiteral extends JavaOclLibraryObject implements
+		OclEnumLiteral {
 
-	private IModelInstanceEnumerationLiteral imiEnumerationLiteral;
-	
 	/**
 	 * <p>
 	 * Instantiates a new {@link JavaOclEnumLiteral}.
@@ -65,7 +64,6 @@ public class JavaOclEnumLiteral extends JavaOclLibraryObject implements OclEnumL
 			IModelInstanceEnumerationLiteral imiEnumerationLiteral) {
 
 		super(imiEnumerationLiteral);
-		this.imiEnumerationLiteral = imiEnumerationLiteral;
 	}
 
 	public JavaOclEnumLiteral(String undefinedReason) {
@@ -78,35 +76,83 @@ public class JavaOclEnumLiteral extends JavaOclLibraryObject implements OclEnumL
 		super(invalidReason);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @seetudresden.ocl20.pivot.essentialocl.standardlibrary.OclEnumLiteral#
+	 * getModelInstanceEnumerationLiteral()
+	 */
+	public IModelInstanceEnumerationLiteral getModelInstanceEnumerationLiteral() {
+
+		return (IModelInstanceEnumerationLiteral) this.imiElement;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny#isEqualTo(tudresden
+	 * .ocl20.pivot.essentialocl.standardlibrary.OclAny)
+	 */
 	public OclBoolean isEqualTo(OclAny that) {
 
 		OclBoolean result;
-		
+
 		checkUndefinedAndInvalid(this, that);
-		
+
 		if (that instanceof JavaOclEnumLiteral) {
 			JavaOclEnumLiteral enumLiteral = (JavaOclEnumLiteral) that;
-			boolean boolResult = imiEnumerationLiteral.equals(enumLiteral.imiEnumerationLiteral);
+			boolean boolResult =
+					getModelInstanceEnumerationLiteral().equals(
+							enumLiteral.getModelInstanceEnumerationLiteral());
 			result = JavaOclBoolean.getInstance(boolResult);
-		} else {
+		}
+		else {
 			result = JavaOclBoolean.getInstance(false);
 		}
-		
+
 		return result;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny#asSet()
+	 */
 	public <T extends OclAny> OclSet<T> asSet() {
-	
+
 		checkUndefinedAndInvalid(this);
-	
+
 		OclSet<T> result;
-	
+
 		Set<IModelInstanceElement> imiSet = new HashSet<IModelInstanceElement>();
-		imiSet.add(imiEnumerationLiteral);
-	
+		imiSet.add(getModelInstanceEnumerationLiteral());
+
 		result = JavaStandardLibraryFactory.INSTANCE.createOclSet(imiSet);
-	
+
 		return result;
+	}
+
+	@Override
+	public String toString() {
+
+		StringBuilder result = new StringBuilder();
+
+		result.append(this.getClass().getSimpleName());
+		result.append("[");
+		
+		if (this.oclIsUndefined().isTrue()) {
+			result.append("undefined: " + this.undefinedreason);
+		}
+
+		else if (this.oclIsInvalid().isTrue()) {
+			result.append("invalid: " + this.invalidReason.getMessage());
+		}
+
+		else {
+			result.append(getModelInstanceEnumerationLiteral().getName());
+		}
+		
+		result.append("]");
+
+		return result.toString();
 	}
 
 }
