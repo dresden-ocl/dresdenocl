@@ -62,12 +62,12 @@ with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
 		</copy>
 
 		<!-- Zip binary files -->
-		<tar tarfile="${basedir}/dist/ocl2-for-eclipse-1.2.tar" basedir="${basedir}/dist/bin"/>
-		<gzip zipfile="${basedir}/dist/ocl2-for-eclipse-1.2.tar.gz" src="${basedir}/dist/ocl2-for-eclipse-1.2.tar"/>
+		<tar tarfile="${basedir}/dist/ocl2-for-eclipse-2.0.tar" basedir="${basedir}/dist/bin"/>
+		<gzip zipfile="${basedir}/dist/ocl2-for-eclipse-2.0.tar.gz" src="${basedir}/dist/ocl2-for-eclipse-2.0.tar"/>
 
 		<!-- Zip source files -->
-		<tar tarfile="${basedir}/dist/ocl2-for-eclipse-src-1.2.tar" basedir="${basedir}/dist/src"/>
-		<gzip zipfile="${basedir}/dist/ocl2-for-eclipse-src-1.2.tar.gz" src="${basedir}/dist/ocl2-for-eclipse-src-1.2.tar"/>
+		<tar tarfile="${basedir}/dist/ocl2-for-eclipse-src-2.0.tar" basedir="${basedir}/dist/src"/>
+		<gzip zipfile="${basedir}/dist/ocl2-for-eclipse-src-2.0.tar.gz" src="${basedir}/dist/ocl2-for-eclipse-src-2.0.tar"/>
 
 		<!-- delete temporary files -->
 		<delete includeEmptyDirs="true" failonerror="false">
