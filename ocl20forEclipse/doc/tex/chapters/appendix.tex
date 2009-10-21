@@ -31,30 +31,40 @@
 
     \textbf{Core} & 
     \textbf{Required:}\newline
-    org.apache.commons.lang\newline
     tudresden.ocl20.pivot.logging\newline
     tudresden.ocl20.pivot.essentialocl\newline
     tudresden.ocl20.pivot.essentialcol.edit\newline
     tudresden.ocl20.pivot.essentialocl.editor\newline
     tudresden.ocl20.pivot.essentialocl.standardlibrary\newline
+    tudresden.ocl20.pivot.examples.royalandloyal\newline
     tudresden.ocl20.pivot.modelbus\newline
     tudresden.ocl20.pivot.modelbus.ui\newline
     tudresden.ocl20.pivot.pivotmodel\newline
     tudresden.ocl20.pivot.pivotmodel.edit\newline
-    tudresden.ocl20.pivot.standardlibrary\newline\newline
+    tudresden.ocl20.pivot.standardlibrary.java\newline\newline
     \textbf{Optional:}\newline
     tudresden.ocl20.pivot.essentialocl.tests\newline
     tudresden.ocl20.pivot.pivotmodel.tests\\
+    \hline
+
+\end{tabular}
+\caption{The plug-ins of Dresden OCL2 for Eclipse related to their feature (part 1).}
+\label{tab:plugins}
+\end{table}
+
+\begin{table}[h]
+\begin{tabular}{|p{4cm}|p{10cm}|}
+    \hline
+    \textbf{Feature} & \textbf{Plug-ins} \\
     \hline
 
     \textbf{Examples} &
     \textbf{Optional:}\newline
     tudresden.ocl20.pivot.examples.living\newline
     tudresden.ocl20.pivot.examples.pml\newline
-    tudresden.ocl20.pivot.examples.royalandloyal\newline
-    tudresden.ocl20.pivot.examples.royalandloyal.constraints\newline
+    tudresden.ocl20.pivot.examples.royalandloyal.ocl22javacode\newline
     tudresden.ocl20.pivot.examples.simple\newline
-    tudresden.ocl20.pivot.examples.simple.constraints\\
+    tudresden.ocl20.pivot.examples.simple.ocl22javacode\\
     \hline
 
     \textbf{Interpreter} &
@@ -68,13 +78,23 @@
     \textbf{Metamodels} &
     \textbf{Required (at least one of the following):}\newline
     tudresden.ocl20.pivot.metamodels.ecore\newline
-    tudresden.ocl20.pivot.metamodels.uml2\\
+    tudresden.ocl20.pivot.metamodels.java\newline
+    tudresden.ocl20.pivot.metamodels.uml2\newline\newline
+    \textbf{Optional:}\newline
+    tudresden.ocl20.pivot.metamodels.test\newline
+    tudresden.ocl20.pivot.metamodels.ecore.test\newline
+    tudresden.ocl20.pivot.metamodels.java.test\newline
+    tudresden.ocl20.pivot.metamodels.uml2.test\\
     \hline
  
     \textbf{Model Instances} &
     \textbf{Required (at least one of the following for interpretation):}\newline
     tudresden.ocl20.pivot.modelinstancetype.ecore\newline
-    tudresden.ocl20.pivot.modelinstancetype.java\\
+    tudresden.ocl20.pivot.modelinstancetype.java\newline\newline
+    \textbf{Optional:}\newline
+    tudresden.ocl20.pivot.modelinstancetype.test\newline
+    tudresden.ocl20.pivot.modelinstancetype.test.ecore\newline
+    tudresden.ocl20.pivot.modelinstancetype.test.java\\
     \hline
  
     \textbf{Ocl2Java} &
@@ -96,8 +116,7 @@
     tudresden.ocl20.pivot.ocl2parser.test\\
     \hline
 \end{tabular}
-\caption{The plug-ins of Dresden OCL2 for Eclipse related to their feature.}
-\label{tab:plugins}
+\caption{The plug-ins of Dresden OCL2 for Eclipse related to their feature (part 2).}
 \end{table}
 
 
@@ -129,7 +148,7 @@
   Model & model/pml.ecore\\
   OCL Expressions & constraints/*.ocl\\
   Model Instance Type & EMF Ecore\\
-  Model Instance & modelinstance/instance.pml\\
+  Model Instances & modelinstance/goodModelinstance.pml, \newline modelinstance/badModelinstance.pml\\
   \hline
 
   \textbf{Royal and Loyal Example} & \\
