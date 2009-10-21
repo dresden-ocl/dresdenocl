@@ -60,8 +60,8 @@ public class PmlFactoryImpl extends EFactoryImpl implements PmlFactory {
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case PmlPackage.PLUGIN: return createPlugin();
 			case PmlPackage.FEATURE: return createFeature();
+			case PmlPackage.PLUGIN: return createPlugin();
 			case PmlPackage.EXTENSION_POINT: return createExtensionPoint();
 			case PmlPackage.EXTENSION: return createExtension();
 			case PmlPackage.JAVA_TYPE: return createJavaType();

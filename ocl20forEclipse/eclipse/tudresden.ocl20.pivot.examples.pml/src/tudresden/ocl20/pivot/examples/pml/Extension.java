@@ -63,7 +63,7 @@ public interface Extension extends EObject {
 	 * @return the value of the '<em>Extension Point</em>' reference.
 	 * @see #setExtensionPoint(ExtensionPoint)
 	 * @see tudresden.ocl20.pivot.examples.pml.PmlPackage#getExtension_ExtensionPoint()
-	 * @model
+	 * @model required="true"
 	 * @generated
 	 */
 	ExtensionPoint getExtensionPoint();

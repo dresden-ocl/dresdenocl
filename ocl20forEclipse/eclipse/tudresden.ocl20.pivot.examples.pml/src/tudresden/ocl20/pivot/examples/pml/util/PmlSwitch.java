@@ -87,15 +87,15 @@ public class PmlSwitch<T> {
 	 */
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
-			case PmlPackage.PLUGIN: {
-				Plugin plugin = (Plugin)theEObject;
-				T result = casePlugin(plugin);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case PmlPackage.FEATURE: {
 				Feature feature = (Feature)theEObject;
 				T result = caseFeature(feature);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case PmlPackage.PLUGIN: {
+				Plugin plugin = (Plugin)theEObject;
+				T result = casePlugin(plugin);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}

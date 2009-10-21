@@ -72,12 +72,12 @@ public class PmlAdapterFactory extends AdapterFactoryImpl {
 	protected PmlSwitch<Adapter> modelSwitch =
 		new PmlSwitch<Adapter>() {
 			@Override
-			public Adapter casePlugin(Plugin object) {
-				return createPluginAdapter();
-			}
-			@Override
 			public Adapter caseFeature(Feature object) {
 				return createFeatureAdapter();
+			}
+			@Override
+			public Adapter casePlugin(Plugin object) {
+				return createPluginAdapter();
 			}
 			@Override
 			public Adapter caseExtensionPoint(ExtensionPoint object) {

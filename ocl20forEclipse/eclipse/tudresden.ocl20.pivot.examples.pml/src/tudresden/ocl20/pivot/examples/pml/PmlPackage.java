@@ -67,7 +67,62 @@ public interface PmlPackage extends EPackage {
 	 * @see tudresden.ocl20.pivot.examples.pml.impl.PmlPackageImpl#getPlugin()
 	 * @generated
 	 */
-	int PLUGIN = 0;
+	int PLUGIN = 1;
+
+	/**
+	 * The meta object id for the '{@link tudresden.ocl20.pivot.examples.pml.impl.FeatureImpl <em>Feature</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see tudresden.ocl20.pivot.examples.pml.impl.FeatureImpl
+	 * @see tudresden.ocl20.pivot.examples.pml.impl.PmlPackageImpl#getFeature()
+	 * @generated
+	 */
+	int FEATURE = 0;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FEATURE__ID = 0;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FEATURE__NAME = 1;
+
+	/**
+	 * The feature id for the '<em><b>Version</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FEATURE__VERSION = 2;
+
+	/**
+	 * The feature id for the '<em><b>Plugins</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FEATURE__PLUGINS = 3;
+
+	/**
+	 * The number of structural features of the '<em>Feature</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FEATURE_FEATURE_COUNT = 4;
 
 	/**
 	 * The feature id for the '<em><b>Id</b></em>' attribute.
@@ -133,22 +188,13 @@ public interface PmlPackage extends EPackage {
 	int PLUGIN__EXTENSIONS = 6;
 
 	/**
-	 * The feature id for the '<em><b>Services</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PLUGIN__SERVICES = 7;
-
-	/**
 	 * The feature id for the '<em><b>Activator</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PLUGIN__ACTIVATOR = 8;
+	int PLUGIN__ACTIVATOR = 7;
 
 	/**
 	 * The number of structural features of the '<em>Plugin</em>' class.
@@ -157,62 +203,7 @@ public interface PmlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PLUGIN_FEATURE_COUNT = 9;
-
-	/**
-	 * The meta object id for the '{@link tudresden.ocl20.pivot.examples.pml.impl.FeatureImpl <em>Feature</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see tudresden.ocl20.pivot.examples.pml.impl.FeatureImpl
-	 * @see tudresden.ocl20.pivot.examples.pml.impl.PmlPackageImpl#getFeature()
-	 * @generated
-	 */
-	int FEATURE = 1;
-
-	/**
-	 * The feature id for the '<em><b>Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FEATURE__ID = 0;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FEATURE__NAME = 1;
-
-	/**
-	 * The feature id for the '<em><b>Version</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FEATURE__VERSION = 2;
-
-	/**
-	 * The feature id for the '<em><b>Plugins</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FEATURE__PLUGINS = 3;
-
-	/**
-	 * The number of structural features of the '<em>Feature</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FEATURE_FEATURE_COUNT = 4;
+	int PLUGIN_FEATURE_COUNT = 8;
 
 	/**
 	 * The meta object id for the '{@link tudresden.ocl20.pivot.examples.pml.impl.ExtensionPointImpl <em>Extension Point</em>}' class.
@@ -577,17 +568,6 @@ public interface PmlPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getPlugin_Extensions();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link tudresden.ocl20.pivot.examples.pml.Plugin#getServices <em>Services</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Services</em>'.
-	 * @see tudresden.ocl20.pivot.examples.pml.Plugin#getServices()
-	 * @see #getPlugin()
-	 * @generated
-	 */
-	EReference getPlugin_Services();
 
 	/**
 	 * Returns the meta object for the reference '{@link tudresden.ocl20.pivot.examples.pml.Plugin#getActivator <em>Activator</em>}'.
@@ -999,14 +979,6 @@ public interface PmlPackage extends EPackage {
 		 * @generated
 		 */
 		EReference PLUGIN__EXTENSIONS = eINSTANCE.getPlugin_Extensions();
-
-		/**
-		 * The meta object literal for the '<em><b>Services</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference PLUGIN__SERVICES = eINSTANCE.getPlugin_Services();
 
 		/**
 		 * The meta object literal for the '<em><b>Activator</b></em>' reference feature.

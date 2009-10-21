@@ -25,24 +25,19 @@ import tudresden.ocl20.pivot.examples.pml.PmlPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>
- * {@link tudresden.ocl20.pivot.examples.pml.impl.ExtensionImpl#getImplementation
- * <em>Implementation</em>}</li>
- * <li>
- * {@link tudresden.ocl20.pivot.examples.pml.impl.ExtensionImpl#getExtensionPoint
- * <em>Extension Point</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.examples.pml.impl.ExtensionImpl#getImplementation <em>Implementation</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.examples.pml.impl.ExtensionImpl#getExtensionPoint <em>Extension Point</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @generated
  */
 public class ExtensionImpl extends EObjectImpl implements Extension {
 
 	/**
-	 * The cached value of the '{@link #getImplementation()
-	 * <em>Implementation</em>}' reference. <!-- begin-user-doc --> <!--
+	 * The cached value of the '{@link #getImplementation() <em>Implementation</em>}' reference.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @see #getImplementation()
 	 * @generated
 	 * @ordered
@@ -50,10 +45,9 @@ public class ExtensionImpl extends EObjectImpl implements Extension {
 	protected JavaType implementation;
 
 	/**
-	 * The cached value of the '{@link #getExtensionPoint()
-	 * <em>Extension Point</em>}' reference. <!-- begin-user-doc --> <!--
+	 * The cached value of the '{@link #getExtensionPoint() <em>Extension Point</em>}' reference.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @see #getExtensionPoint()
 	 * @generated
 	 * @ordered
@@ -62,40 +56,32 @@ public class ExtensionImpl extends EObjectImpl implements Extension {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	protected ExtensionImpl() {
-
 		super();
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	protected EClass eStaticClass() {
-
 		return PmlPackage.Literals.EXTENSION;
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public JavaType getImplementation() {
-
 		if (implementation != null && implementation.eIsProxy()) {
-			InternalEObject oldImplementation = (InternalEObject) implementation;
-			implementation = (JavaType) eResolveProxy(oldImplementation);
+			InternalEObject oldImplementation = (InternalEObject)implementation;
+			implementation = (JavaType)eResolveProxy(oldImplementation);
 			if (implementation != oldImplementation) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE,
-							PmlPackage.EXTENSION__IMPLEMENTATION, oldImplementation,
-							implementation));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, PmlPackage.EXTENSION__IMPLEMENTATION, oldImplementation, implementation));
 			}
 		}
 		return implementation;
@@ -103,44 +89,34 @@ public class ExtensionImpl extends EObjectImpl implements Extension {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public JavaType basicGetImplementation() {
-
 		return implementation;
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public void setImplementation(JavaType newImplementation) {
-
 		JavaType oldImplementation = implementation;
 		implementation = newImplementation;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-					PmlPackage.EXTENSION__IMPLEMENTATION, oldImplementation,
-					implementation));
+			eNotify(new ENotificationImpl(this, Notification.SET, PmlPackage.EXTENSION__IMPLEMENTATION, oldImplementation, implementation));
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public ExtensionPoint getExtensionPoint() {
-
 		if (extensionPoint != null && extensionPoint.eIsProxy()) {
-			InternalEObject oldExtensionPoint = (InternalEObject) extensionPoint;
-			extensionPoint = (ExtensionPoint) eResolveProxy(oldExtensionPoint);
+			InternalEObject oldExtensionPoint = (InternalEObject)extensionPoint;
+			extensionPoint = (ExtensionPoint)eResolveProxy(oldExtensionPoint);
 			if (extensionPoint != oldExtensionPoint) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE,
-							PmlPackage.EXTENSION__EXTENSION_POINT, oldExtensionPoint,
-							extensionPoint));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, PmlPackage.EXTENSION__EXTENSION_POINT, oldExtensionPoint, extensionPoint));
 			}
 		}
 		return extensionPoint;
@@ -148,101 +124,85 @@ public class ExtensionImpl extends EObjectImpl implements Extension {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public ExtensionPoint basicGetExtensionPoint() {
-
 		return extensionPoint;
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public void setExtensionPoint(ExtensionPoint newExtensionPoint) {
-
 		ExtensionPoint oldExtensionPoint = extensionPoint;
 		extensionPoint = newExtensionPoint;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-					PmlPackage.EXTENSION__EXTENSION_POINT, oldExtensionPoint,
-					extensionPoint));
+			eNotify(new ENotificationImpl(this, Notification.SET, PmlPackage.EXTENSION__EXTENSION_POINT, oldExtensionPoint, extensionPoint));
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-
 		switch (featureID) {
-		case PmlPackage.EXTENSION__IMPLEMENTATION:
-			if (resolve)
-				return getImplementation();
-			return basicGetImplementation();
-		case PmlPackage.EXTENSION__EXTENSION_POINT:
-			if (resolve)
-				return getExtensionPoint();
-			return basicGetExtensionPoint();
+			case PmlPackage.EXTENSION__IMPLEMENTATION:
+				if (resolve) return getImplementation();
+				return basicGetImplementation();
+			case PmlPackage.EXTENSION__EXTENSION_POINT:
+				if (resolve) return getExtensionPoint();
+				return basicGetExtensionPoint();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-
 		switch (featureID) {
-		case PmlPackage.EXTENSION__IMPLEMENTATION:
-			setImplementation((JavaType) newValue);
-			return;
-		case PmlPackage.EXTENSION__EXTENSION_POINT:
-			setExtensionPoint((ExtensionPoint) newValue);
-			return;
+			case PmlPackage.EXTENSION__IMPLEMENTATION:
+				setImplementation((JavaType)newValue);
+				return;
+			case PmlPackage.EXTENSION__EXTENSION_POINT:
+				setExtensionPoint((ExtensionPoint)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public void eUnset(int featureID) {
-
 		switch (featureID) {
-		case PmlPackage.EXTENSION__IMPLEMENTATION:
-			setImplementation((JavaType) null);
-			return;
-		case PmlPackage.EXTENSION__EXTENSION_POINT:
-			setExtensionPoint((ExtensionPoint) null);
-			return;
+			case PmlPackage.EXTENSION__IMPLEMENTATION:
+				setImplementation((JavaType)null);
+				return;
+			case PmlPackage.EXTENSION__EXTENSION_POINT:
+				setExtensionPoint((ExtensionPoint)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-
 		switch (featureID) {
-		case PmlPackage.EXTENSION__IMPLEMENTATION:
-			return implementation != null;
-		case PmlPackage.EXTENSION__EXTENSION_POINT:
-			return extensionPoint != null;
+			case PmlPackage.EXTENSION__IMPLEMENTATION:
+				return implementation != null;
+			case PmlPackage.EXTENSION__EXTENSION_POINT:
+				return extensionPoint != null;
 		}
 		return super.eIsSet(featureID);
 	}

@@ -25,7 +25,6 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link tudresden.ocl20.pivot.examples.pml.Plugin#getFeature <em>Feature</em>}</li>
  *   <li>{@link tudresden.ocl20.pivot.examples.pml.Plugin#getExtensionPoints <em>Extension Points</em>}</li>
  *   <li>{@link tudresden.ocl20.pivot.examples.pml.Plugin#getExtensions <em>Extensions</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.examples.pml.Plugin#getServices <em>Services</em>}</li>
  *   <li>{@link tudresden.ocl20.pivot.examples.pml.Plugin#getActivator <em>Activator</em>}</li>
  * </ul>
  * </p>
@@ -200,22 +199,6 @@ public interface Plugin extends EObject {
 	 * @generated
 	 */
 	EList<Extension> getExtensions();
-
-	/**
-	 * Returns the value of the '<em><b>Services</b></em>' containment reference list.
-	 * The list contents are of type {@link tudresden.ocl20.pivot.examples.pml.Operation}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Services</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Services</em>' containment reference list.
-	 * @see tudresden.ocl20.pivot.examples.pml.PmlPackage#getPlugin_Services()
-	 * @model containment="true"
-	 * @generated
-	 */
-	EList<Operation> getServices();
 
 	/**
 	 * Returns the value of the '<em><b>Activator</b></em>' reference.
