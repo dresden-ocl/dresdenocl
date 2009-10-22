@@ -82,7 +82,7 @@
                   the name of a class that implements &lt;code&gt;IModelProvider&lt;/code&gt; and is responsible for loading instances (i.e. domain-specific models) of this metamodel
                </documentation>
                <appInfo>
-                  <meta.attribute kind="java" basedOn="tudresden.ocl20.pivot.modelbus.IModelProvider"/>
+                  <meta.attribute kind="java" basedOn="tudresden.ocl20.pivot.modelbus.model.IModelProvider"/>
                </appInfo>
             </annotation>
          </attribute>

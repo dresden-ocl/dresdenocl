@@ -68,7 +68,7 @@ import tudresden.ocl20.pivot.essentialocl.types.SetType;
 import tudresden.ocl20.pivot.essentialocl.types.TupleType;
 import tudresden.ocl20.pivot.essentialocl.types.TypeType;
 import tudresden.ocl20.pivot.essentialocl.types.VoidType;
-import tudresden.ocl20.pivot.modelbus.IModel;
+import tudresden.ocl20.pivot.modelbus.model.IModel;
 import tudresden.ocl20.pivot.ocl2java.IOcl2Code;
 import tudresden.ocl20.pivot.ocl2java.IOcl2CodeSettings;
 import tudresden.ocl20.pivot.ocl2java.code.IOcl22CodeEnvironment;

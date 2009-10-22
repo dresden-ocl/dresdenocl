@@ -25,8 +25,8 @@ import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.swt.graphics.Image;
 
-import tudresden.ocl20.pivot.modelbus.IMetamodel;
-import tudresden.ocl20.pivot.modelbus.IMetamodelDescriptor;
+import tudresden.ocl20.pivot.modelbus.metamodel.IMetamodel;
+import tudresden.ocl20.pivot.modelbus.metamodel.IMetamodelDescriptor;
 
 /**
  * <p>

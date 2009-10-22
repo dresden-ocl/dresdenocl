@@ -30,8 +30,8 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
 
-import tudresden.ocl20.pivot.modelbus.IModel;
 import tudresden.ocl20.pivot.modelbus.IModelBusConstants;
+import tudresden.ocl20.pivot.modelbus.model.IModel;
 import tudresden.ocl20.pivot.pivotmodel.PrimitiveType;
 import tudresden.ocl20.pivot.pivotmodel.PrimitiveTypeKind;
 import tudresden.ocl20.pivot.pivotmodel.Type;

@@ -30,87 +30,76 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.modelbus.internal;
+package tudresden.ocl20.pivot.modelbus.metamodel.internal;
 
 import org.apache.log4j.Logger;
 
-import java.io.IOException;
+import org.eclipse.core.runtime.IConfigurationElement;
+import org.eclipse.core.runtime.IExtension;
+import org.eclipse.core.runtime.IExtensionPoint;
 
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-
-import tudresden.ocl20.pivot.essentialocl.types.OclLibrary;
-import tudresden.ocl20.pivot.modelbus.IOclLibraryProvider;
+import tudresden.ocl20.pivot.modelbus.IModelBusConstants;
 import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
+import tudresden.ocl20.pivot.modelbus.metamodel.IMetamodelRegistry;
 
 /**
- * Standard implementation of the {@link IOclLibraryProvider} interface that simply loads the model
- * file with the OCL Standard Library from the resources of this plugin.
+ * A simple helper class that can fill an {@link IMetamodelRegistry} with metamodels read from
+ * extensions of the 'metamodels' extension point.
  * 
  * @author Matthias Braeuer
  * @version 1.0 03.04.2007
  */
-public class OclLibraryProvider implements IOclLibraryProvider {
+public class MetamodelRegistryReader {
 
-  // logger for this class
-  private static final Logger logger = ModelBusPlugin.getLogger(OclLibraryProvider.class);
-
-  // the file name of the OCL Standard Library model
-  private static final String OCL_LIBRARY_FILE = "/resources/oclstandardlibrary.types"; //$NON-NLS-1$
-
-  // the cached library instance
-  private OclLibrary oclLibrary;
-
-  /*
-   * (non-Javadoc)
-   * 
-   * @see tudresden.ocl20.pivot.modelbus.IOclLibraryProvider#getOclLibrary()
-   */
-  public OclLibrary getOclLibrary() {
-    
-    if (oclLibrary == null) {
-      oclLibrary = loadOclLibrary();
-    }
-    
-    return oclLibrary;
-  }
-  
+  // a Logger for this class
+  private static final Logger logger = ModelBusPlugin.getLogger(MetamodelRegistryReader.class);
 
   /**
-   * Helper method that performs the actual loading. This should work without errors unless the
-   * Model Bus plugin is changed.
-   * 
-   * @return an <code>oclLibrary</code> instance
+   * @param extensionPoint
+   * @param registry
    */
-  protected OclLibrary loadOclLibrary() {
-    EObject library;
+  public void read(IExtensionPoint extensionPoint, IMetamodelRegistry registry) {
+    IExtension[] extensions = extensionPoint.getExtensions();
 
-    ResourceSet resourceSet = new ResourceSetImpl();
-    Resource resource = resourceSet.createResource(URI.createPlatformPluginURI(ModelBusPlugin.ID
-        + OCL_LIBRARY_FILE,false));
-    
-    if (logger.isInfoEnabled()) {
-      logger.info(ModelBusMessages.OclLibraryProvider_LoadOclLibrary);
+    for (int i = 0; i < extensions.length; i++) {
+      read(extensions[i],registry);
     }
-    
-    try {
-      resource.load(null);
-    }
-    catch (IOException e) {
-      throw new IllegalStateException("Failed to load the OCL Standard Library.",e); //$NON-NLS-1$
-    }
-
-    library = resource.getContents().get(0);
-
-    if (!(library instanceof OclLibrary)) {
-      throw new IllegalStateException("The root object of model '" + OCL_LIBRARY_FILE //$NON-NLS-1$
-          + "' is not an instance of OclLibrary."); //$NON-NLS-1$
-    }
-    
-    return (OclLibrary) library;
   }
 
+  /**
+   * @param extension
+   * @param registry
+   */
+  public void read(IExtension extension, IMetamodelRegistry registry) {
+    IConfigurationElement[] elements = extension.getConfigurationElements();
+
+    for (int i = 0; i < elements.length; i++) {
+      read(elements[i],registry);
+    }
+  }
+
+  /**
+   * @param configElement
+   * @param registry
+   */
+  public void read(IConfigurationElement configElement, IMetamodelRegistry registry) {
+
+    if (configElement.getName().equals(IModelBusConstants.TAG_METAMODEL)) {
+
+      try {
+        registry.addMetamodel(new MetamodelDescriptor(configElement));
+      }
+
+      catch (Exception e) {
+        logger.warn("An error was encountered when reading config element " + configElement,e); //$NON-NLS-1$
+      }
+
+    }
+
+    else {
+      logger.warn("Unable to read config element " + configElement //$NON-NLS-1$
+          + " because its tag name is not recognized."); //$NON-NLS-1$
+    }
+
+  }
 }

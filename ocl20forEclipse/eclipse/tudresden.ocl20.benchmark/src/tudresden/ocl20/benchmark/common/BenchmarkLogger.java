@@ -23,7 +23,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-import tudresden.ocl20.pivot.modelbus.IModelObject;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceObject;
 import tudresden.ocl20.pivot.pivotmodel.Constraint;
 
 /**
@@ -252,7 +252,7 @@ public class BenchmarkLogger {
 	 * @param obj
 	 * @param result
 	 */
-	public void interpretationError(Constraint con, IModelObject obj,
+	public void interpretationError(Constraint con, IModelInstanceObject obj,
 			Object result) {
 		this.statInterpretation[1] += 1;
 
@@ -284,7 +284,7 @@ public class BenchmarkLogger {
 	 * @param con
 	 * @param obj
 	 */
-	public void interpretationSuccess(Constraint con, IModelObject obj) {
+	public void interpretationSuccess(Constraint con, IModelInstanceObject obj) {
 		this.statInterpretation[0] += 1;
 		this.outLine("-->OK.");
 		this.outRuler3();

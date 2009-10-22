@@ -1,4 +1,7 @@
-package tudresden.ocl20.pivot.modelbus;
+package tudresden.ocl20.pivot.modelbus.model.exception;
+
+import tudresden.ocl20.pivot.modelbus.model.IModelFactory;
+
 
 /**
  * A <code>FactoryException</code> is thrown by a {@link IModelFactory model factory} or

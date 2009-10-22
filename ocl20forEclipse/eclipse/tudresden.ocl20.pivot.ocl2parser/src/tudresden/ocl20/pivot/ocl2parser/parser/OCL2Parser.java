@@ -26,7 +26,7 @@ import java.io.PushbackReader;
 import java.io.Reader;
 import java.util.List;
 
-import tudresden.ocl20.pivot.modelbus.IModel;
+import tudresden.ocl20.pivot.modelbus.model.IModel;
 import tudresden.ocl20.pivot.ocl2parser.gen.ocl2as.OclFileAS;
 import tudresden.ocl20.pivot.ocl2parser.gen.parserfiles.analysis.AttrEvalException;
 import tudresden.ocl20.pivot.ocl2parser.gen.parserfiles.lexer.Lexer;

@@ -30,7 +30,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.modelbus.base;
+package tudresden.ocl20.pivot.modelbus.model.base;
 
 import org.apache.log4j.Logger;
 import org.eclipse.osgi.util.NLS;
@@ -39,10 +39,10 @@ import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import tudresden.ocl20.pivot.modelbus.IModel;
-import tudresden.ocl20.pivot.modelbus.IModelProvider;
 import tudresden.ocl20.pivot.modelbus.ModelAccessException;
 import tudresden.ocl20.pivot.modelbus.internal.ModelBusMessages;
+import tudresden.ocl20.pivot.modelbus.model.IModel;
+import tudresden.ocl20.pivot.modelbus.model.IModelProvider;
 
 /**
  * This is a base implementation for the {@link IModelProvider} interface that assumes models to be
@@ -63,7 +63,7 @@ public abstract class AbstractModelProvider implements IModelProvider {
    * This implementation tries to create a URL from the given model name. See
    * {@link Class#getResource(String)} for a description of the required format of the name.
    * 
-   * @see tudresden.ocl20.pivot.modelbus.IModelProvider#getModel(java.lang.String)
+   * @see tudresden.ocl20.pivot.modelbus.model.IModelProvider#getModel(java.lang.String)
    */
   public IModel getModel(String modelName) throws ModelAccessException {
     if (logger.isDebugEnabled()) {

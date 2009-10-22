@@ -26,11 +26,11 @@ import org.eclipse.osgi.util.NLS;
 import tudresden.ocl20.pivot.metamodels.java.JavaMetaModelPlugin;
 import tudresden.ocl20.pivot.metamodels.java.internal.model.JavaModel;
 import tudresden.ocl20.pivot.metamodels.java.internal.msg.JavaMetaModelMessages;
-import tudresden.ocl20.pivot.modelbus.IModel;
-import tudresden.ocl20.pivot.modelbus.IModelProvider;
 import tudresden.ocl20.pivot.modelbus.ModelAccessException;
 import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
-import tudresden.ocl20.pivot.modelbus.base.AbstractModelProvider;
+import tudresden.ocl20.pivot.modelbus.model.IModel;
+import tudresden.ocl20.pivot.modelbus.model.IModelProvider;
+import tudresden.ocl20.pivot.modelbus.model.base.AbstractModelProvider;
 
 /**
  * <p>

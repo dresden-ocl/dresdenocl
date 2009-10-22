@@ -30,7 +30,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.modelbus.internal;
+package tudresden.ocl20.pivot.modelbus.model.internal;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,11 +39,12 @@ import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.ListenerList;
 import org.eclipse.osgi.util.NLS;
 
-import tudresden.ocl20.pivot.modelbus.IModel;
-import tudresden.ocl20.pivot.modelbus.IModelRegistry;
 import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
 import tudresden.ocl20.pivot.modelbus.event.IModelRegistryListener;
 import tudresden.ocl20.pivot.modelbus.event.ModelRegistryEvent;
+import tudresden.ocl20.pivot.modelbus.internal.ModelBusMessages;
+import tudresden.ocl20.pivot.modelbus.model.IModel;
+import tudresden.ocl20.pivot.modelbus.model.IModelRegistry;
 
 /**
  * Standard implementation of the {@link IModelRegistry} interface that uses a simple list for

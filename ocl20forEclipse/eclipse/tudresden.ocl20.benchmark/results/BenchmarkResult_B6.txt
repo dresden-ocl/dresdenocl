@@ -794,7 +794,7 @@ context Dummy  inv B6determinateness_8:
 	r->including(elem))->first()
 	
 java.lang.NullPointerException
-	thrown in: tudresden.ocl20.interpreter.internal.OclInterpreter.caseOperationCallExp(OclInterpreter.java:2189)
+	thrown in: tudresden.ocl20.pivot.interpreter.internal.OclInterpreter.caseOperationCallExp(OclInterpreter.java:2189)
 ..........................................
 
 Constraint: root::tudresden::ocl20::benchmark::testdata::common::B6determinateness_9
@@ -860,7 +860,7 @@ context Dummy  inv B6determinateness_15:
 	r->including(elem))->first()
 	
 java.lang.NullPointerException
-	thrown in: tudresden.ocl20.interpreter.internal.OclInterpreter.caseOperationCallExp(OclInterpreter.java:2189)
+	thrown in: tudresden.ocl20.pivot.interpreter.internal.OclInterpreter.caseOperationCallExp(OclInterpreter.java:2189)
 ..........................................
 
 Constraint: root::tudresden::ocl20::benchmark::testdata::common::B6determinateness_16

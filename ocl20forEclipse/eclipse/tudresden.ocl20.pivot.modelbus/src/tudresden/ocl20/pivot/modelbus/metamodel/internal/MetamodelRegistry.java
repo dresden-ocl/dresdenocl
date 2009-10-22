@@ -30,7 +30,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.modelbus.internal;
+package tudresden.ocl20.pivot.modelbus.metamodel.internal;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -44,11 +44,11 @@ import org.eclipse.core.runtime.dynamichelpers.IExtensionChangeHandler;
 import org.eclipse.core.runtime.dynamichelpers.IExtensionTracker;
 import org.eclipse.ui.PlatformUI;
 
-import tudresden.ocl20.pivot.modelbus.IMetamodel;
-import tudresden.ocl20.pivot.modelbus.IMetamodelDescriptor;
-import tudresden.ocl20.pivot.modelbus.IMetamodelRegistry;
 import tudresden.ocl20.pivot.modelbus.IModelBusConstants;
 import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
+import tudresden.ocl20.pivot.modelbus.metamodel.IMetamodel;
+import tudresden.ocl20.pivot.modelbus.metamodel.IMetamodelDescriptor;
+import tudresden.ocl20.pivot.modelbus.metamodel.IMetamodelRegistry;
 
 /**
  * A default implementation of the {@link IMetamodelRegistry} interface to be used in an Eclipse

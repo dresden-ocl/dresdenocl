@@ -9,9 +9,9 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 import org.eclipse.osgi.util.NLS;
 
-import tudresden.ocl20.pivot.modelbus.IModel;
-import tudresden.ocl20.pivot.modelbus.IModelFactory;
-import tudresden.ocl20.pivot.modelbus.ITypeResolver;
+import tudresden.ocl20.pivot.modelbus.model.IModel;
+import tudresden.ocl20.pivot.modelbus.model.IModelFactory;
+import tudresden.ocl20.pivot.modelbus.model.ITypeResolver;
 import tudresden.ocl20.pivot.parser.internal.ParserMessages;
 
 /**

@@ -22,7 +22,7 @@
  * 
  * $Id$
  */
-package tudresden.ocl20.pivot.modelbus.base;
+package tudresden.ocl20.pivot.modelbus.model.base;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -31,17 +31,17 @@ import java.util.List;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 
-import tudresden.ocl20.pivot.modelbus.IMetamodel;
-import tudresden.ocl20.pivot.modelbus.IModel;
 import tudresden.ocl20.pivot.modelbus.IModelBusConstants;
-import tudresden.ocl20.pivot.modelbus.IModelFactory;
-import tudresden.ocl20.pivot.modelbus.IOclLibraryProvider;
-import tudresden.ocl20.pivot.modelbus.ITypeResolver;
 import tudresden.ocl20.pivot.modelbus.ModelAccessException;
 import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
-import tudresden.ocl20.pivot.modelbus.internal.ModelFactory;
-import tudresden.ocl20.pivot.modelbus.internal.OclLibraryProvider;
-import tudresden.ocl20.pivot.modelbus.internal.TypeResolver;
+import tudresden.ocl20.pivot.modelbus.metamodel.IMetamodel;
+import tudresden.ocl20.pivot.modelbus.model.IModel;
+import tudresden.ocl20.pivot.modelbus.model.IModelFactory;
+import tudresden.ocl20.pivot.modelbus.model.IOclLibraryProvider;
+import tudresden.ocl20.pivot.modelbus.model.ITypeResolver;
+import tudresden.ocl20.pivot.modelbus.model.internal.ModelFactory;
+import tudresden.ocl20.pivot.modelbus.model.internal.OclLibraryProvider;
+import tudresden.ocl20.pivot.modelbus.model.internal.TypeResolver;
 import tudresden.ocl20.pivot.pivotmodel.Namespace;
 import tudresden.ocl20.pivot.pivotmodel.PivotModelFactory;
 import tudresden.ocl20.pivot.pivotmodel.PrimitiveType;

@@ -30,7 +30,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.modelbus;
+package tudresden.ocl20.pivot.modelbus.model;
 
 import tudresden.ocl20.pivot.essentialocl.types.OclLibrary;
 

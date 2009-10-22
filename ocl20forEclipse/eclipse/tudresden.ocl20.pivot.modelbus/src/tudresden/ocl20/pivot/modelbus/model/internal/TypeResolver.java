@@ -1,4 +1,4 @@
-package tudresden.ocl20.pivot.modelbus.internal;
+package tudresden.ocl20.pivot.modelbus.model.internal;
 
 import java.util.HashMap;
 import java.util.List;
@@ -7,12 +7,12 @@ import java.util.Map;
 import org.apache.log4j.Logger;
 
 import tudresden.ocl20.pivot.essentialocl.types.OclLibrary;
-import tudresden.ocl20.pivot.modelbus.IModel;
-import tudresden.ocl20.pivot.modelbus.IOclLibraryProvider;
-import tudresden.ocl20.pivot.modelbus.ITypeResolver;
 import tudresden.ocl20.pivot.modelbus.ModelAccessException;
 import tudresden.ocl20.pivot.modelbus.ModelBusException;
-import tudresden.ocl20.pivot.modelbus.TypeNotFoundException;
+import tudresden.ocl20.pivot.modelbus.model.IModel;
+import tudresden.ocl20.pivot.modelbus.model.IOclLibraryProvider;
+import tudresden.ocl20.pivot.modelbus.model.ITypeResolver;
+import tudresden.ocl20.pivot.modelbus.model.exception.TypeNotFoundException;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 
 

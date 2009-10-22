@@ -1,7 +1,7 @@
 package tudresden.ocl20.pivot.modelbus.event;
 
-import tudresden.ocl20.pivot.modelbus.IModel;
-import tudresden.ocl20.pivot.modelbus.IModelRegistry;
+import tudresden.ocl20.pivot.modelbus.model.IModel;
+import tudresden.ocl20.pivot.modelbus.model.IModelRegistry;
 
 /**
  * An <code>IModelRegistryListener</code> is informed about activities in an

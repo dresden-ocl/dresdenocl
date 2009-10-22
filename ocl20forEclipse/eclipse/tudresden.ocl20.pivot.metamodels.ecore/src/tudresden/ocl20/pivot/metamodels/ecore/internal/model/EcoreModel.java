@@ -46,11 +46,11 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.osgi.util.NLS;
 
 import tudresden.ocl20.pivot.metamodels.ecore.EcoreMetamodelPlugin;
-import tudresden.ocl20.pivot.modelbus.IModel;
 import tudresden.ocl20.pivot.modelbus.IModelBusConstants;
 import tudresden.ocl20.pivot.modelbus.ModelAccessException;
 import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
-import tudresden.ocl20.pivot.modelbus.base.AbstractModel;
+import tudresden.ocl20.pivot.modelbus.model.IModel;
+import tudresden.ocl20.pivot.modelbus.model.base.AbstractModel;
 import tudresden.ocl20.pivot.pivotmodel.Namespace;
 
 /**
@@ -106,7 +106,7 @@ public class EcoreModel extends AbstractModel implements IModel {
 	 *           If an error occurs when creating the adapter for the top name
 	 *           space.
 	 * 
-	 * @see tudresden.ocl20.pivot.modelbus.IModel#getRootNamespace()
+	 * @see tudresden.ocl20.pivot.modelbus.model.IModel#getRootNamespace()
 	 */
 	public Namespace getRootNamespace() throws ModelAccessException {
 

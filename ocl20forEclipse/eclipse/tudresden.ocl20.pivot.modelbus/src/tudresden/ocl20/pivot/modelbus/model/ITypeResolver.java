@@ -1,8 +1,11 @@
-package tudresden.ocl20.pivot.modelbus;
+package tudresden.ocl20.pivot.modelbus.model;
 
 import java.util.List;
 
 import tudresden.ocl20.pivot.essentialocl.types.OclLibrary;
+import tudresden.ocl20.pivot.modelbus.ModelAccessException;
+import tudresden.ocl20.pivot.modelbus.ModelBusException;
+import tudresden.ocl20.pivot.modelbus.model.exception.TypeNotFoundException;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 
 /**

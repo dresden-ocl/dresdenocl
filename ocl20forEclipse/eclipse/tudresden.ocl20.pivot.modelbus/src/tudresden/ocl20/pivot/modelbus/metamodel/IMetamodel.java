@@ -30,7 +30,9 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.modelbus;
+package tudresden.ocl20.pivot.modelbus.metamodel;
+
+import tudresden.ocl20.pivot.modelbus.model.IModelProvider;
 
 /**
  * 

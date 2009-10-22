@@ -28,11 +28,11 @@ import org.eclipse.uml2.uml.Type;
 import org.eclipse.uml2.uml.UMLFactory;
 
 import tudresden.ocl20.pivot.metamodels.uml2.UML2MetamodelPlugin;
-import tudresden.ocl20.pivot.modelbus.IModel;
 import tudresden.ocl20.pivot.modelbus.IModelBusConstants;
 import tudresden.ocl20.pivot.modelbus.ModelAccessException;
 import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
-import tudresden.ocl20.pivot.modelbus.base.AbstractModel;
+import tudresden.ocl20.pivot.modelbus.model.IModel;
+import tudresden.ocl20.pivot.modelbus.model.base.AbstractModel;
 import tudresden.ocl20.pivot.pivotmodel.Namespace;
 
 /**
@@ -93,7 +93,7 @@ public class UML2Model extends AbstractModel implements IModel {
 	 *           if an error occurs when creating the adapter for the top
 	 *           namespace
 	 * 
-	 * @see tudresden.ocl20.pivot.modelbus.IModel#getRootNamespace()
+	 * @see tudresden.ocl20.pivot.modelbus.model.IModel#getRootNamespace()
 	 * 
 	 * @generated
 	 */

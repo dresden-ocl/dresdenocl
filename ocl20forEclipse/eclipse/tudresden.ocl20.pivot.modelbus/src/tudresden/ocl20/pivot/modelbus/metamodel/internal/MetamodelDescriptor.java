@@ -30,76 +30,106 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.modelbus.internal;
+package tudresden.ocl20.pivot.modelbus.metamodel.internal;
 
 import org.apache.log4j.Logger;
-
 import org.eclipse.core.runtime.IConfigurationElement;
-import org.eclipse.core.runtime.IExtension;
-import org.eclipse.core.runtime.IExtensionPoint;
+import org.eclipse.jface.resource.ImageDescriptor;
 
-import tudresden.ocl20.pivot.modelbus.IMetamodelRegistry;
 import tudresden.ocl20.pivot.modelbus.IModelBusConstants;
 import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
+import tudresden.ocl20.pivot.modelbus.descriptor.AbstractDescriptor;
+import tudresden.ocl20.pivot.modelbus.metamodel.IMetamodel;
+import tudresden.ocl20.pivot.modelbus.metamodel.IMetamodelDescriptor;
+import tudresden.ocl20.pivot.modelbus.model.IModelProvider;
 
 /**
- * A simple helper class that can fill an {@link IMetamodelRegistry} with metamodels read from
- * extensions of the 'metamodels' extension point.
+ * 
  * 
  * @author Matthias Braeuer
  * @version 1.0 03.04.2007
  */
-public class MetamodelRegistryReader {
+public class MetamodelDescriptor extends AbstractDescriptor implements IMetamodel,
+    IMetamodelDescriptor {
 
-  // a Logger for this class
-  private static final Logger logger = ModelBusPlugin.getLogger(MetamodelRegistryReader.class);
+  // a logger for this class
+  private static final Logger logger = ModelBusPlugin.getLogger(MetamodelDescriptor.class);
 
-  /**
-   * @param extensionPoint
-   * @param registry
-   */
-  public void read(IExtensionPoint extensionPoint, IMetamodelRegistry registry) {
-    IExtension[] extensions = extensionPoint.getExtensions();
+  // the translatable name of the metamodel
+  private String name;
 
-    for (int i = 0; i < extensions.length; i++) {
-      read(extensions[i],registry);
-    }
-  }
+  // the icon used for the metamodel
+  private ImageDescriptor icon;
 
-  /**
-   * @param extension
-   * @param registry
-   */
-  public void read(IExtension extension, IMetamodelRegistry registry) {
-    IConfigurationElement[] elements = extension.getConfigurationElements();
-
-    for (int i = 0; i < elements.length; i++) {
-      read(elements[i],registry);
-    }
-  }
+  // the cached instance of the model provider
+  private IModelProvider modelProvider;
 
   /**
    * @param configElement
-   * @param registry
    */
-  public void read(IConfigurationElement configElement, IMetamodelRegistry registry) {
-
-    if (configElement.getName().equals(IModelBusConstants.TAG_METAMODEL)) {
-
-      try {
-        registry.addMetamodel(new MetamodelDescriptor(configElement));
-      }
-
-      catch (Exception e) {
-        logger.warn("An error was encountered when reading config element " + configElement,e); //$NON-NLS-1$
-      }
-
+  public MetamodelDescriptor(IConfigurationElement configElement) {
+    super(configElement);
+    
+    if (logger.isDebugEnabled()) {
+      logger.debug("MetamodelDescriptor(configElement=" + configElement + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
     }
 
-    else {
-      logger.warn("Unable to read config element " + configElement //$NON-NLS-1$
-          + " because its tag name is not recognized."); //$NON-NLS-1$
-    }
+    // initialize the descriptor
+    loadFromExtension();
 
+    if (logger.isDebugEnabled()) {
+      logger.debug("MetamodelDescriptor() - exit"); //$NON-NLS-1$
+    }
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see tudresden.ocl20.pivot.modelbus.IMetamodel#getModelProvider()
+   */
+  public IModelProvider getModelProvider() {
+
+    if (modelProvider == null) {
+      modelProvider = createInstance(IModelBusConstants.ATT_MODELPROVIDER,IModelProvider.class);
+    }
+    
+    return modelProvider;
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see tudresden.ocl20.pivot.modelbus.IMetamodel#getName()
+   */
+  public String getName() {
+    return name;
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see tudresden.ocl20.pivot.modelbus.internal.IMetamodelDescriptor#getIcon()
+   */
+  public ImageDescriptor getIcon() {
+    
+    // lazily create the image descriptor
+    if (icon == null) {
+      icon = getImageDescriptor(IModelBusConstants.ATT_ICON);
+    }
+    
+    return icon;
+  }
+
+  /**
+   * Helper method that loads the name and checks the 'itemProvider' attribute
+   */
+  protected void loadFromExtension(){
+    name = getAttribute(IModelBusConstants.ATT_NAME,false);
+    
+    if (name == null) {
+      name = getId();
+    }
+    
+    checkAttribute(IModelBusConstants.ATT_MODELPROVIDER);
   }
 }

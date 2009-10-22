@@ -20,8 +20,8 @@
 package tudresden.ocl20.pivot.ocl2parser.test.simpletests;
 
 import junit.framework.TestCase;
-import tudresden.ocl20.pivot.modelbus.IMetamodel;
 import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
+import tudresden.ocl20.pivot.modelbus.metamodel.IMetamodel;
 
 /**
  * This is a little experimental class. It shows how we can access the metamodel

@@ -30,7 +30,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.modelbus.internal;
+package tudresden.ocl20.pivot.modelbus.model.internal;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -69,15 +69,15 @@ import tudresden.ocl20.pivot.essentialocl.expressions.UnlimitedNaturalExp;
 import tudresden.ocl20.pivot.essentialocl.expressions.Variable;
 import tudresden.ocl20.pivot.essentialocl.expressions.VariableExp;
 import tudresden.ocl20.pivot.essentialocl.types.OclLibrary;
-import tudresden.ocl20.pivot.modelbus.FactoryException;
-import tudresden.ocl20.pivot.modelbus.IModel;
-import tudresden.ocl20.pivot.modelbus.IModelFactory;
-import tudresden.ocl20.pivot.modelbus.IOclLibraryProvider;
-import tudresden.ocl20.pivot.modelbus.ITypeResolver;
 import tudresden.ocl20.pivot.modelbus.ModelAccessException;
 import tudresden.ocl20.pivot.modelbus.ModelBusException;
 import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
-import tudresden.ocl20.pivot.modelbus.TypeNotFoundException;
+import tudresden.ocl20.pivot.modelbus.model.IModel;
+import tudresden.ocl20.pivot.modelbus.model.IModelFactory;
+import tudresden.ocl20.pivot.modelbus.model.IOclLibraryProvider;
+import tudresden.ocl20.pivot.modelbus.model.ITypeResolver;
+import tudresden.ocl20.pivot.modelbus.model.exception.FactoryException;
+import tudresden.ocl20.pivot.modelbus.model.exception.TypeNotFoundException;
 import tudresden.ocl20.pivot.pivotmodel.ConstrainableElement;
 import tudresden.ocl20.pivot.pivotmodel.Constraint;
 import tudresden.ocl20.pivot.pivotmodel.ConstraintKind;
@@ -193,7 +193,7 @@ public class ModelFactory implements IModelFactory {
    * <code>parts</code> varargs array may be empty, in this case an empty
    * collection will be created.
    * 
-   * @see tudresden.ocl20.pivot.modelbus.IModelFactory#createCollectionLiteralExp(java.lang.String,
+   * @see tudresden.ocl20.pivot.modelbus.model.IModelFactory#createCollectionLiteralExp(java.lang.String,
    *      java.util.List)
    */
   public CollectionLiteralExp createCollectionLiteralExp(CollectionKind kind,

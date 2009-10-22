@@ -1,4 +1,4 @@
-package tudresden.ocl20.pivot.modelbus;
+package tudresden.ocl20.pivot.modelbus.model.exception;
 
 
 /**

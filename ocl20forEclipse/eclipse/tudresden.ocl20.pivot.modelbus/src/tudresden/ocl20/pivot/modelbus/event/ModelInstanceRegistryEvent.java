@@ -32,7 +32,7 @@ package tudresden.ocl20.pivot.modelbus.event;
 
 import java.util.EventObject;
 
-import tudresden.ocl20.pivot.modelbus.IModel;
+import tudresden.ocl20.pivot.modelbus.model.IModel;
 import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance;
 import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceRegistry;
 

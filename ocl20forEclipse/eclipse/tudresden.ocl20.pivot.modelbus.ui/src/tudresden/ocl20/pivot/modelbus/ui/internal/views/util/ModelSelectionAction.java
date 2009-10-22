@@ -1,11 +1,4 @@
-package tudresden.ocl20.pivot.modelbus.ui.internal.views.util;
-
-import org.apache.commons.lang.builder.ToStringBuilder;
-import org.apache.commons.lang.builder.ToStringStyle;
-import org.eclipse.jface.action.Action;
-import org.eclipse.jface.action.IAction;
-
-import tudresden.ocl20.pivot.modelbus.IMetamodel; /*
+/*
 Copyright (C) 2009 by Claas Wilke (claaswilke@gmx.net).
 
 This file is part of the Model Bus GUI of Dresden OCL2 for Eclipse.
@@ -23,10 +16,16 @@ for more details.
 You should have received a copy of the GNU Lesser General Public License along 
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
+package tudresden.ocl20.pivot.modelbus.ui.internal.views.util;
 
-import tudresden.ocl20.pivot.modelbus.IMetamodelDescriptor;
-import tudresden.ocl20.pivot.modelbus.IModel;
+import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
+import org.eclipse.jface.action.Action;
+import org.eclipse.jface.action.IAction;
 import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
+import tudresden.ocl20.pivot.modelbus.metamodel.IMetamodel;
+import tudresden.ocl20.pivot.modelbus.metamodel.IMetamodelDescriptor;
+import tudresden.ocl20.pivot.modelbus.model.IModel;
 
 /**
  * <p>
@@ -46,7 +45,7 @@ public class ModelSelectionAction extends Action implements IAction {
 	 * </p>
 	 * 
 	 * @param model
-	 *            The represented {@link IModel}.
+	 *          The represented {@link IModel}.
 	 */
 	public ModelSelectionAction(IModel model) {
 
@@ -60,12 +59,11 @@ public class ModelSelectionAction extends Action implements IAction {
 		metaModel = model.getMetamodel();
 
 		/*
-		 * Eventually set the icon if the meta model. This is realized by an
-		 * Eclipse descriptor.
+		 * Eventually set the icon if the meta model. This is realized by an Eclipse
+		 * descriptor.
 		 */
 		if (metaModel instanceof IMetamodelDescriptor) {
-			this.setImageDescriptor(((IMetamodelDescriptor) metaModel)
-					.getIcon());
+			this.setImageDescriptor(((IMetamodelDescriptor) metaModel).getIcon());
 		}
 		// no else.
 
@@ -78,18 +76,17 @@ public class ModelSelectionAction extends Action implements IAction {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see org.eclipse.jface.action.Action#run()
 	 */
 	@Override
 	public void run() {
+
 		// set the new active model
 		ModelBusPlugin.getModelRegistry().setActiveModel(this.model);
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
@@ -97,8 +94,9 @@ public class ModelSelectionAction extends Action implements IAction {
 
 		String result;
 
-		result = new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
-				.append("model", this.model).toString();
+		result =
+				new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE).append(
+						"model", this.model).toString();
 
 		return result;
 	}

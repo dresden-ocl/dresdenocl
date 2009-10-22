@@ -32,7 +32,7 @@ package tudresden.ocl20.pivot.modelbus.modelinstance.types;
 
 import java.util.Set;
 
-import tudresden.ocl20.pivot.modelbus.IModel;
+import tudresden.ocl20.pivot.modelbus.model.IModel;
 import tudresden.ocl20.pivot.modelbus.modelinstance.exception.AsTypeCastException;
 import tudresden.ocl20.pivot.modelbus.modelinstance.exception.CopyForAtPreException;
 import tudresden.ocl20.pivot.pivotmodel.Type;

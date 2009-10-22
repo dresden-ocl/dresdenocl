@@ -42,7 +42,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Text;
 
-import tudresden.ocl20.pivot.modelbus.IModel;
+import tudresden.ocl20.pivot.modelbus.model.IModel;
 import tudresden.ocl20.pivot.ocl2java.IOcl2CodeSettings;
 import tudresden.ocl20.pivot.ocl2java.Ocl2CodeFactory;
 import tudresden.ocl20.pivot.ocl2java.code.ITransformedCode;

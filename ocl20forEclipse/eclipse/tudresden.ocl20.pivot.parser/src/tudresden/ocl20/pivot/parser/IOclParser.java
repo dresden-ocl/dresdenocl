@@ -36,7 +36,7 @@ import java.net.URL;
 
 import org.apache.commons.lang.NullArgumentException;
 
-import tudresden.ocl20.pivot.modelbus.IModel;
+import tudresden.ocl20.pivot.modelbus.model.IModel;
 
 /**
  * 

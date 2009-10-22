@@ -35,8 +35,8 @@ package tudresden.ocl20.pivot.modelbus.modelinstance;
 import java.io.File;
 import java.net.URL;
 
-import tudresden.ocl20.pivot.modelbus.IModel;
 import tudresden.ocl20.pivot.modelbus.ModelAccessException;
+import tudresden.ocl20.pivot.modelbus.model.IModel;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
 
 /**

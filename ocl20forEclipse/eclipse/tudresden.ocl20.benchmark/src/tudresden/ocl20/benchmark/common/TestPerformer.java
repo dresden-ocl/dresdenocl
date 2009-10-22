@@ -19,20 +19,44 @@ with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
 package tudresden.ocl20.benchmark.common;
 
-import java.io.*;
-import java.util.*;
-import java.util.regex.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.StringReader;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.eclipse.core.runtime.Platform;
 
-import tudresden.ocl20.interpreter.*;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot;
-import tudresden.ocl20.pivot.modelbus.*;
-import tudresden.ocl20.pivot.standardlibrary.java.JavaStandardlibraryPlugin;
+import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
+import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBoolean;
+import tudresden.ocl20.pivot.interpreter.IInterpretationEnvironment;
+import tudresden.ocl20.pivot.interpreter.IOclInterpreter;
+import tudresden.ocl20.pivot.interpreter.OclInterpreterPlugin;
+import tudresden.ocl20.pivot.modelbus.ModelAccessException;
+import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
+import tudresden.ocl20.pivot.modelbus.metamodel.IMetamodel;
+import tudresden.ocl20.pivot.modelbus.model.IModel;
+import tudresden.ocl20.pivot.modelbus.model.IModelRegistry;
+import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance;
+import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceProvider;
+import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceRegistry;
+import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceType;
+import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceTypeRegistry;
+import tudresden.ocl20.pivot.modelbus.modelinstance.exception.TypeNotFoundInModelException;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceObject;
 import tudresden.ocl20.pivot.modelinstancetype.java.JavaModelInstanceTypePlugin;
 import tudresden.ocl20.pivot.ocl2parser.parser.OCL2Parser;
-import tudresden.ocl20.pivot.pivotmodel.*;
-import tudresden.ocl20.pivot.standardlibrary.java.internal.library.*;
+import tudresden.ocl20.pivot.pivotmodel.Constraint;
+import tudresden.ocl20.pivot.pivotmodel.NamedElement;
+import tudresden.ocl20.pivot.pivotmodel.Namespace;
+import tudresden.ocl20.pivot.pivotmodel.Operation;
+import tudresden.ocl20.pivot.pivotmodel.Property;
+import tudresden.ocl20.pivot.standardlibrary.java.JavaStandardlibraryPlugin;
 
 /**
  * <p>
@@ -106,24 +130,27 @@ public class TestPerformer {
 
 	}
 
-	/**
-	 * @param pathList
-	 *            The {@link Type} which instances shall be returned.
-	 * 
-	 * @return All {@link IModelObject}s of the active {@link IModelInstance}
-	 *         which are of the {@link Type} described by the given pathList.
-	 */
-	public List<IModelObject> getObjectsOfKind(List<String> pathList) {
-
-		List<IModelObject> result;
-
-		result = ModelBusPlugin.getModelInstanceRegistry()
-				.getActiveModelInstance(this.myModel)
-				.getObjectsOfType(pathList);
-
-		return result;
-
-	}
+	// FIXME: does use old funtionality of the IModelInstance; commented out,
+	// since it is not used anywayì
+	// /**
+	// * @param pathList
+	// * The {@link Type} which instances shall be returned.
+	// *
+	// * @return All {@link IModelObject}s of the active {@link IModelInstance}
+	// * which are of the {@link Type} described by the given pathList.
+	// */
+	// public List<IModelInstanceObject> getObjectsOfKind(List<String> pathList)
+	// {
+	//
+	// List<IModelInstanceObject> result;
+	//
+	// result = ModelBusPlugin.getModelInstanceRegistry()
+	// .getActiveModelInstance(this.myModel)
+	// .getObjectsOfType(pathList);
+	//
+	// return result;
+	//
+	// }
 
 	/**
 	 * <p>
@@ -512,8 +539,8 @@ public class TestPerformer {
 
 		bLogger
 				.outHead1("Checking current model instance against loaded invariants");
-		List<IModelObject> testObjects = this.getActiveModelInstance()
-				.getObjects();
+		List<IModelInstanceObject> testObjects = this.getActiveModelInstance()
+				.getAllModelInstanceObjects();
 		List<Constraint> constraints = this.getAllActiveConstraints();
 
 		bLogger.printf("invariants  : %d", constraints.size());
@@ -523,7 +550,7 @@ public class TestPerformer {
 
 		NamedElement conElement = null;
 
-		for (IModelObject obj : testObjects) {
+		for (IModelInstanceObject obj : testObjects) {
 			bLogger.outHead3("test object: " + obj.getName());
 			for (Constraint con : constraints) {
 
@@ -562,7 +589,7 @@ public class TestPerformer {
 	 *            interpretation environment. They're extracted and passed as
 	 *            method arguments
 	 */
-	public void checkPreAndPostConditions(IModelObject guineaPig,
+	public void checkPreAndPostConditions(IModelInstanceObject guineaPig,
 			String method, String... params) {
 
 		this.checkPreConditions(guineaPig, method);
@@ -582,11 +609,11 @@ public class TestPerformer {
 	 * @param method
 	 *            Method name just for logging
 	 */
-	public void checkPreConditions(IModelObject guineaPig, String method) {
+	public void checkPreConditions(IModelInstanceObject guineaPig, String method) {
 		bLogger.outHead1("Checking Pre Conditions");
 
 		bLogger.outHead3("Test Object:");
-		bLogger.outLine(guineaPig.getQualifiedName());
+		bLogger.outLine(guineaPig.getName());
 		bLogger.outLine("Method: " + method + "(...)");
 
 		// load all remaining constraints
@@ -624,20 +651,20 @@ public class TestPerformer {
 	 *            variable arguments to specify arguments for the method being
 	 *            invoked
 	 */
-	public void checkPostConditions(IModelObject guineaPig, String method,
-			String... params) {
+	public void checkPostConditions(IModelInstanceObject guineaPig,
+			String method, String... params) {
 
 		bLogger.outHead1("Checking Post Conditions");
 
 		bLogger.outHead3("Test Object:");
-		bLogger.outLine(guineaPig.getQualifiedName());
+		bLogger.outLine(guineaPig.getName());
 		bLogger.outLine("Method: " + method + "(...)");
 
 		// load all remaining constraints
 		List<Constraint> constraints = this.getAllActiveConstraints();
 
 		// collect method parameters
-		OclRoot[] oclParams = this.collectMethodParams(params);
+		OclAny[] oclParams = this.collectMethodParams(params);
 
 		// execute that method only once!
 		boolean methodExecuted = false;
@@ -656,8 +683,8 @@ public class TestPerformer {
 
 			// execute method only once
 			if (!methodExecuted) {
-				OclRoot gPigInOcl = this
-						.createOclRootAdapterByMIObject(guineaPig);
+				OclAny gPigInOcl = this
+						.createOclAnyAdapterByMIObject(guineaPig);
 				try {
 					gPigInOcl.invokeOperation(method, oclParams);
 				} catch (NoSuchMethodException e) {
@@ -674,13 +701,13 @@ public class TestPerformer {
 	}
 
 	/**
-	 * Collect an array of OclRoot-Objects registered in the environment.
+	 * Collect an array of OclAny-Objects registered in the environment.
 	 * 
 	 * @params params String-Array identifying all Variables that are being
 	 *         fetched
 	 */
-	private OclRoot[] collectMethodParams(String... params) {
-		OclRoot[] oclParams = new OclRoot[params.length];
+	private OclAny[] collectMethodParams(String... params) {
+		OclAny[] oclParams = new OclAny[params.length];
 		int counter = 0;
 		for (String name : params) {
 			oclParams[counter++] = this.myGlobalEnvironment.getVar(name);
@@ -699,8 +726,8 @@ public class TestPerformer {
 	 *            Constraint to be checked.
 	 * @pre obj and con are expected to "belong together"
 	 */
-	private void interpretConstraint(IModelObject obj, Constraint con) {
-		OclRoot result = null;
+	private void interpretConstraint(IModelInstanceObject obj, Constraint con) {
+		OclAny result = null;
 
 		assert (this.testEnv.loadedConstraints.containsKey(con
 				.getQualifiedName()));
@@ -718,13 +745,13 @@ public class TestPerformer {
 			return;
 		}
 
-		if (result.isOclUndefined().isTrue()) {
+		if (result.oclIsUndefined().isTrue()) {
 			bLogger.interpretationError(con, obj, result);
 			return;
 		}
 
 		try {
-			JavaOclBoolean res = (JavaOclBoolean) result;
+			OclBoolean res = (OclBoolean) result;
 
 			if (res != null && res.isTrue()) {
 				bLogger.interpretationSuccess(con, obj);
@@ -960,7 +987,6 @@ public class TestPerformer {
 	// * Some Helper Functions
 	// ************************************
 
-
 	/**
 	 * Safe open file.
 	 * 
@@ -1017,15 +1043,15 @@ public class TestPerformer {
 	 * @param object
 	 *            Object to be adapteds
 	 */
-	public IModelObject createModelInstanceAdapter(Object object) {
+	public IModelInstanceObject createModelInstanceAdapter(Object object) {
 
-		IModelObject result = null;
+		IModelInstanceObject result = null;
 		try {
-			result = JavaModelInstanceTypePlugin.addModelObjectToInstance(
-					object, this.getActiveModelInstance());
+			result = (IModelInstanceObject) this.getActiveModelInstance()
+					.addModelInstanceElement(object);
 		}
 
-		catch (ModelAccessException e) {
+		catch (TypeNotFoundInModelException e) {
 			throw new RuntimeException(e);
 		}
 		return result;
@@ -1041,15 +1067,15 @@ public class TestPerformer {
 	 * @param path
 	 *            The path and name of the variable which shall be set.
 	 * @param value
-	 *            The {@link IModelObject} value of the set variable as an
-	 *            Object.
+	 *            The {@link IModelInstanceObject} value of the set variable as
+	 *            an Object.
 	 */
 	public void setEnvironmentVariable(String path, Object value) {
 
-		/* Convert the object into an OclRoot. */
-		OclRoot adaptedObject;
+		/* Convert the object into an OclAny. */
+		OclAny adaptedObject;
 		adaptedObject = JavaStandardlibraryPlugin.getStandardLibraryFactory()
-				.createOclRoot(value);
+				.createOclAny(value);
 		/* Add the variable to the environment. */
 		this.myInterpreter.setEnviromentVariable(path, adaptedObject);
 	}
@@ -1058,8 +1084,8 @@ public class TestPerformer {
 	 * creates an ocl root adapter from a model instance adapter in order to
 	 * being able to execute a method on the model level
 	 */
-	public OclRoot createOclRootAdapterByMIObject(IModelObject obj) {
-		return JavaStandardlibraryPlugin.getOclInstanceAdapterFactory()
-				.createOclRoot(obj);
+	public OclAny createOclRootAdapterByMIObject(IModelInstanceObject obj) {
+		return JavaStandardlibraryPlugin.getStandardLibraryFactory()
+				.createOclAny(obj);
 	}
 }

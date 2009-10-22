@@ -30,7 +30,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.modelbus.internal.descriptor;
+package tudresden.ocl20.pivot.modelbus.descriptor;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.builder.ToStringBuilder;
@@ -43,8 +43,6 @@ import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 
 import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
-import tudresden.ocl20.pivot.modelbus.descriptor.IDescriptor;
-import tudresden.ocl20.pivot.modelbus.descriptor.InvalidDescriptorException;
 
 /**
  * This is a simple base class for classes realizing a descriptor for an extension point. It

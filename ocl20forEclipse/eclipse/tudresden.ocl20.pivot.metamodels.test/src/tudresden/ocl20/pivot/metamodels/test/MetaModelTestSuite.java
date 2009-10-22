@@ -24,7 +24,7 @@ import tudresden.ocl20.pivot.metamodels.test.tests.TestParameter;
 import tudresden.ocl20.pivot.metamodels.test.tests.TestPrimitiveType;
 import tudresden.ocl20.pivot.metamodels.test.tests.TestProperty;
 import tudresden.ocl20.pivot.metamodels.test.tests.TestType;
-import tudresden.ocl20.pivot.modelbus.IMetamodel;
+import tudresden.ocl20.pivot.modelbus.metamodel.IMetamodel;
 
 /**
  * <p>

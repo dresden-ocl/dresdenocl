@@ -26,8 +26,7 @@ import org.junit.Test;
 
 import tudresden.ocl20.benchmark.testdata.b2.Gender;
 import tudresden.ocl20.benchmark.testdata.b2.Person;
-
-import tudresden.ocl20.pivot.modelbus.IModelObject;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceObject;
 
 
 /**
@@ -68,7 +67,7 @@ public class B2Test extends BaseTest
 		perf.safeLoadPrePostFile("bin/tudresden/ocl20/benchmark/testData/b2/expressions/prepostBirth.ocl");
 		
 		// create new Person to test the Constraints on
-		IModelObject testPerson= perf.createModelInstanceAdapter(new Person());
+		IModelInstanceObject testPerson= perf.createModelInstanceAdapter(new Person());
 		
 		// create and set Parameters
 		perf.setEnvironmentVariable("aName", "Ada");
@@ -93,8 +92,8 @@ public class B2Test extends BaseTest
 		bob.birth("Bob", Gender.male);
 		
 		// create new Person to test the Constraints on
-		IModelObject testPerson= perf.createModelInstanceAdapter(ada);
-		IModelObject testSpouse= perf.createModelInstanceAdapter(bob);
+		IModelInstanceObject testPerson= perf.createModelInstanceAdapter(ada);
+		IModelInstanceObject testSpouse= perf.createModelInstanceAdapter(bob);
 		
 		// create and set Parameters
 		perf.setEnvironmentVariable("aSpouse", testSpouse);
@@ -121,7 +120,7 @@ public class B2Test extends BaseTest
 		ada.marry(bob);
 		
 		// create new Person to test the Constraints on
-		IModelObject testPerson= perf.createModelInstanceAdapter(ada);
+		IModelInstanceObject testPerson= perf.createModelInstanceAdapter(ada);
 
 		// first pre is checked.
 		// after that divorce is executed and all posts are checked.
@@ -145,7 +144,7 @@ public class B2Test extends BaseTest
 		ada.birth("Ada", Gender.female);
 		
 		// create new Person to test the Constraints on
-		IModelObject testPerson = perf.createModelInstanceAdapter(ada);
+		IModelInstanceObject testPerson = perf.createModelInstanceAdapter(ada);
 
 		// first pre is checked.
 		// after that divorce is executed and all posts are checked.

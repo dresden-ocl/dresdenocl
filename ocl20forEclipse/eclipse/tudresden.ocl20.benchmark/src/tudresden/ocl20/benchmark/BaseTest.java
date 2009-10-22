@@ -22,15 +22,13 @@ with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
 package tudresden.ocl20.benchmark;
 
 import static org.junit.Assert.fail;
-import org.junit.AfterClass;
-import org.junit.Before;
 
 import java.io.IOException;
 
+import org.junit.AfterClass;
+import org.junit.Before;
+
 import tudresden.ocl20.benchmark.common.TestPerformer;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot;
-import tudresden.ocl20.pivot.modelbus.IModelObject;
-import tudresden.ocl20.pivot.standardlibrary.java.JavaStandardlibraryPlugin;
 
 // TODO: Auto-generated Javadoc
 /**

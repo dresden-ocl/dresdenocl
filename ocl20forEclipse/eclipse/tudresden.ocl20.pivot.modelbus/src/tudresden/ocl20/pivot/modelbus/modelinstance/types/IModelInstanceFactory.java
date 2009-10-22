@@ -22,7 +22,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.WeakHashMap;
 
-import tudresden.ocl20.pivot.modelbus.IModel;
+import tudresden.ocl20.pivot.modelbus.model.IModel;
 import tudresden.ocl20.pivot.modelbus.modelinstance.exception.TypeNotFoundInModelException;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.base.ModelInstanceTuple;
 import tudresden.ocl20.pivot.modelbus.util.OclCollectionTypeKind;

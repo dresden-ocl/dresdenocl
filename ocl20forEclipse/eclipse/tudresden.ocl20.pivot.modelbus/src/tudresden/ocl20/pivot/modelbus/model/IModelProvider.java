@@ -30,29 +30,39 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.modelbus;
+package tudresden.ocl20.pivot.modelbus.model;
 
-import org.eclipse.jface.resource.ImageDescriptor;
+import java.io.File;
+import java.net.URL;
 
-import tudresden.ocl20.pivot.modelbus.descriptor.IDescriptor;
+import tudresden.ocl20.pivot.modelbus.ModelAccessException;
+
+
 
 /**
- * This is an additional interface that is mixed in by the Eclipse-specific implementation of the
- * {@link IMetamodel} interface. It represents a descriptor for the information contained in a
- * single <code>metamodel</code> tag in an extension that extends the <code>metamodels</code>
- * extension point.
  * 
+ *
  * @author Matthias Braeuer
- * @version 1.0 03.04.2007
+ * @version 1.0 30.03.2007
  */
-public interface IMetamodelDescriptor extends IDescriptor {
+public interface IModelProvider {
 
   /**
-   * Returns an image descriptor that can be used as an icon for the metamodel in the Eclipse user
-   * interface.
-   * 
-   * @return an <code>ImageDescriptor</code>
+   * @param modelName
+   * @return
    */
-  ImageDescriptor getIcon();
-
+  IModel getModel(String modelName) throws ModelAccessException;
+  
+  /**
+   * @param modelFile
+   * @return
+   */
+  IModel getModel(File modelFile) throws ModelAccessException;
+  
+  /**
+   * @param modelURL
+   * @return
+   */
+  IModel getModel(URL modelURL) throws ModelAccessException;
+  
 }

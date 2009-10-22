@@ -30,106 +30,88 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.modelbus.internal;
+package tudresden.ocl20.pivot.modelbus.model.internal;
 
 import org.apache.log4j.Logger;
-import org.eclipse.core.runtime.IConfigurationElement;
-import org.eclipse.jface.resource.ImageDescriptor;
 
-import tudresden.ocl20.pivot.modelbus.IMetamodel;
-import tudresden.ocl20.pivot.modelbus.IMetamodelDescriptor;
-import tudresden.ocl20.pivot.modelbus.IModelBusConstants;
-import tudresden.ocl20.pivot.modelbus.IModelProvider;
+import java.io.IOException;
+
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+
+import tudresden.ocl20.pivot.essentialocl.types.OclLibrary;
 import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
-import tudresden.ocl20.pivot.modelbus.internal.descriptor.AbstractDescriptor;
+import tudresden.ocl20.pivot.modelbus.internal.ModelBusMessages;
+import tudresden.ocl20.pivot.modelbus.model.IOclLibraryProvider;
 
 /**
- * 
+ * Standard implementation of the {@link IOclLibraryProvider} interface that simply loads the model
+ * file with the OCL Standard Library from the resources of this plugin.
  * 
  * @author Matthias Braeuer
  * @version 1.0 03.04.2007
  */
-public class MetamodelDescriptor extends AbstractDescriptor implements IMetamodel,
-    IMetamodelDescriptor {
+public class OclLibraryProvider implements IOclLibraryProvider {
 
-  // a logger for this class
-  private static final Logger logger = ModelBusPlugin.getLogger(MetamodelDescriptor.class);
+  // logger for this class
+  private static final Logger logger = ModelBusPlugin.getLogger(OclLibraryProvider.class);
 
-  // the translatable name of the metamodel
-  private String name;
+  // the file name of the OCL Standard Library model
+  private static final String OCL_LIBRARY_FILE = "/resources/oclstandardlibrary.types"; //$NON-NLS-1$
 
-  // the icon used for the metamodel
-  private ImageDescriptor icon;
+  // the cached library instance
+  private OclLibrary oclLibrary;
 
-  // the cached instance of the model provider
-  private IModelProvider modelProvider;
+  /*
+   * (non-Javadoc)
+   * 
+   * @see tudresden.ocl20.pivot.modelbus.IOclLibraryProvider#getOclLibrary()
+   */
+  public OclLibrary getOclLibrary() {
+    
+    if (oclLibrary == null) {
+      oclLibrary = loadOclLibrary();
+    }
+    
+    return oclLibrary;
+  }
+  
 
   /**
-   * @param configElement
-   */
-  public MetamodelDescriptor(IConfigurationElement configElement) {
-    super(configElement);
-    
-    if (logger.isDebugEnabled()) {
-      logger.debug("MetamodelDescriptor(configElement=" + configElement + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
-    }
-
-    // initialize the descriptor
-    loadFromExtension();
-
-    if (logger.isDebugEnabled()) {
-      logger.debug("MetamodelDescriptor() - exit"); //$NON-NLS-1$
-    }
-  }
-
-  /*
-   * (non-Javadoc)
+   * Helper method that performs the actual loading. This should work without errors unless the
+   * Model Bus plugin is changed.
    * 
-   * @see tudresden.ocl20.pivot.modelbus.IMetamodel#getModelProvider()
+   * @return an <code>oclLibrary</code> instance
    */
-  public IModelProvider getModelProvider() {
+  protected OclLibrary loadOclLibrary() {
+    EObject library;
 
-    if (modelProvider == null) {
-      modelProvider = createInstance(IModelBusConstants.ATT_MODELPROVIDER,IModelProvider.class);
+    ResourceSet resourceSet = new ResourceSetImpl();
+    Resource resource = resourceSet.createResource(URI.createPlatformPluginURI(ModelBusPlugin.ID
+        + OCL_LIBRARY_FILE,false));
+    
+    if (logger.isInfoEnabled()) {
+      logger.info(ModelBusMessages.OclLibraryProvider_LoadOclLibrary);
     }
     
-    return modelProvider;
-  }
+    try {
+      resource.load(null);
+    }
+    catch (IOException e) {
+      throw new IllegalStateException("Failed to load the OCL Standard Library.",e); //$NON-NLS-1$
+    }
 
-  /*
-   * (non-Javadoc)
-   * 
-   * @see tudresden.ocl20.pivot.modelbus.IMetamodel#getName()
-   */
-  public String getName() {
-    return name;
-  }
+    library = resource.getContents().get(0);
 
-  /*
-   * (non-Javadoc)
-   * 
-   * @see tudresden.ocl20.pivot.modelbus.internal.IMetamodelDescriptor#getIcon()
-   */
-  public ImageDescriptor getIcon() {
-    
-    // lazily create the image descriptor
-    if (icon == null) {
-      icon = getImageDescriptor(IModelBusConstants.ATT_ICON);
+    if (!(library instanceof OclLibrary)) {
+      throw new IllegalStateException("The root object of model '" + OCL_LIBRARY_FILE //$NON-NLS-1$
+          + "' is not an instance of OclLibrary."); //$NON-NLS-1$
     }
     
-    return icon;
+    return (OclLibrary) library;
   }
 
-  /**
-   * Helper method that loads the name and checks the 'itemProvider' attribute
-   */
-  protected void loadFromExtension(){
-    name = getAttribute(IModelBusConstants.ATT_NAME,false);
-    
-    if (name == null) {
-      name = getId();
-    }
-    
-    checkAttribute(IModelBusConstants.ATT_MODELPROVIDER);
-  }
 }
