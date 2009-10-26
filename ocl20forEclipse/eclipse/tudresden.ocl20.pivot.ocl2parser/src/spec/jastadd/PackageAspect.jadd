@@ -37,6 +37,8 @@ import tudresden.ocl20.pivot.essentialocl.types.OclLibrary;
 import tudresden.ocl20.pivot.essentialocl.types.CollectionType;
 
 import tudresden.ocl20.pivot.modelbus.*;
+import tudresden.ocl20.pivot.modelbus.model.*;
+import tudresden.ocl20.pivot.modelbus.model.exception.*;
 
 
 import tudresden.ocl20.pivot.pivotmodel.ConstraintKind;
