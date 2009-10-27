@@ -101,6 +101,16 @@ public class ModelInstanceTypeTestPlugin extends Plugin {
 
 		ModelInstanceTypeTestServices.getInstance().setModelInstanceTypeID(
 				modelInstanceID);
+
+		/* Set all counters to default values. */
+		ModelInstanceTypeTestServices.getInstance().setBagPropertyCounter(1);
+		ModelInstanceTypeTestServices.getInstance().setBooleanPropertyCounter(1);
+		ModelInstanceTypeTestServices.getInstance().setIntegerPropertyCounter(1);
+		ModelInstanceTypeTestServices.getInstance().setOrderedSetPropertyCounter(1);
+		ModelInstanceTypeTestServices.getInstance().setRealPropertyCounter(1);
+		ModelInstanceTypeTestServices.getInstance().setSequencePropertyCounter(1);
+		ModelInstanceTypeTestServices.getInstance().setSetPropertyCounter(1);
+		ModelInstanceTypeTestServices.getInstance().setStringPropertyCounter(1);
 	}
 
 	/**
