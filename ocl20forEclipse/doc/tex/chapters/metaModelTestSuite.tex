@@ -28,12 +28,11 @@ To instantiate the generic test suite for a new adapted meta-model, only two res
 
 Figure \ref{pic:metaModelTestsuite:testModel} shows the test model that must be implemented in a meta-model that shall be tested with the generic meta-model test suite. At a first sight, the model seems to be very complex. But many of the contained features are optional, because some data structures and types of the pivot model could be (but do not have to be) implemented by a meta-model. E.g., a meta-model can provide a enumeration type but not has to. If a structure is not provided by a test model, the test suite will print a warning during test execution that the expected structure has not been found. If the structure is not adapted intentionally, the warnings can be ignored. In the following, all types and relations of the test model are explained shortly.
 
-\begin{figure}[!p]
-	\centering
-		\rotatebox{90}{\includegraphics[width=1.4\textwidth]{figures/metamodeltestsuite/testModel.pdf}}
+\begin{sidewaysfigure}[!p]
+	\includegraphics[width=0.85\textwidth]{figures/metamodeltestsuite/testModel.pdf}
 	\caption{The required Test Model to test a Meta-Model's adaptation. The gray parts are optional.}
 	\label{pic:metaModelTestsuite:testModel}
-\end{figure}
+\end{sidewaysfigure}
 
 
 \subsection{TestTypeClass1 and TestTypeClass2}
