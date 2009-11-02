@@ -47,37 +47,31 @@ Object Management Group (OMG), Needham, MA, USA:
 \newblock \url{http://www.eclipse.org/aspectj/}.
 \newblock \,Version:\,2009
 
-\bibitem[URL09c]{WWW:MDT}
-\emph{Eclipse Model Development Tools}.
-\newblock Eclipse Project Website.
-\newblock \url{http://www.eclipse.org/modeling/mdt/}.
-\newblock \,Version:\,2009
-
-\bibitem[URL09d]{WWW:eclipse}
+\bibitem[URL09c]{WWW:eclipse}
 \emph{Eclipse project Website}.
 \newblock Eclipse project Website.
 \newblock \url{http://www.eclipse.org/}.
 \newblock \,Version:\,2009
 
-\bibitem[URL09e]{WWW:eclipseSubversive}
+\bibitem[URL09d]{WWW:eclipseSubversive}
 \emph{Polarion Software: Subversive}.
 \newblock Polarion.org Community.
 \newblock \url{http://www.polarion.com/products/svn/subversive.php}.
 \newblock \,Version:\,2009
 
-\bibitem[URL09f]{WWW:toolkitSourceforge}
+\bibitem[URL09e]{WWW:toolkitSourceforge}
 \emph{Sourceforge Project Site of the Dresden OCL Toolkit}.
 \newblock Sourceforge project website.
 \newblock \url{http://sourceforge.net/projects/dresden-ocl/}.
 \newblock \,Version:\,2009
 
-\bibitem[URL09g]{WWW:toolkitSVN}
+\bibitem[URL09f]{WWW:toolkitSVN}
 \emph{SVN of the Dresden OCL Toolkit}.
 \newblock Subversion Repository.
 \newblock \url{http://dresden-ocl.svn.sourceforge.net/svnroot/dresden-ocl}.
 \newblock \,Version:\,2009
 
-\bibitem[URL09h]{WWW:toolkitUpdatesite}
+\bibitem[URL09g]{WWW:toolkitUpdatesite}
 \emph{Update Site of the Dresden OCL Toolkit}.
 \newblock Eclipse Update Site.
 \newblock
@@ -85,7 +79,7 @@ Object Management Group (OMG), Needham, MA, USA:
 orEclipse/updatesite/tudresden.ocl20.updatesite\_2.0.0}.
 \newblock \,Version:\,2009
 
-\bibitem[URL09i]{WWW:toolkit}
+\bibitem[URL09h]{WWW:toolkit}
 \emph{Website of the Dresden OCL Toolkit}.
 \newblock Project website.
 \newblock \url{http://dresden-ocl.sourceforge.net/}.
