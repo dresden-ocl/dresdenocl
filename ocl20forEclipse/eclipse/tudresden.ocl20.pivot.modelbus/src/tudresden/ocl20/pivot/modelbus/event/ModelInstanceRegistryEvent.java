@@ -44,6 +44,8 @@ import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceRegistry;
  */
 public class ModelInstanceRegistryEvent extends EventObject {
 
+	private static final long serialVersionUID = -2515705247138459585L;
+
 	// The affected model instance
 	private IModelInstance affectedModelInstance;
 

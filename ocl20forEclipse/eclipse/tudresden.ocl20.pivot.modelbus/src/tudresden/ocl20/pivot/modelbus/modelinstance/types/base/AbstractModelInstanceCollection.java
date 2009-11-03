@@ -87,7 +87,7 @@ public abstract class AbstractModelInstanceCollection<T extends IModelInstanceEl
 			result = true;
 		}
 
-		if (object instanceof AbstractModelInstanceCollection) {
+		if (object instanceof AbstractModelInstanceCollection<?>) {
 
 			AbstractModelInstanceCollection<?> other;
 			other = (AbstractModelInstanceCollection<?>) object;

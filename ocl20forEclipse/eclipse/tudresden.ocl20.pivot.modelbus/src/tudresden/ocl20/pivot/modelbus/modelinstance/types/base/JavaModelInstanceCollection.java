@@ -51,7 +51,8 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
  * @author Claas Wilke
  */
 public class JavaModelInstanceCollection<T extends IModelInstanceElement>
-		extends AbstractModelInstanceCollection<T> implements IModelInstanceCollection<T> {
+		extends AbstractModelInstanceCollection<T> implements
+		IModelInstanceCollection<T> {
 
 	/** The {@link Logger} for this class. */
 	private static final Logger LOGGER =
@@ -128,12 +129,12 @@ public class JavaModelInstanceCollection<T extends IModelInstanceElement>
 
 		/* Check if sets have the right type of collection. */
 		if (type.getKind().equals(CollectionKind.SET)
-				&& !(this.myContainedObjects instanceof Set)) {
+				&& !(this.myContainedObjects instanceof Set<?>)) {
 			this.myContainedObjects = new HashSet<T>(this.myContainedObjects);
 		}
 
 		else if (type.getKind().equals(CollectionKind.ORDERED_SET)
-				&& !(this.myContainedObjects instanceof UniqueEList)) {
+				&& !(this.myContainedObjects instanceof UniqueEList<?>)) {
 			this.myContainedObjects = new UniqueEList<T>(this.myContainedObjects);
 		}
 		// no else.
