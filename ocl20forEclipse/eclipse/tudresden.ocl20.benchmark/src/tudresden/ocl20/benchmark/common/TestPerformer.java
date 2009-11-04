@@ -25,6 +25,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.StringReader;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -49,13 +50,13 @@ import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceType;
 import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceTypeRegistry;
 import tudresden.ocl20.pivot.modelbus.modelinstance.exception.TypeNotFoundInModelException;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceObject;
-import tudresden.ocl20.pivot.modelinstancetype.java.JavaModelInstanceTypePlugin;
 import tudresden.ocl20.pivot.ocl2parser.parser.OCL2Parser;
 import tudresden.ocl20.pivot.pivotmodel.Constraint;
 import tudresden.ocl20.pivot.pivotmodel.NamedElement;
 import tudresden.ocl20.pivot.pivotmodel.Namespace;
 import tudresden.ocl20.pivot.pivotmodel.Operation;
 import tudresden.ocl20.pivot.pivotmodel.Property;
+import tudresden.ocl20.pivot.pivotmodel.Type;
 import tudresden.ocl20.pivot.standardlibrary.java.JavaStandardlibraryPlugin;
 
 /**
@@ -69,9 +70,9 @@ import tudresden.ocl20.pivot.standardlibrary.java.JavaStandardlibraryPlugin;
 public class TestPerformer {
 
 	/**
-	 * used to specify the content of an ocl-file so that the performer knows
-	 * how to pre-parse the files correctly. However QUERY is not used yet and
-	 * the other two have exactly the same behavior.
+	 * used to specify the content of an ocl-file so that the performer knows how
+	 * to pre-parse the files correctly. However QUERY is not used yet and the
+	 * other two have exactly the same behavior.
 	 */
 	public static enum constraintFileType {
 		STATEMENT, // complete statement containing context
@@ -81,8 +82,7 @@ public class TestPerformer {
 	};
 
 	/**
-	 * The global {@link IEnvironment} used during interpretation and
-	 * preparation.
+	 * The global {@link IEnvironment} used during interpretation and preparation.
 	 */
 	private IInterpretationEnvironment myGlobalEnvironment;
 
@@ -112,7 +112,7 @@ public class TestPerformer {
 	/**
 	 * 
 	 * @param testName
-	 *            The name of the test being executed. Used for the Logger
+	 *          The name of the test being executed. Used for the Logger
 	 */
 	public TestPerformer(String testName) {
 
@@ -125,8 +125,8 @@ public class TestPerformer {
 		this.bLogger = new BenchmarkLogger(this.testEnv);
 
 		// examine a constraint's name
-		this.patternConstraintName = Pattern
-				.compile("(.*?)(inv|pre|post|def)\\s*([\\(\\)\\w]*?)\\s*:(.*)");
+		this.patternConstraintName =
+				Pattern.compile("(.*?)(inv|pre|post|def)\\s*([\\(\\)\\w]*?)\\s*:(.*)");
 
 	}
 
@@ -159,8 +159,8 @@ public class TestPerformer {
 	 * </p>
 	 * 
 	 * @throws RuntimeException
-	 *             Is thrown if any error occurred while loading the model or
-	 *             the meta model.
+	 *           Is thrown if any error occurred while loading the model or the
+	 *           meta model.
 	 */
 	public void init(String metaModelName, String modelBundleName,
 			String modelFilePath) throws RuntimeException {
@@ -168,8 +168,8 @@ public class TestPerformer {
 		/* Try to load model and meta model. */
 		try {
 
-			this.metaModel = ModelBusPlugin.getMetamodelRegistry()
-					.getMetamodel(metaModelName);
+			this.metaModel =
+					ModelBusPlugin.getMetamodelRegistry().getMetamodel(metaModelName);
 
 			if (metaModel == null) {
 				throw new RuntimeException(
@@ -177,12 +177,11 @@ public class TestPerformer {
 			}
 
 			// Get the bundle location for the model files.
-			this.testEnv.fileDirectory = Platform.getBundle(modelBundleName)
-					.getLocation();
+			this.testEnv.fileDirectory =
+					Platform.getBundle(modelBundleName).getLocation();
 
 			// Remove the 'reference:file:' from the beginning.
-			this.testEnv.fileDirectory = this.testEnv.fileDirectory
-					.substring(15);
+			this.testEnv.fileDirectory = this.testEnv.fileDirectory.substring(15);
 
 			// Load the model.
 			this.loadModel(modelFilePath);
@@ -203,20 +202,20 @@ public class TestPerformer {
 	 * Cleans everything...
 	 */
 	public void deInit() throws IOException {
+
 		this.bLogger.close();
 	}
 
 	/**
 	 * loads an Ocl file by loading each statement separately to avoid abort due
-	 * to parser exceptions Statements that could not be loaded, will be stored
-	 * as well as the error messages.
+	 * to parser exceptions Statements that could not be loaded, will be stored as
+	 * well as the error messages.
 	 * 
 	 * @param oclFileName
 	 * 
 	 * @throws RuntimeException
 	 */
-	public void safeLoadStatementFile(String oclFileName)
-			throws RuntimeException {
+	public void safeLoadStatementFile(String oclFileName) throws RuntimeException {
 
 		this.safeLoadConstraintFile(oclFileName, constraintFileType.STATEMENT);
 	}
@@ -235,8 +234,9 @@ public class TestPerformer {
 		oclStatement = oclStatement.replaceAll("\n", "\n\t");
 
 		OCL2Parser anOCLparser;
-		String completeStatement = "package " + packageInformation + " \n"
-				+ oclStatement + " \nendpackage";
+		String completeStatement =
+				"package " + packageInformation + " \n" + oclStatement
+						+ " \nendpackage";
 		StringReader reader = new StringReader(completeStatement);
 		anOCLparser = new OCL2Parser(myModel, reader);
 
@@ -247,8 +247,7 @@ public class TestPerformer {
 			// Save the constraint's definition under it's name to refer to it
 			// later
 			// when logging results
-			this.testEnv.storeConstraintDefinition(packageInformation,
-					oclStatement);
+			this.testEnv.storeConstraintDefinition(packageInformation, oclStatement);
 
 			this.bLogger.oclParseSuccess(oclStatement);
 		} catch (Exception e) {
@@ -260,11 +259,10 @@ public class TestPerformer {
 	}
 
 	/**
-	 * Returns the package (is expected to be the first line) of a
-	 * BufferedReader.
+	 * Returns the package (is expected to be the first line) of a BufferedReader.
 	 * 
 	 * @param reader
-	 *            Input reader that contains package statement
+	 *          Input reader that contains package statement
 	 * 
 	 * @return
 	 * 
@@ -311,6 +309,7 @@ public class TestPerformer {
 	 * Safe load of OCL-File which contains Pre/Post values
 	 */
 	public void safeLoadPrePostFile(String oclFile) {
+
 		this.safeLoadConstraintFile(oclFile, constraintFileType.PREPOST);
 	}
 
@@ -375,13 +374,11 @@ public class TestPerformer {
 
 			// if line starts with context or endpackage
 			// --> parse the LAST statement
-			if ((strLine.startsWith("endpackage") || strLine
-					.startsWith("context"))
+			if ((strLine.startsWith("endpackage") || strLine.startsWith("context"))
 					&& oclStatementString.length() > 0) {
 
 				// try to parse ocl statement
-				this.parseOclStatement(oclStatementString.toString(),
-						packageInfo);
+				this.parseOclStatement(oclStatementString.toString(), packageInfo);
 				// empty ocl string
 				oclStatementString.setLength(0);
 			}
@@ -402,16 +399,17 @@ public class TestPerformer {
 
 	/**
 	 * analyzes a linen from the input and extracts the constraint's name, if
-	 * specified. If no name is given, a new name is generated and integrated
-	 * inh the line
+	 * specified. If no name is given, a new name is generated and integrated inh
+	 * the line
 	 * 
 	 * @param line
-	 *            Line to be analyzed
+	 *          Line to be analyzed
 	 * @param fileName
-	 *            current scanned filename that is used to generate the new
-	 *            constraint name
+	 *          current scanned filename that is used to generate the new
+	 *          constraint name
 	 */
 	private String getOrSetConstraintName(String line, String fileName) {
+
 		// try to capture the invariant's name
 		Matcher match = this.patternConstraintName.matcher(line);
 
@@ -420,23 +418,27 @@ public class TestPerformer {
 			String prefix;
 			if (match.group(2).equals("pre") || match.group(2).equals("post")) {
 				prefix = "_" + match.group(2) + "_";
-			} else {
+			}
+			else {
 				prefix = "";
 			}
 			// create or modify the testname to get a unique name
 			// specially identify pre and posts to test them separately
 			if (match.group(3).length() > 0) {
-				this.testEnv.curConstraintName = this.testEnv.testName + prefix
-						+ fileName + "_" + match.group(3);
-			} else {
-				this.testEnv.curConstraintName = this.testEnv.testName + prefix
-						+ fileName + "_" + (this.testEnv.curConstraintId++);
+				this.testEnv.curConstraintName =
+						this.testEnv.testName + prefix + fileName + "_" + match.group(3);
+			}
+			else {
+				this.testEnv.curConstraintName =
+						this.testEnv.testName + prefix + fileName + "_"
+								+ (this.testEnv.curConstraintId++);
 			}
 
 			return match.group(1) + " " + match.group(2) + " "
 					+ this.testEnv.curConstraintName + ":" + match.group(4);
 
-		} else {
+		}
+		else {
 			return line;
 		}
 	}
@@ -448,9 +450,9 @@ public class TestPerformer {
 	 * They're mostly encapsulated into invariants
 	 * 
 	 * @param source
-	 *            reader supplying source
+	 *          reader supplying source
 	 * @param packageInfo
-	 *            namespace (must conform to current model)
+	 *          namespace (must conform to current model)
 	 */
 	private void handleQueries(BufferedReader source, String packageInfo) {
 
@@ -474,12 +476,11 @@ public class TestPerformer {
 				statementBuilder.append(strLine.substring(1));
 
 				// parse statement
-				this
-						.parseOclStatement(statementBuilder.toString(),
-								packageInfo);
+				this.parseOclStatement(statementBuilder.toString(), packageInfo);
 
 				// the next ! is considered to be the expected result
-			} else if (strLine.startsWith("!")) {
+			}
+			else if (strLine.startsWith("!")) {
 				String methodName = "query_" + (this.testEnv.curConstraintId);
 				statementBuilder.setLength(0);
 				statementBuilder.append("context Person\n");
@@ -488,16 +489,14 @@ public class TestPerformer {
 				statementBuilder.append(" = " + strLine.substring(1));
 
 				// parse Statement
-				this
-						.parseOclStatement(statementBuilder.toString(),
-								packageInfo);
+				this.parseOclStatement(statementBuilder.toString(), packageInfo);
 			}
 		}
 	}
 
 	/**
-	 * returns the next line of the reader by omitting comments, empty lines
-	 * etc. It's throwing RuntimeException when the file seems corrupt.
+	 * returns the next line of the reader by omitting comments, empty lines etc.
+	 * It's throwing RuntimeException when the file seems corrupt.
 	 * 
 	 * @param source
 	 * 
@@ -539,14 +538,13 @@ public class TestPerformer {
 
 		bLogger
 				.outHead1("Checking current model instance against loaded invariants");
-		List<IModelInstanceObject> testObjects = this.getActiveModelInstance()
-				.getAllModelInstanceObjects();
+		List<IModelInstanceObject> testObjects =
+				this.getActiveModelInstance().getAllModelInstanceObjects();
 		List<Constraint> constraints = this.getAllActiveConstraints();
 
 		bLogger.printf("invariants  : %d", constraints.size());
 		bLogger.printf("test objects: %d", testObjects.size());
-		bLogger.printf("total tests : %d", constraints.size()
-				* testObjects.size());
+		bLogger.printf("total tests : %d", constraints.size() * testObjects.size());
 
 		NamedElement conElement = null;
 
@@ -557,8 +555,7 @@ public class TestPerformer {
 				bLogger.outLine("\nConstraint: " + con.getQualifiedName());
 
 				conElement = (NamedElement) con.getConstrainedElement().get(0);
-				if (conElement instanceof Property
-						|| conElement instanceof Operation) {
+				if (conElement instanceof Property || conElement instanceof Operation) {
 					conElement = conElement.getOwner();
 				}
 				// if they equal
@@ -567,7 +564,8 @@ public class TestPerformer {
 					// Interpret and log result
 					this.interpretConstraint(obj, con);
 
-				} else {
+				}
+				else {
 					bLogger.skipInterpretation();
 				}
 			}
@@ -581,13 +579,13 @@ public class TestPerformer {
 	 * checks pre and post conditions one after another.
 	 * 
 	 * @param guineaPig
-	 *            model instance object where constraints are tested
+	 *          model instance object where constraints are tested
 	 * @param method
-	 *            name of method to be executed
+	 *          name of method to be executed
 	 * @param params
-	 *            list of parameter names that are expected to be stored in the
-	 *            interpretation environment. They're extracted and passed as
-	 *            method arguments
+	 *          list of parameter names that are expected to be stored in the
+	 *          interpretation environment. They're extracted and passed as method
+	 *          arguments
 	 */
 	public void checkPreAndPostConditions(IModelInstanceObject guineaPig,
 			String method, String... params) {
@@ -605,11 +603,12 @@ public class TestPerformer {
 	 * Check pre conditions.
 	 * 
 	 * @param guineaPig
-	 *            model instance object to test the constraints on
+	 *          model instance object to test the constraints on
 	 * @param method
-	 *            Method name just for logging
+	 *          Method name just for logging
 	 */
 	public void checkPreConditions(IModelInstanceObject guineaPig, String method) {
+
 		bLogger.outHead1("Checking Pre Conditions");
 
 		bLogger.outHead3("Test Object:");
@@ -643,21 +642,21 @@ public class TestPerformer {
 	/**
 	 * Check post conditions.
 	 * 
-	 * @param guineaPig
-	 *            model instance object to test the constraints on
+	 * @param imiObject
+	 *          model instance object to test the constraints on
 	 * @param method
-	 *            This is invoked when a condition is being tested.
+	 *          This is invoked when a condition is being tested.
 	 * @param params
-	 *            variable arguments to specify arguments for the method being
-	 *            invoked
+	 *          variable arguments to specify arguments for the method being
+	 *          invoked
 	 */
-	public void checkPostConditions(IModelInstanceObject guineaPig,
+	public void checkPostConditions(IModelInstanceObject imiObject,
 			String method, String... params) {
 
 		bLogger.outHead1("Checking Post Conditions");
 
 		bLogger.outHead3("Test Object:");
-		bLogger.outLine(guineaPig.getName());
+		bLogger.outLine(imiObject.getName());
 		bLogger.outLine("Method: " + method + "(...)");
 
 		// load all remaining constraints
@@ -683,17 +682,49 @@ public class TestPerformer {
 
 			// execute method only once
 			if (!methodExecuted) {
-				OclAny gPigInOcl = this
-						.createOclAnyAdapterByMIObject(guineaPig);
-				try {
-					gPigInOcl.invokeOperation(method, oclParams);
-				} catch (NoSuchMethodException e) {
-					throw new RuntimeException(e);
+				OclAny imiObjectInOcl;
+
+				imiObjectInOcl =
+						this.myInterpreter.getStandardLibraryFactory().createOclAny(
+								imiObject);
+
+				/* Get the parameter types. */
+				List<Type> parameterTypes;
+				parameterTypes = new ArrayList<Type>();
+
+				for (OclAny oclParam : oclParams) {
+					parameterTypes.add(oclParam.getModelInstanceElement().getTypes()
+							.iterator().next());
 				}
+				// end for.
+
+				/* Find the operation. */
+				Operation operation;
+				operation = null;
+
+				for (Type type : imiObject.getTypes()) {
+
+					operation = type.lookupOperation(method, parameterTypes);
+					if (operation != null) {
+						break;
+					}
+					// no else.
+				}
+				// end for.
+
+				/* Invoke the operation. */
+				if (operation != null) {
+					imiObjectInOcl.invokeOperation(operation, oclParams);
+				}
+
+				else {
+					throw new RuntimeException("Operation " + method + " not found.");
+				}
+				// end else.
 			}
 
 			// interpret condition
-			this.interpretConstraint(guineaPig, con);
+			this.interpretConstraint(imiObject, con);
 		}
 
 		this.bLogger.printInterpretationStats();
@@ -707,6 +738,7 @@ public class TestPerformer {
 	 *         fetched
 	 */
 	private OclAny[] collectMethodParams(String... params) {
+
 		OclAny[] oclParams = new OclAny[params.length];
 		int counter = 0;
 		for (String name : params) {
@@ -721,20 +753,19 @@ public class TestPerformer {
 	 * Interprets a model instance object with a constraint.
 	 * 
 	 * @param obj
-	 *            model object instance
+	 *          model object instance
 	 * @param con
-	 *            Constraint to be checked.
+	 *          Constraint to be checked.
 	 * @pre obj and con are expected to "belong together"
 	 */
 	private void interpretConstraint(IModelInstanceObject obj, Constraint con) {
+
 		OclAny result = null;
 
-		assert (this.testEnv.loadedConstraints.containsKey(con
-				.getQualifiedName()));
+		assert (this.testEnv.loadedConstraints.containsKey(con.getQualifiedName()));
 		try {
 
-			result = this.myInterpreter.interpretConstraint(con, obj)
-					.getResult();
+			result = this.myInterpreter.interpretConstraint(con, obj).getResult();
 		} catch (Throwable e) { // catch EVERYTHING
 			bLogger.interpretationError(con, obj, e);
 			return;
@@ -755,7 +786,8 @@ public class TestPerformer {
 
 			if (res != null && res.isTrue()) {
 				bLogger.interpretationSuccess(con, obj);
-			} else {
+			}
+			else {
 				bLogger.interpretationError(con, obj, res);
 			}
 		} catch (ClassCastException e) {
@@ -796,8 +828,7 @@ public class TestPerformer {
 
 		// test whether constraint has been loaded this time
 		for (Constraint con : ns.getOwnedRule()) {
-			if (this.testEnv.loadedConstraints.containsKey(con
-					.getQualifiedName())) {
+			if (this.testEnv.loadedConstraints.containsKey(con.getQualifiedName())) {
 				constraints.add(con);
 			}
 		}
@@ -811,7 +842,7 @@ public class TestPerformer {
 	 * </p>
 	 * 
 	 * @param modelInstance
-	 *            The model instance for which the test shall be performed.
+	 *          The model instance for which the test shall be performed.
 	 */
 	public void setModelInstanceType(String modelInstance) {
 
@@ -820,15 +851,15 @@ public class TestPerformer {
 
 	/**
 	 * <p>
-	 * Loads a given fileName as an {@link IModelInstance} of the actual
-	 * selected {@link IModel}.
+	 * Loads a given fileName as an {@link IModelInstance} of the actual selected
+	 * {@link IModel}.
 	 * </p>
 	 * 
 	 * @param modelInstanceFileName
-	 *            The file of the provider class of the {@link IModelInstance}.
+	 *          The file of the provider class of the {@link IModelInstance}.
 	 * 
 	 * @throws RuntimeException
-	 *             Thrown, if the given file can not be found.
+	 *           Thrown, if the given file can not be found.
 	 */
 	public void loadModelInstance(String modelInstanceFileName)
 			throws RuntimeException {
@@ -843,18 +874,19 @@ public class TestPerformer {
 			return;
 		}
 
-		File modelInstanceFile = this.safeOpenFile(this.testEnv.fileDirectory
-				+ modelInstanceFileName);
+		File modelInstanceFile =
+				this.safeOpenFile(this.testEnv.fileDirectory + modelInstanceFileName);
 
-		IModelInstanceProvider modelInstanceProvider = this
-				.getModelInstanceProvider();
+		IModelInstanceProvider modelInstanceProvider =
+				this.getModelInstanceProvider();
 
 		IModelInstance loadedInstance = null;
 
 		// Load the model instance.
 		try {
-			loadedInstance = modelInstanceProvider.getModelInstance(
-					modelInstanceFile, this.myModel);
+			loadedInstance =
+					modelInstanceProvider.getModelInstance(modelInstanceFile,
+							this.myModel);
 		} catch (ModelAccessException e) {
 			throw new RuntimeException(e);
 		}
@@ -883,20 +915,19 @@ public class TestPerformer {
 	 * 
 	 * @param instance
 	 * @param add
-	 *            set true if the instance should be added as well
+	 *          set true if the instance should be added as well
 	 */
 	private void setActiveModelInstance(IModelInstance instance) {
 
 		IModelInstanceRegistry modelInstanceRegistry;
 		modelInstanceRegistry = ModelBusPlugin.getModelInstanceRegistry();
-		IModelInstance[] instances = modelInstanceRegistry
-				.getModelInstances(this.myModel);
+		IModelInstance[] instances =
+				modelInstanceRegistry.getModelInstances(this.myModel);
 		for (IModelInstance inst : instances) {
 			// instance already loaded
 			if (inst.equals(instance)) {
 				// activate and return
-				modelInstanceRegistry.setActiveModelInstance(this.myModel,
-						instance);
+				modelInstanceRegistry.setActiveModelInstance(this.myModel, instance);
 				return;
 			}
 		}
@@ -913,6 +944,7 @@ public class TestPerformer {
 	 * @return the active model instance
 	 */
 	private IModelInstance getActiveModelInstance() {
+
 		IModelInstanceRegistry modelInstanceRegistry;
 		modelInstanceRegistry = ModelBusPlugin.getModelInstanceRegistry();
 
@@ -927,10 +959,11 @@ public class TestPerformer {
 	 * @return current model instanceprovider
 	 */
 	private IModelInstanceProvider getModelInstanceProvider() {
-		IModelInstanceTypeRegistry tMTypeReg = ModelBusPlugin
-				.getModelInstanceTypeRegistry();
-		IModelInstanceType tMInstanceType = tMTypeReg
-				.getModelInstanceType(this.modelInstanceType);
+
+		IModelInstanceTypeRegistry tMTypeReg =
+				ModelBusPlugin.getModelInstanceTypeRegistry();
+		IModelInstanceType tMInstanceType =
+				tMTypeReg.getModelInstanceType(this.modelInstanceType);
 		return tMInstanceType.getModelInstanceProvider();
 	}
 
@@ -940,7 +973,7 @@ public class TestPerformer {
 	 * </p>
 	 * 
 	 * @param modelName
-	 *            Filename of the model
+	 *          Filename of the model
 	 * 
 	 * @throws RuntimeException
 	 */
@@ -952,15 +985,13 @@ public class TestPerformer {
 
 			File modelFile;
 
-			modelFile = this.safeOpenFile(this.testEnv.fileDirectory
-					+ modelName);
+			modelFile = this.safeOpenFile(this.testEnv.fileDirectory + modelName);
 
 			/* Try to load the model. */
 			try {
 				IModelRegistry modelRegistry;
 
-				this.myModel = this.metaModel.getModelProvider().getModel(
-						modelFile);
+				this.myModel = this.metaModel.getModelProvider().getModel(modelFile);
 
 				modelRegistry = ModelBusPlugin.getModelRegistry();
 
@@ -1041,14 +1072,15 @@ public class TestPerformer {
 	 * creates an object adapting the passed model instance object
 	 * 
 	 * @param object
-	 *            Object to be adapteds
+	 *          Object to be adapteds
 	 */
 	public IModelInstanceObject createModelInstanceAdapter(Object object) {
 
 		IModelInstanceObject result = null;
 		try {
-			result = (IModelInstanceObject) this.getActiveModelInstance()
-					.addModelInstanceElement(object);
+			result =
+					(IModelInstanceObject) this.getActiveModelInstance()
+							.addModelInstanceElement(object);
 		}
 
 		catch (TypeNotFoundInModelException e) {
@@ -1060,32 +1092,50 @@ public class TestPerformer {
 	/**
 	 * <p>
 	 * Add a given {@link Object} as a variable to the
-	 * {@link IInterpretationEnvironment} used for preparation and
-	 * interpretation.
+	 * {@link IInterpretationEnvironment} used for preparation and interpretation.
 	 * </p>
 	 * 
 	 * @param path
-	 *            The path and name of the variable which shall be set.
+	 *          The path and name of the variable which shall be set.
 	 * @param value
-	 *            The {@link IModelInstanceObject} value of the set variable as
-	 *            an Object.
+	 *          The {@link IModelInstanceObject} value of the set variable as an
+	 *          Object.
+	 * @return <code>true</code>, if the given value has been set as a value
+	 *         successfully.
 	 */
-	public void setEnvironmentVariable(String path, Object value) {
+	public boolean setEnvironmentVariable(String path, Object value) {
+
+		boolean result;
 
 		/* Convert the object into an OclAny. */
 		OclAny adaptedObject;
-		adaptedObject = JavaStandardlibraryPlugin.getStandardLibraryFactory()
-				.createOclAny(value);
-		/* Add the variable to the environment. */
-		this.myInterpreter.setEnviromentVariable(path, adaptedObject);
+
+		try {
+			adaptedObject =
+					JavaStandardlibraryPlugin.getStandardLibraryFactory().createOclAny(
+							this.myGlobalEnvironment.getModelInstance()
+									.getModelInstanceFactory().createModelInstanceElement(value));
+
+			/* Add the variable to the environment. */
+			this.myInterpreter.setEnviromentVariable(path, adaptedObject);
+
+			result = true;
+		}
+
+		catch (TypeNotFoundInModelException e) {
+			result = false;
+		}
+
+		return result;
 	}
 
 	/**
-	 * creates an ocl root adapter from a model instance adapter in order to
-	 * being able to execute a method on the model level
+	 * creates an ocl root adapter from a model instance adapter in order to being
+	 * able to execute a method on the model level
 	 */
 	public OclAny createOclRootAdapterByMIObject(IModelInstanceObject obj) {
-		return JavaStandardlibraryPlugin.getStandardLibraryFactory()
-				.createOclAny(obj);
+
+		return JavaStandardlibraryPlugin.getStandardLibraryFactory().createOclAny(
+				obj);
 	}
 }
