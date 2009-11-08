@@ -1,24 +1,17 @@
-This plugin contains testcase for the ocl parser.
+OCL2 Parser Test Suite
+======================
+
+This plug-in contains testcases for the OCL2 Parser of Dresden OCL2 for
+Eclipse.
 
 Directory structure:
+====================
 
-The testdata lies under the directory ./src/testdata.
+The testdata lies int the ./resources/ directory.
 
-The testcase that tests the parser are in
-./src/tudresden.ocl20.pivot.ocl2parser.test/parsertests.
+The testcases that tests the parser are located in the package
+./src/tudresden.ocl20.pivot.ocl2parser.test/
 
-The directory ./src/tudresden.ocl20.pivot.ocl2parser.test.simpletests
-contains two files that show how the access is made for the pivotmodel.
+and can be executed using the 
 
-
-Excecute the test:
-
-Go to the
-testcase tudresden.ocl20.pivot.ocl2parser.test.parsertets.OclFilesTest.
-Make a right click on that and choose "Run -> Junit Plug-in Test".
-
-
-Hint:
-If an error occurs while executing the parser then
-try to build the project with Java1.6 compliance and
-rebuild it.
+tudresden.ocl20.pivot.ocl2parser.test.AllTests.java

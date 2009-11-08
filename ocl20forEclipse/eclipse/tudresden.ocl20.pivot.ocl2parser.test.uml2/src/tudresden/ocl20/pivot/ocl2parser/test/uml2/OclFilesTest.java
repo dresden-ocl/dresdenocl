@@ -21,7 +21,6 @@ import static org.junit.Assert.*;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import tudresden.ocl20.pivot.ocl2parser.test.AllUML2Tests;
 import tudresden.ocl20.pivot.ocl2parser.test.TestPerformer;
 
 /**
@@ -43,8 +42,8 @@ public class OclFilesTest {
 		try {
 			if (testPerformer == null) {
 				testPerformer =
-						TestPerformer.getInstance(AllUML2Tests.META_MODEL_NAME,
-								AllUML2Tests.MODEL_BUNDLE, AllUML2Tests.MODEL_BUNDLE_PATH);
+						TestPerformer.getInstance(AllUML2Tests.META_MODEL_ID,
+								AllUML2Tests.MODEL_BUNDLE, AllUML2Tests.MODEL_DIRECTORY);
 				testPerformer.setModel("royalsandloyals.uml");
 			}
 		} catch (Exception ex) {

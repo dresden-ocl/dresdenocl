@@ -31,9 +31,8 @@ import tudresden.ocl20.pivot.ocl2parser.parser.exceptions.BuildingASTException;
 import tudresden.ocl20.pivot.ocl2parser.parser.exceptions.LexException;
 import tudresden.ocl20.pivot.ocl2parser.parser.exceptions.ParsingException;
 import tudresden.ocl20.pivot.ocl2parser.parser.exceptions.SemanticException;
-import tudresden.ocl20.pivot.ocl2parser.test.AllECoreTests;
-import tudresden.ocl20.pivot.ocl2parser.test.MetaModelNotFoundException;
 import tudresden.ocl20.pivot.ocl2parser.test.TestPerformer;
+import tudresden.ocl20.pivot.ocl2parser.test.exception.MetaModelNotFoundException;
 
 public class AtPreTest {
 

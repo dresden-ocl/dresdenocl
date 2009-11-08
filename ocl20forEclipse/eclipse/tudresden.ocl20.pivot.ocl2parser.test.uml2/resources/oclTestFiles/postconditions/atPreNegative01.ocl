@@ -1,0 +1,8 @@
+package tudresden::ocl20::pivot::examples::royalsandloyals
+
+-- Should not be parsed. @pre is only valid in postconditions.
+context LoyaltyProgram::enroll(c : Customer)
+pre: 
+  participants = participants@pre->including(c)
+
+endpackage

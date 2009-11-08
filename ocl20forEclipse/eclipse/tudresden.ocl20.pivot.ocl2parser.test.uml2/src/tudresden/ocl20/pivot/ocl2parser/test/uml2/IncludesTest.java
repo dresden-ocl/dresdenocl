@@ -22,7 +22,6 @@ package tudresden.ocl20.pivot.ocl2parser.test.uml2;
 import static org.junit.Assert.*;
 import org.junit.Test;
 
-import tudresden.ocl20.pivot.ocl2parser.test.AllUML2Tests;
 import tudresden.ocl20.pivot.ocl2parser.test.TestPerformer;
 
 public class IncludesTest {
@@ -33,8 +32,8 @@ public class IncludesTest {
 		String fileName = "oclTestFiles/includes.ocl";
 		try {
 			TestPerformer test =
-					TestPerformer.getInstance(AllUML2Tests.META_MODEL_NAME,
-							AllUML2Tests.MODEL_BUNDLE, AllUML2Tests.MODEL_BUNDLE_PATH);
+					TestPerformer.getInstance(AllUML2Tests.META_MODEL_ID,
+							AllUML2Tests.MODEL_BUNDLE, AllUML2Tests.MODEL_DIRECTORY);
 			// royalsandloyals_includes.xmi
 			test.setModel("royalsandloyals_includes.uml", true);
 			test.parseFile(fileName);

@@ -9,7 +9,6 @@ import java.io.FileNotFoundException;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import tudresden.ocl20.pivot.ocl2parser.test.AllECoreTests;
 import tudresden.ocl20.pivot.ocl2parser.test.TestPerformer;
 
 /**

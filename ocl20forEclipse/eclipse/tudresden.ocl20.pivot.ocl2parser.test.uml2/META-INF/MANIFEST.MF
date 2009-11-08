@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Test Plug-in
 Bundle-SymbolicName: tudresden.ocl20.pivot.ocl2parser.test; singleton:=true
 Bundle-Version: 2.0.0
-Bundle-Activator: tudresden.ocl20.pivot.ocl2parser.test.OCL2ParserTestPlugIn
+Bundle-Activator: tudresden.ocl20.pivot.ocl2parser.test.Activator
 Require-Bundle: org.eclipse.core.runtime,
  tudresden.ocl20.pivot.modelbus,
  tudresden.ocl20.pivot.ocl2parser,
@@ -12,5 +12,5 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.ui,
  org.junit4;bundle-version="4.3.1",
  tudresden.ocl20.pivot.examples.royalandloyal;bundle-version="1.2.0"
-Eclipse-LazyStart: true
+Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: J2SE-1.5

@@ -25,7 +25,6 @@ import java.util.List;
 
 import junit.framework.TestCase;
 import tudresden.ocl20.pivot.modelbus.model.IModel;
-import tudresden.ocl20.pivot.ocl2parser.test.AllUML2Tests;
 import tudresden.ocl20.pivot.ocl2parser.test.TestPerformer;
 import tudresden.ocl20.pivot.pivotmodel.Enumeration;
 import tudresden.ocl20.pivot.pivotmodel.EnumerationLiteral;
@@ -48,8 +47,8 @@ public class PropertyOutput extends TestCase {
 
 		try {
 			TestPerformer testPerformer =
-					TestPerformer.getInstance(AllUML2Tests.META_MODEL_NAME,
-							AllUML2Tests.MODEL_BUNDLE, AllUML2Tests.MODEL_BUNDLE_PATH);
+					TestPerformer.getInstance(AllUML2Tests.META_MODEL_ID,
+							AllUML2Tests.MODEL_BUNDLE, AllUML2Tests.MODEL_DIRECTORY);
 			testPerformer.setModel("royalsandloyals.uml");
 			IModel model = testPerformer.getCurrentModel();
 

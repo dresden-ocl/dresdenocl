@@ -25,7 +25,6 @@ import java.util.List;
 
 import junit.framework.TestCase;
 import tudresden.ocl20.pivot.modelbus.model.IModel;
-import tudresden.ocl20.pivot.ocl2parser.test.AllECoreTests;
 import tudresden.ocl20.pivot.ocl2parser.test.TestPerformer;
 import tudresden.ocl20.pivot.pivotmodel.Enumeration;
 import tudresden.ocl20.pivot.pivotmodel.EnumerationLiteral;
