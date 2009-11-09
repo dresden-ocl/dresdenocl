@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Living Plug-in
+Bundle-Name: Living Example Plug-in
 Bundle-SymbolicName: tudresden.ocl20.pivot.examples.living
 Bundle-Version: 2.0.0
 Export-Package: tudresden.ocl20.pivot.examples.living
@@ -8,3 +8,4 @@ Require-Bundle: tudresden.ocl20.pivot.modelbus
 Bundle-ClassPath: src/,
  .
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-Vendor: TU Dresden, Software Technology Group

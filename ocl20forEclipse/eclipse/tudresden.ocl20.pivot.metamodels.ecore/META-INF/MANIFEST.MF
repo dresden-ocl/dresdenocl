@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Ecore Adapter
+Bundle-Name: EMF Ecore Meta-Model Plug-in
 Bundle-SymbolicName: tudresden.ocl20.pivot.metamodels.ecore;singleton:=true
 Bundle-Version: 2.0.0
 Bundle-Activator: tudresden.ocl20.pivot.metamodels.ecore.EcoreMetamodelPlugin

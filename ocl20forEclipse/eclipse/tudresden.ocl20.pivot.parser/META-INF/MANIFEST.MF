@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: OCL Parser
+Bundle-Name: OCL Parser Interface Plug-in
 Bundle-SymbolicName: tudresden.ocl20.pivot.parser
 Bundle-Version: 2.0.0
 Bundle-Activator: tudresden.ocl20.pivot.parser.ParserPlugin

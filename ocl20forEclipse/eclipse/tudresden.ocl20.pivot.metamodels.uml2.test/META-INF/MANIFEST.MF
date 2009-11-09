@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: UML2 Meta Model Test Plug-in
+Bundle-Name: UML2 Meta-Model Test Plug-in
 Bundle-SymbolicName: tudresden.ocl20.pivot.metamodels.uml2.test;singleton:=true
 Bundle-Version: 2.0.0
 Bundle-Activator: tudresden.ocl20.pivot.metamodels.uml2.test.UML2MetaModelTestPlugin
@@ -13,3 +13,4 @@ Require-Bundle: org.eclipse.ui,
  tudresden.ocl20.pivot.testsuite;bundle-version="1.0.0"
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-Vendor: TU Dresden, Software Technology Group

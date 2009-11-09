@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Interpreter Plug-in
+Bundle-Name: OCL2 Interpreter Plug-in
 Bundle-SymbolicName: tudresden.ocl20.pivot.interpreter
 Bundle-Version: 2.0.0
 Bundle-Activator: tudresden.ocl20.pivot.interpreter.OclInterpreterPlugin
@@ -16,3 +16,4 @@ Bundle-ActivationPolicy: lazy
 Export-Package: tudresden.ocl20.pivot.interpreter,
  tudresden.ocl20.pivot.interpreter.event
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-Vendor: TU Dresden, Software Technology Group

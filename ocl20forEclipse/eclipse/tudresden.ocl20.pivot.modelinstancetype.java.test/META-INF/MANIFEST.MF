@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Test Plug-in
+Bundle-Name: Java Model Instance Type Test Plug-in
 Bundle-SymbolicName: tudresden.ocl20.pivot.modelinstancetype.java.test;singleton:=true
 Bundle-Version: 2.0.0
 Bundle-Activator: tudresden.ocl20.pivot.modelinstancetype.java.test.JavaModelInstanceTypeTestPlugin
@@ -13,3 +13,4 @@ Require-Bundle: org.eclipse.core.runtime,
  tudresden.ocl20.pivot.testsuite
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-Vendor: TU Dresden, Software Technology Group

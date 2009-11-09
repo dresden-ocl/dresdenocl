@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: UML2 Adapter
+Bundle-Name: UML2 Meta-Model Plug-in
 Bundle-SymbolicName: tudresden.ocl20.pivot.metamodels.uml2;singleton:=true
 Bundle-Version: 2.0.0
 Bundle-Activator: tudresden.ocl20.pivot.metamodels.uml2.UML2MetamodelPlugin

@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Ocl2java Plug-in
+Bundle-Name: OCL22java Code Generator Plug-in
 Bundle-SymbolicName: tudresden.ocl20.pivot.ocl2java
 Bundle-Version: 2.0.0
 Bundle-Activator: tudresden.ocl20.pivot.ocl2java.Ocl2JavaPlugin
@@ -19,3 +19,4 @@ Bundle-ClassPath: antlr.jar,
  stringtemplate.jar,
  .
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-Vendor: TU Dresden, Software Technology Group

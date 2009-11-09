@@ -1,8 +1,8 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: OCL Standard Library
+Bundle-Name: OCL2 Standard Library Plug-in
 Bundle-SymbolicName: tudresden.ocl20.pivot.essentialocl.standardlibrary
-Bundle-Version: 1.2.0
+Bundle-Version: 2.0.0
 Bundle-Activator: tudresden.ocl20.pivot.essentialocl.StandardLibraryPlugin
 Bundle-Vendor: TU Dresden, Software Technology Group
 Require-Bundle: org.eclipse.core.runtime,
