@@ -1,0 +1,9 @@
+package tudresden::ocl20::pivot::examples::royalsandloyals
+
+-- Void operation should not be parsed with result type.
+context Customer::birthdayHappens(): Boolean
+pre: true
+  
+endpackage
+  
+endpackage

@@ -1,0 +1,4 @@
+-- Only absolute packages should be parsed.
+package examples::royalsandloyals
+
+endpackage

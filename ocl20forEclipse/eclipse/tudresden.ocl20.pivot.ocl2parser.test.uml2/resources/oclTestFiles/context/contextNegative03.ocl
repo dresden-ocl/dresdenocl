@@ -1,0 +1,9 @@
+package tudresden::ocl20::pivot::examples::royalsandloyals
+
+-- Unknown operation should not be parsed.
+context Customer::somethingHappens(): Boolean
+pre: true
+  
+endpackage
+  
+endpackage

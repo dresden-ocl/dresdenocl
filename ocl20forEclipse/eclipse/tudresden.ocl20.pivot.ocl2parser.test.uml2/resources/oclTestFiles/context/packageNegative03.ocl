@@ -1,0 +1,4 @@
+-- Package declaration is missing.
+
+context LoyaltyProgram
+inv: true

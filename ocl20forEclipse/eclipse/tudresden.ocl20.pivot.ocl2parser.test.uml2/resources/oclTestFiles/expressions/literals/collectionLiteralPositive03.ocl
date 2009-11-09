@@ -1,0 +1,6 @@
+package tudresden::ocl20::pivot::examples::royalsandloyals
+
+context Customer
+inv: Sequence{'a', 'b', 'c'}->size() = 3
+
+endpackage

@@ -1,0 +1,7 @@
+package tudresden::ocl20::pivot::examples::royalsandloyals
+
+-- Operation with wrong number of arguments should not be parsed.
+context LoyaltyAccount::burn(points: Integer, points2: String)
+pre: true
+  
+endpackage

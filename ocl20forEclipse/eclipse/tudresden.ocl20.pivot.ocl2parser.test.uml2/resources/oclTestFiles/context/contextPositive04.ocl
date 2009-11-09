@@ -1,0 +1,7 @@
+package tudresden::ocl20::pivot::examples::royalsandloyals
+
+-- Operation should be parsed.
+context Customer::getAge(): Integer
+pre: true
+  
+endpackage

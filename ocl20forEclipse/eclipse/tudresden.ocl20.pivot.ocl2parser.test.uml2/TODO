@@ -1,0 +1,37 @@
+Implemented Test Packages:
+
+* Namespace and Context
+  + Package Expression
+    - Positives and Negatives
+  + Context Expressions
+    - Positives and Negatives (Types and Operation contexts)
+    
+    TODO
+    - Multiple result context unique/ordered -> Set, OrderedSet etc.
+
+
+Planned Test Packages:
+
+* Expressions
+  - Literal Expressions
+    + Collection Literal Expressions
+  - OperationCallExpressions
+    + Special Postcondition Operations
+      - @pre
+      - oclIsNew()
+    + Operations of the standard library
+    + Static operations
+      - allInstances()
+  - PropertyCallExpressions
+    + static properties
+  ...
+  - VariableExpressions
+    + Special Postcondtions Variables
+      - result
+* Constraint Types
+  + Preconditions
+  + Postconditions
+  + Invariants
+  + Definitions
+  + Bodies
+  + Derives
