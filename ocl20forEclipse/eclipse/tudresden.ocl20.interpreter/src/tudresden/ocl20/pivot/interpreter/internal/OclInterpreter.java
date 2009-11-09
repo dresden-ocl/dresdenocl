@@ -226,6 +226,9 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		this.isModelAccessNeeded = false;
 		this.isPreparation = false;
 
+		/* The must only be used during the interpretation of the same constraint! */
+		this.myEnvironment.clearCache();
+
 		this.myCurrentModelObject = aModelObject;
 
 		/* Try to get the modelObject as OCL object. */
@@ -1927,9 +1930,9 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			/* In case there was nothing to iterate over */
 			if (result == null) {
 				result =
-						myStandardLibraryFactory.createOclUndefined(anIteratorExp
-								.getType(), "null value, since iteration over "
-								+ anIteratorExp.getIterator() + " was on empty collection");
+						myStandardLibraryFactory.createOclUndefined(
+								anIteratorExp.getType(), "null value, since iteration over "
+										+ anIteratorExp.getIterator() + " was on empty collection");
 			}
 
 			/* Eventually cache the result. */
@@ -2159,7 +2162,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			// end else (no static operation).
 
 			/* Probably cache the result. */
-			if (this.isCachingEnabled && !isModelAccessNeeded) {
+			if (!this.isPreparation && this.isCachingEnabled && !isModelAccessNeeded) {
 				this.myEnvironment.cacheResult(anOperationCallExp, result);
 			}
 			// no else.
