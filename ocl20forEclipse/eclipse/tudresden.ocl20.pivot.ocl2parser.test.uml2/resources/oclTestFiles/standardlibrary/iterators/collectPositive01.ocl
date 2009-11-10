@@ -1,0 +1,7 @@
+package package1::package2
+
+context Type1
+inv: Bag { -2, -1, 0, 1, 2 } -> collect(number : Integer | number > 0) 
+         -> size() = 2
+
+endpackage

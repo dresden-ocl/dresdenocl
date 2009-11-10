@@ -1,0 +1,7 @@
+package package1::package2
+
+-- Non-static operations cannot be accessed statically.
+context Type1
+inv: self::getInteger() > 0
+
+endpackage

@@ -1,0 +1,6 @@
+package package1::package2
+
+context Type1
+inv: Set { -2, -1, 0, 1, 2 } -> select(number : Integer | number = 0) -> size() = 1
+
+endpackage

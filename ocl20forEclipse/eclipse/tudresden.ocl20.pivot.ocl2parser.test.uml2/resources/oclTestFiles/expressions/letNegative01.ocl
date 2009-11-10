@@ -1,0 +1,9 @@
+package package1::package2
+
+-- Should fail. Each let expression defines exactly one variable.
+context Type1
+inv: 
+  let boolean1: Boolean = true, boolean2: Boolean = false
+  in boolean1 = boolean2
+
+endpackage

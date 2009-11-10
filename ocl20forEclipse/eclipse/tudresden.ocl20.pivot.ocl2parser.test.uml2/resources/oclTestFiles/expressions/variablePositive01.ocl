@@ -1,0 +1,8 @@
+package package1::package2
+
+-- Test the special variable self.
+context Type1::getType1(): Type1
+body: 
+  self  
+
+endpackage

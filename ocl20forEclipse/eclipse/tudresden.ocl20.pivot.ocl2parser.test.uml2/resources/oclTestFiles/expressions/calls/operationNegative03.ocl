@@ -1,0 +1,8 @@
+package package1::package2
+
+-- Static operations should be accessed statically.
+-- Probably a warning instead of a fail would be okay as well.
+context Type1
+inv: self.aStaticOperation() > 0
+
+endpackage

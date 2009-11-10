@@ -1,0 +1,7 @@
+package package1::package2
+
+-- The operation .=() should be available for primitive types as well.
+context Type1
+inv: anInteger = self.anInteger
+
+endpackage

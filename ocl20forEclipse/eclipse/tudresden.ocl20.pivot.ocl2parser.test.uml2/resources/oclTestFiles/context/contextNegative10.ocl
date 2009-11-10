@@ -1,0 +1,8 @@
+package package1::package2
+
+-- Should not be parsed. 
+-- getInteger() is not void.
+context Type1::getInteger()
+pre: true
+  
+endpackage

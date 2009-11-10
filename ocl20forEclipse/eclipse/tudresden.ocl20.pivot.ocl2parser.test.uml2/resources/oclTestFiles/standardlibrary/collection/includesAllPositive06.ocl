@@ -1,0 +1,6 @@
+package package1::package2
+
+context Type1
+inv: OrderedSet { 1, 2, 3 } -> includesAll(OrderedSet { 1, 2 })
+
+endpackage

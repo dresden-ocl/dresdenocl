@@ -1,0 +1,7 @@
+package package1::package2
+
+-- Unknown property should not be parsed.
+context Type1::anInt: Integer
+derive: 1
+  
+endpackage

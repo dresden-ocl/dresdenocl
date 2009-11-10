@@ -1,0 +1,7 @@
+package package1::package2
+
+-- This kind of quotation marks is not allowed.
+context Type1::aString: String
+init: "aString"
+
+endpackage

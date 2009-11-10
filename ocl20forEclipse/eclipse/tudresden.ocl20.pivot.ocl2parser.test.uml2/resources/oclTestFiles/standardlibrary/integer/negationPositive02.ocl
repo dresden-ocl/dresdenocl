@@ -1,0 +1,7 @@
+package package1::package2
+
+-- Negation can also be used non-infix.
+context Type1
+inv: 2.-() < 0
+
+endpackage

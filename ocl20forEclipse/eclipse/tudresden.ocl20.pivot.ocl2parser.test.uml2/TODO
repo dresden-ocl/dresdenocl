@@ -1,37 +1,14 @@
-Implemented Test Packages:
+Refactoring from AllExpressionsTest
 
-* Namespace and Context
-  + Package Expression
-    - Positives and Negatives
-  + Context Expressions
-    - Positives and Negatives (Types and Operation contexts)
+Add to general test suite?
     
-    TODO
-    - Multiple result context unique/ordered -> Set, OrderedSet etc.
+StandardLibrary:
+================
+False IMPLIES anything is True, anything IMPLIES True is True
 
-
-Planned Test Packages:
-
-* Expressions
-  - Literal Expressions
-    + Collection Literal Expressions
-  - OperationCallExpressions
-    + Special Postcondition Operations
-      - @pre
-      - oclIsNew()
-    + Operations of the standard library
-    + Static operations
-      - allInstances()
-  - PropertyCallExpressions
-    + static properties
-  ...
-  - VariableExpressions
-    + Special Postcondtions Variables
-      - result
-* Constraint Types
-  + Preconditions
-  + Postconditions
-  + Invariants
-  + Definitions
-  + Bodies
-  + Derives
+The IF-expression is another exception. It will be valid as long as 
+the chosen branch is valid, irrespective of the value of the other branch.
+OclVoid = object is true, if object is undefined (Spec 2.1 p. 140)
+OclInvalid = object is true, if object is invalid (Spec 2.1 p. 140)
+Collection->isEmpty(): null->isEmpty() returns true! (Spec 2.1 p. 150)
+Collection->notEmpty(): null->notEmpty() returns false! (Spec 2.1 p. 150)

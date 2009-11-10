@@ -1,0 +1,7 @@
+package package1::package2
+
+-- Should fail. Names in Tuples must be unique.
+context Type1
+inv: Tuple {field1: String = 'field1', field1: Integer = 1}.field1 = 'field1'
+
+endpackage

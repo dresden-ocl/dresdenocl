@@ -1,7 +1,0 @@
-package tudresden::ocl20::pivot::examples::persontest
-	context Person
-		inv: self.getCars()->size() < 10
-		
-	context Person
-		inv: age->size() = 1
-endpackage

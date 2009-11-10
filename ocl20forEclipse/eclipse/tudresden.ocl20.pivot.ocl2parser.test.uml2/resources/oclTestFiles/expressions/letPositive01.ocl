@@ -1,0 +1,8 @@
+package package1::package2
+
+context Type1
+inv: 
+  let boolean1: Boolean = true
+  in boolean1
+
+endpackage

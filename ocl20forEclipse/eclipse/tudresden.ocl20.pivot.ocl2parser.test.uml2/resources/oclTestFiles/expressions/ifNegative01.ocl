@@ -1,0 +1,10 @@
+package package1::package2
+
+-- Should fail. Else is mandatory in OCL.
+context Type1
+inv: 
+  if (true) then
+    true
+  endif    
+
+endpackage

@@ -1,0 +1,12 @@
+package package1::package2
+
+-- Should fail. Type of iterate does not conform to result type.
+context Type1
+inv: self.aSet
+       ->iterate(
+           anInstance : Type1; 
+           sum : String = 0 | 
+           sum + anInstance.anInteger)  
+     > 0
+
+endpackage

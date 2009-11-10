@@ -1,8 +1,0 @@
-package tudresden::ocl20::pivot::examples::royalsandloyals
-
--- The parser should adapt the type of getServices (which is
--- Service, multiple, unique) to Set(Service).
-context LoyaltyProgram::getServices():Set(Service)
-body: partners.deliveredServices->asSet()
-  
-endpackage

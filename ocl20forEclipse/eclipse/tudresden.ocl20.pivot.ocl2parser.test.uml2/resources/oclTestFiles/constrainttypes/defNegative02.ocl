@@ -1,0 +1,7 @@
+package package1::package2
+
+-- Should fail. The name is missing.
+context Type1
+def: Integer = 42
+
+endpackage

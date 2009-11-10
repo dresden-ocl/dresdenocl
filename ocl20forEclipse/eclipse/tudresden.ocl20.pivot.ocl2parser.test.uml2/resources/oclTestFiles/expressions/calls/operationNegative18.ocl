@@ -1,0 +1,7 @@
+package package1::package2
+
+-- Non-Collection Operations should not be accessible using the -> notation.
+context Type1
+inv: self->getInteger() = 0
+
+endpackage

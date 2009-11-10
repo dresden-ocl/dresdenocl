@@ -1,0 +1,7 @@
+package package1::package2
+
+-- Should fail. Wrong context for invariant.
+context Type1::getInteger(): Integer
+inv: true
+
+endpackage

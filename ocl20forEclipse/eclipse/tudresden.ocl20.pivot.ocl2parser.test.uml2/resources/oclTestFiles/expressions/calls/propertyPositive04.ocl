@@ -1,0 +1,9 @@
+package package1::package2
+
+-- When the name of an association-end is missing at one of the ends of an
+-- association, the name of the type at the association end starting with a
+-- lower case character is used as the role name.
+context Type1
+inv: not Type1.type2.oclIsTypeOf(Type1)
+
+endpackage

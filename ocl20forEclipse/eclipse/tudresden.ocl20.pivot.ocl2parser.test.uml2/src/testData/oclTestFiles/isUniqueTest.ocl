@@ -1,6 +1,0 @@
-package tudresden::ocl20::pivot::examples::royalsandloyals
-
-context LoyaltyAccount
-inv: self->isUnique(number)
-
-endpackage

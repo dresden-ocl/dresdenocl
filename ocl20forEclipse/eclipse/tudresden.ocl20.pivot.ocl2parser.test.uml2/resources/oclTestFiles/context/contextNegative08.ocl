@@ -1,0 +1,7 @@
+package package1::package2
+
+-- Property should not be parsed. Wrong result type.
+context Type1::anInteger: Integer
+derive: 'fourty-two'
+  
+endpackage

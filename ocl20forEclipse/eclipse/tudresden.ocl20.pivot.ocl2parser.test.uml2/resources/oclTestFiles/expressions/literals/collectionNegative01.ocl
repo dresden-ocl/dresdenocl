@@ -1,0 +1,7 @@
+package package1::package2
+
+-- Parsing should fail. Range expression is only valid for Integers.
+context Type1
+inv: Sequence{1.0 .. 3.2}->size() = 3
+
+endpackage

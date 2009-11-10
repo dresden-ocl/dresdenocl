@@ -1,0 +1,8 @@
+package package1::package2
+
+-- This type of constraint should be parsable with
+-- OCL version 2.1.
+context Type1
+static def: getGlobalInteger(): Integer = 42
+
+endpackage

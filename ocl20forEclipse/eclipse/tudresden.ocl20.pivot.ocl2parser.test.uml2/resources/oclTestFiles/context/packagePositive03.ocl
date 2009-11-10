@@ -1,0 +1,15 @@
+package package1
+
+context Type2
+inv: true
+
+endpackage
+
+-- According to OCL Specification section 7.3.5,
+-- A file can have multiple package declarations.
+package package1::package 2
+
+context Type1
+inv: true
+
+endpackage

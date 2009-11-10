@@ -1,0 +1,7 @@
+package package1::package2
+
+-- Minus can also be used non-infix.
+context Type1
+inv: 3.-(2) = 1
+
+endpackage

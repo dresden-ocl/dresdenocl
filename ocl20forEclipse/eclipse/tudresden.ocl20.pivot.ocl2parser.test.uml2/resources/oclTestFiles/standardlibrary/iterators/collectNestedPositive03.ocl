@@ -1,0 +1,7 @@
+package package1::package2
+
+context Type1
+inv: Sequence { -2, -1, 0, 1, 2 } -> collectNested(number : Integer | number + 1) 
+         -> size() = 5
+
+endpackage

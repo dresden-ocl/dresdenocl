@@ -1,0 +1,11 @@
+package package1::package2
+
+-- let expressions can be nested
+context Type1
+inv: 
+  let boolean1: Boolean = true
+  in 
+    let boolean2: Boolean = false
+    in boolean1 = boolean2
+
+endpackage

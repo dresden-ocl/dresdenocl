@@ -17,7 +17,7 @@
 
 package tudresden.ocl20.pivot.ocl2parser.test;
 
-import org.eclipse.ui.plugin.AbstractUIPlugin;
+import org.eclipse.core.runtime.Plugin;
 import org.osgi.framework.BundleContext;
 
 /**
@@ -27,7 +27,7 @@ import org.osgi.framework.BundleContext;
  * 
  * @author Nils Thieme
  */
-public class Activator extends AbstractUIPlugin {
+public class Activator extends Plugin {
 
 	/** The plug-in id. */
 	public static final String PLUGIN_ID =

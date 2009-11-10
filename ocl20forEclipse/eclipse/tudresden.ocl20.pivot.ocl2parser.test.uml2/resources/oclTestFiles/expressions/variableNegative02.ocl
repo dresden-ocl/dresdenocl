@@ -1,0 +1,9 @@
+package package1::package2
+
+-- Test the special variable result.
+-- Should fail. Result is only valid in postconditions.
+context Type1::getInteger(): Integer
+pre: 
+  result.oclIsUndefined() 
+
+endpackage

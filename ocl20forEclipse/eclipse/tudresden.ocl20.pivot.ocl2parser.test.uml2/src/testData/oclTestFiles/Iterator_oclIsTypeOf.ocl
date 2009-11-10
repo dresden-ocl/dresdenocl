@@ -1,6 +1,0 @@
-package tudresden::ocl20::pivot::examples::royalsandloyals
-
-context CustomerCard
-inv: transactions->select(oclIsTypeOf(Earning)).points->sum() > 0
-
-endpackage

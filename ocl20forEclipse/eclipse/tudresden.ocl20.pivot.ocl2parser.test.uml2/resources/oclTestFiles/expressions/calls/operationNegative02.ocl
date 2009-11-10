@@ -1,0 +1,7 @@
+package package1::package2
+
+-- Should fail. Type does not match.
+context Type1
+inv: getType1() > 0
+
+endpackage

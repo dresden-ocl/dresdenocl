@@ -1,6 +1,0 @@
-package BagTest
-
-context A
-
-inv : self.b->collect(c)
-endpackage

@@ -1,0 +1,6 @@
+package package1::package2
+
+context Type1
+inv: Tuple {field1: String = 'field1', field2: Integer = 1}.field1 = 'field1'
+
+endpackage

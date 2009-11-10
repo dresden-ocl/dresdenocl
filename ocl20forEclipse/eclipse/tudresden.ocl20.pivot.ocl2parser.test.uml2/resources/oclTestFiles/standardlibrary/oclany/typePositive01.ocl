@@ -1,0 +1,9 @@
+package package1::package2
+
+-- Test the new operation OclInvalid.oclType() that returns
+-- the type of the object.
+-- (new operation in OCL 2.1)
+context Type1
+inv: self.oclIsTypeOf(self.oclType())
+
+endpackage

@@ -1,0 +1,6 @@
+package package1::package2
+
+context Type1
+inv: Type1::aStaticOperation() > 0
+
+endpackage

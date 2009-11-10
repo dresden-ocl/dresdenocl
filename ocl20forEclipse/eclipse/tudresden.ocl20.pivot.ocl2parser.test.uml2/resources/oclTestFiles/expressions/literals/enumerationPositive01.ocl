@@ -1,0 +1,6 @@
+package package1::package2
+
+context Type1::anEnumeration1: Enumeration1
+init: Enumeration1::Literal1
+
+endpackage

@@ -1,0 +1,7 @@
+package package1::package2
+
+-- Should fail. Inits are only valid on Properties.
+context Type1::getInteger(): Integer
+init: 42
+
+endpackage

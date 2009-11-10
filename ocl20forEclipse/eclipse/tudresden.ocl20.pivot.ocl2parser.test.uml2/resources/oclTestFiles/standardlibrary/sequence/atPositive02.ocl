@@ -1,0 +1,7 @@
+package package1::package2
+
+-- Should not fail. Range checks are done at run-time.
+context Type1
+inv: Sequence { 1, 2, 3 } -> at(-2) = 2
+
+endpackage

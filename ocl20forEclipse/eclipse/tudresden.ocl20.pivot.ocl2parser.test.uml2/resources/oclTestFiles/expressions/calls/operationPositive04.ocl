@@ -1,0 +1,8 @@
+package package1::package2
+
+-- Collection Operations should be available for non-collection 
+-- Types as well (implicite .asSet() OperationCall).
+context Type1
+inv: getInteger()->size() > 0
+
+endpackage

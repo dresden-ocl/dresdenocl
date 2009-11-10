@@ -1,0 +1,6 @@
+package package1::package2
+
+context Type1
+inv: Bag { -2, -1, 0, 1, 2 } -> any(number : Integer | number > 0) > 0
+
+endpackage

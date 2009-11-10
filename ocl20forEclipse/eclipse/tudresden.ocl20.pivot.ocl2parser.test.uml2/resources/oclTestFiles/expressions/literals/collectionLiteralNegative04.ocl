@@ -1,7 +1,0 @@
-package tudresden::ocl20::pivot::examples::royalsandloyals
-
--- Parsing should fail. Range expression is only valid for Integers.
-context Customer
-inv: Sequence{'a' .. 'c'}->size()=3
-
-endpackage

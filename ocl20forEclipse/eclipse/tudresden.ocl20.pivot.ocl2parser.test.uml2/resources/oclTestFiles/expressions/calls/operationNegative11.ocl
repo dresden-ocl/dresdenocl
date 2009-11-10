@@ -1,0 +1,8 @@
+package package1::package2
+
+-- Should fail. allInstances() is defined on types, not
+-- on type instances.
+context Type1
+inv: self::allInstances()->contains(self)
+
+endpackage

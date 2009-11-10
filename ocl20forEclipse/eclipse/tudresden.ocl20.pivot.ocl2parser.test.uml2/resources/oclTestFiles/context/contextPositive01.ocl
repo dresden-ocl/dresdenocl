@@ -1,6 +1,6 @@
-package tudresden::ocl20::pivot::examples::royalsandloyals
+package package1::package2
 
-context LoyaltyProgram
+context Type1
 inv: true
   
 endpackage

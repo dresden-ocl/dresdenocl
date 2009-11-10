@@ -1,0 +1,6 @@
+package package1::package2
+
+context Type1
+inv: Sequence { 1, 2 } -> excludes(3)
+
+endpackage

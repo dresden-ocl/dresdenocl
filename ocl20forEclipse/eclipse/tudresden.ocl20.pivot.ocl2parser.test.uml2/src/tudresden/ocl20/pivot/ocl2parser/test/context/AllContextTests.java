@@ -31,7 +31,7 @@ import tudresden.ocl20.pivot.modelbus.model.IModel;
  * Provides all tests of this package as a test suite.
  * </p>
  * 
- * @author Christoph Daehne
+ * @author Claas Wilke
  */
 /* Specify a runner class: Suite.class. */
 @RunWith(Suite.class)
@@ -43,10 +43,10 @@ public class AllContextTests {
 	 * The name of the {@link Bundle} that provides the model used during testing.
 	 */
 	public static final String MODEL_BUNDLE =
-			"tudresden.ocl20.pivot.examples.royalandloyal";
+			"tudresden.ocl20.pivot.ocl2parser.test";
 
 	/** The path of the directory of the {@link IModel} used during testing. */
-	public static final String MODEL_DIRECTORY = "model/";
+	public static final String MODEL_DIRECTORY = "resources/model/";
 
 	/** The ID of the {@link IMetamodel} used during testing. */
 	public static final String META_MODEL_ID =

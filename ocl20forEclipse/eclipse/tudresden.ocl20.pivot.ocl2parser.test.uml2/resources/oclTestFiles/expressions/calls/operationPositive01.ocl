@@ -1,0 +1,7 @@
+package package1::package2
+
+-- Self annotation is obligatory.
+context Type1
+inv: getInteger() > 0
+
+endpackage

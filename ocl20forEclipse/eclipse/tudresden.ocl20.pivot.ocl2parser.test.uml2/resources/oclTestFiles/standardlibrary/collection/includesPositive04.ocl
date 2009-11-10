@@ -1,0 +1,6 @@
+package package1::package2
+
+context Type1
+inv: Set { 1, 2 } -> includes(1)
+
+endpackage
