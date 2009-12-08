@@ -1,7 +1,0 @@
-package Test
-	context Person
-		def: initial : String = name.substring(1,1)
-	
-	context Person
-		def: getNumberChildren() : Integer = 4
-endpackage

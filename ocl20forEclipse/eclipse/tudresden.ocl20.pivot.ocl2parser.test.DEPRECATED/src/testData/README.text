@@ -1,6 +1,0 @@
-This directory contains the model file, namely LoyalRoyalOCL2Parser_4.xmi,
-on which the testcase are based. This file was created with the
-ArgoUML Tool [1]. In the directory oclTestFiles lies the files that
-contains the ocl expression used for the test.
-
-[1] http://argouml.tigris.org/

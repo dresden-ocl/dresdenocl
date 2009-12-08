@@ -1,6 +1,0 @@
-package RoyalLoyal
-
-context Membership
-inv correctCard: participants.cards->includes(self.card)
-
-endpackage

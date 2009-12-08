@@ -1,6 +1,0 @@
-package RoyalLoyal
-
-context LoyaltyProgram::enroll(c : Customer)
-post: participants = participants@pre->including(c)
-
-endpackage

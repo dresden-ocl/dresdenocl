@@ -1,4 +1,0 @@
-package RoyalLoyal
- context LoyaltyProgram::enroll(c : Customer) : Boolean
-   pre : c.name <> ''
-endpackage

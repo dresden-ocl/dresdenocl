@@ -1,6 +1,0 @@
-package RoyalLoyal
-
-context LoyaltyAccount::totalPointsEarned
-derive: transactions->select(oclIsTypeOf(Earning)).points->sum()
-
-endpackage

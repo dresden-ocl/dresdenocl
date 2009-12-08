@@ -1,6 +1,0 @@
-package RoyalLoyal
-
-context LoyaltyProgram
-inv: self.membership.account->isUnique(number)
-
-endpackage

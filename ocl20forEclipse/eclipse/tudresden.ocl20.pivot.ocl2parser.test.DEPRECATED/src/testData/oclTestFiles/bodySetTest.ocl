@@ -1,6 +1,0 @@
-package RoyalLoyal
-
-context LoyaltyProgram::getServices():Set(Service)
-  body: partners.deliveredServices->asSet()
-  
-endpackage

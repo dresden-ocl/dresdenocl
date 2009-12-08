@@ -1,6 +1,0 @@
-package RoyalLoyal
-
-context LoyaltyProgram
-inv knownServiceLevel: levels->includesAll(membership.currentLevel)
-
-endpackage
