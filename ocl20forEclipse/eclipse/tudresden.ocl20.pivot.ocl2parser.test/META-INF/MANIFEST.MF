@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: OCL2 Parser Test Plug-in
-Bundle-SymbolicName: tudresden.ocl20.pivot.ocl2parser.test; singleton:=true
+Bundle-SymbolicName: tudresden.ocl20.pivot.ocl2parser.test;singleton:=true
 Bundle-Version: 2.0.0
 Bundle-Activator: tudresden.ocl20.pivot.ocl2parser.test.Activator
 Require-Bundle: org.eclipse.core.runtime,
@@ -9,7 +9,8 @@ Require-Bundle: org.eclipse.core.runtime,
  tudresden.ocl20.logging,
  tudresden.ocl20.pivot.pivotmodel,
  tudresden.ocl20.pivot.modelbus,
- tudresden.ocl20.pivot.ocl2parser
+ tudresden.ocl20.pivot.ocl2parser,
+ tudresden.ocl20.pivot.testsuite;bundle-version="2.0.0"
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-Vendor: TU Dresden, Software Technology Group

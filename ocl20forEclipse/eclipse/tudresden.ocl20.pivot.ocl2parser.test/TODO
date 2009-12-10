@@ -1,14 +1,1 @@
-Refactoring from TestOclAny
-
 Add to general test suite?
-    
-StandardLibrary:
-================
-False IMPLIES anything is True, anything IMPLIES True is True
-
-The IF-expression is another exception. It will be valid as long as 
-the chosen branch is valid, irrespective of the value of the other branch.
-OclVoid = object is true, if object is undefined (Spec 2.1 p. 140)
-OclInvalid = object is true, if object is invalid (Spec 2.1 p. 140)
-Collection->isEmpty(): null->isEmpty() returns true! (Spec 2.1 p. 150)
-Collection->notEmpty(): null->notEmpty() returns false! (Spec 2.1 p. 150)

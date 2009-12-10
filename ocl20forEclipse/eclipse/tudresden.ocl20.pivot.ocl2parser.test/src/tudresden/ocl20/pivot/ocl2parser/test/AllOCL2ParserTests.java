@@ -37,7 +37,7 @@ import tudresden.ocl20.pivot.ocl2parser.test.standardlibrary.AllStandardLibraryT
 @RunWith(Suite.class)
 @Suite.SuiteClasses( { AllConstraintTypeTests.class, AllContextTests.class,
 		AllExpressionTests.class, AllStandardLibraryTests.class })
-public class AllTests {
+public class AllOCL2ParserTests {
 	/*
 	 * This class remains completely empty, being used only as a holder for the
 	 * above annotations.

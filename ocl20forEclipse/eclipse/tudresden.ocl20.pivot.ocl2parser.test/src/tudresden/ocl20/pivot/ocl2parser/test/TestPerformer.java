@@ -56,7 +56,7 @@ public class TestPerformer {
 	 * The path of the basic directory that contains the OCL constraints used
 	 * during testing.
 	 */
-	protected String OCL_FILE_DIRECTORY = "./resources/oclTestFiles/";
+	protected String OCL_FILE_DIRECTORY = "resources/oclTestFiles/";
 
 	/**
 	 * Contains the instance of the {@link TestPerformer} in relation to the ID of
@@ -190,8 +190,14 @@ public class TestPerformer {
 			ParsingException, LexException, IOException, BuildingASTException,
 			SemanticException {
 
+		String fileDirectory;
+		fileDirectory = Activator.getDefault().getBundle().getLocation();
+
+		/* Remove the 'reference:file:' from the beginning. */
+		fileDirectory = fileDirectory.substring(15);
+
 		File oclFile;
-		oclFile = new File(OCL_FILE_DIRECTORY + filename);
+		oclFile = new File(fileDirectory + OCL_FILE_DIRECTORY + filename);
 
 		/* Check if the file exists at all. */
 		if (!oclFile.exists()) {
