@@ -31,6 +31,7 @@ import tudresden.ocl20.pivot.testsuite.TestSuitePlugin;
  * @author Michael Thiele
  * 
  */
+@SuppressWarnings("deprecation")
 public class SelectTestSuitesDialog extends TitleAreaDialog {
 
 	private Table table;
@@ -44,7 +45,6 @@ public class SelectTestSuitesDialog extends TitleAreaDialog {
 		super(parentShell);
 
 		this.testsToBeExecuted = allTests;
-
 	}
 
 	/*

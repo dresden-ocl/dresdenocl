@@ -1,0 +1,15 @@
+Dresden OCL2 for Eclipse General Test Suite
+===========================================
+
+This plug-in contains the complete test suite of Dresden OCL2 for Eclipse.
+Other test plug-ins are registered per extension point and added to to the
+test suite dynamically.
+
+
+Execute the test Suite:
+=======================
+
+To run the test suite, execute the class 
+tudresden.ocl20.pivot.testsuite.runner.OCL2TestSuiteRunner
+as JUnit Plug-in Test and select the test suites you want to execute in 
+the new opened pop-up window.

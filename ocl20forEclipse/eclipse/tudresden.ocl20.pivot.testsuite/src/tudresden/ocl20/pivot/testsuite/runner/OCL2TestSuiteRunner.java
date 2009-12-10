@@ -39,6 +39,7 @@ import tudresden.ocl20.pivot.testsuite.TestSuitePlugin;
  * @author Michael Thiele
  * 
  */
+@SuppressWarnings("deprecation")
 public class OCL2TestSuiteRunner {
 
 	protected static final String SHOW_WARNINGS =
