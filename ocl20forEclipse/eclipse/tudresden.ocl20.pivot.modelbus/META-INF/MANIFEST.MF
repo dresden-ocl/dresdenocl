@@ -27,6 +27,5 @@ Export-Package: tudresden.ocl20.pivot.modelbus,
  tudresden.ocl20.pivot.modelbus.modelinstance.exception,
  tudresden.ocl20.pivot.modelbus.modelinstance.types,
  tudresden.ocl20.pivot.modelbus.modelinstance.types.base,
- tudresden.ocl20.pivot.modelbus.test,
  tudresden.ocl20.pivot.modelbus.util
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
