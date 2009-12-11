@@ -25,10 +25,11 @@ import tudresden.ocl20.pivot.metamodels.uml2.test.UML2MetaModelTestPlugin;
  * <p>
  * This class tests the {@link UML2MetamodelPlugin} using the
  * {@link MetaModelTestSuite}.
+ * </p>
  * 
  * @author Claas Wilke
  */
-@Suite.SuiteClasses(value = { MetaModelTestSuite.class,
+@Suite.SuiteClasses(value = { MetaModelTestSuite.class, TestUML2Packages.class,
 		TestUmlTypePrimitiveType.class })
 public class TestUML2MetaModel extends MetaModelTestSuite {
 
