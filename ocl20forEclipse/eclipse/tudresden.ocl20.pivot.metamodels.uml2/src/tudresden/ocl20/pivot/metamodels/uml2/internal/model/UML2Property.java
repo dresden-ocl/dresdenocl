@@ -7,7 +7,6 @@ import org.eclipse.uml2.uml.Element;
 import org.eclipse.uml2.uml.TypedElement;
 
 import tudresden.ocl20.pivot.metamodels.uml2.UML2MetamodelPlugin;
-import tudresden.ocl20.pivot.pivotmodel.PrimitiveType;
 import tudresden.ocl20.pivot.pivotmodel.Property;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 import tudresden.ocl20.pivot.pivotmodel.base.AbstractProperty;

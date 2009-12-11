@@ -22,7 +22,9 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.osgi.util.NLS;
 import org.eclipse.uml2.uml.Association;
 import org.eclipse.uml2.uml.AssociationClass;
+import org.eclipse.uml2.uml.Model;
 import org.eclipse.uml2.uml.Package;
+import org.eclipse.uml2.uml.Profile;
 import org.eclipse.uml2.uml.Property;
 import org.eclipse.uml2.uml.Type;
 import org.eclipse.uml2.uml.UMLFactory;
@@ -55,7 +57,8 @@ public class UML2Model extends AbstractModel implements IModel {
 	 * 
 	 * @generated NOT
 	 */
-	private static final Logger LOGGER = UML2MetamodelPlugin.getLogger(UML2Model.class);
+	private static final Logger LOGGER =
+			UML2MetamodelPlugin.getLogger(UML2Model.class);
 
 	/** The resource containing the corresponding UML2 model. */
 	private Resource resource;
@@ -365,7 +368,29 @@ public class UML2Model extends AbstractModel implements IModel {
 		/** Add all sub-packages and sub-types to the new root package. */
 		for (EObject eObject : rootPackages) {
 
-			if (eObject instanceof Package) {
+			/*
+			 * Models should not be added themselves. Add their contained packages
+			 * instead.
+			 */
+			if (eObject instanceof Model) {
+				for (Package uml2package : ((Model) eObject).getNestedPackages()) {
+					rootPackage.getNestedPackages().add(uml2package);
+				}
+				// end for.
+			}
+
+			/*
+			 * Profiles should not be added themselves. Add their contained packages
+			 * instead.
+			 */
+			else if (eObject instanceof Profile) {
+				for (Package uml2package : ((Profile) eObject).getNestedPackages()) {
+					rootPackage.getNestedPackages().add(uml2package);
+				}
+				// end for.
+			}
+
+			else if (eObject instanceof Package) {
 				rootPackage.getNestedPackages().add((Package) eObject);
 			}
 
