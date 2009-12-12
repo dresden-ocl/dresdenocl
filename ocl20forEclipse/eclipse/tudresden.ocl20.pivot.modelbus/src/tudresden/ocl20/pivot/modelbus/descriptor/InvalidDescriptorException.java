@@ -33,35 +33,43 @@
 package tudresden.ocl20.pivot.modelbus.descriptor;
 
 /**
- * An <code>InvalidDescriptorException</code> represents a problem with an attribute value defined
- * by a user for an extension that is represented by an {@link IDescriptor}.
+ * <p>
+ * An {@link InvalidDescriptorException} represents a problem with an attribute
+ * value defined by a user for an extension that is represented by an
+ * {@link IDescriptor}.
+ * </p>
  * 
  * @author Matthias Braeuer
- * @version 1.0 05.04.2007
  */
 public class InvalidDescriptorException extends RuntimeException {
 
-  // generated serial version id
-  private static final long serialVersionUID = 3818384960300041256L;
+	/** generated serial version id. */
+	private static final long serialVersionUID = 3818384960300041256L;
 
-  /**
-   * Creates a new <code>InvalidDescriptorException</code> with an error message.
-   * 
-   * @param message the error message
-   */
-  public InvalidDescriptorException(String message) {
-    super(message);
-  }
+	/**
+	 * <p>
+	 * Creates a new {@link InvalidDescriptorException} with an error message.
+	 * 
+	 * @param message
+	 *          The error message.
+	 */
+	public InvalidDescriptorException(String message) {
 
-  /**
-   * Creates a new <code>InvalidDescriptorException</code> with an error message and a
-   * <code>Throwable</code> that is the reason for the exception.
-   * 
-   * @param message the error message
-   * @param cause the causing <code>Throwable</code>
-   */
-  public InvalidDescriptorException(String message, Throwable cause) {
-    super(message,cause);
-  }
+		super(message);
+	}
 
+	/**
+	 * <p>
+	 * Creates a new {@link InvalidDescriptorException} with an error message and
+	 * a {@link Throwable} that is the reason for the exception.
+	 * 
+	 * @param message
+	 *          The error message.
+	 * @param cause
+	 *          The causing {@link Throwable}.
+	 */
+	public InvalidDescriptorException(String message, Throwable cause) {
+
+		super(message, cause);
+	}
 }

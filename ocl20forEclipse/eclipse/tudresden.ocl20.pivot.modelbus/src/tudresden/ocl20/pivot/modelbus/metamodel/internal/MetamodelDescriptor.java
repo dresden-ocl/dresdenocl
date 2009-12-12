@@ -34,6 +34,7 @@ package tudresden.ocl20.pivot.modelbus.metamodel.internal;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.IConfigurationElement;
+import org.eclipse.core.runtime.IExtension;
 import org.eclipse.jface.resource.ImageDescriptor;
 
 import tudresden.ocl20.pivot.modelbus.IModelBusConstants;
@@ -44,92 +45,115 @@ import tudresden.ocl20.pivot.modelbus.metamodel.IMetamodelDescriptor;
 import tudresden.ocl20.pivot.modelbus.model.IModelProvider;
 
 /**
+ * <p>
+ * Implements the {@link IMetamodelDescriptor} interface.
+ * </p>
  * 
+ * @see IMetamodelDescriptor
  * 
  * @author Matthias Braeuer
- * @version 1.0 03.04.2007
  */
-public class MetamodelDescriptor extends AbstractDescriptor implements IMetamodel,
-    IMetamodelDescriptor {
+public class MetamodelDescriptor extends AbstractDescriptor implements
+		IMetamodel, IMetamodelDescriptor {
 
-  // a logger for this class
-  private static final Logger logger = ModelBusPlugin.getLogger(MetamodelDescriptor.class);
+	/** A logger for this class. */
+	private static final Logger LOGGER =
+			ModelBusPlugin.getLogger(MetamodelDescriptor.class);
 
-  // the translatable name of the metamodel
-  private String name;
+	/** The icon used for the {@link IMetamodel}. */
+	private ImageDescriptor icon;
 
-  // the icon used for the metamodel
-  private ImageDescriptor icon;
+	/** The cached instance of the {@link IModelProvider}. */
+	private IModelProvider modelProvider;
 
-  // the cached instance of the model provider
-  private IModelProvider modelProvider;
+	/** The translatable name of the {@link IMetamodel}. */
+	private String name;
 
-  /**
-   * @param configElement
-   */
-  public MetamodelDescriptor(IConfigurationElement configElement) {
-    super(configElement);
-    
-    if (logger.isDebugEnabled()) {
-      logger.debug("MetamodelDescriptor(configElement=" + configElement + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
-    }
+	/**
+	 * <p>
+	 * Creates a new {@link MetamodelDescriptor} for a given
+	 * {@link IConfigurationElement}.
+	 * </p>
+	 * 
+	 * @param configElement
+	 *          The {@link IConfigurationElement} describing the
+	 *          {@link IExtension} of the {@link IMetamodel} belonging to this
+	 *          {@link MetamodelDescriptor}.
+	 */
+	public MetamodelDescriptor(IConfigurationElement configElement) {
 
-    // initialize the descriptor
-    loadFromExtension();
+		super(configElement);
 
-    if (logger.isDebugEnabled()) {
-      logger.debug("MetamodelDescriptor() - exit"); //$NON-NLS-1$
-    }
-  }
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER
+					.debug("MetamodelDescriptor(configElement=" + configElement + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
+		}
+		// no else.
 
-  /*
-   * (non-Javadoc)
-   * 
-   * @see tudresden.ocl20.pivot.modelbus.IMetamodel#getModelProvider()
-   */
-  public IModelProvider getModelProvider() {
+		/* Initialize the descriptor. */
+		this.loadFromExtension();
 
-    if (modelProvider == null) {
-      modelProvider = createInstance(IModelBusConstants.ATT_MODELPROVIDER,IModelProvider.class);
-    }
-    
-    return modelProvider;
-  }
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("MetamodelDescriptor() - exit"); //$NON-NLS-1$
+		}
+		// no else.
+	}
 
-  /*
-   * (non-Javadoc)
-   * 
-   * @see tudresden.ocl20.pivot.modelbus.IMetamodel#getName()
-   */
-  public String getName() {
-    return name;
-  }
+	/*
+	 * (non-Javadoc)
+	 * @see tudresden.ocl20.pivot.modelbus.internal.IMetamodelDescriptor#getIcon()
+	 */
+	public ImageDescriptor getIcon() {
+	
+		/* Lazily create the image descriptor. */
+		if (this.icon == null) {
+			this.icon = this.getImageDescriptor(IModelBusConstants.ATT_ICON);
+		}
+		// no else.
+	
+		return this.icon;
+	}
 
-  /*
-   * (non-Javadoc)
-   * 
-   * @see tudresden.ocl20.pivot.modelbus.internal.IMetamodelDescriptor#getIcon()
-   */
-  public ImageDescriptor getIcon() {
-    
-    // lazily create the image descriptor
-    if (icon == null) {
-      icon = getImageDescriptor(IModelBusConstants.ATT_ICON);
-    }
-    
-    return icon;
-  }
+	/*
+	 * (non-Javadoc)
+	 * @see tudresden.ocl20.pivot.modelbus.IMetamodel#getName()
+	 */
+	public String getName() {
+	
+		return this.name;
+	}
 
-  /**
-   * Helper method that loads the name and checks the 'itemProvider' attribute
-   */
-  protected void loadFromExtension(){
-    name = getAttribute(IModelBusConstants.ATT_NAME,false);
-    
-    if (name == null) {
-      name = getId();
-    }
-    
-    checkAttribute(IModelBusConstants.ATT_MODELPROVIDER);
-  }
+	/*
+	 * (non-Javadoc)
+	 * @see tudresden.ocl20.pivot.modelbus.IMetamodel#getModelProvider()
+	 */
+	public IModelProvider getModelProvider() {
+
+		if (this.modelProvider == null) {
+			this.modelProvider =
+					this.createInstance(IModelBusConstants.ATT_MODELPROVIDER,
+							IModelProvider.class);
+		}
+		// no else.
+
+		return this.modelProvider;
+	}
+
+	/**
+	 * <p>
+	 * A helper method that loads the name and checks the 'itemProvider'
+	 * attribute.
+	 * </p>
+	 */
+	protected void loadFromExtension() {
+
+		this.name = this.getAttribute(IModelBusConstants.ATT_NAME, false);
+
+		if (this.name == null) {
+			this.name = getId();
+		}
+		// no else.
+
+		this.checkAttribute(IModelBusConstants.ATT_MODELPROVIDER);
+	}
 }

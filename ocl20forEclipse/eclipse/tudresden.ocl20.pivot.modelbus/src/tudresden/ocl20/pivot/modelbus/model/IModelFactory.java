@@ -34,6 +34,8 @@ package tudresden.ocl20.pivot.modelbus.model;
 
 import java.util.List;
 
+import javax.naming.TimeLimitExceededException;
+
 import tudresden.ocl20.pivot.essentialocl.expressions.BooleanLiteralExp;
 import tudresden.ocl20.pivot.essentialocl.expressions.CollectionItem;
 import tudresden.ocl20.pivot.essentialocl.expressions.CollectionKind;
@@ -65,275 +67,427 @@ import tudresden.ocl20.pivot.modelbus.model.exception.FactoryException;
 import tudresden.ocl20.pivot.pivotmodel.ConstrainableElement;
 import tudresden.ocl20.pivot.pivotmodel.Constraint;
 import tudresden.ocl20.pivot.pivotmodel.ConstraintKind;
+import tudresden.ocl20.pivot.pivotmodel.EnumerationLiteral;
 import tudresden.ocl20.pivot.pivotmodel.Expression;
 import tudresden.ocl20.pivot.pivotmodel.Operation;
 import tudresden.ocl20.pivot.pivotmodel.Parameter;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 
 /**
- * This class contains many utility methods to create {@link OclExpression}s
- * and their parts. The signatures of the methods reflect the needs of a
- * primitive string-based script engine, but may not necessarily be suited for a
- * real OCL parser. Thus, this interface may be refactored once an OCL parser
- * for the Pivot Model-based architecture is being built.
+ * <p>
+ * This class contains many utility methods to create {@link OclExpression}s and
+ * their parts. The signatures of the methods reflect the needs of a primitive
+ * string-based script engine, but may not necessarily be suited for a real OCL
+ * parser. Thus, this interface may be refactored once an OCL parser for the
+ * Pivot Model-based architecture is being built.
+ * </p>
  * 
  * @author Matthias Braeuer
- * @version 1.0 30.03.2007
  */
 public interface IModelFactory {
 
-  /**
-   * Creates a new {@link Constraint}. The name is optional. but the other
-   * parameters need to have valid values.
-   * 
-   * @param name an optional name for the <code>Constraint</code>
-   * @param kind one of the constants defined in {@link ConstraintKind}
-   * @param specification the <code>Expression</code> that specifies the
-   *          <code>Constraint</code>
-   * @param constrainedElement at least one element that is the target of the
-   *          <code>Constraint</code>
-   * 
-   * @return a <code>Constraint</code> instance
-   */
-  Constraint createConstraint(String name, ConstraintKind kind,
-      Expression specification, ConstrainableElement... constrainedElement);
+	/**
+	 * <p>
+	 * Creates a {@link BooleanLiteralExp}.
+	 * </p>
+	 * 
+	 * @param booleanSymbol
+	 *          The <code>boolean</code> value of the {@link BooleanLiteralExp}.
+	 * @return A {@link BooleanLiteralExp} instance.
+	 */
+	BooleanLiteralExp createBooleanLiteralExp(boolean booleanSymbol);
 
-  /**
-   * Creates a new {@link ExpressionInOcl}. The body expression and the context
-   * variable must not be <code>null</code>. The result and parameter
-   * variables are optional since they are only required for constraints whose
-   * context is an operation.
-   * 
-   * @param body the body expression as a <code>String</code> in OCL concrete
-   *          syntax
-   * @param bodyExpression the <code>OclExpresson</code> that is the body of
-   *          the <code>ExpressonInOcl</code>
-   * @param context the <code>Variable</code> representing the contextual
-   *          classifier
-   * @param result the result variable of an operation constraint
-   * @param parameter the parameters of an operation constraint
-   * 
-   * @return an <code>ExpressionInOcl</code> instance
-   */
-  ExpressionInOcl createExpressionInOcl(String body,
-      OclExpression bodyExpression, Variable context, Variable result,
-      Variable... parameter);
+	/**
+	 * <p>
+	 * Creates a {@link CollectionItem}.
+	 * </p>
+	 * 
+	 * @param item
+	 *          The {@link OclExpression} of the item.
+	 * @return A {@link CollectionItem} instance.
+	 */
+	CollectionItem createCollectionItem(OclExpression item);
 
-  /**
-   * Creates a new {@link Variable}. The name must not be <code>null</code>.
-   * Type and init expression are optional (OCL Specification, Section 9.3). If
-   * none is given, however, it is likely that a {@link WellformednessException}
-   * will be thrown at a later time when the type is requested. If both a type
-   * and an init expression are given, this method will not check whether the
-   * type of the init expression conforms to the given type. Instead, this will
-   * be checked by the <code>Variable</code> implementation once the type is
-   * accessed for the first time.
-   * 
-   * @param name the name of the variable
-   * @param type the type of the variable
-   * @param initExpression an (optional) initialization expression
-   * 
-   * @return a <code>Variable</code> instance
-   */
-  Variable createVariable(String name, Type type, OclExpression initExpression);
+	/**
+	 * <p>
+	 * Creates a {@link CollectionLiteralExp}.
+	 * </p>
+	 * 
+	 * @param kind
+	 *          The {@link CollectionKind} of the {@link CollectionLiteralExp}.
+	 * @param parts
+	 *          The {@link CollectionLiteralPart}s of the
+	 *          {@link CollectionLiteralExp}.
+	 * @return A {@link CollectionLiteralExp} instance.
+	 */
+	CollectionLiteralExp createCollectionLiteralExp(CollectionKind kind,
+			CollectionLiteralPart... parts);
 
-  /**
-   * Creates a new {@link Variable} that represents a {@link Parameter} in an
-   * expression that constrains an {@link Operation}. The name and type of the
-   * <code>Variable</code> will be determined automatically.
-   * 
-   * @param representedParameter the <code>Parameter</code> represented by the
-   *          <code>Variable</code>
-   * 
-   * @return a <code>Variable</code> instance
-   */
-  Variable createVariable(Parameter representedParameter);
+	/**
+	 * <p>
+	 * Creates a {@link CollectionRange}.
+	 * </p>
+	 * 
+	 * @param first
+	 *          The {@link OclExpression} for the first element.
+	 * @param last
+	 *          The {@link OclExpression} for the last element.
+	 * @return A {@link CollectionRange} instance.
+	 */
+	CollectionRange createCollectionRange(OclExpression first, OclExpression last);
 
-  /**
-   * @param source
-   * @param referredPropertyName
-   * @param qualifier
-   * 
-   * @return
-   */
-  PropertyCallExp createPropertyCallExp(OclExpression source,
-      String referredPropertyName, OclExpression... qualifier);
+	/**
+	 * <p>
+	 * Creates a new {@link Constraint}. The name is optional. but the other
+	 * parameters need to have valid values.
+	 * </p>
+	 * 
+	 * @param name
+	 *          An optional name for the {@link Constraint}.
+	 * @param kind
+	 *          One of the constants defined in {@link ConstraintKind}.
+	 * @param specification
+	 *          The {@link Expression} that specifies the {@link Constraint}.
+	 * @param constrainedElement
+	 *          At least one element that is the target of the {@link Constraint}.
+	 * 
+	 * @return A {@link Constraint} instance.
+	 */
+	Constraint createConstraint(String name, ConstraintKind kind,
+			Expression specification, ConstrainableElement... constrainedElement);
 
-  /**
-   * @param referredPropertyPathName
-   * @param qualifier
-   * @return
-   * @throws FactoryException
-   */
-  PropertyCallExp createPropertyCallExp(List<String> referredPropertyPathName,
-      OclExpression... qualifier) throws FactoryException;
+	/**
+	 * <p>
+	 * Creates a {@link EnumLiteralExp}.
+	 * </p>
+	 * 
+	 * @param referredEnumLiteralPathName
+	 *          The fully qualified name of the referred
+	 *          {@link EnumerationLiteral} as a {@link String}.
+	 * @return A {@link EnumLiteralExp} instance.
+	 * @throws FactoryException
+	 *           Thrown, if the creation fails.
+	 */
+	EnumLiteralExp createEnumLiteralExp(List<String> referredEnumLiteralPathName)
+			throws FactoryException;
 
-  /**
-   * @param source
-   * @param referredOperationName
-   * @param argument
-   * 
-   * @return
-   */
-  OperationCallExp createOperationCallExp(OclExpression source,
-      String referredOperationName, OclExpression... argument);
+	/**
+	 * <p>
+	 * Creates a new {@link ExpressionInOcl}. The body expression and the context
+	 * variable must not be <code>null</code>. The result and parameter variables
+	 * are optional since they are only required for constraints whose context is
+	 * an operation.
+	 * </p>
+	 * 
+	 * @param body
+	 *          The body expression as a {@link String} in OCL concrete syntax.
+	 * @param bodyExpression
+	 *          The {@link OclExpression} that is the body of the
+	 *          {@link ExpressionInOcl}.
+	 * @param context
+	 *          The {@link Variable} representing the contextual classifier.
+	 * @param result
+	 *          The result {@link Variable} of an operation {@link Constraint}.
+	 * @param parameter
+	 *          The parameters of an operation {@link Constraint}.
+	 * 
+	 * @return An {@link ExpressionInOcl} instance.
+	 */
+	ExpressionInOcl createExpressionInOcl(String body,
+			OclExpression bodyExpression, Variable context, Variable result,
+			Variable... parameter);
 
-  /**
-   * Creates a new {@link OperationCallExp} for a static operation. The
-   * <code>referredOperationPathName</code> must not be <code>null</code>,
-   * the arguments are optional. The owning type must exist in the associated
-   * {@link IModel model} and the specified operation must be static.
-   * 
-   * @param referredOperationPathName the fully qualified name of the operation
-   *          (i.e., including the fully qualified name of its owning
-   *          <code>Type</code>)
-   * @param argument an optional list of arguments
-   * 
-   * @return an <code>OperationCallExp</code> instance
-   * 
-   * @throws FactoryException if the expression cannot be created
-   */
-  OperationCallExp createOperationCallExp(
-      List<String> referredOperationPathName, OclExpression... argument)
-      throws FactoryException;
+	/**
+	 * <p>
+	 * Creates an {@link IfExp}.
+	 * </p>
+	 * 
+	 * @param condition
+	 *          The condition {@link OclExpression}.
+	 * @param thenExpression
+	 *          The then {@link OclExpression}.
+	 * @param elseExpression
+	 *          The else {@link OclExpression}.
+	 * @return An {@link IfExp} instance.
+	 */
+	IfExp createIfExp(OclExpression condition, OclExpression thenExpression,
+			OclExpression elseExpression);
 
-  /**
-   * @param source
-   * @param name
-   * @param body
-   * @param result
-   * @param iterator
-   * @return
-   */
-  IterateExp createIterateExp(OclExpression source, OclExpression body,
-      Variable result, Variable... iterator);
+	/**
+	 * <p>
+	 * Creates an {@link IntegerLiteralExp}.
+	 * </p>
+	 * 
+	 * @param integerSymbol
+	 *          The <code>int</code> value of the {@link IntegerLiteralExp}.
+	 * @return An {@link IntegerLiteralExp} instance.
+	 */
+	IntegerLiteralExp createIntegerLiteralExp(int integerSymbol);
 
-  /**
-   * @param source
-   * @param name
-   * @param body
-   * @param iterator
-   * 
-   * @return
-   */
-  IteratorExp createIteratorExp(OclExpression source, String name,
-      OclExpression body, Variable... iterator);
+	/**
+	 * <p>
+	 * Creates an {@link InvalidLiteralExp}.
+	 * </p>
+	 * 
+	 * @return The {@link InvalidLiteralExp} instance.
+	 */
+	InvalidLiteralExp createInvalidLiteralExp();
 
-  /**
-   * @param condition
-   * @param thenExpression
-   * @param elseExpression
-   * @return
-   */
-  IfExp createIfExp(OclExpression condition, OclExpression thenExpression,
-      OclExpression elseExpression);
+	/**
+	 * <p>
+	 * Creates a new {@link IterateExp}.
+	 * </p>
+	 * 
+	 * @param source
+	 *          The source {@link OclExpression}.
+	 * @param name
+	 *          The name of the {@link IterateExp}.
+	 * @param body
+	 *          The body {@link OclExpression} of the {@link IterateExp}.
+	 * @param result
+	 *          The result {@link Variable}.
+	 * @param iterator
+	 *          The optional iterator {@link Variable}s as an array.
+	 * @return The {@link IterateExp} instance.
+	 */
+	IterateExp createIterateExp(OclExpression source, OclExpression body,
+			Variable result, Variable... iterator);
 
-  /**
-   * @param variable
-   * @param in
-   * @return
-   */
-  LetExp createLetExp(Variable variable, OclExpression in);
+	/**
+	 * <p>
+	 * Creates a new {@link IteratorExp}.
+	 * </p>
+	 * 
+	 * @param source
+	 *          The source {@link OclExpression}.
+	 * @param name
+	 *          The name of the {@link IteratorExp}.
+	 * @param body
+	 *          The body {@link OclExpression}.
+	 * @param iterator
+	 *          The iterator {@link Variable}s as an array.
+	 * 
+	 * @return A {@link IteratorExp} instance.
+	 */
+	IteratorExp createIteratorExp(OclExpression source, String name,
+			OclExpression body, Variable... iterator);
 
-  /**
-   * @param referredVariable
-   * @return
-   */
-  VariableExp createVariableExp(Variable referredVariable);
+	/**
+	 * <p>
+	 * Creates a {@link LetExp} instance.
+	 * </p>
+	 * 
+	 * @param variable
+	 *          The {@link Variable} of the {@link LetExp}.
+	 * @param in
+	 *          The {@link OclExpression} of the {@link LetExp}.
+	 * @return A {@link LetExp} instance.
+	 */
+	LetExp createLetExp(Variable variable, OclExpression in);
 
-  /**
-   * @param first
-   * @param last
-   * @return
-   */
-  CollectionRange createCollectionRange(OclExpression first, OclExpression last);
+	/**
+	 * <p>
+	 * Creates a new {@link OperationCallExp}.
+	 * </p>
+	 * 
+	 * @param source
+	 *          The source {@link OclExpression} of the {@link OperationCallExp}.
+	 * @param referredOperationName
+	 *          The fully qualified name of the operation (i.e., including the
+	 *          fully qualified name of its owning {@link Type}).
+	 * @param argument
+	 *          An optional list of arguments as {@link OclExpression}s.
+	 * 
+	 * @return The created {@link OperationCallExp}.
+	 */
+	OperationCallExp createOperationCallExp(OclExpression source,
+			String referredOperationName, OclExpression... argument);
 
-  /**
-   * @param item
-   * @return
-   */
-  CollectionItem createCollectionItem(OclExpression item);
+	/**
+	 * <p>
+	 * Creates a new {@link OperationCallExp} for a static operation. The
+	 * <code>referredOperationPathName</code> must not be <code>null</code>, the
+	 * arguments are optional. The owning type must exist in the associated
+	 * {@link IModel model} and the specified operation must be static.
+	 * </p>
+	 * 
+	 * @param referredOperationPathName
+	 *          The fully qualified name of the operation (i.e., including the
+	 *          fully qualified name of its owning {@link Type}).
+	 * @param argument
+	 *          An optional list of arguments as {@link OclExpression}s.
+	 * 
+	 * @return An {@link OperationCallExp} instance.
+	 * 
+	 * @throws FactoryException
+	 *           If the expression cannot be created.
+	 */
+	OperationCallExp createOperationCallExp(
+			List<String> referredOperationPathName, OclExpression... argument)
+			throws FactoryException;
 
-  /**
-   * @param parts
-   * @return
-   */
-  CollectionLiteralExp createCollectionLiteralExp(CollectionKind kind,
-      CollectionLiteralPart... parts);
+	/**
+	 * <p>
+	 * Creates a {@link PropertyCallExp}.
+	 * </p>
+	 * 
+	 * @param source
+	 *          The source {@link OclExpression} of the {@link PropertyCallExp}.
+	 * @param referredPropertyName
+	 *          The referred property's name as a {@link String}.
+	 * @param qualifier
+	 *          qualifier {@link OclExpression} as an Array.
+	 * 
+	 * @return A {@link PropertyCallExp} instance.
+	 */
+	PropertyCallExp createPropertyCallExp(OclExpression source,
+			String referredPropertyName, OclExpression... qualifier);
 
-  /**
-   * Creates a new {@link TupleLiteralPart} from a
-   * {@link Variable variable declaration}.
-   * 
-   * @param variableDeclaration the variable declaration for which the tuple
-   *          literal part should be created
-   * 
-   * @return a <code>TupleLiteralPart</code> instance
-   */
-  TupleLiteralPart createTupleLiteralPart(Variable variableDeclaration)
-      throws FactoryException;
+	/**
+	 * <p>
+	 * Creates a {@link PropertyCallExp}.
+	 * </p>
+	 * 
+	 * @param referredPropertyPathName
+	 *          The referred property's name as a {@link String}.
+	 * @param qualifier
+	 *          qualifier {@link OclExpression} as an Array.
+	 * @return A {@link PropertyCallExp} instance.
+	 * @throws FactoryException
+	 *           Thrown, if the creation fails.
+	 */
+	PropertyCallExp createPropertyCallExp(List<String> referredPropertyPathName,
+			OclExpression... qualifier) throws FactoryException;
 
-  /**
-   * @param parts
-   * @return
-   */
-  TupleLiteralExp createTupleLiteralExp(TupleLiteralPart... parts);
+	/**
+	 * <p>
+	 * Creates a {@link RealLiteralExp}.
+	 * </p>
+	 * 
+	 * @param realSymbol
+	 *          The <code>float</code> value of the {@link RealLiteralExp}.</p>
+	 * @return The {@link RealLiteralExp}.
+	 */
+	RealLiteralExp createRealLiteralExp(float realSymbol);
 
-  /**
-   * @param referredEnumLiteralPathName
-   * @return
-   * @throws FactoryException
-   */
-  EnumLiteralExp createEnumLiteralExp(List<String> referredEnumLiteralPathName)
-      throws FactoryException;
+	/**
+	 * <p>
+	 * Creates a {@link StringLiteralExp}.
+	 * </p>
+	 * 
+	 * @param stringSymbol
+	 *          The {@link String} value of the {@link StringLiteralExp}.
+	 * @return A {@link StringLiteralExp} instance.
+	 */
+	StringLiteralExp createStringLiteralExp(String stringSymbol);
 
-  /**
-   * @param realSymbol
-   * @return
-   */
-  RealLiteralExp createRealLiteralExp(float realSymbol);
+	/**
+	 * <p>
+	 * Creates a {@link TupleLiteralExp}.
+	 * </p>
+	 * 
+	 * @param parts
+	 *          The {@link TupleLiteralPart}s of the {@link TupleLiteralExp}.
+	 * @return A {@link TupleLiteralExp} instance.
+	 */
+	TupleLiteralExp createTupleLiteralExp(TupleLiteralPart... parts);
 
-  /**
-   * @param symbol
-   * @return
-   */
-  UnlimitedNaturalExp createUnlimitedNaturalExp(long symbol);
+	/**
+	 * <p>
+	 * Creates a new {@link TupleLiteralPart} from a {@link Variable variable
+	 * declaration}.
+	 * </p>
+	 * 
+	 * @param variableDeclaration
+	 *          The variable declaration for which the tuple literal part should
+	 *          be created
+	 * 
+	 * @return A {@link TupleLiteralPart} instance.
+	 */
+	TupleLiteralPart createTupleLiteralPart(Variable variableDeclaration)
+			throws FactoryException;
 
-  /**
-   * @param integerSymbol
-   * @return
-   */
-  IntegerLiteralExp createIntegerLiteralExp(int integerSymbol);
+	/**
+	 * <p>
+	 * Creates a {@link TypeLiteralExp}.
+	 * </p>
+	 * 
+	 * @param referredTypePathName
+	 *          The fully qualified name of the {@link Type} this
+	 *          {@link TimeLimitExceededException} refers to.
+	 * 
+	 * @return A {@link TypeLiteralExp} instance.
+	 * @throws FactoryException
+	 *           Thrown, if the creation fails.
+	 */
+	TypeLiteralExp createTypeLiteralExp(List<String> referredTypePathName)
+			throws FactoryException;
 
-  /**
-   * @param stringSymbol
-   * @return
-   */
-  StringLiteralExp createStringLiteralExp(String stringSymbol);
+	/**
+	 * <p>
+	 * Creates an {@link UndefinedLiteralExp}.
+	 * </p>
+	 * 
+	 * @return An {@link UndefinedLiteralExp} instance.
+	 */
+	UndefinedLiteralExp createUndefinedLiteralExp();
 
-  /**
-   * @param booleanSymbol
-   * @return
-   */
-  BooleanLiteralExp createBooleanLiteralExp(boolean booleanSymbol);
+	/**
+	 * <p>
+	 * Creates an {@link UnlimitedNaturalExp}.
+	 * </p>
+	 * 
+	 * @param symbol
+	 *          The <code>long</code> value of the {@link UnlimitedNaturalExp}.
+	 * @return A {@link UnlimitedNaturalExp} instance.
+	 */
+	UnlimitedNaturalExp createUnlimitedNaturalExp(long symbol);
 
-  /**
-   * @return
-   */
-  UndefinedLiteralExp createUndefinedLiteralExp();
+	/**
+	 * <p>
+	 * Creates a new {@link Variable}. The name must not be <code>null</code>.
+	 * Type and init expression are optional (OCL Specification, Section 9.3). If
+	 * none is given, however, it is likely that a {@link WellformednessException}
+	 * will be thrown at a later time when the type is requested. If both a type
+	 * and an init expression are given, this method will not check whether the
+	 * type of the init expression conforms to the given type. Instead, this will
+	 * be checked by the {@link Variable} implementation once the type is accessed
+	 * for the first time.
+	 * </p>
+	 * 
+	 * @param name
+	 *          The name of the {@link Variable}.
+	 * @param type
+	 *          The {@link Type} of the {@link Variable}.
+	 * @param initExpression
+	 *          An (optional) initialization {@link OclExpression}.
+	 * 
+	 * @return A {@link Variable} instance.
+	 */
+	Variable createVariable(String name, Type type, OclExpression initExpression);
 
-  /**
-   * @return
-   */
-  InvalidLiteralExp createInvalidLiteralExp();
+	/**
+	 * <p>
+	 * Creates a new {@link Variable} that represents a {@link Parameter} in an
+	 * expression that constrains an {@link Operation}. The name and type of the
+	 * {@link Variable} will be determined automatically.
+	 * </p>
+	 * 
+	 * @param representedParameter
+	 *          The {@link Parameter} represented by the {@link Variable}.
+	 * 
+	 * @return A {@link Variable} instance.
+	 */
+	Variable createVariable(Parameter representedParameter);
 
-  /**
-   * @param referredTypePathName
-   * 
-   * @return
-   * @throws FactoryException
-   */
-  TypeLiteralExp createTypeLiteralExp(List<String> referredTypePathName)
-      throws FactoryException;
-
+	/**
+	 * <p>
+	 * Creates a {@link VariableExp}.
+	 * </p>
+	 * 
+	 * @param referredVariable
+	 *          The referred {@link Variable}.
+	 * @return A {@link VariableExp} instance.
+	 */
+	VariableExp createVariableExp(Variable referredVariable);
 }

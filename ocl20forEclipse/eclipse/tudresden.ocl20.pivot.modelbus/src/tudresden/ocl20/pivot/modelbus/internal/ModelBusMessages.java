@@ -35,32 +35,44 @@ package tudresden.ocl20.pivot.modelbus.internal;
 import org.eclipse.osgi.util.NLS;
 
 /**
- * Constants to access localized messages for the Model Bus plugin.
+ * <p>
+ * Constants to access localized messages for the Model Bus plug-in.
+ * </p>
  * 
  * @author Matthias Braeuer
- * @version 1.0 10.04.2007
  */
 public class ModelBusMessages extends NLS {
 
-	private static final String BUNDLE_NAME =
-			"tudresden.ocl20.pivot.modelbus.internal.messages"; //$NON-NLS-1$
-
 	public static String AbstractModelProvider_LoadingModel;
+
 	public static String ModelRegistry_SettingActiveModel;
+
 	public static String OclLibraryProvider_LoadOclLibrary;
 
 	public static String IModelInstanceElement_CannotCast;
+
 	public static String IModelInstanceElement_CannotConvertArray;
+
 	public static String IModelInstanceElement_CannotAdaptToType;
+
 	public static String IModelInstanceElement_CollectionHasUnknownContent;
 
+	/** The location of the messages file. */
+	private static final String MESSAGES_FILE_LOCATION =
+			"tudresden.ocl20.pivot.modelbus.internal.messages"; //$NON-NLS-1$
+
 	static {
-		// initialize resource bundle
-		NLS.initializeMessages(BUNDLE_NAME, ModelBusMessages.class);
+		/* Initialize resource bundle. */
+		NLS.initializeMessages(MESSAGES_FILE_LOCATION, ModelBusMessages.class);
 	}
 
+	/**
+	 * <p>
+	 * Initializes the {@link ModelBusMessages}.
+	 * </p>
+	 */
 	private ModelBusMessages() {
 
-		// no implementaton necessary
+		/* no implementaton necessary. */
 	}
 }

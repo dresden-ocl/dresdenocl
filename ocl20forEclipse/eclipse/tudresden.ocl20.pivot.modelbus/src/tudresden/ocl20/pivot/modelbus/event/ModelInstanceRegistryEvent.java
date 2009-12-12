@@ -33,34 +33,40 @@ package tudresden.ocl20.pivot.modelbus.event;
 import java.util.EventObject;
 
 import tudresden.ocl20.pivot.modelbus.model.IModel;
+import tudresden.ocl20.pivot.modelbus.model.internal.ModelInstanceRegistry;
 import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance;
 import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceRegistry;
 
 /**
- * 
+ * <p>
+ * Represents events fired by the {@link ModelInstanceRegistry} if a new
+ * {@link IModelInstance} is added or removed.
+ * </p>
  * 
  * @author Ronny Brandt
- * @version 1.0 31.08.2007
  */
 public class ModelInstanceRegistryEvent extends EventObject {
 
+	/** Generated serial id. */
 	private static final long serialVersionUID = -2515705247138459585L;
 
-	// The affected model instance
+	/** The affected {@link IModelInstance}. */
 	private IModelInstance affectedModelInstance;
 
-	// The affected model
+	/** The affected {@link IModel}. */
 	private IModel affectedModel;
 
 	/**
-	 * Instantiates a new model instance registry event.
+	 * <p>
+	 * Instantiates a new {@link ModelInstanceRegistryEvent}.
+	 * </p>
 	 * 
 	 * @param source
-	 *            the source
+	 *          The {@link IModelInstanceRegistry} this event belongs to.
 	 * @param affectedModel
-	 *            the affected model
+	 *          The affected {@link IModel}.
 	 * @param affectedModelInstance
-	 *            the affected model instance
+	 *          The affected {@link IModelInstance}.
 	 */
 	public ModelInstanceRegistryEvent(IModelInstanceRegistry source,
 			IModel affectedModel, IModelInstance affectedModelInstance) {
@@ -70,39 +76,48 @@ public class ModelInstanceRegistryEvent extends EventObject {
 		this.affectedModelInstance = affectedModelInstance;
 	}
 
-	/**
-	 * Gets the affected {@link IModelInstance}
-	 * 
-	 * @return the affected model instance
-	 */
-	public IModelInstance getAffectedModelInstance() {
-		return affectedModelInstance;
-	}
-
-	/**
-	 * Gets the affected {@link IModel}.
-	 * 
-	 * @return the affected model
-	 */
-	public IModel getAffectedModel() {
-		return affectedModel;
-	}
-
-	/**
-	 * Gets the {@link IModelInstanceRegistry}.
-	 * 
-	 * @return the model instance registry
-	 */
-	public IModelInstanceRegistry getModelInstanceRegistry() {
-		return getSource();
-	}
-
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see java.util.EventObject#getSource()
 	 */
 	public IModelInstanceRegistry getSource() {
+	
 		return (IModelInstanceRegistry) super.getSource();
+	}
+
+	/**
+	 * <p>
+	 * Gets the affected {@link IModel}.
+	 * </p>
+	 * 
+	 * @return The affected {@link IModel}.
+	 */
+	public IModel getAffectedModel() {
+
+		return this.affectedModel;
+	}
+
+	/**
+	 * <p>
+	 * Gets the affected {@link IModelInstance}.
+	 * </p>
+	 * 
+	 * @return The affected {@link IModelInstance}.
+	 */
+	public IModelInstance getAffectedModelInstance() {
+
+		return this.affectedModelInstance;
+	}
+
+	/**
+	 * <p>
+	 * Gets the {@link IModelInstanceRegistry}.
+	 * </p>
+	 * 
+	 * @return The {@link IModelInstanceRegistry}.
+	 */
+	public IModelInstanceRegistry getModelInstanceRegistry() {
+
+		return this.getSource();
 	}
 }

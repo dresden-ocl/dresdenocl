@@ -1,3 +1,36 @@
+/**
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * Copyright (C) 2007 Matthias Braeuer (braeuer.matthias@web.de).            *
+ * All rights reserved.                                                      *
+ *                                                                           *
+ * This work was done as a project at the Chair for Software Technology,     *
+ * Dresden University Of Technology, Germany (http://st.inf.tu-dresden.de).  *
+ * It is understood that any modification not identified as such is not      *
+ * covered by the preceding statement.                                       *
+ *                                                                           *
+ * This work is free software; you can redistribute it and/or modify it      *
+ * under the terms of the GNU Library General Public License as published    *
+ * by the Free Software Foundation; either version 2 of the License, or      *
+ * (at your option) any later version.                                       *
+ *                                                                           *
+ * This work is distributed in the hope that it will be useful, but WITHOUT  *
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or     *
+ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Library General Public     *
+ * License for more details.                                                 *
+ *                                                                           *
+ * You should have received a copy of the GNU Library General Public License *
+ * along with this library; if not, you can view it online at                *
+ * http://www.fsf.org/licensing/licenses/gpl.html.                           *
+ *                                                                           *
+ * To submit a bug report, send a comment, or get the latest news on this    *
+ * project, please visit the website: http://dresden-ocl.sourceforge.net.    *
+ * For more information on OCL and related projects visit the OCL Portal:    *
+ * http://st.inf.tu-dresden.de/ocl                                           *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ *
+ * $Id$
+ */
+
 package tudresden.ocl20.pivot.modelbus;
 
 import org.apache.log4j.Logger;
@@ -15,50 +48,56 @@ import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceTypeRegistry;
 import tudresden.ocl20.pivot.modelbus.modelinstance.internal.ModelInstanceTypeRegistry;
 
 /**
- * The activator class controls the plug-in life cycle
+ * <p>
+ * The activator class controls the plug-in life cycle.
+ * </p>
+ * 
+ * @author Matthias Braeuer
  */
 public class ModelBusPlugin extends Plugin {
 
-	// The plug-in ID
+	/** The plug-in ID. */
 	public static final String ID = "tudresden.ocl20.pivot.modelbus"; //$NON-NLS-1$
 
-	// The shared instance
+	/** The shared instance. */
 	private static ModelBusPlugin plugin;
 
-	// the registry of registered metamodels
+	/** The registry of registered meta-models. */
 	private IMetamodelRegistry metamodelRegistry;
 
-	// the registry for models
+	/** The registry for models. */
 	private IModelRegistry modelRegistry;
 
+	/** The registry for model instances. */
 	private IModelInstanceRegistry modelInstanceRegistry;
 
-	/* The registry of registered model instance file formats. */
-	private IModelInstanceTypeRegistry miffRegistry;
+	/** The registry of registered model instance types. */
+	private IModelInstanceTypeRegistry modelInstanceTypeRegistry;
 
 	/**
-	 * The constructor
+	 * <p>
+	 * Creates the {@link ModelBusPlugin}.
+	 * </p>
 	 */
 	public ModelBusPlugin() {
+
 		plugin = this;
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see
 	 * org.eclipse.ui.plugin.AbstractUIPlugin#start(org.osgi.framework.BundleContext
 	 * )
 	 */
 	@Override
 	public void start(BundleContext context) throws Exception {
-		super.start(context);
 
+		super.start(context);
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see
 	 * org.eclipse.ui.plugin.AbstractUIPlugin#stop(org.osgi.framework.BundleContext
 	 * )
@@ -66,45 +105,67 @@ public class ModelBusPlugin extends Plugin {
 	@Override
 	public void stop(BundleContext context) throws Exception {
 
-		// dispose the metamodel registry
-		if (metamodelRegistry != null) {
-			metamodelRegistry.dispose();
-			metamodelRegistry = null;
+		/* Dispose the meta-model registry. */
+		if (this.metamodelRegistry != null) {
+			this.metamodelRegistry.dispose();
+			this.metamodelRegistry = null;
 		}
+		// no else.
 
-		// dispose the model registry
-		if (modelRegistry != null) {
-			modelRegistry.dispose();
-			modelRegistry = null;
+		/* dispose the model registry. */
+		if (this.modelRegistry != null) {
+			this.modelRegistry.dispose();
+			this.modelRegistry = null;
 		}
+		// no else.
+
+		/* dispose the model instance type registry. */
+		if (this.modelInstanceTypeRegistry != null) {
+			this.modelInstanceTypeRegistry.dispose();
+			this.modelInstanceTypeRegistry = null;
+		}
+		// no else.
+
+		/* dispose the model instance registry. */
+		if (this.modelInstanceRegistry != null) {
+			this.modelInstanceRegistry.dispose();
+			this.modelInstanceRegistry = null;
+		}
+		// no else.
 
 		plugin = null;
 		super.stop(context);
 	}
 
 	/**
-	 * Returns the shared instance
+	 * <p>
+	 * Returns the shared instance.
+	 * </p>
 	 * 
-	 * @return the shared instance
+	 * @return The shared instance.
 	 */
 	public static ModelBusPlugin getDefault() {
+
 		return plugin;
 	}
 
 	/**
+	 * <p>
 	 * Returns the {@link IMetamodelRegistry} managed by the
-	 * <code>ModelBusPlugin</code>.
+	 * {@link ModelBusPlugin}.
+	 * </p>
 	 * 
-	 * @return an <code>IMetamodelRegistry</code> instance
+	 * @return An {@link IMetamodelRegistry} instance.
 	 */
 	public static IMetamodelRegistry getMetamodelRegistry() {
-		// check that the plugin has been activated
+
+		/* Check that the plugin has been activated. */
 		if (plugin == null) {
 			throw new IllegalStateException(
 					"The Model Bus plugin has not been activated."); //$NON-NLS-1$
 		}
 
-		// lazily create the registry
+		/* Lazily create the registry. */
 		if (plugin.metamodelRegistry == null) {
 			plugin.metamodelRegistry = new MetamodelRegistry();
 		}
@@ -113,19 +174,22 @@ public class ModelBusPlugin extends Plugin {
 	}
 
 	/**
-	 * Returns the {@link IModelRegistry} managed by the
-	 * <code>ModelBusPlugin</code>.
+	 * <p>
+	 * Returns the {@link IModelRegistry} managed by the {@link ModelBusPlugin}.
+	 * </p>
 	 * 
-	 * @return an <code>IModelRegistry</code> instance
+	 * @return An {@link IModelRegistry} instance.
 	 */
 	public static IModelRegistry getModelRegistry() {
-		// check that the plugin has been activated
+
+		/* Check that the plugin has been activated. */
 		if (plugin == null) {
 			throw new IllegalStateException(
 					"The Model Bus plugin has not been activated."); //$NON-NLS-1$
 		}
+		// no else.
 
-		// lazily create the registry
+		/* Probably lazily create the registry. */
 		if (plugin.modelRegistry == null) {
 			plugin.modelRegistry = new ModelRegistry();
 		}
@@ -133,16 +197,27 @@ public class ModelBusPlugin extends Plugin {
 		return plugin.modelRegistry;
 	}
 
+	/**
+	 * <p>
+	 * Returns the {@link IModelInstanceRegistry} managed by the
+	 * {@link ModelBusPlugin}.
+	 * </p>
+	 * 
+	 * @return An {@link IModelInstanceRegistry} instance.
+	 */
 	public static IModelInstanceRegistry getModelInstanceRegistry() {
+
 		if (plugin == null) {
 			throw new IllegalStateException(
 					"The Model Bus plugin has not been activated."); //$NON-NLS-1$
 		}
+		// no else.
 
-		// lazily create the registry
+		/* Lazily create the registry. */
 		if (plugin.modelInstanceRegistry == null) {
 			plugin.modelInstanceRegistry = new ModelInstanceRegistry();
 		}
+		// no else.
 
 		return plugin.modelInstanceRegistry;
 	}
@@ -156,33 +231,36 @@ public class ModelBusPlugin extends Plugin {
 	 * @return An {@link IModelInstanceTypeRegistry} instance.
 	 */
 	public static IModelInstanceTypeRegistry getModelInstanceTypeRegistry() {
-		
+
 		/* Check that the plug-in has been activated. */
 		if (plugin == null) {
 			throw new IllegalStateException(
 					"The Model Bus plug-in has not been activated.");
 		}
-		
+		// no else.
+
 		/* Else lazily create the registry. */
-		else if (plugin.miffRegistry == null) {
-			plugin.miffRegistry = new ModelInstanceTypeRegistry();
+		else if (plugin.modelInstanceTypeRegistry == null) {
+			plugin.modelInstanceTypeRegistry = new ModelInstanceTypeRegistry();
 		}
 		// no else.
 
-		return plugin.miffRegistry;
+		return plugin.modelInstanceTypeRegistry;
 	}
 
 	/**
-	 * Facade method for the classes in this plugin that hides the dependency
-	 * from the <code>tudresden.ocl20.logging</code> plugin.
+	 * <p>
+	 * Facade method for the classes in this plug-in that hides the dependency
+	 * from the <code>tudresden.ocl20.logging</code> plug-in.
+	 * </p>
 	 * 
 	 * @param clazz
-	 *            the class to return the logger for
+	 *          the class to return the logger for
 	 * 
 	 * @return a log4j <code>Logger</code> instance
 	 */
 	public static Logger getLogger(Class<?> clazz) {
+
 		return LoggingPlugin.getLogManager(plugin).getLogger(clazz);
 	}
-
 }

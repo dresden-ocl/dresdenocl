@@ -34,65 +34,83 @@ package tudresden.ocl20.pivot.modelbus.model;
 
 import tudresden.ocl20.pivot.modelbus.event.IModelRegistryListener;
 
-
 /**
- * An <code>IModelRegistry</code> manages a list of {@link IModel} references.
- *
+ * An {@link IModelRegistry} manages a list of {@link IModel} references.</p>
+ * 
  * @author Matthias Braeuer
- * @version 1.0 30.03.2007
  */
 public interface IModelRegistry {
 
-  /**
-   * Returns all {@link IModel models} registered with this <code>IModelRegistry</code>.
-   * 
-   * @return an array of <code>IModel</code> instances
-   */
-  IModel[] getModels();
-  
-  /**
-   * Adds a {@link IModel model} to this <code>IModelRegistry</code>. If the model registry was
-   * empty, this becomes the active model.
-   * 
-   * @param model the model
-   * 
-   * @see #setActiveModel(IModel)
-   */
-  void addModel(IModel model);
-  
-  /**
-   * Sets the given model as the active model in the <code>IModelRegistry</code>. This allows
-   * to update visual representations of the registry to be updated independently.
-   * 
-   * @param model the new active model
-   */
-  void setActiveModel(IModel model);
-  
-  /**
-   * Returns the currently active model in the model registry. If there are no models in the
-   * model registry, <code>null</code> is returned.
-   * 
-   * @return a <code>IModel</code> instance or <code>null</code>
-   */
-  IModel getActiveModel();
-  
-  /**
-   * Disposes the registry.
-   */
-  void dispose();
-  
-  /**
-   * Adds an {@link IModelRegistryListener} to this model registry.
-   * 
-   * @param listener the listener
-   */
-  void addModelRegistryListener(IModelRegistryListener listener);
-  
-  /**
-   * Removes an {@link IModelRegistryListener} from this model registry.
-   * 
-   * @param listener the listener
-   */
-  void removeModelRegistryListener(IModelRegistryListener listener);
-  
+	/**
+	 * <p>
+	 * Adds a {@link IModel model} to this {@link IModelRegistry}. If the
+	 * {@link IModelRegistry} was empty, this becomes the active {@link IModel}.
+	 * </p>
+	 * 
+	 * @param model
+	 *          The {@link IModel} to be added.
+	 * 
+	 * @see #setActiveModel(IModel)
+	 */
+	void addModel(IModel model);
+
+	/**
+	 * <p>
+	 * Adds an {@link IModelRegistryListener} to this {@link IModelRegistry}.
+	 * </p>
+	 * 
+	 * @param listener
+	 *          The {@link IModelRegistryListener} to be added.
+	 */
+	void addModelRegistryListener(IModelRegistryListener listener);
+
+	/**
+	 * <p>
+	 * Disposes the {@link IModelRegistry}.
+	 * </p>
+	 */
+	void dispose();
+
+	/**
+	 * <p>
+	 * Returns the currently active {@link IModel} in the {@link IModelRegistry}.
+	 * If there are no {@link IModel}s in the {@link IModelRegistry},
+	 * <code>null</code> is returned.
+	 * </p>
+	 * 
+	 * @return An {@link IModel} instance or <code>null</code>
+	 */
+	IModel getActiveModel();
+
+	/**
+	 * <p>
+	 * Returns all {@link IModel models} registered with this
+	 * {@link IModelRegistry}.
+	 * </p>
+	 * 
+	 * @return An array of {@link IModel} instances.
+	 */
+	IModel[] getModels();
+
+	/**
+	 * <p>
+	 * Removes an {@link IModelRegistryListener} from this {@link IModelRegistry}.
+	 * </p>
+	 * 
+	 * @param listener
+	 *          The {@link IModelRegistryListener} to be removed.
+	 */
+	void removeModelRegistryListener(IModelRegistryListener listener);
+
+	/**
+	 * <p>
+	 * Sets the given {@link IModel} as the active {@link IModel} in the
+	 * {@link IModelRegistry}. This allows to update visual representations of the
+	 * {@link IModelRegistry} to be updated independently.
+	 * </p>
+	 * 
+	 * @param model
+	 *          The new active {@link IModel}.
+	 */
+	void setActiveModel(IModel model);
 }

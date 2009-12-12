@@ -33,31 +33,36 @@ package tudresden.ocl20.pivot.modelbus.event;
 import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance;
 
 /**
- * The listener interface for receiving IModelInstanceRegistry events.
- * The class that is interested in processing a IModelInstanceRegistry
- * event implements this interface, and the object created
- * with that class is registered with a component using the
- * component's <code>addIModelInstanceRegistryListener<code> method. When
+ * <p>
+ * The listener interface for receiving IModelInstanceRegistry events. The class
+ * that is interested in processing a IModelInstanceRegistry event implements
+ * this interface, and the object created with that class is registered with a
+ * component using the component's
+ * <code>addIModelInstanceRegistryListener<code> method. When
  * the IModelInstanceRegistry event occurs, that object's appropriate
  * method is invoked.
+ * </p>
  * 
  * @see IModelInstanceRegistryEvent
  * @author Ronny Brandt
- * @version 1.0 31.08.2007
  */
 public interface IModelInstanceRegistryListener {
 
 	/**
+	 * <p>
 	 * Active {@link IModelInstance} changed.
+	 * </p>
 	 * 
-	 * @param event the event
+	 * @param event
+	 *          The event.
 	 */
 	void activeModelInstanceChanged(ModelInstanceRegistryEvent event);
-	
+
 	/**
 	 * {@link IModelInstance} added.
 	 * 
-	 * @param event the event
+	 * @param event
+	 *          The event
 	 */
 	void modelInstanceAdded(ModelInstanceRegistryEvent event);
 }

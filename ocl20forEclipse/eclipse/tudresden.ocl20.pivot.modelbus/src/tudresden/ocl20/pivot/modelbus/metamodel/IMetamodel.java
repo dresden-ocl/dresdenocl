@@ -32,37 +32,45 @@
  */
 package tudresden.ocl20.pivot.modelbus.metamodel;
 
+import tudresden.ocl20.pivot.modelbus.model.IModel;
 import tudresden.ocl20.pivot.modelbus.model.IModelProvider;
 
 /**
- * 
+ * <p>
+ * Represents meta-models that can be used to load {@link IModel}s.
+ * </p>
  * 
  * @author Matthias Braeuer
- * @version 1.0 30.03.2007
  */
 public interface IMetamodel {
 
-  /**
-   * Returns a unique identifier for this metamodel under which it can be registered in an
-   * {@link IMetamodelRegistry}.
-   * 
-   * @return a <code>String</code> identifier
-   */
-  String getId();
+	/**
+	 * <p>
+	 * Returns a unique identifier for this {@link IMetamodel} under which it can
+	 * be registered in an {@link IMetamodelRegistry}.
+	 * </p>
+	 * 
+	 * @return A {@link String} identifier.
+	 */
+	String getId();
 
-  /**
-   * Returns a human-readable and possibly translatable name of this metamodel that may be used to
-   * display it in a user interface.
-   * 
-   * @return a <code>String</code> representing the name of the metamodel
-   */
-  String getName();
+	/**
+	 * <p>
+	 * Returns the {@link IModelProvider} that can be used to load instances of
+	 * this {@link IMetamodel}.
+	 * </p>
+	 * 
+	 * @return An {@link IModelProvider} instance.
+	 */
+	IModelProvider getModelProvider();
 
-  /**
-   * Returns the {@link IModelProvider} that can be used to load instances of this metamodel.
-   * 
-   * @return an <code>IModelProvider</code> instance
-   */
-  IModelProvider getModelProvider();
-
+	/**
+	 * <p>
+	 * Returns a human-readable and possibly translatable name of this
+	 * {@link IMetamodel} that may be used to display it in a user interface.
+	 * </p>
+	 * 
+	 * @return A {@link String} representing the name of the {@link IMetamodel}.
+	 */
+	String getName();
 }

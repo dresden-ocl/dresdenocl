@@ -37,22 +37,24 @@ import org.eclipse.jface.resource.ImageDescriptor;
 import tudresden.ocl20.pivot.modelbus.descriptor.IDescriptor;
 
 /**
- * This is an additional interface that is mixed in by the Eclipse-specific implementation of the
- * {@link IMetamodel} interface. It represents a descriptor for the information contained in a
- * single <code>metamodel</code> tag in an extension that extends the <code>metamodels</code>
- * extension point.
+ * <p>
+ * This is an additional interface that is mixed in by the Eclipse-specific
+ * implementation of the {@link IMetamodel} interface. It represents a
+ * descriptor for the information contained in a single <code>metamodel</code>
+ * tag in an extension that extends the <code>metamodels</code> extension point.
+ * </p>
  * 
  * @author Matthias Braeuer
- * @version 1.0 03.04.2007
  */
 public interface IMetamodelDescriptor extends IDescriptor {
 
-  /**
-   * Returns an image descriptor that can be used as an icon for the metamodel in the Eclipse user
-   * interface.
-   * 
-   * @return an <code>ImageDescriptor</code>
-   */
-  ImageDescriptor getIcon();
-
+	/**
+	 * <p>
+	 * Returns an {@link ImageDescriptor} that can be used as an icon for the
+	 * {@link IMetamodel} in the Eclipse user interface.
+	 * </p>
+	 * 
+	 * @return An {@link ImageDescriptor}.
+	 */
+	ImageDescriptor getIcon();
 }

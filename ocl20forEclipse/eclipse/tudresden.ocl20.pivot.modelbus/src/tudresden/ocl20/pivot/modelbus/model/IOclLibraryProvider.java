@@ -34,18 +34,21 @@ package tudresden.ocl20.pivot.modelbus.model;
 
 import tudresden.ocl20.pivot.essentialocl.types.OclLibrary;
 
-
 /**
+ * <p>
+ * The {@link IOclLibraryProvider} provides access to the {@link OclLibrary}.
+ * </p>
  * 
- *
  * @author Matthias Braeuer
- * @version 1.0 30.03.2007
  */
 public interface IOclLibraryProvider {
 
-  /**
-   * @return
-   */
-  OclLibrary getOclLibrary();
-  
+	/**
+	 * <p>
+	 * Returns the {@link OclLibrary}.
+	 * </p>
+	 * 
+	 * @return The {@link OclLibrary}.
+	 */
+	OclLibrary getOclLibrary();
 }

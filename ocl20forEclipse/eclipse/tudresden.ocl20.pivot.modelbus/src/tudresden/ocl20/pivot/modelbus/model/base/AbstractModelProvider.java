@@ -45,88 +45,101 @@ import tudresden.ocl20.pivot.modelbus.model.IModel;
 import tudresden.ocl20.pivot.modelbus.model.IModelProvider;
 
 /**
- * This is a base implementation for the {@link IModelProvider} interface that assumes models to be
- * stored in files or accessible as a resource, respectively. Metamodeling technologies that support
- * these concepts may subclass this class for an easier implementation.
+ * <p>
+ * This is a base implementation for the {@link IModelProvider} interface that
+ * assumes models to be stored in files or accessible as a resource,
+ * respectively. Meta.modeling technologies that support these concepts may
+ * subclass this class for an easier implementation.
+ * </p>
  * 
  * @author Matthias Braeuer
- * @version 1.0 10.04.2007
  */
 public abstract class AbstractModelProvider implements IModelProvider {
 
-  /**
-   * Logger for this class
-   */
-  private static final Logger logger = Logger.getLogger(AbstractModelProvider.class);
+	/** {@link Logger} for this class */
+	private static final Logger LOGGER =
+			Logger.getLogger(AbstractModelProvider.class);
 
-  /**
-   * This implementation tries to create a URL from the given model name. See
-   * {@link Class#getResource(String)} for a description of the required format of the name.
-   * 
-   * @see tudresden.ocl20.pivot.modelbus.model.IModelProvider#getModel(java.lang.String)
-   */
-  public IModel getModel(String modelName) throws ModelAccessException {
-    if (logger.isDebugEnabled()) {
-      logger.debug("getModel(modelName=" + modelName + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
-    }
+	/*
+	 * (non-Javadoc)
+	 * @see tudresden.ocl20.pivot.modelbus.IModelProvider#getModel(java.io.File)
+	 */
+	public IModel getModel(File modelFile) throws ModelAccessException {
 
-    URL modelUrl;
-    IModel model;
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("getModel(modelFile=" + modelFile + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
+		}
+		// no else.
 
-    modelUrl = AbstractModelProvider.class.getResource(modelName);
+		if (modelFile == null) {
+			throw new IllegalArgumentException("The argument 'modelFile' was null."); //$NON-NLS-1$
+		}
+		// no else.
 
-    if (modelUrl == null) {
-      throw new ModelAccessException("Failed to create a URL for model " + modelName); //$NON-NLS-1$
-    }
+		IModel model;
+		URL modelFileUrl;
 
-    logger.info(NLS.bind(ModelBusMessages.AbstractModelProvider_LoadingModel,modelName));
+		try {
+			modelFileUrl = modelFile.toURI().toURL();
+		}
 
-    // delegate to user implementation
-    model = getModel(modelUrl);
+		catch (MalformedURLException e) {
+			throw new ModelAccessException("Failed to create a URL for file " //$NON-NLS-1$
+					+ modelFile.getAbsolutePath(), e);
+		}
 
-    if (logger.isDebugEnabled()) {
-      logger.debug("getModel() - exit - return value=" + model); //$NON-NLS-1$
-    }
+		LOGGER.info(NLS.bind(ModelBusMessages.AbstractModelProvider_LoadingModel,
+				modelFile.getAbsolutePath()));
 
-    return model;
-  }
+		/* Delegate to user implementation. */
+		model = this.getModel(modelFileUrl);
 
-  /*
-   * (non-Javadoc)
-   * 
-   * @see tudresden.ocl20.pivot.modelbus.IModelProvider#getModel(java.io.File)
-   */
-  public IModel getModel(File modelFile) throws ModelAccessException {
-    if (logger.isDebugEnabled()) {
-      logger.debug("getModel(modelFile=" + modelFile + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
-    }
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("getModel() - exit - return value=" + model); //$NON-NLS-1$
+		}
+		// no else.
 
-    if (modelFile == null) {
-      throw new IllegalArgumentException("The argument 'modelFile' was null."); //$NON-NLS-1$
-    }
+		return model;
+	}
 
-    IModel model;
-    URL modelFileUrl;
+	/**
+	 * <p>
+	 * This implementation tries to create a {@link URL} from the given model
+	 * name. See {@link Class#getResource(String)} for a description of the
+	 * required format of the name.
+	 * </p>
+	 * 
+	 * @see tudresden.ocl20.pivot.modelbus.model.IModelProvider#getModel(java.lang.String)
+	 */
+	public IModel getModel(String modelName) throws ModelAccessException {
 
-    try {
-      modelFileUrl = modelFile.toURI().toURL();
-    }
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("getModel(modelName=" + modelName + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
+		}
+		// no else.
 
-    catch (MalformedURLException e) {
-      throw new ModelAccessException("Failed to create a URL for file " //$NON-NLS-1$
-          + modelFile.getAbsolutePath(),e);
-    }
+		URL modelUrl;
+		IModel model;
 
-    logger.info(NLS.bind(ModelBusMessages.AbstractModelProvider_LoadingModel,modelFile
-        .getAbsolutePath()));
+		modelUrl = AbstractModelProvider.class.getResource(modelName);
 
-    // delegate to user implementation
-    model = getModel(modelFileUrl);
+		if (modelUrl == null) {
+			throw new ModelAccessException(
+					"Failed to create a URL for model " + modelName); //$NON-NLS-1$
+		}
+		// no else.
 
-    if (logger.isDebugEnabled()) {
-      logger.debug("getModel() - exit - return value=" + model); //$NON-NLS-1$
-    }
+		LOGGER.info(NLS.bind(ModelBusMessages.AbstractModelProvider_LoadingModel,
+				modelName));
 
-    return model;
-  }
+		/* Delegate to user implementation. */
+		model = this.getModel(modelUrl);
+
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("getModel() - exit - return value=" + model); //$NON-NLS-1$
+		}
+		// no else.
+
+		return model;
+	}
 }

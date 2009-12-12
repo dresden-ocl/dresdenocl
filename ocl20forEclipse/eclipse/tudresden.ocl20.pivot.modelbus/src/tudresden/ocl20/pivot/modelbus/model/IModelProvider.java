@@ -36,33 +36,56 @@ import java.io.File;
 import java.net.URL;
 
 import tudresden.ocl20.pivot.modelbus.ModelAccessException;
-
-
+import tudresden.ocl20.pivot.modelbus.metamodel.IMetamodel;
 
 /**
+ * <p>
+ * An {@link IModelProvider} can be used to load an {@link IModel} for a given
+ * {@link String}, {@link File} or {@link URL} that is implemented in the
+ * {@link IModelProvider}'s {@link IMetamodel}.
+ * </p>
  * 
- *
  * @author Matthias Braeuer
- * @version 1.0 30.03.2007
  */
 public interface IModelProvider {
 
-  /**
-   * @param modelName
-   * @return
-   */
-  IModel getModel(String modelName) throws ModelAccessException;
-  
-  /**
-   * @param modelFile
-   * @return
-   */
-  IModel getModel(File modelFile) throws ModelAccessException;
-  
-  /**
-   * @param modelURL
-   * @return
-   */
-  IModel getModel(URL modelURL) throws ModelAccessException;
-  
+	/**
+	 * <p>
+	 * Loads a model for a given {@link File} representing the {@link IModel}.
+	 * </p>
+	 * 
+	 * @param modelFile
+	 *          The {@link File} of the {@link IModel}.
+	 * @return An {@link IModel} instance.
+	 * @throws ModelAccessException
+	 *           Thrown, if the {@link IModel} cannot be loaded.
+	 */
+	IModel getModel(File modelFile) throws ModelAccessException;
+
+	/**
+	 * <p>
+	 * Loads a model for a given {@link String} representing the {@link IModel}'s
+	 * name.
+	 * </p>
+	 * 
+	 * @param modelName
+	 *          The name of the {@link IModel}.
+	 * @return An {@link IModel} instance.
+	 * @throws ModelAccessException
+	 *           Thrown, if the {@link IModel} cannot be loaded.
+	 */
+	IModel getModel(String modelName) throws ModelAccessException;
+
+	/**
+	 * <p>
+	 * Loads a model for a given {@link URL} representing the {@link IModel}.
+	 * </p>
+	 * 
+	 * @param modelURL
+	 *          The {@link URL} of the {@link IModel}.
+	 * @return An {@link IModel} instance.
+	 * @throws ModelAccessException
+	 *           Thrown, if the {@link IModel} cannot be loaded.
+	 */
+	IModel getModel(URL modelURL) throws ModelAccessException;
 }

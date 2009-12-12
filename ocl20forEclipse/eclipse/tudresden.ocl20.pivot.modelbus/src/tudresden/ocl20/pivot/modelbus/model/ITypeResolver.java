@@ -1,3 +1,36 @@
+/**
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * Copyright (C) 2007 Matthias Braeuer (braeuer.matthias@web.de).            *
+ * All rights reserved.                                                      *
+ *                                                                           *
+ * This work was done as a project at the Chair for Software Technology,     *
+ * Dresden University Of Technology, Germany (http://st.inf.tu-dresden.de).  *
+ * It is understood that any modification not identified as such is not      *
+ * covered by the preceding statement.                                       *
+ *                                                                           *
+ * This work is free software; you can redistribute it and/or modify it      *
+ * under the terms of the GNU Library General Public License as published    *
+ * by the Free Software Foundation; either version 2 of the License, or      *
+ * (at your option) any later version.                                       *
+ *                                                                           *
+ * This work is distributed in the hope that it will be useful, but WITHOUT  *
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or     *
+ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Library General Public     *
+ * License for more details.                                                 *
+ *                                                                           *
+ * You should have received a copy of the GNU Library General Public License *
+ * along with this library; if not, you can view it online at                *
+ * http://www.fsf.org/licensing/licenses/gpl.html.                           *
+ *                                                                           *
+ * To submit a bug report, send a comment, or get the latest news on this    *
+ * project, please visit the website: http://dresden-ocl.sourceforge.net.    *
+ * For more information on OCL and related projects visit the OCL Portal:    *
+ * http://st.inf.tu-dresden.de/ocl                                           *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ *
+ * $Id$
+ */
+
 package tudresden.ocl20.pivot.modelbus.model;
 
 import java.util.List;
@@ -9,26 +42,35 @@ import tudresden.ocl20.pivot.modelbus.model.exception.TypeNotFoundException;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 
 /**
- * A <code>ITypeResolver</code> helps in finding types. These can either be located in the
- * {@link OclLibrary OCL library} or in an associated {@link IModel model}.
+ * <p>
+ * An {@link ITypeResolver} helps in finding {@link Type}s. These can either be
+ * located in the {@link OclLibrary} or in an associated {@link IModel}.
+ * </p>
  * 
  * @author Matthias Braeuer
- * @version 1.0 19.06.2007
  */
 public interface ITypeResolver {
 
-  /**
-   * Looks up a {@link Type} in the OCL library or in the associated model.
-   * 
-   * @param pathName the path name of the type to look for
-   * 
-   * @return a <code>Type</code> instance
-   * 
-   * @throws IllegalArgumentException if the given pathname is either <code>null</code> or empty
-   * @throws ModelAccessException if something goes wrong when accessing the model 
-   * @throws TypeNotFoundException if a type with the given path name cannot be found
-   * @throws ModelBusException if a general configuration error occurs 
-   */
-  public Type findType(List<String> pathName) throws TypeNotFoundException, ModelAccessException;
-  
+	/**
+	 * <p>
+	 * Looks up a {@link Type} in the OCL library or in the associated
+	 * {@link IModel}.
+	 * </p>
+	 * 
+	 * @param pathName
+	 *          The path name of the {@link Type} to look for.
+	 * 
+	 * @return A {@link Type} instance.
+	 * 
+	 * @throws IllegalArgumentException
+	 *           If the given pathname is either <code>null</code> or empty.
+	 * @throws ModelAccessException
+	 *           If something goes wrong when accessing the {@link IModel}.
+	 * @throws TypeNotFoundException
+	 *           If a {@link Type} with the given path name cannot be found.
+	 * @throws ModelBusException
+	 *           If a general configuration error occurs.
+	 */
+	public Type findType(List<String> pathName) throws TypeNotFoundException,
+			ModelAccessException;
 }

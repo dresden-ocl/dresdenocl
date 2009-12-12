@@ -32,42 +32,54 @@
  */
 package tudresden.ocl20.pivot.modelbus.metamodel;
 
-
 /**
+ * <p>
+ * The {@link IMetamodelRegistry} manages a list of {@link IMetamodel}s that are
+ * currently available.
+ * </p>
  * 
- *
  * @author Matthias Braeuer
- * @version 1.0 30.03.2007
  */
 public interface IMetamodelRegistry {
 
-  /**
-   * Returns the {@link IMetamodel metamodel} with the given id or <code>null</code> if no metamodel
-   * with that id is registered.
-   * 
-   * @param id an identifier for a metamodel
-   * 
-   * @return an <code>IModel</code> instance or <code>null</code>
-   */
-  IMetamodel getMetamodel(String id);
-  
-  /**
-   * Returns all {@link IMetamodel metamodels} registered with this <code>IMetamodelRegistry</code>.
-   * 
-   * @return an array of <code>IMetamodel</code> instances
-   */
-  IMetamodel[] getMetamodels();
-  
-  /**
-   * Adds a {@link IMetamodel metamodel} to this <code>IMetamodelRegistry</code>.
-   * 
-   * @param metamodel the metamodel
-   */
-  void addMetamodel(IMetamodel metamodel);
-  
-  /**
-   * Disposes the registry.
-   */
-  void dispose();
-  
+	/**
+	 * <p>
+	 * Adds a {@link IMetamodel} to this {@link IMetamodelRegistry}.
+	 * </p>
+	 * .
+	 * 
+	 * @param metamodel
+	 *          The {@link IMetamodel} that shall be added.
+	 */
+	void addMetamodel(IMetamodel metamodel);
+
+	/**
+	 * <p>
+	 * Disposes this {@link IMetamodelRegistry}.
+	 * </p>
+	 */
+	void dispose();
+
+	/**
+	 * <p>
+	 * Returns the {@link IMetamodel} with the given id or <code>null</code> if no
+	 * {@link IMetamodel} with that id is registered.
+	 * </p>
+	 * 
+	 * @param id
+	 *          An identifier for a {@link IMetamodel}.
+	 * 
+	 * @return An {@link IMetamodel} instance or <code>null</code>.
+	 */
+	IMetamodel getMetamodel(String id);
+
+	/**
+	 * <p>
+	 * Returns all {@link IMetamodel}s registered with this
+	 * {@link IMetamodelRegistry}.
+	 * </p>
+	 * 
+	 * @return An array of {@link IMetamodel} instances.
+	 */
+	IMetamodel[] getMetamodels();
 }

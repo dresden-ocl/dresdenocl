@@ -35,33 +35,37 @@ package tudresden.ocl20.pivot.modelbus.descriptor;
 import org.eclipse.core.runtime.IExtension;
 import org.eclipse.ui.IPluginContribution;
 
-
 /**
- * This interface represents the minimal functionality which should be exposed by a 
- * descriptor representing an extension for a particular extension point.
- *
+ * <p>
+ * This interface represents the minimal functionality which should be exposed
+ * by a descriptor representing an extension for a particular extension point.
+ * </p>
+ * 
  * @author Matthias Braeuer
- * @version 1.0 05.04.2007
  */
 public interface IDescriptor extends IPluginContribution {
-  
-  /**
-   * The name of the attribute containing the id. This is the string <code>"id"</code>. 
-   */
-  String ATT_ID = "id"; //$NON-NLS-1$
-  
-  /**
-   * Returns the id of the corresponding extension.
-   * 
-   * @return a <code>String</code> that uniquely identifies an extension
-   */
-  String getId();
-  
-  /**
-   * Returns the {@link IExtension} that is represented by this descriptor.
-   * 
-   * @return an <code>IExtension</code> instance
-   */
-  IExtension getDeclaringExtension();
 
+	/**
+	 * The name of the attribute containing the id. This is the string
+	 * <code>"id"</code>.
+	 */
+	String ATT_ID = "id"; //$NON-NLS-1$
+
+	/**
+	 * <p>
+	 * Returns the {@link IExtension} that is represented by this descriptor.
+	 * </p>
+	 * 
+	 * @return an {@link IExtension} instance.
+	 */
+	IExtension getDeclaringExtension();
+
+	/**
+	 *<p>
+	 * Returns the id of the corresponding extension.
+	 * </p>
+	 * 
+	 * @return a {@link String} that uniquely identifies an extension.
+	 */
+	String getId();
 }

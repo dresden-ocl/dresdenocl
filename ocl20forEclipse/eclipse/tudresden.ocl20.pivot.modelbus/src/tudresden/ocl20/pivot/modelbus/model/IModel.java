@@ -40,88 +40,120 @@ import tudresden.ocl20.pivot.pivotmodel.Namespace;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 
 /**
- * 
+ * <p>
+ * Represents a model imported into Dresden OCL2 for Eclipse.
+ * </p>
  * 
  * @author Matthias Braeuer
- * @version 1.0 30.03.2007
  */
 public interface IModel {
 
-  /**
-   * Returns a name that can be used to render a visual representation of the model. This may be the
-   * file name or another characteristic string.
-   * 
-   * @return a <code>String</code> that identifies this model
-   */
-  String getDisplayName();
+	/**
+	 * <p>
+	 * This operation allows to find a {@link Namespace} anywhere in the
+	 * corresponding {@link IModel}. It is an additional operation defined in the
+	 * OCL Specification, Section 12.12. The path name needs to be fully
+	 * qualified. If no {@link Namespace} with this path name is found,
+	 * <code>null</code> is returned. An empty path name results in the
+	 * {@link #getRootNamespace()}.
+	 * </p>
+	 * 
+	 * @param pathName
+	 *          A fully qualified name identifying a {@link Namespace}.
+	 * 
+	 * @return A {@link Namespace} instance or <code>null</code>.
+	 * 
+	 * @throws ModelAccessException
+	 *           If an error occurs when accessing the adapted model.
+	 */
+	Namespace findNamespace(List<String> pathName) throws ModelAccessException;
 
-  /**
-   * Returns the {@link IMetamodel metamodel} for this model.
-   * 
-   * @return an <code>IMetamodel</code> instance
-   */
-  IMetamodel getMetamodel();
+	/**
+	 * <p>
+	 * This operation allows to find a {@link Type} anywhere in the corresponding
+	 * {@link IModel}. It is an additional operation defined in the OCL
+	 * Specification, Section 12.12. The specification states that "the pathName
+	 * need not be a fully qualified name (it may be), as long as it can uniquely
+	 * identify the [type] somewhere in the [..] model. If a [type] name occurs
+	 * more than once, it needs to be qualified with its owning [namespace]
+	 * (recursively) until the qualified name is unique. If more than one [type]
+	 * is found, the operation returns [null]" (UML-specific references in the
+	 * quotation have been adapted to fit the Pivot Model).
+	 * </p>
+	 * 
+	 * @param pathName
+	 *          A path name that uniquely identifies a {@link Type}.
+	 * 
+	 * @return A {@link Type} instance or <code>null</code>.
+	 * 
+	 * @throws ModelAccessException
+	 *           If an error occurs when accessing the adapted model.
+	 */
+	Type findType(List<String> pathName) throws ModelAccessException;
 
-  /**
-   * Returns the root {@link Namespace namespace} in the model. This <code>Namespace</code>
-   * represents the root of the model hierachy. It is not itself part of the model, but merely
-   * serves as a container for other model elements (including other namespaces and
-   * {@link Type types}). In particular, this namespace is not taken into account when looking for
-   * namespaces and types using {@link #findNamespace(List)} or {@link #findType(List)},
-   * respectively.
-   * 
-   * @return a <code>Namespace</code> instance
-   * 
-   * @throws ModelAccessException if the root namespace cannot be retrieved from the model
-   */
-  Namespace getRootNamespace() throws ModelAccessException;
+	/**
+	 * <p>
+	 * Returns a name that can be used to render a visual representation of the
+	 * model. This may be the file name or another characteristic string.
+	 * </p>
+	 * 
+	 * @return A {@link String} that identifies this {@link IModel}.
+	 */
+	String getDisplayName();
 
-  /**
-   * This operation allows to find a {@link Type} anywhere in the corresponding model. It is an
-   * additional operation defined in the OCL Specification, Section 12.12. The specification states
-   * that "the pathName need not be a fully qualified name (it may be), as long as it can uniquely
-   * identify the [type] somewhere in the [..] model. If a [type] name occurs more than once, it
-   * needs to be qualified with its owning [namespace] (recursively) until the qualified name is
-   * unique. If more than one [type] is found, the operation returns [null]" (UML-specific
-   * references in the quotation have been adapted to fit the Pivot Model).
-   * 
-   * @param pathName a path name that uniquely identifies a type
-   * 
-   * @return a <code>Type</code> instance or <code>null</code>
-   * 
-   * @throws ModelAccessException if an error occurs when accessing the adapted model
-   */
-  Type findType(List<String> pathName) throws ModelAccessException;
+	/**
+	 * <p>
+	 * Returns the {@link IModelFactory} of this {@link IModel}.
+	 * </p>
+	 * 
+	 * @return The {@link IModelFactory} of this {@link IModel}.
+	 */
+	IModelFactory getFactory();
 
-  /**
-   * This operation allows to find a {@link Namespace} anywhere in the corresponding model. It is an
-   * additional operation defined in the OCL Specification, Section 12.12. The path name needs to be
-   * fully qualified. If no namespace with this path name is found, <code>null</code> is returned.
-   * An empty path name results in the {@link #getRootNamespace() root namespace}.
-   * 
-   * @param pathName a fully qualified name identifying a namespace
-   * 
-   * @return a <code>Namespace</code> instance or <code>null</code>
-   * 
-   * @throws ModelAccessException if an error occurs when accessing the adapted model
-   */
-  Namespace findNamespace(List<String> pathName) throws ModelAccessException;
+	/**
+	 * <p>
+	 * Returns the {@link IMetamodel} for this {@link IModel}.
+	 * </p>
+	 * 
+	 * @return An {@link IMetamodel} instance.
+	 */
+	IMetamodel getMetamodel();
 
-  /**
-   * @return
-   */
-  IModelFactory getFactory();
+	/**
+	 * <p>
+	 * Returns the {@link IOclLibraryProvider} of this {@link IModel}.
+	 * </p>
+	 * 
+	 * @return The {@link IOclLibraryProvider} of this {@link IModel}.
+	 */
+	IOclLibraryProvider getOclLibraryProvider();
 
-  /**
-   * @return
-   */
-  IOclLibraryProvider getOclLibraryProvider();
-  
-  /**
-   * Returns a {@link ITypeResolver type resolver} object that can be used to find types in the
-   * OCL standard library and in this model.
-   * 
-   * @return a <code>ITypeResolver</code> instance
-   */
-  ITypeResolver getTypeResolver();
+	/**
+	 * <p>
+	 * Returns the root {@link Namespace} of the {@link IModel}. This
+	 * {@link Namespace} represents the root of the model hierarchy. It is not
+	 * itself part of the {@link IModel}, but merely serves as a container for
+	 * other model elements (including other {@link Namespace}s and {@link Type}
+	 * s). In particular, this {@link Namespace} is not taken into account when
+	 * looking for {@link Namespace} and {@link Type}s using
+	 * {@link #findNamespace(List)} or {@link #findType(List)}, respectively.
+	 * </p>
+	 * 
+	 * @return A {@link Namespace} instance.
+	 * 
+	 * @throws ModelAccessException
+	 *           If the root {@link Namespace} cannot be retrieved from the
+	 *           {@link IModel}.
+	 */
+	Namespace getRootNamespace() throws ModelAccessException;
+
+	/**
+	 * <p>
+	 * Returns a {@link ITypeResolver} object that can be used to find types in
+	 * the OCL standard library and in this {@link IModel}.
+	 * </p>
+	 * 
+	 * @return An {@link ITypeResolver} instance.
+	 */
+	ITypeResolver getTypeResolver();
 }

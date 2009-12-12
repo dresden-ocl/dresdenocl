@@ -40,66 +40,99 @@ import org.eclipse.core.runtime.IExtensionPoint;
 
 import tudresden.ocl20.pivot.modelbus.IModelBusConstants;
 import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
+import tudresden.ocl20.pivot.modelbus.metamodel.IMetamodel;
 import tudresden.ocl20.pivot.modelbus.metamodel.IMetamodelRegistry;
 
 /**
- * A simple helper class that can fill an {@link IMetamodelRegistry} with metamodels read from
- * extensions of the 'metamodels' extension point.
+ * <p>
+ * A simple helper class that can fill an {@link IMetamodelRegistry} with
+ * {@link IMetamodel}s read from extensions of the 'metamodels'
+ * {@link IExtensionPoint}.
+ * </p>
  * 
  * @author Matthias Braeuer
- * @version 1.0 03.04.2007
  */
 public class MetamodelRegistryReader {
 
-  // a Logger for this class
-  private static final Logger logger = ModelBusPlugin.getLogger(MetamodelRegistryReader.class);
+	/** A {@link Logger} for this class. */
+	private static final Logger LOGGER =
+			ModelBusPlugin.getLogger(MetamodelRegistryReader.class);
 
-  /**
-   * @param extensionPoint
-   * @param registry
-   */
-  public void read(IExtensionPoint extensionPoint, IMetamodelRegistry registry) {
-    IExtension[] extensions = extensionPoint.getExtensions();
+	/**
+	 * <p>
+	 * Reads the {@link IMetamodel} of a given {@link IConfigurationElement} into
+	 * a given {@link IMetamodelRegistry}.
+	 * </p>
+	 * 
+	 * @param configElement
+	 *          The {@link IConfigurationElement} to be read.
+	 * @param registry
+	 *          The {@link IMetamodelRegistry}.
+	 */
+	public void read(IConfigurationElement configElement,
+			IMetamodelRegistry registry) {
 
-    for (int i = 0; i < extensions.length; i++) {
-      read(extensions[i],registry);
-    }
-  }
+		if (configElement.getName().equals(IModelBusConstants.TAG_METAMODEL)) {
 
-  /**
-   * @param extension
-   * @param registry
-   */
-  public void read(IExtension extension, IMetamodelRegistry registry) {
-    IConfigurationElement[] elements = extension.getConfigurationElements();
+			try {
+				registry.addMetamodel(new MetamodelDescriptor(configElement));
+			}
 
-    for (int i = 0; i < elements.length; i++) {
-      read(elements[i],registry);
-    }
-  }
+			catch (Exception e) {
+				LOGGER
+						.warn(
+								"An error was encountered when reading config element " + configElement, e); //$NON-NLS-1$
+			}
+			// end catch.
+		}
 
-  /**
-   * @param configElement
-   * @param registry
-   */
-  public void read(IConfigurationElement configElement, IMetamodelRegistry registry) {
+		else {
+			LOGGER.warn("Unable to read config element " + configElement //$NON-NLS-1$
+					+ " because its tag name is not recognized."); //$NON-NLS-1$
+		}
+		// end else.
+	}
 
-    if (configElement.getName().equals(IModelBusConstants.TAG_METAMODEL)) {
+	/**
+	 * <p>
+	 * Reads all {@link IMetamodel} provided by a given {@link IExtension} into a
+	 * given {@link IMetamodelRegistry}.
+	 * </p>
+	 * 
+	 * @param extension
+	 *          The {@link IExtension} whose {@link IMetamodel}s shall be read.
+	 * @param registry
+	 *          The {@link IMetamodelRegistry}.
+	 */
+	public void read(IExtension extension, IMetamodelRegistry registry) {
 
-      try {
-        registry.addMetamodel(new MetamodelDescriptor(configElement));
-      }
+		IConfigurationElement[] elements;
+		elements = extension.getConfigurationElements();
 
-      catch (Exception e) {
-        logger.warn("An error was encountered when reading config element " + configElement,e); //$NON-NLS-1$
-      }
+		for (int index = 0; index < elements.length; index++) {
+			this.read(elements[index], registry);
+		}
+		// end for.
+	}
 
-    }
+	/**
+	 * <p>
+	 * Reads the {@link IExtension}s of a given {@link IExtensionPoint} as
+	 * {@link IMetamodel}s into a given {@link IMetamodelRegistry}.</p<
+	 * 
+	 * @param extensionPoint
+	 *          The {@link IExtensionPoint}.
+	 * @param registry
+	 *          The {@link IMetamodelRegistry}.
+	 */
+	public void read(IExtensionPoint extensionPoint, IMetamodelRegistry registry) {
 
-    else {
-      logger.warn("Unable to read config element " + configElement //$NON-NLS-1$
-          + " because its tag name is not recognized."); //$NON-NLS-1$
-    }
+		IExtension[] extensions;
+		extensions = extensionPoint.getExtensions();
 
-  }
+		for (int index = 0; index < extensions.length; index++) {
+			this.read(extensions[index], registry);
+		}
+		// end for.
+	}
 }

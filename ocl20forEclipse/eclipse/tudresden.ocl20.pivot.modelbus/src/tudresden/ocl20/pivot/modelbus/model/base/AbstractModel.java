@@ -49,52 +49,55 @@ import tudresden.ocl20.pivot.pivotmodel.PrimitiveTypeKind;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 
 /**
+ * <p>
  * Abstract base implementation of the {@link IModel} interface.
+ * </p>
  * 
  * @author Matthias Braeuer
  */
 public abstract class AbstractModel implements IModel {
 
-	/**
-	 * Logger for this class
-	 */
+	/** The {@link Logger} for this class. */
 	private static final Logger LOGGER =
 			ModelBusPlugin.getLogger(AbstractModel.class);
 
-	// this model's name as displayed to clients
+	/** The {@link IModel}'s name as displayed to clients. */
 	private String displayName;
 
-	// the metamodel of this model
+	/** The {@link IMetamodel} of this {@link IModel}. */
 	private IMetamodel metamodel;
 
-	// a cached instance of the OCL Library provider
-	private IOclLibraryProvider oclLibraryProvider;
-
-	// cached instance of the model factory
+	/** A cached instance of the IModelFactory. */
 	private IModelFactory modelFactory;
 
-	// the type resolver of this model
+	/** A cached instance of the IOclLibraryProvider. */
+	private IOclLibraryProvider oclLibraryProvider;
+
+	/** The IModelFactory of this {@link IModel}. */
 	private ITypeResolver typeResolver;
 
 	/**
+	 * <p>
 	 * Constructor to be called by subclasses. The <code>displayName</code> is a
 	 * name that should be used to identify this model in a graphical user
 	 * interface. This may be the file name or another identifier.
+	 * </p>
 	 * 
 	 * @param displayName
-	 *          a name for this model
+	 *          A name for this {@link IModel}.
 	 * @param metamodel
-	 *          the metamodel for this model
+	 *          The {@link IMetamodel} for this {@link IModel}.
 	 */
 	protected AbstractModel(String displayName, IMetamodel metamodel) {
 
-		// use an empty string if display name is null
+		/* Use an empty string if display name is null. */
 		this.displayName = StringUtils.defaultString(displayName);
 
 		if (metamodel == null) {
 			throw new IllegalArgumentException(
 					"The metamodel reference must not be null."); //$NON-NLS-1$
 		}
+		// no else.
 
 		this.metamodel = metamodel;
 	}
@@ -106,7 +109,7 @@ public abstract class AbstractModel implements IModel {
 	public Namespace findNamespace(List<String> pathName)
 			throws ModelAccessException {
 
-		/* Eventually log the entry into this method. */
+		/* Probably log the entry into this method. */
 		if (LOGGER.isDebugEnabled()) {
 			String msg;
 
@@ -130,26 +133,31 @@ public abstract class AbstractModel implements IModel {
 		/* By default search in the root name space. */
 		Namespace namespace = getRootNamespace();
 
-		/* Eventually remove the root package from the path name. */
-		if (pathName.get(0).equals(IModelBusConstants.ROOT_PACKAGE_NAME)) {
-			pathName.remove(0);
-		}
-		// no else.
+		if (pathName.size() > 0) {
 
-		/* Iterate through the namespace hierarchy. */
-		for (String namespaceName : pathName) {
-
-			/* Search for the next nested name space. */
-			namespace = namespace.lookupNamespace(namespaceName);
-
-			/* Eventually cancel the search. */
-			if (namespace == null) {
-				break;
+			/* Probably remove the root package from the path name. */
+			if (pathName.get(0).equals(IModelBusConstants.ROOT_PACKAGE_NAME)) {
+				pathName.remove(0);
 			}
 			// no else.
-		}
 
-		/* Eventually log the exit from this method. */
+			/* Iterate through the name space hierarchy. */
+			for (String namespaceName : pathName) {
+
+				/* Search for the next nested name space. */
+				namespace = namespace.lookupNamespace(namespaceName);
+
+				/* Probably cancel the search. */
+				if (namespace == null) {
+					break;
+				}
+				// no else.
+			}
+			// end for.
+		}
+		// no else (path name is empty).
+
+		/* Probably log the exit from this method. */
 		if (LOGGER.isDebugEnabled()) {
 			String msg;
 
@@ -169,7 +177,7 @@ public abstract class AbstractModel implements IModel {
 	 */
 	public Type findType(List<String> pathName) throws ModelAccessException {
 
-		/* Eventually log the entry into this method. */
+		/* Probably log the entry into this method. */
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("findType(pathName=" + pathName + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
@@ -183,12 +191,25 @@ public abstract class AbstractModel implements IModel {
 		// no else.
 
 		Type result = null;
+		boolean isAbsolutePath = false;
 
-		/* Eventually remove the root package from the pathName. */
+		/* Probably remove the root package from the pathName. */
 		if (pathName.get(0).equals(IModelBusConstants.ROOT_PACKAGE_NAME)) {
+
 			pathName.remove(0);
+
+			isAbsolutePath = true;
+
+			if (pathName.size() == 0) {
+				throw new IllegalArgumentException(
+						"The path name must not be the root package name."); //$NON-NLS-1$
+			}
+			// no else.
 		}
 		// no else.
+
+		List<Type> foundTypes;
+		foundTypes = new ArrayList<Type>();
 
 		/* If the path has only one element check for a primitive type. */
 		if (pathName.size() == 1) {
@@ -198,58 +219,117 @@ public abstract class AbstractModel implements IModel {
 			primitiveName = pathName.get(0);
 
 			for (PrimitiveTypeKind aKind : PrimitiveTypeKind.VALUES) {
+
 				if (primitiveName.equals(aKind.getName())) {
 					primitiveType = PivotModelFactory.INSTANCE.createPrimitiveType();
 					primitiveType.setKind(aKind);
 					primitiveType.setName(aKind.getName());
-					result = primitiveType;
-					break;
+					foundTypes.add(primitiveType);
 				}
 				// no else.
 			}
+			// end for.
+		}
+		// no else.
+
+		/* Search for Types that match this path name. */
+		foundTypes.addAll(this.findTypeHere(this.getRootNamespace(), pathName,
+				!isAbsolutePath));
+
+		/* Check if more than one Type was found. */
+		if (foundTypes.size() > 1) {
+			String msg;
+
+			msg =
+					"More than one type with path name " + pathName + " were found: " + foundTypes; //$NON-NLS-1$//$NON-NLS-2$
+			LOGGER.warn(msg);
+
+			result = null;
 		}
 
-		if (result == null) {
-			List<Type> foundTypes;
+		/* Else check if at least one type has been found. */
+		else if (foundTypes.size() == 0) {
+			String msg;
 
-			/* Search for Types that match this path name. */
-			foundTypes = findTypeHere(this.getRootNamespace(), pathName, true);
+			msg = "Type with path name " + pathName + " was not found: " + foundTypes; //$NON-NLS-1$//$NON-NLS-2$
+			LOGGER.warn(msg);
 
-			/* Check if more than one Type was found. */
-			if (foundTypes.size() > 1) {
-				String msg;
-
-				msg =
-						"More than one type with path name " + pathName + " were found: " + foundTypes; //$NON-NLS-1$//$NON-NLS-2$
-				LOGGER.warn(msg);
-
-				result = null;
-			}
-
-			/* Else check if at least one type has been found. */
-			else if (foundTypes.size() == 0) {
-				String msg;
-
-				msg =
-						"Type with path name " + pathName + " was not found: " + foundTypes; //$NON-NLS-1$//$NON-NLS-2$
-				LOGGER.warn(msg);
-
-				result = null;
-			}
-
-			/* Else return the found type. */
-			else {
-				result = foundTypes.get(0);
-			}
+			result = null;
 		}
 
-		/* Eventually log the exit from this method. */
+		/* Else return the found type. */
+		else {
+			result = foundTypes.get(0);
+		}
+		// end else.
+
+		/* Probably log the exit from this method. */
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("findType() - exit - return value=" + result); //$NON-NLS-1$
 		}
 		// no else.
 
 		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see tudresden.ocl20.pivot.modelbus.IModel#getDisplayName()
+	 */
+	public String getDisplayName() {
+
+		return this.displayName;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see tudresden.ocl20.pivot.modelbus.IModel#getFactory()
+	 */
+	public IModelFactory getFactory() {
+
+		/* Lazily create the model factory. */
+		if (this.modelFactory == null) {
+			this.modelFactory = new ModelFactory(this);
+		}
+
+		return this.modelFactory;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see tudresden.ocl20.pivot.modelbus.IModel#getMetamodel()
+	 */
+	public IMetamodel getMetamodel() {
+
+		return this.metamodel;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see tudresden.ocl20.pivot.modelbus.IModel#getOclLibraryProvider()
+	 */
+	public IOclLibraryProvider getOclLibraryProvider() {
+
+		/* Lazily create an OCL Library provider. */
+		if (this.oclLibraryProvider == null) {
+			this.oclLibraryProvider = new OclLibraryProvider();
+		}
+
+		return this.oclLibraryProvider;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see tudresden.ocl20.pivot.modelbus.IModel#getTypeResolver()
+	 */
+	public ITypeResolver getTypeResolver() {
+
+		if (this.typeResolver == null) {
+			this.typeResolver = new TypeResolver(this);
+		}
+		// no else.
+
+		return this.typeResolver;
 	}
 
 	/**
@@ -273,7 +353,7 @@ public abstract class AbstractModel implements IModel {
 	private List<Type> findTypeHere(Namespace namespace, List<String> pathName,
 			boolean searchAllNestedNamespaces) {
 
-		/* Eventually log the entry into this method. */
+		/* Probably log the entry into this method. */
 		if (LOGGER.isDebugEnabled()) {
 			String msg;
 
@@ -327,72 +407,12 @@ public abstract class AbstractModel implements IModel {
 			}
 		}
 
-		/* Eventually log the exit from this method. */
+		/* Probably log the exit from this method. */
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("findTypeHere() - exit - return value=" + result); //$NON-NLS-1$
 		}
 		// no else.
 
 		return result;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.modelbus.IModel#getDisplayName()
-	 */
-	public String getDisplayName() {
-
-		return displayName;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.modelbus.IModel#getMetamodel()
-	 */
-	public IMetamodel getMetamodel() {
-
-		return metamodel;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.modelbus.IModel#getFactory()
-	 */
-	public IModelFactory getFactory() {
-
-		// lazily create the model factory
-		if (modelFactory == null) {
-			modelFactory = new ModelFactory(this);
-		}
-
-		return modelFactory;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.modelbus.IModel#getOclLibraryProvider()
-	 */
-	public IOclLibraryProvider getOclLibraryProvider() {
-
-		// lazily create an OCL Library provider
-		if (oclLibraryProvider == null) {
-			oclLibraryProvider = new OclLibraryProvider();
-		}
-
-		return oclLibraryProvider;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.modelbus.IModel#getTypeResolver()
-	 */
-	public ITypeResolver getTypeResolver() {
-
-		if (typeResolver == null) {
-			typeResolver = new TypeResolver(this);
-		}
-
-		return typeResolver;
-
 	}
 }
