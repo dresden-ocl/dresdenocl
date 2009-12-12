@@ -18,6 +18,7 @@ with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
 package tudresden.ocl20.pivot.modelbus.ui.internal.wizards.util;
 
+import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.resource.JFaceResources;
 import org.eclipse.jface.resource.LocalResourceManager;
 import org.eclipse.jface.resource.ResourceManager;
@@ -52,22 +53,22 @@ public class ModelLabelProvider extends LabelProvider implements ILabelProvider 
 	 * </p>
 	 */
 	public ModelLabelProvider() {
+
 		this.resources = new LocalResourceManager(JFaceResources.getResources());
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see org.eclipse.jface.viewers.BaseLabelProvider#dispose()
 	 */
 	@Override
 	public void dispose() {
+
 		this.resources.dispose();
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see org.eclipse.jface.viewers.LabelProvider#getImage(java.lang.Object)
 	 */
 	@Override
@@ -87,14 +88,24 @@ public class ModelLabelProvider extends LabelProvider implements ILabelProvider 
 			aMetaModel = aModel.getMetamodel();
 
 			/*
-			 * Check if the model instance type has been added and configured
-			 * via the modelInstanceTypes extension point.
+			 * Check if the model instance type has been added and configured via the
+			 * modelInstanceTypes extension point.
 			 */
 			if (aMetaModel instanceof IMetamodelDescriptor) {
 				IMetamodelDescriptor mmDescriptor;
 
 				mmDescriptor = (IMetamodelDescriptor) aMetaModel;
-				result = this.resources.createImage(mmDescriptor.getIcon());
+
+				ImageDescriptor imageDescriptor;
+				imageDescriptor =
+						ImageDescriptor.createFromURL(mmDescriptor.getIconURL());
+
+				if (imageDescriptor == null) {
+					imageDescriptor = ImageDescriptor.getMissingImageDescriptor();
+				}
+				// no else.
+
+				result = this.resources.createImage(imageDescriptor);
 			}
 			// no else.
 		}
@@ -109,8 +120,8 @@ public class ModelLabelProvider extends LabelProvider implements ILabelProvider 
 	 * </p>
 	 * 
 	 * @param element
-	 *            The element which name should be returned. <strong>Should be
-	 *            an instance of {@link IModel}!</strong>
+	 *          The element which name should be returned. <strong>Should be an
+	 *          instance of {@link IModel}!</strong>
 	 * 
 	 * @return The name of the given {@link IModel}.
 	 */

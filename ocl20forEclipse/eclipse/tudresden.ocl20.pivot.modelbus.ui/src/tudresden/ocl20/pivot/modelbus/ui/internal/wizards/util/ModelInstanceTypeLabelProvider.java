@@ -18,6 +18,7 @@ with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
 package tudresden.ocl20.pivot.modelbus.ui.internal.wizards.util;
 
+import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.resource.JFaceResources;
 import org.eclipse.jface.resource.LocalResourceManager;
 import org.eclipse.jface.resource.ResourceManager;
@@ -49,22 +50,22 @@ public class ModelInstanceTypeLabelProvider extends LabelProvider implements
 	 * </p>
 	 */
 	public ModelInstanceTypeLabelProvider() {
+
 		this.resources = new LocalResourceManager(JFaceResources.getResources());
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see org.eclipse.jface.viewers.BaseLabelProvider#dispose()
 	 */
 	@Override
 	public void dispose() {
+
 		this.resources.dispose();
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see org.eclipse.jface.viewers.LabelProvider#getImage(java.lang.Object)
 	 */
 	@Override
@@ -73,14 +74,23 @@ public class ModelInstanceTypeLabelProvider extends LabelProvider implements
 		Image result;
 
 		/*
-		 * Check if the model instance type has been added and configured via
-		 * the modelInstanceTypes extension point.
+		 * Check if the model instance type has been added and configured via the
+		 * modelInstanceTypes extension point.
 		 */
 		if (element instanceof IModelInstanceTypeDescriptor) {
 			IModelInstanceTypeDescriptor miType;
 
 			miType = (IModelInstanceTypeDescriptor) element;
-			result = this.resources.createImage(miType.getIcon());
+
+			ImageDescriptor imageDescriptor;
+			imageDescriptor = ImageDescriptor.createFromURL(miType.getIconURL());
+
+			if (imageDescriptor == null) {
+				imageDescriptor = ImageDescriptor.getMissingImageDescriptor();
+			}
+			// no else.
+
+			result = this.resources.createImage(imageDescriptor);
 		}
 
 		else {
@@ -92,7 +102,6 @@ public class ModelInstanceTypeLabelProvider extends LabelProvider implements
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see org.eclipse.jface.viewers.LabelProvider#getText(java.lang.Object)
 	 */
 	@Override

@@ -18,6 +18,7 @@ with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
 package tudresden.ocl20.pivot.modelbus.ui.internal.wizards.util;
 
+import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.resource.JFaceResources;
 import org.eclipse.jface.resource.LocalResourceManager;
 import org.eclipse.jface.resource.ResourceManager;
@@ -45,22 +46,22 @@ public class MetaModelLabelProvider extends LabelProvider implements
 	 * </p>
 	 */
 	public MetaModelLabelProvider() {
+
 		this.resources = new LocalResourceManager(JFaceResources.getResources());
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see org.eclipse.jface.viewers.BaseLabelProvider#dispose()
 	 */
 	@Override
 	public void dispose() {
+
 		this.resources.dispose();
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see org.eclipse.jface.viewers.LabelProvider#getImage(java.lang.Object)
 	 */
 	@Override
@@ -69,15 +70,25 @@ public class MetaModelLabelProvider extends LabelProvider implements
 		Image result;
 
 		/*
-		 * Check if the meta model has been added and configured via the
-		 * metamodels extension point.
+		 * Check if the meta model has been added and configured via the metamodels
+		 * extension point.
 		 */
 		if (element instanceof IMetamodelDescriptor) {
 			IMetamodelDescriptor metamodel;
 
 			metamodel = (IMetamodelDescriptor) element;
 
-			result = this.resources.createImage(metamodel.getIcon());
+			ImageDescriptor imageDescriptor;
+			imageDescriptor =
+					ImageDescriptor.createFromURL(((IMetamodelDescriptor) metamodel)
+							.getIconURL());
+
+			if (imageDescriptor == null) {
+				imageDescriptor = ImageDescriptor.getMissingImageDescriptor();
+			}
+			// no else.
+
+			result = this.resources.createImage(imageDescriptor);
 		}
 
 		else {
@@ -89,7 +100,6 @@ public class MetaModelLabelProvider extends LabelProvider implements
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see org.eclipse.jface.viewers.LabelProvider#getText(java.lang.Object)
 	 */
 	@Override

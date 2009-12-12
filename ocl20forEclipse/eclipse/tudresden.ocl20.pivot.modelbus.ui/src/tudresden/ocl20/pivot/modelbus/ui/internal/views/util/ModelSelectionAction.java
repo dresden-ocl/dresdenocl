@@ -22,6 +22,8 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.IAction;
+import org.eclipse.jface.resource.ImageDescriptor;
+
 import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
 import tudresden.ocl20.pivot.modelbus.metamodel.IMetamodel;
 import tudresden.ocl20.pivot.modelbus.metamodel.IMetamodelDescriptor;
@@ -63,7 +65,18 @@ public class ModelSelectionAction extends Action implements IAction {
 		 * descriptor.
 		 */
 		if (metaModel instanceof IMetamodelDescriptor) {
-			this.setImageDescriptor(((IMetamodelDescriptor) metaModel).getIcon());
+
+			ImageDescriptor imageDescriptor;
+			imageDescriptor =
+					ImageDescriptor.createFromURL(((IMetamodelDescriptor) metaModel)
+							.getIconURL());
+
+			if (imageDescriptor == null) {
+				imageDescriptor = ImageDescriptor.getMissingImageDescriptor();
+			}
+			// no else.
+
+			this.setImageDescriptor(imageDescriptor);
 		}
 		// no else.
 
