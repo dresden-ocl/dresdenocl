@@ -33,7 +33,6 @@
 package tudresden.ocl20.pivot.modelbus.descriptor;
 
 import org.eclipse.core.runtime.IExtension;
-import org.eclipse.ui.IPluginContribution;
 
 /**
  * <p>
@@ -43,7 +42,7 @@ import org.eclipse.ui.IPluginContribution;
  * 
  * @author Matthias Braeuer
  */
-public interface IDescriptor extends IPluginContribution {
+public interface IDescriptor {
 
 	/**
 	 * The name of the attribute containing the id. This is the string

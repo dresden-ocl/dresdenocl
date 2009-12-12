@@ -32,6 +32,8 @@
  */
 package tudresden.ocl20.pivot.modelbus.descriptor;
 
+import java.net.URL;
+
 import javax.management.Descriptor;
 
 import org.apache.commons.lang.IllegalClassException;
@@ -42,8 +44,8 @@ import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IExtension;
-import org.eclipse.jface.resource.ImageDescriptor;
-import org.eclipse.ui.plugin.AbstractUIPlugin;
+import org.eclipse.core.runtime.Platform;
+import org.osgi.framework.Bundle;
 
 import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
 
@@ -61,7 +63,7 @@ import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
 public abstract class AbstractDescriptor implements IDescriptor {
 
 	/** a {@link Logger} for this class. */
-	private static final Logger logger =
+	private static final Logger LOGGER =
 			ModelBusPlugin.getLogger(AbstractDescriptor.class);
 
 	/** The id of the extension. */
@@ -139,7 +141,7 @@ public abstract class AbstractDescriptor implements IDescriptor {
 	 */
 	@Override
 	public String toString() {
-	
+
 		return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE).append(
 				"id", id).toString(); //$NON-NLS-1$
 	}
@@ -159,8 +161,8 @@ public abstract class AbstractDescriptor implements IDescriptor {
 	 */
 	protected void checkAttribute(String attributeName) {
 
-		if (logger.isDebugEnabled()) {
-			logger
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER
 					.debug("checkAttribute(attributeName=" + attributeName + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 		// no else.
@@ -168,8 +170,8 @@ public abstract class AbstractDescriptor implements IDescriptor {
 		// simple use the checks implemented in #getAttribute()
 		getAttribute(attributeName, true);
 
-		if (logger.isDebugEnabled()) {
-			logger.debug("checkAttribute() - exit"); //$NON-NLS-1$
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("checkAttribute() - exit"); //$NON-NLS-1$
 		}
 		// no else.
 	}
@@ -192,8 +194,8 @@ public abstract class AbstractDescriptor implements IDescriptor {
 	 */
 	protected <T> T createInstance(String attributeName, Class<T> type) {
 
-		if (logger.isDebugEnabled()) {
-			logger.debug("createInstance(attributeName=" + attributeName + //$NON-NLS-1$
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("createInstance(attributeName=" + attributeName + //$NON-NLS-1$
 					", type=" + type + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 		// no else.
@@ -219,8 +221,8 @@ public abstract class AbstractDescriptor implements IDescriptor {
 
 		T returnT = type.cast(instance);
 
-		if (logger.isDebugEnabled()) {
-			logger.debug("createInstance() - exit - return value=" + returnT); //$NON-NLS-1$
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("createInstance() - exit - return value=" + returnT); //$NON-NLS-1$
 		}
 
 		return returnT;
@@ -242,8 +244,8 @@ public abstract class AbstractDescriptor implements IDescriptor {
 	 */
 	protected String getAttribute(String attributeName, boolean required) {
 
-		if (logger.isDebugEnabled()) {
-			logger
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER
 					.debug("getAttribute(attributeName=" + attributeName + ", required=" + required //$NON-NLS-1$ //$NON-NLS-2$
 							+ ") - enter"); //$NON-NLS-1$
 		}
@@ -257,8 +259,8 @@ public abstract class AbstractDescriptor implements IDescriptor {
 		}
 		// no else.
 
-		if (logger.isDebugEnabled()) {
-			logger.debug("getAttribute() - exit - return value=" + value); //$NON-NLS-1$
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("getAttribute() - exit - return value=" + value); //$NON-NLS-1$
 		}
 		// no else.
 
@@ -267,41 +269,49 @@ public abstract class AbstractDescriptor implements IDescriptor {
 
 	/**
 	 * <p>
-	 * Helper method for subclasses that returns an icon resource for the given
-	 * attribute name. If no icon can be found, a default icon is returned.
+	 * Helper method for subclasses that returns an icon's {@link URL} for the
+	 * given attribute name. If no {@link URL} can be found, <code>null</code> is
+	 * returned.
 	 * </p>
 	 */
-	protected ImageDescriptor getImageDescriptor(String attributeName) {
+	protected URL getIconURL(String attributeName) {
 
-		if (logger.isDebugEnabled()) {
-			logger.debug("getIcon(attributeName=" + attributeName + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("getIconURL(attributeName=" + attributeName + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
+		// no else.
+
+		URL result;
+		result = null;
 
 		String iconName;
-		ImageDescriptor icon = null;
 
-		// get the value of the icon attribute
+		/* Get the value of the icon attribute. */
 		iconName = configElement.getAttribute(attributeName);
 
-		// try to get the icon
+		/* Try to get the URL. */
 		if (iconName != null) {
-			icon =
-					AbstractUIPlugin.imageDescriptorFromPlugin(getDeclaringExtension()
-							.getContributor().getName(), iconName);
+			Bundle metaModelBundle;
+			metaModelBundle =
+					Platform.getBundle(this.getDeclaringExtension().getContributor()
+							.getName());
+
+			result = metaModelBundle.getResource(iconName);
 		}
 
-		// If no icon was found use the error icon
-		if (icon == null) {
-			logger
+		/* If no icon was found use the error icon. */
+		if (result == null) {
+			LOGGER
 					.warn("No icon resource found for attribute " + attributeName + " in extension " + id); //$NON-NLS-1$ //$NON-NLS-2$
-			icon = ImageDescriptor.getMissingImageDescriptor();
 		}
+		// no else.
 
-		if (logger.isDebugEnabled()) {
-			logger.debug("getIcon() - exit - return value=" + icon); //$NON-NLS-1$
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("getIconURL() - exit - return value=" + result); //$NON-NLS-1$
 		}
+		// no else.
 
-		return icon;
+		return result;
 	}
 
 	/**

@@ -18,9 +18,10 @@ with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
 package tudresden.ocl20.pivot.modelbus.modelinstance.internal;
 
+import java.net.URL;
+
 import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.IConfigurationElement;
-import org.eclipse.jface.resource.ImageDescriptor;
 
 import tudresden.ocl20.pivot.modelbus.IModelBusConstants;
 import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
@@ -37,18 +38,21 @@ import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceTypeDescriptor
  * 
  * @author Claas Wilke
  */
-public class ModelInstanceTypeDescriptor extends AbstractDescriptor
-		implements IModelInstanceType, IModelInstanceTypeDescriptor {
+public class ModelInstanceTypeDescriptor extends AbstractDescriptor implements
+		IModelInstanceType, IModelInstanceTypeDescriptor {
 
 	/** A {@link Logger} for this class. */
-	private static final Logger logger = ModelBusPlugin
-			.getLogger(ModelInstanceTypeDescriptor.class);
+	private static final Logger logger =
+			ModelBusPlugin.getLogger(ModelInstanceTypeDescriptor.class);
 
 	/** The name of the {@link IModelInstanceType}. */
 	private String name;
 
-	/** The icon used for the {@link ModelInstanceTypeDescriptor}. */
-	private ImageDescriptor icon;
+	/**
+	 * The {@link URL} of the icon used for the
+	 * {@link ModelInstanceTypeDescriptor}.
+	 */
+	private URL iconURL;
 
 	/** The cached instance of the {@link IModelInstanceProvider}. */
 	private IModelInstanceProvider modelInstanceProvider;
@@ -68,8 +72,7 @@ public class ModelInstanceTypeDescriptor extends AbstractDescriptor
 		if (logger.isDebugEnabled()) {
 			String msg;
 
-			msg = "MetamodelDescriptor(configElement=" + configElement
-					+ ") - enter";
+			msg = "MetamodelDescriptor(configElement=" + configElement + ") - enter";
 
 			logger.debug(msg);
 		}
@@ -87,18 +90,16 @@ public class ModelInstanceTypeDescriptor extends AbstractDescriptor
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.modelbus.IModelInstanceFileFormat#getModelProvider
-	 * ()
+	 * tudresden.ocl20.pivot.modelbus.IModelInstanceFileFormat#getModelProvider ()
 	 */
 	public IModelInstanceProvider getModelInstanceProvider() {
 
 		/* Lazily create the model instance provider. */
 		if (this.modelInstanceProvider == null) {
-			this.modelInstanceProvider = this.createInstance(
-					IModelBusConstants.ATT_MODELINSTANCEPROVIDER,
-					IModelInstanceProvider.class);
+			this.modelInstanceProvider =
+					this.createInstance(IModelBusConstants.ATT_MODELINSTANCEPROVIDER,
+							IModelInstanceProvider.class);
 		}
 		// no else.
 
@@ -110,24 +111,23 @@ public class ModelInstanceTypeDescriptor extends AbstractDescriptor
 	 * @see tudresden.ocl20.pivot.modelbus.IModelInstanceType#getName()
 	 */
 	public String getName() {
+
 		return this.name;
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * tudresden.ocl20.pivot.modelbus.internal.IMetamodelDescriptor#getIcon()
+	 * @see tudresden.ocl20.pivot.modelbus.internal.IMetamodelDescriptor#getIcon()
 	 */
-	public ImageDescriptor getIcon() {
+	public URL getIconURL() {
 
 		/* Lazily create the image descriptor. */
-		if (this.icon == null) {
-			this.icon = getImageDescriptor(IModelBusConstants.ATT_ICON);
+		if (this.iconURL == null) {
+			this.iconURL = this.getIconURL(IModelBusConstants.ATT_ICON);
 		}
 		// no else.
 
-		return this.icon;
+		return this.iconURL;
 	}
 
 	/**
@@ -137,7 +137,7 @@ public class ModelInstanceTypeDescriptor extends AbstractDescriptor
 	 * </p>
 	 */
 	protected void loadFromExtension() {
-		
+
 		this.name = getAttribute(IModelBusConstants.ATT_NAME, false);
 
 		if (this.name == null) {

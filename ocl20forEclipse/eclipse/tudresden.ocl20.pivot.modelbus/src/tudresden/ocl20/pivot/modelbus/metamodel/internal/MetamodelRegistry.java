@@ -35,20 +35,20 @@ package tudresden.ocl20.pivot.modelbus.metamodel.internal;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.commons.lang.IllegalClassException;
 import org.apache.log4j.Logger;
+import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IExtension;
 import org.eclipse.core.runtime.IExtensionPoint;
 import org.eclipse.core.runtime.IExtensionRegistry;
+import org.eclipse.core.runtime.IRegistryEventListener;
 import org.eclipse.core.runtime.Platform;
-import org.eclipse.core.runtime.dynamichelpers.ExtensionTracker;
-import org.eclipse.core.runtime.dynamichelpers.IExtensionChangeHandler;
-import org.eclipse.core.runtime.dynamichelpers.IExtensionTracker;
-import org.eclipse.ui.PlatformUI;
 
 import tudresden.ocl20.pivot.modelbus.IModelBusConstants;
 import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
+import tudresden.ocl20.pivot.modelbus.descriptor.IDescriptor;
+import tudresden.ocl20.pivot.modelbus.descriptor.InvalidDescriptorException;
 import tudresden.ocl20.pivot.modelbus.metamodel.IMetamodel;
-import tudresden.ocl20.pivot.modelbus.metamodel.IMetamodelDescriptor;
 import tudresden.ocl20.pivot.modelbus.metamodel.IMetamodelRegistry;
 
 /**
@@ -60,7 +60,7 @@ import tudresden.ocl20.pivot.modelbus.metamodel.IMetamodelRegistry;
  * @author Matthias Braeuer
  */
 public final class MetamodelRegistry implements IMetamodelRegistry,
-		IExtensionChangeHandler {
+		IRegistryEventListener {
 
 	/** Logger for this class. */
 	private static final Logger LOGGER =
@@ -96,8 +96,8 @@ public final class MetamodelRegistry implements IMetamodelRegistry,
 		metaModelReader.read(this.getExtensionPoint(), this);
 
 		/* Register this registry as a listener for plug-in events. */
-		PlatformUI.getWorkbench().getExtensionTracker().registerHandler(this,
-				ExtensionTracker.createExtensionPointFilter(getExtensionPoint()));
+		Platform.getExtensionRegistry().addListener(this,
+				METAMODEL_EXTENSION_POINT_ID);
 
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("MetamodelRegistry() - exit"); //$NON-NLS-1$
@@ -108,25 +108,37 @@ public final class MetamodelRegistry implements IMetamodelRegistry,
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.eclipse.core.runtime.dynamichelpers.IExtensionChangeHandler#addExtension
-	 * (org.eclipse.core.runtime.dynamichelpers.IExtensionTracker,
-	 * org.eclipse.core.runtime.IExtension)
+	 * org.eclipse.core.runtime.IRegistryEventListener#added(org.eclipse.core.
+	 * runtime.IExtension[])
 	 */
-	public void addExtension(IExtensionTracker tracker, IExtension extension) {
+	public void added(IExtension[] extensions) {
 
 		if (LOGGER.isDebugEnabled()) {
-			LOGGER
-					.debug("addExtension(tracker=" + tracker + ", extension=" + extension + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+			LOGGER.debug("added(extensions=" + extensions + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 		}
 		// no else.
 
 		/* Use the registry reader to read in the new extension. */
-		this.metaModelReader.read(extension, this);
-
-		if (LOGGER.isDebugEnabled()) {
-			LOGGER.debug("addExtension() - exit"); //$NON-NLS-1$
+		for (IExtension extension : extensions) {
+			this.metaModelReader.read(extension, this);
 		}
 		// no else.
+
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("added(IExtension[]) - exit"); //$NON-NLS-1$
+		}
+		// no else.
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * org.eclipse.core.runtime.IRegistryEventListener#added(org.eclipse.core.
+	 * runtime.IExtensionPoint[])
+	 */
+	public void added(IExtensionPoint[] extensionPoints) {
+
+		/* Do nothing. Only listen for extensions. */
 	}
 
 	/*
@@ -157,9 +169,6 @@ public final class MetamodelRegistry implements IMetamodelRegistry,
 		/* Add the meta-model to the cache. */
 		this.metaModels.put(metamodel.getId(), metamodel);
 
-		/* Register with the Eclipse platform if contributed via an extension. */
-		this.registerMetamodelDescriptor(metamodel);
-
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("addMetamodel() - exit"); //$NON-NLS-1$
 		}
@@ -173,7 +182,7 @@ public final class MetamodelRegistry implements IMetamodelRegistry,
 	public void dispose() {
 
 		/* Remove from the extension tracker. */
-		PlatformUI.getWorkbench().getExtensionTracker().unregisterHandler(this);
+		Platform.getExtensionRegistry().removeListener(this);
 
 		/* Clear meta-model cache. */
 		if (this.metaModels != null) {
@@ -226,31 +235,90 @@ public final class MetamodelRegistry implements IMetamodelRegistry,
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.eclipse.core.runtime.dynamichelpers.IExtensionChangeHandler#removeExtension
-	 * (org.eclipse.core.runtime.IExtension, java.lang.Object[])
+	 * org.eclipse.core.runtime.IRegistryEventListener#removed(org.eclipse.core
+	 * .runtime.IExtension[])
 	 */
-	public void removeExtension(IExtension extension, Object[] objects) {
+	public void removed(IExtension[] extensions) {
+
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("removed(extensions=" + extensions + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		}
+		// no else.
+
+		/* Remove all registered objects from the meta-model cache. */
+		if (this.metaModels != null) {
+
+			for (IExtension extension : extensions) {
+
+				for (IConfigurationElement configurationElement : extension
+						.getConfigurationElements()) {
+
+					String metaModelID;
+					metaModelID =
+							this.getAttribute(IDescriptor.ATT_ID, configurationElement);
+
+					if (metaModelID != null) {
+						this.metaModels.remove(metaModelID);
+					}
+					// no else.
+				}
+				// end for (configurationElements).
+			}
+			// end for (extensions).
+		}
+		// no else.
+
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("removed(IExtension[]) - exit"); //$NON-NLS-1$
+		}
+		// no else.
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * org.eclipse.core.runtime.IRegistryEventListener#removed(org.eclipse.core
+	 * .runtime.IExtensionPoint[])
+	 */
+	public void removed(IExtensionPoint[] extensionPoints) {
+
+		/* Do nothing. Only listen for extensions. */
+	}
+
+	/**
+	 * <p>
+	 * Helper method that returns the value of an attribute of the given
+	 * {@link IConfigurationElement}. Throws an {@link InvalidDescriptorException}
+	 * if the attribute is empty and required.
+	 * </p>
+	 * 
+	 * @param attributeName
+	 *          The name of the extension point attribute.
+	 * @param configurationElement
+	 *          The {@link IllegalClassException} whose attribute shall be
+	 *          returned.
+	 * 
+	 * @throws InvalidDescriptorException
+	 *           If the value of the attribute is invalid.
+	 */
+	private String getAttribute(String attributeName,
+			IConfigurationElement configurationElement) {
 
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER
-					.debug("removeExtension(extension=" + extension + ", objects=" + objects + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+					.debug("getAttribute(attributeName=" + attributeName + ", configurationElement=" + configurationElement //$NON-NLS-1$ //$NON-NLS-2$
+							+ ") - enter"); //$NON-NLS-1$
 		}
 		// no else.
 
-		/* Remove all registered objects from the metamodel cache. */
-		if (this.metaModels != null) {
-
-			for (int index = 0; index < objects.length; index++) {
-				this.metaModels.remove(objects[index]);
-			}
-			// end for.
-		}
-		// no else.
+		String value = configurationElement.getAttribute(attributeName);
 
 		if (LOGGER.isDebugEnabled()) {
-			LOGGER.debug("removeExtension() - exit"); //$NON-NLS-1$
+			LOGGER.debug("getAttribute() - exit - return value=" + value); //$NON-NLS-1$
 		}
 		// no else.
+
+		return value;
 	}
 
 	/**
@@ -278,28 +346,5 @@ public final class MetamodelRegistry implements IMetamodelRegistry,
 		// no else.
 
 		return result;
-	}
-
-	/**
-	 * <p>
-	 * A helper method to register an Eclipse-based {@link IMetamodel} with the
-	 * extension tracker.
-	 * </p>
-	 * 
-	 * @param metamodel
-	 *          The {@link IMetamodel} that shall be added.
-	 */
-	private void registerMetamodelDescriptor(IMetamodel metamodel) {
-
-		if (metamodel instanceof IMetamodelDescriptor) {
-
-			IMetamodelDescriptor descriptor;
-			descriptor = (IMetamodelDescriptor) metamodel;
-
-			PlatformUI.getWorkbench().getExtensionTracker().registerObject(
-					descriptor.getDeclaringExtension(), descriptor,
-					IExtensionTracker.REF_WEAK);
-		}
-		// no else.
 	}
 }

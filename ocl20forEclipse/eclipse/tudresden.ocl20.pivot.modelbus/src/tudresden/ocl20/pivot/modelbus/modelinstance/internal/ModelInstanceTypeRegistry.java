@@ -18,22 +18,22 @@ with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
 package tudresden.ocl20.pivot.modelbus.modelinstance.internal;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
+import org.apache.commons.lang.IllegalClassException;
 import org.apache.log4j.Logger;
+import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IExtension;
 import org.eclipse.core.runtime.IExtensionPoint;
+import org.eclipse.core.runtime.IRegistryEventListener;
 import org.eclipse.core.runtime.Platform;
-import org.eclipse.core.runtime.dynamichelpers.ExtensionTracker;
-import org.eclipse.core.runtime.dynamichelpers.IExtensionChangeHandler;
-import org.eclipse.core.runtime.dynamichelpers.IExtensionTracker;
-import org.eclipse.ui.PlatformUI;
 
 import tudresden.ocl20.pivot.modelbus.IModelBusConstants;
 import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
+import tudresden.ocl20.pivot.modelbus.descriptor.IDescriptor;
+import tudresden.ocl20.pivot.modelbus.descriptor.InvalidDescriptorException;
 import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceType;
-import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceTypeDescriptor;
 import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceTypeRegistry;
 
 /**
@@ -45,22 +45,22 @@ import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceTypeRegistry;
  * @author Claas Wilke
  */
 public class ModelInstanceTypeRegistry implements IModelInstanceTypeRegistry,
-		IExtensionChangeHandler {
+		IRegistryEventListener {
 
 	/** The full identifier of the fileFormats extension point. */
-	private static final String MITYPE_EXTENSION_POINT_ID = ModelBusPlugin.ID
-			+ '.' + IModelBusConstants.EXT_MODELINSTANCETYPES;
+	private static final String MODEL_INSTANCE_TYPE_EXTENSION_POINT_ID =
+			ModelBusPlugin.ID + '.' + IModelBusConstants.EXT_MODELINSTANCETYPES;
 
 	/** The {@link Logger} for this class. */
-	private static final Logger logger = ModelBusPlugin
-			.getLogger(ModelInstanceTypeRegistry.class);
+	private static final Logger LOGGER =
+			ModelBusPlugin.getLogger(ModelInstanceTypeRegistry.class);
 
-	/** The {@link List} of registered {@link IModelInstanceType}. */
-	private List<IModelInstanceType> miTypes;
+	/** The registered {@link IModelInstanceType}s mapped by their id. */
+	private Map<String, IModelInstanceType> modelInstanceTypes;
 
 	/**
-	 * A helper class to read the {@link ModelInstanceTypeRegistry}
-	 * configuration from the Eclipse extension registry.
+	 * A helper class to read the {@link ModelInstanceTypeRegistry} configuration
+	 * from the Eclipse extension registry.
 	 */
 	private ModelInstanceTypeRegistryReader reader;
 
@@ -72,8 +72,8 @@ public class ModelInstanceTypeRegistry implements IModelInstanceTypeRegistry,
 	public ModelInstanceTypeRegistry() {
 
 		/* Eventually log the entry of this method. */
-		if (logger.isDebugEnabled()) {
-			logger.debug("ModelInstanceFileFormatRegistry() - enter");
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("ModelInstanceFileFormatRegistry() - enter");
 		}
 		// no else.
 
@@ -82,38 +82,71 @@ public class ModelInstanceTypeRegistry implements IModelInstanceTypeRegistry,
 		this.reader.read(this.getExtensionPoint(), this);
 
 		/* Register the registry as a listener for plug-in events. */
-		PlatformUI.getWorkbench().getExtensionTracker().registerHandler(
-				this,
-				ExtensionTracker
-						.createExtensionPointFilter(getExtensionPoint()));
+		Platform.getExtensionRegistry().addListener(this,
+				MODEL_INSTANCE_TYPE_EXTENSION_POINT_ID);
 
 		/* Eventually log the exit of this method. */
-		if (logger.isDebugEnabled()) {
-			logger.debug("ModelInstanceFileFormatRegistry() - exit");
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("ModelInstanceFileFormatRegistry() - exit");
 		}
 		// no else.
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 * @see
+	 * org.eclipse.core.runtime.IRegistryEventListener#added(org.eclipse.core.
+	 * runtime.IExtension[])
+	 */
+	public void added(IExtension[] extensions) {
+
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("added(extensions=" + extensions + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		}
+		// no else.
+
+		/* Use the registry reader to read in the new extension. */
+		for (IExtension extension : extensions) {
+			this.reader.read(extension, this);
+		}
+		// no else.
+
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("added(IExtension[]) - exit"); //$NON-NLS-1$
+		}
+		// no else.
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * org.eclipse.core.runtime.IRegistryEventListener#added(org.eclipse.core.
+	 * runtime.IExtensionPoint[])
+	 */
+	public void added(IExtensionPoint[] extensionPoints) {
+
+		/* Do nothing. Only listen for extensions. */
+	}
+
+	/*
+	 * (non-Javadoc)
 	 * @seetudresden.ocl20.pivot.modelbus.IModelInstanceTypeRegistry#
 	 * addModelInstanceType(tudresden.ocl20.pivot.modelbus.IModelInstanceType)
 	 */
-	public void addModelInstanceType(IModelInstanceType miType) {
+	public void addModelInstanceType(IModelInstanceType modelInstanceType) {
 
-		/* Eventually log the entry of this method. */
-		if (logger.isDebugEnabled()) {
+		/* Probably log the entry of this method. */
+		if (LOGGER.isDebugEnabled()) {
 			String msg;
 
-			msg = "addModelInstanceType(miType=" + miType + ") - enter";
+			msg = "addModelInstanceType(miType=" + modelInstanceType + ") - enter";
 
-			logger.debug(msg);
+			LOGGER.debug(msg);
 		}
 		// no else.
 
 		/* Check if the miType is null. */
-		if (miType == null) {
+		if (modelInstanceType == null) {
 			String msg;
 
 			msg = "The parameter 'miType' must not be null.";
@@ -122,58 +155,81 @@ public class ModelInstanceTypeRegistry implements IModelInstanceTypeRegistry,
 		}
 
 		/* Else lazily create the list of Model Instance Types. */
-		if (this.miTypes == null) {
-			this.miTypes = new ArrayList<IModelInstanceType>();
+		if (this.modelInstanceTypes == null) {
+			this.modelInstanceTypes = new HashMap<String, IModelInstanceType>();
 		}
 		// no else.
 
 		/*
-		 * Else check if the file format is already contained in the registry.
-		 * Than silently do nothing.
+		 * Else check if the file format is already contained in the registry. Than
+		 * silently do nothing.
 		 */
-		else if (this.miTypes.contains(miType)) {
+		else if (this.modelInstanceTypes.containsKey(modelInstanceType.getId())) {
 			String msg;
 
-			msg = "ModelInstanceType '" + miType.getName()
-					+ "' is already loaded.";
+			msg =
+					"ModelInstanceType '" + modelInstanceType.getName()
+							+ "' is already loaded.";
 
 			throw new IllegalStateException(msg);
 		}
 
 		/* Add the file format. */
-		this.miTypes.add(miType);
+		this.modelInstanceTypes.put(modelInstanceType.getId(), modelInstanceType);
 
-		/* Register with the Eclipse platform if contributed via an extension. */
-		this.registerMetamodelDescriptor(miType);
-
-		/* Eventually log the exit of this method. */
-		if (logger.isDebugEnabled()) {
+		/* Probably log the exit of this method. */
+		if (LOGGER.isDebugEnabled()) {
 			String msg;
 
 			msg = "addModelInstanceType() - exit";
 
-			logger.debug(msg);
+			LOGGER.debug(msg);
 		}
 		// no else.
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see tudresden.ocl20.pivot.modelbus.IModelInstanceTypeRegistry#dispose()
 	 */
 	public void dispose() {
 
-		if (this.miTypes != null) {
-			this.miTypes.clear();
-			this.miTypes = null;
+		if (this.modelInstanceTypes != null) {
+			this.modelInstanceTypes.clear();
+			this.modelInstanceTypes = null;
 		}
 		// no else.
+
+		Platform.getExtensionRegistry().removeListener(this);
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 * @seetudresden.ocl20.pivot.modelbus.IModelInstanceTypeRegistry#
+	 * getModelInstanceType(java.lang.String)
+	 */
+	public IModelInstanceType getModelInstanceType(String id) {
+	
+		IModelInstanceType result;
+	
+		result = this.modelInstanceTypes.get(id);
+	
+		if (result == null) {
+			String msg;
+	
+			msg =
+					"The ModelInstanceType with the given id '" + id
+							+ "' does not exist.";
+	
+			throw new IllegalStateException(msg);
+		}
+		// no else.
+	
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
 	 * @seetudresden.ocl20.pivot.modelbus.IModelInstanceFileFormatRegistry#
 	 * getFileFormats()
 	 */
@@ -181,13 +237,14 @@ public class ModelInstanceTypeRegistry implements IModelInstanceTypeRegistry,
 
 		IModelInstanceType[] result;
 
-		if (this.miTypes == null) {
+		if (this.modelInstanceTypes == null) {
 			result = new IModelInstanceType[0];
 		}
 
 		else {
-			result = this.miTypes.toArray(new IModelInstanceType[this.miTypes
-					.size()]);
+			result =
+					this.modelInstanceTypes.values().toArray(
+							new IModelInstanceType[this.modelInstanceTypes.size()]);
 		}
 
 		return result;
@@ -195,103 +252,91 @@ public class ModelInstanceTypeRegistry implements IModelInstanceTypeRegistry,
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @seetudresden.ocl20.pivot.modelbus.IModelInstanceTypeRegistry#
-	 * getModelInstanceType(java.lang.String)
-	 */
-	public IModelInstanceType getModelInstanceType(String id) {
-
-		IModelInstanceType result;
-
-		result = null;
-
-		for (IModelInstanceType aFileFormat : this.miTypes) {
-
-			if (aFileFormat.getId().equals(id)) {
-				result = aFileFormat;
-				break;
-			}
-			// no else.
-		}
-
-		if (result == null) {
-			String msg;
-
-			msg = "The ModelInstanceType with the given id '" + id
-					+ "' does not exist.";
-
-			throw new IllegalStateException(msg);
-		}
-
-		else {
-			return result;
-		}
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
 	 * @see
-	 * org.eclipse.core.runtime.dynamichelpers.IExtensionChangeHandler#addExtension
-	 * (org.eclipse.core.runtime.dynamichelpers.IExtensionTracker,
-	 * org.eclipse.core.runtime.IExtension)
+	 * org.eclipse.core.runtime.IRegistryEventListener#removed(org.eclipse.core
+	 * .runtime.IExtension[])
 	 */
-	public void addExtension(IExtensionTracker tracker, IExtension extension) {
+	public void removed(IExtension[] extensions) {
 
-		/* Eventually log the entry of this method. */
-		if (logger.isDebugEnabled()) {
-			String msg;
-
-			msg = "addExtension(tracker=" + tracker + ", extension=";
-			msg += extension + ") - enter";
-
-			logger.debug(msg);
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("removed(extensions=" + extensions + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 		}
 		// no else.
 
-		/* Use the registry reader to read in the new extension. */
-		this.reader.read(extension, this);
+		/* Remove all registered objects from the cache. */
+		if (this.modelInstanceTypes != null) {
 
-		/* Eventually log the exit of this method. */
-		if (logger.isDebugEnabled()) {
-			logger.debug("addExtension() - exit");
+			for (IExtension extension : extensions) {
+
+				for (IConfigurationElement configurationElement : extension
+						.getConfigurationElements()) {
+
+					String modelInstanceTypeID;
+					modelInstanceTypeID =
+							this.getAttribute(IDescriptor.ATT_ID, configurationElement);
+
+					if (modelInstanceTypeID != null) {
+						this.modelInstanceTypes.remove(modelInstanceTypeID);
+					}
+					// no else.
+				}
+				// end for (configurationElements).
+			}
+			// end for (extensions).
+		}
+		// no else.
+
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("removed(IExtension[]) - exit"); //$NON-NLS-1$
 		}
 		// no else.
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @seeorg.eclipse.core.runtime.dynamichelpers.IExtensionChangeHandler#
-	 * removeExtension(org.eclipse.core.runtime.IExtension, java.lang.Object[])
+	 * @see
+	 * org.eclipse.core.runtime.IRegistryEventListener#removed(org.eclipse.core
+	 * .runtime.IExtensionPoint[])
 	 */
-	public void removeExtension(IExtension extension, Object[] objects) {
+	public void removed(IExtensionPoint[] extensionPoints) {
 
-		/* Eventually log the entry of this method. */
-		if (logger.isDebugEnabled()) {
-			String msg;
+		/* Do nothing. Only listen for extensions. */
+	}
 
-			msg = "removeExtension(extension=" + extension + ", objects=";
-			msg += objects + ") - enter";
+	/**
+	 * <p>
+	 * Helper method that returns the value of an attribute of the given
+	 * {@link IConfigurationElement}. Throws an {@link InvalidDescriptorException}
+	 * if the attribute is empty and required.
+	 * </p>
+	 * 
+	 * @param attributeName
+	 *          The name of the extension point attribute.
+	 * @param configurationElement
+	 *          The {@link IllegalClassException} whose attribute shall be
+	 *          returned.
+	 * 
+	 * @throws InvalidDescriptorException
+	 *           If the value of the attribute is invalid.
+	 */
+	private String getAttribute(String attributeName,
+			IConfigurationElement configurationElement) {
 
-			logger.debug(msg);
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER
+					.debug("getAttribute(attributeName=" + attributeName + ", configurationElement=" + configurationElement //$NON-NLS-1$ //$NON-NLS-2$
+							+ ") - enter"); //$NON-NLS-1$
 		}
 		// no else.
 
-		/* Remove all registered objects from the file format cache. */
-		if (this.miTypes != null) {
+		String value = configurationElement.getAttribute(attributeName);
 
-			for (int i = 0; i < objects.length; i++) {
-				this.miTypes.remove(objects[i]);
-			}
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("getAttribute() - exit - return value=" + value); //$NON-NLS-1$
 		}
 		// no else.
 
-		/* Eventually log the exit of this method. */
-		if (logger.isDebugEnabled()) {
-			logger.debug("removeExtension() - exit");
-		}
-		// no else.
+		return value;
 	}
 
 	/**
@@ -304,8 +349,9 @@ public class ModelInstanceTypeRegistry implements IModelInstanceTypeRegistry,
 		IExtensionPoint result;
 
 		/* Get the point from the registry. */
-		result = Platform.getExtensionRegistry().getExtensionPoint(
-				MITYPE_EXTENSION_POINT_ID);
+		result =
+				Platform.getExtensionRegistry().getExtensionPoint(
+						MODEL_INSTANCE_TYPE_EXTENSION_POINT_ID);
 
 		/* This should not happen unless the id changes. */
 		if (result == null) {
@@ -313,31 +359,12 @@ public class ModelInstanceTypeRegistry implements IModelInstanceTypeRegistry,
 
 			msg = "The extension point for new model instance types could not ";
 			msg += "be found under the id ";
-			msg += MITYPE_EXTENSION_POINT_ID;
+			msg += MODEL_INSTANCE_TYPE_EXTENSION_POINT_ID;
 
 			throw new IllegalStateException(msg);
 		}
 		// no else.
 
 		return result;
-	}
-
-	/**
-	 * A helper method to register an {@link IModelInstanceType} with the
-	 * extension tracker.
-	 * 
-	 * @param fileFormat
-	 *            The {@link IModelInstanceType} which shall be registered.
-	 */
-	private void registerMetamodelDescriptor(IModelInstanceType fileformat) {
-
-		if (fileformat instanceof IModelInstanceTypeDescriptor) {
-			IModelInstanceTypeDescriptor descriptor = (IModelInstanceTypeDescriptor) fileformat;
-
-			PlatformUI.getWorkbench().getExtensionTracker().registerObject(
-					descriptor.getDeclaringExtension(), descriptor,
-					IExtensionTracker.REF_WEAK);
-		}
-		// no else.
 	}
 }

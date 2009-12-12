@@ -32,10 +32,11 @@
  */
 package tudresden.ocl20.pivot.modelbus.metamodel.internal;
 
+import java.net.URL;
+
 import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IExtension;
-import org.eclipse.jface.resource.ImageDescriptor;
 
 import tudresden.ocl20.pivot.modelbus.IModelBusConstants;
 import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
@@ -60,11 +61,11 @@ public class MetamodelDescriptor extends AbstractDescriptor implements
 	private static final Logger LOGGER =
 			ModelBusPlugin.getLogger(MetamodelDescriptor.class);
 
-	/** The icon used for the {@link IMetamodel}. */
-	private ImageDescriptor icon;
-
 	/** The cached instance of the {@link IModelProvider}. */
 	private IModelProvider modelProvider;
+
+	/** The {@link URL} of the icon of this {@link IMetamodel}. */
+	private URL iconURL;
 
 	/** The translatable name of the {@link IMetamodel}. */
 	private String name;
@@ -101,17 +102,18 @@ public class MetamodelDescriptor extends AbstractDescriptor implements
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.modelbus.internal.IMetamodelDescriptor#getIcon()
+	 * @see
+	 * tudresden.ocl20.pivot.modelbus.metamodel.IMetamodelDescriptor#getIconURL()
 	 */
-	public ImageDescriptor getIcon() {
-	
+	public URL getIconURL() {
+
 		/* Lazily create the image descriptor. */
-		if (this.icon == null) {
-			this.icon = this.getImageDescriptor(IModelBusConstants.ATT_ICON);
+		if (this.iconURL == null) {
+			this.iconURL = this.getIconURL(IModelBusConstants.ATT_ICON);
 		}
 		// no else.
-	
-		return this.icon;
+
+		return this.iconURL;
 	}
 
 	/*
@@ -119,7 +121,7 @@ public class MetamodelDescriptor extends AbstractDescriptor implements
 	 * @see tudresden.ocl20.pivot.modelbus.IMetamodel#getName()
 	 */
 	public String getName() {
-	
+
 		return this.name;
 	}
 

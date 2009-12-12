@@ -32,7 +32,7 @@
  */
 package tudresden.ocl20.pivot.modelbus.metamodel;
 
-import org.eclipse.jface.resource.ImageDescriptor;
+import java.net.URL;
 
 import tudresden.ocl20.pivot.modelbus.descriptor.IDescriptor;
 
@@ -50,11 +50,11 @@ public interface IMetamodelDescriptor extends IDescriptor {
 
 	/**
 	 * <p>
-	 * Returns an {@link ImageDescriptor} that can be used as an icon for the
+	 * Returns a {@link URL} that can be used as an icon for the
 	 * {@link IMetamodel} in the Eclipse user interface.
 	 * </p>
 	 * 
 	 * @return An {@link ImageDescriptor}.
 	 */
-	ImageDescriptor getIcon();
+	URL getIconURL();
 }

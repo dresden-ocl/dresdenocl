@@ -18,15 +18,15 @@ with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
 package tudresden.ocl20.pivot.modelbus.modelinstance;
 
-import org.eclipse.jface.resource.ImageDescriptor;
+import java.net.URL;
 
 import tudresden.ocl20.pivot.modelbus.descriptor.IDescriptor;
 
 /**
  * <p>
  * This is an additional interface that is mixed in by the Eclipse-specific
- * implementation of the {@link IModelInstanceType} interface. It
- * represents a descriptor for the information contained in a single
+ * implementation of the {@link IModelInstanceType} interface. It represents a
+ * descriptor for the information contained in a single
  * {@link IModelInstanceType} tag in an extension that extends the
  * <code>modelinstancetypes</code> extension point.
  * </p>
@@ -37,11 +37,11 @@ public interface IModelInstanceTypeDescriptor extends IDescriptor {
 
 	/**
 	 * <p>
-	 * Returns an {@link ImageDescriptor} that can be used as an icon for the
+	 * Returns a {@link URL} that can be used as an icon for the
 	 * {@link IModelInstanceType} in the Eclipse user interface.
 	 * </p>
 	 * 
-	 * @return An {@link ImageDescriptor}.
+	 * @return A {@link URL}.
 	 */
-	ImageDescriptor getIcon();
+	URL getIconURL();
 }

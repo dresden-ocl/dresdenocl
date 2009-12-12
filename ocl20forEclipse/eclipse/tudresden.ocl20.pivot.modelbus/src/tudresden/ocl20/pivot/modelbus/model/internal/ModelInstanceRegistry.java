@@ -44,220 +44,302 @@ import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance;
 import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceRegistry;
 
 /**
- * 
+ * <p>
+ * The {@link ModelInstanceRegistry} manages all {@link IModelInstance}s that
+ * are currently imported into Dresden OCL2 for Eclipse.
+ * </p>
  * 
  * @author Ronny Brandt
- * @version 1.0 31.08.2007
  */
 public class ModelInstanceRegistry implements IModelInstanceRegistry {
 
-	// The model instances mapped to corresponding model
+	/** The {@link IModelInstance}s mapped to the corresponding {@link IModel}. */
 	private Map<IModel, List<IModelInstance>> modelInstances;
 
-	// Map of active model instances according to the models
-	private Map<IModel, IModelInstance> activeModelInstance;
+	/** Map of active {@link IModelInstance}s according to their {@link IModel}. */
+	private Map<IModel, IModelInstance> activeModelInstances;
 
-	// The listeners
+	/** The listeners of this {@link ModelInstanceRegistry}. */
 	private ListenerList listeners;
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see tudresden.ocl20.pivot.modelbus.IModelInstanceRegistry#addModelInstance(tudresden.ocl20.pivot.modelbus.IModel,
-	 *      tudresden.ocl20.pivot.modelbus.IModelInstance)
+	 * @see
+	 * tudresden.ocl20.pivot.modelbus.IModelInstanceRegistry#addModelInstance(
+	 * tudresden.ocl20.pivot.modelbus.IModel,
+	 * tudresden.ocl20.pivot.modelbus.IModelInstance)
 	 */
 	public void addModelInstance(IModel model, IModelInstance modelInstance) {
-		if (modelInstance == null)
+
+		if (modelInstance == null) {
 			throw new IllegalArgumentException(
 					"The parameter 'modelInstance' must not be null.");
+		}
+		// no else.
 
-		if (model == null)
+		if (model == null) {
 			throw new IllegalArgumentException(
 					"The parameter 'model' must not be null.");
+		}
+		// no else.
 
-		if (modelInstances == null)
-			modelInstances = new HashMap<IModel, List<IModelInstance>>();
+		/* Lazy initialization of map. */
+		if (this.modelInstances == null) {
+			this.modelInstances = new HashMap<IModel, List<IModelInstance>>();
+		}
+		// no else.
 
-		List<IModelInstance> instances = modelInstances.get(model);
+		List<IModelInstance> instances;
+		instances = this.modelInstances.get(model);
 
-		if (instances == null)
+		if (instances == null) {
 			instances = new ArrayList<IModelInstance>();
+		}
+		// no else.
 
-		if (instances.contains(modelInstance))
+		if (instances.contains(modelInstance)) {
 			throw new IllegalArgumentException("ModelInstance '"
-					+ modelInstance.getDisplayName() + "' is already loaded.");
+					+ modelInstance.getDisplayName() + "' has already been loaded.");
+		}
+		// no else.
 
 		instances.add(modelInstance);
 
-		modelInstances.put(model, instances);
+		this.modelInstances.put(model, instances);
 
-		fireModelInstanceAdded(model, modelInstance);
-	}
-
-	/**
-	 * Fire model instance added.
-	 * 
-	 * @param model
-	 *            the model
-	 * @param modelInstance
-	 *            the model instance
-	 */
-	private void fireModelInstanceAdded(IModel model,
-			IModelInstance modelInstance) {
-		ModelInstanceRegistryEvent event = null;
-
-		if (listeners != null) {
-			Object[] listeners = this.listeners.getListeners();
-
-			for (int i = 0; i < listeners.length; i++) {
-
-				// lazily create the event
-				if (event == null) {
-					event = new ModelInstanceRegistryEvent(this, model,
-							modelInstance);
-				}
-
-				((IModelInstanceRegistryListener) listeners[i])
-						.modelInstanceAdded(event);
-			}
-		}
+		this.fireModelInstanceAdded(model, modelInstance);
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see tudresden.ocl20.pivot.modelbus.IModelInstanceRegistry#addModelInstanceRegistryListener(tudresden.ocl20.pivot.modelbus.event.IModelInstanceRegistryListener)
+	 * @seetudresden.ocl20.pivot.modelbus.IModelInstanceRegistry#
+	 * addModelInstanceRegistryListener
+	 * (tudresden.ocl20.pivot.modelbus.event.IModelInstanceRegistryListener)
 	 */
 	public void addModelInstanceRegistryListener(
 			IModelInstanceRegistryListener listener) {
 
-		getListeners().add(listener);
-	}
-
-	/**
-	 * Gets the listeners.
-	 * 
-	 * @return the listeners
-	 */
-	private ListenerList getListeners() {
-		if (listeners == null)
-			listeners = new ListenerList(ListenerList.IDENTITY);
-		return listeners;
+		this.getListeners().add(listener);
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see tudresden.ocl20.pivot.modelbus.IModelInstanceRegistry#dispose()
 	 */
 	public void dispose() {
-		if (modelInstances != null) {
-			modelInstances.clear();
-			modelInstances = null;
+
+		if (this.modelInstances != null) {
+			this.modelInstances.clear();
+			this.modelInstances = null;
 		}
+		// no else.
+
+		if (this.activeModelInstances != null) {
+			this.activeModelInstances.clear();
+			this.activeModelInstances = null;
+		}
+		// no else.
+
+		if (this.listeners != null) {
+			this.listeners.clear();
+			this.listeners = null;
+		}
+		// no else.
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see tudresden.ocl20.pivot.modelbus.IModelInstanceRegistry#getActiveModelInstance(tudresden.ocl20.pivot.modelbus.IModel)
+	 * @see
+	 * tudresden.ocl20.pivot.modelbus.IModelInstanceRegistry#getActiveModelInstance
+	 * (tudresden.ocl20.pivot.modelbus.IModel)
 	 */
 	public IModelInstance getActiveModelInstance(IModel model) {
-		if (activeModelInstance != null)
-			return activeModelInstance.get(model);
-		return null;
+
+		return this.activeModelInstances.get(model);
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see tudresden.ocl20.pivot.modelbus.IModelInstanceRegistry#getModelInstances(tudresden.ocl20.pivot.modelbus.IModel)
+	 * @see
+	 * tudresden.ocl20.pivot.modelbus.IModelInstanceRegistry#getModelInstances
+	 * (tudresden.ocl20.pivot.modelbus.IModel)
 	 */
 	public IModelInstance[] getModelInstances(IModel model) {
-		if (modelInstances == null)
-			return new IModelInstance[] {};
-		List<IModelInstance> instances = modelInstances.get(model);
-		if (instances == null)
-			return new IModelInstance[] {};
-		return instances.toArray(new IModelInstance[instances.size()]);
+
+		IModelInstance[] result;
+
+		if (this.modelInstances == null) {
+			result = new IModelInstance[] {};
+		}
+
+		else {
+			List<IModelInstance> instances;
+			instances = this.modelInstances.get(model);
+
+			if (instances == null) {
+				result = new IModelInstance[] {};
+			}
+
+			else {
+				result = instances.toArray(new IModelInstance[instances.size()]);
+			}
+		}
+
+		return result;
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see tudresden.ocl20.pivot.modelbus.IModelInstanceRegistry#removeModelInstanceRegistryListener(tudresden.ocl20.pivot.modelbus.event.IModelInstanceRegistryListener)
+	 * @seetudresden.ocl20.pivot.modelbus.IModelInstanceRegistry#
+	 * removeModelInstanceRegistryListener
+	 * (tudresden.ocl20.pivot.modelbus.event.IModelInstanceRegistryListener)
 	 */
 	public void removeModelInstanceRegistryListener(
 			IModelInstanceRegistryListener listener) {
 
-		if (listeners != null)
-			listeners.remove(listener);
+		if (this.listeners != null) {
+			this.listeners.remove(listener);
+		}
+		// no else.
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see tudresden.ocl20.pivot.modelbus.IModelInstanceRegistry#setActiveModelInstance(tudresden.ocl20.pivot.modelbus.IModel,
-	 *      tudresden.ocl20.pivot.modelbus.IModelInstance)
+	 * @see
+	 * tudresden.ocl20.pivot.modelbus.IModelInstanceRegistry#setActiveModelInstance
+	 * (tudresden.ocl20.pivot.modelbus.IModel,
+	 * tudresden.ocl20.pivot.modelbus.IModelInstance)
 	 */
-	public void setActiveModelInstance(IModel model,
-			IModelInstance modelInstance) {
-		if (modelInstances == null)
+	public void setActiveModelInstance(IModel model, IModelInstance modelInstance) {
+
+		if (this.modelInstances == null) {
 			throw new IllegalArgumentException(
 					"The model instance '"
 							+ modelInstance.getDisplayName()
-							+ "' must be added to the model instance registry first befor it can be set active.");
+							+ "' must be added to the model instance registry first before it can be set active.");
+		}
+		// no else.
 
-		if (modelInstances.get(model) == null)
+		if (this.modelInstances.get(model) == null) {
 			throw new IllegalArgumentException(
 					"The model instance '"
 							+ modelInstance.getDisplayName()
-							+ "' must be added to the model instance registry first befor it can be set active.");
+							+ "' must be added to the model instance registry first before it can be set active.");
+		}
+		// no else.
 
-		if (!modelInstances.get(model).contains(modelInstance))
+		if (!this.modelInstances.get(model).contains(modelInstance)) {
 			throw new IllegalArgumentException(
 					"The model instance '"
 							+ modelInstance.getDisplayName()
-							+ "' must be added to the model instance registry first befor it can be set active.");
+							+ "' must be added to the model instance registry first before it can be set active.");
+		}
+		// no else.
 
-		if (activeModelInstance == null)
-			activeModelInstance = new HashMap<IModel, IModelInstance>();
+		if (this.activeModelInstances == null) {
+			this.activeModelInstances = new HashMap<IModel, IModelInstance>();
+		}
+		// no else.
 
-		IModelInstance instance = activeModelInstance.get(model);
+		IModelInstance instance;
+		instance = activeModelInstances.get(model);
 
 		if (instance == null || !instance.equals(modelInstance)) {
-			activeModelInstance.put(model, modelInstance);
+			this.activeModelInstances.put(model, modelInstance);
 		}
+		// no else.
 
-		fireActiveModelInstanceChanged(model, modelInstance);
+		this.fireActiveModelInstanceChanged(model, modelInstance);
 	}
 
 	/**
-	 * Fire active model instance changed.
+	 * <p>
+	 * Informs all listeners that the active {@link IModelInstance} has been
+	 * changed.
+	 * </p>
 	 * 
 	 * @param model
-	 *            the model
+	 *          The {@link IModel} of the new active {@link IModelInstance}.
 	 * @param modelInstance
-	 *            the model instance
+	 *          The new active {@link IModelInstance}.
 	 */
 	private void fireActiveModelInstanceChanged(IModel model,
 			IModelInstance modelInstance) {
-		ModelInstanceRegistryEvent event = null;
 
-		if (listeners != null) {
-			Object[] listeners = this.listeners.getListeners();
+		ModelInstanceRegistryEvent event;
+		event = null;
 
-			for (int i = 0; i < listeners.length; i++) {
+		if (this.listeners != null) {
 
-				// lazily create the event
+			Object[] listeners;
+			listeners = this.listeners.getListeners();
+
+			for (int index = 0; index < listeners.length; index++) {
+
+				/* Lazily create the event. */
 				if (event == null) {
-					event = new ModelInstanceRegistryEvent(this, model,
-							modelInstance);
+					event = new ModelInstanceRegistryEvent(this, model, modelInstance);
 				}
+				// no else.
 
-				((IModelInstanceRegistryListener) listeners[i])
+				((IModelInstanceRegistryListener) listeners[index])
 						.activeModelInstanceChanged(event);
 			}
+			// end for.
 		}
+		// no else.
+	}
+
+	/**
+	 * <p>
+	 * Informs the listeners that a new {@link IModelInstance} has been added.
+	 * </p>
+	 * 
+	 * @param model
+	 *          The {@link IModel} of the {@link IModelInstance} that has been
+	 *          added.
+	 * @param modelInstance
+	 *          The {@link IModelInstance} that has been added.
+	 */
+	private void fireModelInstanceAdded(IModel model, IModelInstance modelInstance) {
+
+		ModelInstanceRegistryEvent event;
+		event = null;
+
+		if (this.listeners != null) {
+			Object[] listeners;
+			listeners = this.listeners.getListeners();
+
+			for (int index = 0; index < listeners.length; index++) {
+
+				/* Lazily create the event. */
+				if (event == null) {
+					event = new ModelInstanceRegistryEvent(this, model, modelInstance);
+				}
+				// no else.
+
+				((IModelInstanceRegistryListener) listeners[index])
+						.modelInstanceAdded(event);
+			}
+			// end for.
+		}
+		// no else.
+	}
+
+	/**
+	 * <p>
+	 * Returns the {@link ListenerList} of this {@link ModelInstanceRegistry}.
+	 * </p>
+	 * 
+	 * @return The {@link ListenerList} of this {@link ModelInstanceRegistry}.
+	 */
+	private ListenerList getListeners() {
+
+		if (this.listeners == null) {
+			this.listeners = new ListenerList(ListenerList.IDENTITY);
+		}
+		// no else.
+
+		return this.listeners;
 	}
 }
