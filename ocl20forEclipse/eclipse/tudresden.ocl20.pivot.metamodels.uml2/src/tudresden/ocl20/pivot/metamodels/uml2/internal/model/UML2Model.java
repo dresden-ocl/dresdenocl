@@ -373,10 +373,9 @@ public class UML2Model extends AbstractModel implements IModel {
 			 * instead.
 			 */
 			if (eObject instanceof Model) {
-				for (Package uml2package : ((Model) eObject).getNestedPackages()) {
-					rootPackage.getNestedPackages().add(uml2package);
-				}
-				// end for.
+				/* Use model as root name space and replace name. */
+				rootPackage = (Model) eObject;
+				rootPackage.setName(IModelBusConstants.ROOT_PACKAGE_NAME);
 			}
 
 			/*
@@ -384,10 +383,9 @@ public class UML2Model extends AbstractModel implements IModel {
 			 * instead.
 			 */
 			else if (eObject instanceof Profile) {
-				for (Package uml2package : ((Profile) eObject).getNestedPackages()) {
-					rootPackage.getNestedPackages().add(uml2package);
-				}
-				// end for.
+				/* Use profile as root name space and replace name. */
+				rootPackage = (Profile) eObject;
+				rootPackage.setName(IModelBusConstants.ROOT_PACKAGE_NAME);
 			}
 
 			else if (eObject instanceof Package) {
