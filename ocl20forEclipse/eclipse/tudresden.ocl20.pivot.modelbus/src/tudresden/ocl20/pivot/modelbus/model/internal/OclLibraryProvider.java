@@ -48,70 +48,85 @@ import tudresden.ocl20.pivot.modelbus.internal.ModelBusMessages;
 import tudresden.ocl20.pivot.modelbus.model.IOclLibraryProvider;
 
 /**
- * Standard implementation of the {@link IOclLibraryProvider} interface that simply loads the model
- * file with the OCL Standard Library from the resources of this plugin.
+ * <p>
+ * Standard implementation of the {@link IOclLibraryProvider} interface that
+ * simply loads the model file with the OCL Standard Library from the resources
+ * of this plug.in.
+ * </p>
  * 
  * @author Matthias Braeuer
  * @version 1.0 03.04.2007
  */
 public class OclLibraryProvider implements IOclLibraryProvider {
 
-  // logger for this class
-  private static final Logger logger = ModelBusPlugin.getLogger(OclLibraryProvider.class);
+	/** The {@link Logger} for this class. */
+	private static final Logger LOGGER =
+			ModelBusPlugin.getLogger(OclLibraryProvider.class);
 
-  // the file name of the OCL Standard Library model
-  private static final String OCL_LIBRARY_FILE = "/resources/oclstandardlibrary.types"; //$NON-NLS-1$
+	/** The file name of the OCL Standard Library model. */
+	private static final String OCL_LIBRARY_FILE =
+			"/resources/oclstandardlibrary.types"; //$NON-NLS-1$
 
-  // the cached library instance
-  private OclLibrary oclLibrary;
+	/** The cached {@link OclLibrary} instance. */
+	private OclLibrary oclLibrary;
 
-  /*
-   * (non-Javadoc)
-   * 
-   * @see tudresden.ocl20.pivot.modelbus.IOclLibraryProvider#getOclLibrary()
-   */
-  public OclLibrary getOclLibrary() {
-    
-    if (oclLibrary == null) {
-      oclLibrary = loadOclLibrary();
-    }
-    
-    return oclLibrary;
-  }
-  
+	/*
+	 * (non-Javadoc)
+	 * @see tudresden.ocl20.pivot.modelbus.IOclLibraryProvider#getOclLibrary()
+	 */
+	public OclLibrary getOclLibrary() {
 
-  /**
-   * Helper method that performs the actual loading. This should work without errors unless the
-   * Model Bus plugin is changed.
-   * 
-   * @return an <code>oclLibrary</code> instance
-   */
-  protected OclLibrary loadOclLibrary() {
-    EObject library;
+		if (this.oclLibrary == null) {
+			this.oclLibrary = this.loadOclLibrary();
+		}
+		// no else.
 
-    ResourceSet resourceSet = new ResourceSetImpl();
-    Resource resource = resourceSet.createResource(URI.createPlatformPluginURI(ModelBusPlugin.ID
-        + OCL_LIBRARY_FILE,false));
-    
-    if (logger.isInfoEnabled()) {
-      logger.info(ModelBusMessages.OclLibraryProvider_LoadOclLibrary);
-    }
-    
-    try {
-      resource.load(null);
-    }
-    catch (IOException e) {
-      throw new IllegalStateException("Failed to load the OCL Standard Library.",e); //$NON-NLS-1$
-    }
+		return this.oclLibrary;
+	}
 
-    library = resource.getContents().get(0);
+	/**
+	 * <p>
+	 * A helper method that performs the actual loading. This should work without
+	 * errors unless the Model Bus plug-in is changed.
+	 * </p>
+	 * 
+	 * @return An {@link OclLibrary} instance.
+	 */
+	protected OclLibrary loadOclLibrary() {
 
-    if (!(library instanceof OclLibrary)) {
-      throw new IllegalStateException("The root object of model '" + OCL_LIBRARY_FILE //$NON-NLS-1$
-          + "' is not an instance of OclLibrary."); //$NON-NLS-1$
-    }
-    
-    return (OclLibrary) library;
-  }
+		EObject result;
 
+		ResourceSet resourceSet;
+		resourceSet = new ResourceSetImpl();
+
+		Resource resource;
+		resource =
+				resourceSet.createResource(URI.createPlatformPluginURI(
+						ModelBusPlugin.ID + OCL_LIBRARY_FILE, false));
+
+		if (LOGGER.isInfoEnabled()) {
+			LOGGER.info(ModelBusMessages.OclLibraryProvider_LoadOclLibrary);
+		}
+		// no else.
+
+		try {
+			resource.load(null);
+		}
+
+		catch (IOException e) {
+			throw new IllegalStateException(
+					"Failed to load the OCL Standard Library.", e); //$NON-NLS-1$
+		}
+
+		result = resource.getContents().get(0);
+
+		if (!(result instanceof OclLibrary)) {
+			throw new IllegalStateException(
+					"The root object of model '" + OCL_LIBRARY_FILE //$NON-NLS-1$
+							+ "' is not an instance of OclLibrary."); //$NON-NLS-1$
+		}
+		// no else.
+
+		return (OclLibrary) result;
+	}
 }

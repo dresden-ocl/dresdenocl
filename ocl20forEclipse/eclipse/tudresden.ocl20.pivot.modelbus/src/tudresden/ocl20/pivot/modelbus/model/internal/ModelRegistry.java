@@ -32,8 +32,8 @@
  */
 package tudresden.ocl20.pivot.modelbus.model.internal;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.ListenerList;
@@ -47,204 +47,274 @@ import tudresden.ocl20.pivot.modelbus.model.IModel;
 import tudresden.ocl20.pivot.modelbus.model.IModelRegistry;
 
 /**
- * Standard implementation of the {@link IModelRegistry} interface that uses a simple list for
- * storing references to {@link IModel models}.
+ * <p>
+ * Standard implementation of the {@link IModelRegistry} interface that uses a
+ * simple list for storing references to {@link IModel models}.
+ * </p>
  * 
  * @author Matthias Braeuer
- * @version 1.0 11.04.2007
  */
 public class ModelRegistry implements IModelRegistry {
 
-  // Logger for this class
-  private static final Logger logger = ModelBusPlugin.getLogger(ModelRegistry.class);
+	/** {@link Logger} for this class. */
+	private static final Logger LOGGER =
+			ModelBusPlugin.getLogger(ModelRegistry.class);
 
-  // the list of registered models
-  private List<IModel> models;
+	/** Keeps track of the active {@link IModel}. */
+	private IModel activeModel;
 
-  // keeps track of the active model
-  private IModel activeModel;
+	/** The list of registered {@link IModel}s. */
+	private Set<IModel> models;
 
-  // a list of listeners
-  private ListenerList listeners;
+	/** A list of listeners. */
+	private ListenerList listeners;
 
-  /*
-   * (non-Javadoc)
-   * 
-   * @see tudresden.ocl20.pivot.modelbus.IModelRegistry#addMetamodel(tudresden.ocl20.pivot.modelbus.IModel)
-   */
-  public void addModel(IModel model) {
-    if (logger.isDebugEnabled()) {
-      logger.debug("addModel(model=" + model + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
-    }
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * tudresden.ocl20.pivot.modelbus.IModelRegistry#addMetamodel(tudresden.ocl20
+	 * .pivot.modelbus.IModel)
+	 */
+	public void addModel(IModel model) {
 
-    if (model == null) {
-      throw new IllegalArgumentException("The parameter 'model' must not be null."); //$NON-NLS-1$
-    }
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("addModel(model=" + model + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
+		}
+		// no else.
 
-    // lazily create the list of models
-    if (models == null) {
-      models = new ArrayList<IModel>();
-    }
+		if (model == null) {
+			throw new IllegalArgumentException(
+					"The parameter 'model' must not be null."); //$NON-NLS-1$
+		}
+		// no else.
 
-    // check if model is already contained in the registry; this is meant to be captured and dealt
-    // with on the UI, e.g., by showing an error message; this is better than silently do nothing
-    if (models.contains(model)) {
-      throw new IllegalStateException("Model '" + model.getDisplayName() + "' is already loaded."); //$NON-NLS-1$//$NON-NLS-2$
-    }
+		/* Lazily create the list of models. */
+		if (this.models == null) {
+			this.models = new HashSet<IModel>();
+		}
+		// no else.
 
-    // add the model
-    models.add(model);
+		/*
+		 * Check if model is already contained in the registry; this is meant to be
+		 * captured and dealt with on the UI, e.g., by showing an error message;
+		 * this is better than silently do nothing.
+		 */
+		if (this.models.contains(model)) {
+			LOGGER.warn("Model '" + model.getDisplayName() + "' is already loaded."); //$NON-NLS-1$//$NON-NLS-2$
+		}
+		// no else.
 
-    // inform listeners
-    fireModelAdded(model);
+		/* Add the model. */
+		this.models.add(model);
 
-    // if no model has been active, make this the active one
-    if (activeModel == null) {
-      setActiveModel(model);
-    }
+		/* Inform listeners. */
+		this.fireModelAdded(model);
 
-    if (logger.isDebugEnabled()) {
-      logger.debug("addModel() - exit"); //$NON-NLS-1$
-    }
-  }
+		/* If no model has been active, make this the active one. */
+		if (this.activeModel == null) {
+			this.setActiveModel(model);
+		}
+		// no else.
 
-  /*
-   * (non-Javadoc)
-   * 
-   * @see tudresden.ocl20.pivot.modelbus.IModelRegistry#getActiveModel()
-   */
-  public IModel getActiveModel() {
-    return activeModel;
-  }
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("addModel() - exit"); //$NON-NLS-1$
+		}
+		// no else.
+	}
 
-  /*
-   * (non-Javadoc)
-   * 
-   * @see tudresden.ocl20.pivot.modelbus.IModelRegistry#setActiveModel(tudresden.ocl20.pivot.modelbus.IModel)
-   */
-  public void setActiveModel(IModel model) {
-    if (logger.isDebugEnabled()) {
-      logger.debug("setActiveModel(model=" + model + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
-    }
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * tudresden.ocl20.pivot.modelbus.IModelRegistry#addModelBusListener(tudresden
+	 * .ocl20.pivot.modelbus.event.IModelRegistryListener)
+	 */
+	public void addModelRegistryListener(IModelRegistryListener listener) {
 
-    if (model == null) {
-      throw new IllegalArgumentException("The active model must not be null."); //$NON-NLS-1$
-    }
+		this.getListeners().add(listener);
+	}
 
-    // check that the new active model is managed by this registry
-    if (!models.contains(model)) {
-      throw new IllegalArgumentException("The model '" + model.getDisplayName() //$NON-NLS-1$
-          + "' must be added to the model registry first before it can be set active."); //$NON-NLS-1$
-    }
+	/*
+	 * (non-Javadoc)
+	 * @see tudresden.ocl20.pivot.modelbus.IModelRegistry#dispose()
+	 */
+	public void dispose() {
 
-    // only update if the active model has changed
-    if (activeModel == null || !activeModel.equals(model)) {
-      if (logger.isInfoEnabled()) {
-        logger.info(NLS.bind(ModelBusMessages.ModelRegistry_SettingActiveModel,model
-            .getDisplayName()));
-      }
+		this.activeModel = null;
 
-      activeModel = model;
-      fireActiveModelChanged(model);
-    }
+		if (this.models != null) {
+			this.models.clear();
+			this.models = null;
+		}
+		// no else.
+	}
 
-    if (logger.isDebugEnabled()) {
-      logger.debug("setActiveModel() - exit"); //$NON-NLS-1$
-    }
-  }
+	/*
+	 * (non-Javadoc)
+	 * @see tudresden.ocl20.pivot.modelbus.IModelRegistry#getActiveModel()
+	 */
+	public IModel getActiveModel() {
 
-  /*
-   * (non-Javadoc)
-   * 
-   * @see tudresden.ocl20.pivot.modelbus.IModelRegistry#dispose()
-   */
-  public void dispose() {
-    if (models != null) {
-      models.clear();
-      models = null;
-    }
-  }
+		return this.activeModel;
+	}
 
-  /*
-   * (non-Javadoc)
-   * 
-   * @see tudresden.ocl20.pivot.modelbus.IModelRegistry#getModels()
-   */
-  public IModel[] getModels() {
-    return models == null ? new IModel[] {} : models.toArray(new IModel[models.size()]);
-  }
+	/*
+	 * (non-Javadoc)
+	 * @see tudresden.ocl20.pivot.modelbus.IModelRegistry#getModels()
+	 */
+	public IModel[] getModels() {
 
-  /*
-   * (non-Javadoc)
-   * 
-   * @see tudresden.ocl20.pivot.modelbus.IModelRegistry#addModelBusListener(tudresden.ocl20.pivot.modelbus.event.IModelRegistryListener)
-   */
-  public void addModelRegistryListener(IModelRegistryListener listener) {
-    getListeners().add(listener);
-  }
+		IModel[] result;
 
-  /*
-   * (non-Javadoc)
-   * 
-   * @see tudresden.ocl20.pivot.modelbus.IModelRegistry#removeModelBusListener(tudresden.ocl20.pivot.modelbus.event.IModelRegistryListener)
-   */
-  public void removeModelRegistryListener(IModelRegistryListener listener) {
-    if (listeners != null) {
-      listeners.remove(listener);
-    }
-  }
+		if (this.models == null) {
+			result = new IModel[] {};
+		}
 
-  /**
-   * Helper method that informs all listeners about an added model.
-   */
-  protected void fireModelAdded(IModel model) {
-    ModelRegistryEvent event = null;
+		else {
+			result = this.models.toArray(new IModel[this.models.size()]);
+		}
 
-    if (listeners != null) {
-      Object[] listeners = this.listeners.getListeners();
+		return result;
+	}
 
-      for (int i = 0; i < listeners.length; i++) {
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * tudresden.ocl20.pivot.modelbus.IModelRegistry#removeModelBusListener(tudresden
+	 * .ocl20.pivot.modelbus.event.IModelRegistryListener)
+	 */
+	public void removeModelRegistryListener(IModelRegistryListener listener) {
 
-        // lazily create the event
-        if (event == null) {
-          event = new ModelRegistryEvent(this,model);
-        }
+		if (this.listeners != null) {
+			this.listeners.remove(listener);
+		}
+		// no else.
+	}
 
-        ((IModelRegistryListener) listeners[i]).modelAdded(event);
-      }
-    }
-  }
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * tudresden.ocl20.pivot.modelbus.IModelRegistry#setActiveModel(tudresden.
+	 * ocl20.pivot.modelbus.IModel)
+	 */
+	public void setActiveModel(IModel model) {
 
-  /**
-   * Helper method that informs all listeners about an added model.
-   */
-  protected void fireActiveModelChanged(IModel model) {
-    ModelRegistryEvent event = null;
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("setActiveModel(model=" + model + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
+		}
+		// no else.
 
-    if (listeners != null) {
-      Object[] listeners = this.listeners.getListeners();
+		if (model == null) {
+			throw new IllegalArgumentException("The active model must not be null."); //$NON-NLS-1$
+		}
+		// no else.
 
-      for (int i = 0; i < listeners.length; i++) {
+		/* Check that the new active model is managed by this registry. */
+		if (this.models == null || !this.models.contains(model)) {
+			throw new IllegalArgumentException(
+					"The model '" + model.getDisplayName() //$NON-NLS-1$
+							+ "' must be added to the model registry first before it can be set active."); //$NON-NLS-1$
+		}
+		// no else.
 
-        // lazily create the event
-        if (event == null) {
-          event = new ModelRegistryEvent(this,model);
-        }
+		/* Only update if the active model has changed. */
+		if (this.activeModel == null || !this.activeModel.equals(model)) {
 
-        ((IModelRegistryListener) listeners[i]).activeModelChanged(event);
-      }
-    }
-  }
+			if (LOGGER.isInfoEnabled()) {
+				LOGGER.info(NLS.bind(ModelBusMessages.ModelRegistry_SettingActiveModel,
+						model.getDisplayName()));
+			}
+			// no else.
 
-  /**
-   * Helper method that lazily creates the list of listeners.
-   */
-  protected ListenerList getListeners() {
+			this.activeModel = model;
+			this.fireActiveModelChanged(model);
+		}
+		// no else.
 
-    if (listeners == null) {
-      listeners = new ListenerList(ListenerList.IDENTITY);
-    }
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("setActiveModel() - exit"); //$NON-NLS-1$
+		}
+		// no else.
+	}
 
-    return listeners;
-  }
+	/**
+	 * <p>
+	 * A helper method that informs all listeners about a a new active
+	 * {@link IModel}.
+	 * </p>
+	 * 
+	 * @param model
+	 *          The {@link IModel} that has been set active.
+	 */
+	protected void fireActiveModelChanged(IModel model) {
+
+		ModelRegistryEvent event;
+		event = null;
+
+		if (this.listeners != null) {
+
+			Object[] listeners;
+			listeners = this.listeners.getListeners();
+
+			for (int index = 0; index < listeners.length; index++) {
+
+				/* Lazily create the event. */
+				if (event == null) {
+					event = new ModelRegistryEvent(this, model);
+				}
+				// no else.
+
+				((IModelRegistryListener) listeners[index]).activeModelChanged(event);
+			}
+			// end for.
+		}
+		// no else.
+	}
+
+	/**
+	 * <p>
+	 * A helper method that informs all listeners about an added {@link IModel}.
+	 * </p>
+	 * 
+	 * @param model
+	 *          The {@link IModel} that has been added.
+	 */
+	protected void fireModelAdded(IModel model) {
+
+		ModelRegistryEvent event;
+		event = null;
+
+		if (this.listeners != null) {
+
+			Object[] listeners;
+			listeners = this.listeners.getListeners();
+
+			for (int index = 0; index < listeners.length; index++) {
+
+				/* Lazily create the event. */
+				if (event == null) {
+					event = new ModelRegistryEvent(this, model);
+				}
+				// no else.
+
+				((IModelRegistryListener) listeners[index]).modelAdded(event);
+			}
+			// end for.
+		}
+		// no else.
+	}
+
+	/**
+	 * <p>
+	 * A helper method that lazily creates the {@link ListenerList}.
+	 * </p>
+	 */
+	protected ListenerList getListeners() {
+
+		if (this.listeners == null) {
+			this.listeners = new ListenerList(ListenerList.IDENTITY);
+		}
+		// no else.
+
+		return this.listeners;
+	}
 }

@@ -28,7 +28,7 @@
  * http://st.inf.tu-dresden.de/ocl                                           *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  */
-package tudresden.ocl20.pivot.modelbus.model.internal;
+package tudresden.ocl20.pivot.modelbus.modelinstance.internal;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -137,12 +137,6 @@ public class ModelInstanceRegistry implements IModelInstanceRegistry {
 		if (this.activeModelInstances != null) {
 			this.activeModelInstances.clear();
 			this.activeModelInstances = null;
-		}
-		// no else.
-
-		if (this.listeners != null) {
-			this.listeners.clear();
-			this.listeners = null;
 		}
 		// no else.
 	}
