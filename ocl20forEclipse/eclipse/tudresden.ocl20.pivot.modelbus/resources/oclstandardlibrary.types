@@ -145,6 +145,7 @@
     </ownedOperation>
   </oclAny>
   <oclVoid name="OclVoid" superType="//@oclAny"/>
+  <oclInvalid name="OclInvalid" superType="//@oclAny"/>
   <oclType name="OclType" superType="//@oclAny">
     <ownedTypeParameter name="T"/>
     <ownedOperation name="=" type="//@oclBoolean">
