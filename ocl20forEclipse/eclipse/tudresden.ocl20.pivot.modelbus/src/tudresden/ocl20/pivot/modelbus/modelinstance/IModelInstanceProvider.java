@@ -72,23 +72,23 @@ public interface IModelInstanceProvider {
 	 * <p>
 	 * Loads an IModelInstance for a given name and a given {@link IModel}.
 	 * 
-	 * @param modelInstanceName
-	 *          The name of the {@link IModelInstance} which shall be returned.
-	 * @return An {@link IModelInstance}.
-	 */
-	IModelInstance getModelInstance(String modelInstanceName, IModel model)
-			throws ModelAccessException;
-
-	/**
-	 * <p>
-	 * Loads an IModelInstance for a given name and a given {@link IModel}.
-	 * 
 	 * @param modelInstanceFile
 	 *          The {@link File} of the {@link IModelInstance} which shall be
 	 *          returned.
 	 * @return An {@link IModelInstance}.
 	 */
 	IModelInstance getModelInstance(File modelInstanceFile, IModel model)
+			throws ModelAccessException;
+
+	/**
+	 * <p>
+	 * Loads an IModelInstance for a given name and a given {@link IModel}.
+	 * 
+	 * @param modelInstanceName
+	 *          The name of the {@link IModelInstance} which shall be returned.
+	 * @return An {@link IModelInstance}.
+	 */
+	IModelInstance getModelInstance(String modelInstanceName, IModel model)
 			throws ModelAccessException;
 
 	/**

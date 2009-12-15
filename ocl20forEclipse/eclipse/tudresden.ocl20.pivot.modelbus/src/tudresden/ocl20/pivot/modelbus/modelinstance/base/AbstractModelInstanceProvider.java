@@ -55,6 +55,42 @@ public abstract class AbstractModelInstanceProvider implements
 	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.modelbus.IModelInstanceProvider#getModelInstance
+	 * (java.io.File, tudresden.ocl20.pivot.modelbus.IModel)
+	 */
+	@SuppressWarnings("deprecation")
+	public IModelInstance getModelInstance(File modelInstanceFile, IModel model)
+			throws ModelAccessException {
+	
+		IModelInstance modelInstance;
+		URL modelInstanceFileUrl;
+	
+		if (modelInstanceFile == null) {
+			throw new IllegalArgumentException(
+					"The argument 'modelInstanceFile' was null."); //$NON-NLS-1$
+		}
+		// no else.
+	
+		try {
+			/* File.toURL().toURL() handles white spaces differently. */
+			modelInstanceFileUrl = modelInstanceFile.toURL();
+		}
+	
+		catch (MalformedURLException e) {
+			throw new ModelAccessException("Failed to create a URL for file " //$NON-NLS-1$
+					+ modelInstanceFile.getAbsolutePath(), e);
+		}
+	
+		/* Delegate to user implementation. */
+		modelInstance = this.getModelInstance(modelInstanceFileUrl, model);
+	
+		return modelInstance;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.modelbus.IModelInstanceProvider#getModelInstance
 	 * (java.lang.String, tudresden.ocl20.pivot.modelbus.IModel)
 	 */
 	public IModelInstance getModelInstance(String modelInstanceName,
@@ -74,42 +110,6 @@ public abstract class AbstractModelInstanceProvider implements
 
 		/* Delegate to user implementation. */
 		modelInstance = this.getModelInstance(modelInstanceUrl, model);
-
-		return modelInstance;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * tudresden.ocl20.pivot.modelbus.IModelInstanceProvider#getModelInstance
-	 * (java.io.File, tudresden.ocl20.pivot.modelbus.IModel)
-	 */
-	@SuppressWarnings("deprecation")
-	public IModelInstance getModelInstance(File modelInstanceFile, IModel model)
-			throws ModelAccessException {
-
-		IModelInstance modelInstance;
-		URL modelInstanceFileUrl;
-
-		if (modelInstanceFile == null) {
-			throw new IllegalArgumentException(
-					"The argument 'modelInstanceFile' was null."); //$NON-NLS-1$
-		}
-		// no else.
-
-		try {
-			/* File.toURL().toURL() handles white spaces differently. */
-			modelInstanceFileUrl = modelInstanceFile.toURL();
-		}
-
-		catch (MalformedURLException e) {
-			throw new ModelAccessException("Failed to create a URL for file " //$NON-NLS-1$
-					+ modelInstanceFile.getAbsolutePath(), e);
-		}
-
-		/* Delegate to user implementation. */
-		modelInstance = this.getModelInstance(modelInstanceFileUrl, model);
 
 		return modelInstance;
 	}

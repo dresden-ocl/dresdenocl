@@ -34,75 +34,90 @@ import tudresden.ocl20.pivot.modelbus.event.IModelInstanceRegistryListener;
 import tudresden.ocl20.pivot.modelbus.model.IModel;
 
 /**
+ * <p>
+ * The {@link IModelInstanceRegistry} manages all {@link IModelInstance}s that
+ * are imported into Dresden OCL2 for Eclipse.
+ * </p>
  * 
- *
  * @author Ronny Brandt
- * @version 1.0 31.08.2007
  */
 public interface IModelInstanceRegistry {
 
 	/**
-	 * Adds a {@link IModelInstance}.
+	 * <p>
+	 * Adds an {@link IModelInstance}.
+	 * </p>
 	 * 
 	 * @param model
-	 *            the {@link IModel} the {@link IModelInstance} belongs to
+	 *          The {@link IModel} the {@link IModelInstance} belongs to.
 	 * @param modelInstance
-	 *            the {@link IModelInstance} to add
+	 *          The {@link IModelInstance} to add.
 	 */
 	void addModelInstance(IModel model, IModelInstance modelInstance);
 
 	/**
-	 * Gets the {@link IModelInstance}s that belong to the given {@link IModel}.
+	 * <p>
+	 * Adds an {@link IModelInstanceRegistryListener}.
+	 * </p>
 	 * 
-	 * @param model
-	 *            the {@link IModel} the {@link IModelInstance}s are asked for
-	 * 
-	 * @return the {@link IModelInstance}s for the given {@link IModel}
+	 * @param listener
+	 *          The {@link IModelInstanceRegistryListener} to be added.
 	 */
-	IModelInstance[] getModelInstances(IModel model);
+	void addModelInstanceRegistryListener(IModelInstanceRegistryListener listener);
 
 	/**
+	 * <p>
+	 * Disposes the {@link IModelInstanceRegistry}.
+	 * </p>
+	 */
+	void dispose();
+
+	/**
+	 * <p>
 	 * Gets the active {@link IModelInstance} for the given {@link IModel}.
+	 * </p>
 	 * 
 	 * @param model
-	 *            the {@link IModel} whose active {@link IModelInstance} is
-	 *            searched
+	 *          The {@link IModel} whose active {@link IModelInstance} is
+	 *          searched.
 	 * 
-	 * @return the active {@link IModelInstance} for the given {@link IModel}
+	 * @return The active {@link IModelInstance} for the given {@link IModel}.
 	 */
 	IModelInstance getActiveModelInstance(IModel model);
 
 	/**
-	 * Sets the active {@link IModelInstance} for the given {@link IModel}.
+	 * <p>
+	 * Gets the {@link IModelInstance}s that belong to the given {@link IModel}.
+	 * </p>
 	 * 
 	 * @param model
-	 *            the {@link IModel} for which the active {@link IModelInstance}
-	 *            shall be set
-	 * @param modelInstance
-	 *            the new active {@link IModelInstance}
-	 */
-	void setActiveModelInstance(IModel model, IModelInstance modelInstance);
-
-	/**
-	 * Adds an {@link IModelInstanceRegistryListener}
+	 *          The {@link IModel} the {@link IModelInstance}s are requested for.
 	 * 
-	 * @param listener
-	 *            the listener
+	 * @return The {@link IModelInstance}s for the given {@link IModel}.
 	 */
-	void addModelInstanceRegistryListener(
-			IModelInstanceRegistryListener listener);
+	IModelInstance[] getModelInstances(IModel model);
 
 	/**
+	 * <p>
 	 * Removes an {@link IModelInstanceRegistryListener}.
+	 * </p>
 	 * 
 	 * @param listener
-	 *            the listener
+	 *          The {@link IModelInstanceRegistryListener} to be removed.
 	 */
 	void removeModelInstanceRegistryListener(
 			IModelInstanceRegistryListener listener);
 
 	/**
-	 * Dispose.
+	 * <p>
+	 * Sets the active {@link IModelInstance} for the given {@link IModel}.
+	 * </p>
+	 * 
+	 * @param model
+	 *          The {@link IModel} for which the active {@link IModelInstance}
+	 *          shall be set.
+	 * @param modelInstance
+	 *          The new active {@link IModelInstance}.
 	 */
-	void dispose();
+	void setActiveModelInstance(IModel model, IModelInstance modelInstance);
 }

@@ -1,3 +1,35 @@
+/**
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * Copyright (C) 2007 Matthias Braeuer (braeuer.matthias@web.de).            *
+ * All rights reserved.                                                      *
+ *                                                                           *
+ * This work was done as a project at the Chair for Software Technology,     *
+ * Dresden University Of Technology, Germany (http://st.inf.tu-dresden.de).  *
+ * It is understood that any modification not identified as such is not      *
+ * covered by the preceding statement.                                       *
+ *                                                                           *
+ * This work is free software; you can redistribute it and/or modify it      *
+ * under the terms of the GNU Library General Public License as published    *
+ * by the Free Software Foundation; either version 2 of the License, or      *
+ * (at your option) any later version.                                       *
+ *                                                                           *
+ * This work is distributed in the hope that it will be useful, but WITHOUT  *
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or     *
+ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Library General Public     *
+ * License for more details.                                                 *
+ *                                                                           *
+ * You should have received a copy of the GNU Library General Public License *
+ * along with this library; if not, you can view it online at                *
+ * http://www.fsf.org/licensing/licenses/gpl.html.                           *
+ *                                                                           *
+ * To submit a bug report, send a comment, or get the latest news on this    *
+ * project, please visit the website: http://dresden-ocl.sourceforge.net.    *
+ * For more information on OCL and related projects visit the OCL Portal:    *
+ * http://st.inf.tu-dresden.de/ocl                                           *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ *
+ * $Id$
+ */
 package tudresden.ocl20.pivot.modelbus.model.internal;
 
 import java.util.HashMap;
@@ -15,127 +47,156 @@ import tudresden.ocl20.pivot.modelbus.model.ITypeResolver;
 import tudresden.ocl20.pivot.modelbus.model.exception.TypeNotFoundException;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 
-
 /**
+ * <p>
  * A default implementation of the {@link ITypeResolver} interface.
- *
+ * </p>
+ * 
  * @author Matthias Braeuer
- * @version 1.0 19.06.2007
  */
 public class TypeResolver implements ITypeResolver {
 
-  /**
-   * Logger for this class
-   */
-  private static final Logger logger = Logger.getLogger(TypeResolver.class);
-  
-  // the associated model
-  private IModel model;
-  
-  // a cache for the primitive types from the OCL Standard library
-  private Map<String, Type> primitiveTypes;
+	/** The {@link Logger} for this class. */
+	private static final Logger LOGGER = Logger.getLogger(TypeResolver.class);
 
+	/** The associated {@link IModel}. */
+	private IModel model;
 
-  /**
-   * Creates a new default <code>TypeResolver</code>.
-   * 
-   * @param model the associated <code>IModel</code>, must not be <code>null</code>
-   */
-  public TypeResolver(IModel model) {
-    
-    // should not happen in the default implementation, but clients may create own type resolvers
-    if (model == null) {
-      throw new IllegalArgumentException("The reference to the associated model must not be null."); //$NON-NLS-1$
-    }
-    
-    this.model = model;
-  }
+	/** Cache for the predefined {@link Type}s from the OCL Standard library. */
+	private Map<String, Type> predefinedTypes;
 
+	/**
+	 * <p>
+	 * Creates a new default {@link TypeResolver}.
+	 * </p>
+	 * 
+	 * @param model
+	 *          The associated {@link IModel}, must not be <code>null</code>.
+	 */
+	public TypeResolver(IModel model) {
 
-  /* (non-Javadoc)
-   * @see tudresden.ocl20.pivot.modelbus.ITypeResolver#findType(java.util.List)
-   */
-  public Type findType(List<String> pathName) throws TypeNotFoundException, ModelAccessException {
-    if (logger.isDebugEnabled()) {
-      logger.debug("findType(pathName=" + pathName + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
-    }
+		/*
+		 * Should not happen in the default implementation, but clients may create
+		 * own type resolvers.
+		 */
+		if (model == null) {
+			throw new IllegalArgumentException(
+					"The reference to the associated model must not be null."); //$NON-NLS-1$
+		}
+		// no else.
 
-    Type type = null;
+		this.model = model;
+	}
 
-    if (pathName == null || pathName.isEmpty()) {
-      throw new IllegalArgumentException("The path name must not be null or empty."); //$NON-NLS-1$
-    }
-    
-    // try to look up a primitive type
-    if (pathName.size() == 1) {
-      type = getPredefinedTypes().get(pathName.get(0));
-    }
+	/*
+	 * (non-Javadoc)
+	 * @see tudresden.ocl20.pivot.modelbus.ITypeResolver#findType(java.util.List)
+	 */
+	public Type findType(List<String> pathName) throws TypeNotFoundException,
+			ModelAccessException {
 
-    // if no primitive type found, try to look in the model
-    if (type == null) {
-      type = model.findType(pathName);
-    }
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("findType(pathName=" + pathName + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
+		}
+		// no else.
 
-    if (type == null) {
-      throw new TypeNotFoundException("Unable to find type '" + pathName + "'."); //$NON-NLS-1$//$NON-NLS-2$
-    }
+		Type type = null;
 
-    if (logger.isDebugEnabled()) {
-      logger.debug("findType() - exit - return value=" + type); //$NON-NLS-1$
-    }
-    
-    return type;
-  }
- 
-  
-  /**
-   * Helper method to lazily get the OCL standard types.
-   */
-  private Map<String, Type> getPredefinedTypes(){
+		if (pathName == null || pathName.isEmpty()) {
+			throw new IllegalArgumentException(
+					"The path name must not be null or empty."); //$NON-NLS-1$
+		}
+		// no else.
 
-    if (primitiveTypes == null) {
-      
-      // get the OCL library
-      IOclLibraryProvider provider = model.getOclLibraryProvider();
+		/* Try to look up a primitive type. */
+		if (pathName.size() == 1) {
+			type = this.getPredefinedTypes().get(pathName.get(0));
+		}
+		// no else.
 
-      if (provider == null) {
-        throw new ModelBusException("The model '" + model.getDisplayName() //$NON-NLS-1$
-            + "' did not return a valid provider for the OCL Standard Library."); //$NON-NLS-1$
-      }
+		/* If no primitive type found, try to look in the model. */
+		if (type == null) {
+			type = this.model.findType(pathName);
+		}
+		// no else.
 
-      OclLibrary oclLibrary = provider.getOclLibrary();
+		if (type == null) {
+			throw new TypeNotFoundException("Unable to find type '" + pathName + "'."); //$NON-NLS-1$//$NON-NLS-2$
+		}
+		// no else.
 
-      // instantiate the map for the primitive types and initialize it
-      primitiveTypes = new HashMap<String, Type>();
-      initializePredefinedTypes(oclLibrary);
-    }
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("findType() - exit - return value=" + type); //$NON-NLS-1$
+		}
+		// no else.
 
-    return primitiveTypes;
-  }
+		return type;
+	}
 
-  
-  /**
-   * Helper method to initialize the cache with the primitive types.
-   * 
-   * TODO: These explicit String references to the OCL Standard Library types should be replaced by
-   * a generic lookup mechanism, maybe configured via external property files. To see why this is
-   * necessary, notice that the type returned by oclLibrary.getOclBoolean() is not necessarily named
-   * "Boolean". It is just known that this is the OCL boolean type, the concrete naming is up to the
-   * model of the Standard Library provided by the OclLibraryProvider.
-   */
-  protected void initializePredefinedTypes(OclLibrary oclLibrary) {
-    primitiveTypes.put("OclAny",oclLibrary.getOclAny()); //$NON-NLS-1$
-    primitiveTypes.put("OclType",oclLibrary.getOclType()); //$NON-NLS-1$
-    primitiveTypes.put("OclVoid",oclLibrary.getOclVoid()); //$NON-NLS-1$
-    primitiveTypes.put("Invalid",oclLibrary.getOclInvalid()); //$NON-NLS-1$
-    primitiveTypes.put("Boolean",oclLibrary.getOclBoolean()); //$NON-NLS-1$
-    primitiveTypes.put("Integer",oclLibrary.getOclInteger()); //$NON-NLS-1$
-    primitiveTypes.put("Real",oclLibrary.getOclReal()); //$NON-NLS-1$
-    primitiveTypes.put("String",oclLibrary.getOclString()); //$NON-NLS-1$
-    primitiveTypes.put("Collection",oclLibrary.getOclCollection()); //$NON-NLS-1$
-    primitiveTypes.put("Sequence",oclLibrary.getOclSequence()); //$NON-NLS-1$
-    primitiveTypes.put("Bag",oclLibrary.getOclBag()); //$NON-NLS-1$
-    primitiveTypes.put("Set",oclLibrary.getOclSet()); //$NON-NLS-1$
-    primitiveTypes.put("OrderedSet",oclLibrary.getOclOrderedSet()); //$NON-NLS-1$
-  }
+	/**
+	 * <p>
+	 * Helper method to initialize the cache with the primitive types.
+	 * </p>
+	 */
+	protected void initializePredefinedTypes(OclLibrary oclLibrary) {
+
+		this.predefinedTypes.put(oclLibrary.getOclAny().getName(), oclLibrary
+				.getOclAny());
+		this.predefinedTypes.put(oclLibrary.getOclType().getName(), oclLibrary
+				.getOclType());
+		this.predefinedTypes.put(oclLibrary.getOclVoid().getName(), oclLibrary
+				.getOclVoid());
+		this.predefinedTypes.put(oclLibrary.getOclInvalid().getName(), oclLibrary
+				.getOclInvalid());
+
+		this.predefinedTypes.put(oclLibrary.getOclBoolean().getName(), oclLibrary
+				.getOclBoolean());
+		this.predefinedTypes.put(oclLibrary.getOclInteger().getName(), oclLibrary
+				.getOclInteger());
+		this.predefinedTypes.put(oclLibrary.getOclReal().getName(), oclLibrary
+				.getOclReal());
+		this.predefinedTypes.put(oclLibrary.getOclString().getName(), oclLibrary
+				.getOclString());
+
+		this.predefinedTypes.put(oclLibrary.getOclCollection().getName(),
+				oclLibrary.getOclCollection());
+		this.predefinedTypes.put(oclLibrary.getOclSequence().getName(), oclLibrary
+				.getOclSequence());
+		this.predefinedTypes.put(oclLibrary.getOclBag().getName(), oclLibrary
+				.getOclBag());
+		this.predefinedTypes.put(oclLibrary.getOclSet().getName(), oclLibrary
+				.getOclSet());
+		this.predefinedTypes.put(oclLibrary.getOclOrderedSet().getName(),
+				oclLibrary.getOclOrderedSet());
+	}
+
+	/**
+	 * <p>
+	 * A helper method to lazily get the OCL standard {@link Type}s.
+	 * </p>
+	 */
+	private Map<String, Type> getPredefinedTypes() {
+
+		if (this.predefinedTypes == null) {
+
+			/* Get the OCL library. */
+			IOclLibraryProvider provider;
+			provider = this.model.getOclLibraryProvider();
+
+			if (provider == null) {
+				throw new ModelBusException("The model '" + model.getDisplayName() //$NON-NLS-1$
+						+ "' did not return a valid provider for the OCL Standard Library."); //$NON-NLS-1$
+			}
+			// no else.
+
+			OclLibrary oclLibrary;
+			oclLibrary = provider.getOclLibrary();
+
+			/* Instantiate the map for the primitive types and initialize it. */
+			this.predefinedTypes = new HashMap<String, Type>();
+			this.initializePredefinedTypes(oclLibrary);
+		}
+
+		return this.predefinedTypes;
+	}
 }

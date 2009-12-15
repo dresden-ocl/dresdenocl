@@ -18,7 +18,6 @@ with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
 package tudresden.ocl20.pivot.modelbus.modelinstance;
 
-
 /**
  * <p>
  * An interface for the registry which contains all registered file formats for
@@ -36,8 +35,7 @@ public interface IModelInstanceTypeRegistry {
 	 * </p>
 	 * 
 	 * @param fileFormat
-	 *            The {@link IModelInstanceTypeRegistry} which shall be
-	 *            added.
+	 *          The {@link IModelInstanceTypeRegistry} which shall be added.
 	 */
 	void addModelInstanceType(IModelInstanceType miType);
 
@@ -51,12 +49,12 @@ public interface IModelInstanceTypeRegistry {
 	/**
 	 * <p>
 	 * Returns the {@link IModelInstanceType} with the given id or
-	 * <code>null</code> if no {@link IModelInstanceTypeRegistry} with
-	 * that id is registered.
+	 * <code>null</code> if no {@link IModelInstanceTypeRegistry} with that id is
+	 * registered.
 	 * </p>
 	 * 
 	 * @param id
-	 *            An identifier for a {@link IModelInstanceTypeRegistry}.
+	 *          An identifier for a {@link IModelInstanceTypeRegistry}.
 	 * 
 	 * @return An IModelInstanceFileFormat instance or <code>null</code>.
 	 */
