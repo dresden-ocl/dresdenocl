@@ -45,7 +45,9 @@ public interface IModelInstanceRegistry {
 
 	/**
 	 * <p>
-	 * Adds an {@link IModelInstance}.
+	 * Adds an {@link IModelInstance}. If no active {@link IModelInstance} for the
+	 * given {@link IModel} has been set before, the {@link IModelInstance} will
+	 * also be set as active.
 	 * </p>
 	 * 
 	 * @param model

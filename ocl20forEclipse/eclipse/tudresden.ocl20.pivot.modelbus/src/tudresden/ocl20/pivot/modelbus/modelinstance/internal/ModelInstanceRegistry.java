@@ -30,13 +30,15 @@
  */
 package tudresden.ocl20.pivot.modelbus.modelinstance.internal;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
+import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.ListenerList;
 
+import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
 import tudresden.ocl20.pivot.modelbus.event.IModelInstanceRegistryListener;
 import tudresden.ocl20.pivot.modelbus.event.ModelInstanceRegistryEvent;
 import tudresden.ocl20.pivot.modelbus.model.IModel;
@@ -53,8 +55,12 @@ import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceRegistry;
  */
 public class ModelInstanceRegistry implements IModelInstanceRegistry {
 
+	/** {@link Logger} for this class. */
+	private static final Logger LOGGER =
+			ModelBusPlugin.getLogger(ModelInstanceRegistry.class);
+
 	/** The {@link IModelInstance}s mapped to the corresponding {@link IModel}. */
-	private Map<IModel, List<IModelInstance>> modelInstances;
+	private Map<IModel, Set<IModelInstance>> modelInstances;
 
 	/** Map of active {@link IModelInstance}s according to their {@link IModel}. */
 	private Map<IModel, IModelInstance> activeModelInstances;
@@ -71,6 +77,12 @@ public class ModelInstanceRegistry implements IModelInstanceRegistry {
 	 */
 	public void addModelInstance(IModel model, IModelInstance modelInstance) {
 
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER
+					.debug("addModelInstance(model = " + model + ", modelInstance = " + modelInstance + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
+		}
+		// no else.
+
 		if (modelInstance == null) {
 			throw new IllegalArgumentException(
 					"The parameter 'modelInstance' must not be null.");
@@ -85,21 +97,25 @@ public class ModelInstanceRegistry implements IModelInstanceRegistry {
 
 		/* Lazy initialization of map. */
 		if (this.modelInstances == null) {
-			this.modelInstances = new HashMap<IModel, List<IModelInstance>>();
+			this.modelInstances = new HashMap<IModel, Set<IModelInstance>>();
 		}
 		// no else.
 
-		List<IModelInstance> instances;
+		Set<IModelInstance> instances;
 		instances = this.modelInstances.get(model);
 
 		if (instances == null) {
-			instances = new ArrayList<IModelInstance>();
+			instances = new HashSet<IModelInstance>();
 		}
 		// no else.
 
-		if (instances.contains(modelInstance)) {
-			throw new IllegalArgumentException("ModelInstance '"
-					+ modelInstance.getDisplayName() + "' has already been loaded.");
+		IModelInstance similarModelInstance;
+		similarModelInstance = this.getSimilarModelInstance(model, modelInstance);
+
+		if (similarModelInstance != null) {
+			LOGGER.warn("ModelInstance '" + modelInstance.getDisplayName()
+					+ "' has already been loaded. The ModelInstance will be replaced.");
+			instances.remove(similarModelInstance);
 		}
 		// no else.
 
@@ -107,7 +123,20 @@ public class ModelInstanceRegistry implements IModelInstanceRegistry {
 
 		this.modelInstances.put(model, instances);
 
+		/* Check if an active model instance of the model already exists. */
+		if (this.activeModelInstances == null
+				|| this.activeModelInstances.get(model) == null
+				|| instances.size() == 1) {
+			this.setActiveModelInstance(model, modelInstance);
+		}
+		// no else.
+
 		this.fireModelInstanceAdded(model, modelInstance);
+
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("addModelInstance(IModel, IModelInstance) - exit"); //$NON-NLS-1$
+		}
+		// no else.
 	}
 
 	/*
@@ -149,7 +178,17 @@ public class ModelInstanceRegistry implements IModelInstanceRegistry {
 	 */
 	public IModelInstance getActiveModelInstance(IModel model) {
 
-		return this.activeModelInstances.get(model);
+		IModelInstance result;
+
+		if (this.activeModelInstances != null) {
+			result = this.activeModelInstances.get(model);
+		}
+
+		else {
+			result = null;
+		}
+
+		return result;
 	}
 
 	/*
@@ -167,7 +206,7 @@ public class ModelInstanceRegistry implements IModelInstanceRegistry {
 		}
 
 		else {
-			List<IModelInstance> instances;
+			Set<IModelInstance> instances;
 			instances = this.modelInstances.get(model);
 
 			if (instances == null) {
@@ -205,6 +244,17 @@ public class ModelInstanceRegistry implements IModelInstanceRegistry {
 	 * tudresden.ocl20.pivot.modelbus.IModelInstance)
 	 */
 	public void setActiveModelInstance(IModel model, IModelInstance modelInstance) {
+
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER
+					.debug("setActiveModelInstance(model = " + model + ", modelInstance = " + modelInstance + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
+		}
+		// no else.
+
+		if (modelInstance == null || model == null) {
+			throw new IllegalArgumentException(
+					"Model and ModelInstance arguments must not be null.");
+		}
 
 		if (this.modelInstances == null) {
 			throw new IllegalArgumentException(
@@ -244,6 +294,11 @@ public class ModelInstanceRegistry implements IModelInstanceRegistry {
 		// no else.
 
 		this.fireActiveModelInstanceChanged(model, modelInstance);
+
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("setActiveModelInstance(IModel, IModelInstance) - exit"); //$NON-NLS-1$
+		}
+		// no else.
 	}
 
 	/**
@@ -335,5 +390,56 @@ public class ModelInstanceRegistry implements IModelInstanceRegistry {
 		// no else.
 
 		return this.listeners;
+	}
+
+	/**
+	 * <p>
+	 * A helper method that checks if a given {@link IModelInstance} already
+	 * exsits for a given {@link IModel}.
+	 * </p>
+	 * 
+	 * @param model
+	 *          The {@link IModel}.
+	 * @param modelInstance
+	 *          The {@link IModelInstance}.
+	 * @return A found {@link IModelInstance} if the given {@link IModelInstance}
+	 *         or an {@link IModelInstance} with the same display name is already
+	 *         registered. Else <code>null</code>.
+	 */
+	private IModelInstance getSimilarModelInstance(IModel model,
+			IModelInstance modelInstance) {
+
+		IModelInstance result;
+
+		Set<IModelInstance> modelInstances;
+		modelInstances = this.modelInstances.get(model);
+
+		if (modelInstances != null) {
+
+			if (modelInstances.contains(modelInstance)) {
+				result = modelInstance;
+			}
+
+			else {
+				result = null;
+
+				for (IModelInstance aModelInstance : modelInstances) {
+					if (aModelInstance.getDisplayName().equals(
+							modelInstance.getDisplayName())) {
+						result = aModelInstance;
+						break;
+					}
+					// no else.
+				}
+				// end for.
+			}
+			// end else.
+		}
+
+		else {
+			result = null;
+		}
+
+		return result;
 	}
 }

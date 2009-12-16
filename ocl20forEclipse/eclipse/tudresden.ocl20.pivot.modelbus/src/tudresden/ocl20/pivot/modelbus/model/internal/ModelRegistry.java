@@ -100,7 +100,8 @@ public class ModelRegistry implements IModelRegistry {
 		 * this is better than silently do nothing.
 		 */
 		if (this.models.contains(model)) {
-			LOGGER.warn("Model '" + model.getDisplayName() + "' is already loaded."); //$NON-NLS-1$//$NON-NLS-2$
+			LOGGER
+					.warn("Model '" + model.getDisplayName() + "' is already loaded. The model will be replaced."); //$NON-NLS-1$//$NON-NLS-2$
 		}
 		// no else.
 
