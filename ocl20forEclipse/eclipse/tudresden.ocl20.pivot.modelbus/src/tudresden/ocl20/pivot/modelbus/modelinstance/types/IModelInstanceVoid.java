@@ -37,10 +37,20 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
  * {@link Type} of the {@link PrimitiveTypeKind#VOID}.
  * </p>
  * 
+ * <p>
+ * <strong>This interface should not be implemented!<strong> The singleton
+ * instance is available via the constant {@link IModelInstanceVoid#INSTANCE}.
+ * </p>
+ * 
  * @author Claas Wilke
  */
 public interface IModelInstanceVoid extends IModelInstancePrimitiveType {
 
+	/**
+	 * <p>
+	 * The singleton instance of {@link IModelInstanceVoid}.
+	 * </p>
+	 */
 	static final IModelInstanceVoid INSTANCE = new IModelInstanceVoid() {
 
 		/*
