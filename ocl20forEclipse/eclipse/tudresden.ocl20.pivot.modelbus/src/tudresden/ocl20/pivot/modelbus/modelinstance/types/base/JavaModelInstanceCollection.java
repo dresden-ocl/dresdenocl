@@ -129,11 +129,13 @@ public class JavaModelInstanceCollection<T extends IModelInstanceElement>
 
 		/* Check if sets have the right type of collection. */
 		if (type.getKind().equals(CollectionKind.SET)
+				&& this.myContainedObjects != null
 				&& !(this.myContainedObjects instanceof Set<?>)) {
 			this.myContainedObjects = new HashSet<T>(this.myContainedObjects);
 		}
 
 		else if (type.getKind().equals(CollectionKind.ORDERED_SET)
+				&& this.myContainedObjects != null
 				&& !(this.myContainedObjects instanceof UniqueEList<?>)) {
 			this.myContainedObjects = new UniqueEList<T>(this.myContainedObjects);
 		}

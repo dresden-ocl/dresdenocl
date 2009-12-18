@@ -511,6 +511,13 @@ public class BasisJavaModelInstanceFactory implements IModelInstanceFactory {
 		return result;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceFactory
+	 * #createModelInstanceTuple(java.util.List, java.util.List,
+	 * tudresden.ocl20.pivot.pivotmodel.Type)
+	 */
 	public IModelInstanceTuple createModelInstanceTuple(
 			List<IModelInstanceString> keys, List<IModelInstanceElement> values,
 			Type type) {
