@@ -80,6 +80,12 @@ public class JavaModelInstance extends AbstractModelInstance {
 			JavaModelInstanceTypePlugin.getLogger(JavaModelInstance.class);
 
 	/**
+	 * A counter used to generated default names for empty
+	 * {@link JavaModelInstance}s.
+	 */
+	private static int nameCounter = 0;
+
+	/**
 	 * The {@link ClassLoader}s of this {@link JavaModelInstance}. Required to
 	 * find {@link EnumerationLiteral}s, to get static {@link Property}s and to
 	 * invoke static {@link Operation}s.
@@ -228,6 +234,9 @@ public class JavaModelInstance extends AbstractModelInstance {
 
 		/* Initialize the instance. */
 		this.myModel = model;
+
+		this.myName = this.getClass().getSimpleName() + nameCounter;
+		nameCounter++;
 
 		this.myModelInstanceFactory = new JavaModelInstanceFactory(this.myModel);
 

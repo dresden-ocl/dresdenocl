@@ -58,6 +58,12 @@ public class EcoreModelInstance extends AbstractModelInstance implements
 			EcoreModelInstanceTypePlugin.getLogger(EcoreModelInstanceProvider.class);
 
 	/**
+	 * A counter used to generated default names for empty
+	 * {@link JavaModelInstance}s.
+	 */
+	private static int nameCounter = 0;
+
+	/**
 	 * The {@link Resource} representing the adapted model instance elements of
 	 * this {@link IModelInstance}.
 	 */
@@ -88,6 +94,9 @@ public class EcoreModelInstance extends AbstractModelInstance implements
 
 		this.myModel = model;
 		this.myModelInstanceFactory = new EcoreModelInstanceFactory(this.myModel);
+
+		this.myName = this.getClass().getSimpleName() + nameCounter;
+		nameCounter++;
 
 		/* Probably debug the exit of this method. */
 		if (LOGGER.isDebugEnabled()) {
