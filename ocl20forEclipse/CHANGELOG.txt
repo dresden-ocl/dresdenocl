@@ -1,9 +1,22 @@
 Changes and Bugs fixed during the different Releases
 ====================================================
 
+Release 2.1 (not scheduled yet)
+===============================
 
-Release 2.0 (Scheduled: October 2009)
-=====================================
+* A bug in the ModelRegistry was fixed.
+  - Adding of Models should now handle NullPointerExceptions correctly.
+ 
+* A bug in the UML2 Meta-Model was fixed.
+  - If the top-level package is a UML model or profile directory, 
+    these packages are now adapted correctly.
+
+* A bub in the JavaModelInstanceCollection was fixed.   - JavaModelInstanceCollections can now be initialized with null 
+    values even if they are of the type Set or OrderedSet.
+
+
+Release 2.0 (Scheduled: December 2009)
+======================================
 * The Pivot Model do now contain the PrimitiveTypeKind Void for the adaptation
   of a void Type for Operations without return Parameter.
 
