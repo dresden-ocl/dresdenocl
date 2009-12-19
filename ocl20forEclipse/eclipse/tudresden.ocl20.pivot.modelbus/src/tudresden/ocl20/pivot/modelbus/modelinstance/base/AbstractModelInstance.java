@@ -86,7 +86,7 @@ public abstract class AbstractModelInstance implements IModelInstance {
 	protected IModelInstanceFactory myModelInstanceFactory;
 
 	/** The name of the model instance. */
-	protected String myName;
+	protected String myName = "";
 
 	/**
 	 * <p>
