@@ -198,6 +198,62 @@ public final class ModelInstanceTypeTestServices {
 
 	/**
 	 * <p>
+	 * Returns an empty {@link IModelInstance} of the current
+	 * {@link IModelInstanceType} under test.
+	 * </p>
+	 * 
+	 * @return An empty {@link IModelInstance}.
+	 */
+	public IModelInstance getEmptyModelInstance() {
+
+		IModelInstance result;
+
+		/* Load the IModel first. */
+		if (this.myModel == null) {
+			this.loadModel();
+		}
+		// no else.
+
+		/* Check if the model has been loaded. */
+		if (this.myModel != null) {
+
+			/* Try to get the model instance type. */
+			IModelInstanceType modelInstanceType;
+
+			modelInstanceType =
+					ModelBusPlugin.getModelInstanceTypeRegistry().getModelInstanceType(
+							this.myModelInstanceTypeId);
+
+			if (modelInstanceType != null) {
+				result =
+						modelInstanceType.getModelInstanceProvider()
+								.createEmptyModelInstance(this.myModel);
+			}
+
+			else {
+				String msg;
+
+				msg =
+						ModelInstanceTypeTestSuiteMessages.ModelInstanceTypeTestSuite_Services_ModelInstanceTypeNotFound;
+
+				throw new RuntimeException(msg);
+			}
+		}
+
+		else {
+			String msg;
+
+			msg =
+					ModelInstanceTypeTestSuiteMessages.ModelInstanceTypeTestSuite_Services_ModelWasNull;
+
+			throw new RuntimeException(msg);
+		}
+
+		return result;
+	}
+
+	/**
+	 * <p>
 	 * Indicates, how many integer {@link Property}s the
 	 * <code>PrimitiveTypeProviderClass</code> has.
 	 * </p>
@@ -270,7 +326,8 @@ public final class ModelInstanceTypeTestServices {
 
 			msg =
 					ModelInstanceTypeTestSuiteMessages.ModelInstanceTypeTestSuite_Services_ModelInstanceFileNotFound;
-			msg = NLS.bind(msg, this.myModelInstancePath, this.myModelInstanceBundleId);
+			msg =
+					NLS.bind(msg, this.myModelInstancePath, this.myModelInstanceBundleId);
 
 			throw new RuntimeException(msg);
 		}

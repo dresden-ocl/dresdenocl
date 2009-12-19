@@ -199,6 +199,42 @@ public class TestModelInstance {
 
 	/**
 	 * <p>
+	 * Tests the method {@link IModelInstance#getDisplayName()}.
+	 * </p>
+	 */
+	@org.junit.Test
+	public void testGetDisplayName01() {
+
+		assertNotNull("The name of an IModelInstance must not be null.",
+				modelInstanceUnderTest.getDisplayName());
+
+		/* The model instances should return the same model. */
+		assertTrue("The name of an IModelInstance must not have a length of 0.",
+				modelInstanceUnderTest.getDisplayName().length() > 0);
+	}
+
+	/**
+	 * <p>
+	 * Tests the method {@link IModelInstance#getDisplayName()}.
+	 * </p>
+	 */
+	@org.junit.Test
+	public void testGetDisplayName02() {
+
+		IModelInstance modelInstance;
+		modelInstance =
+				ModelInstanceTypeTestServices.getInstance().getEmptyModelInstance();
+
+		assertNotNull("The name of an IModelInstance must not be null.",
+				modelInstance.getDisplayName());
+
+		/* The model instances should return the same model. */
+		assertTrue("The name of an IModelInstance must not have a length of 0.",
+				modelInstance.getDisplayName().length() > 0);
+	}
+
+	/**
+	 * <p>
 	 * Tests the method {@link IModelInstance#getAllModelInstanceObjects())}.
 	 * </p>
 	 */
@@ -297,8 +333,7 @@ public class TestModelInstance {
 
 			/* Try to get the property. */
 			try {
-				propertyValue =
-						modelInstanceUnderTest.getStaticProperty(property);
+				propertyValue = modelInstanceUnderTest.getStaticProperty(property);
 
 				/* The value should not be null. */
 				assertNotNull(msg, propertyValue);
