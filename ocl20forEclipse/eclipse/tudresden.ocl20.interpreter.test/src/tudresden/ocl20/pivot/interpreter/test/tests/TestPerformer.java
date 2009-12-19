@@ -328,7 +328,7 @@ public class TestPerformer {
 		 */
 		for (Constraint aConstraint : uninterpretedConstraints) {
 
-			for (IModelInstanceElement anModelObject : modelObjects) {
+			for (IModelInstanceElement aModelObject : modelObjects) {
 
 				NamedElement aConstrainedElement;
 
@@ -351,9 +351,9 @@ public class TestPerformer {
 				 * Check if the the constrained element matches to the current model
 				 * object and eventually do the interpretation.
 				 */
-				if (anModelObject.getTypes().contains(aConstrainedElement)) {
+				if (aModelObject.getTypes().contains(aConstrainedElement)) {
 					result.add(this.myInterpreter.interpretConstraint(aConstraint,
-							anModelObject).getResult());
+							aModelObject).getResult());
 				}
 				// no else.
 			}
@@ -368,10 +368,11 @@ public class TestPerformer {
 	}
 
 	// TODO JavaDoc
-	public Operation findOperation(IModelInstanceElement imiElement, String name) throws OperationNotFoundException {
+	public Operation findOperation(IModelInstanceElement imiElement, String name)
+			throws OperationNotFoundException {
 
 		for (Type type : imiElement.getTypes()) {
-			
+
 			for (Operation ownedOperation : type.getOwnedOperation()) {
 
 				if (ownedOperation.getName().equals(name)) {
@@ -379,8 +380,9 @@ public class TestPerformer {
 				}
 			}
 		}
-		
-		throw new OperationNotFoundException("Cannot find operation " + name + " on " + imiElement);
+
+		throw new OperationNotFoundException("Cannot find operation " + name
+				+ " on " + imiElement);
 	}
 
 	/**
@@ -547,22 +549,29 @@ public class TestPerformer {
 
 	/**
 	 * <p>
-	 * Resets the {@link IModel} used by this {@link TestPerformer} and
+	 * Resets the environment ({@link IModel}, {@link IModelInstance} and
+	 * {@link IOclInterpreter}) used by this {@link TestPerformer} and
 	 * reinitializes it. Used to remove new defined or initialized
 	 * {@link IModelInstanceElement}s from the {@link IModel}.
 	 * </p>
+	 * 
+	 * @throws ModelAccessException
 	 */
-	public void resetModel() {
+	public void reset() throws ModelAccessException {
 
 		/* Remove all loaded models. */
 		ModelBusPlugin.getModelRegistry().dispose();
 
-		/* Reload the model. */
-		this.loadModel();
-		this.myModel = ModelBusPlugin.getModelRegistry().getActiveModel();
+		this.myModel = null;
+		this.myModelInstance = null;
+		this.myGlobalEnvironment = null;
+		this.myInterpreter = null;
+		this.interpretedConstraints.clear();
 
-		/* Try to reset the prepared constraints of the global environment. */
-		this.myGlobalEnvironment.clearPreparedConstraints();
+		this.init();
+
+		this.interpretedConstraints.addAll(this.myModel.getRootNamespace()
+				.getOwnedAndNestedRules());
 	}
 
 	/**

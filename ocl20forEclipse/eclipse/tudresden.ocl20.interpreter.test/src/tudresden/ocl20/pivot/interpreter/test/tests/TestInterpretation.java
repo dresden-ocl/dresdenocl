@@ -47,6 +47,7 @@ import tudresden.ocl20.pivot.examples.royalsandloyals.ServiceLevel;
 import tudresden.ocl20.pivot.examples.royalsandloyals.Transaction;
 import tudresden.ocl20.pivot.interpreter.IInterpretationEnvironment;
 import tudresden.ocl20.pivot.interpreter.IOclInterpreter;
+import tudresden.ocl20.pivot.modelbus.ModelAccessException;
 import tudresden.ocl20.pivot.modelbus.modelinstance.exception.OperationNotFoundException;
 import tudresden.ocl20.pivot.modelbus.modelinstance.exception.TypeNotFoundInModelException;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
@@ -1226,9 +1227,11 @@ public class TestInterpretation {
 	 * A test case testing the interpretation of a {@link Constraint} contained
 	 * invariant07.ocl.
 	 * </p>
+	 * 
+	 * @throws ModelAccessException
 	 */
 	@Test
-	public void testInvariant07() {
+	public void testInvariant07() throws ModelAccessException {
 
 		Customer customer1;
 		Customer customer2;
@@ -1245,7 +1248,7 @@ public class TestInterpretation {
 		 * Reset the model to undo some preparations which cross-cut with the tested
 		 * constraint.
 		 */
-		testPerformer.resetModel();
+		testPerformer.reset();
 
 		/* Load OCL file. */
 		testPerformer.loadOCLFile("constraints/invariant07.ocl");
@@ -2479,9 +2482,11 @@ public class TestInterpretation {
 	 * A test case testing the interpretation of a {@link Constraint} contained
 	 * post08.ocl.
 	 * </p>
+	 * 
+	 * @throws OperationNotFoundException
 	 */
 	@Test
-	public void testPost08() {
+	public void testPost08() throws OperationNotFoundException {
 
 		Transaction transaction;
 		OclAny transactionInOcl;
@@ -2522,21 +2527,15 @@ public class TestInterpretation {
 		 * Try to invoke the tested operation and add the result variable to the
 		 * environment.
 		 */
-		try {
-			OclAny parameters[];
-			OclAny opResult;
+		OclAny parameters[];
+		OclAny opResult;
 
-			parameters = new OclAny[0];
-			Operation operation =
-					testPerformer.findOperation(modelObject, "getProgram");
-			opResult = transactionInOcl.invokeOperation(operation, parameters);
+		parameters = new OclAny[0];
+		Operation operation =
+				testPerformer.findOperation(modelObject, "getProgram");
+		opResult = transactionInOcl.invokeOperation(operation, parameters);
 
-			testPerformer.setEnvironmentVariable("result", opResult);
-		}
-
-		catch (OperationNotFoundException e) {
-			fail("The tested operation could not be invoked. Test failed.");
-		}
+		testPerformer.setEnvironmentVariable("result", opResult);
 
 		/* Interpret the selected model objects. */
 		results = testPerformer.interpretRemainingConstraints(modelObject);
