@@ -20,7 +20,10 @@ with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
 package tudresden.ocl20.pivot.modelbus.test.modelinstance;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -263,6 +266,311 @@ public class ModelInstanceRegistryTest {
 	/**
 	 * <p>
 	 * Tests the method
+	 * {@link IModelInstanceRegistry#removeModelInstance(IModelInstance)} by
+	 * simply removing an {@link IModelInstance} that has been added before.
+	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 */
+	@Test
+	public void testRemoveModelInstance01() throws ModelAccessException {
+
+		IModelInstanceRegistry modelInstanceRegistry;
+		modelInstanceRegistry = ModelBusPlugin.getModelInstanceRegistry();
+
+		assertEquals(0, modelInstanceRegistry.getModelInstances(this.model).length);
+
+		IModelInstance modelInstance01;
+		modelInstance01 =
+				ModelBusTestUtility.getJavaModelInstance(
+						"bin/package1/ModelInstance01ProviderClass.class", this.model);
+
+		modelInstanceRegistry.addModelInstance(this.model, modelInstance01);
+
+		/* The model should now be added to the registry. */
+		assertEquals(1, modelInstanceRegistry.getModelInstances(this.model).length);
+
+		/* The model instance should be set as active model instance. */
+		assertNotNull(modelInstanceRegistry.getActiveModelInstance(this.model));
+		assertEquals(modelInstance01, modelInstanceRegistry
+				.getActiveModelInstance(this.model));
+
+		assertTrue(modelInstanceRegistry.removeModelInstance(modelInstance01));
+
+		/* The model instance should now be removed from the registry. */
+		assertEquals(0, modelInstanceRegistry.getModelInstances(this.model).length);
+
+		/* Active model instance should be null. */
+		assertNull(modelInstanceRegistry.getActiveModelInstance(this.model));
+	}
+
+	/**
+	 * <p>
+	 * Tests the method
+	 * {@link IModelInstanceRegistry#removeModelInstance(IModelInstance)} by
+	 * simply removing an {@link IModelInstance} that has been added before.
+	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 */
+	@Test
+	public void testRemoveModelInstance02() throws ModelAccessException {
+
+		IModelInstanceRegistry modelInstanceRegistry;
+		modelInstanceRegistry = ModelBusPlugin.getModelInstanceRegistry();
+
+		assertEquals(0, modelInstanceRegistry.getModelInstances(this.model).length);
+
+		IModelInstance modelInstance01;
+		modelInstance01 =
+				ModelBusTestUtility.getJavaModelInstance(
+						"bin/package1/ModelInstance01ProviderClass.class", this.model);
+
+		IModelInstance modelInstance02;
+		modelInstance02 =
+				ModelBusTestUtility.getJavaModelInstance(
+						"bin/package1/ModelInstance02ProviderClass.class", this.model);
+
+		modelInstanceRegistry.addModelInstance(this.model, modelInstance01);
+		modelInstanceRegistry.addModelInstance(this.model, modelInstance02);
+
+		/* The model instances should now be added to the registry. */
+		assertEquals(2, modelInstanceRegistry.getModelInstances(this.model).length);
+
+		/* The first model instance should be set as active model instance. */
+		assertNotNull(modelInstanceRegistry.getActiveModelInstance(this.model));
+		assertEquals(modelInstance01, modelInstanceRegistry
+				.getActiveModelInstance(this.model));
+
+		assertTrue(modelInstanceRegistry.removeModelInstance(modelInstance01));
+
+		/* The model instance should now be removed from the registry. */
+		assertEquals(1, modelInstanceRegistry.getModelInstances(this.model).length);
+
+		/* Active model instance should be set to model instance 2. */
+		assertNotNull(modelInstanceRegistry.getActiveModelInstance(this.model));
+		assertEquals(modelInstance02, modelInstanceRegistry
+				.getActiveModelInstance(this.model));
+	}
+
+	/**
+	 * <p>
+	 * Tests the method
+	 * {@link IModelInstanceRegistry#removeModelInstance(IModelInstance)} by
+	 * simply removing an {@link IModelInstance} that has been added before.
+	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 */
+	@Test
+	public void testRemoveModelInstance03() throws ModelAccessException {
+
+		IModelInstanceRegistry modelInstanceRegistry;
+		modelInstanceRegistry = ModelBusPlugin.getModelInstanceRegistry();
+
+		assertEquals(0, modelInstanceRegistry.getModelInstances(this.model).length);
+
+		IModelInstance modelInstance01;
+		modelInstance01 =
+				ModelBusTestUtility.getJavaModelInstance(
+						"bin/package1/ModelInstance01ProviderClass.class", this.model);
+
+		IModelInstance modelInstance02;
+		modelInstance02 =
+				ModelBusTestUtility.getJavaModelInstance(
+						"bin/package1/ModelInstance02ProviderClass.class", this.model);
+
+		IModelInstance modelInstance03;
+		modelInstance03 =
+				ModelBusTestUtility.getJavaModelInstance(
+						"bin/package1/ModelInstance03ProviderClass.class", this.model);
+
+		modelInstanceRegistry.addModelInstance(this.model, modelInstance01);
+		modelInstanceRegistry.addModelInstance(this.model, modelInstance02);
+		modelInstanceRegistry.addModelInstance(this.model, modelInstance03);
+
+		/* The model instances should now be added to the registry. */
+		assertEquals(3, modelInstanceRegistry.getModelInstances(this.model).length);
+
+		/* The first model instance should be set as active model instance. */
+		assertNotNull(modelInstanceRegistry.getActiveModelInstance(this.model));
+		assertEquals(modelInstance01, modelInstanceRegistry
+				.getActiveModelInstance(this.model));
+
+		assertTrue(modelInstanceRegistry.removeModelInstance(modelInstance01));
+
+		/* The model instance should now be removed from the registry. */
+		assertEquals(2, modelInstanceRegistry.getModelInstances(this.model).length);
+
+		/* Active model instance should be set to null. */
+		assertNull(modelInstanceRegistry.getActiveModelInstance(this.model));
+	}
+
+	/**
+	 * <p>
+	 * Tests the method
+	 * {@link IModelInstanceRegistry#removeModelInstance(IModelInstance)} by
+	 * simply removing a <code>null</code> value.
+	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void testRemoveModelInstance04() throws ModelAccessException {
+
+		IModelInstanceRegistry modelInstanceRegistry;
+		modelInstanceRegistry = ModelBusPlugin.getModelInstanceRegistry();
+
+		assertEquals(0, modelInstanceRegistry.getModelInstances(this.model).length);
+
+		IModelInstance modelInstance01;
+		modelInstance01 = null;
+
+		/* Should raise an exception. */
+		modelInstanceRegistry.removeModelInstance(modelInstance01);
+	}
+
+	/**
+	 * <p>
+	 * Tests the method
+	 * {@link IModelInstanceRegistry#removeModelInstance(IModelInstance)} by
+	 * simply removing an {@link IModelInstance} that has not been added before.
+	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 */
+	@Test
+	public void testRemoveModelInstance05() throws ModelAccessException {
+
+		IModelInstanceRegistry modelInstanceRegistry;
+		modelInstanceRegistry = ModelBusPlugin.getModelInstanceRegistry();
+
+		assertEquals(0, modelInstanceRegistry.getModelInstances(this.model).length);
+
+		IModelInstance modelInstance01;
+		modelInstance01 =
+				ModelBusTestUtility.getJavaModelInstance(
+						"bin/package1/ModelInstance01ProviderClass.class", this.model);
+
+		assertFalse(modelInstanceRegistry.removeModelInstance(modelInstance01));
+	}
+
+	/**
+	 * <p>
+	 * Tests the method {@link IModelInstanceRegistry#removeModelInstance(String)}
+	 * by simply removing an {@link IModelInstance} that has been added before.
+	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 */
+	@Test
+	public void testRemoveModelInstance06() throws ModelAccessException {
+
+		IModelInstanceRegistry modelInstanceRegistry;
+		modelInstanceRegistry = ModelBusPlugin.getModelInstanceRegistry();
+
+		assertEquals(0, modelInstanceRegistry.getModelInstances(this.model).length);
+
+		IModelInstance modelInstance01;
+		modelInstance01 =
+				ModelBusTestUtility.getJavaModelInstance(
+						"bin/package1/ModelInstance01ProviderClass.class", this.model);
+
+		modelInstanceRegistry.addModelInstance(this.model, modelInstance01);
+
+		/* The model should now be added to the registry. */
+		assertEquals(1, modelInstanceRegistry.getModelInstances(this.model).length);
+
+		/* The model instance should be set as active model instance. */
+		assertNotNull(modelInstanceRegistry.getActiveModelInstance(this.model));
+		assertEquals(modelInstance01, modelInstanceRegistry
+				.getActiveModelInstance(this.model));
+
+		IModelInstance removedIModelInstance;
+		removedIModelInstance =
+				modelInstanceRegistry.removeModelInstance(modelInstance01
+						.getDisplayName());
+
+		assertEquals(modelInstance01, removedIModelInstance);
+
+		/* The model instance should now be removed from the registry. */
+		assertEquals(0, modelInstanceRegistry.getModelInstances(this.model).length);
+
+		/* Active model instance should be null. */
+		assertNull(modelInstanceRegistry.getActiveModelInstance(this.model));
+	}
+
+	/**
+	 * <p>
+	 * Tests the method {@link IModelInstanceRegistry#removeModelInstance(String)}
+	 * by simply removing an {@link IModelInstance}'s display name that does not
+	 * exist.
+	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 */
+	@Test
+	public void testRemoveModelInstance07() throws ModelAccessException {
+
+		IModelInstanceRegistry modelInstanceRegistry;
+		modelInstanceRegistry = ModelBusPlugin.getModelInstanceRegistry();
+
+		assertEquals(0, modelInstanceRegistry.getModelInstances(this.model).length);
+
+		IModelInstance modelInstance01;
+		modelInstance01 =
+				ModelBusTestUtility.getJavaModelInstance(
+						"bin/package1/ModelInstance01ProviderClass.class", this.model);
+
+		modelInstanceRegistry.addModelInstance(this.model, modelInstance01);
+
+		/* The model should now be added to the registry. */
+		assertEquals(1, modelInstanceRegistry.getModelInstances(this.model).length);
+
+		/* The model instance should be set as active model instance. */
+		assertNotNull(modelInstanceRegistry.getActiveModelInstance(this.model));
+		assertEquals(modelInstance01, modelInstanceRegistry
+				.getActiveModelInstance(this.model));
+
+		IModelInstance removedIModelInstance;
+		removedIModelInstance =
+				modelInstanceRegistry.removeModelInstance("unknown display name");
+
+		assertNull(removedIModelInstance);
+
+		/* The model instance should not be removed from the registry. */
+		assertEquals(1, modelInstanceRegistry.getModelInstances(this.model).length);
+
+		/* Active model instance should stil be set. */
+		assertNotNull(modelInstanceRegistry.getActiveModelInstance(this.model));
+		assertEquals(modelInstance01, modelInstanceRegistry
+				.getActiveModelInstance(this.model));
+	}
+
+	/**
+	 * <p>
+	 * Tests the method {@link IModelInstanceRegistry#removeModelInstance(String)}
+	 * by simply removing a <code>null</code> value.
+	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void testRemoveModelInstance08() throws ModelAccessException {
+
+		IModelInstanceRegistry modelInstanceRegistry;
+		modelInstanceRegistry = ModelBusPlugin.getModelInstanceRegistry();
+
+		String displayName;
+		displayName = null;
+
+		/* Should raise an exception. */
+		modelInstanceRegistry.removeModelInstance(displayName);
+	}
+
+	/**
+	 * <p>
+	 * Tests the method
 	 * {@link IModelInstanceRegistry#setActiveModelInstance(IModel, IModelInstance)}
 	 * by setting an {@link IModelInstance} as active that has been added before.
 	 * </p>
@@ -332,14 +640,29 @@ public class ModelInstanceRegistryTest {
 	 * 
 	 * @throws ModelAccessException
 	 */
-	@Test(expected = IllegalArgumentException.class)
+	@Test
 	public void testSetActiveModelInstance03() throws ModelAccessException {
 
 		IModelInstanceRegistry modelInstanceRegistry;
 		modelInstanceRegistry = ModelBusPlugin.getModelInstanceRegistry();
 
-		/* Should cause an exception. */
+		assertEquals(0, modelInstanceRegistry.getModelInstances(this.model).length);
+
+		IModelInstance modelInstance;
+		modelInstance =
+				ModelBusTestUtility.getJavaModelInstance(
+						"bin/package1/ModelInstance01ProviderClass.class", this.model);
+
+		modelInstanceRegistry.addModelInstance(this.model, modelInstance);
+
+		/* The model instance should now be added to the registry. */
+		assertEquals(1, modelInstanceRegistry.getModelInstances(this.model).length);
+
+		/* Should not cause an exception. */
 		modelInstanceRegistry.setActiveModelInstance(this.model, null);
+
+		/* The model Instance should be set to null. */
+		assertNull(modelInstanceRegistry.getActiveModelInstance(this.model));
 	}
 
 	/**

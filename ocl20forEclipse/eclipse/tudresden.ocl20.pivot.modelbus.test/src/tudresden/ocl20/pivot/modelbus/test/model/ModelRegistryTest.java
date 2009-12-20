@@ -20,7 +20,10 @@ with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
 package tudresden.ocl20.pivot.modelbus.test.model;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -220,6 +223,277 @@ public class ModelRegistryTest {
 		/* Model1 should still be set as active model. */
 		assertNotNull(modelRegistry.getActiveModel());
 		assertEquals(model1, modelRegistry.getActiveModel());
+	}
+
+	/**
+	 * <p>
+	 * Tests the method {@link IModelRegistry#removeModel(IModel)} by simply
+	 * removed an {@link IModel} that has been added before.
+	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 */
+	@Test
+	public void testRemoveModel01() throws ModelAccessException {
+
+		IModelRegistry modelRegistry;
+		modelRegistry = ModelBusPlugin.getModelRegistry();
+
+		assertEquals(0, modelRegistry.getModels().length);
+
+		IModel model;
+		model = ModelBusTestUtility.getUML2Model("resources/models/model01.uml");
+
+		modelRegistry.addModel(model);
+
+		/* The model should now be added to the registry. */
+		assertEquals(1, modelRegistry.getModels().length);
+
+		/* The model should be set as active model. */
+		assertNotNull(modelRegistry.getActiveModel());
+		assertEquals(model, modelRegistry.getActiveModel());
+
+		assertTrue(modelRegistry.removeModel(model));
+
+		/* No model should remain in the registry. */
+		assertEquals(0, modelRegistry.getModels().length);
+
+		/* No model should be set as active model. */
+		assertNull(modelRegistry.getActiveModel());
+	}
+
+	/**
+	 * <p>
+	 * Tests the method {@link IModelRegistry#removeModel(IModel)} by simply
+	 * removed an {@link IModel} that has been added before.
+	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 */
+	@Test
+	public void testRemoveModel02() throws ModelAccessException {
+
+		IModelRegistry modelRegistry;
+		modelRegistry = ModelBusPlugin.getModelRegistry();
+
+		assertEquals(0, modelRegistry.getModels().length);
+
+		IModel model01;
+		model01 = ModelBusTestUtility.getUML2Model("resources/models/model01.uml");
+
+		IModel model02;
+		model02 = ModelBusTestUtility.getUML2Model("resources/models/model02.uml");
+
+		modelRegistry.addModel(model01);
+		modelRegistry.addModel(model02);
+
+		/* The models should now be added to the registry. */
+		assertEquals(2, modelRegistry.getModels().length);
+
+		/* The model01 should be set as active model. */
+		assertNotNull(modelRegistry.getActiveModel());
+		assertEquals(model01, modelRegistry.getActiveModel());
+
+		assertTrue(modelRegistry.removeModel(model01));
+
+		/* One model should remain in the registry. */
+		assertEquals(1, modelRegistry.getModels().length);
+
+		/* Model02 should be set as active model. */
+		assertNotNull(modelRegistry.getActiveModel());
+		assertEquals(model02, modelRegistry.getActiveModel());
+	}
+
+	/**
+	 * <p>
+	 * Tests the method {@link IModelRegistry#removeModel(IModel)} by simply
+	 * removed an {@link IModel} that has been added before.
+	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 */
+	@Test
+	public void testRemoveModel03() throws ModelAccessException {
+
+		IModelRegistry modelRegistry;
+		modelRegistry = ModelBusPlugin.getModelRegistry();
+
+		assertEquals(0, modelRegistry.getModels().length);
+
+		IModel model01;
+		model01 = ModelBusTestUtility.getUML2Model("resources/models/model01.uml");
+
+		IModel model02;
+		model02 = ModelBusTestUtility.getUML2Model("resources/models/model02.uml");
+
+		IModel model03;
+		model03 = ModelBusTestUtility.getUML2Model("resources/models/model03.uml");
+
+		modelRegistry.addModel(model01);
+		modelRegistry.addModel(model02);
+		modelRegistry.addModel(model03);
+
+		/* The models should now be added to the registry. */
+		assertEquals(3, modelRegistry.getModels().length);
+
+		/* The model01 should be set as active model. */
+		assertNotNull(modelRegistry.getActiveModel());
+		assertEquals(model01, modelRegistry.getActiveModel());
+
+		assertTrue(modelRegistry.removeModel(model01));
+
+		/* Two models should remain in the registry. */
+		assertEquals(2, modelRegistry.getModels().length);
+
+		/* No should be set as active model. */
+		assertNull(modelRegistry.getActiveModel());
+	}
+
+	/**
+	 * <p>
+	 * Tests the method {@link IModelRegistry#removeModel(IModel)} by simply
+	 * removing a <code>null</code> value.
+	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void testRemoveModel04() throws ModelAccessException {
+
+		IModelRegistry modelRegistry;
+		modelRegistry = ModelBusPlugin.getModelRegistry();
+
+		assertEquals(0, modelRegistry.getModels().length);
+
+		IModel model;
+		model = null;
+
+		modelRegistry.removeModel(model);
+	}
+
+	/**
+	 * <p>
+	 * Tests the method {@link IModelRegistry#removeModel(IModel)} by simply
+	 * removing an {@link IModel} that has not been added before.
+	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 */
+	@Test
+	public void testRemoveModel05() throws ModelAccessException {
+
+		IModelRegistry modelRegistry;
+		modelRegistry = ModelBusPlugin.getModelRegistry();
+
+		assertEquals(0, modelRegistry.getModels().length);
+
+		IModel model;
+		model = ModelBusTestUtility.getUML2Model("resources/models/model01.uml");
+
+		assertFalse(modelRegistry.removeModel(model));
+	}
+
+	/**
+	 * <p>
+	 * Tests the method {@link IModelRegistry#removeModel(String)} by simply
+	 * removing an {@link IModel} that has been added before.
+	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 */
+	@Test
+	public void testRemoveModel06() throws ModelAccessException {
+
+		IModelRegistry modelRegistry;
+		modelRegistry = ModelBusPlugin.getModelRegistry();
+
+		assertEquals(0, modelRegistry.getModels().length);
+
+		IModel model;
+		model = ModelBusTestUtility.getUML2Model("resources/models/model01.uml");
+
+		modelRegistry.addModel(model);
+
+		/* The model should now be added to the registry. */
+		assertEquals(1, modelRegistry.getModels().length);
+
+		/* The model should be set as active model. */
+		assertNotNull(modelRegistry.getActiveModel());
+		assertEquals(model, modelRegistry.getActiveModel());
+
+		IModel removedModel;
+		removedModel = modelRegistry.removeModel(model.getDisplayName());
+
+		assertEquals(model, removedModel);
+
+		/* No model should remain in the registry. */
+		assertEquals(0, modelRegistry.getModels().length);
+
+		/* No model should be set as active model. */
+		assertNull(modelRegistry.getActiveModel());
+	}
+
+	/**
+	 * <p>
+	 * Tests the method {@link IModelRegistry#removeModel(String)} by simply
+	 * removing an {@link IModel} with a display name that does not exists.
+	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 */
+	@Test
+	public void testRemoveModel07() throws ModelAccessException {
+
+		IModelRegistry modelRegistry;
+		modelRegistry = ModelBusPlugin.getModelRegistry();
+
+		assertEquals(0, modelRegistry.getModels().length);
+
+		IModel model;
+		model = ModelBusTestUtility.getUML2Model("resources/models/model01.uml");
+
+		modelRegistry.addModel(model);
+
+		/* The model should now be added to the registry. */
+		assertEquals(1, modelRegistry.getModels().length);
+
+		/* The model should be set as active model. */
+		assertNotNull(modelRegistry.getActiveModel());
+		assertEquals(model, modelRegistry.getActiveModel());
+
+		IModel removedModel;
+		removedModel = modelRegistry.removeModel("an unknown display name");
+
+		assertNull(removedModel);
+
+		/* One model should remain in the registry. */
+		assertEquals(1, modelRegistry.getModels().length);
+
+		/* Model01 should be set as active model. */
+		assertNotNull(modelRegistry.getActiveModel());
+		assertEquals(model, modelRegistry.getActiveModel());
+	}
+
+	/**
+	 * <p>
+	 * Tests the method {@link IModelRegistry#removeModel(String)} by simply
+	 * removing an {@link IModel} with a display name that does not exists.
+	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void testRemoveModel08() throws ModelAccessException {
+
+		IModelRegistry modelRegistry;
+		modelRegistry = ModelBusPlugin.getModelRegistry();
+
+		assertEquals(0, modelRegistry.getModels().length);
+
+		String displayName;
+		displayName = null;
+
+		modelRegistry.removeModel(displayName);
 	}
 
 	/**
