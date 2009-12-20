@@ -266,6 +266,11 @@ public class InterpreterView extends ViewPart implements ISelectionListener,
 		/* Do nothing until a new active IModel has been set. */
 	}
 
+	public void modelRemoved(ModelRegistryEvent event) {
+
+		/* Do nothing until a new active IModel has been set. */
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * @seetudresden.ocl20.pivot.modelbus.event.IModelInstanceRegistryListener#
@@ -273,6 +278,11 @@ public class InterpreterView extends ViewPart implements ISelectionListener,
 	 * (tudresden.ocl20.pivot.modelbus.event.ModelInstanceRegistryEvent)
 	 */
 	public void modelInstanceAdded(ModelInstanceRegistryEvent event) {
+
+		/* Do nothing until a new ModelInstance has been activated. */
+	}
+
+	public void modelInstanceRemoved(ModelInstanceRegistryEvent event) {
 
 		/* Do nothing until a new ModelInstance has been activated. */
 	}
