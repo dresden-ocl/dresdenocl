@@ -178,13 +178,21 @@ public class ModelInstancesView extends ViewPart implements
 	 * @see tudresden.ocl20.pivot.modelbus.event.IModelRegistryListener#modelAdded
 	 * (tudresden.ocl20.pivot.modelbus.event.ModelRegistryEvent)
 	 */
-	public void modelAdded(ModelRegistryEvent e) {
+	public void modelAdded(ModelRegistryEvent event) {
 
-		this.rebuildMenu(e.getAffectedModel());
+		this.rebuildMenu(event.getAffectedModel());
 
-		this.setActiveModelInstance(e.getAffectedModel(), ModelBusPlugin
-				.getModelInstanceRegistry()
-				.getActiveModelInstance(e.getAffectedModel()));
+		this.setActiveModelInstance(event.getAffectedModel(), ModelBusPlugin
+				.getModelInstanceRegistry().getActiveModelInstance(
+						event.getAffectedModel()));
+	}
+
+	public void modelRemoved(ModelRegistryEvent event) {
+
+		if (this.myModelInstanceSelectionActions != null) {
+			this.myModelInstanceSelectionActions.remove(event.getAffectedModel());
+		}
+		// no else.
 	}
 
 	/*
@@ -195,8 +203,18 @@ public class ModelInstancesView extends ViewPart implements
 	 */
 	public void modelInstanceAdded(ModelInstanceRegistryEvent event) {
 
-		this.addModelInstanceSelectionAction(event.getAffectedModel(), event
-				.getAffectedModelInstance());
+		this.addModelInstanceSelectionAction(event.getAffectedModelInstance());
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @seetudresden.ocl20.pivot.modelbus.event.IModelInstanceRegistryListener#
+	 * modelInstanceRemoved
+	 * (tudresden.ocl20.pivot.modelbus.event.ModelInstanceRegistryEvent)
+	 */
+	public void modelInstanceRemoved(ModelInstanceRegistryEvent event) {
+
+		this.removeModelInstanceSelectionAction(event.getAffectedModelInstance());
 	}
 
 	/*
@@ -252,61 +270,6 @@ public class ModelInstancesView extends ViewPart implements
 
 	/**
 	 * <p>
-	 * Adds an {@link ModelInstanceSelectionAction} for a given {@link IModel}
-	 * {@link IModelInstance}. The {@link ModelInstanceSelectionAction} is used to
-	 * select the IModelInstance to be shown in this view.
-	 * </p>
-	 * 
-	 * @param model
-	 *          The {@link IModel} of the {@link ModelInstanceSelectionAction} .
-	 * @param modelInstance
-	 *          The {@link IModelInstance} of the
-	 *          {@link ModelInstanceSelectionAction}.
-	 * 
-	 * @return the model instance selection action
-	 */
-	protected ModelInstanceSelectionAction addModelInstanceSelectionAction(
-			IModel model, IModelInstance modelInstance) {
-
-		ModelInstanceSelectionAction result;
-		Map<IModelInstance, ModelInstanceSelectionAction> aModelsActions;
-
-		result = null;
-
-		aModelsActions = this.myModelInstanceSelectionActions.get(model);
-
-		/* Get the action or initialize it. */
-		if (aModelsActions != null) {
-			result = aModelsActions.get(model);
-		}
-		// no else.
-
-		else {
-			aModelsActions =
-					new HashMap<IModelInstance, ModelInstanceSelectionAction>();
-		}
-
-		if (result == null) {
-
-			result = new ModelInstanceSelectionAction(model, modelInstance);
-
-			aModelsActions.put(modelInstance, result);
-			this.myModelInstanceSelectionActions.put(model, aModelsActions);
-
-			if (ModelBusPlugin.getModelRegistry().getActiveModel() == model) {
-				getMenu().add(result);
-			}
-			// no else.
-
-			this.getViewSite().getActionBars().updateActionBars();
-		}
-		// no else.
-
-		return result;
-	}
-
-	/**
-	 * <p>
 	 * Initializes the drop-down menu of the view with all {@link IModelInstance}s
 	 * currently registered for the active {@link IModel}.
 	 * </p>
@@ -327,13 +290,13 @@ public class ModelInstancesView extends ViewPart implements
 			aModel = modelIt.next();
 
 			if (aModel != null) {
-				IModelInstance[] aModelsInstances;
+				IModelInstance[] modelsInstances;
 
-				aModelsInstances =
+				modelsInstances =
 						ModelBusPlugin.getModelInstanceRegistry().getModelInstances(aModel);
 
-				for (int i = 0; i < aModelsInstances.length; i++) {
-					this.addModelInstanceSelectionAction(aModel, aModelsInstances[i]);
+				for (int i = 0; i < modelsInstances.length; i++) {
+					this.addModelInstanceSelectionAction(modelsInstances[i]);
 				}
 			}
 			// no else.
@@ -356,6 +319,64 @@ public class ModelInstancesView extends ViewPart implements
 		// no else.
 
 		return this.myMenu;
+	}
+
+	/**
+	 * <p>
+	 * Adds an {@link ModelInstanceSelectionAction} for a given
+	 * {@link IModelInstance}. The {@link ModelInstanceSelectionAction} is used to
+	 * select the IModelInstance to be shown in this view.
+	 * </p>
+	 * 
+	 * @param modelInstance
+	 *          The {@link IModelInstance} of the
+	 *          {@link ModelInstanceSelectionAction}.
+	 * 
+	 * @return the model instance selection action
+	 */
+	private ModelInstanceSelectionAction addModelInstanceSelectionAction(
+			IModelInstance modelInstance) {
+
+		ModelInstanceSelectionAction result;
+		Map<IModelInstance, ModelInstanceSelectionAction> aModelsActions;
+
+		result = null;
+
+		aModelsActions =
+				this.myModelInstanceSelectionActions.get(modelInstance.getModel());
+
+		/* Get the action or initialize it. */
+		if (aModelsActions != null) {
+			result = aModelsActions.get(modelInstance.getModel());
+		}
+		// no else.
+
+		else {
+			aModelsActions =
+					new HashMap<IModelInstance, ModelInstanceSelectionAction>();
+		}
+
+		if (result == null) {
+
+			result =
+					new ModelInstanceSelectionAction(modelInstance.getModel(),
+							modelInstance);
+
+			aModelsActions.put(modelInstance, result);
+			this.myModelInstanceSelectionActions.put(modelInstance.getModel(),
+					aModelsActions);
+
+			if (ModelBusPlugin.getModelRegistry().getActiveModel() == modelInstance
+					.getModel()) {
+				getMenu().add(result);
+			}
+			// no else.
+
+			this.getViewSite().getActionBars().updateActionBars();
+		}
+		// no else.
+
+		return result;
 	}
 
 	/**
@@ -396,6 +417,56 @@ public class ModelInstancesView extends ViewPart implements
 
 		}
 		// no else.
+	}
+
+	/**
+	 * <p>
+	 * Removes an {@link ModelInstanceSelectionAction} for a given
+	 * {@link IModelInstance}.
+	 * </p>
+	 * 
+	 * @param modelInstance
+	 *          The {@link IModelInstance} of the
+	 *          {@link ModelInstanceSelectionAction}.
+	 * 
+	 * @return The ModelInstanceSelectionAction that has been removed or
+	 *         <code>null</code> if no {@link ModelInstanceSelectionAction} has
+	 *         been removed.
+	 */
+	private ModelInstanceSelectionAction removeModelInstanceSelectionAction(
+			IModelInstance modelInstance) {
+
+		ModelInstanceSelectionAction result;
+		result = null;
+
+		Map<IModelInstance, ModelInstanceSelectionAction> modelsActions;
+		modelsActions =
+				this.myModelInstanceSelectionActions.get(modelInstance.getModel());
+
+		/* Check if the model has actions at all. */
+		if (modelsActions != null) {
+			result = modelsActions.get(modelInstance.getModel());
+
+			result = modelsActions.remove(modelInstance);
+
+			if (result != null) {
+
+				this.myModelInstanceSelectionActions.put(modelInstance.getModel(),
+						modelsActions);
+
+				if (ModelBusPlugin.getModelRegistry().getActiveModel() == modelInstance
+						.getModel()) {
+					getMenu().remove(result.getId());
+
+					this.getViewSite().getActionBars().updateActionBars();
+				}
+				// no else.
+			}
+			// no else.
+		}
+		// no else.
+
+		return result;
 	}
 
 	/**

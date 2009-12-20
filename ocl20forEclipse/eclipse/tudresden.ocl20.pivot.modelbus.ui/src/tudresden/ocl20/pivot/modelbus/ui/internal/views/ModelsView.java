@@ -50,6 +50,7 @@ import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
 import tudresden.ocl20.pivot.modelbus.event.IModelRegistryListener;
 import tudresden.ocl20.pivot.modelbus.event.ModelRegistryEvent;
 import tudresden.ocl20.pivot.modelbus.model.IModel;
+import tudresden.ocl20.pivot.modelbus.model.IModelRegistry;
 import tudresden.ocl20.pivot.modelbus.ui.ModelBusUIPlugin;
 import tudresden.ocl20.pivot.modelbus.ui.internal.ModelBusUIMessages;
 import tudresden.ocl20.pivot.modelbus.ui.internal.views.util.ModelSelectionAction;
@@ -70,8 +71,8 @@ public class ModelsView extends ViewPart implements IModelRegistryListener {
 	public static final String ID = IModelBusConstants.MODELS_VIEW_ID;
 
 	/** The {@link Logger} for this {@link Class}. */
-	private static final Logger LOGGER = ModelBusUIPlugin
-			.getLogger(ModelsView.class);
+	private static final Logger LOGGER =
+			ModelBusUIPlugin.getLogger(ModelsView.class);
 
 	/** The adapter factory that provides the view of the {@link IModel}. */
 	private ComposedAdapterFactory myAdapterFactory;
@@ -103,6 +104,7 @@ public class ModelsView extends ViewPart implements IModelRegistryListener {
 	 * </p>
 	 */
 	public ModelsView() {
+
 		super();
 
 		List<AdapterFactory> factories;
@@ -124,25 +126,24 @@ public class ModelsView extends ViewPart implements IModelRegistryListener {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see org.eclipse.ui.part.WorkbenchPart#dispose()
 	 */
 	@Override
 	public void dispose() {
-	
+
 		/* Clear the cache for model selection actions. */
 		this.myModelSelectionActions.clear();
 		this.selectedAction = null;
-	
+
 		/* Remove as listener from the model registry. */
 		ModelBusPlugin.getModelRegistry().removeModelRegistryListener(this);
-	
+
 		/* Eventually dispose the property sheet page. */
 		if (this.myPropertySheet != null) {
 			this.myPropertySheet.dispose();
 		}
 		// no else.
-	
+
 		super.dispose();
 	}
 
@@ -156,34 +157,33 @@ public class ModelsView extends ViewPart implements IModelRegistryListener {
 	@SuppressWarnings("unchecked")
 	@Override
 	public Object getAdapter(Class adapter) {
-	
+
 		Object result;
-	
+
 		if (adapter.equals(IPropertySheetPage.class)) {
 			result = this.getPropertySheetPage();
 		}
-	
+
 		else {
 			result = super.getAdapter(adapter);
 		}
-	
+
 		return result;
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @seetudresden.ocl20.pivot.modelbus.event.IModelRegistryListener#
 	 * activeModelChanged
 	 * (tudresden.ocl20.pivot.modelbus.event.ModelRegistryEvent)
 	 */
 	public void activeModelChanged(ModelRegistryEvent e) {
+
 		this.setActiveModel(e.getAffectedModel());
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see
 	 * org.eclipse.ui.part.WorkbenchPart#createPartControl(org.eclipse.swt.widgets
 	 * .Composite)
@@ -192,18 +192,17 @@ public class ModelsView extends ViewPart implements IModelRegistryListener {
 	public void createPartControl(Composite parent) {
 
 		/* Create a new tree viewer. */
-		this.myModelViewer = new TreeViewer(parent, SWT.MULTI | SWT.H_SCROLL
-				| SWT.V_SCROLL);
+		this.myModelViewer =
+				new TreeViewer(parent, SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL);
 
 		/* Enable drill down behavior. */
 		this.myDrillDownAdapter = new DrillDownAdapter(this.myModelViewer);
-		this.myDrillDownAdapter.addNavigationActions(getViewSite()
-				.getActionBars().getToolBarManager());
+		this.myDrillDownAdapter.addNavigationActions(getViewSite().getActionBars()
+				.getToolBarManager());
 
 		/* Set content and label provider. */
-		this.myModelViewer
-				.setContentProvider(new AdapterFactoryContentProvider(
-						this.myAdapterFactory));
+		this.myModelViewer.setContentProvider(new AdapterFactoryContentProvider(
+				this.myAdapterFactory));
 		this.myModelViewer.setLabelProvider(new AdapterFactoryLabelProvider(
 				this.myAdapterFactory));
 
@@ -219,30 +218,40 @@ public class ModelsView extends ViewPart implements IModelRegistryListener {
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * tudresden.ocl20.pivot.modelbus.event.IModelRegistryListener#modelAdded
+	 * @see tudresden.ocl20.pivot.modelbus.event.IModelRegistryListener#modelAdded
 	 * (tudresden.ocl20.pivot.modelbus.event.ModelRegistryEvent)
 	 */
 	public void modelAdded(ModelRegistryEvent e) {
+
 		this.addModelSelectionAction(e.getAffectedModel());
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.modelbus.event.IModelRegistryListener#modelRemoved
+	 * (tudresden.ocl20.pivot.modelbus.event.ModelRegistryEvent)
+	 */
+	public void modelRemoved(ModelRegistryEvent event) {
+
+		this.removeModelSelectionAction(event.getAffectedModel());
+	}
+
+	/*
+	 * (non-Javadoc)
 	 * @see org.eclipse.ui.part.WorkbenchPart#setFocus()
 	 */
 	@Override
 	public void setFocus() {
+
 		this.myModelViewer.getControl().setFocus();
 	}
 
 	/**
 	 * <p>
 	 * Creates a new {@link ModelSelectionAction} for the given {@link IModel
-	 * model} and adds it to the menu. Duplicate actions are prevented by
-	 * checking whether an action for the given model already exists.
+	 * model} and adds it to the menu. Duplicate actions are prevented by checking
+	 * whether an action for the given model already exists.
 	 * </p>
 	 */
 	private ModelSelectionAction addModelSelectionAction(IModel model) {
@@ -268,6 +277,39 @@ public class ModelsView extends ViewPart implements IModelRegistryListener {
 
 	/**
 	 * <p>
+	 * A helper method that removes the selection action for a given
+	 * {@link IModel} from this {@link ModelsView}. Called when an {@link IModel}
+	 * has been removed from the {@link IModelRegistry}.
+	 * </p>
+	 * 
+	 * @param model
+	 *          The {@link IModel} whose selection action shall be removed.
+	 * @return The {@link ModelSelectionAction} that has been removed or
+	 *         <code>null</code> if no {@link ModelSelectionAction} has been
+	 *         removed.
+	 */
+	private ModelSelectionAction removeModelSelectionAction(IModel model) {
+
+		ModelSelectionAction action;
+
+		/* Check if the action exists. */
+		if (this.myModelSelectionActions.containsKey(model)) {
+			action = this.myModelSelectionActions.remove(model);
+
+			this.getMenu().remove(action.getId());
+
+			this.getViewSite().getActionBars().updateActionBars();
+		}
+
+		else {
+			action = null;
+		}
+
+		return action;
+	}
+
+	/**
+	 * <p>
 	 * A helper method which lazily initializes the reference to the drop down
 	 * menu.
 	 * </p>
@@ -285,12 +327,11 @@ public class ModelsView extends ViewPart implements IModelRegistryListener {
 
 	/**
 	 * <p>
-	 * A helper method that lazily creates a cached version of the property
-	 * sheet.
+	 * A helper method that lazily creates a cached version of the property sheet.
 	 * </p>
 	 */
 	private IPropertySheetPage getPropertySheetPage() {
-	
+
 		if (this.myPropertySheet == null) {
 			this.myPropertySheet = new PropertySheetPage();
 			this.myPropertySheet
@@ -298,7 +339,7 @@ public class ModelsView extends ViewPart implements IModelRegistryListener {
 							this.myAdapterFactory));
 		}
 		// no else.
-	
+
 		return this.myPropertySheet;
 	}
 
@@ -389,8 +430,8 @@ public class ModelsView extends ViewPart implements IModelRegistryListener {
 
 			MessageDialog.openError(getSite().getShell(),
 					ModelBusUIMessages.ModelsView_Error, NLS.bind(
-							ModelBusUIMessages.ModelsView_AccessRootNamespace,
-							model.getDisplayName()));
+							ModelBusUIMessages.ModelsView_AccessRootNamespace, model
+									.getDisplayName()));
 
 			/* Do not exit here to reset the input to null below. */
 			rootNamespace = null;
@@ -398,9 +439,9 @@ public class ModelsView extends ViewPart implements IModelRegistryListener {
 		// end catch.
 
 		/*
-		 * Update the input; we do not use equals for comparison of current
-		 * input with new root name space because the root name space may be a
-		 * transient one with an empty name.
+		 * Update the input; we do not use equals for comparison of current input
+		 * with new root name space because the root name space may be a transient
+		 * one with an empty name.
 		 */
 		if (this.myModelViewer.getInput() == null && rootNamespace != null
 				|| this.myModelViewer.getInput() != null
@@ -417,21 +458,21 @@ public class ModelsView extends ViewPart implements IModelRegistryListener {
 	 * </p>
 	 */
 	private void setInput(Namespace rootNamespace) {
-	
+
 		this.myModelViewer.setInput(rootNamespace);
 		this.myModelViewer.refresh();
-	
+
 		this.myModelViewer.setSelection(new StructuredSelection(rootNamespace
 				.getNestedNamespace().isEmpty() ? StructuredSelection.EMPTY
 				: rootNamespace.getNestedNamespace().get(0)));
-	
+
 		this.myDrillDownAdapter.reset();
 	}
 
 	/**
 	 * <p>
-	 * Activates the action corresponding to the given {@link IModel} and
-	 * updates the input for the viewer.
+	 * Activates the action corresponding to the given {@link IModel} and updates
+	 * the input for the viewer.
 	 * </p>
 	 */
 	private void updateActiveModel() {
