@@ -58,11 +58,22 @@ public interface IModelRegistryListener {
 	/**
 	 * <p>
 	 * This method is called when a {@link IModel model} has been added to a
-	 * {@link IModelRegistry model registry}.
+	 * {@link IModelRegistry}.
 	 * </p>
 	 * 
 	 * @param event
 	 *          A {@link ModelRegistryEvent} object with more details.
 	 */
 	void modelAdded(ModelRegistryEvent event);
+
+	/**
+	 * <p>
+	 * This method is called when a {@link IModel model} has been removed from a
+	 * {@link IModelRegistry}.
+	 * </p>
+	 * 
+	 * @param event
+	 *          A {@link ModelRegistryEvent} object with more details.
+	 */
+	void modelRemoved(ModelRegistryEvent event);
 }

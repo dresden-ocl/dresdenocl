@@ -94,6 +94,40 @@ public interface IModelRegistry {
 
 	/**
 	 * <p>
+	 * Removes a {@link IModel model} from this {@link IModelRegistry}. If the
+	 * removed {@link IModel} has been the active {@link IModel} the active
+	 * {@link IModel} will be reset as well. If only one {@link IModel} remains in
+	 * the {@link IModelRegistry}, this {@link IModel} becomes the active
+	 * {@link IModel}. Else the active {@link IModel} will be set to
+	 * <code>null</code>.
+	 * </p>
+	 * 
+	 * @param model
+	 *          The {@link IModel} that shall be removed.
+	 * 
+	 * @return <code>true</code> if the given {@link IModel} has been removed.
+	 */
+	boolean removeModel(IModel model);
+
+	/**
+	 * <p>
+	 * Removes a {@link IModel model} for a given {@link IModel}s display name
+	 * from this {@link IModelRegistry}. If only one {@link IModel} remains in the
+	 * {@link IModelRegistry}, this {@link IModel} becomes the active
+	 * {@link IModel}. Else the active {@link IModel} will be set to
+	 * <code>null</code>.
+	 * </p>
+	 * 
+	 * @param displayName
+	 *          The display name of the {@link IModel} that shall be removed.
+	 * 
+	 * @return The {@link IModel} that have been removed or <code>null</code> if
+	 *         no {@link IModel} for the given display name has been found.
+	 */
+	IModel removeModel(String displayName);
+
+	/**
+	 * <p>
 	 * Removes an {@link IModelRegistryListener} from this {@link IModelRegistry}.
 	 * </p>
 	 * 

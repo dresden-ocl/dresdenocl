@@ -101,6 +101,46 @@ public interface IModelInstanceRegistry {
 
 	/**
 	 * <p>
+	 * Removes a {@link IModelInstance} from this {@link IModelInstanceRegistry}.
+	 * If the removed {@link IModelInstance} has been the active
+	 * {@link IModelInstance} of its {@link IModel}, the active {@link IModel}
+	 * will be reset as well. If only one {@link IModelInstance} remains for this
+	 * {@link IModel}, this {@link IModelInstance} becomes the active
+	 * {@link IModelInstance}. Else the active {@link IModelInstance} will be set
+	 * to <code>null</code>.
+	 * </p>
+	 * 
+	 * @param modelInstance
+	 *          The {@link IModelInstance} that shall be removed.
+	 * 
+	 * @return <code>true</code> if the given {@link IModelInstance} has been
+	 *         removed.
+	 */
+	boolean removeModelInstance(IModelInstance modelInstance);
+
+	/**
+	 * <p>
+	 * Removes a {@link IModelIntance} for a given {@link IModelIntance}'s display
+	 * name from this {@link IModelInstanceRegistry}. If the removed
+	 * {@link IModelInstance} has been the active {@link IModelInstance} of its
+	 * {@link IModel}, the active {@link IModel} will be reset as well. If only
+	 * one {@link IModelInstance} remains for this {@link IModel}, this
+	 * {@link IModelInstance} becomes the active {@link IModelInstance}. Else the
+	 * active {@link IModelInstance} will be set to <code>null</code>.
+	 * </p>
+	 * 
+	 * @param displayName
+	 *          The display name of the {@link IModelIntance} that shall be
+	 *          removed.
+	 * 
+	 * @return The {@link IModelIntance} that have been removed or
+	 *         <code>null</code> if no {@link IModelIntance} for the given display
+	 *         name has been found.
+	 */
+	public IModelInstance removeModelInstance(String displayName);
+
+	/**
+	 * <p>
 	 * Removes an {@link IModelInstanceRegistryListener}.
 	 * </p>
 	 * 
@@ -119,7 +159,8 @@ public interface IModelInstanceRegistry {
 	 *          The {@link IModel} for which the active {@link IModelInstance}
 	 *          shall be set.
 	 * @param modelInstance
-	 *          The new active {@link IModelInstance}.
+	 *          The new active {@link IModelInstance}. Can be <code>null</code> to
+	 *          reset the active {@link IModelInstance}.
 	 */
 	void setActiveModelInstance(IModel model, IModelInstance modelInstance);
 }

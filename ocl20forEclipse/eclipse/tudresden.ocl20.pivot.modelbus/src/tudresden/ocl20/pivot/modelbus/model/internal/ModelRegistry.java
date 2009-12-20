@@ -180,6 +180,83 @@ public class ModelRegistry implements IModelRegistry {
 	/*
 	 * (non-Javadoc)
 	 * @see
+	 * tudresden.ocl20.pivot.modelbus.model.IModelRegistry#removeModel(tudresden
+	 * .ocl20.pivot.modelbus.model.IModel)
+	 */
+	public boolean removeModel(IModel model) {
+
+		if (model == null) {
+			throw new IllegalArgumentException("Parameter model must not be null");
+		}
+		// no else.
+
+		boolean result;
+
+		if (this.models != null) {
+			result = this.models.remove(model);
+			this.fireModelRemoved(model);
+
+			/* Probably update the active model. */
+			if (model.equals(this.getActiveModel())) {
+
+				this.activeModel = null;
+
+				if (this.models.size() == 1) {
+					this.activeModel = this.models.iterator().next();
+				}
+				// no else.
+
+				this.fireActiveModelChanged(this.getActiveModel());
+			}
+			// no else.
+		}
+
+		else {
+			result = false;
+		}
+
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * tudresden.ocl20.pivot.modelbus.model.IModelRegistry#removeModel(java.lang
+	 * .String)
+	 */
+	public IModel removeModel(String displayName) {
+
+		if (displayName == null) {
+			throw new IllegalArgumentException(
+					"The parameter displayName must not be null.");
+		}
+		// no else.
+
+		IModel result;
+		result = null;
+
+		if (this.models != null) {
+
+			for (IModel model : this.models) {
+
+				if (model.getDisplayName().equals(displayName)) {
+
+					result = model;
+					this.removeModel(model);
+					break;
+				}
+				// no else.
+			}
+			// end for.
+		}
+		// no else.
+
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see
 	 * tudresden.ocl20.pivot.modelbus.IModelRegistry#removeModelBusListener(tudresden
 	 * .ocl20.pivot.modelbus.event.IModelRegistryListener)
 	 */
@@ -246,7 +323,7 @@ public class ModelRegistry implements IModelRegistry {
 	 * @param model
 	 *          The {@link IModel} that has been set active.
 	 */
-	protected void fireActiveModelChanged(IModel model) {
+	private void fireActiveModelChanged(IModel model) {
 
 		ModelRegistryEvent event;
 		event = null;
@@ -279,7 +356,7 @@ public class ModelRegistry implements IModelRegistry {
 	 * @param model
 	 *          The {@link IModel} that has been added.
 	 */
-	protected void fireModelAdded(IModel model) {
+	private void fireModelAdded(IModel model) {
 
 		ModelRegistryEvent event;
 		event = null;
@@ -306,10 +383,43 @@ public class ModelRegistry implements IModelRegistry {
 
 	/**
 	 * <p>
+	 * A helper method that informs all listeners about a removed {@link IModel}.
+	 * </p>
+	 * 
+	 * @param model
+	 *          The {@link IModel} that has been removed.
+	 */
+	private void fireModelRemoved(IModel model) {
+
+		ModelRegistryEvent event;
+		event = null;
+
+		if (this.listeners != null) {
+
+			Object[] listeners;
+			listeners = this.listeners.getListeners();
+
+			for (int index = 0; index < listeners.length; index++) {
+
+				/* Lazily create the event. */
+				if (event == null) {
+					event = new ModelRegistryEvent(this, model);
+				}
+				// no else.
+
+				((IModelRegistryListener) listeners[index]).modelRemoved(event);
+			}
+			// end for.
+		}
+		// no else.
+	}
+
+	/**
+	 * <p>
 	 * A helper method that lazily creates the {@link ListenerList}.
 	 * </p>
 	 */
-	protected ListenerList getListeners() {
+	private ListenerList getListeners() {
 
 		if (this.listeners == null) {
 			this.listeners = new ListenerList(ListenerList.IDENTITY);

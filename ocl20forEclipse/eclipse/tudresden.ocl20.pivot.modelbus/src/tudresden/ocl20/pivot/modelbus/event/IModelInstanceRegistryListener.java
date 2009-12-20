@@ -31,6 +31,7 @@
 package tudresden.ocl20.pivot.modelbus.event;
 
 import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance;
+import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceRegistry;
 
 /**
  * <p>
@@ -54,15 +55,27 @@ public interface IModelInstanceRegistryListener {
 	 * </p>
 	 * 
 	 * @param event
-	 *          The event.
+	 *          The event identifying the {@link IModelInstance}.
 	 */
 	void activeModelInstanceChanged(ModelInstanceRegistryEvent event);
 
 	/**
-	 * {@link IModelInstance} added.
+	 * <p>
+	 * Called when an {@link IModelInstance} has been added to the
+	 * {@link IModelInstanceRegistry}.
 	 * 
 	 * @param event
-	 *          The event
+	 *          The event identifying the {@link IModelInstance}.
 	 */
 	void modelInstanceAdded(ModelInstanceRegistryEvent event);
+
+	/**
+	 * <p>
+	 * Called when an {@link IModelInstance} has been removed to the
+	 * {@link IModelInstanceRegistry}.
+	 * 
+	 * @param event
+	 *          The event identifying the {@link IModelInstance}.
+	 */
+	void modelInstanceRemoved(ModelInstanceRegistryEvent event);
 }
