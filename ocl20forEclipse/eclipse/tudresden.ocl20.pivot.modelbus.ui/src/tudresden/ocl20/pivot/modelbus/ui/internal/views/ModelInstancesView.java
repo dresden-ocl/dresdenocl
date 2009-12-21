@@ -36,6 +36,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
+import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.TreeSelection;
@@ -54,8 +55,11 @@ import tudresden.ocl20.pivot.modelbus.event.IModelRegistryListener;
 import tudresden.ocl20.pivot.modelbus.event.ModelInstanceRegistryEvent;
 import tudresden.ocl20.pivot.modelbus.event.ModelRegistryEvent;
 import tudresden.ocl20.pivot.modelbus.model.IModel;
+import tudresden.ocl20.pivot.modelbus.model.IModelRegistry;
 import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance;
+import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceRegistry;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
+import tudresden.ocl20.pivot.modelbus.ui.ModelBusUIPlugin;
 import tudresden.ocl20.pivot.modelbus.ui.internal.views.util.ModelInstanceSelectionAction;
 import tudresden.ocl20.pivot.modelbus.ui.internal.views.util.ModelObjectContentProvider;
 import tudresden.ocl20.pivot.modelbus.ui.internal.views.util.ModelObjectFilter;
@@ -73,6 +77,18 @@ public class ModelInstancesView extends ViewPart implements
 
 	/** The Constant ID of this class. */
 	public static final String ID = IModelBusConstants.MODEL_INSTANCES_VIEW_ID;
+
+	/**
+	 * Icon to remove an {@link IModelInstance} from the
+	 * {@link IModelInstanceRegistry}.
+	 */
+	public static String IMAGE_CLOSE_MODEL_INSTANCE = "icons/delete.gif";
+
+	/**
+	 * Action to the tool bar to remove the currently selected
+	 * {@link IModelInstance}.
+	 */
+	private Action myActionRemoveModelInstance;
 
 	/** The menu of the {@link ModelInstancesView}. */
 	private IMenuManager myMenu;
@@ -270,59 +286,6 @@ public class ModelInstancesView extends ViewPart implements
 
 	/**
 	 * <p>
-	 * Initializes the drop-down menu of the view with all {@link IModelInstance}s
-	 * currently registered for the active {@link IModel}.
-	 * </p>
-	 */
-	protected void initMenu() {
-
-		IModel[] allModels;
-		Iterator<IModel> modelIt;
-
-		allModels = ModelBusPlugin.getModelRegistry().getModels();
-		modelIt = Arrays.asList(allModels).iterator();
-
-		/* Iterate through the models and collect all model instances. */
-		while (modelIt.hasNext()) {
-
-			IModel aModel;
-
-			aModel = modelIt.next();
-
-			if (aModel != null) {
-				IModelInstance[] modelsInstances;
-
-				modelsInstances =
-						ModelBusPlugin.getModelInstanceRegistry().getModelInstances(aModel);
-
-				for (int i = 0; i < modelsInstances.length; i++) {
-					this.addModelInstanceSelectionAction(modelsInstances[i]);
-				}
-			}
-			// no else.
-		}
-	}
-
-	/**
-	 * <p>
-	 * Returns the {@link IMenuManager} of this {@link ModelInstancesView}.
-	 * </p>
-	 * 
-	 * @return The {@link IMenuManager} of this {@link ModelInstancesView}.
-	 */
-	protected IMenuManager getMenu() {
-
-		/* Eventually initialize the menu manager. */
-		if (this.myMenu == null) {
-			this.myMenu = getViewSite().getActionBars().getMenuManager();
-		}
-		// no else.
-
-		return this.myMenu;
-	}
-
-	/**
-	 * <p>
 	 * Adds an {@link ModelInstanceSelectionAction} for a given
 	 * {@link IModelInstance}. The {@link ModelInstanceSelectionAction} is used to
 	 * select the IModelInstance to be shown in this view.
@@ -377,6 +340,87 @@ public class ModelInstancesView extends ViewPart implements
 		// no else.
 
 		return result;
+	}
+
+	/**
+	 * <p>
+	 * Returns the {@link IMenuManager} of this {@link ModelInstancesView}.
+	 * </p>
+	 * 
+	 * @return The {@link IMenuManager} of this {@link ModelInstancesView}.
+	 */
+	private IMenuManager getMenu() {
+
+		/* Eventually initialize the menu manager. */
+		if (this.myMenu == null) {
+			this.myMenu = getViewSite().getActionBars().getMenuManager();
+		}
+		// no else.
+
+		return this.myMenu;
+	}
+
+	/**
+	 * <p>
+	 * Initializes the drop-down menu of the view with all {@link IModelInstance}s
+	 * currently registered for the active {@link IModel}.
+	 * </p>
+	 */
+	private void initMenu() {
+
+		IModel[] allModels;
+		Iterator<IModel> modelIt;
+
+		allModels = ModelBusPlugin.getModelRegistry().getModels();
+		modelIt = Arrays.asList(allModels).iterator();
+
+		/* Iterate through the models and collect all model instances. */
+		while (modelIt.hasNext()) {
+
+			IModel aModel;
+
+			aModel = modelIt.next();
+
+			if (aModel != null) {
+				IModelInstance[] modelsInstances;
+
+				modelsInstances =
+						ModelBusPlugin.getModelInstanceRegistry().getModelInstances(aModel);
+
+				for (int i = 0; i < modelsInstances.length; i++) {
+					this.addModelInstanceSelectionAction(modelsInstances[i]);
+				}
+			}
+			// no else.
+		}
+
+		/*
+		 * Add an action to the tool bar to remove the currently selected model
+		 * instance.
+		 */
+		myActionRemoveModelInstance = new Action() {
+
+			/*
+			 * (non-Javadoc)
+			 * @see org.eclipse.jface.action.Action#run()
+			 */
+			public void run() {
+
+				removeSelectedModelInstance();
+			}
+		};
+
+		myActionRemoveModelInstance
+				.setToolTipText("Closes the currently selected model instance.");
+		myActionRemoveModelInstance.setText("Close Model Instance");
+		myActionRemoveModelInstance.setImageDescriptor(ModelBusUIPlugin
+				.getImageDescriptor(IMAGE_CLOSE_MODEL_INSTANCE));
+		myActionRemoveModelInstance.setEnabled(ModelBusPlugin
+				.getModelInstanceRegistry().getActiveModelInstance(
+						ModelBusPlugin.getModelRegistry().getActiveModel()) != null);
+
+		this.getViewSite().getActionBars().getToolBarManager().add(
+				myActionRemoveModelInstance);
 	}
 
 	/**
@@ -471,6 +515,31 @@ public class ModelInstancesView extends ViewPart implements
 
 	/**
 	 * <p>
+	 * Helper method to remove the currently selected {@link IModelInstance} from
+	 * the {@link ModelBusPlugin}.
+	 * </p>
+	 */
+	private void removeSelectedModelInstance() {
+
+		IModelRegistry modelRegistry;
+		modelRegistry = ModelBusPlugin.getModelRegistry();
+
+		IModelInstanceRegistry modelInstanceRegistry;
+		modelInstanceRegistry = ModelBusPlugin.getModelInstanceRegistry();
+
+		IModelInstance activeModelInstance;
+		activeModelInstance =
+				modelInstanceRegistry.getActiveModelInstance(modelRegistry
+						.getActiveModel());
+
+		if (activeModelInstance != null) {
+			modelInstanceRegistry.removeModelInstance(activeModelInstance);
+		}
+		// no else.
+	}
+
+	/**
+	 * <p>
 	 * Sets the active {@link IModelInstance}.
 	 * </p>
 	 * 
@@ -548,11 +617,15 @@ public class ModelInstancesView extends ViewPart implements
 
 			}
 			// no else.
+
+			this.myActionRemoveModelInstance.setEnabled(true);
 		}
 
 		/* Else the tree viewer gets a null input. */
 		else {
 			this.myViewer.setInput(null);
+
+			this.myActionRemoveModelInstance.setEnabled(false);
 		}
 	}
 

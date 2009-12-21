@@ -70,9 +70,15 @@ public class ModelsView extends ViewPart implements IModelRegistryListener {
 	/** The Constant ID of this {@link Class}. */
 	public static final String ID = IModelBusConstants.MODELS_VIEW_ID;
 
+	/** Icon to remove an {@link IModel} from the {@link IModelRegistry}. */
+	public static String IMAGE_CLOSE_MODEL = "icons/delete.gif";
+
 	/** The {@link Logger} for this {@link Class}. */
 	private static final Logger LOGGER =
 			ModelBusUIPlugin.getLogger(ModelsView.class);
+
+	/** Action to the tool bar to remove the currently selected {@link IModel}. */
+	private Action myActionRemoveModel;
 
 	/** The adapter factory that provides the view of the {@link IModel}. */
 	private ComposedAdapterFactory myAdapterFactory;
@@ -355,13 +361,56 @@ public class ModelsView extends ViewPart implements IModelRegistryListener {
 
 		models = ModelBusPlugin.getModelRegistry().getModels();
 
-		/* Add an action for every model available. */
+		/* Add an action for every model available to the menu. */
 		for (int i = 0; i < models.length; i++) {
 			this.addModelSelectionAction(models[i]);
 		}
 
 		/* Update the currently active model. */
 		this.updateActiveModel();
+
+		/* Add an action to the tool bar to remove the currently selected model. */
+		myActionRemoveModel = new Action() {
+
+			/*
+			 * (non-Javadoc)
+			 * @see org.eclipse.jface.action.Action#run()
+			 */
+			public void run() {
+
+				removeSelectedModel();
+			}
+		};
+
+		myActionRemoveModel.setToolTipText("Closes the currently selected model.");
+		myActionRemoveModel.setText("Close Model");
+		myActionRemoveModel.setImageDescriptor(ModelBusUIPlugin
+				.getImageDescriptor(IMAGE_CLOSE_MODEL));
+		myActionRemoveModel.setEnabled(ModelBusPlugin.getModelRegistry()
+				.getActiveModel() != null);
+
+		this.getViewSite().getActionBars().getToolBarManager().add(
+				myActionRemoveModel);
+	}
+
+	/**
+	 * <p>
+	 * Helper method to remove the currently selected {@link IModel} from the
+	 * {@link ModelBusPlugin}.
+	 * </p>
+	 */
+	private void removeSelectedModel() {
+
+		IModelRegistry modelRegistry;
+		modelRegistry = ModelBusPlugin.getModelRegistry();
+
+		IModel activeModel;
+		activeModel = modelRegistry.getActiveModel();
+
+		if (activeModel != null) {
+			modelRegistry.removeModel(activeModel);
+		}
+		// no else.
 	}
 
 	/**
@@ -390,66 +439,76 @@ public class ModelsView extends ViewPart implements IModelRegistryListener {
 	 */
 	private void setActiveModel(IModel model) {
 
-		ModelSelectionAction action;
-		Namespace rootNamespace;
+		if (model != null) {
+			ModelSelectionAction action;
+			Namespace rootNamespace;
 
-		action = this.myModelSelectionActions.get(model);
+			action = this.myModelSelectionActions.get(model);
 
-		if (action != null && action != this.selectedAction) {
+			if (action != null && action != this.selectedAction) {
 
-			if (this.selectedAction != null) {
-				this.selectedAction.setChecked(false);
+				if (this.selectedAction != null) {
+					this.selectedAction.setChecked(false);
+				}
+				// no else.
+
+				action.setChecked(true);
+				this.selectedAction = action;
+			}
+
+			/* This should not happen. */
+			else {
+				String msg;
+
+				msg = "No model selection action has been created for model '";
+				msg += model.getDisplayName() + "'";
+
+				throw new IllegalStateException(msg);
+			}
+
+			/* Get the root name space from the new active model. */
+			try {
+				rootNamespace = model.getRootNamespace();
+			}
+
+			catch (ModelAccessException e) {
+
+				String msg;
+
+				msg = "Error when accessing model " + model;
+				LOGGER.error(msg, e);
+
+				MessageDialog.openError(getSite().getShell(),
+						ModelBusUIMessages.ModelsView_Error, NLS.bind(
+								ModelBusUIMessages.ModelsView_AccessRootNamespace, model
+										.getDisplayName()));
+
+				/* Do not exit here to reset the input to null below. */
+				rootNamespace = null;
+			}
+			// end catch.
+
+			/*
+			 * Update the input; we do not use equals for comparison of current input
+			 * with new root name space because the root name space may be a transient
+			 * one with an empty name.
+			 */
+			if (this.myModelViewer.getInput() == null && rootNamespace != null
+					|| this.myModelViewer.getInput() != null
+					&& this.myModelViewer.getInput() != rootNamespace) {
+
+				this.setInput(rootNamespace);
 			}
 			// no else.
 
-			action.setChecked(true);
-			this.selectedAction = action;
+			this.myActionRemoveModel.setEnabled(true);
 		}
 
-		/* This should not happen. */
 		else {
-			String msg;
+			this.setInput(null);
 
-			msg = "No model selection action has been created for model '";
-			msg += model.getDisplayName() + "'";
-
-			throw new IllegalStateException(msg);
+			this.myActionRemoveModel.setEnabled(false);
 		}
-
-		/* Get the root name space from the new active model. */
-		try {
-			rootNamespace = model.getRootNamespace();
-		}
-
-		catch (ModelAccessException e) {
-
-			String msg;
-
-			msg = "Error when accessing model " + model;
-			LOGGER.error(msg, e);
-
-			MessageDialog.openError(getSite().getShell(),
-					ModelBusUIMessages.ModelsView_Error, NLS.bind(
-							ModelBusUIMessages.ModelsView_AccessRootNamespace, model
-									.getDisplayName()));
-
-			/* Do not exit here to reset the input to null below. */
-			rootNamespace = null;
-		}
-		// end catch.
-
-		/*
-		 * Update the input; we do not use equals for comparison of current input
-		 * with new root name space because the root name space may be a transient
-		 * one with an empty name.
-		 */
-		if (this.myModelViewer.getInput() == null && rootNamespace != null
-				|| this.myModelViewer.getInput() != null
-				&& this.myModelViewer.getInput() != rootNamespace) {
-
-			this.setInput(rootNamespace);
-		}
-		// no else.
 	}
 
 	/**
@@ -462,9 +521,12 @@ public class ModelsView extends ViewPart implements IModelRegistryListener {
 		this.myModelViewer.setInput(rootNamespace);
 		this.myModelViewer.refresh();
 
-		this.myModelViewer.setSelection(new StructuredSelection(rootNamespace
-				.getNestedNamespace().isEmpty() ? StructuredSelection.EMPTY
-				: rootNamespace.getNestedNamespace().get(0)));
+		if (rootNamespace != null) {
+			this.myModelViewer.setSelection(new StructuredSelection(rootNamespace
+					.getNestedNamespace().isEmpty() ? StructuredSelection.EMPTY
+					: rootNamespace.getNestedNamespace().get(0)));
+		}
+		// no else.
 
 		this.myDrillDownAdapter.reset();
 	}
