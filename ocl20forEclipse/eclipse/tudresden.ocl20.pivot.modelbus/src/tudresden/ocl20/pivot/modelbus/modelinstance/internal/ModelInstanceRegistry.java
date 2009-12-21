@@ -41,6 +41,7 @@ import org.eclipse.core.runtime.ListenerList;
 import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
 import tudresden.ocl20.pivot.modelbus.event.IModelInstanceRegistryListener;
 import tudresden.ocl20.pivot.modelbus.event.ModelInstanceRegistryEvent;
+import tudresden.ocl20.pivot.modelbus.event.ModelRegistryEvent;
 import tudresden.ocl20.pivot.modelbus.model.IModel;
 import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance;
 import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceRegistry;
@@ -67,6 +68,17 @@ public class ModelInstanceRegistry implements IModelInstanceRegistry {
 
 	/** The listeners of this {@link ModelInstanceRegistry}. */
 	private ListenerList listeners;
+
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * tudresden.ocl20.pivot.modelbus.event.IModelRegistryListener#activeModelChanged
+	 * (tudresden.ocl20.pivot.modelbus.event.ModelRegistryEvent)
+	 */
+	public void activeModelChanged(ModelRegistryEvent event) {
+
+		/* Do nothing. Only listens to removed models. */
+	}
 
 	/*
 	 * (non-Javadoc)
@@ -122,6 +134,7 @@ public class ModelInstanceRegistry implements IModelInstanceRegistry {
 		instances.add(modelInstance);
 
 		this.modelInstances.put(model, instances);
+		this.fireModelInstanceAdded(modelInstance);
 
 		/* Check if an active model instance of the model already exists. */
 		if (this.activeModelInstances == null
@@ -130,8 +143,6 @@ public class ModelInstanceRegistry implements IModelInstanceRegistry {
 			this.setActiveModelInstance(model, modelInstance);
 		}
 		// no else.
-
-		this.fireModelInstanceAdded(modelInstance);
 
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("addModelInstance(IModel, IModelInstance) - exit"); //$NON-NLS-1$
@@ -223,6 +234,37 @@ public class ModelInstanceRegistry implements IModelInstanceRegistry {
 
 	/*
 	 * (non-Javadoc)
+	 * @see
+	 * tudresden.ocl20.pivot.modelbus.event.IModelRegistryListener#modelAdded(
+	 * tudresden.ocl20.pivot.modelbus.event.ModelRegistryEvent)
+	 */
+	public void modelAdded(ModelRegistryEvent event) {
+
+		/* Do nothing. Only listens to removed models. */
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * tudresden.ocl20.pivot.modelbus.event.IModelRegistryListener#modelRemoved
+	 * (tudresden.ocl20.pivot.modelbus.event.ModelRegistryEvent)
+	 */
+	public void modelRemoved(ModelRegistryEvent event) {
+
+		if (this.modelInstances.containsKey(event.getAffectedModel())) {
+
+			for (IModelInstance modelInstance : this.modelInstances.get(event
+					.getAffectedModel())) {
+
+				this.removeModelInstance(modelInstance);
+			}
+			// end for.
+		}
+		// no else.
+	}
+
+	/*
+	 * (non-Javadoc)
 	 * @seetudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceRegistry#
 	 * removeModelInstance
 	 * (tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance)
@@ -248,8 +290,15 @@ public class ModelInstanceRegistry implements IModelInstanceRegistry {
 
 				if (result) {
 
-					this.modelInstances.put(modelInstance.getModel(),
-							modelInstancesOfModel);
+					if (modelInstancesOfModel.size() > 0) {
+						this.modelInstances.put(modelInstance.getModel(),
+								modelInstancesOfModel);
+					}
+
+					else {
+						this.modelInstances.remove(modelInstance.getModel());
+					}
+
 					this.fireModelInstanceRemoved(modelInstance);
 
 					/* Probably add the active IModelInstances as well. */
@@ -378,7 +427,7 @@ public class ModelInstanceRegistry implements IModelInstanceRegistry {
 		}
 		// no else.
 
-		if (this.modelInstances.get(model) == null) {
+		if (this.modelInstances.get(model) == null && modelInstance != null) {
 			throw new IllegalArgumentException(
 					"The model instance '"
 							+ modelInstance.getDisplayName()
@@ -391,7 +440,7 @@ public class ModelInstanceRegistry implements IModelInstanceRegistry {
 			throw new IllegalArgumentException(
 					"The model instance '"
 							+ modelInstance.getDisplayName()
-							+ "' must be added to the model instance registry first before it can be set active.");
+							+ "' must be added to the model instance registry before it can be set active.");
 		}
 		// no else.
 
@@ -400,15 +449,22 @@ public class ModelInstanceRegistry implements IModelInstanceRegistry {
 		}
 		// no else.
 
-		IModelInstance instance;
-		instance = activeModelInstances.get(model);
-
-		if (instance == null || !instance.equals(modelInstance)) {
-			this.activeModelInstances.put(model, modelInstance);
+		if (modelInstance == null) {
+			this.activeModelInstances.remove(model);
 		}
-		// no else.
 
-		this.fireActiveModelInstanceChanged(modelInstance);
+		else {
+			IModelInstance instance;
+			instance = activeModelInstances.get(model);
+
+			if (instance == null || !instance.equals(modelInstance)) {
+				this.activeModelInstances.put(model, modelInstance);
+			}
+			// no else.
+		}
+		// end else.
+
+		this.fireActiveModelInstanceChanged(model, modelInstance);
 
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("setActiveModelInstance(IModel, IModelInstance) - exit"); //$NON-NLS-1$
@@ -427,7 +483,8 @@ public class ModelInstanceRegistry implements IModelInstanceRegistry {
 	 * @param modelInstance
 	 *          The new active {@link IModelInstance}.
 	 */
-	private void fireActiveModelInstanceChanged(IModelInstance modelInstance) {
+	private void fireActiveModelInstanceChanged(IModel model,
+			IModelInstance modelInstance) {
 
 		ModelInstanceRegistryEvent event;
 		event = null;
@@ -441,9 +498,7 @@ public class ModelInstanceRegistry implements IModelInstanceRegistry {
 
 				/* Lazily create the event. */
 				if (event == null) {
-					event =
-							new ModelInstanceRegistryEvent(this, modelInstance.getModel(),
-									modelInstance);
+					event = new ModelInstanceRegistryEvent(this, model, modelInstance);
 				}
 				// no else.
 

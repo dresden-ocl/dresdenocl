@@ -157,7 +157,7 @@ public class ModelBusPlugin extends Plugin {
 	 * 
 	 * @return An {@link IMetamodelRegistry} instance.
 	 */
-	public static IMetamodelRegistry getMetamodelRegistry() {
+	public synchronized static IMetamodelRegistry getMetamodelRegistry() {
 
 		/* Check that the plugin has been activated. */
 		if (plugin == null) {
@@ -180,7 +180,7 @@ public class ModelBusPlugin extends Plugin {
 	 * 
 	 * @return An {@link IModelRegistry} instance.
 	 */
-	public static IModelRegistry getModelRegistry() {
+	public synchronized static IModelRegistry getModelRegistry() {
 
 		/* Check that the plugin has been activated. */
 		if (plugin == null) {
@@ -205,7 +205,7 @@ public class ModelBusPlugin extends Plugin {
 	 * 
 	 * @return An {@link IModelInstanceRegistry} instance.
 	 */
-	public static IModelInstanceRegistry getModelInstanceRegistry() {
+	public synchronized static IModelInstanceRegistry getModelInstanceRegistry() {
 
 		if (plugin == null) {
 			throw new IllegalStateException(
@@ -216,6 +216,8 @@ public class ModelBusPlugin extends Plugin {
 		/* Lazily create the registry. */
 		if (plugin.modelInstanceRegistry == null) {
 			plugin.modelInstanceRegistry = new ModelInstanceRegistry();
+			ModelBusPlugin.getModelRegistry().addModelRegistryListener(
+					plugin.modelInstanceRegistry);
 		}
 		// no else.
 
@@ -230,7 +232,7 @@ public class ModelBusPlugin extends Plugin {
 	 * 
 	 * @return An {@link IModelInstanceTypeRegistry} instance.
 	 */
-	public static IModelInstanceTypeRegistry getModelInstanceTypeRegistry() {
+	public synchronized static IModelInstanceTypeRegistry getModelInstanceTypeRegistry() {
 
 		/* Check that the plug-in has been activated. */
 		if (plugin == null) {

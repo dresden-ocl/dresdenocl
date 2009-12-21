@@ -193,7 +193,9 @@ public class ModelRegistry implements IModelRegistry {
 		boolean result;
 
 		if (this.models != null) {
+
 			result = this.models.remove(model);
+
 			this.fireModelRemoved(model);
 
 			/* Probably update the active model. */
