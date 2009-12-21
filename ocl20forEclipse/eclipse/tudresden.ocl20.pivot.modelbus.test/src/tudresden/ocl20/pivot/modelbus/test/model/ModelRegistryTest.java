@@ -33,6 +33,8 @@ import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
 import tudresden.ocl20.pivot.modelbus.metamodel.IMetamodelRegistry;
 import tudresden.ocl20.pivot.modelbus.model.IModel;
 import tudresden.ocl20.pivot.modelbus.model.IModelRegistry;
+import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance;
+import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceRegistry;
 import tudresden.ocl20.pivot.modelbus.test.ModelBusTestUtility;
 
 /**
@@ -494,6 +496,73 @@ public class ModelRegistryTest {
 		displayName = null;
 
 		modelRegistry.removeModel(displayName);
+	}
+
+	/**
+	 * <p>
+	 * Tests the method
+	 * {@link IModelInstanceRegistry#removeModelInstance(IModelInstance)} by
+	 * simply removing an {@link IModelInstance} that has been added before.
+	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 */
+	@Test
+	public void testRemoveModel09() throws ModelAccessException {
+
+		/* --- Add the model. --- */
+		IModelRegistry modelRegistry;
+		modelRegistry = ModelBusPlugin.getModelRegistry();
+
+		assertEquals(0, modelRegistry.getModels().length);
+
+		IModel model;
+		model = ModelBusTestUtility.getUML2Model("resources/models/model03.uml");
+
+		modelRegistry.addModel(model);
+
+		/* The model should now be added to the registry. */
+		assertEquals(1, modelRegistry.getModels().length);
+
+		/* The model should be set as active model. */
+		assertNotNull(modelRegistry.getActiveModel());
+		assertEquals(model, modelRegistry.getActiveModel());
+
+		/* --- Add the Model Instance. --- */
+		IModelInstanceRegistry modelInstanceRegistry;
+		modelInstanceRegistry = ModelBusPlugin.getModelInstanceRegistry();
+
+		assertEquals(0, modelInstanceRegistry.getModelInstances(model).length);
+
+		IModelInstance modelInstance01;
+		modelInstance01 =
+				ModelBusTestUtility.getJavaModelInstance(
+						"bin/package1/ModelInstance01ProviderClass.class", model);
+
+		modelInstanceRegistry.addModelInstance(model, modelInstance01);
+
+		/* The model should now be added to the registry. */
+		assertEquals(1, modelInstanceRegistry.getModelInstances(model).length);
+
+		/* The model instance should be set as active model instance. */
+		assertNotNull(modelInstanceRegistry.getActiveModelInstance(model));
+		assertEquals(modelInstance01, modelInstanceRegistry
+				.getActiveModelInstance(model));
+
+		/* --- Remove the model. --- */
+		assertTrue(modelRegistry.removeModel(model));
+
+		/* No model should remain in the registry. */
+		assertEquals(0, modelRegistry.getModels().length);
+
+		/* No model should be set as active model. */
+		assertNull(modelRegistry.getActiveModel());
+
+		/* The model instance should now be removed from the registry. */
+		assertEquals(0, modelInstanceRegistry.getModelInstances(model).length);
+
+		/* Active model instance should be null. */
+		assertNull(modelInstanceRegistry.getActiveModelInstance(model));
 	}
 
 	/**
