@@ -16,45 +16,36 @@ for more details.
 
 You should have received a copy of the GNU Lesser General Public License along 
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
-*/
-package tudresden.ocl20.benchmark.testdata.common;
+ */
+package tudresden.ocl20.benchmark;
 
+import junit.framework.Test;
+import junit.framework.TestSuite;
+import tudresden.ocl20.benchmark.common.InvariantExecuter;
 
-import java.util.ArrayList;
-import java.util.List;
+/**
+ * Skeleton of a b7 test which is not implemented yet.
+ */
+public class B7Test extends TestSuite {
 
-// TODO: Auto-generated Javadoc
-public class ModelInstance {
+	/**
+	 * Instantiates a new b6 test.
+	 */
+	public B7Test() {
 
+		super("b7");
+
+		this.addTest(new InvariantExecuter("b7/Efficiency.ecore", //
+				"", //
+		"src/tudresden/ocl20/benchmark/testdata/b7/expressions/mathlibFunctions.ocl"));
+		
+	}
 	
 	/**
-	 * required method be a dummy --> try to provide models as requested by each test method
-	 * This hack is done to reuse testperformer from interpreter test, hope it works :).
-	 * 
-	 * @return 
+	 * returns the test suite for single execution
 	 */
-	public static List<Object> getModelObjects()
+	public static Test suite()
 	{
-		return getFinalStateModelInstance();
-		//return getFinalStateModelInstance().getModelObjects();
+		return new B7Test();
 	}
-	
-	/**
-	 * 
-	 * 
-	 * @return A simple model instance of the simple UML model.
-	 */
-	protected static List<Object> getFinalStateModelInstance() {
-		
-		Dummy test;
-		
-		test = new Dummy("Test");
-				
-		List<Object> result = new ArrayList<Object>();
-		
-		result.add(test);
-		
-		return result;
-	}
-		
 }

@@ -16,50 +16,64 @@ for more details.
 
 You should have received a copy of the GNU Lesser General Public License along 
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
-*/
+ */
 package tudresden.ocl20.benchmark;
 
-import org.junit.BeforeClass;
-import org.junit.Test;
-
-
+import tudresden.ocl20.benchmark.common.InvariantExecuter;
+import junit.framework.Test;
+import junit.framework.TestSuite;
 
 // TODO: Auto-generated Javadoc
 /**
  * The Class B1Test.
  */
-public class B1Test extends BaseTest
-{
+public class B1Test extends TestSuite {
 
-	@BeforeClass
-	public static void init()
-	{
-		initPerformer("b1", "CivilStatusWorld.ecore");
-	}
-	
-	@Test
 	/**
-	 * Test invariants on first modelInstance
+	 * Instantiates a new b1 test.
 	 */
-	public void testInvariants1()
-	{
-		perf.loadModelInstance("bin/tudresden/ocl20/benchmark/testdata/b1/ModelFirstState.class");
-		perf.safeLoadStatementFile("bin/tudresden/ocl20/benchmark/testdata/b1/expressions/invariants.ocl");
+	public B1Test() {
+
+		super("b1");
+
+		this.addTest(this.testInvariants1());
 		
-		perf.checkActiveInvariants();
+		
+		this.addTest(this.testInvariants2());
+
+	}
+
+	/**
+	 * Test invariants1.
+	 * 
+	 * @return the test suite
+	 */
+	protected TestSuite testInvariants1() {
+
+		return new InvariantExecuter("b1/CivilStatusWorld.ecore", //
+				"bin/tudresden/ocl20/benchmark/testdata/b1/ModelFirstState.class", //
+				"bin/tudresden/ocl20/benchmark/testdata/b1/expressions/invariants.ocl");
 	}
 	
 	/**
-	 * Test invariants on the evolution model instance
+	 * Test invariants2.
+	 * 
+	 * @return the test suite
 	 */
-	@Test
-	public void testInvariants2()
-	{
-		perf.loadModelInstance("bin/tudresden/ocl20/benchmark/testdata/b1/ModelEvolution.class");
-		
-		perf.safeLoadStatementFile("bin/tudresden/ocl20/benchmark/testdata/b1/expressions/invariants.ocl");
-		
-		perf.checkActiveInvariants();
+	protected TestSuite testInvariants2() {
+		return new InvariantExecuter("b1/CivilStatusWorld.ecore", //
+				"bin/tudresden/ocl20/benchmark/testdata/b1/ModelEvolution.class", //
+				"bin/tudresden/ocl20/benchmark/testdata/b1/expressions/invariants.ocl");
+
 	}
 	
+	/**
+	 * returns the test suite for single execution
+	 */
+	public static Test suite()
+	{
+		return new B1Test();
+	}
+
 }
+

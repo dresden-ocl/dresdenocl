@@ -16,142 +16,210 @@ for more details.
 
 You should have received a copy of the GNU Lesser General Public License along 
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
-*/
+ */
 package tudresden.ocl20.benchmark;
 
-
-
-import org.junit.BeforeClass;
-import org.junit.Test;
-
+import junit.framework.Test;
+import junit.framework.TestSuite;
+import tudresden.ocl20.benchmark.common.InvariantExecuter;
+import tudresden.ocl20.benchmark.common.PrePostExecuter;
 import tudresden.ocl20.benchmark.testdata.b2.Gender;
 import tudresden.ocl20.benchmark.testdata.b2.Person;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceObject;
 
-
+// TODO: Auto-generated Javadoc
 /**
  * The Class B2Test.
  */
-public class B2Test extends BaseTest
-{
+public class B2Test extends TestSuite {
 
 	/**
-	 * Inits the.
+	 * Instantiates a new b2 test.
 	 */
-	@BeforeClass
-	public static void init()
-	{
-		initPerformer("b2", "CivilStatusWorld.ecore");
-	}
-	
-	@Test
-	/**
-	 * Test invariants from B2
-	 */
-	public void testInvariants()
-	{
-		perf.loadModelInstance("bin/tudresden/ocl20/benchmark/testdata/b2/ModelInstance.class");
-		perf.safeLoadStatementFile("bin/tudresden/ocl20/benchmark/testData/b2/expressions/invariants.ocl");
-			
-		perf.checkActiveInvariants();
-		
-	}
-	
-	/**
-	 * Test pre post conditions for the birth-method
-	 * parameters for birth: aName:String, Gender:aGender
-	 */
-	@Test
-	public void testPrePostBirth()
-	{
-		perf.safeLoadPrePostFile("bin/tudresden/ocl20/benchmark/testData/b2/expressions/prepostBirth.ocl");
-		
-		// create new Person to test the Constraints on
-		IModelInstanceObject testPerson= perf.createModelInstanceAdapter(new Person());
-		
-		// create and set Parameters
-		perf.setEnvironmentVariable("aName", "Ada");
-		perf.setEnvironmentVariable("aGender", Gender.female);
-		
-		perf.checkPreAndPostConditions(testPerson, "birth", "aName", "aGender");
-		
-		
-	}
-	
-	/**
-	 * Test pre post conditions for he marry-method
-	 * Person::marry(aSpouse:Person)
-	 */
-	@Test
-	public void testPrePostMarry()
-	{
-		perf.safeLoadPrePostFile("bin/tudresden/ocl20/benchmark/testData/b2/expressions/prepostMarry.ocl");
-		Person ada = new Person();
-		ada.birth("Ada", Gender.female);
-		Person bob = new Person();
-		bob.birth("Bob", Gender.male);
-		
-		// create new Person to test the Constraints on
-		IModelInstanceObject testPerson= perf.createModelInstanceAdapter(ada);
-		IModelInstanceObject testSpouse= perf.createModelInstanceAdapter(bob);
-		
-		// create and set Parameters
-		perf.setEnvironmentVariable("aSpouse", testSpouse);
-			
-		perf.checkPreAndPostConditions(testPerson, "marry", "aSpouse");
-		
-	}
-	
-	/**
-	 * Test pre post conditions for he divorce-method
-	 * Person::marry(aSpouse:Person)
-	 */
-	@Test
-	public void testPrePostDivorce()
-	{
-		
-		perf.safeLoadPrePostFile("bin/tudresden/ocl20/benchmark/testData/b2/expressions/prepostDivorce.ocl");
-		
-		// create person and it's spouse and marry them
-		Person ada = new Person();
-		ada.birth("Ada", Gender.female);
-		Person bob = new Person();
-		bob.birth("Bob", Gender.male);
-		ada.marry(bob);
-		
-		// create new Person to test the Constraints on
-		IModelInstanceObject testPerson= perf.createModelInstanceAdapter(ada);
+	public B2Test() {
 
-		// first pre is checked.
-		// after that divorce is executed and all posts are checked.
-		perf.checkPreAndPostConditions(testPerson, "divorce");
-		
+		super("b2");
+
+		// test invariants
+		this
+				.addTest(new InvariantExecuter("b2/CivilStatusWorld.ecore", //
+						"bin/tudresden/ocl20/benchmark/testdata/b2/ModelInstance.class",//
+						"bin/tudresden/ocl20/benchmark/testData/b2/expressions/invariants.ocl"));
+
+		// test the pre and post conditions of the Class' functions
+		this.addTest(this.testPrePostBirth());
+
+		this.addTest(this.testPrePostMarry());
+
+		this.addTest(this.testPrePostDivorce());
+
+		this.addTest(this.testPrePostDeath());
+
 	}
-	
+
+	/**
+	 * Test pre post conditions for the birth-method parameters for birth:
+	 * aName:String, Gender:aGender.
+	 * 
+	 * @return 
+	 */
+
+	public TestSuite testPrePostBirth() {
+
+		return new PrePostExecuter("b2/CivilStatusWorld.ecore", //
+				"bin/tudresden/ocl20/benchmark/testData/b2/expressions/prepostBirth.ocl") {
+
+			@Override
+			protected IModelInstanceObject createModelInstanceObject() {
+
+				// create new Person to test the Constraints on
+				IModelInstanceObject testPerson =
+						perf.createModelInstanceAdapter(new Person());
+
+				// create and set Parameters
+				perf.setEnvironmentVariable("aName", "Ada");
+				perf.setEnvironmentVariable("aGender", Gender.female);
+
+				return testPerson;
+			}
+
+			@Override
+			protected String getMethod() {
+
+				return "birth";
+			}
+
+			@Override
+			protected String[] getParams() {
+
+				return new String[] { "aName", "aGender" };
+			}
+		};
+	}
+
+	/**
+	 * Test pre post marry.
+	 * 
+	 * @return the test suite
+	 */
+	public TestSuite testPrePostMarry() {
+
+		return new PrePostExecuter("b2/CivilStatusWorld.ecore", //
+				"bin/tudresden/ocl20/benchmark/testData/b2/expressions/prepostMarry.ocl") {
+
+			@Override
+			protected String[] getParams() {
+
+				return new String[] { "aSpouse" };
+			}
+
+			@Override
+			protected String getMethod() {
+
+				return "marry";
+			}
+
+			@Override
+			protected IModelInstanceObject createModelInstanceObject() {
+
+				Person ada = new Person();
+				ada.birth("Ada", Gender.female);
+
+				IModelInstanceObject person = perf.createModelInstanceAdapter(ada);
+
+				return person;
+			}
+
+			@Override
+			protected void preparePost() {
+
+				Person bob = new Person();
+				bob.birth("Bob", Gender.male);
+
+				perf.setEnvironmentVariable("aSpouse", bob);
+			}
+		};
+	}
+
+	/**
+	 * Test pre post divorce.
+	 * 
+	 * @return the test suite
+	 */
+	public TestSuite testPrePostDivorce() {
+
+		return new PrePostExecuter("b2/CivilStatusWorld.ecore", //
+				"bin/tudresden/ocl20/benchmark/testData/b2/expressions/prepostDivorce.ocl") {
+
+			@Override
+			protected String[] getParams() {
+
+				return new String[] {};
+			}
+
+			@Override
+			protected String getMethod() {
+
+				return "divorce";
+			}
+
+			@Override
+			protected IModelInstanceObject createModelInstanceObject() {
+
+				Person ada = new Person();
+				ada.birth("Ada", Gender.female);
+				Person bob = new Person();
+				bob.birth("Bob", Gender.male);
+				ada.marry(bob);
+
+				IModelInstanceObject person = perf.createModelInstanceAdapter(ada);
+
+				return person;
+			}
+		};
+	}
+
+	/**
+	 * Test pre post death.
+	 * 
+	 * @return the test suite
+	 */
+	public TestSuite testPrePostDeath() {
+
+		return new PrePostExecuter("b2/CivilStatusWorld.ecore", //
+				"bin/tudresden/ocl20/benchmark/testData/b2/expressions/prepostDeath.ocl") {
+
+			@Override
+			protected String[] getParams() {
+
+				return new String[] {};
+			}
+
+			@Override
+			protected String getMethod() {
+
+				return "death";
+			}
+
+			@Override
+			protected IModelInstanceObject createModelInstanceObject() {
+
+				// create person and it's spouse and marry them
+				Person ada = new Person();
+				ada.birth("Ada", Gender.female);
+
+				IModelInstanceObject person = perf.createModelInstanceAdapter(ada);
+
+				return person;
+			}
+		};
+	}
 	
 	/**
-	 * Test pre post conditions for he death-method
-	 * Person::death()
+	 * returns the test suite for single execution
 	 */
-	@Test
-	public void testPrePostDeath()
+	public static Test suite()
 	{
-		
-		perf.safeLoadPrePostFile("bin/tudresden/ocl20/benchmark/testData/b2/expressions/prepostDeath.ocl");
-		
-		// create person and it's spouse and marry them
-		Person ada = new Person();
-		ada.birth("Ada", Gender.female);
-		
-		// create new Person to test the Constraints on
-		IModelInstanceObject testPerson = perf.createModelInstanceAdapter(ada);
-
-		// first pre is checked.
-		// after that divorce is executed and all posts are checked.
-		perf.checkPreAndPostConditions(testPerson, "death");
-		
+		return new B2Test();
 	}
-	
-	
-	
 }

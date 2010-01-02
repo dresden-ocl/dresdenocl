@@ -19,18 +19,10 @@ with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
 package tudresden.ocl20.benchmark.common;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
 import java.io.StringReader;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 import org.eclipse.core.runtime.Platform;
 
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
@@ -59,6 +51,7 @@ import tudresden.ocl20.pivot.pivotmodel.Property;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 import tudresden.ocl20.pivot.standardlibrary.java.JavaStandardlibraryPlugin;
 
+// TODO: Auto-generated Javadoc
 /**
  * <p>
  * This class loads a given model file, a given model instance and given OCL
@@ -84,73 +77,37 @@ public class TestPerformer {
 	/**
 	 * The global {@link IEnvironment} used during interpretation and preparation.
 	 */
-	private IInterpretationEnvironment myGlobalEnvironment;
+	protected IInterpretationEnvironment myGlobalEnvironment;
 
 	// @ The {@link IOclInterpreter} used by this {@link TestPerformer}.
-	private IOclInterpreter myInterpreter = null;
+	protected IOclInterpreter myInterpreter = null;
 
 	// @ Model which is worked on
-	private IModel myModel = null;
+	protected IModel myModel = null;
 
 	// @ Metamodel of the Model
-	private IMetamodel metaModel = null;
-
-	// @ Logging engine to document success and failure of parsing and
-	// @ interpretation
-	private BenchmarkLogger bLogger;
+	protected IMetamodel metaModel = null;
 
 	// @ Environment that holds common variables which
 	// @ are used by both the TestPerformer and the Logger.
-	private TestEnvironment testEnv;
+	protected TestEnvironment testEnv;
 
-	// @ Regex-Pattern to get a constraint's name
-	private Pattern patternConstraintName;
+	// @ name of model instance type (mostly java)
+	protected String modelInstanceType;
 
-	// @ name of model instance (mostly java)
-	private String modelInstanceType;
+	protected List<IModelInstanceObject> activeMIObjects;
 
 	/**
 	 * 
-	 * @param testName
-	 *          The name of the test being executed. Used for the Logger
+	 * 
+	 * @param testEnv 
 	 */
-	public TestPerformer(String testName) {
+	public TestPerformer(TestEnvironment testEnv) {
 
 		super();
 
-		this.testEnv = new TestEnvironment();
-
-		this.testEnv.testName = testName;
-
-		this.bLogger = new BenchmarkLogger(this.testEnv);
-
-		// examine a constraint's name
-		this.patternConstraintName =
-				Pattern.compile("(.*?)(inv|pre|post|def)\\s*([\\(\\)\\w]*?)\\s*:(.*)");
-
+		this.testEnv = testEnv;
 	}
-
-	// FIXME: does use old funtionality of the IModelInstance; commented out,
-	// since it is not used anywayì
-	// /**
-	// * @param pathList
-	// * The {@link Type} which instances shall be returned.
-	// *
-	// * @return All {@link IModelObject}s of the active {@link IModelInstance}
-	// * which are of the {@link Type} described by the given pathList.
-	// */
-	// public List<IModelInstanceObject> getObjectsOfKind(List<String> pathList)
-	// {
-	//
-	// List<IModelInstanceObject> result;
-	//
-	// result = ModelBusPlugin.getModelInstanceRegistry()
-	// .getActiveModelInstance(this.myModel)
-	// .getObjectsOfType(pathList);
-	//
-	// return result;
-	//
-	// }
 
 	/**
 	 * <p>
@@ -158,12 +115,14 @@ public class TestPerformer {
 	 * set.
 	 * </p>
 	 * 
-	 * @throws RuntimeException
-	 *           Is thrown if any error occurred while loading the model or the
-	 *           meta model.
+	 * @param metaModelName 
+	 * @param modelFilePath 
+	 * 
+	 * @throws RuntimeException Is thrown if any error occurred while loading the model or the
+	 * meta model.
 	 */
-	public void init(String metaModelName, String modelBundleName,
-			String modelFilePath) throws RuntimeException {
+	public void init(String metaModelName, String modelFilePath)
+			throws RuntimeException {
 
 		/* Try to load model and meta model. */
 		try {
@@ -176,12 +135,8 @@ public class TestPerformer {
 						"Unable to load UML2 meta model during test.");
 			}
 
-			// Get the bundle location for the model files.
-			this.testEnv.fileDirectory =
-					Platform.getBundle(modelBundleName).getLocation();
-
-			// Remove the 'reference:file:' from the beginning.
-			this.testEnv.fileDirectory = this.testEnv.fileDirectory.substring(15);
+			this.testEnv.initFileDirectory(Platform
+					.getBundle("tudresden.ocl20.benchmark"));
 
 			// Load the model.
 			this.loadModel(modelFilePath);
@@ -199,545 +154,167 @@ public class TestPerformer {
 	}
 
 	/**
-	 * Cleans everything...
+	 * Loads all objects and constraints of the currently active model instance.
 	 */
-	public void deInit() throws IOException {
+	public void loadActiveMIObjects() {
 
-		this.bLogger.close();
+		if (this.activeMIObjects == null) {
+			this.activeMIObjects =
+					this.getActiveModelInstance().getAllModelInstanceObjects();
+		}
 	}
 
 	/**
-	 * loads an Ocl file by loading each statement separately to avoid abort due
-	 * to parser exceptions Statements that could not be loaded, will be stored as
-	 * well as the error messages.
+	 * Check invariant with all active instance objects.
 	 * 
-	 * @param oclFileName
-	 * 
-	 * @throws RuntimeException
-	 */
-	public void safeLoadStatementFile(String oclFileName) throws RuntimeException {
-
-		this.safeLoadConstraintFile(oclFileName, constraintFileType.STATEMENT);
-	}
-
-	/**
-	 * Parses the ocl statement.
-	 * 
-	 * @param oclStatement
-	 * @param packageInformation
+	 * @param con 
+	 * @param results 
 	 * 
 	 * @return true, if successful
-	 */
-	private boolean parseOclStatement(String oclStatement,
-			String packageInformation) {
-
-		oclStatement = oclStatement.replaceAll("\n", "\n\t");
-
-		OCL2Parser anOCLparser;
-		String completeStatement =
-				"package " + packageInformation + " \n" + oclStatement
-						+ " \nendpackage";
-		StringReader reader = new StringReader(completeStatement);
-		anOCLparser = new OCL2Parser(myModel, reader);
-
-		// try to parse the ocl statement
-		try {
-			anOCLparser.parse();
-
-			// Save the constraint's definition under it's name to refer to it
-			// later
-			// when logging results
-			this.testEnv.storeConstraintDefinition(packageInformation, oclStatement);
-
-			this.bLogger.oclParseSuccess(oclStatement);
-		} catch (Exception e) {
-			this.bLogger.oclParseError(oclStatement, e);
-			return false;
-		}
-
-		return true;
-	}
-
-	/**
-	 * Returns the package (is expected to be the first line) of a BufferedReader.
 	 * 
-	 * @param reader
-	 *          Input reader that contains package statement
-	 * 
-	 * @return
-	 * 
-	 * @throws RuntimeException
+	 * @throws Throwable 
 	 */
-	private String getPackageFromReader(BufferedReader reader)
-			throws RuntimeException {
-
-		String line = "";
-		try {
-			while ((line = reader.readLine()) != null) {
-				line = line.trim();
-				// empty line or comment at the beginning
-				if (line.equals("") || line.startsWith("--")) {
-					continue;
-				}
-
-				if (line.startsWith("package")) {
-					return line.substring(7).trim();
-				}
-
-				throw new RuntimeException(
-						"Cannot find the package-statement in the reader. This has to be the first statement!");
-			}
-
-			throw new RuntimeException(
-					"Unexpected End of Reader, did not find a package");
-		} catch (IOException e) {
-			throw new RuntimeException(e);
-		}
-	}
-
-	/**
-	 * Safe load query file.
-	 * 
-	 * @param queryFile
-	 */
-	public void safeLoadQueryFile(String queryFile) {
-
-		this.safeLoadConstraintFile(queryFile, constraintFileType.QUERY);
-	}
-
-	/**
-	 * Safe load of OCL-File which contains Pre/Post values
-	 */
-	public void safeLoadPrePostFile(String oclFile) {
-
-		this.safeLoadConstraintFile(oclFile, constraintFileType.PREPOST);
-	}
-
-	/**
-	 * Loads an ocl file either as query or normal invariant file...
-	 * 
-	 * @param fileName
-	 * @param type
-	 */
-	private void safeLoadConstraintFile(String fileName, constraintFileType type) {
-
-		// check if the file has been loaded already
-		if (this.testEnv.loadedOclFiles.contains(fileName)) {
-			return;
-		}
-
-		// start the curConstraintID at 1 for each file
-		this.testEnv.curConstraintId = 1;
-		FileReader oclFileReader = this.safeOpenFileReader(fileName);
-		BufferedReader bufReader = new BufferedReader(oclFileReader);
-
-		// package information to be copied
-		// at the beginning of each statement
-		String packageInformation = this.getPackageFromReader(bufReader);
-
-		bLogger.outHead2("Start Parsing File: " + fileName);
-		switch (type) {
-		case STATEMENT:
-			this.handleStatements(bufReader, packageInformation, fileName);
-			break;
-
-		case QUERY:
-			this.handleQueries(bufReader, packageInformation);
-			break;
-
-		case PREPOST:
-			this.handleStatements(bufReader, packageInformation, fileName);
-			break;
-		}
-
-		this.bLogger.printParseStats();
-
-		// register for being loaded
-		this.testEnv.loadedOclFiles.add(fileName);
-	}
-
-	/**
-	 * Handle statements.
-	 * 
-	 * @param source
-	 * @param packageInfo
-	 */
-	private void handleStatements(BufferedReader source, String packageInfo,
-			String fileName) {
-
-		fileName = Helper.getFileNameFromPath(fileName);
-
-		String strLine;
-		StringBuilder oclStatementString = new StringBuilder();
-
-		while ((strLine = this.nextLine(source)) != null) {
-
-			// if line starts with context or endpackage
-			// --> parse the LAST statement
-			if ((strLine.startsWith("endpackage") || strLine.startsWith("context"))
-					&& oclStatementString.length() > 0) {
-
-				// try to parse ocl statement
-				this.parseOclStatement(oclStatementString.toString(), packageInfo);
-				// empty ocl string
-				oclStatementString.setLength(0);
-			}
-
-			// EOF
-			if (strLine.startsWith("endpackage")) {
-				break;
-			}
-
-			// try to extract the constraint's name
-			strLine = this.getOrSetConstraintName(strLine, fileName);
-
-			oclStatementString.append(strLine);
-			oclStatementString.append("\n");
-
-		}
-	}
-
-	/**
-	 * analyzes a linen from the input and extracts the constraint's name, if
-	 * specified. If no name is given, a new name is generated and integrated inh
-	 * the line
-	 * 
-	 * @param line
-	 *          Line to be analyzed
-	 * @param fileName
-	 *          current scanned filename that is used to generate the new
-	 *          constraint name
-	 */
-	private String getOrSetConstraintName(String line, String fileName) {
-
-		// try to capture the invariant's name
-		Matcher match = this.patternConstraintName.matcher(line);
-
-		if (match.matches()) {
-			// if pre or post add it to the name
-			String prefix;
-			if (match.group(2).equals("pre") || match.group(2).equals("post")) {
-				prefix = "_" + match.group(2) + "_";
-			}
-			else {
-				prefix = "";
-			}
-			// create or modify the testname to get a unique name
-			// specially identify pre and posts to test them separately
-			if (match.group(3).length() > 0) {
-				this.testEnv.curConstraintName =
-						this.testEnv.testName + prefix + fileName + "_" + match.group(3);
-			}
-			else {
-				this.testEnv.curConstraintName =
-						this.testEnv.testName + prefix + fileName + "_"
-								+ (this.testEnv.curConstraintId++);
-			}
-
-			return match.group(1) + " " + match.group(2) + " "
-					+ this.testEnv.curConstraintName + ":" + match.group(4);
-
-		}
-		else {
-			return line;
-		}
-	}
-
-	/**
-	 * Handles a source which contains queries. The source is expected to be in
-	 * the USE-Format, queries start with `?´. All queries are encapsulated into
-	 * OCL-statements which are then parsed. Expected Results start with `!´.
-	 * They're mostly encapsulated into invariants
-	 * 
-	 * @param source
-	 *          reader supplying source
-	 * @param packageInfo
-	 *          namespace (must conform to current model)
-	 */
-	private void handleQueries(BufferedReader source, String packageInfo) {
-
-		String strLine;
-		StringBuilder statementBuilder = new StringBuilder();
-
-		while ((strLine = this.nextLine(source)) != null
-				|| statementBuilder.length() > 0) {
-
-			// reset ocl statement
-			statementBuilder.setLength(0);
-
-			if (strLine.startsWith("?")) {
-				String methodName = "query_" + (this.testEnv.curConstraintId++);
-
-				statementBuilder.append("context Person\n");
-				statementBuilder.append("def: ");
-				statementBuilder.append(methodName);
-				statementBuilder.append(": "); // String =
-
-				statementBuilder.append(strLine.substring(1));
-
-				// parse statement
-				this.parseOclStatement(statementBuilder.toString(), packageInfo);
-
-				// the next ! is considered to be the expected result
-			}
-			else if (strLine.startsWith("!")) {
-				String methodName = "query_" + (this.testEnv.curConstraintId);
-				statementBuilder.setLength(0);
-				statementBuilder.append("context Person\n");
-				statementBuilder.append("inv: self.");
-				statementBuilder.append(methodName);
-				statementBuilder.append(" = " + strLine.substring(1));
-
-				// parse Statement
-				this.parseOclStatement(statementBuilder.toString(), packageInfo);
-			}
-		}
-	}
-
-	/**
-	 * returns the next line of the reader by omitting comments, empty lines etc.
-	 * It's throwing RuntimeException when the file seems corrupt.
-	 * 
-	 * @param source
-	 * 
-	 * @return next line or null in case of end
-	 */
-	private String nextLine(BufferedReader source) {
-
-		String line;
-		try {
-			// as long as there are lines to read
-			while ((line = source.readLine()) != null) {
-				line = line.trim();
-				if (line.length() == 0 || line.startsWith("--")) {
-					continue;
-				}
-
-				if (line.startsWith("package")) {
-					throw new RuntimeException(
-							"Package information should be only once in an Ocl File");
-				}
-
-				return line;
-			}
-
-		} catch (IOException e) {
-			throw new RuntimeException("Error Reading Source File.", e);
-		}
-
-		// file empty or EOF
-		return null;
-	}
-
-	/**
-	 * Loads all constraints and checks them with all model instance objects of
-	 * the current instance. Failure and Success are documented via the
-	 * benchmarkLogger.
-	 */
-	public void checkActiveInvariants() {
-
-		bLogger
-				.outHead1("Checking current model instance against loaded invariants");
-		List<IModelInstanceObject> testObjects =
-				this.getActiveModelInstance().getAllModelInstanceObjects();
-		List<Constraint> constraints = this.getAllActiveConstraints();
-
-		bLogger.printf("invariants  : %d", constraints.size());
-		bLogger.printf("test objects: %d", testObjects.size());
-		bLogger.printf("total tests : %d", constraints.size() * testObjects.size());
+	public boolean checkInvariantWithAllActiveInstanceObjects(Constraint con,
+			StringBuilder results) throws Throwable {
 
 		NamedElement conElement = null;
 
-		for (IModelInstanceObject obj : testObjects) {
-			bLogger.outHead3("test object: " + obj.getName());
-			for (Constraint con : constraints) {
+		boolean success = true;
 
-				bLogger.outLine("\nConstraint: " + con.getQualifiedName());
+		for (IModelInstanceObject obj : this.activeMIObjects) {
 
-				conElement = (NamedElement) con.getConstrainedElement().get(0);
-				if (conElement instanceof Property || conElement instanceof Operation) {
-					conElement = conElement.getOwner();
-				}
-				// if they equal
-				if (obj.getTypes().contains(conElement)) {
+			conElement = (NamedElement) con.getConstrainedElement().get(0);
+			if (conElement instanceof Property || conElement instanceof Operation) {
+				conElement = conElement.getOwner();
+			}
+			// interpret only when rule applies to object
+			if (obj.getTypes().contains(conElement)) {
+				String result;
+				// Interpret constraint and current object
+				result = this.interpretConstraint2(obj, con);
 
-					// Interpret and log result
-					this.interpretConstraint(obj, con);
-
+				if (result != null) {
+					results.append(obj.getName() + " --> " + result + " ## ");
+					success = false;
 				}
 				else {
-					bLogger.skipInterpretation();
+					results.append(obj.getName() + " --> OK ## ");
 				}
+
 			}
 		}
 
-		this.bLogger.printInterpretationStats();
+		return success;
 
 	}
 
-	/**
-	 * checks pre and post conditions one after another.
-	 * 
-	 * @param guineaPig
-	 *          model instance object where constraints are tested
-	 * @param method
-	 *          name of method to be executed
-	 * @param params
-	 *          list of parameter names that are expected to be stored in the
-	 *          interpretation environment. They're extracted and passed as method
-	 *          arguments
-	 */
-	public void checkPreAndPostConditions(IModelInstanceObject guineaPig,
-			String method, String... params) {
-
-		this.checkPreConditions(guineaPig, method);
-
-		// clean statistics between both
-		this.bLogger.cleanStatistics();
-
-		this.checkPostConditions(guineaPig, method, params);
-
-	}
 
 	/**
-	 * Check pre conditions.
+	 * Check post condition.
 	 * 
-	 * @param guineaPig
-	 *          model instance object to test the constraints on
-	 * @param method
-	 *          Method name just for logging
-	 */
-	public void checkPreConditions(IModelInstanceObject guineaPig, String method) {
-
-		bLogger.outHead1("Checking Pre Conditions");
-
-		bLogger.outHead3("Test Object:");
-		bLogger.outLine(guineaPig.getName());
-		bLogger.outLine("Method: " + method + "(...)");
-
-		// load all remaining constraints
-		List<Constraint> constraints = this.getAllActiveConstraints();
-
-		for (Constraint con : constraints) {
-
-			// doesnt check post conditions
-			if (con.getName().contains("_post_")) {
-				continue;
-			}
-
-			bLogger.outLine("\nConstraint: " + con.getQualifiedName());
-
-			// must be pre then
-			assert (con.getName().contains("_pre_"));
-
-			// interpret condition
-			this.interpretConstraint(guineaPig, con);
-
-		}
-
-		this.bLogger.printInterpretationStats();
-
-	}
-
-	/**
-	 * Check post conditions.
+	 * @param guineaPig 
+	 * @param con 
+	 * @param results 
+	 * @param method 
+	 * @param params 
 	 * 
-	 * @param imiObject
-	 *          model instance object to test the constraints on
-	 * @param method
-	 *          This is invoked when a condition is being tested.
-	 * @param params
-	 *          variable arguments to specify arguments for the method being
-	 *          invoked
+	 * @return true, if successful
+	 * 
+	 * @throws Throwable 
 	 */
-	public void checkPostConditions(IModelInstanceObject imiObject,
-			String method, String... params) {
-
-		bLogger.outHead1("Checking Post Conditions");
-
-		bLogger.outHead3("Test Object:");
-		bLogger.outLine(imiObject.getName());
-		bLogger.outLine("Method: " + method + "(...)");
-
-		// load all remaining constraints
-		List<Constraint> constraints = this.getAllActiveConstraints();
+	public boolean checkPostCondition(IModelInstanceObject guineaPig,
+			Constraint con, StringBuilder results, String method, String... params)
+			throws Throwable {
 
 		// collect method parameters
 		OclAny[] oclParams = this.collectMethodParams(params);
 
-		// execute that method only once!
-		boolean methodExecuted = false;
+		// create an ocl wrapper around the instance object (not sure why :))
+		OclAny oclGuineaPig =
+				this.myInterpreter.getStandardLibraryFactory().createOclAny(guineaPig);
 
-		for (Constraint con : constraints) {
+		//
+		List<Type> parameterTypes = new ArrayList<Type>();
 
-			// ignore pre-conditions
-			if (con.getName().contains("_pre_")) {
-				continue;
-			}
-
-			bLogger.outLine("\nConstraint: " + con.getQualifiedName());
-
-			// constraint must be post then
-			assert (con.getName().contains("_post_"));
-
-			// execute method only once
-			if (!methodExecuted) {
-				OclAny imiObjectInOcl;
-
-				imiObjectInOcl =
-						this.myInterpreter.getStandardLibraryFactory().createOclAny(
-								imiObject);
-
-				/* Get the parameter types. */
-				List<Type> parameterTypes;
-				parameterTypes = new ArrayList<Type>();
-
-				for (OclAny oclParam : oclParams) {
-					parameterTypes.add(oclParam.getModelInstanceElement().getTypes()
-							.iterator().next());
-				}
-				// end for.
-
-				/* Find the operation. */
-				Operation operation;
-				operation = null;
-
-				for (Type type : imiObject.getTypes()) {
-
-					operation = type.lookupOperation(method, parameterTypes);
-					if (operation != null) {
-						break;
-					}
-					// no else.
-				}
-				// end for.
-
-				/* Invoke the operation. */
-				if (operation != null) {
-					imiObjectInOcl.invokeOperation(operation, oclParams);
-				}
-
-				else {
-					throw new RuntimeException("Operation " + method + " not found.");
-				}
-				// end else.
-			}
-
-			// interpret condition
-			this.interpretConstraint(imiObject, con);
+		for (OclAny oclParam : oclParams) {
+			parameterTypes.add(oclParam.getModelInstanceElement().getTypes()
+					.iterator().next());
 		}
 
-		this.bLogger.printInterpretationStats();
+		/* Find the operation. */
+		Operation operation = null;
 
+		for (Type type : guineaPig.getTypes()) {
+
+			operation = type.lookupOperation(method, parameterTypes);
+			if (operation != null) {
+				break;
+			}
+
+		}
+
+		// invoke the operation
+		if (operation != null) {
+			oclGuineaPig.invokeOperation(operation, oclParams);
+		}
+		else {
+			results.append("Operation not found");
+			return false;
+		}
+
+		String result;
+		// Interpret constraint after the invocation
+		result = this.interpretConstraint2(guineaPig, con);
+
+		if (result != null) {
+			results.append(guineaPig.getName() + " --> " + result);
+			return false;
+		}
+		else {
+			return true;
+		}
+
+	}
+
+	/**
+	 * Check pre condition.
+	 * 
+	 * @param guineaPig 
+	 * @param con 
+	 * @param results 
+	 * 
+	 * @return true, if successful
+	 * 
+	 * @throws Throwable 
+	 */
+	public boolean checkPreCondition(IModelInstanceObject guineaPig,
+			Constraint con, StringBuilder results) throws Throwable {
+
+		boolean success = true;
+		String result;
+		// Interpret constraint and current object
+		result = this.interpretConstraint2(guineaPig, con);
+
+		if (result != null) {
+			results.append(guineaPig.getName() + " --> " + result + " ## ");
+			success = false;
+		}
+		else {
+			results.append(guineaPig.getName() + " --> OK ## ");
+		}
+
+		return success;
 	}
 
 	/**
 	 * Collect an array of OclAny-Objects registered in the environment.
 	 * 
-	 * @params params String-Array identifying all Variables that are being
-	 *         fetched
+	 * @param params String-Array identifying all Variables that are being
+	 * fetched
+	 * 
+	 * @return 
 	 */
-	private OclAny[] collectMethodParams(String... params) {
+	protected OclAny[] collectMethodParams(String... params) {
 
 		OclAny[] oclParams = new OclAny[params.length];
 		int counter = 0;
@@ -752,88 +329,74 @@ public class TestPerformer {
 	/**
 	 * Interprets a model instance object with a constraint.
 	 * 
-	 * @param obj
-	 *          model object instance
-	 * @param con
-	 *          Constraint to be checked.
-	 * @pre obj and con are expected to "belong together"
+	 * @param obj 
+	 * @param con 
+	 * 
+	 * @return null if everything went ok, string in case of failure or exception
+	 * when something weired happend.
+	 * 
+	 * @throws Throwable 
 	 */
-	private void interpretConstraint(IModelInstanceObject obj, Constraint con) {
+	protected String interpretConstraint2(IModelInstanceObject obj, Constraint con)
+			throws Throwable {
 
 		OclAny result = null;
 
-		assert (this.testEnv.loadedConstraints.containsKey(con.getQualifiedName()));
-		try {
-
-			result = this.myInterpreter.interpretConstraint(con, obj).getResult();
-		} catch (Throwable e) { // catch EVERYTHING
-			bLogger.interpretationError(con, obj, e);
-			return;
-		}
+		result = this.myInterpreter.interpretConstraint(con, obj).getResult();
 
 		if (result == null) {
-			bLogger.interpretationError(con, obj, null);
-			return;
+			return "Interpretation error: result was null";
+
 		}
 
 		if (result.oclIsUndefined().isTrue()) {
-			bLogger.interpretationError(con, obj, result);
-			return;
+			return "Result is oclUndefined. OclBoolean was expected";
 		}
 
-		try {
-			OclBoolean res = (OclBoolean) result;
+		OclBoolean res = (OclBoolean) result;
 
-			if (res != null && res.isTrue()) {
-				bLogger.interpretationSuccess(con, obj);
-			}
-			else {
-				bLogger.interpretationError(con, obj, res);
-			}
-		} catch (ClassCastException e) {
-			bLogger.interpretationError(con, obj,
-					"Result was not JavaOclBoolean, as expected");
-
-			return;
-		} catch (Exception e) {
-			bLogger.interpretationError(con, obj, e);
+		if (res != null && res.isTrue()) {
+			return null;
 		}
+		else {
+			return "Result was OclBoolean(false)";
+		}
+
 	}
 
 	/**
-	 * returns all active constraints starting at the root node
+	 * Interpret constraint.
+	 * 
+	 * @param obj 
+	 * @param con 
 	 */
-	private List<Constraint> getAllActiveConstraints() {
+	@SuppressWarnings("unused")
+	protected void interpretConstraint(IModelInstanceObject obj, Constraint con) {
 
-		Namespace root = null;
-		List<Constraint> constraints = new LinkedList<Constraint>();
-		try {
-			root = this.myModel.getRootNamespace();
-		} catch (ModelAccessException e) {
-			throw new RuntimeException(e);
-		}
-
-		return this.getAllActiveConstraints(root, constraints);
 	}
 
 	/**
-	 * Returns all active constraints that are owned by the passed namespace
+	 * Gets the constraint by statement.
+	 * 
+	 * @param stmt 
+	 * 
+	 * @return the constraint by statement
+	 * 
+	 * @throws ModelAccessException 
 	 */
-	private List<Constraint> getAllActiveConstraints(Namespace ns,
-			List<Constraint> constraints) {
+	public Constraint getConstraintByStatement(
+			StatementDefinition stmt)
+			throws ModelAccessException {
 
-		for (Namespace nested : ns.getNestedNamespace()) {
-			this.getAllActiveConstraints(nested, constraints);
-		}
+		Namespace ns = this.myModel.findNamespace(stmt.getNamespaceList());
 
-		// test whether constraint has been loaded this time
 		for (Constraint con : ns.getOwnedRule()) {
-			if (this.testEnv.loadedConstraints.containsKey(con.getQualifiedName())) {
-				constraints.add(con);
+			if (stmt.isSourceOf(con)) {
+				return con;
 			}
 		}
 
-		return constraints;
+		return null;
 	}
 
 	/**
@@ -841,12 +404,27 @@ public class TestPerformer {
 	 * Sets the model instance of this {@link TestPerformer}.
 	 * </p>
 	 * 
-	 * @param modelInstance
-	 *          The model instance for which the test shall be performed.
+	 * @param modelInstance The model instance for which the test shall be performed.
 	 */
 	public void setModelInstanceType(String modelInstance) {
 
 		this.modelInstanceType = modelInstance;
+	}
+
+	/**
+	 * create an empty model instance on the currently loaded model.
+	 */
+	public void loadEmptyModelInstance() {
+
+		// create an empty model instance
+		IModelInstanceProvider modelInstanceProvider =
+				this.getModelInstanceProvider();
+
+		IModelInstance emptyModelInstance =
+				modelInstanceProvider.createEmptyModelInstance(this.myModel);
+
+		// set as current model instance
+		this.setActiveModelInstance(emptyModelInstance);
 	}
 
 	/**
@@ -855,11 +433,9 @@ public class TestPerformer {
 	 * {@link IModel}.
 	 * </p>
 	 * 
-	 * @param modelInstanceFileName
-	 *          The file of the provider class of the {@link IModelInstance}.
+	 * @param modelInstanceFileName The file of the provider class of the {@link IModelInstance}.
 	 * 
-	 * @throws RuntimeException
-	 *           Thrown, if the given file can not be found.
+	 * @throws RuntimeException Thrown, if the given file can not be found.
 	 */
 	public void loadModelInstance(String modelInstanceFileName)
 			throws RuntimeException {
@@ -899,25 +475,31 @@ public class TestPerformer {
 	}
 
 	/**
-	 * cleans up. This is mostly done when a new TestCase starts.
+	 * Parses the ocl statement.
+	 * 
+	 * @param completeStatement 
+	 * 
+	 * @return true, if successful
+	 * 
+	 * @throws Exception 
 	 */
-	public void clean() {
+	public void parseOclStatement(String completeStatement) throws Exception {
 
-		// clean loaded constraints map
-		this.testEnv.loadedConstraints.clear();
+		OCL2Parser anOCLparser;
 
-		// clear logger statistics
-		this.bLogger.cleanStatistics();
+		StringReader reader = new StringReader(completeStatement);
+		anOCLparser = new OCL2Parser(myModel, reader);
+
+		anOCLparser.parse();
+
 	}
 
 	/**
 	 * Sets the active model instance.
 	 * 
-	 * @param instance
-	 * @param add
-	 *          set true if the instance should be added as well
+	 * @param instance 
 	 */
-	private void setActiveModelInstance(IModelInstance instance) {
+	protected void setActiveModelInstance(IModelInstance instance) {
 
 		IModelInstanceRegistry modelInstanceRegistry;
 		modelInstanceRegistry = ModelBusPlugin.getModelInstanceRegistry();
@@ -943,7 +525,7 @@ public class TestPerformer {
 	 * 
 	 * @return the active model instance
 	 */
-	private IModelInstance getActiveModelInstance() {
+	protected IModelInstance getActiveModelInstance() {
 
 		IModelInstanceRegistry modelInstanceRegistry;
 		modelInstanceRegistry = ModelBusPlugin.getModelInstanceRegistry();
@@ -958,7 +540,7 @@ public class TestPerformer {
 	 * 
 	 * @return current model instanceprovider
 	 */
-	private IModelInstanceProvider getModelInstanceProvider() {
+	protected IModelInstanceProvider getModelInstanceProvider() {
 
 		IModelInstanceTypeRegistry tMTypeReg =
 				ModelBusPlugin.getModelInstanceTypeRegistry();
@@ -972,12 +554,11 @@ public class TestPerformer {
 	 * Loads an {@link IModel} which uses the corresponding meta model.
 	 * </p>
 	 * 
-	 * @param modelName
-	 *          Filename of the model
+	 * @param modelName Filename of the model
 	 * 
-	 * @throws RuntimeException
+	 * @throws RuntimeException 
 	 */
-	private void loadModel(String modelName) throws RuntimeException {
+	protected void loadModel(String modelName) throws RuntimeException {
 
 		/* Check if the model has not already been loaded yet. */
 		if (!(this.myModel != null && this.myModel.getDisplayName().equals(
@@ -1021,13 +602,13 @@ public class TestPerformer {
 	/**
 	 * Safe open file.
 	 * 
-	 * @param fileName
+	 * @param fileName 
 	 * 
 	 * @return the file
 	 * 
-	 * @throws RuntimeException
+	 * @throws RuntimeException 
 	 */
-	private File safeOpenFile(String fileName) throws RuntimeException {
+	protected File safeOpenFile(String fileName) throws RuntimeException {
 
 		File tmpFile = new File(fileName);
 
@@ -1046,38 +627,17 @@ public class TestPerformer {
 	}
 
 	/**
-	 * Safe open file reader.
+	 * creates an object adapting the passed model instance object.
 	 * 
-	 * @param fileName
+	 * @param object Object to be adapteds
 	 * 
-	 * @return the file reader
-	 * 
-	 * @throws RuntimeException
+	 * @return 
 	 */
-	private FileReader safeOpenFileReader(String fileName)
-			throws RuntimeException {
-
-		File tmpFile = this.safeOpenFile(fileName);
-
-		try {
-			FileReader tmpReader = new FileReader(tmpFile);
-			return tmpReader;
-		} catch (FileNotFoundException e) {
-			throw new RuntimeException("Error opening file " + fileName
-					+ " (it exists, though)");
-		}
-	}
-
-	/**
-	 * creates an object adapting the passed model instance object
-	 * 
-	 * @param object
-	 *          Object to be adapteds
-	 */
-	public IModelInstanceObject createModelInstanceAdapter(Object object) {
+	public IModelInstanceObject createModelInstanceAdapter(Object object){
 
 		IModelInstanceObject result = null;
 		try {
+			
 			result =
 					(IModelInstanceObject) this.getActiveModelInstance()
 							.addModelInstanceElement(object);
@@ -1095,13 +655,12 @@ public class TestPerformer {
 	 * {@link IInterpretationEnvironment} used for preparation and interpretation.
 	 * </p>
 	 * 
-	 * @param path
-	 *          The path and name of the variable which shall be set.
-	 * @param value
-	 *          The {@link IModelInstanceObject} value of the set variable as an
-	 *          Object.
+	 * @param path The path and name of the variable which shall be set.
+	 * @param value The {@link IModelInstanceObject} value of the set variable as an
+	 * Object.
+	 * 
 	 * @return <code>true</code>, if the given value has been set as a value
-	 *         successfully.
+	 * successfully.
 	 */
 	public boolean setEnvironmentVariable(String path, Object value) {
 
@@ -1131,7 +690,11 @@ public class TestPerformer {
 
 	/**
 	 * creates an ocl root adapter from a model instance adapter in order to being
-	 * able to execute a method on the model level
+	 * able to execute a method on the model level.
+	 * 
+	 * @param obj 
+	 * 
+	 * @return 
 	 */
 	public OclAny createOclRootAdapterByMIObject(IModelInstanceObject obj) {
 

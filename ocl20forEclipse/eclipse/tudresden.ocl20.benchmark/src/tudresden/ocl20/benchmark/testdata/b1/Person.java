@@ -172,6 +172,14 @@ public class Person {
 		return null;
 	}
 	
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	public String toString()
+	{
+		return "Person: "+this.name;
+	}
+	
 //	public static List<Person> allInstances()
 //	{
 //		return persons;

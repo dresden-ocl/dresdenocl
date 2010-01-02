@@ -16,40 +16,34 @@ for more details.
 
 You should have received a copy of the GNU Lesser General Public License along 
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
-*/
+ */
 package tudresden.ocl20.benchmark;
 
-import org.junit.BeforeClass;
-import org.junit.Test;
+import junit.framework.Test;
+import junit.framework.TestSuite;
+import tudresden.ocl20.benchmark.common.InvariantExecuter;
 
-/**
- * The Class B3Test.
- */
-public class B3Test extends BaseTest
-{
+
+public class B3Test extends TestSuite {
 
 	/**
-	 * Inits the testPerformer
+	 * Instantiates a new b3 test.
 	 */
-	@BeforeClass
-	public static void init()
-	{
-		initPerformer("b3", "CivilStatusWorld.ecore");
+	public B3Test() {
+
+		super("b3");
+
+		this.addTest(new InvariantExecuter("b3/CivilStatusWorld.ecore", //
+				"bin/tudresden/ocl20/benchmark/testdata/b3/ModelInstance.class", //
+		"bin/tudresden/ocl20/benchmark/testdata/b3/expressions/invariants.ocl"));
 		
 	}
-
-	
 	/**
-	 * Test invariants of B3.
+	 * returns the test suite for single execution
 	 */
-	@Test
-	public void testInvariants()
+	public static Test suite()
 	{
-		perf.loadModelInstance("bin/tudresden/ocl20/benchmark/testdata/b3/ModelInstance.class");
-		perf.safeLoadStatementFile("bin/tudresden/ocl20/benchmark/testdata/b3/expressions/invariants.ocl");
-			
-		perf.checkActiveInvariants();
-		
-	}	
-	
+		return new B3Test();
+	}
+
 }

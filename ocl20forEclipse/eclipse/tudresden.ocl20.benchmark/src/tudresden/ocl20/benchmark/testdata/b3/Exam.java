@@ -31,10 +31,10 @@ public class Exam {
 	/**
 	 * Instantiates a new exam.
 	 * 
-	 * @param examinee
-	 * @param examiner
-	 * @param recorder
-	 * @param date
+	 * @param examinee 
+	 * @param examiner 
+	 * @param recorder 
+	 * @param date 
 	 * @param id name to identify from the invariants
 	 */
 	public Exam(Person examinee, Person examiner, Person recorder, int date,

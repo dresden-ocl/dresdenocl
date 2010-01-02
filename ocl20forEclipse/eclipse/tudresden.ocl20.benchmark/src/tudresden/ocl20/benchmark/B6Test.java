@@ -19,43 +19,34 @@ with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
 package tudresden.ocl20.benchmark;
 
-import org.junit.BeforeClass;
-import org.junit.Test;
+import junit.framework.Test;
+import junit.framework.TestSuite;
+import tudresden.ocl20.benchmark.common.InvariantExecuter;
 
-/**
- * The Class B6Test.
- */
-public class B6Test extends BaseTest {
+
+public class B6Test extends TestSuite {
 
 	/**
-	 * Test init.
+	 * Instantiates a new b6 test.
 	 */
-	@BeforeClass
-	public static void testInit() {
-		initPerformer("b6", "DummyWorld.ecore", "common");
+	public B6Test() {
 
+		super("b6");
+
+		this.addTest(new InvariantExecuter("common/DummyWorld.ecore", //
+				"bin/tudresden/ocl20/benchmark/testdata/common/ModelInstance.class", //
+		"src/tudresden/ocl20/benchmark/testdata/b6/expressions/determinateness.ocl"));
+		
+		this.addTest(new InvariantExecuter("common/DummyWorld.ecore", //
+				"bin/tudresden/ocl20/benchmark/testdata/common/ModelInstance.class", //
+		"src/tudresden/ocl20/benchmark/testdata/b6/expressions/conversion2sequence.ocl"));
 	}
-
-	@Test
-	public void testDeterminateness() {
-
-		perf.loadModelInstance("bin/tudresden/ocl20/benchmark/testdata/common/ModelInstance.class");
-		
-		perf.safeLoadStatementFile("src/tudresden/ocl20/benchmark/testdata/b6/expressions/determinateness.ocl");
-		
-		perf.checkActiveInvariants();
-
-	}
-    
-	@Test
-	public void testConversion2Sequence()
-	{
-		perf.loadModelInstance("bin/tudresden/ocl20/benchmark/testdata/common/ModelInstance.class");
-		
-		perf.safeLoadStatementFile("src/tudresden/ocl20/benchmark/testdata/b6/expressions/conversion2sequence.ocl");
-
-		perf.checkActiveInvariants();
 	
+	/**
+	 * returns the test suite for single execution
+	 */
+	public static Test suite()
+	{
+		return new B6Test();
 	}
-
 }

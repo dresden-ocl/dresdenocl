@@ -151,7 +151,10 @@ public class Person {
 	
 	/**
 	 * Birth-Method as defined in Test B2 of Benchmark
-	 * used for Pre and Post Tests
+	 * used for Pre and Post Tests.
+	 * 
+	 * @param aName 
+	 * @param aGender 
 	 */
 	public void birth(String aName, Gender aGender)
 	{

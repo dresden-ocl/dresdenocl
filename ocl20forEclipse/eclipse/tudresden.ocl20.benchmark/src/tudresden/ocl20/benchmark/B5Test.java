@@ -21,49 +21,51 @@ package tudresden.ocl20.benchmark;
 
 import java.io.File;
 
-import org.junit.BeforeClass;
-import org.junit.Test;
+import junit.framework.Test;
+import junit.framework.TestSuite;
+import tudresden.ocl20.benchmark.common.InvariantExecuter;
 
-// TODO: Auto-generated Javadoc
-/**
- * The Class B4Test.
- */
-public class B5Test extends BaseTest {
+
+public class B5Test extends TestSuite {
 
 	/**
-	 * Test init.
+	 * Instantiates a new b5 test.
 	 */
-	@BeforeClass
-	public static void testInit() {
-		initPerformer("b5", "DummyWorld.ecore", "common");
+	public B5Test() {
 
-	}
+		super("b5");
 
-	/**
-	 * Load all invariant files within the testdata directory an check them
-	 * afterwards on the dummy model instance
-	 */
-	@Test
-	public void testAllInvariants() {
+		String modelInstance =
+				"bin/tudresden/ocl20/benchmark/testdata/common/ModelInstance.class";
+		String model = "common/DummyWorld.ecore";
 
-		perf
-				.loadModelInstance("bin/tudresden/ocl20/benchmark/testdata/common/ModelInstance.class");
-		File expressionsDir = new File(
-				"src/tudresden/ocl20/benchmark/testdata/b5/expressions/");
+		
+		// get directory where all expressions are located
+		File expressionsDir =
+				new File("src/tudresden/ocl20/benchmark/testdata/b5/expressions/");
 
+		
+		// get all files
 		File[] testFiles = expressionsDir.listFiles();
 
+		
+		// create an own invariant executer for all 
 		for (File testFile : testFiles) {
-			if(testFile.getName().indexOf(".ocl") == -1){
+			if (testFile.getName().indexOf(".ocl") == -1) {
 				continue;
 			}
-			perf
-					.safeLoadStatementFile("src/tudresden/ocl20/benchmark/testdata/b5/expressions/"
-							+ testFile.getName());
+			this.addTest(new InvariantExecuter(model, //
+					modelInstance, //
+					"src/tudresden/ocl20/benchmark/testdata/b5/expressions/"
+							+ testFile.getName()));
 		}
-
-		perf.checkActiveInvariants();
-
 	}
-
+	
+	/**
+	 * returns the test suite for single execution
+	 */
+	public static Test suite()
+	{
+		return new B5Test();
+	}
 }

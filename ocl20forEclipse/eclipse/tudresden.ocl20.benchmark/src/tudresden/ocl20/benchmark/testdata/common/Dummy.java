@@ -21,18 +21,27 @@ package tudresden.ocl20.benchmark.testdata.common;
 
 import java.lang.reflect.Field;
 
+// TODO: Auto-generated Javadoc
 public class Dummy {
 
 		
 	public String name;
 	
 	
+	/**
+	 * Instantiates a new dummy.
+	 * 
+	 * @param name 
+	 */
 	public Dummy(String name)
 	{
 		this.name = name;
 	}
 	
 
+	/**
+	 * Prints the.
+	 */
 	public void print()
 	{
 		try{
