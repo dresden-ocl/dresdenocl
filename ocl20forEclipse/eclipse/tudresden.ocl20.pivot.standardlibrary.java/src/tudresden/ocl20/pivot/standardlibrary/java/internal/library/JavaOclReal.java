@@ -182,6 +182,8 @@ public class JavaOclReal extends JavaOclLibraryObject implements OclReal,
 
 		try {
 			Double doubleResult = dividend / divisor;
+			if (doubleResult.isInfinite() || doubleResult.isNaN())
+				throw new InvalidException(new ArithmeticException("Division by zero"));
 			result = JavaStandardLibraryFactory.INSTANCE.createOclReal(doubleResult);
 		} catch (ArithmeticException e) {
 			throw new InvalidException(e);

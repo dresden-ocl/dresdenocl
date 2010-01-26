@@ -286,7 +286,7 @@ public class JavaOclInteger extends JavaOclReal implements OclInteger {
 
 		return result;
 	}
-
+	
 	/*
 	 * (non-Javadoc)
 	 * @see tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclAny
