@@ -15,22 +15,22 @@ import tudresden.ocl20.pivot.standardlibrary.java.exceptions.InvalidException;
 // FIXME Michael: Add undefined and invalid tests
 public class JavaOclIntegerTest {
 
-	private IStandardLibraryFactory myStandardLibraryFactory =
+	private final IStandardLibraryFactory myStandardLibraryFactory =
 			TestPerformer.getInstance().getSLFactory();
 
-	private OclInteger integer_400 =
+	private final OclInteger integer_400 =
 			myStandardLibraryFactory.createOclInteger(-400L);
-	private OclInteger integer_1 = myStandardLibraryFactory.createOclInteger(-1L);
-	private OclInteger integer0 = myStandardLibraryFactory.createOclInteger(0L);
-	private OclInteger integer1 = myStandardLibraryFactory.createOclInteger(1L);
-	private OclInteger integer4 = myStandardLibraryFactory.createOclInteger(4L);
-	private OclInteger integer99 = myStandardLibraryFactory.createOclInteger(99L);
-	private OclInteger integer100 =
+	private final OclInteger integer_1 = myStandardLibraryFactory.createOclInteger(-1L);
+	private final OclInteger integer0 = myStandardLibraryFactory.createOclInteger(0L);
+	private final OclInteger integer1 = myStandardLibraryFactory.createOclInteger(1L);
+	private final OclInteger integer4 = myStandardLibraryFactory.createOclInteger(4L);
+	private final OclInteger integer99 = myStandardLibraryFactory.createOclInteger(99L);
+	private final OclInteger integer100 =
 			myStandardLibraryFactory.createOclInteger(100L);
-	private OclInteger integer400 =
+	private final OclInteger integer400 =
 			myStandardLibraryFactory.createOclInteger(400L);
 
-	private OclReal real0_25 = myStandardLibraryFactory.createOclReal(0.25);
+	private final OclReal real0_25 = myStandardLibraryFactory.createOclReal(0.25);
 
 	@Test
 	public void testAdd() throws TestException {
