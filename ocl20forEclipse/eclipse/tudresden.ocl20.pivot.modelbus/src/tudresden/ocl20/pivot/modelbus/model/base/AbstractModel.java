@@ -42,6 +42,7 @@ import tudresden.ocl20.pivot.modelbus.model.ITypeResolver;
 import tudresden.ocl20.pivot.modelbus.model.internal.ModelFactory;
 import tudresden.ocl20.pivot.modelbus.model.internal.OclLibraryProvider;
 import tudresden.ocl20.pivot.modelbus.model.internal.TypeResolver;
+import tudresden.ocl20.pivot.pivotmodel.Constraint;
 import tudresden.ocl20.pivot.pivotmodel.Namespace;
 import tudresden.ocl20.pivot.pivotmodel.PivotModelFactory;
 import tudresden.ocl20.pivot.pivotmodel.PrimitiveType;
@@ -330,6 +331,23 @@ public abstract class AbstractModel implements IModel {
 		// no else.
 
 		return this.typeResolver;
+	}
+
+	/**
+	 * <p>
+	 * Removes all {@link Constraint}s from this {@link IModel}.
+	 * </p>
+	 * 
+	 * @return <code>true</code> if all {@link Constraint}s have been removed.
+	 * @throws IllegalArgumentException
+	 *           Thrown, if the given parameter is invalid.
+	 * @throws ModelAccessException
+	 *           Thrown, if the given {@link IModel} is in an invalid state.
+	 */
+	public boolean removeAllConstraints(IModel model)
+			throws IllegalArgumentException, ModelAccessException {
+
+		return this.getRootNamespace().removeOwnedAndNestedRules();
 	}
 
 	/**

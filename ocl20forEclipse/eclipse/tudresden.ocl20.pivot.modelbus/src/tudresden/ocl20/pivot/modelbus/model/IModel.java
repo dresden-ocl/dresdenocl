@@ -36,6 +36,7 @@ import java.util.List;
 
 import tudresden.ocl20.pivot.modelbus.ModelAccessException;
 import tudresden.ocl20.pivot.modelbus.metamodel.IMetamodel;
+import tudresden.ocl20.pivot.pivotmodel.Constraint;
 import tudresden.ocl20.pivot.pivotmodel.Namespace;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 
@@ -156,4 +157,18 @@ public interface IModel {
 	 * @return An {@link ITypeResolver} instance.
 	 */
 	ITypeResolver getTypeResolver();
+
+	/**
+	 * <p>
+	 * Removes all {@link Constraint}s from this {@link IModel}.
+	 * </p>
+	 * 
+	 * @return <code>true</code> if all {@link Constraint}s have been removed.
+	 * @throws IllegalArgumentException
+	 *           Thrown, if the given parameter is invalid.
+	 * @throws ModelAccessException
+	 *           Thrown, if the given {@link IModel} is in an invalid state.
+	 */
+	public boolean removeAllConstraints(IModel model)
+			throws IllegalArgumentException, ModelAccessException;
 }
