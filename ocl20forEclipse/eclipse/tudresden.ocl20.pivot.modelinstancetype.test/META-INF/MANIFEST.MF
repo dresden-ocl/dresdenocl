@@ -8,12 +8,10 @@ Bundle-Vendor: Dresden University, Software Technology Group
 Require-Bundle: org.eclipse.core.runtime,
  org.junit4,
  tudresden.ocl20.logging,
- tudresden.ocl20.pivot.pivotmodel,
  tudresden.ocl20.pivot.essentialocl,
- tudresden.ocl20.pivot.essentialocl.standardlibrary,
  tudresden.ocl20.pivot.modelbus,
  tudresden.ocl20.pivot.metamodels.uml2;bundle-version="1.2.0",
- tudresden.ocl20.pivot.standardlibrary.java
+ tudresden.ocl20.pivot.facade;bundle-version="2.0.0"
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy
 Export-Package: tudresden.ocl20.pivot.modelinstancetype.test,

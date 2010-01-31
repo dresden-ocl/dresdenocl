@@ -10,8 +10,7 @@ Require-Bundle: org.eclipse.ui,
  tudresden.ocl20.logging,
  tudresden.ocl20.pivot.pivotmodel,
  tudresden.ocl20.pivot.modelbus,
- tudresden.ocl20.pivot.examples.royalandloyal,
- tudresden.ocl20.pivot.testsuite
+ tudresden.ocl20.pivot.facade;bundle-version="2.0.0"
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: tudresden.ocl20.pivot.metamodels.test

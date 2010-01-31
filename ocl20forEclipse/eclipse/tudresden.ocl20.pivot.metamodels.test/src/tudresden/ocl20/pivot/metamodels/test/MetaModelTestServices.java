@@ -20,13 +20,11 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.core.runtime.Platform;
-import org.eclipse.osgi.util.NLS;
 import org.osgi.framework.Bundle;
 
-import tudresden.ocl20.pivot.metamodels.test.msg.MetaModelTestSuiteMessages;
+import tudresden.ocl20.pivot.facade.Ocl2ForEclipseFacade;
 import tudresden.ocl20.pivot.modelbus.IModelBusConstants;
 import tudresden.ocl20.pivot.modelbus.ModelAccessException;
-import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
 import tudresden.ocl20.pivot.modelbus.metamodel.IMetamodel;
 import tudresden.ocl20.pivot.modelbus.model.IModel;
 import tudresden.ocl20.pivot.pivotmodel.EnumerationLiteral;
@@ -442,39 +440,17 @@ public final class MetaModelTestServices {
 
 		/* Else check if the given file does not exist. */
 		else if (!modelFile.exists()) {
-			String msg;
-
-			msg = MetaModelTestSuiteMessages.MetaModelTestSuite_MetaModelNotFound;
-			msg = NLS.bind(msg, myMetaModelId);
-
-			throw new RuntimeException(msg);
+			throw new RuntimeException("The file " + modelFile + " does not exist.");
 		}
 
 		/* Else try to load the model. */
 		else {
 
 			try {
-				IMetamodel metaModel;
+				result = Ocl2ForEclipseFacade.getModel(modelFile, myMetaModelId);
 
-				/* Get the metaModel. */
-				metaModel =
-						ModelBusPlugin.getMetamodelRegistry().getMetamodel(myMetaModelId);
-
-				if (metaModel != null) {
-					result = metaModel.getModelProvider().getModel(modelFile);
-
-					/* Cache the result. */
-					this.myCachedModels.put(modelFile.toString(), result);
-				}
-
-				else {
-					String msg;
-
-					msg = MetaModelTestSuiteMessages.MetaModelTestSuite_MetaModelNotFound;
-					msg = NLS.bind(msg, myMetaModelId);
-
-					throw new RuntimeException(msg);
-				}
+				/* Cache the result. */
+				this.myCachedModels.put(modelFile.toString(), result);
 			}
 
 			catch (ModelAccessException e) {

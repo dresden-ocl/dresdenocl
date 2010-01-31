@@ -30,9 +30,9 @@ import org.eclipse.core.runtime.Platform;
 import org.eclipse.osgi.util.NLS;
 import org.osgi.framework.Bundle;
 
+import tudresden.ocl20.pivot.facade.Ocl2ForEclipseFacade;
 import tudresden.ocl20.pivot.metamodels.uml2.UML2MetamodelPlugin;
 import tudresden.ocl20.pivot.modelbus.ModelAccessException;
-import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
 import tudresden.ocl20.pivot.modelbus.metamodel.IMetamodel;
 import tudresden.ocl20.pivot.modelbus.model.IModel;
 import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance;
@@ -217,27 +217,21 @@ public final class ModelInstanceTypeTestServices {
 		/* Check if the model has been loaded. */
 		if (this.myModel != null) {
 
-			/* Try to get the model instance type. */
-			IModelInstanceType modelInstanceType;
-
-			modelInstanceType =
-					ModelBusPlugin.getModelInstanceTypeRegistry().getModelInstanceType(
-							this.myModelInstanceTypeId);
-
-			if (modelInstanceType != null) {
+			try {
 				result =
-						modelInstanceType.getModelInstanceProvider()
-								.createEmptyModelInstance(this.myModel);
+						Ocl2ForEclipseFacade.getEmptyModelInstance(this.myModel,
+								this.myModelInstanceTypeId);
+			}
+			// end try.
+
+			catch (IllegalArgumentException e) {
+				throw new RuntimeException(e.getMessage(), e);
 			}
 
-			else {
-				String msg;
-
-				msg =
-						ModelInstanceTypeTestSuiteMessages.ModelInstanceTypeTestSuite_Services_ModelInstanceTypeNotFound;
-
-				throw new RuntimeException(msg);
+			catch (ModelAccessException e) {
+				throw new RuntimeException(e.getMessage(), e);
 			}
+			// end catch.
 		}
 
 		else {
@@ -336,35 +330,15 @@ public final class ModelInstanceTypeTestServices {
 		else {
 
 			try {
-
 				/* Check if the model has been loaded. */
 				if (this.myModel != null) {
 
-					/* Try to get the model instance type. */
-					IModelInstanceType modelInstanceType;
+					result =
+							Ocl2ForEclipseFacade.getModelInstance(modelInstanceFile,
+									this.myModel, this.myModelInstanceTypeId);
 
-					modelInstanceType =
-							ModelBusPlugin.getModelInstanceTypeRegistry()
-									.getModelInstanceType(this.myModelInstanceTypeId);
-
-					if (modelInstanceType != null) {
-						result =
-								modelInstanceType.getModelInstanceProvider().getModelInstance(
-										modelInstanceFile, this.myModel);
-
-						/* Cache the result. */
-						this.myCachedModelInstances.put(modelInstanceFile.toString(),
-								result);
-					}
-
-					else {
-						String msg;
-
-						msg =
-								ModelInstanceTypeTestSuiteMessages.ModelInstanceTypeTestSuite_Services_ModelInstanceTypeNotFound;
-
-						throw new RuntimeException(msg);
-					}
+					/* Cache the result. */
+					this.myCachedModelInstances.put(modelInstanceFile.toString(), result);
 				}
 
 				else {
@@ -843,27 +817,10 @@ public final class ModelInstanceTypeTestServices {
 			else {
 
 				try {
-					IMetamodel metaModel;
+					this.myModel =
+							Ocl2ForEclipseFacade.getModel(modelFile, META_MODEL_ID);
 
-					/* Get the metaModel. */
-					metaModel =
-							ModelBusPlugin.getMetamodelRegistry().getMetamodel(META_MODEL_ID);
-
-					if (metaModel != null) {
-						this.myModel = metaModel.getModelProvider().getModel(modelFile);
-
-						this.addPropertiesToTestModel();
-					}
-
-					else {
-						String msg;
-
-						msg =
-								ModelInstanceTypeTestSuiteMessages.ModelInstanceTypeTestSuite_Services_MetaModelNotFound;
-						NLS.bind(msg, META_MODEL_ID);
-
-						throw new RuntimeException(msg);
-					}
+					this.addPropertiesToTestModel();
 				}
 
 				catch (ModelAccessException e) {

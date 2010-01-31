@@ -2,15 +2,10 @@ package tudresden.ocl20.pivot.modelbus.test;
 
 import java.io.File;
 
-import tudresden.ocl20.pivot.metamodels.uml2.UML2MetamodelPlugin;
+import tudresden.ocl20.pivot.facade.Ocl2ForEclipseFacade;
 import tudresden.ocl20.pivot.modelbus.ModelAccessException;
-import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
-import tudresden.ocl20.pivot.modelbus.metamodel.IMetamodel;
 import tudresden.ocl20.pivot.modelbus.model.IModel;
 import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance;
-import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceProvider;
-import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceType;
-import tudresden.ocl20.pivot.modelinstancetype.java.JavaModelInstanceTypePlugin;
 
 /**
  * <p>
@@ -45,19 +40,6 @@ public class ModelBusTestUtility {
 	public static IModelInstance getJavaModelInstance(String path, IModel model)
 			throws RuntimeException, ModelAccessException {
 
-		if (model == null) {
-			throw new IllegalArgumentException("The model must not be null.");
-		}
-		// no else.
-
-		IModelInstance result;
-
-		/* Load the model instance. */
-		IModelInstanceProvider javaModelInstanceProvider;
-		javaModelInstanceProvider =
-				ModelBusPlugin.getModelInstanceTypeRegistry().getModelInstanceType(
-						JavaModelInstanceTypePlugin.PLUGIN_ID).getModelInstanceProvider();
-
 		/* Get the bundle location for the model files. */
 		String bundleDirectory;
 		bundleDirectory = Activator.getDefault().getBundle().getLocation();
@@ -75,10 +57,8 @@ public class ModelBusTestUtility {
 		}
 		// no else.
 
-		result =
-				javaModelInstanceProvider.getModelInstance(modelInstanceFile, model);
-
-		return result;
+		return Ocl2ForEclipseFacade.getModelInstance(modelInstanceFile, model,
+				Ocl2ForEclipseFacade.Java_ModelInstanceType);
 	}
 
 	/**
@@ -93,8 +73,6 @@ public class ModelBusTestUtility {
 	 * @throws ModelAccessException
 	 */
 	public static IModel getUML2Model(String path) throws ModelAccessException {
-
-		IModel result;
 
 		String bundleDirectory;
 		File modelFile;
@@ -115,26 +93,10 @@ public class ModelBusTestUtility {
 
 		/* Else try to load the model. */
 		else {
-
-			IMetamodel metaModel;
-
-			/* Get the metaModel. */
-			metaModel =
-					ModelBusPlugin.getMetamodelRegistry().getMetamodel(
-							UML2MetamodelPlugin.ID);
-
-			if (metaModel != null) {
-				result = metaModel.getModelProvider().getModel(modelFile);
-			}
-
-			else {
-				throw new RuntimeException("The meta-model " + UML2MetamodelPlugin.ID
-						+ " has not been found.");
-			}
+			return Ocl2ForEclipseFacade.getModel(modelFile,
+					Ocl2ForEclipseFacade.UML2_MetaModel);
 		}
 		// end else.
-
-		return result;
 	}
 
 	/**
@@ -150,14 +112,19 @@ public class ModelBusTestUtility {
 
 		IModelInstance result;
 
-		IModelInstanceType javaModelInstanceType;
-		javaModelInstanceType =
-				ModelBusPlugin.getModelInstanceTypeRegistry().getModelInstanceType(
-						JavaModelInstanceTypePlugin.PLUGIN_ID);
+		try {
+			result =
+					Ocl2ForEclipseFacade.getEmptyModelInstance(model,
+							Ocl2ForEclipseFacade.Java_ModelInstanceType);
+		}
 
-		result =
-				javaModelInstanceType.getModelInstanceProvider()
-						.createEmptyModelInstance(model);
+		catch (IllegalArgumentException e) {
+			result = null;
+		}
+
+		catch (ModelAccessException e) {
+			result = null;
+		}
 
 		return result;
 	}

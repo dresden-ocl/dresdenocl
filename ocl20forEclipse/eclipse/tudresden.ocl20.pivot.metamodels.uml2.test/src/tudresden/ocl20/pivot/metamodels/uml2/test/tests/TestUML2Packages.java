@@ -21,12 +21,10 @@ import java.io.File;
 
 import org.junit.Test;
 
-import tudresden.ocl20.pivot.metamodels.uml2.UML2MetamodelPlugin;
+import tudresden.ocl20.pivot.facade.Ocl2ForEclipseFacade;
 import tudresden.ocl20.pivot.metamodels.uml2.test.UML2MetaModelTestPlugin;
 import tudresden.ocl20.pivot.modelbus.IModelBusConstants;
 import tudresden.ocl20.pivot.modelbus.ModelAccessException;
-import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
-import tudresden.ocl20.pivot.modelbus.metamodel.IMetamodel;
 import tudresden.ocl20.pivot.modelbus.model.IModel;
 import tudresden.ocl20.pivot.pivotmodel.Namespace;
 
@@ -139,35 +137,35 @@ public class TestUML2Packages {
 	 */
 	@Test
 	public void testRootPackage03() throws ModelAccessException {
-	
+
 		IModel testModel;
 		testModel = this.getUML2Model("/model/packageTest/model03.uml");
-	
+
 		Namespace root;
 		root = testModel.getRootNamespace();
-	
+
 		assertNotNull(root);
 		assertEquals(IModelBusConstants.ROOT_PACKAGE_NAME, root.getName());
-	
+
 		assertNull(root.getNestingNamespace());
 		assertEquals(1, root.getNestedNamespace().size());
-	
+
 		Namespace package1;
 		package1 = root.getNestedNamespace().get(0);
-	
+
 		assertNotNull(package1);
 		assertEquals("package1", package1.getName());
-	
+
 		assertNotNull(package1.getNestingNamespace());
 		assertEquals(root, package1.getNestingNamespace());
 		assertEquals(1, package1.getNestedNamespace().size());
-	
+
 		Namespace package2;
 		package2 = package1.getNestedNamespace().get(0);
-	
+
 		assertNotNull(package2);
 		assertEquals("package2", package2.getName());
-	
+
 		assertNotNull(package2.getNestingNamespace());
 		assertEquals(package1, package2.getNestingNamespace());
 		assertEquals(0, package2.getNestedNamespace().size());
@@ -208,22 +206,9 @@ public class TestUML2Packages {
 
 		/* Else try to load the model. */
 		else {
-
-			IMetamodel metaModel;
-
-			/* Get the metaModel. */
-			metaModel =
-					ModelBusPlugin.getMetamodelRegistry().getMetamodel(
-							UML2MetamodelPlugin.ID);
-
-			if (metaModel != null) {
-				result = metaModel.getModelProvider().getModel(modelFile);
-			}
-
-			else {
-				throw new RuntimeException("The meta-model " + UML2MetamodelPlugin.ID
-						+ " has not been found.");
-			}
+			result =
+					Ocl2ForEclipseFacade.getModel(modelFile,
+							Ocl2ForEclipseFacade.UML2_MetaModel);
 		}
 		// end else.
 

@@ -27,8 +27,8 @@ import java.util.Map;
 import org.eclipse.core.runtime.Platform;
 import org.osgi.framework.Bundle;
 
+import tudresden.ocl20.pivot.facade.Ocl2ForEclipseFacade;
 import tudresden.ocl20.pivot.modelbus.ModelAccessException;
-import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
 import tudresden.ocl20.pivot.modelbus.metamodel.IMetamodel;
 import tudresden.ocl20.pivot.modelbus.model.IModel;
 import tudresden.ocl20.pivot.modelbus.model.IModelProvider;
@@ -78,9 +78,6 @@ public class TestPerformer {
 
 	/** The path of the {@link IModel} in its {@link Bundle}. */
 	protected String myModelPath;
-
-	/** The current {@link IModelProvider}. */
-	protected IModelProvider myModelProvider = null;
 
 	/** The path to external {@link IModel} files. */
 	protected String myRemoteModelFileDirectoryPath = null;
@@ -211,6 +208,7 @@ public class TestPerformer {
 		oclFileReader = new FileReader(oclFile);
 
 		OCL2Parser parser;
+		/* Not replaced by facade method to test the different exception types. */
 		parser = new OCL2Parser(this.myModel, oclFileReader);
 
 		parser.parse();
@@ -288,15 +286,7 @@ public class TestPerformer {
 	private void initializeMetamodel(String metamodelName)
 			throws MetaModelNotFoundException {
 
-		this.myMetaModel =
-				ModelBusPlugin.getMetamodelRegistry().getMetamodel(metamodelName);
-
-		/* Probably throw an exception. */
-		if (this.myMetaModel == null) {
-			throw new MetaModelNotFoundException("Unable to load IMetamodel '"
-					+ metamodelName + "'.");
-		}
-		// no else.
+		this.myMetaModel = Ocl2ForEclipseFacade.getMetaModel(metamodelName);
 	}
 
 	/**
@@ -317,8 +307,6 @@ public class TestPerformer {
 			throws ModelAccessException, FileNotFoundException {
 
 		File modelFile;
-
-		this.myModelProvider = this.myMetaModel.getModelProvider();
 		modelFile = new File(pathToModel + modelName);
 
 		/* Check if the file exists. */
@@ -329,6 +317,6 @@ public class TestPerformer {
 		}
 		// no else.
 
-		this.myModel = this.myModelProvider.getModel(modelFile);
+		this.myModel = Ocl2ForEclipseFacade.getModel(modelFile, this.myMetaModel);
 	}
 }
