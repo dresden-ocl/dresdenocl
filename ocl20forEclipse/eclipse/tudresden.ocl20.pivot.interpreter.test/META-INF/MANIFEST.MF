@@ -7,15 +7,12 @@ Bundle-Activator: tudresden.ocl20.pivot.interpreter.test.OclInterpreterTestPlugi
 Require-Bundle: org.eclipse.core.runtime,
  tudresden.ocl20.pivot.interpreter,
  tudresden.ocl20.pivot.modelbus,
- tudresden.ocl20.pivot.metamodels.uml2,
- tudresden.ocl20.pivot.modelinstancetype.java,
  tudresden.ocl20.pivot.essentialocl,
  tudresden.ocl20.pivot.essentialocl.standardlibrary,
  tudresden.ocl20.pivot.examples.royalandloyal,
- tudresden.ocl20.pivot.ocl2parser,
- tudresden.ocl20.pivot.standardlibrary.java,
  org.junit4,
- tudresden.ocl20.pivot.testsuite
+ tudresden.ocl20.pivot.testsuite,
+ tudresden.ocl20.pivot.facade;bundle-version="2.0.0"
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-Vendor: TU Dresden, Software Technology Group

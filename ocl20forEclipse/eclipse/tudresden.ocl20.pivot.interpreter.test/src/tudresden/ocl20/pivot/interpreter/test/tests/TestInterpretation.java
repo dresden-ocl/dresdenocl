@@ -19,18 +19,18 @@ with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
 package tudresden.ocl20.pivot.interpreter.test.tests;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBoolean;
 import tudresden.ocl20.pivot.examples.royalsandloyals.Burning;
 import tudresden.ocl20.pivot.examples.royalsandloyals.Color;
@@ -45,15 +45,17 @@ import tudresden.ocl20.pivot.examples.royalsandloyals.ProgramPartner;
 import tudresden.ocl20.pivot.examples.royalsandloyals.Service;
 import tudresden.ocl20.pivot.examples.royalsandloyals.ServiceLevel;
 import tudresden.ocl20.pivot.examples.royalsandloyals.Transaction;
-import tudresden.ocl20.pivot.interpreter.IInterpretationEnvironment;
-import tudresden.ocl20.pivot.interpreter.IOclInterpreter;
+import tudresden.ocl20.pivot.facade.OCL2ParsingException;
+import tudresden.ocl20.pivot.interpreter.IInterpretationResult;
 import tudresden.ocl20.pivot.modelbus.ModelAccessException;
+import tudresden.ocl20.pivot.modelbus.modelinstance.exception.OperationAccessException;
 import tudresden.ocl20.pivot.modelbus.modelinstance.exception.OperationNotFoundException;
 import tudresden.ocl20.pivot.modelbus.modelinstance.exception.TypeNotFoundInModelException;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceObject;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.base.BasisJavaModelInstanceFactory;
 import tudresden.ocl20.pivot.pivotmodel.Constraint;
 import tudresden.ocl20.pivot.pivotmodel.Operation;
-import tudresden.ocl20.pivot.standardlibrary.java.JavaStandardlibraryPlugin;
 
 /**
  * <p>
@@ -68,48 +70,39 @@ public class TestInterpretation {
 	/**
 	 * The {@link TestPerformer} used for all test cases of this class.
 	 */
-	protected static TestPerformer testPerformer;
+	private static TestPerformer testPerformer;
 
 	/**
 	 * The {@link IModelInstanceElement}s which shall be interpreted during a test
 	 * case.
 	 */
-	private List<IModelInstanceElement> objectList;
+	private List<IModelInstanceElement> objectList =
+			new ArrayList<IModelInstanceElement>();
 
-	/**
-	 * The interpreted results of a test case.
-	 */
-	private List<OclAny> results;
+	/** The {@link Operation} to invoke to test pre- or postconditions. */
+	private Operation operation;
 
-	/**
-	 * The global {@link IInterpretationEnvironment} of the used
-	 * {@link IOclInterpreter}.
-	 */
-	private IInterpretationEnvironment globalEnvironment;
+	/** The result of an {@link Operation} invoked to test postconditions. */
+	private IModelInstanceElement operationInvocationResult;
 
-	/**
-	 * The current {@link IModelInstanceElement} for that a {@link Constraint}
-	 * shall be interpreted.
-	 */
-	private IModelInstanceElement modelObject;
+	/** Contains the parameter values of an {@link Operation} call. */
+	private List<IModelInstanceElement> parameters =
+			new ArrayList<IModelInstanceElement>();
 
-	/**
-	 * A field that can be used to store the name of the result of a preparation
-	 * (a {@link Constraint}).
-	 */
-	private String result_constrainedElement;
-
-	/**
-	 * A field that can be used to store the result of a preparation (a
-	 * {@link Constraint}).
-	 */
-	private Constraint result_Constraint;
+	/** Contains the last parsed {@link Constraint}s. */
+	private Set<Constraint> parsedConstraints;
 
 	/**
 	 * A field that can be used to store an {@link OclBoolean} interpretation
 	 * result.
 	 */
 	private OclBoolean result_Boolean;
+
+	/**
+	 * The interpreted results of a test case.
+	 */
+	private List<IInterpretationResult> results =
+			new ArrayList<IInterpretationResult>();
 
 	/**
 	 * <p>
@@ -127,17 +120,22 @@ public class TestInterpretation {
 	 * A test case testing the interpretation of a {@link Constraint} contained in
 	 * body02.ocl.
 	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 * @throws OCL2ParsingException
+	 * @throws RuntimeException
 	 */
 	@Test
-	public void testBody02() {
+	public void testBody02() throws RuntimeException, OCL2ParsingException,
+			ModelAccessException, TypeNotFoundInModelException {
 
 		LoyaltyAccount loyaltyAccount;
 		Membership membership;
 		CustomerCard card;
 		Customer customer;
 
-		/* Load OCL file. */
-		testPerformer.loadOCLFile("constraints/body02.ocl");
+		/* Load OCL file (contains body expression). */
+		parsedConstraints = testPerformer.loadOCLFile("constraints/body02.ocl");
 
 		/* Create the model objects that shall be interpreted. */
 		customer = new Customer(25);
@@ -152,27 +150,21 @@ public class TestInterpretation {
 		loyaltyAccount = new LoyaltyAccount();
 		loyaltyAccount.setMembership(membership);
 
-		modelObject = testPerformer.addModelObject(loyaltyAccount);
+		objectList.clear();
+		objectList.add(testPerformer.addModelObject(loyaltyAccount));
 
-		/* Prepare the selected combinations. */
-		globalEnvironment = testPerformer.prepareRemainingConstraints(modelObject);
+		/* Load another OCL file to verify the body expression. */
+		parsedConstraints =
+				testPerformer.loadOCLFile("constraints/testInterpreter/body02.ocl");
+		assertEquals(1, parsedConstraints.size());
 
-		result_constrainedElement = TestPerformer.QUALIFIED_NAME_LOYALTY_ACCOUNT;
-		result_constrainedElement += "::getCustomerName()";
-
-		/* The global environment should now contain the defined method. */
-		result_Constraint =
-				globalEnvironment.getConstraint(result_constrainedElement);
-		assertNotNull(result_Constraint);
-
-		/* Load another OCL file to verify the body preparation. */
-		testPerformer.loadOCLFile("constraints/testInterpreter/body02.ocl");
-
-		/* Interpret the selected objectList. */
-		results = testPerformer.interpretRemainingConstraints(modelObject);
+		/* Interpret the selected object(s). */
+		results.clear();
+		results.addAll(testPerformer.interpretConstraint(parsedConstraints
+				.iterator().next(), objectList, true));
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(0);
+		result_Boolean = (OclBoolean) results.get(0).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
@@ -182,39 +174,38 @@ public class TestInterpretation {
 	 * A test case testing the interpretation of a {@link Constraint} contained in
 	 * body03.ocl.
 	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 * @throws OCL2ParsingException
+	 * @throws RuntimeException
 	 */
 	@Test
-	public void testBody03() {
+	public void testBody03() throws RuntimeException, OCL2ParsingException,
+			ModelAccessException, TypeNotFoundInModelException {
 
 		Date date;
 
-		/* Load OCL file. */
-		testPerformer.loadOCLFile("constraints/body03.ocl");
+		/* Load OCL file (contains body expression). */
+		parsedConstraints = testPerformer.loadOCLFile("constraints/body03.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		date = Date.now();
 
-		modelObject = testPerformer.addModelObject(date);
+		objectList.clear();
+		objectList.add(testPerformer.addModelObject(date));
 
-		/* Prepare the selected combinations. */
-		globalEnvironment = testPerformer.prepareRemainingConstraints(modelObject);
+		/* Load another OCL file to verify the body expression. */
+		parsedConstraints =
+				testPerformer.loadOCLFile("constraints/testInterpreter/body03.ocl");
+		assertEquals(1, parsedConstraints.size());
 
-		result_constrainedElement = TestPerformer.QUALIFIED_NAME_DATE;
-		result_constrainedElement += "::nowAsString()";
-
-		/* The global environment should now contain the defined method. */
-		result_Constraint =
-				globalEnvironment.getConstraint(result_constrainedElement);
-		assertNotNull(result_Constraint);
-
-		/* Load another OCL file to verify the body preparation. */
-		testPerformer.loadOCLFile("constraints/testInterpreter/body03.ocl");
-
-		/* Interpret the selected objectList. */
-		results = testPerformer.interpretRemainingConstraints(modelObject);
+		/* Interpret the selected object(s). */
+		results.clear();
+		results.addAll(testPerformer.interpretConstraint(parsedConstraints
+				.iterator().next(), objectList, true));
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(0);
+		result_Boolean = (OclBoolean) results.get(0).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
@@ -224,16 +215,21 @@ public class TestInterpretation {
 	 * A test case testing the interpretation of a {@link Constraint} contained in
 	 * define01.ocl.
 	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 * @throws OCL2ParsingException
+	 * @throws RuntimeException
 	 */
 	@Test
-	public void testDef01() {
+	public void testDef01() throws RuntimeException, OCL2ParsingException,
+			ModelAccessException, TypeNotFoundInModelException {
 
 		LoyaltyAccount loyaltyAccount;
 		Transaction transaction1;
 		Transaction transaction2;
 
-		/* Load OCL file. */
-		testPerformer.loadOCLFile("constraints/define01.ocl");
+		/* Load OCL file (contains definition). */
+		parsedConstraints = testPerformer.loadOCLFile("constraints/define01.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		transaction1 = new Transaction();
@@ -246,27 +242,21 @@ public class TestInterpretation {
 		loyaltyAccount.addTransaction(transaction1);
 		loyaltyAccount.addTransaction(transaction2);
 
-		modelObject = testPerformer.addModelObject(loyaltyAccount);
+		objectList.clear();
+		objectList.add(testPerformer.addModelObject(loyaltyAccount));
 
-		/* Prepare the selected combinations. */
-		globalEnvironment = testPerformer.prepareRemainingConstraints(modelObject);
+		/* Load another OCL file to verify the definition expression. */
+		parsedConstraints =
+				testPerformer.loadOCLFile("constraints/testInterpreter/define01.ocl");
+		assertEquals(1, parsedConstraints.size());
 
-		result_constrainedElement = TestPerformer.QUALIFIED_NAME_LOYALTY_ACCOUNT;
-		result_constrainedElement += "::turnover";
-
-		/* The global environment should now contain the defined method. */
-		result_Constraint =
-				globalEnvironment.getConstraint(result_constrainedElement);
-		assertNotNull(result_Constraint);
-
-		/* Load another OCL file to verify the body preparation. */
-		testPerformer.loadOCLFile("constraints/testInterpreter/define01.ocl");
-
-		/* Interpret the selected objectList. */
-		results = testPerformer.interpretRemainingConstraints(modelObject);
+		/* Interpret the selected object(s). */
+		results.clear();
+		results.addAll(testPerformer.interpretConstraint(parsedConstraints
+				.iterator().next(), objectList, true));
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(0);
+		result_Boolean = (OclBoolean) results.get(0).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
@@ -276,9 +266,14 @@ public class TestInterpretation {
 	 * A test case testing the interpretation of a {@link Constraint} contained in
 	 * define02.ocl.
 	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 * @throws OCL2ParsingException
+	 * @throws RuntimeException
 	 */
 	@Test
-	public void testDef02() {
+	public void testDef02() throws RuntimeException, OCL2ParsingException,
+			ModelAccessException, TypeNotFoundInModelException {
 
 		LoyaltyProgram loyaltyProgram;
 		ServiceLevel level1;
@@ -287,8 +282,8 @@ public class TestInterpretation {
 		Service service2;
 		Service service3;
 
-		/* Load OCL file. */
-		testPerformer.loadOCLFile("constraints/define02.ocl");
+		/* Load OCL file (contains definition). */
+		parsedConstraints = testPerformer.loadOCLFile("constraints/define02.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		service1 = new Service();
@@ -308,27 +303,21 @@ public class TestInterpretation {
 		loyaltyProgram.addLevel(level1);
 		loyaltyProgram.addLevel(level2);
 
-		modelObject = testPerformer.addModelObject(loyaltyProgram);
+		objectList.clear();
+		objectList.add(testPerformer.addModelObject(loyaltyProgram));
 
-		/* Prepare the selected combinations. */
-		globalEnvironment = testPerformer.prepareRemainingConstraints(modelObject);
+		/* Load another OCL file to verify the definition expression. */
+		parsedConstraints =
+				testPerformer.loadOCLFile("constraints/testInterpreter/define02.ocl");
+		assertEquals(1, parsedConstraints.size());
 
-		result_constrainedElement = TestPerformer.QUALIFIED_NAME_LOYALTY_PROGRAM;
-		result_constrainedElement += "::getServicesByLevel(String)";
-
-		/* The global environment should now contain the defined method. */
-		result_Constraint =
-				globalEnvironment.getConstraint(result_constrainedElement);
-		assertNotNull(result_Constraint);
-
-		/* Load another OCL file to verify the body preparation. */
-		testPerformer.loadOCLFile("constraints/testInterpreter/define02.ocl");
-
-		/* Interpret the selected objectList. */
-		results = testPerformer.interpretRemainingConstraints(modelObject);
+		/* Interpret the selected object(s). */
+		results.clear();
+		results.addAll(testPerformer.interpretConstraint(parsedConstraints
+				.iterator().next(), objectList, true));
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(0);
+		result_Boolean = (OclBoolean) results.get(0).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
@@ -338,15 +327,20 @@ public class TestInterpretation {
 	 * A test case testing the interpretation of a {@link Constraint} contained in
 	 * define03.ocl.
 	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 * @throws OCL2ParsingException
+	 * @throws RuntimeException
 	 */
 	@Test
-	public void testDef03() {
+	public void testDef03() throws RuntimeException, OCL2ParsingException,
+			ModelAccessException, TypeNotFoundInModelException {
 
 		Membership membership;
 		ServiceLevel level;
 
-		/* Load OCL file. */
-		testPerformer.loadOCLFile("constraints/define03.ocl");
+		/* Load OCL file (contains definition). */
+		parsedConstraints = testPerformer.loadOCLFile("constraints/define03.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		level = new ServiceLevel();
@@ -355,27 +349,21 @@ public class TestInterpretation {
 		membership = new Membership();
 		membership.setCurrentLevel(level);
 
-		modelObject = testPerformer.addModelObject(membership);
+		objectList.clear();
+		objectList.add(testPerformer.addModelObject(membership));
 
-		/* Prepare the selected combinations. */
-		globalEnvironment = testPerformer.prepareRemainingConstraints(modelObject);
+		/* Load another OCL file to verify the definition expression. */
+		parsedConstraints =
+				testPerformer.loadOCLFile("constraints/testInterpreter/define03.ocl");
+		assertEquals(1, parsedConstraints.size());
 
-		result_constrainedElement = TestPerformer.QUALIFIED_NAME_MEMBERSHIP;
-		result_constrainedElement += "::getCurrentLevelName()";
-
-		/* The global environment should now contain the defined method. */
-		result_Constraint =
-				globalEnvironment.getConstraint(result_constrainedElement);
-		assertNotNull(result_Constraint);
-
-		/* Load another OCL file to verify the body preparation. */
-		testPerformer.loadOCLFile("constraints/testInterpreter/define03.ocl");
-
-		/* Interpret the selected objectList. */
-		results = testPerformer.interpretRemainingConstraints(modelObject);
+		/* Interpret the selected object(s). */
+		results.clear();
+		results.addAll(testPerformer.interpretConstraint(parsedConstraints
+				.iterator().next(), objectList, true));
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(0);
+		result_Boolean = (OclBoolean) results.get(0).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
@@ -385,9 +373,14 @@ public class TestInterpretation {
 	 * A test case testing the interpretation of a {@link Constraint} contained in
 	 * define04.ocl.
 	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 * @throws OCL2ParsingException
+	 * @throws RuntimeException
 	 */
 	@Test
-	public void testDef04() {
+	public void testDef04() throws RuntimeException, OCL2ParsingException,
+			ModelAccessException, TypeNotFoundInModelException {
 
 		LoyaltyAccount loyaltyAccount;
 		Transaction transaction1;
@@ -395,8 +388,8 @@ public class TestInterpretation {
 		Service service1;
 		Service service2;
 
-		/* Load OCL file. */
-		testPerformer.loadOCLFile("constraints/define04.ocl");
+		/* Load OCL file (contains definition). */
+		parsedConstraints = testPerformer.loadOCLFile("constraints/define04.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		service1 = new Service();
@@ -412,27 +405,21 @@ public class TestInterpretation {
 		loyaltyAccount.addTransaction(transaction1);
 		loyaltyAccount.addTransaction(transaction2);
 
-		modelObject = testPerformer.addModelObject(loyaltyAccount);
+		objectList.clear();
+		objectList.add(testPerformer.addModelObject(loyaltyAccount));
 
-		/* Prepare the selected combinations. */
-		globalEnvironment = testPerformer.prepareRemainingConstraints(modelObject);
+		/* Load another OCL file to verify the definition expression. */
+		parsedConstraints =
+				testPerformer.loadOCLFile("constraints/testInterpreter/define04.ocl");
+		assertEquals(1, parsedConstraints.size());
 
-		result_constrainedElement = TestPerformer.QUALIFIED_NAME_LOYALTY_ACCOUNT;
-		result_constrainedElement += "::usedServices";
-
-		/* The global environment should now contain the defined method. */
-		result_Constraint =
-				globalEnvironment.getConstraint(result_constrainedElement);
-		assertNotNull(result_Constraint);
-
-		/* Load another OCL file to verify the body preparation. */
-		testPerformer.loadOCLFile("constraints/testInterpreter/define04.ocl");
-
-		/* Interpret the selected objectList. */
-		results = testPerformer.interpretRemainingConstraints(modelObject);
+		/* Interpret the selected object(s). */
+		results.clear();
+		results.addAll(testPerformer.interpretConstraint(parsedConstraints
+				.iterator().next(), objectList, true));
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(0);
+		result_Boolean = (OclBoolean) results.get(0).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
@@ -442,40 +429,39 @@ public class TestInterpretation {
 	 * A test case testing the interpretation of a {@link Constraint} contained in
 	 * define05.ocl.
 	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 * @throws OCL2ParsingException
+	 * @throws RuntimeException
 	 */
 	@Test
-	public void testDef05() {
+	public void testDef05() throws RuntimeException, OCL2ParsingException,
+			ModelAccessException, TypeNotFoundInModelException {
 
 		Customer customer;
 
-		/* Load OCL file. */
-		testPerformer.loadOCLFile("constraints/define05.ocl");
+		/* Load OCL file (contains definition). */
+		parsedConstraints = testPerformer.loadOCLFile("constraints/define05.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		customer = new Customer(25);
 		customer.setName("Tesman");
 
-		modelObject = testPerformer.addModelObject(customer);
+		objectList.clear();
+		objectList.add(testPerformer.addModelObject(customer));
 
-		/* Prepare the selected combinations. */
-		globalEnvironment = testPerformer.prepareRemainingConstraints(modelObject);
+		/* Load another OCL file to verify the definition expression. */
+		parsedConstraints =
+				testPerformer.loadOCLFile("constraints/testInterpreter/define05.ocl");
+		assertEquals(1, parsedConstraints.size());
 
-		result_constrainedElement = TestPerformer.QUALIFIED_NAME_CUSTOMER;
-		result_constrainedElement += "::initial";
-
-		/* The global environment should now contain the defined method. */
-		result_Constraint =
-				globalEnvironment.getConstraint(result_constrainedElement);
-		assertNotNull(result_Constraint);
-
-		/* Load another OCL file to verify the body preparation. */
-		testPerformer.loadOCLFile("constraints/testInterpreter/define05.ocl");
-
-		/* Interpret the selected objectList. */
-		results = testPerformer.interpretRemainingConstraints(modelObject);
+		/* Interpret the selected object(s). */
+		results.clear();
+		results.addAll(testPerformer.interpretConstraint(parsedConstraints
+				.iterator().next(), objectList, true));
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(0);
+		result_Boolean = (OclBoolean) results.get(0).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
@@ -485,16 +471,21 @@ public class TestInterpretation {
 	 * A test case testing the interpretation of a {@link Constraint} contained in
 	 * define06.ocl.
 	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 * @throws OCL2ParsingException
+	 * @throws RuntimeException
 	 */
 	@Test
-	public void testDef06() {
+	public void testDef06() throws RuntimeException, OCL2ParsingException,
+			ModelAccessException, TypeNotFoundInModelException {
 
 		CustomerCard customerCard;
 		Transaction transaction1;
 		Transaction transaction2;
 
-		/* Load OCL file. */
-		testPerformer.loadOCLFile("constraints/define06.ocl");
+		/* Load OCL file (contains definition). */
+		parsedConstraints = testPerformer.loadOCLFile("constraints/define06.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		transaction1 = new Transaction();
@@ -509,28 +500,21 @@ public class TestInterpretation {
 		customerCard.addTransaction(transaction1);
 		customerCard.addTransaction(transaction2);
 
-		modelObject = testPerformer.addModelObject(customerCard);
+		objectList.clear();
+		objectList.add(testPerformer.addModelObject(customerCard));
 
-		/* Prepare the selected combinations. */
-		globalEnvironment = testPerformer.prepareRemainingConstraints(modelObject);
+		/* Load another OCL file to verify the definition expression. */
+		parsedConstraints =
+				testPerformer.loadOCLFile("constraints/testInterpreter/define06.ocl");
+		assertEquals(1, parsedConstraints.size());
 
-		result_constrainedElement = TestPerformer.QUALIFIED_NAME_CUSTOMER_CARD;
-		result_constrainedElement +=
-				"::getTotalPoints(root::tudresden::ocl20::pivot::examples::royalsandloyals::Date)";
-
-		/* The global environment should now contain the defined method. */
-		result_Constraint =
-				globalEnvironment.getConstraint(result_constrainedElement);
-		assertNotNull(result_Constraint);
-
-		/* Load another OCL file to verify the body preparation. */
-		testPerformer.loadOCLFile("constraints/testInterpreter/define06.ocl");
-
-		/* Interpret the selected objectList. */
-		results = testPerformer.interpretRemainingConstraints(modelObject);
+		/* Interpret the selected object(s). */
+		results.clear();
+		results.addAll(testPerformer.interpretConstraint(parsedConstraints
+				.iterator().next(), objectList, true));
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(0);
+		result_Boolean = (OclBoolean) results.get(0).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
@@ -540,42 +524,40 @@ public class TestInterpretation {
 	 * A test case testing the interpretation of a {@link Constraint} contained in
 	 * define07.ocl.
 	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 * @throws OCL2ParsingException
+	 * @throws RuntimeException
 	 */
 	@Test
-	public void testDef07() {
+	public void testDef07() throws RuntimeException, OCL2ParsingException,
+			ModelAccessException, TypeNotFoundInModelException {
 
 		CustomerCard customerCard;
 
-		/* Load OCL file. */
-		testPerformer.loadOCLFile("constraints/define07.ocl");
+		/* Load OCL file (contains definition). */
+		parsedConstraints = testPerformer.loadOCLFile("constraints/define07.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		customerCard = new CustomerCard();
 
-		modelObject = testPerformer.addModelObject(customerCard);
+		objectList.clear();
+		objectList.add(testPerformer.addModelObject(customerCard));
 
-		/* Prepare the selected combinations. */
-		globalEnvironment = testPerformer.prepareRemainingConstraints(modelObject);
+		/* Load another OCL file to verify the definition expression. */
+		parsedConstraints =
+				testPerformer.loadOCLFile("constraints/testInterpreter/define07.ocl");
+		assertEquals(1, parsedConstraints.size());
 
-		result_constrainedElement = TestPerformer.QUALIFIED_NAME_CUSTOMER_CARD;
-		result_constrainedElement += "::getAllInstances()";
-
-		/* The global environment should now contain the defined method. */
-		result_Constraint =
-				globalEnvironment.getConstraint(result_constrainedElement);
-		assertNotNull(result_Constraint);
-
-		/* Load another OCL file to verify the body preparation. */
-		testPerformer.loadOCLFile("constraints/testInterpreter/define07.ocl");
-
-		/* Interpret the selected objectList. */
-		results = testPerformer.interpretRemainingConstraints(modelObject);
+		/* Interpret the selected object(s). */
+		results.clear();
+		results.addAll(testPerformer.interpretConstraint(parsedConstraints
+				.iterator().next(), objectList, true));
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(0);
+		result_Boolean = (OclBoolean) results.get(0).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
-		assertTrue(result_Boolean.oclIsInvalid().isTrue());
-		// assertTrue(result_Boolean.isTrue());
+		assertTrue(result_Boolean.isTrue());
 	}
 
 	/**
@@ -583,9 +565,14 @@ public class TestInterpretation {
 	 * A test case testing the interpretation of a {@link Constraint} contained in
 	 * define08.ocl.
 	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 * @throws OCL2ParsingException
+	 * @throws RuntimeException
 	 */
 	@Test
-	public void testDef08() {
+	public void testDef08() throws RuntimeException, OCL2ParsingException,
+			ModelAccessException, TypeNotFoundInModelException {
 
 		ProgramPartner programPartner;
 
@@ -597,8 +584,8 @@ public class TestInterpretation {
 		Transaction transaction2;
 		Transaction transaction3;
 
-		/* Load OCL file. */
-		testPerformer.loadOCLFile("constraints/define08.ocl");
+		/* Load OCL file (contains definition). */
+		parsedConstraints = testPerformer.loadOCLFile("constraints/define08.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		transaction1 = new Burning();
@@ -627,27 +614,21 @@ public class TestInterpretation {
 		testPerformer.addModelObject(service2);
 		testPerformer.addModelObject(service3);
 
-		modelObject = testPerformer.addModelObject(programPartner);
+		objectList.clear();
+		objectList.add(testPerformer.addModelObject(programPartner));
 
-		/* Prepare the selected combinations. */
-		globalEnvironment = testPerformer.prepareRemainingConstraints(modelObject);
+		/* Load another OCL file to verify the definition expression. */
+		parsedConstraints =
+				testPerformer.loadOCLFile("constraints/testInterpreter/define08.ocl");
+		assertEquals(1, parsedConstraints.size());
 
-		result_constrainedElement = TestPerformer.QUALIFIED_NAME_PROGRAM_PARTNER;
-		result_constrainedElement += "::getBurningTransactions()";
-
-		/* The global environment should now contain the defined method. */
-		result_Constraint =
-				globalEnvironment.getConstraint(result_constrainedElement);
-		assertNotNull(result_constrainedElement);
-
-		/* Load another OCL file to verify the body preparation. */
-		testPerformer.loadOCLFile("constraints/testInterpreter/define08.ocl");
-
-		/* Interpret the selected objectList. */
-		results = testPerformer.interpretRemainingConstraints(modelObject);
+		/* Interpret the selected object(s). */
+		results.clear();
+		results.addAll(testPerformer.interpretConstraint(parsedConstraints
+				.iterator().next(), objectList, true));
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(0);
+		result_Boolean = (OclBoolean) results.get(0).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
@@ -657,16 +638,20 @@ public class TestInterpretation {
 	 * A test case testing the interpretation of a {@link Constraint} contained in
 	 * derive01.ocl.
 	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 * @throws OCL2ParsingException
+	 * @throws RuntimeException
 	 */
 	@Test
-	public void testDerive01() {
+	public void testDerive01() throws RuntimeException, OCL2ParsingException,
+			ModelAccessException, TypeNotFoundInModelException {
 
 		CustomerCard customerCard;
-
 		Customer customer;
 
-		/* Load OCL file. */
-		testPerformer.loadOCLFile("constraints/derive01.ocl");
+		/* Load OCL file (contains derive expression). */
+		parsedConstraints = testPerformer.loadOCLFile("constraints/derive01.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		customer = new Customer(25);
@@ -676,27 +661,21 @@ public class TestInterpretation {
 		customerCard = new CustomerCard();
 		customerCard.setOwner(customer);
 
-		modelObject = testPerformer.addModelObject(customerCard);
+		objectList.clear();
+		objectList.add(testPerformer.addModelObject(customerCard));
 
-		/* Prepare the selected combinations. */
-		globalEnvironment = testPerformer.prepareRemainingConstraints(modelObject);
+		/* Load another OCL file to verify the derive expression. */
+		parsedConstraints =
+				testPerformer.loadOCLFile("constraints/testInterpreter/derive01.ocl");
+		assertEquals(1, parsedConstraints.size());
 
-		result_constrainedElement = TestPerformer.QUALIFIED_NAME_CUSTOMER_CARD;
-		result_constrainedElement += "::printedName-derive";
-
-		/* The global environment should now contain the defined method. */
-		result_Constraint =
-				globalEnvironment.getConstraint(result_constrainedElement);
-		assertNotNull(result_Constraint);
-
-		/* Load another OCL file to verify the body preparation. */
-		testPerformer.loadOCLFile("constraints/testInterpreter/derive01.ocl");
-
-		/* Interpret the selected objectList. */
-		results = testPerformer.interpretRemainingConstraints(modelObject);
+		/* Interpret the selected object(s). */
+		results.clear();
+		results.addAll(testPerformer.interpretConstraint(parsedConstraints
+				.iterator().next(), objectList, true));
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(0);
+		result_Boolean = (OclBoolean) results.get(0).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
@@ -706,9 +685,14 @@ public class TestInterpretation {
 	 * A test case testing the interpretation of a {@link Constraint} contained in
 	 * derive02.ocl.
 	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 * @throws OCL2ParsingException
+	 * @throws RuntimeException
 	 */
 	@Test
-	public void testDerive02() {
+	public void testDerive02() throws RuntimeException, OCL2ParsingException,
+			ModelAccessException, TypeNotFoundInModelException {
 
 		LoyaltyAccount loyaltyAccount;
 
@@ -716,8 +700,8 @@ public class TestInterpretation {
 		Transaction transaction2;
 		Transaction transaction3;
 
-		/* Load OCL file. */
-		testPerformer.loadOCLFile("constraints/derive02.ocl");
+		/* Load OCL file (contains derive expression). */
+		parsedConstraints = testPerformer.loadOCLFile("constraints/derive02.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		transaction1 = new Earning();
@@ -738,27 +722,21 @@ public class TestInterpretation {
 		testPerformer.addModelObject(transaction2);
 		testPerformer.addModelObject(transaction3);
 
-		modelObject = testPerformer.addModelObject(loyaltyAccount);
+		objectList.clear();
+		objectList.add(testPerformer.addModelObject(loyaltyAccount));
 
-		/* Prepare the selected combinations. */
-		globalEnvironment = testPerformer.prepareRemainingConstraints(modelObject);
+		/* Load another OCL file to verify the derive expression. */
+		parsedConstraints =
+				testPerformer.loadOCLFile("constraints/testInterpreter/derive02.ocl");
+		assertEquals(1, parsedConstraints.size());
 
-		result_constrainedElement = TestPerformer.QUALIFIED_NAME_LOYALTY_ACCOUNT;
-		result_constrainedElement += "::totalPointsEarned-derive";
-
-		/* The global environment should now contain the defined method. */
-		result_Constraint =
-				globalEnvironment.getConstraint(result_constrainedElement);
-		assertNotNull(result_Constraint);
-
-		/* Load another OCL file to verify the body preparation. */
-		testPerformer.loadOCLFile("constraints/testInterpreter/derive02.ocl");
-
-		/* Interpret the selected objectList. */
-		results = testPerformer.interpretRemainingConstraints(modelObject);
+		/* Interpret the selected object(s). */
+		results.clear();
+		results.addAll(testPerformer.interpretConstraint(parsedConstraints
+				.iterator().next(), objectList, true));
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(0);
+		result_Boolean = (OclBoolean) results.get(0).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
@@ -768,39 +746,37 @@ public class TestInterpretation {
 	 * A test case testing the interpretation of a {@link Constraint} contained in
 	 * init01.ocl.
 	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 * @throws OCL2ParsingException
+	 * @throws RuntimeException
 	 */
 	@Test
-	public void testInit01() {
+	public void testInit01() throws RuntimeException, OCL2ParsingException,
+			ModelAccessException, TypeNotFoundInModelException {
 
 		LoyaltyAccount loyaltyAccount;
 
-		/* Load OCL file. */
-		testPerformer.loadOCLFile("constraints/init01.ocl");
+		/* Load OCL file (contains derive expression). */
+		parsedConstraints = testPerformer.loadOCLFile("constraints/init01.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		loyaltyAccount = new LoyaltyAccount();
+		objectList.clear();
+		objectList.add(testPerformer.addModelObject(loyaltyAccount));
 
-		modelObject = testPerformer.addModelObject(loyaltyAccount);
+		/* Load another OCL file to verify the init expression. */
+		parsedConstraints =
+				testPerformer.loadOCLFile("constraints/testInterpreter/init01.ocl");
+		assertEquals(1, parsedConstraints.size());
 
-		/* Prepare the selected combinations. */
-		globalEnvironment = testPerformer.prepareRemainingConstraints(modelObject);
-
-		result_constrainedElement = TestPerformer.QUALIFIED_NAME_LOYALTY_ACCOUNT;
-		result_constrainedElement += "::points-initial";
-
-		/* The global environment should now contain the defined method. */
-		result_Constraint =
-				globalEnvironment.getConstraint(result_constrainedElement);
-		assertNotNull(result_Constraint);
-
-		/* Load another OCL file to verify the body preparation. */
-		testPerformer.loadOCLFile("constraints/testInterpreter/init01.ocl");
-
-		/* Interpret the selected objectList. */
-		results = testPerformer.interpretRemainingConstraints(modelObject);
+		/* Interpret the selected object(s). */
+		results.clear();
+		results.addAll(testPerformer.interpretConstraint(parsedConstraints
+				.iterator().next(), objectList, true));
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(0);
+		result_Boolean = (OclBoolean) results.get(0).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
@@ -810,39 +786,37 @@ public class TestInterpretation {
 	 * A test case testing the interpretation of a {@link Constraint} contained in
 	 * init02.ocl.
 	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 * @throws OCL2ParsingException
+	 * @throws RuntimeException
 	 */
 	@Test
-	public void testInit02() {
+	public void testInit02() throws RuntimeException, OCL2ParsingException,
+			ModelAccessException, TypeNotFoundInModelException {
 
 		CustomerCard customerCard;
 
-		/* Load OCL file. */
-		testPerformer.loadOCLFile("constraints/init02.ocl");
+		/* Load OCL file (contains derive expression). */
+		parsedConstraints = testPerformer.loadOCLFile("constraints/init02.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		customerCard = new CustomerCard();
+		objectList.clear();
+		objectList.add(testPerformer.addModelObject(customerCard));
 
-		modelObject = testPerformer.addModelObject(customerCard);
+		/* Load another OCL file to verify the init expression. */
+		parsedConstraints =
+				testPerformer.loadOCLFile("constraints/testInterpreter/init02.ocl");
+		assertEquals(1, parsedConstraints.size());
 
-		/* Prepare the selected combinations. */
-		globalEnvironment = testPerformer.prepareRemainingConstraints(modelObject);
-
-		result_constrainedElement = TestPerformer.QUALIFIED_NAME_CUSTOMER_CARD;
-		result_constrainedElement += "::valid-initial";
-
-		/* The global environment should now contain the defined method. */
-		result_Constraint =
-				globalEnvironment.getConstraint(result_constrainedElement);
-		assertNotNull(result_Constraint);
-
-		/* Load another OCL file to verify the body preparation. */
-		testPerformer.loadOCLFile("constraints/testInterpreter/init02.ocl");
-
-		/* Interpret the selected objectList. */
-		results = testPerformer.interpretRemainingConstraints(modelObject);
+		/* Interpret the selected object(s). */
+		results.clear();
+		results.addAll(testPerformer.interpretConstraint(parsedConstraints
+				.iterator().next(), objectList, true));
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(0);
+		result_Boolean = (OclBoolean) results.get(0).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
@@ -852,39 +826,37 @@ public class TestInterpretation {
 	 * A test case testing the interpretation of a {@link Constraint} contained in
 	 * init03.ocl.
 	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 * @throws OCL2ParsingException
+	 * @throws RuntimeException
 	 */
 	@Test
-	public void testInit03() {
+	public void testInit03() throws RuntimeException, OCL2ParsingException,
+			ModelAccessException, TypeNotFoundInModelException {
 
 		LoyaltyAccount loyaltyAccount;
 
-		/* Load OCL file. */
-		testPerformer.loadOCLFile("constraints/init03.ocl");
+		/* Load OCL file (contains derive expression). */
+		parsedConstraints = testPerformer.loadOCLFile("constraints/init03.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		loyaltyAccount = new LoyaltyAccount();
+		objectList.clear();
+		objectList.add(testPerformer.addModelObject(loyaltyAccount));
 
-		modelObject = testPerformer.addModelObject(loyaltyAccount);
+		/* Load another OCL file to verify the init expression. */
+		parsedConstraints =
+				testPerformer.loadOCLFile("constraints/testInterpreter/init03.ocl");
+		assertEquals(1, parsedConstraints.size());
 
-		/* Prepare the selected combinations. */
-		globalEnvironment = testPerformer.prepareRemainingConstraints(modelObject);
-
-		result_constrainedElement = TestPerformer.QUALIFIED_NAME_LOYALTY_ACCOUNT;
-		result_constrainedElement += "::transactions-initial";
-
-		/* The global environment should now contain the defined method. */
-		result_Constraint =
-				globalEnvironment.getConstraint(result_constrainedElement);
-		assertNotNull(result_Constraint);
-
-		/* Load another OCL file to verify the body preparation. */
-		testPerformer.loadOCLFile("constraints/testInterpreter/init03.ocl");
-
-		/* Interpret the selected objectList. */
-		results = testPerformer.interpretRemainingConstraints(modelObject);
+		/* Interpret the selected object(s). */
+		results.clear();
+		results.addAll(testPerformer.interpretConstraint(parsedConstraints
+				.iterator().next(), objectList, true));
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(0);
+		result_Boolean = (OclBoolean) results.get(0).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
@@ -894,42 +866,50 @@ public class TestInterpretation {
 	 * A test case testing the interpretation of a {@link Constraint} contained
 	 * invariant01.ocl.
 	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 * @throws OCL2ParsingException
+	 * @throws RuntimeException
 	 */
 	@Test
-	public void testInvariant01() {
+	public void testInvariant01() throws RuntimeException, OCL2ParsingException,
+			ModelAccessException, TypeNotFoundInModelException {
 
 		Customer customer1;
 		Customer customer2;
 		Customer customer3;
 
-		/* Load OCL file. */
-		testPerformer.loadOCLFile("constraints/invariant01.ocl");
+		/* Load OCL file (contains invariant). */
+		parsedConstraints =
+				testPerformer.loadOCLFile("constraints/invariant01.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		customer1 = new Customer(17);
 		customer2 = new Customer(18);
 		customer3 = new Customer(19);
 
-		objectList = new ArrayList<IModelInstanceElement>();
+		objectList.clear();
 		objectList.add(testPerformer.addModelObject(customer1));
 		objectList.add(testPerformer.addModelObject(customer2));
 		objectList.add(testPerformer.addModelObject(customer3));
 
-		/* Interpret the selected combinations. */
-		results = testPerformer.interpretRemainingConstraints(objectList);
+		/* Interpret the selected object(s). */
+		results.clear();
+		results.addAll(testPerformer.interpretConstraint(parsedConstraints
+				.iterator().next(), objectList, true));
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(0);
+		result_Boolean = (OclBoolean) results.get(0).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertFalse(result_Boolean.isTrue());
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(1);
+		result_Boolean = (OclBoolean) results.get(1).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(1);
+		result_Boolean = (OclBoolean) results.get(2).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
@@ -939,15 +919,21 @@ public class TestInterpretation {
 	 * A test case testing the interpretation of a {@link Constraint} contained
 	 * invariant02.ocl.
 	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 * @throws OCL2ParsingException
+	 * @throws RuntimeException
 	 */
 	@Test
-	public void testInvariant02() {
+	public void testInvariant02() throws RuntimeException, OCL2ParsingException,
+			ModelAccessException, TypeNotFoundInModelException {
 
 		CustomerCard customerCard1;
 		CustomerCard customerCard2;
 
-		/* Load OCL file. */
-		testPerformer.loadOCLFile("constraints/invariant02.ocl");
+		/* Load OCL file (contains invariant). */
+		parsedConstraints =
+				testPerformer.loadOCLFile("constraints/invariant02.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		customerCard1 = new CustomerCard();
@@ -958,20 +944,22 @@ public class TestInterpretation {
 		customerCard2.setValidFrom(new Date(2009, 1, 1));
 		customerCard2.setValidThru(new Date(2008, 1, 1));
 
-		objectList = new ArrayList<IModelInstanceElement>();
+		objectList.clear();
 		objectList.add(testPerformer.addModelObject(customerCard1));
 		objectList.add(testPerformer.addModelObject(customerCard2));
 
-		/* Interpret the selected combinations. */
-		results = testPerformer.interpretRemainingConstraints(objectList);
+		/* Interpret the selected object(s). */
+		results.clear();
+		results.addAll(testPerformer.interpretConstraint(parsedConstraints
+				.iterator().next(), objectList, true));
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(0);
+		result_Boolean = (OclBoolean) results.get(0).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(1);
+		result_Boolean = (OclBoolean) results.get(1).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertFalse(result_Boolean.isTrue());
 	}
@@ -981,9 +969,14 @@ public class TestInterpretation {
 	 * A test case testing the interpretation of a {@link Constraint} contained
 	 * invariant03.ocl.
 	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 * @throws OCL2ParsingException
+	 * @throws RuntimeException
 	 */
 	@Test
-	public void testInvariant03() {
+	public void testInvariant03() throws RuntimeException, OCL2ParsingException,
+			ModelAccessException, TypeNotFoundInModelException {
 
 		LoyaltyProgram loyaltyProgram1;
 		LoyaltyProgram loyaltyProgram2;
@@ -993,8 +986,9 @@ public class TestInterpretation {
 		ServiceLevel serviceLevel2;
 		ServiceLevel serviceLevel3;
 
-		/* Load OCL file. */
-		testPerformer.loadOCLFile("constraints/invariant03.ocl");
+		/* Load OCL file (contains invariant). */
+		parsedConstraints =
+				testPerformer.loadOCLFile("constraints/invariant03.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		serviceLevel1 = new ServiceLevel();
@@ -1017,20 +1011,22 @@ public class TestInterpretation {
 		loyaltyProgram2.addLevel(serviceLevel1);
 		loyaltyProgram2.addLevel(serviceLevel3);
 
-		objectList = new ArrayList<IModelInstanceElement>();
+		objectList.clear();
 		objectList.add(testPerformer.addModelObject(loyaltyProgram1));
 		objectList.add(testPerformer.addModelObject(loyaltyProgram2));
 
-		/* Interpret the selected combinations. */
-		results = testPerformer.interpretRemainingConstraints(objectList);
+		/* Interpret the selected object(s). */
+		results.clear();
+		results.addAll(testPerformer.interpretConstraint(parsedConstraints
+				.iterator().next(), objectList, true));
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(0);
+		result_Boolean = (OclBoolean) results.get(0).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(1);
+		result_Boolean = (OclBoolean) results.get(1).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertFalse(result_Boolean.isTrue());
 	}
@@ -1040,9 +1036,14 @@ public class TestInterpretation {
 	 * A test case testing the interpretation of a {@link Constraint} contained
 	 * invariant04.ocl.
 	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 * @throws OCL2ParsingException
+	 * @throws RuntimeException
 	 */
 	@Test
-	public void testInvariant04() {
+	public void testInvariant04() throws RuntimeException, OCL2ParsingException,
+			ModelAccessException, TypeNotFoundInModelException {
 
 		Membership membership1;
 		Membership membership2;
@@ -1057,8 +1058,9 @@ public class TestInterpretation {
 		CustomerCard customerCard2;
 		CustomerCard customerCard3;
 
-		/* Load OCL file. */
-		testPerformer.loadOCLFile("constraints/invariant04.ocl");
+		/* Load OCL file (contains invariant). */
+		parsedConstraints =
+				testPerformer.loadOCLFile("constraints/invariant04.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		customerCard1 = new CustomerCard();
@@ -1085,20 +1087,22 @@ public class TestInterpretation {
 		membership2.setProgram(loyaltyProgram2);
 		membership2.setCard(customerCard3);
 
-		objectList = new ArrayList<IModelInstanceElement>();
+		objectList.clear();
 		objectList.add(testPerformer.addModelObject(membership1));
 		objectList.add(testPerformer.addModelObject(membership2));
 
-		/* Interpret the selected combinations. */
-		results = testPerformer.interpretRemainingConstraints(objectList);
+		/* Interpret the selected object(s). */
+		results.clear();
+		results.addAll(testPerformer.interpretConstraint(parsedConstraints
+				.iterator().next(), objectList, true));
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(0);
+		result_Boolean = (OclBoolean) results.get(0).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(1);
+		result_Boolean = (OclBoolean) results.get(1).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertFalse(result_Boolean.isTrue());
 	}
@@ -1108,9 +1112,14 @@ public class TestInterpretation {
 	 * A test case testing the interpretation of a {@link Constraint} contained
 	 * invariant05.ocl.
 	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 * @throws OCL2ParsingException
+	 * @throws RuntimeException
 	 */
 	@Test
-	public void testInvariant05() {
+	public void testInvariant05() throws RuntimeException, OCL2ParsingException,
+			ModelAccessException, TypeNotFoundInModelException {
 
 		Membership membership1;
 		Membership membership2;
@@ -1119,8 +1128,9 @@ public class TestInterpretation {
 		CustomerCard customerCard1;
 		CustomerCard customerCard2;
 
-		/* Load OCL file. */
-		testPerformer.loadOCLFile("constraints/invariant05.ocl");
+		/* Load OCL file (contains invariant). */
+		parsedConstraints =
+				testPerformer.loadOCLFile("constraints/invariant05.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		customerCard1 = new CustomerCard();
@@ -1144,7 +1154,7 @@ public class TestInterpretation {
 		membership1.setCard(customerCard1);
 		membership2.setCard(customerCard2);
 
-		objectList = new ArrayList<IModelInstanceElement>();
+		objectList.clear();
 		objectList.add(testPerformer.addModelObject(membership1));
 		objectList.add(testPerformer.addModelObject(membership2));
 
@@ -1155,16 +1165,18 @@ public class TestInterpretation {
 		testPerformer.addModelObject(Color.silver);
 		testPerformer.addModelObject(Color.gold);
 
-		/* Interpret the selected combinations. */
-		results = testPerformer.interpretRemainingConstraints(objectList);
+		/* Interpret the selected object(s). */
+		results.clear();
+		results.addAll(testPerformer.interpretConstraint(parsedConstraints
+				.iterator().next(), objectList, true));
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(0);
+		result_Boolean = (OclBoolean) results.get(0).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(1);
+		result_Boolean = (OclBoolean) results.get(1).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertFalse(result_Boolean.isTrue());
 	}
@@ -1174,9 +1186,15 @@ public class TestInterpretation {
 	 * A test case testing the interpretation of a {@link Constraint} contained
 	 * invariant06.ocl.
 	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 * @throws OCL2ParsingException
+	 * @throws RuntimeException
 	 */
 	@Test
-	public void testInvariant06() {
+	public void testInvariant06() throws RuntimeException, OCL2ParsingException,
+			ModelAccessException, TypeNotFoundInModelException,
+			TypeNotFoundInModelException {
 
 		LoyaltyProgram loyaltyProgram1;
 		LoyaltyProgram loyaltyProgram2;
@@ -1186,8 +1204,9 @@ public class TestInterpretation {
 
 		Service service;
 
-		/* Load OCL file. */
-		testPerformer.loadOCLFile("constraints/invariant06.ocl");
+		/* Load OCL file (contains invariant). */
+		parsedConstraints =
+				testPerformer.loadOCLFile("constraints/invariant06.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		service = new Service();
@@ -1204,20 +1223,22 @@ public class TestInterpretation {
 		loyaltyProgram2.addPartner(programPartner1);
 		loyaltyProgram2.addPartner(programPartner2);
 
-		objectList = new ArrayList<IModelInstanceElement>();
+		objectList.clear();
 		objectList.add(testPerformer.addModelObject(loyaltyProgram1));
 		objectList.add(testPerformer.addModelObject(loyaltyProgram2));
 
-		/* Interpret the selected combinations. */
-		results = testPerformer.interpretRemainingConstraints(objectList);
+		/* Interpret the selected object(s). */
+		results.clear();
+		results.addAll(testPerformer.interpretConstraint(parsedConstraints
+				.iterator().next(), objectList, true));
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(0);
+		result_Boolean = (OclBoolean) results.get(0).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(1);
+		result_Boolean = (OclBoolean) results.get(1).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertFalse(result_Boolean.isTrue());
 	}
@@ -1229,9 +1250,13 @@ public class TestInterpretation {
 	 * </p>
 	 * 
 	 * @throws ModelAccessException
+	 *           , TypeNotFoundInModelException
+	 * @throws OCL2ParsingException
+	 * @throws RuntimeException
 	 */
 	@Test
-	public void testInvariant07() throws ModelAccessException {
+	public void testInvariant07() throws ModelAccessException,
+			TypeNotFoundInModelException, RuntimeException, OCL2ParsingException {
 
 		Customer customer1;
 		Customer customer2;
@@ -1244,14 +1269,9 @@ public class TestInterpretation {
 		CustomerCard customerCard3;
 		CustomerCard customerCard4;
 
-		/*
-		 * Reset the model to undo some preparations which cross-cut with the tested
-		 * constraint.
-		 */
-		testPerformer.reset();
-
-		/* Load OCL file. */
-		testPerformer.loadOCLFile("constraints/invariant07.ocl");
+		/* Load OCL file (contains invariant). */
+		parsedConstraints =
+				testPerformer.loadOCLFile("constraints/invariant07.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		customerCard1 = new CustomerCard();
@@ -1280,20 +1300,22 @@ public class TestInterpretation {
 		customer2.addCard(customerCard3);
 		customer2.addCard(customerCard4);
 
-		objectList = new ArrayList<IModelInstanceElement>();
+		objectList.clear();
 		objectList.add(testPerformer.addModelObject(customer1));
 		objectList.add(testPerformer.addModelObject(customer2));
 
-		/* Interpret the selected combinations. */
-		results = testPerformer.interpretRemainingConstraints(objectList);
+		/* Interpret the selected object(s). */
+		results.clear();
+		results.addAll(testPerformer.interpretConstraint(parsedConstraints
+				.iterator().next(), objectList, true));
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(0);
+		result_Boolean = (OclBoolean) results.get(0).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(1);
+		result_Boolean = (OclBoolean) results.get(1).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertFalse(result_Boolean.isTrue());
 	}
@@ -1303,9 +1325,15 @@ public class TestInterpretation {
 	 * A test case testing the interpretation of a {@link Constraint} contained
 	 * invariant08.ocl.
 	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 *           , TypeNotFoundInModelException
+	 * @throws OCL2ParsingException
+	 * @throws RuntimeException
 	 */
 	@Test
-	public void testInvariant08() {
+	public void testInvariant08() throws RuntimeException, OCL2ParsingException,
+			ModelAccessException, TypeNotFoundInModelException {
 
 		LoyaltyProgram loyaltyProgram1;
 		LoyaltyProgram loyaltyProgram2;
@@ -1321,10 +1349,11 @@ public class TestInterpretation {
 
 		LoyaltyAccount loyaltyAccount;
 
-		/* Load OCL file. */
-		testPerformer.loadOCLFile("constraints/invariant08.ocl");
+		/* Load OCL file (contains invariant). */
+		parsedConstraints =
+				testPerformer.loadOCLFile("constraints/invariant08.ocl");
 
-		/* Select the model objects which shall be interpreted. */
+		/* Create the model objects which shall be interpreted. */
 		loyaltyAccount = new LoyaltyAccount();
 
 		membership1 = new Membership();
@@ -1356,20 +1385,22 @@ public class TestInterpretation {
 		loyaltyProgram1.setMembership(membership1);
 		loyaltyProgram2.setMembership(membership2);
 
-		objectList = new ArrayList<IModelInstanceElement>();
+		objectList.clear();
 		objectList.add(testPerformer.addModelObject(loyaltyProgram1));
 		objectList.add(testPerformer.addModelObject(loyaltyProgram2));
 
-		/* Interpret the selected combinations. */
-		results = testPerformer.interpretRemainingConstraints(objectList);
+		/* Interpret the selected object(s). */
+		results.clear();
+		results.addAll(testPerformer.interpretConstraint(parsedConstraints
+				.iterator().next(), objectList, true));
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(0);
+		result_Boolean = (OclBoolean) results.get(0).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(1);
+		result_Boolean = (OclBoolean) results.get(1).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertFalse(result_Boolean.isTrue());
 	}
@@ -1379,9 +1410,15 @@ public class TestInterpretation {
 	 * A test case testing the interpretation of a {@link Constraint} contained
 	 * invariant09.ocl.
 	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 *           , TypeNotFoundInModelException
+	 * @throws OCL2ParsingException
+	 * @throws RuntimeException
 	 */
 	@Test
-	public void testInvariant09() {
+	public void testInvariant09() throws RuntimeException, OCL2ParsingException,
+			ModelAccessException, TypeNotFoundInModelException {
 
 		ProgramPartner programPartner1;
 		ProgramPartner programPartner2;
@@ -1391,8 +1428,9 @@ public class TestInterpretation {
 
 		Customer customer1;
 
-		/* Load OCL file. */
-		testPerformer.loadOCLFile("constraints/invariant09.ocl");
+		/* Load OCL file (contains invariant). */
+		parsedConstraints =
+				testPerformer.loadOCLFile("constraints/invariant09.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		customer1 = new Customer(25);
@@ -1411,20 +1449,22 @@ public class TestInterpretation {
 		programPartner1.addProgram(loyaltyProgram1);
 		programPartner2.addProgram(loyaltyProgram2);
 
-		objectList = new ArrayList<IModelInstanceElement>();
+		objectList.clear();
 		objectList.add(testPerformer.addModelObject(programPartner1));
 		objectList.add(testPerformer.addModelObject(programPartner2));
 
-		/* Interpret the selected combinations. */
-		results = testPerformer.interpretRemainingConstraints(objectList);
+		/* Interpret the selected object(s). */
+		results.clear();
+		results.addAll(testPerformer.interpretConstraint(parsedConstraints
+				.iterator().next(), objectList, true));
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(0);
+		result_Boolean = (OclBoolean) results.get(0).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(1);
+		result_Boolean = (OclBoolean) results.get(1).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertFalse(result_Boolean.isTrue());
 	}
@@ -1434,9 +1474,15 @@ public class TestInterpretation {
 	 * A test case testing the interpretation of a {@link Constraint} contained
 	 * invariant10.ocl.
 	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 *           , TypeNotFoundInModelException
+	 * @throws OCL2ParsingException
+	 * @throws RuntimeException
 	 */
 	@Test
-	public void testInvariant10() {
+	public void testInvariant10() throws RuntimeException, OCL2ParsingException,
+			ModelAccessException, TypeNotFoundInModelException {
 
 		LoyaltyProgram loyaltyProgram1;
 		LoyaltyProgram loyaltyProgram2;
@@ -1444,8 +1490,9 @@ public class TestInterpretation {
 		ServiceLevel serviceLevel1;
 		ServiceLevel serviceLevel2;
 
-		/* Load OCL file. */
-		testPerformer.loadOCLFile("constraints/invariant10.ocl");
+		/* Load OCL file (contains invariant). */
+		parsedConstraints =
+				testPerformer.loadOCLFile("constraints/invariant10.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		serviceLevel1 = new ServiceLevel();
@@ -1465,20 +1512,22 @@ public class TestInterpretation {
 		testPerformer.addModelObject(serviceLevel1);
 		testPerformer.addModelObject(serviceLevel2);
 
-		objectList = new ArrayList<IModelInstanceElement>();
+		objectList.clear();
 		objectList.add(testPerformer.addModelObject(loyaltyProgram1));
 		objectList.add(testPerformer.addModelObject(loyaltyProgram2));
 
-		/* Interpret the selected combinations. */
-		results = testPerformer.interpretRemainingConstraints(objectList);
+		/* Interpret the selected object(s). */
+		results.clear();
+		results.addAll(testPerformer.interpretConstraint(parsedConstraints
+				.iterator().next(), objectList, true));
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(0);
+		result_Boolean = (OclBoolean) results.get(0).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(1);
+		result_Boolean = (OclBoolean) results.get(1).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertFalse(result_Boolean.isTrue());
 	}
@@ -1488,9 +1537,15 @@ public class TestInterpretation {
 	 * A test case testing the interpretation of a {@link Constraint} contained
 	 * invariant11.ocl.
 	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 *           , TypeNotFoundInModelException
+	 * @throws OCL2ParsingException
+	 * @throws RuntimeException
 	 */
 	@Test
-	public void testInvariant11() {
+	public void testInvariant11() throws RuntimeException, OCL2ParsingException,
+			ModelAccessException, TypeNotFoundInModelException {
 
 		ProgramPartner programPartner1;
 		ProgramPartner programPartner2;
@@ -1501,8 +1556,9 @@ public class TestInterpretation {
 		Transaction transaction1;
 		Transaction transaction2;
 
-		/* Load OCL file. */
-		testPerformer.loadOCLFile("constraints/invariant11.ocl");
+		/* Load OCL file (contains invariant). */
+		parsedConstraints =
+				testPerformer.loadOCLFile("constraints/invariant11.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		transaction1 = new Transaction();
@@ -1523,20 +1579,22 @@ public class TestInterpretation {
 		programPartner1.addDeliveredService(service1);
 		programPartner2.addDeliveredService(service2);
 
-		objectList = new ArrayList<IModelInstanceElement>();
+		objectList.clear();
 		objectList.add(testPerformer.addModelObject(programPartner1));
 		objectList.add(testPerformer.addModelObject(programPartner2));
 
-		/* Interpret the selected combinations. */
-		results = testPerformer.interpretRemainingConstraints(objectList);
+		/* Interpret the selected object(s). */
+		results.clear();
+		results.addAll(testPerformer.interpretConstraint(parsedConstraints
+				.iterator().next(), objectList, true));
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(0);
+		result_Boolean = (OclBoolean) results.get(0).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(1);
+		result_Boolean = (OclBoolean) results.get(1).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertFalse(result_Boolean.isTrue());
 	}
@@ -1546,9 +1604,15 @@ public class TestInterpretation {
 	 * A test case testing the interpretation of a {@link Constraint} contained
 	 * invariant12.ocl.
 	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 *           , TypeNotFoundInModelException
+	 * @throws OCL2ParsingException
+	 * @throws RuntimeException
 	 */
 	@Test
-	public void testInvariant12() {
+	public void testInvariant12() throws RuntimeException, OCL2ParsingException,
+			ModelAccessException, TypeNotFoundInModelException {
 
 		ProgramPartner programPartner1;
 		ProgramPartner programPartner2;
@@ -1559,10 +1623,11 @@ public class TestInterpretation {
 		Transaction transaction1;
 		Transaction transaction2;
 
-		/* Load OCL file. */
-		testPerformer.loadOCLFile("constraints/invariant12.ocl");
+		/* Load OCL file (contains invariant). */
+		parsedConstraints =
+				testPerformer.loadOCLFile("constraints/invariant12.ocl");
 
-		/* Select the model objects which shall be interpreted. */
+		/* Create the model objects which shall be interpreted. */
 		transaction1 = new Burning();
 		transaction2 = new Earning();
 
@@ -1581,20 +1646,22 @@ public class TestInterpretation {
 		programPartner1.addDeliveredService(service1);
 		programPartner2.addDeliveredService(service2);
 
-		objectList = new ArrayList<IModelInstanceElement>();
+		objectList.clear();
 		objectList.add(testPerformer.addModelObject(programPartner1));
 		objectList.add(testPerformer.addModelObject(programPartner2));
 
-		/* Interpret the selected combinations. */
-		results = testPerformer.interpretRemainingConstraints(objectList);
+		/* Interpret the selected object(s). */
+		results.clear();
+		results.addAll(testPerformer.interpretConstraint(parsedConstraints
+				.iterator().next(), objectList, true));
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(0);
+		result_Boolean = (OclBoolean) results.get(0).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(1);
+		result_Boolean = (OclBoolean) results.get(1).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertFalse(result_Boolean.isTrue());
 	}
@@ -1604,15 +1671,22 @@ public class TestInterpretation {
 	 * A test case testing the interpretation of a {@link Constraint} contained
 	 * invariant13.ocl.
 	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 *           , TypeNotFoundInModelException
+	 * @throws OCL2ParsingException
+	 * @throws RuntimeException
 	 */
 	@Test
-	public void testInvariant13() {
+	public void testInvariant13() throws RuntimeException, OCL2ParsingException,
+			ModelAccessException, TypeNotFoundInModelException {
 
 		CustomerCard customerCard1;
 		CustomerCard customerCard2;
 
-		/* Load OCL file. */
-		testPerformer.loadOCLFile("constraints/invariant13.ocl");
+		/* Load OCL file (contains invariant). */
+		parsedConstraints =
+				testPerformer.loadOCLFile("constraints/invariant13.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		customerCard1 = new CustomerCard();
@@ -1627,20 +1701,22 @@ public class TestInterpretation {
 		customerCard1.setValid(true);
 		customerCard2.setValid(true);
 
-		objectList = new ArrayList<IModelInstanceElement>();
+		objectList.clear();
 		objectList.add(testPerformer.addModelObject(customerCard1));
 		objectList.add(testPerformer.addModelObject(customerCard2));
 
-		/* Interpret the selected combinations. */
-		results = testPerformer.interpretRemainingConstraints(objectList);
+		/* Interpret the selected object(s). */
+		results.clear();
+		results.addAll(testPerformer.interpretConstraint(parsedConstraints
+				.iterator().next(), objectList, true));
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(0);
+		result_Boolean = (OclBoolean) results.get(0).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(1);
+		result_Boolean = (OclBoolean) results.get(1).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertFalse(result_Boolean.isTrue());
 	}
@@ -1650,9 +1726,15 @@ public class TestInterpretation {
 	 * A test case testing the interpretation of a {@link Constraint} contained
 	 * invariant14.ocl.
 	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 *           , TypeNotFoundInModelException
+	 * @throws OCL2ParsingException
+	 * @throws RuntimeException
 	 */
 	@Test
-	public void testInvariant14() {
+	public void testInvariant14() throws RuntimeException, OCL2ParsingException,
+			ModelAccessException, TypeNotFoundInModelException {
 
 		LoyaltyAccount loyaltyAccount1;
 		LoyaltyAccount loyaltyAccount2;
@@ -1670,10 +1752,11 @@ public class TestInterpretation {
 		Customer customer1;
 		Customer customer2;
 
-		/* Load OCL file. */
-		testPerformer.loadOCLFile("constraints/invariant14.ocl");
+		/* Load OCL file (contains invariant). */
+		parsedConstraints =
+				testPerformer.loadOCLFile("constraints/invariant14.ocl");
 
-		/* Select the model objects which shall be interpreted. */
+		/* Create the model objects which shall be interpreted. */
 		customer1 = new Customer(25);
 		customer2 = new Customer(25);
 
@@ -1705,20 +1788,22 @@ public class TestInterpretation {
 		loyaltyAccount2.addTransaction(transaction3);
 		loyaltyAccount2.addTransaction(transaction4);
 
-		objectList = new ArrayList<IModelInstanceElement>();
+		objectList.clear();
 		objectList.add(testPerformer.addModelObject(loyaltyAccount1));
 		objectList.add(testPerformer.addModelObject(loyaltyAccount2));
 
-		/* Interpret the selected combinations. */
-		results = testPerformer.interpretRemainingConstraints(objectList);
+		/* Interpret the selected object(s). */
+		results.clear();
+		results.addAll(testPerformer.interpretConstraint(parsedConstraints
+				.iterator().next(), objectList, true));
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(0);
+		result_Boolean = (OclBoolean) results.get(0).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(1);
+		result_Boolean = (OclBoolean) results.get(1).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertFalse(result_Boolean.isTrue());
 	}
@@ -1728,17 +1813,24 @@ public class TestInterpretation {
 	 * A test case testing the interpretation of a {@link Constraint} contained
 	 * invariant15.ocl.
 	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 *           , TypeNotFoundInModelException
+	 * @throws OCL2ParsingException
+	 * @throws RuntimeException
 	 */
 	@Test
-	public void testInvariant15() {
+	public void testInvariant15() throws RuntimeException, OCL2ParsingException,
+			ModelAccessException, TypeNotFoundInModelException {
 
 		LoyaltyAccount loyaltyAccount1;
 		LoyaltyAccount loyaltyAccount2;
 
 		Transaction transaction1;
 
-		/* Load OCL file. */
-		testPerformer.loadOCLFile("constraints/invariant15.ocl");
+		/* Load OCL file (contains invariant). */
+		parsedConstraints =
+				testPerformer.loadOCLFile("constraints/invariant15.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		transaction1 = new Transaction();
@@ -1753,20 +1845,22 @@ public class TestInterpretation {
 
 		loyaltyAccount1.addTransaction(transaction1);
 
-		objectList = new ArrayList<IModelInstanceElement>();
+		objectList.clear();
 		objectList.add(testPerformer.addModelObject(loyaltyAccount1));
 		objectList.add(testPerformer.addModelObject(loyaltyAccount2));
 
-		/* Interpret the selected combinations. */
-		results = testPerformer.interpretRemainingConstraints(objectList);
+		/* Interpret the selected object(s). */
+		results.clear();
+		results.addAll(testPerformer.interpretConstraint(parsedConstraints
+				.iterator().next(), objectList, true));
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(0);
+		result_Boolean = (OclBoolean) results.get(0).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(1);
+		result_Boolean = (OclBoolean) results.get(1).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertFalse(result_Boolean.isTrue());
 	}
@@ -1776,25 +1870,34 @@ public class TestInterpretation {
 	 * A test case testing the interpretation of a {@link Constraint} contained
 	 * invariant16.ocl.
 	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 *           , TypeNotFoundInModelException
+	 * @throws OCL2ParsingException
+	 * @throws RuntimeException
 	 */
 	@Test
-	public void testInvariant16() {
+	public void testInvariant16() throws RuntimeException, OCL2ParsingException,
+			ModelAccessException, TypeNotFoundInModelException {
 
 		Service service;
 
-		/* Load OCL file. */
-		testPerformer.loadOCLFile("constraints/invariant16.ocl");
+		/* Load OCL file (contains invariant). */
+		parsedConstraints =
+				testPerformer.loadOCLFile("constraints/invariant16.ocl");
 
-		/* Select the model objects which shall be interpreted. */
+		/* Create the model objects which shall be interpreted. */
 		service = new Service();
+		objectList.clear();
+		objectList.add(testPerformer.addModelObject(service));
 
-		modelObject = testPerformer.addModelObject(service);
-
-		/* Interpret the selected combinations. */
-		results = testPerformer.interpretRemainingConstraints(modelObject);
+		/* Interpret the selected object(s). */
+		results.clear();
+		results.addAll(testPerformer.interpretConstraint(parsedConstraints
+				.iterator().next(), objectList, true));
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(0);
+		result_Boolean = (OclBoolean) results.get(0).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
@@ -1804,25 +1907,34 @@ public class TestInterpretation {
 	 * A test case testing the interpretation of a {@link Constraint} contained
 	 * invariant17.ocl.
 	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 *           , TypeNotFoundInModelException
+	 * @throws OCL2ParsingException
+	 * @throws RuntimeException
 	 */
 	@Test
-	public void testInvariant17() {
+	public void testInvariant17() throws RuntimeException, OCL2ParsingException,
+			ModelAccessException, TypeNotFoundInModelException {
 
 		Service service;
 
-		/* Load OCL file. */
-		testPerformer.loadOCLFile("constraints/invariant17.ocl");
+		/* Load OCL file (contains invariant). */
+		parsedConstraints =
+				testPerformer.loadOCLFile("constraints/invariant17.ocl");
 
-		/* Select the model objects which shall be interpreted. */
+		/* Create the model objects which shall be interpreted. */
 		service = new Service();
+		objectList.clear();
+		objectList.add(testPerformer.addModelObject(service));
 
-		modelObject = testPerformer.addModelObject(service);
-
-		/* Interpret the selected combinations. */
-		results = testPerformer.interpretRemainingConstraints(modelObject);
+		/* Interpret the selected object(s). */
+		results.clear();
+		results.addAll(testPerformer.interpretConstraint(parsedConstraints
+				.iterator().next(), objectList, true));
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(0);
+		result_Boolean = (OclBoolean) results.get(0).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
@@ -1832,15 +1944,22 @@ public class TestInterpretation {
 	 * A test case testing the interpretation of a {@link Constraint} contained
 	 * invariant18.ocl.
 	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 *           , TypeNotFoundInModelException
+	 * @throws OCL2ParsingException
+	 * @throws RuntimeException
 	 */
 	@Test
-	public void testInvariant18() {
+	public void testInvariant18() throws RuntimeException, OCL2ParsingException,
+			ModelAccessException, TypeNotFoundInModelException {
 
 		Transaction transaction;
 		Burning burning;
 
-		/* Load OCL file. */
-		testPerformer.loadOCLFile("constraints/invariant18.ocl");
+		/* Load OCL file (contains invariant). */
+		parsedConstraints =
+				testPerformer.loadOCLFile("constraints/invariant18.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		burning = new Burning();
@@ -1849,13 +1968,16 @@ public class TestInterpretation {
 		transaction = new Transaction();
 
 		testPerformer.addModelObject(transaction);
-		modelObject = testPerformer.addModelObject(burning);
+		objectList.clear();
+		objectList.add(testPerformer.addModelObject(transaction));
 
-		/* Interpret the selected combinations. */
-		results = testPerformer.interpretRemainingConstraints(modelObject);
+		/* Interpret the selected object(s). */
+		results.clear();
+		results.addAll(testPerformer.interpretConstraint(parsedConstraints
+				.iterator().next(), objectList, true));
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(0);
+		result_Boolean = (OclBoolean) results.get(0).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
@@ -1865,68 +1987,60 @@ public class TestInterpretation {
 	 * A test case testing the interpretation of a {@link Constraint} contained
 	 * post01.ocl.
 	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 *           , TypeNotFoundInModelException
+	 * @throws OCL2ParsingException
+	 * @throws RuntimeException
+	 * @throws OperationNotFoundException
+	 * @throws OperationAccessException
 	 */
 	@Test
-	public void testPost01() {
+	public void testPost01() throws RuntimeException, OCL2ParsingException,
+			ModelAccessException, TypeNotFoundInModelException,
+			OperationNotFoundException, OperationAccessException {
 
 		LoyaltyProgram loyaltyProgram;
-		OclAny loyaltyProgramInOcl;
-
 		Customer customer;
-		OclAny customerInOcl;
 
-		/* Load the OCL file. */
-		testPerformer.loadOCLFile("constraints/post01.ocl");
+		/* Load OCL file (contains postcondition). */
+		parsedConstraints = testPerformer.loadOCLFile("constraints/post01.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		loyaltyProgram = new LoyaltyProgram();
 
-		modelObject = testPerformer.addModelObject(loyaltyProgram);
-		loyaltyProgramInOcl =
-				JavaStandardlibraryPlugin.getStandardLibraryFactory().createOclAny(
-						modelObject);
+		objectList.clear();
+		objectList.add(testPerformer.addModelObject(loyaltyProgram));
+
+		/* Find the operation. */
+		operation = testPerformer.findOperation(objectList.get(0), "enroll");
+
+		/* Set the parameters of the operation. */
+		parameters.clear();
 
 		customer = new Customer(25);
+		parameters.add(testPerformer.addModelObject(customer));
 
-		IModelInstanceElement imiCustomer = testPerformer.addModelObject(customer);
-		customerInOcl =
-				JavaStandardlibraryPlugin.getStandardLibraryFactory().createOclAny(
-						imiCustomer);
+		/* Prepare the postcondtion. */
+		testPerformer.preparePostCondition(parsedConstraints.iterator().next(),
+				objectList, operation, parameters);
 
-		/*
-		 * Add the values needed as parameters of the operation call constrained by
-		 * this postcondition to the environment.
-		 */
-		try {
-			testPerformer.setEnvironmentVariable("c", customer);
-		} catch (TypeNotFoundInModelException e1) {
-			fail(e1.getMessage());
-		}
+		/* Invoke the operation. */
+		operationInvocationResult =
+				((IModelInstanceObject) objectList.get(0)).invokeOperation(operation,
+						parameters);
 
-		/* Prepare the selected model objects. */
-		testPerformer.prepareRemainingConstraints(modelObject, false);
-
-		/* Try to invoke the tested operation. */
-		try {
-			Operation operation = testPerformer.findOperation(modelObject, "enroll");
-			loyaltyProgramInOcl.invokeOperation(operation, customerInOcl);
-		}
-
-		catch (OperationNotFoundException e) {
-			fail("The tested operation could not be invoked. Test failed.");
-		}
-
-		/* Interpret the selected model objects. */
-		results = testPerformer.interpretRemainingConstraints(modelObject);
+		/* Interpret the selected object(s). */
+		results.clear();
+		results.addAll(testPerformer.interpretPostCondition(parsedConstraints
+				.iterator().next(), objectList, operation, parameters,
+				operationInvocationResult, true));
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(0);
+		result_Boolean = (OclBoolean) results.get(0).getResult();
 		assertFalse(result_Boolean.oclIsInvalid().isTrue());
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
-
-		/* Remove the added values from the environment. */
-		testPerformer.resetEnvironmentVariable("c");
 	}
 
 	/**
@@ -1934,24 +2048,26 @@ public class TestInterpretation {
 	 * A test case testing the interpretation of a {@link Constraint} contained
 	 * post02.ocl.
 	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 *           , TypeNotFoundInModelException
+	 * @throws OCL2ParsingException
+	 * @throws RuntimeException
+	 * @throws OperationNotFoundException
+	 * @throws OperationAccessException
 	 */
 	@Test
-	public void testPost02() {
+	public void testPost02() throws RuntimeException, OCL2ParsingException,
+			ModelAccessException, TypeNotFoundInModelException,
+			OperationNotFoundException, OperationAccessException {
 
 		LoyaltyProgram loyaltyProgram;
-		OclAny loyaltyProgramInOcl;
-
 		ProgramPartner programPartner;
-		OclAny programPartnerInOcl;
-
 		ServiceLevel serviceLevel;
-		OclAny serviceLevelInOcl;
-
 		Service service;
-		OclAny serviceInOcl;
 
-		/* Load the OCL file. */
-		testPerformer.loadOCLFile("constraints/post02.ocl");
+		/* Load OCL file (contains postcondition). */
+		parsedConstraints = testPerformer.loadOCLFile("constraints/post02.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		service = new Service();
@@ -1964,71 +2080,39 @@ public class TestInterpretation {
 		loyaltyProgram.addPartner(programPartner);
 		loyaltyProgram.addLevel(serviceLevel);
 
-		modelObject = testPerformer.addModelObject(loyaltyProgram);
-		IModelInstanceElement imiProgramPartner =
-				testPerformer.addModelObject(programPartner);
-		IModelInstanceElement imiServiceLevel =
-				testPerformer.addModelObject(serviceLevel);
-		IModelInstanceElement imiService = testPerformer.addModelObject(service);
+		objectList.clear();
+		objectList.add(testPerformer.addModelObject(loyaltyProgram));
 
-		loyaltyProgramInOcl =
-				JavaStandardlibraryPlugin.getStandardLibraryFactory().createOclAny(
-						modelObject);
+		/* Find the operation. */
+		operation = testPerformer.findOperation(objectList.get(0), "addService");
 
-		programPartnerInOcl =
-				JavaStandardlibraryPlugin.getStandardLibraryFactory().createOclAny(
-						imiProgramPartner);
+		/* Set the parameters of the operation. */
+		parameters.clear();
 
-		serviceLevelInOcl =
-				JavaStandardlibraryPlugin.getStandardLibraryFactory().createOclAny(
-						imiServiceLevel);
+		parameters.add(testPerformer.addModelObject(programPartner));
+		parameters.add(testPerformer.addModelObject(serviceLevel));
+		parameters.add(testPerformer.addModelObject(service));
 
-		serviceInOcl =
-				JavaStandardlibraryPlugin.getStandardLibraryFactory().createOclAny(
-						imiService);
+		/* Prepare the postcondtion. */
+		testPerformer.preparePostCondition(parsedConstraints.iterator().next(),
+				objectList, operation, parameters);
 
-		/*
-		 * Add the values needed as parameters of the operation call constrained by
-		 * this postcondition to the environment.
-		 */
-		testPerformer.setEnvironmentVariable("aPartner", programPartnerInOcl);
-		testPerformer.setEnvironmentVariable("aLevel", serviceLevelInOcl);
-		testPerformer.setEnvironmentVariable("aService", serviceInOcl);
+		/* Invoke the operation. */
+		operationInvocationResult =
+				((IModelInstanceObject) objectList.get(0)).invokeOperation(operation,
+						parameters);
 
-		/* Prepare the selected model objects. */
-		testPerformer.prepareRemainingConstraints(modelObject, false);
-
-		/* Try to invoke the tested operation. */
-		try {
-			OclAny parameters[];
-
-			parameters = new OclAny[3];
-
-			parameters[0] = programPartnerInOcl;
-			parameters[1] = serviceLevelInOcl;
-			parameters[2] = serviceInOcl;
-
-			Operation operation =
-					testPerformer.findOperation(modelObject, "addService");
-			loyaltyProgramInOcl.invokeOperation(operation, parameters);
-		}
-
-		catch (OperationNotFoundException e) {
-			fail("The tested operation could not be invoked. Test failed.");
-		}
-
-		/* Interpret the selected model objects. */
-		results = testPerformer.interpretRemainingConstraints(modelObject);
+		/* Interpret the selected object(s). */
+		results.clear();
+		results.addAll(testPerformer.interpretPostCondition(parsedConstraints
+				.iterator().next(), objectList, operation, parameters,
+				operationInvocationResult, true));
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(0);
+		result_Boolean = (OclBoolean) results.get(0).getResult();
+		assertFalse(result_Boolean.oclIsInvalid().isTrue());
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
-
-		/* Remove the added values from the environment. */
-		testPerformer.resetEnvironmentVariable("aPartner");
-		testPerformer.resetEnvironmentVariable("aLevel");
-		testPerformer.resetEnvironmentVariable("aService");
 	}
 
 	/**
@@ -2036,24 +2120,26 @@ public class TestInterpretation {
 	 * A test case testing the interpretation of a {@link Constraint} contained
 	 * post03.ocl.
 	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 *           , TypeNotFoundInModelException
+	 * @throws OCL2ParsingException
+	 * @throws RuntimeException
+	 * @throws OperationNotFoundException
+	 * @throws OperationAccessException
 	 */
 	@Test
-	public void testPost03() {
+	public void testPost03() throws RuntimeException, OCL2ParsingException,
+			ModelAccessException, TypeNotFoundInModelException,
+			OperationNotFoundException, OperationAccessException {
 
 		LoyaltyProgram loyaltyProgram;
-		OclAny loyaltyProgramInOcl;
-
 		ProgramPartner programPartner;
-		OclAny programPartnerInOcl;
-
 		ServiceLevel serviceLevel;
-		OclAny serviceLevelInOcl;
-
 		Service service;
-		OclAny serviceInOcl;
 
-		/* Load the OCL file. */
-		testPerformer.loadOCLFile("constraints/post03.ocl");
+		/* Load OCL file (contains postcondition). */
+		parsedConstraints = testPerformer.loadOCLFile("constraints/post03.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		service = new Service();
@@ -2066,70 +2152,39 @@ public class TestInterpretation {
 		loyaltyProgram.addPartner(programPartner);
 		loyaltyProgram.addLevel(serviceLevel);
 
-		modelObject = testPerformer.addModelObject(loyaltyProgram);
-		IModelInstanceElement imiProgramPartner =
-				testPerformer.addModelObject(programPartner);
-		IModelInstanceElement imiServiceLevel =
-				testPerformer.addModelObject(serviceLevel);
-		IModelInstanceElement imiService = testPerformer.addModelObject(service);
+		objectList.clear();
+		objectList.add(testPerformer.addModelObject(loyaltyProgram));
 
-		loyaltyProgramInOcl =
-				JavaStandardlibraryPlugin.getStandardLibraryFactory().createOclAny(
-						modelObject);
+		/* Find the operation. */
+		operation = testPerformer.findOperation(objectList.get(0), "addService");
 
-		programPartnerInOcl =
-				JavaStandardlibraryPlugin.getStandardLibraryFactory().createOclAny(
-						imiProgramPartner);
+		/* Set the parameters of the operation. */
+		parameters.clear();
 
-		serviceLevelInOcl =
-				JavaStandardlibraryPlugin.getStandardLibraryFactory().createOclAny(
-						imiServiceLevel);
+		parameters.add(testPerformer.addModelObject(programPartner));
+		parameters.add(testPerformer.addModelObject(serviceLevel));
+		parameters.add(testPerformer.addModelObject(service));
 
-		serviceInOcl =
-				JavaStandardlibraryPlugin.getStandardLibraryFactory().createOclAny(
-						imiService);
-		/*
-		 * Add the values needed as parameters of the operation call constrained by
-		 * this postcondition to the environment.
-		 */
-		testPerformer.setEnvironmentVariable("aPartner", programPartnerInOcl);
-		testPerformer.setEnvironmentVariable("aLevel", serviceLevelInOcl);
-		testPerformer.setEnvironmentVariable("aService", serviceInOcl);
+		/* Prepare the postcondtion. */
+		testPerformer.preparePostCondition(parsedConstraints.iterator().next(),
+				objectList, operation, parameters);
 
-		/* Prepare the selected model objects. */
-		testPerformer.prepareRemainingConstraints(modelObject, false);
+		/* Invoke the operation. */
+		operationInvocationResult =
+				((IModelInstanceObject) objectList.get(0)).invokeOperation(operation,
+						parameters);
 
-		/* Try to invoke the tested operation. */
-		try {
-			OclAny parameters[];
-
-			parameters = new OclAny[3];
-
-			parameters[0] = programPartnerInOcl;
-			parameters[1] = serviceLevelInOcl;
-			parameters[2] = serviceInOcl;
-
-			Operation operation =
-					testPerformer.findOperation(modelObject, "addService");
-			loyaltyProgramInOcl.invokeOperation(operation, parameters);
-		}
-
-		catch (OperationNotFoundException e) {
-			fail("The tested operation could not be invoked. Test failed.");
-		}
-
-		/* Interpret the selected model objects. */
-		results = testPerformer.interpretRemainingConstraints(modelObject);
+		/* Interpret the selected object(s). */
+		results.clear();
+		results.addAll(testPerformer.interpretPostCondition(parsedConstraints
+				.iterator().next(), objectList, operation, parameters,
+				operationInvocationResult, true));
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(0);
+		result_Boolean = (OclBoolean) results.get(0).getResult();
+		assertFalse(result_Boolean.oclIsInvalid().isTrue());
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
-
-		/* Remove the added values from the environment. */
-		testPerformer.resetEnvironmentVariable("aPartner");
-		testPerformer.resetEnvironmentVariable("aLevel");
-		testPerformer.resetEnvironmentVariable("aService");
 	}
 
 	/**
@@ -2137,24 +2192,26 @@ public class TestInterpretation {
 	 * A test case testing the interpretation of a {@link Constraint} contained
 	 * post04.ocl.
 	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 *           , TypeNotFoundInModelException
+	 * @throws OCL2ParsingException
+	 * @throws RuntimeException
+	 * @throws OperationNotFoundException
+	 * @throws OperationAccessException
 	 */
 	@Test
-	public void testPost04() {
+	public void testPost04() throws RuntimeException, OCL2ParsingException,
+			ModelAccessException, TypeNotFoundInModelException,
+			OperationNotFoundException, OperationAccessException {
 
 		LoyaltyProgram loyaltyProgram;
-		OclAny loyaltyProgramInOcl;
-
 		ProgramPartner programPartner;
-		OclAny programPartnerInOcl;
-
 		ServiceLevel serviceLevel;
-		OclAny serviceLevelInOcl;
-
 		Service service;
-		OclAny serviceInOcl;
 
-		/* Load the OCL file. */
-		testPerformer.loadOCLFile("constraints/post04.ocl");
+		/* Load OCL file (contains postcondition). */
+		parsedConstraints = testPerformer.loadOCLFile("constraints/post04.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		service = new Service();
@@ -2167,71 +2224,39 @@ public class TestInterpretation {
 		loyaltyProgram.addPartner(programPartner);
 		loyaltyProgram.addLevel(serviceLevel);
 
-		modelObject = testPerformer.addModelObject(loyaltyProgram);
-		IModelInstanceElement imiProgramPartner =
-				testPerformer.addModelObject(programPartner);
-		IModelInstanceElement imiServiceLevel =
-				testPerformer.addModelObject(serviceLevel);
-		IModelInstanceElement imiService = testPerformer.addModelObject(service);
+		objectList.clear();
+		objectList.add(testPerformer.addModelObject(loyaltyProgram));
 
-		loyaltyProgramInOcl =
-				JavaStandardlibraryPlugin.getStandardLibraryFactory().createOclAny(
-						modelObject);
+		/* Find the operation. */
+		operation = testPerformer.findOperation(objectList.get(0), "addService");
 
-		programPartnerInOcl =
-				JavaStandardlibraryPlugin.getStandardLibraryFactory().createOclAny(
-						imiProgramPartner);
+		/* Set the parameters of the operation. */
+		parameters.clear();
 
-		serviceLevelInOcl =
-				JavaStandardlibraryPlugin.getStandardLibraryFactory().createOclAny(
-						imiServiceLevel);
+		parameters.add(testPerformer.addModelObject(programPartner));
+		parameters.add(testPerformer.addModelObject(serviceLevel));
+		parameters.add(testPerformer.addModelObject(service));
 
-		serviceInOcl =
-				JavaStandardlibraryPlugin.getStandardLibraryFactory().createOclAny(
-						imiService);
+		/* Prepare the postcondtion. */
+		testPerformer.preparePostCondition(parsedConstraints.iterator().next(),
+				objectList, operation, parameters);
 
-		/*
-		 * Add the values needed as parameters of the operation call constrained by
-		 * this postcondition to the environment.
-		 */
-		testPerformer.setEnvironmentVariable("aPartner", programPartnerInOcl);
-		testPerformer.setEnvironmentVariable("aLevel", serviceLevelInOcl);
-		testPerformer.setEnvironmentVariable("aService", serviceInOcl);
+		/* Invoke the operation. */
+		operationInvocationResult =
+				((IModelInstanceObject) objectList.get(0)).invokeOperation(operation,
+						parameters);
 
-		/* Prepare the selected model objects. */
-		testPerformer.prepareRemainingConstraints(modelObject, false);
-
-		/* Try to invoke the tested operation. */
-		try {
-			OclAny parameters[];
-
-			parameters = new OclAny[3];
-
-			parameters[0] = programPartnerInOcl;
-			parameters[1] = serviceLevelInOcl;
-			parameters[2] = serviceInOcl;
-
-			Operation operation =
-					testPerformer.findOperation(modelObject, "addService");
-			loyaltyProgramInOcl.invokeOperation(operation, parameters);
-		}
-
-		catch (OperationNotFoundException e) {
-			fail("The tested operation could not be invoked. Test failed.");
-		}
-
-		/* Interpret the selected model objects. */
-		results = testPerformer.interpretRemainingConstraints(modelObject);
+		/* Interpret the selected object(s). */
+		results.clear();
+		results.addAll(testPerformer.interpretPostCondition(parsedConstraints
+				.iterator().next(), objectList, operation, parameters,
+				operationInvocationResult, true));
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(0);
+		result_Boolean = (OclBoolean) results.get(0).getResult();
+		assertFalse(result_Boolean.oclIsInvalid().isTrue());
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
-
-		/* Remove the added values from the environment. */
-		testPerformer.resetEnvironmentVariable("aPartner");
-		testPerformer.resetEnvironmentVariable("aLevel");
-		testPerformer.resetEnvironmentVariable("aService");
 	}
 
 	/**
@@ -2239,56 +2264,57 @@ public class TestInterpretation {
 	 * A test case testing the interpretation of a {@link Constraint} contained
 	 * post05.ocl.
 	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 *           , TypeNotFoundInModelException
+	 * @throws OCL2ParsingException
+	 * @throws RuntimeException
+	 * @throws OperationNotFoundException
+	 * @throws OperationAccessException
 	 */
 	@Test
-	public void testPost05a() {
+	public void testPost05a() throws RuntimeException, OCL2ParsingException,
+			ModelAccessException, TypeNotFoundInModelException,
+			OperationNotFoundException, OperationAccessException {
 
 		LoyaltyAccount loyaltyAccount;
-		OclAny loyaltyAccountInOcl;
 
-		/* Load the OCL file. */
-		testPerformer.loadOCLFile("constraints/post05.ocl");
+		/* Load OCL file (contains postcondition). */
+		parsedConstraints = testPerformer.loadOCLFile("constraints/post05.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		loyaltyAccount = new LoyaltyAccount();
 		loyaltyAccount.setPoints(0);
 
-		modelObject = testPerformer.addModelObject(loyaltyAccount);
+		objectList.clear();
+		objectList.add(testPerformer.addModelObject(loyaltyAccount));
 
-		loyaltyAccountInOcl =
-				JavaStandardlibraryPlugin.getStandardLibraryFactory().createOclAny(
-						modelObject);
+		/* Find the operation. */
+		operation = testPerformer.findOperation(objectList.get(0), "isEmpty");
 
-		/*
-		 * Try to invoke the tested operation and add the result variable to the
-		 * environment.
-		 */
-		try {
-			OclAny parameters[];
-			OclAny opResult;
+		/* Set the parameters of the operation. */
+		parameters.clear();
 
-			parameters = new OclAny[0];
+		/* Prepare the postcondtion. */
+		testPerformer.preparePostCondition(parsedConstraints.iterator().next(),
+				objectList, operation, parameters);
 
-			Operation operation = testPerformer.findOperation(modelObject, "isEmpty");
-			opResult = loyaltyAccountInOcl.invokeOperation(operation, parameters);
+		/* Invoke the operation. */
+		operationInvocationResult =
+				((IModelInstanceObject) objectList.get(0)).invokeOperation(operation,
+						parameters);
 
-			testPerformer.setEnvironmentVariable("result", opResult);
-		}
-
-		catch (OperationNotFoundException e) {
-			fail("The tested operation could not be invoked. Test failed.");
-		}
-
-		/* Interpret the selected model objects. */
-		results = testPerformer.interpretRemainingConstraints(modelObject);
+		/* Interpret the selected object(s). */
+		results.clear();
+		results.addAll(testPerformer.interpretPostCondition(parsedConstraints
+				.iterator().next(), objectList, operation, parameters,
+				operationInvocationResult, true));
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(0);
+		result_Boolean = (OclBoolean) results.get(0).getResult();
+		assertFalse(result_Boolean.oclIsInvalid().isTrue());
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
-
-		/* Remove the added values from the environment. */
-		testPerformer.resetEnvironmentVariable("result");
 	}
 
 	/**
@@ -2296,56 +2322,57 @@ public class TestInterpretation {
 	 * A test case testing the interpretation of a {@link Constraint} contained
 	 * post05.ocl.
 	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 *           , TypeNotFoundInModelException
+	 * @throws OCL2ParsingException
+	 * @throws RuntimeException
+	 * @throws OperationNotFoundException
+	 * @throws OperationAccessException
 	 */
 	@Test
-	public void testPost05b() {
+	public void testPost05b() throws RuntimeException, OCL2ParsingException,
+			ModelAccessException, TypeNotFoundInModelException,
+			OperationNotFoundException, OperationAccessException {
 
 		LoyaltyAccount loyaltyAccount;
-		OclAny loyaltyAccountInOcl;
 
-		/* Load the OCL file. */
-		testPerformer.loadOCLFile("constraints/post05.ocl");
+		/* Load OCL file (contains postcondition). */
+		parsedConstraints = testPerformer.loadOCLFile("constraints/post05.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		loyaltyAccount = new LoyaltyAccount();
 		loyaltyAccount.setPoints(100);
 
-		modelObject = testPerformer.addModelObject(loyaltyAccount);
+		objectList.clear();
+		objectList.add(testPerformer.addModelObject(loyaltyAccount));
 
-		loyaltyAccountInOcl =
-				JavaStandardlibraryPlugin.getStandardLibraryFactory().createOclAny(
-						modelObject);
+		/* Find the operation. */
+		operation = testPerformer.findOperation(objectList.get(0), "isEmpty");
 
-		/*
-		 * Try to invoke the tested operation and add the result variable to the
-		 * environment.
-		 */
-		try {
-			OclAny parameters[];
-			OclAny opResult;
+		/* Set the parameters of the operation. */
+		parameters.clear();
 
-			parameters = new OclAny[0];
+		/* Prepare the postcondtion. */
+		testPerformer.preparePostCondition(parsedConstraints.iterator().next(),
+				objectList, operation, parameters);
 
-			Operation operation = testPerformer.findOperation(modelObject, "isEmpty");
-			opResult = loyaltyAccountInOcl.invokeOperation(operation, parameters);
+		/* Invoke the operation. */
+		operationInvocationResult =
+				((IModelInstanceObject) objectList.get(0)).invokeOperation(operation,
+						parameters);
 
-			testPerformer.setEnvironmentVariable("result", opResult);
-		}
-
-		catch (OperationNotFoundException e) {
-			fail("The tested operation could not be invoked. Test failed.");
-		}
-
-		/* Interpret the selected model objects. */
-		results = testPerformer.interpretRemainingConstraints(modelObject);
+		/* Interpret the selected object(s). */
+		results.clear();
+		results.addAll(testPerformer.interpretPostCondition(parsedConstraints
+				.iterator().next(), objectList, operation, parameters,
+				operationInvocationResult, true));
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(0);
+		result_Boolean = (OclBoolean) results.get(0).getResult();
+		assertFalse(result_Boolean.oclIsInvalid().isTrue());
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertFalse(result_Boolean.isTrue());
-
-		/* Remove the added values from the environment. */
-		testPerformer.resetEnvironmentVariable("result");
 	}
 
 	/**
@@ -2353,48 +2380,54 @@ public class TestInterpretation {
 	 * A test case testing the interpretation of a {@link Constraint} contained
 	 * post06.ocl.
 	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 *           , TypeNotFoundInModelException
+	 * @throws OCL2ParsingException
+	 * @throws RuntimeException
+	 * @throws OperationNotFoundException
+	 * @throws OperationAccessException
 	 */
 	@Test
-	public void testPost06() {
+	public void testPost06() throws RuntimeException, OCL2ParsingException,
+			ModelAccessException, TypeNotFoundInModelException,
+			OperationNotFoundException, OperationAccessException {
 
 		Customer customer;
-		OclAny customerInOcl;
 
-		/* Load the OCL file. */
-		testPerformer.loadOCLFile("constraints/post06.ocl");
+		/* Load OCL file (contains postcondition). */
+		parsedConstraints = testPerformer.loadOCLFile("constraints/post06.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		customer = new Customer(25);
 
-		modelObject = testPerformer.addModelObject(customer);
+		objectList.clear();
+		objectList.add(testPerformer.addModelObject(customer));
 
-		customerInOcl =
-				JavaStandardlibraryPlugin.getStandardLibraryFactory().createOclAny(
-						modelObject);
+		/* Find the operation. */
+		operation =
+				testPerformer.findOperation(objectList.get(0), "birthdayHappens");
 
-		/* Prepare the selected model objects. */
-		testPerformer.prepareRemainingConstraints(modelObject, false);
+		/* Set the parameters of the operation. */
+		parameters.clear();
 
-		/* Try to invoke the tested operation. */
-		try {
-			OclAny parameters[];
+		/* Prepare the postcondtion. */
+		testPerformer.preparePostCondition(parsedConstraints.iterator().next(),
+				objectList, operation, parameters);
 
-			parameters = new OclAny[0];
+		/* Invoke the operation. */
+		operationInvocationResult =
+				((IModelInstanceObject) objectList.get(0)).invokeOperation(operation,
+						parameters);
 
-			Operation operation =
-					testPerformer.findOperation(modelObject, "birthdayHappens");
-			customerInOcl.invokeOperation(operation, parameters);
-		}
-
-		catch (OperationNotFoundException e) {
-			fail("The tested operation could not be invoked. Test failed.");
-		}
-
-		/* Interpret the selected model objects. */
-		results = testPerformer.interpretRemainingConstraints(modelObject);
+		/* Interpret the selected object(s). */
+		results.clear();
+		results.addAll(testPerformer.interpretPostCondition(parsedConstraints
+				.iterator().next(), objectList, operation, parameters,
+				operationInvocationResult, true));
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(0);
+		result_Boolean = (OclBoolean) results.get(0).getResult();
 		assertFalse(result_Boolean.oclIsInvalid().isTrue());
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
@@ -2405,76 +2438,61 @@ public class TestInterpretation {
 	 * A test case testing the interpretation of a {@link Constraint} contained
 	 * post07.ocl.
 	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 *           , TypeNotFoundInModelException
+	 * @throws OCL2ParsingException
+	 * @throws RuntimeException
+	 * @throws OperationNotFoundException
+	 * @throws OperationAccessException
 	 */
 	@Test
-	public void testPost07() {
+	public void testPost07() throws RuntimeException, OCL2ParsingException,
+			ModelAccessException, TypeNotFoundInModelException,
+			OperationNotFoundException, OperationAccessException {
 
 		Service service;
-		Long integer;
 
-		OclAny serviceInOcl;
-		OclAny integerInOcl;
-
-		/* Load the OCL file. */
-		testPerformer.loadOCLFile("constraints/post07.ocl");
+		/* Load OCL file (contains postcondition). */
+		parsedConstraints = testPerformer.loadOCLFile("constraints/post07.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		service = new Service();
 		service.setPointsEarned(100);
 		service.setPointsBurned(0);
 
-		modelObject = testPerformer.addModelObject(service);
+		objectList.clear();
+		objectList.add(testPerformer.addModelObject(service));
 
-		serviceInOcl =
-				JavaStandardlibraryPlugin.getStandardLibraryFactory().createOclAny(
-						modelObject);
+		/* Find the operation. */
+		operation =
+				testPerformer.findOperation(objectList.get(0), "upgradePointsEarned");
 
-		integer = new Long(100);
+		/* Set the parameters of the operation. */
+		parameters.clear();
+		parameters.add(BasisJavaModelInstanceFactory
+				.createModelInstanceInteger(new Long(100)));
 
-		integerInOcl =
-				JavaStandardlibraryPlugin.getStandardLibraryFactory().createOclInteger(
-						integer);
+		/* Prepare the postcondtion. */
+		testPerformer.preparePostCondition(parsedConstraints.iterator().next(),
+				objectList, operation, parameters);
 
-		/*
-		 * Add the values needed as parameters of the operation call constrained by
-		 * this postcondition to the environment.
-		 */
-		try {
-			testPerformer.setEnvironmentVariable("amount", integer);
-		} catch (TypeNotFoundInModelException e1) {
-			fail(e1.getMessage());
-		}
+		/* Invoke the operation. */
+		operationInvocationResult =
+				((IModelInstanceObject) objectList.get(0)).invokeOperation(operation,
+						parameters);
 
-		/* Prepare the selected model objects. */
-		testPerformer.prepareRemainingConstraints(modelObject, false);
-
-		/* Try to invoke the tested operation. */
-		try {
-			OclAny parameters[];
-
-			parameters = new OclAny[1];
-			parameters[0] = integerInOcl;
-
-			Operation operation =
-					testPerformer.findOperation(modelObject, "upgradePointsEarned");
-			serviceInOcl.invokeOperation(operation, parameters);
-		}
-
-		catch (OperationNotFoundException e) {
-			fail("The tested operation could not be invoked. Test failed.");
-		}
-
-		/* Interpret the selected model objects. */
-		results = testPerformer.interpretRemainingConstraints(modelObject);
+		/* Interpret the selected object(s). */
+		results.clear();
+		results.addAll(testPerformer.interpretPostCondition(parsedConstraints
+				.iterator().next(), objectList, operation, parameters,
+				operationInvocationResult, true));
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(0);
+		result_Boolean = (OclBoolean) results.get(0).getResult();
 		assertFalse(result_Boolean.oclIsInvalid().isTrue());
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
-
-		/* Remove the added values from the environment. */
-		testPerformer.resetEnvironmentVariable("amount");
 	}
 
 	/**
@@ -2484,19 +2502,24 @@ public class TestInterpretation {
 	 * </p>
 	 * 
 	 * @throws OperationNotFoundException
+	 * @throws ModelAccessException
+	 *           , TypeNotFoundInModelException
+	 * @throws OCL2ParsingException
+	 * @throws RuntimeException
+	 * @throws OperationAccessException
 	 */
 	@Test
-	public void testPost08() throws OperationNotFoundException {
+	public void testPost08() throws OperationNotFoundException, RuntimeException,
+			OCL2ParsingException, ModelAccessException, TypeNotFoundInModelException,
+			OperationAccessException {
 
 		Transaction transaction;
-		OclAny transactionInOcl;
-
 		Service service;
 		ServiceLevel serviceLevel;
 		LoyaltyProgram loyaltyProgram;
 
-		/* Load the OCL file. */
-		testPerformer.loadOCLFile("constraints/post08.ocl");
+		/* Load OCL file (contains postcondition). */
+		parsedConstraints = testPerformer.loadOCLFile("constraints/post08.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		loyaltyProgram = new LoyaltyProgram();
@@ -2514,40 +2537,35 @@ public class TestInterpretation {
 		testPerformer.addModelObject(serviceLevel);
 		testPerformer.addModelObject(loyaltyProgram);
 
-		modelObject = testPerformer.addModelObject(transaction);
-		transactionInOcl =
-				JavaStandardlibraryPlugin.getStandardLibraryFactory().createOclAny(
-						modelObject);
+		objectList.clear();
+		objectList.add(testPerformer.addModelObject(transaction));
 
-		/* Prepare the selected model objects. */
-		testPerformer.resetEnvironmentVariable("result");
-		testPerformer.prepareRemainingConstraints(modelObject, false);
+		/* Find the operation. */
+		operation = testPerformer.findOperation(objectList.get(0), "getProgram");
 
-		/*
-		 * Try to invoke the tested operation and add the result variable to the
-		 * environment.
-		 */
-		OclAny parameters[];
-		OclAny opResult;
+		/* Set the parameters of the operation. */
+		parameters.clear();
 
-		parameters = new OclAny[0];
-		Operation operation =
-				testPerformer.findOperation(modelObject, "getProgram");
-		opResult = transactionInOcl.invokeOperation(operation, parameters);
+		/* Prepare the postcondtion. */
+		testPerformer.preparePostCondition(parsedConstraints.iterator().next(),
+				objectList, operation, parameters);
 
-		testPerformer.setEnvironmentVariable("result", opResult);
+		/* Invoke the operation. */
+		operationInvocationResult =
+				((IModelInstanceObject) objectList.get(0)).invokeOperation(operation,
+						parameters);
 
-		/* Interpret the selected model objects. */
-		results = testPerformer.interpretRemainingConstraints(modelObject);
+		/* Interpret the selected object(s). */
+		results.clear();
+		results.addAll(testPerformer.interpretPostCondition(parsedConstraints
+				.iterator().next(), objectList, operation, parameters,
+				operationInvocationResult, true));
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(0);
+		result_Boolean = (OclBoolean) results.get(0).getResult();
 		assertFalse(result_Boolean.oclIsInvalid().isTrue());
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
-
-		/* Remove the added values from the environment. */
-		testPerformer.resetEnvironmentVariable("result");
 	}
 
 	/**
@@ -2555,19 +2573,26 @@ public class TestInterpretation {
 	 * A test case testing the interpretation of a {@link Constraint} contained
 	 * post09.ocl.
 	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 *           , TypeNotFoundInModelException
+	 * @throws OCL2ParsingException
+	 * @throws RuntimeException
+	 * @throws OperationNotFoundException
+	 * @throws OperationAccessException
 	 */
 	@Test
-	public void testPost10() {
+	public void testPost10() throws RuntimeException, OCL2ParsingException,
+			ModelAccessException, TypeNotFoundInModelException,
+			OperationNotFoundException, OperationAccessException {
 
 		Transaction transaction;
-		OclAny transactionInOcl;
-
 		Service service;
 		ServiceLevel serviceLevel;
 		LoyaltyProgram loyaltyProgram;
 
-		/* Load the OCL file. */
-		testPerformer.loadOCLFile("constraints/post10.ocl");
+		/* Load OCL file (contains postcondition). */
+		parsedConstraints = testPerformer.loadOCLFile("constraints/post10.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		loyaltyProgram = new LoyaltyProgram();
@@ -2585,45 +2610,35 @@ public class TestInterpretation {
 		testPerformer.addModelObject(serviceLevel);
 		testPerformer.addModelObject(loyaltyProgram);
 
-		modelObject = testPerformer.addModelObject(transaction);
-		transactionInOcl =
-				JavaStandardlibraryPlugin.getStandardLibraryFactory().createOclAny(
-						modelObject);
+		objectList.clear();
+		objectList.add(testPerformer.addModelObject(transaction));
 
-		/* Prepare the selected model objects. */
-		testPerformer.resetEnvironmentVariable("result");
-		testPerformer.prepareRemainingConstraints(modelObject, false);
+		/* Find the operation. */
+		operation = testPerformer.findOperation(objectList.get(0), "getProgram");
 
-		/*
-		 * Try to invoke the tested operation and add the result variable to the
-		 * environment.
-		 */
-		try {
-			OclAny parameters[];
-			OclAny opResult;
+		/* Set the parameters of the operation. */
+		parameters.clear();
 
-			parameters = new OclAny[0];
-			Operation operation =
-					testPerformer.findOperation(modelObject, "getProgram");
-			opResult = transactionInOcl.invokeOperation(operation, parameters);
+		/* Prepare the postcondtion. */
+		testPerformer.preparePostCondition(parsedConstraints.iterator().next(),
+				objectList, operation, parameters);
 
-			testPerformer.setEnvironmentVariable("result", opResult);
-		}
+		/* Invoke the operation. */
+		operationInvocationResult =
+				((IModelInstanceObject) objectList.get(0)).invokeOperation(operation,
+						parameters);
 
-		catch (OperationNotFoundException e) {
-			fail("The tested operation could not be invoked. Test failed.");
-		}
-
-		/* Interpret the selected model objects. */
-		results = testPerformer.interpretRemainingConstraints(modelObject);
+		/* Interpret the selected object(s). */
+		results.clear();
+		results.addAll(testPerformer.interpretPostCondition(parsedConstraints
+				.iterator().next(), objectList, operation, parameters,
+				operationInvocationResult, true));
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(0);
+		result_Boolean = (OclBoolean) results.get(0).getResult();
+		assertFalse(result_Boolean.oclIsInvalid().isTrue());
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
-
-		/* Remove the added values from the environment. */
-		testPerformer.resetEnvironmentVariable("result");
 	}
 
 	/**
@@ -2631,72 +2646,65 @@ public class TestInterpretation {
 	 * A test case testing the interpretation of a {@link Constraint} contained
 	 * post11.ocl.
 	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 *           , TypeNotFoundInModelException
+	 * @throws OCL2ParsingException
+	 * @throws RuntimeException
+	 * @throws OperationNotFoundException
+	 * @throws OperationAccessException
 	 */
 	@Test
-	public void testPost11() {
+	public void testPost11() throws RuntimeException, OCL2ParsingException,
+			ModelAccessException, TypeNotFoundInModelException,
+			OperationNotFoundException, OperationAccessException {
 
 		LoyaltyProgram loyaltyProgram;
-		OclAny loyaltyProgramInOcl;
-
 		Membership membership;
-
 		Customer customer;
-		OclAny customerInOcl;
 
-		/* Load the OCL file. */
-		testPerformer.loadOCLFile("constraints/post11.ocl");
+		/* Load OCL file (contains postcondition). */
+		parsedConstraints = testPerformer.loadOCLFile("constraints/post11.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		customer = new Customer(25);
 
 		membership = new Membership();
+		testPerformer.addModelObject(membership);
 
 		loyaltyProgram = new LoyaltyProgram();
 		loyaltyProgram.setMembership(membership);
 
-		modelObject = testPerformer.addModelObject(loyaltyProgram);
-		loyaltyProgramInOcl =
-				JavaStandardlibraryPlugin.getStandardLibraryFactory().createOclAny(
-						modelObject);
+		objectList.clear();
+		objectList.add(testPerformer.addModelObject(loyaltyProgram));
 
-		IModelInstanceElement imiCustomer = testPerformer.addModelObject(customer);
+		/* Find the operation. */
+		operation = testPerformer.findOperation(objectList.get(0), "enroll");
 
-		customerInOcl =
-				JavaStandardlibraryPlugin.getStandardLibraryFactory().createOclAny(
-						imiCustomer);
+		/* Set the parameters of the operation. */
+		parameters.clear();
+		parameters.add(testPerformer.addModelObject(customer));
 
-		testPerformer.addModelObject(membership);
+		/* Prepare the postcondtion. */
+		testPerformer.preparePostCondition(parsedConstraints.iterator().next(),
+				objectList, operation, parameters);
 
-		/*
-		 * Add the values needed as parameters of the operation call constrained by
-		 * this postcondition to the environment.
-		 */
-		testPerformer.setEnvironmentVariable("c", customerInOcl);
+		/* Invoke the operation. */
+		operationInvocationResult =
+				((IModelInstanceObject) objectList.get(0)).invokeOperation(operation,
+						parameters);
 
-		/* Prepare the selected model objects. */
-		testPerformer.prepareRemainingConstraints(modelObject, false);
-
-		/* Try to invoke the tested operation. */
-		try {
-			Operation operation = testPerformer.findOperation(modelObject, "enroll");
-			loyaltyProgramInOcl.invokeOperation(operation, customerInOcl);
-		}
-
-		catch (OperationNotFoundException e) {
-			fail("The tested operation could not be invoked. Test failed.");
-		}
-
-		/* Interpret the selected model objects. */
-		results = testPerformer.interpretRemainingConstraints(modelObject);
+		/* Interpret the selected object(s). */
+		results.clear();
+		results.addAll(testPerformer.interpretPostCondition(parsedConstraints
+				.iterator().next(), objectList, operation, parameters,
+				operationInvocationResult, true));
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(0);
+		result_Boolean = (OclBoolean) results.get(0).getResult();
 		assertFalse(result_Boolean.oclIsInvalid().isTrue());
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
-
-		/* Remove the added values from the environment. */
-		testPerformer.resetEnvironmentVariable("c");
 	}
 
 	/**
@@ -2704,57 +2712,56 @@ public class TestInterpretation {
 	 * A test case testing the interpretation of a {@link Constraint} contained
 	 * post12.ocl.
 	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 *           , TypeNotFoundInModelException
+	 * @throws OCL2ParsingException
+	 * @throws RuntimeException
+	 * @throws OperationNotFoundException
+	 * @throws OperationAccessException
 	 */
 	@Test
-	public void testPost12() {
+	public void testPost12() throws RuntimeException, OCL2ParsingException,
+			ModelAccessException, TypeNotFoundInModelException,
+			OperationNotFoundException, OperationAccessException {
 
 		Date date;
-		OclAny dateInOcl;
 
-		/* Load the OCL file. */
-		testPerformer.loadOCLFile("constraints/post12.ocl");
+		/* Load OCL file (contains postcondition). */
+		parsedConstraints = testPerformer.loadOCLFile("constraints/post12.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		date = Date.now();
 
-		modelObject = testPerformer.addModelObject(date);
+		objectList.clear();
+		objectList.add(testPerformer.addModelObject(date));
 
-		dateInOcl =
-				JavaStandardlibraryPlugin.getStandardLibraryFactory().createOclAny(
-						modelObject);
+		/* Find the operation. */
+		operation = testPerformer.findOperation(objectList.get(0), "now");
 
-		/* Prepare the selected model objects. */
-		testPerformer.prepareRemainingConstraints(modelObject, false);
+		/* Set the parameters of the operation. */
+		parameters.clear();
 
-		/*
-		 * Try to invoke the tested operation and add the result variable to the
-		 * environment.
-		 */
-		try {
-			OclAny parameters[];
-			OclAny opResult;
+		/* Prepare the postcondtion. */
+		testPerformer.preparePostCondition(parsedConstraints.iterator().next(),
+				objectList, operation, parameters);
 
-			parameters = new OclAny[0];
-			Operation operation = testPerformer.findOperation(modelObject, "now");
-			opResult = dateInOcl.invokeOperation(operation, parameters);
+		/* Invoke the operation. */
+		operationInvocationResult =
+				((IModelInstanceObject) objectList.get(0)).invokeOperation(operation,
+						parameters);
 
-			testPerformer.setEnvironmentVariable("result", opResult);
-		}
-
-		catch (OperationNotFoundException e) {
-			fail("The tested operation could not be invoked. Test failed.");
-		}
-
-		/* Interpret the selected model objects. */
-		results = testPerformer.interpretRemainingConstraints(modelObject);
+		/* Interpret the selected object(s). */
+		results.clear();
+		results.addAll(testPerformer.interpretPostCondition(parsedConstraints
+				.iterator().next(), objectList, operation, parameters,
+				operationInvocationResult, true));
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(0);
+		result_Boolean = (OclBoolean) results.get(0).getResult();
+		assertFalse(result_Boolean.oclIsInvalid().isTrue());
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
-
-		/* Remove the added values from the environment. */
-		testPerformer.resetEnvironmentVariable("result");
 	}
 
 	/**
@@ -2762,64 +2769,99 @@ public class TestInterpretation {
 	 * A test case testing the interpretation of a {@link Constraint} contained
 	 * pre01.ocl.
 	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 *           , TypeNotFoundInModelException
+	 * @throws OCL2ParsingException
+	 * @throws RuntimeException
+	 * @throws OperationNotFoundException
 	 */
 	@Test
-	public void testPre01() {
+	public void testPre01a() throws ModelAccessException,
+			TypeNotFoundInModelException, RuntimeException, OCL2ParsingException,
+			OperationNotFoundException {
 
 		LoyaltyProgram loyaltyProgram;
 		Customer customer;
 
-		/* Load OCL file. */
-		testPerformer.loadOCLFile("constraints/pre01.ocl");
+		/* Load OCL file (contains precondition). */
+		parsedConstraints = testPerformer.loadOCLFile("constraints/pre01.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		loyaltyProgram = new LoyaltyProgram();
 
-		modelObject = testPerformer.addModelObject(loyaltyProgram);
+		objectList.clear();
+		objectList.add(testPerformer.addModelObject(loyaltyProgram));
 
-		/*
-		 * Add the values needed as parameters of the operation call constrained by
-		 * this precondition to the environment.
-		 */
+		/* Prepare the parameters of the interpretation. */
+		parameters.clear();
+
 		customer = new Customer(23);
 		customer.setName("Testman");
-		try {
-			testPerformer.setEnvironmentVariable("c", customer);
-		} catch (TypeNotFoundInModelException e1) {
-			fail(e1.getMessage());
-		}
+		parameters.add(testPerformer.addModelObject(customer));
 
-		/* Interpret the selected combinations. */
-		results = testPerformer.interpretRemainingConstraints(modelObject);
+		/* Find the operation. */
+		operation = testPerformer.findOperation(objectList.get(0), "enroll");
+
+		/* Interpret the selected object(s). */
+		results.clear();
+		results.addAll(testPerformer.interpretPreCondition(parsedConstraints
+				.iterator().next(), objectList, operation, parameters, true));
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(0);
+		result_Boolean = (OclBoolean) results.get(0).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
+	}
 
-		/* Do the same test with different values. */
+	/**
+	 * <p>
+	 * A test case testing the interpretation of a {@link Constraint} contained
+	 * pre01.ocl.
+	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 *           , TypeNotFoundInModelException
+	 * @throws OCL2ParsingException
+	 * @throws RuntimeException
+	 * @throws OperationNotFoundException
+	 */
+	@Test
+	public void testPre01b() throws ModelAccessException,
+			TypeNotFoundInModelException, RuntimeException, OCL2ParsingException,
+			OperationNotFoundException {
 
-		/* Reload the OCL file for another interpretation. */
-		testPerformer.loadOCLFile("constraints/pre01.ocl");
+		LoyaltyProgram loyaltyProgram;
+		Customer customer;
 
-		/* Set new parameters as preparation. */
+		/* Load OCL file (contains precondition). */
+		parsedConstraints = testPerformer.loadOCLFile("constraints/pre01.ocl");
+
+		/* Create the model objects which shall be interpreted. */
+		loyaltyProgram = new LoyaltyProgram();
+
+		objectList.clear();
+		objectList.add(testPerformer.addModelObject(loyaltyProgram));
+
+		/* Prepare the parameters of the interpretation. */
+		parameters.clear();
+
+		customer = new Customer(23);
 		customer.setName("");
-		try {
-			testPerformer.setEnvironmentVariable("c", customer);
-		} catch (TypeNotFoundInModelException e) {
-			fail(e.getMessage());
-		}
+		parameters.add(testPerformer.addModelObject(customer));
 
-		/* Interpret the selected combinations. */
-		results = testPerformer.interpretRemainingConstraints(modelObject);
+		/* Find the operation. */
+		operation = testPerformer.findOperation(objectList.get(0), "enroll");
+
+		/* Interpret the selected object(s). */
+		results.clear();
+		results.addAll(testPerformer.interpretPreCondition(parsedConstraints
+				.iterator().next(), objectList, operation, parameters, true));
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(0);
+		result_Boolean = (OclBoolean) results.get(0).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertFalse(result_Boolean.isTrue());
-
-		/* Remove the added values from the environment. */
-		testPerformer.resetEnvironmentVariable("c");
 	}
 
 	/**
@@ -2827,9 +2869,17 @@ public class TestInterpretation {
 	 * A test case testing the interpretation of a {@link Constraint} contained
 	 * pre02.ocl.
 	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 *           , TypeNotFoundInModelException
+	 * @throws OCL2ParsingException
+	 * @throws RuntimeException
+	 * @throws OperationNotFoundException
 	 */
 	@Test
-	public void testPre02() {
+	public void testPre02() throws RuntimeException, OCL2ParsingException,
+			ModelAccessException, TypeNotFoundInModelException,
+			OperationNotFoundException {
 
 		LoyaltyProgram loyaltyProgram1;
 		LoyaltyProgram loyaltyProgram2;
@@ -2837,10 +2887,9 @@ public class TestInterpretation {
 
 		ProgramPartner programPartner;
 		ServiceLevel serviceLevel;
-		Object service;
 
-		/* Load OCL file. */
-		testPerformer.loadOCLFile("constraints/pre02.ocl");
+		/* Load OCL file (contains precondition). */
+		parsedConstraints = testPerformer.loadOCLFile("constraints/pre02.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		serviceLevel = new ServiceLevel();
@@ -2856,52 +2905,42 @@ public class TestInterpretation {
 		loyaltyProgram1.addLevel(serviceLevel);
 		loyaltyProgram3.addLevel(serviceLevel);
 
-		testPerformer.addModelObject(programPartner);
 		testPerformer.addModelObject(serviceLevel);
 
-		objectList = new ArrayList<IModelInstanceElement>();
+		objectList.clear();
 		objectList.add(testPerformer.addModelObject(loyaltyProgram1));
 		objectList.add(testPerformer.addModelObject(loyaltyProgram2));
 		objectList.add(testPerformer.addModelObject(loyaltyProgram3));
 
-		/*
-		 * Add the values needed as parameters of the operation call constrained by
-		 * this precondition to the environment.
-		 */
-		service = new Service();
+		/* Prepare the parameters of the interpretation. */
+		parameters.clear();
 
-		try {
-			testPerformer.setEnvironmentVariable("aPartner", programPartner);
-			testPerformer.setEnvironmentVariable("aLevel", serviceLevel);
-			testPerformer.setEnvironmentVariable("aService", service);
+		parameters.add(testPerformer.addModelObject(programPartner));
+		parameters.add(testPerformer.addModelObject(serviceLevel));
+		parameters.add(testPerformer.addModelObject(new Service()));
 
-		} catch (TypeNotFoundInModelException e) {
-			fail(e.getMessage());
-		}
+		/* Find the operation. */
+		operation = testPerformer.findOperation(objectList.get(0), "addService");
 
-		/* Interpret the selected combinations. */
-		results = testPerformer.interpretRemainingConstraints(objectList);
+		/* Interpret the selected object(s). */
+		results.clear();
+		results.addAll(testPerformer.interpretPreCondition(parsedConstraints
+				.iterator().next(), objectList, operation, parameters, true));
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(0);
+		result_Boolean = (OclBoolean) results.get(0).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(1);
+		result_Boolean = (OclBoolean) results.get(1).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(2);
+		result_Boolean = (OclBoolean) results.get(2).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertFalse(result_Boolean.isTrue());
-
-		/* Remove the added values from the environment. */
-		testPerformer.resetEnvironmentVariable("aPartner");
-		testPerformer.resetEnvironmentVariable("aLevel");
-		testPerformer.resetEnvironmentVariable("aServices");
-
 	}
 
 	/**
@@ -2909,9 +2948,17 @@ public class TestInterpretation {
 	 * A test case testing the interpretation of a {@link Constraint} contained
 	 * pre03.ocl.
 	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 *           , TypeNotFoundInModelException
+	 * @throws OCL2ParsingException
+	 * @throws RuntimeException
+	 * @throws OperationNotFoundException
 	 */
 	@Test
-	public void testPre03() {
+	public void testPre03() throws RuntimeException, OCL2ParsingException,
+			ModelAccessException, TypeNotFoundInModelException,
+			OperationNotFoundException {
 
 		LoyaltyProgram loyaltyProgram1;
 		LoyaltyProgram loyaltyProgram2;
@@ -2919,10 +2966,9 @@ public class TestInterpretation {
 
 		ProgramPartner programPartner;
 		ServiceLevel serviceLevel;
-		Object service;
 
-		/* Load OCL file. */
-		testPerformer.loadOCLFile("constraints/pre03.ocl");
+		/* Load OCL file (contains precondition). */
+		parsedConstraints = testPerformer.loadOCLFile("constraints/pre03.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		serviceLevel = new ServiceLevel();
@@ -2938,50 +2984,40 @@ public class TestInterpretation {
 		loyaltyProgram1.addLevel(serviceLevel);
 		loyaltyProgram3.addLevel(serviceLevel);
 
-		testPerformer.addModelObject(programPartner);
-		testPerformer.addModelObject(serviceLevel);
-
-		objectList = new ArrayList<IModelInstanceElement>();
+		objectList.clear();
 		objectList.add(testPerformer.addModelObject(loyaltyProgram1));
 		objectList.add(testPerformer.addModelObject(loyaltyProgram2));
 		objectList.add(testPerformer.addModelObject(loyaltyProgram3));
 
-		/*
-		 * Add the values needed as parameters of the operation call constrained by
-		 * this precondition to the environment.
-		 */
-		service = new Service();
+		/* Prepare the parameters of the interpretation. */
+		parameters.clear();
 
-		try {
-			testPerformer.setEnvironmentVariable("aPartner", programPartner);
-			testPerformer.setEnvironmentVariable("aLevel", serviceLevel);
-			testPerformer.setEnvironmentVariable("aService", service);
-		} catch (TypeNotFoundInModelException e) {
-			fail(e.getMessage());
-		}
+		parameters.add(testPerformer.addModelObject(programPartner));
+		parameters.add(testPerformer.addModelObject(serviceLevel));
+		parameters.add(testPerformer.addModelObject(new Service()));
 
-		/* Interpret the selected combinations. */
-		results = testPerformer.interpretRemainingConstraints(objectList);
+		/* Find the operation. */
+		operation = testPerformer.findOperation(objectList.get(0), "addService");
+
+		/* Interpret the selected object(s). */
+		results.clear();
+		results.addAll(testPerformer.interpretPreCondition(parsedConstraints
+				.iterator().next(), objectList, operation, parameters, true));
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(0);
+		result_Boolean = (OclBoolean) results.get(0).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(1);
+		result_Boolean = (OclBoolean) results.get(1).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertFalse(result_Boolean.isTrue());
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(2);
+		result_Boolean = (OclBoolean) results.get(2).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
-
-		/* Remove the added values from the environment. */
-		testPerformer.resetEnvironmentVariable("aPartner");
-		testPerformer.resetEnvironmentVariable("aLevel");
-		testPerformer.resetEnvironmentVariable("aServices");
 	}
 
 	/**
@@ -2989,9 +3025,18 @@ public class TestInterpretation {
 	 * A test case testing the interpretation of a {@link Constraint} contained
 	 * pre04.ocl.
 	 * </p>
+	 * 
+	 * @throws OperationNotFoundException
+	 * @throws ModelAccessException
+	 *           , TypeNotFoundInModelException
+	 * @throws OCL2ParsingException
+	 * @throws RuntimeException
+	 * @throws IllegalArgumentException
 	 */
 	@Test
-	public void testPre04() {
+	public void testPre04() throws IllegalArgumentException, RuntimeException,
+			OCL2ParsingException, ModelAccessException, TypeNotFoundInModelException,
+			OperationNotFoundException {
 
 		LoyaltyProgram loyaltyProgram1;
 		LoyaltyProgram loyaltyProgram2;
@@ -2999,10 +3044,9 @@ public class TestInterpretation {
 
 		ProgramPartner programPartner;
 		ServiceLevel serviceLevel;
-		Object service;
 
-		/* Load OCL file. */
-		testPerformer.loadOCLFile("constraints/pre04.ocl");
+		/* Load OCL file (contains precondition). */
+		parsedConstraints = testPerformer.loadOCLFile("constraints/pre04.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		serviceLevel = new ServiceLevel();
@@ -3018,50 +3062,40 @@ public class TestInterpretation {
 		loyaltyProgram1.addLevel(serviceLevel);
 		loyaltyProgram3.addLevel(serviceLevel);
 
-		testPerformer.addModelObject(programPartner);
-		testPerformer.addModelObject(serviceLevel);
-
-		objectList = new ArrayList<IModelInstanceElement>();
+		objectList.clear();
 		objectList.add(testPerformer.addModelObject(loyaltyProgram1));
 		objectList.add(testPerformer.addModelObject(loyaltyProgram2));
 		objectList.add(testPerformer.addModelObject(loyaltyProgram3));
 
-		/*
-		 * Add the values needed as parameters of the operation call constrained by
-		 * this precondition to the environment.
-		 */
-		service = new Service();
+		/* Prepare the parameters of the interpretation. */
+		parameters.clear();
 
-		try {
-			testPerformer.setEnvironmentVariable("aPartner", programPartner);
-			testPerformer.setEnvironmentVariable("aLevel", serviceLevel);
-			testPerformer.setEnvironmentVariable("aService", service);
-		} catch (TypeNotFoundInModelException e) {
-			fail(e.getMessage());
-		}
+		parameters.add(testPerformer.addModelObject(programPartner));
+		parameters.add(testPerformer.addModelObject(serviceLevel));
+		parameters.add(testPerformer.addModelObject(new Service()));
 
-		/* Interpret the selected combinations. */
-		results = testPerformer.interpretRemainingConstraints(objectList);
+		/* Find the operation. */
+		operation = testPerformer.findOperation(objectList.get(0), "addService");
+
+		/* Interpret the selected object(s). */
+		results.clear();
+		results.addAll(testPerformer.interpretPreCondition(parsedConstraints
+				.iterator().next(), objectList, operation, parameters, true));
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(0);
+		result_Boolean = (OclBoolean) results.get(0).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(1);
+		result_Boolean = (OclBoolean) results.get(1).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertFalse(result_Boolean.isTrue());
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(2);
+		result_Boolean = (OclBoolean) results.get(2).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertFalse(result_Boolean.isTrue());
-
-		/* Remove the added values from the environment. */
-		testPerformer.resetEnvironmentVariable("aPartner");
-		testPerformer.resetEnvironmentVariable("aLevel");
-		testPerformer.resetEnvironmentVariable("aServices");
 	}
 
 	/**
@@ -3069,24 +3103,42 @@ public class TestInterpretation {
 	 * A test case testing the interpretation of a {@link Constraint} contained
 	 * pre05.ocl.
 	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 *           , TypeNotFoundInModelException
+	 * @throws OCL2ParsingException
+	 * @throws RuntimeException
+	 * @throws OperationNotFoundException
 	 */
 	@Test
-	public void testPre05() {
+	public void testPre05() throws RuntimeException, OCL2ParsingException,
+			ModelAccessException, TypeNotFoundInModelException,
+			OperationNotFoundException {
 
 		Transaction transaction;
 
-		/* Load OCL file. */
-		testPerformer.loadOCLFile("constraints/pre05.ocl");
+		/* Load OCL file (contains precondition). */
+		parsedConstraints = testPerformer.loadOCLFile("constraints/pre05.ocl");
 
-		/* Select the model objects which shall be interpreted. */
+		/* Create the model objects which shall be interpreted. */
 		transaction = new Transaction();
-		modelObject = testPerformer.addModelObject(transaction);
 
-		/* Interpret the selected combinations. */
-		results = testPerformer.interpretRemainingConstraints(modelObject);
+		objectList.clear();
+		objectList.add(testPerformer.addModelObject(transaction));
+
+		/* Prepare the parameters of the interpretation. */
+		parameters.clear();
+
+		/* Find the operation. */
+		operation = testPerformer.findOperation(objectList.get(0), "getProgram");
+
+		/* Interpret the selected object(s). */
+		results.clear();
+		results.addAll(testPerformer.interpretPreCondition(parsedConstraints
+				.iterator().next(), objectList, operation, parameters, true));
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(0);
+		result_Boolean = (OclBoolean) results.get(0).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
@@ -3096,24 +3148,42 @@ public class TestInterpretation {
 	 * A test case testing the interpretation of a {@link Constraint} contained
 	 * pre06.ocl.
 	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 *           , TypeNotFoundInModelException
+	 * @throws OCL2ParsingException
+	 * @throws RuntimeException
+	 * @throws OperationNotFoundException
 	 */
 	@Test
-	public void testPre06() {
+	public void testPre06() throws RuntimeException, OCL2ParsingException,
+			ModelAccessException, TypeNotFoundInModelException,
+			OperationNotFoundException {
 
 		Date date;
 
-		/* Load OCL file. */
-		testPerformer.loadOCLFile("constraints/pre06.ocl");
+		/* Load OCL file (contains precondition). */
+		parsedConstraints = testPerformer.loadOCLFile("constraints/pre06.ocl");
 
-		/* Select the model objects which shall be interpreted. */
+		/* Create the model objects which shall be interpreted. */
 		date = Date.now();
-		modelObject = testPerformer.addModelObject(date);
 
-		/* Interpret the selected combinations. */
-		results = testPerformer.interpretRemainingConstraints(modelObject);
+		objectList.clear();
+		objectList.add(testPerformer.addModelObject(date));
+
+		/* Prepare the parameters of the interpretation. */
+		parameters.clear();
+
+		/* Find the operation. */
+		operation = testPerformer.findOperation(objectList.get(0), "now");
+
+		/* Interpret the selected object(s). */
+		results.clear();
+		results.addAll(testPerformer.interpretPreCondition(parsedConstraints
+				.iterator().next(), objectList, operation, parameters, true));
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(0);
+		result_Boolean = (OclBoolean) results.get(0).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
@@ -3123,26 +3193,36 @@ public class TestInterpretation {
 	 * A test case testing the interpretation of a {@link Constraint} contained
 	 * any01.ocl.
 	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 *           , TypeNotFoundInModelException
+	 * @throws OCL2ParsingException
+	 * @throws RuntimeException
 	 */
 	@Test
-	public void testAny01() {
+	public void testAny01() throws RuntimeException, OCL2ParsingException,
+			ModelAccessException, TypeNotFoundInModelException {
 
 		Transaction transaction;
 
-		/* Load OCL file. */
-		testPerformer.loadOCLFile("constraints/test/any01.ocl");
+		/* Load OCL file (contains OclAny-based expression). */
+		parsedConstraints = testPerformer.loadOCLFile("constraints/test/any01.ocl");
 
-		/* Select the model objects which shall be interpreted. */
+		/* Create the model objects which shall be interpreted. */
 		transaction = new Transaction();
-		modelObject = testPerformer.addModelObject(transaction);
+		objectList.clear();
+		objectList.add(testPerformer.addModelObject(transaction));
 
-		/* Interpret the selected combinations. */
-		results = testPerformer.interpretRemainingConstraints(modelObject);
+		/* Interpret the selected object(s). */
+		results.clear();
+		results.addAll(testPerformer.interpretConstraint(parsedConstraints
+				.iterator().next(), objectList, true));
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(0);
+		result_Boolean = (OclBoolean) results.get(0).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
+
 	}
 
 	/**
@@ -3150,24 +3230,33 @@ public class TestInterpretation {
 	 * A test case testing the interpretation of a {@link Constraint} contained
 	 * any02.ocl.
 	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 *           , TypeNotFoundInModelException
+	 * @throws OCL2ParsingException
+	 * @throws RuntimeException
 	 */
 	@Test
-	public void testAny02() {
+	public void testAny02() throws RuntimeException, OCL2ParsingException,
+			ModelAccessException, TypeNotFoundInModelException {
 
 		Transaction transaction;
 
-		/* Load OCL file. */
-		testPerformer.loadOCLFile("constraints/test/any02.ocl");
+		/* Load OCL file (contains OclAny-based expression). */
+		parsedConstraints = testPerformer.loadOCLFile("constraints/test/any02.ocl");
 
-		/* Select the model objects which shall be interpreted. */
+		/* Create the model objects which shall be interpreted. */
 		transaction = new Transaction();
-		modelObject = testPerformer.addModelObject(transaction);
+		objectList.clear();
+		objectList.add(testPerformer.addModelObject(transaction));
 
-		/* Interpret the selected combinations. */
-		results = testPerformer.interpretRemainingConstraints(modelObject);
+		/* Interpret the selected object(s). */
+		results.clear();
+		results.addAll(testPerformer.interpretConstraint(parsedConstraints
+				.iterator().next(), objectList, true));
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(0);
+		result_Boolean = (OclBoolean) results.get(0).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
@@ -3177,24 +3266,33 @@ public class TestInterpretation {
 	 * A test case testing the interpretation of a {@link Constraint} contained
 	 * any03.ocl.
 	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 *           , TypeNotFoundInModelException
+	 * @throws OCL2ParsingException
+	 * @throws RuntimeException
 	 */
 	@Test
-	public void testAny03() {
+	public void testAny03() throws RuntimeException, OCL2ParsingException,
+			ModelAccessException, TypeNotFoundInModelException {
 
 		Transaction transaction;
 
-		/* Load OCL file. */
-		testPerformer.loadOCLFile("constraints/test/any03.ocl");
+		/* Load OCL file (contains OclAny-based expression). */
+		parsedConstraints = testPerformer.loadOCLFile("constraints/test/any03.ocl");
 
-		/* Select the model objects which shall be interpreted. */
+		/* Create the model objects which shall be interpreted. */
 		transaction = new Transaction();
-		modelObject = testPerformer.addModelObject(transaction);
+		objectList.clear();
+		objectList.add(testPerformer.addModelObject(transaction));
 
-		/* Interpret the selected combinations. */
-		results = testPerformer.interpretRemainingConstraints(modelObject);
+		/* Interpret the selected object(s). */
+		results.clear();
+		results.addAll(testPerformer.interpretConstraint(parsedConstraints
+				.iterator().next(), objectList, true));
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(0);
+		result_Boolean = (OclBoolean) results.get(0).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertFalse(result_Boolean.oclIsInvalid().isTrue());
 		assertTrue(result_Boolean.isTrue());
@@ -3205,29 +3303,48 @@ public class TestInterpretation {
 	 * A test case testing the interpretation of a {@link Constraint} contained
 	 * any04.ocl.
 	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 *           , TypeNotFoundInModelException
+	 * @throws OCL2ParsingException
+	 * @throws RuntimeException
 	 */
 	@Test
-	public void testAny04() {
+	public void testAny04() throws ModelAccessException,
+			TypeNotFoundInModelException, RuntimeException, OCL2ParsingException {
 
 		Transaction transaction;
 
-		/* Load OCL file. */
-		testPerformer.loadOCLFile("constraints/test/any04.ocl");
+		/* Load OCL file (contains OclAny-based expression). */
+		parsedConstraints = testPerformer.loadOCLFile("constraints/test/any04.ocl");
 
-		/* Select the model objects which shall be interpreted. */
+		/* Create the model objects which shall be interpreted. */
 		transaction = new Transaction();
-		modelObject = testPerformer.addModelObject(transaction);
+		objectList.clear();
+		objectList.add(testPerformer.addModelObject(transaction));
 
-		/* Interpret the selected combinations. */
-		results = testPerformer.interpretRemainingConstraints(modelObject);
+		/* Interpret the selected object(s). */
+		Iterator<Constraint> constraintIt;
+		constraintIt = parsedConstraints.iterator();
+
+		/*
+		 * Special case for two constraints in one file. Should not be copied, order
+		 * in set is not predictable. Can be ignored here, because the results
+		 * should be equal.
+		 */
+		results.clear();
+		results.addAll(testPerformer.interpretConstraint(constraintIt.next(),
+				objectList, true));
+		results.addAll(testPerformer.interpretConstraint(constraintIt.next(),
+				objectList, true));
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(0);
+		result_Boolean = (OclBoolean) results.get(0).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(1);
+		result_Boolean = (OclBoolean) results.get(1).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
@@ -3237,24 +3354,33 @@ public class TestInterpretation {
 	 * A test case testing the interpretation of a {@link Constraint} contained
 	 * any05.ocl.
 	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 *           , TypeNotFoundInModelException
+	 * @throws OCL2ParsingException
+	 * @throws RuntimeException
 	 */
 	@Test
-	public void testAny05() {
+	public void testAny05() throws RuntimeException, OCL2ParsingException,
+			ModelAccessException, TypeNotFoundInModelException {
 
 		Transaction transaction;
 
-		/* Load OCL file. */
-		testPerformer.loadOCLFile("constraints/test/any05.ocl");
+		/* Load OCL file (contains OclAny-based expression). */
+		parsedConstraints = testPerformer.loadOCLFile("constraints/test/any05.ocl");
 
-		/* Select the model objects which shall be interpreted. */
+		/* Create the model objects which shall be interpreted. */
 		transaction = new Transaction();
-		modelObject = testPerformer.addModelObject(transaction);
+		objectList.clear();
+		objectList.add(testPerformer.addModelObject(transaction));
 
-		/* Interpret the selected combinations. */
-		results = testPerformer.interpretRemainingConstraints(modelObject);
+		/* Interpret the selected object(s). */
+		results.clear();
+		results.addAll(testPerformer.interpretConstraint(parsedConstraints
+				.iterator().next(), objectList, true));
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(0);
+		result_Boolean = (OclBoolean) results.get(0).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
@@ -3264,15 +3390,22 @@ public class TestInterpretation {
 	 * A test case testing the interpretation of a {@link Constraint} contained
 	 * boolean01.ocl.
 	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 *           , TypeNotFoundInModelException
+	 * @throws OCL2ParsingException
+	 * @throws RuntimeException
 	 */
 	@Test
-	public void testBoolean01() {
+	public void testBoolean01() throws RuntimeException, OCL2ParsingException,
+			ModelAccessException, TypeNotFoundInModelException {
 
 		Service service1;
 		Service service2;
 
-		/* Load OCL file. */
-		testPerformer.loadOCLFile("constraints/test/boolean01.ocl");
+		/* Load OCL file (contains boolean expression). */
+		parsedConstraints =
+				testPerformer.loadOCLFile("constraints/test/boolean01.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		service1 = new Service();
@@ -3284,20 +3417,22 @@ public class TestInterpretation {
 		service2.setPointsEarned(100);
 		service2.setPointsBurned(50);
 
-		objectList = new ArrayList<IModelInstanceElement>();
+		objectList.clear();
 		objectList.add(testPerformer.addModelObject(service1));
 		objectList.add(testPerformer.addModelObject(service2));
 
-		/* Interpret the selected combinations. */
-		results = testPerformer.interpretRemainingConstraints(objectList);
+		/* Interpret the selected object(s). */
+		results.clear();
+		results.addAll(testPerformer.interpretConstraint(parsedConstraints
+				.iterator().next(), objectList, true));
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(0);
+		result_Boolean = (OclBoolean) results.get(0).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertFalse(result_Boolean.isTrue());
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(1);
+		result_Boolean = (OclBoolean) results.get(1).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
@@ -3307,24 +3442,34 @@ public class TestInterpretation {
 	 * A test case testing the interpretation of a {@link Constraint} contained
 	 * boolean02.ocl.
 	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 *           , TypeNotFoundInModelException
+	 * @throws OCL2ParsingException
+	 * @throws RuntimeException
 	 */
 	@Test
-	public void testBoolean02() {
+	public void testBoolean02() throws RuntimeException, OCL2ParsingException,
+			ModelAccessException, TypeNotFoundInModelException {
 
 		Service service;
 
-		/* Load OCL file. */
-		testPerformer.loadOCLFile("constraints/test/boolean02.ocl");
+		/* Load OCL file (contains boolean expression). */
+		parsedConstraints =
+				testPerformer.loadOCLFile("constraints/test/boolean02.ocl");
 
-		/* Select the model objects which shall be interpreted. */
+		/* Create the model objects which shall be interpreted. */
 		service = new Service();
-		modelObject = testPerformer.addModelObject(service);
+		objectList.clear();
+		objectList.add(testPerformer.addModelObject(service));
 
-		/* Interpret the selected combinations. */
-		results = testPerformer.interpretRemainingConstraints(modelObject);
+		/* Interpret the selected object(s). */
+		results.clear();
+		results.addAll(testPerformer.interpretConstraint(parsedConstraints
+				.iterator().next(), objectList, true));
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(0);
+		result_Boolean = (OclBoolean) results.get(0).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertFalse(result_Boolean.isTrue());
 	}
@@ -3334,42 +3479,51 @@ public class TestInterpretation {
 	 * A test case testing the interpretation of a {@link Constraint} contained
 	 * boolean03.ocl.
 	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 *           , TypeNotFoundInModelException
+	 * @throws OCL2ParsingException
+	 * @throws RuntimeException
 	 */
 	@Test
-	public void testBoolean03() {
+	public void testBoolean03() throws RuntimeException, OCL2ParsingException,
+			ModelAccessException, TypeNotFoundInModelException {
 
 		Customer customer1;
 		Customer customer2;
 		Customer customer3;
 
-		/* Load OCL file. */
-		testPerformer.loadOCLFile("constraints/test/boolean03.ocl");
+		/* Load OCL file (contains boolean expression). */
+		parsedConstraints =
+				testPerformer.loadOCLFile("constraints/test/boolean03.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		customer1 = new Customer(15);
 		customer2 = new Customer(55);
 		customer3 = new Customer(99);
 
-		objectList = new ArrayList<IModelInstanceElement>();
+		objectList.clear();
 		objectList.add(testPerformer.addModelObject(customer1));
 		objectList.add(testPerformer.addModelObject(customer2));
 		objectList.add(testPerformer.addModelObject(customer3));
 
-		/* Interpret the selected combinations. */
-		results = testPerformer.interpretRemainingConstraints(objectList);
+		/* Interpret the selected object(s). */
+		results.clear();
+		results.addAll(testPerformer.interpretConstraint(parsedConstraints
+				.iterator().next(), objectList, true));
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(0);
+		result_Boolean = (OclBoolean) results.get(0).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertFalse(result_Boolean.isTrue());
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(1);
+		result_Boolean = (OclBoolean) results.get(1).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(2);
+		result_Boolean = (OclBoolean) results.get(2).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertFalse(result_Boolean.isTrue());
 	}
@@ -3379,9 +3533,15 @@ public class TestInterpretation {
 	 * A test case testing the interpretation of a {@link Constraint} contained
 	 * boolean04.ocl.
 	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 *           , TypeNotFoundInModelException
+	 * @throws OCL2ParsingException
+	 * @throws RuntimeException
 	 */
 	@Test
-	public void testBoolean04() {
+	public void testBoolean04() throws RuntimeException, OCL2ParsingException,
+			ModelAccessException, TypeNotFoundInModelException {
 
 		Customer customer1;
 		Customer customer2;
@@ -3391,8 +3551,9 @@ public class TestInterpretation {
 		CustomerCard card3;
 		CustomerCard card4;
 
-		/* Load OCL file. */
-		testPerformer.loadOCLFile("constraints/test/boolean04.ocl");
+		/* Load OCL file (contains boolean expression). */
+		parsedConstraints =
+				testPerformer.loadOCLFile("constraints/test/boolean04.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		customer1 = new Customer(11);
@@ -3413,20 +3574,22 @@ public class TestInterpretation {
 		testPerformer.addModelObject(card3);
 		testPerformer.addModelObject(card4);
 
-		objectList = new ArrayList<IModelInstanceElement>();
+		objectList.clear();
 		objectList.add(testPerformer.addModelObject(customer1));
 		objectList.add(testPerformer.addModelObject(customer2));
 
-		/* Interpret the selected combinations. */
-		results = testPerformer.interpretRemainingConstraints(objectList);
+		/* Interpret the selected object(s). */
+		results.clear();
+		results.addAll(testPerformer.interpretConstraint(parsedConstraints
+				.iterator().next(), objectList, true));
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(0);
+		result_Boolean = (OclBoolean) results.get(0).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertFalse(result_Boolean.isTrue());
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(1);
+		result_Boolean = (OclBoolean) results.get(1).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
@@ -3436,16 +3599,23 @@ public class TestInterpretation {
 	 * A test case testing the interpretation of a {@link Constraint} contained
 	 * boolean05.ocl.
 	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 *           , TypeNotFoundInModelException
+	 * @throws OCL2ParsingException
+	 * @throws RuntimeException
 	 */
 	@Test
-	public void testBoolean05() {
+	public void testBoolean05() throws RuntimeException, OCL2ParsingException,
+			ModelAccessException, TypeNotFoundInModelException {
 
 		Customer customer1;
 		Customer customer2;
 		Customer customer3;
 
-		/* Load OCL file. */
-		testPerformer.loadOCLFile("constraints/test/boolean05.ocl");
+		/* Load OCL file (contains boolean expression). */
+		parsedConstraints =
+				testPerformer.loadOCLFile("constraints/test/boolean05.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		customer1 = new Customer(25);
@@ -3455,26 +3625,27 @@ public class TestInterpretation {
 		customer3 = new Customer(25);
 		customer3.setTitle("Dr.");
 
-		objectList = new ArrayList<IModelInstanceElement>();
+		objectList.clear();
 		objectList.add(testPerformer.addModelObject(customer1));
 		objectList.add(testPerformer.addModelObject(customer2));
 		objectList.add(testPerformer.addModelObject(customer3));
 
-		/* Interpret the selected combinations. */
-		results = testPerformer.interpretRemainingConstraints(objectList);
+		/* Interpret the selected object(s). */
+		results.clear();
+		results.addAll(testPerformer.interpretConstraint(parsedConstraints
+				.iterator().next(), objectList, true));
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(0);
+		result_Boolean = (OclBoolean) results.get(0).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(1);
+		result_Boolean = (OclBoolean) results.get(1).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
-		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(2);
+		result_Boolean = (OclBoolean) results.get(2).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertFalse(result_Boolean.isTrue());
 	}
@@ -3484,15 +3655,22 @@ public class TestInterpretation {
 	 * A test case testing the interpretation of a {@link Constraint} contained
 	 * boolean06.ocl.
 	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 *           , TypeNotFoundInModelException
+	 * @throws OCL2ParsingException
+	 * @throws RuntimeException
 	 */
 	@Test
-	public void testBoolean06() {
+	public void testBoolean06() throws RuntimeException, OCL2ParsingException,
+			ModelAccessException, TypeNotFoundInModelException {
 
 		Customer customer1;
 		Customer customer2;
 
-		/* Load OCL file. */
-		testPerformer.loadOCLFile("constraints/test/boolean06.ocl");
+		/* Load OCL file (contains boolean expression). */
+		parsedConstraints =
+				testPerformer.loadOCLFile("constraints/test/boolean06.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		customer1 = new Customer(25);
@@ -3500,20 +3678,22 @@ public class TestInterpretation {
 		customer2 = new Customer(25);
 		customer2.setName("Nobar");
 
-		objectList = new ArrayList<IModelInstanceElement>();
+		objectList.clear();
 		objectList.add(testPerformer.addModelObject(customer1));
 		objectList.add(testPerformer.addModelObject(customer2));
 
-		/* Interpret the selected combinations. */
-		results = testPerformer.interpretRemainingConstraints(objectList);
+		/* Interpret the selected object(s). */
+		results.clear();
+		results.addAll(testPerformer.interpretConstraint(parsedConstraints
+				.iterator().next(), objectList, true));
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(0);
+		result_Boolean = (OclBoolean) results.get(0).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(1);
+		result_Boolean = (OclBoolean) results.get(1).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertFalse(result_Boolean.isTrue());
 	}
@@ -3523,24 +3703,34 @@ public class TestInterpretation {
 	 * A test case testing the interpretation of a {@link Constraint} contained
 	 * collection01.ocl.
 	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 *           , TypeNotFoundInModelException
+	 * @throws OCL2ParsingException
+	 * @throws RuntimeException
 	 */
 	@Test
-	public void testCollection01() {
+	public void testCollection01() throws RuntimeException, OCL2ParsingException,
+			ModelAccessException, TypeNotFoundInModelException {
 
 		Service service;
 
-		/* Load OCL file. */
-		testPerformer.loadOCLFile("constraints/test/collection01.ocl");
+		/* Load OCL file (contains collection expression). */
+		parsedConstraints =
+				testPerformer.loadOCLFile("constraints/test/collection01.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		service = new Service();
-		modelObject = testPerformer.addModelObject(service);
+		objectList.clear();
+		objectList.add(testPerformer.addModelObject(service));
 
-		/* Interpret the selected combinations. */
-		results = testPerformer.interpretRemainingConstraints(modelObject);
+		/* Interpret the selected object(s). */
+		results.clear();
+		results.addAll(testPerformer.interpretConstraint(parsedConstraints
+				.iterator().next(), objectList, true));
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(0);
+		result_Boolean = (OclBoolean) results.get(0).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
@@ -3550,24 +3740,34 @@ public class TestInterpretation {
 	 * A test case testing the interpretation of a {@link Constraint} contained
 	 * collection02.ocl.
 	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 *           , TypeNotFoundInModelException
+	 * @throws OCL2ParsingException
+	 * @throws RuntimeException
 	 */
 	@Test
-	public void testCollection02() {
+	public void testCollection02() throws RuntimeException, OCL2ParsingException,
+			ModelAccessException, TypeNotFoundInModelException {
 
 		Service service;
 
-		/* Load OCL file. */
-		testPerformer.loadOCLFile("constraints/test/collection02.ocl");
+		/* Load OCL file (contains collection expression). */
+		parsedConstraints =
+				testPerformer.loadOCLFile("constraints/test/collection02.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		service = new Service();
-		modelObject = testPerformer.addModelObject(service);
+		objectList.clear();
+		objectList.add(testPerformer.addModelObject(service));
 
-		/* Interpret the selected combinations. */
-		results = testPerformer.interpretRemainingConstraints(modelObject);
+		/* Interpret the selected object(s). */
+		results.clear();
+		results.addAll(testPerformer.interpretConstraint(parsedConstraints
+				.iterator().next(), objectList, true));
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(0);
+		result_Boolean = (OclBoolean) results.get(0).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
@@ -3577,24 +3777,34 @@ public class TestInterpretation {
 	 * A test case testing the interpretation of a {@link Constraint} contained
 	 * collection03.ocl.
 	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 *           , TypeNotFoundInModelException
+	 * @throws OCL2ParsingException
+	 * @throws RuntimeException
 	 */
 	@Test
-	public void testCollection03() {
+	public void testCollection03() throws RuntimeException, OCL2ParsingException,
+			ModelAccessException, TypeNotFoundInModelException {
 
 		Service service;
 
-		/* Load OCL file. */
-		testPerformer.loadOCLFile("constraints/test/collection03.ocl");
+		/* Load OCL file (contains collection expression). */
+		parsedConstraints =
+				testPerformer.loadOCLFile("constraints/test/collection03.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		service = new Service();
-		modelObject = testPerformer.addModelObject(service);
+		objectList.clear();
+		objectList.add(testPerformer.addModelObject(service));
 
-		/* Interpret the selected combinations. */
-		results = testPerformer.interpretRemainingConstraints(modelObject);
+		/* Interpret the selected object(s). */
+		results.clear();
+		results.addAll(testPerformer.interpretConstraint(parsedConstraints
+				.iterator().next(), objectList, true));
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(0);
+		result_Boolean = (OclBoolean) results.get(0).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
@@ -3604,24 +3814,34 @@ public class TestInterpretation {
 	 * A test case testing the interpretation of a {@link Constraint} contained
 	 * collection04.ocl.
 	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 *           , TypeNotFoundInModelException
+	 * @throws OCL2ParsingException
+	 * @throws RuntimeException
 	 */
 	@Test
-	public void testCollection04() {
+	public void testCollection04() throws RuntimeException, OCL2ParsingException,
+			ModelAccessException, TypeNotFoundInModelException {
 
 		Service service;
 
-		/* Load OCL file. */
-		testPerformer.loadOCLFile("constraints/test/collection04.ocl");
+		/* Load OCL file (contains collection expression). */
+		parsedConstraints =
+				testPerformer.loadOCLFile("constraints/test/collection04.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		service = new Service();
-		modelObject = testPerformer.addModelObject(service);
+		objectList.clear();
+		objectList.add(testPerformer.addModelObject(service));
 
-		/* Interpret the selected combinations. */
-		results = testPerformer.interpretRemainingConstraints(modelObject);
+		/* Interpret the selected object(s). */
+		results.clear();
+		results.addAll(testPerformer.interpretConstraint(parsedConstraints
+				.iterator().next(), objectList, true));
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(0);
+		result_Boolean = (OclBoolean) results.get(0).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
@@ -3631,24 +3851,34 @@ public class TestInterpretation {
 	 * A test case testing the interpretation of a {@link Constraint} contained
 	 * collection05.ocl.
 	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 *           , TypeNotFoundInModelException
+	 * @throws OCL2ParsingException
+	 * @throws RuntimeException
 	 */
 	@Test
-	public void testCollection05() {
+	public void testCollection05() throws RuntimeException, OCL2ParsingException,
+			ModelAccessException, TypeNotFoundInModelException {
 
 		Service service;
 
-		/* Load OCL file. */
-		testPerformer.loadOCLFile("constraints/test/collection05.ocl");
+		/* Load OCL file (contains collection expression). */
+		parsedConstraints =
+				testPerformer.loadOCLFile("constraints/test/collection05.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		service = new Service();
-		modelObject = testPerformer.addModelObject(service);
+		objectList.clear();
+		objectList.add(testPerformer.addModelObject(service));
 
-		/* Interpret the selected combinations. */
-		results = testPerformer.interpretRemainingConstraints(modelObject);
+		/* Interpret the selected object(s). */
+		results.clear();
+		results.addAll(testPerformer.interpretConstraint(parsedConstraints
+				.iterator().next(), objectList, true));
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(0);
+		result_Boolean = (OclBoolean) results.get(0).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
@@ -3658,24 +3888,34 @@ public class TestInterpretation {
 	 * A test case testing the interpretation of a {@link Constraint} contained
 	 * collection06.ocl.
 	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 *           , TypeNotFoundInModelException
+	 * @throws OCL2ParsingException
+	 * @throws RuntimeException
 	 */
 	@Test
-	public void testCollection06() {
+	public void testCollection06() throws RuntimeException, OCL2ParsingException,
+			ModelAccessException, TypeNotFoundInModelException {
 
 		Service service;
 
-		/* Load OCL file. */
-		testPerformer.loadOCLFile("constraints/test/collection06.ocl");
+		/* Load OCL file (contains collection expression). */
+		parsedConstraints =
+				testPerformer.loadOCLFile("constraints/test/collection06.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		service = new Service();
-		modelObject = testPerformer.addModelObject(service);
+		objectList.clear();
+		objectList.add(testPerformer.addModelObject(service));
 
-		/* Interpret the selected combinations. */
-		results = testPerformer.interpretRemainingConstraints(modelObject);
+		/* Interpret the selected object(s). */
+		results.clear();
+		results.addAll(testPerformer.interpretConstraint(parsedConstraints
+				.iterator().next(), objectList, true));
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(0);
+		result_Boolean = (OclBoolean) results.get(0).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
@@ -3685,25 +3925,34 @@ public class TestInterpretation {
 	 * A test case testing the interpretation of a {@link Constraint} contained
 	 * collection07.ocl.
 	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 *           , TypeNotFoundInModelException
+	 * @throws OCL2ParsingException
+	 * @throws RuntimeException
 	 */
 	@Test
-	public void testCollection07() {
+	public void testCollection07() throws RuntimeException, OCL2ParsingException,
+			ModelAccessException, TypeNotFoundInModelException {
 
 		Service service;
 
-		/* Load OCL file. */
-		testPerformer.loadOCLFile("constraints/test/collection07.ocl");
+		/* Load OCL file (contains collection expression). */
+		parsedConstraints =
+				testPerformer.loadOCLFile("constraints/test/collection02.ocl");
 
-		/* Select the model objects which shall be interpreted. */
 		/* Create the model objects which shall be interpreted. */
 		service = new Service();
-		modelObject = testPerformer.addModelObject(service);
+		objectList.clear();
+		objectList.add(testPerformer.addModelObject(service));
 
-		/* Interpret the selected combinations. */
-		results = testPerformer.interpretRemainingConstraints(modelObject);
+		/* Interpret the selected object(s). */
+		results.clear();
+		results.addAll(testPerformer.interpretConstraint(parsedConstraints
+				.iterator().next(), objectList, true));
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(0);
+		result_Boolean = (OclBoolean) results.get(0).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
@@ -3713,25 +3962,34 @@ public class TestInterpretation {
 	 * A test case testing the interpretation of a {@link Constraint} contained
 	 * collection08.ocl.
 	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 *           , TypeNotFoundInModelException
+	 * @throws OCL2ParsingException
+	 * @throws RuntimeException
 	 */
 	@Test
-	public void testCollection08() {
+	public void testCollection08() throws RuntimeException, OCL2ParsingException,
+			ModelAccessException, TypeNotFoundInModelException {
 
 		Service service;
 
-		/* Load OCL file. */
-		testPerformer.loadOCLFile("constraints/test/collection08.ocl");
+		/* Load OCL file (contains collection expression). */
+		parsedConstraints =
+				testPerformer.loadOCLFile("constraints/test/collection08.ocl");
 
-		/* Select the model objects which shall be interpreted. */
 		/* Create the model objects which shall be interpreted. */
 		service = new Service();
-		modelObject = testPerformer.addModelObject(service);
+		objectList.clear();
+		objectList.add(testPerformer.addModelObject(service));
 
-		/* Interpret the selected combinations. */
-		results = testPerformer.interpretRemainingConstraints(modelObject);
+		/* Interpret the selected object(s). */
+		results.clear();
+		results.addAll(testPerformer.interpretConstraint(parsedConstraints
+				.iterator().next(), objectList, true));
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(0);
+		result_Boolean = (OclBoolean) results.get(0).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
@@ -3741,24 +3999,34 @@ public class TestInterpretation {
 	 * A test case testing the interpretation of a {@link Constraint} contained
 	 * collection09.ocl.
 	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 *           , TypeNotFoundInModelException
+	 * @throws OCL2ParsingException
+	 * @throws RuntimeException
 	 */
 	@Test
-	public void testCollection09() {
+	public void testCollection09() throws RuntimeException, OCL2ParsingException,
+			ModelAccessException, TypeNotFoundInModelException {
 
 		Service service;
 
-		/* Load OCL file. */
-		testPerformer.loadOCLFile("constraints/test/collection09.ocl");
+		/* Load OCL file (contains collection expression). */
+		parsedConstraints =
+				testPerformer.loadOCLFile("constraints/test/collection09.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		service = new Service();
-		modelObject = testPerformer.addModelObject(service);
+		objectList.clear();
+		objectList.add(testPerformer.addModelObject(service));
 
-		/* Interpret the selected combinations. */
-		results = testPerformer.interpretRemainingConstraints(modelObject);
+		/* Interpret the selected object(s). */
+		results.clear();
+		results.addAll(testPerformer.interpretConstraint(parsedConstraints
+				.iterator().next(), objectList, true));
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(0);
+		result_Boolean = (OclBoolean) results.get(0).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
@@ -3768,19 +4036,26 @@ public class TestInterpretation {
 	 * A test case testing the interpretation of a {@link Constraint} contained
 	 * collection10.ocl.
 	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 *           , TypeNotFoundInModelException
+	 * @throws OCL2ParsingException
+	 * @throws RuntimeException
 	 */
 	@Test
-	public void testCollection10() {
+	public void testCollection10() throws RuntimeException, OCL2ParsingException,
+			ModelAccessException, TypeNotFoundInModelException {
 
 		LoyaltyProgram loyaltyProgram1;
 		LoyaltyProgram loyaltyProgram2;
 
 		Customer customer;
 
-		/* Load OCL file. */
-		testPerformer.loadOCLFile("constraints/test/collection10.ocl");
+		/* Load OCL file (contains collection expression). */
+		parsedConstraints =
+				testPerformer.loadOCLFile("constraints/test/collection10.ocl");
 
-		/* Select the model objects which shall be interpreted. */
+		/* Create the model objects which shall be interpreted. */
 		customer = new Customer(19);
 
 		loyaltyProgram1 = new LoyaltyProgram();
@@ -3790,20 +4065,22 @@ public class TestInterpretation {
 
 		testPerformer.addModelObject(customer);
 
-		objectList = new ArrayList<IModelInstanceElement>();
+		objectList.clear();
 		objectList.add(testPerformer.addModelObject(loyaltyProgram1));
 		objectList.add(testPerformer.addModelObject(loyaltyProgram2));
 
-		/* Interpret the selected combinations. */
-		results = testPerformer.interpretRemainingConstraints(objectList);
+		/* Interpret the selected object(s). */
+		results.clear();
+		results.addAll(testPerformer.interpretConstraint(parsedConstraints
+				.iterator().next(), objectList, true));
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(0);
+		result_Boolean = (OclBoolean) results.get(0).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(1);
+		result_Boolean = (OclBoolean) results.get(1).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
@@ -3813,17 +4090,24 @@ public class TestInterpretation {
 	 * A test case testing the interpretation of a {@link Constraint} contained
 	 * collection11.ocl.
 	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 *           , TypeNotFoundInModelException
+	 * @throws OCL2ParsingException
+	 * @throws RuntimeException
 	 */
 	@Test
-	public void testCollection11() {
+	public void testCollection11() throws RuntimeException, OCL2ParsingException,
+			ModelAccessException, TypeNotFoundInModelException {
 
 		Membership membership1;
 		Membership membership2;
 
 		LoyaltyAccount loyaltyAccount;
 
-		/* Load OCL file. */
-		testPerformer.loadOCLFile("constraints/test/collection11.ocl");
+		/* Load OCL file (contains collection expression). */
+		parsedConstraints =
+				testPerformer.loadOCLFile("constraints/test/collection11.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		loyaltyAccount = new LoyaltyAccount();
@@ -3835,20 +4119,22 @@ public class TestInterpretation {
 
 		testPerformer.addModelObject(loyaltyAccount);
 
-		objectList = new ArrayList<IModelInstanceElement>();
+		objectList.clear();
 		objectList.add(testPerformer.addModelObject(membership1));
 		objectList.add(testPerformer.addModelObject(membership2));
 
-		/* Interpret the selected combinations. */
-		results = testPerformer.interpretRemainingConstraints(objectList);
+		/* Interpret the selected object(s). */
+		results.clear();
+		results.addAll(testPerformer.interpretConstraint(parsedConstraints
+				.iterator().next(), objectList, true));
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(0);
+		result_Boolean = (OclBoolean) results.get(0).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertFalse(result_Boolean.isTrue());
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(1);
+		result_Boolean = (OclBoolean) results.get(1).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
@@ -3858,24 +4144,35 @@ public class TestInterpretation {
 	 * A test case testing the interpretation of a {@link Constraint} contained
 	 * collection12.ocl.
 	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 *           , TypeNotFoundInModelException
+	 * @throws OCL2ParsingException
+	 * @throws RuntimeException
 	 */
 	@Test
-	public void testCollection12() {
+	public void testCollection12() throws RuntimeException, OCL2ParsingException,
+			ModelAccessException, TypeNotFoundInModelException {
 
 		Membership membership;
 
-		/* Load OCL file. */
-		testPerformer.loadOCLFile("constraints/test/collection12.ocl");
+		/* Load OCL file (contains collection expression). */
+		parsedConstraints =
+				testPerformer.loadOCLFile("constraints/test/collection12.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		membership = new Membership();
-		modelObject = testPerformer.addModelObject(membership);
 
-		/* Interpret the selected combinations. */
-		results = testPerformer.interpretRemainingConstraints(modelObject);
+		objectList.clear();
+		objectList.add(testPerformer.addModelObject(membership));
+
+		/* Interpret the selected object(s). */
+		results.clear();
+		results.addAll(testPerformer.interpretConstraint(parsedConstraints
+				.iterator().next(), objectList, true));
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(0);
+		result_Boolean = (OclBoolean) results.get(0).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
@@ -3885,24 +4182,35 @@ public class TestInterpretation {
 	 * A test case testing the interpretation of a {@link Constraint} contained
 	 * collection13.ocl.
 	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 *           , TypeNotFoundInModelException
+	 * @throws OCL2ParsingException
+	 * @throws RuntimeException
 	 */
 	@Test
-	public void testCollection13() {
+	public void testCollection13() throws RuntimeException, OCL2ParsingException,
+			ModelAccessException, TypeNotFoundInModelException {
 
 		Membership membership;
 
-		/* Load OCL file. */
-		testPerformer.loadOCLFile("constraints/test/collection13.ocl");
+		/* Load OCL file (contains collection expression). */
+		parsedConstraints =
+				testPerformer.loadOCLFile("constraints/test/collection13.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		membership = new Membership();
-		modelObject = testPerformer.addModelObject(membership);
 
-		/* Interpret the selected combinations. */
-		results = testPerformer.interpretRemainingConstraints(modelObject);
+		objectList.clear();
+		objectList.add(testPerformer.addModelObject(membership));
+
+		/* Interpret the selected object(s). */
+		results.clear();
+		results.addAll(testPerformer.interpretConstraint(parsedConstraints
+				.iterator().next(), objectList, true));
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(0);
+		result_Boolean = (OclBoolean) results.get(0).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
@@ -3912,18 +4220,25 @@ public class TestInterpretation {
 	 * A test case testing the interpretation of a {@link Constraint} contained
 	 * collection14.ocl.
 	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 *           , TypeNotFoundInModelException
+	 * @throws OCL2ParsingException
+	 * @throws RuntimeException
 	 */
 	@Test
-	public void testCollection14() {
+	public void testCollection14() throws RuntimeException, OCL2ParsingException,
+			ModelAccessException, TypeNotFoundInModelException {
 
 		Membership membership;
 		LoyaltyProgram loyaltyProgram;
 		ServiceLevel serviceLevel;
 
-		/* Load OCL file. */
-		testPerformer.loadOCLFile("constraints/test/collection14.ocl");
+		/* Load OCL file (contains collection expression). */
+		parsedConstraints =
+				testPerformer.loadOCLFile("constraints/test/collection14.ocl");
 
-		/* Select the model objects which shall be interpreted. */
+		/* Create the model objects which shall be interpreted. */
 		serviceLevel = new ServiceLevel();
 
 		loyaltyProgram = new LoyaltyProgram();
@@ -3936,13 +4251,16 @@ public class TestInterpretation {
 		testPerformer.addModelObject(serviceLevel);
 		testPerformer.addModelObject(loyaltyProgram);
 
-		modelObject = testPerformer.addModelObject(membership);
+		objectList.clear();
+		objectList.add(testPerformer.addModelObject(membership));
 
-		/* Interpret the selected combinations. */
-		results = testPerformer.interpretRemainingConstraints(modelObject);
+		/* Interpret the selected object(s). */
+		results.clear();
+		results.addAll(testPerformer.interpretConstraint(parsedConstraints
+				.iterator().next(), objectList, true));
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(0);
+		result_Boolean = (OclBoolean) results.get(0).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
@@ -3952,9 +4270,15 @@ public class TestInterpretation {
 	 * A test case testing the interpretation of a {@link Constraint} contained
 	 * collection15.ocl.
 	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 *           , TypeNotFoundInModelException
+	 * @throws OCL2ParsingException
+	 * @throws RuntimeException
 	 */
 	@Test
-	public void testCollection15() {
+	public void testCollection15() throws RuntimeException, OCL2ParsingException,
+			ModelAccessException, TypeNotFoundInModelException {
 
 		Membership membership1;
 		Membership membership2;
@@ -3964,10 +4288,11 @@ public class TestInterpretation {
 		ServiceLevel serviceLevel1;
 		ServiceLevel serviceLevel2;
 
-		/* Load OCL file. */
-		testPerformer.loadOCLFile("constraints/test/collection15.ocl");
+		/* Load OCL file (contains collection expression). */
+		parsedConstraints =
+				testPerformer.loadOCLFile("constraints/test/collection15.ocl");
 
-		/* Select the model objects which shall be interpreted. */
+		/* Create the model objects which shall be interpreted. */
 		serviceLevel1 = new ServiceLevel();
 		serviceLevel2 = new ServiceLevel();
 
@@ -3986,20 +4311,22 @@ public class TestInterpretation {
 		testPerformer.addModelObject(serviceLevel2);
 		testPerformer.addModelObject(loyaltyProgram);
 
-		objectList = new ArrayList<IModelInstanceElement>();
+		objectList.clear();
 		objectList.add(testPerformer.addModelObject(membership1));
 		objectList.add(testPerformer.addModelObject(membership2));
 
-		/* Interpret the selected combinations. */
-		results = testPerformer.interpretRemainingConstraints(objectList);
+		/* Interpret the selected object(s). */
+		results.clear();
+		results.addAll(testPerformer.interpretConstraint(parsedConstraints
+				.iterator().next(), objectList, true));
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(0);
+		result_Boolean = (OclBoolean) results.get(0).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(1);
+		result_Boolean = (OclBoolean) results.get(1).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertFalse(result_Boolean.isTrue());
 	}
@@ -4009,9 +4336,17 @@ public class TestInterpretation {
 	 * A test case testing the interpretation of a {@link Constraint} contained
 	 * collection16.ocl.
 	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 *           , TypeNotFoundInModelException
+	 * @throws OCL2ParsingException
+	 * @throws RuntimeException
+	 * @throws IllegalArgumentException
 	 */
 	@Test
-	public void testCollection16() {
+	public void testCollection16() throws IllegalArgumentException,
+			RuntimeException, OCL2ParsingException, ModelAccessException,
+			TypeNotFoundInModelException {
 
 		Membership membership1;
 		Membership membership2;
@@ -4021,10 +4356,11 @@ public class TestInterpretation {
 		ServiceLevel serviceLevel1;
 		ServiceLevel serviceLevel2;
 
-		/* Load OCL file. */
-		testPerformer.loadOCLFile("constraints/test/collection16.ocl");
+		/* Load OCL file (contains collection expression). */
+		parsedConstraints =
+				testPerformer.loadOCLFile("constraints/test/collection16.ocl");
 
-		/* Select the model objects which shall be interpreted. */
+		/* Create the model objects which shall be interpreted. */
 		serviceLevel1 = new ServiceLevel();
 		serviceLevel2 = new ServiceLevel();
 
@@ -4043,20 +4379,22 @@ public class TestInterpretation {
 		testPerformer.addModelObject(serviceLevel2);
 		testPerformer.addModelObject(loyaltyProgram);
 
-		objectList = new ArrayList<IModelInstanceElement>();
+		objectList.clear();
 		objectList.add(testPerformer.addModelObject(membership1));
 		objectList.add(testPerformer.addModelObject(membership2));
 
-		/* Interpret the selected combinations. */
-		results = testPerformer.interpretRemainingConstraints(objectList);
+		/* Interpret the selected object(s). */
+		results.clear();
+		results.addAll(testPerformer.interpretConstraint(parsedConstraints
+				.iterator().next(), objectList, true));
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(0);
+		result_Boolean = (OclBoolean) results.get(0).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(1);
+		result_Boolean = (OclBoolean) results.get(1).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertFalse(result_Boolean.isTrue());
 	}
@@ -4066,9 +4404,15 @@ public class TestInterpretation {
 	 * A test case testing the interpretation of a {@link Constraint} contained
 	 * collection17.ocl.
 	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 *           , TypeNotFoundInModelException
+	 * @throws OCL2ParsingException
+	 * @throws RuntimeException
 	 */
 	@Test
-	public void testCollection17() {
+	public void testCollection17() throws RuntimeException, OCL2ParsingException,
+			ModelAccessException, TypeNotFoundInModelException {
 
 		Membership membership1;
 		Membership membership2;
@@ -4079,10 +4423,11 @@ public class TestInterpretation {
 		ServiceLevel serviceLevel1;
 		ServiceLevel serviceLevel2;
 
-		/* Load OCL file. */
-		testPerformer.loadOCLFile("constraints/test/collection17.ocl");
+		/* Load OCL file (contains collection expression). */
+		parsedConstraints =
+				testPerformer.loadOCLFile("constraints/test/collection17.ocl");
 
-		/* Select the model objects which shall be interpreted. */
+		/* Create the model objects which shall be interpreted. */
 		serviceLevel1 = new ServiceLevel();
 		serviceLevel2 = new ServiceLevel();
 
@@ -4104,20 +4449,22 @@ public class TestInterpretation {
 		testPerformer.addModelObject(loyaltyProgram1);
 		testPerformer.addModelObject(loyaltyProgram2);
 
-		objectList = new ArrayList<IModelInstanceElement>();
+		objectList.clear();
 		objectList.add(testPerformer.addModelObject(membership1));
 		objectList.add(testPerformer.addModelObject(membership2));
 
-		/* Interpret the selected combinations. */
-		results = testPerformer.interpretRemainingConstraints(objectList);
+		/* Interpret the selected object(s). */
+		results.clear();
+		results.addAll(testPerformer.interpretConstraint(parsedConstraints
+				.iterator().next(), objectList, true));
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(0);
+		result_Boolean = (OclBoolean) results.get(0).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(1);
+		result_Boolean = (OclBoolean) results.get(1).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
@@ -4127,26 +4474,37 @@ public class TestInterpretation {
 	 * A test case testing the interpretation of a {@link Constraint} contained
 	 * collection18.ocl.
 	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 *           , TypeNotFoundInModelException
+	 * @throws OCL2ParsingException
+	 * @throws RuntimeException
+	 * @throws IllegalArgumentException
 	 */
 	@Test
-	public void testCollection18() {
+	public void testCollection18() throws IllegalArgumentException,
+			RuntimeException, OCL2ParsingException, ModelAccessException,
+			TypeNotFoundInModelException {
 
 		Membership membership;
 
-		/* Load OCL file. */
-		testPerformer.loadOCLFile("constraints/test/collection18.ocl");
+		/* Load OCL file (contains collection expression). */
+		parsedConstraints =
+				testPerformer.loadOCLFile("constraints/test/collection18.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		membership = new Membership();
 
-		objectList = new ArrayList<IModelInstanceElement>();
+		objectList.clear();
 		objectList.add(testPerformer.addModelObject(membership));
 
-		/* Interpret the selected combinations. */
-		results = testPerformer.interpretRemainingConstraints(objectList);
+		/* Interpret the selected object(s). */
+		results.clear();
+		results.addAll(testPerformer.interpretConstraint(parsedConstraints
+				.iterator().next(), objectList, true));
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(0);
+		result_Boolean = (OclBoolean) results.get(0).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
@@ -4156,26 +4514,35 @@ public class TestInterpretation {
 	 * A test case testing the interpretation of a {@link Constraint} contained
 	 * collection19.ocl.
 	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 *           , TypeNotFoundInModelException
+	 * @throws OCL2ParsingException
+	 * @throws RuntimeException
 	 */
 	@Test
-	public void testCollection19() {
+	public void testCollection19() throws RuntimeException, OCL2ParsingException,
+			ModelAccessException, TypeNotFoundInModelException {
 
 		Membership membership;
 
-		/* Load OCL file. */
-		testPerformer.loadOCLFile("constraints/test/collection19.ocl");
+		/* Load OCL file (contains collection expression). */
+		parsedConstraints =
+				testPerformer.loadOCLFile("constraints/test/collection19.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		membership = new Membership();
 
-		objectList = new ArrayList<IModelInstanceElement>();
+		objectList.clear();
 		objectList.add(testPerformer.addModelObject(membership));
 
-		/* Interpret the selected combinations. */
-		results = testPerformer.interpretRemainingConstraints(objectList);
+		/* Interpret the selected object(s). */
+		results.clear();
+		results.addAll(testPerformer.interpretConstraint(parsedConstraints
+				.iterator().next(), objectList, true));
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(0);
+		result_Boolean = (OclBoolean) results.get(0).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
@@ -4185,9 +4552,15 @@ public class TestInterpretation {
 	 * A test case testing the interpretation of a {@link Constraint} contained
 	 * collection20.ocl.
 	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 *           , TypeNotFoundInModelException
+	 * @throws OCL2ParsingException
+	 * @throws RuntimeException
 	 */
 	@Test
-	public void testCollection20() {
+	public void testCollection20() throws RuntimeException, OCL2ParsingException,
+			ModelAccessException, TypeNotFoundInModelException {
 
 		LoyaltyProgram loyaltyProgram;
 
@@ -4203,8 +4576,9 @@ public class TestInterpretation {
 		ServiceLevel serviceLevel2;
 		ServiceLevel serviceLevel3;
 
-		/* Load OCL file. */
-		testPerformer.loadOCLFile("constraints/test/collection20.ocl");
+		/* Load OCL file (contains collection expression). */
+		parsedConstraints =
+				testPerformer.loadOCLFile("constraints/test/collection20.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		loyaltyProgram = new LoyaltyProgram();
@@ -4249,26 +4623,28 @@ public class TestInterpretation {
 		testPerformer.addModelObject(service2);
 		testPerformer.addModelObject(service3);
 
-		objectList = new ArrayList<IModelInstanceElement>();
+		objectList.clear();
 		objectList.add(testPerformer.addModelObject(serviceLevel1));
 		objectList.add(testPerformer.addModelObject(serviceLevel2));
 		objectList.add(testPerformer.addModelObject(serviceLevel3));
 
-		/* Interpret the selected combinations. */
-		results = testPerformer.interpretRemainingConstraints(objectList);
+		/* Interpret the selected object(s). */
+		results.clear();
+		results.addAll(testPerformer.interpretConstraint(parsedConstraints
+				.iterator().next(), objectList, true));
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(0);
+		result_Boolean = (OclBoolean) results.get(0).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(1);
+		result_Boolean = (OclBoolean) results.get(1).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertFalse(result_Boolean.isTrue());
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(2);
+		result_Boolean = (OclBoolean) results.get(2).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertFalse(result_Boolean.isTrue());
 	}
@@ -4278,9 +4654,15 @@ public class TestInterpretation {
 	 * A test case testing the interpretation of a {@link Constraint} contained
 	 * collection21.ocl.
 	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 *           , TypeNotFoundInModelException
+	 * @throws OCL2ParsingException
+	 * @throws RuntimeException
 	 */
 	@Test
-	public void testCollection21() {
+	public void testCollection21() throws RuntimeException, OCL2ParsingException,
+			ModelAccessException, TypeNotFoundInModelException {
 
 		LoyaltyProgram loyaltyProgram;
 
@@ -4296,8 +4678,9 @@ public class TestInterpretation {
 		ServiceLevel serviceLevel2;
 		ServiceLevel serviceLevel3;
 
-		/* Load OCL file. */
-		testPerformer.loadOCLFile("constraints/test/collection21.ocl");
+		/* Load OCL file (contains collection expression). */
+		parsedConstraints =
+				testPerformer.loadOCLFile("constraints/test/collection21.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		loyaltyProgram = new LoyaltyProgram();
@@ -4342,26 +4725,28 @@ public class TestInterpretation {
 		testPerformer.addModelObject(service2);
 		testPerformer.addModelObject(service3);
 
-		objectList = new ArrayList<IModelInstanceElement>();
+		objectList.clear();
 		objectList.add(testPerformer.addModelObject(serviceLevel1));
 		objectList.add(testPerformer.addModelObject(serviceLevel2));
 		objectList.add(testPerformer.addModelObject(serviceLevel3));
 
-		/* Interpret the selected combinations. */
-		results = testPerformer.interpretRemainingConstraints(objectList);
+		/* Interpret the selected object(s). */
+		results.clear();
+		results.addAll(testPerformer.interpretConstraint(parsedConstraints
+				.iterator().next(), objectList, true));
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(0);
+		result_Boolean = (OclBoolean) results.get(0).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(1);
+		result_Boolean = (OclBoolean) results.get(1).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(2);
+		result_Boolean = (OclBoolean) results.get(2).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertFalse(result_Boolean.isTrue());
 	}
@@ -4371,26 +4756,35 @@ public class TestInterpretation {
 	 * A test case testing the interpretation of a {@link Constraint} contained
 	 * collection22.ocl.
 	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 *           , TypeNotFoundInModelException
+	 * @throws OCL2ParsingException
+	 * @throws RuntimeException
 	 */
 	@Test
-	public void testCollection22() {
+	public void testCollection22() throws RuntimeException, OCL2ParsingException,
+			ModelAccessException, TypeNotFoundInModelException {
 
 		Membership membership;
 
-		/* Load OCL file. */
-		testPerformer.loadOCLFile("constraints/test/collection22.ocl");
+		/* Load OCL file (contains collection expression). */
+		parsedConstraints =
+				testPerformer.loadOCLFile("constraints/test/collection22.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		membership = new Membership();
 
-		objectList = new ArrayList<IModelInstanceElement>();
+		objectList.clear();
 		objectList.add(testPerformer.addModelObject(membership));
 
-		/* Interpret the selected combinations. */
-		results = testPerformer.interpretRemainingConstraints(objectList);
+		/* Interpret the selected object(s). */
+		results.clear();
+		results.addAll(testPerformer.interpretConstraint(parsedConstraints
+				.iterator().next(), objectList, true));
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(0);
+		result_Boolean = (OclBoolean) results.get(0).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
@@ -4400,26 +4794,35 @@ public class TestInterpretation {
 	 * A test case testing the interpretation of a {@link Constraint} contained
 	 * collection25.ocl.
 	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 *           , TypeNotFoundInModelException
+	 * @throws OCL2ParsingException
+	 * @throws RuntimeException
 	 */
 	@Test
-	public void testCollection25() {
+	public void testCollection25() throws RuntimeException, OCL2ParsingException,
+			ModelAccessException, TypeNotFoundInModelException {
 
 		Membership membership;
 
-		/* Load OCL file. */
-		testPerformer.loadOCLFile("constraints/test/collection25.ocl");
+		/* Load OCL file (contains collection expression). */
+		parsedConstraints =
+				testPerformer.loadOCLFile("constraints/test/collection25.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		membership = new Membership();
 
-		objectList = new ArrayList<IModelInstanceElement>();
+		objectList.clear();
 		objectList.add(testPerformer.addModelObject(membership));
 
-		/* Interpret the selected combinations. */
-		results = testPerformer.interpretRemainingConstraints(objectList);
+		/* Interpret the selected object(s). */
+		results.clear();
+		results.addAll(testPerformer.interpretConstraint(parsedConstraints
+				.iterator().next(), objectList, true));
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(0);
+		result_Boolean = (OclBoolean) results.get(0).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
@@ -4429,26 +4832,35 @@ public class TestInterpretation {
 	 * A test case testing the interpretation of a {@link Constraint} contained
 	 * collection26.ocl.
 	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 *           , TypeNotFoundInModelException
+	 * @throws OCL2ParsingException
+	 * @throws RuntimeException
 	 */
 	@Test
-	public void testCollection26() {
+	public void testCollection26() throws RuntimeException, OCL2ParsingException,
+			ModelAccessException, TypeNotFoundInModelException {
 
 		Membership membership;
 
-		/* Load OCL file. */
-		testPerformer.loadOCLFile("constraints/test/collection26.ocl");
+		/* Load OCL file (contains collection expression). */
+		parsedConstraints =
+				testPerformer.loadOCLFile("constraints/test/collection26.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		membership = new Membership();
 
-		objectList = new ArrayList<IModelInstanceElement>();
+		objectList.clear();
 		objectList.add(testPerformer.addModelObject(membership));
 
-		/* Interpret the selected combinations. */
-		results = testPerformer.interpretRemainingConstraints(objectList);
+		/* Interpret the selected object(s). */
+		results.clear();
+		results.addAll(testPerformer.interpretConstraint(parsedConstraints
+				.iterator().next(), objectList, true));
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(0);
+		result_Boolean = (OclBoolean) results.get(0).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
@@ -4458,26 +4870,35 @@ public class TestInterpretation {
 	 * A test case testing the interpretation of a {@link Constraint} contained
 	 * collection27.ocl.
 	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 *           , TypeNotFoundInModelException
+	 * @throws OCL2ParsingException
+	 * @throws RuntimeException
 	 */
 	@Test
-	public void testCollection27() {
+	public void testCollection27() throws RuntimeException, OCL2ParsingException,
+			ModelAccessException, TypeNotFoundInModelException {
 
 		Membership membership;
 
-		/* Load OCL file. */
-		testPerformer.loadOCLFile("constraints/test/collection27.ocl");
+		/* Load OCL file (contains collection expression). */
+		parsedConstraints =
+				testPerformer.loadOCLFile("constraints/test/collection27.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		membership = new Membership();
 
-		objectList = new ArrayList<IModelInstanceElement>();
+		objectList.clear();
 		objectList.add(testPerformer.addModelObject(membership));
 
-		/* Interpret the selected combinations. */
-		results = testPerformer.interpretRemainingConstraints(objectList);
+		/* Interpret the selected object(s). */
+		results.clear();
+		results.addAll(testPerformer.interpretConstraint(parsedConstraints
+				.iterator().next(), objectList, true));
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(0);
+		result_Boolean = (OclBoolean) results.get(0).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
@@ -4487,26 +4908,35 @@ public class TestInterpretation {
 	 * A test case testing the interpretation of a {@link Constraint} contained
 	 * collection28.ocl.
 	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 *           , TypeNotFoundInModelException
+	 * @throws OCL2ParsingException
+	 * @throws RuntimeException
 	 */
 	@Test
-	public void testCollection28() {
+	public void testCollection28() throws RuntimeException, OCL2ParsingException,
+			ModelAccessException, TypeNotFoundInModelException {
 
 		Membership membership;
 
-		/* Load OCL file. */
-		testPerformer.loadOCLFile("constraints/test/collection28.ocl");
+		/* Load OCL file (contains collection expression). */
+		parsedConstraints =
+				testPerformer.loadOCLFile("constraints/test/collection28.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		membership = new Membership();
 
-		objectList = new ArrayList<IModelInstanceElement>();
+		objectList.clear();
 		objectList.add(testPerformer.addModelObject(membership));
 
-		/* Interpret the selected combinations. */
-		results = testPerformer.interpretRemainingConstraints(objectList);
+		/* Interpret the selected object(s). */
+		results.clear();
+		results.addAll(testPerformer.interpretConstraint(parsedConstraints
+				.iterator().next(), objectList, true));
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(0);
+		result_Boolean = (OclBoolean) results.get(0).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
@@ -4516,26 +4946,35 @@ public class TestInterpretation {
 	 * A test case testing the interpretation of a {@link Constraint} contained
 	 * collection29.ocl.
 	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 *           , TypeNotFoundInModelException
+	 * @throws OCL2ParsingException
+	 * @throws RuntimeException
 	 */
 	@Test
-	public void testCollection29() {
+	public void testCollection29() throws RuntimeException, OCL2ParsingException,
+			ModelAccessException, TypeNotFoundInModelException {
 
 		Membership membership;
 
-		/* Load OCL file. */
-		testPerformer.loadOCLFile("constraints/test/collection29.ocl");
+		/* Load OCL file (contains collection expression). */
+		parsedConstraints =
+				testPerformer.loadOCLFile("constraints/test/collection29.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		membership = new Membership();
 
-		objectList = new ArrayList<IModelInstanceElement>();
+		objectList.clear();
 		objectList.add(testPerformer.addModelObject(membership));
 
-		/* Interpret the selected combinations. */
-		results = testPerformer.interpretRemainingConstraints(objectList);
+		/* Interpret the selected object(s). */
+		results.clear();
+		results.addAll(testPerformer.interpretConstraint(parsedConstraints
+				.iterator().next(), objectList, true));
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(0);
+		result_Boolean = (OclBoolean) results.get(0).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
@@ -4545,26 +4984,35 @@ public class TestInterpretation {
 	 * A test case testing the interpretation of a {@link Constraint} contained
 	 * collection30.ocl.
 	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 *           , TypeNotFoundInModelException
+	 * @throws OCL2ParsingException
+	 * @throws RuntimeException
 	 */
 	@Test
-	public void testCollection30() {
+	public void testCollection30() throws RuntimeException, OCL2ParsingException,
+			ModelAccessException, TypeNotFoundInModelException {
 
 		Membership membership;
 
-		/* Load OCL file. */
-		testPerformer.loadOCLFile("constraints/test/collection30.ocl");
+		/* Load OCL file (contains collection expression). */
+		parsedConstraints =
+				testPerformer.loadOCLFile("constraints/test/collection30.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		membership = new Membership();
 
-		objectList = new ArrayList<IModelInstanceElement>();
+		objectList.clear();
 		objectList.add(testPerformer.addModelObject(membership));
 
-		/* Interpret the selected combinations. */
-		results = testPerformer.interpretRemainingConstraints(objectList);
+		/* Interpret the selected object(s). */
+		results.clear();
+		results.addAll(testPerformer.interpretConstraint(parsedConstraints
+				.iterator().next(), objectList, true));
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(0);
+		result_Boolean = (OclBoolean) results.get(0).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
@@ -4574,26 +5022,35 @@ public class TestInterpretation {
 	 * A test case testing the interpretation of a {@link Constraint} contained
 	 * collection31.ocl.
 	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 *           , TypeNotFoundInModelException
+	 * @throws OCL2ParsingException
+	 * @throws RuntimeException
 	 */
 	@Test
-	public void testCollection31() {
+	public void testCollection31() throws RuntimeException, OCL2ParsingException,
+			ModelAccessException, TypeNotFoundInModelException {
 
 		Membership membership;
 
-		/* Load OCL file. */
-		testPerformer.loadOCLFile("constraints/test/collection31.ocl");
+		/* Load OCL file (contains collection expression). */
+		parsedConstraints =
+				testPerformer.loadOCLFile("constraints/test/collection31.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		membership = new Membership();
 
-		objectList = new ArrayList<IModelInstanceElement>();
+		objectList.clear();
 		objectList.add(testPerformer.addModelObject(membership));
 
-		/* Interpret the selected combinations. */
-		results = testPerformer.interpretRemainingConstraints(objectList);
+		/* Interpret the selected object(s). */
+		results.clear();
+		results.addAll(testPerformer.interpretConstraint(parsedConstraints
+				.iterator().next(), objectList, true));
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(0);
+		result_Boolean = (OclBoolean) results.get(0).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
@@ -4603,26 +5060,35 @@ public class TestInterpretation {
 	 * A test case testing the interpretation of a {@link Constraint} contained
 	 * collection32.ocl.
 	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 *           , TypeNotFoundInModelException
+	 * @throws OCL2ParsingException
+	 * @throws RuntimeException
 	 */
 	@Test
-	public void testCollection32() {
+	public void testCollection32() throws RuntimeException, OCL2ParsingException,
+			ModelAccessException, TypeNotFoundInModelException {
 
 		Membership membership;
 
-		/* Load OCL file. */
-		testPerformer.loadOCLFile("constraints/test/collection32.ocl");
+		/* Load OCL file (contains collection expression). */
+		parsedConstraints =
+				testPerformer.loadOCLFile("constraints/test/collection32.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		membership = new Membership();
 
-		objectList = new ArrayList<IModelInstanceElement>();
+		objectList.clear();
 		objectList.add(testPerformer.addModelObject(membership));
 
-		/* Interpret the selected combinations. */
-		results = testPerformer.interpretRemainingConstraints(objectList);
+		/* Interpret the selected object(s). */
+		results.clear();
+		results.addAll(testPerformer.interpretConstraint(parsedConstraints
+				.iterator().next(), objectList, true));
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(0);
+		result_Boolean = (OclBoolean) results.get(0).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
@@ -4632,308 +5098,35 @@ public class TestInterpretation {
 	 * A test case testing the interpretation of a {@link Constraint} contained
 	 * collection33.ocl.
 	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 *           , TypeNotFoundInModelException
+	 * @throws OCL2ParsingException
+	 * @throws RuntimeException
 	 */
 	@Test
-	public void testCollection33() {
+	public void testCollection33() throws RuntimeException, OCL2ParsingException,
+			ModelAccessException, TypeNotFoundInModelException {
 
 		Membership membership;
 
-		/* Load OCL file. */
-		testPerformer.loadOCLFile("constraints/test/collection33.ocl");
+		/* Load OCL file (contains collection expression). */
+		parsedConstraints =
+				testPerformer.loadOCLFile("constraints/test/collection33.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		membership = new Membership();
 
-		objectList = new ArrayList<IModelInstanceElement>();
+		objectList.clear();
 		objectList.add(testPerformer.addModelObject(membership));
 
-		/* Interpret the selected combinations. */
-		results = testPerformer.interpretRemainingConstraints(objectList);
+		/* Interpret the selected object(s). */
+		results.clear();
+		results.addAll(testPerformer.interpretConstraint(parsedConstraints
+				.iterator().next(), objectList, true));
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(0);
-		assertFalse(result_Boolean.oclIsUndefined().isTrue());
-		assertTrue(result_Boolean.isTrue());
-	}
-
-	/**
-	 * <p>
-	 * A test case testing the interpretation of a {@link Constraint} contained
-	 * iterator01.ocl.
-	 * </p>
-	 */
-	@Test
-	public void testIterator01() {
-
-		LoyaltyAccount loyaltyAccount;
-
-		LoyaltyProgram loyaltyProgram1;
-		LoyaltyProgram loyaltyProgram2;
-
-		Membership membership1;
-		Membership membership2;
-
-		Service service;
-
-		ServiceLevel serviceLevel1;
-		ServiceLevel serviceLevel2;
-		ServiceLevel serviceLevel3;
-
-		ProgramPartner programPartner;
-
-		/* Load OCL file. */
-		testPerformer.loadOCLFile("constraints/test/iterator01.ocl");
-
-		/* Create the model objects which shall be interpreted. */
-		serviceLevel1 = new ServiceLevel();
-		serviceLevel2 = new ServiceLevel();
-		serviceLevel3 = new ServiceLevel();
-
-		membership1 = new Membership();
-		membership1.setCurrentLevel(serviceLevel1);
-
-		loyaltyAccount = new LoyaltyAccount();
-		loyaltyAccount.setMembership(membership1);
-		membership1.addAccount(loyaltyAccount);
-
-		membership2 = new Membership();
-		membership2.setCurrentLevel(serviceLevel2);
-
-		loyaltyProgram1 = new LoyaltyProgram();
-		loyaltyProgram2 = new LoyaltyProgram();
-
-		service = new Service();
-		programPartner = new ProgramPartner();
-
-		service.setLevel(serviceLevel1);
-		service.setPartner(programPartner);
-
-		programPartner.addProgram(loyaltyProgram1);
-		programPartner.addDeliveredService(service);
-
-		serviceLevel1.setProgram(loyaltyProgram1);
-		serviceLevel1.addAvailableService(service);
-
-		loyaltyProgram1.setMembership(membership1);
-		loyaltyProgram1.addLevel(serviceLevel1);
-		loyaltyProgram1.addLevel(serviceLevel2);
-		loyaltyProgram1.addPartner(programPartner);
-
-		loyaltyProgram2.setMembership(membership2);
-		loyaltyProgram2.addLevel(serviceLevel1);
-		loyaltyProgram2.addLevel(serviceLevel3);
-
-		testPerformer.addModelObject(loyaltyAccount);
-		testPerformer.addModelObject(membership1);
-		testPerformer.addModelObject(membership2);
-		testPerformer.addModelObject(serviceLevel1);
-		testPerformer.addModelObject(serviceLevel2);
-		testPerformer.addModelObject(serviceLevel3);
-		testPerformer.addModelObject(service);
-		testPerformer.addModelObject(programPartner);
-
-		objectList = new ArrayList<IModelInstanceElement>();
-		objectList.add(testPerformer.addModelObject(loyaltyProgram1));
-		objectList.add(testPerformer.addModelObject(loyaltyProgram2));
-
-		/* Interpret the selected combinations. */
-		results = testPerformer.interpretRemainingConstraints(objectList);
-
-		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(0);
-		assertFalse(result_Boolean.oclIsUndefined().isTrue());
-		assertTrue(result_Boolean.isTrue());
-
-		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(1);
-		assertFalse(result_Boolean.oclIsUndefined().isTrue());
-		assertTrue(result_Boolean.isTrue());
-	}
-
-	/**
-	 * <p>
-	 * A test case testing the interpretation of a {@link Constraint} contained
-	 * iterator02.ocl.
-	 * </p>
-	 */
-	@Test
-	public void testIterator02() {
-
-		LoyaltyAccount loyaltyAccount;
-
-		LoyaltyProgram loyaltyProgram1;
-		LoyaltyProgram loyaltyProgram2;
-
-		Membership membership1;
-		Membership membership2;
-
-		Service service;
-
-		ServiceLevel serviceLevel1;
-		ServiceLevel serviceLevel2;
-		ServiceLevel serviceLevel3;
-
-		ProgramPartner programPartner;
-
-		/* Load OCL file. */
-		testPerformer.loadOCLFile("constraints/test/iterator02.ocl");
-
-		/* Create the model objects which shall be interpreted. */
-		serviceLevel1 = new ServiceLevel();
-		serviceLevel2 = new ServiceLevel();
-		serviceLevel3 = new ServiceLevel();
-
-		membership1 = new Membership();
-		membership1.setCurrentLevel(serviceLevel1);
-
-		loyaltyAccount = new LoyaltyAccount();
-		loyaltyAccount.setMembership(membership1);
-		membership1.addAccount(loyaltyAccount);
-
-		membership2 = new Membership();
-		membership2.setCurrentLevel(serviceLevel2);
-
-		loyaltyProgram1 = new LoyaltyProgram();
-		loyaltyProgram2 = new LoyaltyProgram();
-
-		service = new Service();
-		programPartner = new ProgramPartner();
-
-		service.setLevel(serviceLevel1);
-		service.setPartner(programPartner);
-
-		programPartner.addProgram(loyaltyProgram1);
-		programPartner.addDeliveredService(service);
-
-		serviceLevel1.setProgram(loyaltyProgram1);
-		serviceLevel1.addAvailableService(service);
-
-		loyaltyProgram1.setMembership(membership1);
-		loyaltyProgram1.addLevel(serviceLevel1);
-		loyaltyProgram1.addLevel(serviceLevel2);
-		loyaltyProgram1.addPartner(programPartner);
-
-		loyaltyProgram2.setMembership(membership2);
-		loyaltyProgram2.addLevel(serviceLevel1);
-		loyaltyProgram2.addLevel(serviceLevel3);
-
-		testPerformer.addModelObject(loyaltyAccount);
-		testPerformer.addModelObject(membership1);
-		testPerformer.addModelObject(membership2);
-		testPerformer.addModelObject(serviceLevel1);
-		testPerformer.addModelObject(serviceLevel2);
-		testPerformer.addModelObject(serviceLevel3);
-		testPerformer.addModelObject(service);
-		testPerformer.addModelObject(programPartner);
-
-		objectList = new ArrayList<IModelInstanceElement>();
-		objectList.add(testPerformer.addModelObject(loyaltyProgram1));
-		objectList.add(testPerformer.addModelObject(loyaltyProgram2));
-
-		/* Interpret the selected combinations. */
-		results = testPerformer.interpretRemainingConstraints(objectList);
-
-		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(0);
-		assertFalse(result_Boolean.oclIsUndefined().isTrue());
-		assertTrue(result_Boolean.isTrue());
-
-		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(1);
-		assertFalse(result_Boolean.oclIsUndefined().isTrue());
-		assertTrue(result_Boolean.isTrue());
-	}
-
-	/**
-	 * <p>
-	 * A test case testing the interpretation of a {@link Constraint} contained
-	 * iterator03.ocl.
-	 * </p>
-	 */
-	@Test
-	public void testIterator03() {
-
-		LoyaltyAccount loyaltyAccount;
-
-		LoyaltyProgram loyaltyProgram1;
-		LoyaltyProgram loyaltyProgram2;
-
-		Membership membership1;
-		Membership membership2;
-
-		Service service;
-
-		ServiceLevel serviceLevel1;
-		ServiceLevel serviceLevel2;
-		ServiceLevel serviceLevel3;
-
-		ProgramPartner programPartner;
-
-		/* Load OCL file. */
-		testPerformer.loadOCLFile("constraints/test/iterator03.ocl");
-
-		/* Create the model objects which shall be interpreted. */
-		serviceLevel1 = new ServiceLevel();
-		serviceLevel2 = new ServiceLevel();
-		serviceLevel3 = new ServiceLevel();
-
-		membership1 = new Membership();
-		membership1.setCurrentLevel(serviceLevel1);
-
-		loyaltyAccount = new LoyaltyAccount();
-		loyaltyAccount.setMembership(membership1);
-		membership1.addAccount(loyaltyAccount);
-
-		membership2 = new Membership();
-		membership2.setCurrentLevel(serviceLevel2);
-
-		loyaltyProgram1 = new LoyaltyProgram();
-		loyaltyProgram2 = new LoyaltyProgram();
-
-		service = new Service();
-		programPartner = new ProgramPartner();
-
-		service.setLevel(serviceLevel1);
-		service.setPartner(programPartner);
-
-		programPartner.addProgram(loyaltyProgram1);
-		programPartner.addDeliveredService(service);
-
-		serviceLevel1.setProgram(loyaltyProgram1);
-		serviceLevel1.addAvailableService(service);
-
-		loyaltyProgram1.setMembership(membership1);
-		loyaltyProgram1.addLevel(serviceLevel1);
-		loyaltyProgram1.addLevel(serviceLevel2);
-		loyaltyProgram1.addPartner(programPartner);
-
-		loyaltyProgram2.setMembership(membership2);
-		loyaltyProgram2.addLevel(serviceLevel1);
-		loyaltyProgram2.addLevel(serviceLevel3);
-
-		testPerformer.addModelObject(loyaltyAccount);
-		testPerformer.addModelObject(membership1);
-		testPerformer.addModelObject(membership2);
-		testPerformer.addModelObject(serviceLevel1);
-		testPerformer.addModelObject(serviceLevel2);
-		testPerformer.addModelObject(serviceLevel3);
-		testPerformer.addModelObject(service);
-		testPerformer.addModelObject(programPartner);
-
-		objectList = new ArrayList<IModelInstanceElement>();
-		objectList.add(testPerformer.addModelObject(loyaltyProgram1));
-		objectList.add(testPerformer.addModelObject(loyaltyProgram2));
-
-		/* Interpret the selected combinations. */
-		results = testPerformer.interpretRemainingConstraints(objectList);
-
-		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(0);
-		assertFalse(result_Boolean.oclIsUndefined().isTrue());
-		assertTrue(result_Boolean.isTrue());
-
-		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(1);
+		result_Boolean = (OclBoolean) results.get(0).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
@@ -4943,9 +5136,15 @@ public class TestInterpretation {
 	 * A test case testing the interpretation of a {@link Constraint} contained
 	 * iterate01.ocl.
 	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 *           , TypeNotFoundInModelException
+	 * @throws OCL2ParsingException
+	 * @throws RuntimeException
 	 */
 	@Test
-	public void testIterate01() {
+	public void testIterate01() throws RuntimeException, OCL2ParsingException,
+			ModelAccessException, TypeNotFoundInModelException {
 
 		LoyaltyAccount loyaltyAccount;
 		LoyaltyProgram loyaltyProgram;
@@ -4958,8 +5157,9 @@ public class TestInterpretation {
 
 		ProgramPartner programPartner;
 
-		/* Load OCL file. */
-		testPerformer.loadOCLFile("constraints/test/iterate01.ocl");
+		/* Load OCL file (contains iterate expression). */
+		parsedConstraints =
+				testPerformer.loadOCLFile("constraints/test/iterate01.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		serviceLevel1 = new ServiceLevel();
@@ -4997,14 +5197,322 @@ public class TestInterpretation {
 		testPerformer.addModelObject(serviceLevel2);
 		testPerformer.addModelObject(service);
 
-		objectList = new ArrayList<IModelInstanceElement>();
+		objectList.clear();
 		objectList.add(testPerformer.addModelObject(programPartner));
 
-		/* Interpret the selected combinations. */
-		results = testPerformer.interpretRemainingConstraints(objectList);
+		/* Interpret the selected object(s). */
+		results.clear();
+		results.addAll(testPerformer.interpretConstraint(parsedConstraints
+				.iterator().next(), objectList, true));
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(0);
+		result_Boolean = (OclBoolean) results.get(0).getResult();
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
+		assertTrue(result_Boolean.isTrue());
+	}
+
+	/**
+	 * <p>
+	 * A test case testing the interpretation of a {@link Constraint} contained
+	 * iterator01.ocl.
+	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 *           , TypeNotFoundInModelException
+	 * @throws OCL2ParsingException
+	 * @throws RuntimeException
+	 */
+	@Test
+	public void testIterator01() throws RuntimeException, OCL2ParsingException,
+			ModelAccessException, TypeNotFoundInModelException {
+
+		LoyaltyAccount loyaltyAccount;
+
+		LoyaltyProgram loyaltyProgram1;
+		LoyaltyProgram loyaltyProgram2;
+
+		Membership membership1;
+		Membership membership2;
+
+		Service service;
+
+		ServiceLevel serviceLevel1;
+		ServiceLevel serviceLevel2;
+		ServiceLevel serviceLevel3;
+
+		ProgramPartner programPartner;
+
+		/* Load OCL file (contains iterator expression). */
+		parsedConstraints =
+				testPerformer.loadOCLFile("constraints/test/iterator01.ocl");
+
+		/* Create the model objects which shall be interpreted. */
+		serviceLevel1 = new ServiceLevel();
+		serviceLevel2 = new ServiceLevel();
+		serviceLevel3 = new ServiceLevel();
+
+		membership1 = new Membership();
+		membership1.setCurrentLevel(serviceLevel1);
+
+		loyaltyAccount = new LoyaltyAccount();
+		loyaltyAccount.setMembership(membership1);
+		membership1.addAccount(loyaltyAccount);
+
+		membership2 = new Membership();
+		membership2.setCurrentLevel(serviceLevel2);
+
+		loyaltyProgram1 = new LoyaltyProgram();
+		loyaltyProgram2 = new LoyaltyProgram();
+
+		service = new Service();
+		programPartner = new ProgramPartner();
+
+		service.setLevel(serviceLevel1);
+		service.setPartner(programPartner);
+
+		programPartner.addProgram(loyaltyProgram1);
+		programPartner.addDeliveredService(service);
+
+		serviceLevel1.setProgram(loyaltyProgram1);
+		serviceLevel1.addAvailableService(service);
+
+		loyaltyProgram1.setMembership(membership1);
+		loyaltyProgram1.addLevel(serviceLevel1);
+		loyaltyProgram1.addLevel(serviceLevel2);
+		loyaltyProgram1.addPartner(programPartner);
+
+		loyaltyProgram2.setMembership(membership2);
+		loyaltyProgram2.addLevel(serviceLevel1);
+		loyaltyProgram2.addLevel(serviceLevel3);
+
+		testPerformer.addModelObject(loyaltyAccount);
+		testPerformer.addModelObject(membership1);
+		testPerformer.addModelObject(membership2);
+		testPerformer.addModelObject(serviceLevel1);
+		testPerformer.addModelObject(serviceLevel2);
+		testPerformer.addModelObject(serviceLevel3);
+		testPerformer.addModelObject(service);
+		testPerformer.addModelObject(programPartner);
+
+		objectList.clear();
+		objectList.add(testPerformer.addModelObject(loyaltyProgram1));
+		objectList.add(testPerformer.addModelObject(loyaltyProgram2));
+
+		/* Interpret the selected object(s). */
+		results.clear();
+		results.addAll(testPerformer.interpretConstraint(parsedConstraints
+				.iterator().next(), objectList, true));
+
+		/* Compare with expected results. */
+		result_Boolean = (OclBoolean) results.get(0).getResult();
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
+		assertTrue(result_Boolean.isTrue());
+
+		result_Boolean = (OclBoolean) results.get(0).getResult();
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
+		assertTrue(result_Boolean.isTrue());
+	}
+
+	/**
+	 * <p>
+	 * A test case testing the interpretation of a {@link Constraint} contained
+	 * iterator02.ocl.
+	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 *           , TypeNotFoundInModelException
+	 * @throws OCL2ParsingException
+	 * @throws RuntimeException
+	 */
+	@Test
+	public void testIterator02() throws RuntimeException, OCL2ParsingException,
+			ModelAccessException, TypeNotFoundInModelException {
+
+		LoyaltyAccount loyaltyAccount;
+
+		LoyaltyProgram loyaltyProgram1;
+		LoyaltyProgram loyaltyProgram2;
+
+		Membership membership1;
+		Membership membership2;
+
+		Service service;
+
+		ServiceLevel serviceLevel1;
+		ServiceLevel serviceLevel2;
+		ServiceLevel serviceLevel3;
+
+		ProgramPartner programPartner;
+
+		/* Load OCL file (contains iterator expression). */
+		parsedConstraints =
+				testPerformer.loadOCLFile("constraints/test/iterator02.ocl");
+
+		/* Create the model objects which shall be interpreted. */
+		serviceLevel1 = new ServiceLevel();
+		serviceLevel2 = new ServiceLevel();
+		serviceLevel3 = new ServiceLevel();
+
+		membership1 = new Membership();
+		membership1.setCurrentLevel(serviceLevel1);
+
+		loyaltyAccount = new LoyaltyAccount();
+		loyaltyAccount.setMembership(membership1);
+		membership1.addAccount(loyaltyAccount);
+
+		membership2 = new Membership();
+		membership2.setCurrentLevel(serviceLevel2);
+
+		loyaltyProgram1 = new LoyaltyProgram();
+		loyaltyProgram2 = new LoyaltyProgram();
+
+		service = new Service();
+		programPartner = new ProgramPartner();
+
+		service.setLevel(serviceLevel1);
+		service.setPartner(programPartner);
+
+		programPartner.addProgram(loyaltyProgram1);
+		programPartner.addDeliveredService(service);
+
+		serviceLevel1.setProgram(loyaltyProgram1);
+		serviceLevel1.addAvailableService(service);
+
+		loyaltyProgram1.setMembership(membership1);
+		loyaltyProgram1.addLevel(serviceLevel1);
+		loyaltyProgram1.addLevel(serviceLevel2);
+		loyaltyProgram1.addPartner(programPartner);
+
+		loyaltyProgram2.setMembership(membership2);
+		loyaltyProgram2.addLevel(serviceLevel1);
+		loyaltyProgram2.addLevel(serviceLevel3);
+
+		testPerformer.addModelObject(loyaltyAccount);
+		testPerformer.addModelObject(membership1);
+		testPerformer.addModelObject(membership2);
+		testPerformer.addModelObject(serviceLevel1);
+		testPerformer.addModelObject(serviceLevel2);
+		testPerformer.addModelObject(serviceLevel3);
+		testPerformer.addModelObject(service);
+		testPerformer.addModelObject(programPartner);
+
+		objectList.clear();
+		objectList.add(testPerformer.addModelObject(loyaltyProgram1));
+		objectList.add(testPerformer.addModelObject(loyaltyProgram2));
+
+		/* Interpret the selected object(s). */
+		results.clear();
+		results.addAll(testPerformer.interpretConstraint(parsedConstraints
+				.iterator().next(), objectList, true));
+
+		/* Compare with expected results. */
+		result_Boolean = (OclBoolean) results.get(0).getResult();
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
+		assertTrue(result_Boolean.isTrue());
+
+		result_Boolean = (OclBoolean) results.get(0).getResult();
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
+		assertTrue(result_Boolean.isTrue());
+	}
+
+	/**
+	 * <p>
+	 * A test case testing the interpretation of a {@link Constraint} contained
+	 * iterator03.ocl.
+	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 *           , TypeNotFoundInModelException
+	 * @throws OCL2ParsingException
+	 * @throws RuntimeException
+	 */
+	@Test
+	public void testIterator03() throws RuntimeException, OCL2ParsingException,
+			ModelAccessException, TypeNotFoundInModelException {
+
+		LoyaltyAccount loyaltyAccount;
+
+		LoyaltyProgram loyaltyProgram1;
+		LoyaltyProgram loyaltyProgram2;
+
+		Membership membership1;
+		Membership membership2;
+
+		Service service;
+
+		ServiceLevel serviceLevel1;
+		ServiceLevel serviceLevel2;
+		ServiceLevel serviceLevel3;
+
+		ProgramPartner programPartner;
+
+		/* Load OCL file (contains iterator expression). */
+		parsedConstraints =
+				testPerformer.loadOCLFile("constraints/test/iterator03.ocl");
+
+		/* Create the model objects which shall be interpreted. */
+		serviceLevel1 = new ServiceLevel();
+		serviceLevel2 = new ServiceLevel();
+		serviceLevel3 = new ServiceLevel();
+
+		membership1 = new Membership();
+		membership1.setCurrentLevel(serviceLevel1);
+
+		loyaltyAccount = new LoyaltyAccount();
+		loyaltyAccount.setMembership(membership1);
+		membership1.addAccount(loyaltyAccount);
+
+		membership2 = new Membership();
+		membership2.setCurrentLevel(serviceLevel2);
+
+		loyaltyProgram1 = new LoyaltyProgram();
+		loyaltyProgram2 = new LoyaltyProgram();
+
+		service = new Service();
+		programPartner = new ProgramPartner();
+
+		service.setLevel(serviceLevel1);
+		service.setPartner(programPartner);
+
+		programPartner.addProgram(loyaltyProgram1);
+		programPartner.addDeliveredService(service);
+
+		serviceLevel1.setProgram(loyaltyProgram1);
+		serviceLevel1.addAvailableService(service);
+
+		loyaltyProgram1.setMembership(membership1);
+		loyaltyProgram1.addLevel(serviceLevel1);
+		loyaltyProgram1.addLevel(serviceLevel2);
+		loyaltyProgram1.addPartner(programPartner);
+
+		loyaltyProgram2.setMembership(membership2);
+		loyaltyProgram2.addLevel(serviceLevel1);
+		loyaltyProgram2.addLevel(serviceLevel3);
+
+		testPerformer.addModelObject(loyaltyAccount);
+		testPerformer.addModelObject(membership1);
+		testPerformer.addModelObject(membership2);
+		testPerformer.addModelObject(serviceLevel1);
+		testPerformer.addModelObject(serviceLevel2);
+		testPerformer.addModelObject(serviceLevel3);
+		testPerformer.addModelObject(service);
+		testPerformer.addModelObject(programPartner);
+
+		objectList.clear();
+		objectList.add(testPerformer.addModelObject(loyaltyProgram1));
+		objectList.add(testPerformer.addModelObject(loyaltyProgram2));
+
+		/* Interpret the selected object(s). */
+		results.clear();
+		results.addAll(testPerformer.interpretConstraint(parsedConstraints
+				.iterator().next(), objectList, true));
+
+		/* Compare with expected results. */
+		result_Boolean = (OclBoolean) results.get(0).getResult();
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
+		assertTrue(result_Boolean.isTrue());
+
+		result_Boolean = (OclBoolean) results.get(0).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
@@ -5014,9 +5522,15 @@ public class TestInterpretation {
 	 * A test case testing the interpretation of a {@link Constraint} contained
 	 * iterator04.ocl.
 	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 *           , TypeNotFoundInModelException
+	 * @throws OCL2ParsingException
+	 * @throws RuntimeException
 	 */
 	@Test
-	public void testIterator04() {
+	public void testIterator04() throws RuntimeException, OCL2ParsingException,
+			ModelAccessException, TypeNotFoundInModelException {
 
 		LoyaltyAccount loyaltyAccount;
 
@@ -5034,8 +5548,9 @@ public class TestInterpretation {
 
 		ProgramPartner programPartner;
 
-		/* Load OCL file. */
-		testPerformer.loadOCLFile("constraints/test/iterator04.ocl");
+		/* Load OCL file (contains iterator expression). */
+		parsedConstraints =
+				testPerformer.loadOCLFile("constraints/test/iterator04.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		serviceLevel1 = new ServiceLevel();
@@ -5085,20 +5600,21 @@ public class TestInterpretation {
 		testPerformer.addModelObject(service);
 		testPerformer.addModelObject(programPartner);
 
-		objectList = new ArrayList<IModelInstanceElement>();
+		objectList.clear();
 		objectList.add(testPerformer.addModelObject(loyaltyProgram1));
 		objectList.add(testPerformer.addModelObject(loyaltyProgram2));
 
-		/* Interpret the selected combinations. */
-		results = testPerformer.interpretRemainingConstraints(objectList);
+		/* Interpret the selected object(s). */
+		results.clear();
+		results.addAll(testPerformer.interpretConstraint(parsedConstraints
+				.iterator().next(), objectList, true));
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(0);
+		result_Boolean = (OclBoolean) results.get(0).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
-		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(1);
+		result_Boolean = (OclBoolean) results.get(1).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertFalse(result_Boolean.isTrue());
 	}
@@ -5108,9 +5624,15 @@ public class TestInterpretation {
 	 * A test case testing the interpretation of a {@link Constraint} contained
 	 * iterator05.ocl.
 	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 *           , TypeNotFoundInModelException
+	 * @throws OCL2ParsingException
+	 * @throws RuntimeException
 	 */
 	@Test
-	public void testIterator05() {
+	public void testIterator05() throws RuntimeException, OCL2ParsingException,
+			ModelAccessException, TypeNotFoundInModelException {
 
 		LoyaltyAccount loyaltyAccount;
 
@@ -5128,8 +5650,9 @@ public class TestInterpretation {
 
 		ProgramPartner programPartner;
 
-		/* Load OCL file. */
-		testPerformer.loadOCLFile("constraints/test/iterator05.ocl");
+		/* Load OCL file (contains iterator expression). */
+		parsedConstraints =
+				testPerformer.loadOCLFile("constraints/test/iterator05.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		serviceLevel1 = new ServiceLevel();
@@ -5179,20 +5702,21 @@ public class TestInterpretation {
 		testPerformer.addModelObject(service);
 		testPerformer.addModelObject(programPartner);
 
-		objectList = new ArrayList<IModelInstanceElement>();
+		objectList.clear();
 		objectList.add(testPerformer.addModelObject(loyaltyProgram1));
 		objectList.add(testPerformer.addModelObject(loyaltyProgram2));
 
-		/* Interpret the selected combinations. */
-		results = testPerformer.interpretRemainingConstraints(objectList);
+		/* Interpret the selected object(s). */
+		results.clear();
+		results.addAll(testPerformer.interpretConstraint(parsedConstraints
+				.iterator().next(), objectList, true));
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(0);
+		result_Boolean = (OclBoolean) results.get(0).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
-		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(1);
+		result_Boolean = (OclBoolean) results.get(1).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertFalse(result_Boolean.isTrue());
 	}
@@ -5202,9 +5726,15 @@ public class TestInterpretation {
 	 * A test case testing the interpretation of a {@link Constraint} contained
 	 * iterator06.ocl.
 	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 *           , TypeNotFoundInModelException
+	 * @throws OCL2ParsingException
+	 * @throws RuntimeException
 	 */
 	@Test
-	public void testIterator06() {
+	public void testIterator06() throws RuntimeException, OCL2ParsingException,
+			ModelAccessException, TypeNotFoundInModelException {
 
 		LoyaltyAccount loyaltyAccount;
 		LoyaltyProgram loyaltyProgram;
@@ -5217,8 +5747,9 @@ public class TestInterpretation {
 
 		ProgramPartner programPartner;
 
-		/* Load OCL file. */
-		testPerformer.loadOCLFile("constraints/test/iterator06.ocl");
+		/* Load OCL file (contains iterator expression). */
+		parsedConstraints =
+				testPerformer.loadOCLFile("constraints/test/iterator06.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		serviceLevel1 = new ServiceLevel();
@@ -5256,14 +5787,16 @@ public class TestInterpretation {
 		testPerformer.addModelObject(serviceLevel2);
 		testPerformer.addModelObject(service);
 
-		objectList = new ArrayList<IModelInstanceElement>();
+		objectList.clear();
 		objectList.add(testPerformer.addModelObject(programPartner));
 
-		/* Interpret the selected combinations. */
-		results = testPerformer.interpretRemainingConstraints(objectList);
+		/* Interpret the selected object(s). */
+		results.clear();
+		results.addAll(testPerformer.interpretConstraint(parsedConstraints
+				.iterator().next(), objectList, true));
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(0);
+		result_Boolean = (OclBoolean) results.get(0).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
@@ -5273,9 +5806,15 @@ public class TestInterpretation {
 	 * A test case testing the interpretation of a {@link Constraint} contained
 	 * iterator07.ocl.
 	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 *           , TypeNotFoundInModelException
+	 * @throws OCL2ParsingException
+	 * @throws RuntimeException
 	 */
 	@Test
-	public void testIterator07() {
+	public void testIterator07() throws RuntimeException, OCL2ParsingException,
+			ModelAccessException, TypeNotFoundInModelException {
 
 		CustomerCard customerCard1;
 		CustomerCard customerCard2;
@@ -5283,8 +5822,9 @@ public class TestInterpretation {
 		Transaction transaction1;
 		Transaction transaction2;
 
-		/* Load OCL file. */
-		testPerformer.loadOCLFile("constraints/test/iterator07.ocl");
+		/* Load OCL file (contains iterator expression). */
+		parsedConstraints =
+				testPerformer.loadOCLFile("constraints/test/iterator07.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		customerCard1 = new CustomerCard();
@@ -5305,20 +5845,22 @@ public class TestInterpretation {
 		testPerformer.addModelObject(transaction1);
 		testPerformer.addModelObject(transaction2);
 
-		objectList = new ArrayList<IModelInstanceElement>();
+		objectList.clear();
 		objectList.add(testPerformer.addModelObject(customerCard1));
 		objectList.add(testPerformer.addModelObject(customerCard2));
 
-		/* Interpret the selected combinations. */
-		results = testPerformer.interpretRemainingConstraints(objectList);
+		/* Interpret the selected object(s). */
+		results.clear();
+		results.addAll(testPerformer.interpretConstraint(parsedConstraints
+				.iterator().next(), objectList, true));
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(0);
+		result_Boolean = (OclBoolean) results.get(0).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertFalse(result_Boolean.isTrue());
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(1);
+		result_Boolean = (OclBoolean) results.get(1).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
@@ -5328,9 +5870,15 @@ public class TestInterpretation {
 	 * A test case testing the interpretation of a {@link Constraint} contained
 	 * iterator08.ocl.
 	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 *           , TypeNotFoundInModelException
+	 * @throws OCL2ParsingException
+	 * @throws RuntimeException
 	 */
 	@Test
-	public void testIterator08() {
+	public void testIterator08() throws RuntimeException, OCL2ParsingException,
+			ModelAccessException, TypeNotFoundInModelException {
 
 		Customer customer1;
 		Customer customer2;
@@ -5344,8 +5892,9 @@ public class TestInterpretation {
 		LoyaltyAccount loyaltyAccount1;
 		LoyaltyAccount loyaltyAccount2;
 
-		/* Load OCL file. */
-		testPerformer.loadOCLFile("constraints/test/iterator08.ocl");
+		/* Load OCL file (contains iterator expression). */
+		parsedConstraints =
+				testPerformer.loadOCLFile("constraints/test/iterator08.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		customer1 = new Customer(25);
@@ -5380,20 +5929,22 @@ public class TestInterpretation {
 		testPerformer.addModelObject(loyaltyAccount1);
 		testPerformer.addModelObject(loyaltyAccount2);
 
-		objectList = new ArrayList<IModelInstanceElement>();
+		objectList.clear();
 		objectList.add(testPerformer.addModelObject(customer1));
 		objectList.add(testPerformer.addModelObject(customer2));
 
-		/* Interpret the selected combinations. */
-		results = testPerformer.interpretRemainingConstraints(objectList);
+		/* Interpret the selected object(s). */
+		results.clear();
+		results.addAll(testPerformer.interpretConstraint(parsedConstraints
+				.iterator().next(), objectList, true));
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(0);
+		result_Boolean = (OclBoolean) results.get(0).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(1);
+		result_Boolean = (OclBoolean) results.get(1).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
@@ -5403,9 +5954,15 @@ public class TestInterpretation {
 	 * A test case testing the interpretation of a {@link Constraint} contained
 	 * iterator09.ocl.
 	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 *           , TypeNotFoundInModelException
+	 * @throws OCL2ParsingException
+	 * @throws RuntimeException
 	 */
 	@Test
-	public void testIterator09() {
+	public void testIterator09() throws RuntimeException, OCL2ParsingException,
+			ModelAccessException, TypeNotFoundInModelException {
 
 		LoyaltyProgram loyaltyProgram1;
 		LoyaltyProgram loyaltyProgram2;
@@ -5416,8 +5973,9 @@ public class TestInterpretation {
 		LoyaltyAccount loyaltyAccount1;
 		LoyaltyAccount loyaltyAccount2;
 
-		/* Load OCL file. */
-		testPerformer.loadOCLFile("constraints/test/iterator09.ocl");
+		/* Load OCL file (contains iterator expression). */
+		parsedConstraints =
+				testPerformer.loadOCLFile("constraints/test/iterator09.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		loyaltyProgram1 = new LoyaltyProgram();
@@ -5444,20 +6002,22 @@ public class TestInterpretation {
 		testPerformer.addModelObject(loyaltyAccount1);
 		testPerformer.addModelObject(loyaltyAccount2);
 
-		objectList = new ArrayList<IModelInstanceElement>();
+		objectList.clear();
 		objectList.add(testPerformer.addModelObject(loyaltyProgram1));
 		objectList.add(testPerformer.addModelObject(loyaltyProgram2));
 
-		/* Interpret the selected combinations. */
-		results = testPerformer.interpretRemainingConstraints(objectList);
+		/* Interpret the selected object(s). */
+		results.clear();
+		results.addAll(testPerformer.interpretConstraint(parsedConstraints
+				.iterator().next(), objectList, true));
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(0);
+		result_Boolean = (OclBoolean) results.get(0).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(1);
+		result_Boolean = (OclBoolean) results.get(1).getResult();
 		assertTrue(result_Boolean.oclIsUndefined().isTrue());
 	}
 
@@ -5466,9 +6026,15 @@ public class TestInterpretation {
 	 * A test case testing the interpretation of a {@link Constraint} contained
 	 * iterator10.ocl.
 	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 *           , TypeNotFoundInModelException
+	 * @throws OCL2ParsingException
+	 * @throws RuntimeException
 	 */
 	@Test
-	public void testIterator10() {
+	public void testIterator10() throws RuntimeException, OCL2ParsingException,
+			ModelAccessException, TypeNotFoundInModelException {
 
 		Customer customer1;
 		Customer customer2;
@@ -5476,8 +6042,9 @@ public class TestInterpretation {
 		LoyaltyProgram loyaltyProgram1;
 		LoyaltyProgram loyaltyProgram2;
 
-		/* Load OCL file. */
-		testPerformer.loadOCLFile("constraints/test/iterator10.ocl");
+		/* Load OCL file (contains iterator expression). */
+		parsedConstraints =
+				testPerformer.loadOCLFile("constraints/test/iterator10.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		loyaltyProgram1 = new LoyaltyProgram();
@@ -5495,20 +6062,21 @@ public class TestInterpretation {
 
 		testPerformer.addModelObject(customer1);
 		testPerformer.addModelObject(customer2);
-		objectList = new ArrayList<IModelInstanceElement>();
+		objectList.clear();
 		objectList.add(testPerformer.addModelObject(loyaltyProgram1));
 		objectList.add(testPerformer.addModelObject(loyaltyProgram2));
 
-		/* Interpret the selected combinations. */
-		results = testPerformer.interpretRemainingConstraints(objectList);
+		/* Interpret the selected object(s). */
+		results.clear();
+		results.addAll(testPerformer.interpretConstraint(parsedConstraints
+				.iterator().next(), objectList, true));
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(0);
+		result_Boolean = (OclBoolean) results.get(0).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
-		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(1);
+		result_Boolean = (OclBoolean) results.get(1).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertFalse(result_Boolean.isTrue());
 	}
@@ -5518,9 +6086,17 @@ public class TestInterpretation {
 	 * A test case testing the interpretation of a {@link Constraint} contained
 	 * iterator11.ocl.
 	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 *           , TypeNotFoundInModelException
+	 * @throws OCL2ParsingException
+	 * @throws RuntimeException
+	 * @throws IllegalArgumentException
 	 */
 	@Test
-	public void testIterator11() {
+	public void testIterator11() throws IllegalArgumentException,
+			RuntimeException, OCL2ParsingException, ModelAccessException,
+			TypeNotFoundInModelException {
 
 		Customer customer1;
 		Customer customer2;
@@ -5528,8 +6104,9 @@ public class TestInterpretation {
 		LoyaltyProgram loyaltyProgram1;
 		LoyaltyProgram loyaltyProgram2;
 
-		/* Load OCL file. */
-		testPerformer.loadOCLFile("constraints/test/iterator11.ocl");
+		/* Load OCL file (contains iterator expression). */
+		parsedConstraints =
+				testPerformer.loadOCLFile("constraints/test/iterator11.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		loyaltyProgram1 = new LoyaltyProgram();
@@ -5547,20 +6124,21 @@ public class TestInterpretation {
 
 		testPerformer.addModelObject(customer1);
 		testPerformer.addModelObject(customer2);
-		objectList = new ArrayList<IModelInstanceElement>();
+		objectList.clear();
 		objectList.add(testPerformer.addModelObject(loyaltyProgram1));
 		objectList.add(testPerformer.addModelObject(loyaltyProgram2));
 
-		/* Interpret the selected combinations. */
-		results = testPerformer.interpretRemainingConstraints(objectList);
+		/* Interpret the selected object(s). */
+		results.clear();
+		results.addAll(testPerformer.interpretConstraint(parsedConstraints
+				.iterator().next(), objectList, true));
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(0);
+		result_Boolean = (OclBoolean) results.get(0).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
-		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(1);
+		result_Boolean = (OclBoolean) results.get(1).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertFalse(result_Boolean.isTrue());
 	}
@@ -5570,9 +6148,15 @@ public class TestInterpretation {
 	 * A test case testing the interpretation of a {@link Constraint} contained
 	 * iterator12.ocl.
 	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 *           , TypeNotFoundInModelException
+	 * @throws OCL2ParsingException
+	 * @throws RuntimeException
 	 */
 	@Test
-	public void testIterator12() {
+	public void testIterator12() throws RuntimeException, OCL2ParsingException,
+			ModelAccessException, TypeNotFoundInModelException {
 
 		Customer customer1;
 		Customer customer2;
@@ -5580,8 +6164,9 @@ public class TestInterpretation {
 		LoyaltyProgram loyaltyProgram1;
 		LoyaltyProgram loyaltyProgram2;
 
-		/* Load OCL file. */
-		testPerformer.loadOCLFile("constraints/test/iterator12.ocl");
+		/* Load OCL file (contains iterator expression). */
+		parsedConstraints =
+				testPerformer.loadOCLFile("constraints/test/iterator12.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		loyaltyProgram1 = new LoyaltyProgram();
@@ -5599,20 +6184,21 @@ public class TestInterpretation {
 
 		testPerformer.addModelObject(customer1);
 		testPerformer.addModelObject(customer2);
-		objectList = new ArrayList<IModelInstanceElement>();
+		objectList.clear();
 		objectList.add(testPerformer.addModelObject(loyaltyProgram1));
 		objectList.add(testPerformer.addModelObject(loyaltyProgram2));
 
-		/* Interpret the selected combinations. */
-		results = testPerformer.interpretRemainingConstraints(objectList);
+		/* Interpret the selected object(s). */
+		results.clear();
+		results.addAll(testPerformer.interpretConstraint(parsedConstraints
+				.iterator().next(), objectList, true));
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(0);
+		result_Boolean = (OclBoolean) results.get(0).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
-		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(1);
+		result_Boolean = (OclBoolean) results.get(1).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertFalse(result_Boolean.isTrue());
 	}
@@ -5622,9 +6208,15 @@ public class TestInterpretation {
 	 * A test case testing the interpretation of a {@link Constraint} contained
 	 * iterator13.ocl.
 	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 *           , TypeNotFoundInModelException
+	 * @throws OCL2ParsingException
+	 * @throws RuntimeException
 	 */
 	@Test
-	public void testIterator13() {
+	public void testIterator13() throws RuntimeException, OCL2ParsingException,
+			ModelAccessException, TypeNotFoundInModelException {
 
 		LoyaltyAccount loyaltyAccount1;
 		LoyaltyAccount loyaltyAccount2;
@@ -5638,8 +6230,9 @@ public class TestInterpretation {
 		Membership membership2;
 		Membership membership3;
 
-		/* Load OCL file. */
-		testPerformer.loadOCLFile("constraints/test/iterator13.ocl");
+		/* Load OCL file (contains iterator expression). */
+		parsedConstraints =
+				testPerformer.loadOCLFile("constraints/test/iterator13.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		loyaltyProgram1 = new LoyaltyProgram();
@@ -5674,26 +6267,26 @@ public class TestInterpretation {
 		testPerformer.addModelObject(membership2);
 		testPerformer.addModelObject(membership3);
 
-		objectList = new ArrayList<IModelInstanceElement>();
+		objectList.clear();
 		objectList.add(testPerformer.addModelObject(loyaltyProgram1));
 		objectList.add(testPerformer.addModelObject(loyaltyProgram2));
 		objectList.add(testPerformer.addModelObject(loyaltyProgram3));
 
-		/* Interpret the selected combinations. */
-		results = testPerformer.interpretRemainingConstraints(objectList);
+		/* Interpret the selected object(s). */
+		results.clear();
+		results.addAll(testPerformer.interpretConstraint(parsedConstraints
+				.iterator().next(), objectList, true));
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(0);
+		result_Boolean = (OclBoolean) results.get(0).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertFalse(result_Boolean.isTrue());
 
-		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(1);
+		result_Boolean = (OclBoolean) results.get(1).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
-		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(2);
+		result_Boolean = (OclBoolean) results.get(2).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertFalse(result_Boolean.isTrue());
 	}
@@ -5703,9 +6296,15 @@ public class TestInterpretation {
 	 * A test case testing the interpretation of a {@link Constraint} contained
 	 * iterator14.ocl.
 	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 *           , TypeNotFoundInModelException
+	 * @throws OCL2ParsingException
+	 * @throws RuntimeException
 	 */
 	@Test
-	public void testIterator14() {
+	public void testIterator14() throws RuntimeException, OCL2ParsingException,
+			ModelAccessException, TypeNotFoundInModelException {
 
 		Transaction transaction1;
 		Transaction transaction2;
@@ -5714,8 +6313,9 @@ public class TestInterpretation {
 		LoyaltyAccount loyaltyAccount1;
 		LoyaltyAccount loyaltyAccount2;
 
-		/* Load OCL file. */
-		testPerformer.loadOCLFile("constraints/test/iterator14.ocl");
+		/* Load OCL file (contains iterator expression). */
+		parsedConstraints =
+				testPerformer.loadOCLFile("constraints/test/iterator14.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		loyaltyAccount1 = new LoyaltyAccount();
@@ -5741,20 +6341,21 @@ public class TestInterpretation {
 		testPerformer.addModelObject(transaction2);
 		testPerformer.addModelObject(transaction3);
 
-		objectList = new ArrayList<IModelInstanceElement>();
+		objectList.clear();
 		objectList.add(testPerformer.addModelObject(loyaltyAccount1));
 		objectList.add(testPerformer.addModelObject(loyaltyAccount2));
 
-		/* Interpret the selected combinations. */
-		results = testPerformer.interpretRemainingConstraints(objectList);
+		/* Interpret the selected object(s). */
+		results.clear();
+		results.addAll(testPerformer.interpretConstraint(parsedConstraints
+				.iterator().next(), objectList, true));
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(0);
+		result_Boolean = (OclBoolean) results.get(0).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertFalse(result_Boolean.isTrue());
 
-		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(1);
+		result_Boolean = (OclBoolean) results.get(1).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
@@ -5764,9 +6365,15 @@ public class TestInterpretation {
 	 * A test case testing the interpretation of a {@link Constraint} contained
 	 * iterator15.ocl.
 	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 *           , TypeNotFoundInModelException
+	 * @throws OCL2ParsingException
+	 * @throws RuntimeException
 	 */
 	@Test
-	public void testIterator15() {
+	public void testIterator15() throws RuntimeException, OCL2ParsingException,
+			ModelAccessException, TypeNotFoundInModelException {
 
 		Customer customer1;
 		Customer customer2;
@@ -5779,10 +6386,11 @@ public class TestInterpretation {
 
 		Service service;
 
-		/* Load OCL file. */
-		testPerformer.loadOCLFile("constraints/test/iterator15.ocl");
+		/* Load OCL file (contains iterator expression). */
+		parsedConstraints =
+				testPerformer.loadOCLFile("constraints/test/iterator15.ocl");
 
-		/* Select the model objects which shall be interpreted. */
+		/* Create the model objects which shall be interpreted. */
 		customer1 = new Customer(25);
 		customer2 = new Customer(25);
 
@@ -5808,20 +6416,21 @@ public class TestInterpretation {
 		testPerformer.addModelObject(programPartner2);
 		testPerformer.addModelObject(service);
 
-		objectList = new ArrayList<IModelInstanceElement>();
+		objectList.clear();
 		objectList.add(testPerformer.addModelObject(customer1));
 		objectList.add(testPerformer.addModelObject(customer2));
 
-		/* Interpret the selected combinations. */
-		results = testPerformer.interpretRemainingConstraints(objectList);
+		/* Interpret the selected object(s). */
+		results.clear();
+		results.addAll(testPerformer.interpretConstraint(parsedConstraints
+				.iterator().next(), objectList, true));
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(0);
+		result_Boolean = (OclBoolean) results.get(0).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertFalse(result_Boolean.isTrue());
 
-		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(1);
+		result_Boolean = (OclBoolean) results.get(1).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
@@ -5831,9 +6440,15 @@ public class TestInterpretation {
 	 * A test case testing the interpretation of a {@link Constraint} contained
 	 * iterator16.ocl.
 	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 *           , TypeNotFoundInModelException
+	 * @throws OCL2ParsingException
+	 * @throws RuntimeException
 	 */
 	@Test
-	public void testIterator16() {
+	public void testIterator16() throws RuntimeException, OCL2ParsingException,
+			ModelAccessException, TypeNotFoundInModelException {
 
 		Customer customer1;
 		Customer customer2;
@@ -5846,10 +6461,11 @@ public class TestInterpretation {
 
 		Service service;
 
-		/* Load OCL file. */
-		testPerformer.loadOCLFile("constraints/test/iterator16.ocl");
+		/* Load OCL file (contains iterator expression). */
+		parsedConstraints =
+				testPerformer.loadOCLFile("constraints/test/iterator16.ocl");
 
-		/* Select the model objects which shall be interpreted. */
+		/* Create the model objects which shall be interpreted. */
 		customer1 = new Customer(25);
 		customer2 = new Customer(25);
 
@@ -5875,20 +6491,21 @@ public class TestInterpretation {
 		testPerformer.addModelObject(programPartner2);
 		testPerformer.addModelObject(service);
 
-		objectList = new ArrayList<IModelInstanceElement>();
+		objectList.clear();
 		objectList.add(testPerformer.addModelObject(customer1));
 		objectList.add(testPerformer.addModelObject(customer2));
 
-		/* Interpret the selected combinations. */
-		results = testPerformer.interpretRemainingConstraints(objectList);
+		/* Interpret the selected object(s). */
+		results.clear();
+		results.addAll(testPerformer.interpretConstraint(parsedConstraints
+				.iterator().next(), objectList, true));
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(0);
+		result_Boolean = (OclBoolean) results.get(0).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertFalse(result_Boolean.isTrue());
 
-		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(1);
+		result_Boolean = (OclBoolean) results.get(1).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
@@ -5898,25 +6515,34 @@ public class TestInterpretation {
 	 * A test case testing the interpretation of a {@link Constraint} contained
 	 * numeric01.ocl.
 	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 *           , TypeNotFoundInModelException
+	 * @throws OCL2ParsingException
+	 * @throws RuntimeException
 	 */
 	@Test
-	public void testNumeric01() {
+	public void testNumeric01() throws RuntimeException, OCL2ParsingException,
+			ModelAccessException, TypeNotFoundInModelException {
 
 		Service service;
 
-		/* Load OCL file. */
-		testPerformer.loadOCLFile("constraints/test/numeric01.ocl");
+		/* Load OCL file (contains numeric expression). */
+		parsedConstraints =
+				testPerformer.loadOCLFile("constraints/test/numeric01.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		service = new Service();
+		objectList.clear();
+		objectList.add(testPerformer.addModelObject(service));
 
-		modelObject = testPerformer.addModelObject(service);
-
-		/* Interpret the selected combinations. */
-		results = testPerformer.interpretRemainingConstraints(modelObject);
+		/* Interpret the selected object(s). */
+		results.clear();
+		results.addAll(testPerformer.interpretConstraint(parsedConstraints
+				.iterator().next(), objectList, true));
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(0);
+		result_Boolean = (OclBoolean) results.get(0).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
@@ -5926,25 +6552,34 @@ public class TestInterpretation {
 	 * A test case testing the interpretation of a {@link Constraint} contained
 	 * numeric02.ocl.
 	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 *           , TypeNotFoundInModelException
+	 * @throws OCL2ParsingException
+	 * @throws RuntimeException
 	 */
 	@Test
-	public void testNumeric02() {
+	public void testNumeric02() throws RuntimeException, OCL2ParsingException,
+			ModelAccessException, TypeNotFoundInModelException {
 
 		Service service;
 
-		/* Load OCL file. */
-		testPerformer.loadOCLFile("constraints/test/numeric02.ocl");
+		/* Load OCL file (contains numeric expression). */
+		parsedConstraints =
+				testPerformer.loadOCLFile("constraints/test/numeric02.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		service = new Service();
+		objectList.clear();
+		objectList.add(testPerformer.addModelObject(service));
 
-		modelObject = testPerformer.addModelObject(service);
-
-		/* Interpret the selected combinations. */
-		results = testPerformer.interpretRemainingConstraints(modelObject);
+		/* Interpret the selected object(s). */
+		results.clear();
+		results.addAll(testPerformer.interpretConstraint(parsedConstraints
+				.iterator().next(), objectList, true));
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(0);
+		result_Boolean = (OclBoolean) results.get(0).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
@@ -5954,25 +6589,34 @@ public class TestInterpretation {
 	 * A test case testing the interpretation of a {@link Constraint} contained
 	 * numeric03.ocl.
 	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 *           , TypeNotFoundInModelException
+	 * @throws OCL2ParsingException
+	 * @throws RuntimeException
 	 */
 	@Test
-	public void testNumeric03() {
+	public void testNumeric03() throws RuntimeException, OCL2ParsingException,
+			ModelAccessException, TypeNotFoundInModelException {
 
 		Service service;
 
-		/* Load OCL file. */
-		testPerformer.loadOCLFile("constraints/test/numeric03.ocl");
+		/* Load OCL file (contains numeric expression). */
+		parsedConstraints =
+				testPerformer.loadOCLFile("constraints/test/numeric03.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		service = new Service();
+		objectList.clear();
+		objectList.add(testPerformer.addModelObject(service));
 
-		modelObject = testPerformer.addModelObject(service);
-
-		/* Interpret the selected combinations. */
-		results = testPerformer.interpretRemainingConstraints(modelObject);
+		/* Interpret the selected object(s). */
+		results.clear();
+		results.addAll(testPerformer.interpretConstraint(parsedConstraints
+				.iterator().next(), objectList, true));
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(0);
+		result_Boolean = (OclBoolean) results.get(0).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
@@ -5982,25 +6626,34 @@ public class TestInterpretation {
 	 * A test case testing the interpretation of a {@link Constraint} contained
 	 * numeric04.ocl.
 	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 *           , TypeNotFoundInModelException
+	 * @throws OCL2ParsingException
+	 * @throws RuntimeException
 	 */
 	@Test
-	public void testNumeric04() {
+	public void testNumeric04() throws RuntimeException, OCL2ParsingException,
+			ModelAccessException, TypeNotFoundInModelException {
 
 		Service service;
 
-		/* Load OCL file. */
-		testPerformer.loadOCLFile("constraints/test/numeric04.ocl");
+		/* Load OCL file (contains numeric expression). */
+		parsedConstraints =
+				testPerformer.loadOCLFile("constraints/test/numeric04.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		service = new Service();
+		objectList.clear();
+		objectList.add(testPerformer.addModelObject(service));
 
-		modelObject = testPerformer.addModelObject(service);
-
-		/* Interpret the selected combinations. */
-		results = testPerformer.interpretRemainingConstraints(modelObject);
+		/* Interpret the selected object(s). */
+		results.clear();
+		results.addAll(testPerformer.interpretConstraint(parsedConstraints
+				.iterator().next(), objectList, true));
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(0);
+		result_Boolean = (OclBoolean) results.get(0).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
@@ -6010,25 +6663,34 @@ public class TestInterpretation {
 	 * A test case testing the interpretation of a {@link Constraint} contained
 	 * numeric05.ocl.
 	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 *           , TypeNotFoundInModelException
+	 * @throws OCL2ParsingException
+	 * @throws RuntimeException
 	 */
 	@Test
-	public void testNumeric05() {
+	public void testNumeric05() throws RuntimeException, OCL2ParsingException,
+			ModelAccessException, TypeNotFoundInModelException {
 
 		Service service;
 
-		/* Load OCL file. */
-		testPerformer.loadOCLFile("constraints/test/numeric05.ocl");
+		/* Load OCL file (contains numeric expression). */
+		parsedConstraints =
+				testPerformer.loadOCLFile("constraints/test/numeric05.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		service = new Service();
+		objectList.clear();
+		objectList.add(testPerformer.addModelObject(service));
 
-		modelObject = testPerformer.addModelObject(service);
-
-		/* Interpret the selected combinations. */
-		results = testPerformer.interpretRemainingConstraints(modelObject);
+		/* Interpret the selected object(s). */
+		results.clear();
+		results.addAll(testPerformer.interpretConstraint(parsedConstraints
+				.iterator().next(), objectList, true));
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(0);
+		result_Boolean = (OclBoolean) results.get(0).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
@@ -6038,25 +6700,34 @@ public class TestInterpretation {
 	 * A test case testing the interpretation of a {@link Constraint} contained
 	 * numeric06.ocl.
 	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 *           , TypeNotFoundInModelException
+	 * @throws OCL2ParsingException
+	 * @throws RuntimeException
 	 */
 	@Test
-	public void testNumeric06() {
+	public void testNumeric06() throws RuntimeException, OCL2ParsingException,
+			ModelAccessException, TypeNotFoundInModelException {
 
 		Service service;
 
-		/* Load OCL file. */
-		testPerformer.loadOCLFile("constraints/test/numeric06.ocl");
+		/* Load OCL file (contains numeric expression). */
+		parsedConstraints =
+				testPerformer.loadOCLFile("constraints/test/numeric06.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		service = new Service();
+		objectList.clear();
+		objectList.add(testPerformer.addModelObject(service));
 
-		modelObject = testPerformer.addModelObject(service);
-
-		/* Interpret the selected combinations. */
-		results = testPerformer.interpretRemainingConstraints(modelObject);
+		/* Interpret the selected object(s). */
+		results.clear();
+		results.addAll(testPerformer.interpretConstraint(parsedConstraints
+				.iterator().next(), objectList, true));
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(0);
+		result_Boolean = (OclBoolean) results.get(0).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
@@ -6066,25 +6737,34 @@ public class TestInterpretation {
 	 * A test case testing the interpretation of a {@link Constraint} contained
 	 * numeric07.ocl.
 	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 *           , TypeNotFoundInModelException
+	 * @throws OCL2ParsingException
+	 * @throws RuntimeException
 	 */
 	@Test
-	public void testNumeric07() {
+	public void testNumeric07() throws RuntimeException, OCL2ParsingException,
+			ModelAccessException, TypeNotFoundInModelException {
 
 		Service service;
 
-		/* Load OCL file. */
-		testPerformer.loadOCLFile("constraints/test/numeric07.ocl");
+		/* Load OCL file (contains numeric expression). */
+		parsedConstraints =
+				testPerformer.loadOCLFile("constraints/test/numeric07.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		service = new Service();
+		objectList.clear();
+		objectList.add(testPerformer.addModelObject(service));
 
-		modelObject = testPerformer.addModelObject(service);
-
-		/* Interpret the selected combinations. */
-		results = testPerformer.interpretRemainingConstraints(modelObject);
+		/* Interpret the selected object(s). */
+		results.clear();
+		results.addAll(testPerformer.interpretConstraint(parsedConstraints
+				.iterator().next(), objectList, true));
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(0);
+		result_Boolean = (OclBoolean) results.get(0).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
@@ -6094,25 +6774,34 @@ public class TestInterpretation {
 	 * A test case testing the interpretation of a {@link Constraint} contained
 	 * numeric08.ocl.
 	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 *           , TypeNotFoundInModelException
+	 * @throws OCL2ParsingException
+	 * @throws RuntimeException
 	 */
 	@Test
-	public void testNumeric08() {
+	public void testNumeric08() throws RuntimeException, OCL2ParsingException,
+			ModelAccessException, TypeNotFoundInModelException {
 
 		Service service;
 
-		/* Load OCL file. */
-		testPerformer.loadOCLFile("constraints/test/numeric08.ocl");
+		/* Load OCL file (contains numeric expression). */
+		parsedConstraints =
+				testPerformer.loadOCLFile("constraints/test/numeric08.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		service = new Service();
+		objectList.clear();
+		objectList.add(testPerformer.addModelObject(service));
 
-		modelObject = testPerformer.addModelObject(service);
-
-		/* Interpret the selected combinations. */
-		results = testPerformer.interpretRemainingConstraints(modelObject);
+		/* Interpret the selected object(s). */
+		results.clear();
+		results.addAll(testPerformer.interpretConstraint(parsedConstraints
+				.iterator().next(), objectList, true));
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(0);
+		result_Boolean = (OclBoolean) results.get(0).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
@@ -6122,25 +6811,34 @@ public class TestInterpretation {
 	 * A test case testing the interpretation of a {@link Constraint} contained
 	 * numeric09.ocl.
 	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 *           , TypeNotFoundInModelException
+	 * @throws OCL2ParsingException
+	 * @throws RuntimeException
 	 */
 	@Test
-	public void testNumeric09() {
+	public void testNumeric09() throws RuntimeException, OCL2ParsingException,
+			ModelAccessException, TypeNotFoundInModelException {
 
 		Service service;
 
-		/* Load OCL file. */
-		testPerformer.loadOCLFile("constraints/test/numeric09.ocl");
+		/* Load OCL file (contains numeric expression). */
+		parsedConstraints =
+				testPerformer.loadOCLFile("constraints/test/numeric09.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		service = new Service();
+		objectList.clear();
+		objectList.add(testPerformer.addModelObject(service));
 
-		modelObject = testPerformer.addModelObject(service);
-
-		/* Interpret the selected combinations. */
-		results = testPerformer.interpretRemainingConstraints(modelObject);
+		/* Interpret the selected object(s). */
+		results.clear();
+		results.addAll(testPerformer.interpretConstraint(parsedConstraints
+				.iterator().next(), objectList, true));
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(0);
+		result_Boolean = (OclBoolean) results.get(0).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
@@ -6150,25 +6848,34 @@ public class TestInterpretation {
 	 * A test case testing the interpretation of a {@link Constraint} contained
 	 * numeric10.ocl.
 	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 *           , TypeNotFoundInModelException
+	 * @throws OCL2ParsingException
+	 * @throws RuntimeException
 	 */
 	@Test
-	public void testNumeric10() {
+	public void testNumeric10() throws RuntimeException, OCL2ParsingException,
+			ModelAccessException, TypeNotFoundInModelException {
 
 		Service service;
 
-		/* Load OCL file. */
-		testPerformer.loadOCLFile("constraints/test/numeric10.ocl");
+		/* Load OCL file (contains numeric expression). */
+		parsedConstraints =
+				testPerformer.loadOCLFile("constraints/test/numeric10.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		service = new Service();
+		objectList.clear();
+		objectList.add(testPerformer.addModelObject(service));
 
-		modelObject = testPerformer.addModelObject(service);
-
-		/* Interpret the selected combinations. */
-		results = testPerformer.interpretRemainingConstraints(modelObject);
+		/* Interpret the selected object(s). */
+		results.clear();
+		results.addAll(testPerformer.interpretConstraint(parsedConstraints
+				.iterator().next(), objectList, true));
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(0);
+		result_Boolean = (OclBoolean) results.get(0).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
@@ -6178,157 +6885,206 @@ public class TestInterpretation {
 	 * A test case testing the interpretation of a {@link Constraint} contained
 	 * numeric11.ocl.
 	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 *           , TypeNotFoundInModelException
+	 * @throws OCL2ParsingException
+	 * @throws RuntimeException
 	 */
 	@Test
-	public void testNumeric11() {
+	public void testNumeric11() throws RuntimeException, OCL2ParsingException,
+			ModelAccessException, TypeNotFoundInModelException {
 
 		Service service;
 
-		/* Load OCL file. */
-		testPerformer.loadOCLFile("constraints/test/numeric11.ocl");
+		/* Load OCL file (contains numeric expression). */
+		parsedConstraints =
+				testPerformer.loadOCLFile("constraints/test/numeric11.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		service = new Service();
+		objectList.clear();
+		objectList.add(testPerformer.addModelObject(service));
 
-		modelObject = testPerformer.addModelObject(service);
-
-		/* Interpret the selected combinations. */
-		results = testPerformer.interpretRemainingConstraints(modelObject);
+		/* Interpret the selected object(s). */
+		results.clear();
+		results.addAll(testPerformer.interpretConstraint(parsedConstraints
+				.iterator().next(), objectList, true));
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(0);
+		result_Boolean = (OclBoolean) results.get(0).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
 	/**
 	 * <p>
-	 * A test case testing the interpretation of a {@link Constraint} contained
+	 * A test case testing the interpretation of a {@link Constraint} contained in
 	 * static01.ocl.
 	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 *           , TypeNotFoundInModelException
+	 * @throws OCL2ParsingException
+	 * @throws RuntimeException
 	 */
 	@Test
-	public void testStatic01() {
+	public void testStatic01() throws RuntimeException, OCL2ParsingException,
+			ModelAccessException, TypeNotFoundInModelException {
 
 		Transaction transaction;
 		Date date;
 
-		/* Load OCL file. */
-		testPerformer.loadOCLFile("constraints/test/static01.ocl");
+		/* Load OCL file (contains tuple expression). */
+		parsedConstraints =
+				testPerformer.loadOCLFile("constraints/test/static01.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		transaction = new Transaction();
 		date = new Date(2008, 1, 1);
 
 		transaction.setDate(date);
-
 		testPerformer.addModelObject(date);
-		modelObject = testPerformer.addModelObject(transaction);
 
-		/* Interpret the selected combinations. */
-		results = testPerformer.interpretRemainingConstraints(modelObject);
+		objectList.clear();
+		objectList.add(testPerformer.addModelObject(transaction));
+
+		/* Interpret the selected object(s). */
+		results.clear();
+		results.addAll(testPerformer.interpretConstraint(parsedConstraints
+				.iterator().next(), objectList, true));
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(0);
+		result_Boolean = (OclBoolean) results.get(0).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
 	/**
 	 * <p>
-	 * A test case testing the interpretation of a {@link Constraint} contained
+	 * A test case testing the interpretation of a {@link Constraint} contained in
 	 * static02.ocl.
 	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 *           , TypeNotFoundInModelException
+	 * @throws OCL2ParsingException
+	 * @throws RuntimeException
 	 */
 	@Test
-	public void testStatic02() {
+	public void testStatic02() throws RuntimeException, OCL2ParsingException,
+			ModelAccessException, TypeNotFoundInModelException {
 
 		Transaction transaction;
 		Date date;
 
-		/* Load OCL file. */
-		testPerformer.loadOCLFile("constraints/test/static02.ocl");
+		/* Load OCL file (contains tuple expression). */
+		parsedConstraints =
+				testPerformer.loadOCLFile("constraints/test/static02.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		transaction = new Transaction();
 		date = new Date(2008, 1, 1);
 
 		transaction.setDate(date);
-
 		testPerformer.addModelObject(date);
-		modelObject = testPerformer.addModelObject(transaction);
 
-		/* Interpret the selected combinations. */
-		results = testPerformer.interpretRemainingConstraints(modelObject);
+		objectList.clear();
+		objectList.add(testPerformer.addModelObject(transaction));
+
+		/* Interpret the selected object(s). */
+		results.clear();
+		results.addAll(testPerformer.interpretConstraint(parsedConstraints
+				.iterator().next(), objectList, true));
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(0);
+		result_Boolean = (OclBoolean) results.get(0).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
 	/**
 	 * <p>
-	 * A test case testing the interpretation of a {@link Constraint} contained
+	 * A test case testing the interpretation of a {@link Constraint} contained in
 	 * static03.ocl.
 	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 *           , TypeNotFoundInModelException
+	 * @throws OCL2ParsingException
+	 * @throws RuntimeException
 	 */
 	@Test
-	public void testStatic03() {
+	public void testStatic03() throws RuntimeException, OCL2ParsingException,
+			ModelAccessException, TypeNotFoundInModelException {
 
 		Transaction transaction;
 		Date date;
 
-		/* Load OCL file. */
-		testPerformer.loadOCLFile("constraints/test/static03.ocl");
+		/* Load OCL file (contains tuple expression). */
+		parsedConstraints =
+				testPerformer.loadOCLFile("constraints/test/static03.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		transaction = new Transaction();
 		date = new Date(2008, 1, 1);
 
 		transaction.setDate(date);
-
 		testPerformer.addModelObject(date);
-		modelObject = testPerformer.addModelObject(transaction);
 
-		/* Interpret the selected combinations. */
-		results = testPerformer.interpretRemainingConstraints(modelObject);
+		objectList.clear();
+		objectList.add(testPerformer.addModelObject(transaction));
+
+		/* Interpret the selected object(s). */
+		results.clear();
+		results.addAll(testPerformer.interpretConstraint(parsedConstraints
+				.iterator().next(), objectList, true));
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(0);
+		result_Boolean = (OclBoolean) results.get(0).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
 
 	/**
 	 * <p>
-	 * A test case testing the interpretation of a {@link Constraint} contained
+	 * A test case testing the interpretation of a {@link Constraint} contained in
 	 * static04.ocl.
 	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 *           , TypeNotFoundInModelException
+	 * @throws OCL2ParsingException
+	 * @throws RuntimeException
 	 */
 	@Test
-	public void testStatic04() {
+	public void testStatic04() throws RuntimeException, OCL2ParsingException,
+			ModelAccessException, TypeNotFoundInModelException {
 
 		Transaction transaction;
 		Date date;
 
-		/* Load OCL file. */
-		testPerformer.loadOCLFile("constraints/test/static04.ocl");
+		/* Load OCL file (contains tuple expression). */
+		parsedConstraints =
+				testPerformer.loadOCLFile("constraints/test/static04.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		transaction = new Transaction();
 		date = new Date(2008, 1, 1);
 
 		transaction.setDate(date);
-
 		testPerformer.addModelObject(date);
-		modelObject = testPerformer.addModelObject(transaction);
 
-		/* Interpret the selected combinations. */
-		results = testPerformer.interpretRemainingConstraints(modelObject);
+		objectList.clear();
+		objectList.add(testPerformer.addModelObject(transaction));
+
+		/* Interpret the selected object(s). */
+		results.clear();
+		results.addAll(testPerformer.interpretConstraint(parsedConstraints
+				.iterator().next(), objectList, true));
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(0);
+		result_Boolean = (OclBoolean) results.get(0).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
@@ -6338,25 +7094,35 @@ public class TestInterpretation {
 	 * A test case testing the interpretation of a {@link Constraint} contained in
 	 * string01.ocl.
 	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 *           , TypeNotFoundInModelException
+	 * @throws OCL2ParsingException
+	 * @throws RuntimeException
 	 */
 	@Test
-	public void testString01() {
+	public void testString01() throws RuntimeException, OCL2ParsingException,
+			ModelAccessException, TypeNotFoundInModelException {
 
 		Service service;
 
-		/* Load OCL file. */
-		testPerformer.loadOCLFile("constraints/test/string01.ocl");
+		/* Load OCL file (contains string expression). */
+		parsedConstraints =
+				testPerformer.loadOCLFile("constraints/test/string01.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		service = new Service();
 
-		modelObject = testPerformer.addModelObject(service);
+		objectList.clear();
+		objectList.add(testPerformer.addModelObject(service));
 
-		/* Interpret the selected combinations. */
-		results = testPerformer.interpretRemainingConstraints(modelObject);
+		/* Interpret the selected object(s). */
+		results.clear();
+		results.addAll(testPerformer.interpretConstraint(parsedConstraints
+				.iterator().next(), objectList, true));
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(0);
+		result_Boolean = (OclBoolean) results.get(0).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
@@ -6366,25 +7132,35 @@ public class TestInterpretation {
 	 * A test case testing the interpretation of a {@link Constraint} contained in
 	 * string02.ocl.
 	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 *           , TypeNotFoundInModelException
+	 * @throws OCL2ParsingException
+	 * @throws RuntimeException
 	 */
 	@Test
-	public void testString02() {
+	public void testString02() throws RuntimeException, OCL2ParsingException,
+			ModelAccessException, TypeNotFoundInModelException {
 
 		Service service;
 
-		/* Load OCL file. */
-		testPerformer.loadOCLFile("constraints/test/string02.ocl");
+		/* Load OCL file (contains string expression). */
+		parsedConstraints =
+				testPerformer.loadOCLFile("constraints/test/string02.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		service = new Service();
 
-		modelObject = testPerformer.addModelObject(service);
+		objectList.clear();
+		objectList.add(testPerformer.addModelObject(service));
 
-		/* Interpret the selected combinations. */
-		results = testPerformer.interpretRemainingConstraints(modelObject);
+		/* Interpret the selected object(s). */
+		results.clear();
+		results.addAll(testPerformer.interpretConstraint(parsedConstraints
+				.iterator().next(), objectList, true));
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(0);
+		result_Boolean = (OclBoolean) results.get(0).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
@@ -6394,25 +7170,35 @@ public class TestInterpretation {
 	 * A test case testing the interpretation of a {@link Constraint} contained in
 	 * string03.ocl.
 	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 *           , TypeNotFoundInModelException
+	 * @throws OCL2ParsingException
+	 * @throws RuntimeException
 	 */
 	@Test
-	public void testString03() {
+	public void testString03() throws RuntimeException, OCL2ParsingException,
+			ModelAccessException, TypeNotFoundInModelException {
 
 		Service service;
 
-		/* Load OCL file. */
-		testPerformer.loadOCLFile("constraints/test/string03.ocl");
+		/* Load OCL file (contains string expression). */
+		parsedConstraints =
+				testPerformer.loadOCLFile("constraints/test/string03.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		service = new Service();
 
-		modelObject = testPerformer.addModelObject(service);
+		objectList.clear();
+		objectList.add(testPerformer.addModelObject(service));
 
-		/* Interpret the selected combinations. */
-		results = testPerformer.interpretRemainingConstraints(modelObject);
+		/* Interpret the selected object(s). */
+		results.clear();
+		results.addAll(testPerformer.interpretConstraint(parsedConstraints
+				.iterator().next(), objectList, true));
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(0);
+		result_Boolean = (OclBoolean) results.get(0).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
@@ -6422,25 +7208,35 @@ public class TestInterpretation {
 	 * A test case testing the interpretation of a {@link Constraint} contained in
 	 * string04.ocl.
 	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 *           , TypeNotFoundInModelException
+	 * @throws OCL2ParsingException
+	 * @throws RuntimeException
 	 */
 	@Test
-	public void testString04() {
+	public void testString04() throws RuntimeException, OCL2ParsingException,
+			ModelAccessException, TypeNotFoundInModelException {
 
 		Service service;
 
-		/* Load OCL file. */
-		testPerformer.loadOCLFile("constraints/test/string04.ocl");
+		/* Load OCL file (contains string expression). */
+		parsedConstraints =
+				testPerformer.loadOCLFile("constraints/test/string04.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		service = new Service();
 
-		modelObject = testPerformer.addModelObject(service);
+		objectList.clear();
+		objectList.add(testPerformer.addModelObject(service));
 
-		/* Interpret the selected combinations. */
-		results = testPerformer.interpretRemainingConstraints(modelObject);
+		/* Interpret the selected object(s). */
+		results.clear();
+		results.addAll(testPerformer.interpretConstraint(parsedConstraints
+				.iterator().next(), objectList, true));
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(0);
+		result_Boolean = (OclBoolean) results.get(0).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
@@ -6450,25 +7246,35 @@ public class TestInterpretation {
 	 * A test case testing the interpretation of a {@link Constraint} contained in
 	 * string05.ocl.
 	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 *           , TypeNotFoundInModelException
+	 * @throws OCL2ParsingException
+	 * @throws RuntimeException
 	 */
 	@Test
-	public void testString05() {
+	public void testString05() throws RuntimeException, OCL2ParsingException,
+			ModelAccessException, TypeNotFoundInModelException {
 
 		Service service;
 
-		/* Load OCL file. */
-		testPerformer.loadOCLFile("constraints/test/string05.ocl");
+		/* Load OCL file (contains string expression). */
+		parsedConstraints =
+				testPerformer.loadOCLFile("constraints/test/string05.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		service = new Service();
 
-		modelObject = testPerformer.addModelObject(service);
+		objectList.clear();
+		objectList.add(testPerformer.addModelObject(service));
 
-		/* Interpret the selected combinations. */
-		results = testPerformer.interpretRemainingConstraints(modelObject);
+		/* Interpret the selected object(s). */
+		results.clear();
+		results.addAll(testPerformer.interpretConstraint(parsedConstraints
+				.iterator().next(), objectList, true));
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(0);
+		result_Boolean = (OclBoolean) results.get(0).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
@@ -6478,25 +7284,35 @@ public class TestInterpretation {
 	 * A test case testing the interpretation of a {@link Constraint} contained in
 	 * string06.ocl.
 	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 *           , TypeNotFoundInModelException
+	 * @throws OCL2ParsingException
+	 * @throws RuntimeException
 	 */
 	@Test
-	public void testString06() {
+	public void testString06() throws RuntimeException, OCL2ParsingException,
+			ModelAccessException, TypeNotFoundInModelException {
 
 		Service service;
 
-		/* Load OCL file. */
-		testPerformer.loadOCLFile("constraints/test/string06.ocl");
+		/* Load OCL file (contains string expression). */
+		parsedConstraints =
+				testPerformer.loadOCLFile("constraints/test/string06.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		service = new Service();
 
-		modelObject = testPerformer.addModelObject(service);
+		objectList.clear();
+		objectList.add(testPerformer.addModelObject(service));
 
-		/* Interpret the selected combinations. */
-		results = testPerformer.interpretRemainingConstraints(modelObject);
+		/* Interpret the selected object(s). */
+		results.clear();
+		results.addAll(testPerformer.interpretConstraint(parsedConstraints
+				.iterator().next(), objectList, true));
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(0);
+		result_Boolean = (OclBoolean) results.get(0).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
@@ -6506,25 +7322,35 @@ public class TestInterpretation {
 	 * A test case testing the interpretation of a {@link Constraint} contained in
 	 * tuple01.ocl.
 	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 *           , TypeNotFoundInModelException
+	 * @throws OCL2ParsingException
+	 * @throws RuntimeException
 	 */
 	@Test
-	public void testTuple01() {
+	public void testTuple01() throws RuntimeException, OCL2ParsingException,
+			ModelAccessException, TypeNotFoundInModelException {
 
 		Transaction transaction;
 
-		/* Load OCL file. */
-		testPerformer.loadOCLFile("constraints/test/tuple01.ocl");
+		/* Load OCL file (contains tuple expression). */
+		parsedConstraints =
+				testPerformer.loadOCLFile("constraints/test/tuple01.ocl");
 
-		/* Select the model objects which shall be interpreted. */
+		/* Create the model objects which shall be interpreted. */
 		transaction = new Transaction();
 
-		modelObject = testPerformer.addModelObject(transaction);
+		objectList.clear();
+		objectList.add(testPerformer.addModelObject(transaction));
 
-		/* Interpret the selected combinations. */
-		results = testPerformer.interpretRemainingConstraints(modelObject);
+		/* Interpret the selected object(s). */
+		results.clear();
+		results.addAll(testPerformer.interpretConstraint(parsedConstraints
+				.iterator().next(), objectList, true));
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(0);
+		result_Boolean = (OclBoolean) results.get(0).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
@@ -6534,25 +7360,35 @@ public class TestInterpretation {
 	 * A test case testing the interpretation of a {@link Constraint} contained in
 	 * tuple02.ocl.
 	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 *           , TypeNotFoundInModelException
+	 * @throws OCL2ParsingException
+	 * @throws RuntimeException
 	 */
 	@Test
-	public void testTuple02() {
+	public void testTuple02() throws RuntimeException, OCL2ParsingException,
+			ModelAccessException, TypeNotFoundInModelException {
 
 		Transaction transaction;
 
-		/* Load OCL file. */
-		testPerformer.loadOCLFile("constraints/test/tuple02.ocl");
+		/* Load OCL file (contains tuple expression). */
+		parsedConstraints =
+				testPerformer.loadOCLFile("constraints/test/tuple02.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		transaction = new Transaction();
 
-		modelObject = testPerformer.addModelObject(transaction);
+		objectList.clear();
+		objectList.add(testPerformer.addModelObject(transaction));
 
-		/* Interpret the selected combinations. */
-		results = testPerformer.interpretRemainingConstraints(modelObject);
+		/* Interpret the selected object(s). */
+		results.clear();
+		results.addAll(testPerformer.interpretConstraint(parsedConstraints
+				.iterator().next(), objectList, true));
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(0);
+		result_Boolean = (OclBoolean) results.get(0).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
@@ -6562,25 +7398,35 @@ public class TestInterpretation {
 	 * A test case testing the interpretation of a {@link Constraint} contained in
 	 * tuple03.ocl.
 	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 *           , TypeNotFoundInModelException
+	 * @throws OCL2ParsingException
+	 * @throws RuntimeException
 	 */
 	@Test
-	public void testTuple03() {
+	public void testTuple03() throws RuntimeException, OCL2ParsingException,
+			ModelAccessException, TypeNotFoundInModelException {
 
 		Transaction transaction;
 
-		/* Load OCL file. */
-		testPerformer.loadOCLFile("constraints/test/tuple03.ocl");
+		/* Load OCL file (contains tuple expression). */
+		parsedConstraints =
+				testPerformer.loadOCLFile("constraints/test/tuple03.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		transaction = new Transaction();
 
-		modelObject = testPerformer.addModelObject(transaction);
+		objectList.clear();
+		objectList.add(testPerformer.addModelObject(transaction));
 
-		/* Interpret the selected combinations. */
-		results = testPerformer.interpretRemainingConstraints(modelObject);
+		/* Interpret the selected object(s). */
+		results.clear();
+		results.addAll(testPerformer.interpretConstraint(parsedConstraints
+				.iterator().next(), objectList, true));
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(0);
+		result_Boolean = (OclBoolean) results.get(0).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}
@@ -6590,25 +7436,35 @@ public class TestInterpretation {
 	 * A test case testing the interpretation of a {@link Constraint} contained in
 	 * tuple04.ocl.
 	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 *           , TypeNotFoundInModelException
+	 * @throws OCL2ParsingException
+	 * @throws RuntimeException
 	 */
 	@Test
-	public void testTuple04() {
+	public void testTuple04() throws RuntimeException, OCL2ParsingException,
+			ModelAccessException, TypeNotFoundInModelException {
 
 		Transaction transaction;
 
-		/* Load OCL file. */
-		testPerformer.loadOCLFile("constraints/test/tuple04.ocl");
+		/* Load OCL file (contains tuple expression). */
+		parsedConstraints =
+				testPerformer.loadOCLFile("constraints/test/tuple04.ocl");
 
 		/* Create the model objects which shall be interpreted. */
 		transaction = new Transaction();
 
-		modelObject = testPerformer.addModelObject(transaction);
+		objectList.clear();
+		objectList.add(testPerformer.addModelObject(transaction));
 
-		/* Interpret the selected combinations. */
-		results = testPerformer.interpretRemainingConstraints(modelObject);
+		/* Interpret the selected object(s). */
+		results.clear();
+		results.addAll(testPerformer.interpretConstraint(parsedConstraints
+				.iterator().next(), objectList, true));
 
 		/* Compare with expected results. */
-		result_Boolean = (OclBoolean) results.get(0);
+		result_Boolean = (OclBoolean) results.get(0).getResult();
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 	}

@@ -20,47 +20,25 @@ with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
 package tudresden.ocl20.pivot.interpreter.test.tests;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 import org.eclipse.core.runtime.Platform;
 
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
-import tudresden.ocl20.pivot.examples.royalsandloyals.Customer;
-import tudresden.ocl20.pivot.examples.royalsandloyals.CustomerCard;
-import tudresden.ocl20.pivot.examples.royalsandloyals.Date;
-import tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyAccount;
-import tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyProgram;
-import tudresden.ocl20.pivot.examples.royalsandloyals.ProgramPartner;
-import tudresden.ocl20.pivot.interpreter.IInterpretationEnvironment;
-import tudresden.ocl20.pivot.interpreter.IOclInterpreter;
-import tudresden.ocl20.pivot.interpreter.OclInterpreterPlugin;
-import tudresden.ocl20.pivot.metamodels.uml2.UML2MetamodelPlugin;
-import tudresden.ocl20.pivot.modelbus.IModelBusConstants;
+import tudresden.ocl20.pivot.facade.OCL2ParsingException;
+import tudresden.ocl20.pivot.facade.Ocl2ForEclipseFacade;
+import tudresden.ocl20.pivot.interpreter.IInterpretationResult;
 import tudresden.ocl20.pivot.modelbus.ModelAccessException;
-import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
-import tudresden.ocl20.pivot.modelbus.metamodel.IMetamodel;
 import tudresden.ocl20.pivot.modelbus.model.IModel;
-import tudresden.ocl20.pivot.modelbus.model.IModelRegistry;
 import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance;
-import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceProvider;
-import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceRegistry;
 import tudresden.ocl20.pivot.modelbus.modelinstance.exception.OperationNotFoundException;
 import tudresden.ocl20.pivot.modelbus.modelinstance.exception.TypeNotFoundInModelException;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
-import tudresden.ocl20.pivot.modelinstancetype.java.internal.provider.JavaModelInstanceProvider;
-import tudresden.ocl20.pivot.ocl2parser.parser.OCL2Parser;
 import tudresden.ocl20.pivot.pivotmodel.Constraint;
-import tudresden.ocl20.pivot.pivotmodel.NamedElement;
-import tudresden.ocl20.pivot.pivotmodel.Namespace;
+import tudresden.ocl20.pivot.pivotmodel.ConstraintKind;
 import tudresden.ocl20.pivot.pivotmodel.Operation;
-import tudresden.ocl20.pivot.pivotmodel.Property;
 import tudresden.ocl20.pivot.pivotmodel.Type;
-import tudresden.ocl20.pivot.standardlibrary.java.JavaStandardlibraryPlugin;
 
 /**
  * <p>
@@ -72,45 +50,8 @@ import tudresden.ocl20.pivot.standardlibrary.java.JavaStandardlibraryPlugin;
  */
 public class TestPerformer {
 
-	/**
-	 * The qualified Name of the package that contains the {@link Class}es used
-	 * for testing.
-	 */
-
-	public static String QUALIFIED_NAME_MODEL_PACKAGE =
-			IModelBusConstants.ROOT_PACKAGE_NAME
-					+ "::tudresden::ocl20::pivot::examples::royalsandloyals";
-
-	/** The qualified Name of {@link Customer}. */
-	public static String QUALIFIED_NAME_CUSTOMER =
-			QUALIFIED_NAME_MODEL_PACKAGE + "::Customer";
-
-	/** The qualified Name of {@link CustomerCard}. */
-	public static String QUALIFIED_NAME_CUSTOMER_CARD =
-			QUALIFIED_NAME_MODEL_PACKAGE + "::CustomerCard";
-
-	/** The qualified Name of {@link Date}. */
-	public static String QUALIFIED_NAME_DATE =
-			QUALIFIED_NAME_MODEL_PACKAGE + "::Date";
-
-	/** The qualified Name of {@link LoyaltyAccount}. */
-	public static String QUALIFIED_NAME_LOYALTY_ACCOUNT =
-			QUALIFIED_NAME_MODEL_PACKAGE + "::LoyaltyAccount";
-
-	/** The qualified Name of {@link LoyaltyProgram}. */
-	public static String QUALIFIED_NAME_LOYALTY_PROGRAM =
-			QUALIFIED_NAME_MODEL_PACKAGE + "::LoyaltyProgram";
-
-	/** The qualified Name of {@link LoyaltyProgram}. */
-	public static String QUALIFIED_NAME_MEMBERSHIP =
-			QUALIFIED_NAME_MODEL_PACKAGE + "::Membership";
-
-	/** The qualified Name of {@link ProgramPartner}. */
-	public static String QUALIFIED_NAME_PROGRAM_PARTNER =
-			QUALIFIED_NAME_MODEL_PACKAGE + "::ProgramPartner";
-
 	/** The package of the UML2 meta model. */
-	private final static String META_MODEL = UML2MetamodelPlugin.ID;
+	private final static String META_MODEL = Ocl2ForEclipseFacade.UML2_MetaModel;
 
 	/** The name of the bundle of the model file. */
 	private final static String MODEL_BUNDLE =
@@ -124,23 +65,6 @@ public class TestPerformer {
 	 * and imported.
 	 */
 	protected String fileDirectory = "";
-
-	/**
-	 * Used to select uninterpreted {@link Constraint}s for the actual test case.
-	 */
-	protected Set<Constraint> interpretedConstraints;
-
-	/**
-	 * The global {@link IInterpretationEnvironment} used during interpretation
-	 * and preparation.
-	 */
-	protected IInterpretationEnvironment myGlobalEnvironment;
-
-	/** The {@link IOclInterpreter} used by this {@link TestPerformer}. */
-	protected IOclInterpreter myInterpreter = null;
-
-	/** Contains the UML2 meta model. */
-	protected IMetamodel myMetaModel = null;
 
 	/** Contains the loaded UML2 model. */
 	protected IModel myModel = null;
@@ -168,21 +92,50 @@ public class TestPerformer {
 	 * @param object
 	 *          The {@link Object} that shall be adapted and added.
 	 * @return The adapted {@link IModelInstanceElement}.
+	 * @throws TypeNotFoundInModelException
 	 */
-	public IModelInstanceElement addModelObject(Object object) {
+	public IModelInstanceElement addModelObject(Object object)
+			throws TypeNotFoundInModelException {
 
 		IModelInstanceElement result;
 
-		try {
-			result = myModelInstance.addModelInstanceElement(object);
-		}
-
-		// FIXME: Shouldn't there be a better way of handling this exception?
-		catch (TypeNotFoundInModelException e) {
-			result = null;
-		}
+		result = myModelInstance.addModelInstanceElement(object);
 
 		return result;
+	}
+
+	/**
+	 * <p>
+	 * Searches for a {@link Operation} of a given {@link IModelInstanceElement}
+	 * in its {@link IModel}.
+	 * </p>
+	 * 
+	 * @param imiElement
+	 *          The {@link IModelInstanceElement}.
+	 * @param name
+	 *          The name of the {@link Operation}.
+	 * @return The found {@link Operation}.
+	 * @throws OperationNotFoundException
+	 *           Thrown, if the {@link Operation} has not been found.
+	 */
+	public Operation findOperation(IModelInstanceElement imiElement, String name)
+			throws OperationNotFoundException {
+
+		for (Type type : imiElement.getTypes()) {
+
+			for (Operation ownedOperation : type.getOwnedOperation()) {
+
+				if (ownedOperation.getName().equals(name)) {
+					return ownedOperation;
+				}
+				// no else.
+			}
+			// end for.
+		}
+		// end for.
+
+		throw new OperationNotFoundException("Cannot find operation " + name
+				+ " on " + imiElement);
 	}
 
 	/**
@@ -197,17 +150,8 @@ public class TestPerformer {
 	 */
 	public void init() throws RuntimeException {
 
-		/* Try to load model and meta model. */
+		/* Try to load model and model instance. */
 		try {
-
-			this.myMetaModel =
-					ModelBusPlugin.getMetamodelRegistry().getMetamodel(META_MODEL);
-
-			if (myMetaModel == null) {
-				throw new RuntimeException("Unable to load meta model during test.");
-			}
-			// no else.
-
 			/* Get the bundle location for the model files. */
 			fileDirectory = Platform.getBundle(MODEL_BUNDLE).getLocation();
 
@@ -219,16 +163,6 @@ public class TestPerformer {
 
 			/* Load the model instance. */
 			this.loadModelInstance();
-
-			/* Initialize the set containing already interpreted constraints. */
-			this.interpretedConstraints = new HashSet<Constraint>();
-
-			/* Initialize the interpreter. */
-			this.myInterpreter =
-					OclInterpreterPlugin.createInterpreter(this.myModelInstance);
-			this.myInterpreter.setCachingEnabled(false);
-
-			this.myGlobalEnvironment = this.myInterpreter.getEnvironment();
 		}
 
 		catch (Exception e) {
@@ -239,150 +173,149 @@ public class TestPerformer {
 
 	/**
 	 * <p>
-	 * Interprets all not yet interpreted {@link Constraint}s for a given
-	 * {@link IModelInstanceElement}.
+	 * Interprets a given {@link Constraint} for a given {@link List} of
+	 * {@link IModelInstanceElement}s.
+	 * </p>
 	 * 
-	 * @param modelObject
-	 *          The {@link IModelInstanceElement} that shall be interpreted.
-	 * @result A {@link List} containing {@link OclAny} results for all
-	 *         interpreted combinations.
+	 * @param constrraint
+	 *          The {@link Constraint} that shall be interpreted.
+	 * @param modelObjects
+	 *          The {@link IModelInstanceElement}s that shall be interpreted.
+	 * @throws ModelAccessException
+	 * @throws IllegalArgumentException
+	 * @result A {@link List} containing the {@link IInterpretationResult}s of the
+	 *         interpretation.
 	 */
-	public List<OclAny> interpretRemainingConstraints(
-			IModelInstanceElement modelObject) {
+	public List<IInterpretationResult> interpretConstraint(Constraint constraint,
+			List<IModelInstanceElement> modelObjects, boolean removeConstraints)
+			throws IllegalArgumentException, ModelAccessException {
 
-		List<OclAny> result;
+		List<IInterpretationResult> result;
 
-		List<Constraint> uninterpretedConstraints;
+		result = new ArrayList<IInterpretationResult>();
 
-		result = new ArrayList<OclAny>();
+		for (IModelInstanceElement modelObject : modelObjects) {
 
-		/* Collect all not yet interpreted constraints. */
-		uninterpretedConstraints = this.collectNotYetInterpretedConstraints();
-
-		/*
-		 * Iterate through the given model objects and not yet interpreted
-		 * constraints.
-		 */
-		for (Constraint aConstraint : uninterpretedConstraints) {
-
-			NamedElement aConstrainedElement;
-
-			/* Get the constrained element. */
-			aConstrainedElement =
-					(NamedElement) aConstraint.getConstrainedElement().get(0);
-
-			/* Check if the constrained element is an operation. */
-			if (aConstrainedElement instanceof Operation) {
-
-				Operation anOperation;
-
-				anOperation = (Operation) aConstrainedElement;
-
-				/* Use the constrained type instead. */
-				aConstrainedElement = anOperation.getOwningType();
-			}
-
-			/*
-			 * Check if the the constrained element matches to the current model
-			 * object and eventually do the interpretation.
-			 */
-			if (modelObject.getTypes().contains(aConstrainedElement)) {
-				result.add(this.myInterpreter.interpretConstraint(aConstraint,
-						modelObject).getResult());
-			}
-			// no else.
-
-			/* Add the constraint to the already interpreted constraints. */
-			this.interpretedConstraints.add(aConstraint);
+			result.add(Ocl2ForEclipseFacade.interpretConstraint(constraint,
+					this.myModelInstance, modelObject));
 		}
 		// end for.
+
+		/* Probably remove all constraints are removed from the model. */
+		if (removeConstraints) {
+			this.myModel.removeAllConstraints(this.myModel);
+		}
+		// no else.
 
 		return result;
 	}
 
 	/**
 	 * <p>
-	 * Interprets all not yet interpreted {@link Constraint}s for a given
-	 * {@link List} of {@link IModelInstanceElement}s.
+	 * Interprets a given {@link Constraint} of the
+	 * {@link ConstraintKind#POSTCONDITION} for a given
+	 * {@link IModelInstanceElement}.
+	 * </p>
 	 * 
-	 * @param modelObjects
-	 *          The {@link IModelInstanceElement}s that shall be interpreted.
-	 * @result A {@link List} containing {@link OclAny} results for all
-	 *         interpreted combinations.
+	 * @param constraint
+	 *          The {@link Constraint} that shall be interpreted.
+	 * @param modelInstanceElements
+	 *          The {@link IModelInstanceElement} that shall be interpreted.
+	 * @param operation
+	 *          The {@link Operation} whose postconditions shall be interpreted.
+	 * @param parameters
+	 *          The parameter values of the {@link Operation} for which the
+	 *          postconditions shall be interpreted.
+	 * @param resultValue
+	 *          The result of the {@link Operation}'s invocation for that the
+	 *          postconditions shall be interpreted.
+	 * @param removeConstraints
+	 *          Indicates, whether or not all {@link Constraint} shall be removed
+	 *          from the {@link IModel} after this interpretation.
+	 * @throws ModelAccessException
+	 * @throws IllegalArgumentException
+	 * @result The {@link IInterpretationResult} of the interpretation.
 	 */
-	public List<OclAny> interpretRemainingConstraints(
-			List<IModelInstanceElement> modelObjects) {
+	public List<IInterpretationResult> interpretPostCondition(
+			Constraint constraint, List<IModelInstanceElement> modelInstanceElements,
+			Operation operation, List<IModelInstanceElement> parameters,
+			IModelInstanceElement resultValue, boolean removeConstraints)
+			throws IllegalArgumentException, ModelAccessException {
 
-		List<OclAny> result;
+		List<IInterpretationResult> result;
+		result = new ArrayList<IInterpretationResult>();
 
-		List<Constraint> uninterpretedConstraints;
+		List<Constraint> constraints;
+		constraints = new ArrayList<Constraint>();
+		constraints.add(constraint);
 
-		result = new ArrayList<OclAny>();
+		for (IModelInstanceElement modelInstanceElement : modelInstanceElements) {
+			result.addAll(Ocl2ForEclipseFacade.interpretPostConditions(
+					this.myModelInstance, modelInstanceElement, operation, parameters,
+					resultValue, constraints));
 
-		/* Collect all not yet interpreted constraints. */
-		uninterpretedConstraints = this.collectNotYetInterpretedConstraints();
-
-		/*
-		 * Iterate through the given model objects and not yet interpreted
-		 * constraints.
-		 */
-		for (Constraint aConstraint : uninterpretedConstraints) {
-
-			for (IModelInstanceElement aModelObject : modelObjects) {
-
-				NamedElement aConstrainedElement;
-
-				/* Get the constrained element. */
-				aConstrainedElement =
-						(NamedElement) aConstraint.getConstrainedElement().get(0);
-
-				/* Check if the constrained element is an operation. */
-				if (aConstrainedElement instanceof Operation) {
-
-					Operation anOperation;
-
-					anOperation = (Operation) aConstrainedElement;
-
-					/* Use the constrained type instead. */
-					aConstrainedElement = anOperation.getOwningType();
-				}
-
-				/*
-				 * Check if the the constrained element matches to the current model
-				 * object and eventually do the interpretation.
-				 */
-				if (aModelObject.getTypes().contains(aConstrainedElement)) {
-					result.add(this.myInterpreter.interpretConstraint(aConstraint,
-							aModelObject).getResult());
-				}
-				// no else.
-			}
-			// end for.
-
-			/* Add the constraint to the already interpreted constraints. */
-			this.interpretedConstraints.add(aConstraint);
 		}
 		// end for.
+
+		/* Probably remove all constraints are removed from the model. */
+		if (removeConstraints) {
+			this.myModel.removeAllConstraints(this.myModel);
+		}
+		// no else.
 
 		return result;
 	}
 
-	// TODO JavaDoc
-	public Operation findOperation(IModelInstanceElement imiElement, String name)
-			throws OperationNotFoundException {
+	/**
+	 * <p>
+	 * Interprets a given {@link Constraint} of the
+	 * {@link ConstraintKind#PRECONDITION} for a given
+	 * {@link IModelInstanceElement}.
+	 * </p>
+	 * 
+	 * @param constraint
+	 *          The {@link Constraint} that shall be interpreted.
+	 * @param modelInstanceElements
+	 *          The {@link IModelInstanceElement} that shall be interpreted.
+	 * @param operation
+	 *          The {@link Operation} whose preconditions shall be interpreted.
+	 * @param parameters
+	 *          The parameter values of the {@link Operation} for which the
+	 *          preconditions shall be interpreted.
+	 * @param removeConstraints
+	 *          Indicates, whether or not all {@link Constraint} shall be removed
+	 *          from the {@link IModel} after this interpretation.
+	 * @throws ModelAccessException
+	 * @throws IllegalArgumentException
+	 * @result The {@link IInterpretationResult} of the interpretation.
+	 */
+	public List<IInterpretationResult> interpretPreCondition(
+			Constraint constraint, List<IModelInstanceElement> modelInstanceElements,
+			Operation operation, List<IModelInstanceElement> parameters,
+			boolean removeConstraints) throws IllegalArgumentException,
+			ModelAccessException {
 
-		for (Type type : imiElement.getTypes()) {
+		List<IInterpretationResult> result;
+		result = new ArrayList<IInterpretationResult>();
 
-			for (Operation ownedOperation : type.getOwnedOperation()) {
+		List<Constraint> constraints;
+		constraints = new ArrayList<Constraint>();
+		constraints.add(constraint);
 
-				if (ownedOperation.getName().equals(name)) {
-					return ownedOperation;
-				}
-			}
+		for (IModelInstanceElement modelInstanceElement : modelInstanceElements) {
+			result.addAll(Ocl2ForEclipseFacade.interpretPreConditions(
+					this.myModelInstance, modelInstanceElement, operation, parameters,
+					constraints));
 		}
+		// end for.
 
-		throw new OperationNotFoundException("Cannot find operation " + name
-				+ " on " + imiElement);
+		/* Probably remove all constraints are removed from the model. */
+		if (removeConstraints) {
+			this.myModel.removeAllConstraints(this.myModel);
+		}
+		// no else.
+
+		return result;
 	}
 
 	/**
@@ -393,16 +326,17 @@ public class TestPerformer {
 	 * 
 	 * @param oclFileName
 	 *          The OCL file to be parsed.
+	 * @return A {@link Set} containing the parsed {@link Constraint}s.
+	 * @throws ModelAccessException
+	 * @throws OCL2ParsingException
 	 * @throws Ocl22JavaException
 	 *           Is thrown if any error occurs
 	 */
-	public void loadOCLFile(String oclFileName) throws RuntimeException {
+	public Set<Constraint> loadOCLFile(String oclFileName)
+			throws RuntimeException, OCL2ParsingException, ModelAccessException {
 
+		Set<Constraint> result;
 		File oclFile;
-		FileReader oclFileReader;
-
-		OCL2Parser anOCLparser;
-
 		oclFile = new File(fileDirectory + oclFileName);
 
 		/* Check if the given file exists. */
@@ -416,248 +350,49 @@ public class TestPerformer {
 		}
 		// no else.
 
-		/* Try to open the file. */
-		try {
-			oclFileReader = new FileReader(oclFile);
-		}
+		result = Ocl2ForEclipseFacade.parseConstraints(oclFile, this.myModel, true);
 
-		catch (FileNotFoundException e) {
-			String msg;
-
-			msg = "The given OCL file does not exist. File name: ";
-			msg += oclFileName + ".";
-
-			throw new RuntimeException(msg);
-		}
-
-		anOCLparser = new OCL2Parser(myModel, oclFileReader);
-
-		/* Try to parse the OCL file. */
-		try {
-			anOCLparser.parse();
-		}
-
-		catch (Exception e) {
-			String msg;
-
-			msg = "Exception during parsing of given OCL constraints. ";
-			msg += e.getMessage();
-
-			e.printStackTrace();
-
-			throw new RuntimeException(msg, e);
-		}
+		return result;
 	}
 
 	/**
 	 * <p>
-	 * Prepares all not yet interpreted {@link Constraint}s for a given
-	 * {@link IModelInstanceElement}.
+	 * Prepares a given {@link Constraint} of the
+	 * {@link ConstraintKind#POSTCONDITION} for a given
+	 * {@link IModelInstanceElement} (necessary to store <code>@pre</code>
+	 * values).
+	 * </p>
 	 * 
-	 * @param modelObject
-	 *          The {@link IModelInstanceElement} for that the not yet interpreted
-	 *          {@link Constraint}s shall be prepared.
-	 * @return The {@link IInterpretationEnvironment} of the
-	 *         {@link IOclInterpreter} containing the done preparation.
+	 * @param constraint
+	 *          The {@link Constraint} that shall be interpreted.
+	 * @param modelInstanceElements
+	 *          The {@link IModelInstanceElement} that shall be interpreted.
+	 * @param operation
+	 *          The {@link Operation} whose postconditions shall be interpreted.
+	 * @param parameters
+	 *          The parameter values of the {@link Operation} for which the
+	 *          postconditions shall be interpreted.
+	 * @throws ModelAccessException
+	 * @throws IllegalArgumentException
+	 * @result The {@link IInterpretationResult} of the interpretation.
 	 */
-	public IInterpretationEnvironment prepareRemainingConstraints(
-			IModelInstanceElement modelObject) {
+	public List<IInterpretationResult> preparePostCondition(
+			Constraint constraint, List<IModelInstanceElement> modelInstanceElements,
+			Operation operation, List<IModelInstanceElement> parameters)
+			throws IllegalArgumentException, ModelAccessException {
 
-		return this.prepareRemainingConstraints(modelObject, true);
-	}
+		List<IInterpretationResult> result;
+		result = new ArrayList<IInterpretationResult>();
 
-	/**
-	 * <p>
-	 * Prepares all not yet interpreted {@link Constraint}s for a given
-	 * {@link IModelInstanceElement}.
-	 * 
-	 * @param modelObject
-	 *          The {@link IModelInstanceElement} for that the not yet interpreted
-	 *          {@link Constraint}s shall be prepared.
-	 * @param setInterpreted
-	 *          If true, the prepared {@link Constraint}s will be added to the set
-	 *          of interpreted {@link Constraint}s and thus will not be prepared
-	 *          or interpreted again.
-	 * @return The {@link IInterpretationEnvironment} of the
-	 *         {@link IOclInterpreter} containing the done preparation.
-	 */
-	public IInterpretationEnvironment prepareRemainingConstraints(
-			IModelInstanceElement modelObject, boolean setInterpreted) {
+		List<Constraint> constraints;
+		constraints = new ArrayList<Constraint>();
+		constraints.add(constraint);
 
-		List<Constraint> unInterpretedConstraints;
-
-		/* Collect not interpreted constraints. */
-		unInterpretedConstraints = this.collectNotYetInterpretedConstraints();
-
-		/*
-		 * Iterate through the given model objects and all not yet interpreted
-		 * constraints.
-		 */
-		for (Constraint aConstraint : unInterpretedConstraints) {
-
-			NamedElement aConstrainedElement;
-
-			/* Get the constrained element. */
-			aConstrainedElement =
-					(NamedElement) aConstraint.getConstrainedElement().get(0);
-
-			/*
-			 * If the constrained element is a property, get the constrained type
-			 * instead.
-			 */
-			if (aConstrainedElement instanceof Property) {
-
-				Property aProperty;
-
-				aProperty = (Property) aConstrainedElement;
-				aConstrainedElement = aProperty.getOwningType();
-			}
-
-			/*
-			 * Else if the constrained element is an operation, get the constrained
-			 * type instead.
-			 */
-			else if (aConstrainedElement instanceof Operation) {
-
-				Operation operation;
-
-				operation = (Operation) aConstrainedElement;
-				aConstrainedElement = operation.getOwningType();
-			}
-			// no else.
-
-			/*
-			 * Check if the current model object matches to the constrained element
-			 * and eventually prepare the constrained element.
-			 */
-			if (modelObject.getTypes().contains(aConstrainedElement)) {
-				this.myInterpreter.prepareConstraint(aConstraint, modelObject);
-			}
-			// no else.
-
-			/*
-			 * Eventually add the constraint to the already interpreted constraints.
-			 */
-			if (setInterpreted) {
-				this.interpretedConstraints.add(aConstraint);
-			}
+		for (IModelInstanceElement modelInstanceElement : modelInstanceElements) {
+			Ocl2ForEclipseFacade.preparePostConditions(this.myModelInstance,
+					modelInstanceElement, operation, parameters, constraints);
 		}
 		// end for.
-
-		return this.myGlobalEnvironment;
-	}
-
-	/**
-	 * <p>
-	 * Resets the environment ({@link IModel}, {@link IModelInstance} and
-	 * {@link IOclInterpreter}) used by this {@link TestPerformer} and
-	 * reinitializes it. Used to remove new defined or initialized
-	 * {@link IModelInstanceElement}s from the {@link IModel}.
-	 * </p>
-	 * 
-	 * @throws ModelAccessException
-	 */
-	public void reset() throws ModelAccessException {
-
-		/* Remove all loaded models. */
-		ModelBusPlugin.getModelRegistry().dispose();
-
-		this.myModel = null;
-		this.myModelInstance = null;
-		this.myGlobalEnvironment = null;
-		this.myInterpreter = null;
-		this.interpretedConstraints.clear();
-
-		this.init();
-
-		this.interpretedConstraints.addAll(this.myModel.getRootNamespace()
-				.getOwnedAndNestedRules());
-	}
-
-	/**
-	 * <p>
-	 * Removes a variable to the {@link IInterpretationEnvironment} used for
-	 * preparation and interpretation.
-	 * </p>
-	 * 
-	 * @param path
-	 *          The path and name of the variable which shall be reset.
-	 */
-	public void resetEnvironmentVariable(String path) {
-
-		/* Add the variable to the environment. */
-		this.myInterpreter.resetEnviromentVariable(path);
-	}
-
-	/**
-	 * <p>
-	 * Add a given {@link Object} as a variable to the
-	 * {@link IInterpretationEnvironment} used for preparation and interpretation.
-	 * </p>
-	 * 
-	 * @param path
-	 *          The path and name of the variable which shall be set.
-	 * @param value
-	 *          The {@link IModelInstanceElement} value of the set variable as an
-	 *          Object.
-	 * @throws TypeNotFoundInModelException
-	 */
-	public void setEnvironmentVariable(String path, Object value)
-			throws TypeNotFoundInModelException {
-
-		/* Convert the object into an OclAny. */
-		OclAny adaptedObject;
-
-		IModelInstanceElement imiElement =
-				myModelInstance.addModelInstanceElement(value);
-
-		adaptedObject =
-				JavaStandardlibraryPlugin.getStandardLibraryFactory().createOclAny(
-						imiElement);
-		/* Add the variable to the environment. */
-		this.myInterpreter.setEnviromentVariable(path, adaptedObject);
-	}
-
-	/**
-	 * <p>
-	 * Add a given {@link OclAny} as a variable to the
-	 * {@link IInterpretationEnvironment} used for preparation and interpretation.
-	 * </p>
-	 * 
-	 * @param path
-	 *          The path and name of the variable which shall be set.
-	 * @param value
-	 *          The {@link OclAny} value of the set variable as an Object.
-	 */
-	public void setEnvironmentVariable(String path, OclAny value) {
-
-		/* Add the variable to the environment. */
-		this.myInterpreter.setEnviromentVariable(path, value);
-	}
-
-	/**
-	 * @return A {@link List} containing all loaded {@link Constraint}s which were
-	 *         not interpreted yet.
-	 */
-	protected List<Constraint> collectNotYetInterpretedConstraints() {
-
-		List<Constraint> result;
-
-		Namespace rootNamespace;
-
-		try {
-			rootNamespace = this.myModel.getRootNamespace();
-
-			result =
-					this.collectNotYetInterpretedConstraintsOfNamespace(rootNamespace);
-		}
-
-		catch (ModelAccessException e) {
-			e.printStackTrace();
-			result = null;
-
-			throw new RuntimeException(e.getMessage());
-		}
 
 		return result;
 	}
@@ -695,14 +430,7 @@ public class TestPerformer {
 
 			/* Try to load the model. */
 			try {
-				IModelRegistry modelRegistry;
-
-				this.myModel = this.myMetaModel.getModelProvider().getModel(modelFile);
-
-				modelRegistry = ModelBusPlugin.getModelRegistry();
-
-				modelRegistry.addModel(myModel);
-				modelRegistry.setActiveModel(myModel);
+				this.myModel = Ocl2ForEclipseFacade.getModel(modelFile, META_MODEL);
 			}
 
 			catch (ModelAccessException e) {
@@ -731,66 +459,19 @@ public class TestPerformer {
 			this.myModelInstance = null;
 
 			/* Load the model instance. */
-			IModelInstanceProvider modelInstanceProvider =
-					new JavaModelInstanceProvider();
-			this.myModelInstance =
-					modelInstanceProvider.createEmptyModelInstance(this.myModel);
+			try {
+				this.myModelInstance =
+						Ocl2ForEclipseFacade.getEmptyModelInstance(this.myModel,
+								Ocl2ForEclipseFacade.Java_ModelInstanceType);
+			}
 
-			/*
-			 * Add the successfully loaded model instance to the model instance
-			 * registry.
-			 */
-			IModelInstanceRegistry modelInstanceRegistry;
-			modelInstanceRegistry = ModelBusPlugin.getModelInstanceRegistry();
-
-			modelInstanceRegistry.addModelInstance(myModel, this.myModelInstance);
-			modelInstanceRegistry.setActiveModelInstance(myModel,
-					this.myModelInstance);
+			catch (ModelAccessException e) {
+				throw new RuntimeException(e.getMessage(), e);
+			}
 		}
 
 		else {
 			throw new RuntimeException("No model found to load a model instance.");
 		}
-	}
-
-	/**
-	 * @param aNamespace
-	 *          The {@link Namespace} which {@link Constraint}s shall be
-	 *          collected.
-	 * @return All {@link Constraint}s of a given {@link Namespace} and its nested
-	 *         {@link Namespace}s which were not interpreted yet.
-	 */
-	private List<Constraint> collectNotYetInterpretedConstraintsOfNamespace(
-			Namespace aNamespace) {
-
-		List<Constraint> result;
-
-		List<Namespace> nestedNamespaces;
-		List<Constraint> ownedRules;
-
-		result = new ArrayList<Constraint>();
-
-		/*
-		 * Recursively iterate through all nested name spaces and add their
-		 * constraints.
-		 */
-		nestedNamespaces = aNamespace.getNestedNamespace();
-
-		for (Namespace aNestedNamespace : nestedNamespaces) {
-			result.addAll(this
-					.collectNotYetInterpretedConstraintsOfNamespace(aNestedNamespace));
-		}
-
-		/* Add all not yet interpreted constraints of this name space. */
-		ownedRules = aNamespace.getOwnedRule();
-
-		for (Constraint aConstraint : ownedRules) {
-			if (!this.interpretedConstraints.contains(aConstraint)) {
-				result.add(aConstraint);
-			}
-			// no else.
-		}
-
-		return result;
 	}
 }
