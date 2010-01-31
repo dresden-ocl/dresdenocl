@@ -73,7 +73,8 @@ public class InterpretationEnvironment implements IInterpretationEnvironment {
 	protected HashMap<IModelInstanceElement, HashMap<OperationCallExp, OclAny>> postconditionValues;
 
 	/** Saved constraints for body, def, initial and derive. */
-	protected HashMap<String, Constraint> savedConstraints;
+	protected HashMap<String, Constraint> savedConstraints =
+			new HashMap<String, Constraint>();;
 
 	/**
 	 * Saved instances of {@link Type}s existing before the current context's
@@ -103,21 +104,18 @@ public class InterpretationEnvironment implements IInterpretationEnvironment {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * tudresden.ocl20.pivot.interpreter.IEnvironment#addConstraint(java.lang.String,
-	 * tudresden.ocl20.pivot.pivotmodel.Constraint)
+	 * tudresden.ocl20.pivot.interpreter.IEnvironment#addConstraint(java.lang.
+	 * String, tudresden.ocl20.pivot.pivotmodel.Constraint)
 	 */
 	public void addConstraint(String path, Constraint aConstraint) {
-
-		if (this.savedConstraints == null) {
-			this.savedConstraints = new HashMap<String, Constraint>();
-		}
 
 		this.savedConstraints.put(path, aConstraint);
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.interpreter.IEnvironment#addVar(java.lang.String,
+	 * @see
+	 * tudresden.ocl20.pivot.interpreter.IEnvironment#addVar(java.lang.String,
 	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny)
 	 */
 	public void addVar(String path, OclAny oclRoot) {
@@ -127,7 +125,8 @@ public class InterpretationEnvironment implements IInterpretationEnvironment {
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.interpreter.IEnvironment#cacheResult(tudresden.ocl20.
+	 * @see
+	 * tudresden.ocl20.pivot.interpreter.IEnvironment#cacheResult(tudresden.ocl20.
 	 * pivot.pivotmodel.NamedElement,
 	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny)
 	 */
@@ -157,9 +156,8 @@ public class InterpretationEnvironment implements IInterpretationEnvironment {
 
 	/*
 	 * (non-Javadoc)
-	 * @see
-	 * tudresden.ocl20.pivot.interpreter.IInterpretationEnvironment#clearPreparedConstraints
-	 * ()
+	 * @seetudresden.ocl20.pivot.interpreter.IInterpretationEnvironment#
+	 * clearPreparedConstraints ()
 	 */
 	public void clearPreparedConstraints() {
 
@@ -169,8 +167,8 @@ public class InterpretationEnvironment implements IInterpretationEnvironment {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * tudresden.ocl20.pivot.interpreter.IEnvironment#getCachedResult(tudresden.ocl20
-	 * .pivot.pivotmodel.NamedElement)
+	 * tudresden.ocl20.pivot.interpreter.IEnvironment#getCachedResult(tudresden
+	 * .ocl20 .pivot.pivotmodel.NamedElement)
 	 */
 	public OclAny getCachedResult(NamedElement aNamedElement) {
 
@@ -190,7 +188,8 @@ public class InterpretationEnvironment implements IInterpretationEnvironment {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * tudresden.ocl20.pivot.interpreter.IEnvironment#getConstraint(java.lang.String)
+	 * tudresden.ocl20.pivot.interpreter.IEnvironment#getConstraint(java.lang.
+	 * String)
 	 */
 	public Constraint getConstraint(String path) {
 
@@ -252,13 +251,46 @@ public class InterpretationEnvironment implements IInterpretationEnvironment {
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.interpreter.IEnvironment#getVar(java.lang.String)
+	 * @see
+	 * tudresden.ocl20.pivot.interpreter.IEnvironment#getVar(java.lang.String)
 	 */
 	public OclAny getVar(String path) {
 
 		OclAny result;
 
 		result = savedVariables.get(path);
+
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * tudresden.ocl20.pivot.interpreter.IInterpretationEnvironment#isNewInstance
+	 * (tudresden
+	 * .ocl20.pivot.essentialocl.standardlibrary.OclModelInstanceObject)
+	 */
+	public boolean isNewInstance(OclModelInstanceObject source) {
+
+		boolean result;
+		IModelInstanceObject imiObject;
+
+		imiObject = (IModelInstanceObject) source.getModelInstanceElement();
+		result = true;
+
+		/*
+		 * If any imiObject's type's instances contains the imiObject, return false.
+		 * Else return true.
+		 */
+		for (Type aType : imiObject.getTypes()) {
+
+			if (this.savedInstances.containsKey(aType)
+					&& this.savedInstances.get(aType).contains(imiObject)) {
+				result = false;
+				break;
+			}
+		}
+		// end for.
 
 		return result;
 	}
@@ -317,8 +349,8 @@ public class InterpretationEnvironment implements IInterpretationEnvironment {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * tudresden.ocl20.pivot.interpreter.IEnvironment#setModelInstance(tudresden.ocl20
-	 * .pivot.modelbus.IModelInstance)
+	 * tudresden.ocl20.pivot.interpreter.IEnvironment#setModelInstance(tudresden
+	 * .ocl20 .pivot.modelbus.IModelInstance)
 	 */
 	public void setModelInstance(IModelInstance aModelInstance) {
 
@@ -349,36 +381,7 @@ public class InterpretationEnvironment implements IInterpretationEnvironment {
 
 		result.cachedResults = this.cachedResults;
 
-		return result;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * tudresden.ocl20.pivot.interpreter.IInterpretationEnvironment#isNewInstance(tudresden
-	 * .ocl20.pivot.essentialocl.standardlibrary.OclModelInstanceObject)
-	 */
-	public boolean isNewInstance(OclModelInstanceObject source) {
-
-		boolean result;
-		IModelInstanceObject imiObject;
-
-		imiObject = (IModelInstanceObject) source.getModelInstanceElement();
-		result = true;
-
-		/*
-		 * If any imiObject's type's instances contains the imiObject, return false.
-		 * Else return true.
-		 */
-		for (Type aType : imiObject.getTypes()) {
-
-			if (this.savedInstances.containsKey(aType)
-					&& this.savedInstances.get(aType).contains(imiObject)) {
-				result = false;
-				break;
-			}
-		}
-		// end for.
+		result.savedInstances = this.savedInstances;
 
 		return result;
 	}

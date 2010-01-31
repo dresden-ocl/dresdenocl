@@ -141,8 +141,11 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 	 */
 	private boolean isPreparation = false;
 
-	/** Specifies if caching shall be used. */
-	private boolean isCachingEnabled = true;
+	/**
+	 * FIXME Claas: The caching can cause false results. Should remain switched
+	 * off since this bug is solved. Specifies if caching shall be used.
+	 */
+	private boolean isCachingEnabled = false;
 
 	/** The current {@link IModelInstanceElement} to be interpreted or prepared. */
 	private IModelInstanceElement myCurrentModelObject;
@@ -243,25 +246,14 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		/* Add self variable to environment. */
 		this.myEnvironment.addVar("self", oclModelObject);
 
-		/* Eventually use a cached result. */
-		if (isCachingEnabled && myEnvironment.getCachedResult(aConstraint) != null) {
-			oclRootResult = myEnvironment.getCachedResult(aConstraint);
-		}
+		/* Clear the cache before interpretsation of each constraint. */
+		this.myEnvironment.clearCache();
 
-		/* Else compute the result. */
-		else {
-			EObject constraintSpecification;
+		/* Compute the result. */
+		EObject constraintSpecification;
+		constraintSpecification = (EObject) aConstraint.getSpecification();
 
-			constraintSpecification = (EObject) aConstraint.getSpecification();
-
-			oclRootResult = doSwitch((EObject) constraintSpecification);
-		}
-
-		/* Eventually cache the result. */
-		if (isCachingEnabled && !isModelAccessNeeded) {
-			myEnvironment.cacheResult(aConstraint, oclRootResult);
-		}
-		// no else.
+		oclRootResult = doSwitch((EObject) constraintSpecification);
 
 		result =
 				new InterpretationResultImpl(aModelObject, aConstraint, oclRootResult);
