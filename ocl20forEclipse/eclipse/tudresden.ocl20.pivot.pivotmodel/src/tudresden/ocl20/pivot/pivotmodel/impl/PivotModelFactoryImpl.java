@@ -377,6 +377,16 @@ public class PivotModelFactoryImpl extends EFactoryImpl implements
 	}
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public PivotModelPackageImpl getPivotModelPackage() {
+
+		return (PivotModelPackageImpl) getEPackage();
+	}
+
+	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -399,15 +409,6 @@ public class PivotModelFactoryImpl extends EFactoryImpl implements
 			Object instanceValue) {
 
 		return instanceValue == null ? null : instanceValue.toString();
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @generated
-	 */
-	public PivotModelPackageImpl getPivotModelPackageImpl() {
-
-		return (PivotModelPackageImpl) getEPackage();
 	}
 
 	/**

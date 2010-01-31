@@ -57,19 +57,27 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
 import tudresden.ocl20.pivot.pivotmodel.TypeParameter;
 
 /**
- * <!-- begin-user-doc --> An implementation of the model object '<em><b>Namespace</b></em>'.
- * <!-- end-user-doc -->
+ * <!-- begin-user-doc --> An implementation of the model object '
+ * <em><b>Namespace</b></em>'. <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.NamespaceImpl#getOwnedTypeParameter <em>Owned Type Parameter</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.NamespaceImpl#getOwnedType <em>Owned Type</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.NamespaceImpl#getOwnedRule <em>Owned Rule</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.NamespaceImpl#getNestedNamespace <em>Nested Namespace</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.NamespaceImpl#getNestingNamespace <em>Nesting Namespace</em>}</li>
+ * <li>
+ * {@link tudresden.ocl20.pivot.pivotmodel.impl.NamespaceImpl#getOwnedTypeParameter
+ * <em>Owned Type Parameter</em>}</li>
+ * <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.NamespaceImpl#getOwnedType
+ * <em>Owned Type</em>}</li>
+ * <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.NamespaceImpl#getOwnedRule
+ * <em>Owned Rule</em>}</li>
+ * <li>
+ * {@link tudresden.ocl20.pivot.pivotmodel.impl.NamespaceImpl#getNestedNamespace
+ * <em>Nested Namespace</em>}</li>
+ * <li>
+ * {@link tudresden.ocl20.pivot.pivotmodel.impl.NamespaceImpl#getNestingNamespace
+ * <em>Nesting Namespace</em>}</li>
  * </ul>
  * </p>
- *
+ * 
  * @generated
  */
 public class NamespaceImpl extends NamedElementImpl implements Namespace {
@@ -80,8 +88,10 @@ public class NamespaceImpl extends NamedElementImpl implements Namespace {
 	private static final Logger logger = Logger.getLogger(NamespaceImpl.class);
 
 	/**
-	 * The cached value of the '{@link #getOwnedTypeParameter() <em>Owned Type Parameter</em>}' containment reference list.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getOwnedTypeParameter()
+	 * <em>Owned Type Parameter</em>}' containment reference list. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getOwnedTypeParameter()
 	 * @generated
 	 * @ordered
@@ -89,8 +99,9 @@ public class NamespaceImpl extends NamedElementImpl implements Namespace {
 	protected EList<TypeParameter> ownedTypeParameter;
 
 	/**
-	 * The cached value of the '{@link #getOwnedType() <em>Owned Type</em>}' containment reference list.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getOwnedType() <em>Owned Type</em>}'
+	 * containment reference list. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getOwnedType()
 	 * @generated
 	 * @ordered
@@ -98,8 +109,9 @@ public class NamespaceImpl extends NamedElementImpl implements Namespace {
 	protected EList<Type> ownedType;
 
 	/**
-	 * The cached value of the '{@link #getOwnedRule() <em>Owned Rule</em>}' containment reference list.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getOwnedRule() <em>Owned Rule</em>}'
+	 * containment reference list. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getOwnedRule()
 	 * @generated
 	 * @ordered
@@ -107,8 +119,10 @@ public class NamespaceImpl extends NamedElementImpl implements Namespace {
 	protected EList<Constraint> ownedRule;
 
 	/**
-	 * The cached value of the '{@link #getNestedNamespace() <em>Nested Namespace</em>}' containment reference list.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getNestedNamespace()
+	 * <em>Nested Namespace</em>}' containment reference list. <!-- begin-user-doc
+	 * --> <!-- end-user-doc -->
+	 * 
 	 * @see #getNestedNamespace()
 	 * @generated
 	 * @ordered
@@ -117,6 +131,7 @@ public class NamespaceImpl extends NamedElementImpl implements Namespace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected NamespaceImpl() {
@@ -126,6 +141,7 @@ public class NamespaceImpl extends NamedElementImpl implements Namespace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -135,8 +151,8 @@ public class NamespaceImpl extends NamedElementImpl implements Namespace {
 	}
 
 	/**
-	 * Overridden to return the {@link #getNestingNamespace() nesting namespace} of this
-	 * <code>Namespace</code>.
+	 * Overridden to return the {@link #getNestingNamespace() nesting namespace}
+	 * of this <code>Namespace</code>.
 	 * 
 	 * @see tudresden.ocl20.pivot.pivotmodel.impl.NamedElementImpl#getOwner()
 	 */
@@ -147,9 +163,10 @@ public class NamespaceImpl extends NamedElementImpl implements Namespace {
 	}
 
 	/**
-	 * The implementation in this class simply redirects to {{@link #getOwnedTypeParameterGen()}
-	 * which contains the code generated by EMF. Clients may, however, override this method to provide
-	 * specific behaviour, e.g., adapt to other model repositories.
+	 * The implementation in this class simply redirects to {
+	 * {@link #getOwnedTypeParameterGen()} which contains the code generated by
+	 * EMF. Clients may, however, override this method to provide specific
+	 * behaviour, e.g., adapt to other model repositories.
 	 * 
 	 * @generated NOT
 	 */
@@ -159,8 +176,10 @@ public class NamespaceImpl extends NamedElementImpl implements Namespace {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->The code generated for {{@link #getOwnedTypeParameter} is redirected to
-	 * this method.<!-- end-user-doc -->
+	 * <!-- begin-user-doc -->The code generated for {
+	 * {@link #getOwnedTypeParameter} is redirected to this method.<!--
+	 * end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected final List<TypeParameter> getOwnedTypeParameterGen() {
@@ -176,9 +195,10 @@ public class NamespaceImpl extends NamedElementImpl implements Namespace {
 	}
 
 	/**
-	 * The implementation in this class simply redirects to {{@link #getOwnedRuleGen()} which
-	 * contains the code generated by EMF. Clients may, however, override this method to provide
-	 * specific behaviour, e.g., adapt to other model repositories.
+	 * The implementation in this class simply redirects to {
+	 * {@link #getOwnedRuleGen()} which contains the code generated by EMF.
+	 * Clients may, however, override this method to provide specific behaviour,
+	 * e.g., adapt to other model repositories.
 	 * 
 	 * @generated NOT
 	 */
@@ -188,8 +208,9 @@ public class NamespaceImpl extends NamedElementImpl implements Namespace {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->The code generated for {{@link #getOwnedRule()} is redirected to this
-	 * method.<!-- end-user-doc -->
+	 * <!-- begin-user-doc -->The code generated for {{@link #getOwnedRule()} is
+	 * redirected to this method.<!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected final List<Constraint> getOwnedRuleGen() {
@@ -204,9 +225,10 @@ public class NamespaceImpl extends NamedElementImpl implements Namespace {
 	}
 
 	/**
-	 * The implementation in this class simply redirects to {{@link #getOwnedTypeGen()} which
-	 * contains the code generated by EMF. Clients may, however, override this method to provide
-	 * specific behaviour, e.g., adapt to other model repositories.
+	 * The implementation in this class simply redirects to {
+	 * {@link #getOwnedTypeGen()} which contains the code generated by EMF.
+	 * Clients may, however, override this method to provide specific behaviour,
+	 * e.g., adapt to other model repositories.
 	 * 
 	 * @generated NOT
 	 */
@@ -216,8 +238,9 @@ public class NamespaceImpl extends NamedElementImpl implements Namespace {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->The code generated for {{@link #getOwnedType()} is redirected to this
-	 * method.<!-- end-user-doc -->
+	 * <!-- begin-user-doc -->The code generated for {{@link #getOwnedType()} is
+	 * redirected to this method.<!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected final List<Type> getOwnedTypeGen() {
@@ -232,9 +255,10 @@ public class NamespaceImpl extends NamedElementImpl implements Namespace {
 	}
 
 	/**
-	 * The implementation in this class simply redirects to {{@link #getNestedNamespaceGen()} which
-	 * contains the code generated by EMF. Clients may, however, override this method to provide
-	 * specific behaviour, e.g., adapt to other model repositories.
+	 * The implementation in this class simply redirects to {
+	 * {@link #getNestedNamespaceGen()} which contains the code generated by EMF.
+	 * Clients may, however, override this method to provide specific behaviour,
+	 * e.g., adapt to other model repositories.
 	 * 
 	 * @generated NOT
 	 */
@@ -244,8 +268,10 @@ public class NamespaceImpl extends NamedElementImpl implements Namespace {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->The code generated for {{@link #getNestedNamespace()} is redirected to
-	 * this method.<!-- end-user-doc -->
+	 * <!-- begin-user-doc -->The code generated for {
+	 * {@link #getNestedNamespace()} is redirected to this method.<!--
+	 * end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected final List<Namespace> getNestedNamespaceGen() {
@@ -261,17 +287,19 @@ public class NamespaceImpl extends NamedElementImpl implements Namespace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public Namespace getNestingNamespace() {
 
-		if (eContainerFeatureID != PivotModelPackageImpl.NAMESPACE__NESTING_NAMESPACE)
+		if (eContainerFeatureID() != PivotModelPackageImpl.NAMESPACE__NESTING_NAMESPACE)
 			return null;
 		return (Namespace) eContainer();
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public NotificationChain basicSetNestingNamespace(
@@ -285,12 +313,13 @@ public class NamespaceImpl extends NamedElementImpl implements Namespace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public void setNestingNamespace(Namespace newNestingNamespace) {
 
 		if (newNestingNamespace != eInternalContainer()
-				|| (eContainerFeatureID != PivotModelPackageImpl.NAMESPACE__NESTING_NAMESPACE && newNestingNamespace != null)) {
+				|| (eContainerFeatureID() != PivotModelPackageImpl.NAMESPACE__NESTING_NAMESPACE && newNestingNamespace != null)) {
 			if (EcoreUtil.isAncestor(this, (EObject) newNestingNamespace))
 				throw new IllegalArgumentException(
 						"Recursive containment not allowed for " + toString()); //$NON-NLS-1$
@@ -314,6 +343,7 @@ public class NamespaceImpl extends NamedElementImpl implements Namespace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated NOT
 	 */
 	public Namespace addType(Type type) {
@@ -398,8 +428,8 @@ public class NamespaceImpl extends NamedElementImpl implements Namespace {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated NOT
 	 */
 	public Type lookupType(String name) {
@@ -425,8 +455,8 @@ public class NamespaceImpl extends NamedElementImpl implements Namespace {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated NOT
 	 */
 	public Namespace lookupNamespace(String name) {
@@ -456,6 +486,28 @@ public class NamespaceImpl extends NamedElementImpl implements Namespace {
 	 * 
 	 * @generated NOT
 	 */
+	public boolean removeOwnedAndNestedRules() {
+
+		boolean result;
+		result = true;
+
+		/* Collect the constraints of all nested name spaces. */
+		for (Namespace nestedNamespace : this.getNestedNamespace()) {
+			result &= nestedNamespace.removeOwnedAndNestedRules();
+		}
+		// end for.
+
+		this.ownedRule.clear();
+		result &= this.ownedRule.isEmpty();
+
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
+	 */
 	public Namespace addTypeParameter(TypeParameter typeParameter) {
 
 		if (logger.isDebugEnabled()) {
@@ -475,6 +527,7 @@ public class NamespaceImpl extends NamedElementImpl implements Namespace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public NamedElement bindTypeParameter(List<TypeParameter> parameters,
@@ -487,7 +540,6 @@ public class NamespaceImpl extends NamedElementImpl implements Namespace {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see tudresden.ocl20.pivot.pivotmodel.impl.NamedElementImpl#clone()
 	 */
 	@Override
@@ -527,6 +579,7 @@ public class NamespaceImpl extends NamedElementImpl implements Namespace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
@@ -557,6 +610,7 @@ public class NamespaceImpl extends NamedElementImpl implements Namespace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -582,13 +636,14 @@ public class NamespaceImpl extends NamedElementImpl implements Namespace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(
 			NotificationChain msgs) {
 
-		switch (eContainerFeatureID) {
+		switch (eContainerFeatureID()) {
 		case PivotModelPackageImpl.NAMESPACE__NESTING_NAMESPACE:
 			return eInternalContainer().eInverseRemove(this,
 					PivotModelPackageImpl.NAMESPACE__NESTED_NAMESPACE, Namespace.class,
@@ -599,6 +654,7 @@ public class NamespaceImpl extends NamedElementImpl implements Namespace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -621,6 +677,7 @@ public class NamespaceImpl extends NamedElementImpl implements Namespace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
@@ -654,6 +711,7 @@ public class NamespaceImpl extends NamedElementImpl implements Namespace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -681,6 +739,7 @@ public class NamespaceImpl extends NamedElementImpl implements Namespace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -703,6 +762,7 @@ public class NamespaceImpl extends NamedElementImpl implements Namespace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -721,6 +781,7 @@ public class NamespaceImpl extends NamedElementImpl implements Namespace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override

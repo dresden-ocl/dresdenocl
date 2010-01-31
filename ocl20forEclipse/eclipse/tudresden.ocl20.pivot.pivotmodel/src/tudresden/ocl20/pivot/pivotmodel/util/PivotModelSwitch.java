@@ -196,9 +196,9 @@ public class PivotModelSwitch<T> {
 			Namespace namespace = (Namespace) theEObject;
 			T result = caseNamespace(namespace);
 			if (result == null)
-				result = caseNamedElement(namespace);
-			if (result == null)
 				result = caseGenericElement(namespace);
+			if (result == null)
+				result = caseNamedElement(namespace);
 			if (result == null)
 				result = defaultCase(theEObject);
 			return result;
@@ -207,11 +207,11 @@ public class PivotModelSwitch<T> {
 			Type type = (Type) theEObject;
 			T result = caseType(type);
 			if (result == null)
-				result = caseNamedElement(type);
-			if (result == null)
 				result = caseConstrainableElement(type);
 			if (result == null)
 				result = caseGenericElement(type);
+			if (result == null)
+				result = caseNamedElement(type);
 			if (result == null)
 				result = defaultCase(theEObject);
 			return result;
@@ -222,11 +222,11 @@ public class PivotModelSwitch<T> {
 			if (result == null)
 				result = caseType(primitiveType);
 			if (result == null)
-				result = caseNamedElement(primitiveType);
-			if (result == null)
 				result = caseConstrainableElement(primitiveType);
 			if (result == null)
 				result = caseGenericElement(primitiveType);
+			if (result == null)
+				result = caseNamedElement(primitiveType);
 			if (result == null)
 				result = defaultCase(theEObject);
 			return result;
@@ -237,11 +237,11 @@ public class PivotModelSwitch<T> {
 			if (result == null)
 				result = caseType(enumeration);
 			if (result == null)
-				result = caseNamedElement(enumeration);
-			if (result == null)
 				result = caseConstrainableElement(enumeration);
 			if (result == null)
 				result = caseGenericElement(enumeration);
+			if (result == null)
+				result = caseNamedElement(enumeration);
 			if (result == null)
 				result = defaultCase(theEObject);
 			return result;
@@ -261,13 +261,13 @@ public class PivotModelSwitch<T> {
 			if (result == null)
 				result = caseFeature(property);
 			if (result == null)
-				result = caseTypedElement(property);
+				result = caseConstrainableElement(property);
 			if (result == null)
-				result = caseNamedElement(property);
+				result = caseTypedElement(property);
 			if (result == null)
 				result = caseMultiplicityElement(property);
 			if (result == null)
-				result = caseConstrainableElement(property);
+				result = caseNamedElement(property);
 			if (result == null)
 				result = defaultCase(theEObject);
 			return result;
@@ -278,15 +278,15 @@ public class PivotModelSwitch<T> {
 			if (result == null)
 				result = caseFeature(operation);
 			if (result == null)
-				result = caseTypedElement(operation);
-			if (result == null)
-				result = caseNamedElement(operation);
-			if (result == null)
-				result = caseMultiplicityElement(operation);
-			if (result == null)
 				result = caseConstrainableElement(operation);
 			if (result == null)
 				result = caseGenericElement(operation);
+			if (result == null)
+				result = caseTypedElement(operation);
+			if (result == null)
+				result = caseMultiplicityElement(operation);
+			if (result == null)
+				result = caseNamedElement(operation);
 			if (result == null)
 				result = defaultCase(theEObject);
 			return result;
@@ -297,9 +297,9 @@ public class PivotModelSwitch<T> {
 			if (result == null)
 				result = caseTypedElement(parameter);
 			if (result == null)
-				result = caseNamedElement(parameter);
-			if (result == null)
 				result = caseMultiplicityElement(parameter);
+			if (result == null)
+				result = caseNamedElement(parameter);
 			if (result == null)
 				result = defaultCase(theEObject);
 			return result;

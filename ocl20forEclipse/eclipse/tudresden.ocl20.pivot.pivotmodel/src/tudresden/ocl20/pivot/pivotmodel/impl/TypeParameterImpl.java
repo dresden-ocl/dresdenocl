@@ -85,7 +85,7 @@ public class TypeParameterImpl extends NamedElementImpl implements
 	 */
 	public GenericElement getGenericElement() {
 
-		if (eContainerFeatureID != PivotModelPackageImpl.TYPE_PARAMETER__GENERIC_ELEMENT)
+		if (eContainerFeatureID() != PivotModelPackageImpl.TYPE_PARAMETER__GENERIC_ELEMENT)
 			return null;
 		return (GenericElement) eContainer();
 	}
@@ -110,7 +110,7 @@ public class TypeParameterImpl extends NamedElementImpl implements
 	public void setGenericElement(GenericElement newGenericElement) {
 
 		if (newGenericElement != eInternalContainer()
-				|| (eContainerFeatureID != PivotModelPackageImpl.TYPE_PARAMETER__GENERIC_ELEMENT && newGenericElement != null)) {
+				|| (eContainerFeatureID() != PivotModelPackageImpl.TYPE_PARAMETER__GENERIC_ELEMENT && newGenericElement != null)) {
 			if (EcoreUtil.isAncestor(this, (EObject) newGenericElement))
 				throw new IllegalArgumentException(
 						"Recursive containment not allowed for " + toString()); //$NON-NLS-1$
@@ -230,7 +230,7 @@ public class TypeParameterImpl extends NamedElementImpl implements
 	public NotificationChain eBasicRemoveFromContainerFeature(
 			NotificationChain msgs) {
 
-		switch (eContainerFeatureID) {
+		switch (eContainerFeatureID()) {
 		case PivotModelPackageImpl.TYPE_PARAMETER__GENERIC_ELEMENT:
 			return eInternalContainer().eInverseRemove(this,
 					PivotModelPackageImpl.GENERIC_ELEMENT__OWNED_TYPE_PARAMETER,

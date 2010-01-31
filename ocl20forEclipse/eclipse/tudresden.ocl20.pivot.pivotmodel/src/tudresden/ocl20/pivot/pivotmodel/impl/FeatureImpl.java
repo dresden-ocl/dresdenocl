@@ -271,13 +271,13 @@ public abstract class FeatureImpl extends TypedElementImpl implements Feature {
 
 		switch (featureID) {
 		case PivotModelPackageImpl.FEATURE__ORDERED:
-			return isOrdered() ? Boolean.TRUE : Boolean.FALSE;
+			return isOrdered();
 		case PivotModelPackageImpl.FEATURE__UNIQUE:
-			return isUnique() ? Boolean.TRUE : Boolean.FALSE;
+			return isUnique();
 		case PivotModelPackageImpl.FEATURE__MULTIPLE:
-			return isMultiple() ? Boolean.TRUE : Boolean.FALSE;
+			return isMultiple();
 		case PivotModelPackageImpl.FEATURE__STATIC:
-			return isStatic() ? Boolean.TRUE : Boolean.FALSE;
+			return isStatic();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -291,16 +291,16 @@ public abstract class FeatureImpl extends TypedElementImpl implements Feature {
 
 		switch (featureID) {
 		case PivotModelPackageImpl.FEATURE__ORDERED:
-			setOrdered(((Boolean) newValue).booleanValue());
+			setOrdered((Boolean) newValue);
 			return;
 		case PivotModelPackageImpl.FEATURE__UNIQUE:
-			setUnique(((Boolean) newValue).booleanValue());
+			setUnique((Boolean) newValue);
 			return;
 		case PivotModelPackageImpl.FEATURE__MULTIPLE:
-			setMultiple(((Boolean) newValue).booleanValue());
+			setMultiple((Boolean) newValue);
 			return;
 		case PivotModelPackageImpl.FEATURE__STATIC:
-			setStatic(((Boolean) newValue).booleanValue());
+			setStatic((Boolean) newValue);
 			return;
 		}
 		super.eSet(featureID, newValue);

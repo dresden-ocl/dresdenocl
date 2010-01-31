@@ -124,7 +124,7 @@ public class TypeArgumentImpl extends TypedElementImpl implements TypeArgument {
 	 */
 	public ComplexGenericType getOwningGenericType() {
 
-		if (eContainerFeatureID != PivotModelPackageImpl.TYPE_ARGUMENT__OWNING_GENERIC_TYPE)
+		if (eContainerFeatureID() != PivotModelPackageImpl.TYPE_ARGUMENT__OWNING_GENERIC_TYPE)
 			return null;
 		return (ComplexGenericType) eContainer();
 	}
@@ -173,7 +173,7 @@ public class TypeArgumentImpl extends TypedElementImpl implements TypeArgument {
 	public void setOwningGenericType(ComplexGenericType newOwningGenericType) {
 
 		if (newOwningGenericType != eInternalContainer()
-				|| (eContainerFeatureID != PivotModelPackageImpl.TYPE_ARGUMENT__OWNING_GENERIC_TYPE && newOwningGenericType != null)) {
+				|| (eContainerFeatureID() != PivotModelPackageImpl.TYPE_ARGUMENT__OWNING_GENERIC_TYPE && newOwningGenericType != null)) {
 			if (EcoreUtil.isAncestor(this, (EObject) newOwningGenericType))
 				throw new IllegalArgumentException(
 						"Recursive containment not allowed for " + toString()); //$NON-NLS-1$
@@ -235,7 +235,7 @@ public class TypeArgumentImpl extends TypedElementImpl implements TypeArgument {
 	public NotificationChain eBasicRemoveFromContainerFeature(
 			NotificationChain msgs) {
 
-		switch (eContainerFeatureID) {
+		switch (eContainerFeatureID()) {
 		case PivotModelPackageImpl.TYPE_ARGUMENT__OWNING_GENERIC_TYPE:
 			return eInternalContainer().eInverseRemove(this,
 					PivotModelPackageImpl.COMPLEX_GENERIC_TYPE__TYPE_ARGUMENT,

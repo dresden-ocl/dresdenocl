@@ -304,7 +304,7 @@ public class TypeImpl extends NamedElementImpl implements Type {
 	 */
 	public Namespace getNamespace() {
 
-		if (eContainerFeatureID != PivotModelPackageImpl.TYPE__NAMESPACE)
+		if (eContainerFeatureID() != PivotModelPackageImpl.TYPE__NAMESPACE)
 			return null;
 		return (Namespace) eContainer();
 	}
@@ -329,7 +329,7 @@ public class TypeImpl extends NamedElementImpl implements Type {
 	public void setNamespace(Namespace newNamespace) {
 
 		if (newNamespace != eInternalContainer()
-				|| (eContainerFeatureID != PivotModelPackageImpl.TYPE__NAMESPACE && newNamespace != null)) {
+				|| (eContainerFeatureID() != PivotModelPackageImpl.TYPE__NAMESPACE && newNamespace != null)) {
 			if (EcoreUtil.isAncestor(this, (EObject) newNamespace))
 				throw new IllegalArgumentException(
 						"Recursive containment not allowed for " + toString()); //$NON-NLS-1$
@@ -884,7 +884,7 @@ public class TypeImpl extends NamedElementImpl implements Type {
 	public NotificationChain eBasicRemoveFromContainerFeature(
 			NotificationChain msgs) {
 
-		switch (eContainerFeatureID) {
+		switch (eContainerFeatureID()) {
 		case PivotModelPackageImpl.TYPE__NAMESPACE:
 			return eInternalContainer().eInverseRemove(this,
 					PivotModelPackageImpl.NAMESPACE__OWNED_TYPE, Namespace.class, msgs);

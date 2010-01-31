@@ -183,6 +183,16 @@ public class DatatypesFactoryImpl extends EFactoryImpl implements
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public DatatypesPackageImpl getDatatypesPackage() {
+
+		return (DatatypesPackageImpl) getEPackage();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
 	@SuppressWarnings("unused")
@@ -268,16 +278,6 @@ public class DatatypesFactoryImpl extends EFactoryImpl implements
 	public String convertRealToString(EDataType eDataType, Object instanceValue) {
 
 		return instanceValue == null ? null : instanceValue.toString();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public DatatypesPackageImpl getDatatypesPackageImpl() {
-
-		return (DatatypesPackageImpl) getEPackage();
 	}
 
 	/**

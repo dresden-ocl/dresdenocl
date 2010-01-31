@@ -51,6 +51,7 @@ import tudresden.ocl20.pivot.pivotmodel.NamedElement;
  * The following operations are tested:
  * <ul>
  *   <li>{@link tudresden.ocl20.pivot.pivotmodel.NamedElement#clone() <em>Clone</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.pivotmodel.NamedElement#getQualifiedNameList() <em>Get Qualified Name List</em>}</li>
  * </ul>
  * </p>
  * @generated
@@ -134,6 +135,20 @@ public abstract class NamedElementTest extends TestCase {
 	 * @generated
 	 */
 	public void testClone() {
+
+		// TODO: implement this operation test method
+		// Ensure that you remove @generated or mark it @generated NOT
+		fail();
+	}
+
+	/**
+	 * Tests the '{@link tudresden.ocl20.pivot.pivotmodel.NamedElement#getQualifiedNameList() <em>Get Qualified Name List</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see tudresden.ocl20.pivot.pivotmodel.NamedElement#getQualifiedNameList()
+	 * @generated
+	 */
+	public void testGetQualifiedNameList() {
 
 		// TODO: implement this operation test method
 		// Ensure that you remove @generated or mark it @generated NOT

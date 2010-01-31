@@ -97,7 +97,7 @@ public class EnumerationLiteralImpl extends NamedElementImpl implements
 	 */
 	public Enumeration getEnumeration() {
 
-		if (eContainerFeatureID != PivotModelPackageImpl.ENUMERATION_LITERAL__ENUMERATION)
+		if (eContainerFeatureID() != PivotModelPackageImpl.ENUMERATION_LITERAL__ENUMERATION)
 			return null;
 		return (Enumeration) eContainer();
 	}
@@ -134,7 +134,7 @@ public class EnumerationLiteralImpl extends NamedElementImpl implements
 	public void setEnumeration(Enumeration newEnumeration) {
 
 		if (newEnumeration != eInternalContainer()
-				|| (eContainerFeatureID != PivotModelPackageImpl.ENUMERATION_LITERAL__ENUMERATION && newEnumeration != null)) {
+				|| (eContainerFeatureID() != PivotModelPackageImpl.ENUMERATION_LITERAL__ENUMERATION && newEnumeration != null)) {
 			if (EcoreUtil.isAncestor(this, (EObject) newEnumeration))
 				throw new IllegalArgumentException(
 						"Recursive containment not allowed for " + toString()); //$NON-NLS-1$
@@ -196,7 +196,7 @@ public class EnumerationLiteralImpl extends NamedElementImpl implements
 	public NotificationChain eBasicRemoveFromContainerFeature(
 			NotificationChain msgs) {
 
-		switch (eContainerFeatureID) {
+		switch (eContainerFeatureID()) {
 		case PivotModelPackageImpl.ENUMERATION_LITERAL__ENUMERATION:
 			return eInternalContainer().eInverseRemove(this,
 					PivotModelPackageImpl.ENUMERATION__OWNED_LITERAL, Enumeration.class,

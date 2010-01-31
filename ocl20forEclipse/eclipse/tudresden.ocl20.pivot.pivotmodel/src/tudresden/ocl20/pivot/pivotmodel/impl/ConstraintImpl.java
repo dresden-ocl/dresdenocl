@@ -175,7 +175,7 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 	 */
 	public Namespace getNamespace() {
 
-		if (eContainerFeatureID != PivotModelPackageImpl.CONSTRAINT__NAMESPACE)
+		if (eContainerFeatureID() != PivotModelPackageImpl.CONSTRAINT__NAMESPACE)
 			return null;
 		return (Namespace) eContainer();
 	}
@@ -200,7 +200,7 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 	public void setNamespace(Namespace newNamespace) {
 
 		if (newNamespace != eInternalContainer()
-				|| (eContainerFeatureID != PivotModelPackageImpl.CONSTRAINT__NAMESPACE && newNamespace != null)) {
+				|| (eContainerFeatureID() != PivotModelPackageImpl.CONSTRAINT__NAMESPACE && newNamespace != null)) {
 			if (EcoreUtil.isAncestor(this, (EObject) newNamespace))
 				throw new IllegalArgumentException(
 						"Recursive containment not allowed for " + toString()); //$NON-NLS-1$
@@ -449,7 +449,7 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 	public NotificationChain eBasicRemoveFromContainerFeature(
 			NotificationChain msgs) {
 
-		switch (eContainerFeatureID) {
+		switch (eContainerFeatureID()) {
 		case PivotModelPackageImpl.CONSTRAINT__NAMESPACE:
 			return eInternalContainer().eInverseRemove(this,
 					PivotModelPackageImpl.NAMESPACE__OWNED_RULE, Namespace.class, msgs);

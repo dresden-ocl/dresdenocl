@@ -174,7 +174,7 @@ public class ExpressionImpl extends EObjectImpl implements Expression {
 	 */
 	public Constraint getConstraint() {
 
-		if (eContainerFeatureID != PivotModelPackageImpl.EXPRESSION__CONSTRAINT)
+		if (eContainerFeatureID() != PivotModelPackageImpl.EXPRESSION__CONSTRAINT)
 			return null;
 		return (Constraint) eContainer();
 	}
@@ -199,7 +199,7 @@ public class ExpressionImpl extends EObjectImpl implements Expression {
 	public void setConstraint(Constraint newConstraint) {
 
 		if (newConstraint != eInternalContainer()
-				|| (eContainerFeatureID != PivotModelPackageImpl.EXPRESSION__CONSTRAINT && newConstraint != null)) {
+				|| (eContainerFeatureID() != PivotModelPackageImpl.EXPRESSION__CONSTRAINT && newConstraint != null)) {
 			if (EcoreUtil.isAncestor(this, (EObject) newConstraint))
 				throw new IllegalArgumentException(
 						"Recursive containment not allowed for " + toString()); //$NON-NLS-1$
@@ -261,7 +261,7 @@ public class ExpressionImpl extends EObjectImpl implements Expression {
 	public NotificationChain eBasicRemoveFromContainerFeature(
 			NotificationChain msgs) {
 
-		switch (eContainerFeatureID) {
+		switch (eContainerFeatureID()) {
 		case PivotModelPackageImpl.EXPRESSION__CONSTRAINT:
 			return eInternalContainer().eInverseRemove(this,
 					PivotModelPackageImpl.CONSTRAINT__SPECIFICATION, Constraint.class,

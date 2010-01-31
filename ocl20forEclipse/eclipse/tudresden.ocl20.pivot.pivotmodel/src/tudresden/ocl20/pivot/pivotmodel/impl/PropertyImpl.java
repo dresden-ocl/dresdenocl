@@ -103,7 +103,7 @@ public class PropertyImpl extends FeatureImpl implements Property {
 	 */
 	public Type getOwningType() {
 
-		if (eContainerFeatureID != PivotModelPackageImpl.PROPERTY__OWNING_TYPE)
+		if (eContainerFeatureID() != PivotModelPackageImpl.PROPERTY__OWNING_TYPE)
 			return null;
 		return (Type) eContainer();
 	}
@@ -128,7 +128,7 @@ public class PropertyImpl extends FeatureImpl implements Property {
 	public void setOwningType(Type newOwningType) {
 
 		if (newOwningType != eInternalContainer()
-				|| (eContainerFeatureID != PivotModelPackageImpl.PROPERTY__OWNING_TYPE && newOwningType != null)) {
+				|| (eContainerFeatureID() != PivotModelPackageImpl.PROPERTY__OWNING_TYPE && newOwningType != null)) {
 			if (EcoreUtil.isAncestor(this, (EObject) newOwningType))
 				throw new IllegalArgumentException(
 						"Recursive containment not allowed for " + toString()); //$NON-NLS-1$
@@ -241,7 +241,7 @@ public class PropertyImpl extends FeatureImpl implements Property {
 	public NotificationChain eBasicRemoveFromContainerFeature(
 			NotificationChain msgs) {
 
-		switch (eContainerFeatureID) {
+		switch (eContainerFeatureID()) {
 		case PivotModelPackageImpl.PROPERTY__OWNING_TYPE:
 			return eInternalContainer().eInverseRemove(this,
 					PivotModelPackageImpl.TYPE__OWNED_PROPERTY, Type.class, msgs);

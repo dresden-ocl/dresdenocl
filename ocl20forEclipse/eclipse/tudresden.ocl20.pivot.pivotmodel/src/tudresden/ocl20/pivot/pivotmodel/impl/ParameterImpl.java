@@ -329,7 +329,7 @@ public class ParameterImpl extends TypedElementImpl implements Parameter {
 	 */
 	public Operation getOperation() {
 
-		if (eContainerFeatureID != PivotModelPackageImpl.PARAMETER__OPERATION)
+		if (eContainerFeatureID() != PivotModelPackageImpl.PARAMETER__OPERATION)
 			return null;
 		return (Operation) eContainer();
 	}
@@ -354,7 +354,7 @@ public class ParameterImpl extends TypedElementImpl implements Parameter {
 	public void setOperation(Operation newOperation) {
 
 		if (newOperation != eInternalContainer()
-				|| (eContainerFeatureID != PivotModelPackageImpl.PARAMETER__OPERATION && newOperation != null)) {
+				|| (eContainerFeatureID() != PivotModelPackageImpl.PARAMETER__OPERATION && newOperation != null)) {
 			if (EcoreUtil.isAncestor(this, (EObject) newOperation))
 				throw new IllegalArgumentException(
 						"Recursive containment not allowed for " + toString()); //$NON-NLS-1$
@@ -466,7 +466,7 @@ public class ParameterImpl extends TypedElementImpl implements Parameter {
 	public NotificationChain eBasicRemoveFromContainerFeature(
 			NotificationChain msgs) {
 
-		switch (eContainerFeatureID) {
+		switch (eContainerFeatureID()) {
 		case PivotModelPackageImpl.PARAMETER__OPERATION:
 			return eInternalContainer().eInverseRemove(this,
 					PivotModelPackageImpl.OPERATION__OWNED_PARAMETER, Operation.class,
@@ -484,11 +484,11 @@ public class ParameterImpl extends TypedElementImpl implements Parameter {
 
 		switch (featureID) {
 		case PivotModelPackageImpl.PARAMETER__ORDERED:
-			return isOrdered() ? Boolean.TRUE : Boolean.FALSE;
+			return isOrdered();
 		case PivotModelPackageImpl.PARAMETER__UNIQUE:
-			return isUnique() ? Boolean.TRUE : Boolean.FALSE;
+			return isUnique();
 		case PivotModelPackageImpl.PARAMETER__MULTIPLE:
-			return isMultiple() ? Boolean.TRUE : Boolean.FALSE;
+			return isMultiple();
 		case PivotModelPackageImpl.PARAMETER__KIND:
 			return getKind();
 		case PivotModelPackageImpl.PARAMETER__OPERATION:
@@ -506,13 +506,13 @@ public class ParameterImpl extends TypedElementImpl implements Parameter {
 
 		switch (featureID) {
 		case PivotModelPackageImpl.PARAMETER__ORDERED:
-			setOrdered(((Boolean) newValue).booleanValue());
+			setOrdered((Boolean) newValue);
 			return;
 		case PivotModelPackageImpl.PARAMETER__UNIQUE:
-			setUnique(((Boolean) newValue).booleanValue());
+			setUnique((Boolean) newValue);
 			return;
 		case PivotModelPackageImpl.PARAMETER__MULTIPLE:
-			setMultiple(((Boolean) newValue).booleanValue());
+			setMultiple((Boolean) newValue);
 			return;
 		case PivotModelPackageImpl.PARAMETER__KIND:
 			setKind((ParameterDirectionKind) newValue);
