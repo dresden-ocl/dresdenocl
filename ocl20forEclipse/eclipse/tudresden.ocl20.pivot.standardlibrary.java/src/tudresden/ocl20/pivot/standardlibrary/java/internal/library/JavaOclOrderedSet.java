@@ -42,7 +42,8 @@ import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclOrderedSet;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceCollection;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceInteger;
-import tudresden.ocl20.pivot.standardlibrary.java.exceptions.InvalidException;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.base.TypeConstants;
+import tudresden.ocl20.pivot.pivotmodel.Type;
 import tudresden.ocl20.pivot.standardlibrary.java.factory.JavaStandardLibraryFactory;
 
 /**
@@ -50,6 +51,7 @@ import tudresden.ocl20.pivot.standardlibrary.java.factory.JavaStandardLibraryFac
  * This class represents instances of {@link OclOrderedSet}.
  * </p>
  * 
+ * @author Michael Thiele
  * @author Ronny Brandt
  */
 @SuppressWarnings("unchecked")
@@ -65,20 +67,21 @@ public class JavaOclOrderedSet<T extends OclAny> extends
 	 *          The adapted {@link Collection}.
 	 */
 	public JavaOclOrderedSet(
-			IModelInstanceCollection<IModelInstanceElement> imiCollection) {
+			IModelInstanceCollection<IModelInstanceElement> imiCollection,
+			Type genericType) {
 
-		super(imiCollection);
+		super(imiCollection, genericType);
 
 	}
 
-	public JavaOclOrderedSet(String undefinedReason) {
+	public JavaOclOrderedSet(String undefinedReason, Type genericType) {
 
-		super(undefinedReason);
+		super(undefinedReason, genericType);
 	}
 
-	public JavaOclOrderedSet(Throwable invalidReason) {
+	public JavaOclOrderedSet(Throwable invalidReason, Type genericType) {
 
-		super(invalidReason);
+		super(invalidReason, genericType);
 	}
 
 	/*
@@ -89,17 +92,28 @@ public class JavaOclOrderedSet<T extends OclAny> extends
 	 */
 	public OclOrderedSet<T> append(T that) {
 
-		OclOrderedSet<T> result;
+		OclOrderedSet<T> result = null;
 
-		List<IModelInstanceElement> append =
-				new UniqueEList<IModelInstanceElement>();
+		result =
+				checkInvalid(TypeConstants
+						.ORDERED_SET(genericType), this, that);
 
-		checkUndefinedAndInvalid(this, that);
+		if (result == null)
+			result =
+					checkUndefined("append", TypeConstants
+							.ORDERED_SET(genericType), this);
 
-		append.addAll(getModelInstanceCollection().getCollection());
-		append.add(that.getModelInstanceElement());
+		if (result == null) {
+			List<IModelInstanceElement> append =
+					new UniqueEList<IModelInstanceElement>();
 
-		result = JavaStandardLibraryFactory.INSTANCE.createOclOrderedSet(append);
+			append.addAll(getModelInstanceCollection().getCollection());
+			append.add(that.getModelInstanceElement());
+
+			result =
+					JavaStandardLibraryFactory.INSTANCE.createOclOrderedSet(append,
+							genericType);
+		}
 
 		return result;
 	}
@@ -112,17 +126,28 @@ public class JavaOclOrderedSet<T extends OclAny> extends
 	 */
 	public OclOrderedSet<T> excluding(T that) {
 
-		OclOrderedSet<T> result;
+		OclOrderedSet<T> result = null;
 
-		List<IModelInstanceElement> exclude =
-				new UniqueEList<IModelInstanceElement>();
+		result =
+				checkInvalid(TypeConstants
+						.ORDERED_SET(genericType), this, that);
 
-		checkUndefinedAndInvalid(this, that);
+		if (result == null)
+			result =
+					checkUndefined("excluding", TypeConstants
+							.ORDERED_SET(genericType), this);
 
-		exclude.addAll(getModelInstanceCollection().getCollection());
-		exclude.remove(that.getModelInstanceElement());
+		if (result == null) {
+			List<IModelInstanceElement> exclude =
+					new UniqueEList<IModelInstanceElement>();
 
-		result = JavaStandardLibraryFactory.INSTANCE.createOclOrderedSet(exclude);
+			exclude.addAll(getModelInstanceCollection().getCollection());
+			exclude.remove(that.getModelInstanceElement());
+
+			result =
+					JavaStandardLibraryFactory.INSTANCE.createOclOrderedSet(exclude,
+							genericType);
+		}
 
 		return result;
 	}
@@ -134,38 +159,50 @@ public class JavaOclOrderedSet<T extends OclAny> extends
 	 */
 	public <T2 extends OclAny> OclOrderedSet<T2> flatten() {
 
-		OclOrderedSet<T2> result;
+		OclOrderedSet<T2> result = null;
 
-		List<IModelInstanceElement> flat = new UniqueEList<IModelInstanceElement>();
+		result =
+				checkInvalid(TypeConstants
+						.ORDERED_SET(genericType), this);
 
-		checkUndefinedAndInvalid(this);
+		if (result == null)
+			result =
+					checkUndefined("flatten", TypeConstants
+							.ORDERED_SET(genericType), this);
 
-		/* Iterate over this ordered set. */
-		for (IModelInstanceElement element : getModelInstanceCollection()
-				.getCollection()) {
+		if (result == null) {
+			List<IModelInstanceElement> flat =
+					new UniqueEList<IModelInstanceElement>();
 
-			/*
-			 * nested collections are flattened, i.e. their elements are added to the
-			 * result
-			 */
-			if (element instanceof IModelInstanceCollection<?>) {
-				IModelInstanceCollection<IModelInstanceElement> collection;
-				collection =
-						((IModelInstanceCollection<IModelInstanceElement>) element);
+			/* Iterate over this ordered set. */
+			for (IModelInstanceElement element : getModelInstanceCollection()
+					.getCollection()) {
 
-				for (IModelInstanceElement collectionElement : collection
-						.getCollection()) {
-					flat.add(collectionElement);
+				/*
+				 * nested collections are flattened, i.e. their elements are added to
+				 * the result
+				 */
+				if (element instanceof IModelInstanceCollection<?>) {
+					IModelInstanceCollection<IModelInstanceElement> collection;
+					collection =
+							((IModelInstanceCollection<IModelInstanceElement>) element);
+
+					for (IModelInstanceElement collectionElement : collection
+							.getCollection()) {
+						flat.add(collectionElement);
+					}
+				}
+
+				/* other elements are simply added */
+				else {
+					flat.add(element);
 				}
 			}
 
-			/* other elements are simply added */
-			else {
-				flat.add(element);
-			}
+			result =
+					JavaStandardLibraryFactory.INSTANCE.createOclOrderedSet(flat,
+							genericType);
 		}
-
-		result = JavaStandardLibraryFactory.INSTANCE.createOclOrderedSet(flat);
 
 		return result;
 	}
@@ -190,27 +227,40 @@ public class JavaOclOrderedSet<T extends OclAny> extends
 	 */
 	public OclOrderedSet<T> insertAt(OclInteger index, T anElement) {
 
-		OclOrderedSet<T> result;
+		OclOrderedSet<T> result = null;
 
-		List<IModelInstanceElement> insertAt =
-				new UniqueEList<IModelInstanceElement>();
+		result =
+				checkInvalid(TypeConstants
+						.ORDERED_SET(genericType), this, index, anElement);
 
-		checkUndefinedAndInvalid(this, index, anElement);
-
-		int intIndex =
-				((IModelInstanceInteger) index.getModelInstanceElement()).getLong()
-						.intValue();
-
-		insertAt.addAll(getModelInstanceCollection().getCollection());
-
-		try {
-			insertAt.add(intIndex, anElement.getModelInstanceElement());
-
+		if (result == null)
 			result =
-					JavaStandardLibraryFactory.INSTANCE.createOclOrderedSet(insertAt);
+					checkUndefined("insertAt", TypeConstants
+							.ORDERED_SET(genericType), this, index);
 
-		} catch (IndexOutOfBoundsException e) {
-			throw new InvalidException(e);
+		if (result == null) {
+			List<IModelInstanceElement> insertAt =
+					new UniqueEList<IModelInstanceElement>();
+
+			int intIndex =
+					((IModelInstanceInteger) index.getModelInstanceElement()).getLong()
+							.intValue();
+
+			insertAt.addAll(getModelInstanceCollection().getCollection());
+
+			try {
+				insertAt.add(intIndex, anElement.getModelInstanceElement());
+
+				result =
+						JavaStandardLibraryFactory.INSTANCE.createOclOrderedSet(insertAt,
+								genericType);
+
+			} catch (IndexOutOfBoundsException e) {
+				result =
+						JavaStandardLibraryFactory.INSTANCE.createOclInvalid(
+								TypeConstants
+										.ORDERED_SET(genericType), e);
+			}
 		}
 
 		return result;
@@ -226,48 +276,50 @@ public class JavaOclOrderedSet<T extends OclAny> extends
 
 		OclBoolean result;
 
-		checkUndefinedAndInvalid(this, that);
+		result = checkIsEqualTo(that);
 
-		/* Check if the given object is no OclBag. */
-		if (!(that instanceof OclOrderedSet)) {
-			result = JavaOclBoolean.getInstance(false);
-		}
-
-		/* Else compare the two OrderedSets. */
-		else {
-
-			boolean booleanResult;
-
-			Collection<IModelInstanceElement> orderedSetList1 =
-					this.getModelInstanceCollection().getCollection();
-			Collection<IModelInstanceElement> orderedSetList2 =
-					((IModelInstanceCollection) that.getModelInstanceElement())
-							.getCollection();
-
-			/* Check if orderedSetList1 and orderedSetList2 have the same size. */
-			if (orderedSetList1.size() != orderedSetList2.size()) {
-				booleanResult = false;
-			}
-			else if (orderedSetList1.isEmpty() && orderedSetList2.isEmpty()) {
-				booleanResult = true;
+		if (result == null) {
+			/* Check if the given object is no OclBag. */
+			if (!(that instanceof OclOrderedSet)) {
+				result = JavaOclBoolean.getInstance(false);
 			}
 
-			/* Else iterate over the elements and compare them. */
+			/* Else compare the two OrderedSets. */
 			else {
-				booleanResult = true;
 
-				for (IModelInstanceElement anElement : orderedSetList2) {
+				boolean booleanResult;
 
-					/* check if anElement is in both lists. */
-					if (!orderedSetList1.contains(anElement)) {
-						booleanResult = false;
-						break;
-					}
+				Collection<IModelInstanceElement> orderedSetList1 =
+						this.getModelInstanceCollection().getCollection();
+				Collection<IModelInstanceElement> orderedSetList2 =
+						((IModelInstanceCollection) that.getModelInstanceElement())
+								.getCollection();
+
+				/* Check if orderedSetList1 and orderedSetList2 have the same size. */
+				if (orderedSetList1.size() != orderedSetList2.size()) {
+					booleanResult = false;
+				}
+				else if (orderedSetList1.isEmpty() && orderedSetList2.isEmpty()) {
+					booleanResult = true;
 				}
 
-			}
+				/* Else iterate over the elements and compare them. */
+				else {
+					booleanResult = true;
 
-			result = JavaOclBoolean.getInstance(booleanResult);
+					for (IModelInstanceElement anElement : orderedSetList2) {
+
+						/* check if anElement is in both lists. */
+						if (!orderedSetList1.contains(anElement)) {
+							booleanResult = false;
+							break;
+						}
+					}
+
+				}
+
+				result = JavaOclBoolean.getInstance(booleanResult);
+			}
 		}
 
 		return result;
@@ -281,17 +333,28 @@ public class JavaOclOrderedSet<T extends OclAny> extends
 	 */
 	public OclOrderedSet<T> prepend(T that) {
 
-		OclOrderedSet<T> result;
+		OclOrderedSet<T> result = null;
 
-		List<IModelInstanceElement> prepend =
-				new UniqueEList<IModelInstanceElement>();
+		result =
+				checkInvalid(TypeConstants
+						.ORDERED_SET(genericType), this, that);
 
-		checkUndefinedAndInvalid(this, that);
+		if (result == null)
+			result =
+					checkUndefined("prepend", TypeConstants
+							.ORDERED_SET(genericType), this);
 
-		prepend.addAll(getModelInstanceCollection().getCollection());
-		prepend.add(0, that.getModelInstanceElement());
+		if (result == null) {
+			List<IModelInstanceElement> prepend =
+					new UniqueEList<IModelInstanceElement>();
 
-		result = JavaStandardLibraryFactory.INSTANCE.createOclOrderedSet(prepend);
+			prepend.addAll(getModelInstanceCollection().getCollection());
+			prepend.add(0, that.getModelInstanceElement());
+
+			result =
+					JavaStandardLibraryFactory.INSTANCE.createOclOrderedSet(prepend,
+							genericType);
+		}
 
 		return result;
 	}
@@ -305,33 +368,44 @@ public class JavaOclOrderedSet<T extends OclAny> extends
 	 */
 	public OclOrderedSet<T> subOrderedSet(OclInteger lower, OclInteger upper) {
 
-		OclOrderedSet<T> result;
+		OclOrderedSet<T> result = null;
 
-		List<IModelInstanceElement> subOrderedSet =
-				new UniqueEList<IModelInstanceElement>();
+		result =
+				checkInvalid(TypeConstants
+						.ORDERED_SET(genericType), this, lower, upper);
 
-		checkUndefinedAndInvalid(this, lower, upper);
-
-		int intLower =
-				((IModelInstanceInteger) lower.getModelInstanceElement()).getLong()
-						.intValue() - 1;
-		int intUpper =
-				((IModelInstanceInteger) upper.getModelInstanceElement()).getLong()
-						.intValue();
-
-		final List<IModelInstanceElement> thisCollection =
-				(List<IModelInstanceElement>) getModelInstanceCollection()
-						.getCollection();
-
-		try {
-			subOrderedSet.addAll(thisCollection.subList(intLower, intUpper));
-
+		if (result == null)
 			result =
-					JavaStandardLibraryFactory.INSTANCE
-							.createOclOrderedSet(subOrderedSet);
-		} catch (IndexOutOfBoundsException e) {
+					checkUndefined("subOrderedSet", TypeConstants
+							.ORDERED_SET(genericType), this, lower, upper);
 
-			throw new InvalidException(e);
+		if (result == null) {
+			List<IModelInstanceElement> subOrderedSet =
+					new UniqueEList<IModelInstanceElement>();
+
+			int intLower =
+					((IModelInstanceInteger) lower.getModelInstanceElement()).getLong()
+							.intValue() - 1;
+			int intUpper =
+					((IModelInstanceInteger) upper.getModelInstanceElement()).getLong()
+							.intValue();
+
+			final List<IModelInstanceElement> thisCollection =
+					(List<IModelInstanceElement>) getModelInstanceCollection()
+							.getCollection();
+
+			try {
+				subOrderedSet.addAll(thisCollection.subList(intLower, intUpper));
+
+				result =
+						JavaStandardLibraryFactory.INSTANCE.createOclOrderedSet(
+								subOrderedSet, genericType);
+			} catch (IndexOutOfBoundsException e) {
+				result =
+						JavaStandardLibraryFactory.INSTANCE.createOclInvalid(
+								TypeConstants
+										.ORDERED_SET(genericType), e);
+			}
 		}
 
 		return result;
@@ -344,23 +418,34 @@ public class JavaOclOrderedSet<T extends OclAny> extends
 	 */
 	public OclOrderedSet<T> union(OclOrderedSet<T> that) {
 
-		OclOrderedSet<T> result;
+		OclOrderedSet<T> result = null;
 
-		List<IModelInstanceElement> union =
-				new UniqueEList<IModelInstanceElement>();
+		result =
+				checkInvalid(TypeConstants
+						.ORDERED_SET(genericType), this, that);
 
-		checkUndefinedAndInvalid(this, that);
+		if (result == null)
+			result =
+					checkUndefined("union", TypeConstants
+							.ORDERED_SET(genericType), this, that);
 
-		union.addAll(getModelInstanceCollection().getCollection());
-		List<IModelInstanceElement> thatList =
-				(List<IModelInstanceElement>) that.getModelInstanceCollection()
-						.getCollection();
+		if (result == null) {
+			List<IModelInstanceElement> union =
+					new UniqueEList<IModelInstanceElement>();
 
-		for (IModelInstanceElement element : thatList) {
-			union.add(element);
+			union.addAll(getModelInstanceCollection().getCollection());
+			List<IModelInstanceElement> thatList =
+					(List<IModelInstanceElement>) that.getModelInstanceCollection()
+							.getCollection();
+
+			for (IModelInstanceElement element : thatList) {
+				union.add(element);
+			}
+
+			result =
+					JavaStandardLibraryFactory.INSTANCE.createOclOrderedSet(union,
+							genericType);
 		}
-
-		result = JavaStandardLibraryFactory.INSTANCE.createOclOrderedSet(union);
 
 		return result;
 	}

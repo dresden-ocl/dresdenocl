@@ -14,7 +14,6 @@ Require-Bundle: org.eclipse.core.runtime,
  tudresden.ocl20.pivot.essentialocl,
  tudresden.ocl20.pivot.essentialocl.standardlibrary
 Bundle-ActivationPolicy: lazy
-Export-Package: tudresden.ocl20.pivot.standardlibrary.java,
- tudresden.ocl20.pivot.standardlibrary.java.exceptions
+Export-Package: tudresden.ocl20.pivot.standardlibrary.java
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-Vendor: TU Dresden, Software Technology Group

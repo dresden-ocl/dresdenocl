@@ -42,7 +42,7 @@ import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclString;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceInteger;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceString;
-import tudresden.ocl20.pivot.standardlibrary.java.exceptions.InvalidException;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.base.TypeConstants;
 import tudresden.ocl20.pivot.standardlibrary.java.factory.JavaStandardLibraryFactory;
 
 /**
@@ -90,17 +90,28 @@ public class JavaOclString extends JavaOclLibraryObject implements OclString {
 	 */
 	public OclString concat(OclString aString) {
 
-		OclString result;
-
-		StringBuilder concat = new StringBuilder();
-
-		checkUndefinedAndInvalid(this, aString);
-
-		concat.append(getModelInstanceString().getString());
-		concat.append(aString.getModelInstanceString().getString());
+		OclString result = null;
 
 		result =
-				JavaStandardLibraryFactory.INSTANCE.createOclString(concat.toString());
+				checkInvalid(TypeConstants.STRING,
+						this, aString);
+
+		if (result == null)
+			result =
+					checkUndefined("concat",
+							TypeConstants.STRING, this,
+							aString);
+
+		if (result == null) {
+			StringBuilder concat = new StringBuilder();
+
+			concat.append(getModelInstanceString().getString());
+			concat.append(aString.getModelInstanceString().getString());
+
+			result =
+					JavaStandardLibraryFactory.INSTANCE
+							.createOclString(concat.toString());
+		}
 
 		return result;
 	}
@@ -111,13 +122,22 @@ public class JavaOclString extends JavaOclLibraryObject implements OclString {
 	 */
 	public OclInteger size() {
 
-		OclInteger result;
+		OclInteger result = null;
 
-		checkUndefinedAndInvalid(this);
+		result =
+				checkInvalid(TypeConstants.INTEGER,
+						this);
 
-		/* Else compute the result. */
-		Long size = new Long(getModelInstanceString().getString().length());
-		result = JavaStandardLibraryFactory.INSTANCE.createOclInteger(size);
+		if (result == null)
+			result =
+					checkUndefined("size",
+							TypeConstants.INTEGER, this);
+
+		if (result == null) {
+			/* Else compute the result. */
+			Long size = new Long(getModelInstanceString().getString().length());
+			result = JavaStandardLibraryFactory.INSTANCE.createOclInteger(size);
+		}
 
 		return result;
 	}
@@ -130,28 +150,40 @@ public class JavaOclString extends JavaOclLibraryObject implements OclString {
 	 */
 	public OclString substring(OclInteger lower, OclInteger upper) {
 
-		OclString result;
+		OclString result = null;
 
-		checkUndefinedAndInvalid(this, lower, upper);
+		result =
+				checkInvalid(TypeConstants.STRING,
+						this, lower, upper);
 
-		int intLower =
-				((IModelInstanceInteger) lower.getModelInstanceElement()).getLong()
-						.intValue();
-
-		/* Indices in OCL are different from Java indices! */
-		intLower--;
-
-		int intUpper =
-				((IModelInstanceInteger) upper.getModelInstanceElement()).getLong()
-						.intValue();
-
-		try {
+		if (result == null)
 			result =
-					JavaStandardLibraryFactory.INSTANCE
-							.createOclString(getModelInstanceString().getString().substring(
-									intLower, intUpper));
-		} catch (IndexOutOfBoundsException e) {
-			throw new InvalidException(e);
+					checkUndefined("substring",
+							TypeConstants.STRING, this,
+							lower, upper);
+
+		if (result == null) {
+			int intLower =
+					((IModelInstanceInteger) lower.getModelInstanceElement()).getLong()
+							.intValue();
+
+			/* Indices in OCL are different from Java indices! */
+			intLower--;
+
+			int intUpper =
+					((IModelInstanceInteger) upper.getModelInstanceElement()).getLong()
+							.intValue();
+
+			try {
+				result =
+						JavaStandardLibraryFactory.INSTANCE
+								.createOclString(getModelInstanceString().getString()
+										.substring(intLower, intUpper));
+			} catch (IndexOutOfBoundsException e) {
+				result =
+						JavaStandardLibraryFactory.INSTANCE.createOclInvalid(
+								TypeConstants.STRING, e);
+			}
 		}
 
 		return result;
@@ -164,19 +196,31 @@ public class JavaOclString extends JavaOclLibraryObject implements OclString {
 	 */
 	public OclInteger toInteger() {
 
-		OclInteger result;
+		OclInteger result = null;
 
-		checkUndefinedAndInvalid(this);
+		result =
+				checkInvalid(TypeConstants.INTEGER,
+						this);
 
-		/* Else compute the result. */
-		try {
-			Long toInteger = new Long(getModelInstanceString().getString());
+		if (result == null)
+			result =
+					checkUndefined("toInteger",
+							TypeConstants.INTEGER, this);
 
-			result = JavaStandardLibraryFactory.INSTANCE.createOclInteger(toInteger);
-		}
+		if (result == null) {
+			/* Else compute the result. */
+			try {
+				Long toInteger = new Long(getModelInstanceString().getString());
 
-		catch (NumberFormatException e) {
-			throw new InvalidException(e);
+				result =
+						JavaStandardLibraryFactory.INSTANCE.createOclInteger(toInteger);
+			}
+
+			catch (NumberFormatException e) {
+				result =
+						JavaStandardLibraryFactory.INSTANCE.createOclInvalid(
+								TypeConstants.INTEGER, e);
+			}
 		}
 
 		return result;
@@ -188,19 +232,29 @@ public class JavaOclString extends JavaOclLibraryObject implements OclString {
 	 */
 	public OclReal toReal() {
 
-		OclReal result;
+		OclReal result = null;
 
-		checkUndefinedAndInvalid(this);
+		result =
+				checkInvalid(TypeConstants.REAL, this);
 
-		/* Else compute the result. */
-		try {
-			Double toReal = new Double(getModelInstanceString().getString());
+		if (result == null)
+			result =
+					checkUndefined("toReal",
+							TypeConstants.REAL, this);
 
-			result = JavaStandardLibraryFactory.INSTANCE.createOclReal(toReal);
-		}
+		if (result == null) {
+			/* Else compute the result. */
+			try {
+				Double toReal = new Double(getModelInstanceString().getString());
 
-		catch (NumberFormatException e) {
-			throw new InvalidException(e);
+				result = JavaStandardLibraryFactory.INSTANCE.createOclReal(toReal);
+			}
+
+			catch (NumberFormatException e) {
+				result =
+						JavaStandardLibraryFactory.INSTANCE.createOclInvalid(
+								TypeConstants.REAL, e);
+			}
 		}
 
 		return result;
@@ -215,22 +269,24 @@ public class JavaOclString extends JavaOclLibraryObject implements OclString {
 
 		OclBoolean result;
 
-		checkUndefinedAndInvalid(that);
+		result = checkIsEqualTo(that);
 
-		/* Check if the given object is a String. */
-		if (!(that instanceof OclString)) {
-			result = JavaOclBoolean.getInstance(false);
-		}
-
-		else {
-			String thatString =
-					((IModelInstanceString) that.getModelInstanceElement()).getString();
-
-			if (getModelInstanceString().getString().equals(thatString)) {
-				result = JavaOclBoolean.getInstance(true);
-			}
-			else {
+		if (result == null) {
+			/* Check if the given object is a String. */
+			if (!(that instanceof OclString)) {
 				result = JavaOclBoolean.getInstance(false);
+			}
+
+			else {
+				String thatString =
+						((IModelInstanceString) that.getModelInstanceElement()).getString();
+
+				if (getModelInstanceString().getString().equals(thatString)) {
+					result = JavaOclBoolean.getInstance(true);
+				}
+				else {
+					result = JavaOclBoolean.getInstance(false);
+				}
 			}
 		}
 
@@ -243,18 +299,33 @@ public class JavaOclString extends JavaOclLibraryObject implements OclString {
 	 */
 	public <T extends OclAny> OclSet<T> asSet() {
 
-		checkUndefinedAndInvalid(this);
+		OclSet<T> result = null;
 
-		OclSet<T> result;
+		result =
+				checkInvalid(
+						TypeConstants
+								.SET(TypeConstants.STRING),
+						this);
 
-		Set<IModelInstanceElement> imiSet = new HashSet<IModelInstanceElement>();
-		imiSet.add(getModelInstanceString());
+		if (result == null)
+			result =
+					checkUndefined(
+							"asSet",
+							TypeConstants
+									.SET(TypeConstants.STRING),
+							this);
 
-		result = JavaStandardLibraryFactory.INSTANCE.createOclSet(imiSet);
+		if (result == null) {
+			Set<IModelInstanceElement> imiSet = new HashSet<IModelInstanceElement>();
+			imiSet.add(getModelInstanceString());
+
+			result =
+					JavaStandardLibraryFactory.INSTANCE.createOclSet(imiSet,
+							TypeConstants.INTEGER);
+		}
 
 		return result;
 	}
-	
 
 	@Override
 	public String toString() {
@@ -263,7 +334,7 @@ public class JavaOclString extends JavaOclLibraryObject implements OclString {
 
 		result.append(this.getClass().getSimpleName());
 		result.append("[");
-		
+
 		if (this.oclIsUndefined().isTrue()) {
 			result.append("undefined: ");
 			result.append(this.undefinedreason);
@@ -277,7 +348,7 @@ public class JavaOclString extends JavaOclLibraryObject implements OclString {
 		else {
 			result.append(getModelInstanceString().getString());
 		}
-		
+
 		result.append("]");
 
 		return result.toString();

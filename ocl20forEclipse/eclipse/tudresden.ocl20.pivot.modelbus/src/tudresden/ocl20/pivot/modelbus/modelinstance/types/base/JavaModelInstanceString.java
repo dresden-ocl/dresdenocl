@@ -82,7 +82,7 @@ public class JavaModelInstanceString extends AbstractModelInstanceString
 
 		/* Initialize the type. */
 		this.myTypes = new HashSet<Type>();
-		this.myTypes.add(PrimitiveAndCollectionTypeConstants.MODEL_TYPE_STRING);
+		this.myTypes.add(TypeConstants.STRING);
 
 		/* Eventually debug the exit of this method. */
 		if (LOGGER.isDebugEnabled()) {

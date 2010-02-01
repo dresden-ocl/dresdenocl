@@ -33,7 +33,7 @@ package tudresden.ocl20.pivot.standardlibrary.java.internal.library;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclReal;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceInteger;
-import tudresden.ocl20.pivot.standardlibrary.java.exceptions.InvalidException;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.base.TypeConstants;
 import tudresden.ocl20.pivot.standardlibrary.java.factory.JavaStandardLibraryFactory;
 
 /**
@@ -82,16 +82,26 @@ public class JavaOclInteger extends JavaOclReal implements OclInteger {
 	 */
 	public OclInteger add(OclInteger that) {
 
-		OclInteger result;
+		OclInteger result = null;
 
-		checkUndefinedAndInvalid(this, that);
-
-		/* Else compute the result. */
-		Long summand1 = this.getModelInstanceInteger().getLong();
-		Long summand2 = that.getModelInstanceInteger().getLong();
 		result =
-				JavaStandardLibraryFactory.INSTANCE.createOclInteger(summand1
-						+ summand2);
+				checkInvalid(TypeConstants.INTEGER,
+						this, that);
+
+		if (result == null)
+			result =
+					checkUndefined("add",
+							TypeConstants.INTEGER, this,
+							that);
+
+		if (result == null) {
+			/* Else compute the result. */
+			Long summand1 = this.getModelInstanceInteger().getLong();
+			Long summand2 = that.getModelInstanceInteger().getLong();
+			result =
+					JavaStandardLibraryFactory.INSTANCE.createOclInteger(summand1
+							+ summand2);
+		}
 
 		return result;
 	}
@@ -104,20 +114,32 @@ public class JavaOclInteger extends JavaOclReal implements OclInteger {
 	 */
 	public OclInteger div(OclInteger that) {
 
-		OclInteger result;
+		OclInteger result = null;
 
-		checkUndefinedAndInvalid(this, that);
+		result =
+				checkInvalid(TypeConstants.INTEGER,
+						this, that);
 
-		/* Else compute the result. */
-		Long dividend = this.getModelInstanceInteger().getLong();
-		Long divisor = that.getModelInstanceInteger().getLong();
-
-		try {
+		if (result == null)
 			result =
-					JavaStandardLibraryFactory.INSTANCE.createOclInteger(dividend
-							/ divisor);
-		} catch (ArithmeticException e) {
-			throw new InvalidException(e);
+					checkUndefined("div",
+							TypeConstants.INTEGER, this,
+							that);
+
+		if (result == null) {
+			/* Else compute the result. */
+			Long dividend = this.getModelInstanceInteger().getLong();
+			Long divisor = that.getModelInstanceInteger().getLong();
+
+			try {
+				result =
+						JavaStandardLibraryFactory.INSTANCE.createOclInteger(dividend
+								/ divisor);
+			} catch (ArithmeticException e) {
+				result =
+						JavaStandardLibraryFactory.INSTANCE.createOclInvalid(
+								TypeConstants.INTEGER, e);
+			}
 		}
 
 		return result;
@@ -130,10 +152,25 @@ public class JavaOclInteger extends JavaOclReal implements OclInteger {
 	 */
 	public OclReal divide(OclInteger anInteger) {
 
-		Long longValue = anInteger.getModelInstanceInteger().getLong();
+		OclReal result =
+				checkInvalid(TypeConstants.REAL, this,
+						anInteger);
 
-		return super.divide(JavaStandardLibraryFactory.INSTANCE
-				.createOclReal(longValue));
+		if (result == null)
+			result =
+					checkUndefined("/",
+							TypeConstants.REAL, this,
+							anInteger);
+
+		if (result == null) {
+			Long longValue = anInteger.getModelInstanceInteger().getLong();
+
+			result =
+					super.divide(JavaStandardLibraryFactory.INSTANCE
+							.createOclReal(longValue));
+		}
+
+		return result;
 	}
 
 	/*
@@ -144,16 +181,26 @@ public class JavaOclInteger extends JavaOclReal implements OclInteger {
 	 */
 	public OclInteger max(OclInteger that) {
 
-		OclInteger result;
+		OclInteger result = null;
 
-		checkUndefinedAndInvalid(this, that);
-
-		/* Else compute the result. */
-		Long int1 = this.getModelInstanceInteger().getLong();
-		Long int2 = that.getModelInstanceInteger().getLong();
 		result =
-				JavaStandardLibraryFactory.INSTANCE.createOclInteger(Math.max(int1,
-						int2));
+				checkInvalid(TypeConstants.INTEGER,
+						this, that);
+
+		if (result == null)
+			result =
+					checkUndefined("max",
+							TypeConstants.INTEGER, this,
+							that);
+
+		if (result == null) {
+			/* Else compute the result. */
+			Long int1 = this.getModelInstanceInteger().getLong();
+			Long int2 = that.getModelInstanceInteger().getLong();
+			result =
+					JavaStandardLibraryFactory.INSTANCE.createOclInteger(Math.max(int1,
+							int2));
+		}
 
 		return result;
 	}
@@ -166,16 +213,26 @@ public class JavaOclInteger extends JavaOclReal implements OclInteger {
 	 */
 	public OclInteger min(OclInteger that) {
 
-		OclInteger result;
+		OclInteger result = null;
 
-		checkUndefinedAndInvalid(this, that);
-
-		/* Else compute the result. */
-		Long int1 = this.getModelInstanceInteger().getLong();
-		Long int2 = that.getModelInstanceInteger().getLong();
 		result =
-				JavaStandardLibraryFactory.INSTANCE.createOclInteger(Math.min(int1,
-						int2));
+				checkInvalid(TypeConstants.INTEGER,
+						this, that);
+
+		if (result == null)
+			result =
+					checkUndefined("min",
+							TypeConstants.INTEGER, this,
+							that);
+
+		if (result == null) {
+			/* Else compute the result. */
+			Long int1 = this.getModelInstanceInteger().getLong();
+			Long int2 = that.getModelInstanceInteger().getLong();
+			result =
+					JavaStandardLibraryFactory.INSTANCE.createOclInteger(Math.min(int1,
+							int2));
+		}
 
 		return result;
 	}
@@ -188,20 +245,32 @@ public class JavaOclInteger extends JavaOclReal implements OclInteger {
 	 */
 	public OclInteger mod(OclInteger that) {
 
-		OclInteger result;
+		OclInteger result = null;
 
-		checkUndefinedAndInvalid(this, that);
+		result =
+				checkInvalid(TypeConstants.INTEGER,
+						this, that);
 
-		/* Else compute the result. */
-		Long dividend = this.getModelInstanceInteger().getLong();
-		Long divisor = that.getModelInstanceInteger().getLong();
-
-		try {
+		if (result == null)
 			result =
-					JavaStandardLibraryFactory.INSTANCE.createOclInteger(dividend
-							% divisor);
-		} catch (ArithmeticException e) {
-			throw new InvalidException(e);
+					checkUndefined("mod",
+							TypeConstants.INTEGER, this,
+							that);
+
+		if (result == null) {
+			/* Else compute the result. */
+			Long dividend = this.getModelInstanceInteger().getLong();
+			Long divisor = that.getModelInstanceInteger().getLong();
+
+			try {
+				result =
+						JavaStandardLibraryFactory.INSTANCE.createOclInteger(dividend
+								% divisor);
+			} catch (ArithmeticException e) {
+				result =
+						JavaStandardLibraryFactory.INSTANCE.createOclInvalid(
+								TypeConstants.INTEGER, e);
+			}
 		}
 
 		return result;
@@ -214,14 +283,25 @@ public class JavaOclInteger extends JavaOclReal implements OclInteger {
 	 */
 	public OclInteger multiply(OclInteger that) {
 
-		OclInteger result;
+		OclInteger result = null;
 
-		checkUndefinedAndInvalid(this, that);
+		result =
+				checkInvalid(TypeConstants.INTEGER,
+						this, that);
 
-		/* Else compute the result. */
-		Long int1 = this.getModelInstanceInteger().getLong();
-		Long int2 = that.getModelInstanceInteger().getLong();
-		result = JavaStandardLibraryFactory.INSTANCE.createOclInteger(int1 * int2);
+		if (result == null)
+			result =
+					checkUndefined("*",
+							TypeConstants.INTEGER, this,
+							that);
+
+		if (result == null) {
+			/* Else compute the result. */
+			Long int1 = this.getModelInstanceInteger().getLong();
+			Long int2 = that.getModelInstanceInteger().getLong();
+			result =
+					JavaStandardLibraryFactory.INSTANCE.createOclInteger(int1 * int2);
+		}
 
 		return result;
 	}
@@ -233,14 +313,25 @@ public class JavaOclInteger extends JavaOclReal implements OclInteger {
 	 */
 	public OclInteger subtract(OclInteger that) {
 
-		OclInteger result;
+		OclInteger result = null;
 
-		checkUndefinedAndInvalid(this, that);
+		result =
+				checkInvalid(TypeConstants.INTEGER,
+						this, that);
 
-		/* Else compute the result. */
-		Long int1 = this.getModelInstanceInteger().getLong();
-		Long int2 = that.getModelInstanceInteger().getLong();
-		result = JavaStandardLibraryFactory.INSTANCE.createOclInteger(int1 - int2);
+		if (result == null)
+			result =
+					checkUndefined("-",
+							TypeConstants.INTEGER, this,
+							that);
+
+		if (result == null) {
+			/* Else compute the result. */
+			Long int1 = this.getModelInstanceInteger().getLong();
+			Long int2 = that.getModelInstanceInteger().getLong();
+			result =
+					JavaStandardLibraryFactory.INSTANCE.createOclInteger(int1 - int2);
+		}
 
 		return result;
 	}
@@ -254,14 +345,23 @@ public class JavaOclInteger extends JavaOclReal implements OclInteger {
 	@Override
 	public OclInteger abs() {
 
-		OclInteger result;
+		OclInteger result = null;
 
-		checkUndefinedAndInvalid(this);
-
-		/* Else compute the result. */
 		result =
-				JavaStandardLibraryFactory.INSTANCE.createOclInteger(Math
-						.abs(getModelInstanceInteger().getLong()));
+				checkInvalid(TypeConstants.INTEGER,
+						this);
+
+		if (result == null)
+			result =
+					checkUndefined("abs",
+							TypeConstants.INTEGER, this);
+
+		if (result == null) {
+			/* Else compute the result. */
+			result =
+					JavaStandardLibraryFactory.INSTANCE.createOclInteger(Math
+							.abs(getModelInstanceInteger().getLong()));
+		}
 
 		return result;
 	}
@@ -275,18 +375,27 @@ public class JavaOclInteger extends JavaOclReal implements OclInteger {
 	@Override
 	public OclInteger negative() {
 
-		OclInteger result;
+		OclInteger result = null;
 
-		checkUndefinedAndInvalid(this);
-
-		/* Else compute the result. */
 		result =
-				JavaStandardLibraryFactory.INSTANCE
-						.createOclInteger(-(getModelInstanceInteger().getLong()));
+				checkInvalid(TypeConstants.INTEGER,
+						this);
+
+		if (result == null)
+			result =
+					checkUndefined("-",
+							TypeConstants.INTEGER, this);
+
+		if (result == null) {
+			/* Else compute the result. */
+			result =
+					JavaStandardLibraryFactory.INSTANCE
+							.createOclInteger(-(getModelInstanceInteger().getLong()));
+		}
 
 		return result;
 	}
-	
+
 	/*
 	 * (non-Javadoc)
 	 * @see tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclAny

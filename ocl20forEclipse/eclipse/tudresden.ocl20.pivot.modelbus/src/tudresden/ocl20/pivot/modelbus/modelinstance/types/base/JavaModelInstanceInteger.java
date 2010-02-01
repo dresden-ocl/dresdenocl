@@ -82,7 +82,7 @@ public class JavaModelInstanceInteger extends AbstractModelInstanceInteger
 
 		/* Initialize the type. */
 		this.myTypes = new HashSet<Type>();
-		this.myTypes.add(PrimitiveAndCollectionTypeConstants.MODEL_TYPE_INTEGER);
+		this.myTypes.add(TypeConstants.INTEGER);
 
 		/* Eventually debug the exit of this method. */
 		if (LOGGER.isDebugEnabled()) {

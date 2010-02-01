@@ -109,10 +109,14 @@ public interface IStandardLibraryFactory {
 	 *          the generic Type of the created {@link OclBag}.
 	 * @param elements
 	 *          the {@link IModelInstanceCollection} to be wrapped
+	 * @param genericType
+	 *          the generic {@link Type} for this collection, e.g., AnyType,
+	 *          UML2Class, etc.
 	 * @return the created {@link OclBag}.
 	 */
 	<T extends OclAny> OclBag<T> createOclBag(
-			final IModelInstanceCollection<IModelInstanceElement> elements);
+			final IModelInstanceCollection<IModelInstanceElement> elements,
+			Type genericType);
 
 	/**
 	 * <p>
@@ -125,9 +129,13 @@ public interface IStandardLibraryFactory {
 	 *          {@link JavaModelInstanceCollection} that is created by this method
 	 *          and is wrapped by the {@link OclBag} that is created as the return
 	 *          value.
+	 * @param genericType
+	 *          the generic {@link Type} for this collection, e.g., AnyType,
+	 *          UML2Class, etc.
 	 * @return the created {@link OclBag}.
 	 */
-	<T extends OclAny> OclBag<T> createOclBag(final List<?> elements);
+	<T extends OclAny> OclBag<T> createOclBag(final List<?> elements,
+			Type genericType);
 
 	/**
 	 * <p>
@@ -160,9 +168,13 @@ public interface IStandardLibraryFactory {
 	 * 
 	 * @param collectionType
 	 *          the type of collection to create (Bag, OrderedSet, Sequence, Set).
+	 * @param genericType
+	 *          the generic {@link Type} for this collection, e.g., AnyType,
+	 *          UML2Class, etc.
 	 * @return an empty {@link OclCollection} of the given {@link CollectionType}
 	 */
-	OclCollection<OclAny> createOclCollection(CollectionType collectionType);
+	OclCollection<OclAny> createOclCollection(CollectionType collectionType,
+			Type genericType);
 
 	/**
 	 * <p>
@@ -239,10 +251,14 @@ public interface IStandardLibraryFactory {
 	 *          the generic Type of the created {@link OclOrderedSet}.
 	 * @param elements
 	 *          the {@link IModelInstanceCollection} to be wrapped
+	 * @param genericType
+	 *          the generic {@link Type} for this collection, e.g., AnyType,
+	 *          UML2Class, etc.
 	 * @return the created {@link OclOrderedSet}.
 	 */
 	<T extends OclAny> OclOrderedSet<T> createOclOrderedSet(
-			final IModelInstanceCollection<IModelInstanceElement> elements);
+			final IModelInstanceCollection<IModelInstanceElement> elements,
+			Type genericType);
 
 	/**
 	 * <p>
@@ -255,9 +271,13 @@ public interface IStandardLibraryFactory {
 	 *          {@link JavaModelInstanceCollection} that is created by this method
 	 *          and is wrapped by the {@link OclOrderedSet} that is created as the
 	 *          return value.
+	 * @param genericType
+	 *          the generic {@link Type} for this collection, e.g., AnyType,
+	 *          UML2Class, etc.
 	 * @return the created {@link OclOrderedSet}.
 	 */
-	<T extends OclAny> OclOrderedSet<T> createOclOrderedSet(final List<?> elements);
+	<T extends OclAny> OclOrderedSet<T> createOclOrderedSet(
+			final List<?> elements, Type genericType);
 
 	/**
 	 * <p>
@@ -293,10 +313,14 @@ public interface IStandardLibraryFactory {
 	 *          the generic Type of the created {@link OclSequence}.
 	 * @param elements
 	 *          the {@link IModelInstanceCollection} to be wrapped
+	 * @param genericType
+	 *          the generic {@link Type} for this collection, e.g., AnyType,
+	 *          UML2Class, etc.
 	 * @return the created {@link OclSequence}.
 	 */
 	<T extends OclAny> OclSequence<T> createOclSequence(
-			final IModelInstanceCollection<IModelInstanceElement> elements);
+			final IModelInstanceCollection<IModelInstanceElement> elements,
+			Type genericType);
 
 	/**
 	 * <p>
@@ -309,9 +333,13 @@ public interface IStandardLibraryFactory {
 	 *          {@link JavaModelInstanceCollection} that is created by this method
 	 *          and is wrapped by the {@link OclSequence} that is created as the
 	 *          return value.
+	 * @param genericType
+	 *          the generic {@link Type} for this collection, e.g., AnyType,
+	 *          UML2Class, etc.
 	 * @return the created {@link OclSequence}.
 	 */
-	<T extends OclAny> OclSequence<T> createOclSequence(final List<?> elements);
+	<T extends OclAny> OclSequence<T> createOclSequence(final List<?> elements,
+			Type genericType);
 
 	/**
 	 * <p>
@@ -321,10 +349,14 @@ public interface IStandardLibraryFactory {
 	 *          the generic Type of the created {@link OclSet}.
 	 * @param elements
 	 *          the {@link IModelInstanceCollection} to be wrapped
+	 * @param genericType
+	 *          the generic {@link Type} for this collection, e.g., AnyType,
+	 *          UML2Class, etc.
 	 * @return the created {@link OclSet}.
 	 */
 	<T extends OclAny> OclSet<T> createOclSet(
-			final IModelInstanceCollection<IModelInstanceElement> elements);
+			final IModelInstanceCollection<IModelInstanceElement> elements,
+			Type genericType);
 
 	/**
 	 * <p>
@@ -337,9 +369,13 @@ public interface IStandardLibraryFactory {
 	 *          {@link JavaModelInstanceCollection} that is created by this method
 	 *          and is wrapped by the {@link OclSet} that is created as the return
 	 *          value.
+	 * @param genericType
+	 *          the generic {@link Type} for this collection, e.g., AnyType,
+	 *          UML2Class, etc.
 	 * @return the created {@link OclSet}.
 	 */
-	<T extends OclAny> OclSet<T> createOclSet(final Set<?> elements);
+	<T extends OclAny> OclSet<T> createOclSet(final Set<?> elements,
+			Type genericType);
 
 	/**
 	 * <p>
@@ -434,5 +470,5 @@ public interface IStandardLibraryFactory {
 	 *          The {@link Throwable} that caused this to be invalid
 	 * @return The created invalid {@link OclAny}.
 	 */
-	OclAny createOclInvalid(final Type type, final Throwable cause);
+	<T extends OclAny> T createOclInvalid(final Type type, final Throwable cause);
 }

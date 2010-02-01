@@ -87,9 +87,11 @@ public interface OclBoolean extends OclLibraryObject {
 	OclBoolean implies(OclBoolean b);
 
 	/**
-	 * get boolean representation of <code>this</code>
+	 * Get boolean representation of <code>this</code>.<br>
+	 * <strong>When calling this method, make sure to test that this
+	 * {@link OclBoolean} is neither invalid nor undefined!</strong>
 	 * 
-	 * @return true, <code>this</code> ist true
+	 * @return <code>true</code>, if <code>this</code> is true
 	 */
 	boolean isTrue();
 

@@ -41,6 +41,8 @@ import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBoolean;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSet;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceCollection;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.base.TypeConstants;
+import tudresden.ocl20.pivot.pivotmodel.Type;
 import tudresden.ocl20.pivot.standardlibrary.java.factory.JavaStandardLibraryFactory;
 
 /**
@@ -63,19 +65,20 @@ public class JavaOclSet<T extends OclAny> extends JavaOclUnsortedCollection<T>
 	 *          The adapted model instance object of this {@link JavaOclSet}.
 	 */
 	public JavaOclSet(
-			IModelInstanceCollection<IModelInstanceElement> imiCollection) {
+			IModelInstanceCollection<IModelInstanceElement> imiCollection,
+			Type genericType) {
 
-		super(imiCollection);
+		super(imiCollection, genericType);
 	}
 
-	public JavaOclSet(String undefinedReason) {
+	public JavaOclSet(String undefinedReason, Type genericType) {
 
-		super(undefinedReason);
+		super(undefinedReason, genericType);
 	}
 
-	public JavaOclSet(Throwable invalidReason) {
+	public JavaOclSet(Throwable invalidReason, Type genericType) {
 
-		super(invalidReason);
+		super(invalidReason, genericType);
 	}
 
 	/*
@@ -85,20 +88,31 @@ public class JavaOclSet<T extends OclAny> extends JavaOclUnsortedCollection<T>
 	 */
 	public OclSet<T> complement(OclSet<T> that) {
 
-		OclSet<T> result;
+		OclSet<T> result = null;
 
-		Set<IModelInstanceElement> complement =
-				new HashSet<IModelInstanceElement>();
+		result =
+				checkInvalid(TypeConstants
+						.SET(genericType), this, that);
 
-		checkUndefinedAndInvalid(this, that);
+		if (result == null)
+			result =
+					checkUndefined("complement", TypeConstants
+							.SET(genericType), this, that);
 
-		Collection<IModelInstanceElement> otherCollection =
-				(Collection<IModelInstanceElement>) that.getModelInstanceElement();
+		if (result == null) {
+			Set<IModelInstanceElement> complement =
+					new HashSet<IModelInstanceElement>();
 
-		complement.addAll(getModelInstanceCollection().getCollection());
-		complement.removeAll(otherCollection);
+			Collection<IModelInstanceElement> otherCollection =
+					(Collection<IModelInstanceElement>) that.getModelInstanceElement();
 
-		result = JavaStandardLibraryFactory.INSTANCE.createOclSet(complement);
+			complement.addAll(getModelInstanceCollection().getCollection());
+			complement.removeAll(otherCollection);
+
+			result =
+					JavaStandardLibraryFactory.INSTANCE.createOclSet(complement,
+							genericType);
+		}
 
 		return result;
 	}
@@ -111,16 +125,27 @@ public class JavaOclSet<T extends OclAny> extends JavaOclUnsortedCollection<T>
 	 */
 	public OclSet<T> excluding(T that) {
 
-		OclSet<T> result;
+		OclSet<T> result = null;
 
-		Set<IModelInstanceElement> exclude = new HashSet<IModelInstanceElement>();
+		result =
+				checkInvalid(TypeConstants
+						.SET(genericType), this, that);
 
-		checkUndefinedAndInvalid(this, that);
+		if (result == null)
+			result =
+					checkUndefined("excluding", TypeConstants
+							.SET(genericType), this);
 
-		exclude.addAll(getModelInstanceCollection().getCollection());
-		exclude.remove(that.getModelInstanceElement());
+		if (result == null) {
+			Set<IModelInstanceElement> exclude = new HashSet<IModelInstanceElement>();
 
-		result = JavaStandardLibraryFactory.INSTANCE.createOclSet(exclude);
+			exclude.addAll(getModelInstanceCollection().getCollection());
+			exclude.remove(that.getModelInstanceElement());
+
+			result =
+					JavaStandardLibraryFactory.INSTANCE
+							.createOclSet(exclude, genericType);
+		}
 
 		return result;
 	}
@@ -132,38 +157,48 @@ public class JavaOclSet<T extends OclAny> extends JavaOclUnsortedCollection<T>
 	 */
 	public <T2 extends OclAny> OclSet<T2> flatten() {
 
-		OclSet<T2> result;
+		OclSet<T2> result = null;
 
-		Set<IModelInstanceElement> flat = new HashSet<IModelInstanceElement>();
+		result =
+				checkInvalid(TypeConstants
+						.SET(genericType), this);
 
-		checkUndefinedAndInvalid(this);
+		if (result == null)
+			result =
+					checkUndefined("flatten", TypeConstants
+							.SET(genericType), this);
 
-		/* Iterate over this set. */
-		for (IModelInstanceElement element : getModelInstanceCollection()
-				.getCollection()) {
+		if (result == null) {
+			Set<IModelInstanceElement> flat = new HashSet<IModelInstanceElement>();
 
-			/*
-			 * nested collections are flattened, i.e. their elements are added to the
-			 * result
-			 */
-			if (element instanceof IModelInstanceCollection<?>) {
-				IModelInstanceCollection<IModelInstanceElement> collection;
-				collection =
-						((IModelInstanceCollection<IModelInstanceElement>) element);
+			/* Iterate over this set. */
+			for (IModelInstanceElement element : getModelInstanceCollection()
+					.getCollection()) {
 
-				for (IModelInstanceElement collectionElement : collection
-						.getCollection()) {
-					flat.add(collectionElement);
+				/*
+				 * nested collections are flattened, i.e. their elements are added to
+				 * the result
+				 */
+				if (element instanceof IModelInstanceCollection<?>) {
+					IModelInstanceCollection<IModelInstanceElement> collection;
+					collection =
+							((IModelInstanceCollection<IModelInstanceElement>) element);
+
+					for (IModelInstanceElement collectionElement : collection
+							.getCollection()) {
+						flat.add(collectionElement);
+					}
+				}
+
+				/* other elements are simply added */
+				else {
+					flat.add(element);
 				}
 			}
 
-			/* other elements are simply added */
-			else {
-				flat.add(element);
-			}
+			result =
+					JavaStandardLibraryFactory.INSTANCE.createOclSet(flat, genericType);
 		}
-
-		result = JavaStandardLibraryFactory.INSTANCE.createOclSet(flat);
 
 		return result;
 	}
@@ -176,16 +211,27 @@ public class JavaOclSet<T extends OclAny> extends JavaOclUnsortedCollection<T>
 	 */
 	public OclSet<T> including(T that) {
 
-		OclSet<T> result;
+		OclSet<T> result = null;
 
-		Set<IModelInstanceElement> include = new HashSet<IModelInstanceElement>();
+		result =
+				checkInvalid(TypeConstants
+						.SET(genericType), this, that);
 
-		checkUndefinedAndInvalid(this, that);
+		if (result == null)
+			result =
+					checkUndefined("including", TypeConstants
+							.SET(genericType), this);
 
-		include.addAll(getModelInstanceCollection().getCollection());
-		include.add(that.getModelInstanceElement());
+		if (result == null) {
+			Set<IModelInstanceElement> include = new HashSet<IModelInstanceElement>();
 
-		result = JavaStandardLibraryFactory.INSTANCE.createOclSet(include);
+			include.addAll(getModelInstanceCollection().getCollection());
+			include.add(that.getModelInstanceElement());
+
+			result =
+					JavaStandardLibraryFactory.INSTANCE
+							.createOclSet(include, genericType);
+		}
 
 		return result;
 	}
@@ -211,46 +257,49 @@ public class JavaOclSet<T extends OclAny> extends JavaOclUnsortedCollection<T>
 
 		OclBoolean result;
 
-		checkUndefinedAndInvalid(this, that);
+		result = checkIsEqualTo(that);
 
-		/* Check if the given object is no OclSet. */
-		if (!(that instanceof OclSet)) {
-			result = JavaOclBoolean.getInstance(false);
-		}
-
-		/* Else compare the two OrderedSets. */
-		else {
-
-			boolean booleanResult;
-
-			// copy, since elements are removed later
-			Set<IModelInstanceElement> set1 =
-					new HashSet<IModelInstanceElement>((Set<IModelInstanceElement>) this
-							.getModelInstanceCollection().getCollection());
-			Set<IModelInstanceElement> set2 =
-					(Set<IModelInstanceElement>) ((IModelInstanceCollection) that
-							.getModelInstanceElement()).getCollection();
-
-			if (set1.size() != set2.size()) {
-				booleanResult = false;
+		if (result == null) {
+			/* Check if the given object is no OclSet. */
+			if (!(that instanceof OclSet)) {
+				result = JavaOclBoolean.getInstance(false);
 			}
 
-			/* Else iterate over the elements and compare them. */
+			/* Else compare the two OrderedSets. */
 			else {
 
-				for (IModelInstanceElement element : set2) {
-					if (!set1.remove(element)) {
-						booleanResult = false;
-						break;
-					}
+				boolean booleanResult;
+
+				// copy, since elements are removed later
+				Set<IModelInstanceElement> set1 =
+						new HashSet<IModelInstanceElement>(
+								(Set<IModelInstanceElement>) this.getModelInstanceCollection()
+										.getCollection());
+				Set<IModelInstanceElement> set2 =
+						(Set<IModelInstanceElement>) ((IModelInstanceCollection) that
+								.getModelInstanceElement()).getCollection();
+
+				if (set1.size() != set2.size()) {
+					booleanResult = false;
 				}
 
-				/* set1 should have no elements by now */
-				booleanResult = set1.isEmpty();
+				/* Else iterate over the elements and compare them. */
+				else {
 
+					for (IModelInstanceElement element : set2) {
+						if (!set1.remove(element)) {
+							booleanResult = false;
+							break;
+						}
+					}
+
+					/* set1 should have no elements by now */
+					booleanResult = set1.isEmpty();
+
+				}
+
+				result = JavaOclBoolean.getInstance(booleanResult);
 			}
-
-			result = JavaOclBoolean.getInstance(booleanResult);
 		}
 
 		return result;
@@ -264,34 +313,45 @@ public class JavaOclSet<T extends OclAny> extends JavaOclUnsortedCollection<T>
 	 */
 	public OclSet<T> symmetricDifference(OclSet<T> that) {
 
-		OclSet<T> result;
-
-		Set<IModelInstanceElement> symmetricDifference =
-				new HashSet<IModelInstanceElement>();
-
-		checkUndefinedAndInvalid(this, that);
-
-		Collection<IModelInstanceElement> otherCollectionCopy =
-				new ArrayList<IModelInstanceElement>(that.getModelInstanceCollection()
-						.getCollection());
-
-		/* Iterate over this bag. */
-		for (IModelInstanceElement element : getModelInstanceCollection()
-				.getCollection()) {
-			/*
-			 * if other collection has not the same element, then it is in the
-			 * symmetric difference; remove it, so that it is not counted multiple
-			 * times
-			 */
-			if (!otherCollectionCopy.remove(element)) {
-				symmetricDifference.add(element);
-			}
-		}
-		/* add the other collection that is already without intersection elements */
-		symmetricDifference.addAll(otherCollectionCopy);
+		OclSet<T> result = null;
 
 		result =
-				JavaStandardLibraryFactory.INSTANCE.createOclSet(symmetricDifference);
+				checkInvalid(TypeConstants
+						.SET(genericType), this, that);
+
+		if (result == null)
+			result =
+					checkUndefined("symmetricDifference",
+							TypeConstants.SET(genericType),
+							this, that);
+
+		if (result == null) {
+			Set<IModelInstanceElement> symmetricDifference =
+					new HashSet<IModelInstanceElement>();
+
+			Collection<IModelInstanceElement> otherCollectionCopy =
+					new ArrayList<IModelInstanceElement>(that
+							.getModelInstanceCollection().getCollection());
+
+			/* Iterate over this bag. */
+			for (IModelInstanceElement element : getModelInstanceCollection()
+					.getCollection()) {
+				/*
+				 * if other collection has not the same element, then it is in the
+				 * symmetric difference; remove it, so that it is not counted multiple
+				 * times
+				 */
+				if (!otherCollectionCopy.remove(element)) {
+					symmetricDifference.add(element);
+				}
+			}
+			/* add the other collection that is already without intersection elements */
+			symmetricDifference.addAll(otherCollectionCopy);
+
+			result =
+					JavaStandardLibraryFactory.INSTANCE.createOclSet(symmetricDifference,
+							genericType);
+		}
 
 		return result;
 	}
@@ -304,19 +364,29 @@ public class JavaOclSet<T extends OclAny> extends JavaOclUnsortedCollection<T>
 	 */
 	public OclSet<T> union(OclSet<T> that) {
 
-		OclSet<T> result;
+		OclSet<T> result = null;
 
-		Set<IModelInstanceElement> union = new HashSet<IModelInstanceElement>();
+		result =
+				checkInvalid(TypeConstants
+						.SET(genericType), this, that);
 
-		checkUndefinedAndInvalid(this, that);
+		if (result == null)
+			result =
+					checkUndefined("union", TypeConstants
+							.SET(genericType), this, that);
 
-		Collection<IModelInstanceElement> otherCollection =
-				that.getModelInstanceCollection().getCollection();
+		if (result == null) {
+			Set<IModelInstanceElement> union = new HashSet<IModelInstanceElement>();
 
-		union.addAll(getModelInstanceCollection().getCollection());
-		union.addAll(otherCollection);
+			Collection<IModelInstanceElement> otherCollection =
+					that.getModelInstanceCollection().getCollection();
 
-		result = JavaStandardLibraryFactory.INSTANCE.createOclSet(union);
+			union.addAll(getModelInstanceCollection().getCollection());
+			union.addAll(otherCollection);
+
+			result =
+					JavaStandardLibraryFactory.INSTANCE.createOclSet(union, genericType);
+		}
 
 		return result;
 	}

@@ -101,8 +101,6 @@ import tudresden.ocl20.pivot.pivotmodel.Parameter;
 import tudresden.ocl20.pivot.pivotmodel.Property;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 import tudresden.ocl20.pivot.standardlibrary.java.JavaStandardlibraryPlugin;
-import tudresden.ocl20.pivot.standardlibrary.java.exceptions.InvalidException;
-import tudresden.ocl20.pivot.standardlibrary.java.exceptions.UndefinedException;
 
 /**
  * <p>
@@ -1142,6 +1140,8 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 	 * #caseCollectionLiteralExp
 	 * (tudresden.ocl20.pivot.essentialocl.expressions.CollectionLiteralExp)
 	 */
+	// FIXME Michael: check, if collectionLiteralExp return CollectionType or the
+	// generic type of the collection
 	@Override
 	public OclAny caseCollectionLiteralExp(
 			CollectionLiteralExp collectionLiteralExp) {
@@ -1227,7 +1227,9 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 					// no else.
 				}
 
-				result = myStandardLibraryFactory.createOclSet(tempList);
+				result =
+						myStandardLibraryFactory.createOclSet(tempList,
+								collectionLiteralExp.getType());
 			}
 
 			else if (collectionKind.equals(CollectionKind.ORDERED_SET)) {
@@ -1243,15 +1245,21 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 					// no else.
 				}
 
-				result = myStandardLibraryFactory.createOclOrderedSet(tempList);
+				result =
+						myStandardLibraryFactory.createOclOrderedSet(tempList,
+								collectionLiteralExp.getType());
 			}
 
 			else if (collectionKind.equals(CollectionKind.SEQUENCE)) {
-				result = myStandardLibraryFactory.createOclSequence(resultParts);
+				result =
+						myStandardLibraryFactory.createOclSequence(resultParts,
+								collectionLiteralExp.getType());
 			}
 
 			else if (collectionKind.equals(CollectionKind.BAG)) {
-				result = myStandardLibraryFactory.createOclBag(resultParts);
+				result =
+						myStandardLibraryFactory.createOclBag(resultParts,
+								collectionLiteralExp.getType());
 			}
 
 			else {
@@ -1415,25 +1423,8 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 			if (condition instanceof OclBoolean) {
 
-				try {
-
-					result =
-							((OclBoolean) condition).ifThenElse(thenStatement, elseStatement);
-
-				}
-				/*
-				 * Since the condition can be invalid or undefined check for these
-				 * cases.
-				 */
-				catch (InvalidException e) {
-					result =
-							myStandardLibraryFactory.createOclInvalid(ifExp.getType(), e
-									.getInvalidReason());
-				} catch (UndefinedException e) {
-					result =
-							myStandardLibraryFactory.createOclUndefined(ifExp.getType(), e
-									.getUndefinedReason());
-				}
+				result =
+						((OclBoolean) condition).ifThenElse(thenStatement, elseStatement);
 			}
 			// no else.
 
@@ -3098,11 +3089,15 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 		/* Compute the result type depending on the given result type. */
 		if (resultType instanceof BagType) {
-			result = myStandardLibraryFactory.createOclBag(resultList);
+			result =
+					myStandardLibraryFactory.createOclBag(resultList,
+							((BagType) resultType).getElementType());
 		}
 
 		else if (resultType instanceof SequenceType) {
-			result = myStandardLibraryFactory.createOclSequence(resultList);
+			result =
+					myStandardLibraryFactory.createOclSequence(resultList,
+							((SequenceType) resultType).getElementType());
 		}
 
 		else {
@@ -3916,11 +3911,15 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 		/* Check which type of collection the result shall have. */
 		if (resultType instanceof SequenceType) {
-			result = myStandardLibraryFactory.createOclSequence(resultList);
+			result =
+					myStandardLibraryFactory.createOclSequence(resultList,
+							((SequenceType) resultType).getElementType());
 		}
 
 		else if (resultType instanceof OrderedSetType) {
-			result = myStandardLibraryFactory.createOclOrderedSet(resultList);
+			result =
+					myStandardLibraryFactory.createOclOrderedSet(resultList,
+							((OrderedSetType) resultType).getElementType());
 		}
 
 		else {
@@ -4039,19 +4038,27 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		/* Check which type of collection shall be returned. */
 		if (resultType instanceof SetType) {
 			Set<OclAny> resultSet = new HashSet<OclAny>(resultList);
-			result = myStandardLibraryFactory.createOclSet(resultSet);
+			result =
+					myStandardLibraryFactory.createOclSet(resultSet,
+							((SetType) resultType).getElementType());
 		}
 
 		else if (resultType instanceof BagType) {
-			result = myStandardLibraryFactory.createOclBag(resultList);
+			result =
+					myStandardLibraryFactory.createOclBag(resultList,
+							((BagType) resultType).getElementType());
 		}
 
 		else if (resultType instanceof SequenceType) {
-			result = myStandardLibraryFactory.createOclSequence(resultList);
+			result =
+					myStandardLibraryFactory.createOclSequence(resultList,
+							((SequenceType) resultType).getElementType());
 		}
 
 		else if (resultType instanceof OrderedSetType) {
-			result = myStandardLibraryFactory.createOclOrderedSet(resultList);
+			result =
+					myStandardLibraryFactory.createOclOrderedSet(resultList,
+							((OrderedSetType) resultType).getElementType());
 		}
 
 		else {

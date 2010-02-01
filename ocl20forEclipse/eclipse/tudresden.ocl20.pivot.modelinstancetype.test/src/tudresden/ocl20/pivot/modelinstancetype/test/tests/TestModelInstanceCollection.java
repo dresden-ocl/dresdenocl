@@ -46,7 +46,7 @@ import tudresden.ocl20.pivot.modelbus.modelinstance.exception.PropertyNotFoundEx
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceCollection;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceObject;
-import tudresden.ocl20.pivot.modelbus.modelinstance.types.base.PrimitiveAndCollectionTypeConstants;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.base.TypeConstants;
 import tudresden.ocl20.pivot.modelinstancetype.test.ModelInstanceTypeTestPlugin;
 import tudresden.ocl20.pivot.modelinstancetype.test.ModelInstanceTypeTestServices;
 import tudresden.ocl20.pivot.modelinstancetype.test.msg.ModelInstanceTypeTestSuiteMessages;
@@ -114,17 +114,17 @@ public class TestModelInstanceCollection {
 	public static void setUp() {
 
 		/* Get a collection type from the model. */
-		type_bag = PrimitiveAndCollectionTypeConstants.MODEL_TYPE_BAG;
+		type_bag = TypeConstants.BAG;
 
 		/* Get a collection type from the model. */
 		type_orderedset =
-				PrimitiveAndCollectionTypeConstants.MODEL_TYPE_ORDERED_SET;
+				TypeConstants.ORDERED_SET;
 
 		/* Get a collection type from the model. */
-		type_sequence = PrimitiveAndCollectionTypeConstants.MODEL_TYPE_SEQUENCE;
+		type_sequence = TypeConstants.SEQUENCE;
 
 		/* Get a collection type from the model. */
-		type_set = PrimitiveAndCollectionTypeConstants.MODEL_TYPE_SET;
+		type_set = TypeConstants.SET;
 
 		/* Get the CollectionType's provider class from the model. */
 		type_CollectionTypeProviderClass =

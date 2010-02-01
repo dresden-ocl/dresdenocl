@@ -39,6 +39,7 @@ import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSet;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceBoolean;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.base.BasisJavaModelInstanceFactory;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.base.TypeConstants;
 import tudresden.ocl20.pivot.standardlibrary.java.factory.JavaStandardLibraryFactory;
 
 /**
@@ -112,7 +113,7 @@ public class JavaOclBoolean extends JavaOclLibraryObject implements OclBoolean {
 	 */
 	public static OclBoolean getInstance(Boolean value) {
 
-		OclBoolean result;
+		OclBoolean result = null;
 
 		if (value == null) {
 			result = new JavaOclBoolean("The boolean value is undefined");
@@ -137,23 +138,38 @@ public class JavaOclBoolean extends JavaOclLibraryObject implements OclBoolean {
 	 */
 	public OclBoolean and(OclBoolean aBoolean) {
 
-		OclBoolean result;
+		OclBoolean result = null;
 
-		checkUndefinedAndInvalid(this);
+		// invalid values should be passed on in any case
+		result =
+				checkInvalid(TypeConstants.BOOLEAN,
+						this, aBoolean);
 
-		if (!this.isTrue()) {
-			result = FALSE;
-		}
+		if (result == null)
+			result =
+					checkUndefined("and",
+							TypeConstants.BOOLEAN, this);
 
-		else {
-			checkUndefinedAndInvalid(aBoolean);
-
-			if (!this.isTrue() || !aBoolean.isTrue()) {
+		if (result == null) {
+			if (!this.isTrue()) {
 				result = FALSE;
 			}
 
 			else {
-				result = TRUE;
+				result =
+						checkUndefined("and",
+								TypeConstants.BOOLEAN, this,
+								aBoolean);
+
+				if (result == null) {
+					if (!this.isTrue() || !aBoolean.isTrue()) {
+						result = FALSE;
+					}
+
+					else {
+						result = TRUE;
+					}
+				}
 			}
 		}
 
@@ -169,16 +185,22 @@ public class JavaOclBoolean extends JavaOclLibraryObject implements OclBoolean {
 	 */
 	public OclAny ifThenElse(OclAny thenStatement, OclAny elseStatement) {
 
-		OclAny result;
+		OclAny result = null;
 
-		checkUndefinedAndInvalid(this);
+		// FIXME Michael: Can there be a definite return type if the condition is
+		// invalid?
+		result =
+				checkInvalid(thenStatement.getModelInstanceElement().getTypes()
+						.iterator().next(), this);
 
-		if (this.isTrue()) {
-			result = thenStatement;
-		}
+		if (result == null) {
+			if (this.isTrue()) {
+				result = thenStatement;
+			}
 
-		else {
-			result = elseStatement;
+			else {
+				result = elseStatement;
+			}
 		}
 
 		return result;
@@ -191,11 +213,34 @@ public class JavaOclBoolean extends JavaOclLibraryObject implements OclBoolean {
 	 */
 	public OclBoolean implies(OclBoolean aBoolean) {
 
-		OclBoolean result;
+		OclBoolean result = null;
 
-		checkUndefinedAndInvalid(this);
+		result =
+				checkInvalid(TypeConstants.BOOLEAN,
+						this, aBoolean);
 
-		result = this.not().or(this.and(aBoolean));
+		if (result == null) {
+
+			// see standard, p.16: anything IMPLIES True is True
+			result =
+					checkUndefined("implies",
+							TypeConstants.BOOLEAN, null,
+							aBoolean);
+			if (result == null) {
+
+				if (aBoolean.isTrue())
+					result = aBoolean;
+
+				else {
+					result =
+							checkUndefined("implies",
+									TypeConstants.BOOLEAN, this);
+					if (result == null)
+						result = this.not().or(this.and(aBoolean));
+				}
+			}
+
+		}
 
 		return result;
 	}
@@ -206,8 +251,6 @@ public class JavaOclBoolean extends JavaOclLibraryObject implements OclBoolean {
 	 */
 	public boolean isTrue() {
 
-		checkUndefinedAndInvalid(this);
-
 		return getModelInstanceBoolean().getBoolean();
 	}
 
@@ -217,24 +260,34 @@ public class JavaOclBoolean extends JavaOclLibraryObject implements OclBoolean {
 	 */
 	public OclBoolean not() {
 
-		OclBoolean result;
+		OclBoolean result = null;
 
-		checkUndefinedAndInvalid(this);
+		result =
+				checkInvalid(TypeConstants.BOOLEAN,
+						this);
 
-		if (this.isTrue()) {
-			result = FALSE;
-		}
+		if (result == null)
+			result =
+					checkUndefined("not",
+							TypeConstants.BOOLEAN, this);
 
-		else if (!this.isTrue()) {
-			result = TRUE;
-		}
+		if (result == null) {
 
-		else {
-			String msg;
+			if (this.isTrue()) {
+				result = FALSE;
+			}
 
-			msg = "OclBoolean in illegal state.";
+			else if (!this.isTrue()) {
+				result = TRUE;
+			}
 
-			throw new RuntimeException(msg);
+			else {
+				String msg;
+
+				msg = "OclBoolean in illegal state.";
+
+				throw new RuntimeException(msg);
+			}
 		}
 
 		return result;
@@ -248,24 +301,36 @@ public class JavaOclBoolean extends JavaOclLibraryObject implements OclBoolean {
 	 */
 	public OclBoolean or(OclBoolean aBoolean) {
 
-		OclBoolean result;
+		OclBoolean result = null;
 
-		checkUndefinedAndInvalid(this);
+		result =
+				checkInvalid(TypeConstants.BOOLEAN,
+						this, aBoolean);
 
-		if (this.isTrue()) {
+		// see standard, p.16: True OR anything is True
+		if (result == null)
+			result =
+					checkUndefined("or",
+							TypeConstants.BOOLEAN, this);
+
+		if (result == null && this.isTrue()) {
 			result = TRUE;
 		}
-
 		else {
 
-			checkUndefinedAndInvalid(aBoolean);
+			result =
+					checkUndefined("or",
+							TypeConstants.BOOLEAN, this,
+							aBoolean);
 
-			if (this.isTrue() || aBoolean.isTrue()) {
-				result = TRUE;
-			}
+			if (result == null) {
+				if (this.isTrue() || aBoolean.isTrue()) {
+					result = TRUE;
+				}
 
-			else {
-				result = FALSE;
+				else {
+					result = FALSE;
+				}
 			}
 		}
 
@@ -291,26 +356,29 @@ public class JavaOclBoolean extends JavaOclLibraryObject implements OclBoolean {
 	 */
 	public OclBoolean isEqualTo(OclAny that) {
 
-		OclBoolean result;
+		OclBoolean result = null;
 
-		checkUndefinedAndInvalid(this, that);
+		result = checkIsEqualTo(that);
 
-		/* Check if the given Object is not a boolean. */
-		if (!(that instanceof OclBoolean)) {
-			result = FALSE;
-		}
+		if (result == null) {
 
-		else {
-			OclBoolean aBoolean;
-
-			aBoolean = (OclBoolean) that;
-
-			if (this == aBoolean) {
-				result = TRUE;
+			/* Check if the given Object is not a boolean. */
+			if (!(that instanceof OclBoolean)) {
+				result = FALSE;
 			}
 
 			else {
-				result = FALSE;
+				OclBoolean aBoolean;
+
+				aBoolean = (OclBoolean) that;
+
+				if (this == aBoolean) {
+					result = TRUE;
+				}
+
+				else {
+					result = FALSE;
+				}
 			}
 		}
 
@@ -323,14 +391,27 @@ public class JavaOclBoolean extends JavaOclLibraryObject implements OclBoolean {
 	 */
 	public <T extends OclAny> OclSet<T> asSet() {
 
-		checkUndefinedAndInvalid(this);
+		OclSet<T> result = null;
 
-		OclSet<T> result;
+		result =
+				checkInvalid(
+						TypeConstants
+								.SET(TypeConstants.BOOLEAN),
+						this);
 
-		Set<IModelInstanceElement> imiSet = new HashSet<IModelInstanceElement>();
-		imiSet.add(getModelInstanceBoolean());
+		if (result == null) {
 
-		result = JavaStandardLibraryFactory.INSTANCE.createOclSet(imiSet);
+			Set<IModelInstanceElement> imiSet = new HashSet<IModelInstanceElement>();
+
+			// FIXME Michael: see standard, p.138: implicit conversion of null is
+			// possible, so result in empty set?
+			if (undefinedreason == null)
+				imiSet.add(getModelInstanceBoolean());
+
+			result =
+					JavaStandardLibraryFactory.INSTANCE.createOclSet(imiSet,
+							TypeConstants.BOOLEAN);
+		}
 
 		return result;
 	}

@@ -2,7 +2,6 @@ package tudresden.ocl20.pivot.standardlibrary.java.test.tests;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -14,7 +13,7 @@ import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclReal;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSet;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.factory.IStandardLibraryFactory;
-import tudresden.ocl20.pivot.standardlibrary.java.exceptions.InvalidException;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.base.TypeConstants;
 
 public class JavaOclRealTest {
 
@@ -43,14 +42,16 @@ public class JavaOclRealTest {
 
 		Set<OclReal> realSet0 = new HashSet<OclReal>();
 		realSet0.add(real0);
-		oclRealSet0 = myStandardLibraryFactory.createOclSet(realSet0);
+		oclRealSet0 =
+				myStandardLibraryFactory.createOclSet(realSet0, TypeConstants.REAL);
 		Set<OclReal> realSet0_25 = new HashSet<OclReal>();
 		realSet0_25.add(real0_25);
-		oclRealSet0_25 = myStandardLibraryFactory.createOclSet(realSet0_25);
+		oclRealSet0_25 =
+				myStandardLibraryFactory.createOclSet(realSet0_25, TypeConstants.REAL);
 	}
 
 	@Test
-	public void testAbs() throws TestException {
+	public void testAbs() {
 
 		assertTrue(real0_75.abs().isEqualTo(real0_75).isTrue());
 		assertTrue(real_0_75.abs().isEqualTo(real0_75).isTrue());
@@ -58,7 +59,7 @@ public class JavaOclRealTest {
 	}
 
 	@Test
-	public void testAdd() throws TestException {
+	public void testAdd() {
 
 		assertTrue(real_0_25.add(real0_25).isEqualTo(real0).isTrue());
 		assertTrue(real0.add(real0_75).isEqualTo(real0_75).isTrue());
@@ -67,7 +68,7 @@ public class JavaOclRealTest {
 	}
 
 	@Test
-	public void testCompareTo() throws TestException {
+	public void testCompareTo() {
 
 		assertTrue(real0_25.compareTo(real0_25).isEqualTo(integer0).isTrue());
 		assertTrue(real0_25.compareTo(real0).isEqualTo(integer1).isTrue());
@@ -77,30 +78,18 @@ public class JavaOclRealTest {
 	}
 
 	@Test
-	public void testDivide() throws TestException {
+	public void testDivide() {
 
 		assertTrue(real0.divide(real0_25).isEqualTo(real0).isTrue());
 		assertTrue(real0_5.divide(real0_5).isEqualTo(real1).isTrue());
 		assertTrue(real0_25.divide(real0_5).isEqualTo(real0_5).isTrue());
 		assertTrue(real0_25.divide(real_0_5).isEqualTo(real_0_5).isTrue());
-
-		try {
-			real0_25.divide(real0);
-			fail("Invalid exception expected, because of division by zero.");
-		} catch (InvalidException e) {
-			// OK
-		}
-
-		try {
-			real0.divide(real0);
-			fail("Invalid exception expected, because of division by zero.");
-		} catch (InvalidException e) {
-			// OK
-		}
+		assertTrue(real0_25.divide(real0).oclIsInvalid().isTrue());
+		assertTrue(real0.divide(real0).oclIsInvalid().isTrue());
 	}
 
 	@Test
-	public void testFloor() throws TestException {
+	public void testFloor() {
 
 		assertTrue(real0.floor().isEqualTo(integer0).isTrue());
 		assertTrue(real0_25.floor().isEqualTo(integer0).isTrue());
@@ -109,7 +98,7 @@ public class JavaOclRealTest {
 	}
 
 	@Test
-	public void testIsGreaterEqual() throws TestException {
+	public void testIsGreaterEqual() {
 
 		assertTrue(real0.isGreaterEqual(real0).isTrue());
 		assertTrue(real0.isGreaterEqual(real_0_25).isTrue());
@@ -118,7 +107,7 @@ public class JavaOclRealTest {
 	}
 
 	@Test
-	public void testIsGreaterThan() throws TestException {
+	public void testIsGreaterThan() {
 
 		assertTrue(real0.isGreaterThan(real_0_25).isTrue());
 		assertFalse(real0.isGreaterThan(real0).isTrue());
@@ -127,7 +116,7 @@ public class JavaOclRealTest {
 	}
 
 	@Test
-	public void testIsLessEqual() throws TestException {
+	public void testIsLessEqual() {
 
 		assertTrue(real0.isLessEqual(real0).isTrue());
 		assertTrue(real_0_25.isLessEqual(real0).isTrue());
@@ -136,7 +125,7 @@ public class JavaOclRealTest {
 	}
 
 	@Test
-	public void testIsLessThan() throws TestException {
+	public void testIsLessThan() {
 
 		assertTrue(real_0_25.isLessThan(real0).isTrue());
 		assertFalse(real0.isLessThan(real0).isTrue());
@@ -145,7 +134,7 @@ public class JavaOclRealTest {
 	}
 
 	@Test
-	public void testMax() throws TestException {
+	public void testMax() {
 
 		assertTrue(real0_25.max(real0).isEqualTo(real0_25).isTrue());
 		assertTrue(real0_75.max(real0_25).isEqualTo(real0_75).isTrue());
@@ -156,7 +145,7 @@ public class JavaOclRealTest {
 	}
 
 	@Test
-	public void testMin() throws TestException {
+	public void testMin() {
 
 		assertTrue(real0_25.min(real0).isEqualTo(real0).isTrue());
 		assertTrue(real0_25.min(real0).isEqualTo(integer0).isTrue());
@@ -165,7 +154,7 @@ public class JavaOclRealTest {
 	}
 
 	@Test
-	public void testMultiply() throws TestException {
+	public void testMultiply() {
 
 		assertTrue(real0.multiply(real0).isEqualTo(real0).isTrue());
 		assertTrue(real0.multiply(integer0).isEqualTo(integer0).isTrue());
@@ -176,7 +165,7 @@ public class JavaOclRealTest {
 	}
 
 	@Test
-	public void testNegative() throws TestException {
+	public void testNegative() {
 
 		assertTrue(real0_25.negative().isEqualTo(real_0_25).isTrue());
 		assertTrue(real_0_75.negative().isEqualTo(real0_75).isTrue());
@@ -186,7 +175,7 @@ public class JavaOclRealTest {
 	}
 
 	@Test
-	public void testRound() throws TestException {
+	public void testRound() {
 
 		assertTrue(real0_25.round().isEqualTo(integer0).isTrue());
 		assertTrue(real0_75.round().isEqualTo(integer1).isTrue());
@@ -197,7 +186,7 @@ public class JavaOclRealTest {
 	}
 
 	@Test
-	public void testSubtract() throws TestException {
+	public void testSubtract() {
 
 		assertTrue(real0_25.subtract(real0).isEqualTo(real0_25).isTrue());
 		assertTrue(real0_25.subtract(integer0).isEqualTo(real0_25).isTrue());
@@ -207,7 +196,7 @@ public class JavaOclRealTest {
 	}
 
 	@Test
-	public void testAsSet() throws TestException {
+	public void testAsSet() {
 
 		assertTrue(real0.asSet().isEqualTo(oclRealSet0).isTrue());
 		assertTrue(real0_25.asSet().isEqualTo(oclRealSet0_25).isTrue());

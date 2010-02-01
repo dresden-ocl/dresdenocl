@@ -83,7 +83,7 @@ public class JavaModelInstanceBoolean extends AbstractModelInstanceBoolean
 
 		/* Initialize the type. */
 		this.myTypes = new HashSet<Type>();
-		this.myTypes.add(PrimitiveAndCollectionTypeConstants.MODEL_TYPE_BOOLEAN);
+		this.myTypes.add(TypeConstants.BOOLEAN);
 
 		/* Probably debug the exit of this method. */
 		if (LOGGER.isDebugEnabled()) {

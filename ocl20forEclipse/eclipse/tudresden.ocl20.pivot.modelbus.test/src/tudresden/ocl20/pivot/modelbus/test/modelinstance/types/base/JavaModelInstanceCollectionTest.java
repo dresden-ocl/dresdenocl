@@ -40,7 +40,7 @@ import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceString;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.base.BasisJavaModelInstanceFactory;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.base.JavaModelInstanceCollection;
-import tudresden.ocl20.pivot.modelbus.modelinstance.types.base.PrimitiveAndCollectionTypeConstants;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.base.TypeConstants;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 
 /**
@@ -75,16 +75,16 @@ public class JavaModelInstanceCollectionTest {
 	public static void setUp() throws ModelAccessException {
 
 		/* Get a collection type from the model. */
-		typeBag = PrimitiveAndCollectionTypeConstants.MODEL_TYPE_BAG;
+		typeBag = TypeConstants.BAG;
 
 		/* Get a collection type from the model. */
-		typeOrderedSet = PrimitiveAndCollectionTypeConstants.MODEL_TYPE_ORDERED_SET;
+		typeOrderedSet = TypeConstants.ORDERED_SET;
 
 		/* Get a collection type from the model. */
-		typeSequence = PrimitiveAndCollectionTypeConstants.MODEL_TYPE_SEQUENCE;
+		typeSequence = TypeConstants.SEQUENCE;
 
 		/* Get a collection type from the model. */
-		typeSet = PrimitiveAndCollectionTypeConstants.MODEL_TYPE_SET;
+		typeSet = TypeConstants.SET;
 	}
 
 	/**

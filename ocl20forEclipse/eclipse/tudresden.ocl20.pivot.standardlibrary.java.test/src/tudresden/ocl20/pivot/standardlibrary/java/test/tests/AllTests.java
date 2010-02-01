@@ -10,7 +10,8 @@ import org.junit.runners.Suite;
  * 
  */
 @RunWith(Suite.class)
-@Suite.SuiteClasses( { JavaOclIntegerTest.class, JavaOclRealTest.class, JavaOclCollectionTest.class })
+@Suite.SuiteClasses( { JavaOclIntegerTest.class, JavaOclRealTest.class,
+		JavaOclCollectionTest.class, JavaOclSortedCollectionTest.class })
 public class AllTests {
 
 }

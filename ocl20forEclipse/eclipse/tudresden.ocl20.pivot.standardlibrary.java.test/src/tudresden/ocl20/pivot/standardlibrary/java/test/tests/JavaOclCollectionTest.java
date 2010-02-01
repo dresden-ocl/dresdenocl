@@ -18,21 +18,27 @@ import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclReal;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.factory.IStandardLibraryFactory;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.base.TypeConstants;
 
 // TODO Michael: nested collections
+// FIXME Michael: strict and non-strict evaluation
 public class JavaOclCollectionTest {
 
 	private final IStandardLibraryFactory myStandardLibraryFactory =
 			TestPerformer.getInstance().getSLFactory();
 
 	private final OclCollection<OclAny> emptySet =
-			myStandardLibraryFactory.createOclSet(new HashSet<OclAny>());
+			myStandardLibraryFactory.createOclSet(new HashSet<Object>(),
+					TypeConstants.ANY);
 	private final OclCollection<OclAny> emptyBag =
-			myStandardLibraryFactory.createOclBag(new ArrayList<OclAny>());
+			myStandardLibraryFactory.createOclBag(new ArrayList<Object>(),
+					TypeConstants.ANY);
 	private final OclCollection<OclAny> emptyOrderedSet =
-			myStandardLibraryFactory.createOclOrderedSet(new UniqueEList<OclAny>());
+			myStandardLibraryFactory.createOclOrderedSet(new UniqueEList<Object>(),
+					TypeConstants.ANY);
 	private final OclCollection<OclAny> emptySequence =
-			myStandardLibraryFactory.createOclSequence(new ArrayList<OclAny>());
+			myStandardLibraryFactory.createOclSequence(new ArrayList<Object>(),
+					TypeConstants.ANY);
 
 	private OclCollection<OclReal> oclSet;
 	private OclCollection<OclReal> oclBag;
@@ -53,52 +59,60 @@ public class JavaOclCollectionTest {
 			myStandardLibraryFactory.createOclInteger(0L);
 	private final OclInteger integer1 =
 			myStandardLibraryFactory.createOclInteger(1L);
+	private final OclInteger integer2 =
+			myStandardLibraryFactory.createOclInteger(2L);
 
-//	 private final OclReal undefined =
-//	 (OclReal) myStandardLibraryFactory.createOclUndefined(oclReal0_5
-//	 .getModelInstanceReal().getTypes().iterator().next(),
-//	 "undefined value");
-//	
-//	 private final OclReal invalid =
-//	 (OclReal) myStandardLibraryFactory.createOclInvalid(oclReal0_5
-//	 .getModelInstanceReal().getTypes().iterator().next(),
-//	 new RuntimeException("invalid value"));
+	private final OclReal undefined =
+			(OclReal) myStandardLibraryFactory.createOclUndefined(oclReal0_5
+					.getModelInstanceReal().getTypes().iterator().next(),
+					"undefined value");
+
+//	private final OclReal invalid =
+//			(OclReal) myStandardLibraryFactory.createOclInvalid(oclReal0_5
+//					.getModelInstanceReal().getTypes().iterator().next(),
+//					new RuntimeException("an invalid value"));
 
 	@Before
 	public void init() {
 
 		Set<OclReal> realSet = new HashSet<OclReal>();
 		realSet.add(oclReal0_5);
-		oclSet = myStandardLibraryFactory.createOclSet(realSet);
+		oclSet = myStandardLibraryFactory.createOclSet(realSet, TypeConstants.REAL);
 
 		List<OclReal> realBag = new ArrayList<OclReal>();
 		realBag.add(oclReal0_5);
-		oclBag = myStandardLibraryFactory.createOclBag(realBag);
+		oclBag = myStandardLibraryFactory.createOclBag(realBag, TypeConstants.REAL);
 
 		UniqueEList<OclReal> realOrderedSet = new UniqueEList<OclReal>();
 		realOrderedSet.add(oclReal0_5);
 		oclOrderedSet =
-				myStandardLibraryFactory.createOclOrderedSet(realOrderedSet);
+				myStandardLibraryFactory.createOclOrderedSet(realOrderedSet,
+						TypeConstants.REAL);
 
-		oclSequence = myStandardLibraryFactory.createOclSequence(realBag);
+		oclSequence =
+				myStandardLibraryFactory.createOclSequence(realBag, TypeConstants.REAL);
 
 		realSet.add(oclReal1_5);
-		// realSet.add(undefined);
+		 realSet.add(undefined);
 		// realSet.add(invalid);
-		oclSet2 = myStandardLibraryFactory.createOclSet(realSet);
+		oclSet2 =
+				myStandardLibraryFactory.createOclSet(realSet, TypeConstants.REAL);
 
 		realBag.add(oclReal1_5);
-		// realBag.add(undefined);
+		 realBag.add(undefined);
 		// realBag.add(invalid);
-		oclBag2 = myStandardLibraryFactory.createOclBag(realBag);
+		oclBag2 =
+				myStandardLibraryFactory.createOclBag(realBag, TypeConstants.REAL);
 
 		realOrderedSet.add(oclReal1_5);
-		// realOrderedSet.add(undefined);
+		 realOrderedSet.add(undefined);
 		// realOrderedSet.add(invalid);
 		oclOrderedSet2 =
-				myStandardLibraryFactory.createOclOrderedSet(realOrderedSet);
+				myStandardLibraryFactory.createOclOrderedSet(realOrderedSet,
+						TypeConstants.REAL);
 
-		oclSequence2 = myStandardLibraryFactory.createOclSequence(realBag);
+		oclSequence2 =
+				myStandardLibraryFactory.createOclSequence(realBag, TypeConstants.REAL);
 
 	}
 
@@ -244,21 +258,21 @@ public class JavaOclCollectionTest {
 		assertTrue(emptyOrderedSet.excludesAll(emptySet).isTrue());
 		assertTrue(emptyBag.excludesAll(emptySet).isTrue());
 		assertTrue(emptySequence.excludesAll(emptySet).isTrue());
-		
+
 		assertFalse(oclSet2.excludesAll(oclSet).isTrue());
 		assertFalse(oclSet2.excludesAll(oclOrderedSet).isTrue());
 		assertFalse(oclSet2.excludesAll(oclBag).isTrue());
 		assertFalse(oclSet2.excludesAll(oclSequence).isTrue());
-		
+
 		assertFalse(oclSet2.excludesAll(oclSet2).isTrue());
 		assertFalse(oclOrderedSet2.excludesAll(oclOrderedSet2).isTrue());
 		assertFalse(oclBag2.excludesAll(oclBag2).isTrue());
 		assertFalse(oclSequence2.excludesAll(oclSequence2).isTrue());
 	}
-	
+
 	@Test
 	public void testIncludes() {
-		
+
 		assertFalse(emptySet.includes(oclReal0_5).isTrue());
 		assertFalse(emptyOrderedSet.includes(oclReal0_5).isTrue());
 		assertFalse(emptyBag.includes(oclReal0_5).isTrue());
@@ -282,72 +296,85 @@ public class JavaOclCollectionTest {
 		assertTrue(emptyOrderedSet.includesAll(emptySet).isTrue());
 		assertTrue(emptyBag.includesAll(emptySet).isTrue());
 		assertTrue(emptySequence.includesAll(emptySet).isTrue());
-		
+
 		assertTrue(oclSet2.includesAll(oclSet).isTrue());
 		assertTrue(oclSet2.includesAll(oclOrderedSet).isTrue());
 		assertTrue(oclSet2.includesAll(oclBag).isTrue());
 		assertTrue(oclSet2.includesAll(oclSequence).isTrue());
-		
+
 		assertTrue(oclSet2.includesAll(oclSet2).isTrue());
 		assertTrue(oclOrderedSet2.includesAll(oclOrderedSet2).isTrue());
 		assertTrue(oclBag2.includesAll(oclBag2).isTrue());
 		assertTrue(oclSequence2.includesAll(oclSequence2).isTrue());
-		
+
 		assertFalse(oclSet.includesAll(oclSet2).isTrue());
 		assertFalse(oclOrderedSet.includesAll(oclOrderedSet2).isTrue());
 		assertFalse(oclBag.includesAll(oclBag2).isTrue());
 		assertFalse(oclSequence.includesAll(oclSequence2).isTrue());
 	}
-	
+
 	@Test
 	public void testIsEmpty() {
-		
+
 		assertTrue(emptySet.isEmpty().isTrue());
 		assertTrue(emptyOrderedSet.isEmpty().isTrue());
 		assertTrue(emptyBag.isEmpty().isTrue());
 		assertTrue(emptySequence.isEmpty().isTrue());
-		
+
 		assertFalse(oclSet.isEmpty().isTrue());
 		assertFalse(oclOrderedSet.isEmpty().isTrue());
 		assertFalse(oclBag.isEmpty().isTrue());
 		assertFalse(oclSequence.isEmpty().isTrue());
 	}
-	
+
 	@Test
 	public void testIsNotEmpty() {
-		
+
 		assertFalse(emptySet.notEmpty().isTrue());
 		assertFalse(emptyOrderedSet.notEmpty().isTrue());
 		assertFalse(emptyBag.notEmpty().isTrue());
 		assertFalse(emptySequence.notEmpty().isTrue());
-		
+
 		assertTrue(oclSet.notEmpty().isTrue());
 		assertTrue(oclOrderedSet.notEmpty().isTrue());
 		assertTrue(oclBag.notEmpty().isTrue());
 		assertTrue(oclSequence.notEmpty().isTrue());
 	}
-	
-	
+
 	@Test
 	public void testProduct() {
-		
+
 		fail("Method is not yet implemented.");
 	}
-	
+
 	@Test
 	public void testSize() {
-		
+
 		assertTrue(emptySet.size().isEqualTo(integer0).isTrue());
 		assertTrue(emptyOrderedSet.size().isEqualTo(integer0).isTrue());
 		assertTrue(emptyBag.size().isEqualTo(integer0).isTrue());
 		assertTrue(emptySequence.size().isEqualTo(integer0).isTrue());
-		
+
 		assertTrue(oclSet.size().isEqualTo(integer1).isTrue());
 		assertTrue(oclOrderedSet.size().isEqualTo(integer1).isTrue());
 		assertTrue(oclBag.size().isEqualTo(integer1).isTrue());
 		assertTrue(oclSequence.size().isEqualTo(integer1).isTrue());
 	}
-	
+
+	@Test
+	public void testSum() {
+
+		assertTrue(emptySet.sum().isEqualTo(integer0).isTrue());
+		assertTrue(emptyOrderedSet.sum().isEqualTo(integer0).isTrue());
+		assertTrue(emptyBag.sum().isEqualTo(integer0).isTrue());
+		assertTrue(emptySequence.sum().isEqualTo(integer0).isTrue());
+
+		assertTrue(oclSet2.sum().isEqualTo(integer2).isTrue());
+		assertTrue(oclOrderedSet2.sum().isEqualTo(integer2).isTrue());
+		assertTrue(oclBag2.sum().isEqualTo(integer2).isTrue());
+		assertTrue(oclSequence2.sum().isEqualTo(integer2).isTrue());
+	}
+
 	// @Test
 	// public void testExcluding() throws TestException {
 	//

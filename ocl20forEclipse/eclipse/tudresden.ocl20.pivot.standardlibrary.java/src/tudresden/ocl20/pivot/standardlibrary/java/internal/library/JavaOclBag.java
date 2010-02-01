@@ -40,6 +40,8 @@ import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBoolean;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSet;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceCollection;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.base.TypeConstants;
+import tudresden.ocl20.pivot.pivotmodel.Type;
 import tudresden.ocl20.pivot.standardlibrary.java.factory.JavaStandardLibraryFactory;
 
 /**
@@ -55,19 +57,20 @@ public class JavaOclBag<T extends OclAny> extends JavaOclUnsortedCollection<T>
 		implements OclBag<T> {
 
 	public JavaOclBag(
-			IModelInstanceCollection<IModelInstanceElement> imiCollection) {
+			IModelInstanceCollection<IModelInstanceElement> imiCollection,
+			Type genericType) {
 
-		super(imiCollection);
+		super(imiCollection, genericType);
 	}
 
-	public JavaOclBag(String undefinedReason) {
+	public JavaOclBag(String undefinedReason, Type genericType) {
 
-		super(undefinedReason);
+		super(undefinedReason, genericType);
 	}
 
-	public JavaOclBag(Throwable invalidReason) {
+	public JavaOclBag(Throwable invalidReason, Type genericType) {
 
-		super(invalidReason);
+		super(invalidReason, genericType);
 	}
 
 	/*
@@ -78,60 +81,63 @@ public class JavaOclBag<T extends OclAny> extends JavaOclUnsortedCollection<T>
 	 */
 	public OclBoolean isEqualTo(OclAny that) {
 
-		OclBoolean result;
+		OclBoolean result = null;
 
-		checkUndefinedAndInvalid(this, that);
+		result = checkIsEqualTo(that);
 
-		/* Check if the given object is no OclBag. */
-		if (!(that instanceof OclBag)) {
-			result = JavaOclBoolean.getInstance(false);
-		}
+		if (result == null) {
 
-		/* Else compare the two Bags. */
-		else {
-
-			boolean booleanResult;
-
-			// bagList needs to be a copy
-			Collection<IModelInstanceElement> bagList1 =
-					new ArrayList<IModelInstanceElement>(this
-							.getModelInstanceCollection().getCollection());
-			Collection<IModelInstanceElement> bagList2 =
-					((IModelInstanceCollection) that.getModelInstanceElement())
-							.getCollection();
-
-			/* Check if bagList1 and bagList2 have the same size. */
-			if (bagList1.size() != bagList2.size()) {
-				booleanResult = false;
-			}
-			else if (bagList1.isEmpty() && bagList2.isEmpty()) {
-				booleanResult = true;
+			/* Check if the given object is no OclBag. */
+			if (!(that instanceof OclBag)) {
+				result = JavaOclBoolean.getInstance(false);
 			}
 
-			/* Else iterate over the elements and compare them. */
+			/* Else compare the two Bags. */
 			else {
-				for (IModelInstanceElement anElement : bagList2) {
 
-					/* check if anElement is in both lists. */
-					if (bagList1.contains(anElement)) {
-						bagList1.remove(anElement);
-					}
+				boolean booleanResult;
 
-					else {
-						booleanResult = false;
-						break;
-					}
+				// bagList needs to be a copy
+				Collection<IModelInstanceElement> bagList1 =
+						new ArrayList<IModelInstanceElement>(this
+								.getModelInstanceCollection().getCollection());
+				Collection<IModelInstanceElement> bagList2 =
+						((IModelInstanceCollection) that.getModelInstanceElement())
+								.getCollection();
+
+				/* Check if bagList1 and bagList2 have the same size. */
+				if (bagList1.size() != bagList2.size()) {
+					booleanResult = false;
+				}
+				else if (bagList1.isEmpty() && bagList2.isEmpty()) {
+					booleanResult = true;
 				}
 
-				/*
-				 * If bagList1 is not empty, there are more elements in bagList1 -> not
-				 * equal
-				 */
-				booleanResult = bagList1.isEmpty();
+				/* Else iterate over the elements and compare them. */
+				else {
+					for (IModelInstanceElement anElement : bagList2) {
 
+						/* check if anElement is in both lists. */
+						if (bagList1.contains(anElement)) {
+							bagList1.remove(anElement);
+						}
+
+						else {
+							booleanResult = false;
+							break;
+						}
+					}
+
+					/*
+					 * If bagList1 is not empty, there are more elements in bagList1 ->
+					 * not equal
+					 */
+					booleanResult = bagList1.isEmpty();
+
+				}
+
+				result = JavaOclBoolean.getInstance(booleanResult);
 			}
-
-			result = JavaOclBoolean.getInstance(booleanResult);
 		}
 
 		return result;
@@ -145,23 +151,34 @@ public class JavaOclBag<T extends OclAny> extends JavaOclUnsortedCollection<T>
 	 */
 	public OclBag<T> excluding(T that) {
 
-		OclBag<T> result;
+		OclBag<T> result = null;
 
-		checkUndefinedAndInvalid(this, that);
+		result =
+				checkInvalid(TypeConstants
+						.BAG(genericType), this, that);
 
-		/* Else try to remove the given Object. */
+		if (result == null)
+			result =
+					checkUndefined("excluding", TypeConstants
+							.BAG(genericType), this);
 
-		List<IModelInstanceElement> resultCollection;
+		if (result == null) {
+			/* Else try to remove the given Object. */
 
-		resultCollection =
-				new ArrayList<IModelInstanceElement>(getModelInstanceCollection()
-						.getCollection());
+			List<IModelInstanceElement> resultCollection;
 
-		while (resultCollection.remove(that.getModelInstanceElement())) {
-			/* Remove the given object as often as possible. */
+			resultCollection =
+					new ArrayList<IModelInstanceElement>(getModelInstanceCollection()
+							.getCollection());
+
+			while (resultCollection.remove(that.getModelInstanceElement())) {
+				/* Remove the given object as often as possible. */
+			}
+
+			result =
+					JavaStandardLibraryFactory.INSTANCE.createOclBag(resultCollection,
+							genericType);
 		}
-
-		result = JavaStandardLibraryFactory.INSTANCE.createOclBag(resultCollection);
 
 		return result;
 	}
@@ -171,40 +188,51 @@ public class JavaOclBag<T extends OclAny> extends JavaOclUnsortedCollection<T>
 	 * @see
 	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection#flatten ()
 	 */
+	// FIXME Michael: Should be called recursively!
 	public <T2 extends OclAny> OclBag<T2> flatten() {
 
-		OclBag<T2> result;
+		OclBag<T2> result = null;
 
-		List<IModelInstanceElement> flat = new ArrayList<IModelInstanceElement>();
+		result =
+				checkInvalid(TypeConstants
+						.BAG(genericType), this);
 
-		checkUndefinedAndInvalid(this);
+		if (result == null)
+			result =
+					checkUndefined("flatten", TypeConstants
+							.BAG(genericType), this);
 
-		/* Iterate over this bag. */
-		for (IModelInstanceElement element : getModelInstanceCollection()
-				.getCollection()) {
+		if (result == null) {
+			List<IModelInstanceElement> flat = new ArrayList<IModelInstanceElement>();
 
-			/*
-			 * nested collections are flattened, i.e. their elements are added to the
-			 * result
-			 */
-			if (element instanceof IModelInstanceCollection<?>) {
-				IModelInstanceCollection<IModelInstanceElement> collection;
-				collection =
-						((IModelInstanceCollection<IModelInstanceElement>) element);
+			/* Iterate over this bag. */
+			for (IModelInstanceElement element : getModelInstanceCollection()
+					.getCollection()) {
 
-				for (IModelInstanceElement collectionElement : collection
-						.getCollection()) {
-					flat.add(collectionElement);
+				/*
+				 * nested collections are flattened, i.e. their elements are added to
+				 * the result
+				 */
+				if (element instanceof IModelInstanceCollection<?>) {
+					IModelInstanceCollection<IModelInstanceElement> collection;
+					collection =
+							((IModelInstanceCollection<IModelInstanceElement>) element);
+
+					for (IModelInstanceElement collectionElement : collection
+							.getCollection()) {
+						flat.add(collectionElement);
+					}
+				}
+
+				/* other elements are simply added */
+				else {
+					flat.add(element);
 				}
 			}
 
-			/* other elements are simply added */
-			else {
-				flat.add(element);
-			}
+			result =
+					JavaStandardLibraryFactory.INSTANCE.createOclBag(flat, genericType);
 		}
-
-		result = JavaStandardLibraryFactory.INSTANCE.createOclBag(flat);
 
 		return result;
 	}
@@ -217,17 +245,31 @@ public class JavaOclBag<T extends OclAny> extends JavaOclUnsortedCollection<T>
 	 */
 	public OclBag<T> including(T anObject) {
 
-		OclBag<T> result;
+		OclBag<T> result = null;
 
-		List<IModelInstanceElement> include =
-				new ArrayList<IModelInstanceElement>();
+		result =
+				checkInvalid(TypeConstants
+						.BAG(genericType), this, anObject);
 
-		checkUndefinedAndInvalid(this);
+		if (result == null)
+			result =
+					checkUndefined("including", TypeConstants
+							.BAG(genericType), this);
 
-		include.addAll(getModelInstanceCollection().getCollection());
-		include.add(anObject.getModelInstanceElement());
+		if (result == null) {
+			List<IModelInstanceElement> include =
+					new ArrayList<IModelInstanceElement>();
 
-		result = JavaStandardLibraryFactory.INSTANCE.createOclBag(include);
+			checkInvalid(TypeConstants
+					.BAG(genericType), this);
+
+			include.addAll(getModelInstanceCollection().getCollection());
+			include.add(anObject.getModelInstanceElement());
+
+			result =
+					JavaStandardLibraryFactory.INSTANCE
+							.createOclBag(include, genericType);
+		}
 
 		return result;
 	}
@@ -239,12 +281,19 @@ public class JavaOclBag<T extends OclAny> extends JavaOclUnsortedCollection<T>
 	 */
 	public OclBag<T> intersection(OclBag<T> that) {
 
-		OclBag<T> result;
+		OclBag<T> result = null;
+
+		result =
+				checkInvalid(TypeConstants
+						.BAG(genericType), this, that);
+
+		if (result == null)
+			result =
+					checkUndefined("intersection", TypeConstants
+							.BAG(genericType), this, that);
 
 		List<IModelInstanceElement> intersection =
 				new ArrayList<IModelInstanceElement>();
-
-		checkUndefinedAndInvalid(this, that);
 
 		List<IModelInstanceElement> otherCollectionCopy =
 				new ArrayList<IModelInstanceElement>(that.getModelInstanceCollection()
@@ -262,7 +311,9 @@ public class JavaOclBag<T extends OclAny> extends JavaOclUnsortedCollection<T>
 			}
 		}
 
-		result = JavaStandardLibraryFactory.INSTANCE.createOclBag(intersection);
+		result =
+				JavaStandardLibraryFactory.INSTANCE.createOclBag(intersection,
+						genericType);
 
 		return result;
 	}
@@ -275,19 +326,30 @@ public class JavaOclBag<T extends OclAny> extends JavaOclUnsortedCollection<T>
 	 */
 	public OclBag<T> union(OclSet<T> that) {
 
-		OclBag<T> result;
+		OclBag<T> result = null;
 
-		List<IModelInstanceElement> union = new ArrayList<IModelInstanceElement>();
+		result =
+				checkInvalid(TypeConstants
+						.BAG(genericType), this, that);
 
-		checkUndefinedAndInvalid(this, that);
+		if (result == null)
+			result =
+					checkUndefined("union", TypeConstants
+							.BAG(genericType), this, that);
 
-		Collection<IModelInstanceElement> otherCollection =
-				that.getModelInstanceCollection().getCollection();
+		if (result == null) {
+			List<IModelInstanceElement> union =
+					new ArrayList<IModelInstanceElement>();
 
-		union.addAll(getModelInstanceCollection().getCollection());
-		union.addAll(otherCollection);
+			Collection<IModelInstanceElement> otherCollection =
+					that.getModelInstanceCollection().getCollection();
 
-		result = JavaStandardLibraryFactory.INSTANCE.createOclBag(union);
+			union.addAll(getModelInstanceCollection().getCollection());
+			union.addAll(otherCollection);
+
+			result =
+					JavaStandardLibraryFactory.INSTANCE.createOclBag(union, genericType);
+		}
 
 		return result;
 	}

@@ -1,12 +1,13 @@
 package tudresden.ocl20.pivot.standardlibrary.java.internal.library;
 
+import java.util.HashSet;
+
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBoolean;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSet;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclVoid;
+import tudresden.ocl20.pivot.essentialocl.types.TypesFactory;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceVoid;
-import tudresden.ocl20.pivot.pivotmodel.Operation;
-import tudresden.ocl20.pivot.standardlibrary.java.exceptions.InvalidException;
 import tudresden.ocl20.pivot.standardlibrary.java.factory.JavaStandardLibraryFactory;
 
 public class JavaOclVoid extends JavaOclAny implements OclVoid {
@@ -51,28 +52,8 @@ public class JavaOclVoid extends JavaOclAny implements OclVoid {
 	 */
 	public <T extends OclAny> OclSet<T> asSet() {
 
-		throw new InvalidException(new UnsupportedOperationException(
-				"asSet() is not defined on OclVoid."));
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny#invokeOperation
-	 * (tudresden.ocl20.pivot.pivotmodel.Operation,
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny[])
-	 */
-	public OclAny invokeOperation(Operation operation, OclAny... parameters) {
-
-		OclAny result;
-
-		result =
-				JavaStandardLibraryFactory.INSTANCE.createOclUndefined(operation
-						.getType(), "Tried to invoke operation " + operation + " on "
-						+ this);
-
-		return result;
-
+		return JavaStandardLibraryFactory.INSTANCE.createOclSet(new HashSet<T>(),
+				TypesFactory.INSTANCE.createAnyType());
 	}
 
 	/*
@@ -83,10 +64,13 @@ public class JavaOclVoid extends JavaOclAny implements OclVoid {
 	 */
 	public OclBoolean isEqualTo(OclAny object2) {
 
-		// FIXME Michael: or is null == null allowed? in OCL one should use
-		// oclIsUndefined
-		throw new InvalidException(new UnsupportedOperationException(
-				"isEqualTo(OclAny) is not defined on OclVoid."));
+		// standard, p. 140f
+		if (object2 instanceof OclVoid) {
+			return JavaOclBoolean.getInstance(true);
+		}
+		else {
+			return JavaOclBoolean.getInstance(false);
+		}
 	}
 
 	@Override

@@ -42,6 +42,8 @@ import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSet;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclUnsortedCollection;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceCollection;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.base.TypeConstants;
+import tudresden.ocl20.pivot.pivotmodel.Type;
 import tudresden.ocl20.pivot.standardlibrary.java.factory.JavaStandardLibraryFactory;
 
 /**
@@ -56,19 +58,20 @@ public abstract class JavaOclUnsortedCollection<T extends OclAny> extends
 		JavaOclCollection<T> implements OclUnsortedCollection<T> {
 
 	public JavaOclUnsortedCollection(
-			IModelInstanceCollection<IModelInstanceElement> imiCollection) {
+			IModelInstanceCollection<IModelInstanceElement> imiCollection,
+			Type genericType) {
 
-		super(imiCollection);
+		super(imiCollection, genericType);
 	}
 
-	public JavaOclUnsortedCollection(String undefinedReason) {
+	public JavaOclUnsortedCollection(String undefinedReason, Type genericType) {
 
-		super(undefinedReason);
+		super(undefinedReason, genericType);
 	}
 
-	public JavaOclUnsortedCollection(Throwable invalidReason) {
+	public JavaOclUnsortedCollection(Throwable invalidReason, Type genericType) {
 
-		super(invalidReason);
+		super(invalidReason, genericType);
 	}
 
 	/*
@@ -81,15 +84,26 @@ public abstract class JavaOclUnsortedCollection<T extends OclAny> extends
 
 		OclBag<T> result;
 
-		checkUndefinedAndInvalid(this, aBag);
+		result =
+				checkInvalid(TypeConstants
+						.BAG(genericType), this, aBag);
 
-		/* Else compute the result. */
-		List<IModelInstanceElement> union = new ArrayList<IModelInstanceElement>();
+		if (result == null)
+			result =
+					checkUndefined("union", TypeConstants
+							.BAG(genericType), this, aBag);
 
-		union.addAll(this.getModelInstanceCollection().getCollection());
-		union.addAll(aBag.getModelInstanceCollection().getCollection());
+		if (result == null) {
+			/* Else compute the result. */
+			List<IModelInstanceElement> union =
+					new ArrayList<IModelInstanceElement>();
 
-		result = JavaStandardLibraryFactory.INSTANCE.createOclBag(union);
+			union.addAll(this.getModelInstanceCollection().getCollection());
+			union.addAll(aBag.getModelInstanceCollection().getCollection());
+
+			result =
+					JavaStandardLibraryFactory.INSTANCE.createOclBag(union, genericType);
+		}
 
 		return result;
 	}
@@ -104,25 +118,37 @@ public abstract class JavaOclUnsortedCollection<T extends OclAny> extends
 
 		OclSet<T> result;
 
-		checkUndefinedAndInvalid(this, aSet);
+		result =
+				checkInvalid(TypeConstants
+						.SET(genericType), this, aSet);
 
-		/* Else compute the result. */
-		Collection<IModelInstanceElement> otherSet;
-		Set<IModelInstanceElement> intersection;
+		if (result == null)
+			result =
+					checkUndefined("intersection", TypeConstants
+							.SET(genericType), this, aSet);
 
-		otherSet = aSet.getModelInstanceCollection().getCollection();
-		intersection = new HashSet<IModelInstanceElement>();
+		if (result == null) {
+			/* Else compute the result. */
+			Collection<IModelInstanceElement> otherSet;
+			Set<IModelInstanceElement> intersection;
 
-		for (IModelInstanceElement anElement : otherSet) {
-			if (this.getModelInstanceCollection().getCollection().contains(anElement)
-					&& !intersection.contains(anElement)) {
-				intersection.add(anElement);
+			otherSet = aSet.getModelInstanceCollection().getCollection();
+			intersection = new HashSet<IModelInstanceElement>();
+
+			for (IModelInstanceElement anElement : otherSet) {
+				if (this.getModelInstanceCollection().getCollection().contains(
+						anElement)
+						&& !intersection.contains(anElement)) {
+					intersection.add(anElement);
+				}
 			}
-		}
 
-		result = JavaStandardLibraryFactory.INSTANCE.createOclSet(intersection);
+			result =
+					JavaStandardLibraryFactory.INSTANCE.createOclSet(intersection,
+							genericType);
+		}
 
 		return result;
 	}
-	
+
 }

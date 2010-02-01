@@ -186,9 +186,9 @@ public abstract class AbstractModelInstanceCollection<T extends IModelInstanceEl
 
 		/* Only ordered sets and sequences are ordered. */
 		if (this
-				.isKindOf(PrimitiveAndCollectionTypeConstants.MODEL_TYPE_ORDERED_SET)
+				.isKindOf(TypeConstants.ORDERED_SET)
 				|| this
-						.isKindOf(PrimitiveAndCollectionTypeConstants.MODEL_TYPE_SEQUENCE)) {
+						.isKindOf(TypeConstants.SEQUENCE)) {
 			result = true;
 		}
 
@@ -222,8 +222,8 @@ public abstract class AbstractModelInstanceCollection<T extends IModelInstanceEl
 
 		/* Only ordered sets and sets are unique. */
 		if (this
-				.isKindOf(PrimitiveAndCollectionTypeConstants.MODEL_TYPE_ORDERED_SET)
-				|| this.isKindOf(PrimitiveAndCollectionTypeConstants.MODEL_TYPE_SET)) {
+				.isKindOf(TypeConstants.ORDERED_SET)
+				|| this.isKindOf(TypeConstants.SET)) {
 			result = true;
 		}
 

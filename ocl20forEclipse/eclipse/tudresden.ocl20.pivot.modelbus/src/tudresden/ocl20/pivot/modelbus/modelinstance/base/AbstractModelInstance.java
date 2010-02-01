@@ -43,7 +43,7 @@ import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceFactory;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceObject;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceVoid;
-import tudresden.ocl20.pivot.modelbus.modelinstance.types.base.PrimitiveAndCollectionTypeConstants;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.base.TypeConstants;
 import tudresden.ocl20.pivot.pivotmodel.MultiplicityElement;
 import tudresden.ocl20.pivot.pivotmodel.Operation;
 import tudresden.ocl20.pivot.pivotmodel.PrimitiveType;
@@ -130,13 +130,13 @@ public abstract class AbstractModelInstance implements IModelInstance {
 				if (multiplicityElement.isOrdered()) {
 					result =
 							factory.createModelInstanceElement(adapteeResult,
-									PrimitiveAndCollectionTypeConstants.MODEL_TYPE_ORDERED_SET);
+									TypeConstants.ORDERED_SET);
 				}
 	
 				else {
 					result =
 							factory.createModelInstanceElement(adapteeResult,
-									PrimitiveAndCollectionTypeConstants.MODEL_TYPE_SET);
+									TypeConstants.SET);
 				}
 				// end. else
 			}
@@ -147,13 +147,13 @@ public abstract class AbstractModelInstance implements IModelInstance {
 				if (multiplicityElement.isOrdered()) {
 					result =
 							factory.createModelInstanceElement(adapteeResult,
-									PrimitiveAndCollectionTypeConstants.MODEL_TYPE_SEQUENCE);
+									TypeConstants.SEQUENCE);
 				}
 	
 				else {
 					result =
 							factory.createModelInstanceElement(adapteeResult,
-									PrimitiveAndCollectionTypeConstants.MODEL_TYPE_BAG);
+									TypeConstants.BAG);
 				}
 				// end else.
 			}

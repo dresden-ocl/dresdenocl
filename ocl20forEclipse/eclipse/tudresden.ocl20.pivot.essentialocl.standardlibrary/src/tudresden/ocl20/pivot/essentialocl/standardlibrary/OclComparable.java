@@ -30,7 +30,7 @@
  */
 package tudresden.ocl20.pivot.essentialocl.standardlibrary;
 
-public interface OclComparable {
+public interface OclComparable extends OclAny {
 
 	/**
 	 * Compare two OCL objects.

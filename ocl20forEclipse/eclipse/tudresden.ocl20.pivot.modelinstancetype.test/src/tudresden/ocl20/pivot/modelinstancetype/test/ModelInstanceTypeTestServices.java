@@ -38,7 +38,7 @@ import tudresden.ocl20.pivot.modelbus.model.IModel;
 import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance;
 import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceType;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceObject;
-import tudresden.ocl20.pivot.modelbus.modelinstance.types.base.PrimitiveAndCollectionTypeConstants;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.base.TypeConstants;
 import tudresden.ocl20.pivot.modelinstancetype.test.msg.ModelInstanceTypeTestSuiteMessages;
 import tudresden.ocl20.pivot.modelinstancetype.test.testmodel.TestModelTypesNames;
 import tudresden.ocl20.pivot.pivotmodel.PivotModelFactory;
@@ -665,7 +665,7 @@ public final class ModelInstanceTypeTestServices {
 				aProperty = PivotModelFactory.INSTANCE.createProperty();
 				aProperty.setName("booleanProperty" + index);
 				aProperty
-						.setType(PrimitiveAndCollectionTypeConstants.MODEL_TYPE_BOOLEAN);
+						.setType(TypeConstants.BOOLEAN);
 
 				primitiveTypeProviderClass.addProperty(aProperty);
 			}
@@ -677,7 +677,7 @@ public final class ModelInstanceTypeTestServices {
 				aProperty = PivotModelFactory.INSTANCE.createProperty();
 				aProperty.setName("integerProperty" + index);
 				aProperty
-						.setType(PrimitiveAndCollectionTypeConstants.MODEL_TYPE_INTEGER);
+						.setType(TypeConstants.INTEGER);
 
 				primitiveTypeProviderClass.addProperty(aProperty);
 			}
@@ -688,7 +688,7 @@ public final class ModelInstanceTypeTestServices {
 
 				aProperty = PivotModelFactory.INSTANCE.createProperty();
 				aProperty.setName("realProperty" + index);
-				aProperty.setType(PrimitiveAndCollectionTypeConstants.MODEL_TYPE_REAL);
+				aProperty.setType(TypeConstants.REAL);
 
 				primitiveTypeProviderClass.addProperty(aProperty);
 			}
@@ -700,7 +700,7 @@ public final class ModelInstanceTypeTestServices {
 				aProperty = PivotModelFactory.INSTANCE.createProperty();
 				aProperty.setName("stringProperty" + index);
 				aProperty
-						.setType(PrimitiveAndCollectionTypeConstants.MODEL_TYPE_STRING);
+						.setType(TypeConstants.STRING);
 
 				primitiveTypeProviderClass.addProperty(aProperty);
 			}
@@ -715,7 +715,7 @@ public final class ModelInstanceTypeTestServices {
 
 				aProperty = PivotModelFactory.INSTANCE.createProperty();
 				aProperty.setName("bagProperty" + index);
-				aProperty.setType(PrimitiveAndCollectionTypeConstants.MODEL_TYPE_BAG);
+				aProperty.setType(TypeConstants.BAG);
 
 				collectionTypeProviderClass.addProperty(aProperty);
 			}
@@ -727,7 +727,7 @@ public final class ModelInstanceTypeTestServices {
 				aProperty = PivotModelFactory.INSTANCE.createProperty();
 				aProperty.setName("orderedSetProperty" + index);
 				aProperty
-						.setType(PrimitiveAndCollectionTypeConstants.MODEL_TYPE_ORDERED_SET);
+						.setType(TypeConstants.ORDERED_SET);
 
 				collectionTypeProviderClass.addProperty(aProperty);
 			}
@@ -739,7 +739,7 @@ public final class ModelInstanceTypeTestServices {
 				aProperty = PivotModelFactory.INSTANCE.createProperty();
 				aProperty.setName("sequenceProperty" + index);
 				aProperty
-						.setType(PrimitiveAndCollectionTypeConstants.MODEL_TYPE_SEQUENCE);
+						.setType(TypeConstants.SEQUENCE);
 
 				collectionTypeProviderClass.addProperty(aProperty);
 			}
@@ -750,7 +750,7 @@ public final class ModelInstanceTypeTestServices {
 
 				aProperty = PivotModelFactory.INSTANCE.createProperty();
 				aProperty.setName("setProperty" + index);
-				aProperty.setType(PrimitiveAndCollectionTypeConstants.MODEL_TYPE_SET);
+				aProperty.setType(TypeConstants.SET);
 
 				collectionTypeProviderClass.addProperty(aProperty);
 			}

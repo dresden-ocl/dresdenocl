@@ -33,6 +33,7 @@ package tudresden.ocl20.pivot.standardlibrary.java.internal.library;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -43,11 +44,11 @@ import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclLibraryObject;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclType;
 import tudresden.ocl20.pivot.modelbus.modelinstance.exception.AsTypeCastException;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceInvalid;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceVoid;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.base.TypeConstants;
 import tudresden.ocl20.pivot.pivotmodel.Operation;
-import tudresden.ocl20.pivot.standardlibrary.java.exceptions.InvalidException;
-import tudresden.ocl20.pivot.standardlibrary.java.exceptions.UndefinedException;
-import tudresden.ocl20.pivot.standardlibrary.java.exceptions.UndefinedOrInvalidException;
+import tudresden.ocl20.pivot.pivotmodel.Type;
 import tudresden.ocl20.pivot.standardlibrary.java.factory.JavaStandardLibraryFactory;
 
 /**
@@ -117,8 +118,7 @@ public abstract class JavaOclAny implements OclAny {
 
 		this.invalidReason = invalidReason;
 
-		// FIXME Claas: Own type for Invalid in the ModelInstance?
-		this.imiElement = IModelInstanceVoid.INSTANCE;
+		this.imiElement = IModelInstanceInvalid.INSTANCE;
 	}
 
 	/**
@@ -244,7 +244,11 @@ public abstract class JavaOclAny implements OclAny {
 	 */
 	public OclBoolean oclIsUndefined() {
 
-		return JavaOclBoolean.getInstance(this.undefinedreason != null);
+		/*
+		 * see standard, p. 139; here, we use a different semantics, since invalid
+		 * should not be catched by an undefined check
+		 */
+		return JavaOclBoolean.getInstance((this.undefinedreason != null));
 	}
 
 	/*
@@ -257,20 +261,36 @@ public abstract class JavaOclAny implements OclAny {
 		return JavaOclBoolean.getInstance(this.invalidReason != null);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny#oclAsType(tudresden
+	 * .ocl20.pivot.essentialocl.standardlibrary.OclType)
+	 */
 	@SuppressWarnings("unchecked")
 	public <T extends OclAny> T oclAsType(OclType<T> type) {
 
-		checkUndefinedAndInvalid(this, type);
+		T result = null;
 
-		IModelInstanceElement castedTo;
-		try {
+		result = (T) checkInvalid(type.getType(), this, type);
 
-			castedTo = imiElement.asType(type.getType());
-			return (T) JavaStandardLibraryFactory.INSTANCE.createOclAny(castedTo);
+		if (result == null)
+			result = (T) checkUndefined("oclAsType", type.getType(), this);
 
-		} catch (AsTypeCastException e) {
-			throw new InvalidException(e);
+		if (result == null) {
+
+			IModelInstanceElement castedTo;
+			try {
+
+				castedTo = imiElement.asType(type.getType());
+				result = (T) JavaStandardLibraryFactory.INSTANCE.createOclAny(castedTo);
+
+			} catch (AsTypeCastException e) {
+				setInvalid(e);
+			}
 		}
+
+		return result;
 
 	}
 
@@ -282,10 +302,24 @@ public abstract class JavaOclAny implements OclAny {
 	 */
 	public <T extends OclAny> OclBoolean oclIsKindOf(OclType<T> typespec) {
 
-		checkUndefinedAndInvalid(this, typespec);
+		OclBoolean result = null;
 
-		final boolean isKindOf = imiElement.isKindOf(typespec.getType());
-		return JavaStandardLibraryFactory.INSTANCE.createOclBoolean(isKindOf);
+		result =
+				checkInvalid(TypeConstants.BOOLEAN,
+						this, typespec);
+
+		if (result == null)
+			result =
+					checkUndefined("oclIsKindOf",
+							TypeConstants.BOOLEAN, this);
+
+		if (result == null) {
+
+			final boolean isKindOf = imiElement.isKindOf(typespec.getType());
+			result = JavaStandardLibraryFactory.INSTANCE.createOclBoolean(isKindOf);
+		}
+
+		return result;
 	}
 
 	/*
@@ -296,10 +330,24 @@ public abstract class JavaOclAny implements OclAny {
 	 */
 	public <T extends OclAny> OclBoolean oclIsTypeOf(OclType<T> typespec) {
 
-		checkUndefinedAndInvalid(this, typespec);
+		OclBoolean result = null;
 
-		final boolean isTypeOf = imiElement.isTypeOf(typespec.getType());
-		return JavaStandardLibraryFactory.INSTANCE.createOclBoolean(isTypeOf);
+		result =
+				checkInvalid(TypeConstants.BOOLEAN,
+						this, typespec);
+
+		if (result == null)
+			result =
+					checkUndefined("oclIsTypeOf",
+							TypeConstants.BOOLEAN, this);
+
+		if (result == null) {
+
+			final boolean isTypeOf = imiElement.isTypeOf(typespec.getType());
+			result = JavaStandardLibraryFactory.INSTANCE.createOclBoolean(isTypeOf);
+		}
+
+		return result;
 	}
 
 	/*
@@ -312,6 +360,7 @@ public abstract class JavaOclAny implements OclAny {
 		return imiElement;
 	}
 
+	// TODO Michael: Fix JavaDoc
 	/**
 	 * This methods checks for all given {@link OclAny}s if they are either
 	 * invalid or undefined. If one of them is, an {@link InvalidException} or
@@ -319,7 +368,7 @@ public abstract class JavaOclAny implements OclAny {
 	 * standard library) should not catch these exceptions. The
 	 * {@link OclLibraryObject#invokeOperation(tudresden.ocl20.pivot.pivotmodel.Operation, OclAny...)
 	 * invokeOperation} method of {@link OclLibraryObject} will do that and will
-	 * generate an appropriate return type (since OclUndefined and OclVoid conform
+	 * generate an appropriate return type (since OclInvalid and OclVoid conform
 	 * to every other type except each other).
 	 * 
 	 * @param objects
@@ -329,68 +378,89 @@ public abstract class JavaOclAny implements OclAny {
 	 *           {@link UndefinedException}) to indicate that one element was
 	 *           invalid or undefined
 	 */
-	protected void checkUndefinedAndInvalid(OclAny... objects)
-			throws UndefinedOrInvalidException {
+	protected <T extends OclAny> T checkInvalid(Type returnType,
+			OclAny... objects) {
+
+		T result = null;
 
 		for (OclAny object : objects) {
 
-			if (object.getInvalidReason() != null)
-				throw new InvalidException(object.getInvalidReason());
-
-			if (object.getUndefinedReason() != null)
-				throw new UndefinedException(object.getUndefinedReason());
-
+			if (object.getInvalidReason() != null) {
+				result =
+						JavaStandardLibraryFactory.INSTANCE.createOclInvalid(returnType,
+								object.getInvalidReason());
+				break;
+			}
 		}
+
+		return result;
 	}
 
-	/**
-	 * Used to determine undefined or invalid return values for {@link Operation}
-	 * s.
-	 * 
-	 * @param operation
-	 *          the operation to call
-	 * @param args
-	 *          the arguments of the operation
-	 * @return <code>null</code> if neither the source nor the args are undefined
-	 *         or invalid, the undefined or invalid source else
-	 */
-	protected OclAny checkUndefinedAndInvalid(Operation operation, OclAny... args) {
+	protected <T extends OclAny> T checkUndefined(String methodName,
+			Type returnType, OclAny object, OclAny... args) {
 
-		OclAny result = null;
+		T result = null;
 
-		/* Check if the source is invalid. */
-		if (this.oclIsInvalid().isTrue()) {
+		if (object != null && object.getUndefinedReason() != null) {
+
 			result =
-					JavaStandardLibraryFactory.INSTANCE.createOclInvalid(operation
-							.getType(), this.getInvalidReason());
+					JavaStandardLibraryFactory.INSTANCE.createOclInvalid(returnType,
+							new RuntimeException("Cannot invoke operation " + methodName
+									+ " on null. Reason: " + object.getUndefinedReason()));
 		}
-
-		/* Else check if the source is undefined. */
-		else if (this.oclIsUndefined().isTrue()) {
-			result =
-					JavaStandardLibraryFactory.INSTANCE.createOclUndefined(operation
-							.getType(), this.getUndefinedReason());
-		}
-
-		if (result == null) {
-			/* The same for all the arguments */
+		else {
 			for (OclAny arg : args) {
 
-				if (arg.oclIsInvalid().isTrue()) {
-					result =
-							JavaStandardLibraryFactory.INSTANCE.createOclInvalid(operation
-									.getType(), arg.getInvalidReason());
-					break;
-				}
+				if (arg.getUndefinedReason() != null) {
 
-				else if (arg.oclIsUndefined().isTrue()) {
 					result =
-							JavaStandardLibraryFactory.INSTANCE.createOclUndefined(operation
-									.getType(), arg.getUndefinedReason());
+							JavaStandardLibraryFactory.INSTANCE.createOclInvalid(returnType,
+									new RuntimeException("Cannot invoke operation " + methodName
+											+ " with null as one of its arguments. Reason: "
+											+ arg.getUndefinedReason()));
 					break;
 				}
 			}
 		}
+
+		return result;
+	}
+
+	/**
+	 * Helper method that can be used by every subclass of {@link OclAny} to check
+	 * whether the object itself and its argument are both null or one of them is.
+	 * 
+	 * @param that
+	 *          the object to compare to
+	 * @return <code>true</code> if this and that are both undefined or invalid or
+	 *         <code>false</code> if one of them is. Returns <code>null</code> if
+	 *         both elements are neither undefined nor invalid.
+	 */
+	protected OclBoolean checkIsEqualTo(OclAny that) {
+
+		OclBoolean result = null;
+
+		if (this.undefinedreason != null && that.getUndefinedReason() != null)
+			result = JavaOclBoolean.getInstance(true);
+		else if (this.invalidReason != null && that.getInvalidReason() != null)
+			result = JavaOclBoolean.getInstance(true);
+		else if (this.undefinedreason != null || that.getUndefinedReason() != null)
+			result = JavaOclBoolean.getInstance(false);
+		else if (this.invalidReason != null || that.getInvalidReason() != null)
+			result = JavaOclBoolean.getInstance(false);
+
+		return result;
+	}
+
+	@SuppressWarnings("unchecked")
+	protected <T extends OclAny> T checkAsSet(Type genericType) {
+
+		T result = null;
+
+		if (this.undefinedreason != null)
+			result =
+					(T) JavaStandardLibraryFactory.INSTANCE.createOclSet(
+							new HashSet<Object>(), genericType);
 
 		return result;
 	}
@@ -402,123 +472,80 @@ public abstract class JavaOclAny implements OclAny {
 	 * (tudresden.ocl20.pivot.pivotmodel.Operation,
 	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny[])
 	 */
+	@SuppressWarnings("unchecked")
 	public OclAny invokeOperation(Operation operation, OclAny... args) {
 
-		OclAny result;
+		OclAny result = null;
 
-		if (this.oclIsInvalid().isTrue()) {
+		String opName;
+
+		opName = operation.getName();
+		/*
+		 * possibly map from operation name to standard library operation name
+		 * (e.g., "+" -> "add")
+		 */
+		opName = getOperationName(opName, args.length + 1);
+
+		/* translate arguments */
+		List<Class<? extends OclAny>> argClasses =
+				new LinkedList<Class<? extends OclAny>>();
+		for (OclAny arg : args) {
+			argClasses.add(arg.getClass());
+		}
+
+		Class<? extends OclAny> thisClass = this.getClass();
+
+		/* try to invoke the operation */
+		try {
+			Method methodToInvoke =
+					findMethod(opName, thisClass, argClasses.toArray(new Class[0]));
+
+			Object invocationResult = methodToInvoke.invoke(this, (Object[]) args);
+
+			result = (OclAny) invocationResult;
+
+		}
+		/* if anything goes wrong, wrap it in an InvalidException */
+		catch (SecurityException e) {
 			result =
 					JavaStandardLibraryFactory.INSTANCE.createOclInvalid(operation
-							.getType(), invalidReason);
-		}
-		else if (this.oclIsUndefined().isTrue()) {
+							.getType(), e);
+		} catch (NoSuchMethodException e) {
 			result =
-					JavaStandardLibraryFactory.INSTANCE.createOclUndefined(operation
-							.getType(), undefinedreason);
-		}
-		else {
+					JavaStandardLibraryFactory.INSTANCE.createOclInvalid(operation
+							.getType(), e);
+		} catch (IllegalArgumentException e) {
+			result =
+					JavaStandardLibraryFactory.INSTANCE.createOclInvalid(operation
+							.getType(), e);
+		} catch (IllegalAccessException e) {
+			result =
+					JavaStandardLibraryFactory.INSTANCE.createOclInvalid(operation
+							.getType(), e);
+		} catch (InvocationTargetException e) {
 
-			String opName;
-
-			opName = operation.getName();
-			/*
-			 * possibly map from operation name to standard library operation name
-			 * (e.g., "+" -> "add")
-			 */
-			opName = getOperationName(opName, args.length + 1);
-
-			/* translate arguments */
-			List<Class<? extends OclAny>> argClasses =
-					new LinkedList<Class<? extends OclAny>>();
-			for (OclAny arg : args) {
-				argClasses.add(arg.getClass());
-			}
-
-			Class<? extends OclAny> thisClass = this.getClass();
-
-			/* try to invoke the operation */
-			try {
-				Method methodToInvoke =
-						findMethod(opName, thisClass, argClasses.toArray(new Class[0]));
-
-				Object invocationResult = methodToInvoke.invoke(this, (Object[]) args);
-
-				result = (OclAny) invocationResult;
-
-			}
-			/* if anything goes wrong, wrap it in an InvalidException */
-			catch (SecurityException e) {
+			Throwable cause = e.getCause();
+			if (cause != null) {
 				result =
 						JavaStandardLibraryFactory.INSTANCE.createOclInvalid(operation
-								.getType(), e);
-			} catch (NoSuchMethodException e) {
-				result =
-						JavaStandardLibraryFactory.INSTANCE.createOclInvalid(operation
-								.getType(), e);
-			} catch (IllegalArgumentException e) {
-				result =
-						JavaStandardLibraryFactory.INSTANCE.createOclInvalid(operation
-								.getType(), e);
-			} catch (IllegalAccessException e) {
-				result =
-						JavaStandardLibraryFactory.INSTANCE.createOclInvalid(operation
-								.getType(), e);
-			} catch (InvocationTargetException e) {
-
-				if (e.getCause() != null && e.getCause() instanceof UndefinedException) {
-					result =
-							JavaStandardLibraryFactory.INSTANCE.createOclUndefined(operation
-									.getType(), e.getCause().getMessage());
-				}
-
-				else {
-					Throwable cause = e.getCause();
-					if (cause instanceof InvalidException) {
-						result =
-								JavaStandardLibraryFactory.INSTANCE.createOclInvalid(operation
-										.getType(), ((InvalidException) e.getCause())
-										.getInvalidReason());
-					}
-					else if (cause != null) {
-						result =
-								JavaStandardLibraryFactory.INSTANCE.createOclInvalid(operation
-										.getType(), cause);
-					}
-					else {
-						result =
-								JavaStandardLibraryFactory.INSTANCE.createOclInvalid(operation
-										.getType(), e);
-					}
-				}
+								.getType(), cause);
 			}
-			/*
-			 * In case, an operation has a problem and throws an exception, it has to
-			 * be an InvalidException. At this point, it is known, which type
-			 * OclInvalid should have.
-			 */
-			catch (InvalidException e) {
-				result =
-						JavaStandardLibraryFactory.INSTANCE.createOclInvalid(operation
-								.getType(), e.getCause());
-			}
-			/*
-			 * This happens, if an element involved in the invocation of the method is
-			 * undefined.
-			 */
-			catch (UndefinedException e) {
-				result =
-						JavaStandardLibraryFactory.INSTANCE.createOclUndefined(operation
-								.getType(), e.getUndefinedReason());
-			}
-			/*
-			 * Just in case, if the return type is not an instance of OclAny.
-			 */
-			catch (ClassCastException e) {
+			else {
 				result =
 						JavaStandardLibraryFactory.INSTANCE.createOclInvalid(operation
 								.getType(), e);
 			}
 		}
+
+		/*
+		 * Just in case, if the return type is not an instance of OclAny.
+		 */
+		catch (ClassCastException e) {
+			result =
+					JavaStandardLibraryFactory.INSTANCE.createOclInvalid(operation
+							.getType(), e);
+		}
+		// }
 		// no else.
 
 		return result;
@@ -616,6 +643,12 @@ public abstract class JavaOclAny implements OclAny {
 		}
 
 		return result;
+	}
+
+	protected void setInvalid(Throwable t) {
+
+		invalidReason = t;
+		imiElement = IModelInstanceInvalid.INSTANCE;
 	}
 
 }

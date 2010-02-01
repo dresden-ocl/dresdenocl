@@ -35,6 +35,7 @@ import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBoolean;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclEnumLiteral;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger;
+import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInvalid;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclModelInstanceObject;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclOrderedSet;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclReal;
@@ -44,11 +45,13 @@ import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclString;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclTuple;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclType;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.factory.IStandardLibraryFactory;
+import tudresden.ocl20.pivot.essentialocl.types.AnyType;
 import tudresden.ocl20.pivot.essentialocl.types.BagType;
 import tudresden.ocl20.pivot.essentialocl.types.CollectionType;
 import tudresden.ocl20.pivot.essentialocl.types.OrderedSetType;
 import tudresden.ocl20.pivot.essentialocl.types.SequenceType;
 import tudresden.ocl20.pivot.essentialocl.types.SetType;
+import tudresden.ocl20.pivot.essentialocl.types.TypesFactory;
 import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance;
 import tudresden.ocl20.pivot.modelbus.modelinstance.exception.OperationAccessException;
 import tudresden.ocl20.pivot.modelbus.modelinstance.exception.OperationNotFoundException;
@@ -59,13 +62,14 @@ import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceCollecti
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceEnumerationLiteral;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceInteger;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceInvalid;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceObject;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceReal;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceString;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceTuple;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceVoid;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.base.BasisJavaModelInstanceFactory;
-import tudresden.ocl20.pivot.modelbus.modelinstance.types.base.PrimitiveAndCollectionTypeConstants;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.base.TypeConstants;
 import tudresden.ocl20.pivot.modelbus.util.OclCollectionTypeKind;
 import tudresden.ocl20.pivot.pivotmodel.Enumeration;
 import tudresden.ocl20.pivot.pivotmodel.EnumerationLiteral;
@@ -74,11 +78,12 @@ import tudresden.ocl20.pivot.pivotmodel.PrimitiveType;
 import tudresden.ocl20.pivot.pivotmodel.PrimitiveTypeKind;
 import tudresden.ocl20.pivot.pivotmodel.Property;
 import tudresden.ocl20.pivot.pivotmodel.Type;
-import tudresden.ocl20.pivot.standardlibrary.java.exceptions.InvalidException;
+import tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclAny;
 import tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclBag;
 import tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclBoolean;
 import tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclEnumLiteral;
 import tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclInteger;
+import tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclInvalid;
 import tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclModelInstanceObject;
 import tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclOrderedSet;
 import tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclReal;
@@ -113,15 +118,21 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 	private BasisJavaModelInstanceFactory basisJavaModelInstanceFactory =
 			new BasisJavaModelInstanceFactory();
 
-	// TODO Michael: Caching for IModelInstanceElements is done; for anything
-	// else?
 	/**
 	 * Contains the already adapted {@link OclAny} identified by their adapted
-	 * {@link Object}. <strong>This is a {@link WeakHashMap}! If an {@link Object}
-	 * is disposed, its adapter can also be disposed.</strong>
+	 * {@link Object} (model element). <strong>This is a {@link WeakHashMap}! If
+	 * an {@link Object} is disposed, its adapter can also be disposed.</strong>
 	 */
-	private Map<Object, OclAny> myCachedAdaptedObjects =
+	private Map<Object, OclAny> cachedAdaptedObjects =
 			new WeakHashMap<Object, OclAny>();
+
+	/**
+	 * Contains the already adapted {@link OclAny} identified by their
+	 * {@link IModelInstanceElement}. Is used to cache the undefined and invalid
+	 * reasons for elements that are already adapted to {@link OclAny}.
+	 */
+	private Map<IModelInstanceElement, OclAny> cachedUndefinedOrInvalid =
+			new WeakHashMap<IModelInstanceElement, OclAny>();
 
 	/**
 	 * Private Singleton constructor.
@@ -130,6 +141,13 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @seetudresden.ocl20.pivot.essentialocl.standardlibrary.factory.
+	 * IStandardLibraryFactory
+	 * #createOclAny(tudresden.ocl20.pivot.modelbus.modelinstance
+	 * .types.IModelInstanceElement)
+	 */
 	@SuppressWarnings("unchecked")
 	public OclAny createOclAny(final IModelInstanceElement modelInstanceElement) {
 
@@ -141,7 +159,21 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 		}
 
 		else if (modelInstanceElement instanceof IModelInstanceVoid) {
-			result = JavaOclVoid.INSTANCE;
+			if (cachedUndefinedOrInvalid.containsKey(modelInstanceElement))
+				result = cachedUndefinedOrInvalid.get(modelInstanceElement);
+			else {
+				result = JavaOclVoid.INSTANCE;
+				cachedUndefinedOrInvalid.put(modelInstanceElement, result);
+			}
+		}
+
+		else if (modelInstanceElement instanceof IModelInstanceInvalid) {
+			if (cachedUndefinedOrInvalid.containsKey(modelInstanceElement))
+				result = cachedUndefinedOrInvalid.get(modelInstanceElement);
+			else {
+				result = JavaOclInvalid.INSTANCE;
+				cachedUndefinedOrInvalid.put(modelInstanceElement, result);
+			}
 		}
 
 		else if (modelInstanceElement instanceof IModelInstanceInteger) {
@@ -174,13 +206,19 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 			IModelInstanceCollection<IModelInstanceElement> collection =
 					(IModelInstanceCollection<IModelInstanceElement>) modelInstanceElement;
 
-			result = this.createOclCollection(collection);
+			// FIXME Michael: what if there are multiple Types?
+			result =
+					this.createOclCollection(collection, collection.getTypes().iterator()
+							.next());
 		}
 
+		// FIXME Michael: what if there are multiple Types?
 		else if (modelInstanceElement instanceof IModelInstanceObject) {
+			IModelInstanceObject modelInstanceObject =
+					(IModelInstanceObject) modelInstanceElement;
 			result =
-					new JavaOclModelInstanceObject(
-							(IModelInstanceObject) modelInstanceElement);
+					new JavaOclModelInstanceObject(modelInstanceObject,
+							modelInstanceObject.getTypes().iterator().next());
 		}
 
 		else {
@@ -197,7 +235,8 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 	 * @seetudresden.ocl20.pivot.essentialocl.standardlibrary.factory.
 	 * IStandardLibraryFactory#createOclBag(java.util.List)
 	 */
-	public <T extends OclAny> OclBag<T> createOclBag(final List<?> elements) {
+	public <T extends OclAny> OclBag<T> createOclBag(final List<?> elements,
+			Type genericType) {
 
 		List<IModelInstanceElement> imiElements;
 		imiElements = new ArrayList<IModelInstanceElement>();
@@ -222,11 +261,11 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 				basisJavaModelInstanceFactory.createModelInstanceCollection(
 						imiElements, OclCollectionTypeKind.BAG);
 
-		return new JavaOclBag<T>(imiCollection);
+		return new JavaOclBag<T>(imiCollection, genericType);
 	}
 
 	public <T extends OclAny> OclBag<T> createOclBag(
-			IModelInstanceCollection<IModelInstanceElement> elements) {
+			IModelInstanceCollection<IModelInstanceElement> elements, Type genericType) {
 
 		OclBag<T> result;
 
@@ -238,10 +277,10 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 					basisJavaModelInstanceFactory.createModelInstanceCollection(bag,
 							OclCollectionTypeKind.BAG);
 
-			result = new JavaOclBag<T>(imiResult);
+			result = new JavaOclBag<T>(imiResult, genericType);
 		}
 		else {
-			result = new JavaOclBag<T>(elements);
+			result = new JavaOclBag<T>(elements, genericType);
 		}
 
 		return result;
@@ -269,41 +308,42 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 		return JavaOclBoolean.getInstance(value.getBoolean());
 	}
 
-	public OclCollection<OclAny> createOclCollection(CollectionType collectionType) {
+	public OclCollection<OclAny> createOclCollection(
+			CollectionType collectionType, Type genericType) {
 
 		OclCollection<OclAny> result;
 
 		IModelInstanceCollection<IModelInstanceElement> imiCollection;
 
 		CollectionKind collectionKind = collectionType.getKind();
-		
+
 		if (collectionKind.equals(CollectionKind.BAG)) {
 			imiCollection =
 					basisJavaModelInstanceFactory
 							.createModelInstanceCollection(
 									new ArrayList<IModelInstanceElement>(),
 									OclCollectionTypeKind.BAG);
-			result = createOclBag(imiCollection);
+			result = createOclBag(imiCollection, genericType);
 		}
 		else if (collectionKind.equals(CollectionKind.ORDERED_SET)) {
 			imiCollection =
 					basisJavaModelInstanceFactory.createModelInstanceCollection(
 							new UniqueEList<IModelInstanceElement>(),
 							OclCollectionTypeKind.ORDEREDSET);
-			result = createOclOrderedSet(imiCollection);
+			result = createOclOrderedSet(imiCollection, genericType);
 		}
 		else if (collectionKind.equals(CollectionKind.SEQUENCE)) {
 			imiCollection =
 					basisJavaModelInstanceFactory.createModelInstanceCollection(
 							new ArrayList<IModelInstanceElement>(),
 							OclCollectionTypeKind.SEQUENCE);
-			result = createOclSequence(imiCollection);
+			result = createOclSequence(imiCollection, genericType);
 		}
 		else if (collectionKind.equals(CollectionKind.SET)) {
 			imiCollection =
 					basisJavaModelInstanceFactory.createModelInstanceCollection(
 							new HashSet<IModelInstanceElement>(), OclCollectionTypeKind.SET);
-			result = createOclSet(imiCollection);
+			result = createOclSet(imiCollection, genericType);
 		}
 		else {
 			throw new IllegalArgumentException(
@@ -314,24 +354,25 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 	}
 
 	protected OclCollection<OclAny> createOclCollection(
-			IModelInstanceCollection<IModelInstanceElement> imiCollection) {
+			IModelInstanceCollection<IModelInstanceElement> imiCollection,
+			Type genericType) {
 
 		OclCollection<OclAny> result;
 
 		if (imiCollection.isOrdered()) {
 			if (imiCollection.isUnique()) {
-				result = new JavaOclOrderedSet<OclAny>(imiCollection);
+				result = new JavaOclOrderedSet<OclAny>(imiCollection, genericType);
 			}
 			else {
-				result = new JavaOclSequence<OclAny>(imiCollection);
+				result = new JavaOclSequence<OclAny>(imiCollection, genericType);
 			}
 		}
 		else { // not ordered
 			if (imiCollection.isUnique()) {
-				result = new JavaOclSet<OclAny>(imiCollection);
+				result = new JavaOclSet<OclAny>(imiCollection, genericType);
 			}
 			else {
-				result = new JavaOclBag<OclAny>(imiCollection);
+				result = new JavaOclBag<OclAny>(imiCollection, genericType);
 			}
 		}
 
@@ -404,17 +445,20 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 		OclModelInstanceObject result;
 
 		/* Probably use a cached result. */
-		if (myCachedAdaptedObjects.containsKey(modelInstanceObject)) {
+		if (cachedAdaptedObjects.containsKey(modelInstanceObject)) {
 			result =
-					(OclModelInstanceObject) myCachedAdaptedObjects
+					(OclModelInstanceObject) cachedAdaptedObjects
 							.get(modelInstanceObject);
 		}
 
 		else {
-			result = new JavaOclModelInstanceObject(modelInstanceObject);
+			// FIXME Michael: What to do with multiple types?
+			result =
+					new JavaOclModelInstanceObject(modelInstanceObject,
+							modelInstanceObject.getTypes().iterator().next());
 
 			/* Cache the adapted result. */
-			this.myCachedAdaptedObjects.put(modelInstanceObject, result);
+			this.cachedAdaptedObjects.put(modelInstanceObject, result);
 		}
 
 		return result;
@@ -426,7 +470,7 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 	 * IStandardLibraryFactory#createOclOrderedSet(java.util.List)
 	 */
 	public <T extends OclAny> OclOrderedSet<T> createOclOrderedSet(
-			final List<?> elements) {
+			final List<?> elements, Type genericType) {
 
 		List<IModelInstanceElement> imiElements;
 		imiElements = new UniqueEList<IModelInstanceElement>();
@@ -451,11 +495,11 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 				basisJavaModelInstanceFactory.createModelInstanceCollection(
 						imiElements, OclCollectionTypeKind.ORDEREDSET);
 
-		return new JavaOclOrderedSet<T>(imiCollection);
+		return new JavaOclOrderedSet<T>(imiCollection, genericType);
 	}
 
 	public <T extends OclAny> OclOrderedSet<T> createOclOrderedSet(
-			IModelInstanceCollection<IModelInstanceElement> elements) {
+			IModelInstanceCollection<IModelInstanceElement> elements, Type genericType) {
 
 		OclOrderedSet<T> result;
 
@@ -467,10 +511,10 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 					basisJavaModelInstanceFactory.createModelInstanceCollection(
 							orderedSet, OclCollectionTypeKind.ORDEREDSET);
 
-			result = new JavaOclOrderedSet<T>(imiResult);
+			result = new JavaOclOrderedSet<T>(imiResult, genericType);
 		}
 		else {
-			result = new JavaOclOrderedSet<T>(elements);
+			result = new JavaOclOrderedSet<T>(elements, genericType);
 		}
 
 		return result;
@@ -507,7 +551,7 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 	 * IStandardLibraryFactory#createOclSequence(java.util.List)
 	 */
 	public <T extends OclAny> OclSequence<T> createOclSequence(
-			final List<?> elements) {
+			final List<?> elements, Type genericType) {
 
 		List<IModelInstanceElement> imiElements;
 		imiElements = new ArrayList<IModelInstanceElement>();
@@ -532,11 +576,11 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 				basisJavaModelInstanceFactory.createModelInstanceCollection(
 						imiElements, OclCollectionTypeKind.SEQUENCE);
 
-		return new JavaOclSequence<T>(imiCollection);
+		return new JavaOclSequence<T>(imiCollection, genericType);
 	}
 
 	public <T extends OclAny> OclSequence<T> createOclSequence(
-			IModelInstanceCollection<IModelInstanceElement> elements) {
+			IModelInstanceCollection<IModelInstanceElement> elements, Type genericType) {
 
 		OclSequence<T> result;
 
@@ -548,10 +592,10 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 					basisJavaModelInstanceFactory.createModelInstanceCollection(
 							orderedSet, OclCollectionTypeKind.SEQUENCE);
 
-			result = new JavaOclSequence<T>(imiResult);
+			result = new JavaOclSequence<T>(imiResult, genericType);
 		}
 		else {
-			result = new JavaOclSequence<T>(elements);
+			result = new JavaOclSequence<T>(elements, genericType);
 		}
 
 		return result;
@@ -562,7 +606,8 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 	 * @seetudresden.ocl20.pivot.essentialocl.standardlibrary.factory.
 	 * IStandardLibraryFactory#createOclSet(java.util.List)
 	 */
-	public <T extends OclAny> OclSet<T> createOclSet(final Set<?> elements) {
+	public <T extends OclAny> OclSet<T> createOclSet(final Set<?> elements,
+			Type genericType) {
 
 		Set<IModelInstanceElement> imiElements;
 		imiElements = new HashSet<IModelInstanceElement>();
@@ -587,11 +632,11 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 				basisJavaModelInstanceFactory.createModelInstanceCollection(
 						imiElements, OclCollectionTypeKind.SET);
 
-		return new JavaOclSet<T>(imiCollection);
+		return new JavaOclSet<T>(imiCollection, genericType);
 	}
 
 	public <T extends OclAny> OclSet<T> createOclSet(
-			IModelInstanceCollection<IModelInstanceElement> elements) {
+			IModelInstanceCollection<IModelInstanceElement> elements, Type genericType) {
 
 		OclSet<T> result;
 
@@ -603,10 +648,10 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 					basisJavaModelInstanceFactory.createModelInstanceCollection(set,
 							OclCollectionTypeKind.SET);
 
-			result = new JavaOclSet<T>(imiResult);
+			result = new JavaOclSet<T>(imiResult, genericType);
 		}
 		else {
-			result = new JavaOclSet<T>(elements);
+			result = new JavaOclSet<T>(elements, genericType);
 		}
 
 		return result;
@@ -682,6 +727,21 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 		return result;
 	}
 
+	// /*
+	// * (non-Javadoc)
+	// * @seetudresden.ocl20.pivot.essentialocl.standardlibrary.factory.
+	// * IStandardLibraryFactory#createOclUndefined(java.lang.Class,
+	// * java.lang.String)
+	// */
+	// @SuppressWarnings("unchecked")
+	// public <T extends OclAny> T createOclUndefined(Class<T> clazz, String
+	// reason) {
+	//
+	// Type type = getTypeFromOclAny(clazz);
+	//
+	// return (T) createOclUndefined(type, reason);
+	// }
+
 	/*
 	 * (non-Javadoc)
 	 * @seetudresden.ocl20.pivot.essentialocl.standardlibrary.factory.
@@ -732,19 +792,25 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 		else if (type instanceof CollectionType) {
 
 			if (type instanceof BagType) {
-				result = new JavaOclBag<OclAny>(reason);
+				result =
+						new JavaOclBag<OclAny>(reason, ((BagType) type).getElementType());
 			}
 
 			else if (type instanceof OrderedSetType) {
-				result = new JavaOclOrderedSet<OclAny>(reason);
+				result =
+						new JavaOclOrderedSet<OclAny>(reason, ((OrderedSetType) type)
+								.getElementType());
 			}
 
 			else if (type instanceof SequenceType) {
-				result = new JavaOclSequence<OclAny>(reason);
+				result =
+						new JavaOclSequence<OclAny>(reason, ((SequenceType) type)
+								.getElementType());
 			}
 
 			else if (type instanceof SetType) {
-				result = new JavaOclSet<OclAny>(reason);
+				result =
+						new JavaOclSet<OclAny>(reason, ((SetType) type).getElementType());
 			}
 		}
 
@@ -755,11 +821,32 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 
 		/* If no result has been created yet, create a JavaOclObject. */
 		if (result == null) {
-			result = new JavaOclModelInstanceObject(reason);
+			result = new JavaOclModelInstanceObject(reason, type);
 		}
+
+		/*
+		 * Cache the result, so that createOclAny() can obtain the correct OclAny
+		 * for an IModelInstanceElement.
+		 */
+		cachedUndefinedOrInvalid.put(result.getModelInstanceElement(), result);
 
 		return result;
 	}
+
+	// /*
+	// * (non-Javadoc)
+	// * @seetudresden.ocl20.pivot.essentialocl.standardlibrary.factory.
+	// * IStandardLibraryFactory#createOclInvalid(java.lang.Class,
+	// * java.lang.Throwable)
+	// */
+	// @SuppressWarnings("unchecked")
+	// public <T extends OclAny> T createOclInvalid(Class<T> clazz,
+	// Throwable invalidReason) {
+	//
+	// Type type = getTypeFromOclAny(clazz);
+	//
+	// return (T) createOclInvalid(type, invalidReason);
+	// }
 
 	/*
 	 * (non-Javadoc)
@@ -768,74 +855,120 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 	 * #createOclInvalid(tudresden.ocl20.pivot.pivotmodel.Type,
 	 * java.lang.Throwable)
 	 */
-	public OclAny createOclInvalid(final Type type, final Throwable invalidReason) {
+	@SuppressWarnings("unchecked")
+	public <T extends OclAny> T createOclInvalid(final Type type,
+			final Throwable invalidReason) {
 
-		OclAny result;
+		T result;
 
 		result = null;
 
-		/* Check if the given Type is a primitive type. */
-		if (type instanceof PrimitiveType) {
-			PrimitiveType primitiveType;
-			PrimitiveTypeKind primitiveTypeKind;
-			primitiveType = (PrimitiveType) type;
-			primitiveTypeKind = primitiveType.getKind();
+		if (type instanceof AnyType)
+			result = (T) new JavaOclAny(invalidReason) {
 
-			if (primitiveTypeKind.equals(PrimitiveTypeKind.BOOLEAN)) {
-				result = new JavaOclBoolean(invalidReason);
+				public OclBoolean isEqualTo(OclAny object2) {
+
+					OclBoolean result = null;
+
+					// same semantics as for OclInvalid
+					if (object2 instanceof OclInvalid
+							|| object2.getInvalidReason() != null)
+						result = JavaOclBoolean.getInstance(true);
+					else
+						result = JavaOclBoolean.getInstance(false);
+
+					return result;
+				}
+
+				public <T2 extends OclAny> OclSet<T2> asSet() {
+
+					return createOclInvalid(TypeConstants
+							.SET(type), invalidReason);
+				}
+			};
+
+		// if (type == null)
+		// result = (T) new JavaOclModelInstanceObject(invalidReason, type);
+
+		else {
+
+			/* Check if the given Type is a primitive type. */
+			if (type instanceof PrimitiveType) {
+				PrimitiveType primitiveType;
+				PrimitiveTypeKind primitiveTypeKind;
+				primitiveType = (PrimitiveType) type;
+				primitiveTypeKind = primitiveType.getKind();
+
+				if (primitiveTypeKind.equals(PrimitiveTypeKind.BOOLEAN)) {
+					result = (T) new JavaOclBoolean(invalidReason);
+				}
+
+				else if (primitiveTypeKind.equals(PrimitiveTypeKind.INTEGER)) {
+					result = (T) new JavaOclInteger(invalidReason);
+				}
+
+				else if (primitiveTypeKind.equals(PrimitiveTypeKind.REAL)) {
+					result = (T) new JavaOclReal(invalidReason);
+				}
+
+				else if (primitiveTypeKind.equals(PrimitiveTypeKind.STRING)) {
+					result = (T) new JavaOclString(invalidReason);
+				}
+
+				else if (primitiveTypeKind.equals(PrimitiveTypeKind.VOID)) {
+					result = (T) new JavaOclVoid(invalidReason);
+				}
+
+				else {
+					throw new IllegalArgumentException("Primitive type " + type
+							+ " is unknown.");
+				}
 			}
 
-			else if (primitiveTypeKind.equals(PrimitiveTypeKind.INTEGER)) {
-				result = new JavaOclInteger(invalidReason);
+			/* collection type */
+			else if (type instanceof CollectionType) {
+
+				if (type instanceof BagType) {
+					result =
+							(T) new JavaOclBag<OclAny>(invalidReason, ((BagType) type)
+									.getElementType());
+				}
+
+				else if (type instanceof OrderedSetType) {
+					result =
+							(T) new JavaOclOrderedSet<OclAny>(invalidReason,
+									((OrderedSetType) type).getElementType());
+				}
+
+				else if (type instanceof SequenceType) {
+					result =
+							(T) new JavaOclSequence<OclAny>(invalidReason,
+									((SequenceType) type).getElementType());
+				}
+
+				else if (type instanceof SetType) {
+					result =
+							(T) new JavaOclSet<OclAny>(invalidReason, ((SetType) type)
+									.getElementType());
+				}
 			}
 
-			else if (primitiveTypeKind.equals(PrimitiveTypeKind.REAL)) {
-				result = new JavaOclReal(invalidReason);
+			/* Check if the given Type is an enumeration. */
+			else if (type instanceof Enumeration) {
+				result = (T) new JavaOclEnumLiteral(invalidReason);
 			}
 
-			else if (primitiveTypeKind.equals(PrimitiveTypeKind.STRING)) {
-				result = new JavaOclString(invalidReason);
-			}
-
-			else if (primitiveTypeKind.equals(PrimitiveTypeKind.VOID)) {
-				result = new JavaOclVoid(invalidReason);
-			}
-
-			else {
-				throw new IllegalArgumentException("Primitive type " + type
-						+ " is unknown.");
+			/* If no result has been created yet, create a JavaOclObject. */
+			if (result == null) {
+				result = (T) new JavaOclModelInstanceObject(invalidReason, type);
 			}
 		}
 
-		/* collection type */
-		else if (type instanceof CollectionType) {
-
-			if (type instanceof BagType) {
-				result = new JavaOclBag<OclAny>(invalidReason);
-			}
-
-			else if (type instanceof OrderedSetType) {
-				result = new JavaOclOrderedSet<OclAny>(invalidReason);
-			}
-
-			else if (type instanceof SequenceType) {
-				result = new JavaOclSequence<OclAny>(invalidReason);
-			}
-
-			else if (type instanceof SetType) {
-				result = new JavaOclSet<OclAny>(invalidReason);
-			}
-		}
-
-		/* Check if the given Type is an enumeration. */
-		else if (type instanceof Enumeration) {
-			result = new JavaOclEnumLiteral(invalidReason);
-		}
-
-		/* If no result has been created yet, create a JavaOclObject. */
-		if (result == null) {
-			result = new JavaOclModelInstanceObject(invalidReason);
-		}
+		/*
+		 * Cache the result, so that createOclAny() can obtain the correct OclAny
+		 * for an IModelInstanceElement.
+		 */
+		cachedUndefinedOrInvalid.put(result.getModelInstanceElement(), result);
 
 		return result;
 	}
@@ -852,8 +985,10 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 		 */
 		public <T extends OclAny> OclSet<T> asSet() {
 
-			throw new InvalidException(new UnsupportedOperationException(
-					"asSet() is not supported on meta-type OclType"));
+			return createOclInvalid(TypeConstants
+					.SET(TypesFactory.INSTANCE.createTypeType()),
+					new UnsupportedOperationException(
+							"Cannot invoke operation asSet() on meta-type OclType."));
 		}
 
 		/*
@@ -876,7 +1011,8 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 		 */
 		public OclAny invokeOperation(Operation operation, OclAny... parameters) {
 
-			throw new InvalidException(
+			return createOclInvalid(
+					operation.getType(),
 					new UnsupportedOperationException(
 							"invokeOperation(Operation operation, OclAny... parameters) is not supported on meta-type OclType"));
 		}
@@ -916,8 +1052,10 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 		 */
 		public <T extends OclAny> T oclAsType(OclType<T> type) {
 
-			throw new InvalidException(new UnsupportedOperationException(
-					"oclAsType(OclType<T> type) is not supported on meta-type OclType"));
+			return createOclInvalid(
+					type.getType(),
+					new UnsupportedOperationException(
+							"oclAsType(OclType<T> type) is not supported on meta-type OclType"));
 		}
 
 		/*
@@ -938,7 +1076,8 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 		 */
 		public <T extends OclAny> OclBoolean oclIsKindOf(OclType<T> typespec) {
 
-			throw new InvalidException(
+			return createOclInvalid(
+					TypeConstants.BOOLEAN,
 					new UnsupportedOperationException(
 							"oclIsKindOf(OclType<T> typespec) is not supported on meta-type OclType"));
 		}
@@ -951,7 +1090,8 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 		 */
 		public <T extends OclAny> OclBoolean oclIsTypeOf(OclType<T> typespec) {
 
-			throw new InvalidException(
+			return createOclInvalid(
+					TypeConstants.BOOLEAN,
 					new UnsupportedOperationException(
 							"oclIsTypeOf(OclType<T> typespec) is not supported on meta-type OclType"));
 		}
@@ -964,8 +1104,10 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 		 */
 		public OclBoolean isEqualTo(OclAny object2) {
 
-			throw new InvalidException(new UnsupportedOperationException(
-					"isEqualTo(OclAny object2) is not supported on meta-type OclType"));
+			return createOclInvalid(
+					TypeConstants.BOOLEAN,
+					new UnsupportedOperationException(
+							"isEqualTo(OclAny object2) is not supported on meta-type OclType"));
 		}
 
 		/*
@@ -976,8 +1118,10 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 		 */
 		public OclBoolean isNotEqualTo(OclAny object2) {
 
-			throw new InvalidException(new UnsupportedOperationException(
-					"isNotEqualTo(OclAny object2) is not supported on meta-type OclType"));
+			return createOclInvalid(
+					TypeConstants.BOOLEAN,
+					new UnsupportedOperationException(
+							"isNotEqualTo(OclAny object2) is not supported on meta-type OclType"));
 		}
 
 		/*
@@ -987,8 +1131,8 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 		 */
 		public IModelInstanceElement getModelInstanceElement() {
 
-			throw new InvalidException(new UnsupportedOperationException(
-					"getModelInstanceElement() is not supported on meta-type OclType"));
+			throw new UnsupportedOperationException(
+					"getModelInstanceElement() is not supported on meta-type OclType");
 		}
 
 		/*
@@ -1051,7 +1195,7 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 						BasisJavaModelInstanceFactory.createModelInstanceCollection(
 								modelInstance.getAllInstances(((CollectionType) operation
 										.getType()).getElementType()),
-								PrimitiveAndCollectionTypeConstants.MODEL_TYPE_SET);
+								TypeConstants.SET);
 
 				result = createOclAny(imiResult);
 			}

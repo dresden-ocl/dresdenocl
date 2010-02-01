@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: TestSuite for the OCL StandardLibrary
-Bundle-SymbolicName: tudresden.ocl20.pivot.standardlibrary.java.test
+Bundle-SymbolicName: tudresden.ocl20.pivot.standardlibrary.java.test;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: tudresden.ocl20.pivot.standardlibrary.java.test.StandardLibraryTestPlugin
 Require-Bundle: org.eclipse.ui,
@@ -13,6 +13,8 @@ Require-Bundle: org.eclipse.ui,
  tudresden.ocl20.pivot.pivotmodel;bundle-version="2.0.0",
  tudresden.ocl20.pivot.examples.royalandloyal;bundle-version="2.0.0",
  tudresden.ocl20.pivot.metamodels.uml2;bundle-version="2.0.0",
- tudresden.ocl20.pivot.modelinstancetype.java;bundle-version="2.0.0"
+ tudresden.ocl20.pivot.modelinstancetype.java;bundle-version="2.0.0",
+ tudresden.ocl20.pivot.essentialocl;bundle-version="2.0.0",
+ tudresden.ocl20.pivot.testsuite;bundle-version="2.0.0"
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: J2SE-1.5

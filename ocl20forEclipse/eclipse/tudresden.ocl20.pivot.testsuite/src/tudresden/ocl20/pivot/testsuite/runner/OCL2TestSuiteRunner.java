@@ -20,7 +20,6 @@ import org.eclipse.core.runtime.IExtensionPoint;
 import org.eclipse.core.runtime.IExtensionRegistry;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.Preferences;
-import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
@@ -69,11 +68,11 @@ public class OCL2TestSuiteRunner {
 			display = Display.getDefault();
 		}
 		final Shell parentShell = display.getActiveShell();
-
-		SelectTestSuitesDialog selectTestSuitesDialog =
-				new SelectTestSuitesDialog(parentShell, registeredTestSuites);
-
-		int result = selectTestSuitesDialog.open();
+//
+//		SelectTestSuitesDialog selectTestSuitesDialog =
+//				new SelectTestSuitesDialog(parentShell, registeredTestSuites);
+//
+//		int result = selectTestSuitesDialog.open();
 
 		Test defaultTest = new TestCase("User aborted Test Suite") {
 
@@ -84,12 +83,12 @@ public class OCL2TestSuiteRunner {
 			}
 		};
 
-		if (result == Dialog.CANCEL) {
-			return defaultTest;
-		}
-		else if (result == Dialog.OK) {
+//		if (result == Dialog.CANCEL) {
+//			return defaultTest;
+//		}
+//		else if (result == Dialog.OK) {
 
-			for (Test test : selectTestSuitesDialog.getTestsToBeExecuted()) {
+			for (Test test : registeredTestSuites) {
 				allTestSuite.addTest(test);
 			}
 
@@ -125,9 +124,9 @@ public class OCL2TestSuiteRunner {
 				}
 
 			};
-		}
+//		}
 
-		return defaultTest;
+//		return defaultTest;
 
 	}
 

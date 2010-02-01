@@ -20,6 +20,7 @@ with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
 package tudresden.ocl20.pivot.modelbus.modelinstance.types.base;
 
 import tudresden.ocl20.pivot.essentialocl.expressions.CollectionKind;
+import tudresden.ocl20.pivot.essentialocl.types.AnyType;
 import tudresden.ocl20.pivot.essentialocl.types.CollectionType;
 import tudresden.ocl20.pivot.essentialocl.types.TypesFactory;
 import tudresden.ocl20.pivot.modelbus.model.IModel;
@@ -43,7 +44,13 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
  * @author Claas Wilke
  * 
  */
-public final class PrimitiveAndCollectionTypeConstants {
+public final class TypeConstants {
+
+	/**
+	 * An implementation for {@link AnyType}. Because {@link AnyType} is not part
+	 * of the {@link IModel}, its {@link Type} must be created externally.
+	 */
+	public static final AnyType ANY = TypesFactory.INSTANCE.createAnyType();
 
 	/**
 	 * The {@link PrimitiveType} implementation of the
@@ -52,12 +59,12 @@ public final class PrimitiveAndCollectionTypeConstants {
 	 * This field represents the {@link PrimitiveType} instance that is the only
 	 * {@link Type} of all {@link IModelInstanceBoolean}s.
 	 */
-	public static final PrimitiveType MODEL_TYPE_BOOLEAN =
+	public static final PrimitiveType BOOLEAN =
 			PivotModelFactory.INSTANCE.createPrimitiveType();
-	
-	static{
-		MODEL_TYPE_BOOLEAN.setKind(PrimitiveTypeKind.BOOLEAN);
-		MODEL_TYPE_BOOLEAN.setName(PrimitiveTypeKind.BOOLEAN.getName());
+
+	static {
+		BOOLEAN.setKind(PrimitiveTypeKind.BOOLEAN);
+		BOOLEAN.setName(PrimitiveTypeKind.BOOLEAN.getName());
 	}
 
 	/**
@@ -67,11 +74,11 @@ public final class PrimitiveAndCollectionTypeConstants {
 	 * This field represents the {@link PrimitiveType} instance that is the only
 	 * {@link Type} of all {@link IModelInstanceInteger}s.
 	 */
-	public static final PrimitiveType MODEL_TYPE_INTEGER =
+	public static final PrimitiveType INTEGER =
 			PivotModelFactory.INSTANCE.createPrimitiveType();
 	static {
-		MODEL_TYPE_INTEGER.setKind(PrimitiveTypeKind.INTEGER);
-		MODEL_TYPE_INTEGER.setName(PrimitiveTypeKind.INTEGER.getName());
+		INTEGER.setKind(PrimitiveTypeKind.INTEGER);
+		INTEGER.setName(PrimitiveTypeKind.INTEGER.getName());
 	}
 
 	/**
@@ -81,11 +88,11 @@ public final class PrimitiveAndCollectionTypeConstants {
 	 * field represents the {@link PrimitiveType} instance that is the only
 	 * {@link Type} of all {@link IModelInstanceReal}s.
 	 */
-	public static final PrimitiveType MODEL_TYPE_REAL =
+	public static final PrimitiveType REAL =
 			PivotModelFactory.INSTANCE.createPrimitiveType();
 	static {
-		MODEL_TYPE_REAL.setKind(PrimitiveTypeKind.REAL);
-		MODEL_TYPE_REAL.setName(PrimitiveTypeKind.REAL.getName());
+		REAL.setKind(PrimitiveTypeKind.REAL);
+		REAL.setName(PrimitiveTypeKind.REAL.getName());
 	}
 
 	/**
@@ -95,11 +102,11 @@ public final class PrimitiveAndCollectionTypeConstants {
 	 * This field represents the {@link PrimitiveType} instance that is the only
 	 * {@link Type} of all {@link IModelInstanceString}s.
 	 */
-	public static final PrimitiveType MODEL_TYPE_STRING =
+	public static final PrimitiveType STRING =
 			PivotModelFactory.INSTANCE.createPrimitiveType();
 	static {
-		MODEL_TYPE_STRING.setKind(PrimitiveTypeKind.STRING);
-		MODEL_TYPE_STRING.setName(PrimitiveTypeKind.STRING.getName());
+		STRING.setKind(PrimitiveTypeKind.STRING);
+		STRING.setName(PrimitiveTypeKind.STRING.getName());
 	}
 
 	/**
@@ -109,11 +116,11 @@ public final class PrimitiveAndCollectionTypeConstants {
 	 * field represents the {@link PrimitiveType} instance that is the only
 	 * {@link Type} of all {@link IModelInstanceVoid}s.
 	 */
-	public static final PrimitiveType MODEL_TYPE_VOID =
+	public static final PrimitiveType VOID =
 			PivotModelFactory.INSTANCE.createPrimitiveType();
 	static {
-		MODEL_TYPE_VOID.setKind(PrimitiveTypeKind.VOID);
-		MODEL_TYPE_VOID.setName(PrimitiveTypeKind.VOID.getName());
+		VOID.setKind(PrimitiveTypeKind.VOID);
+		VOID.setName(PrimitiveTypeKind.VOID.getName());
 	}
 
 	/**
@@ -124,11 +131,31 @@ public final class PrimitiveAndCollectionTypeConstants {
 	 * {@link Type} of all {@link IModelInstanceCollection}s of the kind
 	 * {@link CollectionKind#BAG}.
 	 */
-	public static final CollectionType MODEL_TYPE_BAG =
+	public static final CollectionType BAG =
 			TypesFactory.INSTANCE.createCollectionType();
 
 	static {
-		MODEL_TYPE_BAG.setKind(CollectionKind.BAG);
+		BAG.setKind(CollectionKind.BAG);
+	}
+
+	/**
+	 * Returns a {@link CollectionType} that is of kind {@link CollectionKind#BAG}
+	 * . The method call {@link CollectionType#setElementType(Type)} ensures that
+	 * the right generic type is set to the collection.
+	 * 
+	 * @param genericType
+	 *          the generic {@link Type} of the collection, e.g., AnyType,
+	 *          UML2Class, etc.
+	 * @return a {@link CollectionType} that is of kind {@link CollectionKind#BAG}
+	 */
+	public static final CollectionType BAG(Type genericType) {
+
+		CollectionType returnType = TypesFactory.INSTANCE.createCollectionType();
+
+		returnType.setKind(CollectionKind.BAG);
+		returnType.setElementType(genericType);
+
+		return returnType;
 	}
 
 	/**
@@ -139,11 +166,33 @@ public final class PrimitiveAndCollectionTypeConstants {
 	 * {@link Type} of all {@link IModelInstanceCollection}s of the kind
 	 * {@link CollectionKind#SEQUENCE}.
 	 */
-	public static final CollectionType MODEL_TYPE_SEQUENCE =
+	public static final CollectionType SEQUENCE =
 			TypesFactory.INSTANCE.createCollectionType();
 
 	static {
-		MODEL_TYPE_SEQUENCE.setKind(CollectionKind.SEQUENCE);
+		SEQUENCE.setKind(CollectionKind.SEQUENCE);
+	}
+
+	/**
+	 * Returns a {@link CollectionType} that is of kind
+	 * {@link CollectionKind#SEQUENCE} . The method call
+	 * {@link CollectionType#setElementType(Type)} ensures that the right generic
+	 * type is set to the collection.
+	 * 
+	 * @param genericType
+	 *          the generic {@link Type} of the collection, e.g., AnyType,
+	 *          UML2Class, etc.
+	 * @return a {@link CollectionType} that is of kind
+	 *         {@link CollectionKind#SEQUENCE}
+	 */
+	public static final CollectionType SEQUENCE(Type genericType) {
+
+		CollectionType returnType = TypesFactory.INSTANCE.createCollectionType();
+
+		returnType.setKind(CollectionKind.SEQUENCE);
+		returnType.setElementType(genericType);
+
+		return returnType;
 	}
 
 	/**
@@ -154,11 +203,31 @@ public final class PrimitiveAndCollectionTypeConstants {
 	 * {@link Type} of all {@link IModelInstanceCollection}s of the kind
 	 * {@link CollectionKind#SET}.
 	 */
-	public static final CollectionType MODEL_TYPE_SET =
+	public static final CollectionType SET =
 			TypesFactory.INSTANCE.createCollectionType();
 
 	static {
-		MODEL_TYPE_SET.setKind(CollectionKind.SET);
+		SET.setKind(CollectionKind.SET);
+	}
+
+	/**
+	 * Returns a {@link CollectionType} that is of kind {@link CollectionKind#SET}
+	 * . The method call {@link CollectionType#setElementType(Type)} ensures that
+	 * the right generic type is set to the collection.
+	 * 
+	 * @param genericType
+	 *          the generic {@link Type} of the collection, e.g., AnyType,
+	 *          UML2Class, etc.
+	 * @return a {@link CollectionType} that is of kind {@link CollectionKind#SET}
+	 */
+	public static final CollectionType SET(Type genericType) {
+
+		CollectionType returnType = TypesFactory.INSTANCE.createCollectionType();
+
+		returnType.setKind(CollectionKind.SET);
+		returnType.setElementType(genericType);
+
+		return returnType;
 	}
 
 	/**
@@ -169,10 +238,32 @@ public final class PrimitiveAndCollectionTypeConstants {
 	 * {@link Type} of all {@link IModelInstanceCollection}s of the kind
 	 * {@link CollectionKind#ORDERED_SET}.
 	 */
-	public static final CollectionType MODEL_TYPE_ORDERED_SET =
+	public static final CollectionType ORDERED_SET =
 			TypesFactory.INSTANCE.createCollectionType();
 
 	static {
-		MODEL_TYPE_ORDERED_SET.setKind(CollectionKind.ORDERED_SET);
+		ORDERED_SET.setKind(CollectionKind.ORDERED_SET);
+	}
+
+	/**
+	 * Returns a {@link CollectionType} that is of kind
+	 * {@link CollectionKind#ORDERED_SET} . The method call
+	 * {@link CollectionType#setElementType(Type)} ensures that the right generic
+	 * type is set to the collection.
+	 * 
+	 * @param genericType
+	 *          the generic {@link Type} of the collection, e.g., AnyType,
+	 *          UML2Class, etc.
+	 * @return a {@link CollectionType} that is of kind
+	 *         {@link CollectionKind#ORDERED_SET}
+	 */
+	public static final CollectionType ORDERED_SET(Type genericType) {
+
+		CollectionType returnType = TypesFactory.INSTANCE.createCollectionType();
+
+		returnType.setKind(CollectionKind.ORDERED_SET);
+		returnType.setElementType(genericType);
+
+		return returnType;
 	}
 }

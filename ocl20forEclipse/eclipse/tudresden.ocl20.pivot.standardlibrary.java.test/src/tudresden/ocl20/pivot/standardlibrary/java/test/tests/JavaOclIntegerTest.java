@@ -2,15 +2,12 @@ package tudresden.ocl20.pivot.standardlibrary.java.test.tests;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
 
 import org.junit.Test;
 
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclReal;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.factory.IStandardLibraryFactory;
-import tudresden.ocl20.pivot.standardlibrary.java.exceptions.InvalidException;
-
 
 // FIXME Michael: Add undefined and invalid tests
 public class JavaOclIntegerTest {
@@ -20,11 +17,16 @@ public class JavaOclIntegerTest {
 
 	private final OclInteger integer_400 =
 			myStandardLibraryFactory.createOclInteger(-400L);
-	private final OclInteger integer_1 = myStandardLibraryFactory.createOclInteger(-1L);
-	private final OclInteger integer0 = myStandardLibraryFactory.createOclInteger(0L);
-	private final OclInteger integer1 = myStandardLibraryFactory.createOclInteger(1L);
-	private final OclInteger integer4 = myStandardLibraryFactory.createOclInteger(4L);
-	private final OclInteger integer99 = myStandardLibraryFactory.createOclInteger(99L);
+	private final OclInteger integer_1 =
+			myStandardLibraryFactory.createOclInteger(-1L);
+	private final OclInteger integer0 =
+			myStandardLibraryFactory.createOclInteger(0L);
+	private final OclInteger integer1 =
+			myStandardLibraryFactory.createOclInteger(1L);
+	private final OclInteger integer4 =
+			myStandardLibraryFactory.createOclInteger(4L);
+	private final OclInteger integer99 =
+			myStandardLibraryFactory.createOclInteger(99L);
 	private final OclInteger integer100 =
 			myStandardLibraryFactory.createOclInteger(100L);
 	private final OclInteger integer400 =
@@ -33,7 +35,7 @@ public class JavaOclIntegerTest {
 	private final OclReal real0_25 = myStandardLibraryFactory.createOclReal(0.25);
 
 	@Test
-	public void testAdd() throws TestException {
+	public void testAdd() {
 
 		assertTrue(integer0.add(integer0).isEqualTo((integer0)).isTrue());
 		assertTrue(integer99.add(integer1).isEqualTo(integer100).isTrue());
@@ -47,38 +49,26 @@ public class JavaOclIntegerTest {
 	}
 
 	@Test
-	public void testDiv() throws TestException {
+	public void testDiv() {
 
 		assertTrue(integer100.div(integer100).isEqualTo(integer1).isTrue());
 		assertTrue(integer100.div(integer99).isEqualTo(integer1).isTrue());
 		assertTrue(integer99.div(integer100).isEqualTo(integer0).isTrue());
-
-		try {
-			integer1.div(integer0);
-			fail("Expected InvalidException, because of division by zero.");
-		} catch (InvalidException e) {
-			// OK
-		}
+		assertTrue(integer1.div(integer0).oclIsInvalid().isTrue());
 	}
 
 	@Test
-	public void testDivide() throws TestException {
+	public void testDivide() {
 
 		assertTrue(integer100.divide(integer100).isEqualTo(integer1).isTrue());
 		assertTrue(integer100.divide(integer1).isEqualTo(integer100).isTrue());
 		assertTrue(integer100.divide(integer400).isEqualTo(real0_25).isTrue());
 		assertTrue(integer100.divide(integer400).isEqualTo(real0_25).isTrue());
-
-		try {
-			integer100.divide(integer0);
-			fail("Expected InvalidException, because of division by zero.");
-		} catch (InvalidException e) {
-			// OK
-		}
+		assertTrue(integer100.divide(integer0).oclIsInvalid().isTrue());
 	}
 
 	@Test
-	public void testMax() throws TestException {
+	public void testMax() {
 
 		assertTrue(integer100.max(integer0).isEqualTo(integer100).isTrue());
 		assertTrue(integer100.max(integer99).isEqualTo(integer100).isTrue());
@@ -89,7 +79,7 @@ public class JavaOclIntegerTest {
 	}
 
 	@Test
-	public void testMin() throws TestException {
+	public void testMin() {
 
 		assertTrue(integer100.min(integer0).isEqualTo(integer0).isTrue());
 		assertTrue(integer100.min(integer99).isEqualTo(integer99).isTrue());
@@ -100,24 +90,18 @@ public class JavaOclIntegerTest {
 	}
 
 	@Test
-	public void testMod() throws TestException {
+	public void testMod() {
 
 		assertTrue(integer100.mod(integer100).isEqualTo(integer0).isTrue());
 		assertTrue(integer100.mod(integer1).isEqualTo(integer0).isTrue());
 		assertTrue(integer100.mod(integer99).isEqualTo(integer1).isTrue());
 		assertTrue(integer400.mod(integer99).isEqualTo(integer4).isTrue());
 		assertTrue(integer1.mod(integer4).isEqualTo(integer1).isTrue());
-
-		try {
-			integer4.mod(integer0);
-			fail("Expected InvalidException, because of division by zero.");
-		} catch (InvalidException e) {
-			// OK
-		}
+		assertTrue(integer4.mod(integer0).oclIsInvalid().isTrue());
 	}
 
 	@Test
-	public void testMultiply() throws TestException {
+	public void testMultiply() {
 
 		assertTrue(integer100.multiply(integer1).isEqualTo(integer100).isTrue());
 		assertTrue(integer100.multiply(integer0).isEqualTo(integer0).isTrue());
@@ -128,7 +112,7 @@ public class JavaOclIntegerTest {
 	}
 
 	@Test
-	public void testSubtract() throws TestException {
+	public void testSubtract() {
 
 		assertTrue(integer100.subtract(integer0).isEqualTo(integer100).isTrue());
 		assertTrue(integer100.subtract(integer1).isEqualTo(integer99).isTrue());
@@ -139,7 +123,7 @@ public class JavaOclIntegerTest {
 	}
 
 	@Test
-	public void testAbs() throws TestException {
+	public void testAbs() {
 
 		assertTrue(integer100.abs().isEqualTo(integer100).isTrue());
 		assertTrue(integer0.abs().isEqualTo(integer0).isTrue());
@@ -148,12 +132,12 @@ public class JavaOclIntegerTest {
 	}
 
 	@Test
-	public void testNegative() throws TestException {
+	public void testNegative() {
 
 		assertTrue(integer1.negative().isEqualTo(integer_1).isTrue());
 		assertTrue(integer_1.negative().isEqualTo(integer1).isTrue());
 		assertTrue(integer0.negative().isEqualTo(integer0).isTrue());
 		assertTrue(integer_400.negative().isEqualTo(integer400).isTrue());
 	}
-	
+
 }

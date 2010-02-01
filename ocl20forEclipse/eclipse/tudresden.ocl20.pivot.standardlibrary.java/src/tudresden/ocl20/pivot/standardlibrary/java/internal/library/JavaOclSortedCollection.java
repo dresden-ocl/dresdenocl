@@ -40,7 +40,8 @@ import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceCollecti
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceInteger;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.base.BasisJavaModelInstanceFactory;
-import tudresden.ocl20.pivot.standardlibrary.java.exceptions.InvalidException;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.base.TypeConstants;
+import tudresden.ocl20.pivot.pivotmodel.Type;
 import tudresden.ocl20.pivot.standardlibrary.java.factory.JavaStandardLibraryFactory;
 
 /**
@@ -65,19 +66,20 @@ public abstract class JavaOclSortedCollection<T extends OclAny> extends
 	 *          {@link OclSortedCollection}.
 	 */
 	public JavaOclSortedCollection(
-			IModelInstanceCollection<IModelInstanceElement> imiCollection) {
+			IModelInstanceCollection<IModelInstanceElement> imiCollection,
+			Type genericType) {
 
-		super(imiCollection);
+		super(imiCollection, genericType);
 	}
 
-	public JavaOclSortedCollection(String undefinedReason) {
+	public JavaOclSortedCollection(String undefinedReason, Type genericType) {
 
-		super(undefinedReason);
+		super(undefinedReason, genericType);
 	}
 
-	public JavaOclSortedCollection(Throwable invalidReason) {
+	public JavaOclSortedCollection(Throwable invalidReason, Type genericType) {
 
-		super(invalidReason);
+		super(invalidReason, genericType);
 	}
 
 	/*
@@ -87,27 +89,43 @@ public abstract class JavaOclSortedCollection<T extends OclAny> extends
 	 */
 	public T at(OclInteger index) {
 
-		T result;
+		T result = null;
 
-		checkUndefinedAndInvalid(this, index);
+		if (this.invalidReason != null)
+			result =
+					(T) JavaStandardLibraryFactory.INSTANCE.createOclInvalid(genericType,
+							this.invalidReason);
 
-		/* Else compute the result. */
+		if (result == null)
+			result = checkUndefined("concat", genericType, this, index);
 
-		int intIndex =
-				((IModelInstanceInteger) index.getModelInstanceElement()).getLong()
-						.intValue();
+		if (result == null) {
+			/* Else compute the result. */
+			int intIndex =
+					((IModelInstanceInteger) index.getModelInstanceElement()).getLong()
+							.intValue();
 
-		/* Try to get the element of the given index. */
-		try {
+			/* Try to get the element of the given index. */
+			try {
 
-			IModelInstanceElement element =
-					((List<IModelInstanceElement>) getModelInstanceCollection()
-							.getCollection()).get(intIndex - 1);
-			result = (T) JavaStandardLibraryFactory.INSTANCE.createOclAny(element);
+				/*
+				 * intIndex <= 0 -> NPE in BasicEList, therefore throw
+				 * IndexOutOfBoundsException
+				 */
+				if (intIndex <= 0)
+					throw new IndexOutOfBoundsException(
+							"Index <= 0 is not valid for OCL collections as they start at index 1.");
 
-		} catch (IndexOutOfBoundsException e) {
+				IModelInstanceElement element =
+						((List<IModelInstanceElement>) getModelInstanceCollection()
+								.getCollection()).get(intIndex - 1);
+				result = (T) JavaStandardLibraryFactory.INSTANCE.createOclAny(element);
 
-			throw new InvalidException(e);
+			} catch (IndexOutOfBoundsException e) {
+				result =
+						JavaStandardLibraryFactory.INSTANCE
+								.createOclInvalid(genericType, e);
+			}
 		}
 
 		return result;
@@ -145,20 +163,29 @@ public abstract class JavaOclSortedCollection<T extends OclAny> extends
 
 		OclInteger result;
 
-		checkUndefinedAndInvalid(this, anObject);
+		result =
+				checkInvalid(TypeConstants.INTEGER,
+						this, anObject);
 
-		/* Else compute the result. */
-		int intResult;
+		if (result == null)
+			result =
+					checkUndefined("indexOf",
+							TypeConstants.INTEGER, this);
 
-		intResult =
-				((List<IModelInstanceElement>) getModelInstanceCollection()
-						.getCollection()).indexOf(anObject.getModelInstanceElement()) + 1;
-		// FIXME Michael: -1 -> not found? -> invalid?
+		if (result == null) {
+			/* Else compute the result. */
+			int intResult;
 
-		IModelInstanceInteger imiResult =
-				BasisJavaModelInstanceFactory.createModelInstanceInteger(new Long(
-						intResult));
-		result = new JavaOclInteger(imiResult);
+			intResult =
+					((List<IModelInstanceElement>) getModelInstanceCollection()
+							.getCollection()).indexOf(anObject.getModelInstanceElement()) + 1;
+			// FIXME Michael: -1 / not found? / invalid?
+
+			IModelInstanceInteger imiResult =
+					BasisJavaModelInstanceFactory.createModelInstanceInteger(new Long(
+							intResult));
+			result = new JavaOclInteger(imiResult);
+		}
 
 		return result;
 	}
@@ -172,19 +199,29 @@ public abstract class JavaOclSortedCollection<T extends OclAny> extends
 
 		OclSequence<T> result;
 
-		checkUndefinedAndInvalid(this, aCollection);
-
-		/* Else compute the result. */
-		List<IModelInstanceElement> resultCollection;
-
-		resultCollection =
-				(List<IModelInstanceElement>) getModelInstanceCollection()
-						.getCollection();
-		resultCollection.addAll(aCollection.getModelInstanceCollection()
-				.getCollection());
-
 		result =
-				JavaStandardLibraryFactory.INSTANCE.createOclSequence(resultCollection);
+				checkInvalid(TypeConstants
+						.SEQUENCE(genericType), this, aCollection);
+
+		if (result == null)
+			result =
+					checkUndefined("union", TypeConstants
+							.SEQUENCE(genericType), this, aCollection);
+
+		if (result == null) {
+			/* Else compute the result. */
+			List<IModelInstanceElement> resultCollection;
+
+			resultCollection =
+					(List<IModelInstanceElement>) getModelInstanceCollection()
+							.getCollection();
+			resultCollection.addAll(aCollection.getModelInstanceCollection()
+					.getCollection());
+
+			result =
+					JavaStandardLibraryFactory.INSTANCE.createOclSequence(
+							resultCollection, genericType);
+		}
 
 		return result;
 	}

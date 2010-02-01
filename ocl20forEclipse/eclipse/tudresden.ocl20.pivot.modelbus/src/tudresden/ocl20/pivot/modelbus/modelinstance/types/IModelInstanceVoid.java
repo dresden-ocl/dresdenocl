@@ -26,7 +26,7 @@ import org.eclipse.osgi.util.NLS;
 import tudresden.ocl20.pivot.modelbus.internal.ModelBusMessages;
 import tudresden.ocl20.pivot.modelbus.modelinstance.exception.AsTypeCastException;
 import tudresden.ocl20.pivot.modelbus.modelinstance.exception.CopyForAtPreException;
-import tudresden.ocl20.pivot.modelbus.modelinstance.types.base.PrimitiveAndCollectionTypeConstants;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.base.TypeConstants;
 import tudresden.ocl20.pivot.pivotmodel.Operation;
 import tudresden.ocl20.pivot.pivotmodel.PrimitiveTypeKind;
 import tudresden.ocl20.pivot.pivotmodel.Type;
@@ -103,7 +103,7 @@ public interface IModelInstanceVoid extends IModelInstancePrimitiveType {
 			Set<Type> result;
 
 			result = new HashSet<Type>();
-			result.add(PrimitiveAndCollectionTypeConstants.MODEL_TYPE_VOID);
+			result.add(TypeConstants.VOID);
 
 			return result;
 		}
@@ -114,6 +114,7 @@ public interface IModelInstanceVoid extends IModelInstancePrimitiveType {
 		 * tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement
 		 * #isInstanceOf(tudresden.ocl20.pivot.pivotmodel.Type)
 		 */
+		// FIXME Michael: if OclInvalid has own meta-type, this should check for it
 		public boolean isKindOf(Type type) {
 
 			/*
@@ -131,7 +132,7 @@ public interface IModelInstanceVoid extends IModelInstancePrimitiveType {
 		 */
 		public boolean isTypeOf(Type type) {
 
-			return PrimitiveAndCollectionTypeConstants.MODEL_TYPE_VOID.equals(type);
+			return TypeConstants.VOID.equals(type);
 		}
 
 		/*

@@ -21,6 +21,7 @@ package tudresden.ocl20.pivot.modelbus.modelinstance.types.base;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
@@ -91,12 +92,12 @@ public class JavaModelInstanceCollection<T extends IModelInstanceElement>
 		/* Check if a List or set is given. */
 		if (containedObjects instanceof Set<?>) {
 
-			this.myTypes.add(PrimitiveAndCollectionTypeConstants.MODEL_TYPE_SET);
+			this.myTypes.add(TypeConstants.SET);
 		}
 
 		else {
 
-			this.myTypes.add(PrimitiveAndCollectionTypeConstants.MODEL_TYPE_BAG);
+			this.myTypes.add(TypeConstants.BAG);
 		}
 
 		/* Eventually debug the exit of this method. */
@@ -127,7 +128,7 @@ public class JavaModelInstanceCollection<T extends IModelInstanceElement>
 
 		this.initialize(containedObjects);
 
-		/* Check if sets have the right type of collection. */
+		/* Check if sets and sequences have the right type of collection. */
 		if (type.getKind().equals(CollectionKind.SET)
 				&& this.myContainedObjects != null
 				&& !(this.myContainedObjects instanceof Set<?>)) {
@@ -138,6 +139,18 @@ public class JavaModelInstanceCollection<T extends IModelInstanceElement>
 				&& this.myContainedObjects != null
 				&& !(this.myContainedObjects instanceof UniqueEList<?>)) {
 			this.myContainedObjects = new UniqueEList<T>(this.myContainedObjects);
+		}
+
+		else if (type.getKind().equals(CollectionKind.SEQUENCE)
+				&& this.myContainedObjects != null
+				&& !(this.myContainedObjects instanceof List<?>)) {
+			this.myContainedObjects = new ArrayList<T>(this.myContainedObjects);
+		}
+
+		else if (type.getKind().equals(CollectionKind.BAG)
+				&& this.myContainedObjects != null
+				&& !(this.myContainedObjects instanceof List<?>)) {
+			this.myContainedObjects = new ArrayList<T>(this.myContainedObjects);
 		}
 		// no else.
 
@@ -189,7 +202,7 @@ public class JavaModelInstanceCollection<T extends IModelInstanceElement>
 
 				result = new JavaModelInstanceCollection<T>(adaptedCollection,
 
-				PrimitiveAndCollectionTypeConstants.MODEL_TYPE_BAG);
+				TypeConstants.BAG);
 				break;
 
 			case SEQUENCE:
@@ -199,7 +212,7 @@ public class JavaModelInstanceCollection<T extends IModelInstanceElement>
 
 				result = new JavaModelInstanceCollection<T>(adaptedCollection,
 
-				PrimitiveAndCollectionTypeConstants.MODEL_TYPE_SEQUENCE);
+				TypeConstants.SEQUENCE);
 				break;
 
 			case SET:
@@ -209,7 +222,7 @@ public class JavaModelInstanceCollection<T extends IModelInstanceElement>
 
 				result = new JavaModelInstanceCollection<T>(adaptedCollection,
 
-				PrimitiveAndCollectionTypeConstants.MODEL_TYPE_SET);
+				TypeConstants.SET);
 				break;
 
 			case ORDERED_SET:
@@ -219,7 +232,7 @@ public class JavaModelInstanceCollection<T extends IModelInstanceElement>
 
 				result = new JavaModelInstanceCollection<T>(adaptedCollection,
 
-				PrimitiveAndCollectionTypeConstants.MODEL_TYPE_ORDERED_SET);
+				TypeConstants.ORDERED_SET);
 				break;
 
 			default:

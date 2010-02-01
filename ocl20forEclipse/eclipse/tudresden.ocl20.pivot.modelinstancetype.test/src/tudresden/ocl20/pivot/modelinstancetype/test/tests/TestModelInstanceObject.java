@@ -48,7 +48,7 @@ import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceObject;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceString;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceVoid;
-import tudresden.ocl20.pivot.modelbus.modelinstance.types.base.PrimitiveAndCollectionTypeConstants;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.base.TypeConstants;
 import tudresden.ocl20.pivot.modelinstancetype.test.ModelInstanceTypeTestPlugin;
 import tudresden.ocl20.pivot.modelinstancetype.test.ModelInstanceTypeTestServices;
 import tudresden.ocl20.pivot.modelinstancetype.test.msg.ModelInstanceTypeTestSuiteMessages;
@@ -640,11 +640,11 @@ public class TestModelInstanceObject {
 				/* Both values should have the right type. */
 				assertEquals(msg, 1, class2PropertyValue.getTypes().size());
 				assertTrue(msg, class2PropertyValue.getTypes().contains(
-						PrimitiveAndCollectionTypeConstants.MODEL_TYPE_STRING));
+						TypeConstants.STRING));
 
 				assertEquals(msg, 1, class1PropertyValue.getTypes().size());
 				assertTrue(msg, class1PropertyValue.getTypes().contains(
-						PrimitiveAndCollectionTypeConstants.MODEL_TYPE_STRING));
+						TypeConstants.STRING));
 
 				/* Both values should not be equal. */
 				if (((IModelInstanceString) class1PropertyValue).getString().equals(
@@ -947,7 +947,7 @@ public class TestModelInstanceObject {
 
 				/* The result should have an ordered set type. */
 				assertTrue(msg, operationResult.getTypes().contains(
-						PrimitiveAndCollectionTypeConstants.MODEL_TYPE_ORDERED_SET));
+						TypeConstants.ORDERED_SET));
 
 				/* The result should be an IModelInstanceCollecttion. */
 				assertTrue(msg, operationResult instanceof IModelInstanceCollection<?>);
@@ -1028,7 +1028,7 @@ public class TestModelInstanceObject {
 
 				/* The result should have an set type. */
 				assertTrue(msg, operationResult.getTypes().contains(
-						PrimitiveAndCollectionTypeConstants.MODEL_TYPE_SET));
+						TypeConstants.SET));
 
 				/* The result should be an IModelInstanceCollecttion. */
 				assertTrue(msg, operationResult instanceof IModelInstanceCollection<?>);
@@ -1109,7 +1109,7 @@ public class TestModelInstanceObject {
 
 				/* The result should have an sequence type. */
 				assertTrue(msg, operationResult.getTypes().contains(
-						PrimitiveAndCollectionTypeConstants.MODEL_TYPE_SEQUENCE));
+						TypeConstants.SEQUENCE));
 
 				/* The result should be an IModelInstanceCollecttion. */
 				assertTrue(msg, operationResult instanceof IModelInstanceCollection<?>);
@@ -1190,7 +1190,7 @@ public class TestModelInstanceObject {
 
 				/* The result should have an bag type. */
 				assertTrue(msg, operationResult.getTypes().contains(
-						PrimitiveAndCollectionTypeConstants.MODEL_TYPE_BAG));
+						TypeConstants.BAG));
 
 				/* The result should be an IModelInstanceCollecttion. */
 				assertTrue(msg, operationResult instanceof IModelInstanceCollection<?>);
@@ -2239,7 +2239,7 @@ public class TestModelInstanceObject {
 
 				/* The result should have an ordered set type. */
 				assertTrue(msg, aPropertyValue.getTypes().contains(
-						PrimitiveAndCollectionTypeConstants.MODEL_TYPE_ORDERED_SET));
+						TypeConstants.ORDERED_SET));
 
 				/* The result should be an IModelInstanceCollecttion. */
 				assertTrue(msg, aPropertyValue instanceof IModelInstanceCollection<?>);
@@ -2307,7 +2307,7 @@ public class TestModelInstanceObject {
 
 				/* The result should have an unordered set type. */
 				assertTrue(msg, aPropertyValue.getTypes().contains(
-						PrimitiveAndCollectionTypeConstants.MODEL_TYPE_SET));
+						TypeConstants.SET));
 
 				/* The result should be an IModelInstanceCollecttion. */
 				assertTrue(msg, aPropertyValue instanceof IModelInstanceCollection<?>);
@@ -2375,7 +2375,7 @@ public class TestModelInstanceObject {
 
 				/* The result should have an ordered list type. */
 				assertTrue(msg, aPropertyValue.getTypes().contains(
-						PrimitiveAndCollectionTypeConstants.MODEL_TYPE_SEQUENCE));
+						TypeConstants.SEQUENCE));
 
 				/* The result should be an IModelInstanceCollecttion. */
 				assertTrue(msg, aPropertyValue instanceof IModelInstanceCollection<?>);
@@ -2443,7 +2443,7 @@ public class TestModelInstanceObject {
 
 				/* The result should have an unordered list type. */
 				assertTrue(msg, aPropertyValue.getTypes().contains(
-						PrimitiveAndCollectionTypeConstants.MODEL_TYPE_BAG));
+						TypeConstants.BAG));
 
 				/* The result should be an IModelInstanceCollecttion. */
 				assertTrue(msg, aPropertyValue instanceof IModelInstanceCollection<?>);

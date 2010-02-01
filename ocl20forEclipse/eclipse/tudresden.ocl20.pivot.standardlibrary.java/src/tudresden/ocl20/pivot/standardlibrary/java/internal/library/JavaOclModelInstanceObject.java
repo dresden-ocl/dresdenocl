@@ -45,9 +45,10 @@ import tudresden.ocl20.pivot.modelbus.modelinstance.exception.PropertyAccessExce
 import tudresden.ocl20.pivot.modelbus.modelinstance.exception.PropertyNotFoundException;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceObject;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.base.TypeConstants;
 import tudresden.ocl20.pivot.pivotmodel.Operation;
 import tudresden.ocl20.pivot.pivotmodel.Property;
-import tudresden.ocl20.pivot.standardlibrary.java.exceptions.InvalidException;
+import tudresden.ocl20.pivot.pivotmodel.Type;
 import tudresden.ocl20.pivot.standardlibrary.java.factory.JavaStandardLibraryFactory;
 
 /**
@@ -61,6 +62,8 @@ import tudresden.ocl20.pivot.standardlibrary.java.factory.JavaStandardLibraryFac
 public class JavaOclModelInstanceObject extends JavaOclAny implements
 		OclModelInstanceObject {
 
+	protected Type metaType;
+
 	/**
 	 * <p>
 	 * Instantiates a new {@link JavaOclObject}.
@@ -69,19 +72,23 @@ public class JavaOclModelInstanceObject extends JavaOclAny implements
 	 * @param adaptee
 	 *          The adapted model instance object.
 	 */
-	public JavaOclModelInstanceObject(IModelInstanceObject imiObject) {
+	public JavaOclModelInstanceObject(IModelInstanceObject imiObject,
+			Type metaType) {
 
 		super(imiObject);
+		this.metaType = metaType;
 	}
 
-	public JavaOclModelInstanceObject(String undefinedReason) {
+	public JavaOclModelInstanceObject(String undefinedReason, Type metaType) {
 
 		super(undefinedReason);
+		this.metaType = metaType;
 	}
 
-	public JavaOclModelInstanceObject(Throwable invalidReason) {
+	public JavaOclModelInstanceObject(Throwable invalidReason, Type metaType) {
 
 		super(invalidReason);
+		this.metaType = metaType;
 	}
 
 	/*
@@ -104,12 +111,34 @@ public class JavaOclModelInstanceObject extends JavaOclAny implements
 	 */
 	public OclAny invokeOperation(Operation operation, OclAny... args) {
 
-		OclAny result;
+		OclAny result = null;
+		final String operationName = operation.getName();
 
-		result = checkUndefinedAndInvalid(operation, args);
+		/*
+		 * Handle oclIsTypeOf(), oclIsKindOf() and oclAsType() separately as the
+		 * argument has no IMIElement.
+		 */
+		if ((operationName.equals("oclIsTypeOf")
+				|| operationName.equals("oclIsKindOf") || operationName
+				.equals("oclAsType"))
+				&& args.length == 1) {
+			result = super.invokeOperation(operation, args);
+		}
+
+		/*
+		 * Handle oclIsInvalid() and oclIsUndefined separately as they cannot be
+		 * invoked on IMIElements and are definitely defined in the Standard
+		 * Library.
+		 */
+		if (result == null
+				&& (operationName.equals("oclIsUndefined") || operationName
+						.equals("oclIsInvalid")) && args.length == 0)
+			result = super.invokeOperation(operation, args);
+
+		if (result == null)
+			result = checkInvalid(operation, args);
 
 		if (result == null) {
-
 			/* Else try to invoke the operation. */
 			IModelInstanceElement imiResult;
 
@@ -124,19 +153,9 @@ public class JavaOclModelInstanceObject extends JavaOclAny implements
 					imiArguments.add(arg.getModelInstanceElement());
 				}
 
-				imiResult = getModelInstanceObject().invokeOperation(operation, imiArguments);
+				imiResult =
+						getModelInstanceObject().invokeOperation(operation, imiArguments);
 				result = JavaStandardLibraryFactory.INSTANCE.createOclAny(imiResult);
-			}
-
-			/*
-			 * An invalid exception can occur if a OclType object shall be adapted to
-			 * its IModelInstanceElement. OclTypes can only be arguments of operations
-			 * defined in the standard library. Thus, try to invoke a library
-			 * operation.
-			 */
-			catch (InvalidException e) {
-
-				result = super.invokeOperation(operation, args);
 			}
 
 			/*
@@ -159,6 +178,67 @@ public class JavaOclModelInstanceObject extends JavaOclAny implements
 		return result;
 	}
 
+	/**
+	 * Used to determine invalid return values for {@link Operation}s.
+	 * <code>this</code> is checked to be <code>undefined</code> or
+	 * <code>invalid</code> and the arguments are checked for <code>invalid</code>
+	 * .
+	 * 
+	 * @param operation
+	 *          the operation to call
+	 * @param args
+	 *          the arguments of the operation
+	 * @return <code>null</code> if neither the source nor the args are undefined
+	 *         or invalid, the undefined or invalid source else
+	 */
+	protected OclAny checkInvalid(Operation operation, OclAny... args) {
+
+		OclAny result = null;
+
+		/*
+		 * see standard, p. 138: all operations on OclInvalid are illegal, except
+		 * oclIsInvalid(); oclIsUndefined() is not considered to catch invalid ->
+		 * this is not conform to the standard!
+		 */
+		if (this.oclIsInvalid().isTrue()
+				&& !(operation.getName().equals("oclIsInvalid") && args.length == 0)
+				&& !(operation.getName().equals("isEqualTo") && args.length == 1)) {
+			result =
+					JavaStandardLibraryFactory.INSTANCE.createOclInvalid(operation
+							.getType(), this.getInvalidReason());
+		}
+
+		/*
+		 * see standard, p. 138: all operations on OclVoid are illegal, except
+		 * oclIsInvalid() and oclIsUndefined()
+		 */
+		else if (this.oclIsUndefined().isTrue()
+				&& !(operation.getName().equals("oclIsInvalid") && args.length == 0)
+				&& !(operation.getName().equals("oclIsUndefined") && args.length == 0)
+				&& !(operation.getName().equals("isEqualTo") && args.length == 1)) {
+			result =
+					JavaStandardLibraryFactory.INSTANCE.createOclInvalid(operation
+							.getType(), new RuntimeException("Tried to invoke operation "
+							+ operation.getName() + " on null. Reason: "
+							+ this.getUndefinedReason()));
+		}
+
+		if (result == null) {
+			/* The same for all the arguments */
+			for (OclAny arg : args) {
+
+				if (arg.oclIsInvalid().isTrue()) {
+					result =
+							JavaStandardLibraryFactory.INSTANCE.createOclInvalid(operation
+									.getType(), arg.getInvalidReason());
+					break;
+				}
+			}
+		}
+
+		return result;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny#asSet()
@@ -168,12 +248,23 @@ public class JavaOclModelInstanceObject extends JavaOclAny implements
 
 		OclSet<OclModelInstanceObject> result;
 
-		checkUndefinedAndInvalid(this);
+		result =
+				checkInvalid(TypeConstants
+						.SET(metaType), this);
 
-		Set<IModelInstanceElement> resultSet = new HashSet<IModelInstanceElement>();
-		resultSet.add(this.getModelInstanceObject());
+		// TODO Michael: use this method for other types
+		if (result == null)
+			result = checkAsSet(metaType);
 
-		result = JavaStandardLibraryFactory.INSTANCE.createOclSet(resultSet);
+		if (result == null) {
+			Set<IModelInstanceElement> resultSet =
+					new HashSet<IModelInstanceElement>();
+			resultSet.add(this.getModelInstanceObject());
+
+			result =
+					JavaStandardLibraryFactory.INSTANCE.createOclSet(resultSet,
+							TypeConstants.SET(metaType));
+		}
 
 		return result;
 	}
@@ -200,6 +291,7 @@ public class JavaOclModelInstanceObject extends JavaOclAny implements
 		}
 
 		/* Else check if the source is undefined. */
+		// FIXME Michael: should rather be invalid
 		else if (this.oclIsUndefined().isTrue()) {
 			result =
 					JavaStandardLibraryFactory.INSTANCE.createOclUndefined(property
@@ -256,27 +348,28 @@ public class JavaOclModelInstanceObject extends JavaOclAny implements
 
 		OclBoolean result;
 
-		checkUndefinedAndInvalid(this, that);
+		result = checkIsEqualTo(that);
 
-		if (!(that instanceof OclModelInstanceObject)) {
-			result = JavaOclBoolean.getInstance(false);
-		}
-
-		else {
-			Object thatObject =
-					((IModelInstanceObject) that.getModelInstanceElement()).getObject();
-
-			if (getModelInstanceObject().getObject().equals(thatObject)) {
-				result = JavaOclBoolean.getInstance(true);
-			}
-			else {
+		if (result == null) {
+			if (!(that instanceof OclModelInstanceObject)) {
 				result = JavaOclBoolean.getInstance(false);
+			}
+
+			else {
+				Object thatObject =
+						((IModelInstanceObject) that.getModelInstanceElement()).getObject();
+
+				if (getModelInstanceObject().getObject().equals(thatObject)) {
+					result = JavaOclBoolean.getInstance(true);
+				}
+				else {
+					result = JavaOclBoolean.getInstance(false);
+				}
 			}
 		}
 
 		return result;
 	}
-	
 
 	@Override
 	public String toString() {
@@ -285,7 +378,7 @@ public class JavaOclModelInstanceObject extends JavaOclAny implements
 
 		result.append(this.getClass().getSimpleName());
 		result.append("[");
-		
+
 		if (this.oclIsUndefined().isTrue()) {
 			result.append("undefined: " + this.undefinedreason);
 		}
@@ -299,7 +392,7 @@ public class JavaOclModelInstanceObject extends JavaOclAny implements
 			result.append(" - ");
 			result.append(getModelInstanceObject().getObject());
 		}
-		
+
 		result.append("]");
 
 		return result.toString();

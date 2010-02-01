@@ -30,16 +30,11 @@
  */
 package tudresden.ocl20.pivot.standardlibrary.java.internal.library;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBoolean;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclEnumLiteral;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSet;
-import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceEnumerationLiteral;
-import tudresden.ocl20.pivot.standardlibrary.java.factory.JavaStandardLibraryFactory;
 
 /**
  * <p>
@@ -96,17 +91,19 @@ public class JavaOclEnumLiteral extends JavaOclLibraryObject implements
 
 		OclBoolean result;
 
-		checkUndefinedAndInvalid(this, that);
+		result = checkIsEqualTo(that);
 
-		if (that instanceof JavaOclEnumLiteral) {
-			JavaOclEnumLiteral enumLiteral = (JavaOclEnumLiteral) that;
-			boolean boolResult =
-					getModelInstanceEnumerationLiteral().equals(
-							enumLiteral.getModelInstanceEnumerationLiteral());
-			result = JavaOclBoolean.getInstance(boolResult);
-		}
-		else {
-			result = JavaOclBoolean.getInstance(false);
+		if (result == null) {
+			if (that instanceof JavaOclEnumLiteral) {
+				JavaOclEnumLiteral enumLiteral = (JavaOclEnumLiteral) that;
+				boolean boolResult =
+						getModelInstanceEnumerationLiteral().equals(
+								enumLiteral.getModelInstanceEnumerationLiteral());
+				result = JavaOclBoolean.getInstance(boolResult);
+			}
+			else {
+				result = JavaOclBoolean.getInstance(false);
+			}
 		}
 
 		return result;
@@ -118,16 +115,19 @@ public class JavaOclEnumLiteral extends JavaOclLibraryObject implements
 	 */
 	public <T extends OclAny> OclSet<T> asSet() {
 
-		checkUndefinedAndInvalid(this);
-
-		OclSet<T> result;
-
-		Set<IModelInstanceElement> imiSet = new HashSet<IModelInstanceElement>();
-		imiSet.add(getModelInstanceEnumerationLiteral());
-
-		result = JavaStandardLibraryFactory.INSTANCE.createOclSet(imiSet);
-
-		return result;
+		// checkInvalid(this);
+		//
+		// OclSet<T> result;
+		//
+		// Set<IModelInstanceElement> imiSet = new HashSet<IModelInstanceElement>();
+		// imiSet.add(getModelInstanceEnumerationLiteral());
+		//
+		// result = JavaStandardLibraryFactory.INSTANCE.createOclSet(imiSet);
+		//
+		// return result;
+		// FIXME Michael: What generic type should the OclSet have?
+		throw new UnsupportedOperationException(
+				"asSet() on EnumerationLiteral is not supported yet");
 	}
 
 	@Override
@@ -137,7 +137,7 @@ public class JavaOclEnumLiteral extends JavaOclLibraryObject implements
 
 		result.append(this.getClass().getSimpleName());
 		result.append("[");
-		
+
 		if (this.oclIsUndefined().isTrue()) {
 			result.append("undefined: " + this.undefinedreason);
 		}
@@ -149,7 +149,7 @@ public class JavaOclEnumLiteral extends JavaOclLibraryObject implements
 		else {
 			result.append(getModelInstanceEnumerationLiteral().getName());
 		}
-		
+
 		result.append("]");
 
 		return result.toString();

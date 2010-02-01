@@ -38,10 +38,13 @@ import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBoolean;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSet;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclString;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclTuple;
+import tudresden.ocl20.pivot.essentialocl.types.AnyType;
+import tudresden.ocl20.pivot.essentialocl.types.TupleType;
+import tudresden.ocl20.pivot.essentialocl.types.TypesFactory;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceString;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceTuple;
-import tudresden.ocl20.pivot.standardlibrary.java.exceptions.InvalidException;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.base.TypeConstants;
 import tudresden.ocl20.pivot.standardlibrary.java.factory.JavaStandardLibraryFactory;
 
 /**
@@ -96,18 +99,20 @@ public class JavaOclTuple extends JavaOclLibraryObject implements OclTuple {
 
 		OclBoolean result;
 
-		checkUndefinedAndInvalid(this, that);
+		result = checkIsEqualTo(that);
 
-		/* Else compute the result. */
-		if (!(that instanceof OclTuple)) {
-			result = JavaOclBoolean.getInstance(false);
-		}
+		if (result == null) {
+			/* Else compute the result. */
+			if (!(that instanceof OclTuple)) {
+				result = JavaOclBoolean.getInstance(false);
+			}
 
-		else {
+			else {
 
-			result =
-					JavaOclBoolean.getInstance(getModelInstanceTuple().equals(
-							that.getModelInstanceElement()));
+				result =
+						JavaOclBoolean.getInstance(getModelInstanceTuple().equals(
+								that.getModelInstanceElement()));
+			}
 		}
 
 		return result;
@@ -123,17 +128,24 @@ public class JavaOclTuple extends JavaOclLibraryObject implements OclTuple {
 
 		OclAny result;
 
-		checkUndefinedAndInvalid(this);
+		AnyType anyType = TypesFactory.INSTANCE.createAnyType();
+		result = checkInvalid(anyType, this, pathname);
 
-		try {
+		if (result == null)
+			result = checkUndefined("getPropertyValue", anyType, this, pathname);
 
-			IModelInstanceElement imiResult =
-					getModelInstanceTuple().get(
-							(IModelInstanceString) pathname.getModelInstanceElement());
-			result = JavaStandardLibraryFactory.INSTANCE.createOclAny(imiResult);
+		if (result == null) {
+			try {
 
-		} catch (IllegalArgumentException e) {
-			throw new InvalidException(e);
+				IModelInstanceElement imiResult =
+						getModelInstanceTuple().get(
+								(IModelInstanceString) pathname.getModelInstanceElement());
+				result = JavaStandardLibraryFactory.INSTANCE.createOclAny(imiResult);
+
+			} catch (IllegalArgumentException e) {
+				result =
+						JavaStandardLibraryFactory.INSTANCE.createOclInvalid(anyType, e);
+			}
 		}
 
 		return result;
@@ -145,18 +157,28 @@ public class JavaOclTuple extends JavaOclLibraryObject implements OclTuple {
 	 */
 	public <T extends OclAny> OclSet<T> asSet() {
 
-		checkUndefinedAndInvalid(this);
-
 		OclSet<T> result;
+		TupleType tupleType = TypesFactory.INSTANCE.createTupleType();
 
-		Set<IModelInstanceElement> imiSet = new HashSet<IModelInstanceElement>();
-		imiSet.add(getModelInstanceTuple());
+		result =
+				checkInvalid(TypeConstants
+						.SET(tupleType), this);
 
-		result = JavaStandardLibraryFactory.INSTANCE.createOclSet(imiSet);
+		if (result == null)
+			result =
+					checkUndefined("asSet", TypeConstants
+							.SET(tupleType), this);
+
+		if (result == null) {
+			Set<IModelInstanceElement> imiSet = new HashSet<IModelInstanceElement>();
+			imiSet.add(getModelInstanceTuple());
+
+			result =
+					JavaStandardLibraryFactory.INSTANCE.createOclSet(imiSet, tupleType);
+		}
 
 		return result;
 	}
-	
 
 	@Override
 	public String toString() {
@@ -165,7 +187,7 @@ public class JavaOclTuple extends JavaOclLibraryObject implements OclTuple {
 
 		result.append(this.getClass().getSimpleName());
 		result.append("[");
-		
+
 		if (this.oclIsUndefined().isTrue()) {
 			result.append("undefined: " + this.undefinedreason);
 		}
@@ -178,7 +200,7 @@ public class JavaOclTuple extends JavaOclLibraryObject implements OclTuple {
 			// FIXME: print all values
 			result.append(getModelInstanceTuple().getName());
 		}
-		
+
 		result.append("]");
 
 		return result.toString();

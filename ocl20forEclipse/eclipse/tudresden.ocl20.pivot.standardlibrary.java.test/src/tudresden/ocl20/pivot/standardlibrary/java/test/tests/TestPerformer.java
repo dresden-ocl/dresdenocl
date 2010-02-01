@@ -269,67 +269,6 @@ public class TestPerformer {
 	}
 
 	/**
-	 * Tests arbitrary
-	 * 
-	 * @param element
-	 * @param type
-	 * @param operationName
-	 * @throws TestException
-	 */
-	public void testUndefinedAndInvalid(OclAny element, Type type,
-			String operationName, OclAny... parameters) throws TestException {
-
-		OclAny undefined =
-				myStandardLibraryFactory.createOclUndefined(type, "undefined value");
-		OclAny invalid =
-				myStandardLibraryFactory.createOclInvalid(type, new RuntimeException(
-						"invalid value"));
-		OclAny[] allParameters = new OclAny[parameters.length];
-		System.arraycopy(parameters, 0, allParameters, 0, parameters.length);
-
-		try {
-			Operation operation =
-					findOperation(element.getModelInstanceElement(), operationName);
-
-			for (int i = 0; i < allParameters.length; i++) {
-
-				OclAny oldParameter = allParameters[i];
-
-				// undefined
-				allParameters[i] = undefined;
-				OclAny undefinedValue =
-						element.invokeOperation(operation, allParameters);
-
-				if (!undefinedValue.oclIsUndefined().isTrue())
-					throw new TestException("expected undefined as return value of "
-							+ element + "." + operationName + "(" + undefined + ")");
-
-				if (undefinedValue.oclIsInvalid().isTrue())
-					throw new TestException("did not expect invalid as return value of "
-							+ element + "." + operationName + "(" + undefined + ")");
-
-				// invalid
-				allParameters[i] = invalid;
-				OclAny invalidValue = element.invokeOperation(operation, allParameters);
-
-				if (!invalidValue.oclIsInvalid().isTrue())
-					throw new TestException("expected invalid as return value of "
-							+ element + "." + operationName + "(" + invalid + ")");
-
-				if (!invalidValue.oclIsUndefined().isTrue())
-					throw new TestException(
-							"did not except undefined as return value of " + element + "."
-									+ operationName + "(" + invalid + ")");
-
-				allParameters[i] = oldParameter;
-			}
-		} catch (OperationNotFoundException e) {
-			throw new TestException(e);
-		}
-
-	}
-
-	/**
 	 * <p>
 	 * Loads the {@link IModel} used for testing.
 	 * </p>

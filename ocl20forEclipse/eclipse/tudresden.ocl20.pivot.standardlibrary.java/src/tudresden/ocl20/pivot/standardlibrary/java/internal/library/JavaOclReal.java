@@ -41,7 +41,7 @@ import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclReal;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSet;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceReal;
-import tudresden.ocl20.pivot.standardlibrary.java.exceptions.InvalidException;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.base.TypeConstants;
 import tudresden.ocl20.pivot.standardlibrary.java.factory.JavaStandardLibraryFactory;
 
 /**
@@ -95,13 +95,18 @@ public class JavaOclReal extends JavaOclLibraryObject implements OclReal,
 	 */
 	public OclReal abs() {
 
-		OclReal result;
+		OclReal result = null;
 
-		checkUndefinedAndInvalid(this);
+		result = checkInvalid(TypeConstants.REAL, this);
 
-		/* Else compute the result. */
-		Double doubleResult = Math.abs(getModelInstanceReal().getDouble());
-		result = JavaStandardLibraryFactory.INSTANCE.createOclReal(doubleResult);
+		if (result == null)
+			result = checkUndefined("abs", TypeConstants.REAL, this);
+
+		if (result == null) {
+			/* Else compute the result. */
+			Double doubleResult = Math.abs(getModelInstanceReal().getDouble());
+			result = JavaStandardLibraryFactory.INSTANCE.createOclReal(doubleResult);
+		}
 
 		return result;
 	}
@@ -114,15 +119,20 @@ public class JavaOclReal extends JavaOclLibraryObject implements OclReal,
 	 */
 	public OclReal add(OclReal that) {
 
-		OclReal result;
+		OclReal result = null;
 
-		checkUndefinedAndInvalid(this, that);
+		result = checkInvalid(TypeConstants.REAL, this, that);
 
-		/* Else compute the result. */
-		Double summand1 = this.getModelInstanceReal().getDouble();
-		Double summand2 = that.getModelInstanceReal().getDouble();
-		Double doubleResult = summand1 + summand2;
-		result = JavaStandardLibraryFactory.INSTANCE.createOclReal(doubleResult);
+		if (result == null)
+			result = checkUndefined("+", TypeConstants.REAL, this, that);
+
+		if (result == null) {
+			/* Else compute the result. */
+			Double summand1 = this.getModelInstanceReal().getDouble();
+			Double summand2 = that.getModelInstanceReal().getDouble();
+			Double doubleResult = summand1 + summand2;
+			result = JavaStandardLibraryFactory.INSTANCE.createOclReal(doubleResult);
+		}
 
 		return result;
 	}
@@ -135,30 +145,38 @@ public class JavaOclReal extends JavaOclLibraryObject implements OclReal,
 	 */
 	public OclInteger compareTo(OclComparable that) {
 
-		OclInteger result;
+		OclInteger result = null;
 
-		try {
+		result = checkInvalid(TypeConstants.INTEGER, this, that);
 
-			OclReal aReal;
+		if (result == null)
+			result = checkUndefined("compareTo", TypeConstants.INTEGER, this, that);
 
-			/* Cast the given object to real. */
-			aReal = (OclReal) that;
+		if (result == null) {
 
-			checkUndefinedAndInvalid(this, aReal);
+			try {
 
-			if (isGreaterThan(aReal).isTrue()) {
-				result = JavaStandardLibraryFactory.INSTANCE.createOclInteger(1L);
+				OclReal aReal;
+
+				/* Cast the given object to real. */
+				aReal = (OclReal) that;
+
+				if (isGreaterThan(aReal).isTrue()) {
+					result = JavaStandardLibraryFactory.INSTANCE.createOclInteger(1L);
+				}
+
+				else if (isLessThan(aReal).isTrue()) {
+					result = JavaStandardLibraryFactory.INSTANCE.createOclInteger(-1L);
+				}
+
+				else {
+					result = JavaStandardLibraryFactory.INSTANCE.createOclInteger(0L);
+				}
+			} catch (ClassCastException e) {
+				result =
+						JavaStandardLibraryFactory.INSTANCE.createOclInvalid(
+								TypeConstants.INTEGER, e);
 			}
-
-			else if (isLessThan(aReal).isTrue()) {
-				result = JavaStandardLibraryFactory.INSTANCE.createOclInteger(-1L);
-			}
-
-			else {
-				result = JavaStandardLibraryFactory.INSTANCE.createOclInteger(0L);
-			}
-		} catch (ClassCastException e) {
-			throw new InvalidException(e);
 		}
 
 		return result;
@@ -172,21 +190,33 @@ public class JavaOclReal extends JavaOclLibraryObject implements OclReal,
 	 */
 	public OclReal divide(OclReal that) {
 
-		OclReal result;
+		OclReal result = null;
 
-		checkUndefinedAndInvalid(this, that);
+		result = checkInvalid(TypeConstants.REAL, this, that);
 
-		/* Else compute the result. */
-		Double dividend = this.getModelInstanceReal().getDouble();
-		Double divisor = that.getModelInstanceReal().getDouble();
+		if (result == null)
+			result = checkUndefined("/", TypeConstants.REAL, this, that);
 
-		try {
-			Double doubleResult = dividend / divisor;
-			if (doubleResult.isInfinite() || doubleResult.isNaN())
-				throw new InvalidException(new ArithmeticException("Division by zero"));
-			result = JavaStandardLibraryFactory.INSTANCE.createOclReal(doubleResult);
-		} catch (ArithmeticException e) {
-			throw new InvalidException(e);
+		if (result == null) {
+			/* Else compute the result. */
+			Double dividend = this.getModelInstanceReal().getDouble();
+			Double divisor = that.getModelInstanceReal().getDouble();
+
+			try {
+				Double doubleResult = dividend / divisor;
+				if (doubleResult.isInfinite() || doubleResult.isNaN())
+					result =
+							JavaStandardLibraryFactory.INSTANCE.createOclInvalid(
+									TypeConstants.REAL, new ArithmeticException(
+											"Division by zero"));
+				if (result == null)
+					result =
+							JavaStandardLibraryFactory.INSTANCE.createOclReal(doubleResult);
+			} catch (ArithmeticException e) {
+				result =
+						JavaStandardLibraryFactory.INSTANCE.createOclInvalid(
+								TypeConstants.REAL, e);
+			}
 		}
 
 		return result;
@@ -198,15 +228,19 @@ public class JavaOclReal extends JavaOclLibraryObject implements OclReal,
 	 */
 	public OclInteger floor() {
 
-		OclInteger result;
+		OclInteger result = null;
 
-		checkUndefinedAndInvalid(this);
+		result = checkInvalid(TypeConstants.INTEGER, this);
 
-		/* Else compute the result. */
-		Double doubleResult = Math.floor(getModelInstanceReal().getDouble());
-		result =
-				JavaStandardLibraryFactory.INSTANCE.createOclInteger(doubleResult
-						.longValue());
+		if (result == null)
+			result = checkUndefined("floor", TypeConstants.INTEGER, this);
+
+		if (result == null) { /* Else compute the result. */
+			Double doubleResult = Math.floor(getModelInstanceReal().getDouble());
+			result =
+					JavaStandardLibraryFactory.INSTANCE.createOclInteger(doubleResult
+							.longValue());
+		}
 
 		return result;
 	}
@@ -219,15 +253,20 @@ public class JavaOclReal extends JavaOclLibraryObject implements OclReal,
 	 */
 	public OclBoolean isGreaterEqual(OclReal that) {
 
-		OclBoolean result;
+		OclBoolean result = null;
 
-		checkUndefinedAndInvalid(this, that);
+		result = checkInvalid(TypeConstants.BOOLEAN, this, that);
 
-		/* Else compute the result. */
-		Double double1 = getModelInstanceReal().getDouble();
-		Double double2 = that.getModelInstanceReal().getDouble();
+		if (result == null)
+			result = checkUndefined(">=", TypeConstants.BOOLEAN, this, that);
 
-		result = JavaOclBoolean.getInstance(double1 >= double2);
+		if (result == null) {
+			/* Else compute the result. */
+			Double double1 = getModelInstanceReal().getDouble();
+			Double double2 = that.getModelInstanceReal().getDouble();
+
+			result = JavaOclBoolean.getInstance(double1 >= double2);
+		}
 
 		return result;
 	}
@@ -240,15 +279,20 @@ public class JavaOclReal extends JavaOclLibraryObject implements OclReal,
 	 */
 	public OclBoolean isGreaterThan(OclReal that) {
 
-		OclBoolean result;
+		OclBoolean result = null;
 
-		checkUndefinedAndInvalid(this, that);
+		result = checkInvalid(TypeConstants.BOOLEAN, this, that);
 
-		/* Else compute the result. */
-		Double double1 = getModelInstanceReal().getDouble();
-		Double double2 = that.getModelInstanceReal().getDouble();
+		if (result == null)
+			result = checkUndefined(">", TypeConstants.BOOLEAN, this, that);
 
-		result = JavaOclBoolean.getInstance(double1 > double2);
+		if (result == null) {
+			/* Else compute the result. */
+			Double double1 = getModelInstanceReal().getDouble();
+			Double double2 = that.getModelInstanceReal().getDouble();
+
+			result = JavaOclBoolean.getInstance(double1 > double2);
+		}
 
 		return result;
 	}
@@ -260,15 +304,20 @@ public class JavaOclReal extends JavaOclLibraryObject implements OclReal,
 	 */
 	public OclBoolean isLessEqual(OclReal that) {
 
-		OclBoolean result;
+		OclBoolean result = null;
 
-		checkUndefinedAndInvalid(this, that);
+		result = checkInvalid(TypeConstants.BOOLEAN, this, that);
 
-		/* Else compute the result. */
-		Double double1 = getModelInstanceReal().getDouble();
-		Double double2 = that.getModelInstanceReal().getDouble();
+		if (result == null)
+			result = checkUndefined("<=", TypeConstants.BOOLEAN, this, that);
 
-		result = JavaOclBoolean.getInstance(double1 <= double2);
+		if (result == null) {
+			/* Else compute the result. */
+			Double double1 = getModelInstanceReal().getDouble();
+			Double double2 = that.getModelInstanceReal().getDouble();
+
+			result = JavaOclBoolean.getInstance(double1 <= double2);
+		}
 
 		return result;
 	}
@@ -280,15 +329,20 @@ public class JavaOclReal extends JavaOclLibraryObject implements OclReal,
 	 */
 	public OclBoolean isLessThan(OclReal that) {
 
-		OclBoolean result;
+		OclBoolean result = null;
 
-		checkUndefinedAndInvalid(this, that);
+		result = checkInvalid(TypeConstants.BOOLEAN, this, that);
 
-		/* Else compute the result. */
-		Double double1 = getModelInstanceReal().getDouble();
-		Double double2 = that.getModelInstanceReal().getDouble();
+		if (result == null)
+			result = checkUndefined("<", TypeConstants.BOOLEAN, this, that);
 
-		result = JavaOclBoolean.getInstance(double1 < double2);
+		if (result == null) {
+			/* Else compute the result. */
+			Double double1 = getModelInstanceReal().getDouble();
+			Double double2 = that.getModelInstanceReal().getDouble();
+
+			result = JavaOclBoolean.getInstance(double1 < double2);
+		}
 
 		return result;
 	}
@@ -301,15 +355,20 @@ public class JavaOclReal extends JavaOclLibraryObject implements OclReal,
 	 */
 	public OclReal max(OclReal that) {
 
-		OclReal result;
+		OclReal result = null;
 
-		checkUndefinedAndInvalid(this, that);
+		result = checkInvalid(TypeConstants.REAL, this, that);
 
-		/* Else compute the result. */
-		Double double1 = this.getModelInstanceReal().getDouble();
-		Double double2 = that.getModelInstanceReal().getDouble();
-		Double doubleResult = Math.max(double1, double2);
-		result = JavaStandardLibraryFactory.INSTANCE.createOclReal(doubleResult);
+		if (result == null)
+			result = checkUndefined("max", TypeConstants.REAL, this, that);
+
+		if (result == null) {
+			/* Else compute the result. */
+			Double double1 = this.getModelInstanceReal().getDouble();
+			Double double2 = that.getModelInstanceReal().getDouble();
+			Double doubleResult = Math.max(double1, double2);
+			result = JavaStandardLibraryFactory.INSTANCE.createOclReal(doubleResult);
+		}
 
 		return result;
 	}
@@ -322,15 +381,20 @@ public class JavaOclReal extends JavaOclLibraryObject implements OclReal,
 	 */
 	public OclReal min(OclReal that) {
 
-		OclReal result;
+		OclReal result = null;
 
-		checkUndefinedAndInvalid(this, that);
+		result = checkInvalid(TypeConstants.REAL, this, that);
 
-		/* Else compute the result. */
-		Double double1 = this.getModelInstanceReal().getDouble();
-		Double double2 = that.getModelInstanceReal().getDouble();
-		Double doubleResult = Math.min(double1, double2);
-		result = JavaStandardLibraryFactory.INSTANCE.createOclReal(doubleResult);
+		if (result == null)
+			result = checkUndefined("min", TypeConstants.REAL, this, that);
+
+		if (result == null) {
+			/* Else compute the result. */
+			Double double1 = this.getModelInstanceReal().getDouble();
+			Double double2 = that.getModelInstanceReal().getDouble();
+			Double doubleResult = Math.min(double1, double2);
+			result = JavaStandardLibraryFactory.INSTANCE.createOclReal(doubleResult);
+		}
 
 		return result;
 	}
@@ -343,15 +407,20 @@ public class JavaOclReal extends JavaOclLibraryObject implements OclReal,
 	 */
 	public OclReal multiply(OclReal that) {
 
-		OclReal result;
+		OclReal result = null;
 
-		checkUndefinedAndInvalid(this, that);
+		result = checkInvalid(TypeConstants.REAL, this, that);
 
-		/* Else compute the result. */
-		Double double1 = this.getModelInstanceReal().getDouble();
-		Double double2 = that.getModelInstanceReal().getDouble();
-		Double doubleResult = double1 * double2;
-		result = JavaStandardLibraryFactory.INSTANCE.createOclReal(doubleResult);
+		if (result == null)
+			result = checkUndefined("*", TypeConstants.REAL, this, that);
+
+		if (result == null) {
+			/* Else compute the result. */
+			Double double1 = this.getModelInstanceReal().getDouble();
+			Double double2 = that.getModelInstanceReal().getDouble();
+			Double doubleResult = double1 * double2;
+			result = JavaStandardLibraryFactory.INSTANCE.createOclReal(doubleResult);
+		}
 
 		return result;
 	}
@@ -362,13 +431,17 @@ public class JavaOclReal extends JavaOclLibraryObject implements OclReal,
 	 */
 	public OclReal negative() {
 
-		OclReal result;
+		OclReal result = null;
 
-		checkUndefinedAndInvalid(this);
+		result = checkInvalid(TypeConstants.REAL, this);
 
-		/* Else compute the result. */
-		Double doubleResult = -(getModelInstanceReal().getDouble());
-		result = JavaStandardLibraryFactory.INSTANCE.createOclReal(doubleResult);
+		if (result == null)
+			result = checkUndefined("-", TypeConstants.REAL, this);
+
+		if (result == null) { /* Else compute the result. */
+			Double doubleResult = -(getModelInstanceReal().getDouble());
+			result = JavaStandardLibraryFactory.INSTANCE.createOclReal(doubleResult);
+		}
 
 		return result;
 	}
@@ -379,13 +452,18 @@ public class JavaOclReal extends JavaOclLibraryObject implements OclReal,
 	 */
 	public OclInteger round() {
 
-		OclInteger result;
+		OclInteger result = null;
 
-		checkUndefinedAndInvalid(this);
+		result = checkInvalid(TypeConstants.INTEGER, this);
 
-		/* Else compute the result. */
-		Long intResult = Math.round(getModelInstanceReal().getDouble());
-		result = JavaStandardLibraryFactory.INSTANCE.createOclInteger(intResult);
+		if (result == null)
+			result = checkUndefined("round", TypeConstants.INTEGER, this);
+
+		if (result == null) {
+			/* Else compute the result. */
+			Long intResult = Math.round(getModelInstanceReal().getDouble());
+			result = JavaStandardLibraryFactory.INSTANCE.createOclInteger(intResult);
+		}
 
 		return result;
 	}
@@ -398,15 +476,20 @@ public class JavaOclReal extends JavaOclLibraryObject implements OclReal,
 	 */
 	public OclReal subtract(OclReal that) {
 
-		OclReal result;
+		OclReal result = null;
 
-		checkUndefinedAndInvalid(this, that);
+		result = checkInvalid(TypeConstants.REAL, this, that);
 
-		/* Else compute the result. */
-		Double double1 = this.getModelInstanceReal().getDouble();
-		Double double2 = that.getModelInstanceReal().getDouble();
-		Double doubleResult = double1 - double2;
-		result = JavaStandardLibraryFactory.INSTANCE.createOclReal(doubleResult);
+		if (result == null)
+			result = checkUndefined("-", TypeConstants.REAL, this, that);
+
+		if (result == null) {
+			/* Else compute the result. */
+			Double double1 = this.getModelInstanceReal().getDouble();
+			Double double2 = that.getModelInstanceReal().getDouble();
+			Double doubleResult = double1 - double2;
+			result = JavaStandardLibraryFactory.INSTANCE.createOclReal(doubleResult);
+		}
 
 		return result;
 	}
@@ -418,21 +501,24 @@ public class JavaOclReal extends JavaOclLibraryObject implements OclReal,
 	 */
 	public OclBoolean isEqualTo(OclAny that) {
 
-		OclBoolean result;
+		OclBoolean result = null;
 
-		checkUndefinedAndInvalid(this, that);
+		result = checkIsEqualTo(that);
 
-		if (!(that instanceof OclReal)) {
-			result = JavaOclBoolean.getInstance(false);
+		if (result == null) {
+			if (!(that instanceof OclReal)) {
+				result = JavaOclBoolean.getInstance(false);
+			}
+			/* Else compute the result. */
+			else {
+
+				Double double1 = this.getModelInstanceReal().getDouble();
+				Double double2 =
+						((IModelInstanceReal) that.getModelInstanceElement()).getDouble();
+				result = JavaOclBoolean.getInstance(double1.equals(double2));
+			}
 		}
-		/* Else compute the result. */
-		else {
 
-			Double double1 = this.getModelInstanceReal().getDouble();
-			Double double2 =
-					((IModelInstanceReal) that.getModelInstanceElement()).getDouble();
-			result = JavaOclBoolean.getInstance(double1.equals(double2));
-		}
 		return result;
 	}
 
@@ -442,14 +528,20 @@ public class JavaOclReal extends JavaOclLibraryObject implements OclReal,
 	 */
 	public <T extends OclAny> OclSet<T> asSet() {
 
-		checkUndefinedAndInvalid(this);
+		OclSet<T> result = null;
 
-		OclSet<T> result;
+		result = checkInvalid(TypeConstants.SET(TypeConstants.REAL), this);
 
-		Set<IModelInstanceElement> imiSet = new HashSet<IModelInstanceElement>();
-		imiSet.add(getModelInstanceReal());
+		if (result == null) {
+			Set<IModelInstanceElement> imiSet = new HashSet<IModelInstanceElement>();
+			// FIXME Michael: null can be casted to empty set?
+			if (this.undefinedreason == null)
+				imiSet.add(getModelInstanceReal());
 
-		result = JavaStandardLibraryFactory.INSTANCE.createOclSet(imiSet);
+			result =
+					JavaStandardLibraryFactory.INSTANCE.createOclSet(imiSet,
+							TypeConstants.REAL);
+		}
 
 		return result;
 	}
@@ -470,7 +562,10 @@ public class JavaOclReal extends JavaOclLibraryObject implements OclReal,
 
 		} catch (ClassCastException e) {
 
-			throw new InvalidException(e);
+			// FIXME Michael: What to do with multiple types?
+			result =
+					JavaStandardLibraryFactory.INSTANCE.createOclInvalid(that
+							.getModelInstanceElement().getTypes().iterator().next(), e);
 		}
 
 		return result;
@@ -493,26 +588,26 @@ public class JavaOclReal extends JavaOclLibraryObject implements OclReal,
 	 * #toString()
 	 */
 	public String toString() {
-	
+
 		StringBuilder result = new StringBuilder();
-	
+
 		result.append(this.getClass().getSimpleName());
 		result.append("[");
-	
+
 		if (this.oclIsUndefined().isTrue()) {
 			result.append("undefined: " + this.undefinedreason);
 		}
-	
+
 		else if (this.oclIsInvalid().isTrue()) {
 			result.append("invalid: " + this.invalidReason.getMessage());
 		}
-	
+
 		else {
 			result.append((getModelInstanceReal().getDouble()).toString());
 		}
-	
+
 		result.append("]");
-	
+
 		return result.toString();
 	}
 
