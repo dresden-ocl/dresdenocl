@@ -71,6 +71,7 @@ import tudresden.ocl20.pivot.essentialocl.types.VoidType;
 import tudresden.ocl20.pivot.modelbus.model.IModel;
 import tudresden.ocl20.pivot.ocl2java.IOcl2Code;
 import tudresden.ocl20.pivot.ocl2java.IOcl2CodeSettings;
+import tudresden.ocl20.pivot.ocl2java.Ocl2CodeSettings;
 import tudresden.ocl20.pivot.ocl2java.code.IOcl22CodeEnvironment;
 import tudresden.ocl20.pivot.ocl2java.code.ITransformedCode;
 import tudresden.ocl20.pivot.ocl2java.code.ITransformedType;
@@ -134,7 +135,7 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 	private IOcl22CodeEnvironment myCodeTransEnv;
 
 	/** The Settings used during code generation. */
-	private Ocl2JavaSettings mySettings;
+	private IOcl2CodeSettings mySettings;
 
 	/**
 	 * <p>
@@ -181,7 +182,7 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 
 			this.myTemplateEngine = new StringTemplateEngine(templatePaths);
 
-			this.mySettings = new Ocl2JavaSettings();
+			this.mySettings = new Ocl2CodeSettings();
 		}
 
 		catch (IOException e) {
@@ -204,12 +205,24 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 		// no else.
 	}
 
-	/**
-	 * @return The {@link Ocl2JavaSettings} of this {@link Ocl2Java} object.
+	/*
+	 * (non-Javadoc)
+	 * @see tudresden.ocl20.pivot.ocl2java.IOcl2Code#getSettings()
 	 */
-	public Ocl2JavaSettings getSettings() {
+	public IOcl2CodeSettings getSettings() {
 
 		return this.mySettings;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * tudresden.ocl20.pivot.ocl2java.IOcl2Code#setSettings(tudresden.ocl20.pivot
+	 * .ocl2java.IOcl2CodeSettings)
+	 */
+	public void setSettings(IOcl2CodeSettings settings) {
+
+		this.mySettings = settings;
 	}
 
 	/*

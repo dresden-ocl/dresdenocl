@@ -1,5 +1,5 @@
 /*
-Copyright (C) 2008-2009 by Claas Wilke (claaswilke@gmx.net)
+Copyright (C) 2008-2010 by Claas Wilke (claaswilke@gmx.net)
 
 This file is part of the OCL 2 Java Code Generator of Dresden OCL2 for Eclipse.
 
@@ -35,9 +35,19 @@ import tudresden.ocl20.pivot.pivotmodel.Constraint;
 public interface IOcl2Code {
 
 	/**
-	 * @return The {@link Ocl2CodeSettings} of this {@link IOcl2Code} object.
+	 * @return The {@link IOcl2CodeSettings} of this {@link IOcl2Code} object.
 	 */
 	public IOcl2CodeSettings getSettings();
+
+	/**
+	 * <p>
+	 * Sets the {@link IOcl2CodeSettings} of this {@link IOcl2Code} object.
+	 * </p>
+	 * 
+	 * @param settings
+	 *          The {@link IOcl2CodeSettings} to be set.
+	 */
+	public void setSettings(IOcl2CodeSettings settings);
 
 	/**
 	 * <p>
@@ -46,12 +56,12 @@ public interface IOcl2Code {
 	 * </p>
 	 * 
 	 * @param constraints
-	 *            The {@link List} of the {@link Constraint}s whose code
-	 *            fragments shall be transformed.
+	 *          The {@link List} of the {@link Constraint}s whose code fragments
+	 *          shall be transformed.
 	 * @return A {@link List} containing the transformed fragment code of the
 	 *         given {@link Constraint}s.
 	 * @throws Ocl2CodeException
-	 *             Thrown, if an error during code transformation occurs.
+	 *           Thrown, if an error during code transformation occurs.
 	 */
 	public List<String> transformFragmentCode(List<Constraint> constraints)
 			throws Ocl2CodeException;
@@ -63,14 +73,14 @@ public interface IOcl2Code {
 	 * </p>
 	 * 
 	 * @param constraints
-	 *            The {@link List} of the {@link Constraint}s whose
-	 *            instrumentation code shall be transformed.
+	 *          The {@link List} of the {@link Constraint}s whose instrumentation
+	 *          code shall be transformed.
 	 * @return A {@link List} containing the transformed code of the given
 	 *         {@link Constraint}s.
 	 * @throws Ocl2CodeException
-	 *             Thrown, if an error during code transformation occurs.
+	 *           Thrown, if an error during code transformation occurs.
 	 */
-	public List<String> transformInstrumentationCode(
-			List<Constraint> constraints) throws Ocl2CodeException;
+	public List<String> transformInstrumentationCode(List<Constraint> constraints)
+			throws Ocl2CodeException;
 
 }
