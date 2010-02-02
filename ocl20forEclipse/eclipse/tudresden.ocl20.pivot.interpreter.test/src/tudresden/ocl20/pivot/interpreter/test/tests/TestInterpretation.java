@@ -6018,7 +6018,8 @@ public class TestInterpretation {
 
 		/* Compare with expected results. */
 		result_Boolean = (OclBoolean) results.get(1).getResult();
-		assertTrue(result_Boolean.oclIsUndefined().isTrue());
+		assertFalse(result_Boolean.oclIsUndefined().isTrue());
+		assertTrue(result_Boolean.oclIsInvalid().isTrue());
 	}
 
 	/**
