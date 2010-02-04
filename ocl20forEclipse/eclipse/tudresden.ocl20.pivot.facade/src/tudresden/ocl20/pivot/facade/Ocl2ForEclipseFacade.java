@@ -50,11 +50,10 @@ import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceType;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
 import tudresden.ocl20.pivot.modelinstancetype.ecore.EcoreModelInstanceTypePlugin;
 import tudresden.ocl20.pivot.modelinstancetype.java.JavaModelInstanceTypePlugin;
-import tudresden.ocl20.pivot.ocl2java.IOcl2Code;
-import tudresden.ocl20.pivot.ocl2java.IOcl2CodeSettings;
-import tudresden.ocl20.pivot.ocl2java.Ocl2CodeFactory;
-import tudresden.ocl20.pivot.ocl2java.Ocl2CodeSettings;
-import tudresden.ocl20.pivot.ocl2java.exception.Ocl2CodeException;
+import tudresden.ocl20.pivot.ocl2java.IOcl22Code;
+import tudresden.ocl20.pivot.ocl2java.IOcl22CodeSettings;
+import tudresden.ocl20.pivot.ocl2java.Ocl22JavaFactory;
+import tudresden.ocl20.pivot.ocl2java.exception.Ocl22CodeException;
 import tudresden.ocl20.pivot.ocl2parser.parser.OCL2Parser;
 import tudresden.ocl20.pivot.ocl2parser.parser.exceptions.BuildingASTException;
 import tudresden.ocl20.pivot.ocl2parser.parser.exceptions.LexException;
@@ -102,29 +101,29 @@ public class Ocl2ForEclipseFacade {
 	private static Map<IModelInstance, IOclInterpreter> cachedInterpreters =
 			new WeakHashMap<IModelInstance, IOclInterpreter>();
 
-	/** The {@link IOcl2Code} representing the Java/AspectJ code generator. */
-	private static IOcl2Code javaCodeGenerator = null;
+	/** The {@link IOcl22Code} representing the Java/AspectJ code generator. */
+	private static IOcl22Code javaCodeGenerator = null;
 
 	/**
 	 * <p>
 	 * Generates the AspectJ code for a given {@link List} of {@link Constraint}s
-	 * and a given {@link IOcl2CodeSettings}.
+	 * and a given {@link IOcl22CodeSettings}.
 	 * </p>
 	 * 
 	 * @param constraints
 	 *          The {@link Constraint}s used for code generation.
 	 * @param settings
-	 *          The {@link IOcl2CodeSettings} used for code generation (can be
+	 *          The {@link IOcl22CodeSettings} used for code generation (can be
 	 *          <code>null</code> if default settings shall be used).
 	 * @return The generated AspectJ code as a set of {@link String}s.
 	 * @throws IllegalArgumentException
 	 *           Thrown if the {@link List} of {@link Constraint}s is empty or
 	 *           <code>null</code>.
-	 * @throws Ocl2CodeException
+	 * @throws Ocl22CodeException
 	 */
 	public static List<String> generateAspectJCode(List<Constraint> constraints,
-			IOcl2CodeSettings settings) throws IllegalArgumentException,
-			Ocl2CodeException {
+			IOcl22CodeSettings settings) throws IllegalArgumentException,
+			Ocl22CodeException {
 
 		if (constraints == null || constraints.size() == 0) {
 			throw new IllegalArgumentException(
@@ -134,16 +133,20 @@ public class Ocl2ForEclipseFacade {
 
 		if (javaCodeGenerator == null) {
 			javaCodeGenerator =
-					Ocl2CodeFactory.getInstance().createJavaCodeGenerator();
+					Ocl22JavaFactory.getInstance().createJavaCodeGenerator();
 		}
 		// no else.
 
-		if (settings == null) {
+		javaCodeGenerator.resetEnvironment();
+
+		if (settings != null) {
 			javaCodeGenerator.setSettings(settings);
 		}
 
 		else {
-			javaCodeGenerator.setSettings(new Ocl2CodeSettings());
+			/* Necessary to replace possibly altered settings. */
+			javaCodeGenerator.setSettings(Ocl22JavaFactory.getInstance()
+					.createJavaCodeGeneratorSettings());
 		}
 
 		return javaCodeGenerator.transformInstrumentationCode(constraints);
@@ -152,23 +155,23 @@ public class Ocl2ForEclipseFacade {
 	/**
 	 * <p>
 	 * Generates the AspectJ code for a given {@link Constraint} and a given
-	 * {@link IOcl2CodeSettings}.
+	 * {@link IOcl22CodeSettings}.
 	 * </p>
 	 * 
 	 * @param constraint
 	 *          The {@link Constraint} used for code generation.
 	 * @param settings
-	 *          The {@link IOcl2CodeSettings} used for code generation (can be
+	 *          The {@link IOcl22CodeSettings} used for code generation (can be
 	 *          <code>null</code> if default settings shall be used).
 	 * @return The generated AspectJ code as a {@link String}s.
 	 * @throws IllegalArgumentException
 	 *           Thrown if the {@link List} of {@link Constraint}s is empty or
 	 *           <code>null</code>.
-	 * @throws Ocl2CodeException
+	 * @throws Ocl22CodeException
 	 */
 	public static String generateAspectJCode(Constraint constraint,
-			IOcl2CodeSettings settings) throws IllegalArgumentException,
-			Ocl2CodeException {
+			IOcl22CodeSettings settings) throws IllegalArgumentException,
+			Ocl22CodeException {
 
 		if (constraint == null) {
 			throw new IllegalArgumentException("The constraint must not be null.");
@@ -185,23 +188,23 @@ public class Ocl2ForEclipseFacade {
 	/**
 	 * <p>
 	 * Generates the Java fragment code for a given {@link List} of
-	 * {@link Constraint}s and a given {@link IOcl2CodeSettings}.
+	 * {@link Constraint}s and a given {@link IOcl22CodeSettings}.
 	 * </p>
 	 * 
 	 * @param constraints
 	 *          The {@link Constraint}s used for code generation.
 	 * @param settings
-	 *          The {@link IOcl2CodeSettings} used for code generation (can be
+	 *          The {@link IOcl22CodeSettings} used for code generation (can be
 	 *          <code>null</code> if default settings shall be used).
 	 * @return The generated fragments as a set of {@link String}s.
 	 * @throws IllegalArgumentException
 	 *           Thrown if the {@link List} of {@link Constraint}s is empty or
 	 *           <code>null</code>.
-	 * @throws Ocl2CodeException
+	 * @throws Ocl22CodeException
 	 */
 	public static List<String> generateJavaFragmentCode(
-			List<Constraint> constraints, IOcl2CodeSettings settings)
-			throws IllegalArgumentException, Ocl2CodeException {
+			List<Constraint> constraints, IOcl22CodeSettings settings)
+			throws IllegalArgumentException, Ocl22CodeException {
 
 		if (constraints == null || constraints.size() == 0) {
 			throw new IllegalArgumentException(
@@ -211,16 +214,20 @@ public class Ocl2ForEclipseFacade {
 
 		if (javaCodeGenerator == null) {
 			javaCodeGenerator =
-					Ocl2CodeFactory.getInstance().createJavaCodeGenerator();
+					Ocl22JavaFactory.getInstance().createJavaCodeGenerator();
 		}
 		// no else.
 
-		if (settings == null) {
+		javaCodeGenerator.resetEnvironment();
+
+		if (settings != null) {
 			javaCodeGenerator.setSettings(settings);
 		}
 
 		else {
-			javaCodeGenerator.setSettings(new Ocl2CodeSettings());
+			/* Necessary to replace possibly altered settings. */
+			javaCodeGenerator.setSettings(Ocl22JavaFactory.getInstance()
+					.createJavaCodeGeneratorSettings());
 		}
 
 		return javaCodeGenerator.transformFragmentCode(constraints);
@@ -229,23 +236,23 @@ public class Ocl2ForEclipseFacade {
 	/**
 	 * <p>
 	 * Generates the Java fragment code for a given {@link Constraint} and a given
-	 * {@link IOcl2CodeSettings}.
+	 * {@link IOcl22CodeSettings}.
 	 * </p>
 	 * 
 	 * @param constraint
 	 *          The {@link Constraint} used for code generation.
 	 * @param settings
-	 *          The {@link IOcl2CodeSettings} used for code generation (can be
+	 *          The {@link IOcl22CodeSettings} used for code generation (can be
 	 *          <code>null</code> if default settings shall be used).
 	 * @return The generated fragment as a {@link String}s.
 	 * @throws IllegalArgumentException
 	 *           Thrown if the {@link List} of {@link Constraint}s is empty or
 	 *           <code>null</code>.
-	 * @throws Ocl2CodeException
+	 * @throws Ocl22CodeException
 	 */
 	public static String generateJavaFragmentCode(Constraint constraint,
-			IOcl2CodeSettings settings) throws IllegalArgumentException,
-			Ocl2CodeException {
+			IOcl22CodeSettings settings) throws IllegalArgumentException,
+			Ocl22CodeException {
 
 		if (constraint == null) {
 			throw new IllegalArgumentException("The constraint must not be null.");
@@ -257,6 +264,20 @@ public class Ocl2ForEclipseFacade {
 		constraints.add(constraint);
 
 		return generateJavaFragmentCode(constraints, settings).get(0);
+	}
+
+	/**
+	 * <p>
+	 * Returns an {@link IOcl22CodeSettings} instance to configure Java or AspectJ
+	 * code generation.
+	 * </p>
+	 * 
+	 * @return An {@link IOcl22CodeSettings} instance to configure Java or AspectJ
+	 *         code generation.
+	 */
+	public static IOcl22CodeSettings getJavaCodeGeneratorSettings() {
+
+		return Ocl22JavaFactory.getInstance().createJavaCodeGeneratorSettings();
 	}
 
 	/**
@@ -1131,7 +1152,7 @@ public class Ocl2ForEclipseFacade {
 
 	/**
 	 * <p>
-	 * Parses a {@link Set} of OCL {@link Constraint}s that are provided by a
+	 * Parses a {@link List} of OCL {@link Constraint}s that are provided by a
 	 * given {@link File}.
 	 * </p>
 	 * 
@@ -1144,7 +1165,7 @@ public class Ocl2ForEclipseFacade {
 	 * @param addToModel
 	 *          Indicates whether or not the parsed {@link Constraint}s, its
 	 *          defined fields and functions to the given {@link IModel}.
-	 * @return The parsed {@link Constraint}s as a {@link Set}.
+	 * @return The parsed {@link Constraint}s as a {@link List}.
 	 * @throws OCL2ParsingException
 	 *           Thrown, if the parsing fails.
 	 * @throws IllegalArgumentException
@@ -1152,7 +1173,7 @@ public class Ocl2ForEclipseFacade {
 	 * @throws ModelAccessException
 	 *           Thrown, if access to the given {@link IModel} is not possible.
 	 */
-	public static Set<Constraint> parseConstraints(File file, IModel model,
+	public static List<Constraint> parseConstraints(File file, IModel model,
 			boolean addToModel) throws OCL2ParsingException,
 			IllegalArgumentException, ModelAccessException {
 
@@ -1176,7 +1197,7 @@ public class Ocl2ForEclipseFacade {
 
 	/**
 	 * <p>
-	 * Parses a {@link Set} of OCL {@link Constraint}s that are provided by a
+	 * Parses a {@link List} of OCL {@link Constraint}s that are provided by a
 	 * given {@link Reader}.
 	 * </p>
 	 * 
@@ -1189,7 +1210,7 @@ public class Ocl2ForEclipseFacade {
 	 * @param addToModel
 	 *          Indicates whether or not the parsed {@link Constraint}s, its
 	 *          defined fields and functions to the given {@link IModel}.
-	 * @return The parsed {@link Constraint}s as a {@link Set}.
+	 * @return The parsed {@link Constraint}s as a {@link List}.
 	 * @throws OCL2ParsingException
 	 *           Thrown, if the parsing fails.
 	 * @throws IllegalArgumentException
@@ -1197,7 +1218,7 @@ public class Ocl2ForEclipseFacade {
 	 * @throws ModelAccessException
 	 *           Thrown, if access to the given {@link IModel} is not possible.
 	 */
-	public static Set<Constraint> parseConstraints(Reader reader, IModel model,
+	public static List<Constraint> parseConstraints(Reader reader, IModel model,
 			boolean addToModel) throws OCL2ParsingException,
 			IllegalArgumentException, ModelAccessException {
 
@@ -1210,10 +1231,10 @@ public class Ocl2ForEclipseFacade {
 		}
 		// no else.
 
-		Set<Constraint> result;
-		Set<Constraint> oldConstraints;
+		List<Constraint> result;
+		List<Constraint> oldConstraints;
 		oldConstraints =
-				new HashSet<Constraint>(model.getRootNamespace()
+				new ArrayList<Constraint>(model.getRootNamespace()
 						.getOwnedAndNestedRules());
 
 		/* FIXME Claas: Use the same parser for all requests of the same model. */
@@ -1267,7 +1288,7 @@ public class Ocl2ForEclipseFacade {
 		// end catch.
 
 		result =
-				new HashSet<Constraint>(model.getRootNamespace()
+				new ArrayList<Constraint>(model.getRootNamespace()
 						.getOwnedAndNestedRules());
 		result.removeAll(oldConstraints);
 
@@ -1278,7 +1299,7 @@ public class Ocl2ForEclipseFacade {
 
 	/**
 	 * <p>
-	 * Parses a {@link Set} of OCL {@link Constraint}s that are provided by a
+	 * Parses a {@link List} of OCL {@link Constraint}s that are provided by a
 	 * given {@link String}.
 	 * </p>
 	 * 
@@ -1290,7 +1311,7 @@ public class Ocl2ForEclipseFacade {
 	 * @param addToModel
 	 *          Indicates whether or not the parsed {@link Constraint}s, its
 	 *          defined fields and functions to the given {@link IModel}.
-	 * @return The parsed {@link Constraint}s as a {@link Set}.
+	 * @return The parsed {@link Constraint}s as a {@link List}.
 	 * @throws OCL2ParsingException
 	 *           Thrown, if the parsing fails.
 	 * @throws IllegalArgumentException
@@ -1298,7 +1319,7 @@ public class Ocl2ForEclipseFacade {
 	 * @throws ModelAccessException
 	 *           Thrown, if access to the given {@link IModel} is not possible.
 	 */
-	public static Set<Constraint> parseConstraints(String string, IModel model,
+	public static List<Constraint> parseConstraints(String string, IModel model,
 			boolean addToModel) throws OCL2ParsingException,
 			IllegalArgumentException, ModelAccessException {
 
@@ -1315,7 +1336,7 @@ public class Ocl2ForEclipseFacade {
 
 	/**
 	 * <p>
-	 * Parses a {@link Set} of OCL {@link Constraint}s that are provided by a
+	 * Parses a {@link List} of OCL {@link Constraint}s that are provided by a
 	 * given {@link URL}.
 	 * </p>
 	 * 
@@ -1327,7 +1348,7 @@ public class Ocl2ForEclipseFacade {
 	 * @param addToModel
 	 *          Indicates whether or not the parsed {@link Constraint}s, its
 	 *          defined fields and functions to the given {@link IModel}.
-	 * @return The parsed {@link Constraint}s as a {@link Set}.
+	 * @return The parsed {@link Constraint}s as a {@link List}.
 	 * @throws OCL2ParsingException
 	 *           Thrown, if the parsing fails.
 	 * @throws IllegalArgumentException
@@ -1335,7 +1356,7 @@ public class Ocl2ForEclipseFacade {
 	 * @throws ModelAccessException
 	 *           Thrown, if access to the given {@link IModel} is not possible.
 	 */
-	public static Set<Constraint> parseConstraints(URL location, IModel model,
+	public static List<Constraint> parseConstraints(URL location, IModel model,
 			boolean addToModel) throws OCL2ParsingException,
 			IllegalArgumentException, ModelAccessException {
 
