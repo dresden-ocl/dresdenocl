@@ -4,9 +4,13 @@ Changes and Bugs fixed during the different Releases
 Release 2.1 (not scheduled yet)
 ===============================
 
+* A new Facade Plug-in containing a facade for all functionalities of
+  Dresden OCL2 for Eclipse has been introduced.
+  
 * The Model and Model Instance Life-cycle Management has been improved.
   - After import, Models can now be removed again.
   - After import, Model Instances can now be removed again.
+  - Constraints can now be removed from models again.
 
 * A bug in the ModelRegistry was fixed.
   - Adding of Models should now handle NullPointerExceptions correctly.
@@ -15,7 +19,8 @@ Release 2.1 (not scheduled yet)
   - If the top-level package is a UML model or profile directory, 
     these packages are now adapted correctly.
 
-* A bug in the JavaModelInstanceCollection was fixed.   - JavaModelInstanceCollections can now be initialized with null 
+* A bug in the JavaModelInstanceCollection was fixed.
+  - JavaModelInstanceCollections can now be initialized with null 
     values even if they are of the type Set or OrderedSet.
 
 * A bug in the Ecore ModelInstance Type was fixed.
@@ -23,6 +28,15 @@ Release 2.1 (not scheduled yet)
 
 * A bug in the Java ModelInstance Type was fixed.
   - Empty model instances now get a created default name.
+  
+* Some bugs in the OCL Standard Library were fixed.
+
+
+Tests
+-----
+* A new Modelbus Test Suite Plug-in has been introduced.
+
+* A new OCL Standard Library Test Suite Plug-in has been introduced.
 
 
 Release 2.0 (Scheduled: December 2009)
