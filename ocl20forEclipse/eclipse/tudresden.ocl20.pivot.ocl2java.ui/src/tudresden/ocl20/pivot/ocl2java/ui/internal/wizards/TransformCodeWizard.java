@@ -28,9 +28,9 @@ import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.ui.INewWizard;
 import org.eclipse.ui.IWorkbench;
 
-import tudresden.ocl20.pivot.ocl2java.IOcl2Code;
-import tudresden.ocl20.pivot.ocl2java.Ocl2CodeFactory;
-import tudresden.ocl20.pivot.ocl2java.exception.Ocl2CodeException;
+import tudresden.ocl20.pivot.ocl2java.IOcl22Code;
+import tudresden.ocl20.pivot.ocl2java.Ocl22JavaFactory;
+import tudresden.ocl20.pivot.ocl2java.exception.Ocl22CodeException;
 import tudresden.ocl20.pivot.ocl2java.ui.Ocl2JavaUIPlugIn;
 import tudresden.ocl20.pivot.ocl2java.ui.internal.Ocl2JavaUIMessages;
 import tudresden.ocl20.pivot.pivotmodel.Constraint;
@@ -60,7 +60,7 @@ public class TransformCodeWizard extends Wizard implements INewWizard {
 	private SpecificSettingsPage specificSettingsPage;
 
 	/** The code generator associated with this wizard. */
-	private IOcl2Code myCodeGenerator;
+	private IOcl22Code myCodeGenerator;
 
 	/**
 	 * <p>
@@ -114,12 +114,12 @@ public class TransformCodeWizard extends Wizard implements INewWizard {
 
 		/* Try Initialize the code generator. */
 		try {
-			myCodeGenerator = Ocl2CodeFactory.getInstance()
+			myCodeGenerator = Ocl22JavaFactory.getInstance()
 					.createJavaCodeGenerator();
 		}
 
 		/* Else show an exception. */
-		catch (Ocl2CodeException e) {
+		catch (Ocl22CodeException e) {
 			MessageDialog
 					.openError(
 							getShell(),
@@ -198,7 +198,7 @@ public class TransformCodeWizard extends Wizard implements INewWizard {
 			result = true;
 		}
 
-		catch (Ocl2CodeException e) {
+		catch (Ocl22CodeException e) {
 			MessageDialog
 					.openError(
 							getShell(),

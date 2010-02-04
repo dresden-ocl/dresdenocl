@@ -21,33 +21,33 @@ package tudresden.ocl20.pivot.ocl2java;
 import java.util.List;
 
 import tudresden.ocl20.pivot.modelbus.model.IModel;
-import tudresden.ocl20.pivot.ocl2java.exception.Ocl2CodeException;
+import tudresden.ocl20.pivot.ocl2java.exception.Ocl22CodeException;
 import tudresden.ocl20.pivot.pivotmodel.Constraint;
 
 /**
  * <p>
- * An interface for a code generator which uses an {@link IModel} and its
- * {@link Constraint}s to generate code.
+ * An interface for a OCL2 to code generator which uses an {@link IModel} and
+ * its {@link Constraint}s to generate the constraint code.
  * </p>
  * 
  * @author Claas Wilke
  */
-public interface IOcl2Code {
+public interface IOcl22Code {
 
 	/**
-	 * @return The {@link IOcl2CodeSettings} of this {@link IOcl2Code} object.
+	 * @return The {@link IOcl22CodeSettings} of this {@link IOcl22Code} object.
 	 */
-	public IOcl2CodeSettings getSettings();
+	public IOcl22CodeSettings getSettings();
 
 	/**
 	 * <p>
-	 * Sets the {@link IOcl2CodeSettings} of this {@link IOcl2Code} object.
+	 * Sets the {@link IOcl22CodeSettings} of this {@link IOcl22Code} object.
 	 * </p>
 	 * 
 	 * @param settings
-	 *          The {@link IOcl2CodeSettings} to be set.
+	 *          The {@link IOcl22CodeSettings} to be set.
 	 */
-	public void setSettings(IOcl2CodeSettings settings);
+	public void setSettings(IOcl22CodeSettings settings);
 
 	/**
 	 * <p>
@@ -60,11 +60,11 @@ public interface IOcl2Code {
 	 *          shall be transformed.
 	 * @return A {@link List} containing the transformed fragment code of the
 	 *         given {@link Constraint}s.
-	 * @throws Ocl2CodeException
+	 * @throws Ocl22CodeException
 	 *           Thrown, if an error during code transformation occurs.
 	 */
 	public List<String> transformFragmentCode(List<Constraint> constraints)
-			throws Ocl2CodeException;
+			throws Ocl22CodeException;
 
 	/**
 	 * <p>
@@ -77,10 +77,18 @@ public interface IOcl2Code {
 	 *          code shall be transformed.
 	 * @return A {@link List} containing the transformed code of the given
 	 *         {@link Constraint}s.
-	 * @throws Ocl2CodeException
+	 * @throws Ocl22CodeException
 	 *           Thrown, if an error during code transformation occurs.
 	 */
 	public List<String> transformInstrumentationCode(List<Constraint> constraints)
-			throws Ocl2CodeException;
+			throws Ocl22CodeException;
 
+	/**
+	 * <p>
+	 * Resets the code generators environment. The environment can be used for
+	 * code generation specific information such as incremented numbers for file
+	 * names or similar information.
+	 * </p>
+	 */
+	public void resetEnvironment();
 }

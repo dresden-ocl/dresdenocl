@@ -16,25 +16,26 @@ for more details.
 You should have received a copy of the GNU Lesser General Public License along 
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
-package tudresden.ocl20.pivot.ocl2java;
+package tudresden.ocl20.pivot.ocl2java.internal;
 
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import tudresden.ocl20.pivot.ocl2java.IOcl22CodeSettings;
 import tudresden.ocl20.pivot.ocl2java.code.ITransformedCode;
 import tudresden.ocl20.pivot.ocl2java.code.impl.TransformedCodeImpl;
 import tudresden.ocl20.pivot.pivotmodel.Constraint;
 
 /**
  * <p>
- * This class implements the interface {@link IOcl2CodeSettings}.
+ * This class implements the interface {@link IOcl22CodeSettings}.
  * </p>
  * 
  * @author Claas Wilke
  */
-public class Ocl2CodeSettings implements IOcl2CodeSettings {
+public class Ocl22JavaSettings implements IOcl22CodeSettings {
 
 	/**
 	 * Specifies whether or not the transformed Code shall be saved in files.
@@ -87,10 +88,10 @@ public class Ocl2CodeSettings implements IOcl2CodeSettings {
 
 	/**
 	 * <p>
-	 * Creates a new {@link Ocl2CodeSettings}.
+	 * Creates a new {@link Ocl22JavaSettings}.
 	 * </p>
 	 */
-	public Ocl2CodeSettings() {
+	public Ocl22JavaSettings() {
 
 		this.sourceDirectory = "";
 
@@ -105,7 +106,7 @@ public class Ocl2CodeSettings implements IOcl2CodeSettings {
 		this.disabledInheritance = new HashSet<Constraint>();
 
 		this.defaultInvariantCheckMode =
-				IOcl2CodeSettings.INVARIANT_CHECK_AFTER_CONSTRUCT_AND_ATTRIBUTE_CHANGE;
+				IOcl22CodeSettings.INVARIANT_CHECK_AFTER_CONSTRUCT_AND_ATTRIBUTE_CHANGE;
 
 		this.invariantCheckMode = new HashMap<Constraint, Integer>();
 

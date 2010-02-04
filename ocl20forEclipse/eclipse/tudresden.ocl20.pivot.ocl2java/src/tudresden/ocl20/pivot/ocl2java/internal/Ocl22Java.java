@@ -69,16 +69,15 @@ import tudresden.ocl20.pivot.essentialocl.types.TupleType;
 import tudresden.ocl20.pivot.essentialocl.types.TypeType;
 import tudresden.ocl20.pivot.essentialocl.types.VoidType;
 import tudresden.ocl20.pivot.modelbus.model.IModel;
-import tudresden.ocl20.pivot.ocl2java.IOcl2Code;
-import tudresden.ocl20.pivot.ocl2java.IOcl2CodeSettings;
-import tudresden.ocl20.pivot.ocl2java.Ocl2CodeSettings;
+import tudresden.ocl20.pivot.ocl2java.IOcl22Code;
+import tudresden.ocl20.pivot.ocl2java.IOcl22CodeSettings;
 import tudresden.ocl20.pivot.ocl2java.code.IOcl22CodeEnvironment;
 import tudresden.ocl20.pivot.ocl2java.code.ITransformedCode;
 import tudresden.ocl20.pivot.ocl2java.code.ITransformedType;
 import tudresden.ocl20.pivot.ocl2java.code.impl.Ocl22JavaEnvironment;
 import tudresden.ocl20.pivot.ocl2java.code.impl.TransformedCodeImpl;
 import tudresden.ocl20.pivot.ocl2java.code.impl.TransformedTypeImpl;
-import tudresden.ocl20.pivot.ocl2java.exception.Ocl2CodeException;
+import tudresden.ocl20.pivot.ocl2java.exception.Ocl22CodeException;
 import tudresden.ocl20.pivot.ocl2java.template.ITemplate;
 import tudresden.ocl20.pivot.ocl2java.template.ITemplateEngine;
 import tudresden.ocl20.pivot.ocl2java.template.impl.StringTemplateAdapter;
@@ -105,11 +104,11 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
  * 
  * @author Claas Wilke
  */
-public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
-		implements IOcl2Code {
+public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
+		implements IOcl22Code {
 
 	/** The Logger for this class. */
-	private static final Logger LOGGER = Logger.getLogger(Ocl2Java.class);
+	private static final Logger LOGGER = Logger.getLogger(Ocl22Java.class);
 
 	/** The paths of the String templates for the code transformation. */
 	private final static String TEMPLATE_PATH = "/resources/template/java/";
@@ -135,17 +134,17 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 	private IOcl22CodeEnvironment myCodeTransEnv;
 
 	/** The Settings used during code generation. */
-	private IOcl2CodeSettings mySettings;
+	private IOcl22CodeSettings mySettings;
 
 	/**
 	 * <p>
 	 * Creates a new instance to transform code.
 	 * </p>
 	 * 
-	 * @throws Ocl2CodeException
+	 * @throws Ocl22CodeException
 	 *           If the initialization fails.
 	 */
-	public Ocl2Java() throws Ocl2CodeException {
+	public Ocl22Java() throws Ocl22CodeException {
 
 		this.init();
 	}
@@ -155,11 +154,11 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 	 * Initializes the code generator.
 	 * </p>
 	 * 
-	 * @throws Ocl2CodeException
+	 * @throws Ocl22CodeException
 	 *           Thrown, if a String template for code transformation can not be
 	 *           found.
 	 */
-	private void init() throws Ocl2CodeException {
+	private void init() throws Ocl22CodeException {
 
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("init() - start");
@@ -182,7 +181,7 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 
 			this.myTemplateEngine = new StringTemplateEngine(templatePaths);
 
-			this.mySettings = new Ocl2CodeSettings();
+			this.mySettings = new Ocl22JavaSettings();
 		}
 
 		catch (IOException e) {
@@ -196,7 +195,7 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 			}
 			// no else.
 
-			throw new Ocl2CodeException(msg);
+			throw new Ocl22CodeException(msg);
 		}
 
 		if (LOGGER.isDebugEnabled()) {
@@ -209,9 +208,18 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 	 * (non-Javadoc)
 	 * @see tudresden.ocl20.pivot.ocl2java.IOcl2Code#getSettings()
 	 */
-	public IOcl2CodeSettings getSettings() {
+	public IOcl22CodeSettings getSettings() {
 
 		return this.mySettings;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see tudresden.ocl20.pivot.ocl2java.IOcl22Code#resetEnvironment()
+	 */
+	public void resetEnvironment() {
+
+		this.myCodeTransEnv = new Ocl22JavaEnvironment();
 	}
 
 	/*
@@ -220,7 +228,7 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 	 * tudresden.ocl20.pivot.ocl2java.IOcl2Code#setSettings(tudresden.ocl20.pivot
 	 * .ocl2java.IOcl2CodeSettings)
 	 */
-	public void setSettings(IOcl2CodeSettings settings) {
+	public void setSettings(IOcl22CodeSettings settings) {
 
 		this.mySettings = settings;
 	}
@@ -232,7 +240,7 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 	 * .List)
 	 */
 	public List<String> transformFragmentCode(List<Constraint> constraints)
-			throws Ocl2CodeException {
+			throws Ocl22CodeException {
 
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("transformFragmentCode(List<Constraint>) - start");
@@ -282,10 +290,10 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 	 *          The {@link Constraint} for which code shall be transformed.
 	 * @return An {@link ITransformedCode} containing the Code transformed for the
 	 *         given {@link Constraint}'s {@link OclExpression}.
-	 * @throws Ocl2CodeException
+	 * @throws Ocl22CodeException
 	 */
 	private ITransformedCode transformFragmentCode(Constraint aConstraint)
-			throws Ocl2CodeException {
+			throws Ocl22CodeException {
 
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("transformFragmentCode(Constraint) - start");
@@ -313,7 +321,7 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 	 * (java.util.List)
 	 */
 	public List<String> transformInstrumentationCode(List<Constraint> constraints)
-			throws Ocl2CodeException {
+			throws Ocl22CodeException {
 
 		/* Eventually log the entry into this method. */
 		if (LOGGER.isDebugEnabled()) {
@@ -358,12 +366,12 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 	 * @param aConstraint
 	 *          The {@link Constraint} for which the code shall be transformed.
 	 * @return The transformed Code for the given {@link Constraint}.
-	 * @throws Ocl2CodeException
+	 * @throws Ocl22CodeException
 	 *           Thrown, if an unknown or illegal Type or Expression is found
 	 *           during code transformation.
 	 */
 	private String transformInstrumentationCode(Constraint aConstraint)
-			throws Ocl2CodeException {
+			throws Ocl22CodeException {
 
 		/* Eventually log the entry into this method. */
 		if (LOGGER.isDebugEnabled()) {
@@ -421,7 +429,7 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 
 			LOGGER.fatal(msg);
 
-			throw new Ocl2CodeException(msg);
+			throw new Ocl22CodeException(msg);
 		}
 
 		/* Eventually log the exit from this method. */
@@ -2472,7 +2480,7 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 	 *          The {@link Constraint} which shall be instrumented.
 	 */
 	private String instrumentCodeForBody(Constraint aConstraint)
-			throws Ocl2CodeException {
+			throws Ocl22CodeException {
 
 		/* Eventually log the entry into this method. */
 		if (LOGGER.isDebugEnabled()) {
@@ -2595,7 +2603,7 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 				msg += "Expected Type was Operation but was ";
 				msg += aConstrainedElem.getClass().getName();
 
-				throw new Ocl2CodeException(msg);
+				throw new Ocl22CodeException(msg);
 			}
 		}
 		// end for.
@@ -2628,7 +2636,7 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 	 *          The {@link Constraint} which shall be instrumented.
 	 */
 	private String instrumentCodeForDef(Constraint aConstraint)
-			throws Ocl2CodeException {
+			throws Ocl22CodeException {
 
 		/* Eventually log the entry into this method. */
 		if (LOGGER.isDebugEnabled()) {
@@ -2873,7 +2881,7 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 					msg += "Expected Type was Operation or Property but was ";
 					msg += aConstrainedElem.getClass().getName();
 
-					throw new Ocl2CodeException(msg);
+					throw new Ocl22CodeException(msg);
 				}
 
 				/* Set advice template parameters. */
@@ -2899,7 +2907,7 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 				msg += "Expected Type was Type but was ";
 				msg += aConstrainedElem.getClass().getName();
 
-				throw new Ocl2CodeException(msg);
+				throw new Ocl22CodeException(msg);
 			}
 		}
 		// end for.
@@ -2932,7 +2940,7 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 	 *          The {@link Constraint} which shall be instrumented.
 	 */
 	private String instrumentCodeForDerive(Constraint aConstraint)
-			throws Ocl2CodeException {
+			throws Ocl22CodeException {
 
 		/* Eventually log the entry into this method. */
 		if (LOGGER.isDebugEnabled()) {
@@ -3049,7 +3057,7 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 				msg += "Expected Type was Property but was ";
 				msg += aConstrainedElem.getClass().getName();
 
-				throw new Ocl2CodeException(msg);
+				throw new Ocl22CodeException(msg);
 			}
 		}
 		// end for.
@@ -3082,7 +3090,7 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 	 *          The {@link Constraint} which shall be instrumented.
 	 */
 	private String instrumentCodeForInit(Constraint aConstraint)
-			throws Ocl2CodeException {
+			throws Ocl22CodeException {
 
 		/* Eventually log the entry into this method. */
 		if (LOGGER.isDebugEnabled()) {
@@ -3192,7 +3200,7 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 				msg += "Expected Type was Property but was ";
 				msg += aConstrainedElem.getClass().getName();
 
-				throw new Ocl2CodeException(msg);
+				throw new Ocl22CodeException(msg);
 			}
 		}
 		// end for.
@@ -3225,7 +3233,7 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 	 *          The {@link Constraint} which shall be instrumented.
 	 */
 	private String instrumentCodeForInv(Constraint aConstraint)
-			throws Ocl2CodeException {
+			throws Ocl22CodeException {
 
 		/* Eventually log the entry into this method. */
 		if (LOGGER.isDebugEnabled()) {
@@ -3294,12 +3302,12 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 				 */
 				switch (this.mySettings.getInvariantCheckMode(aConstraint)) {
 
-				case IOcl2CodeSettings.INVARIANT_CHECK_AFTER_CONSTRUCT_AND_PUBLIC_METHOD_EXECUTION:
+				case IOcl22CodeSettings.INVARIANT_CHECK_AFTER_CONSTRUCT_AND_PUBLIC_METHOD_EXECUTION:
 					adviceTemplate =
 							this.myTemplateEngine.getTemplate("invInstrumentation2");
 					break;
 
-				case IOcl2CodeSettings.INVARIANT_CHECK_AFTER_SPECIAL_METHOD_INVOCATION:
+				case IOcl22CodeSettings.INVARIANT_CHECK_AFTER_SPECIAL_METHOD_INVOCATION:
 					adviceTemplate =
 							this.myTemplateEngine.getTemplate("invInstrumentation3");
 					break;
@@ -3323,7 +3331,7 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 				 * Eventually add called attributes as parameters (only if the invariant
 				 * shall be verified after the change of an depending attribute).
 				 */
-				if (this.mySettings.getInvariantCheckMode(aConstraint) == IOcl2CodeSettings.INVARIANT_CHECK_AFTER_CONSTRUCT_AND_ATTRIBUTE_CHANGE) {
+				if (this.mySettings.getInvariantCheckMode(aConstraint) == IOcl22CodeSettings.INVARIANT_CHECK_AFTER_CONSTRUCT_AND_ATTRIBUTE_CHANGE) {
 
 					if (this.myCodeTransEnv.hasCalledProperties()) {
 
@@ -3342,7 +3350,7 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 				 * Eventually add super class for method definition (only if the
 				 * invariant shall be verified after special method invocation).
 				 */
-				if (this.mySettings.getInvariantCheckMode(aConstraint) == IOcl2CodeSettings.INVARIANT_CHECK_AFTER_SPECIAL_METHOD_INVOCATION) {
+				if (this.mySettings.getInvariantCheckMode(aConstraint) == IOcl22CodeSettings.INVARIANT_CHECK_AFTER_SPECIAL_METHOD_INVOCATION) {
 
 					ITemplate classTemplate;
 					ITemplate methodTemplate;
@@ -3410,7 +3418,7 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 				msg += "Expected Type was Type but was ";
 				msg += aConstrainedElem.getClass().getName();
 
-				throw new Ocl2CodeException(msg);
+				throw new Ocl22CodeException(msg);
 			}
 		}
 		// end for.
@@ -3443,7 +3451,7 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 	 *          The {@link Constraint} which shall be instrumented.
 	 */
 	private String instrumentCodeForPost(Constraint aConstraint)
-			throws Ocl2CodeException {
+			throws Ocl22CodeException {
 
 		/* Eventually log the entry into this method. */
 		if (LOGGER.isDebugEnabled()) {
@@ -3654,7 +3662,7 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 				msg += "Expected Type was Operation but was ";
 				msg += aConstrainedElem.getClass().getName();
 
-				throw new Ocl2CodeException(msg);
+				throw new Ocl22CodeException(msg);
 			}
 		}
 		// end for.
@@ -3687,7 +3695,7 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 	 *          The {@link Constraint} which shall be instrumented.
 	 */
 	private String instrumentCodeForPre(Constraint aConstraint)
-			throws Ocl2CodeException {
+			throws Ocl22CodeException {
 
 		/* Eventually log the entry into this method. */
 		if (LOGGER.isDebugEnabled()) {
@@ -3818,7 +3826,7 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 				msg += "Expected Type was Operation but was ";
 				msg += aConstrainedElem.getClass().getName();
 
-				throw new Ocl2CodeException(msg);
+				throw new Ocl22CodeException(msg);
 			}
 		}
 		// end for.
@@ -3960,11 +3968,11 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 	 * attributes and/or methods.
 	 * </p>
 	 * 
-	 * @throws Ocl2CodeException
+	 * @throws Ocl22CodeException
 	 *           Ocl2CodeException Thrown if the given file or location can not be
 	 *           found.
 	 */
-	private void saveExtendedClasses() throws Ocl2CodeException {
+	private void saveExtendedClasses() throws Ocl22CodeException {
 
 		/* Eventually log the entry into this method. */
 		if (LOGGER.isDebugEnabled()) {
@@ -4025,11 +4033,11 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 	 * @param subFolder
 	 *          The subFolder(s) into which the File shall be located (relative)
 	 *          to the sourcePath.
-	 * @throws Ocl2CodeException
+	 * @throws Ocl22CodeException
 	 *           Thrown if the given file or location can not be found.
 	 */
 	private void saveTransformedCode(String generatedCode, String fileName,
-			String subFolder) throws Ocl2CodeException {
+			String subFolder) throws Ocl22CodeException {
 
 		/* Eventually log the entry into this method. */
 		if (LOGGER.isDebugEnabled()) {
@@ -4078,7 +4086,7 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 
 			LOGGER.fatal(msg);
 
-			throw new Ocl2CodeException(msg);
+			throw new Ocl22CodeException(msg);
 		}
 
 		catch (IOException e) {
@@ -4091,7 +4099,7 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 
 			LOGGER.fatal(msg);
 
-			throw new Ocl2CodeException(msg);
+			throw new Ocl22CodeException(msg);
 		}
 
 		/* Eventually log the exit from this method. */

@@ -25,38 +25,38 @@ package tudresden.ocl20.pivot.ocl2java.exception;
  * 
  * @author Claas Wilke
  */
-public class Ocl2CodeException extends Exception {
+public class Ocl22CodeException extends Exception {
 
 	/** ID to serialize this class. */
 	private static final long serialVersionUID = -4045552692357262486L;
 
 	/**
 	 * <p>
-	 * Creates a new {@link Ocl2CodeException}.
+	 * Creates a new {@link Ocl22CodeException}.
 	 * </p>
 	 * 
 	 * @param msg
-	 *          The message of the created {@link Ocl2CodeException}.
+	 *          The message of the created {@link Ocl22CodeException}.
 	 */
-	public Ocl2CodeException(String msg) {
+	public Ocl22CodeException(String msg) {
 
 		super(msg);
 	}
 
 	/**
 	 * <p>
-	 * Creates a new {@link Ocl2CodeException}.
+	 * Creates a new {@link Ocl22CodeException}.
 	 * </p>
 	 * 
 	 * @param msg
-	 *          The message of the created {@link Ocl2CodeException}.
+	 *          The message of the created {@link Ocl22CodeException}.
 	 * @param cause
 	 *          The cause (which is saved for later retrieval by the
 	 *          {@link Throwable#getCause()} method). (A <code>null</code> value
 	 *          is permitted, and indicates that the cause is nonexistent or
 	 *          unknown.)
 	 */
-	public Ocl2CodeException(final String msg, Throwable cause) {
+	public Ocl22CodeException(final String msg, Throwable cause) {
 
 		super(msg, cause);
 	}

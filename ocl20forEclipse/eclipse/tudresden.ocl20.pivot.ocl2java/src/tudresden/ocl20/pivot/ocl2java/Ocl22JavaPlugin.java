@@ -31,20 +31,20 @@ import tudresden.ocl20.logging.LoggingPlugin;
  * 
  * @author Claas Wilke
  */
-public class Ocl2JavaPlugin extends Plugin {
+public class Ocl22JavaPlugin extends Plugin {
 
 	/** The plug-in ID. */
 	public static final String PLUGIN_ID = "tudresden.ocl20.pivot.ocl2java";
 
 	/** The shared instance. */
-	private static Ocl2JavaPlugin plugin;
+	private static Ocl22JavaPlugin plugin;
 
 	/**
 	 * <p>
-	 * Creates a new {@link Ocl2JavaPlugin}.
+	 * Creates a new {@link Ocl22JavaPlugin}.
 	 * </p>
 	 */
-	public Ocl2JavaPlugin() {
+	public Ocl22JavaPlugin() {
 	}
 
 	/*
@@ -75,7 +75,7 @@ public class Ocl2JavaPlugin extends Plugin {
 	/**
 	 * @return the shared instance
 	 */
-	public static Ocl2JavaPlugin getDefault() {
+	public static Ocl22JavaPlugin getDefault() {
 		return plugin;
 	}
 

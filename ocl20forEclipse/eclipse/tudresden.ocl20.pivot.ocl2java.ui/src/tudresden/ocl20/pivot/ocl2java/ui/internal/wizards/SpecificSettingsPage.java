@@ -43,8 +43,8 @@ import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Text;
 
 import tudresden.ocl20.pivot.modelbus.model.IModel;
-import tudresden.ocl20.pivot.ocl2java.IOcl2CodeSettings;
-import tudresden.ocl20.pivot.ocl2java.Ocl2CodeFactory;
+import tudresden.ocl20.pivot.ocl2java.IOcl22CodeSettings;
+import tudresden.ocl20.pivot.ocl2java.Ocl22JavaFactory;
 import tudresden.ocl20.pivot.ocl2java.code.ITransformedCode;
 import tudresden.ocl20.pivot.ocl2java.ui.internal.Ocl2JavaUIMessages;
 import tudresden.ocl20.pivot.pivotmodel.Constraint;
@@ -60,7 +60,7 @@ import tudresden.ocl20.pivot.pivotmodel.ConstraintKind;
 public class SpecificSettingsPage extends WizardPage {
 
 	/** The settings of the code generator associated with this wizard page. */
-	private IOcl2CodeSettings mySettings;
+	private IOcl22CodeSettings mySettings;
 
 	/** The viewer displaying the registered meta models. */
 	private StructuredViewer constraintViewer;
@@ -90,7 +90,7 @@ public class SpecificSettingsPage extends WizardPage {
 	 * 
 	 * @param selection
 	 */
-	public SpecificSettingsPage(IOcl2CodeSettings settings) {
+	public SpecificSettingsPage(IOcl22CodeSettings settings) {
 		super("SpecificSettingsPage");
 
 		setTitle(Ocl2JavaUIMessages.SpecificSettingsPage_Title);
@@ -363,9 +363,9 @@ public class SpecificSettingsPage extends WizardPage {
 				this.invariantMode3.setEnabled(true);
 
 				this.invariantMode2
-						.setSelection(invariantCheckMode == IOcl2CodeSettings.INVARIANT_CHECK_AFTER_CONSTRUCT_AND_PUBLIC_METHOD_EXECUTION);
+						.setSelection(invariantCheckMode == IOcl22CodeSettings.INVARIANT_CHECK_AFTER_CONSTRUCT_AND_PUBLIC_METHOD_EXECUTION);
 				this.invariantMode3
-						.setSelection(invariantCheckMode == IOcl2CodeSettings.INVARIANT_CHECK_AFTER_SPECIAL_METHOD_INVOCATION);
+						.setSelection(invariantCheckMode == IOcl22CodeSettings.INVARIANT_CHECK_AFTER_SPECIAL_METHOD_INVOCATION);
 				this.invariantMode1.setSelection(!(this.invariantMode2
 						.getSelection() || this.invariantMode3.getSelection()));
 			}
@@ -444,7 +444,7 @@ public class SpecificSettingsPage extends WizardPage {
 			boolean inheritanceStatus;
 			int invariantCheckMode;
 
-			violationCode = Ocl2CodeFactory.getInstance()
+			violationCode = Ocl22JavaFactory.getInstance()
 					.createTransformedCode();
 			violationCode.addCode(this.violationMacroText.getText());
 
@@ -460,15 +460,15 @@ public class SpecificSettingsPage extends WizardPage {
 
 			if (selectedConstraint.getKind() == ConstraintKind.INVARIANT) {
 				if (this.invariantMode2.getSelection()) {
-					invariantCheckMode = IOcl2CodeSettings.INVARIANT_CHECK_AFTER_CONSTRUCT_AND_PUBLIC_METHOD_EXECUTION;
+					invariantCheckMode = IOcl22CodeSettings.INVARIANT_CHECK_AFTER_CONSTRUCT_AND_PUBLIC_METHOD_EXECUTION;
 				}
 
 				else if (this.invariantMode3.getSelection()) {
-					invariantCheckMode = IOcl2CodeSettings.INVARIANT_CHECK_AFTER_SPECIAL_METHOD_INVOCATION;
+					invariantCheckMode = IOcl22CodeSettings.INVARIANT_CHECK_AFTER_SPECIAL_METHOD_INVOCATION;
 				}
 
 				else {
-					invariantCheckMode = IOcl2CodeSettings.INVARIANT_CHECK_AFTER_CONSTRUCT_AND_ATTRIBUTE_CHANGE;
+					invariantCheckMode = IOcl22CodeSettings.INVARIANT_CHECK_AFTER_CONSTRUCT_AND_ATTRIBUTE_CHANGE;
 				}
 			}
 

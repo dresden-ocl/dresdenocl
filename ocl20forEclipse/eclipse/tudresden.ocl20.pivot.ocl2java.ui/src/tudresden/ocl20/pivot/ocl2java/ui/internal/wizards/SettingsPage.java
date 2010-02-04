@@ -32,8 +32,8 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Text;
 
-import tudresden.ocl20.pivot.ocl2java.IOcl2CodeSettings;
-import tudresden.ocl20.pivot.ocl2java.Ocl2CodeFactory;
+import tudresden.ocl20.pivot.ocl2java.IOcl22CodeSettings;
+import tudresden.ocl20.pivot.ocl2java.Ocl22JavaFactory;
 import tudresden.ocl20.pivot.ocl2java.code.ITransformedCode;
 import tudresden.ocl20.pivot.ocl2java.ui.internal.Ocl2JavaUIMessages;
 
@@ -61,7 +61,7 @@ public class SettingsPage extends WizardPage {
 	private Button invariantMode3;
 
 	/** The settings of the code generator associated with this wizard page. */
-	private IOcl2CodeSettings settings;
+	private IOcl22CodeSettings settings;
 
 	/** The Text field containing the violation macro. */
 	private Text violationMacroText;
@@ -76,7 +76,7 @@ public class SettingsPage extends WizardPage {
 	 *            The settings of the code generator associated with this wizard
 	 *            page.
 	 */
-	public SettingsPage(IOcl2CodeSettings settings) {
+	public SettingsPage(IOcl22CodeSettings settings) {
 		super("SettingsPage");
 
 		setTitle(Ocl2JavaUIMessages.SettingsPage_Title);
@@ -321,7 +321,7 @@ public class SettingsPage extends WizardPage {
 		ITransformedCode violationCode;
 
 		/* Restore the violation macro. */
-		violationCode = Ocl2CodeFactory.getInstance().createTransformedCode();
+		violationCode = Ocl22JavaFactory.getInstance().createTransformedCode();
 		violationCode
 				.addCode(Ocl2JavaUIMessages.SettingsPage_DefaultViolationMacro);
 
@@ -335,7 +335,7 @@ public class SettingsPage extends WizardPage {
 
 		/* Restore the invariant check mode. */
 		this.settings
-				.setDefaultInvariantCheckMode(IOcl2CodeSettings.INVARIANT_CHECK_AFTER_CONSTRUCT_AND_ATTRIBUTE_CHANGE);
+				.setDefaultInvariantCheckMode(IOcl22CodeSettings.INVARIANT_CHECK_AFTER_CONSTRUCT_AND_ATTRIBUTE_CHANGE);
 		this.invariantMode1.setSelection(true);
 		this.invariantMode2.setSelection(false);
 		this.invariantMode3.setSelection(false);
@@ -382,17 +382,17 @@ public class SettingsPage extends WizardPage {
 
 		if (this.invariantMode2.getSelection()) {
 			this.settings
-					.setDefaultInvariantCheckMode(IOcl2CodeSettings.INVARIANT_CHECK_AFTER_CONSTRUCT_AND_PUBLIC_METHOD_EXECUTION);
+					.setDefaultInvariantCheckMode(IOcl22CodeSettings.INVARIANT_CHECK_AFTER_CONSTRUCT_AND_PUBLIC_METHOD_EXECUTION);
 		}
 
 		else if (this.invariantMode3.getSelection()) {
 			this.settings
-					.setDefaultInvariantCheckMode(IOcl2CodeSettings.INVARIANT_CHECK_AFTER_SPECIAL_METHOD_INVOCATION);
+					.setDefaultInvariantCheckMode(IOcl22CodeSettings.INVARIANT_CHECK_AFTER_SPECIAL_METHOD_INVOCATION);
 		}
 
 		else {
 			this.settings
-					.setDefaultInvariantCheckMode(IOcl2CodeSettings.INVARIANT_CHECK_AFTER_CONSTRUCT_AND_ATTRIBUTE_CHANGE);
+					.setDefaultInvariantCheckMode(IOcl22CodeSettings.INVARIANT_CHECK_AFTER_CONSTRUCT_AND_ATTRIBUTE_CHANGE);
 		}
 	}
 
@@ -417,7 +417,7 @@ public class SettingsPage extends WizardPage {
 
 			ITransformedCode violationCode;
 
-			violationCode = Ocl2CodeFactory.getInstance()
+			violationCode = Ocl22JavaFactory.getInstance()
 					.createTransformedCode();
 			violationCode.addCode(this.violationMacroText.getText());
 
