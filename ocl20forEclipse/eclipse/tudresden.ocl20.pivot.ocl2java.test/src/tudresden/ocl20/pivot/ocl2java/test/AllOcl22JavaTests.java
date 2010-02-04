@@ -28,7 +28,7 @@ import tudresden.ocl20.pivot.ocl2java.test.tests.InstrumentationTest;
 /**
  * <p>
  * Provides a jUnit Test Suite containing all plug-in tests of the OCL 2 Java
- * Code transformer ({@link Ocl2Java}).
+ * Code transformer ({@link Ocl22Java}).
  * </p>
  * 
  * @author Claas Wilke
@@ -36,7 +36,7 @@ import tudresden.ocl20.pivot.ocl2java.test.tests.InstrumentationTest;
  */
 @RunWith(Suite.class)
 @Suite.SuiteClasses( { InstrumentationTest.class, FragmentTest.class })
-public class AllTests {
+public class AllOcl22JavaTests {
 	/*
 	 * This class remains completely empty, being used only as a holder for the
 	 * above annotations.

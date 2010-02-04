@@ -26,7 +26,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.core.runtime.Platform;
@@ -34,13 +33,10 @@ import org.eclipse.core.runtime.Platform;
 import tudresden.ocl20.pivot.facade.Ocl2ForEclipseFacade;
 import tudresden.ocl20.pivot.modelbus.ModelAccessException;
 import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
-import tudresden.ocl20.pivot.modelbus.metamodel.IMetamodel;
 import tudresden.ocl20.pivot.modelbus.model.IModel;
-import tudresden.ocl20.pivot.modelbus.model.IModelProvider;
-import tudresden.ocl20.pivot.ocl2java.IOcl2Code;
-import tudresden.ocl20.pivot.ocl2java.IOcl2CodeSettings;
-import tudresden.ocl20.pivot.ocl2java.Ocl2CodeFactory;
-import tudresden.ocl20.pivot.ocl2java.exception.Ocl2CodeException;
+import tudresden.ocl20.pivot.ocl2java.IOcl22Code;
+import tudresden.ocl20.pivot.ocl2java.IOcl22CodeSettings;
+import tudresden.ocl20.pivot.ocl2java.exception.Ocl22CodeException;
 import tudresden.ocl20.pivot.ocl2java.test.Ocl2CodeTestPlugin;
 import tudresden.ocl20.pivot.ocl2parser.parser.OCL2Parser;
 import tudresden.ocl20.pivot.pivotmodel.Constraint;
@@ -55,10 +51,6 @@ import tudresden.ocl20.pivot.pivotmodel.Namespace;
  * @author Claas Wilke
  */
 public final class CodegenTestPerformer {
-
-	/** The ID of the {@link IMetamodel} of the {@link IModel} used for testing. */
-	private static final String META_MODEL_ID =
-			"tudresden.ocl20.pivot.metamodels.uml2";
 
 	/** The name of the bundle of the model file. */
 	private static final String MODEL_BUNDLE =
@@ -77,17 +69,14 @@ public final class CodegenTestPerformer {
 	/** The file directory of the model. */
 	private String fileDirectory = "";
 
-	/** The code generator used for testing. */
-	private IOcl2Code myCodeGenerator;
+	/** The {@link IOcl22CodeSettings} used for testing. */
+	private IOcl22CodeSettings myCodeGeneratorSettings;
 
 	/** The {@link IModel} used for testing. */
 	private IModel myModel = null;
 
 	/** The {@link File} resource of the {@link IModel}. */
 	private File myModelFile;
-
-	/** The {@link IModelProvider} used for testing. */
-	private IModelProvider myModelProvider = null;
 
 	/** Contains the transformed code of the last test case. */
 	private String transformedCode;
@@ -97,11 +86,11 @@ public final class CodegenTestPerformer {
 	 * Creates a new {@link CodegenTestPerformer}.
 	 * </p>
 	 * 
-	 * @throws Ocl2CodeException
+	 * @throws Ocl22CodeException
 	 *           Thrown if any error occurred while loading the model or the meta
 	 *           model.
 	 */
-	private CodegenTestPerformer() throws Ocl2CodeException {
+	private CodegenTestPerformer() throws Ocl22CodeException {
 
 		super();
 
@@ -114,11 +103,11 @@ public final class CodegenTestPerformer {
 	 * </p>
 	 * 
 	 * @return The only instance of {@link CodegenTestPerformer}.
-	 * @throws Ocl2CodeException
+	 * @throws Ocl22CodeException
 	 *           Thrown if {@link OCL2Parser} of {@link IModel} initialization
 	 *           required for testing fails.
 	 */
-	public static CodegenTestPerformer getInstance() throws Ocl2CodeException {
+	public static CodegenTestPerformer getInstance() throws Ocl22CodeException {
 
 		/* Eventually create the instance. */
 		if (myInstance == null) {
@@ -131,17 +120,21 @@ public final class CodegenTestPerformer {
 
 	/**
 	 * <p>
-	 * Parses the file <code>oclFileName</code> against the loaded UML model file.
-	 * If an error occurred an CodeGenerationException will be thrown.
+	 * Parses the {@link File} <code>oclFileName</code> against the loaded UML
+	 * model file. If an error occurred an {@link Ocl22CodeException} will be
+	 * thrown.
 	 * </p>
 	 * 
 	 * @param oclFileName
 	 *          The OCL file to be parsed.
-	 * @throws Ocl2CodeException
+	 * @throws Ocl22CodeException
 	 *           Is thrown if any error occurs
+	 * @return The added {@link Constraint}s as a {@link List}.
 	 */
-	public void addOCLFile(String oclFileName) throws Ocl2CodeException {
+	public List<Constraint> addOclConstraintsToModel(String oclFileName)
+			throws Ocl22CodeException {
 
+		List<Constraint> result;
 		File oclFile;
 		oclFile = new File(fileDirectory + oclFileName);
 
@@ -151,11 +144,12 @@ public final class CodegenTestPerformer {
 			msg = "The given OCL file does not exist. File name: ";
 			msg += oclFileName + ".";
 
-			throw new Ocl2CodeException(msg);
+			throw new Ocl22CodeException(msg);
 		}
 
 		try {
-			Ocl2ForEclipseFacade.parseConstraints(oclFile, this.myModel, true);
+			result =
+					Ocl2ForEclipseFacade.parseConstraints(oclFile, this.myModel, true);
 		}
 
 		catch (Exception e) {
@@ -166,13 +160,13 @@ public final class CodegenTestPerformer {
 
 			e.printStackTrace();
 
-			throw new Ocl2CodeException(msg, e);
+			throw new Ocl22CodeException(msg, e);
 		}
+
+		return result;
 	}
 
 	/**
-	 * FIXME Claas: Continue refactoring here.
-	 * 
 	 * <p>
 	 * Disables inheritance for a given {@link Constraint}.
 	 * </p>
@@ -182,8 +176,7 @@ public final class CodegenTestPerformer {
 	 */
 	public void disableInheritance(Constraint aConstraint) {
 
-		this.myCodeGenerator.getSettings()
-				.setInheritanceDisabled(aConstraint, true);
+		this.myCodeGeneratorSettings.setInheritanceDisabled(aConstraint, true);
 	}
 
 	/**
@@ -204,14 +197,17 @@ public final class CodegenTestPerformer {
 			sourceDirectory = sourceDirectory.substring(15);
 			sourceDirectory += "src/";
 
-			this.myCodeGenerator.getSettings().setSourceDirectory(sourceDirectory);
-			this.myCodeGenerator.getSettings().setSaveCode(true);
+			this.myCodeGeneratorSettings.setSourceDirectory(sourceDirectory);
 
 			allConstraints = this.getAllConstraints();
-			this.myCodeGenerator.transformInstrumentationCode(allConstraints);
+
+			this.myCodeGeneratorSettings.setSaveCode(true);
+			Ocl2ForEclipseFacade.generateAspectJCode(allConstraints,
+					this.myCodeGeneratorSettings);
+			this.myCodeGeneratorSettings.setSaveCode(false);
 		}
 
-		catch (Ocl2CodeException e) {
+		catch (Ocl22CodeException e) {
 			String msg;
 
 			msg = "An error occured during preparing tests. ";
@@ -233,11 +229,11 @@ public final class CodegenTestPerformer {
 	 *          The {@link Constraint} file used for the diff test.
 	 * @param expectedFileName
 	 *          The file which contains the expected code.
-	 * @throws Ocl2CodeException
+	 * @throws Ocl22CodeException
 	 *           Thrown if an Exception during the difference test occurs.
 	 */
 	public void doDiffTest(String constraintFileName, String expectedFileName)
-			throws Ocl2CodeException {
+			throws Ocl22CodeException {
 
 		this.doDiffTest(constraintFileName, expectedFileName, false);
 	}
@@ -255,14 +251,18 @@ public final class CodegenTestPerformer {
 	 * @param disableInheritance
 	 *          Set this value true if the inheritance of the {@link Constraint}
 	 *          shall be disabled.
-	 * @throws Ocl2CodeException
+	 * @throws Ocl22CodeException
 	 *           Thrown if an Exception during the difference test occurs.
 	 */
 	public void doDiffTest(String constraintFileName, String expectedFileName,
-			boolean disableInheritance) throws Ocl2CodeException {
+			boolean disableInheritance) throws Ocl22CodeException {
 
-		this.doDiffTest(constraintFileName, expectedFileName, disableInheritance,
-				IOcl2CodeSettings.INVARIANT_CHECK_AFTER_CONSTRUCT_AND_ATTRIBUTE_CHANGE);
+		this
+				.doDiffTest(
+						constraintFileName,
+						expectedFileName,
+						disableInheritance,
+						IOcl22CodeSettings.INVARIANT_CHECK_AFTER_CONSTRUCT_AND_ATTRIBUTE_CHANGE);
 	}
 
 	/**
@@ -281,42 +281,31 @@ public final class CodegenTestPerformer {
 	 * @param checkMode
 	 *          The mode with which invariants shall be checked after
 	 *          instrumentation.
-	 * @throws Ocl2CodeException
+	 * @throws Ocl22CodeException
 	 *           Thrown if an Exception during the difference test occurs.
 	 */
 	public void doDiffTest(String constraintFileName, String expectedFileName,
-			boolean disableInheritance, int checkMode) throws Ocl2CodeException {
+			boolean disableInheritance, int checkMode) throws Ocl22CodeException {
 
-		Constraint lastConstraint;
 		List<Constraint> constraints;
+		Constraint constraint;
 
 		/* Load the OCL file. */
-		this.addOCLFile(constraintFileName);
+		constraints = this.addOclConstraintsToModel(constraintFileName);
+		constraint = constraints.get(constraints.size() - 1);
 
-		/*
-		 * Get the parsed constraint (files are only allowed to contain one
-		 * expression).
-		 */
-		lastConstraint = this.getLastLoadedConstraint();
-
-		/* Eventually disable the inheritance. */
+		/* Probably disable the inheritance. */
 		if (disableInheritance) {
-			this.disableInheritance(lastConstraint);
+			this.disableInheritance(constraint);
 		}
 		// no else.
 
-		/* Eventually set the invariant check mode. */
-		if (checkMode != IOcl2CodeSettings.INVARIANT_CHECK_AFTER_CONSTRUCT_AND_ATTRIBUTE_CHANGE) {
-			this.myCodeGenerator.getSettings().setInvariantCheckMode(lastConstraint,
-					checkMode);
-		}
-
-		constraints = new ArrayList<Constraint>();
-		constraints.add(lastConstraint);
+		this.myCodeGeneratorSettings.setInvariantCheckMode(constraint, checkMode);
 
 		/* Transform the instrumentation code. */
 		this.transformedCode =
-				this.myCodeGenerator.transformInstrumentationCode(constraints).get(0);
+				Ocl2ForEclipseFacade.generateAspectJCode(constraint,
+						this.myCodeGeneratorSettings);
 
 		/* To the real difference test. */
 		this.compareStringAndFile(expectedFileName, transformedCode);
@@ -337,27 +326,23 @@ public final class CodegenTestPerformer {
 			String expectedFileName) {
 
 		try {
-			Constraint lastConstraint;
 			List<Constraint> constraints;
+			Constraint constraint;
 
-			/* Parse the constraint. */
-			this.addOCLFile(constraintFileName);
-
-			/* Get the not last parsed constraints. */
-			lastConstraint = this.getLastLoadedConstraint();
-
-			constraints = new ArrayList<Constraint>();
-			constraints.add(lastConstraint);
+			/* Load the OCL file. */
+			constraints = this.addOclConstraintsToModel(constraintFileName);
+			constraint = constraints.get(constraints.size() - 1);
 
 			/* Transform the fragment code. */
 			this.transformedCode =
-					this.myCodeGenerator.transformFragmentCode(constraints).get(0);
+					Ocl2ForEclipseFacade.generateJavaFragmentCode(constraint,
+							this.myCodeGeneratorSettings);
 
 			/* Do the real difference test. */
 			this.compareStringAndFile(expectedFileName, transformedCode);
 		}
 
-		catch (Ocl2CodeException e) {
+		catch (Ocl22CodeException e) {
 			String msg;
 
 			msg = "An error occured during preparing tests. ";
@@ -370,34 +355,16 @@ public final class CodegenTestPerformer {
 	}
 
 	/**
-	 * @return The last {@link Constraint} loaded for testing.
-	 */
-	public Constraint getLastLoadedConstraint() {
-
-		Constraint result;
-		List<Constraint> allConstraints;
-
-		result = null;
-		allConstraints = this.getAllConstraints();
-
-		if (allConstraints.size() > 0) {
-			result = allConstraints.get(allConstraints.size() - 1);
-		}
-
-		return result;
-	}
-
-	/**
 	 * <p>
 	 * Resets and re-initializes the {@link CodegenTestPerformer} and the
 	 * ModelRegistry.
 	 * </p>
 	 * 
-	 * @throws Ocl2CodeException
+	 * @throws Ocl22CodeException
 	 *           Thrown if {@link OCL2Parser} of {@link IModel} initialization
 	 *           required for testing fails.
 	 */
-	public void reset() throws Ocl2CodeException {
+	public void reset() throws Ocl22CodeException {
 
 		ModelBusPlugin.getModelRegistry().dispose();
 
@@ -406,18 +373,18 @@ public final class CodegenTestPerformer {
 
 	/**
 	 * <p>
-	 * Resets and re-initializes the {@link IOcl2Code} code generator of this
+	 * Resets and re-initializes the {@link IOcl22Code} code generator of this
 	 * {@link CodegenTestPerformer}.
 	 * </p>
 	 * 
-	 * @throws Ocl2CodeException
+	 * @throws Ocl22CodeException
 	 *           Thrown if {@link OCL2Parser} of {@link IModel} initialization
 	 *           required for testing fails.
 	 */
-	public void resetCodeGenerator() throws Ocl2CodeException {
+	public void resetCodeGenerator() throws Ocl22CodeException {
 
-		this.myCodeGenerator =
-				Ocl2CodeFactory.getInstance().createJavaCodeGenerator();
+		this.myCodeGeneratorSettings =
+				Ocl2ForEclipseFacade.getJavaCodeGeneratorSettings();
 	}
 
 	/**
@@ -433,7 +400,7 @@ public final class CodegenTestPerformer {
 	 */
 	public void setInvariantCheckMode(Constraint aConstraint, int mode) {
 
-		this.myCodeGenerator.getSettings().setInvariantCheckMode(aConstraint, mode);
+		this.myCodeGeneratorSettings.setInvariantCheckMode(aConstraint, mode);
 	}
 
 	/**
@@ -449,11 +416,11 @@ public final class CodegenTestPerformer {
 	 *          should be relative to the resource folder to avoid errors.
 	 * @param givenString
 	 *          The String which shall be checked.
-	 * @throws Ocl2CodeException
+	 * @throws Ocl22CodeException
 	 *           Thrown, if a difference test fails.
 	 */
 	private void compareStringAndFile(String expectedFilePath, String givenString)
-			throws Ocl2CodeException {
+			throws Ocl22CodeException {
 
 		File expectedCodeFile;
 		String expectedCodeBundleDirectory;
@@ -527,43 +494,26 @@ public final class CodegenTestPerformer {
 		// end try.
 
 		catch (FileNotFoundException e) {
-			throw new Ocl2CodeException(
+			throw new Ocl22CodeException(
 					"An already found file was not found. Test failed.");
 		}
 
 		catch (IOException e) {
-			throw new Ocl2CodeException(
+			throw new Ocl22CodeException(
 					"The difference file could not be read. Test failed");
 		}
 	}
 
 	/**
-	 *<p>
+	 * <p>
 	 * Initializes the {@link CodegenTestPerformer}.
 	 * </p>
 	 * 
-	 * @throws Ocl2CodeException
+	 * @throws Ocl22CodeException
 	 *           Thrown if any error occurred while loading the model or the meta
 	 *           model.
 	 */
-	private void init() throws Ocl2CodeException {
-
-		try {
-			IMetamodel metamodel;
-
-			metamodel =
-					ModelBusPlugin.getMetamodelRegistry().getMetamodel(META_MODEL_ID);
-
-			if (metamodel == null) {
-				throw new Ocl2CodeException("Unable to load the IMetamodel "
-						+ META_MODEL_ID);
-			}
-			// no else.
-
-		} catch (Exception e) {
-			throw new Ocl2CodeException("Unable to load the IMetamodel "
-					+ META_MODEL_ID + ": " + e.getMessage());
-		}
+	private void init() throws Ocl22CodeException {
 
 		this.transformedCode = null;
 
@@ -575,11 +525,9 @@ public final class CodegenTestPerformer {
 
 		this.loadModel();
 
-		this.myCodeGenerator =
-				Ocl2CodeFactory.getInstance().createJavaCodeGenerator();
+		this.resetCodeGenerator();
 
-		this.myCodeGenerator.getSettings().setGettersForDefinedAttributesEnabled(
-				true);
+		this.myCodeGeneratorSettings.setGettersForDefinedAttributesEnabled(true);
 	}
 
 	/**
@@ -612,11 +560,11 @@ public final class CodegenTestPerformer {
 	 * Loads the {@link IModel} for testing.
 	 * </p>
 	 * 
-	 * @throws Ocl2CodeException
+	 * @throws Ocl22CodeException
 	 *           Is thrown if the model cannot be initialized or the model file is
 	 *           not found.
 	 */
-	private void loadModel() throws Ocl2CodeException {
+	private void loadModel() throws Ocl22CodeException {
 
 		/* Check if the model has already been set. */
 		if (this.myModel != null
@@ -625,12 +573,6 @@ public final class CodegenTestPerformer {
 		}
 		// no else.
 
-		IMetamodel metaModel;
-
-		metaModel =
-				ModelBusPlugin.getMetamodelRegistry().getMetamodel(META_MODEL_ID);
-
-		this.myModelProvider = metaModel.getModelProvider();
 		this.myModelFile = new File(this.fileDirectory + MODEL_FILE_NAME);
 
 		if (!myModelFile.exists()) {
@@ -640,16 +582,18 @@ public final class CodegenTestPerformer {
 			msg += this.fileDirectory + MODEL_FILE_NAME;
 			msg += " doesn't exist.";
 
-			throw new Ocl2CodeException(msg);
+			throw new Ocl22CodeException(msg);
 		}
 		// no else;
 
 		try {
-			this.myModel = myModelProvider.getModel(myModelFile);
+			this.myModel =
+					Ocl2ForEclipseFacade.getModel(this.myModelFile,
+							Ocl2ForEclipseFacade.UML2_MetaModel);
 		}
 
 		catch (ModelAccessException e) {
-			throw new Ocl2CodeException("The model could not be loaded. "
+			throw new Ocl22CodeException("The model could not be loaded. "
 					+ e.getMessage());
 		}
 	}

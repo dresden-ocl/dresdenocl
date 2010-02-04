@@ -22,12 +22,12 @@ package tudresden.ocl20.pivot.ocl2java.test.tests;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import tudresden.ocl20.pivot.ocl2java.Ocl2JavaPlugin;
-import tudresden.ocl20.pivot.ocl2java.exception.Ocl2CodeException;
+import tudresden.ocl20.pivot.ocl2java.Ocl22JavaPlugin;
+import tudresden.ocl20.pivot.ocl2java.exception.Ocl22CodeException;
 
 /**
  * <p>
- * This class provides some test cases which tests the {@link Ocl2JavaPlugin}.
+ * This class provides some test cases which tests the {@link Ocl22JavaPlugin}.
  * </p>
  * 
  * @author Claas Wilke
@@ -48,10 +48,10 @@ public class FragmentTest {
 	 * Prepares all test cases of this test class.
 	 * </p>
 	 * 
-	 * @throws Ocl2CodeException
+	 * @throws Ocl22CodeException
 	 */
 	@BeforeClass
-	public static void setUp() throws Ocl2CodeException {
+	public static void setUp() throws Ocl22CodeException {
 		testPerformer = CodegenTestPerformer.getInstance();
 		testPerformer.reset();
 	}
