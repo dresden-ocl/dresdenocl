@@ -26,7 +26,6 @@ import static org.junit.Assert.assertTrue;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -90,7 +89,7 @@ public class TestInterpretation {
 			new ArrayList<IModelInstanceElement>();
 
 	/** Contains the last parsed {@link Constraint}s. */
-	private Set<Constraint> parsedConstraints;
+	private List<Constraint> parsedConstraints;
 
 	/**
 	 * A field that can be used to store an {@link OclBoolean} interpretation

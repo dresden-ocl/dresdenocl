@@ -22,7 +22,6 @@ package tudresden.ocl20.pivot.interpreter.test.tests;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 import org.eclipse.core.runtime.Platform;
 
@@ -326,16 +325,16 @@ public class TestPerformer {
 	 * 
 	 * @param oclFileName
 	 *          The OCL file to be parsed.
-	 * @return A {@link Set} containing the parsed {@link Constraint}s.
+	 * @return A {@link List} containing the parsed {@link Constraint}s.
 	 * @throws ModelAccessException
 	 * @throws OCL2ParsingException
 	 * @throws Ocl22JavaException
 	 *           Is thrown if any error occurs
 	 */
-	public Set<Constraint> loadOCLFile(String oclFileName)
+	public List<Constraint> loadOCLFile(String oclFileName)
 			throws RuntimeException, OCL2ParsingException, ModelAccessException {
 
-		Set<Constraint> result;
+		List<Constraint> result;
 		File oclFile;
 		oclFile = new File(fileDirectory + oclFileName);
 
