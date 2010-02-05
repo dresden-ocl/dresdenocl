@@ -51,12 +51,10 @@ public interface IModelInstanceRegistry extends IModelRegistryListener {
 	 * also be set as active.
 	 * </p>
 	 * 
-	 * @param model
-	 *          The {@link IModel} the {@link IModelInstance} belongs to.
 	 * @param modelInstance
 	 *          The {@link IModelInstance} to add.
 	 */
-	void addModelInstance(IModel model, IModelInstance modelInstance);
+	void addModelInstance(IModelInstance modelInstance);
 
 	/**
 	 * <p>

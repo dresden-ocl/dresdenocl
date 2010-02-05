@@ -157,7 +157,7 @@ public class LoadModelInstanceWizard extends Wizard implements IImportWizard {
 				 * registry.
 				 */
 				modelInstanceRegistry = ModelBusPlugin.getModelInstanceRegistry();
-				modelInstanceRegistry.addModelInstance(model, modelInstance);
+				modelInstanceRegistry.addModelInstance(modelInstance);
 
 				/* Try to activate the ModelInstanceView. */
 				try {

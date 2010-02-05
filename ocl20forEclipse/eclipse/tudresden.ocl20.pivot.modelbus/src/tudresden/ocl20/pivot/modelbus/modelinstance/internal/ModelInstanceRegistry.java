@@ -82,28 +82,21 @@ public class ModelInstanceRegistry implements IModelInstanceRegistry {
 
 	/*
 	 * (non-Javadoc)
-	 * @see
-	 * tudresden.ocl20.pivot.modelbus.IModelInstanceRegistry#addModelInstance(
-	 * tudresden.ocl20.pivot.modelbus.IModel,
-	 * tudresden.ocl20.pivot.modelbus.IModelInstance)
+	 * @seetudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceRegistry#
+	 * addModelInstance
+	 * (tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance)
 	 */
-	public void addModelInstance(IModel model, IModelInstance modelInstance) {
+	public void addModelInstance(IModelInstance modelInstance) {
 
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER
-					.debug("addModelInstance(model = " + model + ", modelInstance = " + modelInstance + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
+					.debug("addModelInstance(modelInstance = " + modelInstance + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 		// no else.
 
 		if (modelInstance == null) {
 			throw new IllegalArgumentException(
 					"The parameter 'modelInstance' must not be null.");
-		}
-		// no else.
-
-		if (model == null) {
-			throw new IllegalArgumentException(
-					"The parameter 'model' must not be null.");
 		}
 		// no else.
 
@@ -114,7 +107,7 @@ public class ModelInstanceRegistry implements IModelInstanceRegistry {
 		// no else.
 
 		Set<IModelInstance> instances;
-		instances = this.modelInstances.get(model);
+		instances = this.modelInstances.get(modelInstance.getModel());
 
 		if (instances == null) {
 			instances = new HashSet<IModelInstance>();
@@ -122,7 +115,7 @@ public class ModelInstanceRegistry implements IModelInstanceRegistry {
 		// no else.
 
 		IModelInstance similarModelInstance;
-		similarModelInstance = this.getSimilarModelInstance(model, modelInstance);
+		similarModelInstance = this.getSimilarModelInstance(modelInstance);
 
 		if (similarModelInstance != null) {
 			LOGGER.warn("ModelInstance '" + modelInstance.getDisplayName()
@@ -133,19 +126,19 @@ public class ModelInstanceRegistry implements IModelInstanceRegistry {
 
 		instances.add(modelInstance);
 
-		this.modelInstances.put(model, instances);
+		this.modelInstances.put(modelInstance.getModel(), instances);
 		this.fireModelInstanceAdded(modelInstance);
 
 		/* Check if an active model instance of the model already exists. */
 		if (this.activeModelInstances == null
-				|| this.activeModelInstances.get(model) == null
+				|| this.activeModelInstances.get(modelInstance.getModel()) == null
 				|| instances.size() == 1) {
-			this.setActiveModelInstance(model, modelInstance);
+			this.setActiveModelInstance(modelInstance.getModel(), modelInstance);
 		}
 		// no else.
 
 		if (LOGGER.isDebugEnabled()) {
-			LOGGER.debug("addModelInstance(IModel, IModelInstance) - exit"); //$NON-NLS-1$
+			LOGGER.debug("addModelInstance(IModelInstance) - exit"); //$NON-NLS-1$
 		}
 		// no else.
 	}
@@ -401,10 +394,9 @@ public class ModelInstanceRegistry implements IModelInstanceRegistry {
 
 	/*
 	 * (non-Javadoc)
-	 * @see
-	 * tudresden.ocl20.pivot.modelbus.IModelInstanceRegistry#setActiveModelInstance
-	 * (tudresden.ocl20.pivot.modelbus.IModel,
-	 * tudresden.ocl20.pivot.modelbus.IModelInstance)
+	 * @seetudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceRegistry#
+	 * setActiveModelInstance(tudresden.ocl20.pivot.modelbus.model.IModel,
+	 * tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance)
 	 */
 	public void setActiveModelInstance(IModel model, IModelInstance modelInstance) {
 
@@ -464,7 +456,7 @@ public class ModelInstanceRegistry implements IModelInstanceRegistry {
 		}
 		// end else.
 
-		this.fireActiveModelInstanceChanged(model, modelInstance);
+		this.fireActiveModelInstanceChanged(modelInstance);
 
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("setActiveModelInstance(IModel, IModelInstance) - exit"); //$NON-NLS-1$
@@ -478,13 +470,10 @@ public class ModelInstanceRegistry implements IModelInstanceRegistry {
 	 * changed.
 	 * </p>
 	 * 
-	 * @param model
-	 *          The {@link IModel} of the new active {@link IModelInstance}.
 	 * @param modelInstance
 	 *          The new active {@link IModelInstance}.
 	 */
-	private void fireActiveModelInstanceChanged(IModel model,
-			IModelInstance modelInstance) {
+	private void fireActiveModelInstanceChanged(IModelInstance modelInstance) {
 
 		ModelInstanceRegistryEvent event;
 		event = null;
@@ -498,7 +487,7 @@ public class ModelInstanceRegistry implements IModelInstanceRegistry {
 
 				/* Lazily create the event. */
 				if (event == null) {
-					event = new ModelInstanceRegistryEvent(this, model, modelInstance);
+					event = new ModelInstanceRegistryEvent(this, modelInstance);
 				}
 				// no else.
 
@@ -531,9 +520,7 @@ public class ModelInstanceRegistry implements IModelInstanceRegistry {
 
 				/* Lazily create the event. */
 				if (event == null) {
-					event =
-							new ModelInstanceRegistryEvent(this, modelInstance.getModel(),
-									modelInstance);
+					event = new ModelInstanceRegistryEvent(this, modelInstance);
 				}
 				// no else.
 
@@ -566,9 +553,7 @@ public class ModelInstanceRegistry implements IModelInstanceRegistry {
 
 				/* Lazily create the event. */
 				if (event == null) {
-					event =
-							new ModelInstanceRegistryEvent(this, modelInstance.getModel(),
-									modelInstance);
+					event = new ModelInstanceRegistryEvent(this, modelInstance);
 				}
 				// no else.
 
@@ -603,21 +588,18 @@ public class ModelInstanceRegistry implements IModelInstanceRegistry {
 	 * exsits for a given {@link IModel}.
 	 * </p>
 	 * 
-	 * @param model
-	 *          The {@link IModel}.
 	 * @param modelInstance
 	 *          The {@link IModelInstance}.
 	 * @return A found {@link IModelInstance} if the given {@link IModelInstance}
 	 *         or an {@link IModelInstance} with the same display name is already
 	 *         registered. Else <code>null</code>.
 	 */
-	private IModelInstance getSimilarModelInstance(IModel model,
-			IModelInstance modelInstance) {
+	private IModelInstance getSimilarModelInstance(IModelInstance modelInstance) {
 
 		IModelInstance result;
 
 		Set<IModelInstance> modelInstances;
-		modelInstances = this.modelInstances.get(model);
+		modelInstances = this.modelInstances.get(modelInstance.getModel());
 
 		if (modelInstances != null) {
 

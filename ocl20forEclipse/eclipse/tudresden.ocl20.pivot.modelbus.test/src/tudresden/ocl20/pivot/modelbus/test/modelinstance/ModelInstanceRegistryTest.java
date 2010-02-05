@@ -90,7 +90,7 @@ public class ModelInstanceRegistryTest {
 				ModelBusTestUtility.getJavaModelInstance(
 						"bin/package1/ModelInstance01ProviderClass.class", this.model);
 
-		modelInstanceRegistry.addModelInstance(this.model, modelInstance);
+		modelInstanceRegistry.addModelInstance(modelInstance);
 
 		/* The model should now be added to the registry. */
 		assertEquals(1, modelInstanceRegistry.getModelInstances(this.model).length);
@@ -123,7 +123,7 @@ public class ModelInstanceRegistryTest {
 				ModelBusTestUtility.getJavaModelInstance(
 						"bin/package1/ModelInstance01ProviderClass.class", this.model);
 
-		modelInstanceRegistry.addModelInstance(this.model, modelInstance);
+		modelInstanceRegistry.addModelInstance(modelInstance);
 
 		/* The model should now be added to the registry. */
 		assertEquals(1, modelInstanceRegistry.getModelInstances(this.model).length);
@@ -134,7 +134,7 @@ public class ModelInstanceRegistryTest {
 				.getActiveModelInstance(this.model));
 
 		/* Add the same model instance again. */
-		modelInstanceRegistry.addModelInstance(this.model, modelInstance);
+		modelInstanceRegistry.addModelInstance(modelInstance);
 
 		/* The model should now be added to the registry. */
 		assertEquals(1, modelInstanceRegistry.getModelInstances(this.model).length);
@@ -167,7 +167,7 @@ public class ModelInstanceRegistryTest {
 				ModelBusTestUtility.getJavaModelInstance(
 						"bin/package1/ModelInstance01ProviderClass.class", this.model);
 
-		modelInstanceRegistry.addModelInstance(this.model, modelInstance);
+		modelInstanceRegistry.addModelInstance(modelInstance);
 
 		/* The model should now be added to the registry. */
 		assertEquals(1, modelInstanceRegistry.getModelInstances(this.model).length);
@@ -182,7 +182,7 @@ public class ModelInstanceRegistryTest {
 				ModelBusTestUtility.getJavaModelInstance(
 						"bin/package1/ModelInstance01ProviderClass.class", this.model);
 
-		modelInstanceRegistry.addModelInstance(this.model, modelInstance);
+		modelInstanceRegistry.addModelInstance(modelInstance);
 
 		/* The model should now be added to the registry. */
 		assertEquals(1, modelInstanceRegistry.getModelInstances(this.model).length);
@@ -197,34 +197,13 @@ public class ModelInstanceRegistryTest {
 	 * <p>
 	 * Tests the method
 	 * {@link IModelInstanceRegistry#addModelInstance(IModel, IModelInstance)} by
-	 * adding a <code>null</code> value.
-	 * </p>
-	 * 
-	 * @throws ModelAccessException
-	 */
-	@Test(expected = IllegalArgumentException.class)
-	public void testAddModelInstance04() throws ModelAccessException {
-
-		IModelInstanceRegistry modelInstanceRegistry;
-		modelInstanceRegistry = ModelBusPlugin.getModelInstanceRegistry();
-
-		assertEquals(0, modelInstanceRegistry.getModelInstances(this.model).length);
-
-		/* Should cause an exception. */
-		modelInstanceRegistry.addModelInstance(model, null);
-	}
-
-	/**
-	 * <p>
-	 * Tests the method
-	 * {@link IModelInstanceRegistry#addModelInstance(IModel, IModelInstance)} by
 	 * simply adding two different {@link IModelInstance}s.
 	 * </p>
 	 * 
 	 * @throws ModelAccessException
 	 */
 	@Test
-	public void testAddModelInstance05() throws ModelAccessException {
+	public void testAddModelInstance04() throws ModelAccessException {
 
 		IModelInstanceRegistry modelInstanceRegistry;
 		modelInstanceRegistry = ModelBusPlugin.getModelInstanceRegistry();
@@ -236,7 +215,7 @@ public class ModelInstanceRegistryTest {
 				ModelBusTestUtility.getJavaModelInstance(
 						"bin/package1/ModelInstance01ProviderClass.class", this.model);
 
-		modelInstanceRegistry.addModelInstance(this.model, modelInstance1);
+		modelInstanceRegistry.addModelInstance(modelInstance1);
 
 		/* The model should now be added to the registry. */
 		assertEquals(1, modelInstanceRegistry.getModelInstances(this.model).length);
@@ -252,7 +231,7 @@ public class ModelInstanceRegistryTest {
 				ModelBusTestUtility.getJavaModelInstance(
 						"bin/package1/ModelInstance02ProviderClass.class", this.model);
 
-		modelInstanceRegistry.addModelInstance(this.model, modelInstance2);
+		modelInstanceRegistry.addModelInstance(modelInstance2);
 
 		/* The model should now be added to the registry. */
 		assertEquals(2, modelInstanceRegistry.getModelInstances(this.model).length);
@@ -285,7 +264,7 @@ public class ModelInstanceRegistryTest {
 				ModelBusTestUtility.getJavaModelInstance(
 						"bin/package1/ModelInstance01ProviderClass.class", this.model);
 
-		modelInstanceRegistry.addModelInstance(this.model, modelInstance01);
+		modelInstanceRegistry.addModelInstance(modelInstance01);
 
 		/* The model should now be added to the registry. */
 		assertEquals(1, modelInstanceRegistry.getModelInstances(this.model).length);
@@ -331,8 +310,8 @@ public class ModelInstanceRegistryTest {
 				ModelBusTestUtility.getJavaModelInstance(
 						"bin/package1/ModelInstance02ProviderClass.class", this.model);
 
-		modelInstanceRegistry.addModelInstance(this.model, modelInstance01);
-		modelInstanceRegistry.addModelInstance(this.model, modelInstance02);
+		modelInstanceRegistry.addModelInstance(modelInstance01);
+		modelInstanceRegistry.addModelInstance(modelInstance02);
 
 		/* The model instances should now be added to the registry. */
 		assertEquals(2, modelInstanceRegistry.getModelInstances(this.model).length);
@@ -385,9 +364,9 @@ public class ModelInstanceRegistryTest {
 				ModelBusTestUtility.getJavaModelInstance(
 						"bin/package1/ModelInstance03ProviderClass.class", this.model);
 
-		modelInstanceRegistry.addModelInstance(this.model, modelInstance01);
-		modelInstanceRegistry.addModelInstance(this.model, modelInstance02);
-		modelInstanceRegistry.addModelInstance(this.model, modelInstance03);
+		modelInstanceRegistry.addModelInstance(modelInstance01);
+		modelInstanceRegistry.addModelInstance(modelInstance02);
+		modelInstanceRegistry.addModelInstance(modelInstance03);
 
 		/* The model instances should now be added to the registry. */
 		assertEquals(3, modelInstanceRegistry.getModelInstances(this.model).length);
@@ -476,7 +455,7 @@ public class ModelInstanceRegistryTest {
 				ModelBusTestUtility.getJavaModelInstance(
 						"bin/package1/ModelInstance01ProviderClass.class", this.model);
 
-		modelInstanceRegistry.addModelInstance(this.model, modelInstance01);
+		modelInstanceRegistry.addModelInstance(modelInstance01);
 
 		/* The model should now be added to the registry. */
 		assertEquals(1, modelInstanceRegistry.getModelInstances(this.model).length);
@@ -522,7 +501,7 @@ public class ModelInstanceRegistryTest {
 				ModelBusTestUtility.getJavaModelInstance(
 						"bin/package1/ModelInstance01ProviderClass.class", this.model);
 
-		modelInstanceRegistry.addModelInstance(this.model, modelInstance01);
+		modelInstanceRegistry.addModelInstance(modelInstance01);
 
 		/* The model should now be added to the registry. */
 		assertEquals(1, modelInstanceRegistry.getModelInstances(this.model).length);
@@ -590,7 +569,7 @@ public class ModelInstanceRegistryTest {
 				ModelBusTestUtility.getJavaModelInstance(
 						"bin/package1/ModelInstance01ProviderClass.class", this.model);
 
-		modelInstanceRegistry.addModelInstance(this.model, modelInstance);
+		modelInstanceRegistry.addModelInstance(modelInstance);
 
 		/* The model instance should now be added to the registry. */
 		assertEquals(1, modelInstanceRegistry.getModelInstances(this.model).length);
@@ -653,7 +632,7 @@ public class ModelInstanceRegistryTest {
 				ModelBusTestUtility.getJavaModelInstance(
 						"bin/package1/ModelInstance01ProviderClass.class", this.model);
 
-		modelInstanceRegistry.addModelInstance(this.model, modelInstance);
+		modelInstanceRegistry.addModelInstance(modelInstance);
 
 		/* The model instance should now be added to the registry. */
 		assertEquals(1, modelInstanceRegistry.getModelInstances(this.model).length);
@@ -688,7 +667,7 @@ public class ModelInstanceRegistryTest {
 				ModelBusTestUtility.getJavaModelInstance(
 						"bin/package1/ModelInstance01ProviderClass.class", this.model);
 
-		modelInstanceRegistry.addModelInstance(this.model, modelInstance1);
+		modelInstanceRegistry.addModelInstance(modelInstance1);
 
 		/* Set the model instance as active. */
 		modelInstanceRegistry.setActiveModelInstance(this.model, modelInstance1);
@@ -704,7 +683,7 @@ public class ModelInstanceRegistryTest {
 				ModelBusTestUtility.getJavaModelInstance(
 						"bin/package1/ModelInstance02ProviderClass.class", this.model);
 
-		modelInstanceRegistry.addModelInstance(this.model, modelInstance2);
+		modelInstanceRegistry.addModelInstance(modelInstance2);
 
 		/* Set the model instance as active. */
 		modelInstanceRegistry.setActiveModelInstance(this.model, modelInstance2);

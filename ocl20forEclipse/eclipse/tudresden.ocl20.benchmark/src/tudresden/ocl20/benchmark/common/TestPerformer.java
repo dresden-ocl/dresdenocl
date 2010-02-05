@@ -100,7 +100,7 @@ public class TestPerformer {
 	/**
 	 * 
 	 * 
-	 * @param testEnv 
+	 * @param testEnv
 	 */
 	public TestPerformer(TestEnvironment testEnv) {
 
@@ -115,11 +115,12 @@ public class TestPerformer {
 	 * set.
 	 * </p>
 	 * 
-	 * @param metaModelName 
-	 * @param modelFilePath 
+	 * @param metaModelName
+	 * @param modelFilePath
 	 * 
-	 * @throws RuntimeException Is thrown if any error occurred while loading the model or the
-	 * meta model.
+	 * @throws RuntimeException
+	 *           Is thrown if any error occurred while loading the model or the
+	 *           meta model.
 	 */
 	public void init(String metaModelName, String modelFilePath)
 			throws RuntimeException {
@@ -167,12 +168,12 @@ public class TestPerformer {
 	/**
 	 * Check invariant with all active instance objects.
 	 * 
-	 * @param con 
-	 * @param results 
+	 * @param con
+	 * @param results
 	 * 
 	 * @return true, if successful
 	 * 
-	 * @throws Throwable 
+	 * @throws Throwable
 	 */
 	public boolean checkInvariantWithAllActiveInstanceObjects(Constraint con,
 			StringBuilder results) throws Throwable {
@@ -208,19 +209,18 @@ public class TestPerformer {
 
 	}
 
-
 	/**
 	 * Check post condition.
 	 * 
-	 * @param guineaPig 
-	 * @param con 
-	 * @param results 
-	 * @param method 
-	 * @param params 
+	 * @param guineaPig
+	 * @param con
+	 * @param results
+	 * @param method
+	 * @param params
 	 * 
 	 * @return true, if successful
 	 * 
-	 * @throws Throwable 
+	 * @throws Throwable
 	 */
 	public boolean checkPostCondition(IModelInstanceObject guineaPig,
 			Constraint con, StringBuilder results, String method, String... params)
@@ -279,13 +279,13 @@ public class TestPerformer {
 	/**
 	 * Check pre condition.
 	 * 
-	 * @param guineaPig 
-	 * @param con 
-	 * @param results 
+	 * @param guineaPig
+	 * @param con
+	 * @param results
 	 * 
 	 * @return true, if successful
 	 * 
-	 * @throws Throwable 
+	 * @throws Throwable
 	 */
 	public boolean checkPreCondition(IModelInstanceObject guineaPig,
 			Constraint con, StringBuilder results) throws Throwable {
@@ -309,10 +309,10 @@ public class TestPerformer {
 	/**
 	 * Collect an array of OclAny-Objects registered in the environment.
 	 * 
-	 * @param params String-Array identifying all Variables that are being
-	 * fetched
+	 * @param params
+	 *          String-Array identifying all Variables that are being fetched
 	 * 
-	 * @return 
+	 * @return
 	 */
 	protected OclAny[] collectMethodParams(String... params) {
 
@@ -329,13 +329,13 @@ public class TestPerformer {
 	/**
 	 * Interprets a model instance object with a constraint.
 	 * 
-	 * @param obj 
-	 * @param con 
+	 * @param obj
+	 * @param con
 	 * 
 	 * @return null if everything went ok, string in case of failure or exception
-	 * when something weired happend.
+	 *         when something weired happend.
 	 * 
-	 * @throws Throwable 
+	 * @throws Throwable
 	 */
 	protected String interpretConstraint2(IModelInstanceObject obj, Constraint con)
 			throws Throwable {
@@ -367,8 +367,8 @@ public class TestPerformer {
 	/**
 	 * Interpret constraint.
 	 * 
-	 * @param obj 
-	 * @param con 
+	 * @param obj
+	 * @param con
 	 */
 	@SuppressWarnings("unused")
 	protected void interpretConstraint(IModelInstanceObject obj, Constraint con) {
@@ -378,14 +378,13 @@ public class TestPerformer {
 	/**
 	 * Gets the constraint by statement.
 	 * 
-	 * @param stmt 
+	 * @param stmt
 	 * 
 	 * @return the constraint by statement
 	 * 
-	 * @throws ModelAccessException 
+	 * @throws ModelAccessException
 	 */
-	public Constraint getConstraintByStatement(
-			StatementDefinition stmt)
+	public Constraint getConstraintByStatement(StatementDefinition stmt)
 			throws ModelAccessException {
 
 		Namespace ns = this.myModel.findNamespace(stmt.getNamespaceList());
@@ -404,7 +403,8 @@ public class TestPerformer {
 	 * Sets the model instance of this {@link TestPerformer}.
 	 * </p>
 	 * 
-	 * @param modelInstance The model instance for which the test shall be performed.
+	 * @param modelInstance
+	 *          The model instance for which the test shall be performed.
 	 */
 	public void setModelInstanceType(String modelInstance) {
 
@@ -433,9 +433,11 @@ public class TestPerformer {
 	 * {@link IModel}.
 	 * </p>
 	 * 
-	 * @param modelInstanceFileName The file of the provider class of the {@link IModelInstance}.
+	 * @param modelInstanceFileName
+	 *          The file of the provider class of the {@link IModelInstance}.
 	 * 
-	 * @throws RuntimeException Thrown, if the given file can not be found.
+	 * @throws RuntimeException
+	 *           Thrown, if the given file can not be found.
 	 */
 	public void loadModelInstance(String modelInstanceFileName)
 			throws RuntimeException {
@@ -477,11 +479,11 @@ public class TestPerformer {
 	/**
 	 * Parses the ocl statement.
 	 * 
-	 * @param completeStatement 
+	 * @param completeStatement
 	 * 
 	 * @return true, if successful
 	 * 
-	 * @throws Exception 
+	 * @throws Exception
 	 */
 	public void parseOclStatement(String completeStatement) throws Exception {
 
@@ -497,7 +499,7 @@ public class TestPerformer {
 	/**
 	 * Sets the active model instance.
 	 * 
-	 * @param instance 
+	 * @param instance
 	 */
 	protected void setActiveModelInstance(IModelInstance instance) {
 
@@ -514,7 +516,7 @@ public class TestPerformer {
 			}
 		}
 		// else add and activate
-		modelInstanceRegistry.addModelInstance(this.myModel, instance);
+		modelInstanceRegistry.addModelInstance(instance);
 		modelInstanceRegistry.setActiveModelInstance(this.myModel, instance);
 
 		this.myGlobalEnvironment.setModelInstance(instance);
@@ -554,9 +556,10 @@ public class TestPerformer {
 	 * Loads an {@link IModel} which uses the corresponding meta model.
 	 * </p>
 	 * 
-	 * @param modelName Filename of the model
+	 * @param modelName
+	 *          Filename of the model
 	 * 
-	 * @throws RuntimeException 
+	 * @throws RuntimeException
 	 */
 	protected void loadModel(String modelName) throws RuntimeException {
 
@@ -602,11 +605,11 @@ public class TestPerformer {
 	/**
 	 * Safe open file.
 	 * 
-	 * @param fileName 
+	 * @param fileName
 	 * 
 	 * @return the file
 	 * 
-	 * @throws RuntimeException 
+	 * @throws RuntimeException
 	 */
 	protected File safeOpenFile(String fileName) throws RuntimeException {
 
@@ -629,15 +632,16 @@ public class TestPerformer {
 	/**
 	 * creates an object adapting the passed model instance object.
 	 * 
-	 * @param object Object to be adapteds
+	 * @param object
+	 *          Object to be adapteds
 	 * 
-	 * @return 
+	 * @return
 	 */
-	public IModelInstanceObject createModelInstanceAdapter(Object object){
+	public IModelInstanceObject createModelInstanceAdapter(Object object) {
 
 		IModelInstanceObject result = null;
 		try {
-			
+
 			result =
 					(IModelInstanceObject) this.getActiveModelInstance()
 							.addModelInstanceElement(object);
@@ -655,12 +659,14 @@ public class TestPerformer {
 	 * {@link IInterpretationEnvironment} used for preparation and interpretation.
 	 * </p>
 	 * 
-	 * @param path The path and name of the variable which shall be set.
-	 * @param value The {@link IModelInstanceObject} value of the set variable as an
-	 * Object.
+	 * @param path
+	 *          The path and name of the variable which shall be set.
+	 * @param value
+	 *          The {@link IModelInstanceObject} value of the set variable as an
+	 *          Object.
 	 * 
 	 * @return <code>true</code>, if the given value has been set as a value
-	 * successfully.
+	 *         successfully.
 	 */
 	public boolean setEnvironmentVariable(String path, Object value) {
 
@@ -692,9 +698,9 @@ public class TestPerformer {
 	 * creates an ocl root adapter from a model instance adapter in order to being
 	 * able to execute a method on the model level.
 	 * 
-	 * @param obj 
+	 * @param obj
 	 * 
-	 * @return 
+	 * @return
 	 */
 	public OclAny createOclRootAdapterByMIObject(IModelInstanceObject obj) {
 

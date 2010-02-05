@@ -23,7 +23,6 @@ import java.io.File;
 
 import org.eclipse.core.runtime.Platform;
 
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.factory.IStandardLibraryFactory;
 import tudresden.ocl20.pivot.examples.royalsandloyals.Customer;
 import tudresden.ocl20.pivot.examples.royalsandloyals.CustomerCard;
@@ -349,7 +348,7 @@ public class TestPerformer {
 			IModelInstanceRegistry modelInstanceRegistry;
 			modelInstanceRegistry = ModelBusPlugin.getModelInstanceRegistry();
 
-			modelInstanceRegistry.addModelInstance(myModel, this.myModelInstance);
+			modelInstanceRegistry.addModelInstance(this.myModelInstance);
 			modelInstanceRegistry.setActiveModelInstance(myModel,
 					this.myModelInstance);
 		}

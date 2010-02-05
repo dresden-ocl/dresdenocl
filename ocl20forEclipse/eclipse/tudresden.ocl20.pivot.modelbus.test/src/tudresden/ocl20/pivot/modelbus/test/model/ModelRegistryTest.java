@@ -539,7 +539,7 @@ public class ModelRegistryTest {
 				ModelBusTestUtility.getJavaModelInstance(
 						"bin/package1/ModelInstance01ProviderClass.class", model);
 
-		modelInstanceRegistry.addModelInstance(model, modelInstance01);
+		modelInstanceRegistry.addModelInstance(modelInstance01);
 
 		/* The model should now be added to the registry. */
 		assertEquals(1, modelInstanceRegistry.getModelInstances(model).length);

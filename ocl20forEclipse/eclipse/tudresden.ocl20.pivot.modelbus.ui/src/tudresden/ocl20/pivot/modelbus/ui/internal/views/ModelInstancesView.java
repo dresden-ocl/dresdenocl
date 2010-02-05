@@ -150,8 +150,7 @@ public class ModelInstancesView extends ViewPart implements
 
 		this.rebuildMenu(e.getAffectedModel());
 
-		this.setActiveModelInstance(e.getAffectedModel(), ModelBusPlugin
-				.getModelInstanceRegistry()
+		this.setActiveModelInstance(ModelBusPlugin.getModelInstanceRegistry()
 				.getActiveModelInstance(e.getAffectedModel()));
 	}
 
@@ -163,8 +162,7 @@ public class ModelInstancesView extends ViewPart implements
 	 */
 	public void activeModelInstanceChanged(ModelInstanceRegistryEvent event) {
 
-		this.setActiveModelInstance(event.getAffectedModel(), event
-				.getAffectedModelInstance());
+		this.setActiveModelInstance(event.getAffectedModelInstance());
 	}
 
 	/*
@@ -198,9 +196,8 @@ public class ModelInstancesView extends ViewPart implements
 
 		this.rebuildMenu(event.getAffectedModel());
 
-		this.setActiveModelInstance(event.getAffectedModel(), ModelBusPlugin
-				.getModelInstanceRegistry().getActiveModelInstance(
-						event.getAffectedModel()));
+		this.setActiveModelInstance(ModelBusPlugin.getModelInstanceRegistry()
+				.getActiveModelInstance(event.getAffectedModel()));
 	}
 
 	public void modelRemoved(ModelRegistryEvent event) {
@@ -543,16 +540,16 @@ public class ModelInstancesView extends ViewPart implements
 	 * Sets the active {@link IModelInstance}.
 	 * </p>
 	 * 
-	 * @param affectedModel
-	 *          The affected {@link IModel}.
 	 * @param affectedModelInstance
 	 *          The affected {@link IModelInstance}.
 	 */
-	private void setActiveModelInstance(IModel affectedModel,
-			IModelInstance affectedModelInstance) {
+	private void setActiveModelInstance(IModelInstance affectedModelInstance) {
 
 		/* Check if the model instance is not null. */
 		if (affectedModelInstance != null) {
+
+			IModel affectedModel;
+			affectedModel = affectedModelInstance.getModel();
 
 			ModelInstanceSelectionAction aSelectionAction;
 			Map<IModelInstance, ModelInstanceSelectionAction> aModelsSelectionActions;

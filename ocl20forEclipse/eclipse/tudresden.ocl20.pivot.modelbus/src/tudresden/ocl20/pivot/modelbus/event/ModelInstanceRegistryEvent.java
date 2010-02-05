@@ -32,7 +32,6 @@ package tudresden.ocl20.pivot.modelbus.event;
 
 import java.util.EventObject;
 
-import tudresden.ocl20.pivot.modelbus.model.IModel;
 import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance;
 import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceRegistry;
 import tudresden.ocl20.pivot.modelbus.modelinstance.internal.ModelInstanceRegistry;
@@ -53,9 +52,6 @@ public class ModelInstanceRegistryEvent extends EventObject {
 	/** The affected {@link IModelInstance}. */
 	private IModelInstance affectedModelInstance;
 
-	/** The affected {@link IModel}. */
-	private IModel affectedModel;
-
 	/**
 	 * <p>
 	 * Instantiates a new {@link ModelInstanceRegistryEvent}.
@@ -63,16 +59,13 @@ public class ModelInstanceRegistryEvent extends EventObject {
 	 * 
 	 * @param source
 	 *          The {@link IModelInstanceRegistry} this event belongs to.
-	 * @param affectedModel
-	 *          The affected {@link IModel}.
 	 * @param affectedModelInstance
 	 *          The affected {@link IModelInstance}.
 	 */
 	public ModelInstanceRegistryEvent(IModelInstanceRegistry source,
-			IModel affectedModel, IModelInstance affectedModelInstance) {
+			IModelInstance affectedModelInstance) {
 
 		super(source);
-		this.affectedModel = affectedModel;
 		this.affectedModelInstance = affectedModelInstance;
 	}
 
@@ -81,20 +74,8 @@ public class ModelInstanceRegistryEvent extends EventObject {
 	 * @see java.util.EventObject#getSource()
 	 */
 	public IModelInstanceRegistry getSource() {
-	
+
 		return (IModelInstanceRegistry) super.getSource();
-	}
-
-	/**
-	 * <p>
-	 * Gets the affected {@link IModel}.
-	 * </p>
-	 * 
-	 * @return The affected {@link IModel}.
-	 */
-	public IModel getAffectedModel() {
-
-		return this.affectedModel;
 	}
 
 	/**
