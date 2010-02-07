@@ -1093,6 +1093,11 @@ public class JavaModelInstance extends AbstractModelInstance {
 	public IModelInstanceElement addModelInstanceElement(Object object)
 			throws TypeNotFoundInModelException {
 
+		if (object == null) {
+			throw new IllegalArgumentException("Parameter 'object' must not be null.");
+		}
+		// no else.
+
 		IModelInstanceElement result;
 
 		/* Try to adapt and add the object. */
@@ -1118,6 +1123,12 @@ public class JavaModelInstance extends AbstractModelInstance {
 	 */
 	public IModelInstanceElement getStaticProperty(Property property)
 			throws PropertyAccessException, PropertyNotFoundException {
+
+		if (property == null) {
+			throw new IllegalArgumentException(
+					"Parameter 'property' must not be null.");
+		}
+		// no else.
 
 		IModelInstanceElement result;
 
@@ -1234,6 +1245,17 @@ public class JavaModelInstance extends AbstractModelInstance {
 	public IModelInstanceElement invokeStaticOperation(Operation operation,
 			List<IModelInstanceElement> args) throws OperationNotFoundException,
 			OperationAccessException {
+
+		if (operation == null) {
+			throw new IllegalArgumentException(
+					"Parameter 'operation' must not be null.");
+		}
+		// no else.
+
+		else if (args == null) {
+			throw new IllegalArgumentException("Parameter 'args' must not be null.");
+		}
+		// no else.
 
 		IModelInstanceElement result;
 
