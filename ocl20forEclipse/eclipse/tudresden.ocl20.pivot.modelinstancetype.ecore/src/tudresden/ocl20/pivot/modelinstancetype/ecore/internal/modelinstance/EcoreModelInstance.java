@@ -190,6 +190,11 @@ public class EcoreModelInstance extends AbstractModelInstance implements
 	public IModelInstanceElement addModelInstanceElement(Object object)
 			throws TypeNotFoundInModelException {
 
+		if (object == null) {
+			throw new IllegalArgumentException("Parameter 'object' must not be null.");
+		}
+		// no else.
+
 		IModelInstanceElement result;
 
 		/* Try to adapt and add the object. */
@@ -213,6 +218,12 @@ public class EcoreModelInstance extends AbstractModelInstance implements
 	public IModelInstanceElement getStaticProperty(Property property)
 			throws PropertyAccessException, PropertyNotFoundException {
 
+		if (property == null) {
+			throw new IllegalArgumentException(
+					"Parameter 'property' must not be null.");
+		}
+		// no else.
+
 		String msg;
 		msg =
 				EcoreModelInstanceTypeMessages.EcoreModelInstance_NoSupportOfStaticProperties;
@@ -229,6 +240,17 @@ public class EcoreModelInstance extends AbstractModelInstance implements
 	public IModelInstanceElement invokeStaticOperation(Operation operation,
 			List<IModelInstanceElement> args) throws OperationAccessException,
 			OperationNotFoundException {
+
+		if (operation == null) {
+			throw new IllegalArgumentException(
+					"Parameter 'operation' must not be null.");
+		}
+		// no else.
+
+		else if (args == null) {
+			throw new IllegalArgumentException("Parameter 'args' must not be null.");
+		}
+		// no else.
 
 		String msg;
 		msg =

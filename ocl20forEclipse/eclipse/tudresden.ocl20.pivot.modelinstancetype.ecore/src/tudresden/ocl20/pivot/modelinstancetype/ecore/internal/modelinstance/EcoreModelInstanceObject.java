@@ -214,6 +214,11 @@ public class EcoreModelInstanceObject extends AbstractModelInstanceObject
 	 */
 	public IModelInstanceElement asType(Type type) throws AsTypeCastException {
 
+		if (type == null) {
+			throw new IllegalArgumentException("Parameter 'type' must not be null.");
+		}
+		// no else.
+
 		IModelInstanceElement result;
 
 		String typeClassName;
@@ -375,6 +380,12 @@ public class EcoreModelInstanceObject extends AbstractModelInstanceObject
 	public IModelInstanceElement getProperty(Property property)
 			throws PropertyAccessException, PropertyNotFoundException {
 
+		if (property == null) {
+			throw new IllegalArgumentException(
+					"Parameter 'property' must not be null.");
+		}
+		// no else.
+
 		IModelInstanceElement result;
 
 		/* Check if this object is undefined. */
@@ -467,6 +478,17 @@ public class EcoreModelInstanceObject extends AbstractModelInstanceObject
 	public IModelInstanceElement invokeOperation(Operation operation,
 			List<IModelInstanceElement> args) throws OperationNotFoundException,
 			OperationAccessException {
+
+		if (operation == null) {
+			throw new IllegalArgumentException(
+					"Parameter 'operation' must not be null.");
+		}
+		// no else.
+
+		else if (args == null) {
+			throw new IllegalArgumentException("Parameter 'args' must not be null.");
+		}
+		// no else.
 
 		IModelInstanceElement result;
 
