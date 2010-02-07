@@ -177,7 +177,7 @@ public class TestModelInstanceEnumerationLiteral {
 	 * </p>
 	 */
 	@Test
-	public void testAsType() {
+	public void testAsType01() {
 
 		msg =
 				ModelInstanceTypeTestSuiteMessages.TestModelInstanceEnumerationLiteral_AsTypeIsWrong;
@@ -209,6 +209,24 @@ public class TestModelInstanceEnumerationLiteral {
 
 	/**
 	 * <p>
+	 * Tests the method {@link IModelInstanceEnumerationLiteral#asType(Type)} with
+	 * illegal arguments.
+	 * </p>
+	 * 
+	 * @throws AsTypeCastException
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void testAsType02() throws AsTypeCastException {
+
+		for (IModelInstanceEnumerationLiteral literal1 : instances_EnumerationLiteral) {
+
+			literal1.asType(null);
+		}
+		// end for.
+	}
+
+	/**
+	 * <p>
 	 * Tests the method {@link IModelInstanceEnumerationLiteral#copyForAtPre()}.
 	 * </p>
 	 */
@@ -222,7 +240,7 @@ public class TestModelInstanceEnumerationLiteral {
 		for (IModelInstanceEnumerationLiteral aLiteral : instances_EnumerationLiteral) {
 
 			try {
-				aLiteral.copyForAtPre();
+				assertNotNull(msg, aLiteral.copyForAtPre());
 			}
 
 			catch (CopyForAtPreException e) {
@@ -247,15 +265,18 @@ public class TestModelInstanceEnumerationLiteral {
 		for (IModelInstanceEnumerationLiteral aLiteral : instances_EnumerationLiteral) {
 
 			for (IModelInstanceEnumerationLiteral anotherLiteral : instances_EnumerationLiteral) {
-				
+
 				if (aLiteral.getLiteral().equals(anotherLiteral.getLiteral())) {
 					assertTrue(msg, aLiteral.equals(anotherLiteral));
 				}
-				
+
 				else {
 					assertFalse(msg, aLiteral.equals(anotherLiteral));
 				}
 				// end else.
+
+				/* No literal should be equal to null. */
+				assertFalse(msg, aLiteral.equals(null));
 			}
 			// end for.
 		}

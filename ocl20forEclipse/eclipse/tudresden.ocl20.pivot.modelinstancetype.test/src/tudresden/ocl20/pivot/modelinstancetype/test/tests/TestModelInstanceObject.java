@@ -284,7 +284,7 @@ public class TestModelInstanceObject {
 	 * </p>
 	 */
 	@Test
-	public void testAsType1() {
+	public void testAsType01() {
 
 		msg =
 				ModelInstanceTypeTestSuiteMessages.TestModelInstanceObject_AsTypeIsWrong;
@@ -328,7 +328,7 @@ public class TestModelInstanceObject {
 	 * </p>
 	 */
 	@Test
-	public void testAsType2() {
+	public void testAsType02() {
 
 		msg =
 				ModelInstanceTypeTestSuiteMessages.TestModelInstanceObject_AsTypeIsWrong;
@@ -414,7 +414,7 @@ public class TestModelInstanceObject {
 	 * </p>
 	 */
 	@Test
-	public void testAsType3() {
+	public void testAsType03() {
 
 		msg =
 				ModelInstanceTypeTestSuiteMessages.TestModelInstanceObject_AsTypeIsWrong;
@@ -458,7 +458,7 @@ public class TestModelInstanceObject {
 	 * </p>
 	 */
 	@Test
-	public void testAsType4() {
+	public void testAsType04() {
 
 		msg =
 				ModelInstanceTypeTestSuiteMessages.TestModelInstanceObject_AsTypeIsWrong;
@@ -502,7 +502,7 @@ public class TestModelInstanceObject {
 	 * </p>
 	 */
 	@Test
-	public void testAsType5() {
+	public void testAsType05() {
 
 		msg =
 				ModelInstanceTypeTestSuiteMessages.TestModelInstanceObject_AsTypeIsWrong;
@@ -577,6 +577,24 @@ public class TestModelInstanceObject {
 			catch (AsTypeCastException e) {
 				fail(msg);
 			}
+		}
+		// end for.
+	}
+
+	/**
+	 * <p>
+	 * Tests the method {@link IModelInstanceObject#asType(Type)} with illegal
+	 * arguments.
+	 * </p>
+	 * 
+	 * @throws AsTypeCastException
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void testAsType06() throws AsTypeCastException {
+
+		/* An IModelInstanceObject should cast-able to all implemented types. */
+		for (IModelInstanceElement anElement : instances_AllClasses) {
+			anElement.asType(null);
 		}
 		// end for.
 	}
@@ -690,7 +708,7 @@ public class TestModelInstanceObject {
 		for (IModelInstanceElement anElement : instances_CopyableClass) {
 
 			try {
-				anElement.copyForAtPre();
+				assertNotNull(msg, anElement.copyForAtPre());
 			}
 
 			catch (CopyForAtPreException e) {
@@ -744,6 +762,9 @@ public class TestModelInstanceObject {
 					assertFalse(msg, anElement.equals(anotherElement));
 				}
 				// end else.
+
+				/* No object should be equal to null. */
+				assertFalse(msg, anElement.equals(null));
 			}
 			// end for.
 		}
@@ -758,7 +779,7 @@ public class TestModelInstanceObject {
 	 * </p>
 	 */
 	@Test
-	public void testInvokeOperation1() {
+	public void testInvokeOperation01() {
 
 		Operation operation;
 		String operationName;
@@ -831,7 +852,7 @@ public class TestModelInstanceObject {
 	 * </p>
 	 */
 	@Test
-	public void testInvokeOperation2() {
+	public void testInvokeOperation02() {
 
 		Operation operation;
 		String operationName;
@@ -904,7 +925,7 @@ public class TestModelInstanceObject {
 	 * </p>
 	 */
 	@Test
-	public void testInvokeOperation3() {
+	public void testInvokeOperation03() {
 
 		Operation operation;
 		String operationName;
@@ -985,7 +1006,7 @@ public class TestModelInstanceObject {
 	 * </p>
 	 */
 	@Test
-	public void testInvokeOperation4() {
+	public void testInvokeOperation04() {
 
 		Operation operation;
 		String operationName;
@@ -1027,8 +1048,7 @@ public class TestModelInstanceObject {
 				assertEquals(msg, 1, operationResult.getTypes().size());
 
 				/* The result should have an set type. */
-				assertTrue(msg, operationResult.getTypes().contains(
-						TypeConstants.SET));
+				assertTrue(msg, operationResult.getTypes().contains(TypeConstants.SET));
 
 				/* The result should be an IModelInstanceCollecttion. */
 				assertTrue(msg, operationResult instanceof IModelInstanceCollection<?>);
@@ -1066,7 +1086,7 @@ public class TestModelInstanceObject {
 	 * </p>
 	 */
 	@Test
-	public void testInvokeOperation5() {
+	public void testInvokeOperation05() {
 
 		Operation operation;
 		String operationName;
@@ -1147,7 +1167,7 @@ public class TestModelInstanceObject {
 	 * </p>
 	 */
 	@Test
-	public void testInvokeOperation6() {
+	public void testInvokeOperation06() {
 
 		Operation operation;
 		String operationName;
@@ -1189,8 +1209,7 @@ public class TestModelInstanceObject {
 				assertEquals(msg, 1, operationResult.getTypes().size());
 
 				/* The result should have an bag type. */
-				assertTrue(msg, operationResult.getTypes().contains(
-						TypeConstants.BAG));
+				assertTrue(msg, operationResult.getTypes().contains(TypeConstants.BAG));
 
 				/* The result should be an IModelInstanceCollecttion. */
 				assertTrue(msg, operationResult instanceof IModelInstanceCollection<?>);
@@ -1228,7 +1247,7 @@ public class TestModelInstanceObject {
 	 * </p>
 	 */
 	@Test
-	public void testInvokeOperation7() {
+	public void testInvokeOperation07() {
 
 		Property argumentProperty;
 		IModelInstanceElement argument1;
@@ -1343,7 +1362,7 @@ public class TestModelInstanceObject {
 	 * </p>
 	 */
 	@Test
-	public void testInvokeOperation8() {
+	public void testInvokeOperation08() {
 
 		Property argumentProperty;
 		IModelInstanceElement argument1;
@@ -1458,7 +1477,7 @@ public class TestModelInstanceObject {
 	 * </p>
 	 */
 	@Test
-	public void testInvokeOperation9() {
+	public void testInvokeOperation09() {
 
 		Property argumentProperty;
 		IModelInstanceElement argument1;
@@ -2140,12 +2159,76 @@ public class TestModelInstanceObject {
 	/**
 	 * <p>
 	 * Tests the method
+	 * {@link IModelInstanceObject#invokeOperation(tudresden.ocl20.pivot.pivotmodel.Operation, java.util.List)}
+	 * for an {@link Operation} with illegal arguments.
+	 * </p>
+	 * 
+	 * @throws OperationAccessException
+	 * @throws OperationNotFoundException
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void testInvokeOperation15() throws OperationNotFoundException,
+			OperationAccessException {
+
+		Operation operation;
+		String operationName;
+
+		/* Try to find the operation. */
+		operationName = "voidOperationWithEnumerationLiteralMultipleArgument";
+		operation = null;
+
+		for (Operation anOperation : type_Class1.allOperations()) {
+
+			if (anOperation.getName().equals(operationName)) {
+				operation = anOperation;
+				break;
+			}
+			// no else.
+		}
+
+		for (IModelInstanceElement anElement : instances_Class1) {
+
+			IModelInstanceObject anObject;
+			anObject = (IModelInstanceObject) anElement;
+
+			anObject.invokeOperation(operation, null);
+		}
+		// end for.
+	}
+
+	/**
+	 * <p>
+	 * Tests the method
+	 * {@link IModelInstanceObject#invokeOperation(tudresden.ocl20.pivot.pivotmodel.Operation, java.util.List)}
+	 * for an {@link Operation} with illegal arguments.
+	 * </p>
+	 * 
+	 * @throws OperationAccessException
+	 * @throws OperationNotFoundException
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void testInvokeOperation16() throws OperationNotFoundException,
+			OperationAccessException {
+
+		for (IModelInstanceElement anElement : instances_Class1) {
+
+			IModelInstanceObject anObject;
+			anObject = (IModelInstanceObject) anElement;
+
+			anObject.invokeOperation(null, new ArrayList<IModelInstanceElement>());
+		}
+		// end for.
+	}
+
+	/**
+	 * <p>
+	 * Tests the method
 	 * {@link IModelInstanceObject#getProperty(tudresden.ocl20.pivot.pivotmodel.Property)}
 	 * for a non multiple property.
 	 * </p>
 	 */
 	@Test
-	public void testGetProperty1() {
+	public void testGetProperty01() {
 
 		Property aProperty;
 		IModelInstanceElement aPropertyValue;
@@ -2204,7 +2287,7 @@ public class TestModelInstanceObject {
 	 * </p>
 	 */
 	@Test
-	public void testGetProperty2() {
+	public void testGetProperty02() {
 
 		Property aProperty;
 		IModelInstanceElement aPropertyValue;
@@ -2272,7 +2355,7 @@ public class TestModelInstanceObject {
 	 * </p>
 	 */
 	@Test
-	public void testGetProperty3() {
+	public void testGetProperty03() {
 
 		Property aProperty;
 		IModelInstanceElement aPropertyValue;
@@ -2306,8 +2389,7 @@ public class TestModelInstanceObject {
 				assertEquals(msg, 1, aPropertyValue.getTypes().size());
 
 				/* The result should have an unordered set type. */
-				assertTrue(msg, aPropertyValue.getTypes().contains(
-						TypeConstants.SET));
+				assertTrue(msg, aPropertyValue.getTypes().contains(TypeConstants.SET));
 
 				/* The result should be an IModelInstanceCollecttion. */
 				assertTrue(msg, aPropertyValue instanceof IModelInstanceCollection<?>);
@@ -2340,7 +2422,7 @@ public class TestModelInstanceObject {
 	 * </p>
 	 */
 	@Test
-	public void testGetProperty4() {
+	public void testGetProperty04() {
 
 		Property aProperty;
 		IModelInstanceElement aPropertyValue;
@@ -2408,7 +2490,7 @@ public class TestModelInstanceObject {
 	 * </p>
 	 */
 	@Test
-	public void testGetProperty5() {
+	public void testGetProperty05() {
 
 		Property aProperty;
 		IModelInstanceElement aPropertyValue;
@@ -2442,8 +2524,7 @@ public class TestModelInstanceObject {
 				assertEquals(msg, 1, aPropertyValue.getTypes().size());
 
 				/* The result should have an unordered list type. */
-				assertTrue(msg, aPropertyValue.getTypes().contains(
-						TypeConstants.BAG));
+				assertTrue(msg, aPropertyValue.getTypes().contains(TypeConstants.BAG));
 
 				/* The result should be an IModelInstanceCollecttion. */
 				assertTrue(msg, aPropertyValue instanceof IModelInstanceCollection<?>);
@@ -2464,6 +2545,30 @@ public class TestModelInstanceObject {
 			catch (PropertyNotFoundException e) {
 				fail(msg + " " + e.getMessage());
 			}
+		}
+		// end for.
+	}
+
+	/**
+	 * <p>
+	 * Tests the method
+	 * {@link IModelInstanceObject#getProperty(tudresden.ocl20.pivot.pivotmodel.Property)}
+	 * with illegal arguments.
+	 * </p>
+	 * 
+	 * @throws PropertyNotFoundException
+	 * @throws PropertyAccessException
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void testGetProperty06() throws PropertyAccessException,
+			PropertyNotFoundException {
+
+		for (IModelInstanceElement anElement : instances_Class1) {
+
+			IModelInstanceObject anObject;
+			anObject = (IModelInstanceObject) anElement;
+
+			anObject.getProperty(null);
 		}
 		// end for.
 	}

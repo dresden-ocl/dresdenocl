@@ -202,7 +202,7 @@ public class TestModelInstanceString {
 	 * </p>
 	 */
 	@Test
-	public void testAsType() {
+	public void testAsType01() {
 
 		/* Check as type with all types possible to cast. */
 		for (IModelInstanceString aString : instances_string) {
@@ -318,6 +318,108 @@ public class TestModelInstanceString {
 
 	/**
 	 * <p>
+	 * Tests the method {@link IModelInstanceString#asType(Type)} with illegal
+	 * arguments.
+	 * </p>
+	 * 
+	 * @throws AsTypeCastException
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void testAsType02() throws AsTypeCastException {
+
+		for (IModelInstanceString aString : instances_string) {
+
+			aString.asType(null);
+		}
+		// end for.
+	}
+
+	/**
+	 * <p>
+	 * Tests the method {@link IModelInstanceString#asType(Type)}.
+	 * </p>
+	 * 
+	 * @throws AsTypeCastException
+	 */
+	@Test
+	public void testAsType03() throws AsTypeCastException {
+
+		/* Check as type with all types possible to cast. */
+		for (IModelInstanceString aString : instances_string) {
+
+			IModelInstanceElement anotherString;
+			IModelInstanceElement aBoolean;
+			IModelInstanceElement anInteger;
+			IModelInstanceElement aReal;
+
+			/* Test recast with boolean type. */
+			msg =
+					ModelInstanceTypeTestSuiteMessages.TestModelInstanceString_AsTypeIsWrong;
+			msg = NLS.bind(msg, type_boolean);
+
+			aBoolean = aString.asType(type_boolean);
+			anotherString = aBoolean.asType(type_string);
+
+			/* The casted element should be a String. */
+			assertTrue(msg, anotherString instanceof IModelInstanceString);
+
+			/* The value should depend on the boolean value. */
+			if (aBoolean.isUndefined()) {
+				assertTrue(msg, anotherString.isUndefined());
+			}
+
+			else {
+				assertEquals(msg, ((IModelInstanceBoolean) aBoolean).getBoolean()
+						.toString(), ((IModelInstanceString) anotherString).getString());
+			}
+
+			/* Test recast with integer type. */
+			msg =
+					ModelInstanceTypeTestSuiteMessages.TestModelInstanceString_AsTypeIsWrong;
+			msg = NLS.bind(msg, type_integer);
+
+			anInteger = aString.asType(type_integer);
+			anotherString = anInteger.asType(type_string);
+
+			/* The casted element should be a String. */
+			assertTrue(msg, anotherString instanceof IModelInstanceString);
+
+			/* The value should depend on the integer value. */
+			if (anInteger.isUndefined()) {
+				assertTrue(msg, anotherString.isUndefined());
+			}
+
+			else {
+				assertEquals(msg, ((IModelInstanceInteger) anInteger).getLong()
+						.toString(), ((IModelInstanceString) anotherString).getString());
+			}
+
+			/* Test recast with real type. */
+			msg =
+					ModelInstanceTypeTestSuiteMessages.TestModelInstanceString_AsTypeIsWrong;
+			msg = NLS.bind(msg, type_real);
+
+			aReal = aString.asType(type_real);
+			anotherString = aReal.asType(type_string);
+
+			/* The casted element should be a String. */
+			assertTrue(msg, anotherString instanceof IModelInstanceString);
+
+			/* The value should depend on the real value. */
+			if (aReal.isUndefined()) {
+				assertTrue(msg, anotherString.isUndefined());
+			}
+
+			else {
+				assertEquals(msg, ((IModelInstanceReal) aReal).getDouble().toString(),
+						((IModelInstanceString) anotherString).getString());
+			}
+		}
+		// end for.
+	}
+
+	/**
+	 * <p>
 	 * Tests the method {@link IModelInstanceString#copyForAtPre()}.
 	 * </p>
 	 */
@@ -331,7 +433,7 @@ public class TestModelInstanceString {
 		for (IModelInstanceString aString : instances_string) {
 
 			try {
-				aString.copyForAtPre();
+				assertNotNull(msg, aString.copyForAtPre());
 			}
 
 			catch (CopyForAtPreException e) {
@@ -364,6 +466,9 @@ public class TestModelInstanceString {
 					assertFalse(msg, aString.equals(anotherString));
 				}
 				// end else.
+
+				/* No string should be equal to null. */
+				assertFalse(msg, aString.equals(null));
 			}
 			// end for.
 		}

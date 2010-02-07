@@ -193,7 +193,7 @@ public class TestModelInstanceReal {
 	 * </p>
 	 */
 	@Test
-	public void testAsType() {
+	public void testAsType01() {
 
 		/* Check as type with all types possible to cast. */
 		for (IModelInstanceReal aReal : instances_real) {
@@ -271,6 +271,87 @@ public class TestModelInstanceReal {
 
 	/**
 	 * <p>
+	 * Tests the method {@link IModelInstanceReal#asType(Type)} with illegal
+	 * arguments.
+	 * </p>
+	 * 
+	 * @throws AsTypeCastException
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void testAsType02() throws AsTypeCastException {
+
+		for (IModelInstanceReal aReal : instances_real) {
+
+			aReal.asType(null);
+		}
+		// end for.
+	}
+
+	/**
+	 * <p>
+	 * Tests the method {@link IModelInstanceReal#asType(Type)}.
+	 * </p>
+	 * 
+	 * @throws AsTypeCastException
+	 */
+	@Test
+	public void testAsType03() throws AsTypeCastException {
+
+		/* Check as type with all types possible to cast. */
+		for (IModelInstanceReal aReal : instances_real) {
+
+			IModelInstanceElement anotherReal;
+			IModelInstanceElement anInteger;
+			IModelInstanceElement aString;
+
+			/* Test recast with integer type. */
+			msg =
+					ModelInstanceTypeTestSuiteMessages.TestModelInstanceReal_AsTypeIsWrong;
+			msg = NLS.bind(msg, type_integer);
+
+			anInteger = aReal.asType(type_integer);
+			anotherReal = anInteger.asType(type_real);
+
+			/* The casted element should be a Real. */
+			assertTrue(msg, anotherReal instanceof IModelInstanceReal);
+
+			/* The value should depend on the real value. */
+			if (anInteger.isUndefined()) {
+				assertTrue(msg, anotherReal.isUndefined());
+			}
+
+			else {
+				assertEquals(msg, ((IModelInstanceInteger) anInteger).getDouble(),
+						((IModelInstanceReal) anotherReal).getDouble());
+			}
+
+			/* Test recast with string type. */
+			msg =
+					ModelInstanceTypeTestSuiteMessages.TestModelInstanceReal_AsTypeIsWrong;
+			msg = NLS.bind(msg, type_string);
+
+			aString = aReal.asType(type_string);
+			anotherReal = aString.asType(type_real);
+
+			/* The casted element should be a Real. */
+			assertTrue(msg, anotherReal instanceof IModelInstanceReal);
+
+			/* The value should depend on the real value. */
+			if (aString.isUndefined()) {
+				assertTrue(msg, anotherReal.isUndefined());
+			}
+
+			else {
+				assertEquals(msg, new Double(Double
+						.parseDouble(((IModelInstanceString) aString).getString())),
+						((IModelInstanceReal) anotherReal).getDouble());
+			}
+		}
+		// end for.
+	}
+
+	/**
+	 * <p>
 	 * Tests the method {@link IModelInstanceReal#copyForAtPre()}.
 	 * </p>
 	 */
@@ -284,7 +365,7 @@ public class TestModelInstanceReal {
 		for (IModelInstanceReal aReal : instances_real) {
 
 			try {
-				aReal.copyForAtPre();
+				assertNotNull(msg, aReal.copyForAtPre());
 			}
 
 			catch (CopyForAtPreException e) {
@@ -317,6 +398,9 @@ public class TestModelInstanceReal {
 					assertFalse(msg, aReal.equals(anotherReal));
 				}
 				// end else.
+
+				/* No real should be equal to null. */
+				assertFalse(msg, aReal.equals(null));
 			}
 			// end for.
 		}

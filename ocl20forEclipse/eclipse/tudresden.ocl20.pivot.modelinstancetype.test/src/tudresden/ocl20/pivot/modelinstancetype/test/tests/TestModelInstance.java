@@ -111,7 +111,7 @@ public class TestModelInstance {
 	 * </p>
 	 */
 	@org.junit.Test
-	public void testAddModelInstanceElement() {
+	public void testAddModelInstanceElement01() {
 
 		IModelInstanceObject anAdaptedObject;
 		IModelInstanceElement anAddedObject;
@@ -153,6 +153,22 @@ public class TestModelInstance {
 
 			fail(msg);
 		}
+	}
+
+	/**
+	 * <p>
+	 * Tests the method {@link IModelInstance#addModelInstanceElement(Object)}
+	 * with an illegal argument.
+	 * </p>
+	 * 
+	 * @throws TypeNotFoundInModelException
+	 */
+	@org.junit.Test(expected = IllegalArgumentException.class)
+	public void testAddModelInstanceElement02()
+			throws TypeNotFoundInModelException {
+
+		/* Try to adapt a null value. */
+		modelInstanceUnderTest.addModelInstanceElement(null);
 	}
 
 	/**
@@ -308,7 +324,7 @@ public class TestModelInstance {
 	 * </p>
 	 */
 	@org.junit.Test
-	public void testGetStaticProperty() {
+	public void testGetStaticProperty01() {
 
 		Property property;
 		IModelInstanceElement propertyValue;
@@ -370,12 +386,30 @@ public class TestModelInstance {
 
 	/**
 	 * <p>
+	 * Tests the method {@link IModelInstance#getStaticProperty(Property)} with an
+	 * illegal argument.
+	 * </p>
+	 * 
+	 * @throws PropertyNotFoundException
+	 * @throws PropertyAccessException
+	 */
+	@org.junit.Test(expected = IllegalArgumentException.class)
+	public void testGetStaticProperty02() throws PropertyAccessException,
+			PropertyNotFoundException {
+
+		/* Try to invoke with null value. */
+		modelInstanceUnderTest.getStaticProperty(null);
+	}
+
+	/**
+	 * <p>
 	 * Tests the method
-	 * {@link IModelInstance#invokeStaticOperation(Operation, List)}.
+	 * {@link IModelInstance#invokeStaticOperation(Operation, List)} with an
+	 * illegal argument.
 	 * </p>
 	 */
 	@org.junit.Test
-	public void testInvokeStaticOperation() {
+	public void testInvokeStaticOperation01() {
 
 		Operation operation;
 
@@ -444,11 +478,73 @@ public class TestModelInstance {
 
 	/**
 	 * <p>
+	 * Tests the method
+	 * {@link IModelInstance#invokeStaticOperation(Operation, List)} with illegal
+	 * arguments.
+	 * </p>
+	 * 
+	 * @throws OperationNotFoundException
+	 * @throws OperationAccessException
+	 */
+	@org.junit.Test(expected = IllegalArgumentException.class)
+	public void testInvokeStaticOperation02() throws OperationAccessException,
+			OperationNotFoundException {
+
+		Operation operation;
+		operation = null;
+
+		msg =
+				ModelInstanceTypeTestSuiteMessages.TestModelInstance_InvokeStaticOperationIsWrong;
+
+		/* Load the Operation required for testing. */
+		for (Operation anOperation : type_StaticPropertyAndOperationClass
+				.allOperations()) {
+
+			if (anOperation.getName().equals("staticOperation")) {
+				operation = anOperation;
+				break;
+			}
+			// no else.
+		}
+
+		if (operation != null) {
+
+			/* Try to invoke the operation with null arguments. */
+			modelInstanceUnderTest.invokeStaticOperation(operation, null);
+		}
+
+		/* Else fail. */
+		else {
+			fail(msg);
+		}
+	}
+
+	/**
+	 * <p>
+	 * Tests the method
+	 * {@link IModelInstance#invokeStaticOperation(Operation, List)} with illegal
+	 * arguments.
+	 * </p>
+	 * 
+	 * @throws OperationNotFoundException
+	 * @throws OperationAccessException
+	 */
+	@org.junit.Test(expected = IllegalArgumentException.class)
+	public void testInvokeStaticOperation03() throws OperationAccessException,
+			OperationNotFoundException {
+
+		/* Try to invoke the operation with null arguments. */
+		modelInstanceUnderTest.invokeStaticOperation(null,
+				new ArrayList<IModelInstanceElement>());
+	}
+
+	/**
+	 * <p>
 	 * Tests the method {@link IModelInstance#isInstanceOf(IModel)}.
 	 * </p>
 	 */
 	@org.junit.Test
-	public void testIsInstanceOf() {
+	public void testIsInstanceOf01() {
 
 		IModel model;
 
@@ -460,5 +556,17 @@ public class TestModelInstance {
 
 		/* The method isInstanceOf should return true. */
 		assertTrue(msg, modelInstanceUnderTest.isInstanceOf(model));
+	}
+
+	/**
+	 * <p>
+	 * Tests the method {@link IModelInstance#isInstanceOf(IModel)} with illegal
+	 * arguments.
+	 * </p>
+	 */
+	@org.junit.Test(expected = IllegalArgumentException.class)
+	public void testIsInstanceOf02() {
+
+		modelInstanceUnderTest.isInstanceOf(null);
 	}
 }

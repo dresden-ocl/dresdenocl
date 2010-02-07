@@ -117,8 +117,7 @@ public class TestModelInstanceCollection {
 		type_bag = TypeConstants.BAG;
 
 		/* Get a collection type from the model. */
-		type_orderedset =
-				TypeConstants.ORDERED_SET;
+		type_orderedset = TypeConstants.ORDERED_SET;
 
 		/* Get a collection type from the model. */
 		type_sequence = TypeConstants.SEQUENCE;
@@ -333,7 +332,7 @@ public class TestModelInstanceCollection {
 	 * </p>
 	 */
 	@Test
-	public void testAsType() {
+	public void testAsType01() {
 
 		/* Check as type with all types possible to cast. */
 		for (IModelInstanceCollection<?> aCollection : instances_allCollections) {
@@ -469,6 +468,25 @@ public class TestModelInstanceCollection {
 
 	/**
 	 * <p>
+	 * Tests the method {@link IModelInstanceCollection#asType(Type)} with illegal
+	 * arguments.
+	 * </p>
+	 * 
+	 * @throws AsTypeCastException
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void testAsType02() throws AsTypeCastException {
+
+		/* Check as type with all types possible to cast. */
+		for (IModelInstanceCollection<?> aCollection : instances_allCollections) {
+
+			aCollection.asType(null);
+		}
+		// end for.
+	}
+
+	/**
+	 * <p>
 	 * Tests the method {@link IModelInstanceCollection#copyForAtPre()}.
 	 * </p>
 	 */
@@ -482,7 +500,7 @@ public class TestModelInstanceCollection {
 		for (IModelInstanceCollection<?> aCollection : instances_allCollections) {
 
 			try {
-				aCollection.copyForAtPre();
+				assertNotNull(msg, aCollection.copyForAtPre());
 			}
 
 			catch (CopyForAtPreException e) {
@@ -523,6 +541,9 @@ public class TestModelInstanceCollection {
 					assertFalse(msg, aCollection.equals(anotherCollection));
 				}
 				// end else.
+
+				/* No collection should be equal to null. */
+				assertFalse(msg, aCollection.equals(null));
 			}
 			// end for.
 		}

@@ -184,7 +184,7 @@ public class TestModelInstanceBoolean {
 	 * </p>
 	 */
 	@Test
-	public void testAsType() {
+	public void testAsType01() {
 
 		msg =
 				ModelInstanceTypeTestSuiteMessages.TestModelInstanceBoolean_AsTypeIsWrong;
@@ -239,6 +239,57 @@ public class TestModelInstanceBoolean {
 
 	/**
 	 * <p>
+	 * Tests the method {@link IModelInstanceBoolean#asType(Type)} with illegal
+	 * arguments.
+	 * </p>
+	 * 
+	 * @throws AsTypeCastException
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void testAsType02() throws AsTypeCastException {
+
+		/* Check as type with all types possible to cast. */
+		for (IModelInstanceBoolean aBoolean : instances_boolean) {
+
+			/* Test as type with null value. */
+			aBoolean.asType(null);
+		}
+		// end for.
+	}
+
+	/**
+	 * <p>
+	 * Tests the method {@link IModelInstanceBoolean#asType(Type)}.
+	 * </p>
+	 * 
+	 * @throws AsTypeCastException
+	 */
+	@Test
+	public void testAsType03() throws AsTypeCastException {
+
+		msg =
+				ModelInstanceTypeTestSuiteMessages.TestModelInstanceBoolean_AsTypeIsWrong;
+		msg = NLS.bind(msg, type_string);
+
+		/* Check as type with all types possible to cast. */
+		for (IModelInstanceBoolean aBoolean : instances_boolean) {
+
+			IModelInstanceElement anotherBoolean;
+
+			/* Test as type with string type and back to boolean. */
+			anotherBoolean = aBoolean.asType(type_string).asType(type_boolean);
+
+			/* The casted element should be a Boolean. */
+			assertTrue(msg, anotherBoolean instanceof IModelInstanceBoolean);
+
+			/* The boolean should be equal. */
+			assertEquals(msg, aBoolean, anotherBoolean);
+		}
+		// end for.
+	}
+
+	/**
+	 * <p>
 	 * Tests the method {@link IModelInstanceBoolean#copyForAtPre()}.
 	 * </p>
 	 */
@@ -252,7 +303,7 @@ public class TestModelInstanceBoolean {
 		for (IModelInstanceBoolean aBoolean : instances_boolean) {
 
 			try {
-				aBoolean.copyForAtPre();
+				assertNotNull(msg, aBoolean.copyForAtPre());
 			}
 
 			catch (CopyForAtPreException e) {
@@ -276,15 +327,18 @@ public class TestModelInstanceBoolean {
 		for (IModelInstanceBoolean aBoolean : instances_boolean) {
 
 			for (IModelInstanceBoolean anotherBoolean : instances_boolean) {
-				
+
 				if (aBoolean.getBoolean().equals(anotherBoolean.getBoolean())) {
 					assertTrue(msg, aBoolean.equals(anotherBoolean));
 				}
-				
+
 				else {
 					assertFalse(msg, aBoolean.equals(anotherBoolean));
 				}
 				// end else.
+
+				/* No boolean should be equal to null. */
+				assertFalse(msg, aBoolean.equals(null));
 			}
 			// end for.
 		}

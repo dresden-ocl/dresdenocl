@@ -193,7 +193,7 @@ public class TestModelInstanceInteger {
 	 * </p>
 	 */
 	@Test
-	public void testAsType() {
+	public void testAsType01() {
 
 		/* Check as type with all types possible to cast. */
 		for (IModelInstanceInteger anInteger : instances_integer) {
@@ -206,7 +206,7 @@ public class TestModelInstanceInteger {
 			try {
 				msg =
 						ModelInstanceTypeTestSuiteMessages.TestModelInstanceInteger_AsTypeIsWrong;
-				msg = NLS.bind(msg, type_string);
+				msg = NLS.bind(msg, type_integer);
 
 				anotherInteger = anInteger.asType(type_integer);
 
@@ -267,6 +267,68 @@ public class TestModelInstanceInteger {
 
 	/**
 	 * <p>
+	 * Tests the method {@link IModelInstanceInteger#asType(Type)} with illegal
+	 * arguments.
+	 * </p>
+	 * 
+	 * @throws AsTypeCastException
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void testAsType02() throws AsTypeCastException {
+
+		for (IModelInstanceInteger anInteger : instances_integer) {
+
+			anInteger.asType(null);
+		}
+		// end for.
+	}
+
+	/**
+	 * <p>
+	 * Tests the method {@link IModelInstanceInteger#asType(Type)}.
+	 * </p>
+	 * 
+	 * @throws AsTypeCastException
+	 */
+	@Test
+	public void testAsType03() throws AsTypeCastException {
+
+		/* Check as type with all types possible to cast. */
+		for (IModelInstanceInteger anInteger : instances_integer) {
+
+			IModelInstanceElement anotherInteger;
+
+			/* Test recast from string. */
+			msg =
+					ModelInstanceTypeTestSuiteMessages.TestModelInstanceInteger_AsTypeIsWrong;
+			msg = NLS.bind(msg, type_string);
+
+			anotherInteger = anInteger.asType(type_string).asType(type_integer);
+
+			/* The casted element should be an integer. */
+			assertTrue(msg, anotherInteger instanceof IModelInstanceInteger);
+
+			/* The value should be equal. */
+			assertEquals(msg, anInteger, anotherInteger);
+
+			/* Test recast from real. */
+			msg =
+					ModelInstanceTypeTestSuiteMessages.TestModelInstanceInteger_AsTypeIsWrong;
+			msg = NLS.bind(msg, type_real);
+
+			anotherInteger = anInteger.asType(type_real).asType(type_integer);
+
+			/* The casted element should be an integer. */
+			assertTrue(msg, anotherInteger instanceof IModelInstanceInteger);
+
+			/* The value should be equal. */
+			assertEquals(msg, anInteger, anotherInteger);
+		}
+		// end for.
+	}
+
+	/**
+	 * <p>
 	 * Tests the method {@link IModelInstanceInteger#copyForAtPre()}.
 	 * </p>
 	 */
@@ -280,7 +342,7 @@ public class TestModelInstanceInteger {
 		for (IModelInstanceInteger anInteger : instances_integer) {
 
 			try {
-				anInteger.copyForAtPre();
+				assertNotNull(msg, anInteger.copyForAtPre());
 			}
 
 			catch (CopyForAtPreException e) {
@@ -313,6 +375,9 @@ public class TestModelInstanceInteger {
 					assertFalse(msg, anInteger.equals(anotherInteger));
 				}
 				// end else.
+
+				/* No integer should be equal to null. */
+				assertFalse(msg, anInteger.equals(null));
 			}
 			// end for.
 		}
