@@ -181,6 +181,12 @@ public class JavaModelInstanceCollection<T extends IModelInstanceElement>
 	 */
 	public IModelInstanceElement asType(Type type) throws AsTypeCastException {
 
+		if (type == null) {
+			throw new IllegalArgumentException(
+					"The parameter 'type' must not be null.");
+		}
+		// no else.
+
 		IModelInstanceElement result;
 
 		/* By default, the result is undefined. */

@@ -107,32 +107,32 @@ public abstract class AbstractModelInstance implements IModelInstance {
 	public static IModelInstanceElement adaptInvocationResult(
 			Object adapteeResult, Type type, MultiplicityElement multiplicityElement,
 			IModelInstanceFactory factory) {
-	
+
 		IModelInstanceElement result;
-	
+
 		/* Check if the result is expected as void. */
 		if (type instanceof PrimitiveType
 				&& ((PrimitiveType) type).getKind().equals(PrimitiveTypeKind.VOID)) {
 			result = IModelInstanceVoid.INSTANCE;
 		}
-	
+
 		/*
 		 * Else if the result is multiple, the result must be adapted to a
 		 * collection.
 		 */
 		else if (multiplicityElement.isMultiple()) {
-	
+
 			/* Compute the type of collection that is required for the adaptation. */
-	
+
 			/* If the operation is unique, adapt to a set. */
 			if (multiplicityElement.isUnique()) {
-	
+
 				if (multiplicityElement.isOrdered()) {
 					result =
 							factory.createModelInstanceElement(adapteeResult,
 									TypeConstants.ORDERED_SET);
 				}
-	
+
 				else {
 					result =
 							factory.createModelInstanceElement(adapteeResult,
@@ -140,16 +140,16 @@ public abstract class AbstractModelInstance implements IModelInstance {
 				}
 				// end. else
 			}
-	
+
 			/* Else adapt to a list. */
 			else {
-	
+
 				if (multiplicityElement.isOrdered()) {
 					result =
 							factory.createModelInstanceElement(adapteeResult,
 									TypeConstants.SEQUENCE);
 				}
-	
+
 				else {
 					result =
 							factory.createModelInstanceElement(adapteeResult,
@@ -159,12 +159,12 @@ public abstract class AbstractModelInstance implements IModelInstance {
 			}
 			// end else.
 		}
-	
+
 		/* Else adapt to the result type of the operation. */
 		else {
 			result = factory.createModelInstanceElement(adapteeResult, type);
 		}
-	
+
 		return result;
 	}
 
@@ -175,13 +175,13 @@ public abstract class AbstractModelInstance implements IModelInstance {
 	 * ()
 	 */
 	public Set<Type> getAllImplementedTypes() {
-	
+
 		Set<Type> result = new HashSet<Type>();
-	
+
 		for (IModelInstanceElement modelObject : this.myModelInstanceObjects) {
 			result.addAll(modelObject.getTypes());
 		}
-	
+
 		return result;
 	}
 
@@ -192,22 +192,22 @@ public abstract class AbstractModelInstance implements IModelInstance {
 	 * (tudresden.ocl20.pivot.pivotmodel.Type)
 	 */
 	public Set<IModelInstanceObject> getAllInstances(Type type) {
-	
+
 		if (type == null) {
 			throw new IllegalArgumentException("Parameter type must not be null");
 		}
 		// no else.
-		
+
 		Set<IModelInstanceObject> result;
-	
+
 		/* If the type has been found, return all implementations. */
 		result = this.myModelInstanceObjectsByType.get(type);
-	
+
 		if (result == null) {
 			result = new HashSet<IModelInstanceObject>();
 		}
 		// no else.
-	
+
 		return result;
 	}
 
@@ -217,7 +217,7 @@ public abstract class AbstractModelInstance implements IModelInstance {
 	 * getAllModelInstanceObjects()
 	 */
 	public List<IModelInstanceObject> getAllModelInstanceObjects() {
-	
+
 		return new ArrayList<IModelInstanceObject>(this.myModelInstanceObjects);
 	}
 
@@ -226,7 +226,7 @@ public abstract class AbstractModelInstance implements IModelInstance {
 	 * @see tudresden.ocl20.pivot.modelbus.IModelInstance#getDisplayName()
 	 */
 	public String getDisplayName() {
-	
+
 		return this.myName;
 	}
 
@@ -235,7 +235,7 @@ public abstract class AbstractModelInstance implements IModelInstance {
 	 * @see tudresden.ocl20.pivot.modelbus.IModelInstance#getModel()
 	 */
 	public IModel getModel() {
-	
+
 		return this.myModel;
 	}
 
@@ -245,7 +245,7 @@ public abstract class AbstractModelInstance implements IModelInstance {
 	 * getModelInstanceFactory()
 	 */
 	public IModelInstanceFactory getModelInstanceFactory() {
-	
+
 		return this.myModelInstanceFactory;
 	}
 
@@ -255,9 +255,14 @@ public abstract class AbstractModelInstance implements IModelInstance {
 	 * tudresden.ocl20.pivot.modelbus.IModelInstance#isInstanceOf(tudresden.ocl20
 	 * .pivot.modelbus.IModel)
 	 */
-	public boolean isInstanceOf(IModel aModel) {
-	
-		return this.myModel.equals(aModel);
+	public boolean isInstanceOf(IModel model) {
+
+		if (model == null) {
+			throw new IllegalArgumentException("Parameter 'model' must not be null.");
+		}
+		// no else.
+
+		return this.myModel.equals(model);
 	}
 
 	/**

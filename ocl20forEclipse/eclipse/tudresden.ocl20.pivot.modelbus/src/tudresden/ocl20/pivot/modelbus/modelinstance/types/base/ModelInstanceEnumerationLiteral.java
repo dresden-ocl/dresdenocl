@@ -107,6 +107,11 @@ public class ModelInstanceEnumerationLiteral extends
 	 */
 	public IModelInstanceElement asType(Type type) throws AsTypeCastException {
 
+		if (type == null) {
+			throw new IllegalArgumentException("Parameter 'type' must not be null.");
+		}
+		// no else.
+
 		IModelInstanceElement result;
 
 		result = null;

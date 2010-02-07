@@ -104,6 +104,11 @@ public class JavaModelInstanceBoolean extends AbstractModelInstanceBoolean
 	 */
 	public IModelInstanceElement asType(Type type) throws AsTypeCastException {
 
+		if (type == null) {
+			throw new IllegalArgumentException("Parameter 'type' must not be null.");
+		}
+		// no else.
+
 		IModelInstanceElement result;
 
 		/* By default the result is null. */

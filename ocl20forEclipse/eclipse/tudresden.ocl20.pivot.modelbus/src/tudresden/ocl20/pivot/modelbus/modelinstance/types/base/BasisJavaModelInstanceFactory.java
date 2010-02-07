@@ -98,6 +98,11 @@ public class BasisJavaModelInstanceFactory implements IModelInstanceFactory {
 		}
 		// no else.
 
+		if (kind == null) {
+			throw new IllegalArgumentException("Paramerer 'kind' must not be null.");
+		}
+		// no else.
+
 		IModelInstanceCollection<T> result;
 
 		switch (kind) {
