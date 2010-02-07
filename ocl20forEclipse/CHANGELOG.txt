@@ -19,15 +19,20 @@ Release 2.1 (not scheduled yet)
   - If the top-level package is a UML model or profile directory, 
     these packages are now adapted correctly.
 
-* A bug in the JavaModelInstanceCollection was fixed.
+* Some bugs in the basis model instance elements were fixed.
+  - Illegal arguments are now handled appropriately.
   - JavaModelInstanceCollections can now be initialized with null 
     values even if they are of the type Set or OrderedSet.
 
-* A bug in the Ecore ModelInstance Type was fixed.
+* Some bugs in the Ecore ModelInstance Type were fixed.
   - Empty model instances now get a created default name.
+  - Illegal arguments are now handled appropriately.
 
-* A bug in the Java ModelInstance Type was fixed.
+* Some bugs in the Java ModelInstance Type were fixed.
   - Empty model instances now get a created default name.
+  - Illegal arguments are now handled appropriately.
+  - The copy mechanism for @pre values works now correctly when invoking
+    empty constructors.
   
 * Some bugs in the OCL Standard Library were fixed.
 
@@ -37,6 +42,11 @@ Tests
 * A new Modelbus Test Suite Plug-in has been introduced.
 
 * A new OCL Standard Library Test Suite Plug-in has been introduced.
+
+* Some test cases have been added to the Generic Model Instance Type
+  Test Suite.
+  - Illegal arguments are now tested.
+  - Recasts between primitive type instances are now tested.
 
 
 Release 2.0 (Scheduled: December 2009)
