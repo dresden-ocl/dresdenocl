@@ -27,6 +27,8 @@ Release 2.1 (not scheduled yet)
 * Some bugs in the Ecore ModelInstance Type were fixed.
   - Empty model instances now get a created default name.
   - Illegal arguments are now handled appropriately.
+  - Types are now resolved, even if their package name is not modeled completely
+    in the Model.
 
 * Some bugs in the Java ModelInstance Type were fixed.
   - Empty model instances now get a created default name.
