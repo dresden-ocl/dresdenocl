@@ -279,7 +279,7 @@ public class EcoreModelInstanceFactory extends BasisJavaModelInstanceFactory
 							types.add(type);
 							result = new EcoreModelInstanceObject(null, types, this);
 						}
-						
+
 						/* Else the throw an exception. */
 						else {
 							String msg;
@@ -537,9 +537,24 @@ public class EcoreModelInstanceFactory extends BasisJavaModelInstanceFactory
 		Type result;
 
 		try {
-			result =
-					this.myModel.findType(EcoreModelInstanceTypeUtility
-							.toQualifiedNameList(aClass.getCanonicalName()));
+			List<String> typePath;
+			typePath =
+					EcoreModelInstanceTypeUtility.toQualifiedNameList(aClass
+							.getCanonicalName());
+
+			result = null;
+
+			/*
+			 * The problem with Ecore models is that Ecore models do not contain the
+			 * complete package hierarchy of the implementation class. Thus, remove
+			 * package per package from the path and search for a type again.
+			 */
+			while (result == null && typePath.size() >= 2) {
+				result = this.myModel.findType(typePath);
+
+				typePath.remove(0);
+			}
+			// end while.
 		}
 
 		catch (ModelAccessException e) {
