@@ -1,0 +1,213 @@
+<ContainerClass>
+	<primitiveTypeProviderClassInstances
+		booleanProperty1="true" integerProperty1="42" realProperty1="-1.8"
+		stringProperty1="test" />
+	<enumerationLiteralProviderClassInstances
+		enumerationLiteralProperty1="Literal1" />
+	<collectionTypeProviderClassInstances>
+		<bagProperty1>1</bagProperty1>
+		<bagProperty1>s</bagProperty1>
+		<bagProperty1>test</bagProperty1>
+		<orderedSetProperty1>1</orderedSetProperty1>
+		<sequenceProperty1>1st</sequenceProperty1>
+		<sequenceProperty1>2nd</sequenceProperty1>
+		<sequenceProperty1>3rd</sequenceProperty1>
+		<setProperty1>a</setProperty1>
+		<setProperty1>c</setProperty1>
+		<setProperty1>d</setProperty1>
+		<setProperty1>b</setProperty1>
+	</collectionTypeProviderClassInstances>
+	<class1Instances nonMultipleProperty="somethingElse"
+		argumentPropertyBooleanNonMultiple="true"
+		argumentPropertyStringNonMultiple="something">
+		<argumentPropertyObjectNonMultiple>
+			<class1 />
+		</argumentPropertyObjectNonMultiple>
+		<argumentPropertyObjectMultiple>
+			<class1 />
+			<class2 />
+		</argumentPropertyObjectMultiple>
+		<multipleUniqueOrderedProperty>a</multipleUniqueOrderedProperty>
+		<multipleUniqueOrderedProperty>b</multipleUniqueOrderedProperty>
+		<multipleUniqueOrderedProperty>c</multipleUniqueOrderedProperty>
+		<multipleUniqueUnorderedProperty>a</multipleUniqueUnorderedProperty>
+		<multipleUniqueUnorderedProperty>c</multipleUniqueUnorderedProperty>
+		<multipleUniqueUnorderedProperty>v</multipleUniqueUnorderedProperty>
+		<multipleNonuniqueOrderedProperty>a</multipleNonuniqueOrderedProperty>
+		<multipleNonuniqueOrderedProperty>b</multipleNonuniqueOrderedProperty>
+		<multipleNonuniqueOrderedProperty>c</multipleNonuniqueOrderedProperty>
+		<multipleNonuniqueOrderedProperty>a</multipleNonuniqueOrderedProperty>
+		<multipleNonuniqueUnorderedProperty>a
+		</multipleNonuniqueUnorderedProperty>
+		<multipleNonuniqueUnorderedProperty>c
+		</multipleNonuniqueUnorderedProperty>
+		<multipleNonuniqueUnorderedProperty>b
+		</multipleNonuniqueUnorderedProperty>
+		<multipleNonuniqueUnorderedProperty>a
+		</multipleNonuniqueUnorderedProperty>
+		<argumentPropertyBooleanMultiple>true
+		</argumentPropertyBooleanMultiple>
+		<argumentPropertyBooleanMultiple>false
+		</argumentPropertyBooleanMultiple>
+		<argumentPropertyStringMultiple>test</argumentPropertyStringMultiple>
+		<argumentPropertyStringMultiple>anotherTest
+		</argumentPropertyStringMultiple>
+		<argumentPropertyEnumerationLiteralMultiple>Literal1
+		</argumentPropertyEnumerationLiteralMultiple>
+		<argumentPropertyEnumerationLiteralMultiple>Literal2
+		</argumentPropertyEnumerationLiteralMultiple>
+	</class1Instances>
+	<class1Instances nonMultipleProperty="a"
+		argumentPropertyStringNonMultiple="a">
+		<argumentPropertyObjectNonMultiple>
+			<class1 />
+		</argumentPropertyObjectNonMultiple>
+		<argumentPropertyObjectMultiple>
+			<class2 />
+		</argumentPropertyObjectMultiple>
+		<multipleUniqueOrderedProperty>a</multipleUniqueOrderedProperty>
+		<multipleUniqueOrderedProperty>b</multipleUniqueOrderedProperty>
+		<multipleUniqueOrderedProperty>c</multipleUniqueOrderedProperty>
+		<multipleUniqueUnorderedProperty>a</multipleUniqueUnorderedProperty>
+		<multipleUniqueUnorderedProperty>b</multipleUniqueUnorderedProperty>
+		<multipleUniqueUnorderedProperty>c</multipleUniqueUnorderedProperty>
+		<multipleNonuniqueOrderedProperty>a</multipleNonuniqueOrderedProperty>
+		<multipleNonuniqueOrderedProperty>b</multipleNonuniqueOrderedProperty>
+		<multipleNonuniqueOrderedProperty>c</multipleNonuniqueOrderedProperty>
+		<multipleNonuniqueUnorderedProperty>a
+		</multipleNonuniqueUnorderedProperty>
+		<multipleNonuniqueUnorderedProperty>b
+		</multipleNonuniqueUnorderedProperty>
+		<multipleNonuniqueUnorderedProperty>c
+		</multipleNonuniqueUnorderedProperty>
+		<argumentPropertyBooleanMultiple>true
+		</argumentPropertyBooleanMultiple>
+		<argumentPropertyStringMultiple>a</argumentPropertyStringMultiple>
+		<argumentPropertyStringMultiple>b</argumentPropertyStringMultiple>
+		<argumentPropertyStringMultiple>c</argumentPropertyStringMultiple>
+		<argumentPropertyEnumerationLiteralMultiple>Literal2
+		</argumentPropertyEnumerationLiteralMultiple>
+		<argumentPropertyEnumerationLiteralMultiple>Literal1
+		</argumentPropertyEnumerationLiteralMultiple>
+	</class1Instances>
+	<class2Instances nonMultipleProperty="a"
+		argumentPropertyStringNonMultiple="c">
+		<argumentPropertyObjectNonMultiple>
+			<interface2 />
+		</argumentPropertyObjectNonMultiple>
+		<argumentPropertyObjectMultiple>
+			<class2 />
+		</argumentPropertyObjectMultiple>
+		<argumentPropertyObjectMultiple>
+			<interface3 />
+		</argumentPropertyObjectMultiple>
+		<multipleUniqueOrderedProperty>a</multipleUniqueOrderedProperty>
+		<multipleUniqueOrderedProperty>b</multipleUniqueOrderedProperty>
+		<multipleUniqueOrderedProperty>c</multipleUniqueOrderedProperty>
+		<multipleUniqueUnorderedProperty>a</multipleUniqueUnorderedProperty>
+		<multipleUniqueUnorderedProperty>b</multipleUniqueUnorderedProperty>
+		<multipleUniqueUnorderedProperty>c</multipleUniqueUnorderedProperty>
+		<multipleNonuniqueOrderedProperty>a</multipleNonuniqueOrderedProperty>
+		<multipleNonuniqueOrderedProperty>b</multipleNonuniqueOrderedProperty>
+		<multipleNonuniqueOrderedProperty>c</multipleNonuniqueOrderedProperty>
+		<multipleNonuniqueUnorderedProperty>a
+		</multipleNonuniqueUnorderedProperty>
+		<multipleNonuniqueUnorderedProperty>b
+		</multipleNonuniqueUnorderedProperty>
+		<multipleNonuniqueUnorderedProperty>c
+		</multipleNonuniqueUnorderedProperty>
+		<argumentPropertyBooleanMultiple>false
+		</argumentPropertyBooleanMultiple>
+		<argumentPropertyBooleanMultiple>true
+		</argumentPropertyBooleanMultiple>
+		<argumentPropertyStringMultiple>a</argumentPropertyStringMultiple>
+		<argumentPropertyStringMultiple>b</argumentPropertyStringMultiple>
+		<argumentPropertyStringMultiple>c</argumentPropertyStringMultiple>
+		<argumentPropertyEnumerationLiteralMultiple>Literal1
+		</argumentPropertyEnumerationLiteralMultiple>
+		<argumentPropertyEnumerationLiteralMultiple>Literal2
+		</argumentPropertyEnumerationLiteralMultiple>
+	</class2Instances>
+	<interface1Instances xsi:type="testmodel:I1I2Implementation" />
+	<interface1Instances xsi:type="testmodel:I1Implementation" />
+	<interface2Instances xsi:type="testmodel:I2C1Implementation"
+		nonMultipleProperty="42" argumentPropertyBooleanNonMultiple="true"
+		argumentPropertyStringNonMultiple="4">
+		<argumentPropertyObjectNonMultiple>
+			<class1 />
+		</argumentPropertyObjectNonMultiple>
+		<argumentPropertyObjectMultiple>
+			<class1 />
+		</argumentPropertyObjectMultiple>
+		<multipleUniqueOrderedProperty>a</multipleUniqueOrderedProperty>
+		<multipleUniqueOrderedProperty>b</multipleUniqueOrderedProperty>
+		<multipleUniqueOrderedProperty>c</multipleUniqueOrderedProperty>
+		<multipleUniqueUnorderedProperty>a</multipleUniqueUnorderedProperty>
+		<multipleUniqueUnorderedProperty>b</multipleUniqueUnorderedProperty>
+		<multipleUniqueUnorderedProperty>c</multipleUniqueUnorderedProperty>
+		<multipleNonuniqueOrderedProperty>1
+		</multipleNonuniqueOrderedProperty>
+		<multipleNonuniqueOrderedProperty>2</multipleNonuniqueOrderedProperty>
+		<multipleNonuniqueOrderedProperty></multipleNonuniqueOrderedProperty>
+		<multipleNonuniqueOrderedProperty>3</multipleNonuniqueOrderedProperty>
+		<multipleNonuniqueUnorderedProperty>a
+		</multipleNonuniqueUnorderedProperty>
+		<multipleNonuniqueUnorderedProperty>b
+		</multipleNonuniqueUnorderedProperty>
+		<multipleNonuniqueUnorderedProperty>c
+		</multipleNonuniqueUnorderedProperty>
+		<argumentPropertyBooleanMultiple>true
+		</argumentPropertyBooleanMultiple>
+		<argumentPropertyBooleanMultiple>false
+		</argumentPropertyBooleanMultiple>
+		<argumentPropertyStringMultiple>a</argumentPropertyStringMultiple>
+		<argumentPropertyStringMultiple>b</argumentPropertyStringMultiple>
+		<argumentPropertyStringMultiple>c</argumentPropertyStringMultiple>
+		<argumentPropertyEnumerationLiteralMultiple>Literal2
+		</argumentPropertyEnumerationLiteralMultiple>
+	</interface2Instances>
+	<interface3Instances nonMultipleProperty="aa"
+		argumentPropertyStringNonMultiple="querty"
+		argumentPropertyEnumerationLiteralNonMultiple="Literal2">
+		<argumentPropertyObjectNonMultiple>
+			<class2 />
+		</argumentPropertyObjectNonMultiple>
+		<argumentPropertyObjectMultiple>
+			<class1 />
+		</argumentPropertyObjectMultiple>
+		<argumentPropertyObjectMultiple>
+			<class2 />
+		</argumentPropertyObjectMultiple>
+		<multipleUniqueOrderedProperty>a</multipleUniqueOrderedProperty>
+		<multipleUniqueOrderedProperty>b</multipleUniqueOrderedProperty>
+		<multipleUniqueOrderedProperty>c</multipleUniqueOrderedProperty>
+		<multipleUniqueUnorderedProperty>a</multipleUniqueUnorderedProperty>
+		<multipleUniqueUnorderedProperty>b</multipleUniqueUnorderedProperty>
+		<multipleUniqueUnorderedProperty>c</multipleUniqueUnorderedProperty>
+		<multipleNonuniqueOrderedProperty></multipleNonuniqueOrderedProperty>
+		<multipleNonuniqueOrderedProperty>a</multipleNonuniqueOrderedProperty>
+		<multipleNonuniqueOrderedProperty>d</multipleNonuniqueOrderedProperty>
+		<multipleNonuniqueUnorderedProperty>a
+		</multipleNonuniqueUnorderedProperty>
+		<multipleNonuniqueUnorderedProperty>b
+		</multipleNonuniqueUnorderedProperty>
+		<multipleNonuniqueUnorderedProperty>c
+		</multipleNonuniqueUnorderedProperty>
+		<argumentPropertyBooleanMultiple>true
+		</argumentPropertyBooleanMultiple>
+		<argumentPropertyBooleanMultiple>false
+		</argumentPropertyBooleanMultiple>
+		<argumentPropertyStringMultiple>a</argumentPropertyStringMultiple>
+		<argumentPropertyStringMultiple>c</argumentPropertyStringMultiple>
+		<argumentPropertyStringMultiple>v</argumentPropertyStringMultiple>
+		<argumentPropertyEnumerationLiteralMultiple>Literal2
+		</argumentPropertyEnumerationLiteralMultiple>
+		<argumentPropertyEnumerationLiteralMultiple>Literal1
+		</argumentPropertyEnumerationLiteralMultiple>
+	</interface3Instances>
+	<interface3Instances />
+	<copyableClassInstances>
+		<ClonableCopyableClass></ClonableCopyableClass>
+	</copyableClassInstances>
+	<!-- no non copy-able classes -->
+</ContainerClass>
