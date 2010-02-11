@@ -882,8 +882,7 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 
 				public <T2 extends OclAny> OclSet<T2> asSet() {
 
-					return createOclInvalid(TypeConstants
-							.SET(type), invalidReason);
+					return createOclInvalid(TypeConstants.SET(type), invalidReason);
 				}
 			};
 
@@ -928,29 +927,37 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 			/* collection type */
 			else if (type instanceof CollectionType) {
 
-				if (type instanceof BagType) {
+				CollectionType collectionType;
+				collectionType = (CollectionType) type;
+
+				switch (collectionType.getKind()) {
+				case ORDERED_SET:
 					result =
-							(T) new JavaOclBag<OclAny>(invalidReason, ((BagType) type)
+							(T) new JavaOclOrderedSet<OclAny>(invalidReason, collectionType
 									.getElementType());
-				}
+					break;
 
-				else if (type instanceof OrderedSetType) {
+				case SEQUENCE:
 					result =
-							(T) new JavaOclOrderedSet<OclAny>(invalidReason,
-									((OrderedSetType) type).getElementType());
-				}
-
-				else if (type instanceof SequenceType) {
-					result =
-							(T) new JavaOclSequence<OclAny>(invalidReason,
-									((SequenceType) type).getElementType());
-				}
-
-				else if (type instanceof SetType) {
-					result =
-							(T) new JavaOclSet<OclAny>(invalidReason, ((SetType) type)
+							(T) new JavaOclSequence<OclAny>(invalidReason, collectionType
 									.getElementType());
+					break;
+
+				case SET:
+					result =
+							(T) new JavaOclSet<OclAny>(invalidReason, collectionType
+									.getElementType());
+					break;
+
+				/* Bag is the most general collection type. */
+				case BAG:
+				default:
+					result =
+							(T) new JavaOclBag<OclAny>(invalidReason, collectionType
+									.getElementType());
+					break;
 				}
+				// end switch.
 			}
 
 			/* Check if the given Type is an enumeration. */
@@ -985,10 +992,9 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 		 */
 		public <T extends OclAny> OclSet<T> asSet() {
 
-			return createOclInvalid(TypeConstants
-					.SET(TypesFactory.INSTANCE.createTypeType()),
-					new UnsupportedOperationException(
-							"Cannot invoke operation asSet() on meta-type OclType."));
+			return createOclInvalid(TypeConstants.SET(TypesFactory.INSTANCE
+					.createTypeType()), new UnsupportedOperationException(
+					"Cannot invoke operation asSet() on meta-type OclType."));
 		}
 
 		/*
@@ -1194,8 +1200,7 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 				imiResult =
 						BasisJavaModelInstanceFactory.createModelInstanceCollection(
 								modelInstance.getAllInstances(((CollectionType) operation
-										.getType()).getElementType()),
-								TypeConstants.SET);
+										.getType()).getElementType()), TypeConstants.SET);
 
 				result = createOclAny(imiResult);
 			}
