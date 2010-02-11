@@ -58,7 +58,7 @@ public class ModelBusTestUtility {
 		// no else.
 
 		return Ocl2ForEclipseFacade.getModelInstance(modelInstanceFile, model,
-				Ocl2ForEclipseFacade.Java_ModelInstanceType);
+				Ocl2ForEclipseFacade.JAVA_MODEL_INSTANCE_TYPE);
 	}
 
 	/**
@@ -115,7 +115,7 @@ public class ModelBusTestUtility {
 		try {
 			result =
 					Ocl2ForEclipseFacade.getEmptyModelInstance(model,
-							Ocl2ForEclipseFacade.Java_ModelInstanceType);
+							Ocl2ForEclipseFacade.JAVA_MODEL_INSTANCE_TYPE);
 		}
 
 		catch (IllegalArgumentException e) {

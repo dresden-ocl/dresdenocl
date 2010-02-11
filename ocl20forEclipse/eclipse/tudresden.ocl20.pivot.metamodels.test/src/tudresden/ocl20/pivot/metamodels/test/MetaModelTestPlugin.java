@@ -14,7 +14,7 @@
 package tudresden.ocl20.pivot.metamodels.test;
 
 import org.apache.log4j.Logger;
-import org.eclipse.ui.plugin.AbstractUIPlugin;
+import org.eclipse.core.runtime.Plugin;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
 
@@ -27,7 +27,7 @@ import tudresden.ocl20.pivot.modelbus.model.IModel;
  * The activator class controls the plug-in life cycle.
  * </p>
  */
-public class MetaModelTestPlugin extends AbstractUIPlugin {
+public class MetaModelTestPlugin extends Plugin {
 
 	/** The plug-in ID. */
 	public static final String PLUGIN_ID =

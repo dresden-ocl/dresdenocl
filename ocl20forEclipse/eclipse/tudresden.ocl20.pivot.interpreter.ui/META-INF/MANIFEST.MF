@@ -2,18 +2,14 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: OCL2 Interpreter GUI Plug-in
 Bundle-SymbolicName: tudresden.ocl20.pivot.interpreter.ui;singleton:=true
-Bundle-Version: 2.0.0
+Bundle-Version: 2.1.0.qualifier
 Bundle-Activator: tudresden.ocl20.pivot.interpreter.ui.InterpreterUIPlugin
-Require-Bundle: org.eclipse.ui,
- org.eclipse.core.runtime,
- tudresden.ocl20.pivot.interpreter,
- tudresden.ocl20.logging,
- tudresden.ocl20.pivot.modelbus,
- tudresden.ocl20.pivot.pivotmodel,
- tudresden.ocl20.pivot.essentialocl,
- tudresden.ocl20.pivot.essentialocl.standardlibrary,
- tudresden.ocl20.pivot.standardlibrary.java,
- tudresden.ocl20.pivot.modelbus.ui
+Require-Bundle: org.eclipse.ui;bundle-version="3.4.0",
+ org.eclipse.core.runtime;bundle-version="3.4.0",
+ tudresden.ocl20.pivot.interpreter;bundle-version="2.1.0",
+ tudresden.ocl20.pivot.modelbus;bundle-version="2.1.0",
+ tudresden.ocl20.pivot.essentialocl;bundle-version="2.1.0",
+ tudresden.ocl20.pivot.essentialocl.standardlibrary;bundle-version="2.1.0"
 Bundle-ActivationPolicy: lazy
 Bundle-Vendor: TU Dresden, Software Technology Group
 Bundle-RequiredExecutionEnvironment: J2SE-1.5

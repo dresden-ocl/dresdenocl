@@ -78,17 +78,17 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
 public class Ocl2ForEclipseFacade {
 
 	/** The ID of the EMF Ecore {@link IMetamodel}. */
-	public final static String Ecore_MetaModel = EcoreMetamodelPlugin.ID;
+	public final static String ECORE_META_MODEL = EcoreMetamodelPlugin.ID;
 
 	/** The ID of the EMF Ecore {@link IModelInstanceType}. */
-	public final static String Ecore_ModelInstanceType =
+	public final static String ECORE_MODEL_INSTANCE_TYPE =
 			EcoreModelInstanceTypePlugin.PLUGIN_ID;
 
 	/** The ID of the reflective Java {@link IMetamodel}. */
-	public final static String Java_MetaModel = JavaMetaModelPlugin.ID;
+	public final static String JAVA_META_MODEL = JavaMetaModelPlugin.ID;
 
 	/** The ID of the Java {@link IModelInstanceType}. */
-	public final static String Java_ModelInstanceType =
+	public final static String JAVA_MODEL_INSTANCE_TYPE =
 			JavaModelInstanceTypePlugin.PLUGIN_ID;
 
 	/** The ID of the Eclipse MDT UML2 {@link IMetamodel}. */

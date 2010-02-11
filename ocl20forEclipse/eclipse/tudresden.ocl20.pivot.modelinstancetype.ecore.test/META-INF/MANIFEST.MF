@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Ecore Model Instance Type Test Plug-in
 Bundle-SymbolicName: tudresden.ocl20.pivot.modelinstancetype.ecore.test;singleton:=true
-Bundle-Version: 2.0.0
+Bundle-Version: 2.1.0.qualifier
 Bundle-ClassPath: .
 Bundle-Vendor: TU Dresden, Software Technology Group
 Bundle-Localization: plugin
@@ -10,10 +10,10 @@ Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: tudresden.ocl20.pivot.modelinstancetype.test.testmodel,
  tudresden.ocl20.pivot.modelinstancetype.test.testmodel.impl,
  tudresden.ocl20.pivot.modelinstancetype.test.testmodel.util
-Require-Bundle: org.eclipse.core.runtime,
- org.junit4,
- tudresden.ocl20.pivot.pivotmodel;bundle-version="1.2.0",
- tudresden.ocl20.pivot.modelinstancetype.ecore;bundle-version="1.2.0",
- tudresden.ocl20.pivot.testsuite;bundle-version="1.0.0",
- tudresden.ocl20.pivot.modelinstancetype.test;bundle-version="1.2.0"
+Require-Bundle: org.eclipse.core.runtime;bundle-version="3.4.0",
+ org.junit4;bundle-version="4.0.0",
+ tudresden.ocl20.pivot.pivotmodel;bundle-version="2.1.0",
+ tudresden.ocl20.pivot.modelinstancetype.ecore;bundle-version="2.1.0",
+ tudresden.ocl20.pivot.testsuite;bundle-version="2.1.0",
+ tudresden.ocl20.pivot.modelinstancetype.test;bundle-version="2.1.0"
 Bundle-ActivationPolicy: lazy

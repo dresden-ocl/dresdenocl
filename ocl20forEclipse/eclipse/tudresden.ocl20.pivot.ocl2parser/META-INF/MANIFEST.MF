@@ -2,10 +2,10 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: OCL2 Parser Plug-in
 Bundle-SymbolicName: tudresden.ocl20.pivot.ocl2parser
-Bundle-Version: 2.0.0
+Bundle-Version: 2.1.0.qualifier
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
-Require-Bundle: tudresden.ocl20.pivot.essentialocl,
- tudresden.ocl20.pivot.modelbus, tudresden.ocl20.pivot.pivotmodel
+Require-Bundle: tudresden.ocl20.pivot.essentialocl;bundle-version="2.1.0",
+ tudresden.ocl20.pivot.modelbus;bundle-version="2.1.0"
 Bundle-Vendor: TU Dresden, Software Technology Group
 Export-Package: org.sablecc.sablecc,
  org.sablecc.sablecc.analysis,

@@ -261,7 +261,27 @@ public class XmlModelInstance extends AbstractModelInstance {
 			instanceDocument = documentBuilder.parse(modelInstanceFile);
 			rootNode = instanceDocument.getFirstChild();
 
+			/* Add the container node. */
 			this.addModelInstanceElement(rootNode);
+
+			/*
+			 * XML files always have a root container node. Probably add its contained
+			 * elements as well.
+			 */
+			for (int index = 0; index < rootNode.getChildNodes().getLength(); index++) {
+
+				Node containedNode;
+				containedNode = rootNode.getChildNodes().item(index);
+
+				try {
+					this.addModelInstanceElement(containedNode);
+				}
+
+				catch (TypeNotFoundInModelException e) {
+					// FIXME
+				}
+				// end for.
+			}
 
 			/* Initialize the caching maps for the operations getObjectsOfType etc. */
 			this.initializeTypeMapping();

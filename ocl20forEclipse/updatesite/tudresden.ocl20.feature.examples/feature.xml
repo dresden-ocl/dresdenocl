@@ -2,7 +2,7 @@
 <feature
       id="tudresden.ocl20.feature.examples"
       label="Dresden OCL2 for Eclipse Examples"
-      version="2.0.0"
+      version="2.1.0.qualifier"
       provider-name="TU Dresden">
    <install-handler library="" handler=""/>
 
@@ -183,12 +183,9 @@ Library.
    </license>
 
    <requires>
-      <import plugin="org.eclipse.core.runtime"/>
       <import plugin="org.eclipse.emf.ecore"/>
-      <import plugin="org.junit4"/>
-      <import plugin="tudresden.ocl20.pivot.modelbus"/>
       <import plugin="org.aspectj.runtime"/>
-      <import plugin="tudresden.ocl20.pivot.testsuite" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="org.junit4" version="4.0.0" match="greaterOrEqual"/>
    </requires>
 
    <plugin

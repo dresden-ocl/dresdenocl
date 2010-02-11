@@ -461,7 +461,7 @@ public class TestPerformer {
 			try {
 				this.myModelInstance =
 						Ocl2ForEclipseFacade.getEmptyModelInstance(this.myModel,
-								Ocl2ForEclipseFacade.Java_ModelInstanceType);
+								Ocl2ForEclipseFacade.JAVA_MODEL_INSTANCE_TYPE);
 			}
 
 			catch (ModelAccessException e) {

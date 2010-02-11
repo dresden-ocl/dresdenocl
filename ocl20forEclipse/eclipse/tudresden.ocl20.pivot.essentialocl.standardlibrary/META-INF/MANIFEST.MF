@@ -2,13 +2,12 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: OCL2 Standard Library Plug-in
 Bundle-SymbolicName: tudresden.ocl20.pivot.essentialocl.standardlibrary
-Bundle-Version: 2.0.0
+Bundle-Version: 2.1.0.qualifier
 Bundle-Activator: tudresden.ocl20.pivot.essentialocl.StandardLibraryPlugin
 Bundle-Vendor: TU Dresden, Software Technology Group
-Require-Bundle: org.eclipse.core.runtime,
- tudresden.ocl20.pivot.pivotmodel;bundle-version="1.2.0",
- tudresden.ocl20.pivot.modelbus;bundle-version="1.2.0",
- tudresden.ocl20.pivot.essentialocl;bundle-version="2.0.0"
+Require-Bundle: org.eclipse.core.runtime;bundle-version="3.4.0",
+ tudresden.ocl20.pivot.modelbus;bundle-version="2.1.0",
+ tudresden.ocl20.pivot.essentialocl;bundle-version="2.1.0"
 Bundle-ActivationPolicy: lazy
 Export-Package: tudresden.ocl20.pivot.essentialocl,
  tudresden.ocl20.pivot.essentialocl.standardlibrary,

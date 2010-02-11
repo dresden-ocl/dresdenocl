@@ -2,15 +2,15 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: OCL Parser Interface Plug-in
 Bundle-SymbolicName: tudresden.ocl20.pivot.parser
-Bundle-Version: 2.0.0
+Bundle-Version: 2.1.0.qualifier
 Bundle-Activator: tudresden.ocl20.pivot.parser.ParserPlugin
 Bundle-Vendor: TU Dresden, Software Technology Group
-Require-Bundle: org.eclipse.core.runtime,
- tudresden.ocl20.logging,
- tudresden.ocl20.pivot.modelbus,
- org.apache.commons.lang,
- tudresden.ocl20.pivot.ocl2parser
-Eclipse-LazyStart: true
+Require-Bundle: org.eclipse.core.runtime;bundle-version="3.4.0",
+ tudresden.ocl20.logging;bundle-version="2.1.0",
+ tudresden.ocl20.pivot.modelbus;bundle-version="2.1.0",
+ org.apache.commons.lang;bundle-version="2.3.0",
+ tudresden.ocl20.pivot.ocl2parser;bundle-version="2.1.0"
+Bundle-ActivationPolicy: lazy
 Export-Package: tudresden.ocl20.pivot.parser;
   uses:="org.apache.log4j,
    tudresden.ocl20.pivot.modelbus,

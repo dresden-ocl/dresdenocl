@@ -2,21 +2,20 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Dresden OCL2 for Eclipse Facade
 Bundle-SymbolicName: tudresden.ocl20.pivot.facade
-Bundle-Version: 2.0.0
+Bundle-Version: 2.1.0.qualifier
 Bundle-Activator: tudresden.ocl20.pivot.facade.Activator
 Bundle-Vendor: TU Dresden, Software Technology Group
-Require-Bundle: org.eclipse.core.runtime,
- tudresden.ocl20.pivot.essentialocl;bundle-version="2.0.0",
- tudresden.ocl20.pivot.pivotmodel;bundle-version="2.0.0",
- tudresden.ocl20.pivot.modelbus;bundle-version="2.0.0",
- tudresden.ocl20.pivot.metamodels.ecore;bundle-version="2.0.0",
- tudresden.ocl20.pivot.metamodels.java;bundle-version="2.0.0",
- tudresden.ocl20.pivot.metamodels.uml2;bundle-version="2.0.0",
- tudresden.ocl20.pivot.modelinstancetype.ecore;bundle-version="2.0.0",
- tudresden.ocl20.pivot.modelinstancetype.java;bundle-version="2.0.0",
- tudresden.ocl20.pivot.ocl2parser;bundle-version="2.0.0",
- tudresden.ocl20.pivot.ocl2java;bundle-version="2.0.0",
- tudresden.ocl20.pivot.interpreter;bundle-version="2.0.0"
+Require-Bundle: org.eclipse.core.runtime;bundle-version="3.4.0",
+ tudresden.ocl20.pivot.essentialocl;bundle-version="2.1.0",
+ tudresden.ocl20.pivot.modelbus;bundle-version="2.1.0",
+ tudresden.ocl20.pivot.metamodels.ecore;bundle-version="2.1.0",
+ tudresden.ocl20.pivot.metamodels.java;bundle-version="2.1.0",
+ tudresden.ocl20.pivot.metamodels.uml2;bundle-version="2.1.0",
+ tudresden.ocl20.pivot.modelinstancetype.ecore;bundle-version="2.1.0",
+ tudresden.ocl20.pivot.modelinstancetype.java;bundle-version="2.1.0",
+ tudresden.ocl20.pivot.ocl2parser;bundle-version="2.1.0",
+ tudresden.ocl20.pivot.ocl2java;bundle-version="2.1.0",
+ tudresden.ocl20.pivot.interpreter;bundle-version="2.1.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
 Export-Package: tudresden.ocl20.pivot.facade

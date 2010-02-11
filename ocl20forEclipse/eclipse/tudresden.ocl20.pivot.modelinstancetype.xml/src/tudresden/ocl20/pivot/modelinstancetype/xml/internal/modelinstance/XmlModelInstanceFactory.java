@@ -111,6 +111,7 @@ public class XmlModelInstanceFactory extends BasisJavaModelInstanceFactory {
 	public IModelInstanceElement createModelInstanceElement(Object adapted)
 			throws TypeNotFoundInModelException {
 
+		/* FIXME Built-in caching. */
 		/* Probably debug the entry of this method. */
 		if (LOGGER.isDebugEnabled()) {
 			String msg;
@@ -126,7 +127,11 @@ public class XmlModelInstanceFactory extends BasisJavaModelInstanceFactory {
 		IModelInstanceElement result;
 
 		if (adapted instanceof Node) {
-			result = this.createModelInstanceObject((Node) adapted);
+
+			Node node;
+			node = (Node) adapted;
+
+			result = this.createModelInstanceObject(node);
 
 			if (result instanceof IModelInstanceObject) {
 				this.modelInstance
@@ -167,6 +172,7 @@ public class XmlModelInstanceFactory extends BasisJavaModelInstanceFactory {
 	public IModelInstanceElement createModelInstanceElement(Object adapted,
 			Type type) {
 
+		/* FIXME Built-in caching. */
 		/* Probably debug the entry of this method. */
 		if (LOGGER.isDebugEnabled()) {
 			String msg;
@@ -505,10 +511,24 @@ public class XmlModelInstanceFactory extends BasisJavaModelInstanceFactory {
 		Type result;
 		result = null;
 
+		String nodeName;
+		nodeName = node.getNodeName();
+
+		/* Remove all points from the name (conform to xsd implementation). */
+		nodeName = nodeName.replaceAll("\\.", "");
+
+		/* Convert the first letter to an upper case. */
+		if (nodeName.length() > 0) {
+			nodeName =
+					nodeName.substring(0, 1).toUpperCase()
+							+ nodeName.substring(1, nodeName.length());
+		}
+		// no else.
+
 		List<String> pathName;
 		pathName = new ArrayList<String>();
 
-		pathName.add(node.getNodeName());
+		pathName.add(nodeName);
 
 		/* FIXME Claas: Probably handle the node's name space. */
 

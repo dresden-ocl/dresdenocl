@@ -18,13 +18,13 @@ with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
 package tudresden.ocl20.pivot.metamodels.uml2.test;
 
-import org.eclipse.ui.plugin.AbstractUIPlugin;
+import org.eclipse.core.runtime.Plugin;
 import org.osgi.framework.BundleContext;
 
 /**
  * <p>The activator class controls the plug-in life cycle.</p>
  */
-public class UML2MetaModelTestPlugin extends AbstractUIPlugin {
+public class UML2MetaModelTestPlugin extends Plugin {
 
 	/** The plug-in ID. */
 	public static final String PLUGIN_ID = "tudresden.ocl20.pivot.metamodels.uml2.test";

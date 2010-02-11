@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Essential OCL Plug-in
 Bundle-SymbolicName: tudresden.ocl20.pivot.essentialocl; singleton:=true
-Bundle-Version: 2.0.0
+Bundle-Version: 2.1.0.qualifier
 Bundle-ClassPath: .
 Bundle-Vendor: TU Dresden, Software Technology Group
 Bundle-Localization: plugin
@@ -13,10 +13,9 @@ Export-Package: tudresden.ocl20.pivot.essentialocl.expressions,
  tudresden.ocl20.pivot.essentialocl.types,
  tudresden.ocl20.pivot.essentialocl.types.impl,
  tudresden.ocl20.pivot.essentialocl.types.util
-Require-Bundle: org.eclipse.core.runtime,
- org.eclipse.emf.ecore;visibility:=reexport,
- tudresden.ocl20.pivot.pivotmodel;visibility:=reexport,
- tudresden.ocl20.logging,
- org.apache.commons.lang
+Require-Bundle: org.eclipse.core.runtime;bundle-version="3.4.0",
+ tudresden.ocl20.pivot.pivotmodel;bundle-version="2.1.0";visibility:=reexport,
+ tudresden.ocl20.logging;bundle-version="2.1.0",
+ org.apache.commons.lang;bundle-version="2.3.0"
 Bundle-ActivationPolicy: lazy
 Bundle-Activator: tudresden.ocl20.pivot.essentialocl.EssentialOclPlugin

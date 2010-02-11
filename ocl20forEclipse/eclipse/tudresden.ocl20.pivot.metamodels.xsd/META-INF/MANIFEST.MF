@@ -2,17 +2,15 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: XSD Meta-Model Plug-in
 Bundle-SymbolicName: tudresden.ocl20.pivot.metamodels.xsd; singleton:=true
-Bundle-Version: 1.0.0
+Bundle-Version: 2.1.0.qualifier
 Bundle-Activator: tudresden.ocl20.pivot.metamodels.xsd.XSDMetamodelPlugin
 Bundle-Vendor: TU Dresden, Software Technology Group
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
-Require-Bundle: org.eclipse.core.runtime,
- org.eclipse.emf.ecore,
+Require-Bundle: org.eclipse.core.runtime;bundle-version="3.4.0",
  org.eclipse.emf.ecore.xmi,
  org.eclipse.xsd,
- tudresden.ocl20.pivot.modelbus,
- tudresden.ocl20.pivot.pivotmodel,
- tudresden.ocl20.logging,
- org.apache.commons.lang,
- tudresden.ocl20.pivot.metamodels.ecore;bundle-version="2.0.0"
+ tudresden.ocl20.pivot.modelbus;bundle-version="2.1.0",
+ tudresden.ocl20.pivot.pivotmodel;bundle-version="2.1.0",
+ tudresden.ocl20.logging;bundle-version="2.1.0",
+ tudresden.ocl20.pivot.metamodels.ecore;bundle-version="2.1.0"
 Bundle-ActivationPolicy: lazy

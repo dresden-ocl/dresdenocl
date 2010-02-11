@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Essential OCL Edit Plug-in
 Bundle-SymbolicName: tudresden.ocl20.pivot.essentialocl.edit; singleton:=true
-Bundle-Version: 2.0.0
+Bundle-Version: 2.1.0.qualifier
 Bundle-ClassPath: .
 Bundle-Activator: tudresden.ocl20.pivot.essentialocl.types.provider.EssentialOCLEditPlugin$Implementation
 Bundle-Vendor: TU Dresden, Software Technology Group
@@ -10,9 +10,7 @@ Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: tudresden.ocl20.pivot.essentialocl.expressions.provider,
  tudresden.ocl20.pivot.essentialocl.types.provider
-Require-Bundle: org.eclipse.core.runtime,
- tudresden.ocl20.pivot.essentialocl;visibility:=reexport,
- org.eclipse.emf.edit;visibility:=reexport,
- tudresden.ocl20.pivot.pivotmodel;visibility:=reexport,
- tudresden.ocl20.pivot.pivotmodel.edit;visibility:=reexport
-Eclipse-LazyStart: true
+Require-Bundle: tudresden.ocl20.pivot.essentialocl;bundle-version="2.1.0";visibility:=reexport,
+ tudresden.ocl20.pivot.pivotmodel.edit;bundle-version="2.1.0";visibility:=reexport,
+ org.eclipse.core.runtime;bundle-version="3.4.0"
+Bundle-ActivationPolicy: lazy

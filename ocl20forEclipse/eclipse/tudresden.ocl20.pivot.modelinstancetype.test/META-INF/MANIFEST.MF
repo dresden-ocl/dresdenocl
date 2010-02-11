@@ -2,16 +2,16 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Generic Model Instance Type Test Plug-in
 Bundle-SymbolicName: tudresden.ocl20.pivot.modelinstancetype.test
-Bundle-Version: 2.0.0
+Bundle-Version: 2.1.0.qualifier
 Bundle-Activator: tudresden.ocl20.pivot.modelinstancetype.test.ModelInstanceTypeTestPlugin
 Bundle-Vendor: Dresden University, Software Technology Group
-Require-Bundle: org.eclipse.core.runtime,
- org.junit4,
- tudresden.ocl20.logging,
- tudresden.ocl20.pivot.essentialocl,
- tudresden.ocl20.pivot.modelbus,
- tudresden.ocl20.pivot.metamodels.uml2;bundle-version="1.2.0",
- tudresden.ocl20.pivot.facade;bundle-version="2.0.0"
+Require-Bundle: org.eclipse.core.runtime;bundle-version="3.4.0",
+ org.junit4;bundle-version="4.0.0",
+ tudresden.ocl20.logging;bundle-version="2.1.0",
+ tudresden.ocl20.pivot.essentialocl;bundle-version="2.1.0",
+ tudresden.ocl20.pivot.modelbus;bundle-version="2.1.0",
+ tudresden.ocl20.pivot.metamodels.uml2;bundle-version="2.1.0",
+ tudresden.ocl20.pivot.facade;bundle-version="2.1.0"
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy
 Export-Package: tudresden.ocl20.pivot.modelinstancetype.test,

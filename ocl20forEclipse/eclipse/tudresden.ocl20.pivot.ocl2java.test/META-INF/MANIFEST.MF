@@ -2,16 +2,15 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: OCL22Java Test Plug-in
 Bundle-SymbolicName: tudresden.ocl20.pivot.ocl2java.test;singleton:=true
-Bundle-Version: 2.0.0
+Bundle-Version: 2.1.0.qualifier
 Bundle-Activator: tudresden.ocl20.pivot.ocl2java.test.Ocl2CodeTestPlugin
-Require-Bundle: org.eclipse.core.runtime,
- org.eclipse.core.resources,
- org.junit4,
- tudresden.ocl20.pivot.modelbus,
- tudresden.ocl20.pivot.essentialocl,
- tudresden.ocl20.pivot.ocl2parser,
- tudresden.ocl20.pivot.ocl2java,
- tudresden.ocl20.pivot.facade;bundle-version="2.0.0"
+Require-Bundle: org.eclipse.core.runtime;bundle-version="3.4.0",
+ org.junit4;bundle-version="4.0.0",
+ tudresden.ocl20.pivot.modelbus;bundle-version="2.1.0",
+ tudresden.ocl20.pivot.essentialocl;bundle-version="2.1.0",
+ tudresden.ocl20.pivot.ocl2parser;bundle-version="2.1.0",
+ tudresden.ocl20.pivot.ocl2java;bundle-version="2.1.0",
+ tudresden.ocl20.pivot.facade;bundle-version="2.1.0"
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-Vendor: TU Dresden, Software Technology Group
