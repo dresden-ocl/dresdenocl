@@ -63,6 +63,7 @@ import tudresden.ocl20.pivot.pivotmodel.Constraint;
 import tudresden.ocl20.pivot.pivotmodel.ConstraintKind;
 import tudresden.ocl20.pivot.pivotmodel.Operation;
 import tudresden.ocl20.pivot.pivotmodel.Parameter;
+import tudresden.ocl20.pivot.pivotmodel.Type;
 
 /**
  * <p>
@@ -813,7 +814,7 @@ public class Ocl2ForEclipseFacade {
 	/**
 	 * <p>
 	 * Interpret the given {@link Constraint} for the given
-	 * {@link IModelInstanceElement} .
+	 * {@link IModelInstanceElement}.
 	 * </p>
 	 * 
 	 * @param constraint
@@ -824,7 +825,10 @@ public class Ocl2ForEclipseFacade {
 	 * @param modelInstanceElement
 	 *          The {@link IModelInstanceElement} representing the current object.
 	 * 
-	 * @return The IInterpretationResult of the interpretation as {@link OclRoot}
+	 * @return The {@link IInterpretationResult} of the interpretation or
+	 *         <code>null</code> if the given {@link Constraint} cannot be checked
+	 *         for the given {@link IModelInstanceElement} (wrong {@link Type} of
+	 *         {@link IModelInstanceElement}).
 	 * @throws IllegalArgumentException
 	 *           Thrown, if at least one parameter is invalid.
 	 * @throws ModelAccessException
@@ -938,8 +942,14 @@ public class Ocl2ForEclipseFacade {
 		result = new ArrayList<IInterpretationResult>();
 
 		for (Constraint constraint : constraints) {
-			result.add(interpretConstraint(constraint, modelInstance,
-					modelInstanceElement));
+			IInterpretationResult aResult;
+			aResult =
+					interpretConstraint(constraint, modelInstance, modelInstanceElement);
+
+			if (aResult != null) {
+				result.add(aResult);
+			}
+			// no else.
 		}
 		// end for.
 

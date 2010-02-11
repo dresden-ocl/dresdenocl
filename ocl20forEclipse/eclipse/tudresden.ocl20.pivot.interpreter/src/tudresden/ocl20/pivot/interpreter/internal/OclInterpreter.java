@@ -221,43 +221,55 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		// no else.
 
 		IInterpretationResult result;
-		OclAny oclRootResult;
-		OclAny oclModelObject;
 
-		this.isModelAccessNeeded = false;
-		this.isPreparation = false;
+		/*
+		 * Check if the IModelInstanceElement is constrained by the constraint at
+		 * all.
+		 */
+		if (this.isConstrained(aModelObject, aConstraint)) {
+			OclAny oclRootResult;
+			OclAny oclModelObject;
 
-		/* The must only be used during the interpretation of the same constraint! */
-		this.myEnvironment.clearCache();
+			this.isModelAccessNeeded = false;
+			this.isPreparation = false;
 
-		this.myCurrentModelObject = aModelObject;
+			/* The must only be used during the interpretation of the same constraint! */
+			this.myEnvironment.clearCache();
 
-		/* Try to get the modelObject as OCL object. */
-		if (aModelObject != null) {
-			oclModelObject = myStandardLibraryFactory.createOclAny(aModelObject);
+			this.myCurrentModelObject = aModelObject;
+
+			/* Try to get the modelObject as OCL object. */
+			if (aModelObject != null) {
+				oclModelObject = myStandardLibraryFactory.createOclAny(aModelObject);
+			}
+
+			else {
+				oclModelObject = null;
+			}
+
+			/* Add self variable to environment. */
+			this.myEnvironment.addVar("self", oclModelObject);
+
+			/* Clear the cache before interpretsation of each constraint. */
+			this.myEnvironment.clearCache();
+
+			/* Compute the result. */
+			EObject constraintSpecification;
+			constraintSpecification = (EObject) aConstraint.getSpecification();
+
+			oclRootResult = doSwitch((EObject) constraintSpecification);
+
+			result =
+					new InterpretationResultImpl(aModelObject, aConstraint, oclRootResult);
+
+			OclInterpreterPlugin.getInterpreterRegistry().fireInterpretationFinished(
+					result);
 		}
 
 		else {
-			oclModelObject = null;
+			// FIXME Mention this in JavaDoc.
+			result = null;
 		}
-
-		/* Add self variable to environment. */
-		this.myEnvironment.addVar("self", oclModelObject);
-
-		/* Clear the cache before interpretsation of each constraint. */
-		this.myEnvironment.clearCache();
-
-		/* Compute the result. */
-		EObject constraintSpecification;
-		constraintSpecification = (EObject) aConstraint.getSpecification();
-
-		oclRootResult = doSwitch((EObject) constraintSpecification);
-
-		result =
-				new InterpretationResultImpl(aModelObject, aConstraint, oclRootResult);
-
-		OclInterpreterPlugin.getInterpreterRegistry().fireInterpretationFinished(
-				result);
 
 		/* Eventually log the exit of this method. */
 		if (LOGGER.isDebugEnabled()) {
@@ -269,6 +281,62 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			LOGGER.debug(msg);
 		}
 		// no else.
+
+		return result;
+	}
+
+	/**
+	 * TODO JavaDoc.
+	 * 
+	 * @param modelObject
+	 * @param constraint
+	 * @return
+	 */
+	private boolean isConstrained(IModelInstanceElement modelObject,
+			Constraint constraint) {
+
+		boolean result;
+		result = false;
+
+		NamedElement constrainedElem;
+
+		/* Get the constrained element. */
+		constrainedElem = (NamedElement) constraint.getConstrainedElement().get(0);
+
+		/* Check if the constrained element is a type. */
+		if (constrainedElem instanceof Type) {
+
+			Type constrainedType;
+
+			constrainedType = (Type) constrainedElem;
+
+			/*
+			 * Check if the model object is an instance of the constrained type.
+			 */
+			if (modelObject.isKindOf(constrainedType)) {
+				result = true;
+			}
+			// no else.
+		}
+
+		/*
+		 * Else check if the constrained element is a operation.
+		 */
+		else if (constrainedElem instanceof Operation) {
+
+			Type operationsType;
+
+			operationsType = ((Operation) constrainedElem).getOwningType();
+
+			/*
+			 * Check if the model object is an instance of the constrained operation's
+			 * type.
+			 */
+			if (modelObject.isKindOf(operationsType)) {
+				result = true;
+			}
+			// no else.
+		}
 
 		return result;
 	}
@@ -644,53 +712,58 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		}
 		// no else.
 
-		ConstraintKind aKind;
+		/* Only prepare constraints for constrained elements. */
+		if (this.isConstrained(modelObject, aConstraint)) {
 
-		this.isPreparation = true;
+			ConstraintKind aKind;
 
-		aKind = aConstraint.getKind();
+			this.isPreparation = true;
 
-		/*
-		 * Check if a constraints which do not need the IModelInstanceElement
-		 * context shall be prepared.
-		 */
-		if (aKind.equals(ConstraintKind.BODY)
-				|| aKind.equals(ConstraintKind.DEFINITION)
-				|| aKind.equals(ConstraintKind.DERIVED)
-				|| aKind.equals(ConstraintKind.INITIAL)) {
+			aKind = aConstraint.getKind();
 
-			this.prepareConstraint(aConstraint);
-		}
+			/*
+			 * Check if a constraints which do not need the IModelInstanceElement
+			 * context shall be prepared.
+			 */
+			if (aKind.equals(ConstraintKind.BODY)
+					|| aKind.equals(ConstraintKind.DEFINITION)
+					|| aKind.equals(ConstraintKind.DERIVED)
+					|| aKind.equals(ConstraintKind.INITIAL)) {
 
-		/* Else prepare the constraint and its context. */
-		else {
-			OclAny oclModelObject;
-			EObject constraintSpecification;
-
-			this.isModelAccessNeeded = false;
-			this.myCurrentModelObject = modelObject;
-
-			/* Try to get the modelObject as OCL object. */
-			if (modelObject != null) {
-				oclModelObject = myStandardLibraryFactory.createOclAny(modelObject);
+				this.prepareConstraint(aConstraint);
 			}
 
+			/* Else prepare the constraint and its context. */
 			else {
-				oclModelObject = null;
+				OclAny oclModelObject;
+				EObject constraintSpecification;
+
+				this.isModelAccessNeeded = false;
+				this.myCurrentModelObject = modelObject;
+
+				/* Try to get the modelObject as OCL object. */
+				if (modelObject != null) {
+					oclModelObject = myStandardLibraryFactory.createOclAny(modelObject);
+				}
+
+				else {
+					oclModelObject = null;
+				}
+
+				/* Add self variable to environment. */
+				this.myEnvironment.addVar(SELF_VARIABLE_NAME, oclModelObject);
+
+				/* Prepare the constraintSpecification. */
+				constraintSpecification = (EObject) aConstraint.getSpecification();
+				this.doSwitch((EObject) constraintSpecification);
 			}
 
-			/* Add self variable to environment. */
-			this.myEnvironment.addVar(SELF_VARIABLE_NAME, oclModelObject);
+			this.isPreparation = false;
 
-			/* Prepare the constraintSpecification. */
-			constraintSpecification = (EObject) aConstraint.getSpecification();
-			this.doSwitch((EObject) constraintSpecification);
+			/* Remove the self variable from the environment again. */
+			this.myEnvironment.addVar(SELF_VARIABLE_NAME, null);
 		}
-
-		this.isPreparation = false;
-
-		/* Remove the self variable from the environment again. */
-		this.myEnvironment.addVar(SELF_VARIABLE_NAME, null);
+		// no else.
 
 		/* Eventually log the exit of this method. */
 		if (LOGGER.isDebugEnabled()) {
