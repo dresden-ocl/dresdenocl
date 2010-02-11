@@ -204,34 +204,6 @@ public class TestBag {
 	 * <code>Bag->intersection(Collection(T))</code>.
 	 * </p>
 	 */
-	@Test
-	public void testIntersectionPositive03() throws Exception {
-
-		TestPerformer testPerformer;
-
-		String modelFileName;
-		String oclFileName;
-
-		oclFileName = "standardlibrary/bag/intersectionPositive03.ocl";
-		modelFileName = "testmodel.uml";
-
-		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllStandardLibraryTests.META_MODEL_ID,
-						AllStandardLibraryTests.MODEL_BUNDLE,
-						AllStandardLibraryTests.MODEL_DIRECTORY);
-		testPerformer.setModel(modelFileName);
-
-		/* Try to parse the constraint file. */
-		testPerformer.parseFile(oclFileName);
-	}
-
-	/**
-	 * <p>
-	 * A test case testing the method
-	 * <code>Bag->intersection(Collection(T))</code>.
-	 * </p>
-	 */
 	@Test(expected = SemanticException.class)
 	public void testIntersectionNegative01() throws Exception {
 
@@ -278,6 +250,34 @@ public class TestBag {
 						AllStandardLibraryTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
+		/* Try to parse the constraint file. */
+		testPerformer.parseFile(oclFileName);
+	}
+
+	/**
+	 * <p>
+	 * A test case testing the method
+	 * <code>Bag->intersection(Collection(T))</code>.
+	 * </p>
+	 */
+	@Test(expected = SemanticException.class)
+	public void testIntersectionNegative03() throws Exception {
+	
+		TestPerformer testPerformer;
+	
+		String modelFileName;
+		String oclFileName;
+	
+		oclFileName = "standardlibrary/bag/intersectionNegative03.ocl";
+		modelFileName = "testmodel.uml";
+	
+		/* Try to get the TestPerformer. */
+		testPerformer =
+				TestPerformer.getInstance(AllStandardLibraryTests.META_MODEL_ID,
+						AllStandardLibraryTests.MODEL_BUNDLE,
+						AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer.setModel(modelFileName);
+	
 		/* Try to parse the constraint file. */
 		testPerformer.parseFile(oclFileName);
 	}
@@ -341,33 +341,6 @@ public class TestBag {
 	 * A test case testing the method <code>Bag->union(Collection(T))</code>.
 	 * </p>
 	 */
-	@Test
-	public void testUnionPositive03() throws Exception {
-
-		TestPerformer testPerformer;
-
-		String modelFileName;
-		String oclFileName;
-
-		oclFileName = "standardlibrary/bag/unionPositive03.ocl";
-		modelFileName = "testmodel.uml";
-
-		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllStandardLibraryTests.META_MODEL_ID,
-						AllStandardLibraryTests.MODEL_BUNDLE,
-						AllStandardLibraryTests.MODEL_DIRECTORY);
-		testPerformer.setModel(modelFileName);
-
-		/* Try to parse the constraint file. */
-		testPerformer.parseFile(oclFileName);
-	}
-
-	/**
-	 * <p>
-	 * A test case testing the method <code>Bag->union(Collection(T))</code>.
-	 * </p>
-	 */
 	@Test(expected = SemanticException.class)
 	public void testUnionNegative01() throws Exception {
 
@@ -413,6 +386,33 @@ public class TestBag {
 						AllStandardLibraryTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
+		/* Try to parse the constraint file. */
+		testPerformer.parseFile(oclFileName);
+	}
+
+	/**
+	 * <p>
+	 * A test case testing the method <code>Bag->union(Collection(T))</code>.
+	 * </p>
+	 */
+	@Test(expected = SemanticException.class)
+	public void testUnionNegative03() throws Exception {
+	
+		TestPerformer testPerformer;
+	
+		String modelFileName;
+		String oclFileName;
+	
+		oclFileName = "standardlibrary/bag/unionNegative02.ocl";
+		modelFileName = "testmodel.uml";
+	
+		/* Try to get the TestPerformer. */
+		testPerformer =
+				TestPerformer.getInstance(AllStandardLibraryTests.META_MODEL_ID,
+						AllStandardLibraryTests.MODEL_BUNDLE,
+						AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer.setModel(modelFileName);
+	
 		/* Try to parse the constraint file. */
 		testPerformer.parseFile(oclFileName);
 	}

@@ -1,6 +1,0 @@
-package package1::package2
-
-context Type1
-inv: Bag { 1, 2 } -> intersection ( Set { 1, 2} ) -> size() = 2
-
-endpackage
