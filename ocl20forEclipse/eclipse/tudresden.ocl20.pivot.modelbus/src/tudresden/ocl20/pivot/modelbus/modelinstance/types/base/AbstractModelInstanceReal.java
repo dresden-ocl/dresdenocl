@@ -56,7 +56,15 @@ public abstract class AbstractModelInstanceReal extends
 		else {
 			resultBuffer.append("MIReal");
 			resultBuffer.append("[");
-			resultBuffer.append(this.getDouble());
+			
+			if (this.isUndefined()) {
+				resultBuffer.append("undefined");
+			}
+
+			else {
+				resultBuffer.append(this.getDouble().toString());
+			}
+
 			resultBuffer.append("]");
 		}
 		// no else.

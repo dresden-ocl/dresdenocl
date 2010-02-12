@@ -55,7 +55,15 @@ public abstract class AbstractModelInstanceInteger extends
 		else {
 			resultBuffer.append("MIInteger");
 			resultBuffer.append("[");
-			resultBuffer.append(this.getLong().toString());
+
+			if (this.isUndefined()) {
+				resultBuffer.append("undefined");
+			}
+
+			else {
+				resultBuffer.append(this.getLong().toString());
+			}
+
 			resultBuffer.append("]");
 		}
 

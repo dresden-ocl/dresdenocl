@@ -57,7 +57,15 @@ public abstract class AbstractModelInstanceBoolean extends
 		else {
 			resultBuffer.append("MIBoolean");
 			resultBuffer.append("[");
-			resultBuffer.append(this.getBoolean().toString());
+
+			if (this.isUndefined()) {
+				resultBuffer.append("undefined");
+			}
+
+			else {
+				resultBuffer.append(this.getBoolean().toString());
+			}
+
 			resultBuffer.append("]");
 		}
 		// end else.

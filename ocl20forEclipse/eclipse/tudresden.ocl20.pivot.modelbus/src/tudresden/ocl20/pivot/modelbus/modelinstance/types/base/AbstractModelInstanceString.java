@@ -57,7 +57,15 @@ public abstract class AbstractModelInstanceString extends
 		else {
 			resultBuffer.append("MIString");
 			resultBuffer.append("[");
-			resultBuffer.append(this.getString());
+
+			if (this.isUndefined()) {
+				resultBuffer.append("undefined");
+			}
+
+			else {
+				resultBuffer.append(this.getString().toString());
+			}
+
 			resultBuffer.append("]");
 		}
 		// no else.

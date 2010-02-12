@@ -57,7 +57,15 @@ public abstract class AbstractModelInstanceEnumerationLiteral extends
 		else {
 			resultBuffer.append("MIEnumerationLiteral");
 			resultBuffer.append("[");
-			resultBuffer.append(this.getLiteral().toString());
+
+			if (this.isUndefined()) {
+				resultBuffer.append("undefined");
+			}
+
+			else {
+				resultBuffer.append(this.getLiteral().toString());
+			}
+
 			resultBuffer.append("]");
 		}
 		// end else.

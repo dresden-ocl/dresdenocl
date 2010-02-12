@@ -115,7 +115,7 @@ public abstract class AbstractModelInstanceElement implements
 
 			for (Type aType : this.getTypes()) {
 
-				if (resultBuffer.length() == 1) {
+				if (resultBuffer.length() > 1) {
 					resultBuffer.append(",");
 				}
 				// no else.
