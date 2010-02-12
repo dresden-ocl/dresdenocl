@@ -1968,7 +1968,7 @@ public class TestInterpretation {
 
 		testPerformer.addModelObject(transaction);
 		objectList.clear();
-		objectList.add(testPerformer.addModelObject(transaction));
+		objectList.add(testPerformer.addModelObject(burning));
 
 		/* Interpret the selected object(s). */
 		results.clear();

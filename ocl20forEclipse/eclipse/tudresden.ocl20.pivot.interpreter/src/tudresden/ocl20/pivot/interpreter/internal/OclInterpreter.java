@@ -298,45 +298,57 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		boolean result;
 		result = false;
 
-		NamedElement constrainedElem;
+		if (constraint.getKind().equals(ConstraintKind.BODY)
+				|| constraint.getKind().equals(ConstraintKind.DEFINITION)
+				|| constraint.getKind().equals(ConstraintKind.DERIVED)
+				|| constraint.getKind().equals(ConstraintKind.INITIAL)) {
 
-		/* Get the constrained element. */
-		constrainedElem = (NamedElement) constraint.getConstrainedElement().get(0);
-
-		/* Check if the constrained element is a type. */
-		if (constrainedElem instanceof Type) {
-
-			Type constrainedType;
-
-			constrainedType = (Type) constrainedElem;
-
-			/*
-			 * Check if the model object is an instance of the constrained type.
-			 */
-			if (modelObject.isKindOf(constrainedType)) {
-				result = true;
-			}
-			// no else.
+			result = true;
 		}
 
-		/*
-		 * Else check if the constrained element is a operation.
-		 */
-		else if (constrainedElem instanceof Operation) {
+		else {
+			NamedElement constrainedElem;
 
-			Type operationsType;
+			/* Get the constrained element. */
+			constrainedElem =
+					(NamedElement) constraint.getConstrainedElement().get(0);
 
-			operationsType = ((Operation) constrainedElem).getOwningType();
+			/* Check if the constrained element is a type. */
+			if (constrainedElem instanceof Type) {
+
+				Type constrainedType;
+
+				constrainedType = (Type) constrainedElem;
+
+				/*
+				 * Check if the model object is an instance of the constrained type.
+				 */
+				if (modelObject.isKindOf(constrainedType)) {
+					result = true;
+				}
+				// no else.
+			}
 
 			/*
-			 * Check if the model object is an instance of the constrained operation's
-			 * type.
+			 * Else check if the constrained element is a operation.
 			 */
-			if (modelObject.isKindOf(operationsType)) {
-				result = true;
+			else if (constrainedElem instanceof Operation) {
+
+				Type operationsType;
+
+				operationsType = ((Operation) constrainedElem).getOwningType();
+
+				/*
+				 * Check if the model object is an instance of the constrained
+				 * operation's type.
+				 */
+				if (modelObject.isKindOf(operationsType)) {
+					result = true;
+				}
+				// no else.
 			}
-			// no else.
 		}
+		// end else.
 
 		return result;
 	}
@@ -712,29 +724,28 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		}
 		// no else.
 
-		/* Only prepare constraints for constrained elements. */
-		if (this.isConstrained(modelObject, aConstraint)) {
+		ConstraintKind aKind;
 
-			ConstraintKind aKind;
+		this.isPreparation = true;
 
-			this.isPreparation = true;
+		aKind = aConstraint.getKind();
 
-			aKind = aConstraint.getKind();
+		/*
+		 * Check if a constraints which do not need the IModelInstanceElement
+		 * context shall be prepared.
+		 */
+		if (aKind.equals(ConstraintKind.BODY)
+				|| aKind.equals(ConstraintKind.DEFINITION)
+				|| aKind.equals(ConstraintKind.DERIVED)
+				|| aKind.equals(ConstraintKind.INITIAL)) {
 
-			/*
-			 * Check if a constraints which do not need the IModelInstanceElement
-			 * context shall be prepared.
-			 */
-			if (aKind.equals(ConstraintKind.BODY)
-					|| aKind.equals(ConstraintKind.DEFINITION)
-					|| aKind.equals(ConstraintKind.DERIVED)
-					|| aKind.equals(ConstraintKind.INITIAL)) {
+			this.prepareConstraint(aConstraint);
+		}
 
-				this.prepareConstraint(aConstraint);
-			}
-
-			/* Else prepare the constraint and its context. */
-			else {
+		/* Else prepare the constraint and its context. */
+		else {
+			/* Only prepare constraints for constrained elements. */
+			if (this.isConstrained(modelObject, aConstraint)) {
 				OclAny oclModelObject;
 				EObject constraintSpecification;
 
@@ -756,14 +767,14 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 				/* Prepare the constraintSpecification. */
 				constraintSpecification = (EObject) aConstraint.getSpecification();
 				this.doSwitch((EObject) constraintSpecification);
+
+				/* Remove the self variable from the environment again. */
+				this.myEnvironment.addVar(SELF_VARIABLE_NAME, null);
 			}
-
-			this.isPreparation = false;
-
-			/* Remove the self variable from the environment again. */
-			this.myEnvironment.addVar(SELF_VARIABLE_NAME, null);
+			// no else.
 		}
-		// no else.
+
+		this.isPreparation = false;
 
 		/* Eventually log the exit of this method. */
 		if (LOGGER.isDebugEnabled()) {
@@ -4029,8 +4040,8 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 	/**
 	 * <p>
 	 * A helper method that tries to return the prepared value of a given
-	 * {@link Property}. Prepared values could be result from <code>derive</code>,
-	 * <code>body</code> or <code>init</code> expressions.
+	 * {@link Property}. Prepared values could be the result from
+	 * <code>derive</code>, <code>body</code> or <code>init</code> expressions.
 	 * </p>
 	 * 
 	 * <p>
