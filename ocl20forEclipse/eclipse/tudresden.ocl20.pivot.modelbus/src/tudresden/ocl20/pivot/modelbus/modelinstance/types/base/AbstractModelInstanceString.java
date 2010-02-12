@@ -55,7 +55,7 @@ public abstract class AbstractModelInstanceString extends
 
 		/* Else construct a name of all implemented types. */
 		else {
-			resultBuffer.append(this.getClass().getSimpleName());
+			resultBuffer.append("MIString");
 			resultBuffer.append("[");
 			resultBuffer.append(this.getString());
 			resultBuffer.append("]");

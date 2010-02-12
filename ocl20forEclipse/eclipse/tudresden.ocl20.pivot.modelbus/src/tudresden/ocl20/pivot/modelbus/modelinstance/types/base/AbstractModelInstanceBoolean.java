@@ -55,7 +55,7 @@ public abstract class AbstractModelInstanceBoolean extends
 
 		/* Else construct a name of all implemented types. */
 		else {
-			resultBuffer.append(this.getClass().getSimpleName());
+			resultBuffer.append("MIBoolean");
 			resultBuffer.append("[");
 			resultBuffer.append(this.getBoolean().toString());
 			resultBuffer.append("]");

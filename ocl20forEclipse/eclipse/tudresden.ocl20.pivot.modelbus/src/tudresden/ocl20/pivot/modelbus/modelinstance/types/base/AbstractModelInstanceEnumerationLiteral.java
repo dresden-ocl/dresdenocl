@@ -55,7 +55,7 @@ public abstract class AbstractModelInstanceEnumerationLiteral extends
 
 		/* Else construct a name of all implemented types. */
 		else {
-			resultBuffer.append(this.getClass().getSimpleName());
+			resultBuffer.append("MIEnumerationLiteral");
 			resultBuffer.append("[");
 			resultBuffer.append(this.getLiteral().toString());
 			resultBuffer.append("]");

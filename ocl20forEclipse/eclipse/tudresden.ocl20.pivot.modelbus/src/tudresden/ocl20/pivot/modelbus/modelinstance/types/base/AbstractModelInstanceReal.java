@@ -54,7 +54,7 @@ public abstract class AbstractModelInstanceReal extends
 
 		/* Else construct a name of all implemented types. */
 		else {
-			resultBuffer.append(AbstractModelInstanceReal.class.getSimpleName());
+			resultBuffer.append("MIReal");
 			resultBuffer.append("[");
 			resultBuffer.append(this.getDouble());
 			resultBuffer.append("]");

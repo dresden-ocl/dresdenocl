@@ -53,7 +53,7 @@ public abstract class AbstractModelInstanceInteger extends
 
 		/* Else construct a name of all implemented types. */
 		else {
-			resultBuffer.append(this.getClass().getSimpleName());
+			resultBuffer.append("MIInteger");
 			resultBuffer.append("[");
 			resultBuffer.append(this.getLong().toString());
 			resultBuffer.append("]");

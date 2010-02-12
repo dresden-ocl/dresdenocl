@@ -191,7 +191,7 @@ public class ModelInstanceTuple extends AbstractModelInstanceElement implements
 
 		/* Else construct a name of all implemented types. */
 		else {
-			resultBuffer.append(this.getClass().getSimpleName());
+			resultBuffer.append("MITuple");
 			resultBuffer.append("[");
 			resultBuffer.append(this.myMap.toString());
 			resultBuffer.append("]");

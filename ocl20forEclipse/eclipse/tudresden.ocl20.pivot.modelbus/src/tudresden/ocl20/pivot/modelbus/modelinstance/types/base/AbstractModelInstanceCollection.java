@@ -58,7 +58,7 @@ public abstract class AbstractModelInstanceCollection<T extends IModelInstanceEl
 		/* Else construct a name of all implemented types. */
 		else {
 			resultBuffer
-					.append(AbstractModelInstanceCollection.class.getSimpleName());
+					.append("MICollection");
 			resultBuffer.append("[");
 			resultBuffer.append("types = " + this.getTypes() + ", ");
 			resultBuffer.append("content = " + this.getCollection().toString());
