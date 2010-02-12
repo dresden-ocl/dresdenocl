@@ -57,11 +57,50 @@ public abstract class AbstractModelInstanceCollection<T extends IModelInstanceEl
 
 		/* Else construct a name of all implemented types. */
 		else {
-			resultBuffer
-					.append("MICollection");
+			if (this.isOrdered()) {
+				if (this.isUnique()) {
+					resultBuffer.append("MIOrderedSet");
+				}
+
+				else {
+					resultBuffer.append("MISet");
+				}
+			}
+
+			else {
+				if (this.isUnique()) {
+					resultBuffer.append("MISequence");
+				}
+
+				else {
+					resultBuffer.append("MIBag");
+				}
+			}
+
 			resultBuffer.append("[");
-			resultBuffer.append("types = " + this.getTypes() + ", ");
-			resultBuffer.append("content = " + this.getCollection().toString());
+
+			boolean firstElement;
+			firstElement = true;
+
+			for (T element : this.getCollection()) {
+
+				if (firstElement) {
+					firstElement = false;
+				}
+
+				else {
+					resultBuffer.append(", ");
+				}
+
+				if (element instanceof IModelInstanceElement) {
+					resultBuffer.append(((IModelInstanceElement) element).getName());
+				}
+
+				else {
+					resultBuffer.append(element.toString());
+				}
+			}
+
 			resultBuffer.append("]");
 		}
 		// end else.
@@ -185,10 +224,8 @@ public abstract class AbstractModelInstanceCollection<T extends IModelInstanceEl
 		boolean result;
 
 		/* Only ordered sets and sequences are ordered. */
-		if (this
-				.isKindOf(TypeConstants.ORDERED_SET)
-				|| this
-						.isKindOf(TypeConstants.SEQUENCE)) {
+		if (this.isKindOf(TypeConstants.ORDERED_SET)
+				|| this.isKindOf(TypeConstants.SEQUENCE)) {
 			result = true;
 		}
 
@@ -221,8 +258,7 @@ public abstract class AbstractModelInstanceCollection<T extends IModelInstanceEl
 		boolean result;
 
 		/* Only ordered sets and sets are unique. */
-		if (this
-				.isKindOf(TypeConstants.ORDERED_SET)
+		if (this.isKindOf(TypeConstants.ORDERED_SET)
 				|| this.isKindOf(TypeConstants.SET)) {
 			result = true;
 		}

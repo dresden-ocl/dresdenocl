@@ -63,7 +63,8 @@ public abstract class AbstractModelInstanceEnumerationLiteral extends
 			}
 
 			else {
-				resultBuffer.append(this.getLiteral().toString());
+				resultBuffer.append(this.getLiteral().getEnumeration().getName() + "::"
+						+ this.getLiteral().getName());
 			}
 
 			resultBuffer.append("]");
