@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Generic Model Instance Type Test Plug-in
-Bundle-SymbolicName: tudresden.ocl20.pivot.modelinstancetype.test
+Bundle-SymbolicName: tudresden.ocl20.pivot.modelinstancetype.test;singleton:=true
 Bundle-Version: 2.1.0.qualifier
 Bundle-Activator: tudresden.ocl20.pivot.modelinstancetype.test.ModelInstanceTypeTestPlugin
 Bundle-Vendor: Dresden University, Software Technology Group

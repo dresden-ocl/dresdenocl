@@ -143,7 +143,7 @@ public class TestModelInstance {
 			}
 
 			catch (TypeNotFoundInModelException e) {
-				fail(msg);
+				fail(msg + e.getMessage());
 			}
 		}
 

@@ -22,10 +22,13 @@ package tudresden.ocl20.pivot.modelinstancetype.xml.internal.modelinstance;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
+import java.util.WeakHashMap;
 
 import org.apache.log4j.Logger;
 import org.eclipse.osgi.util.NLS;
+import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 
 import tudresden.ocl20.pivot.modelbus.ModelAccessException;
@@ -45,6 +48,7 @@ import tudresden.ocl20.pivot.modelinstancetype.xml.internal.msg.XmlModelInstance
 import tudresden.ocl20.pivot.pivotmodel.Enumeration;
 import tudresden.ocl20.pivot.pivotmodel.EnumerationLiteral;
 import tudresden.ocl20.pivot.pivotmodel.PrimitiveType;
+import tudresden.ocl20.pivot.pivotmodel.Property;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 
 /**
@@ -71,6 +75,9 @@ public class XmlModelInstanceFactory extends BasisJavaModelInstanceFactory {
 	 * shall be created.
 	 */
 	private XmlModelInstance modelInstance;
+
+	private Map<Node, IModelInstanceObject> cacheModelInstanceObjects =
+			new WeakHashMap<Node, IModelInstanceObject>();
 
 	/**
 	 * <p>
@@ -111,7 +118,6 @@ public class XmlModelInstanceFactory extends BasisJavaModelInstanceFactory {
 	public IModelInstanceElement createModelInstanceElement(Object adapted)
 			throws TypeNotFoundInModelException {
 
-		/* FIXME Built-in caching. */
 		/* Probably debug the entry of this method. */
 		if (LOGGER.isDebugEnabled()) {
 			String msg;
@@ -128,17 +134,10 @@ public class XmlModelInstanceFactory extends BasisJavaModelInstanceFactory {
 
 		if (adapted instanceof Node) {
 
-			/* FIXME Claas adapt the object according to the found type. */
 			Node node;
 			node = (Node) adapted;
 
-			result = this.createModelInstanceObject(node);
-
-			if (result instanceof IModelInstanceObject) {
-				this.modelInstance
-						.addModelInstanceObject((IModelInstanceObject) result);
-			}
-			// no else.
+			result = this.createModelInstanceElement(node);
 		}
 
 		else {
@@ -173,7 +172,6 @@ public class XmlModelInstanceFactory extends BasisJavaModelInstanceFactory {
 	public IModelInstanceElement createModelInstanceElement(Object adapted,
 			Type type) {
 
-		/* FIXME Built-in caching. */
 		/* Probably debug the entry of this method. */
 		if (LOGGER.isDebugEnabled()) {
 			String msg;
@@ -229,17 +227,31 @@ public class XmlModelInstanceFactory extends BasisJavaModelInstanceFactory {
 					break;
 
 				default:
-					// FIXME -> exception.
-					result = null;
+					throw new IllegalArgumentException(
+							NLS
+									.bind(
+											XmlModelInstanceTypeMessages.XmlModelInstanceFactory_UnknownClassOfAdaptee,
+											adapted.getClass().getCanonicalName()));
 				}
 				// end select.
 			}
 
 			else {
-				result = this.createModelInstanceObject(node, type);
+				/* Probably use a cached result. */
+				if (this.cacheModelInstanceObjects.containsKey(node)) {
+					result = this.cacheModelInstanceObjects.get(node);
+				}
 
-				this.modelInstance
-						.addModelInstanceObject((IModelInstanceObject) result);
+				else {
+					result = this.createModelInstanceObject(node, type);
+
+					/* Add the result to the model instance and the cache. */
+					this.modelInstance
+							.addModelInstanceObject((IModelInstanceObject) result);
+					this.cacheModelInstanceObjects.put(node,
+							(IModelInstanceObject) result);
+				}
+				// end else.
 			}
 		}
 
@@ -301,6 +313,31 @@ public class XmlModelInstanceFactory extends BasisJavaModelInstanceFactory {
 		else {
 			result = super.createModelInstanceBoolean(null);
 		}
+
+		return result;
+	}
+
+	/**
+	 * <p>
+	 * Creates an {@link IModelInstanceElement} for a given {@link Node}.
+	 * 
+	 * @param node
+	 *          The {@link Node} that shall be adapted.
+	 * @return The created {@link IModelInstanceElement}.
+	 * @throws TypeNotFoundInModelException
+	 *           Thrown, if now {@link Type} in the {@link IModel} can be found
+	 *           that matches to the given {@link Node}.
+	 */
+	private IModelInstanceElement createModelInstanceElement(Node node)
+			throws TypeNotFoundInModelException {
+
+		IModelInstanceElement result;
+
+		Type type;
+		type = this.findTypeOfNode(node);
+
+		result =
+				(IModelInstanceElement) this.createModelInstanceElement(node, type);
 
 		return result;
 	}
@@ -469,30 +506,6 @@ public class XmlModelInstanceFactory extends BasisJavaModelInstanceFactory {
 
 	/**
 	 * <p>
-	 * Creates an {@link XmlModelInstanceObject} for a given {@link Node}.
-	 * 
-	 * @param node
-	 *          The {@link Node} that shall be adapted.
-	 * @return The created {@link XmlModelInstanceObject}.
-	 * @throws TypeNotFoundInModelException
-	 *           Thrown, if now {@link Type} in the {@link IModel} can be found
-	 *           that matches to the given {@link Node}.
-	 */
-	private XmlModelInstanceObject createModelInstanceObject(Node node)
-			throws TypeNotFoundInModelException {
-
-		XmlModelInstanceObject result;
-
-		Type type;
-		type = this.findTypeInModel(node);
-
-		result = this.createModelInstanceObject(node, type);
-
-		return result;
-	}
-
-	/**
-	 * <p>
 	 * Creates an {@link XmlModelInstanceObject} for a given {@link Node} and a
 	 * given {@link Type}.
 	 * 
@@ -516,6 +529,76 @@ public class XmlModelInstanceFactory extends BasisJavaModelInstanceFactory {
 		return result;
 	}
 
+	private Type findTypeOfNode(Node node) throws TypeNotFoundInModelException {
+
+		Type result;
+		result = null;
+
+		/* Collect all parent nodes. */
+		List<Node> parents;
+		parents = new ArrayList<Node>();
+
+		Node aNode;
+		aNode = node;
+
+		while (aNode != null) {
+
+			if (aNode == aNode.getParentNode() || aNode instanceof Document) {
+				break;
+			}
+
+			else {
+				parents.add(aNode);
+				aNode = aNode.getParentNode();
+			}
+		}
+		// end while.
+
+		if (parents.size() != 0) {
+
+			/* Try to find the type of the root node. */
+			Type rootType;
+			rootType = this.findTypeOfRootNode(parents.remove(parents.size() - 1));
+
+			if (rootType != null) {
+
+				result = rootType;
+
+				/* Take the next node, try to find its property and its type. */
+				while (parents.size() > 0) {
+
+					List<Property> properties;
+					properties = result.allProperties();
+
+					aNode = parents.remove(parents.size() - 1);
+					result = null;
+
+					for (Property property : properties) {
+						if (property.getName().equalsIgnoreCase(aNode.getNodeName().trim())) {
+							result = property.getType();
+							break;
+						}
+						// no else.
+					}
+					// end for.
+				}
+			}
+			// no else (root type not found).
+		}
+		// no else (no parent node found).
+
+		if (result == null) {
+			throw new TypeNotFoundInModelException(
+					NLS
+							.bind(
+									XmlModelInstanceTypeMessages.XmlModelInstanceFactory_UnknownTypeOfAdaptee,
+									node));
+		}
+		// no else.
+
+		return result;
+	}
+
 	/**
 	 * <p>
 	 * A helper method that searches for the {@link Type} of a given {@link Node}
@@ -526,7 +609,8 @@ public class XmlModelInstanceFactory extends BasisJavaModelInstanceFactory {
 	 *          The {@link Node} for that a {@link Type} shall be found.
 	 * @return The found {@link Type}.
 	 */
-	private Type findTypeInModel(Node node) throws TypeNotFoundInModelException {
+	private Type findTypeOfRootNode(Node node)
+			throws TypeNotFoundInModelException {
 
 		Type result;
 		result = null;
@@ -542,15 +626,6 @@ public class XmlModelInstanceFactory extends BasisJavaModelInstanceFactory {
 		/* FIXME Claas: Probably handle the node's name space. */
 		try {
 			result = this.model.findType(pathName);
-
-			if (result == null) {
-				throw new TypeNotFoundInModelException(
-						NLS
-								.bind(
-										XmlModelInstanceTypeMessages.XmlModelInstanceFactory_UnknownTypeOfAdaptee,
-										node));
-			}
-			// no else.
 		}
 		// end try.
 

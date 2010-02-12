@@ -71,6 +71,70 @@ public class XmlModelInstanceObject extends AbstractModelInstanceElement
 	protected IModelInstanceFactory modelInstanceFactory;
 
 	/**
+	 * The original {@link Type}s of this {@link XmlModelInstanceObject} (required
+	 * if a casted {@link XmlModelInstanceObject} shall be recasted to a sub-type.
+	 */
+	protected Set<Type> originalTypes;
+
+	/**
+	 * <p>
+	 * Creates a new {@link XmlModelInstanceObject}.
+	 * </p>
+	 * 
+	 * @param node
+	 *          The {@link Node} for which an {@link XmlModelInstanceObject} shall
+	 *          be created.
+	 * @param types
+	 *          The {@link Type}s this {@link IModelObject} belongs to.
+	 * @param orignialTypes
+	 *          The original {@link Type}s of this {@link XmlModelInstanceObject}
+	 *          (required if a casted {@link XmlModelInstanceObject} shall be
+	 *          recasted to a sub-type.
+	 * @param factory
+	 *          The {@link IModelInstanceFactory} to adapt properties of this
+	 *          {@link XmlModelInstanceObject}.
+	 */
+	protected XmlModelInstanceObject(Node node, Set<Type> types,
+			Set<Type> orignialTypes, IModelInstanceFactory factory) {
+
+		this(node, types, factory);
+
+		/* Probably debug the entry of this method. */
+		if (LOGGER.isDebugEnabled()) {
+			String msg;
+
+			msg = "XMLModelInstanceObject("; //$NON-NLS-1$
+			msg += "node = " + node; //$NON-NLS-1$
+			msg += ", types = " + types; //$NON-NLS-1$
+			msg += ", originalTypes = " + originalTypes; //$NON-NLS-1$
+			msg += ", factory = " + factory; //$NON-NLS-1$
+			msg += ")"; //$NON-NLS-1$
+
+			LOGGER.debug(msg);
+		}
+		// no else.
+
+		if (originalTypes == null || originalTypes.size() == 0) {
+			throw new IllegalArgumentException(
+					"Parameter 'originalTypes' must not be null or empty.");
+		}
+		// no else.
+
+		this.originalTypes = orignialTypes;
+
+		/* Probably debug the exit of this method. */
+		if (LOGGER.isDebugEnabled()) {
+			String msg;
+
+			msg = "XMLModelInstanceObject(Object, "; //$NON-NLS-1$
+			msg += "Set<Type>, Set<Type>, IModelInstanceFactory) - exit"; //$NON-NLS-1$
+
+			LOGGER.debug(msg);
+		}
+		// no else.
+	}
+
+	/**
 	 * <p>
 	 * Creates a new {@link XmlModelInstanceObject}.
 	 * </p>
@@ -115,6 +179,7 @@ public class XmlModelInstanceObject extends AbstractModelInstanceElement
 
 		this.adaptedNode = node;
 		this.myTypes = types;
+		this.originalTypes = myTypes;
 		this.modelInstanceFactory = factory;
 
 		/* Probably debug the exit of this method. */
@@ -152,10 +217,11 @@ public class XmlModelInstanceObject extends AbstractModelInstanceElement
 		result = null;
 
 		/* If the type can be casted in the model, cast it. */
-		for (Type oneOfMyTypes : this.myTypes) {
-			if (type.conformsTo(oneOfMyTypes)) {
+		for (Type oneOfMyTypes : this.originalTypes) {
+			if (oneOfMyTypes.conformsTo(type)) {
 				result =
-						new XmlModelInstanceObject(null, types, this.modelInstanceFactory);
+						new XmlModelInstanceObject(this.adaptedNode, types,
+								this.originalTypes, this.modelInstanceFactory);
 				break;
 			}
 			// no else.
@@ -307,10 +373,10 @@ public class XmlModelInstanceObject extends AbstractModelInstanceElement
 					Node node;
 					node = containedNodes.item(index);
 
+					/* FIXME Probably solve this problem in the model. */
 					String nodeName;
 					nodeName = node.getNodeName().replaceAll("\\.", "");
 
-					// TODO Improve compare strategy
 					if (nodeName.equalsIgnoreCase(property.getName())) {
 						propertyNodes.add(node);
 					}
