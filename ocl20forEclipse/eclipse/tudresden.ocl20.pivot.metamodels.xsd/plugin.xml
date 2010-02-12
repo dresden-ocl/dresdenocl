@@ -4,9 +4,10 @@
     <extension
     		point="tudresden.ocl20.pivot.modelbus.metamodels">
       <metamodel
-            id = "tudresden.ocl20.pivot.metamodels.xsd"
-            modelProvider = "tudresden.ocl20.pivot.metamodels.xsd.internal.provider.XSDModelProvider"
-            name = "XSD Meta-Model">
+            icon="icons/xsd.gif"
+            id="tudresden.ocl20.pivot.metamodels.xsd"
+            modelProvider="tudresden.ocl20.pivot.metamodels.xsd.internal.provider.XSDModelProvider"
+            name="XML Schema Meta-Model">
       </metamodel>
    </extension>
 
