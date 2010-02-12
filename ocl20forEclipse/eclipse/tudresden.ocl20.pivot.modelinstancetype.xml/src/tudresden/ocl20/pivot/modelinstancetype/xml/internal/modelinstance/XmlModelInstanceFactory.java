@@ -128,6 +128,7 @@ public class XmlModelInstanceFactory extends BasisJavaModelInstanceFactory {
 
 		if (adapted instanceof Node) {
 
+			/* FIXME Claas adapt the object according to the found type. */
 			Node node;
 			node = (Node) adapted;
 
@@ -198,7 +199,16 @@ public class XmlModelInstanceFactory extends BasisJavaModelInstanceFactory {
 			}
 			// no else.
 
-			if (type instanceof PrimitiveType) {
+			/* Probably adapt a literal. */
+			if (type instanceof Enumeration) {
+
+				result =
+						this
+								.createModelInstanceEnumerationLiteral(node, (Enumeration) type);
+			}
+
+			/* Else probably adapt a primitive type. */
+			else if (type instanceof PrimitiveType) {
 
 				switch (((PrimitiveType) type).getKind()) {
 
@@ -223,13 +233,6 @@ public class XmlModelInstanceFactory extends BasisJavaModelInstanceFactory {
 					result = null;
 				}
 				// end select.
-			}
-
-			else if (type instanceof Enumeration) {
-
-				result =
-						this
-								.createModelInstanceEnumerationLiteral(node, (Enumeration) type);
 			}
 
 			else {
@@ -283,15 +286,15 @@ public class XmlModelInstanceFactory extends BasisJavaModelInstanceFactory {
 		 * have to alter the nodes' value to get the right result such as 'true',
 		 * 'false' or null in all other cases!
 		 */
-		if (node == null || node.getNodeValue() == null) {
+		if (node == null || node.getTextContent() == null) {
 			result = super.createModelInstanceBoolean(null);
 		}
 
-		else if (node.getNodeValue().trim().equalsIgnoreCase("true")) {
+		else if (node.getTextContent().trim().equalsIgnoreCase("true")) {
 			result = super.createModelInstanceBoolean(true);
 		}
 
-		else if (node.getNodeValue().trim().equalsIgnoreCase("false")) {
+		else if (node.getTextContent().trim().equalsIgnoreCase("false")) {
 			result = super.createModelInstanceBoolean(false);
 		}
 
@@ -321,7 +324,7 @@ public class XmlModelInstanceFactory extends BasisJavaModelInstanceFactory {
 
 		IModelInstanceEnumerationLiteral result;
 
-		if (node == null || node.getNodeValue() == null) {
+		if (node == null || node.getTextContent() == null) {
 			result = super.createModelInstanceEnumerationLiteral(null);
 		}
 
@@ -331,7 +334,7 @@ public class XmlModelInstanceFactory extends BasisJavaModelInstanceFactory {
 
 			/* Try to find a literal that matches to the node's value. */
 			for (EnumerationLiteral aLiteral : enumeration.getOwnedLiteral()) {
-				if (aLiteral.getName().equalsIgnoreCase(node.getNodeValue().trim())) {
+				if (aLiteral.getName().equalsIgnoreCase(node.getTextContent().trim())) {
 					literal = aLiteral;
 					break;
 				}
@@ -367,13 +370,22 @@ public class XmlModelInstanceFactory extends BasisJavaModelInstanceFactory {
 		 * have to alter the nodes' value to get the right result such as '1' except
 		 * of '1.23', or null in many cases!
 		 */
-		if (node.getNodeValue() == null) {
+		if (node == null || node.getTextContent() == null) {
 			result = super.createModelInstanceInteger(null);
 		}
 
 		else {
-			result =
-					super.createModelInstanceInteger(Long.parseLong(node.getNodeValue()));
+			Long longValue;
+			try {
+				longValue =
+						new Double(Double.parseDouble(node.getTextContent())).longValue();
+			}
+
+			catch (NumberFormatException e) {
+				longValue = null;
+			}
+
+			result = super.createModelInstanceInteger(longValue);
 		}
 
 		return result;
@@ -401,14 +413,22 @@ public class XmlModelInstanceFactory extends BasisJavaModelInstanceFactory {
 		 * to alter the nodes' value to get the right result such as '1' except of
 		 * '1.0', or null in many cases!
 		 */
-		if (node.getNodeValue() == null) {
+		if (node == null || node.getTextContent() == null) {
 			result = super.createModelInstanceReal(null);
 		}
 
 		else {
-			result =
-					super
-							.createModelInstanceReal(Double.parseDouble(node.getNodeValue()));
+			Double doubleValue;
+
+			try {
+				doubleValue = new Double(Double.parseDouble(node.getTextContent()));
+			}
+
+			catch (NumberFormatException e) {
+				doubleValue = null;
+			}
+
+			result = super.createModelInstanceReal(doubleValue);
 		}
 
 		return result;
@@ -436,12 +456,12 @@ public class XmlModelInstanceFactory extends BasisJavaModelInstanceFactory {
 		 * have to alter the nodes' value to get the right result such as
 		 * 'truefalse' except of null!
 		 */
-		if (node == null || node.getNodeValue() == null) {
+		if (node == null || node.getTextContent() == null) {
 			result = super.createModelInstanceString(null);
 		}
 
 		else {
-			result = super.createModelInstanceString(node.getNodeValue());
+			result = super.createModelInstanceString(node.getTextContent());
 		}
 
 		return result;

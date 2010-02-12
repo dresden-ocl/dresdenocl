@@ -274,106 +274,111 @@ public class XmlModelInstanceObject extends AbstractModelInstanceElement
 		IModelInstanceElement result;
 		result = null;
 
-		/* Probably handle non-multiple primitive properties. */
-		if (!property.isMultiple() && (property.getType() instanceof PrimitiveType)
-				|| property.getType() instanceof Enumeration) {
+		if (!this.isUndefined()) {
 
-			Node propertyNode;
-			propertyNode =
-					this.adaptedNode.getAttributes().getNamedItem(property.getName());
+			/* Probably handle non-multiple primitive properties. */
+			if (!property.isMultiple()
+					&& (property.getType() instanceof PrimitiveType)
+					|| property.getType() instanceof Enumeration) {
 
-			if (propertyNode != null) {
-				result =
-						this.modelInstanceFactory.createModelInstanceElement(propertyNode,
-								property.getType());
-			}
-			// no else (is handled below).
-		}
-		// no else.
+				Node propertyNode;
+				propertyNode =
+						this.adaptedNode.getAttributes().getNamedItem(property.getName());
 
-		if (result == null && !this.isUndefined()) {
-			NodeList containedNodes;
-			containedNodes = this.adaptedNode.getChildNodes();
-
-			List<Node> propertyNodes;
-			propertyNodes = new ArrayList<Node>();
-
-			/* Collect all nodes that belong to the given property. */
-			for (int index = 0; index < containedNodes.getLength(); index++) {
-
-				Node node;
-				node = containedNodes.item(index);
-
-				String nodeName;
-				nodeName = node.getNodeName().replaceAll("\\.", "");
-
-				// TODO Improve compare strategy
-				if (nodeName.equalsIgnoreCase(property.getName())) {
-					propertyNodes.add(node);
-				}
-				// no else.
-			}
-			// end for (on nodes).
-
-			if (property.isMultiple()) {
-
-				List<IModelInstanceElement> imiList;
-				imiList = new ArrayList<IModelInstanceElement>();
-
-				for (Node node : propertyNodes) {
-					imiList.add(this.modelInstanceFactory.createModelInstanceElement(
-							node, property.getType()));
-				}
-				// end for.
-
-				if (property.isOrdered()) {
-
-					if (property.isUnique()) {
-						result =
-								this.modelInstanceFactory.createModelInstanceCollection(
-										imiList, OclCollectionTypeKind.ORDEREDSET);
-					}
-
-					else {
-						result =
-								this.modelInstanceFactory.createModelInstanceCollection(
-										imiList, OclCollectionTypeKind.SEQUENCE);
-					}
-					// end else.
-				}
-
-				else {
-					if (property.isUnique()) {
-						result =
-								this.modelInstanceFactory.createModelInstanceCollection(
-										imiList, OclCollectionTypeKind.SET);
-					}
-
-					else {
-						result =
-								this.modelInstanceFactory.createModelInstanceCollection(
-										imiList, OclCollectionTypeKind.BAG);
-					}
-					// end else.
-				}
-				// end else.
-			}
-
-			else {
-				if (propertyNodes.size() > 0) {
+				if (propertyNode != null) {
 					result =
 							this.modelInstanceFactory.createModelInstanceElement(
-									propertyNodes.get(0), property.getType());
+									propertyNode, property.getType());
+				}
+				// no else (is handled below).
+			}
+			// no else.
+
+			if (result == null) {
+				NodeList containedNodes;
+				containedNodes = this.adaptedNode.getChildNodes();
+
+				List<Node> propertyNodes;
+				propertyNodes = new ArrayList<Node>();
+
+				/* Collect all nodes that belong to the given property. */
+				for (int index = 0; index < containedNodes.getLength(); index++) {
+
+					Node node;
+					node = containedNodes.item(index);
+
+					String nodeName;
+					nodeName = node.getNodeName().replaceAll("\\.", "");
+
+					// TODO Improve compare strategy
+					if (nodeName.equalsIgnoreCase(property.getName())) {
+						propertyNodes.add(node);
+					}
+					// no else.
+				}
+				// end for (on nodes).
+
+				if (property.isMultiple()) {
+
+					List<IModelInstanceElement> imiList;
+					imiList = new ArrayList<IModelInstanceElement>();
+
+					for (Node node : propertyNodes) {
+						imiList.add(this.modelInstanceFactory.createModelInstanceElement(
+								node, property.getType()));
+					}
+					// end for.
+
+					if (property.isOrdered()) {
+
+						if (property.isUnique()) {
+							result =
+									this.modelInstanceFactory.createModelInstanceCollection(
+											imiList, OclCollectionTypeKind.ORDEREDSET);
+						}
+
+						else {
+							result =
+									this.modelInstanceFactory.createModelInstanceCollection(
+											imiList, OclCollectionTypeKind.SEQUENCE);
+						}
+						// end else.
+					}
+
+					else {
+						if (property.isUnique()) {
+							result =
+									this.modelInstanceFactory.createModelInstanceCollection(
+											imiList, OclCollectionTypeKind.SET);
+						}
+
+						else {
+							result =
+									this.modelInstanceFactory.createModelInstanceCollection(
+											imiList, OclCollectionTypeKind.BAG);
+						}
+						// end else.
+					}
+					// end else.
 				}
 
 				else {
-					result =
-							this.modelInstanceFactory.createModelInstanceElement(null,
-									property.getType());
+					if (propertyNodes.size() > 0) {
+						result =
+								this.modelInstanceFactory.createModelInstanceElement(
+										propertyNodes.get(0), property.getType());
+					}
+
+					else {
+						result =
+								this.modelInstanceFactory.createModelInstanceElement(null,
+										property.getType());
+					}
 				}
 			}
+			// no else.
 		}
-		// no else.
+		// no else (undefined).
 
 		return result;
 	}
