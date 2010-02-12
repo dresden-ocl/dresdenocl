@@ -25,6 +25,7 @@ import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.viewers.ViewerFilter;
 
 import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceCollection;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
 import tudresden.ocl20.pivot.modelbus.ui.internal.views.ModelInstancesView;
 import tudresden.ocl20.pivot.modelbus.ui.internal.views.ModelsView;
@@ -248,7 +249,7 @@ public class ModelObjectFilter extends ViewerFilter {
 
 			if (anElement instanceof IModelInstanceElement) {
 
-				Type type;				
+				Type type;
 				type = (Type) aParentElement;
 
 				/* Check if the type of this object shall be filtered. */
@@ -258,6 +259,51 @@ public class ModelObjectFilter extends ViewerFilter {
 			else {
 				result = false;
 			}
+		}
+
+		/* Else check if the parent element is an IModelInstanceCollection. */
+		else if (aParentElement instanceof IModelInstanceCollection<?>) {
+
+			/* Collections can always be displayed. */
+			result = true;
+		}
+		/* Else check if the parent element is an IModelInstanceElement. */
+		else if (aParentElement instanceof IModelInstanceElement) {
+
+			Set<Type> types;
+			types = ((IModelInstanceElement) aParentElement).getTypes();
+
+			result = false;
+
+			/* Check if the types of this object shall be filtered. */
+			for (Type type : types) {
+				result |= this.myFilteredTypes.contains(type);
+			}
+			// end for.
+		}
+
+		/* Else check if the parent element is an ModelInstanceObjectProperty. */
+		else if (aParentElement instanceof ModelInstanceObjectProperty) {
+
+			ModelInstanceObjectProperty modelInstanceObjectProperty;
+			modelInstanceObjectProperty =
+					(ModelInstanceObjectProperty) aParentElement;
+
+			result =
+					this.select(aViewer, modelInstanceObjectProperty.getOwner(),
+							modelInstanceObjectProperty);
+		}
+
+		/* Else check if the parent element is an ModelInstanceCollectionElement. */
+		else if (aParentElement instanceof ModelInstanceCollectionElement) {
+
+			ModelInstanceCollectionElement modelInstanceCollectionElement;
+			modelInstanceCollectionElement =
+					(ModelInstanceCollectionElement) aParentElement;
+
+			result =
+					this.select(aViewer, modelInstanceCollectionElement.getOwner(),
+							modelInstanceCollectionElement);
 		}
 
 		else {

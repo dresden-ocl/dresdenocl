@@ -39,6 +39,12 @@ Release 2.1 (not scheduled yet)
 * Some bugs in the OCL Standard Library were fixed.
 
 
+GUI
+---
+* The Model Instance Browser has been improved.
+  - Owned properties of ModelInstanceElements can now be browsed.
+  
+
 Tests
 -----
 * A new Modelbus Test Suite Plug-in has been introduced.

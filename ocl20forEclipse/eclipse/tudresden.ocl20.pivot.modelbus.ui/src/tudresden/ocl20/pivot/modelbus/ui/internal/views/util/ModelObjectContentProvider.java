@@ -18,6 +18,9 @@ with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
 package tudresden.ocl20.pivot.modelbus.ui.internal.views.util;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Set;
 
 import org.eclipse.jface.viewers.IStructuredContentProvider;
@@ -25,8 +28,12 @@ import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.jface.viewers.Viewer;
 
 import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance;
+import tudresden.ocl20.pivot.modelbus.modelinstance.exception.PropertyAccessException;
+import tudresden.ocl20.pivot.modelbus.modelinstance.exception.PropertyNotFoundException;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceCollection;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceObject;
+import tudresden.ocl20.pivot.pivotmodel.Property;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 
 /**
@@ -65,6 +72,7 @@ public class ModelObjectContentProvider implements IStructuredContentProvider,
 	 * 
 	 * @see org.eclipse.jface.viewers.ITreeContentProvider#getChildren(java.lang.Object)
 	 */
+	@SuppressWarnings("unchecked")
 	public Object[] getChildren(Object parentElement) {
 
 		Object[] result;
@@ -92,6 +100,91 @@ public class ModelObjectContentProvider implements IStructuredContentProvider,
 
 			result =
 					objectsOfType.toArray(new IModelInstanceObject[objectsOfType.size()]);
+		}
+
+		/* Else check if the given element is a IModelInstanceObject. */
+		else if (parentElement instanceof IModelInstanceObject) {
+
+			IModelInstanceObject imiObject;
+			imiObject = (IModelInstanceObject) parentElement;
+
+			List<ModelInstanceObjectProperty> resultList;
+			resultList = new ArrayList<ModelInstanceObjectProperty>();
+
+			/* If the element has at least on children it has elements. */
+			for (Type aType : imiObject.getTypes()) {
+
+				for (Property property : aType.allProperties()) {
+					IModelInstanceElement propertyValue;
+					propertyValue = null;
+
+					try {
+						propertyValue = imiObject.getProperty(property);
+					}
+
+					catch (PropertyAccessException e) {
+						/* Do nothing. */
+					}
+
+					catch (PropertyNotFoundException e) {
+						/* Do nothing. */
+					}
+
+					ModelInstanceObjectProperty modelInstanceObjectProperty;
+					modelInstanceObjectProperty =
+							new ModelInstanceObjectProperty(imiObject, property,
+									propertyValue);
+
+					resultList.add(modelInstanceObjectProperty);
+				}
+				// end for.
+			}
+			// end for.
+
+			Collections.sort(resultList);
+			result = resultList.toArray(new ModelInstanceObjectProperty[0]);
+		}
+
+		/* Else check if the given element is a IModelInstanceObject. */
+		else if (parentElement instanceof ModelInstanceObjectProperty) {
+
+			ModelInstanceObjectProperty modelInstanceObjectProperty;
+			modelInstanceObjectProperty = (ModelInstanceObjectProperty) parentElement;
+
+			result = this.getChildren(modelInstanceObjectProperty.getValue());
+		}
+
+		/* Else check if the given element is a IModelInstanceCollection. */
+		else if (parentElement instanceof IModelInstanceCollection<?>) {
+
+			IModelInstanceCollection<IModelInstanceElement> modelInstanceCollection;
+			modelInstanceCollection =
+					(IModelInstanceCollection<IModelInstanceElement>) parentElement;
+
+			List<ModelInstanceCollectionElement> resultList;
+			resultList = new ArrayList<ModelInstanceCollectionElement>();
+
+			if (modelInstanceCollection.getCollection() != null) {
+				for (IModelInstanceElement element : modelInstanceCollection
+						.getCollection()) {
+					resultList.add(new ModelInstanceCollectionElement(
+							modelInstanceCollection, element));
+				}
+				// end for.
+			}
+			// no else.
+
+			result = resultList.toArray(new ModelInstanceCollectionElement[0]);
+		}
+
+		/* Else check if the given element is a ModelInstanceCollectionElement. */
+		else if (parentElement instanceof ModelInstanceCollectionElement) {
+
+			ModelInstanceCollectionElement modelInstanceCollectionElement;
+			modelInstanceCollectionElement =
+					(ModelInstanceCollectionElement) parentElement;
+
+			result = this.getChildren(modelInstanceCollectionElement.getElement());
 		}
 
 		/* Else return an empty array. */
@@ -134,7 +227,7 @@ public class ModelObjectContentProvider implements IStructuredContentProvider,
 			if (this.myModelInstance.getAllInstances(type).size() > 0) {
 				result = this.myModelInstance;
 			}
-			
+
 			else {
 				result = null;
 			}
@@ -144,6 +237,12 @@ public class ModelObjectContentProvider implements IStructuredContentProvider,
 		else if (anElement instanceof IModelInstanceElement) {
 
 			result = ((IModelInstanceElement) anElement).getTypes();
+		}
+
+		/* Else check if the given element is an ModelInstanceObjectProperty. */
+		else if (anElement instanceof ModelInstanceObjectProperty) {
+
+			result = ((ModelInstanceObjectProperty) anElement).getOwner();
 		}
 
 		/* Else return null. */
@@ -186,6 +285,68 @@ public class ModelObjectContentProvider implements IStructuredContentProvider,
 
 			else {
 				result = false;
+			}
+		}
+
+		/* Else check if the given element is a IModelInstanceObject. */
+		else if (anElement instanceof IModelInstanceObject) {
+
+			IModelInstanceObject imiObject;
+			imiObject = (IModelInstanceObject) anElement;
+
+			result = false;
+
+			/* If the element has at least on children it has elements. */
+			for (Type aType : imiObject.getTypes()) {
+
+				result |= aType.allProperties().size() > 0;
+			}
+			// end for.
+		}
+
+		/* Else check if the given element is a ModelInstanceObjectProperty. */
+		else if (anElement instanceof ModelInstanceObjectProperty) {
+
+			ModelInstanceObjectProperty modelInstanceObjectProperty;
+			modelInstanceObjectProperty = (ModelInstanceObjectProperty) anElement;
+
+			if (modelInstanceObjectProperty.getValue() == null) {
+				result = false;
+			}
+
+			else {
+				return (this.hasChildren(modelInstanceObjectProperty.getValue()));
+			}
+		}
+
+		/* Else check if the given element is a IModelInstanceCollection. */
+		else if (anElement instanceof IModelInstanceCollection<?>) {
+
+			IModelInstanceCollection<?> imiCollection;
+			imiCollection = (IModelInstanceCollection<?>) anElement;
+
+			if (imiCollection.isUndefined()) {
+				result = false;
+			}
+
+			else {
+				result = imiCollection.getCollection().size() > 0;
+			}
+		}
+
+		/* Else check if the given element is a ModelInstanceCollectionElement. */
+		else if (anElement instanceof ModelInstanceCollectionElement) {
+
+			ModelInstanceCollectionElement modelInstanceCollectionElement;
+			modelInstanceCollectionElement =
+					(ModelInstanceCollectionElement) anElement;
+
+			if (modelInstanceCollectionElement.getElement() == null) {
+				result = false;
+			}
+
+			else {
+				result = this.hasChildren(modelInstanceCollectionElement.getElement());
 			}
 		}
 

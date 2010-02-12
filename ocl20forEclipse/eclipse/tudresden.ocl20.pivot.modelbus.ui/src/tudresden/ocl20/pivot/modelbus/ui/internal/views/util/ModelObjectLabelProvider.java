@@ -22,6 +22,7 @@ import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.swt.graphics.Image;
 
 import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceCollection;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
 import tudresden.ocl20.pivot.modelbus.ui.ModelBusUIPlugin;
 import tudresden.ocl20.pivot.modelbus.ui.internal.views.ModelInstancesView;
@@ -37,12 +38,29 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
  */
 public class ModelObjectLabelProvider extends LabelProvider {
 
+	/**
+	 * The path of the icon to display {@link ModelInstanceCollectionElement}s.
+	 */
+	private final static String ICON_COLLECTION = "icons/collection.gif";
+
+	/** The path of the icon to display {@link IModelInstanceElement}s. */
+	private final static String ICON_MODEL_INSTANCE_ELEMENT = "icons/object.gif";
+
+	/** The path of the icon to display {@link ModelInstanceObjectProperty}s. */
+	private final static String ICON_PROPERTY = "icons/property.gif";
+
+	/**
+	 * The path of the icon to display {@link ModelInstanceObjectProperty}s that
+	 * are undefined.
+	 */
+	private final static String ICON_UNDEFINED_PROPERTY =
+			"icons/undefined_object.gif";
+
+	/** The path of the icon to display {@link Type}s. */
 	private final static String ICON_TYPE = "icons/type.gif";
-	private final static String ICON_OBJECT = "icons/object.gif";
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see org.eclipse.jface.viewers.LabelProvider#getText(java.lang.Object)
 	 */
 	public String getText(Object anObject) {
@@ -61,8 +79,16 @@ public class ModelObjectLabelProvider extends LabelProvider {
 
 			Type type;
 			type = (Type) anObject;
-			
+
 			result = type.getQualifiedName();
+		}
+
+		else if (anObject instanceof ModelInstanceObjectProperty) {
+			result = ((ModelInstanceObjectProperty) anObject).getValueText();
+		}
+
+		else if (anObject instanceof ModelInstanceCollectionElement) {
+			result = ((ModelInstanceCollectionElement) anObject).getElementText();
 		}
 
 		else {
@@ -74,7 +100,6 @@ public class ModelObjectLabelProvider extends LabelProvider {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see org.eclipse.jface.viewers.LabelProvider#getImage(java.lang.Object)
 	 */
 	public Image getImage(Object anObject) {
@@ -82,13 +107,38 @@ public class ModelObjectLabelProvider extends LabelProvider {
 		Image result;
 
 		if (anObject instanceof Type) {
-			result = ModelBusUIPlugin.getImageDescriptor(ICON_TYPE)
-					.createImage();
+			result = ModelBusUIPlugin.getImageDescriptor(ICON_TYPE).createImage();
 		}
 
 		else if (anObject instanceof IModelInstanceElement) {
-			result = ModelBusUIPlugin.getImageDescriptor(ICON_OBJECT)
-					.createImage();
+			result =
+					ModelBusUIPlugin.getImageDescriptor(ICON_MODEL_INSTANCE_ELEMENT)
+							.createImage();
+		}
+
+		else if (anObject instanceof ModelInstanceObjectProperty) {
+			ModelInstanceObjectProperty property;
+			property = (ModelInstanceObjectProperty) anObject;
+
+			if (property.getValue() == null || property.getValue().isUndefined()) {
+				result =
+						ModelBusUIPlugin.getImageDescriptor(ICON_UNDEFINED_PROPERTY)
+								.createImage();
+			}
+
+			else if (property.getValue() instanceof IModelInstanceCollection<?>) {
+				result =
+						ModelBusUIPlugin.getImageDescriptor(ICON_COLLECTION).createImage();
+			}
+
+			else {
+				result =
+						ModelBusUIPlugin.getImageDescriptor(ICON_PROPERTY).createImage();
+			}
+		}
+
+		else if (anObject instanceof ModelInstanceCollectionElement) {
+			result = ModelBusUIPlugin.getImageDescriptor(ICON_PROPERTY).createImage();
 		}
 
 		else {
