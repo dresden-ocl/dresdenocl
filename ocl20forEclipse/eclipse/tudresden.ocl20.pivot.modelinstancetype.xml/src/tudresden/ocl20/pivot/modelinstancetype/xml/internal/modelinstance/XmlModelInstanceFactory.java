@@ -514,24 +514,12 @@ public class XmlModelInstanceFactory extends BasisJavaModelInstanceFactory {
 		String nodeName;
 		nodeName = node.getNodeName();
 
-		/* Remove all points from the name (conform to xsd implementation). */
-		nodeName = nodeName.replaceAll("\\.", "");
-
-		/* Convert the first letter to an upper case. */
-		if (nodeName.length() > 0) {
-			nodeName =
-					nodeName.substring(0, 1).toUpperCase()
-							+ nodeName.substring(1, nodeName.length());
-		}
-		// no else.
-
 		List<String> pathName;
 		pathName = new ArrayList<String>();
 
 		pathName.add(nodeName);
 
 		/* FIXME Claas: Probably handle the node's name space. */
-
 		try {
 			result = this.model.findType(pathName);
 

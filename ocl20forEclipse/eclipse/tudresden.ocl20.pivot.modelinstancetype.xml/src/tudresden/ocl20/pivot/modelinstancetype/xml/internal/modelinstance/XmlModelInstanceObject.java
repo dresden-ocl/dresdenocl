@@ -291,7 +291,7 @@ public class XmlModelInstanceObject extends AbstractModelInstanceElement
 		}
 		// no else.
 
-		if (result == null) {
+		if (result == null && !this.isUndefined()) {
 			NodeList containedNodes;
 			containedNodes = this.adaptedNode.getChildNodes();
 
@@ -304,7 +304,11 @@ public class XmlModelInstanceObject extends AbstractModelInstanceElement
 				Node node;
 				node = containedNodes.item(index);
 
-				if (node.getNodeName().equals(property.getName())) {
+				String nodeName;
+				nodeName = node.getNodeName().replaceAll("\\.", "");
+
+				// TODO Improve compare strategy
+				if (nodeName.equalsIgnoreCase(property.getName())) {
 					propertyNodes.add(node);
 				}
 				// no else.
