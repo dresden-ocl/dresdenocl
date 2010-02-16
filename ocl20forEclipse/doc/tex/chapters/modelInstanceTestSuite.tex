@@ -76,7 +76,7 @@ Because some model instance types provide different types that shall be mapped t
 The \code{StaticPropertyAndOperationClass} is used to test the invocation of static properties and operations. Because not every model instance type supports the invocation of static properties and operations (e.g., \acs{EMF} Ecore does not), these tests are based on an extra type. If the model instance type that shall be tested does not support static features, this class could be ignored.
 
 
-\subsection{Copyable and NonCopyableClass}
+\subsection{Copyable- and NonCopyableClass}
 
 \acs{OCL} supports the special operation \code{@pre}, that can be used in \acs{OCL} to access to values of properties and operations that existed before the execution of an operation that is the current context of the constraint, the \code{@pre} expression belongs to. To support this operation, the \acs{OCL}2 Interpreter must copy and store values of model instance objects. 
 
