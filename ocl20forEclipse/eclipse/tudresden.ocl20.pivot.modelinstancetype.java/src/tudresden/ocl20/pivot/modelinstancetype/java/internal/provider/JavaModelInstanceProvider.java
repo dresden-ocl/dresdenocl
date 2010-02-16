@@ -67,6 +67,11 @@ public class JavaModelInstanceProvider extends AbstractModelInstanceProvider {
 	 */
 	public IModelInstance createEmptyModelInstance(IModel model) {
 
+		if (model == null) {
+			throw new IllegalArgumentException("Paramter 'model' must not be null.");
+		}
+		// no else.
+
 		return new JavaModelInstance(model);
 	}
 

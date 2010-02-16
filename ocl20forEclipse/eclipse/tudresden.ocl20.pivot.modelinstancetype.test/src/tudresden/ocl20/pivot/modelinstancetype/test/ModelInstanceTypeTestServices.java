@@ -33,9 +33,11 @@ import org.osgi.framework.Bundle;
 import tudresden.ocl20.pivot.facade.Ocl2ForEclipseFacade;
 import tudresden.ocl20.pivot.metamodels.uml2.UML2MetamodelPlugin;
 import tudresden.ocl20.pivot.modelbus.ModelAccessException;
+import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
 import tudresden.ocl20.pivot.modelbus.metamodel.IMetamodel;
 import tudresden.ocl20.pivot.modelbus.model.IModel;
 import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance;
+import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceProvider;
 import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceType;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceObject;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.base.TypeConstants;
@@ -362,6 +364,21 @@ public final class ModelInstanceTypeTestServices {
 
 	/**
 	 * <p>
+	 * Returns the {@link IModelInstanceProvider} of the current
+	 * {@link IModelInstanceType} under test.
+	 * </p>
+	 * 
+	 * @return The {@link IModelInstanceProvider} of the current
+	 *         {@link IModelInstanceType} under test.
+	 */
+	public IModelInstanceProvider getModelInstanceProvider() {
+
+		return ModelBusPlugin.getModelInstanceTypeRegistry().getModelInstanceType(
+				this.myModelInstanceTypeId).getModelInstanceProvider();
+	}
+
+	/**
+	 * <p>
 	 * Searches for a {@link Type} in the current {@link IModel} under test.
 	 * </p>
 	 * 
@@ -664,8 +681,7 @@ public final class ModelInstanceTypeTestServices {
 
 				aProperty = PivotModelFactory.INSTANCE.createProperty();
 				aProperty.setName("booleanProperty" + index);
-				aProperty
-						.setType(TypeConstants.BOOLEAN);
+				aProperty.setType(TypeConstants.BOOLEAN);
 
 				primitiveTypeProviderClass.addProperty(aProperty);
 			}
@@ -676,8 +692,7 @@ public final class ModelInstanceTypeTestServices {
 
 				aProperty = PivotModelFactory.INSTANCE.createProperty();
 				aProperty.setName("integerProperty" + index);
-				aProperty
-						.setType(TypeConstants.INTEGER);
+				aProperty.setType(TypeConstants.INTEGER);
 
 				primitiveTypeProviderClass.addProperty(aProperty);
 			}
@@ -699,8 +714,7 @@ public final class ModelInstanceTypeTestServices {
 
 				aProperty = PivotModelFactory.INSTANCE.createProperty();
 				aProperty.setName("stringProperty" + index);
-				aProperty
-						.setType(TypeConstants.STRING);
+				aProperty.setType(TypeConstants.STRING);
 
 				primitiveTypeProviderClass.addProperty(aProperty);
 			}
@@ -726,8 +740,7 @@ public final class ModelInstanceTypeTestServices {
 
 				aProperty = PivotModelFactory.INSTANCE.createProperty();
 				aProperty.setName("orderedSetProperty" + index);
-				aProperty
-						.setType(TypeConstants.ORDERED_SET);
+				aProperty.setType(TypeConstants.ORDERED_SET);
 
 				collectionTypeProviderClass.addProperty(aProperty);
 			}
@@ -738,8 +751,7 @@ public final class ModelInstanceTypeTestServices {
 
 				aProperty = PivotModelFactory.INSTANCE.createProperty();
 				aProperty.setName("sequenceProperty" + index);
-				aProperty
-						.setType(TypeConstants.SEQUENCE);
+				aProperty.setType(TypeConstants.SEQUENCE);
 
 				collectionTypeProviderClass.addProperty(aProperty);
 			}

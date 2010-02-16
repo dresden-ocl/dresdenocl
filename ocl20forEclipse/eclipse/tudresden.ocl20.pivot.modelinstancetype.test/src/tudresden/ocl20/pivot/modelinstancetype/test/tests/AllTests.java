@@ -49,8 +49,8 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
 @Suite.SuiteClasses( { TestModelInstanceBoolean.class,
 		TestModelInstanceInteger.class, TestModelInstanceReal.class,
 		TestModelInstanceString.class, TestModelInstanceCollection.class,
-		TestModelInstanceEnumerationLiteral.class, TestModelInstanceObject.class,
-		TestModelInstance.class })
+		TestModelInstanceEnumerationLiteral.class, TestModelInstanceProvider.class,
+		TestModelInstanceObject.class, TestModelInstance.class })
 public class AllTests {
 
 	/**
