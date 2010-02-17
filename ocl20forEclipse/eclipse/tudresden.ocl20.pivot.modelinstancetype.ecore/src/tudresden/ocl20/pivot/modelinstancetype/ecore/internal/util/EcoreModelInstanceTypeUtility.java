@@ -104,9 +104,51 @@ public class EcoreModelInstanceTypeUtility {
 			}
 
 			else {
-				result =
-						toQualifiedNameList(clazz.getCanonicalName()).equals(
-								type.getQualifiedNameList());
+				List<String> reflectionTypeQualifiedNameList;
+				List<String> typeQualifiedNameList;
+
+				reflectionTypeQualifiedNameList =
+						toQualifiedNameList(clazz.getCanonicalName());
+				typeQualifiedNameList = type.getQualifiedNameList();
+
+				if (typeQualifiedNameList.size() > 0
+						&& typeQualifiedNameList.get(0).equals(
+								IModelBusConstants.ROOT_PACKAGE_NAME)) {
+					typeQualifiedNameList.remove(0);
+				}
+				// no else.
+
+				if (typeQualifiedNameList.size() > reflectionTypeQualifiedNameList
+						.size()) {
+					result = false;
+				}
+
+				else {
+					/*
+					 * Check that the qualified name of the class's name ends with the
+					 * qualified name of the type.
+					 */
+					int offset;
+					offset =
+							reflectionTypeQualifiedNameList.size()
+									- typeQualifiedNameList.size();
+
+					result = true;
+
+					for (int index = 0; index < typeQualifiedNameList.size(); index++) {
+
+						result &=
+								typeQualifiedNameList.get(index).equals(
+										reflectionTypeQualifiedNameList.get(index + offset));
+
+						if (!result) {
+							break;
+						}
+						// no else.
+					}
+					// end for.
+				}
+				// end else.
 			}
 		}
 
@@ -119,6 +161,7 @@ public class EcoreModelInstanceTypeUtility {
 					conformsTypeToType(genericArrayType.getGenericComponentType(), type);
 		}
 
+		/* This is the case, if the type is a collection. */
 		else if (reflectionType instanceof ParameterizedType) {
 
 			ParameterizedType parameterizedType;
