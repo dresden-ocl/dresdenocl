@@ -32,6 +32,7 @@ package tudresden.ocl20.pivot.standardlibrary.java.internal.library;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -667,6 +668,52 @@ public abstract class JavaOclAny implements OclAny {
 			msg += ") found.";
 
 			throw new NoSuchMethodException(msg);
+		}
+
+		return result;
+	}
+
+	/**
+	 * <p>
+	 * Overrides the method {@link Object#equals(Object)}. Has the same semantics
+	 * as {@link OclAny#isEqualTo(OclAny)} but results in <code>false</code> if
+	 * the result is <code>invalid</code> or <code>undefined</code>.
+	 * </p>
+	 * 
+	 * <p>
+	 * <strong>This semantics is required to support {@link Collection} operations
+	 * such as {@link Collection#contains(Object)} in interpretation of iterate
+	 * expressions!</strong>
+	 * </p>
+	 * 
+	 * @param other
+	 *          The {@link Object} to be compared.
+	 */
+	@Override
+	public boolean equals(Object other) {
+
+		boolean result;
+
+		if (other == null) {
+			result = false;
+		}
+
+		else if (other instanceof OclAny) {
+			OclBoolean oclResult;
+			oclResult = this.isEqualTo((OclAny) other);
+
+			if (oclResult.oclIsUndefined().isTrue()
+					|| oclResult.oclIsInvalid().isTrue()) {
+				result = false;
+			}
+
+			else {
+				result = oclResult.isTrue();
+			}
+		}
+
+		else {
+			result = false;
 		}
 
 		return result;

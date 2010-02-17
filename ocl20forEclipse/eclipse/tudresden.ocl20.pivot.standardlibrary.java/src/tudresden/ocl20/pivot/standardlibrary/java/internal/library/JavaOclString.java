@@ -324,5 +324,4 @@ public class JavaOclString extends JavaOclLibraryObject implements OclString {
 
 		return result.toString();
 	}
-
 }
