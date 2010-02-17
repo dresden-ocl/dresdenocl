@@ -16,6 +16,6 @@ Require-Bundle: org.eclipse.core.runtime;bundle-version="3.4.0",
  tudresden.ocl20.pivot.ocl2parser;bundle-version="2.1.0",
  tudresden.ocl20.pivot.ocl2java;bundle-version="2.1.0",
  tudresden.ocl20.pivot.interpreter;bundle-version="2.1.0"
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy
 Export-Package: tudresden.ocl20.pivot.facade
