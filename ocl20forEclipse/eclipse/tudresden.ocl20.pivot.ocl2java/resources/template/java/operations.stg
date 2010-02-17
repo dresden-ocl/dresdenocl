@@ -12,7 +12,7 @@ java.lang.Math.abs($sourceExp$)
 
 // --- AllInstances Operation ---
 allInstancesOperation(sourceExp, typeName) ::= <<
-(new $setType()$<$typeName$>((java.util.Set<$typeName$>) this.allInstances.get($sourceExp$.class.getCanonicalName()).keySet()))
+(new $setType()$<$typeName$>((java.util.Set<$typeName$>) allInstances.get($sourceExp$.class.getCanonicalName()).keySet()))
 >>
 
 

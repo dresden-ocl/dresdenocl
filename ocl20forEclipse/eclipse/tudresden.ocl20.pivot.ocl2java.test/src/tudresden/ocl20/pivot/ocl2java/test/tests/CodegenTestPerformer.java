@@ -419,7 +419,7 @@ public final class CodegenTestPerformer {
 	 * @throws Ocl22CodeException
 	 *           Thrown, if a difference test fails.
 	 */
-	private void compareStringAndFile(String expectedFilePath, String givenString)
+	public void compareStringAndFile(String expectedFilePath, String givenString)
 			throws Ocl22CodeException {
 
 		File expectedCodeFile;

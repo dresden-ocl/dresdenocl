@@ -1,5 +1,5 @@
 /*
-Copyright (C) 2008-2009 by Claas Wilke (claaswilke@gmx.net)
+Copyright (C) 2008-2010 by Claas Wilke (claaswilke@gmx.net)
 
 This file is part of the OCL 2 Java Code Generator of Dresden OCL2 for Eclipse.
 
@@ -24,6 +24,7 @@ import org.junit.runners.Suite;
 
 import tudresden.ocl20.pivot.ocl2java.test.tests.FragmentTest;
 import tudresden.ocl20.pivot.ocl2java.test.tests.InstrumentationTest;
+import tudresden.ocl20.pivot.ocl2java.test.tests.TestOcl22Java;
 
 /**
  * <p>
@@ -35,7 +36,8 @@ import tudresden.ocl20.pivot.ocl2java.test.tests.InstrumentationTest;
  * 
  */
 @RunWith(Suite.class)
-@Suite.SuiteClasses( { InstrumentationTest.class, FragmentTest.class })
+@Suite.SuiteClasses( { InstrumentationTest.class, FragmentTest.class,
+		TestOcl22Java.class })
 public class AllOcl22JavaTests {
 	/*
 	 * This class remains completely empty, being used only as a holder for the

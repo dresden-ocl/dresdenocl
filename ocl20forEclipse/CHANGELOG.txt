@@ -38,6 +38,9 @@ Release 2.1 (not scheduled yet)
   
 * Some bugs in the OCL Standard Library were fixed.
 
+* A bug in the Ocl22Java Code Generator was fixed.
+  - The code generation of OclAny.allInstances() now works properly again.
+
 
 GUI
 ---

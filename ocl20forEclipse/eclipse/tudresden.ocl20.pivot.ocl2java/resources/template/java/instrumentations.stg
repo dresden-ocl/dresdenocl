@@ -12,7 +12,7 @@ package $package$;
 public privileged aspect $name$ {
 
 $if(allInstanceClasses)$
-    protected java.util.Map<String, java.util.Map> allInstances = new java.util.HashMap<String, java.util.Map>();
+    protected static java.util.Map<String, java.util.Map> allInstances = new java.util.HashMap<String, java.util.Map>();
 
     $allInstanceClasses:allInstancesAdvice(); separator = "\n\n"$
 
@@ -42,7 +42,7 @@ after($name$ $selfVariable()$) : execution($name$.new(..)) && this($selfVariable
 
     java.util.Map<$name$, Object> instanceMap;
 
-    instanceMap = (java.util.Map<$name$, Object>) this.allInstances.get($selfVariable()$.getClass().getCanonicalName());
+    instanceMap = (java.util.Map<$name$, Object>) allInstances.get($selfVariable()$.getClass().getCanonicalName());
 
     if (instanceMap == null) {
         instanceMap = new java.util.WeakHashMap<$name$, Object>();
@@ -51,7 +51,7 @@ after($name$ $selfVariable()$) : execution($name$.new(..)) && this($selfVariable
 
     instanceMap.put($selfVariable()$, null);
 
-    this.allInstances.put($selfVariable()$.getClass().getCanonicalName(), instanceMap);
+    allInstances.put($selfVariable()$.getClass().getCanonicalName(), instanceMap);
 }
 >>
 
