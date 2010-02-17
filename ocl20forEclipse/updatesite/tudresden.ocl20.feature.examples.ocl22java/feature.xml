@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="tudresden.ocl20.feature.examples.ocl22java"
+      label="Ocl22Java Examples"
+      version="2.1.0.qualifier"
+      provider-name="TU Dresden, Software Technology Group">
+
+   <description url="http://www.example.com/description">
+      Examples for the OCL22Java Code Generator of Dresden OCL2 for Eclipse. Requires the installation of the AspectJ Development Tools (AJDT)!
+   </description>
+
+   <copyright url="http://www.example.com/copyright">
+      [Enter Copyright Description here.]
+   </copyright>
+
+   <license url="http://www.example.com/license">
+      [Enter License Description here.]
+   </license>
+
+   <requires>
+      <import plugin="org.aspectj.runtime"/>
+      <import plugin="org.junit4" version="4.0.0" match="greaterOrEqual"/>
+   </requires>
+
+   <plugin
+         id="tudresden.ocl20.pivot.examples.royalandloyal.ocl22javacode"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="tudresden.ocl20.pivot.examples.simple.ocl22javacode"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+</feature>

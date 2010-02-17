@@ -184,8 +184,6 @@ Library.
 
    <requires>
       <import plugin="org.eclipse.emf.ecore"/>
-      <import plugin="org.aspectj.runtime"/>
-      <import plugin="org.junit4" version="4.0.0" match="greaterOrEqual"/>
    </requires>
 
    <plugin
@@ -204,20 +202,6 @@ Library.
 
    <plugin
          id="tudresden.ocl20.pivot.examples.living"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="tudresden.ocl20.pivot.examples.royalandloyal.ocl22javacode"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="tudresden.ocl20.pivot.examples.simple.ocl22javacode"
          download-size="0"
          install-size="0"
          version="0.0.0"
