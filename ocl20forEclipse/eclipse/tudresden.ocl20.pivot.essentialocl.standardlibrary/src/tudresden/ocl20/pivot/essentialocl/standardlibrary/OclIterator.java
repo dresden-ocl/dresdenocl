@@ -37,10 +37,11 @@ public interface OclIterator<T extends OclAny> {
 	 * @return true if the iteration has more elements.
 	 */
 	OclBoolean hasNext();
-	
+
 	/**
 	 * 
 	 * @return the next element in the iteration.
 	 */
 	T next();
+
 }

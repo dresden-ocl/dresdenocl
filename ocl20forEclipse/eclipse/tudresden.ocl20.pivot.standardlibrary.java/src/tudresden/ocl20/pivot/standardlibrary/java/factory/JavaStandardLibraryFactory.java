@@ -44,6 +44,7 @@ import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSet;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclString;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclTuple;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclType;
+import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclVoid;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.factory.IStandardLibraryFactory;
 import tudresden.ocl20.pivot.essentialocl.types.AnyType;
 import tudresden.ocl20.pivot.essentialocl.types.BagType;
@@ -353,7 +354,7 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 		return result;
 	}
 
-	protected OclCollection<OclAny> createOclCollection(
+	public OclCollection<OclAny> createOclCollection(
 			IModelInstanceCollection<IModelInstanceElement> imiCollection,
 			Type genericType) {
 
@@ -748,88 +749,118 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 	 * IStandardLibraryFactory
 	 * #createOclUndefined(tudresden.ocl20.pivot.pivotmodel.Type)
 	 */
-	public OclAny createOclUndefined(final Type type, final String reason) {
+	@SuppressWarnings("unchecked")
+	public <T extends OclAny> T createOclUndefined(final Type type,
+			final String reason) {
 
-		OclAny result;
+		T result;
 
 		result = null;
 
-		/* Check if the given Type is a primitive type. */
-		if (type instanceof PrimitiveType) {
-			PrimitiveType primitiveType;
-			PrimitiveTypeKind primitiveTypeKind;
-			primitiveType = (PrimitiveType) type;
-			primitiveTypeKind = primitiveType.getKind();
+		if (type instanceof AnyType)
+			result = (T) new JavaOclAny(reason) {
 
-			if (primitiveTypeKind.equals(PrimitiveTypeKind.BOOLEAN)) {
-				result = new JavaOclBoolean(reason);
+				public OclBoolean isEqualTo(OclAny object2) {
+
+					OclBoolean result = null;
+
+					// same semantics as for OclInvalid
+					if (object2 instanceof OclVoid
+							|| object2.getUndefinedReason() != null)
+						result = JavaOclBoolean.getInstance(true);
+					else
+						result = JavaOclBoolean.getInstance(false);
+
+					return result;
+				}
+
+				public <T2 extends OclAny> OclSet<T2> asSet() {
+
+					return createOclSet(new HashSet<Object>(), type);
+				}
+			};
+
+		else {
+
+			/* Check if the given Type is a primitive type. */
+			if (type instanceof PrimitiveType) {
+				PrimitiveType primitiveType;
+				PrimitiveTypeKind primitiveTypeKind;
+				primitiveType = (PrimitiveType) type;
+				primitiveTypeKind = primitiveType.getKind();
+
+				if (primitiveTypeKind.equals(PrimitiveTypeKind.BOOLEAN)) {
+					result = (T) new JavaOclBoolean(reason);
+				}
+
+				else if (primitiveTypeKind.equals(PrimitiveTypeKind.INTEGER)) {
+					result = (T) new JavaOclInteger(reason);
+				}
+
+				else if (primitiveTypeKind.equals(PrimitiveTypeKind.REAL)) {
+					result = (T) new JavaOclReal(reason);
+				}
+
+				else if (primitiveTypeKind.equals(PrimitiveTypeKind.STRING)) {
+					result = (T) new JavaOclString(reason);
+				}
+
+				else if (primitiveTypeKind.equals(PrimitiveTypeKind.VOID)) {
+					result = (T) JavaOclVoid.INSTANCE;
+				}
+
+				/* unknown primitive type */
+				else {
+					throw new IllegalArgumentException("Primitive type " + type
+							+ " is unknown.");
+				}
 			}
 
-			else if (primitiveTypeKind.equals(PrimitiveTypeKind.INTEGER)) {
-				result = new JavaOclInteger(reason);
+			/* collection type */
+			else if (type instanceof CollectionType) {
+
+				if (type instanceof BagType) {
+					result =
+							(T) new JavaOclBag<OclAny>(reason, ((BagType) type)
+									.getElementType());
+				}
+
+				else if (type instanceof OrderedSetType) {
+					result =
+							(T) new JavaOclOrderedSet<OclAny>(reason, ((OrderedSetType) type)
+									.getElementType());
+				}
+
+				else if (type instanceof SequenceType) {
+					result =
+							(T) new JavaOclSequence<OclAny>(reason, ((SequenceType) type)
+									.getElementType());
+				}
+
+				else if (type instanceof SetType) {
+					result =
+							(T) new JavaOclSet<OclAny>(reason, ((SetType) type)
+									.getElementType());
+				}
 			}
 
-			else if (primitiveTypeKind.equals(PrimitiveTypeKind.REAL)) {
-				result = new JavaOclReal(reason);
+			/* Check if the given Type is an enumeration. */
+			else if (type instanceof Enumeration) {
+				result = (T) new JavaOclEnumLiteral(reason);
 			}
 
-			else if (primitiveTypeKind.equals(PrimitiveTypeKind.STRING)) {
-				result = new JavaOclString(reason);
+			/* If no result has been created yet, create a JavaOclObject. */
+			if (result == null) {
+				result = (T) new JavaOclModelInstanceObject(reason, type);
 			}
 
-			else if (primitiveTypeKind.equals(PrimitiveTypeKind.VOID)) {
-				result = JavaOclVoid.INSTANCE;
-			}
-
-			/* unknown primitive type */
-			else {
-				throw new IllegalArgumentException("Primitive type " + type
-						+ " is unknown.");
-			}
+			/*
+			 * Cache the result, so that createOclAny() can obtain the correct OclAny
+			 * for an IModelInstanceElement.
+			 */
+			cachedUndefinedOrInvalid.put(result.getModelInstanceElement(), result);
 		}
-
-		/* collection type */
-		else if (type instanceof CollectionType) {
-
-			if (type instanceof BagType) {
-				result =
-						new JavaOclBag<OclAny>(reason, ((BagType) type).getElementType());
-			}
-
-			else if (type instanceof OrderedSetType) {
-				result =
-						new JavaOclOrderedSet<OclAny>(reason, ((OrderedSetType) type)
-								.getElementType());
-			}
-
-			else if (type instanceof SequenceType) {
-				result =
-						new JavaOclSequence<OclAny>(reason, ((SequenceType) type)
-								.getElementType());
-			}
-
-			else if (type instanceof SetType) {
-				result =
-						new JavaOclSet<OclAny>(reason, ((SetType) type).getElementType());
-			}
-		}
-
-		/* Check if the given Type is an enumeration. */
-		else if (type instanceof Enumeration) {
-			result = new JavaOclEnumLiteral(reason);
-		}
-
-		/* If no result has been created yet, create a JavaOclObject. */
-		if (result == null) {
-			result = new JavaOclModelInstanceObject(reason, type);
-		}
-
-		/*
-		 * Cache the result, so that createOclAny() can obtain the correct OclAny
-		 * for an IModelInstanceElement.
-		 */
-		cachedUndefinedOrInvalid.put(result.getModelInstanceElement(), result);
-
+		
 		return result;
 	}
 
@@ -885,9 +916,6 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 					return createOclInvalid(TypeConstants.SET(type), invalidReason);
 				}
 			};
-
-		// if (type == null)
-		// result = (T) new JavaOclModelInstanceObject(invalidReason, type);
 
 		else {
 

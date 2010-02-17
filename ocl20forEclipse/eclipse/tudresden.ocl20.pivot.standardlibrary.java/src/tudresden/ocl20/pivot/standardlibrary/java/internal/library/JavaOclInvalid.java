@@ -9,7 +9,6 @@ import tudresden.ocl20.pivot.essentialocl.types.TypesFactory;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceInvalid;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.base.TypeConstants;
-import tudresden.ocl20.pivot.pivotmodel.Operation;
 import tudresden.ocl20.pivot.standardlibrary.java.factory.JavaStandardLibraryFactory;
 
 /**
@@ -56,21 +55,8 @@ public class JavaOclInvalid extends JavaOclAny implements OclInvalid {
 	 */
 	public <T extends OclAny> OclSet<T> asSet() {
 
-		return JavaStandardLibraryFactory.INSTANCE.createOclInvalid(
-				TypeConstants
-						.SET(TypesFactory.INSTANCE.createInvalidType()),
-				invalidReason);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclAny#
-	 * getInvalidReason()
-	 */
-	public Throwable getInvalidReason() {
-
-		return invalidReason;
+		return JavaStandardLibraryFactory.INSTANCE.createOclInvalid(TypeConstants
+				.SET(TypesFactory.INSTANCE.createInvalidType()), invalidReason);
 	}
 
 	/*
@@ -87,31 +73,6 @@ public class JavaOclInvalid extends JavaOclAny implements OclInvalid {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclAny#
-	 * getUndefinedReason()
-	 */
-	public String getUndefinedReason() {
-
-		return undefinedreason;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclAny#
-	 * invokeOperation(tudresden.ocl20.pivot.pivotmodel.Operation,
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny[])
-	 */
-	// FIXME Michael: oclIsInvalid, oclIsUndefined and IsEqualTo
-	public OclAny invokeOperation(Operation operation, OclAny... parameters) {
-
-		return JavaStandardLibraryFactory.INSTANCE.createOclInvalid(operation
-				.getType(), invalidReason);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see
 	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny#isEqualTo(tudresden
 	 * .ocl20.pivot.essentialocl.standardlibrary.OclAny)
 	 */
@@ -121,17 +82,6 @@ public class JavaOclInvalid extends JavaOclAny implements OclInvalid {
 			return JavaOclBoolean.getInstance(true);
 		else
 			return JavaOclBoolean.getInstance(false);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclAny#
-	 * isNotEqualTo(tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny)
-	 */
-	public OclBoolean isNotEqualTo(OclAny object2) {
-
-		return isEqualTo(object2).not();
 	}
 
 	/*

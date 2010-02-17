@@ -40,7 +40,7 @@ import java.util.Map;
 
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBoolean;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclLibraryObject;
+import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSet;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclType;
 import tudresden.ocl20.pivot.modelbus.modelinstance.exception.AsTypeCastException;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
@@ -286,7 +286,9 @@ public abstract class JavaOclAny implements OclAny {
 				result = (T) JavaStandardLibraryFactory.INSTANCE.createOclAny(castedTo);
 
 			} catch (AsTypeCastException e) {
-				setInvalid(e);
+				result =
+						JavaStandardLibraryFactory.INSTANCE.createOclInvalid(
+								type.getType(), e);
 			}
 		}
 
@@ -304,14 +306,10 @@ public abstract class JavaOclAny implements OclAny {
 
 		OclBoolean result = null;
 
-		result =
-				checkInvalid(TypeConstants.BOOLEAN,
-						this, typespec);
+		result = checkInvalid(TypeConstants.BOOLEAN, this, typespec);
 
 		if (result == null)
-			result =
-					checkUndefined("oclIsKindOf",
-							TypeConstants.BOOLEAN, this);
+			result = checkUndefined("oclIsKindOf", TypeConstants.BOOLEAN, this);
 
 		if (result == null) {
 
@@ -332,14 +330,10 @@ public abstract class JavaOclAny implements OclAny {
 
 		OclBoolean result = null;
 
-		result =
-				checkInvalid(TypeConstants.BOOLEAN,
-						this, typespec);
+		result = checkInvalid(TypeConstants.BOOLEAN, this, typespec);
 
 		if (result == null)
-			result =
-					checkUndefined("oclIsTypeOf",
-							TypeConstants.BOOLEAN, this);
+			result = checkUndefined("oclIsTypeOf", TypeConstants.BOOLEAN, this);
 
 		if (result == null) {
 
@@ -360,23 +354,20 @@ public abstract class JavaOclAny implements OclAny {
 		return imiElement;
 	}
 
-	// TODO Michael: Fix JavaDoc
 	/**
-	 * This methods checks for all given {@link OclAny}s if they are either
-	 * invalid or undefined. If one of them is, an {@link InvalidException} or
-	 * {@link UndefinedException} is thrown. The direct caller (a method of the
-	 * standard library) should not catch these exceptions. The
-	 * {@link OclLibraryObject#invokeOperation(tudresden.ocl20.pivot.pivotmodel.Operation, OclAny...)
-	 * invokeOperation} method of {@link OclLibraryObject} will do that and will
-	 * generate an appropriate return type (since OclInvalid and OclVoid conform
-	 * to every other type except each other).
+	 * This methods checks for all given {@link OclAny}s whether they are invalid.
+	 * If one of them is, the typed <code>invalid</code> value is returned based
+	 * on the given return {@link Type}.
 	 * 
+	 * @param <T>
+	 *          a concrete subclass of {@link OclAny}
+	 * @param returnType
+	 *          the {@link Type} of the returned <code>invalid</code> value
 	 * @param objects
-	 *          the {@link OclAny}s to check whether they are invalid or undefined
-	 * @throws UndefinedOrInvalidException
-	 *           a concrete sub-class ({@link InvalidException} or
-	 *           {@link UndefinedException}) to indicate that one element was
-	 *           invalid or undefined
+	 *          the {@link OclAny}s to check whether they are invalid
+	 * @return the typed <code>invalid</code> if one of the given objects is
+	 *         <code>invalid</code>, or <code>null</code> (the Java
+	 *         <code>null</code>) if there is no given <code>invalid</code> value
 	 */
 	protected <T extends OclAny> T checkInvalid(Type returnType,
 			OclAny... objects) {
@@ -396,6 +387,29 @@ public abstract class JavaOclAny implements OclAny {
 		return result;
 	}
 
+	/**
+	 * Checks for the given object and arguments of a method call whether the
+	 * values are undefined/null. If so, the appropriately typed
+	 * <code>undefined</code> value is returned.
+	 * 
+	 * @param <T>
+	 *          a concrete subclass of {@link OclAny}
+	 * @param methodName
+	 *          the name of the method that needs to be checked for undefined/null
+	 *          values; the method's name is used in the error message of the
+	 *          returned <code>undefined</code> value
+	 * @param returnType
+	 *          the {@link Type} of the returned <code>undefined</code> value
+	 * @param object
+	 *          the object on which the method is called
+	 * @param args
+	 *          the arguments of the method that should also be checked for
+	 *          <code>undefined</code> values
+	 * @return the typed <code>undefined</code> value if there is a given
+	 *         <code>undefined</code> value or <code>null</code> (the Java
+	 *         <code>null</code>) if there is no given <code>undefined</code>
+	 *         value.
+	 */
 	protected <T extends OclAny> T checkUndefined(String methodName,
 			Type returnType, OclAny object, OclAny... args) {
 
@@ -452,14 +466,27 @@ public abstract class JavaOclAny implements OclAny {
 		return result;
 	}
 
-	@SuppressWarnings("unchecked")
-	protected <T extends OclAny> T checkAsSet(Type genericType) {
+	/**
+	 * The method {@link OclAny#asSet()} is used in implicit conversions. Since
+	 * <code>undefined</code> is allowed to be a source of collection operations,
+	 * this method checks whether this object is <code>undefined</code> and if so,
+	 * it returns an empty {@link OclSet}.
+	 * 
+	 * @param <T>
+	 *          a subclass of {@link OclAny} that represents the generic type of
+	 *          the {@link OclSet}
+	 * @param genericType
+	 *          the {@link Type} of the element in question
+	 * @return an empty {@link OclSet} if this is <code>undefined</code> or
+	 *         <code>null</code> if this is defined
+	 */
+	protected <T extends OclAny> OclSet<T> checkAsSet(Type genericType) {
 
-		T result = null;
+		OclSet<T> result = null;
 
 		if (this.undefinedreason != null)
 			result =
-					(T) JavaStandardLibraryFactory.INSTANCE.createOclSet(
+					JavaStandardLibraryFactory.INSTANCE.createOclSet(
 							new HashSet<Object>(), genericType);
 
 		return result;
@@ -574,7 +601,7 @@ public abstract class JavaOclAny implements OclAny {
 	 *           call is ambiguous based on the parameter types, or if methodName
 	 *           is null.
 	 */
-	private Method findMethod(String methodName,
+	protected Method findMethod(String methodName,
 			Class<? extends OclAny> sourceType,
 			Class<? extends OclAny>... parameterTypes) throws NoSuchMethodException {
 
@@ -644,11 +671,4 @@ public abstract class JavaOclAny implements OclAny {
 
 		return result;
 	}
-
-	protected void setInvalid(Throwable t) {
-
-		invalidReason = t;
-		imiElement = IModelInstanceInvalid.INSTANCE;
-	}
-
 }

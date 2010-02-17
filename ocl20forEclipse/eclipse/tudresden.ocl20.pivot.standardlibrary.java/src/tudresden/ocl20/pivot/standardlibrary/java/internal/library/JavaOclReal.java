@@ -532,12 +532,12 @@ public class JavaOclReal extends JavaOclLibraryObject implements OclReal,
 
 		result = checkInvalid(TypeConstants.SET(TypeConstants.REAL), this);
 
+		if (result == null)
+			result = checkAsSet(TypeConstants.REAL);
+
 		if (result == null) {
 			Set<IModelInstanceElement> imiSet = new HashSet<IModelInstanceElement>();
-			// FIXME Michael: null can be casted to empty set?
-			if (this.undefinedreason == null)
-				imiSet.add(getModelInstanceReal());
-
+			imiSet.add(getModelInstanceElement());
 			result =
 					JavaStandardLibraryFactory.INSTANCE.createOclSet(imiSet,
 							TypeConstants.REAL);
@@ -561,11 +561,9 @@ public class JavaOclReal extends JavaOclLibraryObject implements OclReal,
 			result = add((OclReal) that);
 
 		} catch (ClassCastException e) {
-
-			// FIXME Michael: What to do with multiple types?
 			result =
-					JavaStandardLibraryFactory.INSTANCE.createOclInvalid(that
-							.getModelInstanceElement().getTypes().iterator().next(), e);
+					JavaStandardLibraryFactory.INSTANCE.createOclInvalid(
+							TypeConstants.REAL, e);
 		}
 
 		return result;

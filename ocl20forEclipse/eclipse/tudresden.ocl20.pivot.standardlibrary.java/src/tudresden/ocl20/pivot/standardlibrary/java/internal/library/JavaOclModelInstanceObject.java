@@ -30,6 +30,7 @@
  */
 package tudresden.ocl20.pivot.standardlibrary.java.internal.library;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
@@ -60,7 +61,7 @@ import tudresden.ocl20.pivot.standardlibrary.java.factory.JavaStandardLibraryFac
  * @author Michael Thiele
  */
 public class JavaOclModelInstanceObject extends JavaOclAny implements
-		OclModelInstanceObject {
+		OclModelInstanceObject, IAddableElement {
 
 	protected Type metaType;
 
@@ -248,11 +249,8 @@ public class JavaOclModelInstanceObject extends JavaOclAny implements
 
 		OclSet<OclModelInstanceObject> result;
 
-		result =
-				checkInvalid(TypeConstants
-						.SET(metaType), this);
+		result = checkInvalid(TypeConstants.SET(metaType), this);
 
-		// TODO Michael: use this method for other types
 		if (result == null)
 			result = checkAsSet(metaType);
 
@@ -290,12 +288,10 @@ public class JavaOclModelInstanceObject extends JavaOclAny implements
 							.getType(), this.getInvalidReason());
 		}
 
-		/* Else check if the source is undefined. */
-		// FIXME Michael: should rather be invalid
 		else if (this.oclIsUndefined().isTrue()) {
 			result =
-					JavaStandardLibraryFactory.INSTANCE.createOclUndefined(property
-							.getType(), this.getUndefinedReason());
+					JavaStandardLibraryFactory.INSTANCE.createOclInvalid(property
+							.getType(), new NullPointerException(this.getUndefinedReason()));
 		}
 
 		/* Else try to get the property. */
@@ -396,5 +392,90 @@ public class JavaOclModelInstanceObject extends JavaOclAny implements
 		result.append("]");
 
 		return result.toString();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.IAddableElement
+	 * #add(tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny)
+	 */
+	public OclAny add(OclAny that) {
+
+		/*
+		 * convention: any ModelInstanceElement that has an operation called "+",
+		 * "add" or "plus" is considered to be addable. Else return invalid.
+		 */
+		OclAny result;
+
+		result = checkInvalid(metaType, this, that);
+
+		if (result == null)
+			result = checkUndefined("+", metaType, this, that);
+
+		if (result == null) {
+			if (that.getModelInstanceElement().isKindOf(metaType)) {
+				result = findMethod("+", that);
+				if (result == null)
+					result = findMethod("add", that);
+				if (result == null)
+					result = findMethod("plus", that);
+				if (result == null)
+					// not found any matching method -> invalid
+					result =
+							JavaStandardLibraryFactory.INSTANCE.createOclInvalid(metaType,
+									new NoSuchMethodException(
+											"Cannot find operation +, add or plus on " + this));
+			}
+		}
+
+		return result;
+	}
+
+	@SuppressWarnings("unchecked")
+	private OclAny findMethod(String methodName, OclAny that) {
+
+		OclAny result = null;
+		try {
+			findMethod(methodName, this.getClass(), that.getClass());
+
+			/*
+			 * if no exception has been thrown, search for the operation in the
+			 * PivotModel
+			 */
+			Operation operation = null;
+			for (Type type : this.imiElement.getTypes()) {
+				for (Type argType : that.getModelInstanceElement().getTypes()) {
+					List<Type> argTypes = Arrays.asList(argType);
+					operation = type.lookupOperation(methodName, argTypes);
+					if (operation != null) {
+						break;
+					}
+				}
+			}
+			if (operation != null)
+				result = super.invokeOperation(operation, that);
+			else
+				result =
+						JavaStandardLibraryFactory.INSTANCE.createOclInvalid(metaType,
+								new NoSuchMethodException("Cannot find " + methodName + " on "
+										+ this));
+		} catch (NoSuchMethodException e) {
+			// ignore
+		}
+
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.IAddableElement
+	 * #getNeutralElement()
+	 */
+	public OclAny getNeutralElement() {
+
+		// FIXME Michael: how to get an instance of an unknown neutral element?
+		return null;
 	}
 }

@@ -177,6 +177,21 @@ public interface IStandardLibraryFactory {
 			Type genericType);
 
 	/**
+	 * Creates an {@link OclCollection} for the given
+	 * {@link IModelInstanceCollection}.
+	 * 
+	 * @param imiCollection
+	 *          the {@link IModelInstanceCollection} to wrap
+	 * @param genericType
+	 *          the generic {@link Type} of the {@link OclCollection}
+	 * @return an {@link OclCollection} for the given
+	 *         {@link IModelInstanceCollection}
+	 */
+	OclCollection<OclAny> createOclCollection(
+			IModelInstanceCollection<IModelInstanceElement> imiCollection,
+			Type genericType);
+
+	/**
 	 * <p>
 	 * Creates a new {@link OclEnumLiteral} instance for a given
 	 * {@link IModelInstanceEnumerationLiteral}.
@@ -456,7 +471,7 @@ public interface IStandardLibraryFactory {
 	 *          The reason why this {@link OclAny} is undefined.
 	 * @return The created undefined {@link OclAny}.
 	 */
-	OclAny createOclUndefined(final Type type, final String reason);
+	public <T extends OclAny> T createOclUndefined(final Type type, final String reason);
 
 	/**
 	 * <p>

@@ -92,15 +92,10 @@ public class JavaOclString extends JavaOclLibraryObject implements OclString {
 
 		OclString result = null;
 
-		result =
-				checkInvalid(TypeConstants.STRING,
-						this, aString);
+		result = checkInvalid(TypeConstants.STRING, this, aString);
 
 		if (result == null)
-			result =
-					checkUndefined("concat",
-							TypeConstants.STRING, this,
-							aString);
+			result = checkUndefined("concat", TypeConstants.STRING, this, aString);
 
 		if (result == null) {
 			StringBuilder concat = new StringBuilder();
@@ -124,14 +119,10 @@ public class JavaOclString extends JavaOclLibraryObject implements OclString {
 
 		OclInteger result = null;
 
-		result =
-				checkInvalid(TypeConstants.INTEGER,
-						this);
+		result = checkInvalid(TypeConstants.INTEGER, this);
 
 		if (result == null)
-			result =
-					checkUndefined("size",
-							TypeConstants.INTEGER, this);
+			result = checkUndefined("size", TypeConstants.INTEGER, this);
 
 		if (result == null) {
 			/* Else compute the result. */
@@ -152,15 +143,11 @@ public class JavaOclString extends JavaOclLibraryObject implements OclString {
 
 		OclString result = null;
 
-		result =
-				checkInvalid(TypeConstants.STRING,
-						this, lower, upper);
+		result = checkInvalid(TypeConstants.STRING, this, lower, upper);
 
 		if (result == null)
 			result =
-					checkUndefined("substring",
-							TypeConstants.STRING, this,
-							lower, upper);
+					checkUndefined("substring", TypeConstants.STRING, this, lower, upper);
 
 		if (result == null) {
 			int intLower =
@@ -198,14 +185,10 @@ public class JavaOclString extends JavaOclLibraryObject implements OclString {
 
 		OclInteger result = null;
 
-		result =
-				checkInvalid(TypeConstants.INTEGER,
-						this);
+		result = checkInvalid(TypeConstants.INTEGER, this);
 
 		if (result == null)
-			result =
-					checkUndefined("toInteger",
-							TypeConstants.INTEGER, this);
+			result = checkUndefined("toInteger", TypeConstants.INTEGER, this);
 
 		if (result == null) {
 			/* Else compute the result. */
@@ -234,13 +217,10 @@ public class JavaOclString extends JavaOclLibraryObject implements OclString {
 
 		OclReal result = null;
 
-		result =
-				checkInvalid(TypeConstants.REAL, this);
+		result = checkInvalid(TypeConstants.REAL, this);
 
 		if (result == null)
-			result =
-					checkUndefined("toReal",
-							TypeConstants.REAL, this);
+			result = checkUndefined("toReal", TypeConstants.REAL, this);
 
 		if (result == null) {
 			/* Else compute the result. */
@@ -301,19 +281,10 @@ public class JavaOclString extends JavaOclLibraryObject implements OclString {
 
 		OclSet<T> result = null;
 
-		result =
-				checkInvalid(
-						TypeConstants
-								.SET(TypeConstants.STRING),
-						this);
+		result = checkInvalid(TypeConstants.SET(TypeConstants.STRING), this);
 
 		if (result == null)
-			result =
-					checkUndefined(
-							"asSet",
-							TypeConstants
-									.SET(TypeConstants.STRING),
-							this);
+			result = checkAsSet(TypeConstants.STRING);
 
 		if (result == null) {
 			Set<IModelInstanceElement> imiSet = new HashSet<IModelInstanceElement>();

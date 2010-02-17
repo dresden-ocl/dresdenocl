@@ -87,7 +87,7 @@ public abstract class JavaOclCollection<T extends OclAny> extends
 		while (iter.hasNext().isTrue()) {
 			T element = iter.next();
 
-			if (element.oclIsInvalid().isTrue()) {
+			if (element.getInvalidReason() != null) {
 				this.invalidReason =
 						new RuntimeException(
 								"Cannot create OclCollection with an invalid element. Reason: ",
@@ -133,7 +133,7 @@ public abstract class JavaOclCollection<T extends OclAny> extends
 		result = checkInvalid(TypeConstants.SET(genericType), this);
 
 		if (result == null)
-			result = checkUndefined("asSet", TypeConstants.SET(genericType), this);
+			result = checkAsSet(genericType);
 
 		if (result == null) {
 			IModelInstanceCollection<IModelInstanceElement> imiCollectionResult =
@@ -152,6 +152,7 @@ public abstract class JavaOclCollection<T extends OclAny> extends
 	 * @see
 	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection#asBag()
 	 */
+	// FIXME Michael: treat like asSet() for undefined values?
 	public OclBag<T> asBag() {
 
 		OclBag<T> result = null;
@@ -539,7 +540,6 @@ public abstract class JavaOclCollection<T extends OclAny> extends
 
 		T result = null;
 
-		// FIXME Michael: Cannot guaranty return type T; use OclReal in the meantime
 		result = checkInvalid(genericType, this);
 
 		if (result == null)

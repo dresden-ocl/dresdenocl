@@ -132,7 +132,7 @@ public final class TypeConstants {
 	 * {@link CollectionKind#BAG}.
 	 */
 	public static final CollectionType BAG =
-			TypesFactory.INSTANCE.createCollectionType();
+			TypesFactory.INSTANCE.createBagType();
 
 	static {
 		BAG.setKind(CollectionKind.BAG);
@@ -150,7 +150,7 @@ public final class TypeConstants {
 	 */
 	public static final CollectionType BAG(Type genericType) {
 
-		CollectionType returnType = TypesFactory.INSTANCE.createCollectionType();
+		CollectionType returnType = TypesFactory.INSTANCE.createBagType();
 
 		returnType.setKind(CollectionKind.BAG);
 		returnType.setElementType(genericType);
@@ -167,7 +167,7 @@ public final class TypeConstants {
 	 * {@link CollectionKind#SEQUENCE}.
 	 */
 	public static final CollectionType SEQUENCE =
-			TypesFactory.INSTANCE.createCollectionType();
+			TypesFactory.INSTANCE.createSequenceType();
 
 	static {
 		SEQUENCE.setKind(CollectionKind.SEQUENCE);
@@ -187,7 +187,7 @@ public final class TypeConstants {
 	 */
 	public static final CollectionType SEQUENCE(Type genericType) {
 
-		CollectionType returnType = TypesFactory.INSTANCE.createCollectionType();
+		CollectionType returnType = TypesFactory.INSTANCE.createSequenceType();
 
 		returnType.setKind(CollectionKind.SEQUENCE);
 		returnType.setElementType(genericType);
@@ -204,7 +204,7 @@ public final class TypeConstants {
 	 * {@link CollectionKind#SET}.
 	 */
 	public static final CollectionType SET =
-			TypesFactory.INSTANCE.createCollectionType();
+			TypesFactory.INSTANCE.createSetType();
 
 	static {
 		SET.setKind(CollectionKind.SET);
@@ -222,7 +222,7 @@ public final class TypeConstants {
 	 */
 	public static final CollectionType SET(Type genericType) {
 
-		CollectionType returnType = TypesFactory.INSTANCE.createCollectionType();
+		CollectionType returnType = TypesFactory.INSTANCE.createSetType();
 
 		returnType.setKind(CollectionKind.SET);
 		returnType.setElementType(genericType);
@@ -239,7 +239,7 @@ public final class TypeConstants {
 	 * {@link CollectionKind#ORDERED_SET}.
 	 */
 	public static final CollectionType ORDERED_SET =
-			TypesFactory.INSTANCE.createCollectionType();
+			TypesFactory.INSTANCE.createOrderedSetType();
 
 	static {
 		ORDERED_SET.setKind(CollectionKind.ORDERED_SET);
@@ -259,7 +259,7 @@ public final class TypeConstants {
 	 */
 	public static final CollectionType ORDERED_SET(Type genericType) {
 
-		CollectionType returnType = TypesFactory.INSTANCE.createCollectionType();
+		CollectionType returnType = TypesFactory.INSTANCE.createOrderedSetType();
 
 		returnType.setKind(CollectionKind.ORDERED_SET);
 		returnType.setElementType(genericType);

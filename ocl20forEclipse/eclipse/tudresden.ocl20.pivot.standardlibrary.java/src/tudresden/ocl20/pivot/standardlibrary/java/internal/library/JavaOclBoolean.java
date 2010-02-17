@@ -141,14 +141,10 @@ public class JavaOclBoolean extends JavaOclLibraryObject implements OclBoolean {
 		OclBoolean result = null;
 
 		// invalid values should be passed on in any case
-		result =
-				checkInvalid(TypeConstants.BOOLEAN,
-						this, aBoolean);
+		result = checkInvalid(TypeConstants.BOOLEAN, this, aBoolean);
 
 		if (result == null)
-			result =
-					checkUndefined("and",
-							TypeConstants.BOOLEAN, this);
+			result = checkUndefined("and", TypeConstants.BOOLEAN, this);
 
 		if (result == null) {
 			if (!this.isTrue()) {
@@ -156,10 +152,7 @@ public class JavaOclBoolean extends JavaOclLibraryObject implements OclBoolean {
 			}
 
 			else {
-				result =
-						checkUndefined("and",
-								TypeConstants.BOOLEAN, this,
-								aBoolean);
+				result = checkUndefined("and", TypeConstants.BOOLEAN, this, aBoolean);
 
 				if (result == null) {
 					if (!this.isTrue() || !aBoolean.isTrue()) {
@@ -215,26 +208,19 @@ public class JavaOclBoolean extends JavaOclLibraryObject implements OclBoolean {
 
 		OclBoolean result = null;
 
-		result =
-				checkInvalid(TypeConstants.BOOLEAN,
-						this, aBoolean);
+		result = checkInvalid(TypeConstants.BOOLEAN, this, aBoolean);
 
 		if (result == null) {
 
 			// see standard, p.16: anything IMPLIES True is True
-			result =
-					checkUndefined("implies",
-							TypeConstants.BOOLEAN, null,
-							aBoolean);
+			result = checkUndefined("implies", TypeConstants.BOOLEAN, null, aBoolean);
 			if (result == null) {
 
 				if (aBoolean.isTrue())
 					result = aBoolean;
 
 				else {
-					result =
-							checkUndefined("implies",
-									TypeConstants.BOOLEAN, this);
+					result = checkUndefined("implies", TypeConstants.BOOLEAN, this);
 					if (result == null)
 						result = this.not().or(this.and(aBoolean));
 				}
@@ -262,14 +248,10 @@ public class JavaOclBoolean extends JavaOclLibraryObject implements OclBoolean {
 
 		OclBoolean result = null;
 
-		result =
-				checkInvalid(TypeConstants.BOOLEAN,
-						this);
+		result = checkInvalid(TypeConstants.BOOLEAN, this);
 
 		if (result == null)
-			result =
-					checkUndefined("not",
-							TypeConstants.BOOLEAN, this);
+			result = checkUndefined("not", TypeConstants.BOOLEAN, this);
 
 		if (result == null) {
 
@@ -303,25 +285,18 @@ public class JavaOclBoolean extends JavaOclLibraryObject implements OclBoolean {
 
 		OclBoolean result = null;
 
-		result =
-				checkInvalid(TypeConstants.BOOLEAN,
-						this, aBoolean);
+		result = checkInvalid(TypeConstants.BOOLEAN, this, aBoolean);
 
 		// see standard, p.16: True OR anything is True
 		if (result == null)
-			result =
-					checkUndefined("or",
-							TypeConstants.BOOLEAN, this);
+			result = checkUndefined("or", TypeConstants.BOOLEAN, this);
 
 		if (result == null && this.isTrue()) {
 			result = TRUE;
 		}
 		else {
 
-			result =
-					checkUndefined("or",
-							TypeConstants.BOOLEAN, this,
-							aBoolean);
+			result = checkUndefined("or", TypeConstants.BOOLEAN, this, aBoolean);
 
 			if (result == null) {
 				if (this.isTrue() || aBoolean.isTrue()) {
@@ -393,21 +368,15 @@ public class JavaOclBoolean extends JavaOclLibraryObject implements OclBoolean {
 
 		OclSet<T> result = null;
 
-		result =
-				checkInvalid(
-						TypeConstants
-								.SET(TypeConstants.BOOLEAN),
-						this);
+		result = checkInvalid(TypeConstants.SET(TypeConstants.BOOLEAN), this);
+
+		if (result == null)
+			result = checkAsSet(TypeConstants.BOOLEAN);
 
 		if (result == null) {
 
 			Set<IModelInstanceElement> imiSet = new HashSet<IModelInstanceElement>();
-
-			// FIXME Michael: see standard, p.138: implicit conversion of null is
-			// possible, so result in empty set?
-			if (undefinedreason == null)
-				imiSet.add(getModelInstanceBoolean());
-
+			imiSet.add(getModelInstanceBoolean());
 			result =
 					JavaStandardLibraryFactory.INSTANCE.createOclSet(imiSet,
 							TypeConstants.BOOLEAN);

@@ -19,19 +19,31 @@ import tudresden.ocl20.pivot.standardlibrary.java.factory.JavaStandardLibraryFac
 public class JavaOclIterator<T extends OclAny> implements OclIterator<T> {
 
 	protected Iterator<IModelInstanceElement> iterator;
+	
+	protected boolean isInvalid;
+	
 
 	public JavaOclIterator(OclCollection<? extends OclAny> collection) {
-
+		
 		this.iterator =
 				collection.getModelInstanceCollection().getCollection().iterator();
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclIterator#hasNext()
+	 */
 	public OclBoolean hasNext() {
 
 		return JavaStandardLibraryFactory.INSTANCE.createOclBoolean(iterator
 				.hasNext());
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclIterator#next()
+	 */
 	@SuppressWarnings("unchecked")
 	public T next() {
 

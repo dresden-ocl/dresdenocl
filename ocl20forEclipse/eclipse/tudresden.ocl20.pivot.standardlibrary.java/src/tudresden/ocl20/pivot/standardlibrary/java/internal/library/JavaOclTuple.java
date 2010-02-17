@@ -160,14 +160,10 @@ public class JavaOclTuple extends JavaOclLibraryObject implements OclTuple {
 		OclSet<T> result;
 		TupleType tupleType = TypesFactory.INSTANCE.createTupleType();
 
-		result =
-				checkInvalid(TypeConstants
-						.SET(tupleType), this);
+		result = checkInvalid(TypeConstants.SET(tupleType), this);
 
 		if (result == null)
-			result =
-					checkUndefined("asSet", TypeConstants
-							.SET(tupleType), this);
+			result = checkAsSet(tupleType);
 
 		if (result == null) {
 			Set<IModelInstanceElement> imiSet = new HashSet<IModelInstanceElement>();

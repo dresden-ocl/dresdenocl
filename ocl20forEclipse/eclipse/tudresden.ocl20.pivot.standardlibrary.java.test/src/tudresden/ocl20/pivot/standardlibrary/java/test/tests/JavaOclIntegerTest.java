@@ -8,6 +8,7 @@ import org.junit.Test;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclReal;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.factory.IStandardLibraryFactory;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.base.TypeConstants;
 
 // FIXME Michael: Add undefined and invalid tests
 public class JavaOclIntegerTest {
@@ -34,6 +35,14 @@ public class JavaOclIntegerTest {
 
 	private final OclReal real0_25 = myStandardLibraryFactory.createOclReal(0.25);
 
+	private final OclInteger undefined =
+			(OclInteger) myStandardLibraryFactory.createOclUndefined(
+					TypeConstants.INTEGER, "undefined integer");
+
+	private final OclInteger invalid =
+			(OclInteger) myStandardLibraryFactory.createOclInvalid(
+					TypeConstants.INTEGER, new RuntimeException("invalid integer"));
+
 	@Test
 	public void testAdd() {
 
@@ -41,11 +50,6 @@ public class JavaOclIntegerTest {
 		assertTrue(integer99.add(integer1).isEqualTo(integer100).isTrue());
 		assertTrue(integer100.add(integer_1).isEqualTo(integer99).isTrue());
 		assertFalse(integer99.add(integer_1).isEqualTo(integer100).isTrue());
-
-		// TestPerformer.getInstance().testUndefinedAndInvalid(integer0,
-		// integer0.getModelInstanceInteger().getTypes().iterator().next(), "add",
-		// integer0);
-
 	}
 
 	@Test
@@ -54,6 +58,7 @@ public class JavaOclIntegerTest {
 		assertTrue(integer100.div(integer100).isEqualTo(integer1).isTrue());
 		assertTrue(integer100.div(integer99).isEqualTo(integer1).isTrue());
 		assertTrue(integer99.div(integer100).isEqualTo(integer0).isTrue());
+
 		assertTrue(integer1.div(integer0).oclIsInvalid().isTrue());
 	}
 
@@ -64,7 +69,9 @@ public class JavaOclIntegerTest {
 		assertTrue(integer100.divide(integer1).isEqualTo(integer100).isTrue());
 		assertTrue(integer100.divide(integer400).isEqualTo(real0_25).isTrue());
 		assertTrue(integer100.divide(integer400).isEqualTo(real0_25).isTrue());
+
 		assertTrue(integer100.divide(integer0).oclIsInvalid().isTrue());
+
 	}
 
 	@Test
@@ -97,6 +104,7 @@ public class JavaOclIntegerTest {
 		assertTrue(integer100.mod(integer99).isEqualTo(integer1).isTrue());
 		assertTrue(integer400.mod(integer99).isEqualTo(integer4).isTrue());
 		assertTrue(integer1.mod(integer4).isEqualTo(integer1).isTrue());
+
 		assertTrue(integer4.mod(integer0).oclIsInvalid().isTrue());
 	}
 

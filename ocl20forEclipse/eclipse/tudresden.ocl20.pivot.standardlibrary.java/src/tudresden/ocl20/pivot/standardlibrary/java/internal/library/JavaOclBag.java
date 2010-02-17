@@ -153,14 +153,11 @@ public class JavaOclBag<T extends OclAny> extends JavaOclUnsortedCollection<T>
 
 		OclBag<T> result = null;
 
-		result =
-				checkInvalid(TypeConstants
-						.BAG(genericType), this, that);
+		result = checkInvalid(TypeConstants.BAG(genericType), this, that);
 
 		if (result == null)
 			result =
-					checkUndefined("excluding", TypeConstants
-							.BAG(genericType), this);
+					checkUndefined("excluding", TypeConstants.BAG(genericType), this);
 
 		if (result == null) {
 			/* Else try to remove the given Object. */
@@ -193,48 +190,50 @@ public class JavaOclBag<T extends OclAny> extends JavaOclUnsortedCollection<T>
 
 		OclBag<T2> result = null;
 
-		result =
-				checkInvalid(TypeConstants
-						.BAG(genericType), this);
+		result = checkInvalid(TypeConstants.BAG(genericType), this);
 
 		if (result == null)
-			result =
-					checkUndefined("flatten", TypeConstants
-							.BAG(genericType), this);
+			result = checkUndefined("flatten", TypeConstants.BAG(genericType), this);
 
 		if (result == null) {
-			List<IModelInstanceElement> flat = new ArrayList<IModelInstanceElement>();
 
-			/* Iterate over this bag. */
-			for (IModelInstanceElement element : getModelInstanceCollection()
-					.getCollection()) {
-
-				/*
-				 * nested collections are flattened, i.e. their elements are added to
-				 * the result
-				 */
-				if (element instanceof IModelInstanceCollection<?>) {
-					IModelInstanceCollection<IModelInstanceElement> collection;
-					collection =
-							((IModelInstanceCollection<IModelInstanceElement>) element);
-
-					for (IModelInstanceElement collectionElement : collection
-							.getCollection()) {
-						flat.add(collectionElement);
-					}
-				}
-
-				/* other elements are simply added */
-				else {
-					flat.add(element);
-				}
-			}
+			List<IModelInstanceElement> flat =
+					flatRec(getModelInstanceCollection().getCollection());
 
 			result =
 					JavaStandardLibraryFactory.INSTANCE.createOclBag(flat, genericType);
 		}
 
 		return result;
+	}
+
+	private List<IModelInstanceElement> flatRec(
+			Collection<IModelInstanceElement> imiCollection) {
+
+		List<IModelInstanceElement> flat = new ArrayList<IModelInstanceElement>();
+		/* Iterate over this bag. */
+		for (IModelInstanceElement element : imiCollection) {
+
+			/*
+			 * nested collections are flattened, i.e. their elements are added to the
+			 * result
+			 */
+			if (element instanceof IModelInstanceCollection<?>) {
+				IModelInstanceCollection<IModelInstanceElement> collection;
+				collection =
+						((IModelInstanceCollection<IModelInstanceElement>) element);
+
+				final List<IModelInstanceElement> flattened = flatRec(collection.getCollection());
+				flat.addAll(flattened);
+			}
+
+			/* other elements are simply added */
+			else {
+				flat.add(element);
+			}
+		}
+
+		return flat;
 	}
 
 	/*
@@ -247,21 +246,17 @@ public class JavaOclBag<T extends OclAny> extends JavaOclUnsortedCollection<T>
 
 		OclBag<T> result = null;
 
-		result =
-				checkInvalid(TypeConstants
-						.BAG(genericType), this, anObject);
+		result = checkInvalid(TypeConstants.BAG(genericType), this, anObject);
 
 		if (result == null)
 			result =
-					checkUndefined("including", TypeConstants
-							.BAG(genericType), this);
+					checkUndefined("including", TypeConstants.BAG(genericType), this);
 
 		if (result == null) {
 			List<IModelInstanceElement> include =
 					new ArrayList<IModelInstanceElement>();
 
-			checkInvalid(TypeConstants
-					.BAG(genericType), this);
+			checkInvalid(TypeConstants.BAG(genericType), this);
 
 			include.addAll(getModelInstanceCollection().getCollection());
 			include.add(anObject.getModelInstanceElement());
@@ -283,14 +278,12 @@ public class JavaOclBag<T extends OclAny> extends JavaOclUnsortedCollection<T>
 
 		OclBag<T> result = null;
 
-		result =
-				checkInvalid(TypeConstants
-						.BAG(genericType), this, that);
+		result = checkInvalid(TypeConstants.BAG(genericType), this, that);
 
 		if (result == null)
 			result =
-					checkUndefined("intersection", TypeConstants
-							.BAG(genericType), this, that);
+					checkUndefined("intersection", TypeConstants.BAG(genericType), this,
+							that);
 
 		List<IModelInstanceElement> intersection =
 				new ArrayList<IModelInstanceElement>();
@@ -328,14 +321,11 @@ public class JavaOclBag<T extends OclAny> extends JavaOclUnsortedCollection<T>
 
 		OclBag<T> result = null;
 
-		result =
-				checkInvalid(TypeConstants
-						.BAG(genericType), this, that);
+		result = checkInvalid(TypeConstants.BAG(genericType), this, that);
 
 		if (result == null)
 			result =
-					checkUndefined("union", TypeConstants
-							.BAG(genericType), this, that);
+					checkUndefined("union", TypeConstants.BAG(genericType), this, that);
 
 		if (result == null) {
 			List<IModelInstanceElement> union =
