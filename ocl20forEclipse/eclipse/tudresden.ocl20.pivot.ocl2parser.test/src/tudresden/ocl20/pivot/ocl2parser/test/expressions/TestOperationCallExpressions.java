@@ -240,6 +240,35 @@ public class TestOperationCallExpressions {
 
 	/**
 	 * <p>
+	 * A test case to check that a OperationCallExpression is parsed
+	 * appropriately.
+	 * </p>
+	 */
+	@Test
+	public void testOperationCallExpressionPositive08() throws Exception {
+	
+		TestPerformer testPerformer;
+	
+		String modelFileName;
+		String oclFileName;
+	
+		oclFileName = "expressions/calls/operationPositive08.ocl";
+		modelFileName = "testmodel.uml";
+	
+		/* Try to get the TestPerformer. */
+		testPerformer =
+				TestPerformer
+						.getInstance(AllExpressionTests.META_MODEL_ID,
+								AllExpressionTests.MODEL_BUNDLE,
+								AllExpressionTests.MODEL_DIRECTORY);
+		testPerformer.setModel(modelFileName);
+	
+		/* Try to parse the constraint file. */
+		testPerformer.parseFile(oclFileName);
+	}
+
+	/**
+	 * <p>
 	 * A test case to check that a OperationCallExpression is not parsed
 	 * appropriately.
 	 * </p>

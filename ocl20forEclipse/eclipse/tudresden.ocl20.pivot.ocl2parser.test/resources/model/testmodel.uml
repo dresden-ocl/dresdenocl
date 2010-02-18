@@ -39,6 +39,9 @@
         <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_0BVjQc25Ed62LvZ-4azseA" value="1"/>
       </ownedAttribute>
       <ownedAttribute xmi:id="_119E8M9NEd6fXa3ug6sYeg" name="anEnumeration1" type="_eotpoM9KEd6fXa3ug6sYeg"/>
+      <ownedAttribute xmi:id="_LE9O0BypEd-EjePyA9Bg_Q" name="pre" isStatic="true">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      </ownedAttribute>
       <ownedOperation xmi:id="__dTN0NMrEd6S8rUf29aumQ" name="aStaticOperation" isStatic="true">
         <ownedParameter xmi:id="_FjFgUNMsEd6S8rUf29aumQ" direction="return">
           <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
@@ -47,6 +50,11 @@
       <ownedOperation xmi:id="_G5vUAM23Ed62LvZ-4azseA" name="addInteger">
         <ownedParameter xmi:id="_JjTXQM23Ed62LvZ-4azseA" name="anInt">
           <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation xmi:id="_BZRMoBypEd-EjePyA9Bg_Q" name="body">
+        <ownedParameter xmi:id="_Iixl8BypEd-EjePyA9Bg_Q" direction="return">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Boolean"/>
         </ownedParameter>
       </ownedOperation>
       <ownedOperation xmi:id="_4EmsgNMsEd6S8rUf29aumQ" name="doSomething">

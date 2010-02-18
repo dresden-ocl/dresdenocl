@@ -171,6 +171,33 @@ public class TestOclAny {
 
 	/**
 	 * <p>
+	 * A test case testing the method <code>OclAny.=()</code>.
+	 * </p>
+	 */
+	@Test
+	public void testEqualsPositive06() throws Exception {
+	
+		TestPerformer testPerformer;
+	
+		String modelFileName;
+		String oclFileName;
+	
+		oclFileName = "standardlibrary/oclany/equalsPositive06.ocl";
+		modelFileName = "testmodel.uml";
+	
+		/* Try to get the TestPerformer. */
+		testPerformer =
+				TestPerformer.getInstance(AllStandardLibraryTests.META_MODEL_ID,
+						AllStandardLibraryTests.MODEL_BUNDLE,
+						AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer.setModel(modelFileName);
+	
+		/* Try to parse the constraint file. */
+		testPerformer.parseFile(oclFileName);
+	}
+
+	/**
+	 * <p>
 	 * A test case testing the method <code>OclAny.<>()</code>.
 	 * </p>
 	 */
@@ -333,6 +360,33 @@ public class TestOclAny {
 
 	/**
 	 * <p>
+	 * A test case testing the method <code>OclAny.<>()</code>.
+	 * </p>
+	 */
+	@Test
+	public void testNotEqualsPositive07() throws Exception {
+	
+		TestPerformer testPerformer;
+	
+		String modelFileName;
+		String oclFileName;
+	
+		oclFileName = "standardlibrary/oclany/notequalsPositive07.ocl";
+		modelFileName = "testmodel.uml";
+	
+		/* Try to get the TestPerformer. */
+		testPerformer =
+				TestPerformer.getInstance(AllStandardLibraryTests.META_MODEL_ID,
+						AllStandardLibraryTests.MODEL_BUNDLE,
+						AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer.setModel(modelFileName);
+	
+		/* Try to parse the constraint file. */
+		testPerformer.parseFile(oclFileName);
+	}
+
+	/**
+	 * <p>
 	 * A test case testing the method <code>OclAny.oclAsType()</code>.
 	 * </p>
 	 */
@@ -408,6 +462,33 @@ public class TestOclAny {
 						AllStandardLibraryTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
+		/* Try to parse the constraint file. */
+		testPerformer.parseFile(oclFileName);
+	}
+
+	/**
+	 * <p>
+	 * A test case testing the method <code>OclAny.oclAsType()</code>.
+	 * </p>
+	 */
+	@Test
+	public void testOclAsTypePositive04() throws Exception {
+	
+		TestPerformer testPerformer;
+	
+		String modelFileName;
+		String oclFileName;
+	
+		oclFileName = "standardlibrary/oclany/asTypePositive04.ocl";
+		modelFileName = "testmodel.uml";
+	
+		/* Try to get the TestPerformer. */
+		testPerformer =
+				TestPerformer.getInstance(AllStandardLibraryTests.META_MODEL_ID,
+						AllStandardLibraryTests.MODEL_BUNDLE,
+						AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer.setModel(modelFileName);
+	
 		/* Try to parse the constraint file. */
 		testPerformer.parseFile(oclFileName);
 	}
@@ -495,6 +576,33 @@ public class TestOclAny {
 
 	/**
 	 * <p>
+	 * A test case testing the method <code>OclAny.oclIsInvalid()</code>.
+	 * </p>
+	 */
+	@Test
+	public void testOclIsInvalidPositive04() throws Exception {
+	
+		TestPerformer testPerformer;
+	
+		String modelFileName;
+		String oclFileName;
+	
+		oclFileName = "standardlibrary/oclany/isInvalidPositive04.ocl";
+		modelFileName = "testmodel.uml";
+	
+		/* Try to get the TestPerformer. */
+		testPerformer =
+				TestPerformer.getInstance(AllStandardLibraryTests.META_MODEL_ID,
+						AllStandardLibraryTests.MODEL_BUNDLE,
+						AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer.setModel(modelFileName);
+	
+		/* Try to parse the constraint file. */
+		testPerformer.parseFile(oclFileName);
+	}
+
+	/**
+	 * <p>
 	 * A test case testing the method <code>OclAny.oclIsKindOf(Type)</code>.
 	 * </p>
 	 */
@@ -576,6 +684,33 @@ public class TestOclAny {
 
 	/**
 	 * <p>
+	 * A test case testing the method <code>OclAny.oclIsKindOf(Type)</code>.
+	 * </p>
+	 */
+	@Test
+	public void testOclIsKindOfPositive04() throws Exception {
+	
+		TestPerformer testPerformer;
+	
+		String modelFileName;
+		String oclFileName;
+	
+		oclFileName = "standardlibrary/oclany/isKindOfPositive04.ocl";
+		modelFileName = "testmodel.uml";
+	
+		/* Try to get the TestPerformer. */
+		testPerformer =
+				TestPerformer.getInstance(AllStandardLibraryTests.META_MODEL_ID,
+						AllStandardLibraryTests.MODEL_BUNDLE,
+						AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer.setModel(modelFileName);
+	
+		/* Try to parse the constraint file. */
+		testPerformer.parseFile(oclFileName);
+	}
+
+	/**
+	 * <p>
 	 * A test case testing the method <code>OclAny.oclIsNew()</code>.
 	 * </p>
 	 */
@@ -651,6 +786,33 @@ public class TestOclAny {
 						AllStandardLibraryTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
+		/* Try to parse the constraint file. */
+		testPerformer.parseFile(oclFileName);
+	}
+
+	/**
+	 * <p>
+	 * A test case testing the method <code>OclAny.oclIsNew()</code>.
+	 * </p>
+	 */
+	@Test
+	public void testOclIsNewPositive04() throws Exception {
+	
+		TestPerformer testPerformer;
+	
+		String modelFileName;
+		String oclFileName;
+	
+		oclFileName = "standardlibrary/oclany/isNewPositive04.ocl";
+		modelFileName = "testmodel.uml";
+	
+		/* Try to get the TestPerformer. */
+		testPerformer =
+				TestPerformer.getInstance(AllStandardLibraryTests.META_MODEL_ID,
+						AllStandardLibraryTests.MODEL_BUNDLE,
+						AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer.setModel(modelFileName);
+	
 		/* Try to parse the constraint file. */
 		testPerformer.parseFile(oclFileName);
 	}
@@ -792,6 +954,33 @@ public class TestOclAny {
 
 	/**
 	 * <p>
+	 * A test case testing the method <code>OclAny.oclIsTypeOf(Type)</code>.
+	 * </p>
+	 */
+	@Test
+	public void testOclIsTypeOfPositive04() throws Exception {
+	
+		TestPerformer testPerformer;
+	
+		String modelFileName;
+		String oclFileName;
+	
+		oclFileName = "standardlibrary/oclany/isTypeOfPositive04.ocl";
+		modelFileName = "testmodel.uml";
+	
+		/* Try to get the TestPerformer. */
+		testPerformer =
+				TestPerformer.getInstance(AllStandardLibraryTests.META_MODEL_ID,
+						AllStandardLibraryTests.MODEL_BUNDLE,
+						AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer.setModel(modelFileName);
+	
+		/* Try to parse the constraint file. */
+		testPerformer.parseFile(oclFileName);
+	}
+
+	/**
+	 * <p>
 	 * A test case testing the method <code>OclAny.oclIsUndefined()</code>.
 	 * </p>
 	 */
@@ -873,18 +1062,72 @@ public class TestOclAny {
 
 	/**
 	 * <p>
+	 * A test case testing the method <code>OclAny.oclIsUndefined()</code>.
+	 * </p>
+	 */
+	@Test
+	public void testOclIsUndefinedPositive04() throws Exception {
+	
+		TestPerformer testPerformer;
+	
+		String modelFileName;
+		String oclFileName;
+	
+		oclFileName = "standardlibrary/oclany/isUndefinedPositive04.ocl";
+		modelFileName = "testmodel.uml";
+	
+		/* Try to get the TestPerformer. */
+		testPerformer =
+				TestPerformer.getInstance(AllStandardLibraryTests.META_MODEL_ID,
+						AllStandardLibraryTests.MODEL_BUNDLE,
+						AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer.setModel(modelFileName);
+	
+		/* Try to parse the constraint file. */
+		testPerformer.parseFile(oclFileName);
+	}
+
+	/**
+	 * <p>
 	 * A test case testing the method <code>OclAny.oclType()</code>.
 	 * </p>
 	 */
 	@Test
 	public void testOclTypePositive01() throws Exception {
+	
+		TestPerformer testPerformer;
+	
+		String modelFileName;
+		String oclFileName;
+	
+		oclFileName = "standardlibrary/oclany/typePositive01.ocl";
+		modelFileName = "testmodel.uml";
+	
+		/* Try to get the TestPerformer. */
+		testPerformer =
+				TestPerformer.getInstance(AllStandardLibraryTests.META_MODEL_ID,
+						AllStandardLibraryTests.MODEL_BUNDLE,
+						AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer.setModel(modelFileName);
+	
+		/* Try to parse the constraint file. */
+		testPerformer.parseFile(oclFileName);
+	}
+
+	/**
+	 * <p>
+	 * A test case testing the method <code>OclAny.oclType()</code>.
+	 * </p>
+	 */
+	@Test
+	public void testOclTypePositive02() throws Exception {
 
 		TestPerformer testPerformer;
 
 		String modelFileName;
 		String oclFileName;
 
-		oclFileName = "standardlibrary/oclany/typePositive01.ocl";
+		oclFileName = "standardlibrary/oclany/typePositive02.ocl";
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */

@@ -1,0 +1,7 @@
+package package1::package2
+
+-- Operations defined on OclAny should be call-able using self.
+context Type1
+inv: self.oclIsTypeOf(Type1)
+
+endpackage
