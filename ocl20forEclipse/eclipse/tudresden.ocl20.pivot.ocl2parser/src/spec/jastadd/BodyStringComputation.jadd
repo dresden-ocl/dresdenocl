@@ -1,0 +1,261 @@
+/*
+    Copyright (C) 2008  Nils (s0006383@inf.tu-dresden.de)
+
+    This file is part of the OCL parser of the Dresden OCL2 for Eclipse.
+
+    The OCL parser is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Lesser General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    The OCL parser is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Lesser General Public License for more details.
+
+    You should have received a copy of the GNU Lesser General Public License
+    along with the OCL parser.  If not, see <http://www.gnu.org/licenses/>.
+.
+*/
+
+public aspect BodyStringComputation {
+	abstract public String OclExpressionAS.computeBodyString();
+	
+	public String TupleLiteralExpAS.computeBodyString() {
+		String tupleVariables = new String();
+		int numberParts = getNumParts();
+		for(int i = 0; i < numberParts; i++) {
+			tupleVariables = tupleVariables + "," + getParts(i).computeBodyString();
+		}
+		
+		if (tupleVariables.length() != 0 ) tupleVariables = tupleVariables.substring(1, tupleVariables.length());
+		String result = new String();
+		result = "tuple {" + tupleVariables + "}";
+		return result;
+	}
+	
+	public String TupleLiteralPartAS.computeBodyString() {
+		String variableString = getVariable().computeBodyString();
+		String expressionString = getExpression().computeBodyString();
+		
+		return variableString + "=" + expressionString;
+	}
+	
+	abstract public String CollectionLiteralPartAS.computeBodyString();
+	
+	public String CollectionLiteralExpAS.computeBodyString() {
+		String name = getName().getValue();
+		
+		String partString = new String();
+		int numberCollectionLiteralPart = getNumCollectionLiteralPartAS();
+		for(int i = 0; i < numberCollectionLiteralPart; i++) {
+			partString = partString + "," + getCollectionLiteralPartAS(i).computeBodyString();
+		}
+		
+		if (partString.length() != 0) partString = partString.substring(1, partString.length());
+		
+		return name + "{" + partString + "}";
+	}
+	
+	public String CollectionRangeAS.computeBodyString() {
+		String firstExpressionString = getFirst().computeBodyString();
+		String lastExpressionString = getLast().computeBodyString();
+		
+		return firstExpressionString + ".." + lastExpressionString;
+	}
+	
+	public String CollectionItemAS.computeBodyString() {
+		return getItem().computeBodyString();
+	}
+	
+	public String BooleanLiteralExpAS.computeBodyString() {
+		return getValue().getValue();
+	}
+	
+	public String StringLiteralExpAS.computeBodyString() {
+		return getValue().getValue();
+	}
+	
+	public String IntegerLiteralExpAS.computeBodyString() {
+		return getValue().getValue();
+	}
+	
+	public String RealLiteralExpAS.computeBodyString() {
+		return getValue().getValue();
+	}
+	
+	public String LetExpAS.computeBodyString() {
+		String variableString = new String();
+		int numberVariable = getNumVariable();
+		for(int i = 0; i < numberVariable; i++) {
+			variableString = variableString + "," + getVariable(i).computeBodyString();
+		}
+		
+		variableString = variableString.substring(1, variableString.length());
+		
+		String expressionString = getIn().computeBodyString();
+		
+		return "let " + variableString + " in " + expressionString; 
+	}
+	
+	public String IfExpAS.computeBodyString() {
+		String conditionString = getCondition().computeBodyString();
+		String thenString = getThenExpression().computeBodyString();
+		String elseString = getElseExpression().computeBodyString();
+		
+		return "if " + conditionString + " then " + thenString + " else " + elseString;
+	}
+	
+	abstract public String CallExpAS.computeBodyString();
+	
+	public String CallExpAS.getSourceString() {
+		if (hasSource()) return getSource().computeBodyString();
+		return new String();
+	}
+	
+	public String LoopExpAS.getExpressionString() {
+		return getBody().computeBodyString();		
+	}
+	
+	public String IterateExpAS.computeBodyString() {
+		String sourceString = getSourceString();
+		String expressionString = getExpressionString();
+		
+		String iteratorString = getIterator().computeBodyString();
+		
+		String resultString = getResult().computeBodyString();
+		
+		return sourceString + " -> iterate (" + iteratorString + " ; " + resultString + " | " + expressionString + " )";  
+	}
+	
+	public String IteratorExpAS.computeBodyString() {
+		String sourceString = getSourceString();
+		String expressionString = getExpressionString();
+		
+		String iteratorString = new String();
+		int numberIterator = getNumIterators();
+		for(int i = 0; i < numberIterator; i++) {
+			iteratorString = iteratorString + " , " + getIterators(i).computeBodyString();
+		}
+		
+		if (iteratorString.length() != 0) iteratorString = iteratorString.substring(1, iteratorString.length());
+		
+		String operationString = getOperation().getValue();
+		
+		return sourceString + " -> " + operationString + " ( " + iteratorString + " | " +expressionString + ")";
+	}
+	
+	public String FeatureCallExpAS.getAtPreString() {
+		if (hasAtPre()) return getAtPre().getValue();
+		return new String();
+	}
+	
+	public String OperationCallExpAS.computeBodyString() {
+		String pathNameString = getName().computeBodyString();
+		
+		String argumentString = new String();
+		int numberArgument = getNumArgument();
+		for(int i = 0; i < numberArgument; i++) {
+			argumentString = argumentString + ", " + getArgument(i).computeBodyString();
+		}
+		
+		if (argumentString.length() != 0) argumentString = argumentString.substring(1, argumentString.length());
+		
+		String sourceString = getSourceString();
+		String atpreString = getAtPreString();
+		
+		if (sourceString.length() != 0) {
+			return sourceString + "." + pathNameString + atpreString + "(" + argumentString + ")";
+		}
+		
+		return pathNameString + atpreString + "(" + argumentString + ")";
+		
+	}
+	
+	public String PropertyCallExpAS.computeBodyString() {
+		String pathNameString = getPathName().computeBodyString();
+		
+		String qualifierString = new String();
+		int numberQualifier = getNumQualifier();
+		for(int i = 0; i < numberQualifier; i++) {
+			qualifierString = qualifierString + ", " + getQualifier(i); 
+		}
+		
+		if (qualifierString.length() != 0) qualifierString = qualifierString.substring(1, qualifierString.length());
+		
+		String sourceString = getSourceString();
+		String atpreString = getAtPreString();
+		
+		if (sourceString.length() != 0) {
+			return sourceString + "." + pathNameString + "[" + qualifierString + "]" + atpreString;
+		}
+		
+		return pathNameString + "[" + qualifierString + "]" + atpreString;
+	}
+	
+	public String VariableExpAS.computeBodyString() {
+		return getVariable().computeBodyString();
+	}
+	
+	public String VariableAS.computeBodyString() {
+		String resultString = new String();
+		String nameString = getName().getValue();
+		
+		String typeString = new String();
+		if (hasType()) typeString = getType().computeBodyString();
+		
+		String expressionString = new String();
+		if (hasExpression()) expressionString = getExpression().computeBodyString();
+		
+		if (typeString.length() != 0) {
+			resultString = nameString + ":" + typeString;
+			if (expressionString.length() != 0) {
+				resultString = resultString + "=" + expressionString;
+				return resultString;
+			}
+			
+			return resultString;
+		}
+		
+		if (expressionString.length() != 0) {
+			return nameString + "=" + expressionString;
+		}
+		
+		return nameString;
+	}
+	
+	abstract public String TypeAS.computeBodyString();
+	
+	public String PathNameAS.computeBodyString() {
+		String pathNameString = new String();
+		int numberToken = getNumTokenAS();
+		for(int i = 0; i < numberToken; i++) {
+			pathNameString = pathNameString + "::" + getTokenAS(i).getValue();
+		}
+		
+		if(pathNameString.length() != 0) pathNameString = pathNameString.substring(2, pathNameString.length());
+		
+		return pathNameString;
+	}
+	
+	public String TupleTypeAS.computeBodyString() {
+		String variableString = new String();
+		int numberVariable = getNumVariableAS();
+		for(int i = 0; i < numberVariable; i++) {
+			variableString = variableString + ", " + getVariableAS(i).computeBodyString();
+		}
+		
+		if (variableString.length() != 0) variableString = variableString.substring(1, variableString.length());
+		
+		return "TupleType( " + variableString + " )";
+	}
+	
+	public String CollectionTypeAS.computeBodyString() {
+		String nameString = getName().getValue();
+		String typeString = getType().computeBodyString();
+		
+		return nameString + "( " + typeString + " )";
+	}
+	
+	
+}

@@ -1,0 +1,130 @@
+/*
+    Copyright (C) 2008  Nils (s0006383@inf.tu-dresden.de)
+
+    This file is part of the OCL parser of the Dresden OCL2 for Eclipse.
+
+    The OCL parser is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Lesser General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    The OCL parser is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Lesser General Public License for more details.
+
+    You should have received a copy of the GNU Lesser General Public License
+    along with the OCL parser.  If not, see <http://www.gnu.org/licenses/>.
+.
+*/
+
+public aspect IterateExpASMComputation {
+	/*
+	 * Concrete syntax:
+	 * IterateExpCs ::= OclExpressionCs[1] '->' 'iterate' '(' (VariableDeclarationCs[1] ';' )? VariableDeclarationCs[2] '|' OclExpressionCs[2] ')'
+	 */
+	public IterateExp IterateExpAS.computeASM(Environment env) throws BuildingASMException {
+		// Get the expression factory.
+		IModelFactory factory = env.getExpFactory();
+		
+		// The iterate expression must have a source.
+		if (!hasSource()) throw new BuildingASMException("The iterate expression has no source, it is unusual, maybe it is an internal error.", null);
+		
+		// Compute the source expression.
+		OclExpression sourceExpression = getSource().computeASM(env);
+		
+		/* To compute the body expression, we must build a nested environment with the result
+		 * and iterator variable. 
+		 */
+		Environment nestedEnvironment = env.nestedEnvironment();
+		
+		Variable iterator = null;
+		
+		// Iterate expression an iterator
+		if (hasIterator()) {
+			// Compute the iterator variable.
+			iterator = getIterator().computeASM(env);
+			
+			// The iterator variable must not have an init expression
+			// OCL-specification page 77, Disambuating rule [2]
+			if (iterator.getInitExpression() != null) throw new BuildingASMException("The iterator variable of the" +
+					" iterate expression must have an empty init epxression. This error occurs if the parser build" +
+					" the iterator variable of the iterate expression with an init expression. This is an error.", null);
+					
+			nestedEnvironment.addExplicitVariable(iterator);		
+			
+		}
+		else {// Iterate expression has no iterator
+			Type iteratorType = null;
+			
+			// Examine whether the source expression is of type collection type.
+			if (sourceExpression.getType() instanceof CollectionType) {
+				iteratorType = ((CollectionType)sourceExpression.getType()).getElementType();
+			}
+			else { // The source expression is not of type collection type.
+				
+				// If the source expression is not a collection type then take this type and pack into a collection.
+				// This behavior is NOT part of the ocl specification.
+				sourceExpression = sourceExpression.withAsSet();
+				//throw new BuildingASMException("The source expression is not of type collection type.", null);
+			}
+			
+			// Create an empty iterator variable with the type of the element type of source expression.
+			iterator = factory.createVariable(VariableNameGenerator.getDefault().getVariableName(), iteratorType, null);
+		}
+		
+		// Pack the only iterator variable in an array because the factory method expect an array.
+		Variable[] iteratorVariables = new Variable[1];
+		iteratorVariables[0] = iterator;
+		
+		// First we must examine some properties of the result variable.
+		VariableAS resultAS = getResult();
+		
+		// The result variable must have a type.
+		// OCL-specification, page 77, disambiguating rule [1]
+		if (resultAS.hasType() == false) throw new BuildingASMException("The result variable has no type.", null);
+		
+		// The result variable must have an initial expression.
+		// OCL-specification, page 77, disambiguating rule [1]
+		if (resultAS.hasExpression() == false) throw new BuildingASMException("The result variable has no init expression.", null);
+		
+		// Compute the result variable.
+		Variable resultVariable = getResult().computeASM(env);
+		
+		/*
+		
+		// The result variable must have a type.
+		// OCL-specification, page 77, disambiguating rule [1]
+		if (resultVariable.getType() == null) throw new BuildingASMException("The result variable has no type.", null);
+		
+		// The result variable must have an initial expression.
+		// OCL-specification, page 77, disambiguating rule [1]
+		if (resultVariable.getInitExpression() == null) throw new BuildingASMException("The result variable has no init expression.", null);
+		
+		*/
+		
+		
+		/*
+		 * We must add the result variable to an explicit variable in the environment.
+		 */
+		nestedEnvironment.addExplicitVariable(resultVariable);
+		
+		/*
+		 * It is incurious whether the variable is a variable that was defined by the user or
+		 * it is a variable that is implicit generated. We must add the variable to
+		 * the implicit list.
+		 */
+		nestedEnvironment.addImplicitVariable(iterator);
+		
+		// Compute the body with the nested environment.
+		OclExpression bodyExpression = getBody().computeASM(nestedEnvironment);
+		
+		// Create the iterate expression with the factory.
+		IterateExp iterateExpression = factory.createIterateExp(sourceExpression, bodyExpression, resultVariable, iteratorVariables);
+		
+		// If the factory returns null, it is an internal error.
+		if (iterateExpression == null) throw new BuildingASMException("An internal error occured.", null);
+		
+		return iterateExpression;
+	}
+}
