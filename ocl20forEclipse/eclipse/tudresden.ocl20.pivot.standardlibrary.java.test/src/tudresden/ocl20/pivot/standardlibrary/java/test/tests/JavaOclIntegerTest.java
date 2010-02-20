@@ -11,6 +11,11 @@ import tudresden.ocl20.pivot.essentialocl.standardlibrary.factory.IStandardLibra
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.base.TypeConstants;
 
 // FIXME Michael: Add undefined and invalid tests
+/**
+ * Test for integers in OCL.
+ * 
+ * @author Michael Thiele
+ */
 public class JavaOclIntegerTest {
 
 	private final IStandardLibraryFactory myStandardLibraryFactory =

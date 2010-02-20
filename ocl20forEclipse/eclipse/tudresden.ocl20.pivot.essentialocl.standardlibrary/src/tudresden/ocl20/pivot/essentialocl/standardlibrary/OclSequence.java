@@ -54,15 +54,6 @@ public interface OclSequence<T extends OclAny> extends OclSortedCollection<T> {
 	 * 
 	 * @param o
 	 * 
-	 * @return The sequence consisting of all elements in <code>this</code>,
-	 *         followed by all elements in <code>o</code>.
-	 */
-	OclSequence<T> union(OclOrderedSet<T> o);
-
-	/**
-	 * 
-	 * @param o
-	 * 
 	 * @return The sequence of elements, consisting of all elements of
 	 *         <code>this</code>, followed by <code>o</code>.
 	 */
@@ -112,4 +103,12 @@ public interface OclSequence<T extends OclAny> extends OclSortedCollection<T> {
 	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection#flatten()
 	 */
 	<T2 extends OclAny> OclSequence<T2> flatten();
+	
+	/**
+	 * 
+	 * @param s
+	 * 
+	 * @return the union of <code>this</code> and <code>s</code>.
+	 */
+	OclSequence<T> union(OclSequence<T> s);
 }

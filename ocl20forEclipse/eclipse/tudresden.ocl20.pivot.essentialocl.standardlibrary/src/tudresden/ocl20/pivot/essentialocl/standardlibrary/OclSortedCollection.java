@@ -27,12 +27,4 @@ public interface OclSortedCollection<T extends OclAny> extends OclCollection<T> 
 	 * @return the last element in <code>this</code>.
 	 */
 	T last();
-	
-	/**
-	 * 
-	 * @param s
-	 * 
-	 * @return the union of <code>this</code> and <code>s</code>.
-	 */
-	OclSequence<T> union(OclSequence<T> s);
 }

@@ -185,15 +185,15 @@ public class JavaOclBag<T extends OclAny> extends JavaOclUnsortedCollection<T>
 	 * @see
 	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection#flatten ()
 	 */
-	// FIXME Michael: Should be called recursively!
 	public <T2 extends OclAny> OclBag<T2> flatten() {
 
 		OclBag<T2> result = null;
 
-		result = checkInvalid(TypeConstants.BAG(genericType), this);
+		// FIXME Michael: better way to determine real return type
+		result = checkInvalid(TypeConstants.BAG(TypeConstants.ANY), this);
 
 		if (result == null)
-			result = checkUndefined("flatten", TypeConstants.BAG(genericType), this);
+			result = checkUndefined("flatten", TypeConstants.BAG(TypeConstants.ANY), this);
 
 		if (result == null) {
 
@@ -223,7 +223,8 @@ public class JavaOclBag<T extends OclAny> extends JavaOclUnsortedCollection<T>
 				collection =
 						((IModelInstanceCollection<IModelInstanceElement>) element);
 
-				final List<IModelInstanceElement> flattened = flatRec(collection.getCollection());
+				final List<IModelInstanceElement> flattened =
+						flatRec(collection.getCollection());
 				flat.addAll(flattened);
 			}
 

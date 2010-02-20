@@ -124,6 +124,17 @@ public abstract class JavaOclCollection<T extends OclAny> extends
 
 	/*
 	 * (non-Javadoc)
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection#getGenericType
+	 * ()
+	 */
+	public Type getGenericType() {
+
+		return genericType;
+	}
+
+	/*
+	 * (non-Javadoc)
 	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny#asSet()
 	 */
 	public OclSet<T> asSet() {

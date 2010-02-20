@@ -14,14 +14,21 @@ import org.junit.Before;
 import org.junit.Test;
 
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
+import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBag;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclIterator;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclReal;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.factory.IStandardLibraryFactory;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.base.TypeConstants;
+import tudresden.ocl20.pivot.pivotmodel.Type;
 
 // TODO Michael: nested collections
+/**
+ * Test for collections in OCL.
+ * 
+ * @author Michael Thiele
+ */
 public class JavaOclCollectionTest {
 
 	private final IStandardLibraryFactory myStandardLibraryFactory =
@@ -44,17 +51,17 @@ public class JavaOclCollectionTest {
 	 * Set { 0.5 }
 	 */
 	private OclCollection<OclReal> oclSet;
-	
+
 	/**
 	 * Bag { 0.5 }
 	 */
 	private OclCollection<OclReal> oclBag;
-	
+
 	/**
 	 * OrderedSet { 0.5 }
 	 */
 	private OclCollection<OclReal> oclOrderedSet;
-	
+
 	/**
 	 * Sequence { 0.5 }
 	 */
@@ -64,17 +71,17 @@ public class JavaOclCollectionTest {
 	 * Set { 0.5, 1.5, null, null }
 	 */
 	private OclCollection<OclReal> oclSet2;
-	
+
 	/**
 	 * Bag { 0.5, 1.5, null, null }
 	 */
 	private OclCollection<OclReal> oclBag2;
-	
+
 	/**
 	 * OrderedSet { 0.5, 1.5, null, null }
 	 */
 	private OclCollection<OclReal> oclOrderedSet2;
-	
+
 	/**
 	 * Sequence { 0.5, 1.5, null, null }
 	 */
@@ -92,9 +99,9 @@ public class JavaOclCollectionTest {
 	private final OclInteger integer2 =
 			myStandardLibraryFactory.createOclInteger(2L);
 	private final OclInteger integer3 =
-		myStandardLibraryFactory.createOclInteger(3L);
+			myStandardLibraryFactory.createOclInteger(3L);
 	private final OclInteger integer4 =
-		myStandardLibraryFactory.createOclInteger(4L);
+			myStandardLibraryFactory.createOclInteger(4L);
 
 	private final OclReal undefined =
 			myStandardLibraryFactory.createOclUndefined(TypeConstants.REAL,
@@ -379,7 +386,7 @@ public class JavaOclCollectionTest {
 		assertTrue(oclOrderedSet.size().isEqualTo(integer1).isTrue());
 		assertTrue(oclBag.size().isEqualTo(integer1).isTrue());
 		assertTrue(oclSequence.size().isEqualTo(integer1).isTrue());
-		
+
 		assertTrue(oclSet2.size().isEqualTo(integer3).isTrue());
 		assertTrue(oclOrderedSet2.size().isEqualTo(integer3).isTrue());
 		assertTrue(oclBag2.size().isEqualTo(integer4).isTrue());
@@ -399,43 +406,185 @@ public class JavaOclCollectionTest {
 		assertTrue(oclBag2.sum().isEqualTo(integer2).isTrue());
 		assertTrue(oclSequence2.sum().isEqualTo(integer2).isTrue());
 	}
-	
+
+	@Test
+	public void testFlatten() {
+
+		// /*
+		// * Set { Set { 0.5, null }, Set { 0.5, 1.5 } }->flatten() == Set { 0.5,
+		// 1.5,
+		// * null }
+		// */
+		// Set<OclReal> realSet1 = new HashSet<OclReal>();
+		// realSet1.add(oclReal0_5);
+		// realSet1.add(undefined);
+		//
+		// Set<OclReal> realSet2 = new HashSet<OclReal>();
+		// realSet2.add(oclReal0_5);
+		// realSet2.add(oclReal1_5);
+		//
+		// Set<Set<OclReal>> setOfRealSets = new HashSet<Set<OclReal>>();
+		// setOfRealSets.add(realSet1);
+		// setOfRealSets.add(realSet2);
+		// OclSet<OclSet<OclAny>> oclSetofSets =
+		// myStandardLibraryFactory.createOclSet(setOfRealSets, TypeConstants
+		// .SET(TypeConstants.REAL));
+		//
+		// assertTrue(oclSetofSets.flatten().isEqualTo(oclSet2).isTrue());
+		//
+		// /*
+		// * Set { Set { Set { 0.5, null}, Set { 0.5, 1.5 } }, Set { Set { 2.5 } }
+		// * }->flatten() == Set { 0.5, 1.5, 2.5, null }
+		// */
+		OclReal oclReal2_5 = myStandardLibraryFactory.createOclReal(2.5);
+		//
+		// realSet1.add(oclReal1_5);
+		// realSet1.add(oclReal2_5);
+		// OclSet<OclReal> oclResultSet =
+		// myStandardLibraryFactory.createOclSet(realSet1, TypeConstants.REAL);
+		//
+		// Set<OclReal> realSet3 = new HashSet<OclReal>();
+		// realSet3.add(oclReal2_5);
+		//
+		// Set<Set<OclReal>> setOfRealSets2 = new HashSet<Set<OclReal>>();
+		// setOfRealSets2.add(realSet3);
+		//
+		// Set<Set<Set<OclReal>>> setOfSetsOfRealSets =
+		// new HashSet<Set<Set<OclReal>>>();
+		// setOfSetsOfRealSets.add(setOfRealSets);
+		// setOfSetsOfRealSets.add(setOfRealSets2);
+		// OclSet<OclSet<OclSet<OclReal>>> oclSetOfSetsOfSets =
+		// myStandardLibraryFactory.createOclSet(setOfSetsOfRealSets,
+		// TypeConstants.SET(TypeConstants.SET(TypeConstants.REAL)));
+		//
+		// assertTrue(oclSetOfSetsOfSets.flatten().isEqualTo(oclResultSet).isTrue());
+
+		/*
+		 * Bag { Bag { 0.5, null }, Bag { 0.5, 1.5 } }->flatten() == Bag { 0.5, 0.5,
+		 * 1.5, null }
+		 */
+		List<OclReal> realBag1 = new ArrayList<OclReal>();
+		realBag1.add(oclReal0_5);
+		realBag1.add(undefined);
+
+		List<OclReal> realBag2 = new ArrayList<OclReal>();
+		realBag2.add(oclReal0_5);
+		realBag2.add(oclReal1_5);
+
+		List<OclReal> realBag3 = new ArrayList<OclReal>();
+		realBag3.addAll(realBag1);
+		realBag3.addAll(realBag2);
+		OclBag<OclReal> oclResultBag =
+				myStandardLibraryFactory.createOclBag(realBag3, TypeConstants.REAL);
+
+		List<List<OclReal>> BagOfRealBags = new ArrayList<List<OclReal>>();
+		BagOfRealBags.add(realBag1);
+		BagOfRealBags.add(realBag2);
+		OclBag<OclBag<OclAny>> oclBagofBags =
+				myStandardLibraryFactory.createOclBag(BagOfRealBags, TypeConstants
+						.BAG(TypeConstants.REAL));
+		assertTrue(oclBagofBags.flatten().isEqualTo(oclResultBag).isTrue());
+
+		/*
+		 * Bag { Bag { Bag { 0.5, null}, Bag { 0.5, 1.5 } }, Bag { Bag { 2.5 } }
+		 * }->flatten() == Bag { 0.5, null, 0.5, 1.5, 2.5 }
+		 */
+		List<OclReal> realBag5 = new ArrayList<OclReal>();
+		realBag3.add(oclReal2_5);
+
+		List<OclReal> realBag4 = new ArrayList<OclReal>();
+		realBag4.addAll(realBag1);
+		realBag4.addAll(realBag2);
+		realBag4.addAll(realBag5);
+		OclBag<OclReal> oclResultBag2 =
+				myStandardLibraryFactory.createOclBag(realBag4, TypeConstants.REAL);
+
+		List<List<OclReal>> BagOfRealBags2 = new ArrayList<List<OclReal>>();
+		BagOfRealBags2.add(realBag5);
+
+		List<List<List<OclReal>>> BagOfBagsOfRealBags =
+				new ArrayList<List<List<OclReal>>>();
+		BagOfBagsOfRealBags.add(BagOfRealBags);
+		BagOfBagsOfRealBags.add(BagOfRealBags2);
+		OclBag<OclBag<OclBag<OclReal>>> oclBagOfBagsOfBags =
+				myStandardLibraryFactory.createOclBag(BagOfBagsOfRealBags,
+						TypeConstants.BAG(TypeConstants.BAG(TypeConstants.REAL)));
+
+		final OclBag<OclAny> flatBag = oclBagOfBagsOfBags.flatten();
+		assertTrue(flatBag.isEqualTo(oclResultBag2).isTrue());
+		/*
+		 * The generic/element type of the Bag should be Real.
+		 */
+		Type genericType = flatBag.getGenericType();
+		assertTrue(genericType.equals(TypeConstants.REAL));
+
+	}
+
 	@Test
 	public void testGetIterator() {
-		
+
 		assertFalse(emptySet.getIterator().hasNext().isTrue());
 		assertFalse(emptyOrderedSet.getIterator().hasNext().isTrue());
 		assertFalse(emptyBag.getIterator().hasNext().isTrue());
 		assertFalse(emptySequence.getIterator().hasNext().isTrue());
-		
+
 		final OclIterator<OclReal> setIterator = oclSet2.getIterator();
-		final OclIterator<OclReal> orderedSetIterator = oclOrderedSet2.getIterator();
+		final OclIterator<OclReal> orderedSetIterator =
+				oclOrderedSet2.getIterator();
 		final OclIterator<OclReal> bagIterator = oclBag2.getIterator();
 		final OclIterator<OclReal> sequenceIterator = oclSequence2.getIterator();
-		
+
 		assertTrue(setIterator.hasNext().isTrue());
 		assertTrue(orderedSetIterator.hasNext().isTrue());
 		assertTrue(bagIterator.hasNext().isTrue());
 		assertTrue(sequenceIterator.hasNext().isTrue());
-		
-		assertTrue(setIterator.next().isEqualTo(oclReal0_5).isTrue());
+
+		/*
+		 * Sets and Bags make no claims about element order.
+		 */
+		OclReal setIteratorNext = setIterator.next();
+		OclReal bagIteratorNext = bagIterator.next();
+
+		assertTrue(setIteratorNext.isEqualTo(oclReal0_5).isTrue()
+				|| setIteratorNext.isEqualTo(oclReal1_5).isTrue()
+				|| setIteratorNext.isEqualTo(undefined).isTrue());
 		assertTrue(orderedSetIterator.next().isEqualTo(oclReal0_5).isTrue());
-		assertTrue(bagIterator.next().isEqualTo(oclReal0_5).isTrue());
+		assertTrue(bagIteratorNext.isEqualTo(oclReal0_5).isTrue()
+				|| bagIteratorNext.isEqualTo(oclReal1_5).isTrue()
+				|| bagIteratorNext.isEqualTo(undefined).isTrue());
 		assertTrue(sequenceIterator.next().isEqualTo(oclReal0_5).isTrue());
-		
-		assertTrue(setIterator.next().isEqualTo(oclReal1_5).isTrue());
+
+		setIteratorNext = setIterator.next();
+		bagIteratorNext = bagIterator.next();
+
+		assertTrue(setIteratorNext.isEqualTo(oclReal0_5).isTrue()
+				|| setIteratorNext.isEqualTo(oclReal1_5).isTrue()
+				|| setIteratorNext.isEqualTo(undefined).isTrue());
 		assertTrue(orderedSetIterator.next().isEqualTo(oclReal1_5).isTrue());
-		assertTrue(bagIterator.next().isEqualTo(oclReal1_5).isTrue());
+		assertTrue(bagIteratorNext.isEqualTo(oclReal1_5).isTrue()
+				|| bagIteratorNext.isEqualTo(oclReal1_5).isTrue()
+				|| bagIteratorNext.isEqualTo(undefined).isTrue());
 		assertTrue(sequenceIterator.next().isEqualTo(oclReal1_5).isTrue());
-		
-		assertTrue(setIterator.next().isEqualTo(undefined).isTrue());
+
+		setIteratorNext = setIterator.next();
+		bagIteratorNext = bagIterator.next();
+
+		assertTrue(setIteratorNext.isEqualTo(oclReal0_5).isTrue()
+				|| setIteratorNext.isEqualTo(oclReal1_5).isTrue()
+				|| setIteratorNext.isEqualTo(undefined).isTrue());
 		assertTrue(orderedSetIterator.next().isEqualTo(undefined).isTrue());
-		assertTrue(bagIterator.next().isEqualTo(undefined).isTrue());
+		assertTrue(bagIteratorNext.isEqualTo(undefined).isTrue()
+				|| bagIteratorNext.isEqualTo(oclReal1_5).isTrue()
+				|| bagIteratorNext.isEqualTo(undefined).isTrue());
 		assertTrue(sequenceIterator.next().isEqualTo(undefined).isTrue());
-		
+
 		assertFalse(setIterator.hasNext().isTrue());
 		assertFalse(orderedSetIterator.hasNext().isTrue());
-		assertTrue(bagIterator.next().isEqualTo(undefined).isTrue());
+		/*
+		 * There is definitely another element in the Bag, but not certain which
+		 * one. The Sequence's last element is definitely an undefined value.
+		 */
+		assertTrue(bagIterator.hasNext().isTrue());
 		assertTrue(sequenceIterator.next().isEqualTo(undefined).isTrue());
 	}
 }

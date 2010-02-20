@@ -242,21 +242,7 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 		List<IModelInstanceElement> imiElements;
 		imiElements = new ArrayList<IModelInstanceElement>();
 
-		for (Object element : elements) {
-
-			if (element instanceof IModelInstanceElement) {
-
-				imiElements.add((IModelInstanceElement) element);
-			}
-			else if (element instanceof OclAny) {
-
-				imiElements.add(((OclAny) element).getModelInstanceElement());
-			}
-			else {
-				throw new IllegalArgumentException("Cannot create JavaOclBag for "
-						+ elements);
-			}
-		}
+		createOclCollections(elements, genericType, imiElements, "OclBag");
 
 		IModelInstanceCollection<IModelInstanceElement> imiCollection =
 				basisJavaModelInstanceFactory.createModelInstanceCollection(
@@ -309,46 +295,34 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 		return JavaOclBoolean.getInstance(value.getBoolean());
 	}
 
-	public OclCollection<OclAny> createOclCollection(
+	public OclCollection<OclAny> createOclCollection(Collection<?> elements,
 			CollectionType collectionType, Type genericType) {
 
 		OclCollection<OclAny> result;
 
-		IModelInstanceCollection<IModelInstanceElement> imiCollection;
-
 		CollectionKind collectionKind = collectionType.getKind();
 
-		if (collectionKind.equals(CollectionKind.BAG)) {
-			imiCollection =
-					basisJavaModelInstanceFactory
-							.createModelInstanceCollection(
-									new ArrayList<IModelInstanceElement>(),
-									OclCollectionTypeKind.BAG);
-			result = createOclBag(imiCollection, genericType);
+		if (elements instanceof List<?>
+				&& collectionKind.equals(CollectionKind.BAG)) {
+			result = createOclBag((List<?>) elements, genericType);
 		}
-		else if (collectionKind.equals(CollectionKind.ORDERED_SET)) {
-			imiCollection =
-					basisJavaModelInstanceFactory.createModelInstanceCollection(
-							new UniqueEList<IModelInstanceElement>(),
-							OclCollectionTypeKind.ORDEREDSET);
-			result = createOclOrderedSet(imiCollection, genericType);
+		else if (elements instanceof UniqueEList<?>
+				&& collectionKind.equals(CollectionKind.ORDERED_SET)) {
+			result = createOclOrderedSet((List<?>) elements, genericType);
 		}
-		else if (collectionKind.equals(CollectionKind.SEQUENCE)) {
-			imiCollection =
-					basisJavaModelInstanceFactory.createModelInstanceCollection(
-							new ArrayList<IModelInstanceElement>(),
-							OclCollectionTypeKind.SEQUENCE);
-			result = createOclSequence(imiCollection, genericType);
+		else if (elements instanceof List<?>
+				&& collectionKind.equals(CollectionKind.SEQUENCE)) {
+			result = createOclSequence((List<?>) elements, genericType);
 		}
-		else if (collectionKind.equals(CollectionKind.SET)) {
-			imiCollection =
-					basisJavaModelInstanceFactory.createModelInstanceCollection(
-							new HashSet<IModelInstanceElement>(), OclCollectionTypeKind.SET);
-			result = createOclSet(imiCollection, genericType);
+		else if (elements instanceof Set<?>
+				&& collectionKind.equals(CollectionKind.SET)) {
+			result = createOclSet((Set<?>) elements, genericType);
 		}
 		else {
 			throw new IllegalArgumentException(
-					"Cannot create OclCollection with given type " + collectionType);
+					"Cannot create OclCollection with given type " + collectionType
+							+ " and the following elements type "
+							+ elements.getClass().getCanonicalName());
 		}
 
 		return result;
@@ -476,21 +450,7 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 		List<IModelInstanceElement> imiElements;
 		imiElements = new UniqueEList<IModelInstanceElement>();
 
-		for (Object element : elements) {
-
-			if (element instanceof IModelInstanceElement) {
-
-				imiElements.add((IModelInstanceElement) element);
-			}
-			else if (element instanceof OclAny) {
-
-				imiElements.add(((OclAny) element).getModelInstanceElement());
-			}
-			else {
-				throw new IllegalArgumentException("Cannot create JavaOclSet for "
-						+ elements);
-			}
-		}
+		createOclCollections(elements, genericType, imiElements, "OclOrderedSet");
 
 		IModelInstanceCollection<IModelInstanceElement> imiCollection =
 				basisJavaModelInstanceFactory.createModelInstanceCollection(
@@ -557,21 +517,7 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 		List<IModelInstanceElement> imiElements;
 		imiElements = new ArrayList<IModelInstanceElement>();
 
-		for (Object element : elements) {
-
-			if (element instanceof IModelInstanceElement) {
-
-				imiElements.add((IModelInstanceElement) element);
-			}
-			else if (element instanceof OclAny) {
-
-				imiElements.add(((OclAny) element).getModelInstanceElement());
-			}
-			else {
-				throw new IllegalArgumentException("Cannot create JavaOclSet for "
-						+ elements);
-			}
-		}
+		createOclCollections(elements, genericType, imiElements, "OclSequence");
 
 		IModelInstanceCollection<IModelInstanceElement> imiCollection =
 				basisJavaModelInstanceFactory.createModelInstanceCollection(
@@ -613,21 +559,7 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 		Set<IModelInstanceElement> imiElements;
 		imiElements = new HashSet<IModelInstanceElement>();
 
-		for (Object element : elements) {
-
-			if (element instanceof IModelInstanceElement) {
-
-				imiElements.add((IModelInstanceElement) element);
-			}
-			else if (element instanceof OclAny) {
-
-				imiElements.add(((OclAny) element).getModelInstanceElement());
-			}
-			else {
-				throw new IllegalArgumentException("Cannot create JavaOclSet for "
-						+ elements);
-			}
-		}
+		createOclCollections(elements, genericType, imiElements, "OclSet");
 
 		IModelInstanceCollection<IModelInstanceElement> imiCollection =
 				basisJavaModelInstanceFactory.createModelInstanceCollection(
@@ -860,7 +792,7 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 			 */
 			cachedUndefinedOrInvalid.put(result.getModelInstanceElement(), result);
 		}
-		
+
 		return result;
 	}
 
@@ -1006,6 +938,36 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 		cachedUndefinedOrInvalid.put(result.getModelInstanceElement(), result);
 
 		return result;
+	}
+
+	private void createOclCollections(final Collection<?> elements,
+			Type genericType, Collection<IModelInstanceElement> imiElements,
+			String collectionName) {
+
+		for (Object element : elements) {
+
+			if (element instanceof IModelInstanceElement) {
+
+				imiElements.add((IModelInstanceElement) element);
+			}
+			else if (element instanceof OclAny) {
+
+				imiElements.add(((OclAny) element).getModelInstanceElement());
+			}
+			else if (element instanceof Collection<?>
+					&& genericType instanceof CollectionType) {
+
+				CollectionType collectionType = (CollectionType) genericType;
+				OclCollection<OclAny> oclCollection =
+						createOclCollection((Collection<?>) element, collectionType,
+								collectionType.getElementType());
+				imiElements.add(oclCollection.getModelInstanceElement());
+			}
+			else {
+				throw new IllegalArgumentException("Cannot create " + collectionName
+						+ " for " + elements);
+			}
+		}
 	}
 
 	/**

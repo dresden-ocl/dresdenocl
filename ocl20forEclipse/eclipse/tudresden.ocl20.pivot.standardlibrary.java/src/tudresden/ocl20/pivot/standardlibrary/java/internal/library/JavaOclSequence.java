@@ -31,13 +31,11 @@
 package tudresden.ocl20.pivot.standardlibrary.java.internal.library;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBoolean;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclOrderedSet;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSequence;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceCollection;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
@@ -92,14 +90,11 @@ public class JavaOclSequence<T extends OclAny> extends
 
 		OclSequence<T> result = null;
 
-		result =
-				checkInvalid(TypeConstants
-						.SEQUENCE(genericType), this, that);
+		result = checkInvalid(TypeConstants.SEQUENCE(genericType), this, that);
 
 		if (result == null)
 			result =
-					checkUndefined("append", TypeConstants
-							.SEQUENCE(genericType), this);
+					checkUndefined("append", TypeConstants.SEQUENCE(genericType), this);
 
 		if (result == null) {
 			List<IModelInstanceElement> append =
@@ -126,21 +121,23 @@ public class JavaOclSequence<T extends OclAny> extends
 
 		OclSequence<T> result = null;
 
-		result =
-				checkInvalid(TypeConstants
-						.SEQUENCE(genericType), this, that);
+		result = checkInvalid(TypeConstants.SEQUENCE(genericType), this, that);
 
 		if (result == null)
 			result =
-					checkUndefined("excluding", TypeConstants
-							.SEQUENCE(genericType), this);
+					checkUndefined("excluding", TypeConstants.SEQUENCE(genericType), this);
 
 		if (result == null) {
 			List<IModelInstanceElement> exclude =
 					new ArrayList<IModelInstanceElement>();
 
 			exclude.addAll(getModelInstanceCollection().getCollection());
-			exclude.remove(that.getModelInstanceElement());
+			/*
+			 * see standard, p. 157: Returns
+			 * "[t]he sequence containing all elements of self apart from all occurrences of object."
+			 */
+			while (exclude.remove(that.getModelInstanceElement()))
+				;
 
 			result =
 					JavaStandardLibraryFactory.INSTANCE.createOclSequence(exclude,
@@ -159,14 +156,11 @@ public class JavaOclSequence<T extends OclAny> extends
 
 		OclSequence<T2> result = null;
 
-		result =
-				checkInvalid(TypeConstants
-						.SEQUENCE(genericType), this);
+		result = checkInvalid(TypeConstants.SEQUENCE(genericType), this);
 
 		if (result == null)
 			result =
-					checkUndefined("flatten", TypeConstants
-							.SEQUENCE(genericType), this);
+					checkUndefined("flatten", TypeConstants.SEQUENCE(genericType), this);
 
 		if (result == null) {
 			List<IModelInstanceElement> flat = new ArrayList<IModelInstanceElement>();
@@ -227,21 +221,24 @@ public class JavaOclSequence<T extends OclAny> extends
 		OclSequence<T> result = null;
 
 		result =
-				checkInvalid(TypeConstants
-						.SEQUENCE(genericType), this, index, anElement);
+				checkInvalid(TypeConstants.SEQUENCE(genericType), this, index,
+						anElement);
 
 		if (result == null)
 			result =
-					checkUndefined("insertAt", TypeConstants
-							.SEQUENCE(genericType), this, index);
+					checkUndefined("insertAt", TypeConstants.SEQUENCE(genericType), this,
+							index);
 
 		if (result == null) {
 			List<IModelInstanceElement> insertAt =
 					new ArrayList<IModelInstanceElement>();
 
+			/*
+			 * Java index is OCL index - 1
+			 */
 			int intIndex =
 					((IModelInstanceInteger) index.getModelInstanceElement()).getLong()
-							.intValue();
+							.intValue() - 1;
 
 			insertAt.addAll(getModelInstanceCollection().getCollection());
 
@@ -254,9 +251,8 @@ public class JavaOclSequence<T extends OclAny> extends
 
 			} catch (IndexOutOfBoundsException e) {
 				result =
-						JavaStandardLibraryFactory.INSTANCE.createOclInvalid(
-								TypeConstants
-										.SEQUENCE(genericType), e);
+						JavaStandardLibraryFactory.INSTANCE.createOclInvalid(TypeConstants
+								.SEQUENCE(genericType), e);
 			}
 		}
 
@@ -330,14 +326,11 @@ public class JavaOclSequence<T extends OclAny> extends
 
 		OclSequence<T> result = null;
 
-		result =
-				checkInvalid(TypeConstants
-						.SEQUENCE(genericType), this, that);
+		result = checkInvalid(TypeConstants.SEQUENCE(genericType), this, that);
 
 		if (result == null)
 			result =
-					checkUndefined("prepend", TypeConstants
-							.SEQUENCE(genericType), this);
+					checkUndefined("prepend", TypeConstants.SEQUENCE(genericType), this);
 
 		if (result == null) {
 			List<IModelInstanceElement> prepend =
@@ -366,13 +359,12 @@ public class JavaOclSequence<T extends OclAny> extends
 		OclSequence<T> result = null;
 
 		result =
-				checkInvalid(TypeConstants
-						.SEQUENCE(genericType), this, lower, upper);
+				checkInvalid(TypeConstants.SEQUENCE(genericType), this, lower, upper);
 
 		if (result == null)
 			result =
-					checkUndefined("subSequence", TypeConstants
-							.SEQUENCE(genericType), this, lower, upper);
+					checkUndefined("subSequence", TypeConstants.SEQUENCE(genericType),
+							this, lower, upper);
 
 		if (result == null) {
 			List<IModelInstanceElement> subSequence =
@@ -390,6 +382,11 @@ public class JavaOclSequence<T extends OclAny> extends
 							.getCollection();
 
 			try {
+				// test if lower > upper
+				if (intLower >= intUpper)
+					throw new IndexOutOfBoundsException(
+							"The fromIndex of method subSequence() cannot be greater then the toIndex.");
+
 				subSequence.addAll(thisCollection.subList(intLower, intUpper));
 
 				result =
@@ -397,9 +394,8 @@ public class JavaOclSequence<T extends OclAny> extends
 								genericType);
 			} catch (IndexOutOfBoundsException e) {
 				result =
-						JavaStandardLibraryFactory.INSTANCE.createOclInvalid(
-								TypeConstants
-										.SEQUENCE(genericType), e);
+						JavaStandardLibraryFactory.INSTANCE.createOclInvalid(TypeConstants
+								.SEQUENCE(genericType), e);
 			}
 		}
 
@@ -408,35 +404,35 @@ public class JavaOclSequence<T extends OclAny> extends
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSequence#union(
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclOrderedSet)
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSortedCollection#
+	 * union(tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSequence)
 	 */
-	public OclSequence<T> union(OclOrderedSet<T> that) {
+	public OclSequence<T> union(OclSequence<T> aCollection) {
 
-		OclSequence<T> result = null;
+		OclSequence<T> result;
 
 		result =
-				checkInvalid(TypeConstants
-						.SEQUENCE(genericType), this, that);
+				checkInvalid(TypeConstants.SEQUENCE(genericType), this, aCollection);
 
 		if (result == null)
 			result =
-					checkUndefined("union", TypeConstants
-							.SEQUENCE(genericType), this, that);
+					checkUndefined("union", TypeConstants.SEQUENCE(genericType), this,
+							aCollection);
 
 		if (result == null) {
-			List<IModelInstanceElement> union =
+			/* Else compute the result. */
+			List<IModelInstanceElement> resultCollection =
 					new ArrayList<IModelInstanceElement>();
 
-			Collection<IModelInstanceElement> thatCollection =
-					that.getModelInstanceCollection().getCollection();
-
-			union.addAll(getModelInstanceCollection().getCollection());
-			union.addAll(thatCollection);
+			resultCollection
+					.addAll(this.getModelInstanceCollection().getCollection());
+			resultCollection.addAll(aCollection.getModelInstanceCollection()
+					.getCollection());
 
 			result =
-					JavaStandardLibraryFactory.INSTANCE.createOclSequence(union,
-							genericType);
+					JavaStandardLibraryFactory.INSTANCE.createOclSequence(
+							resultCollection, genericType);
 		}
 
 		return result;

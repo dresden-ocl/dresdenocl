@@ -30,6 +30,7 @@
  */
 package tudresden.ocl20.pivot.standardlibrary.java.internal.library;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
@@ -163,14 +164,10 @@ public abstract class JavaOclSortedCollection<T extends OclAny> extends
 
 		OclInteger result;
 
-		result =
-				checkInvalid(TypeConstants.INTEGER,
-						this, anObject);
+		result = checkInvalid(TypeConstants.INTEGER, this, anObject);
 
 		if (result == null)
-			result =
-					checkUndefined("indexOf",
-							TypeConstants.INTEGER, this);
+			result = checkUndefined("indexOf", TypeConstants.INTEGER, this);
 
 		if (result == null) {
 			/* Else compute the result. */
@@ -190,39 +187,4 @@ public abstract class JavaOclSortedCollection<T extends OclAny> extends
 		return result;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSortedCollection
-	 * #union(tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSequence)
-	 */
-	public OclSequence<T> union(OclSequence<T> aCollection) {
-
-		OclSequence<T> result;
-
-		result =
-				checkInvalid(TypeConstants
-						.SEQUENCE(genericType), this, aCollection);
-
-		if (result == null)
-			result =
-					checkUndefined("union", TypeConstants
-							.SEQUENCE(genericType), this, aCollection);
-
-		if (result == null) {
-			/* Else compute the result. */
-			List<IModelInstanceElement> resultCollection;
-
-			resultCollection =
-					(List<IModelInstanceElement>) getModelInstanceCollection()
-							.getCollection();
-			resultCollection.addAll(aCollection.getModelInstanceCollection()
-					.getCollection());
-
-			result =
-					JavaStandardLibraryFactory.INSTANCE.createOclSequence(
-							resultCollection, genericType);
-		}
-
-		return result;
-	}
 }

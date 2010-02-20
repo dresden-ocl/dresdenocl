@@ -166,6 +166,8 @@ public interface IStandardLibraryFactory {
 	/**
 	 * Creates an empty {@link OclCollection} of the given {@link CollectionType}.
 	 * 
+	 * @param elements
+	 *          the elements to adapt
 	 * @param collectionType
 	 *          the type of collection to create (Bag, OrderedSet, Sequence, Set).
 	 * @param genericType
@@ -173,8 +175,8 @@ public interface IStandardLibraryFactory {
 	 *          UML2Class, etc.
 	 * @return an empty {@link OclCollection} of the given {@link CollectionType}
 	 */
-	OclCollection<OclAny> createOclCollection(CollectionType collectionType,
-			Type genericType);
+	OclCollection<OclAny> createOclCollection(Collection<?> elements,
+			CollectionType collectionType, Type genericType);
 
 	/**
 	 * Creates an {@link OclCollection} for the given
@@ -471,7 +473,8 @@ public interface IStandardLibraryFactory {
 	 *          The reason why this {@link OclAny} is undefined.
 	 * @return The created undefined {@link OclAny}.
 	 */
-	public <T extends OclAny> T createOclUndefined(final Type type, final String reason);
+	public <T extends OclAny> T createOclUndefined(final Type type,
+			final String reason);
 
 	/**
 	 * <p>

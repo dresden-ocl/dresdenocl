@@ -34,6 +34,7 @@ package tudresden.ocl20.pivot.essentialocl.standardlibrary;
 
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceCollection;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
+import tudresden.ocl20.pivot.pivotmodel.Type;
 
 /**
  * 
@@ -49,6 +50,13 @@ public interface OclCollection<T extends OclAny> extends OclLibraryObject {
 	 * @return the wrapped {@link IModelInstanceCollection}
 	 */
 	IModelInstanceCollection<IModelInstanceElement> getModelInstanceCollection();
+
+	/**
+	 * Returns the generic/element type of this collection.
+	 * 
+	 * @return the generic/element type of this collection
+	 */
+	Type getGenericType();
 
 	/**
 	 * 

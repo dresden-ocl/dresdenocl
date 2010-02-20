@@ -15,6 +15,12 @@ import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSet;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.factory.IStandardLibraryFactory;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.base.TypeConstants;
 
+/**
+ * Tests for real values in OCL.
+ * 
+ * @author Michael Thiele
+ *
+ */
 public class JavaOclRealTest {
 
 	private IStandardLibraryFactory myStandardLibraryFactory =

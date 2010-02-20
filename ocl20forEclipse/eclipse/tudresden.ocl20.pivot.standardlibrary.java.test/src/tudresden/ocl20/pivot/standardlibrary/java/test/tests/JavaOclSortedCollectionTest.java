@@ -16,6 +16,12 @@ import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSortedCollection;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.factory.IStandardLibraryFactory;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.base.TypeConstants;
 
+/**
+ * Test for sorted collections in OCL.
+ * 
+ * @author Michael Thiele
+ * 
+ */
 public class JavaOclSortedCollectionTest {
 
 	private final IStandardLibraryFactory myStandardLibraryFactory =
@@ -45,16 +51,15 @@ public class JavaOclSortedCollectionTest {
 			myStandardLibraryFactory.createOclInteger(1L);
 	private final OclInteger integer2 =
 			myStandardLibraryFactory.createOclInteger(2L);
+	private final OclInteger integer3 =
+			myStandardLibraryFactory.createOclInteger(3L);
+	private final OclInteger integer4 =
+			myStandardLibraryFactory.createOclInteger(4L);
 
-	// private final OclReal undefined =
-	// (OclReal) myStandardLibraryFactory.createOclUndefined(oclReal0_5
-	// .getModelInstanceReal().getTypes().iterator().next(),
-	// "undefined value");
-	//	
-	// private final OclReal invalid =
-	// (OclReal) myStandardLibraryFactory.createOclInvalid(oclReal0_5
-	// .getModelInstanceReal().getTypes().iterator().next(),
-	// new RuntimeException("invalid value"));
+	private final OclReal undefined =
+			(OclReal) myStandardLibraryFactory.createOclUndefined(oclReal0_5
+					.getModelInstanceReal().getTypes().iterator().next(),
+					"undefined value");
 
 	@Before
 	public void init() {
@@ -72,13 +77,14 @@ public class JavaOclSortedCollectionTest {
 						TypeConstants.REAL);
 
 		realOrderedSet.add(oclReal1_5);
-		// realOrderedSet.add(undefined);
-		// realOrderedSet.add(invalid);
+		realOrderedSet.add(undefined);
+
 		oclOrderedSet2 =
 				myStandardLibraryFactory.createOclOrderedSet(realOrderedSet,
 						TypeConstants.REAL);
 
 		realSequence.add(oclReal1_5);
+		realSequence.add(undefined);
 		oclSequence2 =
 				myStandardLibraryFactory.createOclSequence(realSequence,
 						TypeConstants.REAL);
@@ -92,8 +98,13 @@ public class JavaOclSortedCollectionTest {
 
 		assertTrue(oclOrderedSet2.at(integer1).isEqualTo(oclReal0_5).isTrue());
 		assertTrue(oclOrderedSet2.at(integer2).isEqualTo(oclReal1_5).isTrue());
+		assertTrue(oclOrderedSet2.at(integer3).isEqualTo(undefined).isTrue());
 		assertTrue(oclSequence2.at(integer1).isEqualTo(oclReal0_5).isTrue());
 		assertTrue(oclSequence2.at(integer2).isEqualTo(oclReal1_5).isTrue());
+		assertTrue(oclSequence2.at(integer3).isEqualTo(undefined).isTrue());
+
+		assertTrue(oclOrderedSet2.at(integer4).oclIsInvalid().isTrue());
+		assertTrue(oclSequence2.at(integer4).oclIsInvalid().isTrue());
 
 		assertTrue(emptyOrderedSet.at(integer1).oclIsInvalid().isTrue());
 		assertTrue(emptySequence.at(integer1).oclIsInvalid().isTrue());
@@ -117,8 +128,8 @@ public class JavaOclSortedCollectionTest {
 		assertTrue(oclOrderedSet.last().isEqualTo(oclReal0_5).isTrue());
 		assertTrue(oclSequence.last().isEqualTo(oclReal0_5).isTrue());
 
-		assertTrue(oclOrderedSet2.last().isEqualTo(oclReal1_5).isTrue());
-		assertTrue(oclSequence2.last().isEqualTo(oclReal1_5).isTrue());
+		assertTrue(oclOrderedSet2.last().isEqualTo(undefined).isTrue());
+		assertTrue(oclSequence2.last().isEqualTo(undefined).isTrue());
 
 		assertTrue(emptyOrderedSet.last().oclIsInvalid().isTrue());
 		assertTrue(emptySequence.last().oclIsInvalid().isTrue());
@@ -137,5 +148,4 @@ public class JavaOclSortedCollectionTest {
 		assertTrue(oclOrderedSet.indexOf(oclReal1_5).isEqualTo(integer0).isTrue());
 		assertTrue(oclSequence.indexOf(oclReal1_5).isEqualTo(integer0).isTrue());
 	}
-
 }
