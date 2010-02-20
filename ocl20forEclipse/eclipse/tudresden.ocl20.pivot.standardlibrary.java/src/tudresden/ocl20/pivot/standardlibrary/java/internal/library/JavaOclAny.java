@@ -391,7 +391,7 @@ public abstract class JavaOclAny implements OclAny {
 	/**
 	 * Checks for the given object and arguments of a method call whether the
 	 * values are undefined/null. If so, the appropriately typed
-	 * <code>undefined</code> value is returned.
+	 * <code>invalid</code> value is returned.
 	 * 
 	 * @param <T>
 	 *          a concrete subclass of {@link OclAny}

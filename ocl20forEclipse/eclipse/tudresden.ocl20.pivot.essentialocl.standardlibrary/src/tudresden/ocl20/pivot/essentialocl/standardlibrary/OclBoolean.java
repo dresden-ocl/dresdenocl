@@ -52,7 +52,10 @@ public interface OclBoolean extends OclLibraryObject {
 	/**
 	 * 
 	 * @param b
-	 * @return true if either <code>this</code> or <code>b</code> is true.
+	 * @return <code>true</code> OR anything is <code>true</code>,
+	 *         <code>false</code> otherwise<br>
+	 *         <strong>This rule does not apply for invalid. Invalid results in
+	 *         invalid</strong>.
 	 */
 	OclBoolean or(OclBoolean b);
 
@@ -67,7 +70,9 @@ public interface OclBoolean extends OclLibraryObject {
 	/**
 	 * 
 	 * @param b
-	 * @return true if both <code>this</code> and <code>b</code> are true.
+	 * @return <code>false</code> AND anythings returns <code>false</code><br>
+	 *         <strong>This rule does not apply for invalid. Invalid results in
+	 *         invalid</strong>.
 	 */
 	OclBoolean and(OclBoolean b);
 
@@ -81,8 +86,10 @@ public interface OclBoolean extends OclLibraryObject {
 	/**
 	 * 
 	 * @param b
-	 * @return true if <code>this</code> is false, or if <code>this</code> is true
-	 *         and <code>b</code> is true.
+	 * @return <code>false</code> IMPLIES anything returns <code>true</code><br>
+	 *         anything IMPLIES <code>true</code> returns <code>true</code><br>
+	 *         <strong>These rules do not apply for invalid. Invalid results in
+	 *         invalid</strong>.
 	 */
 	OclBoolean implies(OclBoolean b);
 

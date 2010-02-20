@@ -40,6 +40,7 @@ import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceBoolean;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.base.BasisJavaModelInstanceFactory;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.base.TypeConstants;
+import tudresden.ocl20.pivot.pivotmodel.Type;
 import tudresden.ocl20.pivot.standardlibrary.java.factory.JavaStandardLibraryFactory;
 
 /**
@@ -182,9 +183,13 @@ public class JavaOclBoolean extends JavaOclLibraryObject implements OclBoolean {
 
 		// FIXME Michael: Can there be a definite return type if the condition is
 		// invalid?
-		result =
-				checkInvalid(thenStatement.getModelInstanceElement().getTypes()
-						.iterator().next(), this);
+		final Type type =
+				thenStatement.getModelInstanceElement().getTypes().iterator().next();
+
+		result = checkInvalid(type, this);
+
+		if (result == null)
+			result = checkUndefined("ifThenElse", type, this);
 
 		if (result == null) {
 			if (this.isTrue()) {
@@ -204,25 +209,30 @@ public class JavaOclBoolean extends JavaOclLibraryObject implements OclBoolean {
 	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBoolean#implies
 	 * (tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBoolean)
 	 */
-	public OclBoolean implies(OclBoolean aBoolean) {
+	public OclBoolean implies(OclBoolean that) {
 
 		OclBoolean result = null;
 
-		result = checkInvalid(TypeConstants.BOOLEAN, this, aBoolean);
+		result = checkInvalid(TypeConstants.BOOLEAN, this, that);
 
 		if (result == null) {
 
 			// see standard, p.16: anything IMPLIES True is True
-			result = checkUndefined("implies", TypeConstants.BOOLEAN, null, aBoolean);
-			if (result == null) {
+			if (!that.oclIsUndefined().isTrue() && that.isTrue())
+				result = TRUE;
 
-				if (aBoolean.isTrue())
-					result = aBoolean;
+			// see standard, p.16: False IMPLIES anything is True
+			else if (!this.oclIsUndefined().isTrue() && !this.isTrue())
+				result = TRUE;
 
-				else {
-					result = checkUndefined("implies", TypeConstants.BOOLEAN, this);
-					if (result == null)
-						result = this.not().or(this.and(aBoolean));
+			else {
+				result = checkUndefined("implies", TypeConstants.BOOLEAN, this, that);
+
+				if (result == null) {
+					if (this.isTrue() && !that.isTrue())
+						result = FALSE;
+					else
+						result = TRUE;
 				}
 			}
 
@@ -281,31 +291,25 @@ public class JavaOclBoolean extends JavaOclLibraryObject implements OclBoolean {
 	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBoolean#or(tudresden
 	 * .ocl20.pivot.essentialocl.standardlibrary.OclBoolean)
 	 */
-	public OclBoolean or(OclBoolean aBoolean) {
+	public OclBoolean or(OclBoolean that) {
 
 		OclBoolean result = null;
 
-		result = checkInvalid(TypeConstants.BOOLEAN, this, aBoolean);
+		result = checkInvalid(TypeConstants.BOOLEAN, this, that);
 
 		// see standard, p.16: True OR anything is True
-		if (result == null)
-			result = checkUndefined("or", TypeConstants.BOOLEAN, this);
+		if (result == null) {
+			if (!this.oclIsUndefined().isTrue() && this.isTrue())
+				result = TRUE;
 
-		if (result == null && this.isTrue()) {
-			result = TRUE;
-		}
-		else {
+			else if (!that.oclIsUndefined().isTrue() && that.isTrue())
+				result = TRUE;
 
-			result = checkUndefined("or", TypeConstants.BOOLEAN, this, aBoolean);
+			else {
+				result = checkUndefined("or", TypeConstants.BOOLEAN, this, that);
 
-			if (result == null) {
-				if (this.isTrue() || aBoolean.isTrue()) {
-					result = TRUE;
-				}
-
-				else {
-					result = FALSE;
-				}
+				if (result == null)
+					result = getInstance(this.isTrue() || that.isTrue());
 			}
 		}
 
@@ -318,9 +322,19 @@ public class JavaOclBoolean extends JavaOclLibraryObject implements OclBoolean {
 	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBoolean#xor(tudresden
 	 * .ocl20.pivot.essentialocl.standardlibrary.OclBoolean)
 	 */
-	public OclBoolean xor(OclBoolean aBoolean) {
+	public OclBoolean xor(OclBoolean that) {
 
-		return this.isNotEqualTo(aBoolean);
+		OclBoolean result;
+
+		result = checkInvalid(TypeConstants.BOOLEAN, this, that);
+
+		if (result == null)
+			result = checkUndefined("xor", TypeConstants.BOOLEAN, this, that);
+
+		if (result == null)
+			result = this.isNotEqualTo(that);
+
+		return result;
 	}
 
 	/*
