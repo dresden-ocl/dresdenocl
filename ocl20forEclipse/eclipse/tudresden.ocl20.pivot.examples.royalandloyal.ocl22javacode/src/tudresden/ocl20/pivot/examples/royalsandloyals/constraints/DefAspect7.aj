@@ -1,9 +1,14 @@
 package tudresden.ocl20.pivot.examples.royalsandloyals.constraints;
 
-@Generated
+/**
+ * <p>Generated Aspect to enforce OCL constraint.</p>
+ *
+ * @author OCL22Java of Dresden OCL2 for Eclipse
+ * @Generated
+ */
 public privileged aspect DefAspect7 {
 
-    protected java.util.Map<String, java.util.Map> allInstances = new java.util.HashMap<String, java.util.Map>();
+    protected static java.util.Map<String, java.util.Map> allInstances = new java.util.HashMap<String, java.util.Map>();
 
     /**
      * <p>Adds all instances of the class {@link tudresden.ocl20.pivot.examples.royalsandloyals.CustomerCard} to the {@link java.util.Map} allInstances.</p>
@@ -12,7 +17,7 @@ public privileged aspect DefAspect7 {
     
         java.util.Map<tudresden.ocl20.pivot.examples.royalsandloyals.CustomerCard, Object> instanceMap;
     
-        instanceMap = (java.util.Map<tudresden.ocl20.pivot.examples.royalsandloyals.CustomerCard, Object>) this.allInstances.get(aClass.getClass().getCanonicalName());
+        instanceMap = (java.util.Map<tudresden.ocl20.pivot.examples.royalsandloyals.CustomerCard, Object>) allInstances.get(aClass.getClass().getCanonicalName());
     
         if (instanceMap == null) {
             instanceMap = new java.util.WeakHashMap<tudresden.ocl20.pivot.examples.royalsandloyals.CustomerCard, Object>();
@@ -21,7 +26,7 @@ public privileged aspect DefAspect7 {
     
         instanceMap.put(aClass, null);
     
-        this.allInstances.put(aClass.getClass().getCanonicalName(), instanceMap);
+        allInstances.put(aClass.getClass().getCanonicalName(), instanceMap);
     }
 
     /* Declares a new super class containing the new attribute or method. */
@@ -37,9 +42,9 @@ public privileged aspect DefAspect7 {
     /**
      * <p>Defines the method getAllInstances() defined by the constraint
      * <code>context CustomerCard
-     *       def: getAllInstances = self[].allInstances()</code></p>
+     *       def: getAllInstances = CustomerCard[].allInstances()</code></p>
      */
     tudresden.ocl20.pivot.ocl2java.types.OclSet<tudresden.ocl20.pivot.examples.royalsandloyals.CustomerCard> around(tudresden.ocl20.pivot.examples.royalsandloyals.CustomerCard aClass): getAllInstancesCaller(aClass) {
-        return (new tudresden.ocl20.pivot.ocl2java.types.OclSet<tudresden.ocl20.pivot.examples.royalsandloyals.CustomerCard>((java.util.Set<tudresden.ocl20.pivot.examples.royalsandloyals.CustomerCard>) this.allInstances.get(tudresden.ocl20.pivot.examples.royalsandloyals.CustomerCard.class.getCanonicalName()).keySet()));
+        return (new tudresden.ocl20.pivot.ocl2java.types.OclSet<tudresden.ocl20.pivot.examples.royalsandloyals.CustomerCard>((java.util.Set<tudresden.ocl20.pivot.examples.royalsandloyals.CustomerCard>) allInstances.get(tudresden.ocl20.pivot.examples.royalsandloyals.CustomerCard.class.getCanonicalName()).keySet()));
     }
 }

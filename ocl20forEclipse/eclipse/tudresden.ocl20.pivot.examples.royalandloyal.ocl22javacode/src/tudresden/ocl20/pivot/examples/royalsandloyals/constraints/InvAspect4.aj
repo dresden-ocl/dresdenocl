@@ -1,6 +1,11 @@
 package tudresden.ocl20.pivot.examples.royalsandloyals.constraints;
 
-@Generated
+/**
+ * <p>Generated Aspect to enforce OCL constraint.</p>
+ *
+ * @author OCL22Java of Dresden OCL2 for Eclipse
+ * @Generated
+ */
 public privileged aspect InvAspect4 {
 
     /* Declares a new super class containing the new attribute or method. */
@@ -29,7 +34,7 @@ public privileged aspect InvAspect4 {
             result1.addAll(anElement1.cards);
         }
     
-        if (!result1.flatten().contains(aClass.card)) {
+        if (!((tudresden.ocl20.pivot.ocl2java.types.OclBag<tudresden.ocl20.pivot.examples.royalsandloyals.CustomerCard>) result1.flatten()).contains(aClass.card)) {
         	// TODO Auto-generated code executed when constraint is violated.
         	throw new RuntimeException("Error: Constraint was violated.");
         }

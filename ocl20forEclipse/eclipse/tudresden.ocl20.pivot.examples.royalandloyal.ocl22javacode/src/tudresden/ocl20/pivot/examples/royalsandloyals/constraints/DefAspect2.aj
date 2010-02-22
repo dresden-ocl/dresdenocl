@@ -1,6 +1,11 @@
 package tudresden.ocl20.pivot.examples.royalsandloyals.constraints;
 
-@Generated
+/**
+ * <p>Generated Aspect to enforce OCL constraint.</p>
+ *
+ * @author OCL22Java of Dresden OCL2 for Eclipse
+ * @Generated
+ */
 public privileged aspect DefAspect2 {
 
     /* Declares a new super class containing the new attribute or method. */
@@ -37,6 +42,6 @@ public privileged aspect DefAspect2 {
             result1.addAll(anElement1.availableServices);
         }
     
-        return (tudresden.ocl20.pivot.ocl2java.types.OclSet<tudresden.ocl20.pivot.examples.royalsandloyals.Service>) result1.flatten().asSet();
+        return ((tudresden.ocl20.pivot.ocl2java.types.OclSequence<tudresden.ocl20.pivot.examples.royalsandloyals.Service>) result1.flatten()).asSet();
     }
 }
