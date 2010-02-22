@@ -474,7 +474,7 @@ public class EcoreModelInstanceFactory extends BasisJavaModelInstanceFactory
 			/* Try to find a literal with the right value. */
 			for (EnumerationLiteral aLiteral : enumeration.getOwnedLiteral()) {
 
-				if (aLiteral.getName().equals(anEnum.toString())) {
+				if (aLiteral.getName().equalsIgnoreCase(anEnum.toString())) {
 
 					result = createModelInstanceEnumerationLiteral(aLiteral);
 					break;
