@@ -17,29 +17,25 @@ You should have received a copy of the GNU Lesser General Public License along
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package tudresden.ocl20.pivot.ocl2java.test;
+package tudresden.ocl20.pivot.ocl2java.test.tests.standardlibrary;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
 import tudresden.ocl20.pivot.ocl2java.Ocl22JavaPlugin;
-import tudresden.ocl20.pivot.ocl2java.test.tests.FragmentTest;
-import tudresden.ocl20.pivot.ocl2java.test.tests.InstrumentationTest;
-import tudresden.ocl20.pivot.ocl2java.test.tests.standardlibrary.AllStandardLibraryTests;
 
 /**
  * <p>
- * Provides a jUnit Test Suite containing all plug-in tests of the OCL 2 Java
- * Code transformer ({@link Ocl22JavaPlugin}).
+ * Provides a jUnit Test Suite containing all standard library tests of the OCL
+ * 2 Java Code transformer ({@link Ocl22JavaPlugin}).
  * </p>
  * 
  * @author Claas Wilke
  * 
  */
 @RunWith(Suite.class)
-@Suite.SuiteClasses( { AllStandardLibraryTests.class,
-		InstrumentationTest.class, FragmentTest.class })
-public class AllOcl22JavaTests {
+@Suite.SuiteClasses( { TestCollection.class, TestOclAny.class })
+public class AllStandardLibraryTests {
 	/*
 	 * This class remains completely empty, being used only as a holder for the
 	 * above annotations.

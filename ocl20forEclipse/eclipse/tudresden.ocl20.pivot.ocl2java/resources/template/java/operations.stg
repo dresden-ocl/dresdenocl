@@ -125,8 +125,8 @@ $sourceExp$.first()
 
 
 // --- Flatten Operation ---
-flattenOperation(sourceExp) ::= <<
-$sourceExp$.flatten()
+flattenOperation(sourceExp, returnType) ::= <<
+(($returnType$) $sourceExp$.flatten())
 >>
 
 

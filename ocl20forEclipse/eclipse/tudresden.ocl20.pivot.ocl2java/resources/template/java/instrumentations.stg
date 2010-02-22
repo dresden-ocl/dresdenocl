@@ -8,7 +8,12 @@ group javaInstrumentations;
 aspectFile(package, name, advice, allInstanceClasses, isNewClasses) ::= <<
 package $package$;
 
-@Generated
+/**
+ * <p>Generated Aspect to enforce OCL constraint.</p>
+ *
+ * @author OCL22Java of Dresden OCL2 for Eclipse
+ * @Generated
+ */
 public privileged aspect $name$ {
 
 $if(allInstanceClasses)$

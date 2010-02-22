@@ -1,0 +1,1 @@
+((new tudresden.ocl20.pivot.ocl2java.types.OclSet<testpackage.Class1>((java.util.Set<testpackage.Class1>) allInstances.get(testpackage.Class1.class.getCanonicalName()).keySet())).size() > new Integer(0))

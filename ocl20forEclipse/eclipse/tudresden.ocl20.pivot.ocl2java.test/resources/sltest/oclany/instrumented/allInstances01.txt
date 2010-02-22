@@ -1,6 +1,11 @@
 package testpackage.constraints;
 
-@Generated
+/**
+ * <p>Generated Aspect to enforce OCL constraint.</p>
+ *
+ * @author OCL22Java of Dresden OCL2 for Eclipse
+ * @Generated
+ */
 public privileged aspect InvAspect1 {
 
     protected static java.util.Map<String, java.util.Map> allInstances = new java.util.HashMap<String, java.util.Map>();

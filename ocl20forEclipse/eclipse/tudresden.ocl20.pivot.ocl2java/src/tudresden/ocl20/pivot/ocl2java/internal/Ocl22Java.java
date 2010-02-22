@@ -323,7 +323,7 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 	public List<String> transformInstrumentationCode(List<Constraint> constraints)
 			throws Ocl22CodeException {
 
-		/* Eventually log the entry into this method. */
+		/* Probably log the entry into this method. */
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("transformInstrumentationCode"
 					+ "(List<Constraint>) - start");
@@ -341,13 +341,13 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 			result.add(this.transformInstrumentationCode(aConstraint));
 		}
 
-		/* Eventually save all new transformed super classes as files. */
+		/* Probably save all new transformed super classes as files. */
 		if (this.mySettings.isSaveCode()) {
 			this.saveExtendedClasses();
 		}
 		// no else.
 
-		/* Eventually log the exit from this method. */
+		/* Probably log the exit from this method. */
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("transformInstrumentationCode"
 					+ "(List<Constraint>) - end - return value=" + result);
@@ -373,7 +373,7 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 	private String transformInstrumentationCode(Constraint aConstraint)
 			throws Ocl22CodeException {
 
-		/* Eventually log the entry into this method. */
+		/* Probably log the entry into this method. */
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("transformInstrumentationCode(Constraint) - start");
 		}
@@ -432,7 +432,7 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 			throw new Ocl22CodeException(msg);
 		}
 
-		/* Eventually log the exit from this method. */
+		/* Probably log the exit from this method. */
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("transformInstrumentationCode(Constraint"
 					+ "- end - return value=" + result);
@@ -636,7 +636,7 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 		enumerationName = anEnumeration.getQualifiedName();
 		enumerationName = enumerationName.replaceAll("::", ".");
 
-		/* Eventually remove the root package. */
+		/* Probably remove the root package. */
 		if (enumerationName.startsWith("root.")) {
 			enumerationName = enumerationName.substring(5);
 		}
@@ -1543,7 +1543,12 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 				}
 
 				else if (operationName.equals("flatten")) {
+					String returnType;
+					returnType =
+							this.transformType(anOperationCallExp.getType()).toString();
+
 					template = this.myTemplateEngine.getTemplate("flattenOperation");
+					template.setAttribute("returnType", returnType);
 				}
 
 				else if (operationName.equals("includes")) {
@@ -1671,7 +1676,7 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 			// }
 		}
 
-		/* Eventually set more attributes of the template. */
+		/* Probably set more attributes of the template. */
 		if (template != null && resultExp == null) {
 
 			List<OclExpression> argumentList;
@@ -1680,7 +1685,7 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 
 			argumentList = anOperationCallExp.getArgument();
 
-			/* Eventually set code for arguments of the operation. */
+			/* Probably set code for arguments of the operation. */
 			for (OclExpression anArgument : argumentList) {
 
 				ITransformedCode argCode;
@@ -1775,7 +1780,7 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 		result.setResultExp(template.toString());
 
 		/*
-		 * Store the called properties in the environment (Eventually needed for
+		 * Store the called properties in the environment (Probably needed for
 		 * invariant instrumentation). Only store properties, which are properties
 		 * of the constrained element. Thus their source must be a self variable.
 		 */
@@ -2104,7 +2109,7 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 	 */
 	private ITransformedType transformAnyType(AnyType anAnyType) {
 
-		/* Eventually log the entry into this method. */
+		/* Probably log the entry into this method. */
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("transformAnyType(AnyType) - start");
 		}
@@ -2116,7 +2121,7 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 		template = this.myTemplateEngine.getTemplate("anyType");
 		result = new TransformedTypeImpl(template.toString());
 
-		/* Eventually log the exit from this method. */
+		/* Probably log the exit from this method. */
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("transformAnyType(AnyType)" + "- end - return value="
 					+ result);
@@ -2134,7 +2139,7 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 	private ITransformedType transformCollectionType(
 			CollectionType aCollectionType) {
 
-		/* Eventually log the entry into this method. */
+		/* Probably log the entry into this method. */
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("transformCollectionType(CollectionType) - start");
 		}
@@ -2186,7 +2191,7 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 		}
 		// no else.
 
-		/* Eventually log the exit from this method. */
+		/* Probably log the exit from this method. */
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("transformCollectionType(CollectionType)"
 					+ "- end - return value=" + result);
@@ -2203,7 +2208,7 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 	 */
 	private ITransformedType transformEnumerationType(Enumeration anEnumeration) {
 
-		/* Eventually log the entry into this method. */
+		/* Probably log the entry into this method. */
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("transformEnumerationType(Enumeration) - start");
 		}
@@ -2215,7 +2220,7 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 		template = this.myTemplateEngine.getTemplate("enumerationType");
 		result = new TransformedTypeImpl(template.toString());
 
-		/* Eventually log the exit from this method. */
+		/* Probably log the exit from this method. */
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("transformEnumerationType(Enumeration)"
 					+ "- end - return value=" + result);
@@ -2232,7 +2237,7 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 	 */
 	private ITransformedType transformPrimitiveType(PrimitiveType aPrimitiveType) {
 
-		/* Eventually log the entry into this method. */
+		/* Probably log the entry into this method. */
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("transformPrimitiveType(PrimitiveType) - start");
 		}
@@ -2280,7 +2285,7 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 		}
 		// no else.
 
-		/* Eventually log the exit from this method. */
+		/* Probably log the exit from this method. */
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("transformPrimitiveType(PrimitiveType)"
 					+ "- end - return value=" + result);
@@ -2297,7 +2302,7 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 	 */
 	private ITransformedType transformTupleType(TupleType aTupleType) {
 
-		/* Eventually log the entry into this method. */
+		/* Probably log the entry into this method. */
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("transformTupleType(TupleType) - start");
 		}
@@ -2309,7 +2314,7 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 		template = this.myTemplateEngine.getTemplate("tupleType");
 		result = new TransformedTypeImpl(template.toString());
 
-		/* Eventually log the exit from this method. */
+		/* Probably log the exit from this method. */
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("transformTupleType(TupleType)" + "- end - return value="
 					+ result);
@@ -2326,7 +2331,7 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 	 */
 	private ITransformedType transformType(Type aType) {
 
-		/* Eventually log the entry into this method. */
+		/* Probably log the entry into this method. */
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("transformType(Type) - start");
 		}
@@ -2404,7 +2409,7 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 			result = new TransformedTypeImpl(typeName);
 		}
 
-		/* Eventually log the exit from this method. */
+		/* Probably log the exit from this method. */
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("transformType(Type)" + "- end - return value=" + result);
 		}
@@ -2420,7 +2425,7 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 	 */
 	private ITransformedType transformTypeType(TypeType aTypeType) {
 
-		/* Eventually log the entry into this method. */
+		/* Probably log the entry into this method. */
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("transformTypeType(TypeType) - start");
 		}
@@ -2432,7 +2437,7 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 		template = this.myTemplateEngine.getTemplate("typeType");
 		result = new TransformedTypeImpl(template.toString());
 
-		/* Eventually log the exit from this method. */
+		/* Probably log the exit from this method. */
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("transformTypeType(TypeType)" + "- end - return value="
 					+ result);
@@ -2449,7 +2454,7 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 	 */
 	private ITransformedType transformVoidType(VoidType aVoidType) {
 
-		/* Eventually log the entry into this method. */
+		/* Probably log the entry into this method. */
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("transformVoidType(VoidType) - start");
 		}
@@ -2461,7 +2466,7 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 		template = this.myTemplateEngine.getTemplate("voidType");
 		result = new TransformedTypeImpl(template.toString());
 
-		/* Eventually log the exit from this method. */
+		/* Probably log the exit from this method. */
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("transformVoidType(VoidType)" + "- end - return value="
 					+ result);
@@ -2482,7 +2487,7 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 	private String instrumentCodeForBody(Constraint aConstraint)
 			throws Ocl22CodeException {
 
-		/* Eventually log the entry into this method. */
+		/* Probably log the entry into this method. */
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("instrumentCodeForBody(Constraint) - start");
 		}
@@ -2518,7 +2523,7 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 				.getConstraintPackage(contextPackage));
 		aspectTemplate.setAttribute("name", aspectName);
 
-		/* Eventually collect allInstances for some classes. */
+		/* Probably collect allInstances for some classes. */
 		if (this.myCodeTransEnv.hasAllInstancesClasses()) {
 			Set<String> allInstancesClasses;
 
@@ -2566,14 +2571,14 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 						.getBody());
 				adviceTemplate.setAttribute("method", operationName);
 
-				/* Eventually set the returnType. */
+				/* Probably set the returnType. */
 				if (!operationResultType.equals(this.myTemplateEngine.getTemplate(
 						"voidType").toString())) {
 					adviceTemplate.setAttribute("returnType", operationResultType);
 				}
 				// no else.
 
-				/* Eventually set the arguments of the operation. */
+				/* Probably set the arguments of the operation. */
 				for (Parameter anArgument : anOperation.getInputParameter()) {
 					String anArgumentsName;
 					String anArgumentsType;
@@ -2585,7 +2590,7 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 					adviceTemplate.setAttribute("argTypes", anArgumentsType);
 				}
 
-				/* Eventually set that the constraint operation is static. */
+				/* Probably set that the constraint operation is static. */
 				if (anOperation.isStatic()) {
 					adviceTemplate.setAttribute("opIsStatic", "true");
 				}
@@ -2610,14 +2615,14 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 
 		result = aspectTemplate.toString();
 
-		/* Eventually save the generated Code. */
+		/* Probably save the generated Code. */
 		if (this.mySettings.isSaveCode()) {
 			this.saveTransformedCode(result, aspectName + ".aj", this
 					.getConstraintPackage(contextPackage));
 		}
 		// no else.
 
-		/* Eventually log the exit from this method. */
+		/* Probably log the exit from this method. */
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("instrumentCodeForBody(Constraint)"
 					+ "- end - return value=" + result);
@@ -2638,7 +2643,7 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 	private String instrumentCodeForDef(Constraint aConstraint)
 			throws Ocl22CodeException {
 
-		/* Eventually log the entry into this method. */
+		/* Probably log the entry into this method. */
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("instrumentCodeForDef(Constraint) - start");
 		}
@@ -2678,7 +2683,7 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 				.getConstraintPackage(contextPackage));
 		aspectTemplate.setAttribute("name", aspectName);
 
-		/* Eventually collect allInstances for some classes. */
+		/* Probably collect allInstances for some classes. */
 		if (this.myCodeTransEnv.hasAllInstancesClasses()) {
 			Set<String> allInstancesClasses;
 
@@ -2761,7 +2766,7 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 							.setAttribute("attributes", attributeTemplate.toString());
 
 					/*
-					 * Eventually also create a new getter method for the new attribute.
+					 * Probably also create a new getter method for the new attribute.
 					 */
 					if (this.mySettings.isGettersForDefinedAttributesEnabled()) {
 						attributeTemplate =
@@ -2834,7 +2839,7 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 					methodTemplate.setAttribute("name", operationName);
 					methodTemplate.setAttribute("returnType", operationReturnType);
 
-					/* Eventually set the arguments of the operation. */
+					/* Probably set the arguments of the operation. */
 					for (Parameter anArgument : definedOperation.getInputParameter()) {
 						anArgumentsName = anArgument.getName();
 						anArgumentsType =
@@ -2855,7 +2860,7 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 					/* Set operation specific template parameters. */
 					adviceTemplate.setAttribute("method", operationName);
 
-					/* Eventually set the returnType. */
+					/* Probably set the returnType. */
 					if (!operationReturnType.equals(this.myTemplateEngine.getTemplate(
 							"voidType").toString())) {
 						adviceTemplate.setAttribute("returnType", operationReturnType);
@@ -2914,14 +2919,14 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 
 		result = aspectTemplate.toString();
 
-		/* Eventually save the generated Code. */
+		/* Probably save the generated Code. */
 		if (this.mySettings.isSaveCode()) {
 			this.saveTransformedCode(result, aspectName + ".aj", this
 					.getConstraintPackage(contextPackage));
 		}
 		// no else.
 
-		/* Eventually log the exit from this method. */
+		/* Probably log the exit from this method. */
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("instrumentCodeForDef(Constraint)" + "- end - return value="
 					+ result);
@@ -2942,7 +2947,7 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 	private String instrumentCodeForDerive(Constraint aConstraint)
 			throws Ocl22CodeException {
 
-		/* Eventually log the entry into this method. */
+		/* Probably log the entry into this method. */
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("instrumentCodeForDerive(Constraint) - start");
 		}
@@ -2977,7 +2982,7 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 				.getConstraintPackage(contextPackage));
 		aspectTemplate.setAttribute("name", aspectName);
 
-		/* Eventually collect allInstances for some classes. */
+		/* Probably collect allInstances for some classes. */
 		if (this.myCodeTransEnv.hasAllInstancesClasses()) {
 			Set<String> allInstancesClasses;
 
@@ -3039,7 +3044,7 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 				adviceTemplate.setAttribute("oclBody", aConstraint.getSpecification()
 						.getBody());
 
-				/* Eventually set that the constrained attribute is static. */
+				/* Probably set that the constrained attribute is static. */
 				if (aProperty.isStatic()) {
 					adviceTemplate.setAttribute("attIsStatic", "true");
 				}
@@ -3064,14 +3069,14 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 
 		result = aspectTemplate.toString();
 
-		/* Eventually save the generated Code. */
+		/* Probably save the generated Code. */
 		if (this.mySettings.isSaveCode()) {
 			this.saveTransformedCode(result, aspectName + ".aj", this
 					.getConstraintPackage(contextPackage));
 		}
 		// no else.
 
-		/* Eventually log the exit from this method. */
+		/* Probably log the exit from this method. */
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("instrumentCodeForDerive(Constraint)"
 					+ "- end - return value=" + result);
@@ -3092,7 +3097,7 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 	private String instrumentCodeForInit(Constraint aConstraint)
 			throws Ocl22CodeException {
 
-		/* Eventually log the entry into this method. */
+		/* Probably log the entry into this method. */
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("instrumentCodeForInit(Constraint) - start");
 		}
@@ -3130,7 +3135,7 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 				.getConstraintPackage(contextPackage));
 		aspectTemplate.setAttribute("name", aspectName);
 
-		/* Eventually collect allInstances for some classes. */
+		/* Probably collect allInstances for some classes. */
 		if (this.myCodeTransEnv.hasAllInstancesClasses()) {
 			Set<String> allInstancesClasses;
 
@@ -3207,14 +3212,14 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 
 		result = aspectTemplate.toString();
 
-		/* Eventually save the generated Code. */
+		/* Probably save the generated Code. */
 		if (this.mySettings.isSaveCode()) {
 			this.saveTransformedCode(result, aspectName + ".aj", this
 					.getConstraintPackage(contextPackage));
 		}
 		// no else.
 
-		/* Eventually log the exit from this method. */
+		/* Probably log the exit from this method. */
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("instrumentCodeForInit(Constraint)"
 					+ "- end - return value=" + result);
@@ -3235,7 +3240,7 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 	private String instrumentCodeForInv(Constraint aConstraint)
 			throws Ocl22CodeException {
 
-		/* Eventually log the entry into this method. */
+		/* Probably log the entry into this method. */
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("instrumentCodeForInv(Constraint) - start");
 		}
@@ -3271,7 +3276,7 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 				.getConstraintPackage(contextPackage));
 		aspectTemplate.setAttribute("name", aspectName);
 
-		/* Eventually collect allInstances for some classes. */
+		/* Probably collect allInstances for some classes. */
 		if (this.myCodeTransEnv.hasAllInstancesClasses()) {
 			Set<String> allInstancesClasses;
 
@@ -3328,7 +3333,7 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 						.getViolationMacro(aConstraint).getCode());
 
 				/*
-				 * Eventually add called attributes as parameters (only if the invariant
+				 * Probably add called attributes as parameters (only if the invariant
 				 * shall be verified after the change of an depending attribute).
 				 */
 				if (this.mySettings.getInvariantCheckMode(aConstraint) == IOcl22CodeSettings.INVARIANT_CHECK_AFTER_CONSTRUCT_AND_ATTRIBUTE_CHANGE) {
@@ -3347,8 +3352,8 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 				// no else.
 
 				/*
-				 * Eventually add super class for method definition (only if the
-				 * invariant shall be verified after special method invocation).
+				 * Probably add super class for method definition (only if the invariant
+				 * shall be verified after special method invocation).
 				 */
 				if (this.mySettings.getInvariantCheckMode(aConstraint) == IOcl22CodeSettings.INVARIANT_CHECK_AFTER_SPECIAL_METHOD_INVOCATION) {
 
@@ -3400,7 +3405,7 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 				}
 				// no else.
 
-				/* Eventually disable the inheritance for this invariant. */
+				/* Probably disable the inheritance for this invariant. */
 				if (this.mySettings.isInheritanceDisabled(aConstraint)) {
 					adviceTemplate.setAttribute("disableInheritance", "true");
 				}
@@ -3425,14 +3430,14 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 
 		result = aspectTemplate.toString();
 
-		/* Eventually save the generated Code. */
+		/* Probably save the generated Code. */
 		if (this.mySettings.isSaveCode()) {
 			this.saveTransformedCode(result, aspectName + ".aj", this
 					.getConstraintPackage(contextPackage));
 		}
 		// no else.
 
-		/* Eventually log the exit from this method. */
+		/* Probably log the exit from this method. */
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("instrumentCodeForInv(Constraint)" + "- end - return value="
 					+ result);
@@ -3453,7 +3458,7 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 	private String instrumentCodeForPost(Constraint aConstraint)
 			throws Ocl22CodeException {
 
-		/* Eventually log the entry into this method. */
+		/* Probably log the entry into this method. */
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("instrumentCodeForPost(Constraint) - start");
 		}
@@ -3489,7 +3494,7 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 				.getConstraintPackage(contextPackage));
 		aspectTemplate.setAttribute("name", aspectName);
 
-		/* Eventually collect allInstances for some classes. */
+		/* Probably collect allInstances for some classes. */
 		if (this.myCodeTransEnv.hasAllInstancesClasses()) {
 			Set<String> allInstancesClasses;
 
@@ -3501,7 +3506,7 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 		}
 		// no else.
 
-		/* Eventually collect newInstances for some classes. */
+		/* Probably collect newInstances for some classes. */
 		if (this.myCodeTransEnv.hasIsNewClasses()) {
 			Set<String> isNewClasses;
 
@@ -3551,14 +3556,14 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 				adviceTemplate.setAttribute("errorCode", this.mySettings
 						.getViolationMacro(aConstraint).getCode());
 
-				/* Eventually set the returnType. */
+				/* Probably set the returnType. */
 				if (!operationResultType.equals(this.myTemplateEngine.getTemplate(
 						"voidType").toString())) {
 					adviceTemplate.setAttribute("returnType", operationResultType);
 				}
 				// no else.
 
-				/* Eventually set the arguments of the operation. */
+				/* Probably set the arguments of the operation. */
 				for (Parameter anArgument : anOperation.getInputParameter()) {
 					String anArgumentsName;
 					String anArgumentsType;
@@ -3570,7 +3575,7 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 					adviceTemplate.setAttribute("argTypes", anArgumentsType);
 				}
 
-				/* Eventually store some atPre values */
+				/* Probably store some atPre values */
 				if (this.myCodeTransEnv.hasAtPreValues()) {
 					Map<ITransformedCode, Object[]> atPreValues;
 					Set<ITransformedCode> valueCodes;
@@ -3632,19 +3637,19 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 				}
 				// no else.
 
-				/* Eventually use the special OCL operation oclIsNew. */
+				/* Probably use the special OCL operation oclIsNew. */
 				if (this.myCodeTransEnv.hasIsNewClasses()) {
 					adviceTemplate.setAttribute("oclIsNewUsed", "true");
 				}
 				// no else.
 
-				/* Eventually disable inheritance for this post condition. */
+				/* Probably disable inheritance for this post condition. */
 				if (this.mySettings.isInheritanceDisabled(aConstraint)) {
 					adviceTemplate.setAttribute("disableInheritance", "true");
 				}
 				// no else.
 
-				/* Eventually set that the constraint operation is static. */
+				/* Probably set that the constraint operation is static. */
 				if (anOperation.isStatic()) {
 					adviceTemplate.setAttribute("opIsStatic", "true");
 				}
@@ -3669,14 +3674,14 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 
 		result = aspectTemplate.toString();
 
-		/* Eventually save the generated Code. */
+		/* Probably save the generated Code. */
 		if (this.mySettings.isSaveCode()) {
 			this.saveTransformedCode(result, aspectName + ".aj", this
 					.getConstraintPackage(contextPackage));
 		}
 		// no else.
 
-		/* Eventually log the exit from this method. */
+		/* Probably log the exit from this method. */
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("instrumentCodeForPost(Constraint)"
 					+ "- end - return value=" + result);
@@ -3697,7 +3702,7 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 	private String instrumentCodeForPre(Constraint aConstraint)
 			throws Ocl22CodeException {
 
-		/* Eventually log the entry into this method. */
+		/* Probably log the entry into this method. */
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("instrumentCodeForPre(Constraint) - start");
 		}
@@ -3733,7 +3738,7 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 				.getConstraintPackage(contextPackage));
 		aspectTemplate.setAttribute("name", aspectName);
 
-		/* Eventually collect allInstances for some classes. */
+		/* Probably collect allInstances for some classes. */
 		if (this.myCodeTransEnv.hasAllInstancesClasses()) {
 			Set<String> allInstancesClasses;
 
@@ -3783,14 +3788,14 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 				adviceTemplate.setAttribute("errorCode", this.mySettings
 						.getViolationMacro(aConstraint).getCode());
 
-				/* Eventually set the returnType. */
+				/* Probably set the returnType. */
 				if (!operationResultType.equals(this.myTemplateEngine.getTemplate(
 						"voidType").toString())) {
 					adviceTemplate.setAttribute("returnType", operationResultType);
 				}
 				// no else.
 
-				/* Eventually set the arguments of the operation. */
+				/* Probably set the arguments of the operation. */
 				for (Parameter anArgument : anOperation.getInputParameter()) {
 					String anArgumentsName;
 					String anArgumentsType;
@@ -3802,13 +3807,13 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 					adviceTemplate.setAttribute("argTypes", anArgumentsType);
 				}
 
-				/* Eventually disable inheritance for this post condition. */
+				/* Probably disable inheritance for this post condition. */
 				if (this.mySettings.isInheritanceDisabled(aConstraint)) {
 					adviceTemplate.setAttribute("disableInheritance", "true");
 				}
 				// no else.
 
-				/* Eventually set that the constraint operation is static. */
+				/* Probably set that the constraint operation is static. */
 				if (anOperation.isStatic()) {
 					adviceTemplate.setAttribute("opIsStatic", "true");
 				}
@@ -3833,14 +3838,14 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 
 		result = aspectTemplate.toString();
 
-		/* Eventually save the generated Code. */
+		/* Probably save the generated Code. */
 		if (this.mySettings.isSaveCode()) {
 			this.saveTransformedCode(result, aspectName + ".aj", this
 					.getConstraintPackage(contextPackage));
 		}
 		// no else.
 
-		/* Eventually log the exit from this method. */
+		/* Probably log the exit from this method. */
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("instrumentCodeForPre(Constraint)" + "- end - return value="
 					+ result);
@@ -3974,7 +3979,7 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 	 */
 	private void saveExtendedClasses() throws Ocl22CodeException {
 
-		/* Eventually log the entry into this method. */
+		/* Probably log the entry into this method. */
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("saveExtendedClasses() - start");
 		}
@@ -4012,7 +4017,7 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 					.saveTransformedCode(aClassTemplate.toString(), fileName, packagePath);
 		}
 
-		/* Eventually log the exit from this method. */
+		/* Probably log the exit from this method. */
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("saveExtendedClasses() - end");
 		}
@@ -4039,7 +4044,7 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 	private void saveTransformedCode(String generatedCode, String fileName,
 			String subFolder) throws Ocl22CodeException {
 
-		/* Eventually log the entry into this method. */
+		/* Probably log the entry into this method. */
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("saveGeneratedCode(String, String, String)");
 		}
@@ -4102,7 +4107,7 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 			throw new Ocl22CodeException(msg);
 		}
 
-		/* Eventually log the exit from this method. */
+		/* Probably log the exit from this method. */
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("saveGeneratedCode(String, String, String) - end");
 		}
