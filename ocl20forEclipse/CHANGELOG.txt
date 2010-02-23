@@ -36,7 +36,18 @@ Release 2.1 (not scheduled yet)
   - The copy mechanism for @pre values works now correctly when invoking
     empty constructors.
   
-* Some bugs in the OCL Standard Library were fixed.
+* Complete rewrite of the OCL Standard Library; some bugs were fixed.
+  - invalid and null values are now created by every library method and no exceptions are thrown
+  - consistent way of handling null(undefined) and invalid
+  - undefined can be created for AnyType
+  - TypeConstants: create BagType, etc. instead of CollectionType -> invalid and undefined collections can be created
+  - OclBoolean: and(), or() and implies() accept undefined values and can return OclBooleans (standard, p. 15)
+  - union(OclSequence) only on OclSequence instead of SortedCollection
+  - excluding(T) now removes all appearances, not only the first
+  - OclCollections can return their generic/element type
+  - support for the creation of nested OclCollections
+  - OclAny: oclIsUndefined() now returns invalid if the object is invalid
+  - OclString: substring() returns invalid if lower index is greater than higher index
 
 * Some bugs in the Ocl22Java Code Generator was fixed.
   - The code generation of OclAny.allInstances() now works properly again.
