@@ -202,7 +202,7 @@ public class TestPerformer {
 
 		/* Probably remove all constraints are removed from the model. */
 		if (removeConstraints) {
-			this.myModel.removeAllConstraints(this.myModel);
+			this.myModel.removeAllConstraints();
 		}
 		// no else.
 
@@ -258,7 +258,7 @@ public class TestPerformer {
 
 		/* Probably remove all constraints are removed from the model. */
 		if (removeConstraints) {
-			this.myModel.removeAllConstraints(this.myModel);
+			this.myModel.removeAllConstraints();
 		}
 		// no else.
 
@@ -310,7 +310,7 @@ public class TestPerformer {
 
 		/* Probably remove all constraints are removed from the model. */
 		if (removeConstraints) {
-			this.myModel.removeAllConstraints(this.myModel);
+			this.myModel.removeAllConstraints();
 		}
 		// no else.
 

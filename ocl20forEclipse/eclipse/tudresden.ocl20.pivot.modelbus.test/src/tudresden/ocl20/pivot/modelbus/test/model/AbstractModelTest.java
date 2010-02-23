@@ -25,14 +25,20 @@ import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.junit.Test;
 
+import tudresden.ocl20.pivot.facade.OCL2ParsingException;
+import tudresden.ocl20.pivot.facade.Ocl2ForEclipseFacade;
 import tudresden.ocl20.pivot.modelbus.IModelBusConstants;
 import tudresden.ocl20.pivot.modelbus.ModelAccessException;
 import tudresden.ocl20.pivot.modelbus.model.IModel;
 import tudresden.ocl20.pivot.modelbus.test.ModelBusTestUtility;
+import tudresden.ocl20.pivot.pivotmodel.Constraint;
 import tudresden.ocl20.pivot.pivotmodel.Namespace;
 import tudresden.ocl20.pivot.pivotmodel.PrimitiveType;
 import tudresden.ocl20.pivot.pivotmodel.PrimitiveTypeKind;
@@ -602,4 +608,302 @@ public class AbstractModelTest {
 		/* The result should be null. Name Type3 is ambigous. */
 		assertNull(type);
 	}
+
+	/**
+	 * <p>
+	 * Tests the method {@link IModel#getConstraints()} for an {@link IModel}
+	 * without {@link Constraint}s.
+	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 * @throws OCL2ParsingException
+	 * @throws IllegalArgumentException
+	 */
+	@Test
+	public void testGetConstraints01() throws ModelAccessException,
+			IllegalArgumentException, OCL2ParsingException {
+
+		IModel model;
+		model = ModelBusTestUtility.getUML2Model("resources/models/model05.uml");
+
+		assertNotNull(model.getConstraints());
+		assertEquals(0, model.getConstraints().size());
+
+		model.removeAllConstraints();
+		Ocl2ForEclipseFacade.removeModel(model);
+	}
+
+	/**
+	 * <p>
+	 * Tests the method {@link IModel#getConstraints()} for a model with
+	 * {@link Constraint}s.
+	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 * @throws OCL2ParsingException
+	 * @throws IllegalArgumentException
+	 */
+	@Test
+	public void testGetConstraints02() throws ModelAccessException,
+			IllegalArgumentException, OCL2ParsingException {
+
+		IModel model;
+		model = ModelBusTestUtility.getUML2Model("resources/models/model05.uml");
+
+		assertNotNull(model.getConstraints());
+		assertEquals(0, model.getConstraints().size());
+
+		Collection<Constraint> constraints;
+		constraints =
+				ModelBusTestUtility.parseConstraints(
+						"resources/constraints/constraints01.ocl", model);
+
+		assertNotNull(constraints);
+		assertTrue(constraints.size() > 0);
+
+		assertEquals(constraints, model.getConstraints());
+
+		model.removeAllConstraints();
+		Ocl2ForEclipseFacade.removeModel(model);
+	}
+
+	/**
+	 * <p>
+	 * Tests the method {@link IModel#getConstraints()} for a model with
+	 * {@link Constraint}s.
+	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 * @throws OCL2ParsingException
+	 * @throws IllegalArgumentException
+	 */
+	@Test
+	public void testGetConstraints03() throws ModelAccessException,
+			IllegalArgumentException, OCL2ParsingException {
+
+		IModel model;
+		model = ModelBusTestUtility.getUML2Model("resources/models/model05.uml");
+
+		assertNotNull(model.getConstraints());
+		assertEquals(0, model.getConstraints().size());
+
+		Collection<Constraint> constraints;
+		constraints =
+				ModelBusTestUtility.parseConstraints(
+						"resources/constraints/constraints01.ocl", model);
+
+		assertNotNull(constraints);
+		assertTrue(constraints.size() > 0);
+
+		constraints.addAll(ModelBusTestUtility.parseConstraints(
+				"resources/constraints/constraints02.ocl", model));
+
+		Collection<Constraint> modelConstraints;
+		modelConstraints = model.getConstraints();
+
+		assertEquals(constraints.size(), modelConstraints.size());
+
+		for (Constraint constraint : constraints) {
+			assertTrue(modelConstraints.contains(constraint));
+		}
+
+		model.removeAllConstraints();
+		Ocl2ForEclipseFacade.removeModel(model);
+	}
+
+	/**
+	 * <p>
+	 * Tests the method {@link IModel#removeAllConstraints()} for an
+	 * {@link IModel} without {@link Constraint}s.
+	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 * @throws OCL2ParsingException
+	 * @throws IllegalArgumentException
+	 */
+	@Test
+	public void testRemoveAllConstraints01() throws ModelAccessException,
+			IllegalArgumentException, OCL2ParsingException {
+
+		IModel model;
+		model = ModelBusTestUtility.getUML2Model("resources/models/model05.uml");
+
+		model.removeAllConstraints();
+
+		assertNotNull(model.getConstraints());
+		assertEquals(0, model.getConstraints().size());
+
+		Ocl2ForEclipseFacade.removeModel(model);
+	}
+
+	/**
+	 * <p>
+	 * Tests the method {@link IModel#removeAllConstraints()} for an
+	 * {@link IModel} with {@link Constraint}s.
+	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 * @throws OCL2ParsingException
+	 * @throws IllegalArgumentException
+	 */
+	@Test
+	public void testRemoveAllConstraints02() throws ModelAccessException,
+			IllegalArgumentException, OCL2ParsingException {
+
+		IModel model;
+		model = ModelBusTestUtility.getUML2Model("resources/models/model05.uml");
+
+		ModelBusTestUtility.parseConstraints(
+				"resources/constraints/constraints01.ocl", model);
+
+		assertNotNull(model.getConstraints());
+		assertTrue(model.getConstraints().size() > 0);
+
+		model.removeAllConstraints();
+
+		assertNotNull(model.getConstraints());
+		assertEquals(0, model.getConstraints().size());
+
+		Ocl2ForEclipseFacade.removeModel(model);
+	}
+
+	/**
+	 * <p>
+	 * Tests the method {@link IModel#removeAllConstraints()} for an
+	 * {@link IModel} with {@link Constraint}s.
+	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 * @throws OCL2ParsingException
+	 * @throws IllegalArgumentException
+	 */
+	@Test
+	public void testRemoveAllConstraints03() throws ModelAccessException,
+			IllegalArgumentException, OCL2ParsingException {
+
+		IModel model;
+		model = ModelBusTestUtility.getUML2Model("resources/models/model05.uml");
+
+		ModelBusTestUtility.parseConstraints(
+				"resources/constraints/constraints01.ocl", model);
+		ModelBusTestUtility.parseConstraints(
+				"resources/constraints/constraints02.ocl", model);
+
+		assertNotNull(model.getConstraints());
+		assertTrue(model.getConstraints().size() > 0);
+
+		model.removeAllConstraints();
+
+		assertNotNull(model.getConstraints());
+		assertEquals(0, model.getConstraints().size());
+
+		Ocl2ForEclipseFacade.removeModel(model);
+	}
+
+	/**
+	 * <p>
+	 * Tests the method {@link IModel#removeConstraints(Collection)} for an
+	 * {@link IModel} without {@link Constraint}s.
+	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 * @throws OCL2ParsingException
+	 * @throws IllegalArgumentException
+	 */
+	@Test
+	public void testRemoveConstraints01() throws ModelAccessException,
+			IllegalArgumentException, OCL2ParsingException {
+
+		IModel model;
+		model = ModelBusTestUtility.getUML2Model("resources/models/model05.uml");
+
+		model.removeConstraints(new HashSet<Constraint>());
+
+		assertNotNull(model.getConstraints());
+		assertEquals(0, model.getConstraints().size());
+
+		Ocl2ForEclipseFacade.removeModel(model);
+	}
+
+	/**
+	 * <p>
+	 * Tests the method {@link IModel#removeConstraints(Collection)} for an
+	 * {@link IModel} with {@link Constraint}s.
+	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 * @throws OCL2ParsingException
+	 * @throws IllegalArgumentException
+	 */
+	@Test
+	public void testRemoveConstraints02() throws ModelAccessException,
+			IllegalArgumentException, OCL2ParsingException {
+
+		IModel model;
+		model = ModelBusTestUtility.getUML2Model("resources/models/model05.uml");
+
+		Collection<Constraint> constraints;
+		constraints =
+				ModelBusTestUtility.parseConstraints(
+						"resources/constraints/constraints01.ocl", model);
+
+		assertNotNull(model.getConstraints());
+		assertTrue(model.getConstraints().size() > 0);
+
+		model.removeConstraints(constraints);
+
+		assertNotNull(model.getConstraints());
+		assertEquals(0, model.getConstraints().size());
+
+		Ocl2ForEclipseFacade.removeModel(model);
+	}
+
+	/**
+	 * <p>
+	 * Tests the method {@link IModel#removeConstraints(Collection)} for an
+	 * {@link IModel} with {@link Constraint}s.
+	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 * @throws OCL2ParsingException
+	 * @throws IllegalArgumentException
+	 */
+	@Test
+	public void testRemoveConstraints03() throws ModelAccessException,
+			IllegalArgumentException, OCL2ParsingException {
+
+		IModel model;
+		model = ModelBusTestUtility.getUML2Model("resources/models/model05.uml");
+
+		Collection<Constraint> constraints;
+		constraints =
+				ModelBusTestUtility.parseConstraints(
+						"resources/constraints/constraints01.ocl", model);
+		constraints.addAll(ModelBusTestUtility.parseConstraints(
+				"resources/constraints/constraints02.ocl", model));
+
+		assertNotNull(model.getConstraints());
+		assertTrue(model.getConstraints().size() > 0);
+
+		while (constraints.size() > 0) {
+			assertNotNull(model.getConstraints());
+			assertTrue(model.getConstraints().size() > 0);
+
+			Constraint constraint;
+			constraint = constraints.iterator().next();
+			constraints.remove(constraint);
+
+			Set<Constraint> constraintToBeRemoved;
+			constraintToBeRemoved = new HashSet<Constraint>();
+			constraintToBeRemoved.add(constraint);
+
+			model.removeConstraints(constraintToBeRemoved);
+		}
+
+		assertNotNull(model.getConstraints());
+		assertEquals(0, model.getConstraints().size());
+
+		Ocl2ForEclipseFacade.removeModel(model);
+	}
+	/* FIXME Claas: Test cases to transitively remove definitions etc? */
 }

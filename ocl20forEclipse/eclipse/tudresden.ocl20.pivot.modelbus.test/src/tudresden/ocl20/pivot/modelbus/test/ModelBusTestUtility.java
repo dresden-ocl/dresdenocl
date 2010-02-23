@@ -1,11 +1,14 @@
 package tudresden.ocl20.pivot.modelbus.test;
 
 import java.io.File;
+import java.util.Collection;
 
+import tudresden.ocl20.pivot.facade.OCL2ParsingException;
 import tudresden.ocl20.pivot.facade.Ocl2ForEclipseFacade;
 import tudresden.ocl20.pivot.modelbus.ModelAccessException;
 import tudresden.ocl20.pivot.modelbus.model.IModel;
 import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance;
+import tudresden.ocl20.pivot.pivotmodel.Constraint;
 
 /**
  * <p>
@@ -127,5 +130,47 @@ public class ModelBusTestUtility {
 		}
 
 		return result;
+	}
+
+	/**
+	 * <p>
+	 * Parses OCL {@link Constraint}s from a given file for a given {@link IModel}
+	 * .
+	 * </p>
+	 * 
+	 * @param constraintLocation
+	 *          The name of the file containing the {@link Constraint}s.
+	 * @param model
+	 *          The {@link IModel}.
+	 * @throws ModelAccessException
+	 * @throws OCL2ParsingException
+	 * @throws IllegalArgumentException
+	 */
+	public static Collection<Constraint> parseConstraints(
+			String constraintLocation, IModel model) throws IllegalArgumentException,
+			OCL2ParsingException, ModelAccessException {
+
+		String bundleDirectory;
+		File constraintFile;
+
+		/* Get the bundle location for the model files. */
+		bundleDirectory = Activator.getDefault().getBundle().getLocation();
+
+		/* Remove the 'reference:file:' from the beginning. */
+		bundleDirectory = bundleDirectory.substring(15);
+
+		constraintFile = new File(bundleDirectory + constraintLocation);
+
+		/* Check if the given file does not exist. */
+		if (!constraintFile.exists()) {
+			throw new RuntimeException("The model for the path " + bundleDirectory
+					+ constraintLocation + " cannot be found.");
+		}
+
+		/* Else try to parse the constraints. */
+		else {
+			return Ocl2ForEclipseFacade.parseConstraints(constraintFile, model, true);
+		}
+		// end else.
 	}
 }

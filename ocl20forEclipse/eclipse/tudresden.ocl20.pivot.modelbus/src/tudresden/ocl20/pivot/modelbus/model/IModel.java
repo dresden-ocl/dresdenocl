@@ -32,6 +32,7 @@
  */
 package tudresden.ocl20.pivot.modelbus.model;
 
+import java.util.Collection;
 import java.util.List;
 
 import tudresden.ocl20.pivot.modelbus.ModelAccessException;
@@ -91,6 +92,17 @@ public interface IModel {
 	 *           If an error occurs when accessing the adapted model.
 	 */
 	Type findType(List<String> pathName) throws ModelAccessException;
+
+	/**
+	 * <p>
+	 * Returns all {@link Constraint}s that are contained in this {@link IModel}.
+	 * </p>
+	 * 
+	 * @return All {@link Constraint}s that are contained in this {@link IModel}.
+	 * @throws ModelAccessException
+	 *           Thrown, if the given {@link IModel} is in an invalid state.
+	 */
+	public Collection<Constraint> getConstraints() throws ModelAccessException;
 
 	/**
 	 * <p>
@@ -169,6 +181,23 @@ public interface IModel {
 	 * @throws ModelAccessException
 	 *           Thrown, if the given {@link IModel} is in an invalid state.
 	 */
-	public boolean removeAllConstraints(IModel model)
+	public boolean removeAllConstraints() throws IllegalArgumentException,
+			ModelAccessException;
+
+	/**
+	 * <p>
+	 * Removes all {@link Constraint}s from this {@link IModel} that are contained
+	 * in a given {@link Collection}.
+	 * </p>
+	 * 
+	 * @param constraints
+	 *          The {@link Constraint}s that shall be removed.
+	 * @return <code>true</code> if the {@link Constraint}s have been removed.
+	 * @throws IllegalArgumentException
+	 *           Thrown, if the given parameter is invalid.
+	 * @throws ModelAccessException
+	 *           Thrown, if the given {@link IModel} is in an invalid state.
+	 */
+	public boolean removeConstraints(Collection<Constraint> constraints)
 			throws IllegalArgumentException, ModelAccessException;
 }

@@ -52,6 +52,7 @@ import tudresden.ocl20.pivot.pivotmodel.impl.PivotModelFactoryImpl;
  *   <li>{@link tudresden.ocl20.pivot.pivotmodel.Namespace#lookupType(java.lang.String) <em>Lookup Type</em>}</li>
  *   <li>{@link tudresden.ocl20.pivot.pivotmodel.Namespace#lookupNamespace(java.lang.String) <em>Lookup Namespace</em>}</li>
  *   <li>{@link tudresden.ocl20.pivot.pivotmodel.Namespace#removeOwnedAndNestedRules() <em>Remove Owned And Nested Rules</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.pivotmodel.Namespace#removeOwnedAndNestedRules(java.util.List) <em>Remove Owned And Nested Rules</em>}</li>
  *   <li>{@link tudresden.ocl20.pivot.pivotmodel.GenericElement#bindTypeParameter(java.util.List, java.util.List) <em>Bind Type Parameter</em>}</li>
  *   <li>{@link tudresden.ocl20.pivot.pivotmodel.GenericElement#addTypeParameter(tudresden.ocl20.pivot.pivotmodel.TypeParameter) <em>Add Type Parameter</em>}</li>
  * </ul>
@@ -209,6 +210,20 @@ public class NamespaceTest extends NamedElementTest {
 	 * @generated
 	 */
 	public void testRemoveOwnedAndNestedRules() {
+
+		// TODO: implement this operation test method
+		// Ensure that you remove @generated or mark it @generated NOT
+		fail();
+	}
+
+	/**
+	 * Tests the '{@link tudresden.ocl20.pivot.pivotmodel.Namespace#removeOwnedAndNestedRules(java.util.List) <em>Remove Owned And Nested Rules</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see tudresden.ocl20.pivot.pivotmodel.Namespace#removeOwnedAndNestedRules(java.util.List)
+	 * @generated
+	 */
+	public void testRemoveOwnedAndNestedRules__List() {
 
 		// TODO: implement this operation test method
 		// Ensure that you remove @generated or mark it @generated NOT

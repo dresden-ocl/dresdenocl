@@ -162,6 +162,12 @@
         <details key="documentation" value="&lt;p>&#xD;&#xA;Removes all {@link Constraint}s that are owned by this or any nested {@link Namespace}.&#xD;&#xA;&lt;/p>&#xD;&#xA;&#xD;&#xA;@return &lt;code>true&lt;/code> if the {@link Constraint}s have been removed."/>
       </eAnnotations>
     </eOperations>
+    <eOperations name="removeOwnedAndNestedRules" lowerBound="1" eType="ecore:EDataType datatypes.ecore#//Boolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;p>&#xD;&#xA;Removes all {@link Constraint}s that are owned by this or any nested {@link Namespace} and contained in the given {@link Collection}.&#xD;&#xA;&lt;/p>&#xD;&#xA;&#xD;&#xA;@param constraints The {@link Constraint}s that shall be removed.&#xD;&#xA;@return &lt;code>true&lt;/code> if the {@link Constraint}s have been removed."/>
+      </eAnnotations>
+      <eParameters name="constraints" upperBound="-1" eType="#//Constraint"/>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedType" upperBound="-1"
         eType="#//Type" containment="true" eOpposite="#//Type/namespace">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">

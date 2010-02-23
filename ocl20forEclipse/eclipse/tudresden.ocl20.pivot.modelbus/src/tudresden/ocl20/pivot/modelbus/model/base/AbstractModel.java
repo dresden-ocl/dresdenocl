@@ -25,6 +25,7 @@
 package tudresden.ocl20.pivot.modelbus.model.base;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -275,6 +276,15 @@ public abstract class AbstractModel implements IModel {
 
 	/*
 	 * (non-Javadoc)
+	 * @see tudresden.ocl20.pivot.modelbus.model.IModel#getConstraints()
+	 */
+	public Collection<Constraint> getConstraints() throws ModelAccessException {
+
+		return this.getRootNamespace().getOwnedAndNestedRules();
+	}
+
+	/*
+	 * (non-Javadoc)
 	 * @see tudresden.ocl20.pivot.modelbus.IModel#getDisplayName()
 	 */
 	public String getDisplayName() {
@@ -333,21 +343,27 @@ public abstract class AbstractModel implements IModel {
 		return this.typeResolver;
 	}
 
-	/**
-	 * <p>
-	 * Removes all {@link Constraint}s from this {@link IModel}.
-	 * </p>
-	 * 
-	 * @return <code>true</code> if all {@link Constraint}s have been removed.
-	 * @throws IllegalArgumentException
-	 *           Thrown, if the given parameter is invalid.
-	 * @throws ModelAccessException
-	 *           Thrown, if the given {@link IModel} is in an invalid state.
+	/*
+	 * (non-Javadoc)
+	 * @see tudresden.ocl20.pivot.modelbus.model.IModel#removeAllConstraints()
 	 */
-	public boolean removeAllConstraints(IModel model)
-			throws IllegalArgumentException, ModelAccessException {
+	public boolean removeAllConstraints() throws IllegalArgumentException,
+			ModelAccessException {
 
 		return this.getRootNamespace().removeOwnedAndNestedRules();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * tudresden.ocl20.pivot.modelbus.model.IModel#removeConstraints(java.util
+	 * .Collection)
+	 */
+	public boolean removeConstraints(Collection<Constraint> constraints)
+			throws IllegalArgumentException, ModelAccessException {
+
+		return this.getRootNamespace().removeOwnedAndNestedRules(
+				new ArrayList<Constraint>(constraints));
 	}
 
 	/**

@@ -3380,6 +3380,12 @@ public class PivotModelPackageImpl extends EPackageImpl {
 		addEOperation(namespaceEClass, theDatatypesPackage.getBoolean(),
 				"removeOwnedAndNestedRules", 1, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
+		op =
+				addEOperation(namespaceEClass, theDatatypesPackage.getBoolean(),
+						"removeOwnedAndNestedRules", 1, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		addEParameter(op, this.getConstraint(),
+				"constraints", 0, -1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+
 		initEClass(typeEClass, Type.class,
 				"Type", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 		initEReference(

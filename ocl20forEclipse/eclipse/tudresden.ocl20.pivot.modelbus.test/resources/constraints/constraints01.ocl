@@ -1,0 +1,7 @@
+package package1
+
+context Type1
+inv: true
+inv: false
+
+endpackage

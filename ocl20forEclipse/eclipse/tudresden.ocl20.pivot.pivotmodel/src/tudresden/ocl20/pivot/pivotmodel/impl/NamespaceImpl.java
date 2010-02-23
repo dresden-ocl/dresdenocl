@@ -508,6 +508,31 @@ public class NamespaceImpl extends NamedElementImpl implements Namespace {
 	 * 
 	 * @generated NOT
 	 */
+	public boolean removeOwnedAndNestedRules(List<Constraint> constraints) {
+
+		boolean result;
+		result = false;
+
+		/* Collect the constraints of all nested name spaces. */
+		for (Namespace nestedNamespace : this.getNestedNamespace()) {
+			result |= nestedNamespace.removeOwnedAndNestedRules(constraints);
+		}
+		// end for.
+
+		/*
+		 * Results in true if at least one constraint has been removed. Same
+		 * semantic as Collection.removeAll()
+		 */
+		result |= this.ownedRule.removeAll(constraints);
+
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
+	 */
 	public Namespace addTypeParameter(TypeParameter typeParameter) {
 
 		if (logger.isDebugEnabled()) {
