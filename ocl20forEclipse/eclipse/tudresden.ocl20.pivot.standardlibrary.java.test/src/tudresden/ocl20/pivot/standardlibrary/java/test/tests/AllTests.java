@@ -10,9 +10,11 @@ import org.junit.runners.Suite;
  * 
  */
 @RunWith(Suite.class)
-@Suite.SuiteClasses( { JavaOclBooleanTest.class, JavaOclIntegerTest.class,
-		JavaOclRealTest.class, JavaOclCollectionTest.class,
-		JavaOclSequenceTest.class, JavaOclSortedCollectionTest.class })
+@Suite.SuiteClasses( { JavaOclAnyTest.class, JavaOclBagTest.class,
+		JavaOclBooleanTest.class, JavaOclIntegerTest.class,
+		JavaOclInvalidTest.class, JavaOclRealTest.class,
+		JavaOclCollectionTest.class, JavaOclSequenceTest.class,
+		JavaOclSortedCollectionTest.class, JavaOclStringTest.class })
 public class AllTests {
 
 }

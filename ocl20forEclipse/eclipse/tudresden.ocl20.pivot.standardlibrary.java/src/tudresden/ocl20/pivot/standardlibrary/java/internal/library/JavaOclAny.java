@@ -249,7 +249,11 @@ public abstract class JavaOclAny implements OclAny {
 		 * see standard, p. 139; here, we use a different semantics, since invalid
 		 * should not be catched by an undefined check
 		 */
-		return JavaOclBoolean.getInstance((this.undefinedreason != null));
+		if (this.invalidReason != null)
+			return JavaStandardLibraryFactory.INSTANCE.createOclInvalid(
+					TypeConstants.BOOLEAN, invalidReason);
+		else
+			return JavaOclBoolean.getInstance((this.undefinedreason != null));
 	}
 
 	/*

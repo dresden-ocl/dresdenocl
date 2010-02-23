@@ -50,6 +50,7 @@ import tudresden.ocl20.pivot.standardlibrary.java.factory.JavaStandardLibraryFac
  * Provides an implementation of {@link OclString} in Java.
  * </p>
  * 
+ * @author Michael Thiele
  * @author Ronny Brandt
  */
 public class JavaOclString extends JavaOclLibraryObject implements OclString {
@@ -150,18 +151,20 @@ public class JavaOclString extends JavaOclLibraryObject implements OclString {
 					checkUndefined("substring", TypeConstants.STRING, this, lower, upper);
 
 		if (result == null) {
+			/* Indices in OCL are different from Java indices! */
 			int intLower =
 					((IModelInstanceInteger) lower.getModelInstanceElement()).getLong()
-							.intValue();
-
-			/* Indices in OCL are different from Java indices! */
-			intLower--;
+							.intValue() - 1;
 
 			int intUpper =
 					((IModelInstanceInteger) upper.getModelInstanceElement()).getLong()
 							.intValue();
 
 			try {
+				if (intLower >= intUpper)
+					throw new IndexOutOfBoundsException(
+							"Cannot use substring() with greater lower bound.");
+
 				result =
 						JavaStandardLibraryFactory.INSTANCE
 								.createOclString(getModelInstanceString().getString()

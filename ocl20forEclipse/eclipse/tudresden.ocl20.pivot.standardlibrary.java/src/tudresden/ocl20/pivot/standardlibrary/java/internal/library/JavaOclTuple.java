@@ -193,8 +193,7 @@ public class JavaOclTuple extends JavaOclLibraryObject implements OclTuple {
 		}
 
 		else {
-			// FIXME: print all values
-			result.append(getModelInstanceTuple().getName());
+			result.append(getModelInstanceTuple().toString());
 		}
 
 		result.append("]");
