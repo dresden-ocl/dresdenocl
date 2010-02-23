@@ -33,6 +33,8 @@
 package tudresden.ocl20.pivot.metamodels.ecore.internal.model;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -147,6 +149,15 @@ public class EcoreNamespace extends AbstractNamespace implements Namespace {
 			result.add(EcoreAdapterFactory.INSTANCE.createType(eClassifier));
 		}
 
+		/* Improves display of model. */
+		Collections.sort(result, new Comparator<Type>() {
+
+			public int compare(Type first, Type second) {
+
+				return first.getName().compareTo(second.getName());
+			}
+		});
+
 		return result;
 	}
 
@@ -165,6 +176,15 @@ public class EcoreNamespace extends AbstractNamespace implements Namespace {
 		for (EPackage subPackage : this.ePackage.getESubpackages()) {
 			result.add(EcoreAdapterFactory.INSTANCE.createNamespace(subPackage));
 		}
+
+		/* Improves display of model. */
+		Collections.sort(result, new Comparator<Namespace>() {
+
+			public int compare(Namespace first, Namespace second) {
+
+				return first.getName().compareTo(second.getName());
+			}
+		});
 
 		return result;
 	}
