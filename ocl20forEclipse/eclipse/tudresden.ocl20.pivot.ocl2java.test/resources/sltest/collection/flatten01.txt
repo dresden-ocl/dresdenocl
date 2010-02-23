@@ -14,4 +14,4 @@ collection3.add(new Integer(1));
 collection3.add(new Integer(3));
 collection1.add(collection3);
 
-(tudresden.ocl20.pivot.ocl2java.types.OclSet<Integer>) collection1.flatten()
+((tudresden.ocl20.pivot.ocl2java.types.OclSet<Integer>) collection1.flatten())
