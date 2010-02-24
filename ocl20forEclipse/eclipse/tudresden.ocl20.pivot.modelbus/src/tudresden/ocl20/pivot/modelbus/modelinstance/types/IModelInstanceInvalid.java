@@ -1,7 +1,5 @@
 package tudresden.ocl20.pivot.modelbus.modelinstance.types;
 
-import java.util.Set;
-
 import org.eclipse.osgi.util.NLS;
 
 import tudresden.ocl20.pivot.modelbus.internal.ModelBusMessages;
@@ -57,10 +55,10 @@ public interface IModelInstanceInvalid extends IModelInstancePrimitiveType {
 		 * (non-Javadoc)
 		 * @see
 		 * tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement
-		 * #getTypes()
+		 * #getType()
 		 */
 		// FIXME Michael: needs own meta-type
-		public Set<Type> getTypes() {
+		public Type getType() {
 
 			return null;
 		}
@@ -101,5 +99,4 @@ public interface IModelInstanceInvalid extends IModelInstancePrimitiveType {
 		}
 
 	};
-
 }

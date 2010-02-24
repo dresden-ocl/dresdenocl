@@ -82,10 +82,11 @@ public class ModelInstanceEnumerationLiteral extends
 
 		this.myLiteral = literal;
 
-		this.myTypes = new HashSet<Type>();
 		// FIXME How to determine the type of the enumeration literal?
-		if (myLiteral != null)
-			this.myTypes.add(this.myLiteral.getEnumeration());
+		if (myLiteral != null) {
+			this.myType = this.myLiteral.getEnumeration();
+		}
+		// no else.
 
 		/* Eventually debug the exit of this method. */
 		if (LOGGER.isDebugEnabled()) {
@@ -117,7 +118,7 @@ public class ModelInstanceEnumerationLiteral extends
 		result = null;
 
 		/* Check if the given type is the type of this literal. */
-		if (this.myTypes.contains(type)) {
+		if (this.myType.conformsTo(type)) {
 
 			Set<Type> types;
 			types = new HashSet<Type>();

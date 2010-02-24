@@ -207,19 +207,15 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 			IModelInstanceCollection<IModelInstanceElement> collection =
 					(IModelInstanceCollection<IModelInstanceElement>) modelInstanceElement;
 
-			// FIXME Michael: what if there are multiple Types?
-			result =
-					this.createOclCollection(collection, collection.getTypes().iterator()
-							.next());
+			result = this.createOclCollection(collection, collection.getType());
 		}
 
-		// FIXME Michael: what if there are multiple Types?
 		else if (modelInstanceElement instanceof IModelInstanceObject) {
 			IModelInstanceObject modelInstanceObject =
 					(IModelInstanceObject) modelInstanceElement;
 			result =
 					new JavaOclModelInstanceObject(modelInstanceObject,
-							modelInstanceObject.getTypes().iterator().next());
+							modelInstanceObject.getType());
 		}
 
 		else {
@@ -427,10 +423,9 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 		}
 
 		else {
-			// FIXME Michael: What to do with multiple types?
 			result =
 					new JavaOclModelInstanceObject(modelInstanceObject,
-							modelInstanceObject.getTypes().iterator().next());
+							modelInstanceObject.getType());
 
 			/* Cache the adapted result. */
 			this.cachedAdaptedObjects.put(modelInstanceObject, result);

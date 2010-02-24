@@ -30,7 +30,7 @@
  */
 package tudresden.ocl20.pivot.standardlibrary.java.internal.library;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
@@ -444,15 +444,12 @@ public class JavaOclModelInstanceObject extends JavaOclAny implements
 			 * PivotModel
 			 */
 			Operation operation = null;
-			for (Type type : this.imiElement.getTypes()) {
-				for (Type argType : that.getModelInstanceElement().getTypes()) {
-					List<Type> argTypes = Arrays.asList(argType);
-					operation = type.lookupOperation(methodName, argTypes);
-					if (operation != null) {
-						break;
-					}
-				}
-			}
+			List<Type> argTypes;
+			argTypes = new ArrayList<Type>();
+			argTypes.add(that.getModelInstanceElement().getType());
+			operation =
+					this.imiElement.getType().lookupOperation(methodName, argTypes);
+
 			if (operation != null)
 				result = super.invokeOperation(operation, that);
 			else

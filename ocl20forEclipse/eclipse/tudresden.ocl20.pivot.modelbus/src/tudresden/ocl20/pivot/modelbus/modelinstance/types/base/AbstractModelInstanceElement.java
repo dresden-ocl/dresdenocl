@@ -30,8 +30,6 @@
  */
 package tudresden.ocl20.pivot.modelbus.modelinstance.types.base;
 
-import java.util.Set;
-
 import tudresden.ocl20.pivot.modelbus.model.IModel;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceCollection;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
@@ -49,10 +47,10 @@ public abstract class AbstractModelInstanceElement implements
 		IModelInstanceElement {
 
 	/**
-	 * The {@link Type}s of the {@link IModel} of which this
+	 * The {@link Type} of the {@link IModel} of which this
 	 * {@link IModelInstanceElement} is an instance.
 	 */
-	protected Set<Type> myTypes;
+	protected Type myType;
 
 	/**
 	 * The name of this {@link IModelInstanceElement}. Could be <code>null</code>.
@@ -112,17 +110,7 @@ public abstract class AbstractModelInstanceElement implements
 		/* Else construct a name of all implemented types. */
 		else {
 			resultBuffer.append("[");
-
-			for (Type aType : this.getTypes()) {
-
-				if (resultBuffer.length() > 1) {
-					resultBuffer.append(",");
-				}
-				// no else.
-
-				resultBuffer.append(aType.getName());
-			}
-
+			resultBuffer.append(this.myType.getName());
 			resultBuffer.append("]");
 		}
 		// end else.
@@ -132,11 +120,13 @@ public abstract class AbstractModelInstanceElement implements
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.modelbus.IModelInstanceElement#getTypes()
+	 * @see
+	 * tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement
+	 * #getType()
 	 */
-	public Set<Type> getTypes() {
+	public Type getType() {
 
-		return this.myTypes;
+		return this.myType;
 	}
 
 	/*
@@ -147,21 +137,7 @@ public abstract class AbstractModelInstanceElement implements
 	 */
 	public boolean isKindOf(Type type) {
 
-		boolean result;
-
-		result = false;
-
-		for (Type aType : this.myTypes) {
-
-			if (aType.conformsTo(type)) {
-				result = true;
-				break;
-			}
-			// no else.
-		}
-		// end for.
-
-		return result;
+		return this.myType.conformsTo(type);
 	}
 
 	/*
@@ -172,21 +148,6 @@ public abstract class AbstractModelInstanceElement implements
 	 */
 	public boolean isTypeOf(Type type) {
 
-		boolean result;
-
-		/*
-		 * Check if this IModelInstanceElement has exactly one type. Otherwise it
-		 * cannot be of the given Type. Elements that have more than one type are a
-		 * sub type of these Types.
-		 */
-		if (this.myTypes.size() != 1) {
-			result = false;
-		}
-		
-		else {
-			result = type.equals(this.myTypes.iterator().next());
-		}
-
-		return result;
+		return type.equals(this.myType);
 	}
 }

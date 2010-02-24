@@ -30,8 +30,6 @@
  */
 package tudresden.ocl20.pivot.modelbus.modelinstance.types;
 
-import java.util.Set;
-
 import tudresden.ocl20.pivot.modelbus.model.IModel;
 import tudresden.ocl20.pivot.modelbus.modelinstance.exception.AsTypeCastException;
 import tudresden.ocl20.pivot.modelbus.modelinstance.exception.CopyForAtPreException;
@@ -119,7 +117,7 @@ public interface IModelInstanceElement {
 
 	/**
 	 * <p>
-	 * Returns the {@link Type}s of that this IModelInstanceElement is an
+	 * Returns the {@link Type} of that this IModelInstanceElement is an
 	 * instance.
 	 * </p>
 	 * 
@@ -128,20 +126,10 @@ public interface IModelInstanceElement {
 	 * their super types!
 	 * </p>
 	 * 
-	 * <p>
-	 * <strong>Please be aware, that the {@link Type}s of an
-	 * {@link IModelInstanceElement} are only set, if the
-	 * {@link IModelInstanceElement} represents at least one Type in the
-	 * {@link IModel}. The {@link IModelInstanceElement}s of the kinds
-	 * {@link IModelInstanceCollection}, {@link IModelInstanceBoolean},
-	 * {@link IModelInstanceInteger}, {@link IModelInstanceReal}, and
-	 * {@link IModelInstanceString} do not have a {@link Type}.</strong>
-	 * </p>
-	 * 
-	 * @return The {@link Type}s of which this IModelInstanceElement is an
+	 * @return The {@link Type} of which this IModelInstanceElement is an
 	 *         instance. </p>
 	 */
-	Set<Type> getTypes();
+	Type getType();
 
 	/**
 	 * <p>

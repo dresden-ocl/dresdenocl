@@ -405,11 +405,11 @@ public class JavaModelInstanceFactory extends BasisJavaModelInstanceFactory
 		// no else.
 
 		IModelInstanceObject result;
-		Set<Type> modelTypes;
 
-		modelTypes = this.findTypesOfObjectInModel(object);
+		Type modelType;
+		modelType = this.findTypesOfObjectInModel(object);
 
-		result = new JavaModelInstanceObject(object, modelTypes, this);
+		result = new JavaModelInstanceObject(object, modelType, this);
 
 		/* Probably debug the exit of this method. */
 		if (LOGGER.isDebugEnabled()) {
@@ -462,36 +462,12 @@ public class JavaModelInstanceFactory extends BasisJavaModelInstanceFactory
 		 * element can return null. Handle this case here.
 		 */
 		if (object == null) {
-			Set<Type> types = new HashSet<Type>();
-			types.add(type);
-
-			result = new JavaModelInstanceObject(null, types, this);
+			result = new JavaModelInstanceObject(null, type, this);
 		}
 
 		else {
-			Set<Type> modelTypes;
 			Class<?> typeClass;
-
 			String canonicalName;
-			modelTypes = new HashSet<Type>();
-
-			/* Try to find the types of the given object in the model. */
-			try {
-
-				/* Search for a type that conforms to the given type. */
-				for (Type aModelType : this.findTypesOfObjectInModel(object)) {
-
-					if (aModelType.conformsTo(type)) {
-						modelTypes.add(aModelType);
-						break;
-					}
-					// no else.
-				}
-			}
-
-			catch (TypeNotFoundInModelException e1) {
-				modelTypes.add(type);
-			}
 
 			/* Convert the type's name into a canonical name. */
 			canonicalName =
@@ -508,26 +484,24 @@ public class JavaModelInstanceFactory extends BasisJavaModelInstanceFactory
 
 					/* Check if the given object conforms to the found class. */
 					if (typeClass.isAssignableFrom(object.getClass())) {
-						result =
-								new JavaModelInstanceObject(object, typeClass, modelTypes, this);
+						result = new JavaModelInstanceObject(object, typeClass, type, this);
 					}
 
 					else {
 						/* Create an undefined instance object. */
-						result =
-								new JavaModelInstanceObject(null, typeClass, modelTypes, this);
+						result = new JavaModelInstanceObject(null, typeClass, type, this);
 					}
 				}
 
 				/* Create an undefined instance object. */
 				else {
-					result = new JavaModelInstanceObject(null, modelTypes, this);
+					result = new JavaModelInstanceObject(null, type, this);
 				}
 			}
 
 			catch (ClassNotFoundException e) {
 				/* Create an undefined instance object. */
-				result = new JavaModelInstanceObject(null, modelTypes, this);
+				result = new JavaModelInstanceObject(null, type, this);
 			}
 		}
 
@@ -690,21 +664,30 @@ public class JavaModelInstanceFactory extends BasisJavaModelInstanceFactory
 	 * </p>
 	 * 
 	 * @param object
-	 *          The {@link Object} for which the {@link Type}s shall be returned.
-	 * @return The found {@link Type}s as a {@link Set}.
+	 *          The {@link Object} for which the {@link Type} shall be returned.
+	 * @return The found {@link Type}.
 	 * @throws TypeNotFoundInModelException
 	 *           Thrown, if a given {@link Object} cannot be adapted to a
 	 *           {@link Type} in the {@link IModel}.
 	 */
-	private Set<Type> findTypesOfObjectInModel(Object object)
+	private Type findTypesOfObjectInModel(Object object)
 			throws TypeNotFoundInModelException {
 
-		Set<Type> result;
+		Type result;
+		Set<Type> resultSet;
 
 		Class<?> objectClass;
 		objectClass = object.getClass();
 
-		result = findTypesOfClassInModel(objectClass);
+		resultSet = findTypesOfClassInModel(objectClass);
+
+		if (resultSet.size() == 1) {
+			result = resultSet.iterator().next();
+		}
+
+		else {
+			result = super.createComplexType(resultSet);
+		}
 
 		return result;
 	}

@@ -349,14 +349,11 @@ public class JavaModelInstanceIntegerTest {
 		modelInstanceInteger =
 				BasisJavaModelInstanceFactory.createModelInstanceInteger(new Long(42));
 
-		assertEquals(1, modelInstanceInteger.getTypes().size());
+		assertNotNull(modelInstanceInteger.getType());
 
-		for (Type type : modelInstanceInteger.getTypes()) {
-
-			assertTrue(type instanceof PrimitiveType);
-			assertEquals(PrimitiveTypeKind.INTEGER, ((PrimitiveType) type).getKind());
-		}
-		// end for.
+		assertTrue(modelInstanceInteger.getType() instanceof PrimitiveType);
+		assertEquals(PrimitiveTypeKind.INTEGER,
+				((PrimitiveType) modelInstanceInteger.getType()).getKind());
 	}
 
 	/**

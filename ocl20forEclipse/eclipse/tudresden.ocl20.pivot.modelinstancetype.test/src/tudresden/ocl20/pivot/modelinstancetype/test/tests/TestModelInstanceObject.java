@@ -306,12 +306,10 @@ public class TestModelInstanceObject {
 						((IModelInstanceObject) castedElement).getObject());
 
 				/* The casted element should have exactly one type. */
-				assertEquals(msg, 1, castedElement.getTypes().size());
+				assertNotNull(msg, castedElement.getType());
 
 				/* The casted element should have the type Class1. */
-				for (Type type : castedElement.getTypes()) {
-					assertEquals(msg, type_Class1, type);
-				}
+				assertEquals(msg, type_Class1, castedElement.getType());
 			}
 
 			catch (AsTypeCastException e) {
@@ -350,12 +348,10 @@ public class TestModelInstanceObject {
 						((IModelInstanceObject) castedElement).getObject());
 
 				/* The casted element should have exactly one type. */
-				assertEquals(msg, 1, castedElement.getTypes().size());
+				assertNotNull(msg, castedElement.getType());
 
 				/* The casted element should have the type Class1. */
-				for (Type type : castedElement.getTypes()) {
-					assertEquals(msg, type_Class2, type);
-				}
+				assertEquals(msg, type_Class2, castedElement.getType());
 			}
 
 			catch (AsTypeCastException e) {
@@ -374,12 +370,10 @@ public class TestModelInstanceObject {
 						((IModelInstanceObject) castedElement).getObject());
 
 				/* The casted element should have exactly one type. */
-				assertEquals(msg, 1, castedElement.getTypes().size());
+				assertNotNull(msg, castedElement.getType());
 
 				/* The casted element should have the type Class1. */
-				for (Type type : castedElement.getTypes()) {
-					assertEquals(msg, type_Class1, type);
-				}
+				assertEquals(msg, type_Class1, castedElement.getType());
 
 				/* The casted Class1 should be re-cast-able to Class2. */
 				castedElement = castedElement.asType(type_Class2);
@@ -392,12 +386,10 @@ public class TestModelInstanceObject {
 						((IModelInstanceObject) castedElement).getObject());
 
 				/* The casted element should have exactly one type. */
-				assertEquals(msg, 1, castedElement.getTypes().size());
+				assertNotNull(msg, castedElement.getType());
 
 				/* The casted element should have the type Class2. */
-				for (Type type : castedElement.getTypes()) {
-					assertEquals(msg, type_Class2, type);
-				}
+				assertEquals(msg, type_Class2, castedElement.getType());
 			}
 
 			catch (AsTypeCastException e) {
@@ -436,12 +428,10 @@ public class TestModelInstanceObject {
 						((IModelInstanceObject) castedElement).getObject());
 
 				/* The casted element should have exactly one type. */
-				assertEquals(msg, 1, castedElement.getTypes().size());
+				assertNotNull(msg, castedElement.getType());
 
 				/* The casted element should have the type Class1. */
-				for (Type type : castedElement.getTypes()) {
-					assertEquals(msg, type_Interface1, type);
-				}
+				assertEquals(msg, type_Interface1, castedElement.getType());
 			}
 
 			catch (AsTypeCastException e) {
@@ -480,12 +470,10 @@ public class TestModelInstanceObject {
 						((IModelInstanceObject) castedElement).getObject());
 
 				/* The casted element should have exactly one type. */
-				assertEquals(msg, 1, castedElement.getTypes().size());
+				assertNotNull(msg, castedElement.getType());
 
-				/* The casted element should have the type Class1. */
-				for (Type type : castedElement.getTypes()) {
-					assertEquals(msg, type_Interface2, type);
-				}
+				/* The casted element should have the type Interface2. */
+				assertEquals(msg, type_Interface2, castedElement.getType());
 			}
 
 			catch (AsTypeCastException e) {
@@ -524,12 +512,10 @@ public class TestModelInstanceObject {
 						((IModelInstanceObject) castedElement).getObject());
 
 				/* The casted element should have exactly one type. */
-				assertEquals(msg, 1, castedElement.getTypes().size());
+				assertNotNull(msg, castedElement.getType());
 
-				/* The casted element should have the type Class1. */
-				for (Type type : castedElement.getTypes()) {
-					assertEquals(msg, type_Interface3, type);
-				}
+				/* The casted element should have the type Interface3. */
+				assertEquals(msg, type_Interface3, castedElement.getType());
 			}
 
 			catch (AsTypeCastException e) {
@@ -548,12 +534,10 @@ public class TestModelInstanceObject {
 						((IModelInstanceObject) castedElement).getObject());
 
 				/* The casted element should have exactly one type. */
-				assertEquals(msg, 1, castedElement.getTypes().size());
+				assertNotNull(msg, castedElement.getType());
 
-				/* The casted element should have the type Class1. */
-				for (Type type : castedElement.getTypes()) {
-					assertEquals(msg, type_Interface2, type);
-				}
+				/* The casted element should have the type Interface2. */
+				assertEquals(msg, type_Interface2, castedElement.getType());
 
 				/* The casted Interface2 should be re-cast-able to Interface3. */
 				castedElement = castedElement.asType(type_Interface3);
@@ -566,12 +550,10 @@ public class TestModelInstanceObject {
 						((IModelInstanceObject) castedElement).getObject());
 
 				/* The casted element should have exactly one type. */
-				assertEquals(msg, 1, castedElement.getTypes().size());
+				assertNotNull(msg, castedElement.getType());
 
 				/* The casted element should have the type Interface3. */
-				for (Type type : castedElement.getTypes()) {
-					assertEquals(msg, type_Interface3, type);
-				}
+				assertEquals(msg, type_Interface3, castedElement.getType());
 			}
 
 			catch (AsTypeCastException e) {
@@ -656,13 +638,11 @@ public class TestModelInstanceObject {
 						((IModelInstanceObject) castedElement).getProperty(class1property);
 
 				/* Both values should have the right type. */
-				assertEquals(msg, 1, class2PropertyValue.getTypes().size());
-				assertTrue(msg, class2PropertyValue.getTypes().contains(
-						TypeConstants.STRING));
+				assertNotNull(msg, class2PropertyValue.getType());
+				assertEquals(msg, TypeConstants.STRING, class2PropertyValue.getType());
 
-				assertEquals(msg, 1, class1PropertyValue.getTypes().size());
-				assertTrue(msg, class1PropertyValue.getTypes().contains(
-						TypeConstants.STRING));
+				assertNotNull(msg, class1PropertyValue.getType());
+				assertEquals(msg, TypeConstants.STRING, class1PropertyValue.getType());
 
 				/* Both values should not be equal. */
 				if (((IModelInstanceString) class1PropertyValue).getString().equals(
@@ -752,8 +732,8 @@ public class TestModelInstanceObject {
 			 */
 			for (IModelInstanceObject anotherElement : instances_Class1) {
 
-				if (anElement.getTypes().size() == anotherElement.getTypes().size()
-						&& anElement.getTypes().containsAll(anotherElement.getTypes())
+				if (anElement.getType() != null && anotherElement.getType() != null
+						&& anElement.getType().equals(anotherElement.getType())
 						&& anElement.getObject().equals(anotherElement.getObject())) {
 					assertTrue(msg, anElement.equals(anotherElement));
 				}
@@ -818,11 +798,10 @@ public class TestModelInstanceObject {
 				assertNotNull(msg, operationResult);
 
 				/* The result should have exactly one type. */
-				assertEquals(msg, 1, operationResult.getTypes().size());
+				assertNotNull(msg, operationResult.getType());
 
 				/* The result should have the same type as the operation. */
-				assertTrue(msg, operationResult.getTypes()
-						.contains(operation.getType()));
+				assertEquals(msg, operation.getType(), operationResult.getType());
 
 				/* The result should be void. */
 				assertTrue(msg, operationResult instanceof IModelInstanceVoid);
@@ -891,11 +870,10 @@ public class TestModelInstanceObject {
 				assertNotNull(msg, operationResult);
 
 				/* The result should have exactly one type. */
-				assertEquals(msg, 1, operationResult.getTypes().size());
+				assertNotNull(msg, operationResult.getType());
 
 				/* The result should have the same type as the operation. */
-				assertTrue(msg, operationResult.getTypes()
-						.contains(operation.getType()));
+				assertEquals(msg, operation.getType(), operationResult.getType());
 
 				/* The result should be an IModelInstanceElement. */
 				assertTrue(msg, operationResult instanceof IModelInstanceElement);
@@ -964,11 +942,10 @@ public class TestModelInstanceObject {
 				assertNotNull(msg, operationResult);
 
 				/* The result should have exactly one type. */
-				assertEquals(msg, 1, operationResult.getTypes().size());
+				assertNotNull(msg, operationResult.getType());
 
 				/* The result should have an ordered set type. */
-				assertTrue(msg, operationResult.getTypes().contains(
-						TypeConstants.ORDERED_SET));
+				assertEquals(msg, TypeConstants.ORDERED_SET, operationResult.getType());
 
 				/* The result should be an IModelInstanceCollecttion. */
 				assertTrue(msg, operationResult instanceof IModelInstanceCollection<?>);
@@ -1045,10 +1022,10 @@ public class TestModelInstanceObject {
 				assertNotNull(msg, operationResult);
 
 				/* The result should have exactly one type. */
-				assertEquals(msg, 1, operationResult.getTypes().size());
+				assertNotNull(msg, operationResult.getType());
 
 				/* The result should have an set type. */
-				assertTrue(msg, operationResult.getTypes().contains(TypeConstants.SET));
+				assertEquals(msg, TypeConstants.SET, operationResult.getType());
 
 				/* The result should be an IModelInstanceCollecttion. */
 				assertTrue(msg, operationResult instanceof IModelInstanceCollection<?>);
@@ -1125,11 +1102,10 @@ public class TestModelInstanceObject {
 				assertNotNull(msg, operationResult);
 
 				/* The result should have exactly one type. */
-				assertEquals(msg, 1, operationResult.getTypes().size());
+				assertNotNull(msg, operationResult.getType());
 
 				/* The result should have an sequence type. */
-				assertTrue(msg, operationResult.getTypes().contains(
-						TypeConstants.SEQUENCE));
+				assertEquals(msg, TypeConstants.SEQUENCE, operationResult.getType());
 
 				/* The result should be an IModelInstanceCollecttion. */
 				assertTrue(msg, operationResult instanceof IModelInstanceCollection<?>);
@@ -1206,10 +1182,10 @@ public class TestModelInstanceObject {
 				assertNotNull(msg, operationResult);
 
 				/* The result should have exactly one type. */
-				assertEquals(msg, 1, operationResult.getTypes().size());
+				assertNotNull(msg, operationResult.getType());
 
 				/* The result should have an bag type. */
-				assertTrue(msg, operationResult.getTypes().contains(TypeConstants.BAG));
+				assertEquals(msg, TypeConstants.BAG, operationResult.getType());
 
 				/* The result should be an IModelInstanceCollecttion. */
 				assertTrue(msg, operationResult instanceof IModelInstanceCollection<?>);
@@ -1330,7 +1306,7 @@ public class TestModelInstanceObject {
 					assertNotNull(msg, operationResult);
 
 					/* The result should have exactly one type. */
-					assertEquals(msg, 1, operationResult.getTypes().size());
+					assertNotNull(msg, operationResult.getType());
 
 					/* The result should be void. */
 					/* The result should be an IModelInstanceCollecttion. */
@@ -1445,7 +1421,7 @@ public class TestModelInstanceObject {
 					assertNotNull(msg, operationResult);
 
 					/* The result should have exactly one type. */
-					assertEquals(msg, 1, operationResult.getTypes().size());
+					assertNotNull(msg, operationResult.getType());
 
 					/* The result should be void. */
 					/* The result should be an IModelInstanceCollecttion. */
@@ -1560,7 +1536,7 @@ public class TestModelInstanceObject {
 					assertNotNull(msg, operationResult);
 
 					/* The result should have exactly one type. */
-					assertEquals(msg, 1, operationResult.getTypes().size());
+					assertNotNull(msg, operationResult.getType());
 
 					/* The result should be void. */
 					/* The result should be an IModelInstanceCollecttion. */
@@ -1675,7 +1651,7 @@ public class TestModelInstanceObject {
 					assertNotNull(msg, operationResult);
 
 					/* The result should have exactly one type. */
-					assertEquals(msg, 1, operationResult.getTypes().size());
+					assertNotNull(msg, operationResult.getType());
 
 					/* The result should be void. */
 					/* The result should be an IModelInstanceCollecttion. */
@@ -1789,7 +1765,7 @@ public class TestModelInstanceObject {
 					assertNotNull(msg, operationResult);
 
 					/* The result should have exactly one type. */
-					assertEquals(msg, 1, operationResult.getTypes().size());
+					assertNotNull(msg, operationResult.getType());
 
 					/* The result should be void. */
 					/* The result should be an IModelInstanceCollecttion. */
@@ -1903,7 +1879,7 @@ public class TestModelInstanceObject {
 					assertNotNull(msg, operationResult);
 
 					/* The result should have exactly one type. */
-					assertEquals(msg, 1, operationResult.getTypes().size());
+					assertNotNull(msg, operationResult.getType());
 
 					/* The result should be void. */
 					/* The result should be an IModelInstanceCollecttion. */
@@ -2018,7 +1994,7 @@ public class TestModelInstanceObject {
 					assertNotNull(msg, operationResult);
 
 					/* The result should have exactly one type. */
-					assertEquals(msg, 1, operationResult.getTypes().size());
+					assertNotNull(msg, operationResult.getType());
 
 					/* The result should be void. */
 					/* The result should be an IModelInstanceCollecttion. */
@@ -2133,7 +2109,7 @@ public class TestModelInstanceObject {
 					assertNotNull(msg, operationResult);
 
 					/* The result should have exactly one type. */
-					assertEquals(msg, 1, operationResult.getTypes().size());
+					assertNotNull(msg, operationResult.getType());
 
 					/* The result should be void. */
 					/* The result should be an IModelInstanceCollecttion. */
@@ -2259,10 +2235,10 @@ public class TestModelInstanceObject {
 				assertNotNull(msg, aPropertyValue);
 
 				/* The result should have at least one type. */
-				assertTrue(msg, 1 <= aPropertyValue.getTypes().size());
+				assertNotNull(msg, aPropertyValue.getType());
 
 				/* The result should have the same type as the property. */
-				assertTrue(msg, aPropertyValue.getTypes().contains(aProperty.getType()));
+				assertEquals(msg, aProperty.getType(), aPropertyValue.getType());
 
 				/* The result should be and IModelInstanceElement. */
 				assertTrue(msg, aPropertyValue instanceof IModelInstanceElement);
@@ -2318,11 +2294,10 @@ public class TestModelInstanceObject {
 				assertNotNull(msg, aPropertyValue);
 
 				/* The result should have exactly one type. */
-				assertEquals(msg, 1, aPropertyValue.getTypes().size());
+				assertNotNull(msg, aPropertyValue.getType());
 
 				/* The result should have an ordered set type. */
-				assertTrue(msg, aPropertyValue.getTypes().contains(
-						TypeConstants.ORDERED_SET));
+				assertEquals(msg, TypeConstants.ORDERED_SET, aPropertyValue.getType());
 
 				/* The result should be an IModelInstanceCollecttion. */
 				assertTrue(msg, aPropertyValue instanceof IModelInstanceCollection<?>);
@@ -2386,10 +2361,10 @@ public class TestModelInstanceObject {
 				assertNotNull(msg, aPropertyValue);
 
 				/* The result should have exactly one type. */
-				assertEquals(msg, 1, aPropertyValue.getTypes().size());
+				assertNotNull(msg, aPropertyValue.getType());
 
 				/* The result should have an unordered set type. */
-				assertTrue(msg, aPropertyValue.getTypes().contains(TypeConstants.SET));
+				assertEquals(msg, TypeConstants.SET, aPropertyValue.getType());
 
 				/* The result should be an IModelInstanceCollecttion. */
 				assertTrue(msg, aPropertyValue instanceof IModelInstanceCollection<?>);
@@ -2453,11 +2428,10 @@ public class TestModelInstanceObject {
 				assertNotNull(msg, aPropertyValue);
 
 				/* The result should have exactly one type. */
-				assertEquals(msg, 1, aPropertyValue.getTypes().size());
+				assertNotNull(msg, aPropertyValue.getType());
 
 				/* The result should have an ordered list type. */
-				assertTrue(msg, aPropertyValue.getTypes().contains(
-						TypeConstants.SEQUENCE));
+				assertEquals(msg, TypeConstants.SEQUENCE, aPropertyValue.getType());
 
 				/* The result should be an IModelInstanceCollecttion. */
 				assertTrue(msg, aPropertyValue instanceof IModelInstanceCollection<?>);
@@ -2521,10 +2495,10 @@ public class TestModelInstanceObject {
 				assertNotNull(msg, aPropertyValue);
 
 				/* The result should have exactly one type. */
-				assertEquals(msg, 1, aPropertyValue.getTypes().size());
+				assertNotNull(msg, aPropertyValue.getType());
 
 				/* The result should have an unordered list type. */
-				assertTrue(msg, aPropertyValue.getTypes().contains(TypeConstants.BAG));
+				assertEquals(msg, TypeConstants.BAG, aPropertyValue.getType());
 
 				/* The result should be an IModelInstanceCollecttion. */
 				assertTrue(msg, aPropertyValue instanceof IModelInstanceCollection<?>);
@@ -2591,14 +2565,14 @@ public class TestModelInstanceObject {
 		for (IModelInstanceElement anElement : instances_Class1) {
 
 			/* An Class1 instance should have at least one type. */
-			assertTrue(msg, 1 <= anElement.getTypes().size());
+			assertNotNull(msg, anElement.getType());
 
 			/*
 			 * A Class1 instance should have Class1 as Type or should be an instance
 			 * of Class2.
 			 */
-			if (!anElement.getTypes().contains(type_Class1)
-					&& !anElement.getTypes().contains(type_Class2)) {
+			if (!anElement.getType().conformsTo(type_Class1)
+					&& !anElement.getType().conformsTo(type_Class2)) {
 
 				fail(msg);
 			}
@@ -2625,13 +2599,13 @@ public class TestModelInstanceObject {
 		for (IModelInstanceElement anElement : instances_Class2) {
 
 			/* An Class2 instance should have at least one type. */
-			assertTrue(msg, 1 <= anElement.getTypes().size());
+			assertNotNull(msg, anElement.getType());
 
 			/*
 			 * A Class2 should have Class2 as Type and not should have Class1 as Type
 			 */
-			if (!anElement.getTypes().contains(type_Class2)
-					|| anElement.getTypes().contains(type_Class1)) {
+			if (!anElement.getType().conformsTo(type_Class2)
+					|| anElement.getType().equals(type_Class1)) {
 
 				fail(msg);
 			}
@@ -2658,10 +2632,10 @@ public class TestModelInstanceObject {
 		for (IModelInstanceElement anElement : instances_Interface1) {
 
 			/* An Interface1 instance should have at least one type. */
-			assertTrue(msg, 1 <= anElement.getTypes().size());
+			assertNotNull(msg, anElement.getType());
 
 			/* An Interface1 should have Interface1 as Type. */
-			if (!anElement.getTypes().contains(type_Interface1)) {
+			if (!anElement.getType().conformsTo(type_Interface1)) {
 
 				fail(msg);
 			}
@@ -2688,22 +2662,22 @@ public class TestModelInstanceObject {
 		for (IModelInstanceElement anElement : instances_Interface2) {
 
 			/* An Interface2 instance should have at least one type. */
-			assertTrue(msg, 1 <= anElement.getTypes().size());
+			assertNotNull(msg, anElement.getType());
 
 			/*
 			 * An Interface2 instance should have Interface2 as Type XOR the
 			 * Interface3 as type.
 			 */
-			if (anElement.getTypes().contains(type_Interface2)) {
+			if (anElement.getType().conformsTo(type_Interface2)) {
 
-				if (anElement.getTypes().contains(type_Interface3)) {
+				if (anElement.getType().conformsTo(type_Interface3)) {
 					fail(msg);
 				}
 				// no else.
 			}
 
 			else {
-				if (!anElement.getTypes().contains(type_Interface3)) {
+				if (!anElement.getType().conformsTo(type_Interface3)) {
 					fail(msg);
 				}
 				// no else.
@@ -2730,14 +2704,14 @@ public class TestModelInstanceObject {
 		for (IModelInstanceElement anElement : instances_Interface3) {
 
 			/* An Interface3 instance should have at least one type. */
-			assertTrue(msg, 1 <= anElement.getTypes().size());
+			assertNotNull(msg, anElement.getType());
 
 			/*
 			 * An Interface2 instance should have Interface3 as Type and not should
 			 * have the Interface2 as type.
 			 */
-			if (!anElement.getTypes().contains(type_Interface3)
-					|| anElement.getTypes().contains(type_Interface2)) {
+			if (!anElement.getType().conformsTo(type_Interface3)
+					|| anElement.getType().equals(type_Interface2)) {
 				fail(msg);
 			}
 			// no else.

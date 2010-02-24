@@ -282,15 +282,10 @@ public class InterpretationEnvironment implements IInterpretationEnvironment {
 		 * If any imiObject's type's instances contains the imiObject, return false.
 		 * Else return true.
 		 */
-		for (Type aType : imiObject.getTypes()) {
-
-			if (this.savedInstances.containsKey(aType)
-					&& this.savedInstances.get(aType).contains(imiObject)) {
-				result = false;
-				break;
-			}
+		if (this.savedInstances.containsKey(imiObject.getType())
+				&& this.savedInstances.get(imiObject.getType()).contains(imiObject)) {
+			result = false;
 		}
-		// end for.
 
 		return result;
 	}

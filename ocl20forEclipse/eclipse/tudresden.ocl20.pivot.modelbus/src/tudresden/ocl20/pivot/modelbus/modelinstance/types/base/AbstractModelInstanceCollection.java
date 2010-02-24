@@ -145,8 +145,8 @@ public abstract class AbstractModelInstanceCollection<T extends IModelInstanceEl
 				/* Check if both collections are unique. */
 				result &= this.isUnique() == other.isUnique();
 
-				/* Check if both collections have the same type(s). */
-				result &= this.getTypes().equals(other.getTypes());
+				/* Check if both collections have the same type. */
+				result &= this.getType().equals(other.getType());
 
 				/* Check if both collections have the same elements. */
 				result &= this.getCollection().equals(other.getCollection());
@@ -197,12 +197,12 @@ public abstract class AbstractModelInstanceCollection<T extends IModelInstanceEl
 			result = prime * result + this.getCollection().hashCode();
 		}
 
-		if (this.myTypes == null) {
+		if (this.myType == null) {
 			result = prime * result;
 		}
 
 		else {
-			result = prime * result + this.myTypes.hashCode();
+			result = prime * result + this.myType.hashCode();
 		}
 
 		return result;

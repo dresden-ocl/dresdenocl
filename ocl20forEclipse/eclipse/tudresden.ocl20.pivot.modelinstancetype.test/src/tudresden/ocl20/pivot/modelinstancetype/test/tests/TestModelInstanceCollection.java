@@ -353,15 +353,11 @@ public class TestModelInstanceCollection {
 				/* The casted element should be a Collection. */
 				assertTrue(msg, aBag instanceof IModelInstanceCollection<?>);
 
-				/* The bag should have one type and the type Bag. */
-				assertEquals(msg, 1, aBag.getTypes().size());
+				assertNotNull(msg, aBag.getType());
 
-				for (Type type : aBag.getTypes()) {
-
-					assertTrue(msg, type instanceof CollectionType);
-					assertEquals(msg, CollectionKind.BAG, ((CollectionType) type)
-							.getKind());
-				}
+				assertTrue(msg, aBag.getType() instanceof CollectionType);
+				assertEquals(msg, CollectionKind.BAG, ((CollectionType) aBag.getType())
+						.getKind());
 
 				/* The bag should not be ordered and not unique. */
 				assertFalse(msg, ((IModelInstanceCollection<?>) aBag).isOrdered());
@@ -384,14 +380,11 @@ public class TestModelInstanceCollection {
 				assertTrue(msg, anOrderedSet instanceof IModelInstanceCollection<?>);
 
 				/* The OrderedSet should have one type and the type OrderedSet. */
-				assertEquals(msg, 1, anOrderedSet.getTypes().size());
+				assertNotNull(msg, anOrderedSet.getType());
 
-				for (Type type : anOrderedSet.getTypes()) {
-
-					assertTrue(msg, type instanceof CollectionType);
-					assertEquals(msg, CollectionKind.ORDERED_SET, ((CollectionType) type)
-							.getKind());
-				}
+				assertTrue(msg, anOrderedSet.getType() instanceof CollectionType);
+				assertEquals(msg, CollectionKind.ORDERED_SET,
+						((CollectionType) anOrderedSet.getType()).getKind());
 
 				/* The OrderedSet should be ordered and unique. */
 				assertTrue(msg, ((IModelInstanceCollection<?>) anOrderedSet)
@@ -415,14 +408,11 @@ public class TestModelInstanceCollection {
 				assertTrue(msg, aSequence instanceof IModelInstanceCollection<?>);
 
 				/* The Sequence should have one type and the type Sequence. */
-				assertEquals(msg, 1, aSequence.getTypes().size());
+				assertNotNull(msg, aSequence.getType());
 
-				for (Type type : aSequence.getTypes()) {
-
-					assertTrue(msg, type instanceof CollectionType);
-					assertEquals(msg, CollectionKind.SEQUENCE, ((CollectionType) type)
-							.getKind());
-				}
+				assertTrue(msg, aSequence.getType() instanceof CollectionType);
+				assertEquals(msg, CollectionKind.SEQUENCE, ((CollectionType) aSequence
+						.getType()).getKind());
 
 				/* The Sequence should be ordered but not unique. */
 				assertTrue(msg, ((IModelInstanceCollection<?>) aSequence).isOrdered());
@@ -445,14 +435,11 @@ public class TestModelInstanceCollection {
 				assertTrue(msg, aSet instanceof IModelInstanceCollection<?>);
 
 				/* The Set should have one type and the type Set. */
-				assertEquals(msg, 1, aSet.getTypes().size());
+				assertNotNull(msg, aSet.getType());
 
-				for (Type type : aSet.getTypes()) {
-
-					assertTrue(msg, type instanceof CollectionType);
-					assertEquals(msg, CollectionKind.SET, ((CollectionType) type)
-							.getKind());
-				}
+				assertTrue(msg, aSet.getType() instanceof CollectionType);
+				assertEquals(msg, CollectionKind.SET, ((CollectionType) aSet.getType())
+						.getKind());
 
 				/* The Set should not be ordered but unique. */
 				assertFalse(msg, ((IModelInstanceCollection<?>) aSet).isOrdered());
@@ -528,9 +515,10 @@ public class TestModelInstanceCollection {
 
 				if (aCollection.isOrdered() == anotherCollection.isOrdered()
 						&& aCollection.isUnique() == anotherCollection.isUnique()
-						&& aCollection.getTypes().size() == anotherCollection.getTypes()
-								.size()
-						&& aCollection.getTypes().containsAll(anotherCollection.getTypes())
+						&& aCollection.getType() != null
+						&& anotherCollection.getType() != null
+						&& (aCollection.getType().conformsTo(anotherCollection.getType()) || anotherCollection
+								.getType().conformsTo(aCollection.getType()))
 						&& aCollection.getCollection().equals(
 								anotherCollection.getCollection())) {
 
@@ -735,11 +723,11 @@ public class TestModelInstanceCollection {
 
 	/**
 	 * <p>
-	 * Tests the method {@link IModelInstanceCollection#getTypes()}.
+	 * Tests the method {@link IModelInstanceCollection#getType()}.
 	 * </p>
 	 */
 	@Test
-	public void testGetTypes1() {
+	public void testGetType1() {
 
 		msg =
 				ModelInstanceTypeTestSuiteMessages.TestModelInstanceCollection_GetTypesIsWrong;
@@ -747,26 +735,23 @@ public class TestModelInstanceCollection {
 
 		for (IModelInstanceCollection<?> aCollection : instances_bag) {
 
-			/* A Collection should have exactly one type. */
-			assertEquals(msg, 1, aCollection.getTypes().size());
+			assertNotNull(msg, aCollection.getType());
 
 			/* A Bag should have the CollectionType of the kind Bag. */
-			for (Type type : aCollection.getTypes()) {
-
-				assertTrue(msg, type instanceof CollectionType);
-				assertEquals(msg, CollectionKind.BAG, ((CollectionType) type).getKind());
-			}
+			assertTrue(msg, aCollection.getType() instanceof CollectionType);
+			assertEquals(msg, CollectionKind.BAG, ((CollectionType) aCollection
+					.getType()).getKind());
 		}
 		// end for.
 	}
 
 	/**
 	 * <p>
-	 * Tests the method {@link IModelInstanceCollection#getTypes()}.
+	 * Tests the method {@link IModelInstanceCollection#getType()}.
 	 * </p>
 	 */
 	@Test
-	public void testGetTypes2() {
+	public void testGetType2() {
 
 		msg =
 				ModelInstanceTypeTestSuiteMessages.TestModelInstanceCollection_GetTypesIsWrong;
@@ -774,27 +759,23 @@ public class TestModelInstanceCollection {
 
 		for (IModelInstanceCollection<?> aCollection : instances_orderedset) {
 
-			/* A OrderedSet should have exactly one type. */
-			assertEquals(msg, 1, aCollection.getTypes().size());
+			assertNotNull(msg, aCollection.getType());
 
-			/* A OrderedSet should have the CollectionType of the kind OrderedSet. */
-			for (Type type : aCollection.getTypes()) {
-
-				assertTrue(msg, type instanceof CollectionType);
-				assertEquals(msg, CollectionKind.ORDERED_SET, ((CollectionType) type)
-						.getKind());
-			}
+			/* An OrderedSet should have the CollectionType of the kind OrderedSet. */
+			assertTrue(msg, aCollection.getType() instanceof CollectionType);
+			assertEquals(msg, CollectionKind.ORDERED_SET,
+					((CollectionType) aCollection.getType()).getKind());
 		}
 		// end for.
 	}
 
 	/**
 	 * <p>
-	 * Tests the method {@link IModelInstanceCollection#getTypes()}.
+	 * Tests the method {@link IModelInstanceCollection#getType()}.
 	 * </p>
 	 */
 	@Test
-	public void testGetTypes3() {
+	public void testGetType3() {
 
 		msg =
 				ModelInstanceTypeTestSuiteMessages.TestModelInstanceCollection_GetTypesIsWrong;
@@ -802,27 +783,23 @@ public class TestModelInstanceCollection {
 
 		for (IModelInstanceCollection<?> aCollection : instances_sequence) {
 
-			/* A Collection should have exactly one type. */
-			assertEquals(msg, 1, aCollection.getTypes().size());
+			assertNotNull(msg, aCollection.getType());
 
-			/* A Sequence should have the CollectionType of the kind Sequence. */
-			for (Type type : aCollection.getTypes()) {
-
-				assertTrue(msg, type instanceof CollectionType);
-				assertEquals(msg, CollectionKind.SEQUENCE, ((CollectionType) type)
-						.getKind());
-			}
+			/* An Sequence should have the CollectionType of the kind OrderedSet. */
+			assertTrue(msg, aCollection.getType() instanceof CollectionType);
+			assertEquals(msg, CollectionKind.SEQUENCE, ((CollectionType) aCollection
+					.getType()).getKind());
 		}
 		// end for.
 	}
 
 	/**
 	 * <p>
-	 * Tests the method {@link IModelInstanceCollection#getTypes()}.
+	 * Tests the method {@link IModelInstanceCollection#getType()}.
 	 * </p>
 	 */
 	@Test
-	public void testGetTypes4() {
+	public void testGetType4() {
 
 		msg =
 				ModelInstanceTypeTestSuiteMessages.TestModelInstanceCollection_GetTypesIsWrong;
@@ -830,15 +807,12 @@ public class TestModelInstanceCollection {
 
 		for (IModelInstanceCollection<?> aCollection : instances_set) {
 
-			/* A Collection should have exactly one type. */
-			assertEquals(msg, 1, aCollection.getTypes().size());
+			assertNotNull(msg, aCollection.getType());
 
-			/* A Set should have the CollectionType of the kind Set. */
-			for (Type type : aCollection.getTypes()) {
-
-				assertTrue(msg, type instanceof CollectionType);
-				assertEquals(msg, CollectionKind.SET, ((CollectionType) type).getKind());
-			}
+			/* An Set should have the CollectionType of the kind OrderedSet. */
+			assertTrue(msg, aCollection.getType() instanceof CollectionType);
+			assertEquals(msg, CollectionKind.SET, ((CollectionType) aCollection
+					.getType()).getKind());
 		}
 		// end for.
 	}

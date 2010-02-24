@@ -20,7 +20,6 @@ with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
 package tudresden.ocl20.pivot.modelbus.modelinstance.types.base;
 
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
@@ -103,8 +102,7 @@ public class ModelInstanceTuple extends AbstractModelInstanceElement implements
 				this.myMap.put(keys.get(index), values.get(index));
 			}
 
-			this.myTypes = new HashSet<Type>();
-			this.myTypes.add(type);
+			this.myType = type;
 		}
 
 		/* Probably debug the exit of this method. */
@@ -153,8 +151,7 @@ public class ModelInstanceTuple extends AbstractModelInstanceElement implements
 		else {
 			this.myMap = map;
 
-			this.myTypes = new HashSet<Type>();
-			this.myTypes.add(type);
+			this.myType = type;
 		}
 
 		/* Probably debug the exit of this method. */
@@ -208,21 +205,18 @@ public class ModelInstanceTuple extends AbstractModelInstanceElement implements
 	 * #asType(tudresden.ocl20.pivot.pivotmodel.Type)
 	 */
 	public IModelInstanceElement asType(Type type) throws AsTypeCastException {
-	
+
 		IModelInstanceElement result;
-	
-		Type myType;
-		myType = this.myTypes.iterator().next();
-	
-		if (myType.conformsTo(type)) {
-			result = new ModelInstanceTuple(this.myMap, myType);
+
+		if (this.myType.conformsTo(type)) {
+			result = new ModelInstanceTuple(this.myMap, this.myType);
 		}
-	
+
 		else {
-			throw new AsTypeCastException("Cannot cast from " + myType + " to "
+			throw new AsTypeCastException("Cannot cast from " + this.myType + " to "
 					+ type + ".");
 		}
-	
+
 		return result;
 	}
 
@@ -234,7 +228,7 @@ public class ModelInstanceTuple extends AbstractModelInstanceElement implements
 	 */
 	public IModelInstanceElement copyForAtPre() throws CopyForAtPreException {
 
-		return new ModelInstanceTuple(this.myMap, this.myTypes.iterator().next());
+		return new ModelInstanceTuple(this.myMap, this.myType);
 	}
 
 	/*

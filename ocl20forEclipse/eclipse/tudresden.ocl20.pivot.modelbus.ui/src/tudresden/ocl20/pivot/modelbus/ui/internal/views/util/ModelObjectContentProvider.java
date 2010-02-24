@@ -112,32 +112,27 @@ public class ModelObjectContentProvider implements IStructuredContentProvider,
 			resultList = new ArrayList<ModelInstanceObjectProperty>();
 
 			/* If the element has at least on children it has elements. */
-			for (Type aType : imiObject.getTypes()) {
+			for (Property property : imiObject.getType().allProperties()) {
+				IModelInstanceElement propertyValue;
+				propertyValue = null;
 
-				for (Property property : aType.allProperties()) {
-					IModelInstanceElement propertyValue;
-					propertyValue = null;
-
-					try {
-						propertyValue = imiObject.getProperty(property);
-					}
-
-					catch (PropertyAccessException e) {
-						/* Do nothing. */
-					}
-
-					catch (PropertyNotFoundException e) {
-						/* Do nothing. */
-					}
-
-					ModelInstanceObjectProperty modelInstanceObjectProperty;
-					modelInstanceObjectProperty =
-							new ModelInstanceObjectProperty(imiObject, property,
-									propertyValue);
-
-					resultList.add(modelInstanceObjectProperty);
+				try {
+					propertyValue = imiObject.getProperty(property);
 				}
-				// end for.
+
+				catch (PropertyAccessException e) {
+					/* Do nothing. */
+				}
+
+				catch (PropertyNotFoundException e) {
+					/* Do nothing. */
+				}
+
+				ModelInstanceObjectProperty modelInstanceObjectProperty;
+				modelInstanceObjectProperty =
+						new ModelInstanceObjectProperty(imiObject, property, propertyValue);
+
+				resultList.add(modelInstanceObjectProperty);
 			}
 			// end for.
 
@@ -236,7 +231,7 @@ public class ModelObjectContentProvider implements IStructuredContentProvider,
 		/* Else check if the given element is an IModelInstanceElement. */
 		else if (anElement instanceof IModelInstanceElement) {
 
-			result = ((IModelInstanceElement) anElement).getTypes();
+			result = ((IModelInstanceElement) anElement).getType();
 		}
 
 		/* Else check if the given element is an ModelInstanceObjectProperty. */
@@ -294,14 +289,8 @@ public class ModelObjectContentProvider implements IStructuredContentProvider,
 			IModelInstanceObject imiObject;
 			imiObject = (IModelInstanceObject) anElement;
 
-			result = false;
-
 			/* If the element has at least on children it has elements. */
-			for (Type aType : imiObject.getTypes()) {
-
-				result |= aType.allProperties().size() > 0;
-			}
-			// end for.
+			result = imiObject.getType().allProperties().size() > 0;
 		}
 
 		/* Else check if the given element is a ModelInstanceObjectProperty. */

@@ -422,16 +422,12 @@ public class TestModelInstanceInteger {
 
 		for (IModelInstanceInteger anInteger : instances_integer) {
 
-			/* An Integer should have exactly one type. */
-			assertEquals(msg, 1, anInteger.getTypes().size());
+			assertNotNull(msg, anInteger.getType());
 
 			/* An Integer should have the PrimitiveType of the kind Integer. */
-			for (Type type : anInteger.getTypes()) {
-
-				assertTrue(msg, type instanceof PrimitiveType);
-				assertEquals(msg, PrimitiveTypeKind.INTEGER, ((PrimitiveType) type)
-						.getKind());
-			}
+			assertTrue(msg, anInteger.getType() instanceof PrimitiveType);
+			assertEquals(msg, PrimitiveTypeKind.INTEGER, ((PrimitiveType) anInteger
+					.getType()).getKind());
 		}
 		// end for.
 	}

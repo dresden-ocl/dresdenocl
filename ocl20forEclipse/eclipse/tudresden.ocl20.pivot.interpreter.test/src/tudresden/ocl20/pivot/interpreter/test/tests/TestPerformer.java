@@ -37,7 +37,6 @@ import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
 import tudresden.ocl20.pivot.pivotmodel.Constraint;
 import tudresden.ocl20.pivot.pivotmodel.ConstraintKind;
 import tudresden.ocl20.pivot.pivotmodel.Operation;
-import tudresden.ocl20.pivot.pivotmodel.Type;
 
 /**
  * <p>
@@ -120,16 +119,12 @@ public class TestPerformer {
 	public Operation findOperation(IModelInstanceElement imiElement, String name)
 			throws OperationNotFoundException {
 
-		for (Type type : imiElement.getTypes()) {
+		for (Operation ownedOperation : imiElement.getType().getOwnedOperation()) {
 
-			for (Operation ownedOperation : type.getOwnedOperation()) {
-
-				if (ownedOperation.getName().equals(name)) {
-					return ownedOperation;
-				}
-				// no else.
+			if (ownedOperation.getName().equals(name)) {
+				return ownedOperation;
 			}
-			// end for.
+			// no else.
 		}
 		// end for.
 

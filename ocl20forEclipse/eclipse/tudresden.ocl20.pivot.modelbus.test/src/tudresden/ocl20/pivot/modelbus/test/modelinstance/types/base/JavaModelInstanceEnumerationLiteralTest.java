@@ -267,15 +267,10 @@ public class JavaModelInstanceEnumerationLiteralTest {
 						.createModelInstanceEnumerationLiteral(literal1);
 
 		/* An EnumerationLiteral should have exactly one type. */
-		assertEquals(1, modelInstanceEnumerationLiteral01.getTypes().size());
+		assertNotNull(modelInstanceEnumerationLiteral01.getType());
 
-		/* An EnumerationLiteral should have its Enumeration as Type. */
-		for (Type type : modelInstanceEnumerationLiteral01.getTypes()) {
-
-			assertTrue(type instanceof Enumeration);
-			assertEquals(typeEnumeration1, type);
-		}
-		// end for.
+		assertTrue(modelInstanceEnumerationLiteral01.getType() instanceof Enumeration);
+		assertEquals(typeEnumeration1, modelInstanceEnumerationLiteral01.getType());
 	}
 
 	/**

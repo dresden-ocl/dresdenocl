@@ -189,7 +189,7 @@ public class TestPerformer {
 				conElement = conElement.getOwner();
 			}
 			// interpret only when rule applies to object
-			if (obj.getTypes().contains(conElement)) {
+			if (obj.getType().equals(conElement)) {
 				String result;
 				// Interpret constraint and current object
 				result = this.interpretConstraint2(obj, con);
@@ -237,21 +237,13 @@ public class TestPerformer {
 		List<Type> parameterTypes = new ArrayList<Type>();
 
 		for (OclAny oclParam : oclParams) {
-			parameterTypes.add(oclParam.getModelInstanceElement().getTypes()
-					.iterator().next());
+			parameterTypes.add(oclParam.getModelInstanceElement().getType());
 		}
 
 		/* Find the operation. */
 		Operation operation = null;
 
-		for (Type type : guineaPig.getTypes()) {
-
-			operation = type.lookupOperation(method, parameterTypes);
-			if (operation != null) {
-				break;
-			}
-
-		}
+		operation = guineaPig.getType().lookupOperation(method, parameterTypes);
 
 		// invoke the operation
 		if (operation != null) {

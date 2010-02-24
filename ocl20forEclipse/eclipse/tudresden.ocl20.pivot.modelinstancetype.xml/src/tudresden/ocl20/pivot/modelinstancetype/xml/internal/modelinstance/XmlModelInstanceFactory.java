@@ -20,10 +20,8 @@ with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
 package tudresden.ocl20.pivot.modelinstancetype.xml.internal.modelinstance;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.WeakHashMap;
 
 import org.apache.log4j.Logger;
@@ -520,11 +518,7 @@ public class XmlModelInstanceFactory extends BasisJavaModelInstanceFactory {
 
 		XmlModelInstanceObject result;
 
-		Set<Type> types;
-		types = new HashSet<Type>();
-		types.add(type);
-
-		result = new XmlModelInstanceObject(node, types, this);
+		result = new XmlModelInstanceObject(node, type, this);
 
 		return result;
 	}

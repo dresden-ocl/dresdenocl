@@ -45,7 +45,6 @@ import tudresden.ocl20.pivot.modelbus.modelinstance.exception.TypeNotFoundInMode
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
 import tudresden.ocl20.pivot.modelinstancetype.java.internal.provider.JavaModelInstanceProvider;
 import tudresden.ocl20.pivot.pivotmodel.Operation;
-import tudresden.ocl20.pivot.pivotmodel.Type;
 import tudresden.ocl20.pivot.standardlibrary.java.JavaStandardlibraryPlugin;
 
 /**
@@ -231,14 +230,10 @@ public class TestPerformer {
 	public Operation findOperation(IModelInstanceElement imiElement, String name)
 			throws OperationNotFoundException {
 
-		// FIXME: getTypes returns a type
-		for (Type type : imiElement.getTypes()) {
+		for (Operation ownedOperation : imiElement.getType().getOwnedOperation()) {
 
-			for (Operation ownedOperation : type.getOwnedOperation()) {
-
-				if (ownedOperation.getName().equals(name)) {
-					return ownedOperation;
-				}
+			if (ownedOperation.getName().equals(name)) {
+				return ownedOperation;
 			}
 		}
 

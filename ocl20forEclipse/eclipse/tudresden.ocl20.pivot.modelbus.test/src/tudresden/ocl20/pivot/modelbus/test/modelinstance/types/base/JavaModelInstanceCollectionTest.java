@@ -116,14 +116,11 @@ public class JavaModelInstanceCollectionTest {
 		castedElement = modelInstanceCollection01.asType(typeBag);
 
 		assertTrue(castedElement instanceof IModelInstanceCollection<?>);
-		assertEquals(1, castedElement.getTypes().size());
+		assertNotNull(castedElement.getType());
 
-		for (Type type : castedElement.getTypes()) {
-
-			assertTrue(type instanceof CollectionType);
-			assertEquals(CollectionKind.BAG, ((CollectionType) type).getKind());
-		}
-		// end for.
+		assertTrue(castedElement.getType() instanceof CollectionType);
+		assertEquals(CollectionKind.BAG, ((CollectionType) castedElement.getType())
+				.getKind());
 	}
 
 	/**
@@ -155,15 +152,11 @@ public class JavaModelInstanceCollectionTest {
 		castedElement = modelInstanceCollection01.asType(typeOrderedSet);
 
 		assertTrue(castedElement instanceof IModelInstanceCollection<?>);
-		assertEquals(1, castedElement.getTypes().size());
+		assertNotNull(castedElement.getType());
 
-		for (Type type : castedElement.getTypes()) {
-
-			assertTrue(type instanceof CollectionType);
-			assertEquals(CollectionKind.ORDERED_SET, ((CollectionType) type)
-					.getKind());
-		}
-		// end for.
+		assertTrue(castedElement.getType() instanceof CollectionType);
+		assertEquals(CollectionKind.ORDERED_SET, ((CollectionType) castedElement
+				.getType()).getKind());
 	}
 
 	/**
@@ -195,14 +188,11 @@ public class JavaModelInstanceCollectionTest {
 		castedElement = modelInstanceCollection01.asType(typeSequence);
 
 		assertTrue(castedElement instanceof IModelInstanceCollection<?>);
-		assertEquals(1, castedElement.getTypes().size());
+		assertNotNull(castedElement.getType());
 
-		for (Type type : castedElement.getTypes()) {
-
-			assertTrue(type instanceof CollectionType);
-			assertEquals(CollectionKind.SEQUENCE, ((CollectionType) type).getKind());
-		}
-		// end for.
+		assertTrue(castedElement.getType() instanceof CollectionType);
+		assertEquals(CollectionKind.SEQUENCE, ((CollectionType) castedElement
+				.getType()).getKind());
 	}
 
 	/**
@@ -234,14 +224,11 @@ public class JavaModelInstanceCollectionTest {
 		castedElement = modelInstanceCollection01.asType(typeSet);
 
 		assertTrue(castedElement instanceof IModelInstanceCollection<?>);
-		assertEquals(1, castedElement.getTypes().size());
+		assertNotNull(castedElement.getType());
 
-		for (Type type : castedElement.getTypes()) {
-
-			assertTrue(type instanceof CollectionType);
-			assertEquals(CollectionKind.SET, ((CollectionType) type).getKind());
-		}
-		// end for.
+		assertTrue(castedElement.getType() instanceof CollectionType);
+		assertEquals(CollectionKind.SET, ((CollectionType) castedElement.getType())
+				.getKind());
 	}
 
 	/**
@@ -273,14 +260,11 @@ public class JavaModelInstanceCollectionTest {
 		castedElement = modelInstanceCollection01.asType(typeBag);
 
 		assertTrue(castedElement instanceof IModelInstanceCollection<?>);
-		assertEquals(1, castedElement.getTypes().size());
+		assertNotNull(castedElement.getType());
 
-		for (Type type : castedElement.getTypes()) {
-
-			assertTrue(type instanceof CollectionType);
-			assertEquals(CollectionKind.BAG, ((CollectionType) type).getKind());
-		}
-		// end for.
+		assertTrue(castedElement.getType() instanceof CollectionType);
+		assertEquals(CollectionKind.BAG, ((CollectionType) castedElement.getType())
+				.getKind());
 	}
 
 	/**
@@ -312,15 +296,11 @@ public class JavaModelInstanceCollectionTest {
 		castedElement = modelInstanceCollection01.asType(typeOrderedSet);
 
 		assertTrue(castedElement instanceof IModelInstanceCollection<?>);
-		assertEquals(1, castedElement.getTypes().size());
+		assertNotNull(castedElement.getType());
 
-		for (Type type : castedElement.getTypes()) {
-
-			assertTrue(type instanceof CollectionType);
-			assertEquals(CollectionKind.ORDERED_SET, ((CollectionType) type)
-					.getKind());
-		}
-		// end for.
+		assertTrue(castedElement.getType() instanceof CollectionType);
+		assertEquals(CollectionKind.ORDERED_SET, ((CollectionType) castedElement
+				.getType()).getKind());
 	}
 
 	/**
@@ -352,14 +332,11 @@ public class JavaModelInstanceCollectionTest {
 		castedElement = modelInstanceCollection01.asType(typeSequence);
 
 		assertTrue(castedElement instanceof IModelInstanceCollection<?>);
-		assertEquals(1, castedElement.getTypes().size());
+		assertNotNull(castedElement.getType());
 
-		for (Type type : castedElement.getTypes()) {
-
-			assertTrue(type instanceof CollectionType);
-			assertEquals(CollectionKind.SEQUENCE, ((CollectionType) type).getKind());
-		}
-		// end for.
+		assertTrue(castedElement.getType() instanceof CollectionType);
+		assertEquals(CollectionKind.SEQUENCE, ((CollectionType) castedElement
+				.getType()).getKind());
 	}
 
 	/**
@@ -391,14 +368,11 @@ public class JavaModelInstanceCollectionTest {
 		castedElement = modelInstanceCollection01.asType(typeSet);
 
 		assertTrue(castedElement instanceof IModelInstanceCollection<?>);
-		assertEquals(1, castedElement.getTypes().size());
+		assertNotNull(castedElement.getType());
 
-		for (Type type : castedElement.getTypes()) {
-
-			assertTrue(type instanceof CollectionType);
-			assertEquals(CollectionKind.SET, ((CollectionType) type).getKind());
-		}
-		// end for.
+		assertTrue(castedElement.getType() instanceof CollectionType);
+		assertEquals(CollectionKind.SET, ((CollectionType) castedElement.getType())
+				.getKind());
 	}
 
 	/**
@@ -430,14 +404,11 @@ public class JavaModelInstanceCollectionTest {
 		castedElement = modelInstanceCollection01.asType(typeBag);
 
 		assertTrue(castedElement instanceof IModelInstanceCollection<?>);
-		assertEquals(1, castedElement.getTypes().size());
+		assertNotNull(castedElement.getType());
 
-		for (Type type : castedElement.getTypes()) {
-
-			assertTrue(type instanceof CollectionType);
-			assertEquals(CollectionKind.BAG, ((CollectionType) type).getKind());
-		}
-		// end for.
+		assertTrue(castedElement.getType() instanceof CollectionType);
+		assertEquals(CollectionKind.BAG, ((CollectionType) castedElement.getType())
+				.getKind());
 	}
 
 	/**
@@ -469,15 +440,11 @@ public class JavaModelInstanceCollectionTest {
 		castedElement = modelInstanceCollection01.asType(typeOrderedSet);
 
 		assertTrue(castedElement instanceof IModelInstanceCollection<?>);
-		assertEquals(1, castedElement.getTypes().size());
+		assertNotNull(castedElement.getType());
 
-		for (Type type : castedElement.getTypes()) {
-
-			assertTrue(type instanceof CollectionType);
-			assertEquals(CollectionKind.ORDERED_SET, ((CollectionType) type)
-					.getKind());
-		}
-		// end for.
+		assertTrue(castedElement.getType() instanceof CollectionType);
+		assertEquals(CollectionKind.ORDERED_SET, ((CollectionType) castedElement
+				.getType()).getKind());
 	}
 
 	/**
@@ -509,14 +476,11 @@ public class JavaModelInstanceCollectionTest {
 		castedElement = modelInstanceCollection01.asType(typeSequence);
 
 		assertTrue(castedElement instanceof IModelInstanceCollection<?>);
-		assertEquals(1, castedElement.getTypes().size());
+		assertNotNull(castedElement.getType());
 
-		for (Type type : castedElement.getTypes()) {
-
-			assertTrue(type instanceof CollectionType);
-			assertEquals(CollectionKind.SEQUENCE, ((CollectionType) type).getKind());
-		}
-		// end for.
+		assertTrue(castedElement.getType() instanceof CollectionType);
+		assertEquals(CollectionKind.SEQUENCE, ((CollectionType) castedElement
+				.getType()).getKind());
 	}
 
 	/**
@@ -548,14 +512,11 @@ public class JavaModelInstanceCollectionTest {
 		castedElement = modelInstanceCollection01.asType(typeSet);
 
 		assertTrue(castedElement instanceof IModelInstanceCollection<?>);
-		assertEquals(1, castedElement.getTypes().size());
+		assertNotNull(castedElement.getType());
 
-		for (Type type : castedElement.getTypes()) {
-
-			assertTrue(type instanceof CollectionType);
-			assertEquals(CollectionKind.SET, ((CollectionType) type).getKind());
-		}
-		// end for.
+		assertTrue(castedElement.getType() instanceof CollectionType);
+		assertEquals(CollectionKind.SET, ((CollectionType) castedElement.getType())
+				.getKind());
 	}
 
 	/**
@@ -587,14 +548,11 @@ public class JavaModelInstanceCollectionTest {
 		castedElement = modelInstanceCollection01.asType(typeBag);
 
 		assertTrue(castedElement instanceof IModelInstanceCollection<?>);
-		assertEquals(1, castedElement.getTypes().size());
+		assertNotNull(castedElement.getType());
 
-		for (Type type : castedElement.getTypes()) {
-
-			assertTrue(type instanceof CollectionType);
-			assertEquals(CollectionKind.BAG, ((CollectionType) type).getKind());
-		}
-		// end for.
+		assertTrue(castedElement.getType() instanceof CollectionType);
+		assertEquals(CollectionKind.BAG, ((CollectionType) castedElement.getType())
+				.getKind());
 	}
 
 	/**
@@ -626,15 +584,11 @@ public class JavaModelInstanceCollectionTest {
 		castedElement = modelInstanceCollection01.asType(typeOrderedSet);
 
 		assertTrue(castedElement instanceof IModelInstanceCollection<?>);
-		assertEquals(1, castedElement.getTypes().size());
+		assertNotNull(castedElement.getType());
 
-		for (Type type : castedElement.getTypes()) {
-
-			assertTrue(type instanceof CollectionType);
-			assertEquals(CollectionKind.ORDERED_SET, ((CollectionType) type)
-					.getKind());
-		}
-		// end for.
+		assertTrue(castedElement.getType() instanceof CollectionType);
+		assertEquals(CollectionKind.ORDERED_SET, ((CollectionType) castedElement
+				.getType()).getKind());
 	}
 
 	/**
@@ -666,14 +620,11 @@ public class JavaModelInstanceCollectionTest {
 		castedElement = modelInstanceCollection01.asType(typeSequence);
 
 		assertTrue(castedElement instanceof IModelInstanceCollection<?>);
-		assertEquals(1, castedElement.getTypes().size());
+		assertNotNull(castedElement.getType());
 
-		for (Type type : castedElement.getTypes()) {
-
-			assertTrue(type instanceof CollectionType);
-			assertEquals(CollectionKind.SEQUENCE, ((CollectionType) type).getKind());
-		}
-		// end for.
+		assertTrue(castedElement.getType() instanceof CollectionType);
+		assertEquals(CollectionKind.SEQUENCE, ((CollectionType) castedElement
+				.getType()).getKind());
 	}
 
 	/**
@@ -705,14 +656,11 @@ public class JavaModelInstanceCollectionTest {
 		castedElement = modelInstanceCollection01.asType(typeSet);
 
 		assertTrue(castedElement instanceof IModelInstanceCollection<?>);
-		assertEquals(1, castedElement.getTypes().size());
+		assertNotNull(castedElement.getType());
 
-		for (Type type : castedElement.getTypes()) {
-
-			assertTrue(type instanceof CollectionType);
-			assertEquals(CollectionKind.SET, ((CollectionType) type).getKind());
-		}
-		// end for.
+		assertTrue(castedElement.getType() instanceof CollectionType);
+		assertEquals(CollectionKind.SET, ((CollectionType) castedElement.getType())
+				.getKind());
 	}
 
 	/**
@@ -1756,14 +1704,11 @@ public class JavaModelInstanceCollectionTest {
 				BasisJavaModelInstanceFactory.createModelInstanceCollection(elements01,
 						typeBag);
 
-		assertEquals(1, modelInstanceCollection01.getTypes().size());
+		assertNotNull(modelInstanceCollection01.getType());
 
-		for (Type type : modelInstanceCollection01.getTypes()) {
-
-			assertTrue(type instanceof CollectionType);
-			assertEquals(CollectionKind.BAG, ((CollectionType) type).getKind());
-		}
-		// end for.
+		assertTrue(modelInstanceCollection01.getType() instanceof CollectionType);
+		assertEquals(CollectionKind.SET,
+				((CollectionType) modelInstanceCollection01.getType()).getKind());
 	}
 
 	/**
@@ -1789,15 +1734,11 @@ public class JavaModelInstanceCollectionTest {
 				BasisJavaModelInstanceFactory.createModelInstanceCollection(elements01,
 						typeOrderedSet);
 
-		assertEquals(1, modelInstanceCollection01.getTypes().size());
+		assertNotNull(modelInstanceCollection01.getType());
 
-		for (Type type : modelInstanceCollection01.getTypes()) {
-
-			assertTrue(type instanceof CollectionType);
-			assertEquals(CollectionKind.ORDERED_SET, ((CollectionType) type)
-					.getKind());
-		}
-		// end for.
+		assertTrue(modelInstanceCollection01.getType() instanceof CollectionType);
+		assertEquals(CollectionKind.SET,
+				((CollectionType) modelInstanceCollection01.getType()).getKind());
 	}
 
 	/**
@@ -1823,14 +1764,11 @@ public class JavaModelInstanceCollectionTest {
 				BasisJavaModelInstanceFactory.createModelInstanceCollection(elements01,
 						typeSequence);
 
-		assertEquals(1, modelInstanceCollection01.getTypes().size());
+		assertNotNull(modelInstanceCollection01.getType());
 
-		for (Type type : modelInstanceCollection01.getTypes()) {
-
-			assertTrue(type instanceof CollectionType);
-			assertEquals(CollectionKind.SEQUENCE, ((CollectionType) type).getKind());
-		}
-		// end for.
+		assertTrue(modelInstanceCollection01.getType() instanceof CollectionType);
+		assertEquals(CollectionKind.SET,
+				((CollectionType) modelInstanceCollection01.getType()).getKind());
 	}
 
 	/**
@@ -1856,14 +1794,11 @@ public class JavaModelInstanceCollectionTest {
 				BasisJavaModelInstanceFactory.createModelInstanceCollection(elements01,
 						typeSet);
 
-		assertEquals(1, modelInstanceCollection01.getTypes().size());
+		assertNotNull(modelInstanceCollection01.getType());
 
-		for (Type type : modelInstanceCollection01.getTypes()) {
-
-			assertTrue(type instanceof CollectionType);
-			assertEquals(CollectionKind.SET, ((CollectionType) type).getKind());
-		}
-		// end for.
+		assertTrue(modelInstanceCollection01.getType() instanceof CollectionType);
+		assertEquals(CollectionKind.SET,
+				((CollectionType) modelInstanceCollection01.getType()).getKind());
 	}
 
 	/**

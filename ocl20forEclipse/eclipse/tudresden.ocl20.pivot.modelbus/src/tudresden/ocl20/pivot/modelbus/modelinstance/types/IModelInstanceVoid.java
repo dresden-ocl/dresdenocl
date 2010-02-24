@@ -18,9 +18,6 @@ with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
 package tudresden.ocl20.pivot.modelbus.modelinstance.types;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import org.eclipse.osgi.util.NLS;
 
 import tudresden.ocl20.pivot.modelbus.internal.ModelBusMessages;
@@ -96,16 +93,11 @@ public interface IModelInstanceVoid extends IModelInstancePrimitiveType {
 		 * (non-Javadoc)
 		 * @see
 		 * tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement
-		 * #getTypes()
+		 * #getType()
 		 */
-		public Set<Type> getTypes() {
+		public Type getType() {
 
-			Set<Type> result;
-
-			result = new HashSet<Type>();
-			result.add(TypeConstants.VOID);
-
-			return result;
+			return TypeConstants.VOID;
 		}
 
 		/*

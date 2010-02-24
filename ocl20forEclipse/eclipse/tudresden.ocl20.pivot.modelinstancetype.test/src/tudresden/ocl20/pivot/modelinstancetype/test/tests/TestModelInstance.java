@@ -208,7 +208,7 @@ public class TestModelInstance {
 		for (IModelInstanceObject object : modelInstanceUnderTest
 				.getAllInstances(type_Class1)) {
 
-			assertTrue(msg, object.getTypes().contains(type_Class1));
+			assertTrue(msg, object.getType().conformsTo(type_Class1));
 		}
 		// end for.
 	}
@@ -354,11 +354,8 @@ public class TestModelInstance {
 				/* The value should not be null. */
 				assertNotNull(msg, propertyValue);
 
-				/* The value should have exactly one type. */
-				assertEquals(msg, 1, propertyValue.getTypes().size());
-
 				/* The value should be of the right type. */
-				assertTrue(msg, propertyValue.getTypes().contains(property.getType()));
+				assertEquals(msg, property.getType(), propertyValue.getType());
 			}
 
 			catch (PropertyNotFoundException e) {
@@ -445,12 +442,8 @@ public class TestModelInstance {
 				/* The result should not be null. */
 				assertNotNull(msg, operationResult);
 
-				/* The result should have exactly one type. */
-				assertEquals(msg, 1, operationResult.getTypes().size());
-
 				/* The result should be of the right type. */
-				assertTrue(msg, operationResult.getTypes()
-						.contains(operation.getType()));
+				assertEquals(msg, operation.getType(), operationResult.getType());
 			}
 
 			catch (OperationNotFoundException e) {

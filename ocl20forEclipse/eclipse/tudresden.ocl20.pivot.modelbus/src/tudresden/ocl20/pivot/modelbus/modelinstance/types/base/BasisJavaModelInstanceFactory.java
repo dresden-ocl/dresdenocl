@@ -26,7 +26,9 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
+import java.util.WeakHashMap;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.UniqueEList;
@@ -48,6 +50,7 @@ import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceInteger;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceReal;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceString;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceTuple;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.internal.ComplexType;
 import tudresden.ocl20.pivot.modelbus.util.OclCollectionTypeKind;
 import tudresden.ocl20.pivot.pivotmodel.EnumerationLiteral;
 import tudresden.ocl20.pivot.pivotmodel.PrimitiveType;
@@ -74,6 +77,9 @@ public class BasisJavaModelInstanceFactory implements IModelInstanceFactory {
 	/** The {@link Logger} for this class. */
 	private static final Logger LOGGER =
 			ModelBusPlugin.getLogger(BasisJavaModelInstanceFactory.class);
+
+	private Map<Set<Type>, Type> cachedComplexTypes =
+			new WeakHashMap<Set<Type>, Type>();
 
 	/*
 	 * (non-Javadoc)
@@ -110,15 +116,13 @@ public class BasisJavaModelInstanceFactory implements IModelInstanceFactory {
 		case BAG:
 
 			result =
-					new JavaModelInstanceCollection<T>(collection,
-							TypeConstants.BAG);
+					new JavaModelInstanceCollection<T>(collection, TypeConstants.BAG);
 			break;
 
 		case SEQUENCE:
 
 			result =
-					new JavaModelInstanceCollection<T>(collection,
-							TypeConstants.SEQUENCE);
+					new JavaModelInstanceCollection<T>(collection, TypeConstants.SEQUENCE);
 			break;
 
 		case SET:
@@ -128,8 +132,7 @@ public class BasisJavaModelInstanceFactory implements IModelInstanceFactory {
 			 * JavaModelInstanceCollection constructor.
 			 */
 			result =
-					new JavaModelInstanceCollection<T>(collection,
-							TypeConstants.SET);
+					new JavaModelInstanceCollection<T>(collection, TypeConstants.SET);
 			break;
 
 		case ORDEREDSET:
@@ -815,6 +818,33 @@ public class BasisJavaModelInstanceFactory implements IModelInstanceFactory {
 		/* Adapt and add all elements. */
 		for (Object object : collection) {
 			result.add(this.createModelInstanceElement(object));
+		}
+
+		return result;
+	}
+
+	/**
+	 * <p>
+	 * Creates a new {@link ComplexType} for a given {@link Set} of {@link Type}s
+	 * the {@link ComplexType} shall inherit.
+	 * </p>
+	 * 
+	 * @param types
+	 *          The {@link Set} of {@link Type}s the {@link ComplexType} shall
+	 *          inherit.
+	 * @return The created {@link ComplexType}.
+	 */
+	protected Type createComplexType(Set<Type> types) {
+
+		Type result;
+
+		if (this.cachedComplexTypes.containsKey(types)) {
+			result = this.cachedComplexTypes.get(types);
+		}
+
+		else {
+			result = new ComplexType(types);
+			this.cachedComplexTypes.put(types, result);
 		}
 
 		return result;

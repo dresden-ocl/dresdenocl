@@ -44,6 +44,7 @@ import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceFactory;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceObject;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceVoid;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.base.TypeConstants;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.internal.ComplexType;
 import tudresden.ocl20.pivot.pivotmodel.MultiplicityElement;
 import tudresden.ocl20.pivot.pivotmodel.Operation;
 import tudresden.ocl20.pivot.pivotmodel.PrimitiveType;
@@ -179,7 +180,22 @@ public abstract class AbstractModelInstance implements IModelInstance {
 		Set<Type> result = new HashSet<Type>();
 
 		for (IModelInstanceElement modelObject : this.myModelInstanceObjects) {
-			result.addAll(modelObject.getTypes());
+
+			Type type;
+			type = modelObject.getType();
+
+			/* Handle ComplexTypes especially. */
+			if (type instanceof ComplexType) {
+
+				for (Type anImplementedType : ((ComplexType) type)
+						.getImplementedTypes()) {
+					result.add(anImplementedType);
+				}
+			}
+
+			else {
+				result.add(type);
+			}
 		}
 
 		return result;
@@ -278,9 +294,32 @@ public abstract class AbstractModelInstance implements IModelInstance {
 	protected void addModelInstanceObjectToCache(
 			IModelInstanceObject modelInstanceObject) {
 
-		/* Iterate through all types of the object. */
-		for (Type type : modelInstanceObject.getTypes()) {
+		Type type;
+		type = modelInstanceObject.getType();
 
+		/* Handle ComplexTypes especially. */
+		if (type instanceof ComplexType) {
+
+			for (Type anImplementedType : ((ComplexType) type).getImplementedTypes()) {
+
+				if (this.myModelInstanceObjectsByType.containsKey(anImplementedType)) {
+					this.myModelInstanceObjectsByType.get(anImplementedType).add(
+							modelInstanceObject);
+				}
+
+				else {
+					Set<IModelInstanceObject> modelObjects;
+
+					modelObjects = new HashSet<IModelInstanceObject>();
+					modelObjects.add(modelInstanceObject);
+
+					myModelInstanceObjectsByType.put(anImplementedType, modelObjects);
+				}
+			}
+			// end for.
+		}
+
+		else {
 			if (this.myModelInstanceObjectsByType.containsKey(type)) {
 				this.myModelInstanceObjectsByType.get(type).add(modelInstanceObject);
 			}
@@ -293,9 +332,7 @@ public abstract class AbstractModelInstance implements IModelInstance {
 
 				myModelInstanceObjectsByType.put(type, modelObjects);
 			}
-
 		}
-		// end for.
 	}
 
 	/**

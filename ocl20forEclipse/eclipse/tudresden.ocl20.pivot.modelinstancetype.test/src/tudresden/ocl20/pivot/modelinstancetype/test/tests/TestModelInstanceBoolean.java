@@ -372,27 +372,23 @@ public class TestModelInstanceBoolean {
 
 	/**
 	 * <p>
-	 * Tests the method {@link IModelInstanceBoolean#getTypes()}.
+	 * Tests the method {@link IModelInstanceBoolean#getType()}.
 	 * </p>
 	 */
 	@Test
-	public void testGetTypes() {
+	public void testGetType() {
 
 		msg =
 				ModelInstanceTypeTestSuiteMessages.TestModelInstanceBoolean_GetTypesIsWrong;
 
 		for (IModelInstanceBoolean aBoolean : instances_boolean) {
 
-			/* A boolean should have exactly one type. */
-			assertEquals(msg, 1, aBoolean.getTypes().size());
+			assertNotNull(msg, aBoolean.getType());
 
 			/* A boolean should have the PrimitiveType of the kind Boolean. */
-			for (Type type : aBoolean.getTypes()) {
-
-				assertTrue(msg, type instanceof PrimitiveType);
-				assertEquals(msg, PrimitiveTypeKind.BOOLEAN, ((PrimitiveType) type)
-						.getKind());
-			}
+			assertTrue(msg, aBoolean.getType() instanceof PrimitiveType);
+			assertEquals(msg, PrimitiveTypeKind.BOOLEAN, ((PrimitiveType) aBoolean
+					.getType()).getKind());
 		}
 		// end for.
 	}

@@ -62,8 +62,7 @@ public class JavaOclSequenceTest {
 
 	private final OclReal undefined =
 			(OclReal) myStandardLibraryFactory.createOclUndefined(oclReal0_5
-					.getModelInstanceReal().getTypes().iterator().next(),
-					"undefined value");
+					.getModelInstanceReal().getType(), "undefined value");
 
 	@Before
 	public void init() {

@@ -346,24 +346,21 @@ public class JavaModelInstanceBooleanTest {
 
 	/**
 	 * <p>
-	 * Tests the method {@link JavaModelInstanceBoolean#getTypes()}.
+	 * Tests the method {@link JavaModelInstanceBoolean#getType()}.
 	 * </p>
 	 */
 	@Test
-	public void testGetTypes01() {
+	public void testGetType01() {
 
 		IModelInstanceBoolean modelInstanceBoolean;
 		modelInstanceBoolean =
 				BasisJavaModelInstanceFactory.createModelInstanceBoolean(true);
 
-		assertEquals(1, modelInstanceBoolean.getTypes().size());
+		assertNotNull(modelInstanceBoolean.getType());
 
-		for (Type type : modelInstanceBoolean.getTypes()) {
-
-			assertTrue(type instanceof PrimitiveType);
-			assertEquals(PrimitiveTypeKind.BOOLEAN, ((PrimitiveType) type).getKind());
-		}
-		// end for.
+		assertTrue(modelInstanceBoolean.getType() instanceof PrimitiveType);
+		assertEquals(PrimitiveTypeKind.BOOLEAN,
+				((PrimitiveType) modelInstanceBoolean.getType()).getKind());
 	}
 
 	/**
@@ -388,11 +385,11 @@ public class JavaModelInstanceBooleanTest {
 	 */
 	@Test
 	public void testIsUndefined02() {
-	
+
 		IModelInstanceBoolean modelInstanceBoolean;
 		modelInstanceBoolean =
 				BasisJavaModelInstanceFactory.createModelInstanceBoolean(null);
-	
+
 		assertTrue(modelInstanceBoolean.isUndefined());
 	}
 }

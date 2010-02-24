@@ -321,15 +321,11 @@ public class TestModelInstanceEnumerationLiteral {
 
 		for (IModelInstanceEnumerationLiteral aLiteral : instances_EnumerationLiteral) {
 
-			/* An EnumerationLiteral should have exactly one type. */
-			assertEquals(msg, 1, aLiteral.getTypes().size());
+			assertNotNull(msg, aLiteral.getType());
 
 			/* An EnumerationLiteral should have its Enumeration as Type. */
-			for (Type type : aLiteral.getTypes()) {
-
-				assertTrue(msg, type instanceof Enumeration);
-				assertEquals(msg, type_Enumeration1, type);
-			}
+			assertTrue(msg, aLiteral.getType() instanceof Enumeration);
+			assertEquals(msg, type_Enumeration1, aLiteral.getType());
 		}
 		// end for.
 	}

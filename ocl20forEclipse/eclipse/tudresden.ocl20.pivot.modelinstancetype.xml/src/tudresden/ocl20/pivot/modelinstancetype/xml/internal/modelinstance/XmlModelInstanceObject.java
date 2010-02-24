@@ -71,10 +71,10 @@ public class XmlModelInstanceObject extends AbstractModelInstanceElement
 	protected IModelInstanceFactory modelInstanceFactory;
 
 	/**
-	 * The original {@link Type}s of this {@link XmlModelInstanceObject} (required
+	 * The original {@link Type} of this {@link XmlModelInstanceObject} (required
 	 * if a casted {@link XmlModelInstanceObject} shall be recasted to a sub-type.
 	 */
-	protected Set<Type> originalTypes;
+	protected Type originalType;
 
 	/**
 	 * <p>
@@ -84,20 +84,20 @@ public class XmlModelInstanceObject extends AbstractModelInstanceElement
 	 * @param node
 	 *          The {@link Node} for which an {@link XmlModelInstanceObject} shall
 	 *          be created.
-	 * @param types
-	 *          The {@link Type}s this {@link IModelObject} belongs to.
-	 * @param orignialTypes
-	 *          The original {@link Type}s of this {@link XmlModelInstanceObject}
+	 * @param type
+	 *          The {@link Type} this {@link IModelObject} belongs to.
+	 * @param orignialType
+	 *          The original {@link Type} of this {@link XmlModelInstanceObject}
 	 *          (required if a casted {@link XmlModelInstanceObject} shall be
 	 *          recasted to a sub-type.
 	 * @param factory
 	 *          The {@link IModelInstanceFactory} to adapt properties of this
 	 *          {@link XmlModelInstanceObject}.
 	 */
-	protected XmlModelInstanceObject(Node node, Set<Type> types,
-			Set<Type> orignialTypes, IModelInstanceFactory factory) {
+	protected XmlModelInstanceObject(Node node, Type type, Type orignialType,
+			IModelInstanceFactory factory) {
 
-		this(node, types, factory);
+		this(node, type, factory);
 
 		/* Probably debug the entry of this method. */
 		if (LOGGER.isDebugEnabled()) {
@@ -105,8 +105,8 @@ public class XmlModelInstanceObject extends AbstractModelInstanceElement
 
 			msg = "XMLModelInstanceObject("; //$NON-NLS-1$
 			msg += "node = " + node; //$NON-NLS-1$
-			msg += ", types = " + types; //$NON-NLS-1$
-			msg += ", originalTypes = " + originalTypes; //$NON-NLS-1$
+			msg += ", type = " + type; //$NON-NLS-1$
+			msg += ", originalType = " + originalType; //$NON-NLS-1$
 			msg += ", factory = " + factory; //$NON-NLS-1$
 			msg += ")"; //$NON-NLS-1$
 
@@ -114,20 +114,20 @@ public class XmlModelInstanceObject extends AbstractModelInstanceElement
 		}
 		// no else.
 
-		if (originalTypes == null || originalTypes.size() == 0) {
+		if (originalType == null) {
 			throw new IllegalArgumentException(
-					"Parameter 'originalTypes' must not be null or empty.");
+					"Parameter 'originalType' must not be null.");
 		}
 		// no else.
 
-		this.originalTypes = orignialTypes;
+		this.originalType = orignialType;
 
 		/* Probably debug the exit of this method. */
 		if (LOGGER.isDebugEnabled()) {
 			String msg;
 
 			msg = "XMLModelInstanceObject(Object, "; //$NON-NLS-1$
-			msg += "Set<Type>, Set<Type>, IModelInstanceFactory) - exit"; //$NON-NLS-1$
+			msg += "Type, Type, IModelInstanceFactory) - exit"; //$NON-NLS-1$
 
 			LOGGER.debug(msg);
 		}
@@ -142,13 +142,13 @@ public class XmlModelInstanceObject extends AbstractModelInstanceElement
 	 * @param node
 	 *          The {@link Node} for which an {@link XmlModelInstanceObject} shall
 	 *          be created.
-	 * @param types
-	 *          The {@link Type}s this {@link IModelObject} belongs to.
+	 * @param type
+	 *          The {@link Type} this {@link IModelObject} belongs to.
 	 * @param factory
 	 *          The {@link IModelInstanceFactory} to adapt properties of this
 	 *          {@link XmlModelInstanceObject}.
 	 */
-	protected XmlModelInstanceObject(Node node, Set<Type> types,
+	protected XmlModelInstanceObject(Node node, Type type,
 			IModelInstanceFactory factory) {
 
 		/* Probably debug the entry of this method. */
@@ -157,7 +157,7 @@ public class XmlModelInstanceObject extends AbstractModelInstanceElement
 
 			msg = "XMLModelInstanceObject("; //$NON-NLS-1$
 			msg += "node = " + node; //$NON-NLS-1$
-			msg += ", types = " + types; //$NON-NLS-1$
+			msg += ", type = " + type; //$NON-NLS-1$
 			msg += ", factory = " + factory; //$NON-NLS-1$
 			msg += ")"; //$NON-NLS-1$
 
@@ -165,9 +165,8 @@ public class XmlModelInstanceObject extends AbstractModelInstanceElement
 		}
 		// no else.
 
-		if (types == null || types.size() == 0) {
-			throw new IllegalArgumentException(
-					"Parameter 'types' must not be null or empty.");
+		if (type == null) {
+			throw new IllegalArgumentException("Parameter 'types' must not be null.");
 		}
 		// no else.
 
@@ -178,8 +177,8 @@ public class XmlModelInstanceObject extends AbstractModelInstanceElement
 		// no else.
 
 		this.adaptedNode = node;
-		this.myTypes = types;
-		this.originalTypes = myTypes;
+		this.myType = type;
+		this.originalType = myType;
 		this.modelInstanceFactory = factory;
 
 		/* Probably debug the exit of this method. */
@@ -187,7 +186,7 @@ public class XmlModelInstanceObject extends AbstractModelInstanceElement
 			String msg;
 
 			msg = "XMLModelInstanceObject(Object, "; //$NON-NLS-1$
-			msg += "Set<Type>, IModelInstanceFactory) - exit"; //$NON-NLS-1$
+			msg += "Type, IModelInstanceFactory) - exit"; //$NON-NLS-1$
 
 			LOGGER.debug(msg);
 		}
@@ -217,16 +216,12 @@ public class XmlModelInstanceObject extends AbstractModelInstanceElement
 		result = null;
 
 		/* If the type can be casted in the model, cast it. */
-		for (Type oneOfMyTypes : this.originalTypes) {
-			if (oneOfMyTypes.conformsTo(type)) {
-				result =
-						new XmlModelInstanceObject(this.adaptedNode, types,
-								this.originalTypes, this.modelInstanceFactory);
-				break;
-			}
-			// no else.
+		if (this.originalType.conformsTo(type)) {
+			result =
+					new XmlModelInstanceObject(this.adaptedNode, type, this.originalType,
+							this.modelInstanceFactory);
 		}
-		// end for.
+		// no else.
 
 		/* If no cast has been done, throw an exception. */
 		if (result == null) {
@@ -257,7 +252,7 @@ public class XmlModelInstanceObject extends AbstractModelInstanceElement
 		copiedNode = this.adaptedNode.cloneNode(true);
 
 		result =
-				new XmlModelInstanceObject(copiedNode, this.myTypes,
+				new XmlModelInstanceObject(copiedNode, this.myType,
 						this.modelInstanceFactory);
 
 		return result;

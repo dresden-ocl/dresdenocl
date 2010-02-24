@@ -488,16 +488,12 @@ public class TestModelInstanceString {
 
 		for (IModelInstanceString aString : instances_string) {
 
-			/* A String should have exactly one type. */
-			assertEquals(msg, 1, aString.getTypes().size());
+			assertNotNull(msg, aString.getType());
 
 			/* A String should have the PrimitiveType of the kind String. */
-			for (Type type : aString.getTypes()) {
-
-				assertTrue(msg, type instanceof PrimitiveType);
-				assertEquals(msg, PrimitiveTypeKind.STRING, ((PrimitiveType) type)
-						.getKind());
-			}
+			assertTrue(msg, aString.getType() instanceof PrimitiveType);
+			assertEquals(msg, PrimitiveTypeKind.STRING, ((PrimitiveType) aString
+					.getType()).getKind());
 		}
 		// end for.
 	}

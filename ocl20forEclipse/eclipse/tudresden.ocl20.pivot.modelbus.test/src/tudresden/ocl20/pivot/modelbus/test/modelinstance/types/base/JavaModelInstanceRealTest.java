@@ -350,14 +350,11 @@ public class JavaModelInstanceRealTest {
 		modelInstanceReal01 =
 				BasisJavaModelInstanceFactory.createModelInstanceReal(new Double(42.7));
 
-		assertEquals(1, modelInstanceReal01.getTypes().size());
+		assertNotNull(modelInstanceReal01.getType());
 
-		for (Type type : modelInstanceReal01.getTypes()) {
-
-			assertTrue(type instanceof PrimitiveType);
-			assertEquals(PrimitiveTypeKind.REAL, ((PrimitiveType) type).getKind());
-		}
-		// end for.
+		assertTrue(modelInstanceReal01.getType() instanceof PrimitiveType);
+		assertEquals(PrimitiveTypeKind.REAL, ((PrimitiveType) modelInstanceReal01
+				.getType()).getKind());
 	}
 
 	/**

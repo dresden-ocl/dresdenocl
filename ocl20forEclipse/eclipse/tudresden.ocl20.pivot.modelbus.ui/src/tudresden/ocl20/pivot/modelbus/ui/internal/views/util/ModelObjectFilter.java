@@ -270,16 +270,11 @@ public class ModelObjectFilter extends ViewerFilter {
 		/* Else check if the parent element is an IModelInstanceElement. */
 		else if (aParentElement instanceof IModelInstanceElement) {
 
-			Set<Type> types;
-			types = ((IModelInstanceElement) aParentElement).getTypes();
-
-			result = false;
+			Type type;
+			type = ((IModelInstanceElement) aParentElement).getType();
 
 			/* Check if the types of this object shall be filtered. */
-			for (Type type : types) {
-				result |= this.myFilteredTypes.contains(type);
-			}
-			// end for.
+			result = this.myFilteredTypes.contains(type);
 		}
 
 		/* Else check if the parent element is an ModelInstanceObjectProperty. */

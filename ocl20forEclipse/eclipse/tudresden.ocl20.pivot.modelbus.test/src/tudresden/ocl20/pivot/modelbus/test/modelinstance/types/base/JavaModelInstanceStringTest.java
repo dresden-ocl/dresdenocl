@@ -537,14 +537,11 @@ public class JavaModelInstanceStringTest {
 		modelInstanceString01 =
 				BasisJavaModelInstanceFactory.createModelInstanceString("something");
 
-		assertEquals(1, modelInstanceString01.getTypes().size());
+		assertNotNull(modelInstanceString01.getType());
 
-		for (Type type : modelInstanceString01.getTypes()) {
-
-			assertTrue(type instanceof PrimitiveType);
-			assertEquals(PrimitiveTypeKind.STRING, ((PrimitiveType) type).getKind());
-		}
-		// end for.
+		assertTrue(modelInstanceString01.getType() instanceof PrimitiveType);
+		assertEquals(PrimitiveTypeKind.STRING,
+				((PrimitiveType) modelInstanceString01.getType()).getKind());
 	}
 
 	/**

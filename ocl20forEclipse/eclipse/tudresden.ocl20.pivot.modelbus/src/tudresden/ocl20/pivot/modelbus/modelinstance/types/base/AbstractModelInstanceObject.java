@@ -90,8 +90,8 @@ public abstract class AbstractModelInstanceObject extends
 				/* Check if both objects adapt the same object. */
 				result = this.getObject() == other.getObject();
 
-				/* Check if both objects have the same type(s). */
-				result &= this.myTypes.equals(other.myTypes);
+				/* Check if both objects have the same type. */
+				result &= this.myType.equals(other.myType);
 			}
 		}
 
@@ -119,7 +119,7 @@ public abstract class AbstractModelInstanceObject extends
 		else {
 			result = 31 * this.getObject().hashCode();
 
-			result = 31 * result + this.myTypes.hashCode();
+			result = 31 * result + this.myType.hashCode();
 		}
 
 		return result;

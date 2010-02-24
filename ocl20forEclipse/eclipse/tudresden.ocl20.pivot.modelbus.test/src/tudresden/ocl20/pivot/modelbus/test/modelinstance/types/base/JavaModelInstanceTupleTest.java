@@ -365,14 +365,10 @@ public class JavaModelInstanceTupleTest {
 		modelInstanceTuple01 =
 				this.createModelInstanceTuple("fourty-two", new Long(42));
 
-		assertEquals(1, modelInstanceTuple01.getTypes().size());
+		assertNotNull(modelInstanceTuple01.getType());
 
-		for (Type type : modelInstanceTuple01.getTypes()) {
-
-			assertTrue(type instanceof TupleType);
-			assertEquals(type, typeTuple1);
-		}
-		// end for.
+		assertTrue(modelInstanceTuple01.getType() instanceof TupleType);
+		assertEquals(typeTuple1, modelInstanceTuple01.getType());
 	}
 
 	/**

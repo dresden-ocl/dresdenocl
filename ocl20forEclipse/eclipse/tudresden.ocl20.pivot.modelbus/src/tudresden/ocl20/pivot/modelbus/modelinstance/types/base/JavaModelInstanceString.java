@@ -18,8 +18,6 @@ with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
 package tudresden.ocl20.pivot.modelbus.modelinstance.types.base;
 
-import java.util.HashSet;
-
 import org.apache.log4j.Logger;
 import org.eclipse.osgi.util.NLS;
 
@@ -81,8 +79,7 @@ public class JavaModelInstanceString extends AbstractModelInstanceString
 		this.myString = string;
 
 		/* Initialize the type. */
-		this.myTypes = new HashSet<Type>();
-		this.myTypes.add(TypeConstants.STRING);
+		this.myType = TypeConstants.STRING;
 
 		/* Eventually debug the exit of this method. */
 		if (LOGGER.isDebugEnabled()) {

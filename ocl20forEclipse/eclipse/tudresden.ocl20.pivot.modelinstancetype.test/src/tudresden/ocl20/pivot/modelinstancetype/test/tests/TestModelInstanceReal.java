@@ -445,16 +445,12 @@ public class TestModelInstanceReal {
 
 		for (IModelInstanceReal aReal : instances_real) {
 
-			/* A Real should have exactly one type. */
-			assertEquals(msg, 1, aReal.getTypes().size());
+			assertNotNull(msg, aReal.getType());
 
 			/* A Real should have the PrimitiveType of the kind Real. */
-			for (Type type : aReal.getTypes()) {
-
-				assertTrue(msg, type instanceof PrimitiveType);
-				assertEquals(msg, PrimitiveTypeKind.REAL, ((PrimitiveType) type)
-						.getKind());
-			}
+			assertTrue(msg, aReal.getType() instanceof PrimitiveType);
+			assertEquals(msg, PrimitiveTypeKind.REAL, ((PrimitiveType) aReal
+					.getType()).getKind());
 		}
 		// end for.
 	}

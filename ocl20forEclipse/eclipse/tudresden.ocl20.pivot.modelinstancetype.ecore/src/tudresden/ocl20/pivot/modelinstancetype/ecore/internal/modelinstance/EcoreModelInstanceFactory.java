@@ -275,9 +275,7 @@ public class EcoreModelInstanceFactory extends BasisJavaModelInstanceFactory
 					else {
 
 						if (adapted == null) {
-							Set<Type> types = new HashSet<Type>();
-							types.add(type);
-							result = new EcoreModelInstanceObject(null, types, this);
+							result = new EcoreModelInstanceObject(null, type, this);
 						}
 
 						/* Else the throw an exception. */
@@ -343,10 +341,10 @@ public class EcoreModelInstanceFactory extends BasisJavaModelInstanceFactory
 
 		IModelInstanceElement result;
 
-		Set<Type> types;
-		types = this.findTypesOfEObjectInModel(eObject);
+		Type type;
+		type = this.findTypesOfEObjectInModel(eObject);
 
-		result = new EcoreModelInstanceObject(eObject, types, this);
+		result = new EcoreModelInstanceObject(eObject, type, this);
 
 		/* Probably debug the exit of this method. */
 		if (LOGGER.isDebugEnabled()) {
@@ -392,28 +390,7 @@ public class EcoreModelInstanceFactory extends BasisJavaModelInstanceFactory
 
 		IModelInstanceElement result;
 
-		Set<Type> types;
-		types = new HashSet<Type>();
-
-		/* Try to find the types of the given object in the model. */
-		try {
-
-			/* Search for a type that conforms to the given type. */
-			for (Type aModelType : this.findTypesOfEObjectInModel(eObject)) {
-
-				if (aModelType.conformsTo(type)) {
-					types.add(aModelType);
-					break;
-				}
-				// no else.
-			}
-		}
-
-		catch (TypeNotFoundInModelException e1) {
-			types.add(type);
-		}
-
-		result = new EcoreModelInstanceObject(eObject, types, this);
+		result = new EcoreModelInstanceObject(eObject, type, this);
 
 		/* Probably debug the exit of this method. */
 		if (LOGGER.isDebugEnabled()) {
@@ -678,15 +655,24 @@ public class EcoreModelInstanceFactory extends BasisJavaModelInstanceFactory
 	 *        {@link EObject} cannot be adapted to any {@link Type} of the
 	 *        {@link IModel} of this {@link EcoreModelInstanceFactory}.
 	 */
-	private Set<Type> findTypesOfEObjectInModel(EObject eObject)
+	private Type findTypesOfEObjectInModel(EObject eObject)
 			throws TypeNotFoundInModelException {
 
-		Set<Type> result;
+		Type result;
+		Set<Type> resultSet;
 
 		Class<?> objectClass;
 		objectClass = eObject.getClass();
 
-		result = findTypesOfClassInModel(objectClass);
+		resultSet = findTypesOfClassInModel(objectClass);
+
+		if (resultSet.size() == 1) {
+			result = resultSet.iterator().next();
+		}
+
+		else {
+			result = super.createComplexType(resultSet);
+		}
 
 		return result;
 	}

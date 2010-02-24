@@ -88,15 +88,15 @@ public class JavaModelInstanceObject extends AbstractModelInstanceObject
 	 * @param object
 	 *          The {@link Object} for which an {@link JavaModelInstanceObject}
 	 *          shall be created.
-	 * @param types
-	 *          The {@link Type}s this {@link IModelInstanceElement} belongs to.
+	 * @param type
+	 *          The {@link Type} this {@link IModelInstanceElement} belongs to.
 	 * @param factory
 	 *          The {@link JavaModelInstanceFactory} of this
 	 *          {@link JavaModelInstanceObject}. Required to adapt the
 	 *          {@link Object}s of accesses {@link Property}s or results of
 	 *          invoked {@link Operation}s.
 	 */
-	protected JavaModelInstanceObject(Object object, Set<Type> types,
+	protected JavaModelInstanceObject(Object object, Type type,
 			JavaModelInstanceFactory factory) {
 
 		/* Eventually debug the entry of this method. */
@@ -105,7 +105,7 @@ public class JavaModelInstanceObject extends AbstractModelInstanceObject
 
 			msg = "JavaModelInstanceObject("; //$NON-NLS-1$
 			msg += "object = " + object; //$NON-NLS-1$
-			msg += ", types = " + types; //$NON-NLS-1$
+			msg += ", type = " + type; //$NON-NLS-1$
 			msg += ", factory = " + factory; //$NON-NLS-1$
 			msg += ")"; //$NON-NLS-1$
 
@@ -114,11 +114,11 @@ public class JavaModelInstanceObject extends AbstractModelInstanceObject
 		// no else.
 
 		if (object != null) {
-			this.initialize(object, object.getClass(), types, factory);
+			this.initialize(object, object.getClass(), type, factory);
 		}
 
 		else {
-			this.initialize(null, null, types, factory);
+			this.initialize(null, null, type, factory);
 		}
 
 		/* Eventually debug the exit of this method. */
@@ -126,7 +126,7 @@ public class JavaModelInstanceObject extends AbstractModelInstanceObject
 			String msg;
 
 			msg = "JavaModelInstanceObject(Object, "; //$NON-NLS-1$
-			msg += "Set<Type>, IModelInstanceFactory) - exit"; //$NON-NLS-1$
+			msg += "Type, IModelInstanceFactory) - exit"; //$NON-NLS-1$
 
 			LOGGER.debug(msg);
 		}
@@ -145,8 +145,8 @@ public class JavaModelInstanceObject extends AbstractModelInstanceObject
 	 *          The Java {@link Class} this {@link JavaModelInstanceObject} is
 	 *          casted to. This is required to access the right {@link Property}s
 	 *          and {@link Operation}s.
-	 * @param types
-	 *          The {@link Type}s this {@link IModelInstanceElement} belongs to.
+	 * @param type
+	 *          The {@link Type} this {@link IModelInstanceElement} belongs to.
 	 * @param factory
 	 *          The {@link JavaModelInstanceFactory} of this
 	 *          {@link JavaModelInstanceObject}. Required to adapt the
@@ -154,7 +154,7 @@ public class JavaModelInstanceObject extends AbstractModelInstanceObject
 	 *          invoked {@link Operation}s.
 	 */
 	protected JavaModelInstanceObject(Object object, Class<?> castedToClass,
-			Set<Type> types, JavaModelInstanceFactory factory) {
+			Type type, JavaModelInstanceFactory factory) {
 
 		/* Eventually debug the entry of this method. */
 		if (LOGGER.isDebugEnabled()) {
@@ -163,7 +163,7 @@ public class JavaModelInstanceObject extends AbstractModelInstanceObject
 			msg = "JavaModelInstanceObject("; //$NON-NLS-1$
 			msg += "object = " + object; //$NON-NLS-1$
 			msg += ", castedToClass = " + castedToClass; //$NON-NLS-1$
-			msg += ", types = " + types; //$NON-NLS-1$
+			msg += ", type = " + type; //$NON-NLS-1$
 			msg += ", factory = " + factory; //$NON-NLS-1$
 			msg += ")"; //$NON-NLS-1$
 
@@ -171,14 +171,14 @@ public class JavaModelInstanceObject extends AbstractModelInstanceObject
 		}
 		// no else.
 
-		this.initialize(object, castedToClass, types, factory);
+		this.initialize(object, castedToClass, type, factory);
 
 		/* Eventually debug the exit of this method. */
 		if (LOGGER.isDebugEnabled()) {
 			String msg;
 
 			msg = "JavaModelInstanceObject(Object, "; //$NON-NLS-1$
-			msg += "Set<Type>, IModelInstanceFactory) - exit"; //$NON-NLS-1$
+			msg += "Type, IModelInstanceFactory) - exit"; //$NON-NLS-1$
 
 			LOGGER.debug(msg);
 		}
@@ -214,14 +214,10 @@ public class JavaModelInstanceObject extends AbstractModelInstanceObject
 			result = null;
 
 			/* If the type can be casted in the model, cast it. */
-			for (Type oneOfMyTypes : this.myTypes) {
-				if (type.conformsTo(oneOfMyTypes)) {
-					result = new JavaModelInstanceObject(null, types, this.myFactory);
-					break;
-				}
-				// no else.
+			if (type.conformsTo(this.myType)) {
+				result = new JavaModelInstanceObject(null, type, this.myFactory);
 			}
-			// end for.
+			// no else.
 
 			/* If no cast has been done, throw an exception. */
 			if (result == null) {
@@ -265,7 +261,7 @@ public class JavaModelInstanceObject extends AbstractModelInstanceObject
 
 				/* Cast this object to the found type. */
 				result =
-						new JavaModelInstanceObject(this.myAdaptedObject, typeClass, types,
+						new JavaModelInstanceObject(this.myAdaptedObject, typeClass, type,
 								this.myFactory);
 			}
 
@@ -376,12 +372,9 @@ public class JavaModelInstanceObject extends AbstractModelInstanceObject
 
 		/* Check if this object is undefined. */
 		if (this.myAdaptedObject == null) {
-			Set<Type> types;
 
-			types = new HashSet<Type>();
-			types.add(operation.getType());
-
-			result = new JavaModelInstanceObject(null, types, this.myFactory);
+			result =
+					new JavaModelInstanceObject(null, operation.getType(), this.myFactory);
 		}
 
 		/* Else find and invoke the operation. */
@@ -483,12 +476,9 @@ public class JavaModelInstanceObject extends AbstractModelInstanceObject
 
 		/* Check if this object is undefined. */
 		if (this.myAdaptedObject == null) {
-			Set<Type> types;
 
-			types = new HashSet<Type>();
-			types.add(property.getType());
-
-			result = new JavaModelInstanceObject(null, types, this.myFactory);
+			result =
+					new JavaModelInstanceObject(null, property.getType(), this.myFactory);
 		}
 
 		/*
@@ -617,7 +607,7 @@ public class JavaModelInstanceObject extends AbstractModelInstanceObject
 			adaptedResult = cloneMethod.invoke(this.myAdaptedObject);
 			result =
 					new JavaModelInstanceObject(adaptedResult, this.myAdaptedType,
-							this.myTypes, this.myFactory);
+							this.myType, this.myFactory);
 		}
 
 		catch (SecurityException e) {
@@ -724,7 +714,7 @@ public class JavaModelInstanceObject extends AbstractModelInstanceObject
 			/* Create the adapter. */
 			result =
 					new JavaModelInstanceObject(copiedAdaptedObject, this.myAdaptedType,
-							this.myTypes, this.myFactory);
+							this.myType, this.myFactory);
 		}
 
 		catch (SecurityException e) {
@@ -902,20 +892,20 @@ public class JavaModelInstanceObject extends AbstractModelInstanceObject
 	 *          The Java {@link Class} this {@link JavaModelInstanceObject} is
 	 *          casted to. This is required to access the right {@link Property}s
 	 *          and {@link Operation}s.
-	 * @param types
-	 *          The {@link Type}s this {@link IModelInstanceElement} belongs to.
+	 * @param type
+	 *          The {@link Type} this {@link IModelInstanceElement} belongs to.
 	 * @param factory
 	 *          The {@link JavaModelInstanceFactory} of this
 	 *          {@link JavaModelInstanceObject}. Required to adapt the
 	 *          {@link Object}s of accesses {@link Property}s or results of
 	 *          invoked {@link Operation}s.
 	 */
-	private void initialize(Object object, Class<?> castedToClass,
-			Set<Type> types, JavaModelInstanceFactory factory) {
+	private void initialize(Object object, Class<?> castedToClass, Type type,
+			JavaModelInstanceFactory factory) {
 
 		this.myAdaptedObject = object;
 		this.myAdaptedType = castedToClass;
-		this.myTypes = types;
+		this.myType = type;
 		this.myFactory = factory;
 	}
 }

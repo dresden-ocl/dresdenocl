@@ -39,17 +39,17 @@ public class JavaOclAnyTest {
 
 		final OclInteger toInt = fourtyTwo.oclAsType(intType);
 		assertTrue(toInt instanceof OclInteger);
-		assertTrue(toInt.getModelInstanceInteger().getTypes().iterator().next()
+		assertTrue(toInt.getModelInstanceInteger().getType()
 				.conformsTo(TypeConstants.INTEGER));
 
 		final OclReal toReal = fourtyTwo.oclAsType(realType);
 		assertTrue(toReal instanceof OclReal);
-		assertTrue(toReal.getModelInstanceReal().getTypes().iterator().next()
+		assertTrue(toReal.getModelInstanceReal().getType()
 				.conformsTo(TypeConstants.REAL));
 
 		final OclString toString = fourtyTwo.oclAsType(stringType);
 		assertTrue(toString instanceof OclString);
-		assertTrue(toString.getModelInstanceString().getTypes().iterator().next()
+		assertTrue(toString.getModelInstanceString().getType()
 				.conformsTo(TypeConstants.STRING));
 
 		assertTrue(fourtyTwo.oclAsType(setType).oclIsInvalid().isTrue());

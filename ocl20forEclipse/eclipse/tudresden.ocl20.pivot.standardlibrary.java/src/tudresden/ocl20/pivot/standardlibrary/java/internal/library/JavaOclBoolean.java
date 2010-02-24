@@ -181,10 +181,7 @@ public class JavaOclBoolean extends JavaOclLibraryObject implements OclBoolean {
 
 		OclAny result = null;
 
-		// FIXME Michael: Can there be a definite return type if the condition is
-		// invalid?
-		final Type type =
-				thenStatement.getModelInstanceElement().getTypes().iterator().next();
+		final Type type = thenStatement.getModelInstanceElement().getType();
 
 		result = checkInvalid(type, this);
 

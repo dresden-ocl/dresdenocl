@@ -92,12 +92,12 @@ public class JavaModelInstanceCollection<T extends IModelInstanceElement>
 		/* Check if a List or set is given. */
 		if (containedObjects instanceof Set<?>) {
 
-			this.myTypes.add(TypeConstants.SET);
+			this.myType = TypeConstants.SET;
 		}
 
 		else {
 
-			this.myTypes.add(TypeConstants.BAG);
+			this.myType = TypeConstants.BAG;
 		}
 
 		/* Eventually debug the exit of this method. */
@@ -154,7 +154,7 @@ public class JavaModelInstanceCollection<T extends IModelInstanceElement>
 		}
 		// no else.
 
-		this.myTypes.add(type);
+		this.myType = type;
 	}
 
 	/**
@@ -170,7 +170,6 @@ public class JavaModelInstanceCollection<T extends IModelInstanceElement>
 	private void initialize(Collection<T> containedObjects) {
 
 		this.myContainedObjects = containedObjects;
-		this.myTypes = new HashSet<Type>();
 	}
 
 	/*
@@ -279,8 +278,8 @@ public class JavaModelInstanceCollection<T extends IModelInstanceElement>
 	public IModelInstanceElement copyForAtPre() {
 
 		/* For a collection, normally only the collection will be copied. */
-		return new JavaModelInstanceCollection<T>(this.myContainedObjects, this
-				.getTypes().toArray(new CollectionType[0])[0]);
+		return new JavaModelInstanceCollection<T>(this.myContainedObjects,
+				(CollectionType) this.getType());
 	}
 
 	/*
