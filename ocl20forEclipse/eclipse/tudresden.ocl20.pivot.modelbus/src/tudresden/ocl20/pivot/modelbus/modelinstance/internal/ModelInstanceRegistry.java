@@ -244,7 +244,8 @@ public class ModelInstanceRegistry implements IModelInstanceRegistry {
 	 */
 	public void modelRemoved(ModelRegistryEvent event) {
 
-		if (this.modelInstances.containsKey(event.getAffectedModel())) {
+		if (this.modelInstances != null
+				&& this.modelInstances.containsKey(event.getAffectedModel())) {
 
 			for (IModelInstance modelInstance : this.modelInstances.get(event
 					.getAffectedModel())) {
