@@ -39,6 +39,8 @@ import tudresden.ocl20.pivot.modelbus.ModelAccessException;
 import tudresden.ocl20.pivot.modelbus.metamodel.IMetamodel;
 import tudresden.ocl20.pivot.pivotmodel.Constraint;
 import tudresden.ocl20.pivot.pivotmodel.Namespace;
+import tudresden.ocl20.pivot.pivotmodel.Operation;
+import tudresden.ocl20.pivot.pivotmodel.Property;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 
 /**
@@ -172,7 +174,9 @@ public interface IModel {
 
 	/**
 	 * <p>
-	 * Removes all {@link Constraint}s from this {@link IModel}.
+	 * Removes all {@link Constraint}s from this {@link IModel}. If the
+	 * {@link Constraint}s define new {@link Property}s or {@link Operation}s,
+	 * these elements are removed as well.
 	 * </p>
 	 * 
 	 * @return <code>true</code> if all {@link Constraint}s have been removed.
@@ -187,7 +191,10 @@ public interface IModel {
 	/**
 	 * <p>
 	 * Removes all {@link Constraint}s from this {@link IModel} that are contained
-	 * in a given {@link Collection}.
+	 * in a given {@link Collection}. If the {@link Constraint}s define new
+	 * {@link Property}s or {@link Operation}s, these elements are removed as
+	 * well. <strong>Attention: This can lead to inconsistencies if other
+	 * constraints refer to the define features that have been removed!</strong>
 	 * </p>
 	 * 
 	 * @param constraints

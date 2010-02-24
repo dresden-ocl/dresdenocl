@@ -1,0 +1,6 @@
+package package1::package2
+
+context Type2
+def: getInteger(): Integer = 42
+
+endpackage

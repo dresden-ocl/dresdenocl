@@ -1,0 +1,6 @@
+package package1
+
+context Type1
+def: anInteger: Integer = 42
+
+endpackage

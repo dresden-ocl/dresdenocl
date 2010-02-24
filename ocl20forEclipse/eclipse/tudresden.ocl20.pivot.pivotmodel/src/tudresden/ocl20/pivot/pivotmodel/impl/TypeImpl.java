@@ -71,20 +71,28 @@ import tudresden.ocl20.pivot.pivotmodel.TypeParameter;
 import tudresden.ocl20.pivot.pivotmodel.util.ListUtil;
 
 /**
- * <!-- begin-user-doc --> An implementation of the model object '<em><b>Type</b></em>'.
- * <!-- end-user-doc -->
+ * <!-- begin-user-doc --> An implementation of the model object '
+ * <em><b>Type</b></em>'. <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.TypeImpl#getOwnedTypeParameter <em>Owned Type Parameter</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.TypeImpl#getNamespace <em>Namespace</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.TypeImpl#getOwnedOperation <em>Owned Operation</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.TypeImpl#getOwnedProperty <em>Owned Property</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.TypeImpl#getSuperType <em>Super Type</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.TypeImpl#getGenericSuperType <em>Generic Super Type</em>}</li>
+ * <li>
+ * {@link tudresden.ocl20.pivot.pivotmodel.impl.TypeImpl#getOwnedTypeParameter
+ * <em>Owned Type Parameter</em>}</li>
+ * <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.TypeImpl#getNamespace <em>
+ * Namespace</em>}</li>
+ * <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.TypeImpl#getOwnedOperation
+ * <em>Owned Operation</em>}</li>
+ * <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.TypeImpl#getOwnedProperty
+ * <em>Owned Property</em>}</li>
+ * <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.TypeImpl#getSuperType <em>
+ * Super Type</em>}</li>
+ * <li>
+ * {@link tudresden.ocl20.pivot.pivotmodel.impl.TypeImpl#getGenericSuperType
+ * <em>Generic Super Type</em>}</li>
  * </ul>
  * </p>
- *
+ * 
  * @generated
  */
 public class TypeImpl extends NamedElementImpl implements Type {
@@ -95,8 +103,10 @@ public class TypeImpl extends NamedElementImpl implements Type {
 	private static final Logger logger = Logger.getLogger(TypeImpl.class);
 
 	/**
-	 * The cached value of the '{@link #getOwnedTypeParameter() <em>Owned Type Parameter</em>}' containment reference list.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getOwnedTypeParameter()
+	 * <em>Owned Type Parameter</em>}' containment reference list. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getOwnedTypeParameter()
 	 * @generated
 	 * @ordered
@@ -104,8 +114,10 @@ public class TypeImpl extends NamedElementImpl implements Type {
 	protected EList<TypeParameter> ownedTypeParameter;
 
 	/**
-	 * The cached value of the '{@link #getOwnedOperation() <em>Owned Operation</em>}' containment reference list.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getOwnedOperation()
+	 * <em>Owned Operation</em>}' containment reference list. <!-- begin-user-doc
+	 * --> <!-- end-user-doc -->
+	 * 
 	 * @see #getOwnedOperation()
 	 * @generated
 	 * @ordered
@@ -113,8 +125,10 @@ public class TypeImpl extends NamedElementImpl implements Type {
 	protected EList<Operation> ownedOperation;
 
 	/**
-	 * The cached value of the '{@link #getOwnedProperty() <em>Owned Property</em>}' containment reference list.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getOwnedProperty()
+	 * <em>Owned Property</em>}' containment reference list. <!-- begin-user-doc
+	 * --> <!-- end-user-doc -->
+	 * 
 	 * @see #getOwnedProperty()
 	 * @generated
 	 * @ordered
@@ -122,8 +136,9 @@ public class TypeImpl extends NamedElementImpl implements Type {
 	protected EList<Property> ownedProperty;
 
 	/**
-	 * The cached value of the '{@link #getSuperType() <em>Super Type</em>}' reference list.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getSuperType() <em>Super Type</em>}'
+	 * reference list. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getSuperType()
 	 * @generated
 	 * @ordered
@@ -131,8 +146,10 @@ public class TypeImpl extends NamedElementImpl implements Type {
 	protected EList<Type> superType;
 
 	/**
-	 * The cached value of the '{@link #getGenericSuperType() <em>Generic Super Type</em>}' containment reference list.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getGenericSuperType()
+	 * <em>Generic Super Type</em>}' containment reference list. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getGenericSuperType()
 	 * @generated
 	 * @ordered
@@ -147,6 +164,7 @@ public class TypeImpl extends NamedElementImpl implements Type {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected TypeImpl() {
@@ -167,10 +185,10 @@ public class TypeImpl extends NamedElementImpl implements Type {
 	}
 
 	/**
-	 * The implementation in this class simply redirects to {{@link #getSuperTypeGen()}
-	 * which contains the code generated by EMF. Client may, however, override
-	 * this method to provide specific behaviour, e.g., adapt to other model
-	 * repositories.
+	 * The implementation in this class simply redirects to {
+	 * {@link #getSuperTypeGen()} which contains the code generated by EMF. Client
+	 * may, however, override this method to provide specific behaviour, e.g.,
+	 * adapt to other model repositories.
 	 * 
 	 * @generated NOT
 	 */
@@ -182,6 +200,7 @@ public class TypeImpl extends NamedElementImpl implements Type {
 	/**
 	 * <!-- begin-user-doc -->The code generated for {{@link #getSuperType()} is
 	 * redirected to this method. <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected final List<Type> getSuperTypeGen() {
@@ -196,6 +215,7 @@ public class TypeImpl extends NamedElementImpl implements Type {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public List<GenericType> getGenericSuperType() {
@@ -209,10 +229,10 @@ public class TypeImpl extends NamedElementImpl implements Type {
 	}
 
 	/**
-	 * The implementation in this class simply redirects to {{@link #getOwnedOperationGen()}
-	 * which contains the code generated by EMF. Clients may, however, override
-	 * this method to provide specific behaviour, e.g., adapt to other model
-	 * repositories.
+	 * The implementation in this class simply redirects to {
+	 * {@link #getOwnedOperationGen()} which contains the code generated by EMF.
+	 * Clients may, however, override this method to provide specific behaviour,
+	 * e.g., adapt to other model repositories.
 	 * 
 	 * @generated NOT
 	 */
@@ -239,10 +259,10 @@ public class TypeImpl extends NamedElementImpl implements Type {
 	}
 
 	/**
-	 * The implementation in this class simply redirects to {{@link #getOwnedPropertyGen()}
-	 * which contains the code generated by EMF. Clients may, however, override
-	 * this method to provide specific behaviour, e.g., adapt to other model
-	 * repositories.
+	 * The implementation in this class simply redirects to {
+	 * {@link #getOwnedPropertyGen()} which contains the code generated by EMF.
+	 * Clients may, however, override this method to provide specific behaviour,
+	 * e.g., adapt to other model repositories.
 	 * 
 	 * @generated NOT
 	 */
@@ -269,10 +289,10 @@ public class TypeImpl extends NamedElementImpl implements Type {
 	}
 
 	/**
-	 * The implementation in this class simply redirects to {{@link #getOwnedTypeParameterGen()}
-	 * which contains the code generated by EMF. Clients may, however, override
-	 * this method to provide specific behaviour, e.g., adapt to other model
-	 * repositories.
+	 * The implementation in this class simply redirects to {
+	 * {@link #getOwnedTypeParameterGen()} which contains the code generated by
+	 * EMF. Clients may, however, override this method to provide specific
+	 * behaviour, e.g., adapt to other model repositories.
 	 * 
 	 * @generated NOT
 	 */
@@ -282,8 +302,10 @@ public class TypeImpl extends NamedElementImpl implements Type {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->The code generated for {{@link #getOwnedTypeParameterGen()}
-	 * is redirected to this method.<!-- end-user-doc -->
+	 * <!-- begin-user-doc -->The code generated for {
+	 * {@link #getOwnedTypeParameterGen()} is redirected to this method.<!--
+	 * end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected final List<TypeParameter> getOwnedTypeParameterGen() {
@@ -300,6 +322,7 @@ public class TypeImpl extends NamedElementImpl implements Type {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public Namespace getNamespace() {
@@ -311,6 +334,7 @@ public class TypeImpl extends NamedElementImpl implements Type {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public NotificationChain basicSetNamespace(Namespace newNamespace,
@@ -324,6 +348,7 @@ public class TypeImpl extends NamedElementImpl implements Type {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public void setNamespace(Namespace newNamespace) {
@@ -675,6 +700,60 @@ public class TypeImpl extends NamedElementImpl implements Type {
 	 * 
 	 * @generated NOT
 	 */
+	public boolean removeProperty(Property property) {
+
+		if (logger.isDebugEnabled()) {
+			logger.debug("removeProperty(p=" + property + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
+		}
+
+		boolean result;
+
+		/*
+		 * Use the generated method, not the client-specific list obtained through
+		 * getOwnedProperty().
+		 */
+		result = this.getOwnedPropertyGen().remove(property);
+
+		if (logger.isDebugEnabled()) {
+			logger
+					.debug("removeProperty(p=" + property + ") - exit - result = " + result); //$NON-NLS-1$ //$NON-NLS-2$
+		}
+
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public boolean removeOperation(Operation operation) {
+
+		if (logger.isDebugEnabled()) {
+			logger.debug("removeOperation(o=" + operation + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
+		}
+
+		boolean result;
+
+		/*
+		 * Use the generated method, not the client-specific list obtained through
+		 * getOwnedOperation().
+		 */
+		result = this.getOwnedOperationGen().remove(operation);
+
+		if (logger.isDebugEnabled()) {
+			logger
+					.debug("removeOperation(o=" + operation + ") - exit - result = " + result); //$NON-NLS-1$ //$NON-NLS-2$
+		}
+
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
+	 */
 	public Type addTypeParameter(TypeParameter typeParameter) {
 
 		if (logger.isDebugEnabled()) {
@@ -695,10 +774,10 @@ public class TypeImpl extends NamedElementImpl implements Type {
 	/**
 	 * Performs a binding of type parameters as described for
 	 * {@link GenericElement#bindTypeParameter()}. Note that the lists for
-	 * <code>parameters</code> and <code>types</code> must support comparison
-	 * of elements via equality, not identity. In particular, this means that
-	 * Ecore {@link EObjectEList}s should be copied into a new list before
-	 * calling this method.
+	 * <code>parameters</code> and <code>types</code> must support comparison of
+	 * elements via equality, not identity. In particular, this means that Ecore
+	 * {@link EObjectEList}s should be copied into a new list before calling this
+	 * method.
 	 * 
 	 * @generated NOT
 	 */
@@ -776,7 +855,6 @@ public class TypeImpl extends NamedElementImpl implements Type {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see java.lang.Object#clone()
 	 */
 	@Override
@@ -824,6 +902,7 @@ public class TypeImpl extends NamedElementImpl implements Type {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
@@ -851,6 +930,7 @@ public class TypeImpl extends NamedElementImpl implements Type {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -878,6 +958,7 @@ public class TypeImpl extends NamedElementImpl implements Type {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -894,6 +975,7 @@ public class TypeImpl extends NamedElementImpl implements Type {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -918,6 +1000,7 @@ public class TypeImpl extends NamedElementImpl implements Type {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
@@ -956,6 +1039,7 @@ public class TypeImpl extends NamedElementImpl implements Type {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -986,6 +1070,7 @@ public class TypeImpl extends NamedElementImpl implements Type {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -1010,6 +1095,7 @@ public class TypeImpl extends NamedElementImpl implements Type {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -1034,6 +1120,7 @@ public class TypeImpl extends NamedElementImpl implements Type {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -1058,6 +1145,7 @@ public class TypeImpl extends NamedElementImpl implements Type {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -1067,8 +1155,8 @@ public class TypeImpl extends NamedElementImpl implements Type {
 	}
 
 	/**
-	 * Returns a string representing this <code>Type</code>. Includes its name
-	 * and namespace.
+	 * Returns a string representing this <code>Type</code>. Includes its name and
+	 * namespace.
 	 * 
 	 * @see java.lang.Object#toString()
 	 */
@@ -1098,15 +1186,16 @@ public class TypeImpl extends NamedElementImpl implements Type {
 	}
 
 	/**
-	 * Overridden to treat types with the same
-	 * {@link #getQualifiedName() qualified name} as equal. This is important to
-	 * determine {@link #commonSuperType(Type) common super types} and
+	 * Overridden to treat types with the same {@link #getQualifiedName()
+	 * qualified name} as equal. This is important to determine
+	 * {@link #commonSuperType(Type) common super types} and
 	 * {@link #conformsTo(Type) type conformance} correctly.
 	 * 
-	 * @param obj the other object to test for equality
+	 * @param obj
+	 *          the other object to test for equality
 	 * 
-	 * @return <code>true</code> if the other object is a <code>Type</code>
-	 *         with the same qualified name, <code>false</code> otherwise
+	 * @return <code>true</code> if the other object is a <code>Type</code> with
+	 *         the same qualified name, <code>false</code> otherwise
 	 */
 	@Override
 	public boolean equals(Object obj) {

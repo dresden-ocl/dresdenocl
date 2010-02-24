@@ -54,6 +54,8 @@ import tudresden.ocl20.pivot.pivotmodel.impl.PivotModelFactoryImpl;
  *   <li>{@link tudresden.ocl20.pivot.pivotmodel.Type#addProperty(tudresden.ocl20.pivot.pivotmodel.Property) <em>Add Property</em>}</li>
  *   <li>{@link tudresden.ocl20.pivot.pivotmodel.Type#addOperation(tudresden.ocl20.pivot.pivotmodel.Operation) <em>Add Operation</em>}</li>
  *   <li>{@link tudresden.ocl20.pivot.pivotmodel.Type#addSuperType(tudresden.ocl20.pivot.pivotmodel.Type) <em>Add Super Type</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.pivotmodel.Type#removeProperty(tudresden.ocl20.pivot.pivotmodel.Property) <em>Remove Property</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.pivotmodel.Type#removeOperation(tudresden.ocl20.pivot.pivotmodel.Operation) <em>Remove Operation</em>}</li>
  *   <li>{@link tudresden.ocl20.pivot.pivotmodel.GenericElement#bindTypeParameter(java.util.List, java.util.List) <em>Bind Type Parameter</em>}</li>
  *   <li>{@link tudresden.ocl20.pivot.pivotmodel.GenericElement#addTypeParameter(tudresden.ocl20.pivot.pivotmodel.TypeParameter) <em>Add Type Parameter</em>}</li>
  * </ul>
@@ -239,6 +241,34 @@ public class TypeTest extends NamedElementTest {
 	 * @generated
 	 */
 	public void testAddSuperType__Type() {
+
+		// TODO: implement this operation test method
+		// Ensure that you remove @generated or mark it @generated NOT
+		fail();
+	}
+
+	/**
+	 * Tests the '{@link tudresden.ocl20.pivot.pivotmodel.Type#removeProperty(tudresden.ocl20.pivot.pivotmodel.Property) <em>Remove Property</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see tudresden.ocl20.pivot.pivotmodel.Type#removeProperty(tudresden.ocl20.pivot.pivotmodel.Property)
+	 * @generated
+	 */
+	public void testRemoveProperty__Property() {
+
+		// TODO: implement this operation test method
+		// Ensure that you remove @generated or mark it @generated NOT
+		fail();
+	}
+
+	/**
+	 * Tests the '{@link tudresden.ocl20.pivot.pivotmodel.Type#removeOperation(tudresden.ocl20.pivot.pivotmodel.Operation) <em>Remove Operation</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see tudresden.ocl20.pivot.pivotmodel.Type#removeOperation(tudresden.ocl20.pivot.pivotmodel.Operation)
+	 * @generated
+	 */
+	public void testRemoveOperation__Operation() {
 
 		// TODO: implement this operation test method
 		// Ensure that you remove @generated or mark it @generated NOT

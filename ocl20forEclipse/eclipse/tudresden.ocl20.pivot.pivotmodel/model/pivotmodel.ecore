@@ -260,6 +260,18 @@
       </eAnnotations>
       <eParameters name="type" eType="#//Type"/>
     </eOperations>
+    <eOperations name="removeProperty" lowerBound="1" eType="ecore:EDataType datatypes.ecore#//Boolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;p>&#xD;&#xA;Removes a {@link Property} from this &lt;code>Type&lt;/code>. This is an additional operation in the Pivot Model to support removal of properties defined via a {@link ConstraintKind#definition definition} constraint. The operation returns a &lt;code>boolean&lt;/code> indicating whether or not the {@link Property} has been removed successfully.&#xD;&#xA;&lt;/p>"/>
+      </eAnnotations>
+      <eParameters name="property" eType="#//Property"/>
+    </eOperations>
+    <eOperations name="removeOperation" lowerBound="1" eType="ecore:EDataType datatypes.ecore#//Boolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;p>&#xD;&#xA;Removes an {@link Operation} from this &lt;code>Type&lt;/code>. This is an additional operation in the Pivot Model to support removal of operations defined via a {@link ConstraintKind#definition definition} constraint. The operation returns a &lt;code>boolean&lt;/code> indicating whether or not the {@link Operation} has been removed successfully.&#xD;&#xA;&lt;/p>"/>
+      </eAnnotations>
+      <eParameters name="operation" eType="#//Operation"/>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="namespace" eType="#//Namespace"
         transient="true" eOpposite="#//Namespace/ownedType">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">

@@ -3473,6 +3473,18 @@ public class PivotModelPackageImpl extends EPackageImpl {
 						"addSuperType", 1, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 		addEParameter(op, this.getType(), "type", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
+		op =
+				addEOperation(typeEClass, theDatatypesPackage.getBoolean(),
+						"removeProperty", 1, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		addEParameter(op, this.getProperty(),
+				"property", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+
+		op =
+				addEOperation(typeEClass, theDatatypesPackage.getBoolean(),
+						"removeOperation", 1, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		addEParameter(op, this.getOperation(),
+				"operation", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+
 		initEClass(
 				primitiveTypeEClass,
 				PrimitiveType.class,

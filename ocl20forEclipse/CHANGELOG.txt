@@ -11,6 +11,7 @@ Release 2.1 (not scheduled yet)
   - After import, Models can now be removed again.
   - After import, Model Instances can now be removed again.
   - Constraints can now be removed from models again.
+  - Defined operations and properties are now removed then their constraints are removed as well.
 
 * A bug in the ModelRegistry was fixed.
   - Adding of Models should now handle NullPointerExceptions correctly.

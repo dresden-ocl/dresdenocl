@@ -25,6 +25,7 @@ import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
@@ -40,8 +41,10 @@ import tudresden.ocl20.pivot.modelbus.model.IModel;
 import tudresden.ocl20.pivot.modelbus.test.ModelBusTestUtility;
 import tudresden.ocl20.pivot.pivotmodel.Constraint;
 import tudresden.ocl20.pivot.pivotmodel.Namespace;
+import tudresden.ocl20.pivot.pivotmodel.Operation;
 import tudresden.ocl20.pivot.pivotmodel.PrimitiveType;
 import tudresden.ocl20.pivot.pivotmodel.PrimitiveTypeKind;
+import tudresden.ocl20.pivot.pivotmodel.Property;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 
 /**
@@ -802,6 +805,134 @@ public class AbstractModelTest {
 
 	/**
 	 * <p>
+	 * Tests the method {@link IModel#removeAllConstraints()} for an
+	 * {@link IModel} with {@link Constraint}s that define new operations.
+	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 * @throws OCL2ParsingException
+	 * @throws IllegalArgumentException
+	 */
+	@Test
+	public void testRemoveAllConstraints04() throws ModelAccessException,
+			IllegalArgumentException, OCL2ParsingException {
+
+		IModel model;
+		model = ModelBusTestUtility.getUML2Model("resources/models/model05.uml");
+
+		ModelBusTestUtility.parseConstraints(
+				"resources/constraints/constraints03.ocl", model);
+		ModelBusTestUtility.parseConstraints(
+				"resources/constraints/constraints04.ocl", model);
+
+		assertNotNull(model.getConstraints());
+		assertTrue(model.getConstraints().size() > 0);
+
+		/* Find the defined operations. */
+		Type type1;
+		type1 =
+				model.findType(Arrays.asList(new String[] {
+						IModelBusConstants.ROOT_PACKAGE_NAME, "package1", "Type1" }));
+		assertNotNull(type1);
+
+		Operation operation1;
+		operation1 = type1.lookupOperation("getInteger", new ArrayList<Type>());
+
+		assertNotNull(operation1);
+
+		Type type2;
+		type2 =
+				model.findType(Arrays.asList(new String[] {
+						IModelBusConstants.ROOT_PACKAGE_NAME, "package1", "package2",
+						"Type2" }));
+		assertNotNull(type2);
+
+		Operation operation2;
+		operation2 = type2.lookupOperation("getInteger", new ArrayList<Type>());
+
+		assertNotNull(operation2);
+
+		model.removeAllConstraints();
+
+		assertNotNull(model.getConstraints());
+		assertEquals(0, model.getConstraints().size());
+
+		/* The operations should be removed as well. */
+		operation1 = type1.lookupOperation("getInteger", new ArrayList<Type>());
+		assertNull(operation1);
+
+		operation2 = type2.lookupOperation("getInteger", new ArrayList<Type>());
+		assertNull(operation2);
+
+		Ocl2ForEclipseFacade.removeModel(model);
+	}
+
+	/**
+	 * <p>
+	 * Tests the method {@link IModel#removeAllConstraints()} for an
+	 * {@link IModel} with {@link Constraint}s that define new properties.
+	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 * @throws OCL2ParsingException
+	 * @throws IllegalArgumentException
+	 */
+	@Test
+	public void testRemoveAllConstraints05() throws ModelAccessException,
+			IllegalArgumentException, OCL2ParsingException {
+
+		IModel model;
+		model = ModelBusTestUtility.getUML2Model("resources/models/model05.uml");
+
+		ModelBusTestUtility.parseConstraints(
+				"resources/constraints/constraints05.ocl", model);
+		ModelBusTestUtility.parseConstraints(
+				"resources/constraints/constraints06.ocl", model);
+
+		assertNotNull(model.getConstraints());
+		assertTrue(model.getConstraints().size() > 0);
+
+		/* Find the defined properties. */
+		Type type1;
+		type1 =
+				model.findType(Arrays.asList(new String[] {
+						IModelBusConstants.ROOT_PACKAGE_NAME, "package1", "Type1" }));
+		assertNotNull(type1);
+
+		Property property1;
+		property1 = type1.lookupProperty("anInteger");
+
+		assertNotNull(property1);
+
+		Type type2;
+		type2 =
+				model.findType(Arrays.asList(new String[] {
+						IModelBusConstants.ROOT_PACKAGE_NAME, "package1", "package2",
+						"Type2" }));
+		assertNotNull(type2);
+
+		Property property2;
+		property2 = type2.lookupProperty("anInteger");
+
+		assertNotNull(property2);
+
+		model.removeAllConstraints();
+
+		assertNotNull(model.getConstraints());
+		assertEquals(0, model.getConstraints().size());
+
+		/* The operations should be removed as well. */
+		property1 = type1.lookupProperty("anInteger");
+		assertNull(property1);
+
+		property2 = type2.lookupProperty("getInteger");
+		assertNull(property2);
+
+		Ocl2ForEclipseFacade.removeModel(model);
+	}
+
+	/**
+	 * <p>
 	 * Tests the method {@link IModel#removeConstraints(Collection)} for an
 	 * {@link IModel} without {@link Constraint}s.
 	 * </p>
@@ -905,5 +1036,160 @@ public class AbstractModelTest {
 
 		Ocl2ForEclipseFacade.removeModel(model);
 	}
-	/* FIXME Claas: Test cases to transitively remove definitions etc? */
+
+	/**
+	 * <p>
+	 * Tests the method {@link IModel#removeConstraints(Collection)} for an
+	 * {@link IModel} with {@link Constraint}s that define new operations.
+	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 * @throws OCL2ParsingException
+	 * @throws IllegalArgumentException
+	 */
+	@Test
+	public void testRemoveConstraints04() throws ModelAccessException,
+			IllegalArgumentException, OCL2ParsingException {
+
+		IModel model;
+		model = ModelBusTestUtility.getUML2Model("resources/models/model05.uml");
+
+		Collection<Constraint> constraints01;
+		constraints01 =
+				ModelBusTestUtility.parseConstraints(
+						"resources/constraints/constraints03.ocl", model);
+
+		Collection<Constraint> constraints02;
+		constraints02 =
+				ModelBusTestUtility.parseConstraints(
+						"resources/constraints/constraints04.ocl", model);
+
+		assertNotNull(model.getConstraints());
+		assertTrue(model.getConstraints().size() > 0);
+
+		/* Find the defined operations. */
+		Type type1;
+		type1 =
+				model.findType(Arrays.asList(new String[] {
+						IModelBusConstants.ROOT_PACKAGE_NAME, "package1", "Type1" }));
+		assertNotNull(type1);
+
+		Operation operation1;
+		operation1 = type1.lookupOperation("getInteger", new ArrayList<Type>());
+
+		assertNotNull(operation1);
+
+		Type type2;
+		type2 =
+				model.findType(Arrays.asList(new String[] {
+						IModelBusConstants.ROOT_PACKAGE_NAME, "package1", "package2",
+						"Type2" }));
+		assertNotNull(type2);
+
+		Operation operation2;
+		operation2 = type2.lookupOperation("getInteger", new ArrayList<Type>());
+
+		assertNotNull(operation2);
+
+		model.removeConstraints(constraints01);
+
+		assertNotNull(model.getConstraints());
+		assertTrue(model.getConstraints().size() > 0);
+
+		/* The operation should be removed as well. */
+		operation1 = type1.lookupOperation("getInteger", new ArrayList<Type>());
+		assertNull(operation1);
+
+		operation2 = type2.lookupOperation("getInteger", new ArrayList<Type>());
+		assertNotNull(operation2);
+
+		model.removeConstraints(constraints02);
+
+		assertNotNull(model.getConstraints());
+		assertEquals(0, model.getConstraints().size());
+
+		/* The operation should be removed as well. */
+		operation2 = type2.lookupOperation("getInteger", new ArrayList<Type>());
+		assertNull(operation2);
+
+		Ocl2ForEclipseFacade.removeModel(model);
+	}
+
+	/**
+	 * <p>
+	 * Tests the method {@link IModel#removeConstraints(Collection)} for an
+	 * {@link IModel} with {@link Constraint}s that define new properties.
+	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 * @throws OCL2ParsingException
+	 * @throws IllegalArgumentException
+	 */
+	@Test
+	public void testRemoveConstraints05() throws ModelAccessException,
+			IllegalArgumentException, OCL2ParsingException {
+
+		IModel model;
+		model = ModelBusTestUtility.getUML2Model("resources/models/model05.uml");
+
+		Collection<Constraint> constraints01;
+		constraints01 =
+				ModelBusTestUtility.parseConstraints(
+						"resources/constraints/constraints05.ocl", model);
+
+		Collection<Constraint> constraints02;
+		constraints02 =
+				ModelBusTestUtility.parseConstraints(
+						"resources/constraints/constraints06.ocl", model);
+
+		assertNotNull(model.getConstraints());
+		assertTrue(model.getConstraints().size() > 0);
+
+		/* Find the defined properties. */
+		Type type1;
+		type1 =
+				model.findType(Arrays.asList(new String[] {
+						IModelBusConstants.ROOT_PACKAGE_NAME, "package1", "Type1" }));
+		assertNotNull(type1);
+
+		Property property1;
+		property1 = type1.lookupProperty("anInteger");
+
+		assertNotNull(property1);
+
+		Type type2;
+		type2 =
+				model.findType(Arrays.asList(new String[] {
+						IModelBusConstants.ROOT_PACKAGE_NAME, "package1", "package2",
+						"Type2" }));
+		assertNotNull(type2);
+
+		Property property2;
+		property2 = type2.lookupProperty("anInteger");
+
+		assertNotNull(property2);
+
+		model.removeConstraints(constraints01);
+
+		assertNotNull(model.getConstraints());
+		assertTrue(model.getConstraints().size() > 0);
+
+		/* The operation should be removed as well. */
+		property1 = type1.lookupProperty("anInteger");
+		assertNull(property1);
+
+		property2 = type2.lookupProperty("anInteger");
+		assertNotNull(property2);
+
+		model.removeConstraints(constraints02);
+
+		assertNotNull(model.getConstraints());
+		assertEquals(0, model.getConstraints().size());
+
+		/* The operation should be removed as well. */
+		property2 = type2.lookupProperty("anInteger");
+		assertNull(property2);
+
+		Ocl2ForEclipseFacade.removeModel(model);
+	}
 }

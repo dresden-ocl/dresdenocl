@@ -49,10 +49,14 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import tudresden.ocl20.pivot.pivotmodel.Constraint;
+import tudresden.ocl20.pivot.pivotmodel.ConstraintKind;
+import tudresden.ocl20.pivot.pivotmodel.Feature;
 import tudresden.ocl20.pivot.pivotmodel.GenericElement;
 import tudresden.ocl20.pivot.pivotmodel.NamedElement;
 import tudresden.ocl20.pivot.pivotmodel.Namespace;
+import tudresden.ocl20.pivot.pivotmodel.Operation;
 import tudresden.ocl20.pivot.pivotmodel.PivotModelFactory;
+import tudresden.ocl20.pivot.pivotmodel.Property;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 import tudresden.ocl20.pivot.pivotmodel.TypeParameter;
 
@@ -497,6 +501,33 @@ public class NamespaceImpl extends NamedElementImpl implements Namespace {
 		}
 		// end for.
 
+		/* Probably remove defined features as well. */
+		for (Constraint constraint : this.ownedRule) {
+
+			if (constraint.getKind() == ConstraintKind.DEFINITION) {
+
+				Feature feature;
+				feature = constraint.getDefinedFeature();
+
+				if (feature instanceof Operation) {
+					Operation operation;
+					operation = (Operation) feature;
+
+					((Type) operation.getOwner()).removeOperation(operation);
+				}
+
+				else if (feature instanceof Property) {
+					Property property;
+					property = (Property) feature;
+
+					((Type) property.getOwner()).removeProperty(property);
+				}
+				// no else.
+			}
+			// no else (remove only defined features).
+		}
+		// no else.
+
 		this.ownedRule.clear();
 		result &= this.ownedRule.isEmpty();
 
@@ -518,6 +549,35 @@ public class NamespaceImpl extends NamedElementImpl implements Namespace {
 			result |= nestedNamespace.removeOwnedAndNestedRules(constraints);
 		}
 		// end for.
+
+		/* Probably remove defined features. */
+		for (Constraint constraint : constraints) {
+
+			if (this.ownedRule.contains(constraint)
+					&& constraint.getKind() == ConstraintKind.DEFINITION) {
+
+				Feature feature;
+				feature = constraint.getDefinedFeature();
+
+				if (feature instanceof Operation) {
+					Operation operation;
+					operation = (Operation) feature;
+
+					((Type) operation.getOwner()).removeOperation(operation);
+				}
+
+				else if (feature instanceof Property) {
+					Property property;
+					property = (Property) feature;
+
+					((Type) property.getOwner()).removeProperty(property);
+				}
+				// no else.
+			}
+			// no else (remove only defined features).
+
+		}
+		// no else.
 
 		/*
 		 * Results in true if at least one constraint has been removed. Same

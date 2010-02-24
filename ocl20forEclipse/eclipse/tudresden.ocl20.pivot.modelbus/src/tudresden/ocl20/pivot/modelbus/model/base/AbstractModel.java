@@ -193,6 +193,10 @@ public abstract class AbstractModel implements IModel {
 		// no else.
 
 		Type result = null;
+
+		/* Copy list to avoid side effects. */
+		pathName = new ArrayList<String>(pathName);
+
 		boolean isAbsolutePath = false;
 
 		/* Probably remove the root package from the pathName. */

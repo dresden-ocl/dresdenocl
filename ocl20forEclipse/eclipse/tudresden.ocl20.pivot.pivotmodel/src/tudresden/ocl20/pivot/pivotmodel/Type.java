@@ -291,6 +291,30 @@ public interface Type extends NamedElement, ConstrainableElement,
 	Type addSuperType(Type type);
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * <p>
+	 * Removes a {@link Property} from this <code>Type</code>. This is an additional operation in the Pivot Model to support removal of properties defined via a {@link ConstraintKind#definition definition} constraint. The operation returns a <code>boolean</code> indicating whether or not the {@link Property} has been removed successfully.
+	 * </p>
+	 * <!-- end-model-doc -->
+	 * @generated
+	 */
+	boolean removeProperty(Property property);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * <p>
+	 * Removes an {@link Operation} from this <code>Type</code>. This is an additional operation in the Pivot Model to support removal of operations defined via a {@link ConstraintKind#definition definition} constraint. The operation returns a <code>boolean</code> indicating whether or not the {@link Operation} has been removed successfully.
+	 * </p>
+	 * <!-- end-model-doc -->
+	 * @generated
+	 */
+	boolean removeOperation(Operation operation);
+
+	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc --> <!-- begin-model-doc -->
 	 * <p>
 	 * Returns all properties of this <code>Type</code> and its supertypes.
