@@ -72,8 +72,8 @@ public class JavaOclBagTest {
 			myStandardLibraryFactory.createOclInteger(4L);
 
 	private final OclReal undefined =
-			(OclReal) myStandardLibraryFactory.createOclUndefined(oclReal0_5
-					.getModelInstanceReal().getType(), "undefined value");
+			(OclReal) myStandardLibraryFactory.createOclUndefined(TypeConstants.REAL,
+					"undefined value");
 
 	@Before
 	public void init() {
