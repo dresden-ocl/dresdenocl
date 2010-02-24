@@ -18,12 +18,14 @@ import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBag;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclIterator;
+import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclOrderedSet;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclReal;
+import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSequence;
+import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSet;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.factory.IStandardLibraryFactory;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.base.TypeConstants;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 
-// TODO Michael: nested collections
 /**
  * Test for collections in OCL.
  * 
@@ -410,54 +412,57 @@ public class JavaOclCollectionTest {
 	@Test
 	public void testFlatten() {
 
-		// /*
-		// * Set { Set { 0.5, null }, Set { 0.5, 1.5 } }->flatten() == Set { 0.5,
-		// 1.5,
-		// * null }
-		// */
-		// Set<OclReal> realSet1 = new HashSet<OclReal>();
-		// realSet1.add(oclReal0_5);
-		// realSet1.add(undefined);
-		//
-		// Set<OclReal> realSet2 = new HashSet<OclReal>();
-		// realSet2.add(oclReal0_5);
-		// realSet2.add(oclReal1_5);
-		//
-		// Set<Set<OclReal>> setOfRealSets = new HashSet<Set<OclReal>>();
-		// setOfRealSets.add(realSet1);
-		// setOfRealSets.add(realSet2);
-		// OclSet<OclSet<OclAny>> oclSetofSets =
-		// myStandardLibraryFactory.createOclSet(setOfRealSets, TypeConstants
-		// .SET(TypeConstants.REAL));
-		//
-		// assertTrue(oclSetofSets.flatten().isEqualTo(oclSet2).isTrue());
-		//
-		// /*
-		// * Set { Set { Set { 0.5, null}, Set { 0.5, 1.5 } }, Set { Set { 2.5 } }
-		// * }->flatten() == Set { 0.5, 1.5, 2.5, null }
-		// */
+		/*
+		 * Set { Set { 0.5, null }, Set { 0.5, 1.5 } }->flatten() == Set { 0.5, 1.5,
+		 * null }
+		 */
+		Set<OclReal> realSet1 = new HashSet<OclReal>();
+		realSet1.add(oclReal0_5);
+		realSet1.add(undefined);
+
+		Set<OclReal> realSet2 = new HashSet<OclReal>();
+		realSet2.add(oclReal0_5);
+		realSet2.add(oclReal1_5);
+
+		Set<Set<OclReal>> setOfRealSets = new HashSet<Set<OclReal>>();
+		setOfRealSets.add(realSet1);
+		setOfRealSets.add(realSet2);
+		OclSet<OclSet<OclAny>> oclSetofSets =
+				myStandardLibraryFactory.createOclSet(setOfRealSets, TypeConstants
+						.SET(TypeConstants.REAL));
+
+		final OclSet<OclAny> flattenedSetOfSets = oclSetofSets.flatten();
+		assertTrue(flattenedSetOfSets.isEqualTo(oclSet2).isTrue());
+		assertTrue(flattenedSetOfSets.getGenericType().equals(TypeConstants.REAL));
+
+		/*
+		 * Set { Set { Set { 0.5, null}, Set { 0.5, 1.5 } }, Set { Set { 2.5 } }
+		 * }->flatten() == Set { 0.5, 1.5, 2.5, null }
+		 */
 		OclReal oclReal2_5 = myStandardLibraryFactory.createOclReal(2.5);
-		//
-		// realSet1.add(oclReal1_5);
-		// realSet1.add(oclReal2_5);
-		// OclSet<OclReal> oclResultSet =
-		// myStandardLibraryFactory.createOclSet(realSet1, TypeConstants.REAL);
-		//
-		// Set<OclReal> realSet3 = new HashSet<OclReal>();
-		// realSet3.add(oclReal2_5);
-		//
-		// Set<Set<OclReal>> setOfRealSets2 = new HashSet<Set<OclReal>>();
-		// setOfRealSets2.add(realSet3);
-		//
-		// Set<Set<Set<OclReal>>> setOfSetsOfRealSets =
-		// new HashSet<Set<Set<OclReal>>>();
-		// setOfSetsOfRealSets.add(setOfRealSets);
-		// setOfSetsOfRealSets.add(setOfRealSets2);
-		// OclSet<OclSet<OclSet<OclReal>>> oclSetOfSetsOfSets =
-		// myStandardLibraryFactory.createOclSet(setOfSetsOfRealSets,
-		// TypeConstants.SET(TypeConstants.SET(TypeConstants.REAL)));
-		//
-		// assertTrue(oclSetOfSetsOfSets.flatten().isEqualTo(oclResultSet).isTrue());
+
+		realSet1.add(oclReal1_5);
+		realSet1.add(oclReal2_5);
+		OclSet<OclReal> oclResultSet =
+				myStandardLibraryFactory.createOclSet(realSet1, TypeConstants.REAL);
+
+		Set<OclReal> realSet3 = new HashSet<OclReal>();
+		realSet3.add(oclReal2_5);
+
+		Set<Set<OclReal>> setOfRealSets2 = new HashSet<Set<OclReal>>();
+		setOfRealSets2.add(realSet3);
+
+		Set<Set<Set<OclReal>>> setOfSetsOfRealSets =
+				new HashSet<Set<Set<OclReal>>>();
+		setOfSetsOfRealSets.add(setOfRealSets);
+		setOfSetsOfRealSets.add(setOfRealSets2);
+		OclSet<OclSet<OclSet<OclReal>>> oclSetOfSetsOfSets =
+				myStandardLibraryFactory.createOclSet(setOfSetsOfRealSets,
+						TypeConstants.SET(TypeConstants.SET(TypeConstants.REAL)));
+
+		OclSet<OclReal> flattenedSetOfSetOfSets = oclSetOfSetsOfSets.flatten();
+		assertTrue(flattenedSetOfSetOfSets.isEqualTo(oclResultSet).isTrue());
+		assertTrue(flattenedSetOfSets.getGenericType().equals(TypeConstants.REAL));
 
 		/*
 		 * Bag { Bag { 0.5, null }, Bag { 0.5, 1.5 } }->flatten() == Bag { 0.5, 0.5,
@@ -518,6 +523,134 @@ public class JavaOclCollectionTest {
 		Type genericType = flatBag.getGenericType();
 		assertTrue(genericType.equals(TypeConstants.REAL));
 
+		/*
+		 * OrderedSet { OrderedSet { 0.5, null }, OrderedSet { 0.5, 1.5 }
+		 * }->flatten() == OrderedSet { 0.5, 1.5, null }
+		 */
+		List<OclReal> realOrderedSet1 = new UniqueEList<OclReal>();
+		realOrderedSet1.add(oclReal0_5);
+		realOrderedSet1.add(undefined);
+
+		List<OclReal> realOrderedSet2 = new UniqueEList<OclReal>();
+		realOrderedSet2.add(oclReal0_5);
+		realOrderedSet2.add(oclReal1_5);
+
+		List<List<OclReal>> OrderedSetOfRealOrderedSets =
+				new UniqueEList<List<OclReal>>();
+		OrderedSetOfRealOrderedSets.add(realOrderedSet1);
+		OrderedSetOfRealOrderedSets.add(realOrderedSet2);
+		OclOrderedSet<OclOrderedSet<OclAny>> oclOrderedSetofOrderedSets =
+				myStandardLibraryFactory.createOclOrderedSet(
+						OrderedSetOfRealOrderedSets, TypeConstants
+								.ORDERED_SET(TypeConstants.REAL));
+
+		final OclOrderedSet<OclAny> flattenedOrderedSetOfOrderedSets =
+				oclOrderedSetofOrderedSets.flatten();
+		assertTrue(flattenedOrderedSetOfOrderedSets.isEqualTo(oclOrderedSet2)
+				.isTrue());
+		assertTrue(flattenedOrderedSetOfOrderedSets.getGenericType().equals(
+				TypeConstants.REAL));
+
+		/*
+		 * OrderedSet { OrderedSet { OrderedSet { 0.5, null}, OrderedSet { 0.5, 1.5
+		 * } }, OrderedSet { OrderedSet { 2.5 } } }->flatten() == OrderedSet { 0.5,
+		 * 1.5, 2.5, null }
+		 */
+		realOrderedSet1.add(oclReal1_5);
+		realOrderedSet1.add(oclReal2_5);
+		OclOrderedSet<OclReal> oclResultOrderedSet =
+				myStandardLibraryFactory.createOclOrderedSet(realOrderedSet1,
+						TypeConstants.REAL);
+
+		List<OclReal> realOrderedSet3 = new UniqueEList<OclReal>();
+		realOrderedSet3.add(oclReal2_5);
+
+		List<List<OclReal>> OrderedSetOfRealOrderedSets2 =
+				new UniqueEList<List<OclReal>>();
+		OrderedSetOfRealOrderedSets2.add(realOrderedSet3);
+
+		List<List<List<OclReal>>> OrderedSetOfOrderedSetsOfRealOrderedSets =
+				new UniqueEList<List<List<OclReal>>>();
+		OrderedSetOfOrderedSetsOfRealOrderedSets.add(OrderedSetOfRealOrderedSets);
+		OrderedSetOfOrderedSetsOfRealOrderedSets.add(OrderedSetOfRealOrderedSets2);
+		OclOrderedSet<OclOrderedSet<OclOrderedSet<OclReal>>> oclOrderedSetOfOrderedSetsOfOrderedSets =
+				myStandardLibraryFactory.createOclOrderedSet(
+						OrderedSetOfOrderedSetsOfRealOrderedSets, TypeConstants
+								.ORDERED_SET(TypeConstants.ORDERED_SET(TypeConstants.REAL)));
+
+		OclOrderedSet<OclReal> flattenedOrderedSetOfOrderedSetOfOrderedSets =
+				oclOrderedSetOfOrderedSetsOfOrderedSets.flatten();
+		assertTrue(flattenedOrderedSetOfOrderedSetOfOrderedSets.isEqualTo(
+				oclResultOrderedSet).isTrue());
+		assertTrue(flattenedOrderedSetOfOrderedSets.getGenericType().equals(
+				TypeConstants.REAL));
+
+		/*
+		 * Sequence { Sequence { 0.5, null }, Sequence { 0.5, 1.5 } }->flatten() ==
+		 * Sequence { 0.5, 0.5, 1.5, null }
+		 */
+		List<OclReal> realSequence1 = new ArrayList<OclReal>();
+		realSequence1.add(oclReal0_5);
+		realSequence1.add(undefined);
+
+		List<OclReal> realSequence2 = new ArrayList<OclReal>();
+		realSequence2.add(oclReal0_5);
+		realSequence2.add(oclReal1_5);
+
+		List<OclReal> realSequence3 = new ArrayList<OclReal>();
+		realSequence3.addAll(realSequence1);
+		realSequence3.addAll(realSequence2);
+		OclSequence<OclReal> oclResultSequence =
+				myStandardLibraryFactory.createOclSequence(realSequence3,
+						TypeConstants.REAL);
+
+		List<List<OclReal>> sequenceOfRealSequences =
+				new ArrayList<List<OclReal>>();
+		sequenceOfRealSequences.add(realSequence1);
+		sequenceOfRealSequences.add(realSequence2);
+		OclSequence<OclSequence<OclAny>> oclSequenceofSequences =
+				myStandardLibraryFactory.createOclSequence(sequenceOfRealSequences,
+						TypeConstants.SEQUENCE(TypeConstants.REAL));
+		assertTrue(oclSequenceofSequences.flatten().isEqualTo(oclResultSequence)
+				.isTrue());
+
+		/*
+		 * Sequence { Sequence { Sequence { 0.5, null}, Sequence { 0.5, 1.5 } },
+		 * Sequence { Sequence { 2.5 } } }->flatten() == Sequence { 0.5, null, 0.5,
+		 * 1.5, 2.5 }
+		 */
+		List<OclReal> realSequence5 = new ArrayList<OclReal>();
+		realSequence3.add(oclReal2_5);
+
+		List<OclReal> realSequence4 = new ArrayList<OclReal>();
+		realSequence4.addAll(realSequence1);
+		realSequence4.addAll(realSequence2);
+		realSequence4.addAll(realSequence5);
+		OclSequence<OclReal> oclResultSequence2 =
+				myStandardLibraryFactory.createOclSequence(realSequence4,
+						TypeConstants.REAL);
+
+		List<List<OclReal>> sequenceOfRealSequences2 =
+				new ArrayList<List<OclReal>>();
+		sequenceOfRealSequences2.add(realSequence5);
+
+		List<List<List<OclReal>>> SequenceOfSequencesOfRealSequences =
+				new ArrayList<List<List<OclReal>>>();
+		SequenceOfSequencesOfRealSequences.add(sequenceOfRealSequences);
+		SequenceOfSequencesOfRealSequences.add(sequenceOfRealSequences2);
+		OclSequence<OclSequence<OclSequence<OclReal>>> oclSequenceOfSequencesOfSequences =
+				myStandardLibraryFactory.createOclSequence(
+						SequenceOfSequencesOfRealSequences, TypeConstants
+								.SEQUENCE(TypeConstants.SEQUENCE(TypeConstants.REAL)));
+
+		final OclSequence<OclAny> flatSequence =
+				oclSequenceOfSequencesOfSequences.flatten();
+		assertTrue(flatSequence.isEqualTo(oclResultSequence2).isTrue());
+		/*
+		 * The generic/element type of the Sequence should be Real.
+		 */
+		genericType = flatSequence.getGenericType();
+		assertTrue(genericType.equals(TypeConstants.REAL));
 	}
 
 	@Test

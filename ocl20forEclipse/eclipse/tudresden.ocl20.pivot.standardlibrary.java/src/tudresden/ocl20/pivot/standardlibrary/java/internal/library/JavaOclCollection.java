@@ -30,6 +30,8 @@
  */
 package tudresden.ocl20.pivot.standardlibrary.java.internal.library;
 
+import java.util.Collection;
+
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBag;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBoolean;
@@ -615,17 +617,7 @@ public abstract class JavaOclCollection<T extends OclAny> extends
 		result.append(this.getClass().getSimpleName());
 		result.append("[");
 
-		if (this.oclIsUndefined().isTrue()) {
-			result.append("undefined: ");
-			result.append(this.getUndefinedReason());
-		}
-
-		else if (this.oclIsInvalid().isTrue()) {
-			result.append("invalid: ");
-			result.append(this.getInvalidReason().getMessage());
-		}
-
-		else {
+		if (!toStringUndefinedOrInvalid(result)) {
 			OclIterator<T> iter = getIterator();
 
 			while (iter.hasNext().isTrue()) {
@@ -636,8 +628,46 @@ public abstract class JavaOclCollection<T extends OclAny> extends
 				}
 			}
 		}
+		// no else
 		result.append("]");
 
 		return result.toString();
+	}
+
+	@SuppressWarnings("unchecked")
+	protected Type flatRec(Collection<IModelInstanceElement> imiCollection,
+			Collection<IModelInstanceElement> returnList) {
+
+		Type result = null;
+
+		/* Iterate over this bag. */
+		for (IModelInstanceElement element : imiCollection) {
+
+			/*
+			 * nested collections are flattened, i.e. their elements are added to the
+			 * result
+			 */
+			if (element instanceof IModelInstanceCollection<?>) {
+				IModelInstanceCollection<IModelInstanceElement> collection;
+				collection =
+						((IModelInstanceCollection<IModelInstanceElement>) element);
+
+				result =
+						this.commonSuperType(result, flatRec(collection.getCollection(),
+								returnList));
+			}
+
+			/* other elements are simply added */
+			else {
+				returnList.add(element);
+				result = this.commonSuperType(result, element.getType());
+			}
+		}
+
+		// FIXME Michael: Should this be OclAny or something else?
+		if (result == null)
+			result = TypeConstants.ANY;
+
+		return result;
 	}
 }

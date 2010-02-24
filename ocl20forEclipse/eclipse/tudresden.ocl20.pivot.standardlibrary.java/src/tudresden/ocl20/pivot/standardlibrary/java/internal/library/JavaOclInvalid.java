@@ -145,5 +145,13 @@ public class JavaOclInvalid extends JavaOclAny implements OclInvalid {
 		return JavaStandardLibraryFactory.INSTANCE.createOclInvalid(
 				TypeConstants.BOOLEAN, invalidReason);
 	}
+	
+	/*
+	 * (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	public String toString() {
+		return "invalid";
+	}
 
 }

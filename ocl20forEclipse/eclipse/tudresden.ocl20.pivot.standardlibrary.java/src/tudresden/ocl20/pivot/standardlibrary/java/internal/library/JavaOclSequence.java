@@ -165,34 +165,12 @@ public class JavaOclSequence<T extends OclAny> extends
 		if (result == null) {
 			List<IModelInstanceElement> flat = new ArrayList<IModelInstanceElement>();
 
-			/* Iterate over this ordered set. */
-			for (IModelInstanceElement element : getModelInstanceCollection()
-					.getCollection()) {
-
-				/*
-				 * nested collections are flattened, i.e. their elements are added to
-				 * the result
-				 */
-				if (element instanceof IModelInstanceCollection<?>) {
-					IModelInstanceCollection<IModelInstanceElement> collection;
-					collection =
-							((IModelInstanceCollection<IModelInstanceElement>) element);
-
-					for (IModelInstanceElement collectionElement : collection
-							.getCollection()) {
-						flat.add(collectionElement);
-					}
-				}
-
-				/* other elements are simply added */
-				else {
-					flat.add(element);
-				}
-			}
+			Type resultType =
+					flatRec(this.getModelInstanceCollection().getCollection(), flat);
 
 			result =
 					JavaStandardLibraryFactory.INSTANCE.createOclSequence(flat,
-							genericType);
+							resultType);
 		}
 
 		return result;

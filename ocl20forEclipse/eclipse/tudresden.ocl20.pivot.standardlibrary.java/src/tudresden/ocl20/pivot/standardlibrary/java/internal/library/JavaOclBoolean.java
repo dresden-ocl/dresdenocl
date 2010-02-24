@@ -402,27 +402,16 @@ public class JavaOclBoolean extends JavaOclLibraryObject implements OclBoolean {
 	 */
 	public String toString() {
 
-		String result;
+		StringBuilder result = new StringBuilder();
 
-		result = this.getClass().getSimpleName();
-		result += "[";
+		result.append(this.getClass().getSimpleName());
+		result.append("[");
 
-		if (this.oclIsUndefined().isTrue()) {
-			result += "undefined: ";
-			result += this.getUndefinedReason();
-		}
+		if (!toStringUndefinedOrInvalid(result))
+			result.append(this.getModelInstanceBoolean().getBoolean().toString());
 
-		else if (this.oclIsInvalid().isTrue()) {
-			result += "invalid: ";
-			result += this.getInvalidReason().getMessage();
-		}
+		result.append("]");
 
-		else {
-			result += this.getModelInstanceBoolean().getBoolean().toString();
-		}
-
-		result += "]";
-
-		return result;
+		return result.toString();
 	}
 }

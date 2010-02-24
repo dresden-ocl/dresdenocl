@@ -193,48 +193,20 @@ public class JavaOclBag<T extends OclAny> extends JavaOclUnsortedCollection<T>
 		result = checkInvalid(TypeConstants.BAG(TypeConstants.ANY), this);
 
 		if (result == null)
-			result = checkUndefined("flatten", TypeConstants.BAG(TypeConstants.ANY), this);
+			result =
+					checkUndefined("flatten", TypeConstants.BAG(TypeConstants.ANY), this);
 
 		if (result == null) {
 
-			List<IModelInstanceElement> flat =
-					flatRec(getModelInstanceCollection().getCollection());
+			List<IModelInstanceElement> flat = new ArrayList<IModelInstanceElement>();
+			Type resultType =
+					flatRec(getModelInstanceCollection().getCollection(), flat);
 
 			result =
-					JavaStandardLibraryFactory.INSTANCE.createOclBag(flat, genericType);
+					JavaStandardLibraryFactory.INSTANCE.createOclBag(flat, resultType);
 		}
 
 		return result;
-	}
-
-	private List<IModelInstanceElement> flatRec(
-			Collection<IModelInstanceElement> imiCollection) {
-
-		List<IModelInstanceElement> flat = new ArrayList<IModelInstanceElement>();
-		/* Iterate over this bag. */
-		for (IModelInstanceElement element : imiCollection) {
-
-			/*
-			 * nested collections are flattened, i.e. their elements are added to the
-			 * result
-			 */
-			if (element instanceof IModelInstanceCollection<?>) {
-				IModelInstanceCollection<IModelInstanceElement> collection;
-				collection =
-						((IModelInstanceCollection<IModelInstanceElement>) element);
-
-				final List<IModelInstanceElement> flattened =
-						flatRec(collection.getCollection());
-				flat.addAll(flattened);
-			}
-
-			/* other elements are simply added */
-			else {
-				flat.add(element);
-			}
-		}
-
-		return flat;
 	}
 
 	/*

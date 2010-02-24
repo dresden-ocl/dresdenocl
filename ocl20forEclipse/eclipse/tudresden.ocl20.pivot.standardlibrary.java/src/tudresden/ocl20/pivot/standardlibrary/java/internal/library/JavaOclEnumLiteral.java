@@ -138,17 +138,8 @@ public class JavaOclEnumLiteral extends JavaOclLibraryObject implements
 		result.append(this.getClass().getSimpleName());
 		result.append("[");
 
-		if (this.oclIsUndefined().isTrue()) {
-			result.append("undefined: " + this.undefinedreason);
-		}
-
-		else if (this.oclIsInvalid().isTrue()) {
-			result.append("invalid: " + this.invalidReason.getMessage());
-		}
-
-		else {
+		if (!toStringUndefinedOrInvalid(result))
 			result.append(getModelInstanceEnumerationLiteral().getName());
-		}
 
 		result.append("]");
 

@@ -19,9 +19,6 @@ import tudresden.ocl20.pivot.standardlibrary.java.factory.JavaStandardLibraryFac
 public class JavaOclIterator<T extends OclAny> implements OclIterator<T> {
 
 	protected Iterator<IModelInstanceElement> iterator;
-	
-	protected boolean isInvalid;
-	
 
 	public JavaOclIterator(OclCollection<? extends OclAny> collection) {
 		

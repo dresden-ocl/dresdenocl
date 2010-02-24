@@ -184,17 +184,8 @@ public class JavaOclTuple extends JavaOclLibraryObject implements OclTuple {
 		result.append(this.getClass().getSimpleName());
 		result.append("[");
 
-		if (this.oclIsUndefined().isTrue()) {
-			result.append("undefined: " + this.undefinedreason);
-		}
-
-		else if (this.oclIsInvalid().isTrue()) {
-			result.append("invalid: " + this.invalidReason.getMessage());
-		}
-
-		else {
+		if (!toStringUndefinedOrInvalid(result))
 			result.append(getModelInstanceTuple().toString());
-		}
 
 		result.append("]");
 

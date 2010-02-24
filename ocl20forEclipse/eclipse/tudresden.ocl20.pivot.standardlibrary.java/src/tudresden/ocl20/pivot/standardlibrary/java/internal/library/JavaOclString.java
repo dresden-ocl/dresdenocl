@@ -309,19 +309,8 @@ public class JavaOclString extends JavaOclLibraryObject implements OclString {
 		result.append(this.getClass().getSimpleName());
 		result.append("[");
 
-		if (this.oclIsUndefined().isTrue()) {
-			result.append("undefined: ");
-			result.append(this.undefinedreason);
-		}
-
-		else if (this.oclIsInvalid().isTrue()) {
-			result.append("invalid: ");
-			result.append(this.invalidReason.getMessage());
-		}
-
-		else {
+		if (!toStringUndefinedOrInvalid(result))
 			result.append(getModelInstanceString().getString());
-		}
 
 		result.append("]");
 

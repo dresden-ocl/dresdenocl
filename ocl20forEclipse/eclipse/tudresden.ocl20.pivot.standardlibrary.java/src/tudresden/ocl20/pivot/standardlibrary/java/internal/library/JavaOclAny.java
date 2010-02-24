@@ -210,6 +210,27 @@ public abstract class JavaOclAny implements OclAny {
 		return result;
 	}
 
+	// FIXME Michael: Is this the right place for this code?
+	protected Type commonSuperType(Type type1, Type type2) {
+
+		Type result;
+
+		if (type1 == null && type2 == null)
+			throw new IllegalArgumentException(
+					"Cannot determine common super type of null values.");
+
+		else if (type1 == null || type1.equals(TypeConstants.ANY))
+			result = type2;
+
+		else if (type2 == null || type2.equals(TypeConstants.ANY))
+			result = type1;
+
+		else
+			result = type1.commonSuperType(type2);
+
+		return result;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * @see
@@ -317,9 +338,12 @@ public abstract class JavaOclAny implements OclAny {
 			result = checkUndefined("oclIsKindOf", TypeConstants.BOOLEAN, this);
 
 		if (result == null) {
-
-			final boolean isKindOf = imiElement.isKindOf(typespec.getType());
-			result = JavaStandardLibraryFactory.INSTANCE.createOclBoolean(isKindOf);
+			if (typespec.getType().equals(TypeConstants.ANY))
+				result = JavaStandardLibraryFactory.INSTANCE.createOclBoolean(true);
+			else {
+				final boolean isKindOf = imiElement.isKindOf(typespec.getType());
+				result = JavaStandardLibraryFactory.INSTANCE.createOclBoolean(isKindOf);
+			}
 		}
 
 		return result;
@@ -721,5 +745,22 @@ public abstract class JavaOclAny implements OclAny {
 		}
 
 		return result;
+	}
+
+	protected boolean toStringUndefinedOrInvalid(StringBuilder result) {
+
+		if (this.oclIsInvalid().isTrue()) {
+			result.append("invalid: ");
+			result.append(this.getInvalidReason().getMessage());
+			return true;
+		}
+
+		else if (this.oclIsUndefined().isTrue()) {
+			result.append("undefined: ");
+			result.append(this.getUndefinedReason());
+			return true;
+		}
+
+		return false;
 	}
 }

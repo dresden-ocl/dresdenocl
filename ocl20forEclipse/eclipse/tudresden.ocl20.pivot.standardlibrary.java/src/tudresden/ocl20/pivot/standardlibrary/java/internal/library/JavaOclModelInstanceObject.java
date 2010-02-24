@@ -375,15 +375,7 @@ public class JavaOclModelInstanceObject extends JavaOclAny implements
 		result.append(this.getClass().getSimpleName());
 		result.append("[");
 
-		if (this.oclIsUndefined().isTrue()) {
-			result.append("undefined: " + this.undefinedreason);
-		}
-
-		else if (this.oclIsInvalid().isTrue()) {
-			result.append("invalid: " + this.invalidReason.getMessage());
-		}
-
-		else {
+		if (!toStringUndefinedOrInvalid(result)) {
 			result.append(getModelInstanceObject().getName());
 			result.append(" - ");
 			result.append(getModelInstanceObject().getObject());

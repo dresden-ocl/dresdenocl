@@ -55,14 +55,6 @@ public interface OclOrderedSet<T extends OclAny> extends OclSortedCollection<T> 
 	 * 
 	 * @param o
 	 * 
-	 * @return The union of <code>this</code> and <code>o</code>.
-	 */
-	OclOrderedSet<T> union(OclOrderedSet<T> o);
-
-	/**
-	 * 
-	 * @param o
-	 * 
 	 * @return The orderedset of elements, consisting of all elements of
 	 *         <code>this</code>, followed by <code>o</code>.
 	 */

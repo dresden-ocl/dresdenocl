@@ -50,6 +50,7 @@ import tudresden.ocl20.pivot.standardlibrary.java.factory.JavaStandardLibraryFac
  * Provides an implementation of {@link OclSet} in Java.
  * </p>
  * 
+ * @author Michael Thiele
  * @author Ronny Brandt
  */
 @SuppressWarnings("unchecked")
@@ -90,21 +91,20 @@ public class JavaOclSet<T extends OclAny> extends JavaOclUnsortedCollection<T>
 
 		OclSet<T> result = null;
 
-		result =
-				checkInvalid(TypeConstants
-						.SET(genericType), this, that);
+		result = checkInvalid(TypeConstants.SET(genericType), this, that);
 
 		if (result == null)
 			result =
-					checkUndefined("complement", TypeConstants
-							.SET(genericType), this, that);
+					checkUndefined("complement", TypeConstants.SET(genericType), this,
+							that);
 
 		if (result == null) {
 			Set<IModelInstanceElement> complement =
 					new HashSet<IModelInstanceElement>();
 
 			Collection<IModelInstanceElement> otherCollection =
-					(Collection<IModelInstanceElement>) that.getModelInstanceElement();
+					(Collection<IModelInstanceElement>) that.getModelInstanceCollection()
+							.getCollection();
 
 			complement.addAll(getModelInstanceCollection().getCollection());
 			complement.removeAll(otherCollection);
@@ -127,14 +127,11 @@ public class JavaOclSet<T extends OclAny> extends JavaOclUnsortedCollection<T>
 
 		OclSet<T> result = null;
 
-		result =
-				checkInvalid(TypeConstants
-						.SET(genericType), this, that);
+		result = checkInvalid(TypeConstants.SET(genericType), this, that);
 
 		if (result == null)
 			result =
-					checkUndefined("excluding", TypeConstants
-							.SET(genericType), this);
+					checkUndefined("excluding", TypeConstants.SET(genericType), this);
 
 		if (result == null) {
 			Set<IModelInstanceElement> exclude = new HashSet<IModelInstanceElement>();
@@ -159,45 +156,19 @@ public class JavaOclSet<T extends OclAny> extends JavaOclUnsortedCollection<T>
 
 		OclSet<T2> result = null;
 
-		result =
-				checkInvalid(TypeConstants
-						.SET(genericType), this);
+		result = checkInvalid(TypeConstants.SET(genericType), this);
 
 		if (result == null)
-			result =
-					checkUndefined("flatten", TypeConstants
-							.SET(genericType), this);
+			result = checkUndefined("flatten", TypeConstants.SET(genericType), this);
 
 		if (result == null) {
 			Set<IModelInstanceElement> flat = new HashSet<IModelInstanceElement>();
 
-			/* Iterate over this set. */
-			for (IModelInstanceElement element : getModelInstanceCollection()
-					.getCollection()) {
-
-				/*
-				 * nested collections are flattened, i.e. their elements are added to
-				 * the result
-				 */
-				if (element instanceof IModelInstanceCollection<?>) {
-					IModelInstanceCollection<IModelInstanceElement> collection;
-					collection =
-							((IModelInstanceCollection<IModelInstanceElement>) element);
-
-					for (IModelInstanceElement collectionElement : collection
-							.getCollection()) {
-						flat.add(collectionElement);
-					}
-				}
-
-				/* other elements are simply added */
-				else {
-					flat.add(element);
-				}
-			}
+			Type resultType =
+					flatRec(this.getModelInstanceCollection().getCollection(), flat);
 
 			result =
-					JavaStandardLibraryFactory.INSTANCE.createOclSet(flat, genericType);
+					JavaStandardLibraryFactory.INSTANCE.createOclSet(flat, resultType);
 		}
 
 		return result;
@@ -213,14 +184,11 @@ public class JavaOclSet<T extends OclAny> extends JavaOclUnsortedCollection<T>
 
 		OclSet<T> result = null;
 
-		result =
-				checkInvalid(TypeConstants
-						.SET(genericType), this, that);
+		result = checkInvalid(TypeConstants.SET(genericType), this, that);
 
 		if (result == null)
 			result =
-					checkUndefined("including", TypeConstants
-							.SET(genericType), this);
+					checkUndefined("including", TypeConstants.SET(genericType), this);
 
 		if (result == null) {
 			Set<IModelInstanceElement> include = new HashSet<IModelInstanceElement>();
@@ -315,14 +283,11 @@ public class JavaOclSet<T extends OclAny> extends JavaOclUnsortedCollection<T>
 
 		OclSet<T> result = null;
 
-		result =
-				checkInvalid(TypeConstants
-						.SET(genericType), this, that);
+		result = checkInvalid(TypeConstants.SET(genericType), this, that);
 
 		if (result == null)
 			result =
-					checkUndefined("symmetricDifference",
-							TypeConstants.SET(genericType),
+					checkUndefined("symmetricDifference", TypeConstants.SET(genericType),
 							this, that);
 
 		if (result == null) {
@@ -366,14 +331,11 @@ public class JavaOclSet<T extends OclAny> extends JavaOclUnsortedCollection<T>
 
 		OclSet<T> result = null;
 
-		result =
-				checkInvalid(TypeConstants
-						.SET(genericType), this, that);
+		result = checkInvalid(TypeConstants.SET(genericType), this, that);
 
 		if (result == null)
 			result =
-					checkUndefined("union", TypeConstants
-							.SET(genericType), this, that);
+					checkUndefined("union", TypeConstants.SET(genericType), this, that);
 
 		if (result == null) {
 			Set<IModelInstanceElement> union = new HashSet<IModelInstanceElement>();

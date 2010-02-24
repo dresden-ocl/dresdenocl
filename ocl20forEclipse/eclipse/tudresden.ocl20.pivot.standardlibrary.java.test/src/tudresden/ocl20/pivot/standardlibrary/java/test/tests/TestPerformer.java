@@ -24,6 +24,7 @@ import java.io.File;
 import org.eclipse.core.runtime.Platform;
 
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.factory.IStandardLibraryFactory;
+import tudresden.ocl20.pivot.essentialocl.types.OclLibrary;
 import tudresden.ocl20.pivot.examples.royalsandloyals.Customer;
 import tudresden.ocl20.pivot.examples.royalsandloyals.CustomerCard;
 import tudresden.ocl20.pivot.examples.royalsandloyals.Date;
@@ -157,6 +158,16 @@ public class TestPerformer {
 		return myStandardLibraryFactory;
 	}
 
+	/**
+	 * Returns the {@link OclLibrary}.
+	 * 
+	 * @return the {@link OclLibrary}
+	 */
+	public OclLibrary getOclLibrary() {
+
+		return myModel.getOclLibraryProvider().getOclLibrary();
+	}
+	
 	/**
 	 * <p>
 	 * Adapts a given {@link Object} as {@link IModelInstanceElement} and adds it

@@ -592,17 +592,8 @@ public class JavaOclReal extends JavaOclLibraryObject implements OclReal,
 		result.append(this.getClass().getSimpleName());
 		result.append("[");
 
-		if (this.oclIsUndefined().isTrue()) {
-			result.append("undefined: " + this.undefinedreason);
-		}
-
-		else if (this.oclIsInvalid().isTrue()) {
-			result.append("invalid: " + this.invalidReason.getMessage());
-		}
-
-		else {
+		if (!toStringUndefinedOrInvalid(result))
 			result.append((getModelInstanceReal().getDouble()).toString());
-		}
 
 		result.append("]");
 
