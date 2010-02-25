@@ -24,13 +24,20 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryContentProvider;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.IMenuManager;
+import org.eclipse.jface.dialogs.ErrorDialog;
 import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.jface.viewers.ISelection;
+import org.eclipse.jface.viewers.ISelectionChangedListener;
+import org.eclipse.jface.viewers.IStructuredSelection;
+import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TreeViewer;
@@ -54,6 +61,7 @@ import tudresden.ocl20.pivot.modelbus.model.IModelRegistry;
 import tudresden.ocl20.pivot.modelbus.ui.ModelBusUIPlugin;
 import tudresden.ocl20.pivot.modelbus.ui.internal.ModelBusUIMessages;
 import tudresden.ocl20.pivot.modelbus.ui.internal.views.util.ModelSelectionAction;
+import tudresden.ocl20.pivot.pivotmodel.Constraint;
 import tudresden.ocl20.pivot.pivotmodel.Namespace;
 import tudresden.ocl20.pivot.pivotmodel.provider.PivotModelItemProviderAdapterFactory;
 
@@ -73,9 +81,28 @@ public class ModelsView extends ViewPart implements IModelRegistryListener {
 	/** Icon to remove an {@link IModel} from the {@link IModelRegistry}. */
 	public static String IMAGE_CLOSE_MODEL = "icons/delete.gif";
 
+	/** Icon to remove selected {@link Constraint}s from a {@link IModel}. */
+	public static String IMAGE_DELETE_CONSTRAINTS =
+			"icons/delete_selected_constraints.gif";
+
+	/** Icon to remove all {@link Constraint}s from a {@link IModel}. */
+	public static String IMAGE_DELETE_ALL_CONSTRAINTS =
+			"icons/delete_all_constraints.gif";
+
 	/** The {@link Logger} for this {@link Class}. */
 	private static final Logger LOGGER =
 			ModelBusUIPlugin.getLogger(ModelsView.class);
+
+	/**
+	 * Action to the tool remove all {@link Constraint}s from a {@link IModel}.
+	 */
+	private Action myActionRemoveAllConstraints;
+
+	/**
+	 * Action to the tool remove selected {@link Constraint}s from a
+	 * {@link IModel}.
+	 */
+	private Action myActionRemoveSelectedConstraints;
 
 	/** Action to the tool bar to remove the currently selected {@link IModel}. */
 	private Action myActionRemoveModel;
@@ -369,6 +396,92 @@ public class ModelsView extends ViewPart implements IModelRegistryListener {
 		/* Update the currently active model. */
 		this.updateActiveModel();
 
+		/*
+		 * Add an action to the tool bar to remove the currently selected
+		 * constraints.
+		 */
+		myActionRemoveSelectedConstraints = new Action() {
+
+			/*
+			 * (non-Javadoc)
+			 * @see org.eclipse.jface.action.Action#run()
+			 */
+			public void run() {
+
+				removeSelectedConstraints();
+			}
+		};
+
+		myActionRemoveSelectedConstraints
+				.setToolTipText("Removes the currently selected Constraints from the Model.");
+		myActionRemoveSelectedConstraints.setText("Remove selected Constraints");
+		myActionRemoveSelectedConstraints.setImageDescriptor(ModelBusUIPlugin
+				.getImageDescriptor(IMAGE_DELETE_CONSTRAINTS));
+		myActionRemoveSelectedConstraints.setEnabled(false);
+
+		this.getViewSite().getActionBars().getToolBarManager().add(
+				myActionRemoveSelectedConstraints);
+
+		/* Add a selection listener to disable/enable the action. */
+		this.myModelViewer
+				.addSelectionChangedListener(new ISelectionChangedListener() {
+
+					public void selectionChanged(SelectionChangedEvent event) {
+
+						/* Disable the action to remove constraints. */
+						myActionRemoveSelectedConstraints.setEnabled(false);
+
+						ISelection selection;
+						selection = event.getSelection();
+
+						if (selection instanceof IStructuredSelection) {
+
+							IStructuredSelection structuredSelection;
+							structuredSelection = (IStructuredSelection) selection;
+
+							for (Object selectedElement : structuredSelection.toList()) {
+								if (selectedElement instanceof Constraint) {
+
+									/*
+									 * If at least one constraint is select, enable the action to
+									 * remove constraints.
+									 */
+									myActionRemoveSelectedConstraints.setEnabled(true);
+								}
+								// no else.
+							}
+							// end for.
+						}
+						// no else (wrong type of selection).
+					}
+				});
+
+		/*
+		 * Add an action to the tool bar to remove all constraints from the model.
+		 */
+		myActionRemoveAllConstraints = new Action() {
+
+			/*
+			 * (non-Javadoc)
+			 * @see org.eclipse.jface.action.Action#run()
+			 */
+			public void run() {
+
+				removeAllConstraints();
+			}
+		};
+
+		myActionRemoveAllConstraints
+				.setToolTipText("Removes all Constraints from the Model.");
+		myActionRemoveAllConstraints.setText("Remove all Constraints");
+		myActionRemoveAllConstraints.setImageDescriptor(ModelBusUIPlugin
+				.getImageDescriptor(IMAGE_DELETE_ALL_CONSTRAINTS));
+		/* Sets the action enabled or disabled. */
+		this.updateConstraintRemoveAction();
+
+		this.getViewSite().getActionBars().getToolBarManager().add(
+				myActionRemoveAllConstraints);
+
 		/* Add an action to the tool bar to remove the currently selected model. */
 		myActionRemoveModel = new Action() {
 
@@ -391,6 +504,84 @@ public class ModelsView extends ViewPart implements IModelRegistryListener {
 
 		this.getViewSite().getActionBars().getToolBarManager().add(
 				myActionRemoveModel);
+	}
+
+	/**
+	 * <p>
+	 * Helper method to remove the all {@link Constraint}s from the {@link IModel}
+	 * .
+	 * </p>
+	 */
+	private void removeAllConstraints() {
+
+		try {
+			ModelBusPlugin.getModelRegistry().getActiveModel().removeAllConstraints();
+		}
+
+		catch (IllegalArgumentException e) {
+			ErrorDialog.openError(this.getSite().getShell(),
+					"Error during Constraint removal", e.getMessage(), new Status(
+							IStatus.ERROR, ModelBusPlugin.ID, e.getMessage()));
+		}
+
+		catch (ModelAccessException e) {
+			ErrorDialog.openError(this.getSite().getShell(),
+					"Error during Constraint removal", e.getMessage(), new Status(
+							IStatus.ERROR, ModelBusPlugin.ID, e.getMessage()));
+
+		}
+		// end catch.
+	}
+
+	/**
+	 * <p>
+	 * Helper method to remove the currently selected {@link Constraint}s from the
+	 * {@link IModel}.
+	 * </p>
+	 */
+	private void removeSelectedConstraints() {
+
+		ISelection selection;
+		selection = this.myModelViewer.getSelection();
+
+		if (selection instanceof IStructuredSelection) {
+			IStructuredSelection structuredSelection;
+			structuredSelection = (IStructuredSelection) selection;
+
+			List<Constraint> constraintsToBeRemoved;
+			constraintsToBeRemoved = new ArrayList<Constraint>();
+
+			for (Object selectedElement : structuredSelection.toList()) {
+				if (selectedElement instanceof Constraint) {
+					constraintsToBeRemoved.add((Constraint) selectedElement);
+				}
+				// no else.
+			}
+			// end for.
+
+			if (constraintsToBeRemoved.size() > 0) {
+				try {
+					ModelBusPlugin.getModelRegistry().getActiveModel().removeConstraints(
+							constraintsToBeRemoved);
+				}
+
+				catch (IllegalArgumentException e) {
+					ErrorDialog.openError(this.getSite().getShell(),
+							"Error during Constraint removal", e.getMessage(), new Status(
+									IStatus.ERROR, ModelBusPlugin.ID, e.getMessage()));
+				}
+
+				catch (ModelAccessException e) {
+					ErrorDialog.openError(this.getSite().getShell(),
+							"Error during Constraint removal", e.getMessage(), new Status(
+									IStatus.ERROR, ModelBusPlugin.ID, e.getMessage()));
+
+				}
+				// end catch.
+			}
+			// no else (no constraint selected).
+		}
+		// no else (wrong selection type).
 	}
 
 	/**
@@ -502,6 +693,10 @@ public class ModelsView extends ViewPart implements IModelRegistryListener {
 			// no else.
 
 			this.myActionRemoveModel.setEnabled(true);
+
+			// try {
+
+			this.updateConstraintRemoveAction();
 		}
 
 		else {
@@ -549,6 +744,30 @@ public class ModelsView extends ViewPart implements IModelRegistryListener {
 
 		else {
 			this.setActiveModel(model);
+		}
+	}
+
+	/**
+	 * FIXME Method is not triggered correctly.
+	 * 
+	 * <p>
+	 * A helper method that sets the {@link Action} to remove all
+	 * {@link Constraint}s from the {@link IModel} enabled or disabled.
+	 * </p>
+	 */
+	private void updateConstraintRemoveAction() {
+
+		try {
+			myActionRemoveAllConstraints.setEnabled(ModelBusPlugin.getModelRegistry()
+					.getActiveModel().getConstraints().size() > 0);
+		}
+
+		catch (ModelAccessException e) {
+			myActionRemoveAllConstraints.setEnabled(false);
+		}
+
+		catch (NullPointerException e) {
+			myActionRemoveAllConstraints.setEnabled(false);
 		}
 	}
 }
