@@ -444,14 +444,14 @@ public class TestInteger {
 	 * </p>
 	 */
 	@Test
-	public void testToStringPositive02() throws Exception {
+	public void testToStringPositive01() throws Exception {
 
 		TestPerformer testPerformer;
 
 		String modelFileName;
 		String oclFileName;
 
-		oclFileName = "standardlibrary/integer/toStringPositive02.ocl";
+		oclFileName = "standardlibrary/integer/toStringPositive01.ocl";
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */

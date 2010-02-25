@@ -2,6 +2,7 @@ package package1::package2
 
 -- Operations defined on OclAny should be call-able using self.
 context Type1
-inv: self.oclType() = Type1
+def: testOclAnyOclType02(): OclType =
+self.oclType()
 
 endpackage
