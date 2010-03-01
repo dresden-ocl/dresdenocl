@@ -1,11 +1,11 @@
-\chapter{Adapting a Model Instance Type to Dresden OCL2 for Eclipse}
+\chapter{Adapting a Model Implementation Type to Dresden OCL2 for Eclipse}
 \label{chapter:modelInstanceTypeAdaptation}
 
 \begin{flushright}
 \textit{Chapter written by Claas Wilke}
 \end{flushright}
 
-As mentioned in Chapter \ref{chapter:architecture}, \acl{DOT4Eclipse} is able to interpret \acs{OCL} constraints on different types of model instances. E.g., the same constraints can be interpreted on Java \code{Objects}, \acs{EMF} \code{EObjects} and \acs{XML} files. This is possible because the toolkit abstracts the instance's elements as \code{IModelInstanceElements}. Thus, each type of model instance that shall be connected with the \acs{OCL}2 Interpreter requires its own Model Instance Type Adaptation. How such an adaptation has to be implemented is explained below. First, the different elements that can belong to a model instance type are presented. Afterwards, the \code{IModelInstanceProvider}, \code{IModelInstance} and \code{IModelInstanceFactory} interfaces are explained.
+As mentioned in Chapter \ref{chapter:architecture}, \acl{DOT4Eclipse} is able to interpret \acs{OCL} constraints on different types of model instances. E.g., the same constraints can be interpreted on Java \code{Objects}, \acs{EMF} \code{EObjects} and \acs{XML} files. This is possible because the toolkit abstracts the instance's elements as \code{IModelInstanceElements}. Thus, each type of model instance that shall be connected with the \acs{OCL}2 Interpreter requires its own Model Implementation Type Adaptation. How such an adaptation has to be implemented is explained below. First, the different elements that can belong to a model implementation type are presented. Afterwards, the \code{IModelInstanceProvider}, \code{IModelInstance} and \code{IModelInstanceFactory} interfaces are explained.
 
 
 \section{The different types of Model Instance Elements}
@@ -35,15 +35,15 @@ The method \code{copyForAtPre()} is required to create a copy of the element if 
 \code{context Person::birthdayHappens()\\
 post: self.age = self.age@pre + 1}
 
-the interpreter has to store the value of the property \code{age}. The value has to be copied, because if \code{age} is incremented during the method's execution, a simple reference would refer to the incremented value\footnote{This is true although age is a primitive type. The integer instance is modeled in Java and thus can be referenced.}. As far as we know, it is rather complicate to copy some objects at runtime - e.g., in Java where the \code{clone()} method is not available for every object. Thus, a \code{CopyForAtPreException} can be thrown, if an element cannot be copied.
+the interpreter has to store the value of the property \code{age}. The value has to be copied, because if \code{age} is incremented during the method's execution, a simple reference would refer to the incremented value.\footnote{This is true although age is a primitive type. The integer instance is modeled in Java and thus can be referenced.} As far as we know, it is rather complicate to copy some objects at runtime - e.g., in Java where the \code{clone()} method is not visible for every class. Thus, a \code{CopyForAtPreException} can be thrown, if an element cannot be copied.
 
 \subsubsection{getName()}
 
 The method \code{getName()} returns a string representation of the element. This additional operation exists to provide a different string to display the element in the \acs{GUI} components besides the general \code{toString()} method's result.
 
-\subsubsection{getTypes()}
+\subsubsection{getType()}
 
-The method \code{getTypes()} returns a set containing all \code{Types} of the element. In most cases, this set contains exactly one Type. But sometimes, this set can contain multiplye types. This is the case if an \code{IModelInstanceElement} represents an object that inherits from multiple types in the model.
+The method \code{getType()} returns the implemented \code{Type} of the element.
 
 \subsubsection{isKindOf(Type) and isTypeOf(Type)}
 
@@ -56,7 +56,7 @@ The method \code{isUndefined()} checks if an \code{IModelInstanceElement}'s adap
 
 \subsection{The Adaptation of Model Instance Objects}
 
-The most important \code{IModelInstanceElement} is the \code{IModelInstanceObject}. It encapsulates the standard objects of an model instance such as a Java \code{Object} or an \acs{EMF} Ecore \code{EObject}. \code{IModelInstanceObject} must be implemented by every model instance type because without this kind of element a model instance type does not do any sense. Besides the inherited methods of \code{IModelInstanceElement} three additional methods have to be implemented. They are explained below.
+The most important \code{IModelInstanceElement} is the \code{IModelInstanceObject}. It encapsulates the standard objects of a model instance such as a Java \code{Object} or an \acs{EMF} Ecore \code{EObject}. An \code{IModelInstanceObject} implementation must be provided by every model implementation type because without this kind of element a model implementation type does not do any sense. Besides the inherited methods of \code{IModelInstanceElement} three additional methods have to be implemented. They are explained below.
 
 \subsubsection{getObject()}
 
@@ -64,16 +64,16 @@ The method \code{getObject()} returns the adapted \code{Object} of the \code{IMo
 
 \subsubsection{getProperty(Property)}
 
-The method \code{getProperty(Property)} is required to get the property values of an object during the interpretation of \acs{OCL} constraints. The method should return the adapted value of the given property (probably an \code{IModelInstanceCollection} of values if the property is multiple or the instance of \code{IModelInstanceVoid} if the property's value is \code{null}) or throws a \code{Pro\-per\-ty\-Not\-Found\-Ex\-ception} if the given property does not exist. A \code{PropertyAccessException} can be thrown, if an unexpected exception occurs during accessing the object's property.
+The method \code{getProperty(Property)} is required to get the properties' values of an object during the interpretation of \acs{OCL} constraints. The method should return the adapted value of the given property (probably an \code{IModelInstanceCollection} of values if the property is multiple or the instance of \code{IModelInstanceVoid} if the property's value is \code{null}) or throws a \code{Pro\-per\-ty\-Not\-Found\-Ex\-ception} if the given property does not exist. A \code{PropertyAccessException} can be thrown, if an unexpected exception occurs during accessing the object's property's value.
 
 \subsubsection{invokeOperation(Operation, List<IModelInstanceElement>)}
 			
-The method \code{invokeOperation(Operation, List<IModelInstanceElement>)} is required to invoke the adapted object's operations during interpretation. The list of arguments (adapted as \code{IModelInstanceElements}) may be empty but not \code{null}. The method should return the adapted value of the operation's invocation (probably an \code{IModelInstanceCollection} of values if the operation is multiple or the instance of \code{IModelInstanceVoid} if the result is \code{null}) or throws an \code{OperationNotFoundException} if the given operation does not exist. A \code{Operation\-Access\-Ex\-ception} can be thrown, if an unexpected exception occurs during invoking the object's operation. This operation is one of the most complicated operations in the complete model instance implementation because it must be able to reconvert adapted model instance elements given as parameters. E.g., a given \code{IModelInstanceObject} has to be unwrapped by calling its \code{getObject()} method. For primitive and collection type implementation instances this is more complicate because they do not contain an adapted object that can be returned. They have to be converted. For details of such a reconvert mechanism investigate the Java implementation that uses \keyword{Java Reflections} to check, whether an operation requires an \code{int}, \code{Integer}, \code{byte}, or \code{Long} (for example) as input.
+The method \code{invokeOperation(Operation, List<IModelInstanceElement>)} is required to invoke the adapted object's operations during interpretation. The list of arguments (adapted as \code{IModelInstanceElements}) may be empty but not \code{null}. The method should return the adapted value of the operation's invocation (probably an \code{IModelInstanceCollection} of values if the operation is multiple or the instance of \code{IModelInstanceVoid} if the result is \code{null}) or throws an \code{OperationNotFoundException} if the given operation does not exist. An \code{Operation\-Access\-Ex\-ception} can be thrown, if an unexpected exception occurs during invoking the object's operation. This operation is one of the most complicated operations in the complete model instance implementation because it must be able to reconvert adapted model instance elements given as parameters. E.g., a given \code{IModelInstanceObject} has to be unwrapped by calling its \code{getObject()} method. For primitive and collection type implementation instances this is more complicate because they do not contain an adapted object that can be returned. They have to be converted. For details of such a reconvert mechanism investigate the Java implementation that uses \keyword{Java Reflections} to check, whether an operation requires an \code{int}, \code{Integer}, \code{byte}, or \code{Long} (for example) as input.
 
 
 \subsection{The Adaptation of Primitive Type Instances}
 
-To adapt primitive type instances, the interfaces \code{IModelInstanceBoolean}, \code{IModel\-In\-stance\-In\-te\-ger}, \code{IModelInstanceReal} and \code{IModelInstanceString} exist. Each of them contains an additional method to return the adapted value as a Java Object\footnote{Precisely, a \code{Boolean}, a \code{Long}, a \code{Double} or a \code{String}.}. Because primitive instances do not have a state, they do not have to but can be implemented by a model instance type. Instead of implementing own primitive type instances, the predefined instances \code{JavaModelInstanceBoolean}, \code{JavaModelInstanceInteger}, \code{JavaModelInstanceReal} and \code{JavaModelInstanceString} (located in the plug-in \code{tudresden.ocl20.pivot.modelbus} can be reused.
+To adapt primitive type instances, the interfaces \code{IModelInstanceBoolean}, \code{IModel\-In\-stance\-In\-te\-ger}, \code{IModelInstanceReal} and \code{IModelInstanceString} exist. Each of them contains an additional method to return the adapted value as a Java Object.\footnote{Precisely, a \code{Boolean}, a \code{Long}, a \code{Double} or a \code{String}.} Because primitive instances do not have a state, they do not have to but can be implemented by a model instance type. Instead of implementing own primitive type instances, the predefined instances \code{JavaModelInstanceBoolean}, \code{JavaModelInstanceInteger}, \code{JavaModelInstanceReal} and \code{JavaModelInstanceString} (located in the plug-in \code{tudresden.ocl20.pivot.modelbus} can be reused.
 
 
 \subsection{The Adaptation of Collections}
@@ -96,12 +96,12 @@ The interface \code{IModelInstanceEnumerationLiteral} represents instances of \c
 
 \subsection{IModelInstanceTuple}
 
-The interface \code{IModelInstanceTuple} represents key (\code{IModelInstanceString}) value \code{IModel\-In\-stance\-Ele\-ment} data structure called \keyword{Tuple}. Tuples are required during \acs{OCL} interpretation only. Thus, a standard \code{ModelInstanceTuple} implementation located in the plug-in \code{tudresden.ocl20.\linebreak[0]pivot.modelbus} exists.
+The interface \code{IModelInstanceTuple} represents key (\code{IModelInstanceString}) value (\code{IModel\-In\-stance\-Ele\-ment}) data structures called \keyword{Tuples}. Tuples are required during \acs{OCL} interpretation only and cannot be part of a model instance. Thus, a standard \code{ModelInstanceTuple} implementation located in the plug-in \code{tudresden.ocl20.\linebreak[0]pivot.modelbus} exists.
 
 
 \subsection{IModelInstanceVoid and IModelInstanceInvalid}
 
-The interfaces \code{IModelInstanceVoid} and \code{IModelInstanceInvalid} exist to define the singleton instances of the types \code{OclVoid} and \code{OclInvalid}. Their instances can be accessed via the static property \code{IModelInstanceVoid.INSTANCE} or \code{IModelInstanceInvalid.INSTANCE} respectively. For example, the \code{IModelInstanceVoid} instance is required when a method's invocation shall return a \code{null} value.
+The interfaces \code{IModelInstanceVoid} and \code{IModelInstanceInvalid} exist to define the singleton instances of the types \code{OclVoid} and \code{OclInvalid}. Their instances can be accessed via the static property \code{IModelInstanceVoid.INSTANCE} or \code{IModelInstanceInvalid.INSTANCE}, respectively. For example, the \code{IModelInstanceVoid} instance is required when a method's invocation shall return a \code{null} value.
 
 
 
@@ -163,12 +163,12 @@ The method \code{invokeStaticOperation(Operation, List<IModelInstanceElement>)} 
 	\label{pic:modelInstanceTypeAdaptation:modelInstanceFactoryInterface}
 \end{figure}
 
-The \code{IModelInstanceFactory} implementation of a model instance is responsible to adapted the instance's objects to the \code{IModelInstanceElement} implementations. It investigates the types of the objects to decide if they shall be adapted as \code{IModelInstanceObjects}, \code{IModelInstance\-Pri\-mi\-tive\-Types} or \code{IModelInstanceEnumerationLiterals}. An \code{IModelInstanceFactory} has to implement four methods as shown in Figure \ref{pic:modelInstanceTypeAdaptation:modelInstanceFactoryInterface}. A default implementation for the basis elements such as \code{IModelInstanceTuples} and \code{IModelInstanceCollections} called \code{BasisJavaModel\-In\-stance\-Fac\-tory} exists. Normally, an \code{IModelInstanceFactory} should extend the \code{BasisJava\-Mo\-del\-In\-stance\-Factory} and should call the methods of the basis implementation as often as possible (e.g., to adapt the \code{IModelInstanceTuples}). For details investigate the existing implementations for \acs{EMF} Ecore and Java.
+The \code{IModelInstanceFactory} implementation of a model instance is responsible to adapt the instance's objects to the \code{IModelInstanceElement} implementations. It investigates the types of the objects to decide if they shall be adapted as \code{IModelInstanceObjects}, \code{IModelInstance\-Pri\-mi\-tive\-Types} or \code{IModelInstanceEnumerationLiterals}. An \code{IModelInstanceFactory} has to implement four methods as shown in Figure \ref{pic:modelInstanceTypeAdaptation:modelInstanceFactoryInterface}. A default implementation for the basis elements such as \code{IModelInstanceTuples} and \code{IModelInstanceCollections} called \code{BasisJavaModel\-In\-stance\-Fac\-tory} exists. Normally, an \code{IModelInstanceFactory} should extend the \code{BasisJava\-Mo\-del\-In\-stance\-Factory} and should call the methods of the basis implementation as often as possible (e.g., to adapt the \code{IModelInstanceTuples}). For details investigate the existing implementations for \acs{EMF} Ecore and Java.
 
 
 
-\section{Adapting an own Model Instance Type}
+\section{Adapting an own Model Implementation Type}
 
-We know that adapting a model instance type sounds easy but can be a lot of pain. Every kind of model instance comes with its own problems and own solutions. Some may be simple, others may be complicate or impossible. But never forget, if you adapted your own type of model instance, you can connect your instances with \acl{DOT4Eclipse} and you can reuse the \acs{OCL}2 Parser and \acs{OCL}2 Interpreter! 
+We know that adapting a model implementation type sounds easy but can be a lot of pain. Every kind of model instance comes with its own problems and solutions. Some may be simple, others may be complicate or impossible. But never forget, if you adapted your own type of model instance, you can connect your instances with \acl{DOT4Eclipse} and you can reuse the \acs{OCL}2 Parser and \acs{OCL}2 Interpreter! 
 
-If you are confused and still do not know how to adapt your model instance type, investigate the existing adaptations for Java (\code{tudresden.ocl20.pivot.modelinstancetype.java}) and \acs{EMF} Ecore (\code{tudresden.ocl20.pivot.modelinstancetype.ecore}). To check your adaptation, have a look at the \keyword{Generic Model Instance Type Test Suite} (presented in Chapter \ref{chapter:modelInstanceTestSuite}) as well.
+If you are confused and still do not know how to adapt your model implementation type, investigate the existing adaptations for Java (\code{tudresden.ocl20.pivot.modelinstancetype.java}) and \acs{EMF} Ecore (\code{tudresden.ocl20.pivot.modelinstancetype.ecore}). To check your adaptation, have a look at the \keyword{Generic Model Implementation Type Test Suite} (presented in Chapter \ref{chapter:modelInstanceTestSuite}) as well.
