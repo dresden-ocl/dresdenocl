@@ -4,6 +4,10 @@ Changes and Bugs fixed during the different Releases
 Release 2.1 (not scheduled yet)
 ===============================
 
+* Dresden OCL2 for Eclipse now supports OCL 2.2!
+  - The only exception is that the new keyword static is not supported yet.
+  - Parsing, Interpretation and Java Code Generation of OCL 2.2 is now possible.
+  
 * A new Facade Plug-in containing a facade for all functionalities of
   Dresden OCL2 for Eclipse has been introduced.
   
@@ -54,8 +58,9 @@ Release 2.1 (not scheduled yet)
   - OclString: substring() returns invalid if lower index is greater than higher index
 
 * Some bugs in the Ocl22Java Code Generator was fixed.
-  - The code generation of OclAny.allInstances() now works properly again.
-  - The code generation of Collection.flatten() now works properly.
+  - The code generation of OclAny.allInstances() now works appropriately again.
+  - The code generation of Collection.flatten() now works appropriately.
+  - Transformation of abstract Collection type now works appropriately.
 
 
 GUI

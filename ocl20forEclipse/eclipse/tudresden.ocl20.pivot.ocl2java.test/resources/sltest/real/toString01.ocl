@@ -1,0 +1,7 @@
+package testpackage
+
+context Class1
+def: testRealToString(source: Real): String =
+source.toString()
+
+endpackage

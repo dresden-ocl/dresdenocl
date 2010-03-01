@@ -78,9 +78,26 @@ public class TestCollection extends AbstractSLTest {
 	 * @throws Ocl22CodeException
 	 */
 	@Test
-	public void testFlatten01() throws IllegalArgumentException,
+	public void testMax01() throws IllegalArgumentException,
 			OCL2ParsingException, ModelAccessException, Ocl22CodeException {
+	
+		this.compareFragmentCodeGeneration("collection", "max01");
+	}
 
-		this.compareFragmentCodeGeneration("collection", "flatten01");
+	/**
+	 * <p>
+	 * Tests the instrumentation of the constraint.
+	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 * @throws OCL2ParsingException
+	 * @throws IllegalArgumentException
+	 * @throws Ocl22CodeException
+	 */
+	@Test
+	public void testMin01() throws IllegalArgumentException,
+			OCL2ParsingException, ModelAccessException, Ocl22CodeException {
+	
+		this.compareFragmentCodeGeneration("collection", "min01");
 	}
 }

@@ -35,7 +35,7 @@ import tudresden.ocl20.pivot.ocl2java.exception.Ocl22CodeException;
  * 
  * @author Claas Wilke
  */
-public class TestOclAny extends AbstractSLTest {
+public class TestSet extends AbstractSLTest {
 
 	/**
 	 * <p>
@@ -69,7 +69,7 @@ public class TestOclAny extends AbstractSLTest {
 
 	/**
 	 * <p>
-	 * Tests the instrumentation of a constraint.
+	 * Tests the instrumentation of the constraint.
 	 * </p>
 	 * 
 	 * @throws ModelAccessException
@@ -78,27 +78,9 @@ public class TestOclAny extends AbstractSLTest {
 	 * @throws Ocl22CodeException
 	 */
 	@Test
-	public void testAllInstancesInstrumented01() throws IllegalArgumentException,
+	public void testFlatten01() throws IllegalArgumentException,
 			OCL2ParsingException, ModelAccessException, Ocl22CodeException {
 
-		this.compareFragmentCodeGeneration("oclany", "allInstances01");
-		this.compareInstrumentationCodeGeneration("oclany", "allInstances01");
-	}
-
-	/**
-	 * <p>
-	 * Tests the instrumentation of a constraint.
-	 * </p>
-	 * 
-	 * @throws ModelAccessException
-	 * @throws OCL2ParsingException
-	 * @throws IllegalArgumentException
-	 * @throws Ocl22CodeException
-	 */
-	@Test
-	public void testOclType01() throws IllegalArgumentException,
-			OCL2ParsingException, ModelAccessException, Ocl22CodeException {
-
-		this.compareFragmentCodeGeneration("oclany", "oclType01");
+		this.compareFragmentCodeGeneration("set", "flatten01");
 	}
 }

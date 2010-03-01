@@ -1,0 +1,11 @@
+Object result1;
+result1 = null;
+
+/* Compute the result of a max operation. */
+for (Object anElement1 : source) {
+    if (result1 == null || ((Comparable) result1).compareTo((Comparable) anElement1) < 0) {
+        result1 = anElement1;
+    }
+}
+
+result1

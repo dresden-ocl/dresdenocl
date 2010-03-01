@@ -15,7 +15,7 @@ for more details.
 
 You should have received a copy of the GNU Lesser General Public License along 
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
-*/
+ */
 package tudresden.ocl20.pivot.ocl2java.types;
 
 import java.util.ArrayList;
@@ -45,6 +45,70 @@ public class OclOrderedSet<T> extends OclCollection<T> implements Set<T> {
 		this.myCollection = new ArrayList<T>();
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.util.Collection#add(java.lang.Object)
+	 */
+	public boolean add(T anObject) {
+
+		boolean result;
+
+		result = false;
+
+		/* Set does not contain duplicates. */
+		if (this.excludes(anObject)) {
+			result = this.myCollection.add(anObject);
+		}
+		// no else.
+
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.util.Collection#addAll(java.util.Collection)
+	 */
+	public boolean addAll(Collection<? extends T> aCollection) {
+
+		boolean result;
+
+		result = false;
+
+		for (T anElement : aCollection) {
+			/* Set does not contain duplicates. */
+			if (this.excludes(anElement)) {
+				/* true if this collection changed as a result of the call. */
+				result |= this.myCollection.add(anElement);
+			}
+			// no else.
+		}
+
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@SuppressWarnings("unchecked")
+	public boolean equals(Object anObject) {
+		boolean result;
+
+		try {
+			OclOrderedSet<T> aBag = (OclOrderedSet<T>) anObject;
+			result = this.equals(aBag);
+		}
+
+		catch (ClassCastException e) {
+			result = false;
+		}
+
+		return result;
+	}
+
 	/**
 	 * @param anObject
 	 *            The Object which shall be appended.
@@ -53,12 +117,12 @@ public class OclOrderedSet<T> extends OclCollection<T> implements Set<T> {
 	 */
 	public OclOrderedSet<T> append(T anObject) {
 		OclOrderedSet<T> result;
-	
+
 		result = new OclOrderedSet<T>();
-	
+
 		result.addAll(this.myCollection);
 		result.add(anObject);
-	
+
 		return result;
 	}
 
@@ -118,54 +182,35 @@ public class OclOrderedSet<T> extends OclCollection<T> implements Set<T> {
 		return result;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#equals(java.lang.Object)
-	 */
-	@SuppressWarnings("unchecked")
-	public boolean equals(Object anObject) {
-		boolean result;
-	
-		try {
-			OclOrderedSet<T> aBag = (OclOrderedSet<T>) anObject;
-			result = this.equals(aBag);
-		}
-	
-		catch (ClassCastException e) {
-			result = false;
-		}
-	
-		return result;
-	}
-
 	/**
 	 * @param aSet
-	 *            The {@link OclOrderedSet} this {@link OclOrderedSet} shall be compared with.
-	 * @return True if this {@link OclOrderedSet} and the given {@link OclOrderedSet} contain
-	 *         the same elements, the same number of times.
+	 *            The {@link OclOrderedSet} this {@link OclOrderedSet} shall be
+	 *            compared with.
+	 * @return True if this {@link OclOrderedSet} and the given
+	 *         {@link OclOrderedSet} contain the same elements, the same number
+	 *         of times.
 	 */
 	public boolean equals(OclOrderedSet<T> aSet) {
 		boolean result;
 		int index;
-	
+
 		result = (this.size() == aSet.size());
-	
+
 		if (result) {
 			index = 1;
 			for (T anElement : aSet) {
 				result &= (anElement.equals(this.get(index)));
-	
+
 				if (!result) {
 					break;
 				}
 				// no else.
-				
+
 				index++;
 			}
 		}
 		// no else.
-	
+
 		return result;
 	}
 
@@ -313,6 +358,23 @@ public class OclOrderedSet<T> extends OclCollection<T> implements Set<T> {
 	}
 
 	/**
+	 * @return An {@link OclOrderedSet} containing the same elements but in
+	 *         reverse order.
+	 */
+	public OclOrderedSet<T> reverse() {
+
+		OclOrderedSet<T> result;
+		result = new OclOrderedSet<T>();
+
+		for (T element : this.myCollection) {
+			result = result.insertAt(1, element);
+		}
+		// end for.
+
+		return result;
+	}
+
+	/**
 	 * @param lower
 	 *            The index of the first element included in the result.
 	 *            <strong>Please pay attention that indexes in OCL starts with
@@ -347,49 +409,6 @@ public class OclOrderedSet<T> extends OclCollection<T> implements Set<T> {
 		/* Indexes in OCL starts with 1. */
 		for (int index = lower - 1; index < upper; index++) {
 			result.add(((List<T>) this.myCollection).get(index));
-		}
-
-		return result;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.util.Collection#add(java.lang.Object)
-	 */
-	public boolean add(T anObject) {
-
-		boolean result;
-
-		result = false;
-
-		/* Set does not contain duplicates. */
-		if (this.excludes(anObject)) {
-			result = this.myCollection.add(anObject);
-		}
-		// no else.
-
-		return result;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.util.Collection#addAll(java.util.Collection)
-	 */
-	public boolean addAll(Collection<? extends T> aCollection) {
-
-		boolean result;
-
-		result = false;
-
-		for (T anElement : aCollection) {
-			/* Set does not contain duplicates. */
-			if (this.excludes(anElement)) {
-				/* true if this collection changed as a result of the call. */
-				result |= this.myCollection.add(anElement);
-			}
-			// no else.
 		}
 
 		return result;

@@ -24,7 +24,7 @@ Boolean
 
 // --- Collection Type ---
 collectionType() ::= <<
-tudresden.ocl20.pivot.ocl2java.types.IOclCollection
+tudresden.ocl20.pivot.ocl2java.types.OclCollection
 >>
 
 

@@ -15,7 +15,7 @@ for more details.
 
 You should have received a copy of the GNU Lesser General Public License along 
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
-*/
+ */
 package tudresden.ocl20.pivot.ocl2java.types;
 
 import java.util.ArrayList;
@@ -154,9 +154,11 @@ public class OclSequence<T> extends OclCollection<T> {
 
 	/**
 	 * @param aSequence
-	 *            The {@link OclSequence} this {@link OclSequence} shall be compared with.
-	 * @return True if this {@link OclSequence} and the given {@link OclSequence} contain
-	 *         the same elements, the same number of times.
+	 *            The {@link OclSequence} this {@link OclSequence} shall be
+	 *            compared with.
+	 * @return True if this {@link OclSequence} and the given
+	 *         {@link OclSequence} contain the same elements, the same number of
+	 *         times.
 	 */
 	public boolean equals(OclSequence<T> aSequence) {
 		boolean result;
@@ -165,9 +167,9 @@ public class OclSequence<T> extends OclCollection<T> {
 		result = (this.size() == aSequence.size());
 
 		if (result) {
-			
+
 			index = 1;
-			
+
 			for (T anElement : aSequence) {
 				result &= this.get(index).equals(anElement);
 
@@ -175,7 +177,7 @@ public class OclSequence<T> extends OclCollection<T> {
 					break;
 				}
 				// no else.
-				
+
 				index++;
 			}
 		}
@@ -363,6 +365,23 @@ public class OclSequence<T> extends OclCollection<T> {
 
 		result.add(anObject);
 		result.addAll(this.myCollection);
+
+		return result;
+	}
+
+	/**
+	 * @return An {@link OclSequence} containing the same elements but in
+	 *         reverse order.
+	 */
+	public OclSequence<T> reverse() {
+
+		OclSequence<T> result;
+		result = new OclSequence<T>();
+
+		for (T element : this.myCollection) {
+			result = result.insertAt(1, element);
+		}
+		// end for.
 
 		return result;
 	}

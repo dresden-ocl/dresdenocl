@@ -58,6 +58,18 @@ $sourceExp$.get($argsExp$)
 >>
 
 
+// --- At Operation on String ---
+atOnStringOperation(sourceExp, argsExp) ::= <<
+Character.toString($sourceExp$.charAt($argsExp$ - 1))
+>>
+
+
+// --- Concat Operation ---
+charactersOperation(sourceExp, argsExp) ::= <<
+$sourceExp$.concat($argsExp$)
+>>
+
+
 // --- Concat Operation ---
 concatOperation(sourceExp, argsExp) ::= <<
 $sourceExp$.concat($argsExp$)
@@ -91,6 +103,12 @@ divisionOnIntegerOperation(sourceExp, argsExp) ::= <<
 // --- Equals Operation ---
 equalsOperation(sourceExp, argsExp) ::= <<
 $sourceExp$.equals($argsExp$)
+>>
+
+
+// --- Equals Operation ---
+equalsIgnorCaseOperation(sourceExp, argsExp) ::= <<
+$sourceExp$.equalsIgnorCase($argsExp$)
 >>
 
 
@@ -178,6 +196,12 @@ $sourceExp$.indexOf($argsExp$)
 >>
 
 
+// --- IndexOf Operation on String ---
+indexOfOnStringOperation(sourceExp, argsExp) ::= <<
+$sourceExp$.indexOf($argsExp$) + 1
+>>
+
+
 // --- InsertAt Operation ---
 insertAtOperation(sourceExp, argsExp) ::= <<
 $sourceExp$.insertAt($argsExp:{arg | $arg$}; separator = ", "$)
@@ -220,9 +244,39 @@ java.lang.Math.max($sourceExp$, $argsExp$)
 >>
 
 
+// --- Max Operation on Collection ---
+maxOnCollectionOperation(sourceExp, genericType, resultVar, elementName) ::= <<
+$genericType$ $resultVar$;
+$resultVar$ = $undefinedLiteralExp()$;
+
+/* Compute the result of a max operation. */
+for ($genericType$ $elementName$ : $sourceExp$) {
+    if ($resultVar$ == $undefinedLiteralExp()$ || ((Comparable) $resultVar$).compareTo((Comparable) $elementName$) < 0) {
+        $resultVar$ = $elementName$;
+    }
+}
+
+>>
+
+
 // --- Min Operation ---
 minOperation(sourceExp, argsExp) ::= <<
 java.lang.Math.min($sourceExp$, $argsExp$)
+>>
+
+
+// --- Min Operation on Collection ---
+minOnCollectionOperation(sourceExp, genericType, resultVar, elementName) ::= <<
+$genericType$ $resultVar$;
+$resultVar$ = $undefinedLiteralExp()$;
+
+/* Compute the result of a min operation. */
+for ($genericType$ $elementName$ : $sourceExp$) {
+    if ($resultVar$ == $undefinedLiteralExp()$ || ((Comparable) $resultVar$).compareTo((Comparable) $elementName$) > 0) {
+        $resultVar$ = $elementName$;
+    }
+}
+
 >>
 
 
@@ -322,9 +376,21 @@ orOperation(sourceExp, argsExp) ::= <<
 >>
 
 
+// --- OclIsTypeOf Operation ---
+oclTypeOperation(sourceExp, argsExp) ::= <<
+$sourceExp$.getClass()
+>>
+
+
 // --- Plus Operation ---
 plusOperation(sourceExp, argsExp) ::= <<
 ($sourceExp$ + $argsExp$)
+>>
+
+
+// --- Plus Operation on String ---
+plusOnStringOperation(sourceExp, argsExp) ::= <<
+$sourceExp$.concat($argsExp$)
 >>
 
 
@@ -395,6 +461,12 @@ $sourceExp$.symmetricDifference($argsExp$)
 >>
 
 
+// --- ToBoolean Operation ---
+toBooleanOperation(sourceExp) ::= <<
+Boolean.parseBoolean($sourceExp$)
+>>
+
+
 // --- ToInteger Operation ---
 toIntegerOperation(sourceExp) ::= <<
 Integer.parseInt($sourceExp$)
@@ -404,6 +476,24 @@ Integer.parseInt($sourceExp$)
 // --- ToReal Operation ---
 toRealOperation(sourceExp) ::= <<
 Float.parseFloat($sourceExp$)
+>>
+
+
+// --- ToString Operation ---
+toStringOperation(sourceExp) ::= <<
+$sourceExp$.toString()
+>>
+
+
+// --- ToLowerCase Operation ---
+toLowerCaseOperation(sourceExp) ::= <<
+$sourceExp$.toLowerCase()
+>>
+
+
+// --- ToUpperCase Operation ---
+toUpperCaseOperation(sourceExp) ::= <<
+$sourceExp$.toUpperCase()
 >>
 
 

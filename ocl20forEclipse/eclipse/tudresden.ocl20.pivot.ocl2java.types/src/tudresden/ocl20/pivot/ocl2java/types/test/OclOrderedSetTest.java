@@ -41,34 +41,34 @@ public class OclOrderedSetTest {
 
 	@Test
 	public void testAppend() {
-	
+
 		OclOrderedSet<String> set1;
 		OclOrderedSet<String> set2;
-	
+
 		String object1;
 		String object2;
 		String object3;
 		String object4;
-	
+
 		set1 = new OclOrderedSet<String>();
 		set2 = new OclOrderedSet<String>();
-	
+
 		object1 = "1";
 		object2 = "2";
 		object3 = "4";
 		object4 = "3";
-	
+
 		set1.add(object1);
 		set1.add(object2);
 		set1.add(object3);
-	
+
 		set2.add(object1);
 		set2.add(object2);
 		set2.add(object3);
 		set2.add(object4);
-	
+
 		set1 = set1.append(object4);
-	
+
 		assertEquals(set1, set2);
 	}
 
@@ -317,50 +317,50 @@ public class OclOrderedSetTest {
 
 	@Test
 	public void testIndexOf() {
-	
+
 		OclOrderedSet<String> set1;
-	
+
 		String object1;
 		String object2;
-	
+
 		set1 = new OclOrderedSet<String>();
-	
+
 		object1 = "1";
 		object2 = "2";
-		
+
 		assertEquals(0, set1.indexOf(object1));
 
 		set1.add(object1);
 		set1.add(object2);
-	
+
 		assertEquals(1, set1.indexOf(object1));
 		assertEquals(2, set1.indexOf(object2));
 	}
 
 	@Test
 	public void testInsertAt() {
-	
+
 		OclOrderedSet<String> set1;
 		OclOrderedSet<String> set2;
-	
+
 		String object1;
 		String object2;
 		String object3;
-	
+
 		set1 = new OclOrderedSet<String>();
 		set2 = new OclOrderedSet<String>();
-	
+
 		object1 = "1";
 		object2 = "2";
 		object3 = "3";
-		
+
 		set1.add(object1);
 		set1.add(object2);
 
 		set2.add(object1);
 		set2.add(object3);
 		set2.add(object2);
-		
+
 		set1 = set1.insertAt(2, object3);
 
 		assertEquals(set2, set1);
@@ -421,55 +421,77 @@ public class OclOrderedSetTest {
 	}
 
 	@Test
-	public void testSubOrderedSet() {
-	
+	public void testReverse() {
+
 		OclOrderedSet<String> set1;
 		OclOrderedSet<String> set2;
-	
+
+		set1 = new OclOrderedSet<String>();
+		set2 = new OclOrderedSet<String>();
+
+		set1.add("1");
+		set1.add("2");
+		set1.add("3");
+
+		set2.add("3");
+		set2.add("2");
+		set2.add("1");
+
+		set1 = set1.reverse();
+
+		assertEquals(set2, set1);
+	}
+
+	@Test
+	public void testSubOrderedSet() {
+
+		OclOrderedSet<String> set1;
+		OclOrderedSet<String> set2;
+
 		String object1;
 		String object2;
 		String object3;
 		String object4;
-	
+
 		set1 = new OclOrderedSet<String>();
 		set2 = new OclOrderedSet<String>();
-	
+
 		object1 = "1";
 		object2 = "2";
 		object3 = "3";
 		object4 = "4";
-		
+
 		set1.add(object1);
 		set1.add(object2);
 		set1.add(object3);
 		set1.add(object4);
-	
+
 		set2.add(object2);
 		set2.add(object3);
-		
+
 		assertEquals(set1, set1.subOrderedSet(1, 4));
 		assertEquals(set2, set1.subOrderedSet(2, 3));
 	}
 
 	@Test
 	public void testAdd() {
-	
+
 		OclOrderedSet<String> set1;
 		OclOrderedSet<String> set2;
-	
+
 		String object1;
 		String object2;
 		String object3;
 		String object4;
-	
+
 		set1 = new OclOrderedSet<String>();
 		set2 = new OclOrderedSet<String>();
-	
+
 		object1 = "1";
 		object2 = "2";
 		object3 = "3";
 		object4 = "2";
-		
+
 		set1.add(object1);
 		set1.add(object2);
 		set1.add(object3);
@@ -484,29 +506,29 @@ public class OclOrderedSetTest {
 
 	@Test
 	public void testAddAll() {
-	
+
 		OclOrderedSet<String> set1;
 		OclOrderedSet<String> set2;
 		OclOrderedSet<String> set3;
-	
+
 		String object1;
 		String object2;
 		String object3;
 		String object4;
-	
+
 		set1 = new OclOrderedSet<String>();
 		set2 = new OclOrderedSet<String>();
 		set3 = new OclOrderedSet<String>();
-	
+
 		object1 = "1";
 		object2 = "2";
 		object3 = "3";
 		object4 = "4";
-		
+
 		set1.add(object1);
 		set1.add(object2);
 		set1.add(object4);
-	
+
 		set2.add(object1);
 		set2.add(object2);
 		set2.add(object3);
@@ -515,7 +537,7 @@ public class OclOrderedSetTest {
 		set3.add(object2);
 		set3.add(object4);
 		set3.add(object3);
-		
+
 		set1.addAll(set2);
 
 		assertEquals(set3, set1);

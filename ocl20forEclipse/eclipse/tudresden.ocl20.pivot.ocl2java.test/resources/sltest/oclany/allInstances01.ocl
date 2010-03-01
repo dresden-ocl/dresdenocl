@@ -2,6 +2,7 @@ package testpackage
 
 context Class1
 -- Change to Class1.allInstances() when bug in parser is fixed.
-inv: self.allInstances()-> size() > 0
+def: testOclAnyAllInstances(source: Class1): Set(Class1) =
+source.allInstances()
 
 endpackage

@@ -6,7 +6,7 @@ package testpackage.constraints;
  * @author OCL22Java of Dresden OCL2 for Eclipse
  * @Generated
  */
-public privileged aspect InvAspect1 {
+public privileged aspect DefAspect1 {
 
     protected static java.util.Map<String, java.util.Map> allInstances = new java.util.HashMap<String, java.util.Map>();
 
@@ -29,26 +29,22 @@ public privileged aspect InvAspect1 {
         allInstances.put(aClass.getClass().getCanonicalName(), instanceMap);
     }
 
-    /**
-     * <p>Describes all Constructors of the class {@link testpackage.Class1}.</p>
-     */
-    protected pointcut allClass1Constructors(testpackage.Class1 aClass):
-        execution(testpackage.Class1.new(..)) && this(aClass);
+    /* Declares a new super class containing the new attribute or method. */
+    declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p><code>Checks an invariant on the class Class1 defined by the constraint
-     * <code>context Class1
-     *       inv: self[].allInstances().size().>( 0)</code></p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testOclAnyAllInstances(testpackage.Class1 source)}.</p>
      */
-    after(testpackage.Class1 aClass) : allClass1Constructors(aClass) {
-        /* Disable this constraint for subclasses of Class1. */
-        if (aClass.getClass().getCanonicalName().equals("testpackage.Class1")) {
-        if (!((new tudresden.ocl20.pivot.ocl2java.types.OclSet<testpackage.Class1>((java.util.Set<testpackage.Class1>) allInstances.get(testpackage.Class1.class.getCanonicalName()).keySet())).size() > new Integer(0))) {
-        	// TODO Auto-generated code executed when constraint is violated.
-        	throw new RuntimeException("Error: Constraint was violated.");
-        }
-        // no else.
-        }
-        // no else.
+    protected pointcut testOclAnyAllInstancesCaller(testpackage.Class1 aClass, testpackage.Class1 source):
+    	call(* testpackage.Class1.testOclAnyAllInstances(testpackage.Class1))
+    	&& target(aClass) && args(source);
+    
+    /**
+     * <p>Defines the method testOclAnyAllInstances(testpackage.Class1 source) defined by the constraint
+     * <code>context Class1
+     *       def: testOclAnyAllInstances = source[].allInstances()</code></p>
+     */
+    tudresden.ocl20.pivot.ocl2java.types.OclSet<testpackage.Class1> around(testpackage.Class1 aClass, testpackage.Class1 source): testOclAnyAllInstancesCaller(aClass, source) {
+        return (new tudresden.ocl20.pivot.ocl2java.types.OclSet<testpackage.Class1>((java.util.Set<testpackage.Class1>) allInstances.get(testpackage.Class1.class.getCanonicalName()).keySet()));
     }
 }
