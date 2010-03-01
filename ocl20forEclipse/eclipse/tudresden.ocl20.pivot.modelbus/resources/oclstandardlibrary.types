@@ -139,12 +139,12 @@
       <ownedTypeParameter name="T"/>
     </ownedOperation>
     <ownedOperation name="oclAsType">
-      <genericType xsi:type="pivot:ParameterGenericType"/>
+      <genericType xsi:type="pivot:ParameterGenericType" typeParameter="//@oclAny/@ownedOperation.4/@ownedTypeParameter.0"/>
       <ownedTypeParameter name="T"/>
       <ownedParameter name="typespec">
         <genericType xsi:type="pivot:ComplexGenericType" unboundType="//@oclType">
           <typeArgument>
-            <genericType xsi:type="pivot:ParameterGenericType"/>
+            <genericType xsi:type="pivot:ParameterGenericType" typeParameter="//@oclAny/@ownedOperation.4/@ownedTypeParameter.0"/>
           </typeArgument>
         </genericType>
       </ownedParameter>
@@ -168,8 +168,11 @@
     <ownedOperation name="oclIsUndefined" type="//@oclBoolean"/>
     <ownedOperation name="oclType">
       <genericType xsi:type="pivot:ComplexGenericType" unboundType="//@oclType">
-        <typeArgument/>
+        <typeArgument>
+          <genericType xsi:type="pivot:ParameterGenericType" typeParameter="//@oclAny/@ownedOperation.10/@ownedTypeParameter.0"/>
+        </typeArgument>
       </genericType>
+      <ownedTypeParameter name="T"/>
     </ownedOperation>
   </oclAny>
   <oclVoid name="OclVoid" superType="//@oclAny"/>
