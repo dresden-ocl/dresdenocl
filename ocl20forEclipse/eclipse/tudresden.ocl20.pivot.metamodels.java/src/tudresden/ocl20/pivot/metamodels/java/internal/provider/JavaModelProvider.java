@@ -13,7 +13,11 @@
  */
 package tudresden.ocl20.pivot.metamodels.java.internal.provider;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
@@ -44,11 +48,12 @@ public class JavaModelProvider extends AbstractModelProvider implements
 		IModelProvider {
 
 	/** The {@link Logger} for this class. */
-	private static final Logger LOGGER =
-			JavaMetaModelPlugin.getLogger(JavaModelProvider.class);
+	private static final Logger LOGGER = JavaMetaModelPlugin
+			.getLogger(JavaModelProvider.class);
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see tudresden.ocl20.pivot.modelbus.IModelProvider#getModel(java.net.URL)
 	 */
 	public IModel getModel(URL modelURL) throws ModelAccessException {
@@ -59,19 +64,12 @@ public class JavaModelProvider extends AbstractModelProvider implements
 		}
 		// no else.
 
-		/* Check if the given file is a class file. */
-		if (!modelURL.getFile().endsWith(".class")) {
-			throw new ModelAccessException(
-					JavaMetaModelMessages.JavaMetaModel_InvalidFileFormat);
-		}
-		// no else.
-
 		File modelFile;
 		String modelFilePath;
 
 		modelFilePath = modelURL.getFile();
 
-		/* Replace eventually existing white spaces in the path. */
+		/* Replace probably existing white spaces in the path. */
 		modelFilePath = modelFilePath.replaceAll("%20", " ");
 
 		modelFile = new File(modelFilePath);
@@ -80,79 +78,42 @@ public class JavaModelProvider extends AbstractModelProvider implements
 		if (!modelFile.exists()) {
 			String msg;
 
-			msg =
-					NLS.bind(JavaMetaModelMessages.JavaMetaModel_FileDoesNotExist,
-							modelURL);
+			msg = NLS.bind(
+					JavaMetaModelMessages.JavaMetaModel_FileDoesNotExist,
+					modelURL);
 
 			throw new ModelAccessException(msg);
 		}
 		// no else.
 
 		IModel result;
-
-		URLClassLoader aClassLoader;
-		Class<?> modelClass;
-
-		URL[] folderURLs;
-		List<String> possibleClassNames;
-
-		int index;
 		result = null;
 
-		folderURLs = this.computeFolderURLs(modelFile);
-
-		/* Compute all possible class names. */
-		possibleClassNames = this.computePossibleClassNames(modelURL);
-
-		index = 0;
-
-		/* Iterate through the names and try to load the class. */
-		for (String aClassName : possibleClassNames) {
-
-			if (index >= folderURLs.length) {
-				break;
-			}
-			// no else.
-
-			try {
-				/*
-				 * The parent class loader from the model bus plug-in is required to
-				 * find types from EMF Ecore like EObject.
-				 */
-				aClassLoader =
-						new URLClassLoader(new URL[] { folderURLs[index] },
-								ModelBusPlugin.class.getClassLoader());
-
-				modelClass = Class.forName(aClassName, true, aClassLoader);
-
-				/* If no exception is thrown, load the model. */
-				result = this.getModel(modelClass);
-				break;
-			}
-
-			catch (ClassNotFoundException e) {
-				/* Do nothing, continue iteration. */
-			}
-
-			catch (NoClassDefFoundError e) {
-				/* Do nothing, continue iteration. */
-			}
-
-			catch (SecurityException e) {
-				/* Do nothing, continue iteration. */
-				/* Could happen if the root package is called 'java' or 'javax'. */
-			}
-
-			index++;
+		/* Probably handle the URL as a class file. */
+		if (modelFile.toString().endsWith(".class")) {
+			Class<?> modelClass;
+			modelClass = loadClassFromUrl(modelURL, new ArrayList<URL>());
+			result = this.getModel(modelClass);
 		}
-		// end for.
+
+		/* Else handle the file as a configuration. */
+		else if (modelFile.toString().endsWith(".javamodel")) {
+			Class<?> modelClass;
+			modelClass = loadClassWithJarsFromUrl(modelFile);
+			result = this.getModel(modelClass);
+		}
+
+		else {
+			throw new ModelAccessException(
+					"Invalid kind of file. Java Meta-Model can only handle .class and .javamodel Files.");
+		}
 
 		/* Check if a Model has been loaded. */
 		if (result == null) {
 			String msg;
 
-			msg =
-					NLS.bind(JavaMetaModelMessages.JavaMetaModel_ClassNotFound, modelURL);
+			msg = NLS.bind(JavaMetaModelMessages.JavaMetaModel_ClassNotFound,
+					modelURL);
 
 			throw new ModelAccessException(msg);
 		}
@@ -173,10 +134,10 @@ public class JavaModelProvider extends AbstractModelProvider implements
 	 * </p>
 	 * 
 	 * @param modelClass
-	 *          The {@link Class} which shall be loaded as {@link IModel}.
+	 *            The {@link Class} which shall be loaded as {@link IModel}.
 	 * @return The {@link IModel} created from the given {@link Class}.
 	 * @throws ModelAccessException
-	 *           Thrown, if an error during {@link IModel} loading occurs.
+	 *             Thrown, if an error during {@link IModel} loading occurs.
 	 */
 	public IModel getModel(Class<?> modelClass) throws ModelAccessException {
 
@@ -207,21 +168,27 @@ public class JavaModelProvider extends AbstractModelProvider implements
 
 	/**
 	 * <p>
-	 * A helper method that computes the URLs of the folders which are parents of
-	 * a given {@link File}.
+	 * A helper method that computes the URLs of the folders which are parents
+	 * of a given {@link File}.
 	 * 
-	 * @param modelFile
-	 *          The File for which the folder URL shall be computed.
+	 * @param modelUrl
+	 *            The {@link URL} for which the folder URL shall be computed.
 	 * @return The computed Folder URLs.
 	 */
-	private URL[] computeFolderURLs(File modelFile) {
+	private URL[] computeFolderURLs(URL modelUrl) {
 
 		List<URL> resultList;
 		File folderFile;
 
 		resultList = new ArrayList<URL>();
 
-		folderFile = modelFile.getParentFile();
+		String filePath;
+
+		/* Replace probably existing white spaces in the path. */
+		filePath = modelUrl.getFile();
+		filePath = filePath.replaceAll("%20", " ");
+
+		folderFile = new File(filePath).getParentFile();
 
 		while (folderFile != null) {
 
@@ -253,7 +220,7 @@ public class JavaModelProvider extends AbstractModelProvider implements
 	 * </p>
 	 * 
 	 * @param aURL
-	 *          The {@link URL}
+	 *            The {@link URL}
 	 * @return The {@link List} of possible {@link Class} names.
 	 */
 	private List<String> computePossibleClassNames(URL aURL) {
@@ -290,6 +257,164 @@ public class JavaModelProvider extends AbstractModelProvider implements
 
 			result.add(aClassName);
 		}
+
+		return result;
+	}
+
+	/**
+	 * <p>
+	 * A helper method that tries to find a {@link Class} that is described by
+	 * the given URL.
+	 * </p>
+	 * 
+	 * @param modelURL
+	 *            The {@link URL} that shall be loaded as a {@link Class}.
+	 * @param jarUrls
+	 *            A {@link List} of {@link URL}s leading to additional JAR
+	 *            archives the given {@link Class} (by its {@link URL})
+	 *            references.
+	 * @return The loaded {@link Class}.
+	 * @throws ModelAccessException
+	 *             Thrown, if the given {@link File} cannot be accessed as Java
+	 *             {@link IModel}.
+	 */
+	private Class<?> loadClassFromUrl(URL modelURL, List<URL> jarUrls)
+			throws ModelAccessException {
+
+		if (!(new File(modelURL.getFile()).exists())) {
+			throw new ModelAccessException("The given java class '" + modelURL
+					+ "' does not exists.");
+		}
+		// no else.
+
+		Class<?> result;
+		result = null;
+
+		URLClassLoader aClassLoader;
+
+		URL[] folderURLs;
+		List<String> possibleClassNames;
+
+		int index;
+
+		folderURLs = this.computeFolderURLs(modelURL);
+
+		/* Compute all possible class names. */
+		possibleClassNames = this.computePossibleClassNames(modelURL);
+
+		index = 0;
+
+		/* Iterate through the names and try to load the class. */
+		for (String aClassName : possibleClassNames) {
+
+			if (index >= folderURLs.length) {
+				break;
+			}
+			// no else.
+
+			try {
+				List<URL> urls;
+				urls = new ArrayList<URL>();
+				urls.add(folderURLs[index]);
+				urls.addAll(jarUrls);
+
+				/*
+				 * The parent class loader from the model bus plug-in is
+				 * required to find types from EMF Ecore like EObject.
+				 */
+				aClassLoader = new URLClassLoader(urls.toArray(new URL[0]),
+						ModelBusPlugin.class.getClassLoader());
+
+				result = Class.forName(aClassName, true, aClassLoader);
+
+				/* If no exception is thrown, return the class. */
+				break;
+			}
+
+			catch (ClassNotFoundException e) {
+				/* Do nothing, continue iteration. */
+			}
+
+			catch (NoClassDefFoundError e) {
+				/* Do nothing, continue iteration. */
+			}
+
+			catch (SecurityException e) {
+				/* Do nothing, continue iteration. */
+				/* Could happen if the root package is called 'java' or 'javax'. */
+			}
+
+			index++;
+		}
+		// end for.
+
+		return result;
+	}
+
+	/**
+	 * <p>
+	 * A helper method that reads a given {@link File} as a java {@link IModel}
+	 * configuration.
+	 * </p>
+	 * <p>
+	 * The configuration is a very simple text file. The first line contains the
+	 * relative location of the java {@link IModel} main {@link Class}. The
+	 * following lines can contain referenced JAR archives.
+	 * </p>
+	 * 
+	 * @param modelFile
+	 *            The {@link File} containing the {@link IModel} configuration.
+	 * @return The loaded model main {@link Class}.
+	 * @throws ModelAccessException
+	 *             Thrown, if the given {@link File} cannot be accessed as Java
+	 *             {@link IModel}.
+	 */
+	private Class<?> loadClassWithJarsFromUrl(File modelFile)
+			throws ModelAccessException {
+
+		Class<?> result;
+		result = null;
+
+		try {
+			List<URL> urls;
+			urls = new ArrayList<URL>();
+
+			BufferedReader configFileReader;
+			configFileReader = new BufferedReader(new FileReader(modelFile));
+
+			/* Read the expected code from file. */
+			while (configFileReader.ready()) {
+
+				String relativeName;
+				relativeName = configFileReader.readLine();
+
+				URL aURL;
+				aURL = new URL("file:" + modelFile.getParent() + "/"
+						+ relativeName);
+				urls.add(aURL);
+			}
+			// end while.
+
+			if (urls.size() == 0) {
+				throw new ModelAccessException(
+						"Invalid configuration: The Java Model Configuration File must contain at least one URL of a class file.");
+			}
+			// no else.
+
+			result = this.loadClassFromUrl(urls.remove(0), urls);
+		}
+		// end try.
+
+		catch (FileNotFoundException e) {
+			throw new ModelAccessException("The given file '" + modelFile
+					+ "' was not found.");
+		}
+
+		catch (IOException e) {
+			throw new ModelAccessException("The given file '" + modelFile
+					+ "' could not be opened.");
+		}
+		// end catch.
 
 		return result;
 	}

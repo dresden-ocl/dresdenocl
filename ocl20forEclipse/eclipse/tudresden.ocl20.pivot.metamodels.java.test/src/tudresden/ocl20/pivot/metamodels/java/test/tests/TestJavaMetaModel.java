@@ -30,15 +30,15 @@ import tudresden.ocl20.pivot.metamodels.test.MetaModelTestSuite;
  * 
  * @generated NOT
  */
-@Suite.SuiteClasses(value = { MetaModelTestSuite.class, TestInnerTypes.class })
+@Suite.SuiteClasses(value = { MetaModelTestSuite.class, TestInnerTypes.class,
+		TestJarArchiveReference.class })
 public class TestJavaMetaModel extends MetaModelTestSuite {
 
 	/** The id of the {@link IMetamodel} which shall be tested. */
 	private static final String META_MODEL_ID = JavaMetaModelPlugin.ID;
 
 	/** The path of the model which shall be tested. */
-	private static final String TEST_MODEL_PATH =
-			"bin/tudresden/ocl20/pivot/metamodels/java/test/model/ModelMainClass.class";
+	private static final String TEST_MODEL_PATH = "bin/tudresden/ocl20/pivot/metamodels/java/test/model/ModelMainClass.class";
 
 	/**
 	 * <p>

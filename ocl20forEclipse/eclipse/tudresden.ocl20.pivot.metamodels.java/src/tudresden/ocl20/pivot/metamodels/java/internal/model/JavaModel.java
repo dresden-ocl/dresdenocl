@@ -55,8 +55,14 @@ public class JavaModel extends AbstractModel implements IModel {
 	 */
 	public JavaModel(Class<?> aClass) {
 
-		super(aClass.getCanonicalName(), ModelBusPlugin.getMetamodelRegistry()
-				.getMetamodel(JavaMetaModelPlugin.ID));
+		super((aClass == null) ? "" : aClass.getCanonicalName(), ModelBusPlugin
+				.getMetamodelRegistry().getMetamodel(JavaMetaModelPlugin.ID));
+
+		if (aClass == null) {
+			throw new IllegalArgumentException(
+					"The parameter 'aClass' must not be null.");
+		}
+		// no else.
 
 		/* Initialize. */
 		this.myModelClass = aClass;
@@ -125,8 +131,8 @@ public class JavaModel extends AbstractModel implements IModel {
 	 * </p>
 	 * 
 	 * @throws ModelAccessException
-	 *           Thrown if an error occurs when creating the adapter for the top
-	 *           {@link Namespace}.
+	 *             Thrown if an error occurs when creating the adapter for the
+	 *             top {@link Namespace}.
 	 * 
 	 * @see tudresden.ocl20.pivot.modelbus.model.IModel#getRootNamespace()
 	 * 
@@ -163,7 +169,8 @@ public class JavaModel extends AbstractModel implements IModel {
 
 			/* Navigate to the root name space. */
 			while (this.myRootNamespace.getNestingNamespace() != null) {
-				this.myRootNamespace = this.myRootNamespace.getNestingNamespace();
+				this.myRootNamespace = this.myRootNamespace
+						.getNestingNamespace();
 			}
 
 		}

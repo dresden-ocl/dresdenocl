@@ -19,6 +19,9 @@ Release 2.1 (not scheduled yet)
 * A bug in the UML2 Meta-Model was fixed.
   - If the top-level package is a UML model or profile directory, 
     these packages are now adapted correctly.
+    
+* The Java Meta-Model has been modified.
+  - Java models can now refer to JAR archives if explicitly defined in a .javamodel File.
 
 * Some bugs in the basis model instance elements were fixed.
   - Illegal arguments are now handled appropriately.

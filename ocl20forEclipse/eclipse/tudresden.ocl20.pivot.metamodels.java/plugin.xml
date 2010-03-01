@@ -7,7 +7,7 @@
             icon="icons/java.gif"
             id="tudresden.ocl20.pivot.metamodels.java"
             modelProvider="tudresden.ocl20.pivot.metamodels.java.internal.provider.JavaModelProvider"
-            name="Java Reflective Meta-Model">
+            name="Java Reflective Meta-Model (.class or .javamodel file)">
       </metamodel>
    </extension>
 </plugin>
