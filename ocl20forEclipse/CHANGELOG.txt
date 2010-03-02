@@ -44,6 +44,10 @@ Release 2.1 (not scheduled yet)
   - The copy mechanism for @pre values works now correctly when invoking
     empty constructors.
   
+* Some bugs in the OCL2 Parser were fixed.
+  - The special operations OclAny.oclAsType(), oclIsKindOf(), ... can now contain Property- 
+    and OperationCallExpressions instead of simple TypeLiteralExpressions.
+    
 * Complete rewrite of the OCL Standard Library; some bugs were fixed.
   - invalid and null values are now created by every library method and no exceptions are thrown
   - consistent way of handling null(undefined) and invalid
