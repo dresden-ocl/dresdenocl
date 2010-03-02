@@ -16,19 +16,45 @@
     You should have received a copy of the GNU Lesser General Public License
     along with the OCL parser.  If not, see <http://www.gnu.org/licenses/>.
 .
-*/
-
+ */
 
 package tudresden.ocl20.pivot.ocl2parser.parser.exceptions;
 
+/**
+ * <p>
+ * {@link SemanticException}s indicate semantic Parsing errors.
+ * </p>
+ * 
+ * @author Claas Wilke
+ */
 public class SemanticException extends Exception {
-	private String message;
-	
+
+	/** Generated ID for serialization. */
+	private static final long serialVersionUID = -2202905950423943922L;
+
+	/**
+	 * <p>
+	 * Creates a new {@link SemanticException}.
+	 * </p>
+	 * 
+	 * @param message
+	 *            The message of the {@link SemanticException}.
+	 */
 	public SemanticException(String message) {
-		this.message = message;
+		super(message);
 	}
-	
-	public String getMessage() {
-		return message;
+
+	/**
+	 * <p>
+	 * Creates a new {@link SemanticException}.
+	 * </p>
+	 * 
+	 * @param message
+	 *            The message of the {@link SemanticException}.
+	 * @param cause
+	 *            The cause of the {@link SemanticException}.
+	 */
+	public SemanticException(String message, Throwable cause) {
+		super(message, cause);
 	}
 }

@@ -16,15 +16,13 @@
     You should have received a copy of the GNU Lesser General Public License
     along with the OCL parser.  If not, see <http://www.gnu.org/licenses/>.
 .
-*/
-
+ */
 
 package tudresden.ocl20.pivot.ocl2parser.parser;
 
 import java.io.IOException;
 import java.io.PushbackReader;
 import java.io.Reader;
-import java.util.List;
 
 import tudresden.ocl20.pivot.modelbus.model.IModel;
 import tudresden.ocl20.pivot.ocl2parser.gen.ocl2as.OclFileAS;
@@ -44,34 +42,33 @@ import tudresden.ocl20.pivot.ocl2parser.parser.exceptions.BuildingASTException;
 import tudresden.ocl20.pivot.ocl2parser.parser.exceptions.LexException;
 import tudresden.ocl20.pivot.ocl2parser.parser.exceptions.ParsingException;
 import tudresden.ocl20.pivot.ocl2parser.parser.exceptions.SemanticException;
-import tudresden.ocl20.pivot.pivotmodel.Namespace;
 
 public class OCL2Parser {
 	protected IModel model;
 	protected Reader oclSource;
-	
-	
+
 	public OCL2Parser(IModel model, Reader oclSource) {
 		this.model = model;
-		this.oclSource = oclSource;	
+		this.oclSource = oclSource;
 	}
-	
-	public void parse() throws ParsingException, LexException, IOException, BuildingASTException, SemanticException {
+
+	public void parse() throws ParsingException, LexException, IOException,
+			BuildingASTException, SemanticException {
 		PushbackReader pushbackReader = new PushbackReader(oclSource, 1000);
 		Lexer lexer = new Lexer(pushbackReader);
 		Parser parser = new Parser(lexer);
-		
-		
+
 		Start startNode;
 		try {
 			startNode = parser.parse();
 		} catch (LexerException e) {
 			throw new LexException(e.getMessage());
-		} catch(ParserException ex) {
-			throw new ParsingException(ex.getMessage(), ex.getToken().getText(), ex.getToken().getLine(), ex.getToken().getPos());
+		} catch (ParserException ex) {
+			throw new ParsingException(ex.getMessage(),
+					ex.getToken().getText(), ex.getToken().getLine(), ex
+							.getToken().getPos());
 		}
-		
-		
+
 		Cs2AsOcl2 transformer = new Cs2AsOcl2();
 		Heritage hrtg = new Heritage();
 		OclFileAS oclFile;
@@ -86,15 +83,16 @@ public class OCL2Parser {
 		} catch (AtPreException e) {
 			throw new SemanticException(e.getMessage());
 		}
-		
+
 		Environment env = new Environment(model);
+
+		/* Try to compute the Abstract Syntax Model. */
 		try {
-			List<Namespace> namespaceList = oclFile.computeASM(env);
-		} catch (BuildingASMException e) {
-			e.printStackTrace();
-			SemanticException ex = new SemanticException(e.getMessage());
-			throw ex;
+			oclFile.computeASM(env);
 		}
-		
+
+		catch (BuildingASMException e) {
+			throw new SemanticException(e.getMessage(), e);
+		}
 	}
 }

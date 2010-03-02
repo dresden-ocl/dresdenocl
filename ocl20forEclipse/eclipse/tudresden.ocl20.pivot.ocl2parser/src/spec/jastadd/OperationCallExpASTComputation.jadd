@@ -349,13 +349,72 @@ public aspect OperationCallExpASMComputation {
 		innerEnv.setSpecialOclOperation(true);
 		
 		OclExpression[] arguments = getArgumentArray(innerEnv);
-		
-		if (arguments.length != 1) throw new BuildingASMException("The special" +
-				" ocl operation has exactly one parameter, but more then one were found.", token);
-		
-		if (!(arguments[0] instanceof TypeLiteralExp)) throw new BuildingASMException("The parameter" +
-				" denotes not a type for a special ocl expression.", token);
-		
+
+		if (arguments.length != 1) {
+			throw new BuildingASMException(
+					"The special"
+							+ " ocl operation has exactly one parameter, but more then one were found.",
+					token);
+		}
+		// no else.
+
+		OclExpression argumentExpression;
+		argumentExpression = arguments[0];
+
+		/*
+		 * Check if the argument expression is of the right type (OclType).
+		 * First check generic types to avoid IllegalArgumentExceptions if
+		 * getType() is null.
+		 */
+		boolean valid;
+
+		/* Valid Generic Operation Call? */
+		valid = (argumentExpression instanceof OperationCallExp
+				&& ((OperationCallExp) argumentExpression)
+						.getReferredOperation().getGenericType() != null && ((OperationCallExp) argumentExpression)
+				.getReferredOperation().getGenericType().isConformant(
+						env.getOclLibrary().getOclType()));
+
+		/* Valid Generic Property Call? */
+		if (!valid) {
+			valid = (argumentExpression instanceof PropertyCallExp
+					&& ((PropertyCallExp) argumentExpression)
+							.getReferredProperty().getGenericType() != null && ((PropertyCallExp) argumentExpression)
+					.getReferredProperty().getGenericType().isConformant(
+							env.getOclLibrary().getOclType()));
+		}
+		// no else.
+
+		/* Valid type? */
+		if (!valid) {
+			valid = (argumentExpression.getType() != null || argumentExpression
+					.getType().conformsTo(env.getOclLibrary().getOclType()));
+		}
+
+		/* Valid Operation Call? */
+		if (!valid) {
+			valid = (argumentExpression instanceof OperationCallExp
+					&& ((OperationCallExp) argumentExpression)
+							.getReferredOperation().getType() != null && ((OperationCallExp) argumentExpression)
+					.getReferredOperation().getType().conformsTo(
+							env.getOclLibrary().getOclType()));
+		}
+
+		/* Valid Property Call? */
+		if (!valid) {
+			valid = (argumentExpression instanceof PropertyCallExp
+					&& ((PropertyCallExp) argumentExpression)
+							.getReferredProperty().getType() != null && ((PropertyCallExp) argumentExpression)
+					.getReferredProperty().getType().conformsTo(
+							env.getOclLibrary().getOclType()));
+		}
+
+		if (!valid) {
+			throw new BuildingASMException("A special OCL operation must have"
+					+ " exactly one expression resulting in a Type.", token);
+		}
+		// no else.
+
 		return arguments;
 	}
 	
