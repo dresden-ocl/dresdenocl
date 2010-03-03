@@ -43,6 +43,8 @@ Release 2.1 (not scheduled yet)
   - Illegal arguments are now handled appropriately.
   - The copy mechanism for @pre values works now correctly when invoking
     empty constructors.
+  - The return type of operations and properties is now adapted correctly if the type of the operation
+    or property is a super type of the result's type.
   
 * Some bugs in the OCL2 Parser were fixed.
   - The special operations OclAny.oclAsType(), oclIsKindOf(), ... can now contain Property- 
