@@ -21,11 +21,13 @@ package tudresden.ocl20.pivot.ocl22java.test.aspectj.standardlibrary;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
 import testpackage.Class1;
+import tudresden.ocl20.pivot.ocl2java.types.OclSequence;
 
 /**
  * <p>
@@ -50,6 +52,52 @@ public class TestString {
 
 		assertEquals("s", class1.testStringAt("some", 1));
 		assertEquals("e", class1.testStringAt("some", 4));
+	}
+
+	/**
+	 * <p>
+	 * Tests the generated code for the method <code>String.characters()</code>.
+	 * </p>
+	 */
+	@Test
+	public void testCharacters01() {
+
+		Class1 class1;
+		class1 = new Class1();
+
+		OclSequence<String> expectedResult;
+		expectedResult = new OclSequence<String>();
+		expectedResult.add("s");
+		expectedResult.add("o");
+		expectedResult.add("m");
+		expectedResult.add("e");
+
+		OclSequence<String> result;
+		result = class1.testStringCharacters("some");
+		
+		assertNotNull(result);
+		assertEquals(expectedResult, result);
+	}
+
+	/**
+	 * <p>
+	 * Tests the generated code for the method <code>String.characters()</code>.
+	 * </p>
+	 */
+	@Test
+	public void testCharacters02() {
+
+		Class1 class1;
+		class1 = new Class1();
+
+		OclSequence<String> expectedResult;
+		expectedResult = new OclSequence<String>();
+
+		OclSequence<String> result;
+		result = class1.testStringCharacters("");
+		
+		assertNotNull(result);
+		assertEquals(expectedResult, result);
 	}
 
 	/**

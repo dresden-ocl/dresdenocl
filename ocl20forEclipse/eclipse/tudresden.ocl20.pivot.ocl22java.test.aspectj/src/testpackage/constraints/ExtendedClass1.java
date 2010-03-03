@@ -57,6 +57,15 @@ public class ExtendedClass1 extends Object {
      *A method signature implemented by an aspect.
      *</p>
      */
+    public Class testOclAnyOclType(Object source) {
+        return null;
+    }
+
+    /**
+     *<p>
+     *A method signature implemented by an aspect.
+     *</p>
+     */
     public tudresden.ocl20.pivot.ocl2java.types.OclOrderedSet<Object> testOrderedSetReverse(tudresden.ocl20.pivot.ocl2java.types.OclOrderedSet<Object> source) {
         return null;
     }
@@ -94,6 +103,15 @@ public class ExtendedClass1 extends Object {
      *</p>
      */
     public String testStringAt(String source, Integer arg01) {
+        return null;
+    }
+
+    /**
+     *<p>
+     *A method signature implemented by an aspect.
+     *</p>
+     */
+    public tudresden.ocl20.pivot.ocl2java.types.OclSequence<String> testStringCharacters(String source) {
         return null;
     }
 

@@ -1347,6 +1347,11 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 							.getTemplate("oclIsKindOfOperation");
 				}
 
+				else if (operationName.equals("oclType")) {
+					template = this.myTemplateEngine
+							.getTemplate("oclTypeOperation");
+				}
+
 				else if (operationName.equals("atPre")) {
 					/* Store the value in a variable and return its name. */
 					String atPreVar;
@@ -1411,6 +1416,23 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 					else if (operationName.equals("at")) {
 						template = this.myTemplateEngine
 								.getTemplate("atOnStringOperation");
+					}
+
+					else if (operationName.equals("characters")) {
+						String resultVar;
+						resultVar = this.myCodeTransEnv.getNewResultVarName();
+
+						template = this.myTemplateEngine
+								.getTemplate("charactersOperation");
+
+						template.setAttribute("sourceExp", sourceCode
+								.getResultExp());
+						template.setAttribute("resultVar", resultVar);
+						template.setAttribute("elementName", this.myCodeTransEnv
+								.getNewIteratorVarName());
+
+						result.addCode(template.toString());
+						resultExp = resultVar;
 					}
 
 					else if (operationName.equals("concat")) {

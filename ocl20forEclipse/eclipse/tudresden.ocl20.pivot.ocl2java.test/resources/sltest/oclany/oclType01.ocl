@@ -1,7 +1,7 @@
 package testpackage
 
 context Class1
-def: testOclAnyOclAsType(source: OclAny): Type =
-source.oclAsType()
+def: testOclAnyOclType(source: OclAny): OclType =
+source.oclType()
 
 endpackage

@@ -19,6 +19,7 @@ with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
 
 package tudresden.ocl20.pivot.ocl22java.test.aspectj.standardlibrary;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
@@ -50,5 +51,20 @@ public class TestOclAny {
 		assertNotNull(class1.testOclAnyAllInstances(class1));
 		assertTrue(class1.testOclAnyAllInstances(class1).size() > 0);
 		assertTrue(class1.testOclAnyAllInstances(class1).contains(class1));
+	}
+
+	/**
+	 * <p>
+	 * Tests the generated code for the method <code>OclAny.oclType()</code> .
+	 * </p>
+	 */
+	@Test
+	public void testOclType01() {
+
+		Class1 class1;
+		class1 = new Class1();
+
+		assertNotNull(class1.testOclAnyOclType(class1));
+		assertEquals(class1.getClass(), class1.testOclAnyOclType(class1));
 	}
 }

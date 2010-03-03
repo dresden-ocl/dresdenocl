@@ -95,8 +95,7 @@ public class GenerateAspectJCode extends AbstractSLTest {
 		constraints.add(new String[] { "integer", "toString01" });
 
 		constraints.add(new String[] { "oclany", "allInstances01" });
-		/* FIXME Remove comment when bug in parser is fixed. */
-		// constraints.add(new String[] { "oclany", "oclType01" });
+		constraints.add(new String[] { "oclany", "oclType01" });
 
 		constraints.add(new String[] { "orderedset", "reverse01" });
 
@@ -107,8 +106,7 @@ public class GenerateAspectJCode extends AbstractSLTest {
 		constraints.add(new String[] { "sequence", "reverse01" });
 
 		constraints.add(new String[] { "string", "at01" });
-		/* FIXME Remove comment when bug in parser is fixed. */
-		// constraints.add(new String[] { "string", "characters01" });
+		constraints.add(new String[] { "string", "characters01" });
 		constraints.add(new String[] { "string", "equalsIgnoreCase01" });
 		constraints.add(new String[] { "string", "indexOf01" });
 		constraints.add(new String[] { "string", "plus01" });

@@ -1,1 +1,12 @@
-TODO
+tudresden.ocl20.pivot.ocl2java.types.OclSequence<String> result1;
+result1 = new tudresden.ocl20.pivot.ocl2java.types.OclSequence<String>();
+
+/* Compute the result of a caharacters operation. */
+for (String anElement1 : source.split("")) {
+    result1.add(anElement1);
+}
+
+/* Remove the first element ''. */
+result1.remove(result1.first());
+
+result1

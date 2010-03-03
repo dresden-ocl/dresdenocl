@@ -64,9 +64,19 @@ Character.toString($sourceExp$.charAt($argsExp$ - 1))
 >>
 
 
-// --- Concat Operation ---
-charactersOperation(sourceExp, argsExp) ::= <<
-$sourceExp$.concat($argsExp$)
+// --- Characters Operation ---
+charactersOperation(sourceExp, resultVar, elementName) ::= <<
+$sequenceType()$<$stringType()$> $resultVar$;
+$resultVar$ = new $sequenceType()$<$stringType()$>();
+
+/* Compute the result of a caharacters operation. */
+for ($stringType()$ $elementName$ : $sourceExp$.split("")) {
+    $resultVar$.add($elementName$);
+}
+
+/* Remove the first element ''. */
+$resultVar$.remove($resultVar$.first());
+
 >>
 
 

@@ -12,18 +12,18 @@ public privileged aspect DefAspect7 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testRealToString(Float source)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testOrderedSetReverse(tudresden.ocl20.pivot.ocl2java.types.OclOrderedSet<Object> source)}.</p>
      */
-    protected pointcut testRealToStringCaller(testpackage.Class1 aClass, Float source):
-    	call(* testpackage.Class1.testRealToString(Float))
+    protected pointcut testOrderedSetReverseCaller(testpackage.Class1 aClass, tudresden.ocl20.pivot.ocl2java.types.OclOrderedSet<Object> source):
+    	call(* testpackage.Class1.testOrderedSetReverse(tudresden.ocl20.pivot.ocl2java.types.OclOrderedSet<Object>))
     	&& target(aClass) && args(source);
     
     /**
-     * <p>Defines the method testRealToString(Float source) defined by the constraint
+     * <p>Defines the method testOrderedSetReverse(tudresden.ocl20.pivot.ocl2java.types.OclOrderedSet<Object> source) defined by the constraint
      * <code>context Class1
-     *       def: testRealToString = source[].toString()</code></p>
+     *       def: testOrderedSetReverse = source[].reverse()</code></p>
      */
-    String around(testpackage.Class1 aClass, Float source): testRealToStringCaller(aClass, source) {
-        return source.toString();
+    tudresden.ocl20.pivot.ocl2java.types.OclOrderedSet<Object> around(testpackage.Class1 aClass, tudresden.ocl20.pivot.ocl2java.types.OclOrderedSet<Object> source): testOrderedSetReverseCaller(aClass, source) {
+        return source.reverse();
     }
 }
