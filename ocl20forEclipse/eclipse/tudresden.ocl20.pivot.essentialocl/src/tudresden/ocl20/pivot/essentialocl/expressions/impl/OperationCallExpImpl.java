@@ -55,10 +55,12 @@ import tudresden.ocl20.pivot.essentialocl.expressions.WellformednessException;
 import tudresden.ocl20.pivot.essentialocl.types.CollectionType;
 import tudresden.ocl20.pivot.essentialocl.types.TupleType;
 import tudresden.ocl20.pivot.essentialocl.types.TypeType;
+import tudresden.ocl20.pivot.pivotmodel.ComplexGenericType;
 import tudresden.ocl20.pivot.pivotmodel.Feature;
 import tudresden.ocl20.pivot.pivotmodel.Operation;
 import tudresden.ocl20.pivot.pivotmodel.Parameter;
 import tudresden.ocl20.pivot.pivotmodel.PrimitiveType;
+import tudresden.ocl20.pivot.pivotmodel.PrimitiveTypeKind;
 import tudresden.ocl20.pivot.pivotmodel.Property;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 import tudresden.ocl20.pivot.pivotmodel.TypeParameter;
@@ -212,7 +214,18 @@ public class OperationCallExpImpl extends FeatureCallExpImpl implements
 
 			}
 
-			// map the operation's type to a corresponding OCL type
+			/* Bind 'characters' operation. */
+			else if (getSourceType() instanceof PrimitiveType
+					&& ((PrimitiveType) getSourceType()).getKind() == PrimitiveTypeKind.STRING) {
+
+				if (operationName.equals("characters")) { //$NON-NLS-1$
+					referredOperation = bindCharactersOperation(referredOperation);
+				}
+				// no else.
+			}
+			// no else.
+
+			/* Map the operation's type to a corresponding OCL type. */
 			type = getOclType(referredOperation.getType());
 		}
 
@@ -221,6 +234,48 @@ public class OperationCallExpImpl extends FeatureCallExpImpl implements
 		}
 
 		return type;
+	}
+
+	/**
+	 * FIXME Claas: Isn't there a general solution to solve the binding of
+	 * generic operations?
+	 * 
+	 * <p>
+	 * Helper method to bind the <code>String.characters()</code>
+	 * {@link Operation} .
+	 * </p>
+	 * 
+	 * @param The
+	 *            <code>String.characters()</code> {@link Operation} that shall
+	 *            be bound to this {@link OperationCallExp}.
+	 */
+	private Operation bindCharactersOperation(Operation charactersOperation) {
+
+		/* Probably log entry. */
+		if (logger.isDebugEnabled()) {
+			logger
+					.debug("bindCharactersOperation(charactersOperation=" + charactersOperation //$NON-NLS-1$
+							+ ") - enter"); //$NON-NLS-1$
+		}
+		// no else.
+
+		PrimitiveType sourceType;
+
+		/* It is safe to cast here since we checked in evaluateType. */
+		sourceType = (PrimitiveType) getSourceType();
+
+		/* Bind the operation. */
+		charactersOperation = charactersOperation.bindTypeParameter(
+				new ArrayList<TypeParameter>(((ComplexGenericType)charactersOperation.getGenericType()).getUnboundType().getOwnedTypeParameter()), Arrays.asList(sourceType));
+
+		/* Probably log exit. */
+		if (logger.isDebugEnabled()) {
+			logger.debug("bindCharactersOperation() - exit - return value=" //$NON-NLS-1$
+					+ charactersOperation);
+		}
+		// no else.
+
+		return charactersOperation;
 	}
 
 	/**
