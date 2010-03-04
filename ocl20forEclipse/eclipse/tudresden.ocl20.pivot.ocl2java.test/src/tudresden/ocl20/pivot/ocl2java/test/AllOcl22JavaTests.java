@@ -25,6 +25,7 @@ import org.junit.runners.Suite;
 import tudresden.ocl20.pivot.ocl2java.Ocl22JavaPlugin;
 import tudresden.ocl20.pivot.ocl2java.test.tests.FragmentTest;
 import tudresden.ocl20.pivot.ocl2java.test.tests.InstrumentationTest;
+import tudresden.ocl20.pivot.ocl2java.test.tests.constraintkinds.AllConstraintsKindTests;
 import tudresden.ocl20.pivot.ocl2java.test.tests.standardlibrary.AllStandardLibraryTests;
 
 /**
@@ -37,8 +38,9 @@ import tudresden.ocl20.pivot.ocl2java.test.tests.standardlibrary.AllStandardLibr
  * 
  */
 @RunWith(Suite.class)
-@Suite.SuiteClasses( { AllStandardLibraryTests.class,
-		InstrumentationTest.class, FragmentTest.class })
+@Suite.SuiteClasses( { AllConstraintsKindTests.class,
+		AllStandardLibraryTests.class, InstrumentationTest.class,
+		FragmentTest.class })
 public class AllOcl22JavaTests {
 	/*
 	 * This class remains completely empty, being used only as a holder for the

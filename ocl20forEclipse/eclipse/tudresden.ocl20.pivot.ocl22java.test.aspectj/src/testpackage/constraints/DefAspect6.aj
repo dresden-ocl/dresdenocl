@@ -12,18 +12,18 @@ public privileged aspect DefAspect6 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testOclAnyOclType(Object source)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testIntegerToString(Integer source)}.</p>
      */
-    protected pointcut testOclAnyOclTypeCaller(testpackage.Class1 aClass, Object source):
-    	call(* testpackage.Class1.testOclAnyOclType(Object))
+    protected pointcut testIntegerToStringCaller(testpackage.Class1 aClass, Integer source):
+    	call(* testpackage.Class1.testIntegerToString(Integer))
     	&& target(aClass) && args(source);
     
     /**
-     * <p>Defines the method testOclAnyOclType(Object source) defined by the constraint
+     * <p>Defines the method testIntegerToString(Integer source) defined by the constraint
      * <code>context Class1
-     *       def: testOclAnyOclType = source[].oclType()</code></p>
+     *       def: testIntegerToString = source[].toString()</code></p>
      */
-    Class around(testpackage.Class1 aClass, Object source): testOclAnyOclTypeCaller(aClass, source) {
-        return source.getClass();
+    String around(testpackage.Class1 aClass, Integer source): testIntegerToStringCaller(aClass, source) {
+        return source.toString();
     }
 }

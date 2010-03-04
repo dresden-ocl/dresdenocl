@@ -17,7 +17,10 @@ You should have received a copy of the GNU Lesser General Public License along
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package tudresden.ocl20.pivot.ocl2java.test.tests.standardlibrary;
+package tudresden.ocl20.pivot.ocl2java.test.tests;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
@@ -26,17 +29,16 @@ import org.junit.Test;
 import tudresden.ocl20.pivot.facade.OCL2ParsingException;
 import tudresden.ocl20.pivot.modelbus.ModelAccessException;
 import tudresden.ocl20.pivot.ocl2java.exception.Ocl22CodeException;
-import tudresden.ocl20.pivot.ocl2java.test.tests.AbstractDiffTest;
 
 /**
  * <p>
- * Contains some test cases to test the code generation for standard library
- * operations.
+ * Contains some test cases to create the aspectJ code for the project
+ * <code>tudresden.ocl20.pivot.ocl22java.test.aspectj</code>.
  * </p>
  * 
  * @author Claas Wilke
  */
-public class TestCollection extends AbstractDiffTest {
+public class GenerateAspectJCode extends AbstractDiffTest {
 
 	/**
 	 * <p>
@@ -79,26 +81,45 @@ public class TestCollection extends AbstractDiffTest {
 	 * @throws Ocl22CodeException
 	 */
 	@Test
-	public void testMax01() throws IllegalArgumentException,
+	public void generateCode() throws IllegalArgumentException,
 			OCL2ParsingException, ModelAccessException, Ocl22CodeException {
-	
-		this.compareFragmentCodeGeneration("sltest/collection", "max01");
-	}
 
-	/**
-	 * <p>
-	 * Tests the instrumentation of the constraint.
-	 * </p>
-	 * 
-	 * @throws ModelAccessException
-	 * @throws OCL2ParsingException
-	 * @throws IllegalArgumentException
-	 * @throws Ocl22CodeException
-	 */
-	@Test
-	public void testMin01() throws IllegalArgumentException,
-			OCL2ParsingException, ModelAccessException, Ocl22CodeException {
-	
-		this.compareFragmentCodeGeneration("sltest/collection", "min01");
+		List<String[]> constraints;
+		constraints = new ArrayList<String[]>();
+
+		constraints.add(new String[] { "constraintkindtest/body", "body01" });
+
+		constraints.add(new String[] { "constraintkindtest/def", "def01" });
+		constraints.add(new String[] { "constraintkindtest/def", "def02" });
+
+		constraints.add(new String[] { "sltest/boolean", "toString01" });
+
+		constraints.add(new String[] { "sltest/collection", "min01" });
+		constraints.add(new String[] { "sltest/collection", "max01" });
+
+		constraints.add(new String[] { "sltest/integer", "toString01" });
+
+		constraints.add(new String[] { "sltest/oclany", "allInstances01" });
+		constraints.add(new String[] { "sltest/oclany", "oclType01" });
+
+		constraints.add(new String[] { "sltest/orderedset", "reverse01" });
+
+		constraints.add(new String[] { "sltest/real", "toString01" });
+
+		constraints.add(new String[] { "sltest/set", "flatten01" });
+
+		constraints.add(new String[] { "sltest/sequence", "reverse01" });
+
+		constraints.add(new String[] { "sltest/string", "at01" });
+		constraints.add(new String[] { "sltest/string", "characters01" });
+		constraints.add(new String[] { "sltest/string", "equalsIgnoreCase01" });
+		constraints.add(new String[] { "sltest/string", "indexOf01" });
+		constraints.add(new String[] { "sltest/string", "plus01" });
+		constraints.add(new String[] { "sltest/string", "toBoolean01" });
+		constraints.add(new String[] { "sltest/string", "toUpperCase01" });
+		constraints.add(new String[] { "sltest/string", "toLowerCase01" });
+
+		this.createInstrumentationCode(
+				"tudresden.ocl20.pivot.ocl22java.test.aspectj", constraints);
 	}
 }

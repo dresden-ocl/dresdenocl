@@ -28,4 +28,18 @@ package testpackage;
  */
 public class Class1 {
 
+	/**
+	 * <p>
+	 * Used to test a body constraint.
+	 * </p>
+	 * 
+	 * @return What defined in the generated AspectJ aspect.
+	 * @throws RuntimeException
+	 *             Thrown, if the AspectJ aspect was not instrumented correctly.
+	 */
+	public Integer bodyOperation01() {
+		/* Implemented by AspectJ file. */
+		throw new RuntimeException(
+				"AspectJ body expression was not instrumented correctly.");
+	}
 }

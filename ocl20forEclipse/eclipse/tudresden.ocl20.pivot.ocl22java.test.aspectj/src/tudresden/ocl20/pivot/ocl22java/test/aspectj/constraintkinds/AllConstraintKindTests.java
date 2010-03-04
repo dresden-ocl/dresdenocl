@@ -17,27 +17,23 @@ You should have received a copy of the GNU Lesser General Public License along
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package tudresden.ocl20.pivot.ocl22java.test.aspectj;
+package tudresden.ocl20.pivot.ocl22java.test.aspectj.constraintkinds;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
-import tudresden.ocl20.pivot.ocl22java.test.aspectj.constraintkinds.AllConstraintKindTests;
-import tudresden.ocl20.pivot.ocl22java.test.aspectj.standardlibrary.AllStandardLibraryTests;
-
 /**
  * <p>
- * Provides a jUnit Test Suite containing all standard library tests of the OCL
- * 2 Java Code transformer ({@link Ocl22JavaPlugin}).
+ * Provides a jUnit Test Suite containing test cases to test the correct
+ * execution of AspectJ files generated for the different kinds of OCL
+ * constraints (body, init, def, derive, pre, post, inv).
  * </p>
  * 
  * @author Claas Wilke
- * 
  */
 @RunWith(Suite.class)
-@Suite.SuiteClasses( { AllConstraintKindTests.class,
-		AllStandardLibraryTests.class })
-public class AllAspectJTests {
+@Suite.SuiteClasses( { TestBody.class, TestDef.class })
+public class AllConstraintKindTests {
 	/*
 	 * This class remains completely empty, being used only as a holder for the
 	 * above annotations.

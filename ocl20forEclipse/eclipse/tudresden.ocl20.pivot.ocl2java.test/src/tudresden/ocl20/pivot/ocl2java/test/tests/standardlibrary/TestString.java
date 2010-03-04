@@ -26,6 +26,7 @@ import org.junit.Test;
 import tudresden.ocl20.pivot.facade.OCL2ParsingException;
 import tudresden.ocl20.pivot.modelbus.ModelAccessException;
 import tudresden.ocl20.pivot.ocl2java.exception.Ocl22CodeException;
+import tudresden.ocl20.pivot.ocl2java.test.tests.AbstractDiffTest;
 
 /**
  * <p>
@@ -35,7 +36,7 @@ import tudresden.ocl20.pivot.ocl2java.exception.Ocl22CodeException;
  * 
  * @author Claas Wilke
  */
-public class TestString extends AbstractSLTest {
+public class TestString extends AbstractDiffTest {
 
 	/**
 	 * <p>
@@ -49,7 +50,7 @@ public class TestString extends AbstractSLTest {
 	public static void setUp() throws IllegalArgumentException,
 			ModelAccessException {
 
-		AbstractSLTest.setUp();
+		AbstractDiffTest.setUp();
 	}
 
 	/**
@@ -64,7 +65,7 @@ public class TestString extends AbstractSLTest {
 	public static void tearDown() throws IllegalArgumentException,
 			ModelAccessException {
 
-		AbstractSLTest.tearDown();
+		AbstractDiffTest.tearDown();
 	}
 
 	/**
@@ -81,7 +82,7 @@ public class TestString extends AbstractSLTest {
 	public void testAt01() throws IllegalArgumentException, OCL2ParsingException,
 			ModelAccessException, Ocl22CodeException {
 
-		this.compareFragmentCodeGeneration("string", "at01");
+		this.compareFragmentCodeGeneration("sltest/string", "at01");
 	}
 
 	/**
@@ -98,7 +99,7 @@ public class TestString extends AbstractSLTest {
 	public void testCharacters01() throws IllegalArgumentException,
 			OCL2ParsingException, ModelAccessException, Ocl22CodeException {
 
-		this.compareFragmentCodeGeneration("string", "characters01");
+		this.compareFragmentCodeGeneration("sltest/string", "characters01");
 	}
 
 	/**
@@ -115,7 +116,7 @@ public class TestString extends AbstractSLTest {
 	public void testEqualsIgnoreCase01() throws IllegalArgumentException,
 			OCL2ParsingException, ModelAccessException, Ocl22CodeException {
 
-		this.compareFragmentCodeGeneration("string", "equalsIgnoreCase01");
+		this.compareFragmentCodeGeneration("sltest/string", "equalsIgnoreCase01");
 	}
 
 	/**
@@ -132,7 +133,7 @@ public class TestString extends AbstractSLTest {
 	public void testIndexOf01() throws IllegalArgumentException,
 			OCL2ParsingException, ModelAccessException, Ocl22CodeException {
 
-		this.compareFragmentCodeGeneration("string", "indexOf01");
+		this.compareFragmentCodeGeneration("sltest/string", "indexOf01");
 	}
 
 	/**
@@ -149,7 +150,7 @@ public class TestString extends AbstractSLTest {
 	public void testPlus01() throws IllegalArgumentException,
 			OCL2ParsingException, ModelAccessException, Ocl22CodeException {
 
-		this.compareFragmentCodeGeneration("string", "plus01");
+		this.compareFragmentCodeGeneration("sltest/string", "plus01");
 	}
 
 	/**
@@ -166,7 +167,7 @@ public class TestString extends AbstractSLTest {
 	public void testToBoolean01() throws IllegalArgumentException,
 			OCL2ParsingException, ModelAccessException, Ocl22CodeException {
 	
-		this.compareFragmentCodeGeneration("string", "toBoolean01");
+		this.compareFragmentCodeGeneration("sltest/string", "toBoolean01");
 	}
 
 	/**
@@ -183,7 +184,7 @@ public class TestString extends AbstractSLTest {
 	public void testToLowerCase01() throws IllegalArgumentException,
 			OCL2ParsingException, ModelAccessException, Ocl22CodeException {
 	
-		this.compareFragmentCodeGeneration("string", "toLowerCase01");
+		this.compareFragmentCodeGeneration("sltest/string", "toLowerCase01");
 	}
 
 	/**
@@ -200,6 +201,6 @@ public class TestString extends AbstractSLTest {
 	public void testToUpperCase01() throws IllegalArgumentException,
 			OCL2ParsingException, ModelAccessException, Ocl22CodeException {
 
-		this.compareFragmentCodeGeneration("string", "toUpperCase01");
+		this.compareFragmentCodeGeneration("sltest/string", "toUpperCase01");
 	}
 }

@@ -6,7 +6,18 @@ package testpackage.constraints;
  * </p>
  */
 public class ExtendedClass1 extends Object {
+
+    protected Integer defProperty01;    
     
+    /**
+     *<p>
+     *A method signature implemented by an aspect.
+     *</p>
+     */
+    public Integer defOperation01() {
+        return null;
+    }
+
     /**
      *<p>
      *A method signature implemented by an aspect.

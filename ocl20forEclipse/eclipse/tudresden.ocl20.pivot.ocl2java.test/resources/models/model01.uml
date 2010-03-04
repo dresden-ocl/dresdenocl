@@ -1,4 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <uml:Package xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:uml="http://www.eclipse.org/uml2/3.0.0/UML" xmi:id="_EV7v8RvWEd-lK-Yjl_N2xQ" name="testpackage">
-  <packagedElement xmi:type="uml:Class" xmi:id="_HtFR8BvWEd-lK-Yjl_N2xQ" name="Class1"/>
+  <elementImport xmi:id="_LYLMcCeDEd-lDLWmUakCpQ">
+    <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+  </elementImport>
+  <elementImport xmi:id="_LYLMcSeDEd-lDLWmUakCpQ">
+    <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+  </elementImport>
+  <elementImport xmi:id="_LYLMcieDEd-lDLWmUakCpQ">
+    <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+  </elementImport>
+  <packagedElement xmi:type="uml:Class" xmi:id="_HtFR8BvWEd-lK-Yjl_N2xQ" name="Class1">
+    <ownedOperation xmi:id="_BJcHkSeDEd-lDLWmUakCpQ" name="bodyOperation01">
+      <ownedParameter xmi:id="_NvC9MCeDEd-lDLWmUakCpQ" direction="return">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      </ownedParameter>
+    </ownedOperation>
+  </packagedElement>
 </uml:Package>

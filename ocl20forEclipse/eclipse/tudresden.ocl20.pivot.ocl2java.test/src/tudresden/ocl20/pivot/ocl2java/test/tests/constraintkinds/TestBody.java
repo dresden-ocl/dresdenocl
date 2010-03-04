@@ -17,7 +17,7 @@ You should have received a copy of the GNU Lesser General Public License along
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package tudresden.ocl20.pivot.ocl2java.test.tests.standardlibrary;
+package tudresden.ocl20.pivot.ocl2java.test.tests.constraintkinds;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
@@ -27,16 +27,18 @@ import tudresden.ocl20.pivot.facade.OCL2ParsingException;
 import tudresden.ocl20.pivot.modelbus.ModelAccessException;
 import tudresden.ocl20.pivot.ocl2java.exception.Ocl22CodeException;
 import tudresden.ocl20.pivot.ocl2java.test.tests.AbstractDiffTest;
+import tudresden.ocl20.pivot.pivotmodel.Constraint;
+import tudresden.ocl20.pivot.pivotmodel.ConstraintKind;
 
 /**
  * <p>
- * Contains some test cases to test the code generation for standard library
- * operations.
+ * Contains some test cases to test the code generation {@link Constraint}s of
+ * the {@link ConstraintKind#BODY}.
  * </p>
  * 
  * @author Claas Wilke
  */
-public class TestCollection extends AbstractDiffTest {
+public class TestBody extends AbstractDiffTest {
 
 	/**
 	 * <p>
@@ -79,26 +81,10 @@ public class TestCollection extends AbstractDiffTest {
 	 * @throws Ocl22CodeException
 	 */
 	@Test
-	public void testMax01() throws IllegalArgumentException,
+	public void testToString01() throws IllegalArgumentException,
 			OCL2ParsingException, ModelAccessException, Ocl22CodeException {
-	
-		this.compareFragmentCodeGeneration("sltest/collection", "max01");
-	}
 
-	/**
-	 * <p>
-	 * Tests the instrumentation of the constraint.
-	 * </p>
-	 * 
-	 * @throws ModelAccessException
-	 * @throws OCL2ParsingException
-	 * @throws IllegalArgumentException
-	 * @throws Ocl22CodeException
-	 */
-	@Test
-	public void testMin01() throws IllegalArgumentException,
-			OCL2ParsingException, ModelAccessException, Ocl22CodeException {
-	
-		this.compareFragmentCodeGeneration("sltest/collection", "min01");
+		this.compareInstrumentationCodeGeneration("constraintkindtest/body",
+				"body01");
 	}
 }

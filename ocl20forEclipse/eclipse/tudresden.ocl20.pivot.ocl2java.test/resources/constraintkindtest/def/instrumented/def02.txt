@@ -6,7 +6,7 @@ package testpackage.constraints;
  * @author OCL22Java of Dresden OCL2 for Eclipse
  * @Generated
  */
-public privileged aspect DefAspect2 {
+public privileged aspect DefAspect1 {
 
     /* Declares a new super class containing the new attribute or method. */
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;

@@ -12,18 +12,18 @@ public privileged aspect DefAspect11 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testStringAt(String source, Integer arg01)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testSetFlatten(tudresden.ocl20.pivot.ocl2java.types.OclSet<Object> source)}.</p>
      */
-    protected pointcut testStringAtCaller(testpackage.Class1 aClass, String source, Integer arg01):
-    	call(* testpackage.Class1.testStringAt(String, Integer))
-    	&& target(aClass) && args(source, arg01);
+    protected pointcut testSetFlattenCaller(testpackage.Class1 aClass, tudresden.ocl20.pivot.ocl2java.types.OclSet<Object> source):
+    	call(* testpackage.Class1.testSetFlatten(tudresden.ocl20.pivot.ocl2java.types.OclSet<Object>))
+    	&& target(aClass) && args(source);
     
     /**
-     * <p>Defines the method testStringAt(String source, Integer arg01) defined by the constraint
+     * <p>Defines the method testSetFlatten(tudresden.ocl20.pivot.ocl2java.types.OclSet<Object> source) defined by the constraint
      * <code>context Class1
-     *       def: testStringAt = source[].at( arg01[])</code></p>
+     *       def: testSetFlatten = source[].flatten()</code></p>
      */
-    String around(testpackage.Class1 aClass, String source, Integer arg01): testStringAtCaller(aClass, source, arg01) {
-        return Character.toString(source.charAt(arg01 - 1));
+    tudresden.ocl20.pivot.ocl2java.types.OclSet<Object> around(testpackage.Class1 aClass, tudresden.ocl20.pivot.ocl2java.types.OclSet<Object> source): testSetFlattenCaller(aClass, source) {
+        return ((tudresden.ocl20.pivot.ocl2java.types.OclSet<Object>) source.flatten());
     }
 }

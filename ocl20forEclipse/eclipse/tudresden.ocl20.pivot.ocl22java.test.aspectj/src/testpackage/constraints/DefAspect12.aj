@@ -12,29 +12,18 @@ public privileged aspect DefAspect12 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testStringCharacters(String source)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testSequenceReverse(tudresden.ocl20.pivot.ocl2java.types.OclSequence<Object> source)}.</p>
      */
-    protected pointcut testStringCharactersCaller(testpackage.Class1 aClass, String source):
-    	call(* testpackage.Class1.testStringCharacters(String))
+    protected pointcut testSequenceReverseCaller(testpackage.Class1 aClass, tudresden.ocl20.pivot.ocl2java.types.OclSequence<Object> source):
+    	call(* testpackage.Class1.testSequenceReverse(tudresden.ocl20.pivot.ocl2java.types.OclSequence<Object>))
     	&& target(aClass) && args(source);
     
     /**
-     * <p>Defines the method testStringCharacters(String source) defined by the constraint
+     * <p>Defines the method testSequenceReverse(tudresden.ocl20.pivot.ocl2java.types.OclSequence<Object> source) defined by the constraint
      * <code>context Class1
-     *       def: testStringCharacters = source[].characters()</code></p>
+     *       def: testSequenceReverse = source[].reverse()</code></p>
      */
-    tudresden.ocl20.pivot.ocl2java.types.OclSequence<String> around(testpackage.Class1 aClass, String source): testStringCharactersCaller(aClass, source) {
-        tudresden.ocl20.pivot.ocl2java.types.OclSequence<String> result1;
-        result1 = new tudresden.ocl20.pivot.ocl2java.types.OclSequence<String>();
-        
-        /* Compute the result of a caharacters operation. */
-        for (String anElement1 : source.split("")) {
-            result1.add(anElement1);
-        }
-        
-        /* Remove the first element ''. */
-        result1.remove(result1.first());
-    
-        return result1;
+    tudresden.ocl20.pivot.ocl2java.types.OclSequence<Object> around(testpackage.Class1 aClass, tudresden.ocl20.pivot.ocl2java.types.OclSequence<Object> source): testSequenceReverseCaller(aClass, source) {
+        return source.reverse();
     }
 }

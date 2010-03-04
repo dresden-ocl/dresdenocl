@@ -17,7 +17,7 @@ You should have received a copy of the GNU Lesser General Public License along
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package tudresden.ocl20.pivot.ocl2java.test.tests.standardlibrary;
+package tudresden.ocl20.pivot.ocl2java.test.tests;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -37,7 +37,6 @@ import tudresden.ocl20.pivot.modelbus.model.IModel;
 import tudresden.ocl20.pivot.ocl2java.IOcl22CodeSettings;
 import tudresden.ocl20.pivot.ocl2java.exception.Ocl22CodeException;
 import tudresden.ocl20.pivot.ocl2java.test.Ocl2CodeTestPlugin;
-import tudresden.ocl20.pivot.ocl2java.test.tests.CodegenTestPerformer;
 import tudresden.ocl20.pivot.pivotmodel.Constraint;
 
 /**
@@ -48,7 +47,7 @@ import tudresden.ocl20.pivot.pivotmodel.Constraint;
  * 
  * @author Claas Wilke
  */
-public abstract class AbstractSLTest {
+public abstract class AbstractDiffTest {
 
 	/** The location of the {@link IModel} used for testing. */
 	private static final String MODEL_NAME = "resources/models/model01.uml";
@@ -68,7 +67,7 @@ public abstract class AbstractSLTest {
 			ModelAccessException {
 
 		File modelFile;
-		modelFile = AbstractSLTest.getFile(MODEL_NAME);
+		modelFile = AbstractDiffTest.getFile(MODEL_NAME);
 
 		testModel = Ocl2ForEclipseFacade.getModel(modelFile,
 				Ocl2ForEclipseFacade.UML2_MetaModel);
@@ -124,7 +123,7 @@ public abstract class AbstractSLTest {
 	 * 
 	 * @param directory
 	 *            the directory of the file relative to
-	 *            <code>resources/sltest/</code>
+	 *            <code>resources/</code>
 	 * @param fileName
 	 *            The name of the file that shall be checked.
 	 * @throws OCL2ParsingException
@@ -137,7 +136,7 @@ public abstract class AbstractSLTest {
 
 		/* Parse the constraint. */
 		File constraintFile;
-		constraintFile = AbstractSLTest.getFile("resources/sltest/" + directory
+		constraintFile = AbstractDiffTest.getFile("resources/" + directory
 				+ "/" + fileName + ".ocl");
 
 		List<Constraint> parsedConstraints;
@@ -155,7 +154,7 @@ public abstract class AbstractSLTest {
 		assertNotNull(generatedCode);
 
 		CodegenTestPerformer.getInstance().compareStringAndFile(
-				"resources/sltest/" + directory + "/" + fileName + ".txt",
+				"resources/" + directory + "/" + fileName + ".txt",
 				generatedCode);
 	}
 
@@ -167,7 +166,7 @@ public abstract class AbstractSLTest {
 	 * 
 	 * @param directory
 	 *            the directory of the file relative to
-	 *            <code>resources/sltest/</code>
+	 *            <code>resources/</code>
 	 * @param fileName
 	 *            The name of the file that shall be checked.
 	 * @throws OCL2ParsingException
@@ -180,7 +179,7 @@ public abstract class AbstractSLTest {
 
 		/* Parse the constraint. */
 		File constraintFile;
-		constraintFile = AbstractSLTest.getFile("resources/sltest/" + directory
+		constraintFile = AbstractDiffTest.getFile("resources/" + directory
 				+ "/" + fileName + ".ocl");
 
 		List<Constraint> parsedConstraints;
@@ -198,7 +197,7 @@ public abstract class AbstractSLTest {
 		assertNotNull(generatedCode);
 
 		CodegenTestPerformer.getInstance().compareStringAndFile(
-				"resources/sltest/" + directory + "/instrumented/" + fileName
+				"resources/" + directory + "/instrumented/" + fileName
 						+ ".txt", generatedCode);
 	}
 
@@ -212,10 +211,10 @@ public abstract class AbstractSLTest {
 	 *            the instrumentation code.
 	 * @param directory
 	 *            the directory of the file relative to
-	 *            <code>resources/sltest/</code>
+	 *            <code>resources/</code>
 	 * @param fileNames
 	 *            The the directories of the files relative to
-	 *            <code>resources/sltest/</code> and the names of the files for
+	 *            <code>resources/</code> and the names of the files for
 	 *            that code shall be generated as a {@link List} containing
 	 *            {@link String} arrays.
 	 * @throws OCL2ParsingException
@@ -246,7 +245,7 @@ public abstract class AbstractSLTest {
 		for (String[] constraintFilePair : fileNames) {
 
 			File constraintFile;
-			constraintFile = AbstractSLTest.getFile("resources/sltest/"
+			constraintFile = AbstractDiffTest.getFile("resources/"
 					+ constraintFilePair[0] + "/" + constraintFilePair[1]
 					+ ".ocl");
 

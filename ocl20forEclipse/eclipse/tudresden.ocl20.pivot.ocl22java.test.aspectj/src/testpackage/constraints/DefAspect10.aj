@@ -12,18 +12,18 @@ public privileged aspect DefAspect10 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testSequenceReverse(tudresden.ocl20.pivot.ocl2java.types.OclSequence<Object> source)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testRealToString(Float source)}.</p>
      */
-    protected pointcut testSequenceReverseCaller(testpackage.Class1 aClass, tudresden.ocl20.pivot.ocl2java.types.OclSequence<Object> source):
-    	call(* testpackage.Class1.testSequenceReverse(tudresden.ocl20.pivot.ocl2java.types.OclSequence<Object>))
+    protected pointcut testRealToStringCaller(testpackage.Class1 aClass, Float source):
+    	call(* testpackage.Class1.testRealToString(Float))
     	&& target(aClass) && args(source);
     
     /**
-     * <p>Defines the method testSequenceReverse(tudresden.ocl20.pivot.ocl2java.types.OclSequence<Object> source) defined by the constraint
+     * <p>Defines the method testRealToString(Float source) defined by the constraint
      * <code>context Class1
-     *       def: testSequenceReverse = source[].reverse()</code></p>
+     *       def: testRealToString = source[].toString()</code></p>
      */
-    tudresden.ocl20.pivot.ocl2java.types.OclSequence<Object> around(testpackage.Class1 aClass, tudresden.ocl20.pivot.ocl2java.types.OclSequence<Object> source): testSequenceReverseCaller(aClass, source) {
-        return source.reverse();
+    String around(testpackage.Class1 aClass, Float source): testRealToStringCaller(aClass, source) {
+        return source.toString();
     }
 }

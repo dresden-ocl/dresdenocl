@@ -17,29 +17,36 @@ You should have received a copy of the GNU Lesser General Public License along
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package tudresden.ocl20.pivot.ocl22java.test.aspectj;
+package tudresden.ocl20.pivot.ocl22java.test.aspectj.constraintkinds;
 
-import org.junit.runner.RunWith;
-import org.junit.runners.Suite;
+import static org.junit.Assert.assertEquals;
 
-import tudresden.ocl20.pivot.ocl22java.test.aspectj.constraintkinds.AllConstraintKindTests;
-import tudresden.ocl20.pivot.ocl22java.test.aspectj.standardlibrary.AllStandardLibraryTests;
+import org.junit.Test;
+
+import testpackage.Class1;
 
 /**
  * <p>
- * Provides a jUnit Test Suite containing all standard library tests of the OCL
- * 2 Java Code transformer ({@link Ocl22JavaPlugin}).
+ * Tests the generated code for a <code>Constraint</code> of the
+ * <code>ConstraintKind.BODY</code>.
  * </p>
  * 
  * @author Claas Wilke
- * 
  */
-@RunWith(Suite.class)
-@Suite.SuiteClasses( { AllConstraintKindTests.class,
-		AllStandardLibraryTests.class })
-public class AllAspectJTests {
-	/*
-	 * This class remains completely empty, being used only as a holder for the
-	 * above annotations.
+public class TestBody {
+
+	/**
+	 * <p>
+	 * Tests the generated code for a <code>Constraint</code> of the
+	 * <code>ConstraintKind.BODY</code>.
+	 * </p>
 	 */
+	@Test
+	public void testBody01() {
+
+		Class1 class1;
+		class1 = new Class1();
+
+		assertEquals(new Integer(42), class1.bodyOperation01());
+	}
 }

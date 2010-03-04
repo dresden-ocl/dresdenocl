@@ -26,6 +26,7 @@ import org.junit.Test;
 import tudresden.ocl20.pivot.facade.OCL2ParsingException;
 import tudresden.ocl20.pivot.modelbus.ModelAccessException;
 import tudresden.ocl20.pivot.ocl2java.exception.Ocl22CodeException;
+import tudresden.ocl20.pivot.ocl2java.test.tests.AbstractDiffTest;
 
 /**
  * <p>
@@ -35,7 +36,7 @@ import tudresden.ocl20.pivot.ocl2java.exception.Ocl22CodeException;
  * 
  * @author Claas Wilke
  */
-public class TestOrderedSet extends AbstractSLTest {
+public class TestOrderedSet extends AbstractDiffTest {
 
 	/**
 	 * <p>
@@ -49,7 +50,7 @@ public class TestOrderedSet extends AbstractSLTest {
 	public static void setUp() throws IllegalArgumentException,
 			ModelAccessException {
 
-		AbstractSLTest.setUp();
+		AbstractDiffTest.setUp();
 	}
 
 	/**
@@ -64,7 +65,7 @@ public class TestOrderedSet extends AbstractSLTest {
 	public static void tearDown() throws IllegalArgumentException,
 			ModelAccessException {
 
-		AbstractSLTest.tearDown();
+		AbstractDiffTest.tearDown();
 	}
 
 	/**
@@ -81,6 +82,6 @@ public class TestOrderedSet extends AbstractSLTest {
 	public void testReverse01() throws IllegalArgumentException,
 			OCL2ParsingException, ModelAccessException, Ocl22CodeException {
 
-		this.compareFragmentCodeGeneration("orderedset", "reverse01");
+		this.compareFragmentCodeGeneration("sltest/orderedset", "reverse01");
 	}
 }
