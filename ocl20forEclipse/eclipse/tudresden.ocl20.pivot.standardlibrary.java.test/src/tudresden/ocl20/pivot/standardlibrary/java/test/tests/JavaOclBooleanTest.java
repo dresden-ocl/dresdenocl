@@ -132,4 +132,13 @@ public class JavaOclBooleanTest {
 		assertTrue(invalid.xor(invalid).oclIsInvalid().isTrue());
 	}
 
+	@Test
+	public void testToString() {
+
+		assertTrue(TRUE.convertToString().isEqualTo(stringTrue).isTrue());
+		assertTrue(FALSE.convertToString().isEqualTo(stringFalse).isTrue());
+		assertTrue(undefined.convertToString().oclIsInvalid().isTrue());
+		assertTrue(invalid.convertToString().oclIsInvalid().isTrue());
+	}
+
 }

@@ -93,11 +93,6 @@ public class JavaOclSequenceTest {
 	@Test
 	public void testAppend() {
 
-		appendAndIncluding();
-	}
-
-	private void appendAndIncluding() {
-
 		assertTrue(emptySequence.append(oclReal0_5).isEqualTo(oclSequence).isTrue());
 		assertTrue(emptySequence.isEmpty().isTrue());
 
@@ -124,7 +119,13 @@ public class JavaOclSequenceTest {
 	@Test
 	public void testIncluding() {
 
-		appendAndIncluding();
+		assertTrue(emptySequence.including(oclReal0_5).isEqualTo(oclSequence)
+				.isTrue());
+		assertTrue(emptySequence.isEmpty().isTrue());
+
+		assertTrue(oclSequence.including(oclReal1_5).including(undefined)
+				.isEqualTo(oclSequence2).isTrue());
+		assertTrue(oclSequence.size().isEqualTo(integer1).isTrue());
 	}
 
 	@Test

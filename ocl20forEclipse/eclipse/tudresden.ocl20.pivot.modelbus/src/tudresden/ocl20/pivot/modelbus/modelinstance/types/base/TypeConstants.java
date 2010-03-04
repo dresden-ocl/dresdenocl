@@ -22,6 +22,7 @@ package tudresden.ocl20.pivot.modelbus.modelinstance.types.base;
 import tudresden.ocl20.pivot.essentialocl.expressions.CollectionKind;
 import tudresden.ocl20.pivot.essentialocl.types.AnyType;
 import tudresden.ocl20.pivot.essentialocl.types.CollectionType;
+import tudresden.ocl20.pivot.essentialocl.types.TypeType;
 import tudresden.ocl20.pivot.essentialocl.types.TypesFactory;
 import tudresden.ocl20.pivot.modelbus.model.IModel;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceBoolean;
@@ -266,4 +267,21 @@ public final class TypeConstants {
 
 		return returnType;
 	}
+
+	/**
+	 * Returns a {@link TypeType} that wraps the given {@link Type}.
+	 * 
+	 * @param type
+	 *          the wrapped {@link Type}
+	 * @return a {@link TypeType} that wraps the given {@link Type}
+	 */
+	public static final TypeType TYPE(Type type) {
+
+		TypeType returnType = TypesFactory.INSTANCE.createTypeType();
+
+		returnType.setRepresentedType(type);
+
+		return returnType;
+	}
+
 }

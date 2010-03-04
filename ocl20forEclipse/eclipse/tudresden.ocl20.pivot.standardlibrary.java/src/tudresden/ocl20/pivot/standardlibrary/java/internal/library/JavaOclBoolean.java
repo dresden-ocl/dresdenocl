@@ -36,6 +36,7 @@ import java.util.Set;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBoolean;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSet;
+import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclString;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceBoolean;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.base.BasisJavaModelInstanceFactory;
@@ -54,14 +55,19 @@ import tudresden.ocl20.pivot.standardlibrary.java.factory.JavaStandardLibraryFac
 public class JavaOclBoolean extends JavaOclLibraryObject implements OclBoolean {
 
 	/* The false instance. */
-	private static OclBoolean FALSE =
+	protected final static OclBoolean FALSE =
 			new JavaOclBoolean(BasisJavaModelInstanceFactory
 					.createModelInstanceBoolean(false));
 
 	/* The true instance. */
-	private static OclBoolean TRUE =
+	protected final static OclBoolean TRUE =
 			new JavaOclBoolean(BasisJavaModelInstanceFactory
 					.createModelInstanceBoolean(true));
+
+	protected final static OclString trueString =
+			JavaStandardLibraryFactory.INSTANCE.createOclString("true");
+	protected final static OclString falseString =
+			JavaStandardLibraryFactory.INSTANCE.createOclString("false");
 
 	/**
 	 * <p>
@@ -413,5 +419,30 @@ public class JavaOclBoolean extends JavaOclLibraryObject implements OclBoolean {
 		result.append("]");
 
 		return result.toString();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBoolean#convertToString
+	 * ()
+	 */
+	public OclString convertToString() {
+
+		OclString result;
+
+		result = checkInvalid(TypeConstants.STRING, this);
+
+		if (result == null)
+			result = checkUndefined("toString", TypeConstants.STRING, this);
+
+		if (result == null) {
+			if (isTrue())
+				result = trueString;
+			else
+				result = falseString;
+		}
+
+		return result;
 	}
 }

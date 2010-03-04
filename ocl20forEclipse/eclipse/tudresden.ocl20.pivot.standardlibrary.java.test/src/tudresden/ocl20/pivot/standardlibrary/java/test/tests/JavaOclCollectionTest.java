@@ -720,4 +720,32 @@ public class JavaOclCollectionTest {
 		assertTrue(bagIterator.hasNext().isTrue());
 		assertTrue(sequenceIterator.next().isEqualTo(undefined).isTrue());
 	}
+
+	@Test
+	public void testMax() {
+
+		assertTrue(emptySet.max().isEqualTo(integer0).isTrue());
+		assertTrue(emptyOrderedSet.max().isEqualTo(integer0).isTrue());
+		assertTrue(emptyBag.max().isEqualTo(integer0).isTrue());
+		assertTrue(emptySequence.max().isEqualTo(integer0).isTrue());
+
+		assertTrue(oclSet2.max().isEqualTo(oclReal1_5).isTrue());
+		assertTrue(oclOrderedSet2.max().isEqualTo(oclReal1_5).isTrue());
+		assertTrue(oclBag2.max().isEqualTo(oclReal1_5).isTrue());
+		assertTrue(oclSequence2.max().isEqualTo(oclReal1_5).isTrue());
+	}
+
+	@Test
+	public void testMin() {
+
+		assertTrue(emptySet.min().isEqualTo(integer0).isTrue());
+		assertTrue(emptyOrderedSet.min().isEqualTo(integer0).isTrue());
+		assertTrue(emptyBag.min().isEqualTo(integer0).isTrue());
+		assertTrue(emptySequence.min().isEqualTo(integer0).isTrue());
+
+		assertTrue(oclSet2.min().isEqualTo(oclReal0_5).isTrue());
+		assertTrue(oclOrderedSet2.min().isEqualTo(oclReal0_5).isTrue());
+		assertTrue(oclBag2.min().isEqualTo(oclReal0_5).isTrue());
+		assertTrue(oclSequence2.min().isEqualTo(oclReal0_5).isTrue());
+	}
 }

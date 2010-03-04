@@ -33,24 +33,30 @@ public class JavaOclAnyTest {
 
 	private final OclInteger fourtyTwo =
 			myStandardLibraryFactory.createOclInteger(42L);
+	private final OclString undefined =
+			myStandardLibraryFactory.createOclUndefined(TypeConstants.STRING,
+					"undefined string");
+	private final OclString invalid =
+			myStandardLibraryFactory.createOclInvalid(TypeConstants.STRING,
+					new RuntimeException("invlaid string"));
 
 	@Test
 	public void testOclAsType() {
 
 		final OclInteger toInt = fourtyTwo.oclAsType(intType);
 		assertTrue(toInt instanceof OclInteger);
-		assertTrue(toInt.getModelInstanceInteger().getType()
-				.conformsTo(TypeConstants.INTEGER));
+		assertTrue(toInt.getModelInstanceInteger().getType().conformsTo(
+				TypeConstants.INTEGER));
 
 		final OclReal toReal = fourtyTwo.oclAsType(realType);
 		assertTrue(toReal instanceof OclReal);
-		assertTrue(toReal.getModelInstanceReal().getType()
-				.conformsTo(TypeConstants.REAL));
+		assertTrue(toReal.getModelInstanceReal().getType().conformsTo(
+				TypeConstants.REAL));
 
 		final OclString toString = fourtyTwo.oclAsType(stringType);
 		assertTrue(toString instanceof OclString);
-		assertTrue(toString.getModelInstanceString().getType()
-				.conformsTo(TypeConstants.STRING));
+		assertTrue(toString.getModelInstanceString().getType().conformsTo(
+				TypeConstants.STRING));
 
 		assertTrue(fourtyTwo.oclAsType(setType).oclIsInvalid().isTrue());
 	}
@@ -71,6 +77,15 @@ public class JavaOclAnyTest {
 		assertFalse(fourtyTwo.oclIsTypeOf(realType).isTrue());
 		assertFalse(fourtyTwo.oclIsTypeOf(anyType).isTrue());
 		assertFalse(fourtyTwo.oclIsTypeOf(stringType).isTrue());
+	}
+
+	@Test
+	public void testOclType() {
+
+		assertTrue(fourtyTwo.oclType().getType().equals(intType.getType()));
+		assertTrue(intType.oclType().oclIsInvalid().isTrue());
+		assertTrue(undefined.oclType().oclIsInvalid().isTrue());
+		assertTrue(invalid.oclType().oclIsInvalid().isTrue());
 	}
 
 	@Test

@@ -1,11 +1,13 @@
 package tudresden.ocl20.pivot.standardlibrary.java.test.tests;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclReal;
+import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSequence;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclString;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.factory.IStandardLibraryFactory;
 
@@ -28,10 +30,15 @@ public class JavaOclStringTest {
 	private final OclString OCL = myStandardLibraryFactory.createOclString("OCL");
 	private final OclString rocks =
 			myStandardLibraryFactory.createOclString("rocks");
+	private final OclString ocl = myStandardLibraryFactory.createOclString("ocl");
+	private final OclString O = myStandardLibraryFactory.createOclString("O");
+	private final OclString o = myStandardLibraryFactory.createOclString("o");
 	private final OclString fourtyTwo =
 			myStandardLibraryFactory.createOclString("42");
 	private final OclString fourtyTwoAndSomething =
 			myStandardLibraryFactory.createOclString("42.23");
+	private final OclString _true =
+			myStandardLibraryFactory.createOclString("true");
 
 	private final OclInteger integer0 =
 			myStandardLibraryFactory.createOclInteger(0L);
@@ -41,6 +48,10 @@ public class JavaOclStringTest {
 			myStandardLibraryFactory.createOclInteger(2L);
 	private final OclInteger integer3 =
 			myStandardLibraryFactory.createOclInteger(3L);
+	private final OclInteger integer5 =
+			myStandardLibraryFactory.createOclInteger(5L);
+	private final OclInteger integer6 =
+			myStandardLibraryFactory.createOclInteger(6L);
 	private final OclInteger integer9 =
 			myStandardLibraryFactory.createOclInteger(9L);
 	private final OclInteger integer42 =
@@ -89,5 +100,81 @@ public class JavaOclStringTest {
 		assertTrue(fourtyTwo.toReal().isEqualTo(integer42).isTrue());
 		assertTrue(OCL_rocks.toReal().oclIsInvalid().isTrue());
 		assertTrue(fourtyTwoAndSomething.toReal().isEqualTo(real42_23).isTrue());
+	}
+
+	@Test
+	public void testToBoolean() {
+
+		assertFalse(emptyString.toBoolean().isTrue());
+		assertFalse(fourtyTwo.toBoolean().isTrue());
+		assertTrue(_true.toBoolean().isTrue());
+		assertFalse(_true.toUpperCase().toBoolean().isTrue());
+	}
+
+	@Test
+	public void testPlus() {
+
+		assertTrue(OCL.plus(ws).plus(rocks).isEqualTo(OCL_rocks).isTrue());
+		// immutable string
+		assertTrue(OCL.size().isEqualTo(integer3).isTrue());
+		assertTrue(OCL.plus(emptyString).isEqualTo(OCL).isTrue());
+	}
+
+	@Test
+	public void testToLowerCase() {
+
+		assertTrue(emptyString.toLowerCase().isEqualTo(emptyString).isTrue());
+		assertTrue(fourtyTwo.toLowerCase().isEqualTo(fourtyTwo).isTrue());
+		assertTrue(rocks.toLowerCase().isEqualTo(rocks).isTrue());
+		assertTrue(OCL.toLowerCase().isEqualTo(ocl).isTrue());
+	}
+
+	@Test
+	public void testToUpperCase() {
+
+		assertTrue(emptyString.toUpperCase().isEqualTo(emptyString).isTrue());
+		assertTrue(fourtyTwo.toUpperCase().isEqualTo(fourtyTwo).isTrue());
+		assertTrue(OCL.toUpperCase().isEqualTo(OCL).isTrue());
+		assertTrue(ocl.toUpperCase().isEqualTo(OCL).isTrue());
+	}
+
+	@Test
+	public void testIndexOf() {
+
+		assertTrue(emptyString.indexOf(emptyString).isEqualTo(integer0).isTrue());
+		assertTrue(emptyString.indexOf(OCL).isEqualTo(integer0).isTrue());
+		assertTrue(OCL.indexOf(emptyString).isEqualTo(integer1).isTrue());
+		assertTrue(OCL_rocks.indexOf(OCL).isEqualTo(integer1).isTrue());
+		assertTrue(OCL_rocks.indexOf(rocks).isEqualTo(integer5).isTrue());
+	}
+
+	@Test
+	public void testEqualsIgnoreCase() {
+
+		assertTrue(emptyString.equalsIgnoreCase(emptyString).isTrue());
+		assertTrue(fourtyTwo.equalsIgnoreCase(fourtyTwo).isTrue());
+		assertTrue(OCL.equalsIgnoreCase(OCL).isTrue());
+		assertTrue(OCL.equalsIgnoreCase(ocl).isTrue());
+		assertTrue(ocl.equalsIgnoreCase(OCL).isTrue());
+	}
+
+	@Test
+	public void testAt() {
+
+		assertTrue(emptyString.at(integer1).oclIsInvalid().isTrue());
+		assertTrue(OCL.at(integer0).oclIsInvalid().isTrue());
+		assertTrue(OCL_rocks.at(integer1).isEqualTo(O).isTrue());
+		assertTrue(OCL_rocks.at(integer6).isEqualTo(o).isTrue());
+		assertTrue(OCL_rocks.at(integer42).oclIsInvalid().isTrue());
+	}
+
+	@Test
+	public void testCharacters() {
+
+		assertTrue(emptyString.characters().isEmpty().isTrue());
+		OclSequence<OclString> chars = OCL_rocks.characters();
+		assertTrue(chars.at(integer1).isEqualTo(O).isTrue());
+		assertTrue(chars.at(integer6).isEqualTo(o).isTrue());
+		assertTrue(chars.size().isEqualTo(integer9).isTrue());
 	}
 }

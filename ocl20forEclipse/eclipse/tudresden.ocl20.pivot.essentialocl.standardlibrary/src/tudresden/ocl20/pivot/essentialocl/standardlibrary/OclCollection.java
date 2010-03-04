@@ -182,4 +182,26 @@ public interface OclCollection<T extends OclAny> extends OclLibraryObject {
 	 */
 	OclIterator<T> getIterator();
 
+	/**
+	 * The element with the maximum value of all elements in <code>this</code>.
+	 * Elements must be of a type supporting the max operation. The max operation
+	 * - supported by the elements - must take one parameter of type T and be both
+	 * associative and commutative. Integer and Real fulfill this condition.
+	 * 
+	 * @return the element with the maximum value of all elements in
+	 *         <code>this</code>
+	 */
+	T max();
+
+	/**
+	 * The element with the minimum value of all elements in <code>this</code>.
+	 * Elements must be of a type supporting the min operation. The min operation
+	 * - supported by the elements - must take one parameter of type T and be both
+	 * associative and commutative. Integer and Real fulfill this condition.
+	 * 
+	 * @return the element with the minimum value of all elements in
+	 *         <code>this</code>
+	 */
+	T min();
+
 }

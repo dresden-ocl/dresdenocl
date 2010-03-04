@@ -108,6 +108,14 @@ public interface OclAny {
 	<T extends OclAny> OclBoolean oclIsKindOf(OclType<T> typespec);
 
 	/**
+	 * Evaluates to the type of which <code>this</code> is an instance.
+	 * 
+	 * @param <T>
+	 * @return the type of which <code>this</code> is an instance
+	 */
+	<T extends OclAny> OclType<T> oclType();
+
+	/**
 	 * Gets the reason for undefined object.
 	 * 
 	 * @return the undefinedreason

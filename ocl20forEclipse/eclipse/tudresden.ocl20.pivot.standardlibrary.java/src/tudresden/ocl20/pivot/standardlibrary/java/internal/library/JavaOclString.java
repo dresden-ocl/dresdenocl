@@ -30,13 +30,16 @@
  */
 package tudresden.ocl20.pivot.standardlibrary.java.internal.library;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBoolean;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclReal;
+import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSequence;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSet;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclString;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
@@ -127,7 +130,7 @@ public class JavaOclString extends JavaOclLibraryObject implements OclString {
 
 		if (result == null) {
 			/* Else compute the result. */
-			Long size = new Long(getModelInstanceString().getString().length());
+			Long size = Long.valueOf(getModelInstanceString().getString().length());
 			result = JavaStandardLibraryFactory.INSTANCE.createOclInteger(size);
 		}
 
@@ -315,5 +318,185 @@ public class JavaOclString extends JavaOclLibraryObject implements OclString {
 		result.append("]");
 
 		return result.toString();
+	}
+
+	public OclString at(OclInteger i) {
+
+		OclString result;
+
+		result = checkInvalid(TypeConstants.STRING, this, i);
+
+		if (result == null)
+			result = checkUndefined("at", TypeConstants.STRING, this, i);
+
+		if (result == null) {
+			int javaIndex = i.getModelInstanceInteger().getLong().intValue() - 1;
+
+			try {
+				Character c =
+						this.getModelInstanceString().getString().charAt(javaIndex);
+				result =
+						JavaStandardLibraryFactory.INSTANCE.createOclString(c.toString());
+
+			} catch (IndexOutOfBoundsException e) {
+				result =
+						JavaStandardLibraryFactory.INSTANCE.createOclInvalid(
+								TypeConstants.STRING, e);
+			}
+		}
+
+		return result;
+	}
+
+	public OclSequence<OclString> characters() {
+
+		OclSequence<OclString> result;
+
+		result = checkInvalid(TypeConstants.SEQUENCE(TypeConstants.STRING), this);
+
+		if (result == null)
+			result =
+					checkUndefined("characters", TypeConstants
+							.SEQUENCE(TypeConstants.STRING), this);
+
+		if (result == null) {
+			List<OclString> oclCharacters = new ArrayList<OclString>();
+
+			for (Character aChar : getModelInstanceString().getString().toCharArray()) {
+				OclString oclChar =
+						JavaStandardLibraryFactory.INSTANCE.createOclString(aChar
+								.toString());
+				oclCharacters.add(oclChar);
+			}
+
+			result =
+					JavaStandardLibraryFactory.INSTANCE.createOclSequence(oclCharacters,
+							TypeConstants.STRING);
+		}
+
+		return result;
+	}
+
+	public OclBoolean equalsIgnoreCase(OclString s) {
+
+		OclBoolean result;
+
+		result = checkInvalid(TypeConstants.BOOLEAN, this, s);
+
+		if (result == null)
+			result =
+					checkUndefined("equalsIgnoreCase", TypeConstants.BOOLEAN, this, s);
+
+		if (result == null)
+			result =
+					JavaStandardLibraryFactory.INSTANCE.createOclBoolean(this
+							.getModelInstanceString().getString().equalsIgnoreCase(
+									s.getModelInstanceString().getString()));
+
+		return result;
+	}
+
+	public OclInteger indexOf(OclString s) {
+
+		OclInteger result;
+
+		result = checkInvalid(TypeConstants.INTEGER, this, s);
+
+		if (result == null)
+			result = checkUndefined("indexOf", TypeConstants.INTEGER, this, s);
+
+		if (result == null) {
+			String thisString = this.getModelInstanceString().getString();
+			String thatString = s.getModelInstanceString().getString();
+
+			/*
+			 * "No string is a substring of the empty string." (standard, p.145)
+			 */
+			if (thisString.equals(""))
+				result = JavaStandardLibraryFactory.INSTANCE.createOclInteger(0L);
+
+			else {
+
+				/*
+				 * "The empty string is considered to be a substring of every string but
+				 * the empty string, at index 1." (standard, p.145)
+				 */
+				if (thatString.equals(""))
+					result = JavaStandardLibraryFactory.INSTANCE.createOclInteger(1L);
+
+				else {
+
+					int javaResult =
+							this.getModelInstanceString().getString().indexOf(
+									s.getModelInstanceString().getString()) + 1;
+					result =
+							JavaStandardLibraryFactory.INSTANCE.createOclInteger(Long
+									.valueOf(javaResult));
+				}
+			}
+
+		}
+
+		return result;
+	}
+
+	public OclString plus(OclString s) {
+
+		return concat(s);
+	}
+
+	public OclBoolean toBoolean() {
+
+		OclBoolean result;
+
+		result = checkInvalid(TypeConstants.BOOLEAN, this);
+
+		if (result == null)
+			result = checkUndefined("toBoolean", TypeConstants.BOOLEAN, this);
+
+		if (result == null) {
+			if (this.getModelInstanceString().getString().equals("true"))
+				result = JavaStandardLibraryFactory.INSTANCE.createOclBoolean(true);
+			else
+				result = JavaStandardLibraryFactory.INSTANCE.createOclBoolean(false);
+		}
+
+		return result;
+	}
+
+	public OclString toLowerCase() {
+
+		OclString result;
+
+		result = checkInvalid(TypeConstants.STRING, this);
+
+		if (result == null)
+			result = checkUndefined("toLowerCase", TypeConstants.STRING, this);
+
+		if (result == null) {
+			result =
+					JavaStandardLibraryFactory.INSTANCE.createOclString(this
+							.getModelInstanceString().getString().toLowerCase());
+		}
+
+		return result;
+	}
+
+	public OclString toUpperCase() {
+
+		OclString result;
+
+		result = checkInvalid(TypeConstants.STRING, this);
+
+		if (result == null)
+			result = checkUndefined("toUpperCase", TypeConstants.STRING, this);
+
+		if (result == null) {
+			result =
+					JavaStandardLibraryFactory.INSTANCE.createOclString(this
+							.getModelInstanceString().getString().toUpperCase());
+		}
+
+		return result;
 	}
 }

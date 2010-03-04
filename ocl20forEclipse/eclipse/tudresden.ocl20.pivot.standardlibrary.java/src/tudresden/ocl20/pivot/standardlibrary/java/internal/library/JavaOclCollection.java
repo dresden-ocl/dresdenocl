@@ -36,6 +36,7 @@ import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBag;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBoolean;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection;
+import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclComparable;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclIterator;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclOrderedSet;
@@ -474,7 +475,7 @@ public abstract class JavaOclCollection<T extends OclAny> extends
 	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection#product
 	 * (tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection)
 	 */
-	// FIXME Michael: implement this method
+	// FIXME Michael: can only be realised when the OCLLibrary is present
 	public <T2 extends OclAny> OclSet<OclTuple> product(OclCollection<T2> that) {
 
 		OclSet<OclTuple> result = null;
@@ -536,7 +537,8 @@ public abstract class JavaOclCollection<T extends OclAny> extends
 		if (result == null) {
 			Long intResult;
 
-			intResult = new Long(getModelInstanceCollection().getCollection().size());
+			intResult =
+					Long.valueOf(getModelInstanceCollection().getCollection().size());
 
 			result = JavaStandardLibraryFactory.INSTANCE.createOclInteger(intResult);
 		}
@@ -562,7 +564,7 @@ public abstract class JavaOclCollection<T extends OclAny> extends
 			/* Else check if this collection is empty. */
 			if (this.isEmpty().isTrue()) {
 				// TODO: future work; neutral element for addition of T's
-				result = (T) JavaStandardLibraryFactory.INSTANCE.createOclReal(0);
+				result = (T) JavaStandardLibraryFactory.INSTANCE.createOclInteger(0L);
 			}
 
 			/* Else iterate through the collection and compute the sum. */
@@ -632,6 +634,132 @@ public abstract class JavaOclCollection<T extends OclAny> extends
 		result.append("]");
 
 		return result.toString();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection#max()
+	 */
+	@SuppressWarnings("unchecked")
+	public T max() {
+
+		T result = null;
+
+		result = checkInvalid(genericType, this);
+
+		if (result == null)
+			result = checkUndefined("max", genericType, this);
+
+		if (result == null) {
+
+			if (this.isEmpty().isTrue())
+				result = (T) JavaStandardLibraryFactory.INSTANCE.createOclInteger(0L);
+
+			else {
+				OclIterator<T> oclIterator = this.getIterator();
+
+				/*
+				 * safe, since collection is not empty
+				 */
+				T maxElement = oclIterator.next();
+
+				final OclInteger integer1 =
+						JavaStandardLibraryFactory.INSTANCE.createOclInteger(1L);
+
+				while (oclIterator.hasNext().isTrue()) {
+					T element = oclIterator.next();
+
+					if (element instanceof OclComparable) {
+						/*
+						 * We should not compare the element to an undefined value.
+						 */
+						if (!maxElement.oclIsUndefined().isTrue()) {
+
+							if (((OclComparable) element).compareTo(
+									(OclComparable) maxElement).isEqualTo(integer1).isTrue())
+								maxElement = element;
+						}
+						else {
+							maxElement = element;
+						}
+					}
+				}
+
+				/*
+				 * In case there were only undefined values, the return should be zero.
+				 */
+				if (maxElement.oclIsUndefined().isTrue())
+					result = (T) JavaStandardLibraryFactory.INSTANCE.createOclInteger(0L);
+				else
+					result = maxElement;
+
+			}
+		}
+
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection#min()
+	 */
+	@SuppressWarnings("unchecked")
+	public T min() {
+
+		T result = null;
+
+		result = checkInvalid(genericType, this);
+
+		if (result == null)
+			result = checkUndefined("min", genericType, this);
+
+		if (result == null) {
+
+			if (this.isEmpty().isTrue())
+				result = (T) JavaStandardLibraryFactory.INSTANCE.createOclInteger(0L);
+
+			else {
+				OclIterator<T> oclIterator = this.getIterator();
+
+				/*
+				 * safe, since collection is not empty
+				 */
+				T minElement = oclIterator.next();
+
+				final OclInteger integer_1 =
+						JavaStandardLibraryFactory.INSTANCE.createOclInteger(-1L);
+
+				while (oclIterator.hasNext().isTrue()) {
+					T element = oclIterator.next();
+
+					if (element instanceof OclComparable) {
+						/*
+						 * We should not compare the element to an undefined value.
+						 */
+						if (!minElement.oclIsUndefined().isTrue()) {
+
+							if (((OclComparable) element).compareTo(
+									(OclComparable) minElement).isEqualTo(integer_1).isTrue())
+								minElement = element;
+						}
+						else {
+							minElement = element;
+						}
+					}
+				}
+
+				/*
+				 * In case there were only undefined values, the return should be zero.
+				 */
+				if (minElement.oclIsUndefined().isTrue())
+					result = (T) JavaStandardLibraryFactory.INSTANCE.createOclInteger(0L);
+				else
+					result = minElement;
+
+			}
+		}
+
+		return result;
 	}
 
 	@SuppressWarnings("unchecked")

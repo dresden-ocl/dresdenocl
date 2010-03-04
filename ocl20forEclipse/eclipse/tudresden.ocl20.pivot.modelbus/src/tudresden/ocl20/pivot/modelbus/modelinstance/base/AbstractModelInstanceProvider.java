@@ -57,7 +57,6 @@ public abstract class AbstractModelInstanceProvider implements
 	 * tudresden.ocl20.pivot.modelbus.IModelInstanceProvider#getModelInstance
 	 * (java.io.File, tudresden.ocl20.pivot.modelbus.IModel)
 	 */
-	@SuppressWarnings("deprecation")
 	public IModelInstance getModelInstance(File modelInstanceFile, IModel model)
 			throws ModelAccessException {
 	

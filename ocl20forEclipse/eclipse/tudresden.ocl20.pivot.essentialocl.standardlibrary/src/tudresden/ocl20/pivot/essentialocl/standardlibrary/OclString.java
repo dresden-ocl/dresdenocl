@@ -86,4 +86,76 @@ public interface OclString extends OclLibraryObject {
 	 * @return
 	 */
 	OclReal toReal();
+
+	/**
+	 * Converts <code>this</code> to a boolean value.
+	 * 
+	 * @return <code>true</code> if <code>this</code> = "true", <code>false</code>
+	 *         otherwise
+	 */
+	OclBoolean toBoolean();
+
+	/**
+	 * Other name ('+') for {@link #concat(OclString)}.
+	 * 
+	 * @param s
+	 *          the {@link OclString} to concatenate
+	 * @return the concatenation of <code>this</code> and <code>s</code>
+	 */
+	OclString plus(OclString s);
+
+	/**
+	 * 
+	 * @return <code>this</code> with all characters converted to lower case
+	 *         characters
+	 */
+	OclString toLowerCase();
+
+	/**
+	 * 
+	 * @return <code>this</code> with all characters converted to upper case
+	 *         characters
+	 */
+	OclString toUpperCase();
+
+	/**
+	 * Queries the index in <code>this</code> at which <code>s</code> is a
+	 * substring of <code>this</code>, or zero if <code>s</code> is not a
+	 * substring of <code>this</code>. The empty string is considered to be a
+	 * substring of every string but the empty string, at index 1. No string is a
+	 * substring of the empty string.
+	 * 
+	 * @param s
+	 *          the substring to look for
+	 * @return the index in <code>this</code> at which <code>s</code> is a
+	 *         substring of <code>this</code>
+	 */
+	OclInteger indexOf(OclString s);
+
+	/**
+	 * Queries whether <code>s</code> and <code>this</code> are equivalent under
+	 * case-insensitive collation.
+	 * 
+	 * @param s
+	 *          the {@link OclString} to compare to
+	 * @return <code>true</code> if <code>this</code> and <code>s</code> are
+	 *         equivalent under case-insensitive collation
+	 */
+	OclBoolean equalsIgnoreCase(OclString s);
+
+	/**
+	 * Queries the character at position i in <code>this</code>.
+	 * 
+	 * @param i
+	 *          the position to look at
+	 * @return the character at position i in <code>this</code>
+	 */
+	OclString at(OclInteger i);
+
+	/**
+	 * Obtains the characters of <code>this</code> as a sequence.
+	 * 
+	 * @return the characters of <code>this</code> as an {@link OclSequence}
+	 */
+	OclSequence<OclString> characters();
 }

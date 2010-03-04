@@ -75,7 +75,6 @@
     <ownedOperation name="mod" type="//@oclInteger">
       <ownedParameter name="i" type="//@oclInteger"/>
     </ownedOperation>
-    <ownedOperation name="toString" type="//@oclString"/>
   </oclInteger>
   <oclReal name="Real" superType="//@oclAny" kind="Real">
     <ownedOperation name="-" type="//@oclReal"/>

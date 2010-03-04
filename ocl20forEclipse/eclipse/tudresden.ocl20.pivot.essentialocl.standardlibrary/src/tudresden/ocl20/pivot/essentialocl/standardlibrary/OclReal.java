@@ -148,4 +148,10 @@ public interface OclReal extends OclLibraryObject, OclComparable {
 	 *         <code>r</code>.
 	 */
 	OclBoolean isGreaterEqual(OclReal r);
+	
+	/**
+	 * 
+	 * @return a {@link OclString} representation of this {@link OclReal}
+	 */
+	OclString convertToString();
 }

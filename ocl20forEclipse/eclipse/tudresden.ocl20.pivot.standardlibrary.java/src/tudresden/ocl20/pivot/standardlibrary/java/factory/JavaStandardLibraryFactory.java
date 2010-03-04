@@ -52,6 +52,7 @@ import tudresden.ocl20.pivot.essentialocl.types.CollectionType;
 import tudresden.ocl20.pivot.essentialocl.types.OrderedSetType;
 import tudresden.ocl20.pivot.essentialocl.types.SequenceType;
 import tudresden.ocl20.pivot.essentialocl.types.SetType;
+import tudresden.ocl20.pivot.essentialocl.types.TypeType;
 import tudresden.ocl20.pivot.essentialocl.types.TypesFactory;
 import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance;
 import tudresden.ocl20.pivot.modelbus.modelinstance.exception.OperationAccessException;
@@ -776,6 +777,16 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 				result = (T) new JavaOclEnumLiteral(reason);
 			}
 
+			else if (type instanceof TypeType) {
+				result = (T) new BaseOclType<OclAny>(reason) {
+
+					public Type getType() {
+
+						return ((TypeType) type).getRepresentedType();
+					}
+				};
+			}
+
 			/* If no result has been created yet, create a JavaOclObject. */
 			if (result == null) {
 				result = (T) new JavaOclModelInstanceObject(reason, type);
@@ -920,6 +931,16 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 				result = (T) new JavaOclEnumLiteral(invalidReason);
 			}
 
+			else if (type instanceof TypeType) {
+				result = (T) new BaseOclType<OclAny>(invalidReason) {
+
+					public Type getType() {
+
+						return ((TypeType) type).getRepresentedType();
+					}
+				};
+			}
+
 			/* If no result has been created yet, create a JavaOclObject. */
 			if (result == null) {
 				result = (T) new JavaOclModelInstanceObject(invalidReason, type);
@@ -930,7 +951,11 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 		 * Cache the result, so that createOclAny() can obtain the correct OclAny
 		 * for an IModelInstanceElement.
 		 */
-		cachedUndefinedOrInvalid.put(result.getModelInstanceElement(), result);
+		try {
+			cachedUndefinedOrInvalid.put(result.getModelInstanceElement(), result);
+		} catch (UnsupportedOperationException e) {
+			// ignore this; from OclType that has no model instance element
+		}
 
 		return result;
 	}
@@ -971,6 +996,23 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 	 */
 	private abstract class BaseOclType<U extends OclAny> implements OclType<U> {
 
+		protected String _undefinedReason;
+		protected Throwable _invalidReason;
+
+		public BaseOclType() {
+
+		}
+
+		public BaseOclType(String _undefinedReason) {
+
+			this._undefinedReason = _undefinedReason;
+		}
+
+		public BaseOclType(Throwable _invalidReason) {
+
+			this._invalidReason = _invalidReason;
+		}
+
 		/*
 		 * (non-Javadoc)
 		 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny#asSet()
@@ -990,7 +1032,7 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 		 */
 		public String getUndefinedReason() {
 
-			return null;
+			return _undefinedReason;
 		}
 
 		/*
@@ -1032,7 +1074,7 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 		 */
 		public OclBoolean oclIsUndefined() {
 
-			return JavaOclBoolean.getInstance(false);
+			return JavaOclBoolean.getInstance(_undefinedReason != null);
 		}
 
 		/*
@@ -1056,7 +1098,7 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 		 */
 		public OclBoolean oclIsInvalid() {
 
-			return JavaOclBoolean.getInstance(false);
+			return JavaOclBoolean.getInstance(_invalidReason != null);
 		}
 
 		/*
@@ -1085,6 +1127,13 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 					TypeConstants.BOOLEAN,
 					new UnsupportedOperationException(
 							"oclIsTypeOf(OclType<T> typespec) is not supported on meta-type OclType"));
+		}
+
+		public <T extends OclAny> OclType<T> oclType() {
+
+			return createOclInvalid(TypeConstants.TYPE(getType()),
+					new UnsupportedOperationException(
+							"oclType() is not supported on meta-type OclType"));
 		}
 
 		/*
@@ -1134,7 +1183,7 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 		 */
 		public Throwable getInvalidReason() {
 
-			return null;
+			return _invalidReason;
 		}
 
 		/*

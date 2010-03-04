@@ -19,7 +19,7 @@ import tudresden.ocl20.pivot.modelbus.modelinstance.types.base.TypeConstants;
  * Tests for real values in OCL.
  * 
  * @author Michael Thiele
- *
+ * 
  */
 public class JavaOclRealTest {
 
@@ -208,4 +208,13 @@ public class JavaOclRealTest {
 		assertTrue(real0_25.asSet().isEqualTo(oclRealSet0_25).isTrue());
 	}
 
+	@Test
+	public void testToString() {
+
+		assertTrue(real0_25.convertToString().isEqualTo(
+				myStandardLibraryFactory.createOclString("0.25")).isTrue());
+		// FIXME Michael: 1 oder 1.0?
+		assertTrue(real1.convertToString().isEqualTo(
+				myStandardLibraryFactory.createOclString("1.0")).isTrue());
+	}
 }

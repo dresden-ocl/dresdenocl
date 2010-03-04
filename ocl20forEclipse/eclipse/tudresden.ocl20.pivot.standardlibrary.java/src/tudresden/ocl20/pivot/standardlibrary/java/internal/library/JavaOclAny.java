@@ -375,6 +375,26 @@ public abstract class JavaOclAny implements OclAny {
 
 	/*
 	 * (non-Javadoc)
+	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny#oclType()
+	 */
+	public <T extends OclAny> OclType<T> oclType() {
+
+		OclType<T> result;
+		Type type = this.getModelInstanceElement().getType();
+
+		result = checkInvalid(TypeConstants.TYPE(type), this);
+
+		if (result == null)
+			result = checkUndefined("oclType", TypeConstants.TYPE(type), this);
+
+		if (result == null)
+			result = JavaStandardLibraryFactory.INSTANCE.createOclType(type);
+
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
 	 * @seetudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny#
 	 * getModelInstanceElement()
 	 */

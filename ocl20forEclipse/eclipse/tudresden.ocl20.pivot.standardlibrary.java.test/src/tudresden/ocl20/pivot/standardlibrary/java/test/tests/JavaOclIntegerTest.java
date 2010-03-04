@@ -153,4 +153,15 @@ public class JavaOclIntegerTest {
 		assertTrue(integer_400.negative().isEqualTo(integer400).isTrue());
 	}
 
+	@Test
+	public void testToString() {
+
+		assertTrue(integer0.convertToString().isEqualTo(
+				myStandardLibraryFactory.createOclString("0")).isTrue());
+		assertTrue(integer400.convertToString().isEqualTo(
+				myStandardLibraryFactory.createOclString("400")).isTrue());
+		assertTrue(undefined.convertToString().oclIsInvalid().isTrue());
+		assertTrue(invalid.convertToString().oclIsInvalid().isTrue());
+	}
+
 }

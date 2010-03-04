@@ -112,5 +112,12 @@ public interface OclBoolean extends OclLibraryObject {
 	 *         elseStatement
 	 */
 	OclAny ifThenElse(OclAny thenStatement, OclAny elseStatement);
+	
+	
+	/**
+	 * 
+	 * @return a {@link OclString} representation of this {@link OclBoolean}
+	 */
+	OclString convertToString();
 
 }

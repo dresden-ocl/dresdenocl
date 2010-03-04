@@ -89,17 +89,6 @@ public class JavaOclOrderedSetTest {
 	@Test
 	public void testAppend() {
 
-		appendAndIncluding();
-	}
-
-	@Test
-	public void testIncluding() {
-
-		appendAndIncluding();
-	}
-
-	private void appendAndIncluding() {
-
 		assertTrue(emptyOrderedSet.append(oclReal0_5).isEqualTo(oclOrderedSet)
 				.isTrue());
 		assertTrue(emptyOrderedSet.isEmpty().isTrue());
@@ -108,6 +97,20 @@ public class JavaOclOrderedSetTest {
 				oclOrderedSet2).isTrue());
 		assertTrue(oclOrderedSet.size().isEqualTo(integer1).isTrue());
 		assertTrue(oclOrderedSet.append(oclReal0_5).isEqualTo(oclOrderedSet)
+				.isTrue());
+	}
+
+	@Test
+	public void testIncluding() {
+
+		assertTrue(emptyOrderedSet.including(oclReal0_5).isEqualTo(oclOrderedSet)
+				.isTrue());
+		assertTrue(emptyOrderedSet.isEmpty().isTrue());
+
+		assertTrue(oclOrderedSet.including(oclReal1_5).including(undefined)
+				.isEqualTo(oclOrderedSet2).isTrue());
+		assertTrue(oclOrderedSet.size().isEqualTo(integer1).isTrue());
+		assertTrue(oclOrderedSet.including(oclReal0_5).isEqualTo(oclOrderedSet)
 				.isTrue());
 	}
 

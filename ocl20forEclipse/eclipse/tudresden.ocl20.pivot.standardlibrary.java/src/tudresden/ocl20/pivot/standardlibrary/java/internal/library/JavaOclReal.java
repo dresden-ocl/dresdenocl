@@ -39,6 +39,7 @@ import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclComparable;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclReal;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSet;
+import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclString;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceReal;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.base.TypeConstants;
@@ -598,6 +599,29 @@ public class JavaOclReal extends JavaOclLibraryObject implements OclReal,
 		result.append("]");
 
 		return result.toString();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclReal#convertToString
+	 * ()
+	 */
+	public OclString convertToString() {
+
+		OclString result;
+
+		result = checkInvalid(TypeConstants.STRING, this);
+
+		if (result == null)
+			result = checkUndefined("toString", TypeConstants.STRING, this);
+
+		if (result == null)
+			result =
+					JavaStandardLibraryFactory.INSTANCE
+							.createOclString(getModelInstanceReal().getDouble().toString());
+
+		return result;
 	}
 
 }
