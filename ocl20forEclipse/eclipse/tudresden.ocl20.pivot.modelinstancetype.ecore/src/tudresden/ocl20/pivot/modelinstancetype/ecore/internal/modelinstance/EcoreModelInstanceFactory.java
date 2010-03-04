@@ -56,8 +56,8 @@ public class EcoreModelInstanceFactory extends BasisJavaModelInstanceFactory
 		implements IModelInstanceFactory {
 
 	/** The {@link Logger} for this class. */
-	private static final Logger LOGGER =
-			EcoreModelInstanceTypePlugin.getLogger(EcoreModelInstanceFactory.class);
+	private static final Logger LOGGER = EcoreModelInstanceTypePlugin
+			.getLogger(EcoreModelInstanceFactory.class);
 
 	/**
 	 * The already adapted {@link IModelInstanceElement}s of this
@@ -65,15 +65,15 @@ public class EcoreModelInstanceFactory extends BasisJavaModelInstanceFactory
 	 * If an {@link EObject} is disposed, its adapted
 	 * {@link IModelInstanceElement} will be disposed as well.</p>
 	 */
-	private Map<EObject, IModelInstanceElement> myCachedAdaptedObjects =
-			new WeakHashMap<EObject, IModelInstanceElement>();
+	private Map<EObject, IModelInstanceElement> myCachedAdaptedObjects = new WeakHashMap<EObject, IModelInstanceElement>();
 
 	/** The IModel for that the {@link IModelInstanceElement}s will be created. */
 	private IModel myModel;
 
 	/**
 	 * <p>
-	 * Creates a new {@link EcoreModelInstanceFactory} for a given {@link IModel}.
+	 * Creates a new {@link EcoreModelInstanceFactory} for a given
+	 * {@link IModel}.
 	 * </p>
 	 */
 	public EcoreModelInstanceFactory(IModel model) {
@@ -83,6 +83,7 @@ public class EcoreModelInstanceFactory extends BasisJavaModelInstanceFactory
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceFactory
 	 * #createModelInstanceElement(java.lang.Object)
@@ -115,8 +116,8 @@ public class EcoreModelInstanceFactory extends BasisJavaModelInstanceFactory
 			/* Check if the given Object is an EnumerationLiteral. */
 			if (adapted instanceof Enum<?>) {
 
-				result =
-						this.createEcoreModelInstanceEnumerationLiteral((Enum<?>) adapted);
+				result = this
+						.createEcoreModelInstanceEnumerationLiteral((Enum<?>) adapted);
 			}
 
 			/* Else check if the given Object is an EObject. */
@@ -140,8 +141,7 @@ public class EcoreModelInstanceFactory extends BasisJavaModelInstanceFactory
 			else {
 				String msg;
 
-				msg =
-						EcoreModelInstanceTypeMessages.EcoreModelInstanceFactory_AdapteeIsNoEObjectInstance;
+				msg = EcoreModelInstanceTypeMessages.EcoreModelInstanceFactory_AdapteeIsNoEObjectInstance;
 				msg = NLS.bind(msg, adapted);
 
 				throw new TypeNotFoundInModelException(msg);
@@ -165,6 +165,7 @@ public class EcoreModelInstanceFactory extends BasisJavaModelInstanceFactory
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceFactory
 	 * #createModelInstanceElement(java.lang.Object,
@@ -195,8 +196,8 @@ public class EcoreModelInstanceFactory extends BasisJavaModelInstanceFactory
 		if (result == null) {
 
 			/*
-			 * Try to use the BasisJavaModelInstanceFactory to probably create an
-			 * adapter for a primitive type or a collection.
+			 * Try to use the BasisJavaModelInstanceFactory to probably create
+			 * an adapter for a primitive type or a collection.
 			 */
 			result = super.createModelInstanceElement(adapted, type);
 
@@ -207,49 +208,77 @@ public class EcoreModelInstanceFactory extends BasisJavaModelInstanceFactory
 				if (type instanceof Enumeration) {
 
 					/*
-					 * If adapted == null, i.e. a PropertyCallExp returned a null value,
-					 * simply try to create an undefined value.
+					 * If adapted == null, i.e. a PropertyCallExp returned a
+					 * null value, simply try to create an undefined value.
 					 */
 					if (adapted == null) {
-						result =
-								BasisJavaModelInstanceFactory
-										.createModelInstanceEnumerationLiteral(null);
+						result = BasisJavaModelInstanceFactory
+								.createModelInstanceEnumerationLiteral(null);
 					}
 
 					else {
 						/*
-						 * Check if the object is an EnumerationLiteral and has the same
-						 * type as the given type.
+						 * Check if the object is an EnumerationLiteral and has
+						 * the same type as the given type.
 						 */
-						if (adapted.getClass().isEnum()
+						if (adapted.getClass().isEnum()) {
 
-								&& EcoreModelInstanceTypeUtility.toQualifiedNameList(
-										adapted.getClass().getCanonicalName()).equals(
-										type.getQualifiedNameList())) {
-							try {
-								result =
-										this
+							List<String> modelInstanceElementTypeName;
+							modelInstanceElementTypeName = EcoreModelInstanceTypeUtility
+									.toQualifiedNameList(adapted.getClass()
+											.getCanonicalName());
+
+							if (modelInstanceElementTypeName.size() > 0) {
+
+								try {
+									Type modelInstanceElementType;
+									modelInstanceElementType = null;
+
+									while (modelInstanceElementTypeName.size() > 0
+											&& modelInstanceElementType == null) {
+										modelInstanceElementType = this.myModel
+												.findType(modelInstanceElementTypeName);
+										modelInstanceElementTypeName.remove(0);
+									}
+									// end while.
+
+									if (modelInstanceElementType != null
+											&& modelInstanceElementType
+													.conformsTo(type)) {
+										result = this
 												.createEcoreModelInstanceEnumerationLiteral((Enum<?>) adapted);
+									}
+									// no else.
+								}
+
+								catch (TypeNotFoundInModelException e) {
+									String msg;
+
+									msg = EcoreModelInstanceTypeMessages.EcoreModelInstanceFactory_CannotAdaptToType;
+									msg = NLS.bind(msg, adapted, type);
+
+									throw new IllegalArgumentException();
+								}
+
+								catch (ModelAccessException e) {
+									String msg;
+
+									msg = EcoreModelInstanceTypeMessages.EcoreModelInstanceFactory_CannotAdaptToType;
+									msg = NLS.bind(msg, adapted, type);
+
+									throw new IllegalArgumentException();
+								}
 							}
-
-							catch (TypeNotFoundInModelException e) {
-								String msg;
-
-								msg =
-										EcoreModelInstanceTypeMessages.EcoreModelInstanceFactory_CannotAdaptToType;
-								msg = NLS.bind(msg, adapted, type);
-
-								throw new IllegalArgumentException();
-							}
+							// no else.
 						}
+						// no else.
 					}
 
 					/* Else throw an exception. */
 					if (result == null) {
 						String msg;
 
-						msg =
-								EcoreModelInstanceTypeMessages.EcoreModelInstanceFactory_CannotAdaptToType;
+						msg = EcoreModelInstanceTypeMessages.EcoreModelInstanceFactory_CannotAdaptToType;
 						msg = NLS.bind(msg, adapted, type);
 
 						throw new IllegalArgumentException(msg);
@@ -265,25 +294,64 @@ public class EcoreModelInstanceFactory extends BasisJavaModelInstanceFactory
 						EObject eObject;
 						eObject = (EObject) adapted;
 
-						result = this.createEcoreModelInstanceObject(eObject, type);
+						/*
+						 * Try to find the type of the adaptable EObject (really
+						 * necessary! Could be a subtype of the given type).
+						 */
+						try {
+							Type modelInstanceElementType;
+							modelInstanceElementType = this
+									.findTypeOfEObjectInModel(eObject);
 
-						/* Cache the adapted object. */
-						this.myCachedAdaptedObjects.put(eObject, result);
+							/*
+							 * Only adapt if the found type conforms to the
+							 * given type.
+							 */
+							if (modelInstanceElementType.conformsTo(type)) {
+								result = this.createEcoreModelInstanceObject(
+										eObject, modelInstanceElementType);
+
+								/* Cache the adapted object. */
+								this.myCachedAdaptedObjects
+										.put(eObject, result);
+							}
+
+							/* Else throw an exception. */
+							else {
+								String msg;
+
+								msg = EcoreModelInstanceTypeMessages.EcoreModelInstanceFactory_CannotAdaptToType;
+								msg = NLS.bind(msg, adapted, type);
+
+								throw new IllegalArgumentException(msg);
+							}
+						}
+						// end try.
+
+						catch (TypeNotFoundInModelException e) {
+							String msg;
+
+							msg = EcoreModelInstanceTypeMessages.EcoreModelInstanceFactory_CannotAdaptToType;
+							msg = NLS.bind(msg, adapted, type);
+
+							throw new IllegalArgumentException(msg);
+						}
+						// end catch.
 					}
 
 					/* Else adapted is either 'null' or an exception is thrown */
 					else {
 
 						if (adapted == null) {
-							result = new EcoreModelInstanceObject(null, type, this);
+							result = new EcoreModelInstanceObject(null, type,
+									this);
 						}
 
 						/* Else the throw an exception. */
 						else {
 							String msg;
 
-							msg =
-									EcoreModelInstanceTypeMessages.EcoreModelInstanceFactory_CannotAdaptToType;
+							msg = EcoreModelInstanceTypeMessages.EcoreModelInstanceFactory_CannotAdaptToType;
 							msg = NLS.bind(msg, adapted, type);
 
 							throw new IllegalArgumentException(msg);
@@ -317,12 +385,12 @@ public class EcoreModelInstanceFactory extends BasisJavaModelInstanceFactory
 	 * </p>
 	 * 
 	 * @param eObject
-	 *          The {@link EObject} that shall be adapted.
+	 *            The {@link EObject} that shall be adapted.
 	 * @return The adapted {@link EcoreModelInstanceObject}.
 	 * @throws TypeNotFoundInModelException
-	 *           Thrown, if the given {@link EObject} cannot be adapted to any
-	 *           {@link Type} of the {@link IModel} of this
-	 *           {@link EcoreModelInstanceFactory}.
+	 *             Thrown, if the given {@link EObject} cannot be adapted to any
+	 *             {@link Type} of the {@link IModel} of this
+	 *             {@link EcoreModelInstanceFactory}.
 	 */
 	private IModelInstanceElement createEcoreModelInstanceObject(EObject eObject)
 			throws TypeNotFoundInModelException {
@@ -342,7 +410,7 @@ public class EcoreModelInstanceFactory extends BasisJavaModelInstanceFactory
 		IModelInstanceElement result;
 
 		Type type;
-		type = this.findTypesOfEObjectInModel(eObject);
+		type = this.findTypeOfEObjectInModel(eObject);
 
 		result = new EcoreModelInstanceObject(eObject, type, this);
 
@@ -367,13 +435,13 @@ public class EcoreModelInstanceFactory extends BasisJavaModelInstanceFactory
 	 * </p>
 	 * 
 	 * @param eObject
-	 *          The {@link EObject} that shall be adapted.
+	 *            The {@link EObject} that shall be adapted.
 	 * @param The
-	 *          {@link Type} to that the {@link EObject} shall be adapted.
+	 *            {@link Type} to that the {@link EObject} shall be adapted.
 	 * @return The adapted {@link EcoreModelInstanceObject}.
 	 */
-	private IModelInstanceElement createEcoreModelInstanceObject(EObject eObject,
-			Type type) {
+	private IModelInstanceElement createEcoreModelInstanceObject(
+			EObject eObject, Type type) {
 
 		/* Probably debug the entry of this method. */
 		if (LOGGER.isDebugEnabled()) {
@@ -413,11 +481,11 @@ public class EcoreModelInstanceFactory extends BasisJavaModelInstanceFactory
 	 * </p>
 	 * 
 	 * @param anEnum
-	 *          The {@link Enum} that shall be adapted.
+	 *            The {@link Enum} that shall be adapted.
 	 * @return The created {@link ModelInstanceEnumerationLiteral}.
 	 * @throws TypeNotFoundInModelException
-	 *           Thrown, if the given {@link Enum} cannot be adapted to the
-	 *           {@link IModel} of this {@link EcoreModelInstanceFactory}.
+	 *             Thrown, if the given {@link Enum} cannot be adapted to the
+	 *             {@link IModel} of this {@link EcoreModelInstanceFactory}.
 	 */
 	private IModelInstanceElement createEcoreModelInstanceEnumerationLiteral(
 			Enum<?> anEnum) throws TypeNotFoundInModelException {
@@ -463,8 +531,7 @@ public class EcoreModelInstanceFactory extends BasisJavaModelInstanceFactory
 			if (result == null) {
 				String msg;
 
-				msg =
-						EcoreModelInstanceTypeMessages.EcoreModelInstanceFactory_TypeNotFoundInModel;
+				msg = EcoreModelInstanceTypeMessages.EcoreModelInstanceFactory_TypeNotFoundInModel;
 				msg = NLS.bind(msg, anEnum);
 
 				throw new TypeNotFoundInModelException(msg);
@@ -474,8 +541,7 @@ public class EcoreModelInstanceFactory extends BasisJavaModelInstanceFactory
 		else {
 			String msg;
 
-			msg =
-					EcoreModelInstanceTypeMessages.EcoreModelInstanceFactory_TypeNotFoundInModel;
+			msg = EcoreModelInstanceTypeMessages.EcoreModelInstanceFactory_TypeNotFoundInModel;
 			msg = NLS.bind(msg, anEnum);
 
 			throw new TypeNotFoundInModelException(msg);
@@ -502,11 +568,11 @@ public class EcoreModelInstanceFactory extends BasisJavaModelInstanceFactory
 	 * </p>
 	 * 
 	 * @param aClass
-	 *          The {@link Class} for that the {@link Type} shall be returned.
+	 *            The {@link Class} for that the {@link Type} shall be returned.
 	 * @return The found {@link Type}.
 	 * @throws TypeNotFoundInModelException
-	 *           Thrown, if a given {@link Object} cannot be adapted to a
-	 *           {@link Type} in the {@link IModel}.
+	 *             Thrown, if a given {@link Object} cannot be adapted to a
+	 *             {@link Type} in the {@link IModel}.
 	 */
 	private Type findTypeOfClassInModel(Class<?> aClass)
 			throws TypeNotFoundInModelException {
@@ -515,16 +581,16 @@ public class EcoreModelInstanceFactory extends BasisJavaModelInstanceFactory
 
 		try {
 			List<String> typePath;
-			typePath =
-					EcoreModelInstanceTypeUtility.toQualifiedNameList(aClass
-							.getCanonicalName());
+			typePath = EcoreModelInstanceTypeUtility.toQualifiedNameList(aClass
+					.getCanonicalName());
 
 			result = null;
 
 			/*
-			 * The problem with Ecore models is that Ecore models do not contain the
-			 * complete package hierarchy of the implementation class. Thus, remove
-			 * package per package from the path and search for a type again.
+			 * The problem with Ecore models is that Ecore models do not contain
+			 * the complete package hierarchy of the implementation class. Thus,
+			 * remove package per package from the path and search for a type
+			 * again.
 			 */
 			while (result == null && typePath.size() >= 2) {
 				result = this.myModel.findType(typePath);
@@ -542,8 +608,7 @@ public class EcoreModelInstanceFactory extends BasisJavaModelInstanceFactory
 		if (result == null) {
 			String msg;
 
-			msg =
-					EcoreModelInstanceTypeMessages.EcoreModelInstanceFactory_TypeNotFoundInModel;
+			msg = EcoreModelInstanceTypeMessages.EcoreModelInstanceFactory_TypeNotFoundInModel;
 			msg = NLS.bind(msg, aClass);
 
 			throw new TypeNotFoundInModelException(msg);
@@ -560,8 +625,8 @@ public class EcoreModelInstanceFactory extends BasisJavaModelInstanceFactory
 	 * </p>
 	 * 
 	 * <p>
-	 * Probably a {@link Class} could be related to different {@link Type}s in the
-	 * {@link IModel} that do not know each other. E.g., multiple interface
+	 * Probably a {@link Class} could be related to different {@link Type}s in
+	 * the {@link IModel} that do not know each other. E.g., multiple interface
 	 * inheritance. In these cases, the result will be a {@link Set} containing
 	 * all {@link Type}s, the {@link Class} could be related to.
 	 * </p>
@@ -578,11 +643,12 @@ public class EcoreModelInstanceFactory extends BasisJavaModelInstanceFactory
 	 * </ul>
 	 * 
 	 * @param aClass
-	 *          The {@link Class} for that the {@link Type}s shall be returned.
+	 *            The {@link Class} for that the {@link Type}s shall be
+	 *            returned.
 	 * @return The found {@link Type}s as an array.
 	 * @throws TypeNotFoundInModelException
-	 *           Thrown, if a given {@link Object} cannot be adapted to a
-	 *           {@link Type} in the {@link IModel}.
+	 *             Thrown, if a given {@link Object} cannot be adapted to a
+	 *             {@link Type} in the {@link IModel}.
 	 */
 	private Set<Type> findTypesOfClassInModel(Class<?> clazz)
 			throws TypeNotFoundInModelException {
@@ -599,7 +665,10 @@ public class EcoreModelInstanceFactory extends BasisJavaModelInstanceFactory
 				result.add(this.findTypeOfClassInModel(clazz));
 			}
 
-			/* Else search for the interfaces in the model and for the super type. */
+			/*
+			 * Else search for the interfaces in the model and for the super
+			 * type.
+			 */
 			catch (TypeNotFoundInModelException e) {
 
 				/* Add the types of the implemented interfaces. */
@@ -615,25 +684,35 @@ public class EcoreModelInstanceFactory extends BasisJavaModelInstanceFactory
 
 				/* Add recursively found types for the super class. */
 				try {
-					result.addAll(findTypesOfClassInModel(clazz.getSuperclass()));
+					result
+							.addAll(findTypesOfClassInModel(clazz
+									.getSuperclass()));
 				}
 
 				catch (TypeNotFoundInModelException e2) {
-					/* Continue probably one of the interfaces will implement a type. */
+					/*
+					 * Continue probably one of the interfaces will implement a
+					 * type.
+					 */
 				}
 
-				/* Remove types, that are already represented by sub types in the model. */
+				/*
+				 * Remove types, that are already represented by sub types in
+				 * the model.
+				 */
 				result = this.removeRedundantModelTypes(result);
 			}
 			// end else.
 		}
 
-		/* Check if any implemented type has been found. Else throw an exception. */
+		/*
+		 * Check if any implemented type has been found. Else throw an
+		 * exception.
+		 */
 		if (result.size() == 0) {
 			String msg;
 
-			msg =
-					EcoreModelInstanceTypeMessages.EcoreModelInstanceFactory_TypeNotFoundInModel;
+			msg = EcoreModelInstanceTypeMessages.EcoreModelInstanceFactory_TypeNotFoundInModel;
 			msg = NLS.bind(msg, clazz);
 
 			throw new TypeNotFoundInModelException(msg);
@@ -649,13 +728,13 @@ public class EcoreModelInstanceFactory extends BasisJavaModelInstanceFactory
 	 * </p>
 	 * 
 	 * @param eObject
-	 *          The {@link EObject} for that {@link Type}s shall be found.
+	 *            The {@link EObject} for that {@link Type}s shall be found.
 	 * @return A {@link Set} of found {@link Type}s.
 	 * @throw {@link TypeNotFoundInModelException} Thrown, if the given
 	 *        {@link EObject} cannot be adapted to any {@link Type} of the
 	 *        {@link IModel} of this {@link EcoreModelInstanceFactory}.
 	 */
-	private Type findTypesOfEObjectInModel(EObject eObject)
+	private Type findTypeOfEObjectInModel(EObject eObject)
 			throws TypeNotFoundInModelException {
 
 		Type result;
@@ -685,7 +764,8 @@ public class EcoreModelInstanceFactory extends BasisJavaModelInstanceFactory
 	 * </p>
 	 * 
 	 * @param types
-	 *          The {@link Set} from which super {@link Type}s shall be removed.
+	 *            The {@link Set} from which super {@link Type}s shall be
+	 *            removed.
 	 * @return The {@link Set} without redundant super {@link Type}s.
 	 */
 	private Set<Type> removeRedundantModelTypes(Set<Type> types) {
