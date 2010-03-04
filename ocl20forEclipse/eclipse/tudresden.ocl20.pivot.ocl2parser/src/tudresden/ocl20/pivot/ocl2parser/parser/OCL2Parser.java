@@ -54,7 +54,14 @@ public class OCL2Parser {
 
 	public void parse() throws ParsingException, LexException, IOException,
 			BuildingASTException, SemanticException {
-		PushbackReader pushbackReader = new PushbackReader(oclSource, 1000);
+
+		/*
+		 * TODO Claas: The size of the pushbackBuffer is arbitrary. Probably we
+		 * should improve this?
+		 */
+		PushbackReader pushbackReader;
+		pushbackReader = new PushbackReader(oclSource, 10000);
+
 		Lexer lexer = new Lexer(pushbackReader);
 		Parser parser = new Parser(lexer);
 
