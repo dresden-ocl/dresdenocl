@@ -49,4 +49,19 @@ public class TestBody {
 
 		assertEquals(new Integer(42), class1.bodyOperation01());
 	}
+
+	/**
+	 * <p>
+	 * Tests the generated code for a <code>Constraint</code> of the
+	 * <code>ConstraintKind.BODY</code>.
+	 * </p>
+	 */
+	@Test
+	public void testBody02() {
+	
+		Class1 class1;
+		class1 = new Class1();
+	
+		assertEquals(new Integer(-42), class1.bodyOperation02(42));
+	}
 }

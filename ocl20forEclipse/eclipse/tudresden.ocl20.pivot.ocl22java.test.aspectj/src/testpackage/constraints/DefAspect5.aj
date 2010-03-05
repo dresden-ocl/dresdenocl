@@ -12,24 +12,24 @@ public privileged aspect DefAspect5 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testCollectionMax(tudresden.ocl20.pivot.ocl2java.types.OclCollection<Object> source)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testCollectionMin(tudresden.ocl20.pivot.ocl2java.types.OclCollection<Object> source)}.</p>
      */
-    protected pointcut testCollectionMaxCaller(testpackage.Class1 aClass, tudresden.ocl20.pivot.ocl2java.types.OclCollection<Object> source):
-    	call(* testpackage.Class1.testCollectionMax(tudresden.ocl20.pivot.ocl2java.types.OclCollection<Object>))
+    protected pointcut testCollectionMinCaller(testpackage.Class1 aClass, tudresden.ocl20.pivot.ocl2java.types.OclCollection<Object> source):
+    	call(* testpackage.Class1.testCollectionMin(tudresden.ocl20.pivot.ocl2java.types.OclCollection<Object>))
     	&& target(aClass) && args(source);
     
     /**
-     * <p>Defines the method testCollectionMax(tudresden.ocl20.pivot.ocl2java.types.OclCollection<Object> source) defined by the constraint
+     * <p>Defines the method testCollectionMin(tudresden.ocl20.pivot.ocl2java.types.OclCollection<Object> source) defined by the constraint
      * <code>context Class1
-     *       def: testCollectionMax = source[].max()</code></p>
+     *       def: testCollectionMin = source[].min()</code></p>
      */
-    Object around(testpackage.Class1 aClass, tudresden.ocl20.pivot.ocl2java.types.OclCollection<Object> source): testCollectionMaxCaller(aClass, source) {
+    Object around(testpackage.Class1 aClass, tudresden.ocl20.pivot.ocl2java.types.OclCollection<Object> source): testCollectionMinCaller(aClass, source) {
         Object result1;
         result1 = null;
         
-        /* Compute the result of a max operation. */
+        /* Compute the result of a min operation. */
         for (Object anElement1 : source) {
-            if (result1 == null || ((Comparable) result1).compareTo((Comparable) anElement1) < 0) {
+            if (result1 == null || ((Comparable) result1).compareTo((Comparable) anElement1) > 0) {
                 result1 = anElement1;
             }
         }

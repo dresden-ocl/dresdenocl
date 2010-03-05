@@ -35,7 +35,8 @@ import tudresden.ocl20.pivot.ocl2java.Ocl22JavaPlugin;
  * 
  */
 @RunWith(Suite.class)
-@Suite.SuiteClasses( { TestBody.class, TestDef.class })
+@Suite.SuiteClasses( { TestBody.class, TestDef.class, TestPre.class,
+		TestPost.class })
 public class AllConstraintsKindTests {
 	/*
 	 * This class remains completely empty, being used only as a holder for the

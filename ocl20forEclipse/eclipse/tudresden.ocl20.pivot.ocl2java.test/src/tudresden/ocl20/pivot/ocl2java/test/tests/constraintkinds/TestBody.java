@@ -81,10 +81,27 @@ public class TestBody extends AbstractDiffTest {
 	 * @throws Ocl22CodeException
 	 */
 	@Test
-	public void testToString01() throws IllegalArgumentException,
+	public void testBody01() throws IllegalArgumentException,
 			OCL2ParsingException, ModelAccessException, Ocl22CodeException {
 
 		this.compareInstrumentationCodeGeneration("constraintkindtest/body",
 				"body01");
+	}
+
+	/**
+	 * <p>
+	 * Tests the instrumentation of the constraint.
+	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 * @throws OCL2ParsingException
+	 * @throws IllegalArgumentException
+	 * @throws Ocl22CodeException
+	 */
+	@Test
+	public void testBody02() throws IllegalArgumentException,
+			OCL2ParsingException, ModelAccessException, Ocl22CodeException {
+
+		this.compareInstrumentationCodeGeneration("constraintkindtest/body", "body02");
 	}
 }

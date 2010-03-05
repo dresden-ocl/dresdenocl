@@ -58,4 +58,16 @@ public class TestDef extends Class1 {
 
 		assertEquals(new Integer(42), this.defOperation01());
 	}
+
+	/**
+	 * <p>
+	 * Tests the generated code for a <code>Constraint</code> of the
+	 * <code>ConstraintKind.DEF</code>.
+	 * </p>
+	 */
+	@Test
+	public void testDef03() {
+
+		assertEquals(new Integer(-42), this.defOperation02(new Integer(42)));
+	}
 }

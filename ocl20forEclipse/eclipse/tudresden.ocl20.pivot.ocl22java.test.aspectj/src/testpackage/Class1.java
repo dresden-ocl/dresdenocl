@@ -42,4 +42,41 @@ public class Class1 {
 		throw new RuntimeException(
 				"AspectJ body expression was not instrumented correctly.");
 	}
+
+	/**
+	 * <p>
+	 * Used to test a body constraint.
+	 * </p>
+	 * 
+	 * @return What defined in the generated AspectJ aspect.
+	 * @throws RuntimeException
+	 *             Thrown, if the AspectJ aspect was not instrumented correctly.
+	 */
+	public Integer bodyOperation02(Integer in1) {
+		/* Implemented by AspectJ file. */
+		throw new RuntimeException(
+				"AspectJ body expression was not instrumented correctly.");
+	}
+
+	/**
+	 * <p>
+	 * Used to test a post constraint.
+	 * </p>
+	 * 
+	 * @return What defined in the generated AspectJ aspect.
+	 */
+	public Integer postOperation01(Integer in1) {
+		return in1 + 2;
+	}
+
+	/**
+	 * <p>
+	 * Used to test a pre constraint.
+	 * </p>
+	 * 
+	 * @return What defined in the generated AspectJ aspect.
+	 */
+	public Integer preOperation01(Integer in1) {
+		return -in1;
+	}
 }

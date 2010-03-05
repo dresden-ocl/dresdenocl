@@ -12,18 +12,18 @@ public privileged aspect DefAspect11 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testSetFlatten(tudresden.ocl20.pivot.ocl2java.types.OclSet<Object> source)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testRealToString(Float source)}.</p>
      */
-    protected pointcut testSetFlattenCaller(testpackage.Class1 aClass, tudresden.ocl20.pivot.ocl2java.types.OclSet<Object> source):
-    	call(* testpackage.Class1.testSetFlatten(tudresden.ocl20.pivot.ocl2java.types.OclSet<Object>))
+    protected pointcut testRealToStringCaller(testpackage.Class1 aClass, Float source):
+    	call(* testpackage.Class1.testRealToString(Float))
     	&& target(aClass) && args(source);
     
     /**
-     * <p>Defines the method testSetFlatten(tudresden.ocl20.pivot.ocl2java.types.OclSet<Object> source) defined by the constraint
+     * <p>Defines the method testRealToString(Float source) defined by the constraint
      * <code>context Class1
-     *       def: testSetFlatten = source[].flatten()</code></p>
+     *       def: testRealToString = source[].toString()</code></p>
      */
-    tudresden.ocl20.pivot.ocl2java.types.OclSet<Object> around(testpackage.Class1 aClass, tudresden.ocl20.pivot.ocl2java.types.OclSet<Object> source): testSetFlattenCaller(aClass, source) {
-        return ((tudresden.ocl20.pivot.ocl2java.types.OclSet<Object>) source.flatten());
+    String around(testpackage.Class1 aClass, Float source): testRealToStringCaller(aClass, source) {
+        return source.toString();
     }
 }

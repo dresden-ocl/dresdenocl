@@ -23,6 +23,15 @@ public class ExtendedClass1 extends Object {
      *A method signature implemented by an aspect.
      *</p>
      */
+    public Integer defOperation02(Integer anInt) {
+        return null;
+    }
+
+    /**
+     *<p>
+     *A method signature implemented by an aspect.
+     *</p>
+     */
     public String testBooleanToString(Boolean source) {
         return null;
     }

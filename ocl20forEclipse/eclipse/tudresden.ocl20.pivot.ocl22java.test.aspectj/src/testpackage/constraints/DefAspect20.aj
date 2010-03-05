@@ -12,18 +12,18 @@ public privileged aspect DefAspect20 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testStringToLowerCase(String source)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testStringToUpperCase(String source)}.</p>
      */
-    protected pointcut testStringToLowerCaseCaller(testpackage.Class1 aClass, String source):
-    	call(* testpackage.Class1.testStringToLowerCase(String))
+    protected pointcut testStringToUpperCaseCaller(testpackage.Class1 aClass, String source):
+    	call(* testpackage.Class1.testStringToUpperCase(String))
     	&& target(aClass) && args(source);
     
     /**
-     * <p>Defines the method testStringToLowerCase(String source) defined by the constraint
+     * <p>Defines the method testStringToUpperCase(String source) defined by the constraint
      * <code>context Class1
-     *       def: testStringToLowerCase = source[].toLowerCase()</code></p>
+     *       def: testStringToUpperCase = source[].toUpperCase()</code></p>
      */
-    String around(testpackage.Class1 aClass, String source): testStringToLowerCaseCaller(aClass, source) {
-        return source.toLowerCase();
+    String around(testpackage.Class1 aClass, String source): testStringToUpperCaseCaller(aClass, source) {
+        return source.toUpperCase();
     }
 }

@@ -33,12 +33,12 @@ import tudresden.ocl20.pivot.pivotmodel.ConstraintKind;
 /**
  * <p>
  * Contains some test cases to test the code generation {@link Constraint}s of
- * the {@link ConstraintKind#DEFINITION}.
+ * the {@link ConstraintKind#PRECONDITION}.
  * </p>
  * 
  * @author Claas Wilke
  */
-public class TestDef extends AbstractDiffTest {
+public class TestPre extends AbstractDiffTest {
 
 	/**
 	 * <p>
@@ -81,46 +81,10 @@ public class TestDef extends AbstractDiffTest {
 	 * @throws Ocl22CodeException
 	 */
 	@Test
-	public void testDef01() throws IllegalArgumentException,
+	public void testPre01() throws IllegalArgumentException,
 			OCL2ParsingException, ModelAccessException, Ocl22CodeException {
 
-		this.compareInstrumentationCodeGeneration("constraintkindtest/def",
-				"def01");
-	}
-
-	/**
-	 * <p>
-	 * Tests the instrumentation of the constraint.
-	 * </p>
-	 * 
-	 * @throws ModelAccessException
-	 * @throws OCL2ParsingException
-	 * @throws IllegalArgumentException
-	 * @throws Ocl22CodeException
-	 */
-	@Test
-	public void testDef02() throws IllegalArgumentException,
-			OCL2ParsingException, ModelAccessException, Ocl22CodeException {
-
-		this.compareInstrumentationCodeGeneration("constraintkindtest/def",
-				"def02");
-	}
-
-	/**
-	 * <p>
-	 * Tests the instrumentation of the constraint.
-	 * </p>
-	 * 
-	 * @throws ModelAccessException
-	 * @throws OCL2ParsingException
-	 * @throws IllegalArgumentException
-	 * @throws Ocl22CodeException
-	 */
-	@Test
-	public void testDef03() throws IllegalArgumentException,
-			OCL2ParsingException, ModelAccessException, Ocl22CodeException {
-	
-		this.compareInstrumentationCodeGeneration("constraintkindtest/def",
-				"def03");
+		this.compareInstrumentationCodeGeneration("constraintkindtest/pre",
+				"pre01");
 	}
 }

@@ -12,18 +12,29 @@ public privileged aspect DefAspect15 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testStringEqualsIgnoreCase(String source, String arg01)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testStringCharacters(String source)}.</p>
      */
-    protected pointcut testStringEqualsIgnoreCaseCaller(testpackage.Class1 aClass, String source, String arg01):
-    	call(* testpackage.Class1.testStringEqualsIgnoreCase(String, String))
-    	&& target(aClass) && args(source, arg01);
+    protected pointcut testStringCharactersCaller(testpackage.Class1 aClass, String source):
+    	call(* testpackage.Class1.testStringCharacters(String))
+    	&& target(aClass) && args(source);
     
     /**
-     * <p>Defines the method testStringEqualsIgnoreCase(String source, String arg01) defined by the constraint
+     * <p>Defines the method testStringCharacters(String source) defined by the constraint
      * <code>context Class1
-     *       def: testStringEqualsIgnoreCase = source[].equalsIgnoreCase( arg01[])</code></p>
+     *       def: testStringCharacters = source[].characters()</code></p>
      */
-    Boolean around(testpackage.Class1 aClass, String source, String arg01): testStringEqualsIgnoreCaseCaller(aClass, source, arg01) {
-        return source.equalsIgnoreCase(arg01);
+    tudresden.ocl20.pivot.ocl2java.types.OclSequence<String> around(testpackage.Class1 aClass, String source): testStringCharactersCaller(aClass, source) {
+        tudresden.ocl20.pivot.ocl2java.types.OclSequence<String> result1;
+        result1 = new tudresden.ocl20.pivot.ocl2java.types.OclSequence<String>();
+        
+        /* Compute the result of a caharacters operation. */
+        for (String anElement1 : source.split("")) {
+            result1.add(anElement1);
+        }
+        
+        /* Remove the first element ''. */
+        result1.remove(result1.first());
+    
+        return result1;
     }
 }

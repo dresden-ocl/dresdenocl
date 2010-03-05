@@ -19,24 +19,49 @@ with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
 
 package tudresden.ocl20.pivot.ocl22java.test.aspectj.constraintkinds;
 
-import org.junit.runner.RunWith;
-import org.junit.runners.Suite;
+import org.junit.Test;
+
+import testpackage.Class1;
 
 /**
  * <p>
- * Provides a jUnit Test Suite containing test cases to test the correct
- * execution of AspectJ files generated for the different kinds of OCL
- * constraints (body, init, def, derive, pre, post, inv).
+ * Tests the generated code for a <code>Constraint</code> of the
+ * <code>ConstraintKind.PRECONDITION</code>.
  * </p>
  * 
  * @author Claas Wilke
  */
-@RunWith(Suite.class)
-@Suite.SuiteClasses( { TestBody.class, TestDef.class, TestPost.class,
-		TestPre.class })
-public class AllConstraintKindTests {
-	/*
-	 * This class remains completely empty, being used only as a holder for the
-	 * above annotations.
+public class TestPre {
+
+	/**
+	 * <p>
+	 * Tests the generated code for a <code>Constraint</code> of the
+	 * <code>ConstraintKind.PRECONDITION</code>.
+	 * </p>
 	 */
+	@Test
+	public void testPre01_01() {
+
+		Class1 class1;
+		class1 = new Class1();
+
+		/* Should be accepted. */
+		class1.preOperation01(42);
+	}
+
+	/**
+	 * <p>
+	 * Tests the generated code for a <code>Constraint</code> of the
+	 * <code>ConstraintKind.PRECONDITION</code>.
+	 * </p>
+	 */
+	@Test(expected = RuntimeException.class)
+	public void testPre01_02() {
+
+		Class1 class1;
+		class1 = new Class1();
+
+		/* Should be rejected. */
+		class1.preOperation01(null);
+	}
 }
