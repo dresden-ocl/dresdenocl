@@ -281,7 +281,13 @@ public class JavaModelProvider extends AbstractModelProvider implements
 	private Class<?> loadClassFromUrl(URL modelURL, List<URL> jarUrls)
 			throws ModelAccessException {
 
-		if (!(new File(modelURL.getFile()).exists())) {
+		String modelFilePath;
+		modelFilePath = modelURL.getFile();
+
+		/* Replace probably existing white spaces in the path. */
+		modelFilePath = modelFilePath.replaceAll("%20", " ");
+
+		if (!(new File(modelFilePath).exists())) {
 			throw new ModelAccessException("The given java class '" + modelURL
 					+ "' does not exists.");
 		}
