@@ -1428,8 +1428,8 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 						template.setAttribute("sourceExp", sourceCode
 								.getResultExp());
 						template.setAttribute("resultVar", resultVar);
-						template.setAttribute("elementName", this.myCodeTransEnv
-								.getNewIteratorVarName());
+						template.setAttribute("elementName",
+								this.myCodeTransEnv.getNewIteratorVarName());
 
 						result.addCode(template.toString());
 						resultExp = resultVar;
@@ -2809,17 +2809,8 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 				// no else.
 
 				/* Probably set the arguments of the operation. */
-				for (Parameter anArgument : anOperation.getInputParameter()) {
-					String anArgumentsName;
-					String anArgumentsType;
-
-					anArgumentsName = anArgument.getName();
-					anArgumentsType = this.transformType(anArgument.getType())
-							.toString();
-
-					adviceTemplate.setAttribute("args", anArgumentsName);
-					adviceTemplate.setAttribute("argTypes", anArgumentsType);
-				}
+				this.setArgumentsForInstrumentationTemplate(aConstraint,
+						adviceTemplate);
 
 				/* Probably set that the constraint operation is static. */
 				if (anOperation.isStatic()) {
@@ -3832,17 +3823,8 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 				// no else.
 
 				/* Probably set the arguments of the operation. */
-				for (Parameter anArgument : anOperation.getInputParameter()) {
-					String anArgumentsName;
-					String anArgumentsType;
-
-					anArgumentsName = anArgument.getName();
-					anArgumentsType = this.transformType(anArgument.getType())
-							.toString();
-
-					adviceTemplate.setAttribute("args", anArgumentsName);
-					adviceTemplate.setAttribute("argTypes", anArgumentsType);
-				}
+				this.setArgumentsForInstrumentationTemplate(aConstraint,
+						adviceTemplate);
 
 				/* Probably store some atPre values */
 				if (this.myCodeTransEnv.hasAtPreValues()) {
@@ -4073,17 +4055,8 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 				// no else.
 
 				/* Probably set the arguments of the operation. */
-				for (Parameter anArgument : anOperation.getInputParameter()) {
-					String anArgumentsName;
-					String anArgumentsType;
-
-					anArgumentsName = anArgument.getName();
-					anArgumentsType = this.transformType(anArgument.getType())
-							.toString();
-
-					adviceTemplate.setAttribute("args", anArgumentsName);
-					adviceTemplate.setAttribute("argTypes", anArgumentsType);
-				}
+				this.setArgumentsForInstrumentationTemplate(aConstraint,
+						adviceTemplate);
 
 				/* Probably disable inheritance for this post condition. */
 				if (this.mySettings.isInheritanceDisabled(aConstraint)) {
@@ -4396,5 +4369,34 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 			LOGGER.debug("saveGeneratedCode(String, String, String) - end");
 		}
 		// no else.
+	}
+
+	/**
+	 * <p>
+	 * Sets the argument names and {@link Type}s of a given {@link Constraint}
+	 * for its instrumentation template.
+	 * </p>
+	 * 
+	 * @param constraint
+	 *            The {@link Constraint} for that the arguments shall be set.
+	 * @param adviceTemplate
+	 *            The {@link ITemplate} to set the names and {@link Type}s.
+	 */
+	private void setArgumentsForInstrumentationTemplate(Constraint constraint,
+			ITemplate adviceTemplate) {
+
+		for (Variable anArgument : ((ExpressionInOcl) constraint
+				.getSpecification()).getParameter()) {
+			String anArgumentsName;
+			String anArgumentsType;
+
+			anArgumentsName = anArgument.getName();
+			anArgumentsType = this.transformType(anArgument.getType())
+					.toString();
+
+			adviceTemplate.setAttribute("args", anArgumentsName);
+			adviceTemplate.setAttribute("argTypes", anArgumentsType);
+		}
+		// end for.
 	}
 }

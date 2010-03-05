@@ -67,6 +67,8 @@ Release 2.1 (not scheduled yet)
   - The code generation of OclAny.allInstances() now works appropriately again.
   - The code generation of Collection.flatten() now works appropriately.
   - Transformation of abstract Collection type now works appropriately.
+  - The transformation of operations whose arguments are named differently in the constraint's context
+    than in the model now works correctly.
 
 
 GUI
