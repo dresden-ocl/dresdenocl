@@ -454,7 +454,7 @@ public final class MetaModelTestServices {
 			}
 
 			catch (ModelAccessException e) {
-				throw new RuntimeException(e.getMessage());
+				throw new RuntimeException(e.getMessage(), e);
 			}
 		}
 		// end else.
