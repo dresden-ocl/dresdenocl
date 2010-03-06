@@ -197,6 +197,222 @@ public class TestInteger {
 
 	/**
 	 * <p>
+	 * A test case testing the method <code>Integer.greaterThanEqual(Integer)</code>.
+	 * </p>
+	 */
+	@Test
+	public void testGreaterThanEqualPositive01() throws Exception {
+	
+		TestPerformer testPerformer;
+	
+		String modelFileName;
+		String oclFileName;
+	
+		oclFileName = "standardlibrary/integer/greaterThanEqualPositive01.ocl";
+		modelFileName = "testmodel.uml";
+	
+		/* Try to get the TestPerformer. */
+		testPerformer =
+				TestPerformer.getInstance(AllStandardLibraryTests.META_MODEL_ID,
+						AllStandardLibraryTests.MODEL_BUNDLE,
+						AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer.setModel(modelFileName);
+	
+		/* Try to parse the constraint file. */
+		testPerformer.parseFile(oclFileName);
+	}
+
+	/**
+	 * <p>
+	 * A test case testing the method <code>Integer.greaterThanEqual(Integer)</code>.
+	 * </p>
+	 */
+	@Test
+	public void testGreaterThanEqualPositive02() throws Exception {
+	
+		TestPerformer testPerformer;
+	
+		String modelFileName;
+		String oclFileName;
+	
+		oclFileName = "standardlibrary/integer/greaterThanEqualPositive02.ocl";
+		modelFileName = "testmodel.uml";
+	
+		/* Try to get the TestPerformer. */
+		testPerformer =
+				TestPerformer.getInstance(AllStandardLibraryTests.META_MODEL_ID,
+						AllStandardLibraryTests.MODEL_BUNDLE,
+						AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer.setModel(modelFileName);
+	
+		/* Try to parse the constraint file. */
+		testPerformer.parseFile(oclFileName);
+	}
+
+	/**
+	 * <p>
+	 * A test case testing the method <code>Integer.greaterThan(Integer)</code>.
+	 * </p>
+	 */
+	@Test
+	public void testGreaterThanPositive01() throws Exception {
+	
+		TestPerformer testPerformer;
+	
+		String modelFileName;
+		String oclFileName;
+	
+		oclFileName = "standardlibrary/integer/greaterThanPositive01.ocl";
+		modelFileName = "testmodel.uml";
+	
+		/* Try to get the TestPerformer. */
+		testPerformer =
+				TestPerformer.getInstance(AllStandardLibraryTests.META_MODEL_ID,
+						AllStandardLibraryTests.MODEL_BUNDLE,
+						AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer.setModel(modelFileName);
+	
+		/* Try to parse the constraint file. */
+		testPerformer.parseFile(oclFileName);
+	}
+
+	/**
+	 * <p>
+	 * A test case testing the method <code>Integer.greaterThan(Integer)</code>.
+	 * </p>
+	 */
+	@Test
+	public void testGreaterThanPositive02() throws Exception {
+	
+		TestPerformer testPerformer;
+	
+		String modelFileName;
+		String oclFileName;
+	
+		oclFileName = "standardlibrary/integer/greaterThanPositive02.ocl";
+		modelFileName = "testmodel.uml";
+	
+		/* Try to get the TestPerformer. */
+		testPerformer =
+				TestPerformer.getInstance(AllStandardLibraryTests.META_MODEL_ID,
+						AllStandardLibraryTests.MODEL_BUNDLE,
+						AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer.setModel(modelFileName);
+	
+		/* Try to parse the constraint file. */
+		testPerformer.parseFile(oclFileName);
+	}
+
+	/**
+	 * <p>
+	 * A test case testing the method <code>Integer.lessThanEqual(Integer)</code>.
+	 * </p>
+	 */
+	@Test
+	public void testLessThanEqualPositive01() throws Exception {
+	
+		TestPerformer testPerformer;
+	
+		String modelFileName;
+		String oclFileName;
+	
+		oclFileName = "standardlibrary/integer/lessThanEqualPositive01.ocl";
+		modelFileName = "testmodel.uml";
+	
+		/* Try to get the TestPerformer. */
+		testPerformer =
+				TestPerformer.getInstance(AllStandardLibraryTests.META_MODEL_ID,
+						AllStandardLibraryTests.MODEL_BUNDLE,
+						AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer.setModel(modelFileName);
+	
+		/* Try to parse the constraint file. */
+		testPerformer.parseFile(oclFileName);
+	}
+
+	/**
+	 * <p>
+	 * A test case testing the method <code>Integer.lessThanEqual(Integer)</code>.
+	 * </p>
+	 */
+	@Test
+	public void testLessThanEqualPositive02() throws Exception {
+	
+		TestPerformer testPerformer;
+	
+		String modelFileName;
+		String oclFileName;
+	
+		oclFileName = "standardlibrary/integer/lessThanEqualPositive02.ocl";
+		modelFileName = "testmodel.uml";
+	
+		/* Try to get the TestPerformer. */
+		testPerformer =
+				TestPerformer.getInstance(AllStandardLibraryTests.META_MODEL_ID,
+						AllStandardLibraryTests.MODEL_BUNDLE,
+						AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer.setModel(modelFileName);
+	
+		/* Try to parse the constraint file. */
+		testPerformer.parseFile(oclFileName);
+	}
+
+	/**
+	 * <p>
+	 * A test case testing the method <code>Integer.lessThan(Integer)</code>.
+	 * </p>
+	 */
+	@Test
+	public void testLessThanPositive01() throws Exception {
+	
+		TestPerformer testPerformer;
+	
+		String modelFileName;
+		String oclFileName;
+	
+		oclFileName = "standardlibrary/integer/lessThanPositive01.ocl";
+		modelFileName = "testmodel.uml";
+	
+		/* Try to get the TestPerformer. */
+		testPerformer =
+				TestPerformer.getInstance(AllStandardLibraryTests.META_MODEL_ID,
+						AllStandardLibraryTests.MODEL_BUNDLE,
+						AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer.setModel(modelFileName);
+	
+		/* Try to parse the constraint file. */
+		testPerformer.parseFile(oclFileName);
+	}
+
+	/**
+	 * <p>
+	 * A test case testing the method <code>Integer.lessThan(Integer)</code>.
+	 * </p>
+	 */
+	@Test
+	public void testLessThanPositive02() throws Exception {
+	
+		TestPerformer testPerformer;
+	
+		String modelFileName;
+		String oclFileName;
+	
+		oclFileName = "standardlibrary/integer/lessThanPositive02.ocl";
+		modelFileName = "testmodel.uml";
+	
+		/* Try to get the TestPerformer. */
+		testPerformer =
+				TestPerformer.getInstance(AllStandardLibraryTests.META_MODEL_ID,
+						AllStandardLibraryTests.MODEL_BUNDLE,
+						AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer.setModel(modelFileName);
+	
+		/* Try to parse the constraint file. */
+		testPerformer.parseFile(oclFileName);
+	}
+
+	/**
+	 * <p>
 	 * A test case testing the method <code>Integer.max(Integer)</code>.
 	 * </p>
 	 */

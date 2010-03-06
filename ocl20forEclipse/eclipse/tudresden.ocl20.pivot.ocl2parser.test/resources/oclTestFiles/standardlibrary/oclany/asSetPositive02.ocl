@@ -1,0 +1,7 @@
+package package1::package2
+
+-- The implicit operation .asSet() should be available for all types.
+context Type1
+inv: self->size() > 0
+
+endpackage

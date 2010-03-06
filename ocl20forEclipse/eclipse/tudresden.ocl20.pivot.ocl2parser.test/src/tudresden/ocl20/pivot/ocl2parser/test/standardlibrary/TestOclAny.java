@@ -36,6 +36,60 @@ public class TestOclAny {
 
 	/**
 	 * <p>
+	 * A test case testing the method <code>OclAny.asSet()</code>.
+	 * </p>
+	 */
+	@Test
+	public void testAsSetPositive01() throws Exception {
+	
+		TestPerformer testPerformer;
+	
+		String modelFileName;
+		String oclFileName;
+	
+		oclFileName = "standardlibrary/oclany/asSetPositive01.ocl";
+		modelFileName = "testmodel.uml";
+	
+		/* Try to get the TestPerformer. */
+		testPerformer =
+				TestPerformer.getInstance(AllStandardLibraryTests.META_MODEL_ID,
+						AllStandardLibraryTests.MODEL_BUNDLE,
+						AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer.setModel(modelFileName);
+	
+		/* Try to parse the constraint file. */
+		testPerformer.parseFile(oclFileName);
+	}
+
+	/**
+	 * <p>
+	 * A test case testing the method <code>OclAny.asSet()</code>.
+	 * </p>
+	 */
+	@Test
+	public void testAsSetPositive02() throws Exception {
+	
+		TestPerformer testPerformer;
+	
+		String modelFileName;
+		String oclFileName;
+	
+		oclFileName = "standardlibrary/oclany/asSetPositive02.ocl";
+		modelFileName = "testmodel.uml";
+	
+		/* Try to get the TestPerformer. */
+		testPerformer =
+				TestPerformer.getInstance(AllStandardLibraryTests.META_MODEL_ID,
+						AllStandardLibraryTests.MODEL_BUNDLE,
+						AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer.setModel(modelFileName);
+	
+		/* Try to parse the constraint file. */
+		testPerformer.parseFile(oclFileName);
+	}
+
+	/**
+	 * <p>
 	 * A test case testing the method <code>OclAny.=()</code>.
 	 * </p>
 	 */

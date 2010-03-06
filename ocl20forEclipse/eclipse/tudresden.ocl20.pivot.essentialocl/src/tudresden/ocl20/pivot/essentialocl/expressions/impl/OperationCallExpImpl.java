@@ -209,7 +209,7 @@ public class OperationCallExpImpl extends FeatureCallExpImpl implements
 				}
 
 				else if (operationName.equals("product")) { //$NON-NLS-1$
-					// TODO: bind 'product'
+					referredOperation = bindProductOperation(referredOperation);
 				}
 
 			}
@@ -266,7 +266,11 @@ public class OperationCallExpImpl extends FeatureCallExpImpl implements
 
 		/* Bind the operation. */
 		charactersOperation = charactersOperation.bindTypeParameter(
-				new ArrayList<TypeParameter>(((ComplexGenericType)charactersOperation.getGenericType()).getUnboundType().getOwnedTypeParameter()), Arrays.asList(sourceType));
+				new ArrayList<TypeParameter>(
+						((ComplexGenericType) charactersOperation
+								.getGenericType()).getUnboundType()
+								.getOwnedTypeParameter()), Arrays
+						.asList(sourceType));
 
 		/* Probably log exit. */
 		if (logger.isDebugEnabled()) {
@@ -444,6 +448,72 @@ public class OperationCallExpImpl extends FeatureCallExpImpl implements
 		// no else.
 
 		return oclTypeOperation;
+	}
+
+	/**
+	 * FIXME Claas: Isn't there a general solution to solve the binding of
+	 * generic operations?
+	 * 
+	 * <p>
+	 * Helper method to bind the
+	 * <code>OclCollection<T1>.product(Collection<T2>)</code> {@link Operation}
+	 * .
+	 * </p>
+	 * 
+	 * @param The
+	 *            <code>OclCollection<T1>.product(Collection<T2>)</code>
+	 *            {@link Operation} that shall be bound to this
+	 *            {@link OperationCallExp}.
+	 */
+	private Operation bindProductOperation(Operation productOperation) {
+
+		/* Probably log the entry of this method. */
+		if (logger.isDebugEnabled()) {
+			logger.debug("bindProductOperation(productOperation=" //$NON-NLS-1$
+					+ productOperation + ") - enter"); //$NON-NLS-1$
+		}
+		// no else.
+
+		/* Get the source's type. */
+		Type sourceType;
+		sourceType = this.getSource().getType();
+
+		/* Check that the type is not null. */
+		if (sourceType == null) {
+			throw new WellformednessException(this,
+					"The source's type of the 'product' operation must be defined."); //$NON-NLS-1$
+		}
+		// no else.
+
+		if (!(sourceType instanceof CollectionType)) {
+			throw new WellformednessException(this,
+					"The source's type of the 'product' operation must be a collection type."); //$NON-NLS-1$
+		}
+		// no else.
+
+		Type sourceElementType;
+		sourceElementType = ((CollectionType) sourceType).getElementType();
+		
+		/* Check argument size. */
+		if (getArgument().size() != 1) {
+			throw new WellformednessException(this,
+					"The 'product' operation must have exactly one argument that is a collection."); //$NON-NLS-1$
+		}
+		// no else.
+
+		/* Bind the product operation, which will set its return type. */
+		productOperation = productOperation.bindTypeParameter(
+				new ArrayList<TypeParameter>(productOperation
+						.getOwnedTypeParameter()), Arrays.asList(sourceElementType));
+
+		/* Probably log the exit of this method. */
+		if (logger.isDebugEnabled()) {
+			logger.debug("bindProductOperation() - exit - return value=" //$NON-NLS-1$
+					+ productOperation);
+		}
+		// no else.
+
+		return productOperation;
 	}
 
 	/**
