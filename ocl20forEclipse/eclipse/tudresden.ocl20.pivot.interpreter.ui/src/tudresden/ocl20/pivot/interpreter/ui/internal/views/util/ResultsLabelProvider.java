@@ -129,18 +129,18 @@ public class ResultsLabelProvider extends LabelProvider implements
 							OclBoolean anOclBoolean;
 							anOclBoolean = (OclBoolean) aResult;
 
-							/* Check if the boolean is undefined. */
-							if (anOclBoolean.oclIsUndefined().isTrue()) {
-								result =
-										InterpreterUIPlugin.getImageDescriptor(
-												ICON_RESULT_UNDEFINED).createImage();
-							}
-
-							/* Else check if the boolean is invalid. */
-							else if (anOclBoolean.oclIsInvalid().isTrue()) {
+							/* Check if the boolean is invalid. */
+							if (anOclBoolean.oclIsInvalid().isTrue()) {
 								result =
 										InterpreterUIPlugin.getImageDescriptor(
 												ICON_RESULT_INVALID).createImage();
+							}
+
+							/* Else check if the boolean is undefined. */
+							else if (anOclBoolean.oclIsUndefined().isTrue()) {
+								result =
+										InterpreterUIPlugin.getImageDescriptor(
+												ICON_RESULT_UNDEFINED).createImage();
 							}
 
 							/* Else check if the boolean is true. */
