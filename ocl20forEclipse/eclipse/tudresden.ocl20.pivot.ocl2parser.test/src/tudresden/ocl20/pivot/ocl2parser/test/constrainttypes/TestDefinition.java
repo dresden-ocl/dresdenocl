@@ -144,6 +144,33 @@ public class TestDefinition {
 
 	/**
 	 * <p>
+	 * A test case to parse a definition that should be parsed appropriately.
+	 * </p>
+	 */
+	@Test
+	public void testDefinitionPositive05() throws Exception {
+	
+		TestPerformer testPerformer;
+	
+		String modelFileName;
+		String oclFileName;
+	
+		oclFileName = "constrainttypes/defPositive05.ocl";
+		modelFileName = "testmodel.uml";
+	
+		/* Try to get the TestPerformer. */
+		testPerformer =
+				TestPerformer.getInstance(AllConstraintTypeTests.META_MODEL_ID,
+						AllConstraintTypeTests.MODEL_BUNDLE,
+						AllConstraintTypeTests.MODEL_DIRECTORY);
+		testPerformer.setModel(modelFileName);
+	
+		/* Try to parse the constraint file. */
+		testPerformer.parseFile(oclFileName);
+	}
+
+	/**
+	 * <p>
 	 * A test case to parse an definition that should not be parsed appropriately.
 	 * </p>
 	 */
