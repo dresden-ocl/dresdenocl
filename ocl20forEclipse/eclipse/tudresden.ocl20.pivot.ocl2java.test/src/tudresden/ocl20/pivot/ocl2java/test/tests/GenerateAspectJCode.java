@@ -102,6 +102,7 @@ public class GenerateAspectJCode extends AbstractDiffTest {
 
 		constraints.add(new String[] { "sltest/collection", "min01" });
 		constraints.add(new String[] { "sltest/collection", "max01" });
+		constraints.add(new String[] { "sltest/collection", "product01" });
 
 		constraints.add(new String[] { "sltest/integer", "toString01" });
 

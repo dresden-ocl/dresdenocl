@@ -101,4 +101,21 @@ public class TestCollection extends AbstractDiffTest {
 	
 		this.compareFragmentCodeGeneration("sltest/collection", "min01");
 	}
+
+	/**
+	 * <p>
+	 * Tests the instrumentation of the constraint.
+	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 * @throws OCL2ParsingException
+	 * @throws IllegalArgumentException
+	 * @throws Ocl22CodeException
+	 */
+	@Test
+	public void testProduct01() throws IllegalArgumentException,
+			OCL2ParsingException, ModelAccessException, Ocl22CodeException {
+	
+		this.compareFragmentCodeGeneration("sltest/collection", "product01");
+	}
 }

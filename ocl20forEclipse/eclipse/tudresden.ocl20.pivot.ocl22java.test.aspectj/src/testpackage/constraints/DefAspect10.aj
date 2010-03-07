@@ -12,18 +12,18 @@ public privileged aspect DefAspect10 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testOrderedSetReverse(tudresden.ocl20.pivot.ocl2java.types.OclOrderedSet<Object> source)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testOclAnyOclType(Object source)}.</p>
      */
-    protected pointcut testOrderedSetReverseCaller(testpackage.Class1 aClass, tudresden.ocl20.pivot.ocl2java.types.OclOrderedSet<Object> source):
-    	call(* testpackage.Class1.testOrderedSetReverse(tudresden.ocl20.pivot.ocl2java.types.OclOrderedSet<Object>))
+    protected pointcut testOclAnyOclTypeCaller(testpackage.Class1 aClass, Object source):
+    	call(* testpackage.Class1.testOclAnyOclType(Object))
     	&& target(aClass) && args(source);
     
     /**
-     * <p>Defines the method testOrderedSetReverse(tudresden.ocl20.pivot.ocl2java.types.OclOrderedSet<Object> source) defined by the constraint
+     * <p>Defines the method testOclAnyOclType(Object source) defined by the constraint
      * <code>context Class1
-     *       def: testOrderedSetReverse = source[].reverse()</code></p>
+     *       def: testOclAnyOclType = source[].oclType()</code></p>
      */
-    tudresden.ocl20.pivot.ocl2java.types.OclOrderedSet<Object> around(testpackage.Class1 aClass, tudresden.ocl20.pivot.ocl2java.types.OclOrderedSet<Object> source): testOrderedSetReverseCaller(aClass, source) {
-        return source.reverse();
+    Class around(testpackage.Class1 aClass, Object source): testOclAnyOclTypeCaller(aClass, source) {
+        return source.getClass();
     }
 }

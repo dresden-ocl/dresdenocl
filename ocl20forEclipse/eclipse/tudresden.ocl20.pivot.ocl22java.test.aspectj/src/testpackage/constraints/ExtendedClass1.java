@@ -59,6 +59,15 @@ public class ExtendedClass1 extends Object {
      *A method signature implemented by an aspect.
      *</p>
      */
+    public Integer testCollectionProduct(tudresden.ocl20.pivot.ocl2java.types.OclCollection<Object> source, tudresden.ocl20.pivot.ocl2java.types.OclCollection<Object> arg01) {
+        return null;
+    }
+
+    /**
+     *<p>
+     *A method signature implemented by an aspect.
+     *</p>
+     */
     public String testIntegerToString(Integer source) {
         return null;
     }

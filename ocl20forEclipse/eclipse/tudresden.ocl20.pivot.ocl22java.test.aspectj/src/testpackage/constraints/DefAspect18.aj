@@ -12,18 +12,18 @@ public privileged aspect DefAspect18 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testStringPlus(String source, String arg01)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testStringIndexOf(String source, String arg01)}.</p>
      */
-    protected pointcut testStringPlusCaller(testpackage.Class1 aClass, String source, String arg01):
-    	call(* testpackage.Class1.testStringPlus(String, String))
+    protected pointcut testStringIndexOfCaller(testpackage.Class1 aClass, String source, String arg01):
+    	call(* testpackage.Class1.testStringIndexOf(String, String))
     	&& target(aClass) && args(source, arg01);
     
     /**
-     * <p>Defines the method testStringPlus(String source, String arg01) defined by the constraint
+     * <p>Defines the method testStringIndexOf(String source, String arg01) defined by the constraint
      * <code>context Class1
-     *       def: testStringPlus = source[].+( arg01[])</code></p>
+     *       def: testStringIndexOf = source[].indexOf( arg01[])</code></p>
      */
-    String around(testpackage.Class1 aClass, String source, String arg01): testStringPlusCaller(aClass, source, arg01) {
-        return source.concat(arg01);
+    Integer around(testpackage.Class1 aClass, String source, String arg01): testStringIndexOfCaller(aClass, source, arg01) {
+        return source.indexOf(arg01) + 1;
     }
 }

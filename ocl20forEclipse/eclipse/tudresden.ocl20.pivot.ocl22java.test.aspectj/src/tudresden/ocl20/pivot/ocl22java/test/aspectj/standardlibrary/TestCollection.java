@@ -74,4 +74,28 @@ public class TestCollection {
 
 		assertEquals(1, class1.testCollectionMin(oclOrderedSet01));
 	}
+
+	/**
+	 * <p>
+	 * Tests the generated code for the method <code>Collection.product(Collection)</code> .
+	 * </p>
+	 */
+	@Test
+	public void testProduct01() {
+	
+		Class1 class1;
+		class1 = new Class1();
+	
+		OclOrderedSet<Object> oclOrderedSet01;
+		oclOrderedSet01 = new OclOrderedSet<Object>();
+		oclOrderedSet01.add(1);
+		oclOrderedSet01.add(2);
+	
+		OclOrderedSet<Object> oclOrderedSet02;
+		oclOrderedSet02 = new OclOrderedSet<Object>();
+		oclOrderedSet02.add(1);
+		oclOrderedSet02.add(2);
+
+		assertEquals(new Integer(4), class1.testCollectionProduct(oclOrderedSet01, oclOrderedSet02));
+	}
 }
