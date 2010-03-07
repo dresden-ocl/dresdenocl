@@ -136,6 +136,10 @@ public class JavaOclModelInstanceObject extends JavaOclAny implements
 						.equals("oclIsInvalid")) && args.length == 0)
 			result = super.invokeOperation(operation, args);
 
+		if (result == null
+				&& (operationName.equals("asSet") && args.length == 0))
+			result = this.asSet();
+
 		if (result == null)
 			result = checkInvalid(operation, args);
 
