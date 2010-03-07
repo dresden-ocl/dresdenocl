@@ -59,8 +59,8 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
 public class XmlModelInstanceFactory extends BasisJavaModelInstanceFactory {
 
 	/** The {@link Logger} for this class. */
-	private static final Logger LOGGER =
-			XmlModelInstanceTypePlugin.getLogger(XmlModelInstanceFactory.class);
+	private static final Logger LOGGER = XmlModelInstanceTypePlugin
+			.getLogger(XmlModelInstanceFactory.class);
 
 	/**
 	 * The {@link IModel} for whose {@link Type}s {@link IModelInstanceElement}s
@@ -69,13 +69,10 @@ public class XmlModelInstanceFactory extends BasisJavaModelInstanceFactory {
 	private IModel model;
 
 	/**
-	 * The {@link XmlModelInstance} for which the {@link IModelInstanceElement}s
-	 * shall be created.
+	 * The cached {@link IModelInstanceObject}s of this
+	 * {@link XmlModelInstanceFactory} identified by their adapted {@link Node}.
 	 */
-	private XmlModelInstance modelInstance;
-
-	private Map<Node, IModelInstanceObject> cacheModelInstanceObjects =
-			new WeakHashMap<Node, IModelInstanceObject>();
+	private Map<Node, IModelInstanceObject> cacheModelInstanceObjects = new WeakHashMap<Node, IModelInstanceObject>();
 
 	/**
 	 * <p>
@@ -83,31 +80,23 @@ public class XmlModelInstanceFactory extends BasisJavaModelInstanceFactory {
 	 * </p>
 	 * 
 	 * @param model
-	 *          The {@link IModel} for whose {@link Type}s
-	 *          {@link IModelInstanceElement}s shall be created.
-	 * @param modelInstance
-	 *          The {@link XmlModelInstance} for which the
-	 *          {@link IModelInstanceElement}s shall be created.
+	 *            The {@link IModel} for whose {@link Type}s
+	 *            {@link IModelInstanceElement}s shall be created.
 	 */
-	public XmlModelInstanceFactory(IModel model, XmlModelInstance modelInstance) {
+	public XmlModelInstanceFactory(IModel model) {
 
 		if (model == null) {
-			throw new IllegalArgumentException("Parameter 'model' must not be null.");
-		}
-		// no else.
-
-		if (modelInstance == null) {
 			throw new IllegalArgumentException(
-					"Parameter 'modelInstance' must not be null.");
+					"Parameter 'model' must not be null.");
 		}
 		// no else.
 
 		this.model = model;
-		this.modelInstance = modelInstance;
 	}
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceFactory
 	 * #createModelInstanceElement(java.lang.Object)
@@ -161,6 +150,7 @@ public class XmlModelInstanceFactory extends BasisJavaModelInstanceFactory {
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceFactory
 	 * #createModelInstanceElement(java.lang.Object,
@@ -198,9 +188,8 @@ public class XmlModelInstanceFactory extends BasisJavaModelInstanceFactory {
 			/* Probably adapt a literal. */
 			if (type instanceof Enumeration) {
 
-				result =
-						this
-								.createModelInstanceEnumerationLiteral(node, (Enumeration) type);
+				result = this.createModelInstanceEnumerationLiteral(node,
+						(Enumeration) type);
 			}
 
 			/* Else probably adapt a primitive type. */
@@ -229,7 +218,8 @@ public class XmlModelInstanceFactory extends BasisJavaModelInstanceFactory {
 							NLS
 									.bind(
 											XmlModelInstanceTypeMessages.XmlModelInstanceFactory_UnknownClassOfAdaptee,
-											adapted.getClass().getCanonicalName()));
+											adapted.getClass()
+													.getCanonicalName()));
 				}
 				// end select.
 			}
@@ -243,9 +233,7 @@ public class XmlModelInstanceFactory extends BasisJavaModelInstanceFactory {
 				else {
 					result = this.createModelInstanceObject(node, type);
 
-					/* Add the result to the model instance and the cache. */
-					this.modelInstance
-							.addModelInstanceObject((IModelInstanceObject) result);
+					/* Add the result to the cache. */
 					this.cacheModelInstanceObjects.put(node,
 							(IModelInstanceObject) result);
 				}
@@ -280,21 +268,22 @@ public class XmlModelInstanceFactory extends BasisJavaModelInstanceFactory {
 	 * given {@link Type}.
 	 * 
 	 * @param node
-	 *          The {@link Node} that shall be adapted.
+	 *            The {@link Node} that shall be adapted.
 	 * @param type
-	 *          The {@link Type} of the {@link IModelInstanceBoolean} in the
-	 *          {@link IModel}.
+	 *            The {@link Type} of the {@link IModelInstanceBoolean} in the
+	 *            {@link IModel}.
 	 * @return The created {@link IModelInstanceBoolean}.
 	 */
-	private IModelInstanceBoolean createModelInstanceBoolean(Node node, Type type) {
+	private IModelInstanceBoolean createModelInstanceBoolean(Node node,
+			Type type) {
 
 		IModelInstanceBoolean result;
 
 		/*
-		 * Use the java basis types here because the adaptation of a node would not
-		 * help. If you adapt a node, cast it to boolean and then to string, you
-		 * have to alter the nodes' value to get the right result such as 'true',
-		 * 'false' or null in all other cases!
+		 * Use the java basis types here because the adaptation of a node would
+		 * not help. If you adapt a node, cast it to boolean and then to string,
+		 * you have to alter the nodes' value to get the right result such as
+		 * 'true', 'false' or null in all other cases!
 		 */
 		if (node == null || node.getTextContent() == null) {
 			result = super.createModelInstanceBoolean(null);
@@ -320,11 +309,11 @@ public class XmlModelInstanceFactory extends BasisJavaModelInstanceFactory {
 	 * Creates an {@link IModelInstanceElement} for a given {@link Node}.
 	 * 
 	 * @param node
-	 *          The {@link Node} that shall be adapted.
+	 *            The {@link Node} that shall be adapted.
 	 * @return The created {@link IModelInstanceElement}.
 	 * @throws TypeNotFoundInModelException
-	 *           Thrown, if now {@link Type} in the {@link IModel} can be found
-	 *           that matches to the given {@link Node}.
+	 *             Thrown, if now {@link Type} in the {@link IModel} can be
+	 *             found that matches to the given {@link Node}.
 	 */
 	private IModelInstanceElement createModelInstanceElement(Node node)
 			throws TypeNotFoundInModelException {
@@ -334,8 +323,8 @@ public class XmlModelInstanceFactory extends BasisJavaModelInstanceFactory {
 		Type type;
 		type = this.findTypeOfNode(node);
 
-		result =
-				(IModelInstanceElement) this.createModelInstanceElement(node, type);
+		result = (IModelInstanceElement) this.createModelInstanceElement(node,
+				type);
 
 		return result;
 	}
@@ -347,11 +336,11 @@ public class XmlModelInstanceFactory extends BasisJavaModelInstanceFactory {
 	 * </p>
 	 * 
 	 * @param node
-	 *          The {@link Node} for that an
-	 *          {@link IModelInstanceEnumerationLiteral} shall be created.
+	 *            The {@link Node} for that an
+	 *            {@link IModelInstanceEnumerationLiteral} shall be created.
 	 * @param enumeration
-	 *          The {@link Enumeration} type for that the
-	 *          {@link IModelInstanceEnumerationLiteral} shall be created.
+	 *            The {@link Enumeration} type for that the
+	 *            {@link IModelInstanceEnumerationLiteral} shall be created.
 	 * @return The created {@link IModelInstanceEnumerationLiteral}.
 	 */
 	private IModelInstanceEnumerationLiteral createModelInstanceEnumerationLiteral(
@@ -369,7 +358,8 @@ public class XmlModelInstanceFactory extends BasisJavaModelInstanceFactory {
 
 			/* Try to find a literal that matches to the node's value. */
 			for (EnumerationLiteral aLiteral : enumeration.getOwnedLiteral()) {
-				if (aLiteral.getName().equalsIgnoreCase(node.getTextContent().trim())) {
+				if (aLiteral.getName().equalsIgnoreCase(
+						node.getTextContent().trim())) {
 					literal = aLiteral;
 					break;
 				}
@@ -389,21 +379,22 @@ public class XmlModelInstanceFactory extends BasisJavaModelInstanceFactory {
 	 * given {@link Type}.
 	 * 
 	 * @param node
-	 *          The {@link Node} that shall be adapted.
+	 *            The {@link Node} that shall be adapted.
 	 * @param type
-	 *          The {@link Type} of the {@link IModelInstanceInteger} in the
-	 *          {@link IModel}.
+	 *            The {@link Type} of the {@link IModelInstanceInteger} in the
+	 *            {@link IModel}.
 	 * @return The created {@link IModelInstanceInteger}.
 	 */
-	private IModelInstanceInteger createModelInstanceInteger(Node node, Type type) {
+	private IModelInstanceInteger createModelInstanceInteger(Node node,
+			Type type) {
 
 		IModelInstanceInteger result;
 
 		/*
-		 * Use the java basis types here because the adaptation of a node would not
-		 * help. If you adapt a node, cast it to integer and then to string, you
-		 * have to alter the nodes' value to get the right result such as '1' except
-		 * of '1.23', or null in many cases!
+		 * Use the java basis types here because the adaptation of a node would
+		 * not help. If you adapt a node, cast it to integer and then to string,
+		 * you have to alter the nodes' value to get the right result such as
+		 * '1' except of '1.23', or null in many cases!
 		 */
 		if (node == null || node.getTextContent() == null) {
 			result = super.createModelInstanceInteger(null);
@@ -412,8 +403,8 @@ public class XmlModelInstanceFactory extends BasisJavaModelInstanceFactory {
 		else {
 			Long longValue;
 			try {
-				longValue =
-						new Double(Double.parseDouble(node.getTextContent())).longValue();
+				longValue = new Double(Double
+						.parseDouble(node.getTextContent())).longValue();
 			}
 
 			catch (NumberFormatException e) {
@@ -428,14 +419,14 @@ public class XmlModelInstanceFactory extends BasisJavaModelInstanceFactory {
 
 	/**
 	 * <p>
-	 * Creates an {@link IModelInstanceReal} for a given {@link Node} and a given
-	 * {@link Type}.
+	 * Creates an {@link IModelInstanceReal} for a given {@link Node} and a
+	 * given {@link Type}.
 	 * 
 	 * @param node
-	 *          The {@link Node} that shall be adapted.
+	 *            The {@link Node} that shall be adapted.
 	 * @param type
-	 *          The {@link Type} of the {@link IModelInstanceReal} in the
-	 *          {@link IModel}.
+	 *            The {@link Type} of the {@link IModelInstanceReal} in the
+	 *            {@link IModel}.
 	 * @return The created {@link IModelInstanceReal}.
 	 */
 	private IModelInstanceReal createModelInstanceReal(Node node, Type type) {
@@ -443,10 +434,10 @@ public class XmlModelInstanceFactory extends BasisJavaModelInstanceFactory {
 		IModelInstanceReal result;
 
 		/*
-		 * Use the java basis types here because the adaptation of a node would not
-		 * help. If you adapt a node, cast it to real and then to string, you have
-		 * to alter the nodes' value to get the right result such as '1' except of
-		 * '1.0', or null in many cases!
+		 * Use the java basis types here because the adaptation of a node would
+		 * not help. If you adapt a node, cast it to real and then to string,
+		 * you have to alter the nodes' value to get the right result such as
+		 * '1' except of '1.0', or null in many cases!
 		 */
 		if (node == null || node.getTextContent() == null) {
 			result = super.createModelInstanceReal(null);
@@ -456,7 +447,8 @@ public class XmlModelInstanceFactory extends BasisJavaModelInstanceFactory {
 			Double doubleValue;
 
 			try {
-				doubleValue = new Double(Double.parseDouble(node.getTextContent()));
+				doubleValue = new Double(Double.parseDouble(node
+						.getTextContent()));
 			}
 
 			catch (NumberFormatException e) {
@@ -475,10 +467,10 @@ public class XmlModelInstanceFactory extends BasisJavaModelInstanceFactory {
 	 * given {@link Type}.
 	 * 
 	 * @param node
-	 *          The {@link Node} that shall be adapted.
+	 *            The {@link Node} that shall be adapted.
 	 * @param type
-	 *          The {@link Type} of the {@link IModelInstanceString} in the
-	 *          {@link IModel}.
+	 *            The {@link Type} of the {@link IModelInstanceString} in the
+	 *            {@link IModel}.
 	 * @return The created {@link IModelInstanceString}.
 	 */
 	private IModelInstanceString createModelInstanceString(Node node, Type type) {
@@ -486,9 +478,9 @@ public class XmlModelInstanceFactory extends BasisJavaModelInstanceFactory {
 		IModelInstanceString result;
 
 		/*
-		 * Use the java basis types here because the adaptation of a node would not
-		 * help. If you adapt a node, cast it to integer and then to string, you
-		 * have to alter the nodes' value to get the right result such as
+		 * Use the java basis types here because the adaptation of a node would
+		 * not help. If you adapt a node, cast it to integer and then to string,
+		 * you have to alter the nodes' value to get the right result such as
 		 * 'truefalse' except of null!
 		 */
 		if (node == null || node.getTextContent() == null) {
@@ -508,13 +500,14 @@ public class XmlModelInstanceFactory extends BasisJavaModelInstanceFactory {
 	 * given {@link Type}.
 	 * 
 	 * @param node
-	 *          The {@link Node} that shall be adapted.
+	 *            The {@link Node} that shall be adapted.
 	 * @param type
-	 *          The {@link Type} of the {@link XmlModelInstanceObject} in the
-	 *          {@link IModel}.
+	 *            The {@link Type} of the {@link XmlModelInstanceObject} in the
+	 *            {@link IModel}.
 	 * @return The created {@link XmlModelInstanceObject}.
 	 */
-	private XmlModelInstanceObject createModelInstanceObject(Node node, Type type) {
+	private XmlModelInstanceObject createModelInstanceObject(Node node,
+			Type type) {
 
 		XmlModelInstanceObject result;
 
@@ -552,7 +545,8 @@ public class XmlModelInstanceFactory extends BasisJavaModelInstanceFactory {
 
 			/* Try to find the type of the root node. */
 			Type rootType;
-			rootType = this.findTypeOfRootNode(parents.remove(parents.size() - 1));
+			rootType = this.findTypeOfRootNode(parents
+					.remove(parents.size() - 1));
 
 			if (rootType != null) {
 
@@ -568,7 +562,8 @@ public class XmlModelInstanceFactory extends BasisJavaModelInstanceFactory {
 					result = null;
 
 					for (Property property : properties) {
-						if (property.getName().equalsIgnoreCase(aNode.getNodeName().trim())) {
+						if (property.getName().equalsIgnoreCase(
+								aNode.getNodeName().trim())) {
 							result = property.getType();
 							break;
 						}
@@ -595,12 +590,12 @@ public class XmlModelInstanceFactory extends BasisJavaModelInstanceFactory {
 
 	/**
 	 * <p>
-	 * A helper method that searches for the {@link Type} of a given {@link Node}
-	 * in the {@link IModel}.
+	 * A helper method that searches for the {@link Type} of a given
+	 * {@link Node} in the {@link IModel}.
 	 * </p>
 	 * 
 	 * @param node
-	 *          The {@link Node} for that a {@link Type} shall be found.
+	 *            The {@link Node} for that a {@link Type} shall be found.
 	 * @return The found {@link Type}.
 	 */
 	private Type findTypeOfRootNode(Node node)

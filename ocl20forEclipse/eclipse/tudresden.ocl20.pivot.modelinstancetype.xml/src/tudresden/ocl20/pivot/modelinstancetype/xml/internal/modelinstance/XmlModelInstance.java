@@ -42,6 +42,7 @@ import tudresden.ocl20.pivot.modelbus.modelinstance.exception.OperationNotFoundE
 import tudresden.ocl20.pivot.modelbus.modelinstance.exception.PropertyAccessException;
 import tudresden.ocl20.pivot.modelbus.modelinstance.exception.PropertyNotFoundException;
 import tudresden.ocl20.pivot.modelbus.modelinstance.exception.TypeNotFoundInModelException;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceCollection;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceObject;
 import tudresden.ocl20.pivot.modelinstancetype.xml.XmlModelInstanceTypePlugin;
@@ -59,8 +60,8 @@ import tudresden.ocl20.pivot.pivotmodel.Property;
 public class XmlModelInstance extends AbstractModelInstance {
 
 	/** The {@link Logger} for this class. */
-	private static final Logger LOGGER =
-			XmlModelInstanceTypePlugin.getLogger(XmlModelInstance.class);
+	private static final Logger LOGGER = XmlModelInstanceTypePlugin
+			.getLogger(XmlModelInstance.class);
 
 	/**
 	 * A counter used to generated default names for empty
@@ -74,8 +75,8 @@ public class XmlModelInstance extends AbstractModelInstance {
 	 * </p>
 	 * 
 	 * @param model
-	 *          The {@link IModel} for that the {@link IModelInstance} shall be
-	 *          loaded.
+	 *            The {@link IModel} for that the {@link IModelInstance} shall
+	 *            be loaded.
 	 */
 	public XmlModelInstance(IModel model) {
 
@@ -97,8 +98,7 @@ public class XmlModelInstance extends AbstractModelInstance {
 		this.myName = model.getDisplayName() + "_XMLInstance" + nameCounter;
 		nameCounter++;
 
-		this.myModelInstanceFactory =
-				new XmlModelInstanceFactory(this.myModel, this);
+		this.myModelInstanceFactory = new XmlModelInstanceFactory(this.myModel);
 
 		/* Probably debug the exit of this method. */
 		if (LOGGER.isDebugEnabled()) {
@@ -117,13 +117,13 @@ public class XmlModelInstance extends AbstractModelInstance {
 	 * </p>
 	 * 
 	 * @param modelInstanceFile
-	 *          The {@link File} that represents the XML document.
+	 *            The {@link File} that represents the XML document.
 	 * @param model
-	 *          The {@link IModel} for that the {@link IModelInstance} shall be
-	 *          loaded.
+	 *            The {@link IModel} for that the {@link IModelInstance} shall
+	 *            be loaded.
 	 * @throws ModelAccessException
-	 *           Thrown, if an error during loading the {@link IModelInstance}
-	 *           occurs.
+	 *             Thrown, if an error during loading the {@link IModelInstance}
+	 *             occurs.
 	 */
 	public XmlModelInstance(File modelInstanceFile, IModel model)
 			throws ModelAccessException {
@@ -145,8 +145,7 @@ public class XmlModelInstance extends AbstractModelInstance {
 		this.myModel = model;
 		this.myName = modelInstanceFile.toString();
 
-		this.myModelInstanceFactory =
-				new XmlModelInstanceFactory(this.myModel, this);
+		this.myModelInstanceFactory = new XmlModelInstanceFactory(this.myModel);
 
 		/* Parse the XML file. */
 		this.parseXMLFile(modelInstanceFile);
@@ -163,6 +162,7 @@ public class XmlModelInstance extends AbstractModelInstance {
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @seetudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance#
 	 * addModelInstanceElement(java.lang.Object)
 	 */
@@ -170,7 +170,8 @@ public class XmlModelInstance extends AbstractModelInstance {
 			throws TypeNotFoundInModelException {
 
 		if (object == null) {
-			throw new IllegalArgumentException("Parameter 'object' must not be null.");
+			throw new IllegalArgumentException(
+					"Parameter 'object' must not be null.");
 		}
 		// no else.
 
@@ -178,11 +179,17 @@ public class XmlModelInstance extends AbstractModelInstance {
 
 		result = this.myModelInstanceFactory.createModelInstanceElement(object);
 
+		if (result instanceof IModelInstanceObject) {
+			this.addModelInstanceObject((IModelInstanceObject) result);
+		}
+		// no else.
+
 		return result;
 	}
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance#getStaticProperty
 	 * (tudresden.ocl20.pivot.pivotmodel.Property)
@@ -202,6 +209,7 @@ public class XmlModelInstance extends AbstractModelInstance {
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @seetudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance#
 	 * invokeStaticOperation(tudresden.ocl20.pivot.pivotmodel.Operation,
 	 * java.util.List)
@@ -216,7 +224,8 @@ public class XmlModelInstance extends AbstractModelInstance {
 		}
 
 		else if (args == null) {
-			throw new IllegalArgumentException("Parameter 'args' must not be null.");
+			throw new IllegalArgumentException(
+					"Parameter 'args' must not be null.");
 		}
 		// no else.
 
@@ -233,7 +242,98 @@ public class XmlModelInstance extends AbstractModelInstance {
 	protected void addModelInstanceObject(IModelInstanceObject imiObject) {
 
 		this.myModelInstanceObjects.add(imiObject);
+		this.addAssoicatedElementsAssWell(imiObject);
 		this.initializeTypeMapping();
+	}
+
+	/**
+	 * <p>
+	 * A helper method that recursively adds the associated
+	 * {@link IModelInstanceObject}s of a given {@link IModelInstanceObject} to
+	 * this {@link XmlModelInstance} as well. The {@link IModelInstanceObject}
+	 * can be associated via properties.
+	 * </p>
+	 * 
+	 * @param imiObject
+	 *            The {@link IModelInstanceObject} those associated
+	 *            {@link IModelInstanceObject}s shall be added as well.
+	 */
+	@SuppressWarnings("unchecked")
+	private void addAssoicatedElementsAssWell(IModelInstanceObject imiObject) {
+
+		/* Probably adapt recursively associated elements. */
+		if (!imiObject.isUndefined()) {
+
+			for (Property property : imiObject.getType().allProperties()) {
+
+				try {
+					IModelInstanceElement propertyValue;
+					propertyValue = imiObject.getProperty(property);
+
+					/*
+					 * If a property's value is a IMIObject and not added yet,
+					 * add it (adds its property's values recursively as well).
+					 */
+					if (propertyValue instanceof IModelInstanceObject
+							&& !this.myModelInstanceObjects
+									.contains((IModelInstanceObject) propertyValue)) {
+						this
+								.addModelInstanceObject((IModelInstanceObject) propertyValue);
+					}
+
+					/*
+					 * Else if a property's value is an IMICollection, probably
+					 * add all its elements.
+					 */
+					if (propertyValue instanceof IModelInstanceCollection<?>) {
+						this
+								.addModelInstanceCollection((IModelInstanceCollection<IModelInstanceElement>) propertyValue);
+					}
+				}
+				// end try.
+
+				catch (PropertyAccessException e) {
+					/* Do nothing. */
+				}
+
+				catch (PropertyNotFoundException e) {
+					/* Do nothing. */
+				}
+				// end catch.
+			}
+			// end for.
+		}
+		// no else.
+	}
+
+	/**
+	 * <p>
+	 * A helper method that recursively adds the contained
+	 * {@link IModelInstanceElement}s if they are {@link IModelInstanceObject}s
+	 * and have not been added yet.
+	 * </p>
+	 * 
+	 * @param collection
+	 *            The {@link IModelInstanceCollection} to be checked.
+	 */
+	@SuppressWarnings("unchecked")
+	private void addModelInstanceCollection(
+			IModelInstanceCollection<IModelInstanceElement> collection) {
+
+		for (IModelInstanceElement element : collection.getCollection()) {
+
+			if (element instanceof IModelInstanceObject
+					&& !this.myModelInstanceObjects
+							.contains((IModelInstanceObject) element)) {
+				this.addModelInstanceObject((IModelInstanceObject) element);
+			}
+
+			else if (element instanceof IModelInstanceCollection<?>) {
+				this
+						.addModelInstanceCollection((IModelInstanceCollection<IModelInstanceElement>) element);
+			}
+		}
+		// end for.
 	}
 
 	/**
@@ -243,12 +343,13 @@ public class XmlModelInstance extends AbstractModelInstance {
 	 * </p>
 	 * 
 	 * @param modelInstanceFile
-	 *          The {@link File} that shall be parsed.
+	 *            The {@link File} that shall be parsed.
 	 * @throws ModelAccessException
-	 *           Thrown, if an error during parsing or {@link IModelObject}
-	 *           adaptation occurs.
+	 *             Thrown, if an error during parsing or {@link IModelObject}
+	 *             adaptation occurs.
 	 */
-	private void parseXMLFile(File modelInstanceFile) throws ModelAccessException {
+	private void parseXMLFile(File modelInstanceFile)
+			throws ModelAccessException {
 
 		/* Parse the XML file. */
 		try {
@@ -256,15 +357,18 @@ public class XmlModelInstance extends AbstractModelInstance {
 			Document instanceDocument;
 			Node rootNode;
 
-			documentBuilder =
-					DocumentBuilderFactory.newInstance().newDocumentBuilder();
+			documentBuilder = DocumentBuilderFactory.newInstance()
+					.newDocumentBuilder();
 			instanceDocument = documentBuilder.parse(modelInstanceFile);
 			rootNode = instanceDocument.getFirstChild();
 
 			/* Add the container node. */
 			this.addModelInstanceElement(rootNode);
 
-			/* Initialize the caching maps for the operations getObjectsOfType etc. */
+			/*
+			 * Initialize the caching maps for the operations getObjectsOfType
+			 * etc.
+			 */
 			this.initializeTypeMapping();
 		}
 		// end try.
