@@ -1564,11 +1564,6 @@ public class EcoreModelInstanceObject extends AbstractModelInstanceObject
 			getterMethodName = "is";
 		}
 
-		/* FIXME Claas: Is this always true? */
-		else if (property.getName().startsWith("x")) {
-			getterMethodName = "";
-		}
-		
 		else {
 			getterMethodName = "get";
 		}
