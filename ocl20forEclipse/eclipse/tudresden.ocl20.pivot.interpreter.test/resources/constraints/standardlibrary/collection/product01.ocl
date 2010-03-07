@@ -1,0 +1,13 @@
+package package1
+
+context Class1
+inv testCollectionProduct01: 
+  let c1: Collection(Integer) =
+    Set { 1 }
+  in
+    let c2: Collection(String) =
+      Set { '2' }
+    in
+      c1 -> product(c2) -> size() = 1
+
+endpackage
