@@ -8,7 +8,7 @@
     \hline
     \textbf{Software} & \textbf{Available at} \\
     \hline
-    Eclipse 3.4.x & \url{http://www.eclipse.org/} \\
+    Eclipse 3.5.x & \url{http://www.eclipse.org/} \\
     \hline
     Eclipse Modeling Framework (EMF) & \url{http://www.eclipse.org/modeling/emf/} \\
     \hline
@@ -16,8 +16,10 @@
     \hline
     Eclipse Plug-in Development Environment (only to run the toolkit using the source code distribution) & \url{http://www.eclipse.org/pde/} \\
     \hline
+    AspectJ Development Tools (AJDT) (only to run the generated code of Ocl22Java) & \url{http://www.eclipse.org/ajdt/} \\
+    \hline
 \end{tabular}
-\caption{Software needed to run Dresden OCL2 for Eclipse (\textbf{If not using the Eclipse MDT Distribution)}.}
+\caption{Software required to run Dresden OCL2 for Eclipse (v. 2.1.0)\newline(Most parts are con\-tained in the Eclipse MDT Distribution).}
 \label{tab:software}
 \end{table}
 
@@ -44,11 +46,13 @@
     tudresden.ocl20.pivot.standardlibrary.java\newline\newline
     \textbf{Optional:}\newline
     tudresden.ocl20.pivot.essentialocl.tests\newline
-    tudresden.ocl20.pivot.pivotmodel.tests\\
+    tudresden.ocl20.pivot.modelbus.tests\newline
+    tudresden.ocl20.pivot.pivotmodel.tests\newline
+    tudresden.ocl20.pivot.standardlibrary.java.tests\\
     \hline
 
 \end{tabular}
-\caption{The plug-ins of Dresden OCL2 for Eclipse related to their feature (part 1).}
+\caption{The plug-ins of Dresden OCL2 for Eclipse (v. 2.1.0) related to their features (part 1).}
 \label{tab:plugins}
 \end{table}
 
@@ -62,9 +66,12 @@
     \textbf{Optional:}\newline
     tudresden.ocl20.pivot.examples.living\newline
     tudresden.ocl20.pivot.examples.pml\newline
-    tudresden.ocl20.pivot.examples.royalandloyal.ocl22javacode\newline
-    tudresden.ocl20.pivot.examples.simple\newline
-    tudresden.ocl20.pivot.examples.simple.ocl22javacode\\
+    tudresden.ocl20.pivot.examples.simple\\
+    \hline
+
+    \textbf{Integration Facade} &
+    \textbf{Optional:}\newline
+    tudresden.ocl20.pivot.facade\\
     \hline
 
     \textbf{Interpreter} &
@@ -101,13 +108,20 @@
     \textbf{Required (for code generation):}\newline
     tudresden.ocl20.pivot.ocl2java\newline
     tudresden.ocl20.pivot.ocl2java.ui\newline\newline
-    \textbf{Optional (eventually for code execution):}\newline
+    \textbf{Optional (required for code execution):}\newline
     tudresden.ocl20.pivot.ocl2java.types\newline\newline
     \textbf{Optional:}\newline
     tudresden.ocl20.pivot.ocl2java.test\\
     \hline
 
-    \textbf{Dresden OCL2 for Eclipse Parser Feature} &
+    \textbf{Ocl22Java Examples} &
+    \textbf{Optional:}\newline
+    tudresden.ocl20.pivot.examples.royalandloyal.ocl22javacode\newline
+    tudresden.ocl20.pivot.examples.simple.ocl22javacode\newline
+    tudresden.ocl20.pivot.ocl22java.test.aspectj\\
+    \hline
+
+    \textbf{OCL2 Parser} &
     \textbf{Required:}\newline
     tudresden.ocl20.pivot.ocl2parser\newline
     tudresden.ocl20.pivot.parser\newline
@@ -116,7 +130,7 @@
     tudresden.ocl20.pivot.ocl2parser.test\\
     \hline
 \end{tabular}
-\caption{The plug-ins of Dresden OCL2 for Eclipse related to their feature (part 2).}
+\caption{The plug-ins of Dresden OCL2 for Eclipse (v. 2.1.0) related to their features (part 2).}
 \end{table}
 
 
@@ -140,6 +154,7 @@
   OCL Expressions & constraints/*.ocl\\
   Model Instance Type & Java\\
   Model Instance & src/tudresden.ocl20.pivot.examples.simple.instance.Model\-Instance\-ProviderClass.java\\
+  Generated\newline AspectJ Code & tudresden.ocl20.pivot.examples.simple.ocl22javacode\\
   \hline
 
   \textbf{PML Example} & \\
@@ -158,6 +173,7 @@
   OCL Expressions & constraints/*.ocl\\
   Model Instance Type & Java\\
   Model Instance & src/tudresden.ocl20.pivot.examples.royalandloyal.instance.Model\-Instance\-ProviderClass.java\\
+  Generated\newline AspectJ Code & tudresden.ocl20.pivot.examples.royalandloyal.ocl22javacode\\
   \hline
 \end{tabular}
 \caption{The examples provided with Dresden OCL2 for Eclipse.}
