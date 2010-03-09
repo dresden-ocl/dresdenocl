@@ -38,23 +38,23 @@ import tudresden.ocl20.pivot.modelbus.model.IModel;
 /* Specify an array of test classes. */
 @Suite.SuiteClasses( { TestBooleanLiterals.class, TestCollectionLiterals.class,
 		TestEnumerationLiterals.class, TestIfExpressions.class,
-		TestIntegerLiterals.class, TestIterateExpressions.class,
-		TestLetExpressions.class, TestOperationCallExpressions.class,
+		TestIntegerLiterals.class, TestInvalidLiterals.class,
+		TestIterateExpressions.class, TestLetExpressions.class,
+		TestNullLiterals.class, TestOperationCallExpressions.class,
 		TestPropertyCallExpressions.class, TestRealLiterals.class,
 		TestStringLiterals.class, TestTupleLiterals.class,
 		TestTypeExpressions.class, TestVariableExpressions.class })
 public class AllExpressionTests {
 
 	/**
-	 * The name of the {@link Bundle} that provides the model used during testing.
+	 * The name of the {@link Bundle} that provides the model used during
+	 * testing.
 	 */
-	public static final String MODEL_BUNDLE =
-			"tudresden.ocl20.pivot.ocl2parser.test";
+	public static final String MODEL_BUNDLE = "tudresden.ocl20.pivot.ocl2parser.test";
 
 	/** The path of the directory of the {@link IModel} used during testing. */
 	public static final String MODEL_DIRECTORY = "resources/model/";
 
 	/** The ID of the {@link IMetamodel} used during testing. */
-	public static final String META_MODEL_ID =
-			"tudresden.ocl20.pivot.metamodels.uml2";
+	public static final String META_MODEL_ID = "tudresden.ocl20.pivot.metamodels.uml2";
 }
