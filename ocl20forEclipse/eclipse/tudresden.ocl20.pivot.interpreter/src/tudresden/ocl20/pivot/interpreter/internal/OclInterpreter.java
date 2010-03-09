@@ -42,6 +42,8 @@ import java.util.Set;
 import java.util.Stack;
 import java.util.TreeMap;
 
+import javax.swing.plaf.SliderUI;
+
 import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
 
@@ -121,14 +123,14 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 	/**
 	 * Logger for this class
 	 */
-	private static final Logger LOGGER =
-			OclInterpreterPlugin.getLogger(OclInterpreter.class);
+	private static final Logger LOGGER = OclInterpreterPlugin
+			.getLogger(OclInterpreter.class);
 
 	// TODO: in future versions, this hard-coded reference should be replaced by
 	// something dynamic (registry lookup, etc.)
 	/** The {@link IStandardLibraryFactory} of this {@link IOclInterpreter}. */
-	private IStandardLibraryFactory myStandardLibraryFactory =
-			JavaStandardlibraryPlugin.getStandardLibraryFactory();
+	private IStandardLibraryFactory myStandardLibraryFactory = JavaStandardlibraryPlugin
+			.getStandardLibraryFactory();
 
 	/** Specifies if model access was needed to interpret result. */
 	private boolean isModelAccessNeeded = false;
@@ -149,20 +151,18 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 	private IModelInstanceElement myCurrentModelObject;
 
 	/**
-	 * The {@link InterpretationEnvironment} to be used to store {@link Variable}s
-	 * etc.
+	 * The {@link InterpretationEnvironment} to be used to store
+	 * {@link Variable}s etc.
 	 */
-	private IInterpretationEnvironment myEnvironment =
-			new InterpretationEnvironment();;
+	private IInterpretationEnvironment myEnvironment = new InterpretationEnvironment();;
 
 	/**
 	 * The Stack is used to store local {@link IInterpretationEnvironment} used
 	 * during method or property call interpretation. The local
-	 * {@link IInterpretationEnvironment}s can contain {@link Variable}s that are
-	 * not visible globally.
+	 * {@link IInterpretationEnvironment}s can contain {@link Variable}s that
+	 * are not visible globally.
 	 */
-	private Stack<IInterpretationEnvironment> myEnvironmentStack =
-			new Stack<IInterpretationEnvironment>();
+	private Stack<IInterpretationEnvironment> myEnvironmentStack = new Stack<IInterpretationEnvironment>();
 
 	/**
 	 * <p>
@@ -170,7 +170,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 	 * </p>
 	 * 
 	 * @param aModelInstance
-	 *          The {@link IModelInstance} used during interpretation.
+	 *            The {@link IModelInstance} used during interpretation.
 	 */
 	public OclInterpreter(IModelInstance aModelInstance) {
 
@@ -179,6 +179,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see tudresden.ocl20.pivot.interpreter.IOclInterpreter#getEnvironment()
 	 */
 	public IInterpretationEnvironment getEnvironment() {
@@ -188,6 +189,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.interpreter.IOclInterpreter#getStandardLibraryFactory
 	 * ()
@@ -199,15 +201,16 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.interpreter.IOclInterpreter#interpretConstraint(tudresden
-	 * .ocl20.pivot.pivotmodel.Constraint,
+	 * tudresden.ocl20.pivot.interpreter.IOclInterpreter#interpretConstraint
+	 * (tudresden .ocl20.pivot.pivotmodel.Constraint,
 	 * tudresden.ocl20.pivot.modelbus.IModelInstanceElement)
 	 */
 	public IInterpretationResult interpretConstraint(Constraint aConstraint,
 			IModelInstanceElement aModelObject) {
 
-		/* Eventually log the entry into this method. */
+		/* Probably log the entry into this method. */
 		if (LOGGER.isDebugEnabled()) {
 			String msg;
 
@@ -223,8 +226,8 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		IInterpretationResult result;
 
 		/*
-		 * Check if the IModelInstanceElement is constrained by the constraint at
-		 * all.
+		 * Check if the IModelInstanceElement is constrained by the constraint
+		 * at all.
 		 */
 		if (this.isConstrained(aModelObject, aConstraint)) {
 			OclAny oclRootResult;
@@ -233,14 +236,18 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			this.isModelAccessNeeded = false;
 			this.isPreparation = false;
 
-			/* The must only be used during the interpretation of the same constraint! */
+			/*
+			 * The must only be used during the interpretation of the same
+			 * constraint!
+			 */
 			this.myEnvironment.clearCache();
 
 			this.myCurrentModelObject = aModelObject;
 
 			/* Try to get the modelObject as OCL object. */
 			if (aModelObject != null) {
-				oclModelObject = myStandardLibraryFactory.createOclAny(aModelObject);
+				oclModelObject = myStandardLibraryFactory
+						.createOclAny(aModelObject);
 			}
 
 			else {
@@ -259,11 +266,11 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 			oclRootResult = doSwitch((EObject) constraintSpecification);
 
-			result =
-					new InterpretationResultImpl(aModelObject, aConstraint, oclRootResult);
+			result = new InterpretationResultImpl(aModelObject, aConstraint,
+					oclRootResult);
 
-			OclInterpreterPlugin.getInterpreterRegistry().fireInterpretationFinished(
-					result);
+			OclInterpreterPlugin.getInterpreterRegistry()
+					.fireInterpretationFinished(result);
 		}
 
 		else {
@@ -271,7 +278,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			result = null;
 		}
 
-		/* Eventually log the exit of this method. */
+		/* Probably log the exit of this method. */
 		if (LOGGER.isDebugEnabled()) {
 			String msg;
 
@@ -310,8 +317,8 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			NamedElement constrainedElem;
 
 			/* Get the constrained element. */
-			constrainedElem =
-					(NamedElement) constraint.getConstrainedElement().get(0);
+			constrainedElem = (NamedElement) constraint.getConstrainedElement()
+					.get(0);
 
 			/* Check if the constrained element is a type. */
 			if (constrainedElem instanceof Type) {
@@ -321,7 +328,8 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 				constrainedType = (Type) constrainedElem;
 
 				/*
-				 * Check if the model object is an instance of the constrained type.
+				 * Check if the model object is an instance of the constrained
+				 * type.
 				 */
 				if (modelObject.isKindOf(constrainedType)) {
 					result = true;
@@ -355,15 +363,17 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.interpreter.IOclInterpreter#interpretConstraints(
 	 * java.util .Collection,
 	 * tudresden.ocl20.pivot.modelbus.IModelInstanceElement)
 	 */
 	public List<IInterpretationResult> interpretConstraints(
-			Collection<Constraint> constraints, IModelInstanceElement aModelObject) {
+			Collection<Constraint> constraints,
+			IModelInstanceElement aModelObject) {
 
-		/* Eventually log the entry into this method. */
+		/* Probably log the entry into this method. */
 		if (LOGGER.isDebugEnabled()) {
 			String msg;
 
@@ -384,12 +394,11 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			result.add(this.interpretConstraint(aConstraint, aModelObject));
 		}
 
-		/* Eventually log the exit of this method. */
+		/* Probably log the exit of this method. */
 		if (LOGGER.isDebugEnabled()) {
 			String msg;
 
-			msg =
-					"interpretConstraints(Collection<Constraint>, IModelInstanceElement) - exit ";
+			msg = "interpretConstraints(Collection<Constraint>, IModelInstanceElement) - exit ";
 			msg += "- return value = " + result;
 
 			LOGGER.debug(msg);
@@ -401,6 +410,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.interpreter.IOclInterpreter#interpretConstraintsOfKind
 	 * ( java.util.Collection,
@@ -408,10 +418,10 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 	 * tudresden.ocl20.pivot.pivotmodel.ConstraintKind)
 	 */
 	public List<IInterpretationResult> interpretConstraintsOfKind(
-			Collection<Constraint> constraints, IModelInstanceElement aModelObject,
-			ConstraintKind aKind) {
+			Collection<Constraint> constraints,
+			IModelInstanceElement aModelObject, ConstraintKind aKind) {
 
-		/* Eventually log the entry into this method. */
+		/* Probably log the entry into this method. */
 		if (LOGGER.isDebugEnabled()) {
 			String msg;
 
@@ -441,12 +451,11 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		/* Interpret the filtered Constraints. */
 		result = this.interpretConstraints(filteredConstraints, aModelObject);
 
-		/* Eventually log the exit of this method. */
+		/* Probably log the exit of this method. */
 		if (LOGGER.isDebugEnabled()) {
 			String msg;
 
-			msg =
-					"interpretConstraints(Collection<Constraint>, IModelInstanceElement) - exit ";
+			msg = "interpretConstraints(Collection<Constraint>, IModelInstanceElement) - exit ";
 			msg += "- return value = " + result;
 
 			LOGGER.debug(msg);
@@ -458,6 +467,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.interpreter.IOclInterpreter#interpretPreConditions
 	 * (tudresden .ocl20.pivot.modelbus.IModelObject,
@@ -470,7 +480,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			IModelInstanceElement[] parameterValues,
 			Collection<Constraint> preConditions) {
 
-		/* Eventually log the entry into this method. */
+		/* Probably log the entry into this method. */
 		if (LOGGER.isDebugEnabled()) {
 			String msg;
 
@@ -496,8 +506,8 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 					&& aConstraint.getConstrainedElement().contains(operation)) {
 
 				/*
-				 * Add the parameters of the Operation to the environment (they can be
-				 * named different for each Constraint).
+				 * Add the parameters of the Operation to the environment (they
+				 * can be named different for each Constraint).
 				 */
 				this.addParametersToEnvironment(aConstraint, parameterValues);
 
@@ -511,12 +521,11 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		}
 		// end for.
 
-		/* Eventually log the exit of this method. */
+		/* Probably log the exit of this method. */
 		if (LOGGER.isDebugEnabled()) {
 			String msg;
 
-			msg =
-					"interpretPreConditions(IModelInstanceElement, Operation, IModelInstanceElement[]";
+			msg = "interpretPreConditions(IModelInstanceElement, Operation, IModelInstanceElement[]";
 			msg += ", Collection<Constraint>) - exit ";
 			msg += "- return value = " + result;
 
@@ -529,19 +538,22 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.interpreter.IOclInterpreter#interpretPostConditions
 	 * (tudresden .ocl20.pivot.modelbus.IModelObject,
 	 * tudresden.ocl20.pivot.pivotmodel.Operation,
 	 * tudresden.ocl20.pivot.modelbus.IModelInstanceElement[],
-	 * tudresden.ocl20.pivot.modelbus.IModelInstanceElement, java.util.Collection)
+	 * tudresden.ocl20.pivot.modelbus.IModelInstanceElement,
+	 * java.util.Collection)
 	 */
 	public List<IInterpretationResult> interpretPostConditions(
 			IModelInstanceElement modelObject, Operation operation,
 			IModelInstanceElement[] parameterValues,
-			IModelInstanceElement resultValue, Collection<Constraint> postConditions) {
+			IModelInstanceElement resultValue,
+			Collection<Constraint> postConditions) {
 
-		/* Eventually log the entry into this method. */
+		/* Probably log the entry into this method. */
 		if (LOGGER.isDebugEnabled()) {
 			String msg;
 
@@ -583,8 +595,8 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 					&& aConstraint.getConstrainedElement().contains(operation)) {
 
 				/*
-				 * Add the parameters of the Operation to the environment (they can be
-				 * named different for each Constraint).
+				 * Add the parameters of the Operation to the environment (they
+				 * can be named different for each Constraint).
 				 */
 				this.addParametersToEnvironment(aConstraint, parameterValues);
 
@@ -601,12 +613,11 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		/* Remove the local environment containing the result variable. */
 		this.popLocalEnvironment();
 
-		/* Eventually log the exit of this method. */
+		/* Probably log the exit of this method. */
 		if (LOGGER.isDebugEnabled()) {
 			String msg;
 
-			msg =
-					"interpretPostConditions(IModelInstanceElement, Operation, IModelInstanceElement[]";
+			msg = "interpretPostConditions(IModelInstanceElement, Operation, IModelInstanceElement[]";
 			msg += ", IModelInstanceElement, Collection<Constraint>) - exit ";
 			msg += "- return value = " + result;
 
@@ -619,11 +630,12 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see tudresden.ocl20.pivot.interpreter.IOclInterpreter#isCachingEnabled()
 	 */
 	public boolean isCachingEnabled() {
 
-		/* Eventually log the entry of this method. */
+		/* Probably log the entry of this method. */
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("isCachingEnabled()() - start");
 		}
@@ -633,7 +645,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 		result = this.isCachingEnabled;
 
-		/* Eventually log the entry of this method. */
+		/* Probably log the entry of this method. */
 		if (LOGGER.isDebugEnabled()) {
 			String msg;
 
@@ -649,12 +661,13 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.interpreter.IOclInterpreter#isModelAccessNeeded()
 	 */
 	public boolean isModelAccessNeeded() {
 
-		/* Eventually log the entry into this method. */
+		/* Probably log the entry into this method. */
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("isModelAccessNeeded() - start");
 		}
@@ -664,7 +677,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 		result = this.isModelAccessNeeded;
 
-		/* Eventually log the exit of this method. */
+		/* Probably log the exit of this method. */
 		if (LOGGER.isDebugEnabled()) {
 			String msg;
 
@@ -680,6 +693,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.interpreter.IOclInterpreter#popLocalEnvironment()
 	 */
@@ -693,6 +707,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.interpreter.IOclInterpreter#pushLocalEnvironment()
 	 */
@@ -704,6 +719,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.interpreter.IOclInterpreter#prepare(tudresden.ocl20
 	 * .pivot .pivotmodel.Constraint)
@@ -711,7 +727,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 	public void prepareConstraint(Constraint aConstraint,
 			IModelInstanceElement modelObject) {
 
-		/* Eventually log the entry into this method. */
+		/* Probably log the entry into this method. */
 		if (LOGGER.isDebugEnabled()) {
 			String msg;
 
@@ -754,7 +770,8 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 				/* Try to get the modelObject as OCL object. */
 				if (modelObject != null) {
-					oclModelObject = myStandardLibraryFactory.createOclAny(modelObject);
+					oclModelObject = myStandardLibraryFactory
+							.createOclAny(modelObject);
 				}
 
 				else {
@@ -765,7 +782,8 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 				this.myEnvironment.addVar(SELF_VARIABLE_NAME, oclModelObject);
 
 				/* Prepare the constraintSpecification. */
-				constraintSpecification = (EObject) aConstraint.getSpecification();
+				constraintSpecification = (EObject) aConstraint
+						.getSpecification();
 				this.doSwitch((EObject) constraintSpecification);
 
 				/* Remove the self variable from the environment again. */
@@ -776,7 +794,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 		this.isPreparation = false;
 
-		/* Eventually log the exit of this method. */
+		/* Probably log the exit of this method. */
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("prepareConstraint(Constraint) - end");
 		}
@@ -785,13 +803,14 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.interpreter.IOclInterpreter#prepareConstraint(tudresden
 	 * .ocl20.pivot.pivotmodel.Constraint)
 	 */
 	public void prepareConstraint(Constraint aConstraint) {
 
-		/* Eventually log the entry of this method. */
+		/* Probably log the entry of this method. */
 		if (LOGGER.isDebugEnabled()) {
 			String msg;
 
@@ -811,9 +830,8 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 		aKind = aConstraint.getKind();
 
-		constrainedElemName =
-				((NamedElement) aConstraint.getConstrainedElement().get(0))
-						.getQualifiedName();
+		constrainedElemName = ((NamedElement) aConstraint
+				.getConstrainedElement().get(0)).getQualifiedName();
 
 		/* Check if a body expressions shall be prepared */
 		if (aKind.equals(ConstraintKind.BODY)) {
@@ -851,7 +869,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 		this.isPreparation = false;
 
-		/* Eventually log the exit of this method. */
+		/* Probably log the exit of this method. */
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("prepareConstraint(Constraint) - end");
 		}
@@ -860,13 +878,14 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.interpreter.IOclInterpreter#prepareConstraints(java
 	 * .util .Collection)
 	 */
 	public void prepareConstraints(Collection<Constraint> constraints) {
 
-		/* Eventually log the entry into this method. */
+		/* Probably log the entry into this method. */
 		if (LOGGER.isDebugEnabled()) {
 			String msg;
 
@@ -893,7 +912,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		}
 		// end for.
 
-		/* Eventually log the exit of this method. */
+		/* Probably log the exit of this method. */
 		if (LOGGER.isDebugEnabled()) {
 			String msg;
 
@@ -906,6 +925,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.interpreter.IOclInterpreter#prepareConstraints(java
 	 * .util .Collection, tudresden.ocl20.pivot.modelbus.IModelInstanceElement)
@@ -913,7 +933,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 	public void prepareConstraints(Collection<Constraint> constraints,
 			IModelInstanceElement modelObject) {
 
-		/* Eventually log the entry into this method. */
+		/* Probably log the entry into this method. */
 		if (LOGGER.isDebugEnabled()) {
 			String msg;
 
@@ -930,12 +950,11 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			this.prepareConstraint(aConstraint, modelObject);
 		}
 
-		/* Eventually log the exit of this method. */
+		/* Probably log the exit of this method. */
 		if (LOGGER.isDebugEnabled()) {
 			String msg;
 
-			msg =
-					"prepareConstraints(Collection<Constraint>, IModelInstanceElement) - end";
+			msg = "prepareConstraints(Collection<Constraint>, IModelInstanceElement) - end";
 
 			LOGGER.debug(msg);
 		}
@@ -953,15 +972,16 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			if (aConstraint.getKind().equals(ConstraintKind.POSTCONDITION)) {
 
 				/*
-				 * Only prepare postconditions defined on the operation of the given
-				 * context.
+				 * Only prepare postconditions defined on the operation of the
+				 * given context.
 				 */
 				if (aConstraint.getConstrainedElement().contains(operation)) {
 					/*
-					 * Add the parameters of the Operation to the environment (they can be
-					 * named different for each Constraint).
+					 * Add the parameters of the Operation to the environment
+					 * (they can be named different for each Constraint).
 					 */
-					this.addParametersToEnvironment(aConstraint, parameterValues);
+					this.addParametersToEnvironment(aConstraint,
+							parameterValues);
 
 					this.prepareConstraint(aConstraint, modelObject);
 
@@ -976,11 +996,13 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.interpreter.IOclInterpreter#setUseCache(boolean)
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.interpreter.IOclInterpreter#setUseCache(boolean)
 	 */
 	public void setCachingEnabled(boolean enabled) {
 
-		/* Eventually log the entry of this method. */
+		/* Probably log the entry of this method. */
 		if (LOGGER.isDebugEnabled()) {
 			String msg;
 
@@ -994,7 +1016,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 		this.isCachingEnabled = enabled;
 
-		/* Eventually log the exit of this method. */
+		/* Probably log the exit of this method. */
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("setCachingEnabled(boolean) - exit");
 		}
@@ -1003,13 +1025,14 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.interpreter.IOclInterpreter#setEnviromentVariable
 	 * (java. lang.String, tudresden.ocl20.pivot.modelbus.IModelInstanceElement)
 	 */
 	public void setEnviromentVariable(String name, IModelInstanceElement value) {
 
-		/* Eventually log the entry into this method. */
+		/* Probably log the entry into this method. */
 		if (LOGGER.isDebugEnabled()) {
 			String msg;
 
@@ -1027,7 +1050,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		oclValue = myStandardLibraryFactory.createOclAny(value);
 		this.myEnvironment.addVar(name, oclValue);
 
-		/* Eventually log the exit of this method. */
+		/* Probably log the exit of this method. */
 		if (LOGGER.isDebugEnabled()) {
 			String msg;
 
@@ -1040,6 +1063,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.interpreter.IOclInterpreter#setEnviromentVariable
 	 * (java. lang.String,
@@ -1047,7 +1071,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 	 */
 	public void setEnviromentVariable(String name, OclAny value) {
 
-		/* Eventually log the entry into this method. */
+		/* Probably log the entry into this method. */
 		if (LOGGER.isDebugEnabled()) {
 			String msg;
 
@@ -1062,7 +1086,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 		this.myEnvironment.addVar(name, value);
 
-		/* Eventually log the exit of this method. */
+		/* Probably log the exit of this method. */
 		if (LOGGER.isDebugEnabled()) {
 			String msg;
 
@@ -1075,6 +1099,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.interpreter.IOclInterpreter#setEnviromentVariable
 	 * (java. lang.String,
@@ -1082,7 +1107,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 	 */
 	public void resetEnviromentVariable(String name) {
 
-		/* Eventually log the entry into this method. */
+		/* Probably log the entry into this method. */
 		if (LOGGER.isDebugEnabled()) {
 			String msg;
 
@@ -1096,7 +1121,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 		this.myEnvironment.addVar(name, null);
 
-		/* Eventually log the exit of this method. */
+		/* Probably log the exit of this method. */
 		if (LOGGER.isDebugEnabled()) {
 			String msg;
 
@@ -1109,14 +1134,16 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch
 	 * #caseBooleanLiteralExp
 	 * (tudresden.ocl20.pivot.essentialocl.expressions.BooleanLiteralExp)
 	 */
 	@Override
 	public OclAny caseBooleanLiteralExp(BooleanLiteralExp booleanLiteralExp) {
 
-		/* Eventually log the entry of this method. */
+		/* Probably log the entry of this method. */
 		if (LOGGER.isDebugEnabled()) {
 			String msg;
 
@@ -1130,7 +1157,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 		OclAny result = null;
 
-		/* Eventually use a cached result. */
+		/* Probably use a cached result. */
 		if (isCachingEnabled
 				&& myEnvironment.getCachedResult(booleanLiteralExp) != null) {
 			result = myEnvironment.getCachedResult(booleanLiteralExp);
@@ -1138,18 +1165,17 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		/* Else compute the result. */
 		else {
 
-			result =
-					myStandardLibraryFactory.createOclBoolean(booleanLiteralExp
-							.isBooleanSymbol());
+			result = myStandardLibraryFactory
+					.createOclBoolean(booleanLiteralExp.isBooleanSymbol());
 
-			/* Eventually cache the result. */
+			/* Probably cache the result. */
 			if (isCachingEnabled && !isModelAccessNeeded) {
 				myEnvironment.cacheResult(booleanLiteralExp, result);
 			}
 			// no else.
 		}
 
-		/* Eventually log the exit from this method. */
+		/* Probably log the exit from this method. */
 		if (LOGGER.isDebugEnabled()) {
 			String msg;
 
@@ -1165,14 +1191,16 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch
 	 * #caseCollectionItem
 	 * (tudresden.ocl20.pivot.essentialocl.expressions.CollectionItem)
 	 */
 	@Override
 	public OclAny caseCollectionItem(CollectionItem collectionItem) {
 
-		/* Eventually log the entry of this method. */
+		/* Probably log the entry of this method. */
 		if (LOGGER.isDebugEnabled()) {
 			String msg;
 
@@ -1186,7 +1214,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 		OclAny result = null;
 
-		/* Eventually use a cached result. */
+		/* Probably use a cached result. */
 		if (isCachingEnabled
 				&& myEnvironment.getCachedResult(collectionItem) != null) {
 			result = myEnvironment.getCachedResult(collectionItem);
@@ -1197,14 +1225,14 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 			result = doSwitch((EObject) collectionItem.getItem());
 
-			/* Eventually cache the result. */
+			/* Probably cache the result. */
 			if (isCachingEnabled && !isModelAccessNeeded) {
 				myEnvironment.cacheResult(collectionItem, result);
 			}
 			// no else
 		}
 
-		/* Eventually log the exit of this method. */
+		/* Probably log the exit of this method. */
 		if (LOGGER.isDebugEnabled()) {
 			String msg;
 
@@ -1220,17 +1248,20 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch
 	 * #caseCollectionLiteralExp
 	 * (tudresden.ocl20.pivot.essentialocl.expressions.CollectionLiteralExp)
 	 */
-	// FIXME Michael: check, if collectionLiteralExp return CollectionType or the
+	// FIXME Michael: check, if collectionLiteralExp return CollectionType or
+	// the
 	// generic type of the collection
 	@Override
 	public OclAny caseCollectionLiteralExp(
 			CollectionLiteralExp collectionLiteralExp) {
 
-		/* Eventually log the entry of this method. */
+		/* Probably log the entry of this method. */
 		if (LOGGER.isDebugEnabled()) {
 			String msg;
 
@@ -1244,7 +1275,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		OclAny result;
 		CollectionKind collectionKind;
 
-		/* Eventually use a cached result. */
+		/* Probably use a cached result. */
 		if (isCachingEnabled
 				&& myEnvironment.getCachedResult(collectionLiteralExp) != null) {
 			result = myEnvironment.getCachedResult(collectionLiteralExp);
@@ -1277,19 +1308,18 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 					OclInteger lastElement;
 
 					/*
-					 * Get the first and the last element of the collection range.
+					 * Get the first and the last element of the collection
+					 * range.
 					 */
-					currentElement =
-							(OclInteger) doSwitch((EObject) ((CollectionRange) aPart)
-									.getFirst());
-					lastElement =
-							(OclInteger) doSwitch((EObject) ((CollectionRange) aPart)
-									.getLast());
+					currentElement = (OclInteger) doSwitch((EObject) ((CollectionRange) aPart)
+							.getFirst());
+					lastElement = (OclInteger) doSwitch((EObject) ((CollectionRange) aPart)
+							.getLast());
 
 					while (currentElement.isLessEqual(lastElement).isTrue()) {
 						resultParts.add(currentElement);
-						currentElement =
-								currentElement.add(myStandardLibraryFactory
+						currentElement = currentElement
+								.add(myStandardLibraryFactory
 										.createOclInteger(1L));
 					}
 				}
@@ -1311,9 +1341,8 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 					// no else.
 				}
 
-				result =
-						myStandardLibraryFactory.createOclSet(tempList,
-								collectionLiteralExp.getType());
+				result = myStandardLibraryFactory.createOclSet(tempList,
+						collectionLiteralExp.getType());
 			}
 
 			else if (collectionKind.equals(CollectionKind.ORDERED_SET)) {
@@ -1329,48 +1358,44 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 					// no else.
 				}
 
-				result =
-						myStandardLibraryFactory.createOclOrderedSet(tempList,
-								collectionLiteralExp.getType());
+				result = myStandardLibraryFactory.createOclOrderedSet(tempList,
+						collectionLiteralExp.getType());
 			}
 
 			else if (collectionKind.equals(CollectionKind.SEQUENCE)) {
-				result =
-						myStandardLibraryFactory.createOclSequence(resultParts,
-								collectionLiteralExp.getType());
+				result = myStandardLibraryFactory.createOclSequence(
+						resultParts, collectionLiteralExp.getType());
 			}
 
 			else if (collectionKind.equals(CollectionKind.BAG)) {
-				result =
-						myStandardLibraryFactory.createOclBag(resultParts,
-								collectionLiteralExp.getType());
+				result = myStandardLibraryFactory.createOclBag(resultParts,
+						collectionLiteralExp.getType());
 			}
 
 			else {
 				String msg;
 
-				msg =
-						"UnknownKind of collection in CollectionLiteralExp. Kind was "
-								+ collectionKind;
+				msg = "UnknownKind of collection in CollectionLiteralExp. Kind was "
+						+ collectionKind;
 
 				if (LOGGER.isInfoEnabled()) {
 					LOGGER.warn(msg);
 				}
 				// no else.
 
-				result =
-						myStandardLibraryFactory.createOclInvalid(collectionLiteralExp
-								.getType(), new IllegalArgumentException(msg));
+				result = myStandardLibraryFactory.createOclInvalid(
+						collectionLiteralExp.getType(),
+						new IllegalArgumentException(msg));
 			}
 
-			/* Eventually cache the result. */
+			/* Probably cache the result. */
 			if (isCachingEnabled && !isModelAccessNeeded) {
 				myEnvironment.cacheResult(collectionLiteralExp, result);
 			}
 			// no else.
 		}
 
-		/* Eventually log the exit of this method. */
+		/* Probably log the exit of this method. */
 		if (LOGGER.isDebugEnabled()) {
 			String msg;
 
@@ -1386,7 +1411,9 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch
 	 * #caseEnumLiteralExp
 	 * (tudresden.ocl20.pivot.essentialocl.expressions.EnumLiteralExp)
 	 */
@@ -1400,7 +1427,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 		OclAny result = null;
 
-		/* Eventually use a cached result. */
+		/* Probably use a cached result. */
 		if (isCachingEnabled
 				&& myEnvironment.getCachedResult(anEnumLiteralExp) != null) {
 			result = myEnvironment.getCachedResult(anEnumLiteralExp);
@@ -1409,11 +1436,11 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		/* Else compute the result. */
 		else {
 
-			result =
-					myStandardLibraryFactory.createOclEnumLiteral(anEnumLiteralExp
+			result = myStandardLibraryFactory
+					.createOclEnumLiteral(anEnumLiteralExp
 							.getReferredEnumLiteral());
 
-			/* Eventually cache the result. */
+			/* Probably cache the result. */
 			if (isCachingEnabled && !isModelAccessNeeded) {
 				myEnvironment.cacheResult(anEnumLiteralExp, result);
 			}
@@ -1431,14 +1458,16 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch
 	 * #caseExpressionInOcl
 	 * (tudresden.ocl20.pivot.essentialocl.expressions.ExpressionInOcl)
 	 */
 	@Override
 	public OclAny caseExpressionInOcl(ExpressionInOcl expressionInOcl) {
 
-		/* Eventually log the entry of this method. */
+		/* Probably log the entry of this method. */
 		if (LOGGER.isDebugEnabled()) {
 			String msg;
 
@@ -1452,7 +1481,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 		OclAny result = doSwitch((EObject) expressionInOcl.getBodyExpression());
 
-		/* Eventually log the exit of this method. */
+		/* Probably log the exit of this method. */
 		if (LOGGER.isDebugEnabled()) {
 			String msg;
 
@@ -1468,13 +1497,15 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch
 	 * #caseIfExp(tudresden.ocl20.pivot.essentialocl.expressions.IfExp)
 	 */
 	@Override
 	public OclAny caseIfExp(IfExp ifExp) {
 
-		/* Eventually log the entry of this method. */
+		/* Probably log the entry of this method. */
 		if (LOGGER.isDebugEnabled()) {
 			String msg;
 
@@ -1488,7 +1519,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 		OclAny result = null;
 
-		/* Eventually use a cached result. */
+		/* Probably use a cached result. */
 		if (isCachingEnabled && myEnvironment.getCachedResult(ifExp) != null) {
 			result = myEnvironment.getCachedResult(ifExp);
 		}
@@ -1507,19 +1538,19 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 			if (condition instanceof OclBoolean) {
 
-				result =
-						((OclBoolean) condition).ifThenElse(thenStatement, elseStatement);
+				result = ((OclBoolean) condition).ifThenElse(thenStatement,
+						elseStatement);
 			}
 			// no else.
 
-			/* Eventually cache the result. */
+			/* Probably cache the result. */
 			if (isCachingEnabled && !isModelAccessNeeded) {
 				myEnvironment.cacheResult(ifExp, result);
 			}
 			// no else.
 		}
 
-		/* Eventually log the exit of this method. */
+		/* Probably log the exit of this method. */
 		if (LOGGER.isDebugEnabled()) {
 			String msg;
 
@@ -1535,7 +1566,9 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch
 	 * #caseIntegerLiteralExp
 	 * (tudresden.ocl20.pivot.essentialocl.expressions.IntegerLiteralExp)
 	 */
@@ -1553,7 +1586,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 		OclAny result = null;
 
-		/* Eventually use the cache to compute the result. */
+		/* Probably use the cache to compute the result. */
 		if (isCachingEnabled
 				&& myEnvironment.getCachedResult(intLiteralExp) != null) {
 
@@ -1567,9 +1600,10 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 			intValue = intLiteralExp.getIntegerSymbol();
 
-			result = myStandardLibraryFactory.createOclInteger(new Long(intValue));
+			result = myStandardLibraryFactory.createOclInteger(new Long(
+					intValue));
 
-			/* Eventually cache the result. */
+			/* Probably cache the result. */
 			if (isCachingEnabled && !isModelAccessNeeded) {
 				myEnvironment.cacheResult(intLiteralExp, result);
 			}
@@ -1593,14 +1627,16 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch
 	 * #caseInvalidLiteralExp
 	 * (tudresden.ocl20.pivot.essentialocl.expressions.InvalidLiteralExp)
 	 */
 	@Override
 	public OclAny caseInvalidLiteralExp(InvalidLiteralExp invalidLiteralExp) {
 
-		/* Eventually log the entry of this method. */
+		/* Probably log the entry of this method. */
 		if (LOGGER.isDebugEnabled()) {
 			String msg;
 
@@ -1614,11 +1650,10 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 		OclAny result = null;
 
-		result =
-				myStandardLibraryFactory.createOclInvalid(invalidLiteralExp.getType(),
-						new Exception());
+		result = myStandardLibraryFactory.createOclInvalid(invalidLiteralExp
+				.getType(), new Exception());
 
-		/* Eventually log the exit of this method. */
+		/* Probably log the exit of this method. */
 		if (LOGGER.isDebugEnabled()) {
 			String msg;
 
@@ -1634,14 +1669,17 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch
-	 * #caseIterateExp (tudresden.ocl20.pivot.essentialocl.expressions.IterateExp)
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch
+	 * #caseIterateExp
+	 * (tudresden.ocl20.pivot.essentialocl.expressions.IterateExp)
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public OclAny caseIterateExp(IterateExp interateExp) {
 
-		/* Eventually log the entry of this method. */
+		/* Probably log the entry of this method. */
 		if (LOGGER.isDebugEnabled()) {
 			String msg;
 
@@ -1655,8 +1693,9 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 		OclAny result = null;
 
-		/* Eventually use a cached result. */
-		if (isCachingEnabled && myEnvironment.getCachedResult(interateExp) != null) {
+		/* Probably use a cached result. */
+		if (isCachingEnabled
+				&& myEnvironment.getCachedResult(interateExp) != null) {
 			result = myEnvironment.getCachedResult(interateExp);
 		}
 
@@ -1676,30 +1715,31 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			}
 
 			/* Reset the accumulator variable in the environment. */
-			myEnvironment.addVar(interateExp.getResult().getQualifiedName(), null);
+			myEnvironment.addVar(interateExp.getResult().getQualifiedName(),
+					null);
 
-			result =
-					evaluateIterate(interateExp.getBody(), col,
-							interateExp.getIterator(), col.getIterator(), interateExp
-									.getResult().getQualifiedName());
+			result = evaluateIterate(interateExp.getBody(), col, interateExp
+					.getIterator(), col.getIterator(), interateExp.getResult()
+					.getQualifiedName());
 
 			// FIXME Michael: Is this OK?
 			/* In case there was nothing to iterate over */
 			if (result == null) {
-				result =
-						myStandardLibraryFactory.createOclUndefined(interateExp.getType(),
-								"null value, since iteration over " + interateExp.getIterator()
-										+ " was on empty collection");
+				result = myStandardLibraryFactory.createOclUndefined(
+						interateExp.getType(),
+						"null value, since iteration over "
+								+ interateExp.getIterator()
+								+ " was on empty collection");
 			}
 
-			/* Eventually cache the result. */
+			/* Probably cache the result. */
 			if (isCachingEnabled && !isModelAccessNeeded) {
 				myEnvironment.cacheResult(interateExp, result);
 			}
 			// no else.
 		}
 
-		/* Eventually log the exit of this method. */
+		/* Probably log the exit of this method. */
 		if (LOGGER.isDebugEnabled()) {
 			String msg;
 
@@ -1715,14 +1755,16 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch
 	 * #caseIteratorExp
 	 * (tudresden.ocl20.pivot.essentialocl.expressions.IteratorExp)
 	 */
 	@SuppressWarnings("unchecked")
 	public OclAny caseIteratorExp(IteratorExp anIteratorExp) {
 
-		/* Eventually log the entry of this method. */
+		/* Probably log the entry of this method. */
 		if (LOGGER.isDebugEnabled()) {
 			String msg;
 
@@ -1736,7 +1778,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 		OclAny result = null;
 
-		/* Eventually use a cached result. */
+		/* Probably use a cached result. */
 		if (isCachingEnabled
 				&& myEnvironment.getCachedResult(anIteratorExp) != null) {
 			result = myEnvironment.getCachedResult(anIteratorExp);
@@ -1769,7 +1811,8 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 				sourceCollection = source.asSet();
 			}
 
-			sourceIterator = (OclIterator<OclAny>) sourceCollection.getIterator();
+			sourceIterator = (OclIterator<OclAny>) sourceCollection
+					.getIterator();
 
 			body = anIteratorExp.getBody();
 
@@ -1778,8 +1821,8 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 			/* Check which type of iterator shall be used. */
 			if (iteratorName.equals("exists")) {
-				result =
-						evaluateExists(body, sourceCollection, allIterators, sourceIterator);
+				result = evaluateExists(body, sourceCollection, allIterators,
+						sourceIterator);
 			}
 
 			else if (iteratorName.equals("select")) {
@@ -1794,24 +1837,22 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 					}
 					// no else.
 
-					result =
-							myStandardLibraryFactory.createOclInvalid(
-									anIteratorExp.getType(), new IllegalArgumentException(msg));
+					result = myStandardLibraryFactory.createOclInvalid(
+							anIteratorExp.getType(),
+							new IllegalArgumentException(msg));
 				}
 
 				else {
-					result =
-							evaluateSelect(body, sourceCollection, allIterators.get(0),
-									resultType);
+					result = evaluateSelect(body, sourceCollection,
+							allIterators.get(0), resultType);
 				}
 			}
 
 			else if (anIteratorExp.getName().equals("forAll")) {
-				result =
-						evaluateForAll(body, sourceCollection, allIterators, sourceIterator);
+				result = evaluateForAll(body, sourceCollection, allIterators,
+						sourceIterator);
 
-			}
-			else if (anIteratorExp.getName().equals("isUnique")) {
+			} else if (anIteratorExp.getName().equals("isUnique")) {
 
 				/* IsUnique can only use one iterator variable. */
 				if (allIterators.size() > 1) {
@@ -1823,14 +1864,14 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 					}
 					// no else.
 
-					result =
-							myStandardLibraryFactory.createOclInvalid(
-									anIteratorExp.getType(), new IllegalArgumentException(msg));
+					result = myStandardLibraryFactory.createOclInvalid(
+							anIteratorExp.getType(),
+							new IllegalArgumentException(msg));
 				}
 
 				else {
-					result =
-							evaluateIsUnique(body, sourceCollection, allIterators.get(0));
+					result = evaluateIsUnique(body, sourceCollection,
+							allIterators.get(0));
 				}
 			}
 
@@ -1846,15 +1887,14 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 					}
 					// no else.
 
-					result =
-							myStandardLibraryFactory.createOclInvalid(
-									anIteratorExp.getType(), new IllegalArgumentException(msg));
+					result = myStandardLibraryFactory.createOclInvalid(
+							anIteratorExp.getType(),
+							new IllegalArgumentException(msg));
 				}
 
 				else {
-					result =
-							evaluateAny(body, sourceCollection, allIterators.get(0),
-									anIteratorExp.getType());
+					result = evaluateAny(body, sourceCollection, allIterators
+							.get(0), anIteratorExp.getType());
 				}
 			}
 
@@ -1870,13 +1910,14 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 					}
 					// no else.
 
-					result =
-							myStandardLibraryFactory.createOclInvalid(
-									anIteratorExp.getType(), new IllegalArgumentException(msg));
+					result = myStandardLibraryFactory.createOclInvalid(
+							anIteratorExp.getType(),
+							new IllegalArgumentException(msg));
 				}
 
 				else {
-					result = evaluateOne(body, sourceCollection, allIterators.get(0));
+					result = evaluateOne(body, sourceCollection, allIterators
+							.get(0));
 				}
 			}
 
@@ -1892,15 +1933,14 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 					}
 					// no else.
 
-					result =
-							myStandardLibraryFactory.createOclInvalid(
-									anIteratorExp.getType(), new IllegalArgumentException(msg));
+					result = myStandardLibraryFactory.createOclInvalid(
+							anIteratorExp.getType(),
+							new IllegalArgumentException(msg));
 				}
 
 				else {
-					result =
-							evaluateReject(body, sourceCollection, allIterators.get(0),
-									resultType);
+					result = evaluateReject(body, sourceCollection,
+							allIterators.get(0), resultType);
 				}
 			}
 
@@ -1916,15 +1956,14 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 					}
 					// no else.
 
-					result =
-							myStandardLibraryFactory.createOclInvalid(
-									anIteratorExp.getType(), new IllegalArgumentException(msg));
+					result = myStandardLibraryFactory.createOclInvalid(
+							anIteratorExp.getType(),
+							new IllegalArgumentException(msg));
 				}
 
 				else {
-					result =
-							evaluateSortedBy(body, sourceCollection, allIterators.get(0),
-									resultType);
+					result = evaluateSortedBy(body, sourceCollection,
+							allIterators.get(0), resultType);
 				}
 			}
 
@@ -1940,15 +1979,14 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 					}
 					// no else.
 
-					result =
-							myStandardLibraryFactory.createOclInvalid(
-									anIteratorExp.getType(), new IllegalArgumentException(msg));
+					result = myStandardLibraryFactory.createOclInvalid(
+							anIteratorExp.getType(),
+							new IllegalArgumentException(msg));
 				}
 
 				else {
-					result =
-							evaluateCollectNested(body, sourceCollection,
-									allIterators.get(0), resultType);
+					result = evaluateCollectNested(body, sourceCollection,
+							allIterators.get(0), resultType);
 				}
 			}
 
@@ -1965,27 +2003,27 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 					}
 					// no else.
 
-					result =
-							myStandardLibraryFactory.createOclInvalid(
-									anIteratorExp.getType(), new IllegalArgumentException(msg));
+					result = myStandardLibraryFactory.createOclInvalid(
+							anIteratorExp.getType(),
+							new IllegalArgumentException(msg));
 				}
 
 				else {
-					result =
-							evaluateCollectNested(body, sourceCollection,
-									allIterators.get(0), resultType);
+					result = evaluateCollectNested(body, sourceCollection,
+							allIterators.get(0), resultType);
 				}
 
 				// FIXME Michael: Is this OK?
 				/* In case there was nothing to iterate over */
 				if (result == null) {
-					result =
-							myStandardLibraryFactory.createOclUndefined(anIteratorExp
-									.getType(), "null value, since iteration over "
-									+ anIteratorExp.getIterator() + " was on empty collection");
+					result = myStandardLibraryFactory.createOclUndefined(
+							anIteratorExp.getType(),
+							"null value, since iteration over "
+									+ anIteratorExp.getIterator()
+									+ " was on empty collection");
 				}
 
-				/* Eventually flatten the result. */
+				/* Probably flatten the result. */
 				if (result instanceof OclCollection) {
 					result = ((OclCollection) result).flatten();
 				}
@@ -1996,20 +2034,21 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			// FIXME Michael: Is this OK?
 			/* In case there was nothing to iterate over */
 			if (result == null) {
-				result =
-						myStandardLibraryFactory.createOclUndefined(
-								anIteratorExp.getType(), "null value, since iteration over "
-										+ anIteratorExp.getIterator() + " was on empty collection");
+				result = myStandardLibraryFactory.createOclUndefined(
+						anIteratorExp.getType(),
+						"null value, since iteration over "
+								+ anIteratorExp.getIterator()
+								+ " was on empty collection");
 			}
 
-			/* Eventually cache the result. */
+			/* Probably cache the result. */
 			if (isCachingEnabled && !isModelAccessNeeded) {
 				myEnvironment.cacheResult(anIteratorExp, result);
 			}
 			// no else.
 		}
 
-		/* Eventually log the entry of this method. */
+		/* Probably log the entry of this method. */
 		if (LOGGER.isDebugEnabled()) {
 			String msg;
 
@@ -2025,13 +2064,15 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch
 	 * #caseLetExp(tudresden.ocl20.pivot.essentialocl.expressions.LetExp)
 	 */
 	@Override
 	public OclAny caseLetExp(LetExp aLetExp) {
 
-		/* Eventually log the entry of this method. */
+		/* Probably log the entry of this method. */
 		if (LOGGER.isDebugEnabled()) {
 			String msg;
 
@@ -2045,7 +2086,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 		OclAny result = null;
 
-		/* Eventually use a cached result. */
+		/* Probably use a cached result. */
 		if (this.isCachingEnabled
 				&& this.myEnvironment.getCachedResult(aLetExp) != null) {
 			result = this.myEnvironment.getCachedResult(aLetExp);
@@ -2056,18 +2097,19 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			result = doSwitch((EObject) aLetExp.getIn());
 
 			/*
-			 * Remove the variable from the environment because it is invalid outside
-			 * the scope of the let expression.
+			 * Remove the variable from the environment because it is invalid
+			 * outside the scope of the let expression.
 			 */
-			this.myEnvironment.addVar(aLetExp.getVariable().getQualifiedName(), null);
+			this.myEnvironment.addVar(aLetExp.getVariable().getQualifiedName(),
+					null);
 
-			/* Eventually cache the result. */
+			/* Probably cache the result. */
 			if (this.isCachingEnabled && !this.isModelAccessNeeded) {
 				this.myEnvironment.cacheResult(aLetExp, result);
 			}
 		}
 
-		/* Eventually log the exit of this method. */
+		/* Probably log the exit of this method. */
 		if (LOGGER.isDebugEnabled()) {
 			String msg;
 
@@ -2083,7 +2125,9 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch
 	 * #caseOperationCallExp
 	 * (tudresden.ocl20.pivot.essentialocl.expressions.OperationCallExp)
 	 */
@@ -2127,9 +2171,8 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			 * prepared definition in OCL.
 			 */
 			if (referredOperation != null) {
-				definedOperationInOcl =
-						this.myEnvironment.getConstraint(referredOperation
-								.getQualifiedName());
+				definedOperationInOcl = this.myEnvironment
+						.getConstraint(referredOperation.getQualifiedName());
 			}
 			// no else.
 
@@ -2143,9 +2186,8 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 					 * TODO: This should not happen but the parser parses static
 					 * operation's source to null. Should be a TypeLiteralExp.
 					 */
-					source =
-							this.myStandardLibraryFactory.createOclType(anOperationCallExp
-									.getSourceType());
+					source = this.myStandardLibraryFactory
+							.createOclType(anOperationCallExp.getSourceType());
 				}
 
 				else {
@@ -2158,21 +2200,23 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 					OclAny[] oclAnyParameters;
 
 					sourceType = (OclType<?>) source;
-					oclAnyParameters =
-							computeParameters(anOperationCallExp, definedOperationInOcl);
+					oclAnyParameters = computeParameters(anOperationCallExp,
+							definedOperationInOcl);
 
-					result =
-							sourceType.invokeStaticOperation(referredOperation,
-									oclAnyParameters, this.myEnvironment.getModelInstance());
+					result = sourceType.invokeStaticOperation(
+							referredOperation, oclAnyParameters,
+							this.myEnvironment.getModelInstance());
 				}
 
 				/* Else result in invalid. */
 				else {
-					result =
-							this.myStandardLibraryFactory.createOclInvalid(referredOperation
-									.getType(), new IllegalArgumentException(
-									"Cannot invoked the static operation " + referredOperation
-											+ " on a source that is no OclType."));
+					result = this.myStandardLibraryFactory
+							.createOclInvalid(
+									referredOperation.getType(),
+									new IllegalArgumentException(
+											"Cannot invoked the static operation "
+													+ referredOperation
+													+ " on a source that is no OclType."));
 				}
 				// end else.
 			}
@@ -2180,8 +2224,8 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			/* Else handle a non static operation. */
 			else {
 				OclAny[] oclAnyParameters;
-				oclAnyParameters =
-						computeParameters(anOperationCallExp, definedOperationInOcl);
+				oclAnyParameters = computeParameters(anOperationCallExp,
+						definedOperationInOcl);
 
 				/* Compute the source of the operation call. */
 				source = doSwitch((EObject) anOperationCallExp.getSource());
@@ -2190,19 +2234,26 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 				 * Probably get the result from a special operation like @pre or
 				 * oclIsNew.
 				 */
-				result = this.handleSpecialOperations(anOperationCallExp, source);
+				result = this.handleSpecialOperations(anOperationCallExp,
+						source);
 
-				/* The standard case. Invoke the operation and compute the result. */
+				/*
+				 * The standard case. Invoke the operation and compute the
+				 * result.
+				 */
 				if (result == null) {
 
 					/* Check if a operation definition has be prepared. */
 					if (definedOperationInOcl != null) {
 
-						/* Interpret the defined operation in its own environment. */
+						/*
+						 * Interpret the defined operation in its own
+						 * environment.
+						 */
 						this.pushLocalEnvironment();
-						result =
-								this.interpretConstraint(definedOperationInOcl,
-										this.myCurrentModelObject).getResult();
+						result = this.interpretConstraint(
+								definedOperationInOcl,
+								this.myCurrentModelObject).getResult();
 						this.popLocalEnvironment();
 
 					}
@@ -2210,15 +2261,15 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 					/* Else invoke the operation. */
 					else {
 
-						result =
-								source.invokeOperation(referredOperation, oclAnyParameters);
+						result = source.invokeOperation(referredOperation,
+								oclAnyParameters);
 					}
 				}
 				// end else.
 
 				/*
-				 * If the result or its source is an OclModelInstanceObject, the result
-				 * cannot be cached.
+				 * If the result or its source is an OclModelInstanceObject, the
+				 * result cannot be cached.
 				 */
 				if ((result instanceof OclModelInstanceObject)
 						|| (source instanceof OclModelInstanceObject)) {
@@ -2229,7 +2280,8 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			// end else (no static operation).
 
 			/* Probably cache the result. */
-			if (!this.isPreparation && this.isCachingEnabled && !isModelAccessNeeded) {
+			if (!this.isPreparation && this.isCachingEnabled
+					&& !isModelAccessNeeded) {
 				this.myEnvironment.cacheResult(anOperationCallExp, result);
 			}
 			// no else.
@@ -2252,7 +2304,9 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch
 	 * #casePropertyCallExp
 	 * (tudresden.ocl20.pivot.essentialocl.expressions.PropertyCallExp)
 	 */
@@ -2303,12 +2357,13 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 					if (propertyCallExp.getSource() == null) {
 
 						/*
-						 * TODO This should not happen. Anyway the parser parses the source
-						 * of static properties to null instead of a TypeLiteralExp.
+						 * TODO This should not happen. Anyway the parser parses
+						 * the source of static properties to null instead of a
+						 * TypeLiteralExp.
 						 */
-						source =
-								this.myStandardLibraryFactory
-										.createOclType((Type) referredProperty.getOwner());
+						source = this.myStandardLibraryFactory
+								.createOclType((Type) referredProperty
+										.getOwner());
 					}
 
 					else {
@@ -2320,17 +2375,18 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 						OclType<?> sourceType;
 						sourceType = (OclType<?>) source;
 
-						result =
-								sourceType.getStaticProperty(referredProperty,
-										this.myEnvironment.getModelInstance());
+						result = sourceType.getStaticProperty(referredProperty,
+								this.myEnvironment.getModelInstance());
 					}
 
 					else {
-						result =
-								this.myStandardLibraryFactory.createOclInvalid(propertyCallExp
-										.getType(), new IllegalArgumentException(
-										"Cannot invoke the static property " + referredProperty
-												+ " on a non static source."));
+						result = this.myStandardLibraryFactory
+								.createOclInvalid(
+										propertyCallExp.getType(),
+										new IllegalArgumentException(
+												"Cannot invoke the static property "
+														+ referredProperty
+														+ " on a non static source."));
 					}
 				}
 
@@ -2345,9 +2401,9 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 						OclTuple sourceTuple;
 						sourceTuple = (OclTuple) source;
 
-						result =
-								sourceTuple.getPropertyValue(this.getStandardLibraryFactory()
-										.createOclString(referredProperty.getName()));
+						result = sourceTuple.getPropertyValue(this
+								.getStandardLibraryFactory().createOclString(
+										referredProperty.getName()));
 					}
 
 					/* Else the source must be an OclModelInstanceObject. */
@@ -2361,9 +2417,8 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 						/* If not, result in invalid. */
 						catch (ClassCastException e) {
-							result =
-									myStandardLibraryFactory.createOclInvalid(propertyCallExp
-											.getType(), e);
+							result = myStandardLibraryFactory.createOclInvalid(
+									propertyCallExp.getType(), e);
 						}
 						// end catch.
 					}
@@ -2406,14 +2461,16 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch
 	 * #caseRealLiteralExp
 	 * (tudresden.ocl20.pivot.essentialocl.expressions.RealLiteralExp)
 	 */
 	@Override
 	public OclAny caseRealLiteralExp(RealLiteralExp realLiteralExp) {
 
-		/* Eventually log the entry of this method. */
+		/* Probably log the entry of this method. */
 		if (LOGGER.isDebugEnabled()) {
 			String msg;
 
@@ -2427,7 +2484,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 		OclAny result = null;
 
-		/* Eventually use a cached result. */
+		/* Probably use a cached result. */
 		if (isCachingEnabled
 				&& myEnvironment.getCachedResult(realLiteralExp) != null) {
 			result = myEnvironment.getCachedResult(realLiteralExp);
@@ -2435,17 +2492,16 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 		/* Else compute the result. */
 		else {
-			result =
-					myStandardLibraryFactory
-							.createOclReal(realLiteralExp.getRealSymbol());
+			result = myStandardLibraryFactory.createOclReal(realLiteralExp
+					.getRealSymbol());
 
-			/* Eventually cache the result. */
+			/* Probably cache the result. */
 			if (isCachingEnabled && !isModelAccessNeeded) {
 				myEnvironment.cacheResult(realLiteralExp, result);
 			}
 		}
 
-		/* Eventually log the exit of this method. */
+		/* Probably log the exit of this method. */
 		if (LOGGER.isDebugEnabled()) {
 			String msg;
 
@@ -2461,14 +2517,16 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch
 	 * #caseStringLiteralExp
 	 * (tudresden.ocl20.pivot.essentialocl.expressions.StringLiteralExp)
 	 */
 	@Override
 	public OclAny caseStringLiteralExp(StringLiteralExp aStringLiteralExp) {
 
-		/* Eventually log the entry of this method. */
+		/* Probably log the entry of this method. */
 		if (LOGGER.isDebugEnabled()) {
 			String msg;
 
@@ -2482,7 +2540,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 		OclAny result = null;
 
-		/* Eventually use a cached result. */
+		/* Probably use a cached result. */
 		if (isCachingEnabled
 				&& myEnvironment.getCachedResult(aStringLiteralExp) != null) {
 			result = myEnvironment.getCachedResult(aStringLiteralExp);
@@ -2490,18 +2548,17 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 		/* Else compute the result. */
 		else {
-			result =
-					myStandardLibraryFactory.createOclString(aStringLiteralExp
-							.getStringSymbol());
+			result = myStandardLibraryFactory.createOclString(aStringLiteralExp
+					.getStringSymbol());
 
-			/* Eventually cache the result. */
+			/* Probably cache the result. */
 			if (isCachingEnabled && !isModelAccessNeeded) {
 				myEnvironment.cacheResult(aStringLiteralExp, result);
 			}
 			// no else.
 		}
 
-		/* Eventually log the exit of this method. */
+		/* Probably log the exit of this method. */
 		if (LOGGER.isDebugEnabled()) {
 			String msg;
 
@@ -2517,14 +2574,16 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch
 	 * #caseTupleLiteralExp
 	 * (tudresden.ocl20.pivot.essentialocl.expressions.TupleLiteralExp)
 	 */
 	@Override
 	public OclAny caseTupleLiteralExp(TupleLiteralExp aTupleLiteralExp) {
 
-		/* Eventually log the entry of this method. */
+		/* Probably log the entry of this method. */
 		if (LOGGER.isDebugEnabled()) {
 			String msg;
 
@@ -2538,7 +2597,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 		OclAny result = null;
 
-		/* Eventually use a cached result. */
+		/* Probably use a cached result. */
 		if (isCachingEnabled
 				&& myEnvironment.getCachedResult(aTupleLiteralExp) != null) {
 			result = myEnvironment.getCachedResult(aTupleLiteralExp);
@@ -2551,22 +2610,21 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			List<IModelInstanceString> partNames;
 			List<IModelInstanceElement> partValues;
 
-			partNames =
-					new ArrayList<IModelInstanceString>(aTupleLiteralExp.getPart().size());
-			partValues =
-					new ArrayList<IModelInstanceElement>(aTupleLiteralExp.getPart()
-							.size());
+			partNames = new ArrayList<IModelInstanceString>(aTupleLiteralExp
+					.getPart().size());
+			partValues = new ArrayList<IModelInstanceElement>(aTupleLiteralExp
+					.getPart().size());
 
 			for (TupleLiteralPart aLiteralPart : aTupleLiteralExp.getPart()) {
 				partNames.add(BasisJavaModelInstanceFactory
-						.createModelInstanceString(aLiteralPart.getProperty().getName()));
+						.createModelInstanceString(aLiteralPart.getProperty()
+								.getName()));
 				partValues.add(doSwitch((EObject) aLiteralPart)
 						.getModelInstanceElement());
 			}
 
-			result =
-					myStandardLibraryFactory.createOclTuple(partNames, partValues,
-							aTupleLiteralExp.getType());
+			result = myStandardLibraryFactory.createOclTuple(partNames,
+					partValues, aTupleLiteralExp.getType());
 
 			/* Probably cache the result. */
 			if (isCachingEnabled && !isModelAccessNeeded) {
@@ -2574,7 +2632,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			}
 		}
 
-		/* Eventually log the exit of this method. */
+		/* Probably log the exit of this method. */
 
 		if (LOGGER.isDebugEnabled()) {
 			String msg;
@@ -2591,14 +2649,16 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch
 	 * #caseTupleLiteralPart
 	 * (tudresden.ocl20.pivot.essentialocl.expressions.TupleLiteralPart)
 	 */
 	@Override
 	public OclAny caseTupleLiteralPart(TupleLiteralPart tupleLiteralPart) {
 
-		/* Eventually log the entry of this method. */
+		/* Probably log the entry of this method. */
 		if (LOGGER.isDebugEnabled()) {
 			String msg;
 
@@ -2611,7 +2671,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 		OclAny result = null;
 
-		/* Eventually use a cached result. */
+		/* Probably use a cached result. */
 		if (isCachingEnabled
 				&& myEnvironment.getCachedResult(tupleLiteralPart) != null) {
 			result = myEnvironment.getCachedResult(tupleLiteralPart);
@@ -2621,14 +2681,14 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		else {
 			result = doSwitch((EObject) tupleLiteralPart.getValue());
 
-			/* Eventually cache the result. */
+			/* Probably cache the result. */
 			if (isCachingEnabled && !isModelAccessNeeded) {
 				myEnvironment.cacheResult(tupleLiteralPart, result);
 			}
 			// no else.
 		}
 
-		/* Eventually log the exit of this method. */
+		/* Probably log the exit of this method. */
 		if (LOGGER.isDebugEnabled()) {
 			String msg;
 
@@ -2644,14 +2704,16 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch
 	 * #caseTypeLiteralExp
 	 * (tudresden.ocl20.pivot.essentialocl.expressions.TypeLiteralExp)
 	 */
 	@Override
 	public OclAny caseTypeLiteralExp(TypeLiteralExp typeLiteralExp) {
 
-		/* Eventually log the entry of this method. */
+		/* Probably log the entry of this method. */
 		if (LOGGER.isDebugEnabled()) {
 			String msg;
 
@@ -2665,7 +2727,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 		OclAny result = null;
 
-		/* Eventually use a cached result. */
+		/* Probably use a cached result. */
 		if (isCachingEnabled
 				&& myEnvironment.getCachedResult(typeLiteralExp) != null) {
 			result = myEnvironment.getCachedResult(typeLiteralExp);
@@ -2675,18 +2737,17 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		else {
 
 			// FIXME Michael: how is "T" bound?
-			result =
-					myStandardLibraryFactory.createOclType(typeLiteralExp
-							.getReferredType());
+			result = myStandardLibraryFactory.createOclType(typeLiteralExp
+					.getReferredType());
 
-			/* Eventually cache the result. */
+			/* Probably cache the result. */
 			if (isCachingEnabled && !isModelAccessNeeded) {
 				myEnvironment.cacheResult(typeLiteralExp, result);
 			}
 			// no else.
 		}
 
-		/* Eventually log the exit of this method. */
+		/* Probably log the exit of this method. */
 		if (LOGGER.isDebugEnabled()) {
 			String msg;
 
@@ -2702,7 +2763,9 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch
 	 * #caseVariable(tudresden.ocl20.pivot.essentialocl.expressions.Variable)
 	 */
 	public OclAny caseVariable(Variable aVariable) {
@@ -2722,8 +2785,9 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 		result = null;
 
-		/* Eventually use a caches result. */
-		if (isCachingEnabled && myEnvironment.getCachedResult(aVariable) != null) {
+		/* Probably use a caches result. */
+		if (isCachingEnabled
+				&& myEnvironment.getCachedResult(aVariable) != null) {
 			result = myEnvironment.getCachedResult(aVariable);
 		}
 
@@ -2732,7 +2796,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			OclExpression initExp;
 			OclAny initValue;
 
-			/* Eventually interpret the initExpression. */
+			/* Probably interpret the initExpression. */
 			initExp = aVariable.getInitExpression();
 			initValue = null;
 
@@ -2741,14 +2805,15 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			}
 
 			/*
-			 * Eventually get the value of the Variable from the environment. For
+			 * Probably get the value of the Variable from the environment. For
 			 * example if the variable was prepared like the variables 'self' or
 			 * 'result'.
 			 */
 			result = myEnvironment.getVar(aVariable.getName());
 
 			/*
-			 * Else initialized the Variable and add the Variable to the environment.
+			 * Else initialized the Variable and add the Variable to the
+			 * environment.
 			 */
 			if (result == null) {
 
@@ -2768,9 +2833,8 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 					}
 					// no else.
 
-					result =
-							myStandardLibraryFactory.createOclUndefined(aVariable.getType(),
-									msg);
+					result = myStandardLibraryFactory.createOclUndefined(
+							aVariable.getType(), msg);
 				}
 			}
 
@@ -2780,7 +2844,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			}
 			// no else.
 
-			/* Eventually cache the result. */
+			/* Probably cache the result. */
 			if (isCachingEnabled && !isModelAccessNeeded) {
 				myEnvironment.cacheResult(aVariable, result);
 			}
@@ -2800,14 +2864,16 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch
 	 * #caseVariableExp
 	 * (tudresden.ocl20.pivot.essentialocl.expressions.VariableExp)
 	 */
 	@Override
 	public OclAny caseVariableExp(VariableExp variableExp) {
 
-		/* Eventually log the entry of this method. */
+		/* Probably log the entry of this method. */
 		if (LOGGER.isDebugEnabled()) {
 			String msg;
 
@@ -2823,8 +2889,9 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 		result = null;
 
-		/* Eventually use a cached result. */
-		if (isCachingEnabled && myEnvironment.getCachedResult(variableExp) != null) {
+		/* Probably use a cached result. */
+		if (isCachingEnabled
+				&& myEnvironment.getCachedResult(variableExp) != null) {
 			result = myEnvironment.getCachedResult(variableExp);
 		}
 
@@ -2832,14 +2899,14 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		else {
 			result = doSwitch((EObject) variableExp.getReferredVariable());
 
-			/* Eventually cache the result. */
+			/* Probably cache the result. */
 			if (isCachingEnabled && !isModelAccessNeeded) {
 				myEnvironment.cacheResult(variableExp, result);
 			}
 			// no else.
 		}
 
-		/* Eventually log the entry of this method. */
+		/* Probably log the entry of this method. */
 		if (LOGGER.isDebugEnabled()) {
 			String msg;
 
@@ -2855,14 +2922,17 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch
 	 * #caseUndefinedLiteralExp
 	 * (tudresden.ocl20.pivot.essentialocl.expressions.UndefinedLiteralExp)
 	 */
 	@Override
-	public OclAny caseUndefinedLiteralExp(UndefinedLiteralExp undefinedLiteralExp) {
+	public OclAny caseUndefinedLiteralExp(
+			UndefinedLiteralExp undefinedLiteralExp) {
 
-		/* Eventually log the entry of this method. */
+		/* Probably log the entry of this method. */
 		if (LOGGER.isDebugEnabled()) {
 			String msg;
 
@@ -2876,7 +2946,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 		OclAny result = null;
 
-		/* Eventually use a cached result. */
+		/* Probably use a cached result. */
 		if (isCachingEnabled
 				&& myEnvironment.getCachedResult(undefinedLiteralExp) != null) {
 
@@ -2888,18 +2958,17 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			Type resultType;
 			resultType = undefinedLiteralExp.getType();
 
-			result =
-					myStandardLibraryFactory.createOclUndefined(resultType,
-							"UndefinedLiteralExp");
+			result = myStandardLibraryFactory.createOclUndefined(resultType,
+					"UndefinedLiteralExp");
 
-			/* Eventually cache the result. */
+			/* Probably cache the result. */
 			if (isCachingEnabled && !isModelAccessNeeded) {
 				myEnvironment.cacheResult(undefinedLiteralExp, result);
 			}
 			// no else.
 		}
 
-		/* Eventually log the exit of this method. */
+		/* Probably log the exit of this method. */
 		if (LOGGER.isDebugEnabled()) {
 			String msg;
 
@@ -2921,10 +2990,11 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 	 * </p>
 	 * 
 	 * @param aConstraint
-	 *          The {@link Constraint} for which the arguments shall be prepared.
+	 *            The {@link Constraint} for which the arguments shall be
+	 *            prepared.
 	 * @param parameters
-	 *          The parameters (as array of {@link IModelInstanceElement}) which
-	 *          shall be added.
+	 *            The parameters (as array of {@link IModelInstanceElement})
+	 *            which shall be added.
 	 */
 	private void addParametersToEnvironment(Constraint aConstraint,
 			IModelInstanceElement[] parameters) {
@@ -2935,12 +3005,13 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		oclExpression = (ExpressionInOcl) aConstraint.getSpecification();
 		index = 0;
 
-		/* Eventually add parameters to the environment. */
+		/* Probably add parameters to the environment. */
 		for (Variable aVariable : oclExpression.getParameter()) {
 
 			if (parameters[index] != null) {
 				this.setEnviromentVariable(aVariable.getName(),
-						myStandardLibraryFactory.createOclAny(parameters[index]));
+						myStandardLibraryFactory
+								.createOclAny(parameters[index]));
 			}
 
 			else {
@@ -2949,9 +3020,8 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 				msg = "Parameter " + aVariable.getName() + " was undefined";
 
-				value =
-						myStandardLibraryFactory.createOclUndefined(aVariable.getType(),
-								msg);
+				value = myStandardLibraryFactory.createOclUndefined(aVariable
+						.getType(), msg);
 
 				this.setEnviromentVariable(aVariable.getName(), value);
 			}
@@ -2967,10 +3037,11 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 	 * </p>
 	 * 
 	 * @param anOperationCallExp
-	 *          The {@link OperationCallExp} whose parameters shall be computed.
+	 *            The {@link OperationCallExp} whose parameters shall be
+	 *            computed.
 	 * @param oclDefinedOperation
-	 *          A probably existing {@link Constraint} definition of the referred
-	 *          {@link Operation}.
+	 *            A probably existing {@link Constraint} definition of the
+	 *            referred {@link Operation}.
 	 */
 	private OclAny[] computeParameters(OperationCallExp anOperationCallExp,
 			Constraint oclDefinedOperation) {
@@ -3022,25 +3093,26 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 	/**
 	 * Returns any element in the source collection for which body evaluates to
-	 * true. If there is more than one element for which body is true, one of them
-	 * is returned. There must be at least one element fulfilling body, otherwise
-	 * the result of this IteratorExp is null.
+	 * true. If there is more than one element for which body is true, one of
+	 * them is returned. There must be at least one element fulfilling body,
+	 * otherwise the result of this IteratorExp is null.
 	 * 
 	 * @param body
-	 *          the body expression to be evaluated
+	 *            the body expression to be evaluated
 	 * @param source
-	 *          the collection representing the source expression of the iteration
+	 *            the collection representing the source expression of the
+	 *            iteration
 	 * @param iterator
-	 *          the iterator (any may have at most one iterator variable.)
+	 *            the iterator (any may have at most one iterator variable.)
 	 * @param resultType
-	 *          The result {@link Type} of this any interator expression.
+	 *            The result {@link Type} of this any interator expression.
 	 * 
 	 * @return the result of the iteration
 	 */
-	private OclAny evaluateAny(OclExpression body, OclCollection<OclAny> source,
-			Variable iterator, Type resultType) {
+	private OclAny evaluateAny(OclExpression body,
+			OclCollection<OclAny> source, Variable iterator, Type resultType) {
 
-		/* Eventually log the entry of this method. */
+		/* Probably log the entry of this method. */
 		if (LOGGER.isDebugEnabled()) {
 			String msg;
 
@@ -3063,7 +3135,8 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 		/*
 		 * Iterate over the source and evaluate the body expression for all
-		 * elements. If it is true for any element, the result the specific element.
+		 * elements. If it is true for any element, the result the specific
+		 * element.
 		 */
 		while (sourceIt.hasNext().isTrue()) {
 
@@ -3089,11 +3162,12 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			String msg;
 
 			msg = "Iterator any() resulted in undefined.";
-			result = myStandardLibraryFactory.createOclUndefined(resultType, msg);
+			result = myStandardLibraryFactory.createOclUndefined(resultType,
+					msg);
 		}
 		// no else.
 
-		/* Eventually log the exit of this method. */
+		/* Probably log the exit of this method. */
 		if (LOGGER.isDebugEnabled()) {
 
 			String msg;
@@ -3110,27 +3184,27 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 	/**
 	 * <p>
-	 * The collection of elements which results from applying body to every member
-	 * of the source set.
+	 * The collection of elements which results from applying body to every
+	 * member of the source set.
 	 * </p>
 	 * 
 	 * @param body
-	 *          The body expression to be evaluated.
+	 *            The body expression to be evaluated.
 	 * @param source
-	 *          The collection representing the source expression of the
-	 *          iteration.
+	 *            The collection representing the source expression of the
+	 *            iteration.
 	 * @param iterator
-	 *          The iterator (collectNested may have at most one iterator
-	 *          variable.).
+	 *            The iterator (collectNested may have at most one iterator
+	 *            variable.).
 	 * @param resultType
-	 *          The result type (set, sequence, bag, orderedSet).
+	 *            The result type (set, sequence, bag, orderedSet).
 	 * 
 	 * @return The result of the iteration.
 	 */
 	private OclAny evaluateCollectNested(OclExpression body,
 			OclCollection<OclAny> source, Variable iterator, Type resultType) {
 
-		/* Eventually log the entry of this method. */
+		/* Probably log the entry of this method. */
 		if (LOGGER.isDebugEnabled()) {
 			String msg;
 
@@ -3153,41 +3227,50 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		resultList = new ArrayList<OclAny>();
 		sourceIt = source.getIterator();
 
-		/*
-		 * Iterate over the source and collect the body expression for all elements.
-		 */
-		while (sourceIt.hasNext().isTrue()) {
-
-			OclAny anElement;
-			OclAny bodyResult;
-
-			/* Get the next element and add it to the environment. */
-			anElement = sourceIt.next();
-			myEnvironment.addVar(iterator.getQualifiedName(), anElement);
-
-			/* Compute the body expression for an element. */
-			bodyResult = doSwitch((EObject) body);
-
-			resultList.add(bodyResult);
+		/* Check if iterator is undefined. */
+		if (sourceIt.hasNext().oclIsInvalid().isTrue()) {
+			result = myStandardLibraryFactory.createOclInvalid(source
+					.getGenericType(), sourceIt.hasNext().getInvalidReason());
 		}
+
+		else {
+
+			/*
+			 * Iterate over the source and collect the body expression for all
+			 * elements.
+			 */
+			while (sourceIt.hasNext().isTrue()) {
+
+				OclAny anElement;
+				OclAny bodyResult;
+
+				/* Get the next element and add it to the environment. */
+				anElement = sourceIt.next();
+				myEnvironment.addVar(iterator.getQualifiedName(), anElement);
+
+				/* Compute the body expression for an element. */
+				bodyResult = doSwitch((EObject) body);
+
+				resultList.add(bodyResult);
+			}
+			// end while.
+		}
+		// end else.
 
 		/* Compute the result type depending on the given result type. */
 		if (resultType instanceof BagType) {
-			result =
-					myStandardLibraryFactory.createOclBag(resultList,
-							((BagType) resultType).getElementType());
+			result = myStandardLibraryFactory.createOclBag(resultList,
+					((BagType) resultType).getElementType());
 		}
 
 		else if (resultType instanceof SequenceType) {
-			result =
-					myStandardLibraryFactory.createOclSequence(resultList,
-							((SequenceType) resultType).getElementType());
+			result = myStandardLibraryFactory.createOclSequence(resultList,
+					((SequenceType) resultType).getElementType());
 		}
 
 		else {
 			String msg;
-			msg =
-					"The ResultType of a collectNested Iterator should by a Sequence or Bag.";
+			msg = "The ResultType of a collectNested Iterator should by a Sequence or Bag.";
 			msg += " But was " + resultType.getQualifiedName();
 
 			if (LOGGER.isInfoEnabled()) {
@@ -3195,12 +3278,11 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			}
 			// no else.
 
-			result =
-					myStandardLibraryFactory.createOclInvalid(resultType,
-							new IllegalArgumentException(msg));
+			result = myStandardLibraryFactory.createOclInvalid(resultType,
+					new IllegalArgumentException(msg));
 		}
 
-		/* Eventually log the exit of this method. */
+		/* Probably log the exit of this method. */
 		if (LOGGER.isDebugEnabled()) {
 
 			String msg;
@@ -3220,13 +3302,14 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 	 * source collection.
 	 * 
 	 * @param body
-	 *          the body expression to be evaluated
+	 *            the body expression to be evaluated
 	 * @param source
-	 *          the collection representing the source expression of the iteration
+	 *            the collection representing the source expression of the
+	 *            iteration
 	 * @param iterators
-	 *          the iterators
+	 *            the iterators
 	 * @param it
-	 *          the current iterator for the source collection
+	 *            the current iterator for the source collection
 	 * 
 	 * @return the result of the iteration
 	 */
@@ -3234,7 +3317,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			OclCollection<OclAny> source, List<Variable> iterators,
 			OclIterator<OclAny> it) {
 
-		/* Eventually log the entry of this method. */
+		/* Probably log the entry of this method. */
 		if (LOGGER.isDebugEnabled()) {
 			String msg;
 
@@ -3255,8 +3338,8 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		result = myStandardLibraryFactory.createOclBoolean(false);
 
 		/*
-		 * Iterate over the collection and check if at least one element fulfills
-		 * the body expression.
+		 * Iterate over the collection and check if at least one element
+		 * fulfills the body expression.
 		 */
 		while (it.hasNext().isTrue()) {
 
@@ -3265,13 +3348,15 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 			/* Add an element to the environment... */
 			anElement = it.next();
-			myEnvironment.addVar(iterators.get(0).getQualifiedName(), anElement);
+			myEnvironment
+					.addVar(iterators.get(0).getQualifiedName(), anElement);
 
 			/* ...and compute its body expression. */
 			bodyResult = null;
 
 			/*
-			 * Eventually recall this method recursively for more iterator variables.
+			 * Probably recall this method recursively for more iterator
+			 * variables.
 			 */
 			if (iterators.size() > 1) {
 
@@ -3279,15 +3364,15 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 				OclIterator<OclAny> nextIt;
 
 				/*
-				 * Remove the firs iterator variable and recall recursively this method
-				 * for all other iterator variables.
+				 * Remove the firs iterator variable and recall recursively this
+				 * method for all other iterator variables.
 				 */
 				tempItList = new ArrayList<Variable>(iterators);
 				tempItList.remove(0);
 
 				nextIt = source.getIterator();
-				bodyResult =
-						(OclBoolean) evaluateExists(body, source, tempItList, nextIt);
+				bodyResult = (OclBoolean) evaluateExists(body, source,
+						tempItList, nextIt);
 			}
 
 			else {
@@ -3302,7 +3387,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			// no else.
 		}
 
-		/* Eventually log the exit of this method. */
+		/* Probably log the exit of this method. */
 		if (LOGGER.isDebugEnabled()) {
 
 			String msg;
@@ -3323,13 +3408,14 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 	 * in the source collection; otherwise, result is false.
 	 * 
 	 * @param body
-	 *          the body expression to be evaluated
+	 *            the body expression to be evaluated
 	 * @param source
-	 *          the collection representing the source expression of the iteration
+	 *            the collection representing the source expression of the
+	 *            iteration
 	 * @param iterators
-	 *          the iterators
+	 *            the iterators
 	 * @param it
-	 *          the current iterator for the source collection
+	 *            the current iterator for the source collection
 	 * 
 	 * @return the result of the iteration
 	 */
@@ -3337,7 +3423,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			OclCollection<OclAny> source, List<Variable> iterators,
 			OclIterator<OclAny> it) {
 
-		/* Eventually log the entry of this method. */
+		/* Probably log the entry of this method. */
 		if (LOGGER.isDebugEnabled()) {
 			String msg;
 
@@ -3357,53 +3443,67 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		/* By default the result is true. */
 		result = myStandardLibraryFactory.createOclBoolean(true);
 
-		/* Iterate through the collection. */
-		while (it.hasNext().isTrue()) {
-
-			OclAny anItVariable;
-			OclBoolean bodyResult;
-
-			/* Get an iterator variable and add it to the environment. */
-			anItVariable = it.next();
-			myEnvironment.addVar(iterators.get(0).getQualifiedName(), anItVariable);
-
-			bodyResult = null;
-
-			/*
-			 * Check if more than this iterator variables are available and eventually
-			 * add them to the environment and compute the result recursively.
-			 */
-			if (iterators.size() > 1) {
-				List<Variable> subIteratorList;
-				OclIterator<OclAny> nextIt;
-
-				subIteratorList = new ArrayList<Variable>(iterators);
-
-				/* Remove the actual iterator. */
-				subIteratorList.remove(0);
-
-				/* Get the next iterator and compute the result recursively. */
-				nextIt = source.getIterator();
-				bodyResult =
-						(OclBoolean) evaluateForAll(body, source, subIteratorList, nextIt);
-			}
-
-			/*
-			 * Else compute the result for this iterator variable and all iterator
-			 * variables which were set recursively before.
-			 */
-			else {
-				bodyResult = (OclBoolean) doSwitch((EObject) body);
-			}
-
-			/* If the body result is false, return false. */
-			if (!bodyResult.isTrue()) {
-				result = myStandardLibraryFactory.createOclBoolean(false);
-				break;
-			}
+		/* FIXME Claas: Same check for other iterate expressions. */
+		/* Check if iterator is undefined. */
+		if (it.hasNext().oclIsInvalid().isTrue()) {
+			result = myStandardLibraryFactory.createOclInvalid(source
+					.getGenericType(), it.hasNext().getInvalidReason());
 		}
 
-		/* Eventually log the exit of this method. */
+		else {
+
+			/* Iterate through the collection. */
+			while (it.hasNext().isTrue()) {
+
+				OclAny anItVariable;
+				OclBoolean bodyResult;
+
+				/* Get an iterator variable and add it to the environment. */
+				anItVariable = it.next();
+				myEnvironment.addVar(iterators.get(0).getQualifiedName(),
+						anItVariable);
+
+				bodyResult = null;
+
+				/*
+				 * Check if more than this iterator variables are available and
+				 * Probably add them to the environment and compute the result
+				 * recursively.
+				 */
+				if (iterators.size() > 1) {
+					List<Variable> subIteratorList;
+					OclIterator<OclAny> nextIt;
+
+					subIteratorList = new ArrayList<Variable>(iterators);
+
+					/* Remove the actual iterator. */
+					subIteratorList.remove(0);
+
+					/* Get the next iterator and compute the result recursively. */
+					nextIt = source.getIterator();
+					bodyResult = (OclBoolean) evaluateForAll(body, source,
+							subIteratorList, nextIt);
+				}
+
+				/*
+				 * Else compute the result for this iterator variable and all
+				 * iterator variables which were set recursively before.
+				 */
+				else {
+					bodyResult = (OclBoolean) doSwitch((EObject) body);
+				}
+
+				/* If the body result is false, return false. */
+				if (!bodyResult.isTrue()) {
+					result = myStandardLibraryFactory.createOclBoolean(false);
+					break;
+				}
+			}
+			// end while.
+		}
+		// end else.
+
+		/* Probably log the exit of this method. */
 		if (LOGGER.isDebugEnabled()) {
 
 			String msg;
@@ -3421,23 +3521,25 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 	/**
 	 * <p>
-	 * Results in true if body evaluates to a different value for each element in
-	 * the source collection; otherwise, result is false.
+	 * Results in true if body evaluates to a different value for each element
+	 * in the source collection; otherwise, result is false.
 	 * </p>
 	 * 
 	 * @param body
-	 *          the body expression to be evaluated
+	 *            the body expression to be evaluated
 	 * @param source
-	 *          the collection representing the source expression of the iteration
+	 *            the collection representing the source expression of the
+	 *            iteration
 	 * @param iterator
-	 *          the iterator (isUnique may have at most one iterator variable.)
+	 *            the iterator (isUnique may have at most one iterator
+	 *            variable.)
 	 * 
 	 * @return the result of the iteration
 	 */
 	private OclAny evaluateIsUnique(OclExpression body,
 			OclCollection<OclAny> source, Variable iterator) {
 
-		/* Eventually log the entry of this method. */
+		/* Probably log the entry of this method. */
 		if (LOGGER.isDebugEnabled()) {
 			String msg;
 
@@ -3487,7 +3589,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			}
 		}
 
-		/* Eventually log the exit of this method. */
+		/* Probably log the exit of this method. */
 		if (LOGGER.isDebugEnabled()) {
 
 			String msg;
@@ -3504,20 +3606,21 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 	/**
 	 * <p>
-	 * Evaluates the general iterate method. Will be invoked recursively for every
-	 * iterator of the iteration.
+	 * Evaluates the general iterate method. Will be invoked recursively for
+	 * every iterator of the iteration.
 	 * </p>
 	 * 
 	 * @param body
-	 *          the body expression of the iteration
+	 *            the body expression of the iteration
 	 * @param source
-	 *          the collection representing the source expression of the iteration
+	 *            the collection representing the source expression of the
+	 *            iteration
 	 * @param iterators
-	 *          the iterators
+	 *            the iterators
 	 * @param it
-	 *          the current iterator for the source collection
+	 *            the current iterator for the source collection
 	 * @param resultVarName
-	 *          the name of the result variable
+	 *            the name of the result variable
 	 * 
 	 * @return the result of the iteration
 	 */
@@ -3525,7 +3628,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			OclCollection<OclAny> source, List<Variable> iterators,
 			OclIterator<OclAny> it, String resultVarName) {
 
-		/* Eventually log the entry of this method. */
+		/* Probably log the entry of this method. */
 		if (LOGGER.isDebugEnabled()) {
 			String msg;
 
@@ -3552,11 +3655,12 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			activeElement = it.next();
 
 			/* Add the elements variable to the environment. */
-			myEnvironment.addVar(iterators.get(0).getQualifiedName(), activeElement);
+			myEnvironment.addVar(iterators.get(0).getQualifiedName(),
+					activeElement);
 
 			/*
-			 * If more than one iterators are used, remove the first iterator and
-			 * recall this method recursively.
+			 * If more than one iterators are used, remove the first iterator
+			 * and recall this method recursively.
 			 */
 			if (iterators.size() > 1) {
 				List<Variable> allIterators;
@@ -3567,8 +3671,8 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 				nextIt = (OclIterator<OclAny>) source.getIterator();
 
-				result =
-						evaluateIterate(body, source, allIterators, nextIt, resultVarName);
+				result = evaluateIterate(body, source, allIterators, nextIt,
+						resultVarName);
 			}
 
 			/* Else compute the result. */
@@ -3580,7 +3684,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			myEnvironment.addVar(resultVarName, result);
 		}
 
-		/* Eventually log the entry of this method. */
+		/* Probably log the entry of this method. */
 		if (LOGGER.isDebugEnabled()) {
 
 			String msg;
@@ -3601,18 +3705,19 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 	 * for which body is true.
 	 * 
 	 * @param body
-	 *          the body expression to be evaluated
+	 *            the body expression to be evaluated
 	 * @param source
-	 *          the collection representing the source expression of the iteration
+	 *            the collection representing the source expression of the
+	 *            iteration
 	 * @param iterator
-	 *          the iterator (one may have at most one iterator variable.)
+	 *            the iterator (one may have at most one iterator variable.)
 	 * 
 	 * @return the result of the iteration
 	 */
-	private OclAny evaluateOne(OclExpression body, OclCollection<OclAny> source,
-			Variable iterator) {
+	private OclAny evaluateOne(OclExpression body,
+			OclCollection<OclAny> source, Variable iterator) {
 
-		/* Eventually log the entry of this method. */
+		/* Probably log the entry of this method. */
 		if (LOGGER.isDebugEnabled()) {
 			String msg;
 
@@ -3639,8 +3744,8 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		oneFoundElement = false;
 
 		/*
-		 * Iterate through the source and check if exactly one element fulfills the
-		 * body condition.
+		 * Iterate through the source and check if exactly one element fulfills
+		 * the body condition.
 		 */
 		while (sourceIt.hasNext().isTrue()) {
 
@@ -3687,7 +3792,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		}
 		// no else.
 
-		/* Eventually log the entry of this method. */
+		/* Probably log the entry of this method. */
 		if (LOGGER.isDebugEnabled()) {
 
 			String msg;
@@ -3705,20 +3810,21 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 	 * The sub collection of source for which body is false.
 	 * 
 	 * @param body
-	 *          the body expression to be evaluated
+	 *            the body expression to be evaluated
 	 * @param source
-	 *          the collection representing the source expression of the iteration
+	 *            the collection representing the source expression of the
+	 *            iteration
 	 * @param iterator
-	 *          the iterator (reject may have at most one iterator variable.)
+	 *            the iterator (reject may have at most one iterator variable.)
 	 * @param resultType
-	 *          the result type (set, sequence, bag, orderedSet)
+	 *            the result type (set, sequence, bag, orderedSet)
 	 * 
 	 * @return the result of the iteration
 	 */
 	private OclAny evaluateReject(OclExpression body,
 			OclCollection<OclAny> source, Variable iterator, Type resultType) {
 
-		/* Eventually log the entry of this method. */
+		/* Probably log the entry of this method. */
 		if (LOGGER.isDebugEnabled()) {
 			String msg;
 
@@ -3739,8 +3845,8 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		OclIterator<OclAny> it = source.getIterator();
 
 		/*
-		 * Iterate over the collection and add all elements to the result list which
-		 * do not fulfill the body condition.
+		 * Iterate over the collection and add all elements to the result list
+		 * which do not fulfill the body condition.
 		 */
 		while (it.hasNext().isTrue()) {
 
@@ -3764,7 +3870,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		/* Convert the result list into a collection. */
 		result = this.getResultListAsCollection(resultList, resultType);
 
-		/* Eventually log the exit of this method. */
+		/* Probably log the exit of this method. */
 		if (LOGGER.isDebugEnabled()) {
 
 			String msg;
@@ -3785,20 +3891,21 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 	 * </p>
 	 * 
 	 * @param body
-	 *          the body expression to be evaluated
+	 *            the body expression to be evaluated
 	 * @param source
-	 *          the collection representing the source expression of the iteration
+	 *            the collection representing the source expression of the
+	 *            iteration
 	 * @param iterator
-	 *          the iterator (select may have at most one iterator variable.)
+	 *            the iterator (select may have at most one iterator variable.)
 	 * @param resultType
-	 *          the result type (set, sequence, bag, orderedSet)
+	 *            the result type (set, sequence, bag, orderedSet)
 	 * 
 	 * @return the result of the iteration
 	 */
 	private OclAny evaluateSelect(OclExpression body,
 			OclCollection<OclAny> source, Variable iterator, Type resultType) {
 
-		/* Eventually log the entry into this method. */
+		/* Probably log the entry into this method. */
 		if (LOGGER.isDebugEnabled()) {
 			String msg;
 
@@ -3842,7 +3949,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		/* Convert the result list into a collection. */
 		result = this.getResultListAsCollection(resultList, resultType);
 
-		/* Eventually log the exit of this method. */
+		/* Probably log the exit of this method. */
 		if (LOGGER.isDebugEnabled()) {
 
 			String msg;
@@ -3861,24 +3968,26 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 	 * Results in the sorted collection containing all elements of the source
 	 * collection. The element for which body has the lowest value comes first,
 	 * and so on. The type of the body expression must have the < operation
-	 * defined. The < operation must return a Boolean value and must be transitive
-	 * (i.e., if a < b and b < c then a < c).
+	 * defined. The < operation must return a Boolean value and must be
+	 * transitive (i.e., if a < b and b < c then a < c).
 	 * 
 	 * @param body
-	 *          the body expression to be evaluated
+	 *            the body expression to be evaluated
 	 * @param source
-	 *          the collection representing the source expression of the iteration
+	 *            the collection representing the source expression of the
+	 *            iteration
 	 * @param iterator
-	 *          the iterator (sortedBy may have at most one iterator variable.)
+	 *            the iterator (sortedBy may have at most one iterator
+	 *            variable.)
 	 * @param resultType
-	 *          the result type (set, sequence, bag, orderedSet)
+	 *            the result type (set, sequence, bag, orderedSet)
 	 * 
 	 * @return the result of the iteration
 	 */
 	private OclAny evaluateSortedBy(OclExpression body,
 			OclCollection<OclAny> source, Variable iterator, Type resultType) {
 
-		/* Eventually log the entry of this method. */
+		/* Probably log the entry of this method. */
 		if (LOGGER.isDebugEnabled()) {
 
 			String msg;
@@ -3900,7 +4009,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			public int compare(OclComparable oclComparable1,
 					OclComparable oclComparable2) {
 
-				/* Eventually log the entry of this method. */
+				/* Probably log the entry of this method. */
 				if (LOGGER.isDebugEnabled()) {
 					String msg;
 
@@ -3919,7 +4028,8 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 				/* Compare the two objects. */
 				oclResult = oclComparable2.compareTo(oclComparable2);
 
-				if (oclResult.isEqualTo(myStandardLibraryFactory.createOclInteger(-1L))
+				if (oclResult.isEqualTo(
+						myStandardLibraryFactory.createOclInteger(-1L))
 						.isTrue()) {
 					result = -1;
 				}
@@ -3933,7 +4043,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 					result = 0;
 				}
 
-				/* Eventually log the exit of this method. */
+				/* Probably log the exit of this method. */
 				if (LOGGER.isDebugEnabled()) {
 					String msg;
 
@@ -3984,9 +4094,8 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 				}
 				// no else.
 
-				result =
-						myStandardLibraryFactory.createOclInvalid(resultType,
-								new IllegalStateException(msg));
+				result = myStandardLibraryFactory.createOclInvalid(resultType,
+						new IllegalStateException(msg));
 			}
 		}
 		// end while.
@@ -3995,21 +4104,18 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 		/* Check which type of collection the result shall have. */
 		if (resultType instanceof SequenceType) {
-			result =
-					myStandardLibraryFactory.createOclSequence(resultList,
-							((SequenceType) resultType).getElementType());
+			result = myStandardLibraryFactory.createOclSequence(resultList,
+					((SequenceType) resultType).getElementType());
 		}
 
 		else if (resultType instanceof OrderedSetType) {
-			result =
-					myStandardLibraryFactory.createOclOrderedSet(resultList,
-							((OrderedSetType) resultType).getElementType());
+			result = myStandardLibraryFactory.createOclOrderedSet(resultList,
+					((OrderedSetType) resultType).getElementType());
 		}
 
 		else {
 			String msg;
-			msg =
-					"The ResultType of a sortedBy Iterator should by a sorted collection.";
+			msg = "The ResultType of a sortedBy Iterator should by a sorted collection.";
 			msg += " But was " + resultType.getQualifiedName();
 
 			if (LOGGER.isInfoEnabled()) {
@@ -4017,12 +4123,11 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			}
 			// no else.
 
-			result =
-					myStandardLibraryFactory.createOclInvalid(resultType,
-							new IllegalArgumentException(msg));
+			result = myStandardLibraryFactory.createOclInvalid(resultType,
+					new IllegalArgumentException(msg));
 		}
 
-		/* Eventually log the exit of this method. */
+		/* Probably log the exit of this method. */
 		if (LOGGER.isDebugEnabled()) {
 
 			String msg;
@@ -4048,7 +4153,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 	 * If no prepared value has been set, the result will be <code>null</code>.
 	 * 
 	 * @param property
-	 *          The {@link Property} whose prepared value shall be returned.
+	 *            The {@link Property} whose prepared value shall be returned.
 	 * @return The prepared value (as {@link OclAny}) or <code>null</code>.
 	 */
 	private OclAny getPreparedPropertyValue(Property property) {
@@ -4064,25 +4169,24 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 			Constraint deriveConstraint;
 
-			deriveConstraint =
-					myEnvironment.getConstraint(qualifiedPropertyName + "-derive");
+			deriveConstraint = myEnvironment
+					.getConstraint(qualifiedPropertyName + "-derive");
 
-			result =
-					this.interpretConstraint(deriveConstraint, myCurrentModelObject)
-							.getResult();
+			result = this.interpretConstraint(deriveConstraint,
+					myCurrentModelObject).getResult();
 		}
 
 		/* Else check if the property has a initial expression. */
-		else if (myEnvironment.getConstraint(qualifiedPropertyName + "-initial") != null) {
+		else if (myEnvironment
+				.getConstraint(qualifiedPropertyName + "-initial") != null) {
 
 			Constraint initialConstaint;
 
-			initialConstaint =
-					myEnvironment.getConstraint(qualifiedPropertyName + "-initial");
+			initialConstaint = myEnvironment
+					.getConstraint(qualifiedPropertyName + "-initial");
 
-			result =
-					this.interpretConstraint(initialConstaint, myCurrentModelObject)
-							.getResult();
+			result = this.interpretConstraint(initialConstaint,
+					myCurrentModelObject).getResult();
 			this.isModelAccessNeeded = this.isModelAccessNeeded();
 		}
 
@@ -4093,9 +4197,8 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 			bodyConstraint = myEnvironment.getConstraint(qualifiedPropertyName);
 
-			result =
-					this.interpretConstraint(bodyConstraint, myCurrentModelObject)
-							.getResult();
+			result = this.interpretConstraint(bodyConstraint,
+					myCurrentModelObject).getResult();
 			this.isModelAccessNeeded = this.isModelAccessNeeded();
 		}
 
@@ -4109,9 +4212,9 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 	 * </p>
 	 * 
 	 * @param resultList
-	 *          The list which shall be returned as collection.
+	 *            The list which shall be returned as collection.
 	 * @param resultType
-	 *          The {@link Type} of the collection which shall be returned.
+	 *            The {@link Type} of the collection which shall be returned.
 	 * @return Returns a given List as an instance of a given collection type.
 	 */
 	private OclAny getResultListAsCollection(List<OclAny> resultList,
@@ -4122,37 +4225,33 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		/* Check which type of collection shall be returned. */
 		if (resultType instanceof SetType) {
 			Set<OclAny> resultSet = new HashSet<OclAny>(resultList);
-			result =
-					myStandardLibraryFactory.createOclSet(resultSet,
-							((SetType) resultType).getElementType());
+			result = myStandardLibraryFactory.createOclSet(resultSet,
+					((SetType) resultType).getElementType());
 		}
 
 		else if (resultType instanceof BagType) {
-			result =
-					myStandardLibraryFactory.createOclBag(resultList,
-							((BagType) resultType).getElementType());
+			result = myStandardLibraryFactory.createOclBag(resultList,
+					((BagType) resultType).getElementType());
 		}
 
 		else if (resultType instanceof SequenceType) {
-			result =
-					myStandardLibraryFactory.createOclSequence(resultList,
-							((SequenceType) resultType).getElementType());
+			result = myStandardLibraryFactory.createOclSequence(resultList,
+					((SequenceType) resultType).getElementType());
 		}
 
 		else if (resultType instanceof OrderedSetType) {
-			result =
-					myStandardLibraryFactory.createOclOrderedSet(resultList,
-							((OrderedSetType) resultType).getElementType());
+			result = myStandardLibraryFactory.createOclOrderedSet(resultList,
+					((OrderedSetType) resultType).getElementType());
 		}
 
 		else {
 			String msg;
 
-			msg = "Unknown Type of Collection. Type was " + resultType.getName();
+			msg = "Unknown Type of Collection. Type was "
+					+ resultType.getName();
 
-			result =
-					myStandardLibraryFactory.createOclInvalid(resultType,
-							new IllegalArgumentException(msg));
+			result = myStandardLibraryFactory.createOclInvalid(resultType,
+					new IllegalArgumentException(msg));
 		}
 
 		return result;
@@ -4166,10 +4265,11 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 	 * </p>
 	 * 
 	 * @param anOperationCallExp
-	 *          The {@link OperationCallExp} representing the {@link Operation} to
-	 *          be called.
+	 *            The {@link OperationCallExp} representing the
+	 *            {@link Operation} to be called.
 	 * @param source
-	 *          The already interpreted source of the {@link OperationCallExp}.
+	 *            The already interpreted source of the {@link OperationCallExp}
+	 *            .
 	 * @return The result of a special {@link Operation} or <code>null</code>.
 	 */
 	private OclAny handleSpecialOperations(OperationCallExp anOperationCallExp,
@@ -4184,24 +4284,25 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			if (this.isPreparation) {
 				String msg;
 
-				this.myEnvironment.savePostconditionValue(anOperationCallExp, source);
+				this.myEnvironment.savePostconditionValue(anOperationCallExp,
+						source);
 
 				msg = "@Pre is not available during constraint preparation.";
-				result =
-						myStandardLibraryFactory.createOclUndefined(anOperationCallExp
-								.getType(), msg);
+				result = myStandardLibraryFactory.createOclUndefined(
+						anOperationCallExp.getType(), msg);
 			}
 
 			else {
-				result = this.myEnvironment.getPostconditionValue(anOperationCallExp);
+				result = this.myEnvironment
+						.getPostconditionValue(anOperationCallExp);
 
 				if (result == null) {
 					String msg;
-					msg = "@Pre value of " + anOperationCallExp + " has not been found.";
+					msg = "@Pre value of " + anOperationCallExp
+							+ " has not been found.";
 
-					result =
-							myStandardLibraryFactory.createOclUndefined(anOperationCallExp
-									.getType(), msg);
+					result = myStandardLibraryFactory.createOclUndefined(
+							anOperationCallExp.getType(), msg);
 				}
 				// no else.
 			}
@@ -4214,29 +4315,28 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			if (this.isPreparation) {
 				String msg;
 
-				this.myEnvironment.saveOldInstances(anOperationCallExp.getSource()
-						.getType());
+				this.myEnvironment.saveOldInstances(anOperationCallExp
+						.getSource().getType());
 
 				msg = "oclIsNew() is not available during preparation.";
-				result =
-						myStandardLibraryFactory.createOclUndefined(anOperationCallExp
-								.getType(), msg);
+				result = myStandardLibraryFactory.createOclUndefined(
+						anOperationCallExp.getType(), msg);
 			}
 
 			else {
 
 				if (source.oclIsInvalid().isTrue()) {
 
-					result =
-							this.myStandardLibraryFactory.createOclInvalid(anOperationCallExp
-									.getType(), source.getInvalidReason());
+					result = this.myStandardLibraryFactory.createOclInvalid(
+							anOperationCallExp.getType(), source
+									.getInvalidReason());
 				}
 
 				else if (source.oclIsUndefined().isTrue()) {
 
-					result =
-							this.myStandardLibraryFactory.createOclUndefined(
-									anOperationCallExp.getType(), source.getUndefinedReason());
+					result = this.myStandardLibraryFactory.createOclUndefined(
+							anOperationCallExp.getType(), source
+									.getUndefinedReason());
 				}
 
 				else {
@@ -4245,17 +4345,16 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 						OclModelInstanceObject oclModelInstanceObject;
 						oclModelInstanceObject = (OclModelInstanceObject) source;
 
-						result =
-								this.myStandardLibraryFactory
-										.createOclBoolean(this.myEnvironment
-												.isNewInstance(oclModelInstanceObject));
+						result = this.myStandardLibraryFactory
+								.createOclBoolean(this.myEnvironment
+										.isNewInstance(oclModelInstanceObject));
 					}
 
 					catch (ClassCastException e) {
 
-						result =
-								this.myStandardLibraryFactory.createOclInvalid(
-										anOperationCallExp.getType(), e);
+						result = this.myStandardLibraryFactory
+								.createOclInvalid(anOperationCallExp.getType(),
+										e);
 					}
 					// end catch.
 				}
@@ -4270,13 +4369,15 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 	/**
 	 * <p>
-	 * A helper method which removes the parameters of an {@link Operation} which
-	 * is the context of a {@link Constraint} from the
-	 * {@link IInterpretationEnvironment} after its execution and interpretation.
+	 * A helper method which removes the parameters of an {@link Operation}
+	 * which is the context of a {@link Constraint} from the
+	 * {@link IInterpretationEnvironment} after its execution and
+	 * interpretation.
 	 * </p>
 	 * 
 	 * @param aConstraint
-	 *          The {@link Constraint} for which the arguments shall be removed.
+	 *            The {@link Constraint} for which the arguments shall be
+	 *            removed.
 	 */
 	private void removeParametersFromEnvironment(Constraint aConstraint) {
 
@@ -4286,7 +4387,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		oclExpression = (ExpressionInOcl) aConstraint.getSpecification();
 		index = 0;
 
-		/* Eventually remove parameters from the environment. */
+		/* Probably remove parameters from the environment. */
 		for (Variable aVariable : oclExpression.getParameter()) {
 
 			this.resetEnviromentVariable(aVariable.getName());

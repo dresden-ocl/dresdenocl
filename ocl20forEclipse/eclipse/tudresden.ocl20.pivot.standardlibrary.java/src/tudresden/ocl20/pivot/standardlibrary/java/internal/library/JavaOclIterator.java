@@ -7,6 +7,8 @@ import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBoolean;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclIterator;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.base.TypeConstants;
+import tudresden.ocl20.pivot.pivotmodel.Type;
 import tudresden.ocl20.pivot.standardlibrary.java.factory.JavaStandardLibraryFactory;
 
 /**
@@ -14,36 +16,57 @@ import tudresden.ocl20.pivot.standardlibrary.java.factory.JavaStandardLibraryFac
  * @author Michael Thiele
  * 
  * @param <T>
- *          the type of the collection
+ *            the type of the collection
  */
 public class JavaOclIterator<T extends OclAny> implements OclIterator<T> {
 
 	protected Iterator<IModelInstanceElement> iterator;
 
+	protected Throwable invalidReason;
+
+	protected Type genericType;
+
 	public JavaOclIterator(OclCollection<? extends OclAny> collection) {
-		
-		this.iterator =
-				collection.getModelInstanceCollection().getCollection().iterator();
+
+		if (collection.oclIsInvalid().isTrue())
+			invalidReason = collection.getInvalidReason();
+		else if (collection.oclIsUndefined().isTrue())
+			invalidReason = new RuntimeException(
+					"Iterator on undefined collection.");
+		else
+			this.iterator = collection.getModelInstanceCollection()
+					.getCollection().iterator();
+
+		this.genericType = collection.getGenericType();
 	}
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclIterator#hasNext()
 	 */
 	public OclBoolean hasNext() {
 
+		if (invalidReason != null)
+			return JavaStandardLibraryFactory.INSTANCE.createOclInvalid(
+					TypeConstants.BOOLEAN, invalidReason);
 		return JavaStandardLibraryFactory.INSTANCE.createOclBoolean(iterator
 				.hasNext());
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclIterator#next()
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclIterator#next()
 	 */
 	@SuppressWarnings("unchecked")
 	public T next() {
 
+		if (invalidReason != null)
+			return JavaStandardLibraryFactory.INSTANCE.createOclInvalid(
+					genericType, invalidReason);
 		IModelInstanceElement imiElement = iterator.next();
 		return (T) JavaStandardLibraryFactory.INSTANCE.createOclAny(imiElement);
 	}
