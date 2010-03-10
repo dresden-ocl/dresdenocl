@@ -16,14 +16,13 @@ for more details.
 You should have received a copy of the GNU Lesser General Public License along 
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
-
 package tudresden.ocl20.pivot.ocl2java.test.tests.constraintkinds;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import tudresden.ocl20.pivot.facade.OCL2ParsingException;
+import tudresden.ocl20.pivot.facade.Ocl2ParsingException;
 import tudresden.ocl20.pivot.modelbus.ModelAccessException;
 import tudresden.ocl20.pivot.ocl2java.exception.Ocl22CodeException;
 import tudresden.ocl20.pivot.ocl2java.test.tests.AbstractDiffTest;
@@ -76,13 +75,13 @@ public class TestPre extends AbstractDiffTest {
 	 * </p>
 	 * 
 	 * @throws ModelAccessException
-	 * @throws OCL2ParsingException
+	 * @throws Ocl2ParsingException
 	 * @throws IllegalArgumentException
 	 * @throws Ocl22CodeException
 	 */
 	@Test
 	public void testPre01() throws IllegalArgumentException,
-			OCL2ParsingException, ModelAccessException, Ocl22CodeException {
+			Ocl2ParsingException, ModelAccessException, Ocl22CodeException {
 
 		this.compareInstrumentationCodeGeneration("constraintkindtest/pre",
 				"pre01");

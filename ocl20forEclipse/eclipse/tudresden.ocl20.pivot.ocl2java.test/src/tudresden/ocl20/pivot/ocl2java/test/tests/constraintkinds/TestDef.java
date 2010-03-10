@@ -23,7 +23,7 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import tudresden.ocl20.pivot.facade.OCL2ParsingException;
+import tudresden.ocl20.pivot.facade.Ocl2ParsingException;
 import tudresden.ocl20.pivot.modelbus.ModelAccessException;
 import tudresden.ocl20.pivot.ocl2java.exception.Ocl22CodeException;
 import tudresden.ocl20.pivot.ocl2java.test.tests.AbstractDiffTest;
@@ -76,13 +76,13 @@ public class TestDef extends AbstractDiffTest {
 	 * </p>
 	 * 
 	 * @throws ModelAccessException
-	 * @throws OCL2ParsingException
+	 * @throws Ocl2ParsingException
 	 * @throws IllegalArgumentException
 	 * @throws Ocl22CodeException
 	 */
 	@Test
 	public void testDef01() throws IllegalArgumentException,
-			OCL2ParsingException, ModelAccessException, Ocl22CodeException {
+			Ocl2ParsingException, ModelAccessException, Ocl22CodeException {
 
 		this.compareInstrumentationCodeGeneration("constraintkindtest/def",
 				"def01");
@@ -94,13 +94,13 @@ public class TestDef extends AbstractDiffTest {
 	 * </p>
 	 * 
 	 * @throws ModelAccessException
-	 * @throws OCL2ParsingException
+	 * @throws Ocl2ParsingException
 	 * @throws IllegalArgumentException
 	 * @throws Ocl22CodeException
 	 */
 	@Test
 	public void testDef02() throws IllegalArgumentException,
-			OCL2ParsingException, ModelAccessException, Ocl22CodeException {
+			Ocl2ParsingException, ModelAccessException, Ocl22CodeException {
 
 		this.compareInstrumentationCodeGeneration("constraintkindtest/def",
 				"def02");
@@ -112,13 +112,13 @@ public class TestDef extends AbstractDiffTest {
 	 * </p>
 	 * 
 	 * @throws ModelAccessException
-	 * @throws OCL2ParsingException
+	 * @throws Ocl2ParsingException
 	 * @throws IllegalArgumentException
 	 * @throws Ocl22CodeException
 	 */
 	@Test
 	public void testDef03() throws IllegalArgumentException,
-			OCL2ParsingException, ModelAccessException, Ocl22CodeException {
+			Ocl2ParsingException, ModelAccessException, Ocl22CodeException {
 	
 		this.compareInstrumentationCodeGeneration("constraintkindtest/def",
 				"def03");

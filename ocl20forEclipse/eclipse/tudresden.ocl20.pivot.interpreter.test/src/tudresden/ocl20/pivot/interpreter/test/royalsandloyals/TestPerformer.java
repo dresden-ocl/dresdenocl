@@ -25,7 +25,7 @@ import java.util.List;
 
 import org.eclipse.core.runtime.Platform;
 
-import tudresden.ocl20.pivot.facade.OCL2ParsingException;
+import tudresden.ocl20.pivot.facade.Ocl2ParsingException;
 import tudresden.ocl20.pivot.facade.Ocl2ForEclipseFacade;
 import tudresden.ocl20.pivot.interpreter.IInterpretationResult;
 import tudresden.ocl20.pivot.modelbus.ModelAccessException;
@@ -322,12 +322,12 @@ public class TestPerformer {
 	 *          The OCL file to be parsed.
 	 * @return A {@link List} containing the parsed {@link Constraint}s.
 	 * @throws ModelAccessException
-	 * @throws OCL2ParsingException
+	 * @throws Ocl2ParsingException
 	 * @throws Ocl22JavaException
 	 *           Is thrown if any error occurs
 	 */
 	public List<Constraint> loadOCLFile(String oclFileName)
-			throws RuntimeException, OCL2ParsingException, ModelAccessException {
+			throws RuntimeException, Ocl2ParsingException, ModelAccessException {
 
 		List<Constraint> result;
 		File oclFile;

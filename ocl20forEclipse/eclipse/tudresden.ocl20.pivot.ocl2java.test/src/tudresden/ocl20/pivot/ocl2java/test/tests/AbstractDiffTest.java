@@ -30,7 +30,7 @@ import java.util.List;
 import org.eclipse.core.runtime.Platform;
 import org.osgi.framework.Bundle;
 
-import tudresden.ocl20.pivot.facade.OCL2ParsingException;
+import tudresden.ocl20.pivot.facade.Ocl2ParsingException;
 import tudresden.ocl20.pivot.facade.Ocl2ForEclipseFacade;
 import tudresden.ocl20.pivot.modelbus.ModelAccessException;
 import tudresden.ocl20.pivot.modelbus.model.IModel;
@@ -126,12 +126,12 @@ public abstract class AbstractDiffTest {
 	 *            <code>resources/</code>
 	 * @param fileName
 	 *            The name of the file that shall be checked.
-	 * @throws OCL2ParsingException
+	 * @throws Ocl2ParsingException
 	 * @throws ModelAccessException
 	 * @throws Ocl22CodeException
 	 */
 	protected void compareFragmentCodeGeneration(String directory,
-			String fileName) throws OCL2ParsingException, ModelAccessException,
+			String fileName) throws Ocl2ParsingException, ModelAccessException,
 			Ocl22CodeException {
 
 		/* Parse the constraint. */
@@ -169,12 +169,12 @@ public abstract class AbstractDiffTest {
 	 *            <code>resources/</code>
 	 * @param fileName
 	 *            The name of the file that shall be checked.
-	 * @throws OCL2ParsingException
+	 * @throws Ocl2ParsingException
 	 * @throws ModelAccessException
 	 * @throws Ocl22CodeException
 	 */
 	protected void compareInstrumentationCodeGeneration(String directory,
-			String fileName) throws OCL2ParsingException, ModelAccessException,
+			String fileName) throws Ocl2ParsingException, ModelAccessException,
 			Ocl22CodeException {
 
 		/* Parse the constraint. */
@@ -217,12 +217,12 @@ public abstract class AbstractDiffTest {
 	 *            <code>resources/</code> and the names of the files for
 	 *            that code shall be generated as a {@link List} containing
 	 *            {@link String} arrays.
-	 * @throws OCL2ParsingException
+	 * @throws Ocl2ParsingException
 	 * @throws ModelAccessException
 	 * @throws Ocl22CodeException
 	 */
 	protected void createInstrumentationCode(String targetBundleId,
-			List<String[]> fileNames) throws OCL2ParsingException,
+			List<String[]> fileNames) throws Ocl2ParsingException,
 			ModelAccessException, Ocl22CodeException {
 
 		/* Get the bundle location for the model files. */

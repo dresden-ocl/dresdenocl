@@ -3,8 +3,8 @@ package tudresden.ocl20.pivot.modelbus.test;
 import java.io.File;
 import java.util.Collection;
 
-import tudresden.ocl20.pivot.facade.OCL2ParsingException;
 import tudresden.ocl20.pivot.facade.Ocl2ForEclipseFacade;
+import tudresden.ocl20.pivot.facade.Ocl2ParsingException;
 import tudresden.ocl20.pivot.modelbus.ModelAccessException;
 import tudresden.ocl20.pivot.modelbus.model.IModel;
 import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance;
@@ -148,7 +148,7 @@ public class ModelBusTestUtility {
 	 */
 	public static Collection<Constraint> parseConstraints(
 			String constraintLocation, IModel model) throws IllegalArgumentException,
-			OCL2ParsingException, ModelAccessException {
+			Ocl2ParsingException, ModelAccessException {
 
 		String bundleDirectory;
 		File constraintFile;

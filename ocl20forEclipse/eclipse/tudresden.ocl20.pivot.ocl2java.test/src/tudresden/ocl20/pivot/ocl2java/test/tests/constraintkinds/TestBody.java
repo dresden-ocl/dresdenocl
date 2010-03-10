@@ -23,7 +23,7 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import tudresden.ocl20.pivot.facade.OCL2ParsingException;
+import tudresden.ocl20.pivot.facade.Ocl2ParsingException;
 import tudresden.ocl20.pivot.modelbus.ModelAccessException;
 import tudresden.ocl20.pivot.ocl2java.exception.Ocl22CodeException;
 import tudresden.ocl20.pivot.ocl2java.test.tests.AbstractDiffTest;
@@ -76,13 +76,13 @@ public class TestBody extends AbstractDiffTest {
 	 * </p>
 	 * 
 	 * @throws ModelAccessException
-	 * @throws OCL2ParsingException
+	 * @throws Ocl2ParsingException
 	 * @throws IllegalArgumentException
 	 * @throws Ocl22CodeException
 	 */
 	@Test
 	public void testBody01() throws IllegalArgumentException,
-			OCL2ParsingException, ModelAccessException, Ocl22CodeException {
+			Ocl2ParsingException, ModelAccessException, Ocl22CodeException {
 
 		this.compareInstrumentationCodeGeneration("constraintkindtest/body",
 				"body01");
@@ -94,13 +94,13 @@ public class TestBody extends AbstractDiffTest {
 	 * </p>
 	 * 
 	 * @throws ModelAccessException
-	 * @throws OCL2ParsingException
+	 * @throws Ocl2ParsingException
 	 * @throws IllegalArgumentException
 	 * @throws Ocl22CodeException
 	 */
 	@Test
 	public void testBody02() throws IllegalArgumentException,
-			OCL2ParsingException, ModelAccessException, Ocl22CodeException {
+			Ocl2ParsingException, ModelAccessException, Ocl22CodeException {
 
 		this.compareInstrumentationCodeGeneration("constraintkindtest/body", "body02");
 	}

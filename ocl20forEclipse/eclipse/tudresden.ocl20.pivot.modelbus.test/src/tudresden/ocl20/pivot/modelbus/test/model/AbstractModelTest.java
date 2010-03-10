@@ -33,8 +33,8 @@ import java.util.Set;
 
 import org.junit.Test;
 
-import tudresden.ocl20.pivot.facade.OCL2ParsingException;
 import tudresden.ocl20.pivot.facade.Ocl2ForEclipseFacade;
+import tudresden.ocl20.pivot.facade.Ocl2ParsingException;
 import tudresden.ocl20.pivot.modelbus.IModelBusConstants;
 import tudresden.ocl20.pivot.modelbus.ModelAccessException;
 import tudresden.ocl20.pivot.modelbus.model.IModel;
@@ -624,7 +624,7 @@ public class AbstractModelTest {
 	 */
 	@Test
 	public void testGetConstraints01() throws ModelAccessException,
-			IllegalArgumentException, OCL2ParsingException {
+			IllegalArgumentException, Ocl2ParsingException {
 
 		IModel model;
 		model = ModelBusTestUtility.getUML2Model("resources/models/model05.uml");
@@ -648,7 +648,7 @@ public class AbstractModelTest {
 	 */
 	@Test
 	public void testGetConstraints02() throws ModelAccessException,
-			IllegalArgumentException, OCL2ParsingException {
+			IllegalArgumentException, Ocl2ParsingException {
 
 		IModel model;
 		model = ModelBusTestUtility.getUML2Model("resources/models/model05.uml");
@@ -677,12 +677,12 @@ public class AbstractModelTest {
 	 * </p>
 	 * 
 	 * @throws ModelAccessException
-	 * @throws OCL2ParsingException
+	 * @throws Ocl2ParsingException
 	 * @throws IllegalArgumentException
 	 */
 	@Test
 	public void testGetConstraints03() throws ModelAccessException,
-			IllegalArgumentException, OCL2ParsingException {
+			IllegalArgumentException, Ocl2ParsingException {
 
 		IModel model;
 		model = ModelBusTestUtility.getUML2Model("resources/models/model05.uml");
@@ -721,12 +721,12 @@ public class AbstractModelTest {
 	 * </p>
 	 * 
 	 * @throws ModelAccessException
-	 * @throws OCL2ParsingException
+	 * @throws Ocl2ParsingException
 	 * @throws IllegalArgumentException
 	 */
 	@Test
 	public void testRemoveAllConstraints01() throws ModelAccessException,
-			IllegalArgumentException, OCL2ParsingException {
+			IllegalArgumentException, Ocl2ParsingException {
 
 		IModel model;
 		model = ModelBusTestUtility.getUML2Model("resources/models/model05.uml");
@@ -746,12 +746,12 @@ public class AbstractModelTest {
 	 * </p>
 	 * 
 	 * @throws ModelAccessException
-	 * @throws OCL2ParsingException
+	 * @throws Ocl2ParsingException
 	 * @throws IllegalArgumentException
 	 */
 	@Test
 	public void testRemoveAllConstraints02() throws ModelAccessException,
-			IllegalArgumentException, OCL2ParsingException {
+			IllegalArgumentException, Ocl2ParsingException {
 
 		IModel model;
 		model = ModelBusTestUtility.getUML2Model("resources/models/model05.uml");
@@ -777,12 +777,12 @@ public class AbstractModelTest {
 	 * </p>
 	 * 
 	 * @throws ModelAccessException
-	 * @throws OCL2ParsingException
+	 * @throws Ocl2ParsingException
 	 * @throws IllegalArgumentException
 	 */
 	@Test
 	public void testRemoveAllConstraints03() throws ModelAccessException,
-			IllegalArgumentException, OCL2ParsingException {
+			IllegalArgumentException, Ocl2ParsingException {
 
 		IModel model;
 		model = ModelBusTestUtility.getUML2Model("resources/models/model05.uml");
@@ -810,12 +810,12 @@ public class AbstractModelTest {
 	 * </p>
 	 * 
 	 * @throws ModelAccessException
-	 * @throws OCL2ParsingException
+	 * @throws Ocl2ParsingException
 	 * @throws IllegalArgumentException
 	 */
 	@Test
 	public void testRemoveAllConstraints04() throws ModelAccessException,
-			IllegalArgumentException, OCL2ParsingException {
+			IllegalArgumentException, Ocl2ParsingException {
 
 		IModel model;
 		model = ModelBusTestUtility.getUML2Model("resources/models/model05.uml");
@@ -874,12 +874,12 @@ public class AbstractModelTest {
 	 * </p>
 	 * 
 	 * @throws ModelAccessException
-	 * @throws OCL2ParsingException
+	 * @throws Ocl2ParsingException
 	 * @throws IllegalArgumentException
 	 */
 	@Test
 	public void testRemoveAllConstraints05() throws ModelAccessException,
-			IllegalArgumentException, OCL2ParsingException {
+			IllegalArgumentException, Ocl2ParsingException {
 
 		IModel model;
 		model = ModelBusTestUtility.getUML2Model("resources/models/model05.uml");
@@ -938,12 +938,12 @@ public class AbstractModelTest {
 	 * </p>
 	 * 
 	 * @throws ModelAccessException
-	 * @throws OCL2ParsingException
+	 * @throws Ocl2ParsingException
 	 * @throws IllegalArgumentException
 	 */
 	@Test
 	public void testRemoveConstraints01() throws ModelAccessException,
-			IllegalArgumentException, OCL2ParsingException {
+			IllegalArgumentException, Ocl2ParsingException {
 
 		IModel model;
 		model = ModelBusTestUtility.getUML2Model("resources/models/model05.uml");
@@ -963,12 +963,12 @@ public class AbstractModelTest {
 	 * </p>
 	 * 
 	 * @throws ModelAccessException
-	 * @throws OCL2ParsingException
+	 * @throws Ocl2ParsingException
 	 * @throws IllegalArgumentException
 	 */
 	@Test
 	public void testRemoveConstraints02() throws ModelAccessException,
-			IllegalArgumentException, OCL2ParsingException {
+			IllegalArgumentException, Ocl2ParsingException {
 
 		IModel model;
 		model = ModelBusTestUtility.getUML2Model("resources/models/model05.uml");
@@ -996,12 +996,12 @@ public class AbstractModelTest {
 	 * </p>
 	 * 
 	 * @throws ModelAccessException
-	 * @throws OCL2ParsingException
+	 * @throws Ocl2ParsingException
 	 * @throws IllegalArgumentException
 	 */
 	@Test
 	public void testRemoveConstraints03() throws ModelAccessException,
-			IllegalArgumentException, OCL2ParsingException {
+			IllegalArgumentException, Ocl2ParsingException {
 
 		IModel model;
 		model = ModelBusTestUtility.getUML2Model("resources/models/model05.uml");
@@ -1044,12 +1044,12 @@ public class AbstractModelTest {
 	 * </p>
 	 * 
 	 * @throws ModelAccessException
-	 * @throws OCL2ParsingException
+	 * @throws Ocl2ParsingException
 	 * @throws IllegalArgumentException
 	 */
 	@Test
 	public void testRemoveConstraints04() throws ModelAccessException,
-			IllegalArgumentException, OCL2ParsingException {
+			IllegalArgumentException, Ocl2ParsingException {
 
 		IModel model;
 		model = ModelBusTestUtility.getUML2Model("resources/models/model05.uml");
@@ -1122,12 +1122,12 @@ public class AbstractModelTest {
 	 * </p>
 	 * 
 	 * @throws ModelAccessException
-	 * @throws OCL2ParsingException
+	 * @throws Ocl2ParsingException
 	 * @throws IllegalArgumentException
 	 */
 	@Test
 	public void testRemoveConstraints05() throws ModelAccessException,
-			IllegalArgumentException, OCL2ParsingException {
+			IllegalArgumentException, Ocl2ParsingException {
 
 		IModel model;
 		model = ModelBusTestUtility.getUML2Model("resources/models/model05.uml");

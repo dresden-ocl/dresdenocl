@@ -28,7 +28,7 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import tudresden.ocl20.pivot.facade.OCL2ParsingException;
+import tudresden.ocl20.pivot.facade.Ocl2ParsingException;
 import tudresden.ocl20.pivot.interpreter.IInterpretationResult;
 import tudresden.ocl20.pivot.modelbus.ModelAccessException;
 
@@ -80,13 +80,13 @@ public class TestCollection extends AbstractInterpreterTest {
 	 * Tests the operation <code>Collection.product(Collection)</code>.
 	 * </p>
 	 * 
-	 * @throws OCL2ParsingException
+	 * @throws Ocl2ParsingException
 	 * @throws ModelAccessException
 	 * @throws IllegalArgumentException
 	 */
 	@Test
 	public void testProduct01() throws IllegalArgumentException,
-			ModelAccessException, OCL2ParsingException {
+			ModelAccessException, Ocl2ParsingException {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,

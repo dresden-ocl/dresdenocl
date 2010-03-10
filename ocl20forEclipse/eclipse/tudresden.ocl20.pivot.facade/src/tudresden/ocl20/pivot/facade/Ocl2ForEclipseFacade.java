@@ -95,19 +95,27 @@ public class Ocl2ForEclipseFacade {
 	public final static String UML2_MetaModel = UML2MetamodelPlugin.ID;
 
 	/**
-	 * Cached interpreters for code generation. They are stored in a
+	 * Cached interpreters for interpretation. They are stored in a
 	 * {@link WeakHashMap}. If an {@link IModelInstance} becomes garbage, its
 	 * {@link IOclInterpreter} becomes garbage as well.
 	 */
 	private static Map<IModelInstance, IOclInterpreter> cachedInterpreters =
 			new WeakHashMap<IModelInstance, IOclInterpreter>();
 
+	/**
+	 * Cached prepared {@link Constraint}s of interpreters for interpretation.
+	 * They are stored in a {@link WeakHashMap}. If an {@link IOclInterpreter}
+	 * becomes garbage, its {@link Constraint}s become garbage as well.
+	 */
+	private static Map<IOclInterpreter, Set<Constraint>> cachedPreparedConstraints =
+			new WeakHashMap<IOclInterpreter, Set<Constraint>>();
+
 	/** The {@link IOcl22Code} representing the Java/AspectJ code generator. */
 	private static IOcl22Code javaCodeGenerator = null;
 
 	/**
 	 * <p>
-	 * Generates the AspectJ code for a given {@link List} of {@link Constraint}s
+	 * Generates the AspectJ code for a given {@link List} of {@link Constraint} s
 	 * and a given {@link IOcl22CodeSettings}.
 	 * </p>
 	 * 
@@ -867,6 +875,8 @@ public class Ocl2ForEclipseFacade {
 		else {
 			interpreter = OclInterpreterPlugin.createInterpreter(modelInstance);
 			cachedInterpreters.put(modelInstance, interpreter);
+
+			cachedPreparedConstraints.put(interpreter, new HashSet<Constraint>());
 		}
 
 		/*
@@ -877,9 +887,17 @@ public class Ocl2ForEclipseFacade {
 
 		/* Prepare body, derive, init expressions and definitions. */
 		/* FIXME Claas: Probably hide this behavior inside the interpreter. */
-		/* FIXME Claas: Probably use caching to improve the performance. */
-		for (Constraint constraintToBePrepared : modelInstance.getModel()
-				.getRootNamespace().getOwnedAndNestedRules()) {
+		Set<Constraint> preparationCandidates =
+				new HashSet<Constraint>(modelInstance.getModel().getConstraints());
+
+		/* Probably remove already prepared constraints to improve performance. */
+		if (cachedPreparedConstraints.containsKey(interpreter)) {
+			preparationCandidates.removeAll(cachedPreparedConstraints
+					.get(interpreter));
+		}
+		// no else.
+
+		for (Constraint constraintToBePrepared : preparationCandidates) {
 
 			switch (constraintToBePrepared.getKind()) {
 
@@ -896,6 +914,19 @@ public class Ocl2ForEclipseFacade {
 			// end switch.
 		}
 		// end for.
+
+		/*
+		 * Store all prepared constraints (and constraints that do not have to be
+		 * prepared as well).
+		 */
+		if (preparationCandidates.size() > 0) {
+			Set<Constraint> preparedConstraints;
+			preparedConstraints = cachedPreparedConstraints.get(interpreter);
+			preparedConstraints.addAll(preparationCandidates);
+
+			cachedPreparedConstraints.put(interpreter, preparedConstraints);
+		}
+		// no else.
 
 		/* Prepare the constraint to be interpreted. */
 		interpreter.prepareConstraint(constraint, modelInstanceElement);
@@ -1176,7 +1207,7 @@ public class Ocl2ForEclipseFacade {
 	 *          Indicates whether or not the parsed {@link Constraint}s, its
 	 *          defined fields and functions to the given {@link IModel}.
 	 * @return The parsed {@link Constraint}s as a {@link List}.
-	 * @throws OCL2ParsingException
+	 * @throws Ocl2ParsingException
 	 *           Thrown, if the parsing fails.
 	 * @throws IllegalArgumentException
 	 *           Thrown, if at least one parameter is invalid.
@@ -1184,7 +1215,7 @@ public class Ocl2ForEclipseFacade {
 	 *           Thrown, if access to the given {@link IModel} is not possible.
 	 */
 	public static List<Constraint> parseConstraints(File file, IModel model,
-			boolean addToModel) throws OCL2ParsingException,
+			boolean addToModel) throws Ocl2ParsingException,
 			IllegalArgumentException, ModelAccessException {
 
 		if (file == null) {
@@ -1221,7 +1252,7 @@ public class Ocl2ForEclipseFacade {
 	 *          Indicates whether or not the parsed {@link Constraint}s, its
 	 *          defined fields and functions to the given {@link IModel}.
 	 * @return The parsed {@link Constraint}s as a {@link List}.
-	 * @throws OCL2ParsingException
+	 * @throws Ocl2ParsingException
 	 *           Thrown, if the parsing fails.
 	 * @throws IllegalArgumentException
 	 *           Thrown, if at least one parameter is invalid.
@@ -1229,7 +1260,7 @@ public class Ocl2ForEclipseFacade {
 	 *           Thrown, if access to the given {@link IModel} is not possible.
 	 */
 	public static List<Constraint> parseConstraints(Reader reader, IModel model,
-			boolean addToModel) throws OCL2ParsingException,
+			boolean addToModel) throws Ocl2ParsingException,
 			IllegalArgumentException, ModelAccessException {
 
 		if (reader == null) {
@@ -1261,7 +1292,7 @@ public class Ocl2ForEclipseFacade {
 			 * FIXME Probably remove parsed constraints, operations and attributes
 			 * from the model again.
 			 */
-			throw new OCL2ParsingException(e);
+			throw new Ocl2ParsingException(e);
 		}
 
 		catch (LexException e) {
@@ -1269,7 +1300,7 @@ public class Ocl2ForEclipseFacade {
 			 * FIXME Probably remove parsed constraints, operations and attributes
 			 * from the model again.
 			 */
-			throw new OCL2ParsingException(e);
+			throw new Ocl2ParsingException(e);
 		}
 
 		catch (IOException e) {
@@ -1277,7 +1308,7 @@ public class Ocl2ForEclipseFacade {
 			 * FIXME Probably remove parsed constraints, operations and attributes
 			 * from the model again.
 			 */
-			throw new OCL2ParsingException(e);
+			throw new Ocl2ParsingException(e);
 		}
 
 		catch (BuildingASTException e) {
@@ -1285,7 +1316,7 @@ public class Ocl2ForEclipseFacade {
 			 * FIXME Probably remove parsed constraints, operations and attributes
 			 * from the model again.
 			 */
-			throw new OCL2ParsingException(e);
+			throw new Ocl2ParsingException(e);
 		}
 
 		catch (SemanticException e) {
@@ -1293,7 +1324,7 @@ public class Ocl2ForEclipseFacade {
 			 * FIXME Probably remove parsed constraints, operations and attributes
 			 * from the model again.
 			 */
-			throw new OCL2ParsingException(e);
+			throw new Ocl2ParsingException(e);
 		}
 		// end catch.
 
@@ -1322,7 +1353,7 @@ public class Ocl2ForEclipseFacade {
 	 *          Indicates whether or not the parsed {@link Constraint}s, its
 	 *          defined fields and functions to the given {@link IModel}.
 	 * @return The parsed {@link Constraint}s as a {@link List}.
-	 * @throws OCL2ParsingException
+	 * @throws Ocl2ParsingException
 	 *           Thrown, if the parsing fails.
 	 * @throws IllegalArgumentException
 	 *           Thrown, if at least one parameter is invalid.
@@ -1330,7 +1361,7 @@ public class Ocl2ForEclipseFacade {
 	 *           Thrown, if access to the given {@link IModel} is not possible.
 	 */
 	public static List<Constraint> parseConstraints(String string, IModel model,
-			boolean addToModel) throws OCL2ParsingException,
+			boolean addToModel) throws Ocl2ParsingException,
 			IllegalArgumentException, ModelAccessException {
 
 		if (string == null) {
@@ -1359,7 +1390,7 @@ public class Ocl2ForEclipseFacade {
 	 *          Indicates whether or not the parsed {@link Constraint}s, its
 	 *          defined fields and functions to the given {@link IModel}.
 	 * @return The parsed {@link Constraint}s as a {@link List}.
-	 * @throws OCL2ParsingException
+	 * @throws Ocl2ParsingException
 	 *           Thrown, if the parsing fails.
 	 * @throws IllegalArgumentException
 	 *           Thrown, if at least one parameter is invalid.
@@ -1367,7 +1398,7 @@ public class Ocl2ForEclipseFacade {
 	 *           Thrown, if access to the given {@link IModel} is not possible.
 	 */
 	public static List<Constraint> parseConstraints(URL location, IModel model,
-			boolean addToModel) throws OCL2ParsingException,
+			boolean addToModel) throws Ocl2ParsingException,
 			IllegalArgumentException, ModelAccessException {
 
 		if (location == null) {
