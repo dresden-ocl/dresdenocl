@@ -21,8 +21,8 @@ package tudresden.ocl20.pivot.ocl2parser.test.constrainttypes;
 
 import org.junit.Test;
 
-import tudresden.ocl20.pivot.ocl2parser.parser.exceptions.ParsingException;
 import tudresden.ocl20.pivot.ocl2parser.test.TestPerformer;
+import tudresden.ocl20.pivot.parser.ParseException;
 
 /**
  * <p>
@@ -68,7 +68,7 @@ public class TestDerive {
 	 * appropriately.
 	 * </p>
 	 */
-	@Test(expected = ParsingException.class)
+	@Test(expected = ParseException.class)
 	public void testDeriveNegative01() throws Exception {
 
 		TestPerformer testPerformer;
@@ -96,7 +96,7 @@ public class TestDerive {
 	 * appropriately.
 	 * </p>
 	 */
-	@Test(expected = ParsingException.class)
+	@Test(expected = ParseException.class)
 	public void testDeriveNegative02() throws Exception {
 
 		TestPerformer testPerformer;
@@ -124,7 +124,7 @@ public class TestDerive {
 	 * appropriately.
 	 * </p>
 	 */
-	@Test(expected = ParsingException.class)
+	@Test(expected = ParseException.class)
 	public void testDeriveNegative03() throws Exception {
 
 		TestPerformer testPerformer;

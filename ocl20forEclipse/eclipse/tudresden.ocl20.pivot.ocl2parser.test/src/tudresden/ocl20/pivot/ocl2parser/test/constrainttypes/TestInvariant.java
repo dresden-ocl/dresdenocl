@@ -21,9 +21,9 @@ package tudresden.ocl20.pivot.ocl2parser.test.constrainttypes;
 
 import org.junit.Test;
 
-import tudresden.ocl20.pivot.ocl2parser.parser.exceptions.ParsingException;
 import tudresden.ocl20.pivot.ocl2parser.parser.exceptions.SemanticException;
 import tudresden.ocl20.pivot.ocl2parser.test.TestPerformer;
+import tudresden.ocl20.pivot.parser.ParseException;
 
 /**
  * <p>
@@ -52,10 +52,10 @@ public class TestInvariant {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllConstraintTypeTests.META_MODEL_ID,
-						AllConstraintTypeTests.MODEL_BUNDLE,
-						AllConstraintTypeTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllConstraintTypeTests.META_MODEL_ID,
+				AllConstraintTypeTests.MODEL_BUNDLE,
+				AllConstraintTypeTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		/* Try to parse the constraint file. */
@@ -79,10 +79,10 @@ public class TestInvariant {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllConstraintTypeTests.META_MODEL_ID,
-						AllConstraintTypeTests.MODEL_BUNDLE,
-						AllConstraintTypeTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllConstraintTypeTests.META_MODEL_ID,
+				AllConstraintTypeTests.MODEL_BUNDLE,
+				AllConstraintTypeTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		/* Try to parse the constraint file. */
@@ -91,10 +91,11 @@ public class TestInvariant {
 
 	/**
 	 * <p>
-	 * A test case to parse an invariant that should not be parsed appropriately.
+	 * A test case to parse an invariant that should not be parsed
+	 * appropriately.
 	 * </p>
 	 */
-	@Test(expected = ParsingException.class)
+	@Test(expected = ParseException.class)
 	public void testInvariantNegative01() throws Exception {
 
 		TestPerformer testPerformer;
@@ -106,10 +107,10 @@ public class TestInvariant {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllConstraintTypeTests.META_MODEL_ID,
-						AllConstraintTypeTests.MODEL_BUNDLE,
-						AllConstraintTypeTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllConstraintTypeTests.META_MODEL_ID,
+				AllConstraintTypeTests.MODEL_BUNDLE,
+				AllConstraintTypeTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		/* Try to parse the constraint file. */
@@ -118,10 +119,11 @@ public class TestInvariant {
 
 	/**
 	 * <p>
-	 * A test case to parse an invariant that should not be parsed appropriately.
+	 * A test case to parse an invariant that should not be parsed
+	 * appropriately.
 	 * </p>
 	 */
-	@Test(expected = ParsingException.class)
+	@Test(expected = ParseException.class)
 	public void testInvariantNegative02() throws Exception {
 
 		TestPerformer testPerformer;
@@ -133,10 +135,10 @@ public class TestInvariant {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllConstraintTypeTests.META_MODEL_ID,
-						AllConstraintTypeTests.MODEL_BUNDLE,
-						AllConstraintTypeTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllConstraintTypeTests.META_MODEL_ID,
+				AllConstraintTypeTests.MODEL_BUNDLE,
+				AllConstraintTypeTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		/* Try to parse the constraint file. */
@@ -145,7 +147,8 @@ public class TestInvariant {
 
 	/**
 	 * <p>
-	 * A test case to parse an invariant that should not be parsed appropriately.
+	 * A test case to parse an invariant that should not be parsed
+	 * appropriately.
 	 * </p>
 	 */
 	@Test(expected = SemanticException.class)
@@ -160,10 +163,10 @@ public class TestInvariant {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllConstraintTypeTests.META_MODEL_ID,
-						AllConstraintTypeTests.MODEL_BUNDLE,
-						AllConstraintTypeTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllConstraintTypeTests.META_MODEL_ID,
+				AllConstraintTypeTests.MODEL_BUNDLE,
+				AllConstraintTypeTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		/* Try to parse the constraint file. */

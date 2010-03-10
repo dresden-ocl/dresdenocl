@@ -16,19 +16,48 @@
     You should have received a copy of the GNU Lesser General Public License
     along with the OCL parser.  If not, see <http://www.gnu.org/licenses/>.
 .
-*/
-
+ */
 
 package tudresden.ocl20.pivot.ocl2parser.parser.exceptions;
 
-public class BuildingASTException extends Exception {
-	private String message;
-	
+import tudresden.ocl20.pivot.parser.ParseException;
+
+/**
+ * <p>
+ * Represents {@link Exception}s that occur during building the AST.
+ * </p>
+ * 
+ * @author Nils Thieme
+ * @author Claas Wilke (refactoring and documentation)
+ */
+public class BuildingASTException extends ParseException {
+
+	/** Generated ID for serialization. */
+	private static final long serialVersionUID = -3629790417170703695L;
+
+	/**
+	 * <p>
+	 * Creates a new {@link Ocl2ParsingException}.
+	 * </p>
+	 * 
+	 * @param msg
+	 *            The message of this {@link Exception}.
+	 */
 	public BuildingASTException(String message) {
-		this.message = message;
+		super(message);
 	}
-	
-	public String getMessage() {
-		return message;
+
+	/**
+	 * <p>
+	 * Creates a new {@link Ocl2ParsingException}.
+	 * </p>
+	 * 
+	 * @param msg
+	 *            The message of this {@link Exception}.
+	 * @param cause
+	 *            The cause of this {@link Exception}.
+	 */
+	public BuildingASTException(String message, Throwable cause) {
+		super(message, cause);
 	}
 }

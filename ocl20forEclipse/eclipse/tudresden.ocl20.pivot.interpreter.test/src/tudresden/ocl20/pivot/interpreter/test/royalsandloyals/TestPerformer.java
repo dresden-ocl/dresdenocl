@@ -25,7 +25,6 @@ import java.util.List;
 
 import org.eclipse.core.runtime.Platform;
 
-import tudresden.ocl20.pivot.facade.Ocl2ParsingException;
 import tudresden.ocl20.pivot.facade.Ocl2ForEclipseFacade;
 import tudresden.ocl20.pivot.interpreter.IInterpretationResult;
 import tudresden.ocl20.pivot.modelbus.ModelAccessException;
@@ -34,6 +33,7 @@ import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance;
 import tudresden.ocl20.pivot.modelbus.modelinstance.exception.OperationNotFoundException;
 import tudresden.ocl20.pivot.modelbus.modelinstance.exception.TypeNotFoundInModelException;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
+import tudresden.ocl20.pivot.parser.ParseException;
 import tudresden.ocl20.pivot.pivotmodel.Constraint;
 import tudresden.ocl20.pivot.pivotmodel.ConstraintKind;
 import tudresden.ocl20.pivot.pivotmodel.Operation;
@@ -52,15 +52,14 @@ public class TestPerformer {
 	private final static String META_MODEL = Ocl2ForEclipseFacade.UML2_MetaModel;
 
 	/** The name of the bundle of the model file. */
-	private final static String MODEL_BUNDLE =
-			"tudresden.ocl20.pivot.examples.royalandloyal";
+	private final static String MODEL_BUNDLE = "tudresden.ocl20.pivot.examples.royalandloyal";
 
 	/** The path of the UML model file. */
 	private final static String MODEL_FILE = "model/royalsandloyals.uml";
 
 	/**
-	 * Contains the directory where the OCL files are stored which shall be parsed
-	 * and imported.
+	 * Contains the directory where the OCL files are stored which shall be
+	 * parsed and imported.
 	 */
 	protected String fileDirectory = "";
 
@@ -83,12 +82,12 @@ public class TestPerformer {
 
 	/**
 	 * <p>
-	 * Adapts a given {@link Object} as {@link IModelInstanceElement} and adds it
-	 * to the {@link IModelInstance} under test.
+	 * Adapts a given {@link Object} as {@link IModelInstanceElement} and adds
+	 * it to the {@link IModelInstance} under test.
 	 * </p>
 	 * 
 	 * @param object
-	 *          The {@link Object} that shall be adapted and added.
+	 *            The {@link Object} that shall be adapted and added.
 	 * @return The adapted {@link IModelInstanceElement}.
 	 * @throws TypeNotFoundInModelException
 	 */
@@ -109,17 +108,18 @@ public class TestPerformer {
 	 * </p>
 	 * 
 	 * @param imiElement
-	 *          The {@link IModelInstanceElement}.
+	 *            The {@link IModelInstanceElement}.
 	 * @param name
-	 *          The name of the {@link Operation}.
+	 *            The name of the {@link Operation}.
 	 * @return The found {@link Operation}.
 	 * @throws OperationNotFoundException
-	 *           Thrown, if the {@link Operation} has not been found.
+	 *             Thrown, if the {@link Operation} has not been found.
 	 */
 	public Operation findOperation(IModelInstanceElement imiElement, String name)
 			throws OperationNotFoundException {
 
-		for (Operation ownedOperation : imiElement.getType().getOwnedOperation()) {
+		for (Operation ownedOperation : imiElement.getType()
+				.getOwnedOperation()) {
 
 			if (ownedOperation.getName().equals(name)) {
 				return ownedOperation;
@@ -139,8 +139,8 @@ public class TestPerformer {
 	 * </p>
 	 * 
 	 * @throws RuntimeException
-	 *           Is thrown if any error occurred while loading the model or the
-	 *           meta model.
+	 *             Is thrown if any error occurred while loading the model or
+	 *             the meta model.
 	 */
 	public void init() throws RuntimeException {
 
@@ -160,8 +160,8 @@ public class TestPerformer {
 		}
 
 		catch (Exception e) {
-			throw new RuntimeException("Unable to initialize the test. Reason: "
-					+ e.getMessage());
+			throw new RuntimeException(
+					"Unable to initialize the test. Reason: " + e.getMessage());
 		}
 	}
 
@@ -172,17 +172,18 @@ public class TestPerformer {
 	 * </p>
 	 * 
 	 * @param constrraint
-	 *          The {@link Constraint} that shall be interpreted.
+	 *            The {@link Constraint} that shall be interpreted.
 	 * @param modelObjects
-	 *          The {@link IModelInstanceElement}s that shall be interpreted.
+	 *            The {@link IModelInstanceElement}s that shall be interpreted.
 	 * @throws ModelAccessException
 	 * @throws IllegalArgumentException
-	 * @result A {@link List} containing the {@link IInterpretationResult}s of the
-	 *         interpretation.
+	 * @result A {@link List} containing the {@link IInterpretationResult}s of
+	 *         the interpretation.
 	 */
-	public List<IInterpretationResult> interpretConstraint(Constraint constraint,
-			List<IModelInstanceElement> modelObjects, boolean removeConstraints)
-			throws IllegalArgumentException, ModelAccessException {
+	public List<IInterpretationResult> interpretConstraint(
+			Constraint constraint, List<IModelInstanceElement> modelObjects,
+			boolean removeConstraints) throws IllegalArgumentException,
+			ModelAccessException {
 
 		List<IInterpretationResult> result;
 
@@ -212,26 +213,28 @@ public class TestPerformer {
 	 * </p>
 	 * 
 	 * @param constraint
-	 *          The {@link Constraint} that shall be interpreted.
+	 *            The {@link Constraint} that shall be interpreted.
 	 * @param modelInstanceElements
-	 *          The {@link IModelInstanceElement} that shall be interpreted.
+	 *            The {@link IModelInstanceElement} that shall be interpreted.
 	 * @param operation
-	 *          The {@link Operation} whose postconditions shall be interpreted.
+	 *            The {@link Operation} whose postconditions shall be
+	 *            interpreted.
 	 * @param parameters
-	 *          The parameter values of the {@link Operation} for which the
-	 *          postconditions shall be interpreted.
+	 *            The parameter values of the {@link Operation} for which the
+	 *            postconditions shall be interpreted.
 	 * @param resultValue
-	 *          The result of the {@link Operation}'s invocation for that the
-	 *          postconditions shall be interpreted.
+	 *            The result of the {@link Operation}'s invocation for that the
+	 *            postconditions shall be interpreted.
 	 * @param removeConstraints
-	 *          Indicates, whether or not all {@link Constraint} shall be removed
-	 *          from the {@link IModel} after this interpretation.
+	 *            Indicates, whether or not all {@link Constraint} shall be
+	 *            removed from the {@link IModel} after this interpretation.
 	 * @throws ModelAccessException
 	 * @throws IllegalArgumentException
 	 * @result The {@link IInterpretationResult} of the interpretation.
 	 */
 	public List<IInterpretationResult> interpretPostCondition(
-			Constraint constraint, List<IModelInstanceElement> modelInstanceElements,
+			Constraint constraint,
+			List<IModelInstanceElement> modelInstanceElements,
 			Operation operation, List<IModelInstanceElement> parameters,
 			IModelInstanceElement resultValue, boolean removeConstraints)
 			throws IllegalArgumentException, ModelAccessException {
@@ -245,8 +248,8 @@ public class TestPerformer {
 
 		for (IModelInstanceElement modelInstanceElement : modelInstanceElements) {
 			result.addAll(Ocl2ForEclipseFacade.interpretPostConditions(
-					this.myModelInstance, modelInstanceElement, operation, parameters,
-					resultValue, constraints));
+					this.myModelInstance, modelInstanceElement, operation,
+					parameters, resultValue, constraints));
 
 		}
 		// end for.
@@ -268,23 +271,25 @@ public class TestPerformer {
 	 * </p>
 	 * 
 	 * @param constraint
-	 *          The {@link Constraint} that shall be interpreted.
+	 *            The {@link Constraint} that shall be interpreted.
 	 * @param modelInstanceElements
-	 *          The {@link IModelInstanceElement} that shall be interpreted.
+	 *            The {@link IModelInstanceElement} that shall be interpreted.
 	 * @param operation
-	 *          The {@link Operation} whose preconditions shall be interpreted.
+	 *            The {@link Operation} whose preconditions shall be
+	 *            interpreted.
 	 * @param parameters
-	 *          The parameter values of the {@link Operation} for which the
-	 *          preconditions shall be interpreted.
+	 *            The parameter values of the {@link Operation} for which the
+	 *            preconditions shall be interpreted.
 	 * @param removeConstraints
-	 *          Indicates, whether or not all {@link Constraint} shall be removed
-	 *          from the {@link IModel} after this interpretation.
+	 *            Indicates, whether or not all {@link Constraint} shall be
+	 *            removed from the {@link IModel} after this interpretation.
 	 * @throws ModelAccessException
 	 * @throws IllegalArgumentException
 	 * @result The {@link IInterpretationResult} of the interpretation.
 	 */
 	public List<IInterpretationResult> interpretPreCondition(
-			Constraint constraint, List<IModelInstanceElement> modelInstanceElements,
+			Constraint constraint,
+			List<IModelInstanceElement> modelInstanceElements,
 			Operation operation, List<IModelInstanceElement> parameters,
 			boolean removeConstraints) throws IllegalArgumentException,
 			ModelAccessException {
@@ -298,8 +303,8 @@ public class TestPerformer {
 
 		for (IModelInstanceElement modelInstanceElement : modelInstanceElements) {
 			result.addAll(Ocl2ForEclipseFacade.interpretPreConditions(
-					this.myModelInstance, modelInstanceElement, operation, parameters,
-					constraints));
+					this.myModelInstance, modelInstanceElement, operation,
+					parameters, constraints));
 		}
 		// end for.
 
@@ -314,20 +319,20 @@ public class TestPerformer {
 
 	/**
 	 * <p>
-	 * Parses the file <i>oclFileName</i> against the loaded UML model file. If an
-	 * error occurred an CodeGenerationException will be thrown.
+	 * Parses the file <i>oclFileName</i> against the loaded UML model file. If
+	 * an error occurred an CodeGenerationException will be thrown.
 	 * </p>
 	 * 
 	 * @param oclFileName
-	 *          The OCL file to be parsed.
+	 *            The OCL file to be parsed.
 	 * @return A {@link List} containing the parsed {@link Constraint}s.
 	 * @throws ModelAccessException
-	 * @throws Ocl2ParsingException
+	 * @throws ParseException
 	 * @throws Ocl22JavaException
-	 *           Is thrown if any error occurs
+	 *             Is thrown if any error occurs
 	 */
 	public List<Constraint> loadOCLFile(String oclFileName)
-			throws RuntimeException, Ocl2ParsingException, ModelAccessException {
+			throws RuntimeException, ParseException, ModelAccessException {
 
 		List<Constraint> result;
 		File oclFile;
@@ -344,7 +349,8 @@ public class TestPerformer {
 		}
 		// no else.
 
-		result = Ocl2ForEclipseFacade.parseConstraints(oclFile, this.myModel, true);
+		result = Ocl2ForEclipseFacade.parseConstraints(oclFile, this.myModel,
+				true);
 
 		return result;
 	}
@@ -358,20 +364,22 @@ public class TestPerformer {
 	 * </p>
 	 * 
 	 * @param constraint
-	 *          The {@link Constraint} that shall be interpreted.
+	 *            The {@link Constraint} that shall be interpreted.
 	 * @param modelInstanceElements
-	 *          The {@link IModelInstanceElement} that shall be interpreted.
+	 *            The {@link IModelInstanceElement} that shall be interpreted.
 	 * @param operation
-	 *          The {@link Operation} whose postconditions shall be interpreted.
+	 *            The {@link Operation} whose postconditions shall be
+	 *            interpreted.
 	 * @param parameters
-	 *          The parameter values of the {@link Operation} for which the
-	 *          postconditions shall be interpreted.
+	 *            The parameter values of the {@link Operation} for which the
+	 *            postconditions shall be interpreted.
 	 * @throws ModelAccessException
 	 * @throws IllegalArgumentException
 	 * @result The {@link IInterpretationResult} of the interpretation.
 	 */
 	public List<IInterpretationResult> preparePostCondition(
-			Constraint constraint, List<IModelInstanceElement> modelInstanceElements,
+			Constraint constraint,
+			List<IModelInstanceElement> modelInstanceElements,
 			Operation operation, List<IModelInstanceElement> parameters)
 			throws IllegalArgumentException, ModelAccessException {
 
@@ -397,8 +405,8 @@ public class TestPerformer {
 	 * </p>
 	 * 
 	 * @throws Ocl22JavaException
-	 *           Is thrown if the {@link IModel} cannot be initialized or the
-	 *           model file is not found.
+	 *             Is thrown if the {@link IModel} cannot be initialized or the
+	 *             model file is not found.
 	 */
 	protected void loadModel() throws RuntimeException {
 
@@ -424,7 +432,8 @@ public class TestPerformer {
 
 			/* Try to load the model. */
 			try {
-				this.myModel = Ocl2ForEclipseFacade.getModel(modelFile, META_MODEL);
+				this.myModel = Ocl2ForEclipseFacade.getModel(modelFile,
+						META_MODEL);
 			}
 
 			catch (ModelAccessException e) {
@@ -442,8 +451,8 @@ public class TestPerformer {
 	 * </p>
 	 * 
 	 * @throws RuntimeException
-	 *           Thrown, if an error during {@link IModelInstance} initialization
-	 *           occurs.
+	 *             Thrown, if an error during {@link IModelInstance}
+	 *             initialization occurs.
 	 */
 	protected void loadModelInstance() throws RuntimeException {
 
@@ -454,8 +463,8 @@ public class TestPerformer {
 
 			/* Load the model instance. */
 			try {
-				this.myModelInstance =
-						Ocl2ForEclipseFacade.getEmptyModelInstance(this.myModel,
+				this.myModelInstance = Ocl2ForEclipseFacade
+						.getEmptyModelInstance(this.myModel,
 								Ocl2ForEclipseFacade.JAVA_MODEL_INSTANCE_TYPE);
 			}
 
@@ -465,7 +474,8 @@ public class TestPerformer {
 		}
 
 		else {
-			throw new RuntimeException("No model found to load a model instance.");
+			throw new RuntimeException(
+					"No model found to load a model instance.");
 		}
 	}
 }

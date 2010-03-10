@@ -16,25 +16,48 @@
     You should have received a copy of the GNU Lesser General Public License
     along with the OCL parser.  If not, see <http://www.gnu.org/licenses/>.
 .
-*/
-
+ */
 
 package tudresden.ocl20.pivot.ocl2parser.parser.exceptions;
 
-public class LexException extends Exception {
+import tudresden.ocl20.pivot.parser.ParseException;
 
-	private String message;
+/**
+ * <p>
+ * Represents {@link Exception}s that occur during lexing an OCL file.
+ * </p>
+ * 
+ * @author Nils Thieme
+ * @author Claas Wilke (refactoring and documentation)
+ */
+public class LexException extends ParseException {
+
+	/** Generated ID for serialization. */
+	private static final long serialVersionUID = 8655563804831189426L;
+
 	/**
+	 * <p>
+	 * Creates a new {@link Ocl2ParsingException}.
+	 * </p>
 	 * 
+	 * @param msg
+	 *            The message of this {@link Exception}.
 	 */
-	private static final long serialVersionUID = -4369885809585811224L;
-	
 	public LexException(String message) {
-		this.message = message;
-	}
-	
-	public String getMessage() {
-		return message;
+		super(message);
 	}
 
+	/**
+	 * <p>
+	 * Creates a new {@link Ocl2ParsingException}.
+	 * </p>
+	 * 
+	 * @param msg
+	 *            The message of this {@link Exception}.
+	 * @param cause
+	 *            The cause of this {@link Exception}.
+	 */
+	public LexException(String message, Throwable cause) {
+		super(message, cause);
+	}
 }

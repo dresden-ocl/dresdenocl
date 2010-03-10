@@ -32,16 +32,11 @@
  */
 package tudresden.ocl20.pivot.parser;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.Plugin;
 import org.osgi.framework.BundleContext;
 
 import tudresden.ocl20.logging.LoggingPlugin;
-import tudresden.ocl20.pivot.modelbus.model.IModel;
-import tudresden.ocl20.pivot.parser.internal.ocl2parser.OCLParser;
 
 /**
  * The activator class controls the plug-in life cycle
@@ -53,9 +48,6 @@ public class ParserPlugin extends Plugin {
 
   // The shared instance
   private static ParserPlugin plugin;
-
-  // a map of cached parsers
-  private Map<IModel, IOclParser> parsers;
 
   /**
    * The constructor
@@ -83,14 +75,7 @@ public class ParserPlugin extends Plugin {
   @Override
   public void stop(BundleContext context) throws Exception {
 
-    // dipose all parsers
-    for (IOclParser parser : parsers.values()) {
-      parser.dispose();
-    }
-
-    parsers.clear();
-
-    plugin = null;
+     plugin = null;
     super.stop(context);
   }
 
@@ -103,45 +88,7 @@ public class ParserPlugin extends Plugin {
     return plugin;
   }
 
-  /**
-   * Returns the {@link IOclParser OCL parser} managed by the plugin.
-   * 
-   * @return an <code>IOclParser</code> instance
-   */
-  public static IOclParser getParser(IModel model) {
-    IOclParser parser;
-
-    // check that the plugin has been activated
-    if (plugin == null) {
-      throw new IllegalStateException(
-          "The OCL parser plug-in has not been activated."); //$NON-NLS-1$
-    }
-
-    // check the argument
-    if (model == null) {
-      throw new IllegalArgumentException(
-          "The model to be used for parsing must not be null."); //$NON-NLS-1$
-    }
-
-    // lazily create the map of parsers
-    if (plugin.parsers == null) {
-      plugin.parsers = new HashMap<IModel, IOclParser>();
-    }
-
-    // try to retrieve a previously created parser
-    parser = plugin.parsers.get(model);
-
-    // create a new parser if necessary
-    if (parser == null) {
-      parser = new OCLParser();
-      parser.setModel(model);
-      plugin.parsers.put(model, parser);
-    }
-
-    return parser;
-  }
-
-  /**
+ /**
    * Facade method for the classes in this plugin that hides the dependency from
    * the <code>tudresden.ocl20.logging</code> plugin.
    * 

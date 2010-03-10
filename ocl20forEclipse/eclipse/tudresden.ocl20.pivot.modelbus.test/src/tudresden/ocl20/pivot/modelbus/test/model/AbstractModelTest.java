@@ -34,11 +34,11 @@ import java.util.Set;
 import org.junit.Test;
 
 import tudresden.ocl20.pivot.facade.Ocl2ForEclipseFacade;
-import tudresden.ocl20.pivot.facade.Ocl2ParsingException;
 import tudresden.ocl20.pivot.modelbus.IModelBusConstants;
 import tudresden.ocl20.pivot.modelbus.ModelAccessException;
 import tudresden.ocl20.pivot.modelbus.model.IModel;
 import tudresden.ocl20.pivot.modelbus.test.ModelBusTestUtility;
+import tudresden.ocl20.pivot.parser.ParseException;
 import tudresden.ocl20.pivot.pivotmodel.Constraint;
 import tudresden.ocl20.pivot.pivotmodel.Namespace;
 import tudresden.ocl20.pivot.pivotmodel.Operation;
@@ -67,7 +67,8 @@ public class AbstractModelTest {
 	public void testFindNameSpace01() throws ModelAccessException {
 
 		IModel model;
-		model = ModelBusTestUtility.getUML2Model("resources/models/model01.uml");
+		model = ModelBusTestUtility
+				.getUML2Model("resources/models/model01.uml");
 
 		List<String> path;
 		path = new ArrayList<String>();
@@ -91,7 +92,8 @@ public class AbstractModelTest {
 	public void testFindNameSpace02() throws ModelAccessException {
 
 		IModel model;
-		model = ModelBusTestUtility.getUML2Model("resources/models/model01.uml");
+		model = ModelBusTestUtility
+				.getUML2Model("resources/models/model01.uml");
 
 		List<String> path;
 		path = new ArrayList<String>();
@@ -117,7 +119,8 @@ public class AbstractModelTest {
 	public void testFindNameSpace03() throws ModelAccessException {
 
 		IModel model;
-		model = ModelBusTestUtility.getUML2Model("resources/models/model01.uml");
+		model = ModelBusTestUtility
+				.getUML2Model("resources/models/model01.uml");
 
 		List<String> path;
 		path = new ArrayList<String>();
@@ -144,7 +147,8 @@ public class AbstractModelTest {
 	public void testFindNameSpace04() throws ModelAccessException {
 
 		IModel model;
-		model = ModelBusTestUtility.getUML2Model("resources/models/model01.uml");
+		model = ModelBusTestUtility
+				.getUML2Model("resources/models/model01.uml");
 
 		List<String> path;
 		path = new ArrayList<String>();
@@ -170,7 +174,8 @@ public class AbstractModelTest {
 	public void testFindNameSpace05() throws ModelAccessException {
 
 		IModel model;
-		model = ModelBusTestUtility.getUML2Model("resources/models/model01.uml");
+		model = ModelBusTestUtility
+				.getUML2Model("resources/models/model01.uml");
 
 		List<String> path;
 		path = new ArrayList<String>();
@@ -198,7 +203,8 @@ public class AbstractModelTest {
 	public void testFindNameSpace06() throws ModelAccessException {
 
 		IModel model;
-		model = ModelBusTestUtility.getUML2Model("resources/models/model01.uml");
+		model = ModelBusTestUtility
+				.getUML2Model("resources/models/model01.uml");
 
 		List<String> path;
 		path = new ArrayList<String>();
@@ -225,7 +231,8 @@ public class AbstractModelTest {
 	public void testFindNameSpace07() throws ModelAccessException {
 
 		IModel model;
-		model = ModelBusTestUtility.getUML2Model("resources/models/model01.uml");
+		model = ModelBusTestUtility
+				.getUML2Model("resources/models/model01.uml");
 
 		List<String> path;
 		path = new ArrayList<String>();
@@ -235,7 +242,10 @@ public class AbstractModelTest {
 		Namespace namespace;
 		namespace = model.findNamespace(path);
 
-		/* The package2 should not be found. Only fully qualified names are valid. */
+		/*
+		 * The package2 should not be found. Only fully qualified names are
+		 * valid.
+		 */
 		assertNull(namespace);
 	}
 
@@ -250,7 +260,8 @@ public class AbstractModelTest {
 	public void testFindNameSpace08() throws ModelAccessException {
 
 		IModel model;
-		model = ModelBusTestUtility.getUML2Model("resources/models/model01.uml");
+		model = ModelBusTestUtility
+				.getUML2Model("resources/models/model01.uml");
 
 		List<String> path;
 		path = new ArrayList<String>();
@@ -277,7 +288,8 @@ public class AbstractModelTest {
 	public void testFindType01() throws ModelAccessException {
 
 		IModel model;
-		model = ModelBusTestUtility.getUML2Model("resources/models/model01.uml");
+		model = ModelBusTestUtility
+				.getUML2Model("resources/models/model01.uml");
 
 		List<String> path;
 		path = new ArrayList<String>();
@@ -297,7 +309,8 @@ public class AbstractModelTest {
 	public void testFindType02() throws ModelAccessException {
 
 		IModel model;
-		model = ModelBusTestUtility.getUML2Model("resources/models/model01.uml");
+		model = ModelBusTestUtility
+				.getUML2Model("resources/models/model01.uml");
 
 		List<String> path;
 		path = new ArrayList<String>();
@@ -319,7 +332,8 @@ public class AbstractModelTest {
 	public void testFindType03() throws ModelAccessException {
 
 		IModel model;
-		model = ModelBusTestUtility.getUML2Model("resources/models/model01.uml");
+		model = ModelBusTestUtility
+				.getUML2Model("resources/models/model01.uml");
 
 		List<String> path;
 		path = new ArrayList<String>();
@@ -348,7 +362,8 @@ public class AbstractModelTest {
 	public void testFindType04() throws ModelAccessException {
 
 		IModel model;
-		model = ModelBusTestUtility.getUML2Model("resources/models/model01.uml");
+		model = ModelBusTestUtility
+				.getUML2Model("resources/models/model01.uml");
 
 		List<String> path;
 		path = new ArrayList<String>();
@@ -376,7 +391,8 @@ public class AbstractModelTest {
 	public void testFindType05() throws ModelAccessException {
 
 		IModel model;
-		model = ModelBusTestUtility.getUML2Model("resources/models/model01.uml");
+		model = ModelBusTestUtility
+				.getUML2Model("resources/models/model01.uml");
 
 		List<String> path;
 		path = new ArrayList<String>();
@@ -404,7 +420,8 @@ public class AbstractModelTest {
 	public void testFindType06() throws ModelAccessException {
 
 		IModel model;
-		model = ModelBusTestUtility.getUML2Model("resources/models/model01.uml");
+		model = ModelBusTestUtility
+				.getUML2Model("resources/models/model01.uml");
 
 		List<String> path;
 		path = new ArrayList<String>();
@@ -434,7 +451,8 @@ public class AbstractModelTest {
 	public void testFindType07() throws ModelAccessException {
 
 		IModel model;
-		model = ModelBusTestUtility.getUML2Model("resources/models/model01.uml");
+		model = ModelBusTestUtility
+				.getUML2Model("resources/models/model01.uml");
 
 		List<String> path;
 		path = new ArrayList<String>();
@@ -462,7 +480,8 @@ public class AbstractModelTest {
 	public void testFindType08() throws ModelAccessException {
 
 		IModel model;
-		model = ModelBusTestUtility.getUML2Model("resources/models/model01.uml");
+		model = ModelBusTestUtility
+				.getUML2Model("resources/models/model01.uml");
 
 		List<String> path;
 		path = new ArrayList<String>();
@@ -489,7 +508,8 @@ public class AbstractModelTest {
 	public void testFindType09() throws ModelAccessException {
 
 		IModel model;
-		model = ModelBusTestUtility.getUML2Model("resources/models/model01.uml");
+		model = ModelBusTestUtility
+				.getUML2Model("resources/models/model01.uml");
 
 		List<String> path;
 		path = new ArrayList<String>();
@@ -515,7 +535,8 @@ public class AbstractModelTest {
 	public void testFindType10() throws ModelAccessException {
 
 		IModel model;
-		model = ModelBusTestUtility.getUML2Model("resources/models/model01.uml");
+		model = ModelBusTestUtility
+				.getUML2Model("resources/models/model01.uml");
 
 		List<String> path;
 		path = new ArrayList<String>();
@@ -541,7 +562,8 @@ public class AbstractModelTest {
 	public void testFindType11() throws ModelAccessException {
 
 		IModel model;
-		model = ModelBusTestUtility.getUML2Model("resources/models/model01.uml");
+		model = ModelBusTestUtility
+				.getUML2Model("resources/models/model01.uml");
 
 		List<String> path;
 		path = new ArrayList<String>();
@@ -570,7 +592,8 @@ public class AbstractModelTest {
 	public void testFindType12() throws ModelAccessException {
 
 		IModel model;
-		model = ModelBusTestUtility.getUML2Model("resources/models/model01.uml");
+		model = ModelBusTestUtility
+				.getUML2Model("resources/models/model01.uml");
 
 		List<String> path;
 		path = new ArrayList<String>();
@@ -598,7 +621,8 @@ public class AbstractModelTest {
 	public void testFindType13() throws ModelAccessException {
 
 		IModel model;
-		model = ModelBusTestUtility.getUML2Model("resources/models/model01.uml");
+		model = ModelBusTestUtility
+				.getUML2Model("resources/models/model01.uml");
 
 		List<String> path;
 		path = new ArrayList<String>();
@@ -619,15 +643,16 @@ public class AbstractModelTest {
 	 * </p>
 	 * 
 	 * @throws ModelAccessException
-	 * @throws OCL2ParsingException
+	 * @throws ParseException
 	 * @throws IllegalArgumentException
 	 */
 	@Test
 	public void testGetConstraints01() throws ModelAccessException,
-			IllegalArgumentException, Ocl2ParsingException {
+			IllegalArgumentException, ParseException {
 
 		IModel model;
-		model = ModelBusTestUtility.getUML2Model("resources/models/model05.uml");
+		model = ModelBusTestUtility
+				.getUML2Model("resources/models/model05.uml");
 
 		assertNotNull(model.getConstraints());
 		assertEquals(0, model.getConstraints().size());
@@ -643,23 +668,23 @@ public class AbstractModelTest {
 	 * </p>
 	 * 
 	 * @throws ModelAccessException
-	 * @throws OCL2ParsingException
+	 * @throws ParseException
 	 * @throws IllegalArgumentException
 	 */
 	@Test
 	public void testGetConstraints02() throws ModelAccessException,
-			IllegalArgumentException, Ocl2ParsingException {
+			IllegalArgumentException, ParseException {
 
 		IModel model;
-		model = ModelBusTestUtility.getUML2Model("resources/models/model05.uml");
+		model = ModelBusTestUtility
+				.getUML2Model("resources/models/model05.uml");
 
 		assertNotNull(model.getConstraints());
 		assertEquals(0, model.getConstraints().size());
 
 		Collection<Constraint> constraints;
-		constraints =
-				ModelBusTestUtility.parseConstraints(
-						"resources/constraints/constraints01.ocl", model);
+		constraints = ModelBusTestUtility.parseConstraints(
+				"resources/constraints/constraints01.ocl", model);
 
 		assertNotNull(constraints);
 		assertTrue(constraints.size() > 0);
@@ -677,23 +702,23 @@ public class AbstractModelTest {
 	 * </p>
 	 * 
 	 * @throws ModelAccessException
-	 * @throws Ocl2ParsingException
+	 * @throws ParseException
 	 * @throws IllegalArgumentException
 	 */
 	@Test
 	public void testGetConstraints03() throws ModelAccessException,
-			IllegalArgumentException, Ocl2ParsingException {
+			IllegalArgumentException, ParseException {
 
 		IModel model;
-		model = ModelBusTestUtility.getUML2Model("resources/models/model05.uml");
+		model = ModelBusTestUtility
+				.getUML2Model("resources/models/model05.uml");
 
 		assertNotNull(model.getConstraints());
 		assertEquals(0, model.getConstraints().size());
 
 		Collection<Constraint> constraints;
-		constraints =
-				ModelBusTestUtility.parseConstraints(
-						"resources/constraints/constraints01.ocl", model);
+		constraints = ModelBusTestUtility.parseConstraints(
+				"resources/constraints/constraints01.ocl", model);
 
 		assertNotNull(constraints);
 		assertTrue(constraints.size() > 0);
@@ -721,15 +746,16 @@ public class AbstractModelTest {
 	 * </p>
 	 * 
 	 * @throws ModelAccessException
-	 * @throws Ocl2ParsingException
+	 * @throws ParseException
 	 * @throws IllegalArgumentException
 	 */
 	@Test
 	public void testRemoveAllConstraints01() throws ModelAccessException,
-			IllegalArgumentException, Ocl2ParsingException {
+			IllegalArgumentException, ParseException {
 
 		IModel model;
-		model = ModelBusTestUtility.getUML2Model("resources/models/model05.uml");
+		model = ModelBusTestUtility
+				.getUML2Model("resources/models/model05.uml");
 
 		model.removeAllConstraints();
 
@@ -746,15 +772,16 @@ public class AbstractModelTest {
 	 * </p>
 	 * 
 	 * @throws ModelAccessException
-	 * @throws Ocl2ParsingException
+	 * @throws ParseException
 	 * @throws IllegalArgumentException
 	 */
 	@Test
 	public void testRemoveAllConstraints02() throws ModelAccessException,
-			IllegalArgumentException, Ocl2ParsingException {
+			IllegalArgumentException, ParseException {
 
 		IModel model;
-		model = ModelBusTestUtility.getUML2Model("resources/models/model05.uml");
+		model = ModelBusTestUtility
+				.getUML2Model("resources/models/model05.uml");
 
 		ModelBusTestUtility.parseConstraints(
 				"resources/constraints/constraints01.ocl", model);
@@ -777,15 +804,16 @@ public class AbstractModelTest {
 	 * </p>
 	 * 
 	 * @throws ModelAccessException
-	 * @throws Ocl2ParsingException
+	 * @throws ParseException
 	 * @throws IllegalArgumentException
 	 */
 	@Test
 	public void testRemoveAllConstraints03() throws ModelAccessException,
-			IllegalArgumentException, Ocl2ParsingException {
+			IllegalArgumentException, ParseException {
 
 		IModel model;
-		model = ModelBusTestUtility.getUML2Model("resources/models/model05.uml");
+		model = ModelBusTestUtility
+				.getUML2Model("resources/models/model05.uml");
 
 		ModelBusTestUtility.parseConstraints(
 				"resources/constraints/constraints01.ocl", model);
@@ -810,15 +838,16 @@ public class AbstractModelTest {
 	 * </p>
 	 * 
 	 * @throws ModelAccessException
-	 * @throws Ocl2ParsingException
+	 * @throws ParseException
 	 * @throws IllegalArgumentException
 	 */
 	@Test
 	public void testRemoveAllConstraints04() throws ModelAccessException,
-			IllegalArgumentException, Ocl2ParsingException {
+			IllegalArgumentException, ParseException {
 
 		IModel model;
-		model = ModelBusTestUtility.getUML2Model("resources/models/model05.uml");
+		model = ModelBusTestUtility
+				.getUML2Model("resources/models/model05.uml");
 
 		ModelBusTestUtility.parseConstraints(
 				"resources/constraints/constraints03.ocl", model);
@@ -830,9 +859,8 @@ public class AbstractModelTest {
 
 		/* Find the defined operations. */
 		Type type1;
-		type1 =
-				model.findType(Arrays.asList(new String[] {
-						IModelBusConstants.ROOT_PACKAGE_NAME, "package1", "Type1" }));
+		type1 = model.findType(Arrays.asList(new String[] {
+				IModelBusConstants.ROOT_PACKAGE_NAME, "package1", "Type1" }));
 		assertNotNull(type1);
 
 		Operation operation1;
@@ -841,10 +869,9 @@ public class AbstractModelTest {
 		assertNotNull(operation1);
 
 		Type type2;
-		type2 =
-				model.findType(Arrays.asList(new String[] {
-						IModelBusConstants.ROOT_PACKAGE_NAME, "package1", "package2",
-						"Type2" }));
+		type2 = model.findType(Arrays.asList(new String[] {
+				IModelBusConstants.ROOT_PACKAGE_NAME, "package1", "package2",
+				"Type2" }));
 		assertNotNull(type2);
 
 		Operation operation2;
@@ -874,15 +901,16 @@ public class AbstractModelTest {
 	 * </p>
 	 * 
 	 * @throws ModelAccessException
-	 * @throws Ocl2ParsingException
+	 * @throws ParseException
 	 * @throws IllegalArgumentException
 	 */
 	@Test
 	public void testRemoveAllConstraints05() throws ModelAccessException,
-			IllegalArgumentException, Ocl2ParsingException {
+			IllegalArgumentException, ParseException {
 
 		IModel model;
-		model = ModelBusTestUtility.getUML2Model("resources/models/model05.uml");
+		model = ModelBusTestUtility
+				.getUML2Model("resources/models/model05.uml");
 
 		ModelBusTestUtility.parseConstraints(
 				"resources/constraints/constraints05.ocl", model);
@@ -894,9 +922,8 @@ public class AbstractModelTest {
 
 		/* Find the defined properties. */
 		Type type1;
-		type1 =
-				model.findType(Arrays.asList(new String[] {
-						IModelBusConstants.ROOT_PACKAGE_NAME, "package1", "Type1" }));
+		type1 = model.findType(Arrays.asList(new String[] {
+				IModelBusConstants.ROOT_PACKAGE_NAME, "package1", "Type1" }));
 		assertNotNull(type1);
 
 		Property property1;
@@ -905,10 +932,9 @@ public class AbstractModelTest {
 		assertNotNull(property1);
 
 		Type type2;
-		type2 =
-				model.findType(Arrays.asList(new String[] {
-						IModelBusConstants.ROOT_PACKAGE_NAME, "package1", "package2",
-						"Type2" }));
+		type2 = model.findType(Arrays.asList(new String[] {
+				IModelBusConstants.ROOT_PACKAGE_NAME, "package1", "package2",
+				"Type2" }));
 		assertNotNull(type2);
 
 		Property property2;
@@ -938,15 +964,16 @@ public class AbstractModelTest {
 	 * </p>
 	 * 
 	 * @throws ModelAccessException
-	 * @throws Ocl2ParsingException
+	 * @throws ParseException
 	 * @throws IllegalArgumentException
 	 */
 	@Test
 	public void testRemoveConstraints01() throws ModelAccessException,
-			IllegalArgumentException, Ocl2ParsingException {
+			IllegalArgumentException, ParseException {
 
 		IModel model;
-		model = ModelBusTestUtility.getUML2Model("resources/models/model05.uml");
+		model = ModelBusTestUtility
+				.getUML2Model("resources/models/model05.uml");
 
 		model.removeConstraints(new HashSet<Constraint>());
 
@@ -963,20 +990,20 @@ public class AbstractModelTest {
 	 * </p>
 	 * 
 	 * @throws ModelAccessException
-	 * @throws Ocl2ParsingException
+	 * @throws ParseException
 	 * @throws IllegalArgumentException
 	 */
 	@Test
 	public void testRemoveConstraints02() throws ModelAccessException,
-			IllegalArgumentException, Ocl2ParsingException {
+			IllegalArgumentException, ParseException {
 
 		IModel model;
-		model = ModelBusTestUtility.getUML2Model("resources/models/model05.uml");
+		model = ModelBusTestUtility
+				.getUML2Model("resources/models/model05.uml");
 
 		Collection<Constraint> constraints;
-		constraints =
-				ModelBusTestUtility.parseConstraints(
-						"resources/constraints/constraints01.ocl", model);
+		constraints = ModelBusTestUtility.parseConstraints(
+				"resources/constraints/constraints01.ocl", model);
 
 		assertNotNull(model.getConstraints());
 		assertTrue(model.getConstraints().size() > 0);
@@ -996,20 +1023,20 @@ public class AbstractModelTest {
 	 * </p>
 	 * 
 	 * @throws ModelAccessException
-	 * @throws Ocl2ParsingException
+	 * @throws ParseException
 	 * @throws IllegalArgumentException
 	 */
 	@Test
 	public void testRemoveConstraints03() throws ModelAccessException,
-			IllegalArgumentException, Ocl2ParsingException {
+			IllegalArgumentException, ParseException {
 
 		IModel model;
-		model = ModelBusTestUtility.getUML2Model("resources/models/model05.uml");
+		model = ModelBusTestUtility
+				.getUML2Model("resources/models/model05.uml");
 
 		Collection<Constraint> constraints;
-		constraints =
-				ModelBusTestUtility.parseConstraints(
-						"resources/constraints/constraints01.ocl", model);
+		constraints = ModelBusTestUtility.parseConstraints(
+				"resources/constraints/constraints01.ocl", model);
 		constraints.addAll(ModelBusTestUtility.parseConstraints(
 				"resources/constraints/constraints02.ocl", model));
 
@@ -1044,34 +1071,32 @@ public class AbstractModelTest {
 	 * </p>
 	 * 
 	 * @throws ModelAccessException
-	 * @throws Ocl2ParsingException
+	 * @throws ParseException
 	 * @throws IllegalArgumentException
 	 */
 	@Test
 	public void testRemoveConstraints04() throws ModelAccessException,
-			IllegalArgumentException, Ocl2ParsingException {
+			IllegalArgumentException, ParseException {
 
 		IModel model;
-		model = ModelBusTestUtility.getUML2Model("resources/models/model05.uml");
+		model = ModelBusTestUtility
+				.getUML2Model("resources/models/model05.uml");
 
 		Collection<Constraint> constraints01;
-		constraints01 =
-				ModelBusTestUtility.parseConstraints(
-						"resources/constraints/constraints03.ocl", model);
+		constraints01 = ModelBusTestUtility.parseConstraints(
+				"resources/constraints/constraints03.ocl", model);
 
 		Collection<Constraint> constraints02;
-		constraints02 =
-				ModelBusTestUtility.parseConstraints(
-						"resources/constraints/constraints04.ocl", model);
+		constraints02 = ModelBusTestUtility.parseConstraints(
+				"resources/constraints/constraints04.ocl", model);
 
 		assertNotNull(model.getConstraints());
 		assertTrue(model.getConstraints().size() > 0);
 
 		/* Find the defined operations. */
 		Type type1;
-		type1 =
-				model.findType(Arrays.asList(new String[] {
-						IModelBusConstants.ROOT_PACKAGE_NAME, "package1", "Type1" }));
+		type1 = model.findType(Arrays.asList(new String[] {
+				IModelBusConstants.ROOT_PACKAGE_NAME, "package1", "Type1" }));
 		assertNotNull(type1);
 
 		Operation operation1;
@@ -1080,10 +1105,9 @@ public class AbstractModelTest {
 		assertNotNull(operation1);
 
 		Type type2;
-		type2 =
-				model.findType(Arrays.asList(new String[] {
-						IModelBusConstants.ROOT_PACKAGE_NAME, "package1", "package2",
-						"Type2" }));
+		type2 = model.findType(Arrays.asList(new String[] {
+				IModelBusConstants.ROOT_PACKAGE_NAME, "package1", "package2",
+				"Type2" }));
 		assertNotNull(type2);
 
 		Operation operation2;
@@ -1122,34 +1146,32 @@ public class AbstractModelTest {
 	 * </p>
 	 * 
 	 * @throws ModelAccessException
-	 * @throws Ocl2ParsingException
+	 * @throws ParseException
 	 * @throws IllegalArgumentException
 	 */
 	@Test
 	public void testRemoveConstraints05() throws ModelAccessException,
-			IllegalArgumentException, Ocl2ParsingException {
+			IllegalArgumentException, ParseException {
 
 		IModel model;
-		model = ModelBusTestUtility.getUML2Model("resources/models/model05.uml");
+		model = ModelBusTestUtility
+				.getUML2Model("resources/models/model05.uml");
 
 		Collection<Constraint> constraints01;
-		constraints01 =
-				ModelBusTestUtility.parseConstraints(
-						"resources/constraints/constraints05.ocl", model);
+		constraints01 = ModelBusTestUtility.parseConstraints(
+				"resources/constraints/constraints05.ocl", model);
 
 		Collection<Constraint> constraints02;
-		constraints02 =
-				ModelBusTestUtility.parseConstraints(
-						"resources/constraints/constraints06.ocl", model);
+		constraints02 = ModelBusTestUtility.parseConstraints(
+				"resources/constraints/constraints06.ocl", model);
 
 		assertNotNull(model.getConstraints());
 		assertTrue(model.getConstraints().size() > 0);
 
 		/* Find the defined properties. */
 		Type type1;
-		type1 =
-				model.findType(Arrays.asList(new String[] {
-						IModelBusConstants.ROOT_PACKAGE_NAME, "package1", "Type1" }));
+		type1 = model.findType(Arrays.asList(new String[] {
+				IModelBusConstants.ROOT_PACKAGE_NAME, "package1", "Type1" }));
 		assertNotNull(type1);
 
 		Property property1;
@@ -1158,10 +1180,9 @@ public class AbstractModelTest {
 		assertNotNull(property1);
 
 		Type type2;
-		type2 =
-				model.findType(Arrays.asList(new String[] {
-						IModelBusConstants.ROOT_PACKAGE_NAME, "package1", "package2",
-						"Type2" }));
+		type2 = model.findType(Arrays.asList(new String[] {
+				IModelBusConstants.ROOT_PACKAGE_NAME, "package1", "package2",
+				"Type2" }));
 		assertNotNull(type2);
 
 		Property property2;

@@ -1,0 +1,8 @@
+package package1::package2
+
+context Type1
+def: definedOperation01(): Boolean = true
+/* Should fail here. */
+inv1: 'false'
+
+endpackage

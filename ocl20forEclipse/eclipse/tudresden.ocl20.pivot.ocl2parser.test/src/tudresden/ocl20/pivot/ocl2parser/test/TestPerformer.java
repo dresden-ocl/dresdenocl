@@ -20,7 +20,6 @@ package tudresden.ocl20.pivot.ocl2parser.test;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -32,12 +31,9 @@ import tudresden.ocl20.pivot.modelbus.ModelAccessException;
 import tudresden.ocl20.pivot.modelbus.metamodel.IMetamodel;
 import tudresden.ocl20.pivot.modelbus.model.IModel;
 import tudresden.ocl20.pivot.modelbus.model.IModelProvider;
-import tudresden.ocl20.pivot.ocl2parser.parser.OCL2Parser;
-import tudresden.ocl20.pivot.ocl2parser.parser.exceptions.BuildingASTException;
-import tudresden.ocl20.pivot.ocl2parser.parser.exceptions.LexException;
-import tudresden.ocl20.pivot.ocl2parser.parser.exceptions.ParsingException;
-import tudresden.ocl20.pivot.ocl2parser.parser.exceptions.SemanticException;
+import tudresden.ocl20.pivot.ocl2parser.parser.Ocl2Parser;
 import tudresden.ocl20.pivot.ocl2parser.test.exception.MetaModelNotFoundException;
+import tudresden.ocl20.pivot.parser.ParseException;
 
 /**
  * <p>
@@ -59,8 +55,8 @@ public class TestPerformer {
 	protected String OCL_FILE_DIRECTORY = "resources/oclTestFiles/";
 
 	/**
-	 * Contains the instance of the {@link TestPerformer} in relation to the ID of
-	 * their {@link IMetamodel}.
+	 * Contains the instance of the {@link TestPerformer} in relation to the ID
+	 * of their {@link IMetamodel}.
 	 */
 	protected static Map<String, TestPerformer> myInstances = null;
 
@@ -88,10 +84,10 @@ public class TestPerformer {
 	 * </p>
 	 * 
 	 * @param modelBundle
-	 *          The ID of the {@link Bundle} of the {@link IModel} used for
-	 *          testing.
+	 *            The ID of the {@link Bundle} of the {@link IModel} used for
+	 *            testing.
 	 * @param modelPath
-	 *          The path of the {@link IModel} inside the {@link Bundle}.
+	 *            The path of the {@link IModel} inside the {@link Bundle}.
 	 */
 	private TestPerformer(String modelBundle, String modelPath) {
 
@@ -108,21 +104,23 @@ public class TestPerformer {
 	 * </p>
 	 * 
 	 * @param metamodelID
-	 *          The ID of the {@link IMetamodel} whose {@link TestPerformer}
-	 *          instance shall be returned.
+	 *            The ID of the {@link IMetamodel} whose {@link TestPerformer}
+	 *            instance shall be returned.
 	 * @param modelBundle
-	 *          The id of the {@link Bundle} that provides the {@link IModel} that
-	 *          shall be used.
+	 *            The id of the {@link Bundle} that provides the {@link IModel}
+	 *            that shall be used.
 	 * @param modelPath
-	 *          The path of the directory of the {@link IModel} in its
-	 *          {@link Bundle} .
-	 * @return The {@link TestPerformer} instance for the given {@link IMetamodel}
-	 *         .
+	 *            The path of the directory of the {@link IModel} in its
+	 *            {@link Bundle} .
+	 * @return The {@link TestPerformer} instance for the given
+	 *         {@link IMetamodel} .
 	 * @throws MetaModelNotFoundException
-	 *           Thrown if no {@link IMetamodel} for the given name can be found.
+	 *             Thrown if no {@link IMetamodel} for the given name can be
+	 *             found.
 	 */
 	public static TestPerformer getInstance(String metamodelID,
-			String modelBundle, String modelPath) throws MetaModelNotFoundException {
+			String modelBundle, String modelPath)
+			throws MetaModelNotFoundException {
 
 		TestPerformer result;
 		result = null;
@@ -166,26 +164,43 @@ public class TestPerformer {
 
 	/**
 	 * <p>
-	 * Parses a given OCL file against the loaded {@link IModel} file. If an error
-	 * occurred an {@link Exception} will be thrown.
+	 * Parses a given OCL file against the loaded {@link IModel} file. If an
+	 * error occurred an {@link Exception} will be thrown.
 	 * </p>
 	 * 
 	 * @param filename
-	 *          The name of OCL {@link FileNotFoundException} to be parsed.
-	 * @throws SemanticException
-	 *           Thrown, if a semantic exception occurred during parsing.
-	 * @throws BuildingASTException
-	 *           Thrown, if an exception occurred during building the ASM.
-	 * @throws IOException
-	 *           Thrown, if the given {@link File} cannot be opened.
-	 * @throws LexException
-	 *           Thrown, if a lexer exception occurred.
-	 * @throws ParsingException
-	 *           Thrown, if a exception occurred during parsing.
+	 *            The name of OCL {@link File} to be parsed.
+	 * @throws Ocl2ParsingException
+	 *             Thrown, if a exception occurred during parsing.
+	 * @throws FileNotFoundException
+	 *             Thrown, if the required {@link File} cannot be found.
+	 * 
 	 */
-	public void parseFile(String filename) throws FileNotFoundException,
-			ParsingException, LexException, IOException, BuildingASTException,
-			SemanticException {
+	public void parseFile(String filename) throws ParseException,
+			FileNotFoundException {
+
+		this.parseFile(filename, false);
+	}
+
+	/**
+	 * <p>
+	 * Parses a given OCL file against the loaded {@link IModel} file. If an
+	 * error occurred an {@link Exception} will be thrown.
+	 * </p>
+	 * 
+	 * @param filename
+	 *            The name of OCL {@link File} to be parsed.
+	 * @param addToModel
+	 *            Indicates whether or not to add the constraints to the
+	 *            {@link IModel} after parsing.
+	 * @throws Ocl2ParsingException
+	 *             Thrown, if a exception occurred during parsing.
+	 * @throws FileNotFoundException
+	 *             Thrown, if the required {@link File} cannot be found.
+	 * 
+	 */
+	public void parseFile(String filename, boolean addToModel)
+			throws ParseException, FileNotFoundException {
 
 		String fileDirectory;
 		fileDirectory = Activator.getDefault().getBundle().getLocation();
@@ -199,35 +214,32 @@ public class TestPerformer {
 		/* Check if the file exists at all. */
 		if (!oclFile.exists()) {
 			throw new FileNotFoundException(
-					"The OCL test file does not exists. File name: " + OCL_FILE_DIRECTORY
-							+ filename + ".");
+					"The OCL test file does not exists. File name: "
+							+ OCL_FILE_DIRECTORY + filename + ".");
 		}
 		// no else.
 
 		FileReader oclFileReader;
 		oclFileReader = new FileReader(oclFile);
 
-		OCL2Parser parser;
 		/* Not replaced by facade method to test the different exception types. */
-		parser = new OCL2Parser(this.myModel, oclFileReader);
-
-		parser.parse();
+		Ocl2Parser.INSTANCE.doParse(this.myModel, oclFileReader, addToModel);
 	}
 
 	/**
 	 * <p>
-	 * Wrapper for {@link TestPerformer#setModel(String, boolean)} which sets the
-	 * second argument to false; thus using the remote location (
+	 * Wrapper for {@link TestPerformer#setModel(String, boolean)} which sets
+	 * the second argument to false; thus using the remote location (
 	 * {@link TestPerformer#MODEL_BUNDLE}/{@link TestPerformer#MODEL_DIRECTORY})
 	 * for loading the {@link IModel}.
 	 * </p>
 	 * 
 	 * @param modelName
-	 *          The name of file containing the {@link IModel}.
+	 *            The name of file containing the {@link IModel}.
 	 * @throws ModelAccessException
-	 *           Thrown from {@link IModelProvider#getModel(String)}
+	 *             Thrown from {@link IModelProvider#getModel(String)}
 	 * @throws FileNotFoundException
-	 *           Thrown if the {@link IModel} has not been found.
+	 *             Thrown if the {@link IModel} has not been found.
 	 */
 	public void setModel(String modelName) throws ModelAccessException,
 			FileNotFoundException {
@@ -243,13 +255,13 @@ public class TestPerformer {
 	 * <code>local == true</code>).
 	 * 
 	 * @param modelName
-	 *          The name of file containing the {@link IModel}.
+	 *            The name of file containing the {@link IModel}.
 	 * @param local
-	 *          Flag for the path to a {@link IModel}.
+	 *            Flag for the path to a {@link IModel}.
 	 * @throws ModelAccessException
-	 *           Thrown from {@link IModelProvider#getModel(String)}
+	 *             Thrown from {@link IModelProvider#getModel(String)}
 	 * @throws FileNotFoundException
-	 *           Thrown if the {@link IModel} has not been found.
+	 *             Thrown if the {@link IModel} has not been found.
 	 */
 	public void setModel(String modelName, boolean local)
 			throws ModelAccessException, FileNotFoundException {
@@ -266,8 +278,8 @@ public class TestPerformer {
 			pathToModel = Platform.getBundle(this.myModelBundle).getLocation();
 
 			/*
-			 * Remove the 'reference:file:' from the beginning and add path in remote
-			 * location.
+			 * Remove the 'reference:file:' from the beginning and add path in
+			 * remote location.
 			 */
 			pathToModel = pathToModel.substring(15) + this.myModelPath;
 		}
@@ -281,7 +293,7 @@ public class TestPerformer {
 	 * </p>
 	 * 
 	 * @throws MetaModelNotFoundException
-	 *           Thrown if the {@link IMetamodel} has not been found.
+	 *             Thrown if the {@link IMetamodel} has not been found.
 	 */
 	private void initializeMetamodel(String metamodelName)
 			throws MetaModelNotFoundException {
@@ -295,13 +307,13 @@ public class TestPerformer {
 	 * </p>
 	 * 
 	 * @param modelName
-	 *          The name of file containing the {@link IModel}.
+	 *            The name of file containing the {@link IModel}.
 	 * @param pathToModel
-	 *          The path to the {@link IModel} file.
+	 *            The path to the {@link IModel} file.
 	 * @throws ModelAccessException
-	 *           Thrown from {@link IModelProvider#getModel(File)}
+	 *             Thrown from {@link IModelProvider#getModel(File)}
 	 * @throws FileNotFoundException
-	 *           Thrown, if the {@link IModel} file has not been found.
+	 *             Thrown, if the {@link IModel} file has not been found.
 	 */
 	private void setModel(String modelName, String pathToModel)
 			throws ModelAccessException, FileNotFoundException {
@@ -313,10 +325,12 @@ public class TestPerformer {
 		if (!modelFile.exists()) {
 			throw new FileNotFoundException(
 					"The IModel file does not exists. The file name was: "
-							+ this.myRemoteModelFileDirectoryPath + modelName + ".");
+							+ this.myRemoteModelFileDirectoryPath + modelName
+							+ ".");
 		}
 		// no else.
 
-		this.myModel = Ocl2ForEclipseFacade.getModel(modelFile, this.myMetaModel);
+		this.myModel = Ocl2ForEclipseFacade.getModel(modelFile,
+				this.myMetaModel);
 	}
 }

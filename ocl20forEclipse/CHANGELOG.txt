@@ -47,6 +47,8 @@ Release 2.1 (not scheduled yet)
     or property is a super type of the result's type.
   
 * Some bugs in the OCL2 Parser were fixed.
+  - The Parser now implements the IOclParser interface.
+  - If the parsing process fails, no constraints or defined features will be added to the model anymore.
   - The special operations OclAny.oclAsType(), oclIsKindOf(), ... can now contain Property- 
     and OperationCallExpressions instead of simple TypeLiteralExpressions.
   - Collection(T1).product(Collection(T2)) is now parsed appropriately.

@@ -1,0 +1,8 @@
+package package1::package2
+
+context Type1
+inv invariant1: true
+inv invariant2: true
+inv invariant3: true
+
+endpackage

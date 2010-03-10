@@ -19,20 +19,16 @@ with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
 
 package tudresden.ocl20.pivot.ocl2parser.test.expressions;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.fail;
 
 import java.io.FileNotFoundException;
-import java.io.IOException;
 
 import org.junit.Test;
 
 import tudresden.ocl20.pivot.modelbus.ModelAccessException;
-import tudresden.ocl20.pivot.ocl2parser.parser.exceptions.BuildingASTException;
-import tudresden.ocl20.pivot.ocl2parser.parser.exceptions.LexException;
-import tudresden.ocl20.pivot.ocl2parser.parser.exceptions.ParsingException;
-import tudresden.ocl20.pivot.ocl2parser.parser.exceptions.SemanticException;
 import tudresden.ocl20.pivot.ocl2parser.test.TestPerformer;
 import tudresden.ocl20.pivot.ocl2parser.test.exception.MetaModelNotFoundException;
+import tudresden.ocl20.pivot.parser.ParseException;
 
 /**
  * <p>
@@ -62,10 +58,10 @@ public class TestIfExpressions {
 		/* Try to get the TestPerformer. */
 		try {
 
-			testPerformer =
-					TestPerformer.getInstance(AllExpressionTests.META_MODEL_ID,
-							AllExpressionTests.MODEL_BUNDLE,
-							AllExpressionTests.MODEL_DIRECTORY);
+			testPerformer = TestPerformer.getInstance(
+					AllExpressionTests.META_MODEL_ID,
+					AllExpressionTests.MODEL_BUNDLE,
+					AllExpressionTests.MODEL_DIRECTORY);
 			testPerformer.setModel(modelFileName);
 
 			/* Try to parse the constraint file. */
@@ -74,26 +70,6 @@ public class TestIfExpressions {
 			}
 
 			catch (FileNotFoundException e) {
-				fail("Failed to parse File. Reason: " + e.getMessage());
-			}
-
-			catch (ParsingException e) {
-				fail("Failed to parse File. Reason: " + e.getMessage());
-			}
-
-			catch (LexException e) {
-				fail("Failed to parse File. Reason: " + e.getMessage());
-			}
-
-			catch (IOException e) {
-				fail("Failed to parse File. Reason: " + e.getMessage());
-			}
-
-			catch (BuildingASTException e) {
-				fail("Failed to parse File. Reason: " + e.getMessage());
-			}
-
-			catch (SemanticException e) {
 				fail("Failed to parse File. Reason: " + e.getMessage());
 			}
 			// end catch.
@@ -120,7 +96,7 @@ public class TestIfExpressions {
 	 * appropriately.
 	 * </p>
 	 */
-	@Test(expected = ParsingException.class)
+	@Test(expected = ParseException.class)
 	public void testIfNegative01() throws Exception {
 
 		TestPerformer testPerformer;
@@ -132,11 +108,10 @@ public class TestIfExpressions {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer
-						.getInstance(AllExpressionTests.META_MODEL_ID,
-								AllExpressionTests.MODEL_BUNDLE,
-								AllExpressionTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllExpressionTests.META_MODEL_ID,
+				AllExpressionTests.MODEL_BUNDLE,
+				AllExpressionTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		/* Try to parse the constraint file. */
@@ -149,7 +124,7 @@ public class TestIfExpressions {
 	 * appropriately.
 	 * </p>
 	 */
-	@Test(expected = ParsingException.class)
+	@Test(expected = ParseException.class)
 	public void testIfNegative02() throws Exception {
 
 		TestPerformer testPerformer;
@@ -161,11 +136,10 @@ public class TestIfExpressions {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer
-						.getInstance(AllExpressionTests.META_MODEL_ID,
-								AllExpressionTests.MODEL_BUNDLE,
-								AllExpressionTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllExpressionTests.META_MODEL_ID,
+				AllExpressionTests.MODEL_BUNDLE,
+				AllExpressionTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		/* Try to parse the constraint file. */

@@ -20,14 +20,17 @@
 
 package tudresden.ocl20.pivot.ocl2parser.parser.exceptions;
 
+import tudresden.ocl20.pivot.parser.ParseException;
+
 /**
  * <p>
  * {@link SemanticException}s indicate semantic Parsing errors.
  * </p>
  * 
- * @author Claas Wilke
+ * @author Nils Thieme
+ * @author Claas Wilke (refactoring and documentation)
  */
-public class SemanticException extends Exception {
+public class SemanticException extends ParseException {
 
 	/** Generated ID for serialization. */
 	private static final long serialVersionUID = -2202905950423943922L;

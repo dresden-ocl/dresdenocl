@@ -4,10 +4,10 @@ import java.io.File;
 import java.util.Collection;
 
 import tudresden.ocl20.pivot.facade.Ocl2ForEclipseFacade;
-import tudresden.ocl20.pivot.facade.Ocl2ParsingException;
 import tudresden.ocl20.pivot.modelbus.ModelAccessException;
 import tudresden.ocl20.pivot.modelbus.model.IModel;
 import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance;
+import tudresden.ocl20.pivot.parser.ParseException;
 import tudresden.ocl20.pivot.pivotmodel.Constraint;
 
 /**
@@ -22,18 +22,19 @@ public class ModelBusTestUtility {
 
 	/**
 	 * <p>
-	 * Loads a Java {@link IModelInstance} for a given path as an instance of the
-	 * given {@link IModel}.
+	 * Loads a Java {@link IModelInstance} for a given path as an instance of
+	 * the given {@link IModel}.
 	 * </p>
 	 * 
 	 * @param path
-	 *          The relative path in this plug-in to the model that shall be
-	 *          loaded.
+	 *            The relative path in this plug-in to the model that shall be
+	 *            loaded.
 	 * @param model
-	 *          The {@link IModel} the {@link IModelInstance} is an instance of.
+	 *            The {@link IModel} the {@link IModelInstance} is an instance
+	 *            of.
 	 * @throws RuntimeException
-	 *           Thrown, if an error during {@link IModelInstance} initialization
-	 *           occurs.
+	 *             Thrown, if an error during {@link IModelInstance}
+	 *             initialization occurs.
 	 * 
 	 * @return The loaded {@link IModelInstance}.
 	 * @throws ModelAccessException
@@ -70,8 +71,8 @@ public class ModelBusTestUtility {
 	 * </p>
 	 * 
 	 * @param path
-	 *          The relative path in this plug-in to the model that shall be
-	 *          loaded.
+	 *            The relative path in this plug-in to the model that shall be
+	 *            loaded.
 	 * @return The current {@link IModel} or <code>null</code>.
 	 * @throws ModelAccessException
 	 */
@@ -90,8 +91,8 @@ public class ModelBusTestUtility {
 
 		/* Check if the given file does not exist. */
 		if (!modelFile.exists()) {
-			throw new RuntimeException("The model for the path " + bundleDirectory
-					+ path + " cannot be found.");
+			throw new RuntimeException("The model for the path "
+					+ bundleDirectory + path + " cannot be found.");
 		}
 
 		/* Else try to load the model. */
@@ -108,7 +109,7 @@ public class ModelBusTestUtility {
 	 * </p>
 	 * 
 	 * @param model
-	 *          The {@link IModel} the {@link IModelInstance} shall belong to.
+	 *            The {@link IModel} the {@link IModelInstance} shall belong to.
 	 * @return The created {@link IModelInstance}.
 	 */
 	public static IModelInstance createEmptyJavaModelInstance(IModel model) {
@@ -116,9 +117,8 @@ public class ModelBusTestUtility {
 		IModelInstance result;
 
 		try {
-			result =
-					Ocl2ForEclipseFacade.getEmptyModelInstance(model,
-							Ocl2ForEclipseFacade.JAVA_MODEL_INSTANCE_TYPE);
+			result = Ocl2ForEclipseFacade.getEmptyModelInstance(model,
+					Ocl2ForEclipseFacade.JAVA_MODEL_INSTANCE_TYPE);
 		}
 
 		catch (IllegalArgumentException e) {
@@ -134,21 +134,22 @@ public class ModelBusTestUtility {
 
 	/**
 	 * <p>
-	 * Parses OCL {@link Constraint}s from a given file for a given {@link IModel}
-	 * .
+	 * Parses OCL {@link Constraint}s from a given file for a given
+	 * {@link IModel} .
 	 * </p>
 	 * 
 	 * @param constraintLocation
-	 *          The name of the file containing the {@link Constraint}s.
+	 *            The name of the file containing the {@link Constraint}s.
 	 * @param model
-	 *          The {@link IModel}.
+	 *            The {@link IModel}.
 	 * @throws ModelAccessException
-	 * @throws OCL2ParsingException
+	 * @throws ParseException
 	 * @throws IllegalArgumentException
 	 */
 	public static Collection<Constraint> parseConstraints(
-			String constraintLocation, IModel model) throws IllegalArgumentException,
-			Ocl2ParsingException, ModelAccessException {
+			String constraintLocation, IModel model)
+			throws IllegalArgumentException, ParseException,
+			ModelAccessException {
 
 		String bundleDirectory;
 		File constraintFile;
@@ -163,13 +164,15 @@ public class ModelBusTestUtility {
 
 		/* Check if the given file does not exist. */
 		if (!constraintFile.exists()) {
-			throw new RuntimeException("The model for the path " + bundleDirectory
-					+ constraintLocation + " cannot be found.");
+			throw new RuntimeException("The model for the path "
+					+ bundleDirectory + constraintLocation
+					+ " cannot be found.");
 		}
 
 		/* Else try to parse the constraints. */
 		else {
-			return Ocl2ForEclipseFacade.parseConstraints(constraintFile, model, true);
+			return Ocl2ForEclipseFacade.parseConstraints(constraintFile, model,
+					true);
 		}
 		// end else.
 	}

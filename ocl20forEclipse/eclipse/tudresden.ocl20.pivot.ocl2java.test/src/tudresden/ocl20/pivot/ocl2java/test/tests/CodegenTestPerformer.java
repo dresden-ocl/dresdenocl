@@ -38,7 +38,6 @@ import tudresden.ocl20.pivot.ocl2java.IOcl22Code;
 import tudresden.ocl20.pivot.ocl2java.IOcl22CodeSettings;
 import tudresden.ocl20.pivot.ocl2java.exception.Ocl22CodeException;
 import tudresden.ocl20.pivot.ocl2java.test.Ocl2CodeTestPlugin;
-import tudresden.ocl20.pivot.ocl2parser.parser.OCL2Parser;
 import tudresden.ocl20.pivot.pivotmodel.Constraint;
 import tudresden.ocl20.pivot.pivotmodel.Namespace;
 
@@ -104,7 +103,7 @@ public final class CodegenTestPerformer {
 	 * 
 	 * @return The only instance of {@link CodegenTestPerformer}.
 	 * @throws Ocl22CodeException
-	 *           Thrown if {@link OCL2Parser} of {@link IModel} initialization
+	 *           Thrown if {@link Ocl2Parser} of {@link IModel} initialization
 	 *           required for testing fails.
 	 */
 	public static CodegenTestPerformer getInstance() throws Ocl22CodeException {
@@ -361,7 +360,7 @@ public final class CodegenTestPerformer {
 	 * </p>
 	 * 
 	 * @throws Ocl22CodeException
-	 *           Thrown if {@link OCL2Parser} of {@link IModel} initialization
+	 *           Thrown if {@link Ocl2Parser} of {@link IModel} initialization
 	 *           required for testing fails.
 	 */
 	public void reset() throws Ocl22CodeException {
@@ -378,7 +377,7 @@ public final class CodegenTestPerformer {
 	 * </p>
 	 * 
 	 * @throws Ocl22CodeException
-	 *           Thrown if {@link OCL2Parser} of {@link IModel} initialization
+	 *           Thrown if {@link Ocl2Parser} of {@link IModel} initialization
 	 *           required for testing fails.
 	 */
 	public void resetCodeGenerator() throws Ocl22CodeException {

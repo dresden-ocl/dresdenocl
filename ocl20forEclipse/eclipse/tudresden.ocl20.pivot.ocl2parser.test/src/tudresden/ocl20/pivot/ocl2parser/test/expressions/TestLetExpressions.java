@@ -21,9 +21,9 @@ package tudresden.ocl20.pivot.ocl2parser.test.expressions;
 
 import org.junit.Test;
 
-import tudresden.ocl20.pivot.ocl2parser.parser.exceptions.ParsingException;
 import tudresden.ocl20.pivot.ocl2parser.parser.exceptions.SemanticException;
 import tudresden.ocl20.pivot.ocl2parser.test.TestPerformer;
+import tudresden.ocl20.pivot.parser.ParseException;
 
 /**
  * <p>
@@ -51,11 +51,10 @@ public class TestLetExpressions {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer
-						.getInstance(AllExpressionTests.META_MODEL_ID,
-								AllExpressionTests.MODEL_BUNDLE,
-								AllExpressionTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllExpressionTests.META_MODEL_ID,
+				AllExpressionTests.MODEL_BUNDLE,
+				AllExpressionTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		/* Try to parse the constraint file. */
@@ -79,11 +78,10 @@ public class TestLetExpressions {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer
-						.getInstance(AllExpressionTests.META_MODEL_ID,
-								AllExpressionTests.MODEL_BUNDLE,
-								AllExpressionTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllExpressionTests.META_MODEL_ID,
+				AllExpressionTests.MODEL_BUNDLE,
+				AllExpressionTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		/* Try to parse the constraint file. */
@@ -95,7 +93,7 @@ public class TestLetExpressions {
 	 * A test case to check that a LetExpression is not parsed appropriately.
 	 * </p>
 	 */
-	@Test(expected = ParsingException.class)
+	@Test(expected = ParseException.class)
 	public void testLetNegative01() throws Exception {
 
 		TestPerformer testPerformer;
@@ -107,11 +105,10 @@ public class TestLetExpressions {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer
-						.getInstance(AllExpressionTests.META_MODEL_ID,
-								AllExpressionTests.MODEL_BUNDLE,
-								AllExpressionTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllExpressionTests.META_MODEL_ID,
+				AllExpressionTests.MODEL_BUNDLE,
+				AllExpressionTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		/* Try to parse the constraint file. */
@@ -135,11 +132,10 @@ public class TestLetExpressions {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer
-						.getInstance(AllExpressionTests.META_MODEL_ID,
-								AllExpressionTests.MODEL_BUNDLE,
-								AllExpressionTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllExpressionTests.META_MODEL_ID,
+				AllExpressionTests.MODEL_BUNDLE,
+				AllExpressionTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		/* Try to parse the constraint file. */

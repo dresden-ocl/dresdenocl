@@ -23,10 +23,10 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import tudresden.ocl20.pivot.facade.Ocl2ParsingException;
 import tudresden.ocl20.pivot.modelbus.ModelAccessException;
 import tudresden.ocl20.pivot.ocl2java.exception.Ocl22CodeException;
 import tudresden.ocl20.pivot.ocl2java.test.tests.AbstractDiffTest;
+import tudresden.ocl20.pivot.parser.ParseException;
 
 /**
  * <p>
@@ -74,13 +74,13 @@ public class TestOrderedSet extends AbstractDiffTest {
 	 * </p>
 	 * 
 	 * @throws ModelAccessException
-	 * @throws Ocl2ParsingException
+	 * @throws ParseException
 	 * @throws IllegalArgumentException
 	 * @throws Ocl22CodeException
 	 */
 	@Test
 	public void testReverse01() throws IllegalArgumentException,
-			Ocl2ParsingException, ModelAccessException, Ocl22CodeException {
+			ParseException, ModelAccessException, Ocl22CodeException {
 
 		this.compareFragmentCodeGeneration("sltest/orderedset", "reverse01");
 	}

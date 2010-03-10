@@ -30,13 +30,13 @@ import java.util.List;
 import org.eclipse.core.runtime.Platform;
 import org.osgi.framework.Bundle;
 
-import tudresden.ocl20.pivot.facade.Ocl2ParsingException;
 import tudresden.ocl20.pivot.facade.Ocl2ForEclipseFacade;
 import tudresden.ocl20.pivot.modelbus.ModelAccessException;
 import tudresden.ocl20.pivot.modelbus.model.IModel;
 import tudresden.ocl20.pivot.ocl2java.IOcl22CodeSettings;
 import tudresden.ocl20.pivot.ocl2java.exception.Ocl22CodeException;
 import tudresden.ocl20.pivot.ocl2java.test.Ocl2CodeTestPlugin;
+import tudresden.ocl20.pivot.parser.ParseException;
 import tudresden.ocl20.pivot.pivotmodel.Constraint;
 
 /**
@@ -122,16 +122,15 @@ public abstract class AbstractDiffTest {
 	 * </p>
 	 * 
 	 * @param directory
-	 *            the directory of the file relative to
-	 *            <code>resources/</code>
+	 *            the directory of the file relative to <code>resources/</code>
 	 * @param fileName
 	 *            The name of the file that shall be checked.
-	 * @throws Ocl2ParsingException
+	 * @throws ParseException
 	 * @throws ModelAccessException
 	 * @throws Ocl22CodeException
 	 */
 	protected void compareFragmentCodeGeneration(String directory,
-			String fileName) throws Ocl2ParsingException, ModelAccessException,
+			String fileName) throws ParseException, ModelAccessException,
 			Ocl22CodeException {
 
 		/* Parse the constraint. */
@@ -165,16 +164,15 @@ public abstract class AbstractDiffTest {
 	 * </p>
 	 * 
 	 * @param directory
-	 *            the directory of the file relative to
-	 *            <code>resources/</code>
+	 *            the directory of the file relative to <code>resources/</code>
 	 * @param fileName
 	 *            The name of the file that shall be checked.
-	 * @throws Ocl2ParsingException
+	 * @throws ParseException
 	 * @throws ModelAccessException
 	 * @throws Ocl22CodeException
 	 */
 	protected void compareInstrumentationCodeGeneration(String directory,
-			String fileName) throws Ocl2ParsingException, ModelAccessException,
+			String fileName) throws ParseException, ModelAccessException,
 			Ocl22CodeException {
 
 		/* Parse the constraint. */
@@ -196,9 +194,10 @@ public abstract class AbstractDiffTest {
 
 		assertNotNull(generatedCode);
 
-		CodegenTestPerformer.getInstance().compareStringAndFile(
-				"resources/" + directory + "/instrumented/" + fileName
-						+ ".txt", generatedCode);
+		CodegenTestPerformer.getInstance()
+				.compareStringAndFile(
+						"resources/" + directory + "/instrumented/" + fileName
+								+ ".txt", generatedCode);
 	}
 
 	/**
@@ -210,19 +209,18 @@ public abstract class AbstractDiffTest {
 	 *            The ID of the {@link Bundle}, whose source directory to save
 	 *            the instrumentation code.
 	 * @param directory
-	 *            the directory of the file relative to
-	 *            <code>resources/</code>
+	 *            the directory of the file relative to <code>resources/</code>
 	 * @param fileNames
 	 *            The the directories of the files relative to
-	 *            <code>resources/</code> and the names of the files for
-	 *            that code shall be generated as a {@link List} containing
+	 *            <code>resources/</code> and the names of the files for that
+	 *            code shall be generated as a {@link List} containing
 	 *            {@link String} arrays.
-	 * @throws Ocl2ParsingException
+	 * @throws ParseException
 	 * @throws ModelAccessException
 	 * @throws Ocl22CodeException
 	 */
 	protected void createInstrumentationCode(String targetBundleId,
-			List<String[]> fileNames) throws Ocl2ParsingException,
+			List<String[]> fileNames) throws ParseException,
 			ModelAccessException, Ocl22CodeException {
 
 		/* Get the bundle location for the model files. */

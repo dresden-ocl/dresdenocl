@@ -32,6 +32,8 @@
  */
 package tudresden.ocl20.pivot.parser.ui.internal.wizards;
 
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 
@@ -49,9 +51,9 @@ import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
 import tudresden.ocl20.pivot.modelbus.model.IModel;
 import tudresden.ocl20.pivot.modelbus.model.IModelRegistry;
 import tudresden.ocl20.pivot.modelbus.ui.ModelBusUIPlugin;
+import tudresden.ocl20.pivot.ocl2parser.parser.Ocl2Parser;
 import tudresden.ocl20.pivot.parser.IOclParser;
 import tudresden.ocl20.pivot.parser.ParseException;
-import tudresden.ocl20.pivot.parser.ParserPlugin;
 import tudresden.ocl20.pivot.parser.ui.ParserUIPlugin;
 import tudresden.ocl20.pivot.parser.ui.internal.ParserUIMessages;
 
@@ -67,8 +69,8 @@ import tudresden.ocl20.pivot.parser.ui.internal.ParserUIMessages;
 public class ParseOCLWizard extends Wizard implements IImportWizard {
 
 	/** The {@link Logger} for this class. */
-	private static final Logger LOGGER =
-			ParserUIPlugin.getLogger(ParseOCLWizard.class);
+	private static final Logger LOGGER = ParserUIPlugin
+			.getLogger(ParseOCLWizard.class);
 
 	/** The icon in the top right corner. */
 	private static final String WIZARD_IMAGE = "icons/ocl_wizard.png"; //$NON-NLS-1$
@@ -101,6 +103,7 @@ public class ParseOCLWizard extends Wizard implements IImportWizard {
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see org.eclipse.ui.IWorkbenchWizard#init(org.eclipse.ui.IWorkbench,
 	 * org.eclipse.jface.viewers.IStructuredSelection)
 	 */
@@ -114,6 +117,7 @@ public class ParseOCLWizard extends Wizard implements IImportWizard {
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see org.eclipse.jface.wizard.Wizard#performFinish()
 	 */
 	@Override
@@ -124,16 +128,18 @@ public class ParseOCLWizard extends Wizard implements IImportWizard {
 		IOclParser parser;
 		URL selectedURL;
 
-		parser = ParserPlugin.getParser(activeModel);
+		parser = Ocl2Parser.INSTANCE;
 
 		/* Try to parse the selected OCL file. */
 		try {
-			selectedURL = mySelectOCLFilePage.getSelectedOCLFile().toURI().toURL();
-			parser.parse(selectedURL);
+			selectedURL = mySelectOCLFilePage.getSelectedOCLFile().toURI()
+					.toURL();
+			parser.doParse(activeModel, new InputStreamReader(selectedURL
+					.openStream()));
 
 			/* Activate the Model Browser View. */
-			this.myWorkbench.getActiveWorkbenchWindow().getActivePage().showView(
-					ModelBusUIPlugin.MODELS_VIEW_ID);
+			this.myWorkbench.getActiveWorkbenchWindow().getActivePage()
+					.showView(ModelBusUIPlugin.MODELS_VIEW_ID);
 
 			result = true;
 		}
@@ -208,6 +214,26 @@ public class ParseOCLWizard extends Wizard implements IImportWizard {
 			throw new IllegalStateException(msg, e);
 		}
 
+		catch (IOException e) {
+			String msgTitle;
+			String msg;
+
+			msgTitle = ParserUIMessages.ParseOCLWizard_ErrorMessageDialogTitle;
+			msg = ParserUIMessages.ParseOCLWizard_UnexpectedError;
+
+			/* Display the message. */
+			MessageDialog.openError(getShell(), msgTitle, msg);
+
+			/* Log the error. */
+			LOGGER.error(msg, e);
+
+			/*
+			 * We need to re-throw a runtime exception or the wizard will close
+			 * afterwards.
+			 */
+			throw new IllegalStateException(msg, e);
+		}
+
 		/* This exception is thrown, if the Model Browser cannot be activated. */
 		catch (PartInitException e) {
 			/* Probably log the error. */
@@ -221,7 +247,10 @@ public class ParseOCLWizard extends Wizard implements IImportWizard {
 			}
 			// no else.
 
-			/* The activation of the model bus does not involve the parser's result. */
+			/*
+			 * The activation of the model bus does not involve the parser's
+			 * result.
+			 */
 			result = true;
 		}
 
@@ -230,6 +259,7 @@ public class ParseOCLWizard extends Wizard implements IImportWizard {
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see org.eclipse.jface.wizard.IWizard#addPages()
 	 */
 	@Override
@@ -241,6 +271,7 @@ public class ParseOCLWizard extends Wizard implements IImportWizard {
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see org.eclipse.jface.wizard.Wizard#canFinish()
 	 */
 	@Override

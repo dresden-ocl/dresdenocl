@@ -21,8 +21,8 @@ package tudresden.ocl20.pivot.ocl2parser.test.constrainttypes;
 
 import org.junit.Test;
 
-import tudresden.ocl20.pivot.ocl2parser.parser.exceptions.ParsingException;
 import tudresden.ocl20.pivot.ocl2parser.test.TestPerformer;
+import tudresden.ocl20.pivot.parser.ParseException;
 
 /**
  * <p>
@@ -174,7 +174,7 @@ public class TestDefinition {
 	 * A test case to parse an definition that should not be parsed appropriately.
 	 * </p>
 	 */
-	@Test(expected = ParsingException.class)
+	@Test(expected = ParseException.class)
 	public void testDefinitionNegative01() throws Exception {
 
 		TestPerformer testPerformer;
@@ -201,7 +201,7 @@ public class TestDefinition {
 	 * A test case to parse an definition that should not be parsed appropriately.
 	 * </p>
 	 */
-	@Test(expected = ParsingException.class)
+	@Test(expected = ParseException.class)
 	public void testDefinitionNegative02() throws Exception {
 
 		TestPerformer testPerformer;
@@ -228,7 +228,7 @@ public class TestDefinition {
 	 * A test case to parse an definition that should not be parsed appropriately.
 	 * </p>
 	 */
-	@Test(expected = ParsingException.class)
+	@Test(expected = ParseException.class)
 	public void testDefinitionNegative03() throws Exception {
 
 		TestPerformer testPerformer;
@@ -255,7 +255,7 @@ public class TestDefinition {
 	 * A test case to parse an definition that should not be parsed appropriately.
 	 * </p>
 	 */
-	@Test(expected = ParsingException.class)
+	@Test(expected = ParseException.class)
 	public void testDefinitionNegative04() throws Exception {
 
 		TestPerformer testPerformer;
@@ -282,7 +282,7 @@ public class TestDefinition {
 	 * A test case to parse an definition that should not be parsed appropriately.
 	 * </p>
 	 */
-	@Test(expected = ParsingException.class)
+	@Test(expected = ParseException.class)
 	public void testDefinitionNegative05() throws Exception {
 
 		TestPerformer testPerformer;
@@ -309,7 +309,7 @@ public class TestDefinition {
 	 * A test case to parse an definition that should not be parsed appropriately.
 	 * </p>
 	 */
-	@Test(expected = ParsingException.class)
+	@Test(expected = ParseException.class)
 	public void testDefinitionNegative06() throws Exception {
 	
 		TestPerformer testPerformer;
@@ -336,7 +336,7 @@ public class TestDefinition {
 	 * A test case to parse an definition that should not be parsed appropriately.
 	 * </p>
 	 */
-	@Test(expected = ParsingException.class)
+	@Test(expected = ParseException.class)
 	public void testDefinitionNegative07() throws Exception {
 	
 		TestPerformer testPerformer;

@@ -32,11 +32,11 @@
  */
 package tudresden.ocl20.pivot.parser;
 
-import java.net.URL;
-
-import org.apache.commons.lang.NullArgumentException;
+import java.io.Reader;
+import java.util.List;
 
 import tudresden.ocl20.pivot.modelbus.model.IModel;
+import tudresden.ocl20.pivot.pivotmodel.Constraint;
 
 /**
  * 
@@ -46,40 +46,50 @@ import tudresden.ocl20.pivot.modelbus.model.IModel;
  */
 public interface IOclParser {
 
-  /**
-   * Parses OCL expressions from the given <code>URL</code>. The URL should
-   * point to a file or other resource that can be interpreted by a parser
-   * implementing this interface.
-   * 
-   * @param url a <code>URL</code> from where to load OCL expressions
-   * 
-   * @throws ParseException when an error occurs, reasons include an invalid
-   *           URL, a malformed OCL expression or problems relating to the model
-   * @throws IllegalStateException if no model has been set yet
-   */
-  void parse(URL url) throws ParseException;
+	/**
+	 * <p>
+	 * Parses OCL expressions from the given {@link Reader} and adds them to the
+	 * given {@link IModel}. The {@link Reader} should point contain a file or
+	 * other resource that can be interpreted by a parser implementing this
+	 * interface.
+	 * </p>
+	 * 
+	 * @param model
+	 *            The {@link IModel} for that the OCL expressions shall be
+	 *            parsed.
+	 * @param reader
+	 *            A {@link Reader} from where to load OCL expressions.
+	 * 
+	 * @throws ParseException
+	 *             When an error occurs, reasons include an invalid URL, a
+	 *             malformed OCL expression or problems relating to the
+	 *             {@link IModel}.
+	 */
+	public List<Constraint> doParse(IModel model, Reader reader)
+			throws ParseException;
 
-  /**
-   * Returns the model this parser uses as a reference for evaluating OCL
-   * expressions. Returns <code>null</code> if no model has been set yet.
-   * 
-   * @return an <code>IModel</code> instance or <code>null</code>
-   */
-  IModel getModel();
-
-  /**
-   * Sets the {@link IModel model} to be used for evaluating expressions.
-   * 
-   * @param model the model, must not be <code>null</code>
-   * 
-   * @exception NullArgumentException if <code>model</code> is
-   *              <code>null</code>
-   */
-  void setModel(IModel model);
-
-  /**
-   * Dispose any resources held by this parser.
-   */
-  void dispose();
-
+	/**
+	 * <p>
+	 * Parses OCL expressions from the given {@link Reader} and adds them to the
+	 * given {@link IModel} if indicated (<code>addToModel</code>). The
+	 * {@link Reader} should point contain a file or other resource that can be
+	 * interpreted by a parser implementing this interface.
+	 * </p>
+	 * 
+	 * @param model
+	 *            The {@link IModel} for that the OCL expressions shall be
+	 *            parsed.
+	 * @param reader
+	 *            A {@link Reader} from where to load OCL expressions.
+	 * @param addToModel
+	 *            Indicates whether or not the parsed {@link Constraint}s, its
+	 *            defined fields and functions to the given {@link IModel}.
+	 * 
+	 * @throws ParseException
+	 *             When an error occurs, reasons include an invalid URL, a
+	 *             malformed OCL expression or problems relating to the
+	 *             {@link IModel}.
+	 */
+	public List<Constraint> doParse(IModel model, Reader reader,
+			boolean addToModel) throws ParseException;
 }

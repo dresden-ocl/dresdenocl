@@ -1,0 +1,10 @@
+package package1::package2
+
+/* Should fail. */
+context Type1
+inv invariant1: true
+inv invariant2: true
+/* Here, the parsing should fail. */
+inv invariant3: 'true'
+
+endpackage

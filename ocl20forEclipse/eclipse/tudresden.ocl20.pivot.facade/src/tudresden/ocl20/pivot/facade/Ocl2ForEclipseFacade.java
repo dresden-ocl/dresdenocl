@@ -21,7 +21,6 @@ package tudresden.ocl20.pivot.facade;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.IOException;
 import java.io.Reader;
 import java.io.StringReader;
 import java.net.URISyntaxException;
@@ -54,11 +53,8 @@ import tudresden.ocl20.pivot.ocl2java.IOcl22Code;
 import tudresden.ocl20.pivot.ocl2java.IOcl22CodeSettings;
 import tudresden.ocl20.pivot.ocl2java.Ocl22JavaFactory;
 import tudresden.ocl20.pivot.ocl2java.exception.Ocl22CodeException;
-import tudresden.ocl20.pivot.ocl2parser.parser.OCL2Parser;
-import tudresden.ocl20.pivot.ocl2parser.parser.exceptions.BuildingASTException;
-import tudresden.ocl20.pivot.ocl2parser.parser.exceptions.LexException;
-import tudresden.ocl20.pivot.ocl2parser.parser.exceptions.ParsingException;
-import tudresden.ocl20.pivot.ocl2parser.parser.exceptions.SemanticException;
+import tudresden.ocl20.pivot.ocl2parser.parser.Ocl2Parser;
+import tudresden.ocl20.pivot.parser.ParseException;
 import tudresden.ocl20.pivot.pivotmodel.Constraint;
 import tudresden.ocl20.pivot.pivotmodel.ConstraintKind;
 import tudresden.ocl20.pivot.pivotmodel.Operation;
@@ -81,15 +77,13 @@ public class Ocl2ForEclipseFacade {
 	public final static String ECORE_META_MODEL = EcoreMetamodelPlugin.ID;
 
 	/** The ID of the EMF Ecore {@link IModelInstanceType}. */
-	public final static String ECORE_MODEL_INSTANCE_TYPE =
-			EcoreModelInstanceTypePlugin.PLUGIN_ID;
+	public final static String ECORE_MODEL_INSTANCE_TYPE = EcoreModelInstanceTypePlugin.PLUGIN_ID;
 
 	/** The ID of the reflective Java {@link IMetamodel}. */
 	public final static String JAVA_META_MODEL = JavaMetaModelPlugin.ID;
 
 	/** The ID of the Java {@link IModelInstanceType}. */
-	public final static String JAVA_MODEL_INSTANCE_TYPE =
-			JavaModelInstanceTypePlugin.PLUGIN_ID;
+	public final static String JAVA_MODEL_INSTANCE_TYPE = JavaModelInstanceTypePlugin.PLUGIN_ID;
 
 	/** The ID of the Eclipse MDT UML2 {@link IMetamodel}. */
 	public final static String UML2_MetaModel = UML2MetamodelPlugin.ID;
@@ -99,40 +93,38 @@ public class Ocl2ForEclipseFacade {
 	 * {@link WeakHashMap}. If an {@link IModelInstance} becomes garbage, its
 	 * {@link IOclInterpreter} becomes garbage as well.
 	 */
-	private static Map<IModelInstance, IOclInterpreter> cachedInterpreters =
-			new WeakHashMap<IModelInstance, IOclInterpreter>();
+	private static Map<IModelInstance, IOclInterpreter> cachedInterpreters = new WeakHashMap<IModelInstance, IOclInterpreter>();
 
 	/**
 	 * Cached prepared {@link Constraint}s of interpreters for interpretation.
 	 * They are stored in a {@link WeakHashMap}. If an {@link IOclInterpreter}
 	 * becomes garbage, its {@link Constraint}s become garbage as well.
 	 */
-	private static Map<IOclInterpreter, Set<Constraint>> cachedPreparedConstraints =
-			new WeakHashMap<IOclInterpreter, Set<Constraint>>();
+	private static Map<IOclInterpreter, Set<Constraint>> cachedPreparedConstraints = new WeakHashMap<IOclInterpreter, Set<Constraint>>();
 
 	/** The {@link IOcl22Code} representing the Java/AspectJ code generator. */
 	private static IOcl22Code javaCodeGenerator = null;
 
 	/**
 	 * <p>
-	 * Generates the AspectJ code for a given {@link List} of {@link Constraint} s
-	 * and a given {@link IOcl22CodeSettings}.
+	 * Generates the AspectJ code for a given {@link List} of {@link Constraint}
+	 * s and a given {@link IOcl22CodeSettings}.
 	 * </p>
 	 * 
 	 * @param constraints
-	 *          The {@link Constraint}s used for code generation.
+	 *            The {@link Constraint}s used for code generation.
 	 * @param settings
-	 *          The {@link IOcl22CodeSettings} used for code generation (can be
-	 *          <code>null</code> if default settings shall be used).
+	 *            The {@link IOcl22CodeSettings} used for code generation (can
+	 *            be <code>null</code> if default settings shall be used).
 	 * @return The generated AspectJ code as a set of {@link String}s.
 	 * @throws IllegalArgumentException
-	 *           Thrown if the {@link List} of {@link Constraint}s is empty or
-	 *           <code>null</code>.
+	 *             Thrown if the {@link List} of {@link Constraint}s is empty or
+	 *             <code>null</code>.
 	 * @throws Ocl22CodeException
 	 */
-	public static List<String> generateAspectJCode(List<Constraint> constraints,
-			IOcl22CodeSettings settings) throws IllegalArgumentException,
-			Ocl22CodeException {
+	public static List<String> generateAspectJCode(
+			List<Constraint> constraints, IOcl22CodeSettings settings)
+			throws IllegalArgumentException, Ocl22CodeException {
 
 		if (constraints == null || constraints.size() == 0) {
 			throw new IllegalArgumentException(
@@ -141,8 +133,8 @@ public class Ocl2ForEclipseFacade {
 		// no else.
 
 		if (javaCodeGenerator == null) {
-			javaCodeGenerator =
-					Ocl22JavaFactory.getInstance().createJavaCodeGenerator();
+			javaCodeGenerator = Ocl22JavaFactory.getInstance()
+					.createJavaCodeGenerator();
 		}
 		// no else.
 
@@ -168,14 +160,14 @@ public class Ocl2ForEclipseFacade {
 	 * </p>
 	 * 
 	 * @param constraint
-	 *          The {@link Constraint} used for code generation.
+	 *            The {@link Constraint} used for code generation.
 	 * @param settings
-	 *          The {@link IOcl22CodeSettings} used for code generation (can be
-	 *          <code>null</code> if default settings shall be used).
+	 *            The {@link IOcl22CodeSettings} used for code generation (can
+	 *            be <code>null</code> if default settings shall be used).
 	 * @return The generated AspectJ code as a {@link String}s.
 	 * @throws IllegalArgumentException
-	 *           Thrown if the {@link List} of {@link Constraint}s is empty or
-	 *           <code>null</code>.
+	 *             Thrown if the {@link List} of {@link Constraint}s is empty or
+	 *             <code>null</code>.
 	 * @throws Ocl22CodeException
 	 */
 	public static String generateAspectJCode(Constraint constraint,
@@ -183,7 +175,8 @@ public class Ocl2ForEclipseFacade {
 			Ocl22CodeException {
 
 		if (constraint == null) {
-			throw new IllegalArgumentException("The constraint must not be null.");
+			throw new IllegalArgumentException(
+					"The constraint must not be null.");
 		}
 		// no else.
 
@@ -201,14 +194,14 @@ public class Ocl2ForEclipseFacade {
 	 * </p>
 	 * 
 	 * @param constraints
-	 *          The {@link Constraint}s used for code generation.
+	 *            The {@link Constraint}s used for code generation.
 	 * @param settings
-	 *          The {@link IOcl22CodeSettings} used for code generation (can be
-	 *          <code>null</code> if default settings shall be used).
+	 *            The {@link IOcl22CodeSettings} used for code generation (can
+	 *            be <code>null</code> if default settings shall be used).
 	 * @return The generated fragments as a set of {@link String}s.
 	 * @throws IllegalArgumentException
-	 *           Thrown if the {@link List} of {@link Constraint}s is empty or
-	 *           <code>null</code>.
+	 *             Thrown if the {@link List} of {@link Constraint}s is empty or
+	 *             <code>null</code>.
 	 * @throws Ocl22CodeException
 	 */
 	public static List<String> generateJavaFragmentCode(
@@ -222,8 +215,8 @@ public class Ocl2ForEclipseFacade {
 		// no else.
 
 		if (javaCodeGenerator == null) {
-			javaCodeGenerator =
-					Ocl22JavaFactory.getInstance().createJavaCodeGenerator();
+			javaCodeGenerator = Ocl22JavaFactory.getInstance()
+					.createJavaCodeGenerator();
 		}
 		// no else.
 
@@ -244,19 +237,19 @@ public class Ocl2ForEclipseFacade {
 
 	/**
 	 * <p>
-	 * Generates the Java fragment code for a given {@link Constraint} and a given
-	 * {@link IOcl22CodeSettings}.
+	 * Generates the Java fragment code for a given {@link Constraint} and a
+	 * given {@link IOcl22CodeSettings}.
 	 * </p>
 	 * 
 	 * @param constraint
-	 *          The {@link Constraint} used for code generation.
+	 *            The {@link Constraint} used for code generation.
 	 * @param settings
-	 *          The {@link IOcl22CodeSettings} used for code generation (can be
-	 *          <code>null</code> if default settings shall be used).
+	 *            The {@link IOcl22CodeSettings} used for code generation (can
+	 *            be <code>null</code> if default settings shall be used).
 	 * @return The generated fragment as a {@link String}s.
 	 * @throws IllegalArgumentException
-	 *           Thrown if the {@link List} of {@link Constraint}s is empty or
-	 *           <code>null</code>.
+	 *             Thrown if the {@link List} of {@link Constraint}s is empty or
+	 *             <code>null</code>.
 	 * @throws Ocl22CodeException
 	 */
 	public static String generateJavaFragmentCode(Constraint constraint,
@@ -264,7 +257,8 @@ public class Ocl2ForEclipseFacade {
 			Ocl22CodeException {
 
 		if (constraint == null) {
-			throw new IllegalArgumentException("The constraint must not be null.");
+			throw new IllegalArgumentException(
+					"The constraint must not be null.");
 		}
 		// no else.
 
@@ -277,12 +271,12 @@ public class Ocl2ForEclipseFacade {
 
 	/**
 	 * <p>
-	 * Returns an {@link IOcl22CodeSettings} instance to configure Java or AspectJ
-	 * code generation.
+	 * Returns an {@link IOcl22CodeSettings} instance to configure Java or
+	 * AspectJ code generation.
 	 * </p>
 	 * 
-	 * @return An {@link IOcl22CodeSettings} instance to configure Java or AspectJ
-	 *         code generation.
+	 * @return An {@link IOcl22CodeSettings} instance to configure Java or
+	 *         AspectJ code generation.
 	 */
 	public static IOcl22CodeSettings getJavaCodeGeneratorSettings() {
 
@@ -296,18 +290,19 @@ public class Ocl2ForEclipseFacade {
 	 * </p>
 	 * 
 	 * @param id
-	 *          The ID of the {@link IMetamodel} that shall be returned. Use the
-	 *          provided constants, if the id of the {@link IMetamodel} is
-	 *          unknown.
+	 *            The ID of the {@link IMetamodel} that shall be returned. Use
+	 *            the provided constants, if the id of the {@link IMetamodel} is
+	 *            unknown.
 	 * @return The {@link IMetamodel} of the given id.
 	 * @throws IllegalArgumentException
-	 *           Thrown if the given ID does not exists.
+	 *             Thrown if the given ID does not exists.
 	 */
 	public static IMetamodel getMetaModel(String id)
 			throws IllegalArgumentException {
 
 		if (id == null) {
-			throw new IllegalArgumentException("Parameter 'id' must not be null.");
+			throw new IllegalArgumentException(
+					"Parameter 'id' must not be null.");
 		}
 		// no else.
 
@@ -315,8 +310,8 @@ public class Ocl2ForEclipseFacade {
 		result = ModelBusPlugin.getMetamodelRegistry().getMetamodel(id);
 
 		if (result == null) {
-			throw new IllegalArgumentException("A MetaModel for the given id '" + id
-					+ "' does not exist.");
+			throw new IllegalArgumentException("A MetaModel for the given id '"
+					+ id + "' does not exist.");
 		}
 		// no else.
 
@@ -342,20 +337,21 @@ public class Ocl2ForEclipseFacade {
 	 * </p>
 	 * 
 	 * @param file
-	 *          The {@link File} that shall be loaded.
+	 *            The {@link File} that shall be loaded.
 	 * @param metaModel
-	 *          The {@link IMetamodel} of the {@link IModel}.
+	 *            The {@link IMetamodel} of the {@link IModel}.
 	 * @return The loaded {@link IModel}.
 	 * @throws ModelAccessException
-	 *           Thrown, if the given location can not be loaded.
+	 *             Thrown, if the given location can not be loaded.
 	 * @throws IllegalArgumentException
-	 *           Thrown if the parameters are invalid.
+	 *             Thrown if the parameters are invalid.
 	 */
 	public static IModel getModel(File file, IMetamodel metaModel)
 			throws ModelAccessException, IllegalArgumentException {
 
 		if (file == null) {
-			throw new IllegalArgumentException("Parameter 'file' must not be null.");
+			throw new IllegalArgumentException(
+					"Parameter 'file' must not be null.");
 		}
 
 		else if (metaModel == null) {
@@ -384,21 +380,22 @@ public class Ocl2ForEclipseFacade {
 	 * </p>
 	 * 
 	 * @param file
-	 *          The {@link File} of the file that shall be loaded.
+	 *            The {@link File} of the file that shall be loaded.
 	 * @param metaModelID
-	 *          The ID of {@link IMetamodel} of the {@link IModel}.
+	 *            The ID of {@link IMetamodel} of the {@link IModel}.
 	 * @return The loaded {@link IModel}.
 	 * @throws ModelAccessException
-	 *           Thrown, if the given location can not be loaded.
+	 *             Thrown, if the given location can not be loaded.
 	 * @throws IllegalArgumentException
-	 *           Thrown if the parameters are invalid or the given ID does not
-	 *           identify an {@link IMetamodel}.
+	 *             Thrown if the parameters are invalid or the given ID does not
+	 *             identify an {@link IMetamodel}.
 	 */
 	public static IModel getModel(File file, String metaModelID)
 			throws ModelAccessException, IllegalArgumentException {
 
 		if (file == null) {
-			throw new IllegalArgumentException("Parameter 'file' must not be null.");
+			throw new IllegalArgumentException(
+					"Parameter 'file' must not be null.");
 		}
 
 		else if (metaModelID == null) {
@@ -421,14 +418,14 @@ public class Ocl2ForEclipseFacade {
 	 * </p>
 	 * 
 	 * @param location
-	 *          The location of the file that shall be loaded.
+	 *            The location of the file that shall be loaded.
 	 * @param metaModel
-	 *          The {@link IMetamodel} of the {@link IModel}.
+	 *            The {@link IMetamodel} of the {@link IModel}.
 	 * @return The loaded {@link IModel}.
 	 * @throws ModelAccessException
-	 *           Thrown, if the given location can not be loaded.
+	 *             Thrown, if the given location can not be loaded.
 	 * @throws IllegalArgumentException
-	 *           Thrown if the parameters are invalid.
+	 *             Thrown if the parameters are invalid.
 	 */
 	public static IModel getModel(URL location, IMetamodel metaModel)
 			throws ModelAccessException, IllegalArgumentException {
@@ -464,15 +461,15 @@ public class Ocl2ForEclipseFacade {
 	 * </p>
 	 * 
 	 * @param location
-	 *          The location of the file that shall be loaded.
+	 *            The location of the file that shall be loaded.
 	 * @param metaModelID
-	 *          The ID of {@link IMetamodel} of the {@link IModel}.
+	 *            The ID of {@link IMetamodel} of the {@link IModel}.
 	 * @return The loaded {@link IModel}.
 	 * @throws ModelAccessException
-	 *           Thrown, if the given location can not be loaded.
+	 *             Thrown, if the given location can not be loaded.
 	 * @throws IllegalArgumentException
-	 *           Thrown if the parameters are invalid or the given ID does not
-	 *           identify an {@link IMetamodel}.
+	 *             Thrown if the parameters are invalid or the given ID does not
+	 *             identify an {@link IMetamodel}.
 	 */
 	public static IModel getModel(URL location, String metaModelID)
 			throws ModelAccessException, IllegalArgumentException {
@@ -490,7 +487,8 @@ public class Ocl2ForEclipseFacade {
 
 		IModel result;
 
-		result = getMetaModel(metaModelID).getModelProvider().getModel(location);
+		result = getMetaModel(metaModelID).getModelProvider()
+				.getModel(location);
 
 		return result;
 	}
@@ -502,21 +500,22 @@ public class Ocl2ForEclipseFacade {
 	 * </p>
 	 * 
 	 * @param model
-	 *          The {@link IModel} of the {@link IModelInstance}.
+	 *            The {@link IModel} of the {@link IModelInstance}.
 	 * @param modelInstanceType
-	 *          The {@link IModelInstanceType} of the {@link IModelInstance}.
+	 *            The {@link IModelInstanceType} of the {@link IModelInstance}.
 	 * @return The created empty {@link IModelInstance}.
 	 * @throws ModelAccessException
-	 *           Thrown, if the given location can not be loaded.
+	 *             Thrown, if the given location can not be loaded.
 	 * @throws IllegalArgumentException
-	 *           Thrown if the parameters are invalid.
+	 *             Thrown if the parameters are invalid.
 	 */
 	public static IModelInstance getEmptyModelInstance(IModel model,
 			IModelInstanceType modelInstanceType) throws ModelAccessException,
 			IllegalArgumentException {
 
 		if (model == null) {
-			throw new IllegalArgumentException("Parameter 'model' must not be null.");
+			throw new IllegalArgumentException(
+					"Parameter 'model' must not be null.");
 		}
 
 		else if (modelInstanceType == null) {
@@ -534,9 +533,8 @@ public class Ocl2ForEclipseFacade {
 
 		IModelInstance result;
 
-		result =
-				modelInstanceType.getModelInstanceProvider().createEmptyModelInstance(
-						model);
+		result = modelInstanceType.getModelInstanceProvider()
+				.createEmptyModelInstance(model);
 
 		return result;
 	}
@@ -548,22 +546,23 @@ public class Ocl2ForEclipseFacade {
 	 * </p>
 	 * 
 	 * @param model
-	 *          The {@link IModel} of the {@link IModelInstance}.
+	 *            The {@link IModel} of the {@link IModelInstance}.
 	 * @param modelInstanceTypeID
-	 *          The id of the {@link IModelInstanceType} of the
-	 *          {@link IModelInstance}.
+	 *            The id of the {@link IModelInstanceType} of the
+	 *            {@link IModelInstance}.
 	 * @return The created empty {@link IModelInstance}.
 	 * @throws ModelAccessException
-	 *           Thrown, if the given location can not be loaded.
+	 *             Thrown, if the given location can not be loaded.
 	 * @throws IllegalArgumentException
-	 *           Thrown if the parameters are invalid.
+	 *             Thrown if the parameters are invalid.
 	 */
 	public static IModelInstance getEmptyModelInstance(IModel model,
 			String modelInstanceTypeID) throws ModelAccessException,
 			IllegalArgumentException {
 
 		if (model == null) {
-			throw new IllegalArgumentException("Parameter 'model' must not be null.");
+			throw new IllegalArgumentException(
+					"Parameter 'model' must not be null.");
 		}
 		// no else.
 
@@ -572,9 +571,8 @@ public class Ocl2ForEclipseFacade {
 
 		IModelInstance result;
 
-		result =
-				modelInstanceType.getModelInstanceProvider().createEmptyModelInstance(
-						model);
+		result = modelInstanceType.getModelInstanceProvider()
+				.createEmptyModelInstance(model);
 
 		return result;
 	}
@@ -586,27 +584,29 @@ public class Ocl2ForEclipseFacade {
 	 * </p>
 	 * 
 	 * @param file
-	 *          The {@link File} that shall be loaded.
+	 *            The {@link File} that shall be loaded.
 	 * @param model
-	 *          The {@link IModel} of the {@link IModelInstance}.
+	 *            The {@link IModel} of the {@link IModelInstance}.
 	 * @param modelInstanceType
-	 *          The {@link IModelInstanceType} of the {@link IModelInstance}.
+	 *            The {@link IModelInstanceType} of the {@link IModelInstance}.
 	 * @return The loaded {@link IModelInstance}.
 	 * @throws ModelAccessException
-	 *           Thrown, if the given location can not be loaded.
+	 *             Thrown, if the given location can not be loaded.
 	 * @throws IllegalArgumentException
-	 *           Thrown if the parameters are invalid.
+	 *             Thrown if the parameters are invalid.
 	 */
 	public static IModelInstance getModelInstance(File file, IModel model,
 			IModelInstanceType modelInstanceType) throws ModelAccessException,
 			IllegalArgumentException {
 
 		if (file == null) {
-			throw new IllegalArgumentException("Parameter 'file' must not be null.");
+			throw new IllegalArgumentException(
+					"Parameter 'file' must not be null.");
 		}
 
 		else if (model == null) {
-			throw new IllegalArgumentException("Parameter 'model' must not be null.");
+			throw new IllegalArgumentException(
+					"Parameter 'model' must not be null.");
 		}
 
 		else if (modelInstanceType == null) {
@@ -624,9 +624,8 @@ public class Ocl2ForEclipseFacade {
 
 		IModelInstance result;
 
-		result =
-				modelInstanceType.getModelInstanceProvider().getModelInstance(file,
-						model);
+		result = modelInstanceType.getModelInstanceProvider().getModelInstance(
+				file, model);
 
 		return result;
 	}
@@ -638,28 +637,30 @@ public class Ocl2ForEclipseFacade {
 	 * </p>
 	 * 
 	 * @param file
-	 *          The {@link File} that shall be loaded.
+	 *            The {@link File} that shall be loaded.
 	 * @param model
-	 *          The {@link IModel} of the {@link IModelInstance}.
+	 *            The {@link IModel} of the {@link IModelInstance}.
 	 * @param modelInstanceTypeID
-	 *          The id of the {@link IModelInstanceType} of the
-	 *          {@link IModelInstance}.
+	 *            The id of the {@link IModelInstanceType} of the
+	 *            {@link IModelInstance}.
 	 * @return The loaded {@link IModelInstance}.
 	 * @throws ModelAccessException
-	 *           Thrown, if the given location can not be loaded.
+	 *             Thrown, if the given location can not be loaded.
 	 * @throws IllegalArgumentException
-	 *           Thrown if the parameters are invalid.
+	 *             Thrown if the parameters are invalid.
 	 */
 	public static IModelInstance getModelInstance(File file, IModel model,
 			String modelInstanceTypeID) throws ModelAccessException,
 			IllegalArgumentException {
 
 		if (file == null) {
-			throw new IllegalArgumentException("Parameter 'file' must not be null.");
+			throw new IllegalArgumentException(
+					"Parameter 'file' must not be null.");
 		}
 
 		else if (model == null) {
-			throw new IllegalArgumentException("Parameter 'model' must not be null.");
+			throw new IllegalArgumentException(
+					"Parameter 'model' must not be null.");
 		}
 		// no else.
 
@@ -668,9 +669,8 @@ public class Ocl2ForEclipseFacade {
 
 		IModelInstance result;
 
-		result =
-				modelInstanceType.getModelInstanceProvider().getModelInstance(file,
-						model);
+		result = modelInstanceType.getModelInstanceProvider().getModelInstance(
+				file, model);
 
 		return result;
 	}
@@ -682,16 +682,16 @@ public class Ocl2ForEclipseFacade {
 	 * </p>
 	 * 
 	 * @param location
-	 *          The location of the {@link File} that shall be loaded.
+	 *            The location of the {@link File} that shall be loaded.
 	 * @param model
-	 *          The {@link IModel} of the {@link IModelInstance}.
+	 *            The {@link IModel} of the {@link IModelInstance}.
 	 * @param modelInstanceType
-	 *          The {@link IModelInstanceType} of the {@link IModelInstance}.
+	 *            The {@link IModelInstanceType} of the {@link IModelInstance}.
 	 * @return The loaded {@link IModelInstance}.
 	 * @throws ModelAccessException
-	 *           Thrown, if the given location can not be loaded.
+	 *             Thrown, if the given location can not be loaded.
 	 * @throws IllegalArgumentException
-	 *           Thrown if the parameters are invalid.
+	 *             Thrown if the parameters are invalid.
 	 */
 	public static IModelInstance getModelInstance(URL location, IModel model,
 			IModelInstanceType modelInstanceType) throws ModelAccessException,
@@ -703,7 +703,8 @@ public class Ocl2ForEclipseFacade {
 		}
 
 		else if (model == null) {
-			throw new IllegalArgumentException("Parameter 'model' must not be null.");
+			throw new IllegalArgumentException(
+					"Parameter 'model' must not be null.");
 		}
 
 		else if (modelInstanceType == null) {
@@ -721,9 +722,8 @@ public class Ocl2ForEclipseFacade {
 
 		IModelInstance result;
 
-		result =
-				modelInstanceType.getModelInstanceProvider().getModelInstance(location,
-						model);
+		result = modelInstanceType.getModelInstanceProvider().getModelInstance(
+				location, model);
 
 		return result;
 	}
@@ -735,17 +735,17 @@ public class Ocl2ForEclipseFacade {
 	 * </p>
 	 * 
 	 * @param location
-	 *          The location of the {@link File} that shall be loaded.
+	 *            The location of the {@link File} that shall be loaded.
 	 * @param model
-	 *          The {@link IModel} of the {@link IModelInstance}.
+	 *            The {@link IModel} of the {@link IModelInstance}.
 	 * @param modelInstanceTypeID
-	 *          The id of the {@link IModelInstanceType} of the
-	 *          {@link IModelInstance}.
+	 *            The id of the {@link IModelInstanceType} of the
+	 *            {@link IModelInstance}.
 	 * @return The loaded {@link IModelInstance}.
 	 * @throws ModelAccessException
-	 *           Thrown, if the given location can not be loaded.
+	 *             Thrown, if the given location can not be loaded.
 	 * @throws IllegalArgumentException
-	 *           Thrown if the parameters are invalid.
+	 *             Thrown if the parameters are invalid.
 	 */
 	public static IModelInstance getModelInstance(URL location, IModel model,
 			String modelInstanceTypeID) throws ModelAccessException,
@@ -757,7 +757,8 @@ public class Ocl2ForEclipseFacade {
 		}
 
 		else if (model == null) {
-			throw new IllegalArgumentException("Parameter 'model' must not be null.");
+			throw new IllegalArgumentException(
+					"Parameter 'model' must not be null.");
 		}
 
 		IModelInstanceType modelInstanceType;
@@ -765,17 +766,16 @@ public class Ocl2ForEclipseFacade {
 
 		IModelInstance result;
 
-		result =
-				modelInstanceType.getModelInstanceProvider().getModelInstance(location,
-						model);
+		result = modelInstanceType.getModelInstanceProvider().getModelInstance(
+				location, model);
 
 		return result;
 	}
 
 	/**
 	 * <p>
-	 * Returns a {@link Set} containing all {@link IModelInstanceType}s of Dresden
-	 * OCL2 for Eclipse.
+	 * Returns a {@link Set} containing all {@link IModelInstanceType}s of
+	 * Dresden OCL2 for Eclipse.
 	 * </p>
 	 */
 	public static Set<IModelInstanceType> getModelInstanceTypes() {
@@ -791,28 +791,30 @@ public class Ocl2ForEclipseFacade {
 	 * </p>
 	 * 
 	 * @param id
-	 *          The ID of the {@link IModelInstanceType} that shall be returned.
-	 *          Use the provided constants, if the id of the
-	 *          {@link IModelInstanceType} is unknown.
+	 *            The ID of the {@link IModelInstanceType} that shall be
+	 *            returned. Use the provided constants, if the id of the
+	 *            {@link IModelInstanceType} is unknown.
 	 * @return The {@link IModelInstanceType} of the given id.
 	 * @throws IllegalArgumentException
-	 *           Thrown if the given ID does not exists.
+	 *             Thrown if the given ID does not exists.
 	 */
 	public static IModelInstanceType getModelInstanceType(String id)
 			throws IllegalArgumentException {
 
 		if (id == null) {
-			throw new IllegalArgumentException("Parameter 'id' must not be null.");
+			throw new IllegalArgumentException(
+					"Parameter 'id' must not be null.");
 		}
 		// no else.
 
 		IModelInstanceType result;
-		result =
-				ModelBusPlugin.getModelInstanceTypeRegistry().getModelInstanceType(id);
+		result = ModelBusPlugin.getModelInstanceTypeRegistry()
+				.getModelInstanceType(id);
 
 		if (result == null) {
 			throw new IllegalArgumentException(
-					"A ModelInstanceType for the given id '" + id + "' does not exist.");
+					"A ModelInstanceType for the given id '" + id
+							+ "' does not exist.");
 		}
 		// no else.
 
@@ -826,22 +828,23 @@ public class Ocl2ForEclipseFacade {
 	 * </p>
 	 * 
 	 * @param constraint
-	 *          The {@link Constraint} to be interpreted.
+	 *            The {@link Constraint} to be interpreted.
 	 * @param modelInstance
-	 *          The {@link IModelInstance} the {@link IModelInstanceElement}
-	 *          belongs to.
+	 *            The {@link IModelInstance} the {@link IModelInstanceElement}
+	 *            belongs to.
 	 * @param modelInstanceElement
-	 *          The {@link IModelInstanceElement} representing the current object.
+	 *            The {@link IModelInstanceElement} representing the current
+	 *            object.
 	 * 
 	 * @return The {@link IInterpretationResult} of the interpretation or
-	 *         <code>null</code> if the given {@link Constraint} cannot be checked
-	 *         for the given {@link IModelInstanceElement} (wrong {@link Type} of
-	 *         {@link IModelInstanceElement}).
+	 *         <code>null</code> if the given {@link Constraint} cannot be
+	 *         checked for the given {@link IModelInstanceElement} (wrong
+	 *         {@link Type} of {@link IModelInstanceElement}).
 	 * @throws IllegalArgumentException
-	 *           Thrown, if at least one parameter is invalid.
+	 *             Thrown, if at least one parameter is invalid.
 	 * @throws ModelAccessException
-	 *           Thrown, if the given {@link IModelInstance} is in an invalid
-	 *           state.
+	 *             Thrown, if the given {@link IModelInstance} is in an invalid
+	 *             state.
 	 */
 	public static IInterpretationResult interpretConstraint(
 			Constraint constraint, IModelInstance modelInstance,
@@ -876,19 +879,20 @@ public class Ocl2ForEclipseFacade {
 			interpreter = OclInterpreterPlugin.createInterpreter(modelInstance);
 			cachedInterpreters.put(modelInstance, interpreter);
 
-			cachedPreparedConstraints.put(interpreter, new HashSet<Constraint>());
+			cachedPreparedConstraints.put(interpreter,
+					new HashSet<Constraint>());
 		}
 
 		/*
-		 * FIXME Claas: Probably move this into the interpreter. Probably make this
-		 * part more intelligent.
+		 * FIXME Claas: Probably move this into the interpreter. Probably make
+		 * this part more intelligent.
 		 */
 		interpreter.getEnvironment().clearPreparedConstraints();
 
 		/* Prepare body, derive, init expressions and definitions. */
 		/* FIXME Claas: Probably hide this behavior inside the interpreter. */
-		Set<Constraint> preparationCandidates =
-				new HashSet<Constraint>(modelInstance.getModel().getConstraints());
+		Set<Constraint> preparationCandidates = new HashSet<Constraint>(
+				modelInstance.getModel().getConstraints());
 
 		/* Probably remove already prepared constraints to improve performance. */
 		if (cachedPreparedConstraints.containsKey(interpreter)) {
@@ -916,8 +920,8 @@ public class Ocl2ForEclipseFacade {
 		// end for.
 
 		/*
-		 * Store all prepared constraints (and constraints that do not have to be
-		 * prepared as well).
+		 * Store all prepared constraints (and constraints that do not have to
+		 * be prepared as well).
 		 */
 		if (preparationCandidates.size() > 0) {
 			Set<Constraint> preparedConstraints;
@@ -931,7 +935,8 @@ public class Ocl2ForEclipseFacade {
 		/* Prepare the constraint to be interpreted. */
 		interpreter.prepareConstraint(constraint, modelInstanceElement);
 
-		result = interpreter.interpretConstraint(constraint, modelInstanceElement);
+		result = interpreter.interpretConstraint(constraint,
+				modelInstanceElement);
 
 		return result;
 	}
@@ -943,20 +948,21 @@ public class Ocl2ForEclipseFacade {
 	 * </p>
 	 * 
 	 * @param constraints
-	 *          The {@link Constraint}s to be interpreted.
+	 *            The {@link Constraint}s to be interpreted.
 	 * @param modelInstance
-	 *          The {@link IModelInstance} the {@link IModelInstanceElement}
-	 *          belongs to.
+	 *            The {@link IModelInstance} the {@link IModelInstanceElement}
+	 *            belongs to.
 	 * @param modelInstanceElement
-	 *          The {@link IModelInstanceElement} representing the current object.
+	 *            The {@link IModelInstanceElement} representing the current
+	 *            object.
 	 * 
-	 * @return A {@link List} containing the {@link IInterpretationResult} of the
-	 *         interpretation as {@link OclRoot}s.
+	 * @return A {@link List} containing the {@link IInterpretationResult} of
+	 *         the interpretation as {@link OclRoot}s.
 	 * @throws IllegalArgumentException
-	 *           Thrown, if at least one parameter is invalid.
+	 *             Thrown, if at least one parameter is invalid.
 	 * @throws ModelAccessException
-	 *           Thrown, if the given {@link IModelInstance} is in an invalid
-	 *           state.
+	 *             Thrown, if the given {@link IModelInstance} is in an invalid
+	 *             state.
 	 */
 	public static List<IInterpretationResult> interpretConstraints(
 			Collection<Constraint> constraints, IModelInstance modelInstance,
@@ -974,8 +980,8 @@ public class Ocl2ForEclipseFacade {
 
 		for (Constraint constraint : constraints) {
 			IInterpretationResult aResult;
-			aResult =
-					interpretConstraint(constraint, modelInstance, modelInstanceElement);
+			aResult = interpretConstraint(constraint, modelInstance,
+					modelInstanceElement);
 
 			if (aResult != null) {
 				result.add(aResult);
@@ -994,40 +1000,43 @@ public class Ocl2ForEclipseFacade {
 	 * 
 	 * <p>
 	 * <strong>Please be aware, that some postconditions must be prepared before
-	 * their constrained {@link Operation} is invoked to save some values such as
-	 * <code>@pre</code> values!</strong> Use the method
+	 * their constrained {@link Operation} is invoked to save some values such
+	 * as <code>@pre</code> values!</strong> Use the method
 	 * {@link Ocl2ForEclipseFacade#preparePostConditions(IModelInstance, IModelInstanceElement, Operation, IModelInstanceElement[], Collection)}
 	 * to prepare postconditions.
 	 * </p>
 	 * 
 	 * @param modelInstance
-	 *          The {@link IModelInstance} the {@link IModelInstanceElement}
-	 *          belongs to.
+	 *            The {@link IModelInstance} the {@link IModelInstanceElement}
+	 *            belongs to.
 	 * @param modelInstanceElement
-	 *          The {@link IModelInstanceElement} on that the {@link Operation}
-	 *          shall be invoked.
+	 *            The {@link IModelInstanceElement} on that the
+	 *            {@link Operation} shall be invoked.
 	 * @param operation
-	 *          The {@link Operation} that shall be invoked.
+	 *            The {@link Operation} that shall be invoked.
 	 * @param parameters
-	 *          The values of the {@link Operation}'s {@link Parameter}s as a
-	 *          {@link List} of {@link IModelInstanceElement} values.
+	 *            The values of the {@link Operation}'s {@link Parameter}s as a
+	 *            {@link List} of {@link IModelInstanceElement} values.
 	 * @param resultValue
-	 *          The result of the {@link Operation}'s invocation or
-	 *          <code>null</code> if no result has been returned (e.g., a void
-	 *          {@link Operation}).
+	 *            The result of the {@link Operation}'s invocation or
+	 *            <code>null</code> if no result has been returned (e.g., a void
+	 *            {@link Operation}).
 	 * @param postConditions
-	 *          The postconditions that shall be interpreted. <b>Attention:</b> if
-	 *          this {@link Collection} contains {@link Constraint}s of the
-	 *          {@link ConstraintKind} that is different than
-	 *          {@link ConstraintKind#POSTCONDITION} they will not be interpreted.
+	 *            The postconditions that shall be interpreted.
+	 *            <b>Attention:</b> if this {@link Collection} contains
+	 *            {@link Constraint}s of the {@link ConstraintKind} that is
+	 *            different than {@link ConstraintKind#POSTCONDITION} they will
+	 *            not be interpreted.
 	 * @return A {@link List} of {@link IInterpretationResult}s.
 	 * @throws IllegalArgumentException
-	 *           Thrown, if at least one parameter is invalid.
+	 *             Thrown, if at least one parameter is invalid.
 	 */
 	public static List<IInterpretationResult> interpretPostConditions(
-			IModelInstance modelInstance, IModelInstanceElement modelInstanceElement,
-			Operation operation, List<IModelInstanceElement> parameters,
-			IModelInstanceElement resultValue, Collection<Constraint> postConditions)
+			IModelInstance modelInstance,
+			IModelInstanceElement modelInstanceElement, Operation operation,
+			List<IModelInstanceElement> parameters,
+			IModelInstanceElement resultValue,
+			Collection<Constraint> postConditions)
 			throws IllegalArgumentException {
 
 		if (modelInstance == null) {
@@ -1069,10 +1078,9 @@ public class Ocl2ForEclipseFacade {
 			cachedInterpreters.put(modelInstance, interpreter);
 		}
 
-		result =
-				interpreter.interpretPostConditions(modelInstanceElement, operation,
-						parameters.toArray(new IModelInstanceElement[0]), resultValue,
-						postConditions);
+		result = interpreter.interpretPostConditions(modelInstanceElement,
+				operation, parameters.toArray(new IModelInstanceElement[0]),
+				resultValue, postConditions);
 
 		return result;
 	}
@@ -1083,29 +1091,32 @@ public class Ocl2ForEclipseFacade {
 	 * </p>
 	 * 
 	 * @param modelInstance
-	 *          The {@link IModelInstance} the {@link IModelInstanceElement}
-	 *          belongs to.
+	 *            The {@link IModelInstance} the {@link IModelInstanceElement}
+	 *            belongs to.
 	 * @param modelInstanceElement
-	 *          The {@link IModelInstanceElement} on that the {@link Operation}
-	 *          shall be invoked.
+	 *            The {@link IModelInstanceElement} on that the
+	 *            {@link Operation} shall be invoked.
 	 * @param operation
-	 *          The {@link Operation} that shall be invoked.
+	 *            The {@link Operation} that shall be invoked.
 	 * @param parameters
-	 *          The values of the {@link Operation}'s {@link Parameter}s as a
-	 *          {@link List} of {@link IModelInstanceElement} values.
+	 *            The values of the {@link Operation}'s {@link Parameter}s as a
+	 *            {@link List} of {@link IModelInstanceElement} values.
 	 * @param preConditions
-	 *          The preconditions that shall be interpreted. <b>Attention:</b> if
-	 *          this {@link Collection} contains {@link Constraint}s of the
-	 *          {@link ConstraintKind} that is different than
-	 *          {@link ConstraintKind#PRECONDITION} they will not be interpreted.
+	 *            The preconditions that shall be interpreted. <b>Attention:</b>
+	 *            if this {@link Collection} contains {@link Constraint}s of the
+	 *            {@link ConstraintKind} that is different than
+	 *            {@link ConstraintKind#PRECONDITION} they will not be
+	 *            interpreted.
 	 * @return A {@link List} of {@link IInterpretationResult}s.
 	 * @throws IllegalArgumentException
-	 *           Thrown, if at least one parameter is invalid.
+	 *             Thrown, if at least one parameter is invalid.
 	 */
 	public static List<IInterpretationResult> interpretPreConditions(
-			IModelInstance modelInstance, IModelInstanceElement modelInstanceElement,
-			Operation operation, List<IModelInstanceElement> parameters,
-			Collection<Constraint> preConditions) throws IllegalArgumentException {
+			IModelInstance modelInstance,
+			IModelInstanceElement modelInstanceElement, Operation operation,
+			List<IModelInstanceElement> parameters,
+			Collection<Constraint> preConditions)
+			throws IllegalArgumentException {
 
 		if (modelInstance == null) {
 			throw new IllegalArgumentException(
@@ -1146,9 +1157,9 @@ public class Ocl2ForEclipseFacade {
 			cachedInterpreters.put(modelInstance, interpreter);
 		}
 
-		result =
-				interpreter.interpretPreConditions(modelInstanceElement, operation,
-						parameters.toArray(new IModelInstanceElement[0]), preConditions);
+		result = interpreter.interpretPreConditions(modelInstanceElement,
+				operation, parameters.toArray(new IModelInstanceElement[0]),
+				preConditions);
 
 		return result;
 	}
@@ -1159,11 +1170,11 @@ public class Ocl2ForEclipseFacade {
 	 * </p>
 	 * 
 	 * @param model
-	 *          The {@link IModel} that shall be removed.
+	 *            The {@link IModel} that shall be removed.
 	 * 
 	 * @return <code>true</code> if the given {@link IModel} has been removed.
 	 * @throws IllegalArgumentException
-	 *           Thrown, if the given parameter is invalid.
+	 *             Thrown, if the given parameter is invalid.
 	 */
 	public static boolean removeModel(IModel model)
 			throws IllegalArgumentException {
@@ -1177,12 +1188,12 @@ public class Ocl2ForEclipseFacade {
 	 * </p>
 	 * 
 	 * @param modelInstance
-	 *          The {@link IModelInstance} that shall be removed.
+	 *            The {@link IModelInstance} that shall be removed.
 	 * 
 	 * @return <code>true</code> if the given {@link IModelInstance} has been
 	 *         removed.
 	 * @throws IllegalArgumentException
-	 *           Thrown, if the given parameter is invalid.
+	 *             Thrown, if the given parameter is invalid.
 	 */
 	public static boolean removeModelInstance(IModelInstance modelInstance)
 			throws IllegalArgumentException {
@@ -1198,25 +1209,22 @@ public class Ocl2ForEclipseFacade {
 	 * </p>
 	 * 
 	 * @param file
-	 *          The {@link File} providing the {@link File} or Stream to be
-	 *          parsed.
+	 *            The {@link File} providing the {@link File} or Stream to be
+	 *            parsed.
 	 * @param model
-	 *          The {@link IModel} for which the {@link Constraint}s shall be
-	 *          parsed.
+	 *            The {@link IModel} for which the {@link Constraint}s shall be
+	 *            parsed.
 	 * @param addToModel
-	 *          Indicates whether or not the parsed {@link Constraint}s, its
-	 *          defined fields and functions to the given {@link IModel}.
+	 *            Indicates whether or not the parsed {@link Constraint}s, its
+	 *            defined fields and functions to the given {@link IModel}.
 	 * @return The parsed {@link Constraint}s as a {@link List}.
-	 * @throws Ocl2ParsingException
-	 *           Thrown, if the parsing fails.
+	 * @throws ParseException
+	 *             Thrown, if the parsing fails.
 	 * @throws IllegalArgumentException
-	 *           Thrown, if at least one parameter is invalid.
-	 * @throws ModelAccessException
-	 *           Thrown, if access to the given {@link IModel} is not possible.
+	 *             Thrown, if at least one parameter is invalid.
 	 */
 	public static List<Constraint> parseConstraints(File file, IModel model,
-			boolean addToModel) throws Ocl2ParsingException,
-			IllegalArgumentException, ModelAccessException {
+			boolean addToModel) throws ParseException, IllegalArgumentException {
 
 		if (file == null) {
 			throw new IllegalAccessError("Parameter 'file' must not be null.");
@@ -1243,97 +1251,36 @@ public class Ocl2ForEclipseFacade {
 	 * </p>
 	 * 
 	 * @param reader
-	 *          The {@link Reader} providing the {@link File} or Stream to be
-	 *          parsed.
+	 *            The {@link Reader} providing the {@link File} or Stream to be
+	 *            parsed.
 	 * @param model
-	 *          The {@link IModel} for which the {@link Constraint}s shall be
-	 *          parsed.
+	 *            The {@link IModel} for which the {@link Constraint}s shall be
+	 *            parsed.
 	 * @param addToModel
-	 *          Indicates whether or not the parsed {@link Constraint}s, its
-	 *          defined fields and functions to the given {@link IModel}.
+	 *            Indicates whether or not the parsed {@link Constraint}s, its
+	 *            defined fields and functions to the given {@link IModel}.
 	 * @return The parsed {@link Constraint}s as a {@link List}.
-	 * @throws Ocl2ParsingException
-	 *           Thrown, if the parsing fails.
 	 * @throws IllegalArgumentException
-	 *           Thrown, if at least one parameter is invalid.
-	 * @throws ModelAccessException
-	 *           Thrown, if access to the given {@link IModel} is not possible.
+	 *             Thrown, if at least one parameter is invalid.
+	 * @throws ParseException
+	 *             Thrown, if the Parsing process fails.
 	 */
-	public static List<Constraint> parseConstraints(Reader reader, IModel model,
-			boolean addToModel) throws Ocl2ParsingException,
-			IllegalArgumentException, ModelAccessException {
+	public static List<Constraint> parseConstraints(Reader reader,
+			IModel model, boolean addToModel) throws IllegalArgumentException,
+			ParseException {
 
 		if (reader == null) {
-			throw new IllegalAccessError("Parameter 'reader' must not be null.");
+			throw new IllegalArgumentException(
+					"Parameter 'reader' must not be null.");
 		}
 
 		else if (model == null) {
-			throw new IllegalAccessError("Parameter 'model' must not be null.");
+			throw new IllegalArgumentException(
+					"Parameter 'model' must not be null.");
 		}
 		// no else.
 
-		List<Constraint> result;
-		List<Constraint> oldConstraints;
-		oldConstraints =
-				new ArrayList<Constraint>(model.getRootNamespace()
-						.getOwnedAndNestedRules());
-
-		/* FIXME Claas: Use the same parser for all requests of the same model. */
-		OCL2Parser parser;
-		parser = new OCL2Parser(model, reader);
-
-		try {
-			parser.parse();
-		}
-		// end try.
-
-		catch (ParsingException e) {
-			/*
-			 * FIXME Probably remove parsed constraints, operations and attributes
-			 * from the model again.
-			 */
-			throw new Ocl2ParsingException(e);
-		}
-
-		catch (LexException e) {
-			/*
-			 * FIXME Probably remove parsed constraints, operations and attributes
-			 * from the model again.
-			 */
-			throw new Ocl2ParsingException(e);
-		}
-
-		catch (IOException e) {
-			/*
-			 * FIXME Probably remove parsed constraints, operations and attributes
-			 * from the model again.
-			 */
-			throw new Ocl2ParsingException(e);
-		}
-
-		catch (BuildingASTException e) {
-			/*
-			 * FIXME Probably remove parsed constraints, operations and attributes
-			 * from the model again.
-			 */
-			throw new Ocl2ParsingException(e);
-		}
-
-		catch (SemanticException e) {
-			/*
-			 * FIXME Probably remove parsed constraints, operations and attributes
-			 * from the model again.
-			 */
-			throw new Ocl2ParsingException(e);
-		}
-		// end catch.
-
-		result =
-				new ArrayList<Constraint>(model.getRootNamespace()
-						.getOwnedAndNestedRules());
-		result.removeAll(oldConstraints);
-
-		/* FIXME Probably remove parsed constraints from the model again. */
+		List<Constraint> result = Ocl2Parser.INSTANCE.doParse(model, reader);
 
 		return result;
 	}
@@ -1345,24 +1292,23 @@ public class Ocl2ForEclipseFacade {
 	 * </p>
 	 * 
 	 * @param string
-	 *          The {@link String} providing the {@link Constraint}s to be parsed.
+	 *            The {@link String} providing the {@link Constraint}s to be
+	 *            parsed.
 	 * @param model
-	 *          The {@link IModel} for which the {@link Constraint}s shall be
-	 *          parsed.
+	 *            The {@link IModel} for which the {@link Constraint}s shall be
+	 *            parsed.
 	 * @param addToModel
-	 *          Indicates whether or not the parsed {@link Constraint}s, its
-	 *          defined fields and functions to the given {@link IModel}.
+	 *            Indicates whether or not the parsed {@link Constraint}s, its
+	 *            defined fields and functions to the given {@link IModel}.
 	 * @return The parsed {@link Constraint}s as a {@link List}.
-	 * @throws Ocl2ParsingException
-	 *           Thrown, if the parsing fails.
+	 * @throws ParseException
+	 *             Thrown, if the parsing fails.
 	 * @throws IllegalArgumentException
-	 *           Thrown, if at least one parameter is invalid.
-	 * @throws ModelAccessException
-	 *           Thrown, if access to the given {@link IModel} is not possible.
+	 *             Thrown, if at least one parameter is invalid.
 	 */
-	public static List<Constraint> parseConstraints(String string, IModel model,
-			boolean addToModel) throws Ocl2ParsingException,
-			IllegalArgumentException, ModelAccessException {
+	public static List<Constraint> parseConstraints(String string,
+			IModel model, boolean addToModel) throws ParseException,
+			IllegalArgumentException {
 
 		if (string == null) {
 			throw new IllegalAccessError("Parameter 'string' must not be null.");
@@ -1382,27 +1328,26 @@ public class Ocl2ForEclipseFacade {
 	 * </p>
 	 * 
 	 * @param location
-	 *          The {@link URL} providing the {@link File} or Stream to be parsed.
+	 *            The {@link URL} providing the {@link File} or Stream to be
+	 *            parsed.
 	 * @param model
-	 *          The {@link IModel} for which the {@link Constraint}s shall be
-	 *          parsed.
+	 *            The {@link IModel} for which the {@link Constraint}s shall be
+	 *            parsed.
 	 * @param addToModel
-	 *          Indicates whether or not the parsed {@link Constraint}s, its
-	 *          defined fields and functions to the given {@link IModel}.
+	 *            Indicates whether or not the parsed {@link Constraint}s, its
+	 *            defined fields and functions to the given {@link IModel}.
 	 * @return The parsed {@link Constraint}s as a {@link List}.
-	 * @throws Ocl2ParsingException
-	 *           Thrown, if the parsing fails.
+	 * @throws ParseException
+	 *             Thrown, if the parsing fails.
 	 * @throws IllegalArgumentException
-	 *           Thrown, if at least one parameter is invalid.
-	 * @throws ModelAccessException
-	 *           Thrown, if access to the given {@link IModel} is not possible.
+	 *             Thrown, if at least one parameter is invalid.
 	 */
 	public static List<Constraint> parseConstraints(URL location, IModel model,
-			boolean addToModel) throws Ocl2ParsingException,
-			IllegalArgumentException, ModelAccessException {
+			boolean addToModel) throws ParseException, IllegalArgumentException {
 
 		if (location == null) {
-			throw new IllegalAccessError("Parameter 'location' must not be null.");
+			throw new IllegalAccessError(
+					"Parameter 'location' must not be null.");
 		}
 		// no else.
 
@@ -1432,21 +1377,22 @@ public class Ocl2ForEclipseFacade {
 	 * </p>
 	 * 
 	 * @param modelInstance
-	 *          The {@link IModelInstance} the {@link IModelInstanceElement}
-	 *          belongs to.
+	 *            The {@link IModelInstance} the {@link IModelInstanceElement}
+	 *            belongs to.
 	 * @param modelInstanceElement
-	 *          The {@link IModelInstanceElement} on that the {@link Operation}
-	 *          shall be invoked.
+	 *            The {@link IModelInstanceElement} on that the
+	 *            {@link Operation} shall be invoked.
 	 * @param operation
-	 *          The {@link Operation} that shall be invoked.
+	 *            The {@link Operation} that shall be invoked.
 	 * @param parameters
-	 *          The values of the {@link Operation}'s {@link Parameter}s as a
-	 *          {@link List} of {@link IModelInstanceElement} values.
+	 *            The values of the {@link Operation}'s {@link Parameter}s as a
+	 *            {@link List} of {@link IModelInstanceElement} values.
 	 * @param postConditions
-	 *          The postconditions that shall be prepared. <b>Attention:</b> if
-	 *          this {@link Collection} contains {@link Constraint}s of the
-	 *          {@link ConstraintKind} that is different than
-	 *          {@link ConstraintKind#POSTCONDITION} they will not be prepared.
+	 *            The postconditions that shall be prepared. <b>Attention:</b>
+	 *            if this {@link Collection} contains {@link Constraint}s of the
+	 *            {@link ConstraintKind} that is different than
+	 *            {@link ConstraintKind#POSTCONDITION} they will not be
+	 *            prepared.
 	 */
 	public static void preparePostConditions(IModelInstance modelInstance,
 			IModelInstanceElement modelInstanceElement, Operation operation,
@@ -1492,6 +1438,7 @@ public class Ocl2ForEclipseFacade {
 		}
 
 		interpreter.preparePostConditions(modelInstanceElement, operation,
-				parameters.toArray(new IModelInstanceElement[0]), postConditions);
+				parameters.toArray(new IModelInstanceElement[0]),
+				postConditions);
 	}
 }

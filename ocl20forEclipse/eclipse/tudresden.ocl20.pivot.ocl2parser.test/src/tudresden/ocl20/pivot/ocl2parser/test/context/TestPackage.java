@@ -21,9 +21,9 @@ package tudresden.ocl20.pivot.ocl2parser.test.context;
 
 import org.junit.Test;
 
-import tudresden.ocl20.pivot.ocl2parser.parser.exceptions.ParsingException;
 import tudresden.ocl20.pivot.ocl2parser.parser.exceptions.SemanticException;
 import tudresden.ocl20.pivot.ocl2parser.test.TestPerformer;
+import tudresden.ocl20.pivot.parser.ParseException;
 
 /**
  * <p>
@@ -37,7 +37,8 @@ public class TestPackage {
 
 	/**
 	 * <p>
-	 * A test case to check that the package declaration is parsed appropriately.
+	 * A test case to check that the package declaration is parsed
+	 * appropriately.
 	 * </p>
 	 */
 	@Test
@@ -52,9 +53,9 @@ public class TestPackage {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllContextTests.META_MODEL_ID,
-						AllContextTests.MODEL_BUNDLE, AllContextTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllContextTests.META_MODEL_ID, AllContextTests.MODEL_BUNDLE,
+				AllContextTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		/* Try to parse the constraint file. */
@@ -63,7 +64,8 @@ public class TestPackage {
 
 	/**
 	 * <p>
-	 * A test case to check that the package declaration is parsed appropriately.
+	 * A test case to check that the package declaration is parsed
+	 * appropriately.
 	 * </p>
 	 */
 	@Test
@@ -78,9 +80,9 @@ public class TestPackage {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllContextTests.META_MODEL_ID,
-						AllContextTests.MODEL_BUNDLE, AllContextTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllContextTests.META_MODEL_ID, AllContextTests.MODEL_BUNDLE,
+				AllContextTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		/* Try to parse the constraint file. */
@@ -89,7 +91,8 @@ public class TestPackage {
 
 	/**
 	 * <p>
-	 * A test case to check that the package declaration is parsed appropriately.
+	 * A test case to check that the package declaration is parsed
+	 * appropriately.
 	 * </p>
 	 */
 	@Test
@@ -104,9 +107,9 @@ public class TestPackage {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllContextTests.META_MODEL_ID,
-						AllContextTests.MODEL_BUNDLE, AllContextTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllContextTests.META_MODEL_ID, AllContextTests.MODEL_BUNDLE,
+				AllContextTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		/* Try to parse the constraint file. */
@@ -115,7 +118,8 @@ public class TestPackage {
 
 	/**
 	 * <p>
-	 * A test case to check that the package declaration is parsed appropriately.
+	 * A test case to check that the package declaration is parsed
+	 * appropriately.
 	 * </p>
 	 */
 	@Test(expected = SemanticException.class)
@@ -130,9 +134,9 @@ public class TestPackage {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllContextTests.META_MODEL_ID,
-						AllContextTests.MODEL_BUNDLE, AllContextTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllContextTests.META_MODEL_ID, AllContextTests.MODEL_BUNDLE,
+				AllContextTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		/* Try to parse the constraint file. */
@@ -141,10 +145,11 @@ public class TestPackage {
 
 	/**
 	 * <p>
-	 * A test case to check that the package declaration is parsed appropriately.
+	 * A test case to check that the package declaration is parsed
+	 * appropriately.
 	 * </p>
 	 */
-	@Test(expected = ParsingException.class)
+	@Test(expected = ParseException.class)
 	public void testPackageNegative02() throws Exception {
 
 		TestPerformer testPerformer;
@@ -156,9 +161,9 @@ public class TestPackage {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllContextTests.META_MODEL_ID,
-						AllContextTests.MODEL_BUNDLE, AllContextTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllContextTests.META_MODEL_ID, AllContextTests.MODEL_BUNDLE,
+				AllContextTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		/* Try to parse the constraint file. */
@@ -167,10 +172,11 @@ public class TestPackage {
 
 	/**
 	 * <p>
-	 * A test case to check that the package declaration is parsed appropriately.
+	 * A test case to check that the package declaration is parsed
+	 * appropriately.
 	 * </p>
 	 */
-	@Test(expected = ParsingException.class)
+	@Test(expected = ParseException.class)
 	public void testPackageNegative03() throws Exception {
 
 		TestPerformer testPerformer;
@@ -182,9 +188,9 @@ public class TestPackage {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllContextTests.META_MODEL_ID,
-						AllContextTests.MODEL_BUNDLE, AllContextTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllContextTests.META_MODEL_ID, AllContextTests.MODEL_BUNDLE,
+				AllContextTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		/* Try to parse the constraint file. */
@@ -193,10 +199,11 @@ public class TestPackage {
 
 	/**
 	 * <p>
-	 * A test case to check that the package declaration is parsed appropriately.
+	 * A test case to check that the package declaration is parsed
+	 * appropriately.
 	 * </p>
 	 */
-	@Test(expected = ParsingException.class)
+	@Test(expected = ParseException.class)
 	public void testPackageNegative04() throws Exception {
 
 		TestPerformer testPerformer;
@@ -208,9 +215,9 @@ public class TestPackage {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllContextTests.META_MODEL_ID,
-						AllContextTests.MODEL_BUNDLE, AllContextTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllContextTests.META_MODEL_ID, AllContextTests.MODEL_BUNDLE,
+				AllContextTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		/* Try to parse the constraint file. */

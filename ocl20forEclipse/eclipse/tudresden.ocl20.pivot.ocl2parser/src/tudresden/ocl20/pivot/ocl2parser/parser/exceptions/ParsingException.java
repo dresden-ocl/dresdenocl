@@ -16,27 +16,86 @@
     You should have received a copy of the GNU Lesser General Public License
     along with the OCL parser.  If not, see <http://www.gnu.org/licenses/>.
 .
-*/
-
+ */
 
 package tudresden.ocl20.pivot.ocl2parser.parser.exceptions;
 
-public class ParsingException extends Exception {
-	private String message;
-	private String value;
+import tudresden.ocl20.pivot.parser.ParseException;
+
+/**
+ * <p>
+ * Represents {@link Exception}s that occur during parsing a constraint file.
+ * </p>
+ * 
+ * @author Nils Thieme
+ * @author Claas Wilke (refactoring and documentation)
+ */
+public class ParsingException extends ParseException {
+
+	/** Generated ID for serialization. */
+	private static final long serialVersionUID = 2141132068538512605L;
+
+	/** The token at which the {@link ParsingException} occurred. */
+	private String tocen;
+
+	/** The line at which the {@link ParsingException} occurred. */
 	private int line;
+
+	/** The column at which the {@link ParsingException} occurred. */
 	private int column;
-	
-	
-	public ParsingException(String message, String value, int line, int column) {
-		this.message = message;
+
+	/**
+	 * <p>
+	 * Creates a new {@link ParsingException}.
+	 * </p>
+	 * 
+	 * @param message
+	 *            The message of this {@link Exception}.
+	 * @param token
+	 *            The token at which the {@link ParsingException} occurred.
+	 * @param line
+	 *            The line at which the {@link ParsingException} occurred.
+	 * @param column
+	 *            The column at which the {@link ParsingException} occurred.
+	 */
+	public ParsingException(String message, String token, int line, int column) {
+		super(message);
 		this.line = line;
 		this.column = column;
-		this.value = value;
-		
+		this.tocen = token;
 	}
-	
+
+	/**
+	 * <p>
+	 * Creates a new {@link ParsingException}.
+	 * </p>
+	 * 
+	 * @param message
+	 *            The message of this {@link Exception}.
+	 * @param cause
+	 *            The cause of this {@link Exception}.
+	 * @param token
+	 *            The token at which the {@link ParsingException} occurred.
+	 * @param line
+	 *            The line at which the {@link ParsingException} occurred.
+	 * @param column
+	 *            The column at which the {@link ParsingException} occurred.
+	 */
+	public ParsingException(String message, Throwable cause, String token,
+			int line, int column) {
+		super(message, cause);
+		this.line = line;
+		this.column = column;
+		this.tocen = token;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Throwable#getMessage()
+	 */
 	public String getMessage() {
-		return message + " The error ocurred in line " + line + " and column " + column + " at the token " + value + ".";
+		return super.getMessage() + " The error ocurred in line " + line
+				+ " and column " + column + " at the token " + tocen + ".";
 	}
 }

@@ -29,7 +29,6 @@ import java.util.List;
 import java.util.Set;
 
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBoolean;
-import tudresden.ocl20.pivot.facade.Ocl2ParsingException;
 import tudresden.ocl20.pivot.facade.Ocl2ForEclipseFacade;
 import tudresden.ocl20.pivot.interpreter.IInterpretationResult;
 import tudresden.ocl20.pivot.interpreter.test.OclInterpreterTestPlugin;
@@ -37,6 +36,7 @@ import tudresden.ocl20.pivot.modelbus.ModelAccessException;
 import tudresden.ocl20.pivot.modelbus.model.IModel;
 import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceObject;
+import tudresden.ocl20.pivot.parser.ParseException;
 import tudresden.ocl20.pivot.pivotmodel.Constraint;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 
@@ -149,12 +149,12 @@ public abstract class AbstractInterpreterTest {
 	 * @return
 	 * @throws IllegalArgumentException
 	 * @throws ModelAccessException
-	 * @throws Ocl2ParsingException
+	 * @throws ParseException
 	 */
 	protected List<IInterpretationResult> interpretConstraintsForInstance(
 			String modelName, String constraintName, String instanceName,
 			List<String> typeName) throws IllegalArgumentException,
-			ModelAccessException, Ocl2ParsingException {
+			ModelAccessException, ParseException {
 
 		assertNotNull(modelName);
 		assertNotNull(constraintName);
