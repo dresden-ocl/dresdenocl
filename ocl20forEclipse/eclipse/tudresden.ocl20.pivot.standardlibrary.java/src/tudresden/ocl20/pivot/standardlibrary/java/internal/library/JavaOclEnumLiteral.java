@@ -30,11 +30,16 @@
  */
 package tudresden.ocl20.pivot.standardlibrary.java.internal.library;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBoolean;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclEnumLiteral;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSet;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceEnumerationLiteral;
+import tudresden.ocl20.pivot.standardlibrary.java.factory.JavaStandardLibraryFactory;
 
 /**
  * <p>
@@ -53,7 +58,7 @@ public class JavaOclEnumLiteral extends JavaOclLibraryObject implements
 	 * </p>
 	 * 
 	 * @param adaptee
-	 *          The adapted element of this {@link JavaOclEnumLiteral}.
+	 *            The adapted element of this {@link JavaOclEnumLiteral}.
 	 */
 	public JavaOclEnumLiteral(
 			IModelInstanceEnumerationLiteral imiEnumerationLiteral) {
@@ -73,6 +78,7 @@ public class JavaOclEnumLiteral extends JavaOclLibraryObject implements
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @seetudresden.ocl20.pivot.essentialocl.standardlibrary.OclEnumLiteral#
 	 * getModelInstanceEnumerationLiteral()
 	 */
@@ -83,6 +89,7 @@ public class JavaOclEnumLiteral extends JavaOclLibraryObject implements
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny#isEqualTo(tudresden
 	 * .ocl20.pivot.essentialocl.standardlibrary.OclAny)
@@ -96,12 +103,12 @@ public class JavaOclEnumLiteral extends JavaOclLibraryObject implements
 		if (result == null) {
 			if (that instanceof JavaOclEnumLiteral) {
 				JavaOclEnumLiteral enumLiteral = (JavaOclEnumLiteral) that;
-				boolean boolResult =
-						getModelInstanceEnumerationLiteral().equals(
-								enumLiteral.getModelInstanceEnumerationLiteral());
+				boolean boolResult = getModelInstanceEnumerationLiteral()
+						.equals(
+								enumLiteral
+										.getModelInstanceEnumerationLiteral());
 				result = JavaOclBoolean.getInstance(boolResult);
-			}
-			else {
+			} else {
 				result = JavaOclBoolean.getInstance(false);
 			}
 		}
@@ -111,23 +118,26 @@ public class JavaOclEnumLiteral extends JavaOclLibraryObject implements
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny#asSet()
 	 */
 	public <T extends OclAny> OclSet<T> asSet() {
 
-		// checkInvalid(this);
-		//
-		// OclSet<T> result;
-		//
-		// Set<IModelInstanceElement> imiSet = new HashSet<IModelInstanceElement>();
-		// imiSet.add(getModelInstanceEnumerationLiteral());
-		//
-		// result = JavaStandardLibraryFactory.INSTANCE.createOclSet(imiSet);
-		//
-		// return result;
-		// FIXME Michael: What generic type should the OclSet have?
-		throw new UnsupportedOperationException(
-				"asSet() on EnumerationLiteral is not supported yet");
+		this.checkInvalid(this.getModelInstanceElement().getType(), this);
+
+		OclSet<T> result;
+
+		Set<IModelInstanceElement> imiSet = new HashSet<IModelInstanceElement>();
+
+		if (!this.imiElement.isUndefined()) {
+			imiSet.add(getModelInstanceEnumerationLiteral());
+		}
+		// no else.
+
+		result = JavaStandardLibraryFactory.INSTANCE.createOclSet(imiSet, this
+				.getModelInstanceElement().getType());
+
+		return result;
 	}
 
 	@Override
