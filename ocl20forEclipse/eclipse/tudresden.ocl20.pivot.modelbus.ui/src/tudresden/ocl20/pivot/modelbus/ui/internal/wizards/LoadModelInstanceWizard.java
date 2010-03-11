@@ -201,7 +201,7 @@ public class LoadModelInstanceWizard extends Wizard implements IImportWizard {
 				 * We need to throw a runtime exception or the wizard will close
 				 * afterwards.
 				 */
-				throw new IllegalStateException(dialogMsg);
+				throw new IllegalStateException(dialogMsg, e);
 			}
 			// end catch.
 		}

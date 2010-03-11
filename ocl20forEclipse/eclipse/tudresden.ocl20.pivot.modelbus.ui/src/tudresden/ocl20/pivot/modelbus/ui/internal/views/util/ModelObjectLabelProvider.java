@@ -53,14 +53,14 @@ public class ModelObjectLabelProvider extends LabelProvider {
 	 * The path of the icon to display {@link ModelInstanceObjectProperty}s that
 	 * are undefined.
 	 */
-	private final static String ICON_UNDEFINED_PROPERTY =
-			"icons/undefined_object.gif";
+	private final static String ICON_UNDEFINED_PROPERTY = "icons/undefined_object.gif";
 
 	/** The path of the icon to display {@link Type}s. */
 	private final static String ICON_TYPE = "icons/type.gif";
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see org.eclipse.jface.viewers.LabelProvider#getText(java.lang.Object)
 	 */
 	public String getText(Object anObject) {
@@ -73,6 +73,11 @@ public class ModelObjectLabelProvider extends LabelProvider {
 
 		else if (anObject instanceof IModelInstanceElement) {
 			result = ((IModelInstanceElement) anObject).getName();
+
+			if (((IModelInstanceElement) anObject).isUndefined()) {
+				result += " (undefined)";
+			}
+			// no else.
 		}
 
 		else if (anObject instanceof Type) {
@@ -88,7 +93,8 @@ public class ModelObjectLabelProvider extends LabelProvider {
 		}
 
 		else if (anObject instanceof ModelInstanceCollectionElement) {
-			result = ((ModelInstanceCollectionElement) anObject).getElementText();
+			result = ((ModelInstanceCollectionElement) anObject)
+					.getElementText();
 		}
 
 		else {
@@ -100,6 +106,7 @@ public class ModelObjectLabelProvider extends LabelProvider {
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see org.eclipse.jface.viewers.LabelProvider#getImage(java.lang.Object)
 	 */
 	public Image getImage(Object anObject) {
@@ -107,38 +114,47 @@ public class ModelObjectLabelProvider extends LabelProvider {
 		Image result;
 
 		if (anObject instanceof Type) {
-			result = ModelBusUIPlugin.getImageDescriptor(ICON_TYPE).createImage();
+			result = ModelBusUIPlugin.getImageDescriptor(ICON_TYPE)
+					.createImage();
 		}
 
 		else if (anObject instanceof IModelInstanceElement) {
-			result =
-					ModelBusUIPlugin.getImageDescriptor(ICON_MODEL_INSTANCE_ELEMENT)
-							.createImage();
+
+			if (((IModelInstanceElement) anObject).isUndefined()) {
+				result = ModelBusUIPlugin.getImageDescriptor(
+						ICON_UNDEFINED_PROPERTY).createImage();
+			}
+
+			else {
+				result = ModelBusUIPlugin.getImageDescriptor(
+						ICON_MODEL_INSTANCE_ELEMENT).createImage();
+			}
 		}
 
 		else if (anObject instanceof ModelInstanceObjectProperty) {
 			ModelInstanceObjectProperty property;
 			property = (ModelInstanceObjectProperty) anObject;
 
-			if (property.getValue() == null || property.getValue().isUndefined()) {
-				result =
-						ModelBusUIPlugin.getImageDescriptor(ICON_UNDEFINED_PROPERTY)
-								.createImage();
+			if (property.getValue() == null
+					|| property.getValue().isUndefined()) {
+				result = ModelBusUIPlugin.getImageDescriptor(
+						ICON_UNDEFINED_PROPERTY).createImage();
 			}
 
 			else if (property.getValue() instanceof IModelInstanceCollection<?>) {
-				result =
-						ModelBusUIPlugin.getImageDescriptor(ICON_COLLECTION).createImage();
+				result = ModelBusUIPlugin.getImageDescriptor(ICON_COLLECTION)
+						.createImage();
 			}
 
 			else {
-				result =
-						ModelBusUIPlugin.getImageDescriptor(ICON_PROPERTY).createImage();
+				result = ModelBusUIPlugin.getImageDescriptor(ICON_PROPERTY)
+						.createImage();
 			}
 		}
 
 		else if (anObject instanceof ModelInstanceCollectionElement) {
-			result = ModelBusUIPlugin.getImageDescriptor(ICON_PROPERTY).createImage();
+			result = ModelBusUIPlugin.getImageDescriptor(ICON_PROPERTY)
+					.createImage();
 		}
 
 		else {

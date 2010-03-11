@@ -50,6 +50,7 @@ public class ModelObjectContentProvider implements IStructuredContentProvider,
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see org.eclipse.jface.viewers.IContentProvider#dispose()
 	 */
 	public void dispose() {
@@ -98,8 +99,8 @@ public class ModelObjectContentProvider implements IStructuredContentProvider,
 			type = (Type) parentElement;
 			objectsOfType = this.myModelInstance.getAllInstances(type);
 
-			result =
-					objectsOfType.toArray(new IModelInstanceObject[objectsOfType.size()]);
+			result = objectsOfType
+					.toArray(new IModelInstanceObject[objectsOfType.size()]);
 		}
 
 		/* Else check if the given element is a IModelInstanceObject. */
@@ -129,8 +130,8 @@ public class ModelObjectContentProvider implements IStructuredContentProvider,
 				}
 
 				ModelInstanceObjectProperty modelInstanceObjectProperty;
-				modelInstanceObjectProperty =
-						new ModelInstanceObjectProperty(imiObject, property, propertyValue);
+				modelInstanceObjectProperty = new ModelInstanceObjectProperty(
+						imiObject, property, propertyValue);
 
 				resultList.add(modelInstanceObjectProperty);
 			}
@@ -153,8 +154,7 @@ public class ModelObjectContentProvider implements IStructuredContentProvider,
 		else if (parentElement instanceof IModelInstanceCollection<?>) {
 
 			IModelInstanceCollection<IModelInstanceElement> modelInstanceCollection;
-			modelInstanceCollection =
-					(IModelInstanceCollection<IModelInstanceElement>) parentElement;
+			modelInstanceCollection = (IModelInstanceCollection<IModelInstanceElement>) parentElement;
 
 			List<ModelInstanceCollectionElement> resultList;
 			resultList = new ArrayList<ModelInstanceCollectionElement>();
@@ -176,10 +176,10 @@ public class ModelObjectContentProvider implements IStructuredContentProvider,
 		else if (parentElement instanceof ModelInstanceCollectionElement) {
 
 			ModelInstanceCollectionElement modelInstanceCollectionElement;
-			modelInstanceCollectionElement =
-					(ModelInstanceCollectionElement) parentElement;
+			modelInstanceCollectionElement = (ModelInstanceCollectionElement) parentElement;
 
-			result = this.getChildren(modelInstanceCollectionElement.getElement());
+			result = this.getChildren(modelInstanceCollectionElement
+					.getElement());
 		}
 
 		/* Else return an empty array. */
@@ -192,6 +192,7 @@ public class ModelObjectContentProvider implements IStructuredContentProvider,
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see org.eclipse.jface.viewers.IStructuredContentProvider#getElements(
 	 * java.lang.Object)
 	 */
@@ -202,6 +203,7 @@ public class ModelObjectContentProvider implements IStructuredContentProvider,
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see org.eclipse.jface.viewers.ITreeContentProvider#getParent(java.lang
 	 * .Object)
 	 */
@@ -216,8 +218,8 @@ public class ModelObjectContentProvider implements IStructuredContentProvider,
 			type = (Type) anElement;
 
 			/*
-			 * Check if the type is implemented by at least one element of the current
-			 * model instance.
+			 * Check if the type is implemented by at least one element of the
+			 * current model instance.
 			 */
 			if (this.myModelInstance.getAllInstances(type).size() > 0) {
 				result = this.myModelInstance;
@@ -250,6 +252,7 @@ public class ModelObjectContentProvider implements IStructuredContentProvider,
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see org.eclipse.jface.viewers.ITreeContentProvider#hasChildren(java.lang
 	 * .Object)
 	 */
@@ -290,7 +293,8 @@ public class ModelObjectContentProvider implements IStructuredContentProvider,
 			imiObject = (IModelInstanceObject) anElement;
 
 			/* If the element has at least on children it has elements. */
-			result = imiObject.getType().allProperties().size() > 0;
+			result = !imiObject.isUndefined()
+					&& imiObject.getType().allProperties().size() > 0;
 		}
 
 		/* Else check if the given element is a ModelInstanceObjectProperty. */
@@ -304,7 +308,8 @@ public class ModelObjectContentProvider implements IStructuredContentProvider,
 			}
 
 			else {
-				return (this.hasChildren(modelInstanceObjectProperty.getValue()));
+				return (this
+						.hasChildren(modelInstanceObjectProperty.getValue()));
 			}
 		}
 
@@ -327,15 +332,15 @@ public class ModelObjectContentProvider implements IStructuredContentProvider,
 		else if (anElement instanceof ModelInstanceCollectionElement) {
 
 			ModelInstanceCollectionElement modelInstanceCollectionElement;
-			modelInstanceCollectionElement =
-					(ModelInstanceCollectionElement) anElement;
+			modelInstanceCollectionElement = (ModelInstanceCollectionElement) anElement;
 
 			if (modelInstanceCollectionElement.getElement() == null) {
 				result = false;
 			}
 
 			else {
-				result = this.hasChildren(modelInstanceCollectionElement.getElement());
+				result = this.hasChildren(modelInstanceCollectionElement
+						.getElement());
 			}
 		}
 
@@ -348,6 +353,7 @@ public class ModelObjectContentProvider implements IStructuredContentProvider,
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see org.eclipse.jface.viewers.IContentProvider#inputChanged(org.eclipse
 	 * .jface.viewers.Viewer, java.lang.Object, java.lang.Object)
 	 */
