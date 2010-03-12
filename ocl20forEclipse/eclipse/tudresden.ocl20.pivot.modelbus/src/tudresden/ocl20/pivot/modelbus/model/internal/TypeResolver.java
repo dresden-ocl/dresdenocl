@@ -41,6 +41,7 @@ import org.apache.log4j.Logger;
 import tudresden.ocl20.pivot.essentialocl.types.OclLibrary;
 import tudresden.ocl20.pivot.modelbus.ModelAccessException;
 import tudresden.ocl20.pivot.modelbus.ModelBusException;
+import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
 import tudresden.ocl20.pivot.modelbus.model.IModel;
 import tudresden.ocl20.pivot.modelbus.model.IOclLibraryProvider;
 import tudresden.ocl20.pivot.modelbus.model.ITypeResolver;
@@ -181,7 +182,7 @@ public class TypeResolver implements ITypeResolver {
 
 			/* Get the OCL library. */
 			IOclLibraryProvider provider;
-			provider = this.model.getOclLibraryProvider();
+			provider = ModelBusPlugin.getOclLibraryProvider();
 
 			if (provider == null) {
 				throw new ModelBusException("The model '" + model.getDisplayName() //$NON-NLS-1$

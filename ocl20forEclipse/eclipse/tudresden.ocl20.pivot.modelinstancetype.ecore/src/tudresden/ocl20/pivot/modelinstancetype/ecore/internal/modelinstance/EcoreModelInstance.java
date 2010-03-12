@@ -67,7 +67,7 @@ public class EcoreModelInstance extends AbstractModelInstance implements
 	 * The {@link Resource} representing the adapted model instance elements of
 	 * this {@link IModelInstance}.
 	 */
-	private Resource myModelInstanceResource;
+	protected Resource myModelInstanceResource;
 
 	/**
 	 * <p>

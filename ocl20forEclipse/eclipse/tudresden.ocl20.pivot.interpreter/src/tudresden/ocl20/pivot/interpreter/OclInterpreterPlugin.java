@@ -31,6 +31,7 @@
 package tudresden.ocl20.pivot.interpreter;
 
 import org.apache.log4j.Logger;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.Plugin;
 import org.osgi.framework.BundleContext;
 
@@ -68,6 +69,7 @@ public class OclInterpreterPlugin extends Plugin {
 	 */
 	public OclInterpreterPlugin() {
 
+		plugin = this;
 	}
 
 	/**
@@ -79,7 +81,7 @@ public class OclInterpreterPlugin extends Plugin {
 	 *          The {@link IModelInstance} used during interpretation.
 	 */
 	public static IOclInterpreter createInterpreter(IModelInstance aModelInstance) {
-	
+
 		return new OclInterpreter(aModelInstance);
 	}
 
@@ -110,7 +112,8 @@ public class OclInterpreterPlugin extends Plugin {
 	}
 
 	/**
-	 * @return The {@link IInterpreterRegistry} of this {@link OclInterpreterPlugin}.
+	 * @return The {@link IInterpreterRegistry} of this
+	 *         {@link OclInterpreterPlugin}.
 	 */
 	public static IInterpreterRegistry getInterpreterRegistry() {
 
@@ -138,7 +141,6 @@ public class OclInterpreterPlugin extends Plugin {
 	public void start(BundleContext context) throws Exception {
 
 		super.start(context);
-		plugin = this;
 
 		LoggingPlugin.configureDefaultLogging(plugin);
 	}

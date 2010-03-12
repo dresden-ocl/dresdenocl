@@ -19,6 +19,7 @@ with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
 package tudresden.ocl20.pivot.modelinstancetype.ecore;
 
 import org.apache.log4j.Logger;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.Plugin;
 import org.osgi.framework.BundleContext;
 
@@ -32,7 +33,8 @@ import tudresden.ocl20.logging.LoggingPlugin;
 public class EcoreModelInstanceTypePlugin extends Plugin {
 
 	/** The plug-in ID. */
-	public static final String PLUGIN_ID = "tudresden.ocl20.pivot.modelinstancetype.ecore";
+	public static final String PLUGIN_ID =
+			"tudresden.ocl20.pivot.modelinstancetype.ecore";
 
 	/** The shared instance. */
 	private static EcoreModelInstanceTypePlugin plugin;
@@ -43,6 +45,7 @@ public class EcoreModelInstanceTypePlugin extends Plugin {
 	 * </p>
 	 */
 	public EcoreModelInstanceTypePlugin() {
+
 		/* Remains empty. */
 	}
 
@@ -54,6 +57,7 @@ public class EcoreModelInstanceTypePlugin extends Plugin {
 	 * @return The shared instance.
 	 */
 	public static EcoreModelInstanceTypePlugin getDefault() {
+
 		return plugin;
 	}
 
@@ -75,25 +79,23 @@ public class EcoreModelInstanceTypePlugin extends Plugin {
 		return LoggingPlugin.getLogManager(plugin).getLogger(clazz);
 	}
 
-
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see
 	 * org.eclipse.core.runtime.Plugins#start(org.osgi.framework.BundleContext)
 	 */
 	public void start(BundleContext context) throws Exception {
+
 		super.start(context);
 		plugin = this;
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.eclipse.core.runtime.Plugin#stop(org.osgi.framework.BundleContext)
+	 * @see org.eclipse.core.runtime.Plugin#stop(org.osgi.framework.BundleContext)
 	 */
 	public void stop(BundleContext context) throws Exception {
+
 		plugin = null;
 		super.stop(context);
 	}

@@ -165,9 +165,9 @@ public class TestPerformer {
 	 */
 	public OclLibrary getOclLibrary() {
 
-		return myModel.getOclLibraryProvider().getOclLibrary();
+		return ModelBusPlugin.getOclLibraryProvider().getOclLibrary();
 	}
-	
+
 	/**
 	 * <p>
 	 * Adapts a given {@link Object} as {@link IModelInstanceElement} and adds it

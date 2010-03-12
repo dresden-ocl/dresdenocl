@@ -30,7 +30,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.modelbus.model.internal;
+package tudresden.ocl20.pivot.modelbus.internal;
 
 import org.apache.log4j.Logger;
 
@@ -44,7 +44,6 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 
 import tudresden.ocl20.pivot.essentialocl.types.OclLibrary;
 import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
-import tudresden.ocl20.pivot.modelbus.internal.ModelBusMessages;
 import tudresden.ocl20.pivot.modelbus.model.IOclLibraryProvider;
 
 /**

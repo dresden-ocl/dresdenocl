@@ -136,15 +136,6 @@ public interface IModel {
 
 	/**
 	 * <p>
-	 * Returns the {@link IOclLibraryProvider} of this {@link IModel}.
-	 * </p>
-	 * 
-	 * @return The {@link IOclLibraryProvider} of this {@link IModel}.
-	 */
-	IOclLibraryProvider getOclLibraryProvider();
-
-	/**
-	 * <p>
 	 * Returns the root {@link Namespace} of the {@link IModel}. This
 	 * {@link Namespace} represents the root of the model hierarchy. It is not
 	 * itself part of the {@link IModel}, but merely serves as a container for

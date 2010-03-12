@@ -49,7 +49,7 @@ public class UML2ModelProvider extends AbstractModelProvider implements
 			UML2MetamodelPlugin.getLogger(UML2ModelProvider.class);
 
 	/** The resourceSet. */
-	private ResourceSet resourceSet;
+	protected ResourceSet resourceSet;
 
 	/**
 	 * @see tudresden.ocl20.pivot.modelbus.model.IModelProvider#getModel(java.net.URL)

@@ -33,6 +33,7 @@ import org.junit.Test;
 import tudresden.ocl20.pivot.essentialocl.types.OclLibrary;
 import tudresden.ocl20.pivot.essentialocl.types.TupleType;
 import tudresden.ocl20.pivot.modelbus.ModelAccessException;
+import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
 import tudresden.ocl20.pivot.modelbus.model.IModel;
 import tudresden.ocl20.pivot.modelbus.model.IOclLibraryProvider;
 import tudresden.ocl20.pivot.modelbus.modelinstance.exception.AsTypeCastException;
@@ -106,7 +107,7 @@ public class JavaModelInstanceTupleTest {
 
 		/* Create typeTuple1. */
 		IOclLibraryProvider oclLibraryProvider;
-		oclLibraryProvider = model.getOclLibraryProvider();
+		oclLibraryProvider = ModelBusPlugin.getOclLibraryProvider();
 
 		OclLibrary oclLibrary;
 		oclLibrary = oclLibraryProvider.getOclLibrary();

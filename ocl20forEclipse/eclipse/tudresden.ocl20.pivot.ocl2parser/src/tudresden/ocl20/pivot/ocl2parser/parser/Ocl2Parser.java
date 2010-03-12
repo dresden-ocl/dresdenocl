@@ -77,7 +77,6 @@ public class Ocl2Parser implements IOclParser {
 	 * 
 	 * @see tudresden.ocl20.pivot.parser.AbstractOclParser#doParse(java.net.URL)
 	 */
-	@Override
 	public List<Constraint> doParse(IModel model, Reader reader)
 			throws ParseException {
 

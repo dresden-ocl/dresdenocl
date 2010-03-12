@@ -63,7 +63,7 @@ public class EcoreModelProvider extends AbstractModelProvider implements
 			EcoreMetamodelPlugin.getLogger(EcoreModelProvider.class);
 
 	/** A cached copy of the resource set used for loading models. */
-	private ResourceSet resourceSet;
+	protected ResourceSet resourceSet;
 
 	/*
 	 * (non-Javadoc)
@@ -119,7 +119,7 @@ public class EcoreModelProvider extends AbstractModelProvider implements
 	 * 
 	 * @return The created {@link ResourceSet}.
 	 */
-	private ResourceSet getResourceSet() {
+	protected ResourceSet getResourceSet() {
 
 		if (this.resourceSet == null) {
 			this.resourceSet = new ResourceSetImpl();

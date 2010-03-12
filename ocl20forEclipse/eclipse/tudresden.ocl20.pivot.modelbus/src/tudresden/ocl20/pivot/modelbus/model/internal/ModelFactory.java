@@ -1165,7 +1165,7 @@ public class ModelFactory implements IModelFactory {
 	protected OclLibrary getOclLibrary() {
 
 		if (oclLibrary == null) {
-			IOclLibraryProvider provider = model.getOclLibraryProvider();
+			IOclLibraryProvider provider = ModelBusPlugin.getOclLibraryProvider();
 
 			if (provider == null) {
 				throw new ModelBusException("The model '" + model.getDisplayName() //$NON-NLS-1$
