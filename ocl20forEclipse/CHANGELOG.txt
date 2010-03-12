@@ -53,7 +53,12 @@ Release 2.1 (not scheduled yet)
     and OperationCallExpressions instead of simple TypeLiteralExpressions.
   - Collection(T1).product(Collection(T2)) is now parsed appropriately.
     
-* Complete rewrite of the OCL Standard Library; some bugs were fixed.
+* Some bugs in the OCL2 Interpreter were fixed.
+  - Boolean operations and, or, implies are now only interpreted partly if necessary.
+  - In IfExpressions either then or else clause is interpreted.
+  - Interpretation of nested definitions has now the right context as self variable.
+
+* Complete rewrite of the OCL2 Standard Library; some bugs were fixed.
   - invalid and null values are now created by every library method and no exceptions are thrown
   - consistent way of handling null(undefined) and invalid
   - undefined can be created for AnyType

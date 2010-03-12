@@ -235,7 +235,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			this.isPreparation = false;
 
 			/*
-			 * The must only be used during the interpretation of the same
+			 * The cache must only be used during the interpretation of the same
 			 * constraint!
 			 */
 			this.myEnvironment.clearCache();
@@ -254,9 +254,6 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 			/* Add self variable to environment. */
 			this.myEnvironment.addVar("self", oclModelObject);
-
-			/* Clear the cache before interpretsation of each constraint. */
-			this.myEnvironment.clearCache();
 
 			/* Compute the result. */
 			EObject constraintSpecification;
@@ -2255,7 +2252,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 						this.pushLocalEnvironment();
 						result = this.interpretConstraint(
 								definedOperationInOcl,
-								this.myCurrentModelObject).getResult();
+								source.getModelInstanceElement()).getResult();
 						this.popLocalEnvironment();
 
 					}
