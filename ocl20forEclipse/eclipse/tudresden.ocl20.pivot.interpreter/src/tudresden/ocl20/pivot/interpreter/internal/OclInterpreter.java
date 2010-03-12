@@ -93,6 +93,7 @@ import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceString;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.base.BasisJavaModelInstanceFactory;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.base.TypeConstants;
 import tudresden.ocl20.pivot.pivotmodel.Constraint;
 import tudresden.ocl20.pivot.pivotmodel.ConstraintKind;
 import tudresden.ocl20.pivot.pivotmodel.NamedElement;
@@ -2093,6 +2094,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 		/* Else compute the result. */
 		else {
+			/* FIXME Claas: Evaluate let expressions by call not by definition. */
 			result = doSwitch((EObject) aLetExp.getIn());
 
 			/*
@@ -4381,14 +4383,32 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 				result = this.myStandardLibraryFactory.createOclBoolean(false);
 			}
 
-			/* Handle implies operation: False implies everything. */
+			/* Handle implies operation. */
 			else if (anOperationCallExp.getReferredOperation().getName()
-					.equals("implies")
-					&& !booleanSource.oclIsInvalid().isTrue()
-					&& !booleanSource.oclIsUndefined().isTrue()
-					&& !booleanSource.isTrue()) {
+					.equals("implies")) {
 
-				result = this.myStandardLibraryFactory.createOclBoolean(true);
+				/* invalid implies anything = invalid. */
+				if (booleanSource.oclIsInvalid().isTrue()) {
+					result = this.myStandardLibraryFactory.createOclInvalid(
+							TypeConstants.BOOLEAN, booleanSource
+									.getInvalidReason());
+				}
+
+				/* undefined implies anything = invalid. */
+				else if (booleanSource.oclIsUndefined().isTrue()) {
+					result = this.myStandardLibraryFactory.createOclInvalid(
+							TypeConstants.BOOLEAN, new NullPointerException(
+									"Implies on undefined is not allowed. "
+											+ booleanSource
+													.getUndefinedReason()));
+				}
+
+				/* false implies anything = true. */
+				else if (!booleanSource.isTrue()) {
+					result = this.myStandardLibraryFactory
+							.createOclBoolean(true);
+				}
+				// end else.
 			}
 
 			/* Handle or operation: True or everything is true. */
