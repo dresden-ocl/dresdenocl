@@ -27,4 +27,7 @@ package package1;
  */
 public class Class1 {
 
+	/** Required to initialize undefined in constraints. */
+	@SuppressWarnings("unused")
+	private Boolean booleanNull = null;
 }

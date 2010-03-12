@@ -115,6 +115,35 @@ public abstract class AbstractInterpreterTest {
 	/**
 	 * <p>
 	 * Helper method to assert that a given {@link IInterpretationResult} is
+	 * <code>false</code>.
+	 * </p>
+	 * 
+	 * @param result
+	 *            The {@link IInterpretationResult} to be checked.
+	 */
+	protected void assertIsFalse(IInterpretationResult result) {
+		assertFalse(result.getResult().oclIsInvalid().isTrue());
+		assertFalse(result.getResult().oclIsUndefined().isTrue());
+		assertTrue(result.getResult() instanceof OclBoolean);
+		assertFalse(((OclBoolean) result.getResult()).isTrue());
+	}
+
+	/**
+	 * <p>
+	 * Helper method to assert that a given {@link IInterpretationResult} is
+	 * <code>invalid</code>.
+	 * </p>
+	 * 
+	 * @param result
+	 *            The {@link IInterpretationResult} to be checked.
+	 */
+	protected void assertIsInvalid(IInterpretationResult result) {
+		assertTrue(result.getResult().oclIsInvalid().isTrue());
+	}
+
+	/**
+	 * <p>
+	 * Helper method to assert that a given {@link IInterpretationResult} is
 	 * <code>true</code>.
 	 * </p>
 	 * 
@@ -126,6 +155,20 @@ public abstract class AbstractInterpreterTest {
 		assertFalse(result.getResult().oclIsUndefined().isTrue());
 		assertTrue(result.getResult() instanceof OclBoolean);
 		assertTrue(((OclBoolean) result.getResult()).isTrue());
+	}
+
+	/**
+	 * <p>
+	 * Helper method to assert that a given {@link IInterpretationResult} is
+	 * <code>undefined</code>.
+	 * </p>
+	 * 
+	 * @param result
+	 *            The {@link IInterpretationResult} to be checked.
+	 */
+	protected void assertIsUndefined(IInterpretationResult result) {
+		assertFalse(result.getResult().oclIsInvalid().isTrue());
+		assertTrue(result.getResult().oclIsUndefined().isTrue());
 	}
 
 	/**
