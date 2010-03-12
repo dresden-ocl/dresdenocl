@@ -147,29 +147,24 @@ public class JavaOclBoolean extends JavaOclLibraryObject implements OclBoolean {
 
 		OclBoolean result = null;
 
-		// invalid values should be passed on in any case
-		result = checkInvalid(TypeConstants.BOOLEAN, this, aBoolean);
+		// false AND anything is false!
+		if (this.invalidReason == null && this.undefinedreason == null
+				&& !this.isTrue())
+			result = FALSE;
 
-		if (result == null)
-			result = checkUndefined("and", TypeConstants.BOOLEAN, this);
+		// anything AND false is false!
+		else if (aBoolean.getInvalidReason() == null
+				&& aBoolean.getUndefinedReason() == null && !aBoolean.isTrue())
+			result = FALSE;
 
-		if (result == null) {
-			if (!this.isTrue()) {
-				result = FALSE;
-			}
+		else {
+			result = checkInvalid(TypeConstants.BOOLEAN, this, aBoolean);
 
-			else {
+			if (result == null)
 				result = checkUndefined("and", TypeConstants.BOOLEAN, this, aBoolean);
 
-				if (result == null) {
-					if (!this.isTrue() || !aBoolean.isTrue()) {
-						result = FALSE;
-					}
-
-					else {
-						result = TRUE;
-					}
-				}
+			if (result == null) {
+				result = getInstance(this.isTrue() && aBoolean.isTrue());
 			}
 		}
 
@@ -216,19 +211,20 @@ public class JavaOclBoolean extends JavaOclLibraryObject implements OclBoolean {
 
 		OclBoolean result = null;
 
-		result = checkInvalid(TypeConstants.BOOLEAN, this, that);
+		// see standard, p.16: False IMPLIES anything is True
+		if (this.invalidReason == null && this.undefinedreason == null
+				&& !this.isTrue())
+			result = TRUE;
 
-		if (result == null) {
+		// see standard, p.16: anything IMPLIES True is True
+		else if (that.getInvalidReason() == null
+				&& that.getUndefinedReason() == null && that.isTrue())
+			result = TRUE;
 
-			// see standard, p.16: anything IMPLIES True is True
-			if (!that.oclIsUndefined().isTrue() && that.isTrue())
-				result = TRUE;
+		else {
+			result = checkInvalid(TypeConstants.BOOLEAN, this, that);
 
-			// see standard, p.16: False IMPLIES anything is True
-			else if (!this.oclIsUndefined().isTrue() && !this.isTrue())
-				result = TRUE;
-
-			else {
+			if (result == null) {
 				result = checkUndefined("implies", TypeConstants.BOOLEAN, this, that);
 
 				if (result == null) {
@@ -250,7 +246,14 @@ public class JavaOclBoolean extends JavaOclLibraryObject implements OclBoolean {
 	 */
 	public boolean isTrue() {
 
-		return getModelInstanceBoolean().getBoolean();
+		if (undefinedreason != null)
+			throw new UndefinedException(undefinedreason);
+
+		else if (invalidReason != null)
+			throw new InvalidException(invalidReason);
+
+		else
+			return getModelInstanceBoolean().getBoolean();
 	}
 
 	/*
@@ -268,21 +271,11 @@ public class JavaOclBoolean extends JavaOclLibraryObject implements OclBoolean {
 
 		if (result == null) {
 
-			if (this.isTrue()) {
+			if (this.isTrue())
 				result = FALSE;
-			}
 
-			else if (!this.isTrue()) {
+			else
 				result = TRUE;
-			}
-
-			else {
-				String msg;
-
-				msg = "OclBoolean in illegal state.";
-
-				throw new RuntimeException(msg);
-			}
 		}
 
 		return result;
@@ -298,17 +291,21 @@ public class JavaOclBoolean extends JavaOclLibraryObject implements OclBoolean {
 
 		OclBoolean result = null;
 
-		result = checkInvalid(TypeConstants.BOOLEAN, this, that);
-
 		// see standard, p.16: True OR anything is True
-		if (result == null) {
-			if (!this.oclIsUndefined().isTrue() && this.isTrue())
-				result = TRUE;
+		if (this.invalidReason == null && this.undefinedreason == null
+				&& this.isTrue())
+			result = TRUE;
 
-			else if (!that.oclIsUndefined().isTrue() && that.isTrue())
-				result = TRUE;
+		// anything OR True is True
+		else if (that.getInvalidReason() == null
+				&& that.getUndefinedReason() == null && that.isTrue())
+			result = TRUE;
 
-			else {
+		else {
+
+			result = checkInvalid(TypeConstants.BOOLEAN, this, that);
+
+			if (result == null) {
 				result = checkUndefined("or", TypeConstants.BOOLEAN, this, that);
 
 				if (result == null)

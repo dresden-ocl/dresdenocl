@@ -258,7 +258,7 @@ public class TestBoolean extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/and04", INSTANCE1_NAME, Arrays
+				CONSTRAINT_DIRECTORY + "/and08", INSTANCE1_NAME, Arrays
 						.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
@@ -642,7 +642,7 @@ public class TestBoolean extends AbstractInterpreterTest {
 	
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/implies04", INSTANCE1_NAME, Arrays
+				CONSTRAINT_DIRECTORY + "/implies08", INSTANCE1_NAME, Arrays
 						.asList(new String[] { "Class1" }));
 	
 		assertNotNull(results);
@@ -1122,7 +1122,7 @@ public class TestBoolean extends AbstractInterpreterTest {
 	
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/or04", INSTANCE1_NAME, Arrays
+				CONSTRAINT_DIRECTORY + "/or08", INSTANCE1_NAME, Arrays
 						.asList(new String[] { "Class1" }));
 	
 		assertNotNull(results);
