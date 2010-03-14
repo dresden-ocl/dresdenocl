@@ -30,7 +30,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBoolean;
+import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger;
 import tudresden.ocl20.pivot.facade.Ocl2ForEclipseFacade;
 import tudresden.ocl20.pivot.interpreter.IInterpretationResult;
@@ -113,6 +115,39 @@ public abstract class AbstractInterpreterTest {
 		assertTrue(result.exists());
 
 		return result;
+	}
+
+	/**
+	 * <p>
+	 * Helper method to assert that a given {@link IInterpretationResult} is an
+	 * {@link OclCollection} of a given size.
+	 * </p>
+	 * 
+	 * @param expectedSize
+	 *            The expectedSize of the collection.
+	 * @param result
+	 *            The {@link IInterpretationResult} to be checked.
+	 */
+	@SuppressWarnings("unchecked")
+	protected void assertIsCollectionOfSize(Integer expectedSize,
+			IInterpretationResult result) {
+		assertFalse(result.getResult().oclIsInvalid().isTrue());
+		assertFalse(result.getResult().oclIsUndefined().isTrue());
+
+		if (result.getResult() instanceof OclCollection<?>) {
+			OclCollection<OclAny> oclCollection;
+			oclCollection = (OclCollection<OclAny>) result.getResult();
+
+			OclInteger size;
+			size = oclCollection.size();
+
+			assertEquals(new Long(expectedSize), size.getModelInstanceInteger()
+					.getLong());
+		}
+
+		else {
+			fail("Result was not a collection.");
+		}
 	}
 
 	/**

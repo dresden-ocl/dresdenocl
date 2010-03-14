@@ -1,8 +1,13 @@
 package package1
 
 context Class1
-inv testCollect04:
-/* Bag is invalid (2 / 0). Expected as true. */
-Bag { (2 / 0) } -> collect(element: Integer | element = 1).oclIsInvalid()
+/* Expected as okay. */
+def: testCollect(): Bag(Integer) =
+Bag { 1, 2, 3 } -> collect(element: Integer | 
+  if element = 2
+    then integerNull
+    else element
+  endif
+)
 
 endpackage

@@ -1,8 +1,8 @@
 package package1
 
 context Class1
-inv testCollect01:
-/* Expected as true. */
-Bag { 1, 2 } -> collect(element: Integer | Bag{ element, -element }) -> size() = 4
+/* Expected as invalid. */
+def: testCollect(): Bag(Integer) =
+Bag { 1 / 0 } -> collect(element: Integer | element)
 
 endpackage

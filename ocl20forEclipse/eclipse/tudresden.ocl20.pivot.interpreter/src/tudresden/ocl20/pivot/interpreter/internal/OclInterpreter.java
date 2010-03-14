@@ -3813,9 +3813,12 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		/* Check if iterator is undefined. */
 		if (sourceIt.hasNext().oclIsInvalid().isTrue()) {
 			result = myStandardLibraryFactory.createOclInvalid(source
-					.getGenericType(), sourceIt.hasNext().getInvalidReason());
+					.getGenericType(), new IllegalArgumentException(
+					"Source of iterator collectNested() was invalid.", sourceIt
+							.hasNext().getInvalidReason()));
 		}
 
+		/* Else compute the result. */
 		else {
 
 			/*
@@ -3837,33 +3840,34 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 				resultList.add(bodyResult);
 			}
 			// end while.
+
+			/* Compute the result type depending on the given result type. */
+			if (resultType instanceof BagType) {
+				result = myStandardLibraryFactory.createOclBag(resultList,
+						((BagType) resultType).getElementType());
+			}
+
+			else if (resultType instanceof SequenceType) {
+				result = myStandardLibraryFactory.createOclSequence(resultList,
+						((SequenceType) resultType).getElementType());
+			}
+
+			else {
+				String msg;
+				msg = "The ResultType of a collectNested Iterator should by a Sequence or Bag.";
+				msg += " But was " + resultType.getQualifiedName();
+
+				if (LOGGER.isInfoEnabled()) {
+					LOGGER.warn(msg);
+				}
+				// no else.
+
+				result = myStandardLibraryFactory.createOclInvalid(resultType,
+						new IllegalArgumentException(msg));
+			}
+			// end else.
 		}
 		// end else.
-
-		/* Compute the result type depending on the given result type. */
-		if (resultType instanceof BagType) {
-			result = myStandardLibraryFactory.createOclBag(resultList,
-					((BagType) resultType).getElementType());
-		}
-
-		else if (resultType instanceof SequenceType) {
-			result = myStandardLibraryFactory.createOclSequence(resultList,
-					((SequenceType) resultType).getElementType());
-		}
-
-		else {
-			String msg;
-			msg = "The ResultType of a collectNested Iterator should by a Sequence or Bag.";
-			msg += " But was " + resultType.getQualifiedName();
-
-			if (LOGGER.isInfoEnabled()) {
-				LOGGER.warn(msg);
-			}
-			// no else.
-
-			result = myStandardLibraryFactory.createOclInvalid(resultType,
-					new IllegalArgumentException(msg));
-		}
 
 		/* Probably log the exit of this method. */
 		if (LOGGER.isDebugEnabled()) {
