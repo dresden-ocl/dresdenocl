@@ -1,0 +1,8 @@
+package package1
+
+context Class1
+inv testCollect05:
+/* Result contains invalid (1 / 0). Expected as true. */
+Bag { 1, 0 } -> collect(element: Integer | 2 / element) -> oclIsInvalid()
+
+endpackage

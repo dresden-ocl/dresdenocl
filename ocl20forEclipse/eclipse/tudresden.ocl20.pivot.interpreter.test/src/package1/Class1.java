@@ -30,4 +30,12 @@ public class Class1 {
 	/** Required to initialize undefined in constraints. */
 	@SuppressWarnings("unused")
 	private Boolean booleanNull = null;
+	
+	/** Required to initialize undefined in constraints. */
+	@SuppressWarnings("unused")
+	private Integer[] bagIntegerNull = null;
+	
+	/** Required to initialize undefined in constraints. */
+	@SuppressWarnings("unused")
+	private Integer integerNull = null;
 }

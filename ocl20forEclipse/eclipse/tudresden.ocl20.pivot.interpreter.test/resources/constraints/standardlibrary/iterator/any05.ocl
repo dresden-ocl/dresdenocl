@@ -1,0 +1,8 @@
+package package1
+
+context Class1
+inv testAny05:
+/* One body is undefined, no other fulfills the condition. Expected as invalid. */
+Bag { 1, integerNull, 3 } -> any(element: Integer | if element.oclIsUndefined() then booleanNull else element = 2 endif) = 2
+
+endpackage

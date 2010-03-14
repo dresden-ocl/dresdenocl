@@ -1,0 +1,8 @@
+package package1
+
+context Class1
+inv testAny04:
+/* Bag is invalid (2 / 0). Expected as true. */
+Bag { (2 / 0) } -> any(element: Integer | element = 1).oclIsInvalid()
+
+endpackage

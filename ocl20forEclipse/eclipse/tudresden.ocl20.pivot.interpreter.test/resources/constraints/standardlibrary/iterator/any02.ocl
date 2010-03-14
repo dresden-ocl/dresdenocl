@@ -1,0 +1,8 @@
+package package1
+
+context Class1
+inv testAny02:
+/* Expected as true. */
+Bag { 1, 2, 3 } -> any(element: Integer | element = 1) = 1
+
+endpackage

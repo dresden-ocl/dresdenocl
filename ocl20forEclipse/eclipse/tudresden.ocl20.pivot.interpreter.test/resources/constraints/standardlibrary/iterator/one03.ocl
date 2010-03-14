@@ -1,0 +1,8 @@
+package package1
+
+context Class1
+inv testOne03:
+/* Bag contains undefined. Expected as invalid. */
+Bag { 1, integerNull, 3 } -> one(element: Integer | element = 3)
+
+endpackage

@@ -1,0 +1,8 @@
+package package1
+
+context Class1
+inv:
+/* -> result false. */
+Bag { 1, 2, 3 } -> exists(element: Integer | false)
+
+endpackage

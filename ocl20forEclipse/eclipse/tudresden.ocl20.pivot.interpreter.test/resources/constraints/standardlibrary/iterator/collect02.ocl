@@ -1,0 +1,8 @@
+package package1
+
+context Class1
+inv testCollect02:
+/* Bag contains undefined. Expected as true. */
+Bag { 1, integerNull } -> collect(element: Integer | Bag { 1, 2 }) -> size() = 4
+
+endpackage

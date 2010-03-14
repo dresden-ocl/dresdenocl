@@ -1,0 +1,8 @@
+package package1
+
+context Class1
+inv testIsUnique04:
+/* Bag is invalid (2 / 0). Expected as invalid. */
+Bag { (2 / 0) } -> isUnique(element: Integer | element)
+
+endpackage

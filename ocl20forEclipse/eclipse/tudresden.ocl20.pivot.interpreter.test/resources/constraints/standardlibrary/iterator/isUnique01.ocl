@@ -1,0 +1,8 @@
+package package1
+
+context Class1
+inv testIsUnique01:
+/* Expected as false. */
+Bag { 1, 3, 1 } -> isUnique(element: Integer | element)
+
+endpackage

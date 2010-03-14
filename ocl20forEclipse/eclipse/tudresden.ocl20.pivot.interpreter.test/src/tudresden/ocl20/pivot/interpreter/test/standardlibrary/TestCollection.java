@@ -34,8 +34,8 @@ import tudresden.ocl20.pivot.parser.ParseException;
 
 /**
  * <p>
- * Contains some test cases to test constraints defined on the context
- * <code>MandateRelatedInformation1</code>.
+ * Contains some test cases to test Standard Library operations on
+ * <code>Collection</code>s.
  * </p>
  * 
  * @author Claas Wilke

@@ -34,16 +34,16 @@ import tudresden.ocl20.pivot.parser.ParseException;
 
 /**
  * <p>
- * Contains some test cases to test Standard Library operations on
- * <code>Boolean</code>s.
+ * Contains some test cases to test Standard Library iterators on
+ * <code>Collection</code>s.
  * </p>
  * 
  * @author Claas Wilke
  */
-public class TestBoolean extends AbstractInterpreterTest {
+public class TestIterator extends AbstractInterpreterTest {
 
 	/** The name of the constraint directory for this test suite. */
-	private static final String CONSTRAINT_DIRECTORY = "standardlibrary/boolean";
+	private static final String CONSTRAINT_DIRECTORY = "standardlibrary/iterator";
 
 	/**
 	 * <p>
@@ -77,7 +77,7 @@ public class TestBoolean extends AbstractInterpreterTest {
 
 	/**
 	 * <p>
-	 * Tests the operation <code>Boolean.and(Boolean)</code>.
+	 * Tests the iterator <code>Collection->any(..)</code>.
 	 * </p>
 	 * 
 	 * @throws ParseException
@@ -85,12 +85,180 @@ public class TestBoolean extends AbstractInterpreterTest {
 	 * @throws IllegalArgumentException
 	 */
 	@Test
-	public void testAnd01() throws IllegalArgumentException,
+	public void testAny01() throws IllegalArgumentException,
 			ModelAccessException, ParseException {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/and01", INSTANCE1_NAME, Arrays
+				CONSTRAINT_DIRECTORY + "/any01", INSTANCE1_NAME, Arrays
+						.asList(new String[] { "Class1" }));
+
+		assertNotNull(results);
+		assertEquals(1, results.size());
+
+		this.assertIsTrue(results.get(0));
+	}
+
+	/**
+	 * <p>
+	 * Tests the iterator <code>Collection->any(..)</code>.
+	 * </p>
+	 * 
+	 * @throws ParseException
+	 * @throws ModelAccessException
+	 * @throws IllegalArgumentException
+	 */
+	@Test
+	public void testAny02() throws IllegalArgumentException,
+			ModelAccessException, ParseException {
+
+		List<IInterpretationResult> results;
+		results = super.interpretConstraintsForInstance(MODEL1_NAME,
+				CONSTRAINT_DIRECTORY + "/any02", INSTANCE1_NAME, Arrays
+						.asList(new String[] { "Class1" }));
+
+		assertNotNull(results);
+		assertEquals(1, results.size());
+
+		this.assertIsTrue(results.get(0));
+	}
+
+	/**
+	 * <p>
+	 * Tests the iterator <code>Collection->any(..)</code>.
+	 * </p>
+	 * 
+	 * @throws ParseException
+	 * @throws ModelAccessException
+	 * @throws IllegalArgumentException
+	 */
+	@Test
+	public void testAny03() throws IllegalArgumentException,
+			ModelAccessException, ParseException {
+
+		List<IInterpretationResult> results;
+		results = super.interpretConstraintsForInstance(MODEL1_NAME,
+				CONSTRAINT_DIRECTORY + "/any03", INSTANCE1_NAME, Arrays
+						.asList(new String[] { "Class1" }));
+
+		assertNotNull(results);
+		assertEquals(1, results.size());
+
+		this.assertIsTrue(results.get(0));
+	}
+
+	/**
+	 * <p>
+	 * Tests the iterator <code>Collection->any(..)</code>.
+	 * </p>
+	 * 
+	 * @throws ParseException
+	 * @throws ModelAccessException
+	 * @throws IllegalArgumentException
+	 */
+	@Test
+	public void testAny04() throws IllegalArgumentException,
+			ModelAccessException, ParseException {
+
+		List<IInterpretationResult> results;
+		results = super.interpretConstraintsForInstance(MODEL1_NAME,
+				CONSTRAINT_DIRECTORY + "/any04", INSTANCE1_NAME, Arrays
+						.asList(new String[] { "Class1" }));
+
+		assertNotNull(results);
+		assertEquals(1, results.size());
+
+		this.assertIsTrue(results.get(0));
+	}
+
+	/**
+	 * <p>
+	 * Tests the iterator <code>Collection->any(..)</code>.
+	 * </p>
+	 * 
+	 * @throws ParseException
+	 * @throws ModelAccessException
+	 * @throws IllegalArgumentException
+	 */
+	@Test
+	public void testAny05() throws IllegalArgumentException,
+			ModelAccessException, ParseException {
+
+		List<IInterpretationResult> results;
+		results = super.interpretConstraintsForInstance(MODEL1_NAME,
+				CONSTRAINT_DIRECTORY + "/any05", INSTANCE1_NAME, Arrays
+						.asList(new String[] { "Class1" }));
+
+		assertNotNull(results);
+		assertEquals(1, results.size());
+
+		this.assertIsInvalid(results.get(0));
+	}
+
+	/**
+	 * <p>
+	 * Tests the iterator <code>Collection->any(..)</code>.
+	 * </p>
+	 * 
+	 * @throws ParseException
+	 * @throws ModelAccessException
+	 * @throws IllegalArgumentException
+	 */
+	@Test
+	public void testAny06() throws IllegalArgumentException,
+			ModelAccessException, ParseException {
+
+		List<IInterpretationResult> results;
+		results = super.interpretConstraintsForInstance(MODEL1_NAME,
+				CONSTRAINT_DIRECTORY + "/any06", INSTANCE1_NAME, Arrays
+						.asList(new String[] { "Class1" }));
+
+		assertNotNull(results);
+		assertEquals(1, results.size());
+
+		this.assertIsTrue(results.get(0));
+	}
+
+	/**
+	 * <p>
+	 * Tests the iterator <code>Collection->any(..)</code>.
+	 * </p>
+	 * 
+	 * @throws ParseException
+	 * @throws ModelAccessException
+	 * @throws IllegalArgumentException
+	 */
+	@Test
+	public void testAny07() throws IllegalArgumentException,
+			ModelAccessException, ParseException {
+
+		List<IInterpretationResult> results;
+		results = super.interpretConstraintsForInstance(MODEL1_NAME,
+				CONSTRAINT_DIRECTORY + "/any07", INSTANCE1_NAME, Arrays
+						.asList(new String[] { "Class1" }));
+
+		assertNotNull(results);
+		assertEquals(1, results.size());
+
+		this.assertIsTrue(results.get(0));
+	}
+
+	/**
+	 * <p>
+	 * Tests the iterator <code>Collection->any(..)</code>.
+	 * </p>
+	 * 
+	 * @throws ParseException
+	 * @throws ModelAccessException
+	 * @throws IllegalArgumentException
+	 */
+	@Test
+	public void testAny08() throws IllegalArgumentException,
+			ModelAccessException, ParseException {
+
+		List<IInterpretationResult> results;
+		results = super.interpretConstraintsForInstance(MODEL1_NAME,
+				CONSTRAINT_DIRECTORY + "/any08", INSTANCE1_NAME, Arrays
 						.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
@@ -101,7 +269,7 @@ public class TestBoolean extends AbstractInterpreterTest {
 
 	/**
 	 * <p>
-	 * Tests the operation <code>Boolean.and(Boolean)</code>.
+	 * Tests the iterator <code>Collection->collect(..)</code>.
 	 * </p>
 	 * 
 	 * @throws ParseException
@@ -109,12 +277,156 @@ public class TestBoolean extends AbstractInterpreterTest {
 	 * @throws IllegalArgumentException
 	 */
 	@Test
-	public void testAnd02() throws IllegalArgumentException,
+	public void testCollect01() throws IllegalArgumentException,
 			ModelAccessException, ParseException {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/and02", INSTANCE1_NAME, Arrays
+				CONSTRAINT_DIRECTORY + "/collect01", INSTANCE1_NAME, Arrays
+						.asList(new String[] { "Class1" }));
+
+		assertNotNull(results);
+		assertEquals(1, results.size());
+
+		this.assertIsTrue(results.get(0));
+	}
+
+	/**
+	 * <p>
+	 * Tests the iterator <code>Collection->collect(..)</code>.
+	 * </p>
+	 * 
+	 * @throws ParseException
+	 * @throws ModelAccessException
+	 * @throws IllegalArgumentException
+	 */
+	@Test
+	public void testCollect02() throws IllegalArgumentException,
+			ModelAccessException, ParseException {
+
+		List<IInterpretationResult> results;
+		results = super.interpretConstraintsForInstance(MODEL1_NAME,
+				CONSTRAINT_DIRECTORY + "/collect02", INSTANCE1_NAME, Arrays
+						.asList(new String[] { "Class1" }));
+
+		assertNotNull(results);
+		assertEquals(1, results.size());
+
+		this.assertIsTrue(results.get(0));
+	}
+
+	/**
+	 * <p>
+	 * Tests the iterator <code>Collection->collect(..)</code>.
+	 * </p>
+	 * 
+	 * @throws ParseException
+	 * @throws ModelAccessException
+	 * @throws IllegalArgumentException
+	 */
+	@Test
+	public void testCollect03() throws IllegalArgumentException,
+			ModelAccessException, ParseException {
+
+		List<IInterpretationResult> results;
+		results = super.interpretConstraintsForInstance(MODEL1_NAME,
+				CONSTRAINT_DIRECTORY + "/collect03", INSTANCE1_NAME, Arrays
+						.asList(new String[] { "Class1" }));
+
+		assertNotNull(results);
+		assertEquals(1, results.size());
+
+		this.assertIsTrue(results.get(0));
+	}
+
+	/**
+	 * <p>
+	 * Tests the iterator <code>Collection->collect(..)</code>.
+	 * </p>
+	 * 
+	 * @throws ParseException
+	 * @throws ModelAccessException
+	 * @throws IllegalArgumentException
+	 */
+	@Test
+	public void testCollect04() throws IllegalArgumentException,
+			ModelAccessException, ParseException {
+
+		List<IInterpretationResult> results;
+		results = super.interpretConstraintsForInstance(MODEL1_NAME,
+				CONSTRAINT_DIRECTORY + "/collect04", INSTANCE1_NAME, Arrays
+						.asList(new String[] { "Class1" }));
+
+		assertNotNull(results);
+		assertEquals(1, results.size());
+
+		this.assertIsTrue(results.get(0));
+	}
+
+	/**
+	 * <p>
+	 * Tests the iterator <code>Collection->collect(..)</code>.
+	 * </p>
+	 * 
+	 * @throws ParseException
+	 * @throws ModelAccessException
+	 * @throws IllegalArgumentException
+	 */
+	@Test
+	public void testCollect05() throws IllegalArgumentException,
+			ModelAccessException, ParseException {
+
+		List<IInterpretationResult> results;
+		results = super.interpretConstraintsForInstance(MODEL1_NAME,
+				CONSTRAINT_DIRECTORY + "/collect05", INSTANCE1_NAME, Arrays
+						.asList(new String[] { "Class1" }));
+
+		assertNotNull(results);
+		assertEquals(1, results.size());
+
+		this.assertIsTrue(results.get(0));
+	}
+
+	/**
+	 * <p>
+	 * Tests the iterator <code>Collection->exists(..)</code>.
+	 * </p>
+	 * 
+	 * @throws ParseException
+	 * @throws ModelAccessException
+	 * @throws IllegalArgumentException
+	 */
+	@Test
+	public void testExists01() throws IllegalArgumentException,
+			ModelAccessException, ParseException {
+
+		List<IInterpretationResult> results;
+		results = super.interpretConstraintsForInstance(MODEL1_NAME,
+				CONSTRAINT_DIRECTORY + "/exists01", INSTANCE1_NAME, Arrays
+						.asList(new String[] { "Class1" }));
+
+		assertNotNull(results);
+		assertEquals(1, results.size());
+
+		this.assertIsInvalid(results.get(0));
+	}
+
+	/**
+	 * <p>
+	 * Tests the iterator <code>Collection->exists(..)</code>.
+	 * </p>
+	 * 
+	 * @throws ParseException
+	 * @throws ModelAccessException
+	 * @throws IllegalArgumentException
+	 */
+	@Test
+	public void testExists02() throws IllegalArgumentException,
+			ModelAccessException, ParseException {
+
+		List<IInterpretationResult> results;
+		results = super.interpretConstraintsForInstance(MODEL1_NAME,
+				CONSTRAINT_DIRECTORY + "/exists02", INSTANCE1_NAME, Arrays
 						.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
@@ -125,7 +437,7 @@ public class TestBoolean extends AbstractInterpreterTest {
 
 	/**
 	 * <p>
-	 * Tests the operation <code>Boolean.and(Boolean)</code>.
+	 * Tests the iterator <code>Collection->exists(..)</code>.
 	 * </p>
 	 * 
 	 * @throws ParseException
@@ -133,12 +445,180 @@ public class TestBoolean extends AbstractInterpreterTest {
 	 * @throws IllegalArgumentException
 	 */
 	@Test
-	public void testAnd03() throws IllegalArgumentException,
+	public void testExists03() throws IllegalArgumentException,
 			ModelAccessException, ParseException {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/and03", INSTANCE1_NAME, Arrays
+				CONSTRAINT_DIRECTORY + "/exists03", INSTANCE1_NAME, Arrays
+						.asList(new String[] { "Class1" }));
+
+		assertNotNull(results);
+		assertEquals(1, results.size());
+
+		this.assertIsInvalid(results.get(0));
+	}
+
+	/**
+	 * <p>
+	 * Tests the iterator <code>Collection->exists(..)</code>.
+	 * </p>
+	 * 
+	 * @throws ParseException
+	 * @throws ModelAccessException
+	 * @throws IllegalArgumentException
+	 */
+	@Test
+	public void testExists04() throws IllegalArgumentException,
+			ModelAccessException, ParseException {
+
+		List<IInterpretationResult> results;
+		results = super.interpretConstraintsForInstance(MODEL1_NAME,
+				CONSTRAINT_DIRECTORY + "/exists04", INSTANCE1_NAME, Arrays
+						.asList(new String[] { "Class1" }));
+
+		assertNotNull(results);
+		assertEquals(1, results.size());
+
+		this.assertIsInvalid(results.get(0));
+	}
+
+	/**
+	 * <p>
+	 * Tests the iterator <code>Collection->exists(..)</code>.
+	 * </p>
+	 * 
+	 * @throws ParseException
+	 * @throws ModelAccessException
+	 * @throws IllegalArgumentException
+	 */
+	@Test
+	public void testExists05() throws IllegalArgumentException,
+			ModelAccessException, ParseException {
+
+		List<IInterpretationResult> results;
+		results = super.interpretConstraintsForInstance(MODEL1_NAME,
+				CONSTRAINT_DIRECTORY + "/exists05", INSTANCE1_NAME, Arrays
+						.asList(new String[] { "Class1" }));
+
+		assertNotNull(results);
+		assertEquals(1, results.size());
+
+		this.assertIsInvalid(results.get(0));
+	}
+
+	/**
+	 * <p>
+	 * Tests the iterator <code>Collection->exists(..)</code>.
+	 * </p>
+	 * 
+	 * @throws ParseException
+	 * @throws ModelAccessException
+	 * @throws IllegalArgumentException
+	 */
+	@Test
+	public void testExists06() throws IllegalArgumentException,
+			ModelAccessException, ParseException {
+
+		List<IInterpretationResult> results;
+		results = super.interpretConstraintsForInstance(MODEL1_NAME,
+				CONSTRAINT_DIRECTORY + "/exists06", INSTANCE1_NAME, Arrays
+						.asList(new String[] { "Class1" }));
+
+		assertNotNull(results);
+		assertEquals(1, results.size());
+
+		this.assertIsTrue(results.get(0));
+	}
+
+	/**
+	 * <p>
+	 * Tests the iterator <code>Collection->exists(..)</code>.
+	 * </p>
+	 * 
+	 * @throws ParseException
+	 * @throws ModelAccessException
+	 * @throws IllegalArgumentException
+	 */
+	@Test
+	public void testExists07() throws IllegalArgumentException,
+			ModelAccessException, ParseException {
+
+		List<IInterpretationResult> results;
+		results = super.interpretConstraintsForInstance(MODEL1_NAME,
+				CONSTRAINT_DIRECTORY + "/exists07", INSTANCE1_NAME, Arrays
+						.asList(new String[] { "Class1" }));
+
+		assertNotNull(results);
+		assertEquals(1, results.size());
+
+		this.assertIsTrue(results.get(0));
+	}
+
+	/**
+	 * <p>
+	 * Tests the iterator <code>Collection->exists(..)</code>.
+	 * </p>
+	 * 
+	 * @throws ParseException
+	 * @throws ModelAccessException
+	 * @throws IllegalArgumentException
+	 */
+	@Test
+	public void testExists08() throws IllegalArgumentException,
+			ModelAccessException, ParseException {
+
+		List<IInterpretationResult> results;
+		results = super.interpretConstraintsForInstance(MODEL1_NAME,
+				CONSTRAINT_DIRECTORY + "/exists08", INSTANCE1_NAME, Arrays
+						.asList(new String[] { "Class1" }));
+
+		assertNotNull(results);
+		assertEquals(1, results.size());
+
+		this.assertIsTrue(results.get(0));
+	}
+
+	/**
+	 * <p>
+	 * Tests the iterator <code>Collection->exists(..)</code>.
+	 * </p>
+	 * 
+	 * @throws ParseException
+	 * @throws ModelAccessException
+	 * @throws IllegalArgumentException
+	 */
+	@Test
+	public void testExists09() throws IllegalArgumentException,
+			ModelAccessException, ParseException {
+
+		List<IInterpretationResult> results;
+		results = super.interpretConstraintsForInstance(MODEL1_NAME,
+				CONSTRAINT_DIRECTORY + "/exists09", INSTANCE1_NAME, Arrays
+						.asList(new String[] { "Class1" }));
+
+		assertNotNull(results);
+		assertEquals(1, results.size());
+
+		this.assertIsTrue(results.get(0));
+	}
+
+	/**
+	 * <p>
+	 * Tests the iterator <code>Collection->exists(..)</code>.
+	 * </p>
+	 * 
+	 * @throws ParseException
+	 * @throws ModelAccessException
+	 * @throws IllegalArgumentException
+	 */
+	@Test
+	public void testExists10() throws IllegalArgumentException,
+			ModelAccessException, ParseException {
+
+		List<IInterpretationResult> results;
+		results = super.interpretConstraintsForInstance(MODEL1_NAME,
+				CONSTRAINT_DIRECTORY + "/exists10", INSTANCE1_NAME, Arrays
 						.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
@@ -149,7 +629,7 @@ public class TestBoolean extends AbstractInterpreterTest {
 
 	/**
 	 * <p>
-	 * Tests the operation <code>Boolean.and(Boolean)</code>.
+	 * Tests the iterator <code>Collection->exists(..)</code>.
 	 * </p>
 	 * 
 	 * @throws ParseException
@@ -157,12 +637,204 @@ public class TestBoolean extends AbstractInterpreterTest {
 	 * @throws IllegalArgumentException
 	 */
 	@Test
-	public void testAnd04() throws IllegalArgumentException,
+	public void testExists11() throws IllegalArgumentException,
 			ModelAccessException, ParseException {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/and04", INSTANCE1_NAME, Arrays
+				CONSTRAINT_DIRECTORY + "/exists11", INSTANCE1_NAME, Arrays
+						.asList(new String[] { "Class1" }));
+
+		assertNotNull(results);
+		assertEquals(1, results.size());
+
+		this.assertIsInvalid(results.get(0));
+	}
+
+	/**
+	 * <p>
+	 * Tests the iterator <code>Collection->exists(..)</code>.
+	 * </p>
+	 * 
+	 * @throws ParseException
+	 * @throws ModelAccessException
+	 * @throws IllegalArgumentException
+	 */
+	@Test
+	public void testExists12() throws IllegalArgumentException,
+			ModelAccessException, ParseException {
+
+		List<IInterpretationResult> results;
+		results = super.interpretConstraintsForInstance(MODEL1_NAME,
+				CONSTRAINT_DIRECTORY + "/exists12", INSTANCE1_NAME, Arrays
+						.asList(new String[] { "Class1" }));
+
+		assertNotNull(results);
+		assertEquals(1, results.size());
+
+		this.assertIsInvalid(results.get(0));
+	}
+
+	/**
+	 * <p>
+	 * Tests the iterator <code>Collection->exists(..)</code>.
+	 * </p>
+	 * 
+	 * @throws ParseException
+	 * @throws ModelAccessException
+	 * @throws IllegalArgumentException
+	 */
+	@Test
+	public void testExists13() throws IllegalArgumentException,
+			ModelAccessException, ParseException {
+
+		List<IInterpretationResult> results;
+		results = super.interpretConstraintsForInstance(MODEL1_NAME,
+				CONSTRAINT_DIRECTORY + "/exists13", INSTANCE1_NAME, Arrays
+						.asList(new String[] { "Class1" }));
+
+		assertNotNull(results);
+		assertEquals(1, results.size());
+
+		this.assertIsInvalid(results.get(0));
+	}
+
+	/**
+	 * <p>
+	 * Tests the iterator <code>Collection->exists(..)</code>.
+	 * </p>
+	 * 
+	 * @throws ParseException
+	 * @throws ModelAccessException
+	 * @throws IllegalArgumentException
+	 */
+	@Test
+	public void testExists14() throws IllegalArgumentException,
+			ModelAccessException, ParseException {
+
+		List<IInterpretationResult> results;
+		results = super.interpretConstraintsForInstance(MODEL1_NAME,
+				CONSTRAINT_DIRECTORY + "/exists14", INSTANCE1_NAME, Arrays
+						.asList(new String[] { "Class1" }));
+
+		assertNotNull(results);
+		assertEquals(1, results.size());
+
+		this.assertIsTrue(results.get(0));
+	}
+
+	/**
+	 * <p>
+	 * Tests the iterator <code>Collection->exists(..)</code>.
+	 * </p>
+	 * 
+	 * @throws ParseException
+	 * @throws ModelAccessException
+	 * @throws IllegalArgumentException
+	 */
+	@Test
+	public void testExists15() throws IllegalArgumentException,
+			ModelAccessException, ParseException {
+
+		List<IInterpretationResult> results;
+		results = super.interpretConstraintsForInstance(MODEL1_NAME,
+				CONSTRAINT_DIRECTORY + "/exists15", INSTANCE1_NAME, Arrays
+						.asList(new String[] { "Class1" }));
+
+		assertNotNull(results);
+		assertEquals(1, results.size());
+
+		this.assertIsTrue(results.get(0));
+	}
+
+	/**
+	 * <p>
+	 * Tests the iterator <code>Collection->exists(..)</code>.
+	 * </p>
+	 * 
+	 * @throws ParseException
+	 * @throws ModelAccessException
+	 * @throws IllegalArgumentException
+	 */
+	@Test
+	public void testExists16() throws IllegalArgumentException,
+			ModelAccessException, ParseException {
+
+		List<IInterpretationResult> results;
+		results = super.interpretConstraintsForInstance(MODEL1_NAME,
+				CONSTRAINT_DIRECTORY + "/exists16", INSTANCE1_NAME, Arrays
+						.asList(new String[] { "Class1" }));
+
+		assertNotNull(results);
+		assertEquals(1, results.size());
+
+		this.assertIsTrue(results.get(0));
+	}
+
+	/**
+	 * <p>
+	 * Tests the iterator <code>Collection->exists(..)</code>.
+	 * </p>
+	 * 
+	 * @throws ParseException
+	 * @throws ModelAccessException
+	 * @throws IllegalArgumentException
+	 */
+	@Test
+	public void testExists17() throws IllegalArgumentException,
+			ModelAccessException, ParseException {
+
+		List<IInterpretationResult> results;
+		results = super.interpretConstraintsForInstance(MODEL1_NAME,
+				CONSTRAINT_DIRECTORY + "/exists17", INSTANCE1_NAME, Arrays
+						.asList(new String[] { "Class1" }));
+
+		assertNotNull(results);
+		assertEquals(1, results.size());
+
+		this.assertIsTrue(results.get(0));
+	}
+
+	/**
+	 * <p>
+	 * Tests the iterator <code>Collection->forAll(..)</code>.
+	 * </p>
+	 * 
+	 * @throws ParseException
+	 * @throws ModelAccessException
+	 * @throws IllegalArgumentException
+	 */
+	@Test
+	public void testForAll01() throws IllegalArgumentException,
+			ModelAccessException, ParseException {
+
+		List<IInterpretationResult> results;
+		results = super.interpretConstraintsForInstance(MODEL1_NAME,
+				CONSTRAINT_DIRECTORY + "/forAll01", INSTANCE1_NAME, Arrays
+						.asList(new String[] { "Class1" }));
+
+		assertNotNull(results);
+		assertEquals(1, results.size());
+
+		this.assertIsInvalid(results.get(0));
+	}
+
+	/**
+	 * <p>
+	 * Tests the iterator <code>Collection->forAll(..)</code>.
+	 * </p>
+	 * 
+	 * @throws ParseException
+	 * @throws ModelAccessException
+	 * @throws IllegalArgumentException
+	 */
+	@Test
+	public void testForAll02() throws IllegalArgumentException,
+			ModelAccessException, ParseException {
+
+		List<IInterpretationResult> results;
+		results = super.interpretConstraintsForInstance(MODEL1_NAME,
+				CONSTRAINT_DIRECTORY + "/forAll02", INSTANCE1_NAME, Arrays
 						.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
@@ -173,7 +845,7 @@ public class TestBoolean extends AbstractInterpreterTest {
 
 	/**
 	 * <p>
-	 * Tests the operation <code>Boolean.and(Boolean)</code>.
+	 * Tests the iterator <code>Collection->forAll(..)</code>.
 	 * </p>
 	 * 
 	 * @throws ParseException
@@ -181,12 +853,12 @@ public class TestBoolean extends AbstractInterpreterTest {
 	 * @throws IllegalArgumentException
 	 */
 	@Test
-	public void testAnd05() throws IllegalArgumentException,
+	public void testForAll03() throws IllegalArgumentException,
 			ModelAccessException, ParseException {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/and05", INSTANCE1_NAME, Arrays
+				CONSTRAINT_DIRECTORY + "/forAll03", INSTANCE1_NAME, Arrays
 						.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
@@ -197,7 +869,7 @@ public class TestBoolean extends AbstractInterpreterTest {
 
 	/**
 	 * <p>
-	 * Tests the operation <code>Boolean.and(Boolean)</code>.
+	 * Tests the iterator <code>Collection->forAll(..)</code>.
 	 * </p>
 	 * 
 	 * @throws ParseException
@@ -205,84 +877,12 @@ public class TestBoolean extends AbstractInterpreterTest {
 	 * @throws IllegalArgumentException
 	 */
 	@Test
-	public void testAnd06() throws IllegalArgumentException,
+	public void testForAll04() throws IllegalArgumentException,
 			ModelAccessException, ParseException {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/and06", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
-
-		assertNotNull(results);
-		assertEquals(1, results.size());
-
-		this.assertIsTrue(results.get(0));
-	}
-
-	/**
-	 * <p>
-	 * Tests the operation <code>Boolean.and(Boolean)</code>.
-	 * </p>
-	 * 
-	 * @throws ParseException
-	 * @throws ModelAccessException
-	 * @throws IllegalArgumentException
-	 */
-	@Test
-	public void testAnd07() throws IllegalArgumentException,
-			ModelAccessException, ParseException {
-
-		List<IInterpretationResult> results;
-		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/and07", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
-
-		assertNotNull(results);
-		assertEquals(1, results.size());
-
-		this.assertIsInvalid(results.get(0));
-	}
-
-	/**
-	 * <p>
-	 * Tests the operation <code>Boolean.and(Boolean)</code>.
-	 * </p>
-	 * 
-	 * @throws ParseException
-	 * @throws ModelAccessException
-	 * @throws IllegalArgumentException
-	 */
-	@Test
-	public void testAnd08() throws IllegalArgumentException,
-			ModelAccessException, ParseException {
-
-		List<IInterpretationResult> results;
-		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/and08", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
-
-		assertNotNull(results);
-		assertEquals(1, results.size());
-
-		this.assertIsInvalid(results.get(0));
-	}
-
-	/**
-	 * <p>
-	 * Tests the operation <code>Boolean.and(Boolean)</code>.
-	 * </p>
-	 * 
-	 * @throws ParseException
-	 * @throws ModelAccessException
-	 * @throws IllegalArgumentException
-	 */
-	@Test
-	public void testAnd09() throws IllegalArgumentException,
-			ModelAccessException, ParseException {
-
-		List<IInterpretationResult> results;
-		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/and09", INSTANCE1_NAME, Arrays
+				CONSTRAINT_DIRECTORY + "/forAll04", INSTANCE1_NAME, Arrays
 						.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
@@ -293,7 +893,7 @@ public class TestBoolean extends AbstractInterpreterTest {
 
 	/**
 	 * <p>
-	 * Tests the operation <code>Boolean.and(Boolean)</code>.
+	 * Tests the iterator <code>Collection->forAll(..)</code>.
 	 * </p>
 	 * 
 	 * @throws ParseException
@@ -301,23 +901,167 @@ public class TestBoolean extends AbstractInterpreterTest {
 	 * @throws IllegalArgumentException
 	 */
 	@Test
-	public void testAnd10() throws IllegalArgumentException,
+	public void testForAll05() throws IllegalArgumentException,
 			ModelAccessException, ParseException {
-
+	
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/and10", INSTANCE1_NAME, Arrays
+				CONSTRAINT_DIRECTORY + "/forAll05", INSTANCE1_NAME, Arrays
 						.asList(new String[] { "Class1" }));
-
+	
 		assertNotNull(results);
 		assertEquals(1, results.size());
+	
+		this.assertIsFalse(results.get(0));
+	}
 
+	/**
+	 * <p>
+	 * Tests the iterator <code>Collection->forAll(..)</code>.
+	 * </p>
+	 * 
+	 * @throws ParseException
+	 * @throws ModelAccessException
+	 * @throws IllegalArgumentException
+	 */
+	@Test
+	public void testForAll06() throws IllegalArgumentException,
+			ModelAccessException, ParseException {
+	
+		List<IInterpretationResult> results;
+		results = super.interpretConstraintsForInstance(MODEL1_NAME,
+				CONSTRAINT_DIRECTORY + "/forAll06", INSTANCE1_NAME, Arrays
+						.asList(new String[] { "Class1" }));
+	
+		assertNotNull(results);
+		assertEquals(1, results.size());
+	
+		this.assertIsFalse(results.get(0));
+	}
+
+	/**
+	 * <p>
+	 * Tests the iterator <code>Collection->forAll(..)</code>.
+	 * </p>
+	 * 
+	 * @throws ParseException
+	 * @throws ModelAccessException
+	 * @throws IllegalArgumentException
+	 */
+	@Test
+	public void testForAll07() throws IllegalArgumentException,
+			ModelAccessException, ParseException {
+	
+		List<IInterpretationResult> results;
+		results = super.interpretConstraintsForInstance(MODEL1_NAME,
+				CONSTRAINT_DIRECTORY + "/forAll07", INSTANCE1_NAME, Arrays
+						.asList(new String[] { "Class1" }));
+	
+		assertNotNull(results);
+		assertEquals(1, results.size());
+	
+		this.assertIsFalse(results.get(0));
+	}
+
+	/**
+	 * <p>
+	 * Tests the iterator <code>Collection->forAll(..)</code>.
+	 * </p>
+	 * 
+	 * @throws ParseException
+	 * @throws ModelAccessException
+	 * @throws IllegalArgumentException
+	 */
+	@Test
+	public void testForAll08() throws IllegalArgumentException,
+			ModelAccessException, ParseException {
+	
+		List<IInterpretationResult> results;
+		results = super.interpretConstraintsForInstance(MODEL1_NAME,
+				CONSTRAINT_DIRECTORY + "/forAll08", INSTANCE1_NAME, Arrays
+						.asList(new String[] { "Class1" }));
+	
+		assertNotNull(results);
+		assertEquals(1, results.size());
+	
+		this.assertIsFalse(results.get(0));
+	}
+
+	/**
+	 * <p>
+	 * Tests the iterator <code>Collection->forAll(..)</code>.
+	 * </p>
+	 * 
+	 * @throws ParseException
+	 * @throws ModelAccessException
+	 * @throws IllegalArgumentException
+	 */
+	@Test
+	public void testForAll09() throws IllegalArgumentException,
+			ModelAccessException, ParseException {
+	
+		List<IInterpretationResult> results;
+		results = super.interpretConstraintsForInstance(MODEL1_NAME,
+				CONSTRAINT_DIRECTORY + "/forAll09", INSTANCE1_NAME, Arrays
+						.asList(new String[] { "Class1" }));
+	
+		assertNotNull(results);
+		assertEquals(1, results.size());
+	
+		this.assertIsFalse(results.get(0));
+	}
+
+	/**
+	 * <p>
+	 * Tests the iterator <code>Collection->forAll(..)</code>.
+	 * </p>
+	 * 
+	 * @throws ParseException
+	 * @throws ModelAccessException
+	 * @throws IllegalArgumentException
+	 */
+	@Test
+	public void testForAll10() throws IllegalArgumentException,
+			ModelAccessException, ParseException {
+	
+		List<IInterpretationResult> results;
+		results = super.interpretConstraintsForInstance(MODEL1_NAME,
+				CONSTRAINT_DIRECTORY + "/forAll10", INSTANCE1_NAME, Arrays
+						.asList(new String[] { "Class1" }));
+	
+		assertNotNull(results);
+		assertEquals(1, results.size());
+	
+		this.assertIsTrue(results.get(0));
+	}
+
+	/**
+	 * <p>
+	 * Tests the iterator <code>Collection->forAll(..)</code>.
+	 * </p>
+	 * 
+	 * @throws ParseException
+	 * @throws ModelAccessException
+	 * @throws IllegalArgumentException
+	 */
+	@Test
+	public void testForAll11() throws IllegalArgumentException,
+			ModelAccessException, ParseException {
+	
+		List<IInterpretationResult> results;
+		results = super.interpretConstraintsForInstance(MODEL1_NAME,
+				CONSTRAINT_DIRECTORY + "/forAll11", INSTANCE1_NAME, Arrays
+						.asList(new String[] { "Class1" }));
+	
+		assertNotNull(results);
+		assertEquals(1, results.size());
+	
 		this.assertIsInvalid(results.get(0));
 	}
 
 	/**
 	 * <p>
-	 * Tests the operation <code>Boolean.and(Boolean)</code>.
+	 * Tests the iterator <code>Collection->forAll(..)</code>.
 	 * </p>
 	 * 
 	 * @throws ParseException
@@ -325,23 +1069,23 @@ public class TestBoolean extends AbstractInterpreterTest {
 	 * @throws IllegalArgumentException
 	 */
 	@Test
-	public void testAnd11() throws IllegalArgumentException,
+	public void testForAll12() throws IllegalArgumentException,
 			ModelAccessException, ParseException {
-
+	
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/and11", INSTANCE1_NAME, Arrays
+				CONSTRAINT_DIRECTORY + "/forAll12", INSTANCE1_NAME, Arrays
 						.asList(new String[] { "Class1" }));
-
+	
 		assertNotNull(results);
 		assertEquals(1, results.size());
-
+	
 		this.assertIsInvalid(results.get(0));
 	}
 
 	/**
 	 * <p>
-	 * Tests the operation <code>Boolean.and(Boolean)</code>.
+	 * Tests the iterator <code>Collection->forAll(..)</code>.
 	 * </p>
 	 * 
 	 * @throws ParseException
@@ -349,23 +1093,23 @@ public class TestBoolean extends AbstractInterpreterTest {
 	 * @throws IllegalArgumentException
 	 */
 	@Test
-	public void testAnd12() throws IllegalArgumentException,
+	public void testForAll13() throws IllegalArgumentException,
 			ModelAccessException, ParseException {
-
+	
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/and12", INSTANCE1_NAME, Arrays
+				CONSTRAINT_DIRECTORY + "/forAll13", INSTANCE1_NAME, Arrays
 						.asList(new String[] { "Class1" }));
-
+	
 		assertNotNull(results);
 		assertEquals(1, results.size());
-
+	
 		this.assertIsInvalid(results.get(0));
 	}
 
 	/**
 	 * <p>
-	 * Tests the operation <code>Boolean.and(Boolean)</code>.
+	 * Tests the iterator <code>Collection->forAll(..)</code>.
 	 * </p>
 	 * 
 	 * @throws ParseException
@@ -373,12 +1117,300 @@ public class TestBoolean extends AbstractInterpreterTest {
 	 * @throws IllegalArgumentException
 	 */
 	@Test
-	public void testAnd13() throws IllegalArgumentException,
+	public void testForAll14() throws IllegalArgumentException,
+			ModelAccessException, ParseException {
+	
+		List<IInterpretationResult> results;
+		results = super.interpretConstraintsForInstance(MODEL1_NAME,
+				CONSTRAINT_DIRECTORY + "/forAll14", INSTANCE1_NAME, Arrays
+						.asList(new String[] { "Class1" }));
+	
+		assertNotNull(results);
+		assertEquals(1, results.size());
+	
+		this.assertIsFalse(results.get(0));
+	}
+
+	/**
+	 * <p>
+	 * Tests the iterator <code>Collection->forAll(..)</code>.
+	 * </p>
+	 * 
+	 * @throws ParseException
+	 * @throws ModelAccessException
+	 * @throws IllegalArgumentException
+	 */
+	@Test
+	public void testForAll15() throws IllegalArgumentException,
+			ModelAccessException, ParseException {
+	
+		List<IInterpretationResult> results;
+		results = super.interpretConstraintsForInstance(MODEL1_NAME,
+				CONSTRAINT_DIRECTORY + "/forAll15", INSTANCE1_NAME, Arrays
+						.asList(new String[] { "Class1" }));
+	
+		assertNotNull(results);
+		assertEquals(1, results.size());
+	
+		this.assertIsFalse(results.get(0));
+	}
+
+	/**
+	 * <p>
+	 * Tests the iterator <code>Collection->forAll(..)</code>.
+	 * </p>
+	 * 
+	 * @throws ParseException
+	 * @throws ModelAccessException
+	 * @throws IllegalArgumentException
+	 */
+	@Test
+	public void testForAll16() throws IllegalArgumentException,
+			ModelAccessException, ParseException {
+	
+		List<IInterpretationResult> results;
+		results = super.interpretConstraintsForInstance(MODEL1_NAME,
+				CONSTRAINT_DIRECTORY + "/forAll16", INSTANCE1_NAME, Arrays
+						.asList(new String[] { "Class1" }));
+	
+		assertNotNull(results);
+		assertEquals(1, results.size());
+	
+		this.assertIsFalse(results.get(0));
+	}
+
+	/**
+	 * <p>
+	 * Tests the iterator <code>Collection->forAll(..)</code>.
+	 * </p>
+	 * 
+	 * @throws ParseException
+	 * @throws ModelAccessException
+	 * @throws IllegalArgumentException
+	 */
+	@Test
+	public void testForAll17() throws IllegalArgumentException,
+			ModelAccessException, ParseException {
+	
+		List<IInterpretationResult> results;
+		results = super.interpretConstraintsForInstance(MODEL1_NAME,
+				CONSTRAINT_DIRECTORY + "/forAll17", INSTANCE1_NAME, Arrays
+						.asList(new String[] { "Class1" }));
+	
+		assertNotNull(results);
+		assertEquals(1, results.size());
+	
+		this.assertIsFalse(results.get(0));
+	}
+
+	/**
+	 * <p>
+	 * Tests the iterator <code>Collection->forAll(..)</code>.
+	 * </p>
+	 * 
+	 * @throws ParseException
+	 * @throws ModelAccessException
+	 * @throws IllegalArgumentException
+	 */
+	@Test
+	public void testForAll18() throws IllegalArgumentException,
+			ModelAccessException, ParseException {
+	
+		List<IInterpretationResult> results;
+		results = super.interpretConstraintsForInstance(MODEL1_NAME,
+				CONSTRAINT_DIRECTORY + "/forAll18", INSTANCE1_NAME, Arrays
+						.asList(new String[] { "Class1" }));
+	
+		assertNotNull(results);
+		assertEquals(1, results.size());
+	
+		this.assertIsFalse(results.get(0));
+	}
+
+	/**
+	 * <p>
+	 * Tests the iterator <code>Collection->forAll(..)</code>.
+	 * </p>
+	 * 
+	 * @throws ParseException
+	 * @throws ModelAccessException
+	 * @throws IllegalArgumentException
+	 */
+	@Test
+	public void testForAll19() throws IllegalArgumentException,
+			ModelAccessException, ParseException {
+	
+		List<IInterpretationResult> results;
+		results = super.interpretConstraintsForInstance(MODEL1_NAME,
+				CONSTRAINT_DIRECTORY + "/forAll19", INSTANCE1_NAME, Arrays
+						.asList(new String[] { "Class1" }));
+	
+		assertNotNull(results);
+		assertEquals(1, results.size());
+	
+		this.assertIsFalse(results.get(0));
+	}
+
+	/**
+	 * <p>
+	 * Tests the iterator <code>Collection->forAll(..)</code>.
+	 * </p>
+	 * 
+	 * @throws ParseException
+	 * @throws ModelAccessException
+	 * @throws IllegalArgumentException
+	 */
+	@Test
+	public void testForAll20() throws IllegalArgumentException,
+			ModelAccessException, ParseException {
+	
+		List<IInterpretationResult> results;
+		results = super.interpretConstraintsForInstance(MODEL1_NAME,
+				CONSTRAINT_DIRECTORY + "/forAll20", INSTANCE1_NAME, Arrays
+						.asList(new String[] { "Class1" }));
+	
+		assertNotNull(results);
+		assertEquals(1, results.size());
+	
+		this.assertIsFalse(results.get(0));
+	}
+
+	/**
+	 * <p>
+	 * Tests the iterator <code>Collection->forAll(..)</code>.
+	 * </p>
+	 * 
+	 * @throws ParseException
+	 * @throws ModelAccessException
+	 * @throws IllegalArgumentException
+	 */
+	@Test
+	public void testForAll21() throws IllegalArgumentException,
+			ModelAccessException, ParseException {
+	
+		List<IInterpretationResult> results;
+		results = super.interpretConstraintsForInstance(MODEL1_NAME,
+				CONSTRAINT_DIRECTORY + "/forAll21", INSTANCE1_NAME, Arrays
+						.asList(new String[] { "Class1" }));
+	
+		assertNotNull(results);
+		assertEquals(1, results.size());
+	
+		this.assertIsFalse(results.get(0));
+	}
+
+	/**
+	 * <p>
+	 * Tests the iterator <code>Collection->forAll(..)</code>.
+	 * </p>
+	 * 
+	 * @throws ParseException
+	 * @throws ModelAccessException
+	 * @throws IllegalArgumentException
+	 */
+	@Test
+	public void testForAll22() throws IllegalArgumentException,
+			ModelAccessException, ParseException {
+	
+		List<IInterpretationResult> results;
+		results = super.interpretConstraintsForInstance(MODEL1_NAME,
+				CONSTRAINT_DIRECTORY + "/forAll22", INSTANCE1_NAME, Arrays
+						.asList(new String[] { "Class1" }));
+	
+		assertNotNull(results);
+		assertEquals(1, results.size());
+	
+		this.assertIsTrue(results.get(0));
+	}
+
+	/**
+	 * <p>
+	 * Tests the iterator <code>Collection->forAll(..)</code>.
+	 * </p>
+	 * 
+	 * @throws ParseException
+	 * @throws ModelAccessException
+	 * @throws IllegalArgumentException
+	 */
+	@Test
+	public void testForAll23() throws IllegalArgumentException,
+			ModelAccessException, ParseException {
+	
+		List<IInterpretationResult> results;
+		results = super.interpretConstraintsForInstance(MODEL1_NAME,
+				CONSTRAINT_DIRECTORY + "/forAll23", INSTANCE1_NAME, Arrays
+						.asList(new String[] { "Class1" }));
+	
+		assertNotNull(results);
+		assertEquals(1, results.size());
+	
+		this.assertIsInvalid(results.get(0));
+	}
+
+	/**
+	 * <p>
+	 * Tests the iterator <code>Collection->forAll(..)</code>.
+	 * </p>
+	 * 
+	 * @throws ParseException
+	 * @throws ModelAccessException
+	 * @throws IllegalArgumentException
+	 */
+	@Test
+	public void testForAll24() throws IllegalArgumentException,
+			ModelAccessException, ParseException {
+	
+		List<IInterpretationResult> results;
+		results = super.interpretConstraintsForInstance(MODEL1_NAME,
+				CONSTRAINT_DIRECTORY + "/forAll24", INSTANCE1_NAME, Arrays
+						.asList(new String[] { "Class1" }));
+	
+		assertNotNull(results);
+		assertEquals(1, results.size());
+	
+		this.assertIsInvalid(results.get(0));
+	}
+
+	/**
+	 * <p>
+	 * Tests the iterator <code>Collection->forAll(..)</code>.
+	 * </p>
+	 * 
+	 * @throws ParseException
+	 * @throws ModelAccessException
+	 * @throws IllegalArgumentException
+	 */
+	@Test
+	public void testForAll25() throws IllegalArgumentException,
+			ModelAccessException, ParseException {
+	
+		List<IInterpretationResult> results;
+		results = super.interpretConstraintsForInstance(MODEL1_NAME,
+				CONSTRAINT_DIRECTORY + "/forAll25", INSTANCE1_NAME, Arrays
+						.asList(new String[] { "Class1" }));
+	
+		assertNotNull(results);
+		assertEquals(1, results.size());
+	
+		this.assertIsInvalid(results.get(0));
+	}
+
+	/**
+	 * <p>
+	 * Tests the iterator <code>Collection->isUnique(..)</code>.
+	 * </p>
+	 * 
+	 * @throws ParseException
+	 * @throws ModelAccessException
+	 * @throws IllegalArgumentException
+	 */
+	@Test
+	public void testIsUnique01() throws IllegalArgumentException,
 			ModelAccessException, ParseException {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/and13", INSTANCE1_NAME, Arrays
+				CONSTRAINT_DIRECTORY + "/isUnique01", INSTANCE1_NAME, Arrays
 						.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
@@ -389,7 +1421,7 @@ public class TestBoolean extends AbstractInterpreterTest {
 
 	/**
 	 * <p>
-	 * Tests the operation <code>Boolean.and(Boolean)</code>.
+	 * Tests the iterator <code>Collection->isUnique(..)</code>.
 	 * </p>
 	 * 
 	 * @throws ParseException
@@ -397,12 +1429,36 @@ public class TestBoolean extends AbstractInterpreterTest {
 	 * @throws IllegalArgumentException
 	 */
 	@Test
-	public void testAnd14() throws IllegalArgumentException,
+	public void testIsUnique02() throws IllegalArgumentException,
 			ModelAccessException, ParseException {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/and14", INSTANCE1_NAME, Arrays
+				CONSTRAINT_DIRECTORY + "/isUnique02", INSTANCE1_NAME, Arrays
+						.asList(new String[] { "Class1" }));
+
+		assertNotNull(results);
+		assertEquals(1, results.size());
+
+		this.assertIsTrue(results.get(0));
+	}
+
+	/**
+	 * <p>
+	 * Tests the iterator <code>Collection->isUnique(..)</code>.
+	 * </p>
+	 * 
+	 * @throws ParseException
+	 * @throws ModelAccessException
+	 * @throws IllegalArgumentException
+	 */
+	@Test
+	public void testIsUnique03() throws IllegalArgumentException,
+			ModelAccessException, ParseException {
+
+		List<IInterpretationResult> results;
+		results = super.interpretConstraintsForInstance(MODEL1_NAME,
+				CONSTRAINT_DIRECTORY + "/isUnique03", INSTANCE1_NAME, Arrays
 						.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
@@ -413,7 +1469,7 @@ public class TestBoolean extends AbstractInterpreterTest {
 
 	/**
 	 * <p>
-	 * Tests the operation <code>Boolean.and(Boolean)</code>.
+	 * Tests the iterator <code>Collection->isUnique(..)</code>.
 	 * </p>
 	 * 
 	 * @throws ParseException
@@ -421,12 +1477,12 @@ public class TestBoolean extends AbstractInterpreterTest {
 	 * @throws IllegalArgumentException
 	 */
 	@Test
-	public void testAnd15() throws IllegalArgumentException,
+	public void testIsUnique04() throws IllegalArgumentException,
 			ModelAccessException, ParseException {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/and15", INSTANCE1_NAME, Arrays
+				CONSTRAINT_DIRECTORY + "/isUnique04", INSTANCE1_NAME, Arrays
 						.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
@@ -437,7 +1493,7 @@ public class TestBoolean extends AbstractInterpreterTest {
 
 	/**
 	 * <p>
-	 * Tests the operation <code>Boolean.and(Boolean)</code>.
+	 * Tests the iterator <code>Collection->one(..)</code>.
 	 * </p>
 	 * 
 	 * @throws ParseException
@@ -445,132 +1501,12 @@ public class TestBoolean extends AbstractInterpreterTest {
 	 * @throws IllegalArgumentException
 	 */
 	@Test
-	public void testAnd16() throws IllegalArgumentException,
+	public void testOne01() throws IllegalArgumentException,
 			ModelAccessException, ParseException {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/and16", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
-
-		assertNotNull(results);
-		assertEquals(1, results.size());
-
-		this.assertIsInvalid(results.get(0));
-	}
-
-	/**
-	 * <p>
-	 * Tests the operation <code>Boolean.implies(Boolean)</code>.
-	 * </p>
-	 * 
-	 * @throws ParseException
-	 * @throws ModelAccessException
-	 * @throws IllegalArgumentException
-	 */
-	@Test
-	public void testImplies01() throws IllegalArgumentException,
-			ModelAccessException, ParseException {
-
-		List<IInterpretationResult> results;
-		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/implies01", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
-
-		assertNotNull(results);
-		assertEquals(1, results.size());
-
-		this.assertIsTrue(results.get(0));
-	}
-
-	/**
-	 * <p>
-	 * Tests the operation <code>Boolean.implies(Boolean)</code>.
-	 * </p>
-	 * 
-	 * @throws ParseException
-	 * @throws ModelAccessException
-	 * @throws IllegalArgumentException
-	 */
-	@Test
-	public void testImplies02() throws IllegalArgumentException,
-			ModelAccessException, ParseException {
-
-		List<IInterpretationResult> results;
-		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/implies02", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
-
-		assertNotNull(results);
-		assertEquals(1, results.size());
-
-		this.assertIsTrue(results.get(0));
-	}
-
-	/**
-	 * <p>
-	 * Tests the operation <code>Boolean.implies(Boolean)</code>.
-	 * </p>
-	 * 
-	 * @throws ParseException
-	 * @throws ModelAccessException
-	 * @throws IllegalArgumentException
-	 */
-	@Test
-	public void testImplies03() throws IllegalArgumentException,
-			ModelAccessException, ParseException {
-
-		List<IInterpretationResult> results;
-		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/implies03", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
-
-		assertNotNull(results);
-		assertEquals(1, results.size());
-
-		this.assertIsTrue(results.get(0));
-	}
-
-	/**
-	 * <p>
-	 * Tests the operation <code>Boolean.implies(Boolean)</code>.
-	 * </p>
-	 * 
-	 * @throws ParseException
-	 * @throws ModelAccessException
-	 * @throws IllegalArgumentException
-	 */
-	@Test
-	public void testImplies04() throws IllegalArgumentException,
-			ModelAccessException, ParseException {
-
-		List<IInterpretationResult> results;
-		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/implies04", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
-
-		assertNotNull(results);
-		assertEquals(1, results.size());
-
-		this.assertIsTrue(results.get(0));
-	}
-
-	/**
-	 * <p>
-	 * Tests the operation <code>Boolean.implies(Boolean)</code>.
-	 * </p>
-	 * 
-	 * @throws ParseException
-	 * @throws ModelAccessException
-	 * @throws IllegalArgumentException
-	 */
-	@Test
-	public void testImplies05() throws IllegalArgumentException,
-			ModelAccessException, ParseException {
-
-		List<IInterpretationResult> results;
-		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/implies05", INSTANCE1_NAME, Arrays
+				CONSTRAINT_DIRECTORY + "/one01", INSTANCE1_NAME, Arrays
 						.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
@@ -581,7 +1517,7 @@ public class TestBoolean extends AbstractInterpreterTest {
 
 	/**
 	 * <p>
-	 * Tests the operation <code>Boolean.implies(Boolean)</code>.
+	 * Tests the iterator <code>Collection->one(..)</code>.
 	 * </p>
 	 * 
 	 * @throws ParseException
@@ -589,12 +1525,12 @@ public class TestBoolean extends AbstractInterpreterTest {
 	 * @throws IllegalArgumentException
 	 */
 	@Test
-	public void testImplies06() throws IllegalArgumentException,
+	public void testOne02() throws IllegalArgumentException,
 			ModelAccessException, ParseException {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/implies06", INSTANCE1_NAME, Arrays
+				CONSTRAINT_DIRECTORY + "/one02", INSTANCE1_NAME, Arrays
 						.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
@@ -605,7 +1541,7 @@ public class TestBoolean extends AbstractInterpreterTest {
 
 	/**
 	 * <p>
-	 * Tests the operation <code>Boolean.implies(Boolean)</code>.
+	 * Tests the iterator <code>Collection->one(..)</code>.
 	 * </p>
 	 * 
 	 * @throws ParseException
@@ -613,12 +1549,12 @@ public class TestBoolean extends AbstractInterpreterTest {
 	 * @throws IllegalArgumentException
 	 */
 	@Test
-	public void testImplies07() throws IllegalArgumentException,
+	public void testOne03() throws IllegalArgumentException,
 			ModelAccessException, ParseException {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/implies07", INSTANCE1_NAME, Arrays
+				CONSTRAINT_DIRECTORY + "/one03", INSTANCE1_NAME, Arrays
 						.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
@@ -629,7 +1565,7 @@ public class TestBoolean extends AbstractInterpreterTest {
 
 	/**
 	 * <p>
-	 * Tests the operation <code>Boolean.implies(Boolean)</code>.
+	 * Tests the iterator <code>Collection->one(..)</code>.
 	 * </p>
 	 * 
 	 * @throws ParseException
@@ -637,684 +1573,12 @@ public class TestBoolean extends AbstractInterpreterTest {
 	 * @throws IllegalArgumentException
 	 */
 	@Test
-	public void testImplies08() throws IllegalArgumentException,
+	public void testOne04() throws IllegalArgumentException,
 			ModelAccessException, ParseException {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/implies08", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
-
-		assertNotNull(results);
-		assertEquals(1, results.size());
-
-		this.assertIsInvalid(results.get(0));
-	}
-
-	/**
-	 * <p>
-	 * Tests the operation <code>Boolean.implies(Boolean)</code>.
-	 * </p>
-	 * 
-	 * @throws ParseException
-	 * @throws ModelAccessException
-	 * @throws IllegalArgumentException
-	 */
-	@Test
-	public void testImplies09() throws IllegalArgumentException,
-			ModelAccessException, ParseException {
-
-		List<IInterpretationResult> results;
-		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/implies09", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
-
-		assertNotNull(results);
-		assertEquals(1, results.size());
-
-		this.assertIsInvalid(results.get(0));
-	}
-
-	/**
-	 * <p>
-	 * Tests the operation <code>Boolean.implies(Boolean)</code>.
-	 * </p>
-	 * 
-	 * @throws ParseException
-	 * @throws ModelAccessException
-	 * @throws IllegalArgumentException
-	 */
-	@Test
-	public void testImplies10() throws IllegalArgumentException,
-			ModelAccessException, ParseException {
-
-		List<IInterpretationResult> results;
-		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/implies10", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
-
-		assertNotNull(results);
-		assertEquals(1, results.size());
-
-		this.assertIsInvalid(results.get(0));
-	}
-
-	/**
-	 * <p>
-	 * Tests the operation <code>Boolean.implies(Boolean)</code>.
-	 * </p>
-	 * 
-	 * @throws ParseException
-	 * @throws ModelAccessException
-	 * @throws IllegalArgumentException
-	 */
-	@Test
-	public void testImplies11() throws IllegalArgumentException,
-			ModelAccessException, ParseException {
-
-		List<IInterpretationResult> results;
-		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/implies11", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
-
-		assertNotNull(results);
-		assertEquals(1, results.size());
-
-		this.assertIsInvalid(results.get(0));
-	}
-
-	/**
-	 * <p>
-	 * Tests the operation <code>Boolean.implies(Boolean)</code>.
-	 * </p>
-	 * 
-	 * @throws ParseException
-	 * @throws ModelAccessException
-	 * @throws IllegalArgumentException
-	 */
-	@Test
-	public void testImplies12() throws IllegalArgumentException,
-			ModelAccessException, ParseException {
-
-		List<IInterpretationResult> results;
-		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/implies12", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
-
-		assertNotNull(results);
-		assertEquals(1, results.size());
-
-		this.assertIsInvalid(results.get(0));
-	}
-
-	/**
-	 * <p>
-	 * Tests the operation <code>Boolean.implies(Boolean)</code>.
-	 * </p>
-	 * 
-	 * @throws ParseException
-	 * @throws ModelAccessException
-	 * @throws IllegalArgumentException
-	 */
-	@Test
-	public void testImplies13() throws IllegalArgumentException,
-			ModelAccessException, ParseException {
-
-		List<IInterpretationResult> results;
-		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/implies13", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
-
-		assertNotNull(results);
-		assertEquals(1, results.size());
-
-		this.assertIsInvalid(results.get(0));
-	}
-
-	/**
-	 * <p>
-	 * Tests the operation <code>Boolean.implies(Boolean)</code>.
-	 * </p>
-	 * 
-	 * @throws ParseException
-	 * @throws ModelAccessException
-	 * @throws IllegalArgumentException
-	 */
-	@Test
-	public void testImplies14() throws IllegalArgumentException,
-			ModelAccessException, ParseException {
-
-		List<IInterpretationResult> results;
-		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/implies14", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
-
-		assertNotNull(results);
-		assertEquals(1, results.size());
-
-		this.assertIsInvalid(results.get(0));
-	}
-
-	/**
-	 * <p>
-	 * Tests the operation <code>Boolean.implies(Boolean)</code>.
-	 * </p>
-	 * 
-	 * @throws ParseException
-	 * @throws ModelAccessException
-	 * @throws IllegalArgumentException
-	 */
-	@Test
-	public void testImplies15() throws IllegalArgumentException,
-			ModelAccessException, ParseException {
-
-		List<IInterpretationResult> results;
-		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/implies15", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
-
-		assertNotNull(results);
-		assertEquals(1, results.size());
-
-		this.assertIsInvalid(results.get(0));
-	}
-
-	/**
-	 * <p>
-	 * Tests the operation <code>Boolean.implies(Boolean)</code>.
-	 * </p>
-	 * 
-	 * @throws ParseException
-	 * @throws ModelAccessException
-	 * @throws IllegalArgumentException
-	 */
-	@Test
-	public void testImplies16() throws IllegalArgumentException,
-			ModelAccessException, ParseException {
-
-		List<IInterpretationResult> results;
-		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/implies16", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
-
-		assertNotNull(results);
-		assertEquals(1, results.size());
-
-		this.assertIsInvalid(results.get(0));
-	}
-
-	/**
-	 * <p>
-	 * Tests the operation <code>Boolean.not()</code>.
-	 * </p>
-	 * 
-	 * @throws ParseException
-	 * @throws ModelAccessException
-	 * @throws IllegalArgumentException
-	 */
-	@Test
-	public void testNot01() throws IllegalArgumentException,
-			ModelAccessException, ParseException {
-
-		List<IInterpretationResult> results;
-		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/not01", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
-
-		assertNotNull(results);
-		assertEquals(1, results.size());
-
-		this.assertIsTrue(results.get(0));
-	}
-
-	/**
-	 * <p>
-	 * Tests the operation <code>Boolean.not()</code>.
-	 * </p>
-	 * 
-	 * @throws ParseException
-	 * @throws ModelAccessException
-	 * @throws IllegalArgumentException
-	 */
-	@Test
-	public void testNot02() throws IllegalArgumentException,
-			ModelAccessException, ParseException {
-
-		List<IInterpretationResult> results;
-		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/not02", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
-
-		assertNotNull(results);
-		assertEquals(1, results.size());
-
-		this.assertIsFalse(results.get(0));
-	}
-
-	/**
-	 * <p>
-	 * Tests the operation <code>Boolean.not()</code>.
-	 * </p>
-	 * 
-	 * @throws ParseException
-	 * @throws ModelAccessException
-	 * @throws IllegalArgumentException
-	 */
-	@Test
-	public void testNot03() throws IllegalArgumentException,
-			ModelAccessException, ParseException {
-
-		List<IInterpretationResult> results;
-		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/not03", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
-
-		assertNotNull(results);
-		assertEquals(1, results.size());
-
-		this.assertIsInvalid(results.get(0));
-	}
-
-	/**
-	 * <p>
-	 * Tests the operation <code>Boolean.not()</code>.
-	 * </p>
-	 * 
-	 * @throws ParseException
-	 * @throws ModelAccessException
-	 * @throws IllegalArgumentException
-	 */
-	@Test
-	public void testNot04() throws IllegalArgumentException,
-			ModelAccessException, ParseException {
-
-		List<IInterpretationResult> results;
-		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/not04", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
-
-		assertNotNull(results);
-		assertEquals(1, results.size());
-
-		this.assertIsInvalid(results.get(0));
-	}
-
-	/**
-	 * <p>
-	 * Tests the operation <code>Boolean.or(Boolean)</code>.
-	 * </p>
-	 * 
-	 * @throws ParseException
-	 * @throws ModelAccessException
-	 * @throws IllegalArgumentException
-	 */
-	@Test
-	public void testOr01() throws IllegalArgumentException,
-			ModelAccessException, ParseException {
-
-		List<IInterpretationResult> results;
-		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/or01", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
-
-		assertNotNull(results);
-		assertEquals(1, results.size());
-
-		this.assertIsFalse(results.get(0));
-	}
-
-	/**
-	 * <p>
-	 * Tests the operation <code>Boolean.or(Boolean)</code>.
-	 * </p>
-	 * 
-	 * @throws ParseException
-	 * @throws ModelAccessException
-	 * @throws IllegalArgumentException
-	 */
-	@Test
-	public void testOr02() throws IllegalArgumentException,
-			ModelAccessException, ParseException {
-
-		List<IInterpretationResult> results;
-		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/or02", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
-
-		assertNotNull(results);
-		assertEquals(1, results.size());
-
-		this.assertIsTrue(results.get(0));
-	}
-
-	/**
-	 * <p>
-	 * Tests the operation <code>Boolean.or(Boolean)</code>.
-	 * </p>
-	 * 
-	 * @throws ParseException
-	 * @throws ModelAccessException
-	 * @throws IllegalArgumentException
-	 */
-	@Test
-	public void testOr03() throws IllegalArgumentException,
-			ModelAccessException, ParseException {
-
-		List<IInterpretationResult> results;
-		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/or03", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
-
-		assertNotNull(results);
-		assertEquals(1, results.size());
-
-		this.assertIsInvalid(results.get(0));
-	}
-
-	/**
-	 * <p>
-	 * Tests the operation <code>Boolean.or(Boolean)</code>.
-	 * </p>
-	 * 
-	 * @throws ParseException
-	 * @throws ModelAccessException
-	 * @throws IllegalArgumentException
-	 */
-	@Test
-	public void testOr04() throws IllegalArgumentException,
-			ModelAccessException, ParseException {
-
-		List<IInterpretationResult> results;
-		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/or04", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
-
-		assertNotNull(results);
-		assertEquals(1, results.size());
-
-		this.assertIsInvalid(results.get(0));
-	}
-
-	/**
-	 * <p>
-	 * Tests the operation <code>Boolean.or(Boolean)</code>.
-	 * </p>
-	 * 
-	 * @throws ParseException
-	 * @throws ModelAccessException
-	 * @throws IllegalArgumentException
-	 */
-	@Test
-	public void testOr05() throws IllegalArgumentException,
-			ModelAccessException, ParseException {
-
-		List<IInterpretationResult> results;
-		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/or05", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
-
-		assertNotNull(results);
-		assertEquals(1, results.size());
-
-		this.assertIsTrue(results.get(0));
-	}
-
-	/**
-	 * <p>
-	 * Tests the operation <code>Boolean.or(Boolean)</code>.
-	 * </p>
-	 * 
-	 * @throws ParseException
-	 * @throws ModelAccessException
-	 * @throws IllegalArgumentException
-	 */
-	@Test
-	public void testOr06() throws IllegalArgumentException,
-			ModelAccessException, ParseException {
-
-		List<IInterpretationResult> results;
-		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/or06", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
-
-		assertNotNull(results);
-		assertEquals(1, results.size());
-
-		this.assertIsTrue(results.get(0));
-	}
-
-	/**
-	 * <p>
-	 * Tests the operation <code>Boolean.or(Boolean)</code>.
-	 * </p>
-	 * 
-	 * @throws ParseException
-	 * @throws ModelAccessException
-	 * @throws IllegalArgumentException
-	 */
-	@Test
-	public void testOr07() throws IllegalArgumentException,
-			ModelAccessException, ParseException {
-
-		List<IInterpretationResult> results;
-		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/or07", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
-
-		assertNotNull(results);
-		assertEquals(1, results.size());
-
-		this.assertIsTrue(results.get(0));
-	}
-
-	/**
-	 * <p>
-	 * Tests the operation <code>Boolean.or(Boolean)</code>.
-	 * </p>
-	 * 
-	 * @throws ParseException
-	 * @throws ModelAccessException
-	 * @throws IllegalArgumentException
-	 */
-	@Test
-	public void testOr08() throws IllegalArgumentException,
-			ModelAccessException, ParseException {
-
-		List<IInterpretationResult> results;
-		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/or08", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
-
-		assertNotNull(results);
-		assertEquals(1, results.size());
-
-		this.assertIsTrue(results.get(0));
-	}
-
-	/**
-	 * <p>
-	 * Tests the operation <code>Boolean.or(Boolean)</code>.
-	 * </p>
-	 * 
-	 * @throws ParseException
-	 * @throws ModelAccessException
-	 * @throws IllegalArgumentException
-	 */
-	@Test
-	public void testOr09() throws IllegalArgumentException,
-			ModelAccessException, ParseException {
-
-		List<IInterpretationResult> results;
-		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/or09", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
-
-		assertNotNull(results);
-		assertEquals(1, results.size());
-
-		this.assertIsInvalid(results.get(0));
-	}
-
-	/**
-	 * <p>
-	 * Tests the operation <code>Boolean.or(Boolean)</code>.
-	 * </p>
-	 * 
-	 * @throws ParseException
-	 * @throws ModelAccessException
-	 * @throws IllegalArgumentException
-	 */
-	@Test
-	public void testOr10() throws IllegalArgumentException,
-			ModelAccessException, ParseException {
-
-		List<IInterpretationResult> results;
-		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/or10", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
-
-		assertNotNull(results);
-		assertEquals(1, results.size());
-
-		this.assertIsTrue(results.get(0));
-	}
-
-	/**
-	 * <p>
-	 * Tests the operation <code>Boolean.or(Boolean)</code>.
-	 * </p>
-	 * 
-	 * @throws ParseException
-	 * @throws ModelAccessException
-	 * @throws IllegalArgumentException
-	 */
-	@Test
-	public void testOr11() throws IllegalArgumentException,
-			ModelAccessException, ParseException {
-
-		List<IInterpretationResult> results;
-		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/or11", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
-
-		assertNotNull(results);
-		assertEquals(1, results.size());
-
-		this.assertIsInvalid(results.get(0));
-	}
-
-	/**
-	 * <p>
-	 * Tests the operation <code>Boolean.or(Boolean)</code>.
-	 * </p>
-	 * 
-	 * @throws ParseException
-	 * @throws ModelAccessException
-	 * @throws IllegalArgumentException
-	 */
-	@Test
-	public void testOr12() throws IllegalArgumentException,
-			ModelAccessException, ParseException {
-
-		List<IInterpretationResult> results;
-		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/or12", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
-
-		assertNotNull(results);
-		assertEquals(1, results.size());
-
-		this.assertIsInvalid(results.get(0));
-	}
-
-	/**
-	 * <p>
-	 * Tests the operation <code>Boolean.or(Boolean)</code>.
-	 * </p>
-	 * 
-	 * @throws ParseException
-	 * @throws ModelAccessException
-	 * @throws IllegalArgumentException
-	 */
-	@Test
-	public void testOr13() throws IllegalArgumentException,
-			ModelAccessException, ParseException {
-
-		List<IInterpretationResult> results;
-		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/or13", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
-
-		assertNotNull(results);
-		assertEquals(1, results.size());
-
-		this.assertIsInvalid(results.get(0));
-	}
-
-	/**
-	 * <p>
-	 * Tests the operation <code>Boolean.or(Boolean)</code>.
-	 * </p>
-	 * 
-	 * @throws ParseException
-	 * @throws ModelAccessException
-	 * @throws IllegalArgumentException
-	 */
-	@Test
-	public void testOr14() throws IllegalArgumentException,
-			ModelAccessException, ParseException {
-
-		List<IInterpretationResult> results;
-		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/or14", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
-
-		assertNotNull(results);
-		assertEquals(1, results.size());
-
-		this.assertIsTrue(results.get(0));
-	}
-
-	/**
-	 * <p>
-	 * Tests the operation <code>Boolean.or(Boolean)</code>.
-	 * </p>
-	 * 
-	 * @throws ParseException
-	 * @throws ModelAccessException
-	 * @throws IllegalArgumentException
-	 */
-	@Test
-	public void testOr15() throws IllegalArgumentException,
-			ModelAccessException, ParseException {
-
-		List<IInterpretationResult> results;
-		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/or15", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
-
-		assertNotNull(results);
-		assertEquals(1, results.size());
-
-		this.assertIsInvalid(results.get(0));
-	}
-
-	/**
-	 * <p>
-	 * Tests the operation <code>Boolean.or(Boolean)</code>.
-	 * </p>
-	 * 
-	 * @throws ParseException
-	 * @throws ModelAccessException
-	 * @throws IllegalArgumentException
-	 */
-	@Test
-	public void testOr16() throws IllegalArgumentException,
-			ModelAccessException, ParseException {
-
-		List<IInterpretationResult> results;
-		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/or16", INSTANCE1_NAME, Arrays
+				CONSTRAINT_DIRECTORY + "/one04", INSTANCE1_NAME, Arrays
 						.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
