@@ -1,7 +1,7 @@
 Changes and Bugs fixed during the different Releases
 ====================================================
 
-Release 2.1 (not scheduled yet)
+Release 2.1 (scheduled for April 2010)
 ===============================
 
 * Dresden OCL2 for Eclipse now supports OCL 2.2!
@@ -57,6 +57,9 @@ Release 2.1 (not scheduled yet)
   - Boolean operations and, or, implies are now only interpreted partly if necessary.
   - In IfExpressions either then or else clause is interpreted.
   - Interpretation of nested definitions has now the right context as self variable.
+  - Iterate expressions are now interpreted correctly if their source collection is invalid or contains
+    undefined values. Body expressions can result in invalid or undefined without leading to wrong 
+    interpretation results.
 
 * Complete rewrite of the OCL2 Standard Library; some bugs were fixed.
   - invalid and null values are now created by every library method and no exceptions are thrown
@@ -71,7 +74,7 @@ Release 2.1 (not scheduled yet)
   - OclAny: oclIsUndefined() now returns invalid if the object is invalid
   - OclString: substring() returns invalid if lower index is greater than higher index
 
-* Some bugs in the Ocl22Java Code Generator was fixed.
+* Some bugs in the Ocl22Java Code Generator were fixed.
   - The code generation of OclAny.allInstances() now works appropriately again.
   - The code generation of Collection.flatten() now works appropriately.
   - Transformation of abstract Collection type now works appropriately.
