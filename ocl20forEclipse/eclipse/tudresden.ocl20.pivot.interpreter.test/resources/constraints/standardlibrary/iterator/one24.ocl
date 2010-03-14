@@ -1,0 +1,13 @@
+package package1
+
+context Class1
+inv:
+/* Expected as false. */
+Bag { integerNull, 0, 1, 2, 0 } -> one(element: Integer | 
+  if element.oclIsUndefined()
+    then booleanNull
+    else element < 1
+  endif
+)
+
+endpackage

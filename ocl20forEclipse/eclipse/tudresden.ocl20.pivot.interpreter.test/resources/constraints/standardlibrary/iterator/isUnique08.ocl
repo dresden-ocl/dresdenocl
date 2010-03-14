@@ -3,10 +3,10 @@ package package1
 context Class1
 inv:
 /* Expected as invalid. */
-Bag { 0, 1, 2 } -> one(element: Integer | 
+Bag { 0, 1, 2, 3 } -> isUnique(element: Integer | 
   if element = 1
-    then booleanNull
-    else element < 0
+    then integerNull
+    else element
   endif
 )
 

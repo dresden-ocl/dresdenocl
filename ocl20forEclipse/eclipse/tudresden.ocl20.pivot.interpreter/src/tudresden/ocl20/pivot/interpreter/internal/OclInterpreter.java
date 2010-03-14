@@ -3136,7 +3136,9 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		/* Check if iterator is undefined. */
 		if (sourceIt.hasNext().oclIsInvalid().isTrue()) {
 			result = myStandardLibraryFactory.createOclInvalid(source
-					.getGenericType(), sourceIt.hasNext().getInvalidReason());
+					.getGenericType(), new IllegalArgumentException(
+					"Source of iterator any() was invalid.", sourceIt.hasNext()
+							.getInvalidReason()));
 		}
 
 		/* Else compute the result. */
@@ -3165,8 +3167,34 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 				/* Remove the variable from the environment again. */
 				this.myEnvironment.addVar(iterator.getQualifiedName(), null);
 
+				/* Probably result in invalid. */
+				if (result == null && bodyResult.oclIsInvalid().isTrue()) {
+					result = this.myStandardLibraryFactory
+							.createOclInvalid(
+									source.getGenericType(),
+									new IllegalArgumentException(
+											"Body-Expression of iterator any() was invalid for at least on element and no other element fulfilling the body condition could be found.",
+											bodyResult.getInvalidReason()));
+					/*
+					 * Do not break. Probably a valid result will be found in
+					 * the following.
+					 */
+				}
+
+				else if (result == null && bodyResult.oclIsUndefined().isTrue()) {
+					result = this.myStandardLibraryFactory
+							.createOclInvalid(
+									source.getGenericType(),
+									new IllegalArgumentException(
+											"Body-Expression of iterator any() was undefined for at least on element and no other element fulfilling the body condition could be found."));
+					/*
+					 * Do not break. Probably a valid result will be found in
+					 * the following.
+					 */
+				}
+
 				/* Probably break iteration. */
-				if (!bodyResult.oclIsInvalid().isTrue()
+				else if (!bodyResult.oclIsInvalid().isTrue()
 						&& !bodyResult.oclIsUndefined().isTrue()
 						&& bodyResult.isTrue()) {
 					result = anElement;
@@ -3246,7 +3274,9 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		/* Check if iterator is undefined. */
 		if (it.hasNext().oclIsInvalid().isTrue()) {
 			result = myStandardLibraryFactory.createOclInvalid(
-					TypeConstants.BOOLEAN, it.hasNext().getInvalidReason());
+					TypeConstants.BOOLEAN, new IllegalArgumentException(
+							"Source of iterator exists() was invalid.", it
+									.hasNext().getInvalidReason()));
 		}
 
 		/* Else compute the result. */
@@ -3369,7 +3399,9 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		/* Check if iterator is undefined. */
 		if (it.hasNext().oclIsInvalid().isTrue()) {
 			result = myStandardLibraryFactory.createOclInvalid(
-					TypeConstants.BOOLEAN, it.hasNext().getInvalidReason());
+					TypeConstants.BOOLEAN, new IllegalArgumentException(
+							"Source of iterator forAll() was invalid.", it
+									.hasNext().getInvalidReason()));
 		}
 
 		else {
@@ -3490,8 +3522,9 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		/* Check if iterator is undefined. */
 		if (sourceIt.hasNext().oclIsInvalid().isTrue()) {
 			result = myStandardLibraryFactory.createOclInvalid(
-					TypeConstants.BOOLEAN, sourceIt.hasNext()
-							.getInvalidReason());
+					TypeConstants.BOOLEAN, new IllegalArgumentException(
+							"Source of iterator isUnique() was invalid.",
+							sourceIt.hasNext().getInvalidReason()));
 		}
 
 		else {
@@ -3599,7 +3632,6 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		// no else.
 
 		OclAny result;
-		boolean foundExactlyOneElement;
 
 		OclIterator<OclAny> sourceIt;
 
@@ -3608,17 +3640,18 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		/* Check if iterator is undefined. */
 		if (sourceIt.hasNext().oclIsInvalid().isTrue()) {
 			result = myStandardLibraryFactory.createOclInvalid(
-					TypeConstants.BOOLEAN, sourceIt.hasNext()
-							.getInvalidReason());
+					TypeConstants.BOOLEAN, new IllegalArgumentException(
+							"Source of iterator one() was invalid.", sourceIt
+									.hasNext().getInvalidReason()));
 		}
 
 		/* Else compute the result. */
 		else {
+			OclAny failedBodyResult;
+			failedBodyResult = null;
+			int validElements = 0;
 
 			result = null;
-
-			/* By default the result is false. */
-			foundExactlyOneElement = false;
 
 			/*
 			 * Iterate through the source and check if exactly one element
@@ -3642,43 +3675,77 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 				/* Remove the variable from the environment again. */
 				this.myEnvironment.addVar(iterator.getQualifiedName(), null);
 
-				/* Cannot determine one if one result is invalid. */
-				if (bodyResult.oclIsInvalid().isTrue()) {
-					result = this.myStandardLibraryFactory.createOclInvalid(
-							TypeConstants.BOOLEAN, bodyResult
-									.getInvalidReason());
-					break;
+				/* Register if body is invalid. */
+				if (failedBodyResult == null
+						&& bodyResult.oclIsInvalid().isTrue()) {
+					failedBodyResult = bodyResult;
 				}
 
-				/* Cannot determine one if one result is undefined. */
-				else if (bodyResult.oclIsUndefined().isTrue()) {
-					result = this.myStandardLibraryFactory
-							.createOclUndefined(TypeConstants.BOOLEAN,
-									"Cannot determine iterator one() on result set containing undefined values.");
-					break;
+				/* Register if body is undefined. */
+				else if (failedBodyResult == null
+						&& bodyResult.oclIsUndefined().isTrue()) {
+					failedBodyResult = bodyResult;
 				}
 
 				/* Else probably count the elements. */
-				else if (bodyResult.isTrue()) {
+				else if (!bodyResult.oclIsInvalid().isTrue()
+						&& !bodyResult.oclIsUndefined().isTrue()
+						&& bodyResult.isTrue()) {
+
+					validElements++;
 
 					/* If alreadyFoundAnElement, break and return false. */
-					if (foundExactlyOneElement) {
-						foundExactlyOneElement = false;
+					if (validElements > 1) {
 						break;
 					}
-
-					else {
-						/* Search for another element. */
-						foundExactlyOneElement = true;
-					}
+					// no else.
 				}
 				// no else.
 			}
 			// end while.
 
+			/* Create the result. */
 			if (result == null) {
-				result = myStandardLibraryFactory
-						.createOclBoolean(foundExactlyOneElement);
+
+				/*
+				 * If more than one elements fulfilled the condition, return
+				 * false.
+				 */
+				if (validElements > 1) {
+					result = myStandardLibraryFactory.createOclBoolean(false);
+				}
+
+				/*
+				 * If body failed for some elements and only one or zero
+				 * elements fulfilled the condition, fail.
+				 */
+				else if (failedBodyResult != null) {
+
+					if (failedBodyResult.oclIsInvalid().isTrue()) {
+						result = this.myStandardLibraryFactory
+								.createOclInvalid(
+										TypeConstants.BOOLEAN,
+										new IllegalArgumentException(
+												"Cannot determine result of iterator one() if body expression is invalid for at least one element and less than two elements fulfill the body expression.",
+												failedBodyResult
+														.getInvalidReason()));
+					}
+
+					else {
+						result = this.myStandardLibraryFactory
+								.createOclInvalid(
+										TypeConstants.BOOLEAN,
+										new IllegalArgumentException(
+												"Cannot determine result of iterator one() if body expression is undefined for at least one element and less than two elements fulfill the body expression."));
+					}
+				}
+
+				/* Else check the found elements fulfilling the condition. */
+				else {
+					result = myStandardLibraryFactory
+							.createOclBoolean(validElements == 1);
+				}
+				// end else.
 			}
 			// no else.
 		}

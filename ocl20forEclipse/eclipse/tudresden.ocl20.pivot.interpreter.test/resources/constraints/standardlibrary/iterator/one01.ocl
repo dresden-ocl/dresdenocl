@@ -1,8 +1,8 @@
 package package1
 
 context Class1
-inv testOne01:
-/* Expected as false. */
-Bag { 1, 2, 1 } -> one(element: Integer | element = 1)
+inv:
+/* Expected as invalid. */
+Bag { 1 / 0 } -> one(element: Integer | element = 1)
 
 endpackage

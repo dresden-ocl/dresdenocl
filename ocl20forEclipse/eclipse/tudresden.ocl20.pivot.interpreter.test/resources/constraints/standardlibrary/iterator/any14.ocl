@@ -3,7 +3,7 @@ package package1
 context Class1
 def: getAny(): Integer =
 /* Expected as 1. */
-Bag { 0, 1, 2 } -> any(element: Integer | 
+Bag { integerNull, 1, 2 } -> any(element: Integer | 
   element = 1
 )
 

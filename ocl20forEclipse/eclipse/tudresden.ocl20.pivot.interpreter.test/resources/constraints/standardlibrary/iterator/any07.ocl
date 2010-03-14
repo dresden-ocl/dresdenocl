@@ -1,8 +1,10 @@
 package package1
 
 context Class1
-inv testAny07:
-/* One body is invalid, another fulfills the condition. Expected as true. */
-Bag { 0, 1, 2 } -> any(element: Integer | 2 / element = 1) = 2
+def: getAny(): Integer =
+/* Expected as 1. */
+Bag { 0, 1, 2 } -> any(element: Integer | 
+  1 / element = 1
+)
 
 endpackage

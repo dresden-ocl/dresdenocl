@@ -19,9 +19,11 @@ with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
 
 package tudresden.ocl20.pivot.interpreter.test.standardlibrary;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -29,6 +31,7 @@ import java.util.List;
 import java.util.Set;
 
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBoolean;
+import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger;
 import tudresden.ocl20.pivot.facade.Ocl2ForEclipseFacade;
 import tudresden.ocl20.pivot.interpreter.IInterpretationResult;
 import tudresden.ocl20.pivot.interpreter.test.OclInterpreterTestPlugin;
@@ -110,6 +113,35 @@ public abstract class AbstractInterpreterTest {
 		assertTrue(result.exists());
 
 		return result;
+	}
+
+	/**
+	 * <p>
+	 * Helper method to assert that a given {@link IInterpretationResult} is
+	 * equal to a given {@link Object}.
+	 * </p>
+	 * 
+	 * @param expected
+	 *            The expected {@link Object}.
+	 * @param result
+	 *            The {@link IInterpretationResult} to be checked.
+	 */
+	protected void assertIsEqual(Object expected, IInterpretationResult result) {
+		assertFalse(result.getResult().oclIsInvalid().isTrue());
+		assertFalse(result.getResult().oclIsUndefined().isTrue());
+
+		if (result.getResult() instanceof OclInteger) {
+			OclInteger oclInteger;
+			oclInteger = (OclInteger) result.getResult();
+
+			assertTrue(expected instanceof Number);
+			assertEquals(new Long(((Number) expected).longValue()), oclInteger
+					.getModelInstanceInteger().getLong());
+		}
+
+		else {
+			fail("Comparison not implemented yet.");
+		}
 	}
 
 	/**

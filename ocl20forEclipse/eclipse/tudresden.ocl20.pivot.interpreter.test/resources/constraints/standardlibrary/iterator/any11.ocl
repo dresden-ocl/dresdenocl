@@ -3,6 +3,6 @@ package package1
 context Class1
 def: getAny(): Integer =
 /* Expected as invalid. */
-Bag { 0, 1, 2 } -> any(element: Integer | 1 / element > 2)
+Bag { 1, integerNull, 2 } -> any(element: Integer | 1 / element > 2)
 
 endpackage

@@ -6,7 +6,7 @@ def: getAny(): Integer =
 Bag { 0, 2, 1 } -> any(element: Integer | 
   if element = 2
     then booleanNull
-    else element = 1
+    else 1 / element = 1
   endif
 )
 

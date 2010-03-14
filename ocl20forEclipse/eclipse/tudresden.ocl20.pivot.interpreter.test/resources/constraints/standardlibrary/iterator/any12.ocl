@@ -3,8 +3,8 @@ package package1
 context Class1
 def: getAny(): Integer =
 /* Expected as invalid. */
-Bag { 0, 1, 2 } -> any(element: Integer | 
-  if element = 0
+Bag { integerNull, 1, 2 } -> any(element: Integer | 
+  if element.oclIsUndefined()
     then booleanNull
     else element = 3
   endif
