@@ -3131,34 +3131,54 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		OclAny result;
 		OclIterator<OclAny> sourceIt;
 
-		result = null;
 		sourceIt = source.getIterator();
 
-		/*
-		 * Iterate over the source and evaluate the body expression for all
-		 * elements. If it is true for any element, the result the specific
-		 * element.
-		 */
-		while (sourceIt.hasNext().isTrue()) {
-
-			OclAny anElement;
-			OclBoolean bodyResult;
-
-			/* Add an element to the environment. */
-			anElement = sourceIt.next();
-			myEnvironment.addVar(iterator.getQualifiedName(), anElement);
-
-			/* Compute the body result. */
-			bodyResult = (OclBoolean) doSwitch((EObject) body);
-
-			if (bodyResult.isTrue()) {
-				result = anElement;
-				break;
-			}
-			// no else.
+		/* Check if iterator is undefined. */
+		if (sourceIt.hasNext().oclIsInvalid().isTrue()) {
+			result = myStandardLibraryFactory.createOclInvalid(source
+					.getGenericType(), sourceIt.hasNext().getInvalidReason());
 		}
-		// end while.
 
+		/* Else compute the result. */
+		else {
+
+			result = null;
+
+			/*
+			 * Iterate over the source and evaluate the body expression for all
+			 * elements. If it is true for any element, the result the specific
+			 * element.
+			 */
+			while (sourceIt.hasNext().isTrue()) {
+
+				OclAny anElement;
+				OclBoolean bodyResult;
+
+				/* Add an element to the environment. */
+				anElement = sourceIt.next();
+				this.myEnvironment.addVar(iterator.getQualifiedName(),
+						anElement);
+
+				/* Compute the body result. */
+				bodyResult = (OclBoolean) doSwitch((EObject) body);
+
+				/* Remove the variable from the environment again. */
+				this.myEnvironment.addVar(iterator.getQualifiedName(), null);
+
+				/* Probably break iteration. */
+				if (!bodyResult.oclIsInvalid().isTrue()
+						&& !bodyResult.oclIsUndefined().isTrue()
+						&& bodyResult.isTrue()) {
+					result = anElement;
+					break;
+				}
+				// no else.
+			}
+			// end while.
+		}
+		// end else.
+
+		/* Probably result in undefined. */
 		if (result == null) {
 			String msg;
 
@@ -3180,6 +3200,501 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		}
 		// no else.
 
+		return result;
+	}
+
+	/**
+	 * Results in true if body evaluates to true for at least one element in the
+	 * source collection.
+	 * 
+	 * @param body
+	 *            the body expression to be evaluated
+	 * @param source
+	 *            the collection representing the source expression of the
+	 *            iteration
+	 * @param iterators
+	 *            the iterators
+	 * @param it
+	 *            the current iterator for the source collection
+	 * 
+	 * @return the result of the iteration
+	 */
+	private OclAny evaluateExists(OclExpression body,
+			OclCollection<OclAny> source, List<Variable> iterators,
+			OclIterator<OclAny> it) {
+
+		/* Probably log the entry of this method. */
+		if (LOGGER.isDebugEnabled()) {
+			String msg;
+
+			msg = "evaluateIsUnique(";
+			msg += "body = " + body;
+			msg += ", source = " + source;
+			msg += ", iterators = " + iterators;
+			msg += ", it = " + it;
+			msg += ") - start";
+
+			LOGGER.debug(msg);
+		}
+		// no else.
+
+		OclBoolean result;
+
+		/* By default the result is false. */
+		result = myStandardLibraryFactory.createOclBoolean(false);
+
+		/* Check if iterator is undefined. */
+		if (it.hasNext().oclIsInvalid().isTrue()) {
+			result = myStandardLibraryFactory.createOclInvalid(
+					TypeConstants.BOOLEAN, it.hasNext().getInvalidReason());
+		}
+
+		/* Else compute the result. */
+		else {
+			/*
+			 * Iterate over the collection and check if at least one element
+			 * fulfills the body expression.
+			 */
+			while (it.hasNext().isTrue()) {
+
+				OclAny anElement;
+				OclBoolean bodyResult;
+
+				/* Add an element to the environment... */
+				anElement = it.next();
+				myEnvironment.addVar(iterators.get(0).getQualifiedName(),
+						anElement);
+
+				/* ...and compute its body expression. */
+				bodyResult = null;
+
+				/*
+				 * Probably recall this method recursively for more iterator
+				 * variables.
+				 */
+				if (iterators.size() > 1) {
+
+					List<Variable> tempItList;
+					OclIterator<OclAny> nextIt;
+
+					/*
+					 * Remove the firs iterator variable and recall recursively
+					 * this method for all other iterator variables.
+					 */
+					tempItList = new ArrayList<Variable>(iterators);
+					tempItList.remove(0);
+
+					nextIt = source.getIterator();
+					bodyResult = (OclBoolean) evaluateExists(body, source,
+							tempItList, nextIt);
+				}
+
+				else {
+					bodyResult = (OclBoolean) doSwitch((EObject) body);
+				}
+
+				/* Remove the variable from the environment again. */
+				this.myEnvironment.addVar(iterators.get(0).getQualifiedName(),
+						null);
+
+				result = result.or(bodyResult);
+
+				/* Probably break iteration. */
+				if (!result.oclIsInvalid().isTrue()
+						&& !result.oclIsUndefined().isTrue() && result.isTrue()) {
+					break;
+				}
+				// no else.
+			}
+			// end while.
+		}
+		// end else.
+
+		/* Probably log the exit of this method. */
+		if (LOGGER.isDebugEnabled()) {
+
+			String msg;
+
+			msg = "evaluateExists(OclExpression, OclCollection<OclAny>";
+			msg += ", List<Variable>, OclIterator<OclAny>) - end - result = ";
+			msg += result;
+
+			LOGGER.debug(msg);
+		}
+		// no else.
+
+		return result;
+	}
+
+	/**
+	 * Results in true if the body expression evaluates to true for each element
+	 * in the source collection; otherwise, result is false.
+	 * 
+	 * @param body
+	 *            the body expression to be evaluated
+	 * @param source
+	 *            the collection representing the source expression of the
+	 *            iteration
+	 * @param iterators
+	 *            the iterators
+	 * @param it
+	 *            the current iterator for the source collection
+	 * 
+	 * @return the result of the iteration
+	 */
+	private OclAny evaluateForAll(OclExpression body,
+			OclCollection<OclAny> source, List<Variable> iterators,
+			OclIterator<OclAny> it) {
+
+		/* Probably log the entry of this method. */
+		if (LOGGER.isDebugEnabled()) {
+			String msg;
+
+			msg = "evaluateIsUnique(";
+			msg += "body = " + body;
+			msg += ", source = " + source;
+			msg += ", iterators = " + iterators;
+			msg += ", it = " + it;
+			msg += ") - start";
+
+			LOGGER.debug(msg);
+		}
+		// no else.
+
+		OclBoolean result;
+
+		/* By default the result is true. */
+		result = myStandardLibraryFactory.createOclBoolean(true);
+
+		/* Check if iterator is undefined. */
+		if (it.hasNext().oclIsInvalid().isTrue()) {
+			result = myStandardLibraryFactory.createOclInvalid(
+					TypeConstants.BOOLEAN, it.hasNext().getInvalidReason());
+		}
+
+		else {
+
+			/* Iterate through the collection. */
+			while (it.hasNext().isTrue()) {
+
+				OclAny anItVariable;
+				OclBoolean bodyResult;
+
+				/* Get an iterator variable and add it to the environment. */
+				anItVariable = it.next();
+				this.myEnvironment.addVar(iterators.get(0).getQualifiedName(),
+						anItVariable);
+
+				bodyResult = null;
+
+				/*
+				 * Check if more than this iterator variables are available and
+				 * Probably add them to the environment and compute the result
+				 * recursively.
+				 */
+				if (iterators.size() > 1) {
+					List<Variable> subIteratorList;
+					OclIterator<OclAny> nextIt;
+
+					subIteratorList = new ArrayList<Variable>(iterators);
+
+					/* Remove the actual iterator. */
+					subIteratorList.remove(0);
+
+					/* Get the next iterator and compute the result recursively. */
+					nextIt = source.getIterator();
+					bodyResult = (OclBoolean) evaluateForAll(body, source,
+							subIteratorList, nextIt);
+				}
+
+				/*
+				 * Else compute the result for this iterator variable and all
+				 * iterator variables which were set recursively before.
+				 */
+				else {
+					bodyResult = (OclBoolean) doSwitch((EObject) body);
+				}
+
+				/* Remove the variable from the environment again. */
+				this.myEnvironment.addVar(iterators.get(0).getQualifiedName(),
+						null);
+
+				result = result.and(bodyResult);
+
+				/* Probably break iteration. */
+				if (result.oclIsInvalid().isTrue()
+						|| result.oclIsUndefined().isTrue() || !result.isTrue()) {
+					break;
+				}
+			}
+			// end while.
+		}
+		// end else.
+
+		/* Probably log the exit of this method. */
+		if (LOGGER.isDebugEnabled()) {
+
+			String msg;
+
+			msg = "evaluateForAll(OclExpression, OclCollection<OclAny>";
+			msg += ", List<Variable>, OclIterator<OclAny>) - end - result = ";
+			msg += result;
+
+			LOGGER.debug(msg);
+		}
+		// no else.
+
+		return result;
+	}
+
+	/**
+	 * <p>
+	 * Results in true if body evaluates to a different value for each element
+	 * in the source collection; otherwise, result is false.
+	 * </p>
+	 * 
+	 * @param body
+	 *            the body expression to be evaluated
+	 * @param source
+	 *            the collection representing the source expression of the
+	 *            iteration
+	 * @param iterator
+	 *            the iterator (isUnique may have at most one iterator
+	 *            variable.)
+	 * 
+	 * @return the result of the iteration
+	 */
+	private OclAny evaluateIsUnique(OclExpression body,
+			OclCollection<OclAny> source, Variable iterator) {
+
+		/* Probably log the entry of this method. */
+		if (LOGGER.isDebugEnabled()) {
+			String msg;
+
+			msg = "evaluateIsUnique(";
+			msg += "body = " + body;
+			msg += ", source = " + source;
+			msg += ", iterator = " + iterator;
+			msg += ") - start";
+
+			LOGGER.debug(msg);
+		}
+		// no else.
+
+		OclAny result;
+
+		OclIterator<OclAny> sourceIt;
+
+		sourceIt = source.getIterator();
+
+		/* Check if iterator is undefined. */
+		if (sourceIt.hasNext().oclIsInvalid().isTrue()) {
+			result = myStandardLibraryFactory.createOclInvalid(
+					TypeConstants.BOOLEAN, sourceIt.hasNext()
+							.getInvalidReason());
+		}
+
+		else {
+			/* By default, the result is true. */
+			result = myStandardLibraryFactory.createOclBoolean(true);
+
+			List<OclAny> resultList;
+			resultList = new ArrayList<OclAny>();
+
+			/* Iterate over the collection and check if every element is unique. */
+			while (sourceIt.hasNext().isTrue()) {
+
+				OclAny anElement;
+				OclAny bodyResult;
+
+				anElement = sourceIt.next();
+
+				/* Add the element to the environment. */
+				this.myEnvironment.addVar(iterator.getQualifiedName(),
+						anElement);
+
+				/* Compute the body for the set environment. */
+				bodyResult = doSwitch((EObject) body);
+
+				/* Remove the variable from the environment again. */
+				this.myEnvironment.addVar(iterator.getQualifiedName(), null);
+
+				/* Check if the result is invalid. */
+				if (bodyResult.oclIsInvalid().isTrue()) {
+					result = this.myStandardLibraryFactory.createOclInvalid(
+							TypeConstants.BOOLEAN, bodyResult
+									.getInvalidReason());
+					break;
+				}
+
+				/* Check if the result is undefined. */
+				else if (bodyResult.oclIsUndefined().isTrue()) {
+					result = this.myStandardLibraryFactory
+							.createOclInvalid(
+									TypeConstants.BOOLEAN,
+									new IllegalArgumentException(
+											"Cannot determine iterator isUnique on Collection containing undefined values."));
+					break;
+				}
+
+				/* Else check if the result is not unique. */
+				else if (resultList.contains(bodyResult)) {
+					result = myStandardLibraryFactory.createOclBoolean(false);
+					break;
+				}
+
+				/* Else continue iteration. */
+				else {
+					resultList.add(bodyResult);
+				}
+			}
+			// end while.
+		}
+		// end else.
+
+		/* Probably log the exit of this method. */
+		if (LOGGER.isDebugEnabled()) {
+
+			String msg;
+
+			msg = "evaluateIsUnique(OclExpression, OclCollection<OclAny>";
+			msg += ", Variable) - end - return value=" + result;
+
+			LOGGER.debug(msg);
+		}
+		// no else.
+
+		return result;
+	}
+
+	/**
+	 * Results in true if there is exactly one element in the source collection
+	 * for which body is true.
+	 * 
+	 * @param body
+	 *            the body expression to be evaluated
+	 * @param source
+	 *            the collection representing the source expression of the
+	 *            iteration
+	 * @param iterator
+	 *            the iterator (one may have at most one iterator variable.)
+	 * 
+	 * @return the result of the iteration
+	 */
+	private OclAny evaluateOne(OclExpression body,
+			OclCollection<OclAny> source, Variable iterator) {
+
+		/* Probably log the entry of this method. */
+		if (LOGGER.isDebugEnabled()) {
+			String msg;
+
+			msg = "evaluateOne(";
+			msg += "body = " + body;
+			msg += ", source = " + source;
+			msg += ", iterator = " + iterator;
+			msg += ") - start";
+
+			LOGGER.debug(msg);
+		}
+		// no else.
+
+		OclAny result;
+		boolean foundExactlyOneElement;
+
+		OclIterator<OclAny> sourceIt;
+
+		sourceIt = source.getIterator();
+
+		/* Check if iterator is undefined. */
+		if (sourceIt.hasNext().oclIsInvalid().isTrue()) {
+			result = myStandardLibraryFactory.createOclInvalid(
+					TypeConstants.BOOLEAN, sourceIt.hasNext()
+							.getInvalidReason());
+		}
+
+		/* Else compute the result. */
+		else {
+
+			result = null;
+
+			/* By default the result is false. */
+			foundExactlyOneElement = false;
+
+			/*
+			 * Iterate through the source and check if exactly one element
+			 * fulfills the body condition.
+			 */
+			while (sourceIt.hasNext().isTrue()) {
+
+				OclAny anElement;
+				OclBoolean bodyResult;
+
+				/*
+				 * Add the element to the environment and compute the body
+				 * result.
+				 */
+				anElement = sourceIt.next();
+				this.myEnvironment.addVar(iterator.getQualifiedName(),
+						anElement);
+
+				bodyResult = (OclBoolean) doSwitch((EObject) body);
+
+				/* Remove the variable from the environment again. */
+				this.myEnvironment.addVar(iterator.getQualifiedName(), null);
+
+				/* Cannot determine one if one result is invalid. */
+				if (bodyResult.oclIsInvalid().isTrue()) {
+					result = this.myStandardLibraryFactory.createOclInvalid(
+							TypeConstants.BOOLEAN, bodyResult
+									.getInvalidReason());
+					break;
+				}
+
+				/* Cannot determine one if one result is undefined. */
+				else if (bodyResult.oclIsUndefined().isTrue()) {
+					result = this.myStandardLibraryFactory
+							.createOclUndefined(TypeConstants.BOOLEAN,
+									"Cannot determine iterator one() on result set containing undefined values.");
+					break;
+				}
+
+				/* Else probably count the elements. */
+				else if (bodyResult.isTrue()) {
+
+					/* If alreadyFoundAnElement, break and return false. */
+					if (foundExactlyOneElement) {
+						foundExactlyOneElement = false;
+						break;
+					}
+
+					else {
+						/* Search for another element. */
+						foundExactlyOneElement = true;
+					}
+				}
+				// no else.
+			}
+			// end while.
+
+			if (result == null) {
+				result = myStandardLibraryFactory
+						.createOclBoolean(foundExactlyOneElement);
+			}
+			// no else.
+		}
+		// end else.
+
+		/* Probably log the entry of this method. */
+		if (LOGGER.isDebugEnabled()) {
+
+			String msg;
+
+			msg = "evaluateOne(OclExpression, OclCollection<OclAny>";
+			msg += ", Variable) - end - result = " + result;
+
+			LOGGER.debug(msg);
+		}
+		// no else.
 		return result;
 	}
 
@@ -3299,313 +3814,6 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 	}
 
 	/**
-	 * Results in true if body evaluates to true for at least one element in the
-	 * source collection.
-	 * 
-	 * @param body
-	 *            the body expression to be evaluated
-	 * @param source
-	 *            the collection representing the source expression of the
-	 *            iteration
-	 * @param iterators
-	 *            the iterators
-	 * @param it
-	 *            the current iterator for the source collection
-	 * 
-	 * @return the result of the iteration
-	 */
-	private OclAny evaluateExists(OclExpression body,
-			OclCollection<OclAny> source, List<Variable> iterators,
-			OclIterator<OclAny> it) {
-
-		/* Probably log the entry of this method. */
-		if (LOGGER.isDebugEnabled()) {
-			String msg;
-
-			msg = "evaluateIsUnique(";
-			msg += "body = " + body;
-			msg += ", source = " + source;
-			msg += ", iterators = " + iterators;
-			msg += ", it = " + it;
-			msg += ") - start";
-
-			LOGGER.debug(msg);
-		}
-		// no else.
-
-		OclAny result;
-
-		/* By default the result is false. */
-		result = myStandardLibraryFactory.createOclBoolean(false);
-
-		/*
-		 * Iterate over the collection and check if at least one element
-		 * fulfills the body expression.
-		 */
-		while (it.hasNext().isTrue()) {
-
-			OclAny anElement;
-			OclBoolean bodyResult;
-
-			/* Add an element to the environment... */
-			anElement = it.next();
-			myEnvironment
-					.addVar(iterators.get(0).getQualifiedName(), anElement);
-
-			/* ...and compute its body expression. */
-			bodyResult = null;
-
-			/*
-			 * Probably recall this method recursively for more iterator
-			 * variables.
-			 */
-			if (iterators.size() > 1) {
-
-				List<Variable> tempItList;
-				OclIterator<OclAny> nextIt;
-
-				/*
-				 * Remove the firs iterator variable and recall recursively this
-				 * method for all other iterator variables.
-				 */
-				tempItList = new ArrayList<Variable>(iterators);
-				tempItList.remove(0);
-
-				nextIt = source.getIterator();
-				bodyResult = (OclBoolean) evaluateExists(body, source,
-						tempItList, nextIt);
-			}
-
-			else {
-				bodyResult = (OclBoolean) doSwitch((EObject) body);
-			}
-
-			/* If the body result is true, result in true. */
-			if (bodyResult.isTrue()) {
-				result = myStandardLibraryFactory.createOclBoolean(true);
-				break;
-			}
-			// no else.
-		}
-
-		/* Probably log the exit of this method. */
-		if (LOGGER.isDebugEnabled()) {
-
-			String msg;
-
-			msg = "evaluateExists(OclExpression, OclCollection<OclAny>";
-			msg += ", List<Variable>, OclIterator<OclAny>) - end - result = ";
-			msg += result;
-
-			LOGGER.debug(msg);
-		}
-		// no else.
-
-		return result;
-	}
-
-	/**
-	 * Results in true if the body expression evaluates to true for each element
-	 * in the source collection; otherwise, result is false.
-	 * 
-	 * @param body
-	 *            the body expression to be evaluated
-	 * @param source
-	 *            the collection representing the source expression of the
-	 *            iteration
-	 * @param iterators
-	 *            the iterators
-	 * @param it
-	 *            the current iterator for the source collection
-	 * 
-	 * @return the result of the iteration
-	 */
-	private OclAny evaluateForAll(OclExpression body,
-			OclCollection<OclAny> source, List<Variable> iterators,
-			OclIterator<OclAny> it) {
-
-		/* Probably log the entry of this method. */
-		if (LOGGER.isDebugEnabled()) {
-			String msg;
-
-			msg = "evaluateIsUnique(";
-			msg += "body = " + body;
-			msg += ", source = " + source;
-			msg += ", iterators = " + iterators;
-			msg += ", it = " + it;
-			msg += ") - start";
-
-			LOGGER.debug(msg);
-		}
-		// no else.
-
-		OclAny result;
-
-		/* By default the result is true. */
-		result = myStandardLibraryFactory.createOclBoolean(true);
-
-		/* FIXME Claas: Same check for other iterate expressions. */
-		/* Check if iterator is undefined. */
-		if (it.hasNext().oclIsInvalid().isTrue()) {
-			result = myStandardLibraryFactory.createOclInvalid(source
-					.getGenericType(), it.hasNext().getInvalidReason());
-		}
-
-		else {
-
-			/* Iterate through the collection. */
-			while (it.hasNext().isTrue()) {
-
-				OclAny anItVariable;
-				OclBoolean bodyResult;
-
-				/* Get an iterator variable and add it to the environment. */
-				anItVariable = it.next();
-				myEnvironment.addVar(iterators.get(0).getQualifiedName(),
-						anItVariable);
-
-				bodyResult = null;
-
-				/*
-				 * Check if more than this iterator variables are available and
-				 * Probably add them to the environment and compute the result
-				 * recursively.
-				 */
-				if (iterators.size() > 1) {
-					List<Variable> subIteratorList;
-					OclIterator<OclAny> nextIt;
-
-					subIteratorList = new ArrayList<Variable>(iterators);
-
-					/* Remove the actual iterator. */
-					subIteratorList.remove(0);
-
-					/* Get the next iterator and compute the result recursively. */
-					nextIt = source.getIterator();
-					bodyResult = (OclBoolean) evaluateForAll(body, source,
-							subIteratorList, nextIt);
-				}
-
-				/*
-				 * Else compute the result for this iterator variable and all
-				 * iterator variables which were set recursively before.
-				 */
-				else {
-					bodyResult = (OclBoolean) doSwitch((EObject) body);
-				}
-
-				/* If the body result is false, return false. */
-				if (!bodyResult.isTrue()) {
-					result = myStandardLibraryFactory.createOclBoolean(false);
-					break;
-				}
-			}
-			// end while.
-		}
-		// end else.
-
-		/* Probably log the exit of this method. */
-		if (LOGGER.isDebugEnabled()) {
-
-			String msg;
-
-			msg = "evaluateForAll(OclExpression, OclCollection<OclAny>";
-			msg += ", List<Variable>, OclIterator<OclAny>) - end - result = ";
-			msg += result;
-
-			LOGGER.debug(msg);
-		}
-		// no else.
-
-		return result;
-	}
-
-	/**
-	 * <p>
-	 * Results in true if body evaluates to a different value for each element
-	 * in the source collection; otherwise, result is false.
-	 * </p>
-	 * 
-	 * @param body
-	 *            the body expression to be evaluated
-	 * @param source
-	 *            the collection representing the source expression of the
-	 *            iteration
-	 * @param iterator
-	 *            the iterator (isUnique may have at most one iterator
-	 *            variable.)
-	 * 
-	 * @return the result of the iteration
-	 */
-	private OclAny evaluateIsUnique(OclExpression body,
-			OclCollection<OclAny> source, Variable iterator) {
-
-		/* Probably log the entry of this method. */
-		if (LOGGER.isDebugEnabled()) {
-			String msg;
-
-			msg = "evaluateIsUnique(";
-			msg += "body = " + body;
-			msg += ", source = " + source;
-			msg += ", iterator = " + iterator;
-			msg += ") - start";
-
-			LOGGER.debug(msg);
-		}
-		// no else.
-
-		OclAny result;
-		List<OclAny> resultList;
-
-		OclIterator<OclAny> sourceIt;
-
-		sourceIt = source.getIterator();
-		resultList = new ArrayList<OclAny>();
-
-		/* By default, the result is true. */
-		result = myStandardLibraryFactory.createOclBoolean(true);
-
-		/* Iterate over the collection and check if every element is unique. */
-		while (sourceIt.hasNext().isTrue()) {
-
-			OclAny anElement;
-			OclAny bodyResult;
-
-			anElement = sourceIt.next();
-
-			/* Add the element to the environment. */
-			myEnvironment.addVar(iterator.getQualifiedName(), anElement);
-
-			/* Compute the body for the set environment. */
-			bodyResult = doSwitch((EObject) body);
-
-			/* Check if the result is unique. */
-			if (!resultList.contains(bodyResult)) {
-				resultList.add(bodyResult);
-			}
-
-			else {
-				result = myStandardLibraryFactory.createOclBoolean(false);
-				break;
-			}
-		}
-
-		/* Probably log the exit of this method. */
-		if (LOGGER.isDebugEnabled()) {
-
-			String msg;
-
-			msg = "evaluateIsUnique(OclExpression, OclCollection<OclAny>";
-			msg += ", Variable) - end - return value=" + result;
-
-			LOGGER.debug(msg);
-		}
-		// no else.
-
-		return result;
-	}
-
-	/**
 	 * <p>
 	 * Evaluates the general iterate method. Will be invoked recursively for
 	 * every iterator of the iteration.
@@ -3698,112 +3906,6 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		}
 		// no else.
 
-		return result;
-	}
-
-	/**
-	 * Results in true if there is exactly one element in the source collection
-	 * for which body is true.
-	 * 
-	 * @param body
-	 *            the body expression to be evaluated
-	 * @param source
-	 *            the collection representing the source expression of the
-	 *            iteration
-	 * @param iterator
-	 *            the iterator (one may have at most one iterator variable.)
-	 * 
-	 * @return the result of the iteration
-	 */
-	private OclAny evaluateOne(OclExpression body,
-			OclCollection<OclAny> source, Variable iterator) {
-
-		/* Probably log the entry of this method. */
-		if (LOGGER.isDebugEnabled()) {
-			String msg;
-
-			msg = "evaluateOne(";
-			msg += "body = " + body;
-			msg += ", source = " + source;
-			msg += ", iterator = " + iterator;
-			msg += ") - start";
-
-			LOGGER.debug(msg);
-		}
-		// no else.
-
-		OclAny result;
-		boolean oneFoundElement;
-
-		OclIterator<OclAny> sourceIt;
-
-		result = null;
-
-		sourceIt = source.getIterator();
-
-		/* By default the result is false. */
-		oneFoundElement = false;
-
-		/*
-		 * Iterate through the source and check if exactly one element fulfills
-		 * the body condition.
-		 */
-		while (sourceIt.hasNext().isTrue()) {
-
-			OclAny anElement;
-			OclAny bodyResult;
-			OclBoolean bodyBooleanResult;
-
-			/* Add the element to the environment and compute the body result. */
-			anElement = sourceIt.next();
-			myEnvironment.addVar(iterator.getQualifiedName(), anElement);
-
-			bodyResult = doSwitch((EObject) body);
-
-			if (bodyResult instanceof OclBoolean) {
-				bodyBooleanResult = (OclBoolean) doSwitch((EObject) body);
-			}
-
-			else {
-				/* A void or undefined result has occurred. */
-				result = bodyResult;
-				break;
-			}
-
-			if (bodyBooleanResult.isTrue()) {
-
-				/*
-				 * If the boolean result is true, another element fulfills the
-				 * condition.
-				 */
-				if (oneFoundElement) {
-					oneFoundElement = false;
-					break;
-				}
-
-				else {
-					/* Search for another element. */
-					oneFoundElement = true;
-				}
-			}
-		}
-
-		if (result == null) {
-			result = myStandardLibraryFactory.createOclBoolean(oneFoundElement);
-		}
-		// no else.
-
-		/* Probably log the entry of this method. */
-		if (LOGGER.isDebugEnabled()) {
-
-			String msg;
-
-			msg = "evaluateOne(OclExpression, OclCollection<OclAny>";
-			msg += ", Variable) - end - result = " + result;
-
-			LOGGER.debug(msg);
-		}
-		// no else.
 		return result;
 	}
 
@@ -3926,26 +4028,39 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		OclIterator<OclAny> it = source.getIterator();
 		List<OclAny> resultList = new ArrayList<OclAny>();
 
-		/* Iterate over the collection. */
-		while (it.hasNext().isTrue()) {
-
-			OclAny anElement;
-			OclBoolean bodyResult;
-
-			/* Add an element to the environment. */
-			anElement = it.next();
-			myEnvironment.addVar(iterator.getQualifiedName(), anElement);
-
-			/* Compute the body expression for an element. */
-			bodyResult = (OclBoolean) doSwitch((EObject) body);
-
-			/* Add the element to the result list if the body result is true. */
-			if (!bodyResult.oclIsUndefined().isTrue() && bodyResult.isTrue()) {
-				resultList.add(anElement);
-			}
-			// no else.
+		/* Check if iterator is undefined. */
+		if (it.hasNext().oclIsInvalid().isTrue()) {
+			result = myStandardLibraryFactory.createOclInvalid(source
+					.getGenericType(), it.hasNext().getInvalidReason());
 		}
-		// end while.
+
+		else {
+			/* Iterate over the collection. */
+			while (it.hasNext().isTrue()) {
+
+				OclAny anElement;
+				OclBoolean bodyResult;
+
+				/* Add an element to the environment. */
+				anElement = it.next();
+				myEnvironment.addVar(iterator.getQualifiedName(), anElement);
+
+				/* Compute the body expression for an element. */
+				bodyResult = (OclBoolean) doSwitch((EObject) body);
+
+				/*
+				 * Add the element to the result list if the body result is
+				 * true.
+				 */
+				if (!bodyResult.oclIsUndefined().isTrue()
+						&& bodyResult.isTrue()) {
+					resultList.add(anElement);
+				}
+				// no else.
+			}
+			// end while.
+		}
+		// no else.
 
 		/* Convert the result list into a collection. */
 		result = this.getResultListAsCollection(resultList, resultType);
