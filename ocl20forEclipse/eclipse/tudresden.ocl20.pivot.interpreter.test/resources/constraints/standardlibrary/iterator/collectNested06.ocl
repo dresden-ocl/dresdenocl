@@ -1,0 +1,8 @@
+package package1
+
+context Class1
+/* Expected as okay. */
+def: testCollect(): Bag(Integer) =
+Bag { 1, integerNull, 3 } -> collect(element: Integer | element)
+
+endpackage

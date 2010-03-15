@@ -1,0 +1,13 @@
+package package1
+
+context Class1
+def: testSelect(): Bag(Integer) =
+/* Expected as invalid. */
+Bag { 0, 1, 2, 3 } -> select(element: Integer | 
+  if element = 1
+    then booleanNull
+    else 1 / element > 0
+  endif
+)
+
+endpackage

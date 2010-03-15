@@ -1,0 +1,13 @@
+package package1
+
+context Class1
+def: testSelect(): Bag(Integer) =
+/* Expected as invalid. */
+Bag { integerNull, 1, 2, 3 } -> reject(element: Integer | 
+  if element.oclIsUndefined()
+    then booleanNull
+    else element = 1
+  endif
+)
+
+endpackage

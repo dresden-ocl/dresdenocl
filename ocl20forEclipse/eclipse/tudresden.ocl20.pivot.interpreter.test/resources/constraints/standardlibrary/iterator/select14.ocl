@@ -1,0 +1,8 @@
+package package1
+
+context Class1
+def: testSelect(): Bag(Integer) =
+/* Expected as Bag { 2 }. */
+Bag { integerNull, 2, 3 } -> select(element: Integer | element = 2)
+
+endpackage

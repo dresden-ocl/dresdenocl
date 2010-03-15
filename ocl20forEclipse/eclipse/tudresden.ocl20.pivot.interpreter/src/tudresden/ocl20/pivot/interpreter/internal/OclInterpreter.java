@@ -3232,6 +3232,125 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 	}
 
 	/**
+	 * <p>
+	 * The collection of elements which results from applying body to every
+	 * member of the source set.
+	 * </p>
+	 * 
+	 * @param body
+	 *            The body expression to be evaluated.
+	 * @param source
+	 *            The collection representing the source expression of the
+	 *            iteration.
+	 * @param iterator
+	 *            The iterator (collectNested may have at most one iterator
+	 *            variable.).
+	 * @param resultType
+	 *            The result type (set, sequence, bag, orderedSet).
+	 * 
+	 * @return The result of the iteration.
+	 */
+	private OclAny evaluateCollectNested(OclExpression body,
+			OclCollection<OclAny> source, Variable iterator, Type resultType) {
+	
+		/* Probably log the entry of this method. */
+		if (LOGGER.isDebugEnabled()) {
+			String msg;
+	
+			msg = "evaluateCollectNested(";
+			msg += "body = " + body;
+			msg += ", source = " + source;
+			msg += ", iterator = " + iterator;
+			msg += ", resultType = " + resultType;
+			msg += ") - start";
+	
+			LOGGER.debug(msg);
+		}
+		// no else.
+	
+		OclAny result;
+	
+		List<OclAny> resultList;
+		OclIterator<OclAny> sourceIt;
+	
+		resultList = new ArrayList<OclAny>();
+		sourceIt = source.getIterator();
+	
+		/* Check if iterator is undefined. */
+		if (sourceIt.hasNext().oclIsInvalid().isTrue()) {
+			result = myStandardLibraryFactory.createOclInvalid(source
+					.getGenericType(), new IllegalArgumentException(
+					"Source of iterator collectNested() was invalid.", sourceIt
+							.hasNext().getInvalidReason()));
+		}
+	
+		/* Else compute the result. */
+		else {
+	
+			/*
+			 * Iterate over the source and collect the body expression for all
+			 * elements.
+			 */
+			while (sourceIt.hasNext().isTrue()) {
+	
+				OclAny anElement;
+				OclAny bodyResult;
+	
+				/* Get the next element and add it to the environment. */
+				anElement = sourceIt.next();
+				myEnvironment.addVar(iterator.getQualifiedName(), anElement);
+	
+				/* Compute the body expression for an element. */
+				bodyResult = doSwitch((EObject) body);
+	
+				resultList.add(bodyResult);
+			}
+			// end while.
+	
+			/* Compute the result type depending on the given result type. */
+			if (resultType instanceof BagType) {
+				result = myStandardLibraryFactory.createOclBag(resultList,
+						((BagType) resultType).getElementType());
+			}
+	
+			else if (resultType instanceof SequenceType) {
+				result = myStandardLibraryFactory.createOclSequence(resultList,
+						((SequenceType) resultType).getElementType());
+			}
+	
+			else {
+				String msg;
+				msg = "The ResultType of a collectNested Iterator should by a Sequence or Bag.";
+				msg += " But was " + resultType.getQualifiedName();
+	
+				if (LOGGER.isInfoEnabled()) {
+					LOGGER.warn(msg);
+				}
+				// no else.
+	
+				result = myStandardLibraryFactory.createOclInvalid(resultType,
+						new IllegalArgumentException(msg));
+			}
+			// end else.
+		}
+		// end else.
+	
+		/* Probably log the exit of this method. */
+		if (LOGGER.isDebugEnabled()) {
+	
+			String msg;
+	
+			msg = "evaluateCollectNested(OclExpression, OclCollection";
+			msg += "<OclAny>, Variable, Type) - end - result = " + result;
+	
+			LOGGER.debug(msg);
+		}
+		// no else.
+	
+		return result;
+	}
+
+	/**
 	 * Results in true if body evaluates to true for at least one element in the
 	 * source collection.
 	 * 
@@ -3766,32 +3885,28 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 	}
 
 	/**
-	 * <p>
-	 * The collection of elements which results from applying body to every
-	 * member of the source set.
-	 * </p>
+	 * The sub collection of source for which body is false.
 	 * 
 	 * @param body
-	 *            The body expression to be evaluated.
+	 *            the body expression to be evaluated
 	 * @param source
-	 *            The collection representing the source expression of the
-	 *            iteration.
+	 *            the collection representing the source expression of the
+	 *            iteration
 	 * @param iterator
-	 *            The iterator (collectNested may have at most one iterator
-	 *            variable.).
+	 *            the iterator (reject may have at most one iterator variable.)
 	 * @param resultType
-	 *            The result type (set, sequence, bag, orderedSet).
+	 *            the result type (set, sequence, bag, orderedSet)
 	 * 
-	 * @return The result of the iteration.
+	 * @return the result of the iteration
 	 */
-	private OclAny evaluateCollectNested(OclExpression body,
+	private OclAny evaluateReject(OclExpression body,
 			OclCollection<OclAny> source, Variable iterator, Type resultType) {
 
 		/* Probably log the entry of this method. */
 		if (LOGGER.isDebugEnabled()) {
 			String msg;
 
-			msg = "evaluateCollectNested(";
+			msg = "evaluateReject(";
 			msg += "body = " + body;
 			msg += ", source = " + source;
 			msg += ", iterator = " + iterator;
@@ -3803,69 +3918,73 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		// no else.
 
 		OclAny result;
+		result = null;
 
-		List<OclAny> resultList;
-		OclIterator<OclAny> sourceIt;
-
-		resultList = new ArrayList<OclAny>();
-		sourceIt = source.getIterator();
+		List<OclAny> resultList = new ArrayList<OclAny>();
+		OclIterator<OclAny> it = source.getIterator();
 
 		/* Check if iterator is undefined. */
-		if (sourceIt.hasNext().oclIsInvalid().isTrue()) {
+		if (it.hasNext().oclIsInvalid().isTrue()) {
 			result = myStandardLibraryFactory.createOclInvalid(source
 					.getGenericType(), new IllegalArgumentException(
-					"Source of iterator collectNested() was invalid.", sourceIt
+					"Source of iterator reject() was invalid.", it
 							.hasNext().getInvalidReason()));
 		}
 
 		/* Else compute the result. */
 		else {
-
 			/*
-			 * Iterate over the source and collect the body expression for all
-			 * elements.
+			 * Iterate over the collection and add all elements to the result
+			 * list which do not fulfill the body condition.
 			 */
-			while (sourceIt.hasNext().isTrue()) {
+			while (it.hasNext().isTrue()) {
 
 				OclAny anElement;
-				OclAny bodyResult;
+				OclBoolean bodyResult;
 
-				/* Get the next element and add it to the environment. */
-				anElement = sourceIt.next();
+				/* Add the actual element to the environment. */
+				anElement = it.next();
 				myEnvironment.addVar(iterator.getQualifiedName(), anElement);
 
-				/* Compute the body expression for an element. */
-				bodyResult = doSwitch((EObject) body);
+				/* Compute the body expression. */
+				bodyResult = (OclBoolean) doSwitch((EObject) body);
 
-				resultList.add(bodyResult);
+				/* Probably result in invalid. */
+				if (bodyResult.oclIsInvalid().isTrue()) {
+					result = this.myStandardLibraryFactory
+							.createOclInvalid(
+									source.getGenericType(),
+									new IllegalArgumentException(
+											"During reject() iteration, body expression was invalid for at least one element.",
+											bodyResult.getInvalidReason()));
+					break;
+				}
+
+				else if (bodyResult.oclIsUndefined().isTrue()) {
+					result = this.myStandardLibraryFactory
+							.createOclInvalid(
+									source.getGenericType(),
+									new IllegalArgumentException(
+											"During reject() iteration, body expression was undefined for at least one element."));
+					break;
+				}
+
+				/*
+				 * Else add the element to the result list if the body result is not
+				 * true.
+				 */
+				else if (!bodyResult.isTrue()) {
+					resultList.add(anElement);
+				}
+				// no else.
 			}
 			// end while.
 
-			/* Compute the result type depending on the given result type. */
-			if (resultType instanceof BagType) {
-				result = myStandardLibraryFactory.createOclBag(resultList,
-						((BagType) resultType).getElementType());
+			/* Probably adapt the result list. */
+			if (result == null) {
+				result = this.getResultListAsCollection(resultList, resultType);
 			}
-
-			else if (resultType instanceof SequenceType) {
-				result = myStandardLibraryFactory.createOclSequence(resultList,
-						((SequenceType) resultType).getElementType());
-			}
-
-			else {
-				String msg;
-				msg = "The ResultType of a collectNested Iterator should by a Sequence or Bag.";
-				msg += " But was " + resultType.getQualifiedName();
-
-				if (LOGGER.isInfoEnabled()) {
-					LOGGER.warn(msg);
-				}
-				// no else.
-
-				result = myStandardLibraryFactory.createOclInvalid(resultType,
-						new IllegalArgumentException(msg));
-			}
-			// end else.
+			// no else.
 		}
 		// end else.
 
@@ -3874,8 +3993,126 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 			String msg;
 
-			msg = "evaluateCollectNested(OclExpression, OclCollection";
-			msg += "<OclAny>, Variable, Type) - end - result = " + result;
+			msg = "evaluateReject(OclExpression, OclCollection";
+			msg += "<OclAny>, Variable, Type) - end - return value=" + result;
+
+			LOGGER.debug(msg);
+		}
+		// no else.
+
+		return result;
+	}
+
+	/**
+	 * <p>
+	 * The sub collection of source for which body is true.
+	 * </p>
+	 * 
+	 * @param body
+	 *            the body expression to be evaluated
+	 * @param source
+	 *            the collection representing the source expression of the
+	 *            iteration
+	 * @param iterator
+	 *            the iterator (select may have at most one iterator variable.)
+	 * @param resultType
+	 *            the result type (set, sequence, bag, orderedSet)
+	 * 
+	 * @return the result of the iteration
+	 */
+	private OclAny evaluateSelect(OclExpression body,
+			OclCollection<OclAny> source, Variable iterator, Type resultType) {
+
+		/* Probably log the entry into this method. */
+		if (LOGGER.isDebugEnabled()) {
+			String msg;
+
+			msg = "evaluateSelect(";
+			msg += "body = " + body;
+			msg += ", source = " + source;
+			msg += ", iterator = " + iterator;
+			msg += ", resultType = " + resultType;
+			msg += ") - start";
+
+			LOGGER.debug(msg);
+		}
+		// no else.
+
+		OclAny result;
+		result = null;
+
+		OclIterator<OclAny> it = source.getIterator();
+		List<OclAny> resultList = new ArrayList<OclAny>();
+
+		/* Check if iterator is undefined. */
+		if (it.hasNext().oclIsInvalid().isTrue()) {
+			result = myStandardLibraryFactory.createOclInvalid(source
+					.getGenericType(), new IllegalArgumentException(
+					"Source of iterator select() was invalid.", it
+							.hasNext().getInvalidReason()));
+		}
+
+		/* Else compute the result. */
+		else {
+			/* Iterate over the collection. */
+			while (it.hasNext().isTrue()) {
+
+				OclAny anElement;
+				OclBoolean bodyResult;
+
+				/* Add an element to the environment. */
+				anElement = it.next();
+				myEnvironment.addVar(iterator.getQualifiedName(), anElement);
+
+				/* Compute the body expression for an element. */
+				bodyResult = (OclBoolean) doSwitch((EObject) body);
+
+				/* Probably result in invalid. */
+				if (bodyResult.oclIsInvalid().isTrue()) {
+					result = this.myStandardLibraryFactory
+							.createOclInvalid(
+									source.getGenericType(),
+									new IllegalArgumentException(
+											"During select() iteration, body expression was invalid for at least one element.",
+											bodyResult.getInvalidReason()));
+					break;
+				}
+
+				else if (bodyResult.oclIsUndefined().isTrue()) {
+					result = this.myStandardLibraryFactory
+							.createOclInvalid(
+									source.getGenericType(),
+									new IllegalArgumentException(
+											"During select() iteration, body expression was undefined for at least one element."));
+					break;
+				}
+
+				/*
+				 * Else add the element to the result list if the body result is
+				 * true.
+				 */
+				else if (bodyResult.isTrue()) {
+					resultList.add(anElement);
+				}
+				// no else.
+			}
+			// end while.
+
+			/* Probably adapt the result list. */
+			if (result == null) {
+				result = this.getResultListAsCollection(resultList, resultType);
+			}
+			// no else.
+		}
+		// end else.
+
+		/* Probably log the exit of this method. */
+		if (LOGGER.isDebugEnabled()) {
+
+			String msg;
+
+			msg = "evaluateSelect(OclExpression, OclCollection";
+			msg += "<OclAny>, Variable, Type) - end - return value=" + result;
 
 			LOGGER.debug(msg);
 		}
@@ -3972,177 +4209,6 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			msg = "evaluateIterate(OclExpression, OclCollection<OclAny>,";
 			msg += " List<Variable>, OclIterator<OclAny>, String) - end";
 			msg += " - return value=" + result;
-
-			LOGGER.debug(msg);
-		}
-		// no else.
-
-		return result;
-	}
-
-	/**
-	 * The sub collection of source for which body is false.
-	 * 
-	 * @param body
-	 *            the body expression to be evaluated
-	 * @param source
-	 *            the collection representing the source expression of the
-	 *            iteration
-	 * @param iterator
-	 *            the iterator (reject may have at most one iterator variable.)
-	 * @param resultType
-	 *            the result type (set, sequence, bag, orderedSet)
-	 * 
-	 * @return the result of the iteration
-	 */
-	private OclAny evaluateReject(OclExpression body,
-			OclCollection<OclAny> source, Variable iterator, Type resultType) {
-
-		/* Probably log the entry of this method. */
-		if (LOGGER.isDebugEnabled()) {
-			String msg;
-
-			msg = "evaluateReject(";
-			msg += "body = " + body;
-			msg += ", source = " + source;
-			msg += ", iterator = " + iterator;
-			msg += ", resultType = " + resultType;
-			msg += ") - start";
-
-			LOGGER.debug(msg);
-		}
-		// no else.
-
-		OclAny result;
-
-		List<OclAny> resultList = new ArrayList<OclAny>();
-		OclIterator<OclAny> it = source.getIterator();
-
-		/*
-		 * Iterate over the collection and add all elements to the result list
-		 * which do not fulfill the body condition.
-		 */
-		while (it.hasNext().isTrue()) {
-
-			OclAny anElement;
-			OclBoolean bodyResult;
-
-			/* Add the actual element to the environment. */
-			anElement = it.next();
-			myEnvironment.addVar(iterator.getQualifiedName(), anElement);
-
-			/* Compute the body expression. */
-			bodyResult = (OclBoolean) doSwitch((EObject) body);
-
-			/* Add the element to the result list if the body result is false. */
-			if (!bodyResult.isTrue()) {
-				resultList.add(anElement);
-			}
-			// no else.
-		}
-
-		/* Convert the result list into a collection. */
-		result = this.getResultListAsCollection(resultList, resultType);
-
-		/* Probably log the exit of this method. */
-		if (LOGGER.isDebugEnabled()) {
-
-			String msg;
-
-			msg = "evaluateReject(OclExpression, OclCollection";
-			msg += "<OclAny>, Variable, Type) - end - return value=" + result;
-
-			LOGGER.debug(msg);
-		}
-		// no else.
-
-		return result;
-	}
-
-	/**
-	 * <p>
-	 * The sub collection of source for which body is true.
-	 * </p>
-	 * 
-	 * @param body
-	 *            the body expression to be evaluated
-	 * @param source
-	 *            the collection representing the source expression of the
-	 *            iteration
-	 * @param iterator
-	 *            the iterator (select may have at most one iterator variable.)
-	 * @param resultType
-	 *            the result type (set, sequence, bag, orderedSet)
-	 * 
-	 * @return the result of the iteration
-	 */
-	private OclAny evaluateSelect(OclExpression body,
-			OclCollection<OclAny> source, Variable iterator, Type resultType) {
-
-		/* Probably log the entry into this method. */
-		if (LOGGER.isDebugEnabled()) {
-			String msg;
-
-			msg = "evaluateSelect(";
-			msg += "body = " + body;
-			msg += ", source = " + source;
-			msg += ", iterator = " + iterator;
-			msg += ", resultType = " + resultType;
-			msg += ") - start";
-
-			LOGGER.debug(msg);
-		}
-		// no else.
-
-		OclAny result;
-
-		OclIterator<OclAny> it = source.getIterator();
-		List<OclAny> resultList = new ArrayList<OclAny>();
-
-		/* Check if iterator is undefined. */
-		if (it.hasNext().oclIsInvalid().isTrue()) {
-			result = myStandardLibraryFactory.createOclInvalid(source
-					.getGenericType(), it.hasNext().getInvalidReason());
-		}
-
-		else {
-			/* Iterate over the collection. */
-			while (it.hasNext().isTrue()) {
-
-				OclAny anElement;
-				OclBoolean bodyResult;
-
-				/* Add an element to the environment. */
-				anElement = it.next();
-				myEnvironment.addVar(iterator.getQualifiedName(), anElement);
-
-				/* Compute the body expression for an element. */
-				bodyResult = (OclBoolean) doSwitch((EObject) body);
-
-				/*
-				 * Add the element to the result list if the body result is
-				 * true.
-				 */
-				if (!bodyResult.oclIsUndefined().isTrue()
-						&& bodyResult.isTrue()) {
-					resultList.add(anElement);
-				}
-				// no else.
-			}
-			// end while.
-		}
-		// no else.
-
-		/* Convert the result list into a collection. */
-		result = this.getResultListAsCollection(resultList, resultType);
-
-		/* Probably log the exit of this method. */
-		if (LOGGER.isDebugEnabled()) {
-
-			String msg;
-
-			msg = "evaluateSelect(OclExpression, OclCollection";
-			msg += "<OclAny>, Variable, Type) - end - return value=" + result;
 
 			LOGGER.debug(msg);
 		}
