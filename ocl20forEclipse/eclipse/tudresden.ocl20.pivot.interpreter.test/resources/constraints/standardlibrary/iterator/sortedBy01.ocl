@@ -1,0 +1,8 @@
+package package1
+
+context Class1
+def: testSortedBy(): Sequence(Integer) =
+/* Expected as invalid. */
+Bag { 1 / 0 } -> sortedBy(element: Integer | element)
+
+endpackage

@@ -3252,30 +3252,30 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 	 */
 	private OclAny evaluateCollectNested(OclExpression body,
 			OclCollection<OclAny> source, Variable iterator, Type resultType) {
-	
+
 		/* Probably log the entry of this method. */
 		if (LOGGER.isDebugEnabled()) {
 			String msg;
-	
+
 			msg = "evaluateCollectNested(";
 			msg += "body = " + body;
 			msg += ", source = " + source;
 			msg += ", iterator = " + iterator;
 			msg += ", resultType = " + resultType;
 			msg += ") - start";
-	
+
 			LOGGER.debug(msg);
 		}
 		// no else.
-	
+
 		OclAny result;
-	
+
 		List<OclAny> resultList;
 		OclIterator<OclAny> sourceIt;
-	
+
 		resultList = new ArrayList<OclAny>();
 		sourceIt = source.getIterator();
-	
+
 		/* Check if iterator is undefined. */
 		if (sourceIt.hasNext().oclIsInvalid().isTrue()) {
 			result = myStandardLibraryFactory.createOclInvalid(source
@@ -3283,70 +3283,70 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 					"Source of iterator collectNested() was invalid.", sourceIt
 							.hasNext().getInvalidReason()));
 		}
-	
+
 		/* Else compute the result. */
 		else {
-	
+
 			/*
 			 * Iterate over the source and collect the body expression for all
 			 * elements.
 			 */
 			while (sourceIt.hasNext().isTrue()) {
-	
+
 				OclAny anElement;
 				OclAny bodyResult;
-	
+
 				/* Get the next element and add it to the environment. */
 				anElement = sourceIt.next();
 				myEnvironment.addVar(iterator.getQualifiedName(), anElement);
-	
+
 				/* Compute the body expression for an element. */
 				bodyResult = doSwitch((EObject) body);
-	
+
 				resultList.add(bodyResult);
 			}
 			// end while.
-	
+
 			/* Compute the result type depending on the given result type. */
 			if (resultType instanceof BagType) {
 				result = myStandardLibraryFactory.createOclBag(resultList,
 						((BagType) resultType).getElementType());
 			}
-	
+
 			else if (resultType instanceof SequenceType) {
 				result = myStandardLibraryFactory.createOclSequence(resultList,
 						((SequenceType) resultType).getElementType());
 			}
-	
+
 			else {
 				String msg;
 				msg = "The ResultType of a collectNested Iterator should by a Sequence or Bag.";
 				msg += " But was " + resultType.getQualifiedName();
-	
+
 				if (LOGGER.isInfoEnabled()) {
 					LOGGER.warn(msg);
 				}
 				// no else.
-	
+
 				result = myStandardLibraryFactory.createOclInvalid(resultType,
 						new IllegalArgumentException(msg));
 			}
 			// end else.
 		}
 		// end else.
-	
+
 		/* Probably log the exit of this method. */
 		if (LOGGER.isDebugEnabled()) {
-	
+
 			String msg;
-	
+
 			msg = "evaluateCollectNested(OclExpression, OclCollection";
 			msg += "<OclAny>, Variable, Type) - end - result = " + result;
-	
+
 			LOGGER.debug(msg);
 		}
 		// no else.
-	
+
 		return result;
 	}
 
@@ -3720,6 +3720,114 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 	}
 
 	/**
+	 * <p>
+	 * Evaluates the general iterate method. Will be invoked recursively for
+	 * every iterator of the iteration.
+	 * </p>
+	 * 
+	 * @param body
+	 *            the body expression of the iteration
+	 * @param source
+	 *            the collection representing the source expression of the
+	 *            iteration
+	 * @param iterators
+	 *            the iterators
+	 * @param it
+	 *            the current iterator for the source collection
+	 * @param resultVarName
+	 *            the name of the result variable
+	 * 
+	 * @return the result of the iteration
+	 */
+	private OclAny evaluateIterate(OclExpression body,
+			OclCollection<OclAny> source, List<Variable> iterators,
+			OclIterator<OclAny> it, String resultVarName) {
+
+		/* Probably log the entry of this method. */
+		if (LOGGER.isDebugEnabled()) {
+			String msg;
+
+			msg = "evaluateIsUnique(";
+			msg += "body = " + body;
+			msg += ", source = " + source;
+			msg += ", iterators = " + iterators;
+			msg += ", it = " + it;
+			msg += ", resultVarName = " + resultVarName;
+			msg += ") - start";
+
+			LOGGER.debug(msg);
+		}
+		// no else.
+
+		OclAny result = null;
+
+		/* Check if iterator is undefined. */
+		if (it.hasNext().oclIsInvalid().isTrue()) {
+			result = myStandardLibraryFactory.createOclInvalid(
+					body.getType(), new IllegalArgumentException(
+							"Source of iterate expression was invalid.", it
+									.hasNext().getInvalidReason()));
+		}
+
+		else {
+			/* Iterate through the iterator. */
+			while (it.hasNext().isTrue()) {
+
+				OclAny activeElement;
+
+				/* Get the next element. */
+				activeElement = it.next();
+
+				/* Add the elements variable to the environment. */
+				myEnvironment.addVar(iterators.get(0).getQualifiedName(),
+						activeElement);
+
+				/*
+				 * If more than one iterators are used, remove the first
+				 * iterator and recall this method recursively.
+				 */
+				if (iterators.size() > 1) {
+					List<Variable> allIterators;
+					OclIterator<OclAny> nextIt;
+
+					allIterators = new ArrayList<Variable>(iterators);
+					allIterators.remove(0);
+
+					nextIt = (OclIterator<OclAny>) source.getIterator();
+
+					result = evaluateIterate(body, source, allIterators,
+							nextIt, resultVarName);
+				}
+
+				/* Else compute the result. */
+				else {
+					result = doSwitch((EObject) body);
+				}
+
+				/* Add the result to the environment. */
+				myEnvironment.addVar(resultVarName, result);
+			}
+			// end while.
+		}
+		// end else.
+
+		/* Probably log the entry of this method. */
+		if (LOGGER.isDebugEnabled()) {
+
+			String msg;
+
+			msg = "evaluateIterate(OclExpression, OclCollection<OclAny>,";
+			msg += " List<Variable>, OclIterator<OclAny>, String) - end";
+			msg += " - return value=" + result;
+
+			LOGGER.debug(msg);
+		}
+		// no else.
+
+		return result;
+	}
+
+	/**
 	 * Results in true if there is exactly one element in the source collection
 	 * for which body is true.
 	 * 
@@ -3927,8 +4035,8 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		if (it.hasNext().oclIsInvalid().isTrue()) {
 			result = myStandardLibraryFactory.createOclInvalid(source
 					.getGenericType(), new IllegalArgumentException(
-					"Source of iterator reject() was invalid.", it
-							.hasNext().getInvalidReason()));
+					"Source of iterator reject() was invalid.", it.hasNext()
+							.getInvalidReason()));
 		}
 
 		/* Else compute the result. */
@@ -3970,8 +4078,8 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 				}
 
 				/*
-				 * Else add the element to the result list if the body result is not
-				 * true.
+				 * Else add the element to the result list if the body result is
+				 * not true.
 				 */
 				else if (!bodyResult.isTrue()) {
 					resultList.add(anElement);
@@ -4048,8 +4156,8 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		if (it.hasNext().oclIsInvalid().isTrue()) {
 			result = myStandardLibraryFactory.createOclInvalid(source
 					.getGenericType(), new IllegalArgumentException(
-					"Source of iterator select() was invalid.", it
-							.hasNext().getInvalidReason()));
+					"Source of iterator select() was invalid.", it.hasNext()
+							.getInvalidReason()));
 		}
 
 		/* Else compute the result. */
@@ -4122,102 +4230,6 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 	}
 
 	/**
-	 * <p>
-	 * Evaluates the general iterate method. Will be invoked recursively for
-	 * every iterator of the iteration.
-	 * </p>
-	 * 
-	 * @param body
-	 *            the body expression of the iteration
-	 * @param source
-	 *            the collection representing the source expression of the
-	 *            iteration
-	 * @param iterators
-	 *            the iterators
-	 * @param it
-	 *            the current iterator for the source collection
-	 * @param resultVarName
-	 *            the name of the result variable
-	 * 
-	 * @return the result of the iteration
-	 */
-	private OclAny evaluateIterate(OclExpression body,
-			OclCollection<OclAny> source, List<Variable> iterators,
-			OclIterator<OclAny> it, String resultVarName) {
-
-		/* Probably log the entry of this method. */
-		if (LOGGER.isDebugEnabled()) {
-			String msg;
-
-			msg = "evaluateIsUnique(";
-			msg += "body = " + body;
-			msg += ", source = " + source;
-			msg += ", iterators = " + iterators;
-			msg += ", it = " + it;
-			msg += ", resultVarName = " + resultVarName;
-			msg += ") - start";
-
-			LOGGER.debug(msg);
-		}
-		// no else.
-
-		OclAny result = null;
-
-		/* Iterate through the iterator. */
-		while (it.hasNext().isTrue()) {
-
-			OclAny activeElement;
-
-			/* Get the next element. */
-			activeElement = it.next();
-
-			/* Add the elements variable to the environment. */
-			myEnvironment.addVar(iterators.get(0).getQualifiedName(),
-					activeElement);
-
-			/*
-			 * If more than one iterators are used, remove the first iterator
-			 * and recall this method recursively.
-			 */
-			if (iterators.size() > 1) {
-				List<Variable> allIterators;
-				OclIterator<OclAny> nextIt;
-
-				allIterators = new ArrayList<Variable>(iterators);
-				allIterators.remove(0);
-
-				nextIt = (OclIterator<OclAny>) source.getIterator();
-
-				result = evaluateIterate(body, source, allIterators, nextIt,
-						resultVarName);
-			}
-
-			/* Else compute the result. */
-			else {
-				result = doSwitch((EObject) body);
-			}
-
-			/* Add the result to the environment. */
-			myEnvironment.addVar(resultVarName, result);
-		}
-
-		/* Probably log the entry of this method. */
-		if (LOGGER.isDebugEnabled()) {
-
-			String msg;
-
-			msg = "evaluateIterate(OclExpression, OclCollection<OclAny>,";
-			msg += " List<Variable>, OclIterator<OclAny>, String) - end";
-			msg += " - return value=" + result;
-
-			LOGGER.debug(msg);
-		}
-		// no else.
-
-		return result;
-	}
-
-	/**
 	 * Results in the sorted collection containing all elements of the source
 	 * collection. The element for which body has the lowest value comes first,
 	 * and so on. The type of the body expression must have the < operation
@@ -4256,129 +4268,129 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		}
 		// no else.
 
-		/* Create comparator for the major part of the sort algorithm. */
-		Comparator<OclComparable> comp = new Comparator<OclComparable>() {
+		OclAny result;
+		result = null;
 
-			public int compare(OclComparable oclComparable1,
-					OclComparable oclComparable2) {
+		OclIterator<OclAny> collectionIt;
+		collectionIt = source.getIterator();
 
-				/* Probably log the entry of this method. */
-				if (LOGGER.isDebugEnabled()) {
-					String msg;
+		/* Check if iterator is undefined. */
+		if (collectionIt.hasNext().oclIsInvalid().isTrue()) {
+			result = myStandardLibraryFactory.createOclInvalid(source
+					.getGenericType(), new IllegalArgumentException(
+					"Source of iterator sortedBy() was invalid.", collectionIt
+							.hasNext().getInvalidReason()));
+		}
 
-					msg = "compare(";
-					msg += "oclComparable1 = " + oclComparable1;
-					msg += ", oclComparable2 = " + oclComparable2;
-					msg += ") - start";
+		/* Else compute the result. */
+		else {
+			List<OclAny> resultList;
 
-					LOGGER.debug(msg);
+			Map<OclComparable, OclAny> results;
+			results = new TreeMap<OclComparable, OclAny>(
+					new Comparator<OclComparable>() {
+
+						public int compare(OclComparable first,
+								OclComparable second) {
+
+							int result;
+
+							OclInteger oclResult;
+							oclResult = first.compareTo(second);
+
+							if (oclResult.oclIsInvalid().isTrue()
+									|| oclResult.oclIsUndefined().isTrue()) {
+								result = 0;
+							}
+
+							else {
+								result = oclResult.getModelInstanceInteger()
+										.getLong().intValue();
+							}
+
+							return result;
+						}
+					});
+
+			/* Iterate over the collection. */
+			while (collectionIt.hasNext().isTrue()) {
+
+				OclAny activeElement;
+				OclAny bodyResult;
+
+				/* Add the active element to the environment. */
+				activeElement = collectionIt.next();
+				myEnvironment
+						.addVar(iterator.getQualifiedName(), activeElement);
+
+				/* Compute the body for the actual set element. */
+				bodyResult = doSwitch((EObject) body);
+
+				/* Probably fail. */
+				if (bodyResult.oclIsInvalid().isTrue()) {
+					result = this.myStandardLibraryFactory
+							.createOclInvalid(
+									resultType,
+									new IllegalStateException(
+											"Body expression was invalid for at least one element during interpretation of iterator sortedBy().",
+											bodyResult.getInvalidReason()));
+					break;
 				}
-				// no else.
 
-				int result;
-				OclInteger oclResult;
-
-				/* Compare the two objects. */
-				oclResult = oclComparable2.compareTo(oclComparable2);
-
-				if (oclResult.isEqualTo(
-						myStandardLibraryFactory.createOclInteger(-1L))
-						.isTrue()) {
-					result = -1;
+				else if (bodyResult.oclIsUndefined().isTrue()) {
+					result = this.myStandardLibraryFactory
+							.createOclInvalid(
+									resultType,
+									new IllegalStateException(
+											"Body expression was undefined for at least one element during interpretation of iterator sortedBy()."));
+					break;
 				}
 
-				else if (oclResult.isEqualTo(
-						myStandardLibraryFactory.createOclInteger(1L)).isTrue()) {
-					result = 1;
+				if (bodyResult instanceof OclComparable) {
+					results.put((OclComparable) bodyResult, activeElement);
 				}
 
 				else {
-					result = 0;
+					result = myStandardLibraryFactory
+							.createOclInvalid(
+									resultType,
+									new IllegalStateException(
+											"Body expression was not comparable for at least one element during interpretation of iterator sortedBy()."));
+				}
+				// end else.
+			}
+			// end while.
+
+			/* Probably adapt the result. */
+			if (result == null) {
+				resultList = new ArrayList<OclAny>(results.values());
+
+				/* Check which type of collection the result shall have. */
+				if (resultType instanceof SequenceType) {
+					result = myStandardLibraryFactory.createOclSequence(
+							resultList, ((SequenceType) resultType)
+									.getElementType());
 				}
 
-				/* Probably log the exit of this method. */
-				if (LOGGER.isDebugEnabled()) {
+				else if (resultType instanceof OrderedSetType) {
+					result = myStandardLibraryFactory.createOclOrderedSet(
+							resultList, ((OrderedSetType) resultType)
+									.getElementType());
+				}
+
+				else {
 					String msg;
+					msg = "The ResultType of the Iterator sortedBy() should be a sorted collection.";
+					msg += " But was " + resultType.getQualifiedName();
 
-					msg = "compare(OclComparable, OclComparable) - end ";
-					msg += "- return value = " + result;
-
-					LOGGER.debug(msg);
+					result = myStandardLibraryFactory.createOclInvalid(
+							resultType, new IllegalArgumentException(msg));
 				}
-				// no else;
-
-				return result;
-			}
-		};
-
-		OclAny result;
-		List<OclAny> resultList;
-
-		Map<OclComparable, OclAny> results;
-		OclIterator<OclAny> collectionIt;
-
-		results = new TreeMap<OclComparable, OclAny>(comp);
-		collectionIt = source.getIterator();
-
-		/* Iterate over the collection. */
-		while (collectionIt.hasNext().isTrue()) {
-
-			OclAny activeElement;
-			OclAny bodyResult;
-
-			/* Add the active element to the environment. */
-			activeElement = collectionIt.next();
-			myEnvironment.addVar(iterator.getQualifiedName(), activeElement);
-
-			/* Compute the body for the actual set element. */
-			bodyResult = doSwitch((EObject) body);
-
-			if (bodyResult instanceof OclComparable) {
-				results.put((OclComparable) bodyResult, activeElement);
-			}
-
-			else {
-				String msg;
-				msg = "The Result of the body expression in a sortedBy Iterator ";
-				msg += "was not comparable.";
-
-				if (LOGGER.isInfoEnabled()) {
-					LOGGER.warn(msg);
-				}
-				// no else.
-
-				result = myStandardLibraryFactory.createOclInvalid(resultType,
-						new IllegalStateException(msg));
-			}
-		}
-		// end while.
-
-		resultList = new ArrayList<OclAny>(results.values());
-
-		/* Check which type of collection the result shall have. */
-		if (resultType instanceof SequenceType) {
-			result = myStandardLibraryFactory.createOclSequence(resultList,
-					((SequenceType) resultType).getElementType());
-		}
-
-		else if (resultType instanceof OrderedSetType) {
-			result = myStandardLibraryFactory.createOclOrderedSet(resultList,
-					((OrderedSetType) resultType).getElementType());
-		}
-
-		else {
-			String msg;
-			msg = "The ResultType of a sortedBy Iterator should by a sorted collection.";
-			msg += " But was " + resultType.getQualifiedName();
-
-			if (LOGGER.isInfoEnabled()) {
-				LOGGER.warn(msg);
+				// end else.
 			}
 			// no else.
-
-			result = myStandardLibraryFactory.createOclInvalid(resultType,
-					new IllegalArgumentException(msg));
 		}
+		// end else.
 
 		/* Probably log the exit of this method. */
 		if (LOGGER.isDebugEnabled()) {
