@@ -57,6 +57,7 @@ import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
 import tudresden.ocl20.pivot.modelbus.event.IModelRegistryListener;
 import tudresden.ocl20.pivot.modelbus.event.ModelRegistryEvent;
 import tudresden.ocl20.pivot.modelbus.model.IModel;
+import tudresden.ocl20.pivot.modelbus.model.IModelListener;
 import tudresden.ocl20.pivot.modelbus.model.IModelRegistry;
 import tudresden.ocl20.pivot.modelbus.ui.ModelBusUIPlugin;
 import tudresden.ocl20.pivot.modelbus.ui.internal.ModelBusUIMessages;
@@ -73,7 +74,8 @@ import tudresden.ocl20.pivot.pivotmodel.provider.PivotModelItemProviderAdapterFa
  * 
  * @author Matthias Braeuer
  */
-public class ModelsView extends ViewPart implements IModelRegistryListener {
+public class ModelsView extends ViewPart implements IModelRegistryListener,
+		IModelListener {
 
 	/** The Constant ID of this {@link Class}. */
 	public static final String ID = IModelBusConstants.MODELS_VIEW_ID;
@@ -82,16 +84,14 @@ public class ModelsView extends ViewPart implements IModelRegistryListener {
 	public static String IMAGE_CLOSE_MODEL = "icons/delete.gif";
 
 	/** Icon to remove selected {@link Constraint}s from a {@link IModel}. */
-	public static String IMAGE_DELETE_CONSTRAINTS =
-			"icons/delete_selected_constraints.gif";
+	public static String IMAGE_DELETE_CONSTRAINTS = "icons/delete_selected_constraints.gif";
 
 	/** Icon to remove all {@link Constraint}s from a {@link IModel}. */
-	public static String IMAGE_DELETE_ALL_CONSTRAINTS =
-			"icons/delete_all_constraints.gif";
+	public static String IMAGE_DELETE_ALL_CONSTRAINTS = "icons/delete_all_constraints.gif";
 
 	/** The {@link Logger} for this {@link Class}. */
-	private static final Logger LOGGER =
-			ModelBusUIPlugin.getLogger(ModelsView.class);
+	private static final Logger LOGGER = ModelBusUIPlugin
+			.getLogger(ModelsView.class);
 
 	/**
 	 * Action to the tool remove all {@link Constraint}s from a {@link IModel}.
@@ -112,6 +112,9 @@ public class ModelsView extends ViewPart implements IModelRegistryListener {
 
 	/** A helper class for back-forward navigation. */
 	private DrillDownAdapter myDrillDownAdapter;
+
+	/** A cached reference to the active model. */
+	private IModel myModel;
 
 	/** A cached reference to the drop down menu. */
 	private IMenuManager myMenu;
@@ -159,6 +162,7 @@ public class ModelsView extends ViewPart implements IModelRegistryListener {
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see org.eclipse.ui.part.WorkbenchPart#dispose()
 	 */
 	@Override
@@ -171,9 +175,15 @@ public class ModelsView extends ViewPart implements IModelRegistryListener {
 		/* Remove as listener from the model registry. */
 		ModelBusPlugin.getModelRegistry().removeModelRegistryListener(this);
 
-		/* Eventually dispose the property sheet page. */
+		/* Probably dispose the property sheet page. */
 		if (this.myPropertySheet != null) {
 			this.myPropertySheet.dispose();
+		}
+		// no else.
+
+		/* Probably unregister as model Listener. */
+		if (this.myModel != null) {
+			this.myModel.removeListener(this);
 		}
 		// no else.
 
@@ -206,6 +216,7 @@ public class ModelsView extends ViewPart implements IModelRegistryListener {
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @seetudresden.ocl20.pivot.modelbus.event.IModelRegistryListener#
 	 * activeModelChanged
 	 * (tudresden.ocl20.pivot.modelbus.event.ModelRegistryEvent)
@@ -217,6 +228,7 @@ public class ModelsView extends ViewPart implements IModelRegistryListener {
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see
 	 * org.eclipse.ui.part.WorkbenchPart#createPartControl(org.eclipse.swt.widgets
 	 * .Composite)
@@ -225,17 +237,18 @@ public class ModelsView extends ViewPart implements IModelRegistryListener {
 	public void createPartControl(Composite parent) {
 
 		/* Create a new tree viewer. */
-		this.myModelViewer =
-				new TreeViewer(parent, SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL);
+		this.myModelViewer = new TreeViewer(parent, SWT.MULTI | SWT.H_SCROLL
+				| SWT.V_SCROLL);
 
 		/* Enable drill down behavior. */
 		this.myDrillDownAdapter = new DrillDownAdapter(this.myModelViewer);
-		this.myDrillDownAdapter.addNavigationActions(getViewSite().getActionBars()
-				.getToolBarManager());
+		this.myDrillDownAdapter.addNavigationActions(getViewSite()
+				.getActionBars().getToolBarManager());
 
 		/* Set content and label provider. */
-		this.myModelViewer.setContentProvider(new AdapterFactoryContentProvider(
-				this.myAdapterFactory));
+		this.myModelViewer
+				.setContentProvider(new AdapterFactoryContentProvider(
+						this.myAdapterFactory));
 		this.myModelViewer.setLabelProvider(new AdapterFactoryLabelProvider(
 				this.myAdapterFactory));
 
@@ -251,7 +264,9 @@ public class ModelsView extends ViewPart implements IModelRegistryListener {
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.modelbus.event.IModelRegistryListener#modelAdded
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.modelbus.event.IModelRegistryListener#modelAdded
 	 * (tudresden.ocl20.pivot.modelbus.event.ModelRegistryEvent)
 	 */
 	public void modelAdded(ModelRegistryEvent e) {
@@ -261,6 +276,19 @@ public class ModelsView extends ViewPart implements IModelRegistryListener {
 
 	/*
 	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.modelbus.model.IModelListener#modelChanged(tudresden
+	 * .ocl20.pivot.modelbus.model.IModel)
+	 */
+	public void modelChanged(IModel model) {
+		/* Update the button to remove all constraints from the active model. */
+		this.updateConstraintRemoveAction();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.modelbus.event.IModelRegistryListener#modelRemoved
 	 * (tudresden.ocl20.pivot.modelbus.event.ModelRegistryEvent)
@@ -272,6 +300,7 @@ public class ModelsView extends ViewPart implements IModelRegistryListener {
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see org.eclipse.ui.part.WorkbenchPart#setFocus()
 	 */
 	@Override
@@ -283,8 +312,8 @@ public class ModelsView extends ViewPart implements IModelRegistryListener {
 	/**
 	 * <p>
 	 * Creates a new {@link ModelSelectionAction} for the given {@link IModel
-	 * model} and adds it to the menu. Duplicate actions are prevented by checking
-	 * whether an action for the given model already exists.
+	 * model} and adds it to the menu. Duplicate actions are prevented by
+	 * checking whether an action for the given model already exists.
 	 * </p>
 	 */
 	private ModelSelectionAction addModelSelectionAction(IModel model) {
@@ -311,12 +340,12 @@ public class ModelsView extends ViewPart implements IModelRegistryListener {
 	/**
 	 * <p>
 	 * A helper method that removes the selection action for a given
-	 * {@link IModel} from this {@link ModelsView}. Called when an {@link IModel}
-	 * has been removed from the {@link IModelRegistry}.
+	 * {@link IModel} from this {@link ModelsView}. Called when an
+	 * {@link IModel} has been removed from the {@link IModelRegistry}.
 	 * </p>
 	 * 
 	 * @param model
-	 *          The {@link IModel} whose selection action shall be removed.
+	 *            The {@link IModel} whose selection action shall be removed.
 	 * @return The {@link ModelSelectionAction} that has been removed or
 	 *         <code>null</code> if no {@link ModelSelectionAction} has been
 	 *         removed.
@@ -349,7 +378,7 @@ public class ModelsView extends ViewPart implements IModelRegistryListener {
 	 */
 	private IMenuManager getMenu() {
 
-		/* Eventually create the menu. */
+		/* Probably create the menu. */
 		if (this.myMenu == null) {
 			this.myMenu = getViewSite().getActionBars().getMenuManager();
 		}
@@ -360,7 +389,8 @@ public class ModelsView extends ViewPart implements IModelRegistryListener {
 
 	/**
 	 * <p>
-	 * A helper method that lazily creates a cached version of the property sheet.
+	 * A helper method that lazily creates a cached version of the property
+	 * sheet.
 	 * </p>
 	 */
 	private IPropertySheetPage getPropertySheetPage() {
@@ -404,6 +434,7 @@ public class ModelsView extends ViewPart implements IModelRegistryListener {
 
 			/*
 			 * (non-Javadoc)
+			 * 
 			 * @see org.eclipse.jface.action.Action#run()
 			 */
 			public void run() {
@@ -414,7 +445,8 @@ public class ModelsView extends ViewPart implements IModelRegistryListener {
 
 		myActionRemoveSelectedConstraints
 				.setToolTipText("Removes the currently selected Constraints from the Model.");
-		myActionRemoveSelectedConstraints.setText("Remove selected Constraints");
+		myActionRemoveSelectedConstraints
+				.setText("Remove selected Constraints");
 		myActionRemoveSelectedConstraints.setImageDescriptor(ModelBusUIPlugin
 				.getImageDescriptor(IMAGE_DELETE_CONSTRAINTS));
 		myActionRemoveSelectedConstraints.setEnabled(false);
@@ -439,14 +471,16 @@ public class ModelsView extends ViewPart implements IModelRegistryListener {
 							IStructuredSelection structuredSelection;
 							structuredSelection = (IStructuredSelection) selection;
 
-							for (Object selectedElement : structuredSelection.toList()) {
+							for (Object selectedElement : structuredSelection
+									.toList()) {
 								if (selectedElement instanceof Constraint) {
 
 									/*
-									 * If at least one constraint is select, enable the action to
-									 * remove constraints.
+									 * If at least one constraint is select,
+									 * enable the action to remove constraints.
 									 */
-									myActionRemoveSelectedConstraints.setEnabled(true);
+									myActionRemoveSelectedConstraints
+											.setEnabled(true);
 								}
 								// no else.
 							}
@@ -457,12 +491,14 @@ public class ModelsView extends ViewPart implements IModelRegistryListener {
 				});
 
 		/*
-		 * Add an action to the tool bar to remove all constraints from the model.
+		 * Add an action to the tool bar to remove all constraints from the
+		 * model.
 		 */
 		myActionRemoveAllConstraints = new Action() {
 
 			/*
 			 * (non-Javadoc)
+			 * 
 			 * @see org.eclipse.jface.action.Action#run()
 			 */
 			public void run() {
@@ -487,6 +523,7 @@ public class ModelsView extends ViewPart implements IModelRegistryListener {
 
 			/*
 			 * (non-Javadoc)
+			 * 
 			 * @see org.eclipse.jface.action.Action#run()
 			 */
 			public void run() {
@@ -495,7 +532,8 @@ public class ModelsView extends ViewPart implements IModelRegistryListener {
 			}
 		};
 
-		myActionRemoveModel.setToolTipText("Closes the currently selected model.");
+		myActionRemoveModel
+				.setToolTipText("Closes the currently selected model.");
 		myActionRemoveModel.setText("Close Model");
 		myActionRemoveModel.setImageDescriptor(ModelBusUIPlugin
 				.getImageDescriptor(IMAGE_CLOSE_MODEL));
@@ -508,26 +546,33 @@ public class ModelsView extends ViewPart implements IModelRegistryListener {
 
 	/**
 	 * <p>
-	 * Helper method to remove the all {@link Constraint}s from the {@link IModel}
-	 * .
+	 * Helper method to remove the all {@link Constraint}s from the
+	 * {@link IModel} .
 	 * </p>
 	 */
 	private void removeAllConstraints() {
 
 		try {
-			ModelBusPlugin.getModelRegistry().getActiveModel().removeAllConstraints();
+			ModelBusPlugin.getModelRegistry().getActiveModel()
+					.removeAllConstraints();
+			ModelBusPlugin.getModelRegistry().getActiveModel()
+					.notifiyListeners();
 		}
 
 		catch (IllegalArgumentException e) {
-			ErrorDialog.openError(this.getSite().getShell(),
-					"Error during Constraint removal", e.getMessage(), new Status(
-							IStatus.ERROR, ModelBusPlugin.ID, e.getMessage()));
+			ErrorDialog
+					.openError(this.getSite().getShell(),
+							"Error during Constraint removal", e.getMessage(),
+							new Status(IStatus.ERROR, ModelBusPlugin.ID, e
+									.getMessage()));
 		}
 
 		catch (ModelAccessException e) {
-			ErrorDialog.openError(this.getSite().getShell(),
-					"Error during Constraint removal", e.getMessage(), new Status(
-							IStatus.ERROR, ModelBusPlugin.ID, e.getMessage()));
+			ErrorDialog
+					.openError(this.getSite().getShell(),
+							"Error during Constraint removal", e.getMessage(),
+							new Status(IStatus.ERROR, ModelBusPlugin.ID, e
+									.getMessage()));
 
 		}
 		// end catch.
@@ -535,8 +580,8 @@ public class ModelsView extends ViewPart implements IModelRegistryListener {
 
 	/**
 	 * <p>
-	 * Helper method to remove the currently selected {@link Constraint}s from the
-	 * {@link IModel}.
+	 * Helper method to remove the currently selected {@link Constraint}s from
+	 * the {@link IModel}.
 	 * </p>
 	 */
 	private void removeSelectedConstraints() {
@@ -561,20 +606,24 @@ public class ModelsView extends ViewPart implements IModelRegistryListener {
 
 			if (constraintsToBeRemoved.size() > 0) {
 				try {
-					ModelBusPlugin.getModelRegistry().getActiveModel().removeConstraints(
-							constraintsToBeRemoved);
+					ModelBusPlugin.getModelRegistry().getActiveModel()
+							.removeConstraints(constraintsToBeRemoved);
+					ModelBusPlugin.getModelRegistry().getActiveModel()
+							.notifiyListeners();
 				}
 
 				catch (IllegalArgumentException e) {
 					ErrorDialog.openError(this.getSite().getShell(),
-							"Error during Constraint removal", e.getMessage(), new Status(
-									IStatus.ERROR, ModelBusPlugin.ID, e.getMessage()));
+							"Error during Constraint removal", e.getMessage(),
+							new Status(IStatus.ERROR, ModelBusPlugin.ID, e
+									.getMessage()));
 				}
 
 				catch (ModelAccessException e) {
 					ErrorDialog.openError(this.getSite().getShell(),
-							"Error during Constraint removal", e.getMessage(), new Status(
-									IStatus.ERROR, ModelBusPlugin.ID, e.getMessage()));
+							"Error during Constraint removal", e.getMessage(),
+							new Status(IStatus.ERROR, ModelBusPlugin.ID, e
+									.getMessage()));
 
 				}
 				// end catch.
@@ -630,7 +679,18 @@ public class ModelsView extends ViewPart implements IModelRegistryListener {
 	 */
 	private void setActiveModel(IModel model) {
 
+		/* Probably unregister as model Listener. */
+		if (this.myModel != null) {
+			this.myModel.removeListener(this);
+		}
+		// no else.
+
+		/* Probably handle the new active model. */
 		if (model != null) {
+
+			this.myModel = model;
+			this.myModel.addListener(this);
+
 			ModelSelectionAction action;
 			Namespace rootNamespace;
 
@@ -669,10 +729,14 @@ public class ModelsView extends ViewPart implements IModelRegistryListener {
 				msg = "Error when accessing model " + model;
 				LOGGER.error(msg, e);
 
-				MessageDialog.openError(getSite().getShell(),
-						ModelBusUIMessages.ModelsView_Error, NLS.bind(
-								ModelBusUIMessages.ModelsView_AccessRootNamespace, model
-										.getDisplayName()));
+				MessageDialog
+						.openError(
+								getSite().getShell(),
+								ModelBusUIMessages.ModelsView_Error,
+								NLS
+										.bind(
+												ModelBusUIMessages.ModelsView_AccessRootNamespace,
+												model.getDisplayName()));
 
 				/* Do not exit here to reset the input to null below. */
 				rootNamespace = null;
@@ -680,9 +744,9 @@ public class ModelsView extends ViewPart implements IModelRegistryListener {
 			// end catch.
 
 			/*
-			 * Update the input; we do not use equals for comparison of current input
-			 * with new root name space because the root name space may be a transient
-			 * one with an empty name.
+			 * Update the input; we do not use equals for comparison of current
+			 * input with new root name space because the root name space may be
+			 * a transient one with an empty name.
 			 */
 			if (this.myModelViewer.getInput() == null && rootNamespace != null
 					|| this.myModelViewer.getInput() != null
@@ -692,9 +756,10 @@ public class ModelsView extends ViewPart implements IModelRegistryListener {
 			}
 			// no else.
 
-			this.myActionRemoveModel.setEnabled(true);
-
-			// try {
+			if (this.myActionRemoveModel != null) {
+				this.myActionRemoveModel.setEnabled(true);
+			}
+			// no else.
 
 			this.updateConstraintRemoveAction();
 		}
@@ -702,7 +767,10 @@ public class ModelsView extends ViewPart implements IModelRegistryListener {
 		else {
 			this.setInput(null);
 
-			this.myActionRemoveModel.setEnabled(false);
+			if (this.myActionRemoveModel != null) {
+				this.myActionRemoveModel.setEnabled(false);
+			}
+			// no else.
 		}
 	}
 
@@ -717,9 +785,10 @@ public class ModelsView extends ViewPart implements IModelRegistryListener {
 		this.myModelViewer.refresh();
 
 		if (rootNamespace != null) {
-			this.myModelViewer.setSelection(new StructuredSelection(rootNamespace
-					.getNestedNamespace().isEmpty() ? StructuredSelection.EMPTY
-					: rootNamespace.getNestedNamespace().get(0)));
+			this.myModelViewer
+					.setSelection(new StructuredSelection(
+							rootNamespace.getNestedNamespace().isEmpty() ? StructuredSelection.EMPTY
+									: rootNamespace.getNestedNamespace().get(0)));
 		}
 		// no else.
 
@@ -728,8 +797,8 @@ public class ModelsView extends ViewPart implements IModelRegistryListener {
 
 	/**
 	 * <p>
-	 * Activates the action corresponding to the given {@link IModel} and updates
-	 * the input for the viewer.
+	 * Activates the action corresponding to the given {@link IModel} and
+	 * updates the input for the viewer.
 	 * </p>
 	 */
 	private void updateActiveModel() {
@@ -748,8 +817,6 @@ public class ModelsView extends ViewPart implements IModelRegistryListener {
 	}
 
 	/**
-	 * FIXME Method is not triggered correctly.
-	 * 
 	 * <p>
 	 * A helper method that sets the {@link Action} to remove all
 	 * {@link Constraint}s from the {@link IModel} enabled or disabled.
@@ -757,17 +824,21 @@ public class ModelsView extends ViewPart implements IModelRegistryListener {
 	 */
 	private void updateConstraintRemoveAction() {
 
-		try {
-			myActionRemoveAllConstraints.setEnabled(ModelBusPlugin.getModelRegistry()
-					.getActiveModel().getConstraints().size() > 0);
-		}
+		if (this.myActionRemoveAllConstraints != null) {
+			try {
+				myActionRemoveAllConstraints.setEnabled(ModelBusPlugin
+						.getModelRegistry().getActiveModel().getConstraints()
+						.size() > 0);
+			}
 
-		catch (ModelAccessException e) {
-			myActionRemoveAllConstraints.setEnabled(false);
-		}
+			catch (ModelAccessException e) {
+				myActionRemoveAllConstraints.setEnabled(false);
+			}
 
-		catch (NullPointerException e) {
-			myActionRemoveAllConstraints.setEnabled(false);
+			catch (NullPointerException e) {
+				myActionRemoveAllConstraints.setEnabled(false);
+			}
 		}
+		// no else.
 	}
 }
