@@ -100,8 +100,7 @@ public class InterpreterView extends ViewPart implements ISelectionListener,
 	public static String REMOVE_IMAGE = "icons/remove.gif";
 
 	/** The currently selected {@link Constraint}s that shall be interpreted. */
-	private Set<Constraint> currentlySelectedConstraints =
-			new HashSet<Constraint>();
+	private Set<Constraint> currentlySelectedConstraints = new HashSet<Constraint>();
 
 	/** The currently selected {@link IModelInstance}. */
 	private IModelInstance currentlySelectedModelInstance;
@@ -110,8 +109,7 @@ public class InterpreterView extends ViewPart implements ISelectionListener,
 	 * The currently selected {@link IModelInstanceElement}s that shall be
 	 * interpreted.
 	 */
-	private Set<IModelInstanceElement> currentlySelectedModelInstanceElements =
-			new HashSet<IModelInstanceElement>();
+	private Set<IModelInstanceElement> currentlySelectedModelInstanceElements = new HashSet<IModelInstanceElement>();
 
 	/** The currently selected rows of this {@link IViewActionDelegate}. */
 	private Set<Object[]> currentlySelectedRows = new HashSet<Object[]>();
@@ -128,8 +126,7 @@ public class InterpreterView extends ViewPart implements ISelectionListener,
 	 * {@link IOclInterpreter}s for {@link IModelInstance}s that are not
 	 * referenced anymore will be collected by the garbage collector!
 	 */
-	private Map<IModelInstance, IOclInterpreter> myCachedInterpreters =
-			new WeakHashMap<IModelInstance, IOclInterpreter>();
+	private Map<IModelInstance, IOclInterpreter> myCachedInterpreters = new WeakHashMap<IModelInstance, IOclInterpreter>();
 
 	/** The currently selected {@link ResultFilter}. */
 	private ResultsFilter myCurrentFilter = new ResultsFilter(this);
@@ -141,7 +138,8 @@ public class InterpreterView extends ViewPart implements ISelectionListener,
 	private InterpretationResultCache myResults = new InterpretationResultCache();
 
 	/**
-	 * The {@link TableViewer} used to present the results of the interpretation.
+	 * The {@link TableViewer} used to present the results of the
+	 * interpretation.
 	 */
 	private TableViewer myTableViewer;
 
@@ -156,16 +154,17 @@ public class InterpreterView extends ViewPart implements ISelectionListener,
 		ModelBusPlugin.getModelRegistry().addModelRegistryListener(this);
 
 		/* Register this view as a model instance listener. */
-		ModelBusPlugin.getModelInstanceRegistry().addModelInstanceRegistryListener(
-				this);
+		ModelBusPlugin.getModelInstanceRegistry()
+				.addModelInstanceRegistryListener(this);
 
-		this.currentlySelectedModelInstance =
-				ModelBusPlugin.getModelInstanceRegistry().getActiveModelInstance(
+		this.currentlySelectedModelInstance = ModelBusPlugin
+				.getModelInstanceRegistry().getActiveModelInstance(
 						ModelBusPlugin.getModelRegistry().getActiveModel());
 	}
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see org.eclipse.ui.part.WorkbenchPart#dispose()
 	 */
 	public void dispose() {
@@ -184,6 +183,7 @@ public class InterpreterView extends ViewPart implements ISelectionListener,
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @seetudresden.ocl20.pivot.modelbus.event.IModelRegistryListener#
 	 * activeModelChanged
 	 * (tudresden.ocl20.pivot.modelbus.event.ModelRegistryEvent)
@@ -195,14 +195,15 @@ public class InterpreterView extends ViewPart implements ISelectionListener,
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @seetudresden.ocl20.pivot.modelbus.event.IModelInstanceRegistryListener#
 	 * activeModelInstanceChanged
 	 * (tudresden.ocl20.pivot.modelbus.event.ModelInstanceRegistryEvent)
 	 */
 	public void activeModelInstanceChanged(ModelInstanceRegistryEvent event) {
 
-		this.currentlySelectedModelInstance =
-				ModelBusPlugin.getModelInstanceRegistry().getActiveModelInstance(
+		this.currentlySelectedModelInstance = ModelBusPlugin
+				.getModelInstanceRegistry().getActiveModelInstance(
 						ModelBusPlugin.getModelRegistry().getActiveModel());
 
 		this.myResults.clear();
@@ -214,15 +215,15 @@ public class InterpreterView extends ViewPart implements ISelectionListener,
 	 * </p>
 	 * 
 	 * @param parent
-	 *          The parent composite of the created {@link TableViewer}.
+	 *            The parent composite of the created {@link TableViewer}.
 	 */
 	public void createPartControl(Composite parent) {
 
 		final Table table;
 		TableColumn column;
 
-		this.myTableViewer =
-				new TableViewer(parent, SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL);
+		this.myTableViewer = new TableViewer(parent, SWT.MULTI | SWT.H_SCROLL
+				| SWT.V_SCROLL);
 
 		/* Set the content and label provider. */
 		this.myTableViewer.setContentProvider(new ResultsContentProvider());
@@ -236,7 +237,8 @@ public class InterpreterView extends ViewPart implements ISelectionListener,
 		column.setText(OclInterpreterUIMessages.InterpreterView_ObjectColumn);
 
 		column = new TableColumn(table, SWT.LEFT);
-		column.setText(OclInterpreterUIMessages.InterpreterView_ConstraintColumn);
+		column
+				.setText(OclInterpreterUIMessages.InterpreterView_ConstraintColumn);
 
 		column = new TableColumn(table, SWT.LEFT);
 		column.setText(OclInterpreterUIMessages.InterpreterView_ResultColumn);
@@ -258,7 +260,9 @@ public class InterpreterView extends ViewPart implements ISelectionListener,
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.modelbus.event.IModelRegistryListener#modelAdded
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.modelbus.event.IModelRegistryListener#modelAdded
 	 * (tudresden.ocl20.pivot.modelbus.event.ModelRegistryEvent)
 	 */
 	public void modelAdded(ModelRegistryEvent event) {
@@ -273,6 +277,7 @@ public class InterpreterView extends ViewPart implements ISelectionListener,
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @seetudresden.ocl20.pivot.modelbus.event.IModelInstanceRegistryListener#
 	 * modelInstanceAdded
 	 * (tudresden.ocl20.pivot.modelbus.event.ModelInstanceRegistryEvent)
@@ -289,6 +294,7 @@ public class InterpreterView extends ViewPart implements ISelectionListener,
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @seeorg.eclipse.ui.ISelectionListener#selectionChanged(org.eclipse.ui.
 	 * IWorkbenchPart, org.eclipse.jface.viewers.ISelection)
 	 */
@@ -296,7 +302,8 @@ public class InterpreterView extends ViewPart implements ISelectionListener,
 
 		/* Check if the selection of the models view changed. */
 		if (part.getSite() != null
-				&& part.getSite().getId().equals(IModelBusConstants.MODELS_VIEW_ID)) {
+				&& part.getSite().getId().equals(
+						IModelBusConstants.MODELS_VIEW_ID)) {
 
 			/* Check if the selection is a tree selection. */
 			if (selection instanceof TreeSelection) {
@@ -312,7 +319,10 @@ public class InterpreterView extends ViewPart implements ISelectionListener,
 				this.clearConstraintSelection();
 				this.clearModelObjectSelection();
 
-				/* Add all selected constraints and types to the constraint selection. */
+				/*
+				 * Add all selected constraints and types to the constraint
+				 * selection.
+				 */
 				while (selectionIt.hasNext()) {
 					Object anObject;
 					anObject = selectionIt.next();
@@ -361,7 +371,8 @@ public class InterpreterView extends ViewPart implements ISelectionListener,
 
 					/* Decide between given Types and IModelObjects. */
 					if (anObject instanceof IModelInstanceElement) {
-						this.addModelObjectSelection((IModelInstanceElement) anObject);
+						this
+								.addModelObjectSelection((IModelInstanceElement) anObject);
 					}
 
 					else if (anObject instanceof Type) {
@@ -428,9 +439,10 @@ public class InterpreterView extends ViewPart implements ISelectionListener,
 	 * </p>
 	 * 
 	 * @param interpretationResult
-	 *          The {@link IInterpretationResult} that shall be added.
+	 *            The {@link IInterpretationResult} that shall be added.
 	 */
-	public void addInterpretationResult(IInterpretationResult interpretationResult) {
+	public void addInterpretationResult(
+			IInterpretationResult interpretationResult) {
 
 		this.myResults.addResult(interpretationResult);
 	}
@@ -489,12 +501,12 @@ public class InterpreterView extends ViewPart implements ISelectionListener,
 
 	/**
 	 * <p>
-	 * Returns the currently selected {@link IModelInstanceElement}s that shall be
-	 * interpreted.
+	 * Returns the currently selected {@link IModelInstanceElement}s that shall
+	 * be interpreted.
 	 * </p>
 	 * 
-	 * @return The currently selected {@link IModelInstanceElement}s that shall be
-	 *         interpreted.
+	 * @return The currently selected {@link IModelInstanceElement}s that shall
+	 *         be interpreted.
 	 */
 	public Set<IModelInstanceElement> getCurrentlySelectedModelInstanceElements() {
 
@@ -507,11 +519,12 @@ public class InterpreterView extends ViewPart implements ISelectionListener,
 	 * </p>
 	 * 
 	 * @param modelInstance
-	 *          The {@link IModelInstance} for that the {@link IOclInterpreter}
-	 *          shall be returned.
+	 *            The {@link IModelInstance} for that the
+	 *            {@link IOclInterpreter} shall be returned.
 	 * @return The {@link IOclInterpreter} for a given {@link IModelInstance}
 	 */
-	public IOclInterpreter getInterpreterForInstance(IModelInstance modelInstance) {
+	public IOclInterpreter getInterpreterForInstance(
+			IModelInstance modelInstance) {
 
 		IOclInterpreter result;
 
@@ -577,7 +590,8 @@ public class InterpreterView extends ViewPart implements ISelectionListener,
 	 */
 	public void refreshView() {
 
-		for (int index = 0; index < this.myTableViewer.getTable().getColumnCount(); index++) {
+		for (int index = 0; index < this.myTableViewer.getTable()
+				.getColumnCount(); index++) {
 			this.myTableViewer.getTable().getColumn(index).pack();
 		}
 
@@ -591,7 +605,7 @@ public class InterpreterView extends ViewPart implements ISelectionListener,
 	 * </p>
 	 * 
 	 * @param enabled
-	 *          If true, a cache will be used.
+	 *            If true, a cache will be used.
 	 */
 	public void setCachingEnabled(boolean enabled) {
 
@@ -604,12 +618,14 @@ public class InterpreterView extends ViewPart implements ISelectionListener,
 	 * </p>
 	 * 
 	 * @param message
-	 *          The message which shall be shown.
+	 *            The message which shall be shown.
 	 */
 	public void showMessage(String message) {
 
-		MessageDialog.openInformation(this.myTableViewer.getControl().getShell(),
-				OclInterpreterUIMessages.InterpreterView_InterpreterResults, message);
+		MessageDialog.openInformation(this.myTableViewer.getControl()
+				.getShell(),
+				OclInterpreterUIMessages.InterpreterView_InterpreterResults,
+				message);
 	}
 
 	/**
@@ -618,7 +634,7 @@ public class InterpreterView extends ViewPart implements ISelectionListener,
 	 * </p>
 	 * 
 	 * @param aConstraint
-	 *          The {@link Constraint} which shall be added.
+	 *            The {@link Constraint} which shall be added.
 	 */
 	private void addConstraintSelection(Constraint aConstraint) {
 
@@ -632,7 +648,7 @@ public class InterpreterView extends ViewPart implements ISelectionListener,
 	 * </p>
 	 * 
 	 * @param modelObject
-	 *          The {@link IModelInstanceElement}s that shall be added.
+	 *            The {@link IModelInstanceElement}s that shall be added.
 	 */
 	private void addModelObjectSelection(IModelInstanceElement modelObject) {
 
@@ -646,13 +662,17 @@ public class InterpreterView extends ViewPart implements ISelectionListener,
 	 * </p>
 	 * 
 	 * @param type
-	 *          The {@link Type} whose {@link IModelInstanceElement}s shall be
-	 *          added.
+	 *            The {@link Type} whose {@link IModelInstanceElement}s shall be
+	 *            added.
 	 */
 	private void addModelObjectSelection(Type type) {
 
-		this.currentlySelectedModelInstanceElements
-				.addAll(this.currentlySelectedModelInstance.getAllInstances(type));
+		if (this.currentlySelectedModelInstance != null) {
+			this.currentlySelectedModelInstanceElements
+					.addAll(this.currentlySelectedModelInstance
+							.getAllInstances(type));
+		}
+		// no else.
 	}
 
 	/**
@@ -712,9 +732,8 @@ public class InterpreterView extends ViewPart implements ISelectionListener,
 
 		/* Create action to prepare all constraints. */
 		{
-			prepareAll =
-					new InterpreterViewMenuAction(
-							InterpreterViewMenuActionType.PREPARE_ALL_CONSTRAINTS, this);
+			prepareAll = new InterpreterViewMenuAction(
+					InterpreterViewMenuActionType.PREPARE_ALL_CONSTRAINTS, this);
 
 			/* Set an Icon for this action. */
 			prepareAll.setImageDescriptor(InterpreterUIPlugin
@@ -724,14 +743,15 @@ public class InterpreterView extends ViewPart implements ISelectionListener,
 			this.getMenuManager().add(prepareAll);
 
 			/* Add the action to the tool bar. */
-			this.getViewSite().getActionBars().getToolBarManager().add(prepareAll);
+			this.getViewSite().getActionBars().getToolBarManager().add(
+					prepareAll);
 		}
 
 		/* Create action to prepare the selected constraints. */
 		{
-			prepareSelected =
-					new InterpreterViewMenuAction(
-							InterpreterViewMenuActionType.PREPARE_SELECTED_CONSTRAINTS, this);
+			prepareSelected = new InterpreterViewMenuAction(
+					InterpreterViewMenuActionType.PREPARE_SELECTED_CONSTRAINTS,
+					this);
 
 			/* Add the action to the menu. */
 			this.getMenuManager().add(prepareSelected);
@@ -742,9 +762,9 @@ public class InterpreterView extends ViewPart implements ISelectionListener,
 
 		/* Create an action to add new variables to the environment. */
 		{
-			addVariable =
-					new InterpreterViewMenuAction(
-							InterpreterViewMenuActionType.ADD_VARIABLE_TO_ENVIRONMENT, this);
+			addVariable = new InterpreterViewMenuAction(
+					InterpreterViewMenuActionType.ADD_VARIABLE_TO_ENVIRONMENT,
+					this);
 
 			addVariable
 					.setText(OclInterpreterUIMessages.InterpreterView_AddVariable_Title);
@@ -757,17 +777,18 @@ public class InterpreterView extends ViewPart implements ISelectionListener,
 			this.getMenuManager().add(addVariable);
 
 			/* Add the action to the tool bar. */
-			this.getViewSite().getActionBars().getToolBarManager().add(addVariable);
+			this.getViewSite().getActionBars().getToolBarManager().add(
+					addVariable);
 		}
 
 		/* Create action to enable or disable the cache. */
 		{
-			setUseCache =
-					new InterpreterViewMenuAction(
-							InterpreterViewMenuActionType.ENABLE_DISABLE_CACHING, this);
+			setUseCache = new InterpreterViewMenuAction(
+					InterpreterViewMenuActionType.ENABLE_DISABLE_CACHING, this);
 
 			setUseCache.setChecked(false);
-			setUseCache.setText(OclInterpreterUIMessages.InterpreterView_UseCache);
+			setUseCache
+					.setText(OclInterpreterUIMessages.InterpreterView_UseCache);
 
 			/* Add the action to the menu. */
 			this.getMenuManager().add(setUseCache);
@@ -779,10 +800,9 @@ public class InterpreterView extends ViewPart implements ISelectionListener,
 		/* ---- INTERPRETER MENU ---- */
 		/* Create action to interpret all constraints and model objects. */
 		{
-			interpretAll =
-					new InterpreterViewMenuAction(
-							InterpreterViewMenuActionType.INTERPRET_ALL_CONSTRAINTS_FOR_ALL_MODEL_OBJECTS,
-							this);
+			interpretAll = new InterpreterViewMenuAction(
+					InterpreterViewMenuActionType.INTERPRET_ALL_CONSTRAINTS_FOR_ALL_MODEL_OBJECTS,
+					this);
 
 			/* Set an Icon for this action. */
 			interpretAll.setImageDescriptor(InterpreterUIPlugin
@@ -792,15 +812,15 @@ public class InterpreterView extends ViewPart implements ISelectionListener,
 			this.getMenuManager().add(interpretAll);
 
 			/* Add the action to the tool bar. */
-			this.getViewSite().getActionBars().getToolBarManager().add(interpretAll);
+			this.getViewSite().getActionBars().getToolBarManager().add(
+					interpretAll);
 		}
 
 		/* Create action to interpret selected constraints and model objects. */
 		{
-			interpretSelected =
-					new InterpreterViewMenuAction(
-							InterpreterViewMenuActionType.INTERPRET_SELECTED_CONSTRAINTS_FOR_SELECTED_MODEL_OBJECTS,
-							this);
+			interpretSelected = new InterpreterViewMenuAction(
+					InterpreterViewMenuActionType.INTERPRET_SELECTED_CONSTRAINTS_FOR_SELECTED_MODEL_OBJECTS,
+					this);
 
 			/* Add the action to the menu. */
 			this.getMenuManager().add(interpretSelected);
@@ -810,13 +830,13 @@ public class InterpreterView extends ViewPart implements ISelectionListener,
 		this.getMenuManager().add(new Separator());
 
 		/*
-		 * Create action to clear the results for the all constraints and objects.
+		 * Create action to clear the results for the all constraints and
+		 * objects.
 		 */
 		{
-			clearAllResults =
-					new InterpreterViewMenuAction(
-							InterpreterViewMenuActionType.CLEAR_ALL_CONSTRAINTS_FOR_ALL_MODEL_OBJECTS,
-							this);
+			clearAllResults = new InterpreterViewMenuAction(
+					InterpreterViewMenuActionType.CLEAR_ALL_CONSTRAINTS_FOR_ALL_MODEL_OBJECTS,
+					this);
 
 			/* Set an Icon for this action. */
 			clearAllResults.setImageDescriptor(InterpreterUIPlugin
@@ -835,24 +855,23 @@ public class InterpreterView extends ViewPart implements ISelectionListener,
 		 * objects.
 		 */
 		{
-			clearResultsForSelected =
-					new InterpreterViewMenuAction(
-							InterpreterViewMenuActionType.CLEAR_SELECTED_CONSTRAINTS_FOR_SELECTED_MODEL_OBJECTS,
-							this);
+			clearResultsForSelected = new InterpreterViewMenuAction(
+					InterpreterViewMenuActionType.CLEAR_SELECTED_CONSTRAINTS_FOR_SELECTED_MODEL_OBJECTS,
+					this);
 
 			/* Add the action to the menu. */
 			this.getMenuManager().add(clearResultsForSelected);
 		}
 
 		/*
-		 * Eventually initialize an action to remove the results for all selected
-		 * constraints.
+		 * Eventually initialize an action to remove the results for all
+		 * selected constraints.
 		 */
 		{
 			if (this.myActionToremoveSelectedResults == null) {
-				this.myActionToremoveSelectedResults =
-						new InterpreterViewMenuAction(
-								InterpreterViewMenuActionType.REMOVE_SELECTED_RESULTS, this);
+				this.myActionToremoveSelectedResults = new InterpreterViewMenuAction(
+						InterpreterViewMenuActionType.REMOVE_SELECTED_RESULTS,
+						this);
 			}
 			// no else.
 
