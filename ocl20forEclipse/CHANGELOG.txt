@@ -61,6 +61,9 @@ Release 2.1 (scheduled for April 2010)
     undefined values. Body expressions can result in invalid or undefined without leading to wrong 
     interpretation results.
 
+* A bugs in the OCL2 Interpreter GUI was fixed.
+  - The view should not crash with an SWT-Exception for presentation of a large number of results anymore.
+
 * Complete rewrite of the OCL2 Standard Library; some bugs were fixed.
   - invalid and null values are now created by every library method and no exceptions are thrown
   - consistent way of handling null(undefined) and invalid

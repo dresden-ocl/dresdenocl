@@ -18,6 +18,10 @@ with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
 package tudresden.ocl20.pivot.interpreter.ui.internal.views.util;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.viewers.ITableLabelProvider;
 import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.swt.graphics.Image;
@@ -57,50 +61,52 @@ public class ResultsLabelProvider extends LabelProvider implements
 	private final static String ICON_RESULT_FALSE = "icons/result_false.gif";
 
 	/** Path to icon for undefined results. */
-	private final static String ICON_RESULT_UNDEFINED =
-			"icons/result_undefined.gif";
+	private final static String ICON_RESULT_UNDEFINED = "icons/result_undefined.gif";
 
 	/** Path to icon for undefined results. */
-	private final static String ICON_RESULT_INVALID =
-			"icons/result_invalid.gif";
+	private final static String ICON_RESULT_INVALID = "icons/result_invalid.gif";
+
+	private Map<ImageDescriptor, Image> cachedImages = new HashMap<ImageDescriptor, Image>();
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see org.eclipse.jface.viewers.LabelProvider#getImage(java.lang.Object)
 	 */
 	public Image getImage(Object obj) {
 
 		Image result;
 
-		result =
-				PlatformUI.getWorkbench().getSharedImages().getImage(
-						ISharedImages.IMG_OBJ_ELEMENT);
+		result = PlatformUI.getWorkbench().getSharedImages().getImage(
+				ISharedImages.IMG_OBJ_ELEMENT);
 
 		return result;
 	}
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see org.eclipse.jface.viewers.ITableLabelProvider#getColumnImage(java
 	 * .lang.Object, int)
 	 */
 	public Image getColumnImage(Object anObject, int index) {
 
 		Image result;
+		ImageDescriptor imageDescriptor;
+		imageDescriptor = null;
 
 		/* Check which icon shall be returned. */
 		switch (index) {
 
 		case ResultsContentProvider.CONSTRAINT: {
-			result =
-					InterpreterUIPlugin.getImageDescriptor(ICON_CONSTRAINT).createImage();
+			imageDescriptor = InterpreterUIPlugin
+					.getImageDescriptor(ICON_CONSTRAINT);
 			break;
 		}
 
 		case ResultsContentProvider.MODELOBJECT: {
-			result =
-					InterpreterUIPlugin.getImageDescriptor(ICON_MODEL_OBJECT)
-							.createImage();
+			imageDescriptor = InterpreterUIPlugin
+					.getImageDescriptor(ICON_MODEL_OBJECT);
 			break;
 		}
 
@@ -131,30 +137,26 @@ public class ResultsLabelProvider extends LabelProvider implements
 
 							/* Check if the boolean is invalid. */
 							if (anOclBoolean.oclIsInvalid().isTrue()) {
-								result =
-										InterpreterUIPlugin.getImageDescriptor(
-												ICON_RESULT_INVALID).createImage();
+								imageDescriptor = InterpreterUIPlugin
+										.getImageDescriptor(ICON_RESULT_INVALID);
 							}
 
 							/* Else check if the boolean is undefined. */
 							else if (anOclBoolean.oclIsUndefined().isTrue()) {
-								result =
-										InterpreterUIPlugin.getImageDescriptor(
-												ICON_RESULT_UNDEFINED).createImage();
+								imageDescriptor = InterpreterUIPlugin
+										.getImageDescriptor(ICON_RESULT_UNDEFINED);
 							}
 
 							/* Else check if the boolean is true. */
 							else if (anOclBoolean.isTrue()) {
-								result =
-										InterpreterUIPlugin.getImageDescriptor(ICON_RESULT_TRUE)
-												.createImage();
+								imageDescriptor = InterpreterUIPlugin
+										.getImageDescriptor(ICON_RESULT_TRUE);
 							}
 
 							/* Else the result is false. */
 							else {
-								result =
-										InterpreterUIPlugin.getImageDescriptor(ICON_RESULT_FALSE)
-												.createImage();
+								imageDescriptor = InterpreterUIPlugin
+										.getImageDescriptor(ICON_RESULT_FALSE);
 							}
 						}
 						// no else.
@@ -166,32 +168,44 @@ public class ResultsLabelProvider extends LabelProvider implements
 			// no else.
 
 			/* If the icon could not be defined, use the undefined icon. */
-			if (result == null) {
+			if (imageDescriptor == null) {
 
-				result =
-						InterpreterUIPlugin.getImageDescriptor(ICON_RESULT_UNDEFINED)
-								.createImage();
+				imageDescriptor = InterpreterUIPlugin
+						.getImageDescriptor(ICON_RESULT_UNDEFINED);
 			}
 			// no else.
 
 			break;
 		}
-
-		default: {
-			result =
-					PlatformUI.getWorkbench().getSharedImages().getImage(
-							ISharedImages.IMG_OBJ_ELEMENT);
-		}
-
+			// no default.
 		}
 		// end switch.
+
+		if (imageDescriptor != null) {
+
+			if (this.cachedImages.containsKey(imageDescriptor)) {
+				result = this.cachedImages.get(imageDescriptor);
+			}
+
+			else {
+				result = imageDescriptor.createImage();
+				this.cachedImages.put(imageDescriptor, result);
+			}
+		}
+
+		else {
+			result = PlatformUI.getWorkbench().getSharedImages().getImage(
+					ISharedImages.IMG_OBJ_ELEMENT);
+		}
 
 		return result;
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * @see org.eclipse.jface.viewers.ITableLabelProvider#getColumnText(java.lang
+	 * 
+	 * @see
+	 * org.eclipse.jface.viewers.ITableLabelProvider#getColumnText(java.lang
 	 * .Object, int)
 	 */
 	public String getColumnText(Object anObject, int index) {
@@ -218,8 +232,7 @@ public class ResultsLabelProvider extends LabelProvider implements
 					}
 
 					else {
-						result =
-								OclInterpreterUIMessages.InterpreterView_Error_WrongTypeOfResult;
+						result = OclInterpreterUIMessages.InterpreterView_Error_WrongTypeOfResult;
 					}
 
 					break;
@@ -236,24 +249,28 @@ public class ResultsLabelProvider extends LabelProvider implements
 
 						aConstraint = (Constraint) aRow[index];
 
-						constrainedElement =
-								(NamedElement) aConstraint.getConstrainedElement().get(0);
+						constrainedElement = (NamedElement) aConstraint
+								.getConstrainedElement().get(0);
 
-						/* If the context is an operation, add context information. */
+						/*
+						 * If the context is an operation, add context
+						 * information.
+						 */
 						if (constrainedElement instanceof Operation) {
 
 							String qualifiedName;
 
-							qualifiedName = constrainedElement.getQualifiedName();
+							qualifiedName = constrainedElement
+									.getQualifiedName();
 							result = "context ";
-							result +=
-									qualifiedName.substring(qualifiedName.lastIndexOf(":") + 1);
+							result += qualifiedName.substring(qualifiedName
+									.lastIndexOf(":") + 1);
 							result += ": ";
 						}
 
 						/*
-						 * Else the context is not needed because it is clear by the model
-						 * object.
+						 * Else the context is not needed because it is clear by
+						 * the model object.
 						 */
 						else {
 							result = "";
@@ -277,8 +294,7 @@ public class ResultsLabelProvider extends LabelProvider implements
 					}
 
 					else {
-						result =
-								OclInterpreterUIMessages.InterpreterView_Error_WrongTypeOfResult;
+						result = OclInterpreterUIMessages.InterpreterView_Error_WrongTypeOfResult;
 					}
 
 					break;
@@ -294,8 +310,7 @@ public class ResultsLabelProvider extends LabelProvider implements
 
 			/* Else show an error message. */
 			else {
-				result =
-						OclInterpreterUIMessages.InterpreterView_Error_WrongTypeOfResult;
+				result = OclInterpreterUIMessages.InterpreterView_Error_WrongTypeOfResult;
 			}
 
 		}
