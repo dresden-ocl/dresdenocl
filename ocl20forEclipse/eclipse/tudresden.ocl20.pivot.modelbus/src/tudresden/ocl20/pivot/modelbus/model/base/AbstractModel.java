@@ -26,8 +26,10 @@ package tudresden.ocl20.pivot.modelbus.model.base;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
@@ -35,11 +37,10 @@ import org.apache.log4j.Logger;
 import tudresden.ocl20.pivot.modelbus.IModelBusConstants;
 import tudresden.ocl20.pivot.modelbus.ModelAccessException;
 import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
-import tudresden.ocl20.pivot.modelbus.internal.OclLibraryProvider;
 import tudresden.ocl20.pivot.modelbus.metamodel.IMetamodel;
 import tudresden.ocl20.pivot.modelbus.model.IModel;
 import tudresden.ocl20.pivot.modelbus.model.IModelFactory;
-import tudresden.ocl20.pivot.modelbus.model.IOclLibraryProvider;
+import tudresden.ocl20.pivot.modelbus.model.IModelListener;
 import tudresden.ocl20.pivot.modelbus.model.ITypeResolver;
 import tudresden.ocl20.pivot.modelbus.model.internal.ModelFactory;
 import tudresden.ocl20.pivot.modelbus.model.internal.TypeResolver;
@@ -60,20 +61,26 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
 public abstract class AbstractModel implements IModel {
 
 	/** The {@link Logger} for this class. */
-	private static final Logger LOGGER =
-			ModelBusPlugin.getLogger(AbstractModel.class);
+	private static final Logger LOGGER = ModelBusPlugin
+			.getLogger(AbstractModel.class);
 
 	/** The {@link IModel}'s name as displayed to clients. */
 	private String displayName;
+
+	/**
+	 * Indicates whether or not this {@link IModel} changed since notifying its
+	 * {@link IModelListener}s for the last time.
+	 */
+	private boolean hasChanged = false;
+
+	/** The {@link IModelListener} of this {@link IModel}. */
+	private Set<IModelListener> listeners = new HashSet<IModelListener>();
 
 	/** The {@link IMetamodel} of this {@link IModel}. */
 	private IMetamodel metamodel;
 
 	/** A cached instance of the IModelFactory. */
 	private IModelFactory modelFactory;
-
-	/** A cached instance of the IOclLibraryProvider. */
-	private IOclLibraryProvider oclLibraryProvider;
 
 	/** The IModelFactory of this {@link IModel}. */
 	private ITypeResolver typeResolver;
@@ -86,9 +93,9 @@ public abstract class AbstractModel implements IModel {
 	 * </p>
 	 * 
 	 * @param displayName
-	 *          A name for this {@link IModel}.
+	 *            A name for this {@link IModel}.
 	 * @param metamodel
-	 *          The {@link IMetamodel} for this {@link IModel}.
+	 *            The {@link IMetamodel} for this {@link IModel}.
 	 */
 	protected AbstractModel(String displayName, IMetamodel metamodel) {
 
@@ -106,6 +113,48 @@ public abstract class AbstractModel implements IModel {
 
 	/*
 	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.modelbus.model.IModel#addListener(tudresden.ocl20
+	 * .pivot.modelbus.model.IModelListener)
+	 */
+	public boolean addListener(IModelListener listener) {
+
+		if (listener == null) {
+			throw new IllegalArgumentException(
+					"Parameter listener must not be null.");
+		}
+		// no else.
+
+		/* Probably log the entry into this method. */
+		if (LOGGER.isDebugEnabled()) {
+			String msg;
+
+			msg = "addListener(";
+			msg += "listener = " + listener; //$NON-NLS-1$ //$NON-NLS-2$
+			msg += ") - enter";
+
+			LOGGER.debug(msg);
+		}
+		// no else.
+
+		boolean result;
+
+		result = this.listeners.add(listener);
+
+		/* Probably log the exit from this method. */
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER
+					.debug("addListener(IModelListener) - exit - return value=" + result); //$NON-NLS-1$
+		}
+		// no else.
+
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see tudresden.ocl20.pivot.modelbus.IModel#findNamespace(java.util.List)
 	 */
 	public Namespace findNamespace(List<String> pathName)
@@ -128,7 +177,8 @@ public abstract class AbstractModel implements IModel {
 
 		/* The path name must not be null. */
 		if (pathName == null) {
-			throw new IllegalArgumentException("The path name must not be null."); //$NON-NLS-1$
+			throw new IllegalArgumentException(
+					"The path name must not be null."); //$NON-NLS-1$
 		}
 		// no else.
 
@@ -175,6 +225,7 @@ public abstract class AbstractModel implements IModel {
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see tudresden.ocl20.pivot.modelbus.IModel#findType(java.util.List)
 	 */
 	public Type findType(List<String> pathName) throws ModelAccessException {
@@ -227,7 +278,8 @@ public abstract class AbstractModel implements IModel {
 			for (PrimitiveTypeKind aKind : PrimitiveTypeKind.VALUES) {
 
 				if (primitiveName.equals(aKind.getName())) {
-					primitiveType = PivotModelFactory.INSTANCE.createPrimitiveType();
+					primitiveType = PivotModelFactory.INSTANCE
+							.createPrimitiveType();
 					primitiveType.setKind(aKind);
 					primitiveType.setName(aKind.getName());
 					foundTypes.add(primitiveType);
@@ -246,8 +298,7 @@ public abstract class AbstractModel implements IModel {
 		if (foundTypes.size() > 1) {
 			String msg;
 
-			msg =
-					"More than one type with path name " + pathName + " were found: " + foundTypes; //$NON-NLS-1$//$NON-NLS-2$
+			msg = "More than one type with path name " + pathName + " were found: " + foundTypes; //$NON-NLS-1$//$NON-NLS-2$
 			LOGGER.warn(msg);
 
 			result = null;
@@ -280,6 +331,7 @@ public abstract class AbstractModel implements IModel {
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see tudresden.ocl20.pivot.modelbus.model.IModel#getConstraints()
 	 */
 	public Collection<Constraint> getConstraints() throws ModelAccessException {
@@ -289,6 +341,7 @@ public abstract class AbstractModel implements IModel {
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see tudresden.ocl20.pivot.modelbus.IModel#getDisplayName()
 	 */
 	public String getDisplayName() {
@@ -298,6 +351,7 @@ public abstract class AbstractModel implements IModel {
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see tudresden.ocl20.pivot.modelbus.IModel#getFactory()
 	 */
 	public IModelFactory getFactory() {
@@ -312,6 +366,7 @@ public abstract class AbstractModel implements IModel {
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see tudresden.ocl20.pivot.modelbus.IModel#getMetamodel()
 	 */
 	public IMetamodel getMetamodel() {
@@ -321,20 +376,7 @@ public abstract class AbstractModel implements IModel {
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.modelbus.IModel#getOclLibraryProvider()
-	 */
-	public IOclLibraryProvider getOclLibraryProvider() {
-
-		/* Lazily create an OCL Library provider. */
-		if (this.oclLibraryProvider == null) {
-			this.oclLibraryProvider = new OclLibraryProvider();
-		}
-
-		return this.oclLibraryProvider;
-	}
-
-	/*
-	 * (non-Javadoc)
+	 * 
 	 * @see tudresden.ocl20.pivot.modelbus.IModel#getTypeResolver()
 	 */
 	public ITypeResolver getTypeResolver() {
@@ -349,16 +391,120 @@ public abstract class AbstractModel implements IModel {
 
 	/*
 	 * (non-Javadoc)
+	 * 
+	 * @see tudresden.ocl20.pivot.modelbus.model.IModel#hasChanged()
+	 */
+	public boolean hasChanged() {
+
+		/* Probably log the entry into this method. */
+		if (LOGGER.isDebugEnabled()) {
+			String msg;
+
+			msg = "hasChanged() - enter";
+
+			LOGGER.debug(msg);
+		}
+		// no else.
+
+		boolean result;
+
+		result = this.hasChanged;
+
+		/* Probably log the exit from this method. */
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("hasChanged() - exit - return value=" + result); //$NON-NLS-1$
+		}
+		// no else.
+
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see tudresden.ocl20.pivot.modelbus.model.IModel#notifiyListeners()
+	 */
+	public synchronized boolean notifiyListeners() {
+
+		/* Probably log the entry into this method. */
+		if (LOGGER.isDebugEnabled()) {
+			String msg;
+
+			msg = "notifiyListeners() - enter";
+
+			LOGGER.debug(msg);
+		}
+		// no else.
+
+		boolean result;
+		result = this.hasChanged;
+
+		if (result) {
+
+			for (IModelListener listener : this.listeners) {
+				listener.modelChanged(this);
+			}
+			// end for.
+
+			this.hasChanged = false;
+		}
+		// no else.
+
+		/* Probably log the exit from this method. */
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("notifiyListeners() - exit - return value=" + result); //$NON-NLS-1$
+		}
+		// no else.
+
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see tudresden.ocl20.pivot.modelbus.model.IModel#removeAllConstraints()
 	 */
 	public boolean removeAllConstraints() throws IllegalArgumentException,
 			ModelAccessException {
 
-		return this.getRootNamespace().removeOwnedAndNestedRules();
+		/* Probably log the entry into this method. */
+		if (LOGGER.isDebugEnabled()) {
+			String msg;
+
+			msg = "removeAllConstraints() - enter";
+
+			LOGGER.debug(msg);
+		}
+		// no else.
+
+		boolean result;
+
+		if (this.getConstraints().size() > 0) {
+			result = this.getRootNamespace().removeOwnedAndNestedRules();
+		}
+
+		else {
+			result = false;
+		}
+
+		if (result) {
+			this.setChanged();
+		}
+		// no else.
+
+		/* Probably log the exit from this method. */
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER
+					.debug("removeAllConstraints() - exit - return value=" + result); //$NON-NLS-1$
+		}
+		// no else.
+
+		return result;
 	}
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.modelbus.model.IModel#removeConstraints(java.util
 	 * .Collection)
@@ -366,8 +512,108 @@ public abstract class AbstractModel implements IModel {
 	public boolean removeConstraints(Collection<Constraint> constraints)
 			throws IllegalArgumentException, ModelAccessException {
 
-		return this.getRootNamespace().removeOwnedAndNestedRules(
+		if (constraints == null) {
+			throw new IllegalArgumentException(
+					"Parameter 'constraints' must not be null.");
+		}
+		// no else.
+
+		/* Probably log the entry into this method. */
+		if (LOGGER.isDebugEnabled()) {
+			String msg;
+
+			msg = "removeConstraints(";
+			msg += "constraints = " + constraints; //$NON-NLS-1$ //$NON-NLS-2$
+			msg += ") - enter";
+
+			LOGGER.debug(msg);
+		}
+		// no else.
+
+		boolean result;
+
+		result = this.getRootNamespace().removeOwnedAndNestedRules(
 				new ArrayList<Constraint>(constraints));
+
+		if (result) {
+			this.setChanged();
+		}
+		// no else.
+
+		/* Probably log the exit from this method. */
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("removeConstraints() - exit"); //$NON-NLS-1$
+		}
+		// no else.
+
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.modelbus.model.IModel#removeListener(tudresden.
+	 * ocl20.pivot.modelbus.model.IModelListener)
+	 */
+	public boolean removeListener(IModelListener listener) {
+
+		if (listener == null) {
+			throw new IllegalArgumentException(
+					"Parameter listener must not be null.");
+		}
+		// no else.
+
+		/* Probably log the entry into this method. */
+		if (LOGGER.isDebugEnabled()) {
+			String msg;
+
+			msg = "removeListener(";
+			msg += "listener = " + listener; //$NON-NLS-1$ //$NON-NLS-2$
+			msg += ") - enter";
+
+			LOGGER.debug(msg);
+		}
+		// no else.
+
+		boolean result;
+
+		result = this.listeners.remove(listener);
+
+		/* Probably log the exit from this method. */
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER
+					.debug("removeListener(IModelListener) - exit - return value=" + result); //$NON-NLS-1$
+		}
+		// no else.
+
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see tudresden.ocl20.pivot.modelbus.model.IModel#setChanged()
+	 */
+	public void setChanged() {
+
+		/* Probably log the entry into this method. */
+		if (LOGGER.isDebugEnabled()) {
+			String msg;
+
+			msg = "setChanged() - enter";
+
+			LOGGER.debug(msg);
+		}
+		// no else.
+
+		this.hasChanged = true;
+
+		/* Probably log the exit from this method. */
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("setChanged() - exit"); //$NON-NLS-1$
+		}
+		// no else.
 	}
 
 	/**
@@ -377,13 +623,13 @@ public abstract class AbstractModel implements IModel {
 	 * </p>
 	 * 
 	 * @param namespace
-	 *          The {@link Namespace} to start the search in.
+	 *            The {@link Namespace} to start the search in.
 	 * @param pathName
-	 *          The path name to look for.
+	 *            The path name to look for.
 	 * @param searchAllNestedNamespaces
-	 *          Indicates whether a recursive search in all nested
-	 *          {@link Namespace}s with the full path name is required (for
-	 *          non-fully-qualified path names).
+	 *            Indicates whether a recursive search in all nested
+	 *            {@link Namespace}s with the full path name is required (for
+	 *            non-fully-qualified path names).
 	 * 
 	 * @return A {@link List} containing all {@link Type}s found matching to the
 	 *         given pathName.
@@ -410,8 +656,8 @@ public abstract class AbstractModel implements IModel {
 		result = new LinkedList<Type>();
 
 		/*
-		 * Search in all nested name spaces with the given path name (in case it was
-		 * not fully qualified).
+		 * Search in all nested name spaces with the given path name (in case it
+		 * was not fully qualified).
 		 */
 		if (searchAllNestedNamespaces) {
 			for (Namespace nestedNamespace : namespace.getNestedNamespace()) {
@@ -440,8 +686,8 @@ public abstract class AbstractModel implements IModel {
 			namespace = namespace.lookupNamespace(firstPathSegment);
 
 			if (namespace != null) {
-				result.addAll(findTypeHere(namespace, pathName.subList(1, pathName
-						.size()), false));
+				result.addAll(findTypeHere(namespace, pathName.subList(1,
+						pathName.size()), false));
 			}
 		}
 

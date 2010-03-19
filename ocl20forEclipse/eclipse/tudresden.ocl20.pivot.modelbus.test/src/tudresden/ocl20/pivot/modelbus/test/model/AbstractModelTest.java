@@ -20,6 +20,7 @@ with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
 package tudresden.ocl20.pivot.modelbus.test.model;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
@@ -37,6 +38,7 @@ import tudresden.ocl20.pivot.facade.Ocl2ForEclipseFacade;
 import tudresden.ocl20.pivot.modelbus.IModelBusConstants;
 import tudresden.ocl20.pivot.modelbus.ModelAccessException;
 import tudresden.ocl20.pivot.modelbus.model.IModel;
+import tudresden.ocl20.pivot.modelbus.model.IModelListener;
 import tudresden.ocl20.pivot.modelbus.test.ModelBusTestUtility;
 import tudresden.ocl20.pivot.parser.ParseException;
 import tudresden.ocl20.pivot.pivotmodel.Constraint;
@@ -55,6 +57,58 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
  * @author Claas Wilke
  */
 public class AbstractModelTest {
+
+	/**
+	 * <p>
+	 * Tests the method
+	 * {@link IModel#addListener(tudresden.ocl20.pivot.modelbus.model.IModelListener)}
+	 * for an {@link IModel} without {@link Constraint}s.
+	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 * @throws ParseException
+	 * @throws IllegalArgumentException
+	 */
+	@Test
+	public void testAddListener01() throws ModelAccessException,
+			IllegalArgumentException, ParseException {
+
+		IModel model;
+		model = ModelBusTestUtility
+				.getUML2Model("resources/models/model01.uml");
+
+		IModelListener listener;
+		listener = new ModelListenerMock();
+
+		assertTrue(model.addListener(listener));
+
+		/* Remove the listener again to avoid side effects. */
+		model.removeListener(listener);
+		Ocl2ForEclipseFacade.removeModel(model);
+	}
+
+	/**
+	 * <p>
+	 * Tests the method
+	 * {@link IModel#addListener(tudresden.ocl20.pivot.modelbus.model.IModelListener)}
+	 * for an {@link IModel} without {@link Constraint}s.
+	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 * @throws ParseException
+	 * @throws IllegalArgumentException
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void testAddListener02() throws ModelAccessException,
+			IllegalArgumentException, ParseException {
+
+		IModel model;
+		model = ModelBusTestUtility
+				.getUML2Model("resources/models/model01.uml");
+
+		model.addListener(null);
+		Ocl2ForEclipseFacade.removeModel(model);
+	}
 
 	/**
 	 * <p>
@@ -741,6 +795,128 @@ public class AbstractModelTest {
 
 	/**
 	 * <p>
+	 * Tests the method {@link IModel#hasChanged()} for an {@link IModel}
+	 * without {@link Constraint}s.
+	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 * @throws ParseException
+	 * @throws IllegalArgumentException
+	 */
+	@Test
+	public void testHasChanged01() throws ModelAccessException,
+			IllegalArgumentException, ParseException {
+
+		IModel model;
+		model = ModelBusTestUtility
+				.getUML2Model("resources/models/model01.uml");
+
+		assertFalse(model.hasChanged());
+		Ocl2ForEclipseFacade.removeModel(model);
+	}
+
+	/**
+	 * <p>
+	 * Tests the method {@link IModel#notifiyListeners()} for an {@link IModel}
+	 * without {@link Constraint}s.
+	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 * @throws ParseException
+	 * @throws IllegalArgumentException
+	 */
+	@Test
+	public void testNotifyListeners01() throws ModelAccessException,
+			IllegalArgumentException, ParseException {
+
+		IModel model;
+		model = ModelBusTestUtility
+				.getUML2Model("resources/models/model01.uml");
+
+		ModelListenerMock listener;
+		listener = new ModelListenerMock();
+
+		assertFalse(listener.wasNotified);
+
+		model.addListener(listener);
+		model.notifiyListeners();
+
+		/* Should not be notified. Model did not change. */
+		assertFalse(listener.wasNotified);
+
+		/* Remove listener again, avoid side effects. */
+		model.removeListener(listener);
+		Ocl2ForEclipseFacade.removeModel(model);
+	}
+
+	/**
+	 * <p>
+	 * Tests the method {@link IModel#notifiyListeners()} for an {@link IModel}
+	 * without {@link Constraint}s.
+	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 * @throws ParseException
+	 * @throws IllegalArgumentException
+	 */
+	@Test
+	public void testNotifyListeners02() throws ModelAccessException,
+			IllegalArgumentException, ParseException {
+
+		IModel model;
+		model = ModelBusTestUtility
+				.getUML2Model("resources/models/model01.uml");
+
+		ModelListenerMock listener;
+		listener = new ModelListenerMock();
+
+		assertFalse(listener.wasNotified);
+
+		model.addListener(listener);
+		model.setChanged();
+		model.notifiyListeners();
+
+		assertTrue(listener.wasNotified);
+
+		/* Remove listener again, avoid side effects. */
+		model.removeListener(listener);
+		Ocl2ForEclipseFacade.removeModel(model);
+	}
+
+	/**
+	 * <p>
+	 * Tests the method {@link IModel#notifiyListeners()} for an {@link IModel}
+	 * without {@link Constraint}s.
+	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 * @throws ParseException
+	 * @throws IllegalArgumentException
+	 */
+	@Test
+	public void testNotifyListeners03() throws ModelAccessException,
+			IllegalArgumentException, ParseException {
+
+		IModel model;
+		model = ModelBusTestUtility
+				.getUML2Model("resources/models/model01.uml");
+
+		ModelListenerMock listener;
+		listener = new ModelListenerMock();
+
+		assertFalse(listener.wasNotified);
+
+		model.setChanged();
+		model.notifiyListeners();
+
+		/* Should not be notified. Did not listen to the model. */
+		assertFalse(listener.wasNotified);
+		Ocl2ForEclipseFacade.removeModel(model);
+
+	}
+
+	/**
+	 * <p>
 	 * Tests the method {@link IModel#removeAllConstraints()} for an
 	 * {@link IModel} without {@link Constraint}s.
 	 * </p>
@@ -953,6 +1129,68 @@ public class AbstractModelTest {
 
 		property2 = type2.lookupProperty("getInteger");
 		assertNull(property2);
+
+		Ocl2ForEclipseFacade.removeModel(model);
+	}
+
+	/**
+	 * <p>
+	 * Tests the method {@link IModel#removeAllConstraints()} for an
+	 * {@link IModel} without {@link Constraint}s.
+	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 * @throws ParseException
+	 * @throws IllegalArgumentException
+	 */
+	@Test
+	public void testRemoveAllConstraints06() throws ModelAccessException,
+			IllegalArgumentException, ParseException {
+
+		IModel model;
+		model = ModelBusTestUtility
+				.getUML2Model("resources/models/model05.uml");
+
+		model.removeAllConstraints();
+
+		assertNotNull(model.getConstraints());
+		assertEquals(0, model.getConstraints().size());
+		assertFalse(model.hasChanged());
+		model.notifiyListeners();
+
+		Ocl2ForEclipseFacade.removeModel(model);
+	}
+
+	/**
+	 * <p>
+	 * Tests the method {@link IModel#removeAllConstraints()} for an
+	 * {@link IModel} with {@link Constraint}s.
+	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 * @throws ParseException
+	 * @throws IllegalArgumentException
+	 */
+	@Test
+	public void testRemoveAllConstraints07() throws ModelAccessException,
+			IllegalArgumentException, ParseException {
+
+		IModel model;
+		model = ModelBusTestUtility
+				.getUML2Model("resources/models/model05.uml");
+
+		ModelBusTestUtility.parseConstraints(
+				"resources/constraints/constraints01.ocl", model);
+
+		assertNotNull(model.getConstraints());
+		assertTrue(model.getConstraints().size() > 0);
+
+		model.removeAllConstraints();
+
+		assertNotNull(model.getConstraints());
+		assertEquals(0, model.getConstraints().size());
+		assertTrue(model.hasChanged());
+		model.notifiyListeners();
 
 		Ocl2ForEclipseFacade.removeModel(model);
 	}
@@ -1211,6 +1449,169 @@ public class AbstractModelTest {
 		property2 = type2.lookupProperty("anInteger");
 		assertNull(property2);
 
+		Ocl2ForEclipseFacade.removeModel(model);
+	}
+
+	/**
+	 * <p>
+	 * Tests the method {@link IModel#removeConstraints(Collection)} for an
+	 * {@link IModel} with invalid argument.
+	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 * @throws ParseException
+	 * @throws IllegalArgumentException
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void testRemoveConstraints06() throws ModelAccessException,
+			IllegalArgumentException, ParseException {
+
+		IModel model;
+		model = ModelBusTestUtility
+				.getUML2Model("resources/models/model05.uml");
+
+		model.removeConstraints(null);
+	}
+
+	/**
+	 * <p>
+	 * Tests the method {@link IModel#removeConstraints(Collection)} for an
+	 * {@link IModel} without {@link Constraint}s.
+	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 * @throws ParseException
+	 * @throws IllegalArgumentException
+	 */
+	@Test
+	public void testRemoveConstraints07() throws ModelAccessException,
+			IllegalArgumentException, ParseException {
+
+		IModel model;
+		model = ModelBusTestUtility
+				.getUML2Model("resources/models/model05.uml");
+
+		model.removeConstraints(new HashSet<Constraint>());
+
+		assertNotNull(model.getConstraints());
+		assertEquals(0, model.getConstraints().size());
+		assertFalse(model.hasChanged());
+		model.notifiyListeners();
+
+		Ocl2ForEclipseFacade.removeModel(model);
+	}
+
+	/**
+	 * <p>
+	 * Tests the method {@link IModel#removeConstraints(Collection)} for an
+	 * {@link IModel} with {@link Constraint}s.
+	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 * @throws ParseException
+	 * @throws IllegalArgumentException
+	 */
+	@Test
+	public void testRemoveConstraints08() throws ModelAccessException,
+			IllegalArgumentException, ParseException {
+
+		IModel model;
+		model = ModelBusTestUtility
+				.getUML2Model("resources/models/model05.uml");
+
+		Collection<Constraint> constraints;
+		constraints = ModelBusTestUtility.parseConstraints(
+				"resources/constraints/constraints01.ocl", model);
+
+		assertNotNull(model.getConstraints());
+		assertTrue(model.getConstraints().size() > 0);
+
+		model.removeConstraints(constraints);
+
+		assertNotNull(model.getConstraints());
+		assertEquals(0, model.getConstraints().size());
+		assertTrue(model.hasChanged());
+		model.notifiyListeners();
+
+		Ocl2ForEclipseFacade.removeModel(model);
+	}
+
+	/**
+	 * <p>
+	 * Tests the method
+	 * {@link IModel#removeListener(tudresden.ocl20.pivot.modelbus.model.IModelListener)}
+	 * for an {@link IModel} without {@link Constraint}s.
+	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 * @throws ParseException
+	 * @throws IllegalArgumentException
+	 */
+	@Test
+	public void testRemoveListener01() throws ModelAccessException,
+			IllegalArgumentException, ParseException {
+
+		IModel model;
+		model = ModelBusTestUtility
+				.getUML2Model("resources/models/model01.uml");
+
+		IModelListener listener;
+		listener = new ModelListenerMock();
+
+		model.addListener(listener);
+		assertTrue(model.removeListener(listener));
+		Ocl2ForEclipseFacade.removeModel(model);
+	}
+
+	/**
+	 * <p>
+	 * Tests the method
+	 * {@link IModel#removeListener(tudresden.ocl20.pivot.modelbus.model.IModelListener)}
+	 * for an {@link IModel} without {@link Constraint}s.
+	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 * @throws ParseException
+	 * @throws IllegalArgumentException
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void testRemoveListener02() throws ModelAccessException,
+			IllegalArgumentException, ParseException {
+
+		IModel model;
+		model = ModelBusTestUtility
+				.getUML2Model("resources/models/model01.uml");
+
+		model.removeListener(null);
+		Ocl2ForEclipseFacade.removeModel(model);
+	}
+
+	/**
+	 * <p>
+	 * Tests the method {@link IModel#setChanged()} for an {@link IModel}
+	 * without {@link Constraint}s.
+	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 * @throws ParseException
+	 * @throws IllegalArgumentException
+	 */
+	@Test
+	public void testSetChanged01() throws ModelAccessException,
+			IllegalArgumentException, ParseException {
+
+		IModel model;
+		model = ModelBusTestUtility
+				.getUML2Model("resources/models/model01.uml");
+
+		assertFalse(model.hasChanged());
+
+		model.setChanged();
+
+		assertTrue(model.hasChanged());
+
+		/* Reset the model's state. */
+		model.notifiyListeners();
 		Ocl2ForEclipseFacade.removeModel(model);
 	}
 }
