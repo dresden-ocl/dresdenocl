@@ -109,7 +109,17 @@ public class Ocl2Parser implements IOclParser {
 				if (!addToModel) {
 					model.removeConstraints(result);
 				}
-				// no else.
+
+				/*
+				 * Else probably notify listeners of the model that constraints
+				 * have been added.
+				 */
+				else {
+					if (result.size() > 0) {
+						model.setChanged();
+						model.notifiyListeners();
+					}
+				}
 			}
 
 			catch (ParseException e) {
