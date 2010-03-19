@@ -124,16 +124,16 @@ After loading the model instance, the model instance can be added to the \code{M
 
 \section{How to access the OCL2 Parser}
 
-The \acs{OCL}2 Parser of \acl{DOT4Eclipse} is located in the plug-in \code{tudresden.ocl20.pivot.\linebreak[0]ocl\-2\-Parser}. The parser provides a very simple interface and can be used as shown in Listing \ref{lst:integration:parserConstraints}. First, a new \code{OCL2Parser} must be created. The constructor requires two arguments, a \code{Reader} used to read all constraints that shall be parsed, and an \code{IModel} for that the constraints shall be parsed. After creating the parser instance, the method \code{OCL2Parser.parse()} can be used to parse the constraints.
+The \acs{OCL}2 Parser of \acl{DOT4Eclipse} is located in the plug-in \code{tudresden.ocl20.pivot.\linebreak[0]ocl\-2\-Parser}. The parser provides a very simple interface and can be used as shown in Listing \ref{lst:integration:parserConstraints}. First a \code{Reader} used to read all constraints that shall be parsed has to be created, and an \code{IModel} for that the constraints shall be parsed has to be loaded. Afterwards, the method \code{OCL2Parser.doParse()} can be invoke on the singleton instance of the parser to parse the constraints.
 
 \begin{figure}[!b]
 \begin{lstlisting}[caption={How to parse constraints.}, captionpos=b, label=lst:integration:parserConstraints]
 FileReader oclFileReader;
 OCL2Parser parser;
+List<Constraint> parsedConstraints;
 
 oclFileReader = new FileReader(oclFile);
-parser = new OCL2Parser(model, oclFileReader);	
-parser.parse();
+parsedConstraints = Ocl2Parser.INSTANCE.doParse(model, reader);
 \end{lstlisting}
 \end{figure}
 
