@@ -25,6 +25,10 @@ Release 2.1 (scheduled for April 2010)
   - If the top-level package is a UML model or profile directory, 
     these packages are now adapted correctly.
     
+* A bug in the EMF Ecore Meta-Model was fixed.
+  - In Ecore models containing references to other Ecore models, the referenced models are now
+    imported as part of the model as well.
+
 * The Java Meta-Model has been modified.
   - Java models can now refer to JAR archives if explicitly defined in a .javamodel File.
 

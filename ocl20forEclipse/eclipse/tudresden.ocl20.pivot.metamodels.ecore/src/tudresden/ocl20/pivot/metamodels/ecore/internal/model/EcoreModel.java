@@ -33,7 +33,9 @@
 package tudresden.ocl20.pivot.metamodels.ecore.internal.model;
 
 import java.io.IOException;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
@@ -43,6 +45,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.osgi.util.NLS;
 
 import tudresden.ocl20.pivot.metamodels.ecore.EcoreMetamodelPlugin;
@@ -69,8 +72,8 @@ import tudresden.ocl20.pivot.pivotmodel.Namespace;
 public class EcoreModel extends AbstractModel implements IModel {
 
 	/** The {@link Logger} for this class. */
-	private static final Logger LOGGER =
-			EcoreMetamodelPlugin.getLogger(EcoreModel.class);
+	private static final Logger LOGGER = EcoreMetamodelPlugin
+			.getLogger(EcoreModel.class);
 
 	/** The {@link Resource} containing the corresponding Ecore model. */
 	private Resource resource;
@@ -84,12 +87,12 @@ public class EcoreModel extends AbstractModel implements IModel {
 	 * </p>
 	 * 
 	 * @param resource
-	 *          The {@link Resource} containing the model.
+	 *            The {@link Resource} containing the model.
 	 */
 	public EcoreModel(Resource resource) {
 
-		super(resource.getURI().toString(), ModelBusPlugin.getMetamodelRegistry()
-				.getMetamodel(EcoreMetamodelPlugin.ID));
+		super(resource.getURI().toString(), ModelBusPlugin
+				.getMetamodelRegistry().getMetamodel(EcoreMetamodelPlugin.ID));
 
 		/* Initialize. */
 		this.resource = resource;
@@ -97,14 +100,15 @@ public class EcoreModel extends AbstractModel implements IModel {
 
 	/**
 	 * <p>
-	 * This method lazily creates a {@link Namespace} adapter for the virtual root
-	 * package in the associated Ecore model. Thus, any possible resource loading
-	 * errors will not happen until this method is called for the first time.
+	 * This method lazily creates a {@link Namespace} adapter for the virtual
+	 * root package in the associated Ecore model. Thus, any possible resource
+	 * loading errors will not happen until this method is called for the first
+	 * time.
 	 * </p>
 	 * 
 	 * @throws ModelAccessException
-	 *           If an error occurs when creating the adapter for the top name
-	 *           space.
+	 *             If an error occurs when creating the adapter for the top name
+	 *             space.
 	 * 
 	 * @see tudresden.ocl20.pivot.modelbus.model.IModel#getRootNamespace()
 	 */
@@ -136,7 +140,8 @@ public class EcoreModel extends AbstractModel implements IModel {
 
 			anEcoreModel = (EcoreModel) anObject;
 
-			result = this.resource.getURI().equals(anEcoreModel.resource.getURI());
+			result = this.resource.getURI().equals(
+					anEcoreModel.resource.getURI());
 		}
 
 		else {
@@ -161,6 +166,7 @@ public class EcoreModel extends AbstractModel implements IModel {
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
@@ -168,9 +174,8 @@ public class EcoreModel extends AbstractModel implements IModel {
 
 		String result;
 
-		result =
-				new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE).append(
-						"resource", this.resource.getURI()).toString();
+		result = new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
+				.append("resource", this.resource.getURI()).toString();
 
 		return result;
 	}
@@ -183,19 +188,20 @@ public class EcoreModel extends AbstractModel implements IModel {
 	 * @return A {@link Namespace} instance.
 	 * 
 	 * @throws ModelAccessException
-	 *           If an error occurs while loading the adapted Ecore model.
+	 *             If an error occurs while loading the adapted Ecore model.
 	 */
 	private Namespace createRootNamespace() throws ModelAccessException {
 
 		EPackage rootPackage;
 		List<EObject> rootPackages;
 
-		/* Eventually try to load the resource. */
+		/* Probably try to load the resource. */
 		if (!resource.isLoaded()) {
 
-			/* Eventually inform the logger. */
+			/* Probably inform the logger. */
 			if (LOGGER.isInfoEnabled()) {
-				LOGGER.info(NLS.bind(EcoreModelMessages.EcoreModel_LoadingEcoreModel,
+				LOGGER.info(NLS.bind(
+						EcoreModelMessages.EcoreModel_LoadingEcoreModel,
 						this.resource.getURI()));
 			}
 			// no else.
@@ -241,6 +247,69 @@ public class EcoreModel extends AbstractModel implements IModel {
 		}
 		// end for.
 
+		this.addNamespacesForReferencedPackages(rootPackage);
+
 		return EcoreAdapterFactory.INSTANCE.createNamespace(rootPackage);
+	}
+
+	/**
+	 * <p>
+	 * Computes the {@link EPackage}s from referenced Ecore models of this
+	 * {@link EcoreModel} and adds them to the root {@link Namespace} as well.
+	 * </p>
+	 * 
+	 * @param rootPackage
+	 *            The {@link EPackage} that represents the root
+	 *            {@link Namespace} of this {@link EcoreModel}.
+	 */
+	private void addNamespacesForReferencedPackages(EPackage rootPackage) {
+
+		/* Collect EPackages that have to be added. */
+		Set<EPackage> packagesToBeAdded;
+		packagesToBeAdded = new HashSet<EPackage>();
+
+		/* Iterate through all references EObjects. */
+		for (EObject eObject : EcoreUtil.ExternalCrossReferencer.find(resource)
+				.keySet()) {
+
+			/* Check the containing package of each EClassifier. */
+			if (eObject instanceof EClassifier) {
+
+				EClassifier eClassifier;
+				eClassifier = (EClassifier) eObject;
+
+				EPackage containerPackage;
+				containerPackage = eClassifier.getEPackage();
+
+				while (containerPackage.getESuperPackage() != null) {
+					containerPackage = containerPackage.getESuperPackage();
+				}
+
+				if (!rootPackage.getESubpackages().contains(containerPackage)
+						&& !packagesToBeAdded.contains(containerPackage)
+						&& !containerPackage.equals(rootPackage)) {
+
+					/*
+					 * Do not add the package directly because a copy is
+					 * required. Afterwards, the containment check fails for the
+					 * copy and the package may be added multiple times.
+					 */
+					packagesToBeAdded.add(containerPackage);
+					/* FIXME Probably make this mechanism recursively. */
+				}
+				// no else.
+			}
+			// no else.
+		}
+
+		/*
+		 * No copy and add the packages. Copy is required to avoid
+		 * bi-directional references.
+		 */
+		for (EPackage ePackage : packagesToBeAdded) {
+			rootPackage.getESubpackages().add(
+					(EPackage) EcoreUtil.copy(ePackage));
+		}
+		// end for.
 	}
 }
