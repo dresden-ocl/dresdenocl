@@ -32,8 +32,6 @@
  */
 package tudresden.ocl20.pivot.parser.ui.internal.wizards;
 
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 
@@ -41,19 +39,13 @@ import org.apache.log4j.Logger;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.wizard.Wizard;
-import org.eclipse.osgi.util.NLS;
 import org.eclipse.ui.IImportWizard;
 import org.eclipse.ui.IWorkbench;
-import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.part.Page;
 
 import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
 import tudresden.ocl20.pivot.modelbus.model.IModel;
 import tudresden.ocl20.pivot.modelbus.model.IModelRegistry;
-import tudresden.ocl20.pivot.modelbus.ui.ModelBusUIPlugin;
-import tudresden.ocl20.pivot.ocl2parser.parser.Ocl2Parser;
-import tudresden.ocl20.pivot.parser.IOclParser;
-import tudresden.ocl20.pivot.parser.ParseException;
 import tudresden.ocl20.pivot.parser.ui.ParserUIPlugin;
 import tudresden.ocl20.pivot.parser.ui.internal.ParserUIMessages;
 
@@ -81,9 +73,6 @@ public class ParseOCLWizard extends Wizard implements IImportWizard {
 	/** The single {@link Page} in this wizard. */
 	private SelectOCLFilePage mySelectOCLFilePage;
 
-	/** A cached reference to the workbench. */
-	private IWorkbench myWorkbench;
-
 	/**
 	 * <p>
 	 * Creates a new {@link ParseOCLWizard}.
@@ -109,8 +98,6 @@ public class ParseOCLWizard extends Wizard implements IImportWizard {
 	 */
 	public void init(IWorkbench workbench, IStructuredSelection selection) {
 
-		this.myWorkbench = workbench;
-
 		setWindowTitle(ParserUIMessages.ParseOCLWizard_WindowTitle); // NON-NLS-1
 		this.mySelectOCLFilePage = new SelectOCLFilePage(selection); // NON-NLS-1
 	}
@@ -125,56 +112,20 @@ public class ParseOCLWizard extends Wizard implements IImportWizard {
 
 		boolean result;
 
-		IOclParser parser;
-		URL selectedURL;
-
-		parser = Ocl2Parser.INSTANCE;
-
-		/* Try to parse the selected OCL file. */
 		try {
-			selectedURL = mySelectOCLFilePage.getSelectedOCLFile().toURI()
+			URL selectedURL;
+			selectedURL = this.mySelectOCLFilePage.getSelectedOCLFile().toURI()
 					.toURL();
-			parser.doParse(activeModel, new InputStreamReader(selectedURL
-					.openStream()));
 
-			/* Activate the Model Browser View. */
-			this.myWorkbench.getActiveWorkbenchWindow().getActivePage()
-					.showView(ModelBusUIPlugin.MODELS_VIEW_ID);
+			Ocl2ParserJob parserJob;
+			parserJob = new Ocl2ParserJob(this.activeModel, selectedURL);
 
+			parserJob.schedule();
 			result = true;
-		}
-
-		/* Probably display an exception. */
-		catch (ParseException e) {
-
-			String msgTitle;
-			String msg;
-
-			msgTitle = ParserUIMessages.ParseOCLWizard_ErrorMessageDialogTitle;
-			msg = ParserUIMessages.ParseOCLWizard_ErrorOccuredDuringParsing;
-
-			if (e.getMessage() != null) {
-				msg += e.getMessage();
-			}
-
-			else {
-				msg += ParserUIMessages.ParseOCLWizard_CheckLog;
-			}
-
-			/* Display the message. */
-			MessageDialog.openError(getShell(), msgTitle, msg);
-
-			/* Log the error. */
-			LOGGER.error(msg, e);
-
-			/*
-			 * We need to re-throw a runtime exception or the wizard will close
-			 * afterwards.
-			 */
-			throw new IllegalStateException(msg, e);
 		}
 
 		catch (MalformedURLException e) {
+
 			String msgTitle;
 			String msg;
 
@@ -182,77 +133,14 @@ public class ParseOCLWizard extends Wizard implements IImportWizard {
 			msg = ParserUIMessages.ParseOCLWizard_UnexpectedError;
 
 			/* Display the message. */
-			MessageDialog.openError(getShell(), msgTitle, msg);
+			MessageDialog.openError(this.getShell(), msgTitle, msg);
 
 			/* Log the error. */
 			LOGGER.error(msg, e);
 
-			/*
-			 * We need to re-throw a runtime exception or the wizard will close
-			 * afterwards.
-			 */
-			throw new IllegalStateException(msg, e);
+			result = false;
 		}
-
-		catch (IllegalStateException e) {
-			String msgTitle;
-			String msg;
-
-			msgTitle = ParserUIMessages.ParseOCLWizard_ErrorMessageDialogTitle;
-			msg = ParserUIMessages.ParseOCLWizard_UnexpectedError;
-
-			/* Display the message. */
-			MessageDialog.openError(getShell(), msgTitle, msg);
-
-			/* Log the error. */
-			LOGGER.error(msg, e);
-
-			/*
-			 * We need to re-throw a runtime exception or the wizard will close
-			 * afterwards.
-			 */
-			throw new IllegalStateException(msg, e);
-		}
-
-		catch (IOException e) {
-			String msgTitle;
-			String msg;
-
-			msgTitle = ParserUIMessages.ParseOCLWizard_ErrorMessageDialogTitle;
-			msg = ParserUIMessages.ParseOCLWizard_UnexpectedError;
-
-			/* Display the message. */
-			MessageDialog.openError(getShell(), msgTitle, msg);
-
-			/* Log the error. */
-			LOGGER.error(msg, e);
-
-			/*
-			 * We need to re-throw a runtime exception or the wizard will close
-			 * afterwards.
-			 */
-			throw new IllegalStateException(msg, e);
-		}
-
-		/* This exception is thrown, if the Model Browser cannot be activated. */
-		catch (PartInitException e) {
-			/* Probably log the error. */
-			if (LOGGER.isInfoEnabled()) {
-				String msg;
-
-				msg = ParserUIMessages.ParseOCLWizard_ModelsViewActivationError;
-				msg = NLS.bind(msg, e.getMessage());
-
-				LOGGER.warn(msg, e);
-			}
-			// no else.
-
-			/*
-			 * The activation of the model bus does not involve the parser's
-			 * result.
-			 */
-			result = true;
-		}
+		// end catch.
 
 		return result;
 	}
