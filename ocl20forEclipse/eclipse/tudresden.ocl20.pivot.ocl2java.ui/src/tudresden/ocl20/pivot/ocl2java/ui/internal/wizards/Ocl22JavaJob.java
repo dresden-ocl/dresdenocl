@@ -26,9 +26,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
-import org.eclipse.ui.IViewActionDelegate;
 
-import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
 import tudresden.ocl20.pivot.ocl2java.IOcl22Code;
 import tudresden.ocl20.pivot.ocl2java.Ocl22JavaPlugin;
 import tudresden.ocl20.pivot.ocl2java.exception.Ocl22CodeException;
@@ -55,18 +53,13 @@ public class Ocl22JavaJob extends Job {
 	 * Creates a new {@link Ocl22JavaJob}.
 	 * </p>
 	 * 
-	 * @param modelObjects
-	 *            The {@link IModelInstanceElement}s that shall be interpreted
-	 *            or <code>null</code> if all {@link IModelInstanceElement}s
-	 *            shall be used.
 	 * @param constraints
 	 *            The {@link Constraint}s for that code shall be generated.
-	 * @param interpreterView
-	 *            The {@link IViewActionDelegate} this {@link Ocl22JavaJob}
-	 *            belongs to.
+	 * @param codeGenerator
+	 *            The {@link IOcl22Code} used for code generation.
 	 */
 	public Ocl22JavaJob(List<Constraint> constraints, IOcl22Code codeGenerator) {
-		super("Interpreting Constraints ...");
+		super("Generating Code ...");
 
 		if (constraints == null) {
 			throw new IllegalArgumentException(
@@ -101,7 +94,7 @@ public class Ocl22JavaJob extends Job {
 
 			monitor.worked(100);
 			monitor.done();
-			
+
 			/* FIXME Claas: Evtl. refresh the altered workspace automatically. */
 
 			result = new Status(IStatus.OK, Ocl22JavaPlugin.PLUGIN_ID,

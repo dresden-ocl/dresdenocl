@@ -73,7 +73,8 @@ import tudresden.ocl20.pivot.modelbus.ui.internal.views.util.ModelObjectLabelPro
  * @author Ronny Brandt
  */
 public class ModelInstancesView extends ViewPart implements
-		IModelInstanceRegistryListener, IModelRegistryListener, ISelectionListener {
+		IModelInstanceRegistryListener, IModelRegistryListener,
+		ISelectionListener {
 
 	/** The Constant ID of this class. */
 	public static final String ID = IModelBusConstants.MODEL_INSTANCES_VIEW_ID;
@@ -94,7 +95,8 @@ public class ModelInstancesView extends ViewPart implements
 	private IMenuManager myMenu;
 
 	/**
-	 * The {@link ModelInstanceSelectionAction}s according to the {@link IModel} .
+	 * The {@link ModelInstanceSelectionAction}s according to the {@link IModel}
+	 * .
 	 */
 	private Map<IModel, Map<IModelInstance, ModelInstanceSelectionAction>> myModelInstanceSelectionActions;
 
@@ -116,17 +118,17 @@ public class ModelInstancesView extends ViewPart implements
 
 		super();
 
-		this.myModelInstanceSelectionActions =
-				new HashMap<IModel, Map<IModelInstance, ModelInstanceSelectionAction>>();
+		this.myModelInstanceSelectionActions = new HashMap<IModel, Map<IModelInstance, ModelInstanceSelectionAction>>();
 
 		/* Register the view as model and model instance listener. */
 		ModelBusPlugin.getModelRegistry().addModelRegistryListener(this);
-		ModelBusPlugin.getModelInstanceRegistry().addModelInstanceRegistryListener(
-				this);
+		ModelBusPlugin.getModelInstanceRegistry()
+				.addModelInstanceRegistryListener(this);
 	}
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see org.eclipse.ui.part.WorkbenchPart#dispose()
 	 */
 	public void dispose() {
@@ -142,39 +144,70 @@ public class ModelInstancesView extends ViewPart implements
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @seetudresden.ocl20.pivot.modelbus.event.IModelRegistryListener#
 	 * activeModelChanged
 	 * (tudresden.ocl20.pivot.modelbus.event.ModelRegistryEvent)
 	 */
 	public void activeModelChanged(ModelRegistryEvent e) {
 
-		this.rebuildMenu(e.getAffectedModel());
+		final IModel model = e.getAffectedModel();
 
-		this.setActiveModelInstance(ModelBusPlugin.getModelInstanceRegistry()
-				.getActiveModelInstance(e.getAffectedModel()));
+		/* Execute in a GUI thread to avoid IllegalThreadExceptions. */
+		ModelBusUIPlugin.getDefault().getWorkbench().getDisplay().asyncExec(
+				new Runnable() {
+
+					/*
+					 * (non-Javadoc)
+					 * 
+					 * @see java.lang.Runnable#run()
+					 */
+					public void run() {
+						rebuildMenu(model);
+						setActiveModelInstance(ModelBusPlugin
+								.getModelInstanceRegistry()
+								.getActiveModelInstance(model));
+					}
+				});
 	}
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @seetudresden.ocl20.pivot.modelbus.event.IModelInstanceRegistryListener#
 	 * activeModelInstanceChanged
 	 * (tudresden.ocl20.pivot.modelbus.event.ModelInstanceRegistryEvent)
 	 */
 	public void activeModelInstanceChanged(ModelInstanceRegistryEvent event) {
 
-		this.setActiveModelInstance(event.getAffectedModelInstance());
+		final IModelInstance modelInstance = event.getAffectedModelInstance();
+
+		/* Execute in a GUI thread to avoid IllegalThreadExceptions. */
+		ModelBusUIPlugin.getDefault().getWorkbench().getDisplay().asyncExec(
+				new Runnable() {
+
+					/*
+					 * (non-Javadoc)
+					 * 
+					 * @see java.lang.Runnable#run()
+					 */
+					public void run() {
+						setActiveModelInstance(modelInstance);
+					}
+				});
 	}
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see
 	 * org.eclipse.ui.part.WorkbenchPart#createPartControl(org.eclipse.swt.widgets
 	 * .Composite)
 	 */
 	public void createPartControl(Composite aParent) {
 
-		this.myViewer =
-				new TreeViewer(aParent, SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL);
+		this.myViewer = new TreeViewer(aParent, SWT.MULTI | SWT.H_SCROLL
+				| SWT.V_SCROLL);
 
 		this.myViewer.setContentProvider(new ModelObjectContentProvider());
 		this.myViewer.setLabelProvider(new ModelObjectLabelProvider());
@@ -189,49 +222,111 @@ public class ModelInstancesView extends ViewPart implements
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.modelbus.event.IModelRegistryListener#modelAdded
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.modelbus.event.IModelRegistryListener#modelAdded
 	 * (tudresden.ocl20.pivot.modelbus.event.ModelRegistryEvent)
 	 */
 	public void modelAdded(ModelRegistryEvent event) {
 
-		this.rebuildMenu(event.getAffectedModel());
+		final IModel model = event.getAffectedModel();
 
-		this.setActiveModelInstance(ModelBusPlugin.getModelInstanceRegistry()
-				.getActiveModelInstance(event.getAffectedModel()));
+		/* Execute in a GUI thread to avoid IllegalThreadExceptions. */
+		ModelBusUIPlugin.getDefault().getWorkbench().getDisplay().asyncExec(
+				new Runnable() {
+
+					/*
+					 * (non-Javadoc)
+					 * 
+					 * @see java.lang.Runnable#run()
+					 */
+					public void run() {
+						rebuildMenu(model);
+						setActiveModelInstance(ModelBusPlugin
+								.getModelInstanceRegistry()
+								.getActiveModelInstance(model));
+					}
+				});
 	}
 
 	public void modelRemoved(ModelRegistryEvent event) {
 
-		if (this.myModelInstanceSelectionActions != null) {
-			this.myModelInstanceSelectionActions.remove(event.getAffectedModel());
-		}
-		// no else.
+		final IModel model = event.getAffectedModel();
+
+		/* Execute in a GUI thread to avoid IllegalThreadExceptions. */
+		ModelBusUIPlugin.getDefault().getWorkbench().getDisplay().asyncExec(
+				new Runnable() {
+
+					/*
+					 * (non-Javadoc)
+					 * 
+					 * @see java.lang.Runnable#run()
+					 */
+					public void run() {
+						if (myModelInstanceSelectionActions != null) {
+							myModelInstanceSelectionActions.remove(model);
+						}
+						// no else.
+
+					}
+				});
 	}
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @seetudresden.ocl20.pivot.modelbus.event.IModelInstanceRegistryListener#
 	 * modelInstanceAdded
 	 * (tudresden.ocl20.pivot.modelbus.event.ModelInstanceRegistryEvent)
 	 */
 	public void modelInstanceAdded(ModelInstanceRegistryEvent event) {
 
-		this.addModelInstanceSelectionAction(event.getAffectedModelInstance());
+		final IModelInstance modelInstance = event.getAffectedModelInstance();
+
+		/* Execute in a GUI thread to avoid IllegalThreadExceptions. */
+		ModelBusUIPlugin.getDefault().getWorkbench().getDisplay().asyncExec(
+				new Runnable() {
+
+					/*
+					 * (non-Javadoc)
+					 * 
+					 * @see java.lang.Runnable#run()
+					 */
+					public void run() {
+						addModelInstanceSelectionAction(modelInstance);
+					}
+				});
 	}
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @seetudresden.ocl20.pivot.modelbus.event.IModelInstanceRegistryListener#
 	 * modelInstanceRemoved
 	 * (tudresden.ocl20.pivot.modelbus.event.ModelInstanceRegistryEvent)
 	 */
 	public void modelInstanceRemoved(ModelInstanceRegistryEvent event) {
 
-		this.removeModelInstanceSelectionAction(event.getAffectedModelInstance());
+		final IModelInstance modelInstance = event.getAffectedModelInstance();
+
+		/* Execute in a GUI thread to avoid IllegalThreadExceptions. */
+		ModelBusUIPlugin.getDefault().getWorkbench().getDisplay().asyncExec(
+				new Runnable() {
+
+					/*
+					 * (non-Javadoc)
+					 * 
+					 * @see java.lang.Runnable#run()
+					 */
+					public void run() {
+						removeModelInstanceSelectionAction(modelInstance);
+					}
+				});
 	}
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @seeorg.eclipse.ui.ISelectionListener#selectionChanged(org.eclipse.ui.
 	 * IWorkbenchPart, org.eclipse.jface.viewers.ISelection)
 	 */
@@ -274,6 +369,7 @@ public class ModelInstancesView extends ViewPart implements
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see org.eclipse.ui.part.WorkbenchPart#setFocus()
 	 */
 	public void setFocus() {
@@ -284,13 +380,13 @@ public class ModelInstancesView extends ViewPart implements
 	/**
 	 * <p>
 	 * Adds an {@link ModelInstanceSelectionAction} for a given
-	 * {@link IModelInstance}. The {@link ModelInstanceSelectionAction} is used to
-	 * select the IModelInstance to be shown in this view.
+	 * {@link IModelInstance}. The {@link ModelInstanceSelectionAction} is used
+	 * to select the IModelInstance to be shown in this view.
 	 * </p>
 	 * 
 	 * @param modelInstance
-	 *          The {@link IModelInstance} of the
-	 *          {@link ModelInstanceSelectionAction}.
+	 *            The {@link IModelInstance} of the
+	 *            {@link ModelInstanceSelectionAction}.
 	 * 
 	 * @return the model instance selection action
 	 */
@@ -302,8 +398,8 @@ public class ModelInstancesView extends ViewPart implements
 
 		result = null;
 
-		aModelsActions =
-				this.myModelInstanceSelectionActions.get(modelInstance.getModel());
+		aModelsActions = this.myModelInstanceSelectionActions.get(modelInstance
+				.getModel());
 
 		/* Get the action or initialize it. */
 		if (aModelsActions != null) {
@@ -312,15 +408,13 @@ public class ModelInstancesView extends ViewPart implements
 		// no else.
 
 		else {
-			aModelsActions =
-					new HashMap<IModelInstance, ModelInstanceSelectionAction>();
+			aModelsActions = new HashMap<IModelInstance, ModelInstanceSelectionAction>();
 		}
 
 		if (result == null) {
 
-			result =
-					new ModelInstanceSelectionAction(modelInstance.getModel(),
-							modelInstance);
+			result = new ModelInstanceSelectionAction(modelInstance.getModel(),
+					modelInstance);
 
 			aModelsActions.put(modelInstance, result);
 			this.myModelInstanceSelectionActions.put(modelInstance.getModel(),
@@ -359,8 +453,9 @@ public class ModelInstancesView extends ViewPart implements
 
 	/**
 	 * <p>
-	 * Initializes the drop-down menu of the view with all {@link IModelInstance}s
-	 * currently registered for the active {@link IModel}.
+	 * Initializes the drop-down menu of the view with all
+	 * {@link IModelInstance}s currently registered for the active
+	 * {@link IModel}.
 	 * </p>
 	 */
 	private void initMenu() {
@@ -381,8 +476,8 @@ public class ModelInstancesView extends ViewPart implements
 			if (aModel != null) {
 				IModelInstance[] modelsInstances;
 
-				modelsInstances =
-						ModelBusPlugin.getModelInstanceRegistry().getModelInstances(aModel);
+				modelsInstances = ModelBusPlugin.getModelInstanceRegistry()
+						.getModelInstances(aModel);
 
 				for (int i = 0; i < modelsInstances.length; i++) {
 					this.addModelInstanceSelectionAction(modelsInstances[i]);
@@ -399,6 +494,7 @@ public class ModelInstancesView extends ViewPart implements
 
 			/*
 			 * (non-Javadoc)
+			 * 
 			 * @see org.eclipse.jface.action.Action#run()
 			 */
 			public void run() {
@@ -412,9 +508,11 @@ public class ModelInstancesView extends ViewPart implements
 		myActionRemoveModelInstance.setText("Close Model Instance");
 		myActionRemoveModelInstance.setImageDescriptor(ModelBusUIPlugin
 				.getImageDescriptor(IMAGE_CLOSE_MODEL_INSTANCE));
-		myActionRemoveModelInstance.setEnabled(ModelBusPlugin
-				.getModelInstanceRegistry().getActiveModelInstance(
-						ModelBusPlugin.getModelRegistry().getActiveModel()) != null);
+		myActionRemoveModelInstance
+				.setEnabled(ModelBusPlugin.getModelInstanceRegistry()
+						.getActiveModelInstance(
+								ModelBusPlugin.getModelRegistry()
+										.getActiveModel()) != null);
 
 		this.getViewSite().getActionBars().getToolBarManager().add(
 				myActionRemoveModelInstance);
@@ -426,7 +524,8 @@ public class ModelInstancesView extends ViewPart implements
 	 * </p>
 	 * 
 	 * @param affectedModel
-	 *          The affected {@link IModel} for which the menu shall be rebuilt.
+	 *            The affected {@link IModel} for which the menu shall be
+	 *            rebuilt.
 	 */
 	private void rebuildMenu(IModel affectedModel) {
 
@@ -434,8 +533,8 @@ public class ModelInstancesView extends ViewPart implements
 
 		this.getMenu().removeAll();
 
-		aModelsSelectionActions =
-				this.myModelInstanceSelectionActions.get(affectedModel);
+		aModelsSelectionActions = this.myModelInstanceSelectionActions
+				.get(affectedModel);
 
 		/*
 		 * If the given model has any model instances to select, add them to the
@@ -467,8 +566,8 @@ public class ModelInstancesView extends ViewPart implements
 	 * </p>
 	 * 
 	 * @param modelInstance
-	 *          The {@link IModelInstance} of the
-	 *          {@link ModelInstanceSelectionAction}.
+	 *            The {@link IModelInstance} of the
+	 *            {@link ModelInstanceSelectionAction}.
 	 * 
 	 * @return The ModelInstanceSelectionAction that has been removed or
 	 *         <code>null</code> if no {@link ModelInstanceSelectionAction} has
@@ -481,8 +580,8 @@ public class ModelInstancesView extends ViewPart implements
 		result = null;
 
 		Map<IModelInstance, ModelInstanceSelectionAction> modelsActions;
-		modelsActions =
-				this.myModelInstanceSelectionActions.get(modelInstance.getModel());
+		modelsActions = this.myModelInstanceSelectionActions.get(modelInstance
+				.getModel());
 
 		/* Check if the model has actions at all. */
 		if (modelsActions != null) {
@@ -492,8 +591,8 @@ public class ModelInstancesView extends ViewPart implements
 
 			if (result != null) {
 
-				this.myModelInstanceSelectionActions.put(modelInstance.getModel(),
-						modelsActions);
+				this.myModelInstanceSelectionActions.put(modelInstance
+						.getModel(), modelsActions);
 
 				if (ModelBusPlugin.getModelRegistry().getActiveModel() == modelInstance
 						.getModel()) {
@@ -512,8 +611,8 @@ public class ModelInstancesView extends ViewPart implements
 
 	/**
 	 * <p>
-	 * Helper method to remove the currently selected {@link IModelInstance} from
-	 * the {@link ModelBusPlugin}.
+	 * Helper method to remove the currently selected {@link IModelInstance}
+	 * from the {@link ModelBusPlugin}.
 	 * </p>
 	 */
 	private void removeSelectedModelInstance() {
@@ -525,9 +624,8 @@ public class ModelInstancesView extends ViewPart implements
 		modelInstanceRegistry = ModelBusPlugin.getModelInstanceRegistry();
 
 		IModelInstance activeModelInstance;
-		activeModelInstance =
-				modelInstanceRegistry.getActiveModelInstance(modelRegistry
-						.getActiveModel());
+		activeModelInstance = modelInstanceRegistry
+				.getActiveModelInstance(modelRegistry.getActiveModel());
 
 		if (activeModelInstance != null) {
 			modelInstanceRegistry.removeModelInstance(activeModelInstance);
@@ -541,7 +639,7 @@ public class ModelInstancesView extends ViewPart implements
 	 * </p>
 	 * 
 	 * @param affectedModelInstance
-	 *          The affected {@link IModelInstance}.
+	 *            The affected {@link IModelInstance}.
 	 */
 	private void setActiveModelInstance(IModelInstance affectedModelInstance) {
 
@@ -556,22 +654,25 @@ public class ModelInstancesView extends ViewPart implements
 
 			/* Get the selection actions of the affected model. */
 			aSelectionAction = null;
-			aModelsSelectionActions =
-					this.myModelInstanceSelectionActions.get(affectedModel);
+			aModelsSelectionActions = this.myModelInstanceSelectionActions
+					.get(affectedModel);
 
 			if (aModelsSelectionActions != null) {
-				aSelectionAction = aModelsSelectionActions.get(affectedModelInstance);
+				aSelectionAction = aModelsSelectionActions
+						.get(affectedModelInstance);
 			}
 			// no else.
 
 			/* Check if the affected model is the active model. */
-			if (affectedModel == ModelBusPlugin.getModelRegistry().getActiveModel()) {
+			if (affectedModel == ModelBusPlugin.getModelRegistry()
+					.getActiveModel()) {
 
 				ModelInstanceSelectionAction theLastSelectionAction;
 
 				/* Get the last selection action. */
 				if (this.mySelectedAction != null) {
-					theLastSelectionAction = this.mySelectedAction.get(affectedModel);
+					theLastSelectionAction = this.mySelectedAction
+							.get(affectedModel);
 				}
 
 				else {
@@ -588,8 +689,7 @@ public class ModelInstancesView extends ViewPart implements
 					aSelectionAction.setChecked(true);
 
 					if (this.mySelectedAction == null) {
-						this.mySelectedAction =
-								new HashMap<IModel, ModelInstanceSelectionAction>();
+						this.mySelectedAction = new HashMap<IModel, ModelInstanceSelectionAction>();
 					}
 					// no else.
 
@@ -606,7 +706,8 @@ public class ModelInstancesView extends ViewPart implements
 					throw new IllegalStateException(msg);
 				}
 
-				if (myViewer.getInput() == null && affectedModelInstance != null
+				if (myViewer.getInput() == null
+						&& affectedModelInstance != null
 						|| myViewer.getInput() != null
 						&& myViewer.getInput() != affectedModelInstance) {
 					setInput(affectedModelInstance);
@@ -632,7 +733,7 @@ public class ModelInstancesView extends ViewPart implements
 	 * </p>
 	 * 
 	 * @param affectedModelInstance
-	 *          The new input which shall be set.
+	 *            The new input which shall be set.
 	 */
 	private void setInput(IModelInstance affectedModelInstance) {
 

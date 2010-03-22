@@ -223,7 +223,21 @@ public class ModelsView extends ViewPart implements IModelRegistryListener,
 	 */
 	public void activeModelChanged(ModelRegistryEvent e) {
 
-		this.setActiveModel(e.getAffectedModel());
+		final IModel model = e.getAffectedModel();
+
+		/* Execute in a GUI thread to avoid IllegalThreadExceptions. */
+		ModelBusUIPlugin.getDefault().getWorkbench().getDisplay().asyncExec(
+				new Runnable() {
+
+					/*
+					 * (non-Javadoc)
+					 * 
+					 * @see java.lang.Runnable#run()
+					 */
+					public void run() {
+						setActiveModel(model);
+					}
+				});
 	}
 
 	/*
@@ -271,7 +285,21 @@ public class ModelsView extends ViewPart implements IModelRegistryListener,
 	 */
 	public void modelAdded(ModelRegistryEvent e) {
 
-		this.addModelSelectionAction(e.getAffectedModel());
+		final IModel model = e.getAffectedModel();
+
+		/* Execute in a GUI thread to avoid IllegalThreadExceptions. */
+		ModelBusUIPlugin.getDefault().getWorkbench().getDisplay().asyncExec(
+				new Runnable() {
+
+					/*
+					 * (non-Javadoc)
+					 * 
+					 * @see java.lang.Runnable#run()
+					 */
+					public void run() {
+						addModelSelectionAction(model);
+					}
+				});
 	}
 
 	/*
@@ -282,8 +310,24 @@ public class ModelsView extends ViewPart implements IModelRegistryListener,
 	 * .ocl20.pivot.modelbus.model.IModel)
 	 */
 	public void modelChanged(IModel model) {
-		/* Update the button to remove all constraints from the active model. */
-		this.updateConstraintRemoveAction();
+
+		/* Execute in a GUI thread to avoid IllegalThreadExceptions. */
+		ModelBusUIPlugin.getDefault().getWorkbench().getDisplay().asyncExec(
+				new Runnable() {
+
+					/*
+					 * (non-Javadoc)
+					 * 
+					 * @see java.lang.Runnable#run()
+					 */
+					public void run() {
+						/*
+						 * Update the button to remove all constraints from the
+						 * active model.
+						 */
+						updateConstraintRemoveAction();
+					}
+				});
 	}
 
 	/*
@@ -295,7 +339,21 @@ public class ModelsView extends ViewPart implements IModelRegistryListener,
 	 */
 	public void modelRemoved(ModelRegistryEvent event) {
 
-		this.removeModelSelectionAction(event.getAffectedModel());
+		final IModel model = event.getAffectedModel();
+
+		/* Execute in a GUI thread to avoid IllegalThreadExceptions. */
+		ModelBusUIPlugin.getDefault().getWorkbench().getDisplay().asyncExec(
+				new Runnable() {
+
+					/*
+					 * (non-Javadoc)
+					 * 
+					 * @see java.lang.Runnable#run()
+					 */
+					public void run() {
+						removeModelSelectionAction(model);
+					}
+				});
 	}
 
 	/*

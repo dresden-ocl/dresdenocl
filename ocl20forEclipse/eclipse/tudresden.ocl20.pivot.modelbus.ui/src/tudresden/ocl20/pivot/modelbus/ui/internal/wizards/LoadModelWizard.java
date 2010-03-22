@@ -32,23 +32,14 @@
  */
 package tudresden.ocl20.pivot.modelbus.ui.internal.wizards;
 
-import org.apache.log4j.Logger;
-import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.ui.IImportWizard;
 import org.eclipse.ui.IWorkbench;
-import org.eclipse.ui.PartInitException;
 
-import tudresden.ocl20.pivot.modelbus.ModelAccessException;
-import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
 import tudresden.ocl20.pivot.modelbus.metamodel.IMetamodel;
-import tudresden.ocl20.pivot.modelbus.model.IModel;
-import tudresden.ocl20.pivot.modelbus.model.IModelProvider;
-import tudresden.ocl20.pivot.modelbus.model.IModelRegistry;
 import tudresden.ocl20.pivot.modelbus.ui.ModelBusUIPlugin;
 import tudresden.ocl20.pivot.modelbus.ui.internal.ModelBusUIMessages;
-import tudresden.ocl20.pivot.modelbus.ui.internal.views.ModelsView;
 
 /**
  * <p>
@@ -63,15 +54,8 @@ public class LoadModelWizard extends Wizard implements IImportWizard {
 	/** The icon in the top right corner. */
 	private static final String WIZARD_IMAGE = "icons/models_wizard.png";
 
-	/** A logger for this class. */
-	private static final Logger LOGGER = ModelBusUIPlugin
-			.getLogger(LoadModelWizard.class);
-
 	/** The single page of this wizard. */
 	private LoadModelPage mainPage;
-
-	/** A cached reference to the workbench. */
-	private IWorkbench workbench;
 
 	/**
 	 * <p>
@@ -107,8 +91,6 @@ public class LoadModelWizard extends Wizard implements IImportWizard {
 	 */
 	public void init(IWorkbench workbench, IStructuredSelection selection) {
 
-		this.workbench = workbench;
-
 		this.setWindowTitle(ModelBusUIMessages.LoadModelWizard_Title);
 		this.mainPage = new LoadModelPage(selection);
 	}
@@ -131,85 +113,16 @@ public class LoadModelWizard extends Wizard implements IImportWizard {
 
 		if (metamodel != null) {
 
-			IModelProvider modelProvider;
-			IModel model = null;
+			this.mainPage.getModelFile();
 
-			/* Load the model. */
-			modelProvider = metamodel.getModelProvider();
-
-			try {
-				model = modelProvider.getModel(this.mainPage.getModelFile());
-			}
-
-			catch (ModelAccessException e) {
-				/* Log and display the exception. */
-				this.openErrorDialog(e);
-			}
-
-			/* Add the successfully loaded model to the model registry. */
-			IModelRegistry modelRegistry;
-
-			modelRegistry = ModelBusPlugin.getModelRegistry();
-
-			/* Try to add the model to the registry. */
-			try {
-				modelRegistry.addModel(model);
-				modelRegistry.setActiveModel(model);
-			}
-
-			catch (Exception e) {
-				/* Log and display the exception. */
-				this.openErrorDialog(e);
-			}
-
-			/* Activate the Model Browser View. */
-			try {
-				this.workbench.getActiveWorkbenchWindow().getActivePage()
-						.showView(ModelsView.ID);
-			}
-
-			catch (PartInitException e) {
-
-				LOGGER.error("Failed to activate the Model Browser view.", e); //$NON-NLS-1$
-				result = false;
-			}
+			LoadModelJob loadModelJob;
+			loadModelJob = new LoadModelJob(metamodel, this.mainPage
+					.getModelFile());
+			loadModelJob.schedule();
 
 			result = true;
 		}
 
 		return result;
-	}
-
-	/**
-	 * <p>
-	 * A helper method which opens an error dialog for a given {@link Exception}
-	 * and logs the {@link Exception} as well.
-	 * </p>
-	 */
-	private void openErrorDialog(Exception e) {
-
-		String dialogTitle;
-		String dialogMsg;
-
-		dialogTitle = ModelBusUIMessages.LoadModelWizard_ErrorMessageDialogTitle;
-		dialogMsg = ModelBusUIMessages.LoadModelWizard_ErrorOccured;
-
-		if (e.getMessage() != null) {
-			dialogMsg += ": \n" + e.getMessage();
-		}
-
-		else {
-			dialogMsg += ModelBusUIMessages.LoadModelWizard_CheckLog;
-		}
-
-		MessageDialog.openError(this.getShell(), dialogTitle, dialogMsg);
-
-		LOGGER.error(dialogMsg, e);
-
-		/*
-		 * We need to re-throw a runtime exception or the wizard will close
-		 * afterwards.
-		 */
-		throw new IllegalStateException(dialogMsg, e);
 	}
 }
