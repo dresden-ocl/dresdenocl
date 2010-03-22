@@ -24,7 +24,6 @@ import java.util.Set;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.IAction;
 
-import tudresden.ocl20.pivot.interpreter.IInterpretationResult;
 import tudresden.ocl20.pivot.interpreter.IOclInterpreter;
 import tudresden.ocl20.pivot.interpreter.ui.internal.msg.OclInterpreterUIMessages;
 import tudresden.ocl20.pivot.interpreter.ui.internal.views.AddVariableDialog;
@@ -66,11 +65,11 @@ public class InterpreterViewMenuAction extends Action implements IAction {
 	 * </p>
 	 * 
 	 * @param actionType
-	 *          The {@link InterpreterViewMenuActionType} which shall be performed
-	 *          by this {@link InterpreterViewMenuAction}.
+	 *            The {@link InterpreterViewMenuActionType} which shall be
+	 *            performed by this {@link InterpreterViewMenuAction}.
 	 * @param interpreterView
-	 *          The {@link InterpreterView} of this
-	 *          {@link InterpreterViewMenuAction}.
+	 *            The {@link InterpreterView} of this
+	 *            {@link InterpreterViewMenuAction}.
 	 */
 	public InterpreterViewMenuAction(InterpreterViewMenuActionType actionType,
 			InterpreterView interpreterView) {
@@ -85,6 +84,7 @@ public class InterpreterViewMenuAction extends Action implements IAction {
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see org.eclipse.jface.action.Action#run()
 	 */
 	public void run() {
@@ -99,16 +99,16 @@ public class InterpreterViewMenuAction extends Action implements IAction {
 			}
 			// no else.
 
-			if (this.myInterpreterView.getCurrentlySelectedModelInstanceElements()
-					.size() == 0) {
+			if (this.myInterpreterView
+					.getCurrentlySelectedModelInstanceElements().size() == 0) {
 				this.myInterpreterView
 						.showMessage(OclInterpreterUIMessages.InterpreterView_ActionError_NoModelObectSelected);
 			}
 			// no else.
 
 			this.interpretSelection(this.myInterpreterView
-					.getCurrentlySelectedModelInstanceElements(), this.myInterpreterView
-					.getCurrentlySelectedConstraints());
+					.getCurrentlySelectedModelInstanceElements(),
+					this.myInterpreterView.getCurrentlySelectedConstraints());
 			break;
 		}
 
@@ -138,8 +138,8 @@ public class InterpreterViewMenuAction extends Action implements IAction {
 			}
 			// no else.
 
-			if (this.myInterpreterView.getCurrentlySelectedModelInstanceElements()
-					.size() == 0) {
+			if (this.myInterpreterView
+					.getCurrentlySelectedModelInstanceElements().size() == 0) {
 				this.myInterpreterView
 						.showMessage(OclInterpreterUIMessages.InterpreterView_ActionError_NoModelObectSelected);
 			}
@@ -174,6 +174,7 @@ public class InterpreterViewMenuAction extends Action implements IAction {
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	public String toString() {
@@ -183,23 +184,19 @@ public class InterpreterViewMenuAction extends Action implements IAction {
 		switch (this.myType) {
 
 		case INTERPRET_SELECTED_CONSTRAINTS_FOR_SELECTED_MODEL_OBJECTS:
-			result =
-					OclInterpreterUIMessages.InterpretAction_InterpretSelectedConstraintsForSelectedModelObjects;
+			result = OclInterpreterUIMessages.InterpretAction_InterpretSelectedConstraintsForSelectedModelObjects;
 			break;
 
 		case INTERPRET_ALL_CONSTRAINTS_FOR_ALL_MODEL_OBJECTS:
-			result =
-					OclInterpreterUIMessages.InterpretAction_InterpretAllConstraintsForAllModelObjects;
+			result = OclInterpreterUIMessages.InterpretAction_InterpretAllConstraintsForAllModelObjects;
 			break;
 
 		case CLEAR_SELECTED_CONSTRAINTS_FOR_SELECTED_MODEL_OBJECTS:
-			result =
-					OclInterpreterUIMessages.InterpretAction_ClearSelectedConstraintsForSelectedModelObjects;
+			result = OclInterpreterUIMessages.InterpretAction_ClearSelectedConstraintsForSelectedModelObjects;
 			break;
 
 		case CLEAR_ALL_CONSTRAINTS_FOR_ALL_MODEL_OBJECTS:
-			result =
-					OclInterpreterUIMessages.InterpretAction_ClearAllConstraintsForAllModelObjects;
+			result = OclInterpreterUIMessages.InterpretAction_ClearAllConstraintsForAllModelObjects;
 			break;
 
 		case REMOVE_SELECTED_RESULTS:
@@ -207,8 +204,7 @@ public class InterpreterViewMenuAction extends Action implements IAction {
 			break;
 
 		case PREPARE_SELECTED_CONSTRAINTS:
-			result =
-					OclInterpreterUIMessages.InterpretAction_PrepareSelectedConstraints;
+			result = OclInterpreterUIMessages.InterpretAction_PrepareSelectedConstraints;
 			break;
 
 		case PREPARE_ALL_CONSTRAINTS:
@@ -228,7 +224,8 @@ public class InterpreterViewMenuAction extends Action implements IAction {
 	 * Returns all {@link Constraint}s contained in a given {@link IModel}.
 	 * 
 	 * @param aModel
-	 *          The {@link IModel} which {@link Constraint}s shall be returned.
+	 *            The {@link IModel} which {@link Constraint}s shall be
+	 *            returned.
 	 * @return A {@link Set} of {@link Constraint}s.
 	 */
 	private Set<Constraint> getAllConstraintsForModel(IModel aModel) {
@@ -239,7 +236,8 @@ public class InterpreterViewMenuAction extends Action implements IAction {
 
 		try {
 			rootNamespace = aModel.getRootNamespace();
-			result = new HashSet<Constraint>(rootNamespace.getOwnedAndNestedRules());
+			result = new HashSet<Constraint>(rootNamespace
+					.getOwnedAndNestedRules());
 		}
 
 		catch (ModelAccessException e) {
@@ -256,128 +254,20 @@ public class InterpreterViewMenuAction extends Action implements IAction {
 	 * </p>
 	 * 
 	 * @param modelObjects
-	 *          The {@link IModelInstanceElement}s that shall be interpreted or
-	 *          <code>null</code> if all {@link IModelInstanceElement}s shall be
-	 *          used.
+	 *            The {@link IModelInstanceElement}s that shall be interpreted
+	 *            or <code>null</code> if all {@link IModelInstanceElement}s
+	 *            shall be used.
 	 * @param constraints
-	 *          The {@link Constraint}s that shall be interpreted or
-	 *          <code>null</code> if all {@link Constraint}s shall be used.
+	 *            The {@link Constraint}s that shall be interpreted or
+	 *            <code>null</code> if all {@link Constraint}s shall be used.
 	 */
 	private void interpretSelection(Set<IModelInstanceElement> modelObjects,
 			Set<Constraint> constraints) {
 
-		IModel activeModel;
-		IModelInstance activeModelInstance;
-
-		activeModel = ModelBusPlugin.getModelRegistry().getActiveModel();
-		activeModelInstance = null;
-
-		if (activeModel != null) {
-			activeModelInstance =
-					ModelBusPlugin.getModelInstanceRegistry().getActiveModelInstance(
-							activeModel);
-
-			if (activeModelInstance != null) {
-
-				IOclInterpreter interpreter;
-
-				Set<IModelInstanceElement> usedModelObjects;
-				Set<Constraint> usedConstraints;
-
-				interpreter =
-						this.myInterpreterView
-								.getInterpreterForInstance(activeModelInstance);
-
-				usedModelObjects = null;
-
-				if (modelObjects != null) {
-					usedModelObjects = modelObjects;
-				}
-
-				else {
-					usedModelObjects =
-							new HashSet<IModelInstanceElement>(activeModelInstance
-									.getAllModelInstanceObjects());
-				}
-
-				usedConstraints = null;
-
-				if (constraints != null) {
-					usedConstraints = constraints;
-				}
-				else {
-					usedConstraints = this.getAllConstraintsForModel(activeModel);
-				}
-
-				/*
-				 * Iterate through the model objects and constraints and compute their
-				 * results.
-				 */
-				for (IModelInstanceElement aModelObject : usedModelObjects) {
-					for (Constraint aConstraint : usedConstraints) {
-
-						NamedElement constrainedElem;
-
-						/* Get the constrained element. */
-						constrainedElem =
-								(NamedElement) aConstraint.getConstrainedElement().get(0);
-
-						/* Check if the constrained element is a type. */
-						if (constrainedElem instanceof Type) {
-
-							Type constrainedType;
-
-							constrainedType = (Type) constrainedElem;
-
-							/*
-							 * Check if the model object is an instance of the constrained
-							 * type.
-							 */
-							if (aModelObject.isKindOf(constrainedType)) {
-								IInterpretationResult interpretationResult =
-										interpreter.interpretConstraint(aConstraint, aModelObject);
-								this.myInterpreterView
-										.addInterpretationResult(interpretationResult);
-							}
-							// no else.
-						}
-
-						/*
-						 * Else check if the constrained element is a operation.
-						 */
-						else if (constrainedElem instanceof Operation) {
-
-							Type operationsType;
-
-							operationsType = ((Operation) constrainedElem).getOwningType();
-
-							/*
-							 * Check if the model object is an instance of the constrained
-							 * operation's type.
-							 */
-							if (aModelObject.isKindOf(operationsType)) {
-								this.myInterpreterView.addInterpretationResult(interpreter
-										.interpretConstraint(aConstraint, aModelObject));
-							}
-							// no else.
-						}
-					}
-					// end for.
-				}
-				// end for.
-			}
-
-			else {
-				this.myInterpreterView
-						.showMessage(OclInterpreterUIMessages.InterpreterView_Error_NoActiveModelInstance
-								+ activeModel);
-			}
-		}
-
-		else {
-			this.myInterpreterView
-					.showMessage(OclInterpreterUIMessages.InterpreterView_Error_NoActiveModel);
-		}
+		Ocl2InterpretationJob interpretationJob;
+		interpretationJob = new Ocl2InterpretationJob(modelObjects,
+				constraints, this.myInterpreterView);
+		interpretationJob.schedule();
 	}
 
 	/**
@@ -389,8 +279,8 @@ public class InterpreterViewMenuAction extends Action implements IAction {
 	 * </p>
 	 * 
 	 * @param constraints
-	 *          The {@link Constraint}s that shall be prepared or
-	 *          <code>null</code> if all {@link Constraint}s shall be used.
+	 *            The {@link Constraint}s that shall be prepared or
+	 *            <code>null</code> if all {@link Constraint}s shall be used.
 	 */
 	private void prepareSelection(Set<Constraint> constraints) {
 
@@ -401,16 +291,17 @@ public class InterpreterViewMenuAction extends Action implements IAction {
 		activeModelInstance = null;
 
 		/*
-		 * If the active model has been set, try to get the active model instance.
+		 * If the active model has been set, try to get the active model
+		 * instance.
 		 */
 		if (activeModel != null) {
 
-			activeModelInstance =
-					ModelBusPlugin.getModelInstanceRegistry().getActiveModelInstance(
-							activeModel);
+			activeModelInstance = ModelBusPlugin.getModelInstanceRegistry()
+					.getActiveModelInstance(activeModel);
 
 			/*
-			 * If the active model instance has been set, continue with preparation.
+			 * If the active model instance has been set, continue with
+			 * preparation.
 			 */
 			if (activeModelInstance != null) {
 
@@ -419,9 +310,8 @@ public class InterpreterViewMenuAction extends Action implements IAction {
 				Set<Constraint> usedConstraints;
 				Set<IModelInstanceElement> usedModelObjects;
 
-				interpreter =
-						this.myInterpreterView
-								.getInterpreterForInstance(activeModelInstance);
+				interpreter = this.myInterpreterView
+						.getInterpreterForInstance(activeModelInstance);
 
 				usedConstraints = null;
 
@@ -435,9 +325,8 @@ public class InterpreterViewMenuAction extends Action implements IAction {
 					usedConstraints = getAllConstraintsForModel(activeModel);
 				}
 
-				usedModelObjects =
-						new HashSet<IModelInstanceElement>(activeModelInstance
-								.getAllModelInstanceObjects());
+				usedModelObjects = new HashSet<IModelInstanceElement>(
+						activeModelInstance.getAllModelInstanceObjects());
 
 				/* Iterate through the constraints and prepare them. */
 				for (Constraint aConstraint : usedConstraints) {
@@ -447,8 +336,8 @@ public class InterpreterViewMenuAction extends Action implements IAction {
 					aKind = aConstraint.getKind();
 
 					/*
-					 * Check if the constraint is a definition, a body definition, an
-					 * initial or a derived value.
+					 * Check if the constraint is a definition, a body
+					 * definition, an initial or a derived value.
 					 */
 					if (aKind.equals(ConstraintKind.DEFINITION)
 							|| aKind.equals(ConstraintKind.BODY)
@@ -467,8 +356,8 @@ public class InterpreterViewMenuAction extends Action implements IAction {
 							NamedElement constrainedElement;
 							Type type;
 
-							constrainedElement =
-									(NamedElement) aConstraint.getConstrainedElement().get(0);
+							constrainedElement = (NamedElement) aConstraint
+									.getConstrainedElement().get(0);
 
 							/* Get the owner of the operation. */
 							if (constrainedElement instanceof Operation) {
@@ -480,10 +369,12 @@ public class InterpreterViewMenuAction extends Action implements IAction {
 							}
 
 							/*
-							 * If the model object is an instance of the constrained element.
+							 * If the model object is an instance of the
+							 * constrained element.
 							 */
 							if (aModelObject.isKindOf(type)) {
-								interpreter.prepareConstraint(aConstraint, aModelObject);
+								interpreter.prepareConstraint(aConstraint,
+										aModelObject);
 							}
 							// no else.
 						}

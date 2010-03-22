@@ -34,6 +34,8 @@ import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
+import tudresden.ocl20.pivot.interpreter.ui.internal.views.InterpreterView;
+
 /**
  * <p>
  * The activator class controls the plug-in life cycle.
@@ -43,6 +45,9 @@ public class InterpreterUIPlugin extends AbstractUIPlugin {
 
 	/** The plug-in ID. */
 	public static final String PLUGIN_ID = "tudresden.ocl20.pivot.interpreter.ui";
+
+	/** The ID of the {@link InterpreterView}. */
+	public static final String INTERPRETER_VIEW_ID = "tudresden.ocl20.pivot.interpreter.ui.internal.views.InterpreterView";
 
 	/** The shared instance of this plug-in. */
 	private static InterpreterUIPlugin plugin;
