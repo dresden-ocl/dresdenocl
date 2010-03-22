@@ -103,7 +103,7 @@ public class TransformCodeWizard extends Wizard implements INewWizard {
 	 */
 	public void init(IWorkbench workbench, IStructuredSelection selection) {
 
-		/* Eventually log the entry into this method. */
+		/* Probably log the entry into this method. */
 		if (logger.isDebugEnabled()) {
 			logger
 					.debug("Enter method init(IWorkbench, IStructuredSelection).");
@@ -147,7 +147,7 @@ public class TransformCodeWizard extends Wizard implements INewWizard {
 		/* This page must observe the Constraint selection. */
 		this.selectConstraintsPage.setObserver(this.specificSettingsPage);
 
-		/* Eventually log the exit from this method. */
+		/* Probably log the exit from this method. */
 		if (logger.isDebugEnabled()) {
 			logger.debug("Exit method init(IWorkbench, IStructuredSelection).");
 		}
@@ -161,7 +161,7 @@ public class TransformCodeWizard extends Wizard implements INewWizard {
 	 */
 	public boolean performFinish() {
 
-		/* Eventually log the entry into this method. */
+		/* Probably log the entry into this method. */
 		if (logger.isDebugEnabled()) {
 			logger.debug("Enter method performFinish().");
 		}
@@ -169,15 +169,11 @@ public class TransformCodeWizard extends Wizard implements INewWizard {
 
 		boolean result;
 
-		List<Constraint> constraints;
-
 		String outputDirectory;
 		String constraintDirectory;
 
-		/* By default we assume something went wrong. */
-		result = false;
-
 		/* Get the selected constraints. */
+		List<Constraint> constraints;
 		constraints = this.selectConstraintsPage.getSelectedConstraints();
 
 		/* Get the output location. */
@@ -185,39 +181,21 @@ public class TransformCodeWizard extends Wizard implements INewWizard {
 		constraintDirectory = this.selectDirectoryPage.getConstraintDirectory();
 
 		/* Try to initialize a code generator. */
-		try {
-			myCodeGenerator.getSettings().setSourceDirectory(outputDirectory);
+		myCodeGenerator.getSettings().setSourceDirectory(outputDirectory);
 
-			myCodeGenerator.getSettings().setConstraintDirectory(
-					constraintDirectory);
+		myCodeGenerator.getSettings().setConstraintDirectory(
+				constraintDirectory);
 
-			myCodeGenerator.getSettings().setSaveCode(true);
+		myCodeGenerator.getSettings().setSaveCode(true);
 
-			myCodeGenerator.transformInstrumentationCode(constraints);
+		/* Do the transformation. */
+		Ocl22JavaJob transformationJob;
+		transformationJob = new Ocl22JavaJob(constraints, this.myCodeGenerator);
 
-			result = true;
-		}
+		transformationJob.schedule();
+		result = true;
 
-		catch (Ocl22CodeException e) {
-			MessageDialog
-					.openError(
-							getShell(),
-							Ocl2JavaUIMessages.TransformCodeWizard_ErrorMessageDialogTitle,
-							Ocl2JavaUIMessages.TransformCodeWizard_CodeGenErrorOccured
-									+ (e.getMessage() != null ? e.getMessage()
-											: Ocl2JavaUIMessages.TransformCodeWizard_CheckLog));
-
-			String errorMsg = "An error occured during code generation.";
-			logger.error(errorMsg, e);
-
-			/*
-			 * We need to re-throw a runtime exception or the wizard will close
-			 * afterwards.
-			 */
-			throw new IllegalStateException(errorMsg, e);
-		}
-
-		/* Eventually log the exit from this method. */
+		/* Probably log the exit from this method. */
 		if (logger.isDebugEnabled()) {
 			logger
 					.debug("Exit method performFinish() - result=" + result
