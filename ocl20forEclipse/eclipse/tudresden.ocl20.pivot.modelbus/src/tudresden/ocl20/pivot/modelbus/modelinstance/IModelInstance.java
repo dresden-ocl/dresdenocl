@@ -69,26 +69,26 @@ public interface IModelInstance {
 	 * <p>
 	 * <strong>Please be aware, that only {@link Object}s that are adapted to
 	 * {@link IModelInstanceObject}s are added!</strong> Neither
-	 * {@link IModelInstancePrimitiveType}s nor {@link IModelInstanceCollection}s
-	 * nor {@link IModelInstanceEnumerationLiteral} are added to the
+	 * {@link IModelInstancePrimitiveType}s nor {@link IModelInstanceCollection}
+	 * s nor {@link IModelInstanceEnumerationLiteral} are added to the
 	 * {@link IModelInstance}'s element list. Although they are adapted as well.
 	 * </p>
 	 * 
 	 * @param object
-	 *          the object to add to the {@link IModelInstance}
-	 * @return The adapted object or <code>null</code> if the given {@link Object}
-	 *         could not be adapted.
+	 *            the object to add to the {@link IModelInstance}
+	 * @return The adapted object or <code>null</code> if the given
+	 *         {@link Object} could not be adapted.
 	 * @throws TypeNotFoundInModelException
-	 *           Thrown if a given Object, cannot be adapted to a {@link Type} in
-	 *           the {@link IModel}.
+	 *             Thrown if a given Object, cannot be adapted to a {@link Type}
+	 *             in the {@link IModel}.
 	 */
 	IModelInstanceElement addModelInstanceElement(Object object)
 			throws TypeNotFoundInModelException;
 
 	/**
 	 * <p>
-	 * Returns a {@link Set} of all {@link Type}s that are at least implemented by
-	 * one {@link IModelInstanceElement} of this {@link IModelInstance}.
+	 * Returns a {@link Set} of all {@link Type}s that are at least implemented
+	 * by one {@link IModelInstanceElement} of this {@link IModelInstance}.
 	 * </p>
 	 * 
 	 * <p>
@@ -100,22 +100,25 @@ public interface IModelInstance {
 	 * the result.
 	 * </p>
 	 * 
-	 * @return A {@link Set} of all {@link Type}s that are at least implemented by
-	 *         one {@link IModelInstanceElement} of this {@link IModelInstance}.
+	 * @return A {@link Set} of all {@link Type}s that are at least implemented
+	 *         by one {@link IModelInstanceElement} of this
+	 *         {@link IModelInstance}.
 	 */
 	Set<Type> getAllImplementedTypes();
 
 	/**
 	 * <p>
-	 * Returns all {@link IModelInstanceObject}s of the given {@link Type}. If the
-	 * given {@link Type} cannot be found in the {@link IModel} of this
-	 * {@link IModelInstance} or not {@link IModelInstanceObject} implementing the
-	 * {@link Type} can be found, an empty {@link Set} will be returned.
+	 * Returns all {@link IModelInstanceObject}s of the given {@link Type} and
+	 * the {@link IModelInstanceObject}s of sub {@link Type}s of this
+	 * {@link Type}. If the given {@link Type} cannot be found in the
+	 * {@link IModel} of this {@link IModelInstance} or not
+	 * {@link IModelInstanceObject} implementing the {@link Type} can be found,
+	 * an empty {@link Set} will be returned.
 	 * </p>
 	 * 
 	 * <p>
-	 * <strong>Note: This operation can be really expensive!</strong> Try avoiding
-	 * it at any rate.
+	 * <strong>Note: This operation can be really expensive!</strong> Try
+	 * avoiding it at any rate.
 	 * </p>
 	 * 
 	 * <p>
@@ -126,7 +129,7 @@ public interface IModelInstance {
 	 * </p>
 	 * 
 	 * @param type
-	 *          the {@link Type} of which all instances should be returned
+	 *            the {@link Type} of which all instances should be returned
 	 * @return All adapted instances of the given {@link Type}.
 	 */
 	Set<IModelInstanceObject> getAllInstances(Type type);
@@ -139,8 +142,9 @@ public interface IModelInstance {
 	 * <p>
 	 * <strong>Please be aware, that only {@link Object}s that are adapted to
 	 * {@link IModelInstanceObject}s are returned!</strong> Neither
-	 * {@link IModelInstancePrimitiveType}s nor {@link IModelInstanceCollection}s
-	 * nor {@link IModelInstanceEnumerationLiteral} will be part of the result.
+	 * {@link IModelInstancePrimitiveType}s nor {@link IModelInstanceCollection}
+	 * s nor {@link IModelInstanceEnumerationLiteral} will be part of the
+	 * result.
 	 * </p>
 	 * 
 	 * @return the {@link IModelInstanceElement}s for this model instance.
@@ -168,9 +172,9 @@ public interface IModelInstance {
 	/**
 	 * <p>
 	 * Returns the {@link IModelInstanceFactory} that is is used to adapt
-	 * {@link IModelInstanceElement}s of this {@link IModelInstance}. This method
-	 * is required to adapt collection content lazily during the work of the
-	 * standard library.
+	 * {@link IModelInstanceElement}s of this {@link IModelInstance}. This
+	 * method is required to adapt collection content lazily during the work of
+	 * the standard library.
 	 * </p>
 	 * 
 	 * @return The {@link IModelInstanceFactory} that is is used to adapt
@@ -184,21 +188,21 @@ public interface IModelInstance {
 	 * </p>
 	 * 
 	 * @param sourceType
-	 *          The {@link Type} to which the static {@link Property} belongs.
+	 *            The {@link Type} to which the static {@link Property} belongs.
 	 * @param property
-	 *          the {@link Property} is used to determine the name of the
-	 *          property, the {@link Type} providing the static property, and the
-	 *          {@link Type} of the fetched property. If
-	 *          {@link Property#isMultiple()} is <code>true</code> create an
-	 *          {@link IModelInstanceCollection} based on
-	 *          {@link Property#isOrdered()} and {@link Property#isUnique()}.
+	 *            the {@link Property} is used to determine the name of the
+	 *            property, the {@link Type} providing the static property, and
+	 *            the {@link Type} of the fetched property. If
+	 *            {@link Property#isMultiple()} is <code>true</code> create an
+	 *            {@link IModelInstanceCollection} based on
+	 *            {@link Property#isOrdered()} and {@link Property#isUnique()}.
 	 * @return the adapted property value
 	 * @throws PropertyAccessException
-	 *           Thrown, if an {@link Exception} occurs during the
-	 *           {@link Property} access in the adapted programming language.
+	 *             Thrown, if an {@link Exception} occurs during the
+	 *             {@link Property} access in the adapted programming language.
 	 * @throws PropertyNotFoundException
-	 *           Thrown if the given {@link Property} cannot be found as a static
-	 *           {@link Property}.
+	 *             Thrown if the given {@link Property} cannot be found as a
+	 *             static {@link Property}.
 	 */
 	IModelInstanceElement getStaticProperty(Property property)
 			throws PropertyAccessException, PropertyNotFoundException;
@@ -209,21 +213,23 @@ public interface IModelInstance {
 	 * </p>
 	 * 
 	 * @param operation
-	 *          the {@link Operation} is used to determine the name of the static
-	 *          operation, the {@link Type} on which the operation shall be
-	 *          invoked, and the {@link Type return type} of the invoked
-	 *          operation. If {@link Operation#isMultiple()} is <code>true</code>
-	 *          create an {@link IModelInstanceCollection} based on
-	 *          {@link Operation#isOrdered()} and {@link Operation#isUnique()}.
+	 *            the {@link Operation} is used to determine the name of the
+	 *            static operation, the {@link Type} on which the operation
+	 *            shall be invoked, and the {@link Type return type} of the
+	 *            invoked operation. If {@link Operation#isMultiple()} is
+	 *            <code>true</code> create an {@link IModelInstanceCollection}
+	 *            based on {@link Operation#isOrdered()} and
+	 *            {@link Operation#isUnique()}.
 	 * @param args
-	 *          the arguments of the static operation
+	 *            the arguments of the static operation
 	 * @return the adapted return value of the static operation invocation.
 	 * @throws OperationAccessException
-	 *           Thrown, if an {@link Exception} occurs during the
-	 *           {@link Operation} invocation in the adapted programming language.
+	 *             Thrown, if an {@link Exception} occurs during the
+	 *             {@link Operation} invocation in the adapted programming
+	 *             language.
 	 * @throws OperationNotFoundException
-	 *           Thrown if the given {@link Operation} cannot be found as a static
-	 *           {@link Operation}.
+	 *             Thrown if the given {@link Operation} cannot be found as a
+	 *             static {@link Operation}.
 	 */
 	IModelInstanceElement invokeStaticOperation(Operation operation,
 			List<IModelInstanceElement> args) throws OperationAccessException,
@@ -231,15 +237,15 @@ public interface IModelInstance {
 
 	/**
 	 * <p>
-	 * Checks whether or not this {@link IModelInstance} is an instance of a given
-	 * {@link IModel}.
+	 * Checks whether or not this {@link IModelInstance} is an instance of a
+	 * given {@link IModel}.
 	 * </p>
 	 * 
 	 * @param aModel
-	 *          The {@link IModel} to which the instance of relationship shall be
-	 *          checked.
-	 * @return <code>True</code>, if this {@link IModelInstance} is an instance of
-	 *         the given {@link IModel}. Else <code>false</code>.
+	 *            The {@link IModel} to which the instance of relationship shall
+	 *            be checked.
+	 * @return <code>True</code>, if this {@link IModelInstance} is an instance
+	 *         of the given {@link IModel}. Else <code>false</code>.
 	 */
 	boolean isInstanceOf(IModel aModel);
 }
