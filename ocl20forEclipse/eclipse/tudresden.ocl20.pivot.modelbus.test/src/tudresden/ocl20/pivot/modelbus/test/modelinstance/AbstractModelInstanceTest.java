@@ -33,6 +33,7 @@ import org.junit.Test;
 
 import package1.package2.Type1;
 import package1.package2.Type2;
+import package1.package2.Type3;
 import tudresden.ocl20.pivot.modelbus.IModelBusConstants;
 import tudresden.ocl20.pivot.modelbus.ModelAccessException;
 import tudresden.ocl20.pivot.modelbus.model.IModel;
@@ -65,6 +66,9 @@ public class AbstractModelInstanceTest {
 	private Type package2Type2;
 
 	/** A {@link Type} used during testing. */
+	private Type package2Type3;
+
+	/** A {@link Type} used during testing. */
 	private Type stringType;
 
 	/**
@@ -77,8 +81,8 @@ public class AbstractModelInstanceTest {
 	@Before
 	public void setUp() throws ModelAccessException {
 
-		this.model =
-				ModelBusTestUtility.getUML2Model("resources/models/model03.uml");
+		this.model = ModelBusTestUtility
+				.getUML2Model("resources/models/model03.uml");
 
 		List<String> pathName;
 		pathName = new ArrayList<String>();
@@ -106,6 +110,14 @@ public class AbstractModelInstanceTest {
 		package1Type2 = this.model.findType(pathName);
 
 		pathName.clear();
+		pathName.add(IModelBusConstants.ROOT_PACKAGE_NAME);
+		pathName.add("package1");
+		pathName.add("package2");
+		pathName.add("Type3");
+
+		package2Type3 = this.model.findType(pathName);
+
+		pathName.clear();
 		pathName.add("String");
 
 		stringType = this.model.findType(pathName);
@@ -122,8 +134,8 @@ public class AbstractModelInstanceTest {
 	public void testGetAllImplementedTypes01() {
 
 		IModelInstance modelInstance;
-		modelInstance =
-				ModelBusTestUtility.createEmptyJavaModelInstance(this.model);
+		modelInstance = ModelBusTestUtility
+				.createEmptyJavaModelInstance(this.model);
 
 		Set<Type> types;
 		types = modelInstance.getAllImplementedTypes();
@@ -144,8 +156,8 @@ public class AbstractModelInstanceTest {
 			throws TypeNotFoundInModelException {
 
 		IModelInstance modelInstance;
-		modelInstance =
-				ModelBusTestUtility.createEmptyJavaModelInstance(this.model);
+		modelInstance = ModelBusTestUtility
+				.createEmptyJavaModelInstance(this.model);
 
 		modelInstance.addModelInstanceElement(new Type1());
 		modelInstance.addModelInstanceElement(new Type2());
@@ -173,8 +185,8 @@ public class AbstractModelInstanceTest {
 	public void testGetAllInstances01() {
 
 		IModelInstance modelInstance;
-		modelInstance =
-				ModelBusTestUtility.createEmptyJavaModelInstance(this.model);
+		modelInstance = ModelBusTestUtility
+				.createEmptyJavaModelInstance(this.model);
 
 		/* Should throw an exception. */
 		modelInstance.getAllInstances(null);
@@ -191,8 +203,8 @@ public class AbstractModelInstanceTest {
 	public void testGetAllInstances02() {
 
 		IModelInstance modelInstance;
-		modelInstance =
-				ModelBusTestUtility.createEmptyJavaModelInstance(this.model);
+		modelInstance = ModelBusTestUtility
+				.createEmptyJavaModelInstance(this.model);
 
 		Set<IModelInstanceObject> instances;
 		instances = modelInstance.getAllInstances(package2Type1);
@@ -214,8 +226,8 @@ public class AbstractModelInstanceTest {
 	public void testGetAllInstances03() throws TypeNotFoundInModelException {
 
 		IModelInstance modelInstance;
-		modelInstance =
-				ModelBusTestUtility.createEmptyJavaModelInstance(this.model);
+		modelInstance = ModelBusTestUtility
+				.createEmptyJavaModelInstance(this.model);
 
 		Type1 type1_01;
 		type1_01 = new Type1();
@@ -247,14 +259,54 @@ public class AbstractModelInstanceTest {
 	public void testGetAllInstances04() throws TypeNotFoundInModelException {
 
 		IModelInstance modelInstance;
-		modelInstance =
-				ModelBusTestUtility.createEmptyJavaModelInstance(this.model);
+		modelInstance = ModelBusTestUtility
+				.createEmptyJavaModelInstance(this.model);
 
 		Set<IModelInstanceObject> instances;
 		instances = modelInstance.getAllInstances(this.stringType);
 
 		assertNotNull(instances);
 		assertEquals(0, instances.size());
+	}
+
+	/**
+	 * <p>
+	 * Tests the method
+	 * {@link IModelInstance#getAllInstances(tudresden.ocl20.pivot.pivotmodel.Type)}
+	 * with a existing {@link Type} as parameter.
+	 * </p>
+	 * 
+	 * @throws TypeNotFoundInModelException
+	 */
+	@Test
+	public void testGetAllInstances05() throws TypeNotFoundInModelException {
+
+		IModelInstance modelInstance;
+		modelInstance = ModelBusTestUtility
+				.createEmptyJavaModelInstance(this.model);
+
+		Type1 type1_01;
+		type1_01 = new Type1();
+
+		modelInstance.addModelInstanceElement(type1_01);
+
+		Type3 type3_01;
+		type3_01 = new Type3();
+
+		modelInstance.addModelInstanceElement(type3_01);
+
+		/* Should return both instances. */
+		Set<IModelInstanceObject> instances;
+		instances = modelInstance.getAllInstances(package2Type1);
+
+		assertNotNull(instances);
+		assertEquals(2, instances.size());
+
+		/* Should return only the Type3 instances. */
+		instances = modelInstance.getAllInstances(package2Type3);
+
+		assertNotNull(instances);
+		assertEquals(1, instances.size());
 	}
 
 	/**
@@ -268,8 +320,8 @@ public class AbstractModelInstanceTest {
 	public void testGetAllModelInstanceObjects01() {
 
 		IModelInstance modelInstance;
-		modelInstance =
-				ModelBusTestUtility.createEmptyJavaModelInstance(this.model);
+		modelInstance = ModelBusTestUtility
+				.createEmptyJavaModelInstance(this.model);
 
 		List<IModelInstanceObject> objects;
 		objects = modelInstance.getAllModelInstanceObjects();
@@ -290,8 +342,8 @@ public class AbstractModelInstanceTest {
 			throws TypeNotFoundInModelException {
 
 		IModelInstance modelInstance;
-		modelInstance =
-				ModelBusTestUtility.createEmptyJavaModelInstance(this.model);
+		modelInstance = ModelBusTestUtility
+				.createEmptyJavaModelInstance(this.model);
 
 		modelInstance.addModelInstanceElement(new Type1());
 		modelInstance.addModelInstanceElement(new Type2());
@@ -316,8 +368,8 @@ public class AbstractModelInstanceTest {
 	public void testIsInstanceOf01() throws ModelAccessException {
 
 		IModelInstance modelInstance;
-		modelInstance =
-				ModelBusTestUtility.createEmptyJavaModelInstance(this.model);
+		modelInstance = ModelBusTestUtility
+				.createEmptyJavaModelInstance(this.model);
 
 		assertTrue(modelInstance.isInstanceOf(this.model));
 
