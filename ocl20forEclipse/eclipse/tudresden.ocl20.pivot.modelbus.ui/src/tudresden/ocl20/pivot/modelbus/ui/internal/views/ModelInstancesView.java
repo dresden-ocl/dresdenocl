@@ -214,6 +214,9 @@ public class ModelInstancesView extends ViewPart implements
 
 		this.myViewer.setInput(this.getViewSite());
 
+		/* Automatically expand top-level elements. */
+		this.myViewer.setAutoExpandLevel(2);
+
 		this.initMenu();
 
 		this.getViewSite().setSelectionProvider(this.myViewer);
@@ -360,6 +363,7 @@ public class ModelInstancesView extends ViewPart implements
 				// end while.
 
 				this.myViewer.addFilter(this.myModelObjectFilter);
+
 				this.myViewer.refresh();
 			}
 			// no else.
