@@ -23,6 +23,7 @@ import org.eclipse.uml2.uml.Interface;
 import tudresden.ocl20.pivot.metamodels.uml2.UML2MetamodelPlugin;
 import tudresden.ocl20.pivot.pivotmodel.Enumeration;
 import tudresden.ocl20.pivot.pivotmodel.EnumerationLiteral;
+import tudresden.ocl20.pivot.pivotmodel.NDirectionalProperty;
 import tudresden.ocl20.pivot.pivotmodel.NamedElement;
 import tudresden.ocl20.pivot.pivotmodel.Namespace;
 import tudresden.ocl20.pivot.pivotmodel.Operation;
@@ -306,6 +307,40 @@ public class UML2AdapterFactory {
 
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("createProperty() - exit - return value=" + property); //$NON-NLS-1$
+		}
+
+		return property;
+	}
+	
+	/**
+	 * <p>
+	 * Creates a {@link BiDirectionalProperty} adapter for a
+	 * {@link org.eclipse.uml2.uml.Property}.
+	 * </p>
+	 * 
+	 * @generated NOT
+	 */
+	public NDirectionalProperty createNDirectionalProperty(org.eclipse.uml2.uml.Property dslProperty) {
+
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("createBiDirectionalProperty(dslProperty=" + dslProperty + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
+		}
+
+		if (dslProperty == null) {
+			if (LOGGER.isDebugEnabled())
+				LOGGER.debug("createBiDirectionalProperty() - exit: dslProperty is null");
+			return null;
+		}
+
+		NDirectionalProperty property = (NDirectionalProperty) adapters.get(dslProperty);
+
+		if (property == null) {
+			property = new UML2NDirectionalProperty(dslProperty);
+			adapters.put(dslProperty, property);
+		}
+
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("createBiDirectionalProperty() - exit - return value=" + property); //$NON-NLS-1$
 		}
 
 		return property;

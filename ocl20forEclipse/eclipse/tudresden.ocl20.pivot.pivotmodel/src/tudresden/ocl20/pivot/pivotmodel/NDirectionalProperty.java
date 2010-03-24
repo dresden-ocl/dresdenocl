@@ -30,89 +30,104 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.pivotmodel.provider;
+package tudresden.ocl20.pivot.pivotmodel;
 
-import org.eclipse.emf.common.EMFPlugin;
-import org.eclipse.emf.common.util.ResourceLocator;
+import java.util.List;
 
 /**
- * This is the central singleton for the Pivot Model edit plugin.
  * <!-- begin-user-doc -->
+ * A representation of the model object '<em><b>NDirectional Property</b></em>'.
  * <!-- end-user-doc -->
+ *
+ * <!-- begin-model-doc -->
+ * <p>
+ * A <code>NDirectionalAssociation</code> is a {@link Property} 
+ * typed element that represents an bidirectional association to another type.
+ * </p>
+ * <!-- end-model-doc -->
+ *
+ * <p>
+ * The following features are supported:
+ * <ul>
+ *   <li>{@link tudresden.ocl20.pivot.pivotmodel.NDirectionalProperty#getInverseNDirectionalProperties <em>Inverse NDirectional Properties</em>}</li>
+ * </ul>
+ * </p>
+ *
  * @generated
  */
-public final class PivotModelEditPlugin extends EMFPlugin {
-
+public interface NDirectionalProperty extends Property {
 	/**
-	 * Keep track of the singleton.
+	 * Returns the value of the '<em><b>Inverse NDirectional Properties</b></em>' containment reference list.
+	 * The list contents are of type {@link tudresden.ocl20.pivot.pivotmodel.NDirectionalProperty}.
 	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Inverse NDirectional Properties</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
 	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Inverse NDirectional Properties</em>' containment reference list.
 	 * @generated
 	 */
-	public static final PivotModelEditPlugin INSTANCE = new PivotModelEditPlugin();
+	List<NDirectionalProperty> getInverseNDirectionalProperties();
 
 	/**
-	 * Keep track of the singleton.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * <p>
+	 * The operation addAssociation added a <code> NDirectionalAssociation</code> to the inverse association list.
+	 * </p>
+	 * <!-- end-model-doc -->
 	 * @generated
 	 */
-	private static Implementation plugin;
+	void addAssociation(NDirectionalProperty bProperty);
 
 	/**
-	 * Create the instance.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * <p>
+	 * The operation removeAssociation removed a <code>NDirectionalAssociation</code> from the inverse association list.
+	 * </p>
+	 * <!-- end-model-doc -->
 	 * @generated
 	 */
-	public PivotModelEditPlugin() {
-		super(new ResourceLocator[] {});
-	}
+	NDirectionalProperty getAssociation(String propName);
 
 	/**
-	 * Returns the singleton instance of the Eclipse plugin.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the singleton instance.
+	 * <!-- begin-model-doc -->
+	 * <p>
+	 * The operation removeAssociation removed a <code>NDirectionalAssociation</code> from the inverse association list.
+	 * </p>
+	 * <!-- end-model-doc -->
 	 * @generated
 	 */
-	@Override
-	public ResourceLocator getPluginResourceLocator() {
-		return plugin;
-	}
+	void removeAssociation(NDirectionalProperty bProperty);
 
 	/**
-	 * Returns the singleton instance of the Eclipse plugin.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the singleton instance.
+	 * <!-- begin-model-doc -->
+	 * <p>
+	 * The operation isInverseAssociation ckecked a <code>NDirectionalAssociation</code> is in the inverse association list.
+	 * </p>
+	 * <!-- end-model-doc -->
 	 * @generated
 	 */
-	public static Implementation getPlugin() {
-		return plugin;
-	}
+	boolean isInverseAssociation(NDirectionalProperty bProperty);
 
 	/**
-	 * The actual implementation of the Eclipse <b>Plugin</b>.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * <p>
+	 * The operation addAssociation added a <code>NDirectionalAssociation</code> to the inverse association list.
+	 * </p>
+	 * <!-- end-model-doc -->
 	 * @generated
 	 */
-	public static class Implementation extends EclipsePlugin {
+	void addAssociations(List<NDirectionalProperty> bProperty);
 
-		/**
-		 * Creates an instance.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		public Implementation() {
-			super();
-
-			// Remember the static instance.
-			//
-			plugin = this;
-		}
-	}
-
-}
+} // NDirectionalProperty

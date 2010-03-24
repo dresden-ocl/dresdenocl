@@ -51,7 +51,6 @@ public class PivotModelAllTests extends TestSuite {
 	 * @generated
 	 */
 	public static void main(String[] args) {
-
 		TestRunner.run(suite());
 	}
 
@@ -61,7 +60,6 @@ public class PivotModelAllTests extends TestSuite {
 	 * @generated
 	 */
 	public static Test suite() {
-
 		TestSuite suite = new PivotModelAllTests("Pivot Model Tests"); //$NON-NLS-1$
 		suite.addTest(PivotModelTests.suite());
 		return suite;
@@ -73,7 +71,6 @@ public class PivotModelAllTests extends TestSuite {
 	 * @generated
 	 */
 	public PivotModelAllTests(String name) {
-
 		super(name);
 	}
 

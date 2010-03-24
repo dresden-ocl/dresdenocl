@@ -14,6 +14,7 @@
 package tudresden.ocl20.pivot.metamodels.uml2.internal.model;
 
 import java.io.IOException;
+import java.util.LinkedList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -35,6 +36,7 @@ import tudresden.ocl20.pivot.modelbus.ModelAccessException;
 import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
 import tudresden.ocl20.pivot.modelbus.model.IModel;
 import tudresden.ocl20.pivot.modelbus.model.base.AbstractModel;
+import tudresden.ocl20.pivot.pivotmodel.NDirectionalProperty;
 import tudresden.ocl20.pivot.pivotmodel.Namespace;
 
 /**
@@ -177,9 +179,11 @@ public class UML2Model extends AbstractModel implements IModel {
 	 * @param allProperties
 	 *          The {@link List} of {@link Property}s which shall be added.
 	 */
-	private void addAllOtherAssciationEnds(Property anOwner,
-			List<Property> allProperties) {
+	private List<NDirectionalProperty> addAllOtherAssciationEnds(Property anOwner,
+			List<Property> allProperties, boolean nDirectional) {
 
+		List<NDirectionalProperty> props = new LinkedList<NDirectionalProperty>();
+		
 		for (Property aProperty : allProperties) {
 
 			/* Do not add the property to itself, but to all other properties. */
@@ -191,8 +195,15 @@ public class UML2Model extends AbstractModel implements IModel {
 				ownerType = UML2AdapterFactory.INSTANCE.createType(anOwner.getType());
 
 				/* Create or get the property. */
-				property = UML2AdapterFactory.INSTANCE.createProperty(aProperty);
-
+				if (nDirectional) {
+					property = UML2AdapterFactory.INSTANCE.createNDirectionalProperty(aProperty);
+					props.add((NDirectionalProperty)property);
+				} else {
+					property = UML2AdapterFactory.INSTANCE.createProperty(aProperty);
+				}
+				
+				
+				
 				/*
 				 * Check if the property has already been added (could happen for
 				 * bidirectional associations between the same type).
@@ -206,6 +217,7 @@ public class UML2Model extends AbstractModel implements IModel {
 			// no else.
 		}
 		// end for.
+		return props;
 	}
 
 	/**
@@ -222,11 +234,15 @@ public class UML2Model extends AbstractModel implements IModel {
 
 		boolean allArentNavigable;
 
+		List<NDirectionalProperty> props = new LinkedList<NDirectionalProperty>();
+		
 		/* Check if all properties aren't navigable. */
 		allArentNavigable = true;
+		int size = 0;
 
 		for (Property aProperty : properties) {
 			allArentNavigable &= !aProperty.isNavigable();
+			if (aProperty.isNavigable()) ++size;
 		}
 
 		/*
@@ -235,7 +251,7 @@ public class UML2Model extends AbstractModel implements IModel {
 		 */
 		if (allArentNavigable) {
 			for (Property aProperty : properties) {
-				this.addAllOtherAssciationEnds(aProperty, properties);
+				props.addAll(this.addAllOtherAssciationEnds(aProperty, properties, true));
 			}
 		}
 
@@ -246,13 +262,20 @@ public class UML2Model extends AbstractModel implements IModel {
 		else {
 			for (Property aProperty : properties) {
 				if (aProperty.isNavigable()) {
-					this.addAllOtherAssciationEnds(aProperty, properties);
+					props.addAll(this.addAllOtherAssciationEnds(aProperty, properties, (size > 1)));
 				}
 				// no else.
 			}
 			// end for.
 		}
 		// end else.
+		
+		/*
+		 * Add all association ends to the other properties.
+		 */
+		for (NDirectionalProperty prop : props) {
+				prop.addAssociations(props);
+		}
 	}
 
 	/**

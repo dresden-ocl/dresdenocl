@@ -47,8 +47,7 @@ public interface PivotModelFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	PivotModelFactory INSTANCE =
-			tudresden.ocl20.pivot.pivotmodel.impl.PivotModelFactoryImpl.eINSTANCE;
+	PivotModelFactory INSTANCE = tudresden.ocl20.pivot.pivotmodel.impl.PivotModelFactoryImpl.eINSTANCE;
 
 	/**
 	 * Returns a new object of class '<em>Enumeration</em>'.
@@ -139,6 +138,15 @@ public interface PivotModelFactory {
 	 * @generated
 	 */
 	Expression createExpression();
+
+	/**
+	 * Returns a new object of class '<em>NDirectional Property</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>NDirectional Property</em>'.
+	 * @generated
+	 */
+	NDirectionalProperty createNDirectionalProperty();
 
 	/**
 	 * Returns a new object of class '<em>Type Parameter</em>'.

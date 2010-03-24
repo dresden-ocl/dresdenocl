@@ -138,6 +138,9 @@
         <genParameters ecoreParameter="pivotmodel.ecore#//Property/cmpSlots/p"/>
       </genOperations>
     </genClasses>
+    <genClasses ecoreClass="pivotmodel.ecore#//BiDirectionalAssociation">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference pivotmodel.ecore#//BiDirectionalAssociation/inverseAssociation"/>
+    </genClasses>
     <genClasses image="false" ecoreClass="pivotmodel.ecore#//TypedElement">
       <genFeatures createChild="false" propertyMultiLine="true" propertySortChoices="true"
           ecoreFeature="ecore:EReference pivotmodel.ecore#//TypedElement/type"/>

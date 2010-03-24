@@ -34,7 +34,6 @@ package tudresden.ocl20.pivot.pivotmodel.tests;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
-
 import junit.textui.TestRunner;
 
 /**
@@ -51,7 +50,6 @@ public class PivotModelTests extends TestSuite {
 	 * @generated
 	 */
 	public static void main(String[] args) {
-
 		TestRunner.run(suite());
 	}
 
@@ -61,7 +59,6 @@ public class PivotModelTests extends TestSuite {
 	 * @generated
 	 */
 	public static Test suite() {
-
 		TestSuite suite = new PivotModelTests("pivotmodel Tests"); //$NON-NLS-1$
 		suite.addTestSuite(NamespaceTest.class);
 		suite.addTestSuite(TypeTest.class);
@@ -76,6 +73,7 @@ public class PivotModelTests extends TestSuite {
 		suite.addTestSuite(TypeParameterTest.class);
 		suite.addTestSuite(TypeArgumentTest.class);
 		suite.addTestSuite(ConstraintTest.class);
+		suite.addTestSuite(NDirectionalPropertyTest.class);
 		return suite;
 	}
 
@@ -85,7 +83,6 @@ public class PivotModelTests extends TestSuite {
 	 * @generated
 	 */
 	public PivotModelTests(String name) {
-
 		super(name);
 	}
 
