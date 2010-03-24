@@ -178,6 +178,10 @@ public class UML2Model extends AbstractModel implements IModel {
 	 *          The {@link Property} which shall know all given {@link Property}s.
 	 * @param allProperties
 	 *          The {@link List} of {@link Property}s which shall be added.
+	 * @param nDirectional
+	 * 			If the parameter true, then created NDirectionalProperties, otherwise Properties
+	 * @return
+	 * 		 a list of all added NDirectionalProperties
 	 */
 	private List<NDirectionalProperty> addAllOtherAssciationEnds(Property anOwner,
 			List<Property> allProperties, boolean nDirectional) {
