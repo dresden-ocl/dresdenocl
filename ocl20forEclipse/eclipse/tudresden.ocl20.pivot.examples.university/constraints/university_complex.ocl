@@ -1,0 +1,180 @@
+-- 
+-- OCL22SQL test and demonstration constraints
+-- 
+-- Part of Dresden OCL Tookit, see LICENSE for license terms.
+-- (c) 2005 Florian Heidenreich <mail@fheidenreich.de>
+-- 
+-- 
+-- Use this constraint file with model university_complex.uml
+-- 
+
+package tudresden::ocl20::pivot::examples::university_complex
+
+/*
+ * The academic grade of a persons supervisor must be greater
+ * than the academic grade of the supervised person.
+ *
+ * Used patterns: BASIC TYPE, NAVIGATION, CLASS AND ATTRIBUTE
+ */
+context Person
+inv tudOclInv1: self.supervisor.grade.value > self.grade.value
+
+
+/*
+ * The number of subfacilities must be greater than or equal to 2
+ *
+ * Used patterns: BASIC VALUE, CLASS AND ATTRIBUTE
+ */
+context Faculty
+inv tudOclInv2: self.subFacility->size() >= 2
+
+
+/*
+ * All subfacilities must be an Institute
+ *
+ * Used patterns: QUERY, BASIC TYPE, CLASS AND ATTRIBUTE, COMPLEX PREDICATE
+ */
+context Faculty
+inv tudOclInv3: self.subFacility->forAll(f:Facility | f.oclIsTypeOf(Institute))
+
+/*
+ * The tax class of an employee depends on the academic grade 
+ * of the employee
+ *
+ * Used patterns: BASIC TYPE, NAVIGATION, CLASS AND ATTRIBUTE
+ */
+context Employee
+inv tudOclInv4:	((self.grade.name = 'diploma') implies (self.taxClass = 'tc1'))
+						and ((self.grade.name = 'doctor') implies (self.taxClass = 'tc2'))
+						and ((self.grade.name = 'professor') implies (self.taxClass = 'tc3'))
+
+/*
+ * The head of the facility is included in the members of the facility
+ *
+ * Used patterns: 
+ */
+context Facility
+inv tudOclInv5: self.member->includes(self.headOfFacility)
+
+/*
+ *
+ */
+context Paper
+inv tudOclInv6: ((self.purpose = 'Diplom') and (self.inProgress = true)) implies (self.author->forAll(p:Person | p.oclIsTypeOf(Student)))
+
+
+
+/*
+ *
+ */
+context Faculty
+inv tudOclInv7: self.headOfFacility.grade.name = 'professor'
+
+
+/*
+ *
+ */
+context Grade
+inv tudOclInv8: Set{'none','diploma','doctor','professor'}->includes(self.name)
+
+/*
+ *
+ */
+context Employee
+-- select
+inv tudOclInv9_1: (self.grade.name = 'doctor') implies (self.papers->select(p:Paper | p.purpose = 'Dissertation')->size() = 1)
+
+-- reject
+inv tudOclInv9_2: (self.grade.name = 'doctor') implies (self.papers->reject(p:Paper | p.purpose = 'Dissertation')->size() > 0)
+
+
+/*
+ *
+ */
+context Student
+
+-- count
+inv tudOclInv10_1: self.papers->count(self.currentPaper) = 1
+
+-- includes
+inv tudOclInv10_2: self.papers->includes(self.currentPaper)
+
+-- excludes
+inv tudOclInv10_3: not(self.papers->excludes(self.currentPaper))
+
+-- includesAll
+inv tudOclInv10_4: self.papers->includesAll(self.papers)
+
+-- excludesAll
+inv tudOclInv10_5: not(self.papers->excludesAll(self.papers))
+
+-- isEmpty
+inv tudOclInv10_6: not(self.papers->isEmpty())
+
+-- notEmpty
+inv tudOclInv10_7: self.papers->notEmpty()
+
+-- size
+inv tudOclInv10_8: self.papers->size() > 0
+
+-- sum
+inv tudOclInv10_9: self.salaries->sum() = 300
+
+-- intersection
+inv tudOclInv11_1: self.papers->intersection(self.supervisor.papers)->notEmpty()
+
+-- including
+inv tudOclInv11_2: self.papers->including(self.currentPaper)->notEmpty()
+
+-- excluding
+inv tudOclInv11_3: self.papers->excluding(self.currentPaper)->notEmpty()
+
+-- union
+inv tudOclInv11_4: self.papers->union(self.supervisor.papers)->notEmpty()
+
+-- union (sequence)
+inv tudOclInv12_1: self.papers->asSequence()->union(self.supervisor.papers->asSequence())->notEmpty()
+
+-- including (sequence)
+inv tudOclInv12_2: self.papers->asSequence()->including(self.currentPaper)->notEmpty()
+
+-- excluding (sequence)
+inv tudOclInv12_3: self.papers->asSequence()->excluding(self.currentPaper)->notEmpty()
+
+-- size (basic type)
+inv tudOclInv13_1: self.firstName.size() > 0
+
+-- concat (basic type)
+inv tudOclInv13_2: self.firstName.concat(self.lastName).size() = self.firstName.size() + self.lastName.size()
+
+-- toUpper (basic type)
+inv tudOclInv13_3: self.firstName.toUpperCase().size() = self.firstName.size()
+
+-- toLower (basic type)
+inv tudOclInv13_4: self.firstName.toLowerCase().size() = self.firstName.size()
+
+-- substring (basic type)
+inv tudOclInv13_5: self.firstName.substring(1, 3).size() = 3
+
+-- abs (basic type)
+inv tudOclInv14_1: self.age.abs() > 0
+
+-- floor (basic type)
+inv tudOclInv14_2: self.age.floor() > 0
+
+-- round (basic type)
+inv tudOclInv14_3: self.age.round() > 0
+
+-- max (basic type)
+inv tudOclInv14_4: self.age.max(1000) = 1000
+
+-- min (basic type)
+inv tudOclInv14_5: self.age.min(-1) = -1
+
+-- div (basic type)
+inv tudOclInv14_6: self.age.div(1000) < 1
+
+-- mod (basic type)
+inv tudOclInv14_7: self.age.mod(1000) = self.age
+
+endpackage
