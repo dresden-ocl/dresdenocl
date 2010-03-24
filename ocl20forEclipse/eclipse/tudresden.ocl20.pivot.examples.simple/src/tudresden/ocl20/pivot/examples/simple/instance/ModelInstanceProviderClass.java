@@ -36,8 +36,8 @@ public class ModelInstanceProviderClass {
 		result = new ArrayList<Object>();
 
 		person1 = new Person();
-		person1.setName("Student Work-a-lot");
-		person1.setAge(22);
+		person1.setName("Person Unspecific");
+		person1.setAge(25);
 		result.add(person1);
 
 		person2 = new Professor();
@@ -46,10 +46,10 @@ public class ModelInstanceProviderClass {
 		result.add(person2);
 
 		person3 = new Student();
-		person3.setName("Person Unspecific");
-		person3.setAge(25);
+		person3.setName("Student Work-a-lot");
+		person3.setAge(23);
 		result.add(person3);
-
+		
 		return result;
 	}
 }
