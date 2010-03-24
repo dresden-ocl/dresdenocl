@@ -37,6 +37,7 @@ import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceObject;
 import tudresden.ocl20.pivot.pivotmodel.Constraint;
 import tudresden.ocl20.pivot.pivotmodel.NamedElement;
+import tudresden.ocl20.pivot.pivotmodel.Property;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 
 /**
@@ -56,10 +57,10 @@ public interface IInterpretationEnvironment extends Cloneable {
 	 * </p>
 	 * 
 	 * @param path
-	 *          The path of the attribute/operation described by the
-	 *          {@link Constraint}.
+	 *            The path of the attribute/operation described by the
+	 *            {@link Constraint}.
 	 * @param aConstraint
-	 *          The {@link Constraint} describing the attribute/operation.
+	 *            The {@link Constraint} describing the attribute/operation.
 	 */
 	public void addConstraint(String path, Constraint aConstraint);
 
@@ -69,9 +70,9 @@ public interface IInterpretationEnvironment extends Cloneable {
 	 * </p>
 	 * 
 	 * @param path
-	 *          The path of the variable or simply the name (e.g. "self")
+	 *            The path of the variable or simply the name (e.g. "self")
 	 * @param anOclRoot
-	 *          The variable to be saved.
+	 *            The variable to be saved.
 	 */
 	public void addVar(String path, OclAny anOclRoot);
 
@@ -82,9 +83,9 @@ public interface IInterpretationEnvironment extends Cloneable {
 	 * </p>
 	 * 
 	 * @param anElement
-	 *          The {@link NamedElement} the result belongs to.
+	 *            The {@link NamedElement} the result belongs to.
 	 * @param result
-	 *          The result for the {@link NamedElement}.
+	 *            The result for the {@link NamedElement}.
 	 */
 	public void cacheResult(NamedElement anElement, OclAny result);
 
@@ -118,11 +119,28 @@ public interface IInterpretationEnvironment extends Cloneable {
 	 * </p>
 	 * 
 	 * @param anElement
-	 *          The {@link NamedElement} the result is asked for.
+	 *            The {@link NamedElement} the result is asked for.
 	 * 
 	 * @return The cached result.
 	 */
 	public OclAny getCachedResult(NamedElement anElement);
+
+	/**
+	 * <p>
+	 * Returns a cached value of a given {@link Property} for a given
+	 * {@link IModelInstanceObject}.
+	 * </p>
+	 * 
+	 * @param imiObject
+	 *            The {@link IModelInstanceObject} to which the {@link Property}
+	 *            belongs to.
+	 * @param property
+	 *            The {@link Property} which cached value shall be returned.
+	 * 
+	 * @return The cached value or null, if no cached value exists.
+	 */
+	public OclAny getCachedProperty(IModelInstanceObject imiObject,
+			Property property);
 
 	/**
 	 * <p>
@@ -131,8 +149,8 @@ public interface IInterpretationEnvironment extends Cloneable {
 	 * </p>
 	 * 
 	 * @param path
-	 *          The path of the attribute/operation described by the
-	 *          {@link Constraint}.
+	 *            The path of the attribute/operation described by the
+	 *            {@link Constraint}.
 	 * 
 	 * @return The {@link Constraint} describing the attribute/operation.
 	 */
@@ -153,8 +171,8 @@ public interface IInterpretationEnvironment extends Cloneable {
 	 * </p>
 	 * 
 	 * @param anOperationCallExp
-	 *          The {@link OperationCallExp} containing operation atPre() or
-	 *          oclIsNew().
+	 *            The {@link OperationCallExp} containing operation atPre() or
+	 *            oclIsNew().
 	 * 
 	 * @return The postcondition result for that operation.
 	 */
@@ -166,7 +184,7 @@ public interface IInterpretationEnvironment extends Cloneable {
 	 * </p>
 	 * 
 	 * @param path
-	 *          The path of the variable or simply the name (e.g. "self").
+	 *            The path of the variable or simply the name (e.g. "self").
 	 * 
 	 * @return Saved variables with given name.
 	 */
@@ -178,10 +196,10 @@ public interface IInterpretationEnvironment extends Cloneable {
 	 * </p>
 	 * 
 	 * @param anOperationCallExp
-	 *          The {@link OperationCallExp} containing operation atPre() or
-	 *          oclIsNew().
+	 *            The {@link OperationCallExp} containing operation atPre() or
+	 *            oclIsNew().
 	 * @param source
-	 *          The result for that operation.
+	 *            The result for that operation.
 	 */
 	public void savePostconditionValue(OperationCallExp anOperationCallExp,
 			OclAny source);
@@ -192,7 +210,7 @@ public interface IInterpretationEnvironment extends Cloneable {
 	 * </p>
 	 * 
 	 * @param aModelInstance
-	 *          The new {@link IModelInstance}.
+	 *            The new {@link IModelInstance}.
 	 */
 	public void setModelInstance(IModelInstance aModelInstance);
 
@@ -206,23 +224,23 @@ public interface IInterpretationEnvironment extends Cloneable {
 	 * </p>
 	 * 
 	 * @param type
-	 *          The {@link Type} for which the instances shall be stored.
+	 *            The {@link Type} for which the instances shall be stored.
 	 */
 	public void saveOldInstances(Type type);
 
 	/**
 	 * <p>
-	 * Checks whether or not a given {@link IModelInstanceObject} (represented by
-	 * an {@link OclModelInstanceObject}) existed before the execution of the
-	 * current interpreted postcondition. This method can be used to interpret the
-	 * <code>oclIsNew()</code> operation during the interpretation of a
+	 * Checks whether or not a given {@link IModelInstanceObject} (represented
+	 * by an {@link OclModelInstanceObject}) existed before the execution of the
+	 * current interpreted postcondition. This method can be used to interpret
+	 * the <code>oclIsNew()</code> operation during the interpretation of a
 	 * postcondition.
 	 * 
 	 * @param source
-	 *          The {@link OclModelInstanceObject} for that the
-	 *          <code>oclIsNew()</code> operation shall be evaluated.
-	 * @return <code>true</code>, if the given {@link OclModelInstanceObject} did
-	 *         not exist before the operation invocation of the current
+	 *            The {@link OclModelInstanceObject} for that the
+	 *            <code>oclIsNew()</code> operation shall be evaluated.
+	 * @return <code>true</code>, if the given {@link OclModelInstanceObject}
+	 *         did not exist before the operation invocation of the current
 	 *         interpreted postcondition.
 	 */
 	public boolean isNewInstance(OclModelInstanceObject source);

@@ -95,13 +95,6 @@ public class Ocl2ForEclipseFacade {
 	 */
 	private static Map<IModelInstance, IOclInterpreter> cachedInterpreters = new WeakHashMap<IModelInstance, IOclInterpreter>();
 
-	/**
-	 * Cached prepared {@link Constraint}s of interpreters for interpretation.
-	 * They are stored in a {@link WeakHashMap}. If an {@link IOclInterpreter}
-	 * becomes garbage, its {@link Constraint}s become garbage as well.
-	 */
-	private static Map<IOclInterpreter, Set<Constraint>> cachedPreparedConstraints = new WeakHashMap<IOclInterpreter, Set<Constraint>>();
-
 	/** The {@link IOcl22Code} representing the Java/AspectJ code generator. */
 	private static IOcl22Code javaCodeGenerator = null;
 
@@ -878,62 +871,7 @@ public class Ocl2ForEclipseFacade {
 		else {
 			interpreter = OclInterpreterPlugin.createInterpreter(modelInstance);
 			cachedInterpreters.put(modelInstance, interpreter);
-
-			cachedPreparedConstraints.put(interpreter,
-					new HashSet<Constraint>());
 		}
-
-		/*
-		 * FIXME Claas: Probably move this into the interpreter. Probably make
-		 * this part more intelligent.
-		 */
-		interpreter.getEnvironment().clearPreparedConstraints();
-
-		/* Prepare body, derive, init expressions and definitions. */
-		/* FIXME Claas: Probably hide this behavior inside the interpreter. */
-		Set<Constraint> preparationCandidates = new HashSet<Constraint>(
-				modelInstance.getModel().getConstraints());
-
-		/* Probably remove already prepared constraints to improve performance. */
-		if (cachedPreparedConstraints.containsKey(interpreter)) {
-			preparationCandidates.removeAll(cachedPreparedConstraints
-					.get(interpreter));
-		}
-		// no else.
-
-		for (Constraint constraintToBePrepared : preparationCandidates) {
-
-			switch (constraintToBePrepared.getKind()) {
-
-			case BODY:
-			case DEFINITION:
-			case DERIVED:
-			case INITIAL:
-
-				interpreter.prepareConstraint(constraintToBePrepared,
-						modelInstanceElement);
-				break;
-			// no default.
-			}
-			// end switch.
-		}
-		// end for.
-
-		/*
-		 * Store all prepared constraints (and constraints that do not have to
-		 * be prepared as well).
-		 */
-		if (preparationCandidates.size() > 0) {
-			Set<Constraint> preparedConstraints;
-			preparedConstraints = cachedPreparedConstraints.get(interpreter);
-			preparedConstraints.addAll(preparationCandidates);
-
-			cachedPreparedConstraints.put(interpreter, preparedConstraints);
-		}
-		// no else.
-
-		/* Prepare the constraint to be interpreted. */
-		interpreter.prepareConstraint(constraint, modelInstanceElement);
 
 		result = interpreter.interpretConstraint(constraint,
 				modelInstanceElement);

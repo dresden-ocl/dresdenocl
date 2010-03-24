@@ -18,7 +18,9 @@ with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
 package tudresden.ocl20.pivot.interpreter.ui.actions;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.eclipse.jface.action.Action;
@@ -158,12 +160,6 @@ public class InterpreterViewMenuAction extends Action implements IAction {
 		case ADD_VARIABLE_TO_ENVIRONMENT: {
 			new AddVariableDialog(this.myInterpreterView).open();
 			break;
-		}
-
-		case ENABLE_DISABLE_CACHING: {
-			boolean enable;
-			enable = this.myInterpreterView.isCachingEnabled();
-			this.myInterpreterView.setCachingEnabled(!enable);
 		}
 
 		}
@@ -329,26 +325,14 @@ public class InterpreterViewMenuAction extends Action implements IAction {
 						activeModelInstance.getAllModelInstanceObjects());
 
 				/* Iterate through the constraints and prepare them. */
-				for (Constraint aConstraint : usedConstraints) {
+				for (Constraint constraint : usedConstraints) {
 
 					ConstraintKind aKind;
 
-					aKind = aConstraint.getKind();
+					aKind = constraint.getKind();
 
-					/*
-					 * Check if the constraint is a definition, a body
-					 * definition, an initial or a derived value.
-					 */
-					if (aKind.equals(ConstraintKind.DEFINITION)
-							|| aKind.equals(ConstraintKind.BODY)
-							|| aKind.equals(ConstraintKind.INITIAL)
-							|| aKind.equals(ConstraintKind.DERIVED)) {
-
-						interpreter.prepareConstraint(aConstraint);
-					}
-
-					/* Else check if the constraint is a postcondition. */
-					else if (aKind.equals(ConstraintKind.POSTCONDITION)) {
+					/* Check if the constraint is a postcondition. */
+					if (aKind.equals(ConstraintKind.POSTCONDITION)) {
 
 						/* Iterate through all model objects. */
 						for (IModelInstanceElement aModelObject : usedModelObjects) {
@@ -356,25 +340,30 @@ public class InterpreterViewMenuAction extends Action implements IAction {
 							NamedElement constrainedElement;
 							Type type;
 
-							constrainedElement = (NamedElement) aConstraint
+							constrainedElement = (NamedElement) constraint
 									.getConstrainedElement().get(0);
 
 							/* Get the owner of the operation. */
 							if (constrainedElement instanceof Operation) {
 								type = (Type) constrainedElement.getOwner();
-							}
 
-							else {
-								type = (Type) constrainedElement;
-							}
+								/*
+								 * If the model object is an instance of the
+								 * constrained element.
+								 */
+								if (aModelObject.isKindOf(type)) {
 
-							/*
-							 * If the model object is an instance of the
-							 * constrained element.
-							 */
-							if (aModelObject.isKindOf(type)) {
-								interpreter.prepareConstraint(aConstraint,
-										aModelObject);
+									List<Constraint> constraintAsList;
+									constraintAsList = new ArrayList<Constraint>();
+									constraintAsList.add(constraint);
+
+									interpreter.preparePostConditions(
+											aModelObject,
+											(Operation) constrainedElement,
+											new IModelInstanceElement[0],
+											constraintAsList);
+								}
+								// no else.
 							}
 							// no else.
 						}

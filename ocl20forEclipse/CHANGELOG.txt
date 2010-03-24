@@ -65,6 +65,8 @@ Release 2.1 (scheduled for April 2010)
   - Iterate expressions are now interpreted correctly if their source collection is invalid or contains
     undefined values. Body expressions can result in invalid or undefined without leading to wrong 
     interpretation results.
+  - Body Expressions, Definitions, Derive and Init expressions must not be prepared anymore and are only
+    interpreted if referenced.
 
 * A bugs in the OCL2 Interpreter GUI was fixed.
   - The view should not crash with an SWT-Exception for presentation of a large number of results anymore.

@@ -114,9 +114,6 @@ public class InterpreterView extends ViewPart implements ISelectionListener,
 	/** The currently selected rows of this {@link IViewActionDelegate}. */
 	private Set<Object[]> currentlySelectedRows = new HashSet<Object[]>();
 
-	/** Specifies, whether or not caching is enabled. */
-	private boolean isCachingEnabled;
-
 	/** The {@link InterpreterViewMenuAction} which removes results. */
 	private InterpreterViewMenuAction myActionToremoveSelectedResults = null;
 
@@ -536,8 +533,6 @@ public class InterpreterView extends ViewPart implements ISelectionListener,
 		}
 		// no else.
 
-		result.setCachingEnabled(this.isCachingEnabled);
-
 		return result;
 	}
 
@@ -571,20 +566,6 @@ public class InterpreterView extends ViewPart implements ISelectionListener,
 
 	/**
 	 * <p>
-	 * Returns whether or not this {@link InterpreterView} will use a cache to
-	 * interpret results.
-	 * </p>
-	 * 
-	 * @return Whether or not this {@link InterpreterView} will use a cache to
-	 *         interpret results.
-	 */
-	public boolean isCachingEnabled() {
-
-		return this.isCachingEnabled;
-	}
-
-	/**
-	 * <p>
 	 * Refreshes this {@link InterpreterView}.
 	 * </p>
 	 */
@@ -596,20 +577,6 @@ public class InterpreterView extends ViewPart implements ISelectionListener,
 		}
 
 		this.myTableViewer.refresh();
-	}
-
-	/**
-	 * <p>
-	 * Enables whether or not this {@link InterpreterView} will use a cache to
-	 * interpret results.
-	 * </p>
-	 * 
-	 * @param enabled
-	 *            If true, a cache will be used.
-	 */
-	public void setCachingEnabled(boolean enabled) {
-
-		this.isCachingEnabled = enabled;
 	}
 
 	/**
@@ -719,7 +686,6 @@ public class InterpreterView extends ViewPart implements ISelectionListener,
 		InterpreterViewMenuAction prepareSelected;
 		InterpreterViewMenuAction prepareAll;
 
-		InterpreterViewMenuAction setUseCache;
 		InterpreterViewMenuAction addVariable;
 
 		InterpreterViewMenuAction interpretSelected;
@@ -779,19 +745,6 @@ public class InterpreterView extends ViewPart implements ISelectionListener,
 			/* Add the action to the tool bar. */
 			this.getViewSite().getActionBars().getToolBarManager().add(
 					addVariable);
-		}
-
-		/* Create action to enable or disable the cache. */
-		{
-			setUseCache = new InterpreterViewMenuAction(
-					InterpreterViewMenuActionType.ENABLE_DISABLE_CACHING, this);
-
-			setUseCache.setChecked(false);
-			setUseCache
-					.setText(OclInterpreterUIMessages.InterpreterView_UseCache);
-
-			/* Add the action to the menu. */
-			this.getMenuManager().add(setUseCache);
 		}
 
 		/* Add a separator line to the menu. */

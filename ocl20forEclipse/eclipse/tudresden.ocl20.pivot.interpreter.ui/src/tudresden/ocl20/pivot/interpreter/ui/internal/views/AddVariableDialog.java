@@ -36,13 +36,13 @@ import org.eclipse.swt.widgets.Text;
 
 import tudresden.ocl20.pivot.essentialocl.expressions.Variable;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.factory.IStandardLibraryFactory;
 import tudresden.ocl20.pivot.interpreter.IInterpretationEnvironment;
 import tudresden.ocl20.pivot.interpreter.IInterpretationResult;
 import tudresden.ocl20.pivot.interpreter.IOclInterpreter;
 import tudresden.ocl20.pivot.interpreter.ui.internal.msg.OclInterpreterUIMessages;
 import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
 import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.base.BasisJavaModelInstanceFactory;
 import tudresden.ocl20.pivot.pivotmodel.PrimitiveType;
 
@@ -60,8 +60,8 @@ public class AddVariableDialog extends Dialog implements SelectionListener {
 	private InterpreterView myInterpreterView;
 
 	/**
-	 * The {@link Combo} to select a {@link OclRoot} value that shall be added to
-	 * the {@link IInterpretationEnvironment} as the result {@link Variable}.
+	 * The {@link Combo} to select a {@link OclRoot} value that shall be added
+	 * to the {@link IInterpretationEnvironment} as the result {@link Variable}.
 	 */
 	private Combo myResultCombo;
 
@@ -116,8 +116,8 @@ public class AddVariableDialog extends Dialog implements SelectionListener {
 	 * </p>
 	 * 
 	 * @param interpreterView
-	 *          The {@link InterpreterView} this {@link AddVariableDialog} belongs
-	 *          to.
+	 *            The {@link InterpreterView} this {@link AddVariableDialog}
+	 *            belongs to.
 	 */
 	public AddVariableDialog(InterpreterView interpreterView) {
 
@@ -128,6 +128,7 @@ public class AddVariableDialog extends Dialog implements SelectionListener {
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see org.eclipse.swt.events.SelectionListener#widgetDefaultSelected(org
 	 * .eclipse.swt.events.SelectionEvent)
 	 */
@@ -138,6 +139,7 @@ public class AddVariableDialog extends Dialog implements SelectionListener {
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see org.eclipse.swt.events.SelectionListener#widgetSelected(org.eclipse
 	 * .swt.events.SelectionEvent)
 	 */
@@ -160,7 +162,9 @@ public class AddVariableDialog extends Dialog implements SelectionListener {
 
 	/*
 	 * (non-Javadoc)
-	 * @see org.eclipse.jface.window.Window#configureShell(org.eclipse.swt.widgets
+	 * 
+	 * @see
+	 * org.eclipse.jface.window.Window#configureShell(org.eclipse.swt.widgets
 	 * .Shell)
 	 */
 	protected void configureShell(Shell newShell) {
@@ -173,6 +177,7 @@ public class AddVariableDialog extends Dialog implements SelectionListener {
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see org.eclipse.jface.dialogs.Dialog#createDialogArea(org.eclipse.swt
 	 * .widgets.Composite)
 	 */
@@ -233,6 +238,7 @@ public class AddVariableDialog extends Dialog implements SelectionListener {
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see org.eclipse.jface.dialogs.Dialog#okPressed()
 	 */
 	protected void okPressed() {
@@ -240,37 +246,31 @@ public class AddVariableDialog extends Dialog implements SelectionListener {
 		IModelInstance modelInstance;
 
 		boolean success;
-		OclAny result;
+		IModelInstanceElement imiValue;
 
-		modelInstance = this.myInterpreterView.getCurrentlySelectedModelInstance();
+		modelInstance = this.myInterpreterView
+				.getCurrentlySelectedModelInstance();
 
 		success = false;
-		result = null;
+		imiValue = null;
 
 		/* Check if a IModelInstance has been set. */
 		if (modelInstance != null) {
 
 			String value;
-			IStandardLibraryFactory standardLibraryFactory;
-
 			value = this.myValueText.getText();
-			standardLibraryFactory =
-					this.myInterpreterView.getInterpreterForInstance(
-							this.myInterpreterView.getCurrentlySelectedModelInstance())
-							.getStandardLibraryFactory();
 
 			/*
-			 * Get the defined value and check if it matches with the selected type.
+			 * Get the defined value and check if it matches with the selected
+			 * type.
 			 */
 			if (this.myTypeCombo.getText().equals("Integer")) {
 
 				if (!value.equals("")) {
 					try {
-						result =
-								standardLibraryFactory
-										.createOclInteger(BasisJavaModelInstanceFactory
-												.createModelInstanceInteger(new Long(Integer
-														.parseInt(value))));
+						imiValue = BasisJavaModelInstanceFactory
+								.createModelInstanceInteger(new Long(Integer
+										.parseInt(value)));
 					}
 
 					catch (NumberFormatException e) {
@@ -279,8 +279,7 @@ public class AddVariableDialog extends Dialog implements SelectionListener {
 										+ value);
 					}
 
-				}
-				else {
+				} else {
 					this.myInterpreterView
 							.showMessage(OclInterpreterUIMessages.InterpreterView_AddVariable_Error_NoValue);
 				}
@@ -289,7 +288,8 @@ public class AddVariableDialog extends Dialog implements SelectionListener {
 			else if (this.myTypeCombo.getText().equals("String")) {
 
 				if (!value.equals("")) {
-					result = standardLibraryFactory.createOclString(value);
+					imiValue = BasisJavaModelInstanceFactory
+							.createModelInstanceString(value);
 				}
 
 				else {
@@ -302,8 +302,9 @@ public class AddVariableDialog extends Dialog implements SelectionListener {
 
 				if (!value.equals("")) {
 					try {
-						result =
-								standardLibraryFactory.createOclReal(Float.parseFloat(value));
+						imiValue = BasisJavaModelInstanceFactory
+								.createModelInstanceReal(Float
+										.parseFloat(value));
 					} catch (NumberFormatException e) {
 						this.myInterpreterView
 								.showMessage(OclInterpreterUIMessages.InterpreterView_AddVariable_Error_NoRealValue
@@ -320,11 +321,13 @@ public class AddVariableDialog extends Dialog implements SelectionListener {
 			else if (this.myTypeCombo.getText().equals("Boolean")) {
 
 				if (value.toLowerCase().equals("true")) {
-					result = standardLibraryFactory.createOclBoolean(true);
+					imiValue = BasisJavaModelInstanceFactory
+							.createModelInstanceBoolean(true);
 				}
 
 				else if (value.toLowerCase().equals("false")) {
-					result = standardLibraryFactory.createOclBoolean(false);
+					imiValue = BasisJavaModelInstanceFactory
+							.createModelInstanceBoolean(false);
 				}
 
 				else {
@@ -338,7 +341,8 @@ public class AddVariableDialog extends Dialog implements SelectionListener {
 				if (this.myResultCombo.getSelectionIndex() >= 0) {
 					int index;
 					index = this.myResultCombo.getSelectionIndex();
-					result = this.myResultValues.get(index);
+					imiValue = this.myResultValues.get(index)
+							.getModelInstanceElement();
 				}
 
 				else {
@@ -351,18 +355,19 @@ public class AddVariableDialog extends Dialog implements SelectionListener {
 		else {
 			this.myInterpreterView
 					.showMessage(OclInterpreterUIMessages.InterpreterView_Error_NoActiveModelInstance
-							+ ModelBusPlugin.getModelRegistry().getActiveModel());
+							+ ModelBusPlugin.getModelRegistry()
+									.getActiveModel());
 		}
 
 		/* Eventually add the variable to the environment. */
 		if (!myVariableText.getText().equals("")) {
-			if (result != null) {
+			if (imiValue != null) {
 				IOclInterpreter interpreter;
 
-				interpreter =
-						this.myInterpreterView.getInterpreterForInstance(modelInstance);
-				interpreter
-						.setEnviromentVariable(this.myVariableText.getText(), result);
+				interpreter = this.myInterpreterView
+						.getInterpreterForInstance(modelInstance);
+				interpreter.setEnviromentVariable(
+						this.myVariableText.getText(), imiValue);
 
 				success = true;
 			}
