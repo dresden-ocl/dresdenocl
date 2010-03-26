@@ -27,6 +27,7 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -66,8 +67,8 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
 public class TestModelInstanceCollection {
 
 	/** The {@link Logger} for this class. */
-	private static final Logger LOGGER =
-			ModelInstanceTypeTestPlugin.getLogger(TestModelInstanceCollection.class);
+	private static final Logger LOGGER = ModelInstanceTypeTestPlugin
+			.getLogger(TestModelInstanceCollection.class);
 
 	/** A {@link String} used to display and log messages and warnings. */
 	private static String msg;
@@ -126,14 +127,15 @@ public class TestModelInstanceCollection {
 		type_set = TypeConstants.SET;
 
 		/* Get the CollectionType's provider class from the model. */
-		type_CollectionTypeProviderClass =
-				ModelInstanceTypeTestServices.getInstance().getModelType(
+		type_CollectionTypeProviderClass = ModelInstanceTypeTestServices
+				.getInstance()
+				.getModelType(
 						TestModelTypesNames.TYPE_NAME_COLLECTION_TYPE_PROVIDER_CLASS);
 
 		/* Load all instances of the type from the model instance. */
-		instances_CollectionTypeProviderClass =
-				ModelInstanceTypeTestServices.getInstance()
-						.getModelInstanceObjectsOfType(type_CollectionTypeProviderClass);
+		instances_CollectionTypeProviderClass = ModelInstanceTypeTestServices
+				.getInstance().getModelInstanceObjectsOfType(
+						type_CollectionTypeProviderClass);
 
 		/* Check if any provider class instance has been found. */
 		if (instances_CollectionTypeProviderClass.size() != 0) {
@@ -185,11 +187,13 @@ public class TestModelInstanceCollection {
 					IModelInstanceElement aBagResult;
 
 					try {
-						aBagResult = aProviderInstance.getProperty(aBagProperty);
+						aBagResult = aProviderInstance
+								.getProperty(aBagProperty);
 
 						if (aBagResult != null
 								&& aBagResult instanceof IModelInstanceCollection<?>) {
-							instances_bag.add((IModelInstanceCollection<?>) aBagResult);
+							instances_bag
+									.add((IModelInstanceCollection<?>) aBagResult);
 						}
 						// no else.
 					}
@@ -208,8 +212,8 @@ public class TestModelInstanceCollection {
 					IModelInstanceElement anOrderedSetResult;
 
 					try {
-						anOrderedSetResult =
-								aProviderInstance.getProperty(anOrderedSetProperty);
+						anOrderedSetResult = aProviderInstance
+								.getProperty(anOrderedSetProperty);
 
 						if (anOrderedSetResult != null
 								&& anOrderedSetResult instanceof IModelInstanceCollection<?>) {
@@ -233,7 +237,8 @@ public class TestModelInstanceCollection {
 					IModelInstanceElement aSequenceResult;
 
 					try {
-						aSequenceResult = aProviderInstance.getProperty(aSequenceProperty);
+						aSequenceResult = aProviderInstance
+								.getProperty(aSequenceProperty);
 
 						if (aSequenceResult != null
 								&& aSequenceResult instanceof IModelInstanceCollection<?>) {
@@ -257,11 +262,13 @@ public class TestModelInstanceCollection {
 					IModelInstanceElement aBagResult;
 
 					try {
-						aBagResult = aProviderInstance.getProperty(aSetProperty);
+						aBagResult = aProviderInstance
+								.getProperty(aSetProperty);
 
 						if (aBagResult != null
 								&& aBagResult instanceof IModelInstanceCollection<?>) {
-							instances_set.add((IModelInstanceCollection<?>) aBagResult);
+							instances_set
+									.add((IModelInstanceCollection<?>) aBagResult);
 						}
 						// no else.
 					}
@@ -279,32 +286,28 @@ public class TestModelInstanceCollection {
 			// end for.
 
 			if (instances_bag.size() == 0 && LOGGER.isDebugEnabled()) {
-				msg =
-						ModelInstanceTypeTestSuiteMessages.TestModelInstanceCollection_NoBagInstanceFound;
+				msg = ModelInstanceTypeTestSuiteMessages.TestModelInstanceCollection_NoBagInstanceFound;
 
 				LOGGER.warn(msg);
 			}
 			// no else.
 
 			if (instances_orderedset.size() == 0 && LOGGER.isDebugEnabled()) {
-				msg =
-						ModelInstanceTypeTestSuiteMessages.TestModelInstanceCollection_NoOrderedSetInstanceFound;
+				msg = ModelInstanceTypeTestSuiteMessages.TestModelInstanceCollection_NoOrderedSetInstanceFound;
 
 				LOGGER.warn(msg);
 			}
 			// no else.
 
 			if (instances_sequence.size() == 0 && LOGGER.isDebugEnabled()) {
-				msg =
-						ModelInstanceTypeTestSuiteMessages.TestModelInstanceCollection_NoSequenceInstanceFound;
+				msg = ModelInstanceTypeTestSuiteMessages.TestModelInstanceCollection_NoSequenceInstanceFound;
 
 				LOGGER.warn(msg);
 			}
 			// no else.
 
 			if (instances_set.size() == 0 && LOGGER.isDebugEnabled()) {
-				msg =
-						ModelInstanceTypeTestSuiteMessages.TestModelInstanceCollection_NoSetInstanceFound;
+				msg = ModelInstanceTypeTestSuiteMessages.TestModelInstanceCollection_NoSetInstanceFound;
 
 				LOGGER.warn(msg);
 			}
@@ -313,8 +316,7 @@ public class TestModelInstanceCollection {
 
 		/* Else print a warning. */
 		else {
-			msg =
-					ModelInstanceTypeTestSuiteMessages.TestModelInstanceCollection_NoProviderClassInstanceFound;
+			msg = ModelInstanceTypeTestSuiteMessages.TestModelInstanceCollection_NoProviderClassInstanceFound;
 
 			LOGGER.warn(msg);
 		}
@@ -344,8 +346,7 @@ public class TestModelInstanceCollection {
 
 			/* Test as type with bag type. */
 			try {
-				msg =
-						ModelInstanceTypeTestSuiteMessages.TestModelInstanceCollection_AsTypeIsWrong;
+				msg = ModelInstanceTypeTestSuiteMessages.TestModelInstanceCollection_AsTypeIsWrong;
 				msg = NLS.bind(msg, type_bag);
 
 				aBag = aCollection.asType(type_bag);
@@ -356,12 +357,14 @@ public class TestModelInstanceCollection {
 				assertNotNull(msg, aBag.getType());
 
 				assertTrue(msg, aBag.getType() instanceof CollectionType);
-				assertEquals(msg, CollectionKind.BAG, ((CollectionType) aBag.getType())
-						.getKind());
+				assertEquals(msg, CollectionKind.BAG, ((CollectionType) aBag
+						.getType()).getKind());
 
 				/* The bag should not be ordered and not unique. */
-				assertFalse(msg, ((IModelInstanceCollection<?>) aBag).isOrdered());
-				assertFalse(msg, ((IModelInstanceCollection<?>) aBag).isUnique());
+				assertFalse(msg, ((IModelInstanceCollection<?>) aBag)
+						.isOrdered());
+				assertFalse(msg, ((IModelInstanceCollection<?>) aBag)
+						.isUnique());
 			}
 
 			catch (AsTypeCastException e) {
@@ -370,26 +373,28 @@ public class TestModelInstanceCollection {
 
 			/* Test as type with OrderedSet type. */
 			try {
-				msg =
-						ModelInstanceTypeTestSuiteMessages.TestModelInstanceCollection_AsTypeIsWrong;
+				msg = ModelInstanceTypeTestSuiteMessages.TestModelInstanceCollection_AsTypeIsWrong;
 				msg = NLS.bind(msg, type_orderedset);
 
 				anOrderedSet = aCollection.asType(type_orderedset);
 
 				/* The casted element should be a Collection. */
-				assertTrue(msg, anOrderedSet instanceof IModelInstanceCollection<?>);
+				assertTrue(msg,
+						anOrderedSet instanceof IModelInstanceCollection<?>);
 
 				/* The OrderedSet should have one type and the type OrderedSet. */
 				assertNotNull(msg, anOrderedSet.getType());
 
-				assertTrue(msg, anOrderedSet.getType() instanceof CollectionType);
+				assertTrue(msg,
+						anOrderedSet.getType() instanceof CollectionType);
 				assertEquals(msg, CollectionKind.ORDERED_SET,
 						((CollectionType) anOrderedSet.getType()).getKind());
 
 				/* The OrderedSet should be ordered and unique. */
 				assertTrue(msg, ((IModelInstanceCollection<?>) anOrderedSet)
 						.isOrdered());
-				assertTrue(msg, ((IModelInstanceCollection<?>) anOrderedSet).isUnique());
+				assertTrue(msg, ((IModelInstanceCollection<?>) anOrderedSet)
+						.isUnique());
 			}
 
 			catch (AsTypeCastException e) {
@@ -398,25 +403,27 @@ public class TestModelInstanceCollection {
 
 			/* Test as type with Sequence type. */
 			try {
-				msg =
-						ModelInstanceTypeTestSuiteMessages.TestModelInstanceCollection_AsTypeIsWrong;
+				msg = ModelInstanceTypeTestSuiteMessages.TestModelInstanceCollection_AsTypeIsWrong;
 				msg = NLS.bind(msg, type_sequence);
 
 				aSequence = aCollection.asType(type_sequence);
 
 				/* The casted element should be a Collection. */
-				assertTrue(msg, aSequence instanceof IModelInstanceCollection<?>);
+				assertTrue(msg,
+						aSequence instanceof IModelInstanceCollection<?>);
 
 				/* The Sequence should have one type and the type Sequence. */
 				assertNotNull(msg, aSequence.getType());
 
 				assertTrue(msg, aSequence.getType() instanceof CollectionType);
-				assertEquals(msg, CollectionKind.SEQUENCE, ((CollectionType) aSequence
-						.getType()).getKind());
+				assertEquals(msg, CollectionKind.SEQUENCE,
+						((CollectionType) aSequence.getType()).getKind());
 
 				/* The Sequence should be ordered but not unique. */
-				assertTrue(msg, ((IModelInstanceCollection<?>) aSequence).isOrdered());
-				assertFalse(msg, ((IModelInstanceCollection<?>) aSequence).isUnique());
+				assertTrue(msg, ((IModelInstanceCollection<?>) aSequence)
+						.isOrdered());
+				assertFalse(msg, ((IModelInstanceCollection<?>) aSequence)
+						.isUnique());
 			}
 
 			catch (AsTypeCastException e) {
@@ -425,8 +432,7 @@ public class TestModelInstanceCollection {
 
 			/* Test as type with Set type. */
 			try {
-				msg =
-						ModelInstanceTypeTestSuiteMessages.TestModelInstanceCollection_AsTypeIsWrong;
+				msg = ModelInstanceTypeTestSuiteMessages.TestModelInstanceCollection_AsTypeIsWrong;
 				msg = NLS.bind(msg, type_set);
 
 				aSet = aCollection.asType(type_set);
@@ -438,11 +444,12 @@ public class TestModelInstanceCollection {
 				assertNotNull(msg, aSet.getType());
 
 				assertTrue(msg, aSet.getType() instanceof CollectionType);
-				assertEquals(msg, CollectionKind.SET, ((CollectionType) aSet.getType())
-						.getKind());
+				assertEquals(msg, CollectionKind.SET, ((CollectionType) aSet
+						.getType()).getKind());
 
 				/* The Set should not be ordered but unique. */
-				assertFalse(msg, ((IModelInstanceCollection<?>) aSet).isOrdered());
+				assertFalse(msg, ((IModelInstanceCollection<?>) aSet)
+						.isOrdered());
 				assertTrue(msg, ((IModelInstanceCollection<?>) aSet).isUnique());
 			}
 
@@ -455,8 +462,8 @@ public class TestModelInstanceCollection {
 
 	/**
 	 * <p>
-	 * Tests the method {@link IModelInstanceCollection#asType(Type)} with illegal
-	 * arguments.
+	 * Tests the method {@link IModelInstanceCollection#asType(Type)} with
+	 * illegal arguments.
 	 * </p>
 	 * 
 	 * @throws AsTypeCastException
@@ -480,8 +487,7 @@ public class TestModelInstanceCollection {
 	@Test
 	public void testCopyForAtPre() {
 
-		msg =
-				ModelInstanceTypeTestSuiteMessages.TestModelInstanceCollection_CopyForAtPreIsWrong;
+		msg = ModelInstanceTypeTestSuiteMessages.TestModelInstanceCollection_CopyForAtPreIsWrong;
 
 		/* A Collection should be copy-able. */
 		for (IModelInstanceCollection<?> aCollection : instances_allCollections) {
@@ -505,37 +511,141 @@ public class TestModelInstanceCollection {
 	@Test
 	public void testEquals() {
 
-		msg =
-				ModelInstanceTypeTestSuiteMessages.TestModelInstanceCollection_EqualsIsWrong;
+		msg = ModelInstanceTypeTestSuiteMessages.TestModelInstanceCollection_EqualsIsWrong;
 
 		/* An CopyableClass instance should be copy-able. */
-		for (IModelInstanceCollection<?> aCollection : instances_allCollections) {
+		for (IModelInstanceCollection<?> collection1 : instances_allCollections) {
 
-			for (IModelInstanceCollection<?> anotherCollection : instances_allCollections) {
+			for (IModelInstanceCollection<?> collection2 : instances_allCollections) {
 
-				if (aCollection.isOrdered() == anotherCollection.isOrdered()
-						&& aCollection.isUnique() == anotherCollection.isUnique()
-						&& aCollection.getType() != null
-						&& anotherCollection.getType() != null
-						&& (aCollection.getType().conformsTo(anotherCollection.getType()) || anotherCollection
-								.getType().conformsTo(aCollection.getType()))
-						&& aCollection.getCollection().equals(
-								anotherCollection.getCollection())) {
+				if (collection1 == null
+						&& collection2 == null
+						|| (this
+								.collectionTypeIsEqual(collection1, collection2) && this
+								.collectionContentIsEqual(collection1,
+										collection2))) {
 
-					assertTrue(msg, aCollection.equals(anotherCollection));
+					assertTrue(msg, collection1.equals(collection2));
 				}
 
 				else {
-					assertFalse(msg, aCollection.equals(anotherCollection));
+					assertFalse(msg, collection1.equals(collection2));
 				}
 				// end else.
 
 				/* No collection should be equal to null. */
-				assertFalse(msg, aCollection.equals(null));
+				assertFalse(msg, collection1.equals(null));
 			}
 			// end for.
 		}
 		// end for.
+	}
+
+	/**
+	 * <p>
+	 * A helper method comparing the content of two
+	 * {@link IModelInstanceCollection}s.
+	 * </p>
+	 * 
+	 * @param collection1
+	 *            The first {@link IModelInstanceCollection} to be checked.
+	 * @param collection2
+	 *            The second {@link IModelInstanceCollection} to be checked.
+	 * @return <code>true</code> if the {@link IModelInstanceCollection}'s
+	 *         contained {@link Collection}s are equal.
+	 */
+	private boolean collectionContentIsEqual(
+			IModelInstanceCollection<?> collection1,
+			IModelInstanceCollection<?> collection2) {
+
+		boolean result;
+
+		if (collection1.getCollection() == null
+				&& collection2.getCollection() == null) {
+			result = true;
+		}
+
+		else {
+			result = collection1.getCollection().equals(
+					collection2.getCollection());
+		}
+
+		return result;
+	}
+
+	/**
+	 * <p>
+	 * A helper method comparing the type of two
+	 * {@link IModelInstanceCollection}s.
+	 * </p>
+	 * 
+	 * @param collection1
+	 *            The first {@link IModelInstanceCollection} to be checked.
+	 * @param collection2
+	 *            The second {@link IModelInstanceCollection} to be checked.
+	 * @return <code>true</code> if the {@link IModelInstanceCollection}'s
+	 *         {@link Type} and their generic {@link Type}s are equal.
+	 */
+	private boolean collectionTypeIsEqual(
+			IModelInstanceCollection<?> collection1,
+			IModelInstanceCollection<?> collection2) {
+
+		boolean result;
+
+		if (collection1.getType() == null && collection2.getType() == null) {
+			result = true;
+		}
+
+		else if (collection1.getType().conformsTo(collection2.getType())
+				&& collection2.getType().conformsTo(collection1.getType())) {
+
+			result = this.elementTypeIsEqual((CollectionType) collection1
+					.getType(), (CollectionType) collection2.getType());
+		}
+
+		else {
+			result = false;
+		}
+
+		return result;
+	}
+
+	/**
+	 * <p>
+	 * A helper method comparing the element {@link Type}s of two
+	 * {@link CollectionType}s.
+	 * </p>
+	 * 
+	 * @param collectionType1
+	 *            The first {@link CollectionType} to be checked.
+	 * @param collectionType1
+	 *            The second {@link CollectionType} to be checked.
+	 * @return <code>true</code> if the {@link IModelInstanceCollection}'s
+	 *         {@link Type} and their generic {@link Type}s are equal.
+	 */
+	private boolean elementTypeIsEqual(CollectionType collectionType1,
+			CollectionType collectionType2) {
+
+		boolean result;
+
+		if (collectionType1.getElementType() == null
+				&& collectionType2.getElementType() == null) {
+			result = true;
+		}
+
+		else if (collectionType1.getElementType().conformsTo(
+				collectionType2.getElementType())
+				&& collectionType2.getElementType().conformsTo(
+						collectionType1.getElementType())) {
+
+			result = true;
+		}
+
+		else {
+			result = false;
+		}
+
+		return result;
 	}
 
 	/**
@@ -546,8 +656,7 @@ public class TestModelInstanceCollection {
 	@Test
 	public void testGetCollection1() {
 
-		msg =
-				ModelInstanceTypeTestSuiteMessages.TestModelInstanceCollection_GetCollectionIsWrong;
+		msg = ModelInstanceTypeTestSuiteMessages.TestModelInstanceCollection_GetCollectionIsWrong;
 		msg = NLS.bind(msg, type_bag, List.class.getCanonicalName());
 
 		/* The method should return a List or should be undefined. */
@@ -648,9 +757,9 @@ public class TestModelInstanceCollection {
 	@Test
 	public void testGetCollection2() {
 
-		msg =
-				ModelInstanceTypeTestSuiteMessages.TestModelInstanceCollection_GetCollectionIsWrong;
-		msg = NLS.bind(msg, type_orderedset, UniqueEList.class.getCanonicalName());
+		msg = ModelInstanceTypeTestSuiteMessages.TestModelInstanceCollection_GetCollectionIsWrong;
+		msg = NLS.bind(msg, type_orderedset, UniqueEList.class
+				.getCanonicalName());
 
 		/* The method should return a List or should be undefined. */
 		for (IModelInstanceCollection<?> aCollection : instances_orderedset) {
@@ -661,7 +770,8 @@ public class TestModelInstanceCollection {
 
 			else {
 				assertNotNull(msg, aCollection.getCollection());
-				assertTrue(msg, aCollection.getCollection() instanceof UniqueEList<?>);
+				assertTrue(msg,
+						aCollection.getCollection() instanceof UniqueEList<?>);
 			}
 		}
 		// end for.
@@ -675,8 +785,7 @@ public class TestModelInstanceCollection {
 	@Test
 	public void testGetCollection3() {
 
-		msg =
-				ModelInstanceTypeTestSuiteMessages.TestModelInstanceCollection_GetCollectionIsWrong;
+		msg = ModelInstanceTypeTestSuiteMessages.TestModelInstanceCollection_GetCollectionIsWrong;
 		msg = NLS.bind(msg, type_sequence, List.class.getCanonicalName());
 
 		/* The method should return a List or should be undefined. */
@@ -702,8 +811,7 @@ public class TestModelInstanceCollection {
 	@Test
 	public void testGetCollection4() {
 
-		msg =
-				ModelInstanceTypeTestSuiteMessages.TestModelInstanceCollection_GetCollectionIsWrong;
+		msg = ModelInstanceTypeTestSuiteMessages.TestModelInstanceCollection_GetCollectionIsWrong;
 		msg = NLS.bind(msg, type_set, Set.class.getCanonicalName());
 
 		/* The method should return a Set or should be undefined. */
@@ -729,8 +837,7 @@ public class TestModelInstanceCollection {
 	@Test
 	public void testGetType1() {
 
-		msg =
-				ModelInstanceTypeTestSuiteMessages.TestModelInstanceCollection_GetTypesIsWrong;
+		msg = ModelInstanceTypeTestSuiteMessages.TestModelInstanceCollection_GetTypesIsWrong;
 		msg = NLS.bind(msg, "Bag", CollectionKind.BAG.toString());
 
 		for (IModelInstanceCollection<?> aCollection : instances_bag) {
@@ -753,15 +860,18 @@ public class TestModelInstanceCollection {
 	@Test
 	public void testGetType2() {
 
-		msg =
-				ModelInstanceTypeTestSuiteMessages.TestModelInstanceCollection_GetTypesIsWrong;
-		msg = NLS.bind(msg, "OrderedSet", CollectionKind.ORDERED_SET.toString());
+		msg = ModelInstanceTypeTestSuiteMessages.TestModelInstanceCollection_GetTypesIsWrong;
+		msg = NLS
+				.bind(msg, "OrderedSet", CollectionKind.ORDERED_SET.toString());
 
 		for (IModelInstanceCollection<?> aCollection : instances_orderedset) {
 
 			assertNotNull(msg, aCollection.getType());
 
-			/* An OrderedSet should have the CollectionType of the kind OrderedSet. */
+			/*
+			 * An OrderedSet should have the CollectionType of the kind
+			 * OrderedSet.
+			 */
 			assertTrue(msg, aCollection.getType() instanceof CollectionType);
 			assertEquals(msg, CollectionKind.ORDERED_SET,
 					((CollectionType) aCollection.getType()).getKind());
@@ -777,18 +887,20 @@ public class TestModelInstanceCollection {
 	@Test
 	public void testGetType3() {
 
-		msg =
-				ModelInstanceTypeTestSuiteMessages.TestModelInstanceCollection_GetTypesIsWrong;
+		msg = ModelInstanceTypeTestSuiteMessages.TestModelInstanceCollection_GetTypesIsWrong;
 		msg = NLS.bind(msg, "Sequence", CollectionKind.SEQUENCE.toString());
 
 		for (IModelInstanceCollection<?> aCollection : instances_sequence) {
 
 			assertNotNull(msg, aCollection.getType());
 
-			/* An Sequence should have the CollectionType of the kind OrderedSet. */
+			/*
+			 * An Sequence should have the CollectionType of the kind
+			 * OrderedSet.
+			 */
 			assertTrue(msg, aCollection.getType() instanceof CollectionType);
-			assertEquals(msg, CollectionKind.SEQUENCE, ((CollectionType) aCollection
-					.getType()).getKind());
+			assertEquals(msg, CollectionKind.SEQUENCE,
+					((CollectionType) aCollection.getType()).getKind());
 		}
 		// end for.
 	}
@@ -801,8 +913,7 @@ public class TestModelInstanceCollection {
 	@Test
 	public void testGetType4() {
 
-		msg =
-				ModelInstanceTypeTestSuiteMessages.TestModelInstanceCollection_GetTypesIsWrong;
+		msg = ModelInstanceTypeTestSuiteMessages.TestModelInstanceCollection_GetTypesIsWrong;
 		msg = NLS.bind(msg, "Set", CollectionKind.SET.toString());
 
 		for (IModelInstanceCollection<?> aCollection : instances_set) {
@@ -825,8 +936,7 @@ public class TestModelInstanceCollection {
 	@Test
 	public void testIsOrdered1() {
 
-		msg =
-				ModelInstanceTypeTestSuiteMessages.TestModelInstanceCollection_IsOrderedIsWrong;
+		msg = ModelInstanceTypeTestSuiteMessages.TestModelInstanceCollection_IsOrderedIsWrong;
 		msg = NLS.bind(msg, type_bag, "not ");
 
 		/* A Bag should not be ordered. */
@@ -845,8 +955,7 @@ public class TestModelInstanceCollection {
 	@Test
 	public void testIsOrdered2() {
 
-		msg =
-				ModelInstanceTypeTestSuiteMessages.TestModelInstanceCollection_IsOrderedIsWrong;
+		msg = ModelInstanceTypeTestSuiteMessages.TestModelInstanceCollection_IsOrderedIsWrong;
 		msg = NLS.bind(msg, type_orderedset, "");
 
 		/* An OrderedSet should be ordered. */
@@ -865,8 +974,7 @@ public class TestModelInstanceCollection {
 	@Test
 	public void testIsOrdered3() {
 
-		msg =
-				ModelInstanceTypeTestSuiteMessages.TestModelInstanceCollection_IsOrderedIsWrong;
+		msg = ModelInstanceTypeTestSuiteMessages.TestModelInstanceCollection_IsOrderedIsWrong;
 		msg = NLS.bind(msg, type_sequence, "");
 
 		/* A Sequence should be ordered. */
@@ -885,8 +993,7 @@ public class TestModelInstanceCollection {
 	@Test
 	public void testIsOrdered4() {
 
-		msg =
-				ModelInstanceTypeTestSuiteMessages.TestModelInstanceCollection_IsOrderedIsWrong;
+		msg = ModelInstanceTypeTestSuiteMessages.TestModelInstanceCollection_IsOrderedIsWrong;
 		msg = NLS.bind(msg, type_set, "not ");
 
 		/* A Set should not be ordered. */
@@ -905,8 +1012,7 @@ public class TestModelInstanceCollection {
 	@Test
 	public void testIsUndefined() {
 
-		msg =
-				ModelInstanceTypeTestSuiteMessages.TestModelInstanceCollection_IsUndefinedIsWrong;
+		msg = ModelInstanceTypeTestSuiteMessages.TestModelInstanceCollection_IsUndefinedIsWrong;
 
 		/* The method should return null if the collection is undefined. */
 		for (IModelInstanceCollection<?> aCollection : instances_allCollections) {
@@ -930,8 +1036,7 @@ public class TestModelInstanceCollection {
 	@Test
 	public void testIsUnique1() {
 
-		msg =
-				ModelInstanceTypeTestSuiteMessages.TestModelInstanceCollection_IsUniqueIsWrong;
+		msg = ModelInstanceTypeTestSuiteMessages.TestModelInstanceCollection_IsUniqueIsWrong;
 		msg = NLS.bind(msg, type_bag, "not ");
 
 		/* The bag should not be unique. */
@@ -950,8 +1055,7 @@ public class TestModelInstanceCollection {
 	@Test
 	public void testIsUnique2() {
 
-		msg =
-				ModelInstanceTypeTestSuiteMessages.TestModelInstanceCollection_IsUniqueIsWrong;
+		msg = ModelInstanceTypeTestSuiteMessages.TestModelInstanceCollection_IsUniqueIsWrong;
 		msg = NLS.bind(msg, type_orderedset, "");
 
 		/* The OrderedSet should be unique. */
@@ -970,8 +1074,7 @@ public class TestModelInstanceCollection {
 	@Test
 	public void testIsUnique3() {
 
-		msg =
-				ModelInstanceTypeTestSuiteMessages.TestModelInstanceCollection_IsUniqueIsWrong;
+		msg = ModelInstanceTypeTestSuiteMessages.TestModelInstanceCollection_IsUniqueIsWrong;
 		msg = NLS.bind(msg, type_sequence, "not ");
 
 		/* The Sequence should not be unique. */
@@ -990,8 +1093,7 @@ public class TestModelInstanceCollection {
 	@Test
 	public void testIsUnique4() {
 
-		msg =
-				ModelInstanceTypeTestSuiteMessages.TestModelInstanceCollection_IsUniqueIsWrong;
+		msg = ModelInstanceTypeTestSuiteMessages.TestModelInstanceCollection_IsUniqueIsWrong;
 		msg = NLS.bind(msg, type_set, "");
 
 		/* The Set should be unique. */

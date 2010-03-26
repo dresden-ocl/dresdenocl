@@ -931,7 +931,8 @@ public class TestModelInstanceObject {
 				assertNotNull(msg, operationResult.getType());
 
 				/* The result should have an ordered set type. */
-				assertEquals(msg, TypeConstants.ORDERED_SET, operationResult
+				assertEquals(msg, TypeConstants
+						.ORDERED_SET(operation.getType()), operationResult
 						.getType());
 
 				/* The result should be an IModelInstanceCollecttion. */
@@ -1011,7 +1012,8 @@ public class TestModelInstanceObject {
 				assertNotNull(msg, operationResult.getType());
 
 				/* The result should have an set type. */
-				assertEquals(msg, TypeConstants.SET, operationResult.getType());
+				assertEquals(msg, TypeConstants.SET(operation.getType()),
+						operationResult.getType());
 
 				/* The result should be an IModelInstanceCollecttion. */
 				assertTrue(msg,
@@ -1091,8 +1093,8 @@ public class TestModelInstanceObject {
 				assertNotNull(msg, operationResult.getType());
 
 				/* The result should have an sequence type. */
-				assertEquals(msg, TypeConstants.SEQUENCE, operationResult
-						.getType());
+				assertEquals(msg, TypeConstants.SEQUENCE(operation.getType()),
+						operationResult.getType());
 
 				/* The result should be an IModelInstanceCollecttion. */
 				assertTrue(msg,
@@ -1172,7 +1174,8 @@ public class TestModelInstanceObject {
 				assertNotNull(msg, operationResult.getType());
 
 				/* The result should have an bag type. */
-				assertEquals(msg, TypeConstants.BAG, operationResult.getType());
+				assertEquals(msg, TypeConstants.BAG(operation.getType()),
+						operationResult.getType());
 
 				/* The result should be an IModelInstanceCollecttion. */
 				assertTrue(msg,
@@ -2275,8 +2278,8 @@ public class TestModelInstanceObject {
 					assertNotNull(msg, aPropertyValue.getType());
 
 					/* The result should have an ordered set type. */
-					assertEquals(msg, TypeConstants.ORDERED_SET, aPropertyValue
-							.getType());
+					assertEquals(msg, TypeConstants.ORDERED_SET(aProperty
+							.getType()), aPropertyValue.getType());
 
 					/* The result should be an IModelInstanceCollecttion. */
 					assertTrue(
@@ -2349,8 +2352,8 @@ public class TestModelInstanceObject {
 					assertNotNull(msg, aPropertyValue.getType());
 
 					/* The result should have an unordered set type. */
-					assertEquals(msg, TypeConstants.SET, aPropertyValue
-							.getType());
+					assertEquals(msg, TypeConstants.SET(aProperty.getType()),
+							aPropertyValue.getType());
 
 					/* The result should be an IModelInstanceCollecttion. */
 					assertTrue(
@@ -2423,8 +2426,8 @@ public class TestModelInstanceObject {
 					assertNotNull(msg, aPropertyValue.getType());
 
 					/* The result should have an ordered list type. */
-					assertEquals(msg, TypeConstants.SEQUENCE, aPropertyValue
-							.getType());
+					assertEquals(msg, TypeConstants.SEQUENCE(aProperty
+							.getType()), aPropertyValue.getType());
 
 					/* The result should be an IModelInstanceCollecttion. */
 					assertTrue(
@@ -2497,8 +2500,8 @@ public class TestModelInstanceObject {
 					assertNotNull(msg, aPropertyValue.getType());
 
 					/* The result should have an unordered list type. */
-					assertEquals(msg, TypeConstants.BAG, aPropertyValue
-							.getType());
+					assertEquals(msg, TypeConstants.BAG(aProperty.getType()),
+							aPropertyValue.getType());
 
 					/* The result should be an IModelInstanceCollecttion. */
 					assertTrue(
@@ -2648,51 +2651,11 @@ public class TestModelInstanceObject {
 	/**
 	 * <p>
 	 * Tests the method {@link IModelInstanceObject#getTypes()} for instances of
-	 * {@link Interface2}.
-	 * </p>
-	 */
-	@Test
-	public void testGetTypes4() {
-
-		msg = ModelInstanceTypeTestSuiteMessages.TestModelInstanceObject_GetTypesIsWrong;
-		msg += " "
-				+ ModelInstanceTypeTestSuiteMessages.TestModelInstanceObject_GetTypesOfInterface2IsWrong;
-
-		for (IModelInstanceElement anElement : instances_Interface2) {
-
-			/* An Interface2 instance should have at least one type. */
-			assertNotNull(msg, anElement.getType());
-
-			/*
-			 * An Interface2 instance should have Interface2 as Type XOR the
-			 * Interface3 as type.
-			 */
-			if (anElement.getType().conformsTo(type_Interface2)) {
-
-				if (anElement.getType().conformsTo(type_Interface3)) {
-					fail(msg);
-				}
-				// no else.
-			}
-
-			else {
-				if (!anElement.getType().conformsTo(type_Interface3)) {
-					fail(msg);
-				}
-				// no else.
-			}
-		}
-		// end for.
-	}
-
-	/**
-	 * <p>
-	 * Tests the method {@link IModelInstanceObject#getTypes()} for instances of
 	 * {@link Interface3}.
 	 * </p>
 	 */
 	@Test
-	public void testGetTypes5() {
+	public void testGetTypes4() {
 
 		msg = ModelInstanceTypeTestSuiteMessages.TestModelInstanceObject_GetTypesIsWrong;
 		msg += " "
