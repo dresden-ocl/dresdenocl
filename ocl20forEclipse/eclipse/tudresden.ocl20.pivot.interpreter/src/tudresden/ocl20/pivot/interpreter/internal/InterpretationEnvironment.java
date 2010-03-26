@@ -43,9 +43,6 @@ import tudresden.ocl20.pivot.interpreter.IOclInterpreter;
 import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceObject;
-import tudresden.ocl20.pivot.pivotmodel.Constraint;
-import tudresden.ocl20.pivot.pivotmodel.NamedElement;
-import tudresden.ocl20.pivot.pivotmodel.Property;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 
 /**
@@ -57,36 +54,8 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
  */
 public class InterpretationEnvironment implements IInterpretationEnvironment {
 
-	/**
-	 * Cached {@link Property} values associated by their
-	 * {@link IModelInstanceObject} and their {@link Property}.
-	 */
-	protected Map<IModelInstanceObject, Map<Property, OclAny>> cachedProperties = new WeakHashMap<IModelInstanceObject, Map<Property, OclAny>>();
-
-	@Override
-	public OclAny getCachedProperty(IModelInstanceObject imiObject,
-			Property property) {
-
-		OclAny result;
-
-		if (this.cachedProperties.containsKey(imiObject)
-				&& this.cachedProperties.get(imiObject).containsKey(property)) {
-			result = this.cachedProperties.get(imiObject).get(property);
-		}
-
-		else {
-			result = null;
-		}
-		// end else.
-
-		return result;
-	}
-
 	/** The global instance of the {@link InterpretationEnvironment}. */
 	private static IInterpretationEnvironment GLOBAL;
-
-	/** Cached results. */
-	private HashMap<NamedElement, OclAny> cachedResults;
 
 	/** the actual model instance. */
 	protected IModelInstance modelInstance;
@@ -97,9 +66,6 @@ public class InterpretationEnvironment implements IInterpretationEnvironment {
 	 * 'Object schizophrenia'.
 	 */
 	protected HashMap<IModelInstanceElement, HashMap<OperationCallExp, OclAny>> postconditionValues;
-
-	/** Saved constraints for body, def, initial and derive. */
-	protected HashMap<String, Constraint> savedConstraints = new HashMap<String, Constraint>();;
 
 	/**
 	 * Saved instances of {@link Type}s existing before the current context's
@@ -128,114 +94,12 @@ public class InterpretationEnvironment implements IInterpretationEnvironment {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.interpreter.IEnvironment#addConstraint(java.lang.
-	 * String, tudresden.ocl20.pivot.pivotmodel.Constraint)
-	 */
-	public void addConstraint(String path, Constraint aConstraint) {
-
-		this.savedConstraints.put(path, aConstraint);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
 	 * tudresden.ocl20.pivot.interpreter.IEnvironment#addVar(java.lang.String,
 	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny)
 	 */
 	public void addVar(String path, OclAny oclRoot) {
 
 		this.savedVariables.put(path, oclRoot);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * tudresden.ocl20.pivot.interpreter.IEnvironment#cacheResult(tudresden.
-	 * ocl20. pivot.pivotmodel.NamedElement,
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny)
-	 */
-	public void cacheResult(NamedElement aNamedElement, OclAny aResult) {
-
-		if (this.cachedResults == null) {
-			this.cachedResults = new HashMap<NamedElement, OclAny>();
-		}
-		// no else.
-
-		this.cachedResults.put(aNamedElement, aResult);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see tudresden.ocl20.pivot.interpreter.IEnvironment#clearCache()
-	 */
-	public void clearCache() {
-
-		this.cachedProperties.clear();
-
-		if (this.cachedResults != null) {
-
-			this.cachedResults.clear();
-			this.cachedResults = null;
-		}
-		// no else.
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @seetudresden.ocl20.pivot.interpreter.IInterpretationEnvironment#
-	 * clearPreparedConstraints ()
-	 */
-	public void clearPreparedConstraints() {
-
-		this.savedConstraints.clear();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * tudresden.ocl20.pivot.interpreter.IEnvironment#getCachedResult(tudresden
-	 * .ocl20 .pivot.pivotmodel.NamedElement)
-	 */
-	public OclAny getCachedResult(NamedElement aNamedElement) {
-
-		OclAny result;
-
-		if (this.cachedResults != null) {
-			result = cachedResults.get(aNamedElement);
-		}
-
-		else {
-			result = null;
-		}
-
-		return result;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * tudresden.ocl20.pivot.interpreter.IEnvironment#getConstraint(java.lang.
-	 * String)
-	 */
-	public Constraint getConstraint(String path) {
-
-		Constraint result;
-
-		if (this.savedConstraints != null) {
-			result = this.savedConstraints.get(path);
-		}
-
-		else {
-			result = null;
-		}
-
-		return result;
 	}
 
 	/*
@@ -405,7 +269,6 @@ public class InterpretationEnvironment implements IInterpretationEnvironment {
 
 		result.modelInstance = this.modelInstance;
 		result.postconditionValues = this.postconditionValues;
-		result.savedConstraints = this.savedConstraints;
 
 		/*
 		 * The Map of variables must be cloned. Otherwise new declared variables
@@ -413,8 +276,6 @@ public class InterpretationEnvironment implements IInterpretationEnvironment {
 		 */
 		result.savedVariables = (HashMap<String, OclAny>) this.savedVariables
 				.clone();
-
-		result.cachedResults = this.cachedResults;
 
 		result.savedInstances = this.savedInstances;
 

@@ -35,9 +35,6 @@ import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclModelInstanceObject;
 import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceObject;
-import tudresden.ocl20.pivot.pivotmodel.Constraint;
-import tudresden.ocl20.pivot.pivotmodel.NamedElement;
-import tudresden.ocl20.pivot.pivotmodel.Property;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 
 /**
@@ -49,20 +46,6 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
  * @author Ronny Brandt
  */
 public interface IInterpretationEnvironment extends Cloneable {
-
-	/**
-	 * <p>
-	 * Saves the {@link Constraint} for the given path. Used for OCL-constraint
-	 * types body, def, initial and derive.
-	 * </p>
-	 * 
-	 * @param path
-	 *            The path of the attribute/operation described by the
-	 *            {@link Constraint}.
-	 * @param aConstraint
-	 *            The {@link Constraint} describing the attribute/operation.
-	 */
-	public void addConstraint(String path, Constraint aConstraint);
 
 	/**
 	 * <p>
@@ -78,83 +61,12 @@ public interface IInterpretationEnvironment extends Cloneable {
 
 	/**
 	 * <p>
-	 * Caches results for a {@link NamedElement} (e.g. an expression). Used for
-	 * performance enhancement.
-	 * </p>
-	 * 
-	 * @param anElement
-	 *            The {@link NamedElement} the result belongs to.
-	 * @param result
-	 *            The result for the {@link NamedElement}.
-	 */
-	public void cacheResult(NamedElement anElement, OclAny result);
-
-	/**
-	 * <p>
-	 * Removes all results from cache.
-	 * </p>
-	 */
-	public void clearCache();
-
-	/**
-	 * <p>
-	 * Removes all prepared {@link Constraint}s from the
-	 * {@link IInterpretationEnvironment}.
-	 * </p>
-	 */
-	public void clearPreparedConstraints();
-
-	/**
-	 * <p>
 	 * Clones an {@link IInterpretationEnvironment}. Used for creating local
 	 * environments.
 	 * 
 	 * @return A copy of the {@link IInterpretationEnvironment}.
 	 */
 	public IInterpretationEnvironment clone();
-
-	/**
-	 * <p>
-	 * Gets the cached result for a {@link NamedElement}.
-	 * </p>
-	 * 
-	 * @param anElement
-	 *            The {@link NamedElement} the result is asked for.
-	 * 
-	 * @return The cached result.
-	 */
-	public OclAny getCachedResult(NamedElement anElement);
-
-	/**
-	 * <p>
-	 * Returns a cached value of a given {@link Property} for a given
-	 * {@link IModelInstanceObject}.
-	 * </p>
-	 * 
-	 * @param imiObject
-	 *            The {@link IModelInstanceObject} to which the {@link Property}
-	 *            belongs to.
-	 * @param property
-	 *            The {@link Property} which cached value shall be returned.
-	 * 
-	 * @return The cached value or null, if no cached value exists.
-	 */
-	public OclAny getCachedProperty(IModelInstanceObject imiObject,
-			Property property);
-
-	/**
-	 * <p>
-	 * Gets saved {@link Constraint} describing attribute/operation with given
-	 * path.
-	 * </p>
-	 * 
-	 * @param path
-	 *            The path of the attribute/operation described by the
-	 *            {@link Constraint}.
-	 * 
-	 * @return The {@link Constraint} describing the attribute/operation.
-	 */
-	public Constraint getConstraint(String path);
 
 	/**
 	 * <p>
@@ -192,6 +104,37 @@ public interface IInterpretationEnvironment extends Cloneable {
 
 	/**
 	 * <p>
+	 * Checks whether or not a given {@link IModelInstanceObject} (represented
+	 * by an {@link OclModelInstanceObject}) existed before the execution of the
+	 * current interpreted postcondition. This method can be used to interpret
+	 * the <code>oclIsNew()</code> operation during the interpretation of a
+	 * postcondition.
+	 * 
+	 * @param source
+	 *            The {@link OclModelInstanceObject} for that the
+	 *            <code>oclIsNew()</code> operation shall be evaluated.
+	 * @return <code>true</code>, if the given {@link OclModelInstanceObject}
+	 *         did not exist before the operation invocation of the current
+	 *         interpreted postcondition.
+	 */
+	public boolean isNewInstance(OclModelInstanceObject source);
+
+	/**
+	 * <p>
+	 * Saves a set of all instances of a given {@link Type} that existed during
+	 * the preparation of a postcondition. The stored value can be used to call
+	 * the method {@link IInterpretationEnvironment#isNewInstance(OclAny)} to
+	 * interpret the <code>oclIsNew()</code> operation during the interpretation
+	 * of a postcondition.
+	 * </p>
+	 * 
+	 * @param type
+	 *            The {@link Type} for which the instances shall be stored.
+	 */
+	public void saveOldInstances(Type type);
+
+	/**
+	 * <p>
 	 * Saves result of atPre() and oclIsNew() for preparation of postconditions.
 	 * </p>
 	 * 
@@ -213,35 +156,4 @@ public interface IInterpretationEnvironment extends Cloneable {
 	 *            The new {@link IModelInstance}.
 	 */
 	public void setModelInstance(IModelInstance aModelInstance);
-
-	/**
-	 * <p>
-	 * Saves a set of all instances of a given {@link Type} that existed during
-	 * the preparation of a postcondition. The stored value can be used to call
-	 * the method {@link IInterpretationEnvironment#isNewInstance(OclAny)} to
-	 * interpret the <code>oclIsNew()</code> operation during the interpretation
-	 * of a postcondition.
-	 * </p>
-	 * 
-	 * @param type
-	 *            The {@link Type} for which the instances shall be stored.
-	 */
-	public void saveOldInstances(Type type);
-
-	/**
-	 * <p>
-	 * Checks whether or not a given {@link IModelInstanceObject} (represented
-	 * by an {@link OclModelInstanceObject}) existed before the execution of the
-	 * current interpreted postcondition. This method can be used to interpret
-	 * the <code>oclIsNew()</code> operation during the interpretation of a
-	 * postcondition.
-	 * 
-	 * @param source
-	 *            The {@link OclModelInstanceObject} for that the
-	 *            <code>oclIsNew()</code> operation shall be evaluated.
-	 * @return <code>true</code>, if the given {@link OclModelInstanceObject}
-	 *         did not exist before the operation invocation of the current
-	 *         interpreted postcondition.
-	 */
-	public boolean isNewInstance(OclModelInstanceObject source);
 }

@@ -274,7 +274,6 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		OclAny result;
 
 		this.isPreparationRun = false;
-		this.myEnvironment.clearCache();
 
 		/* Add self variable to environment. */
 		this.myEnvironment.addVar("self", context);

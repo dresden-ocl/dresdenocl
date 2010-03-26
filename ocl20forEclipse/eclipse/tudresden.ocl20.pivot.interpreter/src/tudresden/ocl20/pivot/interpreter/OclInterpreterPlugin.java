@@ -31,7 +31,6 @@
 package tudresden.ocl20.pivot.interpreter;
 
 import org.apache.log4j.Logger;
-import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.Plugin;
 import org.osgi.framework.BundleContext;
 
