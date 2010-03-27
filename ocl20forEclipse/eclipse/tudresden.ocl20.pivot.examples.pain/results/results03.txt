@@ -1,0 +1,130 @@
+Interpreation results of instance: Pain8Invalid
+Object:,Constraint:,Result:
+[DirectDebitTransactionInformation1],EPC_AOS_DbtrAgtAcct,true
+[DirectDebitTransactionInformation1],EPC_AOS_DrctDbtTxInf,true
+[DirectDebitTransactionInformation1],EPC_AOS_DrctDbtTxInfDbtr,false
+[DirectDebitTransactionInformation1],EPC_AOS_DrctDbtTxInfPmtTpInf,false
+[DirectDebitTransactionInformation1],EPC_AOS_DrctDbtTxInfPurpPrtry,true
+[DirectDebitTransactionInformation1],EPC_AOS_DrctDbtTxInfUltmtCdtr,false
+[DirectDebitTransactionInformation1],EPC_AOS_DrctDbtTxInfUltmtDbtr,false
+[DirectDebitTransactionInformation1],EPC_AOS_InstrForCdtrAgt,true
+[DirectDebitTransactionInformation1],EPC_Charge_Bearer,false
+[DirectDebitTransactionInformation1],EPC_DbtrAcctId,false
+[DirectDebitTransactionInformation1],EPC_DbtradrLine,true
+[DirectDebitTransactionInformation1],EPC_dbtrAgtfinInstnId,true
+[DirectDebitTransactionInformation1],EPC_dbtrNm,true
+[DirectDebitTransactionInformation1],EPC_drctDbtTxInfdbtrIdOrgId,true
+[DirectDebitTransactionInformation1],EPC_drctDbtTxInfdbtrIdprvtId,invalid: [Party2Choice] is null.
+[DirectDebitTransactionInformation1],EPC_drctDbtTxInfUltmdbtrIdorgId,true
+[DirectDebitTransactionInformation1],EPC_drctDbtTxInfultmtcdtrIdorgId,true
+[DirectDebitTransactionInformation1],EPC_drctDbtTxInfultmtCdtrIdprvtId,invalid: [Party2Choice] is null.
+[DirectDebitTransactionInformation1],EPC_drctDbtTxInfultmtDbtrIdprvtId,invalid: [Party2Choice] is null.
+[DirectDebitTransactionInformation1],EPC_DrctDbTxInf_MandatoryFields,false
+[DirectDebitTransactionInformation1],EPC_DrctDbTxInfchrgBr,false
+[DirectDebitTransactionInformation1],EPC_InstdAmtEURO,false
+[DirectDebitTransactionInformation1],EPC_RmtInfstrduStrd,true
+[DirectDebitTransactionInformation1],EPC_AOS_DbtrAgtAcct,true
+[DirectDebitTransactionInformation1],EPC_AOS_DrctDbtTxInf,true
+[DirectDebitTransactionInformation1],EPC_AOS_DrctDbtTxInfDbtr,false
+[DirectDebitTransactionInformation1],EPC_AOS_DrctDbtTxInfPmtTpInf,false
+[DirectDebitTransactionInformation1],EPC_AOS_DrctDbtTxInfPurpPrtry,true
+[DirectDebitTransactionInformation1],EPC_AOS_DrctDbtTxInfUltmtCdtr,false
+[DirectDebitTransactionInformation1],EPC_AOS_DrctDbtTxInfUltmtDbtr,false
+[DirectDebitTransactionInformation1],EPC_AOS_InstrForCdtrAgt,true
+[DirectDebitTransactionInformation1],EPC_Charge_Bearer,false
+[DirectDebitTransactionInformation1],EPC_DbtrAcctId,false
+[DirectDebitTransactionInformation1],EPC_DbtradrLine,true
+[DirectDebitTransactionInformation1],EPC_dbtrAgtfinInstnId,true
+[DirectDebitTransactionInformation1],EPC_dbtrNm,true
+[DirectDebitTransactionInformation1],EPC_drctDbtTxInfdbtrIdOrgId,true
+[DirectDebitTransactionInformation1],EPC_drctDbtTxInfdbtrIdprvtId,invalid: [Party2Choice] is null.
+[DirectDebitTransactionInformation1],EPC_drctDbtTxInfUltmdbtrIdorgId,true
+[DirectDebitTransactionInformation1],EPC_drctDbtTxInfultmtcdtrIdorgId,true
+[DirectDebitTransactionInformation1],EPC_drctDbtTxInfultmtCdtrIdprvtId,invalid: [Party2Choice] is null.
+[DirectDebitTransactionInformation1],EPC_drctDbtTxInfultmtDbtrIdprvtId,invalid: [Party2Choice] is null.
+[DirectDebitTransactionInformation1],EPC_DrctDbTxInf_MandatoryFields,true
+[DirectDebitTransactionInformation1],EPC_DrctDbTxInfchrgBr,false
+[DirectDebitTransactionInformation1],EPC_InstdAmtEURO,false
+[DirectDebitTransactionInformation1],EPC_RmtInfstrduStrd,true
+[Pain00800101],Grouping1Rule,true
+[Pain00800101],Grouping2Rule,true
+[RemittanceInformation1],EPC_AOS_RmtInfStrd,true
+[RemittanceInformation1],EPC_RmtInfStrd,false
+[RemittanceInformation1],EPC_rmtInfustrd,true
+[ServiceLevel3Choice],EPC_svcLvlCd,false
+[MandateRelatedInformation1],AmendmentIndicatorRule,true
+[MandateRelatedInformation1],EPC_AOS_MndtRltInf,false
+[MandateRelatedInformation1],EPC_mndtRltdInf_AmdmntInd,true
+[MandateRelatedInformation1],EPC_orgnlDbtrAcctId,false
+[PaymentTypeInformation2],EPC_AOS_PmtTpInf,false
+[PaymentTypeInformation2],EPC_LclInstrm,false
+[PaymentTypeInformation2],EPC_SvcLvl,true
+[PaymentTypeInformation2],EPC_AOS_PmtTpInf,false
+[PaymentTypeInformation2],EPC_LclInstrm,false
+[PaymentTypeInformation2],EPC_SvcLvl,true
+[PaymentInstructionInformation2],ChargeBearerRule,true
+[PaymentInstructionInformation2],ChargesAccountAgentRule,true
+[PaymentInstructionInformation2],ChargesAccountRule,true
+[PaymentInstructionInformation2],EPC_AOS_Cdtr,false
+[PaymentInstructionInformation2],EPC_AOS_CdtrAcct,true
+[PaymentInstructionInformation2],EPC_AOS_CdtrAgtAcct,true
+[PaymentInstructionInformation2],EPC_AOS_ChrgsAcct,true
+[PaymentInstructionInformation2],EPC_AOS_ChrgsAcctAgt,true
+[PaymentInstructionInformation2],EPC_AOS_UltmtCdtr,false
+[PaymentInstructionInformation2],EPC_CdtrAcctId,false
+[PaymentInstructionInformation2],EPC_CdtrAdrLine,true
+[PaymentInstructionInformation2],EPC_cdtrAgtFinInstnId,true
+[PaymentInstructionInformation2],EPC_cdtrNm,true
+[PaymentInstructionInformation2],EPC_cdtrSchmeId,invalid: Source of iterator collectNested() was invalid.
+[PaymentInstructionInformation2],EPC_PmtInfchrgBr,false
+[PaymentInstructionInformation2],EPC_PmtInfId,false
+[PaymentInstructionInformation2],EPC_PmtInfultmtCdtrIdorgId,true
+[PaymentInstructionInformation2],EPC_PmtInfultmtCdtrIdprvtId,invalid: [Party2Choice] is null.
+[PaymentInstructionInformation2],EPC_PmtTpInf,false
+[PaymentInstructionInformation2],EPC_pmtTpInfSeqTp,true
+[PaymentInstructionInformation2],EPC_Ultimatecdtr,true
+[PaymentInstructionInformation2],PaymentTypeInformationRule,true
+[GroupHeader1],EPC_AOS_GrpHdr,false
+[GroupHeader1],EPC_GprHdrInitgPtyIdorgId,true
+[GroupHeader1],EPC_GrpHdrGrpgMIXD,false
+[GroupHeader1],EPC_GrpHdrprvtId,invalid: [Party2Choice] is null.
+[DirectDebitTransaction1],EPC_AOS_CdtrSchmeId,false
+[DirectDebitTransaction1],EPC_AOS_DrctDbtTx,true
+[DirectDebitTransaction1],EPC_cdtrSchmeId_prvtId_SEPA,invalid: Source of iterator forAll() was invalid.
+[DirectDebitTransaction1],EPC_cdtrSchmeId_prvtIdOnlyOne,invalid: [Party2Choice] is null.
+[DirectDebitTransaction1],EPC_mndtRltdInf_OrgnlcdtrSchmeId_prvtId_SEPA,invalid: Source of iterator forAll() was invalid.
+[DirectDebitTransaction1],EPC_mndtRltdInf_orgnlCdtrSchmeId_prvtIdOnlyOne,invalid: [Party2Choice] is null.
+[DirectDebitTransaction1],EPC_PACS3Mapping_drctDbtTxcdtrSchmeId,false
+[DirectDebitTransaction1],EPC_AOS_CdtrSchmeId,false
+[DirectDebitTransaction1],EPC_AOS_DrctDbtTx,false
+[DirectDebitTransaction1],EPC_cdtrSchmeId_prvtId_SEPA,invalid: Source of iterator forAll() was invalid.
+[DirectDebitTransaction1],EPC_cdtrSchmeId_prvtIdOnlyOne,invalid: [Party2Choice] is null.
+[DirectDebitTransaction1],EPC_mndtRltdInf_OrgnlcdtrSchmeId_prvtId_SEPA,invalid: Source of iterator forAll() was invalid.
+[DirectDebitTransaction1],EPC_mndtRltdInf_orgnlCdtrSchmeId_prvtIdOnlyOne,invalid: [Party2Choice] is null.
+[DirectDebitTransaction1],EPC_PACS3Mapping_drctDbtTxcdtrSchmeId,false
+[ServiceLevel3Choice],EPC_svcLvlCd,false
+[RemittanceInformation1],EPC_AOS_RmtInfStrd,true
+[RemittanceInformation1],EPC_RmtInfStrd,false
+[RemittanceInformation1],EPC_rmtInfustrd,true
+[PaymentInstructionInformation2],ChargeBearerRule,true
+[PaymentInstructionInformation2],ChargesAccountAgentRule,true
+[PaymentInstructionInformation2],ChargesAccountRule,true
+[PaymentInstructionInformation2],EPC_AOS_Cdtr,false
+[PaymentInstructionInformation2],EPC_AOS_CdtrAcct,true
+[PaymentInstructionInformation2],EPC_AOS_CdtrAgtAcct,true
+[PaymentInstructionInformation2],EPC_AOS_ChrgsAcct,true
+[PaymentInstructionInformation2],EPC_AOS_ChrgsAcctAgt,true
+[PaymentInstructionInformation2],EPC_AOS_UltmtCdtr,false
+[PaymentInstructionInformation2],EPC_CdtrAcctId,false
+[PaymentInstructionInformation2],EPC_CdtrAdrLine,true
+[PaymentInstructionInformation2],EPC_cdtrAgtFinInstnId,true
+[PaymentInstructionInformation2],EPC_cdtrNm,true
+[PaymentInstructionInformation2],EPC_cdtrSchmeId,invalid: Source of iterator collectNested() was invalid.
+[PaymentInstructionInformation2],EPC_PmtInfchrgBr,false
+[PaymentInstructionInformation2],EPC_PmtInfId,false
+[PaymentInstructionInformation2],EPC_PmtInfultmtCdtrIdorgId,true
+[PaymentInstructionInformation2],EPC_PmtInfultmtCdtrIdprvtId,invalid: [Party2Choice] is null.
+[PaymentInstructionInformation2],EPC_PmtTpInf,false
+[PaymentInstructionInformation2],EPC_pmtTpInfSeqTp,true
+[PaymentInstructionInformation2],EPC_Ultimatecdtr,true
+[PaymentInstructionInformation2],PaymentTypeInformationRule,true
