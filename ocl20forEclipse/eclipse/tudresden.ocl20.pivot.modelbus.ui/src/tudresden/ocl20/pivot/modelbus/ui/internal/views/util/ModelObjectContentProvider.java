@@ -20,7 +20,10 @@ package tudresden.ocl20.pivot.modelbus.ui.internal.views.util;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.jface.viewers.IStructuredContentProvider;
@@ -82,10 +85,19 @@ public class ModelObjectContentProvider implements IStructuredContentProvider,
 		if (parentElement instanceof IModelInstance) {
 
 			IModelInstance anIModelInstance;
-			Set<Type> implementedTypes;
+			List<Type> implementedTypes;
 
 			anIModelInstance = (IModelInstance) parentElement;
-			implementedTypes = anIModelInstance.getAllImplementedTypes();
+			implementedTypes = new ArrayList<Type>(anIModelInstance
+					.getAllImplementedTypes());
+
+			/* Sort the types by their name. */
+			Collections.sort(implementedTypes, new Comparator<Type>() {
+				public int compare(Type first, Type second) {
+					return first.getQualifiedName().compareTo(
+							second.getQualifiedName());
+				}
+			});
 
 			result = implementedTypes.toArray(new Type[0]);
 		}
@@ -109,33 +121,40 @@ public class ModelObjectContentProvider implements IStructuredContentProvider,
 			IModelInstanceObject imiObject;
 			imiObject = (IModelInstanceObject) parentElement;
 
-			List<ModelInstanceObjectProperty> resultList;
-			resultList = new ArrayList<ModelInstanceObjectProperty>();
+			Map<String, ModelInstanceObjectProperty> adaptedFeatures;
+			adaptedFeatures = new HashMap<String, ModelInstanceObjectProperty>();
 
 			/* If the element has at least on children it has elements. */
 			for (Property property : imiObject.getType().allProperties()) {
 				IModelInstanceElement propertyValue;
-				propertyValue = null;
 
 				try {
 					propertyValue = imiObject.getProperty(property);
 				}
 
 				catch (PropertyAccessException e) {
-					/* Do nothing. */
+					propertyValue = null;
 				}
 
 				catch (PropertyNotFoundException e) {
-					/* Do nothing. */
+					propertyValue = null;
 				}
 
-				ModelInstanceObjectProperty modelInstanceObjectProperty;
-				modelInstanceObjectProperty = new ModelInstanceObjectProperty(
-						imiObject, property, propertyValue);
+				if (!adaptedFeatures.containsKey(property)) {
+					ModelInstanceObjectProperty modelInstanceObjectProperty;
+					modelInstanceObjectProperty = new ModelInstanceObjectProperty(
+							imiObject, property, propertyValue);
 
-				resultList.add(modelInstanceObjectProperty);
+					adaptedFeatures.put(property.getName(),
+							modelInstanceObjectProperty);
+				}
+				// no else.
 			}
 			// end for.
+
+			List<ModelInstanceObjectProperty> resultList;
+			resultList = new ArrayList<ModelInstanceObjectProperty>(
+					adaptedFeatures.values());
 
 			Collections.sort(resultList);
 			result = resultList.toArray(new ModelInstanceObjectProperty[0]);

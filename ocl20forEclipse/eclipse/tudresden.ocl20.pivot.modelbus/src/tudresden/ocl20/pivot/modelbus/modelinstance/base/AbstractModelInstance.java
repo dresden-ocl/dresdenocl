@@ -133,12 +133,12 @@ public abstract class AbstractModelInstance implements IModelInstance {
 
 				if (multiplicityElement.isOrdered()) {
 					result = factory.createModelInstanceElement(adapteeResult,
-							TypeConstants.ORDERED_SET);
+							TypeConstants.ORDERED_SET(type));
 				}
 
 				else {
 					result = factory.createModelInstanceElement(adapteeResult,
-							TypeConstants.SET);
+							TypeConstants.SET(type));
 				}
 				// end. else
 			}
@@ -148,12 +148,12 @@ public abstract class AbstractModelInstance implements IModelInstance {
 
 				if (multiplicityElement.isOrdered()) {
 					result = factory.createModelInstanceElement(adapteeResult,
-							TypeConstants.SEQUENCE);
+							TypeConstants.SEQUENCE(type));
 				}
 
 				else {
 					result = factory.createModelInstanceElement(adapteeResult,
-							TypeConstants.BAG);
+							TypeConstants.BAG(type));
 				}
 				// end else.
 			}

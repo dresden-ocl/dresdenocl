@@ -20,6 +20,7 @@ with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
 package tudresden.ocl20.pivot.modelinstancetype.xml.internal.modelinstance;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.WeakHashMap;
@@ -29,6 +30,7 @@ import org.eclipse.osgi.util.NLS;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 
+import tudresden.ocl20.pivot.essentialocl.types.CollectionType;
 import tudresden.ocl20.pivot.modelbus.ModelAccessException;
 import tudresden.ocl20.pivot.modelbus.model.IModel;
 import tudresden.ocl20.pivot.modelbus.modelinstance.exception.TypeNotFoundInModelException;
@@ -156,6 +158,7 @@ public class XmlModelInstanceFactory extends BasisJavaModelInstanceFactory {
 	 * #createModelInstanceElement(java.lang.Object,
 	 * tudresden.ocl20.pivot.pivotmodel.Type)
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public IModelInstanceElement createModelInstanceElement(Object adapted,
 			Type type) {
@@ -239,6 +242,14 @@ public class XmlModelInstanceFactory extends BasisJavaModelInstanceFactory {
 				}
 				// end else.
 			}
+		}
+
+		else if (type instanceof CollectionType
+				&& adapted instanceof Collection<?>) {
+			result = BasisJavaModelInstanceFactory
+					.createModelInstanceCollection(
+							(Collection<IModelInstanceElement>) adapted,
+							(CollectionType) type);
 		}
 
 		else {

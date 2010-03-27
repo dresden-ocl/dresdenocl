@@ -28,6 +28,7 @@ import org.eclipse.osgi.util.NLS;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import tudresden.ocl20.pivot.modelbus.modelinstance.base.AbstractModelInstance;
 import tudresden.ocl20.pivot.modelbus.modelinstance.exception.AsTypeCastException;
 import tudresden.ocl20.pivot.modelbus.modelinstance.exception.CopyForAtPreException;
 import tudresden.ocl20.pivot.modelbus.modelinstance.exception.OperationAccessException;
@@ -38,7 +39,6 @@ import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceFactory;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceObject;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.base.AbstractModelInstanceElement;
-import tudresden.ocl20.pivot.modelbus.util.OclCollectionTypeKind;
 import tudresden.ocl20.pivot.modelinstancetype.xml.XmlModelInstanceTypePlugin;
 import tudresden.ocl20.pivot.modelinstancetype.xml.internal.msg.XmlModelInstanceTypeMessages;
 import tudresden.ocl20.pivot.pivotmodel.Enumeration;
@@ -348,7 +348,6 @@ public class XmlModelInstanceObject extends AbstractModelInstanceElement
 					&& (property.getType() instanceof PrimitiveType)
 					|| property.getType() instanceof Enumeration) {
 
-
 				for (int index = 0; index < this.adaptedNode.getAttributes()
 						.getLength(); index++) {
 
@@ -357,9 +356,9 @@ public class XmlModelInstanceObject extends AbstractModelInstanceElement
 
 					if (propertyNode.getNodeName().equalsIgnoreCase(
 							property.getName())) {
-						result = this.modelInstanceFactory
-								.createModelInstanceElement(propertyNode,
-										property.getType());
+						result = AbstractModelInstance.adaptInvocationResult(
+								propertyNode, property.getType(), property,
+								this.modelInstanceFactory);
 						break;
 					}
 					// no else.
@@ -375,9 +374,9 @@ public class XmlModelInstanceObject extends AbstractModelInstanceElement
 					 * Adapt the text content of the node as a primitive type
 					 * (is done inside the factory).
 					 */
-					result = this.modelInstanceFactory
-							.createModelInstanceElement(this.adaptedNode,
-									property.getType());
+					result = AbstractModelInstance.adaptInvocationResult(
+							this.adaptedNode, property.getType(), property,
+							this.modelInstanceFactory);
 				}
 				// no else.
 			}
@@ -419,50 +418,22 @@ public class XmlModelInstanceObject extends AbstractModelInstanceElement
 					}
 					// end for.
 
-					if (property.isOrdered()) {
-
-						if (property.isUnique()) {
-							result = this.modelInstanceFactory
-									.createModelInstanceCollection(imiList,
-											OclCollectionTypeKind.ORDEREDSET);
-						}
-
-						else {
-							result = this.modelInstanceFactory
-									.createModelInstanceCollection(imiList,
-											OclCollectionTypeKind.SEQUENCE);
-						}
-						// end else.
-					}
-
-					else {
-						if (property.isUnique()) {
-							result = this.modelInstanceFactory
-									.createModelInstanceCollection(imiList,
-											OclCollectionTypeKind.SET);
-						}
-
-						else {
-							result = this.modelInstanceFactory
-									.createModelInstanceCollection(imiList,
-											OclCollectionTypeKind.BAG);
-						}
-						// end else.
-					}
-					// end else.
+					result = AbstractModelInstance.adaptInvocationResult(
+							imiList, property.getType(), property,
+							this.modelInstanceFactory);
 				}
 
 				else {
 					if (propertyNodes.size() > 0) {
-						result = this.modelInstanceFactory
-								.createModelInstanceElement(propertyNodes
-										.get(0), property.getType());
+						result = AbstractModelInstance.adaptInvocationResult(
+								propertyNodes.get(0), property.getType(),
+								property, this.modelInstanceFactory);
 					}
 
 					else {
-						result = this.modelInstanceFactory
-								.createModelInstanceElement(null, property
-										.getType());
+						result = AbstractModelInstance.adaptInvocationResult(
+								null, property.getType(), property,
+								this.modelInstanceFactory);
 					}
 				}
 			}

@@ -39,7 +39,6 @@ import java.util.Map;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.viewers.ISelection;
-import org.eclipse.jface.viewers.TreeSelection;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
@@ -100,7 +99,13 @@ public class ModelInstancesView extends ViewPart implements
 	 */
 	private Map<IModel, Map<IModelInstance, ModelInstanceSelectionAction>> myModelInstanceSelectionActions;
 
-	/** The actual filter to show {@link IModelInstanceElement}s. */
+	/**
+	 * TODO Claas: Disabled filter because it is more confusing then helpful
+	 * here.
+	 * 
+	 * The actual filter to show {@link IModelInstanceElement}s.
+	 */
+	@SuppressWarnings("unused")
 	private ModelObjectFilter myModelObjectFilter = new ModelObjectFilter();
 
 	/** The selected {@link ModelInstanceSelectionAction}. */
@@ -213,9 +218,6 @@ public class ModelInstancesView extends ViewPart implements
 		this.myViewer.setLabelProvider(new ModelObjectLabelProvider());
 
 		this.myViewer.setInput(this.getViewSite());
-
-		/* Automatically expand top-level elements. */
-		this.myViewer.setAutoExpandLevel(2);
 
 		this.initMenu();
 
@@ -335,40 +337,44 @@ public class ModelInstancesView extends ViewPart implements
 	 */
 	public void selectionChanged(IWorkbenchPart part, ISelection selection) {
 
-		/* Check if the given part is a ModelsView. */
-		if (part != null && part instanceof ModelsView) {
-
-			/* Check if the given selection is a TreeSelection. */
-			if (selection != null && selection instanceof TreeSelection) {
-
-				TreeSelection aTreeSelection;
-				Iterator<?> aSelectionIt;
-
-				/* Remove the old and create a new ModelObjectFilter. */
-				this.myViewer.removeFilter(this.myModelObjectFilter);
-				this.myModelObjectFilter.clearFilter();
-
-				aTreeSelection = (TreeSelection) selection;
-				aSelectionIt = aTreeSelection.iterator();
-
-				/* Iterate over the elements of the selection. */
-				while (aSelectionIt.hasNext()) {
-
-					Object anObject;
-
-					anObject = aSelectionIt.next();
-
-					this.myModelObjectFilter.addFilter(anObject);
-				}
-				// end while.
-
-				this.myViewer.addFilter(this.myModelObjectFilter);
-
-				this.myViewer.refresh();
-			}
-			// no else.
-		}
-		// no else.
+		/*
+		 * TODO Claas: Disabled filter because it is more confusing then helpful
+		 * here.
+		 */
+		// /* Check if the given part is a ModelsView. */
+		// if (part != null && part instanceof ModelsView) {
+		//
+		// /* Check if the given selection is a TreeSelection. */
+		// if (selection != null && selection instanceof TreeSelection) {
+		//
+		// TreeSelection aTreeSelection;
+		// Iterator<?> aSelectionIt;
+		//
+		// /* Remove the old and create a new ModelObjectFilter. */
+		// this.myViewer.removeFilter(this.myModelObjectFilter);
+		// this.myModelObjectFilter.clearFilter();
+		//
+		// aTreeSelection = (TreeSelection) selection;
+		// aSelectionIt = aTreeSelection.iterator();
+		//
+		// /* Iterate over the elements of the selection. */
+		// while (aSelectionIt.hasNext()) {
+		//
+		// Object anObject;
+		//
+		// anObject = aSelectionIt.next();
+		//
+		// this.myModelObjectFilter.addFilter(anObject);
+		// }
+		// // end while.
+		//
+		// this.myViewer.addFilter(this.myModelObjectFilter);
+		//
+		// this.myViewer.refresh();
+		// }
+		// // no else.
+		// }
+		// // no else.
 	}
 
 	/*
