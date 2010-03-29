@@ -1,4 +1,4 @@
-\chapter{Standalone -- Using \acl{DOTEclipse} outside of Eclipse}
+\chapter{Standalone -- Using Dresden OCL2 for Eclipse outside of Eclipse}
 \label{chapter:standalone}
 
 \begin{flushright}
@@ -30,8 +30,8 @@ In order to log different parts of \acl{DOT4Eclipse}, you can alter the \referen
 
 The \reference{src} folder contains one class, named \code{StandaloneDresdenOCLExample.java}. It contains a \code{main} method that executes numerous examples. 
 
-\paragraph{Royals & Loyals}
-The first example is Royals & Loyals. The model is loaded by calling \code{loadUMLModel} on the \code{StandaloneFacade}. The method takes 2 arguments, the first being the file where the UML model is located. The second argument needs to be a file that points to the resources jar of the Eclipse UML project. In the example project, this jar file is located at \reference{lib/org.eclipse.uml2.uml.resources_3.0.0.v200906011111.jar}. The example UML model provided here was built using Eclipse UML 3.x. In order to load older models, you have to update the namespace in line 2 of the model (\code{xmlns:uml="http://www.eclipse.org/uml2/3.0.0/UML"}) or use an older resources jar file. You have to provide the resources to be able to use primitive types in your model that are not mapped correctly when no or the wrong resource is specified.
+\paragraph{Royals \& Loyals}
+The first example is Royals \& Loyals. The model is loaded by calling \code{loadUMLModel} on the \code{StandaloneFacade}. The method takes 2 arguments, the first being the file where the UML model is located. The second argument needs to be a file that points to the resources jar of the Eclipse UML project. In the example project, this jar file is located at \reference{lib/org.eclipse.uml2.uml.resources\_3.0.0.v200906011111.jar}. The example UML model provided here was built using Eclipse UML 3.x. In order to load older models, you have to update the namespace in line 2 of the model (\code{xmlns:uml="http://www.eclipse.org/uml2/3.0.0/UML"}) or use an older resources jar file. You have to provide the resources to be able to use primitive types in your model that are not mapped correctly when no or the wrong resource is specified.
 
 Then, the Java model instance is loaded. Note, that this is needs to be a class that has a method with this signature: \code{public static List<Object> getModelObjects()}. In the returned list all objects that shall be part of the model instance have to be contained. The actual loading is done be calling \code{StandaloneFacade.INSTANCE.loadJavaModelInstance(IModel, File)}.
 
@@ -41,7 +41,7 @@ In order to generate AspectJ code, one needs to create \code{IOcl22CodeSettings}
 
 \paragraph{PML}
 \lstset{language=Java}
-The PML example is nearly analogous to the Royals & Loyals example described above. Before being able to load an Ecore model instance, you have to register the Ecore model at the global Ecore registry. In case of PML this is done by the lines \lstinline[breaklines=true]{Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("pml", new XMIResourceFactoryImpl()); \newline PmlPackage.eINSTANCE.eClass();} Other Ecore models require other factory mappings and their package to be initialised.
+The PML example is nearly analogous to the Royals \& Loyals example described above. Before being able to load an Ecore model instance, you have to register the Ecore model at the global Ecore registry. In case of PML this is done by the lines \lstinline[breaklines=true]{Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("pml", new XMIResourceFactoryImpl()); \newline PmlPackage.eINSTANCE.eClass();} Other Ecore models require other factory mappings and their package to be initialised.
 
 \paragraph{Simple}
 The difference to the other examples is the model instance that is not loaded from a class file, but built in the example itself. To create an empty Java model instance call \code{IModelInstance modelInstance = new JavaModelInstance(model)}. Calling the method \code{addModelInstanceElement(Object)} on the model instance will cause the given object to be adapted to the model instance. Thus, constraints can be evaluated on it.
