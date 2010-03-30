@@ -295,7 +295,6 @@ public class EcoreModel extends AbstractModel implements IModel {
 					 * copy and the package may be added multiple times.
 					 */
 					packagesToBeAdded.add(containerPackage);
-					/* FIXME Probably make this mechanism recursively. */
 				}
 				// no else.
 			}

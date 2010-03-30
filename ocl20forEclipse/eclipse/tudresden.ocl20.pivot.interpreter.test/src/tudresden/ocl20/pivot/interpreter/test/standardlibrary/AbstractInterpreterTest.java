@@ -105,7 +105,7 @@ public abstract class AbstractInterpreterTest {
 		filePath = OclInterpreterTestPlugin.getDefault().getBundle()
 				.getLocation();
 		/* Remove 'reference:file:/' */
-		filePath = filePath.substring(16);
+		filePath = filePath.substring(15);
 
 		filePath += OclInterpreterTestPlugin.getDefault().getBundle()
 				.getResource(path).getPath().substring(1);

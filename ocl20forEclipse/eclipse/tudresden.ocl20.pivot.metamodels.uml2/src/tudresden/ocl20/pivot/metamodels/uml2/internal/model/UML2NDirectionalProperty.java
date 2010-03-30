@@ -65,7 +65,6 @@ public class UML2NDirectionalProperty extends UML2Property implements NDirection
 	 * 
 	 * @generated NOT
 	 */
-	@Override
 	public void addAssociation(NDirectionalProperty bProperty) {
 		if (!isInverseAssociation(bProperty) && bProperty != this && bProperty != null) this.getInverseNDirectionalProperties().add(bProperty);	
 	}
@@ -75,7 +74,6 @@ public class UML2NDirectionalProperty extends UML2Property implements NDirection
 	 * 
 	 * @generated NOT
 	 */
-	@Override
 	public NDirectionalProperty getAssociation(String propName) {
 		NDirectionalProperty property = null;
 		for (NDirectionalProperty prop : getInverseNDirectionalProperties()) {
@@ -92,7 +90,6 @@ public class UML2NDirectionalProperty extends UML2Property implements NDirection
 	 * 
 	 * @generated NOT
 	 */
-	@Override
 	public void removeAssociation(NDirectionalProperty bProperty) {
 		this.getInverseNDirectionalProperties().remove(bProperty);
 		
@@ -103,7 +100,6 @@ public class UML2NDirectionalProperty extends UML2Property implements NDirection
 	 * 
 	 * @generated NOT
 	 */
-	@Override
 	public List<NDirectionalProperty> getInverseNDirectionalProperties() {
 		if (this.inverseNDirectionalProperties == null) {
 			this.inverseNDirectionalProperties = new LinkedList<NDirectionalProperty>();
@@ -116,7 +112,6 @@ public class UML2NDirectionalProperty extends UML2Property implements NDirection
 	 * 
 	 * @generated NOT
 	 */
-	@Override
 	public boolean isInverseAssociation(NDirectionalProperty bProperty) {
 		return getInverseNDirectionalProperties().contains(bProperty);
 	}
@@ -126,7 +121,6 @@ public class UML2NDirectionalProperty extends UML2Property implements NDirection
 	 * 
 	 * @generated NOT
 	 */
-	@Override
 	public void addAssociations(List<NDirectionalProperty> bProperty) {
 		for (NDirectionalProperty prob : bProperty) {
 			addAssociation(prob);

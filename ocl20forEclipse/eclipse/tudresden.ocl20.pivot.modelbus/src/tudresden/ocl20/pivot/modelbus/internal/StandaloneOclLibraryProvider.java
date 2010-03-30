@@ -2,6 +2,8 @@ package tudresden.ocl20.pivot.modelbus.internal;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
 import java.util.Collections;
 
 import org.eclipse.emf.common.util.URI;
@@ -38,6 +40,9 @@ public class StandaloneOclLibraryProvider implements IOclLibraryProvider {
 	/** An URI-based location of the OCL standard library. */
 	private URI oclStandardLibraryLocation;
 
+	/** In case the OCL standard library is given as a InputStream. */
+	private InputStream inputStream;
+
 	/**
 	 * The provider will load the OCL standard library using the given URI.
 	 * 
@@ -62,6 +67,19 @@ public class StandaloneOclLibraryProvider implements IOclLibraryProvider {
 				URI.createFileURI(oclStandardLibraryFile.getAbsolutePath());
 	}
 
+	/**
+	 * The provider will load the OCL standard library using the given {@link URL}
+	 * .
+	 * 
+	 * @param url
+	 *          the {@link URL} of the OCL standard library
+	 */
+	public StandaloneOclLibraryProvider(InputStream inputStream) {
+
+		oclStandardLibraryLocation = URI.createFileURI("temp.types");
+		this.inputStream = inputStream;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * @see
@@ -80,7 +98,10 @@ public class StandaloneOclLibraryProvider implements IOclLibraryProvider {
 			Resource r = rs.createResource(oclStandardLibraryLocation);
 
 			try {
-				r.load(Collections.EMPTY_MAP);
+				if (inputStream != null)
+					r.load(inputStream, Collections.EMPTY_MAP);
+				else
+					r.load(Collections.EMPTY_MAP);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
