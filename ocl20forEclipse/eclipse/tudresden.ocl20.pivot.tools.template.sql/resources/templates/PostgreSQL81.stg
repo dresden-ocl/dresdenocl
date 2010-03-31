@@ -1,0 +1,27 @@
+group postgre;
+
+typeMap ::= [
+        "int":"INT",
+        "long":"BIGINT",
+        "float":"FLOAT",
+        "double":"DOUBLE",
+        "boolean":"BOOL",
+        "short":"INT",
+        "char":"CHAR",
+        "String":"VARCHAR(255)",
+        "Date":"DATE",
+        default:"VARCHAR(255)"
+]
+
+selectStmt(columns, tables, where) ::= <<
+SELECT $columns; separator=", "$ 
+FROM $tables; separator=", "$
+$if(where)$
+WHERE $where$
+$endif$
+>>
+
+createForeignKeyConstraint(tablename, columnname, reference) ::= <<
+ALTER TABLE $tablename$ ADD CONSTRAINT CON$tablename$$columnname$
+FOREIGN KEY ($columnname$) REFERENCES $reference$; 
+>>

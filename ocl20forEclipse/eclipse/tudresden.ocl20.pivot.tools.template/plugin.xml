@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+   <extension-point id="templateGroups" name="Template Groups" schema="schema/templategroups.exsd"/>
+   <extension-point id="templateEngines" name="Template Engines" schema="schema/templateengines.exsd"/>
+   <extension
+         point="tudresden.ocl20.pivot.tools.template.templateEngines">
+      <templateEngine
+            class="tudresden.ocl20.pivot.tools.template.stringtemplate.StringTemplateEngine"
+            name="String Template">
+      </templateEngine>
+   </extension>
+</plugin>

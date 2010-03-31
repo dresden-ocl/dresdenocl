@@ -1,0 +1,554 @@
+group sql;
+
+// --- OCL INVARIANT --- 
+constraint_body(constraint_name,context,context_alias,expression) ::= <<
+create or replace view $constraint_name$ as
+(select * from $context$ as $context_alias$
+where not ($expression$))
+>>
+
+
+// --- NAVIGATION (CLASS AND ATTRIBUTE) --- 
+feature_call_navigation(object,context1,ref_object,context2) ::= <<
+(select $object$ from $context1$ where $ref_object$ in 
+  $context2$)
+>>
+
+feature_call_navigation_context(object,context1,ref_object,context_alias,context_object) ::= <<
+(select $object$ from $context1$ where $ref_object$ = $context_alias$.$context_object$)
+>>
+
+
+// --- ATTRIBUTE ACCESS (CLASS AND ATTRIBUTE) --- 
+feature_call_attribute_context(context_alias,attribute) ::= <<
+$if(context_alias)$$context_alias$.$attribute$$else$$attribute$$endif$
+>>
+
+feature_call_attribute_boolean(attribute) ::= <<
+($attribute$ = 1)
+>>
+
+
+// ---  BOOLEAN (BASIC TYPE) --- 
+literal_boolean_true() ::= <<
+(1=1)
+>>
+
+literal_boolean_false() ::= <<
+(1=0)
+>>
+
+
+// ---  ENUM (BASIC TYPE) --- 
+literal_enum(value) ::= <<
+'$value$'
+>>
+
+
+// --- INTEGER (BASIC TYPE) ---
+literal_integer(value) ::= <<
+$value$
+>>
+
+// --- REAL (BASIC TYPE) ---
+literal_real(value) ::= <<
+$value$
+>>
+
+// --- STRING (BASIC TYPE) ---
+literal_string(value) ::= <<
+'$value$'
+>>
+
+// --- VARIABLE (BASIC TYPE) ---
+literal_variable(value) ::= <<
+>>
+
+
+// ---  COLLECTIONS - BAG (QUERY) --- 
+literal_collection_bag(items) ::= <<
+$items:literal_collection_bag_item(); separator="\nunion all\n"$
+>>
+
+literal_collection_bag_item(item) ::= <<
+$item$
+>>
+
+
+// ---  COLLECTIONS - SEQUENCE (QUERY) --- 
+literal_collection_sequence(items) ::= <<
+$items:literal_collection_sequence_item(); separator="\nunion\n"$
+>>
+
+literal_collection_sequence_item(item) ::= <<
+select elem, seqno from (values ($item$, $i$) as SEQ)(elem, seqno)
+>>
+
+
+// ---  COLLECTIONS - SET (QUERY) --- 
+literal_collection_set(items) ::= <<
+$items:literal_collection_set_item(); separator="\nunion\n"$
+>>
+
+literal_collection_set_item(item) ::= <<
+$item$
+>>
+
+
+// --- ARITHMETIC EXPRESSIONS (BASIC TYPE) --- 
+arithmetic_expression_div(operand1,operand2) ::= <<
+($operand1$ / $operand2$)
+>>
+
+arithmetic_expression_minus(operand1,operand2) ::= <<
+($operand1$ - $operand2$)
+>>
+
+arithmetic_expression_mult(operand1,operand2) ::= <<
+($operand1$ * $operand2$)
+>>
+
+arithmetic_expression_plus(operand1,operand2) ::= <<
+($operand1$ + $operand2$)
+>>
+
+
+// --- IF EXPRESSION ---
+if_expression(if_branch,then_branch,else_branch) ::= <<
+case
+  when $if_branch$ then $then_branch$
+  else $else_branch$
+end
+>>
+
+
+// -- ITERATOR COLLECT (QUERY) ---
+feature_call_collect(expression) ::= <<
+$expression$
+>>
+
+// -- ITERATOR FORALL (QUERY) ---
+feature_call_forall(source,alias,object,collection,expression) ::= <<
+not exists (
+  select $object$ from $collection$
+  where $object$ in (
+    select $object$ from $source$ as $alias$
+    where not $expression$
+  )
+)
+>>
+
+// -- ITERATOR REJECT (QUERY) ---
+feature_call_reject(source,alias,object,collection,expression) ::= <<
+(select $object$ from $collection$
+  where $object$ in (
+    select $object$ from $source$ as $alias$
+    where not ($expression$)
+  )
+)
+>>
+
+// -- ITERATOR SELECT (QUERY) ---
+feature_call_select(source,alias,object,collection,expression) ::= <<
+(select $object$ from $collection$
+  where $object$ in (
+    select $object$ from $source$ as $alias$
+    where ($expression$)
+  )
+)
+>>
+
+// --- OCLISKINDOF (CLASS AND ATTRIBUTE) ---
+feature_call_ocliskindof(source,object,alias) ::= <<
+exists (
+  select $object$ from $source$
+  where $object$ = $alias$.$object$)
+>>
+  
+// --- OCLISTYPEOF (CLASS AND ATTRIBUTE) ---
+feature_call_oclistypeof(source,source2,object,alias) ::= <<
+exists (
+  select $object$ from $source$
+  where $object$ = $alias$.$object$)
+$if(source2)$
+  and not exists (
+  select $object$ from $source2$
+  where $object$ = $alias$.$object$)
+$endif$
+>>
+
+//
+// --- RELATIONAL EXPRESSIONS ---
+//
+
+// --- EQUAL ---
+relational_expression_equals_any(operand1,operand2) ::= <<
+($operand1$ = $operand2$)
+>>
+
+relational_expression_equals_boolean(operand1,operand2) ::= <<
+(($operand1$ AND $operand2$) OR (NOT $operand1$ AND NOT $operand2$))
+>>
+
+relational_expression_equals_enumeration(operand1,operand2) ::= <<
+($operand1$ = $operand2$)
+>>
+
+relational_expression_equals_integer(operand1,operand2) ::= <<
+($operand1$ = $operand2$)
+>>
+
+relational_expression_equals_real(operand1,operand2) ::= <<
+($operand1$ = $operand2$)
+>>
+
+relational_expression_equals_string(operand1,operand2) ::= <<
+($operand1$ = $operand2$)
+>>
+
+
+// --- NEQUAL ---
+relational_expression_nequal_any(operand1,operand2) ::= <<
+NOT ($operand1$ = $operand2$)
+>>
+
+relational_expression_nequal_boolean(operand1,operand2) ::= <<
+((NOT $operand1$ AND $operand2$) OR ($operand1$ AND NOT $operand2$))
+>>
+
+relational_expression_nequal_enumeration(operand1,operand2) ::= <<
+NOT ($operand1$ = $operand2$)
+>>
+
+relational_expression_nequal_integer(operand1,operand2) ::= <<
+NOT ($operand1$ = $operand2$)
+>>
+
+relational_expression_nequal_real(operand1,operand2) ::= <<
+NOT ($operand1$ = $operand2$)
+>>
+
+relational_expression_nequal_string(operand1,operand2) ::= <<
+NOT ($operand1$ = $operand2$)
+>>
+
+
+// --- GREATER ---
+relational_expression_greater_any(operand1,operand2) ::= <<
+($operand1$ > $operand2$)
+>>
+
+relational_expression_greater_enumeration(operand1,operand2) ::= <<
+($operand1$ > $operand2$)
+>>
+
+relational_expression_greater_integer(operand1,operand2) ::= <<
+($operand1$ > $operand2$)
+>>
+
+relational_expression_greater_real(operand1,operand2) ::= <<
+($operand1$ > $operand2$)
+>>
+
+relational_expression_greater_string(operand1,operand2) ::= <<
+($operand1$ > $operand2$)
+>>
+
+
+// --- GREATER OR EQUAL ---
+relational_expression_greaterequal_any(operand1,operand2) ::= <<
+($operand1$ >= $operand2$)
+>>
+
+relational_expression_greaterequal_enumeration(operand1,operand2) ::= <<
+($operand1$ >= $operand2$)
+>>
+
+relational_expression_greaterequal_integer(operand1,operand2) ::= <<
+($operand1$ >= $operand2$)
+>>
+
+relational_expression_greaterequal_real(operand1,operand2) ::= <<
+($operand1$ >= $operand2$)
+>>
+
+relational_expression_greaterequal_string(operand1,operand2) ::= <<
+($operand1$ >= $operand2$)
+>>
+
+
+// --- LESSER ---
+relational_expression_lesser_any(operand1,operand2) ::= <<
+($operand1$ < $operand2$)
+>>
+
+relational_expression_lesser_enumeration(operand1,operand2) ::= <<
+($operand1$ < $operand2$)
+>>
+
+relational_expression_lesser_integer(operand1,operand2) ::= <<
+($operand1$ < $operand2$)
+>>
+
+relational_expression_lesser_real(operand1,operand2) ::= <<
+($operand1$ < $operand2$)
+>>
+
+relational_expression_lesser_string(operand1,operand2) ::= <<
+($operand1$ < $operand2$)
+>>
+
+
+// --- LESSER OR EQUAL ---
+relational_expression_lesserequal_any(operand1,operand2) ::= <<
+($operand1$ <= $operand2$)
+>>
+
+relational_expression_lesserequal_enumeration(operand1,operand2) ::= <<
+($operand1$ <= $operand2$)
+>>
+
+relational_expression_lesserequal_integer(operand1,operand2) ::= <<
+($operand1$ <= $operand2$)
+>>
+
+relational_expression_lesserequal_real(operand1,operand2) ::= <<
+($operand1$ <= $operand2$)
+>>
+
+relational_expression_lesserequal_string(operand1,operand2) ::= <<
+($operand1$ <= $operand2$)
+>>
+
+//
+// --- UNARY EXPRESSIONS ---
+//
+unary_expression_minus(operand) ::= <<
+-$operand$
+>>
+
+unary_expression_not(operand) ::= <<
+(NOT ($operand$))
+>>
+
+
+// --- LOGICAL EXPRESSIONS ---
+logical_expression_and(expression1,expression2) ::= <<
+($expression1$ AND $expression2$)
+>>
+
+logical_expression_or(expression1,expression2) ::= <<
+($expression1$ OR $expression2$)
+>>
+
+logical_expression_xor(expression1,expression2) ::= <<
+(($expression1$ OR $expression2$) AND NOT ($expression1$ AND $expression2$))
+>>
+
+logical_expression_implies(expression1,expression2) ::= <<
+(NOT $expression1$ OR $expression2$)
+>>
+
+// --- COLLECTION RELATED OPERATIONS ---
+feature_call_count(source,element,collection,object) ::= <<
+(select
+  case 
+    when count($element$) is null then 0 
+    else count($element$)
+  end
+  from ($source$)
+  where $element$ in $collection$
+  and $element$ = $object$)
+>>
+
+feature_call_exists(source,object,collection,expression) ::= <<
+not exists (
+  select $object$ from $collection$
+  where $object$ in (
+    select $object$ from $source$
+    where not $expression$
+  )
+)
+>>
+
+feature_call_size(source,element,collection) ::= <<
+(select
+  case
+    when count($element$) is null then 0 
+    else count($element$)
+  end
+  from ($source$)
+  where $element$ in $collection$)  
+>>
+
+feature_call_sum(source,element,collection) ::= <<
+(select
+  case 
+    when sum($element$) is null then 0 
+    else sum($element$)
+  end
+  from $source$
+  where $element$ in $collection$)
+>>
+
+feature_call_excludes(object,collection) ::= <<
+$object$ not in
+  ($collection$)
+>>
+
+feature_call_includes(object,collection) ::= <<
+$object$ in
+  ($collection$)
+>>
+
+feature_call_excludesall(collection,collection2) ::= <<
+not exists (
+  ($collection2$)
+  intersect
+  ($collection$))
+>>
+
+feature_call_includesall(collection,collection2) ::= <<
+not exists (
+  ($collection2$)
+  except
+  ($collection$))
+>>
+
+feature_call_isempty(collection) ::= <<
+not exists ($collection$)
+>>
+
+feature_call_notempty(collection) ::= <<
+exists ($collection$)
+>>
+
+feature_call_intersection_bag(collection,collection2) ::= <<
+($collection2$ intersect all
+  $collection$)
+>>
+
+feature_call_intersection_set(collection,collection2) ::= <<
+($collection2$ intersect
+  $collection$)
+>>
+
+feature_call_including_bag(collection,object) ::= <<
+($collection$ union all
+  ($object$))
+>>
+
+feature_call_including_sequence(collection,object) ::= <<
+($collection$)
+  union
+  (select $object$, ((select max(SEQNO) from ($collection$)) + 1) as SEQNO)
+>>
+
+feature_call_including_set(collection,object) ::= <<
+($collection$ union
+  ($object$))
+>>
+
+feature_call_excluding_bag(collection,object,element) ::= <<
+($collection$ except all
+  ($object$))
+>>
+
+feature_call_excluding_sequence(collection,object,element) ::= <<
+select $element$,
+  (select count(*)+1 from (
+    select $element$, SEQNO
+    from $collection$
+    where not ($element$ = $object$)
+  ) where SEQNO < s.SEQNO) as SEQNO
+  from (
+    select $element$, SEQNO
+    from $collection$
+    where not ($element$ = $object$)
+  ) s
+>>
+
+feature_call_excluding_set(collection,object,element) ::= <<
+($collection$ except
+  ($object$))
+>>
+
+feature_call_union_bag(collection,collection2,element) ::= <<
+($collection$ union all
+  $collection2$)
+>>
+
+feature_call_union_sequence(collection,collection2,element) ::= <<
+($collection$)
+  union
+  (select $element$, (select max(SEQNO) from ($collection$)) + SEQNO
+   from $collection2$)
+>>
+
+feature_call_union_set(collection,collection2,element) ::= <<
+($collection$ union
+  $collection2$)
+>>
+
+feature_call_allinstances(object,source) ::= <<
+(select $object$ from $source$)
+>>
+
+feature_call_symmetricdifference(collection,collection2) ::= <<
+($collection$ except $collection2$
+ $collection2$ except $collection$)
+>>
+
+feature_call_string_concat(operand1,operand2) ::= <<
+$operand1$ || $operand2$
+>>
+
+feature_call_string_size(operand) ::= <<
+LENGTH ($operand$)
+>>
+
+feature_call_string_tolower(operand) ::= <<
+LOWER ($operand$)
+>>
+
+feature_call_string_toupper(operand) ::= <<
+UPPER ($operand$)
+>>
+
+feature_call_string_substring(operand,start,end) ::= <<
+SUBSTRING($operand$, $start$, $end$ - $start$ + 1)
+>>
+
+feature_call_int_abs(operand) ::= <<
+ABS ($operand$)
+>>
+
+feature_call_int_floor(operand) ::= <<
+FLOOR ($operand$)
+>>
+
+feature_call_int_div(operand1,operand2) ::= <<
+($operand1$ / $operand2$)
+>>
+
+feature_call_int_max(operand1,operand2) ::= <<
+case
+  when $operand1$ > $operand2$ then $operand1$ 
+  else $operand2$
+end
+>>
+
+feature_call_int_min(operand1,operand2) ::= <<
+case 
+  when $operand1$ < $operand2$ then $operand1$ 
+  else $operand2$
+end
+>>
+
+feature_call_int_mod(operand1,operand2) ::= <<
+$operand1$ - (($operand1$ / $operand2$) * $operand2$)
+>>
+
+feature_call_int_round(operand) ::= <<
+ROUND ($operand$)
+>>

@@ -1,0 +1,9 @@
+group testGeneral;
+
+general() ::= <<
+generalTemplate
+>>
+
+specific() ::= <<
+generalTemplate
+>>
