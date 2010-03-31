@@ -44,7 +44,7 @@ public aspect IteratorExpASTComputation {
 	// This is case [A]
 	public IteratorExp IteratorExpAS.computeASM(Environment env) throws BuildingASMException {
 		// Get the expression factory.
-		IModelFactory factory = env.getExpFactory();
+		EssentialOclFactory factory = env.getExpFactory();
 		
 		/* If this expression has no source, it is an error. The grammar assures that the iterator expression has one source
 		 * but it is saver if we examine this (the grammar can be changed in future when the ocl standard is changed).
@@ -179,7 +179,7 @@ public aspect IteratorExpASTComputation {
 	// This is case [C] and [D] 
 	public IteratorExp PropertyCallExpAS.computeIteratorASM(Environment env) throws BuildingASMException {
 		// Get the expression factory.
-		IModelFactory factory = env.getExpFactory();
+		EssentialOclFactory factory = env.getExpFactory();
 		
 		// Compute the source expression.
 		OclExpression sourceExpression = getSource().computeASM(env);
@@ -265,7 +265,7 @@ public aspect IteratorExpASTComputation {
 	// This is case [B].
 	public CallExp OperationCallExpAS.computeIteratorASM(Environment env) throws BuildingASMException {
 		// Get the expression factory.
-		IModelFactory factory = env.getExpFactory();
+		EssentialOclFactory factory = env.getExpFactory();
 		
 		// Get the first string of the path name as error token to locate the error.
 		TokenAS token = getName().getTokenAS(0);

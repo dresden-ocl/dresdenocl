@@ -30,7 +30,7 @@ public aspect ConstraintASMComputation {
 	 */
 	public Constraint AttrOrAssocConstraintAS.computeASM(Environment env, ConstraintKind kind) throws BuildingASMException {
 		// Get the expression factory.
-		IModelFactory factory = env.getExpFactory();
+		EssentialOclFactory factory = env.getExpFactory();
 		
 		// Compute the expression.
 		OclExpression expression = getExpression().computeASM(env);
@@ -100,7 +100,7 @@ public aspect ConstraintASMComputation {
 	 */
 	public Constraint DefAttributeConstraintAS.computeASM(Environment env) throws BuildingASMException {
 		// Get the expression factory.
-		IModelFactory factory = env.getExpFactory();
+		EssentialOclFactory factory = env.getExpFactory();
 		
 		// Get the optional name of the definition if any was specified.
 		String optionalName = null;
@@ -196,7 +196,7 @@ public aspect ConstraintASMComputation {
 	 */
 	public Constraint DefOperationConstraintAS.computeASM(Environment env) throws BuildingASMException {
 		// Get the expression factory.
-		IModelFactory factory = env.getExpFactory();
+		EssentialOclFactory factory = env.getExpFactory();
 		
 		// Get the optional definition name if any exists.
 		String optionalName = null;
@@ -334,7 +334,7 @@ public aspect ConstraintASMComputation {
 	 */
 	public Constraint InvClassifierConstraintAS.computeASM(Environment env) throws BuildingASMException {
 		// Get the expression factory.
-		IModelFactory factory = env.getExpFactory();
+		EssentialOclFactory factory = env.getExpFactory();
 		
 		// Compute the expression.
 		OclExpression expression = getExpression().computeASM(env);
@@ -392,7 +392,7 @@ public aspect ConstraintASMComputation {
 	 * [C] prePostOrBodyDeclCS ::= 'body' (simpleNameCS)' ':' OclExpressionCS prePostBodyDeclCS[2]
 	 */
 	public Constraint OperationConstraintAS.computeASM(Environment env) throws BuildingASMException {
-		IModelFactory factory = env.getExpFactory();
+		EssentialOclFactory factory = env.getExpFactory();
 		
 		Operation operation = (Operation)env.getContext();
 		String operationStereotype = getOperationStereotype().getValue();

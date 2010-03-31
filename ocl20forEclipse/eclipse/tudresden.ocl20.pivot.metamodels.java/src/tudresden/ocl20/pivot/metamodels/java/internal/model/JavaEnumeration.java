@@ -19,7 +19,7 @@ import java.util.List;
 import org.apache.log4j.Logger;
 
 import tudresden.ocl20.pivot.metamodels.java.JavaMetaModelPlugin;
-import tudresden.ocl20.pivot.modelbus.IModelBusConstants;
+import tudresden.ocl20.pivot.model.ModelConstants;
 import tudresden.ocl20.pivot.pivotmodel.Enumeration;
 import tudresden.ocl20.pivot.pivotmodel.EnumerationLiteral;
 import tudresden.ocl20.pivot.pivotmodel.Namespace;
@@ -106,7 +106,7 @@ public class JavaEnumeration extends AbstractEnumeration implements Enumeration 
 		List<String> namespaceList;
 
 		namespaceList = new ArrayList<String>();
-		namespaceList.add(IModelBusConstants.ROOT_PACKAGE_NAME);
+		namespaceList.add(ModelConstants.ROOT_PACKAGE_NAME);
 
 		/* Add all packages of the canonical name to the path. */
 		namespacePath = this.myJavaEnum.getCanonicalName().split("\\.");

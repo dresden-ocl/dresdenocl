@@ -3,7 +3,7 @@ package tudresden.ocl20.pivot.standardlibrary.java;
 import java.util.ArrayList;
 import java.util.List;
 
-import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance;
+import tudresden.ocl20.pivot.modelinstance.IModelInstance;
 import tudresden.ocl20.pivot.standardlibrary.java.factory.JavaStandardLibraryFactory;
 
 /**

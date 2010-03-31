@@ -32,7 +32,7 @@
  */
 package tudresden.ocl20.pivot.essentialocl.standardlibrary;
 
-import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceInteger;
+import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceInteger;
 
 /**
  * 

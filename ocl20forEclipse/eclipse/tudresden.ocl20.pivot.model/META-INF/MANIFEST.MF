@@ -1,0 +1,14 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Model
+Bundle-SymbolicName: tudresden.ocl20.pivot.model
+Bundle-Version: 2.2.0.qualifier
+Bundle-Activator: tudresden.ocl20.pivot.model.ModelPlugin
+Bundle-Vendor: TU Dresden, Software Technology Group
+Require-Bundle: org.eclipse.core.runtime,
+ tudresden.ocl20.pivot.pivotmodel;bundle-version="2.1.0";visibility:=reexport
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-ActivationPolicy: lazy
+Export-Package: tudresden.ocl20.pivot.model,
+ tudresden.ocl20.pivot.model.base,
+ tudresden.ocl20.pivot.model.metamodel

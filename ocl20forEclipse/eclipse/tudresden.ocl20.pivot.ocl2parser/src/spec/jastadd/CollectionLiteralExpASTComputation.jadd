@@ -26,7 +26,7 @@ public aspect CollectionLiteralExpASMComputation {
 	 */
 	public CollectionLiteralExp CollectionLiteralExpAS.computeASM(Environment env) throws BuildingASMException {
 		// Get the expression factory
-		IModelFactory factory = env.getExpFactory();
+		EssentialOclFactory factory = env.getExpFactory();
 		
 		// Get the name token of the collection literal expression. The name is the type of the expression
 		// (Bag, Set, OrderedSet, ...)
@@ -98,7 +98,7 @@ public aspect CollectionLiteralExpASMComputation {
 	 */
 	public CollectionRange CollectionRangeAS.computeASM(Environment env) throws BuildingASMException {
 		// Get the expression factory.
-		IModelFactory factory = env.getExpFactory();
+		EssentialOclFactory factory = env.getExpFactory();
 		
 		// Transform the first expression abstract syntax element into corresponding essential ocl element
 		OclExpression leftExpression = getFirst().computeASM(env);
@@ -143,7 +143,7 @@ public aspect CollectionLiteralExpASMComputation {
 	 */
 	public CollectionItem CollectionItemAS.computeASM(Environment env) throws BuildingASMException {
 		// Get the expression factory.
-		IModelFactory factory = env.getExpFactory();
+		EssentialOclFactory factory = env.getExpFactory();
 		
 		// Transform the ocl expression of this collection item as element into
 		// the coressponding ocl expression of the essential ocl.

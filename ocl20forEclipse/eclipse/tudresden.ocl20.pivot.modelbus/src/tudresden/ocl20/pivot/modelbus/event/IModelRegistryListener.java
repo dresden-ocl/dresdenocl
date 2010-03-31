@@ -33,7 +33,7 @@
 
 package tudresden.ocl20.pivot.modelbus.event;
 
-import tudresden.ocl20.pivot.modelbus.model.IModel;
+import tudresden.ocl20.pivot.model.IModel;
 import tudresden.ocl20.pivot.modelbus.model.IModelRegistry;
 
 /**

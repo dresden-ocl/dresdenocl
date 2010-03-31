@@ -25,15 +25,15 @@ import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
-import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance;
-import tudresden.ocl20.pivot.modelbus.modelinstance.exception.PropertyAccessException;
-import tudresden.ocl20.pivot.modelbus.modelinstance.exception.PropertyNotFoundException;
-import tudresden.ocl20.pivot.modelbus.modelinstance.exception.TypeNotFoundInModelException;
-import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceCollection;
-import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
-import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceObject;
+import tudresden.ocl20.pivot.modelinstance.IModelInstance;
+import tudresden.ocl20.pivot.modelinstancetype.exception.PropertyAccessException;
+import tudresden.ocl20.pivot.modelinstancetype.exception.PropertyNotFoundException;
+import tudresden.ocl20.pivot.modelinstancetype.exception.TypeNotFoundInModelException;
 import tudresden.ocl20.pivot.modelinstancetype.test.ModelInstanceTypeTestServices;
 import tudresden.ocl20.pivot.modelinstancetype.test.testmodel.TestModelTypesNames;
+import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceCollection;
+import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement;
+import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceObject;
 import tudresden.ocl20.pivot.pivotmodel.Property;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 

@@ -26,7 +26,7 @@ import org.eclipse.jface.wizard.WizardDialog;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.IWorkbenchWindowActionDelegate;
 
-import tudresden.ocl20.pivot.modelbus.model.IModel;
+import tudresden.ocl20.pivot.model.IModel;
 import tudresden.ocl20.pivot.ocl2java.ui.internal.wizards.TransformCodeWizard;
 import tudresden.ocl20.pivot.pivotmodel.Constraint;
 

@@ -23,8 +23,8 @@ import org.osgi.framework.BundleContext;
 import tudresden.ocl20.logging.LoggingPlugin;
 import tudresden.ocl20.pivot.metamodels.java.internal.model.JavaModel;
 import tudresden.ocl20.pivot.metamodels.java.internal.provider.JavaModelProvider;
-import tudresden.ocl20.pivot.modelbus.ModelAccessException;
-import tudresden.ocl20.pivot.modelbus.model.IModel;
+import tudresden.ocl20.pivot.model.IModel;
+import tudresden.ocl20.pivot.model.ModelAccessException;
 import tudresden.ocl20.pivot.pivotmodel.PrimitiveTypeKind;
 
 /**

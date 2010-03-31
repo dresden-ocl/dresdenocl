@@ -23,10 +23,10 @@ import org.apache.commons.lang.builder.ToStringStyle;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.IAction;
 
+import tudresden.ocl20.pivot.model.IModel;
 import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
-import tudresden.ocl20.pivot.modelbus.model.IModel;
-import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance;
 import tudresden.ocl20.pivot.modelbus.ui.internal.views.ModelInstancesView;
+import tudresden.ocl20.pivot.modelinstance.IModelInstance;
 
 /**
  * <p>

@@ -30,12 +30,12 @@ import org.eclipse.jface.viewers.IStructuredContentProvider;
 import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.jface.viewers.Viewer;
 
-import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance;
-import tudresden.ocl20.pivot.modelbus.modelinstance.exception.PropertyAccessException;
-import tudresden.ocl20.pivot.modelbus.modelinstance.exception.PropertyNotFoundException;
-import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceCollection;
-import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
-import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceObject;
+import tudresden.ocl20.pivot.modelinstance.IModelInstance;
+import tudresden.ocl20.pivot.modelinstancetype.exception.PropertyAccessException;
+import tudresden.ocl20.pivot.modelinstancetype.exception.PropertyNotFoundException;
+import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceCollection;
+import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement;
+import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceObject;
 import tudresden.ocl20.pivot.pivotmodel.Property;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 

@@ -23,6 +23,7 @@ import java.io.File;
 
 import org.eclipse.core.runtime.Platform;
 
+import tudresden.ocl20.pivot.essentialocl.StandardLibraryPlugin;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.factory.IStandardLibraryFactory;
 import tudresden.ocl20.pivot.essentialocl.types.OclLibrary;
 import tudresden.ocl20.pivot.examples.royalsandloyals.Customer;
@@ -32,19 +33,19 @@ import tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyAccount;
 import tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyProgram;
 import tudresden.ocl20.pivot.examples.royalsandloyals.ProgramPartner;
 import tudresden.ocl20.pivot.metamodels.uml2.UML2MetamodelPlugin;
-import tudresden.ocl20.pivot.modelbus.IModelBusConstants;
-import tudresden.ocl20.pivot.modelbus.ModelAccessException;
+import tudresden.ocl20.pivot.model.IModel;
+import tudresden.ocl20.pivot.model.ModelAccessException;
+import tudresden.ocl20.pivot.model.ModelConstants;
+import tudresden.ocl20.pivot.model.metamodel.IMetamodel;
 import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
-import tudresden.ocl20.pivot.modelbus.metamodel.IMetamodel;
-import tudresden.ocl20.pivot.modelbus.model.IModel;
 import tudresden.ocl20.pivot.modelbus.model.IModelRegistry;
-import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance;
-import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceProvider;
 import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceRegistry;
-import tudresden.ocl20.pivot.modelbus.modelinstance.exception.OperationNotFoundException;
-import tudresden.ocl20.pivot.modelbus.modelinstance.exception.TypeNotFoundInModelException;
-import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
+import tudresden.ocl20.pivot.modelinstance.IModelInstance;
+import tudresden.ocl20.pivot.modelinstance.IModelInstanceProvider;
+import tudresden.ocl20.pivot.modelinstancetype.exception.OperationNotFoundException;
+import tudresden.ocl20.pivot.modelinstancetype.exception.TypeNotFoundInModelException;
 import tudresden.ocl20.pivot.modelinstancetype.java.internal.provider.JavaModelInstanceProvider;
+import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement;
 import tudresden.ocl20.pivot.pivotmodel.Operation;
 import tudresden.ocl20.pivot.standardlibrary.java.JavaStandardlibraryPlugin;
 
@@ -65,7 +66,7 @@ public class TestPerformer {
 	 */
 
 	public static String QUALIFIED_NAME_MODEL_PACKAGE =
-			IModelBusConstants.ROOT_PACKAGE_NAME
+			ModelConstants.ROOT_PACKAGE_NAME
 					+ "::tudresden::ocl20::pivot::examples::royalsandloyals";
 
 	/** The qualified Name of {@link Customer}. */
@@ -165,7 +166,7 @@ public class TestPerformer {
 	 */
 	public OclLibrary getOclLibrary() {
 
-		return ModelBusPlugin.getOclLibraryProvider().getOclLibrary();
+		return StandardLibraryPlugin.getOclLibraryProvider().getOclLibrary();
 	}
 
 	/**

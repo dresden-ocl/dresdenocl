@@ -21,8 +21,8 @@ package tudresden.ocl20.pivot.modelbus.ui.internal.wizards.util;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 
-import tudresden.ocl20.pivot.modelbus.metamodel.IMetamodel;
-import tudresden.ocl20.pivot.modelbus.model.IModel;
+import tudresden.ocl20.pivot.model.metamodel.IMetamodel;
+import tudresden.ocl20.pivot.model.IModel;
 import tudresden.ocl20.pivot.modelbus.ui.internal.wizards.LoadModelInstancePage;
 
 /**

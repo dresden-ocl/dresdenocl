@@ -9,10 +9,10 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 
 import tudresden.ocl20.pivot.metamodels.xsd.internal.model.XSDModel;
-import tudresden.ocl20.pivot.modelbus.ModelAccessException;
-import tudresden.ocl20.pivot.modelbus.model.IModel;
-import tudresden.ocl20.pivot.modelbus.model.IModelProvider;
-import tudresden.ocl20.pivot.modelbus.model.base.AbstractModelProvider;
+import tudresden.ocl20.pivot.model.IModel;
+import tudresden.ocl20.pivot.model.IModelProvider;
+import tudresden.ocl20.pivot.model.ModelAccessException;
+import tudresden.ocl20.pivot.model.base.AbstractModelProvider;
 
 /**
  * Implementation of the {@link IModelProvider} interface for XSD models. This implementation will
@@ -28,7 +28,7 @@ public class XSDModelProvider extends AbstractModelProvider implements IModelPro
   private ResourceSet resourceSet = null;
 
   /**
-   * @see tudresden.ocl20.pivot.modelbus.IModelProvider#getModel(java.net.URL)
+   * @see tudresden.ocl20.pivot.model.IModelProvider#getModel(java.net.URL)
    *
    * @generated
    */

@@ -34,7 +34,7 @@ public aspect IfExpASMComputation {
 	 * assemble all parts to a IfExp-instance.
 	 */
 	public IfExp IfExpAS.computeASM(Environment env) throws BuildingASMException {
-		IModelFactory factory = env.getExpFactory();
+		EssentialOclFactory factory = env.getExpFactory();
 		OclExpression condition = this.getCondition().computeASM(env);
 		OclExpression thenExpression = this.getThenExpression().computeASM(env);
 		OclExpression elseExpression = this.getElseExpression().computeASM(env);

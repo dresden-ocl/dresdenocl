@@ -36,7 +36,7 @@ public aspect PrimitiveLiteralExpASTComputation {
 	 * [B] BooleanLiteralExpCS ::= 'false'
 	 */
 	public BooleanLiteralExp BooleanLiteralExpAS.computeASM(Environment env) throws BuildingASMException {
-		IModelFactory factory = env.getExpFactory();
+		EssentialOclFactory factory = env.getExpFactory();
 		TokenAS token = this.getValue();
 		BooleanLiteralExp exp = null;
 		if (token.getValue().equals("true")) return factory.createBooleanLiteralExp(true);
@@ -53,7 +53,7 @@ public aspect PrimitiveLiteralExpASTComputation {
 	 * IntegerLiteralExpCS ::= <String>
 	 */
 	public IntegerLiteralExp IntegerLiteralExpAS.computeASM(Environment env) throws BuildingASMException {
-		IModelFactory factory = env.getExpFactory();
+		EssentialOclFactory factory = env.getExpFactory();
 		TokenAS token = getValue();
 		int intValue;
 		try {
@@ -72,7 +72,7 @@ public aspect PrimitiveLiteralExpASTComputation {
 	 * RealLiteralExpCS ::= <String>
 	 */
 	public RealLiteralExp RealLiteralExpAS.computeASM(Environment env) throws BuildingASMException {
-		IModelFactory factory = env.getExpFactory();
+		EssentialOclFactory factory = env.getExpFactory();
 		TokenAS token = getValue();
 		float floatValue;
 		
@@ -95,7 +95,7 @@ public aspect PrimitiveLiteralExpASTComputation {
 	 * This method removes the quotation marks.
 	 */
 	public StringLiteralExp StringLiteralExpAS.computeASM(Environment env) throws BuildingASMException {
-		IModelFactory factory = env.getExpFactory();
+		EssentialOclFactory factory = env.getExpFactory();
 		TokenAS token = getValue();
 		
 		String value = token.getValue();

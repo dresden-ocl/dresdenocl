@@ -23,8 +23,8 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.osgi.framework.Bundle;
 
-import tudresden.ocl20.pivot.modelbus.metamodel.IMetamodel;
-import tudresden.ocl20.pivot.modelbus.model.IModel;
+import tudresden.ocl20.pivot.model.metamodel.IMetamodel;
+import tudresden.ocl20.pivot.model.IModel;
 
 /**
  * <p>

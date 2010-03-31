@@ -31,7 +31,7 @@ public aspect NamespaceASMComputation {
 	 * The compute-method will return a namespace.
 	 */
 	public Namespace PackagedConstraintAS.computeASM(Environment env) throws BuildingASMException {
-		IModelFactory factory = env.getExpFactory();
+		EssentialOclFactory factory = env.getExpFactory();
 		
 		if (getName().getNumTokenAS() == 0) throw new BuildingASMException("The path name must not be" +
 				" empty in the package declaration.", null);

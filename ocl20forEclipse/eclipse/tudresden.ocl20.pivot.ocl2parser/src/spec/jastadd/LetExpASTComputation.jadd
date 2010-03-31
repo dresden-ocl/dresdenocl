@@ -36,7 +36,7 @@ public aspect LetExpASMComputation {
 	 */
 	public LetExp LetExpAS.computeASM(Environment env) throws BuildingASMException {
 		// Get the model factory to create the let expression.
-		IModelFactory factory = env.getExpFactory();
+		EssentialOclFactory factory = env.getExpFactory();
 		
 		// Create a new inner environment for the variables.	
 		Environment innerEnv = env.nestedEnvironment();

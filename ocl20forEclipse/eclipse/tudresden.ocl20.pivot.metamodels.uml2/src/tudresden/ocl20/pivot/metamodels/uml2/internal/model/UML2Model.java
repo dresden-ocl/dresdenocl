@@ -31,11 +31,11 @@ import org.eclipse.uml2.uml.Type;
 import org.eclipse.uml2.uml.UMLFactory;
 
 import tudresden.ocl20.pivot.metamodels.uml2.UML2MetamodelPlugin;
-import tudresden.ocl20.pivot.modelbus.IModelBusConstants;
-import tudresden.ocl20.pivot.modelbus.ModelAccessException;
+import tudresden.ocl20.pivot.model.IModel;
+import tudresden.ocl20.pivot.model.ModelAccessException;
+import tudresden.ocl20.pivot.model.ModelConstants;
+import tudresden.ocl20.pivot.model.base.AbstractModel;
 import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
-import tudresden.ocl20.pivot.modelbus.model.IModel;
-import tudresden.ocl20.pivot.modelbus.model.base.AbstractModel;
 import tudresden.ocl20.pivot.pivotmodel.NDirectionalProperty;
 import tudresden.ocl20.pivot.pivotmodel.Namespace;
 
@@ -98,7 +98,7 @@ public class UML2Model extends AbstractModel implements IModel {
 	 *           if an error occurs when creating the adapter for the top
 	 *           namespace
 	 * 
-	 * @see tudresden.ocl20.pivot.modelbus.model.IModel#getRootNamespace()
+	 * @see tudresden.ocl20.pivot.model.IModel#getRootNamespace()
 	 * 
 	 * @generated
 	 */
@@ -390,7 +390,7 @@ public class UML2Model extends AbstractModel implements IModel {
 
 		/* Create a new package to serve as the root package. */
 		rootPackage = UMLFactory.eINSTANCE.createPackage();
-		rootPackage.setName(IModelBusConstants.ROOT_PACKAGE_NAME);
+		rootPackage.setName(ModelConstants.ROOT_PACKAGE_NAME);
 
 		/** Add all sub-packages and sub-types to the new root package. */
 		for (EObject eObject : rootPackages) {
@@ -402,7 +402,7 @@ public class UML2Model extends AbstractModel implements IModel {
 			if (eObject instanceof Model) {
 				/* Use model as root name space and replace name. */
 				rootPackage = (Model) eObject;
-				rootPackage.setName(IModelBusConstants.ROOT_PACKAGE_NAME);
+				rootPackage.setName(ModelConstants.ROOT_PACKAGE_NAME);
 			}
 
 			/*
@@ -412,7 +412,7 @@ public class UML2Model extends AbstractModel implements IModel {
 			else if (eObject instanceof Profile) {
 				/* Use profile as root name space and replace name. */
 				rootPackage = (Profile) eObject;
-				rootPackage.setName(IModelBusConstants.ROOT_PACKAGE_NAME);
+				rootPackage.setName(ModelConstants.ROOT_PACKAGE_NAME);
 			}
 
 			else if (eObject instanceof Package) {

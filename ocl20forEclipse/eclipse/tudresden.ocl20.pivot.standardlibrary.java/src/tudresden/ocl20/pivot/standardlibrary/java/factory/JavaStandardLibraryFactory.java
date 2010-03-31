@@ -52,27 +52,26 @@ import tudresden.ocl20.pivot.essentialocl.types.CollectionType;
 import tudresden.ocl20.pivot.essentialocl.types.OrderedSetType;
 import tudresden.ocl20.pivot.essentialocl.types.SequenceType;
 import tudresden.ocl20.pivot.essentialocl.types.SetType;
+import tudresden.ocl20.pivot.essentialocl.types.TypeConstants;
 import tudresden.ocl20.pivot.essentialocl.types.TypeType;
 import tudresden.ocl20.pivot.essentialocl.types.TypesFactory;
-import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance;
-import tudresden.ocl20.pivot.modelbus.modelinstance.exception.OperationAccessException;
-import tudresden.ocl20.pivot.modelbus.modelinstance.exception.OperationNotFoundException;
-import tudresden.ocl20.pivot.modelbus.modelinstance.exception.PropertyAccessException;
-import tudresden.ocl20.pivot.modelbus.modelinstance.exception.PropertyNotFoundException;
-import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceBoolean;
-import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceCollection;
-import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
-import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceEnumerationLiteral;
-import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceInteger;
-import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceInvalid;
-import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceObject;
-import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceReal;
-import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceString;
-import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceTuple;
-import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceVoid;
-import tudresden.ocl20.pivot.modelbus.modelinstance.types.base.BasisJavaModelInstanceFactory;
-import tudresden.ocl20.pivot.modelbus.modelinstance.types.base.TypeConstants;
-import tudresden.ocl20.pivot.modelbus.util.OclCollectionTypeKind;
+import tudresden.ocl20.pivot.modelinstance.IModelInstance;
+import tudresden.ocl20.pivot.modelinstancetype.exception.OperationAccessException;
+import tudresden.ocl20.pivot.modelinstancetype.exception.OperationNotFoundException;
+import tudresden.ocl20.pivot.modelinstancetype.exception.PropertyAccessException;
+import tudresden.ocl20.pivot.modelinstancetype.exception.PropertyNotFoundException;
+import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceBoolean;
+import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceCollection;
+import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement;
+import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceEnumerationLiteral;
+import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceInteger;
+import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceInvalid;
+import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceObject;
+import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceReal;
+import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceString;
+import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceTuple;
+import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceVoid;
+import tudresden.ocl20.pivot.modelinstancetype.types.base.BasisJavaModelInstanceFactory;
 import tudresden.ocl20.pivot.pivotmodel.Enumeration;
 import tudresden.ocl20.pivot.pivotmodel.EnumerationLiteral;
 import tudresden.ocl20.pivot.pivotmodel.Operation;
@@ -243,7 +242,7 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 
 		IModelInstanceCollection<IModelInstanceElement> imiCollection =
 				basisJavaModelInstanceFactory.createModelInstanceCollection(
-						imiElements, OclCollectionTypeKind.BAG);
+						imiElements, false, false);
 
 		return new JavaOclBag<T>(imiCollection, genericType);
 	}
@@ -259,7 +258,7 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 
 			IModelInstanceCollection<IModelInstanceElement> imiResult =
 					basisJavaModelInstanceFactory.createModelInstanceCollection(bag,
-							OclCollectionTypeKind.BAG);
+							false, false);
 
 			result = new JavaOclBag<T>(imiResult, genericType);
 		}
@@ -450,7 +449,7 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 
 		IModelInstanceCollection<IModelInstanceElement> imiCollection =
 				basisJavaModelInstanceFactory.createModelInstanceCollection(
-						imiElements, OclCollectionTypeKind.ORDEREDSET);
+						imiElements, true, true);
 
 		return new JavaOclOrderedSet<T>(imiCollection, genericType);
 	}
@@ -466,7 +465,7 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 
 			IModelInstanceCollection<IModelInstanceElement> imiResult =
 					basisJavaModelInstanceFactory.createModelInstanceCollection(
-							orderedSet, OclCollectionTypeKind.ORDEREDSET);
+							orderedSet, true, true);
 
 			result = new JavaOclOrderedSet<T>(imiResult, genericType);
 		}
@@ -517,7 +516,7 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 
 		IModelInstanceCollection<IModelInstanceElement> imiCollection =
 				basisJavaModelInstanceFactory.createModelInstanceCollection(
-						imiElements, OclCollectionTypeKind.SEQUENCE);
+						imiElements, true, false);
 
 		return new JavaOclSequence<T>(imiCollection, genericType);
 	}
@@ -533,7 +532,7 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 
 			IModelInstanceCollection<IModelInstanceElement> imiResult =
 					basisJavaModelInstanceFactory.createModelInstanceCollection(
-							orderedSet, OclCollectionTypeKind.SEQUENCE);
+							orderedSet, true, false);
 
 			result = new JavaOclSequence<T>(imiResult, genericType);
 		}
@@ -559,7 +558,7 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 
 		IModelInstanceCollection<IModelInstanceElement> imiCollection =
 				basisJavaModelInstanceFactory.createModelInstanceCollection(
-						imiElements, OclCollectionTypeKind.SET);
+						imiElements, false, true);
 
 		return new JavaOclSet<T>(imiCollection, genericType);
 	}
@@ -575,7 +574,7 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 
 			IModelInstanceCollection<IModelInstanceElement> imiResult =
 					basisJavaModelInstanceFactory.createModelInstanceCollection(set,
-							OclCollectionTypeKind.SET);
+							false, true);
 
 			result = new JavaOclSet<T>(imiResult, genericType);
 		}

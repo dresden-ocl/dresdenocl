@@ -32,6 +32,8 @@
  */
 package tudresden.ocl20.pivot.modelbus.metamodel;
 
+import tudresden.ocl20.pivot.model.metamodel.IMetamodel;
+
 /**
  * <p>
  * The {@link IMetamodelRegistry} manages a list of {@link IMetamodel}s that are

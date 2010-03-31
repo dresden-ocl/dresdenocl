@@ -3,7 +3,7 @@ package tudresden.ocl20.pivot.modelbus.metamodel.internal;
 import java.util.HashMap;
 import java.util.Map;
 
-import tudresden.ocl20.pivot.modelbus.metamodel.IMetamodel;
+import tudresden.ocl20.pivot.model.metamodel.IMetamodel;
 import tudresden.ocl20.pivot.modelbus.metamodel.IMetamodelRegistry;
 
 /**

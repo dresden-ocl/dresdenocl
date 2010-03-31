@@ -49,11 +49,11 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.osgi.util.NLS;
 
 import tudresden.ocl20.pivot.metamodels.ecore.EcoreMetamodelPlugin;
-import tudresden.ocl20.pivot.modelbus.IModelBusConstants;
-import tudresden.ocl20.pivot.modelbus.ModelAccessException;
+import tudresden.ocl20.pivot.model.IModel;
+import tudresden.ocl20.pivot.model.ModelAccessException;
+import tudresden.ocl20.pivot.model.ModelConstants;
+import tudresden.ocl20.pivot.model.base.AbstractModel;
 import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
-import tudresden.ocl20.pivot.modelbus.model.IModel;
-import tudresden.ocl20.pivot.modelbus.model.base.AbstractModel;
 import tudresden.ocl20.pivot.pivotmodel.Namespace;
 
 /**
@@ -110,7 +110,7 @@ public class EcoreModel extends AbstractModel implements IModel {
 	 *             If an error occurs when creating the adapter for the top name
 	 *             space.
 	 * 
-	 * @see tudresden.ocl20.pivot.modelbus.model.IModel#getRootNamespace()
+	 * @see tudresden.ocl20.pivot.model.IModel#getRootNamespace()
 	 */
 	public Namespace getRootNamespace() throws ModelAccessException {
 
@@ -225,7 +225,7 @@ public class EcoreModel extends AbstractModel implements IModel {
 
 		/* Create a new package to serve as the root package. */
 		rootPackage = EcoreFactory.eINSTANCE.createEPackage();
-		rootPackage.setName(IModelBusConstants.ROOT_PACKAGE_NAME);
+		rootPackage.setName(ModelConstants.ROOT_PACKAGE_NAME);
 
 		/* Add all sub-packages and sub-types to the new root package. */
 		for (EObject eObject : rootPackages) {

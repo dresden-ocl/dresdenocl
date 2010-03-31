@@ -8,6 +8,7 @@ Bundle-Vendor: TU Dresden, Software Technology Group
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: tudresden.ocl20.pivot.essentialocl.expressions,
+ tudresden.ocl20.pivot.essentialocl.expressions.factory,
  tudresden.ocl20.pivot.essentialocl.expressions.impl,
  tudresden.ocl20.pivot.essentialocl.expressions.util,
  tudresden.ocl20.pivot.essentialocl.types,
@@ -15,7 +16,6 @@ Export-Package: tudresden.ocl20.pivot.essentialocl.expressions,
  tudresden.ocl20.pivot.essentialocl.types.util
 Require-Bundle: org.eclipse.core.runtime;bundle-version="3.4.0",
  tudresden.ocl20.pivot.pivotmodel;bundle-version="2.1.0";visibility:=reexport,
- tudresden.ocl20.logging;bundle-version="2.1.0",
- org.apache.commons.lang;bundle-version="2.3.0"
+ tudresden.ocl20.pivot.model;bundle-version="2.2.0";visibility:=reexport
 Bundle-ActivationPolicy: lazy
 Bundle-Activator: tudresden.ocl20.pivot.essentialocl.EssentialOclPlugin

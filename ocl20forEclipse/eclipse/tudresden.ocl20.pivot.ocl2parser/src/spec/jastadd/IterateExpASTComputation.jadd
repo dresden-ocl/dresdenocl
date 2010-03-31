@@ -25,7 +25,7 @@ public aspect IterateExpASMComputation {
 	 */
 	public IterateExp IterateExpAS.computeASM(Environment env) throws BuildingASMException {
 		// Get the expression factory.
-		IModelFactory factory = env.getExpFactory();
+		EssentialOclFactory factory = env.getExpFactory();
 		
 		// The iterate expression must have a source.
 		if (!hasSource()) throw new BuildingASMException("The iterate expression has no source, it is unusual, maybe it is an internal error.", null);

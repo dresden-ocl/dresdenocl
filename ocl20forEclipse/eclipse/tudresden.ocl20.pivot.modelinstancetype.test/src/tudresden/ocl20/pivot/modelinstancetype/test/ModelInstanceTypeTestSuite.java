@@ -22,7 +22,7 @@ package tudresden.ocl20.pivot.modelinstancetype.test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
-import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance;
+import tudresden.ocl20.pivot.modelinstance.IModelInstance;
 import tudresden.ocl20.pivot.modelinstancetype.test.tests.AllTests;
 
 /**

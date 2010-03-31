@@ -23,7 +23,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
-import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance;
+import tudresden.ocl20.pivot.modelinstance.IModelInstance;
 import tudresden.ocl20.pivot.modelinstancetype.test.testmodel.C1Implementation;
 import tudresden.ocl20.pivot.modelinstancetype.test.testmodel.Class1;
 import tudresden.ocl20.pivot.modelinstancetype.test.testmodel.Class2;

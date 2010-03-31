@@ -6,10 +6,13 @@ Bundle-Version: 2.1.0.qualifier
 Bundle-Activator: tudresden.ocl20.pivot.essentialocl.StandardLibraryPlugin
 Bundle-Vendor: TU Dresden, Software Technology Group
 Require-Bundle: org.eclipse.core.runtime;bundle-version="3.4.0",
- tudresden.ocl20.pivot.modelbus;bundle-version="2.1.0",
- tudresden.ocl20.pivot.essentialocl;bundle-version="2.1.0"
+ tudresden.ocl20.pivot.modelbus;bundle-version="2.1.0";visibility:=reexport,
+ org.eclipse.emf.ecore.xmi;bundle-version="2.5.0"
 Bundle-ActivationPolicy: lazy
 Export-Package: tudresden.ocl20.pivot.essentialocl,
  tudresden.ocl20.pivot.essentialocl.standardlibrary,
- tudresden.ocl20.pivot.essentialocl.standardlibrary.factory
+ tudresden.ocl20.pivot.essentialocl.standardlibrary.factory,
+ tudresden.ocl20.pivot.essentialocl.standardlibrary.provider
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-ClassPath: resources/,
+ .

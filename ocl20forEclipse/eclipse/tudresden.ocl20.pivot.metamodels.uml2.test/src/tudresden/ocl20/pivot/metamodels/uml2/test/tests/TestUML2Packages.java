@@ -23,9 +23,9 @@ import org.junit.Test;
 
 import tudresden.ocl20.pivot.facade.Ocl2ForEclipseFacade;
 import tudresden.ocl20.pivot.metamodels.uml2.test.UML2MetaModelTestPlugin;
-import tudresden.ocl20.pivot.modelbus.IModelBusConstants;
-import tudresden.ocl20.pivot.modelbus.ModelAccessException;
-import tudresden.ocl20.pivot.modelbus.model.IModel;
+import tudresden.ocl20.pivot.model.IModel;
+import tudresden.ocl20.pivot.model.ModelAccessException;
+import tudresden.ocl20.pivot.model.ModelConstants;
 import tudresden.ocl20.pivot.pivotmodel.Namespace;
 
 /**
@@ -56,7 +56,7 @@ public class TestUML2Packages {
 		root = testModel.getRootNamespace();
 
 		assertNotNull(root);
-		assertEquals(IModelBusConstants.ROOT_PACKAGE_NAME, root.getName());
+		assertEquals(ModelConstants.ROOT_PACKAGE_NAME, root.getName());
 
 		assertNull(root.getNestingNamespace());
 		assertEquals(1, root.getNestedNamespace().size());
@@ -100,7 +100,7 @@ public class TestUML2Packages {
 		root = testModel.getRootNamespace();
 
 		assertNotNull(root);
-		assertEquals(IModelBusConstants.ROOT_PACKAGE_NAME, root.getName());
+		assertEquals(ModelConstants.ROOT_PACKAGE_NAME, root.getName());
 
 		assertNull(root.getNestingNamespace());
 		assertEquals(1, root.getNestedNamespace().size());
@@ -145,7 +145,7 @@ public class TestUML2Packages {
 		root = testModel.getRootNamespace();
 
 		assertNotNull(root);
-		assertEquals(IModelBusConstants.ROOT_PACKAGE_NAME, root.getName());
+		assertEquals(ModelConstants.ROOT_PACKAGE_NAME, root.getName());
 
 		assertNull(root.getNestingNamespace());
 		assertEquals(1, root.getNestedNamespace().size());

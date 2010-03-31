@@ -34,19 +34,14 @@
 package tudresden.ocl20.pivot.modelbus;
 
 import org.apache.log4j.Logger;
-import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.Plugin;
 import org.osgi.framework.BundleContext;
 
 import tudresden.ocl20.logging.LoggingPlugin;
-import tudresden.ocl20.pivot.essentialocl.types.OclLibrary;
-import tudresden.ocl20.pivot.modelbus.internal.OclLibraryProvider;
-import tudresden.ocl20.pivot.modelbus.internal.StandaloneOclLibraryProvider;
 import tudresden.ocl20.pivot.modelbus.metamodel.IMetamodelRegistry;
 import tudresden.ocl20.pivot.modelbus.metamodel.internal.MetamodelRegistry;
 import tudresden.ocl20.pivot.modelbus.metamodel.internal.StandaloneMetamodelRegistry;
 import tudresden.ocl20.pivot.modelbus.model.IModelRegistry;
-import tudresden.ocl20.pivot.modelbus.model.IOclLibraryProvider;
 import tudresden.ocl20.pivot.modelbus.model.internal.ModelRegistry;
 import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceRegistry;
 import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceTypeRegistry;
@@ -67,9 +62,6 @@ public class ModelBusPlugin extends Plugin {
 
 	/** The shared instance. */
 	private static ModelBusPlugin plugin;
-
-	/** The standard OCL library provider */
-	private IOclLibraryProvider oclLibraryProvider;
 
 	/** The registry of registered meta-models. */
 	private IMetamodelRegistry metamodelRegistry;
@@ -156,59 +148,6 @@ public class ModelBusPlugin extends Plugin {
 	public static ModelBusPlugin getDefault() {
 
 		return plugin;
-	}
-
-	/**
-	 * <p>
-	 * Returns the {@link IOclLibraryProvider} that is used to get an instance of
-	 * the {@link OclLibrary}.
-	 * </p>
-	 * <p>
-	 * If no {@link IOclLibraryProvider} has been given to the
-	 * {@link ModelBusPlugin}, the standard {@link OclLibraryProvider} will be
-	 * used. This is important when using DresdenOCL stand-alone, as the
-	 * {@link StandaloneOclLibraryProvider} should be set first, using
-	 * {@link #setOclLibraryProvider(IOclLibraryProvider)}.
-	 * </p>
-	 * 
-	 * @see #setOclLibraryProvider(IOclLibraryProvider)
-	 * 
-	 * @return the {@link IOclLibraryProvider} that is used to get an instance of
-	 *         the {@link OclLibrary}
-	 */
-	public synchronized static IOclLibraryProvider getOclLibraryProvider() {
-
-		/* Check that the plugin has been activated. */
-		if (plugin == null) {
-			throw new IllegalStateException(
-					"The Model Bus plugin has not been activated."); //$NON-NLS-1$
-		}
-
-		/* Lazyily create the provider */
-		if (plugin.oclLibraryProvider == null)
-			plugin.oclLibraryProvider = new OclLibraryProvider();
-
-		return plugin.oclLibraryProvider;
-	}
-
-	/**
-	 * Sets the {@link IOclLibraryProvider} of the {@link ModelBusPlugin}. This
-	 * method has to be called when using DresdenOCL stand-alone. The standard
-	 * argument should be {@link StandaloneOclLibraryProvider}.
-	 * 
-	 * @param oclLibraryProvider
-	 *          the {@link IOclLibraryProvider} to set
-	 */
-	public synchronized static void setOclLibraryProvider(
-			IOclLibraryProvider oclLibraryProvider) {
-
-		/* Check that the plugin has been activated. */
-		if (plugin == null) {
-			throw new IllegalStateException(
-					"The Model Bus plugin has not been activated."); //$NON-NLS-1$
-		}
-
-		plugin.oclLibraryProvider = oclLibraryProvider;
 	}
 
 	/**

@@ -8,8 +8,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import tudresden.ocl20.pivot.modelbus.IModelBusConstants;
-import tudresden.ocl20.pivot.modelbus.model.IModel;
+import tudresden.ocl20.pivot.model.IModel;
+import tudresden.ocl20.pivot.model.ModelConstants;
 import tudresden.ocl20.pivot.modelinstancetype.java.JavaModelInstanceTypePlugin;
 import tudresden.ocl20.pivot.pivotmodel.PrimitiveType;
 import tudresden.ocl20.pivot.pivotmodel.PrimitiveTypeKind;
@@ -134,7 +134,7 @@ public class JavaModelInstanceTypeUtility {
 		qualifiedNameList = new ArrayList<String>(qualifiedNameList);
 
 		/* Probably remove the root package from the name. */
-		if (qualifiedNameList.get(0).equals(IModelBusConstants.ROOT_PACKAGE_NAME)) {
+		if (qualifiedNameList.get(0).equals(ModelConstants.ROOT_PACKAGE_NAME)) {
 			qualifiedNameList.remove(0);
 		}
 		// no else.
@@ -171,7 +171,7 @@ public class JavaModelInstanceTypeUtility {
 
 		if (result == null) {
 			result = new ArrayList<String>(Arrays.asList(canonicalName.split("[.]")));
-			result.add(0, IModelBusConstants.ROOT_PACKAGE_NAME);
+			result.add(0, ModelConstants.ROOT_PACKAGE_NAME);
 		}
 		// no else.
 

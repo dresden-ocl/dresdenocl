@@ -26,16 +26,16 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import tudresden.ocl20.pivot.essentialocl.types.TypeConstants;
 import tudresden.ocl20.pivot.facade.Ocl2ForEclipseFacade;
-import tudresden.ocl20.pivot.modelbus.IModelBusConstants;
-import tudresden.ocl20.pivot.modelbus.ModelAccessException;
-import tudresden.ocl20.pivot.modelbus.model.IModel;
-import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance;
-import tudresden.ocl20.pivot.modelbus.modelinstance.exception.PropertyAccessException;
-import tudresden.ocl20.pivot.modelbus.modelinstance.exception.PropertyNotFoundException;
-import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
-import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceObject;
-import tudresden.ocl20.pivot.modelbus.modelinstance.types.base.TypeConstants;
+import tudresden.ocl20.pivot.model.IModel;
+import tudresden.ocl20.pivot.model.ModelAccessException;
+import tudresden.ocl20.pivot.model.ModelConstants;
+import tudresden.ocl20.pivot.modelinstance.IModelInstance;
+import tudresden.ocl20.pivot.modelinstancetype.exception.PropertyAccessException;
+import tudresden.ocl20.pivot.modelinstancetype.exception.PropertyNotFoundException;
+import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement;
+import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceObject;
 import tudresden.ocl20.pivot.modelinstancetype.xml.XmlModelInstanceTypePlugin;
 import tudresden.ocl20.pivot.pivotmodel.Property;
 import tudresden.ocl20.pivot.pivotmodel.Type;
@@ -147,7 +147,7 @@ public class TestValueProperty {
 
 		Type booleanValueType;
 		booleanValueType = testModel.findType(Arrays.asList(new String[] {
-				IModelBusConstants.ROOT_PACKAGE_NAME, "package1",
+				ModelConstants.ROOT_PACKAGE_NAME, "package1",
 				"BooleanValue" }));
 		assertNotNull(msg, booleanValueType);
 
@@ -191,7 +191,7 @@ public class TestValueProperty {
 	
 		Type enumerationValueType;
 		enumerationValueType = testModel.findType(Arrays.asList(new String[] {
-				IModelBusConstants.ROOT_PACKAGE_NAME, "package1",
+				ModelConstants.ROOT_PACKAGE_NAME, "package1",
 				"EnumerationValue" }));
 		assertNotNull(msg, enumerationValueType);
 	
@@ -213,7 +213,7 @@ public class TestValueProperty {
 	
 		assertNotNull(msg, adaptedValue);
 		assertEquals(msg, testModel.findType(Arrays.asList(new String[] {
-				IModelBusConstants.ROOT_PACKAGE_NAME, "package1",
+				ModelConstants.ROOT_PACKAGE_NAME, "package1",
 				"Enumeration1" })), adaptedValue.getType());
 		assertFalse(msg, adaptedValue.isUndefined());
 	}
@@ -238,7 +238,7 @@ public class TestValueProperty {
 
 		Type integerValueType;
 		integerValueType = testModel.findType(Arrays.asList(new String[] {
-				IModelBusConstants.ROOT_PACKAGE_NAME, "package1",
+				ModelConstants.ROOT_PACKAGE_NAME, "package1",
 				"IntegerValue" }));
 		assertNotNull(msg, integerValueType);
 
@@ -282,7 +282,7 @@ public class TestValueProperty {
 
 		Type realValueType;
 		realValueType = testModel.findType(Arrays
-				.asList(new String[] { IModelBusConstants.ROOT_PACKAGE_NAME,
+				.asList(new String[] { ModelConstants.ROOT_PACKAGE_NAME,
 						"package1", "RealValue" }));
 		assertNotNull(msg, realValueType);
 
@@ -326,7 +326,7 @@ public class TestValueProperty {
 
 		Type stringValueType;
 		stringValueType = testModel.findType(Arrays
-				.asList(new String[] { IModelBusConstants.ROOT_PACKAGE_NAME,
+				.asList(new String[] { ModelConstants.ROOT_PACKAGE_NAME,
 						"package1", "StringValue" }));
 		assertNotNull(msg, stringValueType);
 

@@ -20,7 +20,7 @@ package tudresden.ocl20.pivot.ocl2java;
 
 import java.util.List;
 
-import tudresden.ocl20.pivot.modelbus.model.IModel;
+import tudresden.ocl20.pivot.model.IModel;
 import tudresden.ocl20.pivot.ocl2java.exception.Ocl22CodeException;
 import tudresden.ocl20.pivot.pivotmodel.Constraint;
 

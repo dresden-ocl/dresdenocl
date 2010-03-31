@@ -30,9 +30,10 @@
  */
 package tudresden.ocl20.pivot.modelbus.modelinstance;
 
+import tudresden.ocl20.pivot.model.IModel;
 import tudresden.ocl20.pivot.modelbus.event.IModelInstanceRegistryListener;
 import tudresden.ocl20.pivot.modelbus.event.IModelRegistryListener;
-import tudresden.ocl20.pivot.modelbus.model.IModel;
+import tudresden.ocl20.pivot.modelinstance.IModelInstance;
 
 /**
  * <p>

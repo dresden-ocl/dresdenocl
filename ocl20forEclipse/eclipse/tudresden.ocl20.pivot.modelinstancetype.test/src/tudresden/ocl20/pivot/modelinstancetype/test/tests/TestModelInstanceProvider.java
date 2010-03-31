@@ -25,9 +25,9 @@ import static org.junit.Assert.assertNotNull;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import tudresden.ocl20.pivot.modelbus.model.IModel;
-import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance;
-import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceProvider;
+import tudresden.ocl20.pivot.model.IModel;
+import tudresden.ocl20.pivot.modelinstance.IModelInstance;
+import tudresden.ocl20.pivot.modelinstance.IModelInstanceProvider;
 import tudresden.ocl20.pivot.modelinstancetype.test.ModelInstanceTypeTestServices;
 
 /**
@@ -57,7 +57,7 @@ public class TestModelInstanceProvider {
 	/**
 	 * <p>
 	 * Tests the method
-	 * {@link IModelInstanceProvider#createEmptyModelInstance(tudresden.ocl20.pivot.modelbus.model.IModel)}
+	 * {@link IModelInstanceProvider#createEmptyModelInstance(tudresden.ocl20.pivot.model.IModel)}
 	 * .
 	 * </p>
 	 */
@@ -88,7 +88,7 @@ public class TestModelInstanceProvider {
 	/**
 	 * <p>
 	 * Tests the method
-	 * {@link IModelInstanceProvider#createEmptyModelInstance(tudresden.ocl20.pivot.modelbus.model.IModel)}
+	 * {@link IModelInstanceProvider#createEmptyModelInstance(tudresden.ocl20.pivot.model.IModel)}
 	 * with illegal arguments.
 	 * </p>
 	 */

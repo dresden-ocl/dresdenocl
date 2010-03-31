@@ -23,10 +23,10 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 
 import tudresden.ocl20.pivot.metamodels.uml2.UML2MetamodelPlugin;
 import tudresden.ocl20.pivot.metamodels.uml2.internal.model.UML2Model;
-import tudresden.ocl20.pivot.modelbus.ModelAccessException;
-import tudresden.ocl20.pivot.modelbus.model.IModel;
-import tudresden.ocl20.pivot.modelbus.model.IModelProvider;
-import tudresden.ocl20.pivot.modelbus.model.base.AbstractModelProvider;
+import tudresden.ocl20.pivot.model.IModel;
+import tudresden.ocl20.pivot.model.IModelProvider;
+import tudresden.ocl20.pivot.model.ModelAccessException;
+import tudresden.ocl20.pivot.model.base.AbstractModelProvider;
 
 /**
  * <p>
@@ -52,7 +52,7 @@ public class UML2ModelProvider extends AbstractModelProvider implements
 	protected ResourceSet resourceSet;
 
 	/**
-	 * @see tudresden.ocl20.pivot.modelbus.model.IModelProvider#getModel(java.net.URL)
+	 * @see tudresden.ocl20.pivot.model.IModelProvider#getModel(java.net.URL)
 	 * 
 	 * @generated NOT
 	 */

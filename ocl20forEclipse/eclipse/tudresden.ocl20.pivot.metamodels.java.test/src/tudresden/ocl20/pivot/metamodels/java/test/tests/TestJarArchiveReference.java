@@ -23,9 +23,9 @@ import org.junit.Test;
 
 import tudresden.ocl20.pivot.facade.Ocl2ForEclipseFacade;
 import tudresden.ocl20.pivot.metamodels.java.test.JavaMetaModelTestPlugin;
-import tudresden.ocl20.pivot.modelbus.IModelBusConstants;
-import tudresden.ocl20.pivot.modelbus.ModelAccessException;
-import tudresden.ocl20.pivot.modelbus.model.IModel;
+import tudresden.ocl20.pivot.model.IModel;
+import tudresden.ocl20.pivot.model.ModelAccessException;
+import tudresden.ocl20.pivot.model.ModelConstants;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 
 /**
@@ -95,7 +95,7 @@ public class TestJarArchiveReference {
 
 		Type personType;
 		personType = model.findType(Arrays.asList(new String[] {
-				IModelBusConstants.ROOT_PACKAGE_NAME, "tudresden", "ocl20",
+				ModelConstants.ROOT_PACKAGE_NAME, "tudresden", "ocl20",
 				"pivot", "examples", "simple", "Person" }));
 		assertNotNull(msg, personType);
 	}

@@ -18,6 +18,8 @@ with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
 package tudresden.ocl20.pivot.modelbus.modelinstance;
 
+import tudresden.ocl20.pivot.modelinstance.IModelInstanceProvider;
+
 /**
  * <p>
  * A type or file format in which model instance can be save and imported into Dresden

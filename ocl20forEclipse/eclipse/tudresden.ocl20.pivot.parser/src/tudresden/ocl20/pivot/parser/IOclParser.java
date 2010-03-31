@@ -35,7 +35,7 @@ package tudresden.ocl20.pivot.parser;
 import java.io.Reader;
 import java.util.List;
 
-import tudresden.ocl20.pivot.modelbus.model.IModel;
+import tudresden.ocl20.pivot.model.IModel;
 import tudresden.ocl20.pivot.pivotmodel.Constraint;
 
 /**

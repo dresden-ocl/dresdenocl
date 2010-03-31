@@ -26,7 +26,7 @@ public aspect TupleLiteralExpASMComputation {
 	 */
 	public TupleLiteralExp TupleLiteralExpAS.computeASM(Environment env) throws BuildingASMException {
 		// Get the expression factory.
-		IModelFactory factory = env.getExpFactory();
+		EssentialOclFactory factory = env.getExpFactory();
 		
 		// Create a new list for the tupel literal parts.
 		java.util.List partList = new ArrayList();
@@ -65,7 +65,7 @@ public aspect TupleLiteralExpASMComputation {
 	
 	public TupleLiteralPart TupleLiteralPartAS.computeASM(Environment env) throws BuildingASMException {
 		// Get the factory.
-		IModelFactory factory = env.getExpFactory();
+		EssentialOclFactory factory = env.getExpFactory();
 		
 		// Get the token of the variable. It is need when an error occured to make lokalization information.
 		TokenAS token = getVariable().getName();
@@ -82,12 +82,7 @@ public aspect TupleLiteralExpASMComputation {
 		// Try to create a tuple literal instance. If something go wrong
 		// throw an exception. But we don't know which error occured.
 		TupleLiteralPart part = null;
-		try {
-			part = factory.createTupleLiteralPart(variable);
-		}
-		catch (FactoryException ex) {
-			throw new BuildingASMException("An internal error occured.", token);
-		}
+		part = factory.createTupleLiteralPart(variable);
 		
 		// Return the tuple literal part.
 		return part; 

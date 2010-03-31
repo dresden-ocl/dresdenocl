@@ -23,7 +23,7 @@ public aspect TypeASMComputation {
 	
 	public Type PathNameAS.computeASM(Environment env) throws BuildingASMException {
 		// Get the expression factory.
-		IModelFactory factory = env.getExpFactory();
+		EssentialOclFactory factory = env.getExpFactory();
 		
 		// Get the first token for error message.
 		TokenAS token = getTokenAS(0);
@@ -58,7 +58,7 @@ public aspect TypeASMComputation {
 	 */
 	public Type CollectionTypeAS.computeASM(Environment env) throws BuildingASMException {
 		// Get the expression factory.
-		IModelFactory factory = env.getExpFactory();
+		EssentialOclFactory factory = env.getExpFactory();
 		
 		// Get the ocl library for building the collections types.
 		OclLibrary library = env.getOclLibrary();
@@ -95,7 +95,7 @@ public aspect TypeASMComputation {
 	 */
 	public Type TupleTypeAS.computeASM(Environment env) throws BuildingASMException {
 		// Get the expression factory.
-		IModelFactory factory = env.getExpFactory();
+		EssentialOclFactory factory = env.getExpFactory();
 		
 		// The error token.
 		TokenAS errorToken = null;

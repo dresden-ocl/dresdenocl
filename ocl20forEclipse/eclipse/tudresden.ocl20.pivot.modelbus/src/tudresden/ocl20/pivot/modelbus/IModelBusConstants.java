@@ -32,10 +32,9 @@
  */
 package tudresden.ocl20.pivot.modelbus;
 
-import tudresden.ocl20.pivot.modelbus.model.IModel;
-import tudresden.ocl20.pivot.modelbus.model.IModelProvider;
-import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceProvider;
+import tudresden.ocl20.pivot.model.IModelProvider;
 import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceType;
+import tudresden.ocl20.pivot.modelinstance.IModelInstanceProvider;
 
 /**
  * <p>
@@ -102,7 +101,4 @@ public interface IModelBusConstants {
 	 */
 	public static final String MODEL_INSTANCES_VIEW_ID =
 			"tudresden.ocl20.pivot.modelbus.ui.views.modelinstances"; //$NON-NLS-1$
-
-	/** The name of the root package in {@link IModel}s. */
-	public static final String ROOT_PACKAGE_NAME = "root";
 }

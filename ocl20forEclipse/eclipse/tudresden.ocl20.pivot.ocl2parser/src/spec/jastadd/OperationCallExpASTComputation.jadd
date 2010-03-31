@@ -83,7 +83,7 @@ public aspect OperationCallExpASMComputation {
 		 * Rule G: calling a static operation
 		 * Rule H: unary mathematical expression (the source was set by the parser, it is the OclExpressionCs)
 		 */
-		IModelFactory factory = env.getExpFactory();
+		EssentialOclFactory factory = env.getExpFactory();
 		Environment nestedEnvironment = env.nestedEnvironment();
 		
 		OclExpression[] arguments = null; //getArgumentArray(env);
@@ -93,7 +93,7 @@ public aspect OperationCallExpASMComputation {
 		
 		
 		
-		/* Since the fabric method of the IModelFactory that creates the operation call expression
+		/* Since the fabric method of the EssentialOclFactory that creates the operation call expression
 		 * require a source expression, an operation name and a list of arguments, this method stands
 		 * for the cases A, B, C, E and H in the OCL-Specification [page 80 and 81, Nonterminal OperationCallExpCS].
 		 */
@@ -303,7 +303,7 @@ public aspect OperationCallExpASMComputation {
 			try {
 				resultOperation = factory.createOperationCallExp(pathNameList, arguments);
 			}
-			catch(FactoryException ex) {
+			catch(EssentialOclFactoryException ex) {
 				String message = ex.getMessage();
 				throw new BuildingASMException(message, token);
 			}

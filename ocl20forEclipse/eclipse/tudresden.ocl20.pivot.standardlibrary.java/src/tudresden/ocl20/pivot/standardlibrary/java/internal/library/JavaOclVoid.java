@@ -7,7 +7,7 @@ import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBoolean;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSet;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclVoid;
 import tudresden.ocl20.pivot.essentialocl.types.TypesFactory;
-import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceVoid;
+import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceVoid;
 import tudresden.ocl20.pivot.standardlibrary.java.factory.JavaStandardLibraryFactory;
 
 public class JavaOclVoid extends JavaOclAny implements OclVoid {

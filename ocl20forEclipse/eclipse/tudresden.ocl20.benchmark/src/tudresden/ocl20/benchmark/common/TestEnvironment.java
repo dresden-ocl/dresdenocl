@@ -27,7 +27,7 @@ import java.util.Map;
 import org.osgi.framework.Bundle;
 
 import tudresden.ocl20.benchmark.common.StatementDefinition;
-import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance;
+import tudresden.ocl20.pivot.modelinstance.IModelInstance;
 
 /**
  * the test environment stores data which is accessed by different objects but

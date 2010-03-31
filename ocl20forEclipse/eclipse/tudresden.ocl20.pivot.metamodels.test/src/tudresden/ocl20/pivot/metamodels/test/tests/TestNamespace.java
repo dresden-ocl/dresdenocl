@@ -27,9 +27,9 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import tudresden.ocl20.pivot.metamodels.test.MetaModelTestServices;
-import tudresden.ocl20.pivot.modelbus.IModelBusConstants;
-import tudresden.ocl20.pivot.modelbus.metamodel.IMetamodel;
-import tudresden.ocl20.pivot.modelbus.model.IModel;
+import tudresden.ocl20.pivot.model.IModel;
+import tudresden.ocl20.pivot.model.ModelConstants;
+import tudresden.ocl20.pivot.model.metamodel.IMetamodel;
 import tudresden.ocl20.pivot.pivotmodel.Namespace;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 
@@ -66,7 +66,7 @@ public class TestNamespace {
 	public static void setUp() {
 
 		rootPackage = MetaModelTestServices.getInstance()
-				.getNamespaceUnderTest(IModelBusConstants.ROOT_PACKAGE_NAME);
+				.getNamespaceUnderTest(ModelConstants.ROOT_PACKAGE_NAME);
 
 		package1 = MetaModelTestServices.getInstance().getNamespaceUnderTest(
 				MetaModelTestServices.NAMESPACE_QUALIFIED_NAME_PACKAGE1);

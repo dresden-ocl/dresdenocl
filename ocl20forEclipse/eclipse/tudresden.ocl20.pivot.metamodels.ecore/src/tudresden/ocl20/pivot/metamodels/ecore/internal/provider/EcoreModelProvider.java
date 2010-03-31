@@ -42,10 +42,10 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 
 import tudresden.ocl20.pivot.metamodels.ecore.EcoreMetamodelPlugin;
 import tudresden.ocl20.pivot.metamodels.ecore.internal.model.EcoreModel;
-import tudresden.ocl20.pivot.modelbus.ModelAccessException;
-import tudresden.ocl20.pivot.modelbus.model.IModel;
-import tudresden.ocl20.pivot.modelbus.model.IModelProvider;
-import tudresden.ocl20.pivot.modelbus.model.base.AbstractModelProvider;
+import tudresden.ocl20.pivot.model.IModel;
+import tudresden.ocl20.pivot.model.IModelProvider;
+import tudresden.ocl20.pivot.model.ModelAccessException;
+import tudresden.ocl20.pivot.model.base.AbstractModelProvider;
 
 /**
  * <p>

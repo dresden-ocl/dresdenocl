@@ -25,8 +25,8 @@ import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
 
 import tudresden.ocl20.logging.LoggingPlugin;
-import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance;
 import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceType;
+import tudresden.ocl20.pivot.modelinstance.IModelInstance;
 
 /**
  * <p>

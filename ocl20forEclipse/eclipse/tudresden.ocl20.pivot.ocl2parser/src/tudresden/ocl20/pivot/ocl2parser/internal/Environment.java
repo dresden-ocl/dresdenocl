@@ -23,16 +23,16 @@ package tudresden.ocl20.pivot.ocl2parser.internal;
 import java.util.ArrayList;
 import java.util.List;
 
+import tudresden.ocl20.pivot.essentialocl.StandardLibraryPlugin;
 import tudresden.ocl20.pivot.essentialocl.expressions.OclExpression;
 import tudresden.ocl20.pivot.essentialocl.expressions.Variable;
+import tudresden.ocl20.pivot.essentialocl.expressions.factory.EssentialOclFactory;
 import tudresden.ocl20.pivot.essentialocl.types.OclLibrary;
-import tudresden.ocl20.pivot.modelbus.ModelAccessException;
+import tudresden.ocl20.pivot.essentialocl.types.util.TypeResolver;
+import tudresden.ocl20.pivot.model.IModel;
+import tudresden.ocl20.pivot.model.ModelAccessException;
+import tudresden.ocl20.pivot.model.TypeNotFoundException;
 import tudresden.ocl20.pivot.modelbus.ModelBusException;
-import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
-import tudresden.ocl20.pivot.modelbus.model.IModel;
-import tudresden.ocl20.pivot.modelbus.model.IModelFactory;
-import tudresden.ocl20.pivot.modelbus.model.ITypeResolver;
-import tudresden.ocl20.pivot.modelbus.model.exception.TypeNotFoundException;
 import tudresden.ocl20.pivot.pivotmodel.ConstrainableElement;
 import tudresden.ocl20.pivot.pivotmodel.NamedElement;
 import tudresden.ocl20.pivot.pivotmodel.Namespace;
@@ -51,8 +51,8 @@ public class Environment {
 	protected List<Variable> implicitVariables;
 	protected List<Variable> explicitVariables;
 	protected Namespace namespace;
-	protected IModelFactory expFactory;
-	protected ITypeResolver typeResolver;
+	protected EssentialOclFactory expFactory;
+	protected TypeResolver typeResolver;
 	protected Type contextualClassifier = null;
 	protected ConstrainableElement context = null;
 	protected boolean specialOclOperation = false;
@@ -66,9 +66,9 @@ public class Environment {
 		// tempVariables = new ArrayList<Variable>();
 		implicitVariables = new ArrayList<Variable>();
 		explicitVariables = new ArrayList<Variable>();
-		expFactory = model.getFactory();
+		expFactory = new EssentialOclFactory(getOclLibrary(), model);
 		this.model = model;
-		typeResolver = model.getTypeResolver();
+		typeResolver = new TypeResolver(getOclLibrary());
 	}
 
 	/**
@@ -106,7 +106,7 @@ public class Environment {
 		Type type = null;
 
 		try {
-			type = typeResolver.findType(pathName);
+			type = typeResolver.findType(pathName, model);
 		}
 
 		catch (ModelAccessException e) {
@@ -436,7 +436,7 @@ public class Environment {
 	 * 
 	 * @return the expression factory
 	 */
-	public IModelFactory getExpFactory() {
+	public EssentialOclFactory getExpFactory() {
 
 		return expFactory;
 	}
@@ -448,7 +448,7 @@ public class Environment {
 	 */
 	public OclLibrary getOclLibrary() {
 
-		return ModelBusPlugin.getOclLibraryProvider().getOclLibrary();
+		return StandardLibraryPlugin.getOclLibraryProvider().getOclLibrary();
 	}
 
 	/**

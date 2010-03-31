@@ -90,7 +90,7 @@ public aspect PropertyCallExpASTComputation {
 	 */
 	public OclExpression PropertyCallExpAS.computePropertyASM(Environment env) throws BuildingASMException {
 		// Get the factory.
-		IModelFactory factory = env.getExpFactory();
+		EssentialOclFactory factory = env.getExpFactory();
 		
 		// Get the number elements of the path name. It can be  one or more than one.
 		int numberPathElements = getPathName().getNumTokenAS();
@@ -447,12 +447,12 @@ public aspect PropertyCallExpASTComputation {
 	 * @return a TypeLiteralExpression
 	 * @throws BuildingASMException thrown if the type with the name is not found.
 	 */
-	protected TypeLiteralExp PropertyCallExpAS.computeTypeLiteralExpression(java.util.List nameList, IModelFactory factory, TokenAS token) throws BuildingASMException {
+	protected TypeLiteralExp PropertyCallExpAS.computeTypeLiteralExpression(java.util.List nameList, EssentialOclFactory factory, TokenAS token) throws BuildingASMException {
 		TypeLiteralExp expression = null;
 		try {
 			expression = factory.createTypeLiteralExp(nameList);
 		}
-		catch(FactoryException ex) {
+		catch(EssentialOclFactoryException ex) {
 			String message = ex.getMessage() + " An error occured while creating a type literal expression.";
 			throw new BuildingASMException(message, token);
 		}

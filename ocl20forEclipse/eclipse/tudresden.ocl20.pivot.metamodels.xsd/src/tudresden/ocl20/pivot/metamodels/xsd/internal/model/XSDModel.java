@@ -12,11 +12,11 @@ import org.eclipse.xsd.ecore.XSDEcoreBuilder;
 
 import tudresden.ocl20.pivot.metamodels.ecore.internal.model.EcoreAdapterFactory;
 import tudresden.ocl20.pivot.metamodels.xsd.XSDMetamodelPlugin;
-import tudresden.ocl20.pivot.modelbus.IModelBusConstants;
-import tudresden.ocl20.pivot.modelbus.ModelAccessException;
+import tudresden.ocl20.pivot.model.IModel;
+import tudresden.ocl20.pivot.model.ModelAccessException;
+import tudresden.ocl20.pivot.model.ModelConstants;
+import tudresden.ocl20.pivot.model.base.AbstractModel;
 import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
-import tudresden.ocl20.pivot.modelbus.model.IModel;
-import tudresden.ocl20.pivot.modelbus.model.base.AbstractModel;
 import tudresden.ocl20.pivot.pivotmodel.Namespace;
 
 /**
@@ -72,7 +72,7 @@ public class XSDModel extends AbstractModel implements IModel {
 	 *           if an error occurs when creating the adapter for the top
 	 *           namespace
 	 * 
-	 * @see tudresden.ocl20.pivot.modelbus.IModel#getRootNamespace()
+	 * @see tudresden.ocl20.pivot.model.IModel#getRootNamespace()
 	 * 
 	 * @generated
 	 */
@@ -119,7 +119,7 @@ public class XSDModel extends AbstractModel implements IModel {
 
 		// create a new package to serve as the root package
 		EPackage rootPackage = EcoreFactory.eINSTANCE.createEPackage();
-		rootPackage.setName(IModelBusConstants.ROOT_PACKAGE_NAME);
+		rootPackage.setName(ModelConstants.ROOT_PACKAGE_NAME);
 
 		// add all sub-packages and subtypes to the new root package
 		for (Object object : ePackages) {

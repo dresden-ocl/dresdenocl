@@ -19,10 +19,10 @@ with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
 package tudresden.ocl20.pivot.metamodels.java.internal.model;
 
 import tudresden.ocl20.pivot.metamodels.java.JavaMetaModelPlugin;
-import tudresden.ocl20.pivot.modelbus.ModelAccessException;
+import tudresden.ocl20.pivot.model.IModel;
+import tudresden.ocl20.pivot.model.ModelAccessException;
+import tudresden.ocl20.pivot.model.base.AbstractModel;
 import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
-import tudresden.ocl20.pivot.modelbus.model.IModel;
-import tudresden.ocl20.pivot.modelbus.model.base.AbstractModel;
 import tudresden.ocl20.pivot.pivotmodel.Namespace;
 import tudresden.ocl20.pivot.pivotmodel.Operation;
 import tudresden.ocl20.pivot.pivotmodel.Parameter;
@@ -134,7 +134,7 @@ public class JavaModel extends AbstractModel implements IModel {
 	 *             Thrown if an error occurs when creating the adapter for the
 	 *             top {@link Namespace}.
 	 * 
-	 * @see tudresden.ocl20.pivot.modelbus.model.IModel#getRootNamespace()
+	 * @see tudresden.ocl20.pivot.model.IModel#getRootNamespace()
 	 * 
 	 * @generated NOT
 	 */
