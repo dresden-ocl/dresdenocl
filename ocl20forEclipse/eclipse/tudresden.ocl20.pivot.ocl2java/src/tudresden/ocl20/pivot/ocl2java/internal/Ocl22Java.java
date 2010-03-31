@@ -22,6 +22,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -78,10 +79,6 @@ import tudresden.ocl20.pivot.ocl2java.code.impl.Ocl22JavaEnvironment;
 import tudresden.ocl20.pivot.ocl2java.code.impl.TransformedCodeImpl;
 import tudresden.ocl20.pivot.ocl2java.code.impl.TransformedTypeImpl;
 import tudresden.ocl20.pivot.ocl2java.exception.Ocl22CodeException;
-import tudresden.ocl20.pivot.ocl2java.template.ITemplate;
-import tudresden.ocl20.pivot.ocl2java.template.ITemplateEngine;
-import tudresden.ocl20.pivot.ocl2java.template.impl.StringTemplateAdapter;
-import tudresden.ocl20.pivot.ocl2java.template.impl.StringTemplateEngine;
 import tudresden.ocl20.pivot.pivotmodel.ConstrainableElement;
 import tudresden.ocl20.pivot.pivotmodel.Constraint;
 import tudresden.ocl20.pivot.pivotmodel.ConstraintKind;
@@ -95,6 +92,12 @@ import tudresden.ocl20.pivot.pivotmodel.PrimitiveType;
 import tudresden.ocl20.pivot.pivotmodel.PrimitiveTypeKind;
 import tudresden.ocl20.pivot.pivotmodel.Property;
 import tudresden.ocl20.pivot.pivotmodel.Type;
+import tudresden.ocl20.pivot.tools.template.ITemplate;
+import tudresden.ocl20.pivot.tools.template.ITemplateEngine;
+import tudresden.ocl20.pivot.tools.template.ITemplateGroup;
+import tudresden.ocl20.pivot.tools.template.TemplatePlugin;
+import tudresden.ocl20.pivot.tools.template.exception.TemplateException;
+import tudresden.ocl20.pivot.tools.template.impl.TemplateGroup;
 
 /**
  * <p>
@@ -125,7 +128,7 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 	 * The engine to provide all {@link ITemplate}s used for code
 	 * transformation.
 	 */
-	private ITemplateEngine myTemplateEngine;
+	private ITemplateGroup myTemplateGroup;
 
 	/**
 	 * The environment to provide and store some values during code
@@ -169,22 +172,24 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 
 		/* Try to load the template engine. */
 		try {
-			LinkedList<String> templatePaths;
+			LinkedList<URL> templatePaths;
 
-			templatePaths = new LinkedList<String>();
+			templatePaths = new LinkedList<URL>();
+			
+			templatePaths.add(this.getClass().getResource(TEMPLATE_PATH + JAVA_TEMPLATE_FILE));
+			templatePaths.add(this.getClass().getResource(TEMPLATE_PATH + TYPE_TEMPLATE_FILE));
+			templatePaths.add(this.getClass().getResource(TEMPLATE_PATH + OPERATION_TEMPLATE_FILE));
+			templatePaths.add(this.getClass().getResource(TEMPLATE_PATH + EXPRESSION_TEMPLATE_FILE));
+			templatePaths.add(this.getClass().getResource(TEMPLATE_PATH + INSTRUMENTATION_TEMPLATE_FILE));
 
-			templatePaths.add(TEMPLATE_PATH + JAVA_TEMPLATE_FILE);
-			templatePaths.add(TEMPLATE_PATH + TYPE_TEMPLATE_FILE);
-			templatePaths.add(TEMPLATE_PATH + OPERATION_TEMPLATE_FILE);
-			templatePaths.add(TEMPLATE_PATH + EXPRESSION_TEMPLATE_FILE);
-			templatePaths.add(TEMPLATE_PATH + INSTRUMENTATION_TEMPLATE_FILE);
-
-			this.myTemplateEngine = new StringTemplateEngine(templatePaths);
-
+			ITemplateEngine templateEngine = TemplatePlugin.getTemplateEngineRegistry().getNewTemplateEngine("StringTemplate");
+			
+			this.myTemplateGroup = new TemplateGroup("Java",null, templateEngine, templatePaths);
+			
 			this.mySettings = new Ocl22JavaSettings();
 		}
 
-		catch (IOException e) {
+		catch (TemplateException e) {
 			String msg;
 
 			msg = "The template for code transformation could not be loaded. ";
@@ -470,7 +475,7 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 		ITemplate template;
 		String literalValue;
 
-		template = this.myTemplateEngine.getTemplate("literalExp");
+		template = this.myTemplateGroup.getTemplate("literalExp");
 
 		literalValue = "";
 		literalValue += aBooleanLiteralExp.isBooleanSymbol();
@@ -524,7 +529,7 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 		collectionName = this.myCodeTransEnv.getNewCollectionVarName();
 
 		/* Prepare the template for the collection expression. */
-		template = this.myTemplateEngine.getTemplate("collectionLiteralExp");
+		template = this.myTemplateGroup.getTemplate("collectionLiteralExp");
 		template.setAttribute("collectionName", collectionName);
 		template.setAttribute("collectionType", resultType.toString());
 
@@ -547,7 +552,7 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 				anItemsCode = this.doSwitch((EObject) anItemsExp);
 
 				/* Transform code for element expression. */
-				elemTemplate = this.myTemplateEngine
+				elemTemplate = this.myTemplateGroup
 						.getTemplate("collectionLiteralExp_collectionItem");
 				elemTemplate.setAttribute("collectionName", collectionName);
 				elemTemplate
@@ -588,7 +593,7 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 				// no else.
 				elementCode = lastExpCode.getCode();
 
-				elemTemplate = this.myTemplateEngine
+				elemTemplate = this.myTemplateGroup
 						.getTemplate("collectionLiteralExp_collectionRange");
 				elemTemplate.setAttribute("collectionName", collectionName);
 				elemTemplate.setAttribute("indexVar", this.myCodeTransEnv
@@ -657,7 +662,7 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 		}
 		// no else.
 
-		template = this.myTemplateEngine.getTemplate("enumLiteralExp");
+		template = this.myTemplateGroup.getTemplate("enumLiteralExp");
 		template.setAttribute("enumerationName", enumerationName);
 		template.setAttribute("literalName", anEnumerationLiteral.getName());
 
@@ -753,7 +758,7 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 		resultType = this.transformType(thenExp.getType());
 
 		/* Transform ifExp. */
-		template = this.myTemplateEngine.getTemplate("ifExp");
+		template = this.myTemplateGroup.getTemplate("ifExp");
 		template.setAttribute("ifCode", ifCode.getCode());
 		template.setAttribute("ifExp", ifCode.getResultExp());
 		template.setAttribute("thenCode", thenCode.getCode());
@@ -796,7 +801,7 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 		ITemplate template;
 		String literalValue;
 
-		template = this.myTemplateEngine.getTemplate("literalExp");
+		template = this.myTemplateGroup.getTemplate("literalExp");
 
 		literalValue = "";
 		literalValue += anIntegerLiteralExp.getIntegerSymbol();
@@ -836,7 +841,7 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 		ITransformedCode result;
 		ITemplate template;
 
-		template = this.myTemplateEngine.getTemplate("invalidLiteralExp");
+		template = this.myTemplateGroup.getTemplate("invalidLiteralExp");
 
 		result = new TransformedCodeImpl();
 		result.setResultExp(template.toString());
@@ -931,7 +936,7 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 
 		result = new TransformedCodeImpl();
 
-		template = this.myTemplateEngine.getTemplate("iterateExp");
+		template = this.myTemplateGroup.getTemplate("iterateExp");
 
 		template.setAttribute("sourceCode", sourceCode.getCode());
 		template.setAttribute("sourceExp", sourceCode.getResultExp());
@@ -1065,7 +1070,7 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 		itVarList.add(0, itVariable);
 
 		/* Begin code transformation of IteratorExp. */
-		template = this.myTemplateEngine.getTemplate("iteratorExp_" + itName);
+		template = this.myTemplateGroup.getTemplate("iteratorExp_" + itName);
 
 		if (itName.equals("any") || itName.equals("exists")
 				|| itName.equals("forAll") || itName.equals("one")) {
@@ -1093,10 +1098,10 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 			 * operation must be computed.
 			 */
 			if (bodyType.isGenericType()) {
-				addOp = this.myTemplateEngine
+				addOp = this.myTemplateGroup
 						.getTemplate("addAllOperationName").toString();
 			} else {
-				addOp = this.myTemplateEngine.getTemplate("addOperationName")
+				addOp = this.myTemplateGroup.getTemplate("addOperationName")
 						.toString();
 			}
 
@@ -1189,7 +1194,7 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 		/* Generate the code for the inExp. */
 		inCode = doSwitch((EObject) inExp);
 
-		template = this.myTemplateEngine.getTemplate("letExp");
+		template = this.myTemplateGroup.getTemplate("letExp");
 		template.setAttribute("varType", this.transformType(aVarsType)
 				.getTypeName());
 		template.setAttribute("varName", aVar.getName());
@@ -1294,19 +1299,19 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 			if (sourceType instanceof Type) {
 
 				if (operationName.equals("oclIsNew")) {
-					template = this.myTemplateEngine
+					template = this.myTemplateGroup
 							.getTemplate("oclIsNewOperation");
 					this.myCodeTransEnv.addIsNewClass(this.transformType(
 							sourceExp.getType()).toString());
 				}
 
 				else if (operationName.equals("oclIsUndefined")) {
-					template = this.myTemplateEngine
+					template = this.myTemplateGroup
 							.getTemplate("oclIsUndefinedOperation");
 				}
 
 				else if (operationName.equals("oclIsInvalid")) {
-					template = this.myTemplateEngine
+					template = this.myTemplateGroup
 							.getTemplate("oclIsInvalidOperation");
 				}
 
@@ -1316,39 +1321,39 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 					instanceType = this.transformType(
 							anOperationCallExp.getSourceType()).toString();
 
-					template = this.myTemplateEngine
+					template = this.myTemplateGroup
 							.getTemplate("allInstancesOperation");
 					template.setAttribute("typeName", instanceType);
 					this.myCodeTransEnv.addAllInstancesClass(instanceType);
 				}
 
 				else if (operationName.equals("=")) {
-					template = this.myTemplateEngine
+					template = this.myTemplateGroup
 							.getTemplate("equalsOperation");
 				}
 
 				else if (operationName.equals("<>")) {
-					template = this.myTemplateEngine
+					template = this.myTemplateGroup
 							.getTemplate("notEqualsOperation");
 				}
 
 				else if (operationName.equals("oclAsType")) {
-					template = this.myTemplateEngine
+					template = this.myTemplateGroup
 							.getTemplate("oclAsTypeOperation");
 				}
 
 				else if (operationName.equals("oclIsTypeOf")) {
-					template = this.myTemplateEngine
+					template = this.myTemplateGroup
 							.getTemplate("oclIsTypeOfOperation");
 				}
 
 				else if (operationName.equals("oclIsKindOf")) {
-					template = this.myTemplateEngine
+					template = this.myTemplateGroup
 							.getTemplate("oclIsKindOfOperation");
 				}
 
 				else if (operationName.equals("oclType")) {
-					template = this.myTemplateEngine
+					template = this.myTemplateGroup
 							.getTemplate("oclTypeOperation");
 				}
 
@@ -1377,27 +1382,27 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 				if (sourceTypeKind.compareTo(PrimitiveTypeKind.BOOLEAN) == 0) {
 
 					if (operationName.equals("not")) {
-						template = this.myTemplateEngine
+						template = this.myTemplateGroup
 								.getTemplate("notOperation");
 					}
 
 					else if (operationName.equals("or")) {
-						template = this.myTemplateEngine
+						template = this.myTemplateGroup
 								.getTemplate("orOperation");
 					}
 
 					else if (operationName.equals("xor")) {
-						template = this.myTemplateEngine
+						template = this.myTemplateGroup
 								.getTemplate("xorOperation");
 					}
 
 					else if (operationName.equals("and")) {
-						template = this.myTemplateEngine
+						template = this.myTemplateGroup
 								.getTemplate("andOperation");
 					}
 
 					else if (operationName.equals("implies")) {
-						template = this.myTemplateEngine
+						template = this.myTemplateGroup
 								.getTemplate("impliesOperation");
 					}
 					// no else.
@@ -1409,12 +1414,12 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 				if (sourceTypeKind.compareTo(PrimitiveTypeKind.STRING) == 0) {
 
 					if (operationName.equals("+")) {
-						template = this.myTemplateEngine
+						template = this.myTemplateGroup
 								.getTemplate("plusOnStringOperation");
 					}
 
 					else if (operationName.equals("at")) {
-						template = this.myTemplateEngine
+						template = this.myTemplateGroup
 								.getTemplate("atOnStringOperation");
 					}
 
@@ -1422,7 +1427,7 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 						String resultVar;
 						resultVar = this.myCodeTransEnv.getNewResultVarName();
 
-						template = this.myTemplateEngine
+						template = this.myTemplateGroup
 								.getTemplate("charactersOperation");
 
 						template.setAttribute("sourceExp", sourceCode
@@ -1436,37 +1441,37 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 					}
 
 					else if (operationName.equals("concat")) {
-						template = this.myTemplateEngine
+						template = this.myTemplateGroup
 								.getTemplate("concatOperation");
 					}
 
 					else if (operationName.equals("indexOf")) {
-						template = this.myTemplateEngine
+						template = this.myTemplateGroup
 								.getTemplate("indexOfOnStringOperation");
 					}
 
 					else if (operationName.equals("size")) {
-						template = this.myTemplateEngine
+						template = this.myTemplateGroup
 								.getTemplate("sizeOnStringOperation");
 					}
 
 					else if (operationName.equals("toBoolean")) {
-						template = this.myTemplateEngine
+						template = this.myTemplateGroup
 								.getTemplate("toBooleanOperation");
 					}
 
 					else if (operationName.equals("toInteger")) {
-						template = this.myTemplateEngine
+						template = this.myTemplateGroup
 								.getTemplate("toIntegerOperation");
 					}
 
 					else if (operationName.equals("toReal")) {
-						template = this.myTemplateEngine
+						template = this.myTemplateGroup
 								.getTemplate("toRealOperation");
 					}
 
 					else if (operationName.equals("substring")) {
-						template = this.myTemplateEngine
+						template = this.myTemplateGroup
 								.getTemplate("substringOperation");
 					}
 					// no else.
@@ -1478,12 +1483,12 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 						|| sourceTypeKind.compareTo(PrimitiveTypeKind.INTEGER) == 0
 						|| sourceTypeKind.compareTo(PrimitiveTypeKind.REAL) == 0) {
 					if (operationName.equals("=")) {
-						template = this.myTemplateEngine
+						template = this.myTemplateGroup
 								.getTemplate("equalsOnPrimitiveOperation");
 					}
 
 					else if (operationName.equals("<>")) {
-						template = this.myTemplateEngine
+						template = this.myTemplateGroup
 								.getTemplate("notEqualsOnPrimitiveOperation");
 					}
 					// no else.
@@ -1495,70 +1500,70 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 						|| sourceTypeKind.compareTo(PrimitiveTypeKind.INTEGER) == 0) {
 
 					if (operationName.equals("abs")) {
-						template = this.myTemplateEngine
+						template = this.myTemplateGroup
 								.getTemplate("absOperation");
 					}
 
 					else if (operationName.equals("round")) {
-						template = this.myTemplateEngine
+						template = this.myTemplateGroup
 								.getTemplate("roundOperation");
 					}
 
 					else if (operationName.equals("floor")) {
-						template = this.myTemplateEngine
+						template = this.myTemplateGroup
 								.getTemplate("floorOperation");
 					}
 
 					else if (operationName.equals("-")) {
 						/* Decide between binary minus and ... */
 						if (anOperationCallExp.getArgument().size() > 0) {
-							template = this.myTemplateEngine
+							template = this.myTemplateGroup
 									.getTemplate("minusOperation");
 						}
 						/* ... unary negative. */
 						else {
-							template = this.myTemplateEngine
+							template = this.myTemplateGroup
 									.getTemplate("negativeOperation");
 						}
 					}
 
 					else if (operationName.equals("+")) {
-						template = this.myTemplateEngine
+						template = this.myTemplateGroup
 								.getTemplate("plusOperation");
 					}
 
 					else if (operationName.equals("*")) {
-						template = this.myTemplateEngine
+						template = this.myTemplateGroup
 								.getTemplate("multiplyOperation");
 					}
 
 					else if (operationName.equals("max")) {
-						template = this.myTemplateEngine
+						template = this.myTemplateGroup
 								.getTemplate("maxOperation");
 					}
 
 					else if (operationName.equals("min")) {
-						template = this.myTemplateEngine
+						template = this.myTemplateGroup
 								.getTemplate("minOperation");
 					}
 
 					else if (operationName.equals("<")) {
-						template = this.myTemplateEngine
+						template = this.myTemplateGroup
 								.getTemplate("lesserOperation");
 					}
 
 					else if (operationName.equals(">")) {
-						template = this.myTemplateEngine
+						template = this.myTemplateGroup
 								.getTemplate("greaterOperation");
 					}
 
 					else if (operationName.equals("<=")) {
-						template = this.myTemplateEngine
+						template = this.myTemplateGroup
 								.getTemplate("lesserEqualsOperation");
 					}
 
 					else if (operationName.equals(">=")) {
-						template = this.myTemplateEngine
+						template = this.myTemplateGroup
 								.getTemplate("greaterEqualsOperation");
 					}
 					// no else.
@@ -1568,7 +1573,7 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 				/* Operations on Real */
 				if (sourceTypeKind.compareTo(PrimitiveTypeKind.REAL) == 0) {
 					if (operationName.equals("/")) {
-						template = this.myTemplateEngine
+						template = this.myTemplateGroup
 								.getTemplate("divisionOperation");
 					}
 					// no else.
@@ -1578,17 +1583,17 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 				/* Operations on Real */
 				if (sourceTypeKind.compareTo(PrimitiveTypeKind.INTEGER) == 0) {
 					if (operationName.equals("/")) {
-						template = this.myTemplateEngine
+						template = this.myTemplateGroup
 								.getTemplate("divisionOnIntegerOperation");
 					}
 
 					else if (operationName.equals("div")) {
-						template = this.myTemplateEngine
+						template = this.myTemplateGroup
 								.getTemplate("divOperation");
 					}
 
 					else if (operationName.equals("mod")) {
-						template = this.myTemplateEngine
+						template = this.myTemplateGroup
 								.getTemplate("modOperation");
 					}
 					// no else.
@@ -1601,17 +1606,17 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 			if (sourceType instanceof CollectionType) {
 
 				if (operationName.equals("size")) {
-					template = this.myTemplateEngine
+					template = this.myTemplateGroup
 							.getTemplate("sizeOperation");
 				}
 
 				else if (operationName.equals("isEmpty")) {
-					template = this.myTemplateEngine
+					template = this.myTemplateGroup
 							.getTemplate("isEmptyOperation");
 				}
 
 				else if (operationName.equals("notEmpty")) {
-					template = this.myTemplateEngine
+					template = this.myTemplateGroup
 							.getTemplate("notEmptyOperation");
 				}
 
@@ -1630,7 +1635,7 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 
 					resultVar = this.myCodeTransEnv.getNewResultVarName();
 
-					template = this.myTemplateEngine
+					template = this.myTemplateGroup
 							.getTemplate("minOnCollectionOperation");
 
 					template.setAttribute("sourceExp", sourceCode
@@ -1660,7 +1665,7 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 
 					resultVar = this.myCodeTransEnv.getNewResultVarName();
 
-					template = this.myTemplateEngine
+					template = this.myTemplateGroup
 							.getTemplate("maxOnCollectionOperation");
 
 					template.setAttribute("sourceExp", sourceCode
@@ -1690,7 +1695,7 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 
 					resultVar = this.myCodeTransEnv.getNewResultVarName();
 
-					template = this.myTemplateEngine
+					template = this.myTemplateGroup
 							.getTemplate("sumOperation");
 
 					template.setAttribute("sourceExp", sourceCode
@@ -1706,22 +1711,22 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 				}
 
 				else if (operationName.equals("asBag")) {
-					template = this.myTemplateEngine
+					template = this.myTemplateGroup
 							.getTemplate("asBagOperation");
 				}
 
 				else if (operationName.equals("asOrderedSet")) {
-					template = this.myTemplateEngine
+					template = this.myTemplateGroup
 							.getTemplate("asOrderedSetOperation");
 				}
 
 				else if (operationName.equals("asSequence")) {
-					template = this.myTemplateEngine
+					template = this.myTemplateGroup
 							.getTemplate("asSequenceOperation");
 				}
 
 				else if (operationName.equals("asSet")) {
-					template = this.myTemplateEngine
+					template = this.myTemplateGroup
 							.getTemplate("asSetOperation");
 				}
 
@@ -1730,53 +1735,53 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 					returnType = this.transformType(
 							anOperationCallExp.getType()).toString();
 
-					template = this.myTemplateEngine
+					template = this.myTemplateGroup
 							.getTemplate("flattenOperation");
 					template.setAttribute("returnType", returnType);
 				}
 
 				else if (operationName.equals("includes")) {
-					template = this.myTemplateEngine
+					template = this.myTemplateGroup
 							.getTemplate("includesOperation");
 				}
 
 				else if (operationName.equals("excludes")) {
-					template = this.myTemplateEngine
+					template = this.myTemplateGroup
 							.getTemplate("excludesOperation");
 				}
 
 				else if (operationName.equals("count")) {
-					template = this.myTemplateEngine
+					template = this.myTemplateGroup
 							.getTemplate("countOperation");
 				}
 
 				else if (operationName.equals("includesAll")) {
-					template = this.myTemplateEngine
+					template = this.myTemplateGroup
 							.getTemplate("includesAllOperation");
 				}
 
 				else if (operationName.equals("excludesAll")) {
-					template = this.myTemplateEngine
+					template = this.myTemplateGroup
 							.getTemplate("excludesAllOperation");
 				}
 
 				else if (operationName.equals("product")) {
-					template = this.myTemplateEngine
+					template = this.myTemplateGroup
 							.getTemplate("productOperation");
 				}
 
 				else if (operationName.equals("union")) {
-					template = this.myTemplateEngine
+					template = this.myTemplateGroup
 							.getTemplate("unionOperation");
 				}
 
 				else if (operationName.equals("including")) {
-					template = this.myTemplateEngine
+					template = this.myTemplateGroup
 							.getTemplate("includingOperation");
 				}
 
 				else if (operationName.equals("excluding")) {
-					template = this.myTemplateEngine
+					template = this.myTemplateGroup
 							.getTemplate("excludingOperation");
 				}
 				// no else.
@@ -1785,7 +1790,7 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 				if (sourceType instanceof BagType
 						|| sourceType instanceof SetType) {
 					if (operationName.equals("intersection")) {
-						template = this.myTemplateEngine
+						template = this.myTemplateGroup
 								.getTemplate("intersectionOperation");
 					}
 					// no else.
@@ -1796,37 +1801,37 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 				if (sourceType instanceof OrderedSetType
 						|| sourceType instanceof SequenceType) {
 					if (operationName.equals("first")) {
-						template = this.myTemplateEngine
+						template = this.myTemplateGroup
 								.getTemplate("firstOperation");
 					}
 
 					else if (operationName.equals("last")) {
-						template = this.myTemplateEngine
+						template = this.myTemplateGroup
 								.getTemplate("lastOperation");
 					}
 
 					else if (operationName.equals("append")) {
-						template = this.myTemplateEngine
+						template = this.myTemplateGroup
 								.getTemplate("appendOperation");
 					}
 
 					else if (operationName.equals("prepend")) {
-						template = this.myTemplateEngine
+						template = this.myTemplateGroup
 								.getTemplate("prependOperation");
 					}
 
 					else if (operationName.equals("at")) {
-						template = this.myTemplateEngine
+						template = this.myTemplateGroup
 								.getTemplate("atOperation");
 					}
 
 					else if (operationName.equals("indexOf")) {
-						template = this.myTemplateEngine
+						template = this.myTemplateGroup
 								.getTemplate("indexOfOperation");
 					}
 
 					else if (operationName.equals("insertAt")) {
-						template = this.myTemplateEngine
+						template = this.myTemplateGroup
 								.getTemplate("insertAtOperation");
 					}
 					// no else.
@@ -1836,7 +1841,7 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 				/* Operations on OrderedSetType. */
 				if (sourceType instanceof OrderedSetType) {
 					if (operationName.equals("subOrderedSet")) {
-						template = this.myTemplateEngine
+						template = this.myTemplateGroup
 								.getTemplate("subOrderedSetOperation");
 					}
 				}
@@ -1845,7 +1850,7 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 				/* Operations on SequenceType. */
 				if (sourceType instanceof SequenceType) {
 					if (operationName.equals("subSequence")) {
-						template = this.myTemplateEngine
+						template = this.myTemplateGroup
 								.getTemplate("subSequenceOperation");
 					}
 				}
@@ -1854,7 +1859,7 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 				/* Operations on SetType. */
 				if (sourceType instanceof SetType) {
 					if (operationName.equals("symmetricDifference")) {
-						template = this.myTemplateEngine
+						template = this.myTemplateGroup
 								.getTemplate("symmetricDifferenceOperation");
 					}
 				}
@@ -1871,7 +1876,7 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 			// }
 			//
 			// else {
-			template = this.myTemplateEngine.getTemplate("umlOperation");
+			template = this.myTemplateGroup.getTemplate("umlOperation");
 			template.setAttribute("operationName", operationName);
 			// }
 		}
@@ -1968,12 +1973,12 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 
 		/* The property calls on tuples must be adapted. */
 		if (sourceExp != null && sourceExp.getType() instanceof TupleType) {
-			template = this.myTemplateEngine
+			template = this.myTemplateGroup
 					.getTemplate("propertyCallExpOnTuple");
 		}
 
 		else {
-			template = this.myTemplateEngine.getTemplate("propertyCallExp");
+			template = this.myTemplateGroup.getTemplate("propertyCallExp");
 		}
 
 		/* Set template attributes. */
@@ -2033,7 +2038,7 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 		ITemplate template;
 		String literalValue;
 
-		template = this.myTemplateEngine.getTemplate("literalExp");
+		template = this.myTemplateGroup.getTemplate("literalExp");
 
 		literalValue = "";
 		literalValue += aRealLiteralExp.getRealSymbol();
@@ -2075,7 +2080,7 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 		ITemplate template;
 		String literalValue;
 
-		template = this.myTemplateEngine.getTemplate("stringLiteralExp");
+		template = this.myTemplateGroup.getTemplate("stringLiteralExp");
 		literalValue = "";
 		literalValue += aStringLiteralExp.getStringSymbol();
 		template.setAttribute("value", literalValue);
@@ -2126,7 +2131,7 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 		// no else.
 
 		/* Get template for tupleLiteralExp. */
-		template = this.myTemplateEngine.getTemplate("tupleLiteralExp");
+		template = this.myTemplateGroup.getTemplate("tupleLiteralExp");
 		template.setAttribute("tupleName", tupleName);
 
 		tupleElements = aTupleLiteralExp.getPart();
@@ -2209,7 +2214,7 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 		ITransformedCode result;
 		ITemplate template;
 
-		template = this.myTemplateEngine.getTemplate("undefinedLiteralExp");
+		template = this.myTemplateGroup.getTemplate("undefinedLiteralExp");
 
 		result = new TransformedCodeImpl();
 		result.setResultExp(template.toString());
@@ -2245,7 +2250,7 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 		ITemplate template;
 		String literalValue;
 
-		template = this.myTemplateEngine.getTemplate("literalExp");
+		template = this.myTemplateGroup.getTemplate("literalExp");
 
 		literalValue = "";
 		literalValue += anUnlimitedNaturalExp.getSymbol();
@@ -2295,7 +2300,7 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 		 */
 		if (aVariable.getName().equals("self")) {
 
-			template = this.myTemplateEngine.getTemplate("selfVariable");
+			template = this.myTemplateGroup.getTemplate("selfVariable");
 			result.setResultExp(template.toString());
 		}
 
@@ -2305,7 +2310,7 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 		 */
 		else if (aVariable.getName().equals("result")) {
 
-			template = this.myTemplateEngine.getTemplate("resultVariable");
+			template = this.myTemplateGroup.getTemplate("resultVariable");
 			result.setResultExp(template.toString());
 		}
 
@@ -2339,7 +2344,7 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 		ITransformedType result;
 		ITemplate template;
 
-		template = this.myTemplateEngine.getTemplate("anyType");
+		template = this.myTemplateGroup.getTemplate("anyType");
 		result = new TransformedTypeImpl(template.toString());
 
 		/* Probably log the exit from this method. */
@@ -2375,23 +2380,23 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 		template = null;
 
 		if (aCollectionType instanceof BagType) {
-			template = this.myTemplateEngine.getTemplate("bagType");
+			template = this.myTemplateGroup.getTemplate("bagType");
 		}
 
 		else if (aCollectionType instanceof OrderedSetType) {
-			template = this.myTemplateEngine.getTemplate("orderedSetType");
+			template = this.myTemplateGroup.getTemplate("orderedSetType");
 		}
 
 		else if (aCollectionType instanceof SequenceType) {
-			template = this.myTemplateEngine.getTemplate("sequenceType");
+			template = this.myTemplateGroup.getTemplate("sequenceType");
 		}
 
 		else if (aCollectionType instanceof SetType) {
-			template = this.myTemplateEngine.getTemplate("setType");
+			template = this.myTemplateGroup.getTemplate("setType");
 		}
 
 		else {
-			template = this.myTemplateEngine.getTemplate("collectionType");
+			template = this.myTemplateGroup.getTemplate("collectionType");
 		}
 		// no else.
 
@@ -2442,7 +2447,7 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 		ITransformedType result;
 		ITemplate template;
 
-		template = this.myTemplateEngine.getTemplate("enumerationType");
+		template = this.myTemplateGroup.getTemplate("enumerationType");
 		result = new TransformedTypeImpl(template.toString());
 
 		/* Probably log the exit from this method. */
@@ -2481,27 +2486,27 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 		aKindValue = aKind.getValue();
 
 		if (aKindValue == PrimitiveTypeKind.BOOLEAN_VALUE) {
-			template = this.myTemplateEngine.getTemplate("booleanType");
+			template = this.myTemplateGroup.getTemplate("booleanType");
 		}
 
 		else if (aKindValue == PrimitiveTypeKind.INTEGER_VALUE) {
-			template = this.myTemplateEngine.getTemplate("integerType");
+			template = this.myTemplateGroup.getTemplate("integerType");
 		}
 
 		else if (aKindValue == PrimitiveTypeKind.REAL_VALUE) {
-			template = this.myTemplateEngine.getTemplate("realType");
+			template = this.myTemplateGroup.getTemplate("realType");
 		}
 
 		else if (aKindValue == PrimitiveTypeKind.STRING_VALUE) {
-			template = this.myTemplateEngine.getTemplate("stringType");
+			template = this.myTemplateGroup.getTemplate("stringType");
 		}
 
 		else if (aKindValue == PrimitiveTypeKind.VOID_VALUE) {
-			template = this.myTemplateEngine.getTemplate("voidType");
+			template = this.myTemplateGroup.getTemplate("voidType");
 		}
 
 		else if (aKindValue == PrimitiveTypeKind.UNKNOWN_VALUE) {
-			template = this.myTemplateEngine.getTemplate("unknownType");
+			template = this.myTemplateGroup.getTemplate("unknownType");
 		}
 		// no else.
 
@@ -2536,7 +2541,7 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 		ITransformedType result;
 		ITemplate template;
 
-		template = this.myTemplateEngine.getTemplate("tupleType");
+		template = this.myTemplateGroup.getTemplate("tupleType");
 		result = new TransformedTypeImpl(template.toString());
 
 		/* Probably log the exit from this method. */
@@ -2660,7 +2665,7 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 		ITransformedType result;
 		ITemplate template;
 
-		template = this.myTemplateEngine.getTemplate("typeType");
+		template = this.myTemplateGroup.getTemplate("typeType");
 		result = new TransformedTypeImpl(template.toString());
 
 		/* Probably log the exit from this method. */
@@ -2689,7 +2694,7 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 		ITransformedType result;
 		ITemplate template;
 
-		template = this.myTemplateEngine.getTemplate("voidType");
+		template = this.myTemplateGroup.getTemplate("voidType");
 		result = new TransformedTypeImpl(template.toString());
 
 		/* Probably log the exit from this method. */
@@ -2744,7 +2749,7 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 		/* Get the path of the package where the constraint class is located. */
 		contextPackage = this.getPackagePath(aConstraint);
 
-		aspectTemplate = this.myTemplateEngine.getTemplate("aspectFile");
+		aspectTemplate = this.myTemplateGroup.getTemplate("aspectFile");
 		aspectTemplate.setAttribute("package", this
 				.getConstraintPackage(contextPackage));
 		aspectTemplate.setAttribute("name", aspectName);
@@ -2785,7 +2790,7 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 				operationResultType = this.transformType(anOperation.getType())
 						.toString();
 				/* Create Template for the advice code. */
-				adviceTemplate = this.myTemplateEngine
+				adviceTemplate = this.myTemplateGroup
 						.getTemplate("bodyInstrumentation");
 
 				/* Set template parameters. */
@@ -2801,7 +2806,7 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 				adviceTemplate.setAttribute("method", operationName);
 
 				/* Probably set the returnType. */
-				if (!operationResultType.equals(this.myTemplateEngine
+				if (!operationResultType.equals(this.myTemplateGroup
 						.getTemplate("voidType").toString())) {
 					adviceTemplate.setAttribute("returnType",
 							operationResultType);
@@ -2901,7 +2906,7 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 		contextPackage = this.getPackagePath(aConstraint);
 
 		/* Begin with aspect specification. */
-		aspectTemplate = this.myTemplateEngine.getTemplate("aspectFile");
+		aspectTemplate = this.myTemplateGroup.getTemplate("aspectFile");
 		aspectTemplate.setAttribute("package", this
 				.getConstraintPackage(contextPackage));
 		aspectTemplate.setAttribute("name", aspectName);
@@ -2981,7 +2986,7 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 					}
 
 					/* Define the new attribute. */
-					attributeTemplate = this.myTemplateEngine
+					attributeTemplate = this.myTemplateGroup
 							.getTemplate("javaAttribute");
 
 					attributeTemplate.setAttribute("name", propertyName);
@@ -2996,7 +3001,7 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 					 * attribute.
 					 */
 					if (this.mySettings.isGettersForDefinedAttributesEnabled()) {
-						attributeTemplate = this.myTemplateEngine
+						attributeTemplate = this.myTemplateGroup
 								.getTemplate("javaAttributeGetter");
 
 						attributeTemplate.setAttribute("name", propertyName);
@@ -3012,7 +3017,7 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 
 					/* INITIALIZATION OF NEW DEFINED ATTRIBUTE */
 					/* Create the template for the advice code. */
-					adviceTemplate = this.myTemplateEngine
+					adviceTemplate = this.myTemplateGroup
 							.getTemplate("defAttributeInstrumentation");
 
 					/* Set attribute specific template attributes. */
@@ -3064,7 +3069,7 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 					}
 
 					/* Define the operation. */
-					methodTemplate = this.myTemplateEngine
+					methodTemplate = this.myTemplateGroup
 							.getTemplate("javaMethod");
 
 					methodTemplate.setAttribute("name", operationName);
@@ -3089,14 +3094,14 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 
 					/* IMPLEMENTATION OF NEW DEFINED OPERATION. */
 					/* Create a template for the advice code. */
-					adviceTemplate = this.myTemplateEngine
+					adviceTemplate = this.myTemplateGroup
 							.getTemplate("defMethodInstrumentation");
 
 					/* Set operation specific template parameters. */
 					adviceTemplate.setAttribute("method", operationName);
 
 					/* Probably set the returnType. */
-					if (!operationReturnType.equals(this.myTemplateEngine
+					if (!operationReturnType.equals(this.myTemplateGroup
 							.getTemplate("voidType").toString())) {
 						adviceTemplate.setAttribute("returnType",
 								operationReturnType);
@@ -3218,7 +3223,7 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 		/* Get the path of the package where the constraint class is located. */
 		contextPackage = this.getPackagePath(aConstraint);
 
-		aspectTemplate = this.myTemplateEngine.getTemplate("aspectFile");
+		aspectTemplate = this.myTemplateGroup.getTemplate("aspectFile");
 		aspectTemplate.setAttribute("package", this
 				.getConstraintPackage(contextPackage));
 		aspectTemplate.setAttribute("name", aspectName);
@@ -3271,7 +3276,7 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 						.toString();
 
 				/* Create Template for the advice code. */
-				adviceTemplate = this.myTemplateEngine
+				adviceTemplate = this.myTemplateGroup
 						.getTemplate("deriveInstrumentation");
 
 				/* Set template parameters. */
@@ -3375,7 +3380,7 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 		/* Get the path of the package where the constraint class is located. */
 		contextPackage = this.getPackagePath(aConstraint);
 
-		aspectTemplate = this.myTemplateEngine.getTemplate("aspectFile");
+		aspectTemplate = this.myTemplateGroup.getTemplate("aspectFile");
 		aspectTemplate.setAttribute("package", this
 				.getConstraintPackage(contextPackage));
 		aspectTemplate.setAttribute("name", aspectName);
@@ -3422,12 +3427,12 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 
 				/* Get the template and handle static attribute specially. */
 				if (aProperty.isStatic()) {
-					adviceTemplate = this.myTemplateEngine
+					adviceTemplate = this.myTemplateGroup
 							.getTemplate("staticInitInstrumentation");
 				}
 
 				else {
-					adviceTemplate = this.myTemplateEngine
+					adviceTemplate = this.myTemplateGroup
 							.getTemplate("initInstrumentation");
 				}
 
@@ -3519,7 +3524,7 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 		/* Get the path of the package where the constraint class is located. */
 		contextPackage = this.getPackagePath(aConstraint);
 
-		aspectTemplate = this.myTemplateEngine.getTemplate("aspectFile");
+		aspectTemplate = this.myTemplateGroup.getTemplate("aspectFile");
 		aspectTemplate.setAttribute("package", this
 				.getConstraintPackage(contextPackage));
 		aspectTemplate.setAttribute("name", aspectName);
@@ -3556,17 +3561,17 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 				switch (this.mySettings.getInvariantCheckMode(aConstraint)) {
 
 				case IOcl22CodeSettings.INVARIANT_CHECK_AFTER_CONSTRUCT_AND_PUBLIC_METHOD_EXECUTION:
-					adviceTemplate = this.myTemplateEngine
+					adviceTemplate = this.myTemplateGroup
 							.getTemplate("invInstrumentation2");
 					break;
 
 				case IOcl22CodeSettings.INVARIANT_CHECK_AFTER_SPECIAL_METHOD_INVOCATION:
-					adviceTemplate = this.myTemplateEngine
+					adviceTemplate = this.myTemplateGroup
 							.getTemplate("invInstrumentation3");
 					break;
 
 				default:
-					adviceTemplate = this.myTemplateEngine
+					adviceTemplate = this.myTemplateGroup
 							.getTemplate("invInstrumentation1");
 				}
 
@@ -3637,14 +3642,14 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 								contextPackage, (Type) aConstrainedElem);
 					}
 
-					operationName = this.myTemplateEngine.getTemplate(
+					operationName = this.myTemplateGroup.getTemplate(
 							"checkInvariantsOperationName").toString();
 
 					/* Check if the Method has already been defined. */
 					if (!classTemplate.toString().contains(operationName)) {
 
 						/* Else Define the method. */
-						methodTemplate = this.myTemplateEngine
+						methodTemplate = this.myTemplateGroup
 								.getTemplate("javaMethod");
 
 						methodTemplate.setAttribute("name", operationName);
@@ -3744,7 +3749,7 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 		/* Get the path of the package where the constraint class is located. */
 		contextPackage = this.getPackagePath(aConstraint);
 
-		aspectTemplate = this.myTemplateEngine.getTemplate("aspectFile");
+		aspectTemplate = this.myTemplateGroup.getTemplate("aspectFile");
 		aspectTemplate.setAttribute("package", this
 				.getConstraintPackage(contextPackage));
 		aspectTemplate.setAttribute("name", aspectName);
@@ -3797,7 +3802,7 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 				operationResultType = this.transformType(anOperation.getType())
 						.toString();
 				/* Create Template for the advice code. */
-				adviceTemplate = this.myTemplateEngine
+				adviceTemplate = this.myTemplateGroup
 						.getTemplate("postInstrumentation");
 
 				/* Set template parameters. */
@@ -3815,7 +3820,7 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 						.getViolationMacro(aConstraint).getCode());
 
 				/* Probably set the returnType. */
-				if (!operationResultType.equals(this.myTemplateEngine
+				if (!operationResultType.equals(this.myTemplateGroup
 						.getTemplate("voidType").toString())) {
 					adviceTemplate.setAttribute("returnType",
 							operationResultType);
@@ -3988,7 +3993,7 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 		/* Get the path of the package where the constraint class is located. */
 		contextPackage = this.getPackagePath(aConstraint);
 
-		aspectTemplate = this.myTemplateEngine.getTemplate("aspectFile");
+		aspectTemplate = this.myTemplateGroup.getTemplate("aspectFile");
 		aspectTemplate.setAttribute("package", this
 				.getConstraintPackage(contextPackage));
 		aspectTemplate.setAttribute("name", aspectName);
@@ -4029,7 +4034,7 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 				operationResultType = this.transformType(anOperation.getType())
 						.toString();
 				/* Create Template for the advice code. */
-				adviceTemplate = this.myTemplateEngine
+				adviceTemplate = this.myTemplateGroup
 						.getTemplate("preInstrumentation");
 
 				/* Set template parameters. */
@@ -4047,7 +4052,7 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 						.getViolationMacro(aConstraint).getCode());
 
 				/* Probably set the returnType. */
-				if (!operationResultType.equals(this.myTemplateEngine
+				if (!operationResultType.equals(this.myTemplateGroup
 						.getTemplate("voidType").toString())) {
 					adviceTemplate.setAttribute("returnType",
 							operationResultType);
@@ -4179,7 +4184,7 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 
 	/**
 	 * <p>
-	 * A helper method which returns a {@link StringTemplateAdapter} containing
+	 * A helper method which returns a {@link ITemplate} containing
 	 * the code for a new defined Class as new super class to a given
 	 * {@link Type} .
 	 * </p>
@@ -4188,7 +4193,7 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 	 *            The package where the given {@link Type} is located.
 	 * @param aType
 	 *            The {@link Type} which new superclass shall be created.
-	 * @return A {@link StringTemplateAdapter} containing the code for a new
+	 * @return A {@link ITemplate} containing the code for a new
 	 *         defined Class as new super class to a given {@link Type}.
 	 */
 	private ITemplate createExtendedClassTemplate(String contextPackage,
@@ -4202,7 +4207,7 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 		className = EXTENDEC_CLASS_NAME_PREFIX + aType.getName();
 		packagePath = this.getConstraintPackage(this.getPackagePath(aType));
 
-		classTemplate = this.myTemplateEngine.getTemplate("javaFile");
+		classTemplate = this.myTemplateGroup.getTemplate("javaFile");
 
 		classTemplate.setAttribute("package", packagePath);
 		classTemplate.setAttribute("name", aType.getName());

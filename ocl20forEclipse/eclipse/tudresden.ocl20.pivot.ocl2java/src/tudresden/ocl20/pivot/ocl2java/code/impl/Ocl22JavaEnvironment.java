@@ -26,8 +26,8 @@ import java.util.TreeSet;
 
 import tudresden.ocl20.pivot.ocl2java.code.IOcl22CodeEnvironment;
 import tudresden.ocl20.pivot.ocl2java.code.ITransformedCode;
-import tudresden.ocl20.pivot.ocl2java.template.ITemplate;
 import tudresden.ocl20.pivot.pivotmodel.Type;
+import tudresden.ocl20.pivot.tools.template.ITemplate;
 
 /**
  *<p>

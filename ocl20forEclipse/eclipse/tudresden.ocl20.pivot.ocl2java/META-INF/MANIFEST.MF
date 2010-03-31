@@ -7,13 +7,12 @@ Bundle-Activator: tudresden.ocl20.pivot.ocl2java.Ocl22JavaPlugin
 Require-Bundle: org.eclipse.core.runtime;bundle-version="3.4.0",
  tudresden.ocl20.logging;bundle-version="2.1.0",
  tudresden.ocl20.pivot.essentialocl;bundle-version="2.1.0",
- tudresden.ocl20.pivot.modelbus;bundle-version="2.1.0"
+ tudresden.ocl20.pivot.modelbus;bundle-version="2.1.0",
+ tudresden.ocl20.pivot.tools.template;bundle-version="2.1.0"
 Bundle-ActivationPolicy: lazy
 Export-Package: tudresden.ocl20.pivot.ocl2java,
  tudresden.ocl20.pivot.ocl2java.code,
  tudresden.ocl20.pivot.ocl2java.exception
-Bundle-ClassPath: antlr.jar,
- stringtemplate.jar,
- .
+Bundle-ClassPath: .
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-Vendor: TU Dresden, Software Technology Group

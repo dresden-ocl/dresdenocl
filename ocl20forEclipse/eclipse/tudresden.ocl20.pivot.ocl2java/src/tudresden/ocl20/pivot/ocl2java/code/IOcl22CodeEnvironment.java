@@ -21,11 +21,11 @@ package tudresden.ocl20.pivot.ocl2java.code;
 import java.util.Map;
 import java.util.Set;
 
-import tudresden.ocl20.pivot.ocl2java.template.ITemplate;
 import tudresden.ocl20.pivot.pivotmodel.Constraint;
 import tudresden.ocl20.pivot.pivotmodel.Expression;
 import tudresden.ocl20.pivot.pivotmodel.Property;
 import tudresden.ocl20.pivot.pivotmodel.Type;
+import tudresden.ocl20.pivot.tools.template.ITemplate;
 
 /**
  * <p>
