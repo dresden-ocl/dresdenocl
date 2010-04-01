@@ -34,13 +34,13 @@ import org.junit.Test;
 import package1.package2.Type1;
 import package1.package2.Type2;
 import package1.package2.Type3;
-import tudresden.ocl20.pivot.modelbus.IModelBusConstants;
-import tudresden.ocl20.pivot.modelbus.ModelAccessException;
-import tudresden.ocl20.pivot.modelbus.model.IModel;
-import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance;
-import tudresden.ocl20.pivot.modelbus.modelinstance.exception.TypeNotFoundInModelException;
-import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceObject;
+import tudresden.ocl20.pivot.model.IModel;
+import tudresden.ocl20.pivot.model.ModelAccessException;
+import tudresden.ocl20.pivot.model.ModelConstants;
 import tudresden.ocl20.pivot.modelbus.test.ModelBusTestUtility;
+import tudresden.ocl20.pivot.modelinstance.IModelInstance;
+import tudresden.ocl20.pivot.modelinstancetype.exception.TypeNotFoundInModelException;
+import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceObject;
 import tudresden.ocl20.pivot.pivotmodel.PrimitiveType;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 
@@ -87,7 +87,7 @@ public class AbstractModelInstanceTest {
 		List<String> pathName;
 		pathName = new ArrayList<String>();
 
-		pathName.add(IModelBusConstants.ROOT_PACKAGE_NAME);
+		pathName.add(ModelConstants.ROOT_PACKAGE_NAME);
 		pathName.add("package1");
 		pathName.add("package2");
 		pathName.add("Type1");
@@ -95,7 +95,7 @@ public class AbstractModelInstanceTest {
 		package2Type1 = this.model.findType(pathName);
 
 		pathName.clear();
-		pathName.add(IModelBusConstants.ROOT_PACKAGE_NAME);
+		pathName.add(ModelConstants.ROOT_PACKAGE_NAME);
 		pathName.add("package1");
 		pathName.add("package2");
 		pathName.add("Type2");
@@ -103,14 +103,14 @@ public class AbstractModelInstanceTest {
 		package2Type2 = this.model.findType(pathName);
 
 		pathName.clear();
-		pathName.add(IModelBusConstants.ROOT_PACKAGE_NAME);
+		pathName.add(ModelConstants.ROOT_PACKAGE_NAME);
 		pathName.add("package1");
 		pathName.add("Type2");
 
 		package1Type2 = this.model.findType(pathName);
 
 		pathName.clear();
-		pathName.add(IModelBusConstants.ROOT_PACKAGE_NAME);
+		pathName.add(ModelConstants.ROOT_PACKAGE_NAME);
 		pathName.add("package1");
 		pathName.add("package2");
 		pathName.add("Type3");

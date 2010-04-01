@@ -2,9 +2,9 @@ package tudresden.ocl20.pivot.modelbus.test.modelinstance.types.base;
 
 import java.util.List;
 
-import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
-import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceString;
-import tudresden.ocl20.pivot.modelbus.modelinstance.types.base.ModelInstanceTuple;
+import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement;
+import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceString;
+import tudresden.ocl20.pivot.modelinstancetype.types.base.ModelInstanceTuple;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 
 /**

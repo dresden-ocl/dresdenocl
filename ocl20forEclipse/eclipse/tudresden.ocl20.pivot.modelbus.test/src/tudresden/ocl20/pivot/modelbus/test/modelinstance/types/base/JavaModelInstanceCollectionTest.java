@@ -32,15 +32,15 @@ import org.junit.Test;
 
 import tudresden.ocl20.pivot.essentialocl.expressions.CollectionKind;
 import tudresden.ocl20.pivot.essentialocl.types.CollectionType;
-import tudresden.ocl20.pivot.modelbus.ModelAccessException;
-import tudresden.ocl20.pivot.modelbus.modelinstance.exception.AsTypeCastException;
-import tudresden.ocl20.pivot.modelbus.modelinstance.exception.CopyForAtPreException;
-import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceCollection;
-import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
-import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceString;
-import tudresden.ocl20.pivot.modelbus.modelinstance.types.base.BasisJavaModelInstanceFactory;
-import tudresden.ocl20.pivot.modelbus.modelinstance.types.base.JavaModelInstanceCollection;
-import tudresden.ocl20.pivot.modelbus.modelinstance.types.base.TypeConstants;
+import tudresden.ocl20.pivot.essentialocl.types.TypeConstants;
+import tudresden.ocl20.pivot.model.ModelAccessException;
+import tudresden.ocl20.pivot.modelinstancetype.exception.AsTypeCastException;
+import tudresden.ocl20.pivot.modelinstancetype.exception.CopyForAtPreException;
+import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceCollection;
+import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement;
+import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceString;
+import tudresden.ocl20.pivot.modelinstancetype.types.base.BasisJavaModelInstanceFactory;
+import tudresden.ocl20.pivot.modelinstancetype.types.base.JavaModelInstanceCollection;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 
 /**

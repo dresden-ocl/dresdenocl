@@ -35,10 +35,10 @@ import java.util.Set;
 import org.junit.Test;
 
 import tudresden.ocl20.pivot.facade.Ocl2ForEclipseFacade;
-import tudresden.ocl20.pivot.modelbus.IModelBusConstants;
-import tudresden.ocl20.pivot.modelbus.ModelAccessException;
-import tudresden.ocl20.pivot.modelbus.model.IModel;
-import tudresden.ocl20.pivot.modelbus.model.IModelListener;
+import tudresden.ocl20.pivot.model.IModel;
+import tudresden.ocl20.pivot.model.IModelListener;
+import tudresden.ocl20.pivot.model.ModelAccessException;
+import tudresden.ocl20.pivot.model.ModelConstants;
 import tudresden.ocl20.pivot.modelbus.test.ModelBusTestUtility;
 import tudresden.ocl20.pivot.parser.ParseException;
 import tudresden.ocl20.pivot.pivotmodel.Constraint;
@@ -132,7 +132,7 @@ public class AbstractModelTest {
 
 		/* Empty path should result in the root name space. */
 		assertNotNull(namespace);
-		assertEquals(IModelBusConstants.ROOT_PACKAGE_NAME, namespace.getName());
+		assertEquals(ModelConstants.ROOT_PACKAGE_NAME, namespace.getName());
 	}
 
 	/**
@@ -152,14 +152,14 @@ public class AbstractModelTest {
 		List<String> path;
 		path = new ArrayList<String>();
 
-		path.add(IModelBusConstants.ROOT_PACKAGE_NAME);
+		path.add(ModelConstants.ROOT_PACKAGE_NAME);
 
 		Namespace namespace;
 		namespace = model.findNamespace(path);
 
 		/* The root name space should be found. */
 		assertNotNull(namespace);
-		assertEquals(IModelBusConstants.ROOT_PACKAGE_NAME, namespace.getName());
+		assertEquals(ModelConstants.ROOT_PACKAGE_NAME, namespace.getName());
 	}
 
 	/**
@@ -179,7 +179,7 @@ public class AbstractModelTest {
 		List<String> path;
 		path = new ArrayList<String>();
 
-		path.add(IModelBusConstants.ROOT_PACKAGE_NAME);
+		path.add(ModelConstants.ROOT_PACKAGE_NAME);
 		path.add("package1");
 
 		Namespace namespace;
@@ -234,7 +234,7 @@ public class AbstractModelTest {
 		List<String> path;
 		path = new ArrayList<String>();
 
-		path.add(IModelBusConstants.ROOT_PACKAGE_NAME);
+		path.add(ModelConstants.ROOT_PACKAGE_NAME);
 		path.add("package1");
 		path.add("package2");
 
@@ -320,7 +320,7 @@ public class AbstractModelTest {
 		List<String> path;
 		path = new ArrayList<String>();
 
-		path.add(IModelBusConstants.ROOT_PACKAGE_NAME);
+		path.add(ModelConstants.ROOT_PACKAGE_NAME);
 		path.add("package1");
 		path.add("package3");
 
@@ -369,7 +369,7 @@ public class AbstractModelTest {
 		List<String> path;
 		path = new ArrayList<String>();
 
-		path.add(IModelBusConstants.ROOT_PACKAGE_NAME);
+		path.add(ModelConstants.ROOT_PACKAGE_NAME);
 
 		/* Should crash. Path must not be null or empty. */
 		model.findType(path);
@@ -392,7 +392,7 @@ public class AbstractModelTest {
 		List<String> path;
 		path = new ArrayList<String>();
 
-		path.add(IModelBusConstants.ROOT_PACKAGE_NAME);
+		path.add(ModelConstants.ROOT_PACKAGE_NAME);
 		path.add(PrimitiveTypeKind.STRING.toString());
 
 		Type type;
@@ -451,7 +451,7 @@ public class AbstractModelTest {
 		List<String> path;
 		path = new ArrayList<String>();
 
-		path.add(IModelBusConstants.ROOT_PACKAGE_NAME);
+		path.add(ModelConstants.ROOT_PACKAGE_NAME);
 		path.add("Type1");
 
 		Type type;
@@ -480,7 +480,7 @@ public class AbstractModelTest {
 		List<String> path;
 		path = new ArrayList<String>();
 
-		path.add(IModelBusConstants.ROOT_PACKAGE_NAME);
+		path.add(ModelConstants.ROOT_PACKAGE_NAME);
 		path.add("package1");
 		path.add("package2");
 		path.add("Type2");
@@ -568,7 +568,7 @@ public class AbstractModelTest {
 		List<String> path;
 		path = new ArrayList<String>();
 
-		path.add(IModelBusConstants.ROOT_PACKAGE_NAME);
+		path.add(ModelConstants.ROOT_PACKAGE_NAME);
 		path.add("Type2");
 
 		Type type;
@@ -622,7 +622,7 @@ public class AbstractModelTest {
 		List<String> path;
 		path = new ArrayList<String>();
 
-		path.add(IModelBusConstants.ROOT_PACKAGE_NAME);
+		path.add(ModelConstants.ROOT_PACKAGE_NAME);
 		path.add("package1");
 		path.add("Type3");
 
@@ -1036,7 +1036,7 @@ public class AbstractModelTest {
 		/* Find the defined operations. */
 		Type type1;
 		type1 = model.findType(Arrays.asList(new String[] {
-				IModelBusConstants.ROOT_PACKAGE_NAME, "package1", "Type1" }));
+				ModelConstants.ROOT_PACKAGE_NAME, "package1", "Type1" }));
 		assertNotNull(type1);
 
 		Operation operation1;
@@ -1046,7 +1046,7 @@ public class AbstractModelTest {
 
 		Type type2;
 		type2 = model.findType(Arrays.asList(new String[] {
-				IModelBusConstants.ROOT_PACKAGE_NAME, "package1", "package2",
+				ModelConstants.ROOT_PACKAGE_NAME, "package1", "package2",
 				"Type2" }));
 		assertNotNull(type2);
 
@@ -1099,7 +1099,7 @@ public class AbstractModelTest {
 		/* Find the defined properties. */
 		Type type1;
 		type1 = model.findType(Arrays.asList(new String[] {
-				IModelBusConstants.ROOT_PACKAGE_NAME, "package1", "Type1" }));
+				ModelConstants.ROOT_PACKAGE_NAME, "package1", "Type1" }));
 		assertNotNull(type1);
 
 		Property property1;
@@ -1109,7 +1109,7 @@ public class AbstractModelTest {
 
 		Type type2;
 		type2 = model.findType(Arrays.asList(new String[] {
-				IModelBusConstants.ROOT_PACKAGE_NAME, "package1", "package2",
+				ModelConstants.ROOT_PACKAGE_NAME, "package1", "package2",
 				"Type2" }));
 		assertNotNull(type2);
 
@@ -1334,7 +1334,7 @@ public class AbstractModelTest {
 		/* Find the defined operations. */
 		Type type1;
 		type1 = model.findType(Arrays.asList(new String[] {
-				IModelBusConstants.ROOT_PACKAGE_NAME, "package1", "Type1" }));
+				ModelConstants.ROOT_PACKAGE_NAME, "package1", "Type1" }));
 		assertNotNull(type1);
 
 		Operation operation1;
@@ -1344,7 +1344,7 @@ public class AbstractModelTest {
 
 		Type type2;
 		type2 = model.findType(Arrays.asList(new String[] {
-				IModelBusConstants.ROOT_PACKAGE_NAME, "package1", "package2",
+				ModelConstants.ROOT_PACKAGE_NAME, "package1", "package2",
 				"Type2" }));
 		assertNotNull(type2);
 
@@ -1409,7 +1409,7 @@ public class AbstractModelTest {
 		/* Find the defined properties. */
 		Type type1;
 		type1 = model.findType(Arrays.asList(new String[] {
-				IModelBusConstants.ROOT_PACKAGE_NAME, "package1", "Type1" }));
+				ModelConstants.ROOT_PACKAGE_NAME, "package1", "Type1" }));
 		assertNotNull(type1);
 
 		Property property1;
@@ -1419,7 +1419,7 @@ public class AbstractModelTest {
 
 		Type type2;
 		type2 = model.findType(Arrays.asList(new String[] {
-				IModelBusConstants.ROOT_PACKAGE_NAME, "package1", "package2",
+				ModelConstants.ROOT_PACKAGE_NAME, "package1", "package2",
 				"Type2" }));
 		assertNotNull(type2);
 

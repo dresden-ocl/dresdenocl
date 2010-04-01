@@ -27,11 +27,12 @@ import java.util.List;
 
 import org.junit.Test;
 
-import tudresden.ocl20.pivot.modelbus.IModelBusConstants;
-import tudresden.ocl20.pivot.modelbus.ModelAccessException;
-import tudresden.ocl20.pivot.modelbus.model.IModel;
-import tudresden.ocl20.pivot.modelbus.model.ITypeResolver;
-import tudresden.ocl20.pivot.modelbus.model.exception.TypeNotFoundException;
+import tudresden.ocl20.pivot.essentialocl.StandardLibraryPlugin;
+import tudresden.ocl20.pivot.essentialocl.types.util.TypeResolver;
+import tudresden.ocl20.pivot.model.IModel;
+import tudresden.ocl20.pivot.model.ModelAccessException;
+import tudresden.ocl20.pivot.model.ModelConstants;
+import tudresden.ocl20.pivot.model.TypeNotFoundException;
 import tudresden.ocl20.pivot.modelbus.test.ModelBusTestUtility;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 
@@ -58,10 +59,12 @@ public class TypeResolverTest {
 			TypeNotFoundException {
 
 		IModel model1;
-		model1 = ModelBusTestUtility.getUML2Model("resources/models/model01.uml");
+		model1 = ModelBusTestUtility
+				.getUML2Model("resources/models/model01.uml");
 
-		ITypeResolver typeResolver;
-		typeResolver = model1.getTypeResolver();
+		TypeResolver typeResolver;
+		typeResolver = new TypeResolver(StandardLibraryPlugin
+				.getOclLibraryProvider().getOclLibrary());
 
 		assertNotNull(typeResolver);
 
@@ -69,13 +72,13 @@ public class TypeResolverTest {
 		List<String> path;
 		path = new ArrayList<String>();
 
-		path.add(IModelBusConstants.ROOT_PACKAGE_NAME);
+		path.add(ModelConstants.ROOT_PACKAGE_NAME);
 		path.add("package1");
 		path.add("package2");
 		path.add("Type2");
 
 		Type type;
-		type = typeResolver.findType(path);
+		type = typeResolver.findType(path, model1);
 
 		assertNotNull(type);
 		assertEquals(path.get(path.size() - 1), type.getName());
@@ -95,10 +98,12 @@ public class TypeResolverTest {
 			TypeNotFoundException {
 
 		IModel model1;
-		model1 = ModelBusTestUtility.getUML2Model("resources/models/model01.uml");
+		model1 = ModelBusTestUtility
+				.getUML2Model("resources/models/model01.uml");
 
-		ITypeResolver typeResolver;
-		typeResolver = model1.getTypeResolver();
+		TypeResolver typeResolver;
+		typeResolver = new TypeResolver(StandardLibraryPlugin
+				.getOclLibraryProvider().getOclLibrary());
 
 		assertNotNull(typeResolver);
 
@@ -109,7 +114,7 @@ public class TypeResolverTest {
 		path.add("OclAny");
 
 		Type type;
-		type = typeResolver.findType(path);
+		type = typeResolver.findType(path, model1);
 
 		assertNotNull(type);
 		assertEquals(path.get(path.size() - 1), type.getName());
@@ -130,10 +135,12 @@ public class TypeResolverTest {
 			TypeNotFoundException {
 
 		IModel model1;
-		model1 = ModelBusTestUtility.getUML2Model("resources/models/model01.uml");
+		model1 = ModelBusTestUtility
+				.getUML2Model("resources/models/model01.uml");
 
-		ITypeResolver typeResolver;
-		typeResolver = model1.getTypeResolver();
+		TypeResolver typeResolver;
+		typeResolver = new TypeResolver(StandardLibraryPlugin
+				.getOclLibraryProvider().getOclLibrary());
 
 		assertNotNull(typeResolver);
 
@@ -144,7 +151,7 @@ public class TypeResolverTest {
 		path.add("OclInvalid");
 
 		Type type;
-		type = typeResolver.findType(path);
+		type = typeResolver.findType(path, model1);
 
 		assertNotNull(type);
 		assertEquals(path.get(path.size() - 1), type.getName());
@@ -165,10 +172,12 @@ public class TypeResolverTest {
 			TypeNotFoundException {
 
 		IModel model1;
-		model1 = ModelBusTestUtility.getUML2Model("resources/models/model01.uml");
+		model1 = ModelBusTestUtility
+				.getUML2Model("resources/models/model01.uml");
 
-		ITypeResolver typeResolver;
-		typeResolver = model1.getTypeResolver();
+		TypeResolver typeResolver;
+		typeResolver = new TypeResolver(StandardLibraryPlugin
+				.getOclLibraryProvider().getOclLibrary());
 
 		assertNotNull(typeResolver);
 
@@ -177,7 +186,7 @@ public class TypeResolverTest {
 		path = new ArrayList<String>();
 
 		/* Expected to crash. */
-		typeResolver.findType(path);
+		typeResolver.findType(path, model1);
 	}
 
 	/**
@@ -194,15 +203,17 @@ public class TypeResolverTest {
 			TypeNotFoundException {
 
 		IModel model1;
-		model1 = ModelBusTestUtility.getUML2Model("resources/models/model01.uml");
+		model1 = ModelBusTestUtility
+				.getUML2Model("resources/models/model01.uml");
 
-		ITypeResolver typeResolver;
-		typeResolver = model1.getTypeResolver();
+		TypeResolver typeResolver;
+		typeResolver = new TypeResolver(StandardLibraryPlugin
+				.getOclLibraryProvider().getOclLibrary());
 
 		assertNotNull(typeResolver);
 
 		/* Expected to crash. */
-		typeResolver.findType(null);
+		typeResolver.findType(null, model1);
 	}
 
 	/**
@@ -219,10 +230,12 @@ public class TypeResolverTest {
 			TypeNotFoundException {
 
 		IModel model1;
-		model1 = ModelBusTestUtility.getUML2Model("resources/models/model01.uml");
+		model1 = ModelBusTestUtility
+				.getUML2Model("resources/models/model01.uml");
 
-		ITypeResolver typeResolver;
-		typeResolver = model1.getTypeResolver();
+		TypeResolver typeResolver;
+		typeResolver = new TypeResolver(StandardLibraryPlugin
+				.getOclLibraryProvider().getOclLibrary());
 
 		assertNotNull(typeResolver);
 
@@ -230,12 +243,12 @@ public class TypeResolverTest {
 		List<String> path;
 		path = new ArrayList<String>();
 
-		path.add(IModelBusConstants.ROOT_PACKAGE_NAME);
+		path.add(ModelConstants.ROOT_PACKAGE_NAME);
 		path.add("package1");
 		path.add("package2");
 		path.add("Type42");
 
 		/* Expected to crash. */
-		typeResolver.findType(path);
+		typeResolver.findType(path, model1);
 	}
 }
