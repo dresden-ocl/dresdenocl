@@ -21,8 +21,7 @@ package tudresden.ocl20.benchmark.common;
 
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
-import tudresden.ocl20.benchmark.common.StatementDefinition;
-import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceObject;
+import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceObject;
 import tudresden.ocl20.pivot.pivotmodel.Constraint;
 
 /**

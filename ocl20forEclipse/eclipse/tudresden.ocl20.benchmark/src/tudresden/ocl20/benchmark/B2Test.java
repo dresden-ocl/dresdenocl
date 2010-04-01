@@ -25,7 +25,7 @@ import tudresden.ocl20.benchmark.common.InvariantExecuter;
 import tudresden.ocl20.benchmark.common.PrePostExecuter;
 import tudresden.ocl20.benchmark.testdata.b2.Gender;
 import tudresden.ocl20.benchmark.testdata.b2.Person;
-import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceObject;
+import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceObject;
 
 // TODO: Auto-generated Javadoc
 /**

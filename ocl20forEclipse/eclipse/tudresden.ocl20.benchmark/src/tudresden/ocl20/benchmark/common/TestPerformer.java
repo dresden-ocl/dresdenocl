@@ -31,18 +31,19 @@ import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBoolean;
 import tudresden.ocl20.pivot.interpreter.IInterpretationEnvironment;
 import tudresden.ocl20.pivot.interpreter.IOclInterpreter;
 import tudresden.ocl20.pivot.interpreter.OclInterpreterPlugin;
-import tudresden.ocl20.pivot.model.metamodel.IMetamodel;
 import tudresden.ocl20.pivot.model.IModel;
 import tudresden.ocl20.pivot.model.ModelAccessException;
+import tudresden.ocl20.pivot.model.metamodel.IMetamodel;
 import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
 import tudresden.ocl20.pivot.modelbus.model.IModelRegistry;
 import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceRegistry;
+import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceType;
 import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceTypeRegistry;
-import tudresden.ocl20.pivot.modelbus.modelinstance.exception.TypeNotFoundInModelException;
-import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceObject;
 import tudresden.ocl20.pivot.modelinstance.IModelInstance;
 import tudresden.ocl20.pivot.modelinstance.IModelInstanceProvider;
-import tudresden.ocl20.pivot.modelinstance.IModelInstanceType;
+import tudresden.ocl20.pivot.modelinstancetype.exception.TypeNotFoundInModelException;
+import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement;
+import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceObject;
 import tudresden.ocl20.pivot.ocl2parser.parser.Ocl2Parser;
 import tudresden.ocl20.pivot.pivotmodel.Constraint;
 import tudresden.ocl20.pivot.pivotmodel.NamedElement;
@@ -64,9 +65,9 @@ import tudresden.ocl20.pivot.standardlibrary.java.JavaStandardlibraryPlugin;
 public class TestPerformer {
 
 	/**
-	 * used to specify the content of an ocl-file so that the performer knows how
-	 * to pre-parse the files correctly. However QUERY is not used yet and the
-	 * other two have exactly the same behavior.
+	 * used to specify the content of an ocl-file so that the performer knows
+	 * how to pre-parse the files correctly. However QUERY is not used yet and
+	 * the other two have exactly the same behavior.
 	 */
 	public static enum constraintFileType {
 		STATEMENT, // complete statement containing context
@@ -74,11 +75,6 @@ public class TestPerformer {
 		PREPOST
 		// only pre/post, context will be attached
 	};
-
-	/**
-	 * The global {@link IEnvironment} used during interpretation and preparation.
-	 */
-	protected IInterpretationEnvironment myGlobalEnvironment;
 
 	// @ The {@link IOclInterpreter} used by this {@link TestPerformer}.
 	protected IOclInterpreter myInterpreter = null;
@@ -120,8 +116,8 @@ public class TestPerformer {
 	 * @param modelFilePath
 	 * 
 	 * @throws RuntimeException
-	 *           Is thrown if any error occurred while loading the model or the
-	 *           meta model.
+	 *             Is thrown if any error occurred while loading the model or
+	 *             the meta model.
 	 */
 	public void init(String metaModelName, String modelFilePath)
 			throws RuntimeException {
@@ -129,8 +125,8 @@ public class TestPerformer {
 		/* Try to load model and meta model. */
 		try {
 
-			this.metaModel =
-					ModelBusPlugin.getMetamodelRegistry().getMetamodel(metaModelName);
+			this.metaModel = ModelBusPlugin.getMetamodelRegistry()
+					.getMetamodel(metaModelName);
 
 			if (metaModel == null) {
 				throw new RuntimeException(
@@ -145,8 +141,6 @@ public class TestPerformer {
 
 			// Initialize the interpreter.
 			this.myInterpreter = OclInterpreterPlugin.createInterpreter(null);
-
-			this.myGlobalEnvironment = this.myInterpreter.getEnvironment();
 		}
 
 		catch (Exception e) {
@@ -160,8 +154,8 @@ public class TestPerformer {
 	public void loadActiveMIObjects() {
 
 		if (this.activeMIObjects == null) {
-			this.activeMIObjects =
-					this.getActiveModelInstance().getAllModelInstanceObjects();
+			this.activeMIObjects = this.getActiveModelInstance()
+					.getAllModelInstanceObjects();
 		}
 	}
 
@@ -185,7 +179,8 @@ public class TestPerformer {
 		for (IModelInstanceObject obj : this.activeMIObjects) {
 
 			conElement = (NamedElement) con.getConstrainedElement().get(0);
-			if (conElement instanceof Property || conElement instanceof Operation) {
+			if (conElement instanceof Property
+					|| conElement instanceof Operation) {
 				conElement = conElement.getOwner();
 			}
 			// interpret only when rule applies to object
@@ -197,8 +192,7 @@ public class TestPerformer {
 				if (result != null) {
 					results.append(obj.getName() + " --> " + result + " ## ");
 					success = false;
-				}
-				else {
+				} else {
 					results.append(obj.getName() + " --> OK ## ");
 				}
 
@@ -223,16 +217,15 @@ public class TestPerformer {
 	 * @throws Throwable
 	 */
 	public boolean checkPostCondition(IModelInstanceObject guineaPig,
-			Constraint con, StringBuilder results, String method, String... params)
-			throws Throwable {
+			Constraint con, StringBuilder results, String method,
+			String... params) throws Throwable {
 
 		// collect method parameters
 		OclAny[] oclParams = this.collectMethodParams(params);
 
 		// create an ocl wrapper around the instance object (not sure why :))
-		OclAny oclGuineaPig =
-				JavaStandardlibraryPlugin.getStandardLibraryFactory().createOclAny(
-						guineaPig);
+		OclAny oclGuineaPig = JavaStandardlibraryPlugin
+				.getStandardLibraryFactory().createOclAny(guineaPig);
 
 		//
 		List<Type> parameterTypes = new ArrayList<Type>();
@@ -249,8 +242,7 @@ public class TestPerformer {
 		// invoke the operation
 		if (operation != null) {
 			oclGuineaPig.invokeOperation(operation, oclParams);
-		}
-		else {
+		} else {
 			results.append("Operation not found");
 			return false;
 		}
@@ -262,8 +254,7 @@ public class TestPerformer {
 		if (result != null) {
 			results.append(guineaPig.getName() + " --> " + result);
 			return false;
-		}
-		else {
+		} else {
 			return true;
 		}
 
@@ -291,8 +282,7 @@ public class TestPerformer {
 		if (result != null) {
 			results.append(guineaPig.getName() + " --> " + result + " ## ");
 			success = false;
-		}
-		else {
+		} else {
 			results.append(guineaPig.getName() + " --> OK ## ");
 		}
 
@@ -303,7 +293,7 @@ public class TestPerformer {
 	 * Collect an array of OclAny-Objects registered in the environment.
 	 * 
 	 * @param params
-	 *          String-Array identifying all Variables that are being fetched
+	 *            String-Array identifying all Variables that are being fetched
 	 * 
 	 * @return
 	 */
@@ -325,13 +315,13 @@ public class TestPerformer {
 	 * @param obj
 	 * @param con
 	 * 
-	 * @return null if everything went ok, string in case of failure or exception
-	 *         when something weired happend.
+	 * @return null if everything went ok, string in case of failure or
+	 *         exception when something weired happend.
 	 * 
 	 * @throws Throwable
 	 */
-	protected String interpretConstraint2(IModelInstanceObject obj, Constraint con)
-			throws Throwable {
+	protected String interpretConstraint2(IModelInstanceObject obj,
+			Constraint con) throws Throwable {
 
 		OclAny result = null;
 
@@ -350,8 +340,7 @@ public class TestPerformer {
 
 		if (res != null && res.isTrue()) {
 			return null;
-		}
-		else {
+		} else {
 			return "Result was OclBoolean(false)";
 		}
 
@@ -397,7 +386,7 @@ public class TestPerformer {
 	 * </p>
 	 * 
 	 * @param modelInstance
-	 *          The model instance for which the test shall be performed.
+	 *            The model instance for which the test shall be performed.
 	 */
 	public void setModelInstanceType(String modelInstance) {
 
@@ -410,11 +399,11 @@ public class TestPerformer {
 	public void loadEmptyModelInstance() {
 
 		// create an empty model instance
-		IModelInstanceProvider modelInstanceProvider =
-				this.getModelInstanceProvider();
+		IModelInstanceProvider modelInstanceProvider = this
+				.getModelInstanceProvider();
 
-		IModelInstance emptyModelInstance =
-				modelInstanceProvider.createEmptyModelInstance(this.myModel);
+		IModelInstance emptyModelInstance = modelInstanceProvider
+				.createEmptyModelInstance(this.myModel);
 
 		// set as current model instance
 		this.setActiveModelInstance(emptyModelInstance);
@@ -422,15 +411,15 @@ public class TestPerformer {
 
 	/**
 	 * <p>
-	 * Loads a given fileName as an {@link IModelInstance} of the actual selected
-	 * {@link IModel}.
+	 * Loads a given fileName as an {@link IModelInstance} of the actual
+	 * selected {@link IModel}.
 	 * </p>
 	 * 
 	 * @param modelInstanceFileName
-	 *          The file of the provider class of the {@link IModelInstance}.
+	 *            The file of the provider class of the {@link IModelInstance}.
 	 * 
 	 * @throws RuntimeException
-	 *           Thrown, if the given file can not be found.
+	 *             Thrown, if the given file can not be found.
 	 */
 	public void loadModelInstance(String modelInstanceFileName)
 			throws RuntimeException {
@@ -445,19 +434,18 @@ public class TestPerformer {
 			return;
 		}
 
-		File modelInstanceFile =
-				this.safeOpenFile(this.testEnv.fileDirectory + modelInstanceFileName);
+		File modelInstanceFile = this.safeOpenFile(this.testEnv.fileDirectory
+				+ modelInstanceFileName);
 
-		IModelInstanceProvider modelInstanceProvider =
-				this.getModelInstanceProvider();
+		IModelInstanceProvider modelInstanceProvider = this
+				.getModelInstanceProvider();
 
 		IModelInstance loadedInstance = null;
 
 		// Load the model instance.
 		try {
-			loadedInstance =
-					modelInstanceProvider.getModelInstance(modelInstanceFile,
-							this.myModel);
+			loadedInstance = modelInstanceProvider.getModelInstance(
+					modelInstanceFile, this.myModel);
 		} catch (ModelAccessException e) {
 			throw new RuntimeException(e);
 		}
@@ -498,13 +486,14 @@ public class TestPerformer {
 
 		IModelInstanceRegistry modelInstanceRegistry;
 		modelInstanceRegistry = ModelBusPlugin.getModelInstanceRegistry();
-		IModelInstance[] instances =
-				modelInstanceRegistry.getModelInstances(this.myModel);
+		IModelInstance[] instances = modelInstanceRegistry
+				.getModelInstances(this.myModel);
 		for (IModelInstance inst : instances) {
 			// instance already loaded
 			if (inst.equals(instance)) {
 				// activate and return
-				modelInstanceRegistry.setActiveModelInstance(this.myModel, instance);
+				modelInstanceRegistry.setActiveModelInstance(this.myModel,
+						instance);
 				return;
 			}
 		}
@@ -512,7 +501,7 @@ public class TestPerformer {
 		modelInstanceRegistry.addModelInstance(instance);
 		modelInstanceRegistry.setActiveModelInstance(this.myModel, instance);
 
-		this.myGlobalEnvironment.setModelInstance(instance);
+		this.myInterpreter = OclInterpreterPlugin.createInterpreter(instance);
 	}
 
 	/**
@@ -537,10 +526,10 @@ public class TestPerformer {
 	 */
 	protected IModelInstanceProvider getModelInstanceProvider() {
 
-		IModelInstanceTypeRegistry tMTypeReg =
-				ModelBusPlugin.getModelInstanceTypeRegistry();
-		IModelInstanceType tMInstanceType =
-				tMTypeReg.getModelInstanceType(this.modelInstanceType);
+		IModelInstanceTypeRegistry tMTypeReg = ModelBusPlugin
+				.getModelInstanceTypeRegistry();
+		IModelInstanceType tMInstanceType = tMTypeReg
+				.getModelInstanceType(this.modelInstanceType);
 		return tMInstanceType.getModelInstanceProvider();
 	}
 
@@ -550,7 +539,7 @@ public class TestPerformer {
 	 * </p>
 	 * 
 	 * @param modelName
-	 *          Filename of the model
+	 *            Filename of the model
 	 * 
 	 * @throws RuntimeException
 	 */
@@ -562,13 +551,15 @@ public class TestPerformer {
 
 			File modelFile;
 
-			modelFile = this.safeOpenFile(this.testEnv.fileDirectory + modelName);
+			modelFile = this.safeOpenFile(this.testEnv.fileDirectory
+					+ modelName);
 
 			/* Try to load the model. */
 			try {
 				IModelRegistry modelRegistry;
 
-				this.myModel = this.metaModel.getModelProvider().getModel(modelFile);
+				this.myModel = this.metaModel.getModelProvider().getModel(
+						modelFile);
 
 				modelRegistry = ModelBusPlugin.getModelRegistry();
 
@@ -626,7 +617,7 @@ public class TestPerformer {
 	 * creates an object adapting the passed model instance object.
 	 * 
 	 * @param object
-	 *          Object to be adapteds
+	 *            Object to be adapteds
 	 * 
 	 * @return
 	 */
@@ -635,9 +626,8 @@ public class TestPerformer {
 		IModelInstanceObject result = null;
 		try {
 
-			result =
-					(IModelInstanceObject) this.getActiveModelInstance()
-							.addModelInstanceElement(object);
+			result = (IModelInstanceObject) this.getActiveModelInstance()
+					.addModelInstanceElement(object);
 		}
 
 		catch (TypeNotFoundInModelException e) {
@@ -649,14 +639,15 @@ public class TestPerformer {
 	/**
 	 * <p>
 	 * Add a given {@link Object} as a variable to the
-	 * {@link IInterpretationEnvironment} used for preparation and interpretation.
+	 * {@link IInterpretationEnvironment} used for preparation and
+	 * interpretation.
 	 * </p>
 	 * 
 	 * @param path
-	 *          The path and name of the variable which shall be set.
+	 *            The path and name of the variable which shall be set.
 	 * @param value
-	 *          The {@link IModelInstanceObject} value of the set variable as an
-	 *          Object.
+	 *            The {@link IModelInstanceObject} value of the set variable as
+	 *            an Object.
 	 * 
 	 * @return <code>true</code>, if the given value has been set as a value
 	 *         successfully.
@@ -666,13 +657,11 @@ public class TestPerformer {
 		boolean result;
 
 		/* Convert the object into an OclAny. */
-		OclAny adaptedObject;
+		IModelInstanceElement adaptedObject;
 
 		try {
-			adaptedObject =
-					JavaStandardlibraryPlugin.getStandardLibraryFactory().createOclAny(
-							this.myGlobalEnvironment.getModelInstance()
-									.getModelInstanceFactory().createModelInstanceElement(value));
+			adaptedObject = this.getActiveModelInstance()
+					.addModelInstanceElement(value);
 
 			/* Add the variable to the environment. */
 			this.myInterpreter.setEnviromentVariable(path, adaptedObject);
@@ -688,8 +677,8 @@ public class TestPerformer {
 	}
 
 	/**
-	 * creates an ocl root adapter from a model instance adapter in order to being
-	 * able to execute a method on the model level.
+	 * creates an ocl root adapter from a model instance adapter in order to
+	 * being able to execute a method on the model level.
 	 * 
 	 * @param obj
 	 * 
@@ -697,7 +686,7 @@ public class TestPerformer {
 	 */
 	public OclAny createOclRootAdapterByMIObject(IModelInstanceObject obj) {
 
-		return JavaStandardlibraryPlugin.getStandardLibraryFactory().createOclAny(
-				obj);
+		return JavaStandardlibraryPlugin.getStandardLibraryFactory()
+				.createOclAny(obj);
 	}
 }
