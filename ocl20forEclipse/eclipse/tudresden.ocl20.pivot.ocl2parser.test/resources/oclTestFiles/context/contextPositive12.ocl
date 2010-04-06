@@ -4,6 +4,6 @@ package package1::package2
 -- but multiple, unique, and unordered.
 -- Thus the Parser should interpret the Type as Set(Type1).
 context Type1::aSet: Set(Type1)
-derive: Type1->allInstances()
+derive: Type1.allInstances()
   
 endpackage

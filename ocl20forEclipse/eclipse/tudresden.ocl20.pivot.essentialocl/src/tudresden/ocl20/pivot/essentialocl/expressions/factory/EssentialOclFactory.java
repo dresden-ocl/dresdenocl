@@ -90,8 +90,8 @@ import tudresden.ocl20.pivot.pivotmodel.Property;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 
 /**
- * Standard implementation of the {@link EssentialOclFactory} interface which relies
- * on a given {@link IModel} instance to find types in the model.
+ * Standard implementation of the {@link EssentialOclFactory} interface which
+ * relies on a given {@link IModel} instance to find types in the model.
  * 
  * @author Matthias Braeuer
  * @version 1.0 10.04.2007
@@ -117,14 +117,16 @@ public class EssentialOclFactory {
 	 * </p>
 	 * 
 	 * @param oclLibrary
-	 *          The {@link OclLibrary} this {@link EssentialOclFactory} belongs to.
+	 *          The {@link OclLibrary} this {@link EssentialOclFactory} belongs
+	 *          to.
 	 * @param model
 	 *          the {@link IModel} the created OCL expressions belong to.
 	 */
 	public EssentialOclFactory(OclLibrary oclLibrary, IModel model) {
 
 		if (LOGGER.isDebugEnabled()) {
-			LOGGER.debug("EssentialOclFactory(oclLibrary=" + oclLibrary + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
+			LOGGER
+					.debug("EssentialOclFactory(oclLibrary=" + oclLibrary + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 		// no else.
 
@@ -803,9 +805,6 @@ public class EssentialOclFactory {
 		String referredOperation = pathName.get(pathName.size() - 1);
 		pathName = pathName.subList(0, pathName.size() - 1);
 
-		// lookup the type
-		Type owningType = findType(pathName);
-
 		// collect the parameter types
 		List<Type> paramTypes = new ArrayList<Type>();
 
@@ -815,16 +814,29 @@ public class EssentialOclFactory {
 			}
 		}
 
-		// lookup the operation
-		Operation operation =
-				owningType.lookupOperation(referredOperation, paramTypes);
+		// lookup the type
+		Type owningType = findType(pathName);
 
-		if (operation == null || !operation.isStatic()) {
-			throw new IllegalArgumentException(
-					"Unable to find a static operation '" + referredOperation //$NON-NLS-1$
-							+ "' with argument types " + paramTypes + "' in type " //$NON-NLS-1$ //$NON-NLS-2$
-							+ owningType.getQualifiedName() + "."); //$NON-NLS-1$
+		// FIXME Michael: This is wrong, but the parser treats this as a static
+		// operation. A new parser should avoid this, so this code can move to
+		// another place (non-static operation)
+		
+		// lookup the operation on OclType first (allInstances, probably more)
+		Operation operation =
+				oclLibrary.getOclType().lookupOperation(referredOperation, paramTypes);
+
+		if (operation == null) {
+
+			operation = owningType.lookupOperation(referredOperation, paramTypes);
+
+			if (operation == null || !operation.isStatic()) {
+				throw new IllegalArgumentException(
+						"Unable to find a static operation '" + referredOperation //$NON-NLS-1$
+								+ "' with argument types " + paramTypes + "' in type " //$NON-NLS-1$ //$NON-NLS-2$
+								+ owningType.getQualifiedName() + "."); //$NON-NLS-1$
+			}
 		}
+		// no else.
 
 		// create the expression
 		OperationCallExp operationCallExp =
@@ -1335,7 +1347,8 @@ public class EssentialOclFactory {
 	 * exception.
 	 * </p>
 	 */
-	protected Type findType(List<String> pathName) throws EssentialOclFactoryException {
+	protected Type findType(List<String> pathName)
+			throws EssentialOclFactoryException {
 
 		Type type;
 
@@ -1349,9 +1362,10 @@ public class EssentialOclFactory {
 
 		catch (TypeNotFoundException e) {
 			LOGGER.error("findType(pathName=" + pathName + ")", e); //$NON-NLS-1$//$NON-NLS-2$
-			throw new EssentialOclFactoryException("Failed to lookup type " + pathName //$NON-NLS-1$
-					+ ", both in the OCL Standard Library and the associated model '" //$NON-NLS-1$
-					+ model.getDisplayName() + "'.", e); //$NON-NLS-1$
+			throw new EssentialOclFactoryException(
+					"Failed to lookup type " + pathName //$NON-NLS-1$
+							+ ", both in the OCL Standard Library and the associated model '" //$NON-NLS-1$
+							+ model.getDisplayName() + "'.", e); //$NON-NLS-1$
 
 		}
 

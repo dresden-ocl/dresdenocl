@@ -130,21 +130,13 @@
       </genericType>
       <ownedTypeParameter name="E"/>
     </ownedOperation>
-    <ownedOperation name="allInstances" static="true">
-      <genericType xsi:type="pivot:ComplexGenericType" unboundType="//@oclSet">
-        <typeArgument>
-          <genericType xsi:type="pivot:ParameterGenericType" typeParameter="//@oclAny/@ownedOperation.3/@ownedTypeParameter.0"/>
-        </typeArgument>
-      </genericType>
-      <ownedTypeParameter name="E"/>
-    </ownedOperation>
     <ownedOperation name="oclAsType">
-      <genericType xsi:type="pivot:ParameterGenericType" typeParameter="//@oclAny/@ownedOperation.4/@ownedTypeParameter.0"/>
+      <genericType xsi:type="pivot:ParameterGenericType" typeParameter="//@oclAny/@ownedOperation.3/@ownedTypeParameter.0"/>
       <ownedTypeParameter name="E"/>
       <ownedParameter name="typespec">
         <genericType xsi:type="pivot:ComplexGenericType" unboundType="//@oclType">
           <typeArgument>
-            <genericType xsi:type="pivot:ParameterGenericType" typeParameter="//@oclAny/@ownedOperation.4/@ownedTypeParameter.0"/>
+            <genericType xsi:type="pivot:ParameterGenericType" typeParameter="//@oclAny/@ownedOperation.3/@ownedTypeParameter.0"/>
           </typeArgument>
         </genericType>
       </ownedParameter>
@@ -169,7 +161,7 @@
     <ownedOperation name="oclType">
       <genericType xsi:type="pivot:ComplexGenericType" unboundType="//@oclType">
         <typeArgument>
-          <genericType xsi:type="pivot:ParameterGenericType" typeParameter="//@oclAny/@ownedOperation.10/@ownedTypeParameter.0"/>
+          <genericType xsi:type="pivot:ParameterGenericType" typeParameter="//@oclAny/@ownedOperation.9/@ownedTypeParameter.0"/>
         </typeArgument>
       </genericType>
       <ownedTypeParameter name="E"/>
@@ -192,6 +184,14 @@
           <typeArgument/>
         </genericType>
       </ownedParameter>
+    </ownedOperation>
+    <ownedOperation name="allInstances">
+      <genericType xsi:type="pivot:ComplexGenericType" unboundType="//@oclSet">
+        <typeArgument>
+          <genericType xsi:type="pivot:ParameterGenericType" typeParameter="//@oclType/@ownedOperation.2/@ownedTypeParameter.0"/>
+        </typeArgument>
+      </genericType>
+      <ownedTypeParameter name="E"/>
     </ownedOperation>
   </oclType>
   <oclCollection superType="//@oclAny" oclLibrary="/">

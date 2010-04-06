@@ -4,6 +4,6 @@ package package1::package2
 -- but multiple, nonunique, and unordered.
 -- Thus the Parser should interpret the Type as Bag(Type1).
 context Type1::aBag: Bag(Type1)
-derive: Type1->allInstances()->asBag()
+derive: Type1.allInstances()->asBag()
   
 endpackage
