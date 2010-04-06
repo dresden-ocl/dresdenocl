@@ -14,6 +14,7 @@
 package tudresden.ocl20.pivot.metamodels.ecore.test.tests;
 
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import java.io.File;
@@ -100,5 +101,26 @@ public class TestModelImport {
 				ModelConstants.ROOT_PACKAGE_NAME, "package1", "package2",
 				"TestTypeClass1" }));
 		assertNotNull(msg, testTypeClass);
+
+		modelFile = TestModelImport.getFile("model/testModel.ecore");
+
+		/*
+		 * Because the import is not bijective, the type resolving should not
+		 * work vice versa.
+		 */
+		model = Ocl2ForEclipseFacade.getModel(modelFile,
+				Ocl2ForEclipseFacade.ECORE_META_MODEL);
+
+		assertNotNull(msg, model);
+
+		/*
+		 * Try to find a type that is referenced but not defined by the model
+		 * itself.
+		 */
+		Type testReferredType;
+		testReferredType = model.findType(Arrays.asList(new String[] {
+				ModelConstants.ROOT_PACKAGE_NAME, "package3",
+				"TestReferredType" }));
+		assertNull(msg, testReferredType);
 	}
 }
