@@ -182,34 +182,6 @@ public class TestOperationCallExpressions {
 	 * </p>
 	 */
 	@Test
-	public void testOperationCallExpressionPositive06() throws Exception {
-
-		TestPerformer testPerformer;
-
-		String modelFileName;
-		String oclFileName;
-
-		oclFileName = "expressions/calls/operationPositive06.ocl";
-		modelFileName = "testmodel.uml";
-
-		/* Try to get the TestPerformer. */
-		testPerformer = TestPerformer.getInstance(
-				AllExpressionTests.META_MODEL_ID,
-				AllExpressionTests.MODEL_BUNDLE,
-				AllExpressionTests.MODEL_DIRECTORY);
-		testPerformer.setModel(modelFileName);
-
-		/* Try to parse the constraint file. */
-		testPerformer.parseFile(oclFileName);
-	}
-
-	/**
-	 * <p>
-	 * A test case to check that a OperationCallExpression is parsed
-	 * appropriately.
-	 * </p>
-	 */
-	@Test
 	public void testOperationCallExpressionPositive07() throws Exception {
 
 		TestPerformer testPerformer;
@@ -470,90 +442,6 @@ public class TestOperationCallExpressions {
 		String oclFileName;
 
 		oclFileName = "expressions/calls/operationNegative08.ocl";
-		modelFileName = "testmodel.uml";
-
-		/* Try to get the TestPerformer. */
-		testPerformer = TestPerformer.getInstance(
-				AllExpressionTests.META_MODEL_ID,
-				AllExpressionTests.MODEL_BUNDLE,
-				AllExpressionTests.MODEL_DIRECTORY);
-		testPerformer.setModel(modelFileName);
-
-		/* Try to parse the constraint file. */
-		testPerformer.parseFile(oclFileName);
-	}
-
-	/**
-	 * <p>
-	 * A test case to check that a OperationCallExpression is not parsed
-	 * appropriately.
-	 * </p>
-	 */
-	@Test(expected = SemanticException.class)
-	public void testOperationCallExpressionNegative09() throws Exception {
-
-		TestPerformer testPerformer;
-
-		String modelFileName;
-		String oclFileName;
-
-		oclFileName = "expressions/calls/operationNegative09.ocl";
-		modelFileName = "testmodel.uml";
-
-		/* Try to get the TestPerformer. */
-		testPerformer = TestPerformer.getInstance(
-				AllExpressionTests.META_MODEL_ID,
-				AllExpressionTests.MODEL_BUNDLE,
-				AllExpressionTests.MODEL_DIRECTORY);
-		testPerformer.setModel(modelFileName);
-
-		/* Try to parse the constraint file. */
-		testPerformer.parseFile(oclFileName);
-	}
-
-	/**
-	 * <p>
-	 * A test case to check that a OperationCallExpression is not parsed
-	 * appropriately.
-	 * </p>
-	 */
-	@Test(expected = SemanticException.class)
-	public void testOperationCallExpressionNegative10() throws Exception {
-
-		TestPerformer testPerformer;
-
-		String modelFileName;
-		String oclFileName;
-
-		oclFileName = "expressions/calls/operationNegative10.ocl";
-		modelFileName = "testmodel.uml";
-
-		/* Try to get the TestPerformer. */
-		testPerformer = TestPerformer.getInstance(
-				AllExpressionTests.META_MODEL_ID,
-				AllExpressionTests.MODEL_BUNDLE,
-				AllExpressionTests.MODEL_DIRECTORY);
-		testPerformer.setModel(modelFileName);
-
-		/* Try to parse the constraint file. */
-		testPerformer.parseFile(oclFileName);
-	}
-
-	/**
-	 * <p>
-	 * A test case to check that a OperationCallExpression is not parsed
-	 * appropriately.
-	 * </p>
-	 */
-	@Test(expected = SemanticException.class)
-	public void testOperationCallExpressionNegative11() throws Exception {
-
-		TestPerformer testPerformer;
-
-		String modelFileName;
-		String oclFileName;
-
-		oclFileName = "expressions/calls/operationNegative11.ocl";
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
