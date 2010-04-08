@@ -90,15 +90,4 @@ public interface OclType<T extends OclAny> extends OclAny {
 	 */
 	OclAny invokeStaticOperation(Operation operation, OclAny[] oclAnyParameters,
 			IModelInstance modelInstance);
-
-	/**
-	 * <p>
-	 * {@link #allInstances()} can be invoked on any {@link Type} and returns all
-	 * instances for that Type. It is not a static operation on the type, but an
-	 * operation on type.
-	 * </p>
-	 * 
-	 * @return all instances of the type this operation is called on
-	 */
-	OclSet<OclAny> allInstances();
 }

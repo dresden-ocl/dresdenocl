@@ -453,9 +453,7 @@ public interface IStandardLibraryFactory {
 	 * 
 	 * @param type
 	 *          The {@link Type} this {@link OclType} should wrap.
-	 * @param oclAny
-	 *          The {@link OclAny} for what the {@link OclType} should be
-	 *          returned.
+	 * 
 	 * @return The created {@link OclType}.
 	 */
 	public <T extends OclAny> OclType<T> createOclType(final Type type);

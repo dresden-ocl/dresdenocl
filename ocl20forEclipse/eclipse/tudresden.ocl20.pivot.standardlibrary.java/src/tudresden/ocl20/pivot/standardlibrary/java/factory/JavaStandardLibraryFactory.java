@@ -55,8 +55,6 @@ import tudresden.ocl20.pivot.essentialocl.types.SetType;
 import tudresden.ocl20.pivot.essentialocl.types.TypeConstants;
 import tudresden.ocl20.pivot.essentialocl.types.TypeType;
 import tudresden.ocl20.pivot.essentialocl.types.TypesFactory;
-import tudresden.ocl20.pivot.model.IModel;
-import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
 import tudresden.ocl20.pivot.modelinstance.IModelInstance;
 import tudresden.ocl20.pivot.modelinstancetype.exception.OperationAccessException;
 import tudresden.ocl20.pivot.modelinstancetype.exception.OperationNotFoundException;
@@ -627,7 +625,7 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 	 * (non-Javadoc)
 	 * @seetudresden.ocl20.pivot.essentialocl.standardlibrary.factory.
 	 * IStandardLibraryFactory
-	 * #createOclType(tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny)
+	 * #createOclType(tudresden.ocl20.pivot.pivotmodel.Type)
 	 */
 	public <T extends OclAny> OclType<T> createOclType(final Type type) {
 
@@ -1036,18 +1034,10 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 		 */
 		public OclAny invokeOperation(Operation operation, OclAny... parameters) {
 
-			OclAny result;
-
-			if (operation.getName().equals("allInstances") && parameters.length == 0)
-				result = allInstances();
-			else
-				result =
-						createOclInvalid(
-								operation.getType(),
-								new UnsupportedOperationException(
-										"invokeOperation(Operation operation, OclAny... parameters) is not supported on meta-type OclType"));
-
-			return result;
+			return createOclInvalid(
+					operation.getType(),
+					new UnsupportedOperationException(
+							"invokeOperation(Operation operation, OclAny... parameters) is not supported on meta-type OclType"));
 		}
 
 		/**
@@ -1142,10 +1132,22 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 		 */
 		public OclBoolean isEqualTo(OclAny object2) {
 
-			return createOclInvalid(
-					TypeConstants.BOOLEAN,
-					new UnsupportedOperationException(
-							"isEqualTo(OclAny object2) is not supported on meta-type OclType"));
+			OclBoolean result;
+
+			if (object2 instanceof OclType<?>) {
+				if (this.getType().equals(((OclType<?>) object2).getType()))
+					result = JavaOclBoolean.getInstance(true);
+				else
+					result = JavaOclBoolean.getInstance(false);
+			}
+			else
+				result =
+						createOclInvalid(
+								TypeConstants.BOOLEAN,
+								new UnsupportedOperationException(
+										"isEqualTo(OclAny object2) is not supported on meta-type OclType"));
+
+			return result;
 		}
 
 		/*
@@ -1156,10 +1158,7 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 		 */
 		public OclBoolean isNotEqualTo(OclAny object2) {
 
-			return createOclInvalid(
-					TypeConstants.BOOLEAN,
-					new UnsupportedOperationException(
-							"isNotEqualTo(OclAny object2) is not supported on meta-type OclType"));
+			return isEqualTo(object2).not();
 		}
 
 		/*
@@ -1268,24 +1267,6 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 			// end else.
 
 			return result;
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * @see
-		 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclType#allInstances()
-		 */
-		public OclSet<OclAny> allInstances() {
-
-			// FIXME Michael: Is it OK to retrieve the ModelInstance like that. Should
-			// it be done the same way for static operations?
-			IModel model = ModelBusPlugin.getModelRegistry().getActiveModel();
-			IModelInstance modelInstance =
-					ModelBusPlugin.getModelInstanceRegistry().getActiveModelInstance(
-							model);
-			Set<IModelInstanceObject> allInstances =
-					modelInstance.getAllInstances(getType());
-			return createOclSet(allInstances, getType());
 		}
 	}
 }
