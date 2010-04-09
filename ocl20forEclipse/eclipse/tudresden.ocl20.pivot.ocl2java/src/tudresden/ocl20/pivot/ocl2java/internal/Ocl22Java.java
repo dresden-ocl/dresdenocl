@@ -1331,8 +1331,7 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 				else if (operationName.equals("allInstances")) {
 					String instanceType;
 
-					instanceType = this.transformType(
-							anOperationCallExp.getSourceType()).toString();
+					instanceType = sourceCode.getResultExp();
 
 					template = this.myTemplateGroup
 							.getTemplate("allInstancesOperation");
