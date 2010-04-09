@@ -21,9 +21,11 @@ Release 2.1 (scheduled for April 2010)
 * A bug in the ModelRegistry was fixed.
   - Adding of Models should now handle NullPointerExceptions correctly.
  
-* A bug in the UML2 Meta-Model was fixed.
+* Some bugs in the UML2 Meta-Model were fixed.
   - If the top-level package is a UML model or profile directory, 
     these packages are now adapted correctly.
+  - In UML2 models containing references to other UML2 models, the referenced models are now
+    imported as part of the model as well.
     
 * A bug in the EMF Ecore Meta-Model was fixed.
   - In Ecore models containing references to other Ecore models, the referenced models are now

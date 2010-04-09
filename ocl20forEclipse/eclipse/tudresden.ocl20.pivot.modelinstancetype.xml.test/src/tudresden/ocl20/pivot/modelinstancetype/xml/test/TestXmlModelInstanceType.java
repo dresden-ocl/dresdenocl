@@ -58,7 +58,6 @@ public class TestXmlModelInstanceType extends ModelInstanceTypeTestSuite {
 				XmlModelInstanceTypeTestPlugin.PLUGIN_ID, TEST_MODELINSTANCE_PATH,
 				MODEL_INSTANCE_ID);
 
-		/* TODO Claas: Probably alter the counters. */
 		ModelInstanceTypeTestServices.getInstance().setBooleanPropertyCounter(1);
 		ModelInstanceTypeTestServices.getInstance().setIntegerPropertyCounter(1);
 		ModelInstanceTypeTestServices.getInstance().setRealPropertyCounter(1);

@@ -134,7 +134,6 @@ public class ExpressionInOclImpl extends ExpressionImpl implements ExpressionInO
    * @see tudresden.ocl20.pivot.pivotmodel.impl.ExpressionImpl#setLanguage(java.lang.String)
    */
   @Override
-  @SuppressWarnings("unused")
   public void setLanguage(String newLanguage) {
     throw new UnsupportedOperationException("The language of an ExpressionInOcl cannot be changed."); //$NON-NLS-1$
   }

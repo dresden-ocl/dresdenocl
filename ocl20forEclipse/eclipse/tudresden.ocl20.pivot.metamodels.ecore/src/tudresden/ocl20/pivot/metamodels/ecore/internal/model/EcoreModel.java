@@ -182,6 +182,66 @@ public class EcoreModel extends AbstractModel implements IModel {
 
 	/**
 	 * <p>
+	 * Computes the {@link EPackage}s from referenced Ecore models of this
+	 * {@link EcoreModel} and adds them to the root {@link Namespace} as well.
+	 * </p>
+	 * 
+	 * @param rootPackage
+	 *            The {@link EPackage} that represents the root
+	 *            {@link Namespace} of this {@link EcoreModel}.
+	 */
+	private void addNamespacesForReferencedPackages(EPackage rootPackage) {
+	
+		/* Collect EPackages that have to be added. */
+		Set<EPackage> packagesToBeAdded;
+		packagesToBeAdded = new HashSet<EPackage>();
+	
+		/* Iterate through all references EObjects. */
+		for (EObject eObject : EcoreUtil.ExternalCrossReferencer.find(resource)
+				.keySet()) {
+	
+			/* Check the containing package of each EClassifier. */
+			if (eObject instanceof EClassifier) {
+	
+				EClassifier eClassifier;
+				eClassifier = (EClassifier) eObject;
+	
+				EPackage containerPackage;
+				containerPackage = eClassifier.getEPackage();
+	
+				while (containerPackage.getESuperPackage() != null) {
+					containerPackage = containerPackage.getESuperPackage();
+				}
+	
+				if (!rootPackage.getESubpackages().contains(containerPackage)
+						&& !packagesToBeAdded.contains(containerPackage)
+						&& !containerPackage.equals(rootPackage)) {
+	
+					/*
+					 * Do not add the package directly because a copy is
+					 * required. Afterwards, the containment check fails for the
+					 * copy and the package may be added multiple times.
+					 */
+					packagesToBeAdded.add(containerPackage);
+				}
+				// no else.
+			}
+			// no else.
+		}
+	
+		/*
+		 * Now copy and add the packages. Copy is required to avoid
+		 * bi-directional references.
+		 */
+		for (EPackage ePackage : packagesToBeAdded) {
+			rootPackage.getESubpackages().add(
+					(EPackage) EcoreUtil.copy(ePackage));
+		}
+		// end for.
+	}
+
+	/**
+	 * <p>
 	 * A helper method that creates the adapter for the root {@link Namespace}.
 	 * </p>
 	 * 
@@ -250,65 +310,5 @@ public class EcoreModel extends AbstractModel implements IModel {
 		this.addNamespacesForReferencedPackages(rootPackage);
 
 		return EcoreAdapterFactory.INSTANCE.createNamespace(rootPackage);
-	}
-
-	/**
-	 * <p>
-	 * Computes the {@link EPackage}s from referenced Ecore models of this
-	 * {@link EcoreModel} and adds them to the root {@link Namespace} as well.
-	 * </p>
-	 * 
-	 * @param rootPackage
-	 *            The {@link EPackage} that represents the root
-	 *            {@link Namespace} of this {@link EcoreModel}.
-	 */
-	private void addNamespacesForReferencedPackages(EPackage rootPackage) {
-
-		/* Collect EPackages that have to be added. */
-		Set<EPackage> packagesToBeAdded;
-		packagesToBeAdded = new HashSet<EPackage>();
-
-		/* Iterate through all references EObjects. */
-		for (EObject eObject : EcoreUtil.ExternalCrossReferencer.find(resource)
-				.keySet()) {
-
-			/* Check the containing package of each EClassifier. */
-			if (eObject instanceof EClassifier) {
-
-				EClassifier eClassifier;
-				eClassifier = (EClassifier) eObject;
-
-				EPackage containerPackage;
-				containerPackage = eClassifier.getEPackage();
-
-				while (containerPackage.getESuperPackage() != null) {
-					containerPackage = containerPackage.getESuperPackage();
-				}
-
-				if (!rootPackage.getESubpackages().contains(containerPackage)
-						&& !packagesToBeAdded.contains(containerPackage)
-						&& !containerPackage.equals(rootPackage)) {
-
-					/*
-					 * Do not add the package directly because a copy is
-					 * required. Afterwards, the containment check fails for the
-					 * copy and the package may be added multiple times.
-					 */
-					packagesToBeAdded.add(containerPackage);
-				}
-				// no else.
-			}
-			// no else.
-		}
-
-		/*
-		 * No copy and add the packages. Copy is required to avoid
-		 * bi-directional references.
-		 */
-		for (EPackage ePackage : packagesToBeAdded) {
-			rootPackage.getESubpackages().add(
-					(EPackage) EcoreUtil.copy(ePackage));
-		}
-		// end for.
 	}
 }

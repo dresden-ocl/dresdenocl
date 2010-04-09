@@ -132,7 +132,6 @@ public abstract class OclExpressionImpl extends TypedElementImpl implements
 	 * @see tudresden.ocl20.pivot.pivotmodel.impl.TypedElementImpl#setType(tudresden.ocl20.pivot.pivotmodel.Type)
 	 */
 	@Override
-	@SuppressWarnings("unused")
 	public void setType(Type newType) {
 
 		throw new UnsupportedOperationException(

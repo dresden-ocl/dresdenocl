@@ -176,7 +176,6 @@ public class IterateExpImpl extends LoopExpImpl implements IterateExp {
    * @see tudresden.ocl20.pivot.pivotmodel.impl.NamedElementImpl#setName(java.lang.String)
    */
   @Override
-  @SuppressWarnings("unused")
   public void setName(String newName) {
     throw new UnsupportedOperationException(
         "The name of an IterateExp cannot be set, it defaults to 'iterate'"); //$NON-NLS-1$
