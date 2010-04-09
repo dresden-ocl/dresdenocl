@@ -32,7 +32,6 @@ import tudresden.ocl20.pivot.pivotmodel.EnumerationLiteral;
 import tudresden.ocl20.pivot.pivotmodel.Namespace;
 import tudresden.ocl20.pivot.pivotmodel.Parameter;
 import tudresden.ocl20.pivot.pivotmodel.ParameterDirectionKind;
-import tudresden.ocl20.pivot.pivotmodel.PrimitiveType;
 import tudresden.ocl20.pivot.pivotmodel.PrimitiveTypeKind;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 
@@ -46,8 +45,8 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
 public class JavaAdapterFactory {
 
 	/** The {@link Logger} for this class. */
-	private static final Logger LOGGER =
-			JavaMetaModelPlugin.getLogger(JavaAdapterFactory.class);
+	private static final Logger LOGGER = JavaMetaModelPlugin
+			.getLogger(JavaAdapterFactory.class);
 
 	/**
 	 * <p>
@@ -77,8 +76,8 @@ public class JavaAdapterFactory {
 	private Map<String, Parameter> adaptedParameters;
 
 	/**
-	 * A {@link Map} containing all {@link Class}es already adapted referenced by
-	 * their {@link Class} {@link Object}.
+	 * A {@link Map} containing all {@link Class}es already adapted referenced
+	 * by their {@link Class} {@link Object}.
 	 */
 	private Map<Class<?>, Type> adaptedTypes;
 
@@ -100,10 +99,11 @@ public class JavaAdapterFactory {
 	/**
 	 * <p>
 	 * A helper method which checks whether or not a given {@link Class}
-	 * represents a {@link Type} with multiple values (an array or a collection).
+	 * represents a {@link Type} with multiple values (an array or a
+	 * collection).
 	 * 
 	 * @param aType
-	 *          The {@link Class} which shall be checked.
+	 *            The {@link Class} which shall be checked.
 	 * @return True if the given {@link Class} has multiple values.
 	 */
 	protected static boolean isMultiple(Class<?> aType) {
@@ -138,7 +138,7 @@ public class JavaAdapterFactory {
 	 * represents a {@link Type} with ordered values.
 	 * 
 	 * @param aType
-	 *          The {@link Class} which shall be checked.
+	 *            The {@link Class} which shall be checked.
 	 * @return True if the given {@link Class} contains ordered values.
 	 */
 	protected static boolean isOrdered(Class<?> aType) {
@@ -168,7 +168,7 @@ public class JavaAdapterFactory {
 	 * represents a {@link Type} with unique values.
 	 * 
 	 * @param aType
-	 *          The {@link Class} which shall be checked.
+	 *            The {@link Class} which shall be checked.
 	 * @return True if the given {@link Class} contains unique values.
 	 */
 	protected static boolean isUnique(Class<?> aType) {
@@ -207,7 +207,8 @@ public class JavaAdapterFactory {
 	 * </p>
 	 * 
 	 * @param aLiteral
-	 *          The adapted {@link Object} of this {@link JavaEnumerationLiteral}.
+	 *            The adapted {@link Object} of this
+	 *            {@link JavaEnumerationLiteral}.
 	 * @return A new {@link JavaEnumerationLiteral} instance.
 	 */
 	public EnumerationLiteral createEnumerationLiteral(Enum<?> aLiteral) {
@@ -254,7 +255,7 @@ public class JavaAdapterFactory {
 	 * </p>
 	 * 
 	 * @param method
-	 *          The {@link Method} whose inpute parameters shall be created.
+	 *            The {@link Method} whose inpute parameters shall be created.
 	 * @return A new {@link List} of {@link JavaParameter} instances.
 	 */
 	public List<Parameter> createInputParameters(Method method) {
@@ -281,8 +282,9 @@ public class JavaAdapterFactory {
 		result = new ArrayList<Parameter>();
 
 		for (int index = 0; index < classes.length; index++) {
-			result.add(this.createParameter(classes[index], genericTypes[index],
-					ParameterDirectionKind.IN, method, index + 1));
+			result.add(this.createParameter(classes[index],
+					genericTypes[index], ParameterDirectionKind.IN, method,
+					index + 1));
 		}
 
 		/* Eventually log the exit of this method. */
@@ -296,13 +298,13 @@ public class JavaAdapterFactory {
 
 	/**
 	 * <p>
-	 * Creates a {@link Namespace} for its given qualified name as a {@link List}
-	 * of {@link Namespace} names.
+	 * Creates a {@link Namespace} for its given qualified name as a
+	 * {@link List} of {@link Namespace} names.
 	 * </p>
 	 * 
 	 * @param qualifiedPath
-	 *          The qualified name of the {@link Namespace} which shall be created
-	 *          as a {@link List} of {@link Namespace} names.
+	 *            The qualified name of the {@link Namespace} which shall be
+	 *            created as a {@link List} of {@link Namespace} names.
 	 * @return The created {@link Namespace}.
 	 */
 	public Namespace createNamespace(List<String> qualifiedPath) {
@@ -332,7 +334,7 @@ public class JavaAdapterFactory {
 	 * </p>
 	 * 
 	 * @param aClass
-	 *          The related {@link Class} of this {@link JavaClass}.
+	 *            The related {@link Class} of this {@link JavaClass}.
 	 * @return A new {@link JavaClass} instance.
 	 */
 	public Type createType(Class<?> aClass) {
@@ -361,13 +363,13 @@ public class JavaAdapterFactory {
 
 			/* Check if the given type is the void type. */
 			if (aClass.equals(void.class)) {
-				result = JavaVoidType.getInstance();
+				result = new JavaVoidType(this);
 			}
 
 			/* Else check if the class is a primitive type. */
 			else if (!JavaPrimitiveType.getPrimitiveTypeKind(aClass).equals(
 					PrimitiveTypeKind.UNKNOWN)) {
-				result = new JavaPrimitiveType(aClass);
+				result = new JavaPrimitiveType(aClass, this);
 			}
 
 			/* Else check if the class is an Enumeration. */
@@ -381,9 +383,9 @@ public class JavaAdapterFactory {
 			}
 
 			/*
-			 * Navigate to the root name space to register this packages transitive
-			 * with the root name space (eventually unknown sub name spaces are
-			 * adapted).
+			 * Navigate to the root name space to register this packages
+			 * transitively with the root name space (eventually unknown sub
+			 * name spaces are adapted).
 			 */
 			Namespace aNamespace;
 
@@ -412,7 +414,7 @@ public class JavaAdapterFactory {
 	 * </p>
 	 * 
 	 * @param aField
-	 *          The related {@link Method} of this {@link JavaOperation}.
+	 *            The related {@link Method} of this {@link JavaOperation}.
 	 * @return A new {@link JavaOperation} instance.
 	 */
 	public JavaOperation createOperation(Method aMethod) {
@@ -459,21 +461,23 @@ public class JavaAdapterFactory {
 	 * </p>
 	 * 
 	 * @param aClass
-	 *          The {@link Class} that shall be adapted.
+	 *            The {@link Class} that shall be adapted.
 	 * @param genericType
-	 *          The generic {@link java.lang.reflect.Type} of the
-	 *          {@link JavaParameter} or <code>null</code>.
+	 *            The generic {@link java.lang.reflect.Type} of the
+	 *            {@link JavaParameter} or <code>null</code>.
 	 * @param parameterKind
-	 *          The {@link ParameterDirectionKind} of the {@link JavaParameter}.
+	 *            The {@link ParameterDirectionKind} of the
+	 *            {@link JavaParameter}.
 	 * @param method
-	 *          The {@link Method} of the {@link JavaParameter}.
+	 *            The {@link Method} of the {@link JavaParameter}.
 	 * @param parameterNumber
-	 *          A number used to create a unique parameter name.
+	 *            A number used to create a unique parameter name.
 	 * @return A new {@link JavaParameter} instance.
 	 */
 	public Parameter createParameter(Class<?> aClass,
-			java.lang.reflect.Type genericType, ParameterDirectionKind parameterKind,
-			Method method, int parameterNumber) {
+			java.lang.reflect.Type genericType,
+			ParameterDirectionKind parameterKind, Method method,
+			int parameterNumber) {
 
 		/* Eventually log the entry of this method. */
 		if (LOGGER.isDebugEnabled()) {
@@ -508,9 +512,8 @@ public class JavaAdapterFactory {
 
 		/* Else create the parameters. */
 		else {
-			result =
-					new JavaParameter(aClass, genericType, parameterKind, method,
-							parameterNumber, this);
+			result = new JavaParameter(aClass, genericType, parameterKind,
+					method, parameterNumber, this);
 
 			/* Cache the result. */
 			this.adaptedParameters.put(key, result);
@@ -531,7 +534,7 @@ public class JavaAdapterFactory {
 	 * </p>
 	 * 
 	 * @param aField
-	 *          The related {@link Field} of this {@link JavaField}.
+	 *            The related {@link Field} of this {@link JavaField}.
 	 * @return A new {@link JavaField} instance.
 	 */
 	public JavaField createProperty(Field aField) {
@@ -577,7 +580,7 @@ public class JavaAdapterFactory {
 	 * </p>
 	 * 
 	 * @param aNamespace
-	 *          The {@link Namespace} whose children shall be returned.
+	 *            The {@link Namespace} whose children shall be returned.
 	 * @return All found adapted {@link Namespace} located in this
 	 *         {@link Namespace}.
 	 */
@@ -595,7 +598,8 @@ public class JavaAdapterFactory {
 			anAdaptedNamespace = this.adaptedNamespaces.get(aQualifiedName);
 
 			if (anAdaptedNamespace.getNestingNamespace() != null
-					&& anAdaptedNamespace.getNestingNamespace().equals(aNamespace)) {
+					&& anAdaptedNamespace.getNestingNamespace().equals(
+							aNamespace)) {
 				result.add(anAdaptedNamespace);
 			}
 			// no else.
@@ -607,12 +611,14 @@ public class JavaAdapterFactory {
 
 	/**
 	 * <p>
-	 * Returns all {@link Type}s that are contained in a given {@link Namespace} .
+	 * Returns all {@link Type}s that are contained in a given {@link Namespace}
+	 * .
 	 * </p>
 	 * 
 	 * @param aNamespace
-	 *          The {@link Namespace} whose children shall be returned.
-	 * @return All found adapted {@link Type}s located in this {@link Namespace} .
+	 *            The {@link Namespace} whose children shall be returned.
+	 * @return All found adapted {@link Type}s located in this {@link Namespace}
+	 *         .
 	 */
 	public List<Type> getOwnedTypes(Namespace aNamespace) {
 
@@ -627,22 +633,15 @@ public class JavaAdapterFactory {
 
 			anAdaptedType = this.adaptedTypes.get(aClass);
 
-			/*
-			 * Don't iterate through primitive types. They don't have a name space.
-			 */
-			if (!(anAdaptedType instanceof PrimitiveType)) {
+			/* Special handling of the root name space. */
+			if (aNamespace.getNestingNamespace() == null
+					&& anAdaptedType.getNamespace().getNestingNamespace() == null) {
+				result.add(anAdaptedType);
+			}
 
-				/* Special handling of the root name space. */
-				if (aNamespace.getNestingNamespace() == null
-						&& anAdaptedType.getNamespace().getNestingNamespace() == null) {
-					result.add(anAdaptedType);
-				}
-
-				/* Handling for other name spaces. */
-				else if (anAdaptedType.getNamespace().equals(aNamespace)) {
-					result.add(anAdaptedType);
-				}
-				// no else.
+			/* Handling for other name spaces. */
+			else if (anAdaptedType.getNamespace().equals(aNamespace)) {
+				result.add(anAdaptedType);
 			}
 			// no else.
 		}
@@ -657,11 +656,11 @@ public class JavaAdapterFactory {
 	 * {@link Type}.
 	 * 
 	 * @param aType
-	 *          The Java {@link Class} which shall be adapted.
+	 *            The Java {@link Class} which shall be adapted.
 	 * @param aGenericType
-	 *          The generic {@link java.lang.reflect.Type} to the given
-	 *          {@link Class} or null, if the {@link Class} does not represent a
-	 *          generic type.
+	 *            The generic {@link java.lang.reflect.Type} to the given
+	 *            {@link Class} or null, if the {@link Class} does not represent
+	 *            a generic type.
 	 * @return The adapted {@link Type}.
 	 */
 	protected Type adaptJavaType(Class<?> aType,
@@ -682,7 +681,8 @@ public class JavaAdapterFactory {
 				java.lang.reflect.Type arguments[];
 				java.lang.reflect.Type argument;
 
-				arguments = ((ParameterizedType) aGenericType).getActualTypeArguments();
+				arguments = ((ParameterizedType) aGenericType)
+						.getActualTypeArguments();
 
 				/* Use the first generic type of the collection as type. */
 				argument = arguments[0];
@@ -715,7 +715,7 @@ public class JavaAdapterFactory {
 	 * </p>
 	 * 
 	 * @param qualifiedPath
-	 *          The path which shall be converted.
+	 *            The path which shall be converted.
 	 * @return The converted qualifiedName
 	 */
 	private String toQualifiedName(List<String> qualifiedPath) {

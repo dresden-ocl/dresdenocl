@@ -1622,8 +1622,8 @@ public class EcoreModelInstanceObject extends AbstractModelInstanceObject
 
 			if (clazz.getSuperclass() != null
 					&& !alreadyCheckedClasses.contains(clazz.getSuperclass())) {
-				result = this.findSuperClassConformingToName(clazz.getSuperclass(),
-						canonicalName, alreadyCheckedClasses);
+				result = this.findSuperClassConformingToName(clazz
+						.getSuperclass(), canonicalName, alreadyCheckedClasses);
 			}
 			// no else.
 
@@ -1633,6 +1633,11 @@ public class EcoreModelInstanceObject extends AbstractModelInstanceObject
 					if (!alreadyCheckedClasses.contains(interfaze)) {
 						result = this.findSuperClassConformingToName(interfaze,
 								canonicalName, alreadyCheckedClasses);
+
+						if (result != null) {
+							break;
+						}
+						// no else.
 					}
 					// no else.
 				}

@@ -15,7 +15,6 @@ package tudresden.ocl20.pivot.metamodels.test.tests;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
 
 import java.util.HashMap;
 import java.util.List;
@@ -29,8 +28,8 @@ import org.junit.Test;
 import tudresden.ocl20.pivot.metamodels.test.MetaModelTestPlugin;
 import tudresden.ocl20.pivot.metamodels.test.MetaModelTestServices;
 import tudresden.ocl20.pivot.metamodels.test.msg.MetaModelTestSuiteMessages;
-import tudresden.ocl20.pivot.model.metamodel.IMetamodel;
 import tudresden.ocl20.pivot.model.IModel;
+import tudresden.ocl20.pivot.model.metamodel.IMetamodel;
 import tudresden.ocl20.pivot.pivotmodel.PrimitiveType;
 import tudresden.ocl20.pivot.pivotmodel.PrimitiveTypeKind;
 import tudresden.ocl20.pivot.pivotmodel.Property;
@@ -492,14 +491,14 @@ public class TestPrimitiveType {
 		String msg;
 
 		msg = "The adaptation of PrimitiveType.getNamespace() seems to be wrong.";
-		msg = " Primitive Type shall not belong to a Namespace.";
+		msg = " Primitive Type shall belong to a Namespace.";
 
 		for (String aTypesName : allPrimitiveTypes.keySet()) {
 
 			type = (PrimitiveType) allPrimitiveTypes.get(aTypesName);
 
-			/* The primitive type must not be contained in any name space. */
-			assertNull(msg, type.getNamespace());
+			/* The primitive type must be contained in a name space. */
+			assertNotNull(msg, type.getNamespace());
 		}
 	}
 
@@ -591,14 +590,14 @@ public class TestPrimitiveType {
 		String msg;
 
 		msg = "The adaptation of PrimitiveType.getOwner() seems to be wrong.";
-		msg = " Primitive Type shall be owned by any Element.";
+		msg = " Primitive Type shall be owned a Element.";
 
 		for (String aTypesName : allPrimitiveTypes.keySet()) {
 
 			type = (PrimitiveType) allPrimitiveTypes.get(aTypesName);
 
-			/* The primitive type must not be owned by any element. */
-			assertNull(msg, type.getOwner());
+			/* The primitive type must be owned by a element. */
+			assertNotNull(msg, type.getOwner());
 		}
 	}
 

@@ -3513,16 +3513,19 @@ public class TestInterpretation {
 
 		/* Compare with expected results. */
 		result_Boolean = (OclBoolean) results.get(0).getResult();
+		assertFalse(result_Boolean.oclIsInvalid().isTrue());
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertFalse(result_Boolean.isTrue());
 
 		/* Compare with expected results. */
 		result_Boolean = (OclBoolean) results.get(1).getResult();
+		assertFalse(result_Boolean.oclIsInvalid().isTrue());
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertTrue(result_Boolean.isTrue());
 
 		/* Compare with expected results. */
 		result_Boolean = (OclBoolean) results.get(2).getResult();
+		assertFalse(result_Boolean.oclIsInvalid().isTrue());
 		assertFalse(result_Boolean.oclIsUndefined().isTrue());
 		assertFalse(result_Boolean.isTrue());
 	}

@@ -45,6 +45,7 @@ import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement;
 import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceFactory;
 import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceObject;
 import tudresden.ocl20.pivot.pivotmodel.Operation;
+import tudresden.ocl20.pivot.pivotmodel.PrimitiveType;
 import tudresden.ocl20.pivot.pivotmodel.Property;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 
@@ -58,8 +59,8 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
 public class TestModelInstance {
 
 	/** The {@link Logger} for this class. */
-	private static final Logger LOGGER =
-			ModelInstanceTypeTestPlugin.getLogger(TestModelInstance.class);
+	private static final Logger LOGGER = ModelInstanceTypeTestPlugin
+			.getLogger(TestModelInstance.class);
 
 	/** A String used to display messages during the tests. */
 	private static String msg;
@@ -70,7 +71,9 @@ public class TestModelInstance {
 	/** The type {@link Class1} used in this test class. */
 	private static Type type_Class1;
 
-	/** The type {@link StaticPropertyAndOperationClass} used in this test class. */
+	/**
+	 * The type {@link StaticPropertyAndOperationClass} used in this test class.
+	 */
 	private static Type type_StaticPropertyAndOperationClass;
 
 	/**
@@ -83,25 +86,24 @@ public class TestModelInstance {
 	public static void setUp() {
 
 		/* Try to load the model instance. */
-		modelInstanceUnderTest =
-				ModelInstanceTypeTestServices.getInstance().getModelInstance();
+		modelInstanceUnderTest = ModelInstanceTypeTestServices.getInstance()
+				.getModelInstance();
 
 		if (modelInstanceUnderTest == null) {
-			msg =
-					ModelInstanceTypeTestSuiteMessages.TestModelInstance_LoadModelInstanceWrong;
+			msg = ModelInstanceTypeTestSuiteMessages.TestModelInstance_LoadModelInstanceWrong;
 
 			LOGGER.error(msg);
 		}
 		// no else.
 
 		/* Find the type in the Model. */
-		type_Class1 =
-				ModelInstanceTypeTestServices.getInstance().getModelType(
-						TestModelTypesNames.TYPE_NAME_CLASS1);
+		type_Class1 = ModelInstanceTypeTestServices.getInstance().getModelType(
+				TestModelTypesNames.TYPE_NAME_CLASS1);
 
 		/* Find the type in the Model. */
-		type_StaticPropertyAndOperationClass =
-				ModelInstanceTypeTestServices.getInstance().getModelType(
+		type_StaticPropertyAndOperationClass = ModelInstanceTypeTestServices
+				.getInstance()
+				.getModelType(
 						TestModelTypesNames.TYPE_NAME_STATIC_PROPERTY_AND_OPERATION_CLASS);
 	}
 
@@ -116,21 +118,18 @@ public class TestModelInstance {
 		IModelInstanceObject anAdaptedObject;
 		IModelInstanceElement anAddedObject;
 
-		msg =
-				ModelInstanceTypeTestSuiteMessages.TestModelInstance_AddModelInstanceElementIsWrong;
+		msg = ModelInstanceTypeTestSuiteMessages.TestModelInstance_AddModelInstanceElementIsWrong;
 
 		/* Get an adapted Object from the model. */
-		anAdaptedObject =
-				ModelInstanceTypeTestServices.getInstance()
-						.getModelInstanceObjectsOfType(type_Class1).iterator().next();
+		anAdaptedObject = ModelInstanceTypeTestServices.getInstance()
+				.getModelInstanceObjectsOfType(type_Class1).iterator().next();
 
 		if (anAdaptedObject != null) {
 
 			/* Try to re-adapt the given object. */
 			try {
-				anAddedObject =
-						modelInstanceUnderTest.addModelInstanceElement(anAdaptedObject
-								.getObject());
+				anAddedObject = modelInstanceUnderTest
+						.addModelInstanceElement(anAdaptedObject.getObject());
 
 				/* The added object should not be null. */
 				assertNotNull(msg, anAddedObject);
@@ -148,8 +147,7 @@ public class TestModelInstance {
 		}
 
 		else {
-			msg =
-					ModelInstanceTypeTestSuiteMessages.TestModelInstance_AddModelInstanceElementIsWrong2;
+			msg = ModelInstanceTypeTestSuiteMessages.TestModelInstance_AddModelInstanceElementIsWrong2;
 
 			fail(msg);
 		}
@@ -179,15 +177,14 @@ public class TestModelInstance {
 	@org.junit.Test
 	public void testGetAllImplementedTypes() {
 
-		msg =
-				ModelInstanceTypeTestSuiteMessages.TestModelInstance_GetAllImplementedTypesIsWrong;
+		msg = ModelInstanceTypeTestSuiteMessages.TestModelInstance_GetAllImplementedTypesIsWrong;
 
 		/* The method should return a result. */
 		assertNotNull(msg, modelInstanceUnderTest.getAllImplementedTypes());
 
 		/* The result should contain the type Class1. */
-		assertTrue(msg, modelInstanceUnderTest.getAllImplementedTypes().contains(
-				type_Class1));
+		assertTrue(msg, modelInstanceUnderTest.getAllImplementedTypes()
+				.contains(type_Class1));
 	}
 
 	/**
@@ -198,8 +195,7 @@ public class TestModelInstance {
 	@org.junit.Test
 	public void testGetAllInstances() {
 
-		msg =
-				ModelInstanceTypeTestSuiteMessages.TestModelInstance_GetAllInstancesIsWrong;
+		msg = ModelInstanceTypeTestSuiteMessages.TestModelInstance_GetAllInstancesIsWrong;
 
 		/* The method should return a result. */
 		assertNotNull(msg, modelInstanceUnderTest.getAllInstances(type_Class1));
@@ -225,7 +221,8 @@ public class TestModelInstance {
 				modelInstanceUnderTest.getDisplayName());
 
 		/* The model instances should return the same model. */
-		assertTrue("The name of an IModelInstance must not have a length of 0.",
+		assertTrue(
+				"The name of an IModelInstance must not have a length of 0.",
 				modelInstanceUnderTest.getDisplayName().length() > 0);
 	}
 
@@ -238,14 +235,15 @@ public class TestModelInstance {
 	public void testGetDisplayName02() {
 
 		IModelInstance modelInstance;
-		modelInstance =
-				ModelInstanceTypeTestServices.getInstance().getEmptyModelInstance();
+		modelInstance = ModelInstanceTypeTestServices.getInstance()
+				.getEmptyModelInstance();
 
 		assertNotNull("The name of an IModelInstance must not be null.",
 				modelInstance.getDisplayName());
 
 		/* The model instances should return the same model. */
-		assertTrue("The name of an IModelInstance must not have a length of 0.",
+		assertTrue(
+				"The name of an IModelInstance must not have a length of 0.",
 				modelInstance.getDisplayName().length() > 0);
 	}
 
@@ -259,8 +257,7 @@ public class TestModelInstance {
 
 		List<IModelInstanceObject> allObjects;
 
-		msg =
-				ModelInstanceTypeTestSuiteMessages.TestModelInstance_GetAllModelInstanceObjectsIsWrong;
+		msg = ModelInstanceTypeTestSuiteMessages.TestModelInstance_GetAllModelInstanceObjectsIsWrong;
 
 		allObjects = modelInstanceUnderTest.getAllModelInstanceObjects();
 
@@ -308,8 +305,7 @@ public class TestModelInstance {
 
 		IModelInstanceFactory factory;
 
-		msg =
-				ModelInstanceTypeTestSuiteMessages.TestModelInstance_GetModelInstanceFactoryIsWrong;
+		msg = ModelInstanceTypeTestSuiteMessages.TestModelInstance_GetModelInstanceFactoryIsWrong;
 
 		/* Get the model instance factory. */
 		factory = modelInstanceUnderTest.getModelInstanceFactory();
@@ -329,8 +325,7 @@ public class TestModelInstance {
 		Property property;
 		IModelInstanceElement propertyValue;
 
-		msg =
-				ModelInstanceTypeTestSuiteMessages.TestModelInstance_GetStaticPropertyIsWrong;
+		msg = ModelInstanceTypeTestSuiteMessages.TestModelInstance_GetStaticPropertyIsWrong;
 
 		property = null;
 
@@ -349,13 +344,23 @@ public class TestModelInstance {
 
 			/* Try to get the property. */
 			try {
-				propertyValue = modelInstanceUnderTest.getStaticProperty(property);
+				propertyValue = modelInstanceUnderTest
+						.getStaticProperty(property);
 
 				/* The value should not be null. */
 				assertNotNull(msg, propertyValue);
 
 				/* The value should be of the right type. */
-				assertEquals(msg, property.getType(), propertyValue.getType());
+				if (property.getType() instanceof PrimitiveType) {
+					assertEquals(msg, ((PrimitiveType) property.getType())
+							.getKind(), ((PrimitiveType) propertyValue
+							.getType()).getKind());
+				}
+
+				else {
+					assertEquals(msg, property.getType(), propertyValue
+							.getType());
+				}
 			}
 
 			catch (PropertyNotFoundException e) {
@@ -383,8 +388,8 @@ public class TestModelInstance {
 
 	/**
 	 * <p>
-	 * Tests the method {@link IModelInstance#getStaticProperty(Property)} with an
-	 * illegal argument.
+	 * Tests the method {@link IModelInstance#getStaticProperty(Property)} with
+	 * an illegal argument.
 	 * </p>
 	 * 
 	 * @throws PropertyNotFoundException
@@ -413,8 +418,7 @@ public class TestModelInstance {
 		List<IModelInstanceElement> arguments;
 		IModelInstanceElement operationResult;
 
-		msg =
-				ModelInstanceTypeTestSuiteMessages.TestModelInstance_InvokeStaticOperationIsWrong;
+		msg = ModelInstanceTypeTestSuiteMessages.TestModelInstance_InvokeStaticOperationIsWrong;
 
 		operation = null;
 
@@ -436,14 +440,23 @@ public class TestModelInstance {
 
 			/* Try to invoke the operation. */
 			try {
-				operationResult =
-						modelInstanceUnderTest.invokeStaticOperation(operation, arguments);
+				operationResult = modelInstanceUnderTest.invokeStaticOperation(
+						operation, arguments);
 
 				/* The result should not be null. */
 				assertNotNull(msg, operationResult);
 
 				/* The result should be of the right type. */
-				assertEquals(msg, operation.getType(), operationResult.getType());
+				if (operation.getType() instanceof PrimitiveType) {
+					assertEquals(msg, ((PrimitiveType) operation.getType())
+							.getKind(), ((PrimitiveType) operationResult
+							.getType()).getKind());
+				}
+
+				else {
+					assertEquals(msg, operation.getType(), operationResult
+							.getType());
+				}
 			}
 
 			catch (OperationNotFoundException e) {
@@ -472,8 +485,8 @@ public class TestModelInstance {
 	/**
 	 * <p>
 	 * Tests the method
-	 * {@link IModelInstance#invokeStaticOperation(Operation, List)} with illegal
-	 * arguments.
+	 * {@link IModelInstance#invokeStaticOperation(Operation, List)} with
+	 * illegal arguments.
 	 * </p>
 	 * 
 	 * @throws OperationNotFoundException
@@ -486,8 +499,7 @@ public class TestModelInstance {
 		Operation operation;
 		operation = null;
 
-		msg =
-				ModelInstanceTypeTestSuiteMessages.TestModelInstance_InvokeStaticOperationIsWrong;
+		msg = ModelInstanceTypeTestSuiteMessages.TestModelInstance_InvokeStaticOperationIsWrong;
 
 		/* Load the Operation required for testing. */
 		for (Operation anOperation : type_StaticPropertyAndOperationClass
@@ -515,8 +527,8 @@ public class TestModelInstance {
 	/**
 	 * <p>
 	 * Tests the method
-	 * {@link IModelInstance#invokeStaticOperation(Operation, List)} with illegal
-	 * arguments.
+	 * {@link IModelInstance#invokeStaticOperation(Operation, List)} with
+	 * illegal arguments.
 	 * </p>
 	 * 
 	 * @throws OperationNotFoundException
@@ -541,8 +553,7 @@ public class TestModelInstance {
 
 		IModel model;
 
-		msg =
-				ModelInstanceTypeTestSuiteMessages.TestModelInstance_IsInstanceOfIsWrong;
+		msg = ModelInstanceTypeTestSuiteMessages.TestModelInstance_IsInstanceOfIsWrong;
 
 		/* Get the model from the test environment. */
 		model = ModelInstanceTypeTestServices.getInstance().getModelUnderTest();

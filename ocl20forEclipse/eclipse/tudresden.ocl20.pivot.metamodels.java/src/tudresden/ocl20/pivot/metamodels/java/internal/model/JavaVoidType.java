@@ -13,9 +13,13 @@
  */
 package tudresden.ocl20.pivot.metamodels.java.internal.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.apache.log4j.Logger;
 
 import tudresden.ocl20.pivot.metamodels.java.JavaMetaModelPlugin;
+import tudresden.ocl20.pivot.model.ModelConstants;
 import tudresden.ocl20.pivot.pivotmodel.Namespace;
 import tudresden.ocl20.pivot.pivotmodel.PrimitiveType;
 import tudresden.ocl20.pivot.pivotmodel.PrimitiveTypeKind;
@@ -33,28 +37,34 @@ public class JavaVoidType extends AbstractPrimitiveType implements
 		PrimitiveType {
 
 	/** The {@link Logger} for this class. */
-	private static final Logger LOGGER =
-			JavaMetaModelPlugin.getLogger(JavaVoidType.class);
+	private static final Logger LOGGER = JavaMetaModelPlugin
+			.getLogger(JavaVoidType.class);
 
-	/** The singleton instance of the {@link JavaVoidType}. */
-	private static JavaVoidType myInstance;
+	/** The {@link JavaAdapterFactory} the {@link JavaVoidType} belongs to. */
+	private JavaAdapterFactory myFactory;
 
 	/**
 	 * <p>
 	 * Creates a new {@link JavaVoidType} instance.
 	 * </p>
+	 * 
+	 * @param aFactory
+	 *            The {@link JavaAdapterFactory} the {@link JavaVoidType}
+	 *            belongs to.
 	 */
-	private JavaVoidType() {
+	public JavaVoidType(JavaAdapterFactory aFactory) {
 
 		/* Eventually log the entry of this method. */
 		if (LOGGER.isDebugEnabled()) {
 			String msg;
 
-			msg = "JavaVoidType() - enter";
+			msg = "JavaVoidType(aFactory = " + aFactory + ") - enter";
 
 			LOGGER.debug(msg); //$NON-NLS-1$
 		}
 		// no else.
+
+		this.myFactory = aFactory;
 
 		/* Eventually log the exit from this method. */
 		if (LOGGER.isDebugEnabled()) {
@@ -63,27 +73,11 @@ public class JavaVoidType extends AbstractPrimitiveType implements
 		// no else.
 	}
 
-	/**
-	 * <p>
-	 * Returns the only instance of the {@link JavaVoidType}.
-	 * </p>
-	 * 
-	 * @return The only instance of the {@link JavaVoidType}.
-	 */
-	public static JavaVoidType getInstance() {
-
-		/* Eventually initialize the instance. */
-		if (myInstance == null) {
-			myInstance = new JavaVoidType();
-		}
-		// no else.
-
-		return myInstance;
-	}
-
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractPrimitiveType#getKind()
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.pivotmodel.base.AbstractPrimitiveType#getKind()
 	 */
 	@Override
 	public PrimitiveTypeKind getKind() {
@@ -93,22 +87,44 @@ public class JavaVoidType extends AbstractPrimitiveType implements
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractPrimitiveType#getName()
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.pivotmodel.base.AbstractPrimitiveType#getName()
 	 */
 	@Override
 	public String getName() {
 
-		return this.getKind().getName();
+		return void.class.getSimpleName();
 	}
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.pivotmodel.base.AbstractPrimitiveType#getNamespace ()
+	 * tudresden.ocl20.pivot.pivotmodel.base.AbstractPrimitiveType#getNamespace
+	 * ()
 	 */
 	@Override
 	public Namespace getNamespace() {
 
-		return null;
+		Namespace result;
+
+		String[] namespacePath;
+		List<String> namespaceList;
+
+		namespaceList = new ArrayList<String>();
+		namespaceList.add(ModelConstants.ROOT_PACKAGE_NAME);
+
+		/* Add all packages of the canonical name to the path. */
+		namespacePath = void.class.getCanonicalName().split("\\.");
+
+		for (int index = 0; index < namespacePath.length - 1; index++) {
+			namespaceList.add(namespacePath[index]);
+		}
+
+		/* Create the name space. */
+		result = this.myFactory.createNamespace(namespaceList);
+
+		return result;
 	}
 }

@@ -245,6 +245,7 @@ public class EcorePrimitiveType extends AbstractPrimitiveType implements
 	@Override
 	public Namespace getNamespace() {
 
-		return null;
+		return EcoreAdapterFactory.INSTANCE.createNamespace(this.eDataType
+				.getEPackage());
 	}
 }

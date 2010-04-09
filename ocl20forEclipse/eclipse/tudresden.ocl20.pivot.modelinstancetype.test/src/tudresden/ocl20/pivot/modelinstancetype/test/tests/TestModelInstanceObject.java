@@ -391,6 +391,7 @@ public class TestModelInstanceObject {
 	public void testAsType03() {
 
 		msg = ModelInstanceTypeTestSuiteMessages.TestModelInstanceObject_AsTypeIsWrong;
+		NLS.bind(msg, type_Interface1, type_Interface1);
 
 		/* An IModelInstanceObject should cast-able to all implemented types. */
 		for (IModelInstanceElement anElement : instances_Interface1) {
@@ -859,8 +860,16 @@ public class TestModelInstanceObject {
 				assertNotNull(msg, operationResult.getType());
 
 				/* The result should have the same type as the operation. */
-				assertEquals(msg, operation.getType(), operationResult
-						.getType());
+				if (operation.getType() instanceof PrimitiveType) {
+					assertEquals(msg, ((PrimitiveType) operation.getType())
+							.getKind(), ((PrimitiveType) operationResult
+							.getType()).getKind());
+				}
+
+				else {
+					assertEquals(msg, operation.getType(), operationResult
+							.getType());
+				}
 
 				/* The result should be an IModelInstanceElement. */
 				assertTrue(msg,
@@ -2215,8 +2224,16 @@ public class TestModelInstanceObject {
 					assertNotNull(msg, aPropertyValue.getType());
 
 					/* The result should have the same type as the property. */
-					assertEquals(msg, aProperty.getType(), aPropertyValue
-							.getType());
+					if (aProperty.getType() instanceof PrimitiveType) {
+						assertEquals(msg, ((PrimitiveType) aProperty.getType())
+								.getKind(), ((PrimitiveType) aPropertyValue
+								.getType()).getKind());
+					}
+
+					else {
+						assertEquals(msg, aProperty.getType(), aPropertyValue
+								.getType());
+					}
 
 					/* The result should be and IModelInstanceElement. */
 					assertTrue(msg,

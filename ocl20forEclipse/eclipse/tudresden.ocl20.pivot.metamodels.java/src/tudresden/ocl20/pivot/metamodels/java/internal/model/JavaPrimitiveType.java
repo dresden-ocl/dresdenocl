@@ -13,9 +13,13 @@
  */
 package tudresden.ocl20.pivot.metamodels.java.internal.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.apache.log4j.Logger;
 
 import tudresden.ocl20.pivot.metamodels.java.JavaMetaModelPlugin;
+import tudresden.ocl20.pivot.model.ModelConstants;
 import tudresden.ocl20.pivot.pivotmodel.Namespace;
 import tudresden.ocl20.pivot.pivotmodel.PrimitiveType;
 import tudresden.ocl20.pivot.pivotmodel.PrimitiveTypeKind;
@@ -32,11 +36,14 @@ public class JavaPrimitiveType extends AbstractPrimitiveType implements
 		PrimitiveType {
 
 	/** The {@link Logger} for this class. */
-	private static final Logger LOGGER =
-			JavaMetaModelPlugin.getLogger(JavaPrimitiveType.class);
+	private static final Logger LOGGER = JavaMetaModelPlugin
+			.getLogger(JavaPrimitiveType.class);
 
 	/** The adapted {@link Class} of this {@link PrimitiveType}. */
 	private Class<?> myClass;
+
+	/** The {@link JavaAdapterFactory} the {@link JavaPrimitiveType} belongs to. */
+	private JavaAdapterFactory myFactory;
 
 	/**
 	 * <p>
@@ -44,9 +51,13 @@ public class JavaPrimitiveType extends AbstractPrimitiveType implements
 	 * </p>
 	 * 
 	 * @param dslPrimitiveType
-	 *          The {@link Class} that is adopted by this class.
+	 *            The {@link Class} that is adopted by this class.
+	 * @param aFactory
+	 *            The {@link JavaAdapterFactory} the {@link JavaPrimitiveType}
+	 *            belongs to.
 	 */
-	public JavaPrimitiveType(Class<?> dslPrimitiveType) {
+	public JavaPrimitiveType(Class<?> dslPrimitiveType,
+			JavaAdapterFactory aFactory) {
 
 		/* Eventually log the entry of this method. */
 		if (LOGGER.isDebugEnabled()) {
@@ -54,6 +65,7 @@ public class JavaPrimitiveType extends AbstractPrimitiveType implements
 
 			msg = "JavaPrimitiveType(";
 			msg += "dslPrimitiveType = " + dslPrimitiveType;
+			msg += "aFactory = " + aFactory;
 			msg += ") - enter";
 
 			LOGGER.debug(msg); //$NON-NLS-1$
@@ -62,6 +74,7 @@ public class JavaPrimitiveType extends AbstractPrimitiveType implements
 
 		/* Initialize. */
 		this.myClass = dslPrimitiveType;
+		this.myFactory = aFactory;
 
 		/* Eventually log the exit from this method. */
 		if (LOGGER.isDebugEnabled()) {
@@ -72,14 +85,14 @@ public class JavaPrimitiveType extends AbstractPrimitiveType implements
 
 	/**
 	 * <p>
-	 * Returns the {@link PrimitiveTypeKind} of a given Java {@link Class}. If the
-	 * {@link PrimitiveTypeKind#UNKNOWN} is returned, the given {@link Class}
-	 * cannot be adapted as a {@link PrimitiveType}.
+	 * Returns the {@link PrimitiveTypeKind} of a given Java {@link Class}. If
+	 * the {@link PrimitiveTypeKind#UNKNOWN} is returned, the given
+	 * {@link Class} cannot be adapted as a {@link PrimitiveType}.
 	 * </p>
 	 * 
 	 * @param aClass
-	 *          The {@link Class} whose {@link PrimitiveTypeKind} shall be
-	 *          returned.
+	 *            The {@link Class} whose {@link PrimitiveTypeKind} shall be
+	 *            returned.
 	 * @return The {@link PrimitiveTypeKind} of the given {@link Class} or
 	 *         {@link PrimitiveTypeKind#UNKNOWN}.
 	 */
@@ -150,7 +163,9 @@ public class JavaPrimitiveType extends AbstractPrimitiveType implements
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractPrimitiveType#getKind()
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.pivotmodel.base.AbstractPrimitiveType#getKind()
 	 */
 	@Override
 	public PrimitiveTypeKind getKind() {
@@ -164,22 +179,44 @@ public class JavaPrimitiveType extends AbstractPrimitiveType implements
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractPrimitiveType#getName()
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.pivotmodel.base.AbstractPrimitiveType#getName()
 	 */
 	@Override
 	public String getName() {
 
-		return this.getKind().getName();
+		return this.myClass.getSimpleName();
 	}
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.pivotmodel.base.AbstractPrimitiveType#getNamespace ()
+	 * tudresden.ocl20.pivot.pivotmodel.base.AbstractPrimitiveType#getNamespace
+	 * ()
 	 */
 	@Override
 	public Namespace getNamespace() {
 
-		return null;
+		Namespace result;
+
+		String[] namespacePath;
+		List<String> namespaceList;
+
+		namespaceList = new ArrayList<String>();
+		namespaceList.add(ModelConstants.ROOT_PACKAGE_NAME);
+
+		/* Add all packages of the canonical name to the path. */
+		namespacePath = this.myClass.getCanonicalName().split("\\.");
+
+		for (int index = 0; index < namespacePath.length - 1; index++) {
+			namespaceList.add(namespacePath[index]);
+		}
+
+		/* Create the name space. */
+		result = this.myFactory.createNamespace(namespaceList);
+
+		return result;
 	}
 }

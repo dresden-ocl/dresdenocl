@@ -46,50 +46,47 @@ public class UML2PrimitiveType extends AbstractPrimitiveType implements
 	 * 
 	 * @generated NOT
 	 */
-	private static final Logger LOGGER =
-			UML2MetamodelPlugin.getLogger(UML2PrimitiveType.class);
+	private static final Logger LOGGER = UML2MetamodelPlugin
+			.getLogger(UML2PrimitiveType.class);
 
 	/**
 	 * An array of all Names of {@link Type}s representing the
 	 * {@link PrimitiveTypeKind#BOOLEAN}.
 	 */
-	private static String booleanKindNames[] =
-			new String[] { "Boolean", boolean.class.getCanonicalName(),
-					Boolean.class.getCanonicalName(), "EBoolean", "EBooleanObject" };
+	private static String booleanKindNames[] = new String[] { "Boolean",
+			boolean.class.getCanonicalName(), Boolean.class.getCanonicalName(),
+			"EBoolean", "EBooleanObject" };
 
 	/**
 	 * An array of all Names of {@link Type}s representing the
 	 * {@link PrimitiveTypeKind#INTEGER}.
 	 */
-	private static String integerKindNames[] =
-			new String[] { "Integer", "UnlimitedNatural",
-					byte.class.getCanonicalName(), Byte.class.getCanonicalName(),
-					short.class.getCanonicalName(), Short.class.getCanonicalName(),
-					int.class.getCanonicalName(), Integer.class.getCanonicalName(),
-					long.class.getCanonicalName(), Long.class.getCanonicalName(),
-					BigInteger.class.getCanonicalName(),
-					BigDecimal.class.getCanonicalName(), "EByte", "EByteObject",
-					"EShort", "EShortObject", "EInt", "EIntegerObject", "ELong",
-					"ELongObject", "EBigInteger", "EBigDecimal" };
+	private static String integerKindNames[] = new String[] { "Integer",
+			"UnlimitedNatural", byte.class.getCanonicalName(),
+			Byte.class.getCanonicalName(), short.class.getCanonicalName(),
+			Short.class.getCanonicalName(), int.class.getCanonicalName(),
+			Integer.class.getCanonicalName(), long.class.getCanonicalName(),
+			Long.class.getCanonicalName(), BigInteger.class.getCanonicalName(),
+			BigDecimal.class.getCanonicalName(), "EByte", "EByteObject",
+			"EShort", "EShortObject", "EInt", "EIntegerObject", "ELong",
+			"ELongObject", "EBigInteger", "EBigDecimal" };
 
 	/**
 	 * An array of all Names of {@link Type}s representing the
 	 * {@link PrimitiveTypeKind#REAL}.
 	 */
-	private static String realKindNames[] =
-			new String[] { float.class.getCanonicalName(),
-					Float.class.getCanonicalName(), double.class.getCanonicalName(),
-					Double.class.getCanonicalName(), "EFloat", "EFloatObject", "EDouble",
-					"EDoubleObject" };
+	private static String realKindNames[] = new String[] {
+			float.class.getCanonicalName(), Float.class.getCanonicalName(),
+			double.class.getCanonicalName(), Double.class.getCanonicalName(),
+			"EFloat", "EFloatObject", "EDouble", "EDoubleObject" };
 
 	/**
 	 * An array of all Names of {@link Type}s representing the
 	 * {@link PrimitiveTypeKind#STRING}.
 	 */
-	private static String stringKindNames[] =
-			new String[] { "String", char.class.getCanonicalName(),
-					Character.class.getCanonicalName(), String.class.getCanonicalName(),
-					"EChar", "ECharacter", "EString" };
+	private static String stringKindNames[] = new String[] { "String",
+			char.class.getCanonicalName(), Character.class.getCanonicalName(),
+			String.class.getCanonicalName(), "EChar", "ECharacter", "EString" };
 
 	/**
 	 * <p>
@@ -106,8 +103,8 @@ public class UML2PrimitiveType extends AbstractPrimitiveType implements
 	 * </p>
 	 * 
 	 * @param dslPrimitiveType
-	 *          the {@link org.eclipse.uml2.uml.PrimitiveType} that is adopted by
-	 *          this class
+	 *            the {@link org.eclipse.uml2.uml.PrimitiveType} that is adopted
+	 *            by this class
 	 * 
 	 * @generated
 	 */
@@ -135,7 +132,7 @@ public class UML2PrimitiveType extends AbstractPrimitiveType implements
 	 * </p>
 	 * 
 	 * @param aUmlType
-	 *          The {@link org.eclipse.uml2.uml.Type} that shall be checked.
+	 *            The {@link org.eclipse.uml2.uml.Type} that shall be checked.
 	 * 
 	 * @return The {@link PrimitiveTypeKind} of the given
 	 *         {@link org.eclipse.uml2.uml.Type} or
@@ -226,9 +223,8 @@ public class UML2PrimitiveType extends AbstractPrimitiveType implements
 		if (result == PrimitiveTypeKind.UNKNOWN && LOGGER.isInfoEnabled()) {
 			String msg;
 
-			msg =
-					NLS.bind(UML2ModelMessages.UML2_UnknownPrimitiveTypeKind,
-							this.dslPrimitiveType.getName());
+			msg = NLS.bind(UML2ModelMessages.UML2_UnknownPrimitiveTypeKind,
+					this.dslPrimitiveType.getName());
 
 			LOGGER.warn(msg);
 		}
@@ -247,12 +243,12 @@ public class UML2PrimitiveType extends AbstractPrimitiveType implements
 
 		String result;
 		result = this.dslPrimitiveType.getName();
-		
+
 		if (result == null) {
 			result = this.getKind().getName();
 		}
 		// no else.
-		
+
 		return result;
 	}
 
@@ -264,6 +260,7 @@ public class UML2PrimitiveType extends AbstractPrimitiveType implements
 	@Override
 	public Namespace getNamespace() {
 
-		return null;
+		return UML2AdapterFactory.INSTANCE
+				.createNamespace(this.dslPrimitiveType.getPackage());
 	}
 }

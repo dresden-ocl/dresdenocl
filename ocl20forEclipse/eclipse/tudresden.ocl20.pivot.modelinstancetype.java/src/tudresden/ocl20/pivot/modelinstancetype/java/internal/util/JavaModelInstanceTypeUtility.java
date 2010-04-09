@@ -28,14 +28,14 @@ public class JavaModelInstanceTypeUtility {
 
 	/**
 	 * <p>
-	 * This method checks, if a given {@link java.lang.reflect.Type} conforms to a
-	 * given {@link Type}.
+	 * This method checks, if a given {@link java.lang.reflect.Type} conforms to
+	 * a given {@link Type}.
 	 * </p>
 	 * 
 	 * @param reflectionType
-	 *          The {@link java.lang.reflect.Type}.
+	 *            The {@link java.lang.reflect.Type}.
 	 * @param type
-	 *          The {@link Type}.
+	 *            The {@link Type}.
 	 * @return <code>true</code>, if the types conform. Else <code>false</code>.
 	 */
 	public static boolean conformsTypeToType(
@@ -53,9 +53,19 @@ public class JavaModelInstanceTypeUtility {
 			}
 
 			else {
-				result =
-						toQualifiedNameList(clazz.getCanonicalName()).equals(
-								type.getQualifiedNameList());
+
+				if (type instanceof PrimitiveType) {
+					result = toQualifiedNameList(clazz.getCanonicalName())
+							.equals(
+									Arrays
+											.asList(new String[] { ((PrimitiveType) type)
+													.getKind().getName() }));
+				}
+
+				else {
+					result = toQualifiedNameList(clazz.getCanonicalName())
+							.equals(type.getQualifiedNameList());
+				}
 			}
 		}
 
@@ -64,8 +74,8 @@ public class JavaModelInstanceTypeUtility {
 			GenericArrayType genericArrayType;
 			genericArrayType = (GenericArrayType) reflectionType;
 
-			result =
-					conformsTypeToType(genericArrayType.getGenericComponentType(), type);
+			result = conformsTypeToType(genericArrayType
+					.getGenericComponentType(), type);
 		}
 
 		else if (reflectionType instanceof ParameterizedType) {
@@ -75,14 +85,13 @@ public class JavaModelInstanceTypeUtility {
 
 			/* Check if exactly one generic parameter is set. */
 			if (parameterizedType.getActualTypeArguments().length == 1) {
-				result =
-						conformsTypeToType(parameterizedType.getActualTypeArguments()[0],
-								type);
+				result = conformsTypeToType(parameterizedType
+						.getActualTypeArguments()[0], type);
 			}
 
 			/*
-			 * Else a ParameterizedType can contain more than one classes. Thus, the
-			 * result is not unambiguous.
+			 * Else a ParameterizedType can contain more than one classes. Thus,
+			 * the result is not unambiguous.
 			 */
 			else {
 				result = false;
@@ -92,8 +101,8 @@ public class JavaModelInstanceTypeUtility {
 		else if (reflectionType instanceof TypeVariable<?>) {
 
 			/*
-			 * A TypeVariable can contain more than one classes. Thus, the result is
-			 * not unambiguous.
+			 * A TypeVariable can contain more than one classes. Thus, the
+			 * result is not unambiguous.
 			 */
 			result = false;
 		}
@@ -101,8 +110,8 @@ public class JavaModelInstanceTypeUtility {
 		else if (reflectionType instanceof WildcardType) {
 
 			/*
-			 * A WildcardType can contain more than one classes. Thus, the result is
-			 * not unambiguous.
+			 * A WildcardType can contain more than one classes. Thus, the
+			 * result is not unambiguous.
 			 */
 			result = false;
 		}
@@ -122,7 +131,7 @@ public class JavaModelInstanceTypeUtility {
 	 * </p>
 	 * 
 	 * @param qualifiedNameList
-	 *          The given qualified name {@link List}.
+	 *            The given qualified name {@link List}.
 	 * @return The converte canonical name.
 	 */
 	public static String toCanonicalName(List<String> qualifiedNameList) {
@@ -154,12 +163,13 @@ public class JavaModelInstanceTypeUtility {
 
 	/**
 	 * <p>
-	 * Converts a given Java canonical name into a {@link List} of {@link String}s
-	 * representing a qualified name of an {@link IModel}'s {@link Type}.
+	 * Converts a given Java canonical name into a {@link List} of
+	 * {@link String}s representing a qualified name of an {@link IModel}'s
+	 * {@link Type}.
 	 * </p>
 	 * 
 	 * @param canonicalName
-	 *          The canonical name that shall be converted.
+	 *            The canonical name that shall be converted.
 	 * @return The qualified name as a {@link List} of {@link String}s.
 	 */
 	public static List<String> toQualifiedNameList(String canonicalName) {
@@ -170,7 +180,8 @@ public class JavaModelInstanceTypeUtility {
 		result = toPrimitiveQualifiedName(canonicalName);
 
 		if (result == null) {
-			result = new ArrayList<String>(Arrays.asList(canonicalName.split("[.]")));
+			result = new ArrayList<String>(Arrays.asList(canonicalName
+					.split("[.]")));
 			result.add(0, ModelConstants.ROOT_PACKAGE_NAME);
 		}
 		// no else.
@@ -181,14 +192,16 @@ public class JavaModelInstanceTypeUtility {
 	/**
 	 * <p>
 	 * A helper method that converts a given canonical name of a java
-	 * {@link Class} into the qualified name (as a {@link List} of {@link String}
-	 * s) if the given {@link Class} can be mapped to a {@link PrimitiveType} of
-	 * any {@link PrimitiveTypeKind}. Else <code>null</code> is returned.
+	 * {@link Class} into the qualified name (as a {@link List} of
+	 * {@link String} s) if the given {@link Class} can be mapped to a
+	 * {@link PrimitiveType} of any {@link PrimitiveTypeKind}. Else
+	 * <code>null</code> is returned.
 	 * </p>
 	 * 
 	 * @param canonicalName
-	 *          The canonical name that shall be converted.
-	 * @return The qualified name of a {@link PrimitiveType} or <code>null</code>.
+	 *            The canonical name that shall be converted.
+	 * @return The qualified name of a {@link PrimitiveType} or
+	 *         <code>null</code>.
 	 */
 	private static List<String> toPrimitiveQualifiedName(String canonicalName) {
 
