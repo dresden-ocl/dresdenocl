@@ -158,13 +158,35 @@ public aspect OperationCallExpASMComputation {
 					/* This is case E of the OCL-Specification [page 80 and 81, Nonterminal OperationCallExpCS] */
 					//if (hasAtPre()) sourceExpression = sourceExpression.withAtPre();
 					OperationCallExp returnExpression = null;
-					try {
-						returnExpression = factory.createOperationCallExp(sourceExpression, operationName, arguments);
+					
+					
+					// FIXME Michael: ask the SL library for other operations on OclType
+					// static operation call
+					if (sourceExpression.getType() instanceof TypeType
+							&& !operationName.equals("allInstances")) {
+						Type sourceType =
+								((TypeType) sourceExpression.getType()).getRepresentedType();
+						java.util.List pathNameOperation = new ArrayList();
+						pathNameOperation.add(sourceType.getName());
+						pathNameOperation.add(operationName);
+	
+						try {
+							returnExpression =
+									factory.createOperationCallExp(pathNameOperation, arguments);
+						} catch (Exception ex) {
+							throw new BuildingASMException(ex.getMessage(), token);
+						}
 					}
-					catch(Exception ex) {
-						String message = ex.getMessage();
-						message = message + " The operation is invalid.";
-						throw new BuildingASMException(message, token);
+					else {
+
+						try {
+							returnExpression = factory.createOperationCallExp(sourceExpression, operationName, arguments);
+						}
+						catch(Exception ex) {
+							String message = ex.getMessage();
+							message = message + " The operation is invalid.";
+							throw new BuildingASMException(message, token);
+						}
 					}
 					
 					if (returnExpression == null) throw new BuildingASMException("The operation is invalid.", token);

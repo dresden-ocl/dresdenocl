@@ -329,7 +329,7 @@ public aspect IteratorExpASTComputation {
 			for (int i = 0; i < numberArgument; i++) {
 				OclExpression argument = getArgument(i).computeASM(env);
 				arguments[i] = argument;
-				argumentList.add(argument);
+				argumentList.add(argument.getType());
 			}
 			
 			// Take the element type.

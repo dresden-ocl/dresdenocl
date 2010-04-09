@@ -212,14 +212,34 @@ public aspect PropertyCallExpASTComputation {
 					sourceExpression = sourceExpression.withAtPre();
 				}*/
 				
-				// Try to create a property call expression with the computed elements before.
 				OclExpression result = null;
-				try {
-					result = factory.createPropertyCallExp(sourceExpression, attributeName, qualifiers);
-				} catch(Exception ex) {
-					throw new BuildingASMException(ex.getMessage() + " An error occured while building an property call expression.", token);
-				}
 				
+				if (sourceExpression.getType() instanceof TypeType) {
+					// Try to create a static property call expression.
+					Type sourceType =
+							((TypeType) sourceExpression.getType()).getRepresentedType();
+					java.util.List propertyName = new java.util.ArrayList();
+					propertyName.add(sourceType.getName());
+					propertyName.add(attributeName);
+					try {
+						result =
+								factory.createPropertyCallExp(propertyName, qualifiers);
+					} catch (Exception ex) {
+						String message =
+								ex.getMessage() + " The static property can not be found.";
+						throw new BuildingASMException(message, token);
+					}
+				}
+				// no static call
+				else {
+					
+					// Try to create a property call expression with the computed elements before.
+					try {
+						result = factory.createPropertyCallExp(sourceExpression, attributeName, qualifiers);
+					} catch(Exception ex) {
+						throw new BuildingASMException(ex.getMessage() + " An error occured while building an property call expression.", token);
+					}
+				}
 												
 				// If the factory method return null, then it is an internal error.
 				if (result == null) throw new BuildingASMException("An internal error occured.", token);
@@ -260,16 +280,13 @@ public aspect PropertyCallExpASTComputation {
 						java.util.List nameList = new ArrayList();
 						nameList.add(attributeName);
 						
-						// Lookup for a type with the attribute name.
-						Type sourceType = env.lookupType(nameList);
-						
-						/* If a type exists then we set the source type in the environment
-						 * to give the caller the type and we return null to indicate that we have
-						 * build no property call expression, but set the source type.
-						 */
-						if (sourceType != null) {
-							env.setSourceType(sourceType);
-							return null;
+						TypeLiteralExp result;
+						try {
+							result = factory.createTypeLiteralExp(nameList);
+							env.setSourceType(result.getType());
+							return result;
+						} catch (EssentialOclFactoryException e) {
+							// no type was found; ignore
 						}
 						
 						// No type with the specific name exists.
@@ -385,13 +402,15 @@ public aspect PropertyCallExpASTComputation {
 			 * we return null, to indicate the caller that we have saved a type in the environment.
 			 */
 			
-			Type type = env.lookupType(pathNameList);
 			/*
 			 * This is case 6.
 			 */
-			if (type != null) {
-				env.setSourceType(type);
-				return null;
+			try {
+				OclExpression result = factory.createTypeLiteralExp(pathNameList);
+				env.setSourceType(result.getType());
+				return result;
+			} catch (EssentialOclFactoryException e) {
+				// could not find type in model; continue with other possiblities
 			}
 			
 			/*
