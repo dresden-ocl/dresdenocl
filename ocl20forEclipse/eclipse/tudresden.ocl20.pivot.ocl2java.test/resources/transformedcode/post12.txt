@@ -15,7 +15,7 @@ public privileged aspect PostAspect1 {
     	execution(* tudresden.ocl20.pivot.examples.royalsandloyals.Date.now());
     
     /**
-     * <p>Checks a postcondition for the now() defined by the constraint
+     * <p>Checks a postcondition for the operation {@link Date#now()} defined by the constraint
      * <code>context Date::now() : tudresden.ocl20.pivot.examples.royalsandloyals.Date
      *       post: result[].oclIsUndefined().not()</code></p>
      */

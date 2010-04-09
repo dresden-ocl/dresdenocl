@@ -30,6 +30,26 @@ public class Class1 {
 
 	/**
 	 * <p>
+	 * Empty constructor required for most test cases.
+	 * </p>
+	 */
+	public Class1() {
+		/* Remains empty. */
+	}
+
+	/**
+	 * <p>
+	 * Constructor to test definition of pre and postconditions on constructors.
+	 * </p>
+	 * 
+	 * @param anInt
+	 */
+	public Class1(Integer anInt) {
+		/* Remains empty. */
+	}
+
+	/**
+	 * <p>
 	 * Used to test a body constraint.
 	 * </p>
 	 * 

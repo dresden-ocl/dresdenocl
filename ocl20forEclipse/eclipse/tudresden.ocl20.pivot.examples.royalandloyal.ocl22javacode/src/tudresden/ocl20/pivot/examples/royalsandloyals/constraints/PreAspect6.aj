@@ -15,7 +15,7 @@ public privileged aspect PreAspect6 {
     	execution(* tudresden.ocl20.pivot.examples.royalsandloyals.Date.now());
     
     /**
-     * <p>Checks a precondition for the now() defined by the constraint
+     * <p>Checks a precondition for the {@link Date#now()} defined by the constraint
      * <code>context Date::now() : tudresden.ocl20.pivot.examples.royalsandloyals.Date
      *       pre: true</code></p>
      */

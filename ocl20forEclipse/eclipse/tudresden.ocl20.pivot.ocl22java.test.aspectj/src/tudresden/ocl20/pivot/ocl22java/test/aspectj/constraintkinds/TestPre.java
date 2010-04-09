@@ -64,4 +64,30 @@ public class TestPre {
 		/* Should be rejected. */
 		class1.preOperation01(null);
 	}
+
+	/**
+	 * <p>
+	 * Tests the generated code for a <code>Constraint</code> of the
+	 * <code>ConstraintKind.PRECONDITION</code>.
+	 * </p>
+	 */
+	@Test
+	public void testPre02_01() {
+
+		/* Should be accepted. */
+		new Class1(42);
+	}
+
+	/**
+	 * <p>
+	 * Tests the generated code for a <code>Constraint</code> of the
+	 * <code>ConstraintKind.PRECONDITION</code>.
+	 * </p>
+	 */
+	@Test(expected = RuntimeException.class)
+	public void testPre02_02() {
+
+		/* Should be rejected. */
+		new Class1(null);
+	}
 }

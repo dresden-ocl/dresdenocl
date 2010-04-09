@@ -3838,7 +3838,7 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 							operationResultType);
 				}
 				// no else.
-
+				
 				/* Probably set the arguments of the operation. */
 				this.setArgumentsForInstrumentationTemplate(aConstraint,
 						adviceTemplate);
@@ -3923,6 +3923,12 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 				/* Probably set that the constraint operation is static. */
 				if (anOperation.isStatic()) {
 					adviceTemplate.setAttribute("opIsStatic", "true");
+				}
+				// no else.
+
+				/* Probably set that the constrained operation is a constructor. */
+				if (operationName.equals(constrainedClass.getName())) {
+					adviceTemplate.setAttribute("opIsConstructor", "true");
 				}
 				// no else.
 
@@ -4042,7 +4048,7 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 
 				constrainedClass = anOperation.getOwner();
 
-				operationName = anOperation.getName();
+				operationName = anOperation.getName();				
 				operationResultType = this.transformType(anOperation.getType())
 						.toString();
 				/* Create Template for the advice code. */
@@ -4084,6 +4090,12 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 				/* Probably set that the constraint operation is static. */
 				if (anOperation.isStatic()) {
 					adviceTemplate.setAttribute("opIsStatic", "true");
+				}
+				// no else.
+				
+				/* Probably set that the constrained operation is a constructor. */
+				if (operationName.equals(constrainedClass.getName())) {
+					adviceTemplate.setAttribute("opIsConstructor", "true");
 				}
 				// no else.
 

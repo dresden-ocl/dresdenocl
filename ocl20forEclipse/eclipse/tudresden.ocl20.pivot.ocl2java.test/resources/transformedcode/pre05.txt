@@ -16,7 +16,7 @@ public privileged aspect PreAspect1 {
     	&& target(aClass);
     
     /**
-     * <p>Checks a precondition for the getProgram() defined by the constraint
+     * <p>Checks a precondition for the {@link Transaction#getProgram()} defined by the constraint
      * <code>context Transaction::getProgram() : tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyProgram
      *       pre: self[].oclIsTypeOf( Transaction[])</code></p>
      */

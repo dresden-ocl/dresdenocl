@@ -16,7 +16,7 @@ public privileged aspect PostAspect5 {
     	&& target(aClass);
     
     /**
-     * <p>Checks a postcondition for the isEmpty() defined by the constraint
+     * <p>Checks a postcondition for the operation {@link LoyaltyAccount#isEmpty()} defined by the constraint
      * <code>context LoyaltyAccount::isEmpty() : Boolean
      *       post: result[].=( points[].=( 0))</code></p>
      */

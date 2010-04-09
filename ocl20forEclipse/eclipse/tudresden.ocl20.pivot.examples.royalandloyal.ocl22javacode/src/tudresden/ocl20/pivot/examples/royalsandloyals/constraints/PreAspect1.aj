@@ -16,7 +16,7 @@ public privileged aspect PreAspect1 {
     	&& target(aClass) && args(c);
     
     /**
-     * <p>Checks a precondition for the enroll(tudresden.ocl20.pivot.examples.royalsandloyals.Customer c) defined by the constraint
+     * <p>Checks a precondition for the {@link LoyaltyProgram#enroll(, tudresden.ocl20.pivot.examples.royalsandloyals.Customer c)} defined by the constraint
      * <code>context LoyaltyProgram::enroll(c: tudresden.ocl20.pivot.examples.royalsandloyals.Customer) : Boolean
      *       pre: c[].name[].<>( '')</code></p>
      */

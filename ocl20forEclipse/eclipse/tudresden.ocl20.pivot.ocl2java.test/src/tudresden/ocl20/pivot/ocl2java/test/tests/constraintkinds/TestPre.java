@@ -23,9 +23,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import tudresden.ocl20.pivot.model.ModelAccessException;
-import tudresden.ocl20.pivot.ocl2java.exception.Ocl22CodeException;
 import tudresden.ocl20.pivot.ocl2java.test.tests.AbstractDiffTest;
-import tudresden.ocl20.pivot.parser.ParseException;
 import tudresden.ocl20.pivot.pivotmodel.Constraint;
 import tudresden.ocl20.pivot.pivotmodel.ConstraintKind;
 
@@ -74,16 +72,26 @@ public class TestPre extends AbstractDiffTest {
 	 * Tests the instrumentation of the constraint.
 	 * </p>
 	 * 
-	 * @throws ModelAccessException
-	 * @throws ParseException
-	 * @throws IllegalArgumentException
-	 * @throws Ocl22CodeException
+	 * @throws Exception
 	 */
 	@Test
-	public void testPre01() throws IllegalArgumentException, ParseException,
-			ModelAccessException, Ocl22CodeException {
+	public void testPre01() throws Exception {
 
 		this.compareInstrumentationCodeGeneration("constraintkindtest/pre",
 				"pre01");
+	}
+
+	/**
+	 * <p>
+	 * Tests the instrumentation of the constraint.
+	 * </p>
+	 * 
+	 * @throws Exception
+	 */
+	@Test
+	public void testPre02() throws Exception {
+
+		this.compareInstrumentationCodeGeneration("constraintkindtest/pre",
+				"pre02");
 	}
 }

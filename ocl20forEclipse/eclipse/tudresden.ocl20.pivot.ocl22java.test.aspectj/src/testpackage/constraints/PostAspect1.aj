@@ -16,7 +16,7 @@ public privileged aspect PostAspect1 {
     	&& target(aClass) && args(anInt);
     
     /**
-     * <p>Checks a postcondition for the postOperation01(, Integer anInt) defined by the constraint
+     * <p>Checks a postcondition for the operation {@link Class1#postOperation01(, Integer anInt)} defined by the constraint
      * <code>context Class1::postOperation01(anInt: Integer) : Integer
      *       post: result[].=( anInt[].*( 2))</code></p>
      */

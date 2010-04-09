@@ -92,11 +92,16 @@ Release 2.1 (scheduled for April 2010)
   - Transformation of abstract Collection type now works appropriately.
   - The transformation of operations whose arguments are named differently in the constraint's context
     than in the model now works correctly.
+  - The code generation of Constructors now works appropriately.
 
 
 GUI
 ---
+* The Model Browser has been improved.
+  - Imported models can now be closed again.
+  - Parsed constraints can now be removed again.
 * The Model Instance Browser has been improved.
+  - Imported model instances can now be closed again.
   - Owned properties of ModelInstanceElements can now be browsed.
   
 

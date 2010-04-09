@@ -64,4 +64,17 @@ public class TestPost {
 		/* Should be rejected. */
 		class1.postOperation01(3);
 	}
+
+	/**
+	 * <p>
+	 * Tests the generated code for a <code>Constraint</code> of the
+	 * <code>ConstraintKind.POSTCONDITION</code>.
+	 * </p>
+	 */
+	@Test
+	public void testPost02_01() {
+	
+		/* Should work. */
+		new Class1(42);
+	}
 }

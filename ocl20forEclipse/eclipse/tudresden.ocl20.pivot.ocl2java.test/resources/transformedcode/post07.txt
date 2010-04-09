@@ -16,7 +16,7 @@ public privileged aspect PostAspect1 {
     	&& target(aClass) && args(amount);
     
     /**
-     * <p>Checks a postcondition for the upgradePointsEarned(, Integer amount) defined by the constraint
+     * <p>Checks a postcondition for the operation {@link Service#upgradePointsEarned(, Integer amount)} defined by the constraint
      * <code>context Service::upgradePointsEarned(amount: Integer) : 
      *       post: calcPoints().=( calcPoints@pre().+( amount[]))</code></p>
      */

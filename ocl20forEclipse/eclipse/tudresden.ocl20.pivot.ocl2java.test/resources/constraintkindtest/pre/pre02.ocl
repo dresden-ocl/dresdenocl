@@ -1,0 +1,6 @@
+package testpackage
+
+context Class1::Class1(anInt: Integer)
+pre: not anInt.oclIsUndefined()
+
+endpackage

@@ -16,7 +16,7 @@ public privileged aspect PostAspect1 {
     	&& target(aClass) && args(aPartner, aLevel, aService);
     
     /**
-     * <p>Checks a postcondition for the addService(, tudresden.ocl20.pivot.examples.royalsandloyals.ProgramPartner aPartner, tudresden.ocl20.pivot.examples.royalsandloyals.ServiceLevel aLevel, tudresden.ocl20.pivot.examples.royalsandloyals.Service aService) defined by the constraint
+     * <p>Checks a postcondition for the operation {@link LoyaltyProgram#addService(, tudresden.ocl20.pivot.examples.royalsandloyals.ProgramPartner aPartner, tudresden.ocl20.pivot.examples.royalsandloyals.ServiceLevel aLevel, tudresden.ocl20.pivot.examples.royalsandloyals.Service aService)} defined by the constraint
      * <code>context LoyaltyProgram::addService(aPartner: tudresden.ocl20.pivot.examples.royalsandloyals.ProgramPartner, aLevel: tudresden.ocl20.pivot.examples.royalsandloyals.ServiceLevel, aService: tudresden.ocl20.pivot.examples.royalsandloyals.Service) : 
      *       post: partners[].deliveredServices[].includes( aService[]).and( levels[].availableServices[].includes( aService[]))</code></p>
      */

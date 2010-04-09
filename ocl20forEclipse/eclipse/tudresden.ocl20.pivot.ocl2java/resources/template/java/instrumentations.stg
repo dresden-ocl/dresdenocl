@@ -192,12 +192,12 @@ protected pointcut $atName$Getter() :
 
 
 // --- Pointcut to describe all calls of a static Method ---
-staticMethodCallPointcut(class, package, method, args, argTypes, returnType) ::= <<
+staticMethodCallPointcut(class, package, method, args, argTypes, returnType, opIsConstructor) ::= <<
 /**
  * <p>Pointcut for all calls on {@link $package$.$class$#$method$($if(args)$$args, argTypes:{arg, type | $type$ $arg$}; separator = ", "$$endif$)}.</p>
  */
 protected pointcut $method$Caller($if(args)$$args, argTypes:{arg, type | $type$ $arg$};separator=", "$$endif$):
-	execution(* $package$.$class$.$method$($argTypes:{type | $type$}; separator=", "$))$if(args)$ && args($args:{arg | $arg$}; separator=", "$)$endif$;
+	execution($if(opIsConstructor)$$else$* $endif$$package$.$class$.$if(opIsConstructor)$new$else$$method$$endif$($argTypes:{type | $type$}; separator=", "$))$if(args)$ && args($args:{arg | $arg$}; separator=", "$)$endif$;
 >>
 
 
@@ -463,9 +463,9 @@ protected pointcut $checkInvariantsOperationName()$Caller($package$.$class$ $sel
 
 
 // --- Instrumentation Code for Preconditions ---
-preInstrumentation(class, package, constCode, constExp, oclBody, method, args, argTypes, returnType, errorCode, disableInheritance, opIsStatic) ::= <<
+preInstrumentation(class, package, constCode, constExp, oclBody, method, args, argTypes, returnType, errorCode, disableInheritance, opIsStatic, opIsConstructor) ::= <<
 $if(opIsStatic)$
-$staticMethodCallPointcut(class = class, package = package, method = method, args = args, argTypes = argTypes, returnType = returnType)$
+$staticMethodCallPointcut(class = class, package = package, method = method, args = args, argTypes = argTypes, returnType = returnType, opIsConstructor = opIsConstructor)$
 
 
 $else$
@@ -474,7 +474,7 @@ $methodCallPointcut(class = class, package = package, method = method, args = ar
 
 $endif$
 /**
- * <p>Checks a precondition for the $method$($if(args)$$args, argTypes:{arg, type | $type$ $arg$}; separator = ", "$$endif$) defined by the constraint
+ * <p>Checks a precondition for the {@link $class$#$method$($if(args)$$args, argTypes:{arg, type | , $type$ $arg$}$$endif$)} defined by the constraint
  * <code>context $class$::$method$($if(args)$$args, argTypes:{arg, type | $arg$: $type$}; separator = ", "$$endif$) : $returnType$
  *       pre: $oclBody$</code></p>
  */
@@ -504,14 +504,14 @@ before($if(opIsStatic)$$else$$package$.$class$ $selfVariable()$$if(args)$, $endi
 
 
 // --- Instrumentation Code for Postconditions ---
-postInstrumentation(class, package, constCode, constExp, oclBody, method, args, argTypes, returnType, errorCode, oclIsNewUsed, primitiveAtPreCodes, primitiveAtPreExps, primitiveAtPreTypes, primitiveAtPreVars, atPreCodes, atPreExps, atPreTypes, atPreVars, atPreTypeSet, disableInheritance, opIsStatic) ::= <<
+postInstrumentation(class, package, constCode, constExp, oclBody, method, args, argTypes, returnType, errorCode, oclIsNewUsed, primitiveAtPreCodes, primitiveAtPreExps, primitiveAtPreTypes, primitiveAtPreVars, atPreCodes, atPreExps, atPreTypes, atPreVars, atPreTypeSet, disableInheritance, opIsStatic, opIsConstructor) ::= <<
 $if(atPreTypeSet)$
 $atPreTypeSet: { type | $deepCopyMethod(class = type)$ }; separator = "\n\n"$
 
 
 $endif$
 $if(opIsStatic)$
-$staticMethodCallPointcut(class = class, package = package, method = method, args = args, argTypes = argTypes, returnType = returnType)$
+$staticMethodCallPointcut(class = class, package = package, method = method, args = args, argTypes = argTypes, returnType = returnType, opIsConstructor = opIsConstructor)$
 
 
 $else$
@@ -520,7 +520,7 @@ $methodCallPointcut(class = class, package = package, method = method, args = ar
 
 $endif$
 /**
- * <p>Checks a postcondition for the $method$($if(args)$$args, argTypes:{arg, type | , $type$ $arg$}$$endif$) defined by the constraint
+ * <p>Checks a postcondition for the operation {@link $class$#$method$($if(args)$$args, argTypes:{arg, type | , $type$ $arg$}$$endif$)} defined by the constraint
  * <code>context $class$::$method$($if(args)$$args, argTypes:{arg, type | $arg$: $type$}; separator = ", "$$endif$) : $returnType$
  *       post: $oclBody$</code></p>
  */

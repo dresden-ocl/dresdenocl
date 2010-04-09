@@ -16,7 +16,7 @@ public privileged aspect PreAspect1 {
     	&& target(aClass) && args(anInt);
     
     /**
-     * <p>Checks a precondition for the preOperation01(Integer anInt) defined by the constraint
+     * <p>Checks a precondition for the {@link Class1#preOperation01(, Integer anInt)} defined by the constraint
      * <code>context Class1::preOperation01(anInt: Integer) : Integer
      *       pre: anInt[].oclIsUndefined().not()</code></p>
      */

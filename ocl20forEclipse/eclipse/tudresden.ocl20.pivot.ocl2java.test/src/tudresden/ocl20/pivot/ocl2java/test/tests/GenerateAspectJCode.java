@@ -95,8 +95,10 @@ public class GenerateAspectJCode extends AbstractDiffTest {
 		constraints.add(new String[] { "constraintkindtest/def", "def03" });
 
 		constraints.add(new String[] { "constraintkindtest/pre", "pre01" });
+		constraints.add(new String[] { "constraintkindtest/pre", "pre02" });
 
 		constraints.add(new String[] { "constraintkindtest/post", "post01" });
+		constraints.add(new String[] { "constraintkindtest/post", "post02" });
 
 		constraints.add(new String[] { "sltest/boolean", "toString01" });
 

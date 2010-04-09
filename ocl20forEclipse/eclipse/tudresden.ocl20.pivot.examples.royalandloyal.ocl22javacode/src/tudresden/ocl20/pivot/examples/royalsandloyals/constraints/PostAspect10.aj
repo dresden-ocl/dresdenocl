@@ -16,7 +16,7 @@ public privileged aspect PostAspect10 {
     	&& target(aClass);
     
     /**
-     * <p>Checks a postcondition for the getProgram() defined by the constraint
+     * <p>Checks a postcondition for the operation {@link Transaction#getProgram()} defined by the constraint
      * <code>context Transaction::getProgram() : tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyProgram
      *       post: self[].oclIsTypeOf( Transaction[])</code></p>
      */

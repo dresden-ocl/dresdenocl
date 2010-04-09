@@ -16,7 +16,7 @@ public privileged aspect PostAspect6 {
     	&& target(aClass);
     
     /**
-     * <p>Checks a postcondition for the birthdayHappens() defined by the constraint
+     * <p>Checks a postcondition for the operation {@link Customer#birthdayHappens()} defined by the constraint
      * <code>context Customer::birthdayHappens() : 
      *       post: age[].=( age[]@pre.+( 1))</code></p>
      */

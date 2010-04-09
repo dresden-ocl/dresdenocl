@@ -81,10 +81,28 @@ public class TestPost extends AbstractDiffTest {
 	 * @throws Ocl22CodeException
 	 */
 	@Test
-	public void testPre01() throws IllegalArgumentException, ParseException,
+	public void testPost01() throws IllegalArgumentException, ParseException,
 			ModelAccessException, Ocl22CodeException {
 
 		this.compareInstrumentationCodeGeneration("constraintkindtest/post",
 				"post01");
+	}
+
+	/**
+	 * <p>
+	 * Tests the instrumentation of the constraint.
+	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 * @throws ParseException
+	 * @throws IllegalArgumentException
+	 * @throws Ocl22CodeException
+	 */
+	@Test
+	public void testPost02() throws IllegalArgumentException, ParseException,
+			ModelAccessException, Ocl22CodeException {
+	
+		this.compareInstrumentationCodeGeneration("constraintkindtest/post",
+				"post02");
 	}
 }
