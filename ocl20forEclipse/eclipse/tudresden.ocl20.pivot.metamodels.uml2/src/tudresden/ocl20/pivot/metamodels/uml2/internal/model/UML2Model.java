@@ -29,6 +29,7 @@ import org.eclipse.uml2.uml.AssociationClass;
 import org.eclipse.uml2.uml.Classifier;
 import org.eclipse.uml2.uml.Model;
 import org.eclipse.uml2.uml.Package;
+import org.eclipse.uml2.uml.PrimitiveType;
 import org.eclipse.uml2.uml.Profile;
 import org.eclipse.uml2.uml.Property;
 import org.eclipse.uml2.uml.Type;
@@ -309,8 +310,17 @@ public class UML2Model extends AbstractModel implements IModel {
 		 * bi-directional references.
 		 */
 		for (Classifier classfier : classifiersToBeAdded) {
-			rootPackage.getOwnedTypes().add(
-					(Classifier) EcoreUtil.copy(classfier));
+			/*
+			 * Check is required to avoid duplicates of primitive types
+			 * referenced in multiple models.
+			 */
+			if (!(classfier instanceof PrimitiveType)
+					|| rootPackage.getOwnedType(((PrimitiveType) classfier)
+							.getName()) == null) {
+				rootPackage.getOwnedTypes().add(
+						(Classifier) EcoreUtil.copy(classfier));
+			}
+			// no else.
 		}
 		// end for.
 	}

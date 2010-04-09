@@ -245,7 +245,15 @@ public class UML2PrimitiveType extends AbstractPrimitiveType implements
 	@Override
 	public String getName() {
 
-		return this.getKind().getName();
+		String result;
+		result = this.dslPrimitiveType.getName();
+		
+		if (result == null) {
+			result = this.getKind().getName();
+		}
+		// no else.
+		
+		return result;
 	}
 
 	/**

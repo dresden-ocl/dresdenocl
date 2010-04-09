@@ -14,6 +14,7 @@
 package tudresden.ocl20.pivot.metamodels.test.tests;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
 import java.util.HashMap;
@@ -47,8 +48,8 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
 public class TestPrimitiveType {
 
 	/** The {@link Logger} for this class. */
-	private static final Logger LOGGER =
-			MetaModelTestPlugin.getLogger(TestPrimitiveType.class);
+	private static final Logger LOGGER = MetaModelTestPlugin
+			.getLogger(TestPrimitiveType.class);
 
 	/**
 	 * The {@link Type} in the {@link IModel} under test which contains all
@@ -84,22 +85,24 @@ public class TestPrimitiveType {
 
 	/**
 	 * A {@link List} containing all {@link PrimitiveType}s of the
-	 * {@link PrimitiveTypeKind#STRING} that shall be tested stored by their name.
+	 * {@link PrimitiveTypeKind#STRING} that shall be tested stored by their
+	 * name.
 	 */
 	private static Map<String, PrimitiveType> stringPrimitiveTypes;
 
 	/**
 	 * <p>
-	 * Loads some elements from the current {@link IModel} under test required for
-	 * the tests contained in this Class.
+	 * Loads some elements from the current {@link IModel} under test required
+	 * for the tests contained in this Class.
 	 * </p>
 	 */
 	@BeforeClass
 	public static void setUp() {
 
 		/* Get the container class. */
-		containerClass =
-				MetaModelTestServices.getInstance().getTypeUnderTest(
+		containerClass = MetaModelTestServices
+				.getInstance()
+				.getTypeUnderTest(
 						MetaModelTestServices.TYPE_QUALIFIED_NAME_TESTPRIMITIVETYPECLASS);
 
 		allPrimitiveTypes = new HashMap<String, PrimitiveType>();
@@ -114,19 +117,17 @@ public class TestPrimitiveType {
 			if (LOGGER.isInfoEnabled()) {
 				String msg;
 
-				msg =
-						NLS
+				msg = NLS
+						.bind(
+								MetaModelTestSuiteMessages.MetaModelTestSuite_ClassNotFoundInModel,
+								MetaModelTestServices.TYPE_QUALIFIED_NAME_TESTPRIMITIVETYPECLASS,
+								PrimitiveType.class.getName());
+				msg += " "
+						+ NLS
 								.bind(
-										MetaModelTestSuiteMessages.MetaModelTestSuite_ClassNotFoundInModel,
-										MetaModelTestServices.TYPE_QUALIFIED_NAME_TESTPRIMITIVETYPECLASS,
-										PrimitiveType.class.getName());
-				msg +=
-						" "
-								+ NLS
-										.bind(
-												MetaModelTestSuiteMessages.MetaModelTestSuite_CurrentlyTestedMetaModel,
-												MetaModelTestServices.getInstance()
-														.getMetaModelUnderTestID());
+										MetaModelTestSuiteMessages.MetaModelTestSuite_CurrentlyTestedMetaModel,
+										MetaModelTestServices.getInstance()
+												.getMetaModelUnderTestID());
 
 				LOGGER.warn(msg);
 			}
@@ -158,10 +159,9 @@ public class TestPrimitiveType {
 						.startsWith(MetaModelTestServices.PRIMITIVETYPE_BOOLEAN_PROPERTY_PREFIX)) {
 
 					/* Get the types name. */
-					primtiveTypeName =
-							aPropertiesName
-									.substring(MetaModelTestServices.PRIMITIVETYPE_BOOLEAN_PROPERTY_PREFIX
-											.length());
+					primtiveTypeName = aPropertiesName
+							.substring(MetaModelTestServices.PRIMITIVETYPE_BOOLEAN_PROPERTY_PREFIX
+									.length());
 
 					/* Store the type in the map. */
 					booleanPrimitiveTypes.put(primtiveTypeName, aPrimitiveType);
@@ -172,10 +172,9 @@ public class TestPrimitiveType {
 						.startsWith(MetaModelTestServices.PRIMITIVETYPE_INTEGER_PROPERTY_PREFIX)) {
 
 					/* Get the types name. */
-					primtiveTypeName =
-							aPropertiesName
-									.substring(MetaModelTestServices.PRIMITIVETYPE_INTEGER_PROPERTY_PREFIX
-											.length());
+					primtiveTypeName = aPropertiesName
+							.substring(MetaModelTestServices.PRIMITIVETYPE_INTEGER_PROPERTY_PREFIX
+									.length());
 
 					/* Store the type in the map. */
 					integerPrimitiveTypes.put(primtiveTypeName, aPrimitiveType);
@@ -186,10 +185,9 @@ public class TestPrimitiveType {
 						.startsWith(MetaModelTestServices.PRIMITIVETYPE_REAL_PROPERTY_PREFIX)) {
 
 					/* Get the types name. */
-					primtiveTypeName =
-							aPropertiesName
-									.substring(MetaModelTestServices.PRIMITIVETYPE_REAL_PROPERTY_PREFIX
-											.length());
+					primtiveTypeName = aPropertiesName
+							.substring(MetaModelTestServices.PRIMITIVETYPE_REAL_PROPERTY_PREFIX
+									.length());
 
 					/* Store the type in the map. */
 					realPrimitiveTypes.put(primtiveTypeName, aPrimitiveType);
@@ -200,10 +198,9 @@ public class TestPrimitiveType {
 						.startsWith(MetaModelTestServices.PRIMITIVETYPE_STRING_PROPERTY_PREFIX)) {
 
 					/* Get the types name. */
-					primtiveTypeName =
-							aPropertiesName
-									.substring(MetaModelTestServices.PRIMITIVETYPE_STRING_PROPERTY_PREFIX
-											.length());
+					primtiveTypeName = aPropertiesName
+							.substring(MetaModelTestServices.PRIMITIVETYPE_STRING_PROPERTY_PREFIX
+									.length());
 
 					/* Store the type in the map. */
 					stringPrimitiveTypes.put(primtiveTypeName, aPrimitiveType);
@@ -221,18 +218,17 @@ public class TestPrimitiveType {
 					if (LOGGER.isInfoEnabled()) {
 						String msg;
 
-						msg =
-								NLS
+						msg = NLS
+								.bind(
+										MetaModelTestSuiteMessages.MetaModelTestSuite_UnknownPrimitiveTypeKind,
+										aPropertiesName);
+						msg += " "
+								+ NLS
 										.bind(
-												MetaModelTestSuiteMessages.MetaModelTestSuite_UnknownPrimitiveTypeKind,
-												aPropertiesName);
-						msg +=
-								" "
-										+ NLS
-												.bind(
-														MetaModelTestSuiteMessages.MetaModelTestSuite_CurrentlyTestedMetaModel,
-														MetaModelTestServices.getInstance()
-																.getMetaModelUnderTestID());
+												MetaModelTestSuiteMessages.MetaModelTestSuite_CurrentlyTestedMetaModel,
+												MetaModelTestServices
+														.getInstance()
+														.getMetaModelUnderTestID());
 
 						LOGGER.warn(msg);
 					}
@@ -250,15 +246,13 @@ public class TestPrimitiveType {
 			if (LOGGER.isInfoEnabled()) {
 				String msg;
 
-				msg =
-						MetaModelTestSuiteMessages.MetaModelTestSuite_NoPrimitiveTypeFound;
-				msg +=
-						" "
-								+ NLS
-										.bind(
-												MetaModelTestSuiteMessages.MetaModelTestSuite_CurrentlyTestedMetaModel,
-												MetaModelTestServices.getInstance()
-														.getMetaModelUnderTestID());
+				msg = MetaModelTestSuiteMessages.MetaModelTestSuite_NoPrimitiveTypeFound;
+				msg += " "
+						+ NLS
+								.bind(
+										MetaModelTestSuiteMessages.MetaModelTestSuite_CurrentlyTestedMetaModel,
+										MetaModelTestServices.getInstance()
+												.getMetaModelUnderTestID());
 
 				LOGGER.warn(msg);
 			}
@@ -274,18 +268,16 @@ public class TestPrimitiveType {
 				if (LOGGER.isInfoEnabled()) {
 					String msg;
 
-					msg =
-							NLS
+					msg = NLS
+							.bind(
+									MetaModelTestSuiteMessages.MetaModelTestSuite_NoPrimitiveTypeOfKindFound,
+									PrimitiveTypeKind.BOOLEAN.getName());
+					msg += " "
+							+ NLS
 									.bind(
-											MetaModelTestSuiteMessages.MetaModelTestSuite_NoPrimitiveTypeOfKindFound,
-											PrimitiveTypeKind.BOOLEAN.getName());
-					msg +=
-							" "
-									+ NLS
-											.bind(
-													MetaModelTestSuiteMessages.MetaModelTestSuite_CurrentlyTestedMetaModel,
-													MetaModelTestServices.getInstance()
-															.getMetaModelUnderTestID());
+											MetaModelTestSuiteMessages.MetaModelTestSuite_CurrentlyTestedMetaModel,
+											MetaModelTestServices.getInstance()
+													.getMetaModelUnderTestID());
 
 					LOGGER.warn(msg);
 				}
@@ -300,18 +292,16 @@ public class TestPrimitiveType {
 				if (LOGGER.isInfoEnabled()) {
 					String msg;
 
-					msg =
-							NLS
+					msg = NLS
+							.bind(
+									MetaModelTestSuiteMessages.MetaModelTestSuite_NoPrimitiveTypeOfKindFound,
+									PrimitiveTypeKind.INTEGER.getName());
+					msg += " "
+							+ NLS
 									.bind(
-											MetaModelTestSuiteMessages.MetaModelTestSuite_NoPrimitiveTypeOfKindFound,
-											PrimitiveTypeKind.INTEGER.getName());
-					msg +=
-							" "
-									+ NLS
-											.bind(
-													MetaModelTestSuiteMessages.MetaModelTestSuite_CurrentlyTestedMetaModel,
-													MetaModelTestServices.getInstance()
-															.getMetaModelUnderTestID());
+											MetaModelTestSuiteMessages.MetaModelTestSuite_CurrentlyTestedMetaModel,
+											MetaModelTestServices.getInstance()
+													.getMetaModelUnderTestID());
 
 					LOGGER.warn(msg);
 				}
@@ -326,18 +316,16 @@ public class TestPrimitiveType {
 				if (LOGGER.isInfoEnabled()) {
 					String msg;
 
-					msg =
-							NLS
+					msg = NLS
+							.bind(
+									MetaModelTestSuiteMessages.MetaModelTestSuite_NoPrimitiveTypeOfKindFound,
+									PrimitiveTypeKind.REAL.getName());
+					msg += " "
+							+ NLS
 									.bind(
-											MetaModelTestSuiteMessages.MetaModelTestSuite_NoPrimitiveTypeOfKindFound,
-											PrimitiveTypeKind.REAL.getName());
-					msg +=
-							" "
-									+ NLS
-											.bind(
-													MetaModelTestSuiteMessages.MetaModelTestSuite_CurrentlyTestedMetaModel,
-													MetaModelTestServices.getInstance()
-															.getMetaModelUnderTestID());
+											MetaModelTestSuiteMessages.MetaModelTestSuite_CurrentlyTestedMetaModel,
+											MetaModelTestServices.getInstance()
+													.getMetaModelUnderTestID());
 
 					LOGGER.warn(msg);
 				}
@@ -352,18 +340,16 @@ public class TestPrimitiveType {
 				if (LOGGER.isInfoEnabled()) {
 					String msg;
 
-					msg =
-							NLS
+					msg = NLS
+							.bind(
+									MetaModelTestSuiteMessages.MetaModelTestSuite_NoPrimitiveTypeOfKindFound,
+									PrimitiveTypeKind.STRING.getName());
+					msg += " "
+							+ NLS
 									.bind(
-											MetaModelTestSuiteMessages.MetaModelTestSuite_NoPrimitiveTypeOfKindFound,
-											PrimitiveTypeKind.STRING.getName());
-					msg +=
-							" "
-									+ NLS
-											.bind(
-													MetaModelTestSuiteMessages.MetaModelTestSuite_CurrentlyTestedMetaModel,
-													MetaModelTestServices.getInstance()
-															.getMetaModelUnderTestID());
+											MetaModelTestSuiteMessages.MetaModelTestSuite_CurrentlyTestedMetaModel,
+											MetaModelTestServices.getInstance()
+													.getMetaModelUnderTestID());
 
 					LOGGER.warn(msg);
 				}
@@ -488,8 +474,8 @@ public class TestPrimitiveType {
 
 			type = (PrimitiveType) allPrimitiveTypes.get(aTypesName);
 
-			/* The primitive type must have the same name as its kind has. */
-			assertEquals(msg, type.getKind().getName(), type.getName());
+			/* The primitive type must havea name. */
+			assertNotNull(msg, type.getName());
 		}
 	}
 
@@ -519,8 +505,8 @@ public class TestPrimitiveType {
 
 	/**
 	 * <p>
-	 * A test case testing the operation {@link PrimitiveType#getOwnedOperation()}
-	 * .
+	 * A test case testing the operation
+	 * {@link PrimitiveType#getOwnedOperation()} .
 	 * </p>
 	 */
 	@Test
@@ -530,8 +516,7 @@ public class TestPrimitiveType {
 
 		String msg;
 
-		msg =
-				"The adaptation of PrimitiveType.getOwnedOperation() seems to be wrong.";
+		msg = "The adaptation of PrimitiveType.getOwnedOperation() seems to be wrong.";
 		msg += "PrimitiveTypes are not allowed to own Operations.";
 
 		for (String aTypesName : allPrimitiveTypes.keySet()) {
@@ -545,7 +530,8 @@ public class TestPrimitiveType {
 
 	/**
 	 * <p>
-	 * A test case testing the operation {@link PrimitiveType#getOwnedProperty()}.
+	 * A test case testing the operation
+	 * {@link PrimitiveType#getOwnedProperty()}.
 	 * </p>
 	 */
 	@Test
@@ -555,8 +541,7 @@ public class TestPrimitiveType {
 
 		String msg;
 
-		msg =
-				"The adaptation of PrimitiveType.getOwnedProperty() seems to be wrong.";
+		msg = "The adaptation of PrimitiveType.getOwnedProperty() seems to be wrong.";
 		msg += "PrimitiveTypes are not allowed to own Properties.";
 
 		for (String aTypesName : allPrimitiveTypes.keySet()) {
@@ -581,8 +566,7 @@ public class TestPrimitiveType {
 
 		String msg;
 
-		msg =
-				"The adaptation of PrimitiveType.getOwnedTypeParameter() seems to be wrong.";
+		msg = "The adaptation of PrimitiveType.getOwnedTypeParameter() seems to be wrong.";
 		msg += "PrimitiveTypes are not allowed to own TypeParameters.";
 
 		for (String aTypesName : allPrimitiveTypes.keySet()) {
@@ -620,7 +604,8 @@ public class TestPrimitiveType {
 
 	/**
 	 * <p>
-	 * A test case testing the operation {@link PrimitiveType#getQualifiedName()}.
+	 * A test case testing the operation
+	 * {@link PrimitiveType#getQualifiedName()}.
 	 * </p>
 	 */
 	@Test
@@ -630,18 +615,14 @@ public class TestPrimitiveType {
 
 		String msg;
 
-		msg =
-				"The adaptation of PrimitiveType.getQualifiedName() seems to be wrong.";
+		msg = "The adaptation of PrimitiveType.getQualifiedName() seems to be wrong.";
 
 		for (String aTypesName : allPrimitiveTypes.keySet()) {
 
 			type = (PrimitiveType) allPrimitiveTypes.get(aTypesName);
 
-			/*
-			 * The qualified name of a primitive type must conform to the name of its
-			 * kind.
-			 */
-			assertEquals(msg, type.getKind().getName(), type.getQualifiedName());
+			/* The qualified name of a primitive type must not be null. */
+			assertNotNull(msg, type.getQualifiedName());
 		}
 	}
 
@@ -658,8 +639,7 @@ public class TestPrimitiveType {
 
 		String msg;
 
-		msg =
-				"The adaptation of PrimitiveType.getGenericSuperType() seems to be wrong.";
+		msg = "The adaptation of PrimitiveType.getGenericSuperType() seems to be wrong.";
 		msg += "PrimitiveTypes are not allowed to have generic super Types.";
 
 		for (String aTypesName : allPrimitiveTypes.keySet()) {
