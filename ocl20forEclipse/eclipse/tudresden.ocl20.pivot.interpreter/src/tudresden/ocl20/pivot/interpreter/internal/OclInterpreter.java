@@ -84,6 +84,7 @@ import tudresden.ocl20.pivot.essentialocl.types.OrderedSetType;
 import tudresden.ocl20.pivot.essentialocl.types.SequenceType;
 import tudresden.ocl20.pivot.essentialocl.types.SetType;
 import tudresden.ocl20.pivot.essentialocl.types.TypeConstants;
+import tudresden.ocl20.pivot.essentialocl.types.TypeType;
 import tudresden.ocl20.pivot.interpreter.IInterpretationEnvironment;
 import tudresden.ocl20.pivot.interpreter.IInterpretationResult;
 import tudresden.ocl20.pivot.interpreter.IOclInterpreter;
@@ -3390,13 +3391,15 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 									"Tried to call allInstances() on null. Reason :"
 											+ source.getUndefinedReason()));
 				else {
+					final Type sourceType =
+							((TypeType) anOperationCallExp.getSourceType())
+									.getRepresentedType();
+
 					Set<IModelInstanceObject> allInstances =
-							myEnvironment.getModelInstance().getAllInstances(
-									anOperationCallExp.getSourceType());
+							myEnvironment.getModelInstance().getAllInstances(sourceType);
 
 					result =
-							myStandardLibraryFactory.createOclSet(allInstances,
-									anOperationCallExp.getSourceType());
+							myStandardLibraryFactory.createOclSet(allInstances, sourceType);
 				}
 			}
 

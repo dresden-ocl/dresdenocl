@@ -1,0 +1,49 @@
+package root
+
+
+context essentialocl::types::AnyType
+/*
+inv AnyTypeNoGenericSuperType	: self.genericSuperType->isEmpty()
+inv AnyTypeCorrectName			: self.name = 'OclAny'
+inv AnyTypeHasNoSuperType		: self.superType->isEmpty()
+inv AnyTypeHasNoProperties		: self.ownedProperty->isEmpty()
+inv AnyTypeHasNoTypeParameters	: self.ownedTypeParameter->isEmpty()
+*/
+def: oclSL: essentialocl::types::OclLibrary =
+								  essentialocl::types::OclLibrary.allInstances()->asOrderedSet()->first()
+inv AnyTypeHasOpEquals			: self.ownedOperation->exists(o |
+									o.name = '='
+									and o.inputParameter->size() = 1
+									--and o.inputParameter->first().genericType.oclAsType(pivotmodel::ComplexGenericType).unboundType = self
+									and o.multiple = false
+									and o.type = self.oclSL.oclBoolean
+								  )
+/*
+inv AnyTypeHasOpNotEquals		: self.ownedOperation->exists(o | o.name = '<>')
+inv AnyTypeHasOpOclIsNew		: self.ownedOperation->exists(o | o.name = 'oclIsNew')
+inv AnyTypeHasOpOclIsUndefined	: self.ownedOperation->exists(o | o.name = 'oclIsUndefined')
+inv AnyTypeHasOpOclIsInvalid	: self.ownedOperation->exists(o | o.name = 'oclIsInvalid')
+inv AnyTypeHasOpOclAsType		: self.ownedOperation->exists(o | o.name = 'oclAsType')
+inv AnyTypeHasOpOclIsTypeOf		: self.ownedOperation->exists(o | o.name = 'oclIsTypeOf')
+inv AnyTypeHasOpOclIsKindOf		: self.ownedOperation->exists(o | o.name = 'oclIsKindOf')
+inv AnyTypeHasOpOclIsInState	: self.ownedOperation->exists(o | o.name = 'oclIsInState')
+inv AnyTypeHasOpOclType			: self.ownedOperation->exists(o | o.name = 'oclType')
+*/
+/*
+context essentialocl::types::CollectionType
+inv CollTypeHasOpEquals			: self.ownedOperation->exists(o |
+									o.name = '='
+									and o.inputParameter->size() = 1
+									and o.inputParameter->first().genericType.oclAsType(pivotmodel::ComplexGenericType).unboundType = self
+									and o.multiple = false
+									and o.type = oclLibrary.oclBoolean
+								  )
+*/
+
+context pivotmodel::PrimitiveType
+inv allPrimitiveTypes			: self.name = 'Boolean' or
+								  self.name = 'String' or
+								  self.name = 'Integer' or
+								  self.name = 'Real'
+
+endpackage

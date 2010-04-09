@@ -526,7 +526,7 @@ public class OperationCallExpImpl extends FeatureCallExpImpl implements
 		}
 
 		// determine the source type
-		Type srcType = getSourceType();
+		Type srcType = ((TypeType) getSourceType()).getRepresentedType();
 
 		// allInstances may only refer to types with a finite number of
 		// instances
@@ -537,7 +537,7 @@ public class OperationCallExpImpl extends FeatureCallExpImpl implements
 					"The 'allInstances' operation cannot be invoked on '" //$NON-NLS-1$
 							+ srcType.getName() + "'."); //$NON-NLS-1$
 		}
-
+		
 		// now bind the 'allInstances' operation with the source type
 		allInstancesOperation = allInstancesOperation.bindTypeParameter(
 				new ArrayList<TypeParameter>(allInstancesOperation

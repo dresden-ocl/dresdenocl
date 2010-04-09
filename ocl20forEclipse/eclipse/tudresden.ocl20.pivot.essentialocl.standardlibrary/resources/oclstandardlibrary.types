@@ -191,7 +191,7 @@
           <genericType xsi:type="pivot:ParameterGenericType" typeParameter="//@oclType/@ownedOperation.2/@ownedTypeParameter.0"/>
         </typeArgument>
       </genericType>
-      <ownedTypeParameter name="E"/>
+      <ownedTypeParameter name="F"/>
     </ownedOperation>
   </oclType>
   <oclCollection superType="//@oclAny" oclLibrary="/">
