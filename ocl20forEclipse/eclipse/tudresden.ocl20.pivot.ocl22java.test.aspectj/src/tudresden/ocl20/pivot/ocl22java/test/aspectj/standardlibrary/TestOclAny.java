@@ -48,9 +48,9 @@ public class TestOclAny {
 		Class1 class1;
 		class1 = new Class1();
 
-		assertNotNull(class1.testOclAnyAllInstances(class1));
-		assertTrue(class1.testOclAnyAllInstances(class1).size() > 0);
-		assertTrue(class1.testOclAnyAllInstances(class1).contains(class1));
+		assertNotNull(class1.testOclAnyAllInstances());
+		assertTrue(class1.testOclAnyAllInstances().size() > 0);
+		assertTrue(class1.testOclAnyAllInstances().contains(class1));
 	}
 
 	/**

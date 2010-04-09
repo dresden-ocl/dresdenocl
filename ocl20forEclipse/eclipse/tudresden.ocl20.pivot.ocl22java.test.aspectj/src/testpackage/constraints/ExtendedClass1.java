@@ -5,7 +5,7 @@ package testpackage.constraints;
  * The class {@link testpackage.constraints.ExtendedClass1} provides some newly defined attributes and methods class {@link Class1}.
  * </p>
  */
-public class ExtendedClass1 extends Object {
+public class ExtendedClass1  {
 
     protected Integer defProperty01;    
     
@@ -77,7 +77,7 @@ public class ExtendedClass1 extends Object {
      *A method signature implemented by an aspect.
      *</p>
      */
-    public tudresden.ocl20.pivot.ocl2java.types.OclSet<testpackage.Class1> testOclAnyAllInstances(testpackage.Class1 source) {
+    public tudresden.ocl20.pivot.ocl2java.types.OclSet<testpackage.Class1> testOclAnyAllInstances() {
         return null;
     }
 

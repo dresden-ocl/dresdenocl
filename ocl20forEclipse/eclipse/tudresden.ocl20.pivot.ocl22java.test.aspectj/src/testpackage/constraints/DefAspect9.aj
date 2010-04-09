@@ -33,18 +33,18 @@ public privileged aspect DefAspect9 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testOclAnyAllInstances(testpackage.Class1 source)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testOclAnyAllInstances()}.</p>
      */
-    protected pointcut testOclAnyAllInstancesCaller(testpackage.Class1 aClass, testpackage.Class1 source):
-    	call(* testpackage.Class1.testOclAnyAllInstances(testpackage.Class1))
-    	&& target(aClass) && args(source);
+    protected pointcut testOclAnyAllInstancesCaller(testpackage.Class1 aClass):
+    	call(* testpackage.Class1.testOclAnyAllInstances())
+    	&& target(aClass);
     
     /**
-     * <p>Defines the method testOclAnyAllInstances(testpackage.Class1 source) defined by the constraint
+     * <p>Defines the method testOclAnyAllInstances() defined by the constraint
      * <code>context Class1
-     *       def: testOclAnyAllInstances = source[].allInstances()</code></p>
+     *       def: testOclAnyAllInstances = Class1[].allInstances()</code></p>
      */
-    tudresden.ocl20.pivot.ocl2java.types.OclSet<testpackage.Class1> around(testpackage.Class1 aClass, testpackage.Class1 source): testOclAnyAllInstancesCaller(aClass, source) {
+    tudresden.ocl20.pivot.ocl2java.types.OclSet<testpackage.Class1> around(testpackage.Class1 aClass): testOclAnyAllInstancesCaller(aClass) {
         return (new tudresden.ocl20.pivot.ocl2java.types.OclSet<testpackage.Class1>((java.util.Set<testpackage.Class1>) allInstances.get(testpackage.Class1.class.getCanonicalName()).keySet()));
     }
 }

@@ -175,17 +175,25 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 			LinkedList<URL> templatePaths;
 
 			templatePaths = new LinkedList<URL>();
-			
-			templatePaths.add(this.getClass().getResource(TEMPLATE_PATH + JAVA_TEMPLATE_FILE));
-			templatePaths.add(this.getClass().getResource(TEMPLATE_PATH + TYPE_TEMPLATE_FILE));
-			templatePaths.add(this.getClass().getResource(TEMPLATE_PATH + OPERATION_TEMPLATE_FILE));
-			templatePaths.add(this.getClass().getResource(TEMPLATE_PATH + EXPRESSION_TEMPLATE_FILE));
-			templatePaths.add(this.getClass().getResource(TEMPLATE_PATH + INSTRUMENTATION_TEMPLATE_FILE));
 
-			ITemplateEngine templateEngine = TemplatePlugin.getTemplateEngineRegistry().getNewTemplateEngine("StringTemplate");
-			
-			this.myTemplateGroup = new TemplateGroup("Java",null, templateEngine, templatePaths);
-			
+			templatePaths.add(this.getClass().getResource(
+					TEMPLATE_PATH + JAVA_TEMPLATE_FILE));
+			templatePaths.add(this.getClass().getResource(
+					TEMPLATE_PATH + TYPE_TEMPLATE_FILE));
+			templatePaths.add(this.getClass().getResource(
+					TEMPLATE_PATH + OPERATION_TEMPLATE_FILE));
+			templatePaths.add(this.getClass().getResource(
+					TEMPLATE_PATH + EXPRESSION_TEMPLATE_FILE));
+			templatePaths.add(this.getClass().getResource(
+					TEMPLATE_PATH + INSTRUMENTATION_TEMPLATE_FILE));
+
+			ITemplateEngine templateEngine = TemplatePlugin
+					.getTemplateEngineRegistry().getNewTemplateEngine(
+							"StringTemplate");
+
+			this.myTemplateGroup = new TemplateGroup("Java", null,
+					templateEngine, templatePaths);
+
 			this.mySettings = new Ocl22JavaSettings();
 		}
 
@@ -1098,8 +1106,8 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 			 * operation must be computed.
 			 */
 			if (bodyType.isGenericType()) {
-				addOp = this.myTemplateGroup
-						.getTemplate("addAllOperationName").toString();
+				addOp = this.myTemplateGroup.getTemplate("addAllOperationName")
+						.toString();
 			} else {
 				addOp = this.myTemplateGroup.getTemplate("addOperationName")
 						.toString();
@@ -1260,9 +1268,14 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 		/* Transform Code for the source of the operation call. */
 		sourceExp = anOperationCallExp.getSource();
 
-		/* Check if the referred operation is static. */
+		/* Check if the type of the source expression has not been set. */
+		/*
+		 * FIXME Claas: This is a bug in the parser. Remove this code when the
+		 * bug is fixed.
+		 */
 		if (anOperationCallExp.getReferredOperation() != null
-				&& anOperationCallExp.getReferredOperation().isStatic()) {
+				&& (sourceExp == null || anOperationCallExp
+						.getReferredOperation().isStatic())) {
 			ITransformedType transformedSourceType;
 
 			/* The type of the source becomes the source expression. */
@@ -1695,8 +1708,7 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 
 					resultVar = this.myCodeTransEnv.getNewResultVarName();
 
-					template = this.myTemplateGroup
-							.getTemplate("sumOperation");
+					template = this.myTemplateGroup.getTemplate("sumOperation");
 
 					template.setAttribute("sourceExp", sourceCode
 							.getResultExp());
@@ -4184,17 +4196,16 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 
 	/**
 	 * <p>
-	 * A helper method which returns a {@link ITemplate} containing
-	 * the code for a new defined Class as new super class to a given
-	 * {@link Type} .
+	 * A helper method which returns a {@link ITemplate} containing the code for
+	 * a new defined Class as new super class to a given {@link Type} .
 	 * </p>
 	 * 
 	 * @param contextPackage
 	 *            The package where the given {@link Type} is located.
 	 * @param aType
 	 *            The {@link Type} which new superclass shall be created.
-	 * @return A {@link ITemplate} containing the code for a new
-	 *         defined Class as new super class to a given {@link Type}.
+	 * @return A {@link ITemplate} containing the code for a new defined Class
+	 *         as new super class to a given {@link Type}.
 	 */
 	private ITemplate createExtendedClassTemplate(String contextPackage,
 			Type aType) {
