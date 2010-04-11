@@ -44,12 +44,11 @@ public class ModelInstanceTuple extends AbstractModelInstanceElement implements
 		IModelInstanceTuple {
 
 	/** The {@link Logger} for this class. */
-	private static final Logger LOGGER =
-			ModelInstanceTypePlugin.getLogger(ModelInstanceTuple.class);
+	private static final Logger LOGGER = ModelInstanceTypePlugin
+			.getLogger(ModelInstanceTuple.class);
 
 	/** Contains the keys and values of this {@link IModelInstanceTuple}. */
-	protected Map<IModelInstanceString, IModelInstanceElement> myMap =
-			new HashMap<IModelInstanceString, IModelInstanceElement>();
+	protected Map<IModelInstanceString, IModelInstanceElement> myMap = new HashMap<IModelInstanceString, IModelInstanceElement>();
 
 	/**
 	 * <p>
@@ -58,17 +57,17 @@ public class ModelInstanceTuple extends AbstractModelInstanceElement implements
 	 * </p>
 	 * 
 	 * <p>
-	 * <strong>Please note that the {@link List}s of keys and values must have the
-	 * same size.</strong> Otherwise, an {@link IllegalArgumentException} is
+	 * <strong>Please note that the {@link List}s of keys and values must have
+	 * the same size.</strong> Otherwise, an {@link IllegalArgumentException} is
 	 * thrown.
 	 * </p>
 	 * 
 	 * @param keys
-	 *          The keys of the {@link ModelInstanceTuple}.
+	 *            The keys of the {@link ModelInstanceTuple}.
 	 * @param values
-	 *          The values of the {@link ModelInstanceTuple}
+	 *            The values of the {@link ModelInstanceTuple}
 	 * @param type
-	 *          The {@link Type} of this {@link ModelInstanceTuple}.
+	 *            The {@link Type} of this {@link ModelInstanceTuple}.
 	 */
 	protected ModelInstanceTuple(List<IModelInstanceString> keys,
 			List<IModelInstanceElement> values, Type type) {
@@ -123,9 +122,9 @@ public class ModelInstanceTuple extends AbstractModelInstanceElement implements
 	 * </p>
 	 * 
 	 * @param map
-	 *          The the keys values of the {@link ModelInstanceTuple}
+	 *            The the keys values of the {@link ModelInstanceTuple}
 	 * @param type
-	 *          The {@link Type} of this {@link ModelInstanceTuple}.
+	 *            The {@link Type} of this {@link ModelInstanceTuple}.
 	 */
 	protected ModelInstanceTuple(
 			Map<IModelInstanceString, IModelInstanceElement> map, Type type) {
@@ -167,6 +166,7 @@ public class ModelInstanceTuple extends AbstractModelInstanceElement implements
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @seetudresden.ocl20.pivot.modelbus.modelinstance.types.impl.
 	 * AbstractModelInstanceElement#getName()
 	 */
@@ -199,8 +199,8 @@ public class ModelInstanceTuple extends AbstractModelInstanceElement implements
 
 	/*
 	 * (non-Javadoc)
-	 * @see
-	 * tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement
+	 * 
+	 * @see tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement
 	 * #asType(tudresden.ocl20.pivot.pivotmodel.Type)
 	 */
 	public IModelInstanceElement asType(Type type) throws AsTypeCastException {
@@ -212,8 +212,8 @@ public class ModelInstanceTuple extends AbstractModelInstanceElement implements
 		}
 
 		else {
-			throw new AsTypeCastException("Cannot cast from " + this.myType + " to "
-					+ type + ".");
+			throw new AsTypeCastException("Cannot cast from " + this.myType
+					+ " to " + type + ".");
 		}
 
 		return result;
@@ -221,8 +221,8 @@ public class ModelInstanceTuple extends AbstractModelInstanceElement implements
 
 	/*
 	 * (non-Javadoc)
-	 * @see
-	 * tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement
+	 * 
+	 * @see tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement
 	 * #copyForAtPre()
 	 */
 	public IModelInstanceElement copyForAtPre() throws CopyForAtPreException {
@@ -232,6 +232,7 @@ public class ModelInstanceTuple extends AbstractModelInstanceElement implements
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @seetudresden.ocl20.pivot.modelbus.modelinstance.types.base.
 	 * AbstractModelInstanceElement#equals(java.lang.Object)
 	 */
@@ -249,7 +250,10 @@ public class ModelInstanceTuple extends AbstractModelInstanceElement implements
 			ModelInstanceTuple other;
 			other = (ModelInstanceTuple) object;
 
-			/* This should not happen. But anyway, null == null results in false. */
+			/*
+			 * This should not happen. But anyway, null == null results in
+			 * false.
+			 */
 			if (this.isUndefined() || other.isUndefined()) {
 				result = false;
 			}
@@ -268,8 +272,8 @@ public class ModelInstanceTuple extends AbstractModelInstanceElement implements
 
 	/*
 	 * (non-Javadoc)
-	 * @see
-	 * tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceTuple#
+	 * 
+	 * @see tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceTuple#
 	 * get(tudresden
 	 * .ocl20.pivot.modelbus.modelinstance.types.IModelInstanceString)
 	 */
@@ -299,6 +303,7 @@ public class ModelInstanceTuple extends AbstractModelInstanceElement implements
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @seetudresden.ocl20.pivot.modelbus.modelinstance.types.base.
 	 * AbstractModelInstanceElement#hashCode()
 	 */
@@ -320,8 +325,20 @@ public class ModelInstanceTuple extends AbstractModelInstanceElement implements
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement
+	 * tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement#isKindOf
+	 * (tudresden.ocl20.pivot.pivotmodel.Type)
+	 */
+	public boolean isKindOf(Type type) {
+
+		return this.getType().conformsTo(type);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement
 	 * #isUndefined()
 	 */
 	public boolean isUndefined() {

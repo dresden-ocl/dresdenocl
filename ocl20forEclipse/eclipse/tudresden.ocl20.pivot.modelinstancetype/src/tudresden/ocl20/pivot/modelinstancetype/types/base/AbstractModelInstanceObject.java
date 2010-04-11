@@ -18,7 +18,9 @@ with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
 package tudresden.ocl20.pivot.modelinstancetype.types.base;
 
+import tudresden.ocl20.pivot.model.IModel;
 import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceObject;
+import tudresden.ocl20.pivot.pivotmodel.Type;
 
 /**
  * <p>
@@ -30,8 +32,51 @@ import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceObject;
 public abstract class AbstractModelInstanceObject extends
 		AbstractModelInstanceElement implements IModelInstanceObject {
 
+	/**
+	 * The original {@link Type} of this {@link AbstractModelInstanceObject}.
+	 * The original {@link Type} is the lowest {@link Type} in the
+	 * {@link IModel}'s inheritance that conforms to this
+	 * {@link AbstractModelInstanceObject}. It is required to enable down-casts
+	 * and {@link AbstractModelInstanceObject#isKindOf(Type)} checks.
+	 */
+	private Type myOriginalType;
+
+	/**
+	 * <p>
+	 * Creates a new {@link AbstractModelInstanceObject}.
+	 * </p>
+	 * 
+	 * @param type
+	 *            The {@link Type} of this {@link AbstractModelInstanceObject}.
+	 * @param originalType
+	 *            The original {@link Type} of this
+	 *            {@link AbstractModelInstanceObject}. The original {@link Type}
+	 *            is the lowest {@link Type} in the {@link IModel}'s inheritance
+	 *            that conforms to this {@link AbstractModelInstanceObject}. It
+	 *            is required to enable down-casts and
+	 *            {@link AbstractModelInstanceObject#isKindOf(Type)} checks.
+	 */
+	protected AbstractModelInstanceObject(Type type, Type originalType) {
+
+		if (type == null) {
+			throw new IllegalArgumentException(
+					"Parameter 'type' must not be null.");
+		}
+		// no else.
+
+		if (originalType == null) {
+			throw new IllegalArgumentException(
+					"Parameter 'originalType' must not be null.");
+		}
+		// no else.
+
+		this.myType = type;
+		this.myOriginalType = originalType;
+	}
+
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @seetudresden.ocl20.pivot.modelbus.modelinstance.types.base.
 	 * AbstractModelInstanceElement#getName()
 	 */
@@ -63,6 +108,7 @@ public abstract class AbstractModelInstanceObject extends
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @seetudresden.ocl20.pivot.modelbus.modelinstance.types.base.
 	 * AbstractModelInstanceElement#equals(java.lang.Object)
 	 */
@@ -80,7 +126,10 @@ public abstract class AbstractModelInstanceObject extends
 			AbstractModelInstanceObject other;
 			other = (AbstractModelInstanceObject) object;
 
-			/* This should not happen. But anyway, null == null results in false. */
+			/*
+			 * This should not happen. But anyway, null == null results in
+			 * false.
+			 */
 			if (this.isUndefined() || other.isUndefined()) {
 				result = false;
 			}
@@ -103,6 +152,7 @@ public abstract class AbstractModelInstanceObject extends
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @seetudresden.ocl20.pivot.modelbus.modelinstance.types.base.
 	 * AbstractModelInstanceElement#hashCode()
 	 */
@@ -126,12 +176,39 @@ public abstract class AbstractModelInstanceObject extends
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement
+	 * tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement#isKindOf
+	 * (tudresden.ocl20.pivot.pivotmodel.Type)
+	 */
+	public boolean isKindOf(Type type) {
+		return this.myOriginalType.conformsTo(type);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement
 	 * #isUndefined()
 	 */
 	public boolean isUndefined() {
 
 		return this.getObject() == null;
+	}
+
+	/**
+	 * <p>
+	 * Returns the original {@link Type} of this
+	 * {@link AbstractModelInstanceObject}. The original {@link Type} is the
+	 * lowest {@link Type} in the {@link IModel}'s inheritance that conforms to
+	 * this {@link AbstractModelInstanceObject}. It is required to enable
+	 * down-casts and {@link AbstractModelInstanceObject#isKindOf(Type)} checks.
+	 * </p>
+	 * 
+	 * @return The original {@link Type} of this
+	 *         {@link AbstractModelInstanceObject}.
+	 */
+	protected Type getOriginalType() {
+		return this.myOriginalType;
 	}
 }

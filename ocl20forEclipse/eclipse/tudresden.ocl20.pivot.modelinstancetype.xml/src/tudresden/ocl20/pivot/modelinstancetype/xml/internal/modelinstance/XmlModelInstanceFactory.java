@@ -522,7 +522,7 @@ public class XmlModelInstanceFactory extends BasisJavaModelInstanceFactory {
 
 		XmlModelInstanceObject result;
 
-		result = new XmlModelInstanceObject(node, type, this);
+		result = new XmlModelInstanceObject(node, type, type, this);
 
 		return result;
 	}

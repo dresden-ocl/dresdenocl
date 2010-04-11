@@ -26,12 +26,23 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.WeakHashMap;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.osgi.util.NLS;
 
 import tudresden.ocl20.pivot.model.IModel;
+import tudresden.ocl20.pivot.model.ModelAccessException;
 import tudresden.ocl20.pivot.model.ModelConstants;
+import tudresden.ocl20.pivot.modelinstancetype.ecore.internal.modelinstance.EcoreModelInstanceFactory;
+import tudresden.ocl20.pivot.modelinstancetype.ecore.internal.msg.EcoreModelInstanceTypeMessages;
+import tudresden.ocl20.pivot.modelinstancetype.exception.TypeNotFoundInModelException;
+import tudresden.ocl20.pivot.modelinstancetype.types.ComplexType;
 import tudresden.ocl20.pivot.pivotmodel.PrimitiveType;
 import tudresden.ocl20.pivot.pivotmodel.PrimitiveTypeKind;
 import tudresden.ocl20.pivot.pivotmodel.Type;
@@ -76,6 +87,25 @@ public class EcoreModelInstanceTypeUtility {
 	 */
 	private static final Class<?> STRING_CLASSES[] = new Class<?>[] {
 			char.class, Character.class, String.class };
+
+	/** The IModel this {@link EcoreModelInstanceTypeUtility} belongs to. */
+	private IModel model;
+
+	/** Already found and cached {@link Type} references. */
+	private Map<Class<?>, Type> cachedTypes = new WeakHashMap<Class<?>, Type>();
+
+	/**
+	 * <p>
+	 * Creates a new {@link EcoreModelInstanceTypeUtility}.
+	 * </p>
+	 * 
+	 * @param model
+	 *            The IModel this {@link EcoreModelInstanceTypeUtility} belongs
+	 *            to.
+	 */
+	public EcoreModelInstanceTypeUtility(IModel model) {
+		this.model = model;
+	}
 
 	/**
 	 * <p>
@@ -285,6 +315,165 @@ public class EcoreModelInstanceTypeUtility {
 
 	/**
 	 * <p>
+	 * A helper method that returns the {@link Type} in a given {@link IModel}
+	 * that correspond to a given {@link Class}.
+	 * </p>
+	 * 
+	 * @param aClass
+	 *            The {@link Class} for that the {@link Type} shall be returned.
+	 * @return The found {@link Type}.
+	 * @throws TypeNotFoundInModelException
+	 *             Thrown, if a given {@link Object} cannot be adapted to a
+	 *             {@link Type} in the {@link IModel}.
+	 */
+	public Type findTypeOfClassInModel(Class<?> aClass)
+			throws TypeNotFoundInModelException {
+
+		Type result;
+
+		/* Probably use a cached result. */
+		result = this.cachedTypes.get(aClass);
+
+		/* Else compute the result. */
+		if (result == null) {
+			try {
+				List<String> typePath;
+				typePath = EcoreModelInstanceTypeUtility
+						.toQualifiedNameList(aClass.getCanonicalName());
+
+				/*
+				 * The problem with Ecore models is that Ecore models do not
+				 * contain the complete package hierarchy of the implementation
+				 * class. Thus, remove package per package from the path and
+				 * search for a type again.
+				 */
+				while (result == null && typePath.size() >= 2) {
+					result = model.findType(typePath);
+
+					typePath.remove(0);
+				}
+				// end while.
+			}
+
+			catch (ModelAccessException e) {
+				result = null;
+			}
+
+			/* Probably throw an exception. */
+			if (result == null) {
+				String msg;
+
+				msg = EcoreModelInstanceTypeMessages.EcoreModelInstanceFactory_TypeNotFoundInModel;
+				msg = NLS.bind(msg, aClass);
+
+				throw new TypeNotFoundInModelException(msg);
+			}
+
+			/* Cache the result. */
+			this.cachedTypes.put(aClass, result);
+		}
+		// no else.
+
+		return result;
+	}
+
+	/**
+	 * <p>
+	 * A helper method that tries to find at least one {@link Type} in the
+	 * {@link IModel} that a given {@link EObject} implements.
+	 * </p>
+	 * 
+	 * @param eObject
+	 *            The {@link EObject} for that {@link Type}s shall be found.
+	 * @return A {@link Set} of found {@link Type}s.
+	 * @throw {@link TypeNotFoundInModelException} Thrown, if the given
+	 *        {@link EObject} cannot be adapted to any {@link Type} of the
+	 *        {@link IModel} of this {@link EcoreModelInstanceFactory}.
+	 */
+	public Type findTypeOfEObjectInModel(EObject eObject)
+			throws TypeNotFoundInModelException {
+
+		Type result;
+		Set<Type> resultSet;
+
+		Class<?> objectClass;
+		objectClass = eObject.getClass();
+
+		/* Probably use a cached result. */
+		result = this.cachedTypes.get(objectClass);
+
+		/* Else compute the result. */
+		if (result == null) {
+			resultSet = findTypesOfClassInModel(objectClass);
+
+			if (resultSet.size() == 1) {
+				result = resultSet.iterator().next();
+			}
+
+			else {
+				result = new ComplexType(resultSet);
+			}
+
+			/* Cache result. */
+			this.cachedTypes.put(objectClass, result);
+		}
+		// no else.
+
+		return result;
+	}
+
+	/**
+	 * <p>
+	 * A helper method that removes {@link Type}s from a given {@link Set} that
+	 * are transitively described by other {@link Type}s of the {@link Set}
+	 * because they are super {@link Type}s.
+	 * </p>
+	 * 
+	 * @param types
+	 *            The {@link Set} from which super {@link Type}s shall be
+	 *            removed.
+	 * @return The {@link Set} without redundant super {@link Type}s.
+	 */
+	private static Set<Type> removeRedundantModelTypes(Set<Type> types) {
+
+		List<Type> typeList;
+		Set<Type> result;
+
+		typeList = new ArrayList<Type>(types);
+		result = new HashSet<Type>();
+
+		for (int index1 = 0; index1 < typeList.size(); index1++) {
+
+			Type type1;
+			boolean isRedundant;
+
+			type1 = typeList.get(index1);
+			isRedundant = false;
+
+			/* Check if any other type is a sub type of type 1. */
+			for (int index2 = 0; index2 < typeList.size(); index2++) {
+
+				Type type2;
+				type2 = typeList.get(index2);
+
+				if (index1 != index2 && type2.conformsTo(type1)) {
+					isRedundant = true;
+					break;
+				}
+				// no else.
+			}
+
+			if (!isRedundant) {
+				result.add(type1);
+			}
+			// no else.
+		}
+
+		return result;
+	}
+
+	/**
+	 * <p>
 	 * A helper method that converts a given canonical name of a java
 	 * {@link Class} into the qualified name (as a {@link List} of
 	 * {@link String} s) if the given {@link Class} can be mapped to a
@@ -359,6 +548,109 @@ public class EcoreModelInstanceTypeUtility {
 			}
 		}
 		// no else.
+
+		return result;
+	}
+
+	/**
+	 * <p>
+	 * A helper method that tries to find a {@link Type} in the {@link IModel}
+	 * that corresponds to the given class.
+	 * </p>
+	 * 
+	 * <p>
+	 * Probably a {@link Class} could be related to different {@link Type}s in
+	 * the {@link IModel} that do not know each other. E.g., multiple interface
+	 * inheritance. In these cases, the result will be a {@link Set} containing
+	 * all {@link Type}s, the {@link Class} could be related to.
+	 * </p>
+	 * 
+	 * <p>
+	 * The search strategy will work as follows:
+	 * </p>
+	 * <ul>
+	 * <li>If the {@link Class} itself is represented by a {@link Type} in the
+	 * {@link IModel}, only this {@link Type} will be returned.</li>
+	 * <li>Else the method will collect all {@link Type}s that are related to
+	 * implemented interfaces of the {@link Class} and probably also the
+	 * {@link Type} of its super {@link Class}.</li>
+	 * </ul>
+	 * 
+	 * @param aClass
+	 *            The {@link Class} for that the {@link Type}s shall be
+	 *            returned.
+	 * @return The found {@link Type}s as an array.
+	 * @throws TypeNotFoundInModelException
+	 *             Thrown, if a given {@link Object} cannot be adapted to a
+	 *             {@link Type} in the {@link IModel}.
+	 */
+	private Set<Type> findTypesOfClassInModel(Class<?> clazz)
+			throws TypeNotFoundInModelException {
+
+		Set<Type> result;
+
+		result = new HashSet<Type>();
+
+		/* Check that the given class is not null. */
+		if (clazz != null) {
+
+			/* Try to find the type corresponding to the class itself. */
+			try {
+				result.add(findTypeOfClassInModel(clazz));
+			}
+
+			/*
+			 * Else search for the interfaces in the model and for the super
+			 * type.
+			 */
+			catch (TypeNotFoundInModelException e) {
+
+				/* Add the types of the implemented interfaces. */
+				for (Class<?> anInterface : clazz.getInterfaces()) {
+					try {
+						result.addAll(findTypesOfClassInModel(anInterface));
+					}
+
+					catch (TypeNotFoundInModelException e2) {
+						/* Continue probably the class will implement a type. */
+					}
+				}
+
+				/* Add recursively found types for the super class. */
+				try {
+					result
+							.addAll(findTypesOfClassInModel(clazz
+									.getSuperclass()));
+				}
+
+				catch (TypeNotFoundInModelException e2) {
+					/*
+					 * Continue probably one of the interfaces will implement a
+					 * type.
+					 */
+				}
+
+				/*
+				 * Remove types, that are already represented by sub types in
+				 * the model.
+				 */
+				result = removeRedundantModelTypes(result);
+			}
+			// end else.
+		}
+
+		/*
+		 * Check if any implemented type has been found. Else throw an
+		 * exception.
+		 */
+		if (result.size() == 0) {
+			String msg;
+
+			msg = EcoreModelInstanceTypeMessages.EcoreModelInstanceFactory_TypeNotFoundInModel;
+			msg = NLS.bind(msg, clazz);
+
+			throw new TypeNotFoundInModelException(msg);
+		}
 
 		return result;
 	}

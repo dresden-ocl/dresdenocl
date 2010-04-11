@@ -23,6 +23,7 @@ import java.util.Collection;
 import tudresden.ocl20.pivot.essentialocl.types.TypeConstants;
 import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceCollection;
 import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement;
+import tudresden.ocl20.pivot.pivotmodel.Type;
 
 /**
  * <p>
@@ -33,10 +34,12 @@ import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement;
  * @author Claas Wilke
  */
 public abstract class AbstractModelInstanceCollection<T extends IModelInstanceElement>
-		extends AbstractModelInstanceElement implements IModelInstanceCollection<T> {
+		extends AbstractModelInstanceElement implements
+		IModelInstanceCollection<T> {
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @seetudresden.ocl20.pivot.modelbus.modelinstance.types.impl.
 	 * AbstractModelInstanceElement#getName()
 	 */
@@ -93,7 +96,8 @@ public abstract class AbstractModelInstanceCollection<T extends IModelInstanceEl
 				}
 
 				if (element instanceof IModelInstanceElement) {
-					resultBuffer.append(((IModelInstanceElement) element).getName());
+					resultBuffer.append(((IModelInstanceElement) element)
+							.getName());
 				}
 
 				else {
@@ -110,6 +114,7 @@ public abstract class AbstractModelInstanceCollection<T extends IModelInstanceEl
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @seetudresden.ocl20.pivot.modelbus.modelinstance.types.base.
 	 * AbstractModelInstanceElement#equals(java.lang.Object)
 	 */
@@ -131,7 +136,10 @@ public abstract class AbstractModelInstanceCollection<T extends IModelInstanceEl
 			AbstractModelInstanceCollection<?> other;
 			other = (AbstractModelInstanceCollection<?>) object;
 
-			/* This should not happen. But anyway, null == null results in false. */
+			/*
+			 * This should not happen. But anyway, null == null results in
+			 * false.
+			 */
 			if (this.isUndefined() || other.isUndefined()) {
 				result = false;
 			}
@@ -162,6 +170,7 @@ public abstract class AbstractModelInstanceCollection<T extends IModelInstanceEl
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @seetudresden.ocl20.pivot.modelbus.modelinstance.types.base.
 	 * AbstractModelInstanceElement#hashCode()
 	 */
@@ -210,11 +219,13 @@ public abstract class AbstractModelInstanceCollection<T extends IModelInstanceEl
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @seetudresden.ocl20.pivot.modelbus.modelinstance.types.base.
 	 * AbstractModelInstanceElement#hashCode()
 	 */
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceCollection
 	 * #isOrdered()
@@ -238,8 +249,8 @@ public abstract class AbstractModelInstanceCollection<T extends IModelInstanceEl
 
 	/*
 	 * (non-Javadoc)
-	 * @see
-	 * tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement
+	 * 
+	 * @see tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement
 	 * #isUndefined()
 	 */
 	public boolean isUndefined() {
@@ -249,6 +260,19 @@ public abstract class AbstractModelInstanceCollection<T extends IModelInstanceEl
 
 	/*
 	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement#isKindOf
+	 * (tudresden.ocl20.pivot.pivotmodel.Type)
+	 */
+	public boolean isKindOf(Type type) {
+
+		return this.getType().conformsTo(type);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceCollection
 	 * #isUnique()

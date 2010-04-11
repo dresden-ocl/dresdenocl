@@ -60,8 +60,8 @@ public class JavaModelInstanceObject extends AbstractModelInstanceObject
 		implements IModelInstanceObject {
 
 	/** The {@link Logger} for this class. */
-	private static final Logger LOGGER =
-			JavaModelInstanceTypePlugin.getLogger(JavaModelInstanceObject.class);
+	private static final Logger LOGGER = JavaModelInstanceTypePlugin
+			.getLogger(JavaModelInstanceObject.class);
 
 	/** The Java {@link Object} adapted by this {@link JavaModelInstanceObject}. */
 	private Object myAdaptedObject;
@@ -86,20 +86,26 @@ public class JavaModelInstanceObject extends AbstractModelInstanceObject
 	 * </p>
 	 * 
 	 * @param object
-	 *          The {@link Object} for which an {@link JavaModelInstanceObject}
-	 *          shall be created.
+	 *            The {@link Object} for which an
+	 *            {@link JavaModelInstanceObject} shall be created.
 	 * @param type
-	 *          The {@link Type} this {@link IModelInstanceElement} belongs to.
+	 *            The {@link Type} this {@link IModelInstanceElement} belongs
+	 *            to.
+	 * @param originalType
+	 *            The original {@link Type} this {@link IModelInstanceElement}
+	 *            belongs to.
 	 * @param factory
-	 *          The {@link JavaModelInstanceFactory} of this
-	 *          {@link JavaModelInstanceObject}. Required to adapt the
-	 *          {@link Object}s of accesses {@link Property}s or results of
-	 *          invoked {@link Operation}s.
+	 *            The {@link JavaModelInstanceFactory} of this
+	 *            {@link JavaModelInstanceObject}. Required to adapt the
+	 *            {@link Object}s of accesses {@link Property}s or results of
+	 *            invoked {@link Operation}s.
 	 */
 	protected JavaModelInstanceObject(Object object, Type type,
-			JavaModelInstanceFactory factory) {
+			Type originalType, JavaModelInstanceFactory factory) {
 
-		/* Eventually debug the entry of this method. */
+		super(type, originalType);
+
+		/* Probably debug the entry of this method. */
 		if (LOGGER.isDebugEnabled()) {
 			String msg;
 
@@ -121,7 +127,7 @@ public class JavaModelInstanceObject extends AbstractModelInstanceObject
 			this.initialize(null, null, type, factory);
 		}
 
-		/* Eventually debug the exit of this method. */
+		/* Probably debug the exit of this method. */
 		if (LOGGER.isDebugEnabled()) {
 			String msg;
 
@@ -139,24 +145,30 @@ public class JavaModelInstanceObject extends AbstractModelInstanceObject
 	 * </p>
 	 * 
 	 * @param object
-	 *          The {@link Object} for which an {@link JavaModelInstanceObject}
-	 *          shall be created.
+	 *            The {@link Object} for which an
+	 *            {@link JavaModelInstanceObject} shall be created.
 	 * @param castedToClass
-	 *          The Java {@link Class} this {@link JavaModelInstanceObject} is
-	 *          casted to. This is required to access the right {@link Property}s
-	 *          and {@link Operation}s.
+	 *            The Java {@link Class} this {@link JavaModelInstanceObject} is
+	 *            casted to. This is required to access the right
+	 *            {@link Property}s and {@link Operation}s.
 	 * @param type
-	 *          The {@link Type} this {@link IModelInstanceElement} belongs to.
+	 *            The {@link Type} this {@link IModelInstanceElement} belongs
+	 *            to.
+	 * @param originalType
+	 *            The original {@link Type} this {@link IModelInstanceElement}
+	 *            belongs to.
 	 * @param factory
-	 *          The {@link JavaModelInstanceFactory} of this
-	 *          {@link JavaModelInstanceObject}. Required to adapt the
-	 *          {@link Object}s of accesses {@link Property}s or results of
-	 *          invoked {@link Operation}s.
+	 *            The {@link JavaModelInstanceFactory} of this
+	 *            {@link JavaModelInstanceObject}. Required to adapt the
+	 *            {@link Object}s of accesses {@link Property}s or results of
+	 *            invoked {@link Operation}s.
 	 */
 	protected JavaModelInstanceObject(Object object, Class<?> castedToClass,
-			Type type, JavaModelInstanceFactory factory) {
+			Type type, Type originalType, JavaModelInstanceFactory factory) {
 
-		/* Eventually debug the entry of this method. */
+		super(type, originalType);
+
+		/* Probably debug the entry of this method. */
 		if (LOGGER.isDebugEnabled()) {
 			String msg;
 
@@ -173,7 +185,7 @@ public class JavaModelInstanceObject extends AbstractModelInstanceObject
 
 		this.initialize(object, castedToClass, type, factory);
 
-		/* Eventually debug the exit of this method. */
+		/* Probably debug the exit of this method. */
 		if (LOGGER.isDebugEnabled()) {
 			String msg;
 
@@ -187,6 +199,7 @@ public class JavaModelInstanceObject extends AbstractModelInstanceObject
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement
 	 * #asType(tudresden.ocl20.pivot.pivotmodel.Type)
@@ -194,7 +207,8 @@ public class JavaModelInstanceObject extends AbstractModelInstanceObject
 	public IModelInstanceElement asType(Type type) throws AsTypeCastException {
 
 		if (type == null) {
-			throw new IllegalArgumentException("Parameter 'type' must not be null.");
+			throw new IllegalArgumentException(
+					"Parameter 'type' must not be null.");
 		}
 		// no else.
 
@@ -215,7 +229,8 @@ public class JavaModelInstanceObject extends AbstractModelInstanceObject
 
 			/* If the type can be casted in the model, cast it. */
 			if (type.conformsTo(this.myType)) {
-				result = new JavaModelInstanceObject(null, type, this.myFactory);
+				result = new JavaModelInstanceObject(null, type, this
+						.getOriginalType(), this.myFactory);
 			}
 			// no else.
 
@@ -234,23 +249,20 @@ public class JavaModelInstanceObject extends AbstractModelInstanceObject
 		/* Else handle the not undefined object. */
 		else {
 			/* Get a canonical name for the given type. */
-			typeClassName =
-					JavaModelInstanceTypeUtility.toCanonicalName(type
-							.getQualifiedNameList());
+			typeClassName = JavaModelInstanceTypeUtility.toCanonicalName(type
+					.getQualifiedNameList());
 
 			/* Try to find a class that is represented by the given type. */
 			try {
-				typeClass =
-						this.myAdaptedObject.getClass().getClassLoader().loadClass(
-								typeClassName);
+				typeClass = this.myAdaptedObject.getClass().getClassLoader()
+						.loadClass(typeClassName);
 			}
 
 			/* If no class has been found, throw an exception. */
 			catch (ClassNotFoundException e) {
 				String msg;
 
-				msg =
-						JavaModelInstanceTypeMessages.JavaModelInstance_CannotCastTypeClassNotFound;
+				msg = JavaModelInstanceTypeMessages.JavaModelInstance_CannotCastTypeClassNotFound;
 				msg = NLS.bind(msg, this.getName(), type);
 
 				throw new AsTypeCastException(msg, e);
@@ -260,9 +272,8 @@ public class JavaModelInstanceObject extends AbstractModelInstanceObject
 			if (typeClass.isAssignableFrom(this.myAdaptedObject.getClass())) {
 
 				/* Cast this object to the found type. */
-				result =
-						new JavaModelInstanceObject(this.myAdaptedObject, typeClass, type,
-								this.myFactory);
+				result = new JavaModelInstanceObject(this.myAdaptedObject,
+						typeClass, type, this.getOriginalType(), this.myFactory);
 			}
 
 			/* Else throw an exception. */
@@ -284,26 +295,26 @@ public class JavaModelInstanceObject extends AbstractModelInstanceObject
 	/**
 	 * <p>
 	 * Performs a copy of the adapted element of this
-	 * {@link IModelInstanceElement} that can be used to store it as a @pre value
-	 * of a postcondition's expression. The method should copy the adapted object
-	 * and all its references that are expected to change during the methods
-	 * execution the postcondition is defined on.
+	 * {@link IModelInstanceElement} that can be used to store it as a @pre
+	 * value of a postcondition's expression. The method should copy the adapted
+	 * object and all its references that are expected to change during the
+	 * methods execution the postcondition is defined on.
 	 * </p>
 	 * 
 	 * <p>
-	 * For {@link JavaModelInstanceObject}s this method tries to clone the adapted
-	 * {@link Object} if the {@link Object} implements {@link Cloneable}. Else the
-	 * {@link Object} will be copied using an probably existing empty
+	 * For {@link JavaModelInstanceObject}s this method tries to clone the
+	 * adapted {@link Object} if the {@link Object} implements {@link Cloneable}
+	 * . Else the {@link Object} will be copied using an probably existing empty
 	 * {@link Constructor} and a flat copy will be created (means all attributes
 	 * and associations will lead to the same values and identities. <strong>If
-	 * neither the <code>clone()</code> method nor the emptry {@link Constructor}
-	 * are provided, this operation will fail with an
+	 * neither the <code>clone()</code> method nor the emptry
+	 * {@link Constructor} are provided, this operation will fail with an
 	 * {@link CopyForAtPreException}.</strong>
 	 * </p>
 	 * 
 	 * @return A copy of the adapted element.
 	 * @throws CopyForAtPreException
-	 *           Thrown, if an error during the copy process occurs.
+	 *             Thrown, if an error during the copy process occurs.
 	 */
 	public IModelInstanceElement copyForAtPre() throws CopyForAtPreException {
 
@@ -338,6 +349,7 @@ public class JavaModelInstanceObject extends AbstractModelInstanceObject
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @seetudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceObject#
 	 * getAdaptedObject()
 	 */
@@ -348,14 +360,15 @@ public class JavaModelInstanceObject extends AbstractModelInstanceObject
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceObject
 	 * #invokeOperation(tudresden.ocl20.pivot.pivotmodel.Operation,
 	 * java.util.List)
 	 */
 	public IModelInstanceElement invokeOperation(Operation operation,
-			List<IModelInstanceElement> args) throws OperationNotFoundException,
-			OperationAccessException {
+			List<IModelInstanceElement> args)
+			throws OperationNotFoundException, OperationAccessException {
 
 		if (operation == null) {
 			throw new IllegalArgumentException(
@@ -364,7 +377,8 @@ public class JavaModelInstanceObject extends AbstractModelInstanceObject
 		// no else.
 
 		else if (args == null) {
-			throw new IllegalArgumentException("Parameter 'args' must not be null.");
+			throw new IllegalArgumentException(
+					"Parameter 'args' must not be null.");
 		}
 		// no else.
 
@@ -373,8 +387,8 @@ public class JavaModelInstanceObject extends AbstractModelInstanceObject
 		/* Check if this object is undefined. */
 		if (this.myAdaptedObject == null) {
 
-			result =
-					new JavaModelInstanceObject(null, operation.getType(), this.myFactory);
+			result = this.myFactory.createModelInstanceElement(null, operation
+					.getType());
 		}
 
 		/* Else find and invoke the operation. */
@@ -392,7 +406,8 @@ public class JavaModelInstanceObject extends AbstractModelInstanceObject
 			argumentValues = new Object[args.size()];
 
 			/* Avoid errors through to much arguments given by the invocation. */
-			argSize = Math.min(args.size(), operation.getSignatureParameter().size());
+			argSize = Math.min(args.size(), operation.getSignatureParameter()
+					.size());
 
 			/* Adapt the argument values. */
 			for (int index = 0; index < argSize; index++) {
@@ -400,9 +415,8 @@ public class JavaModelInstanceObject extends AbstractModelInstanceObject
 				Set<ClassLoader> classLoaders = new HashSet<ClassLoader>();
 				classLoaders.add(this.myAdaptedType.getClassLoader());
 
-				argumentValues[index] =
-						JavaModelInstance.createAdaptedElement(args.get(index),
-								argumentTypes[index], classLoaders);
+				argumentValues[index] = JavaModelInstance.createAdaptedElement(
+						args.get(index), argumentTypes[index], classLoaders);
 			}
 
 			/* Try to invoke the found method. */
@@ -410,20 +424,19 @@ public class JavaModelInstanceObject extends AbstractModelInstanceObject
 				Object adapteeResult;
 				operationMethod.setAccessible(true);
 
-				adapteeResult =
-						operationMethod.invoke(this.myAdaptedObject, argumentValues);
+				adapteeResult = operationMethod.invoke(this.myAdaptedObject,
+						argumentValues);
 
 				/* Adapt the result to the expected result type. */
-				result =
-						AbstractModelInstance.adaptInvocationResult(adapteeResult,
-								operation.getType(), operation, this.myFactory);
+				result = AbstractModelInstance.adaptInvocationResult(
+						adapteeResult, operation.getType(), operation,
+						this.myFactory);
 			}
 
 			catch (IllegalArgumentException e) {
 				String msg;
 
-				msg =
-						JavaModelInstanceTypeMessages.JavaModelInstance_OperationAccessFailed;
+				msg = JavaModelInstanceTypeMessages.JavaModelInstance_OperationAccessFailed;
 				msg = NLS.bind(msg, operation, e.getMessage());
 
 				throw new OperationAccessException(msg, e);
@@ -432,8 +445,7 @@ public class JavaModelInstanceObject extends AbstractModelInstanceObject
 			catch (IllegalAccessException e) {
 				String msg;
 
-				msg =
-						JavaModelInstanceTypeMessages.JavaModelInstance_OperationAccessFailed;
+				msg = JavaModelInstanceTypeMessages.JavaModelInstance_OperationAccessFailed;
 				msg = NLS.bind(msg, operation, e.getMessage());
 
 				throw new OperationAccessException(msg, e);
@@ -442,8 +454,7 @@ public class JavaModelInstanceObject extends AbstractModelInstanceObject
 			catch (InvocationTargetException e) {
 				String msg;
 
-				msg =
-						JavaModelInstanceTypeMessages.JavaModelInstance_OperationAccessFailed;
+				msg = JavaModelInstanceTypeMessages.JavaModelInstance_OperationAccessFailed;
 				msg = NLS.bind(msg, operation, e.getMessage());
 
 				throw new OperationAccessException(msg, e);
@@ -456,6 +467,7 @@ public class JavaModelInstanceObject extends AbstractModelInstanceObject
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceObject
 	 * #getProperty(tudresden.ocl20.pivot.pivotmodel.Property)
@@ -477,8 +489,8 @@ public class JavaModelInstanceObject extends AbstractModelInstanceObject
 		/* Check if this object is undefined. */
 		if (this.myAdaptedObject == null) {
 
-			result =
-					new JavaModelInstanceObject(null, property.getType(), this.myFactory);
+			result = this.myFactory.createModelInstanceElement(null, property
+					.getType());
 		}
 
 		/*
@@ -489,16 +501,16 @@ public class JavaModelInstanceObject extends AbstractModelInstanceObject
 			propertyField = null;
 
 			/*
-			 * Search through all super classes as well. Until the field has been
-			 * found, or no more super classes exist.
+			 * Search through all super classes as well. Until the field has
+			 * been found, or no more super classes exist.
 			 */
 			propertySourceClass = this.myAdaptedType;
 
 			while (propertySourceClass != null && propertyField == null) {
 
 				try {
-					propertyField =
-							propertySourceClass.getDeclaredField(property.getName());
+					propertyField = propertySourceClass
+							.getDeclaredField(property.getName());
 				}
 
 				catch (NoSuchFieldException e) {
@@ -519,16 +531,15 @@ public class JavaModelInstanceObject extends AbstractModelInstanceObject
 				try {
 					propertyValue = propertyField.get(this.myAdaptedObject);
 
-					result =
-							JavaModelInstance.adaptInvocationResult(propertyValue, property
-									.getType(), property, this.myFactory);
+					result = JavaModelInstance.adaptInvocationResult(
+							propertyValue, property.getType(), property,
+							this.myFactory);
 				}
 
 				catch (IllegalArgumentException e) {
 					String msg;
 
-					msg =
-							JavaModelInstanceTypeMessages.JavaModelInstance_PropertyAccessFailed;
+					msg = JavaModelInstanceTypeMessages.JavaModelInstance_PropertyAccessFailed;
 					msg = NLS.bind(msg, property, e.getMessage());
 
 					throw new PropertyAccessException(msg, e);
@@ -537,8 +548,7 @@ public class JavaModelInstanceObject extends AbstractModelInstanceObject
 				catch (IllegalAccessException e) {
 					String msg;
 
-					msg =
-							JavaModelInstanceTypeMessages.JavaModelInstance_PropertyAccessFailed;
+					msg = JavaModelInstanceTypeMessages.JavaModelInstance_PropertyAccessFailed;
 					msg = NLS.bind(msg, property, e.getMessage());
 
 					throw new PropertyAccessException(msg, e);
@@ -550,8 +560,7 @@ public class JavaModelInstanceObject extends AbstractModelInstanceObject
 			else {
 				String msg;
 
-				msg =
-						JavaModelInstanceTypeMessages.JavaModelInstance_PropertyNotFoundInModelInstanceElement;
+				msg = JavaModelInstanceTypeMessages.JavaModelInstance_PropertyNotFoundInModelInstanceElement;
 				msg = NLS.bind(msg, property, this.myAdaptedObject.getClass());
 
 				throw new PropertyNotFoundException(msg);
@@ -565,6 +574,7 @@ public class JavaModelInstanceObject extends AbstractModelInstanceObject
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	public String toString() {
@@ -588,8 +598,8 @@ public class JavaModelInstanceObject extends AbstractModelInstanceObject
 	 * @return A copy of the adapted {@link Object} of this
 	 *         {@link JavaModelInstanceObject}.
 	 * @throws CopyForAtPreException
-	 *           Thrown, if we adapted {@link Object} cannot be copied via clone
-	 *           method.
+	 *             Thrown, if we adapted {@link Object} cannot be copied via
+	 *             clone method.
 	 */
 	private IModelInstanceElement copyForAtPreWithClone()
 			throws CopyForAtPreException {
@@ -605,9 +615,9 @@ public class JavaModelInstanceObject extends AbstractModelInstanceObject
 			cloneMethod.setAccessible(true);
 
 			adaptedResult = cloneMethod.invoke(this.myAdaptedObject);
-			result =
-					new JavaModelInstanceObject(adaptedResult, this.myAdaptedType,
-							this.myType, this.myFactory);
+			result = new JavaModelInstanceObject(adaptedResult,
+					this.myAdaptedType, this.myType, this.getOriginalType(),
+					this.myFactory);
 		}
 
 		catch (SecurityException e) {
@@ -661,16 +671,16 @@ public class JavaModelInstanceObject extends AbstractModelInstanceObject
 	/**
 	 * <p>
 	 * A helper method that tries to copy the adapted {@link Object} of this
-	 * {@link JavaModelInstanceObject} with an empty {@link Constructor} based on
-	 * reflections. The copied {@link Object} will be a flat copy of this
+	 * {@link JavaModelInstanceObject} with an empty {@link Constructor} based
+	 * on reflections. The copied {@link Object} will be a flat copy of this
 	 * {@link Object}. Thus, the fields will all have the same value and id.
 	 * </p>
 	 * 
 	 * @return A copy of the adapted {@link Object} of this
 	 *         {@link JavaModelInstanceObject}.
 	 * @throws CopyForAtPreException
-	 *           Thrown, if the adapted {@link Object} cannot be copied using an
-	 *           empty {@link Constructor}.
+	 *             Thrown, if the adapted {@link Object} cannot be copied using
+	 *             an empty {@link Constructor}.
 	 */
 	private IModelInstanceObject copyForAtPreWithReflections()
 			throws CopyForAtPreException {
@@ -701,7 +711,8 @@ public class JavaModelInstanceObject extends AbstractModelInstanceObject
 					/* Do not set static nor final fields. */
 					if (!(Modifier.isFinal(field.getModifiers()) || Modifier
 							.isStatic(field.getModifiers()))) {
-						field.set(copiedAdaptedObject, field.get(this.myAdaptedObject));
+						field.set(copiedAdaptedObject, field
+								.get(this.myAdaptedObject));
 					}
 					// no else.
 				}
@@ -712,9 +723,9 @@ public class JavaModelInstanceObject extends AbstractModelInstanceObject
 			// end while.
 
 			/* Create the adapter. */
-			result =
-					new JavaModelInstanceObject(copiedAdaptedObject, this.myAdaptedType,
-							this.myType, this.myFactory);
+			result = new JavaModelInstanceObject(copiedAdaptedObject,
+					this.myAdaptedType, this.myType, this.getOriginalType(),
+					this.myFactory);
 		}
 
 		catch (SecurityException e) {
@@ -777,17 +788,18 @@ public class JavaModelInstanceObject extends AbstractModelInstanceObject
 
 	/**
 	 * <p>
-	 * A helper {@link Method} used to find a method of the adapted {@link Object}
-	 * of this {@link JavaModelInstanceObject} that conforms to a given
-	 * {@link Operation}.
+	 * A helper {@link Method} used to find a method of the adapted
+	 * {@link Object} of this {@link JavaModelInstanceObject} that conforms to a
+	 * given {@link Operation}.
 	 * </p>
 	 * 
 	 * @param operation
-	 *          The {@link Operation} for that a {@link Method} shall be found.
+	 *            The {@link Operation} for that a {@link Method} shall be
+	 *            found.
 	 * @return The found {@link Method}.
 	 * @throws OperationNotFoundException
-	 *           If no matching {@link Method} for the given {@link Operation} can
-	 *           be found.
+	 *             If no matching {@link Method} for the given {@link Operation}
+	 *             can be found.
 	 */
 	private Method findMethodOfAdaptedObject(Operation operation)
 			throws OperationNotFoundException {
@@ -800,8 +812,8 @@ public class JavaModelInstanceObject extends AbstractModelInstanceObject
 		methodSourceClass = this.myAdaptedType;
 
 		/*
-		 * Try to find an according method in the adapted objects class, or one of
-		 * its super classes.
+		 * Try to find an according method in the adapted objects class, or one
+		 * of its super classes.
 		 */
 		while (methodSourceClass != null && result == null) {
 
@@ -814,18 +826,20 @@ public class JavaModelInstanceObject extends AbstractModelInstanceObject
 				/* Check if the name matches to the given operation's name. */
 				nameIsEqual = aMethod.getName().equals(operation.getName());
 
-				/* Check if the return type matches to the given operation's type. */
-				resultTypeIsConform =
-						JavaModelInstanceTypeUtility.conformsTypeToType(aMethod
-								.getGenericReturnType(), operation.getType());
+				/*
+				 * Check if the return type matches to the given operation's
+				 * type.
+				 */
+				resultTypeIsConform = JavaModelInstanceTypeUtility
+						.conformsTypeToType(aMethod.getGenericReturnType(),
+								operation.getType());
 
 				/*
-				 * Check if the method has the same size of arguments as the given
-				 * operation.
+				 * Check if the method has the same size of arguments as the
+				 * given operation.
 				 */
-				argumentSizeIsEqual =
-						aMethod.getParameterTypes().length == operation
-								.getSignatureParameter().size();
+				argumentSizeIsEqual = aMethod.getParameterTypes().length == operation
+						.getSignatureParameter().size();
 
 				if (nameIsEqual && resultTypeIsConform && argumentSizeIsEqual) {
 
@@ -840,10 +854,12 @@ public class JavaModelInstanceObject extends AbstractModelInstanceObject
 					matches = true;
 
 					/* Compare the types of all arguments. */
-					for (int index = 0; index < operation.getSignatureParameter().size(); index++) {
+					for (int index = 0; index < operation
+							.getSignatureParameter().size(); index++) {
 
 						if (!JavaModelInstanceTypeUtility.conformsTypeToType(
-								javaTypes[index], pivotModelParamters.get(index).getType())) {
+								javaTypes[index], pivotModelParamters
+										.get(index).getType())) {
 							matches = false;
 							break;
 						}
@@ -868,8 +884,7 @@ public class JavaModelInstanceObject extends AbstractModelInstanceObject
 		if (result == null) {
 			String msg;
 
-			msg =
-					JavaModelInstanceTypeMessages.JavaModelInstance_OperationNotFoundInModelInstanceElement;
+			msg = JavaModelInstanceTypeMessages.JavaModelInstance_OperationNotFoundInModelInstanceElement;
 			msg = NLS.bind(msg, operation, this.myAdaptedObject.getClass());
 
 			throw new OperationNotFoundException(msg);
@@ -881,24 +896,25 @@ public class JavaModelInstanceObject extends AbstractModelInstanceObject
 
 	/**
 	 * <p>
-	 * A helper method that initializes a {@link JavaModelInstanceObject} (Called
-	 * from all constructors).
+	 * A helper method that initializes a {@link JavaModelInstanceObject}
+	 * (Called from all constructors).
 	 * </p>
 	 * 
 	 * @param object
-	 *          The {@link Object} for which an {@link JavaModelInstanceObject}
-	 *          shall be created.
+	 *            The {@link Object} for which an
+	 *            {@link JavaModelInstanceObject} shall be created.
 	 * @param castedToClass
-	 *          The Java {@link Class} this {@link JavaModelInstanceObject} is
-	 *          casted to. This is required to access the right {@link Property}s
-	 *          and {@link Operation}s.
+	 *            The Java {@link Class} this {@link JavaModelInstanceObject} is
+	 *            casted to. This is required to access the right
+	 *            {@link Property}s and {@link Operation}s.
 	 * @param type
-	 *          The {@link Type} this {@link IModelInstanceElement} belongs to.
+	 *            The {@link Type} this {@link IModelInstanceElement} belongs
+	 *            to.
 	 * @param factory
-	 *          The {@link JavaModelInstanceFactory} of this
-	 *          {@link JavaModelInstanceObject}. Required to adapt the
-	 *          {@link Object}s of accesses {@link Property}s or results of
-	 *          invoked {@link Operation}s.
+	 *            The {@link JavaModelInstanceFactory} of this
+	 *            {@link JavaModelInstanceObject}. Required to adapt the
+	 *            {@link Object}s of accesses {@link Property}s or results of
+	 *            invoked {@link Operation}s.
 	 */
 	private void initialize(Object object, Class<?> castedToClass, Type type,
 			JavaModelInstanceFactory factory) {

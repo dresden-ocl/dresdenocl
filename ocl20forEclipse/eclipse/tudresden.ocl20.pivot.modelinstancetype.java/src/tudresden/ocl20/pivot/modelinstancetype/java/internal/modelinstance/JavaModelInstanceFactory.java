@@ -55,24 +55,24 @@ public class JavaModelInstanceFactory extends BasisJavaModelInstanceFactory
 		implements IModelInstanceFactory {
 
 	/** The {@link Logger} for this class. */
-	private static final Logger LOGGER =
-			JavaModelInstanceTypePlugin.getLogger(JavaModelInstanceFactory.class);
+	private static final Logger LOGGER = JavaModelInstanceTypePlugin
+			.getLogger(JavaModelInstanceFactory.class);
 
 	/**
 	 * The already adapted {@link IModelInstanceElement}s of this
-	 * {@link JavaModelInstanceFactory}. <strong>This is a {@link WeakHashMap}! If
-	 * an {@link Object} is disposed, its adapted {@link IModelInstanceElement}
-	 * will be disposed as well.</p>
+	 * {@link JavaModelInstanceFactory}. <strong>This is a {@link WeakHashMap}!
+	 * If an {@link Object} is disposed, its adapted
+	 * {@link IModelInstanceElement} will be disposed as well.</p>
 	 */
-	private Map<Object, IModelInstanceElement> myCachedAdaptedObjects =
-			new WeakHashMap<Object, IModelInstanceElement>();
+	private Map<Object, IModelInstanceElement> myCachedAdaptedObjects = new WeakHashMap<Object, IModelInstanceElement>();
 
 	/** The IModel for that {@link IModelInstanceElement} shall be created. */
 	private IModel myModel;
 
 	/**
 	 * <p>
-	 * Creates a new {@link JavaModelInstanceFactory} for a given {@link IModel} .
+	 * Creates a new {@link JavaModelInstanceFactory} for a given {@link IModel}
+	 * .
 	 * </p>
 	 */
 	public JavaModelInstanceFactory(IModel model) {
@@ -82,8 +82,10 @@ public class JavaModelInstanceFactory extends BasisJavaModelInstanceFactory
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @seetudresden.ocl20.pivot.modelbus.modelinstance.types.impl.java.
-	 * BasisJavaModelInstanceFactory #createModelInstanceElement(java.lang.Object)
+	 * BasisJavaModelInstanceFactory
+	 * #createModelInstanceElement(java.lang.Object)
 	 */
 	public IModelInstanceElement createModelInstanceElement(Object adapted)
 			throws TypeNotFoundInModelException {
@@ -109,8 +111,8 @@ public class JavaModelInstanceFactory extends BasisJavaModelInstanceFactory
 		if (result == null) {
 
 			/*
-			 * Try to use the BasisJavaModelInstanceFactory to probably create an
-			 * adapter for a primitive type or a collection.
+			 * Try to use the BasisJavaModelInstanceFactory to probably create
+			 * an adapter for a primitive type or a collection.
 			 */
 			result = super.createModelInstanceElement(adapted);
 
@@ -119,8 +121,8 @@ public class JavaModelInstanceFactory extends BasisJavaModelInstanceFactory
 
 				/* Check if the object is an EnumerationLiteral. */
 				if (adapted.getClass().isEnum()) {
-					result =
-							this.createJavaModelInstanceEnumerationLiteral((Enum<?>) adapted);
+					result = this
+							.createJavaModelInstanceEnumerationLiteral((Enum<?>) adapted);
 				}
 
 				/* Else create an IModelInstanceObject. */
@@ -153,8 +155,10 @@ public class JavaModelInstanceFactory extends BasisJavaModelInstanceFactory
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @seetudresden.ocl20.pivot.modelbus.modelinstance.types.base.
-	 * BasisJavaModelInstanceFactory #createModelInstanceElement(java.lang.Object,
+	 * BasisJavaModelInstanceFactory
+	 * #createModelInstanceElement(java.lang.Object,
 	 * tudresden.ocl20.pivot.pivotmodel.Type)
 	 */
 	public IModelInstanceElement createModelInstanceElement(Object adapted,
@@ -182,8 +186,8 @@ public class JavaModelInstanceFactory extends BasisJavaModelInstanceFactory
 		if (result == null) {
 
 			/*
-			 * Try to use the BasisJavaModelInstanceFactory to probably create an
-			 * adapter for a primitive type or a collection.
+			 * Try to use the BasisJavaModelInstanceFactory to probably create
+			 * an adapter for a primitive type or a collection.
 			 */
 			result = super.createModelInstanceElement(adapted, type);
 
@@ -194,8 +198,9 @@ public class JavaModelInstanceFactory extends BasisJavaModelInstanceFactory
 				if (type instanceof Enumeration) {
 
 					/*
-					 * If adapted == null, i.e. a PropertyCallExp or OperationCallExp
-					 * returned a null value, simply try to create an undefined value.
+					 * If adapted == null, i.e. a PropertyCallExp or
+					 * OperationCallExp returned a null value, simply try to
+					 * create an undefined value.
 					 */
 					if (adapted == null) {
 						result = createEnumerationLiteral(adapted, type);
@@ -203,13 +208,15 @@ public class JavaModelInstanceFactory extends BasisJavaModelInstanceFactory
 
 					else {
 						/*
-						 * Check if the object is an EnumerationLiteral and has the same
-						 * type as the given type.
+						 * Check if the object is an EnumerationLiteral and has
+						 * the same type as the given type.
 						 */
 						if (adapted.getClass().isEnum()
-								&& JavaModelInstanceTypeUtility.toQualifiedNameList(
-										adapted.getClass().getCanonicalName()).equals(
-										type.getQualifiedNameList())) {
+								&& JavaModelInstanceTypeUtility
+										.toQualifiedNameList(
+												adapted.getClass()
+														.getCanonicalName())
+										.equals(type.getQualifiedNameList())) {
 							result = createEnumerationLiteral(adapted, type);
 						}
 					}
@@ -218,8 +225,7 @@ public class JavaModelInstanceFactory extends BasisJavaModelInstanceFactory
 					if (result == null) {
 						String msg;
 
-						msg =
-								JavaModelInstanceTypeMessages.JavaModelInstance_CannotAdaptToType;
+						msg = JavaModelInstanceTypeMessages.JavaModelInstance_CannotAdaptToType;
 						msg = NLS.bind(msg, adapted, type);
 
 						throw new IllegalArgumentException();
@@ -238,32 +244,37 @@ public class JavaModelInstanceFactory extends BasisJavaModelInstanceFactory
 							ownType = this.findTypesOfObjectInModel(adapted);
 
 							/*
-							 * If the found type conforms to the given type, adapt it.
+							 * If the found type conforms to the given type,
+							 * adapt it.
 							 */
 							if (ownType.conformsTo(type)) {
-								result = createJavaModelInstanceObject(adapted, ownType);
+								result = createJavaModelInstanceObject(adapted,
+										ownType);
 							}
 
 							else {
 								/*
-								 * FIXME Claas: Is this okay? Shouldn't an Exception be thrown
-								 * instead. Else use the given type.
+								 * FIXME Claas: Is this okay? Shouldn't an
+								 * Exception be thrown instead. Else use the
+								 * given type.
 								 */
-								result = createJavaModelInstanceObject(adapted, type);
+								result = createJavaModelInstanceObject(adapted,
+										type);
 							}
 							// end else.
 						}
 
 						/* Result is undefined. Use the type of the property. */
 						else {
-							result = createJavaModelInstanceObject(adapted, type);
+							result = createJavaModelInstanceObject(adapted,
+									type);
 						}
 					}
 
 					catch (TypeNotFoundInModelException e) {
 						/*
-						 * FIXME Claas: Is this okay? Shouldn't an Exception be thrown
-						 * instead. Else use the given type.
+						 * FIXME Claas: Is this okay? Shouldn't an Exception be
+						 * thrown instead. Else use the given type.
 						 */
 						result = createJavaModelInstanceObject(adapted, type);
 					}
@@ -298,19 +309,18 @@ public class JavaModelInstanceFactory extends BasisJavaModelInstanceFactory
 		IModelInstanceElement result;
 
 		/*
-		 * Since an enumeration literal could not be found in the model, handle this
-		 * case.
+		 * Since an enumeration literal could not be found in the model, handle
+		 * this case.
 		 */
 		if (adapted == null) {
-			result =
-					BasisJavaModelInstanceFactory
-							.createModelInstanceEnumerationLiteral(null);
+			result = BasisJavaModelInstanceFactory
+					.createModelInstanceEnumerationLiteral(null);
 		}
 
 		else {
 			try {
-				result =
-						this.createJavaModelInstanceEnumerationLiteral((Enum<?>) adapted);
+				result = this
+						.createJavaModelInstanceEnumerationLiteral((Enum<?>) adapted);
 			}
 
 			catch (TypeNotFoundInModelException e) {
@@ -333,11 +343,11 @@ public class JavaModelInstanceFactory extends BasisJavaModelInstanceFactory
 	 * </p>
 	 * 
 	 * @param anEnum
-	 *          The {@link Enum} that shall be adapted.
+	 *            The {@link Enum} that shall be adapted.
 	 * @return The adapted {@link IModelInstanceEnumerationLiteral}.
 	 * @throws TypeNotFoundInModelException
-	 *           Thrown, if a given {@link Enum} cannot be adapted to a
-	 *           {@link Type} in the {@link IModel}.
+	 *             Thrown, if a given {@link Enum} cannot be adapted to a
+	 *             {@link Type} in the {@link IModel}.
 	 */
 	private IModelInstanceElement createJavaModelInstanceEnumerationLiteral(
 			Enum<?> anEnum) throws TypeNotFoundInModelException {
@@ -383,8 +393,7 @@ public class JavaModelInstanceFactory extends BasisJavaModelInstanceFactory
 			if (result == null) {
 				String msg;
 
-				msg =
-						JavaModelInstanceTypeMessages.JavaModelInstance_TypeNotFoundInModel;
+				msg = JavaModelInstanceTypeMessages.JavaModelInstance_TypeNotFoundInModel;
 				msg = NLS.bind(msg, anEnum);
 
 				throw new TypeNotFoundInModelException(msg);
@@ -420,11 +429,11 @@ public class JavaModelInstanceFactory extends BasisJavaModelInstanceFactory
 	 * </p>
 	 * 
 	 * @param object
-	 *          The {@link Object} that shall be adapted.
+	 *            The {@link Object} that shall be adapted.
 	 * @return The create {@link IModelInstanceObject}.
 	 * @throws TypeNotFoundInModelException
-	 *           Thrown, if a given {@link Object} cannot be adapted to a
-	 *           {@link Type} in the {@link IModel}.
+	 *             Thrown, if a given {@link Object} cannot be adapted to a
+	 *             {@link Type} in the {@link IModel}.
 	 */
 	private IModelInstanceObject createJavaModelInstanceObject(Object object)
 			throws TypeNotFoundInModelException {
@@ -446,7 +455,7 @@ public class JavaModelInstanceFactory extends BasisJavaModelInstanceFactory
 		Type modelType;
 		modelType = this.findTypesOfObjectInModel(object);
 
-		result = new JavaModelInstanceObject(object, modelType, this);
+		result = new JavaModelInstanceObject(object, modelType, modelType, this);
 
 		/* Probably debug the exit of this method. */
 		if (LOGGER.isDebugEnabled()) {
@@ -469,11 +478,11 @@ public class JavaModelInstanceFactory extends BasisJavaModelInstanceFactory
 	 * </p>
 	 * 
 	 * @param object
-	 *          The {@link Object} that shall be adapted.
+	 *            The {@link Object} that shall be adapted.
 	 * @param The
-	 *          {@link Type} the created {@link IModelInstanceObject} shall have.
-	 *          <strong>Please note, that the adapted element could also have a
-	 *          sub-{@link Type} of the given {@link Type}!</strong>
+	 *            {@link Type} the created {@link IModelInstanceObject} shall
+	 *            have. <strong>Please note, that the adapted element could also
+	 *            have a sub-{@link Type} of the given {@link Type}!</strong>
 	 * @return The create {@link IModelInstanceObject}.
 	 */
 	private IModelInstanceObject createJavaModelInstanceObject(Object object,
@@ -499,7 +508,7 @@ public class JavaModelInstanceFactory extends BasisJavaModelInstanceFactory
 		 * element can return null. Handle this case here.
 		 */
 		if (object == null) {
-			result = new JavaModelInstanceObject(null, type, this);
+			result = new JavaModelInstanceObject(null, type, type, this);
 		}
 
 		else {
@@ -507,38 +516,51 @@ public class JavaModelInstanceFactory extends BasisJavaModelInstanceFactory
 			String canonicalName;
 
 			/* Convert the type's name into a canonical name. */
-			canonicalName =
-					JavaModelInstanceTypeUtility.toCanonicalName(type
-							.getQualifiedNameList());
+			canonicalName = JavaModelInstanceTypeUtility.toCanonicalName(type
+					.getQualifiedNameList());
 
 			/* Try to find the type's class. */
 			try {
 
 				/* Check if the object is undefined. */
 				if (object != null) {
-					typeClass =
-							object.getClass().getClassLoader().loadClass(canonicalName);
+					typeClass = object.getClass().getClassLoader().loadClass(
+							canonicalName);
 
 					/* Check if the given object conforms to the found class. */
 					if (typeClass.isAssignableFrom(object.getClass())) {
-						result = new JavaModelInstanceObject(object, typeClass, type, this);
+						Type originalType;
+						try {
+							originalType = this.findTypeOfClassInModel(object
+									.getClass());
+
+							result = new JavaModelInstanceObject(object,
+									typeClass, type, originalType, this);
+						}
+
+						catch (TypeNotFoundInModelException e) {
+							/* Create an undefined instance object. */
+							result = new JavaModelInstanceObject(null,
+									typeClass, type, type, this);
+						}
 					}
 
 					else {
 						/* Create an undefined instance object. */
-						result = new JavaModelInstanceObject(null, typeClass, type, this);
+						result = new JavaModelInstanceObject(null, typeClass,
+								type, type, this);
 					}
 				}
 
 				/* Create an undefined instance object. */
 				else {
-					result = new JavaModelInstanceObject(null, type, this);
+					result = new JavaModelInstanceObject(null, type, type, this);
 				}
 			}
 
 			catch (ClassNotFoundException e) {
 				/* Create an undefined instance object. */
-				result = new JavaModelInstanceObject(null, type, this);
+				result = new JavaModelInstanceObject(null, type, type, this);
 			}
 		}
 
@@ -563,11 +585,11 @@ public class JavaModelInstanceFactory extends BasisJavaModelInstanceFactory
 	 * </p>
 	 * 
 	 * @param aClass
-	 *          The {@link Class} for that the {@link Type} shall be returned.
+	 *            The {@link Class} for that the {@link Type} shall be returned.
 	 * @return The found {@link Type}.
 	 * @throws TypeNotFoundInModelException
-	 *           Thrown, if a given {@link Object} cannot be adapted to a
-	 *           {@link Type} in the {@link IModel}.
+	 *             Thrown, if a given {@link Object} cannot be adapted to a
+	 *             {@link Type} in the {@link IModel}.
 	 */
 	private Type findTypeOfClassInModel(Class<?> aClass)
 			throws TypeNotFoundInModelException {
@@ -575,9 +597,8 @@ public class JavaModelInstanceFactory extends BasisJavaModelInstanceFactory
 		Type result;
 
 		try {
-			result =
-					this.myModel.findType(JavaModelInstanceTypeUtility
-							.toQualifiedNameList(aClass.getCanonicalName()));
+			result = this.myModel.findType(JavaModelInstanceTypeUtility
+					.toQualifiedNameList(aClass.getCanonicalName()));
 		}
 
 		catch (ModelAccessException e) {
@@ -605,8 +626,8 @@ public class JavaModelInstanceFactory extends BasisJavaModelInstanceFactory
 	 * </p>
 	 * 
 	 * <p>
-	 * Probably a {@link Class} could be related to different {@link Type}s in the
-	 * {@link IModel} that do not know each other. E.g., multiple interface
+	 * Probably a {@link Class} could be related to different {@link Type}s in
+	 * the {@link IModel} that do not know each other. E.g., multiple interface
 	 * inheritance. In these cases, the result will be a {@link Set} containing
 	 * all {@link Type}s, the {@link Class} could be related to.
 	 * </p>
@@ -623,11 +644,12 @@ public class JavaModelInstanceFactory extends BasisJavaModelInstanceFactory
 	 * </ul>
 	 * 
 	 * @param aClass
-	 *          The {@link Class} for that the {@link Type}s shall be returned.
+	 *            The {@link Class} for that the {@link Type}s shall be
+	 *            returned.
 	 * @return The found {@link Type}s as an array.
 	 * @throws TypeNotFoundInModelException
-	 *           Thrown, if a given {@link Object} cannot be adapted to a
-	 *           {@link Type} in the {@link IModel}.
+	 *             Thrown, if a given {@link Object} cannot be adapted to a
+	 *             {@link Type} in the {@link IModel}.
 	 */
 	private Set<Type> findTypesOfClassInModel(Class<?> clazz)
 			throws TypeNotFoundInModelException {
@@ -645,7 +667,8 @@ public class JavaModelInstanceFactory extends BasisJavaModelInstanceFactory
 			}
 
 			/*
-			 * Else search for the interfaces in the model and for the super type.
+			 * Else search for the interfaces in the model and for the super
+			 * type.
 			 */
 			catch (TypeNotFoundInModelException e) {
 
@@ -662,17 +685,21 @@ public class JavaModelInstanceFactory extends BasisJavaModelInstanceFactory
 
 				/* Add recursively found types for the super class. */
 				try {
-					result.addAll(findTypesOfClassInModel(clazz.getSuperclass()));
+					result
+							.addAll(findTypesOfClassInModel(clazz
+									.getSuperclass()));
 				}
 
 				catch (TypeNotFoundInModelException e2) {
 					/*
-					 * Continue probably one of the interfaces will implement a type.
+					 * Continue probably one of the interfaces will implement a
+					 * type.
 					 */
 				}
 
 				/*
-				 * Remove types, that are already represented by sub types in the model.
+				 * Remove types, that are already represented by sub types in
+				 * the model.
 				 */
 				result = this.removeRedundantModelTypes(result);
 			}
@@ -680,7 +707,8 @@ public class JavaModelInstanceFactory extends BasisJavaModelInstanceFactory
 		}
 
 		/*
-		 * Check if any implemented type has been found. Else throw an exception.
+		 * Check if any implemented type has been found. Else throw an
+		 * exception.
 		 */
 		if (result.size() == 0) {
 			String msg;
@@ -701,11 +729,12 @@ public class JavaModelInstanceFactory extends BasisJavaModelInstanceFactory
 	 * </p>
 	 * 
 	 * @param object
-	 *          The {@link Object} for which the {@link Type} shall be returned.
+	 *            The {@link Object} for which the {@link Type} shall be
+	 *            returned.
 	 * @return The found {@link Type}.
 	 * @throws TypeNotFoundInModelException
-	 *           Thrown, if a given {@link Object} cannot be adapted to a
-	 *           {@link Type} in the {@link IModel}.
+	 *             Thrown, if a given {@link Object} cannot be adapted to a
+	 *             {@link Type} in the {@link IModel}.
 	 */
 	private Type findTypesOfObjectInModel(Object object)
 			throws TypeNotFoundInModelException {
@@ -737,7 +766,8 @@ public class JavaModelInstanceFactory extends BasisJavaModelInstanceFactory
 	 * </p>
 	 * 
 	 * @param types
-	 *          The {@link Set} from which super {@link Type}s shall be removed.
+	 *            The {@link Set} from which super {@link Type}s shall be
+	 *            removed.
 	 * @return The {@link Set} without redundant super {@link Type}s.
 	 */
 	private Set<Type> removeRedundantModelTypes(Set<Type> types) {

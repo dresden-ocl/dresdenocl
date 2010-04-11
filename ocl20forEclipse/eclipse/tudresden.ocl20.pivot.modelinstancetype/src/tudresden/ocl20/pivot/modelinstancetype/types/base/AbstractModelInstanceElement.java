@@ -52,11 +52,14 @@ public abstract class AbstractModelInstanceElement implements
 	protected Type myType;
 
 	/**
-	 * The name of this {@link IModelInstanceElement}. Could be <code>null</code>.
+	 * The name of this {@link IModelInstanceElement}. Could be
+	 * <code>null</code>.
 	 */
 	protected String myName;
 
-	/** The id of this {@link IModelInstanceElement}. Could be <code>null</code>. */
+	/**
+	 * The id of this {@link IModelInstanceElement}. Could be <code>null</code>.
+	 */
 	protected String myId;
 
 	/**
@@ -88,6 +91,7 @@ public abstract class AbstractModelInstanceElement implements
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see tudresden.ocl20.pivot.modelbus.IModelInstanceElement#getName()
 	 */
 	public String getName() {
@@ -119,8 +123,8 @@ public abstract class AbstractModelInstanceElement implements
 
 	/*
 	 * (non-Javadoc)
-	 * @see
-	 * tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement
+	 * 
+	 * @see tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement
 	 * #getType()
 	 */
 	public Type getType() {
@@ -130,19 +134,8 @@ public abstract class AbstractModelInstanceElement implements
 
 	/*
 	 * (non-Javadoc)
-	 * @see
-	 * tudresden.ocl20.pivot.modelbus.IModelInstanceElement#isInstanceOf(tudresden
-	 * .ocl20 .pivot.pivotmodel.Type)
-	 */
-	public boolean isKindOf(Type type) {
-
-		return this.myType.conformsTo(type);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement
+	 * 
+	 * @see tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement
 	 * #isTypeOf(tudresden.ocl20.pivot.pivotmodel.Type)
 	 */
 	public boolean isTypeOf(Type type) {

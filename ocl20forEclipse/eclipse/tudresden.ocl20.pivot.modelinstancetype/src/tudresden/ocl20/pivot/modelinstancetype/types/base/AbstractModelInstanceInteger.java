@@ -18,7 +18,9 @@ with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
 package tudresden.ocl20.pivot.modelinstancetype.types.base;
 
+import tudresden.ocl20.pivot.essentialocl.types.TypeConstants;
 import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceInteger;
+import tudresden.ocl20.pivot.pivotmodel.Type;
 
 /**
  * <p>
@@ -33,6 +35,7 @@ public abstract class AbstractModelInstanceInteger extends
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @seetudresden.ocl20.pivot.modelbus.modelinstance.types.impl.
 	 * AbstractModelInstanceElement#getName()
 	 */
@@ -72,6 +75,7 @@ public abstract class AbstractModelInstanceInteger extends
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @seetudresden.ocl20.pivot.modelbus.modelinstance.types.base.
 	 * AbstractModelInstanceElement#equals(java.lang.Object)
 	 */
@@ -89,7 +93,10 @@ public abstract class AbstractModelInstanceInteger extends
 			AbstractModelInstanceInteger other;
 			other = (AbstractModelInstanceInteger) object;
 
-			/* This should not happen. But anyway, null == null results in false. */
+			/*
+			 * This should not happen. But anyway, null == null results in
+			 * false.
+			 */
 			if (this.isUndefined() || other.isUndefined()) {
 				result = false;
 			}
@@ -108,6 +115,7 @@ public abstract class AbstractModelInstanceInteger extends
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @seetudresden.ocl20.pivot.modelbus.modelinstance.types.base.
 	 * AbstractModelInstanceElement#hashCode()
 	 */
@@ -129,8 +137,20 @@ public abstract class AbstractModelInstanceInteger extends
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement
+	 * tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement#isKindOf
+	 * (tudresden.ocl20.pivot.pivotmodel.Type)
+	 */
+	public boolean isKindOf(Type type) {
+
+		return TypeConstants.INTEGER.conformsTo(type);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement
 	 * #isUndefined()
 	 */
 	public boolean isUndefined() {

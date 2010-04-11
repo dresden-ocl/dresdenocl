@@ -38,7 +38,7 @@ import tudresden.ocl20.pivot.modelinstancetype.exception.PropertyNotFoundExcepti
 import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement;
 import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceFactory;
 import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceObject;
-import tudresden.ocl20.pivot.modelinstancetype.types.base.AbstractModelInstanceElement;
+import tudresden.ocl20.pivot.modelinstancetype.types.base.AbstractModelInstanceObject;
 import tudresden.ocl20.pivot.modelinstancetype.xml.XmlModelInstanceTypePlugin;
 import tudresden.ocl20.pivot.modelinstancetype.xml.internal.msg.XmlModelInstanceTypeMessages;
 import tudresden.ocl20.pivot.pivotmodel.Enumeration;
@@ -54,12 +54,12 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
  * 
  * @author Claas Wilke
  */
-public class XmlModelInstanceObject extends AbstractModelInstanceElement
+public class XmlModelInstanceObject extends AbstractModelInstanceObject
 		implements IModelInstanceObject {
 
 	/** The {@link Logger} for this class. */
-	private static final Logger LOGGER =
-			XmlModelInstanceTypePlugin.getLogger(XmlModelInstanceObject.class);
+	private static final Logger LOGGER = XmlModelInstanceTypePlugin
+			.getLogger(XmlModelInstanceObject.class);
 
 	/** The XML {@link Node} adapted by this {@link XmlModelInstanceObject}. */
 	protected Node adaptedNode;
@@ -71,33 +71,28 @@ public class XmlModelInstanceObject extends AbstractModelInstanceElement
 	protected IModelInstanceFactory modelInstanceFactory;
 
 	/**
-	 * The original {@link Type} of this {@link XmlModelInstanceObject} (required
-	 * if a casted {@link XmlModelInstanceObject} shall be recasted to a sub-type.
-	 */
-	protected Type originalType;
-
-	/**
 	 * <p>
 	 * Creates a new {@link XmlModelInstanceObject}.
 	 * </p>
 	 * 
 	 * @param node
-	 *          The {@link Node} for which an {@link XmlModelInstanceObject} shall
-	 *          be created.
+	 *            The {@link Node} for which an {@link XmlModelInstanceObject}
+	 *            shall be created.
 	 * @param type
-	 *          The {@link Type} this {@link IModelObject} belongs to.
-	 * @param orignialType
-	 *          The original {@link Type} of this {@link XmlModelInstanceObject}
-	 *          (required if a casted {@link XmlModelInstanceObject} shall be
-	 *          recasted to a sub-type.
+	 *            The {@link Type} this {@link IModelObject} belongs to.
+	 * @param originalType
+	 *            The original {@link Type} of this
+	 *            {@link XmlModelInstanceObject} (required if a casted
+	 *            {@link XmlModelInstanceObject} shall be recasted to a
+	 *            sub-type.
 	 * @param factory
-	 *          The {@link IModelInstanceFactory} to adapt properties of this
-	 *          {@link XmlModelInstanceObject}.
+	 *            The {@link IModelInstanceFactory} to adapt properties of this
+	 *            {@link XmlModelInstanceObject}.
 	 */
-	protected XmlModelInstanceObject(Node node, Type type, Type orignialType,
+	protected XmlModelInstanceObject(Node node, Type type, Type originalType,
 			IModelInstanceFactory factory) {
 
-		this(node, type, factory);
+		super(type, originalType);
 
 		/* Probably debug the entry of this method. */
 		if (LOGGER.isDebugEnabled()) {
@@ -114,13 +109,14 @@ public class XmlModelInstanceObject extends AbstractModelInstanceElement
 		}
 		// no else.
 
-		if (originalType == null) {
+		if (factory == null) {
 			throw new IllegalArgumentException(
-					"Parameter 'originalType' must not be null.");
+					"Parameter 'factory' must not be null.");
 		}
 		// no else.
 
-		this.originalType = orignialType;
+		this.adaptedNode = node;
+		this.modelInstanceFactory = factory;
 
 		/* Probably debug the exit of this method. */
 		if (LOGGER.isDebugEnabled()) {
@@ -134,67 +130,9 @@ public class XmlModelInstanceObject extends AbstractModelInstanceElement
 		// no else.
 	}
 
-	/**
-	 * <p>
-	 * Creates a new {@link XmlModelInstanceObject}.
-	 * </p>
-	 * 
-	 * @param node
-	 *          The {@link Node} for which an {@link XmlModelInstanceObject} shall
-	 *          be created.
-	 * @param type
-	 *          The {@link Type} this {@link IModelObject} belongs to.
-	 * @param factory
-	 *          The {@link IModelInstanceFactory} to adapt properties of this
-	 *          {@link XmlModelInstanceObject}.
-	 */
-	protected XmlModelInstanceObject(Node node, Type type,
-			IModelInstanceFactory factory) {
-
-		/* Probably debug the entry of this method. */
-		if (LOGGER.isDebugEnabled()) {
-			String msg;
-
-			msg = "XMLModelInstanceObject("; //$NON-NLS-1$
-			msg += "node = " + node; //$NON-NLS-1$
-			msg += ", type = " + type; //$NON-NLS-1$
-			msg += ", factory = " + factory; //$NON-NLS-1$
-			msg += ")"; //$NON-NLS-1$
-
-			LOGGER.debug(msg);
-		}
-		// no else.
-
-		if (type == null) {
-			throw new IllegalArgumentException("Parameter 'types' must not be null.");
-		}
-		// no else.
-
-		if (factory == null) {
-			throw new IllegalArgumentException(
-					"Parameter 'factory' must not be null.");
-		}
-		// no else.
-
-		this.adaptedNode = node;
-		this.myType = type;
-		this.originalType = myType;
-		this.modelInstanceFactory = factory;
-
-		/* Probably debug the exit of this method. */
-		if (LOGGER.isDebugEnabled()) {
-			String msg;
-
-			msg = "XMLModelInstanceObject(Object, "; //$NON-NLS-1$
-			msg += "Type, IModelInstanceFactory) - exit"; //$NON-NLS-1$
-
-			LOGGER.debug(msg);
-		}
-		// no else.
-	}
-
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement
 	 * #asType(tudresden.ocl20.pivot.pivotmodel.Type)
@@ -202,7 +140,8 @@ public class XmlModelInstanceObject extends AbstractModelInstanceElement
 	public IModelInstanceElement asType(Type type) throws AsTypeCastException {
 
 		if (type == null) {
-			throw new IllegalArgumentException("Parameter 'type' must not be null.");
+			throw new IllegalArgumentException(
+					"Parameter 'type' must not be null.");
 		}
 		// no else.
 
@@ -216,10 +155,9 @@ public class XmlModelInstanceObject extends AbstractModelInstanceElement
 		result = null;
 
 		/* If the type can be casted in the model, cast it. */
-		if (this.originalType.conformsTo(type)) {
-			result =
-					new XmlModelInstanceObject(this.adaptedNode, type, this.originalType,
-							this.modelInstanceFactory);
+		if (this.getOriginalType().conformsTo(type)) {
+			result = new XmlModelInstanceObject(this.adaptedNode, type, this
+					.getOriginalType(), this.modelInstanceFactory);
 		}
 		// no else.
 
@@ -227,8 +165,7 @@ public class XmlModelInstanceObject extends AbstractModelInstanceElement
 		if (result == null) {
 			String msg;
 
-			msg =
-					XmlModelInstanceTypeMessages.XmlModelInstanceElement_CannotCastToType;
+			msg = XmlModelInstanceTypeMessages.XmlModelInstanceElement_CannotCastToType;
 			msg = NLS.bind(msg, this.getName(), type);
 
 			throw new AsTypeCastException(msg);
@@ -240,6 +177,7 @@ public class XmlModelInstanceObject extends AbstractModelInstanceElement
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement
 	 * #copyForAtPre()
@@ -251,15 +189,15 @@ public class XmlModelInstanceObject extends AbstractModelInstanceElement
 		Node copiedNode;
 		copiedNode = this.adaptedNode.cloneNode(true);
 
-		result =
-				new XmlModelInstanceObject(copiedNode, this.myType,
-						this.modelInstanceFactory);
+		result = new XmlModelInstanceObject(copiedNode, this.myType, this
+				.getOriginalType(), this.modelInstanceFactory);
 
 		return result;
 	}
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @seetudresden.ocl20.pivot.modelbus.modelinstance.types.base.
 	 * AbstractModelInstanceElement#equals(java.lang.Object)
 	 */
@@ -308,6 +246,7 @@ public class XmlModelInstanceObject extends AbstractModelInstanceElement
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceObject
 	 * #getObject()
@@ -319,6 +258,7 @@ public class XmlModelInstanceObject extends AbstractModelInstanceElement
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceObject
 	 * #getProperty(tudresden.ocl20.pivot.pivotmodel.Property)
@@ -359,13 +299,14 @@ public class XmlModelInstanceObject extends AbstractModelInstanceElement
 				}
 				// end for.
 
-				if (result == null && property.getName().equalsIgnoreCase("value")
+				if (result == null
+						&& property.getName().equalsIgnoreCase("value")
 						&& this.adaptedNode.getTextContent() != null
 						&& this.adaptedNode.getTextContent().length() > 0) {
 
 					/*
-					 * Adapt the text content of the node as a primitive type (is done
-					 * inside the factory).
+					 * Adapt the text content of the node as a primitive type
+					 * (is done inside the factory).
 					 */
 					result = AbstractModelInstance.adaptInvocationResult(
 							this.adaptedNode, property.getType(), property,
@@ -405,8 +346,9 @@ public class XmlModelInstanceObject extends AbstractModelInstanceElement
 					imiList = new ArrayList<IModelInstanceElement>();
 
 					for (Node node : propertyNodes) {
-						imiList.add(this.modelInstanceFactory.createModelInstanceElement(
-								node, property.getType()));
+						imiList.add(this.modelInstanceFactory
+								.createModelInstanceElement(node, property
+										.getType()));
 					}
 					// end for.
 
@@ -438,6 +380,7 @@ public class XmlModelInstanceObject extends AbstractModelInstanceElement
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @seetudresden.ocl20.pivot.modelbus.modelinstance.types.base.
 	 * AbstractModelInstanceElement#hashCode()
 	 */
@@ -461,14 +404,15 @@ public class XmlModelInstanceObject extends AbstractModelInstanceElement
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceObject
 	 * #invokeOperation(tudresden.ocl20.pivot.pivotmodel.Operation,
 	 * java.util.List)
 	 */
 	public IModelInstanceElement invokeOperation(Operation operation,
-			List<IModelInstanceElement> args) throws OperationNotFoundException,
-			OperationAccessException {
+			List<IModelInstanceElement> args)
+			throws OperationNotFoundException, OperationAccessException {
 
 		if (operation == null) {
 			throw new IllegalArgumentException(
@@ -477,7 +421,8 @@ public class XmlModelInstanceObject extends AbstractModelInstanceElement
 		// no else.
 
 		else if (args == null) {
-			throw new IllegalArgumentException("Parameter 'args' must not be null.");
+			throw new IllegalArgumentException(
+					"Parameter 'args' must not be null.");
 		}
 		// no else.
 
@@ -487,6 +432,7 @@ public class XmlModelInstanceObject extends AbstractModelInstanceElement
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement
 	 * #isUndefined()

@@ -19,22 +19,25 @@ with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
 package tudresden.ocl20.pivot.modelinstancetype.types.base;
 
 import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceEnumerationLiteral;
+import tudresden.ocl20.pivot.pivotmodel.Type;
 
 /**
  * <p>
  * An abstract adapter {@link Class} for
- * {@link AbstractModelInstanceEnumerationLiteral}s of <code>IModelInstance</code>s.
+ * {@link AbstractModelInstanceEnumerationLiteral}s of
+ * <code>IModelInstance</code>s.
  * </p>
  * 
  * @author Claas Wilke
  */
 public abstract class AbstractModelInstanceEnumerationLiteral extends
-		AbstractModelInstanceElement implements IModelInstanceEnumerationLiteral {
+		AbstractModelInstanceElement implements
+		IModelInstanceEnumerationLiteral {
 
 	/*
 	 * (non-Javadoc)
-	 * @see
-	 * tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement
+	 * 
+	 * @see tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement
 	 * #getName()
 	 */
 	public String getName() {
@@ -62,8 +65,9 @@ public abstract class AbstractModelInstanceEnumerationLiteral extends
 			}
 
 			else {
-				resultBuffer.append(this.getLiteral().getEnumeration().getName() + "::"
-						+ this.getLiteral().getName());
+				resultBuffer.append(this.getLiteral().getEnumeration()
+						.getName()
+						+ "::" + this.getLiteral().getName());
 			}
 
 			resultBuffer.append("]");
@@ -75,6 +79,7 @@ public abstract class AbstractModelInstanceEnumerationLiteral extends
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @seetudresden.ocl20.pivot.modelbus.modelinstance.types.base.
 	 * AbstractModelInstanceElement#equals(java.lang.Object)
 	 */
@@ -92,15 +97,17 @@ public abstract class AbstractModelInstanceEnumerationLiteral extends
 			AbstractModelInstanceEnumerationLiteral other;
 			other = (AbstractModelInstanceEnumerationLiteral) object;
 
-			/* This should not happen. But anyway, null == null results in false. */
+			/*
+			 * This should not happen. But anyway, null == null results in
+			 * false.
+			 */
 			if (this.isUndefined() || other.isUndefined()) {
 				result = false;
 			}
 
 			else {
-				result =
-						this.getLiteral().getQualifiedName().equals(
-								other.getLiteral().getQualifiedName());
+				result = this.getLiteral().getQualifiedName().equals(
+						other.getLiteral().getQualifiedName());
 			}
 		}
 
@@ -113,6 +120,7 @@ public abstract class AbstractModelInstanceEnumerationLiteral extends
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @seetudresden.ocl20.pivot.modelbus.modelinstance.types.base.
 	 * AbstractModelInstanceElement#hashCode()
 	 */
@@ -134,8 +142,20 @@ public abstract class AbstractModelInstanceEnumerationLiteral extends
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement
+	 * tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement#isKindOf
+	 * (tudresden.ocl20.pivot.pivotmodel.Type)
+	 */
+	public boolean isKindOf(Type type) {
+
+		return this.getType().conformsTo(type);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement
 	 * #isUndefined()
 	 */
 	public boolean isUndefined() {

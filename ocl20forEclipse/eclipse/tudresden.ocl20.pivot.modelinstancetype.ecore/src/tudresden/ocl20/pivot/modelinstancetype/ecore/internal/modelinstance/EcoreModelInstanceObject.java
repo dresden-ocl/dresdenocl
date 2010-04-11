@@ -109,13 +109,19 @@ public class EcoreModelInstanceObject extends AbstractModelInstanceObject
 	 *            {@link EcoreModelInstanceObject}.
 	 * @param type
 	 *            The {@link Type} the adapted {@link EObject} implements.
+	 * @param originalType
+	 *            The original {@link Type} the adapted {@link EObject}
+	 *            implements (as after the object has been casted to another
+	 *            {@link Type}.)
 	 * @param factory
 	 *            The {@link EcoreModelInstanceFactory} of this
 	 *            {@link EcoreModelInstanceObject}. Required to adapt results of
 	 *            {@link Property} and {@link Operation} invocations.
 	 */
 	protected EcoreModelInstanceObject(EObject eObject, Type type,
-			IModelInstanceFactory factory) {
+			Type originalType, IModelInstanceFactory factory) {
+
+		super(type, originalType);
 
 		/* Probably debug the entry of this method. */
 		if (LOGGER.isDebugEnabled()) {
@@ -124,6 +130,7 @@ public class EcoreModelInstanceObject extends AbstractModelInstanceObject
 			msg = "EcoreModelInstanceObject("; //$NON-NLS-1$
 			msg += "eObject = " + eObject; //$NON-NLS-1$
 			msg += ", type = " + type; //$NON-NLS-1$
+			msg += ", originalType = " + originalType; //$NON-NLS-1$
 			msg += ", factory = " + factory; //$NON-NLS-1$
 			msg += ")"; //$NON-NLS-1$
 
@@ -166,13 +173,19 @@ public class EcoreModelInstanceObject extends AbstractModelInstanceObject
 	 *            to.
 	 * @param type
 	 *            The {@link Type} the adapted {@link EObject} implements.
+	 * @param originalType
+	 *            The original {@link Type} the adapted {@link EObject}
+	 *            implements (as after the object has been casted to another
+	 *            {@link Type}.)
 	 * @param factory
 	 *            The {@link EcoreModelInstanceFactory} of this
 	 *            {@link EcoreModelInstanceObject}. Required to adapt results of
 	 *            {@link Property} and {@link Operation} invocations.
 	 */
 	protected EcoreModelInstanceObject(EObject eObject, Class<?> clazz,
-			Type type, IModelInstanceFactory factory) {
+			Type type, Type originalType, IModelInstanceFactory factory) {
+
+		super(type, originalType);
 
 		/* Probably debug the entry of this method. */
 		if (LOGGER.isDebugEnabled()) {
@@ -182,6 +195,7 @@ public class EcoreModelInstanceObject extends AbstractModelInstanceObject
 			msg += "eObject = " + eObject; //$NON-NLS-1$
 			msg += ", clazz = " + clazz; //$NON-NLS-1$
 			msg += ", type = " + type; //$NON-NLS-1$
+			msg += ", originalType = " + originalType; //$NON-NLS-1$
 			msg += ", factory = " + factory; //$NON-NLS-1$
 			msg += ")"; //$NON-NLS-1$
 
@@ -232,7 +246,7 @@ public class EcoreModelInstanceObject extends AbstractModelInstanceObject
 
 			/* If the type can be casted in the model, cast it. */
 			if (type.conformsTo(this.myType)) {
-				result = new EcoreModelInstanceObject(null, this.myType,
+				result = new EcoreModelInstanceObject(null, type, this.myType,
 						this.myFactory);
 			}
 			// no else.
@@ -272,7 +286,7 @@ public class EcoreModelInstanceObject extends AbstractModelInstanceObject
 
 			/* Cast this object to the found type. */
 			result = new EcoreModelInstanceObject(this.myEObject, typeClass,
-					type, this.myFactory);
+					type, this.myType, this.myFactory);
 		}
 		// end else.
 
@@ -368,8 +382,8 @@ public class EcoreModelInstanceObject extends AbstractModelInstanceObject
 		if (this.myEObject == null) {
 
 			/* The result will be undefined as well. */
-			result = new EcoreModelInstanceObject(null, property.getType(),
-					this.myFactory);
+			result = this.myFactory.createModelInstanceElement(null, property
+					.getType());
 		}
 
 		/* Else find a getter method of the property that can be invoked. */
@@ -469,8 +483,8 @@ public class EcoreModelInstanceObject extends AbstractModelInstanceObject
 		if (this.myEObject == null) {
 
 			/* The result will be undefined as well. */
-			result = new EcoreModelInstanceObject(null, operation.getType(),
-					this.myFactory);
+			result = this.myFactory.createModelInstanceElement(null, operation
+					.getType());
 		}
 
 		/* Else find and invoke the operation. */
@@ -547,6 +561,21 @@ public class EcoreModelInstanceObject extends AbstractModelInstanceObject
 	/*
 	 * (non-Javadoc)
 	 * 
+	 * @seetudresden.ocl20.pivot.modelinstancetype.types.base.
+	 * AbstractModelInstanceElement
+	 * #isKindOf(tudresden.ocl20.pivot.pivotmodel.Type)
+	 */
+	@Override
+	public boolean isKindOf(Type type) {
+
+		return this.findSuperClassConformingToName(this.myEObject.getClass(),
+				EcoreModelInstanceTypeUtility.toCanonicalName(type
+						.getQualifiedNameList()), new HashSet<Class<?>>()) != null;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	public String toString() {
@@ -588,7 +617,8 @@ public class EcoreModelInstanceObject extends AbstractModelInstanceObject
 
 			adaptedResult = (EObject) cloneMethod.invoke(this.myEObject);
 			result = new EcoreModelInstanceObject(adaptedResult,
-					this.myAdaptedType, this.myType, this.myFactory);
+					this.myAdaptedType, this.myType, this.getOriginalType(),
+					this.myFactory);
 		}
 
 		catch (SecurityException e) {
@@ -696,7 +726,8 @@ public class EcoreModelInstanceObject extends AbstractModelInstanceObject
 
 			/* Create the adapter. */
 			result = new EcoreModelInstanceObject(copiedAdaptedObject,
-					this.myAdaptedType, this.myType, this.myFactory);
+					this.myAdaptedType, this.myType, this.getOriginalType(),
+					this.myFactory);
 		}
 
 		catch (SecurityException e) {
