@@ -142,7 +142,7 @@ public class JavaOclModelInstanceObject extends JavaOclAny implements
 
 		if (result == null)
 			result = checkInvalid(operation, args);
-
+		
 		if (result == null) {
 			/* Else try to invoke the operation. */
 			IModelInstanceElement imiResult;
