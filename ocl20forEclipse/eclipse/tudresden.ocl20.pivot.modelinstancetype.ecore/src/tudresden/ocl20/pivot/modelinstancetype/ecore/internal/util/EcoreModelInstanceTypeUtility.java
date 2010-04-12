@@ -88,11 +88,14 @@ public class EcoreModelInstanceTypeUtility {
 	private static final Class<?> STRING_CLASSES[] = new Class<?>[] {
 			char.class, Character.class, String.class };
 
-	/** The IModel this {@link EcoreModelInstanceTypeUtility} belongs to. */
-	private IModel model;
+	/** Already found and cached {@link Class} references. */
+	private static Map<Type, Class<?>> cachedClasses = new WeakHashMap<Type, Class<?>>();
 
 	/** Already found and cached {@link Type} references. */
 	private Map<Class<?>, Type> cachedTypes = new WeakHashMap<Class<?>, Type>();
+
+	/** The IModel this {@link EcoreModelInstanceTypeUtility} belongs to. */
+	private IModel model;
 
 	/**
 	 * <p>
@@ -307,6 +310,41 @@ public class EcoreModelInstanceTypeUtility {
 			result = new ArrayList<String>(Arrays.asList(canonicalName
 					.split("[.]")));
 			result.add(0, ModelConstants.ROOT_PACKAGE_NAME);
+		}
+		// no else.
+
+		return result;
+	}
+
+	/**
+	 * <p>
+	 * Tries to find a {@link Class} for a given {@link Type} and a given base
+	 * {@link Class} which itself or one of its super {@link Class}es (and
+	 * interfaces) may correspond to the {@link Type}.
+	 * </p>
+	 * 
+	 * @param baseClass
+	 *            A base {@link Class} which itself or one of its super
+	 *            {@link Class}es (and interfaces) may correspond to the
+	 *            {@link Type}.
+	 * @param type
+	 *            The {@link Type} for which the class shall be found.
+	 * 
+	 * @return The found {@link Class} or <code>null</code>.
+	 */
+	public static Class<?> findClassOfType(Class<?> baseClass, Type type) {
+
+		/* Probably use a cached result. */
+		Class<?> result;
+		result = cachedClasses.get(type);
+
+		/* Else compute the result. */
+		if (result == null) {
+			result = findSuperClassConformingToName(baseClass, baseClass,
+					toCanonicalName(type.getQualifiedNameList()),
+					new HashSet<Class<?>>());
+
+			cachedClasses.put(type, result);
 		}
 		// no else.
 
@@ -548,6 +586,74 @@ public class EcoreModelInstanceTypeUtility {
 			}
 		}
 		// no else.
+
+		return result;
+	}
+
+	/**
+	 * <p>
+	 * Tries to find a super {@link Class} of the given {@link Class} that
+	 * conforms to a given (probably partly) canonical name.
+	 * </p>
+	 * 
+	 * @param baseClass
+	 *            The {@link Class} whose super {@link Class}es (including
+	 *            interfaces) are checked.
+	 * @param currentClass
+	 *            The current {@link Class} during the recursive check (the same
+	 *            as baseClass if called externally).
+	 * @param canonicalName
+	 *            The (probably partly) canonical name of the {@link Class} that
+	 *            shall be found.
+	 * @param alreadyCheckedClasses
+	 *            {@link Class} that have already been checked (necessary to
+	 *            avoid cycles).
+	 * @return The found {@link Class} or <code>null</code>.
+	 */
+	private static Class<?> findSuperClassConformingToName(Class<?> baseClass,
+			Class<?> currentClass, String canonicalName,
+			Set<Class<?>> alreadyCheckedClasses) {
+
+		Class<?> result;
+		result = null;
+
+		if (currentClass.getCanonicalName().matches(
+				".*" + canonicalName.replaceAll("\\.", ".*") + ".*")
+				&& currentClass.isAssignableFrom(baseClass)) {
+			result = currentClass;
+		}
+
+		else {
+			/* Do not check the class again. */
+			alreadyCheckedClasses.add(currentClass);
+
+			if (currentClass.getSuperclass() != null
+					&& !alreadyCheckedClasses.contains(currentClass
+							.getSuperclass())) {
+				result = findSuperClassConformingToName(baseClass, currentClass
+						.getSuperclass(), canonicalName, alreadyCheckedClasses);
+			}
+			// no else.
+
+			if (result == null) {
+
+				for (Class<?> interfaze : currentClass.getInterfaces()) {
+					if (!alreadyCheckedClasses.contains(interfaze)) {
+						result = findSuperClassConformingToName(baseClass,
+								interfaze, canonicalName, alreadyCheckedClasses);
+
+						if (result != null) {
+							break;
+						}
+						// no else.
+					}
+					// no else.
+				}
+				// end for.
+			}
+			// no else.
+		}
+		// end else.
 
 		return result;
 	}
