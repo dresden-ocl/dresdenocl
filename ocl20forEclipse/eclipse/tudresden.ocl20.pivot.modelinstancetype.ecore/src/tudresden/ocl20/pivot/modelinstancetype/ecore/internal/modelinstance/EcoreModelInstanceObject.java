@@ -35,6 +35,7 @@ import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.UniqueEList;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.osgi.util.NLS;
 
 import tudresden.ocl20.pivot.modelinstance.base.AbstractModelInstance;
@@ -61,8 +62,6 @@ import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceString;
 import tudresden.ocl20.pivot.modelinstancetype.types.base.AbstractModelInstanceObject;
 import tudresden.ocl20.pivot.pivotmodel.Operation;
 import tudresden.ocl20.pivot.pivotmodel.Parameter;
-import tudresden.ocl20.pivot.pivotmodel.PrimitiveType;
-import tudresden.ocl20.pivot.pivotmodel.PrimitiveTypeKind;
 import tudresden.ocl20.pivot.pivotmodel.Property;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 
@@ -78,8 +77,8 @@ public class EcoreModelInstanceObject extends AbstractModelInstanceObject
 		implements IModelInstanceObject {
 
 	/** The {@link Logger} for this class. */
-	private static final Logger LOGGER = EcoreModelInstanceTypePlugin
-			.getLogger(EcoreModelInstanceProvider.class);
+	private static final Logger LOGGER =
+			EcoreModelInstanceTypePlugin.getLogger(EcoreModelInstanceProvider.class);
 
 	/** The {@link EObject} adapted by this {@link EcoreModelInstanceObject}. */
 	private EObject myEObject;
@@ -100,23 +99,22 @@ public class EcoreModelInstanceObject extends AbstractModelInstanceObject
 
 	/**
 	 * <p>
-	 * Creates a new {@link EcoreModelInstanceObject} for a given
-	 * {@link EObject} and a given {@link Set} of {@link Type}s.
+	 * Creates a new {@link EcoreModelInstanceObject} for a given {@link EObject}
+	 * and a given {@link Set} of {@link Type}s.
 	 * </p>
 	 * 
 	 * @param object
-	 *            The {@link EObject} that shall be adapted by this
-	 *            {@link EcoreModelInstanceObject}.
+	 *          The {@link EObject} that shall be adapted by this
+	 *          {@link EcoreModelInstanceObject}.
 	 * @param type
-	 *            The {@link Type} the adapted {@link EObject} implements.
+	 *          The {@link Type} the adapted {@link EObject} implements.
 	 * @param originalType
-	 *            The original {@link Type} the adapted {@link EObject}
-	 *            implements (as after the object has been casted to another
-	 *            {@link Type}.)
+	 *          The original {@link Type} the adapted {@link EObject} implements
+	 *          (as after the object has been casted to another {@link Type}.)
 	 * @param factory
-	 *            The {@link EcoreModelInstanceFactory} of this
-	 *            {@link EcoreModelInstanceObject}. Required to adapt results of
-	 *            {@link Property} and {@link Operation} invocations.
+	 *          The {@link EcoreModelInstanceFactory} of this
+	 *          {@link EcoreModelInstanceObject}. Required to adapt results of
+	 *          {@link Property} and {@link Operation} invocations.
 	 */
 	protected EcoreModelInstanceObject(EObject eObject, Type type,
 			Type originalType, IModelInstanceFactory factory) {
@@ -152,7 +150,8 @@ public class EcoreModelInstanceObject extends AbstractModelInstanceObject
 		if (LOGGER.isDebugEnabled()) {
 			String msg;
 
-			msg = "EcoreModelInstanceObject(EObject, Type, IModelInstanceFactory) - exit"; //$NON-NLS-1$
+			msg =
+					"EcoreModelInstanceObject(EObject, Type, IModelInstanceFactory) - exit"; //$NON-NLS-1$
 
 			LOGGER.debug(msg);
 		}
@@ -161,26 +160,24 @@ public class EcoreModelInstanceObject extends AbstractModelInstanceObject
 
 	/**
 	 * <p>
-	 * Creates a new {@link EcoreModelInstanceObject} for a given
-	 * {@link EObject} and a given {@link Set} of {@link Type}s.
+	 * Creates a new {@link EcoreModelInstanceObject} for a given {@link EObject}
+	 * and a given {@link Set} of {@link Type}s.
 	 * </p>
 	 * 
 	 * @param object
-	 *            The {@link EObject} that shall be adapted by this
-	 *            {@link EcoreModelInstanceObject}.
+	 *          The {@link EObject} that shall be adapted by this
+	 *          {@link EcoreModelInstanceObject}.
 	 * @param clazz
-	 *            The {@link Class} the adapted {@link EObject} shall be casted
-	 *            to.
+	 *          The {@link Class} the adapted {@link EObject} shall be casted to.
 	 * @param type
-	 *            The {@link Type} the adapted {@link EObject} implements.
+	 *          The {@link Type} the adapted {@link EObject} implements.
 	 * @param originalType
-	 *            The original {@link Type} the adapted {@link EObject}
-	 *            implements (as after the object has been casted to another
-	 *            {@link Type}.)
+	 *          The original {@link Type} the adapted {@link EObject} implements
+	 *          (as after the object has been casted to another {@link Type}.)
 	 * @param factory
-	 *            The {@link EcoreModelInstanceFactory} of this
-	 *            {@link EcoreModelInstanceObject}. Required to adapt results of
-	 *            {@link Property} and {@link Operation} invocations.
+	 *          The {@link EcoreModelInstanceFactory} of this
+	 *          {@link EcoreModelInstanceObject}. Required to adapt results of
+	 *          {@link Property} and {@link Operation} invocations.
 	 */
 	protected EcoreModelInstanceObject(EObject eObject, Class<?> clazz,
 			Type type, Type originalType, IModelInstanceFactory factory) {
@@ -212,7 +209,8 @@ public class EcoreModelInstanceObject extends AbstractModelInstanceObject
 		if (LOGGER.isDebugEnabled()) {
 			String msg;
 
-			msg = "EcoreModelInstanceObject(EObject, Class, Type, IModelInstanceFactory) - exit"; //$NON-NLS-1$
+			msg =
+					"EcoreModelInstanceObject(EObject, Class, Type, IModelInstanceFactory) - exit"; //$NON-NLS-1$
 
 			LOGGER.debug(msg);
 		}
@@ -221,7 +219,6 @@ public class EcoreModelInstanceObject extends AbstractModelInstanceObject
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement
 	 * #asType(tudresden.ocl20.pivot.pivotmodel.Type)
@@ -229,8 +226,7 @@ public class EcoreModelInstanceObject extends AbstractModelInstanceObject
 	public IModelInstanceElement asType(Type type) throws AsTypeCastException {
 
 		if (type == null) {
-			throw new IllegalArgumentException(
-					"Parameter 'type' must not be null.");
+			throw new IllegalArgumentException("Parameter 'type' must not be null.");
 		}
 		// no else.
 
@@ -246,8 +242,9 @@ public class EcoreModelInstanceObject extends AbstractModelInstanceObject
 
 			/* If the type can be casted in the model, cast it. */
 			if (type.conformsTo(this.myType)) {
-				result = new EcoreModelInstanceObject(null, type, this.myType,
-						this.myFactory);
+				result =
+						new EcoreModelInstanceObject(null, type, this.myType,
+								this.myFactory);
 			}
 			// no else.
 
@@ -266,18 +263,21 @@ public class EcoreModelInstanceObject extends AbstractModelInstanceObject
 		/* Else handle the not undefined object. */
 		else {
 			/* Get a canonical name for the given type. */
-			typeClassName = EcoreModelInstanceTypeUtility.toCanonicalName(type
-					.getQualifiedNameList());
+			typeClassName =
+					EcoreModelInstanceTypeUtility.toCanonicalName(type
+							.getQualifiedNameList());
 
 			/* Try to find a class that is represented by the given type. */
-			typeClass = this.findSuperClassConformingToName(this.myEObject
-					.getClass(), typeClassName, new HashSet<Class<?>>());
+			typeClass =
+					this.findSuperClassConformingToName(this.myEObject.getClass(),
+							typeClassName, new HashSet<Class<?>>());
 
 			/* If no class has been found, throw an exception. */
 			if (typeClass == null) {
 				String msg;
 
-				msg = EcoreModelInstanceTypeMessages.EcoreModelInstance_CannotCastTypeClassNotFound;
+				msg =
+						EcoreModelInstanceTypeMessages.EcoreModelInstance_CannotCastTypeClassNotFound;
 				msg = NLS.bind(msg, this.getName(), type);
 
 				throw new AsTypeCastException(msg);
@@ -285,8 +285,9 @@ public class EcoreModelInstanceObject extends AbstractModelInstanceObject
 			// no else.
 
 			/* Cast this object to the found type. */
-			result = new EcoreModelInstanceObject(this.myEObject, typeClass,
-					type, this.myType, this.myFactory);
+			result =
+					new EcoreModelInstanceObject(this.myEObject, typeClass, type,
+							this.myType, this.myFactory);
 		}
 		// end else.
 
@@ -296,26 +297,26 @@ public class EcoreModelInstanceObject extends AbstractModelInstanceObject
 	/**
 	 * <p>
 	 * Performs a copy of the adapted element of this
-	 * {@link IModelInstanceElement} that can be used to store it as a @pre
-	 * value of a postcondition's expression. The method should copy the adapted
-	 * object and all its references that are expected to change during the
-	 * methods execution the postcondition is defined on.
+	 * {@link IModelInstanceElement} that can be used to store it as a @pre value
+	 * of a postcondition's expression. The method should copy the adapted object
+	 * and all its references that are expected to change during the methods
+	 * execution the postcondition is defined on.
 	 * </p>
 	 * 
 	 * <p>
 	 * For {@link EcoreModelInstanceObject}s this method tries to clone the
-	 * adapted {@link Object} if the {@link Object} implements {@link Cloneable}
-	 * . Else the {@link Object} will be copied using an probably existing empty
+	 * adapted {@link Object} if the {@link Object} implements {@link Cloneable} .
+	 * Else the {@link Object} will be copied using an probably existing empty
 	 * {@link Constructor} and a flat copy will be created (means all attributes
 	 * and associations will lead to the same values and identities. <strong>If
-	 * neither the <code>clone()</code> method nor the emptry
-	 * {@link Constructor} are provided, this operation will fail with an
+	 * neither the <code>clone()</code> method nor the emptry {@link Constructor}
+	 * are provided, this operation will fail with an
 	 * {@link CopyForAtPreException}.</strong>
 	 * </p>
 	 * 
 	 * @return A copy of the adapted element.
 	 * @throws CopyForAtPreException
-	 *             Thrown, if an error during the copy process occurs.
+	 *           Thrown, if an error during the copy process occurs.
 	 */
 	public IModelInstanceElement copyForAtPre() throws CopyForAtPreException {
 
@@ -350,7 +351,6 @@ public class EcoreModelInstanceObject extends AbstractModelInstanceObject
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceObject
 	 * #getObject()
@@ -362,7 +362,6 @@ public class EcoreModelInstanceObject extends AbstractModelInstanceObject
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceObject
 	 * #getProperty(tudresden.ocl20.pivot.pivotmodel.Property)
@@ -382,71 +381,27 @@ public class EcoreModelInstanceObject extends AbstractModelInstanceObject
 		if (this.myEObject == null) {
 
 			/* The result will be undefined as well. */
-			result = this.myFactory.createModelInstanceElement(null, property
-					.getType());
+			result =
+					this.myFactory.createModelInstanceElement(null, property.getType());
 		}
 
-		/* Else find a getter method of the property that can be invoked. */
+		/* Else find the StructuralFeature of the property that can be accessed. */
 		else {
 
-			/*
-			 * In Ecore, all properties are accessed by getters and setters.
-			 * This way, also properties can be accessed on generated
-			 * interfaces.
-			 */
-			Method getterMethod;
+			EStructuralFeature sf =
+					this.myEObject.eClass().getEStructuralFeature(property.getName());
 
-			/* Try to find and invoke a getter method. */
-			try {
-				getterMethod = this.findGetterMethodOfProperty(property);
-
-				Object adapteeResult;
-				getterMethod.setAccessible(true);
-
-				adapteeResult = getterMethod.invoke(this.myEObject,
-						new Object[0]);
-
-				/* Adapt the result to the expected result type. */
-				result = AbstractModelInstance.adaptInvocationResult(
-						adapteeResult, property.getType(), property,
-						this.myFactory);
+			if (sf == null) {
+				String msg =
+						EcoreModelInstanceTypeMessages.EcoreModelInstanceObject_PropertyAccessFailed;
+				msg = NLS.bind(msg, property, this.myEObject);
+				throw new PropertyAccessException(msg);
 			}
 
-			catch (IllegalArgumentException e) {
-				String msg;
-
-				msg = EcoreModelInstanceTypeMessages.EcoreModelInstanceObject_PropertyAccessFailed;
-				msg = NLS.bind(msg, property, e.getMessage());
-
-				throw new PropertyAccessException(msg, e);
-			}
-
-			catch (IllegalAccessException e) {
-				String msg;
-
-				msg = EcoreModelInstanceTypeMessages.EcoreModelInstanceObject_PropertyAccessFailed;
-				msg = NLS.bind(msg, property, e.getMessage());
-
-				throw new PropertyAccessException(msg, e);
-			}
-
-			catch (InvocationTargetException e) {
-				String msg;
-
-				msg = EcoreModelInstanceTypeMessages.EcoreModelInstanceObject_PropertyAccessFailed;
-				msg = NLS.bind(msg, property, e.getMessage());
-
-				throw new PropertyAccessException(msg, e);
-			}
-
-			catch (OperationNotFoundException e) {
-				String msg;
-
-				msg = EcoreModelInstanceTypeMessages.EcoreModelInstanceObject_PropertyNotFoundInModelInstanceElement;
-				msg = NLS.bind(msg, property, this.myAdaptedType);
-
-				throw new PropertyNotFoundException(msg, e);
-			}
+			Object adapteeResult = this.myEObject.eGet(sf);
+			result =
+					AbstractModelInstance.adaptInvocationResult(adapteeResult, property
+							.getType(), property, this.myFactory);
 		}
 		// end else.
 
@@ -455,15 +410,14 @@ public class EcoreModelInstanceObject extends AbstractModelInstanceObject
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceObject
 	 * #invokeOperation(tudresden.ocl20.pivot.pivotmodel.Operation,
 	 * java.util.List)
 	 */
 	public IModelInstanceElement invokeOperation(Operation operation,
-			List<IModelInstanceElement> args)
-			throws OperationNotFoundException, OperationAccessException {
+			List<IModelInstanceElement> args) throws OperationNotFoundException,
+			OperationAccessException {
 
 		if (operation == null) {
 			throw new IllegalArgumentException(
@@ -472,8 +426,7 @@ public class EcoreModelInstanceObject extends AbstractModelInstanceObject
 		// no else.
 
 		else if (args == null) {
-			throw new IllegalArgumentException(
-					"Parameter 'args' must not be null.");
+			throw new IllegalArgumentException("Parameter 'args' must not be null.");
 		}
 		// no else.
 
@@ -483,8 +436,8 @@ public class EcoreModelInstanceObject extends AbstractModelInstanceObject
 		if (this.myEObject == null) {
 
 			/* The result will be undefined as well. */
-			result = this.myFactory.createModelInstanceElement(null, operation
-					.getType());
+			result =
+					this.myFactory.createModelInstanceElement(null, operation.getType());
 		}
 
 		/* Else find and invoke the operation. */
@@ -502,14 +455,13 @@ public class EcoreModelInstanceObject extends AbstractModelInstanceObject
 			argumentValues = new Object[args.size()];
 
 			/* Avoid errors through to much arguments given by the invocation. */
-			argSize = Math.min(args.size(), operation.getSignatureParameter()
-					.size());
+			argSize = Math.min(args.size(), operation.getSignatureParameter().size());
 
 			/* Adapt the argument values. */
 			for (int index = 0; index < argSize; index++) {
 
-				argumentValues[index] = this.createAdaptedElement(args
-						.get(index), argumentTypes[index]);
+				argumentValues[index] =
+						this.createAdaptedElement(args.get(index), argumentTypes[index]);
 			}
 
 			/* Try to invoke the found method. */
@@ -517,19 +469,19 @@ public class EcoreModelInstanceObject extends AbstractModelInstanceObject
 				Object adapteeResult;
 				operationMethod.setAccessible(true);
 
-				adapteeResult = operationMethod.invoke(this.myEObject,
-						argumentValues);
+				adapteeResult = operationMethod.invoke(this.myEObject, argumentValues);
 
 				/* Adapt the result to the expected result type. */
-				result = AbstractModelInstance.adaptInvocationResult(
-						adapteeResult, operation.getType(), operation,
-						this.myFactory);
+				result =
+						AbstractModelInstance.adaptInvocationResult(adapteeResult,
+								operation.getType(), operation, this.myFactory);
 			}
 
 			catch (IllegalArgumentException e) {
 				String msg;
 
-				msg = EcoreModelInstanceTypeMessages.EcoreModelInstanceObject_OperationAccessFailed;
+				msg =
+						EcoreModelInstanceTypeMessages.EcoreModelInstanceObject_OperationAccessFailed;
 				msg = NLS.bind(msg, operation, e.getMessage());
 
 				throw new OperationAccessException(msg, e);
@@ -538,7 +490,8 @@ public class EcoreModelInstanceObject extends AbstractModelInstanceObject
 			catch (IllegalAccessException e) {
 				String msg;
 
-				msg = EcoreModelInstanceTypeMessages.EcoreModelInstanceObject_OperationAccessFailed;
+				msg =
+						EcoreModelInstanceTypeMessages.EcoreModelInstanceObject_OperationAccessFailed;
 				msg = NLS.bind(msg, operation, e.getMessage());
 
 				throw new OperationAccessException(msg, e);
@@ -547,7 +500,8 @@ public class EcoreModelInstanceObject extends AbstractModelInstanceObject
 			catch (InvocationTargetException e) {
 				String msg;
 
-				msg = EcoreModelInstanceTypeMessages.EcoreModelInstanceObject_OperationAccessFailed;
+				msg =
+						EcoreModelInstanceTypeMessages.EcoreModelInstanceObject_OperationAccessFailed;
 				msg = NLS.bind(msg, operation, e.getMessage());
 
 				throw new OperationAccessException(msg, e);
@@ -560,7 +514,6 @@ public class EcoreModelInstanceObject extends AbstractModelInstanceObject
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @seetudresden.ocl20.pivot.modelinstancetype.types.base.
 	 * AbstractModelInstanceElement
 	 * #isKindOf(tudresden.ocl20.pivot.pivotmodel.Type)
@@ -575,7 +528,6 @@ public class EcoreModelInstanceObject extends AbstractModelInstanceObject
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	public String toString() {
@@ -599,8 +551,8 @@ public class EcoreModelInstanceObject extends AbstractModelInstanceObject
 	 * @return A copy of the adapted {@link EObject} of this
 	 *         {@link EcoreModelInstanceObject}.
 	 * @throws CopyForAtPreException
-	 *             Thrown, if the adapted {@link EObject} cannot be copied via
-	 *             clone method.
+	 *           Thrown, if the adapted {@link EObject} cannot be copied via clone
+	 *           method.
 	 */
 	private IModelInstanceElement copyForAtPreWithClone()
 			throws CopyForAtPreException {
@@ -616,15 +568,16 @@ public class EcoreModelInstanceObject extends AbstractModelInstanceObject
 			cloneMethod.setAccessible(true);
 
 			adaptedResult = (EObject) cloneMethod.invoke(this.myEObject);
-			result = new EcoreModelInstanceObject(adaptedResult,
-					this.myAdaptedType, this.myType, this.getOriginalType(),
-					this.myFactory);
+			result =
+					new EcoreModelInstanceObject(adaptedResult, this.myAdaptedType,
+							this.myType, this.getOriginalType(), this.myFactory);
 		}
 
 		catch (SecurityException e) {
 			String msg;
 
-			msg = EcoreModelInstanceTypeMessages.EcoreModelInstanceObject_CannotCopyForAtPre;
+			msg =
+					EcoreModelInstanceTypeMessages.EcoreModelInstanceObject_CannotCopyForAtPre;
 			msg = NLS.bind(msg, this.getName(), e.getMessage());
 
 			throw new CopyForAtPreException(msg, e);
@@ -633,7 +586,8 @@ public class EcoreModelInstanceObject extends AbstractModelInstanceObject
 		catch (NoSuchMethodException e) {
 			String msg;
 
-			msg = EcoreModelInstanceTypeMessages.EcoreModelInstanceObject_CannotCopyForAtPre;
+			msg =
+					EcoreModelInstanceTypeMessages.EcoreModelInstanceObject_CannotCopyForAtPre;
 			msg = NLS.bind(msg, this.getName(), e.getMessage());
 
 			throw new CopyForAtPreException(msg, e);
@@ -642,7 +596,8 @@ public class EcoreModelInstanceObject extends AbstractModelInstanceObject
 		catch (IllegalArgumentException e) {
 			String msg;
 
-			msg = EcoreModelInstanceTypeMessages.EcoreModelInstanceObject_CannotCopyForAtPre;
+			msg =
+					EcoreModelInstanceTypeMessages.EcoreModelInstanceObject_CannotCopyForAtPre;
 			msg = NLS.bind(msg, this.getName(), e.getMessage());
 
 			throw new CopyForAtPreException(msg, e);
@@ -651,7 +606,8 @@ public class EcoreModelInstanceObject extends AbstractModelInstanceObject
 		catch (IllegalAccessException e) {
 			String msg;
 
-			msg = EcoreModelInstanceTypeMessages.EcoreModelInstanceObject_CannotCopyForAtPre;
+			msg =
+					EcoreModelInstanceTypeMessages.EcoreModelInstanceObject_CannotCopyForAtPre;
 			msg = NLS.bind(msg, this.getName(), e.getMessage());
 
 			throw new CopyForAtPreException(msg, e);
@@ -660,7 +616,8 @@ public class EcoreModelInstanceObject extends AbstractModelInstanceObject
 		catch (InvocationTargetException e) {
 			String msg;
 
-			msg = EcoreModelInstanceTypeMessages.EcoreModelInstanceObject_CannotCopyForAtPre;
+			msg =
+					EcoreModelInstanceTypeMessages.EcoreModelInstanceObject_CannotCopyForAtPre;
 			msg = NLS.bind(msg, this.getName(), e.getMessage());
 
 			throw new CopyForAtPreException(msg, e);
@@ -672,16 +629,16 @@ public class EcoreModelInstanceObject extends AbstractModelInstanceObject
 	/**
 	 * <p>
 	 * A helper method that tries to copy the adapted {@link Object} of this
-	 * {@link EcoreModelInstanceObject} with an empty {@link Constructor} based
-	 * on reflections. The copied {@link Object} will be a flat copy of this
+	 * {@link EcoreModelInstanceObject} with an empty {@link Constructor} based on
+	 * reflections. The copied {@link Object} will be a flat copy of this
 	 * {@link Object}. Thus, the fields will all have the same value and id.
 	 * </p>
 	 * 
 	 * @return A copy of the adapted {@link Object} of this
 	 *         {@link EcoreModelInstanceObject}.
 	 * @throws CopyForAtPreException
-	 *             Thrown, if the adapted {@link EObject} cannot be copied using
-	 *             an empty {@link Constructor}.
+	 *           Thrown, if the adapted {@link EObject} cannot be copied using an
+	 *           empty {@link Constructor}.
 	 */
 	private IModelInstanceObject copyForAtPreWithReflections()
 			throws CopyForAtPreException {
@@ -699,8 +656,8 @@ public class EcoreModelInstanceObject extends AbstractModelInstanceObject
 			emptyConstructor = adapteeClass.getConstructor(new Class[0]);
 
 			/* Copy the adapted object. */
-			copiedAdaptedObject = (EObject) emptyConstructor
-					.newInstance(new Object[0]);
+			copiedAdaptedObject =
+					(EObject) emptyConstructor.newInstance(new Object[0]);
 
 			/* Iterate through the adapteeClass and all its super classes. */
 			while (adapteeClass != null) {
@@ -713,8 +670,7 @@ public class EcoreModelInstanceObject extends AbstractModelInstanceObject
 					/* Do not set static nor final fields. */
 					if (!(Modifier.isFinal(field.getModifiers()) || Modifier
 							.isStatic(field.getModifiers()))) {
-						field.set(copiedAdaptedObject, field
-								.get(this.myEObject));
+						field.set(copiedAdaptedObject, field.get(this.myEObject));
 					}
 					// no else.
 				}
@@ -725,15 +681,16 @@ public class EcoreModelInstanceObject extends AbstractModelInstanceObject
 			// end while.
 
 			/* Create the adapter. */
-			result = new EcoreModelInstanceObject(copiedAdaptedObject,
-					this.myAdaptedType, this.myType, this.getOriginalType(),
-					this.myFactory);
+			result =
+					new EcoreModelInstanceObject(copiedAdaptedObject, this.myAdaptedType,
+							this.myType, this.getOriginalType(), this.myFactory);
 		}
 
 		catch (SecurityException e) {
 			String msg;
 
-			msg = EcoreModelInstanceTypeMessages.EcoreModelInstanceObject_CannotCopyForAtPre;
+			msg =
+					EcoreModelInstanceTypeMessages.EcoreModelInstanceObject_CannotCopyForAtPre;
 			msg = NLS.bind(msg, this.getName(), e.getMessage());
 
 			throw new CopyForAtPreException(msg, e);
@@ -742,7 +699,8 @@ public class EcoreModelInstanceObject extends AbstractModelInstanceObject
 		catch (NoSuchMethodException e) {
 			String msg;
 
-			msg = EcoreModelInstanceTypeMessages.EcoreModelInstanceObject_CannotCopyForAtPre;
+			msg =
+					EcoreModelInstanceTypeMessages.EcoreModelInstanceObject_CannotCopyForAtPre;
 			msg = NLS.bind(msg, this.getName(), e.getMessage());
 
 			throw new CopyForAtPreException(msg, e);
@@ -751,7 +709,8 @@ public class EcoreModelInstanceObject extends AbstractModelInstanceObject
 		catch (IllegalArgumentException e) {
 			String msg;
 
-			msg = EcoreModelInstanceTypeMessages.EcoreModelInstanceObject_CannotCopyForAtPre;
+			msg =
+					EcoreModelInstanceTypeMessages.EcoreModelInstanceObject_CannotCopyForAtPre;
 			msg = NLS.bind(msg, this.getName(), e.getMessage());
 
 			throw new CopyForAtPreException(msg, e);
@@ -760,7 +719,8 @@ public class EcoreModelInstanceObject extends AbstractModelInstanceObject
 		catch (InstantiationException e) {
 			String msg;
 
-			msg = EcoreModelInstanceTypeMessages.EcoreModelInstanceObject_CannotCopyForAtPre;
+			msg =
+					EcoreModelInstanceTypeMessages.EcoreModelInstanceObject_CannotCopyForAtPre;
 			msg = NLS.bind(msg, this.getName(), e.getMessage());
 
 			throw new CopyForAtPreException(msg, e);
@@ -769,7 +729,8 @@ public class EcoreModelInstanceObject extends AbstractModelInstanceObject
 		catch (IllegalAccessException e) {
 			String msg;
 
-			msg = EcoreModelInstanceTypeMessages.EcoreModelInstanceObject_CannotCopyForAtPre;
+			msg =
+					EcoreModelInstanceTypeMessages.EcoreModelInstanceObject_CannotCopyForAtPre;
 			msg = NLS.bind(msg, this.getName(), e.getMessage());
 
 			throw new CopyForAtPreException(msg, e);
@@ -778,7 +739,8 @@ public class EcoreModelInstanceObject extends AbstractModelInstanceObject
 		catch (InvocationTargetException e) {
 			String msg;
 
-			msg = EcoreModelInstanceTypeMessages.EcoreModelInstanceObject_CannotCopyForAtPre;
+			msg =
+					EcoreModelInstanceTypeMessages.EcoreModelInstanceObject_CannotCopyForAtPre;
 			msg = NLS.bind(msg, this.getName(), e.getMessage());
 
 			throw new CopyForAtPreException(msg, e);
@@ -794,18 +756,16 @@ public class EcoreModelInstanceObject extends AbstractModelInstanceObject
 	 * {@link IModelInstanceElement}. E.g., if the given
 	 * {@link IModelInstanceElement} is an {@link IModelInstanceObject}, the
 	 * adapted {@link Object} is simply returned. For
-	 * {@link IModelInstancePrimitiveType}, a newly created primitive is
-	 * returned.
+	 * {@link IModelInstancePrimitiveType}, a newly created primitive is returned.
 	 * </p>
 	 * 
 	 * @param modelInstanceElement
-	 *            The {@link IModelInstanceElement} those adapted {@link Object}
-	 *            shall be returned or created.
+	 *          The {@link IModelInstanceElement} those adapted {@link Object}
+	 *          shall be returned or created.
 	 * @param typeClass
-	 *            The {@link Class} the recreated element should be an instance
-	 *            of. This could be required for
-	 *            {@link IModelInstancePrimitiveType}s or for
-	 *            {@link IModelInstanceCollection}s.
+	 *          The {@link Class} the recreated element should be an instance of.
+	 *          This could be required for {@link IModelInstancePrimitiveType}s or
+	 *          for {@link IModelInstanceCollection}s.
 	 * @return The created or adapted value ({@link Object}).
 	 */
 	@SuppressWarnings("unchecked")
@@ -825,29 +785,31 @@ public class EcoreModelInstanceObject extends AbstractModelInstanceObject
 			/* Probably recreate a boolean value. */
 			if (modelInstanceElement instanceof IModelInstanceBoolean) {
 
-				result = ((IModelInstanceBoolean) modelInstanceElement)
-						.getBoolean();
+				result = ((IModelInstanceBoolean) modelInstanceElement).getBoolean();
 			}
 
 			/* Else probably recreate an integer value. */
 			else if (modelInstanceElement instanceof IModelInstanceInteger) {
 
-				result = createAdaptedIntegerValue(
-						(IModelInstanceInteger) modelInstanceElement, typeClass);
+				result =
+						createAdaptedIntegerValue(
+								(IModelInstanceInteger) modelInstanceElement, typeClass);
 			}
 
 			/* Else probably recreate a real value. */
 			else if (modelInstanceElement instanceof IModelInstanceReal) {
 
-				result = createAdaptedRealValue(
-						(IModelInstanceReal) modelInstanceElement, typeClass);
+				result =
+						createAdaptedRealValue((IModelInstanceReal) modelInstanceElement,
+								typeClass);
 			}
 
 			/* Else probably recreate an String value. */
 			else if (modelInstanceElement instanceof IModelInstanceString) {
 
-				result = createAdaptedStringValue(
-						(IModelInstanceString) modelInstanceElement, typeClass);
+				result =
+						createAdaptedStringValue(
+								(IModelInstanceString) modelInstanceElement, typeClass);
 			}
 
 			else {
@@ -859,9 +821,10 @@ public class EcoreModelInstanceObject extends AbstractModelInstanceObject
 		/* Else check if the given element is an enumeration literal. */
 		else if (modelInstanceElement instanceof IModelInstanceEnumerationLiteral) {
 
-			result = createAdaptedEnumerationLiteral(
-					(IModelInstanceEnumerationLiteral) modelInstanceElement,
-					typeClass);
+			result =
+					createAdaptedEnumerationLiteral(
+							(IModelInstanceEnumerationLiteral) modelInstanceElement,
+							typeClass);
 		}
 
 		/* Else check if the given element is a collection. */
@@ -874,15 +837,17 @@ public class EcoreModelInstanceObject extends AbstractModelInstanceObject
 
 			/* Else use the collection. */
 			else if (Collection.class.isAssignableFrom(typeClass)) {
-				result = createAdaptedCollection(
-						(IModelInstanceCollection<IModelInstanceElement>) modelInstanceElement,
-						typeClass);
+				result =
+						createAdaptedCollection(
+								(IModelInstanceCollection<IModelInstanceElement>) modelInstanceElement,
+								typeClass);
 			}
 
 			/* Else throw an exception. */
 			else {
 				String msg;
-				msg = EcoreModelInstanceTypeMessages.EcoreModelInstance_CannotRecreateCollection;
+				msg =
+						EcoreModelInstanceTypeMessages.EcoreModelInstance_CannotRecreateCollection;
 
 				throw new IllegalArgumentException(msg);
 			}
@@ -904,20 +869,20 @@ public class EcoreModelInstanceObject extends AbstractModelInstanceObject
 
 	/**
 	 * <p>
-	 * A helper method the converts a given {@link IModelInstanceElement} into
-	 * an Array value of a given {@link Class}.
+	 * A helper method the converts a given {@link IModelInstanceElement} into an
+	 * Array value of a given {@link Class}.
 	 * </p>
 	 * 
 	 * @param modelInstanceElement
-	 *            The {@link IModelInstanceElement} that shall be converted.
+	 *          The {@link IModelInstanceElement} that shall be converted.
 	 * @param type
-	 *            The {@link Class} to that the given
-	 *            {@link IModelInstanceElement} shall be converted.
+	 *          The {@link Class} to that the given {@link IModelInstanceElement}
+	 *          shall be converted.
 	 * @return The converted {@link Object}.
 	 */
 	@SuppressWarnings("unchecked")
-	private Object createAdaptedArray(
-			IModelInstanceElement modelInstanceElement, Class<?> type) {
+	private Object createAdaptedArray(IModelInstanceElement modelInstanceElement,
+			Class<?> type) {
 
 		Object result;
 
@@ -931,7 +896,8 @@ public class EcoreModelInstanceObject extends AbstractModelInstanceObject
 
 			componentType = type.getComponentType();
 
-			modelInstanceCollection = (IModelInstanceCollection<IModelInstanceElement>) modelInstanceElement;
+			modelInstanceCollection =
+					(IModelInstanceCollection<IModelInstanceElement>) modelInstanceElement;
 			adaptedCollection = modelInstanceCollection.getCollection();
 
 			if (componentType.isPrimitive()) {
@@ -945,8 +911,8 @@ public class EcoreModelInstanceObject extends AbstractModelInstanceObject
 					index = 0;
 
 					for (IModelInstanceElement anElement : adaptedCollection) {
-						array[index] = ((IModelInstanceBoolean) anElement)
-								.getBoolean().booleanValue();
+						array[index] =
+								((IModelInstanceBoolean) anElement).getBoolean().booleanValue();
 					}
 
 					result = array;
@@ -961,8 +927,8 @@ public class EcoreModelInstanceObject extends AbstractModelInstanceObject
 					index = 0;
 
 					for (IModelInstanceElement anElement : adaptedCollection) {
-						array[index] = ((IModelInstanceInteger) anElement)
-								.getLong().byteValue();
+						array[index] =
+								((IModelInstanceInteger) anElement).getLong().byteValue();
 					}
 
 					result = array;
@@ -977,8 +943,8 @@ public class EcoreModelInstanceObject extends AbstractModelInstanceObject
 					index = 0;
 
 					for (IModelInstanceElement anElement : adaptedCollection) {
-						array[index] = ((IModelInstanceString) anElement)
-								.getString().charAt(0);
+						array[index] =
+								((IModelInstanceString) anElement).getString().charAt(0);
 					}
 
 					result = array;
@@ -993,8 +959,8 @@ public class EcoreModelInstanceObject extends AbstractModelInstanceObject
 					index = 0;
 
 					for (IModelInstanceElement anElement : adaptedCollection) {
-						array[index] = ((IModelInstanceReal) anElement)
-								.getDouble().doubleValue();
+						array[index] =
+								((IModelInstanceReal) anElement).getDouble().doubleValue();
 					}
 
 					result = array;
@@ -1009,8 +975,8 @@ public class EcoreModelInstanceObject extends AbstractModelInstanceObject
 					index = 0;
 
 					for (IModelInstanceElement anElement : adaptedCollection) {
-						array[index] = ((IModelInstanceReal) anElement)
-								.getDouble().floatValue();
+						array[index] =
+								((IModelInstanceReal) anElement).getDouble().floatValue();
 					}
 
 					result = array;
@@ -1025,8 +991,8 @@ public class EcoreModelInstanceObject extends AbstractModelInstanceObject
 					index = 0;
 
 					for (IModelInstanceElement anElement : adaptedCollection) {
-						array[index] = ((IModelInstanceInteger) anElement)
-								.getLong().intValue();
+						array[index] =
+								((IModelInstanceInteger) anElement).getLong().intValue();
 					}
 
 					result = array;
@@ -1041,8 +1007,8 @@ public class EcoreModelInstanceObject extends AbstractModelInstanceObject
 					index = 0;
 
 					for (IModelInstanceElement anElement : adaptedCollection) {
-						array[index] = ((IModelInstanceInteger) anElement)
-								.getLong().longValue();
+						array[index] =
+								((IModelInstanceInteger) anElement).getLong().longValue();
 					}
 
 					result = array;
@@ -1057,8 +1023,8 @@ public class EcoreModelInstanceObject extends AbstractModelInstanceObject
 					index = 0;
 
 					for (IModelInstanceElement anElement : adaptedCollection) {
-						array[index] = ((IModelInstanceInteger) anElement)
-								.getLong().shortValue();
+						array[index] =
+								((IModelInstanceInteger) anElement).getLong().shortValue();
 					}
 
 					result = array;
@@ -1075,15 +1041,15 @@ public class EcoreModelInstanceObject extends AbstractModelInstanceObject
 				Object[] array;
 
 				/* Create a new array of the given type. */
-				array = (Object[]) Array.newInstance(componentType,
-						adaptedCollection.size());
+				array =
+						(Object[]) Array.newInstance(componentType, adaptedCollection
+								.size());
 
 				index = 0;
 
 				/* Fill the array with elements. */
 				for (IModelInstanceElement anElement : adaptedCollection) {
-					array[index] = createAdaptedElement(anElement,
-							componentType);
+					array[index] = createAdaptedElement(anElement, componentType);
 				}
 				// end for.
 
@@ -1102,15 +1068,15 @@ public class EcoreModelInstanceObject extends AbstractModelInstanceObject
 
 	/**
 	 * <p>
-	 * A helper method that converts a given {@link IModelInstanceElement} into
-	 * an {@link Collection} of a given {@link Class} type.
+	 * A helper method that converts a given {@link IModelInstanceElement} into an
+	 * {@link Collection} of a given {@link Class} type.
 	 * </p>
 	 * 
 	 * @param modelInstanceCollection
-	 *            The {@link IModelInstanceCollection} that shall be converted.
+	 *          The {@link IModelInstanceCollection} that shall be converted.
 	 * @param type
-	 *            The {@link Collection} {@link Class} to that the given
-	 *            {@link IModelInstanceElement} shall be converted.
+	 *          The {@link Collection} {@link Class} to that the given
+	 *          {@link IModelInstanceElement} shall be converted.
 	 * @return The converted {@link Collection}.
 	 */
 	@SuppressWarnings("unchecked")
@@ -1123,15 +1089,16 @@ public class EcoreModelInstanceObject extends AbstractModelInstanceObject
 		if (Collection.class.isAssignableFrom(clazzType)) {
 
 			/*
-			 * Try to initialize the collection using the an empty constructor
-			 * found via reflections.
+			 * Try to initialize the collection using the an empty constructor found
+			 * via reflections.
 			 */
 			try {
 				Constructor<?> collectionConstructor;
 
 				collectionConstructor = clazzType.getConstructor(new Class[0]);
-				result = (Collection<Object>) collectionConstructor
-						.newInstance(new Object[0]);
+				result =
+						(Collection<Object>) collectionConstructor
+								.newInstance(new Object[0]);
 			}
 
 			/* Catch all possible exceptions and probably initialize with null. */
@@ -1160,9 +1127,9 @@ public class EcoreModelInstanceObject extends AbstractModelInstanceObject
 			}
 
 			/*
-			 * This could be implemented for other existing implementations of
-			 * EList. For generated EMF Ecore without hacks and extendes ELists
-			 * this should work.
+			 * This could be implemented for other existing implementations of EList.
+			 * For generated EMF Ecore without hacks and extendes ELists this should
+			 * work.
 			 */
 			if (result == null) {
 
@@ -1186,15 +1153,15 @@ public class EcoreModelInstanceObject extends AbstractModelInstanceObject
 				Class<?> elementClassType;
 
 				/*
-				 * TODO: The question how to retrieve the generic type of a List
-				 * (if any exists) should be investigated very soon.
+				 * TODO: The question how to retrieve the generic type of a List (if any
+				 * exists) should be investigated very soon.
 				 */
 				/* Try to get the elements class. */
 				if (clazzType.getTypeParameters().length == 1
 						&& clazzType.getTypeParameters()[0].getBounds().length == 1
 						&& clazzType.getTypeParameters()[0].getBounds()[0] instanceof Class) {
-					elementClassType = (Class<?>) clazzType.getTypeParameters()[0]
-							.getBounds()[0];
+					elementClassType =
+							(Class<?>) clazzType.getTypeParameters()[0].getBounds()[0];
 				}
 
 				else {
@@ -1204,9 +1171,7 @@ public class EcoreModelInstanceObject extends AbstractModelInstanceObject
 				/* Create the value for all elements. */
 				for (IModelInstanceElement anElement : modelInstanceCollection
 						.getCollection()) {
-					result
-							.add(createAdaptedElement(anElement,
-									elementClassType));
+					result.add(createAdaptedElement(anElement, elementClassType));
 				}
 				// end for.
 			}
@@ -1214,7 +1179,8 @@ public class EcoreModelInstanceObject extends AbstractModelInstanceObject
 			/* Else throw an exception. */
 			else {
 				String msg;
-				msg = EcoreModelInstanceTypeMessages.EcoreModelInstance_CannotRecreateCollection;
+				msg =
+						EcoreModelInstanceTypeMessages.EcoreModelInstance_CannotRecreateCollection;
 
 				throw new IllegalArgumentException(msg);
 			}
@@ -1223,7 +1189,8 @@ public class EcoreModelInstanceObject extends AbstractModelInstanceObject
 		/* Else throw an exception. */
 		else {
 			String msg;
-			msg = EcoreModelInstanceTypeMessages.EcoreModelInstance_CannotRecreateCollection;
+			msg =
+					EcoreModelInstanceTypeMessages.EcoreModelInstance_CannotRecreateCollection;
 
 			throw new IllegalArgumentException(msg);
 		}
@@ -1234,17 +1201,17 @@ public class EcoreModelInstanceObject extends AbstractModelInstanceObject
 	/**
 	 * <p>
 	 * A helper method the converts a given
-	 * {@link IModelInstanceEnumerationLiteral} into an {@link Object} value of
-	 * a given {@link Class}. If the given {@link Class} does not represents an
+	 * {@link IModelInstanceEnumerationLiteral} into an {@link Object} value of a
+	 * given {@link Class}. If the given {@link Class} does not represents an
 	 * {@link Enum}, a {@link IllegalArgumentException} is thrown.
 	 * </p>
 	 * 
 	 * @param modelInstanceEnumerationLiteral
-	 *            The {@link IModelInstanceEnumerationLiteral} that shall be
-	 *            converted.
+	 *          The {@link IModelInstanceEnumerationLiteral} that shall be
+	 *          converted.
 	 * @param type
-	 *            The {@link Class} to that the given
-	 *            {@link IModelInstanceEnumerationLiteral} shall be converted.
+	 *          The {@link Class} to that the given
+	 *          {@link IModelInstanceEnumerationLiteral} shall be converted.
 	 * @return The converted {@link Object}.
 	 */
 	private Object createAdaptedEnumerationLiteral(
@@ -1259,8 +1226,8 @@ public class EcoreModelInstanceObject extends AbstractModelInstanceObject
 			result = null;
 
 			/*
-			 * Try to find an enum constant having the same name as the
-			 * enumeration literal.
+			 * Try to find an enum constant having the same name as the enumeration
+			 * literal.
 			 */
 			for (Object anEnumConstant : typeClass.getEnumConstants()) {
 				if (anEnumConstant.toString().equals(
@@ -1276,12 +1243,14 @@ public class EcoreModelInstanceObject extends AbstractModelInstanceObject
 			if (result == null) {
 				String msg;
 
-				msg = EcoreModelInstanceTypeMessages.EcoreModelInstance_EnumerationLiteralNotFound;
-				msg = NLS
-						.bind(
-								modelInstanceEnumerationLiteral.getLiteral()
-										.getQualifiedName(),
-								"The enumeration literal could not be adapted to any constant of the given Enum class.");
+				msg =
+						EcoreModelInstanceTypeMessages.EcoreModelInstance_EnumerationLiteralNotFound;
+				msg =
+						NLS
+								.bind(
+										modelInstanceEnumerationLiteral.getLiteral()
+												.getQualifiedName(),
+										"The enumeration literal could not be adapted to any constant of the given Enum class.");
 
 				throw new IllegalArgumentException(msg);
 			}
@@ -1297,14 +1266,14 @@ public class EcoreModelInstanceObject extends AbstractModelInstanceObject
 			List<String> enumerationQualifiedName;
 			String enumClassName;
 
-			enumerationQualifiedName = modelInstanceEnumerationLiteral
-					.getLiteral().getQualifiedNameList();
+			enumerationQualifiedName =
+					modelInstanceEnumerationLiteral.getLiteral().getQualifiedNameList();
 			/* Remove the name of the literal. */
-			enumerationQualifiedName
-					.remove(enumerationQualifiedName.size() - 1);
+			enumerationQualifiedName.remove(enumerationQualifiedName.size() - 1);
 
-			enumClassName = EcoreModelInstanceTypeUtility
-					.toCanonicalName(enumerationQualifiedName);
+			enumClassName =
+					EcoreModelInstanceTypeUtility
+							.toCanonicalName(enumerationQualifiedName);
 
 			try {
 				Class<?> enumClass;
@@ -1321,8 +1290,7 @@ public class EcoreModelInstanceObject extends AbstractModelInstanceObject
 					 */
 					for (Object anEnumConstant : enumClass.getEnumConstants()) {
 						if (anEnumConstant.toString().equals(
-								modelInstanceEnumerationLiteral.getLiteral()
-										.getName())) {
+								modelInstanceEnumerationLiteral.getLiteral().getName())) {
 
 							result = anEnumConstant;
 							break;
@@ -1333,13 +1301,14 @@ public class EcoreModelInstanceObject extends AbstractModelInstanceObject
 					if (result == null) {
 						String msg;
 
-						msg = EcoreModelInstanceTypeMessages.EcoreModelInstance_EnumerationLiteralNotFound;
-						msg = NLS
-								.bind(
-										modelInstanceEnumerationLiteral
-												.getLiteral()
-												.getQualifiedName(),
-										"The enumeration literal could not be adapted to any constant of the given Enum class.");
+						msg =
+								EcoreModelInstanceTypeMessages.EcoreModelInstance_EnumerationLiteralNotFound;
+						msg =
+								NLS
+										.bind(
+												modelInstanceEnumerationLiteral.getLiteral()
+														.getQualifiedName(),
+												"The enumeration literal could not be adapted to any constant of the given Enum class.");
 
 						throw new IllegalArgumentException(msg);
 					}
@@ -1349,10 +1318,12 @@ public class EcoreModelInstanceObject extends AbstractModelInstanceObject
 				else {
 					String msg;
 
-					msg = EcoreModelInstanceTypeMessages.EcoreModelInstance_EnumerationLiteralNotFound;
-					msg = NLS.bind(modelInstanceEnumerationLiteral.getLiteral()
-							.getQualifiedName(), "The found class " + enumClass
-							+ " is not an Enum.");
+					msg =
+							EcoreModelInstanceTypeMessages.EcoreModelInstance_EnumerationLiteralNotFound;
+					msg =
+							NLS.bind(modelInstanceEnumerationLiteral.getLiteral()
+									.getQualifiedName(), "The found class " + enumClass
+									+ " is not an Enum.");
 
 					throw new IllegalArgumentException(msg);
 				}
@@ -1361,9 +1332,11 @@ public class EcoreModelInstanceObject extends AbstractModelInstanceObject
 			catch (ClassNotFoundException e) {
 				String msg;
 
-				msg = EcoreModelInstanceTypeMessages.EcoreModelInstance_EnumerationLiteralNotFound;
-				msg = NLS.bind(modelInstanceEnumerationLiteral.getLiteral()
-						.getQualifiedName(), e.getMessage());
+				msg =
+						EcoreModelInstanceTypeMessages.EcoreModelInstance_EnumerationLiteralNotFound;
+				msg =
+						NLS.bind(modelInstanceEnumerationLiteral.getLiteral()
+								.getQualifiedName(), e.getMessage());
 
 				throw new IllegalArgumentException(msg, e);
 			}
@@ -1374,16 +1347,16 @@ public class EcoreModelInstanceObject extends AbstractModelInstanceObject
 
 	/**
 	 * <p>
-	 * A helper method the converts a given {@link IModelInstanceInteger} into
-	 * an Integer value of a given {@link Class}. If the given {@link Class}
+	 * A helper method the converts a given {@link IModelInstanceInteger} into an
+	 * Integer value of a given {@link Class}. If the given {@link Class}
 	 * represents an unknown integer {@link Class}, a {@link Long} is returned.
 	 * </p>
 	 * 
 	 * @param modelInstanceInteger
-	 *            The {@link IModelInstanceElement} that shall be converted.
+	 *          The {@link IModelInstanceElement} that shall be converted.
 	 * @param type
-	 *            The {@link Class} to that the given
-	 *            {@link IModelInstanceElement} shall be converted.
+	 *          The {@link Class} to that the given {@link IModelInstanceElement}
+	 *          shall be converted.
 	 * @return The converted {@link Object}.
 	 */
 	private Object createAdaptedIntegerValue(
@@ -1431,16 +1404,16 @@ public class EcoreModelInstanceObject extends AbstractModelInstanceObject
 
 	/**
 	 * <p>
-	 * A helper method the converts a given {@link IModelInstanceReal} into a
-	 * Real value of a given {@link Class}. If the given {@link Class}
-	 * represents an unknown real {@link Class}, a {@link Number} is returned.
+	 * A helper method the converts a given {@link IModelInstanceReal} into a Real
+	 * value of a given {@link Class}. If the given {@link Class} represents an
+	 * unknown real {@link Class}, a {@link Number} is returned.
 	 * </p>
 	 * 
 	 * @param modelInstanceReal
-	 *            The {@link IModelInstanceReal} that shall be converted.
+	 *          The {@link IModelInstanceReal} that shall be converted.
 	 * @param type
-	 *            The {@link Class} to that the given {@link IModelInstanceReal}
-	 *            shall be converted.
+	 *          The {@link Class} to that the given {@link IModelInstanceReal}
+	 *          shall be converted.
 	 * @return The converted {@link Object}.
 	 */
 	private Object createAdaptedRealValue(IModelInstanceReal modelInstanceReal,
@@ -1474,10 +1447,10 @@ public class EcoreModelInstanceObject extends AbstractModelInstanceObject
 	 * </p>
 	 * 
 	 * @param modelInstanceString
-	 *            The {@link IModelInstanceString} that shall be converted.
+	 *          The {@link IModelInstanceString} that shall be converted.
 	 * @param type
-	 *            The {@link Class} to that the given
-	 *            {@link IModelInstanceString} shall be converted.
+	 *          The {@link Class} to that the given {@link IModelInstanceString}
+	 *          shall be converted.
 	 * @return The converted {@link Object}.
 	 */
 	private Object createAdaptedStringValue(
@@ -1513,107 +1486,11 @@ public class EcoreModelInstanceObject extends AbstractModelInstanceObject
 
 		else {
 			/*
-			 * Other integer types are not supported (except of String). Return
-			 * the String value.
+			 * Other integer types are not supported (except of String). Return the
+			 * String value.
 			 */
 			result = stringValue;
 		}
-
-		return result;
-	}
-
-	/**
-	 * <p>
-	 * A helper {@link Method} used to find a getter {@link Method} of the
-	 * adapted {@link Object} of this {@link EcoreModelInstanceObject} that is a
-	 * getter for a given {@link Property}.
-	 * </p>
-	 * 
-	 * @param property
-	 *            The {@link Property} for that a getter {@link Method} shall be
-	 *            found.
-	 * @return The found getter {@link Method}.
-	 * @throws OperationNotFoundException
-	 *             If no matching getter {@link Method} for the given
-	 *             {@link Property} can be found.
-	 */
-	private Method findGetterMethodOfProperty(Property property)
-			throws OperationNotFoundException {
-
-		Method result;
-
-		String getterMethodName;
-		Class<?> methodSourceClass;
-
-		result = null;
-		methodSourceClass = this.myAdaptedType;
-
-		/* Compute the getter method's name. */
-		if (property.getType() instanceof PrimitiveType
-				&& ((PrimitiveType) property.getType()).getKind().equals(
-						PrimitiveTypeKind.BOOLEAN) && !property.isMultiple()) {
-			getterMethodName = "is";
-		}
-
-		else {
-			getterMethodName = "get";
-		}
-
-		getterMethodName += property.getName();
-
-		/*
-		 * Try to find an according method in the adapted objects class, or one
-		 * of its super classes.
-		 */
-		while (methodSourceClass != null && result == null) {
-
-			for (Method aMethod : methodSourceClass.getDeclaredMethods()) {
-
-				boolean nameIsEqual;
-				boolean resultTypeIsConform;
-				boolean argumentSizeIsEqual;
-
-				/* Check if the name matches to the given getter method name. */
-				nameIsEqual = aMethod.getName().equalsIgnoreCase(
-						getterMethodName);
-
-				/*
-				 * Check if the return type matches to the given operation's
-				 * type.
-				 */
-				resultTypeIsConform = EcoreModelInstanceTypeUtility
-						.conformsTypeToType(aMethod.getGenericReturnType(),
-								property.getType());
-
-				/*
-				 * Check if the method has the same size of arguments as the
-				 * given operation.
-				 */
-				argumentSizeIsEqual = aMethod.getParameterTypes().length == 0;
-
-				if (nameIsEqual && resultTypeIsConform && argumentSizeIsEqual) {
-
-					result = aMethod;
-					break;
-				}
-				// no else.
-			}
-			// end for.
-
-			methodSourceClass = methodSourceClass.getSuperclass();
-		}
-		// end while.
-
-		/* Probably throw an exception. */
-		if (result == null) {
-			String msg;
-
-			msg = EcoreModelInstanceTypeMessages.EcoreModelInstanceObject_OperationNotFound;
-			msg = NLS.bind(msg, getterMethodName, this.myEObject.getClass());
-
-			throw new OperationNotFoundException(msg);
-		}
-		// no else.
 
 		return result;
 	}
@@ -1625,14 +1502,14 @@ public class EcoreModelInstanceObject extends AbstractModelInstanceObject
 	 * </p>
 	 * 
 	 * @param clazz
-	 *            The {@link Class} whose super {@link Class}es (including
-	 *            interfaces) are checked.
+	 *          The {@link Class} whose super {@link Class}es (including
+	 *          interfaces) are checked.
 	 * @param canonicalName
-	 *            The (probably partly) canonical name of the {@link Class} that
-	 *            shall be found.
+	 *          The (probably partly) canonical name of the {@link Class} that
+	 *          shall be found.
 	 * @param alreadyCheckedClasses
-	 *            {@link Class} that have already been checked (necessary to
-	 *            avoid cycles).
+	 *          {@link Class} that have already been checked (necessary to avoid
+	 *          cycles).
 	 * @return The found {@link Class} or <code>null</code>.
 	 */
 	private Class<?> findSuperClassConformingToName(Class<?> clazz,
@@ -1653,8 +1530,9 @@ public class EcoreModelInstanceObject extends AbstractModelInstanceObject
 
 			if (clazz.getSuperclass() != null
 					&& !alreadyCheckedClasses.contains(clazz.getSuperclass())) {
-				result = this.findSuperClassConformingToName(clazz
-						.getSuperclass(), canonicalName, alreadyCheckedClasses);
+				result =
+						this.findSuperClassConformingToName(clazz.getSuperclass(),
+								canonicalName, alreadyCheckedClasses);
 			}
 			// no else.
 
@@ -1662,8 +1540,9 @@ public class EcoreModelInstanceObject extends AbstractModelInstanceObject
 
 				for (Class<?> interfaze : clazz.getInterfaces()) {
 					if (!alreadyCheckedClasses.contains(interfaze)) {
-						result = this.findSuperClassConformingToName(interfaze,
-								canonicalName, alreadyCheckedClasses);
+						result =
+								this.findSuperClassConformingToName(interfaze, canonicalName,
+										alreadyCheckedClasses);
 
 						if (result != null) {
 							break;
@@ -1684,17 +1563,16 @@ public class EcoreModelInstanceObject extends AbstractModelInstanceObject
 	/**
 	 * <p>
 	 * A helper {@link Method} used to find a {@link Method} of the adapted
-	 * {@link Object} of this {@link EcoreModelInstanceObject} that conforms to
-	 * a given {@link Operation}.
+	 * {@link Object} of this {@link EcoreModelInstanceObject} that conforms to a
+	 * given {@link Operation}.
 	 * </p>
 	 * 
 	 * @param operation
-	 *            The {@link Operation} for that a {@link Method} shall be
-	 *            found.
+	 *          The {@link Operation} for that a {@link Method} shall be found.
 	 * @return The found {@link Method}.
 	 * @throws OperationNotFoundException
-	 *             If no matching {@link Method} for the given {@link Operation}
-	 *             can be found.
+	 *           If no matching {@link Method} for the given {@link Operation} can
+	 *           be found.
 	 */
 	private Method findMethodOfAdaptedObject(Operation operation)
 			throws OperationNotFoundException {
@@ -1707,8 +1585,8 @@ public class EcoreModelInstanceObject extends AbstractModelInstanceObject
 		methodSourceClass = this.myAdaptedType;
 
 		/*
-		 * Try to find an according method in the adapted objects class, or one
-		 * of its super classes.
+		 * Try to find an according method in the adapted objects class, or one of
+		 * its super classes.
 		 */
 		while (methodSourceClass != null && result == null) {
 
@@ -1722,19 +1600,19 @@ public class EcoreModelInstanceObject extends AbstractModelInstanceObject
 				nameIsEqual = aMethod.getName().equals(operation.getName());
 
 				/*
-				 * Check if the return type matches to the given operation's
-				 * type.
+				 * Check if the return type matches to the given operation's type.
 				 */
-				resultTypeIsConform = EcoreModelInstanceTypeUtility
-						.conformsTypeToType(aMethod.getGenericReturnType(),
-								operation.getType());
+				resultTypeIsConform =
+						EcoreModelInstanceTypeUtility.conformsTypeToType(aMethod
+								.getGenericReturnType(), operation.getType());
 
 				/*
-				 * Check if the method has the same size of arguments as the
-				 * given operation.
+				 * Check if the method has the same size of arguments as the given
+				 * operation.
 				 */
-				argumentSizeIsEqual = aMethod.getParameterTypes().length == operation
-						.getSignatureParameter().size();
+				argumentSizeIsEqual =
+						aMethod.getParameterTypes().length == operation
+								.getSignatureParameter().size();
 
 				if (nameIsEqual && resultTypeIsConform && argumentSizeIsEqual) {
 
@@ -1749,12 +1627,10 @@ public class EcoreModelInstanceObject extends AbstractModelInstanceObject
 					matches = true;
 
 					/* Compare the types of all arguments. */
-					for (int index = 0; index < operation
-							.getSignatureParameter().size(); index++) {
+					for (int index = 0; index < operation.getSignatureParameter().size(); index++) {
 
 						if (!EcoreModelInstanceTypeUtility.conformsTypeToType(
-								javaTypes[index], pivotModelParamters
-										.get(index).getType())) {
+								javaTypes[index], pivotModelParamters.get(index).getType())) {
 							matches = false;
 							break;
 						}
@@ -1779,7 +1655,8 @@ public class EcoreModelInstanceObject extends AbstractModelInstanceObject
 		if (result == null) {
 			String msg;
 
-			msg = EcoreModelInstanceTypeMessages.EcoreModelInstanceObject_OperationNotFound;
+			msg =
+					EcoreModelInstanceTypeMessages.EcoreModelInstanceObject_OperationNotFound;
 			msg = NLS.bind(msg, operation, this.myEObject.getClass());
 
 			throw new OperationNotFoundException(msg);
@@ -1796,11 +1673,11 @@ public class EcoreModelInstanceObject extends AbstractModelInstanceObject
 	 * </p>
 	 * 
 	 * @param canonicalName
-	 *            The canonical name of the {@link Class} that shall be loaded.
+	 *          The canonical name of the {@link Class} that shall be loaded.
 	 * @return
 	 * @throws ClassNotFoundException
-	 *             Thrown, if the {@link Class} cannot be found by any
-	 *             {@link ClassLoader} of this {@link JavaModelInstance}.
+	 *           Thrown, if the {@link Class} cannot be found by any
+	 *           {@link ClassLoader} of this {@link JavaModelInstance}.
 	 */
 	private Class<?> loadJavaClass(String canonicalName)
 			throws ClassNotFoundException {
