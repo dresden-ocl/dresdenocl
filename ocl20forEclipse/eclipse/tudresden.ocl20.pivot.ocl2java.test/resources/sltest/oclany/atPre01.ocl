@@ -1,0 +1,6 @@
+package testpackage
+
+context Class1::postOperation02()
+post testAtPre01: not self@pre.oclIsUndefined()
+
+endpackage

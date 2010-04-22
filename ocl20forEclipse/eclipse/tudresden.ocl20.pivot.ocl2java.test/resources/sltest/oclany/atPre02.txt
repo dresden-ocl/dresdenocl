@@ -1,0 +1,1 @@
+((Object) atPreValue1).equals((aClass.anInteger01 - new Integer(1)))

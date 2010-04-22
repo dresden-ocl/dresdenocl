@@ -15,7 +15,7 @@ public privileged aspect DefAspect5 {
      * <p>Pointcut for all calls on {@link testpackage.Class1#testCollectionMin(tudresden.ocl20.pivot.ocl2java.types.OclCollection<Object> source)}.</p>
      */
     protected pointcut testCollectionMinCaller(testpackage.Class1 aClass, tudresden.ocl20.pivot.ocl2java.types.OclCollection<Object> source):
-    	call(* testpackage.Class1.testCollectionMin(tudresden.ocl20.pivot.ocl2java.types.OclCollection<Object>))
+    	call(* testpackage.Class1.testCollectionMin(tudresden.ocl20.pivot.ocl2java.types.OclCollections<Object>))
     	&& target(aClass) && args(source);
     
     /**

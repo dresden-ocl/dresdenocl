@@ -99,6 +99,46 @@ public class TestOclAny extends AbstractDiffTest {
 	 * @throws Ocl22CodeException
 	 */
 	@Test
+	public void testAtPre01()
+			throws IllegalArgumentException, ParseException,
+			ModelAccessException, Ocl22CodeException {
+	
+		this.compareFragmentCodeGeneration("sltest/oclany", "atPre01");
+		this.compareInstrumentationCodeGeneration("sltest/oclany",
+				"atPre01");
+	}
+
+	/**
+	 * <p>
+	 * Tests the instrumentation of a constraint.
+	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 * @throws ParseException
+	 * @throws IllegalArgumentException
+	 * @throws Ocl22CodeException
+	 */
+	@Test
+	public void testAtPre02()
+			throws IllegalArgumentException, ParseException,
+			ModelAccessException, Ocl22CodeException {
+	
+		this.compareFragmentCodeGeneration("sltest/oclany", "atPre02");
+		this.compareInstrumentationCodeGeneration("sltest/oclany",
+				"atPre02");
+	}
+
+	/**
+	 * <p>
+	 * Tests the instrumentation of a constraint.
+	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 * @throws ParseException
+	 * @throws IllegalArgumentException
+	 * @throws Ocl22CodeException
+	 */
+	@Test
 	public void testOclType01() throws IllegalArgumentException,
 			ParseException, ModelAccessException, Ocl22CodeException {
 

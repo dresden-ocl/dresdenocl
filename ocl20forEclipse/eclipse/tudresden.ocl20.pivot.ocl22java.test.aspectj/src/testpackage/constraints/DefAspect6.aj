@@ -15,7 +15,7 @@ public privileged aspect DefAspect6 {
      * <p>Pointcut for all calls on {@link testpackage.Class1#testCollectionMax(tudresden.ocl20.pivot.ocl2java.types.OclCollection<Object> source)}.</p>
      */
     protected pointcut testCollectionMaxCaller(testpackage.Class1 aClass, tudresden.ocl20.pivot.ocl2java.types.OclCollection<Object> source):
-    	call(* testpackage.Class1.testCollectionMax(tudresden.ocl20.pivot.ocl2java.types.OclCollection<Object>))
+    	call(* testpackage.Class1.testCollectionMax(tudresden.ocl20.pivot.ocl2java.types.OclCollections<Object>))
     	&& target(aClass) && args(source);
     
     /**

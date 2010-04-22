@@ -10,6 +10,10 @@
     <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
   </elementImport>
   <packagedElement xmi:type="uml:Class" xmi:id="_HtFR8BvWEd-lK-Yjl_N2xQ" name="Class1">
+    <ownedAttribute xmi:id="_s-wwwE1PEd-UlNzXZQNjJA" name="anInteger01">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      <defaultValue xmi:type="uml:LiteralString" xmi:id="_vmTawE1PEd-UlNzXZQNjJA" value=""/>
+    </ownedAttribute>
     <ownedOperation xmi:id="_TMg-EEO0Ed-6dYpdYOZoUQ" name="Class1" isStatic="true">
       <ownedParameter xmi:id="_TMg-EkO0Ed-6dYpdYOZoUQ" name="in1">
         <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
@@ -44,5 +48,6 @@
         <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
       </ownedParameter>
     </ownedOperation>
+    <ownedOperation xmi:id="_HXd_UE1PEd-UlNzXZQNjJA" name="postOperation02"/>
   </packagedElement>
 </uml:Package>
