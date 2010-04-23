@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: OCL Semantics Plug-in
+Bundle-SymbolicName: tudresden.ocl20.pivot.language.ocl.semantics;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Require-Bundle: tudresden.ocl20.pivot.language.ocl;visibility:=reexport, 
+ tudresden.attributegrammar.integration.kiama,
+ scala.library,
+ kiama.attribution
+Bundle-ActivationPolicy: lazy
+Bundle-Vendor: www.langems.org
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Export-Package: tudresden.ocl20.pivot.language.ocl.semantics

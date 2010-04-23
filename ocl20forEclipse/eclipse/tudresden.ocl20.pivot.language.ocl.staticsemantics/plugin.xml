@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="tudresden.ocl20.pivot.language.ocl.resource.ocl.default_load_options">
+      <provider
+            class="tudresden.ocl20.pivot.language.ocl.staticsemantics.postporcessor.OclLoadOptionsProvider"
+            id="tudresden.ocl20.pivot.language.ocl.staticsemantics.StaticSemantics">
+      </provider>
+   </extension>
+
+</plugin>

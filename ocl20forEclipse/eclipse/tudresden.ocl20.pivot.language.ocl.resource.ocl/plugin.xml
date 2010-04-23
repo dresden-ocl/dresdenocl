@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+	<extension point="org.emftext.access.syntax">
+		<metaInformationProvider class="tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclMetaInformation" id="tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclMetaInformation">
+		</metaInformationProvider>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors">
+		<editor class="tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclEditor" contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor" extensions="ocl" icon="icons/editor_icon.gif" id="tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclEditor" name="EMFText ocl Editor">
+		</editor>
+	</extension>
+	
+	<extension point="org.eclipse.core.runtime.preferences">
+		<initializer class="tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclPreferenceInitializer">
+		</initializer>
+	</extension>
+	
+	<extension point="org.eclipse.ui.preferencePages">
+		<page name="Ocl Text Editor" id="tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclPreferencePage" class="tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclPreferencePage" category="org.eclipse.ui.preferencePages.GeneralTextEditor">
+		</page>
+		<page name="Syntax Coloring" id="tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclSyntaxColoringPreferencePage" class="tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclSyntaxColoringPreferencePage" category="tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclPreferencePage">
+		</page>
+		<page name="Brackets" id="tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclBracketPreferencePage" class="tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclBracketPreferencePage" category="tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclPreferencePage">
+		</page>
+		<page name="Occurrence" id="tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclOccurrencePreferencePage" class="tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclOccurrencePreferencePage" category="tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclPreferencePage">
+		</page>
+	</extension>
+	
+	<extension point="org.eclipse.ui.newWizards">
+		<category id="org.emftext.runtime.ui.EMFTextFileCategory" name="EMFText File">
+		</category>
+		<wizard category="org.emftext.runtime.ui.EMFTextFileCategory" icon="/icons/default_new_icon.gif" class="tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclNewFileWizard" id="tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclNewFileWizard" name="EMFText .ocl file">
+		</wizard>
+	</extension>
+	
+	<extension id="tudresden.ocl20.pivot.language.ocl.resource.ocl.problem" name="EMFText Problem" point="org.eclipse.core.resources.markers">
+		<persistent value="true">
+		</persistent>
+		<super type="org.eclipse.core.resources.problemmarker">
+		</super>
+		<super type="org.eclipse.core.resources.textmarker">
+		</super>
+	</extension>
+	
+	<extension id="tudresden.ocl20.pivot.language.ocl.resource.ocl.nature" name="ocl nature" point="org.eclipse.core.resources.natures">
+		<runtime>
+			<run class="tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclNature" />
+		</runtime>
+		<builder id="tudresden.ocl20.pivot.language.ocl.resource.ocl.builder" />
+	</extension>
+	
+	<extension point="org.eclipse.core.resources.builders" id="tudresden.ocl20.pivot.language.ocl.resource.ocl.builder" name="ocl Builder">
+		<builder hasNature="true">
+			<run class="tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclBuilderAdapter" />
+		</builder>
+	</extension>
+	
+	<extension-point id="tudresden.ocl20.pivot.language.ocl.resource.ocl.default_load_options" name="Default Load Options" schema="schema/default_load_options.exsd"/>
+	
+	<extension point="org.eclipse.emf.ecore.extension_parser">
+		<parser class="tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclResourceFactoryDelegator" type="ocl">
+		</parser>
+	</extension>
+	
+	<extension-point id="tudresden.ocl20.pivot.language.ocl.resource.ocl.additional_extension_parser" name="Additional Extension Parser" schema="schema/additional_extension_parser.exsd"/>
+	
+</plugin>

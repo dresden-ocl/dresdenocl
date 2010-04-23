@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/tudresden.ocl20.pivot.language.ocl/src-gen"
+    modelPluginID="tudresden.ocl20.pivot.language.ocl" modelName="OCL" importerID="org.eclipse.emf.importer.ecore"
+    complianceLevel="5.0" copyrightFields="false">
+  <foreignModel>OCL.ecore</foreignModel>
+  <genPackages prefix="Ocl" basePackage="tudresden.ocl20.pivot.language" disposableProviderFactory="true"
+      ecorePackage="OCL.ecore#/">
+    <genClasses image="false" ecoreClass="OCL.ecore#//OclExpressionCS"/>
+    <genClasses ecoreClass="OCL.ecore#//VariableOrStaticPropertyOrEnumLiteralExpCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//VariableOrStaticPropertyOrEnumLiteralExpCS/name"/>
+    </genClasses>
+    <genClasses ecoreClass="OCL.ecore#//PathNameCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//PathNameCS/simpleName"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//PathNameCS/pathName"/>
+    </genClasses>
+    <genClasses ecoreClass="OCL.ecore#//SimpleNameCS">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute OCL.ecore#//SimpleNameCS/simpleName"/>
+    </genClasses>
+    <genClasses ecoreClass="OCL.ecore#//TypeCS"/>
+    <genClasses ecoreClass="OCL.ecore#//TypePathNameCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//TypePathNameCS/pathName"/>
+    </genClasses>
+    <genClasses ecoreClass="OCL.ecore#//TupleTypeCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//TupleTypeCS/variableDeclarationList"/>
+    </genClasses>
+    <genClasses ecoreClass="OCL.ecore#//VariableDeclarationCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//VariableDeclarationCS/variableName"/>
+    </genClasses>
+    <genClasses ecoreClass="OCL.ecore#//VariableDeclarationWithInitCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//VariableDeclarationWithInitCS/type"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//VariableDeclarationWithInitCS/initialization"/>
+    </genClasses>
+    <genClasses ecoreClass="OCL.ecore#//VariableDeclarationWithoutInitCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//VariableDeclarationWithoutInitCS/type"/>
+    </genClasses>
+    <genClasses ecoreClass="OCL.ecore#//VariableDeclarationWithInitListCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//VariableDeclarationWithInitListCS/variableDeclarations"/>
+    </genClasses>
+    <genClasses ecoreClass="OCL.ecore#//VariableDeclarationWithoutInitListCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//VariableDeclarationWithoutInitListCS/variableDeclarations"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="OCL.ecore#//LiteralExpCS"/>
+    <genClasses ecoreClass="OCL.ecore#//CollectionLiteralExpCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//CollectionLiteralExpCS/collectionType"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//CollectionLiteralExpCS/collectionLiteralParts"/>
+    </genClasses>
+    <genClasses ecoreClass="OCL.ecore#//CollectionTypeIdentifierCS">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute OCL.ecore#//CollectionTypeIdentifierCS/collectionTypeName"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//CollectionTypeIdentifierCS/genericType"/>
+    </genClasses>
+    <genClasses ecoreClass="OCL.ecore#//CollectionLiteralPartsCS"/>
+    <genClasses ecoreClass="OCL.ecore#//CollectionLiteralPartsOclExpCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//CollectionLiteralPartsOclExpCS/oclExpression"/>
+    </genClasses>
+    <genClasses ecoreClass="OCL.ecore#//CollectionRangeCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//CollectionRangeCS/from"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//CollectionRangeCS/to"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="OCL.ecore#//CallExpCS"/>
+    <genClasses image="false" ecoreClass="OCL.ecore#//LoopExpCS"/>
+    <genClasses ecoreClass="OCL.ecore#//IteratorExpCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//IteratorExpCS/source"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//IteratorExpCS/iteratorName"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//IteratorExpCS/iteratorVariables"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="OCL.ecore#//FeatureCallExpCS"/>
+    <genClasses image="false" ecoreClass="OCL.ecore#//PropertyCallExpCS"/>
+    <genClasses ecoreClass="OCL.ecore#//PropertyCallWithSourceExpCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//PropertyCallWithSourceExpCS/source"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//PropertyCallWithSourceExpCS/propertyName"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute OCL.ecore#//PropertyCallWithSourceExpCS/isMarkedPre"/>
+    </genClasses>
+    <genClasses ecoreClass="OCL.ecore#//PropertyCallWithImplicitSourceExpCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//PropertyCallWithImplicitSourceExpCS/propertyName"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute OCL.ecore#//PropertyCallWithImplicitSourceExpCS/isMarkedPre"/>
+    </genClasses>
+    <genClasses ecoreClass="OCL.ecore#//PropertyCallExplicitPathExpCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//PropertyCallExplicitPathExpCS/source"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//PropertyCallExplicitPathExpCS/propertyPath"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//PropertyCallExplicitPathExpCS/propertyName"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute OCL.ecore#//PropertyCallExplicitPathExpCS/isMarkedPre"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="OCL.ecore#//OperationCallExpCS"/>
+    <genClasses ecoreClass="OCL.ecore#//UnaryOperationCallExpCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute OCL.ecore#//UnaryOperationCallExpCS/operationName"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//UnaryOperationCallExpCS/target"/>
+    </genClasses>
+    <genClasses ecoreClass="OCL.ecore#//LogicalNotOperationCallExpCS">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute OCL.ecore#//LogicalNotOperationCallExpCS/operationName"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//LogicalNotOperationCallExpCS/target"/>
+    </genClasses>
+    <genClasses ecoreClass="OCL.ecore#//OperationCallWithSourceExp">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//OperationCallWithSourceExp/source"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute OCL.ecore#//OperationCallWithSourceExp/isMarkedPre"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="OCL.ecore#//OperationCallBinaryExpCS">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute OCL.ecore#//OperationCallBinaryExpCS/operationName"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//OperationCallBinaryExpCS/target"/>
+    </genClasses>
+    <genClasses ecoreClass="OCL.ecore#//AdditiveOperationCallExpCS"/>
+    <genClasses ecoreClass="OCL.ecore#//MultOperationCallExpCS"/>
+    <genClasses ecoreClass="OCL.ecore#//RelationalOperationCallExpCS"/>
+    <genClasses ecoreClass="OCL.ecore#//EqualityOperationCallExpCS"/>
+    <genClasses ecoreClass="OCL.ecore#//LogicalAndOperationCallExpCS"/>
+    <genClasses ecoreClass="OCL.ecore#//LogicalOrOperationCallExpCS"/>
+    <genClasses ecoreClass="OCL.ecore#//LogicalXorOperationCallExpCS"/>
+    <genClasses ecoreClass="OCL.ecore#//LogicalImpliesOperationCallExpCS"/>
+    <genClasses ecoreClass="OCL.ecore#//OperationCallWithImlicitSourceExpCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//OperationCallWithImlicitSourceExpCS/operationName"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//OperationCallWithImlicitSourceExpCS/arguments"/>
+    </genClasses>
+    <genClasses ecoreClass="OCL.ecore#//TupleLiteralExpCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//TupleLiteralExpCS/variableDeclarations"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="OCL.ecore#//PrimitiveLiteralExpCS"/>
+    <genClasses ecoreClass="OCL.ecore#//IntegerLiteralExpCS">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute OCL.ecore#//IntegerLiteralExpCS/integerLiteral"/>
+    </genClasses>
+    <genClasses ecoreClass="OCL.ecore#//RealLiteralExpCS">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute OCL.ecore#//RealLiteralExpCS/realLiteral"/>
+    </genClasses>
+    <genClasses ecoreClass="OCL.ecore#//BooleanLiteralExpCS">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute OCL.ecore#//BooleanLiteralExpCS/booleanLiteral"/>
+    </genClasses>
+    <genClasses ecoreClass="OCL.ecore#//StringLiteralExpCS">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute OCL.ecore#//StringLiteralExpCS/stringLiteral"/>
+    </genClasses>
+    <genClasses ecoreClass="OCL.ecore#//LetExpCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//LetExpCS/variableDeclaration"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//LetExpCS/letExpSub"/>
+    </genClasses>
+    <genClasses ecoreClass="OCL.ecore#//LetExpSubCS"/>
+    <genClasses ecoreClass="OCL.ecore#//LetExpSubSubCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//LetExpSubSubCS/variableDeclaration"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//LetExpSubSubCS/letExpSub"/>
+    </genClasses>
+    <genClasses ecoreClass="OCL.ecore#//LetExpSubExpressionCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//LetExpSubExpressionCS/oclExpression"/>
+    </genClasses>
+    <genClasses ecoreClass="OCL.ecore#//IfExpCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//IfExpCS/condition"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//IfExpCS/thenBranch"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//IfExpCS/elseBranch"/>
+    </genClasses>
+    <genClasses ecoreClass="OCL.ecore#//PackageDeclarationCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//PackageDeclarationCS/packageName"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//PackageDeclarationCS/contextDeclarations"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="OCL.ecore#//ContextDeclarationCS"/>
+    <genClasses ecoreClass="OCL.ecore#//AttributeContextDeclarationCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//AttributeContextDeclarationCS/typeName"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//AttributeContextDeclarationCS/attributeName"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//AttributeContextDeclarationCS/type"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//AttributeContextDeclarationCS/initOrDeriveValue"/>
+    </genClasses>
+    <genClasses ecoreClass="OCL.ecore#//ClassifierContextDeclarationCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//ClassifierContextDeclarationCS/typeName"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//ClassifierContextDeclarationCS/invariantsAndDefinitions"/>
+    </genClasses>
+    <genClasses ecoreClass="OCL.ecore#//OperationContextDeclarationCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//OperationContextDeclarationCS/operation"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//OperationContextDeclarationCS/prePostOrBodyDeclarations"/>
+    </genClasses>
+    <genClasses ecoreClass="OCL.ecore#//InitOrDeriveValueCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//InitOrDeriveValueCS/oclExpression"/>
+    </genClasses>
+    <genClasses ecoreClass="OCL.ecore#//InitValueCS"/>
+    <genClasses ecoreClass="OCL.ecore#//DeriveValueCS"/>
+    <genClasses image="false" ecoreClass="OCL.ecore#//InvariantOrDefinitionCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//InvariantOrDefinitionCS/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//InvariantOrDefinitionCS/oclExpression"/>
+    </genClasses>
+    <genClasses ecoreClass="OCL.ecore#//InvariantExpCS"/>
+    <genClasses ecoreClass="OCL.ecore#//DefinitionExpCS">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute OCL.ecore#//DefinitionExpCS/static"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//DefinitionExpCS/variable"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//DefinitionExpCS/operation"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="OCL.ecore#//PrePostOrBodyDeclarationCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//PrePostOrBodyDeclarationCS/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//PrePostOrBodyDeclarationCS/oclExpression"/>
+    </genClasses>
+    <genClasses ecoreClass="OCL.ecore#//PreConditionDeclarationCS"/>
+    <genClasses ecoreClass="OCL.ecore#//PostConditionDeclarationCS"/>
+    <genClasses ecoreClass="OCL.ecore#//BodyDeclarationCS"/>
+    <genClasses ecoreClass="OCL.ecore#//OperationCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//OperationCS/operationName"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//OperationCS/parameters"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//OperationCS/type"/>
+    </genClasses>
+    <genClasses ecoreClass="OCL.ecore#//ParameterCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//ParameterCS/parameterName"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//ParameterCS/parameterType"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>
