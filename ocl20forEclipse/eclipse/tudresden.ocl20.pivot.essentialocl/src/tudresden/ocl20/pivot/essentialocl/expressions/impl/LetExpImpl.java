@@ -52,282 +52,291 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.LetExpImpl#getIn <em>In</em>}</li>
- * <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.LetExpImpl#getVariable <em>Variable</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.LetExpImpl#getIn <em>In</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.LetExpImpl#getVariable <em>Variable</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @generated
  */
 public class LetExpImpl extends OclExpressionImpl implements LetExp {
 
-  /**
-   * Logger for this class
-   */
-  private static final Logger logger = Logger.getLogger(LetExpImpl.class);
+	/**
+	 * Logger for this class
+	 */
+	private static final Logger logger = Logger.getLogger(LetExpImpl.class);
 
-  /**
-   * The cached value of the '{@link #getIn() <em>In</em>}' containment
-   * reference. <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @see #getIn()
-   * @generated
-   * @ordered
-   */
-  protected OclExpression in = null;
+	/**
+	 * The cached value of the '{@link #getIn() <em>In</em>}' containment reference.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @see #getIn()
+	 * @generated
+	 * @ordered
+	 */
+	protected OclExpression in;
 
-  /**
-   * The cached value of the '{@link #getVariable() <em>Variable</em>}'
-   * containment reference. <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @see #getVariable()
-   * @generated
-   * @ordered
-   */
-  protected Variable variable = null;
+	/**
+	 * The cached value of the '{@link #getVariable() <em>Variable</em>}' containment reference.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @see #getVariable()
+	 * @generated
+	 * @ordered
+	 */
+	protected Variable variable;
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  protected LetExpImpl() {
-    super();
-  }
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected LetExpImpl() {
 
-  /**
-   * Overridden to determine the type of the <code>LetExp</code> according to
-   * the OCL specification (Section 8.3):
-   * 
-   * <p>
-   * The type of a Let expression is the type of the in expression.
-   * 
-   * <pre>
-   *   context LetExp
-   *   inv: type = in.type
-   * </pre>
-   * 
-   * </p>
-   * 
-   * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.OclExpressionImpl#evaluateType()
-   */
-  @Override
-  protected Type evaluateType() {
-    if (logger.isDebugEnabled()) {
-      logger.debug("evaluateType() - enter"); //$NON-NLS-1$
-    }
+		super();
+	}
 
-    // check invariant
-    if (in == null) {
-      throw new WellformednessException(this,
-          "The 'in' expression of a LetExp must not be null."); //$NON-NLS-1$
-    }
+	/**
+	 * Overridden to determine the type of the <code>LetExp</code> according to
+	 * the OCL specification (Section 8.3):
+	 * 
+	 * <p>
+	 * The type of a Let expression is the type of the in expression.
+	 * 
+	 * <pre>
+	 *   context LetExp
+	 *   inv: type = in.type
+	 * </pre>
+	 * 
+	 * </p>
+	 * 
+	 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.OclExpressionImpl#evaluateType()
+	 */
+	@Override
+	protected Type evaluateType() {
 
-    Type type = in.getType();
+		if (logger.isDebugEnabled()) {
+			logger.debug("evaluateType() - enter"); //$NON-NLS-1$
+		}
 
-    if (logger.isDebugEnabled()) {
-      logger.debug("evaluateType() - exit - return value=" + type); //$NON-NLS-1$
-    }
+		// check invariant
+		if (in == null) {
+			throw new WellformednessException(this,
+					"The 'in' expression of a LetExp must not be null."); //$NON-NLS-1$
+		}
 
-    return type;
-  }
+		Type type = in.getType();
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  public OclExpression getIn() {
-    return in;
-  }
+		if (logger.isDebugEnabled()) {
+			logger.debug("evaluateType() - exit - return value=" + type); //$NON-NLS-1$
+		}
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  public NotificationChain basicSetIn(OclExpression newIn,
-      NotificationChain msgs) {
-    OclExpression oldIn = in;
-    in = newIn;
-    if (eNotificationRequired()) {
-      ENotificationImpl notification = new ENotificationImpl(this,
-          Notification.SET, ExpressionsPackageImpl.LET_EXP__IN, oldIn, newIn);
-      if (msgs == null) msgs = notification;
-      else msgs.add(notification);
-    }
-    return msgs;
-  }
+		return type;
+	}
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  public void setIn(OclExpression newIn) {
-    if (newIn != in) {
-      NotificationChain msgs = null;
-      if (in != null)
-        msgs = ((InternalEObject) in).eInverseRemove(this,
-            EOPPOSITE_FEATURE_BASE - ExpressionsPackageImpl.LET_EXP__IN, null,
-            msgs);
-      if (newIn != null)
-        msgs = ((InternalEObject) newIn).eInverseAdd(this,
-            EOPPOSITE_FEATURE_BASE - ExpressionsPackageImpl.LET_EXP__IN, null,
-            msgs);
-      msgs = basicSetIn(newIn, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET,
-          ExpressionsPackageImpl.LET_EXP__IN, newIn, newIn));
-  }
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	public OclExpression getIn() {
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  public Variable getVariable() {
-    return variable;
-  }
+		return in;
+	}
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  public NotificationChain basicSetVariable(Variable newVariable,
-      NotificationChain msgs) {
-    Variable oldVariable = variable;
-    variable = newVariable;
-    if (eNotificationRequired()) {
-      ENotificationImpl notification = new ENotificationImpl(this,
-          Notification.SET, ExpressionsPackageImpl.LET_EXP__VARIABLE,
-          oldVariable, newVariable);
-      if (msgs == null) msgs = notification;
-      else msgs.add(notification);
-    }
-    return msgs;
-  }
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetIn(OclExpression newIn,
+			NotificationChain msgs) {
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  public void setVariable(Variable newVariable) {
-    if (newVariable != variable) {
-      NotificationChain msgs = null;
-      if (variable != null)
-        msgs = ((InternalEObject) variable).eInverseRemove(this,
-            EOPPOSITE_FEATURE_BASE - ExpressionsPackageImpl.LET_EXP__VARIABLE,
-            null, msgs);
-      if (newVariable != null)
-        msgs = ((InternalEObject) newVariable).eInverseAdd(this,
-            EOPPOSITE_FEATURE_BASE - ExpressionsPackageImpl.LET_EXP__VARIABLE,
-            null, msgs);
-      msgs = basicSetVariable(newVariable, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET,
-          ExpressionsPackageImpl.LET_EXP__VARIABLE, newVariable, newVariable));
-  }
+		OclExpression oldIn = in;
+		in = newIn;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification =
+					new ENotificationImpl(this, Notification.SET,
+							ExpressionsPackageImpl.LET_EXP__IN, oldIn, newIn);
+			if (msgs == null)
+				msgs = notification;
+			else
+				msgs.add(notification);
+		}
+		return msgs;
+	}
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  @Override
-  public NotificationChain eInverseRemove(InternalEObject otherEnd,
-      int featureID, NotificationChain msgs) {
-    switch (featureID) {
-      case ExpressionsPackageImpl.LET_EXP__IN:
-        return basicSetIn(null, msgs);
-      case ExpressionsPackageImpl.LET_EXP__VARIABLE:
-        return basicSetVariable(null, msgs);
-    }
-    return super.eInverseRemove(otherEnd, featureID, msgs);
-  }
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setIn(OclExpression newIn) {
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  @Override
-  public Object eGet(int featureID, boolean resolve, boolean coreType) {
-    switch (featureID) {
-      case ExpressionsPackageImpl.LET_EXP__IN:
-        return getIn();
-      case ExpressionsPackageImpl.LET_EXP__VARIABLE:
-        return getVariable();
-    }
-    return super.eGet(featureID, resolve, coreType);
-  }
+		if (newIn != in) {
+			NotificationChain msgs = null;
+			if (in != null)
+				msgs =
+						((InternalEObject) in).eInverseRemove(this, EOPPOSITE_FEATURE_BASE
+								- ExpressionsPackageImpl.LET_EXP__IN, null, msgs);
+			if (newIn != null)
+				msgs =
+						((InternalEObject) newIn).eInverseAdd(this, EOPPOSITE_FEATURE_BASE
+								- ExpressionsPackageImpl.LET_EXP__IN, null, msgs);
+			msgs = basicSetIn(newIn, msgs);
+			if (msgs != null)
+				msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET,
+					ExpressionsPackageImpl.LET_EXP__IN, newIn, newIn));
+	}
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  @Override
-  public void eSet(int featureID, Object newValue) {
-    switch (featureID) {
-      case ExpressionsPackageImpl.LET_EXP__IN:
-        setIn((OclExpression) newValue);
-        return;
-      case ExpressionsPackageImpl.LET_EXP__VARIABLE:
-        setVariable((Variable) newValue);
-        return;
-    }
-    super.eSet(featureID, newValue);
-  }
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Variable getVariable() {
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  @Override
-  public void eUnset(int featureID) {
-    switch (featureID) {
-      case ExpressionsPackageImpl.LET_EXP__IN:
-        setIn((OclExpression) null);
-        return;
-      case ExpressionsPackageImpl.LET_EXP__VARIABLE:
-        setVariable((Variable) null);
-        return;
-    }
-    super.eUnset(featureID);
-  }
+		return variable;
+	}
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  @Override
-  public boolean eIsSet(int featureID) {
-    switch (featureID) {
-      case ExpressionsPackageImpl.LET_EXP__IN:
-        return in != null;
-      case ExpressionsPackageImpl.LET_EXP__VARIABLE:
-        return variable != null;
-    }
-    return super.eIsSet(featureID);
-  }
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetVariable(Variable newVariable,
+			NotificationChain msgs) {
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  @Override
-  protected EClass eStaticClass() {
-    return ExpressionsPackageImpl.Literals.LET_EXP;
-  }
+		Variable oldVariable = variable;
+		variable = newVariable;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification =
+					new ENotificationImpl(this, Notification.SET,
+							ExpressionsPackageImpl.LET_EXP__VARIABLE, oldVariable,
+							newVariable);
+			if (msgs == null)
+				msgs = notification;
+			else
+				msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setVariable(Variable newVariable) {
+
+		if (newVariable != variable) {
+			NotificationChain msgs = null;
+			if (variable != null)
+				msgs =
+						((InternalEObject) variable).eInverseRemove(this,
+								EOPPOSITE_FEATURE_BASE
+										- ExpressionsPackageImpl.LET_EXP__VARIABLE, null, msgs);
+			if (newVariable != null)
+				msgs =
+						((InternalEObject) newVariable).eInverseAdd(this,
+								EOPPOSITE_FEATURE_BASE
+										- ExpressionsPackageImpl.LET_EXP__VARIABLE, null, msgs);
+			msgs = basicSetVariable(newVariable, msgs);
+			if (msgs != null)
+				msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET,
+					ExpressionsPackageImpl.LET_EXP__VARIABLE, newVariable, newVariable));
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd,
+			int featureID, NotificationChain msgs) {
+
+		switch (featureID) {
+		case ExpressionsPackageImpl.LET_EXP__IN:
+			return basicSetIn(null, msgs);
+		case ExpressionsPackageImpl.LET_EXP__VARIABLE:
+			return basicSetVariable(null, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object eGet(int featureID, boolean resolve, boolean coreType) {
+
+		switch (featureID) {
+		case ExpressionsPackageImpl.LET_EXP__IN:
+			return getIn();
+		case ExpressionsPackageImpl.LET_EXP__VARIABLE:
+			return getVariable();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void eSet(int featureID, Object newValue) {
+
+		switch (featureID) {
+		case ExpressionsPackageImpl.LET_EXP__IN:
+			setIn((OclExpression) newValue);
+			return;
+		case ExpressionsPackageImpl.LET_EXP__VARIABLE:
+			setVariable((Variable) newValue);
+			return;
+		}
+		super.eSet(featureID, newValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void eUnset(int featureID) {
+
+		switch (featureID) {
+		case ExpressionsPackageImpl.LET_EXP__IN:
+			setIn((OclExpression) null);
+			return;
+		case ExpressionsPackageImpl.LET_EXP__VARIABLE:
+			setVariable((Variable) null);
+			return;
+		}
+		super.eUnset(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean eIsSet(int featureID) {
+
+		switch (featureID) {
+		case ExpressionsPackageImpl.LET_EXP__IN:
+			return in != null;
+		case ExpressionsPackageImpl.LET_EXP__VARIABLE:
+			return variable != null;
+		}
+		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected EClass eStaticClass() {
+
+		return ExpressionsPackageImpl.Literals.LET_EXP;
+	}
 
 } // LetExpImpl

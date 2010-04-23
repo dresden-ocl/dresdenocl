@@ -32,6 +32,7 @@ package tudresden.ocl20.pivot.standardlibrary.java.internal.library;
 
 import java.util.Collection;
 
+import tudresden.ocl20.pivot.essentialocl.EssentialOclPlugin;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBag;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBoolean;
@@ -43,7 +44,6 @@ import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclOrderedSet;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSequence;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSet;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclTuple;
-import tudresden.ocl20.pivot.essentialocl.types.TypeConstants;
 import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceCollection;
 import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement;
 import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceInvalid;
@@ -144,7 +144,9 @@ public abstract class JavaOclCollection<T extends OclAny> extends
 
 		OclSet<T> result = null;
 
-		result = checkInvalid(TypeConstants.SET(genericType), this);
+		result =
+				checkInvalid(EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+						.getSetType(genericType), this);
 
 		if (result == null)
 			result = checkAsSet(genericType);
@@ -152,8 +154,9 @@ public abstract class JavaOclCollection<T extends OclAny> extends
 		if (result == null) {
 			IModelInstanceCollection<IModelInstanceElement> imiCollectionResult =
 					BasisJavaModelInstanceFactory.createModelInstanceCollection(
-							getModelInstanceCollection().getCollection(), TypeConstants
-									.SET(genericType));
+							getModelInstanceCollection().getCollection(), EssentialOclPlugin
+									.getOclLibraryProvider().getOclLibrary().getSetType(
+											(genericType)));
 
 			result = new JavaOclSet<T>(imiCollectionResult, genericType);
 		}
@@ -171,16 +174,21 @@ public abstract class JavaOclCollection<T extends OclAny> extends
 
 		OclBag<T> result = null;
 
-		result = checkInvalid(TypeConstants.BAG(genericType), this);
+		result =
+				checkInvalid(EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+						.getBagType(genericType), this);
 
 		if (result == null)
-			result = checkUndefined("asBag", TypeConstants.BAG(genericType), this);
+			result =
+					checkUndefined("asBag", EssentialOclPlugin.getOclLibraryProvider()
+							.getOclLibrary().getBagType(genericType), this);
 
 		if (result == null) {
 			IModelInstanceCollection<IModelInstanceElement> imiCollectionResult =
 					BasisJavaModelInstanceFactory.createModelInstanceCollection(
-							getModelInstanceCollection().getCollection(), TypeConstants
-									.BAG(genericType));
+							getModelInstanceCollection().getCollection(), EssentialOclPlugin
+									.getOclLibraryProvider().getOclLibrary().getSequenceType(
+											genericType));
 
 			result = new JavaOclBag<T>(imiCollectionResult, genericType);
 		}
@@ -198,18 +206,22 @@ public abstract class JavaOclCollection<T extends OclAny> extends
 
 		OclOrderedSet<T> result = null;
 
-		result = checkInvalid(TypeConstants.ORDERED_SET(genericType), this);
+		result =
+				checkInvalid(EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+						.getOrderedSetType(genericType), this);
 
 		if (result == null)
 			result =
-					checkUndefined("asOrderedSet",
-							TypeConstants.ORDERED_SET(genericType), this);
+					checkUndefined("asOrderedSet", EssentialOclPlugin
+							.getOclLibraryProvider().getOclLibrary().getOrderedSetType(
+									genericType), this);
 
 		if (result == null) {
 			IModelInstanceCollection<IModelInstanceElement> imiCollectionResult =
 					BasisJavaModelInstanceFactory.createModelInstanceCollection(
-							getModelInstanceCollection().getCollection(), TypeConstants
-									.ORDERED_SET(genericType));
+							getModelInstanceCollection().getCollection(), EssentialOclPlugin
+									.getOclLibraryProvider().getOclLibrary().getOrderedSetType(
+											(genericType)));
 
 			result = new JavaOclOrderedSet<T>(imiCollectionResult, genericType);
 		}
@@ -227,18 +239,22 @@ public abstract class JavaOclCollection<T extends OclAny> extends
 
 		OclSequence<T> result = null;
 
-		result = checkInvalid(TypeConstants.SEQUENCE(genericType), this);
+		result =
+				checkInvalid(EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+						.getSequenceType(genericType), this);
 
 		if (result == null)
 			result =
-					checkUndefined("asSequence", TypeConstants.SEQUENCE(genericType),
-							this);
+					checkUndefined("asSequence", EssentialOclPlugin
+							.getOclLibraryProvider().getOclLibrary().getSequenceType(
+									genericType), this);
 
 		if (result == null) {
 			IModelInstanceCollection<IModelInstanceElement> imiCollectionResult =
 					BasisJavaModelInstanceFactory.createModelInstanceCollection(
-							getModelInstanceCollection().getCollection(), TypeConstants
-									.SEQUENCE(genericType));
+							getModelInstanceCollection().getCollection(), EssentialOclPlugin
+									.getOclLibraryProvider().getOclLibrary().getSequenceType(
+											(genericType)));
 
 			result = new JavaOclSequence<T>(imiCollectionResult, genericType);
 		}
@@ -256,10 +272,14 @@ public abstract class JavaOclCollection<T extends OclAny> extends
 
 		OclInteger result = null;
 
-		result = checkInvalid(TypeConstants.INTEGER, this);
+		result =
+				checkInvalid(EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+						.getOclInteger(), this);
 
 		if (result == null)
-			result = checkUndefined("count", TypeConstants.INTEGER, this);
+			result =
+					checkUndefined("count", EssentialOclPlugin.getOclLibraryProvider()
+							.getOclLibrary().getOclInteger(), this);
 
 		if (result == null) {
 			/* Else compute the result. */
@@ -304,10 +324,15 @@ public abstract class JavaOclCollection<T extends OclAny> extends
 
 		OclBoolean result = null;
 
-		result = checkInvalid(TypeConstants.BOOLEAN, this, that);
+		result =
+				checkInvalid(EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+						.getOclBoolean(), this, that);
 
 		if (result == null)
-			result = checkUndefined("excludesAll", TypeConstants.BOOLEAN, this, that);
+			result =
+					checkUndefined("excludesAll", EssentialOclPlugin
+							.getOclLibraryProvider().getOclLibrary().getOclBoolean(), this,
+							that);
 
 		if (result == null) {
 			/* Else compute the result. */
@@ -354,10 +379,14 @@ public abstract class JavaOclCollection<T extends OclAny> extends
 
 		OclBoolean result = null;
 
-		result = checkInvalid(TypeConstants.BOOLEAN, this, that);
+		result =
+				checkInvalid(EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+						.getOclBoolean(), this, that);
 
 		if (result == null)
-			result = checkUndefined("includes", TypeConstants.BOOLEAN, this);
+			result =
+					checkUndefined("includes", EssentialOclPlugin.getOclLibraryProvider()
+							.getOclLibrary().getOclBoolean(), this);
 
 		if (result == null) {
 			/* Else iterate and compare with all elements of this collection. */
@@ -393,10 +422,15 @@ public abstract class JavaOclCollection<T extends OclAny> extends
 
 		OclBoolean result = null;
 
-		result = checkInvalid(TypeConstants.BOOLEAN, this, that);
+		result =
+				checkInvalid(EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+						.getOclBoolean(), this, that);
 
 		if (result == null)
-			result = checkUndefined("includesAll", TypeConstants.BOOLEAN, this, that);
+			result =
+					checkUndefined("includesAll", EssentialOclPlugin
+							.getOclLibraryProvider().getOclLibrary().getOclBoolean(), this,
+							that);
 
 		if (result == null) {
 			/* Else compute the result. */
@@ -439,7 +473,9 @@ public abstract class JavaOclCollection<T extends OclAny> extends
 
 		OclBoolean result = null;
 
-		result = checkInvalid(TypeConstants.BOOLEAN, this);
+		result =
+				checkInvalid(EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+						.getOclBoolean(), this);
 
 		// see standard, p.138
 		if (undefinedreason != null)
@@ -529,10 +565,14 @@ public abstract class JavaOclCollection<T extends OclAny> extends
 
 		OclInteger result = null;
 
-		result = checkInvalid(TypeConstants.INTEGER, this);
+		result =
+				checkInvalid(EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+						.getOclInteger(), this);
 
 		if (result == null)
-			result = checkUndefined("size", TypeConstants.INTEGER, this);
+			result =
+					checkUndefined("size", EssentialOclPlugin.getOclLibraryProvider()
+							.getOclLibrary().getOclInteger(), this);
 
 		if (result == null) {
 			Long intResult;
@@ -589,7 +629,8 @@ public abstract class JavaOclCollection<T extends OclAny> extends
 							} catch (ClassCastException e) {
 								result =
 										(T) JavaStandardLibraryFactory.INSTANCE.createOclInvalid(
-												TypeConstants.REAL, e);
+												EssentialOclPlugin.getOclLibraryProvider()
+														.getOclLibrary().getOclReal(), e);
 							}
 						}
 					}
@@ -794,7 +835,9 @@ public abstract class JavaOclCollection<T extends OclAny> extends
 
 		// FIXME Michael: Should this be OclAny or something else?
 		if (result == null)
-			result = TypeConstants.ANY;
+			result =
+					EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+							.getOclAny();
 
 		return result;
 	}

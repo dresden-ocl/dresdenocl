@@ -10,12 +10,12 @@ import java.util.Set;
 import org.junit.Before;
 import org.junit.Test;
 
+import tudresden.ocl20.pivot.essentialocl.EssentialOclPlugin;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBag;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclReal;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSet;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.factory.IStandardLibraryFactory;
-import tudresden.ocl20.pivot.essentialocl.types.TypeConstants;
 
 public class JavaOclSetTest {
 
@@ -24,7 +24,8 @@ public class JavaOclSetTest {
 
 	private final OclSet<OclReal> emptySet =
 			myStandardLibraryFactory.createOclSet(new HashSet<OclReal>(),
-					TypeConstants.ANY);
+					EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+							.getOclAny());
 
 	/**
 	 * Set { 0.5 }
@@ -48,7 +49,7 @@ public class JavaOclSetTest {
 
 	private OclBag<OclReal> emptyBag =
 			myStandardLibraryFactory.createOclBag(new ArrayList<OclReal>(),
-					TypeConstants.REAL);;
+					EssentialOclPlugin.getOclLibraryProvider().getOclLibrary().getOclReal());;
 
 	/**
 	 * Bag { 0.5, 0.5 }
@@ -68,7 +69,7 @@ public class JavaOclSetTest {
 			myStandardLibraryFactory.createOclInteger(4L);
 
 	private final OclReal undefined =
-			(OclReal) myStandardLibraryFactory.createOclUndefined(TypeConstants.REAL,
+			(OclReal) myStandardLibraryFactory.createOclUndefined(EssentialOclPlugin.getOclLibraryProvider().getOclLibrary().getOclReal(),
 					"undefined value");
 
 	@Before
@@ -76,12 +77,12 @@ public class JavaOclSetTest {
 
 		Set<OclReal> realSet = new HashSet<OclReal>();
 		realSet.add(oclReal0_5);
-		oclSet = myStandardLibraryFactory.createOclSet(realSet, TypeConstants.REAL);
+		oclSet = myStandardLibraryFactory.createOclSet(realSet, EssentialOclPlugin.getOclLibraryProvider().getOclLibrary().getOclReal());
 
 		realSet.add(oclReal1_5);
 		realSet.add(undefined);
 		oclSet2 =
-				myStandardLibraryFactory.createOclSet(realSet, TypeConstants.REAL);
+				myStandardLibraryFactory.createOclSet(realSet, EssentialOclPlugin.getOclLibraryProvider().getOclLibrary().getOclReal());
 
 		Set<OclReal> realSet2 = new HashSet<OclReal>();
 		realSet2.add(oclReal0_5);
@@ -89,17 +90,17 @@ public class JavaOclSetTest {
 		realSet2.add(oclReal2_5);
 		realSet2.add(undefined);
 		oclSet3 =
-				myStandardLibraryFactory.createOclSet(realSet2, TypeConstants.REAL);
+				myStandardLibraryFactory.createOclSet(realSet2, EssentialOclPlugin.getOclLibraryProvider().getOclLibrary().getOclReal());
 
 		Set<OclReal> realSet3 = new HashSet<OclReal>();
 		realSet3.add(oclReal2_5);
 		oclSet4 =
-				myStandardLibraryFactory.createOclSet(realSet3, TypeConstants.REAL);
+				myStandardLibraryFactory.createOclSet(realSet3, EssentialOclPlugin.getOclLibraryProvider().getOclLibrary().getOclReal());
 
 		List<OclReal> realBag = new ArrayList<OclReal>();
 		realBag.add(oclReal0_5);
 		realBag.add(oclReal0_5);
-		oclBag = myStandardLibraryFactory.createOclBag(realBag, TypeConstants.REAL);
+		oclBag = myStandardLibraryFactory.createOclBag(realBag, EssentialOclPlugin.getOclLibraryProvider().getOclLibrary().getOclReal());
 	}
 
 	@Test

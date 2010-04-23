@@ -11,7 +11,6 @@ import java.util.List;
 import junit.extensions.TestSetup;
 import junit.framework.JUnit4TestAdapter;
 import junit.framework.Test;
-import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 import org.eclipse.core.runtime.CoreException;
@@ -20,7 +19,6 @@ import org.eclipse.core.runtime.IExtensionPoint;
 import org.eclipse.core.runtime.IExtensionRegistry;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.Preferences;
-import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
@@ -70,64 +68,66 @@ public class OCL2TestSuiteRunner {
 		}
 		final Shell parentShell = display.getActiveShell();
 
-		SelectTestSuitesDialog selectTestSuitesDialog =
-				new SelectTestSuitesDialog(parentShell, registeredTestSuites);
+//		SelectTestSuitesDialog selectTestSuitesDialog =
+//				new SelectTestSuitesDialog(parentShell, registeredTestSuites);
+		//
+		// int result = selectTestSuitesDialog.open();
+		//
+		// Test defaultTest = new TestCase("User aborted Test Suite") {
+		//
+		// @SuppressWarnings("unused")
+		// public void testFail() {
+		//
+		// fail("User aborted Test Suite");
+		// }
+		// };
+		//
+		// if (result == Dialog.CANCEL) {
+		// return defaultTest;
+		// }
+		// else if (result == Dialog.OK) {
+		//
+		// for (Test test : selectTestSuitesDialog.getTestsToBeExecuted()) {
+		// allTestSuite.addTest(test);
+		// }
 
-		int result = selectTestSuitesDialog.open();
+		for (Test registeredTest : registeredTestSuites)
+			allTestSuite.addTest(registeredTest);
 
-		Test defaultTest = new TestCase("User aborted Test Suite") {
+		return new TestSetup(allTestSuite) {
 
-			@SuppressWarnings("unused")
-			public void testFail() {
+			@Override
+			protected void tearDown() {
 
-				fail("User aborted Test Suite");
-			}
-		};
+				String messages = StringBufferAppender.getMessages();
 
-		if (result == Dialog.CANCEL) {
-			return defaultTest;
-		}
-		else if (result == Dialog.OK) {
-
-			for (Test test : selectTestSuitesDialog.getTestsToBeExecuted()) {
-				allTestSuite.addTest(test);
-			}
-
-			return new TestSetup(allTestSuite) {
-
-				@Override
-				protected void tearDown() {
-
-					String messages = StringBufferAppender.getMessages();
-
-					if (messages.length() == 0)
-						return;
-					else {
-						Preferences preferences =
-								TestSuitePlugin.getDefault().getPluginPreferences();
-						boolean showWarnings = preferences.getBoolean(SHOW_WARNINGS);
-						try {
-							preferences.store(new FileOutputStream(TestSuitePlugin
-									.getDefault().getStateLocation().append("showWarnings.pref")
-									.toFile()), null);
-						} catch (FileNotFoundException e) {
-							// ignore
-						} catch (IllegalStateException e) {
-							// ignore
-						} catch (IOException e) {
-							// ignore
-						}
-
-						if (showWarnings)
-							MessageDialog.openInformation(parentShell, "Warnings", messages);
+				if (messages.length() == 0)
+					return;
+				else {
+					Preferences preferences =
+							TestSuitePlugin.getDefault().getPluginPreferences();
+					boolean showWarnings = preferences.getBoolean(SHOW_WARNINGS);
+					try {
+						preferences
+								.store(new FileOutputStream(TestSuitePlugin.getDefault()
+										.getStateLocation().append("showWarnings.pref").toFile()),
+										null);
+					} catch (FileNotFoundException e) {
+						// ignore
+					} catch (IllegalStateException e) {
+						// ignore
+					} catch (IOException e) {
+						// ignore
 					}
 
+					if (showWarnings)
+						MessageDialog.openInformation(parentShell, "Warnings", messages);
 				}
 
-			};
-		}
+			}
 
-		return defaultTest;
+		};
+		// }
 
 	}
 

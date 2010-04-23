@@ -8,11 +8,11 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
+import tudresden.ocl20.pivot.essentialocl.EssentialOclPlugin;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclReal;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSequence;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.factory.IStandardLibraryFactory;
-import tudresden.ocl20.pivot.essentialocl.types.TypeConstants;
 
 /**
  * Tests for sequences in OCL.
@@ -27,7 +27,8 @@ public class JavaOclSequenceTest {
 
 	private final OclSequence<OclReal> emptySequence =
 			myStandardLibraryFactory.createOclSequence(new ArrayList<OclReal>(),
-					TypeConstants.ANY);
+					EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+							.getOclAny());
 
 	/**
 	 * Sequence { 0.5 }
@@ -71,13 +72,13 @@ public class JavaOclSequenceTest {
 		realSequence.add(oclReal0_5);
 		oclSequence =
 				myStandardLibraryFactory.createOclSequence(realSequence,
-						TypeConstants.REAL);
+						EssentialOclPlugin.getOclLibraryProvider().getOclLibrary().getOclReal());
 
 		realSequence.add(oclReal1_5);
 		realSequence.add(undefined);
 		oclSequence2 =
 				myStandardLibraryFactory.createOclSequence(realSequence,
-						TypeConstants.REAL);
+						EssentialOclPlugin.getOclLibraryProvider().getOclLibrary().getOclReal());
 
 		List<OclReal> realSequence2 = new ArrayList<OclReal>();
 		realSequence2.add(oclReal0_5);
@@ -87,7 +88,7 @@ public class JavaOclSequenceTest {
 
 		oclSequence3 =
 				myStandardLibraryFactory.createOclSequence(realSequence2,
-						TypeConstants.REAL);
+						EssentialOclPlugin.getOclLibraryProvider().getOclLibrary().getOclReal());
 	}
 
 	@Test

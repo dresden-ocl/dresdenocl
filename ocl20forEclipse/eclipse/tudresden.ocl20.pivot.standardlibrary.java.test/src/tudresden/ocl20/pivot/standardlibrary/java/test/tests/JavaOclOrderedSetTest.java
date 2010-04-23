@@ -8,11 +8,11 @@ import org.eclipse.emf.common.util.UniqueEList;
 import org.junit.Before;
 import org.junit.Test;
 
+import tudresden.ocl20.pivot.essentialocl.EssentialOclPlugin;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclOrderedSet;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclReal;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.factory.IStandardLibraryFactory;
-import tudresden.ocl20.pivot.essentialocl.types.TypeConstants;
 
 public class JavaOclOrderedSetTest {
 
@@ -21,7 +21,7 @@ public class JavaOclOrderedSetTest {
 
 	private final OclOrderedSet<OclReal> emptyOrderedSet =
 			myStandardLibraryFactory.createOclOrderedSet(new UniqueEList<OclReal>(),
-					TypeConstants.ANY);
+					EssentialOclPlugin.getOclLibraryProvider().getOclLibrary().getOclAny());
 
 	/**
 	 * OrderedSet { 0.5 }
@@ -57,7 +57,7 @@ public class JavaOclOrderedSetTest {
 			myStandardLibraryFactory.createOclInteger(4L);
 
 	private final OclReal undefined =
-			(OclReal) myStandardLibraryFactory.createOclUndefined(TypeConstants.REAL,
+			(OclReal) myStandardLibraryFactory.createOclUndefined(EssentialOclPlugin.getOclLibraryProvider().getOclLibrary().getOclReal(),
 					"undefined value");
 
 	@Before
@@ -67,13 +67,13 @@ public class JavaOclOrderedSetTest {
 		realOrderedSet.add(oclReal0_5);
 		oclOrderedSet =
 				myStandardLibraryFactory.createOclOrderedSet(realOrderedSet,
-						TypeConstants.REAL);
+						EssentialOclPlugin.getOclLibraryProvider().getOclLibrary().getOclReal());
 
 		realOrderedSet.add(oclReal1_5);
 		realOrderedSet.add(undefined);
 		oclOrderedSet2 =
 				myStandardLibraryFactory.createOclOrderedSet(realOrderedSet,
-						TypeConstants.REAL);
+						EssentialOclPlugin.getOclLibraryProvider().getOclLibrary().getOclReal());
 
 		List<OclReal> realOrderedSet2 = new UniqueEList<OclReal>();
 		realOrderedSet2.add(oclReal0_5);
@@ -83,7 +83,7 @@ public class JavaOclOrderedSetTest {
 
 		oclOrderedSet3 =
 				myStandardLibraryFactory.createOclOrderedSet(realOrderedSet2,
-						TypeConstants.REAL);
+						EssentialOclPlugin.getOclLibraryProvider().getOclLibrary().getOclReal());
 	}
 
 	@Test

@@ -30,7 +30,7 @@ import java.util.List;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import tudresden.ocl20.pivot.essentialocl.StandardLibraryPlugin;
+import tudresden.ocl20.pivot.essentialocl.EssentialOclPlugin;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.provider.IOclLibraryProvider;
 import tudresden.ocl20.pivot.essentialocl.types.OclLibrary;
 import tudresden.ocl20.pivot.essentialocl.types.TupleType;
@@ -108,7 +108,7 @@ public class JavaModelInstanceTupleTest {
 
 		/* Create typeTuple1. */
 		IOclLibraryProvider oclLibraryProvider;
-		oclLibraryProvider = StandardLibraryPlugin.getOclLibraryProvider();
+		oclLibraryProvider = EssentialOclPlugin.getOclLibraryProvider();
 
 		OclLibrary oclLibrary;
 		oclLibrary = oclLibraryProvider.getOclLibrary();

@@ -30,7 +30,7 @@ import org.eclipse.core.runtime.Platform;
 import org.eclipse.osgi.util.NLS;
 import org.osgi.framework.Bundle;
 
-import tudresden.ocl20.pivot.essentialocl.types.TypeConstants;
+import tudresden.ocl20.pivot.essentialocl.EssentialOclPlugin;
 import tudresden.ocl20.pivot.facade.Ocl2ForEclipseFacade;
 import tudresden.ocl20.pivot.metamodels.uml2.UML2MetamodelPlugin;
 import tudresden.ocl20.pivot.model.IModel;
@@ -681,7 +681,8 @@ public final class ModelInstanceTypeTestServices {
 
 				aProperty = PivotModelFactory.INSTANCE.createProperty();
 				aProperty.setName("booleanProperty" + index);
-				aProperty.setType(TypeConstants.BOOLEAN);
+				aProperty.setType(EssentialOclPlugin.getOclLibraryProvider()
+						.getOclLibrary().getOclBoolean());
 
 				primitiveTypeProviderClass.addProperty(aProperty);
 			}
@@ -692,7 +693,8 @@ public final class ModelInstanceTypeTestServices {
 
 				aProperty = PivotModelFactory.INSTANCE.createProperty();
 				aProperty.setName("integerProperty" + index);
-				aProperty.setType(TypeConstants.INTEGER);
+				aProperty.setType(EssentialOclPlugin.getOclLibraryProvider()
+						.getOclLibrary().getOclInteger());
 
 				primitiveTypeProviderClass.addProperty(aProperty);
 			}
@@ -703,7 +705,8 @@ public final class ModelInstanceTypeTestServices {
 
 				aProperty = PivotModelFactory.INSTANCE.createProperty();
 				aProperty.setName("realProperty" + index);
-				aProperty.setType(TypeConstants.REAL);
+				aProperty.setType(EssentialOclPlugin.getOclLibraryProvider()
+						.getOclLibrary().getOclReal());
 
 				primitiveTypeProviderClass.addProperty(aProperty);
 			}
@@ -714,7 +717,8 @@ public final class ModelInstanceTypeTestServices {
 
 				aProperty = PivotModelFactory.INSTANCE.createProperty();
 				aProperty.setName("stringProperty" + index);
-				aProperty.setType(TypeConstants.STRING);
+				aProperty.setType(EssentialOclPlugin.getOclLibraryProvider()
+						.getOclLibrary().getOclString());
 
 				primitiveTypeProviderClass.addProperty(aProperty);
 			}
@@ -729,7 +733,10 @@ public final class ModelInstanceTypeTestServices {
 
 				aProperty = PivotModelFactory.INSTANCE.createProperty();
 				aProperty.setName("bagProperty" + index);
-				aProperty.setType(TypeConstants.BAG);
+				aProperty.setType(EssentialOclPlugin.getOclLibraryProvider()
+						.getOclLibrary().getBagType(
+								EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+										.getOclAny()));
 
 				collectionTypeProviderClass.addProperty(aProperty);
 			}
@@ -740,7 +747,10 @@ public final class ModelInstanceTypeTestServices {
 
 				aProperty = PivotModelFactory.INSTANCE.createProperty();
 				aProperty.setName("orderedSetProperty" + index);
-				aProperty.setType(TypeConstants.ORDERED_SET);
+				aProperty.setType(EssentialOclPlugin.getOclLibraryProvider()
+						.getOclLibrary().getOrderedSetType(
+								EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+										.getOclAny()));
 
 				collectionTypeProviderClass.addProperty(aProperty);
 			}
@@ -751,7 +761,10 @@ public final class ModelInstanceTypeTestServices {
 
 				aProperty = PivotModelFactory.INSTANCE.createProperty();
 				aProperty.setName("sequenceProperty" + index);
-				aProperty.setType(TypeConstants.SEQUENCE);
+				aProperty.setType(EssentialOclPlugin.getOclLibraryProvider()
+						.getOclLibrary().getSequenceType(
+								EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+										.getOclAny()));
 
 				collectionTypeProviderClass.addProperty(aProperty);
 			}
@@ -762,7 +775,10 @@ public final class ModelInstanceTypeTestServices {
 
 				aProperty = PivotModelFactory.INSTANCE.createProperty();
 				aProperty.setName("setProperty" + index);
-				aProperty.setType(TypeConstants.SET);
+				aProperty.setType(EssentialOclPlugin.getOclLibraryProvider()
+						.getOclLibrary().getSetType(
+								EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+										.getOclAny()));
 
 				collectionTypeProviderClass.addProperty(aProperty);
 			}

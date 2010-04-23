@@ -26,7 +26,7 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import tudresden.ocl20.pivot.essentialocl.types.TypeConstants;
+import tudresden.ocl20.pivot.essentialocl.EssentialOclPlugin;
 import tudresden.ocl20.pivot.facade.Ocl2ForEclipseFacade;
 import tudresden.ocl20.pivot.model.IModel;
 import tudresden.ocl20.pivot.model.ModelAccessException;
@@ -71,17 +71,17 @@ public class TestValueProperty {
 		File modelFile;
 		modelFile = TestValueProperty.getFile("model/test01.ecore");
 
-		testModel = Ocl2ForEclipseFacade.getModel(modelFile,
-				Ocl2ForEclipseFacade.ECORE_META_MODEL);
+		testModel =
+				Ocl2ForEclipseFacade.getModel(modelFile,
+						Ocl2ForEclipseFacade.ECORE_META_MODEL);
 		assertNotNull(testModel);
 
 		File modelInstanceFile;
-		modelInstanceFile = TestValueProperty
-				.getFile("modelinstance/test01.xml");
+		modelInstanceFile = TestValueProperty.getFile("modelinstance/test01.xml");
 
-		testModelInstance = Ocl2ForEclipseFacade.getModelInstance(
-				modelInstanceFile, testModel,
-				XmlModelInstanceTypePlugin.PLUGIN_ID);
+		testModelInstance =
+				Ocl2ForEclipseFacade.getModelInstance(modelInstanceFile, testModel,
+						XmlModelInstanceTypePlugin.PLUGIN_ID);
 
 		assertNotNull(testModelInstance);
 	}
@@ -105,19 +105,20 @@ public class TestValueProperty {
 	 * </p>
 	 * 
 	 * @param path
-	 *            The path of the resource.
+	 *          The path of the resource.
 	 * @return The found {@link File} object.
 	 */
 	private static File getFile(String path) {
 
 		String filePath;
-		filePath = XmlModelInstanceTypeTestPlugin.getDefault().getBundle()
-				.getLocation();
+		filePath =
+				XmlModelInstanceTypeTestPlugin.getDefault().getBundle().getLocation();
 		/* Remove 'reference:file:/' */
 		filePath = filePath.substring(16);
 
-		filePath += XmlModelInstanceTypeTestPlugin.getDefault().getBundle()
-				.getResource(path).getPath().substring(1);
+		filePath +=
+				XmlModelInstanceTypeTestPlugin.getDefault().getBundle().getResource(
+						path).getPath().substring(1);
 
 		File constraintFile;
 		constraintFile = new File(filePath);
@@ -139,16 +140,16 @@ public class TestValueProperty {
 	 */
 	@Test
 	public void testBooleanValue01() throws IllegalArgumentException,
-			ModelAccessException, PropertyAccessException,
-			PropertyNotFoundException {
+			ModelAccessException, PropertyAccessException, PropertyNotFoundException {
 
 		String msg;
-		msg = "The adaptation of values contained between XML tags seems to be wrong.";
+		msg =
+				"The adaptation of values contained between XML tags seems to be wrong.";
 
 		Type booleanValueType;
-		booleanValueType = testModel.findType(Arrays.asList(new String[] {
-				ModelConstants.ROOT_PACKAGE_NAME, "package1",
-				"BooleanValue" }));
+		booleanValueType =
+				testModel.findType(Arrays.asList(new String[] {
+						ModelConstants.ROOT_PACKAGE_NAME, "package1", "BooleanValue" }));
 		assertNotNull(msg, booleanValueType);
 
 		Set<IModelInstanceObject> booleanValues;
@@ -167,7 +168,8 @@ public class TestValueProperty {
 		adaptedValue = aBooleanValue.getProperty(valueProperty);
 
 		assertNotNull(msg, adaptedValue);
-		assertEquals(msg, TypeConstants.BOOLEAN, adaptedValue.getType());
+		assertEquals(msg, EssentialOclPlugin.getOclLibraryProvider()
+				.getOclLibrary().getOclBoolean(), adaptedValue.getType());
 		assertFalse(msg, adaptedValue.isUndefined());
 	}
 
@@ -183,38 +185,39 @@ public class TestValueProperty {
 	 */
 	@Test
 	public void testEnumerationValue01() throws IllegalArgumentException,
-			ModelAccessException, PropertyAccessException,
-			PropertyNotFoundException {
-	
+			ModelAccessException, PropertyAccessException, PropertyNotFoundException {
+
 		String msg;
-		msg = "The adaptation of values contained between XML tags seems to be wrong.";
-	
+		msg =
+				"The adaptation of values contained between XML tags seems to be wrong.";
+
 		Type enumerationValueType;
-		enumerationValueType = testModel.findType(Arrays.asList(new String[] {
-				ModelConstants.ROOT_PACKAGE_NAME, "package1",
-				"EnumerationValue" }));
+		enumerationValueType =
+				testModel
+						.findType(Arrays.asList(new String[] {
+								ModelConstants.ROOT_PACKAGE_NAME, "package1",
+								"EnumerationValue" }));
 		assertNotNull(msg, enumerationValueType);
-	
+
 		Set<IModelInstanceObject> enumerationValues;
-		enumerationValues = testModelInstance
-				.getAllInstances(enumerationValueType);
-	
+		enumerationValues = testModelInstance.getAllInstances(enumerationValueType);
+
 		assertNotNull(enumerationValues);
 		assertTrue(enumerationValues.size() > 0);
-	
+
 		IModelInstanceObject anEnumerationValue;
 		anEnumerationValue = enumerationValues.iterator().next();
-	
+
 		Property valueProperty;
 		valueProperty = enumerationValueType.lookupProperty("value");
-	
+
 		IModelInstanceElement adaptedValue;
 		adaptedValue = anEnumerationValue.getProperty(valueProperty);
-	
+
 		assertNotNull(msg, adaptedValue);
 		assertEquals(msg, testModel.findType(Arrays.asList(new String[] {
-				ModelConstants.ROOT_PACKAGE_NAME, "package1",
-				"Enumeration1" })), adaptedValue.getType());
+				ModelConstants.ROOT_PACKAGE_NAME, "package1", "Enumeration1" })),
+				adaptedValue.getType());
 		assertFalse(msg, adaptedValue.isUndefined());
 	}
 
@@ -230,16 +233,16 @@ public class TestValueProperty {
 	 */
 	@Test
 	public void testIntegerValue01() throws IllegalArgumentException,
-			ModelAccessException, PropertyAccessException,
-			PropertyNotFoundException {
+			ModelAccessException, PropertyAccessException, PropertyNotFoundException {
 
 		String msg;
-		msg = "The adaptation of values contained between XML tags seems to be wrong.";
+		msg =
+				"The adaptation of values contained between XML tags seems to be wrong.";
 
 		Type integerValueType;
-		integerValueType = testModel.findType(Arrays.asList(new String[] {
-				ModelConstants.ROOT_PACKAGE_NAME, "package1",
-				"IntegerValue" }));
+		integerValueType =
+				testModel.findType(Arrays.asList(new String[] {
+						ModelConstants.ROOT_PACKAGE_NAME, "package1", "IntegerValue" }));
 		assertNotNull(msg, integerValueType);
 
 		Set<IModelInstanceObject> integerValues;
@@ -258,7 +261,7 @@ public class TestValueProperty {
 		adaptedValue = anIntegerValue.getProperty(valueProperty);
 
 		assertNotNull(msg, adaptedValue);
-		assertEquals(msg, TypeConstants.INTEGER, adaptedValue.getType());
+		assertEquals(msg, EssentialOclPlugin.getOclLibraryProvider().getOclLibrary().getOclInteger(), adaptedValue.getType());
 		assertFalse(msg, adaptedValue.isUndefined());
 	}
 
@@ -274,16 +277,16 @@ public class TestValueProperty {
 	 */
 	@Test
 	public void testRealValue01() throws IllegalArgumentException,
-			ModelAccessException, PropertyAccessException,
-			PropertyNotFoundException {
+			ModelAccessException, PropertyAccessException, PropertyNotFoundException {
 
 		String msg;
-		msg = "The adaptation of values contained between XML tags seems to be wrong.";
+		msg =
+				"The adaptation of values contained between XML tags seems to be wrong.";
 
 		Type realValueType;
-		realValueType = testModel.findType(Arrays
-				.asList(new String[] { ModelConstants.ROOT_PACKAGE_NAME,
-						"package1", "RealValue" }));
+		realValueType =
+				testModel.findType(Arrays.asList(new String[] {
+						ModelConstants.ROOT_PACKAGE_NAME, "package1", "RealValue" }));
 		assertNotNull(msg, realValueType);
 
 		Set<IModelInstanceObject> realValues;
@@ -302,7 +305,7 @@ public class TestValueProperty {
 		adaptedValue = aRealValue.getProperty(valueProperty);
 
 		assertNotNull(msg, adaptedValue);
-		assertEquals(msg, TypeConstants.REAL, adaptedValue.getType());
+		assertEquals(msg, EssentialOclPlugin.getOclLibraryProvider().getOclLibrary().getOclReal(), adaptedValue.getType());
 		assertFalse(msg, adaptedValue.isUndefined());
 	}
 
@@ -318,16 +321,16 @@ public class TestValueProperty {
 	 */
 	@Test
 	public void testStringValue01() throws IllegalArgumentException,
-			ModelAccessException, PropertyAccessException,
-			PropertyNotFoundException {
+			ModelAccessException, PropertyAccessException, PropertyNotFoundException {
 
 		String msg;
-		msg = "The adaptation of values contained between XML tags seems to be wrong.";
+		msg =
+				"The adaptation of values contained between XML tags seems to be wrong.";
 
 		Type stringValueType;
-		stringValueType = testModel.findType(Arrays
-				.asList(new String[] { ModelConstants.ROOT_PACKAGE_NAME,
-						"package1", "StringValue" }));
+		stringValueType =
+				testModel.findType(Arrays.asList(new String[] {
+						ModelConstants.ROOT_PACKAGE_NAME, "package1", "StringValue" }));
 		assertNotNull(msg, stringValueType);
 
 		Set<IModelInstanceObject> stringValues;
@@ -346,7 +349,7 @@ public class TestValueProperty {
 		adaptedValue = aStringValue.getProperty(valueProperty);
 
 		assertNotNull(msg, adaptedValue);
-		assertEquals(msg, TypeConstants.STRING, adaptedValue.getType());
+		assertEquals(msg, EssentialOclPlugin.getOclLibraryProvider().getOclLibrary().getOclString(), adaptedValue.getType());
 		assertFalse(msg, adaptedValue.isUndefined());
 	}
 }

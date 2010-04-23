@@ -47,11 +47,12 @@ import tudresden.ocl20.pivot.pivotmodel.TypeParameter;
  */
 public interface OrderedSetType extends CollectionType {
 
-  /**
-   * Overridden to specialize the co-variant return type to <code>OrderedSetType</code>.
-   * 
-   * @see tudresden.ocl20.pivot.pivotmodel.GenericElement#bindTypeParameter(java.util.List, java.util.List)
-   */
-  OrderedSetType bindTypeParameter(List<TypeParameter> parameters, List<? extends Type> types);
+	/**
+	 * Overridden to specialize the co-variant return type to <code>OrderedSetType</code>.
+	 * 
+	 * @see tudresden.ocl20.pivot.pivotmodel.GenericElement#bindTypeParameter(java.util.List, java.util.List)
+	 */
+	OrderedSetType bindTypeParameter(List<TypeParameter> parameters,
+			List<? extends Type> types);
 
 } // OrderedSetType

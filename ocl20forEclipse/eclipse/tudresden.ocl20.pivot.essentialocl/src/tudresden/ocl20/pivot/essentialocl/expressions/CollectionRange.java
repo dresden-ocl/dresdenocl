@@ -49,52 +49,52 @@ package tudresden.ocl20.pivot.essentialocl.expressions;
  */
 public interface CollectionRange extends CollectionLiteralPart {
 
-  /**
-   * Returns the value of the '<em><b>First</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>First</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>First</em>' containment reference.
-   * @see #setFirst(OclExpression)
-   * @generated
-   */
-  OclExpression getFirst();
+	/**
+	 * Returns the value of the '<em><b>First</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>First</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>First</em>' containment reference.
+	 * @see #setFirst(OclExpression)
+	 * @generated
+	 */
+	OclExpression getFirst();
 
-  /**
-   * Sets the value of the '{@link tudresden.ocl20.pivot.essentialocl.expressions.CollectionRange#getFirst <em>First</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>First</em>' containment reference.
-   * @see #getFirst()
-   * @generated
-   */
-  void setFirst(OclExpression value);
+	/**
+	 * Sets the value of the '{@link tudresden.ocl20.pivot.essentialocl.expressions.CollectionRange#getFirst <em>First</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>First</em>' containment reference.
+	 * @see #getFirst()
+	 * @generated
+	 */
+	void setFirst(OclExpression value);
 
-  /**
-   * Returns the value of the '<em><b>Last</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Last</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Last</em>' containment reference.
-   * @see #setLast(OclExpression)
-   * @generated
-   */
-  OclExpression getLast();
+	/**
+	 * Returns the value of the '<em><b>Last</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Last</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Last</em>' containment reference.
+	 * @see #setLast(OclExpression)
+	 * @generated
+	 */
+	OclExpression getLast();
 
-  /**
-   * Sets the value of the '{@link tudresden.ocl20.pivot.essentialocl.expressions.CollectionRange#getLast <em>Last</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Last</em>' containment reference.
-   * @see #getLast()
-   * @generated
-   */
-  void setLast(OclExpression value);
+	/**
+	 * Sets the value of the '{@link tudresden.ocl20.pivot.essentialocl.expressions.CollectionRange#getLast <em>Last</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Last</em>' containment reference.
+	 * @see #getLast()
+	 * @generated
+	 */
+	void setLast(OclExpression value);
 
 } // CollectionRange

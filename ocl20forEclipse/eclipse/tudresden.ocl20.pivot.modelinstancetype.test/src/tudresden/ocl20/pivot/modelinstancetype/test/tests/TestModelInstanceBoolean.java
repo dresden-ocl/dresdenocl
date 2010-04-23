@@ -36,7 +36,7 @@ import org.eclipse.osgi.util.NLS;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import tudresden.ocl20.pivot.essentialocl.types.TypeConstants;
+import tudresden.ocl20.pivot.essentialocl.EssentialOclPlugin;
 import tudresden.ocl20.pivot.modelinstancetype.exception.AsTypeCastException;
 import tudresden.ocl20.pivot.modelinstancetype.exception.CopyForAtPreException;
 import tudresden.ocl20.pivot.modelinstancetype.exception.PropertyAccessException;
@@ -66,8 +66,8 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
 public class TestModelInstanceBoolean {
 
 	/** The {@link Logger} for this class. */
-	private static final Logger LOGGER = ModelInstanceTypeTestPlugin
-			.getLogger(TestModelInstanceBoolean.class);
+	private static final Logger LOGGER =
+			ModelInstanceTypeTestPlugin.getLogger(TestModelInstanceBoolean.class);
 
 	/** A {@link String} used to display and log messages and warnings. */
 	private static String msg;
@@ -96,21 +96,22 @@ public class TestModelInstanceBoolean {
 	public static void setUp() {
 
 		/* Get a primitive type from the model. */
-		type_boolean = TypeConstants.BOOLEAN;
+		type_boolean =
+				EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+						.getOclBoolean();
 
 		/* Get a primitive type from the model. */
-		type_string = TypeConstants.STRING;
+		type_string = EssentialOclPlugin.getOclLibraryProvider().getOclLibrary().getOclString();
 
 		/* Get the PrimitiveType's provider class from the model. */
-		type_PrimitiveTypeProviderClass = ModelInstanceTypeTestServices
-				.getInstance()
-				.getModelType(
+		type_PrimitiveTypeProviderClass =
+				ModelInstanceTypeTestServices.getInstance().getModelType(
 						TestModelTypesNames.TYPE_NAME_PRIMITIVE_TYPE_PROVIDER_CLASS);
 
 		/* Load all instances of the type from the model instance. */
-		instances_PrimitiveTypeProviderClass = ModelInstanceTypeTestServices
-				.getInstance().getModelInstanceObjectsOfType(
-						type_PrimitiveTypeProviderClass);
+		instances_PrimitiveTypeProviderClass =
+				ModelInstanceTypeTestServices.getInstance()
+						.getModelInstanceObjectsOfType(type_PrimitiveTypeProviderClass);
 
 		/* Check if any provider class instance has been found. */
 		if (instances_PrimitiveTypeProviderClass.size() != 0) {
@@ -137,13 +138,11 @@ public class TestModelInstanceBoolean {
 					IModelInstanceElement aBooleanResult;
 
 					try {
-						aBooleanResult = aProviderInstance
-								.getProperty(aBooleanProperty);
+						aBooleanResult = aProviderInstance.getProperty(aBooleanProperty);
 
 						if (aBooleanResult != null
 								&& aBooleanResult instanceof IModelInstanceBoolean) {
-							instances_boolean
-									.add((IModelInstanceBoolean) aBooleanResult);
+							instances_boolean.add((IModelInstanceBoolean) aBooleanResult);
 						}
 						// no else.
 					}
@@ -161,7 +160,8 @@ public class TestModelInstanceBoolean {
 			// end for.
 
 			if (instances_boolean.size() == 0 && LOGGER.isDebugEnabled()) {
-				msg = ModelInstanceTypeTestSuiteMessages.TestModelInstanceBoolean_NoBooleanInstanceFound;
+				msg =
+						ModelInstanceTypeTestSuiteMessages.TestModelInstanceBoolean_NoBooleanInstanceFound;
 
 				LOGGER.warn(msg);
 			}
@@ -170,7 +170,8 @@ public class TestModelInstanceBoolean {
 
 		/* Else print a warning. */
 		else {
-			msg = ModelInstanceTypeTestSuiteMessages.TestModelInstanceBoolean_NoProviderClassInstanceFound;
+			msg =
+					ModelInstanceTypeTestSuiteMessages.TestModelInstanceBoolean_NoProviderClassInstanceFound;
 
 			LOGGER.warn(msg);
 		}
@@ -184,7 +185,8 @@ public class TestModelInstanceBoolean {
 	@Test
 	public void testAsType01() {
 
-		msg = ModelInstanceTypeTestSuiteMessages.TestModelInstanceBoolean_AsTypeIsWrong;
+		msg =
+				ModelInstanceTypeTestSuiteMessages.TestModelInstanceBoolean_AsTypeIsWrong;
 		msg = NLS.bind(msg, type_string);
 
 		/* Check as type with all types possible to cast. */
@@ -217,13 +219,13 @@ public class TestModelInstanceBoolean {
 
 				/* The value should depend on the boolean value. */
 				if (aBoolean.getBoolean()) {
-					assertEquals(msg, "true",
-							((IModelInstanceString) anotherBoolean).getString());
+					assertEquals(msg, "true", ((IModelInstanceString) anotherBoolean)
+							.getString());
 				}
 
 				else {
-					assertEquals(msg, "false",
-							((IModelInstanceString) anotherBoolean).getString());
+					assertEquals(msg, "false", ((IModelInstanceString) anotherBoolean)
+							.getString());
 				}
 			}
 
@@ -264,7 +266,8 @@ public class TestModelInstanceBoolean {
 	@Test
 	public void testAsType03() throws AsTypeCastException {
 
-		msg = ModelInstanceTypeTestSuiteMessages.TestModelInstanceBoolean_AsTypeIsWrong;
+		msg =
+				ModelInstanceTypeTestSuiteMessages.TestModelInstanceBoolean_AsTypeIsWrong;
 		msg = NLS.bind(msg, type_string);
 
 		/* Check as type with all types possible to cast. */
@@ -292,7 +295,8 @@ public class TestModelInstanceBoolean {
 	@Test
 	public void testCopyForAtPre() {
 
-		msg = ModelInstanceTypeTestSuiteMessages.TestModelInstanceBoolean_CopyForAtPreIsWrong;
+		msg =
+				ModelInstanceTypeTestSuiteMessages.TestModelInstanceBoolean_CopyForAtPreIsWrong;
 
 		/* A boolean should be copy-able. */
 		for (IModelInstanceBoolean aBoolean : instances_boolean) {
@@ -316,7 +320,8 @@ public class TestModelInstanceBoolean {
 	@Test
 	public void testEquals() {
 
-		msg = ModelInstanceTypeTestSuiteMessages.TestModelInstanceBoolean_EqualsIsWrong;
+		msg =
+				ModelInstanceTypeTestSuiteMessages.TestModelInstanceBoolean_EqualsIsWrong;
 
 		for (IModelInstanceBoolean aBoolean : instances_boolean) {
 
@@ -347,7 +352,8 @@ public class TestModelInstanceBoolean {
 	@Test
 	public void testGetBoolean() {
 
-		msg = ModelInstanceTypeTestSuiteMessages.TestModelInstanceBoolean_GetBooleanIsWrong;
+		msg =
+				ModelInstanceTypeTestSuiteMessages.TestModelInstanceBoolean_GetBooleanIsWrong;
 
 		/* The method should return a boolean or should be undefined. */
 		for (IModelInstanceBoolean aBoolean : instances_boolean) {
@@ -371,7 +377,8 @@ public class TestModelInstanceBoolean {
 	@Test
 	public void testGetType() {
 
-		msg = ModelInstanceTypeTestSuiteMessages.TestModelInstanceBoolean_GetTypesIsWrong;
+		msg =
+				ModelInstanceTypeTestSuiteMessages.TestModelInstanceBoolean_GetTypesIsWrong;
 
 		for (IModelInstanceBoolean aBoolean : instances_boolean) {
 
@@ -379,8 +386,8 @@ public class TestModelInstanceBoolean {
 
 			/* A boolean should have the PrimitiveType of the kind Boolean. */
 			assertTrue(msg, aBoolean.getType() instanceof PrimitiveType);
-			assertEquals(msg, PrimitiveTypeKind.BOOLEAN,
-					((PrimitiveType) aBoolean.getType()).getKind());
+			assertEquals(msg, PrimitiveTypeKind.BOOLEAN, ((PrimitiveType) aBoolean
+					.getType()).getKind());
 		}
 		// end for.
 	}
@@ -393,7 +400,8 @@ public class TestModelInstanceBoolean {
 	@Test
 	public void testIsUndefined() {
 
-		msg = ModelInstanceTypeTestSuiteMessages.TestModelInstanceBoolean_IsUndefinedIsWrong;
+		msg =
+				ModelInstanceTypeTestSuiteMessages.TestModelInstanceBoolean_IsUndefinedIsWrong;
 
 		/* The method should return null if the boolean is undefined. */
 		for (IModelInstanceBoolean aBoolean : instances_boolean) {

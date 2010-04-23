@@ -36,11 +36,11 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import tudresden.ocl20.pivot.essentialocl.EssentialOclPlugin;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBag;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSet;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclUnsortedCollection;
-import tudresden.ocl20.pivot.essentialocl.types.TypeConstants;
 import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceCollection;
 import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement;
 import tudresden.ocl20.pivot.pivotmodel.Type;
@@ -85,13 +85,13 @@ public abstract class JavaOclUnsortedCollection<T extends OclAny> extends
 		OclBag<T> result;
 
 		result =
-				checkInvalid(TypeConstants
-						.BAG(genericType), this, aBag);
+				checkInvalid(EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+						.getBagType(genericType), this, aBag);
 
 		if (result == null)
 			result =
-					checkUndefined("union", TypeConstants
-							.BAG(genericType), this, aBag);
+					checkUndefined("union", EssentialOclPlugin.getOclLibraryProvider()
+							.getOclLibrary().getBagType(genericType), this, aBag);
 
 		if (result == null) {
 			/* Else compute the result. */
@@ -119,13 +119,14 @@ public abstract class JavaOclUnsortedCollection<T extends OclAny> extends
 		OclSet<T> result;
 
 		result =
-				checkInvalid(TypeConstants
-						.SET(genericType), this, aSet);
+				checkInvalid(EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+						.getSetType(genericType), this, aSet);
 
 		if (result == null)
 			result =
-					checkUndefined("intersection", TypeConstants
-							.SET(genericType), this, aSet);
+					checkUndefined("intersection", EssentialOclPlugin
+							.getOclLibraryProvider().getOclLibrary().getSetType(genericType),
+							this, aSet);
 
 		if (result == null) {
 			/* Else compute the result. */

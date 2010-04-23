@@ -51,289 +51,300 @@ import tudresden.ocl20.pivot.pivotmodel.impl.TypedElementImpl;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.TupleLiteralPartImpl#getProperty <em>Property</em>}</li>
- * <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.TupleLiteralPartImpl#getValue <em>Value</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.TupleLiteralPartImpl#getProperty <em>Property</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.TupleLiteralPartImpl#getValue <em>Value</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @generated
  */
 public class TupleLiteralPartImpl extends TypedElementImpl implements
-    TupleLiteralPart {
+		TupleLiteralPart {
 
-  /**
-   * The cached value of the '{@link #getProperty() <em>Property</em>}'
-   * containment reference. <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @see #getProperty()
-   * @generated
-   * @ordered
-   */
-  protected Property property = null;
+	/**
+	 * The cached value of the '{@link #getProperty() <em>Property</em>}' containment reference.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @see #getProperty()
+	 * @generated
+	 * @ordered
+	 */
+	protected Property property;
 
-  /**
-   * The cached value of the '{@link #getValue() <em>Value</em>}' containment
-   * reference. <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @see #getValue()
-   * @generated
-   * @ordered
-   */
-  protected OclExpression value = null;
+	/**
+	 * The cached value of the '{@link #getValue() <em>Value</em>}' containment reference.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @see #getValue()
+	 * @generated
+	 * @ordered
+	 */
+	protected OclExpression value;
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  protected TupleLiteralPartImpl() {
-    super();
-  }
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected TupleLiteralPartImpl() {
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  @Override
-  protected EClass eStaticClass() {
-    return ExpressionsPackageImpl.Literals.TUPLE_LITERAL_PART;
-  }
+		super();
+	}
 
-  /**
-   * Overridden to implement type evaluation for this
-   * <code>TupleLiteralPart</code>.
-   * 
-   * <p>
-   * The OCL 2.0 Specification does not say anything about how the type of a
-   * tuple literal part should be determined. So this implementation takes an
-   * educated guess and returns the type of the {@link Property} referenced by
-   * this part. However, the OCL spec lists a wellformedness rule as follows:
-   * </p>
-   * 
-   * <p>
-   * The type of the attribute is the type of the value expression.
-   * 
-   * <pre>
-   * context TupleLiteralPart
-   * inv: attribute.type = value.type
-   * </pre>
-   * 
-   * This implementation checks this constraint and throws a
-   * {@link WellformednessException} if it is not met.
-   * </p>
-   * 
-   * @return a <code>Type</code> instance
-   */
-  @Override
-  public Type getType() {
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected EClass eStaticClass() {
 
-    // check wellformedness
-    if (property == null || value == null) {
-      throw new WellformednessException(this,
-          "A TupleLiteralPart must reference a property and a value expression."); //$NON-NLS-1$
-    }
+		return ExpressionsPackageImpl.Literals.TUPLE_LITERAL_PART;
+	}
 
-    if (!property.getType().equals(value.getType())) {
-      throw new WellformednessException(this,
-          "The type of the property and the type of the value expression " //$NON-NLS-1$
-              + "of a TupleLiteralPart must be equal."); //$NON-NLS-1$
-    }
+	/**
+	 * Overridden to implement type evaluation for this
+	 * <code>TupleLiteralPart</code>.
+	 * 
+	 * <p>
+	 * The OCL 2.0 Specification does not say anything about how the type of a
+	 * tuple literal part should be determined. So this implementation takes an
+	 * educated guess and returns the type of the {@link Property} referenced by
+	 * this part. However, the OCL spec lists a wellformedness rule as follows:
+	 * </p>
+	 * 
+	 * <p>
+	 * The type of the attribute is the type of the value expression.
+	 * 
+	 * <pre>
+	 * context TupleLiteralPart
+	 * inv: attribute.type = value.type
+	 * </pre>
+	 * 
+	 * This implementation checks this constraint and throws a
+	 * {@link WellformednessException} if it is not met.
+	 * </p>
+	 * 
+	 * @return a <code>Type</code> instance
+	 */
+	@Override
+	public Type getType() {
 
-    return property.getType();
-  }
+		// check wellformedness
+		if (property == null || value == null) {
+			throw new WellformednessException(this,
+					"A TupleLiteralPart must reference a property and a value expression."); //$NON-NLS-1$
+		}
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  public Property getProperty() {
-    return property;
-  }
+		if (!property.getType().equals(value.getType())) {
+			throw new WellformednessException(this,
+					"The type of the property and the type of the value expression " //$NON-NLS-1$
+							+ "of a TupleLiteralPart must be equal."); //$NON-NLS-1$
+		}
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  public NotificationChain basicSetProperty(Property newProperty,
-      NotificationChain msgs) {
-    Property oldProperty = property;
-    property = newProperty;
-    if (eNotificationRequired()) {
-      ENotificationImpl notification = new ENotificationImpl(this,
-          Notification.SET,
-          ExpressionsPackageImpl.TUPLE_LITERAL_PART__PROPERTY, oldProperty,
-          newProperty);
-      if (msgs == null) msgs = notification;
-      else msgs.add(notification);
-    }
-    return msgs;
-  }
+		return property.getType();
+	}
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  public void setProperty(Property newProperty) {
-    if (newProperty != property) {
-      NotificationChain msgs = null;
-      if (property != null)
-        msgs = ((InternalEObject) property).eInverseRemove(this,
-            EOPPOSITE_FEATURE_BASE
-                - ExpressionsPackageImpl.TUPLE_LITERAL_PART__PROPERTY, null,
-            msgs);
-      if (newProperty != null)
-        msgs = ((InternalEObject) newProperty).eInverseAdd(this,
-            EOPPOSITE_FEATURE_BASE
-                - ExpressionsPackageImpl.TUPLE_LITERAL_PART__PROPERTY, null,
-            msgs);
-      msgs = basicSetProperty(newProperty, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET,
-          ExpressionsPackageImpl.TUPLE_LITERAL_PART__PROPERTY, newProperty,
-          newProperty));
-  }
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Property getProperty() {
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  public OclExpression getValue() {
-    return value;
-  }
+		return property;
+	}
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  public NotificationChain basicSetValue(OclExpression newValue,
-      NotificationChain msgs) {
-    OclExpression oldValue = value;
-    value = newValue;
-    if (eNotificationRequired()) {
-      ENotificationImpl notification = new ENotificationImpl(this,
-          Notification.SET, ExpressionsPackageImpl.TUPLE_LITERAL_PART__VALUE,
-          oldValue, newValue);
-      if (msgs == null) msgs = notification;
-      else msgs.add(notification);
-    }
-    return msgs;
-  }
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetProperty(Property newProperty,
+			NotificationChain msgs) {
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  public void setValue(OclExpression newValue) {
-    if (newValue != value) {
-      NotificationChain msgs = null;
-      if (value != null)
-        msgs = ((InternalEObject) value).eInverseRemove(this,
-            EOPPOSITE_FEATURE_BASE
-                - ExpressionsPackageImpl.TUPLE_LITERAL_PART__VALUE, null, msgs);
-      if (newValue != null)
-        msgs = ((InternalEObject) newValue).eInverseAdd(this,
-            EOPPOSITE_FEATURE_BASE
-                - ExpressionsPackageImpl.TUPLE_LITERAL_PART__VALUE, null, msgs);
-      msgs = basicSetValue(newValue, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET,
-          ExpressionsPackageImpl.TUPLE_LITERAL_PART__VALUE, newValue, newValue));
-  }
+		Property oldProperty = property;
+		property = newProperty;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification =
+					new ENotificationImpl(this, Notification.SET,
+							ExpressionsPackageImpl.TUPLE_LITERAL_PART__PROPERTY, oldProperty,
+							newProperty);
+			if (msgs == null)
+				msgs = notification;
+			else
+				msgs.add(notification);
+		}
+		return msgs;
+	}
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  @Override
-  public NotificationChain eInverseRemove(InternalEObject otherEnd,
-      int featureID, NotificationChain msgs) {
-    switch (featureID) {
-      case ExpressionsPackageImpl.TUPLE_LITERAL_PART__PROPERTY:
-        return basicSetProperty(null, msgs);
-      case ExpressionsPackageImpl.TUPLE_LITERAL_PART__VALUE:
-        return basicSetValue(null, msgs);
-    }
-    return super.eInverseRemove(otherEnd, featureID, msgs);
-  }
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setProperty(Property newProperty) {
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  @Override
-  public Object eGet(int featureID, boolean resolve, boolean coreType) {
-    switch (featureID) {
-      case ExpressionsPackageImpl.TUPLE_LITERAL_PART__PROPERTY:
-        return getProperty();
-      case ExpressionsPackageImpl.TUPLE_LITERAL_PART__VALUE:
-        return getValue();
-    }
-    return super.eGet(featureID, resolve, coreType);
-  }
+		if (newProperty != property) {
+			NotificationChain msgs = null;
+			if (property != null)
+				msgs =
+						((InternalEObject) property).eInverseRemove(this,
+								EOPPOSITE_FEATURE_BASE
+										- ExpressionsPackageImpl.TUPLE_LITERAL_PART__PROPERTY,
+								null, msgs);
+			if (newProperty != null)
+				msgs =
+						((InternalEObject) newProperty).eInverseAdd(this,
+								EOPPOSITE_FEATURE_BASE
+										- ExpressionsPackageImpl.TUPLE_LITERAL_PART__PROPERTY,
+								null, msgs);
+			msgs = basicSetProperty(newProperty, msgs);
+			if (msgs != null)
+				msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET,
+					ExpressionsPackageImpl.TUPLE_LITERAL_PART__PROPERTY, newProperty,
+					newProperty));
+	}
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  @Override
-  public void eSet(int featureID, Object newValue) {
-    switch (featureID) {
-      case ExpressionsPackageImpl.TUPLE_LITERAL_PART__PROPERTY:
-        setProperty((Property) newValue);
-        return;
-      case ExpressionsPackageImpl.TUPLE_LITERAL_PART__VALUE:
-        setValue((OclExpression) newValue);
-        return;
-    }
-    super.eSet(featureID, newValue);
-  }
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	public OclExpression getValue() {
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  @Override
-  public void eUnset(int featureID) {
-    switch (featureID) {
-      case ExpressionsPackageImpl.TUPLE_LITERAL_PART__PROPERTY:
-        setProperty((Property) null);
-        return;
-      case ExpressionsPackageImpl.TUPLE_LITERAL_PART__VALUE:
-        setValue((OclExpression) null);
-        return;
-    }
-    super.eUnset(featureID);
-  }
+		return value;
+	}
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  @Override
-  public boolean eIsSet(int featureID) {
-    switch (featureID) {
-      case ExpressionsPackageImpl.TUPLE_LITERAL_PART__PROPERTY:
-        return property != null;
-      case ExpressionsPackageImpl.TUPLE_LITERAL_PART__VALUE:
-        return value != null;
-    }
-    return super.eIsSet(featureID);
-  }
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetValue(OclExpression newValue,
+			NotificationChain msgs) {
+
+		OclExpression oldValue = value;
+		value = newValue;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification =
+					new ENotificationImpl(this, Notification.SET,
+							ExpressionsPackageImpl.TUPLE_LITERAL_PART__VALUE, oldValue,
+							newValue);
+			if (msgs == null)
+				msgs = notification;
+			else
+				msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setValue(OclExpression newValue) {
+
+		if (newValue != value) {
+			NotificationChain msgs = null;
+			if (value != null)
+				msgs =
+						((InternalEObject) value).eInverseRemove(this,
+								EOPPOSITE_FEATURE_BASE
+										- ExpressionsPackageImpl.TUPLE_LITERAL_PART__VALUE, null,
+								msgs);
+			if (newValue != null)
+				msgs =
+						((InternalEObject) newValue).eInverseAdd(this,
+								EOPPOSITE_FEATURE_BASE
+										- ExpressionsPackageImpl.TUPLE_LITERAL_PART__VALUE, null,
+								msgs);
+			msgs = basicSetValue(newValue, msgs);
+			if (msgs != null)
+				msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET,
+					ExpressionsPackageImpl.TUPLE_LITERAL_PART__VALUE, newValue, newValue));
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd,
+			int featureID, NotificationChain msgs) {
+
+		switch (featureID) {
+		case ExpressionsPackageImpl.TUPLE_LITERAL_PART__PROPERTY:
+			return basicSetProperty(null, msgs);
+		case ExpressionsPackageImpl.TUPLE_LITERAL_PART__VALUE:
+			return basicSetValue(null, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object eGet(int featureID, boolean resolve, boolean coreType) {
+
+		switch (featureID) {
+		case ExpressionsPackageImpl.TUPLE_LITERAL_PART__PROPERTY:
+			return getProperty();
+		case ExpressionsPackageImpl.TUPLE_LITERAL_PART__VALUE:
+			return getValue();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void eSet(int featureID, Object newValue) {
+
+		switch (featureID) {
+		case ExpressionsPackageImpl.TUPLE_LITERAL_PART__PROPERTY:
+			setProperty((Property) newValue);
+			return;
+		case ExpressionsPackageImpl.TUPLE_LITERAL_PART__VALUE:
+			setValue((OclExpression) newValue);
+			return;
+		}
+		super.eSet(featureID, newValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void eUnset(int featureID) {
+
+		switch (featureID) {
+		case ExpressionsPackageImpl.TUPLE_LITERAL_PART__PROPERTY:
+			setProperty((Property) null);
+			return;
+		case ExpressionsPackageImpl.TUPLE_LITERAL_PART__VALUE:
+			setValue((OclExpression) null);
+			return;
+		}
+		super.eUnset(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean eIsSet(int featureID) {
+
+		switch (featureID) {
+		case ExpressionsPackageImpl.TUPLE_LITERAL_PART__PROPERTY:
+			return property != null;
+		case ExpressionsPackageImpl.TUPLE_LITERAL_PART__VALUE:
+			return value != null;
+		}
+		return super.eIsSet(featureID);
+	}
 
 } // TupleLiteralPartImpl

@@ -48,28 +48,28 @@ package tudresden.ocl20.pivot.essentialocl.expressions;
  */
 public interface UnlimitedNaturalExp extends NumericLiteralExp {
 
-  /**
-   * Returns the value of the '<em><b>Symbol</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Symbol</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Symbol</em>' attribute.
-   * @see #setSymbol(long)
-   * @generated
-   */
-  long getSymbol();
+	/**
+	 * Returns the value of the '<em><b>Symbol</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Symbol</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Symbol</em>' attribute.
+	 * @see #setSymbol(long)
+	 * @generated
+	 */
+	long getSymbol();
 
-  /**
-   * Sets the value of the '{@link tudresden.ocl20.pivot.essentialocl.expressions.UnlimitedNaturalExp#getSymbol <em>Symbol</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Symbol</em>' attribute.
-   * @see #getSymbol()
-   * @generated
-   */
-  void setSymbol(long value);
+	/**
+	 * Sets the value of the '{@link tudresden.ocl20.pivot.essentialocl.expressions.UnlimitedNaturalExp#getSymbol <em>Symbol</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Symbol</em>' attribute.
+	 * @see #getSymbol()
+	 * @generated
+	 */
+	void setSymbol(long value);
 
 } // UnlimitedNaturalExp

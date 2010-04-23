@@ -36,11 +36,11 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
+import tudresden.ocl20.pivot.essentialocl.EssentialOclPlugin;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBoolean;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclModelInstanceObject;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSet;
-import tudresden.ocl20.pivot.essentialocl.types.TypeConstants;
 import tudresden.ocl20.pivot.modelinstancetype.exception.OperationAccessException;
 import tudresden.ocl20.pivot.modelinstancetype.exception.OperationNotFoundException;
 import tudresden.ocl20.pivot.modelinstancetype.exception.PropertyAccessException;
@@ -136,13 +136,12 @@ public class JavaOclModelInstanceObject extends JavaOclAny implements
 						.equals("oclIsInvalid")) && args.length == 0)
 			result = super.invokeOperation(operation, args);
 
-		if (result == null
-				&& (operationName.equals("asSet") && args.length == 0))
+		if (result == null && (operationName.equals("asSet") && args.length == 0))
 			result = this.asSet();
 
 		if (result == null)
 			result = checkInvalid(operation, args);
-		
+
 		if (result == null) {
 			/* Else try to invoke the operation. */
 			IModelInstanceElement imiResult;
@@ -253,7 +252,9 @@ public class JavaOclModelInstanceObject extends JavaOclAny implements
 
 		OclSet<OclModelInstanceObject> result;
 
-		result = checkInvalid(TypeConstants.SET(metaType), this);
+		result =
+				checkInvalid(EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+						.getSetType(metaType), this);
 
 		if (result == null)
 			result = checkAsSet(metaType);
@@ -265,7 +266,8 @@ public class JavaOclModelInstanceObject extends JavaOclAny implements
 
 			result =
 					JavaStandardLibraryFactory.INSTANCE.createOclSet(resultSet,
-							TypeConstants.SET(metaType));
+							EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+									.getSetType(metaType));
 		}
 
 		return result;

@@ -48,28 +48,28 @@ package tudresden.ocl20.pivot.essentialocl.expressions;
  */
 public interface CallExp extends OclExpression {
 
-  /**
-   * Returns the value of the '<em><b>Source</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Source</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Source</em>' containment reference.
-   * @see #setSource(OclExpression)
-   * @generated
-   */
-  OclExpression getSource();
+	/**
+	 * Returns the value of the '<em><b>Source</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Source</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Source</em>' containment reference.
+	 * @see #setSource(OclExpression)
+	 * @generated
+	 */
+	OclExpression getSource();
 
-  /**
-   * Sets the value of the '{@link tudresden.ocl20.pivot.essentialocl.expressions.CallExp#getSource <em>Source</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Source</em>' containment reference.
-   * @see #getSource()
-   * @generated
-   */
-  void setSource(OclExpression value);
+	/**
+	 * Sets the value of the '{@link tudresden.ocl20.pivot.essentialocl.expressions.CallExp#getSource <em>Source</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Source</em>' containment reference.
+	 * @see #getSource()
+	 * @generated
+	 */
+	void setSource(OclExpression value);
 
 } // CallExp

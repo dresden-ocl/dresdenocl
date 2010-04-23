@@ -43,51 +43,51 @@ import tudresden.ocl20.pivot.pivotmodel.impl.TypedElementImpl;
  * <!-- end-user-doc -->
  * <p>
  * </p>
- * 
+ *
  * @generated
  */
 public abstract class CollectionLiteralPartImpl extends TypedElementImpl
-    implements CollectionLiteralPart {
+		implements CollectionLiteralPart {
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  protected CollectionLiteralPartImpl() {
-    super();
-  }
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected CollectionLiteralPartImpl() {
 
-  /**
-   * Overridden to implement lazy caching of evaluated types. Subclasses should
-   * implement {@link #evaluateType()} for the actual type evaluation logic.
-   */
-  @Override
-  public final Type getType() {
+		super();
+	}
 
-    if (type == null) {
-      type = evaluateType();
-    }
+	/**
+	 * Overridden to implement lazy caching of evaluated types. Subclasses should
+	 * implement {@link #evaluateType()} for the actual type evaluation logic.
+	 */
+	@Override
+	public final Type getType() {
 
-    return type;
-  }
+		if (type == null) {
+			type = evaluateType();
+		}
 
-  /**
-   * Evaluates the type of this <code>CollectionLiteralPart</code>.
-   * Subclasses need to implement this according to the OCL specification.
-   * 
-   * @return a <code>Type</code> instance.
-   */
-  protected abstract Type evaluateType();
+		return type;
+	}
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  @Override
-  protected EClass eStaticClass() {
-    return ExpressionsPackageImpl.Literals.COLLECTION_LITERAL_PART;
-  }
+	/**
+	 * Evaluates the type of this <code>CollectionLiteralPart</code>.
+	 * Subclasses need to implement this according to the OCL specification.
+	 * 
+	 * @return a <code>Type</code> instance.
+	 */
+	protected abstract Type evaluateType();
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected EClass eStaticClass() {
+
+		return ExpressionsPackageImpl.Literals.COLLECTION_LITERAL_PART;
+	}
 
 } // CollectionLiteralPartImpl

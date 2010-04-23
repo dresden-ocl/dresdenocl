@@ -57,377 +57,422 @@ import org.apache.commons.lang.builder.ToStringBuilder;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.ExpressionInOclImpl#getBodyExpression <em>Body Expression</em>}</li>
- * <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.ExpressionInOclImpl#getContext <em>Context</em>}</li>
- * <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.ExpressionInOclImpl#getResult <em>Result</em>}</li>
- * <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.ExpressionInOclImpl#getParameter <em>Parameter</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.ExpressionInOclImpl#getBodyExpression <em>Body Expression</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.ExpressionInOclImpl#getContext <em>Context</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.ExpressionInOclImpl#getResult <em>Result</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.ExpressionInOclImpl#getParameter <em>Parameter</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @generated
  */
-public class ExpressionInOclImpl extends ExpressionImpl implements ExpressionInOcl {
+public class ExpressionInOclImpl extends ExpressionImpl implements
+		ExpressionInOcl {
 
-  /**
-   * The cached value of the '{@link #getBodyExpression() <em>Body Expression</em>}' containment
-   * reference. <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @see #getBodyExpression()
-   * @generated
-   * @ordered
-   */
-  protected OclExpression bodyExpression = null;
+	/**
+	 * The cached value of the '{@link #getBodyExpression() <em>Body Expression</em>}' containment reference.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @see #getBodyExpression()
+	 * @generated
+	 * @ordered
+	 */
+	protected OclExpression bodyExpression;
 
-  /**
-   * The cached value of the '{@link #getContext() <em>Context</em>}' containment reference. <!--
-   * begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @see #getContext()
-   * @generated
-   * @ordered
-   */
-  protected Variable context = null;
+	/**
+	 * The cached value of the '{@link #getContext() <em>Context</em>}' containment reference. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @see #getContext()
+	 * @generated
+	 * @ordered
+	 */
+	protected Variable context;
 
-  /**
-   * The cached value of the '{@link #getResult() <em>Result</em>}' containment reference. <!--
-   * begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @see #getResult()
-   * @generated
-   * @ordered
-   */
-  protected Variable result = null;
+	/**
+	 * The cached value of the '{@link #getResult() <em>Result</em>}' containment reference. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @see #getResult()
+	 * @generated
+	 * @ordered
+	 */
+	protected Variable result;
 
-  /**
-   * The cached value of the '{@link #getParameter() <em>Parameter</em>}' containment reference
-   * list. <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @see #getParameter()
-   * @generated
-   * @ordered
-   */
-  protected EList<Variable> parameter = null;
+	/**
+	 * The cached value of the '{@link #getParameter() <em>Parameter</em>}' containment reference list.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @see #getParameter()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Variable> parameter;
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  protected ExpressionInOclImpl() {
-    super();
-  }
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected ExpressionInOclImpl() {
 
-  /**
-   * Overridden to return the string <code>"OCL"</code>.
-   * 
-   * @see tudresden.ocl20.pivot.pivotmodel.impl.ExpressionImpl#getLanguage()
-   */
-  @Override
-  public String getLanguage() {
-    return "OCL"; //$NON-NLS-1$
-  }
+		super();
+	}
 
-  /**
-   * Overridden to prevent setting the language. This method will throw an
-   * {@link UnsupportedOperationException}.
-   * 
-   * @see tudresden.ocl20.pivot.pivotmodel.impl.ExpressionImpl#setLanguage(java.lang.String)
-   */
-  @Override
-  public void setLanguage(String newLanguage) {
-    throw new UnsupportedOperationException("The language of an ExpressionInOcl cannot be changed."); //$NON-NLS-1$
-  }
+	/**
+	 * Overridden to return the string <code>"OCL"</code>.
+	 * 
+	 * @see tudresden.ocl20.pivot.pivotmodel.impl.ExpressionImpl#getLanguage()
+	 */
+	@Override
+	public String getLanguage() {
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  public OclExpression getBodyExpression() {
-    return bodyExpression;
-  }
+		return "OCL"; //$NON-NLS-1$
+	}
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  public NotificationChain basicSetBodyExpression(OclExpression newBodyExpression,
-      NotificationChain msgs) {
-    OclExpression oldBodyExpression = bodyExpression;
-    bodyExpression = newBodyExpression;
-    if (eNotificationRequired()) {
-      ENotificationImpl notification = new ENotificationImpl(this,Notification.SET,
-          ExpressionsPackageImpl.EXPRESSION_IN_OCL__BODY_EXPRESSION,oldBodyExpression,
-          newBodyExpression);
-      if (msgs == null) msgs = notification;
-      else msgs.add(notification);
-    }
-    return msgs;
-  }
+	/**
+	 * Overridden to prevent setting the language. This method will throw an
+	 * {@link UnsupportedOperationException}.
+	 * 
+	 * @see tudresden.ocl20.pivot.pivotmodel.impl.ExpressionImpl#setLanguage(java.lang.String)
+	 */
+	@Override
+	public void setLanguage(String newLanguage) {
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  public void setBodyExpression(OclExpression newBodyExpression) {
-    if (newBodyExpression != bodyExpression) {
-      NotificationChain msgs = null;
-      if (bodyExpression != null)
-        msgs = ((InternalEObject) bodyExpression).eInverseRemove(this,EOPPOSITE_FEATURE_BASE
-            - ExpressionsPackageImpl.EXPRESSION_IN_OCL__BODY_EXPRESSION,null,msgs);
-      if (newBodyExpression != null)
-        msgs = ((InternalEObject) newBodyExpression).eInverseAdd(this,EOPPOSITE_FEATURE_BASE
-            - ExpressionsPackageImpl.EXPRESSION_IN_OCL__BODY_EXPRESSION,null,msgs);
-      msgs = basicSetBodyExpression(newBodyExpression,msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this,Notification.SET,
-          ExpressionsPackageImpl.EXPRESSION_IN_OCL__BODY_EXPRESSION,newBodyExpression,
-          newBodyExpression));
-  }
+		throw new UnsupportedOperationException(
+				"The language of an ExpressionInOcl cannot be changed."); //$NON-NLS-1$
+	}
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  public Variable getContext() {
-    return context;
-  }
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	public OclExpression getBodyExpression() {
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  public NotificationChain basicSetContext(Variable newContext, NotificationChain msgs) {
-    Variable oldContext = context;
-    context = newContext;
-    if (eNotificationRequired()) {
-      ENotificationImpl notification = new ENotificationImpl(this,Notification.SET,
-          ExpressionsPackageImpl.EXPRESSION_IN_OCL__CONTEXT,oldContext,newContext);
-      if (msgs == null) msgs = notification;
-      else msgs.add(notification);
-    }
-    return msgs;
-  }
+		return bodyExpression;
+	}
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  public void setContext(Variable newContext) {
-    if (newContext != context) {
-      NotificationChain msgs = null;
-      if (context != null)
-        msgs = ((InternalEObject) context).eInverseRemove(this,EOPPOSITE_FEATURE_BASE
-            - ExpressionsPackageImpl.EXPRESSION_IN_OCL__CONTEXT,null,msgs);
-      if (newContext != null)
-        msgs = ((InternalEObject) newContext).eInverseAdd(this,EOPPOSITE_FEATURE_BASE
-            - ExpressionsPackageImpl.EXPRESSION_IN_OCL__CONTEXT,null,msgs);
-      msgs = basicSetContext(newContext,msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this,Notification.SET,
-          ExpressionsPackageImpl.EXPRESSION_IN_OCL__CONTEXT,newContext,newContext));
-  }
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetBodyExpression(
+			OclExpression newBodyExpression, NotificationChain msgs) {
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  public Variable getResult() {
-    return result;
-  }
+		OclExpression oldBodyExpression = bodyExpression;
+		bodyExpression = newBodyExpression;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification =
+					new ENotificationImpl(this, Notification.SET,
+							ExpressionsPackageImpl.EXPRESSION_IN_OCL__BODY_EXPRESSION,
+							oldBodyExpression, newBodyExpression);
+			if (msgs == null)
+				msgs = notification;
+			else
+				msgs.add(notification);
+		}
+		return msgs;
+	}
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  public NotificationChain basicSetResult(Variable newResult, NotificationChain msgs) {
-    Variable oldResult = result;
-    result = newResult;
-    if (eNotificationRequired()) {
-      ENotificationImpl notification = new ENotificationImpl(this,Notification.SET,
-          ExpressionsPackageImpl.EXPRESSION_IN_OCL__RESULT,oldResult,newResult);
-      if (msgs == null) msgs = notification;
-      else msgs.add(notification);
-    }
-    return msgs;
-  }
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setBodyExpression(OclExpression newBodyExpression) {
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  public void setResult(Variable newResult) {
-    if (newResult != result) {
-      NotificationChain msgs = null;
-      if (result != null)
-        msgs = ((InternalEObject) result).eInverseRemove(this,EOPPOSITE_FEATURE_BASE
-            - ExpressionsPackageImpl.EXPRESSION_IN_OCL__RESULT,null,msgs);
-      if (newResult != null)
-        msgs = ((InternalEObject) newResult).eInverseAdd(this,EOPPOSITE_FEATURE_BASE
-            - ExpressionsPackageImpl.EXPRESSION_IN_OCL__RESULT,null,msgs);
-      msgs = basicSetResult(newResult,msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this,Notification.SET,
-          ExpressionsPackageImpl.EXPRESSION_IN_OCL__RESULT,newResult,newResult));
-  }
+		if (newBodyExpression != bodyExpression) {
+			NotificationChain msgs = null;
+			if (bodyExpression != null)
+				msgs =
+						((InternalEObject) bodyExpression)
+								.eInverseRemove(
+										this,
+										EOPPOSITE_FEATURE_BASE
+												- ExpressionsPackageImpl.EXPRESSION_IN_OCL__BODY_EXPRESSION,
+										null, msgs);
+			if (newBodyExpression != null)
+				msgs =
+						((InternalEObject) newBodyExpression)
+								.eInverseAdd(
+										this,
+										EOPPOSITE_FEATURE_BASE
+												- ExpressionsPackageImpl.EXPRESSION_IN_OCL__BODY_EXPRESSION,
+										null, msgs);
+			msgs = basicSetBodyExpression(newBodyExpression, msgs);
+			if (msgs != null)
+				msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET,
+					ExpressionsPackageImpl.EXPRESSION_IN_OCL__BODY_EXPRESSION,
+					newBodyExpression, newBodyExpression));
+	}
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  public List<Variable> getParameter() {
-    if (parameter == null) {
-      parameter = new EObjectContainmentEList<Variable>(Variable.class,this,
-          ExpressionsPackageImpl.EXPRESSION_IN_OCL__PARAMETER);
-    }
-    return parameter;
-  }
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Variable getContext() {
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  @Override
-  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID,
-      NotificationChain msgs) {
-    switch (featureID) {
-      case ExpressionsPackageImpl.EXPRESSION_IN_OCL__BODY_EXPRESSION:
-        return basicSetBodyExpression(null,msgs);
-      case ExpressionsPackageImpl.EXPRESSION_IN_OCL__CONTEXT:
-        return basicSetContext(null,msgs);
-      case ExpressionsPackageImpl.EXPRESSION_IN_OCL__RESULT:
-        return basicSetResult(null,msgs);
-      case ExpressionsPackageImpl.EXPRESSION_IN_OCL__PARAMETER:
-        return ((InternalEList<?>) getParameter()).basicRemove(otherEnd,msgs);
-    }
-    return super.eInverseRemove(otherEnd,featureID,msgs);
-  }
+		return context;
+	}
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  @Override
-  public Object eGet(int featureID, boolean resolve, boolean coreType) {
-    switch (featureID) {
-      case ExpressionsPackageImpl.EXPRESSION_IN_OCL__BODY_EXPRESSION:
-        return getBodyExpression();
-      case ExpressionsPackageImpl.EXPRESSION_IN_OCL__CONTEXT:
-        return getContext();
-      case ExpressionsPackageImpl.EXPRESSION_IN_OCL__RESULT:
-        return getResult();
-      case ExpressionsPackageImpl.EXPRESSION_IN_OCL__PARAMETER:
-        return getParameter();
-    }
-    return super.eGet(featureID,resolve,coreType);
-  }
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetContext(Variable newContext,
+			NotificationChain msgs) {
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  @SuppressWarnings("unchecked")
-  @Override
-  public void eSet(int featureID, Object newValue) {
-    switch (featureID) {
-      case ExpressionsPackageImpl.EXPRESSION_IN_OCL__BODY_EXPRESSION:
-        setBodyExpression((OclExpression) newValue);
-        return;
-      case ExpressionsPackageImpl.EXPRESSION_IN_OCL__CONTEXT:
-        setContext((Variable) newValue);
-        return;
-      case ExpressionsPackageImpl.EXPRESSION_IN_OCL__RESULT:
-        setResult((Variable) newValue);
-        return;
-      case ExpressionsPackageImpl.EXPRESSION_IN_OCL__PARAMETER:
-        getParameter().clear();
-        getParameter().addAll((Collection<? extends Variable>) newValue);
-        return;
-    }
-    super.eSet(featureID,newValue);
-  }
+		Variable oldContext = context;
+		context = newContext;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification =
+					new ENotificationImpl(this, Notification.SET,
+							ExpressionsPackageImpl.EXPRESSION_IN_OCL__CONTEXT, oldContext,
+							newContext);
+			if (msgs == null)
+				msgs = notification;
+			else
+				msgs.add(notification);
+		}
+		return msgs;
+	}
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  @Override
-  public void eUnset(int featureID) {
-    switch (featureID) {
-      case ExpressionsPackageImpl.EXPRESSION_IN_OCL__BODY_EXPRESSION:
-        setBodyExpression((OclExpression) null);
-        return;
-      case ExpressionsPackageImpl.EXPRESSION_IN_OCL__CONTEXT:
-        setContext((Variable) null);
-        return;
-      case ExpressionsPackageImpl.EXPRESSION_IN_OCL__RESULT:
-        setResult((Variable) null);
-        return;
-      case ExpressionsPackageImpl.EXPRESSION_IN_OCL__PARAMETER:
-        getParameter().clear();
-        return;
-    }
-    super.eUnset(featureID);
-  }
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setContext(Variable newContext) {
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  @Override
-  public boolean eIsSet(int featureID) {
-    switch (featureID) {
-      case ExpressionsPackageImpl.EXPRESSION_IN_OCL__BODY_EXPRESSION:
-        return bodyExpression != null;
-      case ExpressionsPackageImpl.EXPRESSION_IN_OCL__CONTEXT:
-        return context != null;
-      case ExpressionsPackageImpl.EXPRESSION_IN_OCL__RESULT:
-        return result != null;
-      case ExpressionsPackageImpl.EXPRESSION_IN_OCL__PARAMETER:
-        return parameter != null && !parameter.isEmpty();
-    }
-    return super.eIsSet(featureID);
-  }
+		if (newContext != context) {
+			NotificationChain msgs = null;
+			if (context != null)
+				msgs =
+						((InternalEObject) context).eInverseRemove(this,
+								EOPPOSITE_FEATURE_BASE
+										- ExpressionsPackageImpl.EXPRESSION_IN_OCL__CONTEXT, null,
+								msgs);
+			if (newContext != null)
+				msgs =
+						((InternalEObject) newContext).eInverseAdd(this,
+								EOPPOSITE_FEATURE_BASE
+										- ExpressionsPackageImpl.EXPRESSION_IN_OCL__CONTEXT, null,
+								msgs);
+			msgs = basicSetContext(newContext, msgs);
+			if (msgs != null)
+				msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET,
+					ExpressionsPackageImpl.EXPRESSION_IN_OCL__CONTEXT, newContext,
+					newContext));
+	}
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  @Override
-  protected EClass eStaticClass() {
-    return ExpressionsPackageImpl.Literals.EXPRESSION_IN_OCL;
-  }
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Variable getResult() {
 
-  /**
-   * Overridden to use Jakarta Commons Lang for unified stringification. 
-   * 
-   * @see java.lang.Object#toString()
-   */
-  @Override
-  public String toString() {
-    return new ToStringBuilder(this,ToStringStyle.SHORT_PREFIX_STYLE).appendSuper(super.toString())
-        .append("context",context).append("result",result).append("parameter",parameter).toString(); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-  }
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetResult(Variable newResult,
+			NotificationChain msgs) {
+
+		Variable oldResult = result;
+		result = newResult;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification =
+					new ENotificationImpl(this, Notification.SET,
+							ExpressionsPackageImpl.EXPRESSION_IN_OCL__RESULT, oldResult,
+							newResult);
+			if (msgs == null)
+				msgs = notification;
+			else
+				msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setResult(Variable newResult) {
+
+		if (newResult != result) {
+			NotificationChain msgs = null;
+			if (result != null)
+				msgs =
+						((InternalEObject) result).eInverseRemove(this,
+								EOPPOSITE_FEATURE_BASE
+										- ExpressionsPackageImpl.EXPRESSION_IN_OCL__RESULT, null,
+								msgs);
+			if (newResult != null)
+				msgs =
+						((InternalEObject) newResult).eInverseAdd(this,
+								EOPPOSITE_FEATURE_BASE
+										- ExpressionsPackageImpl.EXPRESSION_IN_OCL__RESULT, null,
+								msgs);
+			msgs = basicSetResult(newResult, msgs);
+			if (msgs != null)
+				msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET,
+					ExpressionsPackageImpl.EXPRESSION_IN_OCL__RESULT, newResult,
+					newResult));
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	public List<Variable> getParameter() {
+
+		if (parameter == null) {
+			parameter =
+					new EObjectContainmentEList<Variable>(Variable.class, this,
+							ExpressionsPackageImpl.EXPRESSION_IN_OCL__PARAMETER);
+		}
+		return parameter;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd,
+			int featureID, NotificationChain msgs) {
+
+		switch (featureID) {
+		case ExpressionsPackageImpl.EXPRESSION_IN_OCL__BODY_EXPRESSION:
+			return basicSetBodyExpression(null, msgs);
+		case ExpressionsPackageImpl.EXPRESSION_IN_OCL__CONTEXT:
+			return basicSetContext(null, msgs);
+		case ExpressionsPackageImpl.EXPRESSION_IN_OCL__RESULT:
+			return basicSetResult(null, msgs);
+		case ExpressionsPackageImpl.EXPRESSION_IN_OCL__PARAMETER:
+			return ((InternalEList<?>) getParameter()).basicRemove(otherEnd, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object eGet(int featureID, boolean resolve, boolean coreType) {
+
+		switch (featureID) {
+		case ExpressionsPackageImpl.EXPRESSION_IN_OCL__BODY_EXPRESSION:
+			return getBodyExpression();
+		case ExpressionsPackageImpl.EXPRESSION_IN_OCL__CONTEXT:
+			return getContext();
+		case ExpressionsPackageImpl.EXPRESSION_IN_OCL__RESULT:
+			return getResult();
+		case ExpressionsPackageImpl.EXPRESSION_IN_OCL__PARAMETER:
+			return getParameter();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public void eSet(int featureID, Object newValue) {
+
+		switch (featureID) {
+		case ExpressionsPackageImpl.EXPRESSION_IN_OCL__BODY_EXPRESSION:
+			setBodyExpression((OclExpression) newValue);
+			return;
+		case ExpressionsPackageImpl.EXPRESSION_IN_OCL__CONTEXT:
+			setContext((Variable) newValue);
+			return;
+		case ExpressionsPackageImpl.EXPRESSION_IN_OCL__RESULT:
+			setResult((Variable) newValue);
+			return;
+		case ExpressionsPackageImpl.EXPRESSION_IN_OCL__PARAMETER:
+			getParameter().clear();
+			getParameter().addAll((Collection<? extends Variable>) newValue);
+			return;
+		}
+		super.eSet(featureID, newValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void eUnset(int featureID) {
+
+		switch (featureID) {
+		case ExpressionsPackageImpl.EXPRESSION_IN_OCL__BODY_EXPRESSION:
+			setBodyExpression((OclExpression) null);
+			return;
+		case ExpressionsPackageImpl.EXPRESSION_IN_OCL__CONTEXT:
+			setContext((Variable) null);
+			return;
+		case ExpressionsPackageImpl.EXPRESSION_IN_OCL__RESULT:
+			setResult((Variable) null);
+			return;
+		case ExpressionsPackageImpl.EXPRESSION_IN_OCL__PARAMETER:
+			getParameter().clear();
+			return;
+		}
+		super.eUnset(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean eIsSet(int featureID) {
+
+		switch (featureID) {
+		case ExpressionsPackageImpl.EXPRESSION_IN_OCL__BODY_EXPRESSION:
+			return bodyExpression != null;
+		case ExpressionsPackageImpl.EXPRESSION_IN_OCL__CONTEXT:
+			return context != null;
+		case ExpressionsPackageImpl.EXPRESSION_IN_OCL__RESULT:
+			return result != null;
+		case ExpressionsPackageImpl.EXPRESSION_IN_OCL__PARAMETER:
+			return parameter != null && !parameter.isEmpty();
+		}
+		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected EClass eStaticClass() {
+
+		return ExpressionsPackageImpl.Literals.EXPRESSION_IN_OCL;
+	}
+
+	/**
+	 * Overridden to use Jakarta Commons Lang for unified stringification. 
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+
+		return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
+				.appendSuper(super.toString())
+				.append("context", context).append("result", result).append("parameter", parameter).toString(); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+	}
 
 } // ExpressionInOclImpl

@@ -5,11 +5,11 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
+import tudresden.ocl20.pivot.essentialocl.EssentialOclPlugin;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclString;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclType;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.factory.IStandardLibraryFactory;
-import tudresden.ocl20.pivot.essentialocl.types.TypeConstants;
 
 public class JavaOclInvalidTest {
 
@@ -17,10 +17,12 @@ public class JavaOclInvalidTest {
 			TestPerformer.getInstance().getSLFactory();
 
 	private OclAny invalid =
-			myStandardLibraryFactory.createOclInvalid(TypeConstants.ANY,
+			myStandardLibraryFactory.createOclInvalid(EssentialOclPlugin
+					.getOclLibraryProvider().getOclLibrary().getOclAny(),
 					new RuntimeException("invalid value"));
 	private OclAny undefined =
-			myStandardLibraryFactory.createOclUndefined(TypeConstants.ANY,
+			myStandardLibraryFactory.createOclUndefined(EssentialOclPlugin
+					.getOclLibraryProvider().getOclLibrary().getOclAny(),
 					"undefined value");
 	private OclString aString =
 			myStandardLibraryFactory.createOclString("a String");
@@ -45,7 +47,8 @@ public class JavaOclInvalidTest {
 		assertTrue(invalid.oclIsUndefined().oclIsInvalid().isTrue());
 		assertTrue(invalid.asSet().oclIsInvalid().isTrue());
 		final OclType<OclAny> anyType =
-				myStandardLibraryFactory.createOclType(TypeConstants.ANY);
+				myStandardLibraryFactory.createOclType(EssentialOclPlugin
+						.getOclLibraryProvider().getOclLibrary().getOclAny());
 		assertTrue(invalid.oclAsType(anyType).oclIsInvalid().isTrue());
 		assertTrue(invalid.oclIsKindOf(anyType).oclIsInvalid().isTrue());
 		assertTrue(invalid.oclIsTypeOf(anyType).oclIsInvalid().isTrue());

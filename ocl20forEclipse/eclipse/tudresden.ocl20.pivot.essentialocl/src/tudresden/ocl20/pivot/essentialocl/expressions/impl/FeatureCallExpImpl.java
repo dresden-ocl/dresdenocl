@@ -50,223 +50,228 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.FeatureCallExpImpl#getSourceType <em>Source Type</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.FeatureCallExpImpl#getSourceType <em>Source Type</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @generated
  */
-public abstract class FeatureCallExpImpl extends CallExpImpl implements FeatureCallExp {
+public abstract class FeatureCallExpImpl extends CallExpImpl implements
+		FeatureCallExp {
 
-  /**
-   * The cached value of the '{@link #getSourceType() <em>Source Type</em>}' reference. <!--
-   * begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @see #getSourceType()
-   * @generated
-   * @ordered
-   */
-  protected Type sourceType;
+	/**
+	 * The cached value of the '{@link #getSourceType() <em>Source Type</em>}' reference. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @see #getSourceType()
+	 * @generated
+	 * @ordered
+	 */
+	protected Type sourceType;
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  protected FeatureCallExpImpl() {
-    super();
-  }
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected FeatureCallExpImpl() {
 
-  /**
-   * Overridden to additionally convert the type into a collection type if necessary.
-   * 
-   * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.OclExpressionImpl#getOclType(tudresden.ocl20.pivot.pivotmodel.Type)
-   */
-  @Override
-  protected Type getOclType(Type type) {
+		super();
+	}
 
-    // use super implementation
-    type = super.getOclType(type);
+	/**
+	 * Overridden to additionally convert the type into a collection type if necessary.
+	 * 
+	 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.OclExpressionImpl#getOclType(tudresden.ocl20.pivot.pivotmodel.Type)
+	 */
+	@Override
+	protected Type getOclType(Type type) {
 
-    // convert to collection type if necessary
-    type = convertToCollectionType(type,getFeature());
+		// use super implementation
+		type = super.getOclType(type);
 
-    return type;
-  }
+		// convert to collection type if necessary
+		type = convertToCollectionType(type, getFeature());
 
-  /**
-   * Helper method for subclasses to convert the given type into a collection type if necessary
-   * based on the multiplicity attributes of the given feature.
-   */
-  private Type convertToCollectionType(Type type, MultiplicityElement element) {
+		return type;
+	}
 
-    if (element.isMultiple()) {
+	/**
+	 * Helper method for subclasses to convert the given type into a collection type if necessary
+	 * based on the multiplicity attributes of the given feature.
+	 */
+	private Type convertToCollectionType(Type type, MultiplicityElement element) {
 
-      if (element.isUnique()) {
+		if (element.isMultiple()) {
 
-        if (element.isOrdered()) {
-          type = oclLibrary.getOrderedSetType(type);
-        }
+			if (element.isUnique()) {
 
-        else {
-          type = oclLibrary.getSetType(type);
-        }
+				if (element.isOrdered()) {
+					type = oclLibrary.getOrderedSetType(type);
+				}
 
-      }
+				else {
+					type = oclLibrary.getSetType(type);
+				}
 
-      else {
+			}
 
-        if (element.isOrdered()) {
-          type = oclLibrary.getSequenceType(type);
-        }
+			else {
 
-        else {
-          type = oclLibrary.getBagType(type);
-        }
-      }
-    }
+				if (element.isOrdered()) {
+					type = oclLibrary.getSequenceType(type);
+				}
 
-    return type;
-  }
+				else {
+					type = oclLibrary.getBagType(type);
+				}
+			}
+		}
 
-  /**
-   * Returns the {@link Feature feature}referenced by this <code>FeatureCallExp</code>. Needs to
-   * be implemented in subclasses.
-   * 
-   * @return a <code>Feature</code> instance.
-   */
-  protected abstract Feature getFeature();
+		return type;
+	}
 
-  /**
-   * The EMF implementation is altered to return the type of the {@link #getSource() source} of this
-   * <code>FeatureCallExp</code> if no explicit source type has been set.
-   * 
-   * @see tudresden.ocl20.pivot.essentialocl.expressions.FeatureCallExp#getSourceType()
-   * 
-   * @generated NOT
-   */
-  public Type getSourceType() {
-    Type srcType;
+	/**
+	 * Returns the {@link Feature feature}referenced by this <code>FeatureCallExp</code>. Needs to
+	 * be implemented in subclasses.
+	 * 
+	 * @return a <code>Feature</code> instance.
+	 */
+	protected abstract Feature getFeature();
 
-    // determine the source type either via the source or via the sourceType field
-    srcType = source != null ? source.getType() : sourceType;
+	/**
+	 * The EMF implementation is altered to return the type of the {@link #getSource() source} of this
+	 * <code>FeatureCallExp</code> if no explicit source type has been set.
+	 * 
+	 * @see tudresden.ocl20.pivot.essentialocl.expressions.FeatureCallExp#getSourceType()
+	 * 
+	 * @generated NOT
+	 */
+	public Type getSourceType() {
 
-    if (srcType == null) {
-      throw new WellformednessException(this,
-          "The source type of a feature call expression must not be empty."); //$NON-NLS-1$
-    }
+		Type srcType;
 
-    return srcType;
-  }
+		// determine the source type either via the source or via the sourceType field
+		srcType = source != null ? source.getType() : sourceType;
 
-  /**
-   * <!-- begin-user-doc --> The code for {@link #getSourceType()} is forwarded to this method. <!--
-   * end-user-doc -->
-   * 
-   * @generated
-   */
-  public Type getSourceTypeGen() {
-    if (sourceType != null && ((EObject) sourceType).eIsProxy()) {
-      InternalEObject oldSourceType = (InternalEObject) sourceType;
-      sourceType = (Type) eResolveProxy(oldSourceType);
-      if (sourceType != oldSourceType) {
-        if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this,Notification.RESOLVE,
-              ExpressionsPackageImpl.FEATURE_CALL_EXP__SOURCE_TYPE,oldSourceType,sourceType));
-      }
-    }
-    return sourceType;
-  }
+		if (srcType == null) {
+			throw new WellformednessException(this,
+					"The source type of a feature call expression must not be empty."); //$NON-NLS-1$
+		}
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  public Type basicGetSourceType() {
-    return sourceType;
-  }
+		return srcType;
+	}
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  public void setSourceType(Type newSourceType) {
-    Type oldSourceType = sourceType;
-    sourceType = newSourceType;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this,Notification.SET,
-          ExpressionsPackageImpl.FEATURE_CALL_EXP__SOURCE_TYPE,oldSourceType,sourceType));
-  }
+	/**
+	 * <!-- begin-user-doc --> The code for {@link #getSourceType()} is forwarded to this method. <!--
+	 * end-user-doc -->
+	 * @generated
+	 */
+	public Type getSourceTypeGen() {
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  @Override
-  public Object eGet(int featureID, boolean resolve, boolean coreType) {
-    switch (featureID) {
-      case ExpressionsPackageImpl.FEATURE_CALL_EXP__SOURCE_TYPE:
-        if (resolve) return getSourceType();
-        return basicGetSourceType();
-    }
-    return super.eGet(featureID,resolve,coreType);
-  }
+		if (sourceType != null && ((EObject) sourceType).eIsProxy()) {
+			InternalEObject oldSourceType = (InternalEObject) sourceType;
+			sourceType = (Type) eResolveProxy(oldSourceType);
+			if (sourceType != oldSourceType) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE,
+							ExpressionsPackageImpl.FEATURE_CALL_EXP__SOURCE_TYPE,
+							oldSourceType, sourceType));
+			}
+		}
+		return sourceType;
+	}
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  @Override
-  public void eSet(int featureID, Object newValue) {
-    switch (featureID) {
-      case ExpressionsPackageImpl.FEATURE_CALL_EXP__SOURCE_TYPE:
-        setSourceType((Type) newValue);
-        return;
-    }
-    super.eSet(featureID,newValue);
-  }
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Type basicGetSourceType() {
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  @Override
-  public void eUnset(int featureID) {
-    switch (featureID) {
-      case ExpressionsPackageImpl.FEATURE_CALL_EXP__SOURCE_TYPE:
-        setSourceType((Type) null);
-        return;
-    }
-    super.eUnset(featureID);
-  }
+		return sourceType;
+	}
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  @Override
-  public boolean eIsSet(int featureID) {
-    switch (featureID) {
-      case ExpressionsPackageImpl.FEATURE_CALL_EXP__SOURCE_TYPE:
-        return sourceType != null;
-    }
-    return super.eIsSet(featureID);
-  }
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setSourceType(Type newSourceType) {
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  @Override
-  protected EClass eStaticClass() {
-    return ExpressionsPackageImpl.Literals.FEATURE_CALL_EXP;
-  }
+		Type oldSourceType = sourceType;
+		sourceType = newSourceType;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET,
+					ExpressionsPackageImpl.FEATURE_CALL_EXP__SOURCE_TYPE, oldSourceType,
+					sourceType));
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object eGet(int featureID, boolean resolve, boolean coreType) {
+
+		switch (featureID) {
+		case ExpressionsPackageImpl.FEATURE_CALL_EXP__SOURCE_TYPE:
+			if (resolve)
+				return getSourceType();
+			return basicGetSourceType();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void eSet(int featureID, Object newValue) {
+
+		switch (featureID) {
+		case ExpressionsPackageImpl.FEATURE_CALL_EXP__SOURCE_TYPE:
+			setSourceType((Type) newValue);
+			return;
+		}
+		super.eSet(featureID, newValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void eUnset(int featureID) {
+
+		switch (featureID) {
+		case ExpressionsPackageImpl.FEATURE_CALL_EXP__SOURCE_TYPE:
+			setSourceType((Type) null);
+			return;
+		}
+		super.eUnset(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean eIsSet(int featureID) {
+
+		switch (featureID) {
+		case ExpressionsPackageImpl.FEATURE_CALL_EXP__SOURCE_TYPE:
+			return sourceType != null;
+		}
+		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected EClass eStaticClass() {
+
+		return ExpressionsPackageImpl.Literals.FEATURE_CALL_EXP;
+	}
 
 } // FeatureCallExpImpl

@@ -83,6 +83,7 @@ import tudresden.ocl20.pivot.pivotmodel.ConstraintKind;
 import tudresden.ocl20.pivot.pivotmodel.Enumeration;
 import tudresden.ocl20.pivot.pivotmodel.EnumerationLiteral;
 import tudresden.ocl20.pivot.pivotmodel.Expression;
+import tudresden.ocl20.pivot.pivotmodel.Feature;
 import tudresden.ocl20.pivot.pivotmodel.Operation;
 import tudresden.ocl20.pivot.pivotmodel.Parameter;
 import tudresden.ocl20.pivot.pivotmodel.PivotModelFactory;
@@ -99,8 +100,8 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
 public class EssentialOclFactory {
 
 	/** The {@link Logger} for this class. */
-	private static final Logger LOGGER =
-			EssentialOclPlugin.getLogger(EssentialOclFactory.class);
+	private static final Logger LOGGER = EssentialOclPlugin
+			.getLogger(EssentialOclFactory.class);
 
 	/** The {@link OclLibrary} instance. */
 	private OclLibrary oclLibrary;
@@ -117,10 +118,10 @@ public class EssentialOclFactory {
 	 * </p>
 	 * 
 	 * @param oclLibrary
-	 *          The {@link OclLibrary} this {@link EssentialOclFactory} belongs
-	 *          to.
+	 *            The {@link OclLibrary} this {@link EssentialOclFactory}
+	 *            belongs to.
 	 * @param model
-	 *          the {@link IModel} the created OCL expressions belong to.
+	 *            the {@link IModel} the created OCL expressions belong to.
 	 */
 	public EssentialOclFactory(OclLibrary oclLibrary, IModel model) {
 
@@ -137,7 +138,8 @@ public class EssentialOclFactory {
 		// no else.
 
 		if (model == null) {
-			throw new IllegalArgumentException("Paramter 'model' must not be null."); //$NON-NLS-1$
+			throw new IllegalArgumentException(
+					"Paramter 'model' must not be null."); //$NON-NLS-1$
 		}
 		// no else.
 
@@ -157,19 +159,22 @@ public class EssentialOclFactory {
 	 * </p>
 	 * 
 	 * @param booleanSymbol
-	 *          The <code>boolean</code> value of the {@link BooleanLiteralExp}.
+	 *            The <code>boolean</code> value of the
+	 *            {@link BooleanLiteralExp}.
 	 * @return A {@link BooleanLiteralExp} instance.
 	 */
 	public BooleanLiteralExp createBooleanLiteralExp(boolean booleanSymbol) {
 
 		if (LOGGER.isDebugEnabled()) {
-			LOGGER.debug("createBooleanLiteralExp(booleanSymbol=" + booleanSymbol //$NON-NLS-1$
-					+ ") - enter"); //$NON-NLS-1$
+			LOGGER
+					.debug("createBooleanLiteralExp(booleanSymbol=" + booleanSymbol //$NON-NLS-1$
+							+ ") - enter"); //$NON-NLS-1$
 		}
 
 		BooleanLiteralExp booleanLiteralExp;
 
-		booleanLiteralExp = ExpressionsFactory.INSTANCE.createBooleanLiteralExp();
+		booleanLiteralExp = ExpressionsFactory.INSTANCE
+				.createBooleanLiteralExp();
 		booleanLiteralExp.setBooleanSymbol(booleanSymbol);
 		booleanLiteralExp.setOclLibrary(oclLibrary);
 
@@ -187,7 +192,7 @@ public class EssentialOclFactory {
 	 * </p>
 	 * 
 	 * @param item
-	 *          The {@link OclExpression} of the item.
+	 *            The {@link OclExpression} of the item.
 	 * @return A {@link CollectionItem} instance.
 	 */
 	public CollectionItem createCollectionItem(OclExpression item) {
@@ -220,10 +225,11 @@ public class EssentialOclFactory {
 	 * </p>
 	 * 
 	 * @param kind
-	 *          The {@link CollectionKind} of the {@link CollectionLiteralExp}.
+	 *            The {@link CollectionKind} of the {@link CollectionLiteralExp}
+	 *            .
 	 * @param parts
-	 *          The {@link CollectionLiteralPart}s of the
-	 *          {@link CollectionLiteralExp}.
+	 *            The {@link CollectionLiteralPart}s of the
+	 *            {@link CollectionLiteralExp}.
 	 * @return A {@link CollectionLiteralExp} instance.
 	 */
 	public CollectionLiteralExp createCollectionLiteralExp(CollectionKind kind,
@@ -242,8 +248,8 @@ public class EssentialOclFactory {
 
 		CollectionLiteralExp collectionLiteralExp;
 
-		collectionLiteralExp =
-				ExpressionsFactory.INSTANCE.createCollectionLiteralExp();
+		collectionLiteralExp = ExpressionsFactory.INSTANCE
+				.createCollectionLiteralExp();
 		collectionLiteralExp.setKind(kind);
 		collectionLiteralExp.getPart().addAll(Arrays.asList(parts));
 
@@ -264,17 +270,18 @@ public class EssentialOclFactory {
 	 * </p>
 	 * 
 	 * @param first
-	 *          The {@link OclExpression} for the first element.
+	 *            The {@link OclExpression} for the first element.
 	 * @param last
-	 *          The {@link OclExpression} for the last element.
+	 *            The {@link OclExpression} for the last element.
 	 * @return A {@link CollectionRange} instance.
 	 */
 	public CollectionRange createCollectionRange(OclExpression first,
 			OclExpression last) {
 
 		if (LOGGER.isDebugEnabled()) {
-			LOGGER.debug("createCollectionRange(first=" + first + ", last=" + last //$NON-NLS-1$ //$NON-NLS-2$
-					+ ") - enter"); //$NON-NLS-1$
+			LOGGER
+					.debug("createCollectionRange(first=" + first + ", last=" + last //$NON-NLS-1$ //$NON-NLS-2$
+							+ ") - enter"); //$NON-NLS-1$
 		}
 
 		if (first == null || last == null) {
@@ -302,23 +309,27 @@ public class EssentialOclFactory {
 	 * </p>
 	 * 
 	 * @param name
-	 *          An optional name for the {@link Constraint}.
+	 *            An optional name for the {@link Constraint}.
 	 * @param kind
-	 *          One of the constants defined in {@link ConstraintKind}.
+	 *            One of the constants defined in {@link ConstraintKind}.
 	 * @param specification
-	 *          The {@link Expression} that specifies the {@link Constraint}.
+	 *            The {@link Expression} that specifies the {@link Constraint}.
 	 * @param constrainedElement
-	 *          At least one element that is the target of the {@link Constraint}.
+	 *            At least one element that is the target of the
+	 *            {@link Constraint}.
 	 * 
 	 * @return A {@link Constraint} instance.
 	 */
 	public Constraint createConstraint(String name, ConstraintKind kind,
-			Expression specification, ConstrainableElement... constrainedElement) {
+			Expression specification, Feature definedFeature,
+			ConstrainableElement... constrainedElement) {
 
 		if (LOGGER.isDebugEnabled()) {
-			LOGGER.debug("createConstraint(name=" + name + ", kind=" + kind //$NON-NLS-1$ //$NON-NLS-2$
-					+ ", specification=" + specification + ", constrainedElement=" //$NON-NLS-1$//$NON-NLS-2$
-					+ ArrayUtils.toString(constrainedElement) + ") - enter"); //$NON-NLS-1$
+			LOGGER
+					.debug("createConstraint(name=" + name + ", kind=" + kind //$NON-NLS-1$ //$NON-NLS-2$
+							+ ", specification=" + specification + ", constrainedElement=" //$NON-NLS-1$//$NON-NLS-2$
+							+ ArrayUtils.toString(constrainedElement)
+							+ ") - enter"); //$NON-NLS-1$
 		}
 
 		if (kind == null || specification == null || constrainedElement == null) {
@@ -331,11 +342,13 @@ public class EssentialOclFactory {
 		constraint.setName(name);
 		constraint.setKind(kind);
 		constraint.setSpecification(specification);
-		constraint.getConstrainedElement()
-				.addAll(Arrays.asList(constrainedElement));
+		constraint.setDefinedFeature(definedFeature);
+		constraint.getConstrainedElement().addAll(
+				Arrays.asList(constrainedElement));
 
 		if (LOGGER.isDebugEnabled()) {
-			LOGGER.debug("createConstraint() - exit - return value=" + constraint); //$NON-NLS-1$
+			LOGGER
+					.debug("createConstraint() - exit - return value=" + constraint); //$NON-NLS-1$
 		}
 
 		return constraint;
@@ -348,17 +361,18 @@ public class EssentialOclFactory {
 	 * </p>
 	 * 
 	 * @param referredEnumLiteralPathName
-	 *          The fully qualified name of the referred
-	 *          {@link EnumerationLiteral} as a {@link String}.
+	 *            The fully qualified name of the referred
+	 *            {@link EnumerationLiteral} as a {@link String}.
 	 * @return A {@link EnumLiteralExp} instance.
 	 * @throws EssentialOclFactoryException
-	 *           Thrown, if the creation fails.
+	 *             Thrown, if the creation fails.
 	 */
 	public EnumLiteralExp createEnumLiteralExp(List<String> pathName)
 			throws EssentialOclFactoryException {
 
 		if (LOGGER.isDebugEnabled()) {
-			LOGGER.debug("createEnumLiteralExp(pathName=" + pathName + ") - enter"); //$NON-NLS-1$//$NON-NLS-2$
+			LOGGER
+					.debug("createEnumLiteralExp(pathName=" + pathName + ") - enter"); //$NON-NLS-1$//$NON-NLS-2$
 		}
 
 		if (pathName == null || pathName.size() < 2) {
@@ -380,8 +394,8 @@ public class EssentialOclFactory {
 					+ " does not denote an enumeration."); //$NON-NLS-1$
 		}
 
-		EnumerationLiteral enumLiteral =
-				((Enumeration) enumeration).lookupLiteral(enumLiteralName);
+		EnumerationLiteral enumLiteral = ((Enumeration) enumeration)
+				.lookupLiteral(enumLiteralName);
 
 		if (enumLiteral == null) {
 			throw new IllegalArgumentException(
@@ -404,23 +418,25 @@ public class EssentialOclFactory {
 
 	/**
 	 * <p>
-	 * Creates a new {@link ExpressionInOcl}. The body expression and the context
-	 * variable must not be <code>null</code>. The result and parameter variables
-	 * are optional since they are only required for constraints whose context is
-	 * an operation.
+	 * Creates a new {@link ExpressionInOcl}. The body expression and the
+	 * context variable must not be <code>null</code>. The result and parameter
+	 * variables are optional since they are only required for constraints whose
+	 * context is an operation.
 	 * </p>
 	 * 
 	 * @param body
-	 *          The body expression as a {@link String} in OCL concrete syntax.
+	 *            The body expression as a {@link String} in OCL concrete
+	 *            syntax.
 	 * @param bodyExpression
-	 *          The {@link OclExpression} that is the body of the
-	 *          {@link ExpressionInOcl}.
+	 *            The {@link OclExpression} that is the body of the
+	 *            {@link ExpressionInOcl}.
 	 * @param context
-	 *          The {@link Variable} representing the contextual classifier.
+	 *            The {@link Variable} representing the contextual classifier.
 	 * @param result
-	 *          The result {@link Variable} of an operation {@link Constraint}.
+	 *            The result {@link Variable} of an operation {@link Constraint}
+	 *            .
 	 * @param parameter
-	 *          The parameters of an operation {@link Constraint}.
+	 *            The parameters of an operation {@link Constraint}.
 	 * 
 	 * @return An {@link ExpressionInOcl} instance.
 	 */
@@ -429,9 +445,10 @@ public class EssentialOclFactory {
 			Variable... parameter) {
 
 		if (LOGGER.isDebugEnabled()) {
-			LOGGER.debug("createExpressionInOcl(bodyExpression=" + bodyExpression //$NON-NLS-1$
-					+ ", context=" + context + ", result=" + result + ", parameter=" //$NON-NLS-1$//$NON-NLS-2$ //$NON-NLS-3$
-					+ ArrayUtils.toString(parameter) + ") - enter"); //$NON-NLS-1$
+			LOGGER
+					.debug("createExpressionInOcl(bodyExpression=" + bodyExpression //$NON-NLS-1$
+							+ ", context=" + context + ", result=" + result + ", parameter=" //$NON-NLS-1$//$NON-NLS-2$ //$NON-NLS-3$
+							+ ArrayUtils.toString(parameter) + ") - enter"); //$NON-NLS-1$
 		}
 
 		if (bodyExpression == null || context == null) {
@@ -470,23 +487,26 @@ public class EssentialOclFactory {
 	 * </p>
 	 * 
 	 * @param condition
-	 *          The condition {@link OclExpression}.
+	 *            The condition {@link OclExpression}.
 	 * @param thenExpression
-	 *          The then {@link OclExpression}.
+	 *            The then {@link OclExpression}.
 	 * @param elseExpression
-	 *          The else {@link OclExpression}.
+	 *            The else {@link OclExpression}.
 	 * @return An {@link IfExp} instance.
 	 */
 	public IfExp createIfExp(OclExpression condition,
 			OclExpression thenExpression, OclExpression elseExpression) {
 
 		if (LOGGER.isDebugEnabled()) {
-			LOGGER.debug("createIfExp(condition=" + condition + ", thenExpression=" //$NON-NLS-1$ //$NON-NLS-2$
-					+ thenExpression + ", elseExpression=" + elseExpression //$NON-NLS-1$
-					+ ") - enter"); //$NON-NLS-1$
+			LOGGER
+					.debug("createIfExp(condition=" + condition + ", thenExpression=" //$NON-NLS-1$ //$NON-NLS-2$
+							+ thenExpression
+							+ ", elseExpression=" + elseExpression //$NON-NLS-1$
+							+ ") - enter"); //$NON-NLS-1$
 		}
 
-		if (condition == null || thenExpression == null || elseExpression == null) {
+		if (condition == null || thenExpression == null
+				|| elseExpression == null) {
 			throw new NullArgumentException(
 					"condition or thenExpression or elseExpression"); //$NON-NLS-1$
 		}
@@ -512,18 +532,19 @@ public class EssentialOclFactory {
 	 * </p>
 	 * 
 	 * @param integerSymbol
-	 *          The <code>int</code> value of the {@link IntegerLiteralExp}.
+	 *            The <code>int</code> value of the {@link IntegerLiteralExp}.
 	 * @return An {@link IntegerLiteralExp} instance.
 	 */
 	public IntegerLiteralExp createIntegerLiteralExp(int integerSymbol) {
 
 		if (LOGGER.isDebugEnabled()) {
-			LOGGER.debug("createIntegerLiteralExp(integerSymbol=" + integerSymbol //$NON-NLS-1$
-					+ ") - enter"); //$NON-NLS-1$
+			LOGGER
+					.debug("createIntegerLiteralExp(integerSymbol=" + integerSymbol //$NON-NLS-1$
+							+ ") - enter"); //$NON-NLS-1$
 		}
 
-		IntegerLiteralExp integerLiteralExp =
-				ExpressionsFactory.INSTANCE.createIntegerLiteralExp();
+		IntegerLiteralExp integerLiteralExp = ExpressionsFactory.INSTANCE
+				.createIntegerLiteralExp();
 		integerLiteralExp.setIntegerSymbol(integerSymbol);
 
 		// initialize reference to the OCL Library
@@ -550,8 +571,8 @@ public class EssentialOclFactory {
 			LOGGER.debug("createInvalidLiteralExp() - enter"); //$NON-NLS-1$
 		}
 
-		InvalidLiteralExp invalidLiteralExp =
-				ExpressionsFactory.INSTANCE.createInvalidLiteralExp();
+		InvalidLiteralExp invalidLiteralExp = ExpressionsFactory.INSTANCE
+				.createInvalidLiteralExp();
 
 		invalidLiteralExp.setOclLibrary(oclLibrary);
 
@@ -569,19 +590,19 @@ public class EssentialOclFactory {
 	 * </p>
 	 * 
 	 * @param source
-	 *          The source {@link OclExpression}.
+	 *            The source {@link OclExpression}.
 	 * @param name
-	 *          The name of the {@link IterateExp}.
+	 *            The name of the {@link IterateExp}.
 	 * @param body
-	 *          The body {@link OclExpression} of the {@link IterateExp}.
+	 *            The body {@link OclExpression} of the {@link IterateExp}.
 	 * @param result
-	 *          The result {@link Variable}.
+	 *            The result {@link Variable}.
 	 * @param iterator
-	 *          The optional iterator {@link Variable}s as an array.
+	 *            The optional iterator {@link Variable}s as an array.
 	 * @return The {@link IterateExp} instance.
 	 */
-	public IterateExp createIterateExp(OclExpression source, OclExpression body,
-			Variable result, Variable... iterator) {
+	public IterateExp createIterateExp(OclExpression source,
+			OclExpression body, Variable result, Variable... iterator) {
 
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("createIterateExp(source=" + source + ", body=" + body //$NON-NLS-1$ //$NON-NLS-2$
@@ -604,7 +625,8 @@ public class EssentialOclFactory {
 		}
 
 		if (LOGGER.isDebugEnabled()) {
-			LOGGER.debug("createIterateExp() - exit - return value=" + iterateExp); //$NON-NLS-1$
+			LOGGER
+					.debug("createIterateExp() - exit - return value=" + iterateExp); //$NON-NLS-1$
 		}
 
 		return iterateExp;
@@ -616,13 +638,13 @@ public class EssentialOclFactory {
 	 * </p>
 	 * 
 	 * @param source
-	 *          The source {@link OclExpression}.
+	 *            The source {@link OclExpression}.
 	 * @param name
-	 *          The name of the {@link IteratorExp}.
+	 *            The name of the {@link IteratorExp}.
 	 * @param body
-	 *          The body {@link OclExpression}.
+	 *            The body {@link OclExpression}.
 	 * @param iterator
-	 *          The iterator {@link Variable}s as an array.
+	 *            The iterator {@link Variable}s as an array.
 	 * 
 	 * @return A {@link IteratorExp} instance.
 	 */
@@ -630,9 +652,10 @@ public class EssentialOclFactory {
 			OclExpression body, Variable... iterator) {
 
 		if (LOGGER.isDebugEnabled()) {
-			LOGGER.debug("createIteratorExp(source=" + source + ", name=" + name //$NON-NLS-1$ //$NON-NLS-2$
-					+ ", body=" + body + ", iterator=" + ArrayUtils.toString(iterator) //$NON-NLS-1$//$NON-NLS-2$
-					+ ") - enter"); //$NON-NLS-1$
+			LOGGER
+					.debug("createIteratorExp(source=" + source + ", name=" + name //$NON-NLS-1$ //$NON-NLS-2$
+							+ ", body=" + body + ", iterator=" + ArrayUtils.toString(iterator) //$NON-NLS-1$//$NON-NLS-2$
+							+ ") - enter"); //$NON-NLS-1$
 		}
 
 		if (source == null || StringUtils.isEmpty(name) || body == null) {
@@ -641,7 +664,8 @@ public class EssentialOclFactory {
 							+ ", name=" + name + ", body=" + body + "."); //$NON-NLS-1$//$NON-NLS-2$ //$NON-NLS-3$
 		}
 
-		IteratorExp iteratorExp = ExpressionsFactory.INSTANCE.createIteratorExp();
+		IteratorExp iteratorExp = ExpressionsFactory.INSTANCE
+				.createIteratorExp();
 
 		iteratorExp.setSource(source);
 		iteratorExp.setName(name);
@@ -655,7 +679,8 @@ public class EssentialOclFactory {
 		iteratorExp.setOclLibrary(oclLibrary);
 
 		if (LOGGER.isDebugEnabled()) {
-			LOGGER.debug("createIteratorExp() - exit - return value=" + iteratorExp); //$NON-NLS-1$
+			LOGGER
+					.debug("createIteratorExp() - exit - return value=" + iteratorExp); //$NON-NLS-1$
 		}
 
 		return iteratorExp;
@@ -667,9 +692,9 @@ public class EssentialOclFactory {
 	 * </p>
 	 * 
 	 * @param variable
-	 *          The {@link Variable} of the {@link LetExp}.
+	 *            The {@link Variable} of the {@link LetExp}.
 	 * @param in
-	 *          The {@link OclExpression} of the {@link LetExp}.
+	 *            The {@link OclExpression} of the {@link LetExp}.
 	 * @return A {@link LetExp} instance.
 	 */
 	public LetExp createLetExp(Variable variable, OclExpression in) {
@@ -703,12 +728,13 @@ public class EssentialOclFactory {
 	 * </p>
 	 * 
 	 * @param source
-	 *          The source {@link OclExpression} of the {@link OperationCallExp}.
+	 *            The source {@link OclExpression} of the
+	 *            {@link OperationCallExp}.
 	 * @param referredOperationName
-	 *          The fully qualified name of the operation (i.e., including the
-	 *          fully qualified name of its owning {@link Type}).
+	 *            The fully qualified name of the operation (i.e., including the
+	 *            fully qualified name of its owning {@link Type}).
 	 * @param argument
-	 *          An optional list of arguments as {@link OclExpression}s.
+	 *            An optional list of arguments as {@link OclExpression}s.
 	 * 
 	 * @return The created {@link OperationCallExp}.
 	 */
@@ -716,9 +742,10 @@ public class EssentialOclFactory {
 			String referredOperationName, OclExpression... argument) {
 
 		if (LOGGER.isDebugEnabled()) {
-			LOGGER.debug("createOperationCallExp(source=" + source //$NON-NLS-1$
-					+ ", referredOperationName=" + referredOperationName + ", argument=" //$NON-NLS-1$ //$NON-NLS-2$
-					+ ArrayUtils.toString(argument) + ") - enter"); //$NON-NLS-1$
+			LOGGER
+					.debug("createOperationCallExp(source=" + source //$NON-NLS-1$
+							+ ", referredOperationName=" + referredOperationName + ", argument=" //$NON-NLS-1$ //$NON-NLS-2$
+							+ ArrayUtils.toString(argument) + ") - enter"); //$NON-NLS-1$
 		}
 
 		if (source == null || StringUtils.isEmpty(referredOperationName)) {
@@ -738,18 +765,33 @@ public class EssentialOclFactory {
 
 		// lookup the operation
 		Type sourceType = source.getType();
-		Operation operation =
-				sourceType.lookupOperation(referredOperationName, paramTypes);
+		Operation operation = sourceType.lookupOperation(referredOperationName,
+				paramTypes);
 
 		if (operation == null) {
+			StringBuilder paramTypeNames = new StringBuilder();
+			if (paramTypes.size() == 0)
+				paramTypeNames.append(" with no argument type ");
+			if (paramTypes.size() == 1)
+				paramTypeNames.append(" with argument type ");
+			else
+				paramTypeNames.append(" with argument types ");
+			for (int i = 0; i < paramTypes.size(); i++) {
+				Type paramType = paramTypes.get(i);
+				if (i > 0)
+					paramTypeNames.append(", ");
+				paramTypeNames.append("'");
+				paramTypeNames.append(paramType.getName());
+				paramTypeNames.append("'");
+			}
 			throw new IllegalArgumentException(
 					"Unable to find operation '" + referredOperationName //$NON-NLS-1$
-							+ "' with argument types " + paramTypes + " in type '" //$NON-NLS-1$ //$NON-NLS-2$
+							+ "'" + paramTypeNames + " in type '" //$NON-NLS-1$ //$NON-NLS-2$
 							+ source.getType().getQualifiedName() + "'."); //$NON-NLS-1$
 		}
 
-		OperationCallExp operationCallExp =
-				ExpressionsFactory.INSTANCE.createOperationCallExp();
+		OperationCallExp operationCallExp = ExpressionsFactory.INSTANCE
+				.createOperationCallExp();
 		operationCallExp.setSource(source);
 		operationCallExp.setReferredOperation(operation);
 
@@ -777,22 +819,23 @@ public class EssentialOclFactory {
 	 * </p>
 	 * 
 	 * @param referredOperationPathName
-	 *          The fully qualified name of the operation (i.e., including the
-	 *          fully qualified name of its owning {@link Type}).
+	 *            The fully qualified name of the operation (i.e., including the
+	 *            fully qualified name of its owning {@link Type}).
 	 * @param argument
-	 *          An optional list of arguments as {@link OclExpression}s.
+	 *            An optional list of arguments as {@link OclExpression}s.
 	 * 
 	 * @return An {@link OperationCallExp} instance.
 	 * 
 	 * @throws EssentialOclFactoryException
-	 *           If the expression cannot be created.
+	 *             If the expression cannot be created.
 	 */
 	public OperationCallExp createOperationCallExp(List<String> pathName,
 			OclExpression... argument) throws EssentialOclFactoryException {
 
 		if (LOGGER.isDebugEnabled()) {
-			LOGGER.debug("createOperationCallExp(pathName=" + pathName //$NON-NLS-1$
-					+ ", argument=" + ArrayUtils.toString(argument) + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
+			LOGGER
+					.debug("createOperationCallExp(pathName=" + pathName //$NON-NLS-1$
+							+ ", argument=" + ArrayUtils.toString(argument) + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 
 		if (pathName == null || pathName.size() < 2) {
@@ -820,14 +863,15 @@ public class EssentialOclFactory {
 		// FIXME Michael: This is wrong, but the parser treats this as a static
 		// operation. A new parser should avoid this, so this code can move to
 		// another place (non-static operation)
-		
+
 		// lookup the operation on OclType first (allInstances, probably more)
-		Operation operation =
-				oclLibrary.getOclType().lookupOperation(referredOperation, paramTypes);
+		Operation operation = oclLibrary.getOclType().lookupOperation(
+				referredOperation, paramTypes);
 
 		if (operation == null) {
 
-			operation = owningType.lookupOperation(referredOperation, paramTypes);
+			operation = owningType.lookupOperation(referredOperation,
+					paramTypes);
 
 			if (operation == null || !operation.isStatic()) {
 				throw new IllegalArgumentException(
@@ -839,8 +883,8 @@ public class EssentialOclFactory {
 		// no else.
 
 		// create the expression
-		OperationCallExp operationCallExp =
-				ExpressionsFactory.INSTANCE.createOperationCallExp();
+		OperationCallExp operationCallExp = ExpressionsFactory.INSTANCE
+				.createOperationCallExp();
 		operationCallExp.setSourceType(owningType);
 		operationCallExp.setReferredOperation(operation);
 
@@ -866,21 +910,24 @@ public class EssentialOclFactory {
 	 * </p>
 	 * 
 	 * @param source
-	 *          The source {@link OclExpression} of the {@link PropertyCallExp}.
+	 *            The source {@link OclExpression} of the
+	 *            {@link PropertyCallExp}.
 	 * @param referredPropertyName
-	 *          The referred property's name as a {@link String}.
+	 *            The referred property's name as a {@link String}.
 	 * @param qualifier
-	 *          qualifier {@link OclExpression} as an Array.
+	 *            qualifier {@link OclExpression} as an Array.
 	 * 
 	 * @return A {@link PropertyCallExp} instance.
+	 * @throws EssentialOclFactoryException 
 	 */
 	public PropertyCallExp createPropertyCallExp(OclExpression source,
-			String referredPropertyName, OclExpression... qualifier) {
+			String referredPropertyName, OclExpression... qualifier) throws EssentialOclFactoryException {
 
 		if (LOGGER.isDebugEnabled()) {
-			LOGGER.debug("createPropertyCallExp(source=" + source //$NON-NLS-1$
-					+ ", referredPropertyName=" + referredPropertyName + ", qualifier=" //$NON-NLS-1$ //$NON-NLS-2$
-					+ ArrayUtils.toString(qualifier) + ") - enter"); //$NON-NLS-1$
+			LOGGER
+					.debug("createPropertyCallExp(source=" + source //$NON-NLS-1$
+							+ ", referredPropertyName=" + referredPropertyName + ", qualifier=" //$NON-NLS-1$ //$NON-NLS-2$
+							+ ArrayUtils.toString(qualifier) + ") - enter"); //$NON-NLS-1$
 		}
 
 		if (source == null || StringUtils.isEmpty(referredPropertyName)) {
@@ -893,16 +940,17 @@ public class EssentialOclFactory {
 		Type sourceType = source.getType();
 		Property property = sourceType.lookupProperty(referredPropertyName);
 
-		// invalid and undefined conform to all types, so we ignore if we haven't
+		// invalid and undefined conform to all types, so we ignore if we
+		// haven't
 		// found a property
 		if (property == null) {
-			throw new IllegalArgumentException(
+			throw new EssentialOclFactoryException(
 					"Unable to find property '" + referredPropertyName //$NON-NLS-1$
 							+ "' in type '" + source.getType().getQualifiedName() + "'"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 
-		PropertyCallExp propertyCallExp =
-				ExpressionsFactory.INSTANCE.createPropertyCallExp();
+		PropertyCallExp propertyCallExp = ExpressionsFactory.INSTANCE
+				.createPropertyCallExp();
 
 		propertyCallExp.setSource(source);
 		propertyCallExp.setReferredProperty(property);
@@ -929,19 +977,20 @@ public class EssentialOclFactory {
 	 * </p>
 	 * 
 	 * @param referredPropertyPathName
-	 *          The referred property's name as a {@link String}.
+	 *            The referred property's name as a {@link String}.
 	 * @param qualifier
-	 *          qualifier {@link OclExpression} as an Array.
+	 *            qualifier {@link OclExpression} as an Array.
 	 * @return A {@link PropertyCallExp} instance.
 	 * @throws EssentialOclFactoryException
-	 *           Thrown, if the creation fails.
+	 *             Thrown, if the creation fails.
 	 */
 	public PropertyCallExp createPropertyCallExp(List<String> pathName,
 			OclExpression... qualifier) throws EssentialOclFactoryException {
 
 		if (LOGGER.isDebugEnabled()) {
-			LOGGER.debug("createPropertyCallExp(pathName=" + pathName //$NON-NLS-1$
-					+ ", qualifier=" + ArrayUtils.toString(qualifier) + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
+			LOGGER
+					.debug("createPropertyCallExp(pathName=" + pathName //$NON-NLS-1$
+							+ ", qualifier=" + ArrayUtils.toString(qualifier) + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 
 		if (pathName == null || pathName.size() < 2) {
@@ -967,8 +1016,8 @@ public class EssentialOclFactory {
 		}
 
 		// create the expression
-		PropertyCallExp propertyCallExp =
-				ExpressionsFactory.INSTANCE.createPropertyCallExp();
+		PropertyCallExp propertyCallExp = ExpressionsFactory.INSTANCE
+				.createPropertyCallExp();
 		propertyCallExp.setSourceType(owningType);
 		propertyCallExp.setReferredProperty(property);
 
@@ -994,7 +1043,8 @@ public class EssentialOclFactory {
 	 * </p>
 	 * 
 	 * @param realSymbol
-	 *          The <code>float</code> value of the {@link RealLiteralExp}.</p>
+	 *            The <code>float</code> value of the {@link RealLiteralExp}
+	 *            .</p>
 	 * @return The {@link RealLiteralExp}.
 	 */
 	public RealLiteralExp createRealLiteralExp(float realSymbol) {
@@ -1004,8 +1054,8 @@ public class EssentialOclFactory {
 					+ ") - enter"); //$NON-NLS-1$
 		}
 
-		RealLiteralExp realLiteralExp =
-				ExpressionsFactory.INSTANCE.createRealLiteralExp();
+		RealLiteralExp realLiteralExp = ExpressionsFactory.INSTANCE
+				.createRealLiteralExp();
 		realLiteralExp.setRealSymbol(realSymbol);
 
 		realLiteralExp.setOclLibrary(oclLibrary);
@@ -1024,7 +1074,7 @@ public class EssentialOclFactory {
 	 * </p>
 	 * 
 	 * @param stringSymbol
-	 *          The {@link String} value of the {@link StringLiteralExp}.
+	 *            The {@link String} value of the {@link StringLiteralExp}.
 	 * @return A {@link StringLiteralExp} instance.
 	 */
 	public StringLiteralExp createStringLiteralExp(String stringSymbol) {
@@ -1060,14 +1110,15 @@ public class EssentialOclFactory {
 	 * </p>
 	 * 
 	 * @param parts
-	 *          The {@link TupleLiteralPart}s of the {@link TupleLiteralExp}.
+	 *            The {@link TupleLiteralPart}s of the {@link TupleLiteralExp}.
 	 * @return A {@link TupleLiteralExp} instance.
 	 */
 	public TupleLiteralExp createTupleLiteralExp(TupleLiteralPart... parts) {
 
 		if (LOGGER.isDebugEnabled()) {
-			LOGGER.debug("createTupleLiteralExp(parts=" + ArrayUtils.toString(parts) //$NON-NLS-1$
-					+ ") - enter"); //$NON-NLS-1$
+			LOGGER
+					.debug("createTupleLiteralExp(parts=" + ArrayUtils.toString(parts) //$NON-NLS-1$
+							+ ") - enter"); //$NON-NLS-1$
 		}
 
 		TupleLiteralExp tupleLiteralExp;
@@ -1098,8 +1149,8 @@ public class EssentialOclFactory {
 	 * </p>
 	 * 
 	 * @param variableDeclaration
-	 *          The variable declaration for which the tuple literal part should
-	 *          be created
+	 *            The variable declaration for which the tuple literal part
+	 *            should be created
 	 * 
 	 * @return A {@link TupleLiteralPart} instance.
 	 */
@@ -1127,19 +1178,20 @@ public class EssentialOclFactory {
 	 * </p>
 	 * 
 	 * @param referredTypePathName
-	 *          The fully qualified name of the {@link Type} this
-	 *          {@link TimeLimitExceededException} refers to.
+	 *            The fully qualified name of the {@link Type} this
+	 *            {@link TimeLimitExceededException} refers to.
 	 * 
 	 * @return A {@link TypeLiteralExp} instance.
 	 * @throws EssentialOclFactoryException
-	 *           Thrown, if the creation fails.
+	 *             Thrown, if the creation fails.
 	 */
 	public TypeLiteralExp createTypeLiteralExp(List<String> referredTypeName)
 			throws EssentialOclFactoryException {
 
 		if (LOGGER.isDebugEnabled()) {
-			LOGGER.debug("createTypeLiteralExp(referredTypeName=" + referredTypeName //$NON-NLS-1$
-					+ ") - enter"); //$NON-NLS-1$
+			LOGGER
+					.debug("createTypeLiteralExp(referredTypeName=" + referredTypeName //$NON-NLS-1$
+							+ ") - enter"); //$NON-NLS-1$
 		}
 
 		if (referredTypeName == null || referredTypeName.size() == 0) {
@@ -1149,8 +1201,8 @@ public class EssentialOclFactory {
 
 		Type type = findType(referredTypeName);
 
-		TypeLiteralExp typeLiteralExp =
-				ExpressionsFactory.INSTANCE.createTypeLiteralExp();
+		TypeLiteralExp typeLiteralExp = ExpressionsFactory.INSTANCE
+				.createTypeLiteralExp();
 		typeLiteralExp.setReferredType(type);
 
 		// initialize reference to the OCL Library
@@ -1177,8 +1229,8 @@ public class EssentialOclFactory {
 			LOGGER.debug("createUndefinedLiteralExp() - enter"); //$NON-NLS-1$
 		}
 
-		UndefinedLiteralExp undefinedLiteralExp =
-				ExpressionsFactory.INSTANCE.createUndefinedLiteralExp();
+		UndefinedLiteralExp undefinedLiteralExp = ExpressionsFactory.INSTANCE
+				.createUndefinedLiteralExp();
 
 		undefinedLiteralExp.setOclLibrary(oclLibrary);
 
@@ -1196,17 +1248,19 @@ public class EssentialOclFactory {
 	 * </p>
 	 * 
 	 * @param symbol
-	 *          The <code>long</code> value of the {@link UnlimitedNaturalExp}.
+	 *            The <code>long</code> value of the {@link UnlimitedNaturalExp}
+	 *            .
 	 * @return A {@link UnlimitedNaturalExp} instance.
 	 */
 	public UnlimitedNaturalExp createUnlimitedNaturalExp(long symbol) {
 
 		if (LOGGER.isDebugEnabled()) {
-			LOGGER.debug("createUnlimitedNaturalExp(symbol=" + symbol + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
+			LOGGER
+					.debug("createUnlimitedNaturalExp(symbol=" + symbol + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 
-		UnlimitedNaturalExp unlimitedNaturalExp =
-				ExpressionsFactory.INSTANCE.createUnlimitedNaturalExp();
+		UnlimitedNaturalExp unlimitedNaturalExp = ExpressionsFactory.INSTANCE
+				.createUnlimitedNaturalExp();
 		unlimitedNaturalExp.setSymbol(symbol);
 
 		if (LOGGER.isDebugEnabled()) {
@@ -1220,21 +1274,21 @@ public class EssentialOclFactory {
 	/**
 	 * <p>
 	 * Creates a new {@link Variable}. The name must not be <code>null</code>.
-	 * Type and init expression are optional (OCL Specification, Section 9.3). If
-	 * none is given, however, it is likely that a {@link WellformednessException}
-	 * will be thrown at a later time when the type is requested. If both a type
-	 * and an init expression are given, this method will not check whether the
-	 * type of the init expression conforms to the given type. Instead, this will
-	 * be checked by the {@link Variable} implementation once the type is accessed
-	 * for the first time.
+	 * Type and init expression are optional (OCL Specification, Section 9.3).
+	 * If none is given, however, it is likely that a
+	 * {@link WellformednessException} will be thrown at a later time when the
+	 * type is requested. If both a type and an init expression are given, this
+	 * method will not check whether the type of the init expression conforms to
+	 * the given type. Instead, this will be checked by the {@link Variable}
+	 * implementation once the type is accessed for the first time.
 	 * </p>
 	 * 
 	 * @param name
-	 *          The name of the {@link Variable}.
+	 *            The name of the {@link Variable}.
 	 * @param type
-	 *          The {@link Type} of the {@link Variable}.
+	 *            The {@link Type} of the {@link Variable}.
 	 * @param initExpression
-	 *          An (optional) initialization {@link OclExpression}.
+	 *            An (optional) initialization {@link OclExpression}.
 	 * 
 	 * @return A {@link Variable} instance.
 	 */
@@ -1279,7 +1333,7 @@ public class EssentialOclFactory {
 	 * </p>
 	 * 
 	 * @param representedParameter
-	 *          The {@link Parameter} represented by the {@link Variable}.
+	 *            The {@link Parameter} represented by the {@link Variable}.
 	 * 
 	 * @return A {@link Variable} instance.
 	 */
@@ -1311,14 +1365,15 @@ public class EssentialOclFactory {
 	 * </p>
 	 * 
 	 * @param referredVariable
-	 *          The referred {@link Variable}.
+	 *            The referred {@link Variable}.
 	 * @return A {@link VariableExp} instance.
 	 */
 	public VariableExp createVariableExp(Variable referredVariable) {
 
 		if (LOGGER.isDebugEnabled()) {
-			LOGGER.debug("createVariableExp(referredVariable=" + referredVariable //$NON-NLS-1$
-					+ ") - enter"); //$NON-NLS-1$
+			LOGGER
+					.debug("createVariableExp(referredVariable=" + referredVariable //$NON-NLS-1$
+							+ ") - enter"); //$NON-NLS-1$
 		}
 
 		if (referredVariable == null) {
@@ -1326,14 +1381,16 @@ public class EssentialOclFactory {
 					"The referred variable must not be null."); //$NON-NLS-1$
 		}
 
-		VariableExp variableExp = ExpressionsFactory.INSTANCE.createVariableExp();
+		VariableExp variableExp = ExpressionsFactory.INSTANCE
+				.createVariableExp();
 		variableExp.setReferredVariable(referredVariable);
 
 		// a variable expression needs access to the OCL library
 		variableExp.setOclLibrary(oclLibrary);
 
 		if (LOGGER.isDebugEnabled()) {
-			LOGGER.debug("createVariableExp() - exit - return value=" + variableExp); //$NON-NLS-1$
+			LOGGER
+					.debug("createVariableExp() - exit - return value=" + variableExp); //$NON-NLS-1$
 		}
 
 		return variableExp;
@@ -1342,12 +1399,12 @@ public class EssentialOclFactory {
 
 	/**
 	 * <p>
-	 * Helper method to look up a type using the associated type resolver. Handles
-	 * all possible checked exceptions by converting them into a factory
+	 * Helper method to look up a type using the associated type resolver.
+	 * Handles all possible checked exceptions by converting them into a factory
 	 * exception.
 	 * </p>
 	 */
-	protected Type findType(List<String> pathName)
+	public Type findType(List<String> pathName)
 			throws EssentialOclFactoryException {
 
 		Type type;

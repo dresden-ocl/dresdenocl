@@ -1,11 +1,11 @@
 package tudresden.ocl20.pivot.standardlibrary.java.internal.library;
 
+import tudresden.ocl20.pivot.essentialocl.EssentialOclPlugin;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBoolean;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInvalid;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSet;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclType;
-import tudresden.ocl20.pivot.essentialocl.types.TypeConstants;
 import tudresden.ocl20.pivot.essentialocl.types.TypesFactory;
 import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement;
 import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceInvalid;
@@ -55,8 +55,9 @@ public class JavaOclInvalid extends JavaOclAny implements OclInvalid {
 	 */
 	public <T extends OclAny> OclSet<T> asSet() {
 
-		return JavaStandardLibraryFactory.INSTANCE.createOclInvalid(TypeConstants
-				.SET(TypesFactory.INSTANCE.createInvalidType()), invalidReason);
+		return JavaStandardLibraryFactory.INSTANCE.createOclInvalid(
+				EssentialOclPlugin.getOclLibraryProvider().getOclLibrary().getSetType(
+						TypesFactory.INSTANCE.createInvalidType()), invalidReason);
 	}
 
 	/*
@@ -117,7 +118,8 @@ public class JavaOclInvalid extends JavaOclAny implements OclInvalid {
 	public <T extends OclAny> OclBoolean oclIsKindOf(OclType<T> typespec) {
 
 		return JavaStandardLibraryFactory.INSTANCE.createOclInvalid(
-				TypeConstants.BOOLEAN, invalidReason);
+				EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+						.getOclBoolean(), invalidReason);
 	}
 
 	/*
@@ -129,7 +131,8 @@ public class JavaOclInvalid extends JavaOclAny implements OclInvalid {
 	public <T extends OclAny> OclBoolean oclIsTypeOf(OclType<T> typespec) {
 
 		return JavaStandardLibraryFactory.INSTANCE.createOclInvalid(
-				TypeConstants.BOOLEAN, invalidReason);
+				EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+						.getOclBoolean(), invalidReason);
 	}
 
 	/*
@@ -143,14 +146,16 @@ public class JavaOclInvalid extends JavaOclAny implements OclInvalid {
 		// see standard, p. 138; is implemented differently, as oclIsUndefined
 		// should not catch exceptions (invalid values)
 		return JavaStandardLibraryFactory.INSTANCE.createOclInvalid(
-				TypeConstants.BOOLEAN, invalidReason);
+				EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+						.getOclBoolean(), invalidReason);
 	}
-	
+
 	/*
 	 * (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
 	public String toString() {
+
 		return "invalid";
 	}
 

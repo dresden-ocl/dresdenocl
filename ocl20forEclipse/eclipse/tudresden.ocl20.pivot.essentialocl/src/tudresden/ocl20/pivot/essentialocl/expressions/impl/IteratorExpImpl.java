@@ -47,187 +47,189 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
  * <!-- end-user-doc -->
  * <p>
  * </p>
- * 
+ *
  * @generated
  */
 public class IteratorExpImpl extends LoopExpImpl implements IteratorExp {
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  protected IteratorExpImpl() {
-    super();
-  }
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected IteratorExpImpl() {
 
-  /**
-   * Overridden to determine the type of the <code>IteratorExp</code>
-   * according to the OCL specification (Section 8.3). Note that the
-   * specification is incomplete and this implementation adds a few more rules.
-   * 
-   * <p>
-   * [1] If the iterator is ‘forAll,’ ‘isUnique,’ or ‘exists’ the type of the
-   * iterator must be Boolean.
-   * 
-   * <pre>
-   *   context IteratorExp
-   *   inv: name = ‘exists’ or name = ‘forAll’ or name = ‘isUnique’
-   *      implies type.oclIsKindOf(PrimitiveType) and type.name = ‘Boolean’
-   * </pre>
-   * 
-   * [2] The result type of the collect operation on a sequence type is a
-   * sequence, the result type of ‘collect’ on any other collection type is a
-   * Bag. The type of the body is always the type of the elements in the return
-   * collection.
-   * 
-   * <pre>
-   *   context IteratorExp
-   *   inv: name = ‘collect’ implies
-   *      if source.type.oclIsKindOf(SequenceType) then
-   *         type = expression.type.collectionType-&gt;select(oclIsTypeOf(SequenceType))-&gt;first()
-   *      else
-   *         type = expression.type.collectionType-&gt;select(oclIsTypeOf(BagType))-&gt;first()
-   *      endif
-   * </pre>
-   * 
-   * [3] The ‘select’ and ‘reject’ iterators have the same type as its source.
-   * 
-   * <pre>
-   *   context IteratorExp
-   *   inv: name = ‘select’ or name = ‘reject’ implies type = source.type
-   * </pre>
-   * 
-   * </p>
-   * 
-   * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.OclExpressionImpl#evaluateType()
-   */
-  @Override
-  protected Type evaluateType() {
-    Type type, sourceType, elementType, bodyType;
+		super();
+	}
 
-    // check for wellformedness of loop expression
-    validateWellformednessRules();
+	/**
+	 * Overridden to determine the type of the <code>IteratorExp</code>
+	 * according to the OCL specification (Section 8.3). Note that the
+	 * specification is incomplete and this implementation adds a few more rules.
+	 * 
+	 * <p>
+	 * [1] If the iterator is ‘forAll,’ ‘isUnique,’ or ‘exists’ the type of the
+	 * iterator must be Boolean.
+	 * 
+	 * <pre>
+	 *   context IteratorExp
+	 *   inv: name = ‘exists’ or name = ‘forAll’ or name = ‘isUnique’
+	 *      implies type.oclIsKindOf(PrimitiveType) and type.name = ‘Boolean’
+	 * </pre>
+	 * 
+	 * [2] The result type of the collect operation on a sequence type is a
+	 * sequence, the result type of ‘collect’ on any other collection type is a
+	 * Bag. The type of the body is always the type of the elements in the return
+	 * collection.
+	 * 
+	 * <pre>
+	 *   context IteratorExp
+	 *   inv: name = ‘collect’ implies
+	 *      if source.type.oclIsKindOf(SequenceType) then
+	 *         type = expression.type.collectionType-&gt;select(oclIsTypeOf(SequenceType))-&gt;first()
+	 *      else
+	 *         type = expression.type.collectionType-&gt;select(oclIsTypeOf(BagType))-&gt;first()
+	 *      endif
+	 * </pre>
+	 * 
+	 * [3] The ‘select’ and ‘reject’ iterators have the same type as its source.
+	 * 
+	 * <pre>
+	 *   context IteratorExp
+	 *   inv: name = ‘select’ or name = ‘reject’ implies type = source.type
+	 * </pre>
+	 * 
+	 * </p>
+	 * 
+	 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.OclExpressionImpl#evaluateType()
+	 */
+	@Override
+	protected Type evaluateType() {
 
-    // determine the types of the source collection, its elements and the body
-    // expression
-    sourceType = source.getType();
-    elementType = ((CollectionType) sourceType).getElementType();
-    bodyType = body.getType();
+		Type type, sourceType, elementType, bodyType;
 
-    // implement rule [1], but additionally check for iterator expression "one"
-    if (name.equals("exists") || name.equals("forAll") || name.equals("isUnique") //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-        || name.equals("one")) { //$NON-NLS-1$
-      type = getValidOclLibrary().getOclBoolean();
-    }
+		// check for wellformedness of loop expression
+		validateWellformednessRules();
 
-    // additional rule missing in the spec
-    else if (name.equals("any")) { //$NON-NLS-1$
-      type = elementType;
-    }
+		// determine the types of the source collection, its elements and the body
+		// expression
+		sourceType = source.getType();
+		elementType = ((CollectionType) sourceType).getElementType();
+		bodyType = body.getType();
 
-    // implement rule [3]
-    else if (name.equals("select") || name.equals("reject")) { //$NON-NLS-1$ //$NON-NLS-2$
-      type = sourceType;
-    }
+		// implement rule [1], but additionally check for iterator expression "one"
+		if (name.equals("exists") || name.equals("forAll") || name.equals("isUnique") //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+				|| name.equals("one")) { //$NON-NLS-1$
+			type = getValidOclLibrary().getOclBoolean();
+		}
 
-    // additional rule missing in the spec
-    else if (name.equals("sortedBy")) { //$NON-NLS-1$
+		// additional rule missing in the spec
+		else if (name.equals("any")) { //$NON-NLS-1$
+			type = elementType;
+		}
 
-      if (sourceType instanceof SetType || sourceType instanceof OrderedSetType) {
-        type = getValidOclLibrary().getOrderedSetType(elementType);
-      }
+		// implement rule [3]
+		else if (name.equals("select") || name.equals("reject")) { //$NON-NLS-1$ //$NON-NLS-2$
+			type = sourceType;
+		}
 
-      else {
-        type = getValidOclLibrary().getSequenceType(elementType);
-      }
-    }
+		// additional rule missing in the spec
+		else if (name.equals("sortedBy")) { //$NON-NLS-1$
 
-    // additional rule missing in the spec
-    else if (name.equals("collectNested")) { //$NON-NLS-1$
+			if (sourceType instanceof SetType || sourceType instanceof OrderedSetType) {
+				type = getValidOclLibrary().getOrderedSetType(elementType);
+			}
 
-      if (sourceType instanceof SequenceType
-          || sourceType instanceof OrderedSetType) {
-        type = getValidOclLibrary().getSequenceType(bodyType);
-      }
+			else {
+				type = getValidOclLibrary().getSequenceType(elementType);
+			}
+		}
 
-      else {
-        type = getValidOclLibrary().getBagType(bodyType);
-      }
-    }
+		// additional rule missing in the spec
+		else if (name.equals("collectNested")) { //$NON-NLS-1$
 
-    // implement rule [2]
-    else if (name.equals("collect")) { //$NON-NLS-1$
-      Type resultElementType;
+			if (sourceType instanceof SequenceType
+					|| sourceType instanceof OrderedSetType) {
+				type = getValidOclLibrary().getSequenceType(bodyType);
+			}
 
-      // flatten the type of the body expression
-      if (bodyType instanceof CollectionType) {
-        resultElementType = ((CollectionType) bodyType).getElementType();
-      }
+			else {
+				type = getValidOclLibrary().getBagType(bodyType);
+			}
+		}
 
-      else {
-        resultElementType = bodyType;
-      }
+		// implement rule [2]
+		else if (name.equals("collect")) { //$NON-NLS-1$
+			Type resultElementType;
 
-      // we enhance rule [2] with a treatment of ordered sets
-      if (sourceType instanceof SequenceType
-          || sourceType instanceof OrderedSetType) {
-        type = getValidOclLibrary().getSequenceType(resultElementType);
-      }
+			// flatten the type of the body expression
+			if (bodyType instanceof CollectionType) {
+				resultElementType = ((CollectionType) bodyType).getElementType();
+			}
 
-      else {
-        type = getValidOclLibrary().getBagType(resultElementType);
-      }
-    }
+			else {
+				resultElementType = bodyType;
+			}
 
-    else {
-      throw new WellformednessException(this,
-          "Unknown iterator expression: '" + name + "'."); //$NON-NLS-1$//$NON-NLS-2$
-    }
+			// we enhance rule [2] with a treatment of ordered sets
+			if (sourceType instanceof SequenceType
+					|| sourceType instanceof OrderedSetType) {
+				type = getValidOclLibrary().getSequenceType(resultElementType);
+			}
 
-    return type;
-  }
+			else {
+				type = getValidOclLibrary().getBagType(resultElementType);
+			}
+		}
 
-  /**
-   * Overridden to additionally check the following wellformedness rule
-   * 
-   * <p>
-   * [4] The type of the body of the select, reject, exists, and forAll must be
-   * boolean.
-   * 
-   * <pre>
-   *   context IteratorExp
-   *   inv: name = ‘exists’ or name = ‘forAll’ or name = ‘select’ or name = ‘reject’
-   *      implies body.type.name = ‘Boolean’
-   * </pre>
-   * 
-   * </p>
-   * 
-   * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.LoopExpImpl#validateWellformednessRules()
-   */
-  @Override
-  protected void validateWellformednessRules() {
-    super.validateWellformednessRules();
+		else {
+			throw new WellformednessException(this,
+					"Unknown iterator expression: '" + name + "'."); //$NON-NLS-1$//$NON-NLS-2$
+		}
 
-    // validate [4], but also check for iterator expressions "any" and "one"
-    if (name.equals("exists") || name.equals("forAll") || name.equals("select") //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-        || name.equals("reject") || name.equals("any") || name.equals("one")) { //$NON-NLS-1$//$NON-NLS-2$ //$NON-NLS-3$
+		return type;
+	}
 
-      if (body.getType() != oclLibrary.getOclBoolean()) {
-        throw new WellformednessException(this, "The body expression of an '" //$NON-NLS-1$
-            + name + "' iterator expression must have the type Boolean."); //$NON-NLS-1$
-      }
-    }
-  }
+	/**
+	 * Overridden to additionally check the following wellformedness rule
+	 * 
+	 * <p>
+	 * [4] The type of the body of the select, reject, exists, and forAll must be
+	 * boolean.
+	 * 
+	 * <pre>
+	 *   context IteratorExp
+	 *   inv: name = ‘exists’ or name = ‘forAll’ or name = ‘select’ or name = ‘reject’
+	 *      implies body.type.name = ‘Boolean’
+	 * </pre>
+	 * 
+	 * </p>
+	 * 
+	 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.LoopExpImpl#validateWellformednessRules()
+	 */
+	@Override
+	protected void validateWellformednessRules() {
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  @Override
-  protected EClass eStaticClass() {
-    return ExpressionsPackageImpl.Literals.ITERATOR_EXP;
-  }
+		super.validateWellformednessRules();
+
+		// validate [4], but also check for iterator expressions "any" and "one"
+		if (name.equals("exists") || name.equals("forAll") || name.equals("select") //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+				|| name.equals("reject") || name.equals("any") || name.equals("one")) { //$NON-NLS-1$//$NON-NLS-2$ //$NON-NLS-3$
+
+			if (body.getType() != oclLibrary.getOclBoolean()) {
+				throw new WellformednessException(this, "The body expression of an '" //$NON-NLS-1$
+						+ name + "' iterator expression must have the type Boolean."); //$NON-NLS-1$
+			}
+		}
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected EClass eStaticClass() {
+
+		return ExpressionsPackageImpl.Literals.ITERATOR_EXP;
+	}
 
 } // IteratorExpImpl

@@ -45,25 +45,28 @@ import tudresden.ocl20.pivot.essentialocl.expressions.LiteralExp;
  *
  * @generated
  */
-public abstract class LiteralExpImpl extends OclExpressionImpl implements LiteralExp {
+public abstract class LiteralExpImpl extends OclExpressionImpl implements
+		LiteralExp {
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  protected LiteralExpImpl() {
-    super();
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected LiteralExpImpl() {
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  protected EClass eStaticClass() {
-    return ExpressionsPackageImpl.Literals.LITERAL_EXP;
-  }
+		super();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected EClass eStaticClass() {
+
+		return ExpressionsPackageImpl.Literals.LITERAL_EXP;
+	}
 
 } //LiteralExpImpl

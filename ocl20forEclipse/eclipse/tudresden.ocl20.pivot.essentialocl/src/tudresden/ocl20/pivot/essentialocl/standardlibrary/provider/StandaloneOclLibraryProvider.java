@@ -15,7 +15,6 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import tudresden.ocl20.pivot.essentialocl.types.OclLibrary;
 import tudresden.ocl20.pivot.essentialocl.types.impl.TypesPackageImpl;
 import tudresden.ocl20.pivot.essentialocl.types.util.TypeResolver;
-import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
 
 /**
  * <p>

@@ -23,7 +23,7 @@ package tudresden.ocl20.pivot.ocl2parser.internal;
 import java.util.ArrayList;
 import java.util.List;
 
-import tudresden.ocl20.pivot.essentialocl.StandardLibraryPlugin;
+import tudresden.ocl20.pivot.essentialocl.EssentialOclPlugin;
 import tudresden.ocl20.pivot.essentialocl.expressions.OclExpression;
 import tudresden.ocl20.pivot.essentialocl.expressions.Variable;
 import tudresden.ocl20.pivot.essentialocl.expressions.factory.EssentialOclFactory;
@@ -448,7 +448,7 @@ public class Environment {
 	 */
 	public OclLibrary getOclLibrary() {
 
-		return StandardLibraryPlugin.getOclLibraryProvider().getOclLibrary();
+		return EssentialOclPlugin.getOclLibraryProvider().getOclLibrary();
 	}
 
 	/**

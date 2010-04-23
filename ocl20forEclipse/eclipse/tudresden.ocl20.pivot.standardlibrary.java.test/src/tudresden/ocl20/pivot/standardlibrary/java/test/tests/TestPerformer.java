@@ -23,7 +23,7 @@ import java.io.File;
 
 import org.eclipse.core.runtime.Platform;
 
-import tudresden.ocl20.pivot.essentialocl.StandardLibraryPlugin;
+import tudresden.ocl20.pivot.essentialocl.EssentialOclPlugin;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.factory.IStandardLibraryFactory;
 import tudresden.ocl20.pivot.essentialocl.types.OclLibrary;
 import tudresden.ocl20.pivot.examples.royalsandloyals.Customer;
@@ -166,7 +166,7 @@ public class TestPerformer {
 	 */
 	public OclLibrary getOclLibrary() {
 
-		return StandardLibraryPlugin.getOclLibraryProvider().getOclLibrary();
+		return EssentialOclPlugin.getOclLibraryProvider().getOclLibrary();
 	}
 
 	/**

@@ -32,6 +32,7 @@
  */
 package tudresden.ocl20.pivot.essentialocl.types;
 
+import org.eclipse.emf.ecore.EObject;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 
 /**
@@ -42,5 +43,5 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
  *
  * @generated
  */
-public interface AnyType extends Type {
+public interface AnyType extends EObject, Type {
 } // AnyType

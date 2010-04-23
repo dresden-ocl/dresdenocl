@@ -35,6 +35,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import tudresden.ocl20.pivot.essentialocl.EssentialOclPlugin;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBoolean;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger;
@@ -42,7 +43,6 @@ import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclReal;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSequence;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSet;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclString;
-import tudresden.ocl20.pivot.essentialocl.types.TypeConstants;
 import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement;
 import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceInteger;
 import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceString;
@@ -96,10 +96,14 @@ public class JavaOclString extends JavaOclLibraryObject implements OclString {
 
 		OclString result = null;
 
-		result = checkInvalid(TypeConstants.STRING, this, aString);
+		result =
+				checkInvalid(EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+						.getOclString(), this, aString);
 
 		if (result == null)
-			result = checkUndefined("concat", TypeConstants.STRING, this, aString);
+			result =
+					checkUndefined("concat", EssentialOclPlugin.getOclLibraryProvider()
+							.getOclLibrary().getOclString(), this, aString);
 
 		if (result == null) {
 			StringBuilder concat = new StringBuilder();
@@ -123,10 +127,14 @@ public class JavaOclString extends JavaOclLibraryObject implements OclString {
 
 		OclInteger result = null;
 
-		result = checkInvalid(TypeConstants.INTEGER, this);
+		result =
+				checkInvalid(EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+						.getOclInteger(), this);
 
 		if (result == null)
-			result = checkUndefined("size", TypeConstants.INTEGER, this);
+			result =
+					checkUndefined("size", EssentialOclPlugin.getOclLibraryProvider()
+							.getOclLibrary().getOclInteger(), this);
 
 		if (result == null) {
 			/* Else compute the result. */
@@ -147,11 +155,15 @@ public class JavaOclString extends JavaOclLibraryObject implements OclString {
 
 		OclString result = null;
 
-		result = checkInvalid(TypeConstants.STRING, this, lower, upper);
+		result =
+				checkInvalid(EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+						.getOclString(), this, lower, upper);
 
 		if (result == null)
 			result =
-					checkUndefined("substring", TypeConstants.STRING, this, lower, upper);
+					checkUndefined("substring", EssentialOclPlugin
+							.getOclLibraryProvider().getOclLibrary().getOclString(), this,
+							lower, upper);
 
 		if (result == null) {
 			/* Indices in OCL are different from Java indices! */
@@ -175,7 +187,8 @@ public class JavaOclString extends JavaOclLibraryObject implements OclString {
 			} catch (IndexOutOfBoundsException e) {
 				result =
 						JavaStandardLibraryFactory.INSTANCE.createOclInvalid(
-								TypeConstants.STRING, e);
+								EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+										.getOclString(), e);
 			}
 		}
 
@@ -191,10 +204,14 @@ public class JavaOclString extends JavaOclLibraryObject implements OclString {
 
 		OclInteger result = null;
 
-		result = checkInvalid(TypeConstants.INTEGER, this);
+		result =
+				checkInvalid(EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+						.getOclInteger(), this);
 
 		if (result == null)
-			result = checkUndefined("toInteger", TypeConstants.INTEGER, this);
+			result =
+					checkUndefined("toInteger", EssentialOclPlugin
+							.getOclLibraryProvider().getOclLibrary().getOclInteger(), this);
 
 		if (result == null) {
 			/* Else compute the result. */
@@ -208,7 +225,8 @@ public class JavaOclString extends JavaOclLibraryObject implements OclString {
 			catch (NumberFormatException e) {
 				result =
 						JavaStandardLibraryFactory.INSTANCE.createOclInvalid(
-								TypeConstants.INTEGER, e);
+								EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+										.getOclInteger(), e);
 			}
 		}
 
@@ -223,10 +241,14 @@ public class JavaOclString extends JavaOclLibraryObject implements OclString {
 
 		OclReal result = null;
 
-		result = checkInvalid(TypeConstants.REAL, this);
+		result =
+				checkInvalid(EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+						.getOclReal(), this);
 
 		if (result == null)
-			result = checkUndefined("toReal", TypeConstants.REAL, this);
+			result =
+					checkUndefined("toReal", EssentialOclPlugin.getOclLibraryProvider()
+							.getOclLibrary().getOclReal(), this);
 
 		if (result == null) {
 			/* Else compute the result. */
@@ -239,7 +261,8 @@ public class JavaOclString extends JavaOclLibraryObject implements OclString {
 			catch (NumberFormatException e) {
 				result =
 						JavaStandardLibraryFactory.INSTANCE.createOclInvalid(
-								TypeConstants.REAL, e);
+								EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+										.getOclReal(), e);
 			}
 		}
 
@@ -287,10 +310,16 @@ public class JavaOclString extends JavaOclLibraryObject implements OclString {
 
 		OclSet<T> result = null;
 
-		result = checkInvalid(TypeConstants.SET(TypeConstants.STRING), this);
+		result =
+				checkInvalid(EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+						.getSetType(
+								EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+										.getOclString()), this);
 
 		if (result == null)
-			result = checkAsSet(TypeConstants.STRING);
+			result =
+					checkAsSet(EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+							.getOclString());
 
 		if (result == null) {
 			Set<IModelInstanceElement> imiSet = new HashSet<IModelInstanceElement>();
@@ -298,7 +327,8 @@ public class JavaOclString extends JavaOclLibraryObject implements OclString {
 
 			result =
 					JavaStandardLibraryFactory.INSTANCE.createOclSet(imiSet,
-							TypeConstants.INTEGER);
+							EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+									.getOclInteger());
 		}
 
 		return result;
@@ -324,10 +354,14 @@ public class JavaOclString extends JavaOclLibraryObject implements OclString {
 
 		OclString result;
 
-		result = checkInvalid(TypeConstants.STRING, this, i);
+		result =
+				checkInvalid(EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+						.getOclString(), this, i);
 
 		if (result == null)
-			result = checkUndefined("at", TypeConstants.STRING, this, i);
+			result =
+					checkUndefined("at", EssentialOclPlugin.getOclLibraryProvider()
+							.getOclLibrary().getOclString(), this, i);
 
 		if (result == null) {
 			int javaIndex = i.getModelInstanceInteger().getLong().intValue() - 1;
@@ -341,7 +375,8 @@ public class JavaOclString extends JavaOclLibraryObject implements OclString {
 			} catch (IndexOutOfBoundsException e) {
 				result =
 						JavaStandardLibraryFactory.INSTANCE.createOclInvalid(
-								TypeConstants.STRING, e);
+								EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+										.getOclString(), e);
 			}
 		}
 
@@ -352,12 +387,17 @@ public class JavaOclString extends JavaOclLibraryObject implements OclString {
 
 		OclSequence<OclString> result;
 
-		result = checkInvalid(TypeConstants.SEQUENCE(TypeConstants.STRING), this);
+		result =
+				checkInvalid(EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+						.getSequenceType(
+								EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+										.getOclString()), this);
 
 		if (result == null)
 			result =
-					checkUndefined("characters", TypeConstants
-							.SEQUENCE(TypeConstants.STRING), this);
+					checkUndefined("characters", EssentialOclPlugin.getOclLibraryProvider()
+.getOclLibrary().getSequenceType(EssentialOclPlugin.getOclLibraryProvider()
+									.getOclLibrary().getOclString()), this);
 
 		if (result == null) {
 			List<OclString> oclCharacters = new ArrayList<OclString>();
@@ -371,7 +411,8 @@ public class JavaOclString extends JavaOclLibraryObject implements OclString {
 
 			result =
 					JavaStandardLibraryFactory.INSTANCE.createOclSequence(oclCharacters,
-							TypeConstants.STRING);
+							EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+									.getOclString());
 		}
 
 		return result;
@@ -381,11 +422,14 @@ public class JavaOclString extends JavaOclLibraryObject implements OclString {
 
 		OclBoolean result;
 
-		result = checkInvalid(TypeConstants.BOOLEAN, this, s);
+		result =
+				checkInvalid(EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+						.getOclBoolean(), this, s);
 
 		if (result == null)
 			result =
-					checkUndefined("equalsIgnoreCase", TypeConstants.BOOLEAN, this, s);
+					checkUndefined("equalsIgnoreCase", EssentialOclPlugin
+							.getOclLibraryProvider().getOclLibrary().getOclBoolean(), this, s);
 
 		if (result == null)
 			result =
@@ -400,10 +444,14 @@ public class JavaOclString extends JavaOclLibraryObject implements OclString {
 
 		OclInteger result;
 
-		result = checkInvalid(TypeConstants.INTEGER, this, s);
+		result =
+				checkInvalid(EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+						.getOclInteger(), this, s);
 
 		if (result == null)
-			result = checkUndefined("indexOf", TypeConstants.INTEGER, this, s);
+			result =
+					checkUndefined("indexOf", EssentialOclPlugin.getOclLibraryProvider()
+							.getOclLibrary().getOclInteger(), this, s);
 
 		if (result == null) {
 			String thisString = this.getModelInstanceString().getString();
@@ -449,10 +497,14 @@ public class JavaOclString extends JavaOclLibraryObject implements OclString {
 
 		OclBoolean result;
 
-		result = checkInvalid(TypeConstants.BOOLEAN, this);
+		result =
+				checkInvalid(EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+						.getOclBoolean(), this);
 
 		if (result == null)
-			result = checkUndefined("toBoolean", TypeConstants.BOOLEAN, this);
+			result =
+					checkUndefined("toBoolean", EssentialOclPlugin
+							.getOclLibraryProvider().getOclLibrary().getOclBoolean(), this);
 
 		if (result == null) {
 			if (this.getModelInstanceString().getString().equals("true"))
@@ -468,10 +520,14 @@ public class JavaOclString extends JavaOclLibraryObject implements OclString {
 
 		OclString result;
 
-		result = checkInvalid(TypeConstants.STRING, this);
+		result =
+				checkInvalid(EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+						.getOclString(), this);
 
 		if (result == null)
-			result = checkUndefined("toLowerCase", TypeConstants.STRING, this);
+			result =
+					checkUndefined("toLowerCase", EssentialOclPlugin
+							.getOclLibraryProvider().getOclLibrary().getOclString(), this);
 
 		if (result == null) {
 			result =
@@ -486,10 +542,14 @@ public class JavaOclString extends JavaOclLibraryObject implements OclString {
 
 		OclString result;
 
-		result = checkInvalid(TypeConstants.STRING, this);
+		result =
+				checkInvalid(EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+						.getOclString(), this);
 
 		if (result == null)
-			result = checkUndefined("toUpperCase", TypeConstants.STRING, this);
+			result =
+					checkUndefined("toUpperCase", EssentialOclPlugin
+							.getOclLibraryProvider().getOclLibrary().getOclString(), this);
 
 		if (result == null) {
 			result =

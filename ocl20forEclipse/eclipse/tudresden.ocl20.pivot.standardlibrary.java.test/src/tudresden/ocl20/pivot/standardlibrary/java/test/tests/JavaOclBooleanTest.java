@@ -6,10 +6,10 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 
+import tudresden.ocl20.pivot.essentialocl.EssentialOclPlugin;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBoolean;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclString;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.factory.IStandardLibraryFactory;
-import tudresden.ocl20.pivot.essentialocl.types.TypeConstants;
 
 /**
  * 
@@ -32,10 +32,12 @@ public class JavaOclBooleanTest {
 	private final OclString stringFalse =
 			myStandardLibraryFactory.createOclString("false");
 	private final OclBoolean undefined =
-			myStandardLibraryFactory.createOclUndefined(TypeConstants.BOOLEAN,
+			myStandardLibraryFactory.createOclUndefined(EssentialOclPlugin
+					.getOclLibraryProvider().getOclLibrary().getOclBoolean(),
 					"undefined boolean");
 	private final OclBoolean invalid =
-			myStandardLibraryFactory.createOclInvalid(TypeConstants.BOOLEAN,
+			myStandardLibraryFactory.createOclInvalid(EssentialOclPlugin
+					.getOclLibraryProvider().getOclLibrary().getOclBoolean(),
 					new RuntimeException("invalid boolean"));
 
 	@Before
@@ -50,17 +52,17 @@ public class JavaOclBooleanTest {
 		assertFalse(TRUE.and(FALSE).isTrue());
 		assertFalse(FALSE.and(TRUE).isTrue());
 		assertFalse(FALSE.and(FALSE).isTrue());
-		
+
 		assertTrue(TRUE.and(undefined).oclIsInvalid().isTrue());
 		assertTrue(TRUE.and(invalid).oclIsInvalid().isTrue());
 		assertFalse(FALSE.and(undefined).isTrue());
 		assertFalse(FALSE.and(invalid).isTrue());
-		
+
 		assertFalse(undefined.and(FALSE).isTrue());
 		assertTrue(undefined.and(TRUE).oclIsInvalid().isTrue());
 		assertTrue(undefined.and(undefined).oclIsInvalid().isTrue());
 		assertTrue(undefined.and(invalid).oclIsInvalid().isTrue());
-		
+
 		assertFalse(invalid.and(FALSE).isTrue());
 		assertTrue(invalid.and(TRUE).oclIsInvalid().isTrue());
 		assertTrue(invalid.and(undefined).oclIsInvalid().isTrue());
@@ -89,23 +91,22 @@ public class JavaOclBooleanTest {
 		assertTrue(FALSE.implies(TRUE).isTrue());
 		assertTrue(FALSE.implies(FALSE).isTrue());
 		assertFalse(TRUE.implies(FALSE).isTrue());
-		
+
 		assertTrue(TRUE.implies(undefined).oclIsInvalid().isTrue());
 		assertTrue(TRUE.implies(invalid).oclIsInvalid().isTrue());
 		assertTrue(FALSE.implies(undefined).isTrue());
 		assertTrue(FALSE.implies(invalid).isTrue());
-		
+
 		assertTrue(undefined.implies(FALSE).oclIsInvalid().isTrue());
 		assertTrue(undefined.implies(TRUE).isTrue());
 		assertTrue(undefined.implies(undefined).oclIsInvalid().isTrue());
 		assertTrue(undefined.implies(invalid).oclIsInvalid().isTrue());
-		
+
 		assertTrue(invalid.implies(FALSE).oclIsInvalid().isTrue());
 		assertTrue(invalid.implies(TRUE).isTrue());
 		assertTrue(invalid.implies(undefined).oclIsInvalid().isTrue());
 		assertTrue(invalid.implies(invalid).oclIsInvalid().isTrue());
-		
-		
+
 	}
 
 	@Test
@@ -130,12 +131,12 @@ public class JavaOclBooleanTest {
 		assertTrue(TRUE.or(invalid).isTrue());
 		assertTrue(FALSE.or(undefined).oclIsInvalid().isTrue());
 		assertTrue(FALSE.or(invalid).oclIsInvalid().isTrue());
-		
+
 		assertTrue(undefined.or(FALSE).oclIsInvalid().isTrue());
 		assertTrue(undefined.or(TRUE).isTrue());
 		assertTrue(undefined.or(undefined).oclIsInvalid().isTrue());
 		assertTrue(undefined.or(invalid).oclIsInvalid().isTrue());
-		
+
 		assertTrue(invalid.or(TRUE).isTrue());
 		assertTrue(invalid.or(FALSE).oclIsInvalid().isTrue());
 		assertTrue(invalid.or(undefined).oclIsInvalid().isTrue());

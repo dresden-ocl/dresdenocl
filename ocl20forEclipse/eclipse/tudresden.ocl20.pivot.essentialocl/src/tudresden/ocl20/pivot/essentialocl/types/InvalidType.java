@@ -32,6 +32,7 @@
  */
 package tudresden.ocl20.pivot.essentialocl.types;
 
+import org.eclipse.emf.ecore.EObject;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 
 /**
@@ -48,31 +49,31 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
  *
  * @generated
  */
-public interface InvalidType extends Type {
+public interface InvalidType extends EObject, Type {
 
-  /**
-   * Returns the value of the '<em><b>Ocl Library</b></em>' container reference.
-   * It is bidirectional and its opposite is '{@link tudresden.ocl20.pivot.essentialocl.types.OclLibrary#getOclInvalid <em>Ocl Invalid</em>}'.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Ocl Library</em>' container reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Ocl Library</em>' container reference.
-   * @see #setOclLibrary(OclLibrary)
-   * @see tudresden.ocl20.pivot.essentialocl.types.OclLibrary#getOclInvalid
-   * @generated
-   */
-  OclLibrary getOclLibrary();
+	/**
+	 * Returns the value of the '<em><b>Ocl Library</b></em>' container reference.
+	 * It is bidirectional and its opposite is '{@link tudresden.ocl20.pivot.essentialocl.types.OclLibrary#getOclInvalid <em>Ocl Invalid</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Ocl Library</em>' container reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Ocl Library</em>' container reference.
+	 * @see #setOclLibrary(OclLibrary)
+	 * @see tudresden.ocl20.pivot.essentialocl.types.OclLibrary#getOclInvalid
+	 * @generated
+	 */
+	OclLibrary getOclLibrary();
 
-  /**
-   * Sets the value of the '{@link tudresden.ocl20.pivot.essentialocl.types.InvalidType#getOclLibrary <em>Ocl Library</em>}' container reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Ocl Library</em>' container reference.
-   * @see #getOclLibrary()
-   * @generated
-   */
-  void setOclLibrary(OclLibrary value);
+	/**
+	 * Sets the value of the '{@link tudresden.ocl20.pivot.essentialocl.types.InvalidType#getOclLibrary <em>Ocl Library</em>}' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Ocl Library</em>' container reference.
+	 * @see #getOclLibrary()
+	 * @generated
+	 */
+	void setOclLibrary(OclLibrary value);
 } // InvalidType

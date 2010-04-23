@@ -27,7 +27,7 @@ import java.util.List;
 
 import org.junit.Test;
 
-import tudresden.ocl20.pivot.essentialocl.StandardLibraryPlugin;
+import tudresden.ocl20.pivot.essentialocl.EssentialOclPlugin;
 import tudresden.ocl20.pivot.essentialocl.types.util.TypeResolver;
 import tudresden.ocl20.pivot.model.IModel;
 import tudresden.ocl20.pivot.model.ModelAccessException;
@@ -63,7 +63,7 @@ public class TypeResolverTest {
 				.getUML2Model("resources/models/model01.uml");
 
 		TypeResolver typeResolver;
-		typeResolver = new TypeResolver(StandardLibraryPlugin
+		typeResolver = new TypeResolver(EssentialOclPlugin
 				.getOclLibraryProvider().getOclLibrary());
 
 		assertNotNull(typeResolver);
@@ -102,7 +102,7 @@ public class TypeResolverTest {
 				.getUML2Model("resources/models/model01.uml");
 
 		TypeResolver typeResolver;
-		typeResolver = new TypeResolver(StandardLibraryPlugin
+		typeResolver = new TypeResolver(EssentialOclPlugin
 				.getOclLibraryProvider().getOclLibrary());
 
 		assertNotNull(typeResolver);
@@ -139,7 +139,7 @@ public class TypeResolverTest {
 				.getUML2Model("resources/models/model01.uml");
 
 		TypeResolver typeResolver;
-		typeResolver = new TypeResolver(StandardLibraryPlugin
+		typeResolver = new TypeResolver(EssentialOclPlugin
 				.getOclLibraryProvider().getOclLibrary());
 
 		assertNotNull(typeResolver);
@@ -176,7 +176,7 @@ public class TypeResolverTest {
 				.getUML2Model("resources/models/model01.uml");
 
 		TypeResolver typeResolver;
-		typeResolver = new TypeResolver(StandardLibraryPlugin
+		typeResolver = new TypeResolver(EssentialOclPlugin
 				.getOclLibraryProvider().getOclLibrary());
 
 		assertNotNull(typeResolver);
@@ -207,7 +207,7 @@ public class TypeResolverTest {
 				.getUML2Model("resources/models/model01.uml");
 
 		TypeResolver typeResolver;
-		typeResolver = new TypeResolver(StandardLibraryPlugin
+		typeResolver = new TypeResolver(EssentialOclPlugin
 				.getOclLibraryProvider().getOclLibrary());
 
 		assertNotNull(typeResolver);
@@ -234,7 +234,7 @@ public class TypeResolverTest {
 				.getUML2Model("resources/models/model01.uml");
 
 		TypeResolver typeResolver;
-		typeResolver = new TypeResolver(StandardLibraryPlugin
+		typeResolver = new TypeResolver(EssentialOclPlugin
 				.getOclLibraryProvider().getOclLibrary());
 
 		assertNotNull(typeResolver);

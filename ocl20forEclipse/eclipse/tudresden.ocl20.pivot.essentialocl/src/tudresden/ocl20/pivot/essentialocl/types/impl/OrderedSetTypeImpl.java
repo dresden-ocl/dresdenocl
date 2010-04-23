@@ -50,68 +50,76 @@ import tudresden.ocl20.pivot.pivotmodel.TypeParameter;
  *
  * @generated
  */
-public class OrderedSetTypeImpl extends CollectionTypeImpl implements OrderedSetType {
+public class OrderedSetTypeImpl extends CollectionTypeImpl implements
+		OrderedSetType {
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * @generated
-   */
-  protected OrderedSetTypeImpl() {
-    super();
-  }
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected OrderedSetTypeImpl() {
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  protected EClass eStaticClass() {
-    return TypesPackageImpl.Literals.ORDERED_SET_TYPE;
-  }
+		super();
+	}
 
-  /**
-   * Overridden to check whether the other {@link CollectionType collection type} also is an
-   * <code>OrderedSetType</code>. In this case, return an <code>OrderedSetType</code> with the
-   * given element type, otherwise default to <code>CollectionType</code>.
-   * 
-   * @see tudresden.ocl20.pivot.essentialocl.types.impl.CollectionTypeImpl#getCommonCollectionType(tudresden.ocl20.pivot.essentialocl.types.CollectionType,
-   *      tudresden.ocl20.pivot.pivotmodel.Type)
-   */
-  @Override
-  protected CollectionType getCommonCollectionType(CollectionType otherCollectionType,
-      Type commonElementType) {
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected EClass eStaticClass() {
 
-    // check invariant
-    if (getOclLibrary() == null) {
-      throw new IllegalStateException("The reference to the OCL library was null for " + this + "."); //$NON-NLS-1$ //$NON-NLS-2$
-    }
+		return TypesPackageImpl.Literals.ORDERED_SET_TYPE;
+	}
 
-    if (otherCollectionType instanceof OrderedSetType) {
-      return getOclLibrary().getOrderedSetType(commonElementType);
-    }
+	/**
+	 * Overridden to check whether the other {@link CollectionType collection type} also is an
+	 * <code>OrderedSetType</code>. In this case, return an <code>OrderedSetType</code> with the
+	 * given element type, otherwise default to <code>CollectionType</code>.
+	 * 
+	 * @see tudresden.ocl20.pivot.essentialocl.types.impl.CollectionTypeImpl#getCommonCollectionType(tudresden.ocl20.pivot.essentialocl.types.CollectionType,
+	 *      tudresden.ocl20.pivot.pivotmodel.Type)
+	 */
+	@Override
+	protected CollectionType getCommonCollectionType(
+			CollectionType otherCollectionType, Type commonElementType) {
 
-    return getOclLibrary().getCollectionType(commonElementType);
-  }
+		// check invariant
+		if (getOclLibrary() == null) {
+			throw new IllegalStateException(
+					"The reference to the OCL library was null for " + this + "."); //$NON-NLS-1$ //$NON-NLS-2$
+		}
 
-  /*
-   * (non-Javadoc)
-   * 
-   * @see tudresden.ocl20.pivot.essentialocl.types.impl.CollectionTypeImpl#bindTypeParameter(java.util.List,
-   *      java.util.List)
-   */
-  @Override
-  public OrderedSetType bindTypeParameter(List<TypeParameter> parameters, List<? extends Type> types) {
-    return (OrderedSetType) super.bindTypeParameter(parameters,types);
-  }
+		if (otherCollectionType instanceof OrderedSetType) {
+			return getOclLibrary().getOrderedSetType(commonElementType);
+		}
 
-  /*
-   * (non-Javadoc)
-   * 
-   * @see tudresden.ocl20.pivot.essentialocl.types.impl.OrderedSetType#clone()
-   */
-  @Override
-  public OrderedSetType clone() {
-    return (OrderedSetType) initialize(TypesFactory.INSTANCE.createOrderedSetType());
-  }
+		return getOclLibrary().getCollectionType(commonElementType);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see tudresden.ocl20.pivot.essentialocl.types.impl.CollectionTypeImpl#bindTypeParameter(java.util.List,
+	 *      java.util.List)
+	 */
+	@Override
+	public OrderedSetType bindTypeParameter(List<TypeParameter> parameters,
+			List<? extends Type> types) {
+
+		return (OrderedSetType) super.bindTypeParameter(parameters, types);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see tudresden.ocl20.pivot.essentialocl.types.impl.OrderedSetType#clone()
+	 */
+	@Override
+	public OrderedSetType clone() {
+
+		return (OrderedSetType) initialize(TypesFactory.INSTANCE
+				.createOrderedSetType());
+	}
 
 } // OrderedSetTypeImpl

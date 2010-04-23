@@ -18,7 +18,7 @@ with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
 package tudresden.ocl20.pivot.modelinstancetype.types.base;
 
-import tudresden.ocl20.pivot.essentialocl.types.TypeConstants;
+import tudresden.ocl20.pivot.essentialocl.EssentialOclPlugin;
 import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceReal;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 
@@ -35,7 +35,6 @@ public abstract class AbstractModelInstanceReal extends
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @seetudresden.ocl20.pivot.modelbus.modelinstance.types.impl.
 	 * AbstractModelInstanceElement#getName()
 	 */
@@ -76,7 +75,6 @@ public abstract class AbstractModelInstanceReal extends
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @seetudresden.ocl20.pivot.modelbus.modelinstance.types.base.
 	 * AbstractModelInstanceElement#equals(java.lang.Object)
 	 */
@@ -95,8 +93,7 @@ public abstract class AbstractModelInstanceReal extends
 			other = (AbstractModelInstanceReal) object;
 
 			/*
-			 * This should not happen. But anyway, null == null results in
-			 * false.
+			 * This should not happen. But anyway, null == null results in false.
 			 */
 			if (this.isUndefined() || other.isUndefined()) {
 				result = false;
@@ -116,7 +113,6 @@ public abstract class AbstractModelInstanceReal extends
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @seetudresden.ocl20.pivot.modelbus.modelinstance.types.base.
 	 * AbstractModelInstanceElement#hashCode()
 	 */
@@ -138,19 +134,18 @@ public abstract class AbstractModelInstanceReal extends
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement#isKindOf
 	 * (tudresden.ocl20.pivot.pivotmodel.Type)
 	 */
 	public boolean isKindOf(Type type) {
 
-		return TypeConstants.REAL.conformsTo(type);
+		return EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+				.getOclReal().conformsTo(type);
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement
 	 * #isUndefined()
 	 */

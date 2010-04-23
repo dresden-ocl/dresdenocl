@@ -37,6 +37,7 @@ import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
 
+import tudresden.ocl20.pivot.essentialocl.types.*;
 import tudresden.ocl20.pivot.essentialocl.types.AnyType;
 import tudresden.ocl20.pivot.essentialocl.types.BagType;
 import tudresden.ocl20.pivot.essentialocl.types.CollectionType;
@@ -64,367 +65,402 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
  */
 public class TypesAdapterFactory extends AdapterFactoryImpl {
 
-  /**
-   * The cached model package.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  protected static TypesPackageImpl modelPackage;
+	/**
+	 * The cached model package.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected static TypesPackageImpl modelPackage;
 
-  /**
-   * Creates an instance of the adapter factory.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public TypesAdapterFactory() {
-    if (modelPackage == null) {
-      modelPackage = TypesPackageImpl.eINSTANCE;
-    }
-  }
+	/**
+	 * Creates an instance of the adapter factory.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public TypesAdapterFactory() {
 
-  /**
-   * Returns whether this factory is applicable for the type of the object.
-   * <!-- begin-user-doc -->
-   * This implementation returns <code>true</code> if the object is either the model's package or is an instance object of the model.
-   * <!-- end-user-doc -->
-   * @return whether this factory is applicable for the type of the object.
-   * @generated
-   */
-  @Override
-  public boolean isFactoryForType(Object object) {
-    if (object == modelPackage) {
-      return true;
-    }
-    if (object instanceof EObject) {
-      return ((EObject) object).eClass().getEPackage() == modelPackage;
-    }
-    return false;
-  }
+		if (modelPackage == null) {
+			modelPackage = TypesPackageImpl.eINSTANCE;
+		}
+	}
 
-  /**
-   * The switch the delegates to the <code>createXXX</code> methods.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  protected TypesSwitch<Adapter> modelSwitch = new TypesSwitch<Adapter>() {
+	/**
+	 * Returns whether this factory is applicable for the type of the object.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns <code>true</code> if the object is either the model's package or is an instance object of the model.
+	 * <!-- end-user-doc -->
+	 * @return whether this factory is applicable for the type of the object.
+	 * @generated
+	 */
+	@Override
+	public boolean isFactoryForType(Object object) {
 
-    @Override
-    public Adapter caseBagType(BagType object) {
-      return createBagTypeAdapter();
-    }
+		if (object == modelPackage) {
+			return true;
+		}
+		if (object instanceof EObject) {
+			return ((EObject) object).eClass().getEPackage() == modelPackage;
+		}
+		return false;
+	}
 
-    @Override
-    public Adapter caseTupleType(TupleType object) {
-      return createTupleTypeAdapter();
-    }
+	/**
+	 * The switch that delegates to the <code>createXXX</code> methods.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected TypesSwitch<Adapter> modelSwitch = new TypesSwitch<Adapter>() {
 
-    @Override
-    public Adapter caseCollectionType(CollectionType object) {
-      return createCollectionTypeAdapter();
-    }
+		@Override
+		public Adapter caseBagType(BagType object) {
 
-    @Override
-    public Adapter caseInvalidType(InvalidType object) {
-      return createInvalidTypeAdapter();
-    }
+			return createBagTypeAdapter();
+		}
 
-    @Override
-    public Adapter caseOrderedSetType(OrderedSetType object) {
-      return createOrderedSetTypeAdapter();
-    }
+		@Override
+		public Adapter caseTupleType(TupleType object) {
 
-    @Override
-    public Adapter caseSequenceType(SequenceType object) {
-      return createSequenceTypeAdapter();
-    }
+			return createTupleTypeAdapter();
+		}
 
-    @Override
-    public Adapter caseSetType(SetType object) {
-      return createSetTypeAdapter();
-    }
+		@Override
+		public Adapter caseCollectionType(CollectionType object) {
 
-    @Override
-    public Adapter caseVoidType(VoidType object) {
-      return createVoidTypeAdapter();
-    }
+			return createCollectionTypeAdapter();
+		}
 
-    @Override
-    public Adapter caseTypeType(TypeType object) {
-      return createTypeTypeAdapter();
-    }
+		@Override
+		public Adapter caseInvalidType(InvalidType object) {
 
-    @Override
-    public Adapter caseOclLibrary(OclLibrary object) {
-      return createOclLibraryAdapter();
-    }
+			return createInvalidTypeAdapter();
+		}
 
-    @Override
-    public Adapter caseAnyType(AnyType object) {
-      return createAnyTypeAdapter();
-    }
+		@Override
+		public Adapter caseOrderedSetType(OrderedSetType object) {
 
-    @Override
-    public Adapter caseNamedElement(NamedElement object) {
-      return createNamedElementAdapter();
-    }
+			return createOrderedSetTypeAdapter();
+		}
 
-    @Override
-    public Adapter caseConstrainableElement(ConstrainableElement object) {
-      return createConstrainableElementAdapter();
-    }
+		@Override
+		public Adapter caseSequenceType(SequenceType object) {
 
-    @Override
-    public Adapter caseGenericElement(GenericElement object) {
-      return createGenericElementAdapter();
-    }
+			return createSequenceTypeAdapter();
+		}
 
-    @Override
-    public Adapter caseType(Type object) {
-      return createTypeAdapter();
-    }
+		@Override
+		public Adapter caseSetType(SetType object) {
 
-    @Override
-    public Adapter defaultCase(EObject object) {
-      return createEObjectAdapter();
-    }
-  };
+			return createSetTypeAdapter();
+		}
 
-  /**
-   * Creates an adapter for the <code>target</code>.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param target the object to adapt.
-   * @return the adapter for the <code>target</code>.
-   * @generated
-   */
-  @Override
-  public Adapter createAdapter(Notifier target) {
-    return modelSwitch.doSwitch((EObject) target);
-  }
+		@Override
+		public Adapter caseVoidType(VoidType object) {
 
-  /**
-   * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.essentialocl.types.BagType <em>Bag Type</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see tudresden.ocl20.pivot.essentialocl.types.BagType
-   * @generated
-   */
-  public Adapter createBagTypeAdapter() {
-    return null;
-  }
+			return createVoidTypeAdapter();
+		}
 
-  /**
-   * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.essentialocl.types.TupleType <em>Tuple Type</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see tudresden.ocl20.pivot.essentialocl.types.TupleType
-   * @generated
-   */
-  public Adapter createTupleTypeAdapter() {
-    return null;
-  }
+		@Override
+		public Adapter caseTypeType(TypeType object) {
 
-  /**
-   * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.essentialocl.types.CollectionType <em>Collection Type</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see tudresden.ocl20.pivot.essentialocl.types.CollectionType
-   * @generated
-   */
-  public Adapter createCollectionTypeAdapter() {
-    return null;
-  }
+			return createTypeTypeAdapter();
+		}
 
-  /**
-   * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.essentialocl.types.InvalidType <em>Invalid Type</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see tudresden.ocl20.pivot.essentialocl.types.InvalidType
-   * @generated
-   */
-  public Adapter createInvalidTypeAdapter() {
-    return null;
-  }
+		@Override
+		public Adapter caseOclLibrary(OclLibrary object) {
 
-  /**
-   * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.essentialocl.types.OrderedSetType <em>Ordered Set Type</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see tudresden.ocl20.pivot.essentialocl.types.OrderedSetType
-   * @generated
-   */
-  public Adapter createOrderedSetTypeAdapter() {
-    return null;
-  }
+			return createOclLibraryAdapter();
+		}
 
-  /**
-   * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.essentialocl.types.SequenceType <em>Sequence Type</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see tudresden.ocl20.pivot.essentialocl.types.SequenceType
-   * @generated
-   */
-  public Adapter createSequenceTypeAdapter() {
-    return null;
-  }
+		@Override
+		public Adapter caseAnyType(AnyType object) {
 
-  /**
-   * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.essentialocl.types.SetType <em>Set Type</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see tudresden.ocl20.pivot.essentialocl.types.SetType
-   * @generated
-   */
-  public Adapter createSetTypeAdapter() {
-    return null;
-  }
+			return createAnyTypeAdapter();
+		}
 
-  /**
-   * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.essentialocl.types.VoidType <em>Void Type</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see tudresden.ocl20.pivot.essentialocl.types.VoidType
-   * @generated
-   */
-  public Adapter createVoidTypeAdapter() {
-    return null;
-  }
+		@Override
+		public Adapter caseNamedElement(NamedElement object) {
 
-  /**
-   * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.essentialocl.types.TypeType <em>Type Type</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see tudresden.ocl20.pivot.essentialocl.types.TypeType
-   * @generated
-   */
-  public Adapter createTypeTypeAdapter() {
-    return null;
-  }
+			return createNamedElementAdapter();
+		}
 
-  /**
-   * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.essentialocl.types.OclLibrary <em>Ocl Library</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see tudresden.ocl20.pivot.essentialocl.types.OclLibrary
-   * @generated
-   */
-  public Adapter createOclLibraryAdapter() {
-    return null;
-  }
+		@Override
+		public Adapter caseConstrainableElement(ConstrainableElement object) {
 
-  /**
-   * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.essentialocl.types.AnyType <em>Any Type</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see tudresden.ocl20.pivot.essentialocl.types.AnyType
-   * @generated
-   */
-  public Adapter createAnyTypeAdapter() {
-    return null;
-  }
+			return createConstrainableElementAdapter();
+		}
 
-  /**
-   * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.pivotmodel.NamedElement <em>Named Element</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see tudresden.ocl20.pivot.pivotmodel.NamedElement
-   * @generated
-   */
-  public Adapter createNamedElementAdapter() {
-    return null;
-  }
+		@Override
+		public Adapter caseGenericElement(GenericElement object) {
 
-  /**
-   * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.pivotmodel.ConstrainableElement <em>Constrainable Element</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see tudresden.ocl20.pivot.pivotmodel.ConstrainableElement
-   * @generated
-   */
-  public Adapter createConstrainableElementAdapter() {
-    return null;
-  }
+			return createGenericElementAdapter();
+		}
 
-  /**
-   * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.pivotmodel.GenericElement <em>Generic Element</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see tudresden.ocl20.pivot.pivotmodel.GenericElement
-   * @generated
-   */
-  public Adapter createGenericElementAdapter() {
-    return null;
-  }
+		@Override
+		public Adapter caseType(Type object) {
 
-  /**
-   * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.pivotmodel.Type <em>Type</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see tudresden.ocl20.pivot.pivotmodel.Type
-   * @generated
-   */
-  public Adapter createTypeAdapter() {
-    return null;
-  }
+			return createTypeAdapter();
+		}
 
-  /**
-   * Creates a new adapter for the default case.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @generated
-   */
-  public Adapter createEObjectAdapter() {
-    return null;
-  }
+		@Override
+		public Adapter defaultCase(EObject object) {
+
+			return createEObjectAdapter();
+		}
+	};
+
+	/**
+	 * Creates an adapter for the <code>target</code>.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param target the object to adapt.
+	 * @return the adapter for the <code>target</code>.
+	 * @generated
+	 */
+	@Override
+	public Adapter createAdapter(Notifier target) {
+
+		return modelSwitch.doSwitch((EObject) target);
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.essentialocl.types.BagType <em>Bag Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see tudresden.ocl20.pivot.essentialocl.types.BagType
+	 * @generated
+	 */
+	public Adapter createBagTypeAdapter() {
+
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.essentialocl.types.TupleType <em>Tuple Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see tudresden.ocl20.pivot.essentialocl.types.TupleType
+	 * @generated
+	 */
+	public Adapter createTupleTypeAdapter() {
+
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.essentialocl.types.CollectionType <em>Collection Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see tudresden.ocl20.pivot.essentialocl.types.CollectionType
+	 * @generated
+	 */
+	public Adapter createCollectionTypeAdapter() {
+
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.essentialocl.types.InvalidType <em>Invalid Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see tudresden.ocl20.pivot.essentialocl.types.InvalidType
+	 * @generated
+	 */
+	public Adapter createInvalidTypeAdapter() {
+
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.essentialocl.types.OrderedSetType <em>Ordered Set Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see tudresden.ocl20.pivot.essentialocl.types.OrderedSetType
+	 * @generated
+	 */
+	public Adapter createOrderedSetTypeAdapter() {
+
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.essentialocl.types.SequenceType <em>Sequence Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see tudresden.ocl20.pivot.essentialocl.types.SequenceType
+	 * @generated
+	 */
+	public Adapter createSequenceTypeAdapter() {
+
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.essentialocl.types.SetType <em>Set Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see tudresden.ocl20.pivot.essentialocl.types.SetType
+	 * @generated
+	 */
+	public Adapter createSetTypeAdapter() {
+
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.essentialocl.types.VoidType <em>Void Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see tudresden.ocl20.pivot.essentialocl.types.VoidType
+	 * @generated
+	 */
+	public Adapter createVoidTypeAdapter() {
+
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.essentialocl.types.TypeType <em>Type Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see tudresden.ocl20.pivot.essentialocl.types.TypeType
+	 * @generated
+	 */
+	public Adapter createTypeTypeAdapter() {
+
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.essentialocl.types.OclLibrary <em>Ocl Library</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see tudresden.ocl20.pivot.essentialocl.types.OclLibrary
+	 * @generated
+	 */
+	public Adapter createOclLibraryAdapter() {
+
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.essentialocl.types.AnyType <em>Any Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see tudresden.ocl20.pivot.essentialocl.types.AnyType
+	 * @generated
+	 */
+	public Adapter createAnyTypeAdapter() {
+
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.pivotmodel.NamedElement <em>Named Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see tudresden.ocl20.pivot.pivotmodel.NamedElement
+	 * @generated
+	 */
+	public Adapter createNamedElementAdapter() {
+
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.pivotmodel.ConstrainableElement <em>Constrainable Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see tudresden.ocl20.pivot.pivotmodel.ConstrainableElement
+	 * @generated
+	 */
+	public Adapter createConstrainableElementAdapter() {
+
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.pivotmodel.GenericElement <em>Generic Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see tudresden.ocl20.pivot.pivotmodel.GenericElement
+	 * @generated
+	 */
+	public Adapter createGenericElementAdapter() {
+
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.pivotmodel.Type <em>Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see tudresden.ocl20.pivot.pivotmodel.Type
+	 * @generated
+	 */
+	public Adapter createTypeAdapter() {
+
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for the default case.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @generated
+	 */
+	public Adapter createEObjectAdapter() {
+
+		return null;
+	}
 
 } //TypesAdapterFactory

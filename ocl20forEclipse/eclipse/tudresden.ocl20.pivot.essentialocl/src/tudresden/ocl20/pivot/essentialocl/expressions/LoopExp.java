@@ -51,42 +51,42 @@ import java.util.List;
  */
 public interface LoopExp extends CallExp {
 
-  /**
-   * Returns the value of the '<em><b>Body</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Body</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Body</em>' containment reference.
-   * @see #setBody(OclExpression)
-   * @generated
-   */
-  OclExpression getBody();
+	/**
+	 * Returns the value of the '<em><b>Body</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Body</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Body</em>' containment reference.
+	 * @see #setBody(OclExpression)
+	 * @generated
+	 */
+	OclExpression getBody();
 
-  /**
-   * Sets the value of the '{@link tudresden.ocl20.pivot.essentialocl.expressions.LoopExp#getBody <em>Body</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Body</em>' containment reference.
-   * @see #getBody()
-   * @generated
-   */
-  void setBody(OclExpression value);
+	/**
+	 * Sets the value of the '{@link tudresden.ocl20.pivot.essentialocl.expressions.LoopExp#getBody <em>Body</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Body</em>' containment reference.
+	 * @see #getBody()
+	 * @generated
+	 */
+	void setBody(OclExpression value);
 
-  /**
-   * Returns the value of the '<em><b>Iterator</b></em>' containment reference list.
-   * The list contents are of type {@link tudresden.ocl20.pivot.essentialocl.expressions.Variable}.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Iterator</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Iterator</em>' containment reference list.
-   * @generated
-   */
-  List<Variable> getIterator();
+	/**
+	 * Returns the value of the '<em><b>Iterator</b></em>' containment reference list.
+	 * The list contents are of type {@link tudresden.ocl20.pivot.essentialocl.expressions.Variable}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Iterator</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Iterator</em>' containment reference list.
+	 * @generated
+	 */
+	List<Variable> getIterator();
 
 } // LoopExp

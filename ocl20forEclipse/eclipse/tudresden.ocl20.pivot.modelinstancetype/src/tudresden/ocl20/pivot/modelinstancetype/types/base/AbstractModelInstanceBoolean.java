@@ -19,7 +19,7 @@ with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
 package tudresden.ocl20.pivot.modelinstancetype.types.base;
 
-import tudresden.ocl20.pivot.essentialocl.types.TypeConstants;
+import tudresden.ocl20.pivot.essentialocl.EssentialOclPlugin;
 import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceBoolean;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 
@@ -146,7 +146,7 @@ public abstract class AbstractModelInstanceBoolean extends
 	 */
 	public boolean isKindOf(Type type) {
 
-		return TypeConstants.BOOLEAN.conformsTo(type);
+		return EssentialOclPlugin.getOclLibraryProvider().getOclLibrary().getOclBoolean().conformsTo(type);
 	}
 
 	/*

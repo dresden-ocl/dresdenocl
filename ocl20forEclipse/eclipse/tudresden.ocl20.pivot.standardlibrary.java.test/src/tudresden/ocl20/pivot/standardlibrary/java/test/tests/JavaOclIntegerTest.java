@@ -5,10 +5,10 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
+import tudresden.ocl20.pivot.essentialocl.EssentialOclPlugin;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclReal;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.factory.IStandardLibraryFactory;
-import tudresden.ocl20.pivot.essentialocl.types.TypeConstants;
 
 // FIXME Michael: Add undefined and invalid tests
 /**
@@ -42,11 +42,13 @@ public class JavaOclIntegerTest {
 
 	private final OclInteger undefined =
 			(OclInteger) myStandardLibraryFactory.createOclUndefined(
-					TypeConstants.INTEGER, "undefined integer");
+					EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+							.getOclInteger(), "undefined integer");
 
 	private final OclInteger invalid =
-			(OclInteger) myStandardLibraryFactory.createOclInvalid(
-					TypeConstants.INTEGER, new RuntimeException("invalid integer"));
+			(OclInteger) myStandardLibraryFactory.createOclInvalid(EssentialOclPlugin
+					.getOclLibraryProvider().getOclLibrary().getOclInteger(),
+					new RuntimeException("invalid integer"));
 
 	@Test
 	public void testAdd() {

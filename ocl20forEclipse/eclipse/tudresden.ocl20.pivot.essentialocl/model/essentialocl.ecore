@@ -76,6 +76,9 @@
       <eOperations name="getOrderedSetType" eType="#//types/OrderedSetType">
         <eParameters name="elementType" eType="ecore:EClass ../../tudresden.ocl20.pivot.pivotmodel/model/pivotmodel.ecore#//Type"/>
       </eOperations>
+      <eOperations name="getTypeType" lowerBound="1" eType="#//types/TypeType">
+        <eParameters name="representedType" lowerBound="1" eType="ecore:EClass ../../tudresden.ocl20.pivot.pivotmodel/model/pivotmodel.ecore#//Type"/>
+      </eOperations>
       <eStructuralFeatures xsi:type="ecore:EReference" name="oclBoolean" lowerBound="1"
           eType="ecore:EClass ../../tudresden.ocl20.pivot.pivotmodel/model/pivotmodel.ecore#//PrimitiveType"
           containment="true" resolveProxies="false"/>

@@ -2,11 +2,11 @@ package tudresden.ocl20.pivot.standardlibrary.java.internal.library;
 
 import java.util.Iterator;
 
+import tudresden.ocl20.pivot.essentialocl.EssentialOclPlugin;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBoolean;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclIterator;
-import tudresden.ocl20.pivot.essentialocl.types.TypeConstants;
 import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 import tudresden.ocl20.pivot.standardlibrary.java.factory.JavaStandardLibraryFactory;
@@ -50,7 +50,7 @@ public class JavaOclIterator<T extends OclAny> implements OclIterator<T> {
 
 		if (invalidReason != null)
 			return JavaStandardLibraryFactory.INSTANCE.createOclInvalid(
-					TypeConstants.BOOLEAN, invalidReason);
+					EssentialOclPlugin.getOclLibraryProvider().getOclLibrary().getOclBoolean(), invalidReason);
 		return JavaStandardLibraryFactory.INSTANCE.createOclBoolean(iterator
 				.hasNext());
 	}

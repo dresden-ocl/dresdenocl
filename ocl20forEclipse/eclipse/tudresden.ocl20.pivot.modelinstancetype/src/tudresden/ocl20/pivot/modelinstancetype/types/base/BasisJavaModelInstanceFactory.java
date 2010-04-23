@@ -34,9 +34,9 @@ import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.UniqueEList;
 import org.eclipse.osgi.util.NLS;
 
+import tudresden.ocl20.pivot.essentialocl.EssentialOclPlugin;
 import tudresden.ocl20.pivot.essentialocl.expressions.CollectionKind;
 import tudresden.ocl20.pivot.essentialocl.types.CollectionType;
-import tudresden.ocl20.pivot.essentialocl.types.TypeConstants;
 import tudresden.ocl20.pivot.modelinstancetype.ModelInstanceTypePlugin;
 import tudresden.ocl20.pivot.modelinstancetype.exception.TypeNotFoundInModelException;
 import tudresden.ocl20.pivot.modelinstancetype.internal.ModelInstanceMessages;
@@ -81,13 +81,13 @@ public class BasisJavaModelInstanceFactory implements IModelInstanceFactory {
 
 	/*
 	 * (non-Javadoc)
-	 * @see
-	 * tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceFactory
+	 * @see tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceFactory
 	 * #createModelInstanceCollection(java.util.Collection, boolean, boolean)
 	 */
 	// FIXME: generic type of collection should be given as parameter
 	public <T extends IModelInstanceElement> IModelInstanceCollection<T> createModelInstanceCollection(
-			Collection<T> collection, boolean isOrdered, boolean isUnique) {
+			Collection<T> collection, boolean isOrdered, boolean isUnique,
+			Type genericType) {
 
 		/* Probably debug the entry of this method. */
 		if (LOGGER.isDebugEnabled()) {
@@ -108,20 +108,26 @@ public class BasisJavaModelInstanceFactory implements IModelInstanceFactory {
 		if (isOrdered) {
 			if (isUnique)
 				result =
-						new JavaModelInstanceCollection<T>(collection,
-								TypeConstants.ORDERED_SET);
+						new JavaModelInstanceCollection<T>(collection, EssentialOclPlugin
+								.getOclLibraryProvider().getOclLibrary().getOrderedSetType(
+										genericType));
 			else
 				result =
-						new JavaModelInstanceCollection<T>(collection,
-								TypeConstants.SEQUENCE);
+						new JavaModelInstanceCollection<T>(collection, EssentialOclPlugin
+								.getOclLibraryProvider().getOclLibrary().getSequenceType(
+										genericType));
 		}
 		else {
 			if (isUnique)
 				result =
-						new JavaModelInstanceCollection<T>(collection, TypeConstants.SET);
+						new JavaModelInstanceCollection<T>(collection, EssentialOclPlugin
+								.getOclLibraryProvider().getOclLibrary()
+								.getSetType(genericType));
 			else
 				result =
-						new JavaModelInstanceCollection<T>(collection, TypeConstants.BAG);
+						new JavaModelInstanceCollection<T>(collection, EssentialOclPlugin
+								.getOclLibraryProvider().getOclLibrary()
+								.getBagType(genericType));
 		}
 
 		/* Probably debug the exit of this method. */
@@ -141,8 +147,7 @@ public class BasisJavaModelInstanceFactory implements IModelInstanceFactory {
 
 	/*
 	 * (non-Javadoc)
-	 * @see
-	 * tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceFactory
+	 * @see tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceFactory
 	 * #createIModelInstanceElement(java.lang.Object)
 	 */
 	public IModelInstanceElement createModelInstanceElement(Object adapted)
@@ -165,15 +170,21 @@ public class BasisJavaModelInstanceFactory implements IModelInstanceFactory {
 		/* Check if the object is an array. */
 		if (adapted.getClass().isArray()) {
 
-			result = createModelInstanceCollection(this.convertArray(adapted));
+			Collection<IModelInstanceElement> elements = this.convertArray(adapted);
+			// FIXME!!!: compute the real type; for now, OclAny()
+			result =
+					createModelInstanceCollection(elements, EssentialOclPlugin
+							.getOclLibraryProvider().getOclLibrary().getOclAny());
 		}
 
+	// FIXME!!!: compute the real type; for now, OclAny()
 		/* Else check if the object is a collection. */
 		else if (adapted instanceof Collection<?>) {
 
 			result =
 					createModelInstanceCollection(this
-							.convertCollection((Collection<?>) adapted));
+							.convertCollection((Collection<?>) adapted), EssentialOclPlugin
+							.getOclLibraryProvider().getOclLibrary().getOclAny());
 		}
 
 		/* Else check if the object is a boolean. */
@@ -229,8 +240,7 @@ public class BasisJavaModelInstanceFactory implements IModelInstanceFactory {
 
 	/*
 	 * (non-Javadoc)
-	 * @see
-	 * tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceFactory
+	 * @see tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceFactory
 	 * #createModelInstanceElement(java.lang.Object,
 	 * tudresden.ocl20.pivot.pivotmodel.Type)
 	 */
@@ -286,7 +296,8 @@ public class BasisJavaModelInstanceFactory implements IModelInstanceFactory {
 
 						else {
 							String msg;
-							msg = ModelInstanceMessages.IModelInstanceElement_CannotAdaptToType;
+							msg =
+									ModelInstanceMessages.IModelInstanceElement_CannotAdaptToType;
 							msg = NLS.bind(msg, adapted, type);
 
 							throw new IllegalArgumentException(msg);
@@ -320,7 +331,8 @@ public class BasisJavaModelInstanceFactory implements IModelInstanceFactory {
 
 						catch (NumberFormatException e) {
 							String msg;
-							msg = ModelInstanceMessages.IModelInstanceElement_CannotAdaptToType;
+							msg =
+									ModelInstanceMessages.IModelInstanceElement_CannotAdaptToType;
 							msg = NLS.bind(msg, adapted, type);
 
 							throw new IllegalArgumentException(msg, e);
@@ -354,7 +366,8 @@ public class BasisJavaModelInstanceFactory implements IModelInstanceFactory {
 
 						catch (NumberFormatException e) {
 							String msg;
-							msg = ModelInstanceMessages.IModelInstanceElement_CannotAdaptToType;
+							msg =
+									ModelInstanceMessages.IModelInstanceElement_CannotAdaptToType;
 							msg = NLS.bind(msg, adapted, type);
 
 							throw new IllegalArgumentException(msg, e);
@@ -494,8 +507,7 @@ public class BasisJavaModelInstanceFactory implements IModelInstanceFactory {
 
 	/*
 	 * (non-Javadoc)
-	 * @see
-	 * tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceFactory
+	 * @see tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceFactory
 	 * #createModelInstanceTuple(java.util.List, java.util.List,
 	 * tudresden.ocl20.pivot.pivotmodel.Type)
 	 */
@@ -562,9 +574,9 @@ public class BasisJavaModelInstanceFactory implements IModelInstanceFactory {
 	 * @return The created {@link IModelInstanceCollection}.
 	 */
 	public static <T extends IModelInstanceElement> IModelInstanceCollection<T> createModelInstanceCollection(
-			Collection<T> adapted) {
+			Collection<T> adapted, Type genericType) {
 
-		return new JavaModelInstanceCollection<T>(adapted);
+		return new JavaModelInstanceCollection<T>(adapted, genericType);
 	}
 
 	/**

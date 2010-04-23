@@ -33,11 +33,11 @@ package tudresden.ocl20.pivot.standardlibrary.java.internal.library;
 import java.util.HashSet;
 import java.util.Set;
 
+import tudresden.ocl20.pivot.essentialocl.EssentialOclPlugin;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBoolean;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSet;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclString;
-import tudresden.ocl20.pivot.essentialocl.types.TypeConstants;
 import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceBoolean;
 import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement;
 import tudresden.ocl20.pivot.modelinstancetype.types.base.BasisJavaModelInstanceFactory;
@@ -158,10 +158,14 @@ public class JavaOclBoolean extends JavaOclLibraryObject implements OclBoolean {
 			result = FALSE;
 
 		else {
-			result = checkInvalid(TypeConstants.BOOLEAN, this, aBoolean);
+			result =
+					checkInvalid(EssentialOclPlugin.getOclLibraryProvider()
+							.getOclLibrary().getOclBoolean(), this, aBoolean);
 
 			if (result == null)
-				result = checkUndefined("and", TypeConstants.BOOLEAN, this, aBoolean);
+				result =
+						checkUndefined("and", EssentialOclPlugin.getOclLibraryProvider()
+								.getOclLibrary().getOclBoolean(), this, aBoolean);
 
 			if (result == null) {
 				result = getInstance(this.isTrue() && aBoolean.isTrue());
@@ -222,10 +226,15 @@ public class JavaOclBoolean extends JavaOclLibraryObject implements OclBoolean {
 			result = TRUE;
 
 		else {
-			result = checkInvalid(TypeConstants.BOOLEAN, this, that);
+			result =
+					checkInvalid(EssentialOclPlugin.getOclLibraryProvider()
+							.getOclLibrary().getOclBoolean(), this, that);
 
 			if (result == null) {
-				result = checkUndefined("implies", TypeConstants.BOOLEAN, this, that);
+				result =
+						checkUndefined("implies", EssentialOclPlugin
+								.getOclLibraryProvider().getOclLibrary().getOclBoolean(), this,
+								that);
 
 				if (result == null) {
 					if (this.isTrue() && !that.isTrue())
@@ -264,10 +273,14 @@ public class JavaOclBoolean extends JavaOclLibraryObject implements OclBoolean {
 
 		OclBoolean result = null;
 
-		result = checkInvalid(TypeConstants.BOOLEAN, this);
+		result =
+				checkInvalid(EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+						.getOclBoolean(), this);
 
 		if (result == null)
-			result = checkUndefined("not", TypeConstants.BOOLEAN, this);
+			result =
+					checkUndefined("not", EssentialOclPlugin.getOclLibraryProvider()
+							.getOclLibrary().getOclBoolean(), this);
 
 		if (result == null) {
 
@@ -303,10 +316,14 @@ public class JavaOclBoolean extends JavaOclLibraryObject implements OclBoolean {
 
 		else {
 
-			result = checkInvalid(TypeConstants.BOOLEAN, this, that);
+			result =
+					checkInvalid(EssentialOclPlugin.getOclLibraryProvider()
+							.getOclLibrary().getOclBoolean(), this, that);
 
 			if (result == null) {
-				result = checkUndefined("or", TypeConstants.BOOLEAN, this, that);
+				result =
+						checkUndefined("or", EssentialOclPlugin.getOclLibraryProvider()
+								.getOclLibrary().getOclBoolean(), this, that);
 
 				if (result == null)
 					result = getInstance(this.isTrue() || that.isTrue());
@@ -326,10 +343,14 @@ public class JavaOclBoolean extends JavaOclLibraryObject implements OclBoolean {
 
 		OclBoolean result;
 
-		result = checkInvalid(TypeConstants.BOOLEAN, this, that);
+		result =
+				checkInvalid(EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+						.getOclBoolean(), this, that);
 
 		if (result == null)
-			result = checkUndefined("xor", TypeConstants.BOOLEAN, this, that);
+			result =
+					checkUndefined("xor", EssentialOclPlugin.getOclLibraryProvider()
+							.getOclLibrary().getOclBoolean(), this, that);
 
 		if (result == null)
 			result = this.isNotEqualTo(that);
@@ -382,10 +403,16 @@ public class JavaOclBoolean extends JavaOclLibraryObject implements OclBoolean {
 
 		OclSet<T> result = null;
 
-		result = checkInvalid(TypeConstants.SET(TypeConstants.BOOLEAN), this);
+		result =
+				checkInvalid(EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+						.getSetType(
+								EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+										.getOclBoolean()), this);
 
 		if (result == null)
-			result = checkAsSet(TypeConstants.BOOLEAN);
+			result =
+					checkAsSet(EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+							.getOclBoolean());
 
 		if (result == null) {
 
@@ -393,7 +420,8 @@ public class JavaOclBoolean extends JavaOclLibraryObject implements OclBoolean {
 			imiSet.add(getModelInstanceBoolean());
 			result =
 					JavaStandardLibraryFactory.INSTANCE.createOclSet(imiSet,
-							TypeConstants.BOOLEAN);
+							EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+									.getOclBoolean());
 		}
 
 		return result;
@@ -428,10 +456,14 @@ public class JavaOclBoolean extends JavaOclLibraryObject implements OclBoolean {
 
 		OclString result;
 
-		result = checkInvalid(TypeConstants.STRING, this);
+		result =
+				checkInvalid(EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+						.getOclString(), this);
 
 		if (result == null)
-			result = checkUndefined("toString", TypeConstants.STRING, this);
+			result =
+					checkUndefined("toString", EssentialOclPlugin.getOclLibraryProvider()
+							.getOclLibrary().getOclString(), this);
 
 		if (result == null) {
 			if (isTrue())

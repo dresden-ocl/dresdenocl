@@ -33,6 +33,7 @@ package tudresden.ocl20.pivot.standardlibrary.java.internal.library;
 import java.util.HashSet;
 import java.util.Set;
 
+import tudresden.ocl20.pivot.essentialocl.EssentialOclPlugin;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBoolean;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSet;
@@ -40,7 +41,6 @@ import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclString;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclTuple;
 import tudresden.ocl20.pivot.essentialocl.types.AnyType;
 import tudresden.ocl20.pivot.essentialocl.types.TupleType;
-import tudresden.ocl20.pivot.essentialocl.types.TypeConstants;
 import tudresden.ocl20.pivot.essentialocl.types.TypesFactory;
 import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement;
 import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceString;
@@ -160,7 +160,9 @@ public class JavaOclTuple extends JavaOclLibraryObject implements OclTuple {
 		OclSet<T> result;
 		TupleType tupleType = TypesFactory.INSTANCE.createTupleType();
 
-		result = checkInvalid(TypeConstants.SET(tupleType), this);
+		result =
+				checkInvalid(EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+						.getSetType(tupleType), this);
 
 		if (result == null)
 			result = checkAsSet(tupleType);

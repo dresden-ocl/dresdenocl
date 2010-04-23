@@ -1,0 +1,548 @@
+package root
+
+/*
+context essentialocl::types::AnyType
+
+inv AnyTypeNoGenericSuperType	: self.genericSuperType->isEmpty()
+inv AnyTypeCorrectName			: self.name = 'OclAny'
+inv AnyTypeHasNoSuperType		: self.superType->isEmpty()
+inv AnyTypeHasNoProperties		: self.ownedProperty->isEmpty()
+inv AnyTypeHasNoTypeParameters	: self.ownedTypeParameter->isEmpty()
+
+def: oclSL: essentialocl::types::OclLibrary =
+								  essentialocl::types::OclLibrary.allInstances()->asOrderedSet()->first()
+inv AnyTypeHasOpEquals			: self.ownedOperation->exists(o |
+									o.name = '='
+									and o.inputParameter->size() = 1
+									and if o.inputParameter->first().type.oclIsUndefined()
+										then o.inputParameter->first().genericType.oclAsType(pivotmodel::ComplexGenericType).unboundType = self
+										else o.inputParameter->first().type = self
+										endif
+									and o.multiple = false
+									and o.type = self.oclSL.oclBoolean
+								  )
+
+inv AnyTypeHasOpNotEquals		: self.ownedOperation->exists(o |
+									o.name = '<>'
+									and o.inputParameter->size() = 1
+									and if o.inputParameter->first().type.oclIsUndefined()
+										then o.inputParameter->first().genericType.oclAsType(pivotmodel::ComplexGenericType).unboundType = self
+										else o.inputParameter->first().type = self
+										endif
+									and o.multiple = false
+									and o.type = self.oclSL.oclBoolean
+								  )
+
+inv AnyTypeHasOpOclIsNew		: self.ownedOperation->exists(o |
+									o.name = 'oclIsNew'
+									and o.inputParameter->size() = 0
+									and o.multiple = false
+									and o.type = self.oclSL.oclBoolean
+								  )
+
+inv AnyTypeHasOpOclIsUndefined	: self.ownedOperation->exists(o | 
+									o.name = 'oclIsUndefined'
+									and o.inputParameter->size() = 0
+									and o.multiple = false
+									and o.type = self.oclSL.oclBoolean
+								  )
+
+inv AnyTypeHasOpOclIsInvalid	: self.ownedOperation->exists(o |
+									o.name = 'oclIsUndefined'
+									and o.inputParameter->size() = 0
+									and o.multiple = false
+									and o.type = self.oclSL.oclBoolean
+								  )
+								  
+inv AnyTypeHasOpOclAsType		: self.ownedOperation->exists(o | 
+									o.name = 'oclAsType'
+									and o.inputParameter->size() = 1
+									and o.inputParameter->first().genericType.oclAsType(pivotmodel::ComplexGenericType).unboundType = self.oclSL.oclType
+									and o.inputParameter->first().genericType.oclAsType(pivotmodel::ComplexGenericType).typeArgument->first().name = o.genericType.oclAsType(pivotmodel::ParameterGenericType).typeParameter.name
+								  )
+
+
+inv AnyTypeHasOpOclIsTypeOf		: self.ownedOperation->exists(o |
+									o.name = 'oclIsTypeOf'
+									and o.inputParameter->size() = 1
+									and o.inputParameter->first().genericType.oclAsType(pivotmodel::ComplexGenericType).unboundType = self.oclSL.oclType
+									and o.type = self.oclSL.oclBoolean
+								  )
+								  
+inv AnyTypeHasOpOclIsKindOf		: self.ownedOperation->exists(o | 
+									o.name = 'oclIsKindOf'
+									and o.inputParameter->size() = 1
+									and o.inputParameter->first().genericType.oclAsType(pivotmodel::ComplexGenericType).unboundType = self.oclSL.oclType
+									and o.type = self.oclSL.oclBoolean
+								  )
+								  
+-- not supported: inv AnyTypeHasOpOclIsInState	: self.ownedOperation->exists(o | o.name = 'oclIsInState')
+
+inv AnyTypeHasOpOclType			: self.ownedOperation->exists(o |
+									o.name = 'oclType'
+									and o.inputParameter->size() = 0
+									and o.genericType.oclAsType(pivotmodel::ComplexGenericType).unboundType = self.oclSL.oclType
+								  )
+
+
+context pivotmodel::PrimitiveType
+
+inv allPrimitiveTypes			: self.name = 'Boolean' or
+								  self.name = 'String' or
+								  self.name = 'Integer' or
+								  self.name = 'Real'
+	
+
+-- *** Real ***
+inv realAddOperation			: (self.kind = PrimitiveTypeKind::Real
+								  	and self.ownedOperation->exists(o |
+								  		(o.name = '+' or o.name = 'add')
+								  		and o.inputParameter->size() = 1
+								  		and o.inputParameter->first().type = self
+								  		and o.type = self
+								  	)
+								  )
+								  or self.kind <> PrimitiveTypeKind::Real
+
+inv realSubtractOperation		: (self.kind = PrimitiveTypeKind::Real
+								  	and self.ownedOperation->exists(o |
+								  		(o.name = '-' or o.name = 'subtract')
+								  		and o.inputParameter->size() = 1
+								  		and o.inputParameter->first().type = self
+								  		and o.type = self
+								  	)
+								  )
+								  or self.kind <> PrimitiveTypeKind::Real
+								  
+inv realMultiplyOperation		: (self.kind = PrimitiveTypeKind::Real
+								  	and self.ownedOperation->exists(o |
+								  		(o.name = '*' or o.name = 'multiply')
+								  		and o.inputParameter->size() = 1
+								  		and o.inputParameter->first().type = self
+								  		and o.type = self
+								  	)
+								  )
+								  or self.kind <> PrimitiveTypeKind::Real
+								  
+inv realDivideOperation			: (self.kind = PrimitiveTypeKind::Real
+								  	and self.ownedOperation->exists(o |
+								  		(o.name = '/' or o.name = 'divide')
+								  		and o.inputParameter->size() = 1
+								  		and o.inputParameter->first().type = self
+								  		and o.type = self
+								  	)
+								  )
+								  or self.kind <> PrimitiveTypeKind::Real
+								  
+inv realNegativeOperation		: (self.kind = PrimitiveTypeKind::Real
+									and self.ownedOperation->exists(o |
+										(o.name = '-' or o.name = 'negative')
+										and o.inputParameter->size() = 0
+										and o.type = self
+									)
+								  )
+								  or self.kind <> PrimitiveTypeKind::Real
+
+inv realAbsOperation			: (self.kind = PrimitiveTypeKind::Real
+									and self.ownedOperation->exists(o |
+										o.name = 'abs'
+										and o.inputParameter->size() = 0
+										and o.type = self
+									)
+								  )
+								  or self.kind <> PrimitiveTypeKind::Real
+								  
+inv realFloorOperation			: (self.kind = PrimitiveTypeKind::Real
+									and self.ownedOperation->exists(o |
+										o.name = 'floor'
+										and o.inputParameter->size() = 0
+										and o.type.oclAsType(PrimitiveType).kind = PrimitiveTypeKind::Integer
+									)
+								  )
+								  or self.kind <> PrimitiveTypeKind::Real
+								  
+inv realRoundOperation			: (self.kind = PrimitiveTypeKind::Real
+									and self.ownedOperation->exists(o |
+										o.name = 'round'
+										and o.inputParameter->size() = 0
+										and o.type.oclAsType(PrimitiveType).kind = PrimitiveTypeKind::Integer
+									)
+								  )
+								  or self.kind <> PrimitiveTypeKind::Real
+								  
+inv realMaxOperation			: (self.kind = PrimitiveTypeKind::Real
+								  	and self.ownedOperation->exists(o |
+								  		o.name = 'max'
+								  		and o.inputParameter->size() = 1
+								  		and o.inputParameter->first().type = self
+								  		and o.type = self
+								  	)
+								  )
+								  or self.kind <> PrimitiveTypeKind::Real
+
+inv realMinOperation			: (self.kind = PrimitiveTypeKind::Real
+								  	and self.ownedOperation->exists(o |
+								  		o.name = 'min'
+								  		and o.inputParameter->size() = 1
+								  		and o.inputParameter->first().type = self
+								  		and o.type = self
+								  	)
+								  )
+								  or self.kind <> PrimitiveTypeKind::Real
+								  
+inv realIsLessThanOperation		: (self.kind = PrimitiveTypeKind::Real
+								  	and self.ownedOperation->exists(o |
+								  		(o.name = '<' or o.name = 'isLessThan')
+								  		and o.inputParameter->size() = 1
+								  		and o.inputParameter->first().type = self
+								  		and o.type.oclAsType(PrimitiveType).kind = PrimitiveTypeKind::Boolean
+								  	)
+								  )
+								  or self.kind <> PrimitiveTypeKind::Real
+								  
+inv realIsGreaterThanOperation	: (self.kind = PrimitiveTypeKind::Real
+								  	and self.ownedOperation->exists(o |
+								  		(o.name = '>' or o.name = 'isGreaterThan')
+								  		and o.inputParameter->size() = 1
+								  		and o.inputParameter->first().type = self
+								  		and o.type.oclAsType(PrimitiveType).kind = PrimitiveTypeKind::Boolean
+								  	)
+								  )
+								  or self.kind <> PrimitiveTypeKind::Real
+								  
+inv realIsLessEqualOperation	: (self.kind = PrimitiveTypeKind::Real
+								  	and self.ownedOperation->exists(o |
+								  		(o.name = '<=' or o.name = 'isLessEqual')
+								  		and o.inputParameter->size() = 1
+								  		and o.inputParameter->first().type = self
+								  		and o.type.oclAsType(PrimitiveType).kind = PrimitiveTypeKind::Boolean
+								  	)
+								  )
+								  or self.kind <> PrimitiveTypeKind::Real
+								  
+inv realIsGreaterEqualOperation	: (self.kind = PrimitiveTypeKind::Real
+								  	and self.ownedOperation->exists(o |
+								  		(o.name = '>=' or o.name = 'isGreaterEqual')
+								  		and o.inputParameter->size() = 1
+								  		and o.inputParameter->first().type = self
+								  		and o.type.oclAsType(PrimitiveType).kind = PrimitiveTypeKind::Boolean
+								  	)
+								  )
+								  or self.kind <> PrimitiveTypeKind::Real
+
+-- *** Integer ***
+inv intNegativeOperation		: (self.kind = PrimitiveTypeKind::Integer
+									and self.ownedOperation->exists(o |
+										(o.name = '-' or o.name = 'negative')
+										and o.inputParameter->size() = 0
+										and o.type = self
+									)
+								  )
+								  or self.kind <> PrimitiveTypeKind::Integer
+
+inv intAddOperation				: (self.kind = PrimitiveTypeKind::Integer
+								  	and self.ownedOperation->exists(o |
+								  		(o.name = '+' or o.name = 'add')
+								  		and o.inputParameter->size() = 1
+								  		and o.inputParameter->first().type = self
+								  		and o.type = self
+								  	)
+								  )
+								  or self.kind <> PrimitiveTypeKind::Integer
+								  
+inv intSubtractOperation		: (self.kind = PrimitiveTypeKind::Integer
+								  	and self.ownedOperation->exists(o |
+								  		(o.name = '-' or o.name = 'subtract')
+								  		and o.inputParameter->size() = 1
+								  		and o.inputParameter->first().type = self
+								  		and o.type = self
+								  	)
+								  )
+								  or self.kind <> PrimitiveTypeKind::Integer
+								  
+inv intMultiplyOperation		: (self.kind = PrimitiveTypeKind::Integer
+								  	and self.ownedOperation->exists(o |
+								  		(o.name = '*' or o.name = 'multiply')
+								  		and o.inputParameter->size() = 1
+								  		and o.inputParameter->first().type = self
+								  		and o.type = self
+								  	)
+								  )
+								  or self.kind <> PrimitiveTypeKind::Integer
+								  
+inv intDivideOperation			: (self.kind = PrimitiveTypeKind::Integer
+								  	and self.ownedOperation->exists(o |
+								  		(o.name = '/' or o.name = 'divide')
+								  		and o.inputParameter->size() = 1
+								  		and o.inputParameter->first().type = self
+								  		and o.type.oclAsType(PrimitiveType).kind = PrimitiveTypeKind::Real
+								  	)
+								  )
+								  or self.kind <> PrimitiveTypeKind::Integer
+
+inv intAbsOperation				: (self.kind = PrimitiveTypeKind::Integer
+									and self.ownedOperation->exists(o |
+										o.name = 'abs'
+										and o.inputParameter->size() = 0
+										and o.type = self
+									)
+								  )
+								  or self.kind <> PrimitiveTypeKind::Integer
+								  
+inv intDivOperation				: (self.kind = PrimitiveTypeKind::Integer
+								  	and self.ownedOperation->exists(o |
+								  		o.name = 'div'
+								  		and o.inputParameter->size() = 1
+								  		and o.inputParameter->first().type = self
+								  		and o.type = self
+								  	)
+								  )
+								  or self.kind <> PrimitiveTypeKind::Integer
+								  
+inv intModOperation				: (self.kind = PrimitiveTypeKind::Integer
+								  	and self.ownedOperation->exists(o |
+								  		o.name = 'mod'
+								  		and o.inputParameter->size() = 1
+								  		and o.inputParameter->first().type = self
+								  		and o.type = self
+								  	)
+								  )
+								  or self.kind <> PrimitiveTypeKind::Integer
+								  
+inv intMaxOperation				: (self.kind = PrimitiveTypeKind::Integer
+								  	and self.ownedOperation->exists(o |
+								  		o.name = 'max'
+								  		and o.inputParameter->size() = 1
+								  		and o.inputParameter->first().type = self
+								  		and o.type = self
+								  	)
+								  )
+								  or self.kind <> PrimitiveTypeKind::Integer
+
+inv realMinOperation			: (self.kind = PrimitiveTypeKind::Integer
+								  	and self.ownedOperation->exists(o |
+								  		o.name = 'min'
+								  		and o.inputParameter->size() = 1
+								  		and o.inputParameter->first().type = self
+								  		and o.type = self
+								  	)
+								  )
+								  or self.kind <> PrimitiveTypeKind::Integer
+		  
+-- *** String ***
+inv stringPlusOperation			: (self.kind = PrimitiveTypeKind::String
+									and self.ownedOperation->exists(o |
+										(o.name = '+' or o.name = 'add')
+										and o.inputParameter->size() = 1
+										and o.inputParameter->first().type = self
+										and o.type = self
+									)
+								  )
+								  or self.kind <> PrimitiveTypeKind::String
+								  
+inv stringConcatOperation		: (self.kind = PrimitiveTypeKind::String
+									and self.ownedOperation->exists(o |
+										o.name = 'concat'
+										and o.inputParameter->size() = 1
+										and o.inputParameter->first().type = self
+										and o.type = self
+									)
+								  )
+								  or self.kind <> PrimitiveTypeKind::String
+								  
+inv stringSizeOperation			: (self.kind = PrimitiveTypeKind::String
+									and self.ownedOperation->exists(o |
+										o.name = 'size'
+										and o.inputParameter->size() = 0
+										and o.type.oclAsType(PrimitiveType).kind = PrimitiveTypeKind::Integer
+									)
+								)
+								or self.kind <> PrimitiveTypeKind::String
+
+inv stringSubstringOperation	: (self.kind = PrimitiveTypeKind::String
+									and self.ownedOperation->exists(o |
+										o.name = 'substring'
+										and o.inputParameter->size() = 2
+										and o.inputParameter->at(1).type.oclAsType(PrimitiveType).kind = PrimitiveTypeKind::Integer
+										and o.inputParameter->at(2).type.oclAsType(PrimitiveType).kind = PrimitiveTypeKind::Integer
+										and o.type = self
+									)
+								  )
+								  or self.kind <> PrimitiveTypeKind::String
+								  
+inv stringtoIntegerOperation	: (self.kind = PrimitiveTypeKind::String
+									and self.ownedOperation->exists(o |
+										o.name = 'toInteger'
+										and o.inputParameter->size() = 0
+										and o.type.oclAsType(PrimitiveType).kind = PrimitiveTypeKind::Integer
+									)
+								)
+								or self.kind <> PrimitiveTypeKind::String								
+
+inv stringtoRealOperation		: (self.kind = PrimitiveTypeKind::String
+									and self.ownedOperation->exists(o |
+										o.name = 'toReal'
+										and o.inputParameter->size() = 0
+										and o.type.oclAsType(PrimitiveType).kind = PrimitiveTypeKind::Real
+									)
+								)
+								or self.kind <> PrimitiveTypeKind::String
+								
+inv stringtoBooleanOperation	: (self.kind = PrimitiveTypeKind::String
+									and self.ownedOperation->exists(o |
+										o.name = 'toBoolean'
+										and o.inputParameter->size() = 0
+										and o.type.oclAsType(PrimitiveType).kind = PrimitiveTypeKind::Boolean
+									)
+								)
+								or self.kind <> PrimitiveTypeKind::String
+								
+inv stringToUpperCaseOperation	: (self.kind = PrimitiveTypeKind::String
+									and self.ownedOperation->exists(o |
+										o.name = 'toUpperCase'
+										and o.inputParameter->size() = 0
+										and o.type = self
+									)
+								)
+								or self.kind <> PrimitiveTypeKind::String
+								
+inv stringToLowerCaseOperation	: (self.kind = PrimitiveTypeKind::String
+									and self.ownedOperation->exists(o |
+										o.name = 'toLowerCase'
+										and o.inputParameter->size() = 0
+										and o.type = self
+									)
+								)
+								or self.kind <> PrimitiveTypeKind::String
+								
+
+inv stringIndexOfOperation		: (self.kind = PrimitiveTypeKind::String
+									and self.ownedOperation->exists(o |
+										o.name = 'indexOf'
+										and o.inputParameter->size() = 1
+										and o.inputParameter->first().type = self
+										and o.type.oclAsType(PrimitiveType).kind = PrimitiveTypeKind::Integer
+									)
+								  )
+								  or self.kind <> PrimitiveTypeKind::String
+								  
+
+inv stringEqualsIgnoreCaseOp	: (self.kind = PrimitiveTypeKind::String
+									and self.ownedOperation->exists(o |
+										o.name = 'equalsIgnoreCase'
+										and o.inputParameter->size() = 1
+										and o.inputParameter->first().type = self
+										and o.type.oclAsType(PrimitiveType).kind = PrimitiveTypeKind::Boolean -- standard states, this should be an Integer???
+									)
+								  )
+								  or self.kind <> PrimitiveTypeKind::String
+
+inv stringAtOperation			: (self.kind = PrimitiveTypeKind::String
+									and self.ownedOperation->exists(o |
+										o.name = 'at'
+										and o.inputParameter->size() = 1
+										and o.inputParameter->first().type.oclAsType(PrimitiveType).kind = PrimitiveTypeKind::Integer
+										and o.type = self
+									)
+								  )
+								  or self.kind <> PrimitiveTypeKind::String
+								  
+inv stringCharactersOperation	: (self.kind = PrimitiveTypeKind::String
+									and self.ownedOperation->exists(o |
+										o.name = 'characters'
+										and o.inputParameter->size() = 0
+										and o.genericType.oclAsType(ComplexGenericType).unboundType = OclLibrary.allInstances()->asOrderedSet()->first().oclSequence
+									)
+								  )
+								  or self.kind <> PrimitiveTypeKind::String
+
+-- *** Boolean ***
+inv booleanOrOperation			: (self.kind = PrimitiveTypeKind::Boolean
+									and self.ownedOperation->exists(o |
+										o.name = 'or'
+										and o.inputParameter->size() = 1
+										and o.inputParameter->first().type = self
+										and o.type = self
+									)
+								  )
+								  or self.kind <> PrimitiveTypeKind::Boolean
+
+inv booleanXorOperation			: (self.kind = PrimitiveTypeKind::Boolean
+									and self.ownedOperation->exists(o |
+										o.name = 'xor'
+										and o.inputParameter->size() = 1
+										and o.inputParameter->first().type = self
+										and o.type = self
+									)
+								  )
+								  or self.kind <> PrimitiveTypeKind::Boolean
+								  
+inv booleanAndOperation			: (self.kind = PrimitiveTypeKind::Boolean
+									and self.ownedOperation->exists(o |
+										o.name = 'and'
+										and o.inputParameter->size() = 1
+										and o.inputParameter->first().type = self
+										and o.type = self
+									)
+								  )
+								  or self.kind <> PrimitiveTypeKind::Boolean
+
+inv booleanNotOperation			: (self.kind = PrimitiveTypeKind::Boolean
+									and self.ownedOperation->exists(o |
+										o.name = 'not'
+										and o.inputParameter->size() = 0
+										and o.type = self
+									)
+								  )
+								  or self.kind <> PrimitiveTypeKind::Boolean
+
+inv booleanImpliesOperation		: (self.kind = PrimitiveTypeKind::Boolean
+									and self.ownedOperation->exists(o |
+										o.name = 'implies'
+										and o.inputParameter->size() = 1
+										and o.inputParameter->first().type = self
+										and o.type = self
+									)
+								  )
+								  or self.kind <> PrimitiveTypeKind::Boolean
+
+
+inv PrimitiveTypehasToStringOp	: self.ownedOperation->exists(o |
+									o.name = 'toString'
+									and o.inputParameter->size() = 0
+									and o.type.oclAsType(PrimitiveType).kind = PrimitiveTypeKind::String
+								  )
+								  or self.kind = PrimitiveTypeKind::String
+								  
+*/
+
+-- *** Collection ***
+context essentialocl::types::CollectionType
+inv collEqualToOperation		: self.allOperations()->exists(o |
+									(o.name = '=' or o.name = 'isEqualTo')
+									and o.inputParameter->size() = 1
+									and o.inputParameter->first().genericType.oclAsType(ComplexGenericType).unboundType = self
+									and o.type = self.oclLibrary.oclBoolean
+								  )
+
+inv collNotEqualToOperation		: self.allOperations()->exists(o |
+									(o.name = '<>' or o.name = 'isNotEqualTo')
+									and o.inputParameter->size() = 1
+									and o.inputParameter->first().genericType.oclAsType(ComplexGenericType).unboundType = self
+									and o.type = self.oclLibrary.oclBoolean
+								  )
+
+inv collSizeOperation			: self.allOperations()->exists(o |
+									o.name = 'size'
+									and o.inputParameter->size() = 0
+									and o.type = self.oclLibrary.oclInteger
+								  )
+								  
+inv collIncludesOperation		: self.allOperations()->exists(o |
+									o.name = 'includes'
+									and o.inputParameter->size() = 1
+									and o.inputParameter->first().genericType.oclAsType(ParameterGenericType).typeParameter = self.ownedTypeParameter->first()
+									and o.type = self.oclLibrary.oclBoolean
+								  )
+
+endpackage

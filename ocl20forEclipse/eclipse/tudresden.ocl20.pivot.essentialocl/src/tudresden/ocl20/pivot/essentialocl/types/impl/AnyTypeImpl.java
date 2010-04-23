@@ -47,34 +47,37 @@ import tudresden.ocl20.pivot.pivotmodel.impl.TypeImpl;
  */
 public class AnyTypeImpl extends TypeImpl implements AnyType {
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * @generated
-   */
-  protected AnyTypeImpl() {
-    super();
-  }
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected AnyTypeImpl() {
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  protected EClass eStaticClass() {
-    return TypesPackageImpl.Literals.ANY_TYPE;
-  }
+		super();
+	}
 
-  /**
-   * Simply returns the name of the <code>AnyType</code> which will be <code>OclAny</code>
-   * because the OCL 2.0 Specification defines only this single instance. As a member of the OCL
-   * Standard Library, <code>OclAny</code> does not really have a namespace. It is implicitly
-   * available in all namespaces.
-   * 
-   * @see tudresden.ocl20.pivot.pivotmodel.impl.NamedElementImpl#getQualifiedName()
-   */
-  @Override
-  public String getQualifiedName() {
-    return getName();
-  }
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected EClass eStaticClass() {
+
+		return TypesPackageImpl.Literals.ANY_TYPE;
+	}
+
+	/**
+	 * Simply returns the name of the <code>AnyType</code> which will be <code>OclAny</code>
+	 * because the OCL 2.0 Specification defines only this single instance. As a member of the OCL
+	 * Standard Library, <code>OclAny</code> does not really have a namespace. It is implicitly
+	 * available in all namespaces.
+	 * 
+	 * @see tudresden.ocl20.pivot.pivotmodel.impl.NamedElementImpl#getQualifiedName()
+	 */
+	@Override
+	public String getQualifiedName() {
+
+		return getName();
+	}
 
 } // AnyTypeImpl

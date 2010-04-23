@@ -21,7 +21,7 @@ package tudresden.ocl20.pivot.modelinstancetype.types.base;
 import org.apache.log4j.Logger;
 import org.eclipse.osgi.util.NLS;
 
-import tudresden.ocl20.pivot.essentialocl.types.TypeConstants;
+import tudresden.ocl20.pivot.essentialocl.EssentialOclPlugin;
 import tudresden.ocl20.pivot.modelinstancetype.ModelInstanceTypePlugin;
 import tudresden.ocl20.pivot.modelinstancetype.exception.AsTypeCastException;
 import tudresden.ocl20.pivot.modelinstancetype.internal.ModelInstanceMessages;
@@ -80,7 +80,8 @@ public class JavaModelInstanceReal extends AbstractModelInstanceReal implements
 		this.myNumber = number;
 
 		/* Initialize the type. */
-		this.myType = TypeConstants.REAL;
+		this.myType =
+				EssentialOclPlugin.getOclLibraryProvider().getOclLibrary().getOclReal();
 
 		/* Eventually debug the exit of this method. */
 		if (LOGGER.isDebugEnabled()) {
@@ -95,8 +96,7 @@ public class JavaModelInstanceReal extends AbstractModelInstanceReal implements
 
 	/*
 	 * (non-Javadoc)
-	 * @see
-	 * tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement
+	 * @see tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement
 	 * #asType(tudresden.ocl20.pivot.pivotmodel.Type)
 	 */
 	public IModelInstanceElement asType(Type type) throws AsTypeCastException {
@@ -159,8 +159,7 @@ public class JavaModelInstanceReal extends AbstractModelInstanceReal implements
 
 	/*
 	 * (non-Javadoc)
-	 * @see
-	 * tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement
+	 * @see tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement
 	 * #deepCopy()
 	 */
 	public IModelInstanceElement copyForAtPre() {

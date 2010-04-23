@@ -48,28 +48,28 @@ package tudresden.ocl20.pivot.essentialocl.expressions;
  */
 public interface IterateExp extends LoopExp {
 
-  /**
-   * Returns the value of the '<em><b>Result</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Result</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Result</em>' containment reference.
-   * @see #setResult(Variable)
-   * @generated
-   */
-  Variable getResult();
+	/**
+	 * Returns the value of the '<em><b>Result</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Result</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Result</em>' containment reference.
+	 * @see #setResult(Variable)
+	 * @generated
+	 */
+	Variable getResult();
 
-  /**
-   * Sets the value of the '{@link tudresden.ocl20.pivot.essentialocl.expressions.IterateExp#getResult <em>Result</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Result</em>' containment reference.
-   * @see #getResult()
-   * @generated
-   */
-  void setResult(Variable value);
+	/**
+	 * Sets the value of the '{@link tudresden.ocl20.pivot.essentialocl.expressions.IterateExp#getResult <em>Result</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Result</em>' containment reference.
+	 * @see #getResult()
+	 * @generated
+	 */
+	void setResult(Variable value);
 
 } // IterateExp

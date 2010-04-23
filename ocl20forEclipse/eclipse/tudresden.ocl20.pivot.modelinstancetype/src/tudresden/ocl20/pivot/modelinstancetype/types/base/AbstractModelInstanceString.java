@@ -18,7 +18,7 @@ with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
 package tudresden.ocl20.pivot.modelinstancetype.types.base;
 
-import tudresden.ocl20.pivot.essentialocl.types.TypeConstants;
+import tudresden.ocl20.pivot.essentialocl.EssentialOclPlugin;
 import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceString;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 
@@ -35,7 +35,6 @@ public abstract class AbstractModelInstanceString extends
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceString#getString
 	 * ()
@@ -77,7 +76,6 @@ public abstract class AbstractModelInstanceString extends
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @seetudresden.ocl20.pivot.modelbus.modelinstance.types.base.
 	 * AbstractModelInstanceElement#equals(java.lang.Object)
 	 */
@@ -96,8 +94,7 @@ public abstract class AbstractModelInstanceString extends
 			other = (AbstractModelInstanceString) object;
 
 			/*
-			 * This should not happen. But anyway, null == null results in
-			 * false.
+			 * This should not happen. But anyway, null == null results in false.
 			 */
 			if (this.isUndefined() || other.isUndefined()) {
 				result = false;
@@ -117,7 +114,6 @@ public abstract class AbstractModelInstanceString extends
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @seetudresden.ocl20.pivot.modelbus.modelinstance.types.base.
 	 * AbstractModelInstanceElement#hashCode()
 	 */
@@ -139,19 +135,18 @@ public abstract class AbstractModelInstanceString extends
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement#isKindOf
 	 * (tudresden.ocl20.pivot.pivotmodel.Type)
 	 */
 	public boolean isKindOf(Type type) {
 
-		return TypeConstants.STRING.conformsTo(type);
+		return EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+				.getOclString().conformsTo(type);
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement
 	 * #isUndefined()
 	 */

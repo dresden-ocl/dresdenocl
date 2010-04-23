@@ -45,25 +45,28 @@ import tudresden.ocl20.pivot.essentialocl.expressions.PrimitiveLiteralExp;
  *
  * @generated
  */
-public abstract class PrimitiveLiteralExpImpl extends LiteralExpImpl implements PrimitiveLiteralExp {
+public abstract class PrimitiveLiteralExpImpl extends LiteralExpImpl implements
+		PrimitiveLiteralExp {
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  protected PrimitiveLiteralExpImpl() {
-    super();
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected PrimitiveLiteralExpImpl() {
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  protected EClass eStaticClass() {
-    return ExpressionsPackageImpl.Literals.PRIMITIVE_LITERAL_EXP;
-  }
+		super();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected EClass eStaticClass() {
+
+		return ExpressionsPackageImpl.Literals.PRIMITIVE_LITERAL_EXP;
+	}
 
 } //PrimitiveLiteralExpImpl

@@ -51,45 +51,45 @@ import java.util.List;
  */
 public interface CollectionLiteralExp extends LiteralExp {
 
-  /**
-   * Returns the value of the '<em><b>Part</b></em>' containment reference list.
-   * The list contents are of type {@link tudresden.ocl20.pivot.essentialocl.expressions.CollectionLiteralPart}.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Part</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Part</em>' containment reference list.
-   * @generated
-   */
-  List<CollectionLiteralPart> getPart();
+	/**
+	 * Returns the value of the '<em><b>Part</b></em>' containment reference list.
+	 * The list contents are of type {@link tudresden.ocl20.pivot.essentialocl.expressions.CollectionLiteralPart}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Part</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Part</em>' containment reference list.
+	 * @generated
+	 */
+	List<CollectionLiteralPart> getPart();
 
-  /**
-   * Returns the value of the '<em><b>Kind</b></em>' attribute.
-   * The literals are from the enumeration {@link tudresden.ocl20.pivot.essentialocl.expressions.CollectionKind}.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Kind</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Kind</em>' attribute.
-   * @see tudresden.ocl20.pivot.essentialocl.expressions.CollectionKind
-   * @see #setKind(CollectionKind)
-   * @generated
-   */
-  CollectionKind getKind();
+	/**
+	 * Returns the value of the '<em><b>Kind</b></em>' attribute.
+	 * The literals are from the enumeration {@link tudresden.ocl20.pivot.essentialocl.expressions.CollectionKind}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Kind</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Kind</em>' attribute.
+	 * @see tudresden.ocl20.pivot.essentialocl.expressions.CollectionKind
+	 * @see #setKind(CollectionKind)
+	 * @generated
+	 */
+	CollectionKind getKind();
 
-  /**
-   * Sets the value of the '{@link tudresden.ocl20.pivot.essentialocl.expressions.CollectionLiteralExp#getKind <em>Kind</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Kind</em>' attribute.
-   * @see tudresden.ocl20.pivot.essentialocl.expressions.CollectionKind
-   * @see #getKind()
-   * @generated
-   */
-  void setKind(CollectionKind value);
+	/**
+	 * Sets the value of the '{@link tudresden.ocl20.pivot.essentialocl.expressions.CollectionLiteralExp#getKind <em>Kind</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Kind</em>' attribute.
+	 * @see tudresden.ocl20.pivot.essentialocl.expressions.CollectionKind
+	 * @see #getKind()
+	 * @generated
+	 */
+	void setKind(CollectionKind value);
 
 } // CollectionLiteralExp

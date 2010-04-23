@@ -23,7 +23,7 @@ import static org.junit.Assert.assertNotNull;
 
 import org.junit.Test;
 
-import tudresden.ocl20.pivot.essentialocl.StandardLibraryPlugin;
+import tudresden.ocl20.pivot.essentialocl.EssentialOclPlugin;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.provider.IOclLibraryProvider;
 import tudresden.ocl20.pivot.model.ModelAccessException;
 
@@ -46,7 +46,6 @@ public class OclLibraryProviderTest {
 	@Test
 	public void testGetOclLibrary01() throws ModelAccessException {
 
-		assertNotNull(StandardLibraryPlugin.getOclLibraryProvider()
-				.getOclLibrary());
+		assertNotNull(EssentialOclPlugin.getOclLibraryProvider().getOclLibrary());
 	}
 }

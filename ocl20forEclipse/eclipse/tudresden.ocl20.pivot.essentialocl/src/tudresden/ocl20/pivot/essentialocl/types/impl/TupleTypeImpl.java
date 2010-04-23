@@ -64,12 +64,10 @@ import tudresden.ocl20.pivot.pivotmodel.impl.TypeImpl;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>
- * {@link tudresden.ocl20.pivot.essentialocl.types.impl.TupleTypeImpl#getOclLibrary
- * <em>Ocl Library</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.essentialocl.types.impl.TupleTypeImpl#getOclLibrary <em>Ocl Library</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @generated
  */
 public class TupleTypeImpl extends TypeImpl implements TupleType {
@@ -130,14 +128,13 @@ public class TupleTypeImpl extends TypeImpl implements TupleType {
 	}
 
 	/**
-	 * The cached value of the '{@link #getOclLibrary() <em>Ocl Library</em>}'
-	 * reference. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The cached value of the '{@link #getOclLibrary() <em>Ocl Library</em>}' reference.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getOclLibrary()
 	 * @generated
 	 * @ordered
 	 */
-	protected OclLibrary oclLibrary = null;
+	protected OclLibrary oclLibrary;
 
 	// a map of tuple types that have been created previously
 	private static Map<String, TupleType> tupleTypes;
@@ -373,7 +370,6 @@ public class TupleTypeImpl extends TypeImpl implements TupleType {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public OclLibrary getOclLibrary() {
@@ -386,7 +382,6 @@ public class TupleTypeImpl extends TypeImpl implements TupleType {
 	 * should be set after a <code>TupleType</code> instance is created.
 	 * Otherwise, there might be errors when determining type conformance.<!--
 	 * end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public void setOclLibrary(OclLibrary newOclLibrary) {
@@ -613,7 +608,6 @@ public class TupleTypeImpl extends TypeImpl implements TupleType {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -628,7 +622,6 @@ public class TupleTypeImpl extends TypeImpl implements TupleType {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -644,7 +637,6 @@ public class TupleTypeImpl extends TypeImpl implements TupleType {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -681,7 +673,6 @@ public class TupleTypeImpl extends TypeImpl implements TupleType {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override

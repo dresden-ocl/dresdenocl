@@ -34,11 +34,11 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import tudresden.ocl20.pivot.essentialocl.EssentialOclPlugin;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBag;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBoolean;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSet;
-import tudresden.ocl20.pivot.essentialocl.types.TypeConstants;
 import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceCollection;
 import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement;
 import tudresden.ocl20.pivot.pivotmodel.Type;
@@ -153,11 +153,15 @@ public class JavaOclBag<T extends OclAny> extends JavaOclUnsortedCollection<T>
 
 		OclBag<T> result = null;
 
-		result = checkInvalid(TypeConstants.BAG(genericType), this, that);
+		result =
+				checkInvalid(EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+						.getBagType(genericType), this, that);
 
 		if (result == null)
 			result =
-					checkUndefined("excluding", TypeConstants.BAG(genericType), this);
+					checkUndefined("excluding", EssentialOclPlugin
+							.getOclLibraryProvider().getOclLibrary().getBagType(genericType),
+							this);
 
 		if (result == null) {
 			/* Else try to remove the given Object. */
@@ -190,11 +194,18 @@ public class JavaOclBag<T extends OclAny> extends JavaOclUnsortedCollection<T>
 		OclBag<T2> result = null;
 
 		// FIXME Michael: better way to determine real return type
-		result = checkInvalid(TypeConstants.BAG(TypeConstants.ANY), this);
+		result =
+				checkInvalid(EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+						.getBagType(
+								EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+										.getOclAny()), this);
 
 		if (result == null)
 			result =
-					checkUndefined("flatten", TypeConstants.BAG(TypeConstants.ANY), this);
+					checkUndefined("flatten", EssentialOclPlugin.getOclLibraryProvider()
+							.getOclLibrary().getBagType(
+									EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+											.getOclAny()), this);
 
 		if (result == null) {
 
@@ -219,17 +230,22 @@ public class JavaOclBag<T extends OclAny> extends JavaOclUnsortedCollection<T>
 
 		OclBag<T> result = null;
 
-		result = checkInvalid(TypeConstants.BAG(genericType), this, anObject);
+		result =
+				checkInvalid(EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+						.getBagType(genericType), this, anObject);
 
 		if (result == null)
 			result =
-					checkUndefined("including", TypeConstants.BAG(genericType), this);
+					checkUndefined("including", EssentialOclPlugin
+							.getOclLibraryProvider().getOclLibrary().getBagType(genericType),
+							this);
 
 		if (result == null) {
 			List<IModelInstanceElement> include =
 					new ArrayList<IModelInstanceElement>();
 
-			checkInvalid(TypeConstants.BAG(genericType), this);
+			checkInvalid(EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+					.getBagType(genericType), this);
 
 			include.addAll(getModelInstanceCollection().getCollection());
 			include.add(anObject.getModelInstanceElement());
@@ -251,12 +267,15 @@ public class JavaOclBag<T extends OclAny> extends JavaOclUnsortedCollection<T>
 
 		OclBag<T> result = null;
 
-		result = checkInvalid(TypeConstants.BAG(genericType), this, that);
+		result =
+				checkInvalid(EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+						.getBagType(genericType), this, that);
 
 		if (result == null)
 			result =
-					checkUndefined("intersection", TypeConstants.BAG(genericType), this,
-							that);
+					checkUndefined("intersection", EssentialOclPlugin
+							.getOclLibraryProvider().getOclLibrary().getBagType(genericType),
+							this, that);
 
 		List<IModelInstanceElement> intersection =
 				new ArrayList<IModelInstanceElement>();
@@ -294,11 +313,14 @@ public class JavaOclBag<T extends OclAny> extends JavaOclUnsortedCollection<T>
 
 		OclBag<T> result = null;
 
-		result = checkInvalid(TypeConstants.BAG(genericType), this, that);
+		result =
+				checkInvalid(EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+						.getBagType(genericType), this, that);
 
 		if (result == null)
 			result =
-					checkUndefined("union", TypeConstants.BAG(genericType), this, that);
+					checkUndefined("union", EssentialOclPlugin.getOclLibraryProvider()
+							.getOclLibrary().getBagType(genericType), this, that);
 
 		if (result == null) {
 			List<IModelInstanceElement> union =
@@ -316,5 +338,4 @@ public class JavaOclBag<T extends OclAny> extends JavaOclUnsortedCollection<T>
 
 		return result;
 	}
-
 }

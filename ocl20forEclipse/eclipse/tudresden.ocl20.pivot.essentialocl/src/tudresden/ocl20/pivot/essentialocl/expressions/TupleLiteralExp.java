@@ -50,18 +50,18 @@ import java.util.List;
  */
 public interface TupleLiteralExp extends LiteralExp {
 
-  /**
-   * Returns the value of the '<em><b>Part</b></em>' containment reference list.
-   * The list contents are of type {@link tudresden.ocl20.pivot.essentialocl.expressions.TupleLiteralPart}.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Part</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Part</em>' containment reference list.
-   * @generated
-   */
-  List<TupleLiteralPart> getPart();
+	/**
+	 * Returns the value of the '<em><b>Part</b></em>' containment reference list.
+	 * The list contents are of type {@link tudresden.ocl20.pivot.essentialocl.expressions.TupleLiteralPart}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Part</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Part</em>' containment reference list.
+	 * @generated
+	 */
+	List<TupleLiteralPart> getPart();
 
 } // TupleLiteralExp

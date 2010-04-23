@@ -9,11 +9,11 @@ import java.util.Set;
 import org.junit.Before;
 import org.junit.Test;
 
+import tudresden.ocl20.pivot.essentialocl.EssentialOclPlugin;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclReal;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSet;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.factory.IStandardLibraryFactory;
-import tudresden.ocl20.pivot.essentialocl.types.TypeConstants;
 
 /**
  * Tests for real values in OCL.
@@ -49,11 +49,13 @@ public class JavaOclRealTest {
 		Set<OclReal> realSet0 = new HashSet<OclReal>();
 		realSet0.add(real0);
 		oclRealSet0 =
-				myStandardLibraryFactory.createOclSet(realSet0, TypeConstants.REAL);
+				myStandardLibraryFactory.createOclSet(realSet0, EssentialOclPlugin
+						.getOclLibraryProvider().getOclLibrary().getOclReal());
 		Set<OclReal> realSet0_25 = new HashSet<OclReal>();
 		realSet0_25.add(real0_25);
 		oclRealSet0_25 =
-				myStandardLibraryFactory.createOclSet(realSet0_25, TypeConstants.REAL);
+				myStandardLibraryFactory.createOclSet(realSet0_25, EssentialOclPlugin
+						.getOclLibraryProvider().getOclLibrary().getOclReal());
 	}
 
 	@Test

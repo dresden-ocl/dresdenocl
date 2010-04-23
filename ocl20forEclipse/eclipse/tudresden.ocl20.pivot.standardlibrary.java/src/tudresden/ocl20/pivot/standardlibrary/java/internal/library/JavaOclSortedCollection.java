@@ -32,10 +32,10 @@ package tudresden.ocl20.pivot.standardlibrary.java.internal.library;
 
 import java.util.List;
 
+import tudresden.ocl20.pivot.essentialocl.EssentialOclPlugin;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSortedCollection;
-import tudresden.ocl20.pivot.essentialocl.types.TypeConstants;
 import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceCollection;
 import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement;
 import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceInteger;
@@ -162,10 +162,11 @@ public abstract class JavaOclSortedCollection<T extends OclAny> extends
 
 		OclInteger result;
 
-		result = checkInvalid(TypeConstants.INTEGER, this, anObject);
+		result =
+				checkInvalid(EssentialOclPlugin.getOclLibraryProvider().getOclLibrary().getOclInteger(), this, anObject);
 
 		if (result == null)
-			result = checkUndefined("indexOf", TypeConstants.INTEGER, this);
+			result = checkUndefined("indexOf", EssentialOclPlugin.getOclLibraryProvider().getOclLibrary().getOclInteger(), this);
 
 		if (result == null) {
 			/* Else compute the result. */

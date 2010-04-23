@@ -49,164 +49,166 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.EnumLiteralExpImpl#getReferredEnumLiteral <em>Referred Enum Literal</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.EnumLiteralExpImpl#getReferredEnumLiteral <em>Referred Enum Literal</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @generated
  */
-public class EnumLiteralExpImpl extends LiteralExpImpl implements EnumLiteralExp {
+public class EnumLiteralExpImpl extends LiteralExpImpl implements
+		EnumLiteralExp {
 
-  /**
-   * Logger for this class
-   */
-  private static final Logger logger = Logger.getLogger(EnumLiteralExpImpl.class);
+	/**
+	 * Logger for this class
+	 */
+	private static final Logger logger =
+			Logger.getLogger(EnumLiteralExpImpl.class);
 
-  /**
-   * The cached value of the '{@link #getReferredEnumLiteral() <em>Referred Enum Literal</em>}'
-   * reference. <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @see #getReferredEnumLiteral()
-   * @generated
-   * @ordered
-   */
-  protected EnumerationLiteral referredEnumLiteral = null;
+	/**
+	 * The cached value of the '{@link #getReferredEnumLiteral() <em>Referred Enum Literal</em>}' reference.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @see #getReferredEnumLiteral()
+	 * @generated
+	 * @ordered
+	 */
+	protected EnumerationLiteral referredEnumLiteral;
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  protected EnumLiteralExpImpl() {
-    super();
-  }
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected EnumLiteralExpImpl() {
 
-  /**
-   * Overridden to determine the type of the <code>EnumLiteralExp</code> according to the OCL
-   * specification (Section 8.3):
-   * 
-   * <p>
-   * The type of an enum Literal expression is the type of the referred literal.
-   * 
-   * <pre>
-   *   context EnumLiteralExp
-   *   inv: self.type = referredEnumLiteral.enumeration
-   * </pre>
-   * 
-   * </p>
-   * 
-   * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.OclExpressionImpl#evaluateType()
-   */
-  @Override
-  protected Type evaluateType() {
-    if (logger.isDebugEnabled()) {
-      logger.debug("evaluateType() - enter"); //$NON-NLS-1$
-    }
+		super();
+	}
 
-    // check invariant
-    if (referredEnumLiteral == null) {
-      throw new WellformednessException(this,
-          "The referred enum literal of an EnumLiteralExp must not be null."); //$NON-NLS-1$
-    }
+	/**
+	 * Overridden to determine the type of the <code>EnumLiteralExp</code> according to the OCL
+	 * specification (Section 8.3):
+	 * 
+	 * <p>
+	 * The type of an enum Literal expression is the type of the referred literal.
+	 * 
+	 * <pre>
+	 *   context EnumLiteralExp
+	 *   inv: self.type = referredEnumLiteral.enumeration
+	 * </pre>
+	 * 
+	 * </p>
+	 * 
+	 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.OclExpressionImpl#evaluateType()
+	 */
+	@Override
+	protected Type evaluateType() {
 
-    Type type = referredEnumLiteral.getEnumeration();
-    
-    if (logger.isDebugEnabled()) {
-      logger.debug("evaluateType() - exit - return value=" + type); //$NON-NLS-1$
-    }
-    
-    return type;
-  }
+		if (logger.isDebugEnabled()) {
+			logger.debug("evaluateType() - enter"); //$NON-NLS-1$
+		}
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  public EnumerationLiteral getReferredEnumLiteral() {
-    return referredEnumLiteral;
-  }
+		// check invariant
+		if (referredEnumLiteral == null) {
+			throw new WellformednessException(this,
+					"The referred enum literal of an EnumLiteralExp must not be null."); //$NON-NLS-1$
+		}
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  public void setReferredEnumLiteral(EnumerationLiteral newReferredEnumLiteral) {
-    EnumerationLiteral oldReferredEnumLiteral = referredEnumLiteral;
-    referredEnumLiteral = newReferredEnumLiteral;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this,Notification.SET,
-          ExpressionsPackageImpl.ENUM_LITERAL_EXP__REFERRED_ENUM_LITERAL,oldReferredEnumLiteral,
-          referredEnumLiteral));
-  }
+		Type type = referredEnumLiteral.getEnumeration();
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  @Override
-  public Object eGet(int featureID, boolean resolve, boolean coreType) {
-    switch (featureID) {
-      case ExpressionsPackageImpl.ENUM_LITERAL_EXP__REFERRED_ENUM_LITERAL:
-        return getReferredEnumLiteral();
-    }
-    return super.eGet(featureID,resolve,coreType);
-  }
+		if (logger.isDebugEnabled()) {
+			logger.debug("evaluateType() - exit - return value=" + type); //$NON-NLS-1$
+		}
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  @Override
-  public void eSet(int featureID, Object newValue) {
-    switch (featureID) {
-      case ExpressionsPackageImpl.ENUM_LITERAL_EXP__REFERRED_ENUM_LITERAL:
-        setReferredEnumLiteral((EnumerationLiteral) newValue);
-        return;
-    }
-    super.eSet(featureID,newValue);
-  }
+		return type;
+	}
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  @Override
-  public void eUnset(int featureID) {
-    switch (featureID) {
-      case ExpressionsPackageImpl.ENUM_LITERAL_EXP__REFERRED_ENUM_LITERAL:
-        setReferredEnumLiteral((EnumerationLiteral) null);
-        return;
-    }
-    super.eUnset(featureID);
-  }
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EnumerationLiteral getReferredEnumLiteral() {
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  @Override
-  public boolean eIsSet(int featureID) {
-    switch (featureID) {
-      case ExpressionsPackageImpl.ENUM_LITERAL_EXP__REFERRED_ENUM_LITERAL:
-        return referredEnumLiteral != null;
-    }
-    return super.eIsSet(featureID);
-  }
+		return referredEnumLiteral;
+	}
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  @Override
-  protected EClass eStaticClass() {
-    return ExpressionsPackageImpl.Literals.ENUM_LITERAL_EXP;
-  }
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setReferredEnumLiteral(EnumerationLiteral newReferredEnumLiteral) {
+
+		EnumerationLiteral oldReferredEnumLiteral = referredEnumLiteral;
+		referredEnumLiteral = newReferredEnumLiteral;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET,
+					ExpressionsPackageImpl.ENUM_LITERAL_EXP__REFERRED_ENUM_LITERAL,
+					oldReferredEnumLiteral, referredEnumLiteral));
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object eGet(int featureID, boolean resolve, boolean coreType) {
+
+		switch (featureID) {
+		case ExpressionsPackageImpl.ENUM_LITERAL_EXP__REFERRED_ENUM_LITERAL:
+			return getReferredEnumLiteral();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void eSet(int featureID, Object newValue) {
+
+		switch (featureID) {
+		case ExpressionsPackageImpl.ENUM_LITERAL_EXP__REFERRED_ENUM_LITERAL:
+			setReferredEnumLiteral((EnumerationLiteral) newValue);
+			return;
+		}
+		super.eSet(featureID, newValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void eUnset(int featureID) {
+
+		switch (featureID) {
+		case ExpressionsPackageImpl.ENUM_LITERAL_EXP__REFERRED_ENUM_LITERAL:
+			setReferredEnumLiteral((EnumerationLiteral) null);
+			return;
+		}
+		super.eUnset(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean eIsSet(int featureID) {
+
+		switch (featureID) {
+		case ExpressionsPackageImpl.ENUM_LITERAL_EXP__REFERRED_ENUM_LITERAL:
+			return referredEnumLiteral != null;
+		}
+		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected EClass eStaticClass() {
+
+		return ExpressionsPackageImpl.Literals.ENUM_LITERAL_EXP;
+	}
 
 } // EnumLiteralExpImpl

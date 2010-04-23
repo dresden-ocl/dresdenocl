@@ -36,8 +36,8 @@ import org.eclipse.osgi.util.NLS;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import tudresden.ocl20.pivot.essentialocl.EssentialOclPlugin;
 import tudresden.ocl20.pivot.essentialocl.types.CollectionType;
-import tudresden.ocl20.pivot.essentialocl.types.TypeConstants;
 import tudresden.ocl20.pivot.modelinstancetype.exception.AsTypeCastException;
 import tudresden.ocl20.pivot.modelinstancetype.exception.CopyForAtPreException;
 import tudresden.ocl20.pivot.modelinstancetype.exception.OperationAccessException;
@@ -71,8 +71,8 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
 public class TestModelInstanceObject {
 
 	/** The {@link Logger} for this class. */
-	private static final Logger LOGGER = ModelInstanceTypeTestPlugin
-			.getLogger(TestModelInstanceObject.class);
+	private static final Logger LOGGER =
+			ModelInstanceTypeTestPlugin.getLogger(TestModelInstanceObject.class);
 
 	/** A {@link String} used to display and log messages and warnings. */
 	private static String msg;
@@ -137,106 +137,126 @@ public class TestModelInstanceObject {
 	public static void setUp() {
 
 		/* Find the type in the Model. */
-		type_Class1 = ModelInstanceTypeTestServices.getInstance().getModelType(
-				TestModelTypesNames.TYPE_NAME_CLASS1);
+		type_Class1 =
+				ModelInstanceTypeTestServices.getInstance().getModelType(
+						TestModelTypesNames.TYPE_NAME_CLASS1);
 
 		/* Load all instances of the type from the model instance. */
-		instances_Class1 = ModelInstanceTypeTestServices.getInstance()
-				.getModelInstanceObjectsOfType(type_Class1);
+		instances_Class1 =
+				ModelInstanceTypeTestServices.getInstance()
+						.getModelInstanceObjectsOfType(type_Class1);
 
 		if (instances_Class1.size() == 0 && LOGGER.isDebugEnabled()) {
-			msg = ModelInstanceTypeTestSuiteMessages.TestModelInstanceObject_NoClass1InstanceFound;
+			msg =
+					ModelInstanceTypeTestSuiteMessages.TestModelInstanceObject_NoClass1InstanceFound;
 
 			LOGGER.warn(msg);
 		}
 		// no else.
 
 		/* Find the type in the Model. */
-		type_Class2 = ModelInstanceTypeTestServices.getInstance().getModelType(
-				TestModelTypesNames.TYPE_NAME_CLASS2);
+		type_Class2 =
+				ModelInstanceTypeTestServices.getInstance().getModelType(
+						TestModelTypesNames.TYPE_NAME_CLASS2);
 
 		/* Load all instances of the type from the model instance. */
-		instances_Class2 = ModelInstanceTypeTestServices.getInstance()
-				.getModelInstanceObjectsOfType(type_Class2);
+		instances_Class2 =
+				ModelInstanceTypeTestServices.getInstance()
+						.getModelInstanceObjectsOfType(type_Class2);
 
 		if (instances_Class2.size() == 0 && LOGGER.isDebugEnabled()) {
-			msg = ModelInstanceTypeTestSuiteMessages.TestModelInstanceObject_NoClass2InstanceFound;
+			msg =
+					ModelInstanceTypeTestSuiteMessages.TestModelInstanceObject_NoClass2InstanceFound;
 
 			LOGGER.warn(msg);
 		}
 		// no else.
 
 		/* Find the type in the Model. */
-		type_Interface1 = ModelInstanceTypeTestServices.getInstance()
-				.getModelType(TestModelTypesNames.TYPE_NAME_INTERFACE1);
+		type_Interface1 =
+				ModelInstanceTypeTestServices.getInstance().getModelType(
+						TestModelTypesNames.TYPE_NAME_INTERFACE1);
 
 		/* Load all instances of the type from the model instance. */
-		instances_Interface1 = ModelInstanceTypeTestServices.getInstance()
-				.getModelInstanceObjectsOfType(type_Interface1);
+		instances_Interface1 =
+				ModelInstanceTypeTestServices.getInstance()
+						.getModelInstanceObjectsOfType(type_Interface1);
 
 		if (instances_Interface1.size() == 0 && LOGGER.isDebugEnabled()) {
-			msg = ModelInstanceTypeTestSuiteMessages.TestModelInstanceObject_NoInterface1InstanceFound;
+			msg =
+					ModelInstanceTypeTestSuiteMessages.TestModelInstanceObject_NoInterface1InstanceFound;
 
 			LOGGER.warn(msg);
 		}
 		// no else.
 
 		/* Find the type in the Model. */
-		type_Interface2 = ModelInstanceTypeTestServices.getInstance()
-				.getModelType(TestModelTypesNames.TYPE_NAME_INTERFACE2);
+		type_Interface2 =
+				ModelInstanceTypeTestServices.getInstance().getModelType(
+						TestModelTypesNames.TYPE_NAME_INTERFACE2);
 
 		/* Load all instances of the type from the model instance. */
-		instances_Interface2 = ModelInstanceTypeTestServices.getInstance()
-				.getModelInstanceObjectsOfType(type_Interface2);
+		instances_Interface2 =
+				ModelInstanceTypeTestServices.getInstance()
+						.getModelInstanceObjectsOfType(type_Interface2);
 
 		if (instances_Interface2.size() == 0 && LOGGER.isDebugEnabled()) {
-			msg = ModelInstanceTypeTestSuiteMessages.TestModelInstanceObject_NoInterface2InstanceFound;
+			msg =
+					ModelInstanceTypeTestSuiteMessages.TestModelInstanceObject_NoInterface2InstanceFound;
 
 			LOGGER.warn(msg);
 		}
 		// no else.
 
 		/* Find the type in the Model. */
-		type_Interface3 = ModelInstanceTypeTestServices.getInstance()
-				.getModelType(TestModelTypesNames.TYPE_NAME_INTERFACE3);
+		type_Interface3 =
+				ModelInstanceTypeTestServices.getInstance().getModelType(
+						TestModelTypesNames.TYPE_NAME_INTERFACE3);
 
 		/* Load all instances of the type from the model instance. */
-		instances_Interface3 = ModelInstanceTypeTestServices.getInstance()
-				.getModelInstanceObjectsOfType(type_Interface3);
+		instances_Interface3 =
+				ModelInstanceTypeTestServices.getInstance()
+						.getModelInstanceObjectsOfType(type_Interface3);
 
 		if (instances_Interface3.size() == 0 && LOGGER.isDebugEnabled()) {
-			msg = ModelInstanceTypeTestSuiteMessages.TestModelInstanceObject_NoInterface3InstanceFound;
+			msg =
+					ModelInstanceTypeTestSuiteMessages.TestModelInstanceObject_NoInterface3InstanceFound;
 
 			LOGGER.warn(msg);
 		}
 		// no else.
 
 		/* Find the type in the Model. */
-		type_CopyableClass = ModelInstanceTypeTestServices.getInstance()
-				.getModelType(TestModelTypesNames.TYPE_NAME_COPYABLE_CLASS);
+		type_CopyableClass =
+				ModelInstanceTypeTestServices.getInstance().getModelType(
+						TestModelTypesNames.TYPE_NAME_COPYABLE_CLASS);
 
 		/* Load all instances of the type from the model instance. */
-		instances_CopyableClass = ModelInstanceTypeTestServices.getInstance()
-				.getModelInstanceObjectsOfType(type_CopyableClass);
+		instances_CopyableClass =
+				ModelInstanceTypeTestServices.getInstance()
+						.getModelInstanceObjectsOfType(type_CopyableClass);
 
 		if (instances_CopyableClass.size() == 0 && LOGGER.isDebugEnabled()) {
-			msg = ModelInstanceTypeTestSuiteMessages.TestModelInstanceObject_NoCopyableClassInstanceFound;
+			msg =
+					ModelInstanceTypeTestSuiteMessages.TestModelInstanceObject_NoCopyableClassInstanceFound;
 
 			LOGGER.warn(msg);
 		}
 		// no else.
 
 		/* Find the type in the Model. */
-		type_NonCopyableClass = ModelInstanceTypeTestServices.getInstance()
-				.getModelType(TestModelTypesNames.TYPE_NAME_NON_COPYABLE_CLASS);
+		type_NonCopyableClass =
+				ModelInstanceTypeTestServices.getInstance().getModelType(
+						TestModelTypesNames.TYPE_NAME_NON_COPYABLE_CLASS);
 
 		/* Load all instances of the type from the model instance. */
-		instances_NonCopyableClass = ModelInstanceTypeTestServices
-				.getInstance().getModelInstanceObjectsOfType(
-						type_NonCopyableClass);
+		instances_NonCopyableClass =
+				ModelInstanceTypeTestServices.getInstance()
+						.getModelInstanceObjectsOfType(type_NonCopyableClass);
 
 		if (instances_NonCopyableClass.size() == 0 && LOGGER.isDebugEnabled()) {
-			msg = ModelInstanceTypeTestSuiteMessages.TestModelInstanceObject_NoNonCopyableClassInstanceFound;
+			msg =
+					ModelInstanceTypeTestSuiteMessages.TestModelInstanceObject_NoNonCopyableClassInstanceFound;
 
 			LOGGER.warn(msg);
 		}
@@ -259,14 +279,15 @@ public class TestModelInstanceObject {
 
 	/**
 	 * <p>
-	 * Tests the method {@link IModelInstanceObject#asType(Type)} for instances
-	 * of {@link Class1}.
+	 * Tests the method {@link IModelInstanceObject#asType(Type)} for instances of
+	 * {@link Class1}.
 	 * </p>
 	 */
 	@Test
 	public void testAsType01() {
 
-		msg = ModelInstanceTypeTestSuiteMessages.TestModelInstanceObject_AsTypeIsWrong;
+		msg =
+				ModelInstanceTypeTestSuiteMessages.TestModelInstanceObject_AsTypeIsWrong;
 
 		/* An IModelInstanceObject should cast-able to all implemented types. */
 		for (IModelInstanceElement anElement : instances_Class1) {
@@ -281,9 +302,8 @@ public class TestModelInstanceObject {
 				assertTrue(msg, castedElement instanceof IModelInstanceObject);
 
 				/* The value should remain the same. */
-				assertEquals(msg, ((IModelInstanceObject) anElement)
-						.getObject(), ((IModelInstanceObject) castedElement)
-						.getObject());
+				assertEquals(msg, ((IModelInstanceObject) anElement).getObject(),
+						((IModelInstanceObject) castedElement).getObject());
 
 				/* The casted element should have exactly one type. */
 				assertNotNull(msg, castedElement.getType());
@@ -301,14 +321,15 @@ public class TestModelInstanceObject {
 
 	/**
 	 * <p>
-	 * Tests the method {@link IModelInstanceObject#asType(Type)} for instances
-	 * of {@link Class2}.
+	 * Tests the method {@link IModelInstanceObject#asType(Type)} for instances of
+	 * {@link Class2}.
 	 * </p>
 	 */
 	@Test
 	public void testAsType02() {
 
-		msg = ModelInstanceTypeTestSuiteMessages.TestModelInstanceObject_AsTypeIsWrong;
+		msg =
+				ModelInstanceTypeTestSuiteMessages.TestModelInstanceObject_AsTypeIsWrong;
 
 		/* An IModelInstanceObject should cast-able to all implemented types. */
 		for (IModelInstanceElement anElement : instances_Class2) {
@@ -323,9 +344,8 @@ public class TestModelInstanceObject {
 				assertTrue(msg, castedElement instanceof IModelInstanceObject);
 
 				/* The value should remain the same. */
-				assertEquals(msg, ((IModelInstanceObject) anElement)
-						.getObject(), ((IModelInstanceObject) castedElement)
-						.getObject());
+				assertEquals(msg, ((IModelInstanceObject) anElement).getObject(),
+						((IModelInstanceObject) castedElement).getObject());
 
 				/* The casted element should have exactly one type. */
 				assertNotNull(msg, castedElement.getType());
@@ -346,9 +366,8 @@ public class TestModelInstanceObject {
 				assertTrue(msg, castedElement instanceof IModelInstanceObject);
 
 				/* The value should remain the same. */
-				assertEquals(msg, ((IModelInstanceObject) anElement)
-						.getObject(), ((IModelInstanceObject) castedElement)
-						.getObject());
+				assertEquals(msg, ((IModelInstanceObject) anElement).getObject(),
+						((IModelInstanceObject) castedElement).getObject());
 
 				/* The casted element should have exactly one type. */
 				assertNotNull(msg, castedElement.getType());
@@ -363,9 +382,8 @@ public class TestModelInstanceObject {
 				assertTrue(msg, castedElement instanceof IModelInstanceObject);
 
 				/* The value should remain the same. */
-				assertEquals(msg, ((IModelInstanceObject) anElement)
-						.getObject(), ((IModelInstanceObject) castedElement)
-						.getObject());
+				assertEquals(msg, ((IModelInstanceObject) anElement).getObject(),
+						((IModelInstanceObject) castedElement).getObject());
 
 				/* The casted element should have exactly one type. */
 				assertNotNull(msg, castedElement.getType());
@@ -383,14 +401,15 @@ public class TestModelInstanceObject {
 
 	/**
 	 * <p>
-	 * Tests the method {@link IModelInstanceObject#asType(Type)} for instances
-	 * of {@link Interface1}.
+	 * Tests the method {@link IModelInstanceObject#asType(Type)} for instances of
+	 * {@link Interface1}.
 	 * </p>
 	 */
 	@Test
 	public void testAsType03() {
 
-		msg = ModelInstanceTypeTestSuiteMessages.TestModelInstanceObject_AsTypeIsWrong;
+		msg =
+				ModelInstanceTypeTestSuiteMessages.TestModelInstanceObject_AsTypeIsWrong;
 		NLS.bind(msg, type_Interface1, type_Interface1);
 
 		/* An IModelInstanceObject should cast-able to all implemented types. */
@@ -406,9 +425,8 @@ public class TestModelInstanceObject {
 				assertTrue(msg, castedElement instanceof IModelInstanceObject);
 
 				/* The value should remain the same. */
-				assertEquals(msg, ((IModelInstanceObject) anElement)
-						.getObject(), ((IModelInstanceObject) castedElement)
-						.getObject());
+				assertEquals(msg, ((IModelInstanceObject) anElement).getObject(),
+						((IModelInstanceObject) castedElement).getObject());
 
 				/* The casted element should have exactly one type. */
 				assertNotNull(msg, castedElement.getType());
@@ -426,14 +444,15 @@ public class TestModelInstanceObject {
 
 	/**
 	 * <p>
-	 * Tests the method {@link IModelInstanceObject#asType(Type)} for instances
-	 * of {@link Interface2}.
+	 * Tests the method {@link IModelInstanceObject#asType(Type)} for instances of
+	 * {@link Interface2}.
 	 * </p>
 	 */
 	@Test
 	public void testAsType04() {
 
-		msg = ModelInstanceTypeTestSuiteMessages.TestModelInstanceObject_AsTypeIsWrong;
+		msg =
+				ModelInstanceTypeTestSuiteMessages.TestModelInstanceObject_AsTypeIsWrong;
 
 		/* An IModelInstanceObject should cast-able to all implemented types. */
 		for (IModelInstanceElement anElement : instances_Interface2) {
@@ -448,9 +467,8 @@ public class TestModelInstanceObject {
 				assertTrue(msg, castedElement instanceof IModelInstanceObject);
 
 				/* The value should remain the same. */
-				assertEquals(msg, ((IModelInstanceObject) anElement)
-						.getObject(), ((IModelInstanceObject) castedElement)
-						.getObject());
+				assertEquals(msg, ((IModelInstanceObject) anElement).getObject(),
+						((IModelInstanceObject) castedElement).getObject());
 
 				/* The casted element should have exactly one type. */
 				assertNotNull(msg, castedElement.getType());
@@ -468,14 +486,15 @@ public class TestModelInstanceObject {
 
 	/**
 	 * <p>
-	 * Tests the method {@link IModelInstanceObject#asType(Type)} for instances
-	 * of {@link Interface3}.
+	 * Tests the method {@link IModelInstanceObject#asType(Type)} for instances of
+	 * {@link Interface3}.
 	 * </p>
 	 */
 	@Test
 	public void testAsType05() {
 
-		msg = ModelInstanceTypeTestSuiteMessages.TestModelInstanceObject_AsTypeIsWrong;
+		msg =
+				ModelInstanceTypeTestSuiteMessages.TestModelInstanceObject_AsTypeIsWrong;
 
 		/* An IModelInstanceObject should cast-able to all implemented types. */
 		for (IModelInstanceElement anElement : instances_Interface3) {
@@ -490,9 +509,8 @@ public class TestModelInstanceObject {
 				assertTrue(msg, castedElement instanceof IModelInstanceObject);
 
 				/* The value should remain the same. */
-				assertEquals(msg, ((IModelInstanceObject) anElement)
-						.getObject(), ((IModelInstanceObject) castedElement)
-						.getObject());
+				assertEquals(msg, ((IModelInstanceObject) anElement).getObject(),
+						((IModelInstanceObject) castedElement).getObject());
 
 				/* The casted element should have exactly one type. */
 				assertNotNull(msg, castedElement.getType());
@@ -513,9 +531,8 @@ public class TestModelInstanceObject {
 				assertTrue(msg, castedElement instanceof IModelInstanceObject);
 
 				/* The value should remain the same. */
-				assertEquals(msg, ((IModelInstanceObject) anElement)
-						.getObject(), ((IModelInstanceObject) castedElement)
-						.getObject());
+				assertEquals(msg, ((IModelInstanceObject) anElement).getObject(),
+						((IModelInstanceObject) castedElement).getObject());
 
 				/* The casted element should have exactly one type. */
 				assertNotNull(msg, castedElement.getType());
@@ -530,9 +547,8 @@ public class TestModelInstanceObject {
 				assertTrue(msg, castedElement instanceof IModelInstanceObject);
 
 				/* The value should remain the same. */
-				assertEquals(msg, ((IModelInstanceObject) anElement)
-						.getObject(), ((IModelInstanceObject) castedElement)
-						.getObject());
+				assertEquals(msg, ((IModelInstanceObject) anElement).getObject(),
+						((IModelInstanceObject) castedElement).getObject());
 
 				/* The casted element should have exactly one type. */
 				assertNotNull(msg, castedElement.getType());
@@ -605,7 +621,8 @@ public class TestModelInstanceObject {
 			// no else.
 		}
 
-		msg = ModelInstanceTypeTestSuiteMessages.TestModelInstanceObject_AsTypeGetPropertyIsWrong;
+		msg =
+				ModelInstanceTypeTestSuiteMessages.TestModelInstanceObject_AsTypeGetPropertyIsWrong;
 
 		/* An IModelInstanceObject should cast-able to all implemented types. */
 		for (IModelInstanceElement anElement : instances_Class2) {
@@ -613,33 +630,31 @@ public class TestModelInstanceObject {
 			/* Cast Class2 instances to Class1. */
 			try {
 				/* Get the property value of class2. */
-				class2PropertyValue = ((IModelInstanceObject) anElement)
-						.getProperty(class2property);
+				class2PropertyValue =
+						((IModelInstanceObject) anElement).getProperty(class2property);
 
 				/* Get the property value of class1 (after cast). */
 				castedElement = anElement.asType(type_Class1);
-				class1PropertyValue = ((IModelInstanceObject) castedElement)
-						.getProperty(class1property);
+				class1PropertyValue =
+						((IModelInstanceObject) castedElement).getProperty(class1property);
 
 				/* Both values should have the right type. */
 				assertNotNull(msg, class2PropertyValue.getType());
-				assertEquals(msg, TypeConstants.STRING, class2PropertyValue
-						.getType());
+				assertEquals(msg, EssentialOclPlugin.getOclLibraryProvider()
+						.getOclLibrary().getOclString(), class2PropertyValue.getType());
 
 				assertNotNull(msg, class1PropertyValue.getType());
-				assertEquals(msg, TypeConstants.STRING, class1PropertyValue
-						.getType());
+				assertEquals(msg, EssentialOclPlugin.getOclLibraryProvider()
+						.getOclLibrary().getOclString(), class1PropertyValue.getType());
 
 				/* Both values should not be equal. */
-				if (((IModelInstanceString) class1PropertyValue).getString()
-						.equals(
-								((IModelInstanceString) class2PropertyValue)
-										.getString())
+				if (((IModelInstanceString) class1PropertyValue).getString().equals(
+						((IModelInstanceString) class2PropertyValue).getString())
 						&& LOGGER.isDebugEnabled()) {
 
 					/*
-					 * Only warn and not fail here. Some model instance types
-					 * cannot support this mechanism. E.g., EMF Ecore.
+					 * Only warn and not fail here. Some model instance types cannot
+					 * support this mechanism. E.g., EMF Ecore.
 					 */
 					LOGGER.warn(msg);
 				}
@@ -669,7 +684,8 @@ public class TestModelInstanceObject {
 	@Test
 	public void testCopyForAtPre() {
 
-		msg = ModelInstanceTypeTestSuiteMessages.TestModelInstanceObject_CopyForAtPreIsWrong;
+		msg =
+				ModelInstanceTypeTestSuiteMessages.TestModelInstanceObject_CopyForAtPreIsWrong;
 
 		/* An CopyableClass instance should be copy-able. */
 		for (IModelInstanceElement anElement : instances_CopyableClass) {
@@ -707,23 +723,24 @@ public class TestModelInstanceObject {
 	@Test
 	public void testEquals() {
 
-		msg = ModelInstanceTypeTestSuiteMessages.TestModelInstanceObject_EqualsIsWrong;
+		msg =
+				ModelInstanceTypeTestSuiteMessages.TestModelInstanceObject_EqualsIsWrong;
 
 		/* An CopyableClass instance should be copy-able. */
 		for (IModelInstanceObject anElement : instances_Class1) {
 
 			/*
-			 * An instance of class1 should equal to another instance of class1
-			 * if they have the same type(s) and the same adapted object.
+			 * An instance of class1 should equal to another instance of class1 if
+			 * they have the same type(s) and the same adapted object.
 			 */
 			for (IModelInstanceObject anotherElement : instances_Class1) {
 
 				if (anElement.getType() != null
 						&& anotherElement.getType() != null
 						&& anElement.getType().equals(anotherElement.getType())
-						&& ((anElement.getObject() == null && anotherElement
-								.getObject() == null) || (anElement.getObject() != null && anElement
-								.getObject().equals(anotherElement.getObject())))) {
+						&& ((anElement.getObject() == null && anotherElement.getObject() == null) || (anElement
+								.getObject() != null && anElement.getObject().equals(
+								anotherElement.getObject())))) {
 					assertTrue(msg, anElement.equals(anotherElement));
 				}
 
@@ -772,7 +789,8 @@ public class TestModelInstanceObject {
 		/* Initialize the arguments. */
 		args = new ArrayList<IModelInstanceElement>();
 
-		msg = ModelInstanceTypeTestSuiteMessages.TestModelInstanceObject_InvokeOperationIsWrong;
+		msg =
+				ModelInstanceTypeTestSuiteMessages.TestModelInstanceObject_InvokeOperationIsWrong;
 
 		for (IModelInstanceElement anElement : instances_Class1) {
 
@@ -789,8 +807,7 @@ public class TestModelInstanceObject {
 				assertNotNull(msg, operationResult.getType());
 
 				/* The result should have the same type as the operation. */
-				assertEquals(msg, operation.getType(), operationResult
-						.getType());
+				assertEquals(msg, operation.getType(), operationResult.getType());
 
 				/* The result should be void. */
 				assertTrue(msg, operationResult instanceof IModelInstanceVoid);
@@ -801,7 +818,8 @@ public class TestModelInstanceObject {
 			}
 
 			catch (OperationNotFoundException e) {
-				msg = ModelInstanceTypeTestSuiteMessages.TestModelInstanceObject_OperationNotFound;
+				msg =
+						ModelInstanceTypeTestSuiteMessages.TestModelInstanceObject_OperationNotFound;
 				msg = NLS.bind(msg, operationName);
 
 				LOGGER.warn(msg);
@@ -843,7 +861,8 @@ public class TestModelInstanceObject {
 		/* Initialize the arguments. */
 		args = new ArrayList<IModelInstanceElement>();
 
-		msg = ModelInstanceTypeTestSuiteMessages.TestModelInstanceObject_InvokeOperationIsWrong;
+		msg =
+				ModelInstanceTypeTestSuiteMessages.TestModelInstanceObject_InvokeOperationIsWrong;
 
 		for (IModelInstanceElement anElement : instances_Class1) {
 
@@ -861,19 +880,16 @@ public class TestModelInstanceObject {
 
 				/* The result should have the same type as the operation. */
 				if (operation.getType() instanceof PrimitiveType) {
-					assertEquals(msg, ((PrimitiveType) operation.getType())
-							.getKind(), ((PrimitiveType) operationResult
-							.getType()).getKind());
+					assertEquals(msg, ((PrimitiveType) operation.getType()).getKind(),
+							((PrimitiveType) operationResult.getType()).getKind());
 				}
 
 				else {
-					assertEquals(msg, operation.getType(), operationResult
-							.getType());
+					assertEquals(msg, operation.getType(), operationResult.getType());
 				}
 
 				/* The result should be an IModelInstanceElement. */
-				assertTrue(msg,
-						operationResult instanceof IModelInstanceElement);
+				assertTrue(msg, operationResult instanceof IModelInstanceElement);
 			}
 
 			catch (OperationAccessException e) {
@@ -881,7 +897,8 @@ public class TestModelInstanceObject {
 			}
 
 			catch (OperationNotFoundException e) {
-				msg = ModelInstanceTypeTestSuiteMessages.TestModelInstanceObject_OperationNotFound;
+				msg =
+						ModelInstanceTypeTestSuiteMessages.TestModelInstanceObject_OperationNotFound;
 				msg = NLS.bind(msg, operationName);
 
 				LOGGER.warn(msg);
@@ -923,7 +940,8 @@ public class TestModelInstanceObject {
 		/* Initialize the arguments. */
 		args = new ArrayList<IModelInstanceElement>();
 
-		msg = ModelInstanceTypeTestSuiteMessages.TestModelInstanceObject_InvokeOperationIsWrong;
+		msg =
+				ModelInstanceTypeTestSuiteMessages.TestModelInstanceObject_InvokeOperationIsWrong;
 
 		for (IModelInstanceElement anElement : instances_Class1) {
 
@@ -940,13 +958,12 @@ public class TestModelInstanceObject {
 				assertNotNull(msg, operationResult.getType());
 
 				/* The result should have an ordered set type. */
-				assertEquals(msg, TypeConstants
-						.ORDERED_SET(operation.getType()), operationResult
-						.getType());
+				assertEquals(msg, EssentialOclPlugin.getOclLibraryProvider()
+						.getOclLibrary().getOrderedSetType(operation.getType()),
+						operationResult.getType());
 
 				/* The result should be an IModelInstanceCollecttion. */
-				assertTrue(msg,
-						operationResult instanceof IModelInstanceCollection<?>);
+				assertTrue(msg, operationResult instanceof IModelInstanceCollection<?>);
 
 				/* The result should be unique. */
 				assertTrue(msg, ((IModelInstanceCollection<?>) operationResult)
@@ -962,7 +979,8 @@ public class TestModelInstanceObject {
 			}
 
 			catch (OperationNotFoundException e) {
-				msg = ModelInstanceTypeTestSuiteMessages.TestModelInstanceObject_OperationNotFound;
+				msg =
+						ModelInstanceTypeTestSuiteMessages.TestModelInstanceObject_OperationNotFound;
 				msg = NLS.bind(msg, operationName);
 
 				LOGGER.warn(msg);
@@ -1004,7 +1022,8 @@ public class TestModelInstanceObject {
 		/* Initialize the arguments. */
 		args = new ArrayList<IModelInstanceElement>();
 
-		msg = ModelInstanceTypeTestSuiteMessages.TestModelInstanceObject_InvokeOperationIsWrong;
+		msg =
+				ModelInstanceTypeTestSuiteMessages.TestModelInstanceObject_InvokeOperationIsWrong;
 
 		for (IModelInstanceElement anElement : instances_Class1) {
 
@@ -1021,21 +1040,20 @@ public class TestModelInstanceObject {
 				assertNotNull(msg, operationResult.getType());
 
 				/* The result should have an set type. */
-				assertEquals(msg, TypeConstants.SET(operation.getType()),
-						operationResult.getType());
+				assertEquals(msg, EssentialOclPlugin.getOclLibraryProvider()
+						.getOclLibrary().getSetType(operation.getType()), operationResult
+						.getType());
 
 				/* The result should be an IModelInstanceCollecttion. */
-				assertTrue(msg,
-						operationResult instanceof IModelInstanceCollection<?>);
+				assertTrue(msg, operationResult instanceof IModelInstanceCollection<?>);
 
 				/* The result should be unique. */
 				assertTrue(msg, ((IModelInstanceCollection<?>) operationResult)
 						.isUnique());
 
 				/* The result should not be ordered. */
-				assertFalse(msg,
-						((IModelInstanceCollection<?>) operationResult)
-								.isOrdered());
+				assertFalse(msg, ((IModelInstanceCollection<?>) operationResult)
+						.isOrdered());
 			}
 
 			catch (OperationAccessException e) {
@@ -1043,7 +1061,8 @@ public class TestModelInstanceObject {
 			}
 
 			catch (OperationNotFoundException e) {
-				msg = ModelInstanceTypeTestSuiteMessages.TestModelInstanceObject_OperationNotFound;
+				msg =
+						ModelInstanceTypeTestSuiteMessages.TestModelInstanceObject_OperationNotFound;
 				msg = NLS.bind(msg, operationName);
 
 				LOGGER.warn(msg);
@@ -1056,8 +1075,8 @@ public class TestModelInstanceObject {
 	 * <p>
 	 * Tests the method
 	 * {@link IModelInstanceObject#invokeOperation(tudresden.ocl20.pivot.pivotmodel.Operation, java.util.List)}
-	 * for an {@link Operation} with no arguments and with a multiple,
-	 * nonunique, ordered result.
+	 * for an {@link Operation} with no arguments and with a multiple, nonunique,
+	 * ordered result.
 	 * </p>
 	 */
 	@Test
@@ -1085,7 +1104,8 @@ public class TestModelInstanceObject {
 		/* Initialize the arguments. */
 		args = new ArrayList<IModelInstanceElement>();
 
-		msg = ModelInstanceTypeTestSuiteMessages.TestModelInstanceObject_InvokeOperationIsWrong;
+		msg =
+				ModelInstanceTypeTestSuiteMessages.TestModelInstanceObject_InvokeOperationIsWrong;
 
 		for (IModelInstanceElement anElement : instances_Class1) {
 
@@ -1102,17 +1122,16 @@ public class TestModelInstanceObject {
 				assertNotNull(msg, operationResult.getType());
 
 				/* The result should have an sequence type. */
-				assertEquals(msg, TypeConstants.SEQUENCE(operation.getType()),
+				assertEquals(msg, EssentialOclPlugin.getOclLibraryProvider()
+						.getOclLibrary().getSequenceType(operation.getType()),
 						operationResult.getType());
 
 				/* The result should be an IModelInstanceCollecttion. */
-				assertTrue(msg,
-						operationResult instanceof IModelInstanceCollection<?>);
+				assertTrue(msg, operationResult instanceof IModelInstanceCollection<?>);
 
 				/* The result should not be unique. */
-				assertFalse(msg,
-						((IModelInstanceCollection<?>) operationResult)
-								.isUnique());
+				assertFalse(msg, ((IModelInstanceCollection<?>) operationResult)
+						.isUnique());
 
 				/* The result should be ordered. */
 				assertTrue(msg, ((IModelInstanceCollection<?>) operationResult)
@@ -1124,7 +1143,8 @@ public class TestModelInstanceObject {
 			}
 
 			catch (OperationNotFoundException e) {
-				msg = ModelInstanceTypeTestSuiteMessages.TestModelInstanceObject_OperationNotFound;
+				msg =
+						ModelInstanceTypeTestSuiteMessages.TestModelInstanceObject_OperationNotFound;
 				msg = NLS.bind(msg, operationName);
 
 				LOGGER.warn(msg);
@@ -1137,8 +1157,8 @@ public class TestModelInstanceObject {
 	 * <p>
 	 * Tests the method
 	 * {@link IModelInstanceObject#invokeOperation(tudresden.ocl20.pivot.pivotmodel.Operation, java.util.List)}
-	 * for an {@link Operation} with no arguments and with a multiple,
-	 * nonunique, unordered result.
+	 * for an {@link Operation} with no arguments and with a multiple, nonunique,
+	 * unordered result.
 	 * </p>
 	 */
 	@Test
@@ -1166,7 +1186,8 @@ public class TestModelInstanceObject {
 		/* Initialize the arguments. */
 		args = new ArrayList<IModelInstanceElement>();
 
-		msg = ModelInstanceTypeTestSuiteMessages.TestModelInstanceObject_InvokeOperationIsWrong;
+		msg =
+				ModelInstanceTypeTestSuiteMessages.TestModelInstanceObject_InvokeOperationIsWrong;
 
 		for (IModelInstanceElement anElement : instances_Class1) {
 
@@ -1183,22 +1204,20 @@ public class TestModelInstanceObject {
 				assertNotNull(msg, operationResult.getType());
 
 				/* The result should have an bag type. */
-				assertEquals(msg, TypeConstants.BAG(operation.getType()),
-						operationResult.getType());
+				assertEquals(msg, EssentialOclPlugin.getOclLibraryProvider()
+						.getOclLibrary().getBagType(operation.getType()), operationResult
+						.getType());
 
 				/* The result should be an IModelInstanceCollecttion. */
-				assertTrue(msg,
-						operationResult instanceof IModelInstanceCollection<?>);
+				assertTrue(msg, operationResult instanceof IModelInstanceCollection<?>);
 
 				/* The result should not be unique. */
-				assertFalse(msg,
-						((IModelInstanceCollection<?>) operationResult)
-								.isUnique());
+				assertFalse(msg, ((IModelInstanceCollection<?>) operationResult)
+						.isUnique());
 
 				/* The result should not be ordered. */
-				assertFalse(msg,
-						((IModelInstanceCollection<?>) operationResult)
-								.isOrdered());
+				assertFalse(msg, ((IModelInstanceCollection<?>) operationResult)
+						.isOrdered());
 			}
 
 			catch (OperationAccessException e) {
@@ -1206,7 +1225,8 @@ public class TestModelInstanceObject {
 			}
 
 			catch (OperationNotFoundException e) {
-				msg = ModelInstanceTypeTestSuiteMessages.TestModelInstanceObject_OperationNotFound;
+				msg =
+						ModelInstanceTypeTestSuiteMessages.TestModelInstanceObject_OperationNotFound;
 				msg = NLS.bind(msg, operationName);
 
 				LOGGER.warn(msg);
@@ -1236,8 +1256,8 @@ public class TestModelInstanceObject {
 			if (property.getName().equals("argumentPropertyBooleanNonMultiple")) {
 				argumentProperty = property;
 				try {
-					argument1 = instances_Class1.iterator().next().getProperty(
-							argumentProperty);
+					argument1 =
+							instances_Class1.iterator().next().getProperty(argumentProperty);
 					break;
 				}
 
@@ -1254,7 +1274,8 @@ public class TestModelInstanceObject {
 		// end for.
 
 		if (argument1 == null) {
-			msg = ModelInstanceTypeTestSuiteMessages.TestModelInstanceObject_NoPrimitiveTypeInstanceFound;
+			msg =
+					ModelInstanceTypeTestSuiteMessages.TestModelInstanceObject_NoPrimitiveTypeInstanceFound;
 			msg = NLS.bind(msg, PrimitiveTypeKind.BOOLEAN.getName());
 
 			fail(msg);
@@ -1291,7 +1312,8 @@ public class TestModelInstanceObject {
 			/* Add a boolean argument. */
 			args.add(argument1);
 
-			msg = ModelInstanceTypeTestSuiteMessages.TestModelInstanceObject_InvokeOperationIsWrong;
+			msg =
+					ModelInstanceTypeTestSuiteMessages.TestModelInstanceObject_InvokeOperationIsWrong;
 
 			for (IModelInstanceElement anElement : instances_Class1) {
 
@@ -1309,8 +1331,7 @@ public class TestModelInstanceObject {
 
 					/* The result should be void. */
 					/* The result should be an IModelInstanceCollecttion. */
-					assertTrue(msg,
-							operationResult instanceof IModelInstanceVoid);
+					assertTrue(msg, operationResult instanceof IModelInstanceVoid);
 				}
 
 				catch (OperationAccessException e) {
@@ -1318,7 +1339,8 @@ public class TestModelInstanceObject {
 				}
 
 				catch (OperationNotFoundException e) {
-					msg = ModelInstanceTypeTestSuiteMessages.TestModelInstanceObject_OperationNotFound;
+					msg =
+							ModelInstanceTypeTestSuiteMessages.TestModelInstanceObject_OperationNotFound;
 					msg = NLS.bind(msg, operationName);
 
 					LOGGER.warn(msg);
@@ -1349,8 +1371,8 @@ public class TestModelInstanceObject {
 			if (property.getName().equals("argumentPropertyStringNonMultiple")) {
 				argumentProperty = property;
 				try {
-					argument1 = instances_Class1.iterator().next().getProperty(
-							argumentProperty);
+					argument1 =
+							instances_Class1.iterator().next().getProperty(argumentProperty);
 					break;
 				}
 
@@ -1367,7 +1389,8 @@ public class TestModelInstanceObject {
 		// end for.
 
 		if (argument1 == null) {
-			msg = ModelInstanceTypeTestSuiteMessages.TestModelInstanceObject_NoPrimitiveTypeInstanceFound;
+			msg =
+					ModelInstanceTypeTestSuiteMessages.TestModelInstanceObject_NoPrimitiveTypeInstanceFound;
 			msg = NLS.bind(msg, PrimitiveTypeKind.STRING.getName());
 
 			fail(msg);
@@ -1404,7 +1427,8 @@ public class TestModelInstanceObject {
 			/* Add a boolean argument. */
 			args.add(argument1);
 
-			msg = ModelInstanceTypeTestSuiteMessages.TestModelInstanceObject_InvokeOperationIsWrong;
+			msg =
+					ModelInstanceTypeTestSuiteMessages.TestModelInstanceObject_InvokeOperationIsWrong;
 
 			for (IModelInstanceElement anElement : instances_Class1) {
 
@@ -1422,8 +1446,7 @@ public class TestModelInstanceObject {
 
 					/* The result should be void. */
 					/* The result should be an IModelInstanceCollecttion. */
-					assertTrue(msg,
-							operationResult instanceof IModelInstanceVoid);
+					assertTrue(msg, operationResult instanceof IModelInstanceVoid);
 				}
 
 				catch (OperationAccessException e) {
@@ -1431,7 +1454,8 @@ public class TestModelInstanceObject {
 				}
 
 				catch (OperationNotFoundException e) {
-					msg = ModelInstanceTypeTestSuiteMessages.TestModelInstanceObject_OperationNotFound;
+					msg =
+							ModelInstanceTypeTestSuiteMessages.TestModelInstanceObject_OperationNotFound;
 					msg = NLS.bind(msg, operationName);
 
 					LOGGER.warn(msg);
@@ -1462,8 +1486,8 @@ public class TestModelInstanceObject {
 			if (property.getName().equals("argumentPropertyBooleanMultiple")) {
 				argumentProperty = property;
 				try {
-					argument1 = instances_Class1.iterator().next().getProperty(
-							argumentProperty);
+					argument1 =
+							instances_Class1.iterator().next().getProperty(argumentProperty);
 					break;
 				}
 
@@ -1480,7 +1504,8 @@ public class TestModelInstanceObject {
 		// end for.
 
 		if (argument1 == null) {
-			msg = ModelInstanceTypeTestSuiteMessages.TestModelInstanceObject_NoPrimitiveTypeInstanceFound;
+			msg =
+					ModelInstanceTypeTestSuiteMessages.TestModelInstanceObject_NoPrimitiveTypeInstanceFound;
 			msg = NLS.bind(msg, PrimitiveTypeKind.BOOLEAN.getName());
 
 			fail(msg);
@@ -1517,7 +1542,8 @@ public class TestModelInstanceObject {
 			/* Add a boolean argument. */
 			args.add(argument1);
 
-			msg = ModelInstanceTypeTestSuiteMessages.TestModelInstanceObject_InvokeOperationIsWrong;
+			msg =
+					ModelInstanceTypeTestSuiteMessages.TestModelInstanceObject_InvokeOperationIsWrong;
 
 			for (IModelInstanceElement anElement : instances_Class1) {
 
@@ -1535,8 +1561,7 @@ public class TestModelInstanceObject {
 
 					/* The result should be void. */
 					/* The result should be an IModelInstanceCollecttion. */
-					assertTrue(msg,
-							operationResult instanceof IModelInstanceVoid);
+					assertTrue(msg, operationResult instanceof IModelInstanceVoid);
 				}
 
 				catch (OperationAccessException e) {
@@ -1544,7 +1569,8 @@ public class TestModelInstanceObject {
 				}
 
 				catch (OperationNotFoundException e) {
-					msg = ModelInstanceTypeTestSuiteMessages.TestModelInstanceObject_OperationNotFound;
+					msg =
+							ModelInstanceTypeTestSuiteMessages.TestModelInstanceObject_OperationNotFound;
 					msg = NLS.bind(msg, operationName);
 
 					LOGGER.warn(msg);
@@ -1575,8 +1601,8 @@ public class TestModelInstanceObject {
 			if (property.getName().equals("argumentPropertyStringMultiple")) {
 				argumentProperty = property;
 				try {
-					argument1 = instances_Class1.iterator().next().getProperty(
-							argumentProperty);
+					argument1 =
+							instances_Class1.iterator().next().getProperty(argumentProperty);
 					break;
 				}
 
@@ -1593,7 +1619,8 @@ public class TestModelInstanceObject {
 		// end for.
 
 		if (argument1 == null) {
-			msg = ModelInstanceTypeTestSuiteMessages.TestModelInstanceObject_NoPrimitiveTypeInstanceFound;
+			msg =
+					ModelInstanceTypeTestSuiteMessages.TestModelInstanceObject_NoPrimitiveTypeInstanceFound;
 			msg = NLS.bind(msg, PrimitiveTypeKind.STRING.getName());
 
 			fail(msg);
@@ -1630,7 +1657,8 @@ public class TestModelInstanceObject {
 			/* Add a boolean argument. */
 			args.add(argument1);
 
-			msg = ModelInstanceTypeTestSuiteMessages.TestModelInstanceObject_InvokeOperationIsWrong;
+			msg =
+					ModelInstanceTypeTestSuiteMessages.TestModelInstanceObject_InvokeOperationIsWrong;
 
 			for (IModelInstanceElement anElement : instances_Class1) {
 
@@ -1648,8 +1676,7 @@ public class TestModelInstanceObject {
 
 					/* The result should be void. */
 					/* The result should be an IModelInstanceCollecttion. */
-					assertTrue(msg,
-							operationResult instanceof IModelInstanceVoid);
+					assertTrue(msg, operationResult instanceof IModelInstanceVoid);
 				}
 
 				catch (OperationAccessException e) {
@@ -1657,7 +1684,8 @@ public class TestModelInstanceObject {
 				}
 
 				catch (OperationNotFoundException e) {
-					msg = ModelInstanceTypeTestSuiteMessages.TestModelInstanceObject_OperationNotFound;
+					msg =
+							ModelInstanceTypeTestSuiteMessages.TestModelInstanceObject_OperationNotFound;
 					msg = NLS.bind(msg, operationName);
 
 					LOGGER.warn(msg);
@@ -1688,8 +1716,8 @@ public class TestModelInstanceObject {
 			if (property.getName().equals("argumentPropertyObjectNonMultiple")) {
 				argumentProperty = property;
 				try {
-					argument1 = instances_Class1.iterator().next().getProperty(
-							argumentProperty);
+					argument1 =
+							instances_Class1.iterator().next().getProperty(argumentProperty);
 					break;
 				}
 
@@ -1706,7 +1734,8 @@ public class TestModelInstanceObject {
 		// end for.
 
 		if (argument1 == null) {
-			msg = ModelInstanceTypeTestSuiteMessages.TestModelInstanceObject_NoClass1InstanceFound2;
+			msg =
+					ModelInstanceTypeTestSuiteMessages.TestModelInstanceObject_NoClass1InstanceFound2;
 
 			fail(msg);
 
@@ -1742,7 +1771,8 @@ public class TestModelInstanceObject {
 			/* Add a boolean argument. */
 			args.add(argument1);
 
-			msg = ModelInstanceTypeTestSuiteMessages.TestModelInstanceObject_InvokeOperationIsWrong;
+			msg =
+					ModelInstanceTypeTestSuiteMessages.TestModelInstanceObject_InvokeOperationIsWrong;
 
 			for (IModelInstanceElement anElement : instances_Class1) {
 
@@ -1760,8 +1790,7 @@ public class TestModelInstanceObject {
 
 					/* The result should be void. */
 					/* The result should be an IModelInstanceCollecttion. */
-					assertTrue(msg,
-							operationResult instanceof IModelInstanceVoid);
+					assertTrue(msg, operationResult instanceof IModelInstanceVoid);
 				}
 
 				catch (OperationAccessException e) {
@@ -1769,7 +1798,8 @@ public class TestModelInstanceObject {
 				}
 
 				catch (OperationNotFoundException e) {
-					msg = ModelInstanceTypeTestSuiteMessages.TestModelInstanceObject_OperationNotFound;
+					msg =
+							ModelInstanceTypeTestSuiteMessages.TestModelInstanceObject_OperationNotFound;
 					msg = NLS.bind(msg, operationName);
 
 					LOGGER.warn(msg);
@@ -1800,8 +1830,8 @@ public class TestModelInstanceObject {
 			if (property.getName().equals("argumentPropertyObjectMultiple")) {
 				argumentProperty = property;
 				try {
-					argument1 = instances_Class1.iterator().next().getProperty(
-							argumentProperty);
+					argument1 =
+							instances_Class1.iterator().next().getProperty(argumentProperty);
 					break;
 				}
 
@@ -1818,7 +1848,8 @@ public class TestModelInstanceObject {
 		// end for.
 
 		if (argument1 == null) {
-			msg = ModelInstanceTypeTestSuiteMessages.TestModelInstanceObject_NoClass1InstanceFound2;
+			msg =
+					ModelInstanceTypeTestSuiteMessages.TestModelInstanceObject_NoClass1InstanceFound2;
 
 			fail(msg);
 
@@ -1854,7 +1885,8 @@ public class TestModelInstanceObject {
 			/* Add a boolean argument. */
 			args.add(argument1);
 
-			msg = ModelInstanceTypeTestSuiteMessages.TestModelInstanceObject_InvokeOperationIsWrong;
+			msg =
+					ModelInstanceTypeTestSuiteMessages.TestModelInstanceObject_InvokeOperationIsWrong;
 
 			for (IModelInstanceElement anElement : instances_Class1) {
 
@@ -1872,8 +1904,7 @@ public class TestModelInstanceObject {
 
 					/* The result should be void. */
 					/* The result should be an IModelInstanceCollecttion. */
-					assertTrue(msg,
-							operationResult instanceof IModelInstanceVoid);
+					assertTrue(msg, operationResult instanceof IModelInstanceVoid);
 				}
 
 				catch (OperationAccessException e) {
@@ -1881,7 +1912,8 @@ public class TestModelInstanceObject {
 				}
 
 				catch (OperationNotFoundException e) {
-					msg = ModelInstanceTypeTestSuiteMessages.TestModelInstanceObject_OperationNotFound;
+					msg =
+							ModelInstanceTypeTestSuiteMessages.TestModelInstanceObject_OperationNotFound;
 					msg = NLS.bind(msg, operationName);
 
 					LOGGER.warn(msg);
@@ -1913,8 +1945,8 @@ public class TestModelInstanceObject {
 					"argumentPropertyEnumerationLiteralNonMultiple")) {
 				argumentProperty = property;
 				try {
-					argument1 = instances_Class1.iterator().next().getProperty(
-							argumentProperty);
+					argument1 =
+							instances_Class1.iterator().next().getProperty(argumentProperty);
 					break;
 				}
 
@@ -1931,7 +1963,8 @@ public class TestModelInstanceObject {
 		// end for.
 
 		if (argument1 == null) {
-			msg = ModelInstanceTypeTestSuiteMessages.TestModelInstanceObject_NoEnumeration1InstanceFound2;
+			msg =
+					ModelInstanceTypeTestSuiteMessages.TestModelInstanceObject_NoEnumeration1InstanceFound2;
 
 			fail(msg);
 
@@ -1967,7 +2000,8 @@ public class TestModelInstanceObject {
 			/* Add a boolean argument. */
 			args.add(argument1);
 
-			msg = ModelInstanceTypeTestSuiteMessages.TestModelInstanceObject_InvokeOperationIsWrong;
+			msg =
+					ModelInstanceTypeTestSuiteMessages.TestModelInstanceObject_InvokeOperationIsWrong;
 
 			for (IModelInstanceElement anElement : instances_Class1) {
 
@@ -1985,8 +2019,7 @@ public class TestModelInstanceObject {
 
 					/* The result should be void. */
 					/* The result should be an IModelInstanceCollecttion. */
-					assertTrue(msg,
-							operationResult instanceof IModelInstanceVoid);
+					assertTrue(msg, operationResult instanceof IModelInstanceVoid);
 				}
 
 				catch (OperationAccessException e) {
@@ -1994,7 +2027,8 @@ public class TestModelInstanceObject {
 				}
 
 				catch (OperationNotFoundException e) {
-					msg = ModelInstanceTypeTestSuiteMessages.TestModelInstanceObject_OperationNotFound;
+					msg =
+							ModelInstanceTypeTestSuiteMessages.TestModelInstanceObject_OperationNotFound;
 					msg = NLS.bind(msg, operationName);
 
 					LOGGER.warn(msg);
@@ -2026,8 +2060,8 @@ public class TestModelInstanceObject {
 					"argumentPropertyEnumerationLiteralMultiple")) {
 				argumentProperty = property;
 				try {
-					argument1 = instances_Class1.iterator().next().getProperty(
-							argumentProperty);
+					argument1 =
+							instances_Class1.iterator().next().getProperty(argumentProperty);
 					break;
 				}
 
@@ -2044,7 +2078,8 @@ public class TestModelInstanceObject {
 		// end for.
 
 		if (argument1 == null) {
-			msg = ModelInstanceTypeTestSuiteMessages.TestModelInstanceObject_NoEnumeration1InstanceFound2;
+			msg =
+					ModelInstanceTypeTestSuiteMessages.TestModelInstanceObject_NoEnumeration1InstanceFound2;
 
 			fail(msg);
 
@@ -2080,7 +2115,8 @@ public class TestModelInstanceObject {
 			/* Add a boolean argument. */
 			args.add(argument1);
 
-			msg = ModelInstanceTypeTestSuiteMessages.TestModelInstanceObject_InvokeOperationIsWrong;
+			msg =
+					ModelInstanceTypeTestSuiteMessages.TestModelInstanceObject_InvokeOperationIsWrong;
 
 			for (IModelInstanceElement anElement : instances_Class1) {
 
@@ -2098,8 +2134,7 @@ public class TestModelInstanceObject {
 
 					/* The result should be void. */
 					/* The result should be an IModelInstanceCollecttion. */
-					assertTrue(msg,
-							operationResult instanceof IModelInstanceVoid);
+					assertTrue(msg, operationResult instanceof IModelInstanceVoid);
 				}
 
 				catch (OperationAccessException e) {
@@ -2107,7 +2142,8 @@ public class TestModelInstanceObject {
 				}
 
 				catch (OperationNotFoundException e) {
-					msg = ModelInstanceTypeTestSuiteMessages.TestModelInstanceObject_OperationNotFound;
+					msg =
+							ModelInstanceTypeTestSuiteMessages.TestModelInstanceObject_OperationNotFound;
 					msg = NLS.bind(msg, operationName);
 
 					LOGGER.warn(msg);
@@ -2176,8 +2212,7 @@ public class TestModelInstanceObject {
 			IModelInstanceObject anObject;
 			anObject = (IModelInstanceObject) anElement;
 
-			anObject.invokeOperation(null,
-					new ArrayList<IModelInstanceElement>());
+			anObject.invokeOperation(null, new ArrayList<IModelInstanceElement>());
 		}
 		// end for.
 	}
@@ -2206,7 +2241,8 @@ public class TestModelInstanceObject {
 			// no else.
 		}
 
-		msg = ModelInstanceTypeTestSuiteMessages.TestModelInstanceObject_GetPropertyIsWrong;
+		msg =
+				ModelInstanceTypeTestSuiteMessages.TestModelInstanceObject_GetPropertyIsWrong;
 
 		for (IModelInstanceElement anElement : instances_Class1) {
 
@@ -2225,19 +2261,16 @@ public class TestModelInstanceObject {
 
 					/* The result should have the same type as the property. */
 					if (aProperty.getType() instanceof PrimitiveType) {
-						assertEquals(msg, ((PrimitiveType) aProperty.getType())
-								.getKind(), ((PrimitiveType) aPropertyValue
-								.getType()).getKind());
+						assertEquals(msg, ((PrimitiveType) aProperty.getType()).getKind(),
+								((PrimitiveType) aPropertyValue.getType()).getKind());
 					}
 
 					else {
-						assertEquals(msg, aProperty.getType(), aPropertyValue
-								.getType());
+						assertEquals(msg, aProperty.getType(), aPropertyValue.getType());
 					}
 
 					/* The result should be and IModelInstanceElement. */
-					assertTrue(msg,
-							aPropertyValue instanceof IModelInstanceElement);
+					assertTrue(msg, aPropertyValue instanceof IModelInstanceElement);
 				}
 
 				catch (PropertyAccessException e) {
@@ -2277,7 +2310,8 @@ public class TestModelInstanceObject {
 			// no else.
 		}
 
-		msg = ModelInstanceTypeTestSuiteMessages.TestModelInstanceObject_GetPropertyIsWrong;
+		msg =
+				ModelInstanceTypeTestSuiteMessages.TestModelInstanceObject_GetPropertyIsWrong;
 
 		for (IModelInstanceElement anElement : instances_Class1) {
 
@@ -2295,23 +2329,20 @@ public class TestModelInstanceObject {
 					assertNotNull(msg, aPropertyValue.getType());
 
 					/* The result should have an ordered set type. */
-					assertEquals(msg, TypeConstants.ORDERED_SET(aProperty
-							.getType()), aPropertyValue.getType());
+					assertEquals(msg, EssentialOclPlugin.getOclLibraryProvider()
+							.getOclLibrary().getOrderedSetType(aProperty.getType()),
+							aPropertyValue.getType());
 
 					/* The result should be an IModelInstanceCollecttion. */
-					assertTrue(
-							msg,
-							aPropertyValue instanceof IModelInstanceCollection<?>);
+					assertTrue(msg, aPropertyValue instanceof IModelInstanceCollection<?>);
 
 					/* The result should be unique. */
-					assertTrue(msg,
-							((IModelInstanceCollection<?>) aPropertyValue)
-									.isUnique());
+					assertTrue(msg, ((IModelInstanceCollection<?>) aPropertyValue)
+							.isUnique());
 
 					/* The result should be ordered. */
-					assertTrue(msg,
-							((IModelInstanceCollection<?>) aPropertyValue)
-									.isOrdered());
+					assertTrue(msg, ((IModelInstanceCollection<?>) aPropertyValue)
+							.isOrdered());
 				}
 
 				catch (PropertyAccessException e) {
@@ -2351,7 +2382,8 @@ public class TestModelInstanceObject {
 			// no else.
 		}
 
-		msg = ModelInstanceTypeTestSuiteMessages.TestModelInstanceObject_GetPropertyIsWrong;
+		msg =
+				ModelInstanceTypeTestSuiteMessages.TestModelInstanceObject_GetPropertyIsWrong;
 
 		for (IModelInstanceElement anElement : instances_Class1) {
 
@@ -2369,23 +2401,20 @@ public class TestModelInstanceObject {
 					assertNotNull(msg, aPropertyValue.getType());
 
 					/* The result should have an unordered set type. */
-					assertEquals(msg, TypeConstants.SET(aProperty.getType()),
-							aPropertyValue.getType());
+					assertEquals(msg, EssentialOclPlugin.getOclLibraryProvider()
+							.getOclLibrary().getSetType(aProperty.getType()), aPropertyValue
+							.getType());
 
 					/* The result should be an IModelInstanceCollecttion. */
-					assertTrue(
-							msg,
-							aPropertyValue instanceof IModelInstanceCollection<?>);
+					assertTrue(msg, aPropertyValue instanceof IModelInstanceCollection<?>);
 
 					/* The result should be unique. */
-					assertTrue(msg,
-							((IModelInstanceCollection<?>) aPropertyValue)
-									.isUnique());
+					assertTrue(msg, ((IModelInstanceCollection<?>) aPropertyValue)
+							.isUnique());
 
 					/* The result should be unordered. */
-					assertFalse(msg,
-							((IModelInstanceCollection<?>) aPropertyValue)
-									.isOrdered());
+					assertFalse(msg, ((IModelInstanceCollection<?>) aPropertyValue)
+							.isOrdered());
 				}
 
 				catch (PropertyAccessException e) {
@@ -2425,7 +2454,8 @@ public class TestModelInstanceObject {
 			// no else.
 		}
 
-		msg = ModelInstanceTypeTestSuiteMessages.TestModelInstanceObject_GetPropertyIsWrong;
+		msg =
+				ModelInstanceTypeTestSuiteMessages.TestModelInstanceObject_GetPropertyIsWrong;
 
 		for (IModelInstanceElement anElement : instances_Class1) {
 
@@ -2443,23 +2473,20 @@ public class TestModelInstanceObject {
 					assertNotNull(msg, aPropertyValue.getType());
 
 					/* The result should have an ordered list type. */
-					assertEquals(msg, TypeConstants.SEQUENCE(aProperty
-							.getType()), aPropertyValue.getType());
+					assertEquals(msg, EssentialOclPlugin.getOclLibraryProvider()
+							.getOclLibrary().getSequenceType(aProperty.getType()),
+							aPropertyValue.getType());
 
 					/* The result should be an IModelInstanceCollecttion. */
-					assertTrue(
-							msg,
-							aPropertyValue instanceof IModelInstanceCollection<?>);
+					assertTrue(msg, aPropertyValue instanceof IModelInstanceCollection<?>);
 
 					/* The result should be unique. */
-					assertFalse(msg,
-							((IModelInstanceCollection<?>) aPropertyValue)
-									.isUnique());
+					assertFalse(msg, ((IModelInstanceCollection<?>) aPropertyValue)
+							.isUnique());
 
 					/* The result should be ordered. */
-					assertTrue(msg,
-							((IModelInstanceCollection<?>) aPropertyValue)
-									.isOrdered());
+					assertTrue(msg, ((IModelInstanceCollection<?>) aPropertyValue)
+							.isOrdered());
 				}
 
 				catch (PropertyAccessException e) {
@@ -2499,7 +2526,8 @@ public class TestModelInstanceObject {
 			// no else.
 		}
 
-		msg = ModelInstanceTypeTestSuiteMessages.TestModelInstanceObject_GetPropertyIsWrong;
+		msg =
+				ModelInstanceTypeTestSuiteMessages.TestModelInstanceObject_GetPropertyIsWrong;
 
 		for (IModelInstanceElement anElement : instances_Class1) {
 
@@ -2517,23 +2545,20 @@ public class TestModelInstanceObject {
 					assertNotNull(msg, aPropertyValue.getType());
 
 					/* The result should have an unordered list type. */
-					assertEquals(msg, TypeConstants.BAG(aProperty.getType()),
-							aPropertyValue.getType());
+					assertEquals(msg, EssentialOclPlugin.getOclLibraryProvider()
+							.getOclLibrary().getBagType(aProperty.getType()), aPropertyValue
+							.getType());
 
 					/* The result should be an IModelInstanceCollecttion. */
-					assertTrue(
-							msg,
-							aPropertyValue instanceof IModelInstanceCollection<?>);
+					assertTrue(msg, aPropertyValue instanceof IModelInstanceCollection<?>);
 
 					/* The result should be non-unique. */
-					assertFalse(msg,
-							((IModelInstanceCollection<?>) aPropertyValue)
-									.isUnique());
+					assertFalse(msg, ((IModelInstanceCollection<?>) aPropertyValue)
+							.isUnique());
 
 					/* The result should be unordered. */
-					assertFalse(msg,
-							((IModelInstanceCollection<?>) aPropertyValue)
-									.isOrdered());
+					assertFalse(msg, ((IModelInstanceCollection<?>) aPropertyValue)
+							.isOrdered());
 				}
 
 				catch (PropertyAccessException e) {
@@ -2582,9 +2607,11 @@ public class TestModelInstanceObject {
 	@Test
 	public void testGetTypes1() {
 
-		msg = ModelInstanceTypeTestSuiteMessages.TestModelInstanceObject_GetTypesIsWrong;
-		msg += " "
-				+ ModelInstanceTypeTestSuiteMessages.TestModelInstanceObject_GetTypesOfClass1IsWrong;
+		msg =
+				ModelInstanceTypeTestSuiteMessages.TestModelInstanceObject_GetTypesIsWrong;
+		msg +=
+				" "
+						+ ModelInstanceTypeTestSuiteMessages.TestModelInstanceObject_GetTypesOfClass1IsWrong;
 
 		for (IModelInstanceElement anElement : instances_Class1) {
 
@@ -2592,8 +2619,8 @@ public class TestModelInstanceObject {
 			assertNotNull(msg, anElement.getType());
 
 			/*
-			 * A Class1 instance should have Class1 as Type or should be an
-			 * instance of Class2.
+			 * A Class1 instance should have Class1 as Type or should be an instance
+			 * of Class2.
 			 */
 			if (!anElement.getType().conformsTo(type_Class1)
 					&& !anElement.getType().conformsTo(type_Class2)) {
@@ -2614,9 +2641,11 @@ public class TestModelInstanceObject {
 	@Test
 	public void testGetTypes2() {
 
-		msg = ModelInstanceTypeTestSuiteMessages.TestModelInstanceObject_GetTypesIsWrong;
-		msg += " "
-				+ ModelInstanceTypeTestSuiteMessages.TestModelInstanceObject_GetTypesOfClass2IsWrong;
+		msg =
+				ModelInstanceTypeTestSuiteMessages.TestModelInstanceObject_GetTypesIsWrong;
+		msg +=
+				" "
+						+ ModelInstanceTypeTestSuiteMessages.TestModelInstanceObject_GetTypesOfClass2IsWrong;
 
 		for (IModelInstanceElement anElement : instances_Class2) {
 
@@ -2624,8 +2653,7 @@ public class TestModelInstanceObject {
 			assertNotNull(msg, anElement.getType());
 
 			/*
-			 * A Class2 should have Class2 as Type and not should have Class1 as
-			 * Type
+			 * A Class2 should have Class2 as Type and not should have Class1 as Type
 			 */
 			if (!anElement.getType().conformsTo(type_Class2)
 					|| anElement.getType().equals(type_Class1)) {
@@ -2646,9 +2674,11 @@ public class TestModelInstanceObject {
 	@Test
 	public void testGetTypes3() {
 
-		msg = ModelInstanceTypeTestSuiteMessages.TestModelInstanceObject_GetTypesIsWrong;
-		msg += " "
-				+ ModelInstanceTypeTestSuiteMessages.TestModelInstanceObject_GetTypesOfInterface1IsWrong;
+		msg =
+				ModelInstanceTypeTestSuiteMessages.TestModelInstanceObject_GetTypesIsWrong;
+		msg +=
+				" "
+						+ ModelInstanceTypeTestSuiteMessages.TestModelInstanceObject_GetTypesOfInterface1IsWrong;
 
 		for (IModelInstanceElement anElement : instances_Interface1) {
 
@@ -2674,9 +2704,11 @@ public class TestModelInstanceObject {
 	@Test
 	public void testGetTypes4() {
 
-		msg = ModelInstanceTypeTestSuiteMessages.TestModelInstanceObject_GetTypesIsWrong;
-		msg += " "
-				+ ModelInstanceTypeTestSuiteMessages.TestModelInstanceObject_GetTypesOfInterface3IsWrong;
+		msg =
+				ModelInstanceTypeTestSuiteMessages.TestModelInstanceObject_GetTypesIsWrong;
+		msg +=
+				" "
+						+ ModelInstanceTypeTestSuiteMessages.TestModelInstanceObject_GetTypesOfInterface3IsWrong;
 
 		for (IModelInstanceElement anElement : instances_Interface3) {
 
@@ -2684,8 +2716,8 @@ public class TestModelInstanceObject {
 			assertNotNull(msg, anElement.getType());
 
 			/*
-			 * An Interface2 instance should have Interface3 as Type and not
-			 * should have the Interface2 as type.
+			 * An Interface2 instance should have Interface3 as Type and not should
+			 * have the Interface2 as type.
 			 */
 			if (!anElement.getType().conformsTo(type_Interface3)
 					|| anElement.getType().equals(type_Interface2)) {
@@ -2704,7 +2736,8 @@ public class TestModelInstanceObject {
 	@Test
 	public void testGetObject() {
 
-		msg = ModelInstanceTypeTestSuiteMessages.TestModelInstanceObject_GetObjectIsWrong;
+		msg =
+				ModelInstanceTypeTestSuiteMessages.TestModelInstanceObject_GetObjectIsWrong;
 
 		/* The method should return an object or should be undefined. */
 		for (IModelInstanceElement anElement : instances_AllTypes) {
@@ -2731,7 +2764,8 @@ public class TestModelInstanceObject {
 	@Test
 	public void testIsUndefined() {
 
-		msg = ModelInstanceTypeTestSuiteMessages.TestModelInstanceObject_IsUndefinedIsWrong;
+		msg =
+				ModelInstanceTypeTestSuiteMessages.TestModelInstanceObject_IsUndefinedIsWrong;
 
 		/* The method should return null if the object is undefined. */
 		for (IModelInstanceElement anElement : instances_AllTypes) {
@@ -2762,7 +2796,8 @@ public class TestModelInstanceObject {
 		/* The model instance objects should be adapted to the right interface. */
 		for (IModelInstanceElement anElement : instances_AllTypes) {
 
-			msg = ModelInstanceTypeTestSuiteMessages.TestModelInstanceObject_WrongAdaptation;
+			msg =
+					ModelInstanceTypeTestSuiteMessages.TestModelInstanceObject_WrongAdaptation;
 
 			assertTrue(msg, anElement instanceof IModelInstanceObject);
 		}

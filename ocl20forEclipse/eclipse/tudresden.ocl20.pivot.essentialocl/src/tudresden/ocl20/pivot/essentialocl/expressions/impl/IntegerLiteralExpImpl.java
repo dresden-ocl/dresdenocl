@@ -50,179 +50,184 @@ import org.apache.commons.lang.builder.ToStringBuilder;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.IntegerLiteralExpImpl#getIntegerSymbol <em>Integer Symbol</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.IntegerLiteralExpImpl#getIntegerSymbol <em>Integer Symbol</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @generated
  */
-public class IntegerLiteralExpImpl extends NumericLiteralExpImpl implements IntegerLiteralExp {
+public class IntegerLiteralExpImpl extends NumericLiteralExpImpl implements
+		IntegerLiteralExp {
 
-  /**
-   * Logger for this class
-   */
-  private static final Logger logger = Logger.getLogger(IntegerLiteralExpImpl.class);
+	/**
+	 * Logger for this class
+	 */
+	private static final Logger logger =
+			Logger.getLogger(IntegerLiteralExpImpl.class);
 
-  /**
-   * The default value of the '{@link #getIntegerSymbol() <em>Integer Symbol</em>}' attribute.
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @see #getIntegerSymbol()
-   * @generated
-   * @ordered
-   */
-  protected static final int INTEGER_SYMBOL_EDEFAULT = 0;
+	/**
+	 * The default value of the '{@link #getIntegerSymbol() <em>Integer Symbol</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @see #getIntegerSymbol()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final int INTEGER_SYMBOL_EDEFAULT = 0;
 
-  /**
-   * The cached value of the '{@link #getIntegerSymbol() <em>Integer Symbol</em>}' attribute. <!--
-   * begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @see #getIntegerSymbol()
-   * @generated
-   * @ordered
-   */
-  protected int integerSymbol = INTEGER_SYMBOL_EDEFAULT;
+	/**
+	 * The cached value of the '{@link #getIntegerSymbol() <em>Integer Symbol</em>}' attribute. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @see #getIntegerSymbol()
+	 * @generated
+	 * @ordered
+	 */
+	protected int integerSymbol = INTEGER_SYMBOL_EDEFAULT;
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  protected IntegerLiteralExpImpl() {
-    super();
-  }
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected IntegerLiteralExpImpl() {
 
-  /**
-   * Overridden to determine the type of the <code>IntegerLiteralExp</code> according to the OCL
-   * specification (Section 8.3):
-   * 
-   * <p>
-   * The type of an integer Literal expression is the type Integer.
-   * 
-   * <pre>
-   *    context IntegerLiteralExp
-   *    inv: self.type.name = ‘Integer’
-   * </pre>
-   * 
-   * </p>
-   * 
-   * @see tudresden.ocl20.pivot.pivotmodel.impl.TypedElementImpl#getType()
-   */
-  @Override
-  protected Type evaluateType() {
-    if (logger.isDebugEnabled()) {
-      logger.debug("evaluateType() - enter"); //$NON-NLS-1$
-    }
+		super();
+	}
 
-    Type type = getValidOclLibrary().getOclInteger();
-    
-    if (logger.isDebugEnabled()) {
-      logger.debug("evaluateType() - exit - return value=" + type); //$NON-NLS-1$
-    }
-    
-    return type;
-  }
+	/**
+	 * Overridden to determine the type of the <code>IntegerLiteralExp</code> according to the OCL
+	 * specification (Section 8.3):
+	 * 
+	 * <p>
+	 * The type of an integer Literal expression is the type Integer.
+	 * 
+	 * <pre>
+	 *    context IntegerLiteralExp
+	 *    inv: self.type.name = ‘Integer’
+	 * </pre>
+	 * 
+	 * </p>
+	 * 
+	 * @see tudresden.ocl20.pivot.pivotmodel.impl.TypedElementImpl#getType()
+	 */
+	@Override
+	protected Type evaluateType() {
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  public int getIntegerSymbol() {
-    return integerSymbol;
-  }
+		if (logger.isDebugEnabled()) {
+			logger.debug("evaluateType() - enter"); //$NON-NLS-1$
+		}
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  public void setIntegerSymbol(int newIntegerSymbol) {
-    int oldIntegerSymbol = integerSymbol;
-    integerSymbol = newIntegerSymbol;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this,Notification.SET,
-          ExpressionsPackageImpl.INTEGER_LITERAL_EXP__INTEGER_SYMBOL,oldIntegerSymbol,integerSymbol));
-  }
+		Type type = getValidOclLibrary().getOclInteger();
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  @Override
-  public Object eGet(int featureID, boolean resolve, boolean coreType) {
-    switch (featureID) {
-      case ExpressionsPackageImpl.INTEGER_LITERAL_EXP__INTEGER_SYMBOL:
-        return new Integer(getIntegerSymbol());
-    }
-    return super.eGet(featureID,resolve,coreType);
-  }
+		if (logger.isDebugEnabled()) {
+			logger.debug("evaluateType() - exit - return value=" + type); //$NON-NLS-1$
+		}
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  @Override
-  public void eSet(int featureID, Object newValue) {
-    switch (featureID) {
-      case ExpressionsPackageImpl.INTEGER_LITERAL_EXP__INTEGER_SYMBOL:
-        setIntegerSymbol(((Integer) newValue).intValue());
-        return;
-    }
-    super.eSet(featureID,newValue);
-  }
+		return type;
+	}
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  @Override
-  public void eUnset(int featureID) {
-    switch (featureID) {
-      case ExpressionsPackageImpl.INTEGER_LITERAL_EXP__INTEGER_SYMBOL:
-        setIntegerSymbol(INTEGER_SYMBOL_EDEFAULT);
-        return;
-    }
-    super.eUnset(featureID);
-  }
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	public int getIntegerSymbol() {
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  @Override
-  public boolean eIsSet(int featureID) {
-    switch (featureID) {
-      case ExpressionsPackageImpl.INTEGER_LITERAL_EXP__INTEGER_SYMBOL:
-        return integerSymbol != INTEGER_SYMBOL_EDEFAULT;
-    }
-    return super.eIsSet(featureID);
-  }
+		return integerSymbol;
+	}
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  @Override
-  protected EClass eStaticClass() {
-    return ExpressionsPackageImpl.Literals.INTEGER_LITERAL_EXP;
-  }
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setIntegerSymbol(int newIntegerSymbol) {
 
-  /**
-   * Adapted the EMF implementation to return a standard string rendering.
-   * 
-   * @generated NOT
-   * 
-   */
-  @Override
-  public String toString() {
-    return new ToStringBuilder(this,ToStringStyle.SHORT_PREFIX_STYLE).appendSuper(super.toString())
-        .append("integerSymbol",integerSymbol).toString(); //$NON-NLS-1$
-  }
+		int oldIntegerSymbol = integerSymbol;
+		integerSymbol = newIntegerSymbol;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET,
+					ExpressionsPackageImpl.INTEGER_LITERAL_EXP__INTEGER_SYMBOL,
+					oldIntegerSymbol, integerSymbol));
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object eGet(int featureID, boolean resolve, boolean coreType) {
+
+		switch (featureID) {
+		case ExpressionsPackageImpl.INTEGER_LITERAL_EXP__INTEGER_SYMBOL:
+			return getIntegerSymbol();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void eSet(int featureID, Object newValue) {
+
+		switch (featureID) {
+		case ExpressionsPackageImpl.INTEGER_LITERAL_EXP__INTEGER_SYMBOL:
+			setIntegerSymbol((Integer) newValue);
+			return;
+		}
+		super.eSet(featureID, newValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void eUnset(int featureID) {
+
+		switch (featureID) {
+		case ExpressionsPackageImpl.INTEGER_LITERAL_EXP__INTEGER_SYMBOL:
+			setIntegerSymbol(INTEGER_SYMBOL_EDEFAULT);
+			return;
+		}
+		super.eUnset(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean eIsSet(int featureID) {
+
+		switch (featureID) {
+		case ExpressionsPackageImpl.INTEGER_LITERAL_EXP__INTEGER_SYMBOL:
+			return integerSymbol != INTEGER_SYMBOL_EDEFAULT;
+		}
+		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected EClass eStaticClass() {
+
+		return ExpressionsPackageImpl.Literals.INTEGER_LITERAL_EXP;
+	}
+
+	/**
+	 * Adapted the EMF implementation to return a standard string rendering.
+	 * 
+	 * @generated NOT
+	 * 
+	 */
+	@Override
+	public String toString() {
+
+		return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
+				.appendSuper(super.toString())
+				.append("integerSymbol", integerSymbol).toString(); //$NON-NLS-1$
+	}
 
 } // IntegerLiteralExpImpl

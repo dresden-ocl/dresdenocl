@@ -41,11 +41,10 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 
-import tudresden.ocl20.pivot.essentialocl.StandardLibraryPlugin;
-import tudresden.ocl20.pivot.essentialocl.internal.StandardLibraryMessages;
+import tudresden.ocl20.pivot.essentialocl.EssentialOclPlugin;
+import tudresden.ocl20.pivot.essentialocl.internal.EssentialOclMessages;
 import tudresden.ocl20.pivot.essentialocl.types.OclLibrary;
 import tudresden.ocl20.pivot.essentialocl.types.util.TypeResolver;
-import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
 
 /**
  * <p>
@@ -61,7 +60,7 @@ public class OclLibraryProvider implements IOclLibraryProvider {
 
 	/** The {@link Logger} for this class. */
 	private static final Logger LOGGER =
-			ModelBusPlugin.getLogger(OclLibraryProvider.class);
+			EssentialOclPlugin.getLogger(OclLibraryProvider.class);
 
 	/** The file name of the OCL Standard Library model. */
 	private static final String OCL_LIBRARY_FILE =
@@ -104,10 +103,10 @@ public class OclLibraryProvider implements IOclLibraryProvider {
 		Resource resource;
 		resource =
 				resourceSet.createResource(URI.createPlatformPluginURI(
-						StandardLibraryPlugin.ID + OCL_LIBRARY_FILE, false));
+						EssentialOclPlugin.ID + OCL_LIBRARY_FILE, false));
 
 		if (LOGGER.isInfoEnabled()) {
-			LOGGER.info(StandardLibraryMessages.OclLibraryProvider_LoadOclLibrary);
+			LOGGER.info(EssentialOclMessages.OclLibraryProvider_LoadOclLibrary);
 		}
 		// no else.
 

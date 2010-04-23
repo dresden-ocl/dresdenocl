@@ -41,111 +41,112 @@ package tudresden.ocl20.pivot.essentialocl.types;
  */
 public interface TypesFactory {
 
-  /**
-   * The singleton instance of the factory.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  TypesFactory INSTANCE = tudresden.ocl20.pivot.essentialocl.types.impl.TypesFactoryImpl.eINSTANCE;
+	/**
+	 * The singleton instance of the factory.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	TypesFactory INSTANCE =
+			tudresden.ocl20.pivot.essentialocl.types.impl.TypesFactoryImpl.eINSTANCE;
 
-  /**
-   * Returns a new object of class '<em>Bag Type</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Bag Type</em>'.
-   * @generated
-   */
-  BagType createBagType();
+	/**
+	 * Returns a new object of class '<em>Bag Type</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Bag Type</em>'.
+	 * @generated
+	 */
+	BagType createBagType();
 
-  /**
-   * Returns a new object of class '<em>Tuple Type</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Tuple Type</em>'.
-   * @generated
-   */
-  TupleType createTupleType();
+	/**
+	 * Returns a new object of class '<em>Tuple Type</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Tuple Type</em>'.
+	 * @generated
+	 */
+	TupleType createTupleType();
 
-  /**
-   * Returns a new object of class '<em>Collection Type</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Collection Type</em>'.
-   * @generated
-   */
-  CollectionType createCollectionType();
+	/**
+	 * Returns a new object of class '<em>Collection Type</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Collection Type</em>'.
+	 * @generated
+	 */
+	CollectionType createCollectionType();
 
-  /**
-   * Returns a new object of class '<em>Invalid Type</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Invalid Type</em>'.
-   * @generated
-   */
-  InvalidType createInvalidType();
+	/**
+	 * Returns a new object of class '<em>Invalid Type</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Invalid Type</em>'.
+	 * @generated
+	 */
+	InvalidType createInvalidType();
 
-  /**
-   * Returns a new object of class '<em>Ordered Set Type</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Ordered Set Type</em>'.
-   * @generated
-   */
-  OrderedSetType createOrderedSetType();
+	/**
+	 * Returns a new object of class '<em>Ordered Set Type</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Ordered Set Type</em>'.
+	 * @generated
+	 */
+	OrderedSetType createOrderedSetType();
 
-  /**
-   * Returns a new object of class '<em>Sequence Type</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Sequence Type</em>'.
-   * @generated
-   */
-  SequenceType createSequenceType();
+	/**
+	 * Returns a new object of class '<em>Sequence Type</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Sequence Type</em>'.
+	 * @generated
+	 */
+	SequenceType createSequenceType();
 
-  /**
-   * Returns a new object of class '<em>Set Type</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Set Type</em>'.
-   * @generated
-   */
-  SetType createSetType();
+	/**
+	 * Returns a new object of class '<em>Set Type</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Set Type</em>'.
+	 * @generated
+	 */
+	SetType createSetType();
 
-  /**
-   * Returns a new object of class '<em>Void Type</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Void Type</em>'.
-   * @generated
-   */
-  VoidType createVoidType();
+	/**
+	 * Returns a new object of class '<em>Void Type</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Void Type</em>'.
+	 * @generated
+	 */
+	VoidType createVoidType();
 
-  /**
-   * Returns a new object of class '<em>Type Type</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Type Type</em>'.
-   * @generated
-   */
-  TypeType createTypeType();
+	/**
+	 * Returns a new object of class '<em>Type Type</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Type Type</em>'.
+	 * @generated
+	 */
+	TypeType createTypeType();
 
-  /**
-   * Returns a new object of class '<em>Ocl Library</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Ocl Library</em>'.
-   * @generated
-   */
-  OclLibrary createOclLibrary();
+	/**
+	 * Returns a new object of class '<em>Ocl Library</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Ocl Library</em>'.
+	 * @generated
+	 */
+	OclLibrary createOclLibrary();
 
-  /**
-   * Returns a new object of class '<em>Any Type</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Any Type</em>'.
-   * @generated
-   */
-  AnyType createAnyType();
+	/**
+	 * Returns a new object of class '<em>Any Type</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Any Type</em>'.
+	 * @generated
+	 */
+	AnyType createAnyType();
 
 } //TypesFactory

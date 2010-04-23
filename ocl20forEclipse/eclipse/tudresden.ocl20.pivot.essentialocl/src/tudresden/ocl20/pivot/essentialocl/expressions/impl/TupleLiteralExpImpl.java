@@ -57,200 +57,200 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.TupleLiteralExpImpl#getPart <em>Part</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.TupleLiteralExpImpl#getPart <em>Part</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @generated
  */
 public class TupleLiteralExpImpl extends LiteralExpImpl implements
-    TupleLiteralExp {
+		TupleLiteralExp {
 
-  /**
-   * The cached value of the '{@link #getPart() <em>Part</em>}' containment
-   * reference list. <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @see #getPart()
-   * @generated
-   * @ordered
-   */
-  protected EList<TupleLiteralPart> part = null;
+	/**
+	 * The cached value of the '{@link #getPart() <em>Part</em>}' containment reference list.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @see #getPart()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<TupleLiteralPart> part;
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  protected TupleLiteralExpImpl() {
-    super();
-  }
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected TupleLiteralExpImpl() {
 
-  /**
-   * Overridden to determine the type of the <code>TupleLiteralExp</code>
-   * according to the OCL specification (Section 8.3):
-   * 
-   * [1] The type of a TupleLiteralExp is a TupleType with the specified parts.
-   * 
-   * <pre>
-   *   context TupleLiteralExp
-   *   inv: type.oclIsKindOf (TupleType)
-   *      and part-&gt;forAll (tlep |
-   *         type.oclAsType (TupleType).allProperties()-&gt;exists (tp | tlep.attribute = tp))
-   *      and part-&gt;size() = type.oclAsType (TupleType).allProperties()-&gt;size()
-   * </pre>
-   * 
-   * [2] All tuple literal expression parts of one tuple literal expression have
-   * unique names.
-   * 
-   * <pre>
-   *   context TupleLiteralExp
-   *   inv: part-&gt;isUnique (attribute.name)
-   * </pre>
-   * 
-   * </p>
-   * 
-   * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.OclExpressionImpl#evaluateType()
-   */
-  @Override
-  protected Type evaluateType() {
-    List<Property> tupleProperties;
-    Type type;
-    
-    // collect the properties of all tuple literal parts
-    tupleProperties = new ArrayList<Property>(getPart().size());
-    
-    for (TupleLiteralPart tupleLiteral : getPart()) {
-      Property partProperty = tupleLiteral.getProperty();
+		super();
+	}
 
-      // check that the part references a property
-      if (partProperty == null) {
-        throw new WellformednessException(this,
-            "All tuple literal parts of a tuple literal expression " //$NON-NLS-1$
-                + "must reference a valid property. "); //$NON-NLS-1$
-      }
+	/**
+	 * Overridden to determine the type of the <code>TupleLiteralExp</code>
+	 * according to the OCL specification (Section 8.3):
+	 * 
+	 * [1] The type of a TupleLiteralExp is a TupleType with the specified parts.
+	 * 
+	 * <pre>
+	 *   context TupleLiteralExp
+	 *   inv: type.oclIsKindOf (TupleType)
+	 *      and part-&gt;forAll (tlep |
+	 *         type.oclAsType (TupleType).allProperties()-&gt;exists (tp | tlep.attribute = tp))
+	 *      and part-&gt;size() = type.oclAsType (TupleType).allProperties()-&gt;size()
+	 * </pre>
+	 * 
+	 * [2] All tuple literal expression parts of one tuple literal expression have
+	 * unique names.
+	 * 
+	 * <pre>
+	 *   context TupleLiteralExp
+	 *   inv: part-&gt;isUnique (attribute.name)
+	 * </pre>
+	 * 
+	 * </p>
+	 * 
+	 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.OclExpressionImpl#evaluateType()
+	 */
+	@Override
+	protected Type evaluateType() {
 
-      tupleProperties.add(partProperty);
-    }
+		List<Property> tupleProperties;
+		Type type;
 
-    // check wellformedness
-    Set<String> partNames = new HashSet<String>();
+		// collect the properties of all tuple literal parts
+		tupleProperties = new ArrayList<Property>(getPart().size());
 
-    for (Property tupleProperty : tupleProperties) {
-      String partName = tupleProperty.getName();
+		for (TupleLiteralPart tupleLiteral : getPart()) {
+			Property partProperty = tupleLiteral.getProperty();
 
-      // check uniqueness of part name
-      if (partNames.contains(partName)) {
-        throw new WellformednessException(this,
-            "All tuple literal parts of one tuple literal expression " //$NON-NLS-1$
-                + "must have unique names"); //$NON-NLS-1$
-      }
-      
-      partNames.add(partName);
-    }
-    
-    // get a tuple type with the corresponding properties
-    type = getValidOclLibrary().makeTupleType(tupleProperties);
-    
-    return type;
-  }
+			// check that the part references a property
+			if (partProperty == null) {
+				throw new WellformednessException(this,
+						"All tuple literal parts of a tuple literal expression " //$NON-NLS-1$
+								+ "must reference a valid property. "); //$NON-NLS-1$
+			}
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  @Override
-  protected EClass eStaticClass() {
-    return ExpressionsPackageImpl.Literals.TUPLE_LITERAL_EXP;
-  }
+			tupleProperties.add(partProperty);
+		}
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  public List<TupleLiteralPart> getPart() {
-    if (part == null) {
-      part = new EObjectContainmentEList<TupleLiteralPart>(
-          TupleLiteralPart.class, this,
-          ExpressionsPackageImpl.TUPLE_LITERAL_EXP__PART);
-    }
-    return part;
-  }
+		// check wellformedness
+		Set<String> partNames = new HashSet<String>();
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  @Override
-  public NotificationChain eInverseRemove(InternalEObject otherEnd,
-      int featureID, NotificationChain msgs) {
-    switch (featureID) {
-      case ExpressionsPackageImpl.TUPLE_LITERAL_EXP__PART:
-        return ((InternalEList<?>) getPart()).basicRemove(otherEnd, msgs);
-    }
-    return super.eInverseRemove(otherEnd, featureID, msgs);
-  }
+		for (Property tupleProperty : tupleProperties) {
+			String partName = tupleProperty.getName();
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  @Override
-  public Object eGet(int featureID, boolean resolve, boolean coreType) {
-    switch (featureID) {
-      case ExpressionsPackageImpl.TUPLE_LITERAL_EXP__PART:
-        return getPart();
-    }
-    return super.eGet(featureID, resolve, coreType);
-  }
+			// check uniqueness of part name
+			if (partNames.contains(partName)) {
+				throw new WellformednessException(this,
+						"All tuple literal parts of one tuple literal expression " //$NON-NLS-1$
+								+ "must have unique names"); //$NON-NLS-1$
+			}
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  @SuppressWarnings("unchecked")
-  @Override
-  public void eSet(int featureID, Object newValue) {
-    switch (featureID) {
-      case ExpressionsPackageImpl.TUPLE_LITERAL_EXP__PART:
-        getPart().clear();
-        getPart().addAll((Collection<? extends TupleLiteralPart>) newValue);
-        return;
-    }
-    super.eSet(featureID, newValue);
-  }
+			partNames.add(partName);
+		}
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  @Override
-  public void eUnset(int featureID) {
-    switch (featureID) {
-      case ExpressionsPackageImpl.TUPLE_LITERAL_EXP__PART:
-        getPart().clear();
-        return;
-    }
-    super.eUnset(featureID);
-  }
+		// get a tuple type with the corresponding properties
+		type = getValidOclLibrary().makeTupleType(tupleProperties);
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  @Override
-  public boolean eIsSet(int featureID) {
-    switch (featureID) {
-      case ExpressionsPackageImpl.TUPLE_LITERAL_EXP__PART:
-        return part != null && !part.isEmpty();
-    }
-    return super.eIsSet(featureID);
-  }
+		return type;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected EClass eStaticClass() {
+
+		return ExpressionsPackageImpl.Literals.TUPLE_LITERAL_EXP;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	public List<TupleLiteralPart> getPart() {
+
+		if (part == null) {
+			part =
+					new EObjectContainmentEList<TupleLiteralPart>(TupleLiteralPart.class,
+							this, ExpressionsPackageImpl.TUPLE_LITERAL_EXP__PART);
+		}
+		return part;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd,
+			int featureID, NotificationChain msgs) {
+
+		switch (featureID) {
+		case ExpressionsPackageImpl.TUPLE_LITERAL_EXP__PART:
+			return ((InternalEList<?>) getPart()).basicRemove(otherEnd, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object eGet(int featureID, boolean resolve, boolean coreType) {
+
+		switch (featureID) {
+		case ExpressionsPackageImpl.TUPLE_LITERAL_EXP__PART:
+			return getPart();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public void eSet(int featureID, Object newValue) {
+
+		switch (featureID) {
+		case ExpressionsPackageImpl.TUPLE_LITERAL_EXP__PART:
+			getPart().clear();
+			getPart().addAll((Collection<? extends TupleLiteralPart>) newValue);
+			return;
+		}
+		super.eSet(featureID, newValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void eUnset(int featureID) {
+
+		switch (featureID) {
+		case ExpressionsPackageImpl.TUPLE_LITERAL_EXP__PART:
+			getPart().clear();
+			return;
+		}
+		super.eUnset(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean eIsSet(int featureID) {
+
+		switch (featureID) {
+		case ExpressionsPackageImpl.TUPLE_LITERAL_EXP__PART:
+			return part != null && !part.isEmpty();
+		}
+		return super.eIsSet(featureID);
+	}
 
 } // TupleLiteralExpImpl

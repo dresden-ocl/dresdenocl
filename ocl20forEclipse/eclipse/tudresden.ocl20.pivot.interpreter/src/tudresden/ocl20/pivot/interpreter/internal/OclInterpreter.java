@@ -44,6 +44,7 @@ import java.util.TreeMap;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
 
+import tudresden.ocl20.pivot.essentialocl.EssentialOclPlugin;
 import tudresden.ocl20.pivot.essentialocl.expressions.BooleanLiteralExp;
 import tudresden.ocl20.pivot.essentialocl.expressions.CollectionItem;
 import tudresden.ocl20.pivot.essentialocl.expressions.CollectionLiteralExp;
@@ -83,7 +84,6 @@ import tudresden.ocl20.pivot.essentialocl.types.BagType;
 import tudresden.ocl20.pivot.essentialocl.types.OrderedSetType;
 import tudresden.ocl20.pivot.essentialocl.types.SequenceType;
 import tudresden.ocl20.pivot.essentialocl.types.SetType;
-import tudresden.ocl20.pivot.essentialocl.types.TypeConstants;
 import tudresden.ocl20.pivot.essentialocl.types.TypeType;
 import tudresden.ocl20.pivot.interpreter.IInterpretationEnvironment;
 import tudresden.ocl20.pivot.interpreter.IInterpretationResult;
@@ -1771,7 +1771,8 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		/* Check if iterator is undefined. */
 		if (it.hasNext().oclIsInvalid().isTrue()) {
 			result =
-					myStandardLibraryFactory.createOclInvalid(TypeConstants.BOOLEAN,
+					myStandardLibraryFactory.createOclInvalid(EssentialOclPlugin
+							.getOclLibraryProvider().getOclLibrary().getOclBoolean(),
 							new IllegalArgumentException(
 									"Source of iterator exists() was invalid.", it.hasNext()
 											.getInvalidReason()));
@@ -1865,7 +1866,8 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		/* Check if iterator is undefined. */
 		if (it.hasNext().oclIsInvalid().isTrue()) {
 			result =
-					myStandardLibraryFactory.createOclInvalid(TypeConstants.BOOLEAN,
+					myStandardLibraryFactory.createOclInvalid(EssentialOclPlugin
+							.getOclLibraryProvider().getOclLibrary().getOclBoolean(),
 							new IllegalArgumentException(
 									"Source of iterator forAll() was invalid.", it.hasNext()
 											.getInvalidReason()));
@@ -1957,7 +1959,8 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		/* Check if iterator is undefined. */
 		if (sourceIt.hasNext().oclIsInvalid().isTrue()) {
 			result =
-					myStandardLibraryFactory.createOclInvalid(TypeConstants.BOOLEAN,
+					myStandardLibraryFactory.createOclInvalid(EssentialOclPlugin
+							.getOclLibraryProvider().getOclLibrary().getOclBoolean(),
 							new IllegalArgumentException(
 									"Source of iterator isUnique() was invalid.", sourceIt
 											.hasNext().getInvalidReason()));
@@ -1990,8 +1993,9 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 				/* Check if the result is invalid. */
 				if (bodyResult.oclIsInvalid().isTrue()) {
 					result =
-							this.myStandardLibraryFactory.createOclInvalid(
-									TypeConstants.BOOLEAN, bodyResult.getInvalidReason());
+							this.myStandardLibraryFactory.createOclInvalid(EssentialOclPlugin
+									.getOclLibraryProvider().getOclLibrary().getOclBoolean(),
+									bodyResult.getInvalidReason());
 					break;
 				}
 
@@ -2000,7 +2004,8 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 					result =
 							this.myStandardLibraryFactory
 									.createOclInvalid(
-											TypeConstants.BOOLEAN,
+											EssentialOclPlugin.getOclLibraryProvider()
+													.getOclLibrary().getOclBoolean(),
 											new IllegalArgumentException(
 													"Cannot determine iterator isUnique on Collection containing undefined values."));
 					break;
@@ -2049,7 +2054,8 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		/* Check if iterator is undefined. */
 		if (sourceIt.hasNext().oclIsInvalid().isTrue()) {
 			result =
-					myStandardLibraryFactory.createOclInvalid(TypeConstants.BOOLEAN,
+					myStandardLibraryFactory.createOclInvalid(EssentialOclPlugin
+							.getOclLibraryProvider().getOclLibrary().getOclBoolean(),
 							new IllegalArgumentException(
 									"Source of iterator one() was invalid.", sourceIt.hasNext()
 											.getInvalidReason()));
@@ -2130,7 +2136,8 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 						result =
 								this.myStandardLibraryFactory
 										.createOclInvalid(
-												TypeConstants.BOOLEAN,
+												EssentialOclPlugin.getOclLibraryProvider()
+														.getOclLibrary().getOclBoolean(),
 												new IllegalArgumentException(
 														"Cannot determine result of iterator one() if body expression is invalid for at least one element and less than two elements fulfill the body expression.",
 														failedBodyResult.getInvalidReason()));
@@ -2140,7 +2147,8 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 						result =
 								this.myStandardLibraryFactory
 										.createOclInvalid(
-												TypeConstants.BOOLEAN,
+												EssentialOclPlugin.getOclLibraryProvider()
+														.getOclLibrary().getOclBoolean(),
 												new IllegalArgumentException(
 														"Cannot determine result of iterator one() if body expression is undefined for at least one element and less than two elements fulfill the body expression."));
 					}
@@ -3049,7 +3057,8 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 						result =
 								this.myStandardLibraryFactory.createOclInvalid(
-										TypeConstants.BOOLEAN, booleanSource.getInvalidReason());
+										EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+												.getOclBoolean(), booleanSource.getInvalidReason());
 					}
 
 					/* undefined implies anything = invalid. */
@@ -3062,7 +3071,8 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 						result =
 								this.myStandardLibraryFactory.createOclInvalid(
-										TypeConstants.BOOLEAN, new NullPointerException(
+										EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+												.getOclBoolean(), new NullPointerException(
 												"Implies on undefined is not allowed. "
 														+ booleanSource.getUndefinedReason()));
 					}

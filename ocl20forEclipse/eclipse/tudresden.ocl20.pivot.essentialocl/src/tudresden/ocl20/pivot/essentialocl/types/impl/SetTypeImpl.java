@@ -52,62 +52,68 @@ import tudresden.ocl20.pivot.pivotmodel.TypeParameter;
  */
 public class SetTypeImpl extends CollectionTypeImpl implements SetType {
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * @generated
-   */
-  protected SetTypeImpl() {
-    super();
-  }
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected SetTypeImpl() {
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  protected EClass eStaticClass() {
-    return TypesPackageImpl.Literals.SET_TYPE;
-  }
+		super();
+	}
 
-  /**
-   * Overridden to check whether the other {@link CollectionType collection type} also is a
-   * <code>SetType</code>. In this case, return a <code>SetType</code> with the given element
-   * type, otherwise default to <code>CollectionType</code>.
-   * 
-   * @see tudresden.ocl20.pivot.essentialocl.types.impl.CollectionTypeImpl#getCommonCollectionType(tudresden.ocl20.pivot.essentialocl.types.CollectionType,
-   *      tudresden.ocl20.pivot.pivotmodel.Type)
-   */
-  @Override
-  protected CollectionType getCommonCollectionType(CollectionType otherCollectionType,
-      Type commonElementType) {
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected EClass eStaticClass() {
 
-    // check invariant
-    if (getOclLibrary() == null) {
-      throw new IllegalStateException("The reference to the OCL library was null for " + this + "."); //$NON-NLS-1$ //$NON-NLS-2$
-    }
+		return TypesPackageImpl.Literals.SET_TYPE;
+	}
 
-    if (otherCollectionType instanceof SetType) {
-      return getOclLibrary().getSetType(commonElementType);
-    }
+	/**
+	 * Overridden to check whether the other {@link CollectionType collection type} also is a
+	 * <code>SetType</code>. In this case, return a <code>SetType</code> with the given element
+	 * type, otherwise default to <code>CollectionType</code>.
+	 * 
+	 * @see tudresden.ocl20.pivot.essentialocl.types.impl.CollectionTypeImpl#getCommonCollectionType(tudresden.ocl20.pivot.essentialocl.types.CollectionType,
+	 *      tudresden.ocl20.pivot.pivotmodel.Type)
+	 */
+	@Override
+	protected CollectionType getCommonCollectionType(
+			CollectionType otherCollectionType, Type commonElementType) {
 
-    return getOclLibrary().getCollectionType(commonElementType);
-  }
+		// check invariant
+		if (getOclLibrary() == null) {
+			throw new IllegalStateException(
+					"The reference to the OCL library was null for " + this + "."); //$NON-NLS-1$ //$NON-NLS-2$
+		}
 
-  /* (non-Javadoc)
-   * @see tudresden.ocl20.pivot.essentialocl.types.impl.CollectionTypeImpl#bindTypeParameter(java.util.List, java.util.List)
-   */
-  @Override
-  public SetType bindTypeParameter(List<TypeParameter> parameters, List<? extends Type> types) {
-    return (SetType) super.bindTypeParameter(parameters,types);
-  }
+		if (otherCollectionType instanceof SetType) {
+			return getOclLibrary().getSetType(commonElementType);
+		}
 
-  /* (non-Javadoc)
-   * @see tudresden.ocl20.pivot.essentialocl.types.impl.CollectionTypeImpl#clone()
-   */
-  @Override
-  public SetType clone() {
-    return (SetType) initialize(TypesFactory.INSTANCE.createSetType());
+		return getOclLibrary().getCollectionType(commonElementType);
+	}
 
-  }
+	/* (non-Javadoc)
+	 * @see tudresden.ocl20.pivot.essentialocl.types.impl.CollectionTypeImpl#bindTypeParameter(java.util.List, java.util.List)
+	 */
+	@Override
+	public SetType bindTypeParameter(List<TypeParameter> parameters,
+			List<? extends Type> types) {
+
+		return (SetType) super.bindTypeParameter(parameters, types);
+	}
+
+	/* (non-Javadoc)
+	 * @see tudresden.ocl20.pivot.essentialocl.types.impl.CollectionTypeImpl#clone()
+	 */
+	@Override
+	public SetType clone() {
+
+		return (SetType) initialize(TypesFactory.INSTANCE.createSetType());
+
+	}
 
 } // SetTypeImpl

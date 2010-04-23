@@ -32,6 +32,7 @@
  */
 package tudresden.ocl20.pivot.essentialocl.expressions;
 
+import org.eclipse.emf.ecore.EObject;
 import tudresden.ocl20.pivot.pivotmodel.ConstrainableElement;
 import tudresden.ocl20.pivot.pivotmodel.Constraint;
 import tudresden.ocl20.pivot.pivotmodel.NamedElement;
@@ -54,126 +55,126 @@ import tudresden.ocl20.pivot.pivotmodel.TypedElement;
  *
  * @generated
  */
-public interface Variable extends TypedElement, NamedElement {
+public interface Variable extends EObject, TypedElement, NamedElement {
 
-  /**
-   * Returns the value of the '<em><b>Represented Parameter</b></em>' reference.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Represented Parameter</em>' reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Represented Parameter</em>' reference.
-   * @see #setRepresentedParameter(Parameter)
-   * @generated
-   */
-  Parameter getRepresentedParameter();
+	/**
+	 * Returns the value of the '<em><b>Represented Parameter</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Represented Parameter</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Represented Parameter</em>' reference.
+	 * @see #setRepresentedParameter(Parameter)
+	 * @generated
+	 */
+	Parameter getRepresentedParameter();
 
-  /**
-   * Sets the value of the '{@link tudresden.ocl20.pivot.essentialocl.expressions.Variable#getRepresentedParameter <em>Represented Parameter</em>}' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Represented Parameter</em>' reference.
-   * @see #getRepresentedParameter()
-   * @generated
-   */
-  void setRepresentedParameter(Parameter value);
+	/**
+	 * Sets the value of the '{@link tudresden.ocl20.pivot.essentialocl.expressions.Variable#getRepresentedParameter <em>Represented Parameter</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Represented Parameter</em>' reference.
+	 * @see #getRepresentedParameter()
+	 * @generated
+	 */
+	void setRepresentedParameter(Parameter value);
 
-  /**
-   * Returns the value of the '<em><b>Init Expression</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Init Expression</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Init Expression</em>' containment reference.
-   * @see #setInitExpression(OclExpression)
-   * @generated
-   */
-  OclExpression getInitExpression();
+	/**
+	 * Returns the value of the '<em><b>Init Expression</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Init Expression</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Init Expression</em>' containment reference.
+	 * @see #setInitExpression(OclExpression)
+	 * @generated
+	 */
+	OclExpression getInitExpression();
 
-  /**
-   * Sets the value of the '{@link tudresden.ocl20.pivot.essentialocl.expressions.Variable#getInitExpression <em>Init Expression</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Init Expression</em>' containment reference.
-   * @see #getInitExpression()
-   * @generated
-   */
-  void setInitExpression(OclExpression value);
+	/**
+	 * Sets the value of the '{@link tudresden.ocl20.pivot.essentialocl.expressions.Variable#getInitExpression <em>Init Expression</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Init Expression</em>' containment reference.
+	 * @see #getInitExpression()
+	 * @generated
+	 */
+	void setInitExpression(OclExpression value);
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * <!-- begin-model-doc -->
-   * <p>
-   * The OCL 2.0 specification defines an additional operation that returns a
-   * corresponding {@link Parameter} for a <code>Variable</code>.
-   * 
-   * It is specified as follows:
-   * <pre>
-   * context Variable::asParameter() : Parameter
-   * post: result.name = self.name
-   * post: result.direction = ParameterDirectionKind::in
-   * post: result.type = self.type
-   * </pre>
-   * </p>
-   * <!-- end-model-doc -->
-   * @generated
-   */
-  Parameter asParameter();
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * <p>
+	 * The OCL 2.0 specification defines an additional operation that returns a
+	 * corresponding {@link Parameter} for a <code>Variable</code>.
+	 * 
+	 * It is specified as follows:
+	 * <pre>
+	 * context Variable::asParameter() : Parameter
+	 * post: result.name = self.name
+	 * post: result.direction = ParameterDirectionKind::in
+	 * post: result.type = self.type
+	 * </pre>
+	 * </p>
+	 * <!-- end-model-doc -->
+	 * @generated
+	 */
+	Parameter asParameter();
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * <!-- begin-model-doc -->
-   * <p>
-   * The OCL 2.0 Specification defines an additional operation that returns a
-   * corresponding {@link Property} for a <code>Variable</code>.
-   * 
-   * It is specified as follows:
-   * <pre>
-   * context Variable::asProperty() : Attribute
-   * post: result.name= self.name
-   * post: result.type= self.type
-   * post: result.isMultiple = false
-   * post: result.isOrdered= true
-   * post: result.isStatic= false
-   * </pre>
-   * 
-   * Note that the OCL specification adds an additional post condition:
-   * 
-   * <pre>
-   * post: result.constraint.specification.bodyExpression = self.initExpression
-   * </pre>
-   * 
-   * However, the meta association between the Pivot Model elements
-   * {@link Constraint} and {@link ConstrainableElement} is only
-   * undirectional (in analogy to the specification in Core::Abstractions),
-   * so we cannot navigate from the property to one of its constraints.
-   * Also, this constraint is not really required because the
-   * <code>asProperty()</code> operation is only used to
-   * determine the type of {@link TupleLiteralExpression}s. There. 
-   * a conversion from <code>Variable</code> to
-   * <code>Property</code> is needed to make a corresponding
-   * <code>TupleType</code>. Thus, setting the name and the
-   * type of the created <code>Propery</code> is sufficient.
-   * </p>
-   * <!-- end-model-doc -->
-   * @generated
-   */
-  Property asProperty();
-  
-  /**
-   * Ths method was added manually to support adding parameters
-   * to the ExpressionInOcl instance by the parser. If the parser trys
-   * to added the same parameter or variable to an ExpressionInOcl the
-   * first ExpressionInOcl instance will lost this parameter. So,
-   * a parameter instance can only be set only once.
-   * @return a clone of a variable
-   */
-  public Variable clone();
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * <p>
+	 * The OCL 2.0 Specification defines an additional operation that returns a
+	 * corresponding {@link Property} for a <code>Variable</code>.
+	 * 
+	 * It is specified as follows:
+	 * <pre>
+	 * context Variable::asProperty() : Attribute
+	 * post: result.name= self.name
+	 * post: result.type= self.type
+	 * post: result.isMultiple = false
+	 * post: result.isOrdered= true
+	 * post: result.isStatic= false
+	 * </pre>
+	 * 
+	 * Note that the OCL specification adds an additional post condition:
+	 * 
+	 * <pre>
+	 * post: result.constraint.specification.bodyExpression = self.initExpression
+	 * </pre>
+	 * 
+	 * However, the meta association between the Pivot Model elements
+	 * {@link Constraint} and {@link ConstrainableElement} is only
+	 * undirectional (in analogy to the specification in Core::Abstractions),
+	 * so we cannot navigate from the property to one of its constraints.
+	 * Also, this constraint is not really required because the
+	 * <code>asProperty()</code> operation is only used to
+	 * determine the type of {@link TupleLiteralExpression}s. There. 
+	 * a conversion from <code>Variable</code> to
+	 * <code>Property</code> is needed to make a corresponding
+	 * <code>TupleType</code>. Thus, setting the name and the
+	 * type of the created <code>Propery</code> is sufficient.
+	 * </p>
+	 * <!-- end-model-doc -->
+	 * @generated
+	 */
+	Property asProperty();
+
+	/**
+	 * Ths method was added manually to support adding parameters
+	 * to the ExpressionInOcl instance by the parser. If the parser trys
+	 * to added the same parameter or variable to an ExpressionInOcl the
+	 * first ExpressionInOcl instance will lost this parameter. So,
+	 * a parameter instance can only be set only once.
+	 * @return a clone of a variable
+	 */
+	public Variable clone();
 
 } // Variable

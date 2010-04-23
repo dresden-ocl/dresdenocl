@@ -49,180 +49,186 @@ import org.apache.commons.lang.builder.ToStringBuilder;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.RealLiteralExpImpl#getRealSymbol <em>Real Symbol</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.RealLiteralExpImpl#getRealSymbol <em>Real Symbol</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @generated
  */
-public class RealLiteralExpImpl extends NumericLiteralExpImpl implements RealLiteralExp {
+public class RealLiteralExpImpl extends NumericLiteralExpImpl implements
+		RealLiteralExp {
 
-  /**
-   * Logger for this class
-   */
-  private static final Logger logger = Logger.getLogger(RealLiteralExpImpl.class);
+	/**
+	 * Logger for this class
+	 */
+	private static final Logger logger =
+			Logger.getLogger(RealLiteralExpImpl.class);
 
-  /**
-   * The default value of the '{@link #getRealSymbol() <em>Real Symbol</em>}' attribute. <!--
-   * begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @see #getRealSymbol()
-   * @generated
-   * @ordered
-   */
-  protected static final float REAL_SYMBOL_EDEFAULT = 0.0F;
+	/**
+	 * The default value of the '{@link #getRealSymbol() <em>Real Symbol</em>}' attribute. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @see #getRealSymbol()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final float REAL_SYMBOL_EDEFAULT = 0.0F;
 
-  /**
-   * The cached value of the '{@link #getRealSymbol() <em>Real Symbol</em>}' attribute. <!--
-   * begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @see #getRealSymbol()
-   * @generated
-   * @ordered
-   */
-  protected float realSymbol = REAL_SYMBOL_EDEFAULT;
+	/**
+	 * The cached value of the '{@link #getRealSymbol() <em>Real Symbol</em>}' attribute. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @see #getRealSymbol()
+	 * @generated
+	 * @ordered
+	 */
+	protected float realSymbol = REAL_SYMBOL_EDEFAULT;
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  protected RealLiteralExpImpl() {
-    super();
-  }
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected RealLiteralExpImpl() {
 
-  /**
-   * Overridden to determine the type of the <code>RealLiteralExp</code> according to the OCL
-   * specification (Section 8.3):
-   * 
-   * <p>
-   * The type of a real Literal expression is the type Real.
-   * 
-   * <pre>
-   *    context RealLiteralExp
-   *    inv: self.type.name = ‘Real’
-   * </pre>
-   * 
-   * </p>
-   * 
-   * @see tudresden.ocl20.pivot.pivotmodel.impl.TypedElementImpl#getType()
-   */
-  @Override
-  protected Type evaluateType() {
-    if (logger.isDebugEnabled()) {
-      logger.debug("evaluateType() - enter"); //$NON-NLS-1$
-    }
+		super();
+	}
 
-    Type type = getValidOclLibrary().getOclReal();
-    
-    if (logger.isDebugEnabled()) {
-      logger.debug("evaluateType() - exit - return value=" + type); //$NON-NLS-1$
-    }
-    
-    return type;
-  }
+	/**
+	 * Overridden to determine the type of the <code>RealLiteralExp</code> according to the OCL
+	 * specification (Section 8.3):
+	 * 
+	 * <p>
+	 * The type of a real Literal expression is the type Real.
+	 * 
+	 * <pre>
+	 *    context RealLiteralExp
+	 *    inv: self.type.name = ‘Real’
+	 * </pre>
+	 * 
+	 * </p>
+	 * 
+	 * @see tudresden.ocl20.pivot.pivotmodel.impl.TypedElementImpl#getType()
+	 */
+	@Override
+	protected Type evaluateType() {
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  public float getRealSymbol() {
-    return realSymbol;
-  }
+		if (logger.isDebugEnabled()) {
+			logger.debug("evaluateType() - enter"); //$NON-NLS-1$
+		}
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  public void setRealSymbol(float newRealSymbol) {
-    float oldRealSymbol = realSymbol;
-    realSymbol = newRealSymbol;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this,Notification.SET,
-          ExpressionsPackageImpl.REAL_LITERAL_EXP__REAL_SYMBOL,oldRealSymbol,realSymbol));
-  }
+		Type type = getValidOclLibrary().getOclReal();
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  @Override
-  public Object eGet(int featureID, boolean resolve, boolean coreType) {
-    switch (featureID) {
-      case ExpressionsPackageImpl.REAL_LITERAL_EXP__REAL_SYMBOL:
-        return new Float(getRealSymbol());
-    }
-    return super.eGet(featureID,resolve,coreType);
-  }
+		if (logger.isDebugEnabled()) {
+			logger.debug("evaluateType() - exit - return value=" + type); //$NON-NLS-1$
+		}
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  @Override
-  public void eSet(int featureID, Object newValue) {
-    switch (featureID) {
-      case ExpressionsPackageImpl.REAL_LITERAL_EXP__REAL_SYMBOL:
-        setRealSymbol(((Float) newValue).floatValue());
-        return;
-    }
-    super.eSet(featureID,newValue);
-  }
+		return type;
+	}
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  @Override
-  public void eUnset(int featureID) {
-    switch (featureID) {
-      case ExpressionsPackageImpl.REAL_LITERAL_EXP__REAL_SYMBOL:
-        setRealSymbol(REAL_SYMBOL_EDEFAULT);
-        return;
-    }
-    super.eUnset(featureID);
-  }
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	public float getRealSymbol() {
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  @Override
-  public boolean eIsSet(int featureID) {
-    switch (featureID) {
-      case ExpressionsPackageImpl.REAL_LITERAL_EXP__REAL_SYMBOL:
-        return realSymbol != REAL_SYMBOL_EDEFAULT;
-    }
-    return super.eIsSet(featureID);
-  }
+		return realSymbol;
+	}
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  @Override
-  protected EClass eStaticClass() {
-    return ExpressionsPackageImpl.Literals.REAL_LITERAL_EXP;
-  }
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setRealSymbol(float newRealSymbol) {
 
-  /**
-   * Adapted the EMF implementation for uniform rendering with Jakarta Commons Lang mechanism.
-   * 
-   * @see java.lang.Object#toString()
-   * 
-   * @generated NOT
-   */
-  @Override
-  public String toString() {
-    return new ToStringBuilder(this,ToStringStyle.SHORT_PREFIX_STYLE).appendSuper(super.toString())
-        .append("realSymbol",realSymbol).toString(); //$NON-NLS-1$
-  }
+		float oldRealSymbol = realSymbol;
+		realSymbol = newRealSymbol;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET,
+					ExpressionsPackageImpl.REAL_LITERAL_EXP__REAL_SYMBOL, oldRealSymbol,
+					realSymbol));
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object eGet(int featureID, boolean resolve, boolean coreType) {
+
+		switch (featureID) {
+		case ExpressionsPackageImpl.REAL_LITERAL_EXP__REAL_SYMBOL:
+			return getRealSymbol();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void eSet(int featureID, Object newValue) {
+
+		switch (featureID) {
+		case ExpressionsPackageImpl.REAL_LITERAL_EXP__REAL_SYMBOL:
+			setRealSymbol((Float) newValue);
+			return;
+		}
+		super.eSet(featureID, newValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void eUnset(int featureID) {
+
+		switch (featureID) {
+		case ExpressionsPackageImpl.REAL_LITERAL_EXP__REAL_SYMBOL:
+			setRealSymbol(REAL_SYMBOL_EDEFAULT);
+			return;
+		}
+		super.eUnset(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean eIsSet(int featureID) {
+
+		switch (featureID) {
+		case ExpressionsPackageImpl.REAL_LITERAL_EXP__REAL_SYMBOL:
+			return realSymbol != REAL_SYMBOL_EDEFAULT;
+		}
+		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected EClass eStaticClass() {
+
+		return ExpressionsPackageImpl.Literals.REAL_LITERAL_EXP;
+	}
+
+	/**
+	 * Adapted the EMF implementation for uniform rendering with Jakarta Commons Lang mechanism.
+	 * 
+	 * @see java.lang.Object#toString()
+	 * 
+	 * @generated NOT
+	 */
+	@Override
+	public String toString() {
+
+		return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
+				.appendSuper(super.toString())
+				.append("realSymbol", realSymbol).toString(); //$NON-NLS-1$
+	}
 
 } // RealLiteralExpImpl

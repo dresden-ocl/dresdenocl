@@ -278,6 +278,7 @@ public abstract class AbstractModel implements IModel {
 			/* If the path has only one element check for a primitive type. */
 			if (pathName.size() == 1) {
 				String primitiveName;
+				
 				PrimitiveType primitiveType;
 
 				primitiveName = pathName.get(0);

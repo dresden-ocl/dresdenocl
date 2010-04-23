@@ -37,6 +37,7 @@ import java.util.List;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 
+import tudresden.ocl20.pivot.essentialocl.types.*;
 import tudresden.ocl20.pivot.essentialocl.types.AnyType;
 import tudresden.ocl20.pivot.essentialocl.types.BagType;
 import tudresden.ocl20.pivot.essentialocl.types.CollectionType;
@@ -69,417 +70,492 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
  */
 public class TypesSwitch<T> {
 
-  /**
-   * The cached model package
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  protected static TypesPackageImpl modelPackage;
+	/**
+	 * The cached model package
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected static TypesPackageImpl modelPackage;
 
-  /**
-   * Creates an instance of the switch.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public TypesSwitch() {
-    if (modelPackage == null) {
-      modelPackage = TypesPackageImpl.eINSTANCE;
-    }
-  }
+	/**
+	 * Creates an instance of the switch.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public TypesSwitch() {
 
-  /**
-   * Calls <code>caseXXX</code> for each class of the model until one returns a non null result; it yields that result.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the first non-null result returned by a <code>caseXXX</code> call.
-   * @generated
-   */
-  public T doSwitch(EObject theEObject) {
-    return doSwitch(theEObject.eClass(), theEObject);
-  }
+		if (modelPackage == null) {
+			modelPackage = TypesPackageImpl.eINSTANCE;
+		}
+	}
 
-  /**
-   * Calls <code>caseXXX</code> for each class of the model until one returns a non null result; it yields that result.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the first non-null result returned by a <code>caseXXX</code> call.
-   * @generated
-   */
-  protected T doSwitch(EClass theEClass, EObject theEObject) {
-    if (theEClass.eContainer() == modelPackage) {
-      return doSwitch(theEClass.getClassifierID(), theEObject);
-    }
-    else {
-      List<EClass> eSuperTypes = theEClass.getESuperTypes();
-      return eSuperTypes.isEmpty() ? defaultCase(theEObject) : doSwitch(
-          eSuperTypes.get(0), theEObject);
-    }
-  }
+	/**
+	 * Calls <code>caseXXX</code> for each class of the model until one returns a non null result; it yields that result.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the first non-null result returned by a <code>caseXXX</code> call.
+	 * @generated
+	 */
+	public T doSwitch(EObject theEObject) {
 
-  /**
-   * Calls <code>caseXXX</code> for each class of the model until one returns a non null result; it yields that result.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the first non-null result returned by a <code>caseXXX</code> call.
-   * @generated
-   */
-  protected T doSwitch(int classifierID, EObject theEObject) {
-    switch (classifierID) {
-      case TypesPackageImpl.BAG_TYPE: {
-        BagType bagType = (BagType) theEObject;
-        T result = caseBagType(bagType);
-        if (result == null) result = caseCollectionType(bagType);
-        if (result == null) result = caseType(bagType);
-        if (result == null) result = caseNamedElement(bagType);
-        if (result == null) result = caseConstrainableElement(bagType);
-        if (result == null) result = caseGenericElement(bagType);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case TypesPackageImpl.TUPLE_TYPE: {
-        TupleType tupleType = (TupleType) theEObject;
-        T result = caseTupleType(tupleType);
-        if (result == null) result = caseType(tupleType);
-        if (result == null) result = caseNamedElement(tupleType);
-        if (result == null) result = caseConstrainableElement(tupleType);
-        if (result == null) result = caseGenericElement(tupleType);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case TypesPackageImpl.COLLECTION_TYPE: {
-        CollectionType collectionType = (CollectionType) theEObject;
-        T result = caseCollectionType(collectionType);
-        if (result == null) result = caseType(collectionType);
-        if (result == null) result = caseNamedElement(collectionType);
-        if (result == null) result = caseConstrainableElement(collectionType);
-        if (result == null) result = caseGenericElement(collectionType);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case TypesPackageImpl.INVALID_TYPE: {
-        InvalidType invalidType = (InvalidType) theEObject;
-        T result = caseInvalidType(invalidType);
-        if (result == null) result = caseType(invalidType);
-        if (result == null) result = caseNamedElement(invalidType);
-        if (result == null) result = caseConstrainableElement(invalidType);
-        if (result == null) result = caseGenericElement(invalidType);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case TypesPackageImpl.ORDERED_SET_TYPE: {
-        OrderedSetType orderedSetType = (OrderedSetType) theEObject;
-        T result = caseOrderedSetType(orderedSetType);
-        if (result == null) result = caseCollectionType(orderedSetType);
-        if (result == null) result = caseType(orderedSetType);
-        if (result == null) result = caseNamedElement(orderedSetType);
-        if (result == null) result = caseConstrainableElement(orderedSetType);
-        if (result == null) result = caseGenericElement(orderedSetType);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case TypesPackageImpl.SEQUENCE_TYPE: {
-        SequenceType sequenceType = (SequenceType) theEObject;
-        T result = caseSequenceType(sequenceType);
-        if (result == null) result = caseCollectionType(sequenceType);
-        if (result == null) result = caseType(sequenceType);
-        if (result == null) result = caseNamedElement(sequenceType);
-        if (result == null) result = caseConstrainableElement(sequenceType);
-        if (result == null) result = caseGenericElement(sequenceType);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case TypesPackageImpl.SET_TYPE: {
-        SetType setType = (SetType) theEObject;
-        T result = caseSetType(setType);
-        if (result == null) result = caseCollectionType(setType);
-        if (result == null) result = caseType(setType);
-        if (result == null) result = caseNamedElement(setType);
-        if (result == null) result = caseConstrainableElement(setType);
-        if (result == null) result = caseGenericElement(setType);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case TypesPackageImpl.VOID_TYPE: {
-        VoidType voidType = (VoidType) theEObject;
-        T result = caseVoidType(voidType);
-        if (result == null) result = caseType(voidType);
-        if (result == null) result = caseNamedElement(voidType);
-        if (result == null) result = caseConstrainableElement(voidType);
-        if (result == null) result = caseGenericElement(voidType);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case TypesPackageImpl.TYPE_TYPE: {
-        TypeType typeType = (TypeType) theEObject;
-        T result = caseTypeType(typeType);
-        if (result == null) result = caseType(typeType);
-        if (result == null) result = caseNamedElement(typeType);
-        if (result == null) result = caseConstrainableElement(typeType);
-        if (result == null) result = caseGenericElement(typeType);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case TypesPackageImpl.OCL_LIBRARY: {
-        OclLibrary oclLibrary = (OclLibrary) theEObject;
-        T result = caseOclLibrary(oclLibrary);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case TypesPackageImpl.ANY_TYPE: {
-        AnyType anyType = (AnyType) theEObject;
-        T result = caseAnyType(anyType);
-        if (result == null) result = caseType(anyType);
-        if (result == null) result = caseNamedElement(anyType);
-        if (result == null) result = caseConstrainableElement(anyType);
-        if (result == null) result = caseGenericElement(anyType);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      default:
-        return defaultCase(theEObject);
-    }
-  }
+		return doSwitch(theEObject.eClass(), theEObject);
+	}
 
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Bag Type</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Bag Type</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseBagType(BagType object) {
-    return null;
-  }
+	/**
+	 * Calls <code>caseXXX</code> for each class of the model until one returns a non null result; it yields that result.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the first non-null result returned by a <code>caseXXX</code> call.
+	 * @generated
+	 */
+	protected T doSwitch(EClass theEClass, EObject theEObject) {
 
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Tuple Type</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Tuple Type</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseTupleType(TupleType object) {
-    return null;
-  }
+		if (theEClass.eContainer() == modelPackage) {
+			return doSwitch(theEClass.getClassifierID(), theEObject);
+		}
+		else {
+			List<EClass> eSuperTypes = theEClass.getESuperTypes();
+			return eSuperTypes.isEmpty() ? defaultCase(theEObject) : doSwitch(
+					eSuperTypes.get(0), theEObject);
+		}
+	}
 
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Collection Type</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Collection Type</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseCollectionType(CollectionType object) {
-    return null;
-  }
+	/**
+	 * Calls <code>caseXXX</code> for each class of the model until one returns a non null result; it yields that result.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the first non-null result returned by a <code>caseXXX</code> call.
+	 * @generated
+	 */
+	protected T doSwitch(int classifierID, EObject theEObject) {
 
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Invalid Type</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Invalid Type</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseInvalidType(InvalidType object) {
-    return null;
-  }
+		switch (classifierID) {
+		case TypesPackageImpl.BAG_TYPE: {
+			BagType bagType = (BagType) theEObject;
+			T result = caseBagType(bagType);
+			if (result == null)
+				result = caseCollectionType(bagType);
+			if (result == null)
+				result = caseType(bagType);
+			if (result == null)
+				result = caseConstrainableElement(bagType);
+			if (result == null)
+				result = caseGenericElement(bagType);
+			if (result == null)
+				result = caseNamedElement(bagType);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case TypesPackageImpl.TUPLE_TYPE: {
+			TupleType tupleType = (TupleType) theEObject;
+			T result = caseTupleType(tupleType);
+			if (result == null)
+				result = caseType(tupleType);
+			if (result == null)
+				result = caseConstrainableElement(tupleType);
+			if (result == null)
+				result = caseGenericElement(tupleType);
+			if (result == null)
+				result = caseNamedElement(tupleType);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case TypesPackageImpl.COLLECTION_TYPE: {
+			CollectionType collectionType = (CollectionType) theEObject;
+			T result = caseCollectionType(collectionType);
+			if (result == null)
+				result = caseType(collectionType);
+			if (result == null)
+				result = caseConstrainableElement(collectionType);
+			if (result == null)
+				result = caseGenericElement(collectionType);
+			if (result == null)
+				result = caseNamedElement(collectionType);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case TypesPackageImpl.INVALID_TYPE: {
+			InvalidType invalidType = (InvalidType) theEObject;
+			T result = caseInvalidType(invalidType);
+			if (result == null)
+				result = caseType(invalidType);
+			if (result == null)
+				result = caseConstrainableElement(invalidType);
+			if (result == null)
+				result = caseGenericElement(invalidType);
+			if (result == null)
+				result = caseNamedElement(invalidType);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case TypesPackageImpl.ORDERED_SET_TYPE: {
+			OrderedSetType orderedSetType = (OrderedSetType) theEObject;
+			T result = caseOrderedSetType(orderedSetType);
+			if (result == null)
+				result = caseCollectionType(orderedSetType);
+			if (result == null)
+				result = caseType(orderedSetType);
+			if (result == null)
+				result = caseConstrainableElement(orderedSetType);
+			if (result == null)
+				result = caseGenericElement(orderedSetType);
+			if (result == null)
+				result = caseNamedElement(orderedSetType);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case TypesPackageImpl.SEQUENCE_TYPE: {
+			SequenceType sequenceType = (SequenceType) theEObject;
+			T result = caseSequenceType(sequenceType);
+			if (result == null)
+				result = caseCollectionType(sequenceType);
+			if (result == null)
+				result = caseType(sequenceType);
+			if (result == null)
+				result = caseConstrainableElement(sequenceType);
+			if (result == null)
+				result = caseGenericElement(sequenceType);
+			if (result == null)
+				result = caseNamedElement(sequenceType);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case TypesPackageImpl.SET_TYPE: {
+			SetType setType = (SetType) theEObject;
+			T result = caseSetType(setType);
+			if (result == null)
+				result = caseCollectionType(setType);
+			if (result == null)
+				result = caseType(setType);
+			if (result == null)
+				result = caseConstrainableElement(setType);
+			if (result == null)
+				result = caseGenericElement(setType);
+			if (result == null)
+				result = caseNamedElement(setType);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case TypesPackageImpl.VOID_TYPE: {
+			VoidType voidType = (VoidType) theEObject;
+			T result = caseVoidType(voidType);
+			if (result == null)
+				result = caseType(voidType);
+			if (result == null)
+				result = caseConstrainableElement(voidType);
+			if (result == null)
+				result = caseGenericElement(voidType);
+			if (result == null)
+				result = caseNamedElement(voidType);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case TypesPackageImpl.TYPE_TYPE: {
+			TypeType typeType = (TypeType) theEObject;
+			T result = caseTypeType(typeType);
+			if (result == null)
+				result = caseType(typeType);
+			if (result == null)
+				result = caseConstrainableElement(typeType);
+			if (result == null)
+				result = caseGenericElement(typeType);
+			if (result == null)
+				result = caseNamedElement(typeType);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case TypesPackageImpl.OCL_LIBRARY: {
+			OclLibrary oclLibrary = (OclLibrary) theEObject;
+			T result = caseOclLibrary(oclLibrary);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case TypesPackageImpl.ANY_TYPE: {
+			AnyType anyType = (AnyType) theEObject;
+			T result = caseAnyType(anyType);
+			if (result == null)
+				result = caseType(anyType);
+			if (result == null)
+				result = caseConstrainableElement(anyType);
+			if (result == null)
+				result = caseGenericElement(anyType);
+			if (result == null)
+				result = caseNamedElement(anyType);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		default:
+			return defaultCase(theEObject);
+		}
+	}
 
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Ordered Set Type</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Ordered Set Type</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseOrderedSetType(OrderedSetType object) {
-    return null;
-  }
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Bag Type</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Bag Type</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseBagType(BagType object) {
 
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Sequence Type</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Sequence Type</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseSequenceType(SequenceType object) {
-    return null;
-  }
+		return null;
+	}
 
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Set Type</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Set Type</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseSetType(SetType object) {
-    return null;
-  }
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Tuple Type</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Tuple Type</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseTupleType(TupleType object) {
 
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Void Type</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Void Type</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseVoidType(VoidType object) {
-    return null;
-  }
+		return null;
+	}
 
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Type Type</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Type Type</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseTypeType(TypeType object) {
-    return null;
-  }
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Collection Type</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Collection Type</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseCollectionType(CollectionType object) {
 
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Ocl Library</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Ocl Library</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseOclLibrary(OclLibrary object) {
-    return null;
-  }
+		return null;
+	}
 
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Any Type</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Any Type</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseAnyType(AnyType object) {
-    return null;
-  }
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Invalid Type</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Invalid Type</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseInvalidType(InvalidType object) {
 
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Named Element</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Named Element</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseNamedElement(NamedElement object) {
-    return null;
-  }
+		return null;
+	}
 
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Constrainable Element</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Constrainable Element</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseConstrainableElement(ConstrainableElement object) {
-    return null;
-  }
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Ordered Set Type</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Ordered Set Type</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseOrderedSetType(OrderedSetType object) {
 
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Generic Element</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Generic Element</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseGenericElement(GenericElement object) {
-    return null;
-  }
+		return null;
+	}
 
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Type</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Type</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseType(Type object) {
-    return null;
-  }
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Sequence Type</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Sequence Type</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseSequenceType(SequenceType object) {
 
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>EObject</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch, but this is the last case anyway.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>EObject</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject)
-   * @generated
-   */
-  public T defaultCase(EObject object) {
-    return null;
-  }
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Set Type</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Set Type</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseSetType(SetType object) {
+
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Void Type</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Void Type</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseVoidType(VoidType object) {
+
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Type Type</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Type Type</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseTypeType(TypeType object) {
+
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Ocl Library</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Ocl Library</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseOclLibrary(OclLibrary object) {
+
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Any Type</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Any Type</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseAnyType(AnyType object) {
+
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Named Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Named Element</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseNamedElement(NamedElement object) {
+
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Constrainable Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Constrainable Element</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseConstrainableElement(ConstrainableElement object) {
+
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Generic Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Generic Element</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseGenericElement(GenericElement object) {
+
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Type</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Type</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseType(Type object) {
+
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>EObject</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch, but this is the last case anyway.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>EObject</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject)
+	 * @generated
+	 */
+	public T defaultCase(EObject object) {
+
+		return null;
+	}
 
 } //TypesSwitch

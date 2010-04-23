@@ -41,7 +41,7 @@ import org.eclipse.osgi.util.NLS;
  * 
  * @author Matthias Braeuer
  */
-public class StandardLibraryMessages extends NLS {
+public class EssentialOclMessages extends NLS {
 
 	public static String OclLibraryProvider_LoadOclLibrary;
 
@@ -51,15 +51,15 @@ public class StandardLibraryMessages extends NLS {
 
 	static {
 		/* Initialize resource bundle. */
-		NLS.initializeMessages(MESSAGES_FILE_LOCATION, StandardLibraryMessages.class);
+		NLS.initializeMessages(MESSAGES_FILE_LOCATION, EssentialOclMessages.class);
 	}
 
 	/**
 	 * <p>
-	 * Initializes the {@link StandardLibraryMessages}.
+	 * Initializes the {@link EssentialOclMessages}.
 	 * </p>
 	 */
-	private StandardLibraryMessages() {
+	private EssentialOclMessages() {
 
 		/* no implementaton necessary. */
 	}

@@ -35,11 +35,11 @@ import java.util.List;
 
 import org.eclipse.emf.common.util.UniqueEList;
 
+import tudresden.ocl20.pivot.essentialocl.EssentialOclPlugin;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBoolean;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclOrderedSet;
-import tudresden.ocl20.pivot.essentialocl.types.TypeConstants;
 import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceCollection;
 import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement;
 import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceInteger;
@@ -94,11 +94,14 @@ public class JavaOclOrderedSet<T extends OclAny> extends
 
 		OclOrderedSet<T> result = null;
 
-		result = checkInvalid(TypeConstants.ORDERED_SET(genericType), this, that);
+		result =
+				checkInvalid(EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+						.getOrderedSetType(genericType), this, that);
 
 		if (result == null)
 			result =
-					checkUndefined("append", TypeConstants.ORDERED_SET(genericType), this);
+					checkUndefined("append", EssentialOclPlugin.getOclLibraryProvider()
+							.getOclLibrary().getOrderedSetType(genericType), this);
 
 		if (result == null) {
 			List<IModelInstanceElement> append =
@@ -125,12 +128,15 @@ public class JavaOclOrderedSet<T extends OclAny> extends
 
 		OclOrderedSet<T> result = null;
 
-		result = checkInvalid(TypeConstants.ORDERED_SET(genericType), this, that);
+		result =
+				checkInvalid(EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+						.getOrderedSetType(genericType), this, that);
 
 		if (result == null)
 			result =
-					checkUndefined("excluding", TypeConstants.ORDERED_SET(genericType),
-							this);
+					checkUndefined("excluding", EssentialOclPlugin
+							.getOclLibraryProvider().getOclLibrary().getOrderedSetType(
+									genericType), this);
 
 		if (result == null) {
 			List<IModelInstanceElement> exclude =
@@ -156,12 +162,14 @@ public class JavaOclOrderedSet<T extends OclAny> extends
 
 		OclOrderedSet<T2> result = null;
 
-		result = checkInvalid(TypeConstants.ORDERED_SET(genericType), this);
+		result =
+				checkInvalid(EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+						.getOrderedSetType(genericType), this);
 
 		if (result == null)
 			result =
-					checkUndefined("flatten", TypeConstants.ORDERED_SET(genericType),
-							this);
+					checkUndefined("flatten", EssentialOclPlugin.getOclLibraryProvider()
+							.getOclLibrary().getOrderedSetType(genericType), this);
 
 		if (result == null) {
 			List<IModelInstanceElement> flat =
@@ -201,13 +209,13 @@ public class JavaOclOrderedSet<T extends OclAny> extends
 		OclOrderedSet<T> result = null;
 
 		result =
-				checkInvalid(TypeConstants.ORDERED_SET(genericType), this, index,
-						anElement);
+				checkInvalid(EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+						.getOrderedSetType(genericType), this, index, anElement);
 
 		if (result == null)
 			result =
-					checkUndefined("insertAt", TypeConstants.ORDERED_SET(genericType),
-							this, index);
+					checkUndefined("insertAt", EssentialOclPlugin.getOclLibraryProvider()
+							.getOclLibrary().getOrderedSetType(genericType), this, index);
 
 		if (result == null) {
 			List<IModelInstanceElement> insertAt =
@@ -228,8 +236,9 @@ public class JavaOclOrderedSet<T extends OclAny> extends
 
 			} catch (IndexOutOfBoundsException e) {
 				result =
-						JavaStandardLibraryFactory.INSTANCE.createOclInvalid(TypeConstants
-								.ORDERED_SET(genericType), e);
+						JavaStandardLibraryFactory.INSTANCE.createOclInvalid(
+								EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+										.getOrderedSetType(genericType), e);
 			} catch (IllegalArgumentException e) {
 				result =
 						JavaStandardLibraryFactory.INSTANCE.createOclOrderedSet(insertAt,
@@ -309,12 +318,14 @@ public class JavaOclOrderedSet<T extends OclAny> extends
 
 		OclOrderedSet<T> result = null;
 
-		result = checkInvalid(TypeConstants.ORDERED_SET(genericType), this, that);
+		result =
+				checkInvalid(EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+						.getOrderedSetType(genericType), this, that);
 
 		if (result == null)
 			result =
-					checkUndefined("prepend", TypeConstants.ORDERED_SET(genericType),
-							this);
+					checkUndefined("prepend", EssentialOclPlugin.getOclLibraryProvider()
+							.getOclLibrary().getOrderedSetType(genericType), this);
 
 		if (result == null) {
 			List<IModelInstanceElement> prepend =
@@ -346,12 +357,14 @@ public class JavaOclOrderedSet<T extends OclAny> extends
 		OclOrderedSet<T> result = null;
 
 		result =
-				checkInvalid(TypeConstants.ORDERED_SET(genericType), this, lower, upper);
+				checkInvalid(EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+						.getOrderedSetType(genericType), this, lower, upper);
 
 		if (result == null)
 			result =
-					checkUndefined("subOrderedSet", TypeConstants
-							.ORDERED_SET(genericType), this, lower, upper);
+					checkUndefined("subOrderedSet", EssentialOclPlugin
+							.getOclLibraryProvider().getOclLibrary().getOrderedSetType(
+									genericType), this, lower, upper);
 
 		if (result == null) {
 			List<IModelInstanceElement> subOrderedSet =
@@ -380,8 +393,9 @@ public class JavaOclOrderedSet<T extends OclAny> extends
 								subOrderedSet, genericType);
 			} catch (IndexOutOfBoundsException e) {
 				result =
-						JavaStandardLibraryFactory.INSTANCE.createOclInvalid(TypeConstants
-								.ORDERED_SET(genericType), e);
+						JavaStandardLibraryFactory.INSTANCE.createOclInvalid(
+								EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+										.getOrderedSetType(genericType), e);
 			}
 		}
 

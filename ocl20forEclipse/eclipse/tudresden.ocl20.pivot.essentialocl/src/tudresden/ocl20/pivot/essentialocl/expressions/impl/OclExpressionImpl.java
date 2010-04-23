@@ -62,12 +62,10 @@ import tudresden.ocl20.pivot.pivotmodel.impl.TypedElementImpl;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>
- * {@link tudresden.ocl20.pivot.essentialocl.expressions.impl.OclExpressionImpl#getOclLibrary
- * <em>Ocl Library</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.OclExpressionImpl#getOclLibrary <em>Ocl Library</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @generated
  */
 public abstract class OclExpressionImpl extends TypedElementImpl implements
@@ -80,9 +78,8 @@ public abstract class OclExpressionImpl extends TypedElementImpl implements
 			Logger.getLogger(OclExpressionImpl.class);
 
 	/**
-	 * The cached value of the '{@link #getOclLibrary() <em>Ocl Library</em>}'
-	 * reference. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The cached value of the '{@link #getOclLibrary() <em>Ocl Library</em>}' reference.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getOclLibrary()
 	 * @generated
 	 * @ordered
@@ -91,7 +88,6 @@ public abstract class OclExpressionImpl extends TypedElementImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	protected OclExpressionImpl() {
@@ -140,7 +136,6 @@ public abstract class OclExpressionImpl extends TypedElementImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public OclLibrary getOclLibrary() {
@@ -150,7 +145,6 @@ public abstract class OclExpressionImpl extends TypedElementImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public void setOclLibrary(OclLibrary newOclLibrary) {
@@ -434,7 +428,6 @@ public abstract class OclExpressionImpl extends TypedElementImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -449,7 +442,6 @@ public abstract class OclExpressionImpl extends TypedElementImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -465,7 +457,6 @@ public abstract class OclExpressionImpl extends TypedElementImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -481,7 +472,6 @@ public abstract class OclExpressionImpl extends TypedElementImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -496,7 +486,6 @@ public abstract class OclExpressionImpl extends TypedElementImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override

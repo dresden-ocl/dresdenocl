@@ -45,26 +45,28 @@ import tudresden.ocl20.pivot.essentialocl.expressions.NumericLiteralExp;
  *
  * @generated
  */
-public abstract class NumericLiteralExpImpl extends PrimitiveLiteralExpImpl implements
-    NumericLiteralExp {
+public abstract class NumericLiteralExpImpl extends PrimitiveLiteralExpImpl
+		implements NumericLiteralExp {
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  protected NumericLiteralExpImpl() {
-    super();
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected NumericLiteralExpImpl() {
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  protected EClass eStaticClass() {
-    return ExpressionsPackageImpl.Literals.NUMERIC_LITERAL_EXP;
-  }
+		super();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected EClass eStaticClass() {
+
+		return ExpressionsPackageImpl.Literals.NUMERIC_LITERAL_EXP;
+	}
 
 } //NumericLiteralExpImpl

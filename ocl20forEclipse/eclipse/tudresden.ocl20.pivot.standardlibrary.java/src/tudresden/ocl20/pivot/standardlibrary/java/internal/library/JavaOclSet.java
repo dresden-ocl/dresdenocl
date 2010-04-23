@@ -35,11 +35,11 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
+import tudresden.ocl20.pivot.essentialocl.EssentialOclPlugin;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBag;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBoolean;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSet;
-import tudresden.ocl20.pivot.essentialocl.types.TypeConstants;
 import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceCollection;
 import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement;
 import tudresden.ocl20.pivot.pivotmodel.Type;
@@ -91,11 +91,11 @@ public class JavaOclSet<T extends OclAny> extends JavaOclUnsortedCollection<T>
 
 		OclSet<T> result = null;
 
-		result = checkInvalid(TypeConstants.SET(genericType), this, that);
+		result = checkInvalid(EssentialOclPlugin.getOclLibraryProvider().getOclLibrary().getSetType(genericType), this, that);
 
 		if (result == null)
 			result =
-					checkUndefined("complement", TypeConstants.SET(genericType), this,
+					checkUndefined("complement", EssentialOclPlugin.getOclLibraryProvider().getOclLibrary().getSetType(genericType), this,
 							that);
 
 		if (result == null) {
@@ -127,11 +127,11 @@ public class JavaOclSet<T extends OclAny> extends JavaOclUnsortedCollection<T>
 
 		OclSet<T> result = null;
 
-		result = checkInvalid(TypeConstants.SET(genericType), this, that);
+		result = checkInvalid(EssentialOclPlugin.getOclLibraryProvider().getOclLibrary().getSetType(genericType), this, that);
 
 		if (result == null)
 			result =
-					checkUndefined("excluding", TypeConstants.SET(genericType), this);
+					checkUndefined("excluding", EssentialOclPlugin.getOclLibraryProvider().getOclLibrary().getSetType(genericType), this);
 
 		if (result == null) {
 			Set<IModelInstanceElement> exclude = new HashSet<IModelInstanceElement>();
@@ -156,10 +156,10 @@ public class JavaOclSet<T extends OclAny> extends JavaOclUnsortedCollection<T>
 
 		OclSet<T2> result = null;
 
-		result = checkInvalid(TypeConstants.SET(genericType), this);
+		result = checkInvalid(EssentialOclPlugin.getOclLibraryProvider().getOclLibrary().getSetType(genericType), this);
 
 		if (result == null)
-			result = checkUndefined("flatten", TypeConstants.SET(genericType), this);
+			result = checkUndefined("flatten", EssentialOclPlugin.getOclLibraryProvider().getOclLibrary().getSetType(genericType), this);
 
 		if (result == null) {
 			Set<IModelInstanceElement> flat = new HashSet<IModelInstanceElement>();
@@ -184,11 +184,11 @@ public class JavaOclSet<T extends OclAny> extends JavaOclUnsortedCollection<T>
 
 		OclSet<T> result = null;
 
-		result = checkInvalid(TypeConstants.SET(genericType), this, that);
+		result = checkInvalid(EssentialOclPlugin.getOclLibraryProvider().getOclLibrary().getSetType(genericType), this, that);
 
 		if (result == null)
 			result =
-					checkUndefined("including", TypeConstants.SET(genericType), this);
+					checkUndefined("including", EssentialOclPlugin.getOclLibraryProvider().getOclLibrary().getSetType(genericType), this);
 
 		if (result == null) {
 			Set<IModelInstanceElement> include = new HashSet<IModelInstanceElement>();
@@ -283,11 +283,11 @@ public class JavaOclSet<T extends OclAny> extends JavaOclUnsortedCollection<T>
 
 		OclSet<T> result = null;
 
-		result = checkInvalid(TypeConstants.SET(genericType), this, that);
+		result = checkInvalid(EssentialOclPlugin.getOclLibraryProvider().getOclLibrary().getSetType(genericType), this, that);
 
 		if (result == null)
 			result =
-					checkUndefined("symmetricDifference", TypeConstants.SET(genericType),
+					checkUndefined("symmetricDifference", EssentialOclPlugin.getOclLibraryProvider().getOclLibrary().getSetType(genericType),
 							this, that);
 
 		if (result == null) {
@@ -331,11 +331,12 @@ public class JavaOclSet<T extends OclAny> extends JavaOclUnsortedCollection<T>
 
 		OclSet<T> result = null;
 
-		result = checkInvalid(TypeConstants.SET(genericType), this, that);
+		result = checkInvalid(EssentialOclPlugin.getOclLibraryProvider().getOclLibrary().getSetType(genericType), this, that);
 
 		if (result == null)
 			result =
-					checkUndefined("union", TypeConstants.SET(genericType), this, that);
+					checkUndefined("union", EssentialOclPlugin.getOclLibraryProvider()
+							.getOclLibrary().getSetType(genericType), this, that);
 
 		if (result == null) {
 			Set<IModelInstanceElement> union = new HashSet<IModelInstanceElement>();

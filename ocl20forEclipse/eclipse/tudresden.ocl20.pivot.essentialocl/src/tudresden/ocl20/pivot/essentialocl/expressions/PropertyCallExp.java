@@ -53,42 +53,42 @@ import tudresden.ocl20.pivot.pivotmodel.Property;
  */
 public interface PropertyCallExp extends FeatureCallExp {
 
-  /**
-   * Returns the value of the '<em><b>Referred Property</b></em>' reference.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Referred Property</em>' reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Referred Property</em>' reference.
-   * @see #setReferredProperty(Property)
-   * @generated
-   */
-  Property getReferredProperty();
+	/**
+	 * Returns the value of the '<em><b>Referred Property</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Referred Property</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Referred Property</em>' reference.
+	 * @see #setReferredProperty(Property)
+	 * @generated
+	 */
+	Property getReferredProperty();
 
-  /**
-   * Sets the value of the '{@link tudresden.ocl20.pivot.essentialocl.expressions.PropertyCallExp#getReferredProperty <em>Referred Property</em>}' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Referred Property</em>' reference.
-   * @see #getReferredProperty()
-   * @generated
-   */
-  void setReferredProperty(Property value);
+	/**
+	 * Sets the value of the '{@link tudresden.ocl20.pivot.essentialocl.expressions.PropertyCallExp#getReferredProperty <em>Referred Property</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Referred Property</em>' reference.
+	 * @see #getReferredProperty()
+	 * @generated
+	 */
+	void setReferredProperty(Property value);
 
-  /**
-   * Returns the value of the '<em><b>Qualifier</b></em>' containment reference list.
-   * The list contents are of type {@link tudresden.ocl20.pivot.essentialocl.expressions.OclExpression}.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Qualifier</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Qualifier</em>' containment reference list.
-   * @generated
-   */
-  List<OclExpression> getQualifier();
+	/**
+	 * Returns the value of the '<em><b>Qualifier</b></em>' containment reference list.
+	 * The list contents are of type {@link tudresden.ocl20.pivot.essentialocl.expressions.OclExpression}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Qualifier</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Qualifier</em>' containment reference list.
+	 * @generated
+	 */
+	List<OclExpression> getQualifier();
 
 } // PropertyCallExp

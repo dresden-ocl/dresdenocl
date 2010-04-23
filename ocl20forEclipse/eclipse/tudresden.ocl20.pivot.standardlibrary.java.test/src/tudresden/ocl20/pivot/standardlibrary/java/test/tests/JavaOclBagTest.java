@@ -10,12 +10,12 @@ import java.util.Set;
 import org.junit.Before;
 import org.junit.Test;
 
+import tudresden.ocl20.pivot.essentialocl.EssentialOclPlugin;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBag;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclReal;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSet;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.factory.IStandardLibraryFactory;
-import tudresden.ocl20.pivot.essentialocl.types.TypeConstants;
 
 /**
  * Test for Bags in OCL.
@@ -30,7 +30,8 @@ public class JavaOclBagTest {
 
 	private final OclBag<OclReal> emptyBag =
 			myStandardLibraryFactory.createOclBag(new ArrayList<OclReal>(),
-					TypeConstants.ANY);
+					EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+							.getOclAny());
 
 	/**
 	 * Bag { 0.5 }
@@ -72,7 +73,7 @@ public class JavaOclBagTest {
 			myStandardLibraryFactory.createOclInteger(4L);
 
 	private final OclReal undefined =
-			(OclReal) myStandardLibraryFactory.createOclUndefined(TypeConstants.REAL,
+			(OclReal) myStandardLibraryFactory.createOclUndefined(EssentialOclPlugin.getOclLibraryProvider().getOclLibrary().getOclReal(),
 					"undefined value");
 
 	@Before
@@ -80,12 +81,12 @@ public class JavaOclBagTest {
 
 		List<OclReal> realBag = new ArrayList<OclReal>();
 		realBag.add(oclReal0_5);
-		oclBag = myStandardLibraryFactory.createOclBag(realBag, TypeConstants.REAL);
+		oclBag = myStandardLibraryFactory.createOclBag(realBag, EssentialOclPlugin.getOclLibraryProvider().getOclLibrary().getOclReal());
 
 		realBag.add(oclReal1_5);
 		realBag.add(undefined);
 		oclBag2 =
-				myStandardLibraryFactory.createOclBag(realBag, TypeConstants.REAL);
+				myStandardLibraryFactory.createOclBag(realBag, EssentialOclPlugin.getOclLibraryProvider().getOclLibrary().getOclReal());
 
 		List<OclReal> realBag2 = new ArrayList<OclReal>();
 		realBag2.add(oclReal0_5);
@@ -94,16 +95,16 @@ public class JavaOclBagTest {
 		realBag2.add(undefined);
 
 		oclBag3 =
-				myStandardLibraryFactory.createOclBag(realBag2, TypeConstants.REAL);
+				myStandardLibraryFactory.createOclBag(realBag2, EssentialOclPlugin.getOclLibraryProvider().getOclLibrary().getOclReal());
 
 		Set<OclReal> realSet = new HashSet<OclReal>();
 		realSet.add(oclReal0_5);
-		oclSet = myStandardLibraryFactory.createOclSet(realSet, TypeConstants.REAL);
+		oclSet = myStandardLibraryFactory.createOclSet(realSet, EssentialOclPlugin.getOclLibraryProvider().getOclLibrary().getOclReal());
 
 		realSet.add(oclReal1_5);
 		realSet.add(undefined);
 		oclSet2 =
-				myStandardLibraryFactory.createOclSet(realSet, TypeConstants.REAL);
+				myStandardLibraryFactory.createOclSet(realSet, EssentialOclPlugin.getOclLibraryProvider().getOclLibrary().getOclReal());
 
 	}
 

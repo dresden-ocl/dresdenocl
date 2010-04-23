@@ -47,74 +47,79 @@ import tudresden.ocl20.pivot.pivotmodel.TypeParameter;
  * <!-- end-user-doc -->
  * <p>
  * </p>
- * 
+ *
  * @generated
  */
-public class SequenceTypeImpl extends CollectionTypeImpl implements SequenceType {
+public class SequenceTypeImpl extends CollectionTypeImpl implements
+		SequenceType {
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  protected SequenceTypeImpl() {
-    super();
-  }
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected SequenceTypeImpl() {
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  @Override
-  protected EClass eStaticClass() {
-    return TypesPackageImpl.Literals.SEQUENCE_TYPE;
-  }
+		super();
+	}
 
-  /**
-   * Overridden to check whether the other {@link CollectionType collection type} also is a
-   * <code>SequenceType</code>. In this case, return a <code>SequenceType</code> with the given
-   * element type, otherwise default to <code>CollectionType</code>.
-   * 
-   * @see tudresden.ocl20.pivot.essentialocl.types.impl.CollectionTypeImpl#getCommonCollectionType(tudresden.ocl20.pivot.essentialocl.types.CollectionType,
-   *      tudresden.ocl20.pivot.pivotmodel.Type)
-   */
-  @Override
-  protected CollectionType getCommonCollectionType(CollectionType otherCollectionType,
-      Type commonElementType) {
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected EClass eStaticClass() {
 
-    // check invariant
-    if (getOclLibrary() == null) {
-      throw new IllegalStateException("The reference to the OCL library was null for " + this + "."); //$NON-NLS-1$ //$NON-NLS-2$
-    }
+		return TypesPackageImpl.Literals.SEQUENCE_TYPE;
+	}
 
-    if (otherCollectionType instanceof SequenceType) {
-      return getOclLibrary().getSequenceType(commonElementType);
-    }
+	/**
+	 * Overridden to check whether the other {@link CollectionType collection type} also is a
+	 * <code>SequenceType</code>. In this case, return a <code>SequenceType</code> with the given
+	 * element type, otherwise default to <code>CollectionType</code>.
+	 * 
+	 * @see tudresden.ocl20.pivot.essentialocl.types.impl.CollectionTypeImpl#getCommonCollectionType(tudresden.ocl20.pivot.essentialocl.types.CollectionType,
+	 *      tudresden.ocl20.pivot.pivotmodel.Type)
+	 */
+	@Override
+	protected CollectionType getCommonCollectionType(
+			CollectionType otherCollectionType, Type commonElementType) {
 
-    return getOclLibrary().getCollectionType(commonElementType);
-  }
+		// check invariant
+		if (getOclLibrary() == null) {
+			throw new IllegalStateException(
+					"The reference to the OCL library was null for " + this + "."); //$NON-NLS-1$ //$NON-NLS-2$
+		}
 
-  /*
-   * (non-Javadoc)
-   * 
-   * @see tudresden.ocl20.pivot.essentialocl.types.impl.CollectionTypeImpl#bindTypeParameter(java.util.List,
-   *      java.util.List)
-   */
-  @Override
-  public SequenceType bindTypeParameter(List<TypeParameter> parameters, List<? extends Type> types) {
-    return (SequenceType) super.bindTypeParameter(parameters,types);
-  }
+		if (otherCollectionType instanceof SequenceType) {
+			return getOclLibrary().getSequenceType(commonElementType);
+		}
 
-  /*
-   * (non-Javadoc)
-   * 
-   * @see tudresden.ocl20.pivot.essentialocl.types.impl.SequenceType#clone()
-   */
+		return getOclLibrary().getCollectionType(commonElementType);
+	}
 
-  @Override
-  public SequenceType clone() {
-    return (SequenceType) initialize(TypesFactory.INSTANCE.createSequenceType());
-  }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see tudresden.ocl20.pivot.essentialocl.types.impl.CollectionTypeImpl#bindTypeParameter(java.util.List,
+	 *      java.util.List)
+	 */
+	@Override
+	public SequenceType bindTypeParameter(List<TypeParameter> parameters,
+			List<? extends Type> types) {
+
+		return (SequenceType) super.bindTypeParameter(parameters, types);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see tudresden.ocl20.pivot.essentialocl.types.impl.SequenceType#clone()
+	 */
+
+	@Override
+	public SequenceType clone() {
+
+		return (SequenceType) initialize(TypesFactory.INSTANCE.createSequenceType());
+	}
 
 } // SequenceTypeImpl

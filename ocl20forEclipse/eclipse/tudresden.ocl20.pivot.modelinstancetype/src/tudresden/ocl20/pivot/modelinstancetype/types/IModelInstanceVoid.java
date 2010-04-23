@@ -20,7 +20,7 @@ package tudresden.ocl20.pivot.modelinstancetype.types;
 
 import org.eclipse.osgi.util.NLS;
 
-import tudresden.ocl20.pivot.essentialocl.types.TypeConstants;
+import tudresden.ocl20.pivot.essentialocl.EssentialOclPlugin;
 import tudresden.ocl20.pivot.modelinstancetype.exception.AsTypeCastException;
 import tudresden.ocl20.pivot.modelinstancetype.exception.CopyForAtPreException;
 import tudresden.ocl20.pivot.modelinstancetype.internal.ModelInstanceMessages;
@@ -52,8 +52,7 @@ public interface IModelInstanceVoid extends IModelInstancePrimitiveType {
 
 		/*
 		 * (non-Javadoc)
-		 * @see
-		 * tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement
+		 * @see tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement
 		 * #asType(tudresden.ocl20.pivot.pivotmodel.Type)
 		 */
 		public IModelInstanceElement asType(Type type) throws AsTypeCastException {
@@ -69,8 +68,7 @@ public interface IModelInstanceVoid extends IModelInstancePrimitiveType {
 
 		/*
 		 * (non-Javadoc)
-		 * @see
-		 * tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement
+		 * @see tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement
 		 * #copyForAtPre()
 		 */
 		public IModelInstanceElement copyForAtPre() throws CopyForAtPreException {
@@ -80,8 +78,7 @@ public interface IModelInstanceVoid extends IModelInstancePrimitiveType {
 
 		/*
 		 * (non-Javadoc)
-		 * @see
-		 * tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement
+		 * @see tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement
 		 * #getName()
 		 */
 		public String getName() {
@@ -91,19 +88,18 @@ public interface IModelInstanceVoid extends IModelInstancePrimitiveType {
 
 		/*
 		 * (non-Javadoc)
-		 * @see
-		 * tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement
+		 * @see tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement
 		 * #getType()
 		 */
 		public Type getType() {
 
-			return TypeConstants.VOID;
+			return EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+					.getOclVoid();
 		}
 
 		/*
 		 * (non-Javadoc)
-		 * @see
-		 * tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement
+		 * @see tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement
 		 * #isInstanceOf(tudresden.ocl20.pivot.pivotmodel.Type)
 		 */
 		// FIXME Michael: if OclInvalid has own meta-type, this should check for it
@@ -118,19 +114,18 @@ public interface IModelInstanceVoid extends IModelInstancePrimitiveType {
 
 		/*
 		 * (non-Javadoc)
-		 * @see
-		 * tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement
+		 * @see tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement
 		 * #isTypeOf(tudresden.ocl20.pivot.pivotmodel.Type)
 		 */
 		public boolean isTypeOf(Type type) {
 
-			return TypeConstants.VOID.equals(type);
+			return EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+					.getOclVoid().equals(type);
 		}
 
 		/*
 		 * (non-Javadoc)
-		 * @see
-		 * tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement
+		 * @see tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement
 		 * #isUndefined()
 		 */
 		public boolean isUndefined() {

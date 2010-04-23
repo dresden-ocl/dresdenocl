@@ -20,7 +20,8 @@ package tudresden.ocl20.pivot.modelinstancetype.types.base;
 
 import java.util.Collection;
 
-import tudresden.ocl20.pivot.essentialocl.types.TypeConstants;
+import tudresden.ocl20.pivot.essentialocl.expressions.CollectionKind;
+import tudresden.ocl20.pivot.essentialocl.types.CollectionType;
 import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceCollection;
 import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement;
 import tudresden.ocl20.pivot.pivotmodel.Type;
@@ -34,12 +35,10 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
  * @author Claas Wilke
  */
 public abstract class AbstractModelInstanceCollection<T extends IModelInstanceElement>
-		extends AbstractModelInstanceElement implements
-		IModelInstanceCollection<T> {
+		extends AbstractModelInstanceElement implements IModelInstanceCollection<T> {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @seetudresden.ocl20.pivot.modelbus.modelinstance.types.impl.
 	 * AbstractModelInstanceElement#getName()
 	 */
@@ -96,8 +95,7 @@ public abstract class AbstractModelInstanceCollection<T extends IModelInstanceEl
 				}
 
 				if (element instanceof IModelInstanceElement) {
-					resultBuffer.append(((IModelInstanceElement) element)
-							.getName());
+					resultBuffer.append(((IModelInstanceElement) element).getName());
 				}
 
 				else {
@@ -114,7 +112,6 @@ public abstract class AbstractModelInstanceCollection<T extends IModelInstanceEl
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @seetudresden.ocl20.pivot.modelbus.modelinstance.types.base.
 	 * AbstractModelInstanceElement#equals(java.lang.Object)
 	 */
@@ -137,8 +134,7 @@ public abstract class AbstractModelInstanceCollection<T extends IModelInstanceEl
 			other = (AbstractModelInstanceCollection<?>) object;
 
 			/*
-			 * This should not happen. But anyway, null == null results in
-			 * false.
+			 * This should not happen. But anyway, null == null results in false.
 			 */
 			if (this.isUndefined() || other.isUndefined()) {
 				result = false;
@@ -170,7 +166,6 @@ public abstract class AbstractModelInstanceCollection<T extends IModelInstanceEl
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @seetudresden.ocl20.pivot.modelbus.modelinstance.types.base.
 	 * AbstractModelInstanceElement#hashCode()
 	 */
@@ -219,15 +214,12 @@ public abstract class AbstractModelInstanceCollection<T extends IModelInstanceEl
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @seetudresden.ocl20.pivot.modelbus.modelinstance.types.base.
 	 * AbstractModelInstanceElement#hashCode()
 	 */
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceCollection
+	 * @see tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceCollection
 	 * #isOrdered()
 	 */
 	public boolean isOrdered() {
@@ -235,8 +227,9 @@ public abstract class AbstractModelInstanceCollection<T extends IModelInstanceEl
 		boolean result;
 
 		/* Only ordered sets and sequences are ordered. */
-		if (this.isKindOf(TypeConstants.ORDERED_SET)
-				|| this.isKindOf(TypeConstants.SEQUENCE)) {
+		CollectionType collectionType = (CollectionType) this.myType;
+		if (collectionType.getKind() == CollectionKind.SEQUENCE
+				|| collectionType.getKind() == CollectionKind.ORDERED_SET) {
 			result = true;
 		}
 
@@ -249,7 +242,6 @@ public abstract class AbstractModelInstanceCollection<T extends IModelInstanceEl
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement
 	 * #isUndefined()
 	 */
@@ -260,7 +252,6 @@ public abstract class AbstractModelInstanceCollection<T extends IModelInstanceEl
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement#isKindOf
 	 * (tudresden.ocl20.pivot.pivotmodel.Type)
@@ -272,18 +263,17 @@ public abstract class AbstractModelInstanceCollection<T extends IModelInstanceEl
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceCollection
+	 * @see tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceCollection
 	 * #isUnique()
 	 */
 	public boolean isUnique() {
 
 		boolean result;
 
+		CollectionType collectionType = (CollectionType) this.myType;
 		/* Only ordered sets and sets are unique. */
-		if (this.isKindOf(TypeConstants.ORDERED_SET)
-				|| this.isKindOf(TypeConstants.SET)) {
+		if (collectionType.getKind() == CollectionKind.ORDERED_SET
+				|| collectionType.getKind() == CollectionKind.SET) {
 			result = true;
 		}
 

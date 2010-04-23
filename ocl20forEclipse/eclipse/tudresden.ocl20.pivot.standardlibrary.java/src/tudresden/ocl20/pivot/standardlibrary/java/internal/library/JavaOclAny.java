@@ -39,11 +39,11 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import tudresden.ocl20.pivot.essentialocl.EssentialOclPlugin;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBoolean;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSet;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclType;
-import tudresden.ocl20.pivot.essentialocl.types.TypeConstants;
 import tudresden.ocl20.pivot.modelinstancetype.exception.AsTypeCastException;
 import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement;
 import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceInvalid;
@@ -219,10 +219,14 @@ public abstract class JavaOclAny implements OclAny {
 			throw new IllegalArgumentException(
 					"Cannot determine common super type of null values.");
 
-		else if (type1 == null || type1.equals(TypeConstants.ANY))
+		else if (type1 == null
+				|| type1.equals(EssentialOclPlugin.getOclLibraryProvider()
+						.getOclLibrary().getOclAny()))
 			result = type2;
 
-		else if (type2 == null || type2.equals(TypeConstants.ANY))
+		else if (type2 == null
+				|| type2.equals(EssentialOclPlugin.getOclLibraryProvider()
+						.getOclLibrary().getOclAny()))
 			result = type1;
 
 		else
@@ -272,7 +276,8 @@ public abstract class JavaOclAny implements OclAny {
 		 */
 		if (this.invalidReason != null)
 			return JavaStandardLibraryFactory.INSTANCE.createOclInvalid(
-					TypeConstants.BOOLEAN, invalidReason);
+					EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+							.getOclBoolean(), invalidReason);
 		else
 			return JavaOclBoolean.getInstance((this.undefinedreason != null));
 	}
@@ -332,13 +337,19 @@ public abstract class JavaOclAny implements OclAny {
 
 		OclBoolean result = null;
 
-		result = checkInvalid(TypeConstants.BOOLEAN, this, typespec);
+		result =
+				checkInvalid(EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+						.getOclBoolean(), this, typespec);
 
 		if (result == null)
-			result = checkUndefined("oclIsKindOf", TypeConstants.BOOLEAN, this);
+			result =
+					checkUndefined("oclIsKindOf", EssentialOclPlugin
+							.getOclLibraryProvider().getOclLibrary().getOclBoolean(), this);
 
 		if (result == null) {
-			if (typespec.getType().equals(TypeConstants.ANY))
+			if (typespec.getType().equals(
+					EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+							.getOclAny()))
 				result = JavaStandardLibraryFactory.INSTANCE.createOclBoolean(true);
 			else {
 				final boolean isKindOf = imiElement.isKindOf(typespec.getType());
@@ -359,10 +370,14 @@ public abstract class JavaOclAny implements OclAny {
 
 		OclBoolean result = null;
 
-		result = checkInvalid(TypeConstants.BOOLEAN, this, typespec);
+		result =
+				checkInvalid(EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+						.getOclBoolean(), this, typespec);
 
 		if (result == null)
-			result = checkUndefined("oclIsTypeOf", TypeConstants.BOOLEAN, this);
+			result =
+					checkUndefined("oclIsTypeOf", EssentialOclPlugin
+							.getOclLibraryProvider().getOclLibrary().getOclBoolean(), this);
 
 		if (result == null) {
 
@@ -382,10 +397,14 @@ public abstract class JavaOclAny implements OclAny {
 		OclType<T> result;
 		Type type = this.getModelInstanceElement().getType();
 
-		result = checkInvalid(TypeConstants.TYPE(type), this);
+		result =
+				checkInvalid(EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+						.getOclType(), this);
 
 		if (result == null)
-			result = checkUndefined("oclType", TypeConstants.TYPE(type), this);
+			result =
+					checkUndefined("oclType", EssentialOclPlugin.getOclLibraryProvider()
+							.getOclLibrary().getOclType(), this);
 
 		if (result == null)
 			result = JavaStandardLibraryFactory.INSTANCE.createOclType(type);

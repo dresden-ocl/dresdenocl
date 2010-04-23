@@ -28,9 +28,9 @@ import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.UniqueEList;
 import org.eclipse.osgi.util.NLS;
 
+import tudresden.ocl20.pivot.essentialocl.EssentialOclPlugin;
 import tudresden.ocl20.pivot.essentialocl.expressions.CollectionKind;
 import tudresden.ocl20.pivot.essentialocl.types.CollectionType;
-import tudresden.ocl20.pivot.essentialocl.types.TypeConstants;
 import tudresden.ocl20.pivot.modelinstancetype.ModelInstanceTypePlugin;
 import tudresden.ocl20.pivot.modelinstancetype.exception.AsTypeCastException;
 import tudresden.ocl20.pivot.modelinstancetype.internal.ModelInstanceMessages;
@@ -74,7 +74,8 @@ public class JavaModelInstanceCollection<T extends IModelInstanceElement>
 	 *          The {@link Object}s contained in this
 	 *          {@link JavaModelInstanceCollection}.
 	 */
-	protected JavaModelInstanceCollection(Collection<T> containedObjects) {
+	protected JavaModelInstanceCollection(Collection<T> containedObjects,
+			Type elementType) {
 
 		/* Eventually debug the entry of this method. */
 		if (LOGGER.isDebugEnabled()) {
@@ -93,12 +94,16 @@ public class JavaModelInstanceCollection<T extends IModelInstanceElement>
 		/* Check if a List or set is given. */
 		if (containedObjects instanceof Set<?>) {
 
-			this.myType = TypeConstants.SET;
+			this.myType =
+					EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+							.getSetType(elementType);
 		}
 
 		else {
 
-			this.myType = TypeConstants.BAG;
+			this.myType =
+					EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+							.getBagType(elementType);
 		}
 
 		/* Eventually debug the exit of this method. */
@@ -175,8 +180,7 @@ public class JavaModelInstanceCollection<T extends IModelInstanceElement>
 
 	/*
 	 * (non-Javadoc)
-	 * @see
-	 * tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement
+	 * @see tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement
 	 * #asType(tudresden.ocl20.pivot.pivotmodel.Type)
 	 */
 	public IModelInstanceElement asType(Type type) throws AsTypeCastException {
@@ -206,9 +210,11 @@ public class JavaModelInstanceCollection<T extends IModelInstanceElement>
 				/* Create a new List to avoid side effects. */
 				adaptedCollection = new ArrayList<T>(this.myContainedObjects);
 
-				result = new JavaModelInstanceCollection<T>(adaptedCollection,
+				result =
+						new JavaModelInstanceCollection<T>(adaptedCollection,
 
-				TypeConstants.BAG);
+						EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+								.getBagType(collectionType.getElementType()));
 				break;
 
 			case SEQUENCE:
@@ -216,9 +222,11 @@ public class JavaModelInstanceCollection<T extends IModelInstanceElement>
 				/* Create a new List to avoid side effects. */
 				adaptedCollection = new ArrayList<T>(this.myContainedObjects);
 
-				result = new JavaModelInstanceCollection<T>(adaptedCollection,
+				result =
+						new JavaModelInstanceCollection<T>(adaptedCollection,
 
-				TypeConstants.SEQUENCE);
+						EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+								.getSequenceType(collectionType.getElementType()));
 				break;
 
 			case SET:
@@ -226,9 +234,11 @@ public class JavaModelInstanceCollection<T extends IModelInstanceElement>
 				/* Create a new Set to avoid side effects. */
 				adaptedCollection = new HashSet<T>(this.myContainedObjects);
 
-				result = new JavaModelInstanceCollection<T>(adaptedCollection,
+				result =
+						new JavaModelInstanceCollection<T>(adaptedCollection,
 
-				TypeConstants.SET);
+						EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+								.getSetType(collectionType.getElementType()));
 				break;
 
 			case ORDERED_SET:
@@ -236,9 +246,11 @@ public class JavaModelInstanceCollection<T extends IModelInstanceElement>
 				/* Create a new List to avoid side effects. */
 				adaptedCollection = new UniqueEList<T>(this.myContainedObjects);
 
-				result = new JavaModelInstanceCollection<T>(adaptedCollection,
+				result =
+						new JavaModelInstanceCollection<T>(adaptedCollection,
 
-				TypeConstants.ORDERED_SET);
+						EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+								.getOrderedSetType(collectionType.getElementType()));
 				break;
 
 			default:
@@ -250,7 +262,9 @@ public class JavaModelInstanceCollection<T extends IModelInstanceElement>
 				/* Create a new List to avoid side effects. */
 				adaptedCollection = new ArrayList<T>(this.myContainedObjects);
 
-				result = new JavaModelInstanceCollection<T>(adaptedCollection);
+				result =
+						new JavaModelInstanceCollection<T>(adaptedCollection,
+								collectionType.getElementType());
 				break;
 			}
 			// end switch.
@@ -272,8 +286,7 @@ public class JavaModelInstanceCollection<T extends IModelInstanceElement>
 	}
 
 	/*
-	 * @see
-	 * tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement
+	 * @see tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement
 	 * #copyForAtPre()
 	 */
 	public IModelInstanceElement copyForAtPre() {
@@ -285,8 +298,7 @@ public class JavaModelInstanceCollection<T extends IModelInstanceElement>
 
 	/*
 	 * (non-Javadoc)
-	 * @see
-	 * tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceCollection
+	 * @see tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceCollection
 	 * #getCollection()
 	 */
 	public Collection<T> getCollection() {

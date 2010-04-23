@@ -49,165 +49,165 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.VariableExpImpl#getReferredVariable <em>Referred Variable</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.VariableExpImpl#getReferredVariable <em>Referred Variable</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @generated
  */
 public class VariableExpImpl extends OclExpressionImpl implements VariableExp {
 
-  /**
-   * Logger for this class
-   */
-  private static final Logger logger = Logger.getLogger(VariableExpImpl.class);
+	/**
+	 * Logger for this class
+	 */
+	private static final Logger logger = Logger.getLogger(VariableExpImpl.class);
 
-  /**
-   * The cached value of the '{@link #getReferredVariable() <em>Referred Variable</em>}'
-   * reference. <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @see #getReferredVariable()
-   * @generated
-   * @ordered
-   */
-  protected Variable referredVariable = null;
+	/**
+	 * The cached value of the '{@link #getReferredVariable() <em>Referred Variable</em>}' reference.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @see #getReferredVariable()
+	 * @generated
+	 * @ordered
+	 */
+	protected Variable referredVariable;
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  protected VariableExpImpl() {
-    super();
-  }
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected VariableExpImpl() {
 
-  /**
-   * Overridden to determine the type of the <code>VariableExp</code>
-   * according to the OCL specification (Section 8.3):
-   * 
-   * <p>
-   * The type of a VariableExp is the type of the variable to which it refers.
-   * 
-   * <pre>
-   * context VariableExp
-   * inv: type = referredVariable.type
-   * </pre>
-   * 
-   * If the {@link #getReferredVariable() referred variable} of this
-   * <code>VariableExp</code> is <code>null</code>, a
-   * {@link WellformednessException} is thrown.
-   * 
-   * @see tudresden.ocl20.pivot.pivotmodel.impl.TypedElementImpl#getType()
-   */
-  @Override
-  protected Type evaluateType() {
-    if (logger.isDebugEnabled()) {
-      logger.debug("evaluateType() - enter"); //$NON-NLS-1$
-    }
+		super();
+	}
 
-    if (referredVariable == null) {
-      throw new WellformednessException(this,
-          "The referred variable of a VariableExp must not be null."); //$NON-NLS-1$
-    }
+	/**
+	 * Overridden to determine the type of the <code>VariableExp</code>
+	 * according to the OCL specification (Section 8.3):
+	 * 
+	 * <p>
+	 * The type of a VariableExp is the type of the variable to which it refers.
+	 * 
+	 * <pre>
+	 * context VariableExp
+	 * inv: type = referredVariable.type
+	 * </pre>
+	 * 
+	 * If the {@link #getReferredVariable() referred variable} of this
+	 * <code>VariableExp</code> is <code>null</code>, a
+	 * {@link WellformednessException} is thrown.
+	 * 
+	 * @see tudresden.ocl20.pivot.pivotmodel.impl.TypedElementImpl#getType()
+	 */
+	@Override
+	protected Type evaluateType() {
 
-    Type type = getOclType(referredVariable.getType());
+		if (logger.isDebugEnabled()) {
+			logger.debug("evaluateType() - enter"); //$NON-NLS-1$
+		}
 
-    if (logger.isDebugEnabled()) {
-      logger.debug("evaluateType() - exit - return value=" + type); //$NON-NLS-1$
-    }
+		if (referredVariable == null) {
+			throw new WellformednessException(this,
+					"The referred variable of a VariableExp must not be null."); //$NON-NLS-1$
+		}
 
-    return type;
-  }
+		Type type = getOclType(referredVariable.getType());
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  public Variable getReferredVariable() {
-    return referredVariable;
-  }
+		if (logger.isDebugEnabled()) {
+			logger.debug("evaluateType() - exit - return value=" + type); //$NON-NLS-1$
+		}
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  public void setReferredVariable(Variable newReferredVariable) {
-    Variable oldReferredVariable = referredVariable;
-    referredVariable = newReferredVariable;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET,
-          ExpressionsPackageImpl.VARIABLE_EXP__REFERRED_VARIABLE,
-          oldReferredVariable, referredVariable));
-  }
+		return type;
+	}
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  @Override
-  public Object eGet(int featureID, boolean resolve, boolean coreType) {
-    switch (featureID) {
-      case ExpressionsPackageImpl.VARIABLE_EXP__REFERRED_VARIABLE:
-        return getReferredVariable();
-    }
-    return super.eGet(featureID, resolve, coreType);
-  }
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Variable getReferredVariable() {
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  @Override
-  public void eSet(int featureID, Object newValue) {
-    switch (featureID) {
-      case ExpressionsPackageImpl.VARIABLE_EXP__REFERRED_VARIABLE:
-        setReferredVariable((Variable) newValue);
-        return;
-    }
-    super.eSet(featureID, newValue);
-  }
+		return referredVariable;
+	}
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  @Override
-  public void eUnset(int featureID) {
-    switch (featureID) {
-      case ExpressionsPackageImpl.VARIABLE_EXP__REFERRED_VARIABLE:
-        setReferredVariable((Variable) null);
-        return;
-    }
-    super.eUnset(featureID);
-  }
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setReferredVariable(Variable newReferredVariable) {
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  @Override
-  public boolean eIsSet(int featureID) {
-    switch (featureID) {
-      case ExpressionsPackageImpl.VARIABLE_EXP__REFERRED_VARIABLE:
-        return referredVariable != null;
-    }
-    return super.eIsSet(featureID);
-  }
+		Variable oldReferredVariable = referredVariable;
+		referredVariable = newReferredVariable;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET,
+					ExpressionsPackageImpl.VARIABLE_EXP__REFERRED_VARIABLE,
+					oldReferredVariable, referredVariable));
+	}
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  @Override
-  protected EClass eStaticClass() {
-    return ExpressionsPackageImpl.Literals.VARIABLE_EXP;
-  }
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object eGet(int featureID, boolean resolve, boolean coreType) {
+
+		switch (featureID) {
+		case ExpressionsPackageImpl.VARIABLE_EXP__REFERRED_VARIABLE:
+			return getReferredVariable();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void eSet(int featureID, Object newValue) {
+
+		switch (featureID) {
+		case ExpressionsPackageImpl.VARIABLE_EXP__REFERRED_VARIABLE:
+			setReferredVariable((Variable) newValue);
+			return;
+		}
+		super.eSet(featureID, newValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void eUnset(int featureID) {
+
+		switch (featureID) {
+		case ExpressionsPackageImpl.VARIABLE_EXP__REFERRED_VARIABLE:
+			setReferredVariable((Variable) null);
+			return;
+		}
+		super.eUnset(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean eIsSet(int featureID) {
+
+		switch (featureID) {
+		case ExpressionsPackageImpl.VARIABLE_EXP__REFERRED_VARIABLE:
+			return referredVariable != null;
+		}
+		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected EClass eStaticClass() {
+
+		return ExpressionsPackageImpl.Literals.VARIABLE_EXP;
+	}
 
 } // VariableExpImpl

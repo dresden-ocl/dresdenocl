@@ -49,190 +49,200 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.CollectionItemImpl#getItem <em>Item</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.CollectionItemImpl#getItem <em>Item</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @generated
  */
-public class CollectionItemImpl extends CollectionLiteralPartImpl implements CollectionItem {
+public class CollectionItemImpl extends CollectionLiteralPartImpl implements
+		CollectionItem {
 
-  /**
-   * The cached value of the '{@link #getItem() <em>Item</em>}' containment reference. <!--
-   * begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @see #getItem()
-   * @generated
-   * @ordered
-   */
-  protected OclExpression item = null;
+	/**
+	 * The cached value of the '{@link #getItem() <em>Item</em>}' containment reference. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @see #getItem()
+	 * @generated
+	 * @ordered
+	 */
+	protected OclExpression item;
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  protected CollectionItemImpl() {
-    super();
-  }
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected CollectionItemImpl() {
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  @Override
-  protected EClass eStaticClass() {
-    return ExpressionsPackageImpl.Literals.COLLECTION_ITEM;
-  }
+		super();
+	}
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  public OclExpression getItem() {
-    return item;
-  }
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected EClass eStaticClass() {
 
-  /**
-   * Overridden to determine the type of the <code>CollectionItem</code> according to the OCL
-   * specification (Section 8.3):
-   * 
-   * <p>
-   * The type of a CollectionItem is the type of the item expression.
-   * 
-   * <pre>
-   *   context CollectionItem
-   *   inv: type = item.type
-   * </pre>
-   * 
-   * </p>
-   * 
-   * @see tudresden.ocl20.pivot.pivotmodel.impl.TypedElementImpl#getType()
-   */
-  @Override
-  public Type evaluateType() {
+		return ExpressionsPackageImpl.Literals.COLLECTION_ITEM;
+	}
 
-    // check invariant
-    if (item == null) {
-      throw new WellformednessException(this,
-          "The referenced item of a CollectionLiteralItem must not be null."); //$NON-NLS-1$
-    }
-    
-    return item.getType();
-  }
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	public OclExpression getItem() {
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  public NotificationChain basicSetItem(OclExpression newItem, NotificationChain msgs) {
-    OclExpression oldItem = item;
-    item = newItem;
-    if (eNotificationRequired()) {
-      ENotificationImpl notification = new ENotificationImpl(this,Notification.SET,
-          ExpressionsPackageImpl.COLLECTION_ITEM__ITEM,oldItem,newItem);
-      if (msgs == null) msgs = notification;
-      else msgs.add(notification);
-    }
-    return msgs;
-  }
+		return item;
+	}
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  public void setItem(OclExpression newItem) {
-    if (newItem != item) {
-      NotificationChain msgs = null;
-      if (item != null)
-        msgs = ((InternalEObject) item).eInverseRemove(this,EOPPOSITE_FEATURE_BASE
-            - ExpressionsPackageImpl.COLLECTION_ITEM__ITEM,null,msgs);
-      if (newItem != null)
-        msgs = ((InternalEObject) newItem).eInverseAdd(this,EOPPOSITE_FEATURE_BASE
-            - ExpressionsPackageImpl.COLLECTION_ITEM__ITEM,null,msgs);
-      msgs = basicSetItem(newItem,msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this,Notification.SET,
-          ExpressionsPackageImpl.COLLECTION_ITEM__ITEM,newItem,newItem));
-  }
+	/**
+	 * Overridden to determine the type of the <code>CollectionItem</code> according to the OCL
+	 * specification (Section 8.3):
+	 * 
+	 * <p>
+	 * The type of a CollectionItem is the type of the item expression.
+	 * 
+	 * <pre>
+	 *   context CollectionItem
+	 *   inv: type = item.type
+	 * </pre>
+	 * 
+	 * </p>
+	 * 
+	 * @see tudresden.ocl20.pivot.pivotmodel.impl.TypedElementImpl#getType()
+	 */
+	@Override
+	public Type evaluateType() {
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  @Override
-  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID,
-      NotificationChain msgs) {
-    switch (featureID) {
-      case ExpressionsPackageImpl.COLLECTION_ITEM__ITEM:
-        return basicSetItem(null,msgs);
-    }
-    return super.eInverseRemove(otherEnd,featureID,msgs);
-  }
+		// check invariant
+		if (item == null) {
+			throw new WellformednessException(this,
+					"The referenced item of a CollectionLiteralItem must not be null."); //$NON-NLS-1$
+		}
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  @Override
-  public Object eGet(int featureID, boolean resolve, boolean coreType) {
-    switch (featureID) {
-      case ExpressionsPackageImpl.COLLECTION_ITEM__ITEM:
-        return getItem();
-    }
-    return super.eGet(featureID,resolve,coreType);
-  }
+		return item.getType();
+	}
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  @Override
-  public void eSet(int featureID, Object newValue) {
-    switch (featureID) {
-      case ExpressionsPackageImpl.COLLECTION_ITEM__ITEM:
-        setItem((OclExpression) newValue);
-        return;
-    }
-    super.eSet(featureID,newValue);
-  }
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetItem(OclExpression newItem,
+			NotificationChain msgs) {
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  @Override
-  public void eUnset(int featureID) {
-    switch (featureID) {
-      case ExpressionsPackageImpl.COLLECTION_ITEM__ITEM:
-        setItem((OclExpression) null);
-        return;
-    }
-    super.eUnset(featureID);
-  }
+		OclExpression oldItem = item;
+		item = newItem;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification =
+					new ENotificationImpl(this, Notification.SET,
+							ExpressionsPackageImpl.COLLECTION_ITEM__ITEM, oldItem, newItem);
+			if (msgs == null)
+				msgs = notification;
+			else
+				msgs.add(notification);
+		}
+		return msgs;
+	}
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  @Override
-  public boolean eIsSet(int featureID) {
-    switch (featureID) {
-      case ExpressionsPackageImpl.COLLECTION_ITEM__ITEM:
-        return item != null;
-    }
-    return super.eIsSet(featureID);
-  }
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setItem(OclExpression newItem) {
+
+		if (newItem != item) {
+			NotificationChain msgs = null;
+			if (item != null)
+				msgs =
+						((InternalEObject) item).eInverseRemove(this,
+								EOPPOSITE_FEATURE_BASE
+										- ExpressionsPackageImpl.COLLECTION_ITEM__ITEM, null, msgs);
+			if (newItem != null)
+				msgs =
+						((InternalEObject) newItem).eInverseAdd(this,
+								EOPPOSITE_FEATURE_BASE
+										- ExpressionsPackageImpl.COLLECTION_ITEM__ITEM, null, msgs);
+			msgs = basicSetItem(newItem, msgs);
+			if (msgs != null)
+				msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET,
+					ExpressionsPackageImpl.COLLECTION_ITEM__ITEM, newItem, newItem));
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd,
+			int featureID, NotificationChain msgs) {
+
+		switch (featureID) {
+		case ExpressionsPackageImpl.COLLECTION_ITEM__ITEM:
+			return basicSetItem(null, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object eGet(int featureID, boolean resolve, boolean coreType) {
+
+		switch (featureID) {
+		case ExpressionsPackageImpl.COLLECTION_ITEM__ITEM:
+			return getItem();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void eSet(int featureID, Object newValue) {
+
+		switch (featureID) {
+		case ExpressionsPackageImpl.COLLECTION_ITEM__ITEM:
+			setItem((OclExpression) newValue);
+			return;
+		}
+		super.eSet(featureID, newValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void eUnset(int featureID) {
+
+		switch (featureID) {
+		case ExpressionsPackageImpl.COLLECTION_ITEM__ITEM:
+			setItem((OclExpression) null);
+			return;
+		}
+		super.eUnset(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean eIsSet(int featureID) {
+
+		switch (featureID) {
+		case ExpressionsPackageImpl.COLLECTION_ITEM__ITEM:
+			return item != null;
+		}
+		return super.eIsSet(featureID);
+	}
 
 } // CollectionItemImpl

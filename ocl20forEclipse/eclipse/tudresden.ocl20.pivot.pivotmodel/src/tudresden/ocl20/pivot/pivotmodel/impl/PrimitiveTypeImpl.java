@@ -107,7 +107,7 @@ public class PrimitiveTypeImpl extends TypeImpl implements PrimitiveType {
 	public boolean conformsTo(Type other) {
 
 		boolean conformant = super.conformsTo(other);
-
+		
 		if (!conformant && other instanceof PrimitiveType) {
 			PrimitiveTypeKind thisKind, otherKind;
 

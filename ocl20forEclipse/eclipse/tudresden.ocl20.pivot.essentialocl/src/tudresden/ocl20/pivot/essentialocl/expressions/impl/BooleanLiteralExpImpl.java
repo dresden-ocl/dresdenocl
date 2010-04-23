@@ -50,181 +50,186 @@ import org.apache.commons.lang.builder.ToStringBuilder;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.BooleanLiteralExpImpl#isBooleanSymbol <em>Boolean Symbol</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.BooleanLiteralExpImpl#isBooleanSymbol <em>Boolean Symbol</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @generated
  */
-public class BooleanLiteralExpImpl extends PrimitiveLiteralExpImpl implements BooleanLiteralExp {
+public class BooleanLiteralExpImpl extends PrimitiveLiteralExpImpl implements
+		BooleanLiteralExp {
 
-  /**
-   * Logger for this class
-   */
-  private static final Logger logger = Logger.getLogger(BooleanLiteralExpImpl.class);
+	/**
+	 * Logger for this class
+	 */
+	private static final Logger logger =
+			Logger.getLogger(BooleanLiteralExpImpl.class);
 
-  /**
-   * The default value of the '{@link #isBooleanSymbol() <em>Boolean Symbol</em>}' attribute. <!--
-   * begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @see #isBooleanSymbol()
-   * @generated
-   * @ordered
-   */
-  protected static final boolean BOOLEAN_SYMBOL_EDEFAULT = false;
+	/**
+	 * The default value of the '{@link #isBooleanSymbol() <em>Boolean Symbol</em>}' attribute. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @see #isBooleanSymbol()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean BOOLEAN_SYMBOL_EDEFAULT = false;
 
-  /**
-   * The cached value of the '{@link #isBooleanSymbol() <em>Boolean Symbol</em>}' attribute. <!--
-   * begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @see #isBooleanSymbol()
-   * @generated
-   * @ordered
-   */
-  protected boolean booleanSymbol = BOOLEAN_SYMBOL_EDEFAULT;
+	/**
+	 * The cached value of the '{@link #isBooleanSymbol() <em>Boolean Symbol</em>}' attribute. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @see #isBooleanSymbol()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean booleanSymbol = BOOLEAN_SYMBOL_EDEFAULT;
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  protected BooleanLiteralExpImpl() {
-    super();
-  }
-  
-  
-  /**
-   * Overridden to determine the type of the <code>BooleanLiteralExp</code> according to the OCL
-   * specification (Section 8.3):
-   * 
-   * <p>
-   * The type of an boolean Literal expression is the type Boolean.
-   * 
-   * <pre>
-   *    context IntegerLiteralExp
-   *    inv: self.type.name = ‘Boolean’
-   * </pre>
-   * 
-   * </p>
-   * 
-   * @see tudresden.ocl20.pivot.pivotmodel.impl.TypedElementImpl#getType()
-   */
-  @Override
-  protected Type evaluateType() {
-    if (logger.isDebugEnabled()) {
-      logger.debug("evaluateType() - enter"); //$NON-NLS-1$
-    }
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected BooleanLiteralExpImpl() {
 
-    Type type = getValidOclLibrary().getOclBoolean();
-    
-    if (logger.isDebugEnabled()) {
-      logger.debug("evaluateType() - exit - return value=" + type); //$NON-NLS-1$
-    }
-    
-    return type;
-  }
+		super();
+	}
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  public boolean isBooleanSymbol() {
-    return booleanSymbol;
-  }
+	/**
+	 * Overridden to determine the type of the <code>BooleanLiteralExp</code> according to the OCL
+	 * specification (Section 8.3):
+	 * 
+	 * <p>
+	 * The type of an boolean Literal expression is the type Boolean.
+	 * 
+	 * <pre>
+	 *    context IntegerLiteralExp
+	 *    inv: self.type.name = ‘Boolean’
+	 * </pre>
+	 * 
+	 * </p>
+	 * 
+	 * @see tudresden.ocl20.pivot.pivotmodel.impl.TypedElementImpl#getType()
+	 */
+	@Override
+	protected Type evaluateType() {
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  public void setBooleanSymbol(boolean newBooleanSymbol) {
-    boolean oldBooleanSymbol = booleanSymbol;
-    booleanSymbol = newBooleanSymbol;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this,Notification.SET,
-          ExpressionsPackageImpl.BOOLEAN_LITERAL_EXP__BOOLEAN_SYMBOL,oldBooleanSymbol,booleanSymbol));
-  }
+		if (logger.isDebugEnabled()) {
+			logger.debug("evaluateType() - enter"); //$NON-NLS-1$
+		}
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  @Override
-  public Object eGet(int featureID, boolean resolve, boolean coreType) {
-    switch (featureID) {
-      case ExpressionsPackageImpl.BOOLEAN_LITERAL_EXP__BOOLEAN_SYMBOL:
-        return isBooleanSymbol() ? Boolean.TRUE : Boolean.FALSE;
-    }
-    return super.eGet(featureID,resolve,coreType);
-  }
+		Type type = getValidOclLibrary().getOclBoolean();
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  @Override
-  public void eSet(int featureID, Object newValue) {
-    switch (featureID) {
-      case ExpressionsPackageImpl.BOOLEAN_LITERAL_EXP__BOOLEAN_SYMBOL:
-        setBooleanSymbol(((Boolean) newValue).booleanValue());
-        return;
-    }
-    super.eSet(featureID,newValue);
-  }
+		if (logger.isDebugEnabled()) {
+			logger.debug("evaluateType() - exit - return value=" + type); //$NON-NLS-1$
+		}
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  @Override
-  public void eUnset(int featureID) {
-    switch (featureID) {
-      case ExpressionsPackageImpl.BOOLEAN_LITERAL_EXP__BOOLEAN_SYMBOL:
-        setBooleanSymbol(BOOLEAN_SYMBOL_EDEFAULT);
-        return;
-    }
-    super.eUnset(featureID);
-  }
+		return type;
+	}
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  @Override
-  public boolean eIsSet(int featureID) {
-    switch (featureID) {
-      case ExpressionsPackageImpl.BOOLEAN_LITERAL_EXP__BOOLEAN_SYMBOL:
-        return booleanSymbol != BOOLEAN_SYMBOL_EDEFAULT;
-    }
-    return super.eIsSet(featureID);
-  }
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean isBooleanSymbol() {
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  @Override
-  protected EClass eStaticClass() {
-    return ExpressionsPackageImpl.Literals.BOOLEAN_LITERAL_EXP;
-  }
+		return booleanSymbol;
+	}
 
-  /**
-   * Adapted the EMF implementation to use the Jakarta Commons Lang mechanism instead.
-   * 
-   * @see java.lang.Object#toString()
-   * 
-   * @generated NOT
-   */
-  @Override
-  public String toString() {
-    return new ToStringBuilder(this,ToStringStyle.SHORT_PREFIX_STYLE).appendSuper(super.toString())
-        .append("booleanSymbol",booleanSymbol).toString(); //$NON-NLS-1$
-  }
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setBooleanSymbol(boolean newBooleanSymbol) {
+
+		boolean oldBooleanSymbol = booleanSymbol;
+		booleanSymbol = newBooleanSymbol;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET,
+					ExpressionsPackageImpl.BOOLEAN_LITERAL_EXP__BOOLEAN_SYMBOL,
+					oldBooleanSymbol, booleanSymbol));
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object eGet(int featureID, boolean resolve, boolean coreType) {
+
+		switch (featureID) {
+		case ExpressionsPackageImpl.BOOLEAN_LITERAL_EXP__BOOLEAN_SYMBOL:
+			return isBooleanSymbol();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void eSet(int featureID, Object newValue) {
+
+		switch (featureID) {
+		case ExpressionsPackageImpl.BOOLEAN_LITERAL_EXP__BOOLEAN_SYMBOL:
+			setBooleanSymbol((Boolean) newValue);
+			return;
+		}
+		super.eSet(featureID, newValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void eUnset(int featureID) {
+
+		switch (featureID) {
+		case ExpressionsPackageImpl.BOOLEAN_LITERAL_EXP__BOOLEAN_SYMBOL:
+			setBooleanSymbol(BOOLEAN_SYMBOL_EDEFAULT);
+			return;
+		}
+		super.eUnset(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean eIsSet(int featureID) {
+
+		switch (featureID) {
+		case ExpressionsPackageImpl.BOOLEAN_LITERAL_EXP__BOOLEAN_SYMBOL:
+			return booleanSymbol != BOOLEAN_SYMBOL_EDEFAULT;
+		}
+		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected EClass eStaticClass() {
+
+		return ExpressionsPackageImpl.Literals.BOOLEAN_LITERAL_EXP;
+	}
+
+	/**
+	 * Adapted the EMF implementation to use the Jakarta Commons Lang mechanism instead.
+	 * 
+	 * @see java.lang.Object#toString()
+	 * 
+	 * @generated NOT
+	 */
+	@Override
+	public String toString() {
+
+		return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
+				.appendSuper(super.toString())
+				.append("booleanSymbol", booleanSymbol).toString(); //$NON-NLS-1$
+	}
 
 } // BooleanLiteralExpImpl

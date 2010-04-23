@@ -384,7 +384,8 @@ public class EcoreModelInstanceObject extends AbstractModelInstanceObject
 					.getEStructuralFeature(property.getName());
 
 			if (sf == null) {
-				String msg = EcoreModelInstanceTypeMessages.EcoreModelInstanceObject_PropertyAccessFailed;
+				String msg =
+						EcoreModelInstanceTypeMessages.EcoreModelInstanceObject_PropertyNotFoundInModelInstanceElement;
 				msg = NLS.bind(msg, property, this.myEObject);
 				throw new PropertyAccessException(msg);
 			}

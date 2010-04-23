@@ -50,28 +50,28 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
  */
 public interface TypeLiteralExp extends LiteralExp {
 
-  /**
-   * Returns the value of the '<em><b>Referred Type</b></em>' reference.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Referred Type</em>' reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Referred Type</em>' reference.
-   * @see #setReferredType(Type)
-   * @generated
-   */
-  Type getReferredType();
+	/**
+	 * Returns the value of the '<em><b>Referred Type</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Referred Type</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Referred Type</em>' reference.
+	 * @see #setReferredType(Type)
+	 * @generated
+	 */
+	Type getReferredType();
 
-  /**
-   * Sets the value of the '{@link tudresden.ocl20.pivot.essentialocl.expressions.TypeLiteralExp#getReferredType <em>Referred Type</em>}' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Referred Type</em>' reference.
-   * @see #getReferredType()
-   * @generated
-   */
-  void setReferredType(Type value);
+	/**
+	 * Sets the value of the '{@link tudresden.ocl20.pivot.essentialocl.expressions.TypeLiteralExp#getReferredType <em>Referred Type</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Referred Type</em>' reference.
+	 * @see #getReferredType()
+	 * @generated
+	 */
+	void setReferredType(Type value);
 
 } // TypeLiteralExp

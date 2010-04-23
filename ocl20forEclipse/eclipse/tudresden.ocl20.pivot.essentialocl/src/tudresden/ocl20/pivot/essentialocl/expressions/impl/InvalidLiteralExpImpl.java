@@ -44,64 +44,67 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
  * <!-- end-user-doc -->
  * <p>
  * </p>
- * 
+ *
  * @generated
  */
-public class InvalidLiteralExpImpl extends LiteralExpImpl implements InvalidLiteralExp {
+public class InvalidLiteralExpImpl extends LiteralExpImpl implements
+		InvalidLiteralExp {
 
-  /**
-   * Logger for this class
-   */
-  private static final Logger logger = Logger.getLogger(InvalidLiteralExpImpl.class);
+	/**
+	 * Logger for this class
+	 */
+	private static final Logger logger =
+			Logger.getLogger(InvalidLiteralExpImpl.class);
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  protected InvalidLiteralExpImpl() {
-    super();
-  }
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected InvalidLiteralExpImpl() {
 
-  /**
-   * Overridden to implement type evaluation. The corresponding wellformedness rule is lacking in
-   * the OCL specification, Section 8.3. However, it should obviously be:
-   * 
-   * <p>
-   * The type of an invalid Literal expression is OclInvalid.
-   * 
-   * <pre>
-   * context InvalidLiteralExp
-   * inv: self.type.name = 'OclInvalid'
-   * </pre>
-   * 
-   * </p>
-   * 
-   * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.OclExpressionImpl#evaluateType()
-   */
-  @Override
-  protected Type evaluateType() {
-    if (logger.isDebugEnabled()) {
-      logger.debug("evaluateType() - enter"); //$NON-NLS-1$
-    }
+		super();
+	}
 
-    Type type = getValidOclLibrary().getOclInvalid();
-    
-    if (logger.isDebugEnabled()) {
-      logger.debug("evaluateType() - exit - return value=" + type); //$NON-NLS-1$
-    }
-    
-    return type;
-  }
+	/**
+	 * Overridden to implement type evaluation. The corresponding wellformedness rule is lacking in
+	 * the OCL specification, Section 8.3. However, it should obviously be:
+	 * 
+	 * <p>
+	 * The type of an invalid Literal expression is OclInvalid.
+	 * 
+	 * <pre>
+	 * context InvalidLiteralExp
+	 * inv: self.type.name = 'OclInvalid'
+	 * </pre>
+	 * 
+	 * </p>
+	 * 
+	 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.OclExpressionImpl#evaluateType()
+	 */
+	@Override
+	protected Type evaluateType() {
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  @Override
-  protected EClass eStaticClass() {
-    return ExpressionsPackageImpl.Literals.INVALID_LITERAL_EXP;
-  }
+		if (logger.isDebugEnabled()) {
+			logger.debug("evaluateType() - enter"); //$NON-NLS-1$
+		}
+
+		Type type = getValidOclLibrary().getOclInvalid();
+
+		if (logger.isDebugEnabled()) {
+			logger.debug("evaluateType() - exit - return value=" + type); //$NON-NLS-1$
+		}
+
+		return type;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected EClass eStaticClass() {
+
+		return ExpressionsPackageImpl.Literals.INVALID_LITERAL_EXP;
+	}
 
 } // InvalidLiteralExpImpl

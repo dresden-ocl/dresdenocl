@@ -47,11 +47,12 @@ import tudresden.ocl20.pivot.pivotmodel.TypeParameter;
  */
 public interface SetType extends CollectionType {
 
-  /**
-   * Overridden to specialize the co-variant return type to <code>SetType</code>.
-   * 
-   * @see tudresden.ocl20.pivot.pivotmodel.GenericElement#bindTypeParameter(java.util.List, java.util.List)
-   */
-  SetType bindTypeParameter(List<TypeParameter> parameters, List<? extends Type> types);
+	/**
+	 * Overridden to specialize the co-variant return type to <code>SetType</code>.
+	 * 
+	 * @see tudresden.ocl20.pivot.pivotmodel.GenericElement#bindTypeParameter(java.util.List, java.util.List)
+	 */
+	SetType bindTypeParameter(List<TypeParameter> parameters,
+			List<? extends Type> types);
 
 } // SetType

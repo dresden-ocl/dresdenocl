@@ -51,149 +51,149 @@ import tudresden.ocl20.pivot.pivotmodel.TypeParameter;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.TypeLiteralExpImpl#getReferredType <em>Referred Type</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.TypeLiteralExpImpl#getReferredType <em>Referred Type</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @generated
  */
 public class TypeLiteralExpImpl extends LiteralExpImpl implements
-    TypeLiteralExp {
+		TypeLiteralExp {
 
-  /**
-   * The cached value of the '{@link #getReferredType() <em>Referred Type</em>}'
-   * reference. <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @see #getReferredType()
-   * @generated
-   * @ordered
-   */
-  protected Type referredType = null;
+	/**
+	 * The cached value of the '{@link #getReferredType() <em>Referred Type</em>}' reference.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @see #getReferredType()
+	 * @generated
+	 * @ordered
+	 */
+	protected Type referredType;
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  protected TypeLiteralExpImpl() {
-    super();
-  }
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected TypeLiteralExpImpl() {
 
-  /**
-   * The type of a <code>TypeLiteralExp</code> is the single instance of
-   * {@link TypeType} called <code>OclType</code>. Since this is a generic
-   * type, it is bound with the {@link #getReferredType() referred type} of this
-   * <code>TypeLiteralExp</code>.
-   * 
-   * @see tudresden.ocl20.pivot.pivotmodel.impl.TypedElementImpl#getType()
-   */
-  @Override
-  protected Type evaluateType() {
+		super();
+	}
 
-    if (referredType == null) {
-      throw new WellformednessException(this,
-          "The referred type of a TypeLiteralExp must not be null."); //$NON-NLS-1$
-    }
+	/**
+	 * The type of a <code>TypeLiteralExp</code> is the single instance of
+	 * {@link TypeType} called <code>OclType</code>. Since this is a generic
+	 * type, it is bound with the {@link #getReferredType() referred type} of this
+	 * <code>TypeLiteralExp</code>.
+	 * 
+	 * @see tudresden.ocl20.pivot.pivotmodel.impl.TypedElementImpl#getType()
+	 */
+	@Override
+	protected Type evaluateType() {
 
-    // get the OclType from the Standard Library
-    Type type = getValidOclLibrary().getOclType();
+		if (referredType == null) {
+			throw new WellformednessException(this,
+					"The referred type of a TypeLiteralExp must not be null."); //$NON-NLS-1$
+		}
 
-    // bind the type with the referred type
-    type = type.bindTypeParameter(new ArrayList<TypeParameter>(type
-        .getOwnedTypeParameter()), Arrays.asList(referredType));
+		// get the OclType from the Standard Library
+		Type type = getValidOclLibrary().getOclType();
 
-    return type;
-  }
+		// bind the type with the referred type
+		type =
+				type.bindTypeParameter(new ArrayList<TypeParameter>(type
+						.getOwnedTypeParameter()), Arrays.asList(referredType));
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  public Type getReferredType() {
-    return referredType;
-  }
+		return type;
+	}
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  public void setReferredType(Type newReferredType) {
-    Type oldReferredType = referredType;
-    referredType = newReferredType;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET,
-          ExpressionsPackageImpl.TYPE_LITERAL_EXP__REFERRED_TYPE,
-          oldReferredType, referredType));
-  }
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Type getReferredType() {
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  @Override
-  public Object eGet(int featureID, boolean resolve, boolean coreType) {
-    switch (featureID) {
-      case ExpressionsPackageImpl.TYPE_LITERAL_EXP__REFERRED_TYPE:
-        return getReferredType();
-    }
-    return super.eGet(featureID, resolve, coreType);
-  }
+		return referredType;
+	}
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  @Override
-  public void eSet(int featureID, Object newValue) {
-    switch (featureID) {
-      case ExpressionsPackageImpl.TYPE_LITERAL_EXP__REFERRED_TYPE:
-        setReferredType((Type) newValue);
-        return;
-    }
-    super.eSet(featureID, newValue);
-  }
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setReferredType(Type newReferredType) {
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  @Override
-  public void eUnset(int featureID) {
-    switch (featureID) {
-      case ExpressionsPackageImpl.TYPE_LITERAL_EXP__REFERRED_TYPE:
-        setReferredType((Type) null);
-        return;
-    }
-    super.eUnset(featureID);
-  }
+		Type oldReferredType = referredType;
+		referredType = newReferredType;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET,
+					ExpressionsPackageImpl.TYPE_LITERAL_EXP__REFERRED_TYPE,
+					oldReferredType, referredType));
+	}
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  @Override
-  public boolean eIsSet(int featureID) {
-    switch (featureID) {
-      case ExpressionsPackageImpl.TYPE_LITERAL_EXP__REFERRED_TYPE:
-        return referredType != null;
-    }
-    return super.eIsSet(featureID);
-  }
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  @Override
-  protected EClass eStaticClass() {
-    return ExpressionsPackageImpl.Literals.TYPE_LITERAL_EXP;
-  }
+		switch (featureID) {
+		case ExpressionsPackageImpl.TYPE_LITERAL_EXP__REFERRED_TYPE:
+			return getReferredType();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void eSet(int featureID, Object newValue) {
+
+		switch (featureID) {
+		case ExpressionsPackageImpl.TYPE_LITERAL_EXP__REFERRED_TYPE:
+			setReferredType((Type) newValue);
+			return;
+		}
+		super.eSet(featureID, newValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void eUnset(int featureID) {
+
+		switch (featureID) {
+		case ExpressionsPackageImpl.TYPE_LITERAL_EXP__REFERRED_TYPE:
+			setReferredType((Type) null);
+			return;
+		}
+		super.eUnset(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean eIsSet(int featureID) {
+
+		switch (featureID) {
+		case ExpressionsPackageImpl.TYPE_LITERAL_EXP__REFERRED_TYPE:
+			return referredType != null;
+		}
+		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected EClass eStaticClass() {
+
+		return ExpressionsPackageImpl.Literals.TYPE_LITERAL_EXP;
+	}
 
 } // TypeLiteralExpImpl

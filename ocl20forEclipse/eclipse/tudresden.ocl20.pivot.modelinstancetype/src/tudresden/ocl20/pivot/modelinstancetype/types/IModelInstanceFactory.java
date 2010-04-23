@@ -51,11 +51,14 @@ public interface IModelInstanceFactory {
 	 * @param isUnique
 	 *          if the collection should contain unique elements only (like Set in
 	 *          Java)
+	 * @param genericType
+	 *          the generic type of the collection
 	 * 
 	 * @return The created <code>IModelInstanceCollection</code>.
 	 */
 	<T extends IModelInstanceElement> IModelInstanceCollection<T> createModelInstanceCollection(
-			Collection<T> collection, boolean isOrdered, boolean isUnique);
+			Collection<T> collection, boolean isOrdered, boolean isUnique,
+			Type genericType);
 
 	/**
 	 * <p>

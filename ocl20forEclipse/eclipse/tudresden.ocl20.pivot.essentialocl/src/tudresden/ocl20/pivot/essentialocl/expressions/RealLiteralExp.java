@@ -48,28 +48,28 @@ package tudresden.ocl20.pivot.essentialocl.expressions;
  */
 public interface RealLiteralExp extends NumericLiteralExp {
 
-  /**
-   * Returns the value of the '<em><b>Real Symbol</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Real Symbol</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Real Symbol</em>' attribute.
-   * @see #setRealSymbol(float)
-   * @generated
-   */
-  float getRealSymbol();
+	/**
+	 * Returns the value of the '<em><b>Real Symbol</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Real Symbol</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Real Symbol</em>' attribute.
+	 * @see #setRealSymbol(float)
+	 * @generated
+	 */
+	float getRealSymbol();
 
-  /**
-   * Sets the value of the '{@link tudresden.ocl20.pivot.essentialocl.expressions.RealLiteralExp#getRealSymbol <em>Real Symbol</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Real Symbol</em>' attribute.
-   * @see #getRealSymbol()
-   * @generated
-   */
-  void setRealSymbol(float value);
+	/**
+	 * Sets the value of the '{@link tudresden.ocl20.pivot.essentialocl.expressions.RealLiteralExp#getRealSymbol <em>Real Symbol</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Real Symbol</em>' attribute.
+	 * @see #getRealSymbol()
+	 * @generated
+	 */
+	void setRealSymbol(float value);
 
 } // RealLiteralExp

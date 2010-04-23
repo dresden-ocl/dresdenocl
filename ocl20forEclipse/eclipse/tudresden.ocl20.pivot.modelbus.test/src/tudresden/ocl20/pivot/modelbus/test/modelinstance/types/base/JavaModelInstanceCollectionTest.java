@@ -30,9 +30,9 @@ import java.util.List;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import tudresden.ocl20.pivot.essentialocl.EssentialOclPlugin;
 import tudresden.ocl20.pivot.essentialocl.expressions.CollectionKind;
 import tudresden.ocl20.pivot.essentialocl.types.CollectionType;
-import tudresden.ocl20.pivot.essentialocl.types.TypeConstants;
 import tudresden.ocl20.pivot.model.ModelAccessException;
 import tudresden.ocl20.pivot.modelinstancetype.exception.AsTypeCastException;
 import tudresden.ocl20.pivot.modelinstancetype.exception.CopyForAtPreException;
@@ -75,16 +75,30 @@ public class JavaModelInstanceCollectionTest {
 	public static void setUp() throws ModelAccessException {
 
 		/* Get a collection type from the model. */
-		typeBag = TypeConstants.BAG;
+		typeBag =
+				EssentialOclPlugin.getOclLibraryProvider().getOclLibrary().getBagType(
+						EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+								.getOclAny());
 
 		/* Get a collection type from the model. */
-		typeOrderedSet = TypeConstants.ORDERED_SET;
+		typeOrderedSet =
+				EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+						.getOrderedSetType(
+								EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+										.getOclAny());
 
 		/* Get a collection type from the model. */
-		typeSequence = TypeConstants.SEQUENCE;
+		typeSequence =
+				EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+						.getSequenceType(
+								EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+										.getOclAny());
 
 		/* Get a collection type from the model. */
-		typeSet = TypeConstants.SET;
+		typeSet =
+				EssentialOclPlugin.getOclLibraryProvider().getOclLibrary().getSetType(
+						EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+								.getOclAny());
 	}
 
 	/**
@@ -1707,7 +1721,7 @@ public class JavaModelInstanceCollectionTest {
 		assertNotNull(modelInstanceCollection01.getType());
 
 		assertTrue(modelInstanceCollection01.getType() instanceof CollectionType);
-		assertEquals(CollectionKind.SET,
+		assertEquals(CollectionKind.BAG,
 				((CollectionType) modelInstanceCollection01.getType()).getKind());
 	}
 
@@ -1737,7 +1751,7 @@ public class JavaModelInstanceCollectionTest {
 		assertNotNull(modelInstanceCollection01.getType());
 
 		assertTrue(modelInstanceCollection01.getType() instanceof CollectionType);
-		assertEquals(CollectionKind.SET,
+		assertEquals(CollectionKind.ORDERED_SET,
 				((CollectionType) modelInstanceCollection01.getType()).getKind());
 	}
 
@@ -1767,7 +1781,7 @@ public class JavaModelInstanceCollectionTest {
 		assertNotNull(modelInstanceCollection01.getType());
 
 		assertTrue(modelInstanceCollection01.getType() instanceof CollectionType);
-		assertEquals(CollectionKind.SET,
+		assertEquals(CollectionKind.SEQUENCE,
 				((CollectionType) modelInstanceCollection01.getType()).getKind());
 	}
 

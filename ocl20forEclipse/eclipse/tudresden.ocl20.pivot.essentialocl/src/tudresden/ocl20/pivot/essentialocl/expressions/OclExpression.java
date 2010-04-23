@@ -32,6 +32,7 @@
  */
 package tudresden.ocl20.pivot.essentialocl.expressions;
 
+import org.eclipse.emf.ecore.EObject;
 import tudresden.ocl20.pivot.essentialocl.types.OclLibrary;
 import tudresden.ocl20.pivot.pivotmodel.NamedElement;
 import tudresden.ocl20.pivot.pivotmodel.TypedElement;
@@ -50,82 +51,82 @@ import tudresden.ocl20.pivot.pivotmodel.TypedElement;
  *
  * @generated
  */
-public interface OclExpression extends TypedElement, NamedElement {
+public interface OclExpression extends EObject, TypedElement, NamedElement {
 
-  /**
-   * Returns the value of the '<em><b>Ocl Library</b></em>' reference.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Ocl Library</em>' reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Ocl Library</em>' reference.
-   * @see #setOclLibrary(OclLibrary)
-   * @generated
-   */
-  OclLibrary getOclLibrary();
+	/**
+	 * Returns the value of the '<em><b>Ocl Library</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Ocl Library</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Ocl Library</em>' reference.
+	 * @see #setOclLibrary(OclLibrary)
+	 * @generated
+	 */
+	OclLibrary getOclLibrary();
 
-  /**
-   * Sets the value of the '{@link tudresden.ocl20.pivot.essentialocl.expressions.OclExpression#getOclLibrary <em>Ocl Library</em>}' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Ocl Library</em>' reference.
-   * @see #getOclLibrary()
-   * @generated
-   */
-  void setOclLibrary(OclLibrary value);
+	/**
+	 * Sets the value of the '{@link tudresden.ocl20.pivot.essentialocl.expressions.OclExpression#getOclLibrary <em>Ocl Library</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Ocl Library</em>' reference.
+	 * @see #getOclLibrary()
+	 * @generated
+	 */
+	void setOclLibrary(OclLibrary value);
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * <!-- begin-model-doc -->
-   * <p>
-   * The OCL 2.0 specification defines an additional operation that returns
-   * an {@link OperationCallExp operation call expression} for the predefined
-   * <code>atPre()</code> operation with the self expression as its source.
-   * </p>
-   * 
-   * <p>
-   * It is specified as follows:
-   * 
-   * <pre>
-   * context OclExpression::withAtPre() : OperationCallExp
-   * post: result.name = 'atPre'
-   * post: result.argument->isEmpty()
-   * post: result.source = self
-   * </pre>
-   * 
-   * </p>
-   * <!-- end-model-doc -->
-   * @generated
-   */
-  OperationCallExp withAtPre();
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * <p>
+	 * The OCL 2.0 specification defines an additional operation that returns
+	 * an {@link OperationCallExp operation call expression} for the predefined
+	 * <code>atPre()</code> operation with the self expression as its source.
+	 * </p>
+	 * 
+	 * <p>
+	 * It is specified as follows:
+	 * 
+	 * <pre>
+	 * context OclExpression::withAtPre() : OperationCallExp
+	 * post: result.name = 'atPre'
+	 * post: result.argument->isEmpty()
+	 * post: result.source = self
+	 * </pre>
+	 * 
+	 * </p>
+	 * <!-- end-model-doc -->
+	 * @generated
+	 */
+	OperationCallExp withAtPre();
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * <!-- begin-model-doc -->
-   * <p>
-   * The OCL 2.0 specification defines an additional operation that returns
-   * an {@link OperationCallExp operation call expression} for the predefined
-   * <code>asSet()</code> operation with the self expression as its source.
-   * </p>
-   * 
-   * <p>
-   * It is specified as follows:
-   * 
-   * <pre>
-   * context OclExpression::withAtPre() : OperationCallExp
-   * post: result.name = 'asSet'
-   * post: result.argument->isEmpty()
-   * post: result.source = self
-   * </pre>
-   * 
-   * </p>
-   * <!-- end-model-doc -->
-   * @generated
-   */
-  OperationCallExp withAsSet();
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * <p>
+	 * The OCL 2.0 specification defines an additional operation that returns
+	 * an {@link OperationCallExp operation call expression} for the predefined
+	 * <code>asSet()</code> operation with the self expression as its source.
+	 * </p>
+	 * 
+	 * <p>
+	 * It is specified as follows:
+	 * 
+	 * <pre>
+	 * context OclExpression::withAtPre() : OperationCallExp
+	 * post: result.name = 'asSet'
+	 * post: result.argument->isEmpty()
+	 * post: result.source = self
+	 * </pre>
+	 * 
+	 * </p>
+	 * <!-- end-model-doc -->
+	 * @generated
+	 */
+	OperationCallExp withAsSet();
 
 } // OclExpression
