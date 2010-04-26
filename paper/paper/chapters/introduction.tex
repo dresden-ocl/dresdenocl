@@ -1,66 +1,66 @@
 \section{Introduction}
 
-Model-Driven Software Development (MDSD) aims to abstract from concrete 
-software implementations and uses modeling languages to describe 
-software systems. Modeling languages include the Unified Modeling Language 
-(UML) \cite{spec:UML2-2}, \note{Ecore is a metamodeling language}{Ecore} of the
-Eclipse Modeling Framework (EMF) \cite{WWW:EMF} and domain-specific modeling languages (DSLs). The Object 
-Constraint Language (OCL) \cite{spec:OCL2-2} was originally designed as 
-an extension of the UML to express structural and functional constraints 
-on UML models in a textual syntax. In recent years, OCL has become a 
-popular constraint language for other modeling languages like EMF Ecore 
-and various DSLs as well\note{need references here}. 
+	Model-Driven Software Development (MDSD) aims to abstract from concrete 
+	software implementations and uses modeling languages to describe 
+	software systems. Modeling languages include the Unified Modeling Language 
+	(UML) \cite{spec:UML2-2}, \note{Ecore is a metamodeling language}{Ecore} of the
+	Eclipse Modeling Framework (EMF) \cite{WWW:EMF} and domain-specific modeling languages (DSLs). The Object 
+	Constraint Language (OCL) \cite{spec:OCL2-2} was originally designed as 
+	an extension of the UML to express structural and functional constraints 
+	on UML models in a textual syntax. In recent years, OCL has become a 
+	popular constraint language for other modeling languages like EMF Ecore 
+	and various DSLs as well\note{need references here}. 
 
-OCL can be
-defined and used as a constraint language \change{on top of}{in combination
-with} every modeling language, that \change{contains  basic}{involves
-object-oriented} modeling concepts like types and navigable properties.
-When integrating OCL with such a modeling language, the concrete and 
-abstract syntax of OCL is not \change{altered}{affected}. As OCL is statically
-typed, the abstract syntax only needs to access to the types of the model 
-it is defined on. \add{Thus, a generic implementation of an OCL parser
-that relies on an abstraction of the underlying model type system can be
-reused to parse OCL constraints on different types of
-models}\cite{braeuerOCL07}.
-%Such a generic architecture for an OCL tool was presented by Matthias Br\"auer 
-%in 2007 \cite{braeuerOCL07}. %Besides the abstract syntax and static semantics, 
-%the OCL specification defines the dynamic OCL semantics as well
-%\cite{spec:OCL2-2}.
+	OCL can be
+	defined and used as a constraint language \change{on top of}{in combination
+	with} every modeling language, that \change{contains  basic}{involves
+	object-oriented} modeling concepts like types and navigable properties.
+	When integrating OCL with such a modeling language, the concrete and 
+	abstract syntax of OCL is not \change{altered}{affected}. As OCL is statically
+	typed, the abstract syntax only needs to access to the types of the model 
+	it is defined on. \add{Thus, a generic implementation of an OCL parser
+	that relies on an abstraction of the underlying model type system can be
+	reused to parse OCL constraints on different types of
+	models}\cite{braeuerOCL07}.
+	%Such a generic architecture for an OCL tool was presented by Matthias Br\"auer 
+	%in 2007 \cite{braeuerOCL07}. %Besides the abstract syntax and static semantics, 
+	%the OCL specification defines the dynamic OCL semantics as well
+	%\cite{spec:OCL2-2}.
 
-One approach to evaluate 
-%the dynamic semantics of 
-OCL constraints on instances 
-of constrained models is \textit{Constraint Interpretation}. \note{Incorporate
-remark that discusses the benefit of interpreters compared with compilers
-w.r.t. language flexibility}
-\note{Introduce the notion model implementation|instantiation. Motivate why it
-is good to vary implementation, reference examples}
-% Although OCL is 
-% defined abstractly and independent of specific implementations, 
-% and can be used at different meta levels,\footnote{E.g., OCL can be used to 
-% define \textit{Well-Formedness Rules (WFRs)} on meta-models checked on models.
-% Alternatively, OCL can be used to define business rules on models that are
-% checked on the model's instances.}
-OCL interpreters are \change{normally limited}{typically bound} to a specific
-\change{programming or modeling}{implementation} languages. Thus, a
-reimplementation of OCL's dynamic semantics is required for every type of 
-model \change{implementation}{instantiation}. 
-\remove{Each reimplementation leads to
-code duplication, limits reuse and makes it more difficult to maintain or extend 
-the OCL semantics for all types of model instances synchronously.}
+	One approach to evaluate 
+	%the dynamic semantics of 
+	OCL constraints on instances 
+	of constrained models is \textit{Constraint Interpretation}. \note{Incorporate
+	remark that discusses the benefit of interpreters compared with compilers
+	w.r.t. language flexibility}
+	\note{Introduce the notion model implementation|instantiation. Motivate why it
+	is good to vary implementation, reference examples}
+	% Although OCL is 
+	% defined abstractly and independent of specific implementations, 
+	% and can be used at different meta levels,\footnote{E.g., OCL can be used to 
+	% define \textit{Well-Formedness Rules (WFRs)} on meta-models checked on models.
+	% Alternatively, OCL can be used to define business rules on models that are
+	% checked on the model's instances.}
+	OCL interpreters are \change{normally limited}{typically bound} to a specific
+	\change{programming or modeling}{implementation} languages. Thus, a
+	reimplementation of OCL's dynamic semantics is required for every type of 
+	model \change{implementation}{instantiation}. 
+	\remove{Each reimplementation leads to
+	code duplication, limits reuse and makes it more difficult to maintain or extend 
+	the OCL semantics for all types of model instances synchronously.}
 
-In this paper, we propose an architecture for an OCL
-\change{tool}{infrastructure} that \change{encapsulates}hides meta-models,
-models and model instantiations behind well-defined interfaces. \change{Thus, it is possible to}{This enables} reuse
-\add{of} the complete OCL infrastructure including the parser, standard library
-and interpreter for \change{every combination of different model and
-instantiation types}{various model implementation languages}. \change{An
-implementation of the approach is used in our tool}{We present an
-implementation of our approach for} \textit{DresdenOCL}
-\cite{WWW:dresdenOCL}\remove{, released in its third version under the name of
-\textit{Dresden OCL2 for Eclipse}}. \textit{DresdenOCL} is able to parse OCL
-constraints on different types of models such as UML, EMF Ecore, Java and XML Schema 
-and evalute them for different model implementations representing model
-instances as Java objects, XML files or \note{confusing\ldots}{UML diagrams}.
-
-\textbf{TODO The paper is structured as follows...}
+	In this paper, we propose an architecture for an OCL
+	\change{tool}{infrastructure} that \change{encapsulates}hides meta-models,
+	models and model instantiations behind well-defined interfaces. \change{Thus, it is possible to}{This enables} reuse
+	\add{of} the complete OCL infrastructure including the parser, standard library
+	and interpreter for \change{every combination of different model and
+	instantiation types}{various model implementation languages}. \change{An
+	implementation of the approach is used in our tool}{We present an
+	implementation of our approach for} \textit{DresdenOCL}
+	\cite{WWW:dresdenOCL}\remove{, released in its third version under the name of
+	\textit{Dresden OCL2 for Eclipse}}. \textit{DresdenOCL} is able to parse OCL
+	constraints on different types of models such as UML, EMF Ecore, Java and XML Schema 
+	and evalute them for different model implementations representing model
+	instances as Java objects, XML files or \note{confusing\ldots}{UML diagrams}.
+	
+	\textbf{TODO The paper is structured as follows...}
