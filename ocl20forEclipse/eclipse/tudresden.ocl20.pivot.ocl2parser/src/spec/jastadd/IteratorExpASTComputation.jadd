@@ -247,8 +247,12 @@ public aspect IteratorExpASTComputation {
 		VariableExp variableExp = factory.createVariableExp(iterator);
 		
 		// Create a property call expression. This becomes the body of the iterator expression.
-		PropertyCallExp body = factory.createPropertyCallExp(variableExp, simpleName, qualifiers);
-		
+		PropertyCallExp body;
+		try {
+			body = factory.createPropertyCallExp(variableExp, simpleName, qualifiers);
+		} catch (EssentialOclFactoryException e) {
+			throw new BuildingASMException("Cannot create PropertyCallExp", getPathName().getTokenAS(0));
+		}
 		// Create a little array to put the only one iterator into it.
 		Variable[] iteratorArray = new Variable[1];
 		iteratorArray[0] = iterator;

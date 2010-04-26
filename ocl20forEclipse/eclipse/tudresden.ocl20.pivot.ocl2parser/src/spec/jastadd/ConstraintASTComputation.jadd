@@ -55,7 +55,7 @@ public aspect ConstraintASMComputation {
 		// Build the constraint.
 		Constraint constraint = null;
 		try {
-			constraint = factory.createConstraint("", kind, oclExpression, env.getContext());
+			constraint = factory.createConstraint("", kind, oclExpression, null, env.getContext());
 		}
 		catch(Throwable th) {
 			String message = th.getMessage() + " The constraint could not be built.";
@@ -168,7 +168,7 @@ public aspect ConstraintASMComputation {
 			 *				and
 			 *				self.constraint.constrainedElement.any(true).oclIsKindOf(Classifier)
 			 */
-			constraint = factory.createConstraint(optionalName, ConstraintKind.get("definition"), oclExpression, selfVariable.getType());
+			constraint = factory.createConstraint(optionalName, ConstraintKind.get("definition"), oclExpression, property, selfVariable.getType());
 			constraint.setDefinedFeature(property);
 		}
 		catch(Throwable th) {
@@ -310,7 +310,7 @@ public aspect ConstraintASMComputation {
 			 *				and
 			 *				self.constraint.constrainedElement.any(true).oclIsKindOf(Classifier)
 			 */
-			constraint = factory.createConstraint(optionalName, ConstraintKind.get("definition"), oclExpression, selfVariable.getType());
+			constraint = factory.createConstraint(optionalName, ConstraintKind.get("definition"), oclExpression, operation, selfVariable.getType());
 			constraint.setDefinedFeature(operation);
 		}
 		catch(Throwable th) {
@@ -377,7 +377,7 @@ public aspect ConstraintASMComputation {
 		
 		
 		// Create the constraint.
-		Constraint constraint = factory.createConstraint(optionalName, ConstraintKind.get("invariant"), oclExpression, selfVariable.getType());
+		Constraint constraint = factory.createConstraint(optionalName, ConstraintKind.get("invariant"), oclExpression, null, selfVariable.getType());
 		
 		return constraint;
 	}
@@ -440,11 +440,11 @@ public aspect ConstraintASMComputation {
 			// Create the constraint.
 			Constraint constraint = null;
 			if (operationStereotype.equals("pre")) {
-				constraint = factory.createConstraint(optionalName, ConstraintKind.get("precondition"), oclExpression, operation);
+				constraint = factory.createConstraint(optionalName, ConstraintKind.get("precondition"), oclExpression, null, operation);
 			}
 			
 			if (operationStereotype.equals("post")) {
-				constraint = factory.createConstraint(optionalName, ConstraintKind.get("postcondition"), oclExpression, operation);
+				constraint = factory.createConstraint(optionalName, ConstraintKind.get("postcondition"), oclExpression, null, operation);
 			}
 			return constraint;
 		}
@@ -458,7 +458,7 @@ public aspect ConstraintASMComputation {
 			if (selfVariable == null) throw new BuildingASMException("The property 'self' was not found. In this case it is internal error.", null);
 			
 			ExpressionInOcl oclExpression = factory.createExpressionInOcl(bodyString, expression, selfVariable, resultVariable, null);
-			Constraint constraint = factory.createConstraint(optionalName, ConstraintKind.get("body"), oclExpression, operation);
+			Constraint constraint = factory.createConstraint(optionalName, ConstraintKind.get("body"), oclExpression, null, operation);
 			return constraint;
 		}
 		
