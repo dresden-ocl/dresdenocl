@@ -1,11 +1,26 @@
 \section{Case Studies}
 
-In this section we shortly present three case studies we used to investigate the power of our generic interpretation approach. Please be aware of the fact that the case studies are examples for adaptation only. Multiple other adaptations are possible and tasks for future works.
+In this section we \remove{shortly} present three case studies \remove{we 
+used to investigate}\add{demonstrate} the power of our \note{do we have a
+generic interpretation approach or a adaptation approach? What is the
+name of the game? Only on approach per paper :) }{generic interpretation
+approach}. \remove{Please be aware of the fact that the case studies are
+examples for adaptation only. Multiple other adaptations are possible and tasks
+for future works.}
 
 
 \subsection{The Royal and Loyal System Example}
 
-As a first case study, we modeled and implemented the \textit{Royal and Loyal System Example} as defined in \cite{warmer:ocl}. The case study was desigend by Warmer and Kleppe to explain the Object Constraint Language and thus, can be used to test the interpretation of almost all possible kinds of OCL expressions. The case study contains 13 classes (including inheritance and enumeration types). We modeled the Royal and Loyal System by using the UML2 meta-model of the Eclipse Model Development Tools (MDT) project \cite{WWW:MDT}. We took over 130 constraints from the book and implemented instances in Java to interpret these constraints on Java objects. 
+As a first case study, we modeled and implemented the \textit{Royal and Loyal System Example} 
+as defined in \cite{warmer:ocl}. The case study was desigend by Warmer and Kleppe to explain 
+the Object Constraint Language and can be used to test the interpretation of
+\change{almost all possible}{various} kinds of OCL expressions. The case study
+consists of 13 UML classes (including inheritance and enumeration types)
+\add{and 130 constraints}. We modeled the Royal and Loyal System \remove{by}
+using the UML2 meta-model of the Eclipse Model Development Tools (MDT) project
+\cite{WWW:MDT}. \remove{We took over 130 constraints from the book}
+\add{The model was implemented and instantiated in Java. Consequently
+constraints are evaluated on Java objects.}
 
 \begin{figure}[tb]
 	\centering
@@ -14,13 +29,38 @@ As a first case study, we modeled and implemented the \textit{Royal and Loyal Sy
 	\label{fig:casestudy01}
 \end{figure}
 
-To load the Royal and Loyal System Example into Dresden OCL2 for Eclipse, the MDT UML2 meta-model had to be adapted by a meta-model adapter (see Figure \ref{fig:casestudy01}). Here, the meta-model adaptation was realized at the layer M2. At M1, the class diagram describing the Royal and Loyal System Example was adapted as an \texttt{IModel}. Furthermore, the Java implementation was adapted as an implementation of this model. E.g., the Java class \texttt{LoyaltyAccount} was mapped as an implementation of the UML class \texttt{LoyaltyAccount}. Please be aware of the fact, that both classes are located at the M1 layer because the Java class is only another representation of the same class as described by the UML class! To load the Java classes as a model implementation, we had to implement a model implementation adapter for Java. This adapter was also responsible to adapt the Java objects to \texttt{IModelInstanceElements} at the M0 layer. The Royal and Loyal case study proved a sound implementation of the OCL Standard Library specification and also a correct adaptation of the MDT UML meta-model and Java model instance objects.
+\note{revise next paragraph. Differentiate what belongs to model and model
+instance adaptation} To \change{load}{pares} the Royal and Loyal \change{System Example}{constraints}
+in DresdenOCL, the MDT UML2 meta-model was adapted by the
+\note{concreteNameFromFigure} meta-model adapter \add{at the layer M2}
+(cf.~Fig. \ref{fig:casestudy01}). \remove{Here, the meta-model adaptation was
+realized at the layer M2}. At M1, the class diagram describing the Royal and
+Loyal System Example was adapted as an \texttt{IModel}. Furthermore, the 
+Java implementation was adapted to an implementation of this model. E.g., the
+Java class \texttt{LoyaltyAccount} was mapped to an implementation of the UML
+class \texttt{LoyaltyAccount}. \remove{Please be aware of the fact, that} Both
+classes are located at the M1 layer because the Java class is only another representation 
+of the same class as described by the UML class. 
+To load the Java classes as a
+model implementation, we had to implement a model implementation adapter for 
+Java. This adapter was also responsible to adapt the Java objects to 
+\texttt{IModelInstanceElements} at the M0 layer. The Royal and Loyal case 
+study proved a sound implementation of the OCL Standard Library specification 
+and also a correct adaptation of the MDT UML meta-model and Java model instance objects.
 
 
 
 \subsection{SEPA Business Rules}
+\note{short intro: similar to prev. sect.}
 
-The company Nomos Software provides a service to check busines rules on financial SEPA messages that are required for financial transactions of bank offices as defined by the European Payment Council (EPC), ISO20022, and the Euro Banking Association (EBA) \cite{spec:UNIFI,spec:EPC}. The SEPA messages are described in XML documents that are instances of XML Schema Definitions (XSD). The service of Nomos Software provides the possibility to validate XML files against a set of business rules that are defined in OCL on the XSD the XML files are instances of.
+The company Nomos Software provides a service to check business rules on
+financial SEPA \note{introduce abbrev.} messages that are \change{required
+for}{used in} financial transactions of bank offices as defined by the European
+Payment Council (EPC), ISO20022, and the Euro Banking Association (EBA) \cite{spec:UNIFI,spec:EPC}. 
+SEPA messages are described in XML documents that are instances of \add{an} XML
+Schema Definitions (XSD). Nomos Software uses OCL constraints defined on such
+schema definitions to validate XML documents against a set of business rules
+\note{what do these roles constraint?}
 
 \begin{figure}[tb]
 	\centering
@@ -29,7 +69,23 @@ The company Nomos Software provides a service to check busines rules on financia
 	\label{fig:casestudy02}
 \end{figure}
 
-We implemented an XSD meta-model and an XML model implementation adaptation for Dresden OCL2 for Eclipse and used the same XSD and XML files that are provided with an online demo of the Nomos service\footnote{Available at http://www.nomos-software.com/demo.html} to test the adaptation (see Figure \ref{fig:casestudy02}). At the M2 layer, the XML Schema meta-model was adapted by a meta-model adapter. At the M1 layer, the \texttt{pain.008.001.01.xml} was adapted as an \texttt{IModel}. An adaptation for XML documents as model implementations was realized as well. Each type of a node in the XML document was mapped to a Type defined in the XML Schema at layer M1. At layer M0, each node was adapted as an \texttt{IModelInstanceElement}. We took the same OCL business rules that Nomos Software uses to test the OCL2 Interpreter of Dresden OCL2 for Eclipse. About 120 constraints have been interpreted for three different XML instances of the XSD and the results have been compared with the results of the Nomos service demo to check the right interpretation of the constraints. The case study showed that the abstract description of model implementation types enables Dresden OCL2 for Eclipse to interpret constraints on XML nodes as well. The OCL2 Interpreter had not to be modified to interpret OCL constraints on XML nodes.
+We implemented an XSD meta-model and an XML model implementation adaptation 
+for DresdenOCL and used the \remove{same} XSD and XML files that are 
+provided with an online demo of the Nomos service\footnote{Available at http://www.nomos-software.com/demo.html} 
+to test our adaptation (see Figure \ref{fig:casestudy02}). At the M2 layer, 
+the XML Schema meta-model was adapted by a meta-model adapter. At the M1 layer, 
+the \texttt{pain.008.001.01.xml} was adapted as an \texttt{IModel}. An 
+adaptation for XML documents as model implementations was realized as well. 
+Each type of a node in the XML document was mapped to a Type defined in the 
+XML Schema at layer M1. At layer M0, each node was adapted as an 
+\texttt{IModelInstanceElement}. We took the \remove{same} about 120 constrains
+provided by Nomos Software to test our adaptation. These constraints were
+evaluated for three different XML files and the results have been
+\add{successfully} compared with the results of the Nomos service demo\remove{to
+check the right interpretation of the constraints}. This shows that our model
+implementation adaptation allows DresdenOCL to transparantly interpret
+constraints on XML as well. The OCL2 Interpreter had not to be
+modified\remove{to interpret OCL constraints on XML nodes}.
 
 
 \subsection{The OCL2.2 Standard Library}
