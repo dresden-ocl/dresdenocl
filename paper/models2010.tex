@@ -1,0 +1,78 @@
+\documentclass[runningheads,a4paper]{llncs}
+
+\usepackage{amssymb}
+\setcounter{tocdepth}{3}
+\usepackage{graphicx}
+
+
+\usepackage{url}
+\urldef{\mails}\path|{claas.wilke, michael.thiele, c.wende}@inf.tu-dresden.de|
+\newcommand{\keywords}[1]{\par\addvspace\baselineskip
+\noindent\keywordname\enspace\ignorespaces#1}
+
+% For german character ä,ö,ü,ß
+\usepackage[latin1]{inputenc}
+
+\begin{document}
+
+\mainmatter  % start of an individual contribution
+
+% first the title is needed
+\title{Defining and Interpreting OCL Constraints on Arbitrary Models and Model Instances}
+
+% a short form should be given in case it is too long for the running head
+\titlerunning{Defining and Interpreting OCL on Arbitrary Models and Model Instances}
+
+% the name(s) of the author(s) follow(s) next
+%
+% NB: Chinese authors should write their first names(s) in front of
+% their surnames. This ensures that the names appear correctly in
+% the running heads and the author index.
+%
+\author{Claas Wilke\and Michael Thiele\and Christian Wende\\
+\mails}
+%
+\authorrunning{Defining and Interpreting OCL on Arbitrary Models and Model Instances}
+% (feature abused for this document to repeat the title also on left hand pages)
+
+% the affiliations are given next; don't give your e-mail address
+% unless you accept that it will be published
+\institute{Technische Universität Dresden\\
+Department of Computer Science\\
+Institute for Software and Multimedia Technology\\
+Software Technology Group
+%\url{http://www.st.inf.tu-dresden.de}
+}
+
+%
+% NB: a more complex sample for affiliations and the mapping to the
+% corresponding authors can be found in the file "llncs.dem"
+% (search for the string "\mainmatter" where a contribution starts).
+% "llncs.dem" accompanies the document class "llncs.cls".
+%
+
+\toctitle{Lecture Notes in Computer Science}
+\tocauthor{Authors' Instructions}
+\maketitle
+
+
+\begin{abstract}
+In recent years the Object Constraint Language (OCL) has become a popular constraint language that is used on top of multiple modeling languages such as UML, EMF Ecore and various domain specific languages. OCL is only loosely coupled to these modeling languages, it is rather common to reuse the same OCL parsers for multiple different modeling languages. Nevertheless, dynamic OCL semantics as required for OCL constraint interpretation is typically implemented in a specific programming language and thus limited to specific programming or modeling languages. In this paper, we propose an architecture for an OCL tool that encapsulates meta-models, models and model instantiations behind well-defined interfaces. We present an OCL interpreter that can interpret OCL constraints on various different model instantiations and provides reuse of the same dynamic OCL semantics implementation for all these instantiation types. The architecture is evaluated by presenting three case studies defining and interpreting OCL constraints on multiple models and model instantiations.
+
+\keywords{OCL, MDSD, Modeling, Constraint Interpretation.}
+\end{abstract}
+
+  \input{chapters/introduction}
+   
+  \input{chapters/foundations}
+
+  \input{chapters/casestudies}
+  
+  \input{chapters/relatedwork}
+
+  \input{chapters/conclusion}
+
+  \bibliographystyle{alpha}
+  \bibliography{models2010}  
+
+\end{document}
