@@ -3,7 +3,7 @@
 \usepackage{amssymb}
 \setcounter{tocdepth}{3}
 \usepackage{graphicx}
-
+\usepackage[inline]{trackchanges}
 
 \usepackage{url}
 \urldef{\mails}\path|{claas.wilke, michael.thiele, c.wende}@inf.tu-dresden.de|
@@ -18,7 +18,10 @@
 \mainmatter  % start of an individual contribution
 
 % first the title is needed
-\title{Defining and Interpreting OCL Constraints on Arbitrary Models and Model Instances}
+
+\title{Defining and Interpreting OCL Constraints on Arbitrary Models and Model
+Instances \note{the term model instance is not very common and easy to distinguish from
+model. What do you think of model implementations?}}
 
 % a short form should be given in case it is too long for the running head
 \titlerunning{Defining and Interpreting OCL on Arbitrary Models and Model Instances}
@@ -55,9 +58,27 @@ Software Technology Group
 \tocauthor{Authors' Instructions}
 \maketitle
 
-
+\note{do we use british or american english?}
 \begin{abstract}
-In recent years the Object Constraint Language (OCL) has become a popular constraint language that is used on top of multiple modeling languages such as UML, EMF Ecore and various domain specific languages. OCL is only loosely coupled to these modeling languages, it is rather common to reuse the same OCL parsers for multiple different modeling languages. Nevertheless, dynamic OCL semantics as required for OCL constraint interpretation is typically implemented in a specific programming language and thus limited to specific programming or modeling languages. In this paper, we propose an architecture for an OCL tool that encapsulates meta-models, models and model instantiations behind well-defined interfaces. We present an OCL interpreter that can interpret OCL constraints on various different model instantiations and provides reuse of the same dynamic OCL semantics implementation for all these instantiation types. The architecture is evaluated by presenting three case studies defining and interpreting OCL constraints on multiple models and model instantiations.
+In recent years the Object Constraint Language (OCL) has become a popular 
+constraint language that is used \change{on top of}{in combination with}
+multiple modeling languages such as UML, EMF Ecore and various domain specific 
+languages. \remove{OCL is only loosely coupled to these modeling languages, }It
+is rather common to reuse the same OCL parsers for multiple different modeling 
+languages. 
+\change{While OCL-annotated models are implemented in various implementation
+languages, dynamic OCL semantics as required for OCL constraint 
+interpretation is typically bound to a specific implementation language.} 
+In this paper, we propose an architecture for an OCL tool that
+\change{encapsulates}{hides} meta-models, models and model
+\change{instantiations}{implementations} behind well-defined interfaces. 
+We present an OCL interpreter that can interpret OCL constraints 
+on various different model \change{instantiations}{implementations} and
+\change{provides}{, thus, enables} reuse of the same dynamic OCL semantics
+implementation for all these \change{instantiation types}{implementation types}.
+The architecture is evaluated \change{by presenting}{in} three case studies
+defining and interpreting OCL constraints on multiple models and model
+\change{instantiations}{implementations}.
 
 \keywords{OCL, MDSD, Modeling, Constraint Interpretation.}
 \end{abstract}
