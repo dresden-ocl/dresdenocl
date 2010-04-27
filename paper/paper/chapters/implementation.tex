@@ -10,12 +10,17 @@
 	\begin{figure}[tb]
 			\centering
 				\includegraphics[width=1.00\textwidth]{figures/modeladaptation.pdf}
-			\caption{\note{arrow names are very small, try to put parts of the lengthy caption to
-	the text. Explain context there. inheritance relations are not explained,
-	highlight adapter pattern, where is OCL from Fig.1 ?} The adaptation
-	architecture of Dresden OCL2 for Eclipse. At the Mn+1 layer, meta-models are adapted to the pivot model. The adapter is responsible to wrap modeled models of the adapted meta-model as wrapped models as well. At the Mn layer, model implementation types can be adapted. Their adapter is responsible to wrap instances 
-			(or runtime objects) to wrapped model objects. The OCL standard library implements the logic to evaluate operation 
-			defined on OCL types. Other request such operation invocations or property request on wrapped objects are delegated 
+			\caption{\note{Claas: Relationship between OCL AS and Model Types, between Constraints 
+			and Standard Library is unclear. Better relationships?}
+			\note{Christian: Explain context there. inheritance relations are not explained,
+			highlight adapter pattern} 
+			The \textit{Generic Adaptation Architecture} of DresdenOCL: At the Mn+1 layer, meta-models are adapted
+			to the model types (VP1). The model adapter component contains these adapters and is responsible 
+			to instantiate them to adapt models of the meta-model. 
+			At the Mn layer, model implementation types are adapted (VP2). The model instance adapter component
+			contains these adapters and is responsible to instantiate them to adapt model instance objects. 
+			The OCL standard library implements the logic to evaluate operations defined on OCL types. Other 
+			requests such as operation invocations or property requests on adapted objects are delegated 
 			via the interfaces of the model implementation type model.}
 			\label{fig:modeladaptation}
 		\end{figure}
