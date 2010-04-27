@@ -3,13 +3,15 @@
 
 		\begin{figure}[tb]
 			\centering
-				\includegraphics[width=0.70\textwidth]{figures/genericlayers.pdf}
-			\caption{The \textit{Generic Three Layer Metadata Architecture}. Each OCL constraint 
+				\includegraphics[width=1.00\textwidth]{figures/genericlayers.pdf}
+			\caption{The \textit{Generic Three Layer Meta data Architecture}. (a): Each OCL constraint 
 			requires a meta-model defining a model on which OCL constraints are specified. The 
-			constraints are evaluated on a model instance that
-			\change{implements}{instantiates} the constrained model. \note{Explain in
-			text, to complicated for caption}{In this context, a model instance can be a
-			set of runtime objects or a model modeled in a constrained meta-model!}}
+			constraints are evaluated on a model instance that instantiates the constrained model. 
+			The generic architecture can be parametrized at two different variation points. Different
+			models and their meta-models can be bound to VP1, different model instances can be bound
+			to VP2.	(b): UML-Example for layers M2, M1 and M0. VP1 is bound to the UML meta-model (MOF), 
+			VP2 is bound to Java. (c): EMF-Example for layers M3, M2 and M1. VP1 is bound to EMF Ecore,
+			VP2 is bound to Ecore-based models.}
 			\label{fig:genericlayers}
 		\end{figure}
 
