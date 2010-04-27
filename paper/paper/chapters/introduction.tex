@@ -35,21 +35,25 @@
 %	code	 has to be executed at specific times, e.g., a precondition has to be checked 
 %	before the actual method is executed. Thus, 
 	instrumentation of the model instance with the translated code might be not possible 
-	or far from trivial. Lastly, the whole compilation has to be 	adapted to every desired model 
-	instance.
+	or far from trivial. Lastly, the whole compilation has to be 	changed for every desired 
+	model instance.
 	
 	OCL constraints can also be evaluated using \textit{Constraint Interpretation} where 
 	an OCL interpreter visits nodes of the abstract syntax of the defined constraints and 
 	executes their appropriate semantics. Model instances are only read and thus neither 
-	need to have dynamic semantic nor instrumentation capabilities.
+	need to have dynamic semantic nor instrumentation capabilities. Furthermore, 
+	since model instances are only read, the complete OCL semantics remains 
+	unaffected from the specifics of model instances and therefore can be reused.
 	
 	For example, consider business rules for models that are defined using XML Schema. 
 	It is impossible to generate code for OCL constraints defined on such 
-	a model as instances of the model (XML files) solely contain structural information. 
+	a model for XML instances of the model since they solely contain structural information. 
 	Another example is a UML model whose model
 	instance is defined in C\#. Although it is possible to compile OCL constraints into 
-	C\# code, the instrumentation of the constrained code is an issue. Yet, the interpretation 
-	of OCL constraints is nonetheless possible for both examples.
+	C\# code, the instrumentation of the constrained code is an issue. The interpretation 
+	of OCL constraints is nonetheless possible for both examples. Furthermore, the 
+	constraints of the examples can be evaluated using the same OCL interpreter -- 
+	they only differ in the way how model instance elements are accessed.
 
 %	\note{Introduce the notion model implementation|instantiation. Motivate why it
 %	is good to vary implementation, reference examples}
@@ -59,8 +63,9 @@
 	% define \textit{Well-Formedness Rules (WFRs)} on meta-models checked on models.
 	% Alternatively, OCL can be used to define business rules on models that are
 	% checked on the model's instances.}
-	As can be seen, the interpretation approach allows the evaluation of 
-	constraints for a multitude of model instances. However, in practice, OCL 
+	Hence, when interpreting OCL constraints on both model and model 
+	instance level, the OCL infrastructure can be reused. The variation points are the 
+	ways models or their instances are accessed. However, in practice, OCL 
 	interpreters are typically bound 
 	to a specific model instance or fixed combinations of models and model instances 
 	\note{references?}. Thus, a reimplementation of OCL's dynamic semantics 
