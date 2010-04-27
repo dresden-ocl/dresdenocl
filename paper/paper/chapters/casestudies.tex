@@ -89,10 +89,39 @@ modified\remove{to interpret OCL constraints on XML nodes}.
 
 
 \subsection{The OCL2.2 Standard Library}
+The last case study depicts the ability to load different model instances of one model 
+in order to check for inconsistencies between both instances. In this example we 
+check WFRs for the OCL standard library of Dresden OCL. 
+DresdenOCL's standard library is explicitly modelled as 
+an instance of the PivotModel, describing predefined OCL types like \texttt{Integer}, 
+\texttt{OclAny} or \texttt{Sequence} and their associated operations. 
+Hence, accessing predefined OCL types is reduced to a simple model 
+import while the model can conveniently be queried, validated or altered 
+\cite{braeuerOCL07}. The WFRs can be used to check whether all OCL types are 
+declared and whether they support all operations that are defined by the 
+current OCL standard.
 
-\textbf{TODO}
+Although modelling the standard library leads to great flexibility, the standard library 
+still needs an implementation that provides its dynamic semantics. 
+This implementation is provided through Java code. As the PivotModel 
+does not support code generation, this can lead to inconsistencies between 
+the modelled standard library and the according Java interfaces.
+We propose to use OCL to check that all modelled types have an equivalent Java 
+interface and all modelled operations are also present in the Java interface. Furthermore, 
+this approach allows us to check whether the standard library supports all operations that 
+are defined in the current OCL standard.
 
-check for all operations that are given in the standard on the modelled SL and on the Interfaces (2 different instances for 1 model)
+In order to evaluate the WFRs, the PivotModel needs to be loaded as a model (see Figure 
+\ref{fig:casestudy03}) via the Ecore Model Adapter. Now, the modelled standard library 
+can be loaded as an instance of the PivotModel via the XMI Model Instance Adapter. Thus, 
+we are able to evaluate the WFRs for the standard library model and can prove the correct 
+structure of it according to the current OCL standard. 
+
+In order to check for inconsistencies with the Java implementation, the Java interfaces 
+for predefined OCL types have be loaded with the Java Class Model Instance Adapter. Then, the same WFRs 
+used for the standard library model before can be checked for this instance. 
+Unfortunately, the Java Class Model Instance Adapter does not exist yet, but will be 
+implemented in the near future.
 
 
 \subsection{Future Work}
