@@ -1,12 +1,61 @@
 \section{Related Work}
-MDT OCL, USE, BluePrint OCL, AspectJ, ...
+In the following we will discuss alternative tools to parse,
+interpret, or compile OCL constraints and the means they provide
+to adapt variability in models and model instances:
 
-In \cite{hartmannDEXA06,hartmannICWI07} Hartmann presented an approach for XML-based template engines that showed a use case for OCL constraints on XML Schemas. OCL was used to express constraints that cannot be defined in XML Schema.
-
-OCL on XML/DTD:
 \begin{itemize}
-	\item http://lci.cs.ubbcluj.ro/ocle/
-	\item Modeling XML applications with UML (D. Carlson) (Buch)
+  
+\item The USE tool \cite{gogolla2007use} contributes an OCL simulator that can
+evaluate OCL constraints against model snapshots. It is bound to UML class, UML object and
+UML sequence diagrams and does not provide means for model or model instance
+adaptations.
+
+\item The OCLE tool~\cite{WWW:OCLE} interprets OCL constraints on
+UML models. Furthermore, it provides a compiler to generate a Java
+implementation from a constrained UML model and the according OCL 
+constraints. OCLE does not allow for model or model instance adaptation.
+
+\item The MIP OCL2 Parser~\cite{WWW:MIP} is a Java library for parsing OCL
+constraints provided by the Institute for Defense Analyses. Constraints are
+checked syntactically and semantically against an UML class diagram.
+To use the parser, one must provide an Java implementation of the abstract 
+UML model expected by the parser. Thus,
+the MIP parser provides very limited means for model adaptation. Since MIP does
+not contribute a interpreter or compiler for constraints, model
+instance adaptation is not relevant.
+
+\item The OCL interpreter and compiler provided by the Kent Modeling Framework
+(KMF) supports model adaptation via a central \emph{Bridge}
+model~\cite{akehurst2003ocl}. Both depend on a Java-based
+representation of model instances. Thus, model instance adaptation is not
+directly supported.
+
+\item The Epsilon Validation Language (EVL) introduced in
+\cite{kolovos2008detecting} is quite similar to OCL. It comes with an
+interpreter that can be used for various EMF-based languages. Thus, model
+adaptation is possible while model instances are bound to EMF.
+ 
+\item A standard OCL interpreter for EMF is provided by MDT OCL
+\cite{WWW:MDT}. It is also tightly integrated with EMF and supports 
+model adaptation for various EMF languages. The interpreter directly supports
+model instances represented in EMF. Its architecture is highly extensible
+\note{add cite} and could be adapted to other other implementation
+infrastructures. However, we are not aware of any such adaptations.
+
 \end{itemize}
 
-\textbf{TODO}
+
+
+
+
+% MDT OCL, USE, BluePrint OCL, AspectJ, ...
+% 
+% In \cite{hartmannDEXA06,hartmannICWI07} Hartmann presented an approach for XML-based template engines that showed a use case for OCL constraints on XML Schemas. OCL was used to express constraints that cannot be defined in XML Schema.
+% 
+% OCL on XML/DTD:
+% \begin{itemize}
+% 	\item http://lci.cs.ubbcluj.ro/ocle/
+% 	\item Modeling XML applications with UML (D. Carlson) (Buch)
+% \end{itemize}
+% 
+% \textbf{TODO}
