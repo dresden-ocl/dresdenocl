@@ -2,10 +2,16 @@ SYNTAXDEF ocl
 FOR <http://www.tu-dresden.de/ocl20/pivot/language/ocl> <OCL.genmodel>
 START PackageDeclarationCS
 
+IMPORTS {
+	pivotmodel : <http://www.tu-dresden.de/ocl20/pivot/2007/pivotmodel> <../tudresden.ocl20.pivot.pivotmodel/model/pivotmodel.genmodel>
+}
+
 OPTIONS {
 	reloadGeneratorModel = "true";
 	tokenspace = "1";
-	overrideTextResource = "false";
+	//overrideTextResource = "false";
+	overrideManifest = "false";
+	usePredefinedTokens = "false";
 }
 
 TOKENS {
@@ -24,7 +30,9 @@ TOKENS {
 	DEFINE STATIC					$ 'static'$;
 	DEFINE INTEGER_LITERAL			$('1'..'9') ('0'..'9')* | '0'$;
 	DEFINE REAL_LITERAL 			$ (('1'..'9') ('0'..'9')* | '0') '.' ('0'..'9')+$;
-	DEFINE SIMPLE_NAME				$ ('A'..'Z'|'a'..'z'|'_') ('A'..'Z'|'a'..'z'|'0'..'9'|'_'|'-')* $;
+	DEFINE SIMPLE_NAME				$ ('A'..'Z'|'a'..'z'|'_') ('A'..'Z'|'a'..'z'|'0'..'9'|'_'|'-')* (('::') ('A'..'Z'|'a'..'z'|'0'..'9'|'_'|'-')*)*$;
+	DEFINE WHITESPACE $(' '|'\t'|'\f')$;
+	DEFINE LINEBREAKS $('\r\n'|'\r'|'\n')$;
 }
 
 TOKENSTYLES {
@@ -37,14 +45,14 @@ RULES {
 
 	SimpleNameCS						::= simpleName[SIMPLE_NAME];
 	
-	PathNameCS							::= simpleName ("::" pathName)?;
+	PathNameCS							::= simpleName;
 	
-	PackageDeclarationCS				::= ("package" packageName (contextDeclarations)* "endpackage")
+	PackageDeclarationCS				::= ("package" namespace[SIMPLE_NAME] (contextDeclarations)* "endpackage")
 											| (contextDeclarations*);
 	
-	OperationContextDeclarationCS		::= "context" operation prePostOrBodyDeclarations+;
+	//OperationContextDeclarationCS		::= "context" operation prePostOrBodyDeclarations+;
 	
-	AttributeContextDeclarationCS		::= "context" typeName "::" attributeName ":" type initOrDeriveValue+;
+	//AttributeContextDeclarationCS		::= "context" typeName "::" attributeName ":" type initOrDeriveValue+;
 	
 	ClassifierContextDeclarationCS		::= "context" typeName invariantsAndDefinitions+;
 	
@@ -98,11 +106,15 @@ RULES {
 	MultOperationCallExpCS	::= source operationName[MULT_OPERATOR] target;
 	
 	// *** OperationCallExpCS: unary (prefix) operations [H] ***
-	@operator(type="unary", weight="13", identifier="OclExpressionCS")
+	@operator(type="unary_prefix", weight="13", identifier="OclExpressionCS")
 	UnaryOperationCallExpCS			::= operationName[ADDITIVE_OPERATOR] target;
 	
-	@operator(type="unary", weight="13", identifier="OclExpressionCS")
+	@operator(type="unary_prefix", weight="13", identifier="OclExpressionCS")
 	LogicalNotOperationCallExpCS	::= operationName[NOT_OPERATOR] target;
+	
+	// *** OperationCallExpCS: normal operation call [C] ***
+	@operator(type="unary_postfix", weight="14", identifier="OclExpressionCS")
+	OperationCallWithSourceAndArgumentsCS	::= source "." operationName[SIMPLE_NAME] "(" (arguments ("," arguments)*)? ")";
 	
 	// *** OperationCallExpCS: implicit source expression [D] ***
 	//@operator(type="primitive", weight="20", identifier="OclExpressionCS")
@@ -110,11 +122,11 @@ RULES {
 	
 	
 	// *** TypeCS: pathName, tuple type or collection type ***
-	TypePathNameCS					::= pathName;
+	TypePathNameCS					::= typeName[SIMPLE_NAME];
 	
 	TupleTypeCS						::= "TupleType" "(" variableDeclarationList? ")";
 	
-	CollectionTypeIdentifierCS		::= collectionTypeName[COLLECTION_TYPES] ("(" genericType ")")?;
+	CollectionTypeIdentifierCS		::= typeName[COLLECTION_TYPES] ("(" genericType ")")?;
 	
 	
 	// *** VariableDeclarationWithoutInitCS ***
@@ -173,5 +185,5 @@ RULES {
 	StringLiteralExpCS		::= stringLiteral['\'', '\''];
 	
 	@operator(type="primitive", weight="20", identifier="OclExpressionCS")
-	VariableOrStaticPropertyOrEnumLiteralExpCS ::= name;
+	VariableOrStaticPropertyOrEnumLiteralExpCS ::= typedElement[SIMPLE_NAME];
 }

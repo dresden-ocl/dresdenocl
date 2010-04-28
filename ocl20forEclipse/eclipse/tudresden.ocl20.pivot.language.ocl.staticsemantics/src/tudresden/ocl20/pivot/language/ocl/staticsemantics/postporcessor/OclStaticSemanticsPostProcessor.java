@@ -6,8 +6,9 @@ import kiama.attribution.Attributable;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 
-import tudresden.ocl20.pivot.essentialocl.StandardLibraryPlugin;
+import tudresden.ocl20.pivot.essentialocl.EssentialOclPlugin;
 import tudresden.ocl20.pivot.essentialocl.expressions.ExpressionInOcl;
 import tudresden.ocl20.pivot.essentialocl.expressions.OclExpression;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.provider.IOclLibraryProvider;
@@ -41,21 +42,18 @@ public class OclStaticSemanticsPostProcessor implements
 					resource.addError("No active model", root);
 					throw new ModelAccessException("No active model");
 				}
-//					modelProvider
-//						.getModel(new File(
-//								"/Users/mt/Documents/workspace/dresden-ocl_trunk/tudresden.ocl20.pivot.examples.simple/model/simple.uml"));
+				// modelProvider
+				// .getModel(new File(
+				// "/Users/mt/Documents/workspace/dresden-ocl_trunk/tudresden.ocl20.pivot.examples.simple/model/simple.uml"));
 
-				IOclLibraryProvider oclLibraryProvider = StandardLibraryPlugin
+				IOclLibraryProvider oclLibraryProvider = EssentialOclPlugin
 						.getOclLibraryProvider();
 				OclLibrary oclLibrary = oclLibraryProvider.getOclLibrary();
 
-				tudresden.ocl20.pivot.language.ocl.staticsemantics.OclStaticSemantics oclStaticSemantics = new tudresden.ocl20.pivot.language.ocl.staticsemantics.OclStaticSemantics(
-						model, oclLibrary, resource);
-				Attributable rootAttributed = oclStaticSemantics
-						.eObject2Attributable(root);
+				tudresden.ocl20.pivot.language.ocl.staticsemantics.OclStaticSemantics oclStaticSemantics = OclStaticSemanticsProvider
+						.getStaticSemantics(model, oclLibrary, resource);
 
-				List<Constraint> result = oclStaticSemantics
-						.cs2EssentialOcl(rootAttributed);
+				List<Constraint> result = oclStaticSemantics.cs2EssentialOcl(root);
 
 				printResult(result);
 
@@ -67,7 +65,7 @@ public class OclStaticSemanticsPostProcessor implements
 		}
 
 	}
-	
+
 	private void printResult(List<Constraint> result) {
 		System.out.println();
 		for (Constraint constraint : result) {
@@ -76,6 +74,7 @@ public class OclStaticSemanticsPostProcessor implements
 	}
 
 	private void printConstraint(Constraint constraint) {
+		System.out.print(constraint.getConstrainedElement() + "   ");
 		System.out.print(constraint.getName());
 		System.out.println("(" + constraint.getKind() + ")");
 		printExpression((ExpressionInOcl) constraint.getSpecification());
@@ -87,6 +86,6 @@ public class OclStaticSemanticsPostProcessor implements
 
 	private void printBodyExpression(OclExpression bodyExpression) {
 		System.out.println(bodyExpression);
-	}	
-	
+	}
+
 }

@@ -6,7 +6,9 @@ Bundle-Version: 1.0.0.qualifier
 Require-Bundle: tudresden.ocl20.pivot.language.ocl;visibility:=reexport, 
  tudresden.attributegrammar.integration.kiama,
  scala.library,
- kiama.attribution
+ kiama.attribution,
+ tudresden.ocl20.pivot.pivotmodel,
+ tudresden.ocl20.pivot.pivotmodel
 Bundle-ActivationPolicy: lazy
 Bundle-Vendor: www.langems.org
 Bundle-RequiredExecutionEnvironment: J2SE-1.5

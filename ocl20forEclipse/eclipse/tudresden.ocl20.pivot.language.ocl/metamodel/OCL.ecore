@@ -6,8 +6,8 @@
   <eClassifiers xsi:type="ecore:EClass" name="OclExpressionCS" abstract="true"/>
   <eClassifiers xsi:type="ecore:EClass" name="VariableOrStaticPropertyOrEnumLiteralExpCS"
       eSuperTypes="#//OclExpressionCS">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="name" lowerBound="1" eType="#//PathNameCS"
-        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="typedElement" lowerBound="1"
+        eType="ecore:EClass ../../tudresden.ocl20.pivot.pivotmodel/model/pivotmodel.ecore#//TypedElement"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PathNameCS">
     <eStructuralFeatures xsi:type="ecore:EReference" name="simpleName" lowerBound="1"
@@ -19,11 +19,11 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="simpleName" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="TypeCS" abstract="true"/>
-  <eClassifiers xsi:type="ecore:EClass" name="TypePathNameCS" eSuperTypes="#//TypeCS">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="pathName" lowerBound="1"
-        eType="#//PathNameCS" containment="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="TypeCS" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="typeName" lowerBound="1"
+        eType="ecore:EClass ../../tudresden.ocl20.pivot.pivotmodel/model/pivotmodel.ecore#//Type"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TypePathNameCS" eSuperTypes="#//TypeCS"/>
   <eClassifiers xsi:type="ecore:EClass" name="TupleTypeCS" eSuperTypes="#//TypeCS">
     <eStructuralFeatures xsi:type="ecore:EReference" name="variableDeclarationList"
         eType="#//VariableDeclarationWithoutInitListCS" containment="true"/>
@@ -58,8 +58,6 @@
         upperBound="-1" eType="#//CollectionLiteralPartsCS" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CollectionTypeIdentifierCS" eSuperTypes="#//TypeCS">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="collectionTypeName" lowerBound="1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="genericType" eType="#//TypeCS"
         containment="true"/>
   </eClassifiers>
@@ -122,14 +120,21 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1"
         eType="#//OclExpressionCS" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="OperationCallWithSourceExp" eSuperTypes="#//OperationCallExpCS">
+  <eClassifiers xsi:type="ecore:EClass" name="OperationCallWithSourceExpCS" eSuperTypes="#//OperationCallExpCS">
     <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1"
         eType="#//OclExpressionCS" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="isMarkedPre" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
         defaultValueLiteral="false"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="OperationCallWithSourceAndArgumentsCS"
+      eSuperTypes="#//OperationCallWithSourceExpCS">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="operationName" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="arguments" upperBound="-1"
+        eType="#//OclExpressionCS" containment="true"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="OperationCallBinaryExpCS" abstract="true"
-      eSuperTypes="#//OperationCallWithSourceExp">
+      eSuperTypes="#//OperationCallWithSourceExpCS">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="operationName" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1"
@@ -198,8 +203,7 @@
         eType="#//OclExpressionCS" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PackageDeclarationCS">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="packageName" eType="#//PathNameCS"
-        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="namespace" eType="ecore:EClass ../../tudresden.ocl20.pivot.pivotmodel/model/pivotmodel.ecore#//Namespace"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="contextDeclarations" upperBound="-1"
         eType="#//ContextDeclarationCS" containment="true"/>
   </eClassifiers>
@@ -216,7 +220,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ClassifierContextDeclarationCS" eSuperTypes="#//ContextDeclarationCS">
     <eStructuralFeatures xsi:type="ecore:EReference" name="typeName" lowerBound="1"
-        eType="#//PathNameCS" containment="true"/>
+        eType="#//TypeCS" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="invariantsAndDefinitions"
         lowerBound="1" upperBound="-1" eType="#//InvariantOrDefinitionCS" containment="true"/>
   </eClassifiers>
