@@ -95,19 +95,19 @@ constraints on XML files as well. The OCL2 Interpreter had not to be modified fo
 \subsection{The OCL2.2 Standard Library}
 The last case study depicts the ability to load different model instances of one model 
 in order to check for inconsistencies between both instances. In this example we 
-check\add{ed} \change{WFRs}{\textit{Well-Formedness Rules (WFRs)}} for the OCL standard library of DresdenOCL. 
+checked \textit{Well-Formedness Rules (WFRs)} for the OCL standard library of DresdenOCL. 
 DresdenOCL's standard library is explicitly modelled as 
-an instance of the \change{PivotModel}{model types}, describing predefined OCL types like \texttt{Integer}, 
+an instance of the model types, describing predefined OCL types like \texttt{Integer}, 
 \texttt{OclAny} or \texttt{Sequence} and their associated operations. 
 Hence, accessing predefined OCL types is reduced to a simple model 
 import while the model can conveniently be queried, validated or altered 
 \cite{braeuerOCL07}. The WFRs can be used to check whether all OCL types are 
 declared and whether they support all operations that are defined by the 
-current OCL \change{standard}{specification} \add{or not}.
+current OCL specification.
 
 Although modelling the standard library leads to great flexibility, the standard library 
 still needs an implementation that provides its dynamic semantics. 
-This implementation is provided through Java code. As the \change{PivotModel}{\textit{Model Types Editor} of Dresden OCL}
+This implementation is provided through Java code. As the \textit{Model Types Editor} of Dresden OCL
 does not support code generation, this can lead to inconsistencies between 
 the modelled standard library and the according Java interfaces.
 We propose to use OCL to check that all modelled types have an equivalent Java 
@@ -116,11 +116,11 @@ this approach allows us to check whether the standard library supports all opera
 are defined in the current OCL standard.
 
 \note{Claas: Probably alter this section according to the description in the other two case studies above.}
-In order to evaluate the WFRs, the \change{PivotModel}{model types} need\remove{s} to be loaded as a model (cf. Fig. 
+In order to evaluate the WFRs, the model types need to be loaded as a model (cf. Fig. 
 \ref{fig:casestudy03}) \note{Claas: Model Figure!} via the \textit{Ecore Model Adapter}. Now, the modelled standard library 
-can be loaded as an instance of the \change{PivotModel}{model types} via the \textit{XMI Model Instance Adapter}. Thus, 
+can be loaded as an instance of the model types via the \textit{XMI Model Instance Adapter}. Thus, 
 we are able to evaluate the WFRs for the standard library model and can prove the correct 
-structure of it according to the current OCL \change{standard}{specification}. 
+structure of it according to the current OCL specification. 
 \note{Claas: Emphasize the model layers used for interpretation here. Big difference to case studies 1 and 2!}
 
 \note{Claas: Do we really have to mention this lack. Lets talk about the interpretation results instead.}
