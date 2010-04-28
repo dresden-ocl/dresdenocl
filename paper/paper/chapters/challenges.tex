@@ -1,0 +1,97 @@
+\section{Challenges}
+
+\subsection{Limitations of Implementation Adaptation}
+	\note{Could we move this section to a later section. It is better to first
+	show how cool the approach already works and then reflect on its limitations. 
+	Furthermore, knowing concrete examples may help understanding the limitations}
+	\note{The whole section is hard to comprehend. I would suggest to use named
+	paragraphs for each concrete limitation} During the implementation of our
+	generic architecture that allows connection of different types of models 
+	with different types of model implementations and \note{vice versa
+	direction was not introduced before}{vice versa} we met various problems and
+	difficulties that are presented in this section. 
+
+	\paragraph{Problem Name}
+	As mentioned above, models and model implementations are only loosely 
+	coupled to support different implementations for the same type of model.
+	\note{don't understand argument: loose coupling ENABLES variable
+	implementations} Thus, we have to match types of an concrete implementation to
+	the types of a model. Currently, this type matching is realized by simply 
+	matching the names of the types (including the names of 
+	their enclosing name spaces where possible). Often, this solution is error 
+	prone and further information is hidden behind our adapters that could be 
+	used to improve the matching. E.g., when adapting an instance of an EMF 
+	Ecore model, one could use the reflection mechanisms provided by Ecore to
+	retrieve the types of EObjects. We plan to improve our matching
+	that is currently scattered over multiple classes of each implementation type 
+	adapter and by introducing type matching strategies that 
+	can be implemented using the \emph{Chain of Responsibility} 
+	pattern\cite{gamma:dp}. The chain could start by trying to match the 
+	types using a implementation specific matcher and end by trying to 
+	simply match the type's names as currently done.
+	
+	\paragraph{Problem Name}
+	Another problem when using adapters for model implementation types 
+	is the unwrapping mechanism of adapted elements when invoking operations 
+	on the implementation's elements. E.g., to invoke an operation of a Java 
+	implementation we require \texttt{Objects} as parameters instead of 
+	\texttt{IModelInstanceElements}. This unwrapping mechanism is easy 
+	where elements that have been adapted before are simply unwrapped 
+	again. Unfortunately, during interpretation of OCL constraints, 
+	new instances of primitive types or new collections can be created 
+	(e.g., when invoking the OCL operation \texttt{size()} that 
+	returns an \texttt{Integer} instance). Thus, the factory of a 
+	model implementation adapter has to provide operations to reconvert 
+	primitive types and collections to elements of the adapted model 
+	instances. In some cases this can become rather complicate because 
+	the adaptation between types of the implementation and the model 
+	implementation type interfaces has not to be bijective. For 
+	example Java \texttt{ints} and \texttt{java.lang.Integers} are 
+	both mapped to \texttt{IModelInstaceIntegers}. During unwrapping, 
+	the factory of the Java implementation adapter has to reflect 
+	whether the method to invoke requires an \texttt{int}, an 
+	\texttt{Integer} or another Java integer-like type's instance.
+	 The unwrapping mechanism of an adapted implementation 
+	 can be considered as the most complicate and error-prone part 
+	 of the complete implementation type adaptation. \remove{Nevertheless, 
+	 this part is necessary to support interpretation of OCL 
+	 constraints containing operation invocations on model defined 
+	 types.}\note{What are we planning to alleviate this challenge?}
+
+
+	\subsection{Improving the Adaptation Process}
+	\note{can we merge this with the limitations section}
+	
+	\paragraph{Problem Name}
+	Adapting different types of meta-models\add{, models, } and model
+	implementations enables the reuse of DrescenOCL for \add{various combinations
+	of modeling and implementation languages}.
+	Nevertheless, the adaptation process contains parts that are similar 
+	for each adaptation and can be error
+	prone as well. \note{how are similar and error-prone connected?}
+	\note{rephrase}
+	When the adaptation of a model implementation 
+	type is wrong, the interpretation results may be wrong as well. 
+	To improve the model adaptation process, we developed a code generator 
+	for the adaptation of meta-models to the pivot model. The code 
+	generator requires an annotated \change{EMF Ecore model}{metamodel} describing
+	the adaptation of meta-model concepts to the pivot model concepts. 
+	The code generator generates the skeleton code for all required 
+	adapters and thus avoids manual implementation of these adapters. 
+	For model implementation types, such a code generator is currently 
+	missing.
+	
+	\paragraph{Problem Name}
+	\remove{Furthermore,} We developed two generic JUnit test suites, 
+	that can be used to test the \remove{correct} adaptation of a model 
+	or model implementation, respectively. \note{Next sentence is hard to
+	comprehend\ldots}The test suites require a specific test model defined in the
+	adapted meta-model or a specific test implementation implemented in the 
+	adapted model implementation. 
+	The test suites then check if all required methods to 
+	retrieve on types, operations, properties etc. are implemented 
+	appropriately in respect to the specified test model or test 
+	implementation. These generic test suite helped us to ensure 
+	that all existing adaptations behave in the same expected manner
+	and to easily detect wrong adaptations of some elements.
+	\note{any future plans?}
