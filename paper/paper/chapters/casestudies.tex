@@ -115,6 +115,16 @@ interface and all modelled operations are also present in the Java interface. Fu
 this approach allows us to check whether the standard library supports all operations that 
 are defined in the current OCL standard.
 
+\begin{figure}[!t]
+	\centering
+		\includegraphics[width=0.60\textwidth]{figures/casestudy03.pdf}
+	\caption{In the standard library case study, VP1 is bound to the \textit{EMF Ecore Model Adapter}. 
+	  Consequently, the EssentialOcl Ecore model is adapted as a model at M1.
+	  VP2 is bound to the \textit{XMI Model Instance Adapter} and thus, each element of the modeled Standard Library
+	  instance is adapted as a model instance object at M0.}
+	\label{fig:casestudy03}
+\end{figure}
+
 \note{Claas: Probably alter this section according to the description in the other two case studies above.}
 In order to evaluate the WFRs, the model types need to be loaded as a model (cf. Fig. 
 \ref{fig:casestudy03}) \note{Claas: Model Figure!} via the \textit{Ecore Model Adapter}. Now, the modelled standard library 
