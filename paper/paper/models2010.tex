@@ -22,7 +22,7 @@
 \title{Improv\change{ed}{ing} Variability for OCL Constraint Interpretation}
 
 % a short form should be given in case it is too long for the running head
-\titlerunning{Improv\change{ed}{ing} Variability for OCL Constraint Interpretation}
+\titlerunning{Improving Variability for OCL Constraint Interpretation}
 
 % the name(s) of the author(s) follow(s) next
 %
@@ -33,7 +33,7 @@
 \author{Claas Wilke\and Michael Thiele\and Christian Wende\\
 \mails}
 %
-\authorrunning{Impro\change{ed}{ing} Variability for OCL Constraint Interpretation}
+\authorrunning{Improving Variability for OCL Constraint Interpretation}
 % (feature abused for this document to repeat the title also on left hand pages)
 
 % the affiliations are given next; don't give your e-mail address
@@ -57,27 +57,23 @@ Software Technology Group
 \maketitle
 
 \begin{abstract}
-In recent years the Object Constraint Language (OCL) has become a popular 
-constraint language that is used \change{on top of}{in combination with}
-multiple modelling languages such as UML, EMF Ecore and various domain specific 
-languages. \remove{OCL is only loosely coupled to these modelling languages, }It
-is rather common to reuse the same OCL parsers for multiple different modelling 
-languages. 
-\change{While OCL-annotated models are implemented and instantiated in various
-implementation languages, dynamic OCL semantics as required for OCL constraint 
-interpretation is typically bound to a specific implementation language.} 
-In this paper, we propose an architecture for an OCL tool that
-\change{encapsulates}{hides} meta-models, models and model
-\change{instances in specific implementation languages} behind well-defined
-interfaces. We present an OCL interpreter that can interpret OCL constraints 
-on various different model \change{instantiations}{implementations} and
-\change{provides}{, thus, enables} reuse of the same dynamic OCL semantics
-implementation for all these \change{instantiation types}{implementation types}.
-The architecture is evaluated \change{by presenting}{in} three case studies
-defining and interpreting OCL constraints on multiple models and model
-\change{instances}.
+  In recent years, OCL has been 
+	applied to various modelling languages including meta-meta-models 
+	like the Meta Object Facility (MOF) or Ecore, various 
+	Domain Specific Languages (DSLs) and the Unified Modelling Language (UML). It
+	is rather common to reuse the same OCL parsers for multiple different modelling 
+	languages. Nevertheless, dynamic OCL semantics and thus, OCL interpretation is
+	often realized in a domain or implementation language specific manner. 
+	In this paper, we propose an architecture for an OCL infrastructure that
+  hides meta-models, models and model instances behind well-defined
+  interfaces. We present an OCL interpreter that can interpret OCL constraints 
+  on various different model instantiations and thus, enables reuse of the same 
+  dynamic OCL semantics implementation for all these instantiation types.
+  The architecture is evaluated in three case studies
+  defining and interpreting OCL constraints on multiple models and model
+  instances.
 
-\keywords{OCL, MDSD, Modelling, Constraint Interpretation.}
+\keywords{OCL, OCL Infrastructure, MDSD, Modelling, Constraint Interpretation, Variability, Adaptation.}
 \end{abstract}
 	\note{terminology: artefact, element, type, concept, class\ldots}
   \input{chapters/introduction}
