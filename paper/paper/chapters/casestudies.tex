@@ -1,109 +1,113 @@
 \section{Case Studies}
 
-In this section we \remove{shortly} present three case studies \remove{we 
-used to investigate}\add{demonstrate} the power of our \note{do we have a
-generic interpretation approach or a adaptation approach? What is the
-name of the game? Only on approach per paper :) }{generic interpretation
-approach}. \remove{Please be aware of the fact that the case studies are
-examples for adaptation only. Multiple other adaptations are possible and tasks
-for future works.}
+In this section we present three case studies to demonstrate the power of the presented
+generic adaptation architecture.
 
 
 \subsection{The Royal and Loyal System Example}
 
-As a first case study, we modeled and implemented the \textit{Royal and Loyal System Example} 
-as defined in \cite{warmer:ocl}. The case study was desigend by Warmer and Kleppe to explain 
+As a first case study, we modelled and implemented the \textit{Royal and Loyal System Example} 
+as defined in \cite{warmer:ocl}. The case study was designed by \textsc{Warmer and Kleppe} to explain 
 the Object Constraint Language and can be used to test the interpretation of
-\change{almost all possible}{various} kinds of OCL expressions. The case study
-consists of 13 UML classes (including inheritance and enumeration types)
-\add{and 130 constraints}. We modeled the Royal and Loyal System \remove{by}
-using the UML2 meta-model of the Eclipse Model Development Tools (MDT) project
-\cite{WWW:MDT}. \remove{We took over 130 constraints from the book}
-\add{The model was implemented and instantiated in Java. Consequently
-constraints are evaluated on Java objects.}
+various kinds of OCL expressions. The case study consists of 13 UML classes (including inheritance and enumeration types)
+and 130 constraints. We modelled the royal and loyal system using the UML2 meta-model of the
+Eclipse Model Development Tools (MDT) project \cite{WWW:MDT}.
+The model was implemented and instantiated in Java. Consequently
+constraints were evaluated on Java objects.
 
-\begin{figure}[tb]
+\begin{figure}[!t]
 	\centering
-		\includegraphics[width=1.00\textwidth]{figures/casestudy01.pdf}
-	\caption{In the Royal and Loyal case study, the MTD UML2 meta-model is adapted at M2. At M1, the Royal and Loyal UML class diagram is adapted as a model and its Java classes are adapted as a model implementation. At M0, each object of the Java classes is adapted as a model instance element.}
+		\includegraphics[width=0.60\textwidth]{figures/casestudy01.pdf}
+	\caption{In the Royal and Loyal case study, VP1 is bound to the \textit{MDT UML2 Model Adapter}. 
+	  Consequently, the Royal and Loyal UML class diagram is adapted as a model at M1.
+	  VP2 is bound to the \textit{Java Model Instance Adapter} and thus, each object of the Java 
+	  implementation is adapted as a model instance object at M0.}
 	\label{fig:casestudy01}
 \end{figure}
 
-\note{revise next paragraph. Differentiate what belongs to model and model
-instance adaptation} To \change{load}{pares} the Royal and Loyal \change{System Example}{constraints}
-in DresdenOCL, the MDT UML2 meta-model was adapted by the
-\note{concreteNameFromFigure} meta-model adapter \add{at the layer M2}
-(cf.~Fig. \ref{fig:casestudy01}). \remove{Here, the meta-model adaptation was
-realized at the layer M2}. At M1, the class diagram describing the Royal and
-Loyal System Example was adapted as an \texttt{IModel}. Furthermore, the 
-Java implementation was adapted to an implementation of this model. E.g., the
-Java class \texttt{LoyaltyAccount} was mapped to an implementation of the UML
-class \texttt{LoyaltyAccount}. \remove{Please be aware of the fact, that} Both
-classes are located at the M1 layer because the Java class is only another representation 
-of the same class as described by the UML class. 
-To load the Java classes as a
-model implementation, we had to implement a model implementation adapter for 
-Java. This adapter was also responsible to adapt the Java objects to 
-\texttt{IModelInstanceElements} at the M0 layer. The Royal and Loyal case 
-study proved a sound implementation of the OCL Standard Library specification 
-and also a correct adaptation of the MDT UML meta-model and Java model instance objects.
+The required adaptations for the royal and loyal case study are shown in Fig. \ref{fig:casestudy01}.
+To parse the Royal and Loyal constraints
+in DresdenOCL, a \textit{UML2 Model Adapter} component was implemented, that 
+adapts the required meta-model elements from the MDT UML2 meta-model to the model 
+types of DresdenOCL at the M2 layer and creates instances of these adapters for all UML models 
+loaded into DresdenOCL. 
+Consequently, the royal and loyal class diagram was adapted as a model at the M1 layer.
+For the Java implementation, a \textit{Java Model Instance Adapter} component was implemented,
+that adapts the Java meta-model elements (classes of the package \texttt{java.lang.reflect})
+to the model instance types and creates instances of these adapters for all Java objects
+loaded into DresdenOCL. Consequently, the objects of the royal and loyal Java implementation
+were adapted as \texttt{ModelInstanceElements} in DresdenOCL at the M0 layer. Both, classes from 
+the class diagram and from the Java implementation are located at the M1 layer 
+because the Java classes are only other representations of the classes described by the 
+UML class diagram! 
 
+The Royal and Loyal case study demonstrates that our generic adapter architecture is able to 
+support the common interpretation of OCL constraints defined on UML classes for Java objects.
 
 
 \subsection{SEPA Business Rules}
-\note{short intro: similar to prev. sect.}
 
-The company Nomos Software provides a service to check business rules on
-financial SEPA \note{introduce abbrev.} messages that are \change{required
-for}{used in} financial transactions of bank offices as defined by the European
-Payment Council (EPC), ISO20022, and the Euro Banking Association (EBA) \cite{spec:UNIFI,spec:EPC}. 
-SEPA messages are described in XML documents that are instances of \add{an} XML
-Schema Definitions (XSD). Nomos Software uses OCL constraints defined on such
-schema definitions to validate XML documents against a set of business rules
-\note{what do these roles constraint?}
+As a second case study we tried to adapt our generic adaptation architecture to the
+area of XML-structured data. Thus, we decided to interpret OCL consistency constraints
+defined on an \textit{XML Schema Definition (XSD)} for an XML instance of this schema in a real, economy-driven
+scenario. The company \textsc{Nomos Software} provides a service to check business rules on
+financial \textit{Single Euro Payments Area (SEPA)} messages that are 
+used in financial transactions of bank offices as defined by the \textit{European
+Payment Council (EPC)}, \textit{ISO20022}, and the \textit{Euro Banking Association (EBA)} \cite{spec:UNIFI,spec:EPC}. 
+SEPA messages are described and shipped as XML documents.
+\textsc{Nomos Software} uses OCL constraints defined on XML schemas
+to validate XML documents against a set of business rules that constrain the consistency of
+this SEPA messages. We implemented an XSD model and an XML model instance adaptation 
+for DresdenOCL and used the XSD and XML files that are 
+provided with an online demo of the Nomos service for \textit{Pain.008.001.01} SEPA 
+messages.\footnote{http://www.nomos-software.com/demo.html}
+We took the about 120 constrains provided by the demo to test our adaptation. 
 
-\begin{figure}[tb]
+\begin{figure}[!t]
 	\centering
-		\includegraphics[width=1.00\textwidth]{figures/casestudy02.pdf}
-	\caption{In the SEPA case study, the XSD meta-model is adapted at M2. At M1, the Pain XML Schema is adapted as a model. The types of XML nodes are mapped to the types in the XSD file. At M0, each node of the XML instance is adapted as a model instance element.}
+		\includegraphics[width=0.60\textwidth]{figures/casestudy02.pdf}
+	\caption{In the SEPA case study, VP1 is bound to the \textit{XSD Model Adapter}. 
+	  Consequently, the Pain.008.001.01 schema is adapted as a model at M1.
+	  VP2 is bound to the \textit{XML Model Instance Adapter} and thus, each node of the XML
+	  instance is adapted as a model instance object at M0.}
 	\label{fig:casestudy02}
 \end{figure}
 
-We implemented an XSD meta-model and an XML model implementation adaptation 
-for DresdenOCL and used the \remove{same} XSD and XML files that are 
-provided with an online demo of the Nomos service\footnote{Available at http://www.nomos-software.com/demo.html} 
-to test our adaptation (see Figure \ref{fig:casestudy02}). At the M2 layer, 
-the XML Schema meta-model was adapted by a meta-model adapter. At the M1 layer, 
-the \texttt{pain.008.001.01.xml} was adapted as an \texttt{IModel}. An 
-adaptation for XML documents as model implementations was realized as well. 
-Each type of a node in the XML document was mapped to a Type defined in the 
-XML Schema at layer M1. At layer M0, each node was adapted as an 
-\texttt{IModelInstanceElement}. We took the \remove{same} about 120 constrains
-provided by Nomos Software to test our adaptation. These constraints were
-evaluated for three different XML files and the results have been
-\add{successfully} compared with the results of the Nomos service demo\remove{to
-check the right interpretation of the constraints}. This shows that our model
-implementation adaptation allows DresdenOCL to transparantly interpret
-constraints on XML as well. The OCL2 Interpreter had not to be
-modified\remove{to interpret OCL constraints on XML nodes}.
+The required adaptations for the SEPA case study are shown in Fig. \ref{fig:casestudy02}.
+To parse the SEPA constraints
+in DresdenOCL, an \textit{XSD Model Adapter} component was implemented, that 
+adapts the required meta-model elements from the XSD meta-model to the model 
+types of DresdenOCL at the M2 layer and creates instances of these adapters for all XML schemas 
+loaded into DresdenOCL. 
+Consequently, the \textit{Pain.008.001.01} XML schema was adapted as a model at the M1 layer.
+For the XML instances, an \textit{XML Instance Adapter} component was implemented,
+that adapts the XML meta-model elements (mainly the class \texttt{org.w3c.dom.Node})
+to the model instance types and creates instances of these adapters for all XML node instances
+loaded into DresdenOCL. Consequently, the nodes of the Pain.008.001.01 XML messages
+were adapted as \texttt{ModelInstanceElements} in DresdenOCL at the M0 layer.
+
+These constraints of the Nomos service demo were evaluated for three different XML files 
+and the results have been successfully compared with the results of the Nomos service demo.
+This shows that our model implementation adaptation allows DresdenOCL to transparantly interpret
+constraints on XML files as well. The OCL2 Interpreter had not to be modified for the SEPA case study!
 
 
 \subsection{The OCL2.2 Standard Library}
 The last case study depicts the ability to load different model instances of one model 
 in order to check for inconsistencies between both instances. In this example we 
-check WFRs for the OCL standard library of Dresden OCL. 
+check\add{ed} \change{WFRs}{\textit{Well-Formedness Rules (WFRs)}} for the OCL standard library of DresdenOCL. 
 DresdenOCL's standard library is explicitly modelled as 
-an instance of the PivotModel, describing predefined OCL types like \texttt{Integer}, 
+an instance of the \change{PivotModel}{model types}, describing predefined OCL types like \texttt{Integer}, 
 \texttt{OclAny} or \texttt{Sequence} and their associated operations. 
 Hence, accessing predefined OCL types is reduced to a simple model 
 import while the model can conveniently be queried, validated or altered 
 \cite{braeuerOCL07}. The WFRs can be used to check whether all OCL types are 
 declared and whether they support all operations that are defined by the 
-current OCL standard.
+current OCL \change{standard}{specification} \add{or not}.
 
 Although modelling the standard library leads to great flexibility, the standard library 
 still needs an implementation that provides its dynamic semantics. 
-This implementation is provided through Java code. As the PivotModel 
+This implementation is provided through Java code. As the \change{PivotModel}{\textit{Model Types Editor} of Dresden OCL}
 does not support code generation, this can lead to inconsistencies between 
 the modelled standard library and the according Java interfaces.
 We propose to use OCL to check that all modelled types have an equivalent Java 
@@ -111,22 +115,23 @@ interface and all modelled operations are also present in the Java interface. Fu
 this approach allows us to check whether the standard library supports all operations that 
 are defined in the current OCL standard.
 
-In order to evaluate the WFRs, the PivotModel needs to be loaded as a model (see Figure 
-\ref{fig:casestudy03}) via the Ecore Model Adapter. Now, the modelled standard library 
-can be loaded as an instance of the PivotModel via the XMI Model Instance Adapter. Thus, 
+\note{Claas: Probably alter this section according to the description in the other two case studies above.}
+In order to evaluate the WFRs, the \change{PivotModel}{model types} need\remove{s} to be loaded as a model (cf. Fig. 
+\ref{fig:casestudy03}) \note{Claas: Model Figure!} via the \textit{Ecore Model Adapter}. Now, the modelled standard library 
+can be loaded as an instance of the \change{PivotModel}{model types} via the \textit{XMI Model Instance Adapter}. Thus, 
 we are able to evaluate the WFRs for the standard library model and can prove the correct 
-structure of it according to the current OCL standard. 
+structure of it according to the current OCL \change{standard}{specification}. 
+\note{Claas: Emphasize the model layers used for interpretation here. Big difference to case studies 1 and 2!}
 
+\note{Claas: Do we really have to mention this lack. Lets talk about the interpretation results instead.}
 In order to check for inconsistencies with the Java implementation, the Java interfaces 
-for predefined OCL types have be loaded with the Java Class Model Instance Adapter. Then, the same WFRs 
+for predefined OCL types have \add{to} be loaded with the \textit{Java Class Model Instance Adapter}. Then, the same WFRs 
 used for the standard library model before can be checked for this instance. 
-Unfortunately, the Java Class Model Instance Adapter does not exist yet, but will be 
+Unfortunately, the \textit{Java Class Model Instance Adapter} does not exist yet, but will be 
 implemented in the near future.
 
 
-\subsection{Future Work}
+\subsection{Future Case Studies}
 
-For future case studies we plan to adapt meta-model and model implementations for web services (Meta-Model: WSDL, Model Implementation: TODO), static programming languages such as C\# (Meta-Model: UML2, Model Implementation: C\#), data bases (Meta-Model: SQL-DDL, Model Implementation: SQL). 
-
-\textbf{TODO} WFRs of OCL SL ...
+For future case studies we plan to adapt meta-model and model implementations for web services (Meta-Model: WSDL, Model Implementation: \note{TODO}), static programming languages such as C\# (Meta-Model: UML2, Model Implementation: C\#), data bases (Meta-Model: SQL-DDL, Model Implementation: SQL). 
 
