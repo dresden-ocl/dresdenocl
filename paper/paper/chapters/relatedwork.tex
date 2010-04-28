@@ -5,61 +5,50 @@ to support variability in models and model instances:
 
 \begin{itemize}
   
-\item The USE tool \cite{gogolla2007use} contributes an OCL simulator that can
+\item The \emph{USE} tool \cite{gogolla2007use} contributes an OCL simulator that can
 evaluate OCL constraints against model snapshots. It is bound to UML class, UML object and
 UML sequence diagrams and does not provide means for model or model instance
 adaptations.
 
-\item The OCLE tool~\cite{WWW:OCLE} interprets OCL constraints on
+\item The \emph{OCLE} tool~\cite{WWW:OCLE} interprets OCL constraints on
 UML models. Furthermore, it provides a compiler to generate a Java
 implementation from a constrained UML model and the according OCL 
-constraints. OCLE does not allow for model or model instance adaptation.
+constraints. \change{OCLE does not allow for model or model instance adaptation.}
+{Although OCLE does not allow for real model or model instance adaptation, XML files
+can be treated as model instances by transforming them into UML object diagrams.}
 
-\item The MIP OCL2 Parser~\cite{WWW:MIP} is a Java library for parsing OCL
+\item The \emph{MIP OCL2 Parser}~\cite{WWW:MIP} is a Java library for parsing OCL
 constraints provided by the Institute for Defense Analyses. Constraints are
-checked syntactically and semantically against an UML class diagram.
-To use the parser, one must provide an Java implementation of the abstract 
+checked syntactically and semantically against a UML class diagram.
+To use the parser, one must provide a Java implementation of the abstract 
 UML model expected by the parser. Thus,
 the MIP parser provides very limited means for model adaptation. Since MIP does
-not contribute a interpreter or compiler for constraints, model
+not contribute an interpreter or compiler for constraints, model
 instance adaptation is not relevant.
 
-\item The OCL interpreter and compiler provided by the Kent Modeling Framework
-(KMF) supports model adaptation via a central \emph{Bridge}
-model~\cite{akehurst2003ocl}. Both depend on a Java-based
+\item The OCL interpreter and compiler provided by the \emph{Kent Modeling Framework
+(KMF)} supports model adaptation via a central \emph{Bridge}
+model~\cite{akehurst2003ocl}. \note{Claas: What does "`both"' mean here?} Both depend on a Java-based
 representation of model instances. Thus, model instance adaptation is not
 directly supported.
 
-\item The Epsilon Validation Language (EVL) introduced in
+\item The \emph{Epsilon Validation Language (EVL)} introduced in
 \cite{kolovos2008detecting} is quite similar to OCL. It comes with an
 interpreter that can be used for various EMF-based languages. Thus, model
 adaptation is possible while model instances are bound to EMF.
  
-\item A standard OCL interpreter for EMF is provided by MDT OCL
+\item A standard OCL interpreter for EMF is provided by \emph{MDT OCL}
 \cite{WWW:MDT}. It is also tightly integrated with EMF and supports 
 model adaptation for various EMF languages. The interpreter directly supports
 model instances represented in EMF. Its architecture is highly extensible
-\note{add cite} and could be adapted to other implementation
-infrastructures. However, we are not aware of any such adaptations.
+and could be adapted to other implementation
+infrastructures \add{using \emph{Java Generics}} \cite{damus:EclipseCon08}. 
+However, we are not aware of any such adaptations.
 
 \end{itemize}
 
 This analysis of related work shows that variability at model level is
 considered useful and has already been implemented in various OCL tools.
-Supporting variability at the model instance level -- as suggested in this paper -- 
-is, thus, a consequent continuation of our previous
+Supporting variability at the model instance level--as suggested in this paper--is, 
+thus, a consequent continuation of our previous
 and other's related work.
-
-
-
-% MDT OCL, USE, BluePrint OCL, AspectJ, ...
-% 
-% In \cite{hartmannDEXA06,hartmannICWI07} Hartmann presented an approach for XML-based template engines that showed a use case for OCL constraints on XML Schemas. OCL was used to express constraints that cannot be defined in XML Schema.
-% 
-% OCL on XML/DTD:
-% \begin{itemize}
-% 	\item http://lci.cs.ubbcluj.ro/ocle/
-% 	\item Modeling XML applications with UML (D. Carlson) (Buch)
-% \end{itemize}
-% 
-% \textbf{TODO}
