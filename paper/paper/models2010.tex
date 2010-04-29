@@ -33,7 +33,7 @@
 \author{Claas Wilke\and Michael Thiele\and Christian Wende\\
 \mails}
 %
-\authorrunning{Improving Variability for OCL Constraint Interpretation}
+\authorrunning{Extended Variability for OCL Interpretation}
 % (feature abused for this document to repeat the title also on left hand pages)
 
 % the affiliations are given next; don't give your e-mail address
@@ -57,21 +57,24 @@ Software Technology Group
 \maketitle
 
 \begin{abstract}
-  In recent years, OCL has been 
-	applied to various modelling languages including meta-meta-models 
-	like the Meta Object Facility (MOF) or Ecore, various 
-	Domain Specific Languages (DSLs) and the Unified Modelling Language (UML). It
-	is rather common to reuse the same OCL parsers for multiple different modelling 
-	languages. Nevertheless, dynamic OCL semantics and thus, OCL interpretation is
-	often realized in a domain or implementation language specific manner. 
-	In this paper, we propose an architecture for an OCL infrastructure that
-  hides meta-models, models and model instances behind well-defined
-  interfaces. We present an OCL interpreter that can interpret OCL constraints 
-  on various different model instantiations and thus, enables reuse of the same 
-  dynamic OCL semantics implementation for all these instantiation types.
-  The architecture is evaluated in three case studies
-  defining and interpreting OCL constraints on multiple models and model
-  instances.
+  In recent years, OCL advanced from a language used to constraint UML models to 
+  a constraint language that is applied to various object-oriented modelling
+  languages including various Domain Specific Languages (DSLs) and metamodeling languages 
+  like the Meta Object Facility (MOF) or Ecore. 
+  Consequently, it is rather common provide variability in OCL parsers to
+  work for different modelling languages. 
+  A second, variability dimension relates to the
+  infrastructure that models are implemented and instantiated in. 
+  Current OCL interpreters do not support such variability but are typically 
+  bound to a specific implementation infrastructure, e.g. Ecore, Java, or a
+  specific model repository. In this paper, we propose a generic adaptation
+  architecture for OCL that hides meta-models, models and model instances 
+  behind well-defined interfaces. We present how the implementation of such
+  architecture for DresdenOCL enables reuse of the same 
+  OCL interpreter for various model implementation and
+  instantiation infrastructures. Finally, our approach is evaluated in three
+  case studies defining and interpreting OCL constraints on multiple models
+  and model instances.
 
 \keywords{OCL, OCL Infrastructure, MDSD, Modelling, Constraint Interpretation, Variability, Adaptation.}
 \end{abstract}
