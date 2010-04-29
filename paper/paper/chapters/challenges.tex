@@ -1,26 +1,27 @@
-\section{Challenges in Generic OCL Infrastructures}
+\section{Challenges \change{in Generic}{of a Variable} OCL Infrastructure\remove{s}}
 
+\note{Michael: Is it a ``generic adapter architecture'' or do we have another name including ``variability''?}
   In this section we highlight some problems that occurred during the design
   and implementation of our generic adapter architecture for an OCL infrastructure.
   We also present some solutions to these challenges.
 
 	\paragraph{Type Matching}
-	As mentioned above, models and model implementations are only loosely 
-	coupled. Model instance elements must be matched to a type of an imported model
-	when they are imported into DresdenOCL. Currently, this type matching is realized by simply 
-	matching the names of the types (including the names of 
-	their enclosing name spaces where possible). E.g., the Java class \texttt{LoyaltyAccount} is
+	As \remove{mentioned above, }models and model implementations are only loosely 
+	coupled\change{. M}{, m}odel instance elements must be matched to a model type
+	when they are imported into DresdenOCL. Currently, this type matching is realised by \change{simply 
+	matching the names of the types}{a simple type name match} (including the names of 
+	their enclosing namespaces where possible). E.g., the Java class \texttt{LoyaltyAccount} is
 	matched to the class \texttt{LoyaltyAccount} in the royal and loyal class diagram.
-	Often, this solution is error prone and further information is hidden behind the adapters that could be 
+	Often, this solution is error prone \note{Michael: this sounds a little bit exaggerated} and further information is hidden behind the adapters that could be 
 	used to improve the matching. E.g., when adapting an instance of an EMF 
 	Ecore model, one could use the reflection mechanisms provided by Ecore to
 	retrieve the types of EObjects. We plan to improve our matching
 	that is currently scattered over multiple classes of each model instance 
-	adapter component and by introducing type matching strategies that 
+	adapter component \remove{and }by introducing type matching strategies that 
 	can be implemented using the \emph{Chain of Responsibility} 
 	pattern \cite{gamma:dp}. The chain could start by trying to match the 
 	types using an implementation specific matcher and end by trying to 
-	simply match the type's names as currently done.
+	simply match the type names as currently done.
 	
 	\paragraph{Element Unwrapping}
 	Another problem when using adapters for model instance types 
@@ -31,28 +32,29 @@
 	where elements that have been adapted before are simply unwrapped 
 	again. Unfortunately, during interpretation of OCL constraints, 
 	new instances of primitive types or new collections can be created 
-	(e.g., when invoking the OCL operation \texttt{size()} that 
+	(e.g., when invoking the OCL operation \texttt{size() \add{on a collection}} that 
 	returns an \texttt{Integer} instance). Thus, a 
 	model instance adapter has to provide operations to reconvert 
 	primitive types and collections to elements of the adapted model 
-	instances. In some cases this can become rather complicate because 
+	instances. In some cases this can become rather complicated because 
 	the adaptation between types of the instance and the model 
 	instance type interfaces has not to be bijective. For 
-	example Java \texttt{ints} and \texttt{java.lang.Integers} are 
+	example, Java \texttt{ints} and \texttt{java.lang.Integers} are 
 	both mapped to \texttt{ModelInstaceIntegers}. During unwrapping, 
 	the Java model instance adapter component has to reflect 
 	whether the method to invoke requires an \texttt{int}, an 
-	\texttt{Integer} or another Java integer-like type's instance.
+	\texttt{Integer} or another Java integer-like type instance.
 	The unwrapping mechanism of an adapted instance 
-	can be considered as the most complicate and error-prone part 
+	can be considered as the most complicated and error-prone part 
 	of the complete model instance adaptation.
 
 	\paragraph{Automated Adapter Creation}
-	Adapting different types of meta-models, models, and model
+	\remove{Adapting different types of meta-models, models, and model
 	instances enables the reuse of DrescenOCL for various combinations
-	of modelling and implementation languages.
-	Nevertheless, the adaptation process contains parts that are similar 
-	for each adaptation and thus, can be automated.
+	of modelling and implementation languages.}
+	\change{Nevertheless, the}{The} adaptation process \add{of models and model 
+	instances} contains parts that are similar 
+	for each adaptation and thus can be automated.
 	To improve the model adaptation process, we developed a code generator 
 	for the adaptation of meta-models to the model type concepts. The code 
 	generator requires an annotated meta-model describing
