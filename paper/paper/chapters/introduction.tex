@@ -20,16 +20,32 @@
 	While several OCL tools support \emph{variability at the model level}, i.e.
 	the modelling language used to specify constrained
 	models~\cite{braeuerOCL07}\cite{akehurst2003ocl}, \emph{variability at model
-	instance level}, i.e. the implementation infrastructure for model instances, is not provided. For OCL compilers as presented in
+	instance level}, i.e. the implementation infrastructure for model instances, is not provided. 
+	For OCL compilers as presented in
 	\cite{UmlMof}, \cite{demuthRGWS09}, \cite{OCLCsharp}, or \cite{OCLRelDB} 
 	such variability is not possible, as the code generated from OCL constraints 
 	needs to be	bound to the implementation infrastructure used at model instance
-	level. However, for OCL interpreters, we argue that a decoupling of the
-	semantics evaluation from a concrete implementation infrastructure is possible.
+	level. 
+	However, for OCL interpreters, we argue that a
+	decoupling of the semantics evaluation from a concrete implementation infrastructure is possible.
 	In this paper, we propose a \emph{Generic Adaptation Architecture} for OCL
 	interpreters that hides models and model instances behind well-defined
 	interfaces. This enables reuse of the complete OCL infrastructure including the OCL parser, 
 	standard library and interpreter for various kinds of models and model instances.
+	
+	The remainder of this paper is structured as follows. In
+	Sect.~\ref{sec:foundation} we analyse diverse applications for OCL and 
+	motivate two variation points for OCL interpretation. In
+	Sect.~\ref{sec:implementation} we discuss the design and implementation of a
+	\emph{Generic Adaptation Architecture} for OCL interpreters to realise the
+	motivated variation points in \emph{DresdenOCL}. In Sect.~\ref{sec:caseStudies}
+	we document the feasibility and	benefits of our adaptation architecture by
+	applying it in three case studies that use OCL with different models and model
+	instances. In Sect.~\ref{sec:lessons} we elaborate on lessons learned
+	during implementation and application of our approach. Finally, we present
+	related work in Sect.~\ref{sec:relatedWork} and conclude our contributions in
+	Sect.~\ref{sec:conclusion}.
+	
 % 	 We present an
 % 	implementation of our approach for \textit{DresdenOCL}
 % 	\cite{WWW:dresdenOCL}.
@@ -115,4 +131,4 @@
 %	code duplication, limits reuse and makes it more difficult to maintain or extend 
 %	the OCL semantics for all types of model instances synchronously.}
 		
-	\note{TODO The paper is structured as follows...}
+% 	\note{TODO The paper is structured as follows...}
