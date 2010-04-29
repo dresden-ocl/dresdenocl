@@ -49,7 +49,7 @@ support the common interpretation of OCL constraints defined on UML classes for 
 
 As a second case study we tried to adapt our generic adaptation architecture to the
 area of XML-structured data. Thus, we decided to interpret OCL consistency constraints
-defined on an \textit{XML Schema Definition (XSD)} for an XML instance of this schema in a real, economy-driven
+defined on an XML schema for an XML instance of this schema in a real, economy-driven
 scenario. The company \textsc{Nomos Software} provides a service to check business rules on
 financial \textit{Single Euro Payments Area (SEPA)} messages that are 
 used in financial transactions of bank offices as defined by the \textit{European
@@ -95,7 +95,7 @@ constraints on XML files as well. The OCL2 Interpreter had not to be modified fo
 \subsection{The OCL2.2 Standard Library}
 The last case study depicts the ability to load different model instances of one model 
 in order to check for inconsistencies between both instances. In this example we 
-checked \textit{Well-Formedness Rules (WFRs)} for the OCL standard library of DresdenOCL. 
+checked WFRs for the OCL standard library of DresdenOCL. 
 DresdenOCL's standard library is explicitly modelled as 
 an instance of the model types, describing predefined OCL types like \texttt{Integer}, 
 \texttt{OclAny} or \texttt{Sequence} and their associated operations. 
@@ -119,17 +119,24 @@ are defined in the current OCL standard.
 	\centering
 		\includegraphics[width=0.60\textwidth]{figures/casestudy03.pdf}
 	\caption{In the standard library case study, VP1 is bound to the \textit{EMF Ecore Model Adapter}. 
-	  Consequently, the EssentialOcl Ecore model is adapted as a model at M1.
-	  VP2 is bound to the \textit{XMI Model Instance Adapter} and thus, each element of the modeled Standard Library
-	  instance is adapted as a model instance object at M0.}
+	  Consequently, the EssentialOcl ecore model is adapted as a model at M2.
+	  VP2 is bound to the \textit{XMI Model Instance Adapter} and thus, each element of the modelled Standard Library
+	  instance is adapted as a model instance object at M1.}
 	\label{fig:casestudy03}
 \end{figure}
 
-\note{Claas: Probably alter this section according to the description in the other two case studies above.}
-In order to evaluate the WFRs, the model types need to be loaded as a model (cf. Fig. 
-\ref{fig:casestudy03}) via the \textit{Ecore Model Adapter}. Now, the modelled standard library 
-can be loaded as an instance of the model types via the \textit{XMI Model Instance Adapter}. Thus, 
-we are able to evaluate the WFRs for the standard library model and can prove the correct 
+The required adaptations for the standard library case study are shown in Fig. \ref{fig:casestudy03}.
+To parse the WFRs in DresdenOCL, an \textit{EMF Ecore Model Adapter} component was implemented, that 
+adapts the required meta-model elements from the ecore meta-model (EMOF) to the model 
+types of DresdenOCL at the M3 layer and creates instances of these adapters for all ecore-based
+meta-models loaded into DresdenOCL. 
+Consequently, the \textit{EssentialOCL} meta-model was adapted as a model at the M2 layer.
+For the standard library instance, an \textit{XMI Model Instance Adapter} component was implemented,
+that adapts the model istances of ecore-based meta-models (stored as XMI-files)
+to the model instance types and creates instances of these adapters for all elements of these models
+loaded into DresdenOCL. Consequently, the elements of the standard library
+were adapted as \texttt{ModelInstanceElements} in DresdenOCL at the M1 layer.
+Thus, we are able to evaluate the WFRs for the standard library model and can prove the correct 
 structure of it according to the current OCL specification. 
 \note{Claas: Emphasize the model layers used for interpretation here. Big difference to case studies 1 and 2!}
 
