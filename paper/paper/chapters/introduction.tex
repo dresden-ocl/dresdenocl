@@ -1,5 +1,7 @@
 \section{Introduction}
 
+	\note{Michael: maybe we should put most of the parts into Foundations and just explain our 
+	motivation here shortly}
 	Model-Driven Software Development (MDSD) aims to abstract from concrete 
 	software implementations and uses models to describe 
 	software systems. To ensure consistency of models, the Object Constraint Language 
@@ -7,13 +9,13 @@
 	Modelling Language (UML) \cite{spec:UML2-2}. In recent years, OCL has been 
 	applied to other modelling languages including meta-meta-models 
 	like the Meta Object Facility (MOF) or Ecore and various 
-	Domain Specific Languages (DSLs) \cite{oclExample:DSL} \note{Claas: Reference is missing in bib-File}. 
+	Domain Specific Languages (DSLs) \cite{oclExample:DSL} \note{Claas: Reference is missing in bib-File; Michael: I am still looking for a good reference - any ideas?}. 
 
 	For instance, OCL can be used to define business rules on a UML model 
 	that are checked for model instances including UML object model\remove{ element}s,  
 	Java objects or XML files. In another example, OCL can be used to define \textit{Well-Formedness 
-	Rules (WFRs)} on an \change{XML Schema definition}{\textit{XML Schema Definition (XSD)}} that are evaluated for instances 
-	of the definition, e.g., XML files. \change{Again, o}{O}ther instances of the \add{XSD} model are possible.
+	Rules (WFRs)} on an \textit{XML Schema Definition (XSD)} that are evaluated for instances 
+	of the definition, e.g., XML files. Other instances of the XSD model are possible.
 	
 	There are two variation points that can be identified. Firstly, OCL constraints can 
 	be defined on different models as long as the model has object-oriented 
@@ -21,26 +23,25 @@
 	such a model, the concrete and abstract syntax of OCL is not affected. 
 	As OCL is statically typed, the abstract syntax only needs access to the types of the 
 	model it is defined on. Thus, a generic implementation of an OCL parser
-	that relies on an abstraction of the \add{model's} underlying type system \remove{of the model} can be
+	that relies on an abstraction of the model's underlying type system can be
 	reused to parse OCL constraints on different types of models \cite{braeuerOCL07}.
-	Secondly, model instances may vary for \remove{a} specific \add{kinds of} model\add{s}. As OCL constraints 
+	Secondly, model instances may vary specific kinds of models. As OCL constraints 
 	are defined on a model and evaluated on elements of the model's instance\add{s}, the variability 
-	of different model and model instance combinations has to be considered \change{as well 
-	by an OCL infrastructure}{by an OCL infrastructure as well}.
+	of different model and model instance combinations has to be considered by an 
+	OCL infrastructure as well.
 	
-	\add{Generally, two approaches exist to evaluate OCL constraints on instances of constraint
-	models: the \textit{Generative Approach} and the \textit{Interpretative Approach}} \cite{demuthRGWS09}.	
-	\change{One approach to evaluate OCL constraints on instances 
-	of constrained models is \textit{Constraint Compilation} where the}{Using the generative approach,} constraints are 
+	Generally, two approaches exist to evaluate OCL constraints on instances of constraint
+	models: the \textit{Generative Approach} and the \textit{Interpretative Approach}
+	\cite{demuthRGWS09}.	
+	Using the generative approach, constraints are 
 	translated \add{into queries or executable code} and added to the model instance. 
 	This approach has some drawbacks. 
 	Firstly, the model instance might not offer means to express dynamic semantics with 
 	the implication that the constraints cannot be translated. Secondly, 
   instrumentation of the model instance with the translated code might be not possible 
 	or far from trivial. Lastly, variations at model instance level can only be achieved with 
-	a completely new compilation. \change{OCL constraints can also be evaluated using 
-	\textit{Constraint Interpretation} where}{Using the interpretative approach,} 
-	an OCL interpreter visits nodes of the \change{abstract syntax of the defined constraints}{constraint's abstract syntax} and 
+	a completely new compilation. Using the interpretative approach, 
+	an OCL interpreter visits nodes of the constraint's abstract syntax and 
 	executes their appropriate semantics. Model instances are only 
 	\change{read}{requested for property values and operation results} and thus neither 
 	need to have dynamic semantic nor instrumentation capabilities. Furthermore, 
@@ -70,11 +71,12 @@
 	variation points. Some OCL infrastructures allow the specification of OCL constraints 
 	on different types of models. However, in practice, OCL interpreters are typically bound 
 	to a specific \add{type of} model instance\add{s} or \add{to} fixed combinations of models and model instances 
-	\note{references?} and hence do not address the \add{second} variation point \change{at model instance level}{to vary model instance types}.
+	\note{references?} and hence do not address the second variation point to vary model instance types.
+	
   In this paper, we propose an architecture for an OCL
 	infrastructure that hides models and model instances behind well-defined interfaces.
-	This enables reuse of the complete OCL infrastructure including the \add{OCL} parser, 
-	standard library and interpreter for various \add{kinds of models and} model instances. We present an
+	This enables reuse of the complete OCL infrastructure including the OCL parser, 
+	standard library and interpreter for various kinds of models and model instances. We present an
 	implementation of our approach for \textit{DresdenOCL}
 	\cite{WWW:dresdenOCL}. \textit{DresdenOCL} is able to parse OCL
 	constraints on different types of models such as UML, EMF Ecore, Java and 
