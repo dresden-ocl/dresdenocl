@@ -306,7 +306,7 @@ FUNCTION {format.editors}
 FUNCTION {format.title}
 { title empty$
     { "" }
-    { title "t" change.case$ }
+    { title }%"t" change.case$ }
   if$
 }
 
@@ -857,7 +857,7 @@ FUNCTION {mastersthesis}
 FUNCTION {misc}
 { output.bibitem
   format.authors "author" output.check
-  stupid.colon
+  %stupid.colon
   format.title "title" output.check
   howpublished new.block.checka
   howpublished output
