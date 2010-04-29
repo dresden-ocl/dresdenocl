@@ -5,19 +5,26 @@
 	\note{explain theory of ocl metalevel relativity  :) }
 	\note{introduce variation points using Fig.2}
 	
+	
+	\note{Fig 1. add headings to subfigures: a) Variation points in OCL Application	b) Applciation of OCL in UML modeling c) Application of OCL in Ecore
+	metamodeling } 
+	\note{Fig 1. can/should we change order to b), c) , a)? } 
+	
 	\begin{figure}[tb]
 			\centering
 				\includegraphics[width=1.00\textwidth]{figures/genericlayers.pdf}
-			\caption{\note{Michael: still too much caption text; in (b), is the UML2 meta-model really MOF?, I thought MOF is on M3} The \textit{Generic Three Layer Meta data Architecture}. (a): Each OCL constraint 
-			requires a meta-model defining a model on which OCL constraints are specified. The 
+			\caption{Variation Points in OCL Parsing and Interpretation}
+			\label{fig:genericlayers}
+		\end{figure}
+
+\note{Michael: still too much caption text; in (b), is the UML2 meta-model
+really MOF?, I thought MOF is on M3} The \textit{Generic Three Layer Meta data Architecture}. (a): Each OCL constraint requires a meta-model defining a model on which OCL constraints are specified. The 
 			constraints are evaluated on a model instance that instantiates the constrained model. 
 			The generic architecture can be parametrized at two different variation points. Different
 			models and their meta-models can be bound to VP1, different model instances can be bound
 			to VP2.	(b): UML-Example for layers M2, M1 and M0. VP1 is bound to the UML meta-model (MOF), 
 			VP2 is bound to Java. (c): EMF-Example for layers M3, M2 and M1. VP1 is bound to EMF Ecore,
-			VP2 is bound to Ecore-based models.}
-			\label{fig:genericlayers}
-		\end{figure}
+			VP2 is bound to Ecore-based models.
 
 	To differentiate between meta-models, models and runtime objects, the OMG introduced 
 	the \textit{MOF Four Layer Metadata Architecture}, that locates the meta-model, 
