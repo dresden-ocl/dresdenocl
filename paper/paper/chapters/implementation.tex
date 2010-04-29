@@ -43,7 +43,7 @@
 
 	To enable the definition of OCL constraints for various modelling languages,
 	DresdenOCL provides a set of common interfaces abstracting structures
-	that are required to navigate and query models.
+	that are required to navigate and query object-oriented models.
 	These interfaces -- called \emph{Model Types} (or \emph{Pivot Model}) \cite{braeuerOCL07} -- standardize
 	the basic	concepts such as types, properties, operations and parameters
 	that bind OCL constraints to a concrete modelling language (cf. Fig. \ref{fig:coreconcepts}).
@@ -56,15 +56,15 @@
 	It contains individual adapters that map concepts of the modelling
 	language to corresponding artefacts of the model types. E.g., the UML
 	meta-model concept \texttt{UMLClass} is adapted to the model type concept
-	\texttt{Type} \note{Christian: Again, figure needed. Claas: Fig 2 sufficient?}. 
+	\texttt{Type}. 
 	Furthermore, the model adapter component has to provide a factory to create 
 	adapters on demand resulting in an \textit{Adapted Model} (cf. Fig.
 	\ref{fig:modeladaptation}, Mn+1 and Mn layer).
 	The adapters are only created for model elements that are required and
-	existing adapters are cached. Thus, \change{we avoid unnecessary and expensive adaptation}{unnecessary and expensive adaptation is avoided}, 
+	existing adapters are cached. Thus, unnecessary and expensive adaptation is avoided, 
 	especially when working on large models of which only parts are constrained using OCL.
-	The presented architecture provides a generic and easy variation of multiple meta-models
-	and corresponding models in an OCL infrastructure (VP1).
+% 	The presented architecture provides a generic and easy variation of multiple meta-models
+% 	and corresponding models in an OCL infrastructure (VP1).
 
 
 \subsection{Model Instance Adaptation}
@@ -96,8 +96,7 @@
 	
 	Each kind of model instance that shall be connected with DresdenOCL is
 	adapted via a \emph{Model Instance Adapter} component (cf. Fig.
-	\ref{fig:modeladaptation}, Mn layer). Similar to the model adapter, 
-	the model instance adapter component contains adapters that map elements of a
+	\ref{fig:modeladaptation}, Mn layer). The model instance adapter component contains adapters that map elements of a
 	concrete model instance to model instance types and has to
 	provide a factory that creates \emph{Model Object Adapters} for the runtime 
 	objects of the adapted model instance (cf. Fig. \ref{fig:modeladaptation}, Mn-1 layer). 
