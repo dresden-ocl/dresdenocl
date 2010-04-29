@@ -1,7 +1,7 @@
 \section{Case Studies}
 
-In this section we present three case studies to demonstrate the power of the presented
-generic adaptation architecture.
+In this section we present three case studies to demonstrate the \change{power}{benefits} of the presented
+\change{generic adaptation architecture}{variability}.
 
 
 \subsection{The Royal and Loyal System Example}
@@ -32,7 +32,7 @@ adapts the required meta-model elements from the MDT UML2 meta-model to the mode
 types of DresdenOCL at the M2 layer and creates instances of these adapters for all UML models 
 loaded into DresdenOCL. 
 Consequently, the royal and loyal class diagram was adapted as a model at the M1 layer.
-For the Java implementation, a \textit{Java Model Instance Adapter} component was implemented,
+\note{Michael: The next sentence is kind of confusing, as we are on model instance layer and speak of Java meta-models... Isn't java.lang.reflect rather the model of Java?} For the Java implementation, a \textit{Java Model Instance Adapter} component was implemented,
 that adapts the Java meta-model elements (classes of the package \texttt{java.lang.reflect})
 to the model instance types and creates instances of these adapters for all Java objects
 loaded into DresdenOCL. Consequently, the objects of the royal and loyal Java implementation
@@ -61,7 +61,7 @@ this SEPA messages. We implemented an XSD model and an XML model instance adapta
 for DresdenOCL and used the XSD and XML files that are 
 provided with an online demo of the Nomos service for \textit{Pain.008.001.01} SEPA 
 messages.\footnote{http://www.nomos-software.com/demo.html}
-We took the about 120 constrains provided by the demo to test our adaptation. 
+About 120 constrains that are provided by the demo were used to test our adaptation mechanism. 
 
 \begin{figure}[!t]
 	\centering
@@ -80,7 +80,7 @@ adapts the required meta-model elements from the XSD meta-model to the model
 types of DresdenOCL at the M2 layer and creates instances of these adapters for all XML schemas 
 loaded into DresdenOCL. 
 Consequently, the \textit{Pain.008.001.01} XML schema was adapted as a model at the M1 layer.
-For the XML instances, an \textit{XML Instance Adapter} component was implemented,
+\note{Michael: again: model instance, but speak of XML meta-model} For the XML instances, an \textit{XML Instance Adapter} component was implemented,
 that adapts the XML meta-model elements (mainly the class \texttt{org.w3c.dom.Node})
 to the model instance types and creates instances of these adapters for all XML node instances
 loaded into DresdenOCL. Consequently, the nodes of the Pain.008.001.01 XML messages
@@ -95,7 +95,7 @@ constraints on XML files as well. The OCL2 Interpreter had not to be modified fo
 \subsection{The OCL2.2 Standard Library}
 The last case study depicts the ability to load different model instances of one model 
 in order to check for inconsistencies between both instances. In this example we 
-checked WFRs for the OCL standard library of DresdenOCL. 
+checked Well-Formedness Rules (WFRs) for the OCL standard library of DresdenOCL. 
 DresdenOCL's standard library is explicitly modelled as 
 an instance of the model types, describing predefined OCL types like \texttt{Integer}, 
 \texttt{OclAny} or \texttt{Sequence} and their associated operations. 
@@ -118,7 +118,7 @@ are defined in the current OCL standard.
 \begin{figure}[!t]
 	\centering
 		\includegraphics[width=0.60\textwidth]{figures/casestudy03.pdf}
-	\caption{In the standard library case study, VP1 is bound to the \textit{EMF Ecore Model Adapter}. 
+	\caption{\note{Michael: I know that this is not correct, but we should replace essentialOcl with model types for consistency} In the standard library case study, VP1 is bound to the \textit{EMF Ecore Model Adapter}. 
 	  Consequently, the EssentialOcl ecore model is adapted as a model at M2.
 	  VP2 is bound to the \textit{XMI Model Instance Adapter} and thus, each element of the modelled Standard Library
 	  instance is adapted as a model instance object at M1.}
@@ -130,7 +130,7 @@ To parse the WFRs in DresdenOCL, an \textit{EMF Ecore Model Adapter} component w
 adapts the required meta-model elements from the ecore meta-model (EMOF) to the model 
 types of DresdenOCL at the M3 layer and creates instances of these adapters for all ecore-based
 meta-models loaded into DresdenOCL. 
-Consequently, the \textit{EssentialOCL} meta-model was adapted as a model at the M2 layer.
+Consequently, the \note{Michael: Model Types?} \textit{EssentialOCL} meta-model was adapted as a model at the M2 layer.
 For the standard library instance, an \textit{XMI Model Instance Adapter} component was implemented,
 that adapts the model istances of ecore-based meta-models (stored as XMI-files)
 to the model instance types and creates instances of these adapters for all elements of these models
@@ -150,5 +150,7 @@ implemented in the near future.
 
 \subsection{Future Case Studies}
 
+\note{Michael: We claim that we have independent model and model instance and now we propose 
+a tight coupling between those?}
 For future case studies we plan to adapt meta-model and model implementations for web services (Meta-Model: WSDL, Model Implementation: \note{TODO}), static programming languages such as C\# (Meta-Model: UML2, Model Implementation: C\#), data bases (Meta-Model: SQL-DDL, Model Implementation: SQL). 
 
