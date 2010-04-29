@@ -1,23 +1,25 @@
 \section{Implementation}
 
-	In this section we discuss the suggested solution to provide a \emph{Generic Adaptation Architecture} for 
-	meta-model, model and model instance independent OCL interpretation. First, we present the solution addressing
-	the first variation point of an OCL infrastructure (VP1) to
-	adapt	various meta-models and models summarized as \emph{Model Adaptation}. Afterwards, the approach is \change{moved}{transposed/shifted} 
-	from the meta-model (Mn+1) to the model (Mn) layer to address the second variation point (VP2) to support 
-	generic \emph{Model Instance Adaptation} as well.
+	In this section we discuss the implementation of a \emph{Generic Adaptation
+	Architecture} to realize the
+	variation points identified in the previous section. First, we present
+	\emph{Model Adaptation} to address VP1. Afterwards, we dicsuss how \emph{Model
+	Instance Adaptation} realises the second variation point (VP2).
 	
 	\begin{figure}[!t]
 			\centering
 				\includegraphics[width=0.80\textwidth]{figures/coreconcepts.pdf}
-			\caption{The core concepts of the \emph{Model Types} and \emph{Model Instance Types}:
-			Each \emph{Model} has a root \emph{Namespace} that contains a set of nested Namespaces and 
-			a set of \emph{Types}. Each Type has a set of \emph{Operations} 
-			and \emph{Properties}. 
-			Each \emph{Model Instance} has a set of \emph{Model Instance Elements}. Each Model Instance
-			Element has exactly one Type and provides 
-			operations to reflect on this Type. \emph{Model Instance Objects} provide further reflective 
-			operations to get properties and to invoke operations.}
+			\caption{
+			Interfaces for model and model instance adaptation
+% 			The core concepts of the \emph{Model Types} and \emph{Model Instance Types}:
+% 			Each \emph{Model} has a root \emph{Namespace} that contains a set of nested Namespaces and 
+% 			a set of \emph{Types}. Each Type has a set of \emph{Operations} 
+% 			and \emph{Properties}. 
+% 			Each \emph{Model Instance} has a set of \emph{Model Instance Elements}. Each Model Instance
+% 			Element has exactly one Type and provides 
+% 			operations to reflect on this Type. \emph{Model Instance Objects} provide further reflective 
+% 			operations to get properties and to invoke operations.
+			}
 			\label{fig:coreconcepts}
 		\end{figure}
 
@@ -26,14 +28,16 @@
 	\begin{figure}[!t]
 			\centering
 				\includegraphics[width=1.00\textwidth]{figures/modeladaptation.pdf}
-			\caption{The \emph{Generic Adaptation Architecture} of DresdenOCL: At the Mn+1 layer, meta-models are adapted
-			to the model types (VP1). The model adapter component contains these adapters and is responsible 
-			to instantiate them to adapt models of the meta-model. 
-			At the Mn layer, model implementation types are adapted (VP2). The model instance adapter component
-			contains these adapters and is responsible to instantiate them to adapt model instance objects. 
-			The OCL standard library implements the logic to evaluate operations defined on OCL types. Other 
-			requests such as operation invocations or property requests on adapted objects are delegated 
-			via the interfaces of the model implementation type model.}
+			\caption{The \emph{Generic Adaptation Architecture} of DresdenOCL
+% 			: At the Mn+1 layer, meta-models are adapted
+% 			to the model types (VP1). The model adapter component contains these adapters and is responsible 
+% 			to instantiate them to adapt models of the meta-model. 
+% 			At the Mn layer, model implementation types are adapted (VP2). The model instance adapter component
+% 			contains these adapters and is responsible to instantiate them to adapt model instance objects. 
+% 			The OCL standard library implements the logic to evaluate operations defined on OCL types. Other 
+% 			requests such as operation invocations or property requests on adapted objects are delegated 
+% 			via the interfaces of the model implementation type model.
+			}
 			\label{fig:modeladaptation}
 		\end{figure}
 
@@ -65,22 +69,21 @@
 
 \subsection{Model Instance Adaptation}
 	
-	The presented abstraction of model types to support various models
-	and meta-models can now be shifted and extended to
-	solve similar problems when working with multiple model instantiations. The 
-	solution addressing the second variation point (VP2) for a generic adaptation
-	architecture of an OCL infrastructure is presented here.
+% 	The presented abstraction of model types to support various models
+% 	and meta-models can now be shifted and extended to
+% 	solve similar problems when working with multiple model instantiations. 
+	To realise variation point (VP2), our Generic Adaptation Architecture
+	re-applies the adaptation pattern for model instance adaptation.
+	Similar to the adaptation of different models, we hide model
+	instances behind
+	interfaces. This enables the reuse of the same OCL interpreter for the dynamic
+	evaluation of OCL constraints on model instance in various implementation
+	infrastructures. 
 	
-	Similar to the adaptation of different meta-models and models, it is
-	useful to hide different model implementations
-	behind \remove{standardised} interfaces. \change{This enables the
-	reuse of the same OCL2 interpreter for the dynamic
-	evaluation of OCL constraints on model instance elements in various model
-	instantiations}{As an OCL interpreter only 
-	accesses these interfaces, it can evaluate various model and model instance 
-	combinations}. To provide means for model
-	instance adaptation, we introduced the \emph{Model Instance
-	Types}. \note{Michael: I don't get the next sentence} The model instance types are different
+	\note{What is the difference between a model instance type and a
+	modelInstanceElement? Confusing. Revise and check for overlaps with previous
+	sect.} To provide means for model instance adaptation, we introduced the
+	\emph{Model Instance Types}. \note{Michael: I don't get the next sentence} The model instance types are different
 	interfaces for instances of standard types in OCL such as primitive types, 
 	collections and objects (cf. Fig. \ref{fig:coreconcepts}). 
 	All these	interfaces inherit a common interface \texttt{ModelInstanceElement}. The most 
@@ -101,9 +104,14 @@
 	Like the model adapter, the model instance adapter also 
 	creates adapters for objects on demand. Adapted objects are cached to
 	improve the performance and to avoid phenomena like \emph{Object
-	Schizophrenia} \cite{assmann:isc}.\note{Claas: Reference Okay?} Due \add{to} the introduction of a common set of model
-	instance types it is possible to easily reuse the same OCL interpreter
-	for various kinds of model instances. Thus, VP2 can be completely addressed
-	by the presented generic adapter architecture.
+	Schizophrenia} \cite{assmann:isc}.\note{Claas: Reference Okay? Christian:
+	Didn't florian send the original source? Always use the most concrete you know}
+	
+	% said a few times before 
+	%
+	%Due to the introduction of a common set of model instance types it is possible
+	%to easily reuse the same OCL interpreter for various kinds of model
+	%instances. Thus, VP2 can be completely addressed by the presented generic
+	%adapter architecture.
 
 
