@@ -1,0 +1,110 @@
+\begin{thebibliography}{10}
+
+\bibitem{spec:OCL2-2}
+OMG:
+\newblock Object Constraint Language, Version 2.2.
+\newblock Object Management Group (OMG), Needham (February 2010)
+
+\bibitem{spec:UML2-2}
+OMG:
+\newblock Unified Modeling Language\texttrademark, OMG Available Specification,
+  Version 2.2.
+\newblock Object Management Group (OMG), Needham (February 2009)
+
+\bibitem{braeuerOCL07}
+Bräuer, M., Demuth, B.:
+\newblock Model-Level Integration of the OCL Standard Library Using a Pivot
+  Model with Generics Support.
+\newblock In Akehurst, D.H., Gogolla, M., Zschaler, S., eds.: Ocl4All -
+  Modelling Systems with OCL. Volume~9 of ECAST., Technische Universität Berlin
+  (2008)
+
+\bibitem{demuthRGWS09}
+Demuth, B., Wilke, C.:
+\newblock Model and Object Verification by Using Dresden OCL.
+\newblock In: Proceedings of the Russian-German Workshop ``Innovation
+  Information Technologies: Theory and Practice'', July 25-31, Ufa, Russia,
+  2009, Ufa State Aviation Technical University (2009)
+
+\bibitem{WWW:dresdenOCL}
+Dresden OCL Toolkit.
+\newblock \url{http://dresden-ocl.sourceforge.net/}
+
+\bibitem{maesOOPSLA87}
+Maes, P.:
+\newblock Concepts and Experiments in Computational Reflection.
+\newblock In: Proceedings of OOPSLA'87. Volume~22 of ACM SIGPLAN Notices., New
+  York, ACM Press (October 1987)  147--155
+
+\bibitem{assmann:isc}
+Aßmann, U.:
+\newblock Invasive Software Composition. 2nd edn.
+\newblock Springer Verlag, Heidelberg (2003)
+
+\bibitem{warmer:ocl}
+Warmer, J., Kleppe, A.:
+\newblock The Object Constraint Language - Getting Your Models Ready for MDA.
+  2nd edn.
+\newblock Pearson Education Inc., Boston (2003)
+
+\bibitem{WWW:MDT}
+Eclipse Model Development Tools.
+\newblock \url{http://www.eclipse.org/modeling/mdt/}
+
+\bibitem{spec:UNIFI}
+ISO:
+\newblock Payments Standards - Initiation - UNIFI (ISO 20022) Message
+  Definition Report.
+\newblock International Organization for Standardization (ISO), Geneva (October
+  2006)
+
+\bibitem{spec:EPC}
+EPC:
+\newblock SEPA Business-To-Business Direct Debit Scheme Customer-To-Bank
+  Implementation Guidelines, Version 1.3.
+\newblock Number EPC131-08. European Payments Council (EPC), Brussels (October
+  2009)
+
+\bibitem{WWW:EBA}
+Euro Banking Association (EBA).
+\newblock \url{https://www.abe-eba.eu/}
+
+\bibitem{gamma:dp}
+Gamma, E., Helm, R., Johnson, R., Vlissides, J.:
+\newblock Design Patterns - Elements of Reusable Object-Oriented Software. 2nd
+  edn.
+\newblock Addison-Wesley Professional, Indianapolis (1995)
+
+\bibitem{gogolla2007use}
+Gogolla, M., Büttner, F., Richters, M.:
+\newblock {USE: A UML-based Specification Environment for Validating UML and
+  OCL}.
+\newblock Science of Computer Programming \textbf{69}(1-3) (2007)  27--34
+
+\bibitem{WWW:OCLE}
+OCLE2.0 - Object Constraint Language Environment.
+\newblock \url{http://lci.cs.ubbcluj.ro/ocle/}
+
+\bibitem{WWW:MIP}
+MIP OCL Parser (MIP MDA Tools).
+\newblock \url{http://mda.cloudexp.com/}
+
+\bibitem{akehurst2003ocl}
+Akehurst, D., Patrascoiu, O.:
+\newblock {Ocl 2.0-Implementing the Standard for Multiple Metamodels}.
+\newblock In: OCL2.0 - "Industry standard or scientific playground?" -
+  Proceedings of the UML'03 workshop, Citeseer (2003)  19--25
+
+\bibitem{kolovos2008detecting}
+Kolovos, D., Paige, R., Polack, F.:
+\newblock {Detecting and Repairing Inconsistencies across Heterogeneous
+  Models}.
+\newblock In: Proceedings of the 2008 International Conference on Software
+  Testing, Verification, and Validation, IEEE Computer Society (2008)  356--364
+
+\bibitem{damus:EclipseCon08}
+Damus, C.W. MDT OCL Goes Generic - Introduction to OCL and Study of the Generic
+  Metamodel and API.
+\newblock Slides of Presentation at the EclipseCon 2008 (2008)
+
+\end{thebibliography}
