@@ -1,32 +1,35 @@
 \section{Case Studies}
 
-In this section we present three case studies to demonstrate the \change{power}{benefits} of the presented
-\change{generic adaptation architecture}{variability}.
+In this section we present three case studies to demonstrate the benefits of our
+\emph{Generic Adaptation Architecture}.
 
 
 \subsection{The Royal and Loyal System Example}
 
 As a first case study, we modelled and implemented the \textit{Royal and Loyal System Example} 
-as defined in \cite{warmer:ocl}. The case study was designed by \textsc{Warmer and Kleppe} to explain 
-the Object Constraint Language and can be used to test the interpretation of
-various kinds of OCL expressions. The case study consists of 13 UML classes (including inheritance and enumeration types)
-and 130 constraints. We modelled the royal and loyal system using the UML2 meta-model of the
+as defined in \cite{warmer:ocl}. The case study was originally designed by \textsc{Warmer
+and Kleppe} to teach the Object Constraint Language. It consists of
+13 UML classes (including inheritance and enumeration types) and 130 constraints. 
+We specify the royal and loyal system using UML2 (model) of the
 Eclipse Model Development Tools (MDT) project \cite{WWW:MDT}.
-The model was implemented and instantiated in Java. Consequently
-constraints were evaluated on Java objects.
+The model was implemented and instantiated in Java (model instance).
+Consequently constraints were evaluated on Java objects.
 
 \begin{figure}[!t]
 	\centering
 		\includegraphics[width=0.60\textwidth]{figures/casestudy01.pdf}
-	\caption{In the Royal and Loyal case study, VP1 is bound to the \textit{MDT UML2 Model Adapter}. 
-	  Consequently, the Royal and Loyal UML class diagram is adapted as a model at M1.
-	  VP2 is bound to the \textit{Java Model Instance Adapter} and thus, each object of the Java 
-	  implementation is adapted as a model instance object at M0.}
+	\caption{
+	Adapters used in the Royals and Loyals case study
+% 	In the Royal and Loyal case study, VP1 is bound to the \textit{MDT UML2 Model Adapter}. 
+% 	  Consequently, the Royal and Loyal UML class diagram is adapted as a model at M1.
+% 	  VP2 is bound to the \textit{Java Model Instance Adapter} and thus, each object of the Java 
+% 	  implementation is adapted as a model instance object at M0.
+	  }
 	\label{fig:casestudy01}
 \end{figure}
 
-The required adaptations for the royal and loyal case study are shown in Fig. \ref{fig:casestudy01}.
-To parse the Royal and Loyal constraints
+The adpaters required for the royal and loyal case study are shown in Fig.
+\ref{fig:casestudy01}. To parse the Royal and Loyal constraints
 in DresdenOCL, a \textit{UML2 Model Adapter} component was implemented, that 
 adapts the required meta-model elements from the MDT UML2 meta-model to the model 
 types of DresdenOCL at the M2 layer and creates instances of these adapters for all UML models 
@@ -47,21 +50,21 @@ support the common interpretation of OCL constraints defined on UML classes for 
 
 \subsection{SEPA Business Rules}
 
-As a second case study we tried to adapt our generic adaptation architecture to the
-area of XML-structured data. Thus, we decided to interpret OCL consistency constraints
-defined on an XML schema for an XML instance of this schema in a real, economy-driven
-scenario. The company \textsc{Nomos Software} provides a service to check business rules on
-financial \textit{Single Euro Payments Area (SEPA)} messages that are 
+In our second case study we interpret OCL consistency constraints
+defined on an XML schema (model) for an XML documents (model instance)
+conforming to this schema. The \textsc{Nomos Software} company provides a
+service to check business rules on financial \textit{Single Euro Payments Area (SEPA)} messages that are 
 used in financial transactions of bank offices as defined by the \textit{European
 Payment Council (EPC)}, \textit{ISO20022}, and the \textit{Euro Banking Association (EBA)} \cite{spec:UNIFI,spec:EPC,WWW:EBA}. 
 SEPA messages are described and shipped as XML documents.
 \textsc{Nomos Software} uses OCL constraints defined on XML schemas
 to validate XML documents against a set of business rules that constrain the consistency of
-these SEPA messages. We implemented an XSD model and an XML model instance adaptation 
-for DresdenOCL and used the XSD and XML files that are 
-provided with an online demo of the Nomos service for \textit{Pain.008.001.01} SEPA 
-messages.\footnote{http://www.nomos-software.com/demo.html}
-About 120 constrains that are provided by the demo were used to test our adaptation mechanism. 
+these SEPA messages. We implemented an XSD model adapter and an XML model
+instance adapter for DresdenOCL to evaluate these constraints on the XSD and
+XML files that are provided with an online demo of the Nomos service for \textit{Pain.008.001.01} 
+SEPA messages.\footnote{http://www.nomos-software.com/demo.html}
+About 120 constrains that are provided by the demo were used to test our
+implementation.
 
 \begin{figure}[!t]
 	\centering
