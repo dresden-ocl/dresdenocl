@@ -1,12 +1,12 @@
 \section{Implementation}
 \label{sec:implementation}
-	In this section we discuss the implementation of a \emph{Generic Adaptation
-	Architecture} to realize the
+	In this section we discuss the implementation of a generic adaptation
+	achitecture to realise the
 	variation points identified in the previous section. First, we present
-	\emph{Model Adaptation} to address VP1. Afterwards, we dicsuss how \emph{Model
-	Instance Adaptation} realises the second variation point (VP2).
+	\emph{Model Adaptation} to address variation point VP1. Afterwards, we discuss how \emph{Model
+	Instance Adaptation} enables variation point VP2.
 	
-	\begin{figure}[!t]
+	\begin{figure}[p]
 			\centering
 				\includegraphics[width=0.80\textwidth]{figures/coreconcepts.pdf}
 			\caption{
@@ -21,16 +21,13 @@
 % 			operations to get properties and to invoke operations.
 			}
 			\label{fig:coreconcepts}
-		\end{figure}
-
-\subsection{Model Adaptation}
-
-	\begin{figure}[!t]
-			\centering
+			
+			\vspace{4.0em}
+			
 				\includegraphics[width=1.00\textwidth]{figures/modeladaptation.pdf}
 			\caption{The \emph{Generic Adaptation Architecture} of DresdenOCL
 % 			: At the Mn+1 layer, meta-models are adapted
-% 			to the model types (VP1). The model adapter component contains these adapters and is responsible 
+% 			to the Model Types (VP1). The model adapter component contains these adapters and is responsible 
 % 			to instantiate them to adapt models of the meta-model. 
 % 			At the Mn layer, model implementation types are adapted (VP2). The model instance adapter component
 % 			contains these adapters and is responsible to instantiate them to adapt model instance objects. 
@@ -38,69 +35,63 @@
 % 			requests such as operation invocations or property requests on adapted objects are delegated 
 % 			via the interfaces of the model implementation type model.
 			}
-			\label{fig:modeladaptation}
+			\label{fig:modeladaptation}			
 		\end{figure}
 
-	To enable the definition of OCL constraints for various modelling languages,
+\subsection{Model Adaptation (VP1)}
+
+	In order to define OCL constraints for various models,
 	DresdenOCL provides a set of common interfaces abstracting structures
-	that are required to navigate and query object-oriented models.
-	These interfaces -- called \emph{Model Types} (or \emph{Pivot Model}) \cite{braeuerOCL07} -- standardize
-	the basic	concepts such as types, properties, operations and parameters
-	that bind OCL constraints to a concrete modelling language (cf. Fig. \ref{fig:coreconcepts}).
-	DresdenOCL only	uses these concepts to parse and statically analyse OCL constraints, 
-	e.g., the OCL2 parser	invokes the operation \texttt{getType()} to access the \texttt{Type} of 
-	an \texttt{Operation} or \texttt{Property}.
+	that are required to navigate and query models.
+	These interfaces -- called \emph{Model Types} (or \emph{Pivot Model}) \cite{braeuerOCL07} -- define
+	the basic	concepts such as \texttt{Types}, \texttt{Properties}, \texttt{Operations} and \texttt{Parameters}
+	that bind OCL constraints to a concrete model (cf. Fig. \ref{fig:coreconcepts}).
+	DresdenOCL uses these concepts to parse and statically analyse OCL constraints, 
+	e.g., the OCL2 parser	can determine the \texttt{Type} of OCL expressions.
 	
-	For every \remove{meta-}model that shall be connected with DresdenOCL, 
+	For every model that shall be connected with DresdenOCL, 
 	a \emph{Model Adapter} component has to be implemented (cf. Fig. \ref{fig:modeladaptation}, Mn+1 layer). 
-	It contains individual adapters that map concepts of the modelling
-	language to corresponding artefacts of the model types. E.g., the UML
+	It contains individual adapters that map concepts of the model to corresponding artefacts of the Model Types. E.g., the UML
 	meta-model concept \texttt{UMLClass} is adapted to the model type concept
 	\texttt{Type}. 
-	Furthermore, the model adapter component has to provide a factory to create 
+	Furthermore, the model adapter component has to create 
 	adapters on demand resulting in an \textit{Adapted Model} (cf. Fig.
-	\ref{fig:modeladaptation}, Mn+1 and Mn layer).
+	\ref{fig:modeladaptation}, Mn layer).
 	The adapters are only created for model elements that are required and
 	existing adapters are cached. Thus, unnecessary and expensive adaptation is avoided, 
-	especially when working on large models of which only parts are constrained using OCL.
+	especially when working on large models of which only parts are constrained.
 % 	The presented architecture provides a generic and easy variation of multiple meta-models
 % 	and corresponding models in an OCL infrastructure (VP1).
 
 
-\subsection{Model Instance Adaptation}
+\subsection{Model Instance Adaptation (VP2)}
 	
-% 	The presented abstraction of model types to support various models
+% 	The presented abstraction of Model Types to support various models
 % 	and meta-models can now be shifted and extended to
 % 	solve similar problems when working with multiple model instantiations. 
-	To realise variation point (VP2), our Generic Adaptation Architecture
-	re-applies the adaptation pattern for model instance adaptation.
-	Similar to the adaptation of different models, we hide model
-	instances behind
+	In our generic adaptation architecture we applied the same principles for model instances as those are also hidden behind a set of common
 	interfaces. This enables the reuse of the same OCL interpreter for the dynamic
-	evaluation of OCL constraints on model instance in various implementation
-	infrastructures. 
+	evaluation of OCL constraints on model instances with various realisation techniques.
 	
-	\note{What is the difference between a model instance type and a
-	modelInstanceElement? Confusing. Revise and check for overlaps with previous
-	sect.} To provide means for model instance adaptation, we introduced the
-	\emph{Model Instance Types}. \note{Michael: I don't get the next sentence} The model instance types are different
-	interfaces for instances of standard types in OCL such as primitive types, 
-	collections and objects (cf. Fig. \ref{fig:coreconcepts}). 
-	All these	interfaces inherit a common interface \texttt{ModelInstanceElement}. The most 
-	important difference between the model types and the model instance types
-	is that \texttt{ModelInstanceElements} provide a \emph{Reflection} \cite{maesOOPSLA87} mechanism whereas 
-	model type elements only allow to reason on relationship between concepts of
-	the same meta-level. During interpretation, the OCL2 interpreter uses these reflection mechanisms to
-	retrieve the \texttt{Type} of a \texttt{ModelInstanceElement}, access \texttt{Property}
+	To provide means for model instance adaptation, we introduced the
+	\emph{Model Instance Types}. The Model Instance Types are a set of \texttt{ModelInstanceElements}
+	representing instances of primitive types, 
+	collections and objects defined in the model (cf. Fig. \ref{fig:coreconcepts}). 
+	\note{Discuss the following sentence. Right or wrong? What about type matching?}
+  The most important difference between Model Types and Model Instance Types
+	is that Model Types abstract modelling concepts whereas Model Instance Types abstract 
+	reflection capabilities of different model instances (cf. Fig. \ref{fig:modeladaptation} Mn and Mn-1 layer).
+	During interpretation, the OCL2 interpreter uses the reflection mechanism to
+	retrieve the \texttt{Type} of a \texttt{ModelInstanceElement}, to access \texttt{Property}
 	values, or to invoke \texttt{Operations}.
 	
 	Each kind of model instance that shall be connected with DresdenOCL is
 	adapted via a \emph{Model Instance Adapter} component (cf. Fig.
 	\ref{fig:modeladaptation}, Mn layer). The model instance adapter component contains adapters that map elements of a
-	concrete model instance to model instance types and has to
-	provide a factory that creates \emph{Model Object Adapters} for the runtime 
+	concrete model instance to Model Instance Types and has to
+	create \emph{Model Object Adapters} for the runtime 
 	objects of the adapted model instance (cf. Fig. \ref{fig:modeladaptation}, Mn-1 layer). 
-	Like the model adapter, the model instance adapter also 
+	Like the model adapter component, the model instance adapter component also 
 	creates adapters for objects on demand. Adapted objects are cached to
 	improve the performance and to avoid phenomena like \emph{Object
 	Schizophrenia} \cite{assmann:isc}.\note{Claas: Reference Okay? Christian:
@@ -108,7 +99,7 @@
 	
 	% said a few times before 
 	%
-	%Due to the introduction of a common set of model instance types it is possible
+	%Due to the introduction of a common set of Model Instance Types it is possible
 	%to easily reuse the same OCL interpreter for various kinds of model
 	%instances. Thus, VP2 can be completely addressed by the presented generic
 	%adapter architecture.

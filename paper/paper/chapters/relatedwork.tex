@@ -9,7 +9,8 @@ to support variability in models and model instances:
 \item The \emph{USE} tool \cite{gogolla2007use} contributes an OCL simulator that can
 evaluate OCL constraints against model snapshots. It is bound to UML class, UML object and
 UML sequence diagrams and does not provide means for model or model instance
-adaptations.
+adaptations. Nevertheless, a case study proofed that it is possible to create snapshots
+from Java runtime objects that can be evaluated with USE \cite{occello:ICSTW08}.
 
 \item The \emph{OCLE} tool~\cite{WWW:OCLE} interprets OCL constraints on
 UML models. Furthermore, it provides a compiler to generate a Java
@@ -41,15 +42,13 @@ adaptation is possible while model instances are bound to EMF.
 \item A standard OCL interpreter for EMF is provided by \emph{MDT OCL}
 \cite{WWW:MDT}. It is also tightly integrated with EMF and supports 
 model adaptation for various EMF languages. The interpreter directly supports
-model instances represented in EMF. Its architecture is highly extensible
-and could be adapted to other implementation
-infrastructures using \emph{Java Generics} \cite{damus:EclipseCon08}. 
+model instances represented in EMF. MDT OCL's architecture is highly extensible
+and could be adapted to other model instances using \emph{Java Generics} \cite{damus:EclipseCon08}. 
 However, we are not aware of any such adaptations.
 
 \end{itemize}
 
 This analysis of related work shows that variability at model level is
 considered useful and has already been implemented in various OCL tools.
-Supporting variability at the model instance level--as suggested in this paper--is, 
-thus, a consequent continuation of our previous
-and other's related work.
+Supporting variability at the model instance level -- as suggested in this paper --  
+is a consequent continuation of our previous and other's related work.

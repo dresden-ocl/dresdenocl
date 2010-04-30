@@ -1,42 +1,41 @@
-\section{Challenges \change{in Generic}{of a Variable} OCL Infrastructure\remove{s}}
+\section{Lessons Learnt}
 \label{sec:lessons}
-\note{Michael: Is it a ``generic adapter architecture'' or do we have another name including ``variability''?}
+
   In this section we highlight some problems that occurred during the design
-  and implementation of our generic adapter architecture for an OCL infrastructure.
-  We also present some solutions to these challenges.
+  and implementation of our generic adaptation architecture for DresdenOCL.
+  We present our solutions to these challenges and possible improvements.
 
 	\paragraph{Type Matching}
-	As \remove{mentioned above, }models and model implementations are only loosely 
-	coupled\change{. M}{, m}odel instance elements must be matched to a model type
-	when they are imported into DresdenOCL. Currently, this type matching is realised by \change{simply 
-	matching the names of the types}{a simple type name match} (including the names of 
+	As models and model instances are only loosely 
+	coupled, model instance elements must be matched to a model type
+	when they are imported into DresdenOCL. Currently, this type matching is realised by a simple type name match (including the names of 
 	their enclosing namespaces where possible). E.g., the Java class \texttt{LoyaltyAccount} is
-	matched to the class \texttt{LoyaltyAccount} in the royal and loyal class diagram.
-	Often, this solution is error prone \note{Michael: this sounds a little bit exaggerated} and further information is hidden behind the adapters that could be 
+	matched to the UML class \texttt{LoyaltyAccount} in the royal and loyal class diagram.
+	This matching algorithm can be rather complex and often information is hidden inside the adapters that could be 
 	used to improve the matching. E.g., when adapting an instance of an EMF 
-	Ecore model, one could use the reflection mechanisms provided by Ecore to
-	retrieve the types of EObjects. We plan to improve our matching
+	Ecore model, one could use the \emph{Generator Model} provided by Ecore to
+	retrieve further type matching information. We plan to improve this process
 	that is currently scattered over multiple classes of each model instance 
-	adapter component \remove{and }by introducing type matching strategies that 
+	adapter component by introducing type matching strategies that 
 	can be implemented using the \emph{Chain of Responsibility} 
 	pattern \cite{gamma:dp}. The chain could start by trying to match the 
 	types using an implementation specific matcher and end by trying to 
 	simply match the type names as currently done.
 	
 	\paragraph{Element Unwrapping}
-	Another problem when using adapters for model instance types 
+	Another problem when using adapters for Model Instance Types 
 	is the unwrapping mechanism of adapted elements when invoking operations 
 	on the \texttt{ModelInstanceElements}. E.g., to invoke an operation of a Java 
 	implementation we require \texttt{java.lang.Objects} as parameters instead of 
 	\texttt{ModelInstanceElements}. This unwrapping mechanism is easy 
-	where elements that have been adapted before are simply unwrapped 
+	for elements that have been adapted before, as they simply can be unwrapped 
 	again. Unfortunately, during interpretation of OCL constraints, 
 	new instances of primitive types or new collections can be created 
-	(e.g., when invoking the OCL operation \texttt{size() \add{on a collection}} that 
+	by the standard library (e.g., when invoking the OCL operation \texttt{size()} on a collection that 
 	returns an \texttt{Integer} instance). Thus, a 
 	model instance adapter has to provide operations to reconvert 
-	primitive types and collections to elements of the adapted model 
-	instances. In some cases this can become rather complicated because 
+	primitive types and collections into elements of the adapted model 
+	instances. In some cases this can become rather complicated as 
 	the adaptation between types of the instance and the model 
 	instance type interfaces has not to be bijective. For 
 	example, Java \texttt{ints} and \texttt{java.lang.Integers} are 
@@ -47,34 +46,34 @@
 	The unwrapping mechanism of an adapted instance 
 	can be considered as the most complicated and error-prone part 
 	of the complete model instance adaptation.
+	Fortunately, model instances providing only structural information do not
+	need this unwrapping mechanism as operations do not exist at all.
 
 	\paragraph{Automated Adapter Creation}
-	\remove{Adapting different types of meta-models, models, and model
-	instances enables the reuse of DrescenOCL for various combinations
-	of modelling and implementation languages.}
-	\change{Nevertheless, the}{The} adaptation process \add{of models and model 
-	instances} contains parts that are similar 
+	The adaptation process of models and model 
+	instances contains parts that are similar 
 	for each adaptation and thus can be automated.
 	To improve the model adaptation process, we developed a code generator 
-	for the adaptation of meta-models to the model type concepts. The code 
+	for the adaptation of model adapter components. The code 
 	generator requires an annotated meta-model describing
-	the relation of meta-model concepts to the model type concepts.
-	E.g., the UML2 meta-class \texttt{Classifier} is annotated as a \texttt{Type} concept. 
+	the relation of meta-model concepts to the Model Types (e.g., the UML2 meta-class
+	\texttt{Classifier} is annotated as a \texttt{Type}). 
 	The code generator generates the skeleton code for all required 
-	adapters and thus avoids manual implementation of these adapters. 
-	For the model instance types, such a code generator is currently 
-	missing but could be implemented as well.
+	adapters that has to be completed manually.
+	For the Model Instance Types, such a code generator is currently 
+	missing, but could be implemented as well.
 	
 	\paragraph{Adaptation Testing}
 	We developed two generic JUnit test suites, 
 	that can be used to test the adaptation of a model 
 	or model instance, respectively. 
-	The test suites are initialized with a model or model instance that
+	The test suites are initialised with a model or model instance that
 	contains all the adapted concepts that shall be tested.
 	The test suites then check if all required methods to 
-	retrieve \texttt{Types}, \texttt{Operations}, \texttt{Properties} etc. are implemented 
-	appropriately. These generic test suites helped us to ensure 
+	retrieve \texttt{Types}, \texttt{Operations}, \texttt{Properties} for the variation point VP1 are implemented appropriately.
+	The reflection mechanism provided by variation point VP2 is tested as well.
+	These generic test suites helped us to ensure 
 	that all existing adaptations behave in the same expected manner
 	and to easily detect wrong adaptations of some elements.
 	Furthermore, these test suites can be used to ensure the absence of specific
-	bugs in all adaptations if such a bug is detected in one of the adaptations by adding new test cases.
+	bugs in all adaptations by adding new test cases if such a bug is detected in one of the adaptations.
