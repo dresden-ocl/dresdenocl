@@ -1,19 +1,24 @@
 \section{Conclusion}
 \label{sec:conclusion}
-\begin{itemize}
-  \item Conclusion:
-  \begin{itemize}
-    \item exchangability
-    \item execution layer can be reused as well
-    \item less errors, only one implementation, well tested
-  \end{itemize}  
-\end{itemize}
 
-The most important difference between Model Types and Model Instance Types
-	is that Model Types abstract modelling concepts whereas Model Instance Types abstract 
-	reflection capabilities of different model instances.
+In this paper we presented an approach for an OCL interpreter that supports both model and model
+instance variability. We showed that various OCL infrastructures support model variability, whereas --
+to the best of our knowledge -- none of the existing OCL infrastructure supports full model instance
+variability. Our approach solves this lack by abstracting from domain-specific concepts 
+and by introducing well-defined interfaces for models
+their instances. By designing such a generic adaptation architecture, the same OCL interpreter has been applied to
+case studies located at different modelling layers and for different model realisations. Thus we 
+improved the reuse of the OCL interpreter and avoided new implementations of the OCL standard library
+for various different model instances. Three case studies proofed the feasibility of our approach.
 
-\section{Acknoledgements}
+Nevertheless, some task remain open for future work. In fact, we plan to improve our approach by
+solving the gaps mentioned in Sect. \ref{sec:lessons}. Furthermore, case studies or benchmarks 
+comparing our adaptive interpretative approach with generative approaches in respect to performance issues 
+remain open. We plan such analysis for future work and intend to compare the results of our interpreter with other
+interpreters or generative approaches such as Java code generation.
+
+
+\section{Acknowledgements}
 
 We want to thank Tricia Balfe of \textsc{Nomos Software} for providing data for the XML case study and for continuous feedback during adaptation of the case study.
 Furthermore, we'd like to thank all people that are or were involved into the DresdenOCL project.
