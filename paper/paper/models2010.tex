@@ -65,13 +65,15 @@ Software Technology Group
   Consequently, it is rather common to provide variability for OCL parsers to
   work with different modelling languages. 
   A second variability dimension relates to the
-  infrastructure that models are realised in. 
-  Current OCL interpreters do not support such variability as they are typically 
-  bound to a specific realisation technique like Java, Ecore, \note{CW: rephrase. But I don't know how.} or another
-  specific model repository. In this paper we propose a generic adaptation
-  architecture for OCL that hides models and \change{model}{their} instances 
-  behind well-defined interfaces. We present how the implementation of such an
-  architecture for DresdenOCL enables reuse of the same 
+  technical space that models are realised in. 
+  Current OCL interpreters do not support such variability as their implementation 
+  is typically bound to a specific technical space like Java,
+ Ecore, or a specific model
+ repository. In this paper we propose a generic adaptation architecture for OCL
+ that hides models and 
+% keep model instances to introduce terminology 
+ model instances behind well-defined
+ interfaces. We present how the implementation of such an architecture for DresdenOCL enables reuse of the same 
   OCL interpreter for various model realisation techniques. Finally, our approach is evaluated in three
   case studies defining and interpreting OCL constraints on multiple models
   and model instances.
