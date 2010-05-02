@@ -6,7 +6,7 @@
 	(OCL) \cite{spec:OCL2-2} has been developed as an extension of the Unified 
 	Modelling Language (UML) \cite{spec:UML2-2}\cite{warmer:ocl}. In recent years,
 	OCL advanced to a constraint language used for various object-oriented
-	modelling languages \cite{detaching} and meta-modelling languages like the Meta
+	modelling \remove{languages} and meta-modelling languages \cite{detaching} \change{like}{e.g.,} the Meta
 	Object Facility (MOF) \cite{UmlMof} or Ecore \cite{WWW:MDT}.
 
 	\change{In addition to the languages that OCL is combined with, a second variability
@@ -16,15 +16,15 @@
 	 Besides instances of constrained models stored in various model repositories
 	like MOFLON \cite{MOFLON}, Netbeans MDR~\cite{UmlMof}, or EMF~\cite{WWW:MDT},
 	they also can be realised using classic programming languages like
-	Java~\cite{demuthRGWS09}, or C\#~\cite{OCLCsharp}, database systems
-	like relational databases~\cite{OCLRelDB}, or XML~\cite{OCLXML}. 
+	Java~\cite{demuthRGWS09}, or C\#~\cite{OCLCsharp}, database systems\remove{
+	like relational databases}~\cite{OCLRelDB}, or XML~\cite{OCLXML}. 
 	
 	Although several OCL tools support \emph{variability at the model level}\remove{, i.e.
 	the modelling language used to specify constrained
 	models}~\cite{braeuerOCL07}\cite{akehurst2003ocl}, \emph{variability at the model
 	instance level}\remove{, i.e. the implementation infrastructure for model instances,} is not provided. 
 	For OCL compilers as presented in
-	\cite{UmlMof}, \cite{demuthRGWS09}, \cite{OCLCsharp}, or \cite{OCLRelDB} 
+	\cite{UmlMof,demuthRGWS09,OCLCsharp,OCLRelDB} 
 	such variability is not possible, as the code generated from OCL constraints 
 	needs to be	bound to the realisation technique used at model instance
 	level. 
@@ -33,7 +33,7 @@
 	In this paper we propose a \emph{Generic Adaptation Architecture} for OCL
 	interpreters that hides models and model instances behind well-defined
 	interfaces. This enables reuse of the complete OCL infrastructure including the OCL parser, 
-	standard library and interpreter for various kinds of models and model instances.
+	standard library and interpreter for various kinds of models and model instances \note{CW: repition of phrase: model and model instances}.
 	
 	The remainder of this paper is structured as follows. In
 	Sect.~\ref{sec:foundation} we analyse diverse applications for OCL and 

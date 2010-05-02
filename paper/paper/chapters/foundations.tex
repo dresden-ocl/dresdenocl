@@ -24,22 +24,24 @@ Model instances can be realised in
 a different \emph{Technological Space}~\cite{kurtev2002technological} than their model. Then, there are two model
 representations at the Mn layer: the constrained model and a \emph{Model Realisation} that can be obtained by a
 \emph{Reflection} \cite{smith1982procedural} mechanism of the 
-model instance. Thus, there has to be a matching of the model realisation to the constrained model.
+model instance. Thus, there has to be a matching of the model realisation to the constrained model (cf. Fig.~\ref{fig:genericlayers}, (a), Mn layer).
 
 Instances of this \emph{Generic Three Layer Architecture} are shown in Fig.~\ref{fig:genericlayers} 
 (b) and (c). The first example illustrates the use of a UML class diagram constrained with business
-rules for which model instance
-elements are Java objects. At the layer M1 a technical space bridge can be observed, as the Java
+rules for which \change{model instance
+elements are Java objects}{Java objects represent a model instance}. At the layer M1 a technical space bridge can be observed, as the Java
 classes correspond to the UML model. The second example depicts the usage of OCL for Well-Formedness
 Rules (WFRs). Here, the model is a domain-specific language modelled in Ecore (M2) for which WFRs are
 evaluated on domain-specific models (M1). In this case, the model and its realisation are identical.
 
 With the generic three layer architecture it is possible to combine various models and instances for
 constraint interpretation independently as depicted as a feature model in Fig.~\ref{fig:features}. 
-The feature selection has to ensure that model
-instances are located exactly one meta-layer below their model. In the feature model two variation
+\remove{The feature selection has to ensure that model
+instances are located exactly one meta-layer below their model.} In the feature model two variation
 points regarding OCL interpretation can be identified: constrained models (VP1) as well as
-model instances (VP2) can vary.
+model instances (VP2) can vary. \add{Thus, various combinations of models and instances are possible,
+as long as the
+instances are located exactly one meta-layer below their model.}
 
 	\begin{figure}[t]
 			\centering

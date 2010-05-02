@@ -1,13 +1,15 @@
 \section{Case Studies}
 \label{sec:caseStudies}
 In this section we present three case studies to demonstrate the benefits of our
-generic adaptation architecture.
+generic adaptation architecture. \add{The case studies use different kinds of models
+and model instances located at different layers of the MOF four layer metadata architecture
+to illustrate the variability of our approach.}
 
 
 \subsection{The Royal and Loyal System Example}
 
 As a first case study, we modelled and implemented the \textit{Royal and Loyal System Example} 
-as defined in \cite{warmer:ocl}. The case study originally was designed by \textsc{Warmer
+as defined in \cite{warmer:ocl}. \change{The case study originally}{This example} was designed by \textsc{Warmer
 and Kleppe} to teach the Object Constraint Language. It consists of
 13 UML classes (including inheritance and enumeration types) and 130 constraints. 
 We specified the royal and loyal system with a UML2 model (VP1) build with the
@@ -56,7 +58,7 @@ SEPA messages are described and shipped as XML documents.
 to validate XML documents against a set of business rules that ensure the consistency of
 SEPA messages. We implemented an \emph{XSD Model Adapter} component and an \emph{XML model
 Instance Adapter} component for DresdenOCL to evaluate about 120 constraints that are provided 
-with the online demo.\footnote{http://www.nomos-software.com/demo.html}
+with the online demo.\footnote{http://www.nomos-software.com/demo.html}\note{Claas: Finally, we have to remove the note package to provide correct footnote numbers again.}
 
 \begin{figure}[!t]
 	\centering
@@ -72,12 +74,12 @@ with the online demo.\footnote{http://www.nomos-software.com/demo.html}
 
 The adapter required for the SEPA case study are shown in Fig.
 \ref{fig:casestudy02}. To parse the SEPA constraints
-into DresdenOCL, an \textit{XSD Model Adapter} component was implemented that 
+into DresdenOCL, \change{an}{the} \textit{XSD Model Adapter} component \remove{was implemented that} 
 adapts required concepts of the XSD meta-model to the Model 
 Types of DresdenOCL at the M2 layer. 
 Consequently, the \textit{SEPA} XML schema was adapted as a model at the M1 layer.
-For the XML
-documents, an \textit{XML Instance Adapter} component was implemented that
+\change{For the XML
+documents, an}{The} \textit{XML Instance Adapter} component \remove{was implemented that}
 adapts the XML model elements (mainly the class \texttt{org.w3c.dom.Node}) to the Model Instance Types. 
 Thus, the nodes of the SEPA messages
 were adapted as \texttt{ModelInstanceElements} in DresdenOCL at the M0 layer.
@@ -98,7 +100,7 @@ constraints on XML files as well. The OCL2 interpreter had not to be modified fo
 \end{figure}
 
 The last case study depicts the ability to load different model instances of one model 
-in order to check for inconsistencies between both instances. In this example we 
+in order to check for inconsistencies between \change{both}{these} instances. In this example we 
 checked Well-Formedness Rules (WFRs) for the OCL standard library of DresdenOCL. 
 DresdenOCL's standard library is explicitly modelled as 
 an instance of the Model Types, describing predefined OCL types like \texttt{Integer}, 
@@ -111,7 +113,7 @@ current OCL specification \cite{spec:OCL2-2}.
 
 Although modelling the standard library leads to great flexibility, the standard library 
 still needs an implementation that provides its dynamic semantics. 
-This implementation is realised in Java. As there is no code generator for the Model Types, this can lead to inconsistencies between 
+This implementation is realised in Java. As there is no code generator for the Model Types, \change{this}{the manual implementation} can lead to inconsistencies between 
 the modelled standard library and the according Java implementation.
 We propose to use OCL to check that all modelled types have an equivalent Java 
 implementation and all modelled operations are also present in the Java interfaces.
