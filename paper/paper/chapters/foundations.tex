@@ -1,15 +1,40 @@
 \section{Foundations}
 \label{sec:foundation}
+\note{needs intro now}
+\subsection{The Generic Three Layer Architecture}
+% not needed here
+\remove{In the introduction section, different use cases for the definition of
+OCL constraints on different models and meta-models have been depicted. }
 
-In the introduction section, different use cases for the definition of OCL constraints on different
-models and meta-models have been depicted. As identified in \cite{demuthRGWS09}, OCL evaluation
-always requires three meta levels of the \emph{MOF Four Layer Metadata Architecture} \cite{spec:MOF1-4}. OCL can 
-be considered an extension of a modelling language. Thus, its
-abstract syntax must extend a meta-model that defines types, navigable properties, and operations
-(cf. Fig.~\ref{fig:genericlayers}, (a), Mn+1 layer). This extension allows the definition of
-OCL constraints on models of this meta-model (Mn layer). 
-During the evaluation of these constraints, an OCL interpreter has to query model
-instance elements for their properties or invoke operations on them (Mn-1 layer). 
+As \change{identified}{discussed} in \cite{demuthRGWS09}, OCL evaluation
+always \change{requires}{involves} three adjacent layers of the \emph{MOF Four Layer Metadata
+Architecture} \cite{spec:MOF1-4 }. This leads to the notion of 
+a Generic Three Layer Architecture for OCL depicted in
+Fig.~\ref{fig:genericlayers}~(a). \add{At layer Mn+1 OCL refers to the language
+constructs of a concrete object-oriented modelling language. Its abstract
+syntax needs to be bound to the language's meta-model that specifies the constructs to
+define types, navigable properties, and operations in the respective
+language. At layer Mn the object-oriented modeling language is applied to
+model a object-oriented system. The OCL binding at
+Mn+1 now allows the definition of OCL constraints on such models. At Mn-1
+the object-oriented model defined at Mn is again instantiated to describe a
+concrete run-time state in the realisation of the modelled system. At this
+layer an OCL interpreter has to query model instance elements to evaluate 
+concrete constraint defined at Mn.}
+Model instances are often realised in
+a different \emph{Technological Space}~\cite{kurtev2002technological} than their model. Then, there are two model
+representations at the layer Mn (cf.
+Fig.~\ref{fig:genericlayers}~(a)): the original constrained \emph{Model} and a
+\emph{Model Realisation} implementing the model in a specific technological space. \add{The
+model realisation is typically derived ba a transformation of the model}
+\note{add citation}. 
+% \remove{ can be obtained by a
+% \emph{Reflection} \cite{smith1982procedural} mechanism of the model instance.}
+\add{Since constraints are defined on the original model but evaluated on
+instances of the model realisation, there has to be a matching of elements in
+the original model and the of model realisation.} \note{add note why this is important to know}
+% sorry had to restructure the prev. paragraph and exact change tracking was to
+% complicated
 
 	\begin{figure}[t]
 			\centering
@@ -20,42 +45,68 @@ instance elements for their properties or invoke operations on them (Mn-1 layer)
 	%\note{Fig 1. add headings to subfigures: a) Variation points in OCL Application	b) Applciation of OCL in UML modeling c) Application of OCL in Ecore
 	%metamodeling } 
 
-Model instances can be realised in
-a different \emph{Technological Space}~\cite{kurtev2002technological} than their model. Then, there are two model
-representations at the Mn layer: the constrained model and a \emph{Model Realisation} that can be obtained by a
-\emph{Reflection} \cite{smith1982procedural} mechanism of the 
-model instance. Thus, there has to be a matching of the model realisation to the constrained model (cf. Fig.~\ref{fig:genericlayers}, (a), Mn layer).
 
-Instances of this \emph{Generic Three Layer Architecture} are shown in Fig.~\ref{fig:genericlayers} 
-(b) and (c). The first example illustrates the use of a UML class diagram constrained with business
-rules for which \change{model instance
-elements are Java objects}{Java objects represent a model instance}. At the layer M1 a technical space bridge can be observed, as the Java
-classes correspond to the UML model. The second example depicts the usage of OCL for Well-Formedness
-Rules (WFRs). Here, the model is a domain-specific language modelled in Ecore (M2) for which WFRs are
-evaluated on domain-specific models (M1). In this case, the model and its realisation are identical.
+Instances of this \emph{Generic Three Layer Architecture} are shown in
+Fig.~\ref{fig:genericlayers}~(b) and (c). Fig.~\ref{fig:genericlayers}~(b)
+examplifies the application of a OCL to constraint UML class diagrams. At M2 (Mn+1) 
+the OCL Abstract Syntax is bound to the UML2 Meta-Model. At M1 (Mn) constraints are defined against UML2
+Class Diagrams. At this layer the original UML model is transformed to a
+Java-based model representation where UML classes correspond to Java classes.
+At M0 (Mn-1) the OCL constraints are evaluated against Java
+objects.
 
-With the generic three layer architecture it is possible to combine various models and instances for
-constraint interpretation independently as depicted as a feature model in Fig.~\ref{fig:features}. 
-\remove{The feature selection has to ensure that model
-instances are located exactly one meta-layer below their model.} In the feature model two variation
-points regarding OCL interpretation can be identified: constrained models (VP1) as well as
-model instances (VP2) can vary. \add{Thus, various combinations of models and instances are possible,
-as long as the
-instances are located exactly one meta-layer below their model.}
+The example in Fig.~\ref{fig:genericlayers} (c) demonstrates the
+application of OCL constraints to define Well-Formedness Rules (WFRs) for
+DSLs build using EMF Ecore. The Generic Three Layer Architecture is lifted one
+layer: At M3 (Mn+1) the OCL Abstract Syntax is bound to the Ecore
+Metameta-model. At M2 (Mn) a new DSL is defined using Ecore and OCL-based WFRs. 
+Since EMF contributes a runtime infrastructure for models
+and model instances no transformation is required at M2. The model and the
+model representation are identical. At M1 (Mn-1) the OCL-based WFRs are
+evaluated against models build using the newly defined DSL.
+% Here, the model is a domain-specific language
+% modelled in Ecore (M2) for which WFRs are evaluated on domain-specific models (M1). In this case, the model and its realisation are identical.
 
-	\begin{figure}[t]
+\subsection{Variations Point of OCL Application}
+
+The instantiation of our Generic Three Layer Architecture for various OCL
+applications found in literature \note{in lack of a better word}{justifies} 
+two variation points. First, VP1 describes variability at Mn+1 and Mn
+w.r.t. the modelling language used to specify constrained models. Second, VP2
+relates to variability at Mn and Mn-1 t w.r.t. the technological space
+model instances are realised and validated in (cf. Fig.~\ref{fig:genericlayers}
+(a)). 
+% In the feature model two
+% variation points regarding OCL interpretation can be identified: constrained models (VP1) as well as model instances (VP2) can vary.
+
+With the generic three layer architecture it is possible to vary several
+models and model instances independently. For example the same UML model can be
+combined with OCL evaluation on model instances realised in Java or a
+relational database, or the OCL evaluation on XML-based model instances can be
+used for models build using the UML or the Ecore metamodel. The feature model
+depicted in Fig.~\ref{fig:features} documents the variation space of OCL
+applications found in literature. The only constraint
+a variant configuration of the generic architecture has to
+satisfy is that the model instance bound to VP2 is located exactly one
+meta-layer below the model bound to VP1. 
+\note{remark that some features (e.g. ecore are found in both groups)}
+\note{can you think of a feature model that reflects the configuration
+constraints of adjacent m layers?} \begin{figure}[t]
 			\centering
 		  \includegraphics[width=1.00\textwidth]{figures/features.pdf}
 			\caption{Features of OCL Interpretation}
 			\label{fig:features}
 	\end{figure}
 	
-In order to define constraints on different models, most OCL tools existing today, support VP1 
-\cite{WWW:MDT,akehurst2003ocl,WWW:dresdenOCL,kolovos2008detecting}. Yet, those tools do not address
-VP2 as their supported models require specific instances (typically located in the same technological
-space). As presented in this paper, this tight coupling is not necessary and a reimplementation of
-OCL interpreters for different technological spaces can be avoided.
-We propose an implementation of the generic three layer architecture to address this problem.
+Several OCL tools provide
+support for variation on VP1
+\cite{WWW:MDT,akehurst2003ocl,WWW:dresdenOCL,kolovos2008detecting}. 
+Yet, those tools do not address VP2 as their supported models require specific 
+instances (typically located in the same technological space\note{of what?}).
+We argue that this tight coupling can be reduced to avoid the
+reimplementation of OCL interpreters for different technological spaces.
+In the following we contribute an implementation of the generic three layer
+architecture that supports VP1 and VP2.
 
 	
 	
