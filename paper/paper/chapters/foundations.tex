@@ -1,34 +1,43 @@
 \section{Foundations}
 \label{sec:foundation}
-\note{needs intro now}
+
+Originally, OCL was designed as a constraint language for UML. Recent work showed
+that OCL can be applied to various other modelling and meta-modelling languages. Thus,
+an abstract description of OCL and its relation to modelling languages is sensible
+and is presented in the following.
+
 \subsection{The Generic Three Layer Architecture}
 As discussed in \cite{demuthRGWS09}, OCL evaluation
-always involves three adjacent layers of the \emph{MOF Four Layer Metadata
-Architecture} \cite{spec:MOF1-4}. This leads to the notion of 
-a Generic Three Layer Architecture for OCL depicted in
-Fig.~\ref{fig:genericlayers}~(a). \add{At layer Mn+1 OCL refers to the language
-constructs of a concrete object-oriented modelling language. Its abstract
-syntax needs to be bound to the language's meta-model that specifies the constructs to
-define types, navigable properties, and operations in the respective
-language. At layer Mn the object-oriented modeling language is applied to
-model a object-oriented system. The OCL binding at
-Mn+1 now allows the definition of OCL constraints on such models. At Mn-1
-the object-oriented model defined at Mn is again instantiated to describe a
-concrete run-time state in the realisation of the modelled system. At this
-layer an OCL interpreter has to query model instance elements to evaluate 
-concrete constraint defined at Mn.}
+always involves three adjacent layers of the \emph{MOF four layer metadata
+architecture} \cite{spec:MOF1-4}. This leads to the notion of 
+a \emph{generic three layer architecture} for OCL as depicted in
+Fig.~\ref{fig:genericlayers}~(a). 
+At layer Mn+1, OCL refers to the language
+concepts of a concrete object-oriented modelling language. 
+Its abstract syntax needs to extend the language's meta-model that specifies concepts like
+types, navigable properties, and operations.
+This extension allows the definition of
+OCL constraints on models that are described by the meta-model (Mn layer).
+During the evaluation of these constraints, an OCL interpreter has to query model
+instance elements for their properties or invoke operations on them (Mn-1 layer).
+
 Model instances are often realised in
-a different \emph{Technological Space}~\cite{kurtev2002technological} than their model. Then, there are two model
+a different \emph{technological space}~\cite{kurtev2002technological} than their model. Then, there are two model
 representations at the layer Mn (cf.
-Fig.~\ref{fig:genericlayers}~(a)): the original constrained \emph{Model} and a
-\emph{Model Realisation} implementing the model in a specific technological space. \add{The
-model realisation is typically derived ba a transformation of the model}
-\note{add citation}. 
+Fig.~\ref{fig:genericlayers}~(a)): the original constrained \emph{model} and a
+\emph{model realisation} implementing the model in a specific technological space. The
+model realisation is typically derived by a transformation of the model
+\cite{WWW:EMF}. 
+This introduces a problem as the connection between the different model representations
+at the Mn layer exists in the transformation, but may not be accessible from the OCL infrastructure.
+An algorithm matching the elements of the model realisation and the constrained model can re-establish
+this connection.
 % \remove{ can be obtained by a
 % \emph{Reflection} \cite{smith1982procedural} mechanism of the model instance.}
-\add{Since constraints are defined on the original model but evaluated on
-instances of the model realisation, there has to be a matching of elements in
-the original model and the of model realisation.} \note{add note why this is important to know}
+%Since constraints are defined on the original model but evaluated on
+%instances of the model realisation, there has to be a matching of elements in
+%the original model and of the model realisation. 
+
 % sorry had to restructure the prev. paragraph and exact change tracking was to
 % complicated
 
@@ -42,10 +51,10 @@ the original model and the of model realisation.} \note{add note why this is imp
 	%metamodeling } 
 
 
-Instances of this \emph{Generic Three Layer Architecture} are shown in
+Instances of this generic three layer architecture are shown in
 Fig.~\ref{fig:genericlayers}~(b) and (c). Fig.~\ref{fig:genericlayers}~(b)
-examplifies the application of a OCL to constraint UML class diagrams. At M2 (Mn+1) 
-the OCL Abstract Syntax is bound to the UML2 Meta-Model. At M1 (Mn) constraints are defined against UML2
+examplifies the application of an OCL to constraint UML class diagrams. At M2 (Mn+1) 
+the OCL Abstract Syntax is bound to the UML Meta-Model. At M1 (Mn) constraints are defined against UML
 Class Diagrams. At this layer the original UML model is transformed to a
 Java-based model representation where UML classes correspond to Java classes.
 At M0 (Mn-1) the OCL constraints are evaluated against Java
@@ -55,7 +64,7 @@ The example in Fig.~\ref{fig:genericlayers} (c) demonstrates the
 application of OCL constraints to define Well-Formedness Rules (WFRs) for
 DSLs build using EMF Ecore. The Generic Three Layer Architecture is lifted one
 layer: At M3 (Mn+1) the OCL Abstract Syntax is bound to the Ecore
-Metameta-model. At M2 (Mn) a new DSL is defined using Ecore and OCL-based WFRs. 
+meta-meta-model. At M2 (Mn) a new DSL is defined using Ecore and OCL-based WFRs. 
 Since EMF contributes a runtime infrastructure for models
 and model instances no transformation is required at M2. The model and the
 model representation are identical. At M1 (Mn-1) the OCL-based WFRs are
@@ -65,8 +74,8 @@ evaluated against models build using the newly defined DSL.
 
 \subsection{Variations Point of OCL Application}
 
-The instantiation of our Generic Three Layer Architecture for various OCL
-applications found in literature \note{in lack of a better word}{justifies} 
+The instantiation of our generic three layer architecture for various OCL
+applications found in literature justifies 
 two variation points. First, VP1 describes variability at Mn+1 and Mn
 w.r.t. the modelling language used to specify constrained models. Second, VP2
 relates to variability at Mn and Mn-1 t w.r.t. the technological space
@@ -79,15 +88,14 @@ With the generic three layer architecture it is possible to vary several
 models and model instances independently. For example the same UML model can be
 combined with OCL evaluation on model instances realised in Java or a
 relational database, or the OCL evaluation on XML-based model instances can be
-used for models build using the UML or the Ecore metamodel. The feature model
+used for models build using the UML or the Ecore meta-model. The feature model
 depicted in Fig.~\ref{fig:features} documents the variation space of OCL
 applications found in literature. The only constraint
 a variant configuration of the generic architecture has to
 satisfy is that the model instance bound to VP2 is located exactly one
 meta-layer below the model bound to VP1. 
-\note{remark that some features (e.g. ecore are found in both groups)}
-\note{can you think of a feature model that reflects the configuration
-constraints of adjacent m layers?} \begin{figure}[t]
+
+  \begin{figure}[t]
 			\centering
 		  \includegraphics[width=1.00\textwidth]{figures/features.pdf}
 			\caption{Features of OCL Interpretation}
@@ -98,7 +106,7 @@ Several OCL tools provide
 support for variation on VP1
 \cite{WWW:MDT,akehurst2003ocl,WWW:dresdenOCL,kolovos2008detecting}. 
 Yet, those tools do not address VP2 as their supported models require specific 
-instances (typically located in the same technological space\note{of what?}).
+instances (typically both located in the same technological space).
 We argue that this tight coupling can be reduced to avoid the
 reimplementation of OCL interpreters for different technological spaces.
 In the following we contribute an implementation of the generic three layer
