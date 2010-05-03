@@ -6,7 +6,7 @@
 	\emph{model adaptation} to address VP1. Afterwards, we discuss how \emph{model
 	instance adaptation} supports VP2.
 	
-	\begin{figure}[p]
+	\begin{figure}[!t]
 			\centering
 				\includegraphics[width=0.80\textwidth]{figures/coreconcepts.pdf}
 			\caption{
@@ -21,22 +21,10 @@
 % 			operations to get properties and to invoke operations.
 			}
 			\label{fig:coreconcepts}
-			
-			\vspace{4.0em}
-			
-				\includegraphics[width=1.00\textwidth]{figures/modeladaptation.pdf}
-			\caption{The \emph{Generic Adaptation Architecture} of DresdenOCL
-% 			: At the Mn+1 layer, meta-models are adapted
-% 			to the Model Types (VP1). The model adapter component contains these adapters and is responsible 
-% 			to instantiate them to adapt models of the meta-model. 
-% 			At the Mn layer, model implementation types are adapted (VP2). The model instance adapter component
-% 			contains these adapters and is responsible to instantiate them to adapt model instance objects. 
-% 			The OCL standard library implements the logic to evaluate operations defined on OCL types. Other 
-% 			requests such as operation invocations or property requests on adapted objects are delegated 
-% 			via the interfaces of the model implementation type model.
-			}
-			\label{fig:modeladaptation}			
 		\end{figure}
+			
+%			\vspace{4.0em}
+			
 
 \subsection{Model Adaptation (VP1)}
 
@@ -66,6 +54,21 @@
 
 \subsection{Model Instance Adaptation (VP2)}
 	
+		\begin{figure}[!t]
+				\includegraphics[width=1.00\textwidth]{figures/modeladaptation.pdf}
+			\caption{The \emph{Generic Adaptation Architecture} of DresdenOCL
+% 			: At the Mn+1 layer, meta-models are adapted
+% 			to the Model Types (VP1). The model adapter component contains these adapters and is responsible 
+% 			to instantiate them to adapt models of the meta-model. 
+% 			At the Mn layer, model implementation types are adapted (VP2). The model instance adapter component
+% 			contains these adapters and is responsible to instantiate them to adapt model instance objects. 
+% 			The OCL standard library implements the logic to evaluate operations defined on OCL types. Other 
+% 			requests such as operation invocations or property requests on adapted objects are delegated 
+% 			via the interfaces of the model implementation type model.
+			}
+			\label{fig:modeladaptation}			
+		\end{figure}
+		
 % 	The presented abstraction of Model Types to support various models
 % 	and meta-models can now be shifted and extended to
 % 	solve similar problems when working with multiple model instantiations. 
