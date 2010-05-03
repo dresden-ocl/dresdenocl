@@ -3,7 +3,7 @@
 	software implementations and uses models to describe software systems. 
 	To ensure consistency of models, the Object Constraint Language 
 	(OCL) \cite{spec:OCL2-2} has been developed as an extension of the Unified 
-	Modelling Language (UML) \cite{spec:UML2-2}\cite{warmer:ocl}. In recent years,
+	Modelling Language (UML) \cite{spec:UML2-2,warmer:ocl}. In recent years,
 	OCL advanced to a constraint language used for various object-oriented
 	modelling and meta-modelling languages \cite{detaching} like the Meta
 	Object Facility (MOF) \cite{UmlMof} or Ecore \cite{WWW:MDT}.
@@ -13,9 +13,9 @@
 	 Besides instances of constrained models stored in various model repositories
 	like MOFLON \cite{MOFLON}, Netbeans MDR~\cite{UmlMof}, or EMF~\cite{WWW:MDT},
 	they also can be realised using classic programming languages like
-	Java~\cite{demuthRGWS09}, or C\#~\cite{OCLCsharp}, database systems~\cite{OCLRelDB}, or XML~\cite{OCLXML}. 
+	Java~\cite{demuthRGWS09}, or C\#~\cite{OCLCsharp}, stored in database systems~\cite{OCLRelDB}, or described with XML~\cite{OCLXML}. 
 	
-	Although several OCL tools support \emph{variability at the model level}~\cite{braeuerOCL07}\cite{akehurst2003ocl}, \emph{variability at the model
+	Although several OCL tools support \emph{variability at the model level}~\cite{braeuerOCL07,akehurst2003ocl}, \emph{variability at the model
 	instance level} is not provided. 
 	For OCL compilers as presented in
 	\cite{UmlMof,demuthRGWS09,OCLCsharp,OCLRelDB} 
@@ -27,7 +27,7 @@
 	In this paper we propose a \emph{Generic Adaptation Architecture} for OCL
 	interpreters that hides models and model instances behind well-defined
 	interfaces. This enables reuse of the complete OCL infrastructure including the OCL parser, 
-	standard library and interpreter \remove{for various kinds of models and model instances }.
+	standard library and interpreter.
 	
 	The remainder of this paper is structured as follows. In
 	Sect.~\ref{sec:foundation} we analyse diverse applications for OCL and 
