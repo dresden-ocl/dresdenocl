@@ -1,32 +1,29 @@
 \section{Conclusion}
 \label{sec:conclusion}
 
-In this paper we presented a \add{generic} approach for \remove{an} OCL
-\change{interpreter}{interpretation} that supports both model and
+In this paper we presented a generic approach for OCL
+interpretation that addresses both model and
 model instance variability. Various OCL infrastructures support 
 model variability, whereas -- to the best of our knowledge -- none of 
-the existing OCL infrastructure supports \remove{full} model instance
-variability. Our approach \change{solves this lack}{addresses this problem} by
+the existing OCL infrastructure supports complete model instance
+variability. Our approach addresses this problem by
 abstracting from domain-specific concepts and by introducing well-defined interfaces for models
-their instances. \change{By designing}{With our implementation of} such a
+and their instances. With our implementation of such a
 generic adaptation architecture, the same OCL interpreter was applied to
-\add{three} case studies that are located at different modelling layers and
-use different \change{model realisations}{models and model instances}. Thus, we
-\change{improved the reuse of the} contribute a reusable OCL interpreter and
+three case studies that are located at different mo\-del\-ling layers and
+use different combinations of models and model instances. We
 avoided new implementations of the OCL standard library for various different
-\change{model instances}{technical spaces}. \remove{Three case studies proofed
-the feasibility of our approach.}
+technical spaces and hence contribute a reusable OCL interpreter.
 
-\change{Nevertheless, some task remain open for future work. In fact, }{For
-future work} we plan to improve our approach by addressing the gaps mentioned 
-in Sect. \ref{sec:lessons}. \add{Furthermore, we are interested in evaluating
+For future work, we plan to improve our approach by addressing the issues mentioned 
+in Sect.~\ref{sec:lessons}. We are interested in evaluating
 the performance impact of our adapter-based approach for OCL interpretation.
-Therefore we plan a benchmark comparing our interpreter with other
-OCL interpreters and compilers and a continuation of our previous}
+Therefore, we plan a benchmark comparing our interpreter with other
+interpreters and compilers, and a continuation of our previous
 work~\cite{OCLRelDB} on extensible OCL compilation.
 
 
 \section{Acknowledgements}
 
 We want to thank Tricia Balfe of \textsc{Nomos Software} for providing data for the XML case study and for continuous feedback during adaptation of the case study.
-Furthermore, we'd like to thank all people that are or were involved into the DresdenOCL project.
+Furthermore, we would like to thank all people that are or were involved in the DresdenOCL project.

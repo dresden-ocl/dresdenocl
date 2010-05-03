@@ -1,10 +1,10 @@
 \section{Introduction}
-	Model-Driven Software Development (MDSD) aims to abstract from concrete 
+	\emph{Model-driven software development (MDSD)} aims to abstract from concrete 
 	software implementations and uses models to describe software systems. 
 	To ensure consistency of models, the Object Constraint Language 
 	(OCL) \cite{spec:OCL2-2} has been developed as an extension of the Unified 
 	Modelling Language (UML) \cite{spec:UML2-2,warmer:ocl}. In recent years,
-	OCL advanced to a constraint language used for various object-oriented
+	OCL advanced to a constraint language used for various 
 	modelling and meta-modelling languages \cite{detaching} like the Meta
 	Object Facility (MOF) \cite{UmlMof} or Ecore \cite{WWW:MDT}.
 
@@ -17,27 +17,27 @@
 	
 	Several OCL tools support \emph{variability at the model level}~\cite{braeuerOCL07,akehurst2003ocl}, i.e., constraint
 	definition on different types of models. Yet, \emph{variability at the model
-	instance level}, i.e., constraint evaluation on different types of model instances is not provided. 
+	instance level}, i.e., constraint evaluation on different types of model instances, is not provided. 
 	For OCL compilers as presented in
 	\cite{UmlMof,demuthRGWS09,OCLCsharp,OCLRelDB} 
 	such variability is not possible, as the code generated from OCL constraints 
-	needs to be	bound to the realisation technique used at model instance
-	level. 
+	needs to be	bound to the technical spaces used at model instance level. 
 	However, for OCL interpreters, we argue that a
-	decoupling of the semantics evaluation from a concrete model instance realisation technique is possible.
-	In this paper we propose a \emph{Generic Adaptation Architecture} for OCL
+	decoupling of the semantics evaluation from a concrete model instance type is possible.
+	In this paper we propose a \emph{generic adaptation architecture} for OCL
 	interpreters that hides models and model instances behind well-defined
 	interfaces. This enables reuse of the complete OCL infrastructure including the OCL parser, 
-	standard library and interpreter.
+	standard library and interpreter. We implemented such an infrastructure in 
+	\emph{DresdenOCL}~\cite{WWW:dresdenOCL}.
 	
 	The remainder of this paper is structured as follows. In
 	Sect.~\ref{sec:foundation} we analyse diverse applications for OCL and 
 	motivate two variation points for OCL interpretation. In
 	Sect.~\ref{sec:implementation} we discuss the design and implementation of a
-	\emph{Generic Adaptation Architecture} for OCL interpreters to realise the
-	motivated variation points in \emph{DresdenOCL}. In Sect.~\ref{sec:caseStudies}
+	\emph{generic adaptation architecture} for OCL interpreters to realise the
+	motivated variation points in DresdenOCL. In Sect.~\ref{sec:caseStudies}
 	we document the feasibility and	benefits of our adaptation architecture by
-	applying it to three case studies that use OCL with different models and model
+	applying it to three case studies that use OCL with different combinations of models and model
 	instances. In Sect.~\ref{sec:lessons} we elaborate on lessons learnt
 	during implementation and application of our approach. Finally, we present
 	related work in Sect.~\ref{sec:relatedWork} and conclude our contributions in

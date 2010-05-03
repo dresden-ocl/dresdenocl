@@ -1,15 +1,8 @@
 \section{Related Work}
 \label{sec:relatedWork}
-In \cite{kolovos2006queries} a first approach to reuse OCL semantics at the model instance level
-for various model realisations was proposed. The approach presented in \cite{kolovos2006queries}
-allowed to reflect properties on model instances and thus, to query on them. In contrast, the
-approach presented in this paper supports the invocation
-of model-defined operations on instances as well. 
-
-\note{Claas: We have to adapt the following sentences.}
 In the following we will discuss alternative tools to parse,
 interpret, or compile OCL constraints and the means they provide
-to support variability in models and model instances:
+to support variability for models and model instances:
 
 \begin{itemize}
   
@@ -44,7 +37,10 @@ supported.
 \item The \emph{Epsilon Validation Language (EVL)} introduced in
 \cite{kolovos2008detecting} is quite similar to OCL. It comes with an
 interpreter that can be used for various EMF-based languages. Thus, model
-adaptation is possible while model instances are bound to EMF.
+adaptation is possible.
+In \cite{kolovos2006queries}, a first approach to reuse OCL semantics at the model instance level
+for various model realisations was proposed. This approach is limited to model
+instances defined at the same meta-layer as their models and operation calls are not supported.
  
 \item A standard OCL interpreter for EMF is provided by \emph{MDT OCL}
 \cite{WWW:MDT}. It is also tightly integrated with EMF and supports 
@@ -55,7 +51,7 @@ However, we are not aware of any such adaptations.
 
 \end{itemize}
 
-This analysis of related work shows that variability at \add{the} model level is
-considered useful and has already been implemented in various OCL tools.
-Supporting variability at the model instance level -- as suggested in this paper -- 
+This analysis of related work consolidates that variability at model level is
+con\-si\-dered useful and has already been implemented in various OCL tools.
+Supporting variability at model instance level -- as suggested in this paper -- 
 is a consequent continuation of our previous and other's related work.
