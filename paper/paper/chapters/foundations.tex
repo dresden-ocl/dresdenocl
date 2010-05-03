@@ -12,11 +12,10 @@ always involves three adjacent layers of the \emph{MOF four layer metadata
 architecture} \cite{spec:MOF1-4}. This leads to the notion of 
 a \emph{generic three layer architecture} for OCL as depicted in
 Fig.~\ref{fig:genericlayers}~(a). 
-At layer Mn+1, OCL refers to the language
-concepts of a concrete object-oriented modelling language. 
-Its abstract syntax needs to extend the language's meta-model that specifies concepts like
-types, navigable properties, and operations.
-This extension allows the definition of
+At layer Mn+1, OCL is bound to a concrete modelling language that has to provide 
+concepts like
+types, navigable properties, and operations. 
+This binding allows the definition of
 OCL constraints on models that are described by the meta-model (Mn layer).
 During the evaluation of these constraints, an OCL interpreter has to query model
 instance elements for their properties or invoke operations on them (Mn-1 layer).
