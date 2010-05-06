@@ -184,6 +184,16 @@ Library.
 
    <requires>
       <import plugin="org.eclipse.emf.ecore"/>
+      <import plugin="org.junit4" version="4.0.0" match="greaterOrEqual"/>
+      <import plugin="tudresden.ocl20.pivot.facade" version="2.1.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.core.runtime" version="3.5.0" match="greaterOrEqual"/>
+      <import plugin="tudresden.ocl20.pivot.modelbus" version="2.1.0" match="greaterOrEqual"/>
+      <import plugin="tudresden.ocl20.pivot.pivotmodel" version="2.1.0" match="greaterOrEqual"/>
+      <import plugin="tudresden.ocl20.pivot.metamodels.xsd" version="2.1.0" match="greaterOrEqual"/>
+      <import plugin="tudresden.ocl20.pivot.interpreter" version="2.1.0" match="greaterOrEqual"/>
+      <import plugin="tudresden.ocl20.pivot.modelinstancetype.xml" version="2.1.0" match="greaterOrEqual"/>
+      <import plugin="tudresden.ocl20.pivot.essentialocl.standardlibrary" version="2.1.0" match="greaterOrEqual"/>
+      <import plugin="tudresden.ocl20.pivot.testsuite" version="2.1.0" match="greaterOrEqual"/>
    </requires>
 
    <plugin
@@ -202,6 +212,13 @@ Library.
 
    <plugin
          id="tudresden.ocl20.pivot.examples.living"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="tudresden.ocl20.pivot.examples.pain"
          download-size="0"
          install-size="0"
          version="0.0.0"

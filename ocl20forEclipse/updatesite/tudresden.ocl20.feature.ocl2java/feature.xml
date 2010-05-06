@@ -182,7 +182,6 @@ Library.
    </license>
 
    <requires>
-      <import plugin="org.eclipse.core.variables"/>
       <import plugin="org.eclipse.core.runtime" version="3.4.0" match="greaterOrEqual"/>
       <import plugin="tudresden.ocl20.logging" version="2.1.0" match="greaterOrEqual"/>
       <import plugin="tudresden.ocl20.pivot.essentialocl" version="2.1.0" match="greaterOrEqual"/>
@@ -192,8 +191,14 @@ Library.
       <import plugin="tudresden.ocl20.pivot.ocl2java" version="2.1.0" match="greaterOrEqual"/>
       <import plugin="tudresden.ocl20.pivot.facade" version="2.1.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.core.resources" version="3.4.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.core.variables"/>
       <import plugin="org.eclipse.ui" version="3.4.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.ui.ide" version="3.4.0" match="greaterOrEqual"/>
+      <import plugin="tudresden.ocl20.pivot.tools.template" version="2.1.0" match="greaterOrEqual"/>
+      <import plugin="tudresden.ocl20.pivot.essentialocl.standardlibrary" version="2.1.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.osgi"/>
+      <import plugin="org.eclipse.core.runtime" version="3.5.0" match="greaterOrEqual"/>
+      <import plugin="tudresden.ocl20.pivot.testsuite" version="2.1.0" match="greaterOrEqual"/>
    </requires>
 
    <plugin
@@ -219,6 +224,20 @@ Library.
 
    <plugin
          id="tudresden.ocl20.pivot.ocl2java.ui"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="tudresden.ocl20.pivot.tools.template"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="tudresden.ocl20.pivot.tools.template.test"
          download-size="0"
          install-size="0"
          version="0.0.0"

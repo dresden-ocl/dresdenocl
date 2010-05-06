@@ -186,26 +186,29 @@ Library.
    </license>
 
    <requires>
-      <import plugin="org.eclipse.uml2.uml"/>
-      <import plugin="org.eclipse.emf.codegen.ecore" version="2.3.1" match="compatible"/>
-      <import plugin="org.eclipse.emf.common.ui"/>
       <import plugin="org.eclipse.core.runtime" version="3.4.0" match="greaterOrEqual"/>
       <import plugin="tudresden.ocl20.logging" version="2.1.0" match="greaterOrEqual"/>
       <import plugin="tudresden.ocl20.pivot.pivotmodel" version="2.1.0" match="greaterOrEqual"/>
       <import plugin="tudresden.ocl20.pivot.modelbus" version="2.1.0" match="greaterOrEqual"/>
       <import plugin="org.apache.commons.lang" version="2.3.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.uml2.uml"/>
       <import plugin="org.eclipse.ui" version="3.4.0" match="greaterOrEqual"/>
       <import plugin="org.junit4" version="4.0.0" match="greaterOrEqual"/>
       <import plugin="tudresden.ocl20.pivot.metamodels.test" version="2.1.0" match="greaterOrEqual"/>
       <import plugin="tudresden.ocl20.pivot.metamodels.ecore" version="2.1.0" match="greaterOrEqual"/>
       <import plugin="tudresden.ocl20.pivot.testsuite" version="2.1.0" match="greaterOrEqual"/>
-      <import plugin="tudresden.ocl20.pivot.metamodels.java" version="2.1.0" match="greaterOrEqual"/>
       <import plugin="tudresden.ocl20.pivot.facade" version="2.1.0" match="greaterOrEqual"/>
+      <import plugin="tudresden.ocl20.pivot.model" version="2.2.0" match="greaterOrEqual"/>
       <import plugin="tudresden.ocl20.pivot.metamodels.uml2" version="2.1.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.emf.codegen.ecore" version="2.3.1" match="compatible"/>
       <import plugin="org.eclipse.core.resources" version="3.4.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.jdt.core" version="3.4.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.jdt.launching" version="3.4.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.ui.ide" version="3.4.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.emf.common.ui"/>
+      <import plugin="org.eclipse.emf.ecore.xmi"/>
+      <import plugin="org.eclipse.xsd"/>
+      <import plugin="tudresden.ocl20.pivot.metamodels.java" version="2.1.0" match="greaterOrEqual"/>
    </requires>
 
    <plugin
@@ -237,13 +240,6 @@ Library.
          unpack="false"/>
 
    <plugin
-         id="tudresden.ocl20.pivot.metamodels.java.test"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
          id="tudresden.ocl20.pivot.metamodels.test"
          download-size="0"
          install-size="0"
@@ -259,6 +255,20 @@ Library.
 
    <plugin
          id="tudresden.ocl20.pivot.codegen.adapter"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="tudresden.ocl20.pivot.metamodels.xsd"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="tudresden.ocl20.pivot.metamodels.java.test"
          download-size="0"
          install-size="0"
          version="0.0.0"
