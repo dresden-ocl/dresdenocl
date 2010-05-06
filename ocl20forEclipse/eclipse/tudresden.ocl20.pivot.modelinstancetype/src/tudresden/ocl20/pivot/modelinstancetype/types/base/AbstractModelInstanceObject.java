@@ -18,7 +18,6 @@ with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
 package tudresden.ocl20.pivot.modelinstancetype.types.base;
 
-import tudresden.ocl20.pivot.model.IModel;
 import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceObject;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 
@@ -34,10 +33,10 @@ public abstract class AbstractModelInstanceObject extends
 
 	/**
 	 * The original {@link Type} of this {@link AbstractModelInstanceObject}.
-	 * The original {@link Type} is the lowest {@link Type} in the
-	 * {@link IModel}'s inheritance that conforms to this
-	 * {@link AbstractModelInstanceObject}. It is required to enable down-casts
-	 * and {@link AbstractModelInstanceObject#isKindOf(Type)} checks.
+	 * The original {@link Type} is the lowest {@link Type} in the IModel's
+	 * inheritance that conforms to this {@link AbstractModelInstanceObject}. It
+	 * is required to enable down-casts and
+	 * {@link AbstractModelInstanceObject#isKindOf(Type)} checks.
 	 */
 	private Type myOriginalType;
 
@@ -51,9 +50,9 @@ public abstract class AbstractModelInstanceObject extends
 	 * @param originalType
 	 *            The original {@link Type} of this
 	 *            {@link AbstractModelInstanceObject}. The original {@link Type}
-	 *            is the lowest {@link Type} in the {@link IModel}'s inheritance
-	 *            that conforms to this {@link AbstractModelInstanceObject}. It
-	 *            is required to enable down-casts and
+	 *            is the lowest {@link Type} in the IModel's inheritance that
+	 *            conforms to this {@link AbstractModelInstanceObject}. It is
+	 *            required to enable down-casts and
 	 *            {@link AbstractModelInstanceObject#isKindOf(Type)} checks.
 	 */
 	protected AbstractModelInstanceObject(Type type, Type originalType) {
@@ -200,9 +199,9 @@ public abstract class AbstractModelInstanceObject extends
 	 * <p>
 	 * Returns the original {@link Type} of this
 	 * {@link AbstractModelInstanceObject}. The original {@link Type} is the
-	 * lowest {@link Type} in the {@link IModel}'s inheritance that conforms to
-	 * this {@link AbstractModelInstanceObject}. It is required to enable
-	 * down-casts and {@link AbstractModelInstanceObject#isKindOf(Type)} checks.
+	 * lowest {@link Type} in the IModel's inheritance that conforms to this
+	 * {@link AbstractModelInstanceObject}. It is required to enable down-casts
+	 * and {@link AbstractModelInstanceObject#isKindOf(Type)} checks.
 	 * </p>
 	 * 
 	 * @return The original {@link Type} of this

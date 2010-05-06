@@ -6,7 +6,8 @@ Bundle-Version: 2.2.0.qualifier
 Bundle-Activator: tudresden.ocl20.pivot.modelinstance.ModelInstancePlugin
 Bundle-Vendor: TU Dresden, Software Technology Group
 Require-Bundle: org.eclipse.core.runtime,
- tudresden.ocl20.pivot.modelinstancetype;bundle-version="2.2.0";visibility:=reexport
+ tudresden.ocl20.pivot.modelinstancetype;bundle-version="2.2.0";visibility:=reexport,
+ tudresden.ocl20.pivot.model;bundle-version="2.2.0";visibility:=reexport
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy
 Export-Package: tudresden.ocl20.pivot.modelinstance,

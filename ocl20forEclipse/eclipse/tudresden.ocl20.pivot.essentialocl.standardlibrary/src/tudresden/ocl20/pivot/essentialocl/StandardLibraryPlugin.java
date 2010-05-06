@@ -5,11 +5,6 @@ import org.eclipse.core.runtime.Plugin;
 import org.osgi.framework.BundleContext;
 
 import tudresden.ocl20.logging.LoggingPlugin;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.provider.IOclLibraryProvider;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.provider.OclLibraryProvider;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.provider.StandaloneOclLibraryProvider;
-import tudresden.ocl20.pivot.essentialocl.types.OclLibrary;
-import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
 
 /**
  * The activator class controls the plug-in life cycle
@@ -17,13 +12,10 @@ import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
 public class StandardLibraryPlugin extends Plugin {
 
 	// The plug-in ID
-	public static final String ID =
-			"tudresden.ocl20.pivot.essentialocl.standardlibrary"; //$NON-NLS-1$
+	public static final String ID = "tudresden.ocl20.pivot.essentialocl.standardlibrary"; //$NON-NLS-1$
 
 	// The shared instance
 	private static StandardLibraryPlugin plugin;
-
-	
 
 	/**
 	 * The constructor
@@ -35,6 +27,7 @@ public class StandardLibraryPlugin extends Plugin {
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see
 	 * org.eclipse.core.runtime.Plugins#start(org.osgi.framework.BundleContext)
 	 */
@@ -46,7 +39,9 @@ public class StandardLibraryPlugin extends Plugin {
 
 	/*
 	 * (non-Javadoc)
-	 * @see org.eclipse.core.runtime.Plugin#stop(org.osgi.framework.BundleContext)
+	 * 
+	 * @see
+	 * org.eclipse.core.runtime.Plugin#stop(org.osgi.framework.BundleContext)
 	 */
 	@Override
 	public void stop(BundleContext context) throws Exception {
@@ -64,7 +59,7 @@ public class StandardLibraryPlugin extends Plugin {
 
 		return plugin;
 	}
-	
+
 	/**
 	 * <p>
 	 * Facade method for the classes in this plug-in that hides the dependency
@@ -72,7 +67,7 @@ public class StandardLibraryPlugin extends Plugin {
 	 * </p>
 	 * 
 	 * @param clazz
-	 *          The {@link Class} to return the {@link Logger} for.
+	 *            The {@link Class} to return the {@link Logger} for.
 	 * 
 	 * @return A log4j {@link Logger}> instance.
 	 * 
@@ -82,6 +77,5 @@ public class StandardLibraryPlugin extends Plugin {
 
 		return LoggingPlugin.getLogManager(plugin).getLogger(clazz);
 	}
-
 
 }
