@@ -33,7 +33,7 @@
         eType="#//SimpleNameCS" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="VariableDeclarationWithInitCS" eSuperTypes="#//VariableDeclarationCS">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//TypeCS"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="typeName" eType="#//TypeCS"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="initialization" eType="#//OclExpressionCS"
         containment="true"/>
@@ -83,20 +83,28 @@
         upperBound="-1" eType="#//VariableDeclarationCS" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="FeatureCallExpCS" abstract="true" eSuperTypes="#//CallExpCS"/>
-  <eClassifiers xsi:type="ecore:EClass" name="PropertyCallExpCS" abstract="true" eSuperTypes="#//FeatureCallExpCS"/>
-  <eClassifiers xsi:type="ecore:EClass" name="PropertyCallWithSourceExpCS" eSuperTypes="#//PropertyCallExpCS">
+  <eClassifiers xsi:type="ecore:EClass" name="NavigationCallExp" eSuperTypes="#//FeatureCallExpCS">
     <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1"
         eType="#//OclExpressionCS" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="propertyName" lowerBound="1"
-        eType="#//SimpleNameCS" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="navigationOperator" unique="false"
+        lowerBound="1" upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="featureCalls" lowerBound="1"
+        upperBound="-1" eType="#//ImplicitFeatureCallCS" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ImplicitFeatureCallCS" abstract="true"
+      eSuperTypes="#//FeatureCallExpCS"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ImplicitPropertyCallCS" eSuperTypes="#//ImplicitFeatureCallCS">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="property" lowerBound="1"
+        eType="ecore:EClass ../../tudresden.ocl20.pivot.pivotmodel/model/pivotmodel.ecore#//Property"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="isMarkedPre" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="PropertyCallWithImplicitSourceExpCS"
-      eSuperTypes="#//PropertyCallExpCS">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="propertyName" lowerBound="1"
-        eType="#//SimpleNameCS" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isMarkedPre" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ImplicitOperationCallCS" eSuperTypes="#//ImplicitFeatureCallCS">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="operationName" lowerBound="1"
+        eType="ecore:EClass ../../tudresden.ocl20.pivot.pivotmodel/model/pivotmodel.ecore#//Operation"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="arguments" upperBound="-1"
+        eType="#//OclExpressionCS" containment="true"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PropertyCallExpCS" abstract="true" eSuperTypes="#//FeatureCallExpCS"/>
   <eClassifiers xsi:type="ecore:EClass" name="PropertyCallExplicitPathExpCS" eSuperTypes="#//PropertyCallExpCS">
     <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1"
         eType="#//OclExpressionCS" containment="true"/>
@@ -126,13 +134,6 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="isMarkedPre" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
         defaultValueLiteral="false"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="OperationCallWithSourceAndArgumentsCS"
-      eSuperTypes="#//OperationCallWithSourceExpCS">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="operationName" lowerBound="1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="arguments" upperBound="-1"
-        eType="#//OclExpressionCS" containment="true"/>
-  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="OperationCallBinaryExpCS" abstract="true"
       eSuperTypes="#//OperationCallWithSourceExpCS">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="operationName" lowerBound="1"
@@ -149,7 +150,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="LogicalXorOperationCallExpCS" eSuperTypes="#//OperationCallBinaryExpCS"/>
   <eClassifiers xsi:type="ecore:EClass" name="LogicalImpliesOperationCallExpCS" eSuperTypes="#//OperationCallBinaryExpCS"/>
   <eClassifiers xsi:type="ecore:EClass" name="OperationCallWithImlicitSourceExpCS"
-      eSuperTypes="#//OperationCallExpCS">
+      eSuperTypes="#//ImplicitFeatureCallCS">
     <eStructuralFeatures xsi:type="ecore:EReference" name="operationName" lowerBound="1"
         eType="#//SimpleNameCS" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="arguments" upperBound="-1"
@@ -236,19 +237,26 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="InitValueCS" eSuperTypes="#//InitOrDeriveValueCS"/>
   <eClassifiers xsi:type="ecore:EClass" name="DeriveValueCS" eSuperTypes="#//InitOrDeriveValueCS"/>
-  <eClassifiers xsi:type="ecore:EClass" name="InvariantOrDefinitionCS" abstract="true">
+  <eClassifiers xsi:type="ecore:EClass" name="InvariantOrDefinitionCS" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="InvariantExpCS" eSuperTypes="#//InvariantOrDefinitionCS">
     <eStructuralFeatures xsi:type="ecore:EReference" name="name" eType="#//SimpleNameCS"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="oclExpression" lowerBound="1"
         eType="#//OclExpressionCS" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="InvariantExpCS" eSuperTypes="#//InvariantOrDefinitionCS"/>
   <eClassifiers xsi:type="ecore:EClass" name="DefinitionExpCS" eSuperTypes="#//InvariantOrDefinitionCS">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="static" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="variable" eType="#//SimpleNameCS"
-        containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="operation" eType="#//OperationCS"
-        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="definitionExpPart" lowerBound="1"
+        eType="#//DefinitionExpPartCS" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DefinitionExpPartCS" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DefinitionExpPropertyCS" eSuperTypes="#//DefinitionExpPartCS">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="variableDeclaration" lowerBound="1"
+        eType="#//VariableDeclarationWithInitCS" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DefinitionExpOperationCS" eSuperTypes="#//DefinitionExpPartCS">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="operation" lowerBound="1"
+        eType="#//OperationCS" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PrePostOrBodyDeclarationCS" abstract="true">
     <eStructuralFeatures xsi:type="ecore:EReference" name="name" eType="#//SimpleNameCS"

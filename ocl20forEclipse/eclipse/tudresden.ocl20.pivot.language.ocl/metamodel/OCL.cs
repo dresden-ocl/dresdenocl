@@ -15,6 +15,7 @@ OPTIONS {
 }
 
 TOKENS {
+	DEFINE NAVIGATION_OPERATOR		$ '.' | '->' $;
 	DEFINE ADDITIVE_OPERATOR		$ '+' | '-' $;
 	DEFINE MULT_OPERATOR			$ '*' | '/' | '%' $;
 	DEFINE RELATIONAL_OPERATOR		$ '<' | '>' | '<=' | '>='$;
@@ -30,7 +31,7 @@ TOKENS {
 	DEFINE STATIC					$ 'static'$;
 	DEFINE INTEGER_LITERAL			$('1'..'9') ('0'..'9')* | '0'$;
 	DEFINE REAL_LITERAL 			$ (('1'..'9') ('0'..'9')* | '0') '.' ('0'..'9')+$;
-	DEFINE SIMPLE_NAME				$ ('A'..'Z'|'a'..'z'|'_') ('A'..'Z'|'a'..'z'|'0'..'9'|'_'|'-')* (('::') ('A'..'Z'|'a'..'z'|'0'..'9'|'_'|'-')*)*$;
+	DEFINE SIMPLE_NAME				$ ('A'..'Z'|'a'..'z'|'_') ('A'..'Z'|'a'..'z'|'0'..'9'|'_')* (('::') ('A'..'Z'|'a'..'z'|'0'..'9'|'_')*)*$;
 	DEFINE WHITESPACE $(' '|'\t'|'\f')$;
 	DEFINE LINEBREAKS $('\r\n'|'\r'|'\n')$;
 }
@@ -62,9 +63,9 @@ RULES {
 	
 	InvariantExpCS						::= "inv" name? ":" oclExpression;
 	
-	DefinitionExpCS						::= (static[STATIC])? "def" name? ":" 
-											(variable "=" oclExpression
-											|operation "=" oclExpression);
+	DefinitionExpCS						::= (static[STATIC])? "def" ":" definitionExpPart;
+	
+	DefinitionExpPropertyCS				::= variableDeclaration;
 											
 	PreConditionDeclarationCS			::= "pre" (name)? ":" oclExpression;
 	
@@ -79,6 +80,7 @@ RULES {
 	// TODO: add "." and "@pre"
 	//@operator(type="binary_left_associative", weight="3", identifier="OclExpressionCS")
 	//PropertyCallWithSourceExpCS	::= source "." propertyName;
+	
 	
 	// *** OperationCallExpCS: binary (infix) operations [A]***
 	@operator(type="binary_left_associative", weight="4", identifier="OclExpressionCS")
@@ -105,6 +107,7 @@ RULES {
 	@operator(type="binary_left_associative", weight="12", identifier="OclExpressionCS")
 	MultOperationCallExpCS	::= source operationName[MULT_OPERATOR] target;
 	
+	
 	// *** OperationCallExpCS: unary (prefix) operations [H] ***
 	@operator(type="unary_prefix", weight="13", identifier="OclExpressionCS")
 	UnaryOperationCallExpCS			::= operationName[ADDITIVE_OPERATOR] target;
@@ -112,9 +115,15 @@ RULES {
 	@operator(type="unary_prefix", weight="13", identifier="OclExpressionCS")
 	LogicalNotOperationCallExpCS	::= operationName[NOT_OPERATOR] target;
 	
+	
 	// *** OperationCallExpCS: normal operation call [C] ***
 	@operator(type="unary_postfix", weight="14", identifier="OclExpressionCS")
-	OperationCallWithSourceAndArgumentsCS	::= source "." operationName[SIMPLE_NAME] "(" (arguments ("," arguments)*)? ")";
+	NavigationCallExp				::= source navigationOperator[NAVIGATION_OPERATOR] featureCalls (navigationOperator[NAVIGATION_OPERATOR] featureCalls)*;
+	
+	// TODO: replace with Operation, Parameters, etc.
+	ImplicitOperationCallCS			::= operationName[SIMPLE_NAME] "(" (arguments ("," arguments)*)? ")";
+	
+	ImplicitPropertyCallCS			::= property[SIMPLE_NAME];
 	
 	// *** OperationCallExpCS: implicit source expression [D] ***
 	//@operator(type="primitive", weight="20", identifier="OclExpressionCS")
@@ -136,7 +145,7 @@ RULES {
 	
 	
 	// *** VariableDeclarationWithInitCS ***
-	VariableDeclarationWithInitCS		::= variableName (":" type)? ("=" initialization)?;
+	VariableDeclarationWithInitCS		::= variableName (":" typeName)? ("=" initialization)?;
 	
 	VariableDeclarationWithInitListCS	::= variableDeclarations ("," variableDeclarations)*;
 	
@@ -160,17 +169,7 @@ RULES {
 	CollectionRangeCS				::= from #0 ".." #0 to;
 	
 	CollectionLiteralPartsOclExpCS	::= oclExpression;
-	
-	
-	
-//						|	source "->" simpleName "(" arguments+ ")"
-//						|	source "."  simpleName "(" arguments+ ")"
-//						|	simpleName "(" arguments+ ")"
-//						|	source "." simpleName isMarkedPre[IS_MARKED_PRE] "(" arguments+ ")"
-//						|	simpleName isMarkedPre[IS_MARKED_PRE] "(" arguments+ ")"
-//						|	pathName "(" arguments ")"
-//						|	source "." pathName "::" simpleName "(" arguments+ ")"
-//						|	source "." pathName "::" simpleName isMarkedPre[IS_MARKED_PRE] "(" arguments+ ")";
+
 	
 	@operator(type="primitive", weight="20", identifier="OclExpressionCS")
 	IntegerLiteralExpCS	::= integerLiteral[INTEGER_LITERAL];

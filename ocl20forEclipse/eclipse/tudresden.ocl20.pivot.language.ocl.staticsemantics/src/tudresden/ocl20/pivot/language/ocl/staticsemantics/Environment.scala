@@ -17,10 +17,10 @@ import Box._
 abstract class Environment(
 		parent : Option[Environment],
 		namespace : Box[Namespace],
-		self : Option[Variable],
-		context : Option[Type],
+		self : Box[Variable],
+		context : Box[Type],
 		explicitVariables : collection.mutable.Set[Variable],
-		var sourceExpression : Box[OclExpression]
+		sourceExpression : Box[OclExpression]
 	) {
 
   protected val model : IModel
@@ -34,32 +34,46 @@ abstract class Environment(
     new {val model = this.model; val oclLibrary = this.oclLibrary} with Environment(Some(this), namespace, self, context, collection.mutable.Set(), sourceExpression)
   }
   
-  def nestedEnvironment(ns : Namespace) : Environment = {
-    new {val model = this.model; val oclLibrary = this.oclLibrary} with Environment(Some(this), !!(ns), self, context, collection.mutable.Set(), sourceExpression)
+  def nestedEnvironmentNS(newNamespace : Box[Namespace]) : Environment = {
+    new {val model = this.model; val oclLibrary = this.oclLibrary} with Environment(Some(this), newNamespace, self, context, collection.mutable.Set(), sourceExpression)
   }
   
-  def nestedEnvironment(newSelf : Variable) : Environment = {
-    new {val model = this.model; val oclLibrary = this.oclLibrary} with Environment(Some(this), namespace, Some(newSelf), context, collection.mutable.Set(), Full(factory.createVariableExp(newSelf)))
+  def nestedEnvironmentSelf(newSelf : Box[Variable]) : Environment = {
+    new {val model = this.model; val oclLibrary = this.oclLibrary} with Environment(Some(this), namespace, newSelf, context, collection.mutable.Set(), newSelf match {case Full(s) => Full(factory.createVariableExp(s)); case Failure(msg, _, _) => Failure(msg, Empty, Empty); case Empty => Empty})
   }
   
-  def nestedEnvironment(newSelf : Variable, newContext : Type) = {
-    new {val model = this.model; val oclLibrary = this.oclLibrary} with Environment(Some(this), namespace, Some(newSelf), Some(newContext), collection.mutable.Set(), sourceExpression)
+  def nestedEnvironment(newSelf : Box[Variable], newContext : Box[Type]) : Environment = {
+    new {val model = this.model; val oclLibrary = this.oclLibrary} with Environment(Some(this), namespace, newSelf, newContext, collection.mutable.Set(), sourceExpression)
+  }
+  
+  def nestedEnvironmentSourceExpression(newSourceExpression : Box[OclExpression]) : Environment = {
+  	new {val model = this.model; val oclLibrary = this.oclLibrary} with Environment(Some(this), namespace, self, context, collection.mutable.Set(), newSourceExpression)
   }
   
   def lookup(name : List[String]) : Box[Type] = {
-    lookupLocal(name) match {
-      case Full(t) => Full(t)
-      case Empty | Failure(_, _, _) => parent match {
-      	case Some(env) => env.lookup(name)
-      	// last resort; type not found yet -> look everywhere
-      	case None => {
-      	  try {
-      	  	Full(factory.findType(name))
-      	  } catch {
-      	    case e : EssentialOclFactoryException => Empty
-      	  }
+    oclLibrary.eContents.flatMap{
+      _ match {
+			  case t : Type => Full(t)
+			  case unknown => Empty}
+			}
+    .find(_.getName == name.first) match {
+      case Some(oclLibraryType) => Full(oclLibraryType)
+      case None => {
+		    lookupLocal(name) match {
+		      case Full(t) => Full(t)
+		      case Empty | Failure(_, _, _) => parent match {
+		      	case Some(env) => env.lookup(name)
+		      	// last resort; type not found yet -> look everywhere
+		      	case None => {
+		      	  try {
+		      	  	Full(factory.findType(name))
+		      	  } catch {
+		      	    case e : EssentialOclFactoryException => Failure(e.getMessage, Empty, Empty)
+		      	  }
+		        }
+		      }
         }
-      }
+	    }
     }
   }
   
@@ -70,21 +84,6 @@ abstract class Environment(
       !!(ns.lookupType(name.last))
     }
   }
-  
-//  def lookupPropertyOnType(name : SimpleNameCS, static : Boolean) : Option[Property] = {
-//    self match {
-//      case Some(s) => {
-//        val allProperties = s.getType.allProperties
-//	    for (i <- 0 until allProperties.size) {
-//	      val property = allProperties.get(i)
-//	      if (property.getName == name.getSimpleName && property.isStatic == static)
-//	        return Some(property)
-//	    }
-//	    None
-//      }
-//      case None => None
-//    }
-//  }
   
   def lookupPropertyOnType(t : Type, name : String, static : Boolean) : Box[Property] = {
     t.allProperties.find(p => p.getName == name && p.isStatic == static) ?~ 
@@ -106,21 +105,12 @@ abstract class Environment(
   
   def addExplicitVariable(variable : Variable) = explicitVariables += variable
   
-  def setSourceExpression(sourceExpression : Box[OclExpression]) {
-    this.sourceExpression = sourceExpression
-  }
-  
   def getSourceExpression = sourceExpression
-  
-  
+    
   def getNamespace = namespace
   
-  def getSelf = self.getOrElse {
-    throw new OclStaticSemanticsException("'self' is not defined.")
-  }
+  def getSelf = self
   
-  def getContext = context.getOrElse {
-    throw new OclStaticSemanticsException("Context is not defined.")
-  }
+  def getContext = context
   
 }
