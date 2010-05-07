@@ -24,6 +24,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
@@ -33,6 +34,7 @@ import java.util.Set;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
 
+import tudresden.ocl20.pivot.essentialocl.EssentialOclPlugin;
 import tudresden.ocl20.pivot.essentialocl.expressions.BooleanLiteralExp;
 import tudresden.ocl20.pivot.essentialocl.expressions.CollectionItem;
 import tudresden.ocl20.pivot.essentialocl.expressions.CollectionLiteralExp;
@@ -63,6 +65,7 @@ import tudresden.ocl20.pivot.essentialocl.types.AnyType;
 import tudresden.ocl20.pivot.essentialocl.types.BagType;
 import tudresden.ocl20.pivot.essentialocl.types.CollectionType;
 import tudresden.ocl20.pivot.essentialocl.types.InvalidType;
+import tudresden.ocl20.pivot.essentialocl.types.OclLibrary;
 import tudresden.ocl20.pivot.essentialocl.types.OrderedSetType;
 import tudresden.ocl20.pivot.essentialocl.types.SequenceType;
 import tudresden.ocl20.pivot.essentialocl.types.SetType;
@@ -123,6 +126,18 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 
 	/** The prefix of the name of new created super classes. */
 	private final static String EXTENDEC_CLASS_NAME_PREFIX = "Extended";
+
+	/**
+	 * Contains operation names that must be renamed to support them in
+	 * languages like Java. E.g., '=' ist renamed to equals.
+	 */
+	private static Map<String, String> renamedOperationNames = new HashMap<String, String>();
+
+	/* static initialization. */
+	static {
+		renamedOperationNames.put("=", "equals");
+		renamedOperationNames.put("<>", "notEquals");
+	}
 
 	/**
 	 * The engine to provide all {@link ITemplate}s used for code
@@ -532,7 +547,8 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 		result = new TransformedCodeImpl();
 
 		/* Compute the result type first. */
-		resultType = this.transformType(aCollectionLiteralExp.getType());
+		resultType = this.transformInitializableType(aCollectionLiteralExp
+				.getType());
 
 		collectionName = this.myCodeTransEnv.getNewCollectionVarName();
 
@@ -954,6 +970,7 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 		template.setAttribute("resultVarInitCode", resultVarInitCode.getCode());
 		template.setAttribute("resultVarInitExp", resultVarInitCode
 				.getResultExp());
+		/* FIXME Claas: Use initializable type here. */
 		template.setAttribute("resultType", resultType.toString());
 		template.setAttribute("resultVar", resultVar);
 
@@ -1013,7 +1030,7 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 		String resultVarName;
 
 		result = new TransformedCodeImpl();
-		resultType = this.transformType(anIteratorExp.getType());
+		resultType = this.transformInitializableType(anIteratorExp.getType());
 
 		/* Get the name of the iterator */
 		itName = anIteratorExp.getName();
@@ -1268,6 +1285,24 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 		/* Transform Code for the source of the operation call. */
 		sourceExp = anOperationCallExp.getSource();
 
+		Operation referredOperation;
+		referredOperation = anOperationCallExp.getReferredOperation();
+
+		List<Type> parameterTypes;
+		parameterTypes = new ArrayList<Type>();
+
+		/* Operation can be null (@pre Operation). */
+		if (referredOperation != null) {
+			for (Parameter parameter : referredOperation.getInputParameter()) {
+				parameterTypes.add(parameter.getType());
+			}
+			// end for.
+		}
+		// no else.
+
+		OclLibrary oclLibrary;
+		oclLibrary = EssentialOclPlugin.getOclLibraryProvider().getOclLibrary();
+
 		/* Check if the type of the source expression has not been set. */
 		/*
 		 * FIXME Claas: This is a bug in the parser. Remove this code when the
@@ -1302,13 +1337,191 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 
 			anOperation = anOperationCallExp.getReferredOperation();
 			operationName = anOperation.getName();
+
+			/* Probably rename the operation. */
+			if (renamedOperationNames.containsKey(operationName)) {
+				operationName = renamedOperationNames.get(operationName);
+			}
+			// no else.
 		}
 
 		resultExp = null;
 		template = null;
 
-		/* Operations on OclAny. The match for all types. */
+		/*
+		 * Search for the template of the operation. Start with concrete types
+		 * and continue with more and more abstract types.
+		 */
 		if (sourceType != null) {
+
+			/* Operations on BagType. */
+			if (template == null && sourceType instanceof BagType) {
+
+				/*
+				 * Do not use the source type here. Otherwise the operation
+				 * check will fail.
+				 */
+				BagType bagType;
+				bagType = oclLibrary.getBagType(oclLibrary.getOclAny());
+
+				/*
+				 * Check if the given operation is defined and probably load its
+				 * template.
+				 */
+				Operation operation;
+				operation = bagType.lookupOperation(operationName,
+						parameterTypes);
+
+				if (operation != null
+						&& operation.getOwningType().equals(bagType)) {
+					template = this.myTemplateGroup.getTemplate(operationName
+							+ "OperationOnBag");
+				}
+				// no else.
+			}
+			// no else.
+
+			/* Operations on OrderedSetType. */
+			if (template == null && sourceType instanceof OrderedSetType) {
+
+				/*
+				 * Do not use the source type here. Otherwise the operation
+				 * check will fail.
+				 */
+				OrderedSetType orderedSetType;
+				orderedSetType = oclLibrary.getOrderedSetType(oclLibrary
+						.getOclAny());
+
+				/*
+				 * Check if the given operation is defined and probably load its
+				 * template.
+				 */
+				Operation operation;
+				operation = orderedSetType.lookupOperation(operationName,
+						parameterTypes);
+
+				if (operation != null
+						&& operation.getOwningType().equals(orderedSetType)) {
+					template = this.myTemplateGroup.getTemplate(operationName
+							+ "OperationOnOrderedSet");
+				}
+				// no else.
+			}
+			// no else.
+
+			/* Operations on SequenceType. */
+			if (template == null && sourceType instanceof SequenceType) {
+
+				/*
+				 * Do not use the source type here. Otherwise the operation
+				 * check will fail.
+				 */
+				SequenceType sequenceType;
+				sequenceType = oclLibrary.getSequenceType(oclLibrary
+						.getOclAny());
+
+				/*
+				 * Check if the given operation is defined and probably load its
+				 * template.
+				 */
+				Operation operation;
+				operation = sequenceType.lookupOperation(operationName,
+						parameterTypes);
+
+				if (operation != null
+						&& operation.getOwningType().equals(sequenceType)) {
+					template = this.myTemplateGroup.getTemplate(operationName
+							+ "OperationOnSequence");
+				}
+				// no else.
+			}
+			// no else.
+
+			/* Operations on SetType. */
+			if (template == null && sourceType instanceof SetType) {
+
+				/* Especially handle the union operation. */
+				if (operationName.equals("union")) {
+
+					if (parameterTypes.size() == 1
+							&& parameterTypes.get(0) instanceof BagType) {
+						template = this.myTemplateGroup
+								.getTemplate("unionOperationWithBagOnSet");
+					}
+
+					else if (parameterTypes.size() == 1
+							&& parameterTypes.get(0) instanceof SetType) {
+						template = this.myTemplateGroup
+								.getTemplate("unionOperationWithSetOnSet");
+					}
+				}
+				// no else.
+
+				if (template == null) {
+					/*
+					 * Do not use the source type here. Otherwise the operation
+					 * check will fail.
+					 */
+					SetType setType;
+					setType = oclLibrary.getSetType(oclLibrary.getOclAny());
+
+					/*
+					 * Check if the given operation is defined and probably load
+					 * its template.
+					 */
+					Operation operation;
+					operation = setType.lookupOperation(operationName,
+							parameterTypes);
+
+					if (operation != null
+							&& operation.getOwningType().equals(setType)) {
+						template = this.myTemplateGroup
+								.getTemplate(operationName + "OperationOnSet");
+					}
+					// no else.
+				}
+				// no else.
+			}
+			// no else.
+
+			/* Operations on CollectionType. */
+			if (template == null && sourceType instanceof CollectionType) {
+
+				/*
+				 * Do not use the source type here. Otherwise the operation
+				 * check will fail.
+				 */
+				CollectionType collectionType;
+				collectionType = oclLibrary.getCollectionType(oclLibrary
+						.getOclAny());
+
+				/*
+				 * Check if the given operation is defined and probably load its
+				 * template.
+				 */
+				Operation operation;
+				operation = collectionType.lookupOperation(operationName,
+						parameterTypes);
+
+				if (operation != null
+						&& operation.getOwningType().equals(collectionType)) {
+					template = this.myTemplateGroup.getTemplate(operationName
+							+ "OperationOnCollection");
+				}
+				// no else.
+			}
+			// no else.
+
+			/*
+			 * Flatten operation requires special argument because result must
+			 * be cast to result type.
+			 */
+			if (template != null && operationName.equals("flatten")) {
+				template.setAttribute("resultType", this.transformType(
+						anOperationCallExp.getType()).toString());
+			}
+			// no else.
+
 			if (sourceType instanceof Type) {
 
 				if (operationName.equals("oclIsNew")) {
@@ -1339,12 +1552,12 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 					this.myCodeTransEnv.addAllInstancesClass(instanceType);
 				}
 
-				else if (operationName.equals("=")) {
+				else if (operationName.equals("equals")) {
 					template = this.myTemplateGroup
 							.getTemplate("equalsOperation");
 				}
 
-				else if (operationName.equals("<>")) {
+				else if (operationName.equals("notEquals")) {
 					template = this.myTemplateGroup
 							.getTemplate("notEqualsOperation");
 				}
@@ -1491,17 +1704,17 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 				// no else.
 
 				/* Operations on Boolean, Real or Integer. */
-				if (sourceTypeKind.compareTo(PrimitiveTypeKind.BOOLEAN) == 0
-						|| sourceTypeKind.compareTo(PrimitiveTypeKind.INTEGER) == 0
-						|| sourceTypeKind.compareTo(PrimitiveTypeKind.REAL) == 0) {
-					if (operationName.equals("=")) {
+				if (sourceTypeKind.equals(PrimitiveTypeKind.BOOLEAN)
+						|| sourceTypeKind.equals(PrimitiveTypeKind.INTEGER)
+						|| sourceTypeKind.equals(PrimitiveTypeKind.REAL)) {
+					if (operationName.equals("equals")) {
 						template = this.myTemplateGroup
-								.getTemplate("equalsOnPrimitiveOperation");
+								.getTemplate("equalsOperationOnPrimitiveType");
 					}
 
-					else if (operationName.equals("<>")) {
+					else if (operationName.equals("notEquals")) {
 						template = this.myTemplateGroup
-								.getTemplate("notEqualsOnPrimitiveOperation");
+								.getTemplate("notEqualsOperationOnPrimitiveType");
 					}
 					// no else.
 				}
@@ -1614,268 +1827,6 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 
 			}
 
-			/* Operations on CollectionTypes. */
-			if (sourceType instanceof CollectionType) {
-
-				if (operationName.equals("size")) {
-					template = this.myTemplateGroup
-							.getTemplate("sizeOperation");
-				}
-
-				else if (operationName.equals("isEmpty")) {
-					template = this.myTemplateGroup
-							.getTemplate("isEmptyOperation");
-				}
-
-				else if (operationName.equals("notEmpty")) {
-					template = this.myTemplateGroup
-							.getTemplate("notEmptyOperation");
-				}
-
-				else if (operationName.equals("min")) {
-					Type genericType;
-					ITransformedType genericTypeInJava;
-
-					String resultVar;
-
-					/*
-					 * The min operation needs the result type of the referred
-					 * operation.
-					 */
-					genericType = anOperationCallExp.getType();
-					genericTypeInJava = this.transformType(genericType);
-
-					resultVar = this.myCodeTransEnv.getNewResultVarName();
-
-					template = this.myTemplateGroup
-							.getTemplate("minOnCollectionOperation");
-
-					template.setAttribute("sourceExp", sourceCode
-							.getResultExp());
-					template.setAttribute("genericType", genericTypeInJava
-							.toString());
-					template.setAttribute("resultVar", resultVar);
-					template.setAttribute("elementName", this.myCodeTransEnv
-							.getNewIteratorVarName());
-
-					result.addCode(template.toString());
-					resultExp = resultVar;
-				}
-
-				else if (operationName.equals("max")) {
-					Type genericType;
-					ITransformedType genericTypeInJava;
-
-					String resultVar;
-
-					/*
-					 * The min operation needs the result type of the referred
-					 * operation.
-					 */
-					genericType = anOperationCallExp.getType();
-					genericTypeInJava = this.transformType(genericType);
-
-					resultVar = this.myCodeTransEnv.getNewResultVarName();
-
-					template = this.myTemplateGroup
-							.getTemplate("maxOnCollectionOperation");
-
-					template.setAttribute("sourceExp", sourceCode
-							.getResultExp());
-					template.setAttribute("genericType", genericTypeInJava
-							.toString());
-					template.setAttribute("resultVar", resultVar);
-					template.setAttribute("elementName", this.myCodeTransEnv
-							.getNewIteratorVarName());
-
-					result.addCode(template.toString());
-					resultExp = resultVar;
-				}
-
-				else if (operationName.equals("sum")) {
-					Type genericType;
-					ITransformedType genericTypeInJava;
-
-					String resultVar;
-
-					/*
-					 * The sum operation needs the result type of the referred
-					 * operation.
-					 */
-					genericType = anOperationCallExp.getType();
-					genericTypeInJava = this.transformType(genericType);
-
-					resultVar = this.myCodeTransEnv.getNewResultVarName();
-
-					template = this.myTemplateGroup.getTemplate("sumOperation");
-
-					template.setAttribute("sourceExp", sourceCode
-							.getResultExp());
-					template.setAttribute("genericType", genericTypeInJava
-							.toString());
-					template.setAttribute("resultVar", resultVar);
-					template.setAttribute("elementName", this.myCodeTransEnv
-							.getNewIteratorVarName());
-
-					result.addCode(template.toString());
-					resultExp = resultVar;
-				}
-
-				else if (operationName.equals("asBag")) {
-					template = this.myTemplateGroup
-							.getTemplate("asBagOperation");
-				}
-
-				else if (operationName.equals("asOrderedSet")) {
-					template = this.myTemplateGroup
-							.getTemplate("asOrderedSetOperation");
-				}
-
-				else if (operationName.equals("asSequence")) {
-					template = this.myTemplateGroup
-							.getTemplate("asSequenceOperation");
-				}
-
-				else if (operationName.equals("asSet")) {
-					template = this.myTemplateGroup
-							.getTemplate("asSetOperation");
-				}
-
-				else if (operationName.equals("flatten")) {
-					String returnType;
-					returnType = this.transformType(
-							anOperationCallExp.getType()).toString();
-
-					template = this.myTemplateGroup
-							.getTemplate("flattenOperation");
-					template.setAttribute("returnType", returnType);
-				}
-
-				else if (operationName.equals("includes")) {
-					template = this.myTemplateGroup
-							.getTemplate("includesOperation");
-				}
-
-				else if (operationName.equals("excludes")) {
-					template = this.myTemplateGroup
-							.getTemplate("excludesOperation");
-				}
-
-				else if (operationName.equals("count")) {
-					template = this.myTemplateGroup
-							.getTemplate("countOperation");
-				}
-
-				else if (operationName.equals("includesAll")) {
-					template = this.myTemplateGroup
-							.getTemplate("includesAllOperation");
-				}
-
-				else if (operationName.equals("excludesAll")) {
-					template = this.myTemplateGroup
-							.getTemplate("excludesAllOperation");
-				}
-
-				else if (operationName.equals("product")) {
-					template = this.myTemplateGroup
-							.getTemplate("productOperation");
-				}
-
-				else if (operationName.equals("union")) {
-					template = this.myTemplateGroup
-							.getTemplate("unionOperation");
-				}
-
-				else if (operationName.equals("including")) {
-					template = this.myTemplateGroup
-							.getTemplate("includingOperation");
-				}
-
-				else if (operationName.equals("excluding")) {
-					template = this.myTemplateGroup
-							.getTemplate("excludingOperation");
-				}
-				// no else.
-
-				/* Operations on BagType or SetType. */
-				if (sourceType instanceof BagType
-						|| sourceType instanceof SetType) {
-					if (operationName.equals("intersection")) {
-						template = this.myTemplateGroup
-								.getTemplate("intersectionOperation");
-					}
-					// no else.
-				}
-				// no else.
-
-				/* Operations on SequenceType or OrderedSetType. */
-				if (sourceType instanceof OrderedSetType
-						|| sourceType instanceof SequenceType) {
-					if (operationName.equals("first")) {
-						template = this.myTemplateGroup
-								.getTemplate("firstOperation");
-					}
-
-					else if (operationName.equals("last")) {
-						template = this.myTemplateGroup
-								.getTemplate("lastOperation");
-					}
-
-					else if (operationName.equals("append")) {
-						template = this.myTemplateGroup
-								.getTemplate("appendOperation");
-					}
-
-					else if (operationName.equals("prepend")) {
-						template = this.myTemplateGroup
-								.getTemplate("prependOperation");
-					}
-
-					else if (operationName.equals("at")) {
-						template = this.myTemplateGroup
-								.getTemplate("atOperation");
-					}
-
-					else if (operationName.equals("indexOf")) {
-						template = this.myTemplateGroup
-								.getTemplate("indexOfOperation");
-					}
-
-					else if (operationName.equals("insertAt")) {
-						template = this.myTemplateGroup
-								.getTemplate("insertAtOperation");
-					}
-					// no else.
-				}
-				// no else.
-
-				/* Operations on OrderedSetType. */
-				if (sourceType instanceof OrderedSetType) {
-					if (operationName.equals("subOrderedSet")) {
-						template = this.myTemplateGroup
-								.getTemplate("subOrderedSetOperation");
-					}
-				}
-				// no else.
-
-				/* Operations on SequenceType. */
-				if (sourceType instanceof SequenceType) {
-					if (operationName.equals("subSequence")) {
-						template = this.myTemplateGroup
-								.getTemplate("subSequenceOperation");
-					}
-				}
-				// no else.
-
-				/* Operations on SetType. */
-				if (sourceType instanceof SetType) {
-					if (operationName.equals("symmetricDifference")) {
-						template = this.myTemplateGroup
-								.getTemplate("symmetricDifferenceOperation");
-					}
-				}
-				// no else.
-			}
 		}
 
 		/* Code for operations on non OclTypes. */
@@ -2464,6 +2415,190 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 		/* Probably log the exit from this method. */
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("transformEnumerationType(Enumeration)"
+					+ "- end - return value=" + result);
+		}
+		// no else.
+
+		return result;
+	}
+
+	/**
+	 * <p>
+	 * Transforms the given {@link CollectionType} into a Java class that can be
+	 * initialized.
+	 * </p>
+	 * 
+	 * @param aCollectionType
+	 *            The {@link CollectionType} for which code shall be returned.
+	 * @return The code for a given {@link CollectionType}.
+	 */
+	private ITransformedType transformInitializableCollectionType(
+			CollectionType aCollectionType) {
+
+		/* Probably log the entry into this method. */
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER
+					.debug("transformInitializableCollectionType(CollectionType) - start");
+		}
+		// no else.
+
+		ITransformedType result;
+		ITemplate template;
+
+		Type elementType;
+
+		result = null;
+		template = null;
+
+		if (aCollectionType instanceof BagType) {
+			template = this.myTemplateGroup
+					.getTemplate("bagTypeInitialization");
+		}
+
+		else if (aCollectionType instanceof OrderedSetType) {
+			template = this.myTemplateGroup
+					.getTemplate("orderedSetTypeInitialization");
+		}
+
+		else if (aCollectionType instanceof SequenceType) {
+			template = this.myTemplateGroup
+					.getTemplate("sequenceTypeInitialization");
+		}
+
+		else if (aCollectionType instanceof SetType) {
+			template = this.myTemplateGroup
+					.getTemplate("setTypeInitialization");
+		}
+
+		else {
+			template = this.myTemplateGroup
+					.getTemplate("collectionTypeInitialization");
+		}
+		// no else.
+
+		if (template != null) {
+			result = new TransformedTypeImpl(template.toString());
+		}
+		// no else.
+
+		/* Get the generic type of the Collection. */
+		elementType = aCollectionType.getElementType();
+
+		/* Set the generic type, if it is not null. */
+		if (elementType != null && result != null) {
+			ITransformedType elementTypeInJava;
+
+			elementTypeInJava = this.transformType(elementType);
+
+			if (!elementTypeInJava.equals("null")) {
+				result.setGenericType(elementTypeInJava);
+			}
+			// no else.
+		}
+		// no else.
+
+		/* Probably log the exit from this method. */
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("transformInitializableCollectionType(CollectionType)"
+					+ "- end - return value=" + result);
+		}
+		// no else.
+
+		return result;
+	}
+
+	/**
+	 * <p>
+	 * Transforms the {@link Type} into a java class that can be instantiated.
+	 * </p>
+	 * 
+	 * @param aType
+	 *            The {@link Type} for which code shall be returned.
+	 * @return The code for a given {@link Type}.
+	 */
+	private ITransformedType transformInitializableType(Type aType) {
+
+		/* Probably log the entry into this method. */
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("transformInitializableType(Type) - start");
+		}
+		// no else.
+
+		ITransformedType result;
+
+		if (aType instanceof AnyType) {
+			AnyType anAnyType;
+
+			anAnyType = (AnyType) aType;
+
+			result = this.transformAnyType(anAnyType);
+		}
+
+		else if (aType instanceof CollectionType) {
+			CollectionType aCollectionType;
+
+			aCollectionType = (CollectionType) aType;
+
+			result = this.transformInitializableCollectionType(aCollectionType);
+		}
+
+		else if (aType instanceof Enumeration) {
+			Enumeration anEnumeration;
+
+			anEnumeration = (Enumeration) aType;
+
+			result = this.transformEnumerationType(anEnumeration);
+		}
+
+		else if (aType instanceof InvalidType) {
+			/* Unreachable code. Invalid expressions are caught by the parser. */
+			result = null;
+		}
+
+		else if (aType instanceof PrimitiveType) {
+			PrimitiveType aPrimitiveType;
+
+			aPrimitiveType = (PrimitiveType) aType;
+
+			result = this.transformPrimitiveType(aPrimitiveType);
+		}
+
+		else if (aType instanceof TupleType) {
+			TupleType aTupleType;
+
+			aTupleType = (TupleType) aType;
+
+			result = this.transformTupleType(aTupleType);
+		}
+
+		else if (aType instanceof TypeType) {
+			TypeType aTypeType;
+
+			aTypeType = (TypeType) aType;
+
+			result = this.transformTypeType(aTypeType);
+		}
+
+		else if (aType instanceof VoidType) {
+			VoidType aVoidType;
+
+			aVoidType = (VoidType) aType;
+
+			result = this.transformVoidType(aVoidType);
+		}
+
+		else {
+			/* For other types return their canonical name as type. */
+			String typeName;
+
+			typeName = this.getCanonicalName(aType);
+
+			result = new TransformedTypeImpl(typeName);
+		}
+
+		/* Probably log the exit from this method. */
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("transformInitializableType(Type)"
 					+ "- end - return value=" + result);
 		}
 		// no else.
@@ -3837,7 +3972,7 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 							operationResultType);
 				}
 				// no else.
-				
+
 				/* Probably set the arguments of the operation. */
 				this.setArgumentsForInstrumentationTemplate(aConstraint,
 						adviceTemplate);
@@ -3861,7 +3996,8 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 						typeAndName = atPreValues.get(aValueCode);
 
 						aType = (Type) typeAndName[0];
-						transformedType = this.transformType(aType).toString();
+						transformedType = this
+								.transformInitializableType(aType).toString();
 
 						/*
 						 * The atPre values for primitive and collection types
@@ -4047,7 +4183,7 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 
 				constrainedClass = anOperation.getOwner();
 
-				operationName = anOperation.getName();				
+				operationName = anOperation.getName();
 				operationResultType = this.transformType(anOperation.getType())
 						.toString();
 				/* Create Template for the advice code. */
@@ -4091,7 +4227,7 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 					adviceTemplate.setAttribute("opIsStatic", "true");
 				}
 				// no else.
-				
+
 				/* Probably set that the constrained operation is a constructor. */
 				if (operationName.equals(constrainedClass.getName())) {
 					adviceTemplate.setAttribute("opIsConstructor", "true");

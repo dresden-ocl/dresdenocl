@@ -3,8 +3,8 @@ Bundle-ManifestVersion: 2
 Bundle-Name: OCL22Java Test Plug-in
 Bundle-SymbolicName: tudresden.ocl20.pivot.ocl2java.types
 Bundle-Version: 2.1.0.qualifier
-Export-Package: tudresden.ocl20.pivot.ocl2java.types,
- tudresden.ocl20.pivot.ocl2java.types.test
+Export-Package: tudresden.ocl20.pivot.ocl22java.types.util,
+ tudresden.ocl20.pivot.ocl2java.types
 Require-Bundle: org.junit4;bundle-version="4.0.0"
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: J2SE-1.5

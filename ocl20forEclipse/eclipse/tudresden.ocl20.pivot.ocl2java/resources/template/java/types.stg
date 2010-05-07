@@ -3,101 +3,96 @@ group javaTypes;
 // ---- TEMPLATES FOR JAVA TYPES ----
 // ----------------------------------
 
-
 // --- Any Type ---
 anyType() ::= <<
 Object
 >>
 
-
 // --- Bag Type ---
 bagType() ::= <<
-tudresden.ocl20.pivot.ocl2java.types.OclBag
+java.util.List
 >>
 
+bagTypeInitialization() ::= <<
+java.util.ArrayList
+>>
 
 // --- Boolean Type ---
 booleanType() ::= <<
 Boolean
 >>
 
-
 // --- Collection Type ---
 collectionType() ::= <<
-tudresden.ocl20.pivot.ocl2java.types.OclCollection
+java.util.Collection
 >>
-
 
 // --- Enumeration Type ---
 enumerationType() ::= <<
 Enum
 >>
 
-
 // --- Integer Type ---
 integerType() ::= <<
 Integer
 >>
 
-
 // --- OrderedSet Type ---
 orderedSetType() ::= <<
-tudresden.ocl20.pivot.ocl2java.types.OclOrderedSet
+java.util.List
 >>
 
+orderedSetTypeInitialization() ::= <<
+java.util.ArrayList
+>>
 
 // --- Real Type ---
 realType() ::= <<
 Float
 >>
 
-
 // --- Sequence Type ---
 sequenceType() ::= <<
-tudresden.ocl20.pivot.ocl2java.types.OclSequence
+java.util.List
 >>
 
+sequenceTypeInitialization() ::= <<
+java.util.ArrayList
+>>
 
 // --- Set Type ---
 setType() ::= <<
-tudresden.ocl20.pivot.ocl2java.types.OclSet
+java.util.Set
 >>
 
+setTypeInitialization() ::= <<
+java.util.HashSet
+>>
 
 // --- String Type ---
 stringType() ::= <<
 String
 >>
 
-
 // --- Type Type ---
 typeType() ::= <<
 Class
 >>
-
 
 // --- Tuple Type ---
 tupleType() ::= <<
 java.util.HashMap<String, Object>
 >>
 
-
-// --- Undefined Type ---
-undefinedType() ::= <<
->>
-
-
 // --- UnlimitedNatural Type ---
 unlimitedNaturalType() ::= <<
 Long
 >>
 
-
 // --- Unknown Primitive Type ---
 unknownType() ::= <<
 /* TODO: Unknown primitive Type. Adapt type manually */
 >>
-
 
 // --- Void Type ---
 voidType() ::= <<

@@ -3,100 +3,190 @@ group javaOperations;
 // ---- TEMPLATES FOR JAVA OPERATIONS ----
 // ---------------------------------------
 
-
 // --- Abs Operation ---
 absOperation(sourceExp, resultType) ::= <<
 java.lang.Math.abs($sourceExp$)
 >>
 
-
 // --- AllInstances Operation ---
 allInstancesOperation(sourceExp, typeName) ::= <<
-(new $setType()$<$typeName$>((java.util.Set<$typeName$>) allInstances.get($sourceExp$.class.getCanonicalName()).keySet()))
+(new $setTypeInitialization()$<$typeName$>((java.util.Set<$typeName$>) allInstances.get($sourceExp$.class.getCanonicalName()).keySet()))
 >>
-
 
 // --- And Operation ---
 andOperation(sourceExp, argsExp) ::= <<
 ($sourceExp$ && $argsExp$)
 >>
 
-
-// --- Append Operation ---
-appendOperation(sourceExp, argsExp) ::= <<
-$sourceExp$.append($argsExp$)
+// --- OrderedSet.append(T) ---
+appendOperationOnOrderedSet(sourceExp, argsExp) ::= <<
+$orderedSetUtility()$.append($sourceExp$, $argsExp$)
 >>
 
-
-// --- AsBag Operation ---
-asBagOperation(sourceExp) ::= <<
-$sourceExp$.asBag()
+// --- Sequence.append(T) ---
+appendOperationOnSequence(sourceExp, argsExp) ::= <<
+$sequenceUtility()$.append($sourceExp$, $argsExp$)
 >>
 
-
-// --- AsOrderedSet Operation ---
-asOrderedSetOperation(sourceExp) ::= <<
-$sourceExp$.asOrderedSet()
+// --- Bag.asBag() ---
+asBagOperationOnBag(sourceExp) ::= <<
+$bagUtility()$.asBag($sourceExp$)
 >>
 
-
-// --- AsSequence Operation ---
-asSequenceOperation(sourceExp) ::= <<
-$sourceExp$.asSequence()
+// --- Collection.asBag() ---
+asBagOperationOnCollection(sourceExp, argsExp) ::= <<
+$collectionUtility()$.asBag($sourceExp$)
 >>
 
-
-// --- AsSet Operation ---
-asSetOperation(sourceExp) ::= <<
-$sourceExp$.asSet()
+// --- OrderedSet.asBag() ---
+asBagOperationOnOrderedSet(sourceExp) ::= <<
+$orderedSetUtility()$.asBag($sourceExp$)
 >>
 
-
-// --- At Operation ---
-atOperation(sourceExp, argsExp) ::= <<
-$sourceExp$.get($argsExp$)
+// --- Sequence.asBag() ---
+asBagOperationOnSequence(sourceExp) ::= <<
+$sequenceUtility()$.asBag($sourceExp$)
 >>
 
+// --- Set.asBag() ---
+asBagOperationOnSet(sourceExp) ::= <<
+$setUtility()$.asBag($sourceExp$)
+>>
+
+// --- Bag.asOrderedSet() ---
+asOrderedSetOperationOnBag(sourceExp, argsExp) ::= <<
+$bagUtility()$.asOrderedSet($sourceExp$)
+>>
+
+// --- Collection.asOrderedSet() ---
+asOrderedSetOperationOnCollection(sourceExp, argsExp) ::= <<
+$collectionUtility()$.asOrderedSet($sourceExp$)
+>>
+
+// --- OrderedSet.asOrderedSet() ---
+asOrderedSetOperationOnOrderedSet(sourceExp) ::= <<
+$orderedSetUtility()$.asOrderedSet($sourceExp$)
+>>
+
+// --- Sequence.asOrderedSet() ---
+asOrderedSetOperationOnSequence(sourceExp) ::= <<
+$sequenceUtility()$.asOrderedSet($sourceExp$)
+>>
+
+// --- Set.asOrderedSet() ---
+asOrderedSetOperationOnSet(sourceExp) ::= <<
+$setUtility()$.asOrderedSet($sourceExp$)
+>>
+
+// --- Bag.asSequence() ---
+asSequenceOperationOnBag(sourceExp, argsExp) ::= <<
+$bagUtility()$.asSequence($sourceExp$)
+>>
+
+// --- Collection.asSequence() ---
+asSequenceOperationOnCollection(sourceExp, argsExp) ::= <<
+$collectionUtility()$.asSequence($sourceExp$)
+>>
+
+// --- OrderedSet.asSequence() ---
+asSequenceOperationOnOrderedSet(sourceExp) ::= <<
+$orderedSetUtility()$.asSequence($sourceExp$)
+>>
+
+// --- Set.asSequence() ---
+asSequenceOperationOnSet(sourceExp) ::= <<
+$setUtility()$.asSequence($sourceExp$)
+>>
+
+// --- Sequence.asSequence() ---
+asSequenceOperationOnSequence(sourceExp) ::= <<
+$sequenceUtility()$.asSequence($sourceExp$)
+>>
+
+// --- Bag.asSet() ---
+asSetOperationOnBag(sourceExp, argsExp) ::= <<
+$bagUtility()$.asSet($sourceExp$)
+>>
+
+// --- Collection.asSet() ---
+asSetOperationOnCollection(sourceExp, argsExp) ::= <<
+$collectionUtility()$.asSet($sourceExp$)
+>>
+
+// --- OrderedSet.asSet() ---
+asSetOperationOnOrderedSet(sourceExp, argsExp) ::= <<
+$orderedSetUtility()$.asSet($sourceExp$)
+>>
+
+// --- Set.asSet() ---
+asSetOperationOnSet(sourceExp, argsExp) ::= <<
+$setUtility()$.asSet($sourceExp$)
+>>
+
+// --- Sequence.asSet() ---
+asSetOperationOnSequence(sourceExp, argsExp) ::= <<
+$sequenceUtility()$.asSet($sourceExp$)
+>>
+
+// --- OrderedSet.at(Integer) ---
+atOperationOnOrderedSet(sourceExp, argsExp) ::= <<
+$orderedSetUtility()$.at($sourceExp$, $argsExp$)
+>>
+
+// --- Sequence.at(Integer) ---
+atOperationOnSequence(sourceExp, argsExp) ::= <<
+$sequenceUtility()$.at($sourceExp$, $argsExp$)
+>>
 
 // --- At Operation on String ---
 atOnStringOperation(sourceExp, argsExp) ::= <<
 Character.toString($sourceExp$.charAt($argsExp$ - 1))
 >>
 
-
 // --- Characters Operation ---
 charactersOperation(sourceExp, resultVar, elementName) ::= <<
 $sequenceType()$<$stringType()$> $resultVar$;
-$resultVar$ = new $sequenceType()$<$stringType()$>();
+$resultVar$ = new $sequenceTypeInitialization()$<$stringType()$>();
 
-/* Compute the result of a caharacters operation. */
+/* Compute the result of a characters operation. */
 for ($stringType()$ $elementName$ : $sourceExp$.split("")) {
     $resultVar$.add($elementName$);
 }
 
 /* Remove the first element ''. */
-$resultVar$.remove($resultVar$.first());
+$resultVar$.remove($sequenceUtility()$.first($resultVar$));
 
 >>
-
 
 // --- Concat Operation ---
 concatOperation(sourceExp, argsExp) ::= <<
 $sourceExp$.concat($argsExp$)
 >>
 
-
-// --- Count Operation ---
-countOperation(sourceExp, argsExp) ::= <<
-$sourceExp$.count($argsExp$)
+// --- Collection.count(T) ---
+countOperationOnCollection(sourceExp, argsExp) ::= <<
+$collectionUtility()$($sourceExp$, $argsExp$)
 >>
 
+// --- Bag.count(T) ---
+countOperationOnBag(sourceExp, argsExp) ::= <<
+$bagUtility()$($sourceExp$, $argsExp$)
+>>
+
+// --- Sequence.count(T) ---
+countOperationOnSequence(sourceExp, argsExp) ::= <<
+$sequenceUtility()$($sourceExp$, $argsExp$)
+>>
+
+// --- Set.count(T) ---
+countOperationOnSet(sourceExp, argsExp) ::= <<
+$setUtility()$($sourceExp$, $argsExp$)
+>>
 
 // --- Div Operation ---
 divOperation(sourceExp, argsExp) ::= <<
 ($sourceExp$ / $argsExp$)
 >>
-
 
 // --- Division Operation ---
 divisionOperation(sourceExp, argsExp) ::= <<
@@ -115,48 +205,91 @@ equalsOperation(sourceExp, argsExp) ::= <<
 $sourceExp$.equals($argsExp$)
 >>
 
-
-// --- Equals Operation ---
+// --- Equals Ignore Case Operation ---
 equalsIgnorCaseOperation(sourceExp, argsExp) ::= <<
 $sourceExp$.equalsIgnorCase($argsExp$)
 >>
 
+// --- Bag.=(Bag(T)) ---
+equalsOperationOnBag(sourceExp, argsExp) ::= <<
+$bagUtility()$.equals($sourceExp$, $argsExp$)
+>>
+
+// --- Collection.=(Collection) ---
+equalsOperationOnCollection(sourceExp, argsExp) ::= <<
+$collectionUtility()$.equals($sourceExp$, $argsExp$)
+>>
+
+// --- Sequence.=(Sequence(T)) ---
+equalsOperationOnSequence(sourceExp, argsExp) ::= <<
+$sequenceUtility()$.equals($sourceExp$, $argsExp$)
+>>
+
+// --- Set.=(Set(T)) ---
+equalsOperationOnSet(sourceExp, argsExp) ::= <<
+$setUtility()$.equals($sourceExp$, $argsExp$)
+>>
 
 // --- Equals Operation on Primitive Types ---
-equalsOnPrimitiveOperation(sourceExp, argsExp) ::= <<
+equalsOperationOnPrimitiveType(sourceExp, argsExp) ::= <<
 (($anyType()$) $sourceExp$).equals($argsExp$)
 >>
 
 
-// --- Excludes Operation ---
-excludesOperation(sourceExp, argsExp) ::= <<
-$sourceExp$.excludes($argsExp$)
+// --- Collection.excludes(T) ---
+excludesOperationOnCollection(sourceExp, argsExp) ::= <<
+$collectionUtility()$.excludes($sourceExp$, $argsExp$)
 >>
 
-
-// --- ExcludesAll Operation ---
-excludesAllOperation(sourceExp, argsExp) ::= <<
-$sourceExp$.excludesAll($argsExp$)
+// --- Collection.excludesAll(Collection(T)) ---
+excludesAllOperationOnCollection(sourceExp, argsExp) ::= <<
+$collectionUtility()$.excludesAll($sourceExp$, $argsExp$)
 >>
 
-
-// --- Excluding Operation ---
-excludingOperation(sourceExp, argsExp) ::= <<
-$sourceExp$.excluding($argsExp$)
+// --- Bag.excluding(T) ---
+excludingOperationOnBag(sourceExp, argsExp) ::= <<
+$bagUtility()$.excluding($sourceExp$, $argsExp$)
 >>
 
-
-// --- First Operation ---
-firstOperation(sourceExp) ::= <<
-$sourceExp$.first()
+// --- Sequence.excluding(T) ---
+excludingOperationOnSequence(sourceExp, argsExp) ::= <<
+$sequenceUtility()$.excluding($sourceExp$, $argsExp$)
 >>
 
-
-// --- Flatten Operation ---
-flattenOperation(sourceExp, returnType) ::= <<
-(($returnType$) $sourceExp$.flatten())
+// --- Set.excluding(T) ---
+excludingOperationOnSet(sourceExp, argsExp) ::= <<
+$setUtility()$.excluding($sourceExp$, $argsExp$)
 >>
 
+// --- OrderedSet.first() ---
+firstOperationOnOrderedSet(sourceExp) ::= <<
+$orderedSetUtility()$.first($sourceExp$)
+>>
+
+// --- Sequence.first() ---
+firstOperationOnSequence(sourceExp) ::= <<
+$sequenceUtility()$.first($sourceExp$)
+>>
+
+// --- Collection.flatten() ---
+flattenOperationOnCollection(sourceExp, argsExp, resultType) ::= <<
+($resultType$) $collectionUtility()$.flatten($sourceExp$)
+>>
+
+// --- Bag.flatten() ---
+flattenOperationOnBag(sourceExp, argsExp, resultType) ::= <<
+($resultType$) $bagUtility()$.flatten($sourceExp$)
+>>
+
+// --- Sequence.flatten() ---
+flattenOperationOnSequence(sourceExp, argsExp, resultType) ::= <<
+($resultType$) $sequenceUtility()$.flatten($sourceExp$)
+>>
+
+// --- Set.flatten() ---
+flattenOperationOnSet(sourceExp, argsExp, resultType) ::= <<
+($resultType$) $setUtility()$.flatten($sourceExp$)
+>>
 
 // --- Floor Operation ---
 floorOperation(sourceExp) ::= <<
@@ -182,65 +315,85 @@ impliesOperation(sourceExp, argsExp) ::= <<
 >>
 
 
-// --- Includes Operation ---
-includesOperation(sourceExp, argsExp) ::= <<
-$sourceExp$.contains($argsExp$)
+// --- Collection.includes(T) ---
+includesOperationOnCollection(sourceExp, argsExp) ::= <<
+$collectionUtility()$.includes($sourceExp$, $argsExp$)
 >>
 
-
-// --- IncludesAll Operation ---
-includesAllOperation(sourceExp, argsExp) ::= <<
-$sourceExp$.containsAll($argsExp$)
+// --- Collection.includesAll(Collection(T)) ---
+includesAllOperationOnCollection(sourceExp, argsExp) ::= <<
+$collectionUtility()$.includesAll($sourceExp$, $argsExp$)
 >>
 
-
-// --- Including Operation ---
-includingOperation(sourceExp, argsExp) ::= <<
-$sourceExp$.including($argsExp$)
+// --- Bag.including(T) ---
+includingOperationOnBag(sourceExp, argsExp) ::= <<
+$bagUtility()$.including($sourceExp$, $argsExp$)
 >>
 
-
-// --- IndexOf Operation ---
-indexOfOperation(sourceExp, argsExp) ::= <<
-$sourceExp$.indexOf($argsExp$)
+// --- Sequence.including(T) ---
+includingOperationOnSequence(sourceExp, argsExp) ::= <<
+$sequenceUtility()$.including($sourceExp$, $argsExp$)
 >>
 
+// --- Set.including(T) ---
+includingOperationOnSet(sourceExp, argsExp) ::= <<
+$setUtility()$.including($sourceExp$, $argsExp$)
+>>
+
+// --- OrderedSet.indexOf(T) ---
+indexOfOperationOnOrderedSet(sourceExp, argsExp) ::= <<
+$orderedSetUtility()$.indexOf($sourceExp$, $argsExp$)
+>>
+
+// --- Sequence.indexOf(T) ---
+indexOfOperationOnSequence(sourceExp, argsExp) ::= <<
+$sequenceUtility()$.indexOf($sourceExp$, $argsExp$)
+>>
 
 // --- IndexOf Operation on String ---
 indexOfOnStringOperation(sourceExp, argsExp) ::= <<
 $sourceExp$.indexOf($argsExp$) + 1
 >>
 
-
-// --- InsertAt Operation ---
-insertAtOperation(sourceExp, argsExp) ::= <<
-$sourceExp$.insertAt($argsExp:{arg | $arg$}; separator = ", "$)
+// --- OrderedSet.insertAt(Integer, T) ---
+insertAtOperationOnOrderedSet(sourceExp, argsExp) ::= <<
+$orderedSetUtility()$.insertAt($sourceExp$, $argsExp:{arg | $arg$}; separator = ", "$)
 >>
 
-
-// --- Intersection Operation ---
-intersectionOperation(sourceExp, argsExp) ::= <<
-$sourceExp$.intersection($argsExp$)
+// --- Sequence.insertAt(Integer, T) ---
+insertAtOperationOnSequence(sourceExp, argsExp) ::= <<
+$sequenceUtility()$.insertAt($sourceExp$, $argsExp:{arg | $arg$}; separator = ", "$)
 >>
 
-
-// --- IsEmpty Operation ---
-isEmptyOperation(sourceExp) ::= <<
-$sourceExp$.isEmpty()
+// --- Bag.intersection(Bag(T)) and Bag.intersection(Set(T)) ---
+intersectionOperationOnBag(sourceExp, argsExp) ::= <<
+$bagUtility()$.intersection($sourceExp$, $argsExp$)
 >>
 
-
-// --- Last Operation ---
-lastOperation(sourceExp) ::= <<
-$sourceExp$.last()
+// --- Set.intersection(Bag(T)) and Set.intersection(Set(T)) ---
+intersectionOperationOnSet(sourceExp, argsExp) ::= <<
+$setUtility()$.intersection($sourceExp$, $argsExp$)
 >>
 
+// --- Collection.isEmpty() ---
+isEmptyOperationOnCollection(sourceExp, argsExp) ::= <<
+$collectionUtility()$.isEmpty($sourceExp$)
+>>
+
+// --- OrderedSet.last() ---
+lastOperationOnOrderedSet(sourceExp, argsExp) ::= <<
+$orderedSetUtility()$.last($sourceExp$)
+>>
+
+// --- Sequence.last() ---
+lastOperationOnSequence(sourceExp, argsExp) ::= <<
+$sequenceUtility()$.last($sourceExp$)
+>>
 
 // --- Lesser Operation ---
 lesserOperation(sourceExp, argsExp) ::= <<
 ($sourceExp$ < $argsExp$)
 >>
-
 
 // --- LesserEquals Operation ---
 lesserEqualsOperation(sourceExp, argsExp) ::= <<
@@ -253,40 +406,19 @@ maxOperation(sourceExp, argsExp) ::= <<
 java.lang.Math.max($sourceExp$, $argsExp$)
 >>
 
-
-// --- Max Operation on Collection ---
-maxOnCollectionOperation(sourceExp, genericType, resultVar, elementName) ::= <<
-$genericType$ $resultVar$;
-$resultVar$ = $undefinedLiteralExp()$;
-
-/* Compute the result of a max operation. */
-for ($genericType$ $elementName$ : $sourceExp$) {
-    if ($resultVar$ == $undefinedLiteralExp()$ || ((Comparable) $resultVar$).compareTo((Comparable) $elementName$) < 0) {
-        $resultVar$ = $elementName$;
-    }
-}
-
+// --- Collection.max() ---
+maxOperationOnCollection(sourceExp, argsExp) ::= <<
+$collectionUtility()$.max($sourceExp$)
 >>
-
 
 // --- Min Operation ---
 minOperation(sourceExp, argsExp) ::= <<
-java.lang.Math.min($sourceExp$, $argsExp$)
+java.lang.Math.min($sourceExp$, argsExp)
 >>
 
-
-// --- Min Operation on Collection ---
-minOnCollectionOperation(sourceExp, genericType, resultVar, elementName) ::= <<
-$genericType$ $resultVar$;
-$resultVar$ = $undefinedLiteralExp()$;
-
-/* Compute the result of a min operation. */
-for ($genericType$ $elementName$ : $sourceExp$) {
-    if ($resultVar$ == $undefinedLiteralExp()$ || ((Comparable) $resultVar$).compareTo((Comparable) $elementName$) > 0) {
-        $resultVar$ = $elementName$;
-    }
-}
-
+// --- Collection.min() ---
+minOperationOnCollection(sourceExp, argsExp) ::= <<
+$collectionUtility()$.min($sourceExp$)
 >>
 
 
@@ -296,9 +428,9 @@ minusOperation(sourceExp, argsExp) ::= <<
 >>
 
 
-// --- MinusOnCollection Operation ---
-minusOnCollectionOperation(sourceExp, argsExp) ::= <<
-$sourceExp$.minus($argsExp$)
+// --- Set.minus(Set(T)) ---
+minusOperationOnSet(sourceExp, argsExp) ::= <<
+$setUtility()$.minus($sourceExp$, $argsExp$)
 >>
 
 
@@ -326,9 +458,9 @@ notOperation(sourceExp) ::= <<
 >>
 
 
-// --- NotEmpty Operation ---
-notEmptyOperation(sourceExp) ::= <<
-$sourceExp$.notEmpty()
+// --- Collection.notEmpty() ---
+notEmptyOperationOnCollection(sourceExp, argsExp) ::= <<
+$collectionUtility()$.notEmpty($sourceExp$)
 >>
 
 
@@ -337,12 +469,15 @@ notEqualsOperation(sourceExp, argsExp) ::= <<
 !$sourceExp$.equals($argsExp$)
 >>
 
-
-// --- NotEquals Operation on Primitive Types ---
-notEqualsOnPrimitiveOperation(sourceExp, argsExp) ::= <<
-!(($anyType()$) $sourceExp$).equals($argsExp$)
+// --- Collection.<>(Collection(T)) ---
+notEqualsOperationOnCollection(sourceExp, argsExp) ::= <<
+!$collectionUtility()$.equals($sourceExp$, $argsExp$)
 >>
 
+// --- NotEquals Operation on Primitive Types ---
+notEqualsOperationOnPrimitiveType(sourceExp, argsExp) ::= <<
+!(($anyType()$) $sourceExp$).equals($argsExp$)
+>>
 
 // --- OclAsType Operation ---
 oclAsTypeOperation(sourceExp, argsExp) ::= <<
@@ -403,28 +538,39 @@ plusOnStringOperation(sourceExp, argsExp) ::= <<
 $sourceExp$.concat($argsExp$)
 >>
 
-
-// --- Prepend Operation ---
-prependOperation(sourceExp, argsExp) ::= <<
-$sourceExp$.prepend($argsExp$)
+// --- Sequence.prepend(T) ---
+prependOperationOnSequence(sourceExp, argsExp) ::= <<
+$sequenceUtility()$.prepend($sourceExp$, $argsExp$)
 >>
 
-
-// --- Product Operation ---
-productOperation(sourceExp, argsExp) ::= <<
-$sourceExp$.product($argsExp:{arg | $arg$}; separator = ", "$)
+// --- OrderedSet.prepend(T) ---
+prependOperationOnOrderedSet(sourceExp, argsExp) ::= <<
+$orderedSetUtility()$.prepend($sourceExp$, $argsExp$)
 >>
 
+// --- Collection.product(Collection(T)) ---
+productOperationOnCollection(sourceExp, argsExp) ::= <<
+$collectionUtility()$.product($sourceExp$, $argsExp:{arg | $arg$}; separator = ", "$)
+>>
+
+// --- OrderedSet.reverse() ---
+reverseOperationOnOrderedSet(sourceExp, argsExp) ::= <<
+$orderedSetUtility()$.reverse($sourceExp$)
+>>
+
+// --- Sequence.reverse() ---
+reverseOperationOnSequence(sourceExp, argsExp) ::= <<
+$sequenceUtility()$.reverse($sourceExp$)
+>>
 
 // --- Round Operation ---
 roundOperation(sourceExp) ::= <<
 java.lang.Math.round($sourceExp$)
 >>
 
-
-// --- Size Operation ---
-sizeOperation(sourceExp) ::= <<
-$sourceExp$.size()
+// --- Collection.size() ---
+sizeOperationOnCollection(sourceExp) ::= <<
+$collectionUtility()$.size($sourceExp$)
 >>
 
 
@@ -433,43 +579,30 @@ sizeOnStringOperation(sourceExp) ::= <<
 $sourceExp$.length()
 >>
 
-
-// --- SubOrderedSet Operation ---
-subOrderedSetOperation(sourceExp, argsExp) ::= <<
-$sourceExp$.subOrderedSet($argsExp:{arg | $arg$}; separator = ", "$)
+// --- OrderedSet.subOrderedSet(Integer, Integer) ---
+subOrderedSetOperationOnOrderedSet(sourceExp, argsExp) ::= <<
+$orderedSetUtility()$.subOrderedSet($sourceExp$, $argsExp:{arg | $arg$}; separator = ", "$)
 >>
 
-
-// --- SubSequence Operation ---
+// --- Sequence.subSequence() ---
 subSequenceOperation(sourceExp, argsExp) ::= <<
-$sourceExp$.subSequence($argsExp:{arg | $arg$}; separator = ", "$)
+$sequenceUtility()$.subSequence($sourceExp$, $argsExp:{arg | $arg$}; separator = ", "$)
 >>
-
 
 // --- Substring Operation ---
 substringOperation(sourceExp, argsExp) ::= <<
 $sourceExp$.substring($argsExp:{arg | $arg$}; separator = " - 1, "$)
 >>
 
-
-// --- Sum Operation ---
-sumOperation(sourceExp, genericType, resultVar, elementName) ::= <<
-$genericType$ $resultVar$;
-$resultVar$ = new $genericType$(0);
-
-/* Compute the result of a sum operation. */
-for ($genericType$ $elementName$ : $sourceExp$) {
-    $resultVar$ += $elementName$;
-}
-
+// --- Collection.sum() ---
+sumOperationOnCollection(sourceExp, argsExp) ::= <<
+$collectionUtility()$.sum($sourceExp$)
 >>
 
-
-// --- SymmetricDifference Operation ---
-symmetricDifferenceOperation(sourceExp, argsExp) ::= <<
-$sourceExp$.symmetricDifference($argsExp$)
+// --- Set.symmatricDifference(Set(T)) ---
+symmetricDifferenceOperationOnSet(sourceExp, argsExp) ::= <<
+$setUtility()$.symmetricDifference($sourceExp$, $argsExp$)
 >>
-
 
 // --- ToBoolean Operation ---
 toBooleanOperation(sourceExp) ::= <<
@@ -513,9 +646,24 @@ $sourceExp$.$operationName$($argsExp:{arg | $arg$}; separator = ", "$)
 >>
 
 
-// --- Union Operation ---
-unionOperation(sourceExp, argsExp) ::= <<
-$sourceExp$.union($argsExp$)
+// --- Bag.union(Bag(T)) and Bag.union(Set(T)) ---
+unionOperationOnBag(sourceExp, argsExp) ::= <<
+$bagUtility()$.union($sourceExp$, $argsExp$)
+>>
+
+// --- Sequence.union(Sequence.union(T)) ---
+unionOperationOnSequence(sourceExp, argsExp) ::= <<
+$sequenceUtility()$.union($sourceExp$, $argsExp$)
+>>
+
+// --- Set.union(Bag(T)) ---
+unionOperationWithBagOnSet(sourceExp, argsExp) ::= <<
+$setUtility()$.unionWihtBag($sourceExp$, $argsExp$)
+>>
+
+// --- Set.union(Set(T)) ---
+unionOperationWithSetOnSet(sourceExp, argsExp) ::= <<
+$setUtility()$.unionWihtSet($sourceExp$, $argsExp$)
 >>
 
 
@@ -533,12 +681,10 @@ addOperationName() ::= <<
 add
 >>
 
-
 // --- AddAll Operation Name ---
 addAllOperationName() ::= <<
 addAll
 >>
-
 
 // --- Name for the method to manually check Invariants ---
 checkInvariantsOperationName() ::= <<
@@ -548,4 +694,29 @@ checkInvariants
 // --- Name for the method to deeply clone Objects ---
 deepCopyOperationName() ::= <<
 createCopy
+>>
+
+// --- Utility Class for Bag Operations ---
+bagUtility() ::= <<
+tudresden.ocl20.pivot.ocl22java.types.util.OclBags
+>>
+
+// --- Utility Class for Collection Operations ---
+collectionUtility() ::= <<
+tudresden.ocl20.pivot.ocl22java.types.util.OclCollections
+>>
+
+// --- Utility Class for OrderedSet Operations ---
+orderedSetUtility() ::= <<
+tudresden.ocl20.pivot.ocl22java.types.util.OclOrderedSets
+>>
+
+// --- Utility Class for Sequence Operations ---
+sequenceUtility() ::= <<
+tudresden.ocl20.pivot.ocl22java.types.util.OclSequences
+>>
+
+// --- Utility Class for Set Operations ---
+setUtility() ::= <<
+tudresden.ocl20.pivot.ocl22java.types.util.OclSets
 >>
