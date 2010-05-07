@@ -26,22 +26,22 @@ public privileged aspect InvAspect12 {
     after(tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyAccount aClass) : checkInvariantsCaller(aClass) {
         /* Disable this constraint for subclasses of LoyaltyAccount. */
         if (aClass.getClass().getCanonicalName().equals("tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyAccount")) {
-        tudresden.ocl20.pivot.ocl2java.types.OclBag<tudresden.ocl20.pivot.examples.royalsandloyals.CustomerCard> result2;
-        result2 = new tudresden.ocl20.pivot.ocl2java.types.OclBag<tudresden.ocl20.pivot.examples.royalsandloyals.CustomerCard>();
+        java.util.ArrayList<tudresden.ocl20.pivot.examples.royalsandloyals.CustomerCard> result2;
+        result2 = new java.util.ArrayList<tudresden.ocl20.pivot.examples.royalsandloyals.CustomerCard>();
         
         /* Iterator Collect: Iterate through all elements and collect them. Elements which are collections are flattened. */
         for (tudresden.ocl20.pivot.examples.royalsandloyals.Transaction anElement2 : aClass.transactions) {
             result2.add(anElement2.card);
         }
-        tudresden.ocl20.pivot.ocl2java.types.OclBag<tudresden.ocl20.pivot.examples.royalsandloyals.Customer> result1;
-        result1 = new tudresden.ocl20.pivot.ocl2java.types.OclBag<tudresden.ocl20.pivot.examples.royalsandloyals.Customer>();
+        java.util.ArrayList<tudresden.ocl20.pivot.examples.royalsandloyals.Customer> result1;
+        result1 = new java.util.ArrayList<tudresden.ocl20.pivot.examples.royalsandloyals.Customer>();
         
         /* Iterator Collect: Iterate through all elements and collect them. Elements which are collections are flattened. */
         for (tudresden.ocl20.pivot.examples.royalsandloyals.CustomerCard anElement1 : result2) {
             result1.add(anElement1.owner);
         }
     
-        if (!((Object) result1.asSet().size()).equals(new Integer(1))) {
+        if (!((Object) tudresden.ocl20.pivot.ocl22java.types.util.OclCollections.size(tudresden.ocl20.pivot.ocl22java.types.util.OclBags.asSet(result1))).equals(new Integer(1))) {
         	// TODO Auto-generated code executed when constraint is violated.
         	throw new RuntimeException("Error: Constraint was violated.");
         }

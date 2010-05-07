@@ -1,9 +1,9 @@
-tudresden.ocl20.pivot.ocl2java.types.OclBag<tudresden.ocl20.pivot.examples.royalsandloyals.ProgramPartner> result1;
-result1 = new tudresden.ocl20.pivot.ocl2java.types.OclBag<tudresden.ocl20.pivot.examples.royalsandloyals.ProgramPartner>();
+java.util.ArrayList<tudresden.ocl20.pivot.examples.royalsandloyals.ProgramPartner> result1;
+result1 = new java.util.ArrayList<tudresden.ocl20.pivot.examples.royalsandloyals.ProgramPartner>();
 
 /* Iterator Collect: Iterate through all elements and collect them. Elements which are collections are flattened. */
 for (tudresden.ocl20.pivot.examples.royalsandloyals.Service anElement1 : aClass.availableServices) {
     result1.add(anElement1.partner);
 }
 
-aClass.program.partners.containsAll(result1)
+tudresden.ocl20.pivot.ocl22java.types.util.OclCollections.includesAll(aClass.program.partners, result1)

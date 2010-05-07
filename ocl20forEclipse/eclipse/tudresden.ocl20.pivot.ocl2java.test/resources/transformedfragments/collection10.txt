@@ -1,1 +1,1 @@
-(aClass.participants.size() < new Integer(10000))
+(tudresden.ocl20.pivot.ocl22java.types.util.OclCollections.size(aClass.participants) < new Integer(10000))

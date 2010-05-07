@@ -1,4 +1,4 @@
-tudresden.ocl20.pivot.ocl2java.types.OclOrderedSet<tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyAccount> result1;
+java.util.ArrayList<tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyAccount> result1;
 java.util.Comparator<tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyAccount> comparator1;
 
 result1 = aClass.membership.accounts;
@@ -8,19 +8,19 @@ comparator1 = new java.util.Comparator<tudresden.ocl20.pivot.examples.royalsandl
     /** Method which compares two elements of the collection. */
     public int compare(tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyAccount anElement1, tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyAccount anElement2) {
         int result2;
-        
+
         result2 = 0;
-        
+
         if (anElement1.number < anElement2.number) {
             result2 = -1;
         } else if (anElement1.number > anElement2.number) {
             result2 = 1;
         }
-				
+
         return result2;
     }
 };
 
 result1 = java.util.Collections.sort(result1, comparator1);
 
-(result1.size() > new Integer(0))
+(tudresden.ocl20.pivot.ocl22java.types.util.OclCollections.size(result1) > new Integer(0))

@@ -26,8 +26,8 @@ public privileged aspect InvAspect7 {
     after(tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyProgram aClass) : checkInvariantsCaller(aClass) {
         /* Disable this constraint for subclasses of LoyaltyProgram. */
         if (aClass.getClass().getCanonicalName().equals("tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyProgram")) {
-        tudresden.ocl20.pivot.ocl2java.types.OclBag<tudresden.ocl20.pivot.examples.royalsandloyals.Service> result2;
-        result2 = new tudresden.ocl20.pivot.ocl2java.types.OclBag<tudresden.ocl20.pivot.examples.royalsandloyals.Service>();
+        java.util.ArrayList<tudresden.ocl20.pivot.examples.royalsandloyals.Service> result2;
+        result2 = new java.util.ArrayList<tudresden.ocl20.pivot.examples.royalsandloyals.Service>();
         
         /* Iterator Collect: Iterate through all elements and collect them. Elements which are collections are flattened. */
         for (tudresden.ocl20.pivot.examples.royalsandloyals.ProgramPartner anElement2 : aClass.partners) {
@@ -45,7 +45,7 @@ public privileged aspect InvAspect7 {
             // no else
         }
     
-        if (!(!result1 || aClass.membership.accounts.isEmpty())) {
+        if (!(!result1 || tudresden.ocl20.pivot.ocl22java.types.util.OclCollections.isEmpty(aClass.membership.accounts))) {
         	// TODO Auto-generated code executed when constraint is violated.
         	throw new RuntimeException("Error: Constraint was violated.");
         }

@@ -23,14 +23,14 @@ public privileged aspect DefAspect1 {
      *       def: usedServices = transactions[].service[].asSet()</code></p>
      */
     before(tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyAccount aClass): usedServicesGetter(aClass) {
-        tudresden.ocl20.pivot.ocl2java.types.OclBag<tudresden.ocl20.pivot.examples.royalsandloyals.Service> result1;
-        result1 = new tudresden.ocl20.pivot.ocl2java.types.OclBag<tudresden.ocl20.pivot.examples.royalsandloyals.Service>();
+        java.util.ArrayList<tudresden.ocl20.pivot.examples.royalsandloyals.Service> result1;
+        result1 = new java.util.ArrayList<tudresden.ocl20.pivot.examples.royalsandloyals.Service>();
         
         /* Iterator Collect: Iterate through all elements and collect them. Elements which are collections are flattened. */
         for (tudresden.ocl20.pivot.examples.royalsandloyals.Transaction anElement1 : aClass.transactions) {
             result1.add(anElement1.service);
         }
     
-        aClass.usedServices = result1.asSet();
+        aClass.usedServices = tudresden.ocl20.pivot.ocl22java.types.util.OclBags.asSet(result1);
     }
 }

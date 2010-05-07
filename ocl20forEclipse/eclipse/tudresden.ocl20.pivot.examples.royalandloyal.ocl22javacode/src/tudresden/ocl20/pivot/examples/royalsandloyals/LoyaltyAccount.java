@@ -18,7 +18,8 @@
  */
 package tudresden.ocl20.pivot.examples.royalsandloyals;
 
-import tudresden.ocl20.pivot.ocl2java.types.OclSet;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * <p>
@@ -38,7 +39,7 @@ public class LoyaltyAccount {
 
 	protected Membership membership;
 
-	protected OclSet<Transaction> transactions = new OclSet<Transaction>();
+	protected Set<Transaction> transactions = new HashSet<Transaction>();
 
 	public void burn(int points) {
 
@@ -101,7 +102,7 @@ public class LoyaltyAccount {
 		this.membership = membership;
 	}
 
-	public OclSet<Transaction> getTransactions() {
+	public Set<Transaction> getTransactions() {
 
 		return transactions;
 	}

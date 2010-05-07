@@ -1,1 +1,1 @@
-source.reverse()
+tudresden.ocl20.pivot.ocl22java.types.util.OclSequences.reverse(source)

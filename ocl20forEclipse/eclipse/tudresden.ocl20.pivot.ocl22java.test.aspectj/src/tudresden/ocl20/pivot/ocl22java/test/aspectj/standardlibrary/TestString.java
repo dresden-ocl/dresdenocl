@@ -24,10 +24,12 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.Test;
 
 import testpackage.Class1;
-import tudresden.ocl20.pivot.ocl2java.types.OclSequence;
 
 /**
  * <p>
@@ -65,16 +67,16 @@ public class TestString {
 		Class1 class1;
 		class1 = new Class1();
 
-		OclSequence<String> expectedResult;
-		expectedResult = new OclSequence<String>();
+		List<String> expectedResult;
+		expectedResult = new ArrayList<String>();
 		expectedResult.add("s");
 		expectedResult.add("o");
 		expectedResult.add("m");
 		expectedResult.add("e");
 
-		OclSequence<String> result;
+		List<String> result;
 		result = class1.testStringCharacters("some");
-		
+
 		assertNotNull(result);
 		assertEquals(expectedResult, result);
 	}
@@ -90,12 +92,12 @@ public class TestString {
 		Class1 class1;
 		class1 = new Class1();
 
-		OclSequence<String> expectedResult;
-		expectedResult = new OclSequence<String>();
+		List<String> expectedResult;
+		expectedResult = new ArrayList<String>();
 
-		OclSequence<String> result;
+		List<String> result;
 		result = class1.testStringCharacters("");
-		
+
 		assertNotNull(result);
 		assertEquals(expectedResult, result);
 	}

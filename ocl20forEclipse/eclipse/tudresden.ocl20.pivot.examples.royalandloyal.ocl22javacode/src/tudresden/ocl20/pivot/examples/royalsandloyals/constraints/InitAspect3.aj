@@ -20,8 +20,8 @@ public privileged aspect InitAspect3 {
      *       init: Set{}</code></p>
      */
     after(tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyAccount aClass) : allLoyaltyAccountConstructors(aClass) {
-        tudresden.ocl20.pivot.ocl2java.types.OclSet collection1;
-        collection1 = new tudresden.ocl20.pivot.ocl2java.types.OclSet();
+        java.util.HashSet collection1;
+        collection1 = new java.util.HashSet();
     
         aClass.transactions = collection1;
     }

@@ -1,9 +1,9 @@
-tudresden.ocl20.pivot.ocl2java.types.OclOrderedSet<String> collection1;
-collection1 = new tudresden.ocl20.pivot.ocl2java.types.OclOrderedSet<String>();
+java.util.ArrayList<String> collection1;
+collection1 = new java.util.ArrayList<String>();
 
 collection1.add("a");
 collection1.add("b");
 collection1.add("c");
 collection1.add("d");
 
-collection1.last().equals("d")
+tudresden.ocl20.pivot.ocl22java.types.util.OclOrderedSets.last(collection1).equals("d")

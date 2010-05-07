@@ -44,7 +44,7 @@ public privileged aspect DefAspect9 {
      * <code>context Class1
      *       def: testOclAnyAllInstances = Class1[].allInstances()</code></p>
      */
-    tudresden.ocl20.pivot.ocl2java.types.OclSet<testpackage.Class1> around(testpackage.Class1 aClass): testOclAnyAllInstancesCaller(aClass) {
-        return (new tudresden.ocl20.pivot.ocl2java.types.OclSet<testpackage.Class1>((java.util.Set<testpackage.Class1>) allInstances.get(testpackage.Class1.class.getCanonicalName()).keySet()));
+    java.util.Set<testpackage.Class1> around(testpackage.Class1 aClass): testOclAnyAllInstancesCaller(aClass) {
+        return (new java.util.HashSet<testpackage.Class1>((java.util.Set<testpackage.Class1>) allInstances.get(testpackage.Class1.class.getCanonicalName()).keySet()));
     }
 }

@@ -18,7 +18,8 @@
  */
 package tudresden.ocl20.pivot.examples.royalsandloyals;
 
-import tudresden.ocl20.pivot.ocl2java.types.OclSet;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * <p>
@@ -32,7 +33,7 @@ public class Membership {
 
 	protected CustomerCard card;
 
-	protected OclSet<LoyaltyAccount> accounts = new OclSet<LoyaltyAccount>();
+	protected Set<LoyaltyAccount> accounts = new HashSet<LoyaltyAccount>();
 
 	protected LoyaltyProgram program;
 
@@ -48,7 +49,7 @@ public class Membership {
 		this.card = card;
 	}
 
-	public OclSet<LoyaltyAccount> getAccounts() {
+	public Set<LoyaltyAccount> getAccounts() {
 
 		return accounts;
 	}

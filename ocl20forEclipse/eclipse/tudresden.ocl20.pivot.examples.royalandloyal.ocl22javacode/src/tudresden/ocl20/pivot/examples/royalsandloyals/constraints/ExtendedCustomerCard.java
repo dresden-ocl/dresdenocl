@@ -21,7 +21,7 @@ public class ExtendedCustomerCard extends Object {
      *A method signature implemented by an aspect.
      *</p>
      */
-    public tudresden.ocl20.pivot.ocl2java.types.OclSet<tudresden.ocl20.pivot.examples.royalsandloyals.CustomerCard> getAllInstances() {
+    public java.util.Set<tudresden.ocl20.pivot.examples.royalsandloyals.CustomerCard> getAllInstances() {
         return null;
     }
 

@@ -1,1 +1,1 @@
-(aClass.program.levels.isEmpty() || aClass.program.levels.notEmpty())
+(tudresden.ocl20.pivot.ocl22java.types.util.OclCollections.isEmpty(aClass.program.levels) || tudresden.ocl20.pivot.ocl22java.types.util.OclCollections.notEmpty(aClass.program.levels))

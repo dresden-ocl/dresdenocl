@@ -1,1 +1,1 @@
-aClass.accounts.isEmpty()
+tudresden.ocl20.pivot.ocl22java.types.util.OclCollections.isEmpty(aClass.accounts)

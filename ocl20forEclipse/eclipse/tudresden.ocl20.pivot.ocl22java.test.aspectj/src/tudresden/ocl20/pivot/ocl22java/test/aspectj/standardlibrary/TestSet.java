@@ -21,10 +21,12 @@ package tudresden.ocl20.pivot.ocl22java.test.aspectj.standardlibrary;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import org.junit.Test;
 
 import testpackage.Class1;
-import tudresden.ocl20.pivot.ocl2java.types.OclSet;
 
 /**
  * <p>
@@ -47,23 +49,23 @@ public class TestSet {
 		Class1 class1;
 		class1 = new Class1();
 
-		OclSet<Object> containedSet01;
-		containedSet01 = new OclSet<Object>();
+		Set<Object> containedSet01;
+		containedSet01 = new HashSet<Object>();
 		containedSet01.add(1);
 		containedSet01.add(2);
 
-		OclSet<Object> containedSet02;
-		containedSet02 = new OclSet<Object>();
+		Set<Object> containedSet02;
+		containedSet02 = new HashSet<Object>();
 		containedSet02.add(1);
 		containedSet02.add(3);
 
-		OclSet<Object> oclSet;
-		oclSet = new OclSet<Object>();
+		Set<Object> oclSet;
+		oclSet = new HashSet<Object>();
 		oclSet.add(containedSet01);
 		oclSet.add(containedSet02);
 
-		OclSet<Object> expectedSet;
-		expectedSet = new OclSet<Object>();
+		Set<Object> expectedSet;
+		expectedSet = new HashSet<Object>();
 		expectedSet.add(1);
 		expectedSet.add(2);
 		expectedSet.add(3);

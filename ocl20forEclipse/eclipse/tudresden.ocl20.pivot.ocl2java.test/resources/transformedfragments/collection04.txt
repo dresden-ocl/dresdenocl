@@ -1,5 +1,5 @@
-tudresden.ocl20.pivot.ocl2java.types.OclSequence<Integer> collection1;
-collection1 = new tudresden.ocl20.pivot.ocl2java.types.OclSequence<Integer>();
+java.util.ArrayList<Integer> collection1;
+collection1 = new java.util.ArrayList<Integer>();
 
 collection1.add(new Integer(1));
 collection1.add(new Integer(3));
@@ -7,4 +7,4 @@ collection1.add(new Integer(45));
 collection1.add(new Integer(2));
 collection1.add(new Integer(3));
 
-((Object) collection1.size()).equals(new Integer(5))
+((Object) tudresden.ocl20.pivot.ocl22java.types.util.OclCollections.size(collection1)).equals(new Integer(5))

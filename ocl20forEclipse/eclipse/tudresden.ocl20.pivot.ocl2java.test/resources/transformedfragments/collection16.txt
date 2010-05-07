@@ -1,1 +1,1 @@
-((Object) aClass.program.levels.excludes(aClass.currentLevel)).equals(new Boolean(false))
+((Object) tudresden.ocl20.pivot.ocl22java.types.util.OclCollections.excludes(aClass.program.levels, aClass.currentLevel)).equals(new Boolean(false))

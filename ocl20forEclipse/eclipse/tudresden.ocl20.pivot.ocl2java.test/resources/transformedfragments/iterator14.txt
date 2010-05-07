@@ -1,5 +1,5 @@
-tudresden.ocl20.pivot.ocl2java.types.OclBag<Integer> result2;
-result2 = new tudresden.ocl20.pivot.ocl2java.types.OclBag<Integer>();
+java.util.ArrayList<Integer> result2;
+result2 = new java.util.ArrayList<Integer>();
 
 /* Iterator Collect: Iterate through all elements and collect them. Elements which are collections are flattened. */
 for (tudresden.ocl20.pivot.examples.royalsandloyals.Transaction anElement2 : aClass.transactions) {

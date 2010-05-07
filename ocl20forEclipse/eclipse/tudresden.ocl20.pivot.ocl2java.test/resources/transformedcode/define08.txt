@@ -23,24 +23,24 @@ public privileged aspect DefAspect1 {
      * <code>context ProgramPartner
      *       def: getBurningTransactions = self[].deliveredServices[].transaction[] -> iterate (t:Transaction ; resultSet:Set( Transaction )=Set{} | if t[].oclIsTypeOf( Burning[]) then resultSet[].including( t[]) else resultSet[] )</code></p>
      */
-    tudresden.ocl20.pivot.ocl2java.types.OclSet<tudresden.ocl20.pivot.examples.royalsandloyals.Transaction> around(tudresden.ocl20.pivot.examples.royalsandloyals.ProgramPartner aClass): getBurningTransactionsCaller(aClass) {
-        tudresden.ocl20.pivot.ocl2java.types.OclBag<tudresden.ocl20.pivot.examples.royalsandloyals.Transaction> result1;
-        result1 = new tudresden.ocl20.pivot.ocl2java.types.OclBag<tudresden.ocl20.pivot.examples.royalsandloyals.Transaction>();
+    java.util.Set<tudresden.ocl20.pivot.examples.royalsandloyals.Transaction> around(tudresden.ocl20.pivot.examples.royalsandloyals.ProgramPartner aClass): getBurningTransactionsCaller(aClass) {
+        java.util.ArrayList<tudresden.ocl20.pivot.examples.royalsandloyals.Transaction> result1;
+        result1 = new java.util.ArrayList<tudresden.ocl20.pivot.examples.royalsandloyals.Transaction>();
         
         /* Iterator Collect: Iterate through all elements and collect them. Elements which are collections are flattened. */
         for (tudresden.ocl20.pivot.examples.royalsandloyals.Service anElement1 : aClass.deliveredServices) {
             result1.add(anElement1.transaction);
         }
-        tudresden.ocl20.pivot.ocl2java.types.OclSet collection1;
-        collection1 = new tudresden.ocl20.pivot.ocl2java.types.OclSet();
-        tudresden.ocl20.pivot.ocl2java.types.OclSet<tudresden.ocl20.pivot.examples.royalsandloyals.Transaction> resultSet;
+        java.util.HashSet collection1;
+        collection1 = new java.util.HashSet();
+        java.util.Set<tudresden.ocl20.pivot.examples.royalsandloyals.Transaction> resultSet;
         resultSet = collection1;
         /* IterateExp: Iterate through all elements and perform an operation on them. */
         for (tudresden.ocl20.pivot.examples.royalsandloyals.Transaction anElement2 : result1) {
-            tudresden.ocl20.pivot.ocl2java.types.OclSet<tudresden.ocl20.pivot.examples.royalsandloyals.Transaction> ifExpResult1;
+            java.util.Set<tudresden.ocl20.pivot.examples.royalsandloyals.Transaction> ifExpResult1;
             
             if (anElement2.getClass().getCanonicalName().equals("tudresden.ocl20.pivot.examples.royalsandloyals.Burning")) {
-                ifExpResult1 = resultSet.including(anElement2);
+                ifExpResult1 = tudresden.ocl20.pivot.ocl22java.types.util.OclSets.including(resultSet, anElement2);
             } else {
                 ifExpResult1 = resultSet;
             }

@@ -23,17 +23,17 @@ public privileged aspect DefAspect16 {
      * <code>context Class1
      *       def: testStringCharacters = source[].characters()</code></p>
      */
-    tudresden.ocl20.pivot.ocl2java.types.OclSequence<String> around(testpackage.Class1 aClass, String source): testStringCharactersCaller(aClass, source) {
-        tudresden.ocl20.pivot.ocl2java.types.OclSequence<String> result1;
-        result1 = new tudresden.ocl20.pivot.ocl2java.types.OclSequence<String>();
+    java.util.List<String> around(testpackage.Class1 aClass, String source): testStringCharactersCaller(aClass, source) {
+        java.util.List<String> result1;
+        result1 = new java.util.ArrayList<String>();
         
-        /* Compute the result of a caharacters operation. */
+        /* Compute the result of a characters operation. */
         for (String anElement1 : source.split("")) {
             result1.add(anElement1);
         }
         
         /* Remove the first element ''. */
-        result1.remove(result1.first());
+        result1.remove(tudresden.ocl20.pivot.ocl22java.types.util.OclSequences.first(result1));
     
         return result1;
     }

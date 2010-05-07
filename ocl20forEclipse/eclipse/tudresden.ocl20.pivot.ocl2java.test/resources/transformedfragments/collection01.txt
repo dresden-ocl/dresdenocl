@@ -1,9 +1,9 @@
-tudresden.ocl20.pivot.ocl2java.types.OclSet<Integer> collection1;
-collection1 = new tudresden.ocl20.pivot.ocl2java.types.OclSet<Integer>();
+java.util.HashSet<Integer> collection1;
+collection1 = new java.util.HashSet<Integer>();
 
 collection1.add(new Integer(1));
 collection1.add(new Integer(2));
 collection1.add(new Integer(5));
 collection1.add(new Integer(88));
 
-((Object) collection1.size()).equals(new Integer(4))
+((Object) tudresden.ocl20.pivot.ocl22java.types.util.OclCollections.size(collection1)).equals(new Integer(4))

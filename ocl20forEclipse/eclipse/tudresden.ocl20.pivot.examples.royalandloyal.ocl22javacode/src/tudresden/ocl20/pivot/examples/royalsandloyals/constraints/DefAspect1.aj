@@ -23,22 +23,14 @@ public privileged aspect DefAspect1 {
      *       def: turnover = transactions[].amount[].sum()</code></p>
      */
     before(tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyAccount aClass): turnoverGetter(aClass) {
-        tudresden.ocl20.pivot.ocl2java.types.OclBag<Float> result1;
-        result1 = new tudresden.ocl20.pivot.ocl2java.types.OclBag<Float>();
+        java.util.ArrayList<Float> result1;
+        result1 = new java.util.ArrayList<Float>();
         
         /* Iterator Collect: Iterate through all elements and collect them. Elements which are collections are flattened. */
         for (tudresden.ocl20.pivot.examples.royalsandloyals.Transaction anElement1 : aClass.transactions) {
             result1.add(anElement1.amount);
         }
-
-        Float result2;
-        result2 = new Float(0);
-        
-        /* Compute the result of a sum operation. */
-        for (Float anElement2 : result1) {
-            result2 += anElement2;
-        }
     
-        aClass.turnover = result2;
+        aClass.turnover = tudresden.ocl20.pivot.ocl22java.types.util.OclCollections.sum(result1);
     }
 }

@@ -1,9 +1,9 @@
-tudresden.ocl20.pivot.ocl2java.types.OclOrderedSet<String> collection1;
-collection1 = new tudresden.ocl20.pivot.ocl2java.types.OclOrderedSet<String>();
+java.util.ArrayList<String> collection1;
+collection1 = new java.util.ArrayList<String>();
 
 collection1.add("Apfel");
 collection1.add("Orange");
 collection1.add("Erdbeere");
 collection1.add("Birne");
 
-((Object) collection1.size()).equals(new Integer(4))
+((Object) tudresden.ocl20.pivot.ocl22java.types.util.OclCollections.size(collection1)).equals(new Integer(4))

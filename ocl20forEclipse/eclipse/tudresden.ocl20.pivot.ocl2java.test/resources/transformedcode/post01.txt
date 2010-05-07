@@ -24,18 +24,18 @@ public privileged aspect PostAspect1 {
         /* Disable this constraint for subclasses of LoyaltyProgram. */
         if (aClass.getClass().getCanonicalName().equals("tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyProgram")) {
     
-        tudresden.ocl20.pivot.ocl2java.types.OclSet<tudresden.ocl20.pivot.examples.royalsandloyals.Customer> atPreValue1;
+        java.util.HashSet<tudresden.ocl20.pivot.examples.royalsandloyals.Customer> atPreValue1;
         
         if ((Object) aClass.participants == null) {
             atPreValue1 = null;
         } else {
-            atPreValue1 = new tudresden.ocl20.pivot.ocl2java.types.OclSet<tudresden.ocl20.pivot.examples.royalsandloyals.Customer>(aClass.participants);
+            atPreValue1 = new java.util.HashSet<tudresden.ocl20.pivot.examples.royalsandloyals.Customer>(aClass.participants);
         }
     
         Boolean result;
         result = proceed(aClass, c);
     
-        if (!aClass.participants.equals(atPreValue1.including(c))) {
+        if (!aClass.participants.equals(tudresden.ocl20.pivot.ocl22java.types.util.OclSets.including(atPreValue1, c))) {
         	// TODO Auto-generated code executed when constraint is violated.
         	throw new RuntimeException("Error: Constraint was violated.");
         }

@@ -12,7 +12,7 @@ public class ExtendedProgramPartner extends Object {
      *A method signature implemented by an aspect.
      *</p>
      */
-    public tudresden.ocl20.pivot.ocl2java.types.OclSet<tudresden.ocl20.pivot.examples.royalsandloyals.Transaction> getBurningTransactions() {
+    public java.util.Set<tudresden.ocl20.pivot.examples.royalsandloyals.Transaction> getBurningTransactions() {
         return null;
     }
 

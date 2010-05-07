@@ -1,15 +1,15 @@
-tudresden.ocl20.pivot.ocl2java.types.OclOrderedSet<String> collection1;
-collection1 = new tudresden.ocl20.pivot.ocl2java.types.OclOrderedSet<String>();
+java.util.ArrayList<String> collection1;
+collection1 = new java.util.ArrayList<String>();
 
 collection1.add("a");
 collection1.add("b");
 collection1.add("c");
 collection1.add("d");
 
-tudresden.ocl20.pivot.ocl2java.types.OclOrderedSet<String> collection2;
-collection2 = new tudresden.ocl20.pivot.ocl2java.types.OclOrderedSet<String>();
+java.util.ArrayList<String> collection2;
+collection2 = new java.util.ArrayList<String>();
 
 collection2.add("b");
 collection2.add("c");
 
-collection1.subOrderedSet(new Integer(2), new Integer(3)).equals(collection2)
+tudresden.ocl20.pivot.ocl22java.types.util.OclOrderedSets.subOrderedSet(collection1, new Integer(2), new Integer(3)).equals(collection2)

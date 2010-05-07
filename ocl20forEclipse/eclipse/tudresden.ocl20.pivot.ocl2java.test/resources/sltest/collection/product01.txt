@@ -1,1 +1,1 @@
-source.product(arg01).size()
+tudresden.ocl20.pivot.ocl22java.types.util.OclCollections.size(tudresden.ocl20.pivot.ocl22java.types.util.OclCollections.product(source, arg01))

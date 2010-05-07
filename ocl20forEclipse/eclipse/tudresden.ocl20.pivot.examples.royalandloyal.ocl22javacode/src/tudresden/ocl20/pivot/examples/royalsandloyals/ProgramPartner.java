@@ -18,7 +18,8 @@
  */
 package tudresden.ocl20.pivot.examples.royalsandloyals;
 
-import tudresden.ocl20.pivot.ocl2java.types.OclBag;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <p>
@@ -34,9 +35,9 @@ public class ProgramPartner {
 
 	protected int numberOfCustomers;
 
-	protected OclBag<LoyaltyProgram> programs = new OclBag<LoyaltyProgram>();
+	protected List<LoyaltyProgram> programs = new ArrayList<LoyaltyProgram>();
 
-	protected OclBag<Service> deliveredServices = new OclBag<Service>();
+	protected List<Service> deliveredServices = new ArrayList<Service>();
 
 	public String getName() {
 
@@ -58,7 +59,7 @@ public class ProgramPartner {
 		this.numberOfCustomers = numberOfCustomers;
 	}
 
-	public OclBag<LoyaltyProgram> getPrograms() {
+	public List<LoyaltyProgram> getPrograms() {
 
 		return programs;
 	}
@@ -68,7 +69,7 @@ public class ProgramPartner {
 		this.programs.add(aProgram);
 	}
 
-	public OclBag<Service> getDeliveredServices() {
+	public List<Service> getDeliveredServices() {
 
 		return deliveredServices;
 	}

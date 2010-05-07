@@ -27,7 +27,7 @@ public privileged aspect PostAspect1 {
         Integer result;
         result = proceed(aClass, anInt);
     
-        if (!((Object) result).equals((anInt * new Integer(2)))) {
+        if (!result.equals((anInt * new Integer(2)))) {
         	// TODO Auto-generated code executed when constraint is violated.
         	throw new RuntimeException("Error: Constraint was violated.");
         }

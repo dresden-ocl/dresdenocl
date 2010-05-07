@@ -1,4 +1,4 @@
-tudresden.ocl20.pivot.ocl2java.types.OclOrderedSet<tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyAccount> result2;
+java.util.ArrayList<tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyAccount> result2;
 java.util.Comparator<tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyAccount> comparator1;
 
 result2 = aClass.membership.accounts;
@@ -22,7 +22,7 @@ comparator1 = new java.util.Comparator<tudresden.ocl20.pivot.examples.royalsandl
 };
 
 result2 = java.util.Collections.sort(result2, comparator1);
-tudresden.ocl20.pivot.ocl2java.types.OclOrderedSet<tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyAccount> result1;
+java.util.ArrayList<tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyAccount> result1;
 java.util.Comparator<tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyAccount> comparator2;
 
 result1 = result2;
@@ -47,4 +47,4 @@ comparator2 = new java.util.Comparator<tudresden.ocl20.pivot.examples.royalsandl
 
 result1 = java.util.Collections.sort(result1, comparator2);
 
-(result1.size() > new Integer(0))
+(tudresden.ocl20.pivot.ocl22java.types.util.OclCollections.size(result1) > new Integer(0))

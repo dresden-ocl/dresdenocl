@@ -44,7 +44,7 @@ public privileged aspect DefAspect7 {
      * <code>context CustomerCard
      *       def: getAllInstances = CustomerCard[].allInstances()</code></p>
      */
-    tudresden.ocl20.pivot.ocl2java.types.OclSet<tudresden.ocl20.pivot.examples.royalsandloyals.CustomerCard> around(tudresden.ocl20.pivot.examples.royalsandloyals.CustomerCard aClass): getAllInstancesCaller(aClass) {
-        return (new tudresden.ocl20.pivot.ocl2java.types.OclSet<tudresden.ocl20.pivot.examples.royalsandloyals.CustomerCard>((java.util.Set<tudresden.ocl20.pivot.examples.royalsandloyals.CustomerCard>) allInstances.get(tudresden.ocl20.pivot.examples.royalsandloyals.CustomerCard.class.getCanonicalName()).keySet()));
+    java.util.Set<tudresden.ocl20.pivot.examples.royalsandloyals.CustomerCard> around(tudresden.ocl20.pivot.examples.royalsandloyals.CustomerCard aClass): getAllInstancesCaller(aClass) {
+        return (new java.util.HashSet<tudresden.ocl20.pivot.examples.royalsandloyals.CustomerCard>((java.util.Set<tudresden.ocl20.pivot.examples.royalsandloyals.CustomerCard>) allInstances.get(tudresden.ocl20.pivot.examples.royalsandloyals.CustomerCard.class.getCanonicalName()).keySet()));
     }
 }

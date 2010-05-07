@@ -20,8 +20,8 @@ public privileged aspect DeriveAspect2 {
      *       def: totalPointsEarned = transactions[] -> select (  | oclIsTypeOf( Earning[])).points[].sum()</code></p>
      */
     before(tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyAccount aClass): totalPointsEarnedGetter(aClass) {
-        tudresden.ocl20.pivot.ocl2java.types.OclSet<tudresden.ocl20.pivot.examples.royalsandloyals.Transaction> result2;
-        result2 = new tudresden.ocl20.pivot.ocl2java.types.OclSet<tudresden.ocl20.pivot.examples.royalsandloyals.Transaction>();
+        java.util.HashSet<tudresden.ocl20.pivot.examples.royalsandloyals.Transaction> result2;
+        result2 = new java.util.HashSet<tudresden.ocl20.pivot.examples.royalsandloyals.Transaction>();
         
         /* Iterator Select: Select all elements which fulfill the condition. */
         for (tudresden.ocl20.pivot.examples.royalsandloyals.Transaction anElement2 : aClass.transactions) {
@@ -30,22 +30,14 @@ public privileged aspect DeriveAspect2 {
             }
             // no else
         }
-        tudresden.ocl20.pivot.ocl2java.types.OclBag<Integer> result1;
-        result1 = new tudresden.ocl20.pivot.ocl2java.types.OclBag<Integer>();
+        java.util.ArrayList<Integer> result1;
+        result1 = new java.util.ArrayList<Integer>();
         
         /* Iterator Collect: Iterate through all elements and collect them. Elements which are collections are flattened. */
         for (tudresden.ocl20.pivot.examples.royalsandloyals.Transaction anElement1 : result2) {
             result1.add(anElement1.points);
         }
-
-        Integer result3;
-        result3 = new Integer(0);
-        
-        /* Compute the result of a sum operation. */
-        for (Integer anElement3 : result1) {
-            result3 += anElement3;
-        }
     
-        aClass.totalPointsEarned = result3;
+        aClass.totalPointsEarned = tudresden.ocl20.pivot.ocl22java.types.util.OclCollections.sum(result1);
     }
 }

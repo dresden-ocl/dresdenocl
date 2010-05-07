@@ -26,15 +26,15 @@ public privileged aspect PostAspect2 {
     
         proceed(aClass, aPartner, aLevel, aService);
     
-        tudresden.ocl20.pivot.ocl2java.types.OclBag<tudresden.ocl20.pivot.examples.royalsandloyals.Service> result1;
-        result1 = new tudresden.ocl20.pivot.ocl2java.types.OclBag<tudresden.ocl20.pivot.examples.royalsandloyals.Service>();
+        java.util.ArrayList<tudresden.ocl20.pivot.examples.royalsandloyals.Service> result1;
+        result1 = new java.util.ArrayList<tudresden.ocl20.pivot.examples.royalsandloyals.Service>();
         
         /* Iterator Collect: Iterate through all elements and collect them. Elements which are collections are flattened. */
         for (tudresden.ocl20.pivot.examples.royalsandloyals.ProgramPartner anElement1 : aClass.partners) {
             result1.addAll(anElement1.deliveredServices);
         }
     
-        if (!result1.contains(aService)) {
+        if (!tudresden.ocl20.pivot.ocl22java.types.util.OclCollections.includes(result1, aService)) {
         	// TODO Auto-generated code executed when constraint is violated.
         	throw new RuntimeException("Error: Constraint was violated.");
         }

@@ -31,7 +31,7 @@ public privileged aspect InvAspect1 {
         
         /* Iterator ForAll: Iterate and check, if all elements fulfill the condition. */
         for (tudresden.ocl20.pivot.examples.royalsandloyals.ProgramPartner anElement1 : aClass.partners) {
-            if (!(anElement1.deliveredServices.size() >= new Integer(1))) {
+            if (!(tudresden.ocl20.pivot.ocl22java.types.util.OclCollections.size(anElement1.deliveredServices) >= new Integer(1))) {
                 result1 = false;
                 break;
             }

@@ -21,10 +21,12 @@ package tudresden.ocl20.pivot.ocl22java.test.aspectj.standardlibrary;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.Test;
 
 import testpackage.Class1;
-import tudresden.ocl20.pivot.ocl2java.types.OclOrderedSet;
 
 /**
  * <p>
@@ -47,14 +49,14 @@ public class TestOrderedSet {
 		Class1 class1;
 		class1 = new Class1();
 
-		OclOrderedSet<Object> oclOrderedSet01;
-		oclOrderedSet01 = new OclOrderedSet<Object>();
+		List<Object> oclOrderedSet01;
+		oclOrderedSet01 = new ArrayList<Object>();
 		oclOrderedSet01.add("1");
 		oclOrderedSet01.add("2");
 		oclOrderedSet01.add("3");
 
-		OclOrderedSet<Object> oclOrderedSet02;
-		oclOrderedSet02 = new OclOrderedSet<Object>();
+		List<Object> oclOrderedSet02;
+		oclOrderedSet02 = new ArrayList<Object>();
 		oclOrderedSet02.add("3");
 		oclOrderedSet02.add("2");
 		oclOrderedSet02.add("1");

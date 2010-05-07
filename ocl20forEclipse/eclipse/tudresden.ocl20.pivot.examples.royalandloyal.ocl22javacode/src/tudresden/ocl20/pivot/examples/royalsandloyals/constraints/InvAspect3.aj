@@ -26,7 +26,7 @@ public privileged aspect InvAspect3 {
     after(tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyProgram aClass) : checkInvariantsCaller(aClass) {
         /* Disable this constraint for subclasses of LoyaltyProgram. */
         if (aClass.getClass().getCanonicalName().equals("tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyProgram")) {
-        if (!aClass.levels.contains(aClass.membership.currentLevel)) {
+        if (!tudresden.ocl20.pivot.ocl22java.types.util.OclCollections.includes(aClass.levels, aClass.membership.currentLevel)) {
         	// TODO Auto-generated code executed when constraint is violated.
         	throw new RuntimeException("Error: Constraint was violated.");
         }

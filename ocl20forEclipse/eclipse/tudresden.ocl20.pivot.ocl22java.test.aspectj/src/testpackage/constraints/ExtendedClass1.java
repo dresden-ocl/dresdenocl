@@ -41,7 +41,7 @@ public class ExtendedClass1  {
      *A method signature implemented by an aspect.
      *</p>
      */
-    public Object testCollectionMin(tudresden.ocl20.pivot.ocl2java.types.OclCollection<Object> source) {
+    public Object testCollectionMin(java.util.Collection<Object> source) {
         return null;
     }
 
@@ -50,7 +50,7 @@ public class ExtendedClass1  {
      *A method signature implemented by an aspect.
      *</p>
      */
-    public Object testCollectionMax(tudresden.ocl20.pivot.ocl2java.types.OclCollection<Object> source) {
+    public Object testCollectionMax(java.util.Collection<Object> source) {
         return null;
     }
 
@@ -59,7 +59,7 @@ public class ExtendedClass1  {
      *A method signature implemented by an aspect.
      *</p>
      */
-    public Integer testCollectionProduct(tudresden.ocl20.pivot.ocl2java.types.OclCollection<Object> source, tudresden.ocl20.pivot.ocl2java.types.OclCollection<Object> arg01) {
+    public Integer testCollectionProduct(java.util.Collection<Object> source, java.util.Collection<Object> arg01) {
         return null;
     }
 
@@ -77,7 +77,7 @@ public class ExtendedClass1  {
      *A method signature implemented by an aspect.
      *</p>
      */
-    public tudresden.ocl20.pivot.ocl2java.types.OclSet<testpackage.Class1> testOclAnyAllInstances() {
+    public java.util.Set<testpackage.Class1> testOclAnyAllInstances() {
         return null;
     }
 
@@ -95,7 +95,7 @@ public class ExtendedClass1  {
      *A method signature implemented by an aspect.
      *</p>
      */
-    public tudresden.ocl20.pivot.ocl2java.types.OclOrderedSet<Object> testOrderedSetReverse(tudresden.ocl20.pivot.ocl2java.types.OclOrderedSet<Object> source) {
+    public java.util.List<Object> testOrderedSetReverse(java.util.List<Object> source) {
         return null;
     }
 
@@ -113,7 +113,7 @@ public class ExtendedClass1  {
      *A method signature implemented by an aspect.
      *</p>
      */
-    public tudresden.ocl20.pivot.ocl2java.types.OclSet<Object> testSetFlatten(tudresden.ocl20.pivot.ocl2java.types.OclSet<Object> source) {
+    public java.util.Set<Object> testSetFlatten(java.util.Set<Object> source) {
         return null;
     }
 
@@ -122,7 +122,7 @@ public class ExtendedClass1  {
      *A method signature implemented by an aspect.
      *</p>
      */
-    public tudresden.ocl20.pivot.ocl2java.types.OclSequence<Object> testSequenceReverse(tudresden.ocl20.pivot.ocl2java.types.OclSequence<Object> source) {
+    public java.util.List<Object> testSequenceReverse(java.util.List<Object> source) {
         return null;
     }
 
@@ -140,7 +140,7 @@ public class ExtendedClass1  {
      *A method signature implemented by an aspect.
      *</p>
      */
-    public tudresden.ocl20.pivot.ocl2java.types.OclSequence<String> testStringCharacters(String source) {
+    public java.util.List<String> testStringCharacters(String source) {
         return null;
     }
 

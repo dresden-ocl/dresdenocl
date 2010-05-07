@@ -18,8 +18,10 @@
  */
 package tudresden.ocl20.pivot.examples.royalsandloyals;
 
-import tudresden.ocl20.pivot.ocl2java.types.OclOrderedSet;
-import tudresden.ocl20.pivot.ocl2java.types.OclSet;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * <p>
@@ -33,12 +35,11 @@ public class LoyaltyProgram {
 
 	protected String name;
 
-	protected OclSet<Customer> participants = new OclSet<Customer>();
+	protected Set<Customer> participants = new HashSet<Customer>();
 
-	protected OclSet<ProgramPartner> partners = new OclSet<ProgramPartner>();
+	protected Set<ProgramPartner> partners = new HashSet<ProgramPartner>();
 
-	protected OclOrderedSet<ServiceLevel> levels =
-			new OclOrderedSet<ServiceLevel>();
+	protected List<ServiceLevel> levels = new ArrayList<ServiceLevel>();
 
 	protected Membership membership;
 
@@ -79,12 +80,12 @@ public class LoyaltyProgram {
 		membership.setProgram(this);
 	}
 
-	public OclSet<Customer> getParticipants() {
+	public Set<Customer> getParticipants() {
 
 		return participants;
 	}
 
-	public OclSet<ProgramPartner> getPartners() {
+	public Set<ProgramPartner> getPartners() {
 
 		return partners;
 	}
@@ -94,7 +95,7 @@ public class LoyaltyProgram {
 		this.partners.add(aPartner);
 	}
 
-	public OclOrderedSet<ServiceLevel> getLevels() {
+	public List<ServiceLevel> getLevels() {
 
 		return levels;
 	}

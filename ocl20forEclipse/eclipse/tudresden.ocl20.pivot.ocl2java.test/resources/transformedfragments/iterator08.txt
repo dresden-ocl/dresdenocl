@@ -1,50 +1,50 @@
-tudresden.ocl20.pivot.ocl2java.types.OclBag<tudresden.ocl20.pivot.examples.royalsandloyals.Membership> result3;
-result3 = new tudresden.ocl20.pivot.ocl2java.types.OclBag<tudresden.ocl20.pivot.examples.royalsandloyals.Membership>();
+java.util.ArrayList<tudresden.ocl20.pivot.examples.royalsandloyals.Membership> result3;
+result3 = new java.util.ArrayList<tudresden.ocl20.pivot.examples.royalsandloyals.Membership>();
 
 /* Iterator Collect: Iterate through all elements and collect them. Elements which are collections are flattened. */
 for (tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyProgram anElement3 : aClass.programs) {
     result3.add(anElement3.membership);
 }
-tudresden.ocl20.pivot.ocl2java.types.OclBag<tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyAccount> result2;
-result2 = new tudresden.ocl20.pivot.ocl2java.types.OclBag<tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyAccount>();
+java.util.ArrayList<tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyAccount> result2;
+result2 = new java.util.ArrayList<tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyAccount>();
 
 /* Iterator Collect: Iterate through all elements and collect them. Elements which are collections are flattened. */
 for (tudresden.ocl20.pivot.examples.royalsandloyals.Membership anElement2 : result3) {
     result2.addAll(anElement2.accounts);
 }
-tudresden.ocl20.pivot.ocl2java.types.OclBag<tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyAccount> result1;
-result1 = new tudresden.ocl20.pivot.ocl2java.types.OclBag<tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyAccount>();
+java.util.ArrayList<tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyAccount> result1;
+result1 = new java.util.ArrayList<tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyAccount>();
 
 /* Iterator Select: Select all elements which fulfill the condition. */
 for (tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyAccount anElement1 : result2) {
     if ((anElement1.points > new Integer(0))) {
         result1.add(anElement1);
-    } 
+    }
     // no else
 }
 
-tudresden.ocl20.pivot.ocl2java.types.OclBag<tudresden.ocl20.pivot.examples.royalsandloyals.Membership> result6;
-result6 = new tudresden.ocl20.pivot.ocl2java.types.OclBag<tudresden.ocl20.pivot.examples.royalsandloyals.Membership>();
+java.util.ArrayList<tudresden.ocl20.pivot.examples.royalsandloyals.Membership> result6;
+result6 = new java.util.ArrayList<tudresden.ocl20.pivot.examples.royalsandloyals.Membership>();
 
 /* Iterator Collect: Iterate through all elements and collect them. Elements which are collections are flattened. */
 for (tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyProgram anElement6 : aClass.programs) {
     result6.add(anElement6.membership);
 }
-tudresden.ocl20.pivot.ocl2java.types.OclBag<tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyAccount> result5;
-result5 = new tudresden.ocl20.pivot.ocl2java.types.OclBag<tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyAccount>();
+java.util.ArrayList<tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyAccount> result5;
+result5 = new java.util.ArrayList<tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyAccount>();
 
 /* Iterator Collect: Iterate through all elements and collect them. Elements which are collections are flattened. */
 for (tudresden.ocl20.pivot.examples.royalsandloyals.Membership anElement5 : result6) {
     result5.addAll(anElement5.accounts);
 }
-tudresden.ocl20.pivot.ocl2java.types.OclBag<tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyAccount> result4;
-result4 = new tudresden.ocl20.pivot.ocl2java.types.OclBag<tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyAccount>();
+java.util.ArrayList<tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyAccount> result4;
+result4 = new java.util.ArrayList<tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyAccount>();
 
 /* Iterator Reject: Select all elements which do not fulfill the condition. */
 for (tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyAccount anElement4 : result5) {
     if (!!(anElement4.points > new Integer(0))) {
         result4.add(anElement4);
-    } 
+    }
     // no else
 }
 

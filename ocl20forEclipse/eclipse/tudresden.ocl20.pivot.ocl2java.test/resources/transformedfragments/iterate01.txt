@@ -1,5 +1,5 @@
-tudresden.ocl20.pivot.ocl2java.types.OclSet<Integer> collection1;
-collection1 = new tudresden.ocl20.pivot.ocl2java.types.OclSet<Integer>();
+java.util.HashSet<Integer> collection1;
+collection1 = new java.util.HashSet<Integer>();
 
 collection1.add(new Integer(1));
 collection1.add(new Integer(2));
