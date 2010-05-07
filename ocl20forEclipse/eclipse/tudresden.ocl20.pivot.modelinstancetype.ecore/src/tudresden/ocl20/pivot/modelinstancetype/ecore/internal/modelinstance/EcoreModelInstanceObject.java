@@ -49,6 +49,7 @@ import tudresden.ocl20.pivot.modelinstancetype.exception.OperationAccessExceptio
 import tudresden.ocl20.pivot.modelinstancetype.exception.OperationNotFoundException;
 import tudresden.ocl20.pivot.modelinstancetype.exception.PropertyAccessException;
 import tudresden.ocl20.pivot.modelinstancetype.exception.PropertyNotFoundException;
+import tudresden.ocl20.pivot.modelinstancetype.exception.TypeNotFoundInModelException;
 import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceBoolean;
 import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceCollection;
 import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement;
@@ -266,7 +267,7 @@ public class EcoreModelInstanceObject extends AbstractModelInstanceObject
 
 				/* Cast this object to the found type. */
 				result = new EcoreModelInstanceObject(this.myEObject,
-						typeClass, type, this.myType, this.myFactory);
+						typeClass, type, this.getOriginalType(), this.myFactory);
 			}
 			// end else.
 		}
@@ -384,8 +385,7 @@ public class EcoreModelInstanceObject extends AbstractModelInstanceObject
 					.getEStructuralFeature(property.getName());
 
 			if (sf == null) {
-				String msg =
-						EcoreModelInstanceTypeMessages.EcoreModelInstanceObject_PropertyNotFoundInModelInstanceElement;
+				String msg = EcoreModelInstanceTypeMessages.EcoreModelInstanceObject_PropertyNotFoundInModelInstanceElement;
 				msg = NLS.bind(msg, property, this.myEObject);
 				throw new PropertyAccessException(msg);
 			}
@@ -467,9 +467,32 @@ public class EcoreModelInstanceObject extends AbstractModelInstanceObject
 						argumentValues);
 
 				/* Adapt the result to the expected result type. */
-				result = AbstractModelInstance.adaptInvocationResult(
-						adapteeResult, operation.getType(), operation,
-						this.myFactory);
+				if (adapteeResult instanceof EObject) {
+					try {
+						Type adapteeType = this.myFactory.getTypeUtility()
+								.findTypeOfEObjectInModel(
+										(EObject) adapteeResult);
+
+						result = AbstractModelInstance.adaptInvocationResult(
+								adapteeResult, adapteeType, operation,
+								this.myFactory);
+					}
+
+					catch (TypeNotFoundInModelException e) {
+						throw new OperationAccessException(
+								"Result of invocation of Operation '"
+										+ operation.getName()
+										+ "' could not be adapted to any model type.",
+								e);
+					}
+				}
+				// no else.
+
+				else {
+					result = AbstractModelInstance.adaptInvocationResult(
+							adapteeResult, operation.getType(), operation,
+							this.myFactory);
+				}
 			}
 
 			catch (IllegalArgumentException e) {
@@ -524,14 +547,19 @@ public class EcoreModelInstanceObject extends AbstractModelInstanceObject
 	 */
 	public String toString() {
 
-		String result;
+		StringBuffer result;
+		result = new StringBuffer();
 
-		result = this.getClass().getSimpleName();
-		result += "[";
-		result += this.myEObject.toString();
-		result += "]";
+		result.append(this.getClass().getSimpleName());
+		result.append("[type=");
+		result.append(this.getType().getName());
+		result.append(",originalType=");
+		result.append(this.getOriginalType().getName());
+		result.append(",");
+		result.append(this.myEObject.toString());
+		result.append("]");
 
-		return result;
+		return result.toString();
 	}
 
 	/**

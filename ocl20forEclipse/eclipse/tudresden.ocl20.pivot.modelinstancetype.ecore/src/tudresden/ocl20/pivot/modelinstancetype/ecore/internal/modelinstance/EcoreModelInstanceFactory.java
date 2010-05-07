@@ -385,6 +385,19 @@ public class EcoreModelInstanceFactory extends BasisJavaModelInstanceFactory
 
 	/**
 	 * <p>
+	 * Returns the {@link EcoreModelInstanceTypeUtility} used to find
+	 * {@link Type}s in the {@link IModel}.
+	 * </p>
+	 * 
+	 * @return The {@link EcoreModelInstanceTypeUtility} used to find
+	 *         {@link Type}s in the {@link IModel}.
+	 */
+	public EcoreModelInstanceTypeUtility getTypeUtility() {
+		return myTypeUtility;
+	}
+
+	/**
+	 * <p>
 	 * A helper method that creates a new {@link EcoreModelInstanceObject} for a
 	 * given {@link EObject}.
 	 * </p>

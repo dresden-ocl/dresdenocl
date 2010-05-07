@@ -444,6 +444,29 @@ public class EcoreModelInstanceTypeUtility {
 		if (result == null) {
 			resultSet = findTypesOfClassInModel(objectClass);
 
+			/*
+			 * Probably remove the EObject Type from the TypeSet. Each element
+			 * is an EObject. This reference cause problems when in invoking the
+			 * isTypeOf method.
+			 */
+			try {
+				Type eObjectType = this.model.findType(Arrays
+						.asList(new String[] { "EObject" }));
+				if (resultSet.size() > 1 && eObjectType != null
+						&& resultSet.contains(eObjectType)) {
+					resultSet.remove(eObjectType);
+				}
+				// no else.
+			}
+
+			catch (ModelAccessException e) {
+				/*
+				 * Unimportant. If EObject is not part of the model. It was not
+				 * found. Thus it is not part of the type Set.
+				 */
+			}
+
+			/* Probably create a complex type. */
 			if (resultSet.size() == 1) {
 				result = resultSet.iterator().next();
 			}
