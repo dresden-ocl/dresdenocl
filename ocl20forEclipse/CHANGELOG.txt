@@ -93,6 +93,7 @@ Release 2.1 (scheduled for April 2010)
   - The transformation of operations whose arguments are named differently in the constraint's context
     than in the model now works correctly.
   - The code generation of Constructors now works appropriately.
+  - Ocl22Java now supports Arrays instead of Collections wherever possible.
 
 
 GUI
