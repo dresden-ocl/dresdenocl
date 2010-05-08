@@ -27,6 +27,7 @@ import java.util.WeakHashMap;
 
 import org.apache.log4j.Logger;
 
+import tudresden.ocl20.pivot.essentialocl.EssentialOclPlugin;
 import tudresden.ocl20.pivot.metamodels.java.JavaMetaModelPlugin;
 import tudresden.ocl20.pivot.pivotmodel.EnumerationLiteral;
 import tudresden.ocl20.pivot.pivotmodel.Namespace;
@@ -358,16 +359,17 @@ public class JavaAdapterFactory {
 			result = this.adaptedTypes.get(aClass);
 		}
 
+		/* Check if the given type is the void type. */
+		else if (aClass.equals(void.class)) {
+			result = EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+					.getOclVoid();
+		}
+
 		/* Else create the result. */
 		else {
 
-			/* Check if the given type is the void type. */
-			if (aClass.equals(void.class)) {
-				result = new JavaVoidType(this);
-			}
-
-			/* Else check if the class is a primitive type. */
-			else if (!JavaPrimitiveType.getPrimitiveTypeKind(aClass).equals(
+			/* Check if the class is a primitive type. */
+			if (!JavaPrimitiveType.getPrimitiveTypeKind(aClass).equals(
 					PrimitiveTypeKind.UNKNOWN)) {
 				result = new JavaPrimitiveType(aClass, this);
 			}

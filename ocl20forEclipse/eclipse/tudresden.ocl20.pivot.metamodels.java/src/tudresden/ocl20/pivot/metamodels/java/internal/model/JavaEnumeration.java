@@ -31,8 +31,6 @@ import tudresden.ocl20.pivot.pivotmodel.base.AbstractEnumeration;
  * </p>
  * 
  * @author Claas Wilke
- * 
- * @generated NOT
  */
 public class JavaEnumeration extends AbstractEnumeration implements Enumeration {
 

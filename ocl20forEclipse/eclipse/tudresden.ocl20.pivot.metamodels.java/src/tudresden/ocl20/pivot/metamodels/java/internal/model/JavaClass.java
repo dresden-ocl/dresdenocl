@@ -39,7 +39,6 @@ import tudresden.ocl20.pivot.pivotmodel.base.AbstractType;
  * </p>
  * 
  * @author Claas Wilke
- * @generated NOT
  */
 public class JavaClass extends AbstractType {
 

@@ -30,14 +30,12 @@ import tudresden.ocl20.pivot.pivotmodel.base.AbstractOperation;
  * <p>
  * An implementation of the Pivot Model {@link Operation} concept for UML2.
  * </p>
- * 
- * @generated
  */
 public class JavaOperation extends AbstractOperation implements Operation {
 
 	/** The {@link Logger} for this class. */
-	private static final Logger LOGGER =
-			JavaMetaModelPlugin.getLogger(JavaOperation.class);
+	private static final Logger LOGGER = JavaMetaModelPlugin
+			.getLogger(JavaOperation.class);
 
 	/** The adapted {@link Method}. */
 	private Method myMethod;
@@ -51,10 +49,10 @@ public class JavaOperation extends AbstractOperation implements Operation {
 	 * </p>
 	 * 
 	 * @param dslOperation
-	 *          The {@link Method} that is adopted by this class.
+	 *            The {@link Method} that is adopted by this class.
 	 * @param aFactory
-	 *          The {@link JavaAdapterFactory}, the new created
-	 *          {@link JavaOperation} shall belong to.
+	 *            The {@link JavaAdapterFactory}, the new created
+	 *            {@link JavaOperation} shall belong to.
 	 */
 	public JavaOperation(Method dslOperation, JavaAdapterFactory aFactory) {
 
@@ -84,6 +82,7 @@ public class JavaOperation extends AbstractOperation implements Operation {
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractOperation#getName()
 	 */
 	@Override
@@ -94,6 +93,7 @@ public class JavaOperation extends AbstractOperation implements Operation {
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.pivotmodel.base.AbstractOperation#getOwnedParameter
 	 * ()
@@ -112,6 +112,7 @@ public class JavaOperation extends AbstractOperation implements Operation {
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.pivotmodel.base.AbstractOperation#getOwningType()
 	 */
@@ -127,6 +128,7 @@ public class JavaOperation extends AbstractOperation implements Operation {
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see tudresden.ocl20.pivot.pivotmodel.impl.OperationImpl#getType()
 	 */
 	@Override
@@ -138,18 +140,20 @@ public class JavaOperation extends AbstractOperation implements Operation {
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.pivotmodel.impl.OperationImpl#getReturnParameter()
 	 */
 	public Parameter getReturnParameter() {
 
 		return this.myFactory.createParameter(this.myMethod.getReturnType(),
-				this.myMethod.getGenericReturnType(), ParameterDirectionKind.RETURN,
-				this.myMethod, 1);
+				this.myMethod.getGenericReturnType(),
+				ParameterDirectionKind.RETURN, this.myMethod, 1);
 	}
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see tudresden.ocl20.pivot.pivotmodel.impl.FeatureImpl#isMultiple()
 	 */
 	@Override
@@ -160,6 +164,7 @@ public class JavaOperation extends AbstractOperation implements Operation {
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see tudresden.ocl20.pivot.pivotmodel.impl.FeatureImpl#isOrdered()
 	 */
 	@Override
@@ -170,6 +175,7 @@ public class JavaOperation extends AbstractOperation implements Operation {
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see tudresden.ocl20.pivot.pivotmodel.impl.FeatureImpl#isStatic()
 	 */
 	public boolean isStatic() {
@@ -179,6 +185,7 @@ public class JavaOperation extends AbstractOperation implements Operation {
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see tudresden.ocl20.pivot.pivotmodel.impl.FeatureImpl#isUnique()
 	 */
 	@Override

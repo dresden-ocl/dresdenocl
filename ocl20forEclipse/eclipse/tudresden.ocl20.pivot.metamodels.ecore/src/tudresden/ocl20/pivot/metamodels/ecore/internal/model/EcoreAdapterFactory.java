@@ -46,6 +46,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EParameter;
 import org.eclipse.emf.ecore.EStructuralFeature;
 
+import tudresden.ocl20.pivot.essentialocl.EssentialOclPlugin;
 import tudresden.ocl20.pivot.metamodels.ecore.EcoreMetamodelPlugin;
 import tudresden.ocl20.pivot.model.IModel;
 import tudresden.ocl20.pivot.pivotmodel.Enumeration;
@@ -73,8 +74,8 @@ public class EcoreAdapterFactory {
 	public static EcoreAdapterFactory INSTANCE = new EcoreAdapterFactory();
 
 	/** The {@link Logger} for this class. */
-	private static final Logger LOGGER =
-			EcoreMetamodelPlugin.getLogger(EcoreAdapterFactory.class);
+	private static final Logger LOGGER = EcoreMetamodelPlugin
+			.getLogger(EcoreAdapterFactory.class);
 
 	/**
 	 * A cache for previously created adapters. It is realized as a
@@ -87,8 +88,8 @@ public class EcoreAdapterFactory {
 	 * A cache for previously created adapters for the {@link Parameter} of the
 	 * {@link ParameterDirectionKind#RETURN} for {@link EOperation}s. It is
 	 * realized as a {@link WeakHashMap} because pivot model elements which are
-	 * not referenced by any {@link IModel} anymore can be cleared by the garbage
-	 * collector.
+	 * not referenced by any {@link IModel} anymore can be cleared by the
+	 * garbage collector.
 	 */
 	private WeakHashMap<EModelElement, NamedElement> myCachedReturnParameterAdapters;
 
@@ -100,8 +101,7 @@ public class EcoreAdapterFactory {
 	private EcoreAdapterFactory() {
 
 		this.myCachedAdapters = new WeakHashMap<EModelElement, NamedElement>();
-		this.myCachedReturnParameterAdapters =
-				new WeakHashMap<EModelElement, NamedElement>();
+		this.myCachedReturnParameterAdapters = new WeakHashMap<EModelElement, NamedElement>();
 	}
 
 	/**
@@ -110,7 +110,7 @@ public class EcoreAdapterFactory {
 	 * </p>
 	 * 
 	 * @param eEnum
-	 *          The {@link EEnum} which shall be adapted.
+	 *            The {@link EEnum} which shall be adapted.
 	 * @return The created {@link Enumeration}.
 	 */
 	public Enumeration createEnumeration(EEnum eEnum) {
@@ -162,7 +162,7 @@ public class EcoreAdapterFactory {
 	 * </p>
 	 * 
 	 * @param eEnumLiteral
-	 *          The {@link EEnumLiteral} which shall be adapted.
+	 *            The {@link EEnumLiteral} which shall be adapted.
 	 * 
 	 * @return The created {@link EnumerationLiteral}.
 	 */
@@ -184,7 +184,8 @@ public class EcoreAdapterFactory {
 
 		/* Eventually use a cached result. */
 		if (this.myCachedAdapters.containsKey(eEnumLiteral)) {
-			result = (EnumerationLiteral) this.myCachedAdapters.get(eEnumLiteral);
+			result = (EnumerationLiteral) this.myCachedAdapters
+					.get(eEnumLiteral);
 		}
 
 		/* Else create the Type. */
@@ -215,7 +216,7 @@ public class EcoreAdapterFactory {
 	 * </p>
 	 * 
 	 * @param ePackage
-	 *          The {@link EPackage} that shall be adapted.
+	 *            The {@link EPackage} that shall be adapted.
 	 */
 	public Namespace createNamespace(EPackage ePackage) {
 
@@ -266,7 +267,7 @@ public class EcoreAdapterFactory {
 	 * </p>
 	 * 
 	 * @param eOperation
-	 *          The {@link EOperation} which shall be adapted.
+	 *            The {@link EOperation} which shall be adapted.
 	 * @return The created {@link Operation}.
 	 */
 	public Operation createOperation(EOperation eOperation) {
@@ -318,7 +319,7 @@ public class EcoreAdapterFactory {
 	 * </p>
 	 * 
 	 * @param eOperation
-	 *          The {@link EParameter} which shall be adapted.
+	 *            The {@link EParameter} which shall be adapted.
 	 * @return The created {@link Parameter}.
 	 */
 	public Parameter createParameter(EParameter eParameter) {
@@ -422,8 +423,8 @@ public class EcoreAdapterFactory {
 	 * </p>
 	 * 
 	 * @param eOperation
-	 *          The {@link EOperation} for which a return {@link Parameter} shall
-	 *          be adapted.
+	 *            The {@link EOperation} for which a return {@link Parameter}
+	 *            shall be adapted.
 	 * @return The created {@link Parameter}.
 	 */
 	public Parameter createReturnParameter(EOperation eOperation) {
@@ -444,7 +445,8 @@ public class EcoreAdapterFactory {
 
 		/* Eventually use a cached result. */
 		if (this.myCachedReturnParameterAdapters.containsKey(eOperation)) {
-			result = (Parameter) this.myCachedReturnParameterAdapters.get(eOperation);
+			result = (Parameter) this.myCachedReturnParameterAdapters
+					.get(eOperation);
 		}
 
 		/* Else create the Type. */
@@ -475,7 +477,7 @@ public class EcoreAdapterFactory {
 	 * </p>
 	 * 
 	 * @param eClassifier
-	 *          The {@link EClassifier} which shall be adapted.
+	 *            The {@link EClassifier} which shall be adapted.
 	 * @return The created {@link Type}.
 	 * 
 	 * @generated NOT
@@ -486,7 +488,8 @@ public class EcoreAdapterFactory {
 
 		/* Check if the classifier is null. */
 		if (eClassifier == null) {
-			result = EcoreVoidType.getInstance();
+			result = EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+					.getOclVoid();
 		}
 
 		/* Else check if the classifier is an EClass. */
@@ -522,7 +525,7 @@ public class EcoreAdapterFactory {
 	 * </p>
 	 * 
 	 * @param eClass
-	 *          The {@link EClass} which shall be adapted.
+	 *            The {@link EClass} which shall be adapted.
 	 * @return The created {@link Type}.
 	 */
 	private Type createType(EClass eClass) {
@@ -574,7 +577,7 @@ public class EcoreAdapterFactory {
 	 * </p>
 	 * 
 	 * @param eDataType
-	 *          The {@link EDataType} which shall be adapted.
+	 *            The {@link EDataType} which shall be adapted.
 	 * @return The created {@link Type}.
 	 */
 	private Type createType(EDataType eDataType) {

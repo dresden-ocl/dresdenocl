@@ -24,15 +24,15 @@ import org.eclipse.osgi.util.NLS;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import tudresden.ocl20.pivot.essentialocl.EssentialOclPlugin;
 import tudresden.ocl20.pivot.metamodels.test.MetaModelTestPlugin;
 import tudresden.ocl20.pivot.metamodels.test.MetaModelTestServices;
 import tudresden.ocl20.pivot.metamodels.test.msg.MetaModelTestSuiteMessages;
-import tudresden.ocl20.pivot.model.metamodel.IMetamodel;
 import tudresden.ocl20.pivot.model.IModel;
+import tudresden.ocl20.pivot.model.metamodel.IMetamodel;
 import tudresden.ocl20.pivot.pivotmodel.Operation;
 import tudresden.ocl20.pivot.pivotmodel.Parameter;
 import tudresden.ocl20.pivot.pivotmodel.PrimitiveType;
-import tudresden.ocl20.pivot.pivotmodel.PrimitiveTypeKind;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 
 /**
@@ -47,8 +47,8 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
 public class TestOperation {
 
 	/** The {@link Logger} for this class. */
-	private static final Logger LOGGER =
-			MetaModelTestPlugin.getLogger(TestOperation.class);
+	private static final Logger LOGGER = MetaModelTestPlugin
+			.getLogger(TestOperation.class);
 
 	/** A {@link Type} of the current {@link IModel} under test. */
 	private static Type class1;
@@ -85,40 +85,44 @@ public class TestOperation {
 
 	/**
 	 * <p>
-	 * Loads some elements from the current {@link IModel} under test required for
-	 * the tests contained in this Class.
+	 * Loads some elements from the current {@link IModel} under test required
+	 * for the tests contained in this Class.
 	 * </p>
 	 */
 	@BeforeClass
 	public static void setUp() {
 
-		class1 =
-				MetaModelTestServices.getInstance().getTypeUnderTest(
-						MetaModelTestServices.TYPE_QUALIFIED_NAME_TESTTYPECLASS1);
+		class1 = MetaModelTestServices.getInstance().getTypeUnderTest(
+				MetaModelTestServices.TYPE_QUALIFIED_NAME_TESTTYPECLASS1);
 
-		class4 =
-				MetaModelTestServices
-						.getInstance()
-						.getTypeUnderTest(
-								MetaModelTestServices.TYPE_QUALIFIED_NAME_TESTOPERATIONANDPARAMETERCLASS);
+		class4 = MetaModelTestServices
+				.getInstance()
+				.getTypeUnderTest(
+						MetaModelTestServices.TYPE_QUALIFIED_NAME_TESTOPERATIONANDPARAMETERCLASS);
 
 		/* Find some operations in the class. */
 		for (Operation anOperation : class4.getOwnedOperation()) {
 
-			if (anOperation.getName().equals(
-					MetaModelTestServices.OPERATION_NAME_OPERATIONWITHOUTPARAMETERS)) {
+			if (anOperation
+					.getName()
+					.equals(
+							MetaModelTestServices.OPERATION_NAME_OPERATIONWITHOUTPARAMETERS)) {
 				operation1 = anOperation;
 			}
 			// no else.
 
-			if (anOperation.getName().equals(
-					MetaModelTestServices.OPERATION_NAME_VOIDOPERATIONWITHPARAMETER)) {
+			if (anOperation
+					.getName()
+					.equals(
+							MetaModelTestServices.OPERATION_NAME_VOIDOPERATIONWITHPARAMETER)) {
 				operation2 = anOperation;
 			}
 			// no else.
 
-			if (anOperation.getName().equals(
-					MetaModelTestServices.OPERATION_NAME_OUTPUTPARAMETEROPERATION)) {
+			if (anOperation
+					.getName()
+					.equals(
+							MetaModelTestServices.OPERATION_NAME_OUTPUTPARAMETEROPERATION)) {
 				outputParameterOperation = anOperation;
 			}
 			// no else.
@@ -135,26 +139,34 @@ public class TestOperation {
 			}
 			// no else.
 
-			if (anOperation.getName().equals(
-					MetaModelTestServices.OPERATION_NAME_ORDEREDMULTIPLEOPERATION)) {
+			if (anOperation
+					.getName()
+					.equals(
+							MetaModelTestServices.OPERATION_NAME_ORDEREDMULTIPLEOPERATION)) {
 				orderedMultipleOperation = anOperation;
 			}
 			// no else.
 
-			if (anOperation.getName().equals(
-					MetaModelTestServices.OPERATION_NAME_UNORDEREDMULTIPLEOPERATION)) {
+			if (anOperation
+					.getName()
+					.equals(
+							MetaModelTestServices.OPERATION_NAME_UNORDEREDMULTIPLEOPERATION)) {
 				unorderedMultipleOperation = anOperation;
 			}
 			// no else.
 
-			if (anOperation.getName().equals(
-					MetaModelTestServices.OPERATION_NAME_UNIQUEMULTIPLEOPERATION)) {
+			if (anOperation
+					.getName()
+					.equals(
+							MetaModelTestServices.OPERATION_NAME_UNIQUEMULTIPLEOPERATION)) {
 				uniqueMultipleOperation = anOperation;
 			}
 			// no else.
 
-			if (anOperation.getName().equals(
-					MetaModelTestServices.OPERATION_NAME_NONUNIQUEMULTIPLEOPERATION)) {
+			if (anOperation
+					.getName()
+					.equals(
+							MetaModelTestServices.OPERATION_NAME_NONUNIQUEMULTIPLEOPERATION)) {
 				nonuniqueMultipleOperation = anOperation;
 			}
 			// no else.
@@ -167,19 +179,17 @@ public class TestOperation {
 			if (LOGGER.isInfoEnabled()) {
 				String msg;
 
-				msg =
-						NLS
+				msg = NLS
+						.bind(
+								MetaModelTestSuiteMessages.MetaModelTestSuite_OperationNotFoundInModel,
+								MetaModelTestServices.OPERATION_NAME_OUTPUTPARAMETEROPERATION,
+								"Operation.getOutputParameter()");
+				msg += " "
+						+ NLS
 								.bind(
-										MetaModelTestSuiteMessages.MetaModelTestSuite_OperationNotFoundInModel,
-										MetaModelTestServices.OPERATION_NAME_OUTPUTPARAMETEROPERATION,
-										"Operation.getOutputParameter()");
-				msg +=
-						" "
-								+ NLS
-										.bind(
-												MetaModelTestSuiteMessages.MetaModelTestSuite_CurrentlyTestedMetaModel,
-												MetaModelTestServices.getInstance()
-														.getMetaModelUnderTestID());
+										MetaModelTestSuiteMessages.MetaModelTestSuite_CurrentlyTestedMetaModel,
+										MetaModelTestServices.getInstance()
+												.getMetaModelUnderTestID());
 
 				LOGGER.warn(msg);
 			}
@@ -192,19 +202,17 @@ public class TestOperation {
 			if (LOGGER.isInfoEnabled()) {
 				String msg;
 
-				msg =
-						NLS
+				msg = NLS
+						.bind(
+								MetaModelTestSuiteMessages.MetaModelTestSuite_OperationNotFoundInModel,
+								MetaModelTestServices.OPERATION_NAME_STATICOPERATION,
+								"Operation.isStatic()");
+				msg += " "
+						+ NLS
 								.bind(
-										MetaModelTestSuiteMessages.MetaModelTestSuite_OperationNotFoundInModel,
-										MetaModelTestServices.OPERATION_NAME_STATICOPERATION,
-										"Operation.isStatic()");
-				msg +=
-						" "
-								+ NLS
-										.bind(
-												MetaModelTestSuiteMessages.MetaModelTestSuite_CurrentlyTestedMetaModel,
-												MetaModelTestServices.getInstance()
-														.getMetaModelUnderTestID());
+										MetaModelTestSuiteMessages.MetaModelTestSuite_CurrentlyTestedMetaModel,
+										MetaModelTestServices.getInstance()
+												.getMetaModelUnderTestID());
 
 				LOGGER.warn(msg);
 			}
@@ -276,7 +284,8 @@ public class TestOperation {
 		msg = "The adaptation of Operation.getName() seems to be wrong.";
 
 		/* The operation must have been found by the given name. */
-		assertEquals(msg,
+		assertEquals(
+				msg,
 				MetaModelTestServices.OPERATION_NAME_OPERATIONWITHOUTPARAMETERS,
 				operation1.getName());
 	}
@@ -328,11 +337,11 @@ public class TestOperation {
 		if (outputParameterOperation != null) {
 			String msg;
 
-			msg =
-					"The adaptation of Operation.getOutputParameter() seems to be wrong.";
+			msg = "The adaptation of Operation.getOutputParameter() seems to be wrong.";
 
 			/* The operation must have one output parameters. */
-			assertEquals(msg, 1, outputParameterOperation.getOutputParameter().size());
+			assertEquals(msg, 1, outputParameterOperation.getOutputParameter()
+					.size());
 		}
 	}
 
@@ -392,18 +401,18 @@ public class TestOperation {
 		if (outputParameterOperation != null) {
 			String msg;
 
-			msg =
-					"The adaptation of Operation.getOwnedParameter() seems to be wrong.";
+			msg = "The adaptation of Operation.getOwnedParameter() seems to be wrong.";
 
 			/* The operation must have one owned parameters. */
-			assertEquals(msg, 2, outputParameterOperation.getOwnedParameter().size());
+			assertEquals(msg, 2, outputParameterOperation.getOwnedParameter()
+					.size());
 		}
 	}
 
 	/**
 	 * <p>
-	 * A test case testing the operation {@link Operation#getOwnedTypeParameter()}
-	 * .
+	 * A test case testing the operation
+	 * {@link Operation#getOwnedTypeParameter()} .
 	 * </p>
 	 */
 	@Test
@@ -411,8 +420,7 @@ public class TestOperation {
 
 		String msg;
 
-		msg =
-				"The adaptation of Operation.getOwnedTypeParameter() seems to be wrong. ";
+		msg = "The adaptation of Operation.getOwnedTypeParameter() seems to be wrong. ";
 		msg += "The Operation " + operation1.getQualifiedName();
 		msg += " should not have Type Parameters.";
 
@@ -450,10 +458,8 @@ public class TestOperation {
 
 		Parameter returnParameter;
 		Type returnType;
-		PrimitiveType primtiveReturnType;
 
-		msg =
-				"The adaptation of Operation.getReturnParameter() seems to be wrong. ";
+		msg = "The adaptation of Operation.getReturnParameter() seems to be wrong. ";
 		msg += "The return type must be of the PrimitiveTypeKind.VOID.";
 
 		returnParameter = operation2.getReturnParameter();
@@ -464,12 +470,8 @@ public class TestOperation {
 		returnType = returnParameter.getType();
 
 		/* The return Type must be primitive. */
-		assertTrue(msg, returnType instanceof PrimitiveType);
-
-		primtiveReturnType = (PrimitiveType) returnType;
-
-		/* The PrimitiveTypeKind must be void. */
-		assertEquals(msg, PrimitiveTypeKind.VOID, primtiveReturnType.getKind());
+		assertEquals(msg, returnType, EssentialOclPlugin
+				.getOclLibraryProvider().getOclLibrary().getOclVoid());
 	}
 
 	/**
@@ -545,8 +547,8 @@ public class TestOperation {
 
 	/**
 	 * <p>
-	 * A test case testing the operation {@link Operation#getSignatureParameter()}
-	 * .
+	 * A test case testing the operation
+	 * {@link Operation#getSignatureParameter()} .
 	 * </p>
 	 */
 	@Test
@@ -554,8 +556,7 @@ public class TestOperation {
 
 		String msg;
 
-		msg =
-				"The adaptation of Operation.getSignatureParameter() seems to be wrong.";
+		msg = "The adaptation of Operation.getSignatureParameter() seems to be wrong.";
 
 		/* The operation must not have any signature parameters. */
 		assertEquals(msg, 0, operation1.getSignatureParameter().size());
@@ -563,8 +564,8 @@ public class TestOperation {
 
 	/**
 	 * <p>
-	 * A test case testing the operation {@link Operation#getSignatureParameter()}
-	 * .
+	 * A test case testing the operation
+	 * {@link Operation#getSignatureParameter()} .
 	 * </p>
 	 */
 	@Test
@@ -572,8 +573,7 @@ public class TestOperation {
 
 		String msg;
 
-		msg =
-				"The adaptation of Operation.getSignatureParameter() seems to be wrong.";
+		msg = "The adaptation of Operation.getSignatureParameter() seems to be wrong.";
 
 		/* The operation must have one signature parameters. */
 		assertEquals(msg, 1, operation2.getSignatureParameter().size());
@@ -581,8 +581,8 @@ public class TestOperation {
 
 	/**
 	 * <p>
-	 * A test case testing the operation {@link Operation#getSignatureParameter()}
-	 * .
+	 * A test case testing the operation
+	 * {@link Operation#getSignatureParameter()} .
 	 * </p>
 	 */
 	@Test
@@ -595,12 +595,11 @@ public class TestOperation {
 		if (outputParameterOperation != null) {
 			String msg;
 
-			msg =
-					"The adaptation of Operation.getSignatureParameter() seems to be wrong.";
+			msg = "The adaptation of Operation.getSignatureParameter() seems to be wrong.";
 
 			/* The operation must have one signature parameters. */
-			assertEquals(msg, 1, outputParameterOperation.getSignatureParameter()
-					.size());
+			assertEquals(msg, 1, outputParameterOperation
+					.getSignatureParameter().size());
 		}
 	}
 
@@ -631,23 +630,17 @@ public class TestOperation {
 		String msg;
 
 		Type type;
-		PrimitiveType primitiveType;
 
 		msg = "The adaptation of Operation.getType() seems to be wrong.";
-		msg += " Type must be of the PrimitiveTypeKind.VOID.";
+		msg += " Type must be OclVoid.";
 
 		type = operation2.getType();
 
 		/* The type must not be null. */
 		assertNotNull(msg, type);
 
-		/* The type must be primitive. */
-		assertTrue(msg, type instanceof PrimitiveType);
-
-		primitiveType = (PrimitiveType) type;
-
-		/* The PrimitiveTypeKind must be void. */
-		assertEquals(msg, PrimitiveTypeKind.VOID, primitiveType.getKind());
+		assertEquals(msg, type, EssentialOclPlugin.getOclLibraryProvider()
+				.getOclLibrary().getOclVoid());
 	}
 
 	/**
@@ -860,8 +853,8 @@ public class TestOperation {
 	public void testIsStatic2() {
 
 		/*
-		 * Only execute this test, if static Operations are in the current IModel
-		 * under test.
+		 * Only execute this test, if static Operations are in the current
+		 * IModel under test.
 		 */
 		if (staticOperation != null) {
 			String msg;
