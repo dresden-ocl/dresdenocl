@@ -34,6 +34,7 @@ public class ModelInstanceTypeTestSuiteMessages extends NLS {
 	private static final String BUNDLE_NAME =
 			"tudresden.ocl20.pivot.modelinstancetype.test.msg.messages"; //$NON-NLS-1$
 
+
 	public static String ModelInstanceTypeTestSuite_Services_ModelInstanceFileNotFound;
 	public static String ModelInstanceTypeTestSuite_Services_ModelInstanceTypeNotFound;
 	public static String ModelInstanceTypeTestSuite_Services_ModelWasNull;
@@ -143,6 +144,7 @@ public class ModelInstanceTypeTestSuiteMessages extends NLS {
 	public static String TestModelInstance_InvokeStaticOperationIsWrong;
 	public static String TestModelInstance_AddModelInstanceElementIsWrong;
 	public static String TestModelInstance_AddModelInstanceElementIsWrong2;
+	public static String TestModelInstance_RemoveModelInstanceElementIsWrong = null;
 
 	static {
 		/* Initialize resource bundle. */

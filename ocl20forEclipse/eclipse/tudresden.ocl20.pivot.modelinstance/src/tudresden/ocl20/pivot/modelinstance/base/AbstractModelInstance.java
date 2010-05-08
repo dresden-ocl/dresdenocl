@@ -66,19 +66,17 @@ public abstract class AbstractModelInstance implements IModelInstance {
 	protected IModel myModel;
 
 	/** Contains all {@link IModelInstanceObject}s of this model instance. */
-	protected Set<IModelInstanceObject> myModelInstanceObjects =
-			new HashSet<IModelInstanceObject>();
+	protected Set<IModelInstanceObject> myModelInstanceObjects = new HashSet<IModelInstanceObject>();
 
 	/**
 	 * <p>
 	 * Contains all {@link IModelInstanceObject}s of this model instance ordered
 	 * by their type's name.
 	 * </p>
-	 * <strong>This map is a {@link WeakHashMap}. If the adapted {@link Type} does
-	 * not exist any more, the adapter is also disposed.</strong>
+	 * <strong>This map is a {@link WeakHashMap}. If the adapted {@link Type}
+	 * does not exist any more, the adapter is also disposed.</strong>
 	 */
-	protected Map<Type, Set<IModelInstanceObject>> myModelInstanceObjectsByType =
-			new WeakHashMap<Type, Set<IModelInstanceObject>>();
+	protected Map<Type, Set<IModelInstanceObject>> myModelInstanceObjectsByType = new WeakHashMap<Type, Set<IModelInstanceObject>>();
 
 	/**
 	 * The {@link IModelInstanceFactory} used to created adapters for the
@@ -95,25 +93,27 @@ public abstract class AbstractModelInstance implements IModelInstance {
 	 * or a {@link Property} access of the excepted given {@link Type}.
 	 * 
 	 * @param adapteeResult
-	 *          The {@link Object} result that shall be adapted.
+	 *            The {@link Object} result that shall be adapted.
 	 * @param type
-	 *          The Type to which the result shall be adapted.
+	 *            The Type to which the result shall be adapted.
 	 * @param multiplicityElement
-	 *          The {@link MultiplicityElement} whose result shall be adapted
-	 *          (could be a {@link Property} or an {@link Operation}).
+	 *            The {@link MultiplicityElement} whose result shall be adapted
+	 *            (could be a {@link Property} or an {@link Operation}).
 	 * @param factory
-	 *          The {@link JavaModelInstanceFactory} used to adapt the result.
+	 *            The {@link JavaModelInstanceFactory} used to adapt the result.
 	 * @return The adapted results as an {@link IModelInstanceElement}.
 	 */
 	public static IModelInstanceElement adaptInvocationResult(
-			Object adapteeResult, Type type, MultiplicityElement multiplicityElement,
+			Object adapteeResult, Type type,
+			MultiplicityElement multiplicityElement,
 			IModelInstanceFactory factory) {
 
 		IModelInstanceElement result;
 
 		/* Check if the result is expected as void. */
 		if (type instanceof PrimitiveType
-				&& ((PrimitiveType) type).getKind().equals(PrimitiveTypeKind.VOID)) {
+				&& ((PrimitiveType) type).getKind().equals(
+						PrimitiveTypeKind.VOID)) {
 			result = IModelInstanceVoid.INSTANCE;
 		}
 
@@ -124,24 +124,23 @@ public abstract class AbstractModelInstance implements IModelInstance {
 		else if (multiplicityElement.isMultiple()) {
 
 			/*
-			 * Compute the type of collection that is required for the adaptation.
+			 * Compute the type of collection that is required for the
+			 * adaptation.
 			 */
 
 			/* If the operation is unique, adapt to a set. */
 			if (multiplicityElement.isUnique()) {
 
 				if (multiplicityElement.isOrdered()) {
-					result =
-							factory.createModelInstanceElement(adapteeResult,
-									EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
-											.getOrderedSetType((type)));
+					result = factory.createModelInstanceElement(adapteeResult,
+							EssentialOclPlugin.getOclLibraryProvider()
+									.getOclLibrary().getOrderedSetType((type)));
 				}
 
 				else {
-					result =
-							factory.createModelInstanceElement(adapteeResult,
-									EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
-											.getSetType(type));
+					result = factory.createModelInstanceElement(adapteeResult,
+							EssentialOclPlugin.getOclLibraryProvider()
+									.getOclLibrary().getSetType(type));
 				}
 				// end. else
 			}
@@ -150,17 +149,15 @@ public abstract class AbstractModelInstance implements IModelInstance {
 			else {
 
 				if (multiplicityElement.isOrdered()) {
-					result =
-							factory.createModelInstanceElement(adapteeResult,
-									EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
-											.getSequenceType(type));
+					result = factory.createModelInstanceElement(adapteeResult,
+							EssentialOclPlugin.getOclLibraryProvider()
+									.getOclLibrary().getSequenceType(type));
 				}
 
 				else {
-					result =
-							factory.createModelInstanceElement(adapteeResult,
-									EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
-											.getBagType(type));
+					result = factory.createModelInstanceElement(adapteeResult,
+							EssentialOclPlugin.getOclLibraryProvider()
+									.getOclLibrary().getBagType(type));
 				}
 				// end else.
 			}
@@ -177,6 +174,7 @@ public abstract class AbstractModelInstance implements IModelInstance {
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance#getElementTypes
 	 * ()
@@ -209,6 +207,7 @@ public abstract class AbstractModelInstance implements IModelInstance {
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance#getAllInstances
 	 * (tudresden.ocl20.pivot.pivotmodel.Type)
@@ -216,7 +215,8 @@ public abstract class AbstractModelInstance implements IModelInstance {
 	public Set<IModelInstanceObject> getAllInstances(Type type) {
 
 		if (type == null) {
-			throw new IllegalArgumentException("Parameter type must not be null");
+			throw new IllegalArgumentException(
+					"Parameter type must not be null");
 		}
 		// no else.
 
@@ -239,6 +239,7 @@ public abstract class AbstractModelInstance implements IModelInstance {
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @seetudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance#
 	 * getAllModelInstanceObjects()
 	 */
@@ -249,6 +250,7 @@ public abstract class AbstractModelInstance implements IModelInstance {
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see tudresden.ocl20.pivot.modelbus.IModelInstance#getDisplayName()
 	 */
 	public String getDisplayName() {
@@ -258,6 +260,7 @@ public abstract class AbstractModelInstance implements IModelInstance {
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see tudresden.ocl20.pivot.modelbus.IModelInstance#getModel()
 	 */
 	public IModel getModel() {
@@ -267,6 +270,7 @@ public abstract class AbstractModelInstance implements IModelInstance {
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @seetudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance#
 	 * getModelInstanceFactory()
 	 */
@@ -277,17 +281,51 @@ public abstract class AbstractModelInstance implements IModelInstance {
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.modelbus.IModelInstance#isInstanceOf(tudresden.
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.modelbus.IModelInstance#isInstanceOf(tudresden.
 	 * ocl20 .pivot.modelbus.IModel)
 	 */
 	public boolean isInstanceOf(IModel model) {
 
 		if (model == null) {
-			throw new IllegalArgumentException("Parameter 'model' must not be null.");
+			throw new IllegalArgumentException(
+					"Parameter 'model' must not be null.");
 		}
 		// no else.
 
 		return this.myModel.equals(model);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.modelinstance.IModelInstance#removeModelInstanceElement
+	 * (tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceObject)
+	 */
+	@Override
+	public void removeModelInstanceElement(IModelInstanceObject imiObject) {
+
+		Set<IModelInstanceObject> objectsByType;
+
+		if (this.myModelInstanceObjectsByType.containsKey(imiObject.getType())) {
+			objectsByType = this.myModelInstanceObjectsByType.get(imiObject
+					.getType());
+			objectsByType.remove(imiObject);
+
+			if (objectsByType.size() > 0) {
+				this.myModelInstanceObjectsByType.put(imiObject.getType(),
+						objectsByType);
+			}
+
+			else {
+				this.myModelInstanceObjectsByType.remove(imiObject.getType());
+			}
+		}
+		// no else.
+
+		this.myModelInstanceObjects.remove(imiObject);
 	}
 
 	/**
@@ -297,8 +335,8 @@ public abstract class AbstractModelInstance implements IModelInstance {
 	 * </p>
 	 * 
 	 * @param modelInstanceObject
-	 *          The {@link IModelInstanceObject} that shall be added to the
-	 *          {@link Type} mapping.
+	 *            The {@link IModelInstanceObject} that shall be added to the
+	 *            {@link Type} mapping.
 	 */
 	protected void addModelInstanceObjectToCache(
 			IModelInstanceObject modelInstanceObject) {
@@ -309,11 +347,13 @@ public abstract class AbstractModelInstance implements IModelInstance {
 		/* Handle ComplexTypes especially. */
 		if (type instanceof ComplexType) {
 
-			for (Type anImplementedType : ((ComplexType) type).getImplementedTypes()) {
+			for (Type anImplementedType : ((ComplexType) type)
+					.getImplementedTypes()) {
 
-				if (this.myModelInstanceObjectsByType.containsKey(anImplementedType)) {
-					this.myModelInstanceObjectsByType.get(anImplementedType).add(
-							modelInstanceObject);
+				if (this.myModelInstanceObjectsByType
+						.containsKey(anImplementedType)) {
+					this.myModelInstanceObjectsByType.get(anImplementedType)
+							.add(modelInstanceObject);
 				}
 
 				else {
@@ -322,7 +362,8 @@ public abstract class AbstractModelInstance implements IModelInstance {
 					modelObjects = new HashSet<IModelInstanceObject>();
 					modelObjects.add(modelInstanceObject);
 
-					myModelInstanceObjectsByType.put(anImplementedType, modelObjects);
+					myModelInstanceObjectsByType.put(anImplementedType,
+							modelObjects);
 				}
 			}
 			// end for.
@@ -330,7 +371,8 @@ public abstract class AbstractModelInstance implements IModelInstance {
 
 		else {
 			if (this.myModelInstanceObjectsByType.containsKey(type)) {
-				this.myModelInstanceObjectsByType.get(type).add(modelInstanceObject);
+				this.myModelInstanceObjectsByType.get(type).add(
+						modelInstanceObject);
 			}
 
 			else {
@@ -346,8 +388,8 @@ public abstract class AbstractModelInstance implements IModelInstance {
 
 	/**
 	 * <p>
-	 * A helper method that adds all adapted {@link IModelInstanceObject} of this
-	 * {@link AbstractModelInstance} contained in the filed
+	 * A helper method that adds all adapted {@link IModelInstanceObject} of
+	 * this {@link AbstractModelInstance} contained in the filed
 	 * {@link AbstractModelInstance#myModelInstanceObjects} to the {@link Type}
 	 * mapping of this {@link AbstractModelInstance}.
 	 * </p>

@@ -76,8 +76,8 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
 public class JavaModelInstance extends AbstractModelInstance {
 
 	/** The {@link Logger} for this class. */
-	private static final Logger LOGGER =
-			JavaModelInstanceTypePlugin.getLogger(JavaModelInstance.class);
+	private static final Logger LOGGER = JavaModelInstanceTypePlugin
+			.getLogger(JavaModelInstance.class);
 
 	/**
 	 * A counter used to generated default names for empty
@@ -98,13 +98,13 @@ public class JavaModelInstance extends AbstractModelInstance {
 	 * </p>
 	 * 
 	 * @param providerClass
-	 *          The provider class used to get all type instances of this model
-	 *          instance.
+	 *            The provider class used to get all type instances of this
+	 *            model instance.
 	 * @param model
-	 *          The {@link IModel} of this {@link IModelInstance}.s
+	 *            The {@link IModel} of this {@link IModelInstance}.s
 	 * @throws TypeNotFoundInModelException
-	 *           Thrown if a model instance Object, cannot be adapted to a
-	 *           {@link Type} in the {@link IModel}.
+	 *             Thrown if a model instance Object, cannot be adapted to a
+	 *             {@link Type} in the {@link IModel}.
 	 */
 	@SuppressWarnings("unchecked")
 	public JavaModelInstance(Class<?> providerClass, IModel model)
@@ -136,10 +136,10 @@ public class JavaModelInstance extends AbstractModelInstance {
 			List<Object> providedObjects;
 
 			/* Get the provider method and its model objects. */
-			providerMethod =
-					providerClass.getDeclaredMethod("getModelObjects", new Class[0]);
-			providedObjects =
-					(List<Object>) providerMethod.invoke(null, new Object[0]);
+			providerMethod = providerClass.getDeclaredMethod("getModelObjects",
+					new Class[0]);
+			providedObjects = (List<Object>) providerMethod.invoke(null,
+					new Object[0]);
 
 			/* Adapt all provided objects. */
 			this.addObjects(providedObjects);
@@ -151,8 +151,7 @@ public class JavaModelInstance extends AbstractModelInstance {
 		catch (NoSuchMethodException e) {
 			String msg;
 
-			msg =
-					JavaModelInstanceTypeMessages.JavaModelInstance_ProviderMethodNotFound;
+			msg = JavaModelInstanceTypeMessages.JavaModelInstance_ProviderMethodNotFound;
 			msg = NLS.bind(msg, providerClass);
 
 			LOGGER.error(msg);
@@ -162,8 +161,7 @@ public class JavaModelInstance extends AbstractModelInstance {
 		catch (IllegalArgumentException e) {
 			String msg;
 
-			msg =
-					JavaModelInstanceTypeMessages.JavaModelInstance_ProviderMethodInvocationError;
+			msg = JavaModelInstanceTypeMessages.JavaModelInstance_ProviderMethodInvocationError;
 			msg = NLS.bind(msg, providerClass);
 
 			LOGGER.error(msg);
@@ -173,8 +171,7 @@ public class JavaModelInstance extends AbstractModelInstance {
 		catch (IllegalAccessException e) {
 			String msg;
 
-			msg =
-					JavaModelInstanceTypeMessages.JavaModelInstance_ProviderMethodInvocationError;
+			msg = JavaModelInstanceTypeMessages.JavaModelInstance_ProviderMethodInvocationError;
 			msg = NLS.bind(msg, providerClass);
 
 			LOGGER.error(msg);
@@ -184,8 +181,7 @@ public class JavaModelInstance extends AbstractModelInstance {
 		catch (InvocationTargetException e) {
 			String msg;
 
-			msg =
-					JavaModelInstanceTypeMessages.JavaModelInstance_ProviderMethodInvocationError;
+			msg = JavaModelInstanceTypeMessages.JavaModelInstance_ProviderMethodInvocationError;
 			msg = NLS.bind(msg, providerClass);
 
 			LOGGER.error(msg);
@@ -209,14 +205,15 @@ public class JavaModelInstance extends AbstractModelInstance {
 	 * </p>
 	 * 
 	 * <p>
-	 * <strong>Please note that an empty {@link JavaModelInstance} cannot be used
-	 * to find static {@link Property}s and static {@link Operation}s until at
-	 * least one {@link Object} has been added whose {@link ClassLoader} knows the
-	 * {@link Class} of the static {@link Property} or {@link Operation}!</strong>
+	 * <strong>Please note that an empty {@link JavaModelInstance} cannot be
+	 * used to find static {@link Property}s and static {@link Operation}s until
+	 * at least one {@link Object} has been added whose {@link ClassLoader}
+	 * knows the {@link Class} of the static {@link Property} or
+	 * {@link Operation}!</strong>
 	 * </p>
 	 * 
 	 * @param model
-	 *          The {@link IModel} of this {@link IModelInstance}.s
+	 *            The {@link IModel} of this {@link IModelInstance}.s
 	 */
 	public JavaModelInstance(IModel model) {
 
@@ -257,19 +254,21 @@ public class JavaModelInstance extends AbstractModelInstance {
 	 * {@link IModelInstanceElement}. E.g., if the given
 	 * {@link IModelInstanceElement} is an {@link IModelInstanceObject}, the
 	 * adapted {@link Object} is simply returned. For
-	 * {@link IModelInstancePrimitiveType}, a newly created primitive is returned.
+	 * {@link IModelInstancePrimitiveType}, a newly created primitive is
+	 * returned.
 	 * </p>
 	 * 
 	 * @param modelInstanceElement
-	 *          The {@link IModelInstanceElement} those adapted {@link Object}
-	 *          shall be returned or created.
+	 *            The {@link IModelInstanceElement} those adapted {@link Object}
+	 *            shall be returned or created.
 	 * @param typeClass
-	 *          The {@link Class} the recreated element should be an instance of.
-	 *          This could be required for {@link IModelInstancePrimitiveType}s or
-	 *          for {@link IModelInstanceCollection}s.
+	 *            The {@link Class} the recreated element should be an instance
+	 *            of. This could be required for
+	 *            {@link IModelInstancePrimitiveType}s or for
+	 *            {@link IModelInstanceCollection}s.
 	 * @param classLoaders
-	 *          A {@link Set} of {@link ClassLoader}s that can probably be used to
-	 *          load required {@link Class}es for the adaptation.
+	 *            A {@link Set} of {@link ClassLoader}s that can probably be
+	 *            used to load required {@link Class}es for the adaptation.
 	 * @return The created or adapted value ({@link Object}).
 	 */
 	@SuppressWarnings("unchecked")
@@ -290,31 +289,29 @@ public class JavaModelInstance extends AbstractModelInstance {
 			/* Probably recreate a boolean value. */
 			if (modelInstanceElement instanceof IModelInstanceBoolean) {
 
-				result = ((IModelInstanceBoolean) modelInstanceElement).getBoolean();
+				result = ((IModelInstanceBoolean) modelInstanceElement)
+						.getBoolean();
 			}
 
 			/* Else probably recreate an integer value. */
 			else if (modelInstanceElement instanceof IModelInstanceInteger) {
 
-				result =
-						createAdaptedIntegerValue(
-								(IModelInstanceInteger) modelInstanceElement, typeClass);
+				result = createAdaptedIntegerValue(
+						(IModelInstanceInteger) modelInstanceElement, typeClass);
 			}
 
 			/* Else probably recreate a real value. */
 			else if (modelInstanceElement instanceof IModelInstanceReal) {
 
-				result =
-						createAdaptedRealValue((IModelInstanceReal) modelInstanceElement,
-								typeClass);
+				result = createAdaptedRealValue(
+						(IModelInstanceReal) modelInstanceElement, typeClass);
 			}
 
 			/* Else probably recreate an String value. */
 			else if (modelInstanceElement instanceof IModelInstanceString) {
 
-				result =
-						createAdaptedStringValue(
-								(IModelInstanceString) modelInstanceElement, typeClass);
+				result = createAdaptedStringValue(
+						(IModelInstanceString) modelInstanceElement, typeClass);
 			}
 
 			else {
@@ -326,10 +323,9 @@ public class JavaModelInstance extends AbstractModelInstance {
 		/* Else check if the given element is an enumeration literal. */
 		else if (modelInstanceElement instanceof IModelInstanceEnumerationLiteral) {
 
-			result =
-					createAdaptedEnumerationLiteral(
-							(IModelInstanceEnumerationLiteral) modelInstanceElement,
-							typeClass, classLoaders);
+			result = createAdaptedEnumerationLiteral(
+					(IModelInstanceEnumerationLiteral) modelInstanceElement,
+					typeClass, classLoaders);
 		}
 
 		/* Else check if the given element is a collection. */
@@ -337,23 +333,21 @@ public class JavaModelInstance extends AbstractModelInstance {
 
 			/* Eventually adapt to an array. */
 			if (typeClass.isArray()) {
-				result =
-						createAdaptedArray(modelInstanceElement, typeClass, classLoaders);
+				result = createAdaptedArray(modelInstanceElement, typeClass,
+						classLoaders);
 			}
 
 			/* Else use the collection. */
 			else if (Collection.class.isAssignableFrom(typeClass)) {
-				result =
-						createAdaptedCollection(
-								(IModelInstanceCollection<IModelInstanceElement>) modelInstanceElement,
-								typeClass, classLoaders);
+				result = createAdaptedCollection(
+						(IModelInstanceCollection<IModelInstanceElement>) modelInstanceElement,
+						typeClass, classLoaders);
 			}
 
 			/* Else throw an exception. */
 			else {
 				String msg;
-				msg =
-						JavaModelInstanceTypeMessages.JavaModelInstance_CannotRecreateCollection;
+				msg = JavaModelInstanceTypeMessages.JavaModelInstance_CannotRecreateCollection;
 
 				throw new IllegalArgumentException(msg);
 			}
@@ -375,18 +369,18 @@ public class JavaModelInstance extends AbstractModelInstance {
 
 	/**
 	 * <p>
-	 * A helper method the converts a given {@link IModelInstanceElement} into an
-	 * Array value of a given {@link Class}.
+	 * A helper method the converts a given {@link IModelInstanceElement} into
+	 * an Array value of a given {@link Class}.
 	 * </p>
 	 * 
 	 * @param modelInstanceElement
-	 *          The {@link IModelInstanceElement} that shall be converted.
+	 *            The {@link IModelInstanceElement} that shall be converted.
 	 * @param type
-	 *          The {@link Class} to that the given {@link IModelInstanceElement}
-	 *          shall be converted.
+	 *            The {@link Class} to that the given
+	 *            {@link IModelInstanceElement} shall be converted.
 	 * @param classLoaders
-	 *          A {@link Set} of {@link ClassLoader}s that can probably be used to
-	 *          load required {@link Class}es for the adaptation.
+	 *            A {@link Set} of {@link ClassLoader}s that can probably be
+	 *            used to load required {@link Class}es for the adaptation.
 	 * @return The converted {@link Object}.
 	 */
 	@SuppressWarnings("unchecked")
@@ -406,8 +400,7 @@ public class JavaModelInstance extends AbstractModelInstance {
 
 			componentType = type.getComponentType();
 
-			modelInstanceCollection =
-					(IModelInstanceCollection<IModelInstanceElement>) modelInstanceElement;
+			modelInstanceCollection = (IModelInstanceCollection<IModelInstanceElement>) modelInstanceElement;
 			adaptedCollection = modelInstanceCollection.getCollection();
 
 			if (componentType.isPrimitive()) {
@@ -421,8 +414,8 @@ public class JavaModelInstance extends AbstractModelInstance {
 					index = 0;
 
 					for (IModelInstanceElement anElement : adaptedCollection) {
-						array[index] =
-								((IModelInstanceBoolean) anElement).getBoolean().booleanValue();
+						array[index] = ((IModelInstanceBoolean) anElement)
+								.getBoolean().booleanValue();
 					}
 
 					result = array;
@@ -437,8 +430,8 @@ public class JavaModelInstance extends AbstractModelInstance {
 					index = 0;
 
 					for (IModelInstanceElement anElement : adaptedCollection) {
-						array[index] =
-								((IModelInstanceInteger) anElement).getLong().byteValue();
+						array[index] = ((IModelInstanceInteger) anElement)
+								.getLong().byteValue();
 					}
 
 					result = array;
@@ -453,8 +446,8 @@ public class JavaModelInstance extends AbstractModelInstance {
 					index = 0;
 
 					for (IModelInstanceElement anElement : adaptedCollection) {
-						array[index] =
-								((IModelInstanceString) anElement).getString().charAt(0);
+						array[index] = ((IModelInstanceString) anElement)
+								.getString().charAt(0);
 					}
 
 					result = array;
@@ -469,8 +462,8 @@ public class JavaModelInstance extends AbstractModelInstance {
 					index = 0;
 
 					for (IModelInstanceElement anElement : adaptedCollection) {
-						array[index] =
-								((IModelInstanceReal) anElement).getDouble().doubleValue();
+						array[index] = ((IModelInstanceReal) anElement)
+								.getDouble().doubleValue();
 					}
 
 					result = array;
@@ -485,8 +478,8 @@ public class JavaModelInstance extends AbstractModelInstance {
 					index = 0;
 
 					for (IModelInstanceElement anElement : adaptedCollection) {
-						array[index] =
-								((IModelInstanceReal) anElement).getDouble().floatValue();
+						array[index] = ((IModelInstanceReal) anElement)
+								.getDouble().floatValue();
 					}
 
 					result = array;
@@ -501,8 +494,8 @@ public class JavaModelInstance extends AbstractModelInstance {
 					index = 0;
 
 					for (IModelInstanceElement anElement : adaptedCollection) {
-						array[index] =
-								((IModelInstanceInteger) anElement).getLong().intValue();
+						array[index] = ((IModelInstanceInteger) anElement)
+								.getLong().intValue();
 					}
 
 					result = array;
@@ -517,8 +510,8 @@ public class JavaModelInstance extends AbstractModelInstance {
 					index = 0;
 
 					for (IModelInstanceElement anElement : adaptedCollection) {
-						array[index] =
-								((IModelInstanceInteger) anElement).getLong().longValue();
+						array[index] = ((IModelInstanceInteger) anElement)
+								.getLong().longValue();
 					}
 
 					result = array;
@@ -533,8 +526,8 @@ public class JavaModelInstance extends AbstractModelInstance {
 					index = 0;
 
 					for (IModelInstanceElement anElement : adaptedCollection) {
-						array[index] =
-								((IModelInstanceInteger) anElement).getLong().shortValue();
+						array[index] = ((IModelInstanceInteger) anElement)
+								.getLong().shortValue();
 					}
 
 					result = array;
@@ -551,16 +544,15 @@ public class JavaModelInstance extends AbstractModelInstance {
 				Object[] array;
 
 				/* Create a new array of the given type. */
-				array =
-						(Object[]) Array.newInstance(componentType, adaptedCollection
-								.size());
+				array = (Object[]) Array.newInstance(componentType,
+						adaptedCollection.size());
 
 				index = 0;
 
 				/* Fill the array with elements. */
 				for (IModelInstanceElement anElement : adaptedCollection) {
-					array[index] =
-							createAdaptedElement(anElement, componentType, classLoaders);
+					array[index] = createAdaptedElement(anElement,
+							componentType, classLoaders);
 				}
 				// end for.
 
@@ -579,18 +571,18 @@ public class JavaModelInstance extends AbstractModelInstance {
 
 	/**
 	 * <p>
-	 * A helper method that converts a given {@link IModelInstanceElement} into an
-	 * {@link Collection} of a given {@link Class} type.
+	 * A helper method that converts a given {@link IModelInstanceElement} into
+	 * an {@link Collection} of a given {@link Class} type.
 	 * </p>
 	 * 
 	 * @param modelInstanceCollection
-	 *          The {@link IModelInstanceCollection} that shall be converted.
+	 *            The {@link IModelInstanceCollection} that shall be converted.
 	 * @param type
-	 *          The {@link Collection} {@link Class} to that the given
-	 *          {@link IModelInstanceElement} shall be converted.
+	 *            The {@link Collection} {@link Class} to that the given
+	 *            {@link IModelInstanceElement} shall be converted.
 	 * @param classLoaders
-	 *          A {@link Set} of {@link ClassLoader}s that can probably be used to
-	 *          load required {@link Class}es for the adaptation.
+	 *            A {@link Set} of {@link ClassLoader}s that can probably be
+	 *            used to load required {@link Class}es for the adaptation.
 	 * @return The converted {@link Collection}.
 	 */
 	@SuppressWarnings("unchecked")
@@ -603,16 +595,15 @@ public class JavaModelInstance extends AbstractModelInstance {
 		if (Collection.class.isAssignableFrom(clazzType)) {
 
 			/*
-			 * Try to initialize the collection using the an empty constructor found
-			 * via reflections.
+			 * Try to initialize the collection using the an empty constructor
+			 * found via reflections.
 			 */
 			try {
 				Constructor<?> collectionConstructor;
 
 				collectionConstructor = clazzType.getConstructor(new Class[0]);
-				result =
-						(Collection<Object>) collectionConstructor
-								.newInstance(new Object[0]);
+				result = (Collection<Object>) collectionConstructor
+						.newInstance(new Object[0]);
 			}
 
 			/* Catch all possible exceptions and probably initialize with null. */
@@ -641,9 +632,9 @@ public class JavaModelInstance extends AbstractModelInstance {
 			}
 
 			/*
-			 * This could be implemented for other existing implementations of List
-			 * and Set. All existing Lists and Sets of the package java.util are
-			 * supported.
+			 * This could be implemented for other existing implementations of
+			 * List and Set. All existing Lists and Sets of the package
+			 * java.util are supported.
 			 */
 			if (result == null) {
 
@@ -687,15 +678,15 @@ public class JavaModelInstance extends AbstractModelInstance {
 				Class<?> elementClassType;
 
 				/*
-				 * TODO: The question how to retrieve the generic type of a List (if any
-				 * exists) should be investigated very soon.
+				 * TODO: The question how to retrieve the generic type of a List
+				 * (if any exists) should be investigated very soon.
 				 */
 				/* Try to get the elements class. */
 				if (clazzType.getTypeParameters().length == 1
 						&& clazzType.getTypeParameters()[0].getBounds().length == 1
 						&& clazzType.getTypeParameters()[0].getBounds()[0] instanceof Class) {
-					elementClassType =
-							(Class<?>) clazzType.getTypeParameters()[0].getBounds()[0];
+					elementClassType = (Class<?>) clazzType.getTypeParameters()[0]
+							.getBounds()[0];
 				}
 
 				else {
@@ -705,8 +696,8 @@ public class JavaModelInstance extends AbstractModelInstance {
 				/* Create the value for all elements. */
 				for (IModelInstanceElement anElement : modelInstanceCollection
 						.getCollection()) {
-					result.add(createAdaptedElement(anElement, elementClassType,
-							classLoaders));
+					result.add(createAdaptedElement(anElement,
+							elementClassType, classLoaders));
 				}
 				// end for.
 			}
@@ -714,8 +705,7 @@ public class JavaModelInstance extends AbstractModelInstance {
 			/* Else throw an exception. */
 			else {
 				String msg;
-				msg =
-						JavaModelInstanceTypeMessages.JavaModelInstance_CannotRecreateCollection;
+				msg = JavaModelInstanceTypeMessages.JavaModelInstance_CannotRecreateCollection;
 
 				throw new IllegalArgumentException(msg);
 			}
@@ -724,8 +714,7 @@ public class JavaModelInstance extends AbstractModelInstance {
 		/* Else throw an exception. */
 		else {
 			String msg;
-			msg =
-					JavaModelInstanceTypeMessages.JavaModelInstance_CannotRecreateCollection;
+			msg = JavaModelInstanceTypeMessages.JavaModelInstance_CannotRecreateCollection;
 
 			throw new IllegalArgumentException(msg);
 		}
@@ -736,20 +725,20 @@ public class JavaModelInstance extends AbstractModelInstance {
 	/**
 	 * <p>
 	 * A helper method the converts a given
-	 * {@link IModelInstanceEnumerationLiteral} into an {@link Object} value of a
-	 * given {@link Class}. If the given {@link Class} does not represents an
+	 * {@link IModelInstanceEnumerationLiteral} into an {@link Object} value of
+	 * a given {@link Class}. If the given {@link Class} does not represents an
 	 * {@link Enum}, a {@link IllegalArgumentException} is thrown.
 	 * </p>
 	 * 
 	 * @param modelInstanceEnumerationLiteral
-	 *          The {@link IModelInstanceEnumerationLiteral} that shall be
-	 *          converted.
+	 *            The {@link IModelInstanceEnumerationLiteral} that shall be
+	 *            converted.
 	 * @param type
-	 *          The {@link Class} to that the given
-	 *          {@link IModelInstanceEnumerationLiteral} shall be converted.
+	 *            The {@link Class} to that the given
+	 *            {@link IModelInstanceEnumerationLiteral} shall be converted.
 	 * @param classLoaders
-	 *          A {@link Set} of {@link ClassLoader}s that can probably be used to
-	 *          load required {@link Class}es for the adaptation.
+	 *            A {@link Set} of {@link ClassLoader}s that can probably be
+	 *            used to load required {@link Class}es for the adaptation.
 	 * @return The converted {@link Object}.
 	 */
 	private static Object createAdaptedEnumerationLiteral(
@@ -764,8 +753,8 @@ public class JavaModelInstance extends AbstractModelInstance {
 			result = null;
 
 			/*
-			 * Try to find an enum constant having the same name as the enumeration
-			 * literal.
+			 * Try to find an enum constant having the same name as the
+			 * enumeration literal.
 			 */
 			for (Object anEnumConstant : typeClass.getEnumConstants()) {
 				if (anEnumConstant.toString().equals(
@@ -781,14 +770,12 @@ public class JavaModelInstance extends AbstractModelInstance {
 			if (result == null) {
 				String msg;
 
-				msg =
-						JavaModelInstanceTypeMessages.JavaModelInstance_EnumerationLiteralNotFound;
-				msg =
-						NLS
-								.bind(
-										modelInstanceEnumerationLiteral.getLiteral()
-												.getQualifiedName(),
-										"The enumeration literal could not be adapted to any constant of the given Enum class.");
+				msg = JavaModelInstanceTypeMessages.JavaModelInstance_EnumerationLiteralNotFound;
+				msg = NLS
+						.bind(
+								modelInstanceEnumerationLiteral.getLiteral()
+										.getQualifiedName(),
+								"The enumeration literal could not be adapted to any constant of the given Enum class.");
 
 				throw new IllegalArgumentException(msg);
 			}
@@ -804,14 +791,14 @@ public class JavaModelInstance extends AbstractModelInstance {
 			List<String> enumerationQualifiedName;
 			String enumClassName;
 
-			enumerationQualifiedName =
-					modelInstanceEnumerationLiteral.getLiteral().getQualifiedNameList();
+			enumerationQualifiedName = modelInstanceEnumerationLiteral
+					.getLiteral().getQualifiedNameList();
 			/* Remove the name of the literal. */
-			enumerationQualifiedName.remove(enumerationQualifiedName.size() - 1);
+			enumerationQualifiedName
+					.remove(enumerationQualifiedName.size() - 1);
 
-			enumClassName =
-					JavaModelInstanceTypeUtility
-							.toCanonicalName(enumerationQualifiedName);
+			enumClassName = JavaModelInstanceTypeUtility
+					.toCanonicalName(enumerationQualifiedName);
 
 			try {
 				Class<?> enumClass;
@@ -828,7 +815,8 @@ public class JavaModelInstance extends AbstractModelInstance {
 					 */
 					for (Object anEnumConstant : enumClass.getEnumConstants()) {
 						if (anEnumConstant.toString().equals(
-								modelInstanceEnumerationLiteral.getLiteral().getName())) {
+								modelInstanceEnumerationLiteral.getLiteral()
+										.getName())) {
 
 							result = anEnumConstant;
 							break;
@@ -839,14 +827,13 @@ public class JavaModelInstance extends AbstractModelInstance {
 					if (result == null) {
 						String msg;
 
-						msg =
-								JavaModelInstanceTypeMessages.JavaModelInstance_EnumerationLiteralNotFound;
-						msg =
-								NLS
-										.bind(
-												modelInstanceEnumerationLiteral.getLiteral()
-														.getQualifiedName(),
-												"The enumeration literal could not be adapted to any constant of the given Enum class.");
+						msg = JavaModelInstanceTypeMessages.JavaModelInstance_EnumerationLiteralNotFound;
+						msg = NLS
+								.bind(
+										modelInstanceEnumerationLiteral
+												.getLiteral()
+												.getQualifiedName(),
+										"The enumeration literal could not be adapted to any constant of the given Enum class.");
 
 						throw new IllegalArgumentException(msg);
 					}
@@ -856,12 +843,10 @@ public class JavaModelInstance extends AbstractModelInstance {
 				else {
 					String msg;
 
-					msg =
-							JavaModelInstanceTypeMessages.JavaModelInstance_EnumerationLiteralNotFound;
-					msg =
-							NLS.bind(modelInstanceEnumerationLiteral.getLiteral()
-									.getQualifiedName(), "The found class " + enumClass
-									+ " is not an Enum.");
+					msg = JavaModelInstanceTypeMessages.JavaModelInstance_EnumerationLiteralNotFound;
+					msg = NLS.bind(modelInstanceEnumerationLiteral.getLiteral()
+							.getQualifiedName(), "The found class " + enumClass
+							+ " is not an Enum.");
 
 					throw new IllegalArgumentException(msg);
 				}
@@ -870,11 +855,9 @@ public class JavaModelInstance extends AbstractModelInstance {
 			catch (ClassNotFoundException e) {
 				String msg;
 
-				msg =
-						JavaModelInstanceTypeMessages.JavaModelInstance_EnumerationLiteralNotFound;
-				msg =
-						NLS.bind(modelInstanceEnumerationLiteral.getLiteral()
-								.getQualifiedName(), e.getMessage());
+				msg = JavaModelInstanceTypeMessages.JavaModelInstance_EnumerationLiteralNotFound;
+				msg = NLS.bind(modelInstanceEnumerationLiteral.getLiteral()
+						.getQualifiedName(), e.getMessage());
 
 				throw new IllegalArgumentException(msg, e);
 			}
@@ -885,16 +868,16 @@ public class JavaModelInstance extends AbstractModelInstance {
 
 	/**
 	 * <p>
-	 * A helper method the converts a given {@link IModelInstanceInteger} into an
-	 * Integer value of a given {@link Class}. If the given {@link Class}
+	 * A helper method the converts a given {@link IModelInstanceInteger} into
+	 * an Integer value of a given {@link Class}. If the given {@link Class}
 	 * represents an unknown integer {@link Class}, a {@link Long} is returned.
 	 * </p>
 	 * 
 	 * @param modelInstanceInteger
-	 *          The {@link IModelInstanceElement} that shall be converted.
+	 *            The {@link IModelInstanceElement} that shall be converted.
 	 * @param type
-	 *          The {@link Class} to that the given {@link IModelInstanceElement}
-	 *          shall be converted.
+	 *            The {@link Class} to that the given
+	 *            {@link IModelInstanceElement} shall be converted.
 	 * @return The converted {@link Object}.
 	 */
 	private static Object createAdaptedIntegerValue(
@@ -942,16 +925,16 @@ public class JavaModelInstance extends AbstractModelInstance {
 
 	/**
 	 * <p>
-	 * A helper method the converts a given {@link IModelInstanceReal} into a Real
-	 * value of a given {@link Class}. If the given {@link Class} represents an
-	 * unknown real {@link Class}, a {@link Number} is returned.
+	 * A helper method the converts a given {@link IModelInstanceReal} into a
+	 * Real value of a given {@link Class}. If the given {@link Class}
+	 * represents an unknown real {@link Class}, a {@link Number} is returned.
 	 * </p>
 	 * 
 	 * @param modelInstanceReal
-	 *          The {@link IModelInstanceReal} that shall be converted.
+	 *            The {@link IModelInstanceReal} that shall be converted.
 	 * @param type
-	 *          The {@link Class} to that the given {@link IModelInstanceReal}
-	 *          shall be converted.
+	 *            The {@link Class} to that the given {@link IModelInstanceReal}
+	 *            shall be converted.
 	 * @return The converted {@link Object}.
 	 */
 	private static Object createAdaptedRealValue(
@@ -985,10 +968,10 @@ public class JavaModelInstance extends AbstractModelInstance {
 	 * </p>
 	 * 
 	 * @param modelInstanceString
-	 *          The {@link IModelInstanceString} that shall be converted.
+	 *            The {@link IModelInstanceString} that shall be converted.
 	 * @param type
-	 *          The {@link Class} to that the given {@link IModelInstanceString}
-	 *          shall be converted.
+	 *            The {@link Class} to that the given
+	 *            {@link IModelInstanceString} shall be converted.
 	 * @return The converted {@link Object}.
 	 */
 	private static Object createAdaptedStringValue(
@@ -1024,8 +1007,8 @@ public class JavaModelInstance extends AbstractModelInstance {
 
 		else {
 			/*
-			 * Other integer types are not supported (except of String). Return the
-			 * String value.
+			 * Other integer types are not supported (except of String). Return
+			 * the String value.
 			 */
 			result = stringValue;
 		}
@@ -1040,14 +1023,14 @@ public class JavaModelInstance extends AbstractModelInstance {
 	 * </p>
 	 * 
 	 * @param canonicalName
-	 *          The canonical name of the {@link Class} that shall be loaded.
+	 *            The canonical name of the {@link Class} that shall be loaded.
 	 * @param classLoaders
-	 *          A {@link Set} of {@link ClassLoader}s that can probably be used to
-	 *          load required {@link Class}es for the adaptation.
+	 *            A {@link Set} of {@link ClassLoader}s that can probably be
+	 *            used to load required {@link Class}es for the adaptation.
 	 * @return
 	 * @throws ClassNotFoundException
-	 *           Thrown, if the {@link Class} cannot be found by any
-	 *           {@link ClassLoader} of this {@link JavaModelInstance}.
+	 *             Thrown, if the {@link Class} cannot be found by any
+	 *             {@link ClassLoader} of this {@link JavaModelInstance}.
 	 */
 	private static Class<?> loadJavaClass(String canonicalName,
 			Set<ClassLoader> classLoaders) throws ClassNotFoundException {
@@ -1087,6 +1070,7 @@ public class JavaModelInstance extends AbstractModelInstance {
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @seetudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance#
 	 * addModelInstanceElement(java.lang.Object)
 	 */
@@ -1094,7 +1078,8 @@ public class JavaModelInstance extends AbstractModelInstance {
 			throws TypeNotFoundInModelException {
 
 		if (object == null) {
-			throw new IllegalArgumentException("Parameter 'object' must not be null.");
+			throw new IllegalArgumentException(
+					"Parameter 'object' must not be null.");
 		}
 		// no else.
 
@@ -1117,6 +1102,7 @@ public class JavaModelInstance extends AbstractModelInstance {
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance#getStaticProperty
 	 * (tudresden.ocl20.pivot.pivotmodel.Property)
@@ -1140,18 +1126,19 @@ public class JavaModelInstance extends AbstractModelInstance {
 
 			/* Try to find the class of the static property. */
 			try {
-				propertyClassCanonicalName =
-						JavaModelInstanceTypeUtility.toCanonicalName(property.getOwner()
+				propertyClassCanonicalName = JavaModelInstanceTypeUtility
+						.toCanonicalName(property.getOwner()
 								.getQualifiedNameList());
 
-				propertyClass =
-						loadJavaClass(propertyClassCanonicalName, this.myClassLoaders);
+				propertyClass = loadJavaClass(propertyClassCanonicalName,
+						this.myClassLoaders);
 
 				Field propertyField;
 
 				/* Try to find a field with the property's name. */
 				try {
-					propertyField = propertyClass.getDeclaredField(property.getName());
+					propertyField = propertyClass.getDeclaredField(property
+							.getName());
 
 					Object propertyValue;
 
@@ -1163,18 +1150,18 @@ public class JavaModelInstance extends AbstractModelInstance {
 						propertyValue = propertyField.get(null);
 
 						/* Adapt the value as result. */
-						result =
-								adaptInvocationResult(propertyValue, property.getType(),
-										property,
-										(JavaModelInstanceFactory) this.myModelInstanceFactory);
+						result = adaptInvocationResult(
+								propertyValue,
+								property.getType(),
+								property,
+								(JavaModelInstanceFactory) this.myModelInstanceFactory);
 					}
 					// end try.
 
 					catch (IllegalArgumentException e) {
 						String msg;
 
-						msg =
-								JavaModelInstanceTypeMessages.JavaModelInstance_PropertyAccessFailed;
+						msg = JavaModelInstanceTypeMessages.JavaModelInstance_PropertyAccessFailed;
 						msg = NLS.bind(msg, property, e.getMessage());
 
 						throw new PropertyAccessException(msg, e);
@@ -1183,8 +1170,7 @@ public class JavaModelInstance extends AbstractModelInstance {
 					catch (IllegalAccessException e) {
 						String msg;
 
-						msg =
-								JavaModelInstanceTypeMessages.JavaModelInstance_PropertyAccessFailed;
+						msg = JavaModelInstanceTypeMessages.JavaModelInstance_PropertyAccessFailed;
 						msg = NLS.bind(msg, property, e.getMessage());
 
 						throw new PropertyAccessException(msg, e);
@@ -1196,11 +1182,9 @@ public class JavaModelInstance extends AbstractModelInstance {
 				catch (NoSuchFieldException e) {
 					String msg;
 
-					msg =
-							JavaModelInstanceTypeMessages.JavaModelInstance_StaticPropertyNotFound;
-					msg =
-							NLS.bind(msg, property,
-									"The field was not found in the adapted class.");
+					msg = JavaModelInstanceTypeMessages.JavaModelInstance_StaticPropertyNotFound;
+					msg = NLS.bind(msg, property,
+							"The field was not found in the adapted class.");
 
 					throw new PropertyNotFoundException(msg);
 				}
@@ -1211,8 +1195,7 @@ public class JavaModelInstance extends AbstractModelInstance {
 			catch (ClassNotFoundException e2) {
 				String msg;
 
-				msg =
-						JavaModelInstanceTypeMessages.JavaModelInstance_StaticPropertyNotFound;
+				msg = JavaModelInstanceTypeMessages.JavaModelInstance_StaticPropertyNotFound;
 				msg = NLS.bind(msg, property, e2.getMessage());
 
 				throw new PropertyNotFoundException(msg, e2);
@@ -1224,11 +1207,9 @@ public class JavaModelInstance extends AbstractModelInstance {
 		else {
 			String msg;
 
-			msg =
-					JavaModelInstanceTypeMessages.JavaModelInstance_StaticPropertyNotFound;
-			msg =
-					NLS.bind(msg, property,
-							"The ClassLoader of the JavaModelInstance was null.");
+			msg = JavaModelInstanceTypeMessages.JavaModelInstance_StaticPropertyNotFound;
+			msg = NLS.bind(msg, property,
+					"The ClassLoader of the JavaModelInstance was null.");
 
 			throw new PropertyNotFoundException(msg);
 		}
@@ -1238,13 +1219,14 @@ public class JavaModelInstance extends AbstractModelInstance {
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @seetudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance#
 	 * invokeStaticOperation(tudresden.ocl20.pivot.pivotmodel.Operation,
 	 * java.util.List)
 	 */
 	public IModelInstanceElement invokeStaticOperation(Operation operation,
-			List<IModelInstanceElement> args) throws OperationNotFoundException,
-			OperationAccessException {
+			List<IModelInstanceElement> args)
+			throws OperationNotFoundException, OperationAccessException {
 
 		if (operation == null) {
 			throw new IllegalArgumentException(
@@ -1253,7 +1235,8 @@ public class JavaModelInstance extends AbstractModelInstance {
 		// no else.
 
 		else if (args == null) {
-			throw new IllegalArgumentException("Parameter 'args' must not be null.");
+			throw new IllegalArgumentException(
+					"Parameter 'args' must not be null.");
 		}
 		// no else.
 
@@ -1272,14 +1255,14 @@ public class JavaModelInstance extends AbstractModelInstance {
 		argumentValues = new Object[args.size()];
 
 		/* Avoid errors through to much arguments given by the invocation. */
-		argSize = Math.min(args.size(), operation.getSignatureParameter().size());
+		argSize = Math.min(args.size(), operation.getSignatureParameter()
+				.size());
 
 		/* Adapt the argument values. */
 		for (int index = 0; index < argSize; index++) {
 
-			argumentValues[index] =
-					createAdaptedElement(args.get(index), argumentTypes[index],
-							this.myClassLoaders);
+			argumentValues[index] = createAdaptedElement(args.get(index),
+					argumentTypes[index], this.myClassLoaders);
 			index++;
 		}
 
@@ -1291,17 +1274,15 @@ public class JavaModelInstance extends AbstractModelInstance {
 			adapteeResult = operationMethod.invoke(null, argumentValues);
 
 			/* Adapt the result to the expected result type. */
-			result =
-					JavaModelInstance.adaptInvocationResult(adapteeResult, operation
-							.getType(), operation,
-							(JavaModelInstanceFactory) this.myModelInstanceFactory);
+			result = JavaModelInstance.adaptInvocationResult(adapteeResult,
+					operation.getType(), operation,
+					(JavaModelInstanceFactory) this.myModelInstanceFactory);
 		}
 
 		catch (IllegalArgumentException e) {
 			String msg;
 
-			msg =
-					JavaModelInstanceTypeMessages.JavaModelInstance_OperationAccessFailed;
+			msg = JavaModelInstanceTypeMessages.JavaModelInstance_OperationAccessFailed;
 			msg = NLS.bind(msg, operation, e.getMessage());
 
 			throw new OperationAccessException(msg, e);
@@ -1310,8 +1291,7 @@ public class JavaModelInstance extends AbstractModelInstance {
 		catch (IllegalAccessException e) {
 			String msg;
 
-			msg =
-					JavaModelInstanceTypeMessages.JavaModelInstance_OperationAccessFailed;
+			msg = JavaModelInstanceTypeMessages.JavaModelInstance_OperationAccessFailed;
 			msg = NLS.bind(msg, operation, e.getMessage());
 
 			throw new OperationAccessException(msg, e);
@@ -1320,8 +1300,7 @@ public class JavaModelInstance extends AbstractModelInstance {
 		catch (InvocationTargetException e) {
 			String msg;
 
-			msg =
-					JavaModelInstanceTypeMessages.JavaModelInstance_OperationAccessFailed;
+			msg = JavaModelInstanceTypeMessages.JavaModelInstance_OperationAccessFailed;
 			msg = NLS.bind(msg, operation, e.getMessage());
 
 			throw new OperationAccessException(msg, e);
@@ -1336,16 +1315,19 @@ public class JavaModelInstance extends AbstractModelInstance {
 	 * </p>
 	 * 
 	 * @param objects
-	 *          A {@link List} of {@link Object}s which shall be added to the
-	 *          objects {@link List}.
+	 *            A {@link List} of {@link Object}s which shall be added to the
+	 *            objects {@link List}.
 	 * @throws TypeNotFoundInModelException
-	 *           Thrown if a given Object, cannot be adapted to a {@link Type} in
-	 *           the {@link IModel}.
+	 *             Thrown if a given Object, cannot be adapted to a {@link Type}
+	 *             in the {@link IModel}.
 	 */
 	private void addObjects(List<Object> objects)
 			throws TypeNotFoundInModelException {
 
-		/* Iterate through the given objects and add them as model instance objects. */
+		/*
+		 * Iterate through the given objects and add them as model instance
+		 * objects.
+		 */
 		for (Object anObject : objects) {
 			this.addObject(anObject);
 		}
@@ -1358,27 +1340,28 @@ public class JavaModelInstance extends AbstractModelInstance {
 	 * </p>
 	 * 
 	 * @param anObject
-	 *          The {@link Object} which shall be added to the {@link List} of
-	 *          {@link IModelInstanceElement}s.
+	 *            The {@link Object} which shall be added to the {@link List} of
+	 *            {@link IModelInstanceElement}s.
 	 * @return The added {@link IModelInstanceElement}.
 	 * @throws TypeNotFoundInModelException
-	 *           Thrown if a given Object, cannot be adapted to a {@link Type} in
-	 *           the {@link IModel}.
+	 *             Thrown if a given Object, cannot be adapted to a {@link Type}
+	 *             in the {@link IModel}.
 	 */
 	private IModelInstanceElement addObject(Object anObject)
 			throws TypeNotFoundInModelException {
 
 		IModelInstanceElement result;
 
-		result = this.myModelInstanceFactory.createModelInstanceElement(anObject);
+		result = this.myModelInstanceFactory
+				.createModelInstanceElement(anObject);
 
 		/* If no type of the object has been found, throw an exception. */
 		if (result == null) {
 			String msg;
 
-			msg =
-					JavaModelInstanceTypeMessages.JavaModelInstance_ObjectDoesNoMatchToModel;
-			msg = NLS.bind(msg, anObject.getClass(), this.myModel.getDisplayName());
+			msg = JavaModelInstanceTypeMessages.JavaModelInstance_ObjectDoesNoMatchToModel;
+			msg = NLS.bind(msg, anObject.getClass(), this.myModel
+					.getDisplayName());
 
 			LOGGER.error(msg);
 			throw new TypeNotFoundInModelException(msg);
@@ -1401,11 +1384,12 @@ public class JavaModelInstance extends AbstractModelInstance {
 	 * </p>
 	 * 
 	 * @param operation
-	 *          The {@link Operation} for that a {@link Method} shall be found.
+	 *            The {@link Operation} for that a {@link Method} shall be
+	 *            found.
 	 * @return The found {@link Method}.
 	 * @throws OperationNotFoundException
-	 *           If no matching {@link Method} for the given {@link Operation} can
-	 *           be found.
+	 *             If no matching {@link Method} for the given {@link Operation}
+	 *             can be found.
 	 */
 	private Method findStaticMethod(Operation operation)
 			throws OperationNotFoundException {
@@ -1416,13 +1400,12 @@ public class JavaModelInstance extends AbstractModelInstance {
 		Class<?> methodSourceClass;
 
 		/* Try to find the operation's source class. */
-		methodSourceClassCanonicalName =
-				JavaModelInstanceTypeUtility.toCanonicalName(operation.getOwner()
-						.getQualifiedNameList());
+		methodSourceClassCanonicalName = JavaModelInstanceTypeUtility
+				.toCanonicalName(operation.getOwner().getQualifiedNameList());
 
 		try {
-			methodSourceClass =
-					loadJavaClass(methodSourceClassCanonicalName, this.myClassLoaders);
+			methodSourceClass = loadJavaClass(methodSourceClassCanonicalName,
+					this.myClassLoaders);
 
 			result = null;
 
@@ -1436,18 +1419,20 @@ public class JavaModelInstance extends AbstractModelInstance {
 				/* Check if the name matches to the given operation's name. */
 				nameIsEqual = aMethod.getName().equals(operation.getName());
 
-				/* Check if the return type matches to the given operation's type. */
-				resultTypeIsConform =
-						JavaModelInstanceTypeUtility.conformsTypeToType(aMethod
-								.getGenericReturnType(), operation.getType());
+				/*
+				 * Check if the return type matches to the given operation's
+				 * type.
+				 */
+				resultTypeIsConform = JavaModelInstanceTypeUtility
+						.conformsTypeToType(aMethod.getGenericReturnType(),
+								operation.getType());
 
 				/*
-				 * Check if the method has the same size of arguments as the given
-				 * operation.
+				 * Check if the method has the same size of arguments as the
+				 * given operation.
 				 */
-				argumentSizeIsEqual =
-						aMethod.getParameterTypes().length == operation
-								.getSignatureParameter().size();
+				argumentSizeIsEqual = aMethod.getParameterTypes().length == operation
+						.getSignatureParameter().size();
 
 				if (nameIsEqual && resultTypeIsConform && argumentSizeIsEqual) {
 
@@ -1462,10 +1447,12 @@ public class JavaModelInstance extends AbstractModelInstance {
 					matches = true;
 
 					/* Compare the types of all arguments. */
-					for (int index = 0; index < operation.getSignatureParameter().size(); index++) {
+					for (int index = 0; index < operation
+							.getSignatureParameter().size(); index++) {
 
 						if (!JavaModelInstanceTypeUtility.conformsTypeToType(
-								javaTypes[index], pivotModelParamters.get(index).getType())) {
+								javaTypes[index], pivotModelParamters
+										.get(index).getType())) {
 							matches = false;
 							break;
 						}
@@ -1486,11 +1473,9 @@ public class JavaModelInstance extends AbstractModelInstance {
 			if (result == null) {
 				String msg;
 
-				msg =
-						JavaModelInstanceTypeMessages.JavaModelInstance_StaticOperationNotFound;
-				msg =
-						NLS.bind(msg, operation,
-								"Given Operation does not exist in implementation.");
+				msg = JavaModelInstanceTypeMessages.JavaModelInstance_StaticOperationNotFound;
+				msg = NLS.bind(msg, operation,
+						"Given Operation does not exist in implementation.");
 
 				throw new OperationNotFoundException(msg);
 			}
@@ -1501,8 +1486,7 @@ public class JavaModelInstance extends AbstractModelInstance {
 		catch (ClassNotFoundException e) {
 			String msg;
 
-			msg =
-					JavaModelInstanceTypeMessages.JavaModelInstance_StaticOperationNotFound;
+			msg = JavaModelInstanceTypeMessages.JavaModelInstance_StaticOperationNotFound;
 			msg = NLS.bind(msg, operation, e.getMessage());
 
 			throw new OperationNotFoundException(msg, e);

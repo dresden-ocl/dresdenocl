@@ -573,4 +573,51 @@ public class TestModelInstance {
 
 		modelInstanceUnderTest.isInstanceOf(null);
 	}
+
+	/**
+	 * <p>
+	 * Tests the method {@link IModelInstance#addModelInstanceElement(Object)} .
+	 * </p>
+	 */
+	@org.junit.Test
+	public void testRemoveModelInstanceElement01() {
+
+		IModelInstanceObject anAdaptedObject;
+
+		msg = ModelInstanceTypeTestSuiteMessages.TestModelInstance_RemoveModelInstanceElementIsWrong;
+
+		/* Get an adapted Object from the model. */
+		anAdaptedObject = ModelInstanceTypeTestServices.getInstance()
+				.getModelInstanceObjectsOfType(type_Class1).iterator().next();
+
+		if (anAdaptedObject != null) {
+
+			/* Count objects that have the same type. */
+			int similarAdaptees;
+			similarAdaptees = modelInstanceUnderTest.getAllInstances(
+					anAdaptedObject.getType()).size();
+
+			/* Remove the object. */
+			modelInstanceUnderTest.removeModelInstanceElement(anAdaptedObject);
+
+			assertEquals(msg, similarAdaptees - 1, modelInstanceUnderTest
+					.getAllInstances(anAdaptedObject.getType()).size());
+
+			/* Re-adapt the given object. */
+			try {
+				modelInstanceUnderTest.addModelInstanceElement(anAdaptedObject
+						.getObject());
+			}
+
+			catch (TypeNotFoundInModelException e) {
+				fail(msg + e.getMessage());
+			}
+		}
+
+		else {
+			msg = ModelInstanceTypeTestSuiteMessages.TestModelInstance_AddModelInstanceElementIsWrong2;
+
+			fail(msg);
+		}
+	}
 }

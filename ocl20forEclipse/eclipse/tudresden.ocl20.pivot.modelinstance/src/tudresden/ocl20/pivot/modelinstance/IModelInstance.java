@@ -248,4 +248,17 @@ public interface IModelInstance {
 	 *         of the given {@link IModel}. Else <code>false</code>.
 	 */
 	boolean isInstanceOf(IModel aModel);
+
+	/**
+	 * <p>
+	 * Removes an {@link IModelInstanceObject} from this {@link IModelInstance}.
+	 * If the given {@link IModelInstanceObject} is not part of this
+	 * {@link IModelInstance}, nothing will happen.
+	 * </p>
+	 * 
+	 * @param object
+	 *            The {@link IModelInstanceObject} to be removed from this
+	 *            {@link IModelInstance}.
+	 */
+	void removeModelInstanceElement(IModelInstanceObject imiObject);
 }
