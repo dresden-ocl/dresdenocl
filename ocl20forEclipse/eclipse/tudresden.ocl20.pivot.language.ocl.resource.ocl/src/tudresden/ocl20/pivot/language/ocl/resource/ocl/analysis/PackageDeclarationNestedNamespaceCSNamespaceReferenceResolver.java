@@ -15,15 +15,15 @@ import tudresden.ocl20.pivot.model.IModel;
 import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
 import tudresden.ocl20.pivot.pivotmodel.Namespace;
 
-public class PackageDeclarationCSNamespaceReferenceResolver
+public class PackageDeclarationNestedNamespaceCSNamespaceReferenceResolver
 		implements
-		tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclReferenceResolver<tudresden.ocl20.pivot.language.ocl.PackageDeclarationCS, tudresden.ocl20.pivot.pivotmodel.Namespace> {
+		tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclReferenceResolver<tudresden.ocl20.pivot.language.ocl.PackageDeclarationNestedNamespaceCS, tudresden.ocl20.pivot.pivotmodel.Namespace> {
 
-	private tudresden.ocl20.pivot.language.ocl.resource.ocl.analysis.OclDefaultResolverDelegate<tudresden.ocl20.pivot.language.ocl.PackageDeclarationCS, tudresden.ocl20.pivot.pivotmodel.Namespace> delegate = new tudresden.ocl20.pivot.language.ocl.resource.ocl.analysis.OclDefaultResolverDelegate<tudresden.ocl20.pivot.language.ocl.PackageDeclarationCS, tudresden.ocl20.pivot.pivotmodel.Namespace>();
+	private tudresden.ocl20.pivot.language.ocl.resource.ocl.analysis.OclDefaultResolverDelegate<tudresden.ocl20.pivot.language.ocl.PackageDeclarationNestedNamespaceCS, tudresden.ocl20.pivot.pivotmodel.Namespace> delegate = new tudresden.ocl20.pivot.language.ocl.resource.ocl.analysis.OclDefaultResolverDelegate<tudresden.ocl20.pivot.language.ocl.PackageDeclarationNestedNamespaceCS, tudresden.ocl20.pivot.pivotmodel.Namespace>();
 
 	public void resolve(
 			java.lang.String identifier,
-			tudresden.ocl20.pivot.language.ocl.PackageDeclarationCS container,
+			tudresden.ocl20.pivot.language.ocl.PackageDeclarationNestedNamespaceCS container,
 			org.eclipse.emf.ecore.EReference reference,
 			int position,
 			boolean resolveFuzzy,
@@ -39,16 +39,20 @@ public class PackageDeclarationCSNamespaceReferenceResolver
 		if (rrHelper != null) {
 			List<Namespace> namespaces = rrHelper.resolveNamespace(identifier,
 					resolveFuzzy, container, model, oclLibrary);
+			String cutOff = "";
+			if (!namespaces.isEmpty()) {
+				cutOff = namespaces.get(0).getNestingNamespace().getQualifiedName() + "::";
+			}
 			for (Namespace namespace : namespaces) {
-				result.addMapping(namespace.getQualifiedName().substring(6), namespace);
-				System.out.println(result);
+				String qualifiedName = namespace.getQualifiedName();
+				result.addMapping(qualifiedName.replace(cutOff, ""), namespace);
 			}
 		}
 	}
 
 	public java.lang.String deResolve(
 			tudresden.ocl20.pivot.pivotmodel.Namespace element,
-			tudresden.ocl20.pivot.language.ocl.PackageDeclarationCS container,
+			tudresden.ocl20.pivot.language.ocl.PackageDeclarationNestedNamespaceCS container,
 			org.eclipse.emf.ecore.EReference reference) {
 		return delegate.deResolve(element, container, reference);
 	}

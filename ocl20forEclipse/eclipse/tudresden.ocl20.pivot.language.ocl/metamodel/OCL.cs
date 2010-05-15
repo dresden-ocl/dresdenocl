@@ -1,6 +1,6 @@
 SYNTAXDEF ocl
 FOR <http://www.tu-dresden.de/ocl20/pivot/language/ocl> <OCL.genmodel>
-START PackageDeclarationCS
+START PackageDeclarationWithNamespaceCS, PackageDeclarationWithoutNamespaceCS
 
 IMPORTS {
 	pivotmodel : <http://www.tu-dresden.de/ocl20/pivot/2007/pivotmodel> <../tudresden.ocl20.pivot.pivotmodel/model/pivotmodel.genmodel>
@@ -29,11 +29,11 @@ TOKENS {
 	DEFINE BOOLEAN_LITERAL			$ 'true' | 'false' $;
 	DEFINE COLLECTION_TYPES			$ 'Set' | 'Bag' | 'Sequence' | 'Collection' | 'OrderedSet' $;
 	DEFINE STATIC					$ 'static'$;
-	DEFINE INTEGER_LITERAL			$('1'..'9') ('0'..'9')* | '0'$;
+	DEFINE INTEGER_LITERAL			$ ('1'..'9') ('0'..'9')* | '0'$;
 	DEFINE REAL_LITERAL 			$ (('1'..'9') ('0'..'9')* | '0') '.' ('0'..'9')+$;
-	DEFINE SIMPLE_NAME				$ ('A'..'Z'|'a'..'z'|'_') ('A'..'Z'|'a'..'z'|'0'..'9'|'_')* (('::') ('A'..'Z'|'a'..'z'|'0'..'9'|'_')*)*$;
-	DEFINE WHITESPACE $(' '|'\t'|'\f')$;
-	DEFINE LINEBREAKS $('\r\n'|'\r'|'\n')$;
+	DEFINE SIMPLE_NAME				$ ('A'..'Z'|'a'..'z'|'_') ('A'..'Z'|'a'..'z'|'0'..'9'|'_')*$;
+	DEFINE WHITESPACE 				$(' '|'\t'|'\f')$;
+	DEFINE LINEBREAKS 				$('\r\n'|'\r'|'\n')$;
 }
 
 TOKENSTYLES {
@@ -46,10 +46,13 @@ RULES {
 
 	SimpleNameCS						::= simpleName[SIMPLE_NAME];
 	
-	PathNameCS							::= simpleName;
+	PathNameCS							::= simpleName ("::" pathName)?;
 	
-	PackageDeclarationCS				::= ("package" namespace[SIMPLE_NAME] (contextDeclarations)* "endpackage")
-											| (contextDeclarations*);
+	PackageDeclarationWithNamespaceCS	::= "package" nestedNamespace (contextDeclarations)* "endpackage";
+	
+	PackageDeclarationNestedNamespaceCS	::= namespace[SIMPLE_NAME] ("::" nestedNamespace)?;
+	
+	PackageDeclarationWithoutNamespaceCS::= contextDeclarations*;
 	
 	//OperationContextDeclarationCS		::= "context" operation prePostOrBodyDeclarations+;
 	
@@ -131,11 +134,13 @@ RULES {
 	
 	
 	// *** TypeCS: pathName, tuple type or collection type ***
-	TypePathNameCS					::= typeName[SIMPLE_NAME];
+	TypePathNameSimpleCS			::= typeName[SIMPLE_NAME];
+	
+	TypePathNameNestedCS			::= namespace[SIMPLE_NAME] #0 "::" #0 typePathName;
 	
 	TupleTypeCS						::= "TupleType" "(" variableDeclarationList? ")";
 	
-	CollectionTypeIdentifierCS		::= typeName[COLLECTION_TYPES] ("(" genericType ")")?;
+	//CollectionTypeIdentifierCS		::= typeName[COLLECTION_TYPES] ("(" genericType ")")?;
 	
 	
 	// *** VariableDeclarationWithoutInitCS ***
@@ -163,8 +168,8 @@ RULES {
 	//@operator(type="primitive", weight="10", identifier="OclExpressionCS")
 	//IfExpCS							::= "if" condition "then" thenBranch "else" elseBranch;
 	
-	@operator(type="primitive", weight="20", identifier="OclExpressionCS")
-	CollectionLiteralExpCS			::= collectionType "{" (collectionLiteralParts ("," collectionLiteralParts)*)? "}";
+	//@operator(type="primitive", weight="20", identifier="OclExpressionCS")
+	//CollectionLiteralExpCS			::= collectionType "{" (collectionLiteralParts ("," collectionLiteralParts)*)? "}";
 	
 	CollectionRangeCS				::= from #0 ".." #0 to;
 	

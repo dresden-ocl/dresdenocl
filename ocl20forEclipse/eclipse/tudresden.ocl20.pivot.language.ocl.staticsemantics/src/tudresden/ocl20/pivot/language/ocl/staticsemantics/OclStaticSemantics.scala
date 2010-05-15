@@ -16,7 +16,22 @@ import tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp._
 import tudresden.attributegrammar.integration.kiama.util.CollectionConverterS2J._
 import tudresden.attributegrammar.integration.kiama.util.CollectionConverterJ2S._
 
-class OclStaticSemantics(model : IModel, oclLibrary : OclLibrary, resource : OclResource) extends ocl.semantics.OclAttributeMaker with semantics.PivotmodelAttributeMaker {
+trait OclStaticSemantics extends ocl.semantics.OclAttributeMaker with pivotmodel.semantics.PivotmodelAttributeMaker {
+  
+  /*
+   * Used for type lookup and adding defs.
+   */
+  protected val model : IModel
+  
+  /*
+   * Used to look up primitive types.
+   */
+  protected val oclLibrary : OclLibrary
+  
+  /*
+   * Do not use resource directly. Instead refer to yieldFailure and addWarning.
+   */
+  protected val resource : OclResource
   
   /*
    * EssentialOclFactory to create essential OCL expressions
@@ -33,9 +48,27 @@ class OclStaticSemantics(model : IModel, oclLibrary : OclLibrary, resource : Ocl
    */
   import kiama.attribution.Attribution._
   
+  /**
+   * Adds an error to the resource and returns a Failure with the given message.
+   */
   protected def yieldFailure(message : String, element : EObject) = {
-    resource.addError(message, element)
+    val eObject = element match {
+      case a : AttributableEObject => a.getEObject
+      case eObject => eObject
+    }
+    resource.addError(message, eObject)
     Failure(message)
+  }
+  
+  /**
+   * Adds a warning to the resource.
+   */
+  protected def addWarning(message : String, element : EObject) {
+    val eObject = element match {
+      case a : AttributableEObject => a.getEObject
+      case eObject => eObject
+    }
+    resource.addWarning(message, eObject)
   }
   
   protected def lookupLibraryType(name : String) : Option[Type] = {
@@ -44,34 +77,26 @@ class OclStaticSemantics(model : IModel, oclLibrary : OclLibrary, resource : Ocl
 			  case t : Type => Full(t)
 			  case unknown => Empty}
 			}
-    .find(_.getName == name.first)
+    .find(_.getName == name)
   }
   
   protected def lookup(name : String, namespace : Namespace) : Box[Type] = {
     if (name == null || name.isEmpty)
       Failure("Cannot resolve Type with no name.")
     else {
-	    if (!name.contains("::"))
-	      lookupLibraryType(name) match {
-		      case Some(oclLibraryType) => Full(oclLibraryType)
-		      case None => {
-				    lookupLocal(name, namespace)
-			    }
+      lookupLibraryType(name) match {
+	      case Some(oclLibraryType) => Full(oclLibraryType)
+	      case None => {
+			    lookupLocal(name, namespace)
 		    }
-	    else
-        lookupLocal(name, namespace)
+	    }
     }
   }
   
   // TODO: add fuzzy
   private def lookupLocal(name : String, namespace : Namespace) : Box[Type] = {
-    val nameList = name.split("::", -1).toList
-    if (nameList.size == 1)
-      !!(namespace.lookupType(name)) ?~ ("Cannot find type " + name + " in namespace " + namespace.getName) 
-    else
-    	for(localNamespaces <- _resolveNamespace (nameList.take(nameList.size - 1).mkString("::"), false) (namespace);
-    			localNamespace <- localNamespaces.firstOption) yield
-        localNamespace.lookupType(nameList.last)
+    !!(namespace.lookupType(name)) ?~ 
+      ("Cannot find type " + name + " in namespace " + namespace.getName)
   }
   
   protected def lookupVariable(name : String, container : Attributable) : Box[Variable] = {
@@ -88,8 +113,35 @@ class OclStaticSemantics(model : IModel, oclLibrary : OclLibrary, resource : Ocl
   }
   
   protected def lookupPropertyOnType(t : Type, name : String, static : Boolean) : Box[Property] = {
-    t.allProperties.find(p => p.getName == name && p.isStatic == static) ?~ 
-      ("Cannot find property " + name + " on type " + t + ".")
+    t.allProperties.find(p => p.getName == name && p.isStatic == static) or {
+    	allDefs.get(t) match {
+        case Some(variableDeclarationWithInit) => {
+          // TODO: avoid cycles!
+          variableDeclarationWithInit.find(v => name == v.getVariableName.getSimpleName).flatMap{v =>
+            if (v.getTypeName != null) {
+              (v.getTypeName->oclType).flatMap{tipe =>
+	              val property = PivotModelFactory.eINSTANCE.createProperty
+	              property.setType(tipe)
+	              determineMultiplicities(tipe, property)
+	              Full(property)
+              }
+            } else {
+              try {
+                computeFeature(v).flatMap{f =>
+                  f._1 match {
+                    case p : Property => Full(p)
+                    case _ => Failure("Cannot find property " + name + " on type " + t + ".", Empty, Empty)
+                  }
+                }
+              } catch {
+                case i : IllegalStateException => yieldFailure("Recursive property definition", v)
+              }
+            }
+          }
+        }
+        case None => Failure("Cannot find property " + name + " on type " + t + ".", Empty, Empty)
+      }
+    }
   }
   
    def lookupPropertyOnTypeFuzzy(t : Type, name : String, static : Boolean) : List[Property] = {
@@ -100,21 +152,14 @@ class OclStaticSemantics(model : IModel, oclLibrary : OclLibrary, resource : Ocl
     paramAttr {
       case (identifier, fuzzy) => {
         case namespace : Namespace => {
-          val _namespaceNames = identifier.split("::", -1).toList
-          val namespaceNames = _namespaceNames.splitAt(_namespaceNames.size - 1)
-          namespaceNames._1.foldLeft (Full(namespace) : Box[Namespace]) {(ns, i) =>
-            ns.flatMap(nns => !!(nns.lookupNamespace(i)) ?~ 
-            		("Cannot find nested namespace " + i + " in namespace " + 
-                nns.getQualifiedName + "."))
-          }.flatMap { ns =>
-            if (!fuzzy) {
-              (!!(ns.lookupNamespace(namespaceNames._2.first)) ?~ 
-	              ("Cannot find nested namespace " + namespaceNames._2.first + 
-	                 " in namespace " + ns.getQualifiedName + ".")).flatMap(ns => Full(List(ns)))
-	          } else {
-              val nestedNamespaces = ns.getNestedNamespace.filter(nns => nns.getName.startsWith(namespaceNames._2.first))
-	            Full(nestedNamespaces:::(nestedNamespaces.flatMap(getAllNestedNamespaces(_))))
-	          }
+          if (!fuzzy) {
+            (!!(namespace.lookupNamespace(identifier)) ?~ 
+              ("Cannot find nested namespace " + identifier + 
+                 " in namespace " + namespace.getQualifiedName + ".")).
+              flatMap(ns => Full(List(ns)))
+          } else {
+            val nestedNamespaces = namespace.getNestedNamespace.filter(nns => nns.getName.startsWith(identifier))
+            Full(nestedNamespaces:::(nestedNamespaces.flatMap(getAllNestedNamespaces(_))))
           }
         }
         case other => {
@@ -138,22 +183,13 @@ class OclStaticSemantics(model : IModel, oclLibrary : OclLibrary, resource : Ocl
             lookup(identifier, namespace).flatMap{t =>
               Full(List(t))
             }
-          } else {
-            val nameList = identifier.split("::", -1).toList
-            if (nameList.size > 1) {
-	            for (localNamespaces <- _resolveNamespace (nameList.take(nameList.size - 1).mkString("::"), false) (namespace);
-	            		 localNamespace <- localNamespaces.firstOption;
-	            		 typeList <- findTypeFuzzy(localNamespace, nameList.last))
-	            	yield typeList
-            } else
-            	findTypeFuzzy(namespace, identifier)
-          }
+          } else
+          	findTypeFuzzy(namespace, identifier)
         }
-        case other => {
+        case other =>
           for (namespace <- other->namespace;
         			 typeList <- _resolveType(identifier, fuzzy) (namespace))
           	yield typeList
-        }
       }
     }
   
@@ -161,44 +197,27 @@ class OclStaticSemantics(model : IModel, oclLibrary : OclLibrary, resource : Ocl
     paramAttr {
       case (identifier, fuzzy) => {
         case aeo : AttributableEObject => {
+          // TODO: replac with new code
           val name = identifier.split("::", -1).toList
-          if (name.size == 1) {	// variable or implicit/explicit property
+          if (name.size == 1) {	// nothing static, no tuple
             if (!fuzzy) {
-              lookupVariable(identifier, aeo) match {
-                case Full(variable) => Full(List(variable))
-                case Failure(_, _, _) | Empty => {
-                  (aeo->sourceExpression).flatMap{sourceExpression =>
-                    val sourceType = sourceExpression.getType
-	                  lookupPropertyOnType(sourceType, identifier, false) match {
-	                    case Full(p) => Full(List(p))
-	                    case Failure(msg, _, _) => {
-	                      allDefs.get(sourceType) match {
-	                        case Some(variableDeclarationWithInit) => {
-	                          // TODO: avoid cycles!
-	                          variableDeclarationWithInit.find(v => identifier == v.getVariableName.getSimpleName).flatMap{v =>
-	                            if (v.getTypeName != null) {
-	                              val tipe = v.getTypeName.getTypeName
-	                              val property = PivotModelFactory.eINSTANCE.createProperty
-	                              property.setType(tipe)
-	                              determineMultiplicities(tipe, property)
-	                              Full(List(property)) 
-	                            } else {
-		                            try {
-			                            computeFeature(v).flatMap{f =>
-			                              Full(List(f._1))
-			                            }
-		                            } catch {
-		                              case i : IllegalStateException => yieldFailure("Recursive property definition", v)
-		                            }
-	                            }
-	                          }
-	                        }
-	                        case None => Failure(msg, Empty, Empty)
-	                      }
-	                    }
-	                  }
+              (aeo->sourceExpression).flatMap{sourceExpression =>
+              	(aeo->self).flatMap{self => 
+                  val sourceType = sourceExpression.getType
+                  if (sourceExpression == self) { // variable or implicit property
+                    lookupVariable(identifier, aeo) match {
+                      case Full(variable) => Full(List(variable))
+                      case Empty | Failure(_, _, _) => 
+                        lookupPropertyOnType(sourceType, identifier, false).flatMap{p =>
+                          Full(List(p))
+                        }
+                    }
                   }
-                }
+                  else // explicit source for a property
+                    lookupPropertyOnType(sourceType, identifier, false).flatMap{p =>
+                      Full(List(p))
+                    }
+              	}
               }
             }
             // fuzzy == true
@@ -259,7 +278,8 @@ class OclStaticSemantics(model : IModel, oclLibrary : OclLibrary, resource : Ocl
                       case c : CollectionType =>
                         lookupOperationOnType(c, identifier, parameters, aeo, Empty)
                       case notMultiple : Type =>
-                        lookupOperationOnType(oclLibrary.getSetType(sourceExpression.getType), identifier, parameters, aeo, Full("implicit as Set()"))
+                        lookupOperationOnType(oclLibrary.getSetType(sourceExpression.getType), identifier, 
+                                              parameters, aeo, Full("implicit as Set()"))
                     }
                   }
                   case Full(false) => {
@@ -269,7 +289,7 @@ class OclStaticSemantics(model : IModel, oclLibrary : OclLibrary, resource : Ocl
                         (!!(c.getElementType.lookupOperation(identifier, parameters.map(_.getType))) ?~
 			              			("Cannot find operation " + identifier + " with parameters " + parameters + " on type " + 
 			                    c.getElementType.getName)).flatMap{o => {
-			                      resource.addWarning("implicit collect()", aeo)
+			                      addWarning("implicit collect() on " + o.getName, aeo)
 			                      Full(List(o))}
                       		}
                       }
@@ -317,7 +337,7 @@ class OclStaticSemantics(model : IModel, oclLibrary : OclLibrary, resource : Ocl
           tipe))
       .flatMap{o => 
       	warning match {
-      	  case Full(w) => resource.addWarning(w, element)
+      	  case Full(w) => addWarning(w + " on " + o.getName, element)
       	  case Failure(_, _, _) | Empty => // ignore
       	}
       	Full(List(o))
@@ -328,8 +348,18 @@ class OclStaticSemantics(model : IModel, oclLibrary : OclLibrary, resource : Ocl
     childAttr {
       case child => {
         case null => !!(model.getRootNamespace)
-        case p@PackageDeclarationCS(_) => {
+        case PackageDeclarationWithNamespaceCS(_, namespace) if child != namespace => {
+          namespace->lastNamespace
+        }
+        case p@PackageDeclarationNestedNamespaceCS(_) => {
           val namespace = p.getNamespace
+          if (namespace.eIsProxy)
+          	Empty
+          else
+            Full(namespace)
+        }
+        case t@TypePathNameNestedCS(_) => {
+          val namespace = t.getNamespace
           if (namespace.eIsProxy)
             Empty
           else
@@ -340,15 +370,31 @@ class OclStaticSemantics(model : IModel, oclLibrary : OclLibrary, resource : Ocl
     }
   }
   
+  private val lastNamespace : Attributable ==> Box[Namespace] = {
+    attr {
+      case p@PackageDeclarationNestedNamespaceCS(nestedNamespace) => {
+        if (nestedNamespace == null) {
+          val namespace = p.getNamespace
+          if (namespace.eIsProxy)
+            Empty
+          else
+            Full(namespace)
+        } else
+          nestedNamespace->lastNamespace
+      }
+    }
+  }
+  
   private val self : Attributable ==> Box[Variable] = {
     childAttr {
       case child => {
         case c@ClassifierContextDeclarationCS(typeCS, _) if child != typeCS => {
-          val selfType = typeCS.getTypeName
-          if (selfType.eIsProxy)
-            Empty
-          else
-            Full(factory.createVariable("self", selfType, null))
+          (typeCS->oclType).flatMap{selfType =>
+	          if (selfType.eIsProxy)
+	            Empty
+	          else
+	            Full(factory.createVariable("self", selfType, null))
+          }
         }
         case passOn => passOn->self
       }
@@ -376,7 +422,7 @@ class OclStaticSemantics(model : IModel, oclLibrary : OclLibrary, resource : Ocl
         else
           Full(typedElement.getType)
       }
-      case t@TypeCS() => {
+      case t@TypePathNameSimpleCS() => {
         val `type` = t.getTypeName
         if (`type`.eIsProxy)
           Empty
@@ -475,7 +521,7 @@ class OclStaticSemantics(model : IModel, oclLibrary : OclLibrary, resource : Ocl
     attr {
       case p@PackageDeclarationCS(contexts) => {
         Full(contexts.flatMap{c =>
-          computeConstraints(c)
+          c->computeConstraints
         }.flatten(i => i))
       }
       
@@ -667,7 +713,6 @@ class OclStaticSemantics(model : IModel, oclLibrary : OclLibrary, resource : Ocl
           yieldFailure("Cannot find operation on " + typeName +  ".", i)
         }
         else {
-          // TODO: better solution for this part?
           val argumentsEOcl = arguments.map(arg => arg->computeOclExpression)
           argumentsEOcl.find(!_.isDefined) match {
             case Some(f) => f.asInstanceOf[Box[FeatureCallExp]]

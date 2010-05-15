@@ -19,11 +19,18 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="simpleName" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="TypeCS" abstract="true">
+  <eClassifiers xsi:type="ecore:EClass" name="TypeCS" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="TypePathNameCS" abstract="true" eSuperTypes="#//TypeCS"/>
+  <eClassifiers xsi:type="ecore:EClass" name="TypePathNameSimpleCS" eSuperTypes="#//TypePathNameCS">
     <eStructuralFeatures xsi:type="ecore:EReference" name="typeName" lowerBound="1"
         eType="ecore:EClass ../../tudresden.ocl20.pivot.pivotmodel/model/pivotmodel.ecore#//Type"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="TypePathNameCS" eSuperTypes="#//TypeCS"/>
+  <eClassifiers xsi:type="ecore:EClass" name="TypePathNameNestedCS" eSuperTypes="#//TypePathNameCS">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="namespace" lowerBound="1"
+        eType="ecore:EClass ../../tudresden.ocl20.pivot.pivotmodel/model/pivotmodel.ecore#//Namespace"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="typePathName" lowerBound="1"
+        eType="#//TypePathNameCS" containment="true"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="TupleTypeCS" eSuperTypes="#//TypeCS">
     <eStructuralFeatures xsi:type="ecore:EReference" name="variableDeclarationList"
         eType="#//VariableDeclarationWithoutInitListCS" containment="true"/>
@@ -203,11 +210,22 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="elseBranch" lowerBound="1"
         eType="#//OclExpressionCS" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="PackageDeclarationCS">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="namespace" eType="ecore:EClass ../../tudresden.ocl20.pivot.pivotmodel/model/pivotmodel.ecore#//Namespace"/>
+  <eClassifiers xsi:type="ecore:EClass" name="PackageDeclarationCS" abstract="true">
     <eStructuralFeatures xsi:type="ecore:EReference" name="contextDeclarations" upperBound="-1"
         eType="#//ContextDeclarationCS" containment="true"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PackageDeclarationWithNamespaceCS" eSuperTypes="#//PackageDeclarationCS">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="nestedNamespace" lowerBound="1"
+        eType="#//PackageDeclarationNestedNamespaceCS" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PackageDeclarationNestedNamespaceCS">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="namespace" lowerBound="1"
+        eType="ecore:EClass ../../tudresden.ocl20.pivot.pivotmodel/model/pivotmodel.ecore#//Namespace"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="nestedNamespace" eType="#//PackageDeclarationNestedNamespaceCS"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PackageDeclarationWithoutNamespaceCS"
+      eSuperTypes="#//PackageDeclarationCS"/>
   <eClassifiers xsi:type="ecore:EClass" name="ContextDeclarationCS" abstract="true"/>
   <eClassifiers xsi:type="ecore:EClass" name="AttributeContextDeclarationCS" eSuperTypes="#//ContextDeclarationCS">
     <eStructuralFeatures xsi:type="ecore:EReference" name="typeName" lowerBound="1"

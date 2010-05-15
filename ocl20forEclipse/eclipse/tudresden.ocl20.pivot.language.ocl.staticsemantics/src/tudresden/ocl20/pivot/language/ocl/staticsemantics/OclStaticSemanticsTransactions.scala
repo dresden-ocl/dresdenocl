@@ -24,30 +24,30 @@ object OclStaticSemanticsTransactions {
     parsedConstraints.removeKey(resource)
     // try to find all defs
     val allDefs = new collection.mutable.HashMap[Type, collection.mutable.Set[VariableDeclarationWithInitCS]] with collection.mutable.MultiMap[Type, VariableDeclarationWithInitCS]
-    root match {
-      case PackageDeclarationCS(contextDeclarations) => {
-        contextDeclarations.foreach{cd =>
-          cd match {
-            case ClassifierContextDeclarationCS(typeName, invariantsAndDefinitions) => {
-              invariantsAndDefinitions.foreach{iad =>
-                iad match {
-                  case DefinitionExpCS(definitionPartExp, static) => {
-                    definitionPartExp match {
-                      case DefinitionExpPropertyCS(variableDeclaration) => {
-                        allDefs.add(typeName.getTypeName, variableDeclaration)
-                      }
-                    }
-                  }
-                  case other => // ignore
-                }
-              }
-            }
-            case other => // ignore
-          }
-        }
-      }
-      case other => //ignore
-    }
+//    root match {
+//      case PackageDeclarationCS(contextDeclarations) => {
+//        contextDeclarations.foreach{cd =>
+//          cd match {
+//            case ClassifierContextDeclarationCS(typeName, invariantsAndDefinitions) => {
+//              invariantsAndDefinitions.foreach{iad =>
+//                iad match {
+//                  case DefinitionExpCS(definitionPartExp, static) => {
+//                    definitionPartExp match {
+//                      case DefinitionExpPropertyCS(variableDeclaration) => {
+//                        allDefs.add(typeName.getTypeName, variableDeclaration)
+//                      }
+//                    }
+//                  }
+//                  case other => // ignore
+//                }
+//              }
+//            }
+//            case other => // ignore
+//          }
+//        }
+//      }
+//      case other => //ignore
+//    }
     allDefs
   }
   

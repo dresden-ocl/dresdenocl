@@ -18,10 +18,15 @@
     <genClasses ecoreClass="OCL.ecore#//SimpleNameCS">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute OCL.ecore#//SimpleNameCS/simpleName"/>
     </genClasses>
-    <genClasses ecoreClass="OCL.ecore#//TypeCS">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference OCL.ecore#//TypeCS/typeName"/>
-    </genClasses>
+    <genClasses ecoreClass="OCL.ecore#//TypeCS"/>
     <genClasses ecoreClass="OCL.ecore#//TypePathNameCS"/>
+    <genClasses ecoreClass="OCL.ecore#//TypePathNameSimpleCS">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference OCL.ecore#//TypePathNameSimpleCS/typeName"/>
+    </genClasses>
+    <genClasses ecoreClass="OCL.ecore#//TypePathNameNestedCS">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference OCL.ecore#//TypePathNameNestedCS/namespace"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//TypePathNameNestedCS/typePathName"/>
+    </genClasses>
     <genClasses ecoreClass="OCL.ecore#//TupleTypeCS">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//TupleTypeCS/variableDeclarationList"/>
     </genClasses>
@@ -149,9 +154,16 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//IfExpCS/elseBranch"/>
     </genClasses>
     <genClasses ecoreClass="OCL.ecore#//PackageDeclarationCS">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference OCL.ecore#//PackageDeclarationCS/namespace"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//PackageDeclarationCS/contextDeclarations"/>
     </genClasses>
+    <genClasses ecoreClass="OCL.ecore#//PackageDeclarationWithNamespaceCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//PackageDeclarationWithNamespaceCS/nestedNamespace"/>
+    </genClasses>
+    <genClasses ecoreClass="OCL.ecore#//PackageDeclarationNestedNamespaceCS">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference OCL.ecore#//PackageDeclarationNestedNamespaceCS/namespace"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//PackageDeclarationNestedNamespaceCS/nestedNamespace"/>
+    </genClasses>
+    <genClasses ecoreClass="OCL.ecore#//PackageDeclarationWithoutNamespaceCS"/>
     <genClasses image="false" ecoreClass="OCL.ecore#//ContextDeclarationCS"/>
     <genClasses ecoreClass="OCL.ecore#//AttributeContextDeclarationCS">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//AttributeContextDeclarationCS/typeName"/>

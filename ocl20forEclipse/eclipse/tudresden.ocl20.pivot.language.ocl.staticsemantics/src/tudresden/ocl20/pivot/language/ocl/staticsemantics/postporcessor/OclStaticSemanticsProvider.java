@@ -13,7 +13,7 @@ public class OclStaticSemanticsProvider {
 	
 	public static tudresden.ocl20.pivot.language.ocl.staticsemantics.OclStaticSemantics getStaticSemantics(IModel model, OclLibrary oclLibrary, OclResource resource) {
 		if (!oclStaticSemantics.containsKey(resource))
-			oclStaticSemantics.put(resource, new tudresden.ocl20.pivot.language.ocl.staticsemantics.OclStaticSemantics(model, oclLibrary, resource));
+			oclStaticSemantics.put(resource, tudresden.ocl20.pivot.language.ocl.staticsemantics.StaticSemanticsFactory.createOclStaticSemantics(model, oclLibrary, resource));
 		return oclStaticSemantics.get(resource);
 	}
 	
