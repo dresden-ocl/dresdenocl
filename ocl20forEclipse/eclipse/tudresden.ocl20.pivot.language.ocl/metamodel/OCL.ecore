@@ -65,6 +65,8 @@
         upperBound="-1" eType="#//CollectionLiteralPartsCS" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CollectionTypeIdentifierCS" eSuperTypes="#//TypeCS">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="typeName" lowerBound="1"
+        eType="ecore:EClass ../../tudresden.ocl20.pivot.pivotmodel/model/pivotmodel.ecore#//Type"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="genericType" eType="#//TypeCS"
         containment="true"/>
   </eClassifiers>
@@ -186,19 +188,8 @@
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="LetExpCS" eSuperTypes="#//OclExpressionCS">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="variableDeclaration" lowerBound="1"
-        eType="#//VariableDeclarationCS" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="letExpSub" lowerBound="1"
-        eType="#//LetExpSubCS" containment="true"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="LetExpSubCS" abstract="true"/>
-  <eClassifiers xsi:type="ecore:EClass" name="LetExpSubSubCS" eSuperTypes="#//LetExpSubCS">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="variableDeclaration" lowerBound="1"
-        eType="#//VariableDeclarationCS" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="letExpSub" lowerBound="1"
-        eType="#//LetExpSubCS" containment="true"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="LetExpSubExpressionCS" eSuperTypes="#//LetExpSubCS">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="variableDeclarations" lowerBound="1"
+        upperBound="-1" eType="#//VariableDeclarationWithInitCS" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="oclExpression" lowerBound="1"
         eType="#//OclExpressionCS" containment="true"/>
   </eClassifiers>

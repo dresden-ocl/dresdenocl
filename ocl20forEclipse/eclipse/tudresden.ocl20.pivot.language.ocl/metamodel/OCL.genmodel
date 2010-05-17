@@ -52,6 +52,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//CollectionLiteralExpCS/collectionLiteralParts"/>
     </genClasses>
     <genClasses ecoreClass="OCL.ecore#//CollectionTypeIdentifierCS">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference OCL.ecore#//CollectionTypeIdentifierCS/typeName"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//CollectionTypeIdentifierCS/genericType"/>
     </genClasses>
     <genClasses ecoreClass="OCL.ecore#//CollectionLiteralPartsCS"/>
@@ -137,16 +138,8 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute OCL.ecore#//StringLiteralExpCS/stringLiteral"/>
     </genClasses>
     <genClasses ecoreClass="OCL.ecore#//LetExpCS">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//LetExpCS/variableDeclaration"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//LetExpCS/letExpSub"/>
-    </genClasses>
-    <genClasses ecoreClass="OCL.ecore#//LetExpSubCS"/>
-    <genClasses ecoreClass="OCL.ecore#//LetExpSubSubCS">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//LetExpSubSubCS/variableDeclaration"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//LetExpSubSubCS/letExpSub"/>
-    </genClasses>
-    <genClasses ecoreClass="OCL.ecore#//LetExpSubExpressionCS">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//LetExpSubExpressionCS/oclExpression"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//LetExpCS/variableDeclarations"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//LetExpCS/oclExpression"/>
     </genClasses>
     <genClasses ecoreClass="OCL.ecore#//IfExpCS">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//IfExpCS/condition"/>

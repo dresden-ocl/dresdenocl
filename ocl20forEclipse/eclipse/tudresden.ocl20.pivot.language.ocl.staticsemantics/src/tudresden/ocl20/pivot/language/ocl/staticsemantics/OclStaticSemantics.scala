@@ -4,6 +4,7 @@ import org.eclipse.emf.ecore._
 import tudresden.attributegrammar.integration.kiama._
 import tudresden.ocl20.pivot.language.ocl.semantics._
 import tudresden.ocl20.pivot.pivotmodel._
+import tudresden.ocl20.pivot.pivotmodel.semantics._
 import tudresden.ocl20.pivot.essentialocl._
 import expressions._
 import types._
@@ -21,17 +22,17 @@ trait OclStaticSemantics extends ocl.semantics.OclAttributeMaker with pivotmodel
   /*
    * Used for type lookup and adding defs.
    */
-  protected val model : IModel
+  protected[staticsemantics] val model : IModel
   
   /*
    * Used to look up primitive types.
    */
-  protected val oclLibrary : OclLibrary
+  protected[staticsemantics] val oclLibrary : OclLibrary
   
   /*
    * Do not use resource directly. Instead refer to yieldFailure and addWarning.
    */
-  protected val resource : OclResource
+  protected[staticsemantics] val resource : OclResource
   
   /*
    * EssentialOclFactory to create essential OCL expressions
@@ -121,21 +122,15 @@ trait OclStaticSemantics extends ocl.semantics.OclAttributeMaker with pivotmodel
             if (v.getTypeName != null) {
               (v.getTypeName->oclType).flatMap{tipe =>
 	              val property = PivotModelFactory.eINSTANCE.createProperty
-	              property.setType(tipe)
 	              determineMultiplicities(tipe, property)
-	              Full(property)
+	              if (property.getType == null) {
+	                // this can happen for not fully qualified collections, e.g., Set instead of Set(Integer)
+	                resolveTypeByComputingFeature(v, name, t)
+	              } else 
+	              	Full(property)
               }
             } else {
-              try {
-                computeFeature(v).flatMap{f =>
-                  f._1 match {
-                    case p : Property => Full(p)
-                    case _ => Failure("Cannot find property " + name + " on type " + t + ".", Empty, Empty)
-                  }
-                }
-              } catch {
-                case i : IllegalStateException => yieldFailure("Recursive property definition", v)
-              }
+              resolveTypeByComputingFeature(v, name, t)
             }
           }
         }
@@ -144,7 +139,22 @@ trait OclStaticSemantics extends ocl.semantics.OclAttributeMaker with pivotmodel
     }
   }
   
-   def lookupPropertyOnTypeFuzzy(t : Type, name : String, static : Boolean) : List[Property] = {
+  protected def resolveTypeByComputingFeature(v : VariableDeclarationWithInitCS,
+                                              name : String,
+                                              t : Type) : Box[Property] = {
+    try {
+			computeFeature(v).flatMap{f =>
+		    f._1 match {
+		      case p : Property => Full(p)
+		      case _ => Failure("Cannot find property " + name + " on type " + t + ".", Empty, Empty)
+		    }
+		  }
+		} catch {
+		  case i : IllegalStateException => yieldFailure("Recursive property definition.", v)
+		}
+  }
+  
+  protected def lookupPropertyOnTypeFuzzy(t : Type, name : String, static : Boolean) : List[Property] = {
     t.allProperties.filter(p => p.getName.startsWith(name) && p.isStatic == static).toList
   }
   
@@ -197,54 +207,39 @@ trait OclStaticSemantics extends ocl.semantics.OclAttributeMaker with pivotmodel
     paramAttr {
       case (identifier, fuzzy) => {
         case aeo : AttributableEObject => {
-          // TODO: replac with new code
-          val name = identifier.split("::", -1).toList
-          if (name.size == 1) {	// nothing static, no tuple
-            if (!fuzzy) {
-              (aeo->sourceExpression).flatMap{sourceExpression =>
-              	(aeo->self).flatMap{self => 
-                  val sourceType = sourceExpression.getType
-                  if (sourceExpression == self) { // variable or implicit property
-                    lookupVariable(identifier, aeo) match {
-                      case Full(variable) => Full(List(variable))
-                      case Empty | Failure(_, _, _) => 
-                        lookupPropertyOnType(sourceType, identifier, false).flatMap{p =>
-                          Full(List(p))
-                        }
-                    }
-                  }
-                  else // explicit source for a property
+          (aeo->sourceExpression).flatMap{sourceExpression =>
+          	if (!fuzzy) {
+              val sourceType = sourceExpression.getType
+              sourceExpression match {
+                case ve : VariableExp if ve.getReferredVariable.getName == "self" => {
+                  lookupVariable(identifier, aeo) match {
+                  case Full(variable) => Full(List(variable))
+                  case Empty | Failure(_, _, _) => 
                     lookupPropertyOnType(sourceType, identifier, false).flatMap{p =>
                       Full(List(p))
                     }
-              	}
-              }
-            }
-            // fuzzy == true
-            else {
-              aeo->sourceExpression match {
-                // SourceExpression set -> lookup in a navigation call
-                case Full(sourceExpression) => {
-                  Full(lookupPropertyOnTypeFuzzy(sourceExpression.getType, identifier, false))
+                  }
                 }
-                // no SourceExpression set -> lookup on self
-                case Failure(_, _, _) | Empty => {
-                  (aeo->self).flatMap{self =>
-		                Full(lookupVariableFuzzy(identifier, aeo):::lookupPropertyOnTypeFuzzy(self.getType, identifier, false))
-		              }
+                case other => {
+                  lookupPropertyOnType(sourceType, identifier, false).flatMap{p =>
+                    Full(List(p))
+                  }
                 }
               }
-            }
-          } else {	// static property or tuple type; TODO: tuple type
-            (_resolveType (name.take(name.size - 1).mkString("::"), false) (aeo)).flatMap {t =>
-              if (!fuzzy) {
-                lookupPropertyOnType(t.first, name.last, true).flatMap{p =>
-                  Full(List(p))
-                }
-              } else {
-                Full(lookupPropertyOnTypeFuzzy(t.first, name.last, true))
-              }
-            }
+          	}
+	          // fuzzy == true
+	          else {
+	            sourceExpression match {
+	              // SourceExpression equals self -> lookup on self
+	              case ve : VariableExp if ve.getReferredVariable.getName == "self" => {
+	                Full(lookupVariableFuzzy(identifier, aeo):::lookupPropertyOnTypeFuzzy(ve.getType, identifier, false))
+	              }
+	              // SourceExpression not equal self -> lookup in a navigation call
+	              case other => {
+	                Full(lookupPropertyOnTypeFuzzy(other.getType, identifier, false))
+	              }
+	            }
+	          }
           }
         }
       }
@@ -290,7 +285,18 @@ trait OclStaticSemantics extends ocl.semantics.OclAttributeMaker with pivotmodel
 			              			("Cannot find operation " + identifier + " with parameters " + parameters + " on type " + 
 			                    c.getElementType.getName)).flatMap{o => {
 			                      addWarning("implicit collect() on " + o.getName, aeo)
-			                      Full(List(o))}
+			                      val newOp = PivotModelFactory.eINSTANCE.createOperation
+			                      newOp.setName(o.getName)
+			                      newOp.setStatic(o.isStatic)
+			                      newOp.getOwnedTypeParameter.addAll(o.getOwnedTypeParameter)
+			                      newOp.getOwnedParameter.addAll(o.getOwnedParameter)
+			                      newOp.setMultiple(true)
+			                      c match {
+			                        case s : SetType => newOp.setUnique(true)
+                              case b : SequenceType => newOp.setOrdered(true)
+			                        case s : OrderedSetType => newOp.setUnique(true); newOp.setOrdered(true)
+			                      }
+			                      Full(List(newOp))}
                       		}
                       }
                       case notMultiple =>
@@ -388,6 +394,7 @@ trait OclStaticSemantics extends ocl.semantics.OclAttributeMaker with pivotmodel
   private val self : Attributable ==> Box[Variable] = {
     childAttr {
       case child => {
+        case null => Empty
         case c@ClassifierContextDeclarationCS(typeCS, _) if child != typeCS => {
           (typeCS->oclType).flatMap{selfType =>
 	          if (selfType.eIsProxy)
@@ -407,13 +414,29 @@ trait OclStaticSemantics extends ocl.semantics.OclAttributeMaker with pivotmodel
         case null => Full(List())
         case c@ClassifierContextDeclarationCS(typeCS, _) if child != typeCS =>
           for (self <- child->self) yield List(self)
+        case l@LetExpCS(variableDeclarations, _) if !variableDeclarations.contains(child) => {
+          Full(variableDeclarations.flatMap{vd =>
+            (vd.getInitialization->computeOclExpression).flatMap{initExp =>
+              if (vd.getTypeName != null) {
+	              (vd.getTypeName->oclType).flatMap{tipe =>
+		              if (!tipe.conformsTo(initExp.getType))
+		              	yieldFailure("Expected type " + tipe.getName + ", but found " + initExp.getType.getName, vd)
+		              else 
+		              	Full(factory.createVariable(vd.getVariableName.getSimpleName, tipe, initExp))
+		            }
+              }
+              else
+                Full(factory.createVariable(vd.getVariableName.getSimpleName, initExp.getType, initExp))
+            }
+          })
+        }
         case passOn => passOn->variables
       }
     }
   }
   
   // TODO: remove as it is dangerous to determine type before it is inferred
-  private val oclType : Attributable ==> Box[Type] = {
+  protected[staticsemantics] val oclType : Attributable ==> Box[Type] = {
     attr {
       case v@VariableOrStaticPropertyOrEnumLiteralExpCS() => {
         val typedElement = v.getTypedElement
@@ -428,6 +451,25 @@ trait OclStaticSemantics extends ocl.semantics.OclAttributeMaker with pivotmodel
           Empty
         else
           Full(`type`)
+      }
+      case c@CollectionTypeIdentifierCS(genericType) => {
+        val `type` = c.getTypeName
+        if (`type`.eIsProxy)
+          Empty
+        else {
+          if (genericType != null) {
+            (genericType->oclType).flatMap{gt =>
+              `type` match {
+                case b : BagType => Full(oclLibrary.getBagType(gt))
+                case s : SetType => Full(oclLibrary.getSetType(gt))
+                case s : SequenceType => Full(oclLibrary.getSequenceType(gt))
+                case o : OrderedSetType => Full(oclLibrary.getOrderedSetType(gt))
+                case c : CollectionType => Full(oclLibrary.getCollectionType(gt))
+              }
+            }
+          } else
+            Full(`type`)
+        }
       }
       case v@VariableDeclarationWithInitCS(_, typeName, init) => {
         // TODO: should this always have a type?
@@ -495,9 +537,6 @@ trait OclStaticSemantics extends ocl.semantics.OclAttributeMaker with pivotmodel
       case StringLiteralExpCS(_) => {
         Full(oclLibrary.getOclString)
       }
-      case LetExpCS(variableDeclaration, _) => {
-        variableDeclaration->oclType
-      }
       case unknown => yieldFailure("Unkown OCL type: " + unknown, unknown.asInstanceOf[EObject])
     }
   }
@@ -505,6 +544,7 @@ trait OclStaticSemantics extends ocl.semantics.OclAttributeMaker with pivotmodel
   private val sourceExpression : Attributable ==> Box[OclExpression] = {
     childAttr {
       case child => {
+        case null => Empty
         case n@NavigationCallExp(source, featureCalls, op) if child != source => {
           if (child.isFirst)
             source->computeOclExpression
@@ -540,8 +580,8 @@ trait OclStaticSemantics extends ocl.semantics.OclAttributeMaker with pivotmodel
 	      computeOclExpression(oclExpression).flatMap{oclExpressionEOcl =>
           oclExpressionEOcl.getType match {
 	          case pt : PrimitiveType => if (pt.getKind != PrimitiveTypeKind.BOOLEAN) 
-	        	  						yieldFailure("Invariants must result in type Boolean and not " + 
-	        	  										pt.getKind + ".", i)
+  						yieldFailure("Invariants must result in type Boolean and not " + 
+  										pt.getKind + ".", i)
 	          case otherType => yieldFailure("Invariants must result in type Boolean and not " + 
 	                                    otherType.getName + ".", i)
 	        }
@@ -578,15 +618,24 @@ trait OclStaticSemantics extends ocl.semantics.OclAttributeMaker with pivotmodel
         computeFeature(variableDeclaration)
       }
       case v@VariableDeclarationWithInitCS(variableName, typeName, initialization) => {
-          for (oclExpressionEOcl <- initialization->computeOclExpression)
-            yield {
-              val property = PivotModelFactory.eINSTANCE.createProperty
-				      property.setName(variableName.getSimpleName)
-				      // TODO: does not work yet for nested collections
-				      determineMultiplicities(oclExpressionEOcl.getType, property)
-				      property.setType(oclExpressionEOcl.getType)
-				      (property, oclExpressionEOcl)
+        (initialization->computeOclExpression).flatMap{oclExpressionEOcl =>
+          val typeConformance = if (typeName != null) {
+            (typeName->oclType).flatMap{t =>
+              if (!oclExpressionEOcl.getType.conformsTo(t))
+                yieldFailure("Expected type " + t.getName + ", but found " + oclExpressionEOcl.getType.getName, v)
+              else
+                Full(true)
             }
+          } else
+            Full(true)
+          typeConformance.flatMap {_ =>
+	          val property = PivotModelFactory.eINSTANCE.createProperty
+			      property.setName(variableName.getSimpleName)
+			      // TODO: does not work yet for nested collections
+			      determineMultiplicities(oclExpressionEOcl.getType, property)
+			      Full((property, oclExpressionEOcl))
+          }
+        }
       }
     }
   }
@@ -717,27 +766,108 @@ trait OclStaticSemantics extends ocl.semantics.OclAttributeMaker with pivotmodel
           argumentsEOcl.find(!_.isDefined) match {
             case Some(f) => f.asInstanceOf[Box[FeatureCallExp]]
             case None => {
-              for (sourceExpression <- i->sourceExpression) yield {
-	              // TODO: put this into the EssentialOclFactory
-		   					val oce = ExpressionsFactory.INSTANCE.createOperationCallExp
-		   					oce.setReferredOperation(operation)
-		   					oce.setSourceType(operation.getType)
-		   					argumentsEOcl.foreach {arg =>
-		   					  oce.getArgument.add(arg.open_!)
-		   					}
-		   					// TODO: failure handling!
-		   					oce.setSource(sourceExpression)
-		   					oce.setOclLibrary(oclLibrary)
-		   					oce
+              for (sourceExpression <- i->sourceExpression;
+              		 multipleNavigationCall <- i->isMultipleNavigationCall) yield {
+                if (operation.isMultiple && !multipleNavigationCall) {
+                  // implicit collect()
+                  val oce = ExpressionsFactory.INSTANCE.createOperationCallExp
+			   					oce.setReferredOperation(operation)
+			   					argumentsEOcl.foreach {arg =>
+			   					  oce.getArgument.add(arg.open_!)
+			   					}
+                  val iteratorVar = ExpressionsFactory.INSTANCE.createVariable
+                  iteratorVar.setName("$implicitCollect$")
+                  iteratorVar.setType(sourceExpression.getType.asInstanceOf[CollectionType].getElementType)
+                  oce.setSource(factory.createVariableExp(iteratorVar))
+			   					oce.setOclLibrary(oclLibrary)
+			   					factory.createIteratorExp(sourceExpression, "collect", oce, iteratorVar)
+                } else {
+			   					val oce = ExpressionsFactory.INSTANCE.createOperationCallExp
+			   					oce.setReferredOperation(operation)	
+			   					argumentsEOcl.foreach {arg =>
+			   					  oce.getArgument.add(arg.open_!)
+			   					}
+                	if (!sourceExpression.getType.isInstanceOf[CollectionType] && multipleNavigationCall)
+			   						// implicit asSet()
+			   						oce.setSource(sourceExpression.withAsSet)
+			   					else
+			   						oce.setSource(sourceExpression)
+			   					oce.setOclLibrary(oclLibrary)
+			   					oce
+                }
               }
 	          }
           }
         }
       }
       
+      case c@CollectionLiteralExpCS(collectionType, collectionLiteralParts) => {
+        val literalPartsEOcl = collectionLiteralParts.map(clp => clp->computeLiteralPart)
+        literalPartsEOcl.find(!_.isDefined) match {
+          case Some(failure) => failure match {
+            case Failure(msg, _, _) => Failure(msg, Empty, Empty)
+            case Empty => Empty
+            case Full(_) => Empty // this cannot happen, but to prevent a warning the case is here
+          } 
+          case None => {
+            (collectionType->oclType).flatMap{ct =>
+              val unboxedLiteralParts = literalPartsEOcl.flatten(l => l)
+              val genericType = ct.asInstanceOf[CollectionType].getElementType
+              val typeConformance = if (genericType != null) {
+                val commonSuperType = unboxedLiteralParts.map(_.getType).reduceLeft((a, b) => a.commonSuperType(b))
+                if (!commonSuperType.conformsTo(genericType))
+                  yieldFailure("Exprected type " + genericType.getName + ", but found " + commonSuperType.getName, c)
+                else
+                  Full(true)
+              } else
+                Full(true)
+              typeConformance.flatMap{_ =>
+                val collectionKind = ct match {
+	                case b : BagType => CollectionKind.BAG
+	                case s : SetType => CollectionKind.SET
+	                case s : SequenceType => CollectionKind.SEQUENCE
+	                case o : OrderedSetType => CollectionKind.ORDERED_SET
+	                case c : CollectionType => CollectionKind.COLLECTION
+	              }
+	              Full(factory.createCollectionLiteralExp(collectionKind, unboxedLiteralParts.toArray : _*))
+              }
+            }
+          }
+        }
+      }
+      
+      case i@IfExpCS(condition, thenBranch, elseBranch) => {
+        for (conditionEOcl <- condition->computeOclExpression;
+        		 thenEOcl <- thenBranch->computeOclExpression;
+        		 elseEOcl <- elseBranch->computeOclExpression)
+          yield factory.createIfExp(conditionEOcl, thenEOcl, elseEOcl)
+      }
+      
+      case l@LetExpCS(variableDeclarations, oclExpression) => {
+        variableDeclarations.foldRight (oclExpression->computeOclExpression) {(vd1, vd2) =>
+        	vd2.flatMap{vd2 =>
+        	  (vd1.getInitialization->computeOclExpression).flatMap{initExp =>
+        	  	if (vd1.getTypeName != null) {
+	        	    (vd1.getTypeName->oclType).flatMap{tipe =>
+	        	      if (!initExp.getType.conformsTo(tipe))
+	        	      	yieldFailure("Expected type " + initExp.getType.getName + ", but found " + tipe.getName, vd1)
+	        	      else {
+		        	  		val variable = factory.createVariable(vd1.getVariableName.getSimpleName, tipe, initExp)
+		        	  		Full(factory.createLetExp(variable, vd2))
+	        	      }
+	        	  	}
+        	  	} else {
+        	  	  val variable = factory.createVariable(vd1.getVariableName.getSimpleName, initExp.getType, initExp)
+		        	  Full(factory.createLetExp(variable, vd2))
+        	  	}
+            }
+          }
+        }
+      }
+      
   	  case unknown => {
   	    unknown match {
-  	      case u : AttributableEObject => resource.addError("unknown element", u)
+  	      case u : AttributableEObject => resource.addError("unknown element", u.getEObject)
   	      case _ => //ignore
   	    }
   	    Failure("unknown element: " + unknown)
@@ -745,10 +875,30 @@ trait OclStaticSemantics extends ocl.semantics.OclAttributeMaker with pivotmodel
     }
   }
   
+  protected val computeLiteralPart : Attributable ==> Box[CollectionLiteralPart] = {
+    attr {
+      case CollectionLiteralPartsOclExpCS(oclExpression) => {
+        (oclExpression->computeOclExpression).flatMap{oclExpressionEOcl =>
+          Full(factory.createCollectionItem(oclExpressionEOcl))
+        }
+      }
+      case c@CollectionRangeCS(from, to) => {
+        (from->computeOclExpression).flatMap{fromEOcl =>
+          (to->computeOclExpression).flatMap{toEOcl =>
+            if (!fromEOcl.getType.conformsTo(toEOcl.getType))
+              yieldFailure("Expected type " + fromEOcl.getType.getName + ", but found " + toEOcl.getType.getName, c)
+            else
+              Full(factory.createCollectionRange(fromEOcl, toEOcl))
+          }
+        }
+      }
+    }
+  }
+  
   /**
    * If the given type is a CollectionType, set MuliplicityElement features
    */
-  private def determineMultiplicities(tipe : Type, multiplicityElement : MultiplicityElement) = {
+  private def determineMultiplicities(tipe : Type, multiplicityElement : MultiplicityElement with TypedElement) = {
     tipe match {
       case c : CollectionType => {
         multiplicityElement.setMultiple(true)
@@ -760,15 +910,17 @@ trait OclStaticSemantics extends ocl.semantics.OclAttributeMaker with pivotmodel
           multiplicityElement.setUnique(true)
           multiplicityElement.setOrdered(true)
         }
+        if (c.getElementType != null)
+        	multiplicityElement.setType(c.getElementType)
       }
-      case _ => // ignore
+      case _ => multiplicityElement.setType(tipe)
     }
   }
   
   @throws(classOf[OclStaticSemanticsException])
-  def cs2EssentialOcl(attributable : EObject) : java.util.List[Constraint] = {
-    allDefs = OclStaticSemanticsTransactions.startStaticSemanticsAnalysis(model, resource, attributable)
-    val constraints = computeConstraints(attributable)
+  def cs2EssentialOcl(root : EObject) : java.util.List[Constraint] = {
+    allDefs = OclStaticSemanticsTransactions.startStaticSemanticsAnalysis(this, root)
+    val constraints = computeConstraints(root)
     // to avoid the conversion of Scala List to Java List multiple times
     val result : java.util.List[Constraint] = constraints.openOr {throw new OclStaticSemanticsException}
     OclStaticSemanticsTransactions.endStaticSemanticsAnalysis(model, resource, result)
@@ -827,11 +979,6 @@ trait OclStaticSemantics extends ocl.semantics.OclAttributeMaker with pivotmodel
       	val parameter = PivotModelFactory.eINSTANCE.createParameter
       	parameter.setName(parameterEOcl.getName)
       	determineMultiplicities(parameterEOcl.getType, parameter)
-      	parameterEOcl.getType match {
-      	  case c : CollectionType => parameter.setType(c.getElementType)
-      	  case g : GenericType => parameter.setGenericType(g)
-      	  case otherType : Type => parameter.setType(otherType)
-      	}
       	parameter.setKind(ParameterDirectionKind.IN)
       	parameter
       }

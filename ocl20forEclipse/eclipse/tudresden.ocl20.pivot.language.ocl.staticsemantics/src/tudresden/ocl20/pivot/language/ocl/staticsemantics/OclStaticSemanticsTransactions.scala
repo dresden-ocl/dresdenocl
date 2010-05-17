@@ -1,5 +1,6 @@
 package tudresden.ocl20.pivot.language.ocl.staticsemantics
 
+import kiama.attribution.Attribution._
 import org.eclipse.emf.ecore._
 import tudresden.ocl20.pivot.language.ocl.semantics._
 import tudresden.ocl20.pivot.model._
@@ -14,40 +15,43 @@ object OclStaticSemanticsTransactions {
    * If there are constraints and defined operations/properties in the model,
    * remove those for the current OclResource.
    */
-  def startStaticSemanticsAnalysis(model : IModel, resource : OclResource, root : EObject) = {
-     parsedConstraints.get(resource) match {
+  def startStaticSemanticsAnalysis(oclStaticSemantics : OclStaticSemantics, root : EObject) = {
+     parsedConstraints.get(oclStaticSemantics.resource) match {
       case Some(constraints) => {
-        model.removeConstraints(constraints)
+        oclStaticSemantics.model.removeConstraints(constraints)
       }
       case None => // do nothing
     }
-    parsedConstraints.removeKey(resource)
+    parsedConstraints.removeKey(oclStaticSemantics.resource)
     // try to find all defs
     val allDefs = new collection.mutable.HashMap[Type, collection.mutable.Set[VariableDeclarationWithInitCS]] with collection.mutable.MultiMap[Type, VariableDeclarationWithInitCS]
-//    root match {
-//      case PackageDeclarationCS(contextDeclarations) => {
-//        contextDeclarations.foreach{cd =>
-//          cd match {
-//            case ClassifierContextDeclarationCS(typeName, invariantsAndDefinitions) => {
-//              invariantsAndDefinitions.foreach{iad =>
-//                iad match {
-//                  case DefinitionExpCS(definitionPartExp, static) => {
-//                    definitionPartExp match {
-//                      case DefinitionExpPropertyCS(variableDeclaration) => {
-//                        allDefs.add(typeName.getTypeName, variableDeclaration)
-//                      }
-//                    }
-//                  }
-//                  case other => // ignore
-//                }
-//              }
-//            }
-//            case other => // ignore
-//          }
-//        }
-//      }
-//      case other => //ignore
-//    }
+    root match {
+      case PackageDeclarationCS(contextDeclarations) => {
+        contextDeclarations.foreach{cd =>
+          cd match {
+            case ClassifierContextDeclarationCS(typeName, invariantsAndDefinitions) => {
+              invariantsAndDefinitions.foreach{iad =>
+                iad match {
+                  case DefinitionExpCS(definitionPartExp, static) => {
+                    definitionPartExp match {
+                      case DefinitionExpPropertyCS(variableDeclaration) => {
+                        (oclStaticSemantics.eObject2Attributable(typeName)->oclStaticSemantics.oclType) match {
+                          case Full(tipe) => allDefs.add(tipe, variableDeclaration)
+                          case other => // ignore
+                        }
+                      }
+                    }
+                  }
+                  case other => // ignore
+                }
+              }
+            }
+            case other => // ignore
+          }
+        }
+      }
+      case other => //ignore
+    }
     allDefs
   }
   

@@ -90,43 +90,43 @@ RULES {
 	LogicalImpliesOperationCallExpCS	::= source operationName[IMPLIES_OPERATOR] target;
 	
 	@operator(type="binary_left_associative", weight="5", identifier="OclExpressionCS")
-	LogicalXorOperationCallExpCS	::= source operationName[XOR_OPERATOR] target;
+	LogicalXorOperationCallExpCS		::= source operationName[XOR_OPERATOR] target;
 	
 	@operator(type="binary_left_associative", weight="6", identifier="OclExpressionCS")
-	LogicalOrOperationCallExpCS	::= source operationName[OR_OPERATOR] target;
+	LogicalOrOperationCallExpCS			::= source operationName[OR_OPERATOR] target;
 	
 	@operator(type="binary_left_associative", weight="7", identifier="OclExpressionCS")
-	LogicalAndOperationCallExpCS	::= source operationName[AND_OPERATOR] target;
+	LogicalAndOperationCallExpCS		::= source operationName[AND_OPERATOR] target;
 	
 	@operator(type="binary_left_associative", weight="8", identifier="OclExpressionCS")
-	EqualityOperationCallExpCS		::= source operationName[EQUALITY_OPERATOR] target;
+	EqualityOperationCallExpCS			::= source operationName[EQUALITY_OPERATOR] target;
 	
 	@operator(type="binary_left_associative", weight="9", identifier="OclExpressionCS")
-	RelationalOperationCallExpCS	::= source operationName[RELATIONAL_OPERATOR] target;
+	RelationalOperationCallExpCS		::= source operationName[RELATIONAL_OPERATOR] target;
 	
 	@operator(type="binary_left_associative", weight="11", identifier="OclExpressionCS")
-	AdditiveOperationCallExpCS	::= source operationName[ADDITIVE_OPERATOR] target;
+	AdditiveOperationCallExpCS			::= source operationName[ADDITIVE_OPERATOR] target;
 	
 	@operator(type="binary_left_associative", weight="12", identifier="OclExpressionCS")
-	MultOperationCallExpCS	::= source operationName[MULT_OPERATOR] target;
+	MultOperationCallExpCS				::= source operationName[MULT_OPERATOR] target;
 	
 	
 	// *** OperationCallExpCS: unary (prefix) operations [H] ***
 	@operator(type="unary_prefix", weight="13", identifier="OclExpressionCS")
-	UnaryOperationCallExpCS			::= operationName[ADDITIVE_OPERATOR] target;
+	UnaryOperationCallExpCS				::= operationName[ADDITIVE_OPERATOR] target;
 	
 	@operator(type="unary_prefix", weight="13", identifier="OclExpressionCS")
-	LogicalNotOperationCallExpCS	::= operationName[NOT_OPERATOR] target;
+	LogicalNotOperationCallExpCS		::= operationName[NOT_OPERATOR] target;
 	
 	
 	// *** OperationCallExpCS: normal operation call [C] ***
 	@operator(type="unary_postfix", weight="14", identifier="OclExpressionCS")
-	NavigationCallExp				::= source navigationOperator[NAVIGATION_OPERATOR] featureCalls (navigationOperator[NAVIGATION_OPERATOR] featureCalls)*;
+	NavigationCallExp					::= source navigationOperator[NAVIGATION_OPERATOR] featureCalls (navigationOperator[NAVIGATION_OPERATOR] featureCalls)*;
 	
 	// TODO: replace with Operation, Parameters, etc.
-	ImplicitOperationCallCS			::= operationName[SIMPLE_NAME] "(" (arguments ("," arguments)*)? ")";
+	ImplicitOperationCallCS				::= operationName[SIMPLE_NAME] "(" (arguments ("," arguments)*)? ")";
 	
-	ImplicitPropertyCallCS			::= property[SIMPLE_NAME];
+	ImplicitPropertyCallCS				::= property[SIMPLE_NAME];
 	
 	// *** OperationCallExpCS: implicit source expression [D] ***
 	//@operator(type="primitive", weight="20", identifier="OclExpressionCS")
@@ -134,19 +134,19 @@ RULES {
 	
 	
 	// *** TypeCS: pathName, tuple type or collection type ***
-	TypePathNameSimpleCS			::= typeName[SIMPLE_NAME];
+	TypePathNameSimpleCS				::= typeName[SIMPLE_NAME];
 	
-	TypePathNameNestedCS			::= namespace[SIMPLE_NAME] #0 "::" #0 typePathName;
+	TypePathNameNestedCS				::= namespace[SIMPLE_NAME] #0 "::" #0 typePathName;
 	
-	TupleTypeCS						::= "TupleType" "(" variableDeclarationList? ")";
+	TupleTypeCS							::= "TupleType" "(" variableDeclarationList? ")";
 	
-	//CollectionTypeIdentifierCS		::= typeName[COLLECTION_TYPES] ("(" genericType ")")?;
+	CollectionTypeIdentifierCS			::= typeName[COLLECTION_TYPES] ("(" genericType ")")?;
 	
 	
 	// *** VariableDeclarationWithoutInitCS ***
-	VariableDeclarationWithoutInitCS		::= variableName ":" type;
+	VariableDeclarationWithoutInitCS	::= variableName ":" type;
 	
-	VariableDeclarationWithoutInitListCS	::= variableDeclarations ("," variableDeclarations)*;
+	VariableDeclarationWithoutInitListCS::= variableDeclarations ("," variableDeclarations)*;
 	
 	
 	// *** VariableDeclarationWithInitCS ***
@@ -156,37 +156,33 @@ RULES {
 	
 	
 	@operator(type="primitive", weight="20", identifier="OclExpressionCS")
-	TupleLiteralExpCS			::= "Tuple" "{" variableDeclarations "}";
+	TupleLiteralExpCS					::= "Tuple" "{" variableDeclarations "}";
+	
+	@operator(type="unary_prefix", weight="2", identifier="OclExpressionCS")
+	LetExpCS							::= "let" variableDeclarations ("," variableDeclarations)* "in" oclExpression;
+	
+	@operator(type="unary_prefix", weight="10", identifier="OclExpressionCS")
+	IfExpCS								::= "if" condition "then" thenBranch "else" elseBranch;
 	
 	@operator(type="primitive", weight="20", identifier="OclExpressionCS")
-	LetExpCS					::= "let" variableDeclaration letExpSub;
+	CollectionLiteralExpCS				::= collectionType "{" (collectionLiteralParts ("," collectionLiteralParts)*)? "}";
 	
-	LetExpSubSubCS				::= "," variableDeclaration letExpSub;
+	CollectionRangeCS					::= from #0 ".." #0 to;
 	
-	// TODO: un-commenting these rules in causes errors in the generated parser
-	// LetExpSubExpressionCS		::= "in" oclExpression;
-	//@operator(type="primitive", weight="10", identifier="OclExpressionCS")
-	//IfExpCS							::= "if" condition "then" thenBranch "else" elseBranch;
-	
-	//@operator(type="primitive", weight="20", identifier="OclExpressionCS")
-	//CollectionLiteralExpCS			::= collectionType "{" (collectionLiteralParts ("," collectionLiteralParts)*)? "}";
-	
-	CollectionRangeCS				::= from #0 ".." #0 to;
-	
-	CollectionLiteralPartsOclExpCS	::= oclExpression;
+	CollectionLiteralPartsOclExpCS		::= oclExpression;
 
 	
 	@operator(type="primitive", weight="20", identifier="OclExpressionCS")
-	IntegerLiteralExpCS	::= integerLiteral[INTEGER_LITERAL];
+	IntegerLiteralExpCS					::= integerLiteral[INTEGER_LITERAL];
 	
 	@operator(type="primitive", weight="20", identifier="OclExpressionCS")
-	RealLiteralExpCS		::= realLiteral[REAL_LITERAL];
+	RealLiteralExpCS					::= realLiteral[REAL_LITERAL];
 	
 	@operator(type="primitive", weight="20", identifier="OclExpressionCS")
-	BooleanLiteralExpCS		::= booleanLiteral[BOOLEAN_LITERAL];
+	BooleanLiteralExpCS					::= booleanLiteral[BOOLEAN_LITERAL];
 	
 	@operator(type="primitive", weight="20", identifier="OclExpressionCS")
-	StringLiteralExpCS		::= stringLiteral['\'', '\''];
+	StringLiteralExpCS					::= stringLiteral['\'', '\''];
 	
 	@operator(type="primitive", weight="20", identifier="OclExpressionCS")
 	VariableOrStaticPropertyOrEnumLiteralExpCS ::= typedElement[SIMPLE_NAME];
