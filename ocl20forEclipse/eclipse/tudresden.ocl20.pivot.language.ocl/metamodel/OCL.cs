@@ -9,17 +9,20 @@ IMPORTS {
 OPTIONS {
 	reloadGeneratorModel = "true";
 	tokenspace = "1";
-	//overrideTextResource = "false";
+	overrideTextResource = "false";
+	overrideLocationMap = "false";
 	overrideManifest = "false";
 	usePredefinedTokens = "false";
 }
 
 TOKENS {
+	DEFINE SL_COMMENT 				$ '--'(~('\n'|'\r'|'\uffff'))* $ COLLECT IN comments;
+	DEFINE ML_COMMENT 				$ '/*'.*'*/'$ COLLECT IN comments;
 	DEFINE NAVIGATION_OPERATOR		$ '.' | '->' $;
 	DEFINE ADDITIVE_OPERATOR		$ '+' | '-' $;
 	DEFINE MULT_OPERATOR			$ '*' | '/' | '%' $;
 	DEFINE RELATIONAL_OPERATOR		$ '<' | '>' | '<=' | '>='$;
-	DEFINE EQUALITY_OPERATOR		$ '=' | '<>' $;
+	DEFINE EQUALITY_OPERATOR		$ '=' $;
 	DEFINE NOT_OPERATOR				$ 'not' $;
 	DEFINE AND_OPERATOR				$ 'and' $;
 	DEFINE OR_OPERATOR				$ 'or' $;
@@ -28,6 +31,7 @@ TOKENS {
 	DEFINE IS_MARKED_PRE			$ '@pre'$;
 	DEFINE BOOLEAN_LITERAL			$ 'true' | 'false' $;
 	DEFINE COLLECTION_TYPES			$ 'Set' | 'Bag' | 'Sequence' | 'Collection' | 'OrderedSet' $;
+	DEFINE ITERATOR_NAME			$ 'select' | 'reject' | 'collect' | 'forAll' | 'any' | 'exists' | 'one' | 'isUnique' | 'collectNested' | 'sortedBy' $;
 	DEFINE STATIC					$ 'static'$;
 	DEFINE INTEGER_LITERAL			$ ('1'..'9') ('0'..'9')* | '0'$;
 	DEFINE REAL_LITERAL 			$ (('1'..'9') ('0'..'9')* | '0') '.' ('0'..'9')+$;
@@ -37,6 +41,8 @@ TOKENS {
 }
 
 TOKENSTYLES {
+	"ML_COMMENT" COLOR #008000, ITALIC;
+	"SL_COMMENT" COLOR #008000, ITALIC;
 	"BOOLEAN_LITERAL" COLOR #800040, BOLD;
 	"STATIC" COLOR #800040, BOLD;
 	"COLLECTION_TYPES" COLOR #800040, BOLD;
@@ -80,10 +86,8 @@ RULES {
 	
 	ParameterCS							::= parameterName ":" parameterType;
 	
-	// TODO: add "." and "@pre"
-	//@operator(type="binary_left_associative", weight="3", identifier="OclExpressionCS")
-	//PropertyCallWithSourceExpCS	::= source "." propertyName;
-	
+	@operator(type="unary_prefix", weight="2", identifier="OclExpressionCS")
+	LetExpCS							::= "let" variableDeclarations ("," variableDeclarations)* "in" oclExpression;
 	
 	// *** OperationCallExpCS: binary (infix) operations [A]***
 	@operator(type="binary_left_associative", weight="4", identifier="OclExpressionCS")
@@ -128,6 +132,11 @@ RULES {
 	
 	ImplicitPropertyCallCS				::= property[SIMPLE_NAME];
 	
+	ImplicitIteratorExpCS				::= iteratorName[ITERATOR_NAME] "(" (iteratorVariables ("," iteratorVariables)? "|")? bodyExpression ")";
+	
+	
+	IteratorExpVariableCS				::= variableName (":" typeName)?;
+	
 	// *** OperationCallExpCS: implicit source expression [D] ***
 	//@operator(type="primitive", weight="20", identifier="OclExpressionCS")
 	//OperationCallWithImlicitSourceExpCS	::= operationName "(" arguments* ")";
@@ -144,23 +153,20 @@ RULES {
 	
 	
 	// *** VariableDeclarationWithoutInitCS ***
-	VariableDeclarationWithoutInitCS	::= variableName ":" type;
+	VariableDeclarationWithoutInitCS	::= variableName ":" typeName;
 	
 	VariableDeclarationWithoutInitListCS::= variableDeclarations ("," variableDeclarations)*;
 	
 	
 	// *** VariableDeclarationWithInitCS ***
-	VariableDeclarationWithInitCS		::= variableName (":" typeName)? ("=" initialization)?;
+	VariableDeclarationWithInitCS		::= variableName (":" typeName)? equal[EQUALITY_OPERATOR] initialization;
 	
 	VariableDeclarationWithInitListCS	::= variableDeclarations ("," variableDeclarations)*;
 	
 	
 	@operator(type="primitive", weight="20", identifier="OclExpressionCS")
 	TupleLiteralExpCS					::= "Tuple" "{" variableDeclarations "}";
-	
-	@operator(type="unary_prefix", weight="2", identifier="OclExpressionCS")
-	LetExpCS							::= "let" variableDeclarations ("," variableDeclarations)* "in" oclExpression;
-	
+		
 	@operator(type="unary_prefix", weight="10", identifier="OclExpressionCS")
 	IfExpCS								::= "if" condition "then" thenBranch "else" elseBranch;
 	
@@ -186,4 +192,8 @@ RULES {
 	
 	@operator(type="primitive", weight="20", identifier="OclExpressionCS")
 	VariableOrStaticPropertyOrEnumLiteralExpCS ::= typedElement[SIMPLE_NAME];
+		
+	@operator(type="unary_prefix", weight="20", identifier="OclExpressionCS")
+	BracketExpCS						::= "(" oclExpression ")";
+
 }

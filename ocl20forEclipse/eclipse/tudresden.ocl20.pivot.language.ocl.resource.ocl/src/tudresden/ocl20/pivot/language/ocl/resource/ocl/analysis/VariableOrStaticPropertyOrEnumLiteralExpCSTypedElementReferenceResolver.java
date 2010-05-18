@@ -8,11 +8,8 @@ package tudresden.ocl20.pivot.language.ocl.resource.ocl.analysis;
 
 import java.util.List;
 
-import tudresden.ocl20.pivot.essentialocl.EssentialOclPlugin;
-import tudresden.ocl20.pivot.essentialocl.types.OclLibrary;
 import tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclReferenceResolveHelper;
-import tudresden.ocl20.pivot.model.IModel;
-import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
+import tudresden.ocl20.pivot.language.ocl.resource.ocl.OclReferenceResolveHelperProvider;
 import tudresden.ocl20.pivot.pivotmodel.TypedElement;
 
 public class VariableOrStaticPropertyOrEnumLiteralExpCSTypedElementReferenceResolver
@@ -28,17 +25,12 @@ public class VariableOrStaticPropertyOrEnumLiteralExpCSTypedElementReferenceReso
 			int position,
 			boolean resolveFuzzy,
 			final tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclReferenceResolveResult<tudresden.ocl20.pivot.pivotmodel.TypedElement> result) {
-		IModel model = ModelBusPlugin.getModelRegistry().getActiveModel();
-		if (model == null)
-			return;
-		OclLibrary oclLibrary = EssentialOclPlugin.getOclLibraryProvider()
-				.getOclLibrary();
 
 		IOclReferenceResolveHelper rrHelper = OclReferenceResolveHelperProvider
 				.getOclReferenceResolveHelper();
 		if (rrHelper != null) {
 			List<TypedElement> typedElements = rrHelper.resolveTypedElement(
-					identifier, resolveFuzzy, container, model, oclLibrary);
+					identifier, resolveFuzzy, container);
 			for (TypedElement typedElement : typedElements) {
 				if (!resolveFuzzy)
 					result.addMapping(identifier, typedElement);

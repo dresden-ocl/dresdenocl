@@ -4,6 +4,10 @@
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="ocl"
     nsURI="http://www.tu-dresden.de/ocl20/pivot/language/ocl" nsPrefix="ocl">
   <eClassifiers xsi:type="ecore:EClass" name="OclExpressionCS" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="BracketExpCS" eSuperTypes="#//OclExpressionCS">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="oclExpression" lowerBound="1"
+        eType="#//OclExpressionCS" containment="true"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="VariableOrStaticPropertyOrEnumLiteralExpCS"
       eSuperTypes="#//OclExpressionCS">
     <eStructuralFeatures xsi:type="ecore:EReference" name="typedElement" lowerBound="1"
@@ -42,12 +46,13 @@
   <eClassifiers xsi:type="ecore:EClass" name="VariableDeclarationWithInitCS" eSuperTypes="#//VariableDeclarationCS">
     <eStructuralFeatures xsi:type="ecore:EReference" name="typeName" eType="#//TypeCS"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="initialization" eType="#//OclExpressionCS"
-        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="initialization" lowerBound="1"
+        eType="#//OclExpressionCS" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="equal" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="VariableDeclarationWithoutInitCS" eSuperTypes="#//VariableDeclarationCS">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1" eType="#//TypeCS"
-        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="typeName" lowerBound="1"
+        eType="#//TypeCS" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="VariableDeclarationWithInitListCS">
     <eStructuralFeatures xsi:type="ecore:EReference" name="variableDeclarations" lowerBound="1"
@@ -83,14 +88,25 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CallExpCS" abstract="true" eSuperTypes="#//OclExpressionCS"/>
   <eClassifiers xsi:type="ecore:EClass" name="LoopExpCS" abstract="true" eSuperTypes="#//CallExpCS"/>
-  <eClassifiers xsi:type="ecore:EClass" name="IteratorExpCS" eSuperTypes="#//LoopExpCS">
+  <eClassifiers xsi:type="ecore:EClass" name="IteratorExpVariableCS">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="variableName" lowerBound="1"
+        eType="#//SimpleNameCS" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="typeName" eType="#//TypeCS"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="IteratorExpCS" abstract="true" eSuperTypes="#//LoopExpCS">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="iteratorName" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="iteratorVariables" upperBound="2"
+        eType="#//IteratorExpVariableCS" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="bodyExpression" lowerBound="1"
+        eType="#//OclExpressionCS" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="IteratorExpWithSourceCS" eSuperTypes="#//IteratorExpCS">
     <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1"
         eType="#//OclExpressionCS" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="iteratorName" lowerBound="1"
-        eType="#//SimpleNameCS" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="iteratorVariables" lowerBound="1"
-        upperBound="-1" eType="#//VariableDeclarationCS" containment="true"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ImplicitIteratorExpCS" eSuperTypes="#//ImplicitFeatureCallCS #//IteratorExpCS"/>
   <eClassifiers xsi:type="ecore:EClass" name="FeatureCallExpCS" abstract="true" eSuperTypes="#//CallExpCS"/>
   <eClassifiers xsi:type="ecore:EClass" name="NavigationCallExp" eSuperTypes="#//FeatureCallExpCS">
     <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1"

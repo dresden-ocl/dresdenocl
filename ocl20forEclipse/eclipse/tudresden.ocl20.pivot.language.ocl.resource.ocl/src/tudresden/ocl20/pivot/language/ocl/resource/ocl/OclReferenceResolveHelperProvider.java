@@ -1,6 +1,5 @@
-package tudresden.ocl20.pivot.language.ocl.resource.ocl.analysis;
+package tudresden.ocl20.pivot.language.ocl.resource.ocl;
 
-import tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclReferenceResolveHelper;
 
 public class OclReferenceResolveHelperProvider {
 

@@ -22,12 +22,23 @@ trait OclStaticSemantics extends ocl.semantics.OclAttributeMaker with pivotmodel
   /*
    * Used for type lookup and adding defs.
    */
-  protected[staticsemantics] val model : IModel
+  protected[staticsemantics] val model : IModel = {
+    var m = resource.getModel
+    if (m == null) {
+      m = modelbus.ModelBusPlugin.getModelRegistry.getActiveModel
+      if (m == null)
+        throw new OclStaticSemanticsException("No active model")
+    }
+    m
+  }
   
   /*
    * Used to look up primitive types.
    */
-  protected[staticsemantics] val oclLibrary : OclLibrary
+  protected[staticsemantics] val oclLibrary : OclLibrary = {
+    val oclLibraryProvider = EssentialOclPlugin.getOclLibraryProvider
+		oclLibraryProvider.getOclLibrary
+  }
   
   /*
    * Do not use resource directly. Instead refer to yieldFailure and addWarning.
@@ -415,27 +426,47 @@ trait OclStaticSemantics extends ocl.semantics.OclAttributeMaker with pivotmodel
         case c@ClassifierContextDeclarationCS(typeCS, _) if child != typeCS =>
           for (self <- child->self) yield List(self)
         case l@LetExpCS(variableDeclarations, _) if !variableDeclarations.contains(child) => {
-          Full(variableDeclarations.flatMap{vd =>
-            (vd.getInitialization->computeOclExpression).flatMap{initExp =>
-              if (vd.getTypeName != null) {
-	              (vd.getTypeName->oclType).flatMap{tipe =>
-		              if (!tipe.conformsTo(initExp.getType))
-		              	yieldFailure("Expected type " + tipe.getName + ", but found " + initExp.getType.getName, vd)
-		              else 
-		              	Full(factory.createVariable(vd.getVariableName.getSimpleName, tipe, initExp))
-		            }
-              }
-              else
-                Full(factory.createVariable(vd.getVariableName.getSimpleName, initExp.getType, initExp))
-            }
-          })
+          (l->variables).flatMap{otherVars =>
+	          Full(variableDeclarations.flatMap{vd =>
+	            (vd.getInitialization->computeOclExpression).flatMap{initExp =>
+	              if (vd.getTypeName != null) {
+		              (vd.getTypeName->oclType).flatMap{tipe =>
+			              if (!tipe.conformsTo(initExp.getType))
+			              	yieldFailure("Expected type " + tipe.getName + ", but found " + initExp.getType.getName, vd)
+			              else 
+			              	Full(factory.createVariable(vd.getVariableName.getSimpleName, tipe, initExp))
+			            }
+	              }
+	              else
+	                Full(factory.createVariable(vd.getVariableName.getSimpleName, initExp.getType, initExp))
+	            }
+	          }:::otherVars)
+          }
+        }
+        case i@IteratorExpCS(iteratorVariables, _, _) => {
+          (i->variables).flatMap{otherVars =>
+	          Full(iteratorVariables.flatMap{iv =>
+	            (i->sourceExpression).flatMap{se =>
+	              if (iv.getTypeName != null) {
+		              (iv.getTypeName->oclType).flatMap{tipe =>
+			              if (!tipe.conformsTo(se.getType.asInstanceOf[CollectionType].getElementType))
+			              	yieldFailure("Expected type " + tipe.getName + ", but found " + 
+	                                se.getType.asInstanceOf[CollectionType].getElementType.getName, iv)
+			              else
+			              	Full(factory.createVariable(iv.getVariableName.getSimpleName, tipe, null))
+			            }
+	              }
+	              else
+	                Full(factory.createVariable(iv.getVariableName.getSimpleName, se.getType.asInstanceOf[CollectionType].getElementType, null))
+	            }
+	          }:::otherVars)
+          }
         }
         case passOn => passOn->variables
       }
     }
   }
   
-  // TODO: remove as it is dangerous to determine type before it is inferred
   protected[staticsemantics] val oclType : Attributable ==> Box[Type] = {
     attr {
       case v@VariableOrStaticPropertyOrEnumLiteralExpCS() => {
@@ -471,7 +502,7 @@ trait OclStaticSemantics extends ocl.semantics.OclAttributeMaker with pivotmodel
             Full(`type`)
         }
       }
-      case v@VariableDeclarationWithInitCS(_, typeName, init) => {
+      case v@VariableDeclarationWithInitCS(_, typeName, init, _) => {
         // TODO: should this always have a type?
         if (typeName != null)
           typeName->oclType
@@ -617,7 +648,7 @@ trait OclStaticSemantics extends ocl.semantics.OclAttributeMaker with pivotmodel
       case d@DefinitionExpPropertyCS(variableDeclaration) => {
         computeFeature(variableDeclaration)
       }
-      case v@VariableDeclarationWithInitCS(variableName, typeName, initialization) => {
+      case v@VariableDeclarationWithInitCS(variableName, typeName, initialization, _) => {
         (initialization->computeOclExpression).flatMap{oclExpressionEOcl =>
           val typeConformance = if (typeName != null) {
             (typeName->oclType).flatMap{t =>
@@ -801,6 +832,40 @@ trait OclStaticSemantics extends ocl.semantics.OclAttributeMaker with pivotmodel
         }
       }
       
+      case i@ImplicitIteratorExpCS(iteratorVariables, bodyExpression, iteratorName) => {
+        (i->sourceExpression).flatMap{se =>
+	        (bodyExpression->computeOclExpression).flatMap{bodyEOcl =>
+	          val iteratorVariablesEOcl = iteratorVariables.map{iv =>
+             	val iterType = se.getType.asInstanceOf[CollectionType].getElementType
+	            if (iv.getTypeName != null) {
+             	  (iv.getTypeName->oclType).flatMap{tipe =>
+                  if (!tipe.conformsTo(iterType))
+                    yieldFailure("Expected type " + tipe.getName + ", but found " + iterType.getName, iv)
+                  else
+                    Full(factory.createVariable(iv.getVariableName.getSimpleName, tipe, null))
+                }
+             	}
+              else {
+                Full(factory.createVariable(iv.getVariableName.getSimpleName, iterType, null))
+              }
+	          }
+           	iteratorVariablesEOcl.find(!_.isDefined) match {
+           		case Some(_) => Empty
+           		case None => {
+           		  val iteratorExp = factory.createIteratorExp(se, iteratorName, bodyEOcl, iteratorVariablesEOcl.flatten(i => i).toArray : _*)
+           		  // triggers WFR checks in EssentialOcl -> if WFRException is thrown yield a Failure
+           		  try {
+           		    iteratorExp.getType
+           		    Full(iteratorExp)
+           		  } catch {
+           		    case e: WellformednessException => yieldFailure(e.getMessage, i)
+           		  }
+           		}
+            }
+	        }
+        }
+      }
+      
       case c@CollectionLiteralExpCS(collectionType, collectionLiteralParts) => {
         val literalPartsEOcl = collectionLiteralParts.map(clp => clp->computeLiteralPart)
         literalPartsEOcl.find(!_.isDefined) match {
@@ -865,6 +930,10 @@ trait OclStaticSemantics extends ocl.semantics.OclAttributeMaker with pivotmodel
         }
       }
       
+      case BracketExpCS(oclExpression) => {
+        oclExpression->computeOclExpression
+      }
+      
   	  case unknown => {
   	    unknown match {
   	      case u : AttributableEObject => resource.addError("unknown element", u.getEObject)
@@ -885,10 +954,21 @@ trait OclStaticSemantics extends ocl.semantics.OclAttributeMaker with pivotmodel
       case c@CollectionRangeCS(from, to) => {
         (from->computeOclExpression).flatMap{fromEOcl =>
           (to->computeOclExpression).flatMap{toEOcl =>
-            if (!fromEOcl.getType.conformsTo(toEOcl.getType))
-              yieldFailure("Expected type " + fromEOcl.getType.getName + ", but found " + toEOcl.getType.getName, c)
-            else
-              Full(factory.createCollectionRange(fromEOcl, toEOcl))
+            val ok_? = fromEOcl.getType match {
+              case pt : PrimitiveType if pt.getKind != PrimitiveTypeKind.INTEGER =>
+                yieldFailure("Collection Ranges can only contain Integers. Found: " + fromEOcl.getType.getName, from)
+              case ok => Full(true)
+            }
+            ok_?.flatMap{_ =>
+              val ok_? = toEOcl.getType match {
+                case pt : PrimitiveType if pt.getKind != PrimitiveTypeKind.INTEGER =>
+                  yieldFailure("Collection Ranges can only contain Integers. Found: " + toEOcl.getType.getName, to)
+                case ok => Full(true)
+              }
+              ok_?.flatMap{_ =>
+                Full(factory.createCollectionRange(fromEOcl, toEOcl))
+              }
+            }
           }
         }
       }

@@ -8,6 +8,9 @@
   <genPackages prefix="Ocl" basePackage="tudresden.ocl20.pivot.language" disposableProviderFactory="true"
       ecorePackage="OCL.ecore#/">
     <genClasses image="false" ecoreClass="OCL.ecore#//OclExpressionCS"/>
+    <genClasses ecoreClass="OCL.ecore#//BracketExpCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//BracketExpCS/oclExpression"/>
+    </genClasses>
     <genClasses ecoreClass="OCL.ecore#//VariableOrStaticPropertyOrEnumLiteralExpCS">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference OCL.ecore#//VariableOrStaticPropertyOrEnumLiteralExpCS/typedElement"/>
     </genClasses>
@@ -36,9 +39,10 @@
     <genClasses ecoreClass="OCL.ecore#//VariableDeclarationWithInitCS">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference OCL.ecore#//VariableDeclarationWithInitCS/typeName"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//VariableDeclarationWithInitCS/initialization"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute OCL.ecore#//VariableDeclarationWithInitCS/equal"/>
     </genClasses>
     <genClasses ecoreClass="OCL.ecore#//VariableDeclarationWithoutInitCS">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//VariableDeclarationWithoutInitCS/type"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//VariableDeclarationWithoutInitCS/typeName"/>
     </genClasses>
     <genClasses ecoreClass="OCL.ecore#//VariableDeclarationWithInitListCS">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//VariableDeclarationWithInitListCS/variableDeclarations"/>
@@ -65,11 +69,19 @@
     </genClasses>
     <genClasses image="false" ecoreClass="OCL.ecore#//CallExpCS"/>
     <genClasses image="false" ecoreClass="OCL.ecore#//LoopExpCS"/>
-    <genClasses ecoreClass="OCL.ecore#//IteratorExpCS">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//IteratorExpCS/source"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//IteratorExpCS/iteratorName"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//IteratorExpCS/iteratorVariables"/>
+    <genClasses ecoreClass="OCL.ecore#//IteratorExpVariableCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//IteratorExpVariableCS/variableName"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//IteratorExpVariableCS/typeName"/>
     </genClasses>
+    <genClasses ecoreClass="OCL.ecore#//IteratorExpCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute OCL.ecore#//IteratorExpCS/iteratorName"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//IteratorExpCS/iteratorVariables"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//IteratorExpCS/bodyExpression"/>
+    </genClasses>
+    <genClasses ecoreClass="OCL.ecore#//IteratorExpWithSourceCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//IteratorExpWithSourceCS/source"/>
+    </genClasses>
+    <genClasses ecoreClass="OCL.ecore#//ImplicitIteratorExpCS"/>
     <genClasses image="false" ecoreClass="OCL.ecore#//FeatureCallExpCS"/>
     <genClasses ecoreClass="OCL.ecore#//NavigationCallExp">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//NavigationCallExp/source"/>
