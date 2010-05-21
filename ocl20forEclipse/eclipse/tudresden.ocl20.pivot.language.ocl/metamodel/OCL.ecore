@@ -175,9 +175,9 @@
   <eClassifiers xsi:type="ecore:EClass" name="LogicalXorOperationCallExpCS" eSuperTypes="#//OperationCallBinaryExpCS"/>
   <eClassifiers xsi:type="ecore:EClass" name="LogicalImpliesOperationCallExpCS" eSuperTypes="#//OperationCallBinaryExpCS"/>
   <eClassifiers xsi:type="ecore:EClass" name="OperationCallWithImlicitSourceExpCS"
-      eSuperTypes="#//ImplicitFeatureCallCS">
+      eSuperTypes="#//OperationCallExpCS">
     <eStructuralFeatures xsi:type="ecore:EReference" name="operationName" lowerBound="1"
-        eType="#//SimpleNameCS" containment="true"/>
+        eType="ecore:EClass ../../tudresden.ocl20.pivot.pivotmodel/model/pivotmodel.ecore#//Operation"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="arguments" upperBound="-1"
         eType="#//OclExpressionCS" containment="true"/>
   </eClassifiers>
@@ -293,16 +293,18 @@
   <eClassifiers xsi:type="ecore:EClass" name="PostConditionDeclarationCS" eSuperTypes="#//PrePostOrBodyDeclarationCS"/>
   <eClassifiers xsi:type="ecore:EClass" name="BodyDeclarationCS" eSuperTypes="#//PrePostOrBodyDeclarationCS"/>
   <eClassifiers xsi:type="ecore:EClass" name="OperationCS">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="operationName" lowerBound="1"
-        eType="#//PathNameCS" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="typeName" lowerBound="1"
+        eType="#//TypePathNameCS" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="operation" lowerBound="1"
+        eType="ecore:EClass ../../tudresden.ocl20.pivot.pivotmodel/model/pivotmodel.ecore#//Operation"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-1"
         eType="#//ParameterCS" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//TypeCS"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="returnType" eType="#//TypeCS"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ParameterCS">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="parameterName" lowerBound="1"
-        eType="#//SimpleNameCS" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parameter" lowerBound="1"
+        eType="ecore:EClass ../../tudresden.ocl20.pivot.pivotmodel/model/pivotmodel.ecore#//Parameter"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="parameterType" lowerBound="1"
         eType="#//TypeCS" containment="true"/>
   </eClassifiers>

@@ -6,10 +6,14 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 
 import tudresden.ocl20.pivot.language.ocl.OclExpressionCS;
+import tudresden.ocl20.pivot.language.ocl.ParameterCS;
+import tudresden.ocl20.pivot.language.ocl.TypeCS;
+import tudresden.ocl20.pivot.language.ocl.TypePathNameCS;
 import tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclReferenceResolveHelper;
 import tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclResource;
 import tudresden.ocl20.pivot.pivotmodel.Namespace;
 import tudresden.ocl20.pivot.pivotmodel.Operation;
+import tudresden.ocl20.pivot.pivotmodel.Parameter;
 import tudresden.ocl20.pivot.pivotmodel.Property;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 import tudresden.ocl20.pivot.pivotmodel.TypedElement;
@@ -59,6 +63,26 @@ public class OclReferenceResolveHelper implements IOclReferenceResolveHelper {
 		List<Operation> ret = OclStaticSemanticsProvider.getStaticSemantics(
 				(OclResource) container.eResource()).resolveOperation(identifier,
 				resolveFuzzy, container, reference, parameters);
+		return ret;
+	}
+
+	@Override
+	public List<Operation> resolveOperationDefinition(String identifier,
+			boolean resolveFuzzy, EObject container, EReference reference,
+			List<ParameterCS> parameters, TypePathNameCS typeName, TypeCS returnType) {
+		List<Operation> ret = OclStaticSemanticsProvider.getStaticSemantics(
+				(OclResource) container.eResource()).resolveOperationDefinition(identifier,
+				resolveFuzzy, container, reference, parameters, typeName, returnType);
+		return ret;
+	}
+
+	@Override
+	public List<Parameter> resolveParameterDefinition(String identifier,
+			boolean resolveFuzzy, EObject container, EReference reference,
+			TypeCS parameterType) {
+		List<Parameter> ret = OclStaticSemanticsProvider.getStaticSemantics(
+				(OclResource) container.eResource()).resolveParameterDefinition(identifier,
+				resolveFuzzy, container, reference, parameterType);
 		return ret;
 	}
 

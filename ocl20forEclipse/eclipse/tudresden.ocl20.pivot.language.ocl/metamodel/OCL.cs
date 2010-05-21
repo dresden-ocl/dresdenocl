@@ -60,9 +60,9 @@ RULES {
 	
 	PackageDeclarationWithoutNamespaceCS::= contextDeclarations*;
 	
-	//OperationContextDeclarationCS		::= "context" operation prePostOrBodyDeclarations+;
+	OperationContextDeclarationCS		::= "context" operation prePostOrBodyDeclarations+;
 	
-	//AttributeContextDeclarationCS		::= "context" typeName "::" attributeName ":" type initOrDeriveValue+;
+	AttributeContextDeclarationCS		::= "context" typeName "::" attributeName ":" type initOrDeriveValue+;
 	
 	ClassifierContextDeclarationCS		::= "context" typeName invariantsAndDefinitions+;
 	
@@ -81,10 +81,10 @@ RULES {
 	PostConditionDeclarationCS			::= "post" (name)? ":" oclExpression;
 	
 	BodyDeclarationCS					::= "body" (name)? ":" oclExpression;
-										
-	OperationCS							::= operationName "(" (parameters ("," parameters)*)? ")" (":" type)?;
+
+	OperationCS							::= typeName "::" operation[SIMPLE_NAME] "(" (parameters ("," parameters)*)? ")" (":" returnType)?;
 	
-	ParameterCS							::= parameterName ":" parameterType;
+	ParameterCS							::= parameter[SIMPLE_NAME] ":" parameterType;
 	
 	@operator(type="unary_prefix", weight="2", identifier="OclExpressionCS")
 	LetExpCS							::= "let" variableDeclarations ("," variableDeclarations)* "in" oclExpression;
@@ -127,20 +127,19 @@ RULES {
 	@operator(type="unary_postfix", weight="14", identifier="OclExpressionCS")
 	NavigationCallExp					::= source navigationOperator[NAVIGATION_OPERATOR] featureCalls (navigationOperator[NAVIGATION_OPERATOR] featureCalls)*;
 	
-	// TODO: replace with Operation, Parameters, etc.
 	ImplicitOperationCallCS				::= operationName[SIMPLE_NAME] "(" (arguments ("," arguments)*)? ")";
 	
 	ImplicitPropertyCallCS				::= property[SIMPLE_NAME];
 	
 	ImplicitIteratorExpCS				::= iteratorName[ITERATOR_NAME] "(" (iteratorVariables ("," iteratorVariables)? "|")? bodyExpression ")";
 	
-	
 	IteratorExpVariableCS				::= variableName (":" typeName)?;
 	
-	// *** OperationCallExpCS: implicit source expression [D] ***
-	//@operator(type="primitive", weight="20", identifier="OclExpressionCS")
-	//OperationCallWithImlicitSourceExpCS	::= operationName "(" arguments* ")";
 	
+	// *** OperationCallExpCS: implicit source expression [D] ***
+	@operator(type="primitive", weight="20", identifier="OclExpressionCS")
+	OperationCallWithImlicitSourceExpCS	::= operationName[SIMPLE_NAME]  "(" arguments* ")";
+		
 	
 	// *** TypeCS: pathName, tuple type or collection type ***
 	TypePathNameSimpleCS				::= typeName[SIMPLE_NAME];
@@ -193,7 +192,7 @@ RULES {
 	@operator(type="primitive", weight="20", identifier="OclExpressionCS")
 	VariableOrStaticPropertyOrEnumLiteralExpCS ::= typedElement[SIMPLE_NAME];
 		
-	@operator(type="unary_prefix", weight="20", identifier="OclExpressionCS")
+	@operator(type="primitive", weight="20", identifier="OclExpressionCS")
 	BracketExpCS						::= "(" oclExpression ")";
 
 }

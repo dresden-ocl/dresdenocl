@@ -213,12 +213,13 @@
     <genClasses ecoreClass="OCL.ecore#//PostConditionDeclarationCS"/>
     <genClasses ecoreClass="OCL.ecore#//BodyDeclarationCS"/>
     <genClasses ecoreClass="OCL.ecore#//OperationCS">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//OperationCS/operationName"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//OperationCS/typeName"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference OCL.ecore#//OperationCS/operation"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//OperationCS/parameters"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//OperationCS/type"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//OperationCS/returnType"/>
     </genClasses>
     <genClasses ecoreClass="OCL.ecore#//ParameterCS">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//ParameterCS/parameterName"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference OCL.ecore#//ParameterCS/parameter"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//ParameterCS/parameterType"/>
     </genClasses>
   </genPackages>
