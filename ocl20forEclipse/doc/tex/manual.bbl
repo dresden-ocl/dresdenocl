@@ -43,6 +43,12 @@ Object Management Group (OMG), Needham, MA, USA:
 \newblock \url{http://www.omg.org/spec/UML/2.2/}.
 \newblock \,Version:\,2.2, February 2009
 
+\bibitem[OMG10]{spec:OCL2-2}
+\emph{Object Constraint Language}.
+\newblock 2.2.
+\newblock Needham : Object Management Group (OMG), 2010
+  \url{http://www.omg.org/spec/OCL/2.2/}
+
 \bibitem[URL10a]{WWW:chainsaw}
 \emph{Apache Chainsaw}.
 \newblock Apache Logging Services.

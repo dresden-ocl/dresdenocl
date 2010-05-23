@@ -1,6 +1,7 @@
 This is BibTeX, Version 0.99cThe top-level auxiliary file: C:\Users\Claas\OCL SHK\Workspaces\DresdenOCL\doc\tex\manual.aux
 A level-1 auxiliary file: chapters/license.aux
 A level-1 auxiliary file: chapters/abstract.aux
+A level-1 auxiliary file: chapters/info.aux
 A level-1 auxiliary file: chapters/introduction.aux
 A level-1 auxiliary file: chapters/interpretation.aux
 A level-1 auxiliary file: chapters/codegeneration.aux
@@ -17,4 +18,6 @@ A level-1 auxiliary file: chapters/appendix.aux
 The style file: alphadin.bst
 Database file #1: manual.bib
 Warning--empty pages in demuth:RGWS09
-(There was 1 warning)
+Warning--empty author and editor in spec:OCL2-2
+Warning--empty author and editor in spec:OCL2-2
+(There were 3 warnings)

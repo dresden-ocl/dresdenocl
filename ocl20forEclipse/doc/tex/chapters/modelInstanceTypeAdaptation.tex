@@ -139,6 +139,7 @@ The most important operation of a model instance is the constructor. Inside the 
 
 
 \subsection{addModelInstanceElement(IModelInstanceElement)}
+\label{sect:modelInstanceTypeAdaptation:addIMIElement}
 
 The method \code{addModelInstanceElement(IModelInstanceElement)} can be used to add another \code{Object} to the model instance during runtime. The implementation should use its \code{IModel\-In\-stance\-Fac\-tory} to adapt the \code{Object} and throw a \code{TypeNotFoundInModelException} if the given \code{Object} can not be adapted to the model instance.
 
