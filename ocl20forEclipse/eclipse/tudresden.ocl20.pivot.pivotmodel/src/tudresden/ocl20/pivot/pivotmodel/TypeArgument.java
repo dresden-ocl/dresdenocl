@@ -44,6 +44,8 @@ package tudresden.ocl20.pivot.pivotmodel;
  * </ul>
  * </p>
  *
+ * @see tudresden.ocl20.pivot.pivotmodel.PivotModelPackage#getTypeArgument()
+ * @model
  * @generated
  */
 public interface TypeArgument extends TypedElement {
@@ -59,7 +61,9 @@ public interface TypeArgument extends TypedElement {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Owning Generic Type</em>' container reference.
 	 * @see #setOwningGenericType(ComplexGenericType)
+	 * @see tudresden.ocl20.pivot.pivotmodel.PivotModelPackage#getTypeArgument_OwningGenericType()
 	 * @see tudresden.ocl20.pivot.pivotmodel.ComplexGenericType#getTypeArgument
+	 * @model opposite="typeArgument" transient="false"
 	 * @generated
 	 */
 	ComplexGenericType getOwningGenericType();

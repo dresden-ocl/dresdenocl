@@ -32,6 +32,8 @@
  */
 package tudresden.ocl20.pivot.pivotmodel;
 
+import org.eclipse.emf.ecore.EObject;
+
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Constrainable Element</b></em>'.
@@ -49,8 +51,10 @@ package tudresden.ocl20.pivot.pivotmodel;
  * <!-- end-model-doc -->
  *
  *
+ * @see tudresden.ocl20.pivot.pivotmodel.PivotModelPackage#getConstrainableElement()
+ * @model interface="true" abstract="true"
  * @generated
  */
-public interface ConstrainableElement {
+public interface ConstrainableElement extends EObject {
 
 } // ConstrainableElement

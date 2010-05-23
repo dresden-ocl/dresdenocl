@@ -33,6 +33,7 @@
 package tudresden.ocl20.pivot.pivotmodel;
 
 import java.util.List;
+import org.eclipse.emf.common.util.EList;
 
 /**
  * <!-- begin-user-doc --> A representation of the model object '<em><b>Type</b></em>'. <!--
@@ -55,6 +56,8 @@ import java.util.List;
  * </ul>
  * </p>
  *
+ * @see tudresden.ocl20.pivot.pivotmodel.PivotModelPackage#getType()
+ * @model
  * @generated
  */
 public interface Type extends NamedElement, ConstrainableElement,
@@ -84,6 +87,8 @@ public interface Type extends NamedElement, ConstrainableElement,
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Generic Super Type</em>' containment reference list.
+	 * @see tudresden.ocl20.pivot.pivotmodel.PivotModelPackage#getType_GenericSuperType()
+	 * @model containment="true"
 	 * @generated
 	 */
 	List<GenericType> getGenericSuperType();
@@ -298,6 +303,7 @@ public interface Type extends NamedElement, ConstrainableElement,
 	 * Removes a {@link Property} from this <code>Type</code>. This is an additional operation in the Pivot Model to support removal of properties defined via a {@link ConstraintKind#definition definition} constraint. The operation returns a <code>boolean</code> indicating whether or not the {@link Property} has been removed successfully.
 	 * </p>
 	 * <!-- end-model-doc -->
+	 * @model dataType="tudresden.ocl20.pivot.datatypes.Boolean" required="true"
 	 * @generated
 	 */
 	boolean removeProperty(Property property);
@@ -310,6 +316,7 @@ public interface Type extends NamedElement, ConstrainableElement,
 	 * Removes an {@link Operation} from this <code>Type</code>. This is an additional operation in the Pivot Model to support removal of operations defined via a {@link ConstraintKind#definition definition} constraint. The operation returns a <code>boolean</code> indicating whether or not the {@link Operation} has been removed successfully.
 	 * </p>
 	 * <!-- end-model-doc -->
+	 * @model dataType="tudresden.ocl20.pivot.datatypes.Boolean" required="true"
 	 * @generated
 	 */
 	boolean removeOperation(Operation operation);

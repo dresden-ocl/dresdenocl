@@ -53,6 +53,8 @@ package tudresden.ocl20.pivot.pivotmodel;
  * </ul>
  * </p>
  *
+ * @see tudresden.ocl20.pivot.pivotmodel.PivotModelPackage#getFeature()
+ * @model abstract="true"
  * @generated
  */
 public interface Feature extends TypedElement, MultiplicityElement {
@@ -73,6 +75,8 @@ public interface Feature extends TypedElement, MultiplicityElement {
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Static</em>' attribute.
 	 * @see #setStatic(boolean)
+	 * @see tudresden.ocl20.pivot.pivotmodel.PivotModelPackage#getFeature_Static()
+	 * @model default="false" dataType="tudresden.ocl20.pivot.datatypes.Boolean"
 	 * @generated
 	 */
 	boolean isStatic();

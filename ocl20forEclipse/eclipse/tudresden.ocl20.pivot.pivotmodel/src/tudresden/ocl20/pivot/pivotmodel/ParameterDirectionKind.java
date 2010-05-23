@@ -35,6 +35,7 @@ package tudresden.ocl20.pivot.pivotmodel;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import org.eclipse.emf.common.util.Enumerator;
 
 /**
  * <!-- begin-user-doc -->
@@ -46,10 +47,11 @@ import java.util.List;
  * An enumeration type that defines literals used to specify direction of {@link Parameter parameters}.
  * </p>
  * <!-- end-model-doc -->
- * @see tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl#getParameterDirectionKind()
+ * @see tudresden.ocl20.pivot.pivotmodel.PivotModelPackage#getParameterDirectionKind()
+ * @model
  * @generated
  */
-public enum ParameterDirectionKind implements InternalParameterDirectionKind {
+public enum ParameterDirectionKind implements Enumerator {
 	/**
 	 * The '<em><b>In</b></em>' literal object.
 	 * <!-- begin-user-doc -->
@@ -101,6 +103,7 @@ public enum ParameterDirectionKind implements InternalParameterDirectionKind {
 	 * </p>
 	 * <!-- end-model-doc -->
 	 * @see #IN
+	 * @model name="in"
 	 * @generated
 	 * @ordered
 	 */
@@ -117,6 +120,7 @@ public enum ParameterDirectionKind implements InternalParameterDirectionKind {
 	 * </p>
 	 * <!-- end-model-doc -->
 	 * @see #OUT
+	 * @model name="out"
 	 * @generated
 	 * @ordered
 	 */
@@ -134,6 +138,7 @@ public enum ParameterDirectionKind implements InternalParameterDirectionKind {
 	 * </p>
 	 * <!-- end-model-doc -->
 	 * @see #INOUT
+	 * @model name="inout"
 	 * @generated
 	 * @ordered
 	 */
@@ -150,6 +155,7 @@ public enum ParameterDirectionKind implements InternalParameterDirectionKind {
 	 * </p>
 	 * <!-- end-model-doc -->
 	 * @see #RETURN
+	 * @model name="return"
 	 * @generated
 	 * @ordered
 	 */
@@ -161,8 +167,8 @@ public enum ParameterDirectionKind implements InternalParameterDirectionKind {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private static final ParameterDirectionKind[] VALUES_ARRAY =
-			new ParameterDirectionKind[] { IN, OUT, INOUT, RETURN, };
+	private static final ParameterDirectionKind[] VALUES_ARRAY = new ParameterDirectionKind[] {
+			IN, OUT, INOUT, RETURN, };
 
 	/**
 	 * A public read-only list of all the '<em><b>Parameter Direction Kind</b></em>' enumerators.
@@ -170,8 +176,8 @@ public enum ParameterDirectionKind implements InternalParameterDirectionKind {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final List<ParameterDirectionKind> VALUES =
-			Collections.unmodifiableList(Arrays.asList(VALUES_ARRAY));
+	public static final List<ParameterDirectionKind> VALUES = Collections
+			.unmodifiableList(Arrays.asList(VALUES_ARRAY));
 
 	/**
 	 * Returns the '<em><b>Parameter Direction Kind</b></em>' literal with the specified literal value.
@@ -180,7 +186,6 @@ public enum ParameterDirectionKind implements InternalParameterDirectionKind {
 	 * @generated
 	 */
 	public static ParameterDirectionKind get(String literal) {
-
 		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
 			ParameterDirectionKind result = VALUES_ARRAY[i];
 			if (result.toString().equals(literal)) {
@@ -197,7 +202,6 @@ public enum ParameterDirectionKind implements InternalParameterDirectionKind {
 	 * @generated
 	 */
 	public static ParameterDirectionKind getByName(String name) {
-
 		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
 			ParameterDirectionKind result = VALUES_ARRAY[i];
 			if (result.getName().equals(name)) {
@@ -214,7 +218,6 @@ public enum ParameterDirectionKind implements InternalParameterDirectionKind {
 	 * @generated
 	 */
 	public static ParameterDirectionKind get(int value) {
-
 		switch (value) {
 		case IN_VALUE:
 			return IN;
@@ -256,7 +259,6 @@ public enum ParameterDirectionKind implements InternalParameterDirectionKind {
 	 * @generated
 	 */
 	private ParameterDirectionKind(int value, String name, String literal) {
-
 		this.value = value;
 		this.name = name;
 		this.literal = literal;
@@ -268,7 +270,6 @@ public enum ParameterDirectionKind implements InternalParameterDirectionKind {
 	 * @generated
 	 */
 	public int getValue() {
-
 		return value;
 	}
 
@@ -278,7 +279,6 @@ public enum ParameterDirectionKind implements InternalParameterDirectionKind {
 	 * @generated
 	 */
 	public String getName() {
-
 		return name;
 	}
 
@@ -288,7 +288,6 @@ public enum ParameterDirectionKind implements InternalParameterDirectionKind {
 	 * @generated
 	 */
 	public String getLiteral() {
-
 		return literal;
 	}
 
@@ -300,19 +299,7 @@ public enum ParameterDirectionKind implements InternalParameterDirectionKind {
 	 */
 	@Override
 	public String toString() {
-
 		return literal;
 	}
 
 } //ParameterDirectionKind
-
-/**
- * A private implementation interface used to hide the inheritance from Enumerator.
- * <!-- begin-user-doc -->
- * <!-- end-user-doc -->
- * @generated
- */
-interface InternalParameterDirectionKind extends
-		org.eclipse.emf.common.util.Enumerator {
-	// Empty 
-}

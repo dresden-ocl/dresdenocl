@@ -32,6 +32,7 @@
  */
 package tudresden.ocl20.pivot.pivotmodel;
 
+import org.eclipse.emf.common.util.EList;
 import java.util.List;
 
 /**
@@ -47,6 +48,8 @@ import java.util.List;
  * </ul>
  * </p>
  *
+ * @see tudresden.ocl20.pivot.pivotmodel.PivotModelPackage#getComplexGenericType()
+ * @model
  * @generated
  */
 public interface ComplexGenericType extends GenericType {
@@ -61,6 +64,8 @@ public interface ComplexGenericType extends GenericType {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Unbound Type</em>' reference.
 	 * @see #setUnboundType(Type)
+	 * @see tudresden.ocl20.pivot.pivotmodel.PivotModelPackage#getComplexGenericType_UnboundType()
+	 * @model resolveProxies="false"
 	 * @generated
 	 */
 	Type getUnboundType();
@@ -86,7 +91,9 @@ public interface ComplexGenericType extends GenericType {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Type Argument</em>' containment reference list.
+	 * @see tudresden.ocl20.pivot.pivotmodel.PivotModelPackage#getComplexGenericType_TypeArgument()
 	 * @see tudresden.ocl20.pivot.pivotmodel.TypeArgument#getOwningGenericType
+	 * @model opposite="owningGenericType" containment="true"
 	 * @generated
 	 */
 	List<TypeArgument> getTypeArgument();
@@ -101,6 +108,7 @@ public interface ComplexGenericType extends GenericType {
 	 * The operation returns a reference to this <code>ComplexGenericType</code>.
 	 * </p>
 	 * <!-- end-model-doc -->
+	 * @model typeArgumentRequired="true"
 	 * @generated
 	 */
 	ComplexGenericType addTypeArgument(TypeArgument typeArgument);

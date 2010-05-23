@@ -254,7 +254,7 @@ public class ConstraintItemProvider extends NamedElementItemProvider implements
 
 		newChildDescriptors.add(createChildParameter(
 				PivotModelPackageImpl.Literals.CONSTRAINT__SPECIFICATION,
-				PivotModelFactory.INSTANCE.createExpression()));
+				PivotModelFactory.eINSTANCE.createExpression()));
 	}
 
 }

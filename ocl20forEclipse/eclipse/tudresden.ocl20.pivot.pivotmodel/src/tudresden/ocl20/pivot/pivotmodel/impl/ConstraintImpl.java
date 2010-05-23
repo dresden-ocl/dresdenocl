@@ -55,6 +55,7 @@ import tudresden.ocl20.pivot.pivotmodel.Expression;
 import tudresden.ocl20.pivot.pivotmodel.Feature;
 import tudresden.ocl20.pivot.pivotmodel.NamedElement;
 import tudresden.ocl20.pivot.pivotmodel.Namespace;
+import tudresden.ocl20.pivot.pivotmodel.PivotModelPackage;
 import tudresden.ocl20.pivot.pivotmodel.PivotModelFactory;
 
 /**
@@ -88,8 +89,7 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final ConstraintKind KIND_EDEFAULT =
-			ConstraintKind.INVARIANT;
+	protected static final ConstraintKind KIND_EDEFAULT = ConstraintKind.INVARIANT;
 
 	/**
 	 * The cached value of the '{@link #getKind() <em>Kind</em>}' attribute.
@@ -133,7 +133,6 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 	 * @generated
 	 */
 	protected ConstraintImpl() {
-
 		super();
 	}
 
@@ -143,8 +142,7 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-
-		return PivotModelPackageImpl.Literals.CONSTRAINT;
+		return PivotModelPackage.Literals.CONSTRAINT;
 	}
 
 	/**
@@ -152,7 +150,6 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 	 * @generated
 	 */
 	public ConstraintKind getKind() {
-
 		return kind;
 	}
 
@@ -161,12 +158,11 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 	 * @generated
 	 */
 	public void setKind(ConstraintKind newKind) {
-
 		ConstraintKind oldKind = kind;
 		kind = newKind == null ? KIND_EDEFAULT : newKind;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
-					PivotModelPackageImpl.CONSTRAINT__KIND, oldKind, kind));
+					PivotModelPackage.CONSTRAINT__KIND, oldKind, kind));
 	}
 
 	/**
@@ -174,8 +170,7 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 	 * @generated
 	 */
 	public Namespace getNamespace() {
-
-		if (eContainerFeatureID() != PivotModelPackageImpl.CONSTRAINT__NAMESPACE)
+		if (eContainerFeatureID() != PivotModelPackage.CONSTRAINT__NAMESPACE)
 			return null;
 		return (Namespace) eContainer();
 	}
@@ -186,10 +181,8 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 	 */
 	public NotificationChain basicSetNamespace(Namespace newNamespace,
 			NotificationChain msgs) {
-
-		msgs =
-				eBasicSetContainer((InternalEObject) newNamespace,
-						PivotModelPackageImpl.CONSTRAINT__NAMESPACE, msgs);
+		msgs = eBasicSetContainer((InternalEObject) newNamespace,
+				PivotModelPackage.CONSTRAINT__NAMESPACE, msgs);
 		return msgs;
 	}
 
@@ -198,27 +191,24 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 	 * @generated
 	 */
 	public void setNamespace(Namespace newNamespace) {
-
 		if (newNamespace != eInternalContainer()
-				|| (eContainerFeatureID() != PivotModelPackageImpl.CONSTRAINT__NAMESPACE && newNamespace != null)) {
-			if (EcoreUtil.isAncestor(this, (EObject) newNamespace))
+				|| (eContainerFeatureID() != PivotModelPackage.CONSTRAINT__NAMESPACE && newNamespace != null)) {
+			if (EcoreUtil.isAncestor(this, newNamespace))
 				throw new IllegalArgumentException(
 						"Recursive containment not allowed for " + toString()); //$NON-NLS-1$
 			NotificationChain msgs = null;
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newNamespace != null)
-				msgs =
-						((InternalEObject) newNamespace).eInverseAdd(this,
-								PivotModelPackageImpl.NAMESPACE__OWNED_RULE, Namespace.class,
-								msgs);
+				msgs = ((InternalEObject) newNamespace).eInverseAdd(this,
+						PivotModelPackage.NAMESPACE__OWNED_RULE,
+						Namespace.class, msgs);
 			msgs = basicSetNamespace(newNamespace, msgs);
 			if (msgs != null)
 				msgs.dispatch();
-		}
-		else if (eNotificationRequired())
+		} else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
-					PivotModelPackageImpl.CONSTRAINT__NAMESPACE, newNamespace,
+					PivotModelPackage.CONSTRAINT__NAMESPACE, newNamespace,
 					newNamespace));
 	}
 
@@ -227,7 +217,6 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 	 * @generated
 	 */
 	public Expression getSpecification() {
-
 		return specification;
 	}
 
@@ -237,14 +226,13 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 	 */
 	public NotificationChain basicSetSpecification(Expression newSpecification,
 			NotificationChain msgs) {
-
 		Expression oldSpecification = specification;
 		specification = newSpecification;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification =
-					new ENotificationImpl(this, Notification.SET,
-							PivotModelPackageImpl.CONSTRAINT__SPECIFICATION,
-							oldSpecification, newSpecification);
+			ENotificationImpl notification = new ENotificationImpl(this,
+					Notification.SET,
+					PivotModelPackage.CONSTRAINT__SPECIFICATION,
+					oldSpecification, newSpecification);
 			if (msgs == null)
 				msgs = notification;
 			else
@@ -258,27 +246,23 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 	 * @generated
 	 */
 	public void setSpecification(Expression newSpecification) {
-
 		if (newSpecification != specification) {
 			NotificationChain msgs = null;
 			if (specification != null)
-				msgs =
-						((InternalEObject) specification).eInverseRemove(this,
-								PivotModelPackageImpl.EXPRESSION__CONSTRAINT, Expression.class,
-								msgs);
+				msgs = ((InternalEObject) specification).eInverseRemove(this,
+						PivotModelPackage.EXPRESSION__CONSTRAINT,
+						Expression.class, msgs);
 			if (newSpecification != null)
-				msgs =
-						((InternalEObject) newSpecification).eInverseAdd(this,
-								PivotModelPackageImpl.EXPRESSION__CONSTRAINT, Expression.class,
-								msgs);
+				msgs = ((InternalEObject) newSpecification).eInverseAdd(this,
+						PivotModelPackage.EXPRESSION__CONSTRAINT,
+						Expression.class, msgs);
 			msgs = basicSetSpecification(newSpecification, msgs);
 			if (msgs != null)
 				msgs.dispatch();
-		}
-		else if (eNotificationRequired())
+		} else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
-					PivotModelPackageImpl.CONSTRAINT__SPECIFICATION, newSpecification,
-					newSpecification));
+					PivotModelPackage.CONSTRAINT__SPECIFICATION,
+					newSpecification, newSpecification));
 	}
 
 	/**
@@ -299,11 +283,10 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 	 * @generated
 	 */
 	protected final List<ConstrainableElement> getConstrainedElementGen() {
-
 		if (constrainedElement == null) {
-			constrainedElement =
-					new EObjectEList<ConstrainableElement>(ConstrainableElement.class,
-							this, PivotModelPackageImpl.CONSTRAINT__CONSTRAINED_ELEMENT);
+			constrainedElement = new EObjectEList<ConstrainableElement>(
+					ConstrainableElement.class, this,
+					PivotModelPackage.CONSTRAINT__CONSTRAINED_ELEMENT);
 		}
 		return constrainedElement;
 	}
@@ -313,7 +296,6 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 	 * @generated
 	 */
 	public Feature getDefinedFeature() {
-
 		return definedFeature;
 	}
 
@@ -322,13 +304,12 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 	 * @generated
 	 */
 	public void setDefinedFeature(Feature newDefinedFeature) {
-
 		Feature oldDefinedFeature = definedFeature;
 		definedFeature = newDefinedFeature;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
-					PivotModelPackageImpl.CONSTRAINT__DEFINED_FEATURE, oldDefinedFeature,
-					definedFeature));
+					PivotModelPackage.CONSTRAINT__DEFINED_FEATURE,
+					oldDefinedFeature, definedFeature));
 	}
 
 	/**
@@ -374,7 +355,7 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 	@Override
 	public Constraint clone() {
 
-		return initialize(PivotModelFactory.INSTANCE.createConstraint());
+		return initialize(PivotModelFactory.eINSTANCE.createConstraint());
 	}
 
 	/**
@@ -404,21 +385,19 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 	 * @generated
 	 */
 	@Override
-	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID,
-			NotificationChain msgs) {
-
+	public NotificationChain eInverseAdd(InternalEObject otherEnd,
+			int featureID, NotificationChain msgs) {
 		switch (featureID) {
-		case PivotModelPackageImpl.CONSTRAINT__NAMESPACE:
+		case PivotModelPackage.CONSTRAINT__NAMESPACE:
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			return basicSetNamespace((Namespace) otherEnd, msgs);
-		case PivotModelPackageImpl.CONSTRAINT__SPECIFICATION:
+		case PivotModelPackage.CONSTRAINT__SPECIFICATION:
 			if (specification != null)
-				msgs =
-						((InternalEObject) specification).eInverseRemove(this,
-								EOPPOSITE_FEATURE_BASE
-										- PivotModelPackageImpl.CONSTRAINT__SPECIFICATION, null,
-								msgs);
+				msgs = ((InternalEObject) specification).eInverseRemove(this,
+						EOPPOSITE_FEATURE_BASE
+								- PivotModelPackage.CONSTRAINT__SPECIFICATION,
+						null, msgs);
 			return basicSetSpecification((Expression) otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
@@ -431,11 +410,10 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd,
 			int featureID, NotificationChain msgs) {
-
 		switch (featureID) {
-		case PivotModelPackageImpl.CONSTRAINT__NAMESPACE:
+		case PivotModelPackage.CONSTRAINT__NAMESPACE:
 			return basicSetNamespace(null, msgs);
-		case PivotModelPackageImpl.CONSTRAINT__SPECIFICATION:
+		case PivotModelPackage.CONSTRAINT__SPECIFICATION:
 			return basicSetSpecification(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -448,11 +426,11 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(
 			NotificationChain msgs) {
-
 		switch (eContainerFeatureID()) {
-		case PivotModelPackageImpl.CONSTRAINT__NAMESPACE:
+		case PivotModelPackage.CONSTRAINT__NAMESPACE:
 			return eInternalContainer().eInverseRemove(this,
-					PivotModelPackageImpl.NAMESPACE__OWNED_RULE, Namespace.class, msgs);
+					PivotModelPackage.NAMESPACE__OWNED_RULE, Namespace.class,
+					msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -463,17 +441,16 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-
 		switch (featureID) {
-		case PivotModelPackageImpl.CONSTRAINT__KIND:
+		case PivotModelPackage.CONSTRAINT__KIND:
 			return getKind();
-		case PivotModelPackageImpl.CONSTRAINT__NAMESPACE:
+		case PivotModelPackage.CONSTRAINT__NAMESPACE:
 			return getNamespace();
-		case PivotModelPackageImpl.CONSTRAINT__SPECIFICATION:
+		case PivotModelPackage.CONSTRAINT__SPECIFICATION:
 			return getSpecification();
-		case PivotModelPackageImpl.CONSTRAINT__CONSTRAINED_ELEMENT:
+		case PivotModelPackage.CONSTRAINT__CONSTRAINED_ELEMENT:
 			return getConstrainedElement();
-		case PivotModelPackageImpl.CONSTRAINT__DEFINED_FEATURE:
+		case PivotModelPackage.CONSTRAINT__DEFINED_FEATURE:
 			return getDefinedFeature();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -486,23 +463,22 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
-
 		switch (featureID) {
-		case PivotModelPackageImpl.CONSTRAINT__KIND:
+		case PivotModelPackage.CONSTRAINT__KIND:
 			setKind((ConstraintKind) newValue);
 			return;
-		case PivotModelPackageImpl.CONSTRAINT__NAMESPACE:
+		case PivotModelPackage.CONSTRAINT__NAMESPACE:
 			setNamespace((Namespace) newValue);
 			return;
-		case PivotModelPackageImpl.CONSTRAINT__SPECIFICATION:
+		case PivotModelPackage.CONSTRAINT__SPECIFICATION:
 			setSpecification((Expression) newValue);
 			return;
-		case PivotModelPackageImpl.CONSTRAINT__CONSTRAINED_ELEMENT:
+		case PivotModelPackage.CONSTRAINT__CONSTRAINED_ELEMENT:
 			getConstrainedElement().clear();
 			getConstrainedElement().addAll(
 					(Collection<? extends ConstrainableElement>) newValue);
 			return;
-		case PivotModelPackageImpl.CONSTRAINT__DEFINED_FEATURE:
+		case PivotModelPackage.CONSTRAINT__DEFINED_FEATURE:
 			setDefinedFeature((Feature) newValue);
 			return;
 		}
@@ -515,21 +491,20 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 	 */
 	@Override
 	public void eUnset(int featureID) {
-
 		switch (featureID) {
-		case PivotModelPackageImpl.CONSTRAINT__KIND:
+		case PivotModelPackage.CONSTRAINT__KIND:
 			setKind(KIND_EDEFAULT);
 			return;
-		case PivotModelPackageImpl.CONSTRAINT__NAMESPACE:
+		case PivotModelPackage.CONSTRAINT__NAMESPACE:
 			setNamespace((Namespace) null);
 			return;
-		case PivotModelPackageImpl.CONSTRAINT__SPECIFICATION:
+		case PivotModelPackage.CONSTRAINT__SPECIFICATION:
 			setSpecification((Expression) null);
 			return;
-		case PivotModelPackageImpl.CONSTRAINT__CONSTRAINED_ELEMENT:
+		case PivotModelPackage.CONSTRAINT__CONSTRAINED_ELEMENT:
 			getConstrainedElement().clear();
 			return;
-		case PivotModelPackageImpl.CONSTRAINT__DEFINED_FEATURE:
+		case PivotModelPackage.CONSTRAINT__DEFINED_FEATURE:
 			setDefinedFeature((Feature) null);
 			return;
 		}
@@ -542,17 +517,16 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-
 		switch (featureID) {
-		case PivotModelPackageImpl.CONSTRAINT__KIND:
+		case PivotModelPackage.CONSTRAINT__KIND:
 			return kind != KIND_EDEFAULT;
-		case PivotModelPackageImpl.CONSTRAINT__NAMESPACE:
+		case PivotModelPackage.CONSTRAINT__NAMESPACE:
 			return getNamespace() != null;
-		case PivotModelPackageImpl.CONSTRAINT__SPECIFICATION:
+		case PivotModelPackage.CONSTRAINT__SPECIFICATION:
 			return specification != null;
-		case PivotModelPackageImpl.CONSTRAINT__CONSTRAINED_ELEMENT:
+		case PivotModelPackage.CONSTRAINT__CONSTRAINED_ELEMENT:
 			return constrainedElement != null && !constrainedElement.isEmpty();
-		case PivotModelPackageImpl.CONSTRAINT__DEFINED_FEATURE:
+		case PivotModelPackage.CONSTRAINT__DEFINED_FEATURE:
 			return definedFeature != null;
 		}
 		return super.eIsSet(featureID);

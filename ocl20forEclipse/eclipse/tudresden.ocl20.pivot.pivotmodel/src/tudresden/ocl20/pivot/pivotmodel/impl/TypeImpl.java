@@ -49,7 +49,6 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
@@ -65,6 +64,7 @@ import tudresden.ocl20.pivot.pivotmodel.NamedElement;
 import tudresden.ocl20.pivot.pivotmodel.Namespace;
 import tudresden.ocl20.pivot.pivotmodel.Operation;
 import tudresden.ocl20.pivot.pivotmodel.PivotModelFactory;
+import tudresden.ocl20.pivot.pivotmodel.PivotModelPackage;
 import tudresden.ocl20.pivot.pivotmodel.Property;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 import tudresden.ocl20.pivot.pivotmodel.TypeParameter;
@@ -76,23 +76,15 @@ import tudresden.ocl20.pivot.pivotmodel.util.ListUtil;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>
- * {@link tudresden.ocl20.pivot.pivotmodel.impl.TypeImpl#getOwnedTypeParameter
- * <em>Owned Type Parameter</em>}</li>
- * <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.TypeImpl#getNamespace <em>
- * Namespace</em>}</li>
- * <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.TypeImpl#getOwnedOperation
- * <em>Owned Operation</em>}</li>
- * <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.TypeImpl#getOwnedProperty
- * <em>Owned Property</em>}</li>
- * <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.TypeImpl#getSuperType <em>
- * Super Type</em>}</li>
- * <li>
- * {@link tudresden.ocl20.pivot.pivotmodel.impl.TypeImpl#getGenericSuperType
- * <em>Generic Super Type</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.TypeImpl#getOwnedTypeParameter <em>Owned Type Parameter</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.TypeImpl#getNamespace <em>Namespace</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.TypeImpl#getOwnedOperation <em>Owned Operation</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.TypeImpl#getOwnedProperty <em>Owned Property</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.TypeImpl#getSuperType <em>Super Type</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.TypeImpl#getGenericSuperType <em>Generic Super Type</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @generated
  */
 public class TypeImpl extends NamedElementImpl implements Type {
@@ -114,10 +106,9 @@ public class TypeImpl extends NamedElementImpl implements Type {
 	protected EList<TypeParameter> ownedTypeParameter;
 
 	/**
-	 * The cached value of the '{@link #getOwnedOperation()
-	 * <em>Owned Operation</em>}' containment reference list. <!-- begin-user-doc
+	 * The cached value of the '{@link #getOwnedOperation() <em>Owned Operation</em>}' containment reference list.
+	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
-	 * 
 	 * @see #getOwnedOperation()
 	 * @generated
 	 * @ordered
@@ -125,10 +116,9 @@ public class TypeImpl extends NamedElementImpl implements Type {
 	protected EList<Operation> ownedOperation;
 
 	/**
-	 * The cached value of the '{@link #getOwnedProperty()
-	 * <em>Owned Property</em>}' containment reference list. <!-- begin-user-doc
+	 * The cached value of the '{@link #getOwnedProperty() <em>Owned Property</em>}' containment reference list.
+	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
-	 * 
 	 * @see #getOwnedProperty()
 	 * @generated
 	 * @ordered
@@ -136,9 +126,8 @@ public class TypeImpl extends NamedElementImpl implements Type {
 	protected EList<Property> ownedProperty;
 
 	/**
-	 * The cached value of the '{@link #getSuperType() <em>Super Type</em>}'
-	 * reference list. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The cached value of the '{@link #getSuperType() <em>Super Type</em>}' reference list.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getSuperType()
 	 * @generated
 	 * @ordered
@@ -164,11 +153,9 @@ public class TypeImpl extends NamedElementImpl implements Type {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	protected TypeImpl() {
-
 		super();
 	}
 
@@ -200,30 +187,25 @@ public class TypeImpl extends NamedElementImpl implements Type {
 	/**
 	 * <!-- begin-user-doc -->The code generated for {{@link #getSuperType()} is
 	 * redirected to this method. <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	protected final List<Type> getSuperTypeGen() {
-
 		if (superType == null) {
-			superType =
-					new EObjectEList<Type>(Type.class, this,
-							PivotModelPackageImpl.TYPE__SUPER_TYPE);
+			superType = new EObjectEList<Type>(Type.class, this,
+					PivotModelPackage.TYPE__SUPER_TYPE);
 		}
 		return superType;
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public List<GenericType> getGenericSuperType() {
-
 		if (genericSuperType == null) {
-			genericSuperType =
-					new EObjectContainmentEList<GenericType>(GenericType.class, this,
-							PivotModelPackageImpl.TYPE__GENERIC_SUPER_TYPE);
+			genericSuperType = new EObjectContainmentEList<GenericType>(
+					GenericType.class, this,
+					PivotModelPackage.TYPE__GENERIC_SUPER_TYPE);
 		}
 		return genericSuperType;
 	}
@@ -248,12 +230,11 @@ public class TypeImpl extends NamedElementImpl implements Type {
 	 * @generated
 	 */
 	protected final List<Operation> getOwnedOperationGen() {
-
 		if (ownedOperation == null) {
-			ownedOperation =
-					new EObjectContainmentWithInverseEList<Operation>(Operation.class,
-							this, PivotModelPackageImpl.TYPE__OWNED_OPERATION,
-							PivotModelPackageImpl.OPERATION__OWNING_TYPE);
+			ownedOperation = new EObjectContainmentWithInverseEList<Operation>(
+					Operation.class, this,
+					PivotModelPackage.TYPE__OWNED_OPERATION,
+					PivotModelPackage.OPERATION__OWNING_TYPE);
 		}
 		return ownedOperation;
 	}
@@ -278,12 +259,11 @@ public class TypeImpl extends NamedElementImpl implements Type {
 	 * @generated
 	 */
 	protected final List<Property> getOwnedPropertyGen() {
-
 		if (ownedProperty == null) {
-			ownedProperty =
-					new EObjectContainmentWithInverseEList<Property>(Property.class,
-							this, PivotModelPackageImpl.TYPE__OWNED_PROPERTY,
-							PivotModelPackageImpl.PROPERTY__OWNING_TYPE);
+			ownedProperty = new EObjectContainmentWithInverseEList<Property>(
+					Property.class, this,
+					PivotModelPackage.TYPE__OWNED_PROPERTY,
+					PivotModelPackage.PROPERTY__OWNING_TYPE);
 		}
 		return ownedProperty;
 	}
@@ -305,74 +285,63 @@ public class TypeImpl extends NamedElementImpl implements Type {
 	 * <!-- begin-user-doc -->The code generated for {
 	 * {@link #getOwnedTypeParameterGen()} is redirected to this method.<!--
 	 * end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	protected final List<TypeParameter> getOwnedTypeParameterGen() {
-
 		if (ownedTypeParameter == null) {
-			ownedTypeParameter =
-					new EObjectContainmentWithInverseEList<TypeParameter>(
-							TypeParameter.class, this,
-							PivotModelPackageImpl.TYPE__OWNED_TYPE_PARAMETER,
-							PivotModelPackageImpl.TYPE_PARAMETER__GENERIC_ELEMENT);
+			ownedTypeParameter = new EObjectContainmentWithInverseEList<TypeParameter>(
+					TypeParameter.class, this,
+					PivotModelPackage.TYPE__OWNED_TYPE_PARAMETER,
+					PivotModelPackage.TYPE_PARAMETER__GENERIC_ELEMENT);
 		}
 		return ownedTypeParameter;
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public Namespace getNamespace() {
-
-		if (eContainerFeatureID() != PivotModelPackageImpl.TYPE__NAMESPACE)
+		if (eContainerFeatureID() != PivotModelPackage.TYPE__NAMESPACE)
 			return null;
 		return (Namespace) eContainer();
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public NotificationChain basicSetNamespace(Namespace newNamespace,
 			NotificationChain msgs) {
-
-		msgs =
-				eBasicSetContainer((InternalEObject) newNamespace,
-						PivotModelPackageImpl.TYPE__NAMESPACE, msgs);
+		msgs = eBasicSetContainer((InternalEObject) newNamespace,
+				PivotModelPackage.TYPE__NAMESPACE, msgs);
 		return msgs;
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public void setNamespace(Namespace newNamespace) {
-
 		if (newNamespace != eInternalContainer()
-				|| (eContainerFeatureID() != PivotModelPackageImpl.TYPE__NAMESPACE && newNamespace != null)) {
-			if (EcoreUtil.isAncestor(this, (EObject) newNamespace))
+				|| (eContainerFeatureID() != PivotModelPackage.TYPE__NAMESPACE && newNamespace != null)) {
+			if (EcoreUtil.isAncestor(this, newNamespace))
 				throw new IllegalArgumentException(
 						"Recursive containment not allowed for " + toString()); //$NON-NLS-1$
 			NotificationChain msgs = null;
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newNamespace != null)
-				msgs =
-						((InternalEObject) newNamespace).eInverseAdd(this,
-								PivotModelPackageImpl.NAMESPACE__OWNED_TYPE, Namespace.class,
-								msgs);
+				msgs = ((InternalEObject) newNamespace).eInverseAdd(this,
+						PivotModelPackage.NAMESPACE__OWNED_TYPE,
+						Namespace.class, msgs);
 			msgs = basicSetNamespace(newNamespace, msgs);
 			if (msgs != null)
 				msgs.dispatch();
-		}
-		else if (eNotificationRequired())
+		} else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
-					PivotModelPackageImpl.TYPE__NAMESPACE, newNamespace, newNamespace));
+					PivotModelPackage.TYPE__NAMESPACE, newNamespace,
+					newNamespace));
 	}
 
 	/**
@@ -623,7 +592,8 @@ public class TypeImpl extends NamedElementImpl implements Type {
 		}
 
 		if (logger.isDebugEnabled()) {
-			logger.debug("lookupOperation() - exit - return value=" + operation); //$NON-NLS-1$
+			logger
+					.debug("lookupOperation() - exit - return value=" + operation); //$NON-NLS-1$
 		}
 
 		return operation;
@@ -724,8 +694,7 @@ public class TypeImpl extends NamedElementImpl implements Type {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
+	 * @generated NOT
 	 */
 	public boolean removeOperation(Operation operation) {
 
@@ -785,8 +754,9 @@ public class TypeImpl extends NamedElementImpl implements Type {
 			List<? extends Type> types) {
 
 		if (logger.isDebugEnabled()) {
-			logger.debug("bindTypeParameter(parameters=" + parameters + ", types=" //$NON-NLS-1$ //$NON-NLS-2$
-					+ types + ") - enter"); //$NON-NLS-1$
+			logger
+					.debug("bindTypeParameter(parameters=" + parameters + ", types=" //$NON-NLS-1$ //$NON-NLS-2$
+							+ types + ") - enter"); //$NON-NLS-1$
 		}
 
 		// precondition check
@@ -821,19 +791,21 @@ public class TypeImpl extends NamedElementImpl implements Type {
 			}
 
 			// bind all generic supertypes
-			for (Iterator<GenericType> it =
-					boundType.getGenericSuperType().iterator(); it.hasNext();) {
+			for (Iterator<GenericType> it = boundType.getGenericSuperType()
+					.iterator(); it.hasNext();) {
 				GenericType genericSuperType = it.next();
 
 				// if generic super type was successfully bound, remove it from the type
-				if (genericSuperType.bindGenericSuperType(parameters, types, boundType)) {
+				if (genericSuperType.bindGenericSuperType(parameters, types,
+						boundType)) {
 					it.remove();
 				}
 			}
 		}
 
 		if (logger.isDebugEnabled()) {
-			logger.debug("bindTypeParameter() - exit - return value=" + boundType); //$NON-NLS-1$
+			logger
+					.debug("bindTypeParameter() - exit - return value=" + boundType); //$NON-NLS-1$
 		}
 
 		return boundType;
@@ -860,7 +832,7 @@ public class TypeImpl extends NamedElementImpl implements Type {
 	@Override
 	public Type clone() {
 
-		return initialize(PivotModelFactory.INSTANCE.createType());
+		return initialize(PivotModelFactory.eINSTANCE.createType());
 	}
 
 	/**
@@ -902,26 +874,24 @@ public class TypeImpl extends NamedElementImpl implements Type {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID,
-			NotificationChain msgs) {
-
+	public NotificationChain eInverseAdd(InternalEObject otherEnd,
+			int featureID, NotificationChain msgs) {
 		switch (featureID) {
-		case PivotModelPackageImpl.TYPE__OWNED_TYPE_PARAMETER:
+		case PivotModelPackage.TYPE__OWNED_TYPE_PARAMETER:
 			return ((InternalEList<InternalEObject>) (InternalEList<?>) getOwnedTypeParameter())
 					.basicAdd(otherEnd, msgs);
-		case PivotModelPackageImpl.TYPE__NAMESPACE:
+		case PivotModelPackage.TYPE__NAMESPACE:
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			return basicSetNamespace((Namespace) otherEnd, msgs);
-		case PivotModelPackageImpl.TYPE__OWNED_OPERATION:
+		case PivotModelPackage.TYPE__OWNED_OPERATION:
 			return ((InternalEList<InternalEObject>) (InternalEList<?>) getOwnedOperation())
 					.basicAdd(otherEnd, msgs);
-		case PivotModelPackageImpl.TYPE__OWNED_PROPERTY:
+		case PivotModelPackage.TYPE__OWNED_PROPERTY:
 			return ((InternalEList<InternalEObject>) (InternalEList<?>) getOwnedProperty())
 					.basicAdd(otherEnd, msgs);
 		}
@@ -930,69 +900,64 @@ public class TypeImpl extends NamedElementImpl implements Type {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd,
 			int featureID, NotificationChain msgs) {
-
 		switch (featureID) {
-		case PivotModelPackageImpl.TYPE__OWNED_TYPE_PARAMETER:
-			return ((InternalEList<?>) getOwnedTypeParameter()).basicRemove(otherEnd,
-					msgs);
-		case PivotModelPackageImpl.TYPE__NAMESPACE:
+		case PivotModelPackage.TYPE__OWNED_TYPE_PARAMETER:
+			return ((InternalEList<?>) getOwnedTypeParameter()).basicRemove(
+					otherEnd, msgs);
+		case PivotModelPackage.TYPE__NAMESPACE:
 			return basicSetNamespace(null, msgs);
-		case PivotModelPackageImpl.TYPE__OWNED_OPERATION:
-			return ((InternalEList<?>) getOwnedOperation()).basicRemove(otherEnd,
-					msgs);
-		case PivotModelPackageImpl.TYPE__OWNED_PROPERTY:
-			return ((InternalEList<?>) getOwnedProperty())
-					.basicRemove(otherEnd, msgs);
-		case PivotModelPackageImpl.TYPE__GENERIC_SUPER_TYPE:
-			return ((InternalEList<?>) getGenericSuperType()).basicRemove(otherEnd,
-					msgs);
+		case PivotModelPackage.TYPE__OWNED_OPERATION:
+			return ((InternalEList<?>) getOwnedOperation()).basicRemove(
+					otherEnd, msgs);
+		case PivotModelPackage.TYPE__OWNED_PROPERTY:
+			return ((InternalEList<?>) getOwnedProperty()).basicRemove(
+					otherEnd, msgs);
+		case PivotModelPackage.TYPE__GENERIC_SUPER_TYPE:
+			return ((InternalEList<?>) getGenericSuperType()).basicRemove(
+					otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(
 			NotificationChain msgs) {
-
 		switch (eContainerFeatureID()) {
-		case PivotModelPackageImpl.TYPE__NAMESPACE:
+		case PivotModelPackage.TYPE__NAMESPACE:
 			return eInternalContainer().eInverseRemove(this,
-					PivotModelPackageImpl.NAMESPACE__OWNED_TYPE, Namespace.class, msgs);
+					PivotModelPackage.NAMESPACE__OWNED_TYPE, Namespace.class,
+					msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-
 		switch (featureID) {
-		case PivotModelPackageImpl.TYPE__OWNED_TYPE_PARAMETER:
+		case PivotModelPackage.TYPE__OWNED_TYPE_PARAMETER:
 			return getOwnedTypeParameter();
-		case PivotModelPackageImpl.TYPE__NAMESPACE:
+		case PivotModelPackage.TYPE__NAMESPACE:
 			return getNamespace();
-		case PivotModelPackageImpl.TYPE__OWNED_OPERATION:
+		case PivotModelPackage.TYPE__OWNED_OPERATION:
 			return getOwnedOperation();
-		case PivotModelPackageImpl.TYPE__OWNED_PROPERTY:
+		case PivotModelPackage.TYPE__OWNED_PROPERTY:
 			return getOwnedProperty();
-		case PivotModelPackageImpl.TYPE__SUPER_TYPE:
+		case PivotModelPackage.TYPE__SUPER_TYPE:
 			return getSuperType();
-		case PivotModelPackageImpl.TYPE__GENERIC_SUPER_TYPE:
+		case PivotModelPackage.TYPE__GENERIC_SUPER_TYPE:
 			return getGenericSuperType();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -1000,38 +965,38 @@ public class TypeImpl extends NamedElementImpl implements Type {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
-
 		switch (featureID) {
-		case PivotModelPackageImpl.TYPE__OWNED_TYPE_PARAMETER:
+		case PivotModelPackage.TYPE__OWNED_TYPE_PARAMETER:
 			getOwnedTypeParameter().clear();
 			getOwnedTypeParameter().addAll(
 					(Collection<? extends TypeParameter>) newValue);
 			return;
-		case PivotModelPackageImpl.TYPE__NAMESPACE:
+		case PivotModelPackage.TYPE__NAMESPACE:
 			setNamespace((Namespace) newValue);
 			return;
-		case PivotModelPackageImpl.TYPE__OWNED_OPERATION:
+		case PivotModelPackage.TYPE__OWNED_OPERATION:
 			getOwnedOperation().clear();
-			getOwnedOperation().addAll((Collection<? extends Operation>) newValue);
+			getOwnedOperation().addAll(
+					(Collection<? extends Operation>) newValue);
 			return;
-		case PivotModelPackageImpl.TYPE__OWNED_PROPERTY:
+		case PivotModelPackage.TYPE__OWNED_PROPERTY:
 			getOwnedProperty().clear();
-			getOwnedProperty().addAll((Collection<? extends Property>) newValue);
+			getOwnedProperty()
+					.addAll((Collection<? extends Property>) newValue);
 			return;
-		case PivotModelPackageImpl.TYPE__SUPER_TYPE:
+		case PivotModelPackage.TYPE__SUPER_TYPE:
 			getSuperType().clear();
 			getSuperType().addAll((Collection<? extends Type>) newValue);
 			return;
-		case PivotModelPackageImpl.TYPE__GENERIC_SUPER_TYPE:
+		case PivotModelPackage.TYPE__GENERIC_SUPER_TYPE:
 			getGenericSuperType().clear();
-			getGenericSuperType()
-					.addAll((Collection<? extends GenericType>) newValue);
+			getGenericSuperType().addAll(
+					(Collection<? extends GenericType>) newValue);
 			return;
 		}
 		super.eSet(featureID, newValue);
@@ -1039,29 +1004,27 @@ public class TypeImpl extends NamedElementImpl implements Type {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public void eUnset(int featureID) {
-
 		switch (featureID) {
-		case PivotModelPackageImpl.TYPE__OWNED_TYPE_PARAMETER:
+		case PivotModelPackage.TYPE__OWNED_TYPE_PARAMETER:
 			getOwnedTypeParameter().clear();
 			return;
-		case PivotModelPackageImpl.TYPE__NAMESPACE:
+		case PivotModelPackage.TYPE__NAMESPACE:
 			setNamespace((Namespace) null);
 			return;
-		case PivotModelPackageImpl.TYPE__OWNED_OPERATION:
+		case PivotModelPackage.TYPE__OWNED_OPERATION:
 			getOwnedOperation().clear();
 			return;
-		case PivotModelPackageImpl.TYPE__OWNED_PROPERTY:
+		case PivotModelPackage.TYPE__OWNED_PROPERTY:
 			getOwnedProperty().clear();
 			return;
-		case PivotModelPackageImpl.TYPE__SUPER_TYPE:
+		case PivotModelPackage.TYPE__SUPER_TYPE:
 			getSuperType().clear();
 			return;
-		case PivotModelPackageImpl.TYPE__GENERIC_SUPER_TYPE:
+		case PivotModelPackage.TYPE__GENERIC_SUPER_TYPE:
 			getGenericSuperType().clear();
 			return;
 		}
@@ -1070,24 +1033,22 @@ public class TypeImpl extends NamedElementImpl implements Type {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-
 		switch (featureID) {
-		case PivotModelPackageImpl.TYPE__OWNED_TYPE_PARAMETER:
+		case PivotModelPackage.TYPE__OWNED_TYPE_PARAMETER:
 			return ownedTypeParameter != null && !ownedTypeParameter.isEmpty();
-		case PivotModelPackageImpl.TYPE__NAMESPACE:
+		case PivotModelPackage.TYPE__NAMESPACE:
 			return getNamespace() != null;
-		case PivotModelPackageImpl.TYPE__OWNED_OPERATION:
+		case PivotModelPackage.TYPE__OWNED_OPERATION:
 			return ownedOperation != null && !ownedOperation.isEmpty();
-		case PivotModelPackageImpl.TYPE__OWNED_PROPERTY:
+		case PivotModelPackage.TYPE__OWNED_PROPERTY:
 			return ownedProperty != null && !ownedProperty.isEmpty();
-		case PivotModelPackageImpl.TYPE__SUPER_TYPE:
+		case PivotModelPackage.TYPE__SUPER_TYPE:
 			return superType != null && !superType.isEmpty();
-		case PivotModelPackageImpl.TYPE__GENERIC_SUPER_TYPE:
+		case PivotModelPackage.TYPE__GENERIC_SUPER_TYPE:
 			return genericSuperType != null && !genericSuperType.isEmpty();
 		}
 		return super.eIsSet(featureID);
@@ -1095,12 +1056,10 @@ public class TypeImpl extends NamedElementImpl implements Type {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
-
 		if (baseClass == ConstrainableElement.class) {
 			switch (derivedFeatureID) {
 			default:
@@ -1109,8 +1068,8 @@ public class TypeImpl extends NamedElementImpl implements Type {
 		}
 		if (baseClass == GenericElement.class) {
 			switch (derivedFeatureID) {
-			case PivotModelPackageImpl.TYPE__OWNED_TYPE_PARAMETER:
-				return PivotModelPackageImpl.GENERIC_ELEMENT__OWNED_TYPE_PARAMETER;
+			case PivotModelPackage.TYPE__OWNED_TYPE_PARAMETER:
+				return PivotModelPackage.GENERIC_ELEMENT__OWNED_TYPE_PARAMETER;
 			default:
 				return -1;
 			}
@@ -1120,12 +1079,10 @@ public class TypeImpl extends NamedElementImpl implements Type {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
-
 		if (baseClass == ConstrainableElement.class) {
 			switch (baseFeatureID) {
 			default:
@@ -1134,8 +1091,8 @@ public class TypeImpl extends NamedElementImpl implements Type {
 		}
 		if (baseClass == GenericElement.class) {
 			switch (baseFeatureID) {
-			case PivotModelPackageImpl.GENERIC_ELEMENT__OWNED_TYPE_PARAMETER:
-				return PivotModelPackageImpl.TYPE__OWNED_TYPE_PARAMETER;
+			case PivotModelPackage.GENERIC_ELEMENT__OWNED_TYPE_PARAMETER:
+				return PivotModelPackage.TYPE__OWNED_TYPE_PARAMETER;
 			default:
 				return -1;
 			}
@@ -1145,13 +1102,11 @@ public class TypeImpl extends NamedElementImpl implements Type {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	protected EClass eStaticClass() {
-
-		return PivotModelPackageImpl.Literals.TYPE;
+		return PivotModelPackage.Literals.TYPE;
 	}
 
 	/**
@@ -1163,8 +1118,8 @@ public class TypeImpl extends NamedElementImpl implements Type {
 	@Override
 	public String toString() {
 
-		return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE).append(
-				"name", getName()).append("namespace", getNamespace()).toString(); //$NON-NLS-1$ //$NON-NLS-2$
+		return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
+				.append("name", getName()).append("namespace", getNamespace()).toString(); //$NON-NLS-1$ //$NON-NLS-2$
 	}
 
 	/**
@@ -1179,9 +1134,8 @@ public class TypeImpl extends NamedElementImpl implements Type {
 		String qualifiedName = getQualifiedName();
 		final int prime = 31;
 		int result = 1;
-		result =
-				prime * result
-						+ ((qualifiedName == null) ? 0 : qualifiedName.hashCode());
+		result = prime * result
+				+ ((qualifiedName == null) ? 0 : qualifiedName.hashCode());
 		return result;
 	}
 

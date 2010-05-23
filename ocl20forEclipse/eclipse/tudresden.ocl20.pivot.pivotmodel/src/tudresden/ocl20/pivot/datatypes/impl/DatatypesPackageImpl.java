@@ -44,6 +44,8 @@ import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 import tudresden.ocl20.pivot.datatypes.DatatypesFactory;
 
+import tudresden.ocl20.pivot.datatypes.DatatypesPackage;
+import tudresden.ocl20.pivot.pivotmodel.PivotModelPackage;
 import tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl;
 
 /**
@@ -57,140 +59,10 @@ import tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl;
  *   <li>and each data type</li>
  * </ul>
  * <!-- end-user-doc -->
- * @see tudresden.ocl20.pivot.datatypes.DatatypesFactory
  * @generated
  */
-public class DatatypesPackageImpl extends EPackageImpl {
-
-	/**
-	 * The package name.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public static final String eNAME = "datatypes"; //$NON-NLS-1$
-
-	/**
-	 * The package namespace URI.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public static final String eNS_URI =
-			"http://www.tu-dresden.de/ocl20/pivot/2007/datatypes"; //$NON-NLS-1$
-
-	/**
-	 * The package namespace name.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public static final String eNS_PREFIX = "datatypes"; //$NON-NLS-1$
-
-	/**
-	 * The singleton instance of the package.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public static final DatatypesPackageImpl eINSTANCE =
-			tudresden.ocl20.pivot.datatypes.impl.DatatypesPackageImpl.init();
-
-	/**
-	 * The meta object id for the '<em>Sequence</em>' data type.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see java.util.List
-	 * @see tudresden.ocl20.pivot.datatypes.impl.DatatypesPackageImpl#getSequence()
-	 * @generated
-	 */
-	public static final int SEQUENCE = 6;
-
-	/**
-	 * The meta object id for the '<em>Set</em>' data type.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see java.util.Set
-	 * @see tudresden.ocl20.pivot.datatypes.impl.DatatypesPackageImpl#getSet()
-	 * @generated
-	 */
-	public static final int SET = 8;
-
-	/**
-	 * The meta object id for the '<em>Unlimited Natural</em>' data type.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see tudresden.ocl20.pivot.datatypes.impl.DatatypesPackageImpl#getUnlimitedNatural()
-	 * @generated
-	 */
-	public static final int UNLIMITED_NATURAL = 4;
-
-	/**
-	 * The meta object id for the '<em>Integer</em>' data type.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see tudresden.ocl20.pivot.datatypes.impl.DatatypesPackageImpl#getInteger()
-	 * @generated
-	 */
-	public static final int INTEGER = 1;
-
-	/**
-	 * The meta object id for the '<em>Boolean</em>' data type.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see tudresden.ocl20.pivot.datatypes.impl.DatatypesPackageImpl#getBoolean()
-	 * @generated
-	 */
-	public static final int BOOLEAN = 0;
-
-	/**
-	 * The meta object id for the '<em>String</em>' data type.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see java.lang.String
-	 * @see tudresden.ocl20.pivot.datatypes.impl.DatatypesPackageImpl#getString()
-	 * @generated
-	 */
-	public static final int STRING = 3;
-
-	/**
-	 * The meta object id for the '<em>Real</em>' data type.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see tudresden.ocl20.pivot.datatypes.impl.DatatypesPackageImpl#getReal()
-	 * @generated
-	 */
-	public static final int REAL = 2;
-
-	/**
-	 * The meta object id for the '<em>Bag</em>' data type.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see java.util.List
-	 * @see tudresden.ocl20.pivot.datatypes.impl.DatatypesPackageImpl#getBag()
-	 * @generated
-	 */
-	public static final int BAG = 7;
-
-	/**
-	 * The meta object id for the '<em>Ordered Set</em>' data type.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see java.util.List
-	 * @see tudresden.ocl20.pivot.datatypes.impl.DatatypesPackageImpl#getOrderedSet()
-	 * @generated
-	 */
-	public static final int ORDERED_SET = 9;
-
-	/**
-	 * The meta object id for the '<em>Collection</em>' data type.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see java.util.Collection
-	 * @see tudresden.ocl20.pivot.datatypes.impl.DatatypesPackageImpl#getCollection()
-	 * @generated
-	 */
-	public static final int COLLECTION = 5;
+public class DatatypesPackageImpl extends EPackageImpl implements
+		DatatypesPackage {
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -273,13 +145,12 @@ public class DatatypesPackageImpl extends EPackageImpl {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see org.eclipse.emf.ecore.EPackage.Registry
-	 * @see tudresden.ocl20.pivot.datatypes.impl.DatatypesPackageImpl#eNS_URI
+	 * @see tudresden.ocl20.pivot.datatypes.DatatypesPackage#eNS_URI
 	 * @see #init()
 	 * @generated
 	 */
 	private DatatypesPackageImpl() {
-
-		super(eNS_URI, ((EFactory) DatatypesFactory.INSTANCE));
+		super(eNS_URI, DatatypesFactory.eINSTANCE);
 	}
 
 	/**
@@ -292,7 +163,7 @@ public class DatatypesPackageImpl extends EPackageImpl {
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
 	 * 
-	 * <p>This method is used to initialize {@link DatatypesPackageImpl#eINSTANCE} when that field is accessed.
+	 * <p>This method is used to initialize {@link DatatypesPackage#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -301,26 +172,24 @@ public class DatatypesPackageImpl extends EPackageImpl {
 	 * @see #initializePackageContents()
 	 * @generated
 	 */
-	public static DatatypesPackageImpl init() {
-
+	public static DatatypesPackage init() {
 		if (isInited)
-			return (DatatypesPackageImpl) EPackage.Registry.INSTANCE
-					.getEPackage(DatatypesPackageImpl.eNS_URI);
+			return (DatatypesPackage) EPackage.Registry.INSTANCE
+					.getEPackage(DatatypesPackage.eNS_URI);
 
 		// Obtain or create and register package
-		DatatypesPackageImpl theDatatypesPackage =
-				(DatatypesPackageImpl) (EPackage.Registry.INSTANCE.get(eNS_URI) instanceof DatatypesPackageImpl ? EPackage.Registry.INSTANCE
-						.get(eNS_URI)
-						: new DatatypesPackageImpl());
+		DatatypesPackageImpl theDatatypesPackage = (DatatypesPackageImpl) (EPackage.Registry.INSTANCE
+				.get(eNS_URI) instanceof DatatypesPackageImpl ? EPackage.Registry.INSTANCE
+				.get(eNS_URI)
+				: new DatatypesPackageImpl());
 
 		isInited = true;
 
 		// Obtain or create and register interdependencies
-		PivotModelPackageImpl thePivotModelPackage =
-				(PivotModelPackageImpl) (EPackage.Registry.INSTANCE
-						.getEPackage(PivotModelPackageImpl.eNS_URI) instanceof PivotModelPackageImpl ? EPackage.Registry.INSTANCE
-						.getEPackage(PivotModelPackageImpl.eNS_URI)
-						: PivotModelPackageImpl.eINSTANCE);
+		PivotModelPackageImpl thePivotModelPackage = (PivotModelPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(PivotModelPackage.eNS_URI) instanceof PivotModelPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(PivotModelPackage.eNS_URI)
+				: PivotModelPackage.eINSTANCE);
 
 		// Create package meta-data objects
 		theDatatypesPackage.createPackageContents();
@@ -334,146 +203,107 @@ public class DatatypesPackageImpl extends EPackageImpl {
 		theDatatypesPackage.freeze();
 
 		// Update the registry and return the package
-		EPackage.Registry.INSTANCE.put(DatatypesPackageImpl.eNS_URI,
+		EPackage.Registry.INSTANCE.put(DatatypesPackage.eNS_URI,
 				theDatatypesPackage);
 		return theDatatypesPackage;
 	}
 
 	/**
-	 * Returns the meta object for data type '{@link java.util.List <em>Sequence</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for data type '<em>Sequence</em>'.
-	 * @see java.util.List
 	 * @generated
 	 */
 	public EDataType getSequence() {
-
 		return sequenceEDataType;
 	}
 
 	/**
-	 * Returns the meta object for data type '{@link java.util.Set <em>Set</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for data type '<em>Set</em>'.
-	 * @see java.util.Set
 	 * @generated
 	 */
 	public EDataType getSet() {
-
 		return setEDataType;
 	}
 
 	/**
-	 * Returns the meta object for data type '<em>Unlimited Natural</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for data type '<em>Unlimited Natural</em>'.
 	 * @generated
 	 */
 	public EDataType getUnlimitedNatural() {
-
 		return unlimitedNaturalEDataType;
 	}
 
 	/**
-	 * Returns the meta object for data type '<em>Integer</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for data type '<em>Integer</em>'.
 	 * @generated
 	 */
 	public EDataType getInteger() {
-
 		return integerEDataType;
 	}
 
 	/**
-	 * Returns the meta object for data type '<em>Boolean</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for data type '<em>Boolean</em>'.
 	 * @generated
 	 */
 	public EDataType getBoolean() {
-
 		return booleanEDataType;
 	}
 
 	/**
-	 * Returns the meta object for data type '{@link java.lang.String <em>String</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for data type '<em>String</em>'.
-	 * @see java.lang.String
 	 * @generated
 	 */
 	public EDataType getString() {
-
 		return stringEDataType;
 	}
 
 	/**
-	 * Returns the meta object for data type '<em>Real</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for data type '<em>Real</em>'.
 	 * @generated
 	 */
 	public EDataType getReal() {
-
 		return realEDataType;
 	}
 
 	/**
-	 * Returns the meta object for data type '{@link java.util.List <em>Bag</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for data type '<em>Bag</em>'.
-	 * @see java.util.List
 	 * @generated
 	 */
 	public EDataType getBag() {
-
 		return bagEDataType;
 	}
 
 	/**
-	 * Returns the meta object for data type '{@link java.util.List <em>Ordered Set</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for data type '<em>Ordered Set</em>'.
-	 * @see java.util.List
 	 * @generated
 	 */
 	public EDataType getOrderedSet() {
-
 		return orderedSetEDataType;
 	}
 
 	/**
-	 * Returns the meta object for data type '{@link java.util.Collection <em>Collection</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for data type '<em>Collection</em>'.
-	 * @see java.util.Collection
 	 * @generated
 	 */
 	public EDataType getCollection() {
-
 		return collectionEDataType;
 	}
 
 	/**
-	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the factory that creates the instances of the model.
 	 * @generated
 	 */
 	public DatatypesFactory getDatatypesFactory() {
-
 		return (DatatypesFactory) getEFactoryInstance();
 	}
 
@@ -492,7 +322,6 @@ public class DatatypesPackageImpl extends EPackageImpl {
 	 * @generated
 	 */
 	public void createPackageContents() {
-
 		if (isCreated)
 			return;
 		isCreated = true;
@@ -525,7 +354,6 @@ public class DatatypesPackageImpl extends EPackageImpl {
 	 * @generated
 	 */
 	public void initializePackageContents() {
-
 		if (isInitialized)
 			return;
 		isInitialized = true;
@@ -544,7 +372,9 @@ public class DatatypesPackageImpl extends EPackageImpl {
 				"Real", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 		initEDataType(stringEDataType, String.class,
 				"String", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
-		initEDataType(unlimitedNaturalEDataType, long.class,
+		initEDataType(
+				unlimitedNaturalEDataType,
+				long.class,
 				"UnlimitedNatural", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 		initEDataType(collectionEDataType, Collection.class,
 				"Collection", !IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
@@ -559,119 +389,6 @@ public class DatatypesPackageImpl extends EPackageImpl {
 
 		// Create resource
 		createResource(eNS_URI);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * Defines literals for the meta objects that represent
-	 * <ul>
-	 *   <li>each class,</li>
-	 *   <li>each feature of each class,</li>
-	 *   <li>each enum,</li>
-	 *   <li>and each data type</li>
-	 * </ul>
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public interface Literals {
-
-		/**
-		 * The meta object literal for the '<em>Sequence</em>' data type.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see java.util.List
-		 * @see tudresden.ocl20.pivot.datatypes.impl.DatatypesPackageImpl#getSequence()
-		 * @generated
-		 */
-		public static final EDataType SEQUENCE = eINSTANCE.getSequence();
-
-		/**
-		 * The meta object literal for the '<em>Set</em>' data type.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see java.util.Set
-		 * @see tudresden.ocl20.pivot.datatypes.impl.DatatypesPackageImpl#getSet()
-		 * @generated
-		 */
-		public static final EDataType SET = eINSTANCE.getSet();
-
-		/**
-		 * The meta object literal for the '<em>Unlimited Natural</em>' data type.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see tudresden.ocl20.pivot.datatypes.impl.DatatypesPackageImpl#getUnlimitedNatural()
-		 * @generated
-		 */
-		public static final EDataType UNLIMITED_NATURAL =
-				eINSTANCE.getUnlimitedNatural();
-
-		/**
-		 * The meta object literal for the '<em>Integer</em>' data type.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see tudresden.ocl20.pivot.datatypes.impl.DatatypesPackageImpl#getInteger()
-		 * @generated
-		 */
-		public static final EDataType INTEGER = eINSTANCE.getInteger();
-
-		/**
-		 * The meta object literal for the '<em>Boolean</em>' data type.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see tudresden.ocl20.pivot.datatypes.impl.DatatypesPackageImpl#getBoolean()
-		 * @generated
-		 */
-		public static final EDataType BOOLEAN = eINSTANCE.getBoolean();
-
-		/**
-		 * The meta object literal for the '<em>String</em>' data type.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see java.lang.String
-		 * @see tudresden.ocl20.pivot.datatypes.impl.DatatypesPackageImpl#getString()
-		 * @generated
-		 */
-		public static final EDataType STRING = eINSTANCE.getString();
-
-		/**
-		 * The meta object literal for the '<em>Real</em>' data type.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see tudresden.ocl20.pivot.datatypes.impl.DatatypesPackageImpl#getReal()
-		 * @generated
-		 */
-		public static final EDataType REAL = eINSTANCE.getReal();
-
-		/**
-		 * The meta object literal for the '<em>Bag</em>' data type.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see java.util.List
-		 * @see tudresden.ocl20.pivot.datatypes.impl.DatatypesPackageImpl#getBag()
-		 * @generated
-		 */
-		public static final EDataType BAG = eINSTANCE.getBag();
-
-		/**
-		 * The meta object literal for the '<em>Ordered Set</em>' data type.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see java.util.List
-		 * @see tudresden.ocl20.pivot.datatypes.impl.DatatypesPackageImpl#getOrderedSet()
-		 * @generated
-		 */
-		public static final EDataType ORDERED_SET = eINSTANCE.getOrderedSet();
-
-		/**
-		 * The meta object literal for the '<em>Collection</em>' data type.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see java.util.Collection
-		 * @see tudresden.ocl20.pivot.datatypes.impl.DatatypesPackageImpl#getCollection()
-		 * @generated
-		 */
-		public static final EDataType COLLECTION = eINSTANCE.getCollection();
-
 	}
 
 } //DatatypesPackageImpl

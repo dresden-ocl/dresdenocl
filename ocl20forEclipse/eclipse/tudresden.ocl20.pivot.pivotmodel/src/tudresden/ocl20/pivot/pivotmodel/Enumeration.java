@@ -32,6 +32,7 @@
  */
 package tudresden.ocl20.pivot.pivotmodel;
 
+import org.eclipse.emf.common.util.EList;
 import java.util.List;
 
 /**
@@ -54,6 +55,8 @@ import java.util.List;
  * </ul>
  * </p>
  *
+ * @see tudresden.ocl20.pivot.pivotmodel.PivotModelPackage#getEnumeration()
+ * @model
  * @generated
  */
 public interface Enumeration extends Type {
@@ -70,7 +73,9 @@ public interface Enumeration extends Type {
 	 * </p>
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Owned Literal</em>' containment reference list.
+	 * @see tudresden.ocl20.pivot.pivotmodel.PivotModelPackage#getEnumeration_OwnedLiteral()
 	 * @see tudresden.ocl20.pivot.pivotmodel.EnumerationLiteral#getEnumeration
+	 * @model opposite="enumeration" containment="true"
 	 * @generated
 	 */
 	List<EnumerationLiteral> getOwnedLiteral();
@@ -85,6 +90,7 @@ public interface Enumeration extends Type {
 	 * The operation returns a reference to this <code>Enumeration</code>.
 	 * </p>
 	 * <!-- end-model-doc -->
+	 * @model required="true" literalRequired="true"
 	 * @generated
 	 */
 	Enumeration addLiteral(EnumerationLiteral literal);
@@ -105,6 +111,7 @@ public interface Enumeration extends Type {
 	 * </pre>
 	 * </p>
 	 * <!-- end-model-doc -->
+	 * @model nameDataType="tudresden.ocl20.pivot.datatypes.String"
 	 * @generated
 	 */
 	EnumerationLiteral lookupLiteral(String name);

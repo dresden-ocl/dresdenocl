@@ -38,6 +38,7 @@ import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EClass;
 
 import tudresden.ocl20.pivot.pivotmodel.GenericType;
+import tudresden.ocl20.pivot.pivotmodel.PivotModelPackage;
 import tudresden.ocl20.pivot.pivotmodel.NamedElement;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 import tudresden.ocl20.pivot.pivotmodel.TypeParameter;
@@ -57,14 +58,14 @@ public abstract class GenericTypeImpl extends NamedElementImpl implements
 	/**
 	 * Logger for this class
 	 */
-	private static final Logger logger = Logger.getLogger(GenericTypeImpl.class);
+	private static final Logger logger = Logger
+			.getLogger(GenericTypeImpl.class);
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	protected GenericTypeImpl() {
-
 		super();
 	}
 
@@ -155,7 +156,8 @@ public abstract class GenericTypeImpl extends NamedElementImpl implements
 		boolean success = doBindGenericSuperType(parameters, types, subType);
 
 		if (logger.isDebugEnabled()) {
-			logger.debug("bindGenericSuperType() - exit - return value=" + success); //$NON-NLS-1$
+			logger
+					.debug("bindGenericSuperType() - exit - return value=" + success); //$NON-NLS-1$
 		}
 
 		return success;
@@ -164,14 +166,16 @@ public abstract class GenericTypeImpl extends NamedElementImpl implements
 	/**
 	 * Subclasses need to implement the actual binding.
 	 */
-	protected abstract boolean doBindGenericType(List<TypeParameter> parameters,
-			List<? extends Type> types, TypedElement typedElement);
+	protected abstract boolean doBindGenericType(
+			List<TypeParameter> parameters, List<? extends Type> types,
+			TypedElement typedElement);
 
 	/**
 	 * Subclasses need to implement the actual binding.
 	 */
 	protected abstract boolean doBindGenericSuperType(
-			List<TypeParameter> parameters, List<? extends Type> types, Type subType);
+			List<TypeParameter> parameters, List<? extends Type> types,
+			Type subType);
 
 	/**
 	 * Made abstract in order to leave implementation to subclasses.
@@ -213,8 +217,7 @@ public abstract class GenericTypeImpl extends NamedElementImpl implements
 	 */
 	@Override
 	protected EClass eStaticClass() {
-
-		return PivotModelPackageImpl.Literals.GENERIC_TYPE;
+		return PivotModelPackage.Literals.GENERIC_TYPE;
 	}
 
 } // GenericTypeImpl

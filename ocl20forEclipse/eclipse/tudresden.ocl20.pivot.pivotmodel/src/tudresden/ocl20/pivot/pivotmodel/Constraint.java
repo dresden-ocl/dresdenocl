@@ -32,6 +32,7 @@
  */
 package tudresden.ocl20.pivot.pivotmodel;
 
+import org.eclipse.emf.common.util.EList;
 import java.util.List;
 
 /**
@@ -60,6 +61,8 @@ import java.util.List;
  * </ul>
  * </p>
  *
+ * @see tudresden.ocl20.pivot.pivotmodel.PivotModelPackage#getConstraint()
+ * @model
  * @generated
  */
 public interface Constraint extends NamedElement {
@@ -79,6 +82,8 @@ public interface Constraint extends NamedElement {
 	 * @return the value of the '<em>Kind</em>' attribute.
 	 * @see tudresden.ocl20.pivot.pivotmodel.ConstraintKind
 	 * @see #setKind(ConstraintKind)
+	 * @see tudresden.ocl20.pivot.pivotmodel.PivotModelPackage#getConstraint_Kind()
+	 * @model required="true"
 	 * @generated
 	 */
 	ConstraintKind getKind();
@@ -112,7 +117,9 @@ public interface Constraint extends NamedElement {
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Namespace</em>' container reference.
 	 * @see #setNamespace(Namespace)
+	 * @see tudresden.ocl20.pivot.pivotmodel.PivotModelPackage#getConstraint_Namespace()
 	 * @see tudresden.ocl20.pivot.pivotmodel.Namespace#getOwnedRule
+	 * @model opposite="ownedRule"
 	 * @generated
 	 */
 	Namespace getNamespace();
@@ -140,7 +147,9 @@ public interface Constraint extends NamedElement {
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Specification</em>' containment reference.
 	 * @see #setSpecification(Expression)
+	 * @see tudresden.ocl20.pivot.pivotmodel.PivotModelPackage#getConstraint_Specification()
 	 * @see tudresden.ocl20.pivot.pivotmodel.Expression#getConstraint
+	 * @model opposite="constraint" containment="true" required="true"
 	 * @generated
 	 */
 	Expression getSpecification();
@@ -167,6 +176,8 @@ public interface Constraint extends NamedElement {
 	 * </p>
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Constrained Element</em>' reference list.
+	 * @see tudresden.ocl20.pivot.pivotmodel.PivotModelPackage#getConstraint_ConstrainedElement()
+	 * @model resolveProxies="false"
 	 * @generated
 	 */
 	List<ConstrainableElement> getConstrainedElement();
@@ -183,6 +194,8 @@ public interface Constraint extends NamedElement {
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Defined Feature</em>' reference.
 	 * @see #setDefinedFeature(Feature)
+	 * @see tudresden.ocl20.pivot.pivotmodel.PivotModelPackage#getConstraint_DefinedFeature()
+	 * @model resolveProxies="false"
 	 * @generated
 	 */
 	Feature getDefinedFeature();
@@ -208,6 +221,7 @@ public interface Constraint extends NamedElement {
 	 * <code>Constraint</code>.
 	 * </p>
 	 * <!-- end-model-doc -->
+	 * @model required="true" constrainedElementRequired="true"
 	 * @generated
 	 */
 	Constraint addConstrainedElement(ConstrainableElement constrainedElement);

@@ -38,11 +38,13 @@ import java.util.List;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 
 import tudresden.ocl20.pivot.pivotmodel.NamedElement;
+import tudresden.ocl20.pivot.pivotmodel.PivotModelPackage;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object '
@@ -98,7 +100,6 @@ public abstract class NamedElementImpl extends EObjectImpl implements
 	 * @generated
 	 */
 	protected NamedElementImpl() {
-
 		super();
 	}
 
@@ -108,8 +109,7 @@ public abstract class NamedElementImpl extends EObjectImpl implements
 	 */
 	@Override
 	protected EClass eStaticClass() {
-
-		return PivotModelPackageImpl.Literals.NAMED_ELEMENT;
+		return PivotModelPackage.Literals.NAMED_ELEMENT;
 	}
 
 	/**
@@ -117,7 +117,6 @@ public abstract class NamedElementImpl extends EObjectImpl implements
 	 * @generated
 	 */
 	public String getName() {
-
 		return name;
 	}
 
@@ -126,12 +125,11 @@ public abstract class NamedElementImpl extends EObjectImpl implements
 	 * @generated
 	 */
 	public void setName(String newName) {
-
 		String oldName = name;
 		name = newName;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
-					PivotModelPackageImpl.NAMED_ELEMENT__NAME, oldName, name));
+					PivotModelPackage.NAMED_ELEMENT__NAME, oldName, name));
 	}
 
 	/**
@@ -248,13 +246,12 @@ public abstract class NamedElementImpl extends EObjectImpl implements
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-
 		switch (featureID) {
-		case PivotModelPackageImpl.NAMED_ELEMENT__NAME:
+		case PivotModelPackage.NAMED_ELEMENT__NAME:
 			return getName();
-		case PivotModelPackageImpl.NAMED_ELEMENT__QUALIFIED_NAME:
+		case PivotModelPackage.NAMED_ELEMENT__QUALIFIED_NAME:
 			return getQualifiedName();
-		case PivotModelPackageImpl.NAMED_ELEMENT__OWNER:
+		case PivotModelPackage.NAMED_ELEMENT__OWNER:
 			return getOwner();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -266,9 +263,8 @@ public abstract class NamedElementImpl extends EObjectImpl implements
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-
 		switch (featureID) {
-		case PivotModelPackageImpl.NAMED_ELEMENT__NAME:
+		case PivotModelPackage.NAMED_ELEMENT__NAME:
 			setName((String) newValue);
 			return;
 		}
@@ -281,9 +277,8 @@ public abstract class NamedElementImpl extends EObjectImpl implements
 	 */
 	@Override
 	public void eUnset(int featureID) {
-
 		switch (featureID) {
-		case PivotModelPackageImpl.NAMED_ELEMENT__NAME:
+		case PivotModelPackage.NAMED_ELEMENT__NAME:
 			setName(NAME_EDEFAULT);
 			return;
 		}
@@ -296,14 +291,14 @@ public abstract class NamedElementImpl extends EObjectImpl implements
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-
 		switch (featureID) {
-		case PivotModelPackageImpl.NAMED_ELEMENT__NAME:
-			return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-		case PivotModelPackageImpl.NAMED_ELEMENT__QUALIFIED_NAME:
+		case PivotModelPackage.NAMED_ELEMENT__NAME:
+			return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT
+					.equals(name);
+		case PivotModelPackage.NAMED_ELEMENT__QUALIFIED_NAME:
 			return QUALIFIED_NAME_EDEFAULT == null ? getQualifiedName() != null
 					: !QUALIFIED_NAME_EDEFAULT.equals(getQualifiedName());
-		case PivotModelPackageImpl.NAMED_ELEMENT__OWNER:
+		case PivotModelPackage.NAMED_ELEMENT__OWNER:
 			return getOwner() != null;
 		}
 		return super.eIsSet(featureID);
@@ -320,8 +315,8 @@ public abstract class NamedElementImpl extends EObjectImpl implements
 	@Override
 	public String toString() {
 
-		return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE).append(
-				"name", getName()).toString(); //$NON-NLS-1$
+		return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
+				.append("name", getName()).toString(); //$NON-NLS-1$
 	}
 
 } // NamedElementImpl

@@ -32,6 +32,7 @@
  */
 package tudresden.ocl20.pivot.pivotmodel;
 
+import org.eclipse.emf.common.util.EList;
 import java.util.List;
 
 /**
@@ -55,6 +56,8 @@ import java.util.List;
  * </ul>
  * </p>
  *
+ * @see tudresden.ocl20.pivot.pivotmodel.PivotModelPackage#getNamespace()
+ * @model
  * @generated
  */
 public interface Namespace extends NamedElement, GenericElement {
@@ -108,7 +111,9 @@ public interface Namespace extends NamedElement, GenericElement {
 	 * </p>
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Nested Namespace</em>' containment reference list.
+	 * @see tudresden.ocl20.pivot.pivotmodel.PivotModelPackage#getNamespace_NestedNamespace()
 	 * @see tudresden.ocl20.pivot.pivotmodel.Namespace#getNestingNamespace
+	 * @model opposite="nestingNamespace" containment="true"
 	 * @generated
 	 */
 	List<Namespace> getNestedNamespace();
@@ -125,7 +130,9 @@ public interface Namespace extends NamedElement, GenericElement {
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Nesting Namespace</em>' container reference.
 	 * @see #setNestingNamespace(Namespace)
+	 * @see tudresden.ocl20.pivot.pivotmodel.PivotModelPackage#getNamespace_NestingNamespace()
 	 * @see tudresden.ocl20.pivot.pivotmodel.Namespace#getNestedNamespace
+	 * @model opposite="nestedNamespace" resolveProxies="false" transient="false"
 	 * @generated
 	 */
 	Namespace getNestingNamespace();
@@ -260,6 +267,7 @@ public interface Namespace extends NamedElement, GenericElement {
 	 * @param constraints The {@link Constraint}s that shall be removed.
 	 * @return <code>true</code> if the {@link Constraint}s have been removed.
 	 * <!-- end-model-doc -->
+	 * @model dataType="tudresden.ocl20.pivot.datatypes.Boolean" required="true" constraintsMany="true"
 	 * @generated
 	 */
 	boolean removeOwnedAndNestedRules(List<Constraint> constraints);

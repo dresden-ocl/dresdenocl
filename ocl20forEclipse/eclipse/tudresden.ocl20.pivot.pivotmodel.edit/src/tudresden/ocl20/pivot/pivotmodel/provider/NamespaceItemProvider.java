@@ -260,27 +260,27 @@ public class NamespaceItemProvider extends NamedElementItemProvider implements
 
 		newChildDescriptors.add(createChildParameter(
 				PivotModelPackageImpl.Literals.GENERIC_ELEMENT__OWNED_TYPE_PARAMETER,
-				PivotModelFactory.INSTANCE.createTypeParameter()));
+				PivotModelFactory.eINSTANCE.createTypeParameter()));
 
 		newChildDescriptors.add(createChildParameter(
 				PivotModelPackageImpl.Literals.NAMESPACE__NESTED_NAMESPACE,
-				PivotModelFactory.INSTANCE.createNamespace()));
+				PivotModelFactory.eINSTANCE.createNamespace()));
 
 		newChildDescriptors.add(createChildParameter(
 				PivotModelPackageImpl.Literals.NAMESPACE__OWNED_TYPE,
-				PivotModelFactory.INSTANCE.createType()));
+				PivotModelFactory.eINSTANCE.createType()));
 
 		newChildDescriptors.add(createChildParameter(
 				PivotModelPackageImpl.Literals.NAMESPACE__OWNED_TYPE,
-				PivotModelFactory.INSTANCE.createPrimitiveType()));
+				PivotModelFactory.eINSTANCE.createPrimitiveType()));
 
 		newChildDescriptors.add(createChildParameter(
 				PivotModelPackageImpl.Literals.NAMESPACE__OWNED_TYPE,
-				PivotModelFactory.INSTANCE.createEnumeration()));
+				PivotModelFactory.eINSTANCE.createEnumeration()));
 
 		newChildDescriptors.add(createChildParameter(
 				PivotModelPackageImpl.Literals.NAMESPACE__OWNED_RULE,
-				PivotModelFactory.INSTANCE.createConstraint()));
+				PivotModelFactory.eINSTANCE.createConstraint()));
 	}
 
 }

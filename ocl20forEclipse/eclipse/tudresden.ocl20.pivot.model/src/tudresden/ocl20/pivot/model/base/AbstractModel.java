@@ -286,7 +286,7 @@ public abstract class AbstractModel implements IModel {
 				for (PrimitiveTypeKind aKind : PrimitiveTypeKind.VALUES) {
 
 					if (primitiveName.equals(aKind.getName())) {
-						primitiveType = PivotModelFactory.INSTANCE
+						primitiveType = PivotModelFactory.eINSTANCE
 								.createPrimitiveType();
 						primitiveType.setKind(aKind);
 						primitiveType.setName(aKind.getName());

@@ -71,7 +71,7 @@ import tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl;
  * until a non-null result is returned,
  * which is the result of the switch.
  * <!-- end-user-doc -->
- * @see tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl
+ * @see tudresden.ocl20.pivot.pivotmodel.PivotModelPackage
  * @generated
  */
 public class PivotModelSwitch<T> {
@@ -82,7 +82,7 @@ public class PivotModelSwitch<T> {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected static PivotModelPackageImpl modelPackage;
+	protected static PivotModelPackage modelPackage;
 
 	/**
 	 * Creates an instance of the switch.
@@ -92,7 +92,7 @@ public class PivotModelSwitch<T> {
 	 */
 	public PivotModelSwitch() {
 		if (modelPackage == null) {
-			modelPackage = PivotModelPackageImpl.eINSTANCE;
+			modelPackage = PivotModelPackage.eINSTANCE;
 		}
 	}
 
@@ -133,14 +133,14 @@ public class PivotModelSwitch<T> {
 	 */
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
-		case PivotModelPackageImpl.NAMED_ELEMENT: {
+		case PivotModelPackage.NAMED_ELEMENT: {
 			NamedElement namedElement = (NamedElement) theEObject;
 			T result = caseNamedElement(namedElement);
 			if (result == null)
 				result = defaultCase(theEObject);
 			return result;
 		}
-		case PivotModelPackageImpl.TYPED_ELEMENT: {
+		case PivotModelPackage.TYPED_ELEMENT: {
 			TypedElement typedElement = (TypedElement) theEObject;
 			T result = caseTypedElement(typedElement);
 			if (result == null)
@@ -149,7 +149,7 @@ public class PivotModelSwitch<T> {
 				result = defaultCase(theEObject);
 			return result;
 		}
-		case PivotModelPackageImpl.FEATURE: {
+		case PivotModelPackage.FEATURE: {
 			Feature feature = (Feature) theEObject;
 			T result = caseFeature(feature);
 			if (result == null)
@@ -162,14 +162,14 @@ public class PivotModelSwitch<T> {
 				result = defaultCase(theEObject);
 			return result;
 		}
-		case PivotModelPackageImpl.MULTIPLICITY_ELEMENT: {
+		case PivotModelPackage.MULTIPLICITY_ELEMENT: {
 			MultiplicityElement multiplicityElement = (MultiplicityElement) theEObject;
 			T result = caseMultiplicityElement(multiplicityElement);
 			if (result == null)
 				result = defaultCase(theEObject);
 			return result;
 		}
-		case PivotModelPackageImpl.GENERIC_ELEMENT: {
+		case PivotModelPackage.GENERIC_ELEMENT: {
 			GenericElement genericElement = (GenericElement) theEObject;
 			T result = caseGenericElement(genericElement);
 			if (result == null)
@@ -178,14 +178,14 @@ public class PivotModelSwitch<T> {
 				result = defaultCase(theEObject);
 			return result;
 		}
-		case PivotModelPackageImpl.CONSTRAINABLE_ELEMENT: {
+		case PivotModelPackage.CONSTRAINABLE_ELEMENT: {
 			ConstrainableElement constrainableElement = (ConstrainableElement) theEObject;
 			T result = caseConstrainableElement(constrainableElement);
 			if (result == null)
 				result = defaultCase(theEObject);
 			return result;
 		}
-		case PivotModelPackageImpl.NAMESPACE: {
+		case PivotModelPackage.NAMESPACE: {
 			Namespace namespace = (Namespace) theEObject;
 			T result = caseNamespace(namespace);
 			if (result == null)
@@ -196,7 +196,7 @@ public class PivotModelSwitch<T> {
 				result = defaultCase(theEObject);
 			return result;
 		}
-		case PivotModelPackageImpl.TYPE: {
+		case PivotModelPackage.TYPE: {
 			Type type = (Type) theEObject;
 			T result = caseType(type);
 			if (result == null)
@@ -209,7 +209,7 @@ public class PivotModelSwitch<T> {
 				result = defaultCase(theEObject);
 			return result;
 		}
-		case PivotModelPackageImpl.PRIMITIVE_TYPE: {
+		case PivotModelPackage.PRIMITIVE_TYPE: {
 			PrimitiveType primitiveType = (PrimitiveType) theEObject;
 			T result = casePrimitiveType(primitiveType);
 			if (result == null)
@@ -224,7 +224,7 @@ public class PivotModelSwitch<T> {
 				result = defaultCase(theEObject);
 			return result;
 		}
-		case PivotModelPackageImpl.ENUMERATION: {
+		case PivotModelPackage.ENUMERATION: {
 			Enumeration enumeration = (Enumeration) theEObject;
 			T result = caseEnumeration(enumeration);
 			if (result == null)
@@ -239,7 +239,7 @@ public class PivotModelSwitch<T> {
 				result = defaultCase(theEObject);
 			return result;
 		}
-		case PivotModelPackageImpl.ENUMERATION_LITERAL: {
+		case PivotModelPackage.ENUMERATION_LITERAL: {
 			EnumerationLiteral enumerationLiteral = (EnumerationLiteral) theEObject;
 			T result = caseEnumerationLiteral(enumerationLiteral);
 			if (result == null)
@@ -248,7 +248,7 @@ public class PivotModelSwitch<T> {
 				result = defaultCase(theEObject);
 			return result;
 		}
-		case PivotModelPackageImpl.PROPERTY: {
+		case PivotModelPackage.PROPERTY: {
 			Property property = (Property) theEObject;
 			T result = caseProperty(property);
 			if (result == null)
@@ -265,7 +265,7 @@ public class PivotModelSwitch<T> {
 				result = defaultCase(theEObject);
 			return result;
 		}
-		case PivotModelPackageImpl.OPERATION: {
+		case PivotModelPackage.OPERATION: {
 			Operation operation = (Operation) theEObject;
 			T result = caseOperation(operation);
 			if (result == null)
@@ -284,7 +284,7 @@ public class PivotModelSwitch<T> {
 				result = defaultCase(theEObject);
 			return result;
 		}
-		case PivotModelPackageImpl.PARAMETER: {
+		case PivotModelPackage.PARAMETER: {
 			Parameter parameter = (Parameter) theEObject;
 			T result = caseParameter(parameter);
 			if (result == null)
@@ -297,7 +297,7 @@ public class PivotModelSwitch<T> {
 				result = defaultCase(theEObject);
 			return result;
 		}
-		case PivotModelPackageImpl.GENERIC_TYPE: {
+		case PivotModelPackage.GENERIC_TYPE: {
 			GenericType genericType = (GenericType) theEObject;
 			T result = caseGenericType(genericType);
 			if (result == null)
@@ -306,7 +306,7 @@ public class PivotModelSwitch<T> {
 				result = defaultCase(theEObject);
 			return result;
 		}
-		case PivotModelPackageImpl.PARAMETER_GENERIC_TYPE: {
+		case PivotModelPackage.PARAMETER_GENERIC_TYPE: {
 			ParameterGenericType parameterGenericType = (ParameterGenericType) theEObject;
 			T result = caseParameterGenericType(parameterGenericType);
 			if (result == null)
@@ -317,7 +317,7 @@ public class PivotModelSwitch<T> {
 				result = defaultCase(theEObject);
 			return result;
 		}
-		case PivotModelPackageImpl.COMPLEX_GENERIC_TYPE: {
+		case PivotModelPackage.COMPLEX_GENERIC_TYPE: {
 			ComplexGenericType complexGenericType = (ComplexGenericType) theEObject;
 			T result = caseComplexGenericType(complexGenericType);
 			if (result == null)
@@ -328,7 +328,7 @@ public class PivotModelSwitch<T> {
 				result = defaultCase(theEObject);
 			return result;
 		}
-		case PivotModelPackageImpl.TYPE_PARAMETER: {
+		case PivotModelPackage.TYPE_PARAMETER: {
 			TypeParameter typeParameter = (TypeParameter) theEObject;
 			T result = caseTypeParameter(typeParameter);
 			if (result == null)
@@ -337,7 +337,7 @@ public class PivotModelSwitch<T> {
 				result = defaultCase(theEObject);
 			return result;
 		}
-		case PivotModelPackageImpl.TYPE_ARGUMENT: {
+		case PivotModelPackage.TYPE_ARGUMENT: {
 			TypeArgument typeArgument = (TypeArgument) theEObject;
 			T result = caseTypeArgument(typeArgument);
 			if (result == null)
@@ -348,7 +348,7 @@ public class PivotModelSwitch<T> {
 				result = defaultCase(theEObject);
 			return result;
 		}
-		case PivotModelPackageImpl.CONSTRAINT: {
+		case PivotModelPackage.CONSTRAINT: {
 			Constraint constraint = (Constraint) theEObject;
 			T result = caseConstraint(constraint);
 			if (result == null)
@@ -357,14 +357,14 @@ public class PivotModelSwitch<T> {
 				result = defaultCase(theEObject);
 			return result;
 		}
-		case PivotModelPackageImpl.EXPRESSION: {
+		case PivotModelPackage.EXPRESSION: {
 			Expression expression = (Expression) theEObject;
 			T result = caseExpression(expression);
 			if (result == null)
 				result = defaultCase(theEObject);
 			return result;
 		}
-		case PivotModelPackageImpl.NDIRECTIONAL_PROPERTY: {
+		case PivotModelPackage.NDIRECTIONAL_PROPERTY: {
 			NDirectionalProperty nDirectionalProperty = (NDirectionalProperty) theEObject;
 			T result = caseNDirectionalProperty(nDirectionalProperty);
 			if (result == null)

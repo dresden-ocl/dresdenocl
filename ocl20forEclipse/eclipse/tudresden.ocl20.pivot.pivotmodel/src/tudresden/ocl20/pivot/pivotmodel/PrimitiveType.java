@@ -54,6 +54,8 @@ package tudresden.ocl20.pivot.pivotmodel;
  * </ul>
  * </p>
  *
+ * @see tudresden.ocl20.pivot.pivotmodel.PivotModelPackage#getPrimitiveType()
+ * @model
  * @generated
  */
 public interface PrimitiveType extends Type {
@@ -74,6 +76,8 @@ public interface PrimitiveType extends Type {
 	 * @return the value of the '<em>Kind</em>' attribute.
 	 * @see tudresden.ocl20.pivot.pivotmodel.PrimitiveTypeKind
 	 * @see #setKind(PrimitiveTypeKind)
+	 * @see tudresden.ocl20.pivot.pivotmodel.PivotModelPackage#getPrimitiveType_Kind()
+	 * @model default="Unknown" required="true"
 	 * @generated
 	 */
 	PrimitiveTypeKind getKind();

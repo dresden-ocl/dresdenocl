@@ -54,6 +54,7 @@ import tudresden.ocl20.pivot.pivotmodel.Feature;
 import tudresden.ocl20.pivot.pivotmodel.GenericElement;
 import tudresden.ocl20.pivot.pivotmodel.NamedElement;
 import tudresden.ocl20.pivot.pivotmodel.Namespace;
+import tudresden.ocl20.pivot.pivotmodel.PivotModelPackage;
 import tudresden.ocl20.pivot.pivotmodel.Operation;
 import tudresden.ocl20.pivot.pivotmodel.PivotModelFactory;
 import tudresden.ocl20.pivot.pivotmodel.Property;
@@ -66,22 +67,14 @@ import tudresden.ocl20.pivot.pivotmodel.TypeParameter;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>
- * {@link tudresden.ocl20.pivot.pivotmodel.impl.NamespaceImpl#getOwnedTypeParameter
- * <em>Owned Type Parameter</em>}</li>
- * <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.NamespaceImpl#getOwnedType
- * <em>Owned Type</em>}</li>
- * <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.NamespaceImpl#getOwnedRule
- * <em>Owned Rule</em>}</li>
- * <li>
- * {@link tudresden.ocl20.pivot.pivotmodel.impl.NamespaceImpl#getNestedNamespace
- * <em>Nested Namespace</em>}</li>
- * <li>
- * {@link tudresden.ocl20.pivot.pivotmodel.impl.NamespaceImpl#getNestingNamespace
- * <em>Nesting Namespace</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.NamespaceImpl#getOwnedTypeParameter <em>Owned Type Parameter</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.NamespaceImpl#getOwnedType <em>Owned Type</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.NamespaceImpl#getOwnedRule <em>Owned Rule</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.NamespaceImpl#getNestedNamespace <em>Nested Namespace</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.NamespaceImpl#getNestingNamespace <em>Nesting Namespace</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @generated
  */
 public class NamespaceImpl extends NamedElementImpl implements Namespace {
@@ -103,9 +96,8 @@ public class NamespaceImpl extends NamedElementImpl implements Namespace {
 	protected EList<TypeParameter> ownedTypeParameter;
 
 	/**
-	 * The cached value of the '{@link #getOwnedType() <em>Owned Type</em>}'
-	 * containment reference list. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The cached value of the '{@link #getOwnedType() <em>Owned Type</em>}' containment reference list.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getOwnedType()
 	 * @generated
 	 * @ordered
@@ -113,9 +105,8 @@ public class NamespaceImpl extends NamedElementImpl implements Namespace {
 	protected EList<Type> ownedType;
 
 	/**
-	 * The cached value of the '{@link #getOwnedRule() <em>Owned Rule</em>}'
-	 * containment reference list. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The cached value of the '{@link #getOwnedRule() <em>Owned Rule</em>}' containment reference list.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getOwnedRule()
 	 * @generated
 	 * @ordered
@@ -135,23 +126,19 @@ public class NamespaceImpl extends NamedElementImpl implements Namespace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	protected NamespaceImpl() {
-
 		super();
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	protected EClass eStaticClass() {
-
-		return PivotModelPackageImpl.Literals.NAMESPACE;
+		return PivotModelPackage.Literals.NAMESPACE;
 	}
 
 	/**
@@ -183,16 +170,14 @@ public class NamespaceImpl extends NamedElementImpl implements Namespace {
 	 * <!-- begin-user-doc -->The code generated for {
 	 * {@link #getOwnedTypeParameter} is redirected to this method.<!--
 	 * end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	protected final List<TypeParameter> getOwnedTypeParameterGen() {
-
 		if (ownedTypeParameter == null) {
 			ownedTypeParameter = new EObjectContainmentWithInverseEList<TypeParameter>(
 					TypeParameter.class, this,
-					PivotModelPackageImpl.NAMESPACE__OWNED_TYPE_PARAMETER,
-					PivotModelPackageImpl.TYPE_PARAMETER__GENERIC_ELEMENT);
+					PivotModelPackage.NAMESPACE__OWNED_TYPE_PARAMETER,
+					PivotModelPackage.TYPE_PARAMETER__GENERIC_ELEMENT);
 		}
 		return ownedTypeParameter;
 	}
@@ -213,16 +198,14 @@ public class NamespaceImpl extends NamedElementImpl implements Namespace {
 	/**
 	 * <!-- begin-user-doc -->The code generated for {{@link #getOwnedRule()} is
 	 * redirected to this method.<!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	protected final List<Constraint> getOwnedRuleGen() {
-
 		if (ownedRule == null) {
 			ownedRule = new EObjectContainmentWithInverseEList<Constraint>(
 					Constraint.class, this,
-					PivotModelPackageImpl.NAMESPACE__OWNED_RULE,
-					PivotModelPackageImpl.CONSTRAINT__NAMESPACE);
+					PivotModelPackage.NAMESPACE__OWNED_RULE,
+					PivotModelPackage.CONSTRAINT__NAMESPACE);
 		}
 		return ownedRule;
 	}
@@ -243,16 +226,13 @@ public class NamespaceImpl extends NamedElementImpl implements Namespace {
 	/**
 	 * <!-- begin-user-doc -->The code generated for {{@link #getOwnedType()} is
 	 * redirected to this method.<!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	protected final List<Type> getOwnedTypeGen() {
-
 		if (ownedType == null) {
 			ownedType = new EObjectContainmentWithInverseEList<Type>(
-					Type.class, this,
-					PivotModelPackageImpl.NAMESPACE__OWNED_TYPE,
-					PivotModelPackageImpl.TYPE__NAMESPACE);
+					Type.class, this, PivotModelPackage.NAMESPACE__OWNED_TYPE,
+					PivotModelPackage.TYPE__NAMESPACE);
 		}
 		return ownedType;
 	}
@@ -274,55 +254,47 @@ public class NamespaceImpl extends NamedElementImpl implements Namespace {
 	 * <!-- begin-user-doc -->The code generated for {
 	 * {@link #getNestedNamespace()} is redirected to this method.<!--
 	 * end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	protected final List<Namespace> getNestedNamespaceGen() {
-
 		if (nestedNamespace == null) {
 			nestedNamespace = new EObjectContainmentWithInverseEList<Namespace>(
 					Namespace.class, this,
-					PivotModelPackageImpl.NAMESPACE__NESTED_NAMESPACE,
-					PivotModelPackageImpl.NAMESPACE__NESTING_NAMESPACE);
+					PivotModelPackage.NAMESPACE__NESTED_NAMESPACE,
+					PivotModelPackage.NAMESPACE__NESTING_NAMESPACE);
 		}
 		return nestedNamespace;
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public Namespace getNestingNamespace() {
-
-		if (eContainerFeatureID() != PivotModelPackageImpl.NAMESPACE__NESTING_NAMESPACE)
+		if (eContainerFeatureID() != PivotModelPackage.NAMESPACE__NESTING_NAMESPACE)
 			return null;
 		return (Namespace) eContainer();
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public NotificationChain basicSetNestingNamespace(
 			Namespace newNestingNamespace, NotificationChain msgs) {
-
 		msgs = eBasicSetContainer((InternalEObject) newNestingNamespace,
-				PivotModelPackageImpl.NAMESPACE__NESTING_NAMESPACE, msgs);
+				PivotModelPackage.NAMESPACE__NESTING_NAMESPACE, msgs);
 		return msgs;
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public void setNestingNamespace(Namespace newNestingNamespace) {
-
 		if (newNestingNamespace != eInternalContainer()
-				|| (eContainerFeatureID() != PivotModelPackageImpl.NAMESPACE__NESTING_NAMESPACE && newNestingNamespace != null)) {
-			if (EcoreUtil.isAncestor(this, (EObject) newNestingNamespace))
+				|| (eContainerFeatureID() != PivotModelPackage.NAMESPACE__NESTING_NAMESPACE && newNestingNamespace != null)) {
+			if (EcoreUtil.isAncestor(this, newNestingNamespace))
 				throw new IllegalArgumentException(
 						"Recursive containment not allowed for " + toString()); //$NON-NLS-1$
 			NotificationChain msgs = null;
@@ -330,15 +302,14 @@ public class NamespaceImpl extends NamedElementImpl implements Namespace {
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newNestingNamespace != null)
 				msgs = ((InternalEObject) newNestingNamespace).eInverseAdd(
-						this,
-						PivotModelPackageImpl.NAMESPACE__NESTED_NAMESPACE,
+						this, PivotModelPackage.NAMESPACE__NESTED_NAMESPACE,
 						Namespace.class, msgs);
 			msgs = basicSetNestingNamespace(newNestingNamespace, msgs);
 			if (msgs != null)
 				msgs.dispatch();
 		} else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
-					PivotModelPackageImpl.NAMESPACE__NESTING_NAMESPACE,
+					PivotModelPackage.NAMESPACE__NESTING_NAMESPACE,
 					newNestingNamespace, newNestingNamespace));
 	}
 
@@ -615,12 +586,10 @@ public class NamespaceImpl extends NamedElementImpl implements Namespace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public NamedElement bindTypeParameter(List<TypeParameter> parameters,
 			List<? extends Type> types) {
-
 		// TODO: implement this method
 		// Ensure that you remove @generated or mark it @generated NOT
 		throw new UnsupportedOperationException();
@@ -634,7 +603,7 @@ public class NamespaceImpl extends NamedElementImpl implements Namespace {
 	@Override
 	public Namespace clone() {
 
-		return initialize(PivotModelFactory.INSTANCE.createNamespace());
+		return initialize(PivotModelFactory.eINSTANCE.createNamespace());
 	}
 
 	/**
@@ -668,28 +637,26 @@ public class NamespaceImpl extends NamedElementImpl implements Namespace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd,
 			int featureID, NotificationChain msgs) {
-
 		switch (featureID) {
-		case PivotModelPackageImpl.NAMESPACE__OWNED_TYPE_PARAMETER:
+		case PivotModelPackage.NAMESPACE__OWNED_TYPE_PARAMETER:
 			return ((InternalEList<InternalEObject>) (InternalEList<?>) getOwnedTypeParameter())
 					.basicAdd(otherEnd, msgs);
-		case PivotModelPackageImpl.NAMESPACE__OWNED_TYPE:
+		case PivotModelPackage.NAMESPACE__OWNED_TYPE:
 			return ((InternalEList<InternalEObject>) (InternalEList<?>) getOwnedType())
 					.basicAdd(otherEnd, msgs);
-		case PivotModelPackageImpl.NAMESPACE__OWNED_RULE:
+		case PivotModelPackage.NAMESPACE__OWNED_RULE:
 			return ((InternalEList<InternalEObject>) (InternalEList<?>) getOwnedRule())
 					.basicAdd(otherEnd, msgs);
-		case PivotModelPackageImpl.NAMESPACE__NESTED_NAMESPACE:
+		case PivotModelPackage.NAMESPACE__NESTED_NAMESPACE:
 			return ((InternalEList<InternalEObject>) (InternalEList<?>) getNestedNamespace())
 					.basicAdd(otherEnd, msgs);
-		case PivotModelPackageImpl.NAMESPACE__NESTING_NAMESPACE:
+		case PivotModelPackage.NAMESPACE__NESTING_NAMESPACE:
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			return basicSetNestingNamespace((Namespace) otherEnd, msgs);
@@ -699,27 +666,25 @@ public class NamespaceImpl extends NamedElementImpl implements Namespace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd,
 			int featureID, NotificationChain msgs) {
-
 		switch (featureID) {
-		case PivotModelPackageImpl.NAMESPACE__OWNED_TYPE_PARAMETER:
+		case PivotModelPackage.NAMESPACE__OWNED_TYPE_PARAMETER:
 			return ((InternalEList<?>) getOwnedTypeParameter()).basicRemove(
 					otherEnd, msgs);
-		case PivotModelPackageImpl.NAMESPACE__OWNED_TYPE:
+		case PivotModelPackage.NAMESPACE__OWNED_TYPE:
 			return ((InternalEList<?>) getOwnedType()).basicRemove(otherEnd,
 					msgs);
-		case PivotModelPackageImpl.NAMESPACE__OWNED_RULE:
+		case PivotModelPackage.NAMESPACE__OWNED_RULE:
 			return ((InternalEList<?>) getOwnedRule()).basicRemove(otherEnd,
 					msgs);
-		case PivotModelPackageImpl.NAMESPACE__NESTED_NAMESPACE:
+		case PivotModelPackage.NAMESPACE__NESTED_NAMESPACE:
 			return ((InternalEList<?>) getNestedNamespace()).basicRemove(
 					otherEnd, msgs);
-		case PivotModelPackageImpl.NAMESPACE__NESTING_NAMESPACE:
+		case PivotModelPackage.NAMESPACE__NESTING_NAMESPACE:
 			return basicSetNestingNamespace(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -727,17 +692,15 @@ public class NamespaceImpl extends NamedElementImpl implements Namespace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(
 			NotificationChain msgs) {
-
 		switch (eContainerFeatureID()) {
-		case PivotModelPackageImpl.NAMESPACE__NESTING_NAMESPACE:
+		case PivotModelPackage.NAMESPACE__NESTING_NAMESPACE:
 			return eInternalContainer().eInverseRemove(this,
-					PivotModelPackageImpl.NAMESPACE__NESTED_NAMESPACE,
+					PivotModelPackage.NAMESPACE__NESTED_NAMESPACE,
 					Namespace.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
@@ -745,22 +708,20 @@ public class NamespaceImpl extends NamedElementImpl implements Namespace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-
 		switch (featureID) {
-		case PivotModelPackageImpl.NAMESPACE__OWNED_TYPE_PARAMETER:
+		case PivotModelPackage.NAMESPACE__OWNED_TYPE_PARAMETER:
 			return getOwnedTypeParameter();
-		case PivotModelPackageImpl.NAMESPACE__OWNED_TYPE:
+		case PivotModelPackage.NAMESPACE__OWNED_TYPE:
 			return getOwnedType();
-		case PivotModelPackageImpl.NAMESPACE__OWNED_RULE:
+		case PivotModelPackage.NAMESPACE__OWNED_RULE:
 			return getOwnedRule();
-		case PivotModelPackageImpl.NAMESPACE__NESTED_NAMESPACE:
+		case PivotModelPackage.NAMESPACE__NESTED_NAMESPACE:
 			return getNestedNamespace();
-		case PivotModelPackageImpl.NAMESPACE__NESTING_NAMESPACE:
+		case PivotModelPackage.NAMESPACE__NESTING_NAMESPACE:
 			return getNestingNamespace();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -768,33 +729,31 @@ public class NamespaceImpl extends NamedElementImpl implements Namespace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
-
 		switch (featureID) {
-		case PivotModelPackageImpl.NAMESPACE__OWNED_TYPE_PARAMETER:
+		case PivotModelPackage.NAMESPACE__OWNED_TYPE_PARAMETER:
 			getOwnedTypeParameter().clear();
 			getOwnedTypeParameter().addAll(
 					(Collection<? extends TypeParameter>) newValue);
 			return;
-		case PivotModelPackageImpl.NAMESPACE__OWNED_TYPE:
+		case PivotModelPackage.NAMESPACE__OWNED_TYPE:
 			getOwnedType().clear();
 			getOwnedType().addAll((Collection<? extends Type>) newValue);
 			return;
-		case PivotModelPackageImpl.NAMESPACE__OWNED_RULE:
+		case PivotModelPackage.NAMESPACE__OWNED_RULE:
 			getOwnedRule().clear();
 			getOwnedRule().addAll((Collection<? extends Constraint>) newValue);
 			return;
-		case PivotModelPackageImpl.NAMESPACE__NESTED_NAMESPACE:
+		case PivotModelPackage.NAMESPACE__NESTED_NAMESPACE:
 			getNestedNamespace().clear();
 			getNestedNamespace().addAll(
 					(Collection<? extends Namespace>) newValue);
 			return;
-		case PivotModelPackageImpl.NAMESPACE__NESTING_NAMESPACE:
+		case PivotModelPackage.NAMESPACE__NESTING_NAMESPACE:
 			setNestingNamespace((Namespace) newValue);
 			return;
 		}
@@ -803,26 +762,24 @@ public class NamespaceImpl extends NamedElementImpl implements Namespace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public void eUnset(int featureID) {
-
 		switch (featureID) {
-		case PivotModelPackageImpl.NAMESPACE__OWNED_TYPE_PARAMETER:
+		case PivotModelPackage.NAMESPACE__OWNED_TYPE_PARAMETER:
 			getOwnedTypeParameter().clear();
 			return;
-		case PivotModelPackageImpl.NAMESPACE__OWNED_TYPE:
+		case PivotModelPackage.NAMESPACE__OWNED_TYPE:
 			getOwnedType().clear();
 			return;
-		case PivotModelPackageImpl.NAMESPACE__OWNED_RULE:
+		case PivotModelPackage.NAMESPACE__OWNED_RULE:
 			getOwnedRule().clear();
 			return;
-		case PivotModelPackageImpl.NAMESPACE__NESTED_NAMESPACE:
+		case PivotModelPackage.NAMESPACE__NESTED_NAMESPACE:
 			getNestedNamespace().clear();
 			return;
-		case PivotModelPackageImpl.NAMESPACE__NESTING_NAMESPACE:
+		case PivotModelPackage.NAMESPACE__NESTING_NAMESPACE:
 			setNestingNamespace((Namespace) null);
 			return;
 		}
@@ -831,22 +788,20 @@ public class NamespaceImpl extends NamedElementImpl implements Namespace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-
 		switch (featureID) {
-		case PivotModelPackageImpl.NAMESPACE__OWNED_TYPE_PARAMETER:
+		case PivotModelPackage.NAMESPACE__OWNED_TYPE_PARAMETER:
 			return ownedTypeParameter != null && !ownedTypeParameter.isEmpty();
-		case PivotModelPackageImpl.NAMESPACE__OWNED_TYPE:
+		case PivotModelPackage.NAMESPACE__OWNED_TYPE:
 			return ownedType != null && !ownedType.isEmpty();
-		case PivotModelPackageImpl.NAMESPACE__OWNED_RULE:
+		case PivotModelPackage.NAMESPACE__OWNED_RULE:
 			return ownedRule != null && !ownedRule.isEmpty();
-		case PivotModelPackageImpl.NAMESPACE__NESTED_NAMESPACE:
+		case PivotModelPackage.NAMESPACE__NESTED_NAMESPACE:
 			return nestedNamespace != null && !nestedNamespace.isEmpty();
-		case PivotModelPackageImpl.NAMESPACE__NESTING_NAMESPACE:
+		case PivotModelPackage.NAMESPACE__NESTING_NAMESPACE:
 			return getNestingNamespace() != null;
 		}
 		return super.eIsSet(featureID);
@@ -854,16 +809,14 @@ public class NamespaceImpl extends NamedElementImpl implements Namespace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
-
 		if (baseClass == GenericElement.class) {
 			switch (derivedFeatureID) {
-			case PivotModelPackageImpl.NAMESPACE__OWNED_TYPE_PARAMETER:
-				return PivotModelPackageImpl.GENERIC_ELEMENT__OWNED_TYPE_PARAMETER;
+			case PivotModelPackage.NAMESPACE__OWNED_TYPE_PARAMETER:
+				return PivotModelPackage.GENERIC_ELEMENT__OWNED_TYPE_PARAMETER;
 			default:
 				return -1;
 			}
@@ -873,16 +826,14 @@ public class NamespaceImpl extends NamedElementImpl implements Namespace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
-
 		if (baseClass == GenericElement.class) {
 			switch (baseFeatureID) {
-			case PivotModelPackageImpl.GENERIC_ELEMENT__OWNED_TYPE_PARAMETER:
-				return PivotModelPackageImpl.NAMESPACE__OWNED_TYPE_PARAMETER;
+			case PivotModelPackage.GENERIC_ELEMENT__OWNED_TYPE_PARAMETER:
+				return PivotModelPackage.NAMESPACE__OWNED_TYPE_PARAMETER;
 			default:
 				return -1;
 			}

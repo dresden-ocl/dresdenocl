@@ -51,6 +51,8 @@ package tudresden.ocl20.pivot.pivotmodel;
  * </ul>
  * </p>
  *
+ * @see tudresden.ocl20.pivot.pivotmodel.PivotModelPackage#getEnumerationLiteral()
+ * @model
  * @generated
  */
 public interface EnumerationLiteral extends NamedElement {
@@ -67,7 +69,9 @@ public interface EnumerationLiteral extends NamedElement {
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Enumeration</em>' container reference.
 	 * @see #setEnumeration(Enumeration)
+	 * @see tudresden.ocl20.pivot.pivotmodel.PivotModelPackage#getEnumerationLiteral_Enumeration()
 	 * @see tudresden.ocl20.pivot.pivotmodel.Enumeration#getOwnedLiteral
+	 * @model opposite="ownedLiteral"
 	 * @generated
 	 */
 	Enumeration getEnumeration();

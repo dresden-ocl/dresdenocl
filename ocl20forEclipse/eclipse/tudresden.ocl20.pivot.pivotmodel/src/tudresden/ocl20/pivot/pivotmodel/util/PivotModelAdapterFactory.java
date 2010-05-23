@@ -66,7 +66,7 @@ import tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl;
  * The <b>Adapter Factory</b> for the model.
  * It provides an adapter <code>createXXX</code> method for each class of the model.
  * <!-- end-user-doc -->
- * @see tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl
+ * @see tudresden.ocl20.pivot.pivotmodel.PivotModelPackage
  * @generated
  */
 public class PivotModelAdapterFactory extends AdapterFactoryImpl {
@@ -77,7 +77,7 @@ public class PivotModelAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected static PivotModelPackageImpl modelPackage;
+	protected static PivotModelPackage modelPackage;
 
 	/**
 	 * Creates an instance of the adapter factory.
@@ -87,7 +87,7 @@ public class PivotModelAdapterFactory extends AdapterFactoryImpl {
 	 */
 	public PivotModelAdapterFactory() {
 		if (modelPackage == null) {
-			modelPackage = PivotModelPackageImpl.eINSTANCE;
+			modelPackage = PivotModelPackage.eINSTANCE;
 		}
 	}
 

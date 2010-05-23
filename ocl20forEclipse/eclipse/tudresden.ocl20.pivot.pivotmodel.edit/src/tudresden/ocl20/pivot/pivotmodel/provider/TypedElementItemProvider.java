@@ -203,7 +203,7 @@ public class TypedElementItemProvider extends NamedElementItemProvider
 				// create a new generic type for type parameters and set its
 				// referenced type parameter
 				ParameterGenericType genericType =
-						PivotModelFactory.INSTANCE.createParameterGenericType();
+						PivotModelFactory.eINSTANCE.createParameterGenericType();
 				genericType.setTypeParameter(typeParameter);
 
 				setGenericType(typedElement, genericType);
@@ -219,13 +219,13 @@ public class TypedElementItemProvider extends NamedElementItemProvider
 					// create a new complex generic type and set the given type
 					// as a reference
 					ComplexGenericType genericType =
-							PivotModelFactory.INSTANCE.createComplexGenericType();
+							PivotModelFactory.eINSTANCE.createComplexGenericType();
 					genericType.setUnboundType(type);
 
 					// append type arguments for each type parameter
 					for (int i = 0, size = type.getOwnedTypeParameter().size(); i < size; i++) {
 						genericType.getTypeArgument().add(
-								PivotModelFactory.INSTANCE.createTypeArgument());
+								PivotModelFactory.eINSTANCE.createTypeArgument());
 					}
 
 					setGenericType(typedElement, genericType);

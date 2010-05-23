@@ -44,6 +44,8 @@ package tudresden.ocl20.pivot.pivotmodel;
  * </ul>
  * </p>
  *
+ * @see tudresden.ocl20.pivot.pivotmodel.PivotModelPackage#getParameterGenericType()
+ * @model
  * @generated
  */
 public interface ParameterGenericType extends GenericType {
@@ -58,6 +60,8 @@ public interface ParameterGenericType extends GenericType {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Type Parameter</em>' reference.
 	 * @see #setTypeParameter(TypeParameter)
+	 * @see tudresden.ocl20.pivot.pivotmodel.PivotModelPackage#getParameterGenericType_TypeParameter()
+	 * @model resolveProxies="false"
 	 * @generated
 	 */
 	TypeParameter getTypeParameter();

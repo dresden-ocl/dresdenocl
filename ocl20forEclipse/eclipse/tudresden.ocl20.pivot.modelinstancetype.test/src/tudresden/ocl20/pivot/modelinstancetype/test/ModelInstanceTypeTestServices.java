@@ -67,8 +67,7 @@ public final class ModelInstanceTypeTestServices {
 	 * The ID of the {@link Bundle} providing the {@link IModel} which shall be
 	 * used for testing.
 	 */
-	private static final String MODEL_BUNDLE_ID =
-			ModelInstanceTypeTestPlugin.PLUGIN_ID;
+	private static final String MODEL_BUNDLE_ID = ModelInstanceTypeTestPlugin.PLUGIN_ID;
 
 	/**
 	 * The path of the {@link IModel} which shall be used for testing.
@@ -82,8 +81,7 @@ public final class ModelInstanceTypeTestServices {
 	 * Contains the already loaded {@link IModelInstance}s identified by their
 	 * {@link File} represented as a {@link String}.
 	 */
-	private Map<String, IModelInstance> myCachedModelInstances =
-			new HashMap<String, IModelInstance>();
+	private Map<String, IModelInstance> myCachedModelInstances = new HashMap<String, IModelInstance>();
 
 	/**
 	 * The {@link IModel}s used during testing;
@@ -220,9 +218,8 @@ public final class ModelInstanceTypeTestServices {
 		if (this.myModel != null) {
 
 			try {
-				result =
-						Ocl2ForEclipseFacade.getEmptyModelInstance(this.myModel,
-								this.myModelInstanceTypeId);
+				result = Ocl2ForEclipseFacade.getEmptyModelInstance(
+						this.myModel, this.myModelInstanceTypeId);
 			}
 			// end try.
 
@@ -239,8 +236,7 @@ public final class ModelInstanceTypeTestServices {
 		else {
 			String msg;
 
-			msg =
-					ModelInstanceTypeTestSuiteMessages.ModelInstanceTypeTestSuite_Services_ModelWasNull;
+			msg = ModelInstanceTypeTestSuiteMessages.ModelInstanceTypeTestSuite_Services_ModelWasNull;
 
 			throw new RuntimeException(msg);
 		}
@@ -264,13 +260,13 @@ public final class ModelInstanceTypeTestServices {
 
 	/**
 	 * <p>
-	 * Returns all {@link IModelInstanceObject}s of a given {@link Type} that are
-	 * part of the current {@link IModelInstance} under test.
+	 * Returns all {@link IModelInstanceObject}s of a given {@link Type} that
+	 * are part of the current {@link IModelInstance} under test.
 	 * </p>
 	 * 
 	 * @param type
-	 *          The {@link Type} whose {@link IModelInstanceObject}s shall be
-	 *          returned.
+	 *            The {@link Type} whose {@link IModelInstanceObject}s shall be
+	 *            returned.
 	 * @return All {@link IModelInstanceObject}s of the given {@link Type}, if
 	 *         any.
 	 */
@@ -303,8 +299,8 @@ public final class ModelInstanceTypeTestServices {
 		// no else.
 
 		/* Get the bundle location for the model instance files. */
-		bundleDirectory =
-				Platform.getBundle(this.myModelInstanceBundleId).getLocation();
+		bundleDirectory = Platform.getBundle(this.myModelInstanceBundleId)
+				.getLocation();
 
 		/* Remove the 'reference:file:' from the beginning. */
 		bundleDirectory = bundleDirectory.substring(15);
@@ -312,18 +308,19 @@ public final class ModelInstanceTypeTestServices {
 		modelInstanceFile = new File(bundleDirectory + this.myModelInstancePath);
 
 		/* Check if the model instance has already been loaded. */
-		if (this.myCachedModelInstances.containsKey(modelInstanceFile.toString())) {
-			result = this.myCachedModelInstances.get(modelInstanceFile.toString());
+		if (this.myCachedModelInstances.containsKey(modelInstanceFile
+				.toString())) {
+			result = this.myCachedModelInstances.get(modelInstanceFile
+					.toString());
 		}
 
 		/* Else check if the given file does not exist. */
 		else if (!modelInstanceFile.exists()) {
 			String msg;
 
-			msg =
-					ModelInstanceTypeTestSuiteMessages.ModelInstanceTypeTestSuite_Services_ModelInstanceFileNotFound;
-			msg =
-					NLS.bind(msg, this.myModelInstancePath, this.myModelInstanceBundleId);
+			msg = ModelInstanceTypeTestSuiteMessages.ModelInstanceTypeTestSuite_Services_ModelInstanceFileNotFound;
+			msg = NLS.bind(msg, this.myModelInstancePath,
+					this.myModelInstanceBundleId);
 
 			throw new RuntimeException(msg);
 		}
@@ -335,19 +332,19 @@ public final class ModelInstanceTypeTestServices {
 				/* Check if the model has been loaded. */
 				if (this.myModel != null) {
 
-					result =
-							Ocl2ForEclipseFacade.getModelInstance(modelInstanceFile,
-									this.myModel, this.myModelInstanceTypeId);
+					result = Ocl2ForEclipseFacade.getModelInstance(
+							modelInstanceFile, this.myModel,
+							this.myModelInstanceTypeId);
 
 					/* Cache the result. */
-					this.myCachedModelInstances.put(modelInstanceFile.toString(), result);
+					this.myCachedModelInstances.put(modelInstanceFile
+							.toString(), result);
 				}
 
 				else {
 					String msg;
 
-					msg =
-							ModelInstanceTypeTestSuiteMessages.ModelInstanceTypeTestSuite_Services_ModelWasNull;
+					msg = ModelInstanceTypeTestSuiteMessages.ModelInstanceTypeTestSuite_Services_ModelWasNull;
 
 					throw new RuntimeException(msg);
 				}
@@ -373,8 +370,9 @@ public final class ModelInstanceTypeTestServices {
 	 */
 	public IModelInstanceProvider getModelInstanceProvider() {
 
-		return ModelBusPlugin.getModelInstanceTypeRegistry().getModelInstanceType(
-				this.myModelInstanceTypeId).getModelInstanceProvider();
+		return ModelBusPlugin.getModelInstanceTypeRegistry()
+				.getModelInstanceType(this.myModelInstanceTypeId)
+				.getModelInstanceProvider();
 	}
 
 	/**
@@ -383,7 +381,8 @@ public final class ModelInstanceTypeTestServices {
 	 * </p>
 	 * 
 	 * @param qualifiedName
-	 *          The qualified name of the {@link Type} which shall be returned.
+	 *            The qualified name of the {@link Type} which shall be
+	 *            returned.
 	 * @return The found {@link Type}.
 	 */
 	public Type getModelType(String qualifiedName) {
@@ -398,9 +397,8 @@ public final class ModelInstanceTypeTestServices {
 
 		/* Get the type to test. */
 		try {
-			result =
-					this.myModel
-							.findType(convertQualifiedNameToQualifiedNameList(qualifiedName));
+			result = this.myModel
+					.findType(convertQualifiedNameToQualifiedNameList(qualifiedName));
 		}
 
 		catch (ModelAccessException e) {
@@ -499,8 +497,8 @@ public final class ModelInstanceTypeTestServices {
 	 * </p>
 	 * 
 	 * @param bagPropertyCounter
-	 *          How many bag {@link Property}s the
-	 *          <code>CollectionTypeProviderClass</code> has.
+	 *            How many bag {@link Property}s the
+	 *            <code>CollectionTypeProviderClass</code> has.
 	 */
 	public void setBagPropertyCounter(int bagPropertyCounter) {
 
@@ -514,8 +512,8 @@ public final class ModelInstanceTypeTestServices {
 	 * </p>
 	 * 
 	 * @param booleanPropertyCounter
-	 *          The count how many boolean {@link Property}s the
-	 *          <code>PrimitiveTypeProviderClass</code> has.
+	 *            The count how many boolean {@link Property}s the
+	 *            <code>PrimitiveTypeProviderClass</code> has.
 	 */
 	public void setBooleanPropertyCounter(int booleanPropertyCounter) {
 
@@ -529,8 +527,8 @@ public final class ModelInstanceTypeTestServices {
 	 * </p>
 	 * 
 	 * @param orderedSetPropertyCounter
-	 *          How many OrderedSet {@link Property}s the
-	 *          <code>CollectionTypeProviderClass</code> has.
+	 *            How many OrderedSet {@link Property}s the
+	 *            <code>CollectionTypeProviderClass</code> has.
 	 */
 	public void setOrderedSetPropertyCounter(int orderedSetPropertyCounter) {
 
@@ -544,8 +542,8 @@ public final class ModelInstanceTypeTestServices {
 	 * </p>
 	 * 
 	 * @param integerPropertyCounter
-	 *          The count how many Integer {@link Property}s the
-	 *          <code>PrimitiveTypeProviderClass</code> has.
+	 *            The count how many Integer {@link Property}s the
+	 *            <code>PrimitiveTypeProviderClass</code> has.
 	 */
 	public void setIntegerPropertyCounter(int integerPropertyCounter) {
 
@@ -559,8 +557,8 @@ public final class ModelInstanceTypeTestServices {
 	 * </p>
 	 * 
 	 * @param realPropertyCounter
-	 *          The count how many Real {@link Property}s the
-	 *          <code>PrimitiveTypeProviderClass</code> has.
+	 *            The count how many Real {@link Property}s the
+	 *            <code>PrimitiveTypeProviderClass</code> has.
 	 */
 	public void setRealPropertyCounter(int realPropertyCounter) {
 
@@ -574,8 +572,8 @@ public final class ModelInstanceTypeTestServices {
 	 * </p>
 	 * 
 	 * @param sequencePropertyCounter
-	 *          How many Sequence {@link Property}s the
-	 *          <code>CollectionTypeProviderClass</code> has.
+	 *            How many Sequence {@link Property}s the
+	 *            <code>CollectionTypeProviderClass</code> has.
 	 */
 	public void setSequencePropertyCounter(int sequencePropertyCounter) {
 
@@ -589,8 +587,8 @@ public final class ModelInstanceTypeTestServices {
 	 * </p>
 	 * 
 	 * @param setPropertyCounter
-	 *          How many Set {@link Property}s the
-	 *          <code>CollectionTypeProviderClass</code> has.
+	 *            How many Set {@link Property}s the
+	 *            <code>CollectionTypeProviderClass</code> has.
 	 */
 	public void setSetPropertyCounter(int setPropertyCounter) {
 
@@ -604,8 +602,8 @@ public final class ModelInstanceTypeTestServices {
 	 * </p>
 	 * 
 	 * @param stringPropertyCounter
-	 *          The count how many String {@link Property}s the
-	 *          <code>PrimitiveTypeProviderClass</code> has.
+	 *            The count how many String {@link Property}s the
+	 *            <code>PrimitiveTypeProviderClass</code> has.
 	 */
 	public void setStringPropertyCounter(int stringPropertyCounter) {
 
@@ -619,8 +617,8 @@ public final class ModelInstanceTypeTestServices {
 	 * </p>
 	 * 
 	 * @param testModelBundleID
-	 *          The ID of the {@link Bundle} providing the {@link IModelInstance}
-	 *          which shall be tested.
+	 *            The ID of the {@link Bundle} providing the
+	 *            {@link IModelInstance} which shall be tested.
 	 */
 	public void setTestModelInstanceBundleID(String testModelBundleID) {
 
@@ -633,7 +631,7 @@ public final class ModelInstanceTypeTestServices {
 	 * </p>
 	 * 
 	 * @param testModelPath
-	 *          The path of the {@link IModelInstance} which shall be tested.
+	 *            The path of the {@link IModelInstance} which shall be tested.
 	 */
 	public void setTestModelInstancePath(String testModelPath) {
 
@@ -646,7 +644,7 @@ public final class ModelInstanceTypeTestServices {
 	 * </p>
 	 * 
 	 * @param metaModelID
-	 *          The ID of the {@link IMetamodel} which shall be tested.
+	 *            The ID of the {@link IMetamodel} which shall be tested.
 	 */
 	public void setModelInstanceTypeID(String modelInstanceTypeId) {
 
@@ -656,8 +654,8 @@ public final class ModelInstanceTypeTestServices {
 	/**
 	 * <p>
 	 * A helper method that probably adds some additional {@link Property}s to
-	 * {@link Type}s in the {@link IModel}. E.g., to provide more than one boolean
-	 * {@link Property} to test different adaptations.
+	 * {@link Type}s in the {@link IModel}. E.g., to provide more than one
+	 * boolean {@link Property} to test different adaptations.
 	 * </p>
 	 */
 	private void addPropertiesToTestModel() {
@@ -665,13 +663,11 @@ public final class ModelInstanceTypeTestServices {
 		Type primitiveTypeProviderClass;
 		Type collectionTypeProviderClass;
 
-		primitiveTypeProviderClass =
-				this
-						.getModelType(TestModelTypesNames.TYPE_NAME_PRIMITIVE_TYPE_PROVIDER_CLASS);
+		primitiveTypeProviderClass = this
+				.getModelType(TestModelTypesNames.TYPE_NAME_PRIMITIVE_TYPE_PROVIDER_CLASS);
 
-		collectionTypeProviderClass =
-				this
-						.getModelType(TestModelTypesNames.TYPE_NAME_COLLECTION_TYPE_PROVIDER_CLASS);
+		collectionTypeProviderClass = this
+				.getModelType(TestModelTypesNames.TYPE_NAME_COLLECTION_TYPE_PROVIDER_CLASS);
 
 		if (primitiveTypeProviderClass != null) {
 
@@ -679,7 +675,7 @@ public final class ModelInstanceTypeTestServices {
 			for (int index = 2; index <= getBooleanPropertyCounter(); index++) {
 				Property aProperty;
 
-				aProperty = PivotModelFactory.INSTANCE.createProperty();
+				aProperty = PivotModelFactory.eINSTANCE.createProperty();
 				aProperty.setName("booleanProperty" + index);
 				aProperty.setType(EssentialOclPlugin.getOclLibraryProvider()
 						.getOclLibrary().getOclBoolean());
@@ -691,7 +687,7 @@ public final class ModelInstanceTypeTestServices {
 			for (int index = 2; index <= getIntegerPropertyCounter(); index++) {
 				Property aProperty;
 
-				aProperty = PivotModelFactory.INSTANCE.createProperty();
+				aProperty = PivotModelFactory.eINSTANCE.createProperty();
 				aProperty.setName("integerProperty" + index);
 				aProperty.setType(EssentialOclPlugin.getOclLibraryProvider()
 						.getOclLibrary().getOclInteger());
@@ -703,7 +699,7 @@ public final class ModelInstanceTypeTestServices {
 			for (int index = 2; index <= getRealPropertyCounter(); index++) {
 				Property aProperty;
 
-				aProperty = PivotModelFactory.INSTANCE.createProperty();
+				aProperty = PivotModelFactory.eINSTANCE.createProperty();
 				aProperty.setName("realProperty" + index);
 				aProperty.setType(EssentialOclPlugin.getOclLibraryProvider()
 						.getOclLibrary().getOclReal());
@@ -715,7 +711,7 @@ public final class ModelInstanceTypeTestServices {
 			for (int index = 2; index <= getStringPropertyCounter(); index++) {
 				Property aProperty;
 
-				aProperty = PivotModelFactory.INSTANCE.createProperty();
+				aProperty = PivotModelFactory.eINSTANCE.createProperty();
 				aProperty.setName("stringProperty" + index);
 				aProperty.setType(EssentialOclPlugin.getOclLibraryProvider()
 						.getOclLibrary().getOclString());
@@ -731,12 +727,12 @@ public final class ModelInstanceTypeTestServices {
 			for (int index = 2; index <= getBagPropertyCounter(); index++) {
 				Property aProperty;
 
-				aProperty = PivotModelFactory.INSTANCE.createProperty();
+				aProperty = PivotModelFactory.eINSTANCE.createProperty();
 				aProperty.setName("bagProperty" + index);
 				aProperty.setType(EssentialOclPlugin.getOclLibraryProvider()
 						.getOclLibrary().getBagType(
-								EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
-										.getOclAny()));
+								EssentialOclPlugin.getOclLibraryProvider()
+										.getOclLibrary().getOclAny()));
 
 				collectionTypeProviderClass.addProperty(aProperty);
 			}
@@ -745,12 +741,12 @@ public final class ModelInstanceTypeTestServices {
 			for (int index = 2; index <= getOrderedSetPropertyCounter(); index++) {
 				Property aProperty;
 
-				aProperty = PivotModelFactory.INSTANCE.createProperty();
+				aProperty = PivotModelFactory.eINSTANCE.createProperty();
 				aProperty.setName("orderedSetProperty" + index);
 				aProperty.setType(EssentialOclPlugin.getOclLibraryProvider()
 						.getOclLibrary().getOrderedSetType(
-								EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
-										.getOclAny()));
+								EssentialOclPlugin.getOclLibraryProvider()
+										.getOclLibrary().getOclAny()));
 
 				collectionTypeProviderClass.addProperty(aProperty);
 			}
@@ -759,12 +755,12 @@ public final class ModelInstanceTypeTestServices {
 			for (int index = 2; index <= getSequencePropertyCounter(); index++) {
 				Property aProperty;
 
-				aProperty = PivotModelFactory.INSTANCE.createProperty();
+				aProperty = PivotModelFactory.eINSTANCE.createProperty();
 				aProperty.setName("sequenceProperty" + index);
 				aProperty.setType(EssentialOclPlugin.getOclLibraryProvider()
 						.getOclLibrary().getSequenceType(
-								EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
-										.getOclAny()));
+								EssentialOclPlugin.getOclLibraryProvider()
+										.getOclLibrary().getOclAny()));
 
 				collectionTypeProviderClass.addProperty(aProperty);
 			}
@@ -773,12 +769,12 @@ public final class ModelInstanceTypeTestServices {
 			for (int index = 2; index <= getBagPropertyCounter(); index++) {
 				Property aProperty;
 
-				aProperty = PivotModelFactory.INSTANCE.createProperty();
+				aProperty = PivotModelFactory.eINSTANCE.createProperty();
 				aProperty.setName("setProperty" + index);
 				aProperty.setType(EssentialOclPlugin.getOclLibraryProvider()
 						.getOclLibrary().getSetType(
-								EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
-										.getOclAny()));
+								EssentialOclPlugin.getOclLibraryProvider()
+										.getOclLibrary().getOclAny()));
 
 				collectionTypeProviderClass.addProperty(aProperty);
 			}
@@ -792,7 +788,7 @@ public final class ModelInstanceTypeTestServices {
 	 * qualified name in the {@link IModel}.
 	 * 
 	 * @param qualifiedName
-	 *          The qualifiedName name that shall be converted.
+	 *            The qualifiedName name that shall be converted.
 	 * @return The converted qualified name.
 	 */
 	private List<String> convertQualifiedNameToQualifiedNameList(
@@ -834,8 +830,7 @@ public final class ModelInstanceTypeTestServices {
 			if (!modelFile.exists()) {
 				String msg;
 
-				msg =
-						ModelInstanceTypeTestSuiteMessages.ModelInstanceTypeTestSuite_Services_ModelFileNotFound;
+				msg = ModelInstanceTypeTestSuiteMessages.ModelInstanceTypeTestSuite_Services_ModelFileNotFound;
 				msg = NLS.bind(msg, MODEL_PATH, bundleDirectory);
 
 				throw new RuntimeException(msg);
@@ -845,8 +840,8 @@ public final class ModelInstanceTypeTestServices {
 			else {
 
 				try {
-					this.myModel =
-							Ocl2ForEclipseFacade.getModel(modelFile, META_MODEL_ID);
+					this.myModel = Ocl2ForEclipseFacade.getModel(modelFile,
+							META_MODEL_ID);
 
 					this.addPropertiesToTestModel();
 				}

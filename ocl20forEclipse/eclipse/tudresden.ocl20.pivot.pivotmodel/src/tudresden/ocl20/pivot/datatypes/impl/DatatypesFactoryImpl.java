@@ -52,25 +52,15 @@ public class DatatypesFactoryImpl extends EFactoryImpl implements
 		DatatypesFactory {
 
 	/**
-	 * The singleton instance of the factory.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public static final DatatypesFactoryImpl eINSTANCE = init();
-
-	/**
 	 * Creates the default factory implementation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static DatatypesFactoryImpl init() {
-
+	public static DatatypesFactory init() {
 		try {
-			DatatypesFactoryImpl theDatatypesFactory =
-					(DatatypesFactoryImpl) EPackage.Registry.INSTANCE
-							.getEFactory("http://www.tu-dresden.de/ocl20/pivot/2007/datatypes"); //$NON-NLS-1$ 
+			DatatypesFactory theDatatypesFactory = (DatatypesFactory) EPackage.Registry.INSTANCE
+					.getEFactory("http://www.tu-dresden.de/ocl20/pivot/2007/datatypes"); //$NON-NLS-1$ 
 			if (theDatatypesFactory != null) {
 				return theDatatypesFactory;
 			}
@@ -87,7 +77,6 @@ public class DatatypesFactoryImpl extends EFactoryImpl implements
 	 * @generated
 	 */
 	public DatatypesFactoryImpl() {
-
 		super();
 	}
 
@@ -98,7 +87,6 @@ public class DatatypesFactoryImpl extends EFactoryImpl implements
 	 */
 	@Override
 	public EObject create(EClass eClass) {
-
 		switch (eClass.getClassifierID()) {
 		default:
 			throw new IllegalArgumentException(
@@ -113,17 +101,16 @@ public class DatatypesFactoryImpl extends EFactoryImpl implements
 	 */
 	@Override
 	public Object createFromString(EDataType eDataType, String initialValue) {
-
 		switch (eDataType.getClassifierID()) {
-		case DatatypesPackageImpl.BOOLEAN:
+		case DatatypesPackage.BOOLEAN:
 			return createBooleanFromString(eDataType, initialValue);
-		case DatatypesPackageImpl.INTEGER:
+		case DatatypesPackage.INTEGER:
 			return createIntegerFromString(eDataType, initialValue);
-		case DatatypesPackageImpl.REAL:
+		case DatatypesPackage.REAL:
 			return createRealFromString(eDataType, initialValue);
-		case DatatypesPackageImpl.STRING:
+		case DatatypesPackage.STRING:
 			return createStringFromString(eDataType, initialValue);
-		case DatatypesPackageImpl.UNLIMITED_NATURAL:
+		case DatatypesPackage.UNLIMITED_NATURAL:
 			return createUnlimitedNaturalFromString(eDataType, initialValue);
 		default:
 			throw new IllegalArgumentException(
@@ -138,17 +125,16 @@ public class DatatypesFactoryImpl extends EFactoryImpl implements
 	 */
 	@Override
 	public String convertToString(EDataType eDataType, Object instanceValue) {
-
 		switch (eDataType.getClassifierID()) {
-		case DatatypesPackageImpl.BOOLEAN:
+		case DatatypesPackage.BOOLEAN:
 			return convertBooleanToString(eDataType, instanceValue);
-		case DatatypesPackageImpl.INTEGER:
+		case DatatypesPackage.INTEGER:
 			return convertIntegerToString(eDataType, instanceValue);
-		case DatatypesPackageImpl.REAL:
+		case DatatypesPackage.REAL:
 			return convertRealToString(eDataType, instanceValue);
-		case DatatypesPackageImpl.STRING:
+		case DatatypesPackage.STRING:
 			return convertStringToString(eDataType, instanceValue);
-		case DatatypesPackageImpl.UNLIMITED_NATURAL:
+		case DatatypesPackage.UNLIMITED_NATURAL:
 			return convertUnlimitedNaturalToString(eDataType, instanceValue);
 		default:
 			throw new IllegalArgumentException(
@@ -185,9 +171,8 @@ public class DatatypesFactoryImpl extends EFactoryImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public DatatypesPackageImpl getDatatypesPackage() {
-
-		return (DatatypesPackageImpl) getEPackage();
+	public DatatypesPackage getDatatypesPackage() {
+		return (DatatypesPackage) getEPackage();
 	}
 
 	/**
@@ -208,7 +193,8 @@ public class DatatypesFactoryImpl extends EFactoryImpl implements
 	 * @generated NOT
 	 */
 	@SuppressWarnings("unused")
-	public String convertIntegerToString(EDataType eDataType, Object instanceValue) {
+	public String convertIntegerToString(EDataType eDataType,
+			Object instanceValue) {
 
 		return instanceValue == null ? null : instanceValue.toString();
 	}
@@ -231,7 +217,8 @@ public class DatatypesFactoryImpl extends EFactoryImpl implements
 	 * @generated NOT
 	 */
 	@SuppressWarnings("unused")
-	public String convertBooleanToString(EDataType eDataType, Object instanceValue) {
+	public String convertBooleanToString(EDataType eDataType,
+			Object instanceValue) {
 
 		return instanceValue == null ? null : instanceValue.toString();
 	}
@@ -242,7 +229,8 @@ public class DatatypesFactoryImpl extends EFactoryImpl implements
 	 * @generated NOT
 	 */
 	@SuppressWarnings("unused")
-	public String createStringFromString(EDataType eDataType, String initialValue) {
+	public String createStringFromString(EDataType eDataType,
+			String initialValue) {
 
 		return initialValue;
 	}
@@ -253,7 +241,8 @@ public class DatatypesFactoryImpl extends EFactoryImpl implements
 	 * @generated NOT
 	 */
 	@SuppressWarnings("unused")
-	public String convertStringToString(EDataType eDataType, Object instanceValue) {
+	public String convertStringToString(EDataType eDataType,
+			Object instanceValue) {
 
 		return (String) instanceValue;
 	}
@@ -287,9 +276,8 @@ public class DatatypesFactoryImpl extends EFactoryImpl implements
 	 * @generated
 	 */
 	@Deprecated
-	public static DatatypesPackageImpl getPackage() {
-
-		return DatatypesPackageImpl.eINSTANCE;
+	public static DatatypesPackage getPackage() {
+		return DatatypesPackage.eINSTANCE;
 	}
 
 } //DatatypesFactoryImpl

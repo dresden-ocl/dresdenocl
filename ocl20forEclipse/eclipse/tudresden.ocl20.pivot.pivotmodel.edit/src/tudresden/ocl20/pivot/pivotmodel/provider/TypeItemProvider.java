@@ -159,13 +159,13 @@ public class TypeItemProvider extends NamedElementItemProvider implements
 
 					// create a new complex generic type and set the given type as a reference
 					ComplexGenericType genericType =
-							PivotModelFactory.INSTANCE.createComplexGenericType();
+							PivotModelFactory.eINSTANCE.createComplexGenericType();
 					genericType.setUnboundType(type);
 
 					// append type arguments for each type parameter
 					for (int i = 0, size = type.getOwnedTypeParameter().size(); i < size; i++) {
 						genericType.getTypeArgument().add(
-								PivotModelFactory.INSTANCE.createTypeArgument());
+								PivotModelFactory.eINSTANCE.createTypeArgument());
 					}
 
 					// add the new generic type to the list of generic super types
@@ -382,13 +382,13 @@ public class TypeItemProvider extends NamedElementItemProvider implements
 
 				// create a new complex generic type and set the given type as a reference
 				ComplexGenericType genericType =
-						PivotModelFactory.INSTANCE.createComplexGenericType();
+						PivotModelFactory.eINSTANCE.createComplexGenericType();
 				genericType.setUnboundType(superType);
 
 				// append type arguments for each type parameter
 				for (int i = 0, size = superType.getOwnedTypeParameter().size(); i < size; i++) {
 					genericType.getTypeArgument().add(
-							PivotModelFactory.INSTANCE.createTypeArgument());
+							PivotModelFactory.eINSTANCE.createTypeArgument());
 				}
 
 				return new CreateChildCommand(domain, owner,
@@ -446,15 +446,15 @@ public class TypeItemProvider extends NamedElementItemProvider implements
 
 		newChildDescriptors.add(createChildParameter(
 				PivotModelPackageImpl.Literals.GENERIC_ELEMENT__OWNED_TYPE_PARAMETER,
-				PivotModelFactory.INSTANCE.createTypeParameter()));
+				PivotModelFactory.eINSTANCE.createTypeParameter()));
 
 		newChildDescriptors.add(createChildParameter(
 				PivotModelPackageImpl.Literals.TYPE__OWNED_OPERATION,
-				PivotModelFactory.INSTANCE.createOperation()));
+				PivotModelFactory.eINSTANCE.createOperation()));
 
 		newChildDescriptors.add(createChildParameter(
 				PivotModelPackageImpl.Literals.TYPE__OWNED_PROPERTY,
-				PivotModelFactory.INSTANCE.createProperty()));
+				PivotModelFactory.eINSTANCE.createProperty()));
 	}
 
 }

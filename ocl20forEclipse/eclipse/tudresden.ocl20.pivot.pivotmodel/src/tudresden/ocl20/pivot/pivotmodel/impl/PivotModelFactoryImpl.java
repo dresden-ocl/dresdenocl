@@ -67,20 +67,13 @@ public class PivotModelFactoryImpl extends EFactoryImpl implements
 		PivotModelFactory {
 
 	/**
-	 * The singleton instance of the factory.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @generated
-	 */
-	public static final PivotModelFactoryImpl eINSTANCE = init();
-
-	/**
 	 * Creates the default factory implementation.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static PivotModelFactoryImpl init() {
+	public static PivotModelFactory init() {
 		try {
-			PivotModelFactoryImpl thePivotModelFactory = (PivotModelFactoryImpl) EPackage.Registry.INSTANCE
+			PivotModelFactory thePivotModelFactory = (PivotModelFactory) EPackage.Registry.INSTANCE
 					.getEFactory("http://www.tu-dresden.de/ocl20/pivot/2007/pivotmodel"); //$NON-NLS-1$ 
 			if (thePivotModelFactory != null) {
 				return thePivotModelFactory;
@@ -107,36 +100,36 @@ public class PivotModelFactoryImpl extends EFactoryImpl implements
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-		case PivotModelPackageImpl.NAMESPACE:
-			return (EObject) createNamespace();
-		case PivotModelPackageImpl.TYPE:
-			return (EObject) createType();
-		case PivotModelPackageImpl.PRIMITIVE_TYPE:
-			return (EObject) createPrimitiveType();
-		case PivotModelPackageImpl.ENUMERATION:
-			return (EObject) createEnumeration();
-		case PivotModelPackageImpl.ENUMERATION_LITERAL:
-			return (EObject) createEnumerationLiteral();
-		case PivotModelPackageImpl.PROPERTY:
-			return (EObject) createProperty();
-		case PivotModelPackageImpl.OPERATION:
-			return (EObject) createOperation();
-		case PivotModelPackageImpl.PARAMETER:
-			return (EObject) createParameter();
-		case PivotModelPackageImpl.PARAMETER_GENERIC_TYPE:
-			return (EObject) createParameterGenericType();
-		case PivotModelPackageImpl.COMPLEX_GENERIC_TYPE:
-			return (EObject) createComplexGenericType();
-		case PivotModelPackageImpl.TYPE_PARAMETER:
-			return (EObject) createTypeParameter();
-		case PivotModelPackageImpl.TYPE_ARGUMENT:
-			return (EObject) createTypeArgument();
-		case PivotModelPackageImpl.CONSTRAINT:
-			return (EObject) createConstraint();
-		case PivotModelPackageImpl.EXPRESSION:
-			return (EObject) createExpression();
-		case PivotModelPackageImpl.NDIRECTIONAL_PROPERTY:
-			return (EObject) createNDirectionalProperty();
+		case PivotModelPackage.NAMESPACE:
+			return createNamespace();
+		case PivotModelPackage.TYPE:
+			return createType();
+		case PivotModelPackage.PRIMITIVE_TYPE:
+			return createPrimitiveType();
+		case PivotModelPackage.ENUMERATION:
+			return createEnumeration();
+		case PivotModelPackage.ENUMERATION_LITERAL:
+			return createEnumerationLiteral();
+		case PivotModelPackage.PROPERTY:
+			return createProperty();
+		case PivotModelPackage.OPERATION:
+			return createOperation();
+		case PivotModelPackage.PARAMETER:
+			return createParameter();
+		case PivotModelPackage.PARAMETER_GENERIC_TYPE:
+			return createParameterGenericType();
+		case PivotModelPackage.COMPLEX_GENERIC_TYPE:
+			return createComplexGenericType();
+		case PivotModelPackage.TYPE_PARAMETER:
+			return createTypeParameter();
+		case PivotModelPackage.TYPE_ARGUMENT:
+			return createTypeArgument();
+		case PivotModelPackage.CONSTRAINT:
+			return createConstraint();
+		case PivotModelPackage.EXPRESSION:
+			return createExpression();
+		case PivotModelPackage.NDIRECTIONAL_PROPERTY:
+			return createNDirectionalProperty();
 		default:
 			throw new IllegalArgumentException(
 					"The class '" + eClass.getName() + "' is not a valid classifier"); //$NON-NLS-1$ //$NON-NLS-2$
@@ -150,12 +143,12 @@ public class PivotModelFactoryImpl extends EFactoryImpl implements
 	@Override
 	public Object createFromString(EDataType eDataType, String initialValue) {
 		switch (eDataType.getClassifierID()) {
-		case PivotModelPackageImpl.PRIMITIVE_TYPE_KIND:
+		case PivotModelPackage.PRIMITIVE_TYPE_KIND:
 			return createPrimitiveTypeKindFromString(eDataType, initialValue);
-		case PivotModelPackageImpl.PARAMETER_DIRECTION_KIND:
+		case PivotModelPackage.PARAMETER_DIRECTION_KIND:
 			return createParameterDirectionKindFromString(eDataType,
 					initialValue);
-		case PivotModelPackageImpl.CONSTRAINT_KIND:
+		case PivotModelPackage.CONSTRAINT_KIND:
 			return createConstraintKindFromString(eDataType, initialValue);
 		default:
 			throw new IllegalArgumentException(
@@ -170,12 +163,12 @@ public class PivotModelFactoryImpl extends EFactoryImpl implements
 	@Override
 	public String convertToString(EDataType eDataType, Object instanceValue) {
 		switch (eDataType.getClassifierID()) {
-		case PivotModelPackageImpl.PRIMITIVE_TYPE_KIND:
+		case PivotModelPackage.PRIMITIVE_TYPE_KIND:
 			return convertPrimitiveTypeKindToString(eDataType, instanceValue);
-		case PivotModelPackageImpl.PARAMETER_DIRECTION_KIND:
+		case PivotModelPackage.PARAMETER_DIRECTION_KIND:
 			return convertParameterDirectionKindToString(eDataType,
 					instanceValue);
-		case PivotModelPackageImpl.CONSTRAINT_KIND:
+		case PivotModelPackage.CONSTRAINT_KIND:
 			return convertConstraintKindToString(eDataType, instanceValue);
 		default:
 			throw new IllegalArgumentException(
@@ -371,8 +364,8 @@ public class PivotModelFactoryImpl extends EFactoryImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public PivotModelPackageImpl getPivotModelPackage() {
-		return (PivotModelPackageImpl) getEPackage();
+	public PivotModelPackage getPivotModelPackage() {
+		return (PivotModelPackage) getEPackage();
 	}
 
 	/**
@@ -404,8 +397,8 @@ public class PivotModelFactoryImpl extends EFactoryImpl implements
 	 * @generated
 	 */
 	@Deprecated
-	public static PivotModelPackageImpl getPackage() {
-		return PivotModelPackageImpl.eINSTANCE;
+	public static PivotModelPackage getPackage() {
+		return PivotModelPackage.eINSTANCE;
 	}
 
 } // PivotModelFactoryImpl

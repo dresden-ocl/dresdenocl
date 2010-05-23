@@ -48,6 +48,7 @@ import tudresden.ocl20.pivot.pivotmodel.NamedElement;
 import tudresden.ocl20.pivot.pivotmodel.Operation;
 import tudresden.ocl20.pivot.pivotmodel.Parameter;
 import tudresden.ocl20.pivot.pivotmodel.ParameterDirectionKind;
+import tudresden.ocl20.pivot.pivotmodel.PivotModelPackage;
 import tudresden.ocl20.pivot.pivotmodel.PivotModelFactory;
 import tudresden.ocl20.pivot.pivotmodel.Property;
 import tudresden.ocl20.pivot.pivotmodel.Type;
@@ -138,8 +139,7 @@ public class ParameterImpl extends TypedElementImpl implements Parameter {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final ParameterDirectionKind KIND_EDEFAULT =
-			ParameterDirectionKind.IN;
+	protected static final ParameterDirectionKind KIND_EDEFAULT = ParameterDirectionKind.IN;
 
 	/**
 	 * The cached value of the '{@link #getKind() <em>Kind</em>}' attribute.
@@ -156,7 +156,6 @@ public class ParameterImpl extends TypedElementImpl implements Parameter {
 	 * @generated
 	 */
 	protected ParameterImpl() {
-
 		super();
 	}
 
@@ -166,8 +165,7 @@ public class ParameterImpl extends TypedElementImpl implements Parameter {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-
-		return PivotModelPackageImpl.Literals.PARAMETER;
+		return PivotModelPackage.Literals.PARAMETER;
 	}
 
 	/**
@@ -189,7 +187,8 @@ public class ParameterImpl extends TypedElementImpl implements Parameter {
 				Type operationType = operation.getType();
 
 				if ((operationType == null && newType != null)
-						|| (operationType != null && !operationType.equals(newType))) {
+						|| (operationType != null && !operationType
+								.equals(newType))) {
 					operation.setType(newType);
 				}
 			}
@@ -240,7 +239,6 @@ public class ParameterImpl extends TypedElementImpl implements Parameter {
 	 * @generated
 	 */
 	public boolean isOrdered() {
-
 		return ordered;
 	}
 
@@ -249,12 +247,11 @@ public class ParameterImpl extends TypedElementImpl implements Parameter {
 	 * @generated
 	 */
 	public void setOrdered(boolean newOrdered) {
-
 		boolean oldOrdered = ordered;
 		ordered = newOrdered;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
-					PivotModelPackageImpl.PARAMETER__ORDERED, oldOrdered, ordered));
+					PivotModelPackage.PARAMETER__ORDERED, oldOrdered, ordered));
 	}
 
 	/**
@@ -262,7 +259,6 @@ public class ParameterImpl extends TypedElementImpl implements Parameter {
 	 * @generated
 	 */
 	public boolean isUnique() {
-
 		return unique;
 	}
 
@@ -271,12 +267,11 @@ public class ParameterImpl extends TypedElementImpl implements Parameter {
 	 * @generated
 	 */
 	public void setUnique(boolean newUnique) {
-
 		boolean oldUnique = unique;
 		unique = newUnique;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
-					PivotModelPackageImpl.PARAMETER__UNIQUE, oldUnique, unique));
+					PivotModelPackage.PARAMETER__UNIQUE, oldUnique, unique));
 	}
 
 	/**
@@ -284,7 +279,6 @@ public class ParameterImpl extends TypedElementImpl implements Parameter {
 	 * @generated
 	 */
 	public boolean isMultiple() {
-
 		return multiple;
 	}
 
@@ -293,12 +287,12 @@ public class ParameterImpl extends TypedElementImpl implements Parameter {
 	 * @generated
 	 */
 	public void setMultiple(boolean newMultiple) {
-
 		boolean oldMultiple = multiple;
 		multiple = newMultiple;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
-					PivotModelPackageImpl.PARAMETER__MULTIPLE, oldMultiple, multiple));
+					PivotModelPackage.PARAMETER__MULTIPLE, oldMultiple,
+					multiple));
 	}
 
 	/**
@@ -306,7 +300,6 @@ public class ParameterImpl extends TypedElementImpl implements Parameter {
 	 * @generated
 	 */
 	public ParameterDirectionKind getKind() {
-
 		return kind;
 	}
 
@@ -315,12 +308,11 @@ public class ParameterImpl extends TypedElementImpl implements Parameter {
 	 * @generated
 	 */
 	public void setKind(ParameterDirectionKind newKind) {
-
 		ParameterDirectionKind oldKind = kind;
 		kind = newKind == null ? KIND_EDEFAULT : newKind;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
-					PivotModelPackageImpl.PARAMETER__KIND, oldKind, kind));
+					PivotModelPackage.PARAMETER__KIND, oldKind, kind));
 	}
 
 	/**
@@ -328,8 +320,7 @@ public class ParameterImpl extends TypedElementImpl implements Parameter {
 	 * @generated
 	 */
 	public Operation getOperation() {
-
-		if (eContainerFeatureID() != PivotModelPackageImpl.PARAMETER__OPERATION)
+		if (eContainerFeatureID() != PivotModelPackage.PARAMETER__OPERATION)
 			return null;
 		return (Operation) eContainer();
 	}
@@ -340,10 +331,8 @@ public class ParameterImpl extends TypedElementImpl implements Parameter {
 	 */
 	public NotificationChain basicSetOperation(Operation newOperation,
 			NotificationChain msgs) {
-
-		msgs =
-				eBasicSetContainer((InternalEObject) newOperation,
-						PivotModelPackageImpl.PARAMETER__OPERATION, msgs);
+		msgs = eBasicSetContainer((InternalEObject) newOperation,
+				PivotModelPackage.PARAMETER__OPERATION, msgs);
 		return msgs;
 	}
 
@@ -352,27 +341,24 @@ public class ParameterImpl extends TypedElementImpl implements Parameter {
 	 * @generated
 	 */
 	public void setOperation(Operation newOperation) {
-
 		if (newOperation != eInternalContainer()
-				|| (eContainerFeatureID() != PivotModelPackageImpl.PARAMETER__OPERATION && newOperation != null)) {
-			if (EcoreUtil.isAncestor(this, (EObject) newOperation))
+				|| (eContainerFeatureID() != PivotModelPackage.PARAMETER__OPERATION && newOperation != null)) {
+			if (EcoreUtil.isAncestor(this, newOperation))
 				throw new IllegalArgumentException(
 						"Recursive containment not allowed for " + toString()); //$NON-NLS-1$
 			NotificationChain msgs = null;
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newOperation != null)
-				msgs =
-						((InternalEObject) newOperation).eInverseAdd(this,
-								PivotModelPackageImpl.OPERATION__OWNED_PARAMETER,
-								Operation.class, msgs);
+				msgs = ((InternalEObject) newOperation).eInverseAdd(this,
+						PivotModelPackage.OPERATION__OWNED_PARAMETER,
+						Operation.class, msgs);
 			msgs = basicSetOperation(newOperation, msgs);
 			if (msgs != null)
 				msgs.dispatch();
-		}
-		else if (eNotificationRequired())
+		} else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
-					PivotModelPackageImpl.PARAMETER__OPERATION, newOperation,
+					PivotModelPackage.PARAMETER__OPERATION, newOperation,
 					newOperation));
 	}
 
@@ -386,7 +372,7 @@ public class ParameterImpl extends TypedElementImpl implements Parameter {
 		Property property;
 
 		// create a new empty property
-		property = PivotModelFactory.INSTANCE.createProperty();
+		property = PivotModelFactory.eINSTANCE.createProperty();
 
 		// set properties
 		property.setName(getName());
@@ -406,7 +392,7 @@ public class ParameterImpl extends TypedElementImpl implements Parameter {
 	@Override
 	public Parameter clone() {
 
-		return initialize(PivotModelFactory.INSTANCE.createParameter());
+		return initialize(PivotModelFactory.eINSTANCE.createParameter());
 	}
 
 	/**
@@ -431,11 +417,10 @@ public class ParameterImpl extends TypedElementImpl implements Parameter {
 	 * @generated
 	 */
 	@Override
-	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID,
-			NotificationChain msgs) {
-
+	public NotificationChain eInverseAdd(InternalEObject otherEnd,
+			int featureID, NotificationChain msgs) {
 		switch (featureID) {
-		case PivotModelPackageImpl.PARAMETER__OPERATION:
+		case PivotModelPackage.PARAMETER__OPERATION:
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			return basicSetOperation((Operation) otherEnd, msgs);
@@ -450,9 +435,8 @@ public class ParameterImpl extends TypedElementImpl implements Parameter {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd,
 			int featureID, NotificationChain msgs) {
-
 		switch (featureID) {
-		case PivotModelPackageImpl.PARAMETER__OPERATION:
+		case PivotModelPackage.PARAMETER__OPERATION:
 			return basicSetOperation(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -465,12 +449,11 @@ public class ParameterImpl extends TypedElementImpl implements Parameter {
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(
 			NotificationChain msgs) {
-
 		switch (eContainerFeatureID()) {
-		case PivotModelPackageImpl.PARAMETER__OPERATION:
+		case PivotModelPackage.PARAMETER__OPERATION:
 			return eInternalContainer().eInverseRemove(this,
-					PivotModelPackageImpl.OPERATION__OWNED_PARAMETER, Operation.class,
-					msgs);
+					PivotModelPackage.OPERATION__OWNED_PARAMETER,
+					Operation.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -481,17 +464,16 @@ public class ParameterImpl extends TypedElementImpl implements Parameter {
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-
 		switch (featureID) {
-		case PivotModelPackageImpl.PARAMETER__ORDERED:
+		case PivotModelPackage.PARAMETER__ORDERED:
 			return isOrdered();
-		case PivotModelPackageImpl.PARAMETER__UNIQUE:
+		case PivotModelPackage.PARAMETER__UNIQUE:
 			return isUnique();
-		case PivotModelPackageImpl.PARAMETER__MULTIPLE:
+		case PivotModelPackage.PARAMETER__MULTIPLE:
 			return isMultiple();
-		case PivotModelPackageImpl.PARAMETER__KIND:
+		case PivotModelPackage.PARAMETER__KIND:
 			return getKind();
-		case PivotModelPackageImpl.PARAMETER__OPERATION:
+		case PivotModelPackage.PARAMETER__OPERATION:
 			return getOperation();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -503,21 +485,20 @@ public class ParameterImpl extends TypedElementImpl implements Parameter {
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-
 		switch (featureID) {
-		case PivotModelPackageImpl.PARAMETER__ORDERED:
+		case PivotModelPackage.PARAMETER__ORDERED:
 			setOrdered((Boolean) newValue);
 			return;
-		case PivotModelPackageImpl.PARAMETER__UNIQUE:
+		case PivotModelPackage.PARAMETER__UNIQUE:
 			setUnique((Boolean) newValue);
 			return;
-		case PivotModelPackageImpl.PARAMETER__MULTIPLE:
+		case PivotModelPackage.PARAMETER__MULTIPLE:
 			setMultiple((Boolean) newValue);
 			return;
-		case PivotModelPackageImpl.PARAMETER__KIND:
+		case PivotModelPackage.PARAMETER__KIND:
 			setKind((ParameterDirectionKind) newValue);
 			return;
-		case PivotModelPackageImpl.PARAMETER__OPERATION:
+		case PivotModelPackage.PARAMETER__OPERATION:
 			setOperation((Operation) newValue);
 			return;
 		}
@@ -530,21 +511,20 @@ public class ParameterImpl extends TypedElementImpl implements Parameter {
 	 */
 	@Override
 	public void eUnset(int featureID) {
-
 		switch (featureID) {
-		case PivotModelPackageImpl.PARAMETER__ORDERED:
+		case PivotModelPackage.PARAMETER__ORDERED:
 			setOrdered(ORDERED_EDEFAULT);
 			return;
-		case PivotModelPackageImpl.PARAMETER__UNIQUE:
+		case PivotModelPackage.PARAMETER__UNIQUE:
 			setUnique(UNIQUE_EDEFAULT);
 			return;
-		case PivotModelPackageImpl.PARAMETER__MULTIPLE:
+		case PivotModelPackage.PARAMETER__MULTIPLE:
 			setMultiple(MULTIPLE_EDEFAULT);
 			return;
-		case PivotModelPackageImpl.PARAMETER__KIND:
+		case PivotModelPackage.PARAMETER__KIND:
 			setKind(KIND_EDEFAULT);
 			return;
-		case PivotModelPackageImpl.PARAMETER__OPERATION:
+		case PivotModelPackage.PARAMETER__OPERATION:
 			setOperation((Operation) null);
 			return;
 		}
@@ -557,17 +537,16 @@ public class ParameterImpl extends TypedElementImpl implements Parameter {
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-
 		switch (featureID) {
-		case PivotModelPackageImpl.PARAMETER__ORDERED:
+		case PivotModelPackage.PARAMETER__ORDERED:
 			return ordered != ORDERED_EDEFAULT;
-		case PivotModelPackageImpl.PARAMETER__UNIQUE:
+		case PivotModelPackage.PARAMETER__UNIQUE:
 			return unique != UNIQUE_EDEFAULT;
-		case PivotModelPackageImpl.PARAMETER__MULTIPLE:
+		case PivotModelPackage.PARAMETER__MULTIPLE:
 			return multiple != MULTIPLE_EDEFAULT;
-		case PivotModelPackageImpl.PARAMETER__KIND:
+		case PivotModelPackage.PARAMETER__KIND:
 			return kind != KIND_EDEFAULT;
-		case PivotModelPackageImpl.PARAMETER__OPERATION:
+		case PivotModelPackage.PARAMETER__OPERATION:
 			return getOperation() != null;
 		}
 		return super.eIsSet(featureID);
@@ -579,15 +558,14 @@ public class ParameterImpl extends TypedElementImpl implements Parameter {
 	 */
 	@Override
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
-
 		if (baseClass == MultiplicityElement.class) {
 			switch (derivedFeatureID) {
-			case PivotModelPackageImpl.PARAMETER__ORDERED:
-				return PivotModelPackageImpl.MULTIPLICITY_ELEMENT__ORDERED;
-			case PivotModelPackageImpl.PARAMETER__UNIQUE:
-				return PivotModelPackageImpl.MULTIPLICITY_ELEMENT__UNIQUE;
-			case PivotModelPackageImpl.PARAMETER__MULTIPLE:
-				return PivotModelPackageImpl.MULTIPLICITY_ELEMENT__MULTIPLE;
+			case PivotModelPackage.PARAMETER__ORDERED:
+				return PivotModelPackage.MULTIPLICITY_ELEMENT__ORDERED;
+			case PivotModelPackage.PARAMETER__UNIQUE:
+				return PivotModelPackage.MULTIPLICITY_ELEMENT__UNIQUE;
+			case PivotModelPackage.PARAMETER__MULTIPLE:
+				return PivotModelPackage.MULTIPLICITY_ELEMENT__MULTIPLE;
 			default:
 				return -1;
 			}
@@ -601,15 +579,14 @@ public class ParameterImpl extends TypedElementImpl implements Parameter {
 	 */
 	@Override
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
-
 		if (baseClass == MultiplicityElement.class) {
 			switch (baseFeatureID) {
-			case PivotModelPackageImpl.MULTIPLICITY_ELEMENT__ORDERED:
-				return PivotModelPackageImpl.PARAMETER__ORDERED;
-			case PivotModelPackageImpl.MULTIPLICITY_ELEMENT__UNIQUE:
-				return PivotModelPackageImpl.PARAMETER__UNIQUE;
-			case PivotModelPackageImpl.MULTIPLICITY_ELEMENT__MULTIPLE:
-				return PivotModelPackageImpl.PARAMETER__MULTIPLE;
+			case PivotModelPackage.MULTIPLICITY_ELEMENT__ORDERED:
+				return PivotModelPackage.PARAMETER__ORDERED;
+			case PivotModelPackage.MULTIPLICITY_ELEMENT__UNIQUE:
+				return PivotModelPackage.PARAMETER__UNIQUE;
+			case PivotModelPackage.MULTIPLICITY_ELEMENT__MULTIPLE:
+				return PivotModelPackage.PARAMETER__MULTIPLE;
 			default:
 				return -1;
 			}

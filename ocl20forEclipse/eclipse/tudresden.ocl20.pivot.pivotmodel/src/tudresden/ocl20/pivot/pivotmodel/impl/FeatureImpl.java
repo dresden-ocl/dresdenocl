@@ -40,6 +40,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import tudresden.ocl20.pivot.pivotmodel.Feature;
 import tudresden.ocl20.pivot.pivotmodel.MultiplicityElement;
+import tudresden.ocl20.pivot.pivotmodel.PivotModelPackage;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object '<em><b>Feature</b></em>'.
@@ -143,7 +144,6 @@ public abstract class FeatureImpl extends TypedElementImpl implements Feature {
 	 * @generated
 	 */
 	protected FeatureImpl() {
-
 		super();
 	}
 
@@ -153,8 +153,7 @@ public abstract class FeatureImpl extends TypedElementImpl implements Feature {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-
-		return PivotModelPackageImpl.Literals.FEATURE;
+		return PivotModelPackage.Literals.FEATURE;
 	}
 
 	/**
@@ -163,7 +162,6 @@ public abstract class FeatureImpl extends TypedElementImpl implements Feature {
 	 * @generated
 	 */
 	public boolean isOrdered() {
-
 		return ordered;
 	}
 
@@ -173,12 +171,11 @@ public abstract class FeatureImpl extends TypedElementImpl implements Feature {
 	 * @generated
 	 */
 	public void setOrdered(boolean newOrdered) {
-
 		boolean oldOrdered = ordered;
 		ordered = newOrdered;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
-					PivotModelPackageImpl.FEATURE__ORDERED, oldOrdered, ordered));
+					PivotModelPackage.FEATURE__ORDERED, oldOrdered, ordered));
 	}
 
 	/**
@@ -187,7 +184,6 @@ public abstract class FeatureImpl extends TypedElementImpl implements Feature {
 	 * @generated
 	 */
 	public boolean isUnique() {
-
 		return unique;
 	}
 
@@ -197,12 +193,11 @@ public abstract class FeatureImpl extends TypedElementImpl implements Feature {
 	 * @generated
 	 */
 	public void setUnique(boolean newUnique) {
-
 		boolean oldUnique = unique;
 		unique = newUnique;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
-					PivotModelPackageImpl.FEATURE__UNIQUE, oldUnique, unique));
+					PivotModelPackage.FEATURE__UNIQUE, oldUnique, unique));
 	}
 
 	/**
@@ -211,7 +206,6 @@ public abstract class FeatureImpl extends TypedElementImpl implements Feature {
 	 * @generated
 	 */
 	public boolean isMultiple() {
-
 		return multiple;
 	}
 
@@ -221,12 +215,11 @@ public abstract class FeatureImpl extends TypedElementImpl implements Feature {
 	 * @generated
 	 */
 	public void setMultiple(boolean newMultiple) {
-
 		boolean oldMultiple = multiple;
 		multiple = newMultiple;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
-					PivotModelPackageImpl.FEATURE__MULTIPLE, oldMultiple, multiple));
+					PivotModelPackage.FEATURE__MULTIPLE, oldMultiple, multiple));
 	}
 
 	/**
@@ -234,7 +227,6 @@ public abstract class FeatureImpl extends TypedElementImpl implements Feature {
 	 * @generated
 	 */
 	public boolean isStatic() {
-
 		return static_;
 	}
 
@@ -243,12 +235,11 @@ public abstract class FeatureImpl extends TypedElementImpl implements Feature {
 	 * @generated
 	 */
 	public void setStatic(boolean newStatic) {
-
 		boolean oldStatic = static_;
 		static_ = newStatic;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
-					PivotModelPackageImpl.FEATURE__STATIC, oldStatic, static_));
+					PivotModelPackage.FEATURE__STATIC, oldStatic, static_));
 	}
 
 	/**
@@ -268,15 +259,14 @@ public abstract class FeatureImpl extends TypedElementImpl implements Feature {
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-
 		switch (featureID) {
-		case PivotModelPackageImpl.FEATURE__ORDERED:
+		case PivotModelPackage.FEATURE__ORDERED:
 			return isOrdered();
-		case PivotModelPackageImpl.FEATURE__UNIQUE:
+		case PivotModelPackage.FEATURE__UNIQUE:
 			return isUnique();
-		case PivotModelPackageImpl.FEATURE__MULTIPLE:
+		case PivotModelPackage.FEATURE__MULTIPLE:
 			return isMultiple();
-		case PivotModelPackageImpl.FEATURE__STATIC:
+		case PivotModelPackage.FEATURE__STATIC:
 			return isStatic();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -288,18 +278,17 @@ public abstract class FeatureImpl extends TypedElementImpl implements Feature {
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-
 		switch (featureID) {
-		case PivotModelPackageImpl.FEATURE__ORDERED:
+		case PivotModelPackage.FEATURE__ORDERED:
 			setOrdered((Boolean) newValue);
 			return;
-		case PivotModelPackageImpl.FEATURE__UNIQUE:
+		case PivotModelPackage.FEATURE__UNIQUE:
 			setUnique((Boolean) newValue);
 			return;
-		case PivotModelPackageImpl.FEATURE__MULTIPLE:
+		case PivotModelPackage.FEATURE__MULTIPLE:
 			setMultiple((Boolean) newValue);
 			return;
-		case PivotModelPackageImpl.FEATURE__STATIC:
+		case PivotModelPackage.FEATURE__STATIC:
 			setStatic((Boolean) newValue);
 			return;
 		}
@@ -312,18 +301,17 @@ public abstract class FeatureImpl extends TypedElementImpl implements Feature {
 	 */
 	@Override
 	public void eUnset(int featureID) {
-
 		switch (featureID) {
-		case PivotModelPackageImpl.FEATURE__ORDERED:
+		case PivotModelPackage.FEATURE__ORDERED:
 			setOrdered(ORDERED_EDEFAULT);
 			return;
-		case PivotModelPackageImpl.FEATURE__UNIQUE:
+		case PivotModelPackage.FEATURE__UNIQUE:
 			setUnique(UNIQUE_EDEFAULT);
 			return;
-		case PivotModelPackageImpl.FEATURE__MULTIPLE:
+		case PivotModelPackage.FEATURE__MULTIPLE:
 			setMultiple(MULTIPLE_EDEFAULT);
 			return;
-		case PivotModelPackageImpl.FEATURE__STATIC:
+		case PivotModelPackage.FEATURE__STATIC:
 			setStatic(STATIC_EDEFAULT);
 			return;
 		}
@@ -336,15 +324,14 @@ public abstract class FeatureImpl extends TypedElementImpl implements Feature {
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-
 		switch (featureID) {
-		case PivotModelPackageImpl.FEATURE__ORDERED:
+		case PivotModelPackage.FEATURE__ORDERED:
 			return ordered != ORDERED_EDEFAULT;
-		case PivotModelPackageImpl.FEATURE__UNIQUE:
+		case PivotModelPackage.FEATURE__UNIQUE:
 			return unique != UNIQUE_EDEFAULT;
-		case PivotModelPackageImpl.FEATURE__MULTIPLE:
+		case PivotModelPackage.FEATURE__MULTIPLE:
 			return multiple != MULTIPLE_EDEFAULT;
-		case PivotModelPackageImpl.FEATURE__STATIC:
+		case PivotModelPackage.FEATURE__STATIC:
 			return static_ != STATIC_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
@@ -357,15 +344,14 @@ public abstract class FeatureImpl extends TypedElementImpl implements Feature {
 	 */
 	@Override
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
-
 		if (baseClass == MultiplicityElement.class) {
 			switch (derivedFeatureID) {
-			case PivotModelPackageImpl.FEATURE__ORDERED:
-				return PivotModelPackageImpl.MULTIPLICITY_ELEMENT__ORDERED;
-			case PivotModelPackageImpl.FEATURE__UNIQUE:
-				return PivotModelPackageImpl.MULTIPLICITY_ELEMENT__UNIQUE;
-			case PivotModelPackageImpl.FEATURE__MULTIPLE:
-				return PivotModelPackageImpl.MULTIPLICITY_ELEMENT__MULTIPLE;
+			case PivotModelPackage.FEATURE__ORDERED:
+				return PivotModelPackage.MULTIPLICITY_ELEMENT__ORDERED;
+			case PivotModelPackage.FEATURE__UNIQUE:
+				return PivotModelPackage.MULTIPLICITY_ELEMENT__UNIQUE;
+			case PivotModelPackage.FEATURE__MULTIPLE:
+				return PivotModelPackage.MULTIPLICITY_ELEMENT__MULTIPLE;
 			default:
 				return -1;
 			}
@@ -380,15 +366,14 @@ public abstract class FeatureImpl extends TypedElementImpl implements Feature {
 	 */
 	@Override
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
-
 		if (baseClass == MultiplicityElement.class) {
 			switch (baseFeatureID) {
-			case PivotModelPackageImpl.MULTIPLICITY_ELEMENT__ORDERED:
-				return PivotModelPackageImpl.FEATURE__ORDERED;
-			case PivotModelPackageImpl.MULTIPLICITY_ELEMENT__UNIQUE:
-				return PivotModelPackageImpl.FEATURE__UNIQUE;
-			case PivotModelPackageImpl.MULTIPLICITY_ELEMENT__MULTIPLE:
-				return PivotModelPackageImpl.FEATURE__MULTIPLE;
+			case PivotModelPackage.MULTIPLICITY_ELEMENT__ORDERED:
+				return PivotModelPackage.FEATURE__ORDERED;
+			case PivotModelPackage.MULTIPLICITY_ELEMENT__UNIQUE:
+				return PivotModelPackage.FEATURE__UNIQUE;
+			case PivotModelPackage.MULTIPLICITY_ELEMENT__MULTIPLE:
+				return PivotModelPackage.FEATURE__MULTIPLE;
 			default:
 				return -1;
 			}

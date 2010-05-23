@@ -51,6 +51,8 @@ package tudresden.ocl20.pivot.pivotmodel;
  * </ul>
  * </p>
  *
+ * @see tudresden.ocl20.pivot.pivotmodel.PivotModelPackage#getProperty()
+ * @model
  * @generated
  */
 public interface Property extends Feature, TypedElement, NamedElement,

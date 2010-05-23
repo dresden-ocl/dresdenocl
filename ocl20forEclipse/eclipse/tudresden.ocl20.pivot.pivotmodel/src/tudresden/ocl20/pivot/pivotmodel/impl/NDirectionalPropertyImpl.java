@@ -46,6 +46,7 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import tudresden.ocl20.pivot.pivotmodel.NDirectionalProperty;
+import tudresden.ocl20.pivot.pivotmodel.PivotModelPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -88,7 +89,7 @@ public class NDirectionalPropertyImpl extends PropertyImpl implements
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return PivotModelPackageImpl.Literals.NDIRECTIONAL_PROPERTY;
+		return PivotModelPackage.Literals.NDIRECTIONAL_PROPERTY;
 	}
 
 	/**
@@ -101,7 +102,7 @@ public class NDirectionalPropertyImpl extends PropertyImpl implements
 			inverseNDirectionalProperties = new EObjectContainmentEList<NDirectionalProperty>(
 					NDirectionalProperty.class,
 					this,
-					PivotModelPackageImpl.NDIRECTIONAL_PROPERTY__INVERSE_NDIRECTIONAL_PROPERTIES);
+					PivotModelPackage.NDIRECTIONAL_PROPERTY__INVERSE_NDIRECTIONAL_PROPERTIES);
 		}
 		return inverseNDirectionalProperties;
 	}
@@ -170,7 +171,7 @@ public class NDirectionalPropertyImpl extends PropertyImpl implements
 	public NotificationChain eInverseRemove(InternalEObject otherEnd,
 			int featureID, NotificationChain msgs) {
 		switch (featureID) {
-		case PivotModelPackageImpl.NDIRECTIONAL_PROPERTY__INVERSE_NDIRECTIONAL_PROPERTIES:
+		case PivotModelPackage.NDIRECTIONAL_PROPERTY__INVERSE_NDIRECTIONAL_PROPERTIES:
 			return ((InternalEList<?>) getInverseNDirectionalProperties())
 					.basicRemove(otherEnd, msgs);
 		}
@@ -185,7 +186,7 @@ public class NDirectionalPropertyImpl extends PropertyImpl implements
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-		case PivotModelPackageImpl.NDIRECTIONAL_PROPERTY__INVERSE_NDIRECTIONAL_PROPERTIES:
+		case PivotModelPackage.NDIRECTIONAL_PROPERTY__INVERSE_NDIRECTIONAL_PROPERTIES:
 			return getInverseNDirectionalProperties();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -200,7 +201,7 @@ public class NDirectionalPropertyImpl extends PropertyImpl implements
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-		case PivotModelPackageImpl.NDIRECTIONAL_PROPERTY__INVERSE_NDIRECTIONAL_PROPERTIES:
+		case PivotModelPackage.NDIRECTIONAL_PROPERTY__INVERSE_NDIRECTIONAL_PROPERTIES:
 			getInverseNDirectionalProperties().clear();
 			getInverseNDirectionalProperties().addAll(
 					(Collection<? extends NDirectionalProperty>) newValue);
@@ -217,7 +218,7 @@ public class NDirectionalPropertyImpl extends PropertyImpl implements
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-		case PivotModelPackageImpl.NDIRECTIONAL_PROPERTY__INVERSE_NDIRECTIONAL_PROPERTIES:
+		case PivotModelPackage.NDIRECTIONAL_PROPERTY__INVERSE_NDIRECTIONAL_PROPERTIES:
 			getInverseNDirectionalProperties().clear();
 			return;
 		}
@@ -232,7 +233,7 @@ public class NDirectionalPropertyImpl extends PropertyImpl implements
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-		case PivotModelPackageImpl.NDIRECTIONAL_PROPERTY__INVERSE_NDIRECTIONAL_PROPERTIES:
+		case PivotModelPackage.NDIRECTIONAL_PROPERTY__INVERSE_NDIRECTIONAL_PROPERTIES:
 			return inverseNDirectionalProperties != null
 					&& !inverseNDirectionalProperties.isEmpty();
 		}

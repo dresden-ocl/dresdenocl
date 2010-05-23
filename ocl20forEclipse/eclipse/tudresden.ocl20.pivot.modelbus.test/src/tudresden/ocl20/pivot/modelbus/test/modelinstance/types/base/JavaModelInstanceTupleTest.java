@@ -117,12 +117,12 @@ public class JavaModelInstanceTupleTest {
 		attributes = new ArrayList<Property>();
 
 		Property property;
-		property = PivotModelFactory.INSTANCE.createProperty();
+		property = PivotModelFactory.eINSTANCE.createProperty();
 		property.setName(attribute02Name.getString());
 		property.setType(typeInteger);
 		attributes.add(property);
 
-		property = PivotModelFactory.INSTANCE.createProperty();
+		property = PivotModelFactory.eINSTANCE.createProperty();
 		property.setName(attribute01Name.getString());
 		property.setType(typeString);
 		attributes.add(property);

@@ -182,7 +182,7 @@ public class EnumerationItemProvider extends TypeItemProvider implements
 
 		newChildDescriptors.add(createChildParameter(
 				PivotModelPackageImpl.Literals.ENUMERATION__OWNED_LITERAL,
-				PivotModelFactory.INSTANCE.createEnumerationLiteral()));
+				PivotModelFactory.eINSTANCE.createEnumerationLiteral()));
 	}
 
 }

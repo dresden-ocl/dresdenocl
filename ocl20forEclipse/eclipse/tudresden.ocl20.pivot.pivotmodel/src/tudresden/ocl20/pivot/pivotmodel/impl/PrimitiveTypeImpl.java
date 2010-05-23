@@ -38,6 +38,7 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
+import tudresden.ocl20.pivot.pivotmodel.PivotModelPackage;
 import tudresden.ocl20.pivot.pivotmodel.PivotModelFactory;
 import tudresden.ocl20.pivot.pivotmodel.PrimitiveType;
 import tudresden.ocl20.pivot.pivotmodel.PrimitiveTypeKind;
@@ -64,8 +65,7 @@ public class PrimitiveTypeImpl extends TypeImpl implements PrimitiveType {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final PrimitiveTypeKind KIND_EDEFAULT =
-			PrimitiveTypeKind.UNKNOWN;
+	protected static final PrimitiveTypeKind KIND_EDEFAULT = PrimitiveTypeKind.UNKNOWN;
 	/**
 	 * The cached value of the '{@link #getKind() <em>Kind</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -80,7 +80,6 @@ public class PrimitiveTypeImpl extends TypeImpl implements PrimitiveType {
 	 * @generated
 	 */
 	protected PrimitiveTypeImpl() {
-
 		super();
 	}
 
@@ -107,7 +106,7 @@ public class PrimitiveTypeImpl extends TypeImpl implements PrimitiveType {
 	public boolean conformsTo(Type other) {
 
 		boolean conformant = super.conformsTo(other);
-		
+
 		if (!conformant && other instanceof PrimitiveType) {
 			PrimitiveTypeKind thisKind, otherKind;
 
@@ -116,9 +115,8 @@ public class PrimitiveTypeImpl extends TypeImpl implements PrimitiveType {
 			thisKind = getKind();
 
 			if (thisKind == PrimitiveTypeKind.INTEGER) {
-				conformant =
-						otherKind == PrimitiveTypeKind.INTEGER
-								|| otherKind == PrimitiveTypeKind.REAL;
+				conformant = otherKind == PrimitiveTypeKind.INTEGER
+						|| otherKind == PrimitiveTypeKind.REAL;
 			}
 
 			else {
@@ -134,7 +132,6 @@ public class PrimitiveTypeImpl extends TypeImpl implements PrimitiveType {
 	 * @generated
 	 */
 	public PrimitiveTypeKind getKind() {
-
 		return kind;
 	}
 
@@ -143,12 +140,11 @@ public class PrimitiveTypeImpl extends TypeImpl implements PrimitiveType {
 	 * @generated
 	 */
 	public void setKind(PrimitiveTypeKind newKind) {
-
 		PrimitiveTypeKind oldKind = kind;
 		kind = newKind == null ? KIND_EDEFAULT : newKind;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
-					PivotModelPackageImpl.PRIMITIVE_TYPE__KIND, oldKind, kind));
+					PivotModelPackage.PRIMITIVE_TYPE__KIND, oldKind, kind));
 	}
 
 	/*
@@ -159,7 +155,7 @@ public class PrimitiveTypeImpl extends TypeImpl implements PrimitiveType {
 	@Override
 	public PrimitiveType clone() {
 
-		return initialize(PivotModelFactory.INSTANCE.createPrimitiveType());
+		return initialize(PivotModelFactory.eINSTANCE.createPrimitiveType());
 	}
 
 	/**
@@ -180,9 +176,8 @@ public class PrimitiveTypeImpl extends TypeImpl implements PrimitiveType {
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-
 		switch (featureID) {
-		case PivotModelPackageImpl.PRIMITIVE_TYPE__KIND:
+		case PivotModelPackage.PRIMITIVE_TYPE__KIND:
 			return getKind();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -194,9 +189,8 @@ public class PrimitiveTypeImpl extends TypeImpl implements PrimitiveType {
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-
 		switch (featureID) {
-		case PivotModelPackageImpl.PRIMITIVE_TYPE__KIND:
+		case PivotModelPackage.PRIMITIVE_TYPE__KIND:
 			setKind((PrimitiveTypeKind) newValue);
 			return;
 		}
@@ -209,9 +203,8 @@ public class PrimitiveTypeImpl extends TypeImpl implements PrimitiveType {
 	 */
 	@Override
 	public void eUnset(int featureID) {
-
 		switch (featureID) {
-		case PivotModelPackageImpl.PRIMITIVE_TYPE__KIND:
+		case PivotModelPackage.PRIMITIVE_TYPE__KIND:
 			setKind(KIND_EDEFAULT);
 			return;
 		}
@@ -224,9 +217,8 @@ public class PrimitiveTypeImpl extends TypeImpl implements PrimitiveType {
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-
 		switch (featureID) {
-		case PivotModelPackageImpl.PRIMITIVE_TYPE__KIND:
+		case PivotModelPackage.PRIMITIVE_TYPE__KIND:
 			return kind != KIND_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
@@ -238,8 +230,7 @@ public class PrimitiveTypeImpl extends TypeImpl implements PrimitiveType {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-
-		return PivotModelPackageImpl.Literals.PRIMITIVE_TYPE;
+		return PivotModelPackage.Literals.PRIMITIVE_TYPE;
 	}
 
 	/**
@@ -252,7 +243,8 @@ public class PrimitiveTypeImpl extends TypeImpl implements PrimitiveType {
 	public String toString() {
 
 		return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
-				.appendToString(super.toString()).append("kind", getKind()).toString(); //$NON-NLS-1$
+				.appendToString(super.toString())
+				.append("kind", getKind()).toString(); //$NON-NLS-1$
 	}
 
 } // PrimitiveTypeImpl

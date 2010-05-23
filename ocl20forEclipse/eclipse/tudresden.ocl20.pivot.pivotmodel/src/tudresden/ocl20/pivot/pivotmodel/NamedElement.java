@@ -32,7 +32,9 @@
  */
 package tudresden.ocl20.pivot.pivotmodel;
 
+import org.eclipse.emf.common.util.EList;
 import java.util.List;
+import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -60,9 +62,11 @@ import java.util.List;
  * </ul>
  * </p>
  *
+ * @see tudresden.ocl20.pivot.pivotmodel.PivotModelPackage#getNamedElement()
+ * @model abstract="true"
  * @generated
  */
-public interface NamedElement {
+public interface NamedElement extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Name</b></em>' attribute.
@@ -76,6 +80,8 @@ public interface NamedElement {
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Name</em>' attribute.
 	 * @see #setName(String)
+	 * @see tudresden.ocl20.pivot.pivotmodel.PivotModelPackage#getNamedElement_Name()
+	 * @model default="" dataType="tudresden.ocl20.pivot.datatypes.String" required="true" ordered="false"
 	 * @generated
 	 */
 	String getName();
@@ -105,6 +111,8 @@ public interface NamedElement {
 	 * </p>
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Qualified Name</em>' attribute.
+	 * @see tudresden.ocl20.pivot.pivotmodel.PivotModelPackage#getNamedElement_QualifiedName()
+	 * @model dataType="tudresden.ocl20.pivot.datatypes.String" transient="true" changeable="false" volatile="true" derived="true"
 	 * @generated
 	 */
 	String getQualifiedName();
@@ -131,6 +139,8 @@ public interface NamedElement {
 	 * </p>
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Owner</em>' reference.
+	 * @see tudresden.ocl20.pivot.pivotmodel.PivotModelPackage#getNamedElement_Owner()
+	 * @model resolveProxies="false" transient="true" changeable="false" volatile="true"
 	 * @generated
 	 */
 	NamedElement getOwner();
@@ -149,6 +159,7 @@ public interface NamedElement {
 	 * can be bound.
 	 * </p>
 	 * <!-- end-model-doc -->
+	 * @model required="true" exceptions="tudresden.ocl20.pivot.pivotmodel.CloneNotSupportedException"
 	 * @generated
 	 */
 	NamedElement clone() throws CloneNotSupportedException;
@@ -161,6 +172,7 @@ public interface NamedElement {
 	 * Returns the name of this {@link NamedElement} as a {@link java.util.List} of {@link java.lang.String}s containing the name of the name spaces and of this {@link NamedElement}.
 	 * </p>
 	 * <!-- end-model-doc -->
+	 * @model kind="operation" dataType="tudresden.ocl20.pivot.datatypes.String" unique="false"
 	 * @generated
 	 */
 	List<String> getQualifiedNameList();

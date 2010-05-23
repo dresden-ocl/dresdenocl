@@ -179,7 +179,7 @@ public class NDirectionalPropertyItemProvider extends PropertyItemProvider
 		newChildDescriptors
 				.add(createChildParameter(
 						PivotModelPackageImpl.Literals.NDIRECTIONAL_PROPERTY__INVERSE_NDIRECTIONAL_PROPERTIES,
-						PivotModelFactory.INSTANCE.createNDirectionalProperty()));
+						PivotModelFactory.eINSTANCE.createNDirectionalProperty()));
 	}
 
 }

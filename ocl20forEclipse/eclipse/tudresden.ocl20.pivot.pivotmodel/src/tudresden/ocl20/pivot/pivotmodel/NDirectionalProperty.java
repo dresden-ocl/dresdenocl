@@ -32,6 +32,7 @@
  */
 package tudresden.ocl20.pivot.pivotmodel;
 
+import org.eclipse.emf.common.util.EList;
 import java.util.List;
 
 /**
@@ -53,6 +54,8 @@ import java.util.List;
  * </ul>
  * </p>
  *
+ * @see tudresden.ocl20.pivot.pivotmodel.PivotModelPackage#getNDirectionalProperty()
+ * @model
  * @generated
  */
 public interface NDirectionalProperty extends Property {
@@ -66,6 +69,8 @@ public interface NDirectionalProperty extends Property {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Inverse NDirectional Properties</em>' containment reference list.
+	 * @see tudresden.ocl20.pivot.pivotmodel.PivotModelPackage#getNDirectionalProperty_InverseNDirectionalProperties()
+	 * @model containment="true"
 	 * @generated
 	 */
 	List<NDirectionalProperty> getInverseNDirectionalProperties();
@@ -78,6 +83,7 @@ public interface NDirectionalProperty extends Property {
 	 * The operation addAssociation added a <code> NDirectionalAssociation</code> to the inverse association list.
 	 * </p>
 	 * <!-- end-model-doc -->
+	 * @model
 	 * @generated
 	 */
 	void addAssociation(NDirectionalProperty bProperty);
@@ -90,6 +96,7 @@ public interface NDirectionalProperty extends Property {
 	 * The operation removeAssociation removed a <code>NDirectionalAssociation</code> from the inverse association list.
 	 * </p>
 	 * <!-- end-model-doc -->
+	 * @model propNameDataType="tudresden.ocl20.pivot.datatypes.String"
 	 * @generated
 	 */
 	NDirectionalProperty getAssociation(String propName);
@@ -102,6 +109,7 @@ public interface NDirectionalProperty extends Property {
 	 * The operation removeAssociation removed a <code>NDirectionalAssociation</code> from the inverse association list.
 	 * </p>
 	 * <!-- end-model-doc -->
+	 * @model
 	 * @generated
 	 */
 	void removeAssociation(NDirectionalProperty bProperty);
@@ -114,6 +122,7 @@ public interface NDirectionalProperty extends Property {
 	 * The operation isInverseAssociation ckecked a <code>NDirectionalAssociation</code> is in the inverse association list.
 	 * </p>
 	 * <!-- end-model-doc -->
+	 * @model dataType="tudresden.ocl20.pivot.datatypes.Boolean"
 	 * @generated
 	 */
 	boolean isInverseAssociation(NDirectionalProperty bProperty);
@@ -126,6 +135,7 @@ public interface NDirectionalProperty extends Property {
 	 * The operation addAssociation added a <code>NDirectionalAssociation</code> to the inverse association list.
 	 * </p>
 	 * <!-- end-model-doc -->
+	 * @model bPropertyMany="true"
 	 * @generated
 	 */
 	void addAssociations(List<NDirectionalProperty> bProperty);

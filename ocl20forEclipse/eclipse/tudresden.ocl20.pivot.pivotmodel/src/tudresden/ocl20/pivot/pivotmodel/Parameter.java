@@ -51,6 +51,8 @@ package tudresden.ocl20.pivot.pivotmodel;
  * </ul>
  * </p>
  *
+ * @see tudresden.ocl20.pivot.pivotmodel.PivotModelPackage#getParameter()
+ * @model
  * @generated
  */
 public interface Parameter extends TypedElement, NamedElement,
@@ -70,6 +72,8 @@ public interface Parameter extends TypedElement, NamedElement,
 	 * @return the value of the '<em>Kind</em>' attribute.
 	 * @see tudresden.ocl20.pivot.pivotmodel.ParameterDirectionKind
 	 * @see #setKind(ParameterDirectionKind)
+	 * @see tudresden.ocl20.pivot.pivotmodel.PivotModelPackage#getParameter_Kind()
+	 * @model default="in"
 	 * @generated
 	 */
 	ParameterDirectionKind getKind();
@@ -97,7 +101,9 @@ public interface Parameter extends TypedElement, NamedElement,
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Operation</em>' container reference.
 	 * @see #setOperation(Operation)
+	 * @see tudresden.ocl20.pivot.pivotmodel.PivotModelPackage#getParameter_Operation()
 	 * @see tudresden.ocl20.pivot.pivotmodel.Operation#getOwnedParameter
+	 * @model opposite="ownedParameter"
 	 * @generated
 	 */
 	Operation getOperation();
@@ -132,6 +138,7 @@ public interface Parameter extends TypedElement, NamedElement,
 	 * </pre>
 	 * </p>
 	 * <!-- end-model-doc -->
+	 * @model
 	 * @generated
 	 */
 	Property asProperty();

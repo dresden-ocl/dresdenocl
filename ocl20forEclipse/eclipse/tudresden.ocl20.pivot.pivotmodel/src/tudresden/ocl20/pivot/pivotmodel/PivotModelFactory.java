@@ -32,14 +32,17 @@
  */
 package tudresden.ocl20.pivot.pivotmodel;
 
+import org.eclipse.emf.ecore.EFactory;
+
 /**
  * <!-- begin-user-doc -->
  * The <b>Factory</b> for the model.
  * It provides a create method for each non-abstract class of the model.
  * <!-- end-user-doc -->
+ * @see tudresden.ocl20.pivot.pivotmodel.PivotModelPackage
  * @generated
  */
-public interface PivotModelFactory {
+public interface PivotModelFactory extends EFactory {
 
 	/**
 	 * The singleton instance of the factory.
@@ -47,7 +50,8 @@ public interface PivotModelFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	PivotModelFactory INSTANCE = tudresden.ocl20.pivot.pivotmodel.impl.PivotModelFactoryImpl.eINSTANCE;
+	PivotModelFactory eINSTANCE = tudresden.ocl20.pivot.pivotmodel.impl.PivotModelFactoryImpl
+			.init();
 
 	/**
 	 * Returns a new object of class '<em>Enumeration</em>'.
@@ -147,6 +151,15 @@ public interface PivotModelFactory {
 	 * @generated
 	 */
 	NDirectionalProperty createNDirectionalProperty();
+
+	/**
+	 * Returns the package supported by this factory.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the package supported by this factory.
+	 * @generated
+	 */
+	PivotModelPackage getPivotModelPackage();
 
 	/**
 	 * Returns a new object of class '<em>Type Parameter</em>'.

@@ -32,6 +32,8 @@
  */
 package tudresden.ocl20.pivot.pivotmodel;
 
+import org.eclipse.emf.ecore.EObject;
+
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Multiplicity Element</b></em>'.
@@ -55,9 +57,11 @@ package tudresden.ocl20.pivot.pivotmodel;
  * </ul>
  * </p>
  *
+ * @see tudresden.ocl20.pivot.pivotmodel.PivotModelPackage#getMultiplicityElement()
+ * @model interface="true" abstract="true"
  * @generated
  */
-public interface MultiplicityElement {
+public interface MultiplicityElement extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Ordered</b></em>' attribute.
@@ -73,6 +77,8 @@ public interface MultiplicityElement {
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Ordered</em>' attribute.
 	 * @see #setOrdered(boolean)
+	 * @see tudresden.ocl20.pivot.pivotmodel.PivotModelPackage#getMultiplicityElement_Ordered()
+	 * @model default="false" dataType="tudresden.ocl20.pivot.datatypes.Boolean"
 	 * @generated
 	 */
 	boolean isOrdered();
@@ -101,6 +107,8 @@ public interface MultiplicityElement {
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Unique</em>' attribute.
 	 * @see #setUnique(boolean)
+	 * @see tudresden.ocl20.pivot.pivotmodel.PivotModelPackage#getMultiplicityElement_Unique()
+	 * @model default="true" dataType="tudresden.ocl20.pivot.datatypes.Boolean"
 	 * @generated
 	 */
 	boolean isUnique();
@@ -132,6 +140,8 @@ public interface MultiplicityElement {
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Multiple</em>' attribute.
 	 * @see #setMultiple(boolean)
+	 * @see tudresden.ocl20.pivot.pivotmodel.PivotModelPackage#getMultiplicityElement_Multiple()
+	 * @model default="false" dataType="tudresden.ocl20.pivot.datatypes.Boolean"
 	 * @generated
 	 */
 	boolean isMultiple();

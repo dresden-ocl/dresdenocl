@@ -35,6 +35,7 @@ package tudresden.ocl20.pivot.pivotmodel;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import org.eclipse.emf.common.util.Enumerator;
 
 /**
  * <!-- begin-user-doc --> A representation of the literals of the enumeration '<em><b>Primitive Type Kind</b></em>',
@@ -47,7 +48,7 @@ import java.util.List;
  * @see tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl#getPrimitiveTypeKind()
  * @generated
  */
-public enum PrimitiveTypeKind implements InternalPrimitiveTypeKind {
+public enum PrimitiveTypeKind implements Enumerator {
 	/**
 	 * The '<em><b>Unknown</b></em>' literal object. <!-- begin-user-doc --> <!-- end-user-doc
 	 * -->
@@ -95,13 +96,13 @@ public enum PrimitiveTypeKind implements InternalPrimitiveTypeKind {
 	 * @ordered
 	 */
 	STRING(4, "String", "String"), /**
-																	 * The '<em><b>Void</b></em>' literal object.
-																	 * <!-- begin-user-doc -->
-																	 * <!-- end-user-doc -->
-																	 * @see #VOID_VALUE
-																	 * @generated
-																	 * @ordered
-																	 */
+									 * The '<em><b>Void</b></em>' literal object.
+									 * <!-- begin-user-doc -->
+									 * <!-- end-user-doc -->
+									 * @see #VOID_VALUE
+									 * @generated
+									 * @ordered
+									 */
 	VOID(5, "Void", "Void"); //$NON-NLS-1$ //$NON-NLS-2$
 
 	/**
@@ -113,6 +114,7 @@ public enum PrimitiveTypeKind implements InternalPrimitiveTypeKind {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @see #UNKNOWN
+	 * @model name="Unknown"
 	 * @generated
 	 * @ordered
 	 */
@@ -127,6 +129,7 @@ public enum PrimitiveTypeKind implements InternalPrimitiveTypeKind {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @see #INTEGER
+	 * @model name="Integer"
 	 * @generated
 	 * @ordered
 	 */
@@ -141,6 +144,7 @@ public enum PrimitiveTypeKind implements InternalPrimitiveTypeKind {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @see #REAL
+	 * @model name="Real"
 	 * @generated
 	 * @ordered
 	 */
@@ -155,6 +159,7 @@ public enum PrimitiveTypeKind implements InternalPrimitiveTypeKind {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @see #BOOLEAN
+	 * @model name="Boolean"
 	 * @generated
 	 * @ordered
 	 */
@@ -169,6 +174,7 @@ public enum PrimitiveTypeKind implements InternalPrimitiveTypeKind {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @see #STRING
+	 * @model name="String"
 	 * @generated
 	 * @ordered
 	 */
@@ -183,6 +189,7 @@ public enum PrimitiveTypeKind implements InternalPrimitiveTypeKind {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @see #VOID
+	 * @model name="Void"
 	 * @generated
 	 * @ordered
 	 */
@@ -194,8 +201,8 @@ public enum PrimitiveTypeKind implements InternalPrimitiveTypeKind {
 	 * --> <!-- end-user-doc -->
 	 * @generated
 	 */
-	private static final PrimitiveTypeKind[] VALUES_ARRAY =
-			new PrimitiveTypeKind[] { UNKNOWN, INTEGER, REAL, BOOLEAN, STRING, VOID, };
+	private static final PrimitiveTypeKind[] VALUES_ARRAY = new PrimitiveTypeKind[] {
+			UNKNOWN, INTEGER, REAL, BOOLEAN, STRING, VOID, };
 
 	/**
 	 * A public read-only list of all the '<em><b>Primitive Type Kind</b></em>' enumerators. <!--
@@ -203,8 +210,8 @@ public enum PrimitiveTypeKind implements InternalPrimitiveTypeKind {
 	 * 
 	 * @generated
 	 */
-	public static final List<PrimitiveTypeKind> VALUES =
-			Collections.unmodifiableList(Arrays.asList(VALUES_ARRAY));
+	public static final List<PrimitiveTypeKind> VALUES = Collections
+			.unmodifiableList(Arrays.asList(VALUES_ARRAY));
 
 	/**
 	 * Returns the '<em><b>Primitive Type Kind</b></em>' literal with the specified literal value.
@@ -212,7 +219,6 @@ public enum PrimitiveTypeKind implements InternalPrimitiveTypeKind {
 	 * @generated
 	 */
 	public static PrimitiveTypeKind get(String literal) {
-
 		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
 			PrimitiveTypeKind result = VALUES_ARRAY[i];
 			if (result.toString().equals(literal)) {
@@ -229,7 +235,6 @@ public enum PrimitiveTypeKind implements InternalPrimitiveTypeKind {
 	 * @generated
 	 */
 	public static PrimitiveTypeKind getByName(String name) {
-
 		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
 			PrimitiveTypeKind result = VALUES_ARRAY[i];
 			if (result.getName().equals(name)) {
@@ -245,7 +250,6 @@ public enum PrimitiveTypeKind implements InternalPrimitiveTypeKind {
 	 * @generated
 	 */
 	public static PrimitiveTypeKind get(int value) {
-
 		switch (value) {
 		case UNKNOWN_VALUE:
 			return UNKNOWN;
@@ -287,7 +291,6 @@ public enum PrimitiveTypeKind implements InternalPrimitiveTypeKind {
 	 * @generated
 	 */
 	private PrimitiveTypeKind(int value, String name, String literal) {
-
 		this.value = value;
 		this.name = name;
 		this.literal = literal;
@@ -298,7 +301,6 @@ public enum PrimitiveTypeKind implements InternalPrimitiveTypeKind {
 	 * @generated
 	 */
 	public int getValue() {
-
 		return value;
 	}
 
@@ -307,7 +309,6 @@ public enum PrimitiveTypeKind implements InternalPrimitiveTypeKind {
 	 * @generated
 	 */
 	public String getName() {
-
 		return name;
 	}
 
@@ -316,7 +317,6 @@ public enum PrimitiveTypeKind implements InternalPrimitiveTypeKind {
 	 * @generated
 	 */
 	public String getLiteral() {
-
 		return literal;
 	}
 
@@ -328,19 +328,7 @@ public enum PrimitiveTypeKind implements InternalPrimitiveTypeKind {
 	 */
 	@Override
 	public String toString() {
-
 		return literal;
 	}
 
 } // PrimitiveTypeKind
-
-/**
- * A private implementation interface used to hide the inheritance from Enumerator. <!--
- * begin-user-doc --> <!-- end-user-doc -->
- * 
- * @generated
- */
-interface InternalPrimitiveTypeKind extends
-		org.eclipse.emf.common.util.Enumerator {
-	// Empty
-}

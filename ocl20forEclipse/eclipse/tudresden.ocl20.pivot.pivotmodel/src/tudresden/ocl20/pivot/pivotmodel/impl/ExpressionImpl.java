@@ -46,6 +46,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 
 import tudresden.ocl20.pivot.pivotmodel.Constraint;
 import tudresden.ocl20.pivot.pivotmodel.Expression;
+import tudresden.ocl20.pivot.pivotmodel.PivotModelPackage;
 import org.apache.commons.lang.builder.ToStringStyle;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
@@ -110,7 +111,6 @@ public class ExpressionImpl extends EObjectImpl implements Expression {
 	 * @generated
 	 */
 	protected ExpressionImpl() {
-
 		super();
 	}
 
@@ -120,8 +120,7 @@ public class ExpressionImpl extends EObjectImpl implements Expression {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-
-		return PivotModelPackageImpl.Literals.EXPRESSION;
+		return PivotModelPackage.Literals.EXPRESSION;
 	}
 
 	/**
@@ -129,7 +128,6 @@ public class ExpressionImpl extends EObjectImpl implements Expression {
 	 * @generated
 	 */
 	public String getBody() {
-
 		return body;
 	}
 
@@ -138,12 +136,11 @@ public class ExpressionImpl extends EObjectImpl implements Expression {
 	 * @generated
 	 */
 	public void setBody(String newBody) {
-
 		String oldBody = body;
 		body = newBody;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
-					PivotModelPackageImpl.EXPRESSION__BODY, oldBody, body));
+					PivotModelPackage.EXPRESSION__BODY, oldBody, body));
 	}
 
 	/**
@@ -151,7 +148,6 @@ public class ExpressionImpl extends EObjectImpl implements Expression {
 	 * @generated
 	 */
 	public String getLanguage() {
-
 		return language;
 	}
 
@@ -160,12 +156,12 @@ public class ExpressionImpl extends EObjectImpl implements Expression {
 	 * @generated
 	 */
 	public void setLanguage(String newLanguage) {
-
 		String oldLanguage = language;
 		language = newLanguage;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
-					PivotModelPackageImpl.EXPRESSION__LANGUAGE, oldLanguage, language));
+					PivotModelPackage.EXPRESSION__LANGUAGE, oldLanguage,
+					language));
 	}
 
 	/**
@@ -173,8 +169,7 @@ public class ExpressionImpl extends EObjectImpl implements Expression {
 	 * @generated
 	 */
 	public Constraint getConstraint() {
-
-		if (eContainerFeatureID() != PivotModelPackageImpl.EXPRESSION__CONSTRAINT)
+		if (eContainerFeatureID() != PivotModelPackage.EXPRESSION__CONSTRAINT)
 			return null;
 		return (Constraint) eContainer();
 	}
@@ -185,10 +180,8 @@ public class ExpressionImpl extends EObjectImpl implements Expression {
 	 */
 	public NotificationChain basicSetConstraint(Constraint newConstraint,
 			NotificationChain msgs) {
-
-		msgs =
-				eBasicSetContainer((InternalEObject) newConstraint,
-						PivotModelPackageImpl.EXPRESSION__CONSTRAINT, msgs);
+		msgs = eBasicSetContainer((InternalEObject) newConstraint,
+				PivotModelPackage.EXPRESSION__CONSTRAINT, msgs);
 		return msgs;
 	}
 
@@ -197,27 +190,24 @@ public class ExpressionImpl extends EObjectImpl implements Expression {
 	 * @generated
 	 */
 	public void setConstraint(Constraint newConstraint) {
-
 		if (newConstraint != eInternalContainer()
-				|| (eContainerFeatureID() != PivotModelPackageImpl.EXPRESSION__CONSTRAINT && newConstraint != null)) {
-			if (EcoreUtil.isAncestor(this, (EObject) newConstraint))
+				|| (eContainerFeatureID() != PivotModelPackage.EXPRESSION__CONSTRAINT && newConstraint != null)) {
+			if (EcoreUtil.isAncestor(this, newConstraint))
 				throw new IllegalArgumentException(
 						"Recursive containment not allowed for " + toString()); //$NON-NLS-1$
 			NotificationChain msgs = null;
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newConstraint != null)
-				msgs =
-						((InternalEObject) newConstraint).eInverseAdd(this,
-								PivotModelPackageImpl.CONSTRAINT__SPECIFICATION,
-								Constraint.class, msgs);
+				msgs = ((InternalEObject) newConstraint).eInverseAdd(this,
+						PivotModelPackage.CONSTRAINT__SPECIFICATION,
+						Constraint.class, msgs);
 			msgs = basicSetConstraint(newConstraint, msgs);
 			if (msgs != null)
 				msgs.dispatch();
-		}
-		else if (eNotificationRequired())
+		} else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
-					PivotModelPackageImpl.EXPRESSION__CONSTRAINT, newConstraint,
+					PivotModelPackage.EXPRESSION__CONSTRAINT, newConstraint,
 					newConstraint));
 	}
 
@@ -226,11 +216,10 @@ public class ExpressionImpl extends EObjectImpl implements Expression {
 	 * @generated
 	 */
 	@Override
-	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID,
-			NotificationChain msgs) {
-
+	public NotificationChain eInverseAdd(InternalEObject otherEnd,
+			int featureID, NotificationChain msgs) {
 		switch (featureID) {
-		case PivotModelPackageImpl.EXPRESSION__CONSTRAINT:
+		case PivotModelPackage.EXPRESSION__CONSTRAINT:
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			return basicSetConstraint((Constraint) otherEnd, msgs);
@@ -245,9 +234,8 @@ public class ExpressionImpl extends EObjectImpl implements Expression {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd,
 			int featureID, NotificationChain msgs) {
-
 		switch (featureID) {
-		case PivotModelPackageImpl.EXPRESSION__CONSTRAINT:
+		case PivotModelPackage.EXPRESSION__CONSTRAINT:
 			return basicSetConstraint(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -260,12 +248,11 @@ public class ExpressionImpl extends EObjectImpl implements Expression {
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(
 			NotificationChain msgs) {
-
 		switch (eContainerFeatureID()) {
-		case PivotModelPackageImpl.EXPRESSION__CONSTRAINT:
+		case PivotModelPackage.EXPRESSION__CONSTRAINT:
 			return eInternalContainer().eInverseRemove(this,
-					PivotModelPackageImpl.CONSTRAINT__SPECIFICATION, Constraint.class,
-					msgs);
+					PivotModelPackage.CONSTRAINT__SPECIFICATION,
+					Constraint.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -276,13 +263,12 @@ public class ExpressionImpl extends EObjectImpl implements Expression {
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-
 		switch (featureID) {
-		case PivotModelPackageImpl.EXPRESSION__BODY:
+		case PivotModelPackage.EXPRESSION__BODY:
 			return getBody();
-		case PivotModelPackageImpl.EXPRESSION__LANGUAGE:
+		case PivotModelPackage.EXPRESSION__LANGUAGE:
 			return getLanguage();
-		case PivotModelPackageImpl.EXPRESSION__CONSTRAINT:
+		case PivotModelPackage.EXPRESSION__CONSTRAINT:
 			return getConstraint();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -294,15 +280,14 @@ public class ExpressionImpl extends EObjectImpl implements Expression {
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-
 		switch (featureID) {
-		case PivotModelPackageImpl.EXPRESSION__BODY:
+		case PivotModelPackage.EXPRESSION__BODY:
 			setBody((String) newValue);
 			return;
-		case PivotModelPackageImpl.EXPRESSION__LANGUAGE:
+		case PivotModelPackage.EXPRESSION__LANGUAGE:
 			setLanguage((String) newValue);
 			return;
-		case PivotModelPackageImpl.EXPRESSION__CONSTRAINT:
+		case PivotModelPackage.EXPRESSION__CONSTRAINT:
 			setConstraint((Constraint) newValue);
 			return;
 		}
@@ -315,15 +300,14 @@ public class ExpressionImpl extends EObjectImpl implements Expression {
 	 */
 	@Override
 	public void eUnset(int featureID) {
-
 		switch (featureID) {
-		case PivotModelPackageImpl.EXPRESSION__BODY:
+		case PivotModelPackage.EXPRESSION__BODY:
 			setBody(BODY_EDEFAULT);
 			return;
-		case PivotModelPackageImpl.EXPRESSION__LANGUAGE:
+		case PivotModelPackage.EXPRESSION__LANGUAGE:
 			setLanguage(LANGUAGE_EDEFAULT);
 			return;
-		case PivotModelPackageImpl.EXPRESSION__CONSTRAINT:
+		case PivotModelPackage.EXPRESSION__CONSTRAINT:
 			setConstraint((Constraint) null);
 			return;
 		}
@@ -336,14 +320,14 @@ public class ExpressionImpl extends EObjectImpl implements Expression {
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-
 		switch (featureID) {
-		case PivotModelPackageImpl.EXPRESSION__BODY:
-			return BODY_EDEFAULT == null ? body != null : !BODY_EDEFAULT.equals(body);
-		case PivotModelPackageImpl.EXPRESSION__LANGUAGE:
-			return LANGUAGE_EDEFAULT == null ? language != null : !LANGUAGE_EDEFAULT
-					.equals(language);
-		case PivotModelPackageImpl.EXPRESSION__CONSTRAINT:
+		case PivotModelPackage.EXPRESSION__BODY:
+			return BODY_EDEFAULT == null ? body != null : !BODY_EDEFAULT
+					.equals(body);
+		case PivotModelPackage.EXPRESSION__LANGUAGE:
+			return LANGUAGE_EDEFAULT == null ? language != null
+					: !LANGUAGE_EDEFAULT.equals(language);
+		case PivotModelPackage.EXPRESSION__CONSTRAINT:
 			return getConstraint() != null;
 		}
 		return super.eIsSet(featureID);

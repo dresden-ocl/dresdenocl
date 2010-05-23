@@ -40,6 +40,8 @@ import java.util.List;
  * <!-- end-user-doc -->
  *
  *
+ * @see tudresden.ocl20.pivot.pivotmodel.PivotModelPackage#getGenericType()
+ * @model abstract="true"
  * @generated
  */
 public interface GenericType extends NamedElement {
@@ -47,6 +49,7 @@ public interface GenericType extends NamedElement {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @model dataType="tudresden.ocl20.pivot.datatypes.Boolean" required="true" parametersDataType="tudresden.ocl20.pivot.datatypes.Sequence<tudresden.ocl20.pivot.pivotmodel.TypeParameter>" parametersRequired="true" parametersMany="false" typesDataType="tudresden.ocl20.pivot.datatypes.Sequence<? extends tudresden.ocl20.pivot.pivotmodel.Type>" typesRequired="true" typesMany="false"
 	 * @generated
 	 */
 	boolean bindGenericType(List<TypeParameter> parameters,
@@ -55,6 +58,7 @@ public interface GenericType extends NamedElement {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @model dataType="tudresden.ocl20.pivot.datatypes.Boolean" parametersDataType="tudresden.ocl20.pivot.datatypes.Sequence<tudresden.ocl20.pivot.pivotmodel.TypeParameter>" parametersRequired="true" parametersMany="false" typesDataType="tudresden.ocl20.pivot.datatypes.Sequence<? extends tudresden.ocl20.pivot.pivotmodel.Type>" typesRequired="true" typesMany="false"
 	 * @generated
 	 */
 	boolean bindGenericSuperType(List<TypeParameter> parameters,
@@ -69,6 +73,7 @@ public interface GenericType extends NamedElement {
 	 * <code>GenericType</code>, <code>false</code> otherwise.
 	 * </p>
 	 * <!-- end-model-doc -->
+	 * @model dataType="tudresden.ocl20.pivot.datatypes.Boolean"
 	 * @generated
 	 */
 	boolean isConformant(Type type);

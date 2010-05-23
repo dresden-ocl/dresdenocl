@@ -33,6 +33,7 @@
 package tudresden.ocl20.pivot.pivotmodel;
 
 import java.util.List;
+import org.eclipse.emf.common.util.EList;
 
 /**
  * <!-- begin-user-doc -->
@@ -46,6 +47,8 @@ import java.util.List;
  * </ul>
  * </p>
  *
+ * @see tudresden.ocl20.pivot.pivotmodel.PivotModelPackage#getGenericElement()
+ * @model interface="true" abstract="true"
  * @generated
  */
 public interface GenericElement extends NamedElement {
@@ -61,7 +64,9 @@ public interface GenericElement extends NamedElement {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Owned Type Parameter</em>' containment reference list.
+	 * @see tudresden.ocl20.pivot.pivotmodel.PivotModelPackage#getGenericElement_OwnedTypeParameter()
 	 * @see tudresden.ocl20.pivot.pivotmodel.TypeParameter#getGenericElement
+	 * @model opposite="genericElement" containment="true"
 	 * @generated
 	 */
 	List<TypeParameter> getOwnedTypeParameter();
@@ -77,6 +82,7 @@ public interface GenericElement extends NamedElement {
 	 * a reference to this <code>GenericElement</code>.
 	 * </p>
 	 * <!-- end-model-doc -->
+	 * @model
 	 * @generated
 	 */
 	GenericElement addTypeParameter(TypeParameter typeParameter);
@@ -105,6 +111,7 @@ public interface GenericElement extends NamedElement {
 	 * bindings have been defined via the arguments passed to this method.
 	 * </p>
 	 * <!-- end-model-doc -->
+	 * @model required="true" parametersDataType="tudresden.ocl20.pivot.datatypes.Sequence<tudresden.ocl20.pivot.pivotmodel.TypeParameter>" parametersRequired="true" parametersMany="false" typesDataType="tudresden.ocl20.pivot.datatypes.Sequence<? extends tudresden.ocl20.pivot.pivotmodel.Type>" typesRequired="true" typesMany="false"
 	 * @generated
 	 */
 	NamedElement bindTypeParameter(List<TypeParameter> parameters,

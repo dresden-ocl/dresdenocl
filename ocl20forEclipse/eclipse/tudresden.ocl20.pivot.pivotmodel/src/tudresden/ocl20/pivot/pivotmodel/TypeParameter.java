@@ -44,6 +44,8 @@ package tudresden.ocl20.pivot.pivotmodel;
  * </ul>
  * </p>
  *
+ * @see tudresden.ocl20.pivot.pivotmodel.PivotModelPackage#getTypeParameter()
+ * @model
  * @generated
  */
 public interface TypeParameter extends NamedElement {
@@ -59,7 +61,9 @@ public interface TypeParameter extends NamedElement {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Generic Element</em>' container reference.
 	 * @see #setGenericElement(GenericElement)
+	 * @see tudresden.ocl20.pivot.pivotmodel.PivotModelPackage#getTypeParameter_GenericElement()
 	 * @see tudresden.ocl20.pivot.pivotmodel.GenericElement#getOwnedTypeParameter
+	 * @model opposite="ownedTypeParameter" resolveProxies="false" transient="false"
 	 * @generated
 	 */
 	GenericElement getGenericElement();

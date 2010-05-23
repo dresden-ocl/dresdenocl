@@ -343,11 +343,11 @@ public class OperationItemProvider extends FeatureItemProvider implements
 
 		newChildDescriptors.add(createChildParameter(
 				PivotModelPackageImpl.Literals.GENERIC_ELEMENT__OWNED_TYPE_PARAMETER,
-				PivotModelFactory.INSTANCE.createTypeParameter()));
+				PivotModelFactory.eINSTANCE.createTypeParameter()));
 
 		newChildDescriptors.add(createChildParameter(
 				PivotModelPackageImpl.Literals.OPERATION__OWNED_PARAMETER,
-				PivotModelFactory.INSTANCE.createParameter()));
+				PivotModelFactory.eINSTANCE.createParameter()));
 	}
 
 }

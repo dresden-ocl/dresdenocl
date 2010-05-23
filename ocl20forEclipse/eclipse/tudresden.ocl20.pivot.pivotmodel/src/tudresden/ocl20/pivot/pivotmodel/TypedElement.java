@@ -52,6 +52,8 @@ package tudresden.ocl20.pivot.pivotmodel;
  * </ul>
  * </p>
  *
+ * @see tudresden.ocl20.pivot.pivotmodel.PivotModelPackage#getTypedElement()
+ * @model abstract="true"
  * @generated
  */
 public interface TypedElement extends NamedElement {
@@ -67,6 +69,8 @@ public interface TypedElement extends NamedElement {
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Type</em>' reference.
 	 * @see #setType(Type)
+	 * @see tudresden.ocl20.pivot.pivotmodel.PivotModelPackage#getTypedElement_Type()
+	 * @model resolveProxies="false" required="true"
 	 * @generated
 	 */
 	Type getType();
@@ -91,6 +95,8 @@ public interface TypedElement extends NamedElement {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Generic Type</em>' containment reference.
 	 * @see #setGenericType(GenericType)
+	 * @see tudresden.ocl20.pivot.pivotmodel.PivotModelPackage#getTypedElement_GenericType()
+	 * @model containment="true"
 	 * @generated
 	 */
 	GenericType getGenericType();
