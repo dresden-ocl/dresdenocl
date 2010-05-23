@@ -191,44 +191,59 @@ public class EcoreModel extends AbstractModel implements IModel {
 	 *            {@link Namespace} of this {@link EcoreModel}.
 	 */
 	private void addNamespacesForReferencedPackages(EPackage rootPackage) {
-	
+
 		/* Collect EPackages that have to be added. */
 		Set<EPackage> packagesToBeAdded;
 		packagesToBeAdded = new HashSet<EPackage>();
-	
+
 		/* Iterate through all references EObjects. */
 		for (EObject eObject : EcoreUtil.ExternalCrossReferencer.find(resource)
 				.keySet()) {
-	
+
 			/* Check the containing package of each EClassifier. */
 			if (eObject instanceof EClassifier) {
-	
+
 				EClassifier eClassifier;
 				eClassifier = (EClassifier) eObject;
-	
+
+				if (eClassifier.eIsProxy()) {
+					EcoreUtil.resolve(eClassifier, resource.getResourceSet());
+				}
+
 				EPackage containerPackage;
 				containerPackage = eClassifier.getEPackage();
-	
-				while (containerPackage.getESuperPackage() != null) {
-					containerPackage = containerPackage.getESuperPackage();
+
+				/* Can happen if proxy resolving fails. */
+				if (containerPackage != null) {
+					/* Check if the classifier belongs to a package. */
+					while (containerPackage.getESuperPackage() != null) {
+						containerPackage = containerPackage.getESuperPackage();
+					}
+
+					if (!rootPackage.getESubpackages().contains(
+							containerPackage)
+							&& !packagesToBeAdded.contains(containerPackage)
+							&& !containerPackage.equals(rootPackage)) {
+
+						/*
+						 * Do not add the package directly because a copy is
+						 * required. Afterwards, the containment check fails for
+						 * the copy and the package may be added multiple times.
+						 */
+						packagesToBeAdded.add(containerPackage);
+					}
+					// no else.
 				}
-	
-				if (!rootPackage.getESubpackages().contains(containerPackage)
-						&& !packagesToBeAdded.contains(containerPackage)
-						&& !containerPackage.equals(rootPackage)) {
-	
-					/*
-					 * Do not add the package directly because a copy is
-					 * required. Afterwards, the containment check fails for the
-					 * copy and the package may be added multiple times.
-					 */
-					packagesToBeAdded.add(containerPackage);
+
+				else {
+					LOGGER
+							.warn("Could not resolve proxy for referenced element "
+									+ eObject + ". Model may be incomplete.");
 				}
-				// no else.
 			}
 			// no else.
 		}
-	
+
 		/*
 		 * Now copy and add the packages. Copy is required to avoid
 		 * bi-directional references.
