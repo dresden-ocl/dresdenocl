@@ -311,7 +311,8 @@ public class EcoreModelInstanceFactory extends BasisJavaModelInstanceFactory
 							 * Only adapt if the found type conforms to the
 							 * given type.
 							 */
-							if (modelInstanceElementType.conformsTo(type)) {
+							/* TODO Improve solution for comparison to EObject. */
+							if (modelInstanceElementType.conformsTo(type) || type.getQualifiedName().equals("ecore::EObject")) {
 								result = this
 										.createEcoreModelInstanceObject(
 												eObject, type,
