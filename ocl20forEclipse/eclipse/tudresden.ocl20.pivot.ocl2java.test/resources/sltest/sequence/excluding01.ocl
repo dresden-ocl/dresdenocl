@@ -1,0 +1,7 @@
+package testpackage
+
+context Class1
+def: testSequenceExcluding01(source: Sequence(OclAny), arg01: OclAny): Sequence(OclAny) =
+source -> excluding(arg01)
+
+endpackage

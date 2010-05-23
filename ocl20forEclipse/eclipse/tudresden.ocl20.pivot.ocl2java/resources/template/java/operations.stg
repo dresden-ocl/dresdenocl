@@ -165,22 +165,22 @@ $sourceExp$.concat($argsExp$)
 
 // --- Collection.count(T) ---
 countOperationOnCollection(sourceExp, argsExp) ::= <<
-$collectionUtility()$($sourceExp$, $argsExp$)
+$collectionUtility()$.count($sourceExp$, $argsExp$)
 >>
 
 // --- Bag.count(T) ---
 countOperationOnBag(sourceExp, argsExp) ::= <<
-$bagUtility()$($sourceExp$, $argsExp$)
+$bagUtility()$.count($sourceExp$, $argsExp$)
 >>
 
 // --- Sequence.count(T) ---
 countOperationOnSequence(sourceExp, argsExp) ::= <<
-$sequenceUtility()$($sourceExp$, $argsExp$)
+$sequenceUtility()$.count($sourceExp$, $argsExp$)
 >>
 
 // --- Set.count(T) ---
 countOperationOnSet(sourceExp, argsExp) ::= <<
-$setUtility()$($sourceExp$, $argsExp$)
+$setUtility()$.count($sourceExp$, $argsExp$)
 >>
 
 // --- Div Operation ---
@@ -471,7 +471,7 @@ notEqualsOperation(sourceExp, argsExp) ::= <<
 
 // --- Collection.<>(Collection(T)) ---
 notEqualsOperationOnCollection(sourceExp, argsExp) ::= <<
-!$collectionUtility()$.equals($sourceExp$, $argsExp$)
+$collectionUtility()$.notEquals($sourceExp$, $argsExp$)
 >>
 
 // --- NotEquals Operation on Primitive Types ---
@@ -585,7 +585,7 @@ $orderedSetUtility()$.subOrderedSet($sourceExp$, $argsExp:{arg | $arg$}; separat
 >>
 
 // --- Sequence.subSequence() ---
-subSequenceOperation(sourceExp, argsExp) ::= <<
+subSequenceOperationOnSequence(sourceExp, argsExp) ::= <<
 $sequenceUtility()$.subSequence($sourceExp$, $argsExp:{arg | $arg$}; separator = ", "$)
 >>
 

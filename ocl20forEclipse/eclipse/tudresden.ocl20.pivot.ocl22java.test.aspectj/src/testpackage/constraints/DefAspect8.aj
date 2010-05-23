@@ -12,18 +12,18 @@ public privileged aspect DefAspect8 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testIntegerToString(Integer source)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testCollectionExcludesAll(java.util.Collection<Object> source, java.util.Collection<Object> arg01)}.</p>
      */
-    protected pointcut testIntegerToStringCaller(testpackage.Class1 aClass, Integer source):
-    	call(* testpackage.Class1.testIntegerToString(Integer))
-    	&& target(aClass) && args(source);
+    protected pointcut testCollectionExcludesAllCaller(testpackage.Class1 aClass, java.util.Collection<Object> source, java.util.Collection<Object> arg01):
+    	call(* testpackage.Class1.testCollectionExcludesAll(java.util.Collection<Object>, java.util.Collection<Object>))
+    	&& target(aClass) && args(source, arg01);
     
     /**
-     * <p>Defines the method testIntegerToString(Integer source) defined by the constraint
+     * <p>Defines the method testCollectionExcludesAll(java.util.Collection<Object> source, java.util.Collection<Object> arg01) defined by the constraint
      * <code>context Class1
-     *       def: testIntegerToString = source[].toString()</code></p>
+     *       def: testCollectionExcludesAll = source[].excludesAll( arg01[])</code></p>
      */
-    String around(testpackage.Class1 aClass, Integer source): testIntegerToStringCaller(aClass, source) {
-        return source.toString();
+    Boolean around(testpackage.Class1 aClass, java.util.Collection<Object> source, java.util.Collection<Object> arg01): testCollectionExcludesAllCaller(aClass, source, arg01) {
+        return tudresden.ocl20.pivot.ocl22java.types.util.OclCollections.excludesAll(source, arg01);
     }
 }

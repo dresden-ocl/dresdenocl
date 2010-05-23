@@ -1,0 +1,8 @@
+package testpackage
+
+context Class1
+def: testOrderedSetAsSet(source: OrderedSet(OclAny)): 
+  Set(OclAny) =
+source -> asSet()
+
+endpackage

@@ -79,9 +79,215 @@ public class TestOrderedSet extends AbstractDiffTest {
 	 * @throws Ocl22CodeException
 	 */
 	@Test
+	public void testAsBag01() throws IllegalArgumentException, ParseException,
+			ModelAccessException, Ocl22CodeException {
+
+		this.compareFragmentCodeGeneration("sltest/orderedset", "asBag01");
+	}
+
+	/**
+	 * <p>
+	 * Tests the instrumentation of the constraint.
+	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 * @throws ParseException
+	 * @throws IllegalArgumentException
+	 * @throws Ocl22CodeException
+	 */
+	@Test
+	public void testAsOrderedSet01() throws IllegalArgumentException,
+			ParseException, ModelAccessException, Ocl22CodeException {
+
+		this.compareFragmentCodeGeneration("sltest/orderedset",
+				"asOrderedSet01");
+	}
+
+	/**
+	 * <p>
+	 * Tests the instrumentation of the constraint.
+	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 * @throws ParseException
+	 * @throws IllegalArgumentException
+	 * @throws Ocl22CodeException
+	 */
+	@Test
+	public void testAsSequence01() throws IllegalArgumentException,
+			ParseException, ModelAccessException, Ocl22CodeException {
+
+		this.compareFragmentCodeGeneration("sltest/orderedset", "asSequence01");
+	}
+
+	/**
+	 * <p>
+	 * Tests the instrumentation of the constraint.
+	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 * @throws ParseException
+	 * @throws IllegalArgumentException
+	 * @throws Ocl22CodeException
+	 */
+	@Test
+	public void testAsSet01() throws IllegalArgumentException, ParseException,
+			ModelAccessException, Ocl22CodeException {
+
+		this.compareFragmentCodeGeneration("sltest/orderedset", "asSet01");
+	}
+
+	/**
+	 * <p>
+	 * Tests the instrumentation of the constraint.
+	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 * @throws ParseException
+	 * @throws IllegalArgumentException
+	 * @throws Ocl22CodeException
+	 */
+	@Test
+	public void testAppend01() throws IllegalArgumentException, ParseException,
+			ModelAccessException, Ocl22CodeException {
+
+		this.compareFragmentCodeGeneration("sltest/orderedset", "append01");
+	}
+
+	/**
+	 * <p>
+	 * Tests the instrumentation of the constraint.
+	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 * @throws ParseException
+	 * @throws IllegalArgumentException
+	 * @throws Ocl22CodeException
+	 */
+	@Test
+	public void testAt01() throws IllegalArgumentException, ParseException,
+			ModelAccessException, Ocl22CodeException {
+
+		this.compareFragmentCodeGeneration("sltest/orderedset", "at01");
+	}
+
+	/**
+	 * <p>
+	 * Tests the instrumentation of the constraint.
+	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 * @throws ParseException
+	 * @throws IllegalArgumentException
+	 * @throws Ocl22CodeException
+	 */
+	@Test
+	public void testFirst01() throws IllegalArgumentException, ParseException,
+			ModelAccessException, Ocl22CodeException {
+
+		this.compareFragmentCodeGeneration("sltest/orderedset", "first01");
+	}
+
+	/**
+	 * <p>
+	 * Tests the instrumentation of the constraint.
+	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 * @throws ParseException
+	 * @throws IllegalArgumentException
+	 * @throws Ocl22CodeException
+	 */
+	@Test
+	public void testInsertAt01() throws IllegalArgumentException,
+			ParseException, ModelAccessException, Ocl22CodeException {
+
+		this.compareFragmentCodeGeneration("sltest/orderedset", "insertAt01");
+	}
+
+	/**
+	 * <p>
+	 * Tests the instrumentation of the constraint.
+	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 * @throws ParseException
+	 * @throws IllegalArgumentException
+	 * @throws Ocl22CodeException
+	 */
+	@Test
+	public void testIndexOf01() throws IllegalArgumentException,
+			ParseException, ModelAccessException, Ocl22CodeException {
+
+		this.compareFragmentCodeGeneration("sltest/orderedset", "indexOf01");
+	}
+
+	/**
+	 * <p>
+	 * Tests the instrumentation of the constraint.
+	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 * @throws ParseException
+	 * @throws IllegalArgumentException
+	 * @throws Ocl22CodeException
+	 */
+	@Test
+	public void testLast01() throws IllegalArgumentException, ParseException,
+			ModelAccessException, Ocl22CodeException {
+
+		this.compareFragmentCodeGeneration("sltest/orderedset", "last01");
+	}
+
+	/**
+	 * <p>
+	 * Tests the instrumentation of the constraint.
+	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 * @throws ParseException
+	 * @throws IllegalArgumentException
+	 * @throws Ocl22CodeException
+	 */
+	@Test
+	public void testPrepend01() throws IllegalArgumentException,
+			ParseException, ModelAccessException, Ocl22CodeException {
+
+		this.compareFragmentCodeGeneration("sltest/orderedset", "prepend01");
+	}
+
+	/**
+	 * <p>
+	 * Tests the instrumentation of the constraint.
+	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 * @throws ParseException
+	 * @throws IllegalArgumentException
+	 * @throws Ocl22CodeException
+	 */
+	@Test
 	public void testReverse01() throws IllegalArgumentException,
 			ParseException, ModelAccessException, Ocl22CodeException {
 
 		this.compareFragmentCodeGeneration("sltest/orderedset", "reverse01");
+	}
+
+	/**
+	 * <p>
+	 * Tests the instrumentation of the constraint.
+	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 * @throws ParseException
+	 * @throws IllegalArgumentException
+	 * @throws Ocl22CodeException
+	 */
+	@Test
+	public void testSubOrderedSet01() throws IllegalArgumentException,
+			ParseException, ModelAccessException, Ocl22CodeException {
+
+		this.compareFragmentCodeGeneration("sltest/orderedset",
+				"subOrderedSet01");
 	}
 }

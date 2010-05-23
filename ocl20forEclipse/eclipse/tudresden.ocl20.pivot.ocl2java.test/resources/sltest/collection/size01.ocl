@@ -1,0 +1,8 @@
+package testpackage
+
+context Class1
+def: testCollectionSize(source: Collection(OclAny)): 
+  Integer =
+source -> size()
+
+endpackage

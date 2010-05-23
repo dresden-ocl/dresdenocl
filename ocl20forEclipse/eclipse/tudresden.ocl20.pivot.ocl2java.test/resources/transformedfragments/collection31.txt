@@ -15,4 +15,4 @@ collection2.add("c");
 collection2.add("c");
 collection2.add("d");
 
-collection1.subSequence(new Integer(3), new Integer(5)).equals(collection2)
+tudresden.ocl20.pivot.ocl22java.types.util.OclSequences.equals(tudresden.ocl20.pivot.ocl22java.types.util.OclSequences.subSequence(collection1, new Integer(3), new Integer(5)), collection2)

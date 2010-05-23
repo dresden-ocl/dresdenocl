@@ -48,4 +48,4 @@ for (tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyAccount anElement4 : 
     // no else
 }
 
-result1.equals(result4)
+tudresden.ocl20.pivot.ocl22java.types.util.OclBags.equals(result1, result4)

@@ -41,6 +41,69 @@ public class ExtendedClass1  {
      *A method signature implemented by an aspect.
      *</p>
      */
+    public Integer testCollectionCount(java.util.Collection<Object> source, Object arg01) {
+        return null;
+    }
+
+    /**
+     *<p>
+     *A method signature implemented by an aspect.
+     *</p>
+     */
+    public Boolean testCollectionEquals(java.util.Collection<Object> source, java.util.Collection<Object> arg01) {
+        return null;
+    }
+
+    /**
+     *<p>
+     *A method signature implemented by an aspect.
+     *</p>
+     */
+    public Boolean testCollectionExcludes(java.util.Collection<Object> source, Object arg01) {
+        return null;
+    }
+
+    /**
+     *<p>
+     *A method signature implemented by an aspect.
+     *</p>
+     */
+    public Boolean testCollectionExcludesAll(java.util.Collection<Object> source, java.util.Collection<Object> arg01) {
+        return null;
+    }
+
+    /**
+     *<p>
+     *A method signature implemented by an aspect.
+     *</p>
+     */
+    public Boolean testCollectionIncludes(java.util.Collection<Object> source, Object arg01) {
+        return null;
+    }
+
+    /**
+     *<p>
+     *A method signature implemented by an aspect.
+     *</p>
+     */
+    public Boolean testCollectionIncludesAll(java.util.Collection<Object> source, java.util.Collection<Object> arg01) {
+        return null;
+    }
+
+    /**
+     *<p>
+     *A method signature implemented by an aspect.
+     *</p>
+     */
+    public Boolean testCollectionIsEmpty(java.util.Collection<Object> source) {
+        return null;
+    }
+
+    /**
+     *<p>
+     *A method signature implemented by an aspect.
+     *</p>
+     */
     public Object testCollectionMin(java.util.Collection<Object> source) {
         return null;
     }
@@ -59,7 +122,34 @@ public class ExtendedClass1  {
      *A method signature implemented by an aspect.
      *</p>
      */
+    public Boolean testCollectionNotEmpty(java.util.Collection<Object> source) {
+        return null;
+    }
+
+    /**
+     *<p>
+     *A method signature implemented by an aspect.
+     *</p>
+     */
     public Integer testCollectionProduct(java.util.Collection<Object> source, java.util.Collection<Object> arg01) {
+        return null;
+    }
+
+    /**
+     *<p>
+     *A method signature implemented by an aspect.
+     *</p>
+     */
+    public Integer testCollectionSize(java.util.Collection<Object> source) {
+        return null;
+    }
+
+    /**
+     *<p>
+     *A method signature implemented by an aspect.
+     *</p>
+     */
+    public Integer testCollectionSum(java.util.Collection<Integer> source) {
         return null;
     }
 

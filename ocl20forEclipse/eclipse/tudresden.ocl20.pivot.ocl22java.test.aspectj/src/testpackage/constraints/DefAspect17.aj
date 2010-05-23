@@ -12,18 +12,18 @@ public privileged aspect DefAspect17 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testStringEqualsIgnoreCase(String source, String arg01)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testCollectionSum(java.util.Collection<Integer> source)}.</p>
      */
-    protected pointcut testStringEqualsIgnoreCaseCaller(testpackage.Class1 aClass, String source, String arg01):
-    	call(* testpackage.Class1.testStringEqualsIgnoreCase(String, String))
-    	&& target(aClass) && args(source, arg01);
+    protected pointcut testCollectionSumCaller(testpackage.Class1 aClass, java.util.Collection<Integer> source):
+    	call(* testpackage.Class1.testCollectionSum(java.util.Collection<Integer>))
+    	&& target(aClass) && args(source);
     
     /**
-     * <p>Defines the method testStringEqualsIgnoreCase(String source, String arg01) defined by the constraint
+     * <p>Defines the method testCollectionSum(java.util.Collection<Integer> source) defined by the constraint
      * <code>context Class1
-     *       def: testStringEqualsIgnoreCase = source[].equalsIgnoreCase( arg01[])</code></p>
+     *       def: testCollectionSum = source[].sum()</code></p>
      */
-    Boolean around(testpackage.Class1 aClass, String source, String arg01): testStringEqualsIgnoreCaseCaller(aClass, source, arg01) {
-        return source.equalsIgnoreCase(arg01);
+    Integer around(testpackage.Class1 aClass, java.util.Collection<Integer> source): testCollectionSumCaller(aClass, source) {
+        return tudresden.ocl20.pivot.ocl22java.types.util.OclCollections.sum(source);
     }
 }

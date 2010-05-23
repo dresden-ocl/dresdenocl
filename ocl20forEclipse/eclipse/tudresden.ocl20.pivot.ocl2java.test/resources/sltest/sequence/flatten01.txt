@@ -1,0 +1,1 @@
+(java.util.List<Object>) tudresden.ocl20.pivot.ocl22java.types.util.OclSequences.flatten(source)

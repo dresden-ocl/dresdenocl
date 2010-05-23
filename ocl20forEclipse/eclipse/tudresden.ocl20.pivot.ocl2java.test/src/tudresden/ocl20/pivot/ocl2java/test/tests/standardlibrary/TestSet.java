@@ -79,9 +79,248 @@ public class TestSet extends AbstractDiffTest {
 	 * @throws Ocl22CodeException
 	 */
 	@Test
+	public void testAsBag01() throws IllegalArgumentException, ParseException,
+			ModelAccessException, Ocl22CodeException {
+
+		this.compareFragmentCodeGeneration("sltest/set", "asBag01");
+	}
+
+	/**
+	 * <p>
+	 * Tests the instrumentation of the constraint.
+	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 * @throws ParseException
+	 * @throws IllegalArgumentException
+	 * @throws Ocl22CodeException
+	 */
+	@Test
+	public void testAsOrderedSet01() throws IllegalArgumentException,
+			ParseException, ModelAccessException, Ocl22CodeException {
+
+		this.compareFragmentCodeGeneration("sltest/set", "asOrderedSet01");
+	}
+
+	/**
+	 * <p>
+	 * Tests the instrumentation of the constraint.
+	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 * @throws ParseException
+	 * @throws IllegalArgumentException
+	 * @throws Ocl22CodeException
+	 */
+	@Test
+	public void testAsSequence01() throws IllegalArgumentException,
+			ParseException, ModelAccessException, Ocl22CodeException {
+
+		this.compareFragmentCodeGeneration("sltest/set", "asSequence01");
+	}
+
+	/**
+	 * <p>
+	 * Tests the instrumentation of the constraint.
+	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 * @throws ParseException
+	 * @throws IllegalArgumentException
+	 * @throws Ocl22CodeException
+	 */
+	@Test
+	public void testAsSet01() throws IllegalArgumentException, ParseException,
+			ModelAccessException, Ocl22CodeException {
+
+		this.compareFragmentCodeGeneration("sltest/set", "asSet01");
+	}
+
+	/**
+	 * <p>
+	 * Tests the instrumentation of the constraint.
+	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 * @throws ParseException
+	 * @throws IllegalArgumentException
+	 * @throws Ocl22CodeException
+	 */
+	@Test
+	public void testCount01() throws IllegalArgumentException, ParseException,
+			ModelAccessException, Ocl22CodeException {
+
+		this.compareFragmentCodeGeneration("sltest/set", "count01");
+	}
+
+	/**
+	 * <p>
+	 * Tests the instrumentation of the constraint.
+	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 * @throws ParseException
+	 * @throws IllegalArgumentException
+	 * @throws Ocl22CodeException
+	 */
+	@Test
+	public void testEquals01() throws IllegalArgumentException, ParseException,
+			ModelAccessException, Ocl22CodeException {
+
+		this.compareFragmentCodeGeneration("sltest/set", "equals01");
+	}
+
+	/**
+	 * <p>
+	 * Tests the instrumentation of the constraint.
+	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 * @throws ParseException
+	 * @throws IllegalArgumentException
+	 * @throws Ocl22CodeException
+	 */
+	@Test
+	public void testExcluding01() throws IllegalArgumentException,
+			ParseException, ModelAccessException, Ocl22CodeException {
+
+		this.compareFragmentCodeGeneration("sltest/set", "excluding01");
+	}
+
+	/**
+	 * <p>
+	 * Tests the instrumentation of the constraint.
+	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 * @throws ParseException
+	 * @throws IllegalArgumentException
+	 * @throws Ocl22CodeException
+	 */
+	@Test
 	public void testFlatten01() throws IllegalArgumentException,
 			ParseException, ModelAccessException, Ocl22CodeException {
 
 		this.compareFragmentCodeGeneration("sltest/set", "flatten01");
+	}
+
+	/**
+	 * <p>
+	 * Tests the instrumentation of the constraint.
+	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 * @throws ParseException
+	 * @throws IllegalArgumentException
+	 * @throws Ocl22CodeException
+	 */
+	@Test
+	public void testIncluding01() throws IllegalArgumentException,
+			ParseException, ModelAccessException, Ocl22CodeException {
+
+		this.compareFragmentCodeGeneration("sltest/set", "including01");
+	}
+
+	/**
+	 * <p>
+	 * Tests the instrumentation of the constraint.
+	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 * @throws ParseException
+	 * @throws IllegalArgumentException
+	 * @throws Ocl22CodeException
+	 */
+	@Test
+	public void testIntersection01() throws IllegalArgumentException,
+			ParseException, ModelAccessException, Ocl22CodeException {
+
+		this.compareFragmentCodeGeneration("sltest/set", "intersection01");
+	}
+
+	/**
+	 * <p>
+	 * Tests the instrumentation of the constraint.
+	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 * @throws ParseException
+	 * @throws IllegalArgumentException
+	 * @throws Ocl22CodeException
+	 */
+	@Test
+	public void testIntersection02() throws IllegalArgumentException,
+			ParseException, ModelAccessException, Ocl22CodeException {
+
+		this.compareFragmentCodeGeneration("sltest/set", "intersection02");
+	}
+
+	/**
+	 * <p>
+	 * Tests the instrumentation of the constraint.
+	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 * @throws ParseException
+	 * @throws IllegalArgumentException
+	 * @throws Ocl22CodeException
+	 */
+	@Test
+	public void testMinus01() throws IllegalArgumentException, ParseException,
+			ModelAccessException, Ocl22CodeException {
+
+		this.compareFragmentCodeGeneration("sltest/set", "minus01");
+	}
+
+	/**
+	 * <p>
+	 * Tests the instrumentation of the constraint.
+	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 * @throws ParseException
+	 * @throws IllegalArgumentException
+	 * @throws Ocl22CodeException
+	 */
+	@Test
+	public void testSymmetricDifference01() throws IllegalArgumentException,
+			ParseException, ModelAccessException, Ocl22CodeException {
+
+		this.compareFragmentCodeGeneration("sltest/set",
+				"symmetricDifference01");
+	}
+
+	/**
+	 * <p>
+	 * Tests the instrumentation of the constraint.
+	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 * @throws ParseException
+	 * @throws IllegalArgumentException
+	 * @throws Ocl22CodeException
+	 */
+	@Test
+	public void testUnion01() throws IllegalArgumentException, ParseException,
+			ModelAccessException, Ocl22CodeException {
+
+		this.compareFragmentCodeGeneration("sltest/set", "union01");
+	}
+
+	/**
+	 * <p>
+	 * Tests the instrumentation of the constraint.
+	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 * @throws ParseException
+	 * @throws IllegalArgumentException
+	 * @throws Ocl22CodeException
+	 */
+	@Test
+	public void testUnion02() throws IllegalArgumentException, ParseException,
+			ModelAccessException, Ocl22CodeException {
+
+		this.compareFragmentCodeGeneration("sltest/set", "union02");
 	}
 }

@@ -12,18 +12,18 @@ public privileged aspect DefAspect14 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testSequenceReverse(java.util.List<Object> source)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testCollectionNotEmpty(java.util.Collection<Object> source)}.</p>
      */
-    protected pointcut testSequenceReverseCaller(testpackage.Class1 aClass, java.util.List<Object> source):
-    	call(* testpackage.Class1.testSequenceReverse(java.util.List<Object>))
+    protected pointcut testCollectionNotEmptyCaller(testpackage.Class1 aClass, java.util.Collection<Object> source):
+    	call(* testpackage.Class1.testCollectionNotEmpty(java.util.Collection<Object>))
     	&& target(aClass) && args(source);
     
     /**
-     * <p>Defines the method testSequenceReverse(java.util.List<Object> source) defined by the constraint
+     * <p>Defines the method testCollectionNotEmpty(java.util.Collection<Object> source) defined by the constraint
      * <code>context Class1
-     *       def: testSequenceReverse = source[].reverse()</code></p>
+     *       def: testCollectionNotEmpty = source[].notEmpty()</code></p>
      */
-    java.util.List<Object> around(testpackage.Class1 aClass, java.util.List<Object> source): testSequenceReverseCaller(aClass, source) {
-        return tudresden.ocl20.pivot.ocl22java.types.util.OclSequences.reverse(source);
+    Boolean around(testpackage.Class1 aClass, java.util.Collection<Object> source): testCollectionNotEmptyCaller(aClass, source) {
+        return tudresden.ocl20.pivot.ocl22java.types.util.OclCollections.notEmpty(source);
     }
 }

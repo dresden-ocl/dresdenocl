@@ -12,18 +12,18 @@ public privileged aspect DefAspect20 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testStringToBoolean(String source)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testOclAnyOclType(Object source)}.</p>
      */
-    protected pointcut testStringToBooleanCaller(testpackage.Class1 aClass, String source):
-    	call(* testpackage.Class1.testStringToBoolean(String))
+    protected pointcut testOclAnyOclTypeCaller(testpackage.Class1 aClass, Object source):
+    	call(* testpackage.Class1.testOclAnyOclType(Object))
     	&& target(aClass) && args(source);
     
     /**
-     * <p>Defines the method testStringToBoolean(String source) defined by the constraint
+     * <p>Defines the method testOclAnyOclType(Object source) defined by the constraint
      * <code>context Class1
-     *       def: testStringToBoolean = source[].toBoolean()</code></p>
+     *       def: testOclAnyOclType = source[].oclType()</code></p>
      */
-    Boolean around(testpackage.Class1 aClass, String source): testStringToBooleanCaller(aClass, source) {
-        return Boolean.parseBoolean(source);
+    Class around(testpackage.Class1 aClass, Object source): testOclAnyOclTypeCaller(aClass, source) {
+        return source.getClass();
     }
 }

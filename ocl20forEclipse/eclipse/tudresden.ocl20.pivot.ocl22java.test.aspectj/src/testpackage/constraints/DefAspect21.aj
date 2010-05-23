@@ -12,18 +12,18 @@ public privileged aspect DefAspect21 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testStringToUpperCase(String source)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testOrderedSetReverse(java.util.List<Object> source)}.</p>
      */
-    protected pointcut testStringToUpperCaseCaller(testpackage.Class1 aClass, String source):
-    	call(* testpackage.Class1.testStringToUpperCase(String))
+    protected pointcut testOrderedSetReverseCaller(testpackage.Class1 aClass, java.util.List<Object> source):
+    	call(* testpackage.Class1.testOrderedSetReverse(java.util.List<Object>))
     	&& target(aClass) && args(source);
     
     /**
-     * <p>Defines the method testStringToUpperCase(String source) defined by the constraint
+     * <p>Defines the method testOrderedSetReverse(java.util.List<Object> source) defined by the constraint
      * <code>context Class1
-     *       def: testStringToUpperCase = source[].toUpperCase()</code></p>
+     *       def: testOrderedSetReverse = source[].reverse()</code></p>
      */
-    String around(testpackage.Class1 aClass, String source): testStringToUpperCaseCaller(aClass, source) {
-        return source.toUpperCase();
+    java.util.List<Object> around(testpackage.Class1 aClass, java.util.List<Object> source): testOrderedSetReverseCaller(aClass, source) {
+        return tudresden.ocl20.pivot.ocl22java.types.util.OclOrderedSets.reverse(source);
     }
 }

@@ -79,6 +79,215 @@ public class TestCollection extends AbstractDiffTest {
 	 * @throws Ocl22CodeException
 	 */
 	@Test
+	public void testAsBag01() throws IllegalArgumentException, ParseException,
+			ModelAccessException, Ocl22CodeException {
+
+		this.compareFragmentCodeGeneration("sltest/collection", "asBag01");
+	}
+
+	/**
+	 * <p>
+	 * Tests the instrumentation of the constraint.
+	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 * @throws ParseException
+	 * @throws IllegalArgumentException
+	 * @throws Ocl22CodeException
+	 */
+	@Test
+	public void testAsOrderedSet01() throws IllegalArgumentException,
+			ParseException, ModelAccessException, Ocl22CodeException {
+
+		this.compareFragmentCodeGeneration("sltest/collection",
+				"asOrderedSet01");
+	}
+
+	/**
+	 * <p>
+	 * Tests the instrumentation of the constraint.
+	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 * @throws ParseException
+	 * @throws IllegalArgumentException
+	 * @throws Ocl22CodeException
+	 */
+	@Test
+	public void testAsSequence01() throws IllegalArgumentException,
+			ParseException, ModelAccessException, Ocl22CodeException {
+
+		this.compareFragmentCodeGeneration("sltest/collection", "asSequence01");
+	}
+
+	/**
+	 * <p>
+	 * Tests the instrumentation of the constraint.
+	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 * @throws ParseException
+	 * @throws IllegalArgumentException
+	 * @throws Ocl22CodeException
+	 */
+	@Test
+	public void testAsSet01() throws IllegalArgumentException, ParseException,
+			ModelAccessException, Ocl22CodeException {
+
+		this.compareFragmentCodeGeneration("sltest/collection", "asSet01");
+	}
+
+	/**
+	 * <p>
+	 * Tests the instrumentation of the constraint.
+	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 * @throws ParseException
+	 * @throws IllegalArgumentException
+	 * @throws Ocl22CodeException
+	 */
+	@Test
+	public void testCount01() throws IllegalArgumentException, ParseException,
+			ModelAccessException, Ocl22CodeException {
+
+		this.compareFragmentCodeGeneration("sltest/collection", "count01");
+	}
+
+	/**
+	 * <p>
+	 * Tests the instrumentation of the constraint.
+	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 * @throws ParseException
+	 * @throws IllegalArgumentException
+	 * @throws Ocl22CodeException
+	 */
+	@Test
+	public void testEquals01() throws IllegalArgumentException, ParseException,
+			ModelAccessException, Ocl22CodeException {
+
+		this.compareFragmentCodeGeneration("sltest/collection", "equals01");
+	}
+
+	/**
+	 * <p>
+	 * Tests the instrumentation of the constraint.
+	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 * @throws ParseException
+	 * @throws IllegalArgumentException
+	 * @throws Ocl22CodeException
+	 */
+	@Test
+	public void testExcludes01() throws IllegalArgumentException,
+			ParseException, ModelAccessException, Ocl22CodeException {
+
+		this.compareFragmentCodeGeneration("sltest/collection", "excludes01");
+	}
+
+	/**
+	 * <p>
+	 * Tests the instrumentation of the constraint.
+	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 * @throws ParseException
+	 * @throws IllegalArgumentException
+	 * @throws Ocl22CodeException
+	 */
+	@Test
+	public void testExcludesAll01() throws IllegalArgumentException,
+			ParseException, ModelAccessException, Ocl22CodeException {
+
+		this
+				.compareFragmentCodeGeneration("sltest/collection",
+						"excludesAll01");
+	}
+
+	/**
+	 * <p>
+	 * Tests the instrumentation of the constraint.
+	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 * @throws ParseException
+	 * @throws IllegalArgumentException
+	 * @throws Ocl22CodeException
+	 */
+	@Test
+	public void testFlatten01() throws IllegalArgumentException, ParseException,
+			ModelAccessException, Ocl22CodeException {
+	
+		this.compareFragmentCodeGeneration("sltest/collection", "flatten01");
+	}
+
+	/**
+	 * <p>
+	 * Tests the instrumentation of the constraint.
+	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 * @throws ParseException
+	 * @throws IllegalArgumentException
+	 * @throws Ocl22CodeException
+	 */
+	@Test
+	public void testIncludesAll01() throws IllegalArgumentException,
+			ParseException, ModelAccessException, Ocl22CodeException {
+
+		this
+				.compareFragmentCodeGeneration("sltest/collection",
+						"includesAll01");
+	}
+
+	/**
+	 * <p>
+	 * Tests the instrumentation of the constraint.
+	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 * @throws ParseException
+	 * @throws IllegalArgumentException
+	 * @throws Ocl22CodeException
+	 */
+	@Test
+	public void testIncludes01() throws IllegalArgumentException,
+			ParseException, ModelAccessException, Ocl22CodeException {
+
+		this.compareFragmentCodeGeneration("sltest/collection", "includes01");
+	}
+
+	/**
+	 * <p>
+	 * Tests the instrumentation of the constraint.
+	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 * @throws ParseException
+	 * @throws IllegalArgumentException
+	 * @throws Ocl22CodeException
+	 */
+	@Test
+	public void testIsEmpty01() throws IllegalArgumentException,
+			ParseException, ModelAccessException, Ocl22CodeException {
+
+		this.compareFragmentCodeGeneration("sltest/collection", "isEmpty01");
+	}
+
+	/**
+	 * <p>
+	 * Tests the instrumentation of the constraint.
+	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 * @throws ParseException
+	 * @throws IllegalArgumentException
+	 * @throws Ocl22CodeException
+	 */
+	@Test
 	public void testMax01() throws IllegalArgumentException, ParseException,
 			ModelAccessException, Ocl22CodeException {
 
@@ -113,9 +322,77 @@ public class TestCollection extends AbstractDiffTest {
 	 * @throws Ocl22CodeException
 	 */
 	@Test
+	public void testNotEmpty01() throws IllegalArgumentException,
+			ParseException, ModelAccessException, Ocl22CodeException {
+
+		this.compareFragmentCodeGeneration("sltest/collection", "notEmpty01");
+	}
+
+	/**
+	 * <p>
+	 * Tests the instrumentation of the constraint.
+	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 * @throws ParseException
+	 * @throws IllegalArgumentException
+	 * @throws Ocl22CodeException
+	 */
+	@Test
+	public void testNotEquals01() throws IllegalArgumentException,
+			ParseException, ModelAccessException, Ocl22CodeException {
+
+		this.compareFragmentCodeGeneration("sltest/collection", "notEquals01");
+	}
+
+	/**
+	 * <p>
+	 * Tests the instrumentation of the constraint.
+	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 * @throws ParseException
+	 * @throws IllegalArgumentException
+	 * @throws Ocl22CodeException
+	 */
+	@Test
 	public void testProduct01() throws IllegalArgumentException,
 			ParseException, ModelAccessException, Ocl22CodeException {
 
 		this.compareFragmentCodeGeneration("sltest/collection", "product01");
+	}
+
+	/**
+	 * <p>
+	 * Tests the instrumentation of the constraint.
+	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 * @throws ParseException
+	 * @throws IllegalArgumentException
+	 * @throws Ocl22CodeException
+	 */
+	@Test
+	public void testSize01() throws IllegalArgumentException, ParseException,
+			ModelAccessException, Ocl22CodeException {
+
+		this.compareFragmentCodeGeneration("sltest/collection", "size01");
+	}
+
+	/**
+	 * <p>
+	 * Tests the instrumentation of the constraint.
+	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 * @throws ParseException
+	 * @throws IllegalArgumentException
+	 * @throws Ocl22CodeException
+	 */
+	@Test
+	public void testSum01() throws IllegalArgumentException, ParseException,
+			ModelAccessException, Ocl22CodeException {
+
+		this.compareFragmentCodeGeneration("sltest/collection", "sum01");
 	}
 }

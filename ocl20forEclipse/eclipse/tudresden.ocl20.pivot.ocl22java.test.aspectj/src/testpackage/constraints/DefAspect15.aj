@@ -12,18 +12,18 @@ public privileged aspect DefAspect15 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testStringAt(String source, Integer arg01)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testCollectionProduct(java.util.Collection<Object> source, java.util.Collection<Object> arg01)}.</p>
      */
-    protected pointcut testStringAtCaller(testpackage.Class1 aClass, String source, Integer arg01):
-    	call(* testpackage.Class1.testStringAt(String, Integer))
+    protected pointcut testCollectionProductCaller(testpackage.Class1 aClass, java.util.Collection<Object> source, java.util.Collection<Object> arg01):
+    	call(* testpackage.Class1.testCollectionProduct(java.util.Collection<Object>, java.util.Collection<Object>))
     	&& target(aClass) && args(source, arg01);
     
     /**
-     * <p>Defines the method testStringAt(String source, Integer arg01) defined by the constraint
+     * <p>Defines the method testCollectionProduct(java.util.Collection<Object> source, java.util.Collection<Object> arg01) defined by the constraint
      * <code>context Class1
-     *       def: testStringAt = source[].at( arg01[])</code></p>
+     *       def: testCollectionProduct = source[].product( arg01[]).size()</code></p>
      */
-    String around(testpackage.Class1 aClass, String source, Integer arg01): testStringAtCaller(aClass, source, arg01) {
-        return Character.toString(source.charAt(arg01 - 1));
+    Integer around(testpackage.Class1 aClass, java.util.Collection<Object> source, java.util.Collection<Object> arg01): testCollectionProductCaller(aClass, source, arg01) {
+        return tudresden.ocl20.pivot.ocl22java.types.util.OclCollections.size(tudresden.ocl20.pivot.ocl22java.types.util.OclCollections.product(source, arg01));
     }
 }
