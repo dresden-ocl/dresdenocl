@@ -206,18 +206,18 @@ public class OclLibraryItemProvider extends ItemProviderAdapter implements
         TypesFactory.INSTANCE.createVoidType()));
 
     newChildDescriptors.add(createChildParameter(
-        TypesPackageImpl.Literals.OCL_LIBRARY__OCL_BOOLEAN,PivotModelFactory.INSTANCE
+        TypesPackageImpl.Literals.OCL_LIBRARY__OCL_BOOLEAN,PivotModelFactory.eINSTANCE
             .createPrimitiveType()));
 
     newChildDescriptors.add(createChildParameter(TypesPackageImpl.Literals.OCL_LIBRARY__OCL_STRING,
-        PivotModelFactory.INSTANCE.createPrimitiveType()));
+        PivotModelFactory.eINSTANCE.createPrimitiveType()));
 
     newChildDescriptors.add(createChildParameter(
-        TypesPackageImpl.Literals.OCL_LIBRARY__OCL_INTEGER,PivotModelFactory.INSTANCE
+        TypesPackageImpl.Literals.OCL_LIBRARY__OCL_INTEGER,PivotModelFactory.eINSTANCE
             .createPrimitiveType()));
 
     newChildDescriptors.add(createChildParameter(TypesPackageImpl.Literals.OCL_LIBRARY__OCL_REAL,
-        PivotModelFactory.INSTANCE.createPrimitiveType()));
+        PivotModelFactory.eINSTANCE.createPrimitiveType()));
 
     newChildDescriptors.add(createChildParameter(
         TypesPackageImpl.Literals.OCL_LIBRARY__OCL_INVALID,TypesFactory.INSTANCE

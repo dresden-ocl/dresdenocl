@@ -325,7 +325,7 @@ public class VariableImpl extends TypedElementImpl implements Variable {
 
 		Parameter parameter;
 
-		parameter = PivotModelFactory.INSTANCE.createParameter();
+		parameter = PivotModelFactory.eINSTANCE.createParameter();
 		parameter.setName(getName());
 		parameter.setType(getType());
 		parameter.setKind(ParameterDirectionKind.IN);
@@ -348,7 +348,7 @@ public class VariableImpl extends TypedElementImpl implements Variable {
 			logger.debug("asProperty() - enter"); //$NON-NLS-1$
 		}
 
-		Property property = PivotModelFactory.INSTANCE.createProperty();
+		Property property = PivotModelFactory.eINSTANCE.createProperty();
 
 		property.setName(getName());
 		property.setType(getType());

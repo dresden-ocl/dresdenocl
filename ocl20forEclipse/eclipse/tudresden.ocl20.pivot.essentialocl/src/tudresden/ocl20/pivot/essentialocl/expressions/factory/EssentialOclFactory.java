@@ -337,7 +337,7 @@ public class EssentialOclFactory {
 					"kind or specification or constrainedElement"); //$NON-NLS-1$
 		}
 
-		Constraint constraint = PivotModelFactory.INSTANCE.createConstraint();
+		Constraint constraint = PivotModelFactory.eINSTANCE.createConstraint();
 
 		constraint.setName(name);
 		constraint.setKind(kind);

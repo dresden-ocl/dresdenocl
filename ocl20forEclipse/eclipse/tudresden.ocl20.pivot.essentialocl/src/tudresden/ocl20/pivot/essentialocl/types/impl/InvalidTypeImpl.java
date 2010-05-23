@@ -153,7 +153,7 @@ public class InvalidTypeImpl extends TypeImpl implements InvalidType {
 						.info("Creating implicit operation '" + name + "' for InvalidType"); //$NON-NLS-1$//$NON-NLS-2$
 			}
 
-			operation = PivotModelFactory.INSTANCE.createOperation();
+			operation = PivotModelFactory.eINSTANCE.createOperation();
 			operation.setName(name);
 
 			// set the type of the new operation to invalid
@@ -186,7 +186,7 @@ public class InvalidTypeImpl extends TypeImpl implements InvalidType {
 			logger.info("Creating implicit property '" + name + "' for InvalidType"); //$NON-NLS-1$//$NON-NLS-2$
 		}
 
-		Property property = PivotModelFactory.INSTANCE.createProperty();
+		Property property = PivotModelFactory.eINSTANCE.createProperty();
 		property.setName(name);
 
 		// set the type of the new property to invalid

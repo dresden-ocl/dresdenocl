@@ -211,7 +211,7 @@ public class TypesModelWizard extends Wizard implements INewWizard {
 
     // create the root depending on selection
     if (initialObjectName == NAMESPACE) {
-      rootObject = PivotModelFactory.INSTANCE.createNamespace();
+      rootObject = PivotModelFactory.eINSTANCE.createNamespace();
     }
 
     else if (initialObjectName == OCL_LIBRARY) {

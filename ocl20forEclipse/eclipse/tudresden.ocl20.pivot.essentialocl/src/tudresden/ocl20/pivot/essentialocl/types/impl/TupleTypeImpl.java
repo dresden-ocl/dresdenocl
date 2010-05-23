@@ -526,7 +526,7 @@ public class TupleTypeImpl extends TypeImpl implements TupleType {
 						// this type
 						if (propertyType != null) {
 							Property commmonProperty =
-									PivotModelFactory.INSTANCE.createProperty();
+									PivotModelFactory.eINSTANCE.createProperty();
 							commmonProperty.setName(propertyName);
 							commmonProperty.setType(propertyType);
 							commonProperties.add(commmonProperty);
