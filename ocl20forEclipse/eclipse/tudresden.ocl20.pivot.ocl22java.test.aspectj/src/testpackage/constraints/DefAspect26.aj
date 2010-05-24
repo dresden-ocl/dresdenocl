@@ -12,29 +12,18 @@ public privileged aspect DefAspect26 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testStringCharacters(String source)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testCollectionFlatten(java.util.Collection<Object> source)}.</p>
      */
-    protected pointcut testStringCharactersCaller(testpackage.Class1 aClass, String source):
-    	call(* testpackage.Class1.testStringCharacters(String))
+    protected pointcut testCollectionFlattenCaller(testpackage.Class1 aClass, java.util.Collection<Object> source):
+    	call(* testpackage.Class1.testCollectionFlatten(java.util.Collection<Object>))
     	&& target(aClass) && args(source);
     
     /**
-     * <p>Defines the method testStringCharacters(String source) defined by the constraint
+     * <p>Defines the method testCollectionFlatten(java.util.Collection<Object> source) defined by the constraint
      * <code>context Class1
-     *       def: testStringCharacters = source[].characters()</code></p>
+     *       def: testCollectionFlatten = source[].flatten()</code></p>
      */
-    java.util.List<String> around(testpackage.Class1 aClass, String source): testStringCharactersCaller(aClass, source) {
-        java.util.List<String> result1;
-        result1 = new java.util.ArrayList<String>();
-        
-        /* Compute the result of a characters operation. */
-        for (String anElement1 : source.split("")) {
-            result1.add(anElement1);
-        }
-        
-        /* Remove the first element ''. */
-        result1.remove(tudresden.ocl20.pivot.ocl22java.types.util.OclSequences.first(result1));
-    
-        return result1;
+    java.util.Collection<Object> around(testpackage.Class1 aClass, java.util.Collection<Object> source): testCollectionFlattenCaller(aClass, source) {
+        return (java.util.Collection<Object>) tudresden.ocl20.pivot.ocl22java.types.util.OclCollections.flatten(source);
     }
 }

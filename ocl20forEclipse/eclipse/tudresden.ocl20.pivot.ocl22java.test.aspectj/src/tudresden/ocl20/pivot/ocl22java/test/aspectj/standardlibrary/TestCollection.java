@@ -23,7 +23,9 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.junit.Test;
@@ -39,10 +41,88 @@ import testpackage.Class1;
  */
 public class TestCollection {
 
-	/*
-	 * FIXME Class: Add test case for asBag, asOrderedSet, asSequence, asSet,
-	 * when parsing bug is fixed.
+	/**
+	 * <p>
+	 * Tests the generated code for the method <code>Collection.asBag()</code> .
+	 * </p>
 	 */
+	@Test
+	public void testAsBag01() {
+
+		Class1 class1;
+		class1 = new Class1();
+
+		Set<Object> set01;
+		set01 = new HashSet<Object>();
+		set01.add(1);
+		set01.add(2);
+		set01.add(3);
+
+		assertEquals(3, class1.testCollectionAsBag(set01).size());
+	}
+
+	/**
+	 * <p>
+	 * Tests the generated code for the method
+	 * <code>Collection.asOrderedSet()</code> .
+	 * </p>
+	 */
+	@Test
+	public void testAsOrderedSet01() {
+
+		Class1 class1;
+		class1 = new Class1();
+
+		Set<Object> set01;
+		set01 = new HashSet<Object>();
+		set01.add(1);
+		set01.add(2);
+		set01.add(3);
+
+		assertEquals(3, class1.testCollectionAsOrderedSet(set01).size());
+	}
+
+	/**
+	 * <p>
+	 * Tests the generated code for the method
+	 * <code>Collection.asSequence()</code> .
+	 * </p>
+	 */
+	@Test
+	public void testAsSequence01() {
+
+		Class1 class1;
+		class1 = new Class1();
+
+		Set<Object> set01;
+		set01 = new HashSet<Object>();
+		set01.add(1);
+		set01.add(2);
+		set01.add(3);
+
+		assertEquals(3, class1.testCollectionAsSequence(set01).size());
+	}
+
+	/**
+	 * <p>
+	 * Tests the generated code for the method <code>Collection.asSet()</code> .
+	 * </p>
+	 */
+	@Test
+	public void testAsSet01() {
+
+		Class1 class1;
+		class1 = new Class1();
+
+		List<Object> bag01;
+		bag01 = new ArrayList<Object>();
+		bag01.add(1);
+		bag01.add(1);
+		bag01.add(2);
+		bag01.add(3);
+
+		assertEquals(3, class1.testCollectionAsSet(bag01).size());
+	}
 
 	/**
 	 * <p>
@@ -142,7 +222,42 @@ public class TestCollection {
 		assertFalse(class1.testCollectionExcludesAll(set01, set01));
 	}
 
-	/* FIXME Class: Add test case for flatten when parsing bug is fixed. */
+	/**
+	 * <p>
+	 * Tests the generated code for the method <code>Collection.flatten()</code>
+	 * .
+	 * </p>
+	 */
+	@Test
+	public void testFlatten01() {
+
+		Class1 class1;
+		class1 = new Class1();
+
+		Set<Object> containedSet01;
+		containedSet01 = new HashSet<Object>();
+		containedSet01.add(1);
+		containedSet01.add(2);
+
+		Set<Object> containedSet02;
+		containedSet02 = new HashSet<Object>();
+		containedSet02.add(1);
+		containedSet02.add(3);
+
+		Set<Object> oclSet;
+		oclSet = new HashSet<Object>();
+		oclSet.add(containedSet01);
+		oclSet.add(containedSet02);
+
+		List<Object> expectedCollection;
+		expectedCollection = new ArrayList<Object>();
+		expectedCollection.add(1);
+		expectedCollection.add(2);
+		expectedCollection.add(1);
+		expectedCollection.add(3);
+
+		assertEquals(expectedCollection, class1.testCollectionFlatten(oclSet));
+	}
 
 	/**
 	 * <p>
@@ -258,34 +373,33 @@ public class TestCollection {
 		assertEquals(1, class1.testCollectionMin(set01));
 	}
 
-	/* FIXME Class: Uncomment test case when parsing bug is fixed. */
-	// /**
-	// * <p>
-	// * Tests the generated code for the method
-	// * <code>Collection.<>(Collection)</code> .
-	// * </p>
-	// */
-	// @Test
-	// public void testNotEquals01() {
-	//
-	// Class1 class1;
-	// class1 = new Class1();
-	//
-	// Set<Object> set01;
-	// set01 = new HashSet<Object>();
-	// set01.add(1);
-	// set01.add(2);
-	// set01.add(3);
-	//
-	// Set<Object> set02;
-	// set02 = new HashSet<Object>();
-	// set02.add(1);
-	// set02.add(2);
-	// set02.add(2);
-	//
-	// assertFalse(class1.testCollectionNotEquals(set01, set01));
-	// assertTrue(class1.testCollectionNotEquals(set01, set02));
-	// }
+	/**
+	 * <p>
+	 * Tests the generated code for the method
+	 * <code>Collection.<>(Collection)</code> .
+	 * </p>
+	 */
+	@Test
+	public void testNotEquals01() {
+
+		Class1 class1;
+		class1 = new Class1();
+
+		Set<Object> set01;
+		set01 = new HashSet<Object>();
+		set01.add(1);
+		set01.add(2);
+		set01.add(3);
+
+		Set<Object> set02;
+		set02 = new HashSet<Object>();
+		set02.add(1);
+		set02.add(2);
+		set02.add(2);
+
+		assertFalse(class1.testCollectionNotEquals(set01, set01));
+		assertTrue(class1.testCollectionNotEquals(set01, set02));
+	}
 
 	/**
 	 * <p>

@@ -12,18 +12,18 @@ public privileged aspect DefAspect22 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testRealToString(Float source)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testCollectionCount(java.util.Collection<Object> source, Object arg01)}.</p>
      */
-    protected pointcut testRealToStringCaller(testpackage.Class1 aClass, Float source):
-    	call(* testpackage.Class1.testRealToString(Float))
-    	&& target(aClass) && args(source);
+    protected pointcut testCollectionCountCaller(testpackage.Class1 aClass, java.util.Collection<Object> source, Object arg01):
+    	call(* testpackage.Class1.testCollectionCount(java.util.Collection<Object>, Object))
+    	&& target(aClass) && args(source, arg01);
     
     /**
-     * <p>Defines the method testRealToString(Float source) defined by the constraint
+     * <p>Defines the method testCollectionCount(java.util.Collection<Object> source, Object arg01) defined by the constraint
      * <code>context Class1
-     *       def: testRealToString = source[].toString()</code></p>
+     *       def: testCollectionCount = source[].count( arg01[])</code></p>
      */
-    String around(testpackage.Class1 aClass, Float source): testRealToStringCaller(aClass, source) {
-        return source.toString();
+    Integer around(testpackage.Class1 aClass, java.util.Collection<Object> source, Object arg01): testCollectionCountCaller(aClass, source, arg01) {
+        return tudresden.ocl20.pivot.ocl22java.types.util.OclCollections.count(source, arg01);
     }
 }

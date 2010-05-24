@@ -100,31 +100,38 @@ public class GenerateAspectJCode extends AbstractDiffTest {
 		constraints.add(new String[] { "constraintkindtest/post", "post01" });
 		constraints.add(new String[] { "constraintkindtest/post", "post02" });
 
-		/* FIXME Class: Add test cases for bag. */
+		constraints.add(new String[] { "sltest/bag", "asBag01" });
+		constraints.add(new String[] { "sltest/bag", "asOrderedSet01" });
+		constraints.add(new String[] { "sltest/bag", "asSequence01" });
+		constraints.add(new String[] { "sltest/bag", "asSet01" });
+		constraints.add(new String[] { "sltest/bag", "count01" });
+		constraints.add(new String[] { "sltest/bag", "equals01" });
+		constraints.add(new String[] { "sltest/bag", "excluding01" });
+		constraints.add(new String[] { "sltest/bag", "flatten01" });
+		constraints.add(new String[] { "sltest/bag", "including01" });
+		constraints.add(new String[] { "sltest/bag", "intersection01" });
+		constraints.add(new String[] { "sltest/bag", "intersection02" });
+		constraints.add(new String[] { "sltest/bag", "union01" });
+		constraints.add(new String[] { "sltest/bag", "union02" });
 
 		constraints.add(new String[] { "sltest/boolean", "toString01" });
 
-		/* FIXME Claas: Add additional test cases when parsing bugs are fixed. */
-		// constraints.add(new String[] { "sltest/collection", "asBag01" });
-		// constraints.add(new String[] { "sltest/collection", "asOrderedSet01"
-		// });
-		// constraints.add(new String[] { "sltest/collection", "asSequence01"
-		// });
-		// constraints.add(new String[] { "sltest/collection", "asSet01" });
+		constraints.add(new String[] { "sltest/collection", "asBag01" });
+		constraints.add(new String[] { "sltest/collection", "asOrderedSet01" });
+		constraints.add(new String[] { "sltest/collection", "asSequence01" });
+		constraints.add(new String[] { "sltest/collection", "asSet01" });
 		constraints.add(new String[] { "sltest/collection", "count01" });
 		constraints.add(new String[] { "sltest/collection", "equals01" });
 		constraints.add(new String[] { "sltest/collection", "excludes01" });
 		constraints.add(new String[] { "sltest/collection", "excludesAll01" });
-		/* FIXME Claas: Add additional test cases when parsing bugs are fixed. */
-		// constraints.add(new String[] { "sltest/collection", "flatten01" });
+		constraints.add(new String[] { "sltest/collection", "flatten01" });
 		constraints.add(new String[] { "sltest/collection", "includes01" });
 		constraints.add(new String[] { "sltest/collection", "includesAll01" });
 		constraints.add(new String[] { "sltest/collection", "isEmpty01" });
 		constraints.add(new String[] { "sltest/collection", "min01" });
 		constraints.add(new String[] { "sltest/collection", "max01" });
 		constraints.add(new String[] { "sltest/collection", "notEmpty01" });
-		/* FIXME Claas: Add additional test cases when parsing bugs are fixed. */
-		// constraints.add(new String[] { "sltest/collection", "notEquals01" });
+		constraints.add(new String[] { "sltest/collection", "notEquals01" });
 		constraints.add(new String[] { "sltest/collection", "product01" });
 		constraints.add(new String[] { "sltest/collection", "size01" });
 		constraints.add(new String[] { "sltest/collection", "sum01" });
@@ -134,16 +141,57 @@ public class GenerateAspectJCode extends AbstractDiffTest {
 		constraints.add(new String[] { "sltest/oclany", "allInstances01" });
 		constraints.add(new String[] { "sltest/oclany", "oclType01" });
 
-		/* FIXME Class: Add additional test cases for orderedset. */
+		constraints.add(new String[] { "sltest/orderedset", "append01" });
+		constraints.add(new String[] { "sltest/orderedset", "asBag01" });
+		constraints.add(new String[] { "sltest/orderedset", "asOrderedSet01" });
+		constraints.add(new String[] { "sltest/orderedset", "asSequence01" });
+		constraints.add(new String[] { "sltest/orderedset", "asSet01" });
+		constraints.add(new String[] { "sltest/orderedset", "at01" });
+		constraints.add(new String[] { "sltest/orderedset", "first01" });
+		constraints.add(new String[] { "sltest/orderedset", "indexof01" });
+		constraints.add(new String[] { "sltest/orderedset", "insertAt01" });
+		constraints.add(new String[] { "sltest/orderedset", "last01" });
+		constraints.add(new String[] { "sltest/orderedset", "prepend01" });
 		constraints.add(new String[] { "sltest/orderedset", "reverse01" });
+		constraints.add(new String[] { "sltest/orderedset", "subOrderedSet01" });
 
 		constraints.add(new String[] { "sltest/real", "toString01" });
 
-		/* FIXME Class: Add additional test cases for set. */
-		constraints.add(new String[] { "sltest/set", "flatten01" });
-
-		/* FIXME Class: Add additional test cases for sequence. */
+		constraints.add(new String[] { "sltest/sequence", "append01" });
+		constraints.add(new String[] { "sltest/sequence", "asBag01" });
+		constraints.add(new String[] { "sltest/sequence", "asOrderedSet01" });
+		constraints.add(new String[] { "sltest/sequence", "asSequence01" });
+		constraints.add(new String[] { "sltest/sequence", "asSet01" });
+		constraints.add(new String[] { "sltest/sequence", "at01" });
+		constraints.add(new String[] { "sltest/sequence", "count01" });
+		constraints.add(new String[] { "sltest/sequence", "equals01" });
+		constraints.add(new String[] { "sltest/sequence", "excluding01" });
+		constraints.add(new String[] { "sltest/sequence", "first01" });
+		constraints.add(new String[] { "sltest/sequence", "flatten01" });
+		constraints.add(new String[] { "sltest/sequence", "including01" });
+		constraints.add(new String[] { "sltest/sequence", "indexof01" });
+		constraints.add(new String[] { "sltest/sequence", "insertAt01" });
+		constraints.add(new String[] { "sltest/sequence", "last01" });
+		constraints.add(new String[] { "sltest/sequence", "prepend01" });
 		constraints.add(new String[] { "sltest/sequence", "reverse01" });
+		constraints.add(new String[] { "sltest/sequence", "subSequence01" });
+		constraints.add(new String[] { "sltest/sequence", "union01" });
+
+		constraints.add(new String[] { "sltest/set", "asBag01" });
+		constraints.add(new String[] { "sltest/set", "asOrderedSet01" });
+		constraints.add(new String[] { "sltest/set", "asSequence01" });
+		constraints.add(new String[] { "sltest/set", "asSet01" });
+		constraints.add(new String[] { "sltest/set", "count01" });
+		constraints.add(new String[] { "sltest/set", "equals01" });
+		constraints.add(new String[] { "sltest/set", "excluding01" });
+		constraints.add(new String[] { "sltest/set", "flatten01" });
+		constraints.add(new String[] { "sltest/set", "including01" });
+		constraints.add(new String[] { "sltest/set", "intersection01" });
+		constraints.add(new String[] { "sltest/set", "intersection02" });
+		constraints.add(new String[] { "sltest/set", "minus01" });
+		constraints.add(new String[] { "sltest/set", "symmetricDifference01" });
+		constraints.add(new String[] { "sltest/set", "union01" });
+		constraints.add(new String[] { "sltest/set", "union02" });
 
 		constraints.add(new String[] { "sltest/string", "at01" });
 		constraints.add(new String[] { "sltest/string", "characters01" });

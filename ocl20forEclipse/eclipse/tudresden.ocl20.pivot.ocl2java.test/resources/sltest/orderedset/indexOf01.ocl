@@ -1,7 +1,7 @@
 package testpackage
 
 context Class1
-def: testOrderedSetInsertAt(source: OrderedSet(OclAny), arg01: OclAny): Integer =
+def: testOrderedSetIndexOf01(source: OrderedSet(OclAny), arg01: OclAny): Integer =
 source -> indexOf(arg01)
 
 endpackage

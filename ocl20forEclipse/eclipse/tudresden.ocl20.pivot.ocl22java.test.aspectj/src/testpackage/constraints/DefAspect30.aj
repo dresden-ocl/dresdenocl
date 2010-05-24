@@ -12,18 +12,18 @@ public privileged aspect DefAspect30 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testStringToBoolean(String source)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testCollectionMin(java.util.Collection<Object> source)}.</p>
      */
-    protected pointcut testStringToBooleanCaller(testpackage.Class1 aClass, String source):
-    	call(* testpackage.Class1.testStringToBoolean(String))
+    protected pointcut testCollectionMinCaller(testpackage.Class1 aClass, java.util.Collection<Object> source):
+    	call(* testpackage.Class1.testCollectionMin(java.util.Collection<Object>))
     	&& target(aClass) && args(source);
     
     /**
-     * <p>Defines the method testStringToBoolean(String source) defined by the constraint
+     * <p>Defines the method testCollectionMin(java.util.Collection<Object> source) defined by the constraint
      * <code>context Class1
-     *       def: testStringToBoolean = source[].toBoolean()</code></p>
+     *       def: testCollectionMin = source[].min()</code></p>
      */
-    Boolean around(testpackage.Class1 aClass, String source): testStringToBooleanCaller(aClass, source) {
-        return Boolean.parseBoolean(source);
+    Object around(testpackage.Class1 aClass, java.util.Collection<Object> source): testCollectionMinCaller(aClass, source) {
+        return tudresden.ocl20.pivot.ocl22java.types.util.OclCollections.min(source);
     }
 }

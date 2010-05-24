@@ -52,7 +52,7 @@ public class OclSequencesTest {
 		assertEquals(1, OclSequences.append(col1, "1").size());
 
 		col1.add("1");
-		assertEquals(1, OclSequences.append(col1, "1").size());
+		assertEquals(2, OclSequences.append(col1, "1").size());
 
 		assertEquals(2, OclSequences.append(col1, "2").size());
 		assertEquals("1", OclSequences.append(col1, "2").get(0));
@@ -72,7 +72,7 @@ public class OclSequencesTest {
 		assertEquals(1, OclSequences.append(col1, "1").size());
 
 		col1 = new String[] { "1" };
-		assertEquals(1, OclSequences.append(col1, "1").size());
+		assertEquals(2, OclSequences.append(col1, "1").size());
 
 		assertEquals(2, OclSequences.append(col1, "2").size());
 		assertEquals("1", OclSequences.append(col1, "2").get(0));
@@ -831,7 +831,7 @@ public class OclSequencesTest {
 		assertEquals(1, OclSequences.insertAt(col1, 1, "1").size());
 
 		col1.add("1");
-		assertEquals(1, OclSequences.insertAt(col1, 1, "1").size());
+		assertEquals(2, OclSequences.insertAt(col1, 1, "1").size());
 
 		assertEquals(2, OclSequences.insertAt(col1, 1, "2").size());
 		assertEquals("1", OclSequences.insertAt(col1, 1, "2").get(1));
@@ -851,7 +851,7 @@ public class OclSequencesTest {
 		assertEquals(1, OclSequences.insertAt(col1, 1, "1").size());
 
 		col1 = new String[] { "1" };
-		assertEquals(1, OclSequences.insertAt(col1, 1, "1").size());
+		assertEquals(2, OclSequences.insertAt(col1, 1, "1").size());
 
 		assertEquals(2, OclSequences.insertAt(col1, 1, "2").size());
 		assertEquals("1", OclSequences.insertAt(col1, 1, "2").get(1));
@@ -953,7 +953,7 @@ public class OclSequencesTest {
 		assertEquals(1, OclSequences.prepend(col1, "1").size());
 
 		col1.add("1");
-		assertEquals(1, OclSequences.prepend(col1, "1").size());
+		assertEquals(2, OclSequences.prepend(col1, "1").size());
 
 		assertEquals(2, OclSequences.prepend(col1, "2").size());
 		assertEquals("1", OclSequences.prepend(col1, "2").get(1));
@@ -973,7 +973,7 @@ public class OclSequencesTest {
 		assertEquals(1, OclSequences.prepend(col1, "1").size());
 
 		col1 = new String[] { "1" };
-		assertEquals(1, OclSequences.prepend(col1, "1").size());
+		assertEquals(2, OclSequences.prepend(col1, "1").size());
 
 		assertEquals(2, OclSequences.prepend(col1, "2").size());
 		assertEquals("1", OclSequences.prepend(col1, "2").get(1));

@@ -32,7 +32,7 @@ import org.junit.runners.Suite;
  * 
  */
 @RunWith(Suite.class)
-@Suite.SuiteClasses( { TestBoolean.class, TestCollection.class,
+@Suite.SuiteClasses( { TestBag.class, TestBoolean.class, TestCollection.class,
 		TestInteger.class, TestOclAny.class, TestOrderedSet.class,
 		TestReal.class, TestSequence.class, TestSet.class, TestString.class })
 public class AllStandardLibraryTests {

@@ -12,18 +12,18 @@ public privileged aspect DefAspect16 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testCollectionSize(java.util.Collection<Object> source)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testBagUnion02(java.util.List<Object> source, java.util.List<Object> arg01)}.</p>
      */
-    protected pointcut testCollectionSizeCaller(testpackage.Class1 aClass, java.util.Collection<Object> source):
-    	call(* testpackage.Class1.testCollectionSize(java.util.Collection<Object>))
-    	&& target(aClass) && args(source);
+    protected pointcut testBagUnion02Caller(testpackage.Class1 aClass, java.util.List<Object> source, java.util.List<Object> arg01):
+    	call(* testpackage.Class1.testBagUnion02(java.util.List<Object>, java.util.List<Object>))
+    	&& target(aClass) && args(source, arg01);
     
     /**
-     * <p>Defines the method testCollectionSize(java.util.Collection<Object> source) defined by the constraint
+     * <p>Defines the method testBagUnion02(java.util.List<Object> source, java.util.List<Object> arg01) defined by the constraint
      * <code>context Class1
-     *       def: testCollectionSize = source[].size()</code></p>
+     *       def: testBagUnion02 = source[].union( arg01[])</code></p>
      */
-    Integer around(testpackage.Class1 aClass, java.util.Collection<Object> source): testCollectionSizeCaller(aClass, source) {
-        return tudresden.ocl20.pivot.ocl22java.types.util.OclCollections.size(source);
+    java.util.List<Object> around(testpackage.Class1 aClass, java.util.List<Object> source, java.util.List<Object> arg01): testBagUnion02Caller(aClass, source, arg01) {
+        return tudresden.ocl20.pivot.ocl22java.types.util.OclBags.union(source, arg01);
     }
 }

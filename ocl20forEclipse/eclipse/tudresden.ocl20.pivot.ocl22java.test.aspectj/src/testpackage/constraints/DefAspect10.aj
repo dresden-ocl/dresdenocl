@@ -12,18 +12,18 @@ public privileged aspect DefAspect10 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testCollectionIncludesAll(java.util.Collection<Object> source, java.util.Collection<Object> arg01)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testBagExcluding01(java.util.List<Object> source, Object arg01)}.</p>
      */
-    protected pointcut testCollectionIncludesAllCaller(testpackage.Class1 aClass, java.util.Collection<Object> source, java.util.Collection<Object> arg01):
-    	call(* testpackage.Class1.testCollectionIncludesAll(java.util.Collection<Object>, java.util.Collection<Object>))
+    protected pointcut testBagExcluding01Caller(testpackage.Class1 aClass, java.util.List<Object> source, Object arg01):
+    	call(* testpackage.Class1.testBagExcluding01(java.util.List<Object>, Object))
     	&& target(aClass) && args(source, arg01);
     
     /**
-     * <p>Defines the method testCollectionIncludesAll(java.util.Collection<Object> source, java.util.Collection<Object> arg01) defined by the constraint
+     * <p>Defines the method testBagExcluding01(java.util.List<Object> source, Object arg01) defined by the constraint
      * <code>context Class1
-     *       def: testCollectionIncludesAll = source[].includesAll( arg01[])</code></p>
+     *       def: testBagExcluding01 = source[].excluding( arg01[])</code></p>
      */
-    Boolean around(testpackage.Class1 aClass, java.util.Collection<Object> source, java.util.Collection<Object> arg01): testCollectionIncludesAllCaller(aClass, source, arg01) {
-        return tudresden.ocl20.pivot.ocl22java.types.util.OclCollections.includesAll(source, arg01);
+    java.util.List<Object> around(testpackage.Class1 aClass, java.util.List<Object> source, Object arg01): testBagExcluding01Caller(aClass, source, arg01) {
+        return tudresden.ocl20.pivot.ocl22java.types.util.OclBags.excluding(source, arg01);
     }
 }

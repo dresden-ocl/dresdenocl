@@ -59,9 +59,7 @@ public class OclSequences {
 		}
 		// end else.
 
-		if (!result.contains(object)) {
-			result.add(object);
-		}
+		result.add(object);
 
 		return result;
 	}
@@ -93,9 +91,7 @@ public class OclSequences {
 		}
 		// end else.
 
-		if (!result.contains(object)) {
-			result.add(object);
-		}
+		result.add(object);
 
 		return result;
 	}
@@ -764,9 +760,7 @@ public class OclSequences {
 		}
 		// no else.
 
-		if (!result.contains(object)) {
-			result.add(index - 1, object);
-		}
+		result.add(index - 1, object);
 
 		return result;
 	}
@@ -870,10 +864,7 @@ public class OclSequences {
 
 		else {
 			for (T element : self) {
-				if (!result.contains(element)) {
-					result.add(element);
-				}
-				// no else.
+				result.add(element);
 			}
 			return result;
 		}

@@ -12,18 +12,18 @@ public privileged aspect DefAspect32 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testStringToLowerCase(String source)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testCollectionNotEmpty(java.util.Collection<Object> source)}.</p>
      */
-    protected pointcut testStringToLowerCaseCaller(testpackage.Class1 aClass, String source):
-    	call(* testpackage.Class1.testStringToLowerCase(String))
+    protected pointcut testCollectionNotEmptyCaller(testpackage.Class1 aClass, java.util.Collection<Object> source):
+    	call(* testpackage.Class1.testCollectionNotEmpty(java.util.Collection<Object>))
     	&& target(aClass) && args(source);
     
     /**
-     * <p>Defines the method testStringToLowerCase(String source) defined by the constraint
+     * <p>Defines the method testCollectionNotEmpty(java.util.Collection<Object> source) defined by the constraint
      * <code>context Class1
-     *       def: testStringToLowerCase = source[].toLowerCase()</code></p>
+     *       def: testCollectionNotEmpty = source[].notEmpty()</code></p>
      */
-    String around(testpackage.Class1 aClass, String source): testStringToLowerCaseCaller(aClass, source) {
-        return source.toLowerCase();
+    Boolean around(testpackage.Class1 aClass, java.util.Collection<Object> source): testCollectionNotEmptyCaller(aClass, source) {
+        return tudresden.ocl20.pivot.ocl22java.types.util.OclCollections.notEmpty(source);
     }
 }

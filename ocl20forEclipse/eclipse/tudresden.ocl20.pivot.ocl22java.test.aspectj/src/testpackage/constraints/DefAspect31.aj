@@ -12,18 +12,18 @@ public privileged aspect DefAspect31 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testStringToUpperCase(String source)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testCollectionMax(java.util.Collection<Object> source)}.</p>
      */
-    protected pointcut testStringToUpperCaseCaller(testpackage.Class1 aClass, String source):
-    	call(* testpackage.Class1.testStringToUpperCase(String))
+    protected pointcut testCollectionMaxCaller(testpackage.Class1 aClass, java.util.Collection<Object> source):
+    	call(* testpackage.Class1.testCollectionMax(java.util.Collection<Object>))
     	&& target(aClass) && args(source);
     
     /**
-     * <p>Defines the method testStringToUpperCase(String source) defined by the constraint
+     * <p>Defines the method testCollectionMax(java.util.Collection<Object> source) defined by the constraint
      * <code>context Class1
-     *       def: testStringToUpperCase = source[].toUpperCase()</code></p>
+     *       def: testCollectionMax = source[].max()</code></p>
      */
-    String around(testpackage.Class1 aClass, String source): testStringToUpperCaseCaller(aClass, source) {
-        return source.toUpperCase();
+    Object around(testpackage.Class1 aClass, java.util.Collection<Object> source): testCollectionMaxCaller(aClass, source) {
+        return tudresden.ocl20.pivot.ocl22java.types.util.OclCollections.max(source);
     }
 }

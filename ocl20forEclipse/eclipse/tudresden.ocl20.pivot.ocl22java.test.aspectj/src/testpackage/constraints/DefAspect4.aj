@@ -12,18 +12,18 @@ public privileged aspect DefAspect4 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testBooleanToString(Boolean source)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testBagAsBag(java.util.List<Object> source)}.</p>
      */
-    protected pointcut testBooleanToStringCaller(testpackage.Class1 aClass, Boolean source):
-    	call(* testpackage.Class1.testBooleanToString(Boolean))
+    protected pointcut testBagAsBagCaller(testpackage.Class1 aClass, java.util.List<Object> source):
+    	call(* testpackage.Class1.testBagAsBag(java.util.List<Object>))
     	&& target(aClass) && args(source);
     
     /**
-     * <p>Defines the method testBooleanToString(Boolean source) defined by the constraint
+     * <p>Defines the method testBagAsBag(java.util.List<Object> source) defined by the constraint
      * <code>context Class1
-     *       def: testBooleanToString = source[].toString()</code></p>
+     *       def: testBagAsBag = source[].asBag()</code></p>
      */
-    String around(testpackage.Class1 aClass, Boolean source): testBooleanToStringCaller(aClass, source) {
-        return source.toString();
+    java.util.List<Object> around(testpackage.Class1 aClass, java.util.List<Object> source): testBagAsBagCaller(aClass, source) {
+        return tudresden.ocl20.pivot.ocl22java.types.util.OclBags.asBag(source);
     }
 }

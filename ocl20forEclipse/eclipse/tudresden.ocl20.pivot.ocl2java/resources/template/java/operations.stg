@@ -658,12 +658,12 @@ $sequenceUtility()$.union($sourceExp$, $argsExp$)
 
 // --- Set.union(Bag(T)) ---
 unionOperationWithBagOnSet(sourceExp, argsExp) ::= <<
-$setUtility()$.unionWihtBag($sourceExp$, $argsExp$)
+$setUtility()$.unionWithBag($sourceExp$, $argsExp$)
 >>
 
 // --- Set.union(Set(T)) ---
 unionOperationWithSetOnSet(sourceExp, argsExp) ::= <<
-$setUtility()$.unionWihtSet($sourceExp$, $argsExp$)
+$setUtility()$.unionWithSet($sourceExp$, $argsExp$)
 >>
 
 
