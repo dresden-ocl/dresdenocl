@@ -123,12 +123,7 @@
         eType="ecore:EClass ../../tudresden.ocl20.pivot.pivotmodel/model/pivotmodel.ecore#//Property"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="isMarkedPre" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ImplicitOperationCallCS" eSuperTypes="#//ImplicitFeatureCallCS">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="operationName" lowerBound="1"
-        eType="ecore:EClass ../../tudresden.ocl20.pivot.pivotmodel/model/pivotmodel.ecore#//Operation"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="arguments" upperBound="-1"
-        eType="#//OclExpressionCS" containment="true"/>
-  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ImplicitOperationCallCS" eSuperTypes="#//ImplicitFeatureCallCS #//OperationCallWithArgsExpCS"/>
   <eClassifiers xsi:type="ecore:EClass" name="PropertyCallExpCS" abstract="true" eSuperTypes="#//FeatureCallExpCS"/>
   <eClassifiers xsi:type="ecore:EClass" name="PropertyCallExplicitPathExpCS" eSuperTypes="#//PropertyCallExpCS">
     <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1"
@@ -141,6 +136,13 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="OperationCallExpCS" abstract="true"
       eSuperTypes="#//FeatureCallExpCS"/>
+  <eClassifiers xsi:type="ecore:EClass" name="OperationCallWithArgsExpCS" abstract="true"
+      eSuperTypes="#//OperationCallExpCS">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="operationName" lowerBound="1"
+        eType="ecore:EClass ../../tudresden.ocl20.pivot.pivotmodel/model/pivotmodel.ecore#//Operation"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="arguments" upperBound="-1"
+        eType="#//OclExpressionCS" containment="true"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="UnaryOperationCallExpCS" eSuperTypes="#//OperationCallExpCS">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="operationName" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -175,12 +177,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="LogicalXorOperationCallExpCS" eSuperTypes="#//OperationCallBinaryExpCS"/>
   <eClassifiers xsi:type="ecore:EClass" name="LogicalImpliesOperationCallExpCS" eSuperTypes="#//OperationCallBinaryExpCS"/>
   <eClassifiers xsi:type="ecore:EClass" name="OperationCallWithImlicitSourceExpCS"
-      eSuperTypes="#//OperationCallExpCS">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="operationName" lowerBound="1"
-        eType="ecore:EClass ../../tudresden.ocl20.pivot.pivotmodel/model/pivotmodel.ecore#//Operation"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="arguments" upperBound="-1"
-        eType="#//OclExpressionCS" containment="true"/>
-  </eClassifiers>
+      eSuperTypes="#//OperationCallWithArgsExpCS"/>
   <eClassifiers xsi:type="ecore:EClass" name="TupleLiteralExpCS" eSuperTypes="#//LiteralExpCS">
     <eStructuralFeatures xsi:type="ecore:EReference" name="variableDeclarations" lowerBound="1"
         eType="#//VariableDeclarationWithInitListCS" containment="true"/>

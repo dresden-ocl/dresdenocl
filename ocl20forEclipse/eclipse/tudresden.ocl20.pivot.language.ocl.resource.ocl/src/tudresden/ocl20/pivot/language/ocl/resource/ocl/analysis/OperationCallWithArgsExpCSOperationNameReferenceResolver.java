@@ -12,15 +12,15 @@ import tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclReferenceResolveHelpe
 import tudresden.ocl20.pivot.language.ocl.resource.ocl.OclReferenceResolveHelperProvider;
 import tudresden.ocl20.pivot.pivotmodel.Operation;
 
-public class OperationCallWithImlicitSourceExpCSOperationNameReferenceResolver
+public class OperationCallWithArgsExpCSOperationNameReferenceResolver
 		implements
-		tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclReferenceResolver<tudresden.ocl20.pivot.language.ocl.OperationCallWithImlicitSourceExpCS, tudresden.ocl20.pivot.pivotmodel.Operation> {
+		tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclReferenceResolver<tudresden.ocl20.pivot.language.ocl.OperationCallWithArgsExpCS, tudresden.ocl20.pivot.pivotmodel.Operation> {
 
-	private tudresden.ocl20.pivot.language.ocl.resource.ocl.analysis.OclDefaultResolverDelegate<tudresden.ocl20.pivot.language.ocl.OperationCallWithImlicitSourceExpCS, tudresden.ocl20.pivot.pivotmodel.Operation> delegate = new tudresden.ocl20.pivot.language.ocl.resource.ocl.analysis.OclDefaultResolverDelegate<tudresden.ocl20.pivot.language.ocl.OperationCallWithImlicitSourceExpCS, tudresden.ocl20.pivot.pivotmodel.Operation>();
+	private tudresden.ocl20.pivot.language.ocl.resource.ocl.analysis.OclDefaultResolverDelegate<tudresden.ocl20.pivot.language.ocl.OperationCallWithArgsExpCS, tudresden.ocl20.pivot.pivotmodel.Operation> delegate = new tudresden.ocl20.pivot.language.ocl.resource.ocl.analysis.OclDefaultResolverDelegate<tudresden.ocl20.pivot.language.ocl.OperationCallWithArgsExpCS, tudresden.ocl20.pivot.pivotmodel.Operation>();
 
 	public void resolve(
 			java.lang.String identifier,
-			tudresden.ocl20.pivot.language.ocl.OperationCallWithImlicitSourceExpCS container,
+			tudresden.ocl20.pivot.language.ocl.OperationCallWithArgsExpCS container,
 			org.eclipse.emf.ecore.EReference reference,
 			int position,
 			boolean resolveFuzzy,
@@ -41,7 +41,7 @@ public class OperationCallWithImlicitSourceExpCSOperationNameReferenceResolver
 
 	public java.lang.String deResolve(
 			tudresden.ocl20.pivot.pivotmodel.Operation element,
-			tudresden.ocl20.pivot.language.ocl.OperationCallWithImlicitSourceExpCS container,
+			tudresden.ocl20.pivot.language.ocl.OperationCallWithArgsExpCS container,
 			org.eclipse.emf.ecore.EReference reference) {
 		return delegate.deResolve(element, container, reference);
 	}

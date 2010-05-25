@@ -93,10 +93,7 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference OCL.ecore#//ImplicitPropertyCallCS/property"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute OCL.ecore#//ImplicitPropertyCallCS/isMarkedPre"/>
     </genClasses>
-    <genClasses ecoreClass="OCL.ecore#//ImplicitOperationCallCS">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//ImplicitOperationCallCS/operationName"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//ImplicitOperationCallCS/arguments"/>
-    </genClasses>
+    <genClasses ecoreClass="OCL.ecore#//ImplicitOperationCallCS"/>
     <genClasses image="false" ecoreClass="OCL.ecore#//PropertyCallExpCS"/>
     <genClasses ecoreClass="OCL.ecore#//PropertyCallExplicitPathExpCS">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//PropertyCallExplicitPathExpCS/source"/>
@@ -105,6 +102,10 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute OCL.ecore#//PropertyCallExplicitPathExpCS/isMarkedPre"/>
     </genClasses>
     <genClasses image="false" ecoreClass="OCL.ecore#//OperationCallExpCS"/>
+    <genClasses image="false" ecoreClass="OCL.ecore#//OperationCallWithArgsExpCS">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference OCL.ecore#//OperationCallWithArgsExpCS/operationName"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//OperationCallWithArgsExpCS/arguments"/>
+    </genClasses>
     <genClasses ecoreClass="OCL.ecore#//UnaryOperationCallExpCS">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute OCL.ecore#//UnaryOperationCallExpCS/operationName"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//UnaryOperationCallExpCS/target"/>
@@ -129,10 +130,7 @@
     <genClasses ecoreClass="OCL.ecore#//LogicalOrOperationCallExpCS"/>
     <genClasses ecoreClass="OCL.ecore#//LogicalXorOperationCallExpCS"/>
     <genClasses ecoreClass="OCL.ecore#//LogicalImpliesOperationCallExpCS"/>
-    <genClasses ecoreClass="OCL.ecore#//OperationCallWithImlicitSourceExpCS">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//OperationCallWithImlicitSourceExpCS/operationName"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//OperationCallWithImlicitSourceExpCS/arguments"/>
-    </genClasses>
+    <genClasses ecoreClass="OCL.ecore#//OperationCallWithImlicitSourceExpCS"/>
     <genClasses ecoreClass="OCL.ecore#//TupleLiteralExpCS">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//TupleLiteralExpCS/variableDeclarations"/>
     </genClasses>

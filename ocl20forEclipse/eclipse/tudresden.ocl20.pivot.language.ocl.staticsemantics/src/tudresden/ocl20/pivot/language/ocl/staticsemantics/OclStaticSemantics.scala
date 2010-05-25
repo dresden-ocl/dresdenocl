@@ -277,7 +277,7 @@ trait OclStaticSemantics extends ocl.semantics.OclAttributeMaker with pivotmodel
       case aeo : AttributableEObject => {
         aeo->sourceExpression match {
           case Full(sourceExpression) => {	// this is an operation call with implicit source
-            if (identifier.contains("::"))
+          	if (identifier.contains("::"))
               yieldFailure("Cannot call a static operation " + identifier + " in a chained feature call", aeo)
             else {
               // TODO: if not found look for defs!
@@ -855,7 +855,7 @@ trait OclStaticSemantics extends ocl.semantics.OclAttributeMaker with pivotmodel
         }
       }
      	
-      case i@ImplicitOperationCallCS(arguments) => {
+      case i@OperationCallWithArgsExpCS(arguments) => {
         val operation = i.getOperationName
         if (operation.eIsProxy) {
           val typeName = i->sourceExpression match {

@@ -16,7 +16,10 @@ public class OclSTATICTokenResolver implements tudresden.ocl20.pivot.language.oc
 	}
 	
 	public void resolve(java.lang.String lexem, org.eclipse.emf.ecore.EStructuralFeature feature, tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenResolveResult result) {
-		defaultTokenResolver.resolve(lexem, feature, result);
+		if (lexem.equals("static"))
+			result.setResolvedToken(true);
+		else
+			result.setResolvedToken(false);
 	}
 	
 	public void setOptions(java.util.Map<?,?> options) {
