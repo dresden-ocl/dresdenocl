@@ -202,6 +202,7 @@
     </genClasses>
     <genClasses ecoreClass="OCL.ecore#//DefinitionExpOperationCS">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//DefinitionExpOperationCS/operation"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//DefinitionExpOperationCS/oclExpression"/>
     </genClasses>
     <genClasses image="false" ecoreClass="OCL.ecore#//PrePostOrBodyDeclarationCS">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//PrePostOrBodyDeclarationCS/name"/>
@@ -210,12 +211,15 @@
     <genClasses ecoreClass="OCL.ecore#//PreConditionDeclarationCS"/>
     <genClasses ecoreClass="OCL.ecore#//PostConditionDeclarationCS"/>
     <genClasses ecoreClass="OCL.ecore#//BodyDeclarationCS"/>
-    <genClasses ecoreClass="OCL.ecore#//OperationCS">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//OperationCS/typeName"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference OCL.ecore#//OperationCS/operation"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//OperationCS/parameters"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//OperationCS/returnType"/>
+    <genClasses image="false" ecoreClass="OCL.ecore#//OperationDefinitionCS">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference OCL.ecore#//OperationDefinitionCS/operation"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//OperationDefinitionCS/parameters"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//OperationDefinitionCS/returnType"/>
     </genClasses>
+    <genClasses ecoreClass="OCL.ecore#//OperationDefinitionInContextCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//OperationDefinitionInContextCS/typeName"/>
+    </genClasses>
+    <genClasses ecoreClass="OCL.ecore#//OperationDefinitionInDefCS"/>
     <genClasses ecoreClass="OCL.ecore#//ParameterCS">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference OCL.ecore#//ParameterCS/parameter"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//ParameterCS/parameterType"/>

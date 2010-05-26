@@ -23,6 +23,7 @@ TOKENS {
 	DEFINE MULT_OPERATOR			$ '*' | '/' | '%' $;
 	DEFINE RELATIONAL_OPERATOR		$ '<' | '>' | '<=' | '>='$;
 	DEFINE EQUALITY_OPERATOR		$ '=' $;
+	DEFINE NEQUALITY_OPERATOR		$ '<>' $;
 	DEFINE NOT_OPERATOR				$ 'not' $;
 	DEFINE AND_OPERATOR				$ 'and' $;
 	DEFINE OR_OPERATOR				$ 'or' $;
@@ -75,6 +76,8 @@ RULES {
 	DefinitionExpCS						::= (static[STATIC])? "def" ":" definitionExpPart;
 	
 	DefinitionExpPropertyCS				::= variableDeclaration;
+	
+	DefinitionExpOperationCS			::= operation "=" oclExpression;
 											
 	PreConditionDeclarationCS			::= "pre" (name)? ":" oclExpression;
 	
@@ -82,7 +85,9 @@ RULES {
 	
 	BodyDeclarationCS					::= "body" (name)? ":" oclExpression;
 
-	OperationCS							::= typeName "::" operation[SIMPLE_NAME] "(" (parameters ("," parameters)*)? ")" (":" returnType)?;
+	OperationDefinitionInContextCS		::= typeName "::" operation[SIMPLE_NAME] "(" (parameters ("," parameters)*)? ")" (":" returnType)?;
+	
+	OperationDefinitionInDefCS			::= operation[SIMPLE_NAME] "(" (parameters ("," parameters)*)? ")" (":" returnType)?;
 	
 	ParameterCS							::= parameter[SIMPLE_NAME] ":" parameterType;
 	
@@ -103,7 +108,7 @@ RULES {
 	LogicalAndOperationCallExpCS		::= source operationName[AND_OPERATOR] target;
 	
 	@operator(type="binary_left_associative", weight="8", identifier="OclExpressionCS")
-	EqualityOperationCallExpCS			::= source operationName[EQUALITY_OPERATOR] target;
+	EqualityOperationCallExpCS			::= source (operationName[EQUALITY_OPERATOR] | operationName[NEQUALITY_OPERATOR]) target;
 	
 	@operator(type="binary_left_associative", weight="9", identifier="OclExpressionCS")
 	RelationalOperationCallExpCS		::= source operationName[RELATIONAL_OPERATOR] target;
@@ -166,8 +171,8 @@ RULES {
 	@operator(type="primitive", weight="20", identifier="OclExpressionCS")
 	TupleLiteralExpCS					::= "Tuple" "{" variableDeclarations "}";
 		
-	@operator(type="unary_prefix", weight="10", identifier="OclExpressionCS")
-	IfExpCS								::= "if" condition "then" thenBranch "else" elseBranch;
+	@operator(type="primitive", weight="20", identifier="OclExpressionCS")
+	IfExpCS								::= "if" condition "then" thenBranch "else" elseBranch "endif";
 	
 	@operator(type="primitive", weight="20", identifier="OclExpressionCS")
 	CollectionLiteralExpCS				::= collectionType "{" (collectionLiteralParts ("," collectionLiteralParts)*)? "}";

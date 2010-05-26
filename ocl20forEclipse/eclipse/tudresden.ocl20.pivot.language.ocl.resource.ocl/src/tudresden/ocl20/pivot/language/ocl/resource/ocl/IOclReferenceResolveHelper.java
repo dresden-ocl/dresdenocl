@@ -8,7 +8,6 @@ import org.eclipse.emf.ecore.EReference;
 import tudresden.ocl20.pivot.language.ocl.OclExpressionCS;
 import tudresden.ocl20.pivot.language.ocl.ParameterCS;
 import tudresden.ocl20.pivot.language.ocl.TypeCS;
-import tudresden.ocl20.pivot.language.ocl.TypePathNameCS;
 import tudresden.ocl20.pivot.pivotmodel.Namespace;
 import tudresden.ocl20.pivot.pivotmodel.Operation;
 import tudresden.ocl20.pivot.pivotmodel.Parameter;
@@ -35,7 +34,7 @@ public interface IOclReferenceResolveHelper {
 
 	List<Operation> resolveOperationDefinition(String identifier,
 			boolean resolveFuzzy, EObject container, EReference reference,
-			List<ParameterCS> parameters, TypePathNameCS typeName, TypeCS returnType);
+			List<ParameterCS> parameters, TypeCS returnType);
 
 	List<Parameter> resolveParameterDefinition(String identifier,
 			boolean resolveFuzzy, EObject container, EReference reference,

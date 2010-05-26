@@ -720,6 +720,7 @@ trait OclStaticSemantics extends ocl.semantics.OclAttributeMaker with pivotmodel
       case d@DefinitionExpPropertyCS(variableDeclaration) => {
         computeFeature(variableDeclaration)
       }
+      
       case v@VariableDeclarationWithInitCS(variableName, typeName, initialization, _) => {
         (initialization->computeOclExpression).flatMap{oclExpressionEOcl =>
           val typeConformance = if (typeName != null) {
@@ -737,6 +738,30 @@ trait OclStaticSemantics extends ocl.semantics.OclAttributeMaker with pivotmodel
 			      // TODO: does not work yet for nested collections
 			      determineMultiplicities(oclExpressionEOcl.getType, property)
 			      Full((property, oclExpressionEOcl))
+          }
+        }
+      }
+      
+      case d@DefinitionExpOperationCS(operationDefinition, oclExpression) => {
+        val operation = operationDefinition.getOperation
+        if (operation.eIsProxy)
+          Empty
+        else {
+          (oclExpression->computeOclExpression).flatMap{oclExpressionEOcl =>
+            val typeName = operationDefinition.getTypeName
+            val typeConformance = if (typeName != null) {
+	            (typeName->oclType).flatMap{t =>
+	              if (!oclExpressionEOcl.getType.conformsTo(t))
+	                yieldFailure("Expected type " + t.getName + ", but found " + 
+                                oclExpressionEOcl.getType.getName, d)
+	              else
+	                Full(true)
+	            }
+	          } else
+	            Full(true)
+	          typeConformance.flatMap {_ =>
+				      Full((operation, oclExpressionEOcl))
+	          }
           }
         }
       }
@@ -1145,12 +1170,16 @@ trait OclStaticSemantics extends ocl.semantics.OclAttributeMaker with pivotmodel
   
   def resolveOperationDefinition(identifier : String, fuzzy : Boolean, container : EObject, 
                                  reference : EReference, parameters : java.util.List[ParameterCS], 
-                                 typeName : TypePathNameCS, returnType : TypeCS) : java.util.List[Operation] = {
+                                 returnType : TypeCS) : java.util.List[Operation] = {
+    val typeName = container match {
+      case OperationDefinitionInContextCS(_, _, tn) => tn->oclType
+      case o : OperationDefinitionInDefCS => o->oclType
+    }
     val parametersEOcl = parameters.map(p => p.getParameter)
     parametersEOcl.find(_.eIsProxy) match {
       case Some(couldNotResolve) => List()
       case None => {
-        (typeName->oclType).flatMap{tipe =>
+        typeName.flatMap{tipe =>
 		      if (!fuzzy)
 		      	(!!(tipe.lookupOperation(identifier, parametersEOcl.map(_.getType))) ?~
               ("Cannot resolve operation with name "+ identifier + " and parameter types (" + 

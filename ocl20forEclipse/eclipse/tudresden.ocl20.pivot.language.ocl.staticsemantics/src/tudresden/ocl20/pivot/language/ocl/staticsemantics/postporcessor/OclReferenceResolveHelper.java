@@ -69,10 +69,11 @@ public class OclReferenceResolveHelper implements IOclReferenceResolveHelper {
 	@Override
 	public List<Operation> resolveOperationDefinition(String identifier,
 			boolean resolveFuzzy, EObject container, EReference reference,
-			List<ParameterCS> parameters, TypePathNameCS typeName, TypeCS returnType) {
+			List<ParameterCS> parameters, TypeCS returnType) {
 		List<Operation> ret = OclStaticSemanticsProvider.getStaticSemantics(
-				(OclResource) container.eResource()).resolveOperationDefinition(identifier,
-				resolveFuzzy, container, reference, parameters, typeName, returnType);
+				(OclResource) container.eResource()).resolveOperationDefinition(
+				identifier, resolveFuzzy, container, reference, parameters,
+				returnType);
 		return ret;
 	}
 
@@ -81,8 +82,8 @@ public class OclReferenceResolveHelper implements IOclReferenceResolveHelper {
 			boolean resolveFuzzy, EObject container, EReference reference,
 			TypeCS parameterType) {
 		List<Parameter> ret = OclStaticSemanticsProvider.getStaticSemantics(
-				(OclResource) container.eResource()).resolveParameterDefinition(identifier,
-				resolveFuzzy, container, reference, parameterType);
+				(OclResource) container.eResource()).resolveParameterDefinition(
+				identifier, resolveFuzzy, container, reference, parameterType);
 		return ret;
 	}
 
