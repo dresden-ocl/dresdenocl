@@ -40,6 +40,7 @@ object OclStaticSemanticsTransactions {
                           case other => // ignore
                         }
                       }
+                      case DefinitionExpOperationCS(_, _) => // TODO: insert operations
                     }
                   }
                   case other => // ignore

@@ -300,18 +300,7 @@ trait OclStaticSemantics extends ocl.semantics.OclAttributeMaker with pivotmodel
 			              			("Cannot find operation " + identifier + " with parameters " + parameters + " on type " + 
 			                    c.getElementType.getName)).flatMap{o => {
 			                      addWarning("implicit collect() on " + o.getName, aeo)
-			                      val newOp = PivotModelFactory.eINSTANCE.createOperation
-			                      newOp.setName(o.getName)
-			                      newOp.setStatic(o.isStatic)
-			                      newOp.getOwnedTypeParameter.addAll(o.getOwnedTypeParameter)
-			                      newOp.getOwnedParameter.addAll(o.getOwnedParameter)
-			                      newOp.setMultiple(true)
-			                      c match {
-			                        case s : SetType => newOp.setUnique(true)
-                              case b : SequenceType => newOp.setOrdered(true)
-			                        case s : OrderedSetType => newOp.setUnique(true); newOp.setOrdered(true)
-			                      }
-			                      Full(List(newOp))}
+			                      Full(List(o))}
                       		}
                       }
                       case notMultiple =>
@@ -737,7 +726,13 @@ trait OclStaticSemantics extends ocl.semantics.OclAttributeMaker with pivotmodel
 			      property.setName(variableName.getSimpleName)
 			      // TODO: does not work yet for nested collections
 			      determineMultiplicities(oclExpressionEOcl.getType, property)
-			      Full((property, oclExpressionEOcl))
+			      (v->self).flatMap{self =>
+			      	self.getType.allProperties.find(_.getName == property.getName) match {
+			      	  case Some(p) => yieldFailure("Property " + p.getName + " is already defined on " + 
+                                           		self.getType.getName, v)
+			      	  case None => Full((property, oclExpressionEOcl))
+			      	}
+			      }
           }
         }
       }
@@ -748,9 +743,9 @@ trait OclStaticSemantics extends ocl.semantics.OclAttributeMaker with pivotmodel
           Empty
         else {
           (oclExpression->computeOclExpression).flatMap{oclExpressionEOcl =>
-            val typeName = operationDefinition.getTypeName
-            val typeConformance = if (typeName != null) {
-	            (typeName->oclType).flatMap{t =>
+            val returnType = operationDefinition.getReturnType
+            val typeConformance = if (returnType != null) {
+	            (returnType->oclType).flatMap{t =>
 	              if (!oclExpressionEOcl.getType.conformsTo(t))
 	                yieldFailure("Expected type " + t.getName + ", but found " + 
                                 oclExpressionEOcl.getType.getName, d)
@@ -760,7 +755,7 @@ trait OclStaticSemantics extends ocl.semantics.OclAttributeMaker with pivotmodel
 	          } else
 	            Full(true)
 	          typeConformance.flatMap {_ =>
-				      Full((operation, oclExpressionEOcl))
+	            Full((operation, oclExpressionEOcl))
 	          }
           }
         }
@@ -1171,44 +1166,83 @@ trait OclStaticSemantics extends ocl.semantics.OclAttributeMaker with pivotmodel
   def resolveOperationDefinition(identifier : String, fuzzy : Boolean, container : EObject, 
                                  reference : EReference, parameters : java.util.List[ParameterCS], 
                                  returnType : TypeCS) : java.util.List[Operation] = {
-    val typeName = container match {
-      case OperationDefinitionInContextCS(_, _, tn) => tn->oclType
-      case o : OperationDefinitionInDefCS => o->oclType
-    }
-    val parametersEOcl = parameters.map(p => p.getParameter)
-    parametersEOcl.find(_.eIsProxy) match {
-      case Some(couldNotResolve) => List()
-      case None => {
-        typeName.flatMap{tipe =>
-		      if (!fuzzy)
-		      	(!!(tipe.lookupOperation(identifier, parametersEOcl.map(_.getType))) ?~
-              ("Cannot resolve operation with name "+ identifier + " and parameter types (" + 
-                 parametersEOcl.map(_.getType.getName).mkString(", ") + ")"))
-              .flatMap(o => Full(List(o)))
-		      else
-		       Full(tipe.allOperations.filter(o => o.getName.startsWith(identifier)))
-		    } match {
-		      case Full(operationList) => {
-		        if (returnType != null) {
-		        	(returnType->oclType).flatMap{returnType =>
-		        		if (!fuzzy)
-		        			if (!operationList.first.getType.conformsTo(returnType))
-		        				yieldFailure("Operation return type " + operationList.first.getType.getName + 
-                             " does not conform to given type " + returnType.getName + ".", container)
-		        			else
-		        				Full(operationList)
-		        		else
-		        			Full(operationList.filter(o => o.getType.conformsTo(returnType)))
-		        	}.open_!
-		        } 
-		        else
-		        	operationList
+    container match {
+      case OperationDefinitionInContextCS(_, _, tn) => {
+        val parametersEOcl = parameters.map(p => p.getParameter)
+		    parametersEOcl.find(_.eIsProxy) match {
+		      case Some(couldNotResolve) => List()
+		      case None => {
+		        (tn->oclType).flatMap{tipe =>
+				      if (!fuzzy)
+				      	(!!(tipe.lookupOperation(identifier, parametersEOcl.map(_.getType))) ?~
+		              ("Cannot resolve operation with name "+ identifier + " and parameter types (" + 
+		                 parametersEOcl.map(_.getType.getName).mkString(", ") + ")"))
+		              .flatMap(o => Full(List(o)))
+				      else
+				       Full(tipe.allOperations.filter(o => o.getName.startsWith(identifier)))
+				    } match {
+				      case Full(operationList) => {
+				        if (returnType != null) {
+				        	(returnType->oclType).flatMap{returnType =>
+				        		if (!fuzzy)
+				        			if (!operationList.first.getType.conformsTo(returnType))
+				        				yieldFailure("Operation return type " + operationList.first.getType.getName + 
+		                             " does not conform to given type " + returnType.getName + ".", container)
+				        			else
+				        				Full(operationList)
+				        		else
+				        			Full(operationList.filter(o => o.getType.conformsTo(returnType)))
+				        	}.open_!
+				        } 
+				        else
+				        	operationList
+				      }
+				      case Failure(msg, _, _) => yieldFailure(msg, container); List()
+				      case Empty => List()
+				    }
 		      }
-		      case Failure(msg, _, _) => yieldFailure(msg, container); List()
-		      case Empty => List()
 		    }
       }
-    }
+      case o@OperationDefinitionInDefCS(_, _) => {
+        val parametersEOcl = parameters.map(p => p.getParameter)
+		    parametersEOcl.find(_.eIsProxy) match {
+		      case Some(couldNotResolve) => List()
+		      case None => {
+		        (o->context).flatMap{context =>
+			        (returnType->oclType).flatMap{rt =>
+	            	if (identifier != null && !identifier.isEmpty && context.isInstanceOf[Type]) {
+	            		val contextType = context.asInstanceOf[Type]
+	            		// TODO: add parameter check 
+	            	  contextType.allOperations.find(o => o.getName == identifier
+              																	&& o.getType.conformsTo(rt))
+              		match {
+								  	case Some(_) => yieldFailure("Operation " + identifier + " is already defined on " +
+								  																contextType.getName, o)
+								  	case None => {
+			            	  val operation = PivotModelFactory.eINSTANCE.createOperation
+						          operation.setName(identifier)
+						          operation.setType(rt)
+						          parametersEOcl.foreach(p => operation.addParameter(p))
+						          val retParameter = PivotModelFactory.eINSTANCE.createParameter
+						          retParameter.setKind(ParameterDirectionKind.RETURN)
+						          determineMultiplicities(rt, retParameter)
+						          operation.addParameter(retParameter)
+						          contextType.addOperation(operation)
+						          Full(List(operation))
+									  }
+								  }
+				        }
+				        else
+				        	Empty
+			        }
+	          }
+		      } match {
+		        case Full(opList) => opList
+		        case Failure(_, _, _) | Empty => List() 
+		      }
+	      }
+	    }
+	  }
   }
   
   def resolveParameterDefinition(identifier : String, fuzzy : Boolean, container : EObject, 

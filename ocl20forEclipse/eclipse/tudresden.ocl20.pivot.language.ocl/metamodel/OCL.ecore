@@ -292,8 +292,6 @@
   <eClassifiers xsi:type="ecore:EClass" name="PostConditionDeclarationCS" eSuperTypes="#//PrePostOrBodyDeclarationCS"/>
   <eClassifiers xsi:type="ecore:EClass" name="BodyDeclarationCS" eSuperTypes="#//PrePostOrBodyDeclarationCS"/>
   <eClassifiers xsi:type="ecore:EClass" name="OperationDefinitionCS" abstract="true">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="typeName" eType="#//TypePathNameCS"
-        containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="operation" lowerBound="1"
         eType="ecore:EClass ../../tudresden.ocl20.pivot.pivotmodel/model/pivotmodel.ecore#//Operation"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-1"
@@ -301,7 +299,10 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="returnType" eType="#//TypeCS"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="OperationDefinitionInContextCS" eSuperTypes="#//OperationDefinitionCS"/>
+  <eClassifiers xsi:type="ecore:EClass" name="OperationDefinitionInContextCS" eSuperTypes="#//OperationDefinitionCS">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="typeName" lowerBound="1"
+        eType="#//TypePathNameCS" containment="true"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="OperationDefinitionInDefCS" eSuperTypes="#//OperationDefinitionCS"/>
   <eClassifiers xsi:type="ecore:EClass" name="ParameterCS">
     <eStructuralFeatures xsi:type="ecore:EReference" name="parameter" lowerBound="1"
