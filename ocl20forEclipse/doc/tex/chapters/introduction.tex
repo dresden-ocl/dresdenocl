@@ -1,11 +1,13 @@
-\chapter{Getting started with Dresden OCL2 for Eclipse}
+\chapter{Getting started with Dresden OCL}
 \label{chapter:introduction}
 
 \begin{flushright}
 \textit{Chapter written by Claas Wilke}
 \end{flushright}
 
-This Chapter generally introduces into \keyword{\acl{DOT4Eclipse}}. \acl{DOT4Eclipse} is the last version of the \keyword{\acl{DOT}} and is based on a \keyword{Pivot Model}. The pivot model was developed by Matthias Bräuer and is described in his Großer Beleg (Minor Thesis) \cite{GB:Braeuer}. Further information about the toolkit is available at the website of the \acl{DOT} \cite{WWW:toolkit}. This Chapter starts with the installation of the required \keyword{Eclipse} plug-ins to run \acl{DOT4Eclipse}. Afterwards, it describes how to load a domain-specific model, an instance of such a model, and \acs{OCL} constraints defined on such a model.
+This chapter generally introduces into \keyword{\acl{DOT4Eclipse}}. \acl{DOT4Eclipse} is the last version of \keyword{DresdenOCL} and is based on a \keyword{Pivot Model}. The pivot model was developed by Matthias Bräuer \cite{GB:Braeuer} and is shortly explained in Chapter~\ref{chapter:architecture}. Further information about DresdenOCL is available at the project's website \cite{WWW:toolkit}. 
+
+This chapter explains the installation of \acl{DOT4Eclipse} and how to load a model, an instance of such a model, and \acs{OCL} constraints defined on such a model into \acl{DOT4Eclipse}. Besides the Eclipse distribution, DresdenOCL can also be used as a stand-alone Java Library. If you plan to use the stand-alone distribution you can skip this chapter and continue with Chapter~\ref{chapter:standalone}. However, this chapter explains the basic concepts of DresdenOCL. Although you cannot use the shown GUI wizards and browsers when using the stand-alone version, this chapter can be helpful to understand the terms used in and the mechanisms provided by DresdenOCL.
   
 
 
@@ -20,20 +22,18 @@ Four different possibilities exist to install \acl{DOT4Eclipse}.
 	\item Or you may checkout and run the source code distribution from the \acs{SVN} available at \cite{WWW:toolkitSVN}.
 \end{enumerate}
 
-This Section will explain the possibilities (1) and (4).
+This section will explain the possibilities (1) and (4).
 	
 	
 \subsection{Installing Dresden OCL2 for Eclipse using the Eclipse Update Site}
 	
-To install \acl{DOT4Eclipse} via the \keyword{Eclipse Update Site}, you have to start an \keyword{Eclipse} instance and select the menu option \eclipse{Help -> Install New Software ...}. Enter the path
+To install \acl{DOT4Eclipse} via the \keyword{Eclipse Update Site}, you have to start an \keyword{Eclipse} instance and select the menu option \eclipse{Help -> Install New Software ...}
 
-\url{http://dresden-ocl.sourceforge.net/downloads/updatesite/}
-
-and press the \eclipse{Add...} button (see Figure \ref{pic:intro:updateSite01}). In the new opened window you can additionaly enter a name for the update site (see Figure \ref{pic:intro:updateSite02}).
+Enter the path \url{http://dresden-ocl.sourceforge.net/downloads/updatesite/} and press the \eclipse{Add...} button (see Figure \ref{pic:intro:updateSite01}). In the new opened window you can additionaly enter a name for the update site (see Figure \ref{pic:intro:updateSite02}).
 
 \begin{figure}[!b]
 	\centering
-	\includegraphics[width=1.0\linewidth]{figures/introduction/updateSite01}
+	\includegraphics[width=0.8\linewidth]{figures/introduction/updateSite01}
 	\caption{Adding an Eclipse Update Site (Step 1).}
 	\label{pic:intro:updateSite01}
 
@@ -45,7 +45,7 @@ and press the \eclipse{Add...} button (see Figure \ref{pic:intro:updateSite01}).
 	\label{pic:intro:updateSite02}
 \end{figure}
 
-Now you can select the features of \acl{DOT4Eclipse} which you want to install. Select them and click on the \eclipse{Next >} button (see Figure \ref{pic:intro:updateSite03}). An overview about all features of \acl{DOT4Eclipse} can be found in Table \ref{tab:plugins}. Follow the wizard and agree with the user license. Then the Toolkit will be installed. Afterwards, you should restart your Eclipse application to finish the installation.
+Now you can select the features of \acl{DOT4Eclipse} which you want to install. Select them and click on the \eclipse{Next >} button (see Figure \ref{pic:intro:updateSite03}). An overview about all features of \acl{DOT4Eclipse} can be found in Table~\ref{tab:plugins} in the appendix of this manual. Follow the wizard and agree with the user license. Then the Toolkit will be installed. Afterwards, you should restart your Eclipse application to finish the installation.
 
 \begin{figure}[t]
 	\centering
@@ -60,9 +60,9 @@ Now you can select the features of \acl{DOT4Eclipse} which you want to install. 
 
 To use \acl{DOT4Eclipse} by checking out the source code from the \acs{SVN} you need to install an \acs{SVN} client. In the following we use the \keyword{Eclipse Subversive} plug-in and at least one of the \keyword{\acs{SVN} Connectors} available at \cite{WWW:eclipseSubversive}.
 
-After installing Eclipse Subversive, a new \keyword{Eclispe Perspective} providing access to \acs{SVN} should exist. The perspective can be opened via the menu \eclipse{Window > Open Perpective > Other... > SVN Repository Exploring}. In the view \eclipse{\acs{SVN} Repositories} you can add a new repository using the URL \url{https://dresden-ocl.svn.sourceforge.net/svnroot/dresden-ocl/} (see Figure \ref{pic:intro:svn01}).
+After installing Eclipse Subversive, a new \keyword{Eclispe Perspective} providing access to \acs{SVN} should exist. The perspective can be opened via the menu \eclipse{Window > Open Perpective > Other... > SVN Repository Exploring}. In the view \eclipse{\acs{SVN} Repositories} you can add a new repository using the \acs{URL} \url{https://dresden-ocl.svn.sourceforge.net/svnroot/dresden-ocl/} (see Figure \ref{pic:intro:svn01}).
 
-\begin{figure}[!h]
+\begin{figure}[!b]
 	\centering
 	\includegraphics[width=0.5\linewidth]{figures/introduction/svn01}
 	\caption{Adding an SVN repository.}
@@ -79,19 +79,17 @@ After pushing the \eclipse{Finish} button, the \acs{SVN} repository root should 
 \end{figure}
 
 
-\subsection{Which Plug-ins do I need at least?}
+\subsection{Which Plug-ins do You need at least?}
 
-An often asked question is ``Which plug-ins are at least required to run \acl{DOT4Eclipse}?'' Well, the answer is: ``That depends.''
-
-That depends on the things you want to do with \acl{DOT4Eclipse}. Table \ref{tab:plugins} shows a list of the currently existing plug-ins of \acl{DOT4Eclipse}, that are related to different features. You should install at least the \keyword{Core} feature, at least one plug-in of the \keyword{Metamodels} feature, and the complete  \keyword{Parser} feature. The \keyword{Interpreter} and \keyword{OCL2Java} features are only required if you want to interpret constraints or to generate code from constraints, respectively. If you import or interpret model instances, you need to install the \keyword{Model Instances} feature as well. The examples of the \keyword{Example} feature are only required to run the examples provided in the tutorials available at \cite{WWW:toolkit}. We recommend to install all provided features.
+Often people wonder which plug-ins of \acl{DOT4Eclipse} they require for a minimum installation. The answer to this question depends on the things you plan to do with \acl{DOT4Eclipse}. Table~\ref{tab:plugins} in the appendix of this manual shows a list of the currently existing plug-ins of \acl{DOT4Eclipse}, that are related to different features. You should install at least the \keyword{Core} feature, at least one meta-model of the \keyword{Meta-Models} feature, and the complete \keyword{Parser} feature. The \keyword{Interpreter} and \keyword{OCL22Java} features are only required if you want to interpret constraints or to generate code from constraints, respectively. If you import or interpret model instances, you need to install the \keyword{Model Instances} feature as well. The examples of the \keyword{Example} feature are only required to run the examples provided in this manual. We recommend to install all provided features.
 		
 
 
 \subsection{Building the OCL2 Parser}
 	
-If you decided to run \acl{DOT4Eclipse} as source code plug-ins from an Eclipse work\-space, you need to build the \keyword{OCL2 Parser} via an \keyword{Ant} build script. If you installed the Toolkit using the update site, you can skip this Subsection.
+If you decided to run \acl{DOT4Eclipse} as source code plug-ins from an Eclipse work\-space, you need to build the \keyword{OCL2 Parser} via an \keyword{Ant} build script. If you installed the Toolkit using the update site, you can skip this section.
   
-To build the \acs{OCL}2 Parser select the file \reference{build.xml} in the project \reference{tudresden.\linebreak[0]ocl20.pivot.ocl2\-par\-ser} and open the context menu. Select the function \eclipse{Run As ... > Ant Build ...} (see Figure \ref{pic:intro:parserbuild01}).
+To build the \acs{OCL}2 Parser select the file \reference{build.xml} in the project \reference{tudresden.\linebreak[0]ocl20.pivot.ocl2\-par\-ser} and open the context menu. Select the function \eclipse{Run As ... > Ant Build ...} (see Figure~\ref{pic:intro:parserbuild01}).
 
 \begin{figure}[p]
 	\centering
@@ -102,7 +100,7 @@ To build the \acs{OCL}2 Parser select the file \reference{build.xml} in the proj
   \vspace{4.0em}
 
 	\centering
-	\includegraphics[width=1.0\linewidth]{figures/introduction/parserbuild02}
+	\includegraphics[width=0.8\linewidth]{figures/introduction/parserbuild02}
 	\caption{Settings of the JRE for the Ant build script.}
 	\label{pic:intro:parserbuild02}
 
@@ -114,11 +112,11 @@ To build the \acs{OCL}2 Parser select the file \reference{build.xml} in the proj
 	\label{pic:intro:parserbuild03}
 \end{figure}
 	
-A new window should open. Select in the sub menu \keyword{\acs{JRE}} the check box \keyword{Run in the same \acs{JRE} as the workspace} and push the \keyword{OK} button (see Figure \ref{pic:intro:parserbuild02}). Afterwards, the \acs{OCL}2 Parser should be generated without errors. If an error like ``Unable to find javac compiler.'' occurs, you might be trying to run the \keyword{Ant} script with a \keyword{\acl{JRE}} instead of a \keyword{\acs{JDK}} (For errors like this one) use the \eclipse{Installed JREs...} button in the same window to select a JDK instead.
+A new window should open. Switch to the tab \keyword{\acs{JRE}}, select the check box \keyword{Run in the same \acs{JRE} as the workspace} and push the \keyword{OK} button (see Figure~\ref{pic:intro:parserbuild02}). Afterwards, the \acs{OCL}2 Parser should be generated without errors. If an error like ``Unable to find javac compiler.'' occurs, you might be trying to run the \keyword{Ant} script with a \keyword{\acl{JRE}} instead of a \keyword{\acs{JDK}} (For errors like this one) use the \eclipse{Installed JREs...} button in the same window to select a \acs{JDK} instead.
 	
-After executing the build script successfully you need to update the projects in your workspace. Update the project \reference{tudresden.ocl20.pivot.oclparser} via context menu (\eclipse{Refresh}, see Figure \ref{pic:intro:parserbuild03}).
+After executing the build script successfully you need to update the projects in your workspace. Update the project \reference{tudresden.ocl20.pivot.oclparser} via context menu (\eclipse{Refresh}, see Figure~\ref{pic:intro:parserbuild03}).
 	
-Additionally, you need to recompile all depending projects. Select the function \eclipse{Project > Clean... > Clean all projects} in the Eclipse menu to clean all projects. Now all the projects should not contain any errors anymore and should be executable.
+Additionally, you need to recompile all depending projects. Select the function \eclipse{Project > Clean...~> Clean all projects} in the Eclipse menu to clean all projects. Now all the projects should not contain any errors any more and should be executable.
 
 
 
@@ -140,28 +138,28 @@ The use of \acl{DOT4Eclipse} is explained using the \keyword{Simple Example} whi
 	\label{pic:examples:simple01}
 \end{figure}
 
-\acl{DOT4Eclipse} provides more examples than the \keyword{Simple Example}. The different examples use different meta-models which is possible with the \textit{Pivot Model} architecture of the Toolkit. An overview about all examples provided with \keyword{Dresden OCL2 for Eclipse} is listed in Table \ref{tab:examples}. The Simple Example can be used with two different meta-models. These are \keyword{\acs{UML} 2.0} (based on \keyword{\acs{Eclipse MDT} \acs{UML}2}) and \keyword{Java}.
+\acl{DOT4Eclipse} provides more examples than the Simple Example. The different examples use different meta-models which is possible with the \textit{Pivot Model} architecture of the Toolkit. An overview about all examples provided with \acl{DOT4Eclipse} is listed in Table~\ref{tab:examples} in the appendix of this manual. The Simple Example can be used with two different meta-models. These are \keyword{\acs{UML} 2.0} (based on \keyword{\acs{Eclipse MDT} \acs{UML}}) and \keyword{Java}.
 	
 
-\subsection{Loading a Domain-Specific Model}
+\subsection{Loading a Model}
 	
-After starting Eclipse you have to load a model into the toolkit. If the plug-ins of \acl{DOT4Eclipse} have been installed using the update site, the Simple Example plug-in has to be imported into the \keyword{Workspace} first. Create a new Java project into your workspace and select the \keyword{Import Wizard} \eclipse{General > Archive File}. In the following window select the \eclipse{plugins} directory in your Eclipse root folder, select the archive \reference{tudresden.ocl20.pivot.examples.\linebreak[0]simple\_1.0.0.jar} and push the \eclipse{Finish} button.
+After starting Eclipse you have to load a model into the DresdenOCL. If the plug-ins of \acl{DOT4Eclipse} have been installed using the update site, the Simple Example plug-in has to be imported into the \keyword{Workspace} first. Create a new Java project into your workspace and select the \keyword{Import Wizard} \eclipse{General > Archive File}. In the following window select the \eclipse{plugins} directory in your Eclipse root folder, select the archive \reference{tudresden.ocl20.pivot.examples.\linebreak[0]simple\_<version\_nr>.jar} and push the \eclipse{Finish} button.
 
-Now you can load a model. Select the menu option \eclipse{Dresden OCL2 > Load Model}. In the opened wizard you have to select a model file and a meta-model for the model (see Figure \ref{pic:intro:loadmodel01}). Push the button \eclipse{Browse Workspace...} and select the file \reference{model/simple.uml} inside the Simple Example Project. Then select the meta-model \acs{UML}2 and push the \eclipse{Finish} button.
+Now you can load a model. Select the menu option \eclipse{Dresden OCL2 > Load Model}. In the opened wizard you have to select a model file and a meta-model for the model\footnote{Section~\ref{sect:info:models} gives an overview over the different meta-models supported by DresdenOCL.} (see Figure \ref{pic:intro:loadmodel01}). Push the button \eclipse{Browse Workspace...} and select the file \reference{model/simple.uml} inside the Simple Example Project. Then select the meta-model \acs{UML}2 and push the \eclipse{Finish} button.
 
-Figure \ref{pic:intro:loadmodel02} shows the loaded Simple Example model, which uses \acs{UML}2 as its meta-model. Via the menu button of the \eclipse{Model Browser} (the little triangle in the right top corner) you can switch between different models loaded into \acl{DOT4Eclipse} (see Figure \ref{pic:intro:loadmodel03}) With the red ex you can close the currently selected model.
+Figure \ref{pic:intro:loadmodel02} shows the loaded Simple Example model, which uses \acs{UML}2 as its meta-model. Via the menu button of the \eclipse{Model Browser} (the little triangle in the right top corner) you can switch between different models loaded into \acl{DOT4Eclipse} (see Figure \ref{pic:intro:loadmodel03}) With the red \emph{X} you can close the currently selected model.
 	
 \begin{figure}[!htbp]
 	\centering
-	\includegraphics[width=0.8\linewidth]{figures/introduction/loadmodel01}
-	\caption{Loading a domain-specific model.}
+	\includegraphics[width=0.7\linewidth]{figures/introduction/loadmodel01}
+	\caption{Loading a Model.}
 	\label{pic:intro:loadmodel01}
 	
   \vspace{6.0em}
 
 	\centering
-	\includegraphics[width=0.5\linewidth]{figures/introduction/loadmodel02}
-	\caption{The Simple Example model in the model browser.}
+	\includegraphics[width=0.4\linewidth]{figures/introduction/loadmodel02}
+	\caption{The Simple Example Model in the Model Browser.}
 	\label{pic:intro:loadmodel02}
 \end{figure}
 
@@ -169,23 +167,23 @@ Figure \ref{pic:intro:loadmodel02} shows the loaded Simple Example model, which 
 \subsection{Loading a Model Instance}
 \label{intro:loadModel}
 	
-After loading a model, you can load a \keyword{model instance} using another wizard. Use the menu option \eclipse{Dresden OCL2 > Load Model Instance}. In the opened wizard you have to select a model instance (in this tutorial we used the file \reference{bin/tudresden/ocl20/\linebreak[0]pivot/examples/simple/instance/\linebreak[0]Mo\-del\-InstanceProviderClass\linebreak[0].class} of the Simple Example (see Figure \ref{pic:intro:loadInstance01}). Besides the model instance resource you have to select a model for which the model instance shall be loaded and the type of model instance you want to load (we want to load a \keyword{Java Instance}).
+After loading a model, you can load a an instance of this model using another wizard. Use the menu option \eclipse{Dresden OCL2 > Load Model Instance}. In the opened wizard you have to select a model instance (in this tutorial we used the file \reference{bin/tudresden/ocl20/\linebreak[0]pivot/examples/\linebreak[0]sim\-ple/\linebreak[0]in\-stance/\linebreak[0]Mo\-del\-InstanceProviderClass\linebreak[0].class} of the Simple Example (see Figure \ref{pic:intro:loadInstance01}). Besides the model instance resource you have to select a model for which the model instance shall be loaded and the type of model instance you want to load\footnote{Section~\ref{sect:info:modelinstances} gives an overview over the different types of model instances supported by DresdenOCL.} (we want to load a \keyword{Java Instance}).
 
 \begin{figure}[!p]
 	\centering
-	\includegraphics[width=0.5\linewidth]{figures/introduction/loadmodel03}
-	\caption{You can switch between different models using the little triangle.}
+	\includegraphics[width=0.4\linewidth]{figures/introduction/loadmodel03}
+	\caption{You can switch between different Models using the little Triangle.}
 	\label{pic:intro:loadmodel03}
 
   \vspace{6.0em}
   
 	\centering
-	\includegraphics[width=0.8\linewidth]{figures/introduction/loadinstance01}
-	\caption{Loading a simple model instance.}
+	\includegraphics[width=0.7\linewidth]{figures/introduction/loadinstance01}
+	\caption{Loading a Simple Model Instance.}
 	\label{pic:intro:loadInstance01}
 \end{figure}
 
-Figure \ref{pic:intro:loadInstance02} shows the loaded model instance of the Simple Example model. Like in the model browser you can switch between different model instances and you can close selected instances. Note that the \eclipse{Model Instance Browser} only shows the model instances of the model actually selected in the model browser. By switching the domain specific model, you also switch the pool of model instances available in the model instance browser.
+Figure \ref{pic:intro:loadInstance02} shows the imported model instance. Like in the model browser you can switch between different model instances and you can close selected instances. Note that the \eclipse{Model Instance Browser} only shows the model instances of the model actually selected in the model browser. By switching the model in the model browser, you also switch the pool of model instances available in the model instance browser.
 
 \begin{figure}[!t]
 	\centering
@@ -196,11 +194,11 @@ Figure \ref{pic:intro:loadInstance02} shows the loaded model instance of the Sim
 	
 	
 
-\subsection{Parsing OCL expressions}
+\subsection{Parsing OCL Expressions}
 	
-Before you can work with \acs{OCL} constraints, you have to load them like the domain-specific model and the model instance into the toolkit. Use the menu option \eclipse{Dresden OCL2 > OCL Expressions} and select an \acs{OCL} file. In this tutorial we used the \acs{OCL} file \reference{constraints/invariants.ocl} of the Simple Example. (see Figure \ref{pic:intro:loadconstraints01}). The constraints of the file \reference{constraints/invariants.ocl} are shown in Listing \ref{list:intro:constraints01}.
+Before you can work with \acs{OCL} constraints, you have to load them like the model and the model instance into DresdenOCL. Use the menu option \eclipse{Dresden OCL2 > Parse OCL Constraints} and select an \acs{OCL} file. In this tutorial we use the \acs{OCL} file \reference{constraints/invariants.ocl} of the Simple Example. (see Figure \ref{pic:intro:loadconstraints01}). The constraints of the file \reference{constraints/invariants.ocl} are shown in Listing \ref{list:intro:constraints01}.
 
-The expressions of the selected \acs{OCL} file are loaded into the actually selected model. Figure \ref{pic:intro:loadconstraints01} shows the \eclipse{Model Browser} containing the model and the parsed expressions.
+The expressions of the selected \acs{OCL} file are parsed and added to the actually selected model. Figure~\ref{pic:intro:loadconstraints02} shows the \eclipse{Model Browser} containing the model and the parsed expressions. Using the icons depicted in Figure~\ref{pic:intro:loadconstraints03}, you can remove selected or all parsed OCL constraints from the model again.
 
 \begin{figure}[b]	
 \lstset{
@@ -239,12 +237,17 @@ endpackage
 	\label{pic:intro:loadconstraints02}
 \end{figure}
 	
+\begin{figure}[t]
+	\centering
+	\includegraphics[width=0.4\linewidth]{figures/introduction/loadconstraints03}
+	\caption{How to remove Constraints from a Model again.}
+	\label{pic:intro:loadconstraints03}
+\end{figure}
 	
-\section{Standalone Application}
-If you do not want to use Eclipse, but still want to interpret OCL constraints or generate AspectJ code, you can use \acl{DOT4Eclipse} outside of Eclipse. A detailed description on how to do this is given in Chapter \ref{chapter:standalone}.
-
 \section{Summary}
   
-This Chapter described how to use \acl{DOT4Eclipse}. It explained how to install the toolkit's plug-ins. Afterwards, the loading of domain-specific models, model instances and \acs{OCL} constraints into the toolkit was explained.
+This chapter described how to use \acl{DOT4Eclipse}. It explained how to install the plug-ins of \acl{DOT4Eclipse}. Afterwards, the import of models, model instances and \acs{OCL} constraints into DresdenOCL was explained.
 
-Now, the imported models can be used with the tools provided by \acl{DOT4Eclipse}. For example you can use the \keyword{OCL2 Interpreter} of \acl{DOT4Eclipse} to interpret \acs{OCL} constraints for a given model and model instance (as explained in Chapter \ref{chapter:interpretation}) or you can use the \keyword{OCL22Java Code Generator} to generate \keyword{AspectJ} code for a loaded model and \acs{OCL} constraints (as explained in Chapter \ref{chapter:codeGeneration}).
+Now, the imported models can be used with the tools provided by DresdenOCL. For example you can use the \keyword{OCL2 Interpreter} to interpret \acs{OCL} constraints for a given model and model instance (as explained in Chapter~\ref{chapter:interpretation}) or you can use the \keyword{OCL22Java Code Generator} to generate \keyword{AspectJ} code for a loaded model and \acs{OCL} constraints (as explained in Chapter~\ref{chapter:codeGeneration}).
+
+If you do not want to use Eclipse, but still want to interpret OCL constraints or generate AspectJ code, you can use DresdenOCL as a stand-alone library outside of Eclipse. A detailed description on how to do this is given in Chapter~\ref{chapter:standalone}.
