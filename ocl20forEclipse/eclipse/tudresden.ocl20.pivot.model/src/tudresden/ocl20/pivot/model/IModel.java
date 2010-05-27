@@ -35,6 +35,8 @@ package tudresden.ocl20.pivot.model;
 import java.util.Collection;
 import java.util.List;
 
+import org.eclipse.emf.ecore.resource.ResourceSet;
+
 import tudresden.ocl20.pivot.model.metamodel.IMetamodel;
 import tudresden.ocl20.pivot.pivotmodel.Constraint;
 import tudresden.ocl20.pivot.pivotmodel.Namespace;
@@ -62,6 +64,16 @@ public interface IModel {
 	 *         successfully.
 	 */
 	public boolean addListener(IModelListener listener);
+
+	/**
+	 * <p>
+	 * Can be used to close references resources of this {@link IModel} before
+	 * it is removed from the DresdenOCL respository. This is f.e. sensible if
+	 * {@link ResourceSet}s must be closed that may contain elements that do not
+	 * belong to the {@link IModel}, e.g. parsed {@link Constraint}s.
+	 * </p>
+	 */
+	public void dispose();
 
 	/**
 	 * <p>

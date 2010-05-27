@@ -18,6 +18,7 @@ import org.junit.runners.Suite;
 
 import tudresden.ocl20.pivot.metamodels.test.tests.TestEnumeration;
 import tudresden.ocl20.pivot.metamodels.test.tests.TestEnumerationLiteral;
+import tudresden.ocl20.pivot.metamodels.test.tests.TestModel;
 import tudresden.ocl20.pivot.metamodels.test.tests.TestNamespace;
 import tudresden.ocl20.pivot.metamodels.test.tests.TestOperation;
 import tudresden.ocl20.pivot.metamodels.test.tests.TestParameter;
@@ -40,8 +41,9 @@ import tudresden.ocl20.pivot.model.metamodel.IMetamodel;
  */
 @RunWith(Suite.class)
 @Suite.SuiteClasses( { TestEnumeration.class, TestEnumerationLiteral.class,
-		TestNamespace.class, TestType.class, TestOperation.class,
-		TestParameter.class, TestPrimitiveType.class, TestProperty.class })
+		TestModel.class, TestNamespace.class, TestType.class,
+		TestOperation.class, TestParameter.class, TestPrimitiveType.class,
+		TestProperty.class })
 public class MetaModelTestSuite {
 	/*
 	 * This class remains completely empty, being used only as a holder for the

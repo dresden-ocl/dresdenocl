@@ -70,6 +70,14 @@ public class JavaModel extends AbstractModel implements IModel {
 		this.myAdapterFactory = new JavaAdapterFactory();
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see tudresden.ocl20.pivot.model.IModel#dispose()
+	 */
+	public void dispose() {
+		/* For Java Models no resources must be closed. */
+	}
+
 	/**
 	 * <p>
 	 * Overridden to base equality check on the URI of the associated resource.

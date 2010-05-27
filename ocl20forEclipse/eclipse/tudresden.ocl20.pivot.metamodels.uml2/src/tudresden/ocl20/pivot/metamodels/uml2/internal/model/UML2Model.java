@@ -92,6 +92,16 @@ public class UML2Model extends AbstractModel implements IModel {
 		this.resource = resource;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see tudresden.ocl20.pivot.model.IModel#dispose()
+	 */
+	public void dispose() {
+		/* Unload the resource to remove external contents. */
+		this.resource.unload();
+	}
+
 	/**
 	 * <p>
 	 * This method lazily creates a {@link Namespace} adapter for the virtual

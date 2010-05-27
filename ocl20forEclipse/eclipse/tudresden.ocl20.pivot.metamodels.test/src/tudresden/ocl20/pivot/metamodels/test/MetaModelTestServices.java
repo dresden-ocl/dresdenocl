@@ -56,12 +56,12 @@ public final class MetaModelTestServices {
 	public static final String NAMESPACE_NAME_PACKAGE2 = "package2";
 
 	/** The name of the {@link Namespace} <code>package1</code>. */
-	public static final String NAMESPACE_QUALIFIED_NAME_PACKAGE1 =
-			ModelConstants.ROOT_PACKAGE_NAME + "::" + NAMESPACE_NAME_PACKAGE1;
+	public static final String NAMESPACE_QUALIFIED_NAME_PACKAGE1 = ModelConstants.ROOT_PACKAGE_NAME
+			+ "::" + NAMESPACE_NAME_PACKAGE1;
 
 	/** The name of the {@link Namespace} <code>package2</code>. */
-	public static final String NAMESPACE_QUALIFIED_NAME_PACKAGE2 =
-			NAMESPACE_QUALIFIED_NAME_PACKAGE1 + "::" + NAMESPACE_NAME_PACKAGE2;
+	public static final String NAMESPACE_QUALIFIED_NAME_PACKAGE2 = NAMESPACE_QUALIFIED_NAME_PACKAGE1
+			+ "::" + NAMESPACE_NAME_PACKAGE2;
 
 	/** The name of the {@link Type} <code>TestTypeClass1</code>. */
 	public static final String TYPE_NAME_TESTTYPECLASS1 = "TestTypeClass1";
@@ -72,91 +72,84 @@ public final class MetaModelTestServices {
 	/** The name of the {@link Type} <code>TestPropertyClass</code>. */
 	public static final String TYPE_NAME_TESTPROPERTYCLASS = "TestPropertyClass";
 
-	/** The name of the {@link Type} <code>TestOperationAndParameterClass</code>. */
-	public static final String TYPE_NAME_TESTOPERATIONANDPARAMETERCLASS =
-			"TestOperationAndParameterClass";
+	/**
+	 * The name of the {@link Type} <code>TestOperationAndParameterClass</code>.
+	 */
+	public static final String TYPE_NAME_TESTOPERATIONANDPARAMETERCLASS = "TestOperationAndParameterClass";
 
 	/** The name of the {@link Type} <code>TestPrimitiveTypeClass</code>. */
-	public static final String TYPE_NAME_TESTPRIMITIVETYPECLASS =
-			"TestPrimitiveTypeClass";
+	public static final String TYPE_NAME_TESTPRIMITIVETYPECLASS = "TestPrimitiveTypeClass";
 
 	/** The name of the {@link Type} <code>TestTypeInterface1</code>. */
-	public static final String TYPE_NAME_TESTTYPEINTERFACE1 =
-			"TestTypeInterface1";
+	public static final String TYPE_NAME_TESTTYPEINTERFACE1 = "TestTypeInterface1";
 
 	/** The name of the {@link Type} <code>TestTypeInterface2</code>. */
-	public static final String TYPE_NAME_TESTTYPEINTERFACE2 =
-			"TestTypeInterface2";
+	public static final String TYPE_NAME_TESTTYPEINTERFACE2 = "TestTypeInterface2";
 
 	/** The qualified name of the {@link Type} <code>TestTypeClass1</code>. */
-	public static final String TYPE_QUALIFIED_NAME_TESTTYPECLASS1 =
-			NAMESPACE_QUALIFIED_NAME_PACKAGE2 + "::" + TYPE_NAME_TESTTYPECLASS1;
+	public static final String TYPE_QUALIFIED_NAME_TESTTYPECLASS1 = NAMESPACE_QUALIFIED_NAME_PACKAGE2
+			+ "::" + TYPE_NAME_TESTTYPECLASS1;
 
 	/** The qualified name of the {@link Type} <code>TestTypeClass2</code>. */
-	public static final String TYPE_QUALIFIED_NAME_TESTTYPECLASS2 =
-			NAMESPACE_QUALIFIED_NAME_PACKAGE2 + "::" + TYPE_NAME_TESTTYPECLASS2;
+	public static final String TYPE_QUALIFIED_NAME_TESTTYPECLASS2 = NAMESPACE_QUALIFIED_NAME_PACKAGE2
+			+ "::" + TYPE_NAME_TESTTYPECLASS2;
 
 	/** The qualified name of the {@link Type} <code>TestPropertyClass</code>. */
-	public static final String TYPE_QUALIFIED_NAME_TESTPROPERTYCLASS =
-			NAMESPACE_QUALIFIED_NAME_PACKAGE2 + "::" + TYPE_NAME_TESTPROPERTYCLASS;
+	public static final String TYPE_QUALIFIED_NAME_TESTPROPERTYCLASS = NAMESPACE_QUALIFIED_NAME_PACKAGE2
+			+ "::" + TYPE_NAME_TESTPROPERTYCLASS;
 
 	/**
 	 * The qualified name of the {@link Type}
 	 * <code>TestOperationAndParameterClass</code>.
 	 */
-	public static final String TYPE_QUALIFIED_NAME_TESTOPERATIONANDPARAMETERCLASS =
-			NAMESPACE_QUALIFIED_NAME_PACKAGE2 + "::"
-					+ TYPE_NAME_TESTOPERATIONANDPARAMETERCLASS;
+	public static final String TYPE_QUALIFIED_NAME_TESTOPERATIONANDPARAMETERCLASS = NAMESPACE_QUALIFIED_NAME_PACKAGE2
+			+ "::" + TYPE_NAME_TESTOPERATIONANDPARAMETERCLASS;
 
 	/**
-	 * The qualified name of the {@link Type} <code>TestPrimitiveTypeClass</code>.
+	 * The qualified name of the {@link Type}
+	 * <code>TestPrimitiveTypeClass</code>.
 	 */
-	public static final String TYPE_QUALIFIED_NAME_TESTPRIMITIVETYPECLASS =
-			NAMESPACE_QUALIFIED_NAME_PACKAGE2 + "::"
-					+ TYPE_NAME_TESTPRIMITIVETYPECLASS;
+	public static final String TYPE_QUALIFIED_NAME_TESTPRIMITIVETYPECLASS = NAMESPACE_QUALIFIED_NAME_PACKAGE2
+			+ "::" + TYPE_NAME_TESTPRIMITIVETYPECLASS;
 
 	/** The qualified name of the {@link Type} <code>TestTypeInterface1</code>. */
-	public static final String TYPE_QUALIFIED_NAME_TESTTYPEINTERFACE1 =
-			NAMESPACE_QUALIFIED_NAME_PACKAGE2 + "::" + TYPE_NAME_TESTTYPEINTERFACE1;
+	public static final String TYPE_QUALIFIED_NAME_TESTTYPEINTERFACE1 = NAMESPACE_QUALIFIED_NAME_PACKAGE2
+			+ "::" + TYPE_NAME_TESTTYPEINTERFACE1;
 
 	/** The qualified name of the {@link Type} <code>TestTypeInterface2</code>. */
-	public static final String TYPE_QUALIFIED_NAME_TESTTYPEINTERFACE2 =
-			NAMESPACE_QUALIFIED_NAME_PACKAGE2 + "::" + TYPE_NAME_TESTTYPEINTERFACE2;
+	public static final String TYPE_QUALIFIED_NAME_TESTTYPEINTERFACE2 = NAMESPACE_QUALIFIED_NAME_PACKAGE2
+			+ "::" + TYPE_NAME_TESTTYPEINTERFACE2;
 
 	/** The name of the {@link Type} <code>TestEnumeration</code>. */
 	public static final String ENUMERATION_NAME_ENUMERATION1 = "TestEnumeration";
 
 	/** The qualified name of the {@link Type} <code>TestEnumeration</code>. */
-	public static final String ENUMERATION_QUALIFIED_NAME_ENUMERATION1 =
-			NAMESPACE_QUALIFIED_NAME_PACKAGE2 + "::" + ENUMERATION_NAME_ENUMERATION1;
+	public static final String ENUMERATION_QUALIFIED_NAME_ENUMERATION1 = NAMESPACE_QUALIFIED_NAME_PACKAGE2
+			+ "::" + ENUMERATION_NAME_ENUMERATION1;
 
 	/**
 	 * The name of the {@link EnumerationLiteral} <code>TestLiteral1</code>.
 	 */
-	public static final String ENUMERATIONLITERAL_NAME_ENUMERATIONLITERAL1 =
-			"TestLiteral1";
+	public static final String ENUMERATIONLITERAL_NAME_ENUMERATIONLITERAL1 = "TestLiteral1";
 
 	/**
 	 * The name of the {@link EnumerationLiteral} <code>TestLiteral2</code>.
 	 */
-	public static final String ENUMERATIONLITERAL_NAME_ENUMERATIONLITERAL2 =
-			"TestLiteral2";
+	public static final String ENUMERATIONLITERAL_NAME_ENUMERATIONLITERAL2 = "TestLiteral2";
 
 	/**
 	 * The qualified name of the {@link EnumerationLiteral}
 	 * <code>TestLiteral1</code>.
 	 */
-	public static final String ENUMERATIONLITERAL_QUALIFIED_NAME_ENUMERATIONLITERAL1 =
-			ENUMERATION_QUALIFIED_NAME_ENUMERATION1 + "::"
-					+ ENUMERATIONLITERAL_NAME_ENUMERATIONLITERAL1;
+	public static final String ENUMERATIONLITERAL_QUALIFIED_NAME_ENUMERATIONLITERAL1 = ENUMERATION_QUALIFIED_NAME_ENUMERATION1
+			+ "::" + ENUMERATIONLITERAL_NAME_ENUMERATIONLITERAL1;
 
 	/**
 	 * The qualified name of the {@link EnumerationLiteral}
 	 * <code>TestLiteral2</code>.
 	 */
-	public static final String ENUMERATIONLITERAL_QUALIFIED_NAME_ENUMERATIONLITERAL2 =
-			ENUMERATION_QUALIFIED_NAME_ENUMERATION1 + "::"
-					+ ENUMERATIONLITERAL_NAME_ENUMERATIONLITERAL2;
+	public static final String ENUMERATIONLITERAL_QUALIFIED_NAME_ENUMERATIONLITERAL2 = ENUMERATION_QUALIFIED_NAME_ENUMERATION1
+			+ "::" + ENUMERATIONLITERAL_NAME_ENUMERATIONLITERAL2;
 
 	/** The name of the {@link Operation} <code>operation1</code>. */
 	public static final String OPERATION_NAME_OPERATION1 = "operation1";
@@ -164,69 +157,73 @@ public final class MetaModelTestServices {
 	/** The name of the {@link Operation} <code>operation2</code>. */
 	public static final String OPERATION_NAME_OPERATION2 = "operation2";
 
-	/** The name of the {@link Operation} <code>operationWithoutParameters</code>. */
-	public static final String OPERATION_NAME_OPERATIONWITHOUTPARAMETERS =
-			"operationWithoutParameters";
+	/**
+	 * The name of the {@link Operation} <code>operationWithoutParameters</code>
+	 * .
+	 */
+	public static final String OPERATION_NAME_OPERATIONWITHOUTPARAMETERS = "operationWithoutParameters";
 
-	/** The name of the {@link Operation} <code>voidOperationWithParameter</code>. */
-	public static final String OPERATION_NAME_VOIDOPERATIONWITHPARAMETER =
-			"voidOperationWithParameter";
+	/**
+	 * The name of the {@link Operation} <code>voidOperationWithParameter</code>
+	 * .
+	 */
+	public static final String OPERATION_NAME_VOIDOPERATIONWITHPARAMETER = "voidOperationWithParameter";
 
 	/**
 	 * The name of the {@link Operation}
 	 * <code>inputOutputParameterOperation</code>.
 	 */
-	public static final String OPERATION_NAME_INPUTOUTPUTPARAMETEROPERATION =
-			"inputOutputParameterOperation";
+	public static final String OPERATION_NAME_INPUTOUTPUTPARAMETEROPERATION = "inputOutputParameterOperation";
 
 	/** The name of the {@link Operation} <code>outputParameterOperation</code>. */
-	public static final String OPERATION_NAME_OUTPUTPARAMETEROPERATION =
-			"outputParameterOperation";
+	public static final String OPERATION_NAME_OUTPUTPARAMETEROPERATION = "outputParameterOperation";
 
 	/** The name of the {@link Operation} <code>staticOperation</code>. */
 	public static final String OPERATION_NAME_STATICOPERATION = "staticOperation";
 
 	/** The name of the {@link Operation} <code>multipleOperation</code>. */
-	public static final String OPERATION_NAME_MULTIPLEOPERATION =
-			"multipleOperation";
+	public static final String OPERATION_NAME_MULTIPLEOPERATION = "multipleOperation";
 
 	/** The name of the {@link Operation} <code>orderedMultipleOperation</code>. */
-	public static final String OPERATION_NAME_ORDEREDMULTIPLEOPERATION =
-			"orderedMultipleOperation";
+	public static final String OPERATION_NAME_ORDEREDMULTIPLEOPERATION = "orderedMultipleOperation";
 
 	/**
-	 * The name of the {@link Operation} <code>unorderedMultipleOperation</code> .
+	 * The name of the {@link Operation} <code>unorderedMultipleOperation</code>
+	 * .
 	 */
-	public static final String OPERATION_NAME_UNORDEREDMULTIPLEOPERATION =
-			"unorderedMultipleOperation";
+	public static final String OPERATION_NAME_UNORDEREDMULTIPLEOPERATION = "unorderedMultipleOperation";
 
 	/** The name of the {@link Operation} <code>uniqueMultipleOperation</code>. */
-	public static final String OPERATION_NAME_UNIQUEMULTIPLEOPERATION =
-			"uniqueMultipleOperation";
+	public static final String OPERATION_NAME_UNIQUEMULTIPLEOPERATION = "uniqueMultipleOperation";
 
 	/**
-	 * The name of the {@link Operation} <code>nonuniqueMultipleOperation</code> .
+	 * The name of the {@link Operation} <code>nonuniqueMultipleOperation</code>
+	 * .
 	 */
-	public static final String OPERATION_NAME_NONUNIQUEMULTIPLEOPERATION =
-			"nonuniqueMultipleOperation";
+	public static final String OPERATION_NAME_NONUNIQUEMULTIPLEOPERATION = "nonuniqueMultipleOperation";
 
-	/** The name of the {@link Operation} <code>operationWithoutParameters</code>. */
-	public static final String OPERATION_QUALIFIED_NAME_OPERATIONWITHOUTPARAMETERS =
-			TYPE_QUALIFIED_NAME_TESTOPERATIONANDPARAMETERCLASS + "::"
-					+ OPERATION_NAME_OPERATIONWITHOUTPARAMETERS + "()";
+	/**
+	 * The name of the {@link Operation} <code>operationWithoutParameters</code>
+	 * .
+	 */
+	public static final String OPERATION_QUALIFIED_NAME_OPERATIONWITHOUTPARAMETERS = TYPE_QUALIFIED_NAME_TESTOPERATIONANDPARAMETERCLASS
+			+ "::" + OPERATION_NAME_OPERATIONWITHOUTPARAMETERS + "()";
 
-	/** The name of the {@link Operation} <code>voidOperationWithParameter</code>. */
-	public static final String OPERATION_QUALIFIED_NAME_VOIDOPERATIONWITHPARAMETER =
-			TYPE_QUALIFIED_NAME_TESTOPERATIONANDPARAMETERCLASS + "::"
-					+ OPERATION_NAME_VOIDOPERATIONWITHPARAMETER + "("
-					+ TYPE_QUALIFIED_NAME_TESTTYPECLASS1 + ")";
+	/**
+	 * The name of the {@link Operation} <code>voidOperationWithParameter</code>
+	 * .
+	 */
+	public static final String OPERATION_QUALIFIED_NAME_VOIDOPERATIONWITHPARAMETER = TYPE_QUALIFIED_NAME_TESTOPERATIONANDPARAMETERCLASS
+			+ "::"
+			+ OPERATION_NAME_VOIDOPERATIONWITHPARAMETER
+			+ "("
+			+ TYPE_QUALIFIED_NAME_TESTTYPECLASS1 + ")";
 
 	/** The name of the {@link Property} <code>associationEnd1</code>. */
 	public static final String PROPERTY_NAME_ASSOCIATONEND1 = "associationEnd1";
 
 	/** The name of the {@link Property} <code>associationEnd</code>. */
-	public static final String PROPERTY_NAME_NONMULTIPLEASSOCIATONEND =
-			"nonmultipleAssociationEnd";
+	public static final String PROPERTY_NAME_NONMULTIPLEASSOCIATONEND = "nonmultipleAssociationEnd";
 
 	/** The name of the {@link Property} <code>property1</code>. */
 	public static final String PROPERTY_NAME_PROPERTY1 = "property1";
@@ -235,76 +232,64 @@ public final class MetaModelTestServices {
 	public static final String PROPERTY_NAME_PROPERTY2 = "property2";
 
 	/** The name of the {@link Property} <code>nonmultipleProperty</code>. */
-	public static final String PROPERTY_NAME_NONMULTIPLEPROPERTY =
-			"nonmultipleProperty";
+	public static final String PROPERTY_NAME_NONMULTIPLEPROPERTY = "nonmultipleProperty";
 
 	/** The name of the {@link Property} <code>staticAssociationEnd</code>. */
-	public static final String PROPERTY_NAME_STATICASSOCIATONEND =
-			"staticAssociationEnd";
+	public static final String PROPERTY_NAME_STATICASSOCIATONEND = "staticAssociationEnd";
 
 	/** The name of the {@link Property} <code>staticProperty</code>. */
 	public static final String PROPERTY_NAME_STATICPROPERTY = "staticProperty";
 
 	/**
-	 * The name of the {@link Property} <code>orderedMultipleAssociationEnd</code>
-	 * .
+	 * The name of the {@link Property}
+	 * <code>orderedMultipleAssociationEnd</code> .
 	 */
-	public static final String PROPERTY_NAME_ORDEREDMULTIPLEASSOCIATONEND =
-			"orderedMultipleAssociationEnd";
+	public static final String PROPERTY_NAME_ORDEREDMULTIPLEASSOCIATONEND = "orderedMultipleAssociationEnd";
 
 	/** The name of the {@link Property} <code>orderedMultipleProperty</code>. */
-	public static final String PROPERTY_NAME_ORDEREDMULTIPLEPROPERTY =
-			"orderedMultipleProperty";
+	public static final String PROPERTY_NAME_ORDEREDMULTIPLEPROPERTY = "orderedMultipleProperty";
 
 	/**
 	 * The name of the {@link Property}
 	 * <code>unorderedMultipleAssociationEnd</code>.
 	 */
-	public static final String PROPERTY_NAME_UNORDEREDMULTIPLEASSOCIATONEND =
-			"unorderedMultipleAssociationEnd";
+	public static final String PROPERTY_NAME_UNORDEREDMULTIPLEASSOCIATONEND = "unorderedMultipleAssociationEnd";
 
 	/** The name of the {@link Property} <code>unorderedMultipleProperty</code>. */
-	public static final String PROPERTY_NAME_UNORDEREDMULTIPLEPROPERTY =
-			"unorderedMultipleProperty";
+	public static final String PROPERTY_NAME_UNORDEREDMULTIPLEPROPERTY = "unorderedMultipleProperty";
 
 	/**
-	 * The name of the {@link Property} <code>uniqueMultipleAssociationEnd</code>.
+	 * The name of the {@link Property}
+	 * <code>uniqueMultipleAssociationEnd</code>.
 	 */
-	public static final String PROPERTY_NAME_UNIQUEMULTIPLEASSOCIATONEND =
-			"uniqueMultipleAssociationEnd";
+	public static final String PROPERTY_NAME_UNIQUEMULTIPLEASSOCIATONEND = "uniqueMultipleAssociationEnd";
 
 	/** The name of the {@link Property} <code>uniqueMultipleProperty</code>. */
-	public static final String PROPERTY_NAME_UNIQUEMULTIPLEPROPERTY =
-			"uniqueMultipleProperty";
+	public static final String PROPERTY_NAME_UNIQUEMULTIPLEPROPERTY = "uniqueMultipleProperty";
 
 	/**
 	 * The name of the {@link Property}
 	 * <code>nonuniqueMultipleAssociationEnd</code>.
 	 */
-	public static final String PROPERTY_NAME_NONUNIQUEMULTIPLEASSOCIATONEND =
-			"nonuniqueMultipleAssociationEnd";
+	public static final String PROPERTY_NAME_NONUNIQUEMULTIPLEASSOCIATONEND = "nonuniqueMultipleAssociationEnd";
 
 	/** The name of the {@link Property} <code>nonuniqueMultipleProperty</code>. */
-	public static final String PROPERTY_NAME_NONUNIQUEMULTIPLEPROPERTY =
-			"nonuniqueMultipleProperty";
+	public static final String PROPERTY_NAME_NONUNIQUEMULTIPLEPROPERTY = "nonuniqueMultipleProperty";
 
 	/** The name of the {@link Property} <code>nonmultipleProperty</code>. */
-	public static final String PROPERTY_QUALIFIED_NAME_NONMULTIPLEPROPERTY =
-			TYPE_QUALIFIED_NAME_TESTPROPERTYCLASS + "::"
-					+ PROPERTY_NAME_NONMULTIPLEPROPERTY;
+	public static final String PROPERTY_QUALIFIED_NAME_NONMULTIPLEPROPERTY = TYPE_QUALIFIED_NAME_TESTPROPERTYCLASS
+			+ "::" + PROPERTY_NAME_NONMULTIPLEPROPERTY;
 
 	/** The name of the {@link Property} <code>nonmultipleAssociationEnd</code>. */
-	public static final String PROPERTY_QUALIFIED_NAME_NONMULTIPLEASSOCIATIONEND =
-			TYPE_QUALIFIED_NAME_TESTPROPERTYCLASS + "::"
-					+ PROPERTY_NAME_NONMULTIPLEASSOCIATONEND;
+	public static final String PROPERTY_QUALIFIED_NAME_NONMULTIPLEASSOCIATIONEND = TYPE_QUALIFIED_NAME_TESTPROPERTYCLASS
+			+ "::" + PROPERTY_NAME_NONMULTIPLEASSOCIATONEND;
 
 	/** The name of the {@link Parameter} <code>in1</code>. */
 	public static final String PARAMETER_NAME_INPUTPARAMETER1 = "in1";
 
 	/** The name of the {@link Parameter} <code>in1</code>. */
-	public static final String PARAMETER_QUALIFIED_NAME_INPUTPARAMETER1 =
-			OPERATION_QUALIFIED_NAME_VOIDOPERATIONWITHPARAMETER + "::"
-					+ PARAMETER_NAME_INPUTPARAMETER1;
+	public static final String PARAMETER_QUALIFIED_NAME_INPUTPARAMETER1 = OPERATION_QUALIFIED_NAME_VOIDOPERATIONWITHPARAMETER
+			+ "::" + PARAMETER_NAME_INPUTPARAMETER1;
 
 	/**
 	 * The prefix of {@link Property}s that represent a {@link PrimitiveType} of
@@ -316,8 +301,7 @@ public final class MetaModelTestServices {
 	 * The prefix of {@link Property}s that represent a {@link PrimitiveType} of
 	 * the {@link PrimitiveTypeKind#INTEGER} which shall be tested.
 	 */
-	public static final String PRIMITIVETYPE_INTEGER_PROPERTY_PREFIX =
-			"anInteger";
+	public static final String PRIMITIVETYPE_INTEGER_PROPERTY_PREFIX = "anInteger";
 
 	/**
 	 * The prefix of {@link Property}s that represent a {@link PrimitiveType} of
@@ -380,7 +364,7 @@ public final class MetaModelTestServices {
 	 * </p>
 	 * 
 	 * @param qualifiedName
-	 *          The name which shall be converted.
+	 *            The name which shall be converted.
 	 * @return The converted path.
 	 */
 	private static List<String> convertQualifiedNameToList(String qualifiedName) {
@@ -425,8 +409,8 @@ public final class MetaModelTestServices {
 		File modelFile;
 
 		/* Get the bundle location for the model files. */
-		bundleDirectory =
-				Platform.getBundle(this.myTestModelBundleId).getLocation();
+		bundleDirectory = Platform.getBundle(this.myTestModelBundleId)
+				.getLocation();
 
 		/* Remove the 'reference:file:' from the beginning. */
 		bundleDirectory = bundleDirectory.substring(15);
@@ -440,14 +424,16 @@ public final class MetaModelTestServices {
 
 		/* Else check if the given file does not exist. */
 		else if (!modelFile.exists()) {
-			throw new RuntimeException("The file " + modelFile + " does not exist.");
+			throw new RuntimeException("The file " + modelFile
+					+ " does not exist.");
 		}
 
 		/* Else try to load the model. */
 		else {
 
 			try {
-				result = Ocl2ForEclipseFacade.getModel(modelFile, myMetaModelId);
+				result = Ocl2ForEclipseFacade
+						.getModel(modelFile, myMetaModelId);
 
 				/* Cache the result. */
 				this.myCachedModels.put(modelFile.toString(), result);
@@ -464,12 +450,13 @@ public final class MetaModelTestServices {
 
 	/**
 	 * <p>
-	 * Searches for a {@link Namespace} in the current {@link IModel} under test.
+	 * Searches for a {@link Namespace} in the current {@link IModel} under
+	 * test.
 	 * </p>
 	 * 
 	 * @param qualifiedName
-	 *          The qualified name of the {@link Namespace} which shall be
-	 *          returned.
+	 *            The qualified name of the {@link Namespace} which shall be
+	 *            returned.
 	 * @return The found {@link Namespace}.
 	 */
 	public Namespace getNamespaceUnderTest(String qualifiedName) {
@@ -482,7 +469,8 @@ public final class MetaModelTestServices {
 
 		/* Get the type to test. */
 		try {
-			result = model.findNamespace(convertQualifiedNameToList(qualifiedName));
+			result = model
+					.findNamespace(convertQualifiedNameToList(qualifiedName));
 		}
 
 		catch (ModelAccessException e) {
@@ -498,7 +486,8 @@ public final class MetaModelTestServices {
 	 * </p>
 	 * 
 	 * @param qualifiedName
-	 *          The qualified name of the {@link Type} which shall be returned.
+	 *            The qualified name of the {@link Type} which shall be
+	 *            returned.
 	 * @return The found {@link Type}.
 	 */
 	public Type getTypeUnderTest(String qualifiedName) {
@@ -523,11 +512,27 @@ public final class MetaModelTestServices {
 
 	/**
 	 * <p>
+	 * Clears the cache of all {@link IModel}s tested yet and removes them from
+	 * the ModelBus as well.
+	 * </p>
+	 */
+	public void resetModelUnderTest() {
+
+		for (IModel model : this.myCachedModels.values()) {
+			Ocl2ForEclipseFacade.removeModel(model);
+		}
+		// end for.
+
+		this.myCachedModels.clear();
+	}
+
+	/**
+	 * <p>
 	 * Sets the ID of the {@link IMetamodel} which shall be tested.
 	 * </p>
 	 * 
 	 * @param metaModelID
-	 *          The ID of the {@link IMetamodel} which shall be tested.
+	 *            The ID of the {@link IMetamodel} which shall be tested.
 	 */
 	public void setMetaModelID(String metaModelID) {
 
@@ -536,13 +541,13 @@ public final class MetaModelTestServices {
 
 	/**
 	 * <p>
-	 * Sets the ID of the {@link Bundle} providing the {@link IModel} which shall
-	 * be tested.
+	 * Sets the ID of the {@link Bundle} providing the {@link IModel} which
+	 * shall be tested.
 	 * </p>
 	 * 
 	 * @param testModelBundleID
-	 *          The ID of the {@link Bundle} providing the {@link IModel} which
-	 *          shall be tested.
+	 *            The ID of the {@link Bundle} providing the {@link IModel}
+	 *            which shall be tested.
 	 */
 	public void setTestModelBundleID(String testModelBundleID) {
 
@@ -555,7 +560,7 @@ public final class MetaModelTestServices {
 	 * </p>
 	 * 
 	 * @param testModelPath
-	 *          The path of the {@link IModel} which shall be tested.
+	 *            The path of the {@link IModel} which shall be tested.
 	 */
 	public void setTestModelPath(String testModelPath) {
 

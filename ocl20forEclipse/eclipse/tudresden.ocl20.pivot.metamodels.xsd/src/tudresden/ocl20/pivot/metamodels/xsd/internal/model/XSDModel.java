@@ -63,6 +63,16 @@ public class XSDModel extends AbstractModel implements IModel {
 		this.resource = resource;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see tudresden.ocl20.pivot.model.IModel#dispose()
+	 */
+	public void dispose() {
+		/* Unload the resource to remove external contents. */
+		this.resource.unload();
+	}
+
 	/**
 	 * This method lazily creates a {@link Namespace} adapter for the virtual root
 	 * package in the associated XSD model. Thus, any possible resource loading

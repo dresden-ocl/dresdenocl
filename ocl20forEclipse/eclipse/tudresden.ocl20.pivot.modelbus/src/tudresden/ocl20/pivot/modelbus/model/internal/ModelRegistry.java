@@ -195,6 +195,7 @@ public class ModelRegistry implements IModelRegistry {
 		if (this.models != null) {
 
 			result = this.models.remove(model);
+			model.dispose();
 
 			this.fireModelRemoved(model);
 
