@@ -819,60 +819,59 @@ public class JavaModelInstanceObject extends AbstractModelInstanceObject
 
 			for (Method aMethod : methodSourceClass.getDeclaredMethods()) {
 
-				boolean nameIsEqual;
-				boolean resultTypeIsConform;
-				boolean argumentSizeIsEqual;
-
 				/* Check if the name matches to the given operation's name. */
-				nameIsEqual = aMethod.getName().equals(operation.getName());
+				if (aMethod.getName().equals(operation.getName())) {
 
-				/*
-				 * Check if the return type matches to the given operation's
-				 * type.
-				 */
-				resultTypeIsConform = JavaModelInstanceTypeUtility
-						.conformsTypeToType(aMethod.getGenericReturnType(),
-								operation.getType());
+					/*
+					 * Check if the return type matches to the given operation's
+					 * type.
+					 */
+					if (JavaModelInstanceTypeUtility.conformsTypeToType(aMethod
+							.getGenericReturnType(), operation.getType())) {
 
-				/*
-				 * Check if the method has the same size of arguments as the
-				 * given operation.
-				 */
-				argumentSizeIsEqual = aMethod.getParameterTypes().length == operation
-						.getSignatureParameter().size();
+						/*
+						 * Check if the method has the same size of arguments as
+						 * the given operation.
+						 */
+						if (aMethod.getParameterTypes().length == operation
+								.getSignatureParameter().size()) {
 
-				if (nameIsEqual && resultTypeIsConform && argumentSizeIsEqual) {
+							java.lang.reflect.Type[] javaTypes;
+							List<Parameter> pivotModelParamters;
 
-					java.lang.reflect.Type[] javaTypes;
-					List<Parameter> pivotModelParamters;
+							boolean matches;
 
-					boolean matches;
+							javaTypes = aMethod.getGenericParameterTypes();
+							pivotModelParamters = operation
+									.getSignatureParameter();
 
-					javaTypes = aMethod.getGenericParameterTypes();
-					pivotModelParamters = operation.getSignatureParameter();
+							matches = true;
 
-					matches = true;
+							/* Compare the types of all arguments. */
+							for (int index = 0; index < operation
+									.getSignatureParameter().size(); index++) {
 
-					/* Compare the types of all arguments. */
-					for (int index = 0; index < operation
-							.getSignatureParameter().size(); index++) {
+								if (!JavaModelInstanceTypeUtility
+										.conformsTypeToType(javaTypes[index],
+												pivotModelParamters.get(index)
+														.getType())) {
+									matches = false;
+									break;
+								}
+								// no else.
+							}
 
-						if (!JavaModelInstanceTypeUtility.conformsTypeToType(
-								javaTypes[index], pivotModelParamters
-										.get(index).getType())) {
-							matches = false;
-							break;
+							if (matches) {
+								result = aMethod;
+								break;
+							}
+							// no else.
 						}
 						// no else.
 					}
-
-					if (matches) {
-						result = aMethod;
-						break;
-					}
-					// no else.
+					// no else (result type differs).
 				}
-				// no else.
+				// no else (name does not match).
 			}
 			// end for.
 

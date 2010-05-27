@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import tudresden.ocl20.pivot.essentialocl.EssentialOclPlugin;
 import tudresden.ocl20.pivot.model.IModel;
 import tudresden.ocl20.pivot.model.ModelConstants;
 import tudresden.ocl20.pivot.modelinstancetype.java.JavaModelInstanceTypePlugin;
@@ -62,9 +63,19 @@ public class JavaModelInstanceTypeUtility {
 													.getKind().getName() }));
 				}
 
+				else if (clazz.getCanonicalName().equals("void")) {
+					result = type.equals(EssentialOclPlugin
+							.getOclLibraryProvider().getOclLibrary()
+							.getOclVoid());
+				}
+
 				else {
-					result = toQualifiedNameList(clazz.getCanonicalName())
-							.equals(type.getQualifiedNameList());
+					List<String> qualifiedClassName = toQualifiedNameList(clazz
+							.getCanonicalName());
+					List<String> qualifiedTypeName = type
+							.getQualifiedNameList();
+
+					result = qualifiedClassName.equals(qualifiedTypeName);
 				}
 			}
 		}

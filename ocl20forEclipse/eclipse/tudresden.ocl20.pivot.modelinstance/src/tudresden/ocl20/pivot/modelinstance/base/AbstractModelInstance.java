@@ -111,9 +111,8 @@ public abstract class AbstractModelInstance implements IModelInstance {
 		IModelInstanceElement result;
 
 		/* Check if the result is expected as void. */
-		if (type instanceof PrimitiveType
-				&& ((PrimitiveType) type).getKind().equals(
-						PrimitiveTypeKind.VOID)) {
+		if (type.equals(EssentialOclPlugin.getOclLibraryProvider()
+				.getOclLibrary().getOclVoid())) {
 			result = IModelInstanceVoid.INSTANCE;
 		}
 
