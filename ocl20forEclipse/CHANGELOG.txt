@@ -13,6 +13,7 @@ Release 2.1 (scheduled for April 2010)
   
 * The Model and Model Instance Life-cycle Management has been improved.
   - After import, Models can now be removed again.
+  - After import, Models can now be refreshed to update external changes.
   - After import, Model Instances can now be removed again.
   - Constraints can now be removed from models again.
   - Defined operations and properties are now removed then their constraints are removed as well.

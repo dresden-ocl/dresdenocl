@@ -68,6 +68,10 @@ public class ModelBusUIMessages extends NLS {
 	public static String ModelsView_AccessRootNamespace;
 
 	public static String ModelsView_Error;
+	
+	public static String ModelsView_ReloadModelTitle;
+
+	public static String ModelsView_ReloadModelQestion;
 
 	public static String LoadModelInstancePage_BrowseFileSystemButtonText;
 

@@ -89,9 +89,15 @@ public class ModelsView extends ViewPart implements IModelRegistryListener,
 	/** Icon to remove all {@link Constraint}s from a {@link IModel}. */
 	public static String IMAGE_DELETE_ALL_CONSTRAINTS = "icons/delete_all_constraints.gif";
 
+	/** Icon to remove an {@link IModel} from the {@link IModelRegistry}. */
+	public static String IMAGE_REFRESH_MODEL = "icons/refresh.gif";
+
 	/** The {@link Logger} for this {@link Class}. */
 	private static final Logger LOGGER = ModelBusUIPlugin
 			.getLogger(ModelsView.class);
+
+	/** Action to the tool bar to refresh the currently selected {@link IModel}. */
+	private Action myActionRefreshModel;
 
 	/**
 	 * Action to the tool remove all {@link Constraint}s from a {@link IModel}.
@@ -576,6 +582,34 @@ public class ModelsView extends ViewPart implements IModelRegistryListener,
 		this.getViewSite().getActionBars().getToolBarManager().add(
 				myActionRemoveAllConstraints);
 
+		/*
+		 * Add an action to the tool bar to refresh the currently selected
+		 * model.
+		 */
+		myActionRefreshModel = new Action() {
+
+			/*
+			 * (non-Javadoc)
+			 * 
+			 * @see org.eclipse.jface.action.Action#run()
+			 */
+			public void run() {
+
+				refreshSelectedModel();
+			}
+		};
+
+		myActionRefreshModel
+				.setToolTipText("Reloads the currently selected model.");
+		myActionRefreshModel.setText("Reload Model");
+		myActionRefreshModel.setImageDescriptor(ModelBusUIPlugin
+				.getImageDescriptor(IMAGE_REFRESH_MODEL));
+		myActionRefreshModel.setEnabled(ModelBusPlugin.getModelRegistry()
+				.getActiveModel() != null);
+
+		this.getViewSite().getActionBars().getToolBarManager().add(
+				myActionRefreshModel);
+
 		/* Add an action to the tool bar to remove the currently selected model. */
 		myActionRemoveModel = new Action() {
 
@@ -600,6 +634,36 @@ public class ModelsView extends ViewPart implements IModelRegistryListener,
 
 		this.getViewSite().getActionBars().getToolBarManager().add(
 				myActionRemoveModel);
+	}
+
+	/**
+	 * <p>
+	 * Helper method to refresh the currently selected {@link IModel} from the
+	 * {@link ModelBusPlugin}.
+	 * </p>
+	 */
+	private void refreshSelectedModel() {
+
+		IModelRegistry modelRegistry;
+		modelRegistry = ModelBusPlugin.getModelRegistry();
+
+		IModel activeModel;
+		activeModel = modelRegistry.getActiveModel();
+
+		if (activeModel != null) {
+
+			/* Probably reload the model. */
+			if (MessageDialog.openQuestion(this.getSite().getShell(),
+					ModelBusUIMessages.ModelsView_ReloadModelTitle,
+					ModelBusUIMessages.ModelsView_ReloadModelQestion)) {
+
+				activeModel.dispose();
+				this.selectedAction = null;
+				this.updateActiveModel();
+			}
+			// no else.
+		}
+		// no else.
 	}
 
 	/**
@@ -820,6 +884,11 @@ public class ModelsView extends ViewPart implements IModelRegistryListener,
 			// no else.
 
 			this.updateConstraintRemoveAction();
+
+			if (this.myActionRefreshModel != null) {
+				this.myActionRefreshModel.setEnabled(true);
+			}
+			// no else.
 		}
 
 		else {
@@ -827,6 +896,11 @@ public class ModelsView extends ViewPart implements IModelRegistryListener,
 
 			if (this.myActionRemoveModel != null) {
 				this.myActionRemoveModel.setEnabled(false);
+			}
+			// no else.
+
+			if (this.myActionRefreshModel != null) {
+				this.myActionRefreshModel.setEnabled(false);
 			}
 			// no else.
 		}

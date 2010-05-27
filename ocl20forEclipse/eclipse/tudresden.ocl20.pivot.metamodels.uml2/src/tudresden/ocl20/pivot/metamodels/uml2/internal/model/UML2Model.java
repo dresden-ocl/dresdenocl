@@ -100,6 +100,7 @@ public class UML2Model extends AbstractModel implements IModel {
 	public void dispose() {
 		/* Unload the resource to remove external contents. */
 		this.resource.unload();
+		this.rootNamespace = null;
 	}
 
 	/**
