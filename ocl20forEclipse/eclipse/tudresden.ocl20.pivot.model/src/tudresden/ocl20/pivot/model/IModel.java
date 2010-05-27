@@ -72,6 +72,11 @@ public interface IModel {
 	 * {@link ResourceSet}s must be closed that may contain elements that do not
 	 * belong to the {@link IModel}, e.g. parsed {@link Constraint}s.
 	 * </p>
+	 * 
+	 * <p>
+	 * If you call {@link IModel#getRootNamespace()} after invocation of
+	 * {@link IModel#dispose()}, the {@link IModel} will be re-opened again.
+	 * </p>
 	 */
 	public void dispose();
 

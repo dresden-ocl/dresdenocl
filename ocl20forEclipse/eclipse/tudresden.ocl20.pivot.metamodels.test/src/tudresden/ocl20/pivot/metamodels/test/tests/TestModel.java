@@ -56,13 +56,10 @@ public class TestModel {
 				"Preperation of Meta-Model Test failed. Cannot assure that the meta-model is adapted correctly.",
 				model.getRootNamespace().getOwnedRule().contains(dummy));
 
-
 		/* Close the model and re-open it again. */
 		model.dispose();
-		MetaModelTestServices.getInstance().resetModelUnderTest();
 
-		model = MetaModelTestServices.getInstance().getModelUnderTest();
-
+		/* Reopen happens automatically when invoking getRootNamespace. */
 		assertFalse(
 				"The implementation of IModel.dispose() seems to be wrong. The model should not contain any external contents after disposal and reimport.",
 				model.getRootNamespace().getOwnedRule().contains(dummy));

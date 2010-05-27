@@ -106,6 +106,8 @@ public class EcoreModel extends AbstractModel implements IModel {
 	public void dispose() {
 		/* Unload the resource to remove external contents. */
 		this.resource.unload();
+		/* Reset the root name space to avoid caching. */
+		this.rootNamespace = null;
 	}
 
 	/**

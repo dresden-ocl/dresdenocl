@@ -512,22 +512,6 @@ public final class MetaModelTestServices {
 
 	/**
 	 * <p>
-	 * Clears the cache of all {@link IModel}s tested yet and removes them from
-	 * the ModelBus as well.
-	 * </p>
-	 */
-	public void resetModelUnderTest() {
-
-		for (IModel model : this.myCachedModels.values()) {
-			Ocl2ForEclipseFacade.removeModel(model);
-		}
-		// end for.
-
-		this.myCachedModels.clear();
-	}
-
-	/**
-	 * <p>
 	 * Sets the ID of the {@link IMetamodel} which shall be tested.
 	 * </p>
 	 * 

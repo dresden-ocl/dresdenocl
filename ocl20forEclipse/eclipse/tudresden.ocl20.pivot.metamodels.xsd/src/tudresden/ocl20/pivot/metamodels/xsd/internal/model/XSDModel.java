@@ -2,7 +2,6 @@ package tudresden.ocl20.pivot.metamodels.xsd.internal.model;
 
 import java.util.Collection;
 
-import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EcoreFactory;
@@ -30,15 +29,6 @@ import tudresden.ocl20.pivot.pivotmodel.Namespace;
  */
 public class XSDModel extends AbstractModel implements IModel {
 
-	/**
-	 * a logger for this class
-	 * 
-	 * @generated
-	 */
-	private static final Logger logger =
-			tudresden.ocl20.pivot.metamodels.xsd.XSDMetamodelPlugin
-					.getLogger(XSDModel.class);
-
 	// the resource containing the corresponding XSD model
 	private org.eclipse.emf.ecore.resource.Resource resource;
 
@@ -49,15 +39,15 @@ public class XSDModel extends AbstractModel implements IModel {
 	 * Creates a new <code>XSDModel</code> adapting the given {@link XSDSchema}.
 	 * 
 	 * @param resource
-	 *          the {@link org.eclipse.emf.ecore.resource.Resource} containing the
-	 *          model
+	 *            the {@link org.eclipse.emf.ecore.resource.Resource} containing
+	 *            the model
 	 * 
 	 * @generated
 	 */
 	public XSDModel(org.eclipse.emf.ecore.resource.Resource resource) {
 
-		super(resource.getURI().toString(), ModelBusPlugin.getMetamodelRegistry()
-				.getMetamodel(XSDMetamodelPlugin.ID));
+		super(resource.getURI().toString(), ModelBusPlugin
+				.getMetamodelRegistry().getMetamodel(XSDMetamodelPlugin.ID));
 
 		// initialize
 		this.resource = resource;
@@ -71,16 +61,19 @@ public class XSDModel extends AbstractModel implements IModel {
 	public void dispose() {
 		/* Unload the resource to remove external contents. */
 		this.resource.unload();
+		/* Reset the root name space to avoid caching. */
+		this.rootNamespace = null;
 	}
 
 	/**
-	 * This method lazily creates a {@link Namespace} adapter for the virtual root
-	 * package in the associated XSD model. Thus, any possible resource loading
-	 * errors will not happen until this method is called for the first time.
+	 * This method lazily creates a {@link Namespace} adapter for the virtual
+	 * root package in the associated XSD model. Thus, any possible resource
+	 * loading errors will not happen until this method is called for the first
+	 * time.
 	 * 
 	 * @throws ModelAccessException
-	 *           if an error occurs when creating the adapter for the top
-	 *           namespace
+	 *             if an error occurs when creating the adapter for the top
+	 *             namespace
 	 * 
 	 * @see tudresden.ocl20.pivot.model.IModel#getRootNamespace()
 	 * 
@@ -96,28 +89,29 @@ public class XSDModel extends AbstractModel implements IModel {
 	}
 
 	/**
-	 * Helper method that creates the adapter for the root namespace. If there is
-	 * only one top-level namespace possible, then this method should just return
-	 * the adapter for the top-level namespace, else it should create a new
-	 * "virtual" root namespace.
+	 * Helper method that creates the adapter for the root namespace. If there
+	 * is only one top-level namespace possible, then this method should just
+	 * return the adapter for the top-level namespace, else it should create a
+	 * new "virtual" root namespace.
 	 * 
 	 * @return a <code>Namespace</code> instance
 	 * 
 	 * @throws ModelAccessException
-	 *           if an error occurs while loading the adapted XSD model
+	 *             if an error occurs while loading the adapted XSD model
 	 * 
 	 * @generated NOT
 	 */
 	protected Namespace createRootNamespace() throws ModelAccessException {
 
 		/*
-		 * Code adapted from
-		 * http://wiki.eclipse.org/index.php/Generating_Dynamic_Ecore_from_XML_Schema
+		 * Code adapted fromhttp://wiki.eclipse.org/index.php/
+		 * Generating_Dynamic_Ecore_from_XML_Schema
 		 */
 		ResourceSet resourceSet = resource.getResourceSet();
 
 		XSDEcoreBuilder xsdEcoreBuilder = new XSDEcoreBuilder();
-		Collection<EObject> ePackages = xsdEcoreBuilder.generate(resource.getURI());
+		Collection<EObject> ePackages = xsdEcoreBuilder.generate(resource
+				.getURI());
 
 		for (EObject element : ePackages) {
 			EPackage ePackage = (EPackage) element;

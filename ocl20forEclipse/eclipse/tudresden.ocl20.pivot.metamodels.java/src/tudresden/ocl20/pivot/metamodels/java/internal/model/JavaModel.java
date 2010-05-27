@@ -72,10 +72,14 @@ public class JavaModel extends AbstractModel implements IModel {
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see tudresden.ocl20.pivot.model.IModel#dispose()
 	 */
 	public void dispose() {
-		/* For Java Models no resources must be closed. */
+		/* Reset the root name space to avoid caching. */
+		this.myRootNamespace = null;
+		/* Reset the adapter factory to clear the cache. */
+		this.myAdapterFactory = new JavaAdapterFactory();
 	}
 
 	/**
@@ -148,7 +152,7 @@ public class JavaModel extends AbstractModel implements IModel {
 	 */
 	public Namespace getRootNamespace() throws ModelAccessException {
 
-		/* Eventually create the adaptation of the root name space. */
+		/* Probably create the adaptation of the root name space. */
 		if (this.myRootNamespace == null) {
 
 			Type mainType;
