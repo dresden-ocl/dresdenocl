@@ -239,7 +239,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1" eType="#//TypeCS"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="initOrDeriveValue" lowerBound="1"
-        upperBound="-1" eType="#//InitOrDeriveValueCS" containment="true"/>
+        upperBound="2" eType="#//InitOrDeriveValueCS" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ClassifierContextDeclarationCS" eSuperTypes="#//ContextDeclarationCS">
     <eStructuralFeatures xsi:type="ecore:EReference" name="typeName" lowerBound="1"

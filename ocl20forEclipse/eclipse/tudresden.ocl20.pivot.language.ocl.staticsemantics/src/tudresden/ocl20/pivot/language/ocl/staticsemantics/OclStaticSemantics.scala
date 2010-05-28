@@ -642,9 +642,21 @@ trait OclStaticSemantics extends ocl.semantics.OclAttributeMaker with pivotmodel
       }
       
       case a@AttributeContextDeclarationCS(_, _, initOrDeriveValues) => {
-        Full(initOrDeriveValues.flatMap{idv =>
-          computeConstraint(idv)
-        })
+        if (initOrDeriveValues.size == 2) {
+          if (initOrDeriveValues(0).isInstanceOf[InitValueCS] && 
+              initOrDeriveValues(1).isInstanceOf[InitValueCS])
+            yieldFailure("Cannot have more than one 'init' definition for an attribute.", a)
+          else if (initOrDeriveValues(0).isInstanceOf[DeriveValueCS] && 
+                   initOrDeriveValues(1).isInstanceOf[DeriveValueCS])
+            yieldFailure("Cannot have more than one 'derive' definition for an attribute.", a)
+          else Full(List())
+        } else {
+          Full(List())
+        }.flatMap{_ =>
+	        Full(initOrDeriveValues.flatMap{idv =>
+	          computeConstraint(idv)
+	        })
+        }
       }
       
       case unknown => Empty
