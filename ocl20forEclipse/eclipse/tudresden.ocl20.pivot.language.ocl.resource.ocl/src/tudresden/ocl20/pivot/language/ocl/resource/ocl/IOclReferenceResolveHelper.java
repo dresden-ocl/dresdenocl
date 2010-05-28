@@ -29,6 +29,9 @@ public interface IOclReferenceResolveHelper {
 	List<Property> resolveProperty(String identifier, boolean resolveFuzzy,
 			EObject container);
 
+	List<Property> resolvePropertyDefinition(String identifier,
+			boolean resolveFuzzy, EObject container);
+
 	List<Operation> resolveOperation(String identifier, boolean resolveFuzzy,
 			EObject container, EReference reference, List<OclExpressionCS> parameters);
 

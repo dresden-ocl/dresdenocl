@@ -8,7 +8,6 @@ import org.eclipse.emf.ecore.EReference;
 import tudresden.ocl20.pivot.language.ocl.OclExpressionCS;
 import tudresden.ocl20.pivot.language.ocl.ParameterCS;
 import tudresden.ocl20.pivot.language.ocl.TypeCS;
-import tudresden.ocl20.pivot.language.ocl.TypePathNameCS;
 import tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclReferenceResolveHelper;
 import tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclResource;
 import tudresden.ocl20.pivot.pivotmodel.Namespace;
@@ -52,6 +51,15 @@ public class OclReferenceResolveHelper implements IOclReferenceResolveHelper {
 			boolean resolveFuzzy, EObject container) {
 		List<Property> ret = OclStaticSemanticsProvider.getStaticSemantics(
 				(OclResource) container.eResource()).resolveProperty(identifier,
+				resolveFuzzy, container);
+		return ret;
+	}
+
+	@Override
+	public List<Property> resolvePropertyDefinition(String identifier,
+			boolean resolveFuzzy, EObject container) {
+		List<Property> ret = OclStaticSemanticsProvider.getStaticSemantics(
+				(OclResource) container.eResource()).resolvePropertyDefinition(identifier,
 				resolveFuzzy, container);
 		return ret;
 	}

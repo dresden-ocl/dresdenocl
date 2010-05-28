@@ -63,7 +63,7 @@ RULES {
 	
 	OperationContextDeclarationCS		::= "context" operation prePostOrBodyDeclarations+;
 	
-	AttributeContextDeclarationCS		::= "context" typeName "::" attributeName ":" type initOrDeriveValue+;
+	AttributeContextDeclarationCS		::= "context" typeName "::" property[SIMPLE_NAME] ":" type initOrDeriveValue+;
 	
 	ClassifierContextDeclarationCS		::= "context" typeName invariantsAndDefinitions+;
 	

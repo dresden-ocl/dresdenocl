@@ -399,6 +399,7 @@ trait OclStaticSemantics extends ocl.semantics.OclAttributeMaker with pivotmodel
     childAttr {
       case child => {
         case null => Empty
+        
         case c@ClassifierContextDeclarationCS(typeCS, _) if child != typeCS => {
           (typeCS->oclType).flatMap{selfType =>
 	          if (selfType.eIsProxy)
@@ -407,6 +408,7 @@ trait OclStaticSemantics extends ocl.semantics.OclAttributeMaker with pivotmodel
 	            Full(factory.createVariable("self", selfType, null))
           }
         }
+        
         case o@OperationContextDeclarationCS(operation, _) if child != operation => {
           val op = operation.getOperation
           if (op.eIsProxy)
@@ -414,6 +416,13 @@ trait OclStaticSemantics extends ocl.semantics.OclAttributeMaker with pivotmodel
           else
             Full(factory.createVariable("self", op.getOwningType, null))
         }
+        
+        case o@AttributeContextDeclarationCS(typeName, _, _) if child != typeName => {
+          (typeName->oclType).flatMap{tipe =>
+            Full(factory.createVariable("self", tipe, null))
+          }
+        }
+        
         case passOn => passOn->self
       }
     }
@@ -430,6 +439,13 @@ trait OclStaticSemantics extends ocl.semantics.OclAttributeMaker with pivotmodel
             Empty
           else
             Full(op)
+        }
+        case a : AttributeContextDeclarationCS => {
+          val property = a.getProperty
+          if (property.eIsProxy)
+            Empty
+          else
+            Full(property)
         }
         case passOn => passOn->context
       }
@@ -624,6 +640,13 @@ trait OclStaticSemantics extends ocl.semantics.OclAttributeMaker with pivotmodel
           computeConstraint(ppb)
         })
       }
+      
+      case a@AttributeContextDeclarationCS(_, _, initOrDeriveValues) => {
+        Full(initOrDeriveValues.flatMap{idv =>
+          computeConstraint(idv)
+        })
+      }
+      
       case unknown => Empty
     }
   }
@@ -677,6 +700,28 @@ trait OclStaticSemantics extends ocl.semantics.OclAttributeMaker with pivotmodel
         		}
         	}
         }
+      }
+      
+      case i@InitOrDeriveValueCS(oclExpression) => {
+        (i->self).flatMap{self =>
+	        (i->context).flatMap{context =>
+	          (oclExpression->computeOclExpression).flatMap{oclExpressionEOcl =>
+	            val property = context.asInstanceOf[Property]
+	            if (!oclExpressionEOcl.getType.conformsTo(property.getType))
+	              yieldFailure("Expected type " + property.getType.getName + ", but found " + oclExpressionEOcl.getType.getName, oclExpression)
+	            else {
+		        		val expression = factory.createExpressionInOcl(
+				        	oclExpression.toString, oclExpressionEOcl, self, null)
+				        val constraint = factory.createConstraint(
+				        	"", i match {
+				        	  case _ : InitValueCS => ConstraintKind.INITIAL
+				        	  case _ : DeriveValueCS => ConstraintKind.DERIVED
+				        	}, expression, null, context)
+				        Full(constraint)
+	            }
+	          }
+	        }
+	      }
       }
     }
   }
@@ -1139,6 +1184,23 @@ trait OclStaticSemantics extends ocl.semantics.OclAttributeMaker with pivotmodel
         }
       }
       case Failure(_, _, _) | Empty => List()
+    }
+  }
+  
+  def resolvePropertyDefinition(identifier : String, fuzzy : Boolean, container : EObject) : java.util.List[Property] = {
+    container match {
+      case AttributeContextDeclarationCS(typeName, _, _) => {
+        (typeName->oclType).flatMap{tn =>
+          if (!fuzzy) {
+            lookupPropertyOnType(tn, identifier, false).flatMap(p => Full(List(p)))
+          } else {
+            Full(lookupPropertyOnTypeFuzzy(tn, identifier, false))
+          }
+        } match {
+          case Full(propertyList) => propertyList
+          case Empty | Failure(_, _, _) => List()
+        }
+      }
     }
   }
   

@@ -170,7 +170,7 @@
     <genClasses image="false" ecoreClass="OCL.ecore#//ContextDeclarationCS"/>
     <genClasses ecoreClass="OCL.ecore#//AttributeContextDeclarationCS">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//AttributeContextDeclarationCS/typeName"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//AttributeContextDeclarationCS/attributeName"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference OCL.ecore#//AttributeContextDeclarationCS/property"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//AttributeContextDeclarationCS/type"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//AttributeContextDeclarationCS/initOrDeriveValue"/>
     </genClasses>
