@@ -164,8 +164,6 @@ public class InterpreterViewMenuAction extends Action implements IAction {
 
 		}
 		// end switch.
-
-		this.myInterpreterView.refreshView();
 	}
 
 	/*

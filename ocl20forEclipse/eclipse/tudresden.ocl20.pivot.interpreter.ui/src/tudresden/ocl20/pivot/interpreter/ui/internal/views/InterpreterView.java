@@ -71,6 +71,7 @@ import tudresden.ocl20.pivot.modelbus.event.IModelInstanceRegistryListener;
 import tudresden.ocl20.pivot.modelbus.event.IModelRegistryListener;
 import tudresden.ocl20.pivot.modelbus.event.ModelInstanceRegistryEvent;
 import tudresden.ocl20.pivot.modelbus.event.ModelRegistryEvent;
+import tudresden.ocl20.pivot.modelbus.ui.ModelBusUIPlugin;
 import tudresden.ocl20.pivot.modelinstance.IModelInstance;
 import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement;
 import tudresden.ocl20.pivot.pivotmodel.Constraint;
@@ -452,6 +453,7 @@ public class InterpreterView extends ViewPart implements ISelectionListener,
 	public void clearResults() {
 
 		this.myResults.clear();
+		this.refreshView();
 	}
 
 	/**
@@ -571,12 +573,26 @@ public class InterpreterView extends ViewPart implements ISelectionListener,
 	 */
 	public void refreshView() {
 
-		for (int index = 0; index < this.myTableViewer.getTable()
-				.getColumnCount(); index++) {
-			this.myTableViewer.getTable().getColumn(index).pack();
-		}
+		/* Execute in a GUI thread to avoid IllegalThreadExceptions. */
+		ModelBusUIPlugin.getDefault().getWorkbench().getDisplay().asyncExec(
+				new Runnable() {
 
-		this.myTableViewer.refresh();
+					/*
+					 * (non-Javadoc)
+					 * 
+					 * @see java.lang.Runnable#run()
+					 */
+					public void run() {
+
+						for (int index = 0; index < myTableViewer.getTable()
+								.getColumnCount(); index++) {
+							myTableViewer.getTable().getColumn(index).pack();
+						}
+						// end for.
+
+						myTableViewer.refresh();
+					}
+				});
 	}
 
 	/**

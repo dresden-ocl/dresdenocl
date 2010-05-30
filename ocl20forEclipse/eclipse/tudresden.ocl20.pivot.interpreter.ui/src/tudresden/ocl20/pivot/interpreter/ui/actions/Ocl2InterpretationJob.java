@@ -185,6 +185,13 @@ public class Ocl2InterpretationJob extends Job {
 
 				ModelBusUIUtility
 						.setActiveView(InterpreterUIPlugin.INTERPRETER_VIEW_ID);
+				interpreterView.refreshView();
+
+				/*
+				 * Unfortunately, a second refresh is required to compute the
+				 * width of the columns in the InverpreterView.
+				 */
+				interpreterView.refreshView();
 			}
 
 			else {
