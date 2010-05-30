@@ -90,6 +90,9 @@ Release 2.1 (scheduled for April 2010)
 * Some bugs in the Ocl22Java Code Generator were fixed.
   - The code generation of OclAny.allInstances() now works appropriately again.
   - The code generation of Collection.flatten() now works appropriately.
+  - The code generation of Integer.mod(Integer) now works appropriately.
+  - The code generation of Integer.min(Integer) now works appropriately.
+  - The code generation of Real.floor() now works appropriately.
   - Transformation of abstract Collection type now works appropriately.
   - The transformation of operations whose arguments are named differently in the constraint's context
     than in the model now works correctly.

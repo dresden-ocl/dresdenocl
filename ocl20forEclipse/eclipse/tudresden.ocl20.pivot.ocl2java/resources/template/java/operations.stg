@@ -196,7 +196,7 @@ divisionOperation(sourceExp, argsExp) ::= <<
 
 // --- Division Operation On Integer ---
 divisionOnIntegerOperation(sourceExp, argsExp) ::= <<
-(($realType()$) $sourceExp$ / ($realType()$) $argsExp$))
+(new $realType()$ ($sourceExp$) / new $realType()$ ($argsExp$))
 >>
 
 
@@ -293,7 +293,7 @@ flattenOperationOnSet(sourceExp, argsExp, resultType) ::= <<
 
 // --- Floor Operation ---
 floorOperation(sourceExp) ::= <<
-(($integerType()$) java.lang.Math.floor($sourceExp$))
+(new $integerType()$(new Double(java.lang.Math.floor($sourceExp$)).intValue()))
 >>
 
 
@@ -413,7 +413,7 @@ $collectionUtility()$.max($sourceExp$)
 
 // --- Min Operation ---
 minOperation(sourceExp, argsExp) ::= <<
-java.lang.Math.min($sourceExp$, argsExp)
+java.lang.Math.min($sourceExp$, $argsExp$)
 >>
 
 // --- Collection.min() ---
@@ -442,7 +442,7 @@ multiplyOperation(sourceExp, argsExp) ::= <<
 
 // --- Modulo Operation ---
 modOperation(sourceExp, argsExp) ::= <<
-($sourceExp$ & $argsExp$)
+($sourceExp$ % $argsExp$)
 >>
 
 
