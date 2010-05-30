@@ -12,18 +12,18 @@ public privileged aspect DefAspect94 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testStringToUpperCase(String source)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testSequenceIndexOf01(java.util.List<Object> source, Object arg01)}.</p>
      */
-    protected pointcut testStringToUpperCaseCaller(testpackage.Class1 aClass, String source):
-    	call(* testpackage.Class1.testStringToUpperCase(String))
-    	&& target(aClass) && args(source);
+    protected pointcut testSequenceIndexOf01Caller(testpackage.Class1 aClass, java.util.List<Object> source, Object arg01):
+    	call(* testpackage.Class1.testSequenceIndexOf01(java.util.List<Object>, Object))
+    	&& target(aClass) && args(source, arg01);
     
     /**
-     * <p>Defines the method testStringToUpperCase(String source) defined by the constraint
+     * <p>Defines the method testSequenceIndexOf01(java.util.List<Object> source, Object arg01) defined by the constraint
      * <code>context Class1
-     *       def: testStringToUpperCase = source[].toUpperCase()</code></p>
+     *       def: testSequenceIndexOf01 = source[].indexOf( arg01[])</code></p>
      */
-    String around(testpackage.Class1 aClass, String source): testStringToUpperCaseCaller(aClass, source) {
-        return source.toUpperCase();
+    Integer around(testpackage.Class1 aClass, java.util.List<Object> source, Object arg01): testSequenceIndexOf01Caller(aClass, source, arg01) {
+        return tudresden.ocl20.pivot.ocl22java.types.util.OclSequences.indexOf(source, arg01);
     }
 }

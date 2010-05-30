@@ -1,0 +1,7 @@
+package testpackage
+
+context Class1
+def: testRealPlus01(source: Real, arg01: Real): Real =
+source + arg01
+
+endpackage

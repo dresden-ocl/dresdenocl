@@ -12,18 +12,18 @@ public privileged aspect DefAspect66 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testSequenceIndexOf01(java.util.List<Object> source, Object arg01)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testOrderedSetSubOrderedSet(java.util.List<Object> source, Integer arg01, Integer arg02)}.</p>
      */
-    protected pointcut testSequenceIndexOf01Caller(testpackage.Class1 aClass, java.util.List<Object> source, Object arg01):
-    	call(* testpackage.Class1.testSequenceIndexOf01(java.util.List<Object>, Object))
-    	&& target(aClass) && args(source, arg01);
+    protected pointcut testOrderedSetSubOrderedSetCaller(testpackage.Class1 aClass, java.util.List<Object> source, Integer arg01, Integer arg02):
+    	call(* testpackage.Class1.testOrderedSetSubOrderedSet(java.util.List<Object>, Integer, Integer))
+    	&& target(aClass) && args(source, arg01, arg02);
     
     /**
-     * <p>Defines the method testSequenceIndexOf01(java.util.List<Object> source, Object arg01) defined by the constraint
+     * <p>Defines the method testOrderedSetSubOrderedSet(java.util.List<Object> source, Integer arg01, Integer arg02) defined by the constraint
      * <code>context Class1
-     *       def: testSequenceIndexOf01 = source[].indexOf( arg01[])</code></p>
+     *       def: testOrderedSetSubOrderedSet = source[].subOrderedSet( arg01[], arg02[])</code></p>
      */
-    Integer around(testpackage.Class1 aClass, java.util.List<Object> source, Object arg01): testSequenceIndexOf01Caller(aClass, source, arg01) {
-        return tudresden.ocl20.pivot.ocl22java.types.util.OclSequences.indexOf(source, arg01);
+    java.util.List<Object> around(testpackage.Class1 aClass, java.util.List<Object> source, Integer arg01, Integer arg02): testOrderedSetSubOrderedSetCaller(aClass, source, arg01, arg02) {
+        return tudresden.ocl20.pivot.ocl22java.types.util.OclOrderedSets.subOrderedSet(source, arg01, arg02);
     }
 }

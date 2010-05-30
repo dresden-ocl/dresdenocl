@@ -1,0 +1,7 @@
+package testpackage
+
+context Class1
+def: testRealRound01(source: Real): Integer =
+source.round()
+
+endpackage

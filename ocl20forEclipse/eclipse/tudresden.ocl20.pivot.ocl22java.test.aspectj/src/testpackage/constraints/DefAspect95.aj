@@ -12,18 +12,18 @@ public privileged aspect DefAspect95 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testStringToLowerCase(String source)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testSequenceInsertAt(java.util.List<Object> source, Integer arg01, Object arg02)}.</p>
      */
-    protected pointcut testStringToLowerCaseCaller(testpackage.Class1 aClass, String source):
-    	call(* testpackage.Class1.testStringToLowerCase(String))
-    	&& target(aClass) && args(source);
+    protected pointcut testSequenceInsertAtCaller(testpackage.Class1 aClass, java.util.List<Object> source, Integer arg01, Object arg02):
+    	call(* testpackage.Class1.testSequenceInsertAt(java.util.List<Object>, Integer, Object))
+    	&& target(aClass) && args(source, arg01, arg02);
     
     /**
-     * <p>Defines the method testStringToLowerCase(String source) defined by the constraint
+     * <p>Defines the method testSequenceInsertAt(java.util.List<Object> source, Integer arg01, Object arg02) defined by the constraint
      * <code>context Class1
-     *       def: testStringToLowerCase = source[].toLowerCase()</code></p>
+     *       def: testSequenceInsertAt = source[].insertAt( arg01[], arg02[])</code></p>
      */
-    String around(testpackage.Class1 aClass, String source): testStringToLowerCaseCaller(aClass, source) {
-        return source.toLowerCase();
+    java.util.List<Object> around(testpackage.Class1 aClass, java.util.List<Object> source, Integer arg01, Object arg02): testSequenceInsertAtCaller(aClass, source, arg01, arg02) {
+        return tudresden.ocl20.pivot.ocl22java.types.util.OclSequences.insertAt(source, arg01, arg02);
     }
 }

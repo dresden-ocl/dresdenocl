@@ -12,18 +12,18 @@ public privileged aspect DefAspect75 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testSetAsSequence(java.util.Set<Object> source)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testRealMin01(Float source, Float arg01)}.</p>
      */
-    protected pointcut testSetAsSequenceCaller(testpackage.Class1 aClass, java.util.Set<Object> source):
-    	call(* testpackage.Class1.testSetAsSequence(java.util.Set<Object>))
-    	&& target(aClass) && args(source);
+    protected pointcut testRealMin01Caller(testpackage.Class1 aClass, Float source, Float arg01):
+    	call(* testpackage.Class1.testRealMin01(Float, Float))
+    	&& target(aClass) && args(source, arg01);
     
     /**
-     * <p>Defines the method testSetAsSequence(java.util.Set<Object> source) defined by the constraint
+     * <p>Defines the method testRealMin01(Float source, Float arg01) defined by the constraint
      * <code>context Class1
-     *       def: testSetAsSequence = source[].asSequence()</code></p>
+     *       def: testRealMin01 = source[].min( arg01[])</code></p>
      */
-    java.util.List<Object> around(testpackage.Class1 aClass, java.util.Set<Object> source): testSetAsSequenceCaller(aClass, source) {
-        return tudresden.ocl20.pivot.ocl22java.types.util.OclSets.asSequence(source);
+    Float around(testpackage.Class1 aClass, Float source, Float arg01): testRealMin01Caller(aClass, source, arg01) {
+        return java.lang.Math.min(source, arg01);
     }
 }

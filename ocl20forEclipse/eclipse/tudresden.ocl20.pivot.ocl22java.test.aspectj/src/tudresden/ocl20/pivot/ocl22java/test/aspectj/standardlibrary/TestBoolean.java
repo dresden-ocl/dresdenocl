@@ -36,6 +36,75 @@ public class TestBoolean {
 
 	/**
 	 * <p>
+	 * Tests the generated code for the method <code>Boolean.and(Boolean)</code>
+	 * .
+	 * </p>
+	 */
+	@Test
+	public void testAnd01() {
+
+		Class1 class1;
+		class1 = new Class1();
+
+		assertEquals(true, class1.testBooleanAnd01(true, true));
+		assertEquals(false, class1.testBooleanAnd01(false, true));
+		assertEquals(false, class1.testBooleanAnd01(true, false));
+		assertEquals(false, class1.testBooleanAnd01(false, false));
+	}
+
+	/**
+	 * <p>
+	 * Tests the generated code for the method
+	 * <code>Boolean.implies(Boolean)</code> .
+	 * </p>
+	 */
+	@Test
+	public void testImplies01() {
+
+		Class1 class1;
+		class1 = new Class1();
+
+		assertEquals(true, class1.testBooleanImplies01(true, true));
+		assertEquals(true, class1.testBooleanImplies01(false, true));
+		assertEquals(false, class1.testBooleanImplies01(true, false));
+		assertEquals(true, class1.testBooleanImplies01(false, false));
+	}
+
+	/**
+	 * <p>
+	 * Tests the generated code for the method <code>Boolean.not()</code> .
+	 * </p>
+	 */
+	@Test
+	public void testNot01() {
+
+		Class1 class1;
+		class1 = new Class1();
+
+		assertEquals(false, class1.testBooleanNot01(true));
+		assertEquals(true, class1.testBooleanNot01(false));
+	}
+
+	/**
+	 * <p>
+	 * Tests the generated code for the method <code>Boolean.or(Boolean)</code>
+	 * .
+	 * </p>
+	 */
+	@Test
+	public void testOr01() {
+
+		Class1 class1;
+		class1 = new Class1();
+
+		assertEquals(true, class1.testBooleanOr01(true, true));
+		assertEquals(true, class1.testBooleanOr01(false, true));
+		assertEquals(true, class1.testBooleanOr01(true, false));
+		assertEquals(false, class1.testBooleanOr01(false, false));
+	}
+
+	/**
+	 * <p>
 	 * Tests the generated code for the method <code>Boolean.toString()</code>.
 	 * </p>
 	 */
@@ -47,5 +116,23 @@ public class TestBoolean {
 
 		assertEquals(class1.testBooleanToString(true), "true");
 		assertEquals(class1.testBooleanToString(false), "false");
+	}
+
+	/**
+	 * <p>
+	 * Tests the generated code for the method <code>Boolean.xor(Boolean)</code>
+	 * .
+	 * </p>
+	 */
+	@Test
+	public void testXor01() {
+
+		Class1 class1;
+		class1 = new Class1();
+
+		assertEquals(false, class1.testBooleanXor01(true, true));
+		assertEquals(true, class1.testBooleanXor01(false, true));
+		assertEquals(true, class1.testBooleanXor01(true, false));
+		assertEquals(false, class1.testBooleanXor01(false, false));
 	}
 }

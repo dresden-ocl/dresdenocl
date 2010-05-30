@@ -12,18 +12,18 @@ public privileged aspect DefAspect46 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testOrderedSetFirst(java.util.List<Object> source)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testIntegerMinus01(Integer source, Integer arg01)}.</p>
      */
-    protected pointcut testOrderedSetFirstCaller(testpackage.Class1 aClass, java.util.List<Object> source):
-    	call(* testpackage.Class1.testOrderedSetFirst(java.util.List<Object>))
-    	&& target(aClass) && args(source);
+    protected pointcut testIntegerMinus01Caller(testpackage.Class1 aClass, Integer source, Integer arg01):
+    	call(* testpackage.Class1.testIntegerMinus01(Integer, Integer))
+    	&& target(aClass) && args(source, arg01);
     
     /**
-     * <p>Defines the method testOrderedSetFirst(java.util.List<Object> source) defined by the constraint
+     * <p>Defines the method testIntegerMinus01(Integer source, Integer arg01) defined by the constraint
      * <code>context Class1
-     *       def: testOrderedSetFirst = source[].first()</code></p>
+     *       def: testIntegerMinus01 = source[].-( arg01[])</code></p>
      */
-    Object around(testpackage.Class1 aClass, java.util.List<Object> source): testOrderedSetFirstCaller(aClass, source) {
-        return tudresden.ocl20.pivot.ocl22java.types.util.OclOrderedSets.first(source);
+    Integer around(testpackage.Class1 aClass, Integer source, Integer arg01): testIntegerMinus01Caller(aClass, source, arg01) {
+        return (source - arg01);
     }
 }

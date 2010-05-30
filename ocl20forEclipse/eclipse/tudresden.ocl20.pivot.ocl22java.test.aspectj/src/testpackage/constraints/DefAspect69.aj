@@ -12,18 +12,18 @@ public privileged aspect DefAspect69 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testSequencePrepend(java.util.List<Object> source, Object arg01)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testRealFloor01(Float source)}.</p>
      */
-    protected pointcut testSequencePrependCaller(testpackage.Class1 aClass, java.util.List<Object> source, Object arg01):
-    	call(* testpackage.Class1.testSequencePrepend(java.util.List<Object>, Object))
-    	&& target(aClass) && args(source, arg01);
+    protected pointcut testRealFloor01Caller(testpackage.Class1 aClass, Float source):
+    	call(* testpackage.Class1.testRealFloor01(Float))
+    	&& target(aClass) && args(source);
     
     /**
-     * <p>Defines the method testSequencePrepend(java.util.List<Object> source, Object arg01) defined by the constraint
+     * <p>Defines the method testRealFloor01(Float source) defined by the constraint
      * <code>context Class1
-     *       def: testSequencePrepend = source[].prepend( arg01[])</code></p>
+     *       def: testRealFloor01 = source[].floor()</code></p>
      */
-    java.util.List<Object> around(testpackage.Class1 aClass, java.util.List<Object> source, Object arg01): testSequencePrependCaller(aClass, source, arg01) {
-        return tudresden.ocl20.pivot.ocl22java.types.util.OclSequences.prepend(source, arg01);
+    Integer around(testpackage.Class1 aClass, Float source): testRealFloor01Caller(aClass, source) {
+        return (new Integer(new Double(java.lang.Math.floor(source)).intValue()));
     }
 }

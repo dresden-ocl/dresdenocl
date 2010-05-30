@@ -12,18 +12,18 @@ public privileged aspect DefAspect37 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testIntegerToString(Integer source)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testCollectionNotEmpty(java.util.Collection<Object> source)}.</p>
      */
-    protected pointcut testIntegerToStringCaller(testpackage.Class1 aClass, Integer source):
-    	call(* testpackage.Class1.testIntegerToString(Integer))
+    protected pointcut testCollectionNotEmptyCaller(testpackage.Class1 aClass, java.util.Collection<Object> source):
+    	call(* testpackage.Class1.testCollectionNotEmpty(java.util.Collection<Object>))
     	&& target(aClass) && args(source);
     
     /**
-     * <p>Defines the method testIntegerToString(Integer source) defined by the constraint
+     * <p>Defines the method testCollectionNotEmpty(java.util.Collection<Object> source) defined by the constraint
      * <code>context Class1
-     *       def: testIntegerToString = source[].toString()</code></p>
+     *       def: testCollectionNotEmpty = source[].notEmpty()</code></p>
      */
-    String around(testpackage.Class1 aClass, Integer source): testIntegerToStringCaller(aClass, source) {
-        return source.toString();
+    Boolean around(testpackage.Class1 aClass, java.util.Collection<Object> source): testCollectionNotEmptyCaller(aClass, source) {
+        return tudresden.ocl20.pivot.ocl22java.types.util.OclCollections.notEmpty(source);
     }
 }

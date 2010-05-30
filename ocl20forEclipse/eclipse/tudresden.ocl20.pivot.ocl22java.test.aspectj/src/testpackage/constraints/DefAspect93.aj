@@ -12,18 +12,18 @@ public privileged aspect DefAspect93 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testStringToBoolean(String source)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testSequenceIncluding01(java.util.List<Object> source, Object arg01)}.</p>
      */
-    protected pointcut testStringToBooleanCaller(testpackage.Class1 aClass, String source):
-    	call(* testpackage.Class1.testStringToBoolean(String))
-    	&& target(aClass) && args(source);
+    protected pointcut testSequenceIncluding01Caller(testpackage.Class1 aClass, java.util.List<Object> source, Object arg01):
+    	call(* testpackage.Class1.testSequenceIncluding01(java.util.List<Object>, Object))
+    	&& target(aClass) && args(source, arg01);
     
     /**
-     * <p>Defines the method testStringToBoolean(String source) defined by the constraint
+     * <p>Defines the method testSequenceIncluding01(java.util.List<Object> source, Object arg01) defined by the constraint
      * <code>context Class1
-     *       def: testStringToBoolean = source[].toBoolean()</code></p>
+     *       def: testSequenceIncluding01 = source[].including( arg01[])</code></p>
      */
-    Boolean around(testpackage.Class1 aClass, String source): testStringToBooleanCaller(aClass, source) {
-        return Boolean.parseBoolean(source);
+    java.util.List<Object> around(testpackage.Class1 aClass, java.util.List<Object> source, Object arg01): testSequenceIncluding01Caller(aClass, source, arg01) {
+        return tudresden.ocl20.pivot.ocl22java.types.util.OclSequences.including(source, arg01);
     }
 }

@@ -24,9 +24,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import tudresden.ocl20.pivot.model.ModelAccessException;
-import tudresden.ocl20.pivot.ocl2java.exception.Ocl22CodeException;
 import tudresden.ocl20.pivot.ocl2java.test.tests.AbstractDiffTest;
-import tudresden.ocl20.pivot.parser.ParseException;
 
 /**
  * <p>
@@ -70,17 +68,195 @@ public class TestReal extends AbstractDiffTest {
 
 	/**
 	 * <p>
-	 * Tests the instrumentation of the constraint.
+	 * Tests the code generation of the constraint.
 	 * </p>
 	 * 
-	 * @throws ModelAccessException
-	 * @throws ParseException
-	 * @throws IllegalArgumentException
-	 * @throws Ocl22CodeException
+	 * @throws Exception
 	 */
 	@Test
-	public void testToString01() throws IllegalArgumentException,
-			ParseException, ModelAccessException, Ocl22CodeException {
+	public void testAbs01() throws Exception {
+
+		this.compareFragmentCodeGeneration("sltest/real", "abs01");
+	}
+
+	/**
+	 * <p>
+	 * Tests the code generation of the constraint.
+	 * </p>
+	 * 
+	 * @throws Exception
+	 */
+	@Test
+	public void testDivision01() throws Exception {
+
+		this.compareFragmentCodeGeneration("sltest/real", "division01");
+	}
+
+	/**
+	 * <p>
+	 * Tests the code generation of the constraint.
+	 * </p>
+	 * 
+	 * @throws Exception
+	 */
+	@Test
+	public void testFloor01() throws Exception {
+
+		this.compareFragmentCodeGeneration("sltest/real", "floor01");
+	}
+
+	/**
+	 * <p>
+	 * Tests the code generation of the constraint.
+	 * </p>
+	 * 
+	 * @throws Exception
+	 */
+	@Test
+	public void testGreaterThan01() throws Exception {
+
+		this.compareFragmentCodeGeneration("sltest/real", "greaterThan01");
+	}
+
+	/**
+	 * <p>
+	 * Tests the code generation of the constraint.
+	 * </p>
+	 * 
+	 * @throws Exception
+	 */
+	@Test
+	public void testGreaterThanEqual01() throws Exception {
+
+		this.compareFragmentCodeGeneration("sltest/real", "greaterThanEqual01");
+	}
+
+	/**
+	 * <p>
+	 * Tests the code generation of the constraint.
+	 * </p>
+	 * 
+	 * @throws Exception
+	 */
+	@Test
+	public void testLessThan01() throws Exception {
+
+		this.compareFragmentCodeGeneration("sltest/real", "lessThan01");
+	}
+
+	/**
+	 * <p>
+	 * Tests the code generation of the constraint.
+	 * </p>
+	 * 
+	 * @throws Exception
+	 */
+	@Test
+	public void testLessThanEqual01() throws Exception {
+
+		this.compareFragmentCodeGeneration("sltest/real", "lessThanEqual01");
+	}
+
+	/**
+	 * <p>
+	 * Tests the code generation of the constraint.
+	 * </p>
+	 * 
+	 * @throws Exception
+	 */
+	@Test
+	public void testMax01() throws Exception {
+
+		this.compareFragmentCodeGeneration("sltest/real", "max01");
+	}
+
+	/**
+	 * <p>
+	 * Tests the code generation of the constraint.
+	 * </p>
+	 * 
+	 * @throws Exception
+	 */
+	@Test
+	public void testMin01() throws Exception {
+
+		this.compareFragmentCodeGeneration("sltest/real", "min01");
+	}
+
+	/**
+	 * <p>
+	 * Tests the code generation of the constraint.
+	 * </p>
+	 * 
+	 * @throws Exception
+	 */
+	@Test
+	public void testMinus01() throws Exception {
+
+		this.compareFragmentCodeGeneration("sltest/real", "minus01");
+	}
+
+	/**
+	 * <p>
+	 * Tests the code generation of the constraint.
+	 * </p>
+	 * 
+	 * @throws Exception
+	 */
+	@Test
+	public void testMultiply01() throws Exception {
+
+		this.compareFragmentCodeGeneration("sltest/real", "multiply01");
+	}
+
+	/**
+	 * <p>
+	 * Tests the code generation of the constraint.
+	 * </p>
+	 * 
+	 * @throws Exception
+	 */
+	@Test
+	public void testNegation01() throws Exception {
+
+		this.compareFragmentCodeGeneration("sltest/real", "negation01");
+	}
+
+	/**
+	 * <p>
+	 * Tests the code generation of the constraint.
+	 * </p>
+	 * 
+	 * @throws Exception
+	 */
+	@Test
+	public void testPlus01() throws Exception {
+
+		this.compareFragmentCodeGeneration("sltest/real", "plus01");
+	}
+
+	/**
+	 * <p>
+	 * Tests the code generation of the constraint.
+	 * </p>
+	 * 
+	 * @throws Exception
+	 */
+	@Test
+	public void testRound01() throws Exception {
+
+		this.compareFragmentCodeGeneration("sltest/real", "round01");
+	}
+
+	/**
+	 * <p>
+	 * Tests the code generation of the constraint.
+	 * </p>
+	 * 
+	 * @throws Exception
+	 */
+	@Test
+	public void testToString01() throws Exception {
 
 		this.compareFragmentCodeGeneration("sltest/real", "toString01");
 	}

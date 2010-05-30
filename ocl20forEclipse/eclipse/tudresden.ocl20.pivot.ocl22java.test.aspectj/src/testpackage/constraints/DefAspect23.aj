@@ -12,18 +12,18 @@ public privileged aspect DefAspect23 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testCollectionEquals(java.util.Collection<Object> source, java.util.Collection<Object> arg01)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testCollectionAsBag(java.util.Collection<Object> source)}.</p>
      */
-    protected pointcut testCollectionEqualsCaller(testpackage.Class1 aClass, java.util.Collection<Object> source, java.util.Collection<Object> arg01):
-    	call(* testpackage.Class1.testCollectionEquals(java.util.Collection<Object>, java.util.Collection<Object>))
-    	&& target(aClass) && args(source, arg01);
+    protected pointcut testCollectionAsBagCaller(testpackage.Class1 aClass, java.util.Collection<Object> source):
+    	call(* testpackage.Class1.testCollectionAsBag(java.util.Collection<Object>))
+    	&& target(aClass) && args(source);
     
     /**
-     * <p>Defines the method testCollectionEquals(java.util.Collection<Object> source, java.util.Collection<Object> arg01) defined by the constraint
+     * <p>Defines the method testCollectionAsBag(java.util.Collection<Object> source) defined by the constraint
      * <code>context Class1
-     *       def: testCollectionEquals = source[].=( arg01[])</code></p>
+     *       def: testCollectionAsBag = source[].asBag()</code></p>
      */
-    Boolean around(testpackage.Class1 aClass, java.util.Collection<Object> source, java.util.Collection<Object> arg01): testCollectionEqualsCaller(aClass, source, arg01) {
-        return tudresden.ocl20.pivot.ocl22java.types.util.OclCollections.equals(source, arg01);
+    java.util.List<Object> around(testpackage.Class1 aClass, java.util.Collection<Object> source): testCollectionAsBagCaller(aClass, source) {
+        return tudresden.ocl20.pivot.ocl22java.types.util.OclCollections.asBag(source);
     }
 }

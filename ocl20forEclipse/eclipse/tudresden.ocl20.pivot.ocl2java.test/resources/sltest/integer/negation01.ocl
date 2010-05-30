@@ -1,0 +1,7 @@
+package testpackage
+
+context Class1
+def: testIntegerNegation01(source: Integer): Integer =
+- source
+
+endpackage

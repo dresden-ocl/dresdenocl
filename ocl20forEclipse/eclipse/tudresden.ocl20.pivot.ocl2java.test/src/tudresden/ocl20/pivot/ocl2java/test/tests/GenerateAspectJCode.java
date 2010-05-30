@@ -114,7 +114,12 @@ public class GenerateAspectJCode extends AbstractDiffTest {
 		constraints.add(new String[] { "sltest/bag", "union01" });
 		constraints.add(new String[] { "sltest/bag", "union02" });
 
+		constraints.add(new String[] { "sltest/boolean", "and01" });
+		constraints.add(new String[] { "sltest/boolean", "implies01" });
+		constraints.add(new String[] { "sltest/boolean", "not01" });
+		constraints.add(new String[] { "sltest/boolean", "or01" });
 		constraints.add(new String[] { "sltest/boolean", "toString01" });
+		constraints.add(new String[] { "sltest/boolean", "xor01" });
 
 		constraints.add(new String[] { "sltest/collection", "asBag01" });
 		constraints.add(new String[] { "sltest/collection", "asOrderedSet01" });
@@ -136,6 +141,15 @@ public class GenerateAspectJCode extends AbstractDiffTest {
 		constraints.add(new String[] { "sltest/collection", "size01" });
 		constraints.add(new String[] { "sltest/collection", "sum01" });
 
+		constraints.add(new String[] { "sltest/integer", "div01" });
+		constraints.add(new String[] { "sltest/integer", "divide01" });
+		constraints.add(new String[] { "sltest/integer", "max01" });
+		constraints.add(new String[] { "sltest/integer", "min01" });
+		constraints.add(new String[] { "sltest/integer", "minus01" });
+		constraints.add(new String[] { "sltest/integer", "mod01" });
+		constraints.add(new String[] { "sltest/integer", "multiply01" });
+		constraints.add(new String[] { "sltest/integer", "negation01" });
+		constraints.add(new String[] { "sltest/integer", "plus01" });
 		constraints.add(new String[] { "sltest/integer", "toString01" });
 
 		constraints.add(new String[] { "sltest/oclany", "allInstances01" });
@@ -153,8 +167,23 @@ public class GenerateAspectJCode extends AbstractDiffTest {
 		constraints.add(new String[] { "sltest/orderedset", "last01" });
 		constraints.add(new String[] { "sltest/orderedset", "prepend01" });
 		constraints.add(new String[] { "sltest/orderedset", "reverse01" });
-		constraints.add(new String[] { "sltest/orderedset", "subOrderedSet01" });
+		constraints
+				.add(new String[] { "sltest/orderedset", "subOrderedSet01" });
 
+		constraints.add(new String[] { "sltest/real", "abs01" });
+		constraints.add(new String[] { "sltest/real", "division01" });
+		constraints.add(new String[] { "sltest/real", "floor01" });
+		constraints.add(new String[] { "sltest/real", "greaterThan01" });
+		constraints.add(new String[] { "sltest/real", "greaterThanEqual01" });
+		constraints.add(new String[] { "sltest/real", "lessThan01" });
+		constraints.add(new String[] { "sltest/real", "lessThanEqual01" });
+		constraints.add(new String[] { "sltest/real", "max01" });
+		constraints.add(new String[] { "sltest/real", "min01" });
+		constraints.add(new String[] { "sltest/real", "minus01" });
+		constraints.add(new String[] { "sltest/real", "multiply01" });
+		constraints.add(new String[] { "sltest/real", "negation01" });
+		constraints.add(new String[] { "sltest/real", "plus01" });
+		constraints.add(new String[] { "sltest/real", "round01" });
 		constraints.add(new String[] { "sltest/real", "toString01" });
 
 		constraints.add(new String[] { "sltest/sequence", "append01" });
@@ -195,11 +224,16 @@ public class GenerateAspectJCode extends AbstractDiffTest {
 
 		constraints.add(new String[] { "sltest/string", "at01" });
 		constraints.add(new String[] { "sltest/string", "characters01" });
+		constraints.add(new String[] { "sltest/string", "concat01" });
 		constraints.add(new String[] { "sltest/string", "equalsIgnoreCase01" });
 		constraints.add(new String[] { "sltest/string", "indexOf01" });
 		constraints.add(new String[] { "sltest/string", "plus01" });
+		constraints.add(new String[] { "sltest/string", "size01" });
+		constraints.add(new String[] { "sltest/string", "substring01" });
 		constraints.add(new String[] { "sltest/string", "toBoolean01" });
+		constraints.add(new String[] { "sltest/string", "toInteger01" });
 		constraints.add(new String[] { "sltest/string", "toUpperCase01" });
+		constraints.add(new String[] { "sltest/string", "toReal01" });
 		constraints.add(new String[] { "sltest/string", "toLowerCase01" });
 
 		this.createInstrumentationCode(

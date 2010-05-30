@@ -12,18 +12,18 @@ public privileged aspect DefAspect19 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testCollectionAsOrderedSet(java.util.Collection<Object> source)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testBooleanNot01(Boolean source)}.</p>
      */
-    protected pointcut testCollectionAsOrderedSetCaller(testpackage.Class1 aClass, java.util.Collection<Object> source):
-    	call(* testpackage.Class1.testCollectionAsOrderedSet(java.util.Collection<Object>))
+    protected pointcut testBooleanNot01Caller(testpackage.Class1 aClass, Boolean source):
+    	call(* testpackage.Class1.testBooleanNot01(Boolean))
     	&& target(aClass) && args(source);
     
     /**
-     * <p>Defines the method testCollectionAsOrderedSet(java.util.Collection<Object> source) defined by the constraint
+     * <p>Defines the method testBooleanNot01(Boolean source) defined by the constraint
      * <code>context Class1
-     *       def: testCollectionAsOrderedSet = source[].asOrderedSet()</code></p>
+     *       def: testBooleanNot01 = source[].not()</code></p>
      */
-    java.util.List<Object> around(testpackage.Class1 aClass, java.util.Collection<Object> source): testCollectionAsOrderedSetCaller(aClass, source) {
-        return tudresden.ocl20.pivot.ocl22java.types.util.OclCollections.asOrderedSet(source);
+    Boolean around(testpackage.Class1 aClass, Boolean source): testBooleanNot01Caller(aClass, source) {
+        return !source;
     }
 }

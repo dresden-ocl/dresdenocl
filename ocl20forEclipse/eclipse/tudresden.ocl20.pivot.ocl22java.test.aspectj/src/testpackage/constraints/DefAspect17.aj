@@ -12,18 +12,18 @@ public privileged aspect DefAspect17 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testBooleanToString(Boolean source)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testBooleanAnd01(Boolean source, Boolean arg01)}.</p>
      */
-    protected pointcut testBooleanToStringCaller(testpackage.Class1 aClass, Boolean source):
-    	call(* testpackage.Class1.testBooleanToString(Boolean))
-    	&& target(aClass) && args(source);
+    protected pointcut testBooleanAnd01Caller(testpackage.Class1 aClass, Boolean source, Boolean arg01):
+    	call(* testpackage.Class1.testBooleanAnd01(Boolean, Boolean))
+    	&& target(aClass) && args(source, arg01);
     
     /**
-     * <p>Defines the method testBooleanToString(Boolean source) defined by the constraint
+     * <p>Defines the method testBooleanAnd01(Boolean source, Boolean arg01) defined by the constraint
      * <code>context Class1
-     *       def: testBooleanToString = source[].toString()</code></p>
+     *       def: testBooleanAnd01 = source[].and( arg01[])</code></p>
      */
-    String around(testpackage.Class1 aClass, Boolean source): testBooleanToStringCaller(aClass, source) {
-        return source.toString();
+    Boolean around(testpackage.Class1 aClass, Boolean source, Boolean arg01): testBooleanAnd01Caller(aClass, source, arg01) {
+        return (source && arg01);
     }
 }

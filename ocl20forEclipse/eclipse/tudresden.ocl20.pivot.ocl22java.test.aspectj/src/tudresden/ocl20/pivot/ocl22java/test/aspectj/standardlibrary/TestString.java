@@ -105,6 +105,24 @@ public class TestString {
 	/**
 	 * <p>
 	 * Tests the generated code for the method
+	 * <code>String.concat(String)</code>.
+	 * </p>
+	 */
+	@Test
+	public void testConcat01() {
+
+		Class1 class1;
+		class1 = new Class1();
+
+		assertEquals("second", class1.testStringConcat01("", "second"));
+		assertEquals("firstsecond", class1
+				.testStringConcat01("first", "second"));
+		assertEquals("first", class1.testStringConcat01("first", ""));
+	}
+
+	/**
+	 * <p>
+	 * Tests the generated code for the method
 	 * <code>String.equalsIgnoreCase(String)</code>.
 	 * </p>
 	 */
@@ -151,6 +169,41 @@ public class TestString {
 
 	/**
 	 * <p>
+	 * Tests the generated code for the method <code>String.size()</code>.
+	 * </p>
+	 */
+	@Test
+	public void testSize01() {
+
+		Class1 class1;
+		class1 = new Class1();
+
+		assertEquals(new Integer(0), class1.testStringSize01(""));
+		assertEquals(new Integer(4), class1.testStringSize01("some"));
+	}
+
+	/**
+	 * <p>
+	 * Tests the generated code for the method
+	 * <code>String.substring(Integer, Integer)</code>.
+	 * </p>
+	 */
+	@Test
+	public void testSubstring01() {
+
+		Class1 class1;
+		class1 = new Class1();
+
+		assertEquals("something", class1.testStringSubstring01("something",
+				new Integer(1), new Integer(9)));
+		assertEquals("some", class1.testStringSubstring01("something",
+				new Integer(1), new Integer(4)));
+		assertEquals("thing", class1.testStringSubstring01("something",
+				new Integer(5), new Integer(9)));
+	}
+
+	/**
+	 * <p>
 	 * Tests the generated code for the method <code>String.toBoolean()</code>.
 	 * </p>
 	 */
@@ -163,6 +216,42 @@ public class TestString {
 		assertTrue(class1.testStringToBoolean("true"));
 		assertFalse(class1.testStringToBoolean("false"));
 		assertFalse(class1.testStringToBoolean("undefined"));
+	}
+
+	/**
+	 * <p>
+	 * Tests the generated code for the method <code>String.toInteger()</code>.
+	 * </p>
+	 */
+	@Test
+	public void testToInteger01() {
+
+		Class1 class1;
+		class1 = new Class1();
+
+		assertEquals(new Integer(42), class1.testStringToInteger("42"));
+		assertEquals(new Integer(-42), class1.testStringToInteger("-42"));
+		assertEquals(new Integer(0), class1.testStringToInteger("0"));
+	}
+
+	/**
+	 * <p>
+	 * Tests the generated code for the method <code>String.toReal()</code>.
+	 * </p>
+	 */
+	@Test
+	public void testToReal01() {
+	
+		Class1 class1;
+		class1 = new Class1();
+	
+		assertEquals(new Float(42), class1.testStringToReal("42"));
+		assertEquals(new Float(-42), class1.testStringToReal("-42"));
+		assertEquals(new Float(0), class1.testStringToReal("0"));
+		assertEquals(new Float(42), class1.testStringToReal("42.0"));
+		assertEquals(new Float(-42), class1.testStringToReal("-42.0"));
+		assertEquals(new Float(0), class1.testStringToReal("0.0"));
+		assertEquals(new Float(42.7), class1.testStringToReal("42.7"));
 	}
 
 	/**

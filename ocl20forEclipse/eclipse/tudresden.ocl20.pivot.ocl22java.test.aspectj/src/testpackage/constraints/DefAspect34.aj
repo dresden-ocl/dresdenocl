@@ -12,18 +12,18 @@ public privileged aspect DefAspect34 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testCollectionProduct(java.util.Collection<Object> source, java.util.Collection<Object> arg01)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testCollectionIsEmpty(java.util.Collection<Object> source)}.</p>
      */
-    protected pointcut testCollectionProductCaller(testpackage.Class1 aClass, java.util.Collection<Object> source, java.util.Collection<Object> arg01):
-    	call(* testpackage.Class1.testCollectionProduct(java.util.Collection<Object>, java.util.Collection<Object>))
-    	&& target(aClass) && args(source, arg01);
+    protected pointcut testCollectionIsEmptyCaller(testpackage.Class1 aClass, java.util.Collection<Object> source):
+    	call(* testpackage.Class1.testCollectionIsEmpty(java.util.Collection<Object>))
+    	&& target(aClass) && args(source);
     
     /**
-     * <p>Defines the method testCollectionProduct(java.util.Collection<Object> source, java.util.Collection<Object> arg01) defined by the constraint
+     * <p>Defines the method testCollectionIsEmpty(java.util.Collection<Object> source) defined by the constraint
      * <code>context Class1
-     *       def: testCollectionProduct = source[].product( arg01[]).size()</code></p>
+     *       def: testCollectionIsEmpty = source[].isEmpty()</code></p>
      */
-    Integer around(testpackage.Class1 aClass, java.util.Collection<Object> source, java.util.Collection<Object> arg01): testCollectionProductCaller(aClass, source, arg01) {
-        return tudresden.ocl20.pivot.ocl22java.types.util.OclCollections.size(tudresden.ocl20.pivot.ocl22java.types.util.OclCollections.product(source, arg01));
+    Boolean around(testpackage.Class1 aClass, java.util.Collection<Object> source): testCollectionIsEmptyCaller(aClass, source) {
+        return tudresden.ocl20.pivot.ocl22java.types.util.OclCollections.isEmpty(source);
     }
 }

@@ -12,18 +12,18 @@ public privileged aspect DefAspect92 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testStringPlus(String source, String arg01)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testSequenceFlatten(java.util.List<Object> source)}.</p>
      */
-    protected pointcut testStringPlusCaller(testpackage.Class1 aClass, String source, String arg01):
-    	call(* testpackage.Class1.testStringPlus(String, String))
-    	&& target(aClass) && args(source, arg01);
+    protected pointcut testSequenceFlattenCaller(testpackage.Class1 aClass, java.util.List<Object> source):
+    	call(* testpackage.Class1.testSequenceFlatten(java.util.List<Object>))
+    	&& target(aClass) && args(source);
     
     /**
-     * <p>Defines the method testStringPlus(String source, String arg01) defined by the constraint
+     * <p>Defines the method testSequenceFlatten(java.util.List<Object> source) defined by the constraint
      * <code>context Class1
-     *       def: testStringPlus = source[].+( arg01[])</code></p>
+     *       def: testSequenceFlatten = source[].flatten()</code></p>
      */
-    String around(testpackage.Class1 aClass, String source, String arg01): testStringPlusCaller(aClass, source, arg01) {
-        return source.concat(arg01);
+    java.util.List<Object> around(testpackage.Class1 aClass, java.util.List<Object> source): testSequenceFlattenCaller(aClass, source) {
+        return (java.util.List<Object>) tudresden.ocl20.pivot.ocl22java.types.util.OclSequences.flatten(source);
     }
 }

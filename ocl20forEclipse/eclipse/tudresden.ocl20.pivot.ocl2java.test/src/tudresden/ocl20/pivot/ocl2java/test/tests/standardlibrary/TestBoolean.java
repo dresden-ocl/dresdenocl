@@ -24,9 +24,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import tudresden.ocl20.pivot.model.ModelAccessException;
-import tudresden.ocl20.pivot.ocl2java.exception.Ocl22CodeException;
 import tudresden.ocl20.pivot.ocl2java.test.tests.AbstractDiffTest;
-import tudresden.ocl20.pivot.parser.ParseException;
 
 /**
  * <p>
@@ -70,18 +68,79 @@ public class TestBoolean extends AbstractDiffTest {
 
 	/**
 	 * <p>
-	 * Tests the instrumentation of the constraint.
+	 * Tests the code generation of a constraint.
 	 * </p>
 	 * 
-	 * @throws ModelAccessException
-	 * @throws ParseException
-	 * @throws IllegalArgumentException
-	 * @throws Ocl22CodeException
+	 * @throws Exception
 	 */
 	@Test
-	public void testToString01() throws IllegalArgumentException,
-			ParseException, ModelAccessException, Ocl22CodeException {
+	public void testAnd01() throws Exception {
+	
+		this.compareFragmentCodeGeneration("sltest/boolean", "and01");
+	}
+
+	/**
+	 * <p>
+	 * Tests the code generation of a constraint.
+	 * </p>
+	 * 
+	 * @throws Exception
+	 */
+	@Test
+	public void testImplies01() throws Exception {
+	
+		this.compareFragmentCodeGeneration("sltest/boolean", "implies01");
+	}
+
+	/**
+	 * <p>
+	 * Tests the code generation of a constraint.
+	 * </p>
+	 * 
+	 * @throws Exception
+	 */
+	@Test
+	public void testNot01() throws Exception {
+	
+		this.compareFragmentCodeGeneration("sltest/boolean", "not01");
+	}
+
+	/**
+	 * <p>
+	 * Tests the code generation of a constraint.
+	 * </p>
+	 * 
+	 * @throws Exception
+	 */
+	@Test
+	public void testOr01() throws Exception {
+
+		this.compareFragmentCodeGeneration("sltest/boolean", "or01");
+	}
+
+	/**
+	 * <p>
+	 * Tests the code generation of a constraint.
+	 * </p>
+	 * 
+	 * @throws Exception
+	 */
+	@Test
+	public void testToString01() throws Exception {
 
 		this.compareFragmentCodeGeneration("sltest/boolean", "toString01");
+	}
+
+	/**
+	 * <p>
+	 * Tests the code generation of a constraint.
+	 * </p>
+	 * 
+	 * @throws Exception
+	 */
+	@Test
+	public void testXor01() throws Exception {
+
+		this.compareFragmentCodeGeneration("sltest/boolean", "xor01");
 	}
 }

@@ -12,18 +12,18 @@ public privileged aspect DefAspect20 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testCollectionAsSequence(java.util.Collection<Object> source)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testBooleanOr01(Boolean source, Boolean arg01)}.</p>
      */
-    protected pointcut testCollectionAsSequenceCaller(testpackage.Class1 aClass, java.util.Collection<Object> source):
-    	call(* testpackage.Class1.testCollectionAsSequence(java.util.Collection<Object>))
-    	&& target(aClass) && args(source);
+    protected pointcut testBooleanOr01Caller(testpackage.Class1 aClass, Boolean source, Boolean arg01):
+    	call(* testpackage.Class1.testBooleanOr01(Boolean, Boolean))
+    	&& target(aClass) && args(source, arg01);
     
     /**
-     * <p>Defines the method testCollectionAsSequence(java.util.Collection<Object> source) defined by the constraint
+     * <p>Defines the method testBooleanOr01(Boolean source, Boolean arg01) defined by the constraint
      * <code>context Class1
-     *       def: testCollectionAsSequence = source[].asSequence()</code></p>
+     *       def: testBooleanOr01 = source[].or( arg01[])</code></p>
      */
-    java.util.List<Object> around(testpackage.Class1 aClass, java.util.Collection<Object> source): testCollectionAsSequenceCaller(aClass, source) {
-        return tudresden.ocl20.pivot.ocl22java.types.util.OclCollections.asSequence(source);
+    Boolean around(testpackage.Class1 aClass, Boolean source, Boolean arg01): testBooleanOr01Caller(aClass, source, arg01) {
+        return (source || arg01);
     }
 }

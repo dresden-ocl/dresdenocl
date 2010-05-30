@@ -12,18 +12,18 @@ public privileged aspect DefAspect51 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testOrderedSetReverse(java.util.List<Object> source)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testIntegerToString(Integer source)}.</p>
      */
-    protected pointcut testOrderedSetReverseCaller(testpackage.Class1 aClass, java.util.List<Object> source):
-    	call(* testpackage.Class1.testOrderedSetReverse(java.util.List<Object>))
+    protected pointcut testIntegerToStringCaller(testpackage.Class1 aClass, Integer source):
+    	call(* testpackage.Class1.testIntegerToString(Integer))
     	&& target(aClass) && args(source);
     
     /**
-     * <p>Defines the method testOrderedSetReverse(java.util.List<Object> source) defined by the constraint
+     * <p>Defines the method testIntegerToString(Integer source) defined by the constraint
      * <code>context Class1
-     *       def: testOrderedSetReverse = source[].reverse()</code></p>
+     *       def: testIntegerToString = source[].toString()</code></p>
      */
-    java.util.List<Object> around(testpackage.Class1 aClass, java.util.List<Object> source): testOrderedSetReverseCaller(aClass, source) {
-        return tudresden.ocl20.pivot.ocl22java.types.util.OclOrderedSets.reverse(source);
+    String around(testpackage.Class1 aClass, Integer source): testIntegerToStringCaller(aClass, source) {
+        return source.toString();
     }
 }

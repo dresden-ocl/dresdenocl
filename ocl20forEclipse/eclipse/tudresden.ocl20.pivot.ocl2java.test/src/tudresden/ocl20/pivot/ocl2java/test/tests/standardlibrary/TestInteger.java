@@ -24,9 +24,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import tudresden.ocl20.pivot.model.ModelAccessException;
-import tudresden.ocl20.pivot.ocl2java.exception.Ocl22CodeException;
 import tudresden.ocl20.pivot.ocl2java.test.tests.AbstractDiffTest;
-import tudresden.ocl20.pivot.parser.ParseException;
 
 /**
  * <p>
@@ -70,17 +68,130 @@ public class TestInteger extends AbstractDiffTest {
 
 	/**
 	 * <p>
-	 * Tests the instrumentation of the constraint.
+	 * Tests the code generation of the constraint.
 	 * </p>
 	 * 
-	 * @throws ModelAccessException
-	 * @throws ParseException
-	 * @throws IllegalArgumentException
-	 * @throws Ocl22CodeException
+	 * @throws Exception
 	 */
 	@Test
-	public void testToString01() throws IllegalArgumentException,
-			ParseException, ModelAccessException, Ocl22CodeException {
+	public void testDiv01() throws Exception {
+
+		this.compareFragmentCodeGeneration("sltest/integer", "div01");
+	}
+
+	/**
+	 * <p>
+	 * Tests the code generation of the constraint.
+	 * </p>
+	 * 
+	 * @throws Exception
+	 */
+	@Test
+	public void testDivide01() throws Exception {
+
+		this.compareFragmentCodeGeneration("sltest/integer", "divide01");
+	}
+
+	/**
+	 * <p>
+	 * Tests the code generation of the constraint.
+	 * </p>
+	 * 
+	 * @throws Exception
+	 */
+	@Test
+	public void testMax01() throws Exception {
+
+		this.compareFragmentCodeGeneration("sltest/integer", "max01");
+	}
+
+	/**
+	 * <p>
+	 * Tests the code generation of the constraint.
+	 * </p>
+	 * 
+	 * @throws Exception
+	 */
+	@Test
+	public void testMin01() throws Exception {
+
+		this.compareFragmentCodeGeneration("sltest/integer", "min01");
+	}
+
+	/**
+	 * <p>
+	 * Tests the code generation of the constraint.
+	 * </p>
+	 * 
+	 * @throws Exception
+	 */
+	@Test
+	public void testMod01() throws Exception {
+
+		this.compareFragmentCodeGeneration("sltest/integer", "mod01");
+	}
+
+	/**
+	 * <p>
+	 * Tests the code generation of the constraint.
+	 * </p>
+	 * 
+	 * @throws Exception
+	 */
+	@Test
+	public void testMinus01() throws Exception {
+
+		this.compareFragmentCodeGeneration("sltest/integer", "minus01");
+	}
+
+	/**
+	 * <p>
+	 * Tests the code generation of the constraint.
+	 * </p>
+	 * 
+	 * @throws Exception
+	 */
+	@Test
+	public void testMultiply01() throws Exception {
+
+		this.compareFragmentCodeGeneration("sltest/integer", "multiply01");
+	}
+
+	/**
+	 * <p>
+	 * Tests the code generation of the constraint.
+	 * </p>
+	 * 
+	 * @throws Exception
+	 */
+	@Test
+	public void testNegation01() throws Exception {
+
+		this.compareFragmentCodeGeneration("sltest/integer", "negation01");
+	}
+
+	/**
+	 * <p>
+	 * Tests the code generation of the constraint.
+	 * </p>
+	 * 
+	 * @throws Exception
+	 */
+	@Test
+	public void testPlus01() throws Exception {
+
+		this.compareFragmentCodeGeneration("sltest/integer", "plus01");
+	}
+
+	/**
+	 * <p>
+	 * Tests the code generation of the constraint.
+	 * </p>
+	 * 
+	 * @throws Exception
+	 */
+	@Test
+	public void testToString01() throws Exception {
 
 		this.compareFragmentCodeGeneration("sltest/integer", "toString01");
 	}

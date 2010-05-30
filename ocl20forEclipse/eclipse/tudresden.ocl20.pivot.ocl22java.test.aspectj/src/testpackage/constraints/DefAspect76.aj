@@ -12,18 +12,18 @@ public privileged aspect DefAspect76 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testSetAsSet(java.util.Set<Object> source)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testRealMinus01(Float source, Float arg01)}.</p>
      */
-    protected pointcut testSetAsSetCaller(testpackage.Class1 aClass, java.util.Set<Object> source):
-    	call(* testpackage.Class1.testSetAsSet(java.util.Set<Object>))
-    	&& target(aClass) && args(source);
+    protected pointcut testRealMinus01Caller(testpackage.Class1 aClass, Float source, Float arg01):
+    	call(* testpackage.Class1.testRealMinus01(Float, Float))
+    	&& target(aClass) && args(source, arg01);
     
     /**
-     * <p>Defines the method testSetAsSet(java.util.Set<Object> source) defined by the constraint
+     * <p>Defines the method testRealMinus01(Float source, Float arg01) defined by the constraint
      * <code>context Class1
-     *       def: testSetAsSet = source[].asSet()</code></p>
+     *       def: testRealMinus01 = source[].-( arg01[])</code></p>
      */
-    java.util.Set<Object> around(testpackage.Class1 aClass, java.util.Set<Object> source): testSetAsSetCaller(aClass, source) {
-        return tudresden.ocl20.pivot.ocl22java.types.util.OclSets.asSet(source);
+    Float around(testpackage.Class1 aClass, Float source, Float arg01): testRealMinus01Caller(aClass, source, arg01) {
+        return (source - arg01);
     }
 }

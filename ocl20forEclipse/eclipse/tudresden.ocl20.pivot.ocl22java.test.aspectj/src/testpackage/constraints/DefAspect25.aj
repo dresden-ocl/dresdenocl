@@ -12,18 +12,18 @@ public privileged aspect DefAspect25 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testCollectionExcludesAll(java.util.Collection<Object> source, java.util.Collection<Object> arg01)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testCollectionAsSequence(java.util.Collection<Object> source)}.</p>
      */
-    protected pointcut testCollectionExcludesAllCaller(testpackage.Class1 aClass, java.util.Collection<Object> source, java.util.Collection<Object> arg01):
-    	call(* testpackage.Class1.testCollectionExcludesAll(java.util.Collection<Object>, java.util.Collection<Object>))
-    	&& target(aClass) && args(source, arg01);
+    protected pointcut testCollectionAsSequenceCaller(testpackage.Class1 aClass, java.util.Collection<Object> source):
+    	call(* testpackage.Class1.testCollectionAsSequence(java.util.Collection<Object>))
+    	&& target(aClass) && args(source);
     
     /**
-     * <p>Defines the method testCollectionExcludesAll(java.util.Collection<Object> source, java.util.Collection<Object> arg01) defined by the constraint
+     * <p>Defines the method testCollectionAsSequence(java.util.Collection<Object> source) defined by the constraint
      * <code>context Class1
-     *       def: testCollectionExcludesAll = source[].excludesAll( arg01[])</code></p>
+     *       def: testCollectionAsSequence = source[].asSequence()</code></p>
      */
-    Boolean around(testpackage.Class1 aClass, java.util.Collection<Object> source, java.util.Collection<Object> arg01): testCollectionExcludesAllCaller(aClass, source, arg01) {
-        return tudresden.ocl20.pivot.ocl22java.types.util.OclCollections.excludesAll(source, arg01);
+    java.util.List<Object> around(testpackage.Class1 aClass, java.util.Collection<Object> source): testCollectionAsSequenceCaller(aClass, source) {
+        return tudresden.ocl20.pivot.ocl22java.types.util.OclCollections.asSequence(source);
     }
 }

@@ -12,18 +12,18 @@ public privileged aspect DefAspect67 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testSequenceInsertAt(java.util.List<Object> source, Integer arg01, Object arg02)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testRealAbs01(Float source)}.</p>
      */
-    protected pointcut testSequenceInsertAtCaller(testpackage.Class1 aClass, java.util.List<Object> source, Integer arg01, Object arg02):
-    	call(* testpackage.Class1.testSequenceInsertAt(java.util.List<Object>, Integer, Object))
-    	&& target(aClass) && args(source, arg01, arg02);
+    protected pointcut testRealAbs01Caller(testpackage.Class1 aClass, Float source):
+    	call(* testpackage.Class1.testRealAbs01(Float))
+    	&& target(aClass) && args(source);
     
     /**
-     * <p>Defines the method testSequenceInsertAt(java.util.List<Object> source, Integer arg01, Object arg02) defined by the constraint
+     * <p>Defines the method testRealAbs01(Float source) defined by the constraint
      * <code>context Class1
-     *       def: testSequenceInsertAt = source[].insertAt( arg01[], arg02[])</code></p>
+     *       def: testRealAbs01 = source[].abs()</code></p>
      */
-    java.util.List<Object> around(testpackage.Class1 aClass, java.util.List<Object> source, Integer arg01, Object arg02): testSequenceInsertAtCaller(aClass, source, arg01, arg02) {
-        return tudresden.ocl20.pivot.ocl22java.types.util.OclSequences.insertAt(source, arg01, arg02);
+    Float around(testpackage.Class1 aClass, Float source): testRealAbs01Caller(aClass, source) {
+        return java.lang.Math.abs(source);
     }
 }

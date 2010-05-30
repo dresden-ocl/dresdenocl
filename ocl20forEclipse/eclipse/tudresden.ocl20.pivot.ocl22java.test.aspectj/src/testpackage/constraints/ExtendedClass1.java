@@ -149,7 +149,52 @@ public class ExtendedClass1  {
      *A method signature implemented by an aspect.
      *</p>
      */
+    public Boolean testBooleanAnd01(Boolean source, Boolean arg01) {
+        return null;
+    }
+
+    /**
+     *<p>
+     *A method signature implemented by an aspect.
+     *</p>
+     */
+    public Boolean testBooleanImplies01(Boolean source, Boolean arg01) {
+        return null;
+    }
+
+    /**
+     *<p>
+     *A method signature implemented by an aspect.
+     *</p>
+     */
+    public Boolean testBooleanNot01(Boolean source) {
+        return null;
+    }
+
+    /**
+     *<p>
+     *A method signature implemented by an aspect.
+     *</p>
+     */
+    public Boolean testBooleanOr01(Boolean source, Boolean arg01) {
+        return null;
+    }
+
+    /**
+     *<p>
+     *A method signature implemented by an aspect.
+     *</p>
+     */
     public String testBooleanToString(Boolean source) {
+        return null;
+    }
+
+    /**
+     *<p>
+     *A method signature implemented by an aspect.
+     *</p>
+     */
+    public Boolean testBooleanXor01(Boolean source, Boolean arg01) {
         return null;
     }
 
@@ -329,6 +374,87 @@ public class ExtendedClass1  {
      *A method signature implemented by an aspect.
      *</p>
      */
+    public Integer testIntegerDiv01(Integer source, Integer arg01) {
+        return null;
+    }
+
+    /**
+     *<p>
+     *A method signature implemented by an aspect.
+     *</p>
+     */
+    public Float testIntegerDivide01(Integer source, Integer arg01) {
+        return null;
+    }
+
+    /**
+     *<p>
+     *A method signature implemented by an aspect.
+     *</p>
+     */
+    public Integer testIntegerMax01(Integer source, Integer arg01) {
+        return null;
+    }
+
+    /**
+     *<p>
+     *A method signature implemented by an aspect.
+     *</p>
+     */
+    public Integer testIntegerMin01(Integer source, Integer arg01) {
+        return null;
+    }
+
+    /**
+     *<p>
+     *A method signature implemented by an aspect.
+     *</p>
+     */
+    public Integer testIntegerMinus01(Integer source, Integer arg01) {
+        return null;
+    }
+
+    /**
+     *<p>
+     *A method signature implemented by an aspect.
+     *</p>
+     */
+    public Integer testIntegerMod01(Integer source, Integer arg01) {
+        return null;
+    }
+
+    /**
+     *<p>
+     *A method signature implemented by an aspect.
+     *</p>
+     */
+    public Integer testIntegerMultiply01(Integer source, Integer arg01) {
+        return null;
+    }
+
+    /**
+     *<p>
+     *A method signature implemented by an aspect.
+     *</p>
+     */
+    public Integer testIntegerNegation01(Integer source) {
+        return null;
+    }
+
+    /**
+     *<p>
+     *A method signature implemented by an aspect.
+     *</p>
+     */
+    public Integer testIntegerPlus01(Integer source, Integer arg01) {
+        return null;
+    }
+
+    /**
+     *<p>
+     *A method signature implemented by an aspect.
+     *</p>
+     */
     public String testIntegerToString(Integer source) {
         return null;
     }
@@ -465,6 +591,132 @@ public class ExtendedClass1  {
      *</p>
      */
     public java.util.List<Object> testOrderedSetSubOrderedSet(java.util.List<Object> source, Integer arg01, Integer arg02) {
+        return null;
+    }
+
+    /**
+     *<p>
+     *A method signature implemented by an aspect.
+     *</p>
+     */
+    public Float testRealAbs01(Float source) {
+        return null;
+    }
+
+    /**
+     *<p>
+     *A method signature implemented by an aspect.
+     *</p>
+     */
+    public Float testRealDivision01(Float source, Float arg01) {
+        return null;
+    }
+
+    /**
+     *<p>
+     *A method signature implemented by an aspect.
+     *</p>
+     */
+    public Integer testRealFloor01(Float source) {
+        return null;
+    }
+
+    /**
+     *<p>
+     *A method signature implemented by an aspect.
+     *</p>
+     */
+    public Boolean testRealGreaterThan01(Float source, Float arg01) {
+        return null;
+    }
+
+    /**
+     *<p>
+     *A method signature implemented by an aspect.
+     *</p>
+     */
+    public Boolean testRealGreaterThanEqual01(Float source, Float arg01) {
+        return null;
+    }
+
+    /**
+     *<p>
+     *A method signature implemented by an aspect.
+     *</p>
+     */
+    public Boolean testRealLessThan01(Float source, Float arg01) {
+        return null;
+    }
+
+    /**
+     *<p>
+     *A method signature implemented by an aspect.
+     *</p>
+     */
+    public Boolean testRealLessThanEqual01(Float source, Float arg01) {
+        return null;
+    }
+
+    /**
+     *<p>
+     *A method signature implemented by an aspect.
+     *</p>
+     */
+    public Float testRealMax01(Float source, Float arg01) {
+        return null;
+    }
+
+    /**
+     *<p>
+     *A method signature implemented by an aspect.
+     *</p>
+     */
+    public Float testRealMin01(Float source, Float arg01) {
+        return null;
+    }
+
+    /**
+     *<p>
+     *A method signature implemented by an aspect.
+     *</p>
+     */
+    public Float testRealMinus01(Float source, Float arg01) {
+        return null;
+    }
+
+    /**
+     *<p>
+     *A method signature implemented by an aspect.
+     *</p>
+     */
+    public Float testRealMultiply01(Float source, Float arg01) {
+        return null;
+    }
+
+    /**
+     *<p>
+     *A method signature implemented by an aspect.
+     *</p>
+     */
+    public Float testRealNegation01(Float source) {
+        return null;
+    }
+
+    /**
+     *<p>
+     *A method signature implemented by an aspect.
+     *</p>
+     */
+    public Float testRealPlus01(Float source, Float arg01) {
+        return null;
+    }
+
+    /**
+     *<p>
+     *A method signature implemented by an aspect.
+     *</p>
+     */
+    public Integer testRealRound01(Float source) {
         return null;
     }
 
@@ -806,6 +1058,15 @@ public class ExtendedClass1  {
      *A method signature implemented by an aspect.
      *</p>
      */
+    public String testStringConcat01(String source, String arg01) {
+        return null;
+    }
+
+    /**
+     *<p>
+     *A method signature implemented by an aspect.
+     *</p>
+     */
     public Boolean testStringEqualsIgnoreCase(String source, String arg01) {
         return null;
     }
@@ -833,6 +1094,24 @@ public class ExtendedClass1  {
      *A method signature implemented by an aspect.
      *</p>
      */
+    public Integer testStringSize01(String source) {
+        return null;
+    }
+
+    /**
+     *<p>
+     *A method signature implemented by an aspect.
+     *</p>
+     */
+    public String testStringSubstring01(String source, Integer arg01, Integer arg02) {
+        return null;
+    }
+
+    /**
+     *<p>
+     *A method signature implemented by an aspect.
+     *</p>
+     */
     public Boolean testStringToBoolean(String source) {
         return null;
     }
@@ -842,7 +1121,25 @@ public class ExtendedClass1  {
      *A method signature implemented by an aspect.
      *</p>
      */
+    public Integer testStringToInteger(String source) {
+        return null;
+    }
+
+    /**
+     *<p>
+     *A method signature implemented by an aspect.
+     *</p>
+     */
     public String testStringToUpperCase(String source) {
+        return null;
+    }
+
+    /**
+     *<p>
+     *A method signature implemented by an aspect.
+     *</p>
+     */
+    public Float testStringToReal(String source) {
         return null;
     }
 

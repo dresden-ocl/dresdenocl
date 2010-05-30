@@ -1,0 +1,1 @@
+java.lang.Math.min(source, arg01)

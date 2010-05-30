@@ -12,18 +12,18 @@ public privileged aspect DefAspect44 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testOrderedSetAsSet(java.util.List<Object> source)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testIntegerMax01(Integer source, Integer arg01)}.</p>
      */
-    protected pointcut testOrderedSetAsSetCaller(testpackage.Class1 aClass, java.util.List<Object> source):
-    	call(* testpackage.Class1.testOrderedSetAsSet(java.util.List<Object>))
-    	&& target(aClass) && args(source);
+    protected pointcut testIntegerMax01Caller(testpackage.Class1 aClass, Integer source, Integer arg01):
+    	call(* testpackage.Class1.testIntegerMax01(Integer, Integer))
+    	&& target(aClass) && args(source, arg01);
     
     /**
-     * <p>Defines the method testOrderedSetAsSet(java.util.List<Object> source) defined by the constraint
+     * <p>Defines the method testIntegerMax01(Integer source, Integer arg01) defined by the constraint
      * <code>context Class1
-     *       def: testOrderedSetAsSet = source[].asSet()</code></p>
+     *       def: testIntegerMax01 = source[].max( arg01[])</code></p>
      */
-    java.util.Set<Object> around(testpackage.Class1 aClass, java.util.List<Object> source): testOrderedSetAsSetCaller(aClass, source) {
-        return tudresden.ocl20.pivot.ocl22java.types.util.OclOrderedSets.asSet(source);
+    Integer around(testpackage.Class1 aClass, Integer source, Integer arg01): testIntegerMax01Caller(aClass, source, arg01) {
+        return java.lang.Math.max(source, arg01);
     }
 }

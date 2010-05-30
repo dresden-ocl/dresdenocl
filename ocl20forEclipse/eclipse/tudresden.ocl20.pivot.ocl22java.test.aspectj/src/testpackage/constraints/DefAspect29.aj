@@ -12,18 +12,18 @@ public privileged aspect DefAspect29 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testCollectionIsEmpty(java.util.Collection<Object> source)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testCollectionExcludes(java.util.Collection<Object> source, Object arg01)}.</p>
      */
-    protected pointcut testCollectionIsEmptyCaller(testpackage.Class1 aClass, java.util.Collection<Object> source):
-    	call(* testpackage.Class1.testCollectionIsEmpty(java.util.Collection<Object>))
-    	&& target(aClass) && args(source);
+    protected pointcut testCollectionExcludesCaller(testpackage.Class1 aClass, java.util.Collection<Object> source, Object arg01):
+    	call(* testpackage.Class1.testCollectionExcludes(java.util.Collection<Object>, Object))
+    	&& target(aClass) && args(source, arg01);
     
     /**
-     * <p>Defines the method testCollectionIsEmpty(java.util.Collection<Object> source) defined by the constraint
+     * <p>Defines the method testCollectionExcludes(java.util.Collection<Object> source, Object arg01) defined by the constraint
      * <code>context Class1
-     *       def: testCollectionIsEmpty = source[].isEmpty()</code></p>
+     *       def: testCollectionExcludes = source[].excludes( arg01[])</code></p>
      */
-    Boolean around(testpackage.Class1 aClass, java.util.Collection<Object> source): testCollectionIsEmptyCaller(aClass, source) {
-        return tudresden.ocl20.pivot.ocl22java.types.util.OclCollections.isEmpty(source);
+    Boolean around(testpackage.Class1 aClass, java.util.Collection<Object> source, Object arg01): testCollectionExcludesCaller(aClass, source, arg01) {
+        return tudresden.ocl20.pivot.ocl22java.types.util.OclCollections.excludes(source, arg01);
     }
 }

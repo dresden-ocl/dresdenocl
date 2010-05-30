@@ -12,18 +12,18 @@ public privileged aspect DefAspect18 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testCollectionAsBag(java.util.Collection<Object> source)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testBooleanImplies01(Boolean source, Boolean arg01)}.</p>
      */
-    protected pointcut testCollectionAsBagCaller(testpackage.Class1 aClass, java.util.Collection<Object> source):
-    	call(* testpackage.Class1.testCollectionAsBag(java.util.Collection<Object>))
-    	&& target(aClass) && args(source);
+    protected pointcut testBooleanImplies01Caller(testpackage.Class1 aClass, Boolean source, Boolean arg01):
+    	call(* testpackage.Class1.testBooleanImplies01(Boolean, Boolean))
+    	&& target(aClass) && args(source, arg01);
     
     /**
-     * <p>Defines the method testCollectionAsBag(java.util.Collection<Object> source) defined by the constraint
+     * <p>Defines the method testBooleanImplies01(Boolean source, Boolean arg01) defined by the constraint
      * <code>context Class1
-     *       def: testCollectionAsBag = source[].asBag()</code></p>
+     *       def: testBooleanImplies01 = source[].implies( arg01[])</code></p>
      */
-    java.util.List<Object> around(testpackage.Class1 aClass, java.util.Collection<Object> source): testCollectionAsBagCaller(aClass, source) {
-        return tudresden.ocl20.pivot.ocl22java.types.util.OclCollections.asBag(source);
+    Boolean around(testpackage.Class1 aClass, Boolean source, Boolean arg01): testBooleanImplies01Caller(aClass, source, arg01) {
+        return (!source || arg01);
     }
 }

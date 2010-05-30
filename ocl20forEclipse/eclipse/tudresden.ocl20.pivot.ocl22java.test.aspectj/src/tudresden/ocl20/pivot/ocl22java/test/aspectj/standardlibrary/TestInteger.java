@@ -36,6 +36,173 @@ public class TestInteger {
 
 	/**
 	 * <p>
+	 * Tests the generated code for the method <code>Integer.div(Integer)</code>
+	 * .
+	 * </p>
+	 */
+	@Test
+	public void testDiv01() {
+
+		Class1 class1;
+		class1 = new Class1();
+
+		assertEquals(new Integer(1), class1.testIntegerDiv01(new Integer(7),
+				new Integer(7)));
+		assertEquals(new Integer(1), class1.testIntegerDiv01(new Integer(13),
+				new Integer(7)));
+		assertEquals(new Integer(-1), class1.testIntegerDiv01(new Integer(7),
+				new Integer(-7)));
+		assertEquals(new Integer(1), class1.testIntegerDiv01(new Integer(-7),
+				new Integer(-7)));
+	}
+
+	/**
+	 * <p>
+	 * Tests the generated code for the method <code>Integer./(Integer)</code> .
+	 * </p>
+	 */
+	@Test
+	public void testDivide01() {
+
+		Class1 class1;
+		class1 = new Class1();
+
+		assertEquals(new Float(1), class1.testIntegerDivide01(new Integer(7),
+				new Integer(7)));
+		assertEquals(new Float(4.5), class1.testIntegerDivide01(new Integer(9),
+				new Integer(2)));
+		assertEquals(new Float(-1), class1.testIntegerDivide01(new Integer(7),
+				new Integer(-7)));
+		assertEquals(new Float(1), class1.testIntegerDivide01(new Integer(-7),
+				new Integer(-7)));
+	}
+
+	/**
+	 * <p>
+	 * Tests the generated code for the method <code>Integer.max(Integer)</code>
+	 * .
+	 * </p>
+	 */
+	@Test
+	public void testMax01() {
+
+		Class1 class1;
+		class1 = new Class1();
+
+		assertEquals(new Integer(8), class1.testIntegerMax01(new Integer(7),
+				new Integer(8)));
+		assertEquals(new Integer(8), class1.testIntegerMax01(new Integer(8),
+				new Integer(7)));
+	}
+
+	/**
+	 * <p>
+	 * Tests the generated code for the method <code>Integer.min(Integer)</code>
+	 * .
+	 * </p>
+	 */
+	@Test
+	public void testMin01() {
+
+		Class1 class1;
+		class1 = new Class1();
+
+		assertEquals(new Integer(7), class1.testIntegerMin01(new Integer(7),
+				new Integer(8)));
+		assertEquals(new Integer(7), class1.testIntegerMin01(new Integer(8),
+				new Integer(7)));
+	}
+
+	/**
+	 * <p>
+	 * Tests the generated code for the method <code>Integer.-(Integer)</code> .
+	 * </p>
+	 */
+	@Test
+	public void testMinus01() {
+
+		Class1 class1;
+		class1 = new Class1();
+
+		assertEquals(new Integer(10), class1.testIntegerMinus01(
+				new Integer(20), new Integer(10)));
+		assertEquals(new Integer(-10), class1.testIntegerMinus01(
+				new Integer(0), new Integer(10)));
+	}
+
+	/**
+	 * <p>
+	 * Tests the generated code for the method <code>Integer.mod(Integer)</code>
+	 * .
+	 * </p>
+	 */
+	@Test
+	public void testMod01() {
+
+		Class1 class1;
+		class1 = new Class1();
+
+		assertEquals(new Integer(0), class1.testIntegerMod01(new Integer(20),
+				new Integer(10)));
+		assertEquals(new Integer(1), class1.testIntegerMod01(new Integer(21),
+				new Integer(10)));
+	}
+
+	/**
+	 * <p>
+	 * Tests the generated code for the method <code>Integer.*(Integer)</code> .
+	 * </p>
+	 */
+	@Test
+	public void testMultiply01() {
+
+		Class1 class1;
+		class1 = new Class1();
+
+		assertEquals(new Integer(49), class1.testIntegerMultiply01(new Integer(
+				7), new Integer(7)));
+		assertEquals(new Integer(-49), class1.testIntegerMultiply01(
+				new Integer(7), new Integer(-7)));
+		assertEquals(new Integer(49), class1.testIntegerMultiply01(new Integer(
+				-7), new Integer(-7)));
+	}
+
+	/**
+	 * <p>
+	 * Tests the generated code for the method <code>Integer.-()</code> .
+	 * </p>
+	 */
+	@Test
+	public void testNegation01() {
+
+		Class1 class1;
+		class1 = new Class1();
+
+		assertEquals(new Integer(-42), class1
+				.testIntegerNegation01(new Integer(42)));
+		assertEquals(new Integer(42), class1.testIntegerNegation01(new Integer(
+				-42)));
+	}
+
+	/**
+	 * <p>
+	 * Tests the generated code for the method <code>Integer.5(Integer)</code> .
+	 * </p>
+	 */
+	@Test
+	public void testPlus01() {
+
+		Class1 class1;
+		class1 = new Class1();
+
+		assertEquals(new Integer(30), class1.testIntegerPlus01(new Integer(20),
+				new Integer(10)));
+		assertEquals(new Integer(10), class1.testIntegerPlus01(new Integer(0),
+				new Integer(10)));
+	}
+
+	/**
+	 * <p>
 	 * Tests the generated code for the method <code>Integer.toString()</code>.
 	 * </p>
 	 */

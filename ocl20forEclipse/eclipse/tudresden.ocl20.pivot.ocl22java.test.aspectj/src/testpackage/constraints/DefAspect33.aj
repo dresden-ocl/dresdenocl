@@ -12,18 +12,18 @@ public privileged aspect DefAspect33 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testCollectionNotEquals(java.util.Collection<Object> source, java.util.Collection<Object> arg01)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testCollectionIncludesAll(java.util.Collection<Object> source, java.util.Collection<Object> arg01)}.</p>
      */
-    protected pointcut testCollectionNotEqualsCaller(testpackage.Class1 aClass, java.util.Collection<Object> source, java.util.Collection<Object> arg01):
-    	call(* testpackage.Class1.testCollectionNotEquals(java.util.Collection<Object>, java.util.Collection<Object>))
+    protected pointcut testCollectionIncludesAllCaller(testpackage.Class1 aClass, java.util.Collection<Object> source, java.util.Collection<Object> arg01):
+    	call(* testpackage.Class1.testCollectionIncludesAll(java.util.Collection<Object>, java.util.Collection<Object>))
     	&& target(aClass) && args(source, arg01);
     
     /**
-     * <p>Defines the method testCollectionNotEquals(java.util.Collection<Object> source, java.util.Collection<Object> arg01) defined by the constraint
+     * <p>Defines the method testCollectionIncludesAll(java.util.Collection<Object> source, java.util.Collection<Object> arg01) defined by the constraint
      * <code>context Class1
-     *       def: testCollectionNotEquals = source[].<>( arg01[])</code></p>
+     *       def: testCollectionIncludesAll = source[].includesAll( arg01[])</code></p>
      */
-    Boolean around(testpackage.Class1 aClass, java.util.Collection<Object> source, java.util.Collection<Object> arg01): testCollectionNotEqualsCaller(aClass, source, arg01) {
-        return tudresden.ocl20.pivot.ocl22java.types.util.OclCollections.notEquals(source, arg01);
+    Boolean around(testpackage.Class1 aClass, java.util.Collection<Object> source, java.util.Collection<Object> arg01): testCollectionIncludesAllCaller(aClass, source, arg01) {
+        return tudresden.ocl20.pivot.ocl22java.types.util.OclCollections.includesAll(source, arg01);
     }
 }

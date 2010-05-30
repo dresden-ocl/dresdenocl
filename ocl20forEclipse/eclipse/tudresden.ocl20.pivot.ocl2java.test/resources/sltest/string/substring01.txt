@@ -1,0 +1,1 @@
+source.substring(arg01 - 1, arg02)

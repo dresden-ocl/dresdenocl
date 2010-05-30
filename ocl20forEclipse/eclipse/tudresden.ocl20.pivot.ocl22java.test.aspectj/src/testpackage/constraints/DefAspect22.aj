@@ -12,18 +12,18 @@ public privileged aspect DefAspect22 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testCollectionCount(java.util.Collection<Object> source, Object arg01)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testBooleanXor01(Boolean source, Boolean arg01)}.</p>
      */
-    protected pointcut testCollectionCountCaller(testpackage.Class1 aClass, java.util.Collection<Object> source, Object arg01):
-    	call(* testpackage.Class1.testCollectionCount(java.util.Collection<Object>, Object))
+    protected pointcut testBooleanXor01Caller(testpackage.Class1 aClass, Boolean source, Boolean arg01):
+    	call(* testpackage.Class1.testBooleanXor01(Boolean, Boolean))
     	&& target(aClass) && args(source, arg01);
     
     /**
-     * <p>Defines the method testCollectionCount(java.util.Collection<Object> source, Object arg01) defined by the constraint
+     * <p>Defines the method testBooleanXor01(Boolean source, Boolean arg01) defined by the constraint
      * <code>context Class1
-     *       def: testCollectionCount = source[].count( arg01[])</code></p>
+     *       def: testBooleanXor01 = source[].xor( arg01[])</code></p>
      */
-    Integer around(testpackage.Class1 aClass, java.util.Collection<Object> source, Object arg01): testCollectionCountCaller(aClass, source, arg01) {
-        return tudresden.ocl20.pivot.ocl22java.types.util.OclCollections.count(source, arg01);
+    Boolean around(testpackage.Class1 aClass, Boolean source, Boolean arg01): testBooleanXor01Caller(aClass, source, arg01) {
+        return (source ^ arg01);
     }
 }

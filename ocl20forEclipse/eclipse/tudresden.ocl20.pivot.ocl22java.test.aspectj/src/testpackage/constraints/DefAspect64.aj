@@ -12,18 +12,18 @@ public privileged aspect DefAspect64 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testSequenceFlatten(java.util.List<Object> source)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testOrderedSetPrepend(java.util.List<Object> source, Object arg01)}.</p>
      */
-    protected pointcut testSequenceFlattenCaller(testpackage.Class1 aClass, java.util.List<Object> source):
-    	call(* testpackage.Class1.testSequenceFlatten(java.util.List<Object>))
-    	&& target(aClass) && args(source);
+    protected pointcut testOrderedSetPrependCaller(testpackage.Class1 aClass, java.util.List<Object> source, Object arg01):
+    	call(* testpackage.Class1.testOrderedSetPrepend(java.util.List<Object>, Object))
+    	&& target(aClass) && args(source, arg01);
     
     /**
-     * <p>Defines the method testSequenceFlatten(java.util.List<Object> source) defined by the constraint
+     * <p>Defines the method testOrderedSetPrepend(java.util.List<Object> source, Object arg01) defined by the constraint
      * <code>context Class1
-     *       def: testSequenceFlatten = source[].flatten()</code></p>
+     *       def: testOrderedSetPrepend = source[].prepend( arg01[])</code></p>
      */
-    java.util.List<Object> around(testpackage.Class1 aClass, java.util.List<Object> source): testSequenceFlattenCaller(aClass, source) {
-        return (java.util.List<Object>) tudresden.ocl20.pivot.ocl22java.types.util.OclSequences.flatten(source);
+    java.util.List<Object> around(testpackage.Class1 aClass, java.util.List<Object> source, Object arg01): testOrderedSetPrependCaller(aClass, source, arg01) {
+        return tudresden.ocl20.pivot.ocl22java.types.util.OclOrderedSets.prepend(source, arg01);
     }
 }

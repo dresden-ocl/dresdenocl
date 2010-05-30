@@ -12,18 +12,18 @@ public privileged aspect DefAspect74 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testSetAsOrderedSet(java.util.Set<Object> source)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testRealMax01(Float source, Float arg01)}.</p>
      */
-    protected pointcut testSetAsOrderedSetCaller(testpackage.Class1 aClass, java.util.Set<Object> source):
-    	call(* testpackage.Class1.testSetAsOrderedSet(java.util.Set<Object>))
-    	&& target(aClass) && args(source);
+    protected pointcut testRealMax01Caller(testpackage.Class1 aClass, Float source, Float arg01):
+    	call(* testpackage.Class1.testRealMax01(Float, Float))
+    	&& target(aClass) && args(source, arg01);
     
     /**
-     * <p>Defines the method testSetAsOrderedSet(java.util.Set<Object> source) defined by the constraint
+     * <p>Defines the method testRealMax01(Float source, Float arg01) defined by the constraint
      * <code>context Class1
-     *       def: testSetAsOrderedSet = source[].asOrderedSet()</code></p>
+     *       def: testRealMax01 = source[].max( arg01[])</code></p>
      */
-    java.util.List<Object> around(testpackage.Class1 aClass, java.util.Set<Object> source): testSetAsOrderedSetCaller(aClass, source) {
-        return tudresden.ocl20.pivot.ocl22java.types.util.OclSets.asOrderedSet(source);
+    Float around(testpackage.Class1 aClass, Float source, Float arg01): testRealMax01Caller(aClass, source, arg01) {
+        return java.lang.Math.max(source, arg01);
     }
 }

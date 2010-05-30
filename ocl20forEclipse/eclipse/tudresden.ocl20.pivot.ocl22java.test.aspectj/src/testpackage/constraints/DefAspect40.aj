@@ -12,18 +12,18 @@ public privileged aspect DefAspect40 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testOrderedSetAppend(java.util.List<Object> source, Object arg01)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testCollectionSize(java.util.Collection<Object> source)}.</p>
      */
-    protected pointcut testOrderedSetAppendCaller(testpackage.Class1 aClass, java.util.List<Object> source, Object arg01):
-    	call(* testpackage.Class1.testOrderedSetAppend(java.util.List<Object>, Object))
-    	&& target(aClass) && args(source, arg01);
+    protected pointcut testCollectionSizeCaller(testpackage.Class1 aClass, java.util.Collection<Object> source):
+    	call(* testpackage.Class1.testCollectionSize(java.util.Collection<Object>))
+    	&& target(aClass) && args(source);
     
     /**
-     * <p>Defines the method testOrderedSetAppend(java.util.List<Object> source, Object arg01) defined by the constraint
+     * <p>Defines the method testCollectionSize(java.util.Collection<Object> source) defined by the constraint
      * <code>context Class1
-     *       def: testOrderedSetAppend = source[].append( arg01[])</code></p>
+     *       def: testCollectionSize = source[].size()</code></p>
      */
-    java.util.List<Object> around(testpackage.Class1 aClass, java.util.List<Object> source, Object arg01): testOrderedSetAppendCaller(aClass, source, arg01) {
-        return tudresden.ocl20.pivot.ocl22java.types.util.OclOrderedSets.append(source, arg01);
+    Integer around(testpackage.Class1 aClass, java.util.Collection<Object> source): testCollectionSizeCaller(aClass, source) {
+        return tudresden.ocl20.pivot.ocl22java.types.util.OclCollections.size(source);
     }
 }

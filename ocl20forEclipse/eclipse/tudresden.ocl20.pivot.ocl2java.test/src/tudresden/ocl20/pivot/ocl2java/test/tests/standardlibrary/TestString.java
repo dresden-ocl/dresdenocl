@@ -104,6 +104,19 @@ public class TestString extends AbstractDiffTest {
 
 	/**
 	 * <p>
+	 * Tests the code generation of the constraint.
+	 * </p>
+	 * 
+	 * @throws Exception
+	 */
+	@Test
+	public void testConcat01() throws Exception {
+	
+		this.compareFragmentCodeGeneration("sltest/string", "concat01");
+	}
+
+	/**
+	 * <p>
 	 * Tests the instrumentation of the constraint.
 	 * </p>
 	 * 
@@ -156,6 +169,32 @@ public class TestString extends AbstractDiffTest {
 
 	/**
 	 * <p>
+	 * Tests the code generation of the constraint.
+	 * </p>
+	 * 
+	 * @throws Exception
+	 */
+	@Test
+	public void testSize01() throws Exception {
+	
+		this.compareFragmentCodeGeneration("sltest/string", "size01");
+	}
+
+	/**
+	 * <p>
+	 * Tests the code generation of the constraint.
+	 * </p>
+	 * 
+	 * @throws Exception
+	 */
+	@Test
+	public void testSubstring01() throws Exception {
+	
+		this.compareFragmentCodeGeneration("sltest/string", "substring01");
+	}
+
+	/**
+	 * <p>
 	 * Tests the instrumentation of the constraint.
 	 * </p>
 	 * 
@@ -173,6 +212,19 @@ public class TestString extends AbstractDiffTest {
 
 	/**
 	 * <p>
+	 * Tests the code generation of the constraint.
+	 * </p>
+	 * 
+	 * @throws Exception
+	 */
+	@Test
+	public void testToInteger01() throws Exception {
+	
+		this.compareFragmentCodeGeneration("sltest/string", "toInteger01");
+	}
+
+	/**
+	 * <p>
 	 * Tests the instrumentation of the constraint.
 	 * </p>
 	 * 
@@ -186,6 +238,19 @@ public class TestString extends AbstractDiffTest {
 			ParseException, ModelAccessException, Ocl22CodeException {
 
 		this.compareFragmentCodeGeneration("sltest/string", "toLowerCase01");
+	}
+
+	/**
+	 * <p>
+	 * Tests the code generation of the constraint.
+	 * </p>
+	 * 
+	 * @throws Exception
+	 */
+	@Test
+	public void testToReal01() throws Exception {
+	
+		this.compareFragmentCodeGeneration("sltest/string", "toReal01");
 	}
 
 	/**
