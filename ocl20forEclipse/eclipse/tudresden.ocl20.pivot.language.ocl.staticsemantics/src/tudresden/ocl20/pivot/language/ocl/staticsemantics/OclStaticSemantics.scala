@@ -534,6 +534,9 @@ trait OclStaticSemantics extends ocl.semantics.OclAttributeMaker with pivotmodel
         else
           Full(`type`)
       }
+      case t@TypePathNameNestedCS(typePathName) => {
+        typePathName->oclType
+      }
       case c@CollectionTypeIdentifierCS(genericType) => {
         val `type` = c.getTypeName
         if (`type`.eIsProxy)
