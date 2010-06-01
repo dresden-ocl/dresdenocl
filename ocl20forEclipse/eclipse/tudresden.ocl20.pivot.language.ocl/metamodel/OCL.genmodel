@@ -11,8 +11,8 @@
     <genClasses ecoreClass="OCL.ecore#//BracketExpCS">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//BracketExpCS/oclExpression"/>
     </genClasses>
-    <genClasses ecoreClass="OCL.ecore#//VariableOrStaticPropertyOrEnumLiteralExpCS">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference OCL.ecore#//VariableOrStaticPropertyOrEnumLiteralExpCS/typedElement"/>
+    <genClasses ecoreClass="OCL.ecore#//NamedLiteralExpCS">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference OCL.ecore#//NamedLiteralExpCS/namedElement"/>
     </genClasses>
     <genClasses ecoreClass="OCL.ecore#//PathNameCS">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//PathNameCS/simpleName"/>

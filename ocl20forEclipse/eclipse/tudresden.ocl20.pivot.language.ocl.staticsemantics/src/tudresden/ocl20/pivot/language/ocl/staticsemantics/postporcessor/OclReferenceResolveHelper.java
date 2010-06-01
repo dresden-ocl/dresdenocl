@@ -10,12 +10,12 @@ import tudresden.ocl20.pivot.language.ocl.ParameterCS;
 import tudresden.ocl20.pivot.language.ocl.TypeCS;
 import tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclReferenceResolveHelper;
 import tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclResource;
+import tudresden.ocl20.pivot.pivotmodel.NamedElement;
 import tudresden.ocl20.pivot.pivotmodel.Namespace;
 import tudresden.ocl20.pivot.pivotmodel.Operation;
 import tudresden.ocl20.pivot.pivotmodel.Parameter;
 import tudresden.ocl20.pivot.pivotmodel.Property;
 import tudresden.ocl20.pivot.pivotmodel.Type;
-import tudresden.ocl20.pivot.pivotmodel.TypedElement;
 
 public class OclReferenceResolveHelper implements IOclReferenceResolveHelper {
 
@@ -38,10 +38,10 @@ public class OclReferenceResolveHelper implements IOclReferenceResolveHelper {
 	}
 
 	@Override
-	public List<TypedElement> resolveTypedElement(String identifier,
+	public List<NamedElement> resolveNamedElement(String identifier,
 			boolean resolveFuzzy, EObject container) {
-		List<TypedElement> ret = OclStaticSemanticsProvider.getStaticSemantics(
-				(OclResource) container.eResource()).resolveTypedElement(identifier,
+		List<NamedElement> ret = OclStaticSemanticsProvider.getStaticSemantics(
+				(OclResource) container.eResource()).resolveNamedElement(identifier,
 				resolveFuzzy, container);
 		return ret;
 	}

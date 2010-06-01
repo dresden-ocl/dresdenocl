@@ -53,8 +53,6 @@ RULES {
 
 	SimpleNameCS						::= simpleName[SIMPLE_NAME];
 	
-	PathNameCS							::= simpleName ("::" pathName)?;
-	
 	PackageDeclarationWithNamespaceCS	::= "package" nestedNamespace (contextDeclarations)* "endpackage";
 	
 	PackageDeclarationNestedNamespaceCS	::= namespace[SIMPLE_NAME] ("::" nestedNamespace)?;
@@ -195,7 +193,7 @@ RULES {
 	StringLiteralExpCS					::= stringLiteral['\'', '\''];
 	
 	@operator(type="primitive", weight="20", identifier="OclExpressionCS")
-	VariableOrStaticPropertyOrEnumLiteralExpCS ::= typedElement[SIMPLE_NAME];
+	NamedLiteralExpCS 					::= namedElement[SIMPLE_NAME];
 		
 	@operator(type="primitive", weight="20", identifier="OclExpressionCS")
 	BracketExpCS						::= "(" oclExpression ")";

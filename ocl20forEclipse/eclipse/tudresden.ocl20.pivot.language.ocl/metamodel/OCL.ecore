@@ -8,10 +8,9 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="oclExpression" lowerBound="1"
         eType="#//OclExpressionCS" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="VariableOrStaticPropertyOrEnumLiteralExpCS"
-      eSuperTypes="#//OclExpressionCS">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="typedElement" lowerBound="1"
-        eType="ecore:EClass ../../tudresden.ocl20.pivot.pivotmodel/model/pivotmodel.ecore#//TypedElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="NamedLiteralExpCS" eSuperTypes="#//OclExpressionCS">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="namedElement" lowerBound="1"
+        eType="ecore:EClass ../../tudresden.ocl20.pivot.pivotmodel/model/pivotmodel.ecore#//NamedElement"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PathNameCS">
     <eStructuralFeatures xsi:type="ecore:EReference" name="simpleName" lowerBound="1"
