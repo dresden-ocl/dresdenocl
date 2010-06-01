@@ -2,12 +2,10 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Java Model Instance Type Plug-in
 Bundle-SymbolicName: tudresden.ocl20.pivot.modelinstancetype.java;singleton:=true
-Bundle-Version: 2.1.0.qualifier
+Bundle-Version: 2.2.0.qualifier
 Bundle-Activator: tudresden.ocl20.pivot.modelinstancetype.java.JavaModelInstanceTypePlugin
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Require-Bundle: org.eclipse.core.runtime;bundle-version="3.4.0",
- tudresden.ocl20.logging;bundle-version="2.1.0",
- tudresden.ocl20.pivot.essentialocl;bundle-version="2.1.0",
  tudresden.ocl20.pivot.modelbus;bundle-version="2.1.0"
 Export-Package: tudresden.ocl20.pivot.modelinstancetype.java,
  tudresden.ocl20.pivot.modelinstancetype.java.internal.provider

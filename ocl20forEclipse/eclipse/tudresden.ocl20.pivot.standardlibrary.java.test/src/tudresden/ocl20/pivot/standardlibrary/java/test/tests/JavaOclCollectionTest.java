@@ -5,6 +5,7 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -14,6 +15,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 import tudresden.ocl20.pivot.essentialocl.EssentialOclPlugin;
+import tudresden.ocl20.pivot.essentialocl.expressions.ExpressionsFactory;
+import tudresden.ocl20.pivot.essentialocl.expressions.RealLiteralExp;
+import tudresden.ocl20.pivot.essentialocl.expressions.Variable;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBag;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection;
@@ -23,7 +27,9 @@ import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclOrderedSet;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclReal;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSequence;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSet;
+import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclTuple;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.factory.IStandardLibraryFactory;
+import tudresden.ocl20.pivot.pivotmodel.Property;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 
 /**
@@ -33,25 +39,21 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
  */
 public class JavaOclCollectionTest {
 
-	private final IStandardLibraryFactory myStandardLibraryFactory =
-			TestPerformer.getInstance().getSLFactory();
+	private final IStandardLibraryFactory myStandardLibraryFactory = TestPerformer
+			.getInstance().getSLFactory();
 
-	private final OclCollection<OclAny> emptySet =
-			myStandardLibraryFactory.createOclSet(new HashSet<Object>(),
-					EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
-							.getOclAny());
-	private final OclCollection<OclAny> emptyBag =
-			myStandardLibraryFactory.createOclBag(new ArrayList<Object>(),
-					EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
-							.getOclAny());
-	private final OclCollection<OclAny> emptyOrderedSet =
-			myStandardLibraryFactory.createOclOrderedSet(new UniqueEList<Object>(),
-					EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
-							.getOclAny());
-	private final OclCollection<OclAny> emptySequence =
-			myStandardLibraryFactory.createOclSequence(new ArrayList<Object>(),
-					EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
-							.getOclAny());
+	private final OclCollection<OclAny> emptySet = myStandardLibraryFactory
+			.createOclSet(new HashSet<Object>(), EssentialOclPlugin
+					.getOclLibraryProvider().getOclLibrary().getOclAny());
+	private final OclCollection<OclAny> emptyBag = myStandardLibraryFactory
+			.createOclBag(new ArrayList<Object>(), EssentialOclPlugin
+					.getOclLibraryProvider().getOclLibrary().getOclAny());
+	private final OclCollection<OclAny> emptyOrderedSet = myStandardLibraryFactory
+			.createOclOrderedSet(new UniqueEList<Object>(), EssentialOclPlugin
+					.getOclLibraryProvider().getOclLibrary().getOclAny());
+	private final OclCollection<OclAny> emptySequence = myStandardLibraryFactory
+			.createOclSequence(new ArrayList<Object>(), EssentialOclPlugin
+					.getOclLibraryProvider().getOclLibrary().getOclAny());
 
 	/**
 	 * Set { 0.5 }
@@ -93,85 +95,81 @@ public class JavaOclCollectionTest {
 	 */
 	private OclCollection<OclReal> oclSequence2;
 
-	private final OclReal oclReal0_5 =
-			myStandardLibraryFactory.createOclReal(0.5);
-	private final OclReal oclReal1_5 =
-			myStandardLibraryFactory.createOclReal(1.5);
+	private final OclReal oclReal0_5 = myStandardLibraryFactory
+			.createOclReal(0.5);
+	private final OclReal oclReal1_5 = myStandardLibraryFactory
+			.createOclReal(1.5);
 
-	private final OclInteger integer0 =
-			myStandardLibraryFactory.createOclInteger(0L);
-	private final OclInteger integer1 =
-			myStandardLibraryFactory.createOclInteger(1L);
-	private final OclInteger integer2 =
-			myStandardLibraryFactory.createOclInteger(2L);
-	private final OclInteger integer3 =
-			myStandardLibraryFactory.createOclInteger(3L);
-	private final OclInteger integer4 =
-			myStandardLibraryFactory.createOclInteger(4L);
+	private final OclInteger integer0 = myStandardLibraryFactory
+			.createOclInteger(0L);
+	private final OclInteger integer1 = myStandardLibraryFactory
+			.createOclInteger(1L);
+	private final OclInteger integer2 = myStandardLibraryFactory
+			.createOclInteger(2L);
+	private final OclInteger integer3 = myStandardLibraryFactory
+			.createOclInteger(3L);
+	private final OclInteger integer4 = myStandardLibraryFactory
+			.createOclInteger(4L);
 
-	private final OclReal undefined =
-			myStandardLibraryFactory.createOclUndefined(EssentialOclPlugin
-					.getOclLibraryProvider().getOclLibrary().getOclReal(),
-					"undefined value");
-	private final OclReal undefined2 =
-			myStandardLibraryFactory.createOclUndefined(EssentialOclPlugin
-					.getOclLibraryProvider().getOclLibrary().getOclReal(),
-					"undefined value2");
+	private final OclReal undefined = myStandardLibraryFactory
+			.createOclUndefined(EssentialOclPlugin.getOclLibraryProvider()
+					.getOclLibrary().getOclReal(), "undefined value");
+	private final OclReal undefined2 = myStandardLibraryFactory
+			.createOclUndefined(EssentialOclPlugin.getOclLibraryProvider()
+					.getOclLibrary().getOclReal(), "undefined value2");
 
 	@Before
 	public void init() {
 
 		Set<OclReal> realSet = new HashSet<OclReal>();
 		realSet.add(oclReal0_5);
-		oclSet =
-				myStandardLibraryFactory.createOclSet(realSet, EssentialOclPlugin
-						.getOclLibraryProvider().getOclLibrary().getOclReal());
+		oclSet = myStandardLibraryFactory.createOclSet(realSet,
+				EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+						.getOclReal());
 
 		List<OclReal> realBag = new ArrayList<OclReal>();
 		realBag.add(oclReal0_5);
-		oclBag =
-				myStandardLibraryFactory.createOclBag(realBag, EssentialOclPlugin
-						.getOclLibraryProvider().getOclLibrary().getOclReal());
+		oclBag = myStandardLibraryFactory.createOclBag(realBag,
+				EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+						.getOclReal());
 
 		UniqueEList<OclReal> realOrderedSet = new UniqueEList<OclReal>();
 		realOrderedSet.add(oclReal0_5);
-		oclOrderedSet =
-				myStandardLibraryFactory.createOclOrderedSet(realOrderedSet,
-						EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
-								.getOclReal());
+		oclOrderedSet = myStandardLibraryFactory.createOclOrderedSet(
+				realOrderedSet, EssentialOclPlugin.getOclLibraryProvider()
+						.getOclLibrary().getOclReal());
 
-		oclSequence =
-				myStandardLibraryFactory.createOclSequence(realBag, EssentialOclPlugin
-						.getOclLibraryProvider().getOclLibrary().getOclReal());
+		oclSequence = myStandardLibraryFactory.createOclSequence(realBag,
+				EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+						.getOclReal());
 
 		realSet.add(oclReal1_5);
 		realSet.add(undefined);
 		realSet.add(undefined2);
 		// realSet.add(invalid);
-		oclSet2 =
-				myStandardLibraryFactory.createOclSet(realSet, EssentialOclPlugin
-						.getOclLibraryProvider().getOclLibrary().getOclReal());
+		oclSet2 = myStandardLibraryFactory.createOclSet(realSet,
+				EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+						.getOclReal());
 
 		realBag.add(oclReal1_5);
 		realBag.add(undefined);
 		realBag.add(undefined2);
 		// realBag.add(invalid);
-		oclBag2 =
-				myStandardLibraryFactory.createOclBag(realBag, EssentialOclPlugin
-						.getOclLibraryProvider().getOclLibrary().getOclReal());
+		oclBag2 = myStandardLibraryFactory.createOclBag(realBag,
+				EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+						.getOclReal());
 
 		realOrderedSet.add(oclReal1_5);
 		realOrderedSet.add(undefined);
 		realOrderedSet.add(undefined2);
 		// realOrderedSet.add(invalid);
-		oclOrderedSet2 =
-				myStandardLibraryFactory.createOclOrderedSet(realOrderedSet,
-						EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
-								.getOclReal());
+		oclOrderedSet2 = myStandardLibraryFactory.createOclOrderedSet(
+				realOrderedSet, EssentialOclPlugin.getOclLibraryProvider()
+						.getOclLibrary().getOclReal());
 
-		oclSequence2 =
-				myStandardLibraryFactory.createOclSequence(realBag, EssentialOclPlugin
-						.getOclLibraryProvider().getOclLibrary().getOclReal());
+		oclSequence2 = myStandardLibraryFactory.createOclSequence(realBag,
+				EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+						.getOclReal());
 
 	}
 
@@ -214,11 +212,14 @@ public class JavaOclCollectionTest {
 				.isTrue());
 		assertTrue(emptyOrderedSet.asOrderedSet().isEqualTo(emptyOrderedSet)
 				.isTrue());
-		assertTrue(emptySequence.asOrderedSet().isEqualTo(emptyOrderedSet).isTrue());
+		assertTrue(emptySequence.asOrderedSet().isEqualTo(emptyOrderedSet)
+				.isTrue());
 		assertTrue(oclSet.asOrderedSet().isEqualTo(oclOrderedSet).isTrue());
 		assertTrue(oclOrderedSet.asOrderedSet() != oclOrderedSet);
-		assertTrue(oclOrderedSet.asOrderedSet().isEqualTo(oclOrderedSet).isTrue());
-		assertTrue(oclOrderedSet.asOrderedSet().isEqualTo(oclOrderedSet).isTrue());
+		assertTrue(oclOrderedSet.asOrderedSet().isEqualTo(oclOrderedSet)
+				.isTrue());
+		assertTrue(oclOrderedSet.asOrderedSet().isEqualTo(oclOrderedSet)
+				.isTrue());
 		assertTrue(oclSequence.asOrderedSet().isEqualTo(oclOrderedSet).isTrue());
 	}
 
@@ -228,7 +229,8 @@ public class JavaOclCollectionTest {
 		assertTrue(emptySet.asSequence().isEqualTo(emptySequence).isTrue());
 		assertTrue(emptySequence.asSequence() != emptySequence);
 		assertTrue(emptySequence.asSequence().isEqualTo(emptySequence).isTrue());
-		assertTrue(emptyOrderedSet.asSequence().isEqualTo(emptySequence).isTrue());
+		assertTrue(emptyOrderedSet.asSequence().isEqualTo(emptySequence)
+				.isTrue());
 		assertTrue(emptySequence.asSequence().isEqualTo(emptySequence).isTrue());
 		assertTrue(oclSet.asSequence().isEqualTo(oclSequence).isTrue());
 		assertTrue(oclSequence.asSequence() != oclSequence);
@@ -241,7 +243,8 @@ public class JavaOclCollectionTest {
 	public void testCount() {
 
 		assertTrue(emptySet.count(oclReal0_5).isEqualTo(integer0).isTrue());
-		assertTrue(emptyOrderedSet.count(oclReal0_5).isEqualTo(integer0).isTrue());
+		assertTrue(emptyOrderedSet.count(oclReal0_5).isEqualTo(integer0)
+				.isTrue());
 		assertTrue(emptyBag.count(oclReal0_5).isEqualTo(integer0).isTrue());
 		assertTrue(emptySequence.count(oclReal0_5).isEqualTo(integer0).isTrue());
 
@@ -256,7 +259,8 @@ public class JavaOclCollectionTest {
 		assertTrue(oclSequence.count(oclReal1_5).isEqualTo(integer0).isTrue());
 
 		assertTrue(oclSet2.count(oclReal0_5).isEqualTo(integer1).isTrue());
-		assertTrue(oclOrderedSet2.count(oclReal0_5).isEqualTo(integer1).isTrue());
+		assertTrue(oclOrderedSet2.count(oclReal0_5).isEqualTo(integer1)
+				.isTrue());
 		assertTrue(oclBag2.count(oclReal0_5).isEqualTo(integer1).isTrue());
 		assertTrue(oclSequence2.count(oclReal0_5).isEqualTo(integer1).isTrue());
 
@@ -390,6 +394,52 @@ public class JavaOclCollectionTest {
 	public void testProduct() {
 
 		fail("Method is not yet implemented.");
+
+		/*
+		 * Product on empty collections result in an empty set (OCL 2.2 Spec. p.
+		 * 149).
+		 */
+		assertTrue(emptySet.product(emptySet).isEqualTo(emptySet).isTrue());
+		assertTrue(emptyOrderedSet.product(emptyOrderedSet).isEqualTo(emptySet)
+				.isTrue());
+		assertTrue(emptyBag.product(emptyBag).isEqualTo(emptySet).isTrue());
+		assertTrue(emptySequence.product(emptySequence).isEqualTo(emptySet)
+				.isTrue());
+
+		/* Hack to create tuple type. */
+		RealLiteralExp realExp01 = ExpressionsFactory.INSTANCE
+				.createRealLiteralExp();
+		realExp01.setRealSymbol(new Float(0.5));
+		realExp01.setOclLibrary(EssentialOclPlugin.getOclLibraryProvider()
+				.getOclLibrary());
+
+		Variable variable = ExpressionsFactory.INSTANCE.createVariable();
+		variable.setName("first");
+		variable.setInitExpression(realExp01);
+
+		Type expectedType = EssentialOclPlugin.getOclLibraryProvider()
+				.getOclLibrary().makeTupleType(
+						Arrays.asList(new Property[] { variable.asProperty(),
+								variable.asProperty() }));
+
+		/* Build Set(Tuple(first -> 0.5, second -> 0.5)) */
+		List<String> names = new ArrayList<String>();
+		names.add("first");
+		names.add("second");
+
+		List<Object> values = new ArrayList<Object>();
+		values.add(0.5);
+		values.add(0.5);
+
+		OclTuple expectedTuple = myStandardLibraryFactory.createOclTupleObject(
+				names, values, expectedType);
+
+		Set<OclTuple> elements = new HashSet<OclTuple>();
+		elements.add(expectedTuple);
+		
+		OclSet<OclTuple> expectedResult = myStandardLibraryFactory
+				.createOclSet(elements, expectedType);
+		assertTrue(oclSet.product(oclSet).isEqualTo(expectedResult).isTrue());
 	}
 
 	@Test
@@ -429,8 +479,8 @@ public class JavaOclCollectionTest {
 	public void testFlatten() {
 
 		/*
-		 * Set { Set { 0.5, null }, Set { 0.5, 1.5 } }->flatten() == Set { 0.5, 1.5,
-		 * null }
+		 * Set { Set { 0.5, null }, Set { 0.5, 1.5 } }->flatten() == Set { 0.5,
+		 * 1.5, null }
 		 */
 		Set<OclReal> realSet1 = new HashSet<OclReal>();
 		realSet1.add(oclReal0_5);
@@ -443,18 +493,17 @@ public class JavaOclCollectionTest {
 		Set<Set<OclReal>> setOfRealSets = new HashSet<Set<OclReal>>();
 		setOfRealSets.add(realSet1);
 		setOfRealSets.add(realSet2);
-		OclSet<OclSet<OclAny>> oclSetofSets =
-				myStandardLibraryFactory.createOclSet(setOfRealSets, EssentialOclPlugin
+		OclSet<OclSet<OclAny>> oclSetofSets = myStandardLibraryFactory
+				.createOclSet(setOfRealSets, EssentialOclPlugin
 						.getOclLibraryProvider().getOclLibrary().getSetType(
-								EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
-										.getOclReal()));
+								EssentialOclPlugin.getOclLibraryProvider()
+										.getOclLibrary().getOclReal()));
 
 		final OclSet<OclAny> flattenedSetOfSets = oclSetofSets.flatten();
 		assertTrue(flattenedSetOfSets.isEqualTo(oclSet2).isTrue());
-		assertTrue(flattenedSetOfSets.getGenericType()
-				.equals(
-						EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
-								.getOclReal()));
+		assertTrue(flattenedSetOfSets.getGenericType().equals(
+				EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+						.getOclReal()));
 
 		/*
 		 * Set { Set { Set { 0.5, null}, Set { 0.5, 1.5 } }, Set { Set { 2.5 } }
@@ -464,9 +513,9 @@ public class JavaOclCollectionTest {
 
 		realSet1.add(oclReal1_5);
 		realSet1.add(oclReal2_5);
-		OclSet<OclReal> oclResultSet =
-				myStandardLibraryFactory.createOclSet(realSet1, EssentialOclPlugin
-						.getOclLibraryProvider().getOclLibrary().getOclReal());
+		OclSet<OclReal> oclResultSet = myStandardLibraryFactory.createOclSet(
+				realSet1, EssentialOclPlugin.getOclLibraryProvider()
+						.getOclLibrary().getOclReal());
 
 		Set<OclReal> realSet3 = new HashSet<OclReal>();
 		realSet3.add(oclReal2_5);
@@ -474,29 +523,34 @@ public class JavaOclCollectionTest {
 		Set<Set<OclReal>> setOfRealSets2 = new HashSet<Set<OclReal>>();
 		setOfRealSets2.add(realSet3);
 
-		Set<Set<Set<OclReal>>> setOfSetsOfRealSets =
-				new HashSet<Set<Set<OclReal>>>();
+		Set<Set<Set<OclReal>>> setOfSetsOfRealSets = new HashSet<Set<Set<OclReal>>>();
 		setOfSetsOfRealSets.add(setOfRealSets);
 		setOfSetsOfRealSets.add(setOfRealSets2);
-		OclSet<OclSet<OclSet<OclReal>>> oclSetOfSetsOfSets =
-				myStandardLibraryFactory.createOclSet(setOfSetsOfRealSets,
-						EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+		OclSet<OclSet<OclSet<OclReal>>> oclSetOfSetsOfSets = myStandardLibraryFactory
+				.createOclSet(
+						setOfSetsOfRealSets,
+						EssentialOclPlugin
+								.getOclLibraryProvider()
+								.getOclLibrary()
 								.getSetType(
-										EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+										EssentialOclPlugin
+												.getOclLibraryProvider()
+												.getOclLibrary()
 												.getSetType(
-														EssentialOclPlugin.getOclLibraryProvider()
-																.getOclLibrary().getOclReal())));
+														EssentialOclPlugin
+																.getOclLibraryProvider()
+																.getOclLibrary()
+																.getOclReal())));
 
 		OclSet<OclReal> flattenedSetOfSetOfSets = oclSetOfSetsOfSets.flatten();
 		assertTrue(flattenedSetOfSetOfSets.isEqualTo(oclResultSet).isTrue());
-		assertTrue(flattenedSetOfSets.getGenericType()
-				.equals(
-						EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
-								.getOclReal()));
+		assertTrue(flattenedSetOfSets.getGenericType().equals(
+				EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+						.getOclReal()));
 
 		/*
-		 * Bag { Bag { 0.5, null }, Bag { 0.5, 1.5 } }->flatten() == Bag { 0.5, 0.5,
-		 * 1.5, null }
+		 * Bag { Bag { 0.5, null }, Bag { 0.5, 1.5 } }->flatten() == Bag { 0.5,
+		 * 0.5, 1.5, null }
 		 */
 		List<OclReal> realBag1 = new ArrayList<OclReal>();
 		realBag1.add(oclReal0_5);
@@ -509,18 +563,18 @@ public class JavaOclCollectionTest {
 		List<OclReal> realBag3 = new ArrayList<OclReal>();
 		realBag3.addAll(realBag1);
 		realBag3.addAll(realBag2);
-		OclBag<OclReal> oclResultBag =
-				myStandardLibraryFactory.createOclBag(realBag3, EssentialOclPlugin
-						.getOclLibraryProvider().getOclLibrary().getOclReal());
+		OclBag<OclReal> oclResultBag = myStandardLibraryFactory.createOclBag(
+				realBag3, EssentialOclPlugin.getOclLibraryProvider()
+						.getOclLibrary().getOclReal());
 
 		List<List<OclReal>> BagOfRealBags = new ArrayList<List<OclReal>>();
 		BagOfRealBags.add(realBag1);
 		BagOfRealBags.add(realBag2);
-		OclBag<OclBag<OclAny>> oclBagofBags =
-				myStandardLibraryFactory.createOclBag(BagOfRealBags, EssentialOclPlugin
+		OclBag<OclBag<OclAny>> oclBagofBags = myStandardLibraryFactory
+				.createOclBag(BagOfRealBags, EssentialOclPlugin
 						.getOclLibraryProvider().getOclLibrary().getBagType(
-								EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
-										.getOclReal()));
+								EssentialOclPlugin.getOclLibraryProvider()
+										.getOclLibrary().getOclReal()));
 		assertTrue(oclBagofBags.flatten().isEqualTo(oclResultBag).isTrue());
 
 		/*
@@ -534,25 +588,31 @@ public class JavaOclCollectionTest {
 		realBag4.addAll(realBag1);
 		realBag4.addAll(realBag2);
 		realBag4.addAll(realBag5);
-		OclBag<OclReal> oclResultBag2 =
-				myStandardLibraryFactory.createOclBag(realBag4, EssentialOclPlugin
-						.getOclLibraryProvider().getOclLibrary().getOclReal());
+		OclBag<OclReal> oclResultBag2 = myStandardLibraryFactory.createOclBag(
+				realBag4, EssentialOclPlugin.getOclLibraryProvider()
+						.getOclLibrary().getOclReal());
 
 		List<List<OclReal>> BagOfRealBags2 = new ArrayList<List<OclReal>>();
 		BagOfRealBags2.add(realBag5);
 
-		List<List<List<OclReal>>> BagOfBagsOfRealBags =
-				new ArrayList<List<List<OclReal>>>();
+		List<List<List<OclReal>>> BagOfBagsOfRealBags = new ArrayList<List<List<OclReal>>>();
 		BagOfBagsOfRealBags.add(BagOfRealBags);
 		BagOfBagsOfRealBags.add(BagOfRealBags2);
-		OclBag<OclBag<OclBag<OclReal>>> oclBagOfBagsOfBags =
-				myStandardLibraryFactory.createOclBag(BagOfBagsOfRealBags,
-						EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+		OclBag<OclBag<OclBag<OclReal>>> oclBagOfBagsOfBags = myStandardLibraryFactory
+				.createOclBag(
+						BagOfBagsOfRealBags,
+						EssentialOclPlugin
+								.getOclLibraryProvider()
+								.getOclLibrary()
 								.getBagType(
-										EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+										EssentialOclPlugin
+												.getOclLibraryProvider()
+												.getOclLibrary()
 												.getBagType(
-														EssentialOclPlugin.getOclLibraryProvider()
-																.getOclLibrary().getOclReal())));
+														EssentialOclPlugin
+																.getOclLibraryProvider()
+																.getOclLibrary()
+																.getOclReal())));
 
 		final OclBag<OclAny> flatBag = oclBagOfBagsOfBags.flatten();
 		assertTrue(flatBag.isEqualTo(oclResultBag2).isTrue());
@@ -560,8 +620,8 @@ public class JavaOclCollectionTest {
 		 * The generic/element type of the Bag should be Real.
 		 */
 		Type genericType = flatBag.getGenericType();
-		assertTrue(genericType.equals(EssentialOclPlugin.getOclLibraryProvider()
-				.getOclLibrary().getOclReal()));
+		assertTrue(genericType.equals(EssentialOclPlugin
+				.getOclLibraryProvider().getOclLibrary().getOclReal()));
 
 		/*
 		 * OrderedSet { OrderedSet { 0.5, null }, OrderedSet { 0.5, 1.5 }
@@ -575,70 +635,74 @@ public class JavaOclCollectionTest {
 		realOrderedSet2.add(oclReal0_5);
 		realOrderedSet2.add(oclReal1_5);
 
-		List<List<OclReal>> OrderedSetOfRealOrderedSets =
-				new UniqueEList<List<OclReal>>();
+		List<List<OclReal>> OrderedSetOfRealOrderedSets = new UniqueEList<List<OclReal>>();
 		OrderedSetOfRealOrderedSets.add(realOrderedSet1);
 		OrderedSetOfRealOrderedSets.add(realOrderedSet2);
-		OclOrderedSet<OclOrderedSet<OclAny>> oclOrderedSetofOrderedSets =
-				myStandardLibraryFactory.createOclOrderedSet(
-						OrderedSetOfRealOrderedSets, EssentialOclPlugin
-								.getOclLibraryProvider().getOclLibrary().getOrderedSetType(
-										EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
-												.getOclReal()));
+		OclOrderedSet<OclOrderedSet<OclAny>> oclOrderedSetofOrderedSets = myStandardLibraryFactory
+				.createOclOrderedSet(OrderedSetOfRealOrderedSets,
+						EssentialOclPlugin.getOclLibraryProvider()
+								.getOclLibrary().getOrderedSetType(
+										EssentialOclPlugin
+												.getOclLibraryProvider()
+												.getOclLibrary().getOclReal()));
 
-		final OclOrderedSet<OclAny> flattenedOrderedSetOfOrderedSets =
-				oclOrderedSetofOrderedSets.flatten();
+		final OclOrderedSet<OclAny> flattenedOrderedSetOfOrderedSets = oclOrderedSetofOrderedSets
+				.flatten();
 		assertTrue(flattenedOrderedSetOfOrderedSets.isEqualTo(oclOrderedSet2)
 				.isTrue());
-		assertTrue(flattenedOrderedSetOfOrderedSets.getGenericType()
-				.equals(
-						EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
-								.getOclReal()));
+		assertTrue(flattenedOrderedSetOfOrderedSets.getGenericType().equals(
+				EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+						.getOclReal()));
 
 		/*
-		 * OrderedSet { OrderedSet { OrderedSet { 0.5, null}, OrderedSet { 0.5, 1.5
-		 * } }, OrderedSet { OrderedSet { 2.5 } } }->flatten() == OrderedSet { 0.5,
-		 * 1.5, 2.5, null }
+		 * OrderedSet { OrderedSet { OrderedSet { 0.5, null}, OrderedSet { 0.5,
+		 * 1.5 } }, OrderedSet { OrderedSet { 2.5 } } }->flatten() == OrderedSet
+		 * { 0.5, 1.5, 2.5, null }
 		 */
 		realOrderedSet1.add(oclReal1_5);
 		realOrderedSet1.add(oclReal2_5);
-		OclOrderedSet<OclReal> oclResultOrderedSet =
-				myStandardLibraryFactory.createOclOrderedSet(realOrderedSet1,
-						EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
-								.getOclReal());
+		OclOrderedSet<OclReal> oclResultOrderedSet = myStandardLibraryFactory
+				.createOclOrderedSet(realOrderedSet1, EssentialOclPlugin
+						.getOclLibraryProvider().getOclLibrary().getOclReal());
 
 		List<OclReal> realOrderedSet3 = new UniqueEList<OclReal>();
 		realOrderedSet3.add(oclReal2_5);
 
-		List<List<OclReal>> OrderedSetOfRealOrderedSets2 =
-				new UniqueEList<List<OclReal>>();
+		List<List<OclReal>> OrderedSetOfRealOrderedSets2 = new UniqueEList<List<OclReal>>();
 		OrderedSetOfRealOrderedSets2.add(realOrderedSet3);
 
-		List<List<List<OclReal>>> OrderedSetOfOrderedSetsOfRealOrderedSets =
-				new UniqueEList<List<List<OclReal>>>();
-		OrderedSetOfOrderedSetsOfRealOrderedSets.add(OrderedSetOfRealOrderedSets);
-		OrderedSetOfOrderedSetsOfRealOrderedSets.add(OrderedSetOfRealOrderedSets2);
-		OclOrderedSet<OclOrderedSet<OclOrderedSet<OclReal>>> oclOrderedSetOfOrderedSetsOfOrderedSets =
-				myStandardLibraryFactory.createOclOrderedSet(
-						OrderedSetOfOrderedSetsOfRealOrderedSets, EssentialOclPlugin
-								.getOclLibraryProvider().getOclLibrary().getOrderedSetType(
-										EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+		List<List<List<OclReal>>> OrderedSetOfOrderedSetsOfRealOrderedSets = new UniqueEList<List<List<OclReal>>>();
+		OrderedSetOfOrderedSetsOfRealOrderedSets
+				.add(OrderedSetOfRealOrderedSets);
+		OrderedSetOfOrderedSetsOfRealOrderedSets
+				.add(OrderedSetOfRealOrderedSets2);
+		OclOrderedSet<OclOrderedSet<OclOrderedSet<OclReal>>> oclOrderedSetOfOrderedSetsOfOrderedSets = myStandardLibraryFactory
+				.createOclOrderedSet(
+						OrderedSetOfOrderedSetsOfRealOrderedSets,
+						EssentialOclPlugin
+								.getOclLibraryProvider()
+								.getOclLibrary()
+								.getOrderedSetType(
+										EssentialOclPlugin
+												.getOclLibraryProvider()
+												.getOclLibrary()
 												.getOrderedSetType(
-														EssentialOclPlugin.getOclLibraryProvider()
-																.getOclLibrary().getOclReal())));
+														EssentialOclPlugin
+																.getOclLibraryProvider()
+																.getOclLibrary()
+																.getOclReal())));
 
-		OclOrderedSet<OclReal> flattenedOrderedSetOfOrderedSetOfOrderedSets =
-				oclOrderedSetOfOrderedSetsOfOrderedSets.flatten();
+		OclOrderedSet<OclReal> flattenedOrderedSetOfOrderedSetOfOrderedSets = oclOrderedSetOfOrderedSetsOfOrderedSets
+				.flatten();
 		assertTrue(flattenedOrderedSetOfOrderedSetOfOrderedSets.isEqualTo(
 				oclResultOrderedSet).isTrue());
-		assertTrue(flattenedOrderedSetOfOrderedSets.getGenericType()
-				.equals(
-						EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
-								.getOclReal()));
+		assertTrue(flattenedOrderedSetOfOrderedSets.getGenericType().equals(
+				EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+						.getOclReal()));
 
 		/*
-		 * Sequence { Sequence { 0.5, null }, Sequence { 0.5, 1.5 } }->flatten() ==
-		 * Sequence { 0.5, 0.5, 1.5, null }
+		 * Sequence { Sequence { 0.5, null }, Sequence { 0.5, 1.5 } }->flatten()
+		 * == Sequence { 0.5, 0.5, 1.5, null }
 		 */
 		List<OclReal> realSequence1 = new ArrayList<OclReal>();
 		realSequence1.add(oclReal0_5);
@@ -651,28 +715,26 @@ public class JavaOclCollectionTest {
 		List<OclReal> realSequence3 = new ArrayList<OclReal>();
 		realSequence3.addAll(realSequence1);
 		realSequence3.addAll(realSequence2);
-		OclSequence<OclReal> oclResultSequence =
-				myStandardLibraryFactory.createOclSequence(realSequence3,
-						EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
-								.getOclReal());
+		OclSequence<OclReal> oclResultSequence = myStandardLibraryFactory
+				.createOclSequence(realSequence3, EssentialOclPlugin
+						.getOclLibraryProvider().getOclLibrary().getOclReal());
 
-		List<List<OclReal>> sequenceOfRealSequences =
-				new ArrayList<List<OclReal>>();
+		List<List<OclReal>> sequenceOfRealSequences = new ArrayList<List<OclReal>>();
 		sequenceOfRealSequences.add(realSequence1);
 		sequenceOfRealSequences.add(realSequence2);
-		OclSequence<OclSequence<OclAny>> oclSequenceofSequences =
-				myStandardLibraryFactory.createOclSequence(sequenceOfRealSequences,
-						EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
-								.getSequenceType(
-										EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
-												.getOclReal()));
-		assertTrue(oclSequenceofSequences.flatten().isEqualTo(oclResultSequence)
-				.isTrue());
+		OclSequence<OclSequence<OclAny>> oclSequenceofSequences = myStandardLibraryFactory
+				.createOclSequence(sequenceOfRealSequences, EssentialOclPlugin
+						.getOclLibraryProvider().getOclLibrary()
+						.getSequenceType(
+								EssentialOclPlugin.getOclLibraryProvider()
+										.getOclLibrary().getOclReal()));
+		assertTrue(oclSequenceofSequences.flatten()
+				.isEqualTo(oclResultSequence).isTrue());
 
 		/*
 		 * Sequence { Sequence { Sequence { 0.5, null}, Sequence { 0.5, 1.5 } },
-		 * Sequence { Sequence { 2.5 } } }->flatten() == Sequence { 0.5, null, 0.5,
-		 * 1.5, 2.5 }
+		 * Sequence { Sequence { 2.5 } } }->flatten() == Sequence { 0.5, null,
+		 * 0.5, 1.5, 2.5 }
 		 */
 		List<OclReal> realSequence5 = new ArrayList<OclReal>();
 		realSequence3.add(oclReal2_5);
@@ -681,37 +743,41 @@ public class JavaOclCollectionTest {
 		realSequence4.addAll(realSequence1);
 		realSequence4.addAll(realSequence2);
 		realSequence4.addAll(realSequence5);
-		OclSequence<OclReal> oclResultSequence2 =
-				myStandardLibraryFactory.createOclSequence(realSequence4,
-						EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
-								.getOclReal());
+		OclSequence<OclReal> oclResultSequence2 = myStandardLibraryFactory
+				.createOclSequence(realSequence4, EssentialOclPlugin
+						.getOclLibraryProvider().getOclLibrary().getOclReal());
 
-		List<List<OclReal>> sequenceOfRealSequences2 =
-				new ArrayList<List<OclReal>>();
+		List<List<OclReal>> sequenceOfRealSequences2 = new ArrayList<List<OclReal>>();
 		sequenceOfRealSequences2.add(realSequence5);
 
-		List<List<List<OclReal>>> SequenceOfSequencesOfRealSequences =
-				new ArrayList<List<List<OclReal>>>();
+		List<List<List<OclReal>>> SequenceOfSequencesOfRealSequences = new ArrayList<List<List<OclReal>>>();
 		SequenceOfSequencesOfRealSequences.add(sequenceOfRealSequences);
 		SequenceOfSequencesOfRealSequences.add(sequenceOfRealSequences2);
-		OclSequence<OclSequence<OclSequence<OclReal>>> oclSequenceOfSequencesOfSequences =
-				myStandardLibraryFactory.createOclSequence(
-						SequenceOfSequencesOfRealSequences, EssentialOclPlugin
-								.getOclLibraryProvider().getOclLibrary().getSequenceType(
-										EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+		OclSequence<OclSequence<OclSequence<OclReal>>> oclSequenceOfSequencesOfSequences = myStandardLibraryFactory
+				.createOclSequence(
+						SequenceOfSequencesOfRealSequences,
+						EssentialOclPlugin
+								.getOclLibraryProvider()
+								.getOclLibrary()
+								.getSequenceType(
+										EssentialOclPlugin
+												.getOclLibraryProvider()
+												.getOclLibrary()
 												.getSequenceType(
-														EssentialOclPlugin.getOclLibraryProvider()
-																.getOclLibrary().getOclReal())));
+														EssentialOclPlugin
+																.getOclLibraryProvider()
+																.getOclLibrary()
+																.getOclReal())));
 
-		final OclSequence<OclAny> flatSequence =
-				oclSequenceOfSequencesOfSequences.flatten();
+		final OclSequence<OclAny> flatSequence = oclSequenceOfSequencesOfSequences
+				.flatten();
 		assertTrue(flatSequence.isEqualTo(oclResultSequence2).isTrue());
 		/*
 		 * The generic/element type of the Sequence should be Real.
 		 */
 		genericType = flatSequence.getGenericType();
-		assertTrue(genericType.equals(EssentialOclPlugin.getOclLibraryProvider()
-				.getOclLibrary().getOclReal()));
+		assertTrue(genericType.equals(EssentialOclPlugin
+				.getOclLibraryProvider().getOclLibrary().getOclReal()));
 	}
 
 	@Test
@@ -723,10 +789,11 @@ public class JavaOclCollectionTest {
 		assertFalse(emptySequence.getIterator().hasNext().isTrue());
 
 		final OclIterator<OclReal> setIterator = oclSet2.getIterator();
-		final OclIterator<OclReal> orderedSetIterator =
-				oclOrderedSet2.getIterator();
+		final OclIterator<OclReal> orderedSetIterator = oclOrderedSet2
+				.getIterator();
 		final OclIterator<OclReal> bagIterator = oclBag2.getIterator();
-		final OclIterator<OclReal> sequenceIterator = oclSequence2.getIterator();
+		final OclIterator<OclReal> sequenceIterator = oclSequence2
+				.getIterator();
 
 		assertTrue(setIterator.hasNext().isTrue());
 		assertTrue(orderedSetIterator.hasNext().isTrue());
