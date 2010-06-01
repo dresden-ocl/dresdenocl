@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
       id="tudresden.ocl20.feature.modelinstances"
-      label="Dresden OCL2 for Eclipse Model Instances"
-      version="2.1.0.qualifier"
-      provider-name="TU Dresden">
+      label="DresdenOCL Model Instances"
+      version="2.2.0.qualifier"
+      provider-name="TU Dresden, Software Technology Group">
 
    <description url="http://dresden-ocl.sourceforge.net/4eclipse_intro.html">
-      Model instances include Java files and Ecore models.
+      The different Model Instance Types supported by DresdenOCL include Java files, Ecore models and XML files.
    </description>
 
    <copyright url="http://www.example.com/copyright">
@@ -183,8 +183,6 @@ Library.
 
    <requires>
       <import plugin="org.eclipse.core.runtime" version="3.4.0" match="greaterOrEqual"/>
-      <import plugin="tudresden.ocl20.logging" version="2.1.0" match="greaterOrEqual"/>
-      <import plugin="tudresden.ocl20.pivot.essentialocl" version="2.1.0" match="greaterOrEqual"/>
       <import plugin="tudresden.ocl20.pivot.modelbus" version="2.1.0" match="greaterOrEqual"/>
       <import plugin="org.junit4" version="4.0.0" match="greaterOrEqual"/>
       <import plugin="tudresden.ocl20.pivot.pivotmodel" version="2.1.0" match="greaterOrEqual"/>
@@ -195,6 +193,8 @@ Library.
       <import plugin="tudresden.ocl20.pivot.facade" version="2.1.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.emf.ecore.xmi" version="2.5.0" match="greaterOrEqual"/>
       <import plugin="tudresden.ocl20.pivot.modelinstancetype.xml" version="2.1.0" match="greaterOrEqual"/>
+      <import plugin="tudresden.ocl20.pivot.testsuite" version="2.2.0" match="greaterOrEqual"/>
+      <import plugin="tudresden.ocl20.pivot.modelinstancetype.java" version="2.1.0" match="greaterOrEqual"/>
    </requires>
 
    <plugin
@@ -234,6 +234,13 @@ Library.
 
    <plugin
          id="tudresden.ocl20.pivot.modelinstancetype.xml.test"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="tudresden.ocl20.pivot.modelinstancetype.java.test"
          download-size="0"
          install-size="0"
          version="0.0.0"

@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
       id="tudresden.ocl20.feature.interpreter"
-      label="Dresden OCL2 for Eclipse Interpreter"
-      version="2.1.0.qualifier"
-      provider-name="TU Dresden">
+      label="DresdenOCL Interpreter"
+      version="2.2.0.qualifier"
+      provider-name="TU Dresden, Software Technology Group">
 
    <description url="http://dresden-ocl.sourceforge.net/4eclipse_packages.html">
-      The OCL2 Interpreter has been developed by Ronny Brandt and can be used to interpret already imported OCL2 constraints. Invariants, pre- and postconditions can be interpreted. Initial and let expressions, definitions and body expressions can be used to enrich and prepare the OCL2 interpretation.
+      The OCL2 Interpreter can
+be used to interpret already imported OCL2 constraints. Invariants,
+pre- and postconditions can be interpreted. Initial and let expressions,
+definitions and body expressions can be used to enrich and prepare
+the OCL2 interpretation.
    </description>
 
    <copyright url="http://www.example.com/copyright">
@@ -183,17 +187,14 @@ Library.
 
    <requires>
       <import plugin="org.eclipse.core.runtime" version="3.4.0" match="greaterOrEqual"/>
-      <import plugin="tudresden.ocl20.logging" version="2.1.0" match="greaterOrEqual"/>
-      <import plugin="tudresden.ocl20.pivot.essentialocl" version="2.1.0" match="greaterOrEqual"/>
-      <import plugin="tudresden.ocl20.pivot.essentialocl.standardlibrary" version="2.1.0" match="greaterOrEqual"/>
       <import plugin="tudresden.ocl20.pivot.standardlibrary.java" version="2.1.0" match="greaterOrEqual"/>
       <import plugin="tudresden.ocl20.pivot.modelbus" version="2.1.0" match="greaterOrEqual"/>
-      <import plugin="tudresden.ocl20.pivot.interpreter" version="2.1.0" match="greaterOrEqual"/>
       <import plugin="tudresden.ocl20.pivot.examples.royalandloyal" version="2.1.0" match="greaterOrEqual"/>
       <import plugin="org.junit4" version="4.0.0" match="greaterOrEqual"/>
       <import plugin="tudresden.ocl20.pivot.testsuite" version="2.1.0" match="greaterOrEqual"/>
       <import plugin="tudresden.ocl20.pivot.facade" version="2.1.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.ui" version="3.4.0" match="greaterOrEqual"/>
+      <import plugin="tudresden.ocl20.pivot.interpreter" version="2.1.0" match="greaterOrEqual"/>
       <import plugin="tudresden.ocl20.pivot.modelbus.ui" version="2.1.0" match="greaterOrEqual"/>
    </requires>
 

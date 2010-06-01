@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
       id="tudresden.ocl20.feature.parser"
-      label="Dresden OCL2 for Eclipse Parser Feature"
-      version="2.1.0.qualifier"
-      provider-name="TU Dresden">
+      label="DresdenOCL2 Parser Feature"
+      version="2.2.0.qualifier"
+      provider-name="TU Dresden, Software Technology Group">
 
    <description url="http://dresden-ocl.sourceforge.net/4eclipse_packages.html">
       The OCL2 Parser has been developed by Nils Thieme and can be used to open text files and parse them as OCL2 constraints. The constraints parsed by the parser are added to the model in the toolkit on which they have been defined.
@@ -182,21 +182,18 @@ Library.
    </license>
 
    <requires>
-      <import plugin="tudresden.ocl20.pivot.essentialocl" version="2.1.0" match="greaterOrEqual"/>
       <import plugin="tudresden.ocl20.pivot.modelbus" version="2.1.0" match="greaterOrEqual"/>
       <import plugin="tudresden.ocl20.pivot.parser" version="2.1.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.core.runtime" version="3.4.0" match="greaterOrEqual"/>
       <import plugin="org.junit4" version="4.0.0" match="greaterOrEqual"/>
-      <import plugin="tudresden.ocl20.pivot.ocl2parser" version="2.1.0" match="greaterOrEqual"/>
       <import plugin="tudresden.ocl20.pivot.testsuite" version="2.1.0" match="greaterOrEqual"/>
       <import plugin="tudresden.ocl20.pivot.facade" version="2.1.0" match="greaterOrEqual"/>
-      <import plugin="tudresden.ocl20.logging" version="2.1.0" match="greaterOrEqual"/>
-      <import plugin="org.apache.commons.lang" version="2.3.0" match="greaterOrEqual"/>
+      <import plugin="tudresden.ocl20.pivot.essentialocl" version="2.1.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.core.runtime" version="3.5.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.core.resources" version="3.5.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.ui" version="3.5.0" match="greaterOrEqual"/>
       <import plugin="tudresden.ocl20.pivot.modelbus.ui" version="2.1.0" match="greaterOrEqual"/>
-      <import plugin="tudresden.ocl20.pivot.essentialocl.standardlibrary" version="2.1.0" match="greaterOrEqual"/>
+      <import plugin="tudresden.ocl20.pivot.ocl2parser" version="2.1.0" match="greaterOrEqual"/>
    </requires>
 
    <plugin

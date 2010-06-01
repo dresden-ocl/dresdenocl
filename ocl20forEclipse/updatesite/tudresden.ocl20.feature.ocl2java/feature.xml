@@ -2,8 +2,8 @@
 <feature
       id="tudresden.ocl20.feature.ocl2java"
       label="Dresden OCL2 for Eclipse Ocl2Java"
-      version="2.1.0.qualifier"
-      provider-name="TU Dresden">
+      version="2.2.0.qualifier"
+      provider-name="TU Dresden, Software Technology Group">
 
    <description url="http://dresden-ocl.sourceforge.net/4eclipse_packages.html">
       OCL2Java is a code generator developed by Claas Wilke which can be used to generated Java code for imported OCL2 constraints. The code generator uses the aspect-oriented language AspectJ to instrument the generated code into the provided Java code for the imported model used for the code generation. The code generator supports the generation of code for invariants, pre- and postconditions, definitions, initial and defined values, body and let expressions.
@@ -183,22 +183,21 @@ Library.
 
    <requires>
       <import plugin="org.eclipse.core.runtime" version="3.4.0" match="greaterOrEqual"/>
-      <import plugin="tudresden.ocl20.logging" version="2.1.0" match="greaterOrEqual"/>
-      <import plugin="tudresden.ocl20.pivot.essentialocl" version="2.1.0" match="greaterOrEqual"/>
       <import plugin="tudresden.ocl20.pivot.modelbus" version="2.1.0" match="greaterOrEqual"/>
+      <import plugin="tudresden.ocl20.pivot.tools.template" version="2.1.0" match="greaterOrEqual"/>
       <import plugin="org.junit4" version="4.0.0" match="greaterOrEqual"/>
-      <import plugin="tudresden.ocl20.pivot.ocl2parser" version="2.1.0" match="greaterOrEqual"/>
-      <import plugin="tudresden.ocl20.pivot.ocl2java" version="2.1.0" match="greaterOrEqual"/>
       <import plugin="tudresden.ocl20.pivot.facade" version="2.1.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.core.resources" version="3.4.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.core.variables"/>
       <import plugin="org.eclipse.ui" version="3.4.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.ui.ide" version="3.4.0" match="greaterOrEqual"/>
-      <import plugin="tudresden.ocl20.pivot.tools.template" version="2.1.0" match="greaterOrEqual"/>
-      <import plugin="tudresden.ocl20.pivot.essentialocl.standardlibrary" version="2.1.0" match="greaterOrEqual"/>
+      <import plugin="tudresden.ocl20.pivot.ocl2java" version="2.1.0" match="greaterOrEqual"/>
+      <import plugin="tudresden.ocl20.logging" version="2.1.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.osgi"/>
       <import plugin="org.eclipse.core.runtime" version="3.5.0" match="greaterOrEqual"/>
       <import plugin="tudresden.ocl20.pivot.testsuite" version="2.1.0" match="greaterOrEqual"/>
+      <import plugin="org.aspectj.runtime"/>
+      <import plugin="tudresden.ocl20.pivot.ocl2java.types" version="2.1.0" match="greaterOrEqual"/>
    </requires>
 
    <plugin
@@ -238,6 +237,13 @@ Library.
 
    <plugin
          id="tudresden.ocl20.pivot.tools.template.test"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="tudresden.ocl20.pivot.ocl22java.test.aspectj"
          download-size="0"
          install-size="0"
          version="0.0.0"

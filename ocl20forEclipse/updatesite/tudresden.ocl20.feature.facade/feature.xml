@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
       id="tudresden.ocl20.feature.facade"
-      label="Dresden OCL2 For Eclipse Integration Facade"
-      version="2.1.0.qualifier"
+      label="DresdenOCL Eclipse Integration Facade"
+      version="2.2.0.qualifier"
       provider-name="TU Dresden, Software Technology Group">
 
    <description url="http://www.example.com/description">
-      This feature contains a Facade that can be used to integrate Dresden OCL for Eclipse into other projects.
+      This feature contains a Facade that can be used to integrate
+DresdenOCL into other Eclipse projects.
    </description>
 
    <copyright url="http://www.example.com/copyright">
@@ -184,7 +185,6 @@ Library.
 
    <requires>
       <import plugin="org.eclipse.core.runtime" version="3.4.0" match="greaterOrEqual"/>
-      <import plugin="tudresden.ocl20.pivot.essentialocl" version="2.1.0" match="greaterOrEqual"/>
       <import plugin="tudresden.ocl20.pivot.modelbus" version="2.1.0" match="greaterOrEqual"/>
       <import plugin="tudresden.ocl20.pivot.metamodels.ecore" version="2.1.0" match="greaterOrEqual"/>
       <import plugin="tudresden.ocl20.pivot.metamodels.java" version="2.1.0" match="greaterOrEqual"/>
