@@ -88,13 +88,20 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute OCL.ecore#//NavigationCallExp/navigationOperator"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//NavigationCallExp/featureCalls"/>
     </genClasses>
-    <genClasses ecoreClass="OCL.ecore#//ImplicitFeatureCallCS"/>
-    <genClasses ecoreClass="OCL.ecore#//ImplicitPropertyCallCS">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference OCL.ecore#//ImplicitPropertyCallCS/property"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute OCL.ecore#//ImplicitPropertyCallCS/isMarkedPre"/>
+    <genClasses ecoreClass="OCL.ecore#//OperationCallBaseExpCS">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference OCL.ecore#//OperationCallBaseExpCS/operationName"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//OperationCallBaseExpCS/arguments"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute OCL.ecore#//OperationCallBaseExpCS/isMarkedPre"/>
     </genClasses>
+    <genClasses ecoreClass="OCL.ecore#//PropertyCallBaseExpCS">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference OCL.ecore#//PropertyCallBaseExpCS/property"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute OCL.ecore#//PropertyCallBaseExpCS/isMarkedPre"/>
+    </genClasses>
+    <genClasses ecoreClass="OCL.ecore#//ImplicitFeatureCallCS"/>
+    <genClasses ecoreClass="OCL.ecore#//ImplicitPropertyCallCS"/>
     <genClasses ecoreClass="OCL.ecore#//ImplicitOperationCallCS"/>
     <genClasses image="false" ecoreClass="OCL.ecore#//PropertyCallExpCS"/>
+    <genClasses ecoreClass="OCL.ecore#//PropertyCallOnSelfExpCS"/>
     <genClasses ecoreClass="OCL.ecore#//PropertyCallExplicitPathExpCS">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//PropertyCallExplicitPathExpCS/source"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//PropertyCallExplicitPathExpCS/propertyPath"/>
@@ -102,10 +109,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute OCL.ecore#//PropertyCallExplicitPathExpCS/isMarkedPre"/>
     </genClasses>
     <genClasses image="false" ecoreClass="OCL.ecore#//OperationCallExpCS"/>
-    <genClasses image="false" ecoreClass="OCL.ecore#//OperationCallWithArgsExpCS">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference OCL.ecore#//OperationCallWithArgsExpCS/operationName"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//OperationCallWithArgsExpCS/arguments"/>
-    </genClasses>
+    <genClasses ecoreClass="OCL.ecore#//OperationCallOnSelfExpCS"/>
     <genClasses ecoreClass="OCL.ecore#//UnaryOperationCallExpCS">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute OCL.ecore#//UnaryOperationCallExpCS/operationName"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//UnaryOperationCallExpCS/target"/>

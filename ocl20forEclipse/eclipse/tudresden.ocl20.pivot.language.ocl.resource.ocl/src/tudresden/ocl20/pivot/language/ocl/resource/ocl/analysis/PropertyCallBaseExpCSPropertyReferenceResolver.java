@@ -12,20 +12,19 @@ import tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclReferenceResolveHelpe
 import tudresden.ocl20.pivot.language.ocl.resource.ocl.OclReferenceResolveHelperProvider;
 import tudresden.ocl20.pivot.pivotmodel.Property;
 
-public class ImplicitPropertyCallCSPropertyReferenceResolver
+public class PropertyCallBaseExpCSPropertyReferenceResolver
 		implements
-		tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclReferenceResolver<tudresden.ocl20.pivot.language.ocl.ImplicitPropertyCallCS, tudresden.ocl20.pivot.pivotmodel.Property> {
+		tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclReferenceResolver<tudresden.ocl20.pivot.language.ocl.PropertyCallBaseExpCS, tudresden.ocl20.pivot.pivotmodel.Property> {
 
-	private tudresden.ocl20.pivot.language.ocl.resource.ocl.analysis.OclDefaultResolverDelegate<tudresden.ocl20.pivot.language.ocl.ImplicitPropertyCallCS, tudresden.ocl20.pivot.pivotmodel.Property> delegate = new tudresden.ocl20.pivot.language.ocl.resource.ocl.analysis.OclDefaultResolverDelegate<tudresden.ocl20.pivot.language.ocl.ImplicitPropertyCallCS, tudresden.ocl20.pivot.pivotmodel.Property>();
+	private tudresden.ocl20.pivot.language.ocl.resource.ocl.analysis.OclDefaultResolverDelegate<tudresden.ocl20.pivot.language.ocl.PropertyCallBaseExpCS, tudresden.ocl20.pivot.pivotmodel.Property> delegate = new tudresden.ocl20.pivot.language.ocl.resource.ocl.analysis.OclDefaultResolverDelegate<tudresden.ocl20.pivot.language.ocl.PropertyCallBaseExpCS, tudresden.ocl20.pivot.pivotmodel.Property>();
 
 	public void resolve(
 			java.lang.String identifier,
-			tudresden.ocl20.pivot.language.ocl.ImplicitPropertyCallCS container,
+			tudresden.ocl20.pivot.language.ocl.PropertyCallBaseExpCS container,
 			org.eclipse.emf.ecore.EReference reference,
 			int position,
 			boolean resolveFuzzy,
 			final tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclReferenceResolveResult<tudresden.ocl20.pivot.pivotmodel.Property> result) {
-
 		IOclReferenceResolveHelper rrHelper = OclReferenceResolveHelperProvider
 				.getOclReferenceResolveHelper();
 		if (rrHelper != null) {
@@ -42,7 +41,7 @@ public class ImplicitPropertyCallCSPropertyReferenceResolver
 
 	public java.lang.String deResolve(
 			tudresden.ocl20.pivot.pivotmodel.Property element,
-			tudresden.ocl20.pivot.language.ocl.ImplicitPropertyCallCS container,
+			tudresden.ocl20.pivot.language.ocl.PropertyCallBaseExpCS container,
 			org.eclipse.emf.ecore.EReference reference) {
 		return delegate.deResolve(element, container, reference);
 	}

@@ -595,7 +595,7 @@ trait OclStaticSemantics extends ocl.semantics.OclAttributeMaker with pivotmodel
         else
           Full(property.getType)
       }
-      case i@ImplicitOperationCallCS(_) => {
+      case i@ImplicitOperationCallCS(_, _) => {
         val operation = i.getOperationName
         if (operation.eIsProxy)
           Empty
@@ -937,7 +937,7 @@ trait OclStaticSemantics extends ocl.semantics.OclAttributeMaker with pivotmodel
         featureCalls.last->computeOclExpression
   	  }
      
-  	  case i@ImplicitPropertyCallCS(isMarkedPre) => {
+  	  case i@PropertyCallBaseExpCS(isMarkedPre) => {
         val property = i.getProperty
         if (property.eIsProxy) {
           val typeName = i->sourceExpression match {
@@ -959,7 +959,7 @@ trait OclStaticSemantics extends ocl.semantics.OclAttributeMaker with pivotmodel
         }
       }
      	
-      case i@OperationCallWithArgsExpCS(arguments) => {
+      case i@OperationCallBaseExpCS(arguments, isMarkedPre) => {
         val operation = i.getOperationName
         if (operation.eIsProxy) {
           val typeName = i->sourceExpression match {
