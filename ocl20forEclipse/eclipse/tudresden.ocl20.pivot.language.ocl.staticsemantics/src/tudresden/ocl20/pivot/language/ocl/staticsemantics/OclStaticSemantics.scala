@@ -473,6 +473,22 @@ trait OclStaticSemantics extends ocl.semantics.OclAttributeMaker with pivotmodel
           for (self <- child->self) yield List(self)
         case a : AttributeContextDeclarationCS =>
           for (self <- child->self) yield List(self)
+        case p : PostConditionDeclarationCS => {
+          (p->context).flatMap {context =>
+	          context match {
+	            case o : Operation => {
+	              (p->variables).flatMap{otherVars =>
+		              val result = ExpressionsFactory.INSTANCE.createVariable
+				          result.setName("result")
+				          result.setType(o.getType)
+				          Full(result::(otherVars))
+			          }
+	            }
+	            case other => yieldFailure("Post conditions are only allowed on operations.", p)
+	          }
+            
+          }
+        }
         case l@LetExpCS(variableDeclarations, _) if !variableDeclarations.contains(child.getEObject) => {
           (l->variables).flatMap{otherVars =>
 	          Full(variableDeclarations.flatMap{vd =>
@@ -639,6 +655,16 @@ trait OclStaticSemantics extends ocl.semantics.OclAttributeMaker with pivotmodel
         // TODO: parameters may have another SE
         case other => for (self <- other->self) yield factory.createVariableExp(self)
       } 
+    }
+  }
+  
+  private val isInPostCondition : Attributable ==> Boolean = {
+    childAttr {
+      case child => {
+        case null => false
+        case p : PostConditionDeclarationCS => true
+        case passOn => passOn->isInPostCondition
+      }
     }
   }
   
@@ -938,73 +964,81 @@ trait OclStaticSemantics extends ocl.semantics.OclAttributeMaker with pivotmodel
   	  }
      
   	  case i@PropertyCallBaseExpCS(isMarkedPre) => {
-        val property = i.getProperty
-        if (property.eIsProxy) {
-          val typeName = i->sourceExpression match {
-            case Full(t) => t.getType.getName
-            case Failure(_, _, _) | Empty => "unknown type"
-          }
-          yieldFailure("Cannot find property on " + typeName + ".", i)
-        }
+        if (isMarkedPre && !(i->isInPostCondition))
+          yieldFailure("Cannot use @pre outside of a post condition.", i)
         else {
-          for (sourceExpression <- i->sourceExpression)
-            yield {
-		          // TODO: put this into the EssentialOclFactory
-		 					val pce = ExpressionsFactory.INSTANCE.createPropertyCallExp
-		 					pce.setReferredProperty(property)
-		 					pce.setSource(sourceExpression)
-		 					pce.setOclLibrary(oclLibrary)
-		 					pce
+	  	    val property = i.getProperty
+	        if (property.eIsProxy) {
+	          val typeName = i->sourceExpression match {
+	            case Full(t) => t.getType.getName
+	            case Failure(_, _, _) | Empty => "unknown type"
 	          }
+	          yieldFailure("Cannot find property on " + typeName + ".", i)
+	        }
+	        else {
+	          for (sourceExpression <- i->sourceExpression)
+	            yield {
+			          // TODO: put this into the EssentialOclFactory
+			 					val pce = ExpressionsFactory.INSTANCE.createPropertyCallExp
+			 					pce.setReferredProperty(property)
+			 					pce.setSource(sourceExpression)
+			 					pce.setOclLibrary(oclLibrary)
+			 					pce
+		          }
+	        }
         }
       }
      	
       case i@OperationCallBaseExpCS(arguments, isMarkedPre) => {
-        val operation = i.getOperationName
-        if (operation.eIsProxy) {
-          val typeName = i->sourceExpression match {
-            case Full(t) => t.getType.getName
-            case Failure(_, _, _) | Empty => "unknown type"
-          }
-          yieldFailure("Cannot find operation on " + typeName +  ".", i)
-        }
+        if (isMarkedPre && !(i->isInPostCondition))
+          yieldFailure("Cannot use @pre outside of a post condition.", i)
         else {
-          val argumentsEOcl = arguments.map(arg => arg->computeOclExpression)
-          argumentsEOcl.find(!_.isDefined) match {
-            case Some(f) => f.asInstanceOf[Box[FeatureCallExp]]
-            case None => {
-              for (sourceExpression <- i->sourceExpression;
-              		 multipleNavigationCall <- i->isMultipleNavigationCall) yield {
-                if (sourceExpression.getType.isInstanceOf[CollectionType] && !multipleNavigationCall) {
-                  // implicit collect()
-                  val oce = ExpressionsFactory.INSTANCE.createOperationCallExp
-			   					oce.setReferredOperation(operation)
-			   					argumentsEOcl.foreach {arg =>
-			   					  oce.getArgument.add(arg.open_!)
-			   					}
-                  val iteratorVar = ExpressionsFactory.INSTANCE.createVariable
-                  iteratorVar.setName("$implicitCollect$")
-                  iteratorVar.setType(sourceExpression.getType.asInstanceOf[CollectionType].getElementType)
-                  oce.setSource(factory.createVariableExp(iteratorVar))
-			   					oce.setOclLibrary(oclLibrary)
-			   					factory.createIteratorExp(sourceExpression, "collect", oce, iteratorVar)
-                } else {
-			   					val oce = ExpressionsFactory.INSTANCE.createOperationCallExp
-			   					oce.setReferredOperation(operation)	
-			   					argumentsEOcl.foreach {arg =>
-			   					  oce.getArgument.add(arg.open_!)
-			   					}
-                	if (!sourceExpression.getType.isInstanceOf[CollectionType] && multipleNavigationCall)
-			   						// implicit asSet()
-			   						oce.setSource(sourceExpression.withAsSet)
-			   					else
-			   						oce.setSource(sourceExpression)
-			   					oce.setOclLibrary(oclLibrary)
-			   					oce
-                }
-              }
+	        val operation = i.getOperationName
+	        if (operation.eIsProxy) {
+	          val typeName = i->sourceExpression match {
+	            case Full(t) => t.getType.getName
+	            case Failure(_, _, _) | Empty => "unknown type"
 	          }
-          }
+	          yieldFailure("Cannot find operation on " + typeName +  ".", i)
+	        }
+	        else {
+	          val argumentsEOcl = arguments.map(arg => arg->computeOclExpression)
+	          argumentsEOcl.find(!_.isDefined) match {
+	            case Some(f) => f.asInstanceOf[Box[FeatureCallExp]]
+	            case None => {
+	              for (sourceExpression <- i->sourceExpression;
+	              		 multipleNavigationCall <- i->isMultipleNavigationCall) yield {
+	                if (sourceExpression.getType.isInstanceOf[CollectionType] && !multipleNavigationCall) {
+	                  // implicit collect()
+	                  val oce = ExpressionsFactory.INSTANCE.createOperationCallExp
+				   					oce.setReferredOperation(operation)
+				   					argumentsEOcl.foreach {arg =>
+				   					  oce.getArgument.add(arg.open_!)
+				   					}
+	                  val iteratorVar = ExpressionsFactory.INSTANCE.createVariable
+	                  iteratorVar.setName("$implicitCollect$")
+	                  iteratorVar.setType(sourceExpression.getType.asInstanceOf[CollectionType].getElementType)
+	                  oce.setSource(factory.createVariableExp(iteratorVar))
+				   					oce.setOclLibrary(oclLibrary)
+				   					factory.createIteratorExp(sourceExpression, "collect", oce, iteratorVar)
+	                } else {
+				   					val oce = ExpressionsFactory.INSTANCE.createOperationCallExp
+				   					oce.setReferredOperation(operation)	
+				   					argumentsEOcl.foreach {arg =>
+				   					  oce.getArgument.add(arg.open_!)
+				   					}
+	                	if (!sourceExpression.getType.isInstanceOf[CollectionType] && multipleNavigationCall)
+				   						// implicit asSet()
+				   						oce.setSource(sourceExpression.withAsSet)
+				   					else
+				   						oce.setSource(sourceExpression)
+				   					oce.setOclLibrary(oclLibrary)
+				   					oce
+	                }
+	              }
+		          }
+	          }
+	        }
         }
       }
       
