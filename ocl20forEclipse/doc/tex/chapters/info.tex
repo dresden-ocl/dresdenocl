@@ -33,48 +33,48 @@ The current OCL 2.2 specification \cite{spec:OCL2-2} contains some inconsistenci
 
 \begin{table}
 	\centering
-		\begin{tabular}{|p{1.2cm}p{1.2cm}||p{1.2cm}|p{1.2cm}|p{1.2cm}|p{2.0cm}|}
+		\begin{tabular}{|p{1.2cm}p{1.2cm}||p{1.2cm}|p{1.2cm}|p{1.2cm}|p{1.2cm}|p{2.0cm}|}
 			\hline
-      \textbf{a}         & \textbf{b}         & \textbf{not a}   & \textbf{a or b}  & \textbf{a and b} & \textbf{a implies b} \\
+      \textbf{a}	& \textbf{b}	& \textbf{not a}	& \textbf{a or b}	& \textbf{a xor b} 	& \textbf{a and b}	& \textbf{a implies b} \\
 			\hline
-			false			&	false			&	true		&	false		&	false		&	true \\
+			false				&	false				&	true						&	false						& false							&	false							&	true \\
+			\hline	
+			false				&	true				&	-								&	true						& true							&	false							&	true \\
 			\hline
-			false			&	true			&	true		&	true		&	false		&	true \\
+			false				&	null				&	-								&	invalid					& invalid						&	false							&	true \\
 			\hline
-			false			&	null	&	true		&	invalid	&	false		&	true \\
+			false				&	invalid			&	-								&	invalid					& invalid						&	false							&	true \\
 			\hline
-			false			&	invalid		&	true		&	invalid	&	false		&	true \\
+			true				&	false				&	false						&	true						& true							&	false							&	false \\
 			\hline
-			true			&	false			&	false		&	true		&	false		&	false \\
+			true				&	true				&	-								&	true						& false							&	true							&	true \\
 			\hline
-			true			&	true			&	false		&	true		&	true		&	true \\
+			true				&	null				&	-								&	true						& invalid						&	invalid						&	invalid \\
 			\hline
-			true			&	null	&	false		&	true		&	invalid	&	invalid \\
+			true				&	invalid			&	-								&	true						& invalid						&	invalid						&	invalid \\
 			\hline
-			true			&	invalid		&	false		&	true		&	invalid	&	invalid \\
+			null				&	false				&	invalid					&	invalid					& invalid						&	false							&	invalid \\
 			\hline
-			null	&	false			&	invalid	&	invalid	&	false		&	invalid \\
+			null				&	true				&	-								&	true						& invalid						&	invalid						&	invalid \\
 			\hline
-			null	&	true			&	invalid	&	true		&	invalid	&	invalid \\
+			null				&	null				&	-								&	invalid					& invalid						&	invalid						&	invalid \\
 			\hline
-			null	&	null	&	invalid	&	invalid	&	invalid	&	invalid \\
+			null				& invalid			&	-								&	invalid					& invalid						&	invalid						&	invalid \\
 			\hline
-			null	& invalid		&	invalid	&	invalid	&	invalid	&	invalid \\
+			invalid			& false				&	invalid					&	invalid					& invalid						&	false							&	invalid \\
 			\hline
-			invalid		& false			&	invalid	&	invalid	&	false		&	invalid \\
+			invalid			&	true				&	-								&	true						& invalid						&	invalid						&	invalid \\
 			\hline
-			invalid		&	true			&	invalid	&	true		&	invalid	&	invalid \\
+			invalid			&	null				&	-								&	invalid					& invalid						&	invalid						&	invalid \\
 			\hline
-			invalid		&	null	&	invalid	&	invalid	&	invalid	&	invalid \\
-			\hline
-			invalid		&	invalid		&	invalid	&	invalid	& invalid	&	invalid \\
+			invalid			&	invalid			&	-								&	invalid					& invalid						& invalid						&	invalid \\
 			\hline
 		\end{tabular}
 		\caption{Decision Table for boolean operators in Dresden OCL.}
 		\label{tab:decisionTable}
 \end{table}
 
-Boolean operators in DresdenOCL are interpreted as documented in Table \ref{tab:decisionTable}. As documented, the operator \code{and} always results in \code{false} as long as one of its operands is \code{false}, ignoring whether the other operand is \code{null} or even \code{invalid}. The operator \code{or} results in \code{true}, as long as one of its operands is \code{true}. Both \code{false implies null} and \code{false implies invalid} result in \code{true}.
+Boolean operators in DresdenOCL are interpreted as documented in Table \ref{tab:decisionTable}. As documented, the operator \code{and} always results in \code{false} as long as one of its operands is \code{false}, ignoring whether the other operand is \code{null} or even \code{invalid}. The operator \code{or} results in \code{true}, as long as one of its operands is \code{true}. Both \code{false implies null} and \code{false implies invalid} result in \code{true}. The operator \code{xor} can only be evaluated if both arguments are nor \code{null} nor \code{invalid}. Otherwise the operand will result in \}
 
 
 \subsubsection{Equality in DresdenOCL}
