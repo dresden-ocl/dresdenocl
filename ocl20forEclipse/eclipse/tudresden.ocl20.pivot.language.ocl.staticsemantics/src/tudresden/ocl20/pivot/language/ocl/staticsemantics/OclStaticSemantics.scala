@@ -352,7 +352,7 @@ trait OclStaticSemantics extends ocl.semantics.OclAttributeMaker with pivotmodel
   private def lookupOperationOnType(tipe : Type, identifier : String, 
                                     parameters : List[Parameter], element : EObject,
                                     warning: Box[String]) : Box[List[Operation]] = {
-    (!!(tipe.lookupOperation(identifier, parameters.map(_.getType))) ?~
+    (!!(tipe.lookupOperation(identifier, parameters.map(determineMultiplicityElementType(_)))) ?~
     			("Cannot find operation " + identifier + " with parameters " + 
           parameters + " on type " + 
           tipe))
@@ -1064,13 +1064,15 @@ trait OclStaticSemantics extends ocl.semantics.OclAttributeMaker with pivotmodel
                 Full(true)
               typeConformance.flatMap{_ =>
                 val collectionKind = ct match {
-	                case b : BagType => CollectionKind.BAG
-	                case s : SetType => CollectionKind.SET
-	                case s : SequenceType => CollectionKind.SEQUENCE
-	                case o : OrderedSetType => CollectionKind.ORDERED_SET
-	                case c : CollectionType => CollectionKind.COLLECTION
+	                case b : BagType => Full(CollectionKind.BAG)
+	                case s : SetType => Full(CollectionKind.SET)
+	                case s : SequenceType => Full(CollectionKind.SEQUENCE)
+	                case o : OrderedSetType => Full(CollectionKind.ORDERED_SET)
+	                case c : CollectionType => yieldFailure("'Collection' cannot be initialised.", c)
 	              }
-	              Full(factory.createCollectionLiteralExp(collectionKind, unboxedLiteralParts.toArray : _*))
+                collectionKind.flatMap{collectionKind =>
+	              	Full(factory.createCollectionLiteralExp(collectionKind, unboxedLiteralParts.toArray : _*))
+	              }
               }
             }
           }
