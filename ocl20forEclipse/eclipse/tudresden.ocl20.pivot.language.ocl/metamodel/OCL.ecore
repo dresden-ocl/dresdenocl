@@ -93,7 +93,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="typeName" eType="#//TypeCS"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="IteratorExpCS" abstract="true" eSuperTypes="#//LoopExpCS">
+  <eClassifiers xsi:type="ecore:EClass" name="IteratorExpCS" eSuperTypes="#//LoopExpCS #//ImplicitFeatureCallCS">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="iteratorName" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="iteratorVariables" upperBound="2"
@@ -101,11 +101,14 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="bodyExpression" lowerBound="1"
         eType="#//OclExpressionCS" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="IteratorExpWithSourceCS" eSuperTypes="#//IteratorExpCS">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1"
+  <eClassifiers xsi:type="ecore:EClass" name="IterateExpCS" eSuperTypes="#//LoopExpCS #//ImplicitFeatureCallCS">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="iteratorVariable" lowerBound="1"
+        eType="#//IteratorExpVariableCS" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="resultVariable" lowerBound="1"
+        eType="#//VariableDeclarationWithInitCS" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="bodyExpression" lowerBound="1"
         eType="#//OclExpressionCS" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ImplicitIteratorExpCS" eSuperTypes="#//ImplicitFeatureCallCS #//IteratorExpCS"/>
   <eClassifiers xsi:type="ecore:EClass" name="FeatureCallExpCS" abstract="true" eSuperTypes="#//CallExpCS"/>
   <eClassifiers xsi:type="ecore:EClass" name="NavigationCallExp" eSuperTypes="#//FeatureCallExpCS">
     <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1"

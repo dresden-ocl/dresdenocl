@@ -142,7 +142,9 @@ RULES {
 	
 	ImplicitPropertyCallCS				::= property[SIMPLE_NAME] (#0 isMarkedPre[IS_MARKED_PRE])?;
 	
-	ImplicitIteratorExpCS				::= iteratorName[ITERATOR_NAME] #0 "(" (#0 iteratorVariables (#0 "," iteratorVariables)? "|")? !1 bodyExpression !0 ")";
+	IteratorExpCS						::= iteratorName[ITERATOR_NAME] #0 "(" (#0 iteratorVariables (#0 "," iteratorVariables)? "|")? !1 bodyExpression !0 ")";
+	
+	IterateExpCS						::= "iterate" #0 "(" iteratorVariable #0 ";" resultVariable "|" bodyExpression #0 ")";
 	
 	IteratorExpVariableCS				::= variableName (":" typeName)?;
 	

@@ -78,10 +78,11 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//IteratorExpCS/iteratorVariables"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//IteratorExpCS/bodyExpression"/>
     </genClasses>
-    <genClasses ecoreClass="OCL.ecore#//IteratorExpWithSourceCS">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//IteratorExpWithSourceCS/source"/>
+    <genClasses ecoreClass="OCL.ecore#//IterateExpCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//IterateExpCS/iteratorVariable"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//IterateExpCS/resultVariable"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//IterateExpCS/bodyExpression"/>
     </genClasses>
-    <genClasses ecoreClass="OCL.ecore#//ImplicitIteratorExpCS"/>
     <genClasses image="false" ecoreClass="OCL.ecore#//FeatureCallExpCS"/>
     <genClasses ecoreClass="OCL.ecore#//NavigationCallExp">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//NavigationCallExp/source"/>

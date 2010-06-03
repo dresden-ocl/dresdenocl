@@ -467,12 +467,16 @@ trait OclStaticSemantics extends ocl.semantics.OclAttributeMaker with pivotmodel
     childAttr {
       case child : AttributableEObject => {
         case null => Full(List())
+        
         case c@ClassifierContextDeclarationCS(typeCS, _) if child != typeCS =>
           for (self <- child->self) yield List(self)
+        
         case o@OperationContextDeclarationCS(operation, _) if child != operation =>
           for (self <- child->self) yield List(self)
+        
         case a : AttributeContextDeclarationCS =>
           for (self <- child->self) yield List(self)
+        
         case p : PostConditionDeclarationCS => {
           (p->context).flatMap {context =>
 	          context match {
@@ -489,24 +493,19 @@ trait OclStaticSemantics extends ocl.semantics.OclAttributeMaker with pivotmodel
             
           }
         }
+        
         case l@LetExpCS(variableDeclarations, _) if !variableDeclarations.contains(child.getEObject) => {
           (l->variables).flatMap{otherVars =>
 	          Full(variableDeclarations.flatMap{vd =>
 	            (vd.getInitialization->computeOclExpression).flatMap{initExp =>
-	              if (vd.getTypeName != null) {
-		              (vd.getTypeName->oclType).flatMap{tipe =>
-			              if (!tipe.conformsTo(initExp.getType))
-			              	yieldFailure("Expected type " + tipe.getName + ", but found " + initExp.getType.getName, vd)
-			              else 
-			              	Full(factory.createVariable(vd.getVariableName.getSimpleName, tipe, initExp))
-			            }
-	              }
-	              else
-	                Full(factory.createVariable(vd.getVariableName.getSimpleName, initExp.getType, initExp))
-	            }
+		            checkVariableDeclarationType(vd).flatMap{tipe =>
+		              Full(factory.createVariable(vd.getVariableName.getSimpleName, tipe, initExp))
+		            }
+		          }
 	          }:::otherVars)
           }
         }
+        
         case i@IteratorExpCS(iteratorVariables, _, _) => {
           (i->variables).flatMap{otherVars =>
 	          Full(iteratorVariables.flatMap{iv =>
@@ -526,6 +525,31 @@ trait OclStaticSemantics extends ocl.semantics.OclAttributeMaker with pivotmodel
 	          }:::otherVars)
           }
         }
+        
+        case i@IterateExpCS(iteratorVariable, resultVariable, _) => {
+          (i->variables).flatMap{otherVars =>
+            (i->sourceExpression).flatMap{se =>
+              if (iteratorVariable.getTypeName != null) {
+	              (iteratorVariable.getTypeName->oclType).flatMap{tipe =>
+		              if (!tipe.conformsTo(se.getType.asInstanceOf[CollectionType].getElementType))
+		              	yieldFailure("Expected type " + tipe.getName + ", but found " + 
+                                se.getType.asInstanceOf[CollectionType].getElementType.getName, iteratorVariable)
+		              else
+		              	Full(factory.createVariable(iteratorVariable.getVariableName.getSimpleName, tipe, null))
+		            }
+              }
+              else
+                Full(factory.createVariable(iteratorVariable.getVariableName.getSimpleName, se.getType.asInstanceOf[CollectionType].getElementType, null))
+            }.flatMap{iv =>
+              (resultVariable.getInitialization->computeOclExpression).flatMap{initExp =>
+	              checkVariableDeclarationType(resultVariable).flatMap{tipe =>
+	              	Full(factory.createVariable(resultVariable.getVariableName.getSimpleName, tipe, initExp)::iv::otherVars)
+	              }
+              }
+            }
+          }
+        }
+        
         case passOn => passOn->variables
       }
     }
@@ -816,20 +840,11 @@ trait OclStaticSemantics extends ocl.semantics.OclAttributeMaker with pivotmodel
       
       case v@VariableDeclarationWithInitCS(variableName, typeName, initialization, _) => {
         (initialization->computeOclExpression).flatMap{oclExpressionEOcl =>
-          val typeConformance = if (typeName != null) {
-            (typeName->oclType).flatMap{t =>
-              if (!oclExpressionEOcl.getType.conformsTo(t))
-                yieldFailure("Expected type " + t.getName + ", but found " + oclExpressionEOcl.getType.getName, v)
-              else
-                Full(true)
-            }
-          } else
-            Full(true)
-          typeConformance.flatMap {_ =>
+          checkVariableDeclarationType(v).flatMap {tipe =>
 	          val property = PivotModelFactory.eINSTANCE.createProperty
 			      property.setName(variableName.getSimpleName)
 			      // TODO: does not work yet for nested collections
-			      determineMultiplicities(oclExpressionEOcl.getType, property)
+			      determineMultiplicities(tipe, property)
 			      (v->self).flatMap{self =>
 			      	self.getType.allProperties.find(_.getName == property.getName) match {
 			      	  case Some(p) => yieldFailure("Property " + p.getName + " is already defined on " + 
@@ -1042,35 +1057,39 @@ trait OclStaticSemantics extends ocl.semantics.OclAttributeMaker with pivotmodel
         }
       }
       
-      case i@ImplicitIteratorExpCS(iteratorVariables, bodyExpression, iteratorName) => {
+      case i@IteratorExpCS(iteratorVariables, bodyExpression, iteratorName) => {
         (i->sourceExpression).flatMap{se =>
 	        (bodyExpression->computeOclExpression).flatMap{bodyEOcl =>
-	          val iteratorVariablesEOcl = iteratorVariables.map{iv =>
-             	val iterType = se.getType.asInstanceOf[CollectionType].getElementType
-	            if (iv.getTypeName != null) {
-             	  (iv.getTypeName->oclType).flatMap{tipe =>
-                  if (!tipe.conformsTo(iterType))
-                    yieldFailure("Expected type " + tipe.getName + ", but found " + iterType.getName, iv)
-                  else
-                    Full(factory.createVariable(iv.getVariableName.getSimpleName, tipe, null))
-                }
-             	}
-              else {
-                Full(factory.createVariable(iv.getVariableName.getSimpleName, iterType, null))
-              }
-	          }
-           	iteratorVariablesEOcl.find(!_.isDefined) match {
-           		case Some(_) => Empty
-           		case None => {
-           		  val iteratorExp = factory.createIteratorExp(se, iteratorName, bodyEOcl, iteratorVariablesEOcl.flatten(i => i).toArray : _*)
-           		  // triggers WFR checks in EssentialOcl -> if WFRException is thrown yield a Failure
-           		  try {
-           		    iteratorExp.getType
-           		    Full(iteratorExp)
-           		  } catch {
-           		    case e: WellformednessException => yieldFailure(e.getMessage, i)
-           		  }
-           		}
+	          (bodyExpression->variables).flatMap {iteratorVariablesEOcl =>
+         		  val iteratorNames = iteratorVariables.map(_.getVariableName.getSimpleName)
+	            val iteratorExp = factory.createIteratorExp(se, iteratorName, bodyEOcl, 
+         		  				iteratorVariablesEOcl.filter(iv => iteratorNames.contains(iv.getName)).toArray : _*)
+         		  // triggers WFR checks in EssentialOcl -> if WFRException is thrown yield a Failure
+         		  try {
+         		    iteratorExp.getType
+         		    Full(iteratorExp)
+         		  } catch {
+         		    case e: WellformednessException => yieldFailure(e.getMessage, i)
+         		  }
+            }
+	        }
+        }
+      }
+      
+      case i@IterateExpCS(iteratorVariable, resultVariable, bodyExpression) => {
+        (i->sourceExpression).flatMap{se =>
+	        (bodyExpression->computeOclExpression).flatMap{bodyEOcl =>
+	          (bodyExpression->variables).flatMap {iteratorVariablesEOcl =>
+	            val iteratorExp = factory.createIterateExp(se, bodyEOcl, 
+	            				iteratorVariablesEOcl.find(iv => resultVariable.getVariableName.getSimpleName == iv.getName).get,
+         		  				iteratorVariablesEOcl.filter(iv => iteratorVariable.getVariableName.getSimpleName == iv.getName).toArray : _*)
+         		  // triggers WFR checks in EssentialOcl -> if WFRException is thrown yield a Failure
+         		  try {
+         		    iteratorExp.getType
+         		    Full(iteratorExp)
+         		  } catch {
+         		    case e: WellformednessException => yieldFailure(e.getMessage, i)
+         		  }
             }
 	        }
         }
@@ -1124,17 +1143,8 @@ trait OclStaticSemantics extends ocl.semantics.OclAttributeMaker with pivotmodel
         variableDeclarations.foldRight (oclExpression->computeOclExpression) {(vd1, vd2) =>
         	vd2.flatMap{vd2 =>
         	  (vd1.getInitialization->computeOclExpression).flatMap{initExp =>
-        	  	if (vd1.getTypeName != null) {
-	        	    (vd1.getTypeName->oclType).flatMap{tipe =>
-	        	      if (!initExp.getType.conformsTo(tipe))
-	        	      	yieldFailure("Expected type " + initExp.getType.getName + ", but found " + tipe.getName, vd1)
-	        	      else {
-		        	  		val variable = factory.createVariable(vd1.getVariableName.getSimpleName, tipe, initExp)
-		        	  		Full(factory.createLetExp(variable, vd2))
-	        	      }
-	        	  	}
-        	  	} else {
-        	  	  val variable = factory.createVariable(vd1.getVariableName.getSimpleName, initExp.getType, initExp)
+        	  	checkVariableDeclarationType(vd1).flatMap{tipe =>
+        	  	  val variable = factory.createVariable(vd1.getVariableName.getSimpleName, tipe, initExp)
 		        	  Full(factory.createLetExp(variable, vd2))
         	  	}
             }
@@ -1226,6 +1236,24 @@ trait OclStaticSemantics extends ocl.semantics.OclAttributeMaker with pivotmodel
     }
     else
       multiplicityElement.getType
+  }
+  
+  private def checkVariableDeclarationType(vd : VariableDeclarationWithInitCS) : Box[Type] = {
+    if (vd.getTypeName != null) {
+      (vd.getTypeName->oclType).flatMap{tipe =>
+        (vd.getInitialization->computeOclExpression).flatMap{initExp =>
+	        if (!initExp.getType.conformsTo(tipe))
+	        	yieldFailure("Expected type " + tipe.getName + ", but found " + 
+	                        initExp.getType.getName, vd)
+	        else
+	          Full(tipe)
+        }
+      }
+    }
+    else
+      (vd.getInitialization->computeOclExpression).flatMap{initExp => 
+        Full(initExp.getType)
+      }
   }
   
   @throws(classOf[OclStaticSemanticsException])
