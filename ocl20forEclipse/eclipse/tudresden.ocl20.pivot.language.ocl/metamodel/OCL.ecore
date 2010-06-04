@@ -62,6 +62,12 @@
         upperBound="-1" eType="#//VariableDeclarationWithoutInitCS" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="LiteralExpCS" abstract="true" eSuperTypes="#//OclExpressionCS"/>
+  <eClassifiers xsi:type="ecore:EClass" name="EnumLiteralOrStaticPropertyExpCS" eSuperTypes="#//LiteralExpCS">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="typeName" lowerBound="1"
+        eType="#//TypePathNameCS" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="enumLiteralOrStaticProperty"
+        lowerBound="1" eType="ecore:EClass ../../tudresden.ocl20.pivot.pivotmodel/model/pivotmodel.ecore#//NamedElement"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CollectionLiteralExpCS" eSuperTypes="#//LiteralExpCS">
     <eStructuralFeatures xsi:type="ecore:EReference" name="collectionType" lowerBound="1"
         eType="#//CollectionTypeIdentifierCS" containment="true"/>

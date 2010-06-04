@@ -218,7 +218,6 @@ trait OclStaticSemantics extends ocl.semantics.OclAttributeMaker with pivotmodel
       }
     }
   
-  // TODO: add type lookup
   private val _resolveNamedElement : Tuple2[String, Boolean] => Attributable ==> Box[List[NamedElement]] = {
     paramAttr {
       case (identifier, fuzzy) => {
@@ -228,20 +227,38 @@ trait OclStaticSemantics extends ocl.semantics.OclAttributeMaker with pivotmodel
               val sourceType = sourceExpression.getType
               sourceExpression match {
                 case ve : VariableExp if ve.getReferredVariable.getName == "self" => {
-                  lookupVariable(identifier, aeo) match {
-	                  case Full(variable) => Full(List(variable))
-	                  case Empty | Failure(_, _, _) => 
-	                    lookupPropertyOnType(sourceType, identifier, false) match {
-	                      case Full(property) => Full(List(property)) 
-	                      case Empty | Failure(_, _, _) => {
-	                        (aeo->namespace).flatMap{namespace =>
-	                          lookup(identifier, namespace).flatMap{t =>
-                             	Full(List(t))
-	                          }
+                  aeo match {
+                    case e@EnumLiteralOrStaticPropertyExpCS(typeName) => {
+                      (typeName->oclType).flatMap{tipe =>
+                        tipe match {
+                          case enum : Enumeration => (!!(enum.lookupLiteral(identifier))).flatMap{lit =>
+                            Full(List(lit))
                           }
-	                      }
-	                    }
+                          case t : Type => lookupPropertyOnType(t, identifier, true).flatMap{p =>
+                            Full(List(p))
+                          }
+                        }
+                      }
+                    }
+                    case other => {
+                      lookupVariable(identifier, aeo) match {
+			                  case Full(variable) => Full(List(variable))
+			                  case Empty | Failure(_, _, _) => {
+			                    lookupPropertyOnType(sourceType, identifier, false) match {
+			                      case Full(property) => Full(List(property)) 
+			                      case Empty | Failure(_, _, _) => {
+			                        (aeo->namespace).flatMap{namespace =>
+			                          lookup(identifier, namespace).flatMap{t =>
+		                             	Full(List(t))
+			                          }
+		                          }
+			                      }
+			                    }
+			                  }
+		                  }
+                    }
                   }
+                  
                 }
                 case other => {
                   lookupPropertyOnType(sourceType, identifier, false).flatMap{p =>
@@ -1154,6 +1171,32 @@ trait OclStaticSemantics extends ocl.semantics.OclAttributeMaker with pivotmodel
       
       case BracketExpCS(oclExpression) => {
         oclExpression->computeOclExpression
+      }
+      
+      case e@EnumLiteralOrStaticPropertyExpCS(typeName) => {
+        val enumLitOrProp = e.getEnumLiteralOrStaticProperty
+        if (enumLitOrProp.eIsProxy)
+          yieldFailure("Cannot resolve enumeration literal or static property.", e)
+        else {
+          enumLitOrProp match {
+            case e : EnumerationLiteral => {
+              // TODO: move to EssentialOclFactory
+              val exp = ExpressionsFactory.INSTANCE.createEnumLiteralExp
+              exp.setReferredEnumLiteral(e)
+              exp.setOclLibrary(oclLibrary)
+              Full(exp)
+            }
+            case p : Property => {
+              // TODO: move to EssentialOclFactory
+              val pce = ExpressionsFactory.INSTANCE.createPropertyCallExp
+     					pce.setReferredProperty(p)
+     					pce.setSourceType(p.getOwningType)
+     					pce.setSource(factory.createTypeLiteralExp(p.getOwningType.getQualifiedNameList))
+     					pce.setOclLibrary(oclLibrary)
+     					Full(pce)
+            }
+          }
+        }
       }
       
   	  case unknown => {

@@ -88,9 +88,7 @@ RULES {
 	OperationDefinitionInDefCS			::= operation[SIMPLE_NAME] "(" (parameters ("," parameters)*)? ")" (":" returnType)?;
 	
 	ParameterCS							::= parameter[SIMPLE_NAME] ":" parameterType;
-	
-	@operator(type="unary_prefix", weight="2", identifier="OclExpressionCS")
-	LetExpCS							::= "let" variableDeclarations (#0 "," variableDeclarations)* "in" !1 oclExpression;
+
 	
 	// *** OperationCallExpCS: binary (infix) operations [A]***
 	@operator(type="binary_left_associative", weight="4", identifier="OclExpressionCS")
@@ -172,6 +170,9 @@ RULES {
 	
 	
 	@operator(type="primitive", weight="20", identifier="OclExpressionCS")
+	EnumLiteralOrStaticPropertyExpCS	::= typeName "::" enumLiteralOrStaticProperty[SIMPLE_NAME];
+	
+	@operator(type="primitive", weight="20", identifier="OclExpressionCS")
 	TupleLiteralExpCS					::= "Tuple" "{" variableDeclarations "}";
 		
 	@operator(type="primitive", weight="20", identifier="OclExpressionCS")
@@ -200,6 +201,10 @@ RULES {
 	
 	@operator(type="primitive", weight="20", identifier="OclExpressionCS")
 	PropertyCallOnSelfExpCS				::= property[SIMPLE_NAME] #0 isMarkedPre[IS_MARKED_PRE];
+	
+	
+	@operator(type="primitive", weight="20", identifier="OclExpressionCS")
+	LetExpCS							::= "let" variableDeclarations (#0 "," variableDeclarations)* "in" !1 oclExpression !0;
 	
 	
 	@operator(type="primitive", weight="20", identifier="OclExpressionCS")

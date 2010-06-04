@@ -51,6 +51,10 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//VariableDeclarationWithoutInitListCS/variableDeclarations"/>
     </genClasses>
     <genClasses image="false" ecoreClass="OCL.ecore#//LiteralExpCS"/>
+    <genClasses ecoreClass="OCL.ecore#//EnumLiteralOrStaticPropertyExpCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//EnumLiteralOrStaticPropertyExpCS/typeName"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference OCL.ecore#//EnumLiteralOrStaticPropertyExpCS/enumLiteralOrStaticProperty"/>
+    </genClasses>
     <genClasses ecoreClass="OCL.ecore#//CollectionLiteralExpCS">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//CollectionLiteralExpCS/collectionType"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//CollectionLiteralExpCS/collectionLiteralParts"/>
