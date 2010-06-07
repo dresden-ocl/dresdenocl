@@ -128,7 +128,7 @@ public aspect ConstraintASMComputation {
 		// Create a new property with the computed name and type.
 		Property property = null;
 		try {
-			property = PivotModelFactory.INSTANCE.createProperty();
+			property = PivotModelFactory.eINSTANCE.createProperty();
 		}
 		catch(Throwable th) {
 			String message = th.getMessage() + " A property could not be built.";
@@ -214,7 +214,7 @@ public aspect ConstraintASMComputation {
 		// Create an operation.
 		Operation operation = null;
 		try {
-			operation = PivotModelFactory.INSTANCE.createOperation();
+			operation = PivotModelFactory.eINSTANCE.createOperation();
 		}
 		catch(Throwable th) {
 			String message = th.getMessage() + " An operation could not be built by the pivot model factory.";
@@ -235,7 +235,7 @@ public aspect ConstraintASMComputation {
 			
 			/*Parameter param = null;
 			try {
-				param = PivotModelFactory.INSTANCE.createParameter();
+				param = PivotModelFactory.eINSTANCE.createParameter();
 			}
 			catch(Throwable th) {
 				String message = th.getMessage() + " A paramter could not be built by the pivot model factory.";
@@ -258,7 +258,7 @@ public aspect ConstraintASMComputation {
 		 */
 		Parameter resultParameter = null;
 		try {
-			resultParameter = PivotModelFactory.INSTANCE.createParameter();
+			resultParameter = PivotModelFactory.eINSTANCE.createParameter();
 		}
 		catch(Throwable th) {
 			String message = th.getMessage() + " A result parameter could not be built by the pivot model factory.";
