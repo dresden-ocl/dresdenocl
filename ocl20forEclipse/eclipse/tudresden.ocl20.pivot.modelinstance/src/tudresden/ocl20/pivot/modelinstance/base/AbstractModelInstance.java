@@ -301,7 +301,6 @@ public abstract class AbstractModelInstance implements IModelInstance {
 	 * tudresden.ocl20.pivot.modelinstance.IModelInstance#removeModelInstanceElement
 	 * (tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceObject)
 	 */
-	@Override
 	public void removeModelInstanceElement(IModelInstanceObject imiObject) {
 
 		Set<IModelInstanceObject> objectsByType;
