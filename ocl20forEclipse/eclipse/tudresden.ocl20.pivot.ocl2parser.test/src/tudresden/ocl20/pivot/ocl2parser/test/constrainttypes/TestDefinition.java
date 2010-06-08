@@ -175,87 +175,6 @@ public class TestDefinition {
 	 * </p>
 	 */
 	@Test(expected = ParseException.class)
-	public void testDefinitionNegative01() throws Exception {
-
-		TestPerformer testPerformer;
-
-		String modelFileName;
-		String oclFileName;
-
-		oclFileName = "constrainttypes/defNegative01.ocl";
-		modelFileName = "testmodel.uml";
-
-		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllConstraintTypeTests.META_MODEL_ID,
-						AllConstraintTypeTests.MODEL_BUNDLE,
-						AllConstraintTypeTests.MODEL_DIRECTORY);
-		testPerformer.setModel(modelFileName);
-
-		/* Try to parse the constraint file. */
-		testPerformer.parseFile(oclFileName);
-	}
-
-	/**
-	 * <p>
-	 * A test case to parse an definition that should not be parsed appropriately.
-	 * </p>
-	 */
-	@Test(expected = ParseException.class)
-	public void testDefinitionNegative02() throws Exception {
-
-		TestPerformer testPerformer;
-
-		String modelFileName;
-		String oclFileName;
-
-		oclFileName = "constrainttypes/defNegative02.ocl";
-		modelFileName = "testmodel.uml";
-
-		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllConstraintTypeTests.META_MODEL_ID,
-						AllConstraintTypeTests.MODEL_BUNDLE,
-						AllConstraintTypeTests.MODEL_DIRECTORY);
-		testPerformer.setModel(modelFileName);
-
-		/* Try to parse the constraint file. */
-		testPerformer.parseFile(oclFileName);
-	}
-
-	/**
-	 * <p>
-	 * A test case to parse an definition that should not be parsed appropriately.
-	 * </p>
-	 */
-	@Test(expected = ParseException.class)
-	public void testDefinitionNegative03() throws Exception {
-
-		TestPerformer testPerformer;
-
-		String modelFileName;
-		String oclFileName;
-
-		oclFileName = "constrainttypes/defNegative03.ocl";
-		modelFileName = "testmodel.uml";
-
-		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllConstraintTypeTests.META_MODEL_ID,
-						AllConstraintTypeTests.MODEL_BUNDLE,
-						AllConstraintTypeTests.MODEL_DIRECTORY);
-		testPerformer.setModel(modelFileName);
-
-		/* Try to parse the constraint file. */
-		testPerformer.parseFile(oclFileName);
-	}
-
-	/**
-	 * <p>
-	 * A test case to parse an definition that should not be parsed appropriately.
-	 * </p>
-	 */
-	@Test(expected = ParseException.class)
 	public void testDefinitionNegative04() throws Exception {
 
 		TestPerformer testPerformer;
@@ -318,33 +237,6 @@ public class TestDefinition {
 		String oclFileName;
 	
 		oclFileName = "constrainttypes/defNegative06.ocl";
-		modelFileName = "testmodel.uml";
-	
-		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllConstraintTypeTests.META_MODEL_ID,
-						AllConstraintTypeTests.MODEL_BUNDLE,
-						AllConstraintTypeTests.MODEL_DIRECTORY);
-		testPerformer.setModel(modelFileName);
-	
-		/* Try to parse the constraint file. */
-		testPerformer.parseFile(oclFileName);
-	}
-
-	/**
-	 * <p>
-	 * A test case to parse an definition that should not be parsed appropriately.
-	 * </p>
-	 */
-	@Test(expected = ParseException.class)
-	public void testDefinitionNegative07() throws Exception {
-	
-		TestPerformer testPerformer;
-	
-		String modelFileName;
-		String oclFileName;
-	
-		oclFileName = "constrainttypes/defNegative07.ocl";
 		modelFileName = "testmodel.uml";
 	
 		/* Try to get the TestPerformer. */

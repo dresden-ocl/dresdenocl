@@ -1,7 +1,0 @@
-package package1::package2
-
--- Should fail. The type is missing.
-context Type1
-def: anotherInteger = 42
-
-endpackage

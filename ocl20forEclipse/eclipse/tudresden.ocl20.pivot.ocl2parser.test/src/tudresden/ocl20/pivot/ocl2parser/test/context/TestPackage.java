@@ -21,7 +21,6 @@ package tudresden.ocl20.pivot.ocl2parser.test.context;
 
 import org.junit.Test;
 
-import tudresden.ocl20.pivot.ocl2parser.parser.exceptions.SemanticException;
 import tudresden.ocl20.pivot.ocl2parser.test.TestPerformer;
 import tudresden.ocl20.pivot.parser.ParseException;
 
@@ -104,33 +103,6 @@ public class TestPackage {
 		String oclFileName;
 
 		oclFileName = "context/packagePositive03.ocl";
-		modelFileName = "testmodel.uml";
-
-		/* Try to get the TestPerformer. */
-		testPerformer = TestPerformer.getInstance(
-				AllContextTests.META_MODEL_ID, AllContextTests.MODEL_BUNDLE,
-				AllContextTests.MODEL_DIRECTORY);
-		testPerformer.setModel(modelFileName);
-
-		/* Try to parse the constraint file. */
-		testPerformer.parseFile(oclFileName);
-	}
-
-	/**
-	 * <p>
-	 * A test case to check that the package declaration is parsed
-	 * appropriately.
-	 * </p>
-	 */
-	@Test(expected = SemanticException.class)
-	public void testPackageNegative01() throws Exception {
-
-		TestPerformer testPerformer;
-
-		String modelFileName;
-		String oclFileName;
-
-		oclFileName = "context/packageNegative01.ocl";
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */

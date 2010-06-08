@@ -23,7 +23,6 @@ import org.junit.Test;
 
 import tudresden.ocl20.pivot.ocl2parser.parser.exceptions.SemanticException;
 import tudresden.ocl20.pivot.ocl2parser.test.TestPerformer;
-import tudresden.ocl20.pivot.parser.ParseException;
 
 /**
  * <p>
@@ -90,18 +89,18 @@ public class TestLetExpressions {
 
 	/**
 	 * <p>
-	 * A test case to check that a LetExpression is not parsed appropriately.
+	 * A test case to check that a LetExpression is parsed appropriately.
 	 * </p>
 	 */
-	@Test(expected = ParseException.class)
-	public void testLetNegative01() throws Exception {
+	@Test
+	public void testLetPositive03() throws Exception {
 
 		TestPerformer testPerformer;
 
 		String modelFileName;
 		String oclFileName;
 
-		oclFileName = "expressions/letNegative01.ocl";
+		oclFileName = "expressions/letPositive03.ocl";
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */

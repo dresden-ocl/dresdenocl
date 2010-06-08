@@ -690,32 +690,6 @@ public class TestContext {
 	 * </p>
 	 */
 	@Test(expected = SemanticException.class)
-	public void testContextNegative10() throws Exception {
-
-		TestPerformer testPerformer;
-
-		String modelFileName;
-		String oclFileName;
-
-		oclFileName = "context/contextNegative10.ocl";
-		modelFileName = "testmodel.uml";
-
-		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllContextTests.META_MODEL_ID,
-						AllContextTests.MODEL_BUNDLE, AllContextTests.MODEL_DIRECTORY);
-		testPerformer.setModel(modelFileName);
-
-		/* Try to parse the constraint file. */
-		testPerformer.parseFile(oclFileName);
-	}
-
-	/**
-	 * <p>
-	 * A test case to parse a context that should not be parsed appropriately.
-	 * </p>
-	 */
-	@Test(expected = SemanticException.class)
 	public void testContextNegative11() throws Exception {
 
 		TestPerformer testPerformer;

@@ -1,4 +1,0 @@
--- Only absolute packages should be parsed.
-package package2
-
-endpackage
