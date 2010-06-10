@@ -267,6 +267,8 @@ public class UML2Model extends AbstractModel implements IModel {
 		for (EObject eObject : EcoreUtil.ExternalCrossReferencer.find(resource)
 				.keySet()) {
 
+			EcoreUtil.resolveAll(eObject);
+
 			/* Check the containing package of each EClassifier. */
 			if (eObject instanceof Classifier) {
 
@@ -303,6 +305,37 @@ public class UML2Model extends AbstractModel implements IModel {
 					// no else.
 				}
 			}
+
+			/*
+			 * Else check if the EObject is a package (can be imported via
+			 * import statement in UML.
+			 */
+			if (eObject instanceof Package) {
+
+				Package importedPackage;
+				importedPackage = (Package) eObject;
+
+				if (importedPackage.getNestingPackage() == null
+						|| importedPackage.getNestingPackage() instanceof Model
+						|| importedPackage.getNestingPackage() instanceof Profile) {
+
+					if (!rootPackage.getNestedPackages().contains(
+							importedPackage)
+							&& !packagesToBeAdded.contains(importedPackage)
+							&& !importedPackage.equals(rootPackage)) {
+
+						/*
+						 * Do not add the package directly because a copy is
+						 * required. Afterwards, the containment check fails for
+						 * the copy and the package may be added multiple times.
+						 */
+						packagesToBeAdded.add(importedPackage);
+					}
+					// no else.
+
+				}
+				// no else.
+			}
 			// no else.
 		}
 
@@ -311,8 +344,12 @@ public class UML2Model extends AbstractModel implements IModel {
 		 * bi-directional references.
 		 */
 		for (Package umlPackage : packagesToBeAdded) {
-			rootPackage.getNestedPackages().add(
-					(Package) EcoreUtil.copy(umlPackage));
+			/*
+			 * FIXME Claas: The copy leads to duplicates of cyclic referenced
+			 * types having a wrong root name space.
+			 */
+			((Package) EcoreUtil.copy(umlPackage))
+					.setNestingPackage(rootPackage);
 		}
 		// end for.
 
@@ -328,6 +365,10 @@ public class UML2Model extends AbstractModel implements IModel {
 			if (!(classfier instanceof PrimitiveType)
 					|| rootPackage.getOwnedType(((PrimitiveType) classfier)
 							.getName()) == null) {
+				/*
+				 * FIXME Claas: The copy leads to duplicates of cyclic
+				 * referenced types having a wrong root name space.
+				 */
 				rootPackage.getOwnedTypes().add(
 						(Classifier) EcoreUtil.copy(classfier));
 			}
@@ -500,6 +541,9 @@ public class UML2Model extends AbstractModel implements IModel {
 
 		}
 		// no else.
+
+		/* Resolve all probably contained proxies of the resource. */
+		EcoreUtil.resolveAll(resource);
 
 		/* Get the root packages. */
 		rootPackages = resource.getContents();
