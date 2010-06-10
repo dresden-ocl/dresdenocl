@@ -175,7 +175,23 @@ DresdenOCL allows to import Ecore models modelled with the \emph{\acf{EMF}}. Typ
 
 DresdenOCL supports to import Java classes as models and thus to define \acs{OCL} constraints directly on Java types and their fields and methods. If a Java class is imported into DresdenOCL, all types used inside the class' declaration are handled as also being a part of the imported model. If a \code{ClassA} is imported into DresdenOCL containing an attribute of the type \code{ClassB}, \code{ClassB} is also imported into DresdenOCL. \code{ClassB} could contain an operation having the return type \code{ClassC} and thus \code{ClassC} could be imported as well. After short consideration it should be clear that such a transitive mechanism could lead to a more or less complete import of the Java standard library into DresdenOCL. Thus, only the types that are used during OCL parsing and evaluation are imported into DresdenOCL.
 
-If a \code{ClassA} is imported into DresdenOCL, the type of \code{ClassA} and all types that are directly related to this class are imported as well. E.g., a \code{ClassB} used in a property of \code{ClassA} would be imported, a related \code{ClassC} used in \code{ClassB} would not be imported (see Figure \ref{fig:info:transitiveTypeImport}). If other types are requested during the work of tools on the imported model (e.g., if a tool requests the operation \code{ClassB.getOwnedOperations()}, all newly required types will be imported as well. This deferred transitive adaptation mechanism avoids that all types never used inside DresdenOCL are imported and adapted and cause overhead and maintenance problems.
+\begin{figure}[t]
+\lstset{language=Java, label={lst:javaModelProvider}, caption={Example for a Java Model Provider Class.}, captionpos=b}
+\begin{lstlisting}
+package tudresden.ocl20.pivot.examples.simple;
+
+public class ModelProviderClass {
+
+  protected Person person;
+
+  protected Professor professor;
+
+  protected Student student;
+}
+\end{lstlisting}
+\end{figure}
+
+If a \code{ClassA} is imported into DresdenOCL, the type of \code{ClassA} and all types that are directly related to this class are imported as well. E.g., a \code{ClassB} used in a property of \code{ClassA} would be imported, a related \code{ClassC} used in \code{ClassB} would not be imported (see Figure \ref{fig:info:transitiveTypeImport}). If other types are requested during the work of tools on the imported model (e.g., if a tool requests the operation \code{ClassB.getOwnedOperations()}, all newly required types will be imported as well. This deferred transitive adaptation mechanism avoids that all types never used inside DresdenOCL are imported and adapted and cause overhead and maintenance problems. Listing~\ref{lst:javaModelProvider} shows an example for a Java class provided with the \emph{Simple Example} of DresdenOCL. The class contains properties having the types \code{Person}, \code{Professor} and \code{Student}. Thus, the imported model in DresdenOCL will contain a package \code{tudresden.ocl20.pivot.example.simple}, containing the four classes \code{ModelProviderClass} \code{Person}, \code{Professor} and \code{Student}.
 
 \begin{figure}[t]
 	\centering
