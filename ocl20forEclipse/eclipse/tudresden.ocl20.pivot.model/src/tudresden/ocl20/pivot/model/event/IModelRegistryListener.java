@@ -31,82 +31,49 @@
  * $Id$
  */
 
-package tudresden.ocl20.pivot.modelbus.event;
-
-import java.util.EventObject;
+package tudresden.ocl20.pivot.model.event;
 
 import tudresden.ocl20.pivot.model.IModel;
-import tudresden.ocl20.pivot.modelbus.model.IModelRegistry;
-import tudresden.ocl20.pivot.modelbus.model.internal.ModelRegistry;
+import tudresden.ocl20.pivot.model.IModelRegistry;
 
 /**
- * <p>
- * Represents events fired by the {@link ModelRegistry} if a new {@link IModel}
- * is added or removed.
- * </p>
+ * An {@link IModelRegistryListener} is informed about activities in an
+ * {@link IModelRegistry}, such as loading models.
  * 
  * @author Matthias Braeuer
  */
-public class ModelRegistryEvent extends EventObject {
-
-	/** Generated serial version id. */
-	private static final long serialVersionUID = -5135930089493176962L;
-
-	/** The affected {@link IModel}. */
-	private IModel affectedModel;
+public interface IModelRegistryListener {
 
 	/**
 	 * <p>
-	 * Creates a new {@link ModelRegistryEvent}.
+	 * This method is called when the active {@link IModel model} is changed in a
+	 * {@link IModelRegistry registry}.
 	 * </p>
 	 * 
-	 * @param source
-	 *          The {@link IModelRegistry} that is the source of this event.
-	 * @param affectedModel
-	 *          The {@link IModel} affected by the operation that caused this
-	 *          event.
+	 * @param event
+	 *          A {@link ModelRegistryEvent} object with more details
 	 */
-	public ModelRegistryEvent(IModelRegistry source, IModel affectedModel) {
-
-		super(source);
-		this.affectedModel = affectedModel;
-	}
+	void activeModelChanged(ModelRegistryEvent event);
 
 	/**
 	 * <p>
-	 * Returns the {@link IModelRegistry} that is the source of this event.
+	 * This method is called when a {@link IModel model} has been added to a
+	 * {@link IModelRegistry}.
 	 * </p>
 	 * 
-	 * @see java.util.EventObject#getSource()
+	 * @param event
+	 *          A {@link ModelRegistryEvent} object with more details.
 	 */
-	@Override
-	public IModelRegistry getSource() {
-	
-		return (IModelRegistry) super.getSource();
-	}
+	void modelAdded(ModelRegistryEvent event);
 
 	/**
 	 * <p>
-	 * Returns the {@link IModel} that is affected by the operation that caused
-	 * this event.
+	 * This method is called when a {@link IModel model} has been removed from a
+	 * {@link IModelRegistry}.
 	 * </p>
 	 * 
-	 * @return An {@link IModel} instance.
+	 * @param event
+	 *          A {@link ModelRegistryEvent} object with more details.
 	 */
-	public IModel getAffectedModel() {
-
-		return this.affectedModel;
-	}
-
-	/**
-	 * <p>
-	 * Does the same as {@link #getSource()}, but has a more concise name.
-	 * </p>
-	 * 
-	 * @return The {@link IModelRegistry} that is the source of this event.
-	 */
-	public IModelRegistry getModelRegistry() {
-
-		return getSource();
-	}
+	void modelRemoved(ModelRegistryEvent event);
 }

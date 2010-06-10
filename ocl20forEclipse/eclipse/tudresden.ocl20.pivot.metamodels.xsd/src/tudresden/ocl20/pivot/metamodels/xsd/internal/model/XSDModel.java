@@ -10,12 +10,11 @@ import org.eclipse.xsd.XSDSchema;
 import org.eclipse.xsd.ecore.XSDEcoreBuilder;
 
 import tudresden.ocl20.pivot.metamodels.ecore.internal.model.EcoreAdapterFactory;
-import tudresden.ocl20.pivot.metamodels.xsd.XSDMetamodelPlugin;
 import tudresden.ocl20.pivot.model.IModel;
 import tudresden.ocl20.pivot.model.ModelAccessException;
 import tudresden.ocl20.pivot.model.ModelConstants;
 import tudresden.ocl20.pivot.model.base.AbstractModel;
-import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
+import tudresden.ocl20.pivot.model.metamodel.IMetamodel;
 import tudresden.ocl20.pivot.pivotmodel.Namespace;
 
 /**
@@ -39,15 +38,15 @@ public class XSDModel extends AbstractModel implements IModel {
 	 * Creates a new <code>XSDModel</code> adapting the given {@link XSDSchema}.
 	 * 
 	 * @param resource
-	 *            the {@link org.eclipse.emf.ecore.resource.Resource} containing
-	 *            the model
+	 *          the {@link org.eclipse.emf.ecore.resource.Resource} containing the
+	 *          model
 	 * 
 	 * @generated
 	 */
-	public XSDModel(org.eclipse.emf.ecore.resource.Resource resource) {
+	public XSDModel(org.eclipse.emf.ecore.resource.Resource resource,
+			IMetamodel metamodel) {
 
-		super(resource.getURI().toString(), ModelBusPlugin
-				.getMetamodelRegistry().getMetamodel(XSDMetamodelPlugin.ID));
+		super(resource.getURI().toString(), metamodel);
 
 		// initialize
 		this.resource = resource;
@@ -55,10 +54,10 @@ public class XSDModel extends AbstractModel implements IModel {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see tudresden.ocl20.pivot.model.IModel#dispose()
 	 */
 	public void dispose() {
+
 		/* Unload the resource to remove external contents. */
 		this.resource.unload();
 		/* Reset the root name space to avoid caching. */
@@ -66,14 +65,13 @@ public class XSDModel extends AbstractModel implements IModel {
 	}
 
 	/**
-	 * This method lazily creates a {@link Namespace} adapter for the virtual
-	 * root package in the associated XSD model. Thus, any possible resource
-	 * loading errors will not happen until this method is called for the first
-	 * time.
+	 * This method lazily creates a {@link Namespace} adapter for the virtual root
+	 * package in the associated XSD model. Thus, any possible resource loading
+	 * errors will not happen until this method is called for the first time.
 	 * 
 	 * @throws ModelAccessException
-	 *             if an error occurs when creating the adapter for the top
-	 *             namespace
+	 *           if an error occurs when creating the adapter for the top
+	 *           namespace
 	 * 
 	 * @see tudresden.ocl20.pivot.model.IModel#getRootNamespace()
 	 * 
@@ -89,15 +87,15 @@ public class XSDModel extends AbstractModel implements IModel {
 	}
 
 	/**
-	 * Helper method that creates the adapter for the root namespace. If there
-	 * is only one top-level namespace possible, then this method should just
-	 * return the adapter for the top-level namespace, else it should create a
-	 * new "virtual" root namespace.
+	 * Helper method that creates the adapter for the root namespace. If there is
+	 * only one top-level namespace possible, then this method should just return
+	 * the adapter for the top-level namespace, else it should create a new
+	 * "virtual" root namespace.
 	 * 
 	 * @return a <code>Namespace</code> instance
 	 * 
 	 * @throws ModelAccessException
-	 *             if an error occurs while loading the adapted XSD model
+	 *           if an error occurs while loading the adapted XSD model
 	 * 
 	 * @generated NOT
 	 */
@@ -110,8 +108,7 @@ public class XSDModel extends AbstractModel implements IModel {
 		ResourceSet resourceSet = resource.getResourceSet();
 
 		XSDEcoreBuilder xsdEcoreBuilder = new XSDEcoreBuilder();
-		Collection<EObject> ePackages = xsdEcoreBuilder.generate(resource
-				.getURI());
+		Collection<EObject> ePackages = xsdEcoreBuilder.generate(resource.getURI());
 
 		for (EObject element : ePackages) {
 			EPackage ePackage = (EPackage) element;

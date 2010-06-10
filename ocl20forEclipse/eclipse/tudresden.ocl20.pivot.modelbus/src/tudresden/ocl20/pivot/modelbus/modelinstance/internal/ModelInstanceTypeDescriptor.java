@@ -26,9 +26,9 @@ import org.eclipse.core.runtime.IConfigurationElement;
 import tudresden.ocl20.pivot.modelbus.IModelBusConstants;
 import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
 import tudresden.ocl20.pivot.modelbus.descriptor.AbstractDescriptor;
-import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceType;
 import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceTypeDescriptor;
 import tudresden.ocl20.pivot.modelinstance.IModelInstanceProvider;
+import tudresden.ocl20.pivot.modelinstance.IModelInstanceType;
 
 /**
  * <p>

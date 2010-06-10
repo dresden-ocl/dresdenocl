@@ -25,8 +25,8 @@ import org.eclipse.core.runtime.IExtensionPoint;
 
 import tudresden.ocl20.pivot.modelbus.IModelBusConstants;
 import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
-import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceType;
-import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceTypeRegistry;
+import tudresden.ocl20.pivot.modelinstance.IModelInstanceType;
+import tudresden.ocl20.pivot.modelinstance.IModelInstanceTypeRegistry;
 
 /**
  * <p>

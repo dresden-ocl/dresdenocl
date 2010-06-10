@@ -29,13 +29,13 @@ import org.junit.Before;
 import org.junit.Test;
 
 import tudresden.ocl20.pivot.model.IModel;
+import tudresden.ocl20.pivot.model.IModelRegistry;
 import tudresden.ocl20.pivot.model.ModelAccessException;
+import tudresden.ocl20.pivot.model.metamodel.IMetamodelRegistry;
 import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
-import tudresden.ocl20.pivot.modelbus.metamodel.IMetamodelRegistry;
-import tudresden.ocl20.pivot.modelbus.model.IModelRegistry;
-import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceRegistry;
 import tudresden.ocl20.pivot.modelbus.test.ModelBusTestUtility;
 import tudresden.ocl20.pivot.modelinstance.IModelInstance;
+import tudresden.ocl20.pivot.modelinstance.IModelInstanceRegistry;
 
 /**
  * <p>

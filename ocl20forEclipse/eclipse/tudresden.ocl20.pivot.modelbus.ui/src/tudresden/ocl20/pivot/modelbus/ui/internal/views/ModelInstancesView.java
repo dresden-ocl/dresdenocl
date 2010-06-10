@@ -48,20 +48,20 @@ import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.part.ViewPart;
 
 import tudresden.ocl20.pivot.model.IModel;
+import tudresden.ocl20.pivot.model.IModelRegistry;
+import tudresden.ocl20.pivot.model.event.IModelRegistryListener;
+import tudresden.ocl20.pivot.model.event.ModelRegistryEvent;
 import tudresden.ocl20.pivot.modelbus.IModelBusConstants;
 import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
-import tudresden.ocl20.pivot.modelbus.event.IModelInstanceRegistryListener;
-import tudresden.ocl20.pivot.modelbus.event.IModelRegistryListener;
-import tudresden.ocl20.pivot.modelbus.event.ModelInstanceRegistryEvent;
-import tudresden.ocl20.pivot.modelbus.event.ModelRegistryEvent;
-import tudresden.ocl20.pivot.modelbus.model.IModelRegistry;
-import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceRegistry;
 import tudresden.ocl20.pivot.modelbus.ui.ModelBusUIPlugin;
 import tudresden.ocl20.pivot.modelbus.ui.internal.views.util.ModelInstanceSelectionAction;
 import tudresden.ocl20.pivot.modelbus.ui.internal.views.util.ModelObjectContentProvider;
 import tudresden.ocl20.pivot.modelbus.ui.internal.views.util.ModelObjectFilter;
 import tudresden.ocl20.pivot.modelbus.ui.internal.views.util.ModelObjectLabelProvider;
 import tudresden.ocl20.pivot.modelinstance.IModelInstance;
+import tudresden.ocl20.pivot.modelinstance.IModelInstanceRegistry;
+import tudresden.ocl20.pivot.modelinstance.event.IModelInstanceRegistryListener;
+import tudresden.ocl20.pivot.modelinstance.event.ModelInstanceRegistryEvent;
 import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement;
 
 /**

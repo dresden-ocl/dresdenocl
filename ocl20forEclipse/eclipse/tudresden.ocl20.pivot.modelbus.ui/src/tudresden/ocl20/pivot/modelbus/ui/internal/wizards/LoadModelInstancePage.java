@@ -53,7 +53,6 @@ import org.eclipse.swt.widgets.Text;
 
 import tudresden.ocl20.pivot.model.IModel;
 import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
-import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceType;
 import tudresden.ocl20.pivot.modelbus.ui.internal.ModelBusUIMessages;
 import tudresden.ocl20.pivot.modelbus.ui.internal.wizards.util.AbstractModelBusPage;
 import tudresden.ocl20.pivot.modelbus.ui.internal.wizards.util.BrowseFileListener;
@@ -63,6 +62,7 @@ import tudresden.ocl20.pivot.modelbus.ui.internal.wizards.util.ModelInstanceType
 import tudresden.ocl20.pivot.modelbus.ui.internal.wizards.util.ModelLabelProvider;
 import tudresden.ocl20.pivot.modelbus.ui.internal.wizards.util.ModelViewerListener;
 import tudresden.ocl20.pivot.modelinstance.IModelInstance;
+import tudresden.ocl20.pivot.modelinstance.IModelInstanceType;
 
 /**
  * <p>

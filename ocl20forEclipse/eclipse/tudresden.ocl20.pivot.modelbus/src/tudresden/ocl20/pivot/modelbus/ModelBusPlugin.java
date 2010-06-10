@@ -38,15 +38,14 @@ import org.eclipse.core.runtime.Plugin;
 import org.osgi.framework.BundleContext;
 
 import tudresden.ocl20.logging.LoggingPlugin;
-import tudresden.ocl20.pivot.modelbus.metamodel.IMetamodelRegistry;
+import tudresden.ocl20.pivot.model.IModelRegistry;
+import tudresden.ocl20.pivot.model.metamodel.IMetamodelRegistry;
 import tudresden.ocl20.pivot.modelbus.metamodel.internal.MetamodelRegistry;
-import tudresden.ocl20.pivot.modelbus.metamodel.internal.StandaloneMetamodelRegistry;
-import tudresden.ocl20.pivot.modelbus.model.IModelRegistry;
 import tudresden.ocl20.pivot.modelbus.model.internal.ModelRegistry;
-import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceRegistry;
-import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceTypeRegistry;
 import tudresden.ocl20.pivot.modelbus.modelinstance.internal.ModelInstanceRegistry;
 import tudresden.ocl20.pivot.modelbus.modelinstance.internal.ModelInstanceTypeRegistry;
+import tudresden.ocl20.pivot.modelinstance.IModelInstanceRegistry;
+import tudresden.ocl20.pivot.modelinstance.IModelInstanceTypeRegistry;
 
 /**
  * <p>
@@ -149,7 +148,7 @@ public class ModelBusPlugin extends Plugin {
 
 		return plugin;
 	}
-
+	
 	/**
 	 * <p>
 	 * Returns the {@link IMetamodelRegistry} managed by the
@@ -168,18 +167,18 @@ public class ModelBusPlugin extends Plugin {
 	 * @return An {@link IMetamodelRegistry} instance.
 	 */
 	public synchronized static IMetamodelRegistry getMetamodelRegistry() {
-
+	
 		/* Check that the plugin has been activated. */
 		if (plugin == null) {
 			throw new IllegalStateException(
-					"The Model Bus plugin has not been activated."); //$NON-NLS-1$
+					"The Model plugin has not been activated."); //$NON-NLS-1$
 		}
-
+	
 		/* Lazily create the registry. */
 		if (plugin.metamodelRegistry == null) {
 			plugin.metamodelRegistry = new MetamodelRegistry();
 		}
-
+	
 		return plugin.metamodelRegistry;
 	}
 

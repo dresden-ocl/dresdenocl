@@ -40,7 +40,7 @@ import tudresden.ocl20.pivot.model.IModel;
 import tudresden.ocl20.pivot.model.ModelAccessException;
 import tudresden.ocl20.pivot.model.ModelConstants;
 import tudresden.ocl20.pivot.model.base.AbstractModel;
-import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
+import tudresden.ocl20.pivot.model.metamodel.IMetamodel;
 import tudresden.ocl20.pivot.pivotmodel.NDirectionalProperty;
 import tudresden.ocl20.pivot.pivotmodel.Namespace;
 
@@ -83,10 +83,9 @@ public class UML2Model extends AbstractModel implements IModel {
 	 * 
 	 * @generated NOT
 	 */
-	public UML2Model(Resource resource) {
+	public UML2Model(Resource resource, IMetamodel metamodel) {
 
-		super(resource.getURI().toString(), ModelBusPlugin
-				.getMetamodelRegistry().getMetamodel(UML2MetamodelPlugin.ID));
+		super(resource.getURI().toString(), metamodel);
 
 		/* Initialize. */
 		this.resource = resource;

@@ -30,10 +30,9 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.modelbus.model;
+package tudresden.ocl20.pivot.model;
 
-import tudresden.ocl20.pivot.model.IModel;
-import tudresden.ocl20.pivot.modelbus.event.IModelRegistryListener;
+import tudresden.ocl20.pivot.model.event.IModelRegistryListener;
 
 /**
  * An {@link IModelRegistry} manages a list of {@link IModel} references.</p>

@@ -30,14 +30,14 @@ import org.eclipse.core.runtime.jobs.Job;
 import tudresden.ocl20.pivot.model.IModel;
 import tudresden.ocl20.pivot.model.ModelAccessException;
 import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
-import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceRegistry;
-import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceType;
 import tudresden.ocl20.pivot.modelbus.ui.ModelBusUIPlugin;
 import tudresden.ocl20.pivot.modelbus.ui.ModelBusUIUtility;
 import tudresden.ocl20.pivot.modelbus.ui.internal.ModelBusUIMessages;
 import tudresden.ocl20.pivot.modelbus.ui.internal.views.ModelInstancesView;
 import tudresden.ocl20.pivot.modelinstance.IModelInstance;
 import tudresden.ocl20.pivot.modelinstance.IModelInstanceProvider;
+import tudresden.ocl20.pivot.modelinstance.IModelInstanceRegistry;
+import tudresden.ocl20.pivot.modelinstance.IModelInstanceType;
 
 /**
  * <p>

@@ -53,7 +53,7 @@ import tudresden.ocl20.pivot.model.IModel;
 import tudresden.ocl20.pivot.model.ModelAccessException;
 import tudresden.ocl20.pivot.model.ModelConstants;
 import tudresden.ocl20.pivot.model.base.AbstractModel;
-import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
+import tudresden.ocl20.pivot.model.metamodel.IMetamodel;
 import tudresden.ocl20.pivot.pivotmodel.Namespace;
 
 /**
@@ -89,10 +89,9 @@ public class EcoreModel extends AbstractModel implements IModel {
 	 * @param resource
 	 *            The {@link Resource} containing the model.
 	 */
-	public EcoreModel(Resource resource) {
+	public EcoreModel(Resource resource, IMetamodel metamodel) {
 
-		super(resource.getURI().toString(), ModelBusPlugin
-				.getMetamodelRegistry().getMetamodel(EcoreMetamodelPlugin.ID));
+		super(resource.getURI().toString(), metamodel);
 
 		/* Initialize. */
 		this.resource = resource;

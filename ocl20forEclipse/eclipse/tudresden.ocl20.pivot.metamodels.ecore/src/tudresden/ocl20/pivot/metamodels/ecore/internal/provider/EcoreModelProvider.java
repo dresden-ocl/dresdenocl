@@ -46,6 +46,7 @@ import tudresden.ocl20.pivot.model.IModel;
 import tudresden.ocl20.pivot.model.IModelProvider;
 import tudresden.ocl20.pivot.model.ModelAccessException;
 import tudresden.ocl20.pivot.model.base.AbstractModelProvider;
+import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
 
 /**
  * <p>
@@ -101,7 +102,10 @@ public class EcoreModelProvider extends AbstractModelProvider implements
 		// no else.
 
 		/* Create the model from the resource. */
-		model = new EcoreModel(getResourceSet().getResource(modelURI, false));
+		model =
+				new EcoreModel(getResourceSet().getResource(modelURI, false),
+						ModelBusPlugin.getMetamodelRegistry().getMetamodel(
+								EcoreMetamodelPlugin.ID));
 
 		/* Eventually log the exit from this method. */
 		if (LOGGER.isDebugEnabled()) {

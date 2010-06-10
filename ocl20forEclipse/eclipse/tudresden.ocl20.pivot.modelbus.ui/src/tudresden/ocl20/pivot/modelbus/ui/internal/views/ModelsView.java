@@ -53,12 +53,12 @@ import tudresden.ocl20.pivot.essentialocl.expressions.provider.ExpressionsItemPr
 import tudresden.ocl20.pivot.essentialocl.types.provider.TypesItemProviderAdapterFactory;
 import tudresden.ocl20.pivot.model.IModel;
 import tudresden.ocl20.pivot.model.IModelListener;
+import tudresden.ocl20.pivot.model.IModelRegistry;
 import tudresden.ocl20.pivot.model.ModelAccessException;
+import tudresden.ocl20.pivot.model.event.IModelRegistryListener;
+import tudresden.ocl20.pivot.model.event.ModelRegistryEvent;
 import tudresden.ocl20.pivot.modelbus.IModelBusConstants;
 import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
-import tudresden.ocl20.pivot.modelbus.event.IModelRegistryListener;
-import tudresden.ocl20.pivot.modelbus.event.ModelRegistryEvent;
-import tudresden.ocl20.pivot.modelbus.model.IModelRegistry;
 import tudresden.ocl20.pivot.modelbus.ui.ModelBusUIPlugin;
 import tudresden.ocl20.pivot.modelbus.ui.internal.ModelBusUIMessages;
 import tudresden.ocl20.pivot.modelbus.ui.internal.views.util.ModelSelectionAction;

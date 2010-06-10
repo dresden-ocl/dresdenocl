@@ -21,6 +21,7 @@ package tudresden.ocl20.pivot.modelbus.modelinstance;
 import java.net.URL;
 
 import tudresden.ocl20.pivot.modelbus.descriptor.IDescriptor;
+import tudresden.ocl20.pivot.modelinstance.IModelInstanceType;
 
 /**
  * <p>

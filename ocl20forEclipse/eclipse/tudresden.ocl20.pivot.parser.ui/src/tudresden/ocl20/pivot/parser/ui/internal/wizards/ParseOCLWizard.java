@@ -44,8 +44,8 @@ import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.part.Page;
 
 import tudresden.ocl20.pivot.model.IModel;
+import tudresden.ocl20.pivot.model.IModelRegistry;
 import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
-import tudresden.ocl20.pivot.modelbus.model.IModelRegistry;
 import tudresden.ocl20.pivot.parser.ui.ParserUIPlugin;
 import tudresden.ocl20.pivot.parser.ui.internal.ParserUIMessages;
 

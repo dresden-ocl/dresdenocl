@@ -33,8 +33,8 @@
 package tudresden.ocl20.pivot.modelbus;
 
 import tudresden.ocl20.pivot.model.IModelProvider;
-import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceType;
 import tudresden.ocl20.pivot.modelinstance.IModelInstanceProvider;
+import tudresden.ocl20.pivot.modelinstance.IModelInstanceType;
 
 /**
  * <p>

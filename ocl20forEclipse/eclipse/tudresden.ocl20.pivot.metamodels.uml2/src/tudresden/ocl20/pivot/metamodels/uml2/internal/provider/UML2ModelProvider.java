@@ -27,6 +27,7 @@ import tudresden.ocl20.pivot.model.IModel;
 import tudresden.ocl20.pivot.model.IModelProvider;
 import tudresden.ocl20.pivot.model.ModelAccessException;
 import tudresden.ocl20.pivot.model.base.AbstractModelProvider;
+import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
 
 /**
  * <p>
@@ -90,7 +91,10 @@ public class UML2ModelProvider extends AbstractModelProvider implements
 		}
 		// no else.
 
-		result = new UML2Model(getResourceSet().getResource(modelURI, false));
+		result =
+				new UML2Model(getResourceSet().getResource(modelURI, false),
+						ModelBusPlugin.getMetamodelRegistry().getMetamodel(
+								UML2MetamodelPlugin.ID));
 
 		/* Eventually debug the exit of this method. */
 		if (LOGGER.isDebugEnabled()) {

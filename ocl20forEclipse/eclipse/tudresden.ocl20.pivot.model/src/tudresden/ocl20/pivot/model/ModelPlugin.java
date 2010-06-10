@@ -16,7 +16,7 @@ public class ModelPlugin extends Plugin {
 
 	// The shared instance
 	private static ModelPlugin plugin;
-	
+
 	/**
 	 * The constructor
 	 */

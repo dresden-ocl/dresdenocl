@@ -30,8 +30,8 @@ import org.eclipse.osgi.util.NLS;
 
 import tudresden.ocl20.pivot.model.IModel;
 import tudresden.ocl20.pivot.model.ModelAccessException;
-import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
 import tudresden.ocl20.pivot.modelinstance.IModelInstance;
+import tudresden.ocl20.pivot.modelinstance.ModelInstancePlugin;
 import tudresden.ocl20.pivot.modelinstance.base.AbstractModelInstanceProvider;
 import tudresden.ocl20.pivot.modelinstancetype.exception.TypeNotFoundInModelException;
 import tudresden.ocl20.pivot.modelinstancetype.java.JavaModelInstanceTypePlugin;
@@ -166,7 +166,7 @@ public class JavaModelInstanceProvider extends AbstractModelInstanceProvider {
 				 */
 				aClassLoader =
 						new URLClassLoader(new URL[] { folderURLs[index] },
-								ModelBusPlugin.class.getClassLoader());
+								ModelInstancePlugin.class.getClassLoader());
 
 				modelInstanceClass = Class.forName(aClassName, true, aClassLoader);
 

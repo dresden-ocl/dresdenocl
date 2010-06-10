@@ -19,11 +19,11 @@ public class TemplatePlugin extends Plugin {
 
 	/** The plug-in ID. */
 	public static final String ID = "tudresden.ocl20.pivot.tools.template"; //$NON-NLS-1$
-	
+
 	private ITemplateGroupRegistry templateGroupRegistry;
 
 	private ITemplateEngineRegistry templateEngineRegistry;
-	
+
 	/** The shared instance. */
 	private static TemplatePlugin plugin;
 
@@ -33,6 +33,7 @@ public class TemplatePlugin extends Plugin {
 	 * </p>
 	 */
 	public TemplatePlugin() {
+
 		plugin = this;
 	}
 
@@ -79,6 +80,9 @@ public class TemplatePlugin extends Plugin {
 
 		/* configure custom logging properties. */
 		LoggingPlugin.configureDefaultLogging(plugin);
+
+		/* Hack to automatically set the TemplateEngineRegistry in Eclipse. */
+		plugin.templateEngineRegistry = new TemplateEngineRegistry();
 	}
 
 	/*
@@ -89,7 +93,7 @@ public class TemplatePlugin extends Plugin {
 	 */
 	@Override
 	public void stop(BundleContext context) throws Exception {
-		
+
 		/* Dispose the meta-model registry. */
 		if (plugin.templateGroupRegistry != null) {
 			plugin.templateGroupRegistry.dispose();
@@ -100,8 +104,7 @@ public class TemplatePlugin extends Plugin {
 
 		super.stop(context);
 	}
-	
-	
+
 	/**
 	 * <p>
 	 * Returns the {@link ITemplateGroupRegistry} managed by the
@@ -154,7 +157,7 @@ public class TemplatePlugin extends Plugin {
 
 		plugin.templateGroupRegistry = templateGroupRegistry;
 	}
-	
+
 	/**
 	 * <p>
 	 * Returns the {@link ITemplateEngineRegistry} managed by the
@@ -182,16 +185,17 @@ public class TemplatePlugin extends Plugin {
 
 		/* Lazily create the registry. */
 		if (plugin.templateEngineRegistry == null) {
-			plugin.templateEngineRegistry = new TemplateEngineRegistry();
+			throw new IllegalStateException(
+					"The templateEngineRegistry must not be null.");
 		}
 
 		return plugin.templateEngineRegistry;
 	}
 
 	/**
-	 * Sets the {@link ITemplateEngineRegistry} of the {@link TemplatePlugin}. This
-	 * method has to be called when using DresdenOCL stand-alone. The standard
-	 * argument should be {@link StandaloneTemplateEngineRegistry}.
+	 * Sets the {@link ITemplateEngineRegistry} of the {@link TemplatePlugin}.
+	 * This method has to be called when using DresdenOCL stand-alone. The
+	 * standard argument should be {@link StandaloneTemplateEngineRegistry}.
 	 * 
 	 * @param metamodelRegistry
 	 *          the {@link ITemplateEngineRegistry} to set
@@ -207,5 +211,5 @@ public class TemplatePlugin extends Plugin {
 
 		plugin.templateEngineRegistry = templateEngineRegistry;
 	}
-	
+
 }

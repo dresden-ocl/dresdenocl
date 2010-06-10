@@ -13,8 +13,6 @@ Bundle-ActivationPolicy: lazy
 Bundle-ClassPath: .
 Export-Package: tudresden.ocl20.pivot.modelbus,
  tudresden.ocl20.pivot.modelbus.descriptor,
- tudresden.ocl20.pivot.modelbus.event,
  tudresden.ocl20.pivot.modelbus.metamodel,
- tudresden.ocl20.pivot.modelbus.model,
  tudresden.ocl20.pivot.modelbus.modelinstance
 Bundle-RequiredExecutionEnvironment: J2SE-1.5

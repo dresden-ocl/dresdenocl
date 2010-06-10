@@ -32,7 +32,6 @@ import tudresden.ocl20.pivot.essentialocl.types.util.TypeResolver;
 import tudresden.ocl20.pivot.model.IModel;
 import tudresden.ocl20.pivot.model.ModelAccessException;
 import tudresden.ocl20.pivot.model.TypeNotFoundException;
-import tudresden.ocl20.pivot.modelbus.ModelBusException;
 import tudresden.ocl20.pivot.pivotmodel.ConstrainableElement;
 import tudresden.ocl20.pivot.pivotmodel.NamedElement;
 import tudresden.ocl20.pivot.pivotmodel.Namespace;
@@ -126,8 +125,6 @@ public class Environment {
 			 * //$NON-NLS-2$ throw new ParseRuntimeException( "Failed to lookup type "
 			 * + pathName + ".", e); //$NON-NLS-1$//$NON-NLS-2$
 			 */
-		} catch (ModelBusException e) {
-			return null;
 		} catch (IllegalArgumentException e) {
 			return null;
 		}

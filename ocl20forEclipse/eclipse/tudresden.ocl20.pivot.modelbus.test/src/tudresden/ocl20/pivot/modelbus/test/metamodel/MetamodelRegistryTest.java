@@ -30,9 +30,9 @@ import org.eclipse.core.runtime.Platform;
 import org.junit.Test;
 
 import tudresden.ocl20.pivot.model.metamodel.IMetamodel;
+import tudresden.ocl20.pivot.model.metamodel.IMetamodelRegistry;
 import tudresden.ocl20.pivot.modelbus.IModelBusConstants;
 import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
-import tudresden.ocl20.pivot.modelbus.metamodel.IMetamodelRegistry;
 
 /**
  * <p>

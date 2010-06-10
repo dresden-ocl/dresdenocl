@@ -18,11 +18,10 @@ with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
 package tudresden.ocl20.pivot.metamodels.java.internal.model;
 
-import tudresden.ocl20.pivot.metamodels.java.JavaMetaModelPlugin;
 import tudresden.ocl20.pivot.model.IModel;
 import tudresden.ocl20.pivot.model.ModelAccessException;
 import tudresden.ocl20.pivot.model.base.AbstractModel;
-import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
+import tudresden.ocl20.pivot.model.metamodel.IMetamodel;
 import tudresden.ocl20.pivot.pivotmodel.Namespace;
 import tudresden.ocl20.pivot.pivotmodel.Operation;
 import tudresden.ocl20.pivot.pivotmodel.Parameter;
@@ -53,10 +52,9 @@ public class JavaModel extends AbstractModel implements IModel {
 	 * 
 	 * @param class The {@link Class} containing the model.
 	 */
-	public JavaModel(Class<?> aClass) {
+	public JavaModel(Class<?> aClass, IMetamodel metamodel) {
 
-		super((aClass == null) ? "" : aClass.getCanonicalName(), ModelBusPlugin
-				.getMetamodelRegistry().getMetamodel(JavaMetaModelPlugin.ID));
+		super((aClass == null) ? "" : aClass.getCanonicalName(), metamodel);
 
 		if (aClass == null) {
 			throw new IllegalArgumentException(
@@ -72,10 +70,10 @@ public class JavaModel extends AbstractModel implements IModel {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see tudresden.ocl20.pivot.model.IModel#dispose()
 	 */
 	public void dispose() {
+
 		/* Reset the root name space to avoid caching. */
 		this.myRootNamespace = null;
 		/* Reset the adapter factory to clear the cache. */
@@ -143,8 +141,8 @@ public class JavaModel extends AbstractModel implements IModel {
 	 * </p>
 	 * 
 	 * @throws ModelAccessException
-	 *             Thrown if an error occurs when creating the adapter for the
-	 *             top {@link Namespace}.
+	 *           Thrown if an error occurs when creating the adapter for the top
+	 *           {@link Namespace}.
 	 * 
 	 * @see tudresden.ocl20.pivot.model.IModel#getRootNamespace()
 	 * 
@@ -181,8 +179,7 @@ public class JavaModel extends AbstractModel implements IModel {
 
 			/* Navigate to the root name space. */
 			while (this.myRootNamespace.getNestingNamespace() != null) {
-				this.myRootNamespace = this.myRootNamespace
-						.getNestingNamespace();
+				this.myRootNamespace = this.myRootNamespace.getNestingNamespace();
 			}
 
 		}
