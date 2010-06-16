@@ -1,8 +1,8 @@
 Changes and Bugs fixed during the different Releases
 ====================================================
 
-Release 2.1 (scheduled for April 2010)
-===============================
+Release 2.2 (June 16th 2010)
+============================
 
 * Dresden OCL2 for Eclipse now supports OCL 2.2!
   - The only exception is that the new keyword static is not supported yet.
@@ -10,6 +10,8 @@ Release 2.1 (scheduled for April 2010)
   
 * A new Facade Plug-in containing a facade for all functionalities of
   Dresden OCL2 for Eclipse has been introduced.
+  
+* Dresden OCL2 for Eclipse now includes a standalone version for non-Eclipse Java projects.
   
 * The Model and Model Instance Life-cycle Management has been improved.
   - After import, Models can now be removed again.
@@ -22,6 +24,10 @@ Release 2.1 (scheduled for April 2010)
 * A bug in the ModelRegistry was fixed.
   - Adding of Models should now handle NullPointerExceptions correctly.
  
+* XML Schemas are now supported as models for DresdenOCL.
+
+* XML files are now supported as model instances for DresdenOCL.
+
 * Some bugs in the UML2 Meta-Model were fixed.
   - If the top-level package is a UML model or profile directory, 
     these packages are now adapted correctly.
@@ -122,8 +128,8 @@ Tests
   - Recasts between primitive type instances are now tested.
 
 
-Release 2.0 (Scheduled: December 2009)
-======================================
+Release 2.0 (January 11th 2010)
+===============================
 * The Pivot Model do now contain the PrimitiveTypeKind Void for the adaptation
   of a void Type for Operations without return Parameter.
 
