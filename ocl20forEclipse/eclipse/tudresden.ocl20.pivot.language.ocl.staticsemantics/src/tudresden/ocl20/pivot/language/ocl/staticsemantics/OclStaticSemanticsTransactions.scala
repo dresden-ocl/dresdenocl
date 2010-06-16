@@ -25,6 +25,7 @@ object OclStaticSemanticsTransactions {
     parsedConstraints.removeKey(oclStaticSemantics.resource)
     // try to find all defs
     val allDefs = new collection.mutable.HashMap[Type, collection.mutable.Set[VariableDeclarationWithInitCS]] with collection.mutable.MultiMap[Type, VariableDeclarationWithInitCS]
+    val allDefsOp = new collection.mutable.HashMap[Type, collection.mutable.Set[Tuple2[OperationDefinitionInDefCS, OclExpressionCS]]] with collection.mutable.MultiMap[Type, Tuple2[OperationDefinitionInDefCS, OclExpressionCS]]
     root match {
       case PackageDeclarationCS(contextDeclarations) => {
         contextDeclarations.foreach{cd =>
@@ -40,7 +41,12 @@ object OclStaticSemanticsTransactions {
                           case other => // ignore
                         }
                       }
-                      case DefinitionExpOperationCS(_, _) => // TODO: insert operations
+                      case DefinitionExpOperationCS(operation, oclExpression) => {
+                        (oclStaticSemantics.eObject2Attributable(typeName)->oclStaticSemantics.oclType) match {
+                          case Full(tipe) => allDefsOp.add(tipe, (operation, oclExpression))
+                          case other => // ignore
+                        }
+                      }
                     }
                   }
                   case other => // ignore
@@ -53,7 +59,7 @@ object OclStaticSemanticsTransactions {
       }
       case other => //ignore
     }
-    allDefs
+    (allDefs, allDefsOp)
   }
   
   /**
