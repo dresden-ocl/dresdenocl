@@ -229,7 +229,7 @@ public class UML2Model extends AbstractModel implements IModel {
 				Package containerPackage;
 				containerPackage = classifier.getNearestPackage();
 
-				if ((containerPackage instanceof Model || containerPackage instanceof Profile)) {
+				if (containerPackage == null || containerPackage instanceof Model || containerPackage instanceof Profile) {
 
 					// FIXME Claas: This will probably cause problems. Types do
 					// not know their right name space now if they should be
