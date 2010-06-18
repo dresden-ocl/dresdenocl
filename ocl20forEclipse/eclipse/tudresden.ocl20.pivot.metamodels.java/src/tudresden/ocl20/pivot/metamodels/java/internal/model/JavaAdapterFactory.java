@@ -50,16 +50,6 @@ public class JavaAdapterFactory {
 			.getLogger(JavaAdapterFactory.class);
 
 	/**
-	 * <p>
-	 * The Singleton instance of the factory.
-	 * </p>
-	 * 
-	 * @generated NOT
-	 */
-	@Deprecated
-	public static JavaAdapterFactory INSTANCE = null;
-
-	/**
 	 * A {@link Map} containing all {@link EnumerationLiteral}s already adapted.
 	 */
 	private Map<Enum<?>, EnumerationLiteral> adaptedEnumLiterals;
