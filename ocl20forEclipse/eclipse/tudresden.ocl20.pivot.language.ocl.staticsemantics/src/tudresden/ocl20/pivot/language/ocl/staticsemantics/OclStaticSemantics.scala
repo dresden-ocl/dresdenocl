@@ -537,6 +537,24 @@ trait OclStaticSemantics extends ocl.semantics.OclAttributeMaker with pivotmodel
           }
         }
         
+        case d@DefinitionExpOperationCS(operation, _) => {
+          (d->variables).flatMap{otherVars =>
+	          val parametersEOcl = operation.getParameters.map(p => p.getParameter)
+				    parametersEOcl.find(_.eIsProxy) match {
+				      case Some(couldNotResolve) => Empty
+				      case None => {
+				        val newVars = parametersEOcl.map{param =>
+					        val variable = ExpressionsFactory.INSTANCE.createVariable
+					        variable.setName(param.getName)
+					        variable.setRepresentedParameter(param)
+					        variable
+				        }
+				        Full(otherVars._1, newVars:::otherVars._2)
+				      }
+		        }
+          }
+        }
+        
         case l@LetExpCS(variableDeclarations, _) if !variableDeclarations.contains(child.getEObject) => {
           (l->variables).flatMap{otherVars =>
 	          Full(otherVars._1, variableDeclarations.flatMap{vd =>
