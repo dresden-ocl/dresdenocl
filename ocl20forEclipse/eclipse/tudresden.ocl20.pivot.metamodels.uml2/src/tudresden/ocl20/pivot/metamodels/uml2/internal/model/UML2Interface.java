@@ -44,8 +44,8 @@ public class UML2Interface extends AbstractType implements Type {
 	 * 
 	 * @generated NOT
 	 */
-	private static final Logger LOGGER =
-			UML2MetamodelPlugin.getLogger(UML2Interface.class);
+	private static final Logger LOGGER = UML2MetamodelPlugin
+			.getLogger(UML2Interface.class);
 
 	/**
 	 * <p>
@@ -58,23 +58,37 @@ public class UML2Interface extends AbstractType implements Type {
 
 	/**
 	 * <p>
+	 * The {@link UML2AdapterFactory} used to create nested elements.
+	 * </p>
+	 * 
+	 * @generate NOT
+	 */
+	private UML2AdapterFactory factory;
+
+	/**
+	 * <p>
 	 * Creates a new <code>UML2Interface</code> instance.
 	 * </p>
 	 * 
 	 * @param dslInterface
-	 *          the {@link org.eclipse.uml2.uml.Interface} that is adopted by this
-	 *          class
+	 *            the {@link org.eclipse.uml2.uml.Interface} that is adopted by
+	 *            this class
+	 * @param factory
+	 *            The {@link UML2AdapterFactory} used to create nested elements.
 	 * 
-	 * @generated
+	 * @generated NOT
 	 */
-	public UML2Interface(org.eclipse.uml2.uml.Interface dslInterface) {
+	public UML2Interface(org.eclipse.uml2.uml.Interface dslInterface,
+			UML2AdapterFactory factory) {
 
 		if (LOGGER.isDebugEnabled()) {
-			LOGGER.debug("UML2Interface(dslInterface=" + dslInterface + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
+			LOGGER
+					.debug("UML2Interface(dslInterface = " + dslInterface + " factory = " + factory + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 
 		// initialize
 		this.dslInterface = dslInterface;
+		this.factory = factory;
 
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("UML2Interface() - exit"); //$NON-NLS-1$
@@ -100,8 +114,7 @@ public class UML2Interface extends AbstractType implements Type {
 	@Override
 	public Namespace getNamespace() {
 
-		return UML2AdapterFactory.INSTANCE.createNamespace(dslInterface
-				.getPackage());
+		return this.factory.createNamespace(dslInterface.getPackage());
 	}
 
 	/**
@@ -119,7 +132,7 @@ public class UML2Interface extends AbstractType implements Type {
 		for (org.eclipse.uml2.uml.Property property : this.dslInterface
 				.getOwnedAttributes()) {
 
-			result.add(UML2AdapterFactory.INSTANCE.createProperty(property));
+			result.add(this.factory.createProperty(property));
 		}
 
 		return result;
@@ -140,7 +153,7 @@ public class UML2Interface extends AbstractType implements Type {
 		for (org.eclipse.uml2.uml.Operation operation : this.dslInterface
 				.getOwnedOperations()) {
 
-			result.add(UML2AdapterFactory.INSTANCE.createOperation(operation));
+			result.add(this.factory.createOperation(operation));
 		}
 
 		return result;
@@ -159,7 +172,7 @@ public class UML2Interface extends AbstractType implements Type {
 		result = new ArrayList<Type>();
 
 		for (Classifier classifier : dslInterface.allParents()) {
-			result.add(UML2AdapterFactory.INSTANCE.createType(classifier));
+			result.add(this.factory.createType(classifier));
 		}
 
 		return result;

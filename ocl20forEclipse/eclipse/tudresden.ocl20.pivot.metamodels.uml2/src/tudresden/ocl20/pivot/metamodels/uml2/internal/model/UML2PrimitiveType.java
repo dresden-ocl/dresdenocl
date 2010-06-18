@@ -99,24 +99,38 @@ public class UML2PrimitiveType extends AbstractPrimitiveType implements
 
 	/**
 	 * <p>
+	 * The {@link UML2AdapterFactory} used to create nested elements.
+	 * </p>
+	 * 
+	 * @generate NOT
+	 */
+	private UML2AdapterFactory factory;
+
+	/**
+	 * <p>
 	 * Creates a new <code>UML2PrimitiveType</code> instance.
 	 * </p>
 	 * 
 	 * @param dslPrimitiveType
 	 *            the {@link org.eclipse.uml2.uml.PrimitiveType} that is adopted
 	 *            by this class
+	 * @param factory
+	 *            The {@link UML2AdapterFactory} used to create nested elements.
 	 * 
-	 * @generated
+	 * @generated NOT
 	 */
-	public UML2PrimitiveType(org.eclipse.uml2.uml.PrimitiveType dslPrimitiveType) {
+	public UML2PrimitiveType(
+			org.eclipse.uml2.uml.PrimitiveType dslPrimitiveType,
+			UML2AdapterFactory factory) {
 
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER
-					.debug("UML2PrimitiveType(dslPrimitiveType=" + dslPrimitiveType + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
+					.debug("UML2PrimitiveType(dslPrimitiveType = " + dslPrimitiveType + ", factory = " + factory + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 
 		// initialize
 		this.dslPrimitiveType = dslPrimitiveType;
+		this.factory = factory;
 
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("org.eclipse.uml2.uml.PrimitiveType() - exit"); //$NON-NLS-1$
@@ -260,7 +274,6 @@ public class UML2PrimitiveType extends AbstractPrimitiveType implements
 	@Override
 	public Namespace getNamespace() {
 
-		return UML2AdapterFactory.INSTANCE
-				.createNamespace(this.dslPrimitiveType.getPackage());
+		return this.factory.createNamespace(this.dslPrimitiveType.getPackage());
 	}
 }

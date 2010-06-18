@@ -42,8 +42,8 @@ public class UML2Enumeration extends AbstractEnumeration implements Enumeration 
 	 * 
 	 * @generated NOT
 	 */
-	private static final Logger LOGGER =
-			UML2MetamodelPlugin.getLogger(UML2Enumeration.class);
+	private static final Logger LOGGER = UML2MetamodelPlugin
+			.getLogger(UML2Enumeration.class);
 
 	/**
 	 * <p>
@@ -56,24 +56,37 @@ public class UML2Enumeration extends AbstractEnumeration implements Enumeration 
 
 	/**
 	 * <p>
+	 * The {@link UML2AdapterFactory} used to create nested elements.
+	 * </p>
+	 * 
+	 * @generate NOT
+	 */
+	private UML2AdapterFactory factory;
+
+	/**
+	 * <p>
 	 * Creates a new <code>UML2Enumeration</code> instance.
 	 * </p>
 	 * 
 	 * @param dslEnumeration
-	 *          the {@link org.eclipse.uml2.uml.Enumeration} that is adopted by
-	 *          this class
+	 *            the {@link org.eclipse.uml2.uml.Enumeration} that is adopted
+	 *            by this class
+	 * @param factory
+	 *            The {@link UML2AdapterFactory} used to create nested elements.
 	 * 
-	 * @generated
+	 * @generated NOT
 	 */
-	public UML2Enumeration(org.eclipse.uml2.uml.Enumeration dslEnumeration) {
+	public UML2Enumeration(org.eclipse.uml2.uml.Enumeration dslEnumeration,
+			UML2AdapterFactory factory) {
 
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER
-					.debug("UML2Enumeration(dslEnumeration=" + dslEnumeration + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
+					.debug("UML2Enumeration(dslEnumeration = " + dslEnumeration + "factory = " + factory + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 
 		// initialize
 		this.dslEnumeration = dslEnumeration;
+		this.factory = factory;
 
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("UML2Enumeration() - exit"); //$NON-NLS-1$
@@ -99,8 +112,7 @@ public class UML2Enumeration extends AbstractEnumeration implements Enumeration 
 	@Override
 	public Namespace getNamespace() {
 
-		return UML2AdapterFactory.INSTANCE.createNamespace(dslEnumeration
-				.getPackage());
+		return this.factory.createNamespace(dslEnumeration.getPackage());
 	}
 
 	/**
@@ -118,7 +130,7 @@ public class UML2Enumeration extends AbstractEnumeration implements Enumeration 
 		for (org.eclipse.uml2.uml.EnumerationLiteral dslEnumerationLiteral : this.dslEnumeration
 				.getOwnedLiterals()) {
 
-			result.add(UML2AdapterFactory.INSTANCE
+			result.add(this.factory
 					.createEnumerationLiteral(dslEnumerationLiteral));
 		}
 

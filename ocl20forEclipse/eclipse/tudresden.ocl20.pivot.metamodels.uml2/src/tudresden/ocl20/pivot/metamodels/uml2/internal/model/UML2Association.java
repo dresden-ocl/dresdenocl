@@ -41,8 +41,8 @@ public class UML2Association extends AbstractProperty implements Property {
 	 * 
 	 * @generated NOT
 	 */
-	private static final Logger LOGGER =
-			UML2MetamodelPlugin.getLogger(UML2Association.class);
+	private static final Logger LOGGER = UML2MetamodelPlugin
+			.getLogger(UML2Association.class);
 
 	/**
 	 * <p>
@@ -55,23 +55,35 @@ public class UML2Association extends AbstractProperty implements Property {
 
 	/**
 	 * <p>
+	 * The {@link UML2AdapterFactory} used to create nested elements.
+	 * </p>
+	 */
+	private UML2AdapterFactory factory;
+
+	/**
+	 * <p>
 	 * Creates a new <code>UML2Association</code> instance.
 	 * </p>
 	 * 
 	 * @param dslProperty
-	 *          the {@link org.eclipse.uml2.uml.Association} that is adopted by
-	 *          this class
+	 *            the {@link org.eclipse.uml2.uml.Association} that is adopted
+	 *            by this class
+	 * @param factory
+	 *            The {@link UML2AdapterFactory} used to create nested elements.
 	 * 
-	 * @generated
+	 * @generated NOT
 	 */
-	public UML2Association(org.eclipse.uml2.uml.Association dslProperty) {
+	public UML2Association(org.eclipse.uml2.uml.Association dslProperty,
+			UML2AdapterFactory factory) {
 
 		if (LOGGER.isDebugEnabled()) {
-			LOGGER.debug("UML2Association(dslProperty=" + dslProperty + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
+			LOGGER
+					.debug("UML2Association(dslProperty = " + dslProperty + "factory = " + factory + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 
 		// initialize
 		this.dslProperty = dslProperty;
+		this.factory = factory;
 
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("UML2Association() - exit"); //$NON-NLS-1$
@@ -97,8 +109,7 @@ public class UML2Association extends AbstractProperty implements Property {
 	@Override
 	public Type getType() {
 
-		return UML2AdapterFactory.INSTANCE.createType(dslProperty.getEndTypes()
-				.get(0));
+		return this.factory.createType(dslProperty.getEndTypes().get(0));
 	}
 
 	/**
@@ -121,7 +132,7 @@ public class UML2Association extends AbstractProperty implements Property {
 
 			aTypedElement = (TypedElement) owner;
 
-			result = UML2AdapterFactory.INSTANCE.createType(aTypedElement.getType());
+			result = this.factory.createType(aTypedElement.getType());
 		}
 
 		else if (owner instanceof org.eclipse.uml2.uml.Class) {
@@ -129,7 +140,7 @@ public class UML2Association extends AbstractProperty implements Property {
 
 			aClass = (org.eclipse.uml2.uml.Class) owner;
 
-			result = UML2AdapterFactory.INSTANCE.createType(aClass);
+			result = this.factory.createType(aClass);
 		}
 
 		else {

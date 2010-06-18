@@ -40,8 +40,8 @@ public class UML2EnumerationLiteral extends AbstractEnumerationLiteral
 	 * 
 	 * @generated NOT
 	 */
-	private static final Logger LOGGER =
-			UML2MetamodelPlugin.getLogger(UML2EnumerationLiteral.class);
+	private static final Logger LOGGER = UML2MetamodelPlugin
+			.getLogger(UML2EnumerationLiteral.class);
 
 	/**
 	 * <p>
@@ -54,25 +54,38 @@ public class UML2EnumerationLiteral extends AbstractEnumerationLiteral
 
 	/**
 	 * <p>
+	 * The {@link UML2AdapterFactory} used to create nested elements.
+	 * </p>
+	 * 
+	 * @generate NOT
+	 */
+	private UML2AdapterFactory factory;
+
+	/**
+	 * <p>
 	 * Creates a new <code>UML2EnumerationLiteral</code> instance.
 	 * </p>
 	 * 
 	 * @param dslEnumerationLiteral
-	 *          the {@link org.eclipse.uml2.uml.EnumerationLiteral} that is
-	 *          adopted by this class
+	 *            the {@link org.eclipse.uml2.uml.EnumerationLiteral} that is
+	 *            adopted by this class
+	 * @param factory
+	 *            The {@link UML2AdapterFactory} used to create nested elements.
 	 * 
-	 * @generated
+	 * @generated NOT
 	 */
 	public UML2EnumerationLiteral(
-			org.eclipse.uml2.uml.EnumerationLiteral dslEnumerationLiteral) {
+			org.eclipse.uml2.uml.EnumerationLiteral dslEnumerationLiteral,
+			UML2AdapterFactory factory) {
 
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER
-					.debug("UML2EnumerationLiteral(dslEnumerationLiteral=" + dslEnumerationLiteral + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
+					.debug("UML2EnumerationLiteral(dslEnumerationLiteral = " + dslEnumerationLiteral + " factory = " + factory + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 
 		// initialize
 		this.dslEnumerationLiteral = dslEnumerationLiteral;
+		this.factory = factory;
 
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("org.eclipse.uml2.uml.EnumerationLiteral() - exit"); //$NON-NLS-1$
@@ -98,7 +111,7 @@ public class UML2EnumerationLiteral extends AbstractEnumerationLiteral
 	@Override
 	public Enumeration getEnumeration() {
 
-		return UML2AdapterFactory.INSTANCE.createEnumeration(dslEnumerationLiteral
+		return this.factory.createEnumeration(dslEnumerationLiteral
 				.getEnumeration());
 	}
 }

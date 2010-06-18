@@ -14,11 +14,17 @@
 package tudresden.ocl20.pivot.metamodels.uml2.internal.model;
 
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
+import org.eclipse.uml2.uml.Association;
+import org.eclipse.uml2.uml.AssociationClass;
 import org.eclipse.uml2.uml.Class;
 import org.eclipse.uml2.uml.Interface;
+import org.eclipse.uml2.uml.Model;
+import org.eclipse.uml2.uml.Profile;
 
 import tudresden.ocl20.pivot.essentialocl.EssentialOclPlugin;
 import tudresden.ocl20.pivot.metamodels.uml2.UML2MetamodelPlugin;
@@ -54,21 +60,22 @@ public class UML2AdapterFactory {
 
 	/**
 	 * <p>
-	 * The Singleton instance of the factory.
-	 * </p>
-	 * 
-	 * @generated
-	 */
-	public static UML2AdapterFactory INSTANCE = new UML2AdapterFactory();
-
-	/**
-	 * <p>
 	 * A cache for previously created adapters.
 	 * </p>
 	 * 
 	 * @generated
 	 */
 	private Map<org.eclipse.uml2.uml.NamedElement, NamedElement> adapters;
+
+	/**
+	 * <p>
+	 * A cache for previously created {@link Namespace}s stored by their
+	 * qualified name.
+	 * </p>
+	 * 
+	 * @generated NOT
+	 */
+	private Map<String, UML2Package> adaptedNamespaces = new HashMap<String, UML2Package>();
 
 	/**
 	 * <p>
@@ -81,16 +88,28 @@ public class UML2AdapterFactory {
 
 	/**
 	 * <p>
-	 * Clients are not supposed to instantiate this class.
+	 * The root {@link Namespace} belonging to the {@link UML2Model} of this
+	 * {@link UML2AdapterFactory}.
 	 * </p>
 	 * 
 	 * @generated NOT
 	 */
-	private UML2AdapterFactory() {
+	private Namespace rootNamespace;
+
+	/**
+	 * <p>
+	 * Creates a new {@link UML2AdapterFactory}.
+	 * </p>
+	 * 
+	 * @generated NOT
+	 */
+	public UML2AdapterFactory(Namespace rootNamespace) {
 
 		this.adapters = new HashMap<org.eclipse.uml2.uml.NamedElement, NamedElement>();
 
 		this.adaptedVoidReturnParameters = new HashMap<org.eclipse.uml2.uml.Operation, Parameter>();
+
+		this.rootNamespace = rootNamespace;
 	}
 
 	/**
@@ -99,42 +118,111 @@ public class UML2AdapterFactory {
 	 * {@link org.eclipse.uml2.uml.Package}.
 	 * </p>
 	 * 
+	 * <p>
+	 * This method should only be used to get {@link Namespace}s that have
+	 * already been created and are cached. Since otherwise the nesting
+	 * {@link Namespace} will be set to <code>null</code>.
+	 * </p>
+	 * 
+	 * @param dslPackage
+	 *            The {Package} that shall be adapted.
 	 * @generated NOT
 	 */
 	public Namespace createNamespace(org.eclipse.uml2.uml.Package dslPackage) {
 
-		/* Eventually log the entry of this method. */
+		/* Probably log the entry of this method. */
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("createNamespace(dslPackage=" + dslPackage
 					+ ") - enter");
 		}
 		// no else.
 
+		Namespace result = this.createNamespace(dslPackage, null);
+
+		/* Probably log the exit of this method. */
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("createNamespace() - exit - return value=" + result);
+		}
+		// no else.
+
+		return result;
+	}
+
+	/**
+	 * <p>
+	 * Creates a {@link Namespace} adapter for an
+	 * {@link org.eclipse.uml2.uml.Package}.
+	 * </p>
+	 * 
+	 * @param dslPackage
+	 *            The {Package} that shall be adapted.
+	 * @param nestingNamespace
+	 *            The nesting {@link Namespace} of the {@link UML2Package}.
+	 * @generated NOT
+	 */
+	public Namespace createNamespace(org.eclipse.uml2.uml.Package dslPackage,
+			Namespace nestingNamespace) {
+
+		/* Probably log the entry of this method. */
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("createNamespace(dslPackage = " + dslPackage
+					+ "nestingNamespace = " + nestingNamespace + ") - enter");
+		}
+		// no else.
+
 		Namespace result;
 
-		/* Check if the dsl package is null. */
-		if (dslPackage == null) {
-			result = null;
+		/*
+		 * A Package can be null or a model or profile, if the method
+		 * getNestingNamespace is accessed on imported model elements. Thus,
+		 * return the root name space instead.
+		 */
+		if (dslPackage == null || dslPackage instanceof Model
+				|| dslPackage instanceof Profile) {
+			result = this.rootNamespace;
 		}
 
-		/* Else try to get the name space. */
+		/* Else adapt or return an already adapted UML2Package. */
 		else {
+			UML2Package umlPackageResult;
 
-			result = (Namespace) this.adapters.get(dslPackage);
-
-			/* Check if the result is null. */
-			if (result == null) {
-
-				result = new UML2Package(dslPackage);
-
-				/* Cache the create name space. */
-				this.adapters.put(dslPackage, result);
+			/* Check if the dsl package is null. */
+			if (dslPackage == null) {
+				throw new IllegalArgumentException(
+						"The Package to be adpated cannot be null.");
 			}
 			// no else.
-		}
-		// end else.
 
-		/* Eventually log the exit of this method. */
+			/* Probably reuse or merge with other package. */
+			if (this.adaptedNamespaces.containsKey(dslPackage
+					.getQualifiedName())) {
+				umlPackageResult = this.adaptedNamespaces.get(dslPackage
+						.getQualifiedName());
+				umlPackageResult.mergePackage(dslPackage);
+			}
+
+			/* Else create a new package. */
+			else {
+				if (nestingNamespace == null) {
+					LOGGER.warn("Created UML2Package "
+							+ dslPackage.getQualifiedName()
+							+ " without nesting name space.");
+				}
+				// no else.
+
+				umlPackageResult = new UML2Package(dslPackage,
+						nestingNamespace, this);
+
+				/* Cache the create name space. */
+				this.adaptedNamespaces.put(dslPackage.getQualifiedName(),
+						umlPackageResult);
+			}
+			// no else.
+
+			result = umlPackageResult;
+		}
+
+		/* Probably log the exit of this method. */
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("createNamespace() - exit - return value=" + result);
 		}
@@ -195,6 +283,44 @@ public class UML2AdapterFactory {
 			result = createType((Interface) dslType);
 		}
 
+		/* Check if aType is an association class. */
+		/*
+		 * FIXME Claas: Discussion with Micha: should we support association
+		 * classes?
+		 */
+		else if (dslType instanceof AssociationClass) {
+
+			AssociationClass anAssociationClass;
+			List<org.eclipse.uml2.uml.Property> allEnds;
+
+			/* Cast to AssociationClass. */
+			anAssociationClass = (AssociationClass) dslType;
+
+			/* Get all association ends. */
+			allEnds = anAssociationClass.allConnections();
+
+			/* Add all other ends to each navigable end. */
+			this.addNavigableAssociationEnds(allEnds);
+		}
+
+		/* Else check if aType is another kind of association. */
+		else if (dslType instanceof Association) {
+
+			Association anAssociation;
+
+			List<org.eclipse.uml2.uml.Property> allEnds;
+
+			/* Cast to association. */
+			anAssociation = (Association) dslType;
+
+			/* Get all association ends. */
+			allEnds = anAssociation.getOwnedEnds();
+
+			/* Add all other ends to each navigable end. */
+			this.addNavigableAssociationEnds(allEnds);
+		}
+		// no else.
+
 		else {
 			/* Should not happen. */
 			throw new IllegalArgumentException("Unknown Type: " + dslType);
@@ -229,7 +355,7 @@ public class UML2AdapterFactory {
 		Enumeration enumeration = (Enumeration) adapters.get(dslEnumeration);
 
 		if (enumeration == null) {
-			enumeration = new UML2Enumeration(dslEnumeration);
+			enumeration = new UML2Enumeration(dslEnumeration, this);
 			adapters.put(dslEnumeration, enumeration);
 		}
 
@@ -268,7 +394,7 @@ public class UML2AdapterFactory {
 				.get(dslEnumerationLiteral);
 
 		if (literal == null) {
-			literal = new UML2EnumerationLiteral(dslEnumerationLiteral);
+			literal = new UML2EnumerationLiteral(dslEnumerationLiteral, this);
 			adapters.put(dslEnumerationLiteral, literal);
 		}
 
@@ -278,41 +404,6 @@ public class UML2AdapterFactory {
 		}
 
 		return literal;
-	}
-
-	/**
-	 * <p>
-	 * Creates a {@link Property} adapter for a
-	 * {@link org.eclipse.uml2.uml.Property}.
-	 * </p>
-	 * 
-	 * @generated
-	 */
-	public Property createProperty(org.eclipse.uml2.uml.Property dslProperty) {
-
-		if (LOGGER.isDebugEnabled()) {
-			LOGGER
-					.debug("createProperty(dslProperty=" + dslProperty + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
-		}
-
-		if (dslProperty == null) {
-			if (LOGGER.isDebugEnabled())
-				LOGGER.debug("createProperty() - exit: dslProperty is null");
-			return null;
-		}
-
-		Property property = (Property) adapters.get(dslProperty);
-
-		if (property == null) {
-			property = new UML2Property(dslProperty);
-			adapters.put(dslProperty, property);
-		}
-
-		if (LOGGER.isDebugEnabled()) {
-			LOGGER.debug("createProperty() - exit - return value=" + property); //$NON-NLS-1$
-		}
-
-		return property;
 	}
 
 	/**
@@ -342,13 +433,48 @@ public class UML2AdapterFactory {
 				.get(dslProperty);
 
 		if (property == null) {
-			property = new UML2NDirectionalProperty(dslProperty);
+			property = new UML2NDirectionalProperty(dslProperty, this);
 			adapters.put(dslProperty, property);
 		}
 
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER
 					.debug("createBiDirectionalProperty() - exit - return value=" + property); //$NON-NLS-1$
+		}
+
+		return property;
+	}
+
+	/**
+	 * <p>
+	 * Creates a {@link Property} adapter for a
+	 * {@link org.eclipse.uml2.uml.Property}.
+	 * </p>
+	 * 
+	 * @generated
+	 */
+	public Property createProperty(org.eclipse.uml2.uml.Property dslProperty) {
+
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER
+					.debug("createProperty(dslProperty=" + dslProperty + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
+		}
+
+		if (dslProperty == null) {
+			if (LOGGER.isDebugEnabled())
+				LOGGER.debug("createProperty() - exit: dslProperty is null");
+			return null;
+		}
+
+		Property property = (Property) adapters.get(dslProperty);
+
+		if (property == null) {
+			property = new UML2Property(dslProperty, this);
+			adapters.put(dslProperty, property);
+		}
+
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("createProperty() - exit - return value=" + property); //$NON-NLS-1$
 		}
 
 		return property;
@@ -378,7 +504,7 @@ public class UML2AdapterFactory {
 		Property property = (Property) adapters.get(dslProperty);
 
 		if (property == null) {
-			property = new UML2Association(dslProperty);
+			property = new UML2Association(dslProperty, this);
 			adapters.put(dslProperty, property);
 		}
 
@@ -413,7 +539,7 @@ public class UML2AdapterFactory {
 		Operation operation = (Operation) adapters.get(dslOperation);
 
 		if (operation == null) {
-			operation = new UML2Operation(dslOperation);
+			operation = new UML2Operation(dslOperation, this);
 			adapters.put(dslOperation, operation);
 		}
 
@@ -449,7 +575,7 @@ public class UML2AdapterFactory {
 		Parameter parameter = (Parameter) adapters.get(dslParameter);
 
 		if (parameter == null) {
-			parameter = new UML2Parameter(dslParameter);
+			parameter = new UML2Parameter(dslParameter, this);
 			adapters.put(dslParameter, parameter);
 		}
 
@@ -478,7 +604,7 @@ public class UML2AdapterFactory {
 	public Parameter createVoidReturnParameter(
 			org.eclipse.uml2.uml.Operation dslOperation) {
 
-		/* Eventually log the entry into this method. */
+		/* Probably log the entry into this method. */
 		if (LOGGER.isDebugEnabled()) {
 			String msg;
 
@@ -505,20 +631,20 @@ public class UML2AdapterFactory {
 		}
 
 		else {
-			/* Eventually get a cached result. */
+			/* Probably get a cached result. */
 			result = this.adaptedVoidReturnParameters.get(dslOperation);
 
 			/* Else create the result. */
 			if (result == null) {
 
-				result = new UML2VoidReturnParameter(dslOperation);
+				result = new UML2VoidReturnParameter(dslOperation, this);
 
 				/* Cache the result. */
 				this.adaptedVoidReturnParameters.put(dslOperation, result);
 			}
 		}
 
-		/* Eventually log the exit from this method. */
+		/* Probably log the exit from this method. */
 		if (LOGGER.isDebugEnabled()) {
 			String msg;
 
@@ -559,7 +685,7 @@ public class UML2AdapterFactory {
 				.get(dslPrimitiveType);
 
 		if (primitiveType == null) {
-			primitiveType = new UML2PrimitiveType(dslPrimitiveType);
+			primitiveType = new UML2PrimitiveType(dslPrimitiveType, this);
 			adapters.put(dslPrimitiveType, primitiveType);
 		}
 
@@ -593,7 +719,7 @@ public class UML2AdapterFactory {
 		Type type = (Type) adapters.get(dslClass);
 
 		if (type == null) {
-			type = new UML2Class(dslClass);
+			type = new UML2Class(dslClass, this);
 			adapters.put(dslClass, type);
 		}
 
@@ -628,7 +754,7 @@ public class UML2AdapterFactory {
 		Type type = (Type) adapters.get(dslInterface);
 
 		if (type == null) {
-			type = new UML2Interface(dslInterface);
+			type = new UML2Interface(dslInterface, this);
 			adapters.put(dslInterface, type);
 		}
 
@@ -651,7 +777,7 @@ public class UML2AdapterFactory {
 	private Type createTypePrimitiveType(
 			org.eclipse.uml2.uml.PrimitiveType dslPrimitiveType) {
 
-		/* Eventually log the entry into this method. */
+		/* Probably log the entry into this method. */
 		if (LOGGER.isDebugEnabled()) {
 			String msg;
 
@@ -665,19 +791,19 @@ public class UML2AdapterFactory {
 
 		Type result;
 
-		/* Eventually get a cached result. */
+		/* Probably get a cached result. */
 		result = (Type) adapters.get(dslPrimitiveType);
 
 		/* If the type has not been adapted before, create a new adaptation. */
 		if (result == null) {
-			result = new UML2TypePrimitiveType(dslPrimitiveType);
+			result = new UML2TypePrimitiveType(dslPrimitiveType, this);
 
 			/* Cache the result. */
 			adapters.put(dslPrimitiveType, result);
 		}
 		// no else.
 
-		/* Eventually log the exit from this method. */
+		/* Probably log the exit from this method. */
 		if (LOGGER.isDebugEnabled()) {
 			String msg;
 
@@ -688,6 +814,137 @@ public class UML2AdapterFactory {
 		}
 		// no else.
 
+		return result;
+	}
+
+	/**
+	 * <p>
+	 * A helper method that iterates through a {@link List} of
+	 * {@link org.eclipse.uml2.uml.Property}s and adds all other
+	 * {@link org.eclipse.uml2.uml.Property}s to each
+	 * {@link org.eclipse.uml2.uml.Property}, if it is navigable.
+	 * </p>
+	 * 
+	 * @param properties
+	 *            The {@link List} of {@link org.eclipse.uml2.uml.Property}s.
+	 */
+	private void addNavigableAssociationEnds(
+			List<org.eclipse.uml2.uml.Property> properties) {
+
+		boolean allArentNavigable;
+
+		List<NDirectionalProperty> adaptedAssociations = new LinkedList<NDirectionalProperty>();
+
+		/* Check if all properties aren't navigable. */
+		allArentNavigable = true;
+		int size = 0;
+
+		for (org.eclipse.uml2.uml.Property aProperty : properties) {
+			allArentNavigable &= !aProperty.isNavigable();
+			if (aProperty.isNavigable())
+				++size;
+		}
+		// end for.
+
+		/*
+		 * If all properties aren't navigable, the association is n-directional.
+		 * All properties know all others.
+		 */
+		if (allArentNavigable) {
+			for (org.eclipse.uml2.uml.Property aProperty : properties) {
+
+				adaptedAssociations.addAll(this.addAllOtherAssciationEnds(
+						aProperty, properties, true));
+			}
+			// end for.
+		}
+
+		/*
+		 * Else check for each property if it is navigable and eventually add
+		 * the other properties to their fields.
+		 */
+		else {
+			for (org.eclipse.uml2.uml.Property aProperty : properties) {
+				if (aProperty.isNavigable()) {
+
+					adaptedAssociations.addAll(this.addAllOtherAssciationEnds(
+							aProperty, properties, (size > 1)));
+				}
+				// no else.
+			}
+			// end for.
+		}
+		// end else.
+
+		/*
+		 * Add all association ends to the other properties.
+		 */
+		for (NDirectionalProperty prop : adaptedAssociations) {
+
+			prop.addAssociations(adaptedAssociations);
+		}
+		// end for.
+	}
+
+	/**
+	 * <p>
+	 * A helper method which adds all {@link org.eclipse.uml2.uml.Property}s of
+	 * a given {@link List} to a given {@link org.eclipse.uml2.uml.Property}'s
+	 * {@link Type} as {@link Property}s.
+	 * </p>
+	 * 
+	 * @param anOwner
+	 *            The {@link org.eclipse.uml2.uml.Property} which shall know all
+	 *            given {@link org.eclipse.uml2.uml.Property}s.
+	 * @param allProperties
+	 *            The {@link List} of {@link org.eclipse.uml2.uml.Property}s
+	 *            which shall be added.
+	 * @param nDirectional
+	 *            If the parameter true, then created
+	 *            {@link NDirectionalProperty}s, otherwise {@link Property}s.
+	 * @return a list of all added {@link NDirectionalProperty}s.
+	 */
+	private List<NDirectionalProperty> addAllOtherAssciationEnds(
+			org.eclipse.uml2.uml.Property anOwner,
+			List<org.eclipse.uml2.uml.Property> allProperties,
+			boolean nDirectional) {
+
+		List<NDirectionalProperty> result = new LinkedList<NDirectionalProperty>();
+
+		for (org.eclipse.uml2.uml.Property aProperty : allProperties) {
+
+			/* Do not add the property to itself, but to all other properties. */
+			if (anOwner != aProperty) {
+				tudresden.ocl20.pivot.pivotmodel.Type ownerType;
+				tudresden.ocl20.pivot.pivotmodel.Property adaptedProperty;
+
+				/* Create or get the owner's Type. */
+				ownerType = this.createType(anOwner.getType());
+
+				/* Create or get the property. */
+				if (nDirectional) {
+					adaptedProperty = this
+							.createNDirectionalProperty(aProperty);
+					result.add((NDirectionalProperty) adaptedProperty);
+				}
+
+				else {
+					adaptedProperty = this.createProperty(aProperty);
+				}
+
+				/*
+				 * Check if the property has already been added (could happen
+				 * for bidirectional associations between the same type).
+				 */
+				if (!ownerType.getOwnedProperty().contains(adaptedProperty)) {
+					/* Else add the property. */
+					ownerType.addProperty(adaptedProperty);
+				}
+				// no else.
+			}
+			// no else.
+		}
+		// end for.
 		return result;
 	}
 }

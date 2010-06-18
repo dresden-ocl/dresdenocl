@@ -44,12 +44,15 @@ public class UML2NDirectionalProperty extends UML2Property implements NDirection
 	 * @param dslProperty
 	 *          the {@link org.eclipse.uml2.uml.Property} that is adopted by this
 	 *          class
+	 * @param factory
+	 *            The {@link UML2AdapterFactory} used to create nested elements.
+	 * 
 	 * 
 	 * @generated NOT
 	 */
-	public UML2NDirectionalProperty(org.eclipse.uml2.uml.Property dslProperty) {
+	public UML2NDirectionalProperty(org.eclipse.uml2.uml.Property dslProperty, UML2AdapterFactory factory) {
 
-		super(dslProperty);
+		super(dslProperty, factory);
 		
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("UML2NDirectionalProperty(dslProperty=" + dslProperty + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
@@ -126,5 +129,4 @@ public class UML2NDirectionalProperty extends UML2Property implements NDirection
 			addAssociation(prob);
 		}
 	}
-
 }

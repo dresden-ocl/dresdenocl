@@ -15,7 +15,6 @@ package tudresden.ocl20.pivot.metamodels.uml2.internal.model;
 
 import java.io.IOException;
 import java.util.HashSet;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
@@ -24,16 +23,11 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.osgi.util.NLS;
-import org.eclipse.uml2.uml.Association;
-import org.eclipse.uml2.uml.AssociationClass;
 import org.eclipse.uml2.uml.Classifier;
 import org.eclipse.uml2.uml.Model;
 import org.eclipse.uml2.uml.Package;
-import org.eclipse.uml2.uml.PrimitiveType;
 import org.eclipse.uml2.uml.Profile;
-import org.eclipse.uml2.uml.Property;
 import org.eclipse.uml2.uml.Type;
-import org.eclipse.uml2.uml.UMLFactory;
 
 import tudresden.ocl20.pivot.metamodels.uml2.UML2MetamodelPlugin;
 import tudresden.ocl20.pivot.model.IModel;
@@ -41,8 +35,8 @@ import tudresden.ocl20.pivot.model.ModelAccessException;
 import tudresden.ocl20.pivot.model.ModelConstants;
 import tudresden.ocl20.pivot.model.base.AbstractModel;
 import tudresden.ocl20.pivot.model.metamodel.IMetamodel;
-import tudresden.ocl20.pivot.pivotmodel.NDirectionalProperty;
 import tudresden.ocl20.pivot.pivotmodel.Namespace;
+import tudresden.ocl20.pivot.pivotmodel.PivotModelFactory;
 
 /**
  * <p>
@@ -73,6 +67,9 @@ public class UML2Model extends AbstractModel implements IModel {
 	/** The adapter for the top package of the associated UML2 model. */
 	private Namespace rootNamespace;
 
+	/** The {@link UML2AdapterFactory} of this {@link UML2Model}. */
+	private UML2AdapterFactory factory;
+
 	/**
 	 * <p>
 	 * Creates a new {@link UML2Model} adapting the given
@@ -97,10 +94,24 @@ public class UML2Model extends AbstractModel implements IModel {
 	 * @see tudresden.ocl20.pivot.model.IModel#dispose()
 	 */
 	public void dispose() {
-		/* Unload the resource to remove external contents. */
-		this.resource.unload();
+		/* Unload referenced resources and the resource. */
+		Set<Resource> resourcesToUnload = new HashSet<Resource>();
+		resourcesToUnload.add(this.resource);
+		
+		for (EObject eObject : EcoreUtil.ExternalCrossReferencer.find(this.resource).keySet()) {
+			resourcesToUnload.add(eObject.eResource());
+		}
+		// end for.
+		
+		for (Resource resource : resourcesToUnload) {
+			resource.unload();
+		}
+		// end for.		
+		
 		/* Reset the root name space to avoid caching. */
 		this.rootNamespace = null;
+		/* Reset the factory as well. */
+		this.factory = null;
 	}
 
 	/**
@@ -187,60 +198,12 @@ public class UML2Model extends AbstractModel implements IModel {
 
 	/**
 	 * <p>
-	 * A helper method which adds all {@link Property}s of a given {@link List}
-	 * to a given {@link Property} as fields.
-	 * </p>
+	 * Returns the {@link UML2AdapterFactory} of this {@link UML2Model}.</p<
 	 * 
-	 * @param anOwner
-	 *            The {@link Property} which shall know all given
-	 *            {@link Property}s.
-	 * @param allProperties
-	 *            The {@link List} of {@link Property}s which shall be added.
-	 * @param nDirectional
-	 *            If the parameter true, then created NDirectionalProperties,
-	 *            otherwise Properties
-	 * @return a list of all added NDirectionalProperties
+	 * @return The {@link UML2AdapterFactory} of this {@link UML2Model}.
 	 */
-	private List<NDirectionalProperty> addAllOtherAssciationEnds(
-			Property anOwner, List<Property> allProperties, boolean nDirectional) {
-
-		List<NDirectionalProperty> props = new LinkedList<NDirectionalProperty>();
-
-		for (Property aProperty : allProperties) {
-
-			/* Do not add the property to itself, but to all other properties. */
-			if (anOwner != aProperty) {
-				tudresden.ocl20.pivot.pivotmodel.Type ownerType;
-				tudresden.ocl20.pivot.pivotmodel.Property property;
-
-				/* Create or get the owner's Type. */
-				ownerType = UML2AdapterFactory.INSTANCE.createType(anOwner
-						.getType());
-
-				/* Create or get the property. */
-				if (nDirectional) {
-					property = UML2AdapterFactory.INSTANCE
-							.createNDirectionalProperty(aProperty);
-					props.add((NDirectionalProperty) property);
-				} else {
-					property = UML2AdapterFactory.INSTANCE
-							.createProperty(aProperty);
-				}
-
-				/*
-				 * Check if the property has already been added (could happen
-				 * for bidirectional associations between the same type).
-				 */
-				if (!ownerType.getOwnedProperty().contains(property)) {
-					/* Else add the property. */
-					ownerType.addProperty(property);
-				}
-				// no else.
-			}
-			// no else.
-		}
-		// end for.
-		return props;
+	public UML2AdapterFactory getFactory() {
+		return this.factory;
 	}
 
 	/**
@@ -248,22 +211,10 @@ public class UML2Model extends AbstractModel implements IModel {
 	 * Computes the {@link Package}s from referenced UML models of this
 	 * {@link UML2Model} and adds them to the root {@link Namespace} as well.
 	 * </p>
-	 * 
-	 * @param rootPackage
-	 *            The {@link Package} that represents the root {@link Namespace}
-	 *            of this {@link UML2Model}.
 	 */
-	private void addNamespacesForReferencedPackages(Package rootPackage) {
+	private void addNamespacesForReferencedPackages() {
 
-		/* Collect Packages that have to be added. */
-		Set<Package> packagesToBeAdded;
-		packagesToBeAdded = new HashSet<Package>();
-
-		/* Collect Classifiers that have to be added. */
-		Set<Classifier> classifiersToBeAdded;
-		classifiersToBeAdded = new HashSet<Classifier>();
-
-		/* Iterate through all references EObjects. */
+		/* Iterate through all referenced EObjects. */
 		for (EObject eObject : EcoreUtil.ExternalCrossReferencer.find(resource)
 				.keySet()) {
 
@@ -278,9 +229,23 @@ public class UML2Model extends AbstractModel implements IModel {
 				Package containerPackage;
 				containerPackage = classifier.getNearestPackage();
 
-				if ((containerPackage instanceof Model || containerPackage instanceof Profile)
-						&& !rootPackage.getOwnedTypes().contains(classifier)) {
-					classifiersToBeAdded.add(classifier);
+				if ((containerPackage instanceof Model || containerPackage instanceof Profile)) {
+
+					// FIXME Claas: This will probably cause problems. Types do
+					// not know their right name space now if they should be
+					// located in the root name space directly. */
+
+					/* Adapt the type. */
+					tudresden.ocl20.pivot.pivotmodel.Type importedType;
+					importedType = this.factory.createType(classifier);
+
+					/* Only add the type if it has not been added yet. */
+					if (!this.rootNamespace.getOwnedType().contains(
+							importedType)) {
+						this.rootNamespace.addType(importedType);
+					}
+					// no else.
+
 				}
 
 				else {
@@ -290,17 +255,23 @@ public class UML2Model extends AbstractModel implements IModel {
 						containerPackage = containerPackage.getNestingPackage();
 					}
 
-					if (!rootPackage.getNestedPackages().contains(
-							containerPackage)
-							&& !packagesToBeAdded.contains(containerPackage)
-							&& !containerPackage.equals(rootPackage)) {
+					/*
+					 * Adapt the package. If a package with the same name
+					 * already exists, the packages are merged.
+					 */
+					Namespace importedNamespace;
+					importedNamespace = this.factory.createNamespace(
+							containerPackage, this.rootNamespace);
 
-						/*
-						 * Do not add the package directly because a copy is
-						 * required. Afterwards, the containment check fails for
-						 * the copy and the package may be added multiple times.
-						 */
-						packagesToBeAdded.add(containerPackage);
+					/*
+					 * Only add the name space if it has not been added yet (for
+					 * merged name space, the name space has not to be added
+					 * again).
+					 */
+					if (!this.rootNamespace.getNestedNamespace().contains(
+							importedNamespace)) {
+						this.rootNamespace
+								.addNestedNamespace(importedNamespace);
 					}
 					// no else.
 				}
@@ -310,7 +281,7 @@ public class UML2Model extends AbstractModel implements IModel {
 			 * Else check if the EObject is a package (can be imported via
 			 * import statement in UML.
 			 */
-			if (eObject instanceof Package) {
+			else if (eObject instanceof Package) {
 
 				Package importedPackage;
 				importedPackage = (Package) eObject;
@@ -319,185 +290,30 @@ public class UML2Model extends AbstractModel implements IModel {
 						|| importedPackage.getNestingPackage() instanceof Model
 						|| importedPackage.getNestingPackage() instanceof Profile) {
 
-					if (!rootPackage.getNestedPackages().contains(
-							importedPackage)
-							&& !packagesToBeAdded.contains(importedPackage)
-							&& !importedPackage.equals(rootPackage)) {
+					/*
+					 * Adapt the package. If a package with the same name
+					 * already exists, the packages are merged.
+					 */
+					Namespace importedNamespace;
+					importedNamespace = this.factory.createNamespace(
+							importedPackage, this.rootNamespace);
 
-						/*
-						 * Do not add the package directly because a copy is
-						 * required. Afterwards, the containment check fails for
-						 * the copy and the package may be added multiple times.
-						 */
-						packagesToBeAdded.add(importedPackage);
+					/*
+					 * Only add the name space if it has not been added yet (for
+					 * merged name space, the name space has not to be added
+					 * again).
+					 */
+					if (!this.rootNamespace.getNestedNamespace().contains(
+							importedNamespace)) {
+						this.rootNamespace
+								.addNestedNamespace(importedNamespace);
 					}
 					// no else.
-
 				}
 				// no else.
 			}
 			// no else.
 		}
-
-		/*
-		 * Now copy and add the packages. Copy is required to avoid
-		 * bi-directional references.
-		 */
-		for (Package umlPackage : packagesToBeAdded) {
-			/*
-			 * FIXME Claas: The copy leads to duplicates of cyclic referenced
-			 * types having a wrong root name space.
-			 */
-			((Package) EcoreUtil.copy(umlPackage))
-					.setNestingPackage(rootPackage);
-		}
-		// end for.
-
-		/*
-		 * Now copy and add the classifiers. Copy is required to avoid
-		 * bi-directional references.
-		 */
-		for (Classifier classfier : classifiersToBeAdded) {
-			/*
-			 * Check is required to avoid duplicates of primitive types
-			 * referenced in multiple models.
-			 */
-			if (!(classfier instanceof PrimitiveType)
-					|| rootPackage.getOwnedType(((PrimitiveType) classfier)
-							.getName()) == null) {
-				/*
-				 * FIXME Claas: The copy leads to duplicates of cyclic
-				 * referenced types having a wrong root name space.
-				 */
-				rootPackage.getOwnedTypes().add(
-						(Classifier) EcoreUtil.copy(classfier));
-			}
-			// no else.
-		}
-		// end for.
-	}
-
-	/**
-	 * <p>
-	 * A helper method that iterates through a {@link List} of {@link Property}s
-	 * and adds all other {@link Property}s to each {@link Property}, if it is
-	 * navigable.
-	 * </p>
-	 * 
-	 * @param properties
-	 *            The {@link List} of {@link Property}s.
-	 */
-	private void addNavigableAssociationEnds(List<Property> properties) {
-
-		boolean allArentNavigable;
-
-		List<NDirectionalProperty> props = new LinkedList<NDirectionalProperty>();
-
-		/* Check if all properties aren't navigable. */
-		allArentNavigable = true;
-		int size = 0;
-
-		for (Property aProperty : properties) {
-			allArentNavigable &= !aProperty.isNavigable();
-			if (aProperty.isNavigable())
-				++size;
-		}
-
-		/*
-		 * If all properties aren't navigable, the association is n-directional.
-		 * All properties know all others.
-		 */
-		if (allArentNavigable) {
-			for (Property aProperty : properties) {
-				props.addAll(this.addAllOtherAssciationEnds(aProperty,
-						properties, true));
-			}
-		}
-
-		/*
-		 * Else check for each property if it is navigable and eventually add
-		 * the other properties to their fields.
-		 */
-		else {
-			for (Property aProperty : properties) {
-				if (aProperty.isNavigable()) {
-					props.addAll(this.addAllOtherAssciationEnds(aProperty,
-							properties, (size > 1)));
-				}
-				// no else.
-			}
-			// end for.
-		}
-		// end else.
-
-		/*
-		 * Add all association ends to the other properties.
-		 */
-		for (NDirectionalProperty prop : props) {
-			prop.addAssociations(props);
-		}
-	}
-
-	/**
-	 * <p>
-	 * Processes all UML Associations: since they are treated as Types in the
-	 * UML meta model, they have to be mapped to Properties in the Pivot Model.
-	 * </p>
-	 * 
-	 * <p>
-	 * Precondition: binary associations
-	 * </p>
-	 * 
-	 * @param rootPackage
-	 *            The containing {@link Package} (or name space).
-	 */
-	private void convertAssociations(Package rootPackage) {
-
-		/* Iterate through nested packages and convert their associations. */
-		for (Package aPackage : rootPackage.getNestedPackages()) {
-			this.convertAssociations(aPackage);
-		}
-
-		/*
-		 * Iterate through all types of the package and convert associations.
-		 */
-		for (Type aType : rootPackage.getOwnedTypes()) {
-
-			/* Check if aType is an association class. */
-			if (aType instanceof AssociationClass) {
-
-				AssociationClass anAssociationClass;
-				List<Property> allEnds;
-
-				/* Cast to AssociationClass. */
-				anAssociationClass = (AssociationClass) aType;
-
-				/* Get all association ends. */
-				allEnds = anAssociationClass.allConnections();
-
-				/* Add all other ends to each navigable end. */
-				this.addNavigableAssociationEnds(allEnds);
-			}
-
-			/* Else check if aType is another kind of association. */
-			else if (aType instanceof Association) {
-
-				Association anAssociation;
-
-				List<Property> allEnds;
-
-				/* Cast to association. */
-				anAssociation = (Association) aType;
-
-				/* Get all association ends. */
-				allEnds = anAssociation.getOwnedEnds();
-
-				/* Add all other ends to each navigable end. */
-				this.addNavigableAssociationEnds(allEnds);
-			}
-			// no else.
-		}
-		// end for.
 	}
 
 	/**
@@ -517,112 +333,108 @@ public class UML2Model extends AbstractModel implements IModel {
 	 */
 	private Namespace createRootNamespace() throws ModelAccessException {
 
-		List<EObject> rootPackages;
-		Package rootPackage;
+		if (this.rootNamespace == null) {
 
-		/** load the resource. */
-		if (!resource.isLoaded()) {
+			/** load the resource. */
+			if (!resource.isLoaded()) {
 
-			if (LOGGER.isInfoEnabled()) {
-				LOGGER.info(NLS.bind(
-						UML2ModelMessages.UML2Model_LoadingUML2Model, resource
-								.getURI()));
+				if (LOGGER.isInfoEnabled()) {
+					LOGGER.info(NLS.bind(
+							UML2ModelMessages.UML2Model_LoadingUML2Model,
+							resource.getURI()));
+				}
+
+				/* Try to load the resource. */
+				try {
+					resource.load(null);
+				}
+
+				catch (IOException e) {
+					throw new ModelAccessException(
+							"Error while loading resource from " + resource.getURI(), e); //$NON-NLS-1$
+				}
+
 			}
+			// no else.
 
-			/* Try to load the resource. */
-			try {
-				resource.load(null);
+			/* Resolve all probably contained proxies of the resource. */
+			EcoreUtil.resolveAll(resource);
+
+			/* Get the root packages. */
+			List<EObject> rootPackages;
+			rootPackages = resource.getContents();
+
+			/* Create a new package to serve as the root package. */
+			this.rootNamespace = PivotModelFactory.eINSTANCE.createNamespace();
+			this.rootNamespace.setName(ModelConstants.ROOT_PACKAGE_NAME);
+
+			this.factory = new UML2AdapterFactory(this.rootNamespace);
+
+			/** Add all sub-packages and sub-types to the new root package. */
+			for (EObject eObject : rootPackages) {
+
+				/*
+				 * Models should not be added themselves. Add their contained
+				 * packages instead.
+				 */
+				if (eObject instanceof Model) {
+
+					for (Package umlPackage : ((Model) eObject)
+							.getNestedPackages()) {
+						this.rootNamespace
+								.addNestedNamespace(this.factory
+										.createNamespace(umlPackage,
+												this.rootNamespace));
+					}
+					// end for.
+
+					for (Type umlType : ((Model) eObject).getOwnedTypes()) {
+						this.rootNamespace.addType(this.factory
+								.createType(umlType));
+					}
+					// end for.
+				}
+
+				/*
+				 * Profiles should not be added themselves. Add their contained
+				 * packages instead.
+				 */
+				else if (eObject instanceof Profile) {
+
+					for (Package umlPackage : ((Profile) eObject)
+							.getNestedPackages()) {
+						this.rootNamespace
+								.addNestedNamespace(this.factory
+										.createNamespace(umlPackage,
+												this.rootNamespace));
+					}
+					// end for.
+
+					for (Type umlType : ((Profile) eObject).getOwnedTypes()) {
+						this.rootNamespace.addType(this.factory
+								.createType(umlType));
+					}
+					// end for.
+				}
+
+				else if (eObject instanceof Package) {
+					this.rootNamespace.addNestedNamespace(this.factory
+							.createNamespace((Package) eObject,
+									this.rootNamespace));
+				}
+
+				else if (eObject instanceof Type) {
+					this.rootNamespace.addType(this.factory
+							.createType((Type) eObject));
+				}
+				// no else.
 			}
+			// end for.
 
-			catch (IOException e) {
-				throw new ModelAccessException(
-						"Error while loading resource from " + resource.getURI(), e); //$NON-NLS-1$
-			}
-
+			this.addNamespacesForReferencedPackages();
 		}
 		// no else.
 
-		/* Resolve all probably contained proxies of the resource. */
-		EcoreUtil.resolveAll(resource);
-
-		/* Get the root packages. */
-		rootPackages = resource.getContents();
-
-		/* Create a new package to serve as the root package. */
-		rootPackage = UMLFactory.eINSTANCE.createPackage();
-		rootPackage.setName(ModelConstants.ROOT_PACKAGE_NAME);
-
-		/** Add all sub-packages and sub-types to the new root package. */
-		for (EObject eObject : rootPackages) {
-
-			/*
-			 * Models should not be added themselves. Add their contained
-			 * packages instead.
-			 */
-			if (eObject instanceof Model) {
-				/* Use model as root name space and replace name. */
-				/*
-				 * FIXME Claas: This is not okay. A UML Model can contain
-				 * multiple models.
-				 */
-				// rootPackage = (Model) eObject;
-				// rootPackage.setName(ModelConstants.ROOT_PACKAGE_NAME);
-
-				for (Package umlPackage : ((Model) eObject).getNestedPackages()) {
-					rootPackage.getNestedPackages().add(
-							(Package) EcoreUtil.copy(umlPackage));
-				}
-				// end for.
-
-				for (Type umlType : ((Model) eObject).getOwnedTypes()) {
-					rootPackage.getOwnedTypes().add(
-							(Type) EcoreUtil.copy(umlType));
-				}
-				// end for.
-			}
-
-			/*
-			 * Profiles should not be added themselves. Add their contained
-			 * packages instead.
-			 */
-			else if (eObject instanceof Profile) {
-				/* Use profile as root name space and replace name. */
-				/*
-				 * FIXME Claas: This is not okay. A UML Model can contain
-				 * multiple models.
-				 */
-				// rootPackage = (Profile) eObject;
-				// rootPackage.setName(ModelConstants.ROOT_PACKAGE_NAME);
-
-				for (Package umlPackage : ((Profile) eObject)
-						.getNestedPackages()) {
-					rootPackage.getNestedPackages().add(
-							(Package) EcoreUtil.copy(umlPackage));
-				}
-				// end for.
-
-				for (Type umlType : ((Profile) eObject).getOwnedTypes()) {
-					rootPackage.getOwnedTypes().add(
-							(Type) EcoreUtil.copy(umlType));
-				}
-				// end for.
-			}
-
-			else if (eObject instanceof Package) {
-				rootPackage.getNestedPackages().add((Package) eObject);
-			}
-
-			else if (eObject instanceof Type) {
-				rootPackage.getOwnedMembers().add((Type) eObject);
-			}
-			// no else.
-		}
-		// end for.
-
-		this.addNamespacesForReferencedPackages(rootPackage);
-
-		this.convertAssociations(rootPackage);
-
-		return UML2AdapterFactory.INSTANCE.createNamespace(rootPackage);
+		return this.rootNamespace;
 	}
 }

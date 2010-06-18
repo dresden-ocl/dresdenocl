@@ -42,8 +42,8 @@ public class UML2Operation extends AbstractOperation implements Operation {
 	 * 
 	 * @generated NOT
 	 */
-	private static final Logger LOGGER =
-			UML2MetamodelPlugin.getLogger(UML2Operation.class);
+	private static final Logger LOGGER = UML2MetamodelPlugin
+			.getLogger(UML2Operation.class);
 
 	/**
 	 * <p>
@@ -56,23 +56,37 @@ public class UML2Operation extends AbstractOperation implements Operation {
 
 	/**
 	 * <p>
+	 * The {@link UML2AdapterFactory} used to create nested elements.
+	 * </p>
+	 * 
+	 * @generate NOT
+	 */
+	private UML2AdapterFactory factory;
+
+	/**
+	 * <p>
 	 * Creates a new <code>UML2Operation</code> instance.
 	 * </p>
 	 * 
 	 * @param dslOperation
-	 *          the {@link org.eclipse.uml2.uml.Operation} that is adopted by this
-	 *          class
+	 *            the {@link org.eclipse.uml2.uml.Operation} that is adopted by
+	 *            this class
+	 * @param factory
+	 *            The {@link UML2AdapterFactory} used to create nested elements.
 	 * 
-	 * @generated
+	 * @generated NOT
 	 */
-	public UML2Operation(org.eclipse.uml2.uml.Operation dslOperation) {
+	public UML2Operation(org.eclipse.uml2.uml.Operation dslOperation,
+			UML2AdapterFactory factory) {
 
 		if (LOGGER.isDebugEnabled()) {
-			LOGGER.debug("UML2Operation(dslOperation=" + dslOperation + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
+			LOGGER
+					.debug("UML2Operation(dslOperation = " + dslOperation + ", factory = " + factory + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 
 		// initialize
 		this.dslOperation = dslOperation;
+		this.factory = factory;
 
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("UML2Operation() - exit"); //$NON-NLS-1$
@@ -104,8 +118,7 @@ public class UML2Operation extends AbstractOperation implements Operation {
 
 		for (org.eclipse.uml2.uml.Parameter dslOwnedParameter : dslOperation
 				.getOwnedParameters()) {
-			result
-					.add(UML2AdapterFactory.INSTANCE.createParameter(dslOwnedParameter));
+			result.add(this.factory.createParameter(dslOwnedParameter));
 		}
 
 		/* Eventually add the void return parameter manually. */
@@ -128,10 +141,9 @@ public class UML2Operation extends AbstractOperation implements Operation {
 		Type result;
 
 		if (this.dslOperation.getOwner() instanceof org.eclipse.uml2.uml.Type) {
-			result =
-					UML2AdapterFactory.INSTANCE
-							.createType(((org.eclipse.uml2.uml.Type) this.dslOperation
-									.getOwner()));
+			result = this.factory
+					.createType(((org.eclipse.uml2.uml.Type) this.dslOperation
+							.getOwner()));
 		}
 
 		else {
@@ -156,7 +168,7 @@ public class UML2Operation extends AbstractOperation implements Operation {
 	@Override
 	public Type getType() {
 
-		return UML2AdapterFactory.INSTANCE.createType(dslOperation.getType());
+		return this.factory.createType(dslOperation.getType());
 	}
 
 	/**
@@ -170,16 +182,13 @@ public class UML2Operation extends AbstractOperation implements Operation {
 
 		/* Check if the return parameter is null. */
 		if (this.dslOperation.getReturnResult() == null) {
-			result =
-					UML2AdapterFactory.INSTANCE
-							.createVoidReturnParameter(this.dslOperation);
+			result = this.factory.createVoidReturnParameter(this.dslOperation);
 		}
 
 		/* Else adapt the return parameter. */
 		else {
-			result =
-					UML2AdapterFactory.INSTANCE.createParameter(this.dslOperation
-							.getReturnResult());
+			result = this.factory.createParameter(this.dslOperation
+					.getReturnResult());
 		}
 
 		return result;
@@ -200,9 +209,8 @@ public class UML2Operation extends AbstractOperation implements Operation {
 		 * isMultiple(), since Operation does not directly inherit from
 		 * MultiplicityElement.
 		 */
-		result =
-				this.dslOperation.getUpper() > 1
-						|| this.dslOperation.getUpper() == LiteralUnlimitedNatural.UNLIMITED;
+		result = this.dslOperation.getUpper() > 1
+				|| this.dslOperation.getUpper() == LiteralUnlimitedNatural.UNLIMITED;
 
 		return result;
 	}
