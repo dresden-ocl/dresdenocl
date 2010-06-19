@@ -157,13 +157,16 @@ trait OclStaticSemantics extends ocl.semantics.OclAttributeMaker with pivotmodel
   
   protected def lookupOperationOnType(t : Type, name : String, static : Boolean, parameters : List[Parameter]) : Box[Operation] = {
     !!(t.lookupOperation(name, parameters.map(determineMultiplicityElementType(_)))) or {
-      (allDefs._2.find(d => t.conformsTo(d._1)) ?~ 
-      	("Cannot find operation " + name + " on " + t.getName + " with parameters + " + parameters.mkString(", "))).flatMap{d =>
-      		d._2.map(_._1.getOperation).find(o => o.getName == name).flatMap{operation =>
+      val d = allDefs._2.filter(d => t.conformsTo(d._1))
+      if (d.isEmpty) Failure("Cannot find operation " + name + " on " + t.getName + " with parameters + " + parameters.mkString(", "))
+      else {
+      	d.flatMap{d =>
+      		// FIXME: also lookup parameters, etc.
+      	  d._2.map(_._1.getOperation).find(o => o.getName == name).flatMap{operation =>
       		  Full(operation)
       		}
-      	}
-      																	
+      	}.toList.firstOption
+      }
     }
   }
   
@@ -274,8 +277,21 @@ trait OclStaticSemantics extends ocl.semantics.OclAttributeMaker with pivotmodel
 	                // in the other cases, the source is part of a navigation call -> only properties have
 	                // to be considered
 	                case other => {
-	                  lookupPropertyOnType(sourceType, identifier, false).flatMap{p =>
-	                    Full(List(p))
+	                  (aeo->isMultipleNavigationCall).flatMap{isMultiple =>
+		                  if ((isMultiple && sourceType.isInstanceOf[CollectionType]) || (!isMultiple && !sourceType.isInstanceOf[CollectionType]))
+		                    lookupPropertyOnType(sourceType, identifier, false).flatMap{p =>
+			                    Full(List(p))
+			                  }
+		                  else if (isMultiple) // implicit asSet
+                      	lookupPropertyOnType(sourceExpression.withAsSet.getType, identifier, false).flatMap{p =>
+                         	addWarning("implicit asSet() on " + aeo, aeo)
+                      	  Full(List(p))
+                       	}
+		                  else // implicit collect
+		                  	lookupPropertyOnType(sourceType.asInstanceOf[CollectionType].getElementType, identifier, false).flatMap{p =>
+		                  		addWarning("implicit collect() on " + aeo, aeo)
+		                  	  Full(List(p))
+                      	}
 	                  }
 	                }
 	              }
@@ -322,7 +338,6 @@ trait OclStaticSemantics extends ocl.semantics.OclAttributeMaker with pivotmodel
           	if (identifier.contains("::"))
               yieldFailure("Cannot call a static operation " + identifier + " in a chained feature call", aeo)
             else {
-              // TODO: if not found look for defs!
               if (!fuzzy) {
                 isMultipleNavigationCall(aeo) match {
                   case Full(true) => {
@@ -556,75 +571,93 @@ trait OclStaticSemantics extends ocl.semantics.OclAttributeMaker with pivotmodel
         }
         
         case l@LetExpCS(variableDeclarations, _) if !variableDeclarations.contains(child.getEObject) => {
-          (l->variables).flatMap{otherVars =>
-	          Full(otherVars._1, variableDeclarations.flatMap{vd =>
-	            (vd.getInitialization->computeOclExpression).flatMap{initExp =>
-		            checkVariableDeclarationType(vd).flatMap{tipe =>
-		              Full(factory.createVariable(vd.getVariableName.getSimpleName, tipe, initExp))
+          val last = variableDeclarations.last
+          (last->variables).flatMap{case (implicitVariableBox, explicitVariables) =>
+            (last.getInitialization->computeOclExpression).flatMap{initExp =>
+	            checkVariableDeclarationType(last).flatMap{tipe =>
+	              Full(implicitVariableBox, factory.createVariable(last.getVariableName.getSimpleName, tipe, initExp)::explicitVariables)
+	            }
+	          }
+          }
+        }
+        
+        // a let exp with multiple variables can have references to previously defined vars
+        case l@LetExpCS(variableDeclarations, _) => {
+          if (child.isFirst)
+            l->variables
+          else {
+            val prev = child.prev.asInstanceOf[VariableDeclarationWithInitCS]
+            ((prev)->variables).flatMap{ case (implicitVariableBox, explicitVariables) =>
+              (prev.getInitialization->computeOclExpression).flatMap{initExp =>
+		            checkVariableDeclarationType(prev).flatMap{tipe =>
+		              Full(implicitVariableBox, factory.createVariable(prev.getVariableName.getSimpleName, tipe, initExp)::explicitVariables)
 		            }
 		          }
-	          }:::otherVars._2)
+            }
           }
         }
         
         case i@IteratorExpCS(iteratorVariables, _, _) => {
         	(i->sourceExpression).flatMap{se =>
-	          (i->variables).flatMap{otherVars =>
-	            val iteratorVariablesEOcl = iteratorVariables.flatMap{iv =>
-	              if (iv.getTypeName != null) {
-		              (iv.getTypeName->oclType).flatMap{tipe =>
-		                // FIXME: dangerous cast!
-			              if (!tipe.conformsTo(determineTypeOf(se)))
-			              	yieldFailure("Expected type " + tipe.getName + ", but found " + 
-	                                determineTypeOf(se).getName, iv)
-			              else
-			              	Full(factory.createVariable(iv.getVariableName.getSimpleName, tipe, null))
-			            }
-	              }
+	          (i->variables).flatMap{case (implicitVariableBox, explicitVariables) =>
+	            implicitVariableBox.flatMap{implicitVariable =>
+		            val iteratorVariablesEOcl = iteratorVariables.flatMap{iv =>
+		              if (iv.getTypeName != null) {
+			              (iv.getTypeName->oclType).flatMap{tipe =>
+				              if (!tipe.conformsTo(determineTypeOf(se)))
+				              	yieldFailure("Expected type " + tipe.getName + ", but found " + 
+		                                determineTypeOf(se).getName, iv)
+				              else
+				              	Full(factory.createVariable(iv.getVariableName.getSimpleName, tipe, null))
+				            }
+		              }
+		              else
+		                Full(factory.createVariable(iv.getVariableName.getSimpleName, determineTypeOf(se), null))
+		            }
+		            // if something went wrong on iterator variable evaluation, return Empty
+		            if (iteratorVariablesEOcl.size != iteratorVariables.size)
+	                Empty
 	              else
-	                Full(factory.createVariable(iv.getVariableName.getSimpleName, determineTypeOf(se), null))
-	            }
-	            // if something went wrong on iterator variable evaluation, return Empty
-	            if (iteratorVariablesEOcl.size != iteratorVariables.size)
-                Empty
-              else
-		            Full(
-		              // implicit variable
-		            	if (iteratorVariables.isEmpty) // TODO: add unique identifier
-			            	Full(factory.createVariable("$implicitVariable$", determineTypeOf(se), null))
-			            else
-		                Full(iteratorVariablesEOcl.first)
-		              ,
-		              // explicit variables
-		              if (iteratorVariables.size == 2)
-	                  iteratorVariablesEOcl.get(1)::otherVars._2
-	                else
-	                  otherVars._2
-			          )
-	          }
+			            Full(
+			              // implicit variable
+			            	if (iteratorVariables.isEmpty) // TODO: add unique identifier
+				            	Full(factory.createVariable("$implicitVariable$", determineTypeOf(se), null))
+				            else
+			                Full(iteratorVariablesEOcl.first)
+			              ,
+			              // explicit variables
+			              if (iteratorVariables.size == 2)
+		                  iteratorVariablesEOcl.get(1)::implicitVariable::explicitVariables
+		                else
+		                  implicitVariable::explicitVariables
+				          )
+		          }
+            }
 	        }
         }
         
         case i@IterateExpCS(iteratorVariable, resultVariable, _) => {
-          (i->variables).flatMap{otherVars =>
-            (i->sourceExpression).flatMap{se =>
-              if (iteratorVariable.getTypeName != null) {
-	              (iteratorVariable.getTypeName->oclType).flatMap{tipe =>
-		              if (!tipe.conformsTo(determineTypeOf(se)))
-		              	yieldFailure("Expected type " + tipe.getName + ", but found " + 
-                                determineTypeOf(se).getName, iteratorVariable)
-		              else
-		              	Full(factory.createVariable(iteratorVariable.getVariableName.getSimpleName, tipe, null))
-		            }
-              }
-              else
-                Full(factory.createVariable(iteratorVariable.getVariableName.getSimpleName, determineTypeOf(se), null))
-            }.flatMap{iv =>
-              (resultVariable.getInitialization->computeOclExpression).flatMap{initExp =>
-	              checkVariableDeclarationType(resultVariable).flatMap{tipe =>
-	              	Full(Full(iv), factory.createVariable(resultVariable.getVariableName.getSimpleName, tipe, initExp)::otherVars._2)
+          (i->variables).flatMap{case (implicitVariableBox, explicitVariables) =>
+            implicitVariableBox.flatMap{implicitVariable =>
+	            (i->sourceExpression).flatMap{se =>
+	              if (iteratorVariable.getTypeName != null) {
+		              (iteratorVariable.getTypeName->oclType).flatMap{tipe =>
+			              if (!tipe.conformsTo(determineTypeOf(se)))
+			              	yieldFailure("Expected type " + tipe.getName + ", but found " + 
+	                                determineTypeOf(se).getName, iteratorVariable)
+			              else
+			              	Full(factory.createVariable(iteratorVariable.getVariableName.getSimpleName, tipe, null))
+			            }
 	              }
-              }
+	              else
+	                Full(factory.createVariable(iteratorVariable.getVariableName.getSimpleName, determineTypeOf(se), null))
+	            }.flatMap{iv =>
+	              (resultVariable.getInitialization->computeOclExpression).flatMap{initExp =>
+		              checkVariableDeclarationType(resultVariable).flatMap{tipe =>
+		              	Full(Full(iv), factory.createVariable(resultVariable.getVariableName.getSimpleName, tipe, initExp)::implicitVariable::explicitVariables)
+		              }
+	              }
+	            }
             }
           }
         }
