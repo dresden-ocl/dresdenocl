@@ -11,6 +11,7 @@ OPTIONS {
 	tokenspace = "1";
 	overrideTextResource = "false";
 	overrideLocationMap = "false";
+	overrideCodeCompletionHelper = "false";
 	overrideManifest = "false";
 	usePredefinedTokens = "false";
 }
@@ -218,6 +219,12 @@ RULES {
 	
 	@operator(type="primitive", weight="20", superclass="OclExpressionCS")
 	StringLiteralExpCS					::= stringLiteral['\'', '\''];
+	
+	@operator(type="primitive", weight="20", superclass="OclExpressionCS")
+	InvalidLiteralExpCS					::= "invalid";
+	
+	@operator(type="primitive", weight="20", superclass="OclExpressionCS")
+	NullLiteralExpCS					::= "null";
 	
 	@operator(type="primitive", weight="20", superclass="OclExpressionCS")
 	NamedLiteralExpCS 					::= namedElement[SIMPLE_NAME];

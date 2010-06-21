@@ -156,6 +156,8 @@
     <genClasses ecoreClass="OCL.ecore#//StringLiteralExpCS">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute OCL.ecore#//StringLiteralExpCS/stringLiteral"/>
     </genClasses>
+    <genClasses ecoreClass="OCL.ecore#//InvalidLiteralExpCS"/>
+    <genClasses ecoreClass="OCL.ecore#//NullLiteralExpCS"/>
     <genClasses ecoreClass="OCL.ecore#//LetExpCS">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//LetExpCS/variableDeclarations"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//LetExpCS/oclExpression"/>

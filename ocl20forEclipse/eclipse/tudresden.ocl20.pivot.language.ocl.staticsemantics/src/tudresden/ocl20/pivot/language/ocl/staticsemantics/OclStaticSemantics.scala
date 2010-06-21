@@ -1027,6 +1027,14 @@ trait OclStaticSemantics extends ocl.semantics.OclAttributeMaker with pivotmodel
   	  case b@BooleanLiteralExpCS(booleanLiteral) => {
         Full(factory.createBooleanLiteralExp(booleanLiteral))
   	  }
+     
+  	  case i@InvalidLiteralExpCS() => {
+  	    Full(factory.createInvalidLiteralExp)
+  	  }
+     
+  	  case n@NullLiteralExpCS() => {
+  	    Full(factory.createUndefinedLiteralExp)
+  	  }
   	  
   	  case o@OperationCallBinaryExpCS(source, target, isMarkedPre, operationName) => {
   	    try {
@@ -1453,7 +1461,8 @@ trait OclStaticSemantics extends ocl.semantics.OclAttributeMaker with pivotmodel
   }
   
   def resolveNamespace(identifier : String, fuzzy : Boolean, container : EObject) : java.util.List[Namespace] = {
-	  _resolveNamespace(identifier, fuzzy) (container) match {
+	  val time = System.currentTimeMillis
+    val result = _resolveNamespace(identifier, fuzzy) (container) match {
       case Full(namespaceList) => namespaceList
       case Failure(msg, _, _) => {
         //resource.addError(msg, container)
@@ -1461,6 +1470,8 @@ trait OclStaticSemantics extends ocl.semantics.OclAttributeMaker with pivotmodel
       }
       case Empty => List()
     }
+    println("resolve Namespace: " + (System.currentTimeMillis - time))
+	  result
   }
   
   def resolveType(identifier : String, fuzzy : Boolean, container : EObject) : java.util.List[Type] = {
