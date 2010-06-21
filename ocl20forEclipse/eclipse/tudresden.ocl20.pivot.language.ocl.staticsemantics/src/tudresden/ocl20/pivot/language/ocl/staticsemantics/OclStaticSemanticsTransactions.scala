@@ -23,6 +23,9 @@ object OclStaticSemanticsTransactions {
       case None => // do nothing
     }
     parsedConstraints.removeKey(oclStaticSemantics.resource)
+  }
+  
+  def getAllDefs(oclStaticSemantics : OclStaticSemantics, root : EObject) = {
     // try to find all defs
     val allDefs = new collection.mutable.HashMap[Type, collection.mutable.Set[VariableDeclarationWithInitCS]] with collection.mutable.MultiMap[Type, VariableDeclarationWithInitCS]
     val allDefsOp = new collection.mutable.HashMap[Type, collection.mutable.Set[Tuple2[OperationDefinitionInDefCS, OclExpressionCS]]] with collection.mutable.MultiMap[Type, Tuple2[OperationDefinitionInDefCS, OclExpressionCS]]

@@ -9,7 +9,7 @@ package tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp;
 import tudresden.ocl20.pivot.model.IModel;
 
 public class OclResource extends org.eclipse.emf.ecore.resource.impl.ResourceImpl implements tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextResource {
-
+	
 	private IModel model;
 	
 	public void setModel(IModel model) {
@@ -164,8 +164,9 @@ public class OclResource extends org.eclipse.emf.ecore.resource.impl.ResourceImp
 		tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclParseResult result = parser.parse();
 		clearState();
 		getContents().clear();
+		org.eclipse.emf.ecore.EObject root = null;
 		if (result != null) {
-			org.eclipse.emf.ecore.EObject root = result.getRoot();
+			root = result.getRoot();
 			if (root != null) {
 				getContents().add(root);
 			}
@@ -179,6 +180,9 @@ public class OclResource extends org.eclipse.emf.ecore.resource.impl.ResourceImp
 		getReferenceResolverSwitch().setOptions(options);
 		if (getErrors().isEmpty()) {
 			runPostProcessors(options);
+			if (root != null) {
+				runValidators(root);
+			}
 		}
 	}
 	
@@ -516,6 +520,50 @@ public class OclResource extends org.eclipse.emf.ecore.resource.impl.ResourceImp
 	
 	public org.eclipse.emf.common.util.EList<org.eclipse.emf.ecore.resource.Resource.Diagnostic> getErrors() {
 		return new tudresden.ocl20.pivot.language.ocl.resource.ocl.util.OclCopiedEList<org.eclipse.emf.ecore.resource.Resource.Diagnostic>(super.getErrors());
+	}
+	
+	private void runValidators(org.eclipse.emf.ecore.EObject root) {
+		// checking constraints provided by EMF validator classes was disabled
+		// check EMF validation constraints
+		// EMF validation does not work if OSGi is not running
+		if (org.eclipse.core.runtime.Platform.isRunning()) {
+			// The EMF validation framework code throws a NPE if the validation plug-in is not
+			// loaded. This is a bug, which is fixed in the helios release. Nonetheless, we
+			// need to catch the exception here.
+			try {
+				org.eclipse.emf.validation.service.ModelValidationService service = org.eclipse.emf.validation.service.ModelValidationService.getInstance();
+				org.eclipse.emf.validation.service.IBatchValidator validator = (org.eclipse.emf.validation.service.IBatchValidator) service.newValidator(org.eclipse.emf.validation.model.EvaluationMode.BATCH);
+				validator.setIncludeLiveConstraints(true);
+				org.eclipse.core.runtime.IStatus status = validator.validate(root);
+				addStatus(status, root);
+			} catch (java.lang.Throwable t) {
+				tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclPlugin.logError("Exception while checking contraints provided by EMF validator classes.", t);
+			}
+		}
+	}
+	
+	private void addStatus(org.eclipse.core.runtime.IStatus status, org.eclipse.emf.ecore.EObject root) {
+		java.util.List<org.eclipse.emf.ecore.EObject> causes = new java.util.ArrayList<org.eclipse.emf.ecore.EObject>();
+		causes.add(root);
+		if (status instanceof org.eclipse.emf.validation.model.ConstraintStatus) {
+			org.eclipse.emf.validation.model.ConstraintStatus constraintStatus = (org.eclipse.emf.validation.model.ConstraintStatus) status;
+			java.util.Set<org.eclipse.emf.ecore.EObject> resultLocus = constraintStatus.getResultLocus();
+			causes.clear();
+			causes.addAll(resultLocus);
+		}
+		if (status.getSeverity() == org.eclipse.core.runtime.IStatus.ERROR) {
+			for (org.eclipse.emf.ecore.EObject cause : causes) {
+				addError(status.getMessage(), cause);
+			}
+		}
+		if (status.getSeverity() == org.eclipse.core.runtime.IStatus.WARNING) {
+			for (org.eclipse.emf.ecore.EObject cause : causes) {
+				addWarning(status.getMessage(), cause);
+			}
+		}
+		for (org.eclipse.core.runtime.IStatus child : status.getChildren()) {
+			addStatus(child, root);
+		}
 	}
 	
 }

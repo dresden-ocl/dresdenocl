@@ -10,7 +10,6 @@ OPTIONS {
 	reloadGeneratorModel = "true";
 	tokenspace = "1";
 	overrideTextResource = "false";
-	overrideLocationMap = "false";
 	overrideCodeCompletionHelper = "false";
 	overrideManifest = "false";
 	usePredefinedTokens = "false";
