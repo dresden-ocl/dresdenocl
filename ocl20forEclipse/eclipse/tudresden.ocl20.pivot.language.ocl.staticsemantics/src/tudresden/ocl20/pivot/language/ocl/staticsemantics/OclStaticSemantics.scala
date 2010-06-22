@@ -18,6 +18,16 @@ import tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp._
 import tudresden.attributegrammar.integration.kiama.util.CollectionConverterS2J._
 import tudresden.attributegrammar.integration.kiama.util.CollectionConverterJ2S._
 
+
+object ImplicitVariableNumberGenerator {
+  var number = 0
+  
+  def getNumber = {
+    number = number + 1
+    "" + number
+  }
+}
+
 trait OclStaticSemantics extends ocl.semantics.OclAttributeMaker with pivotmodel.semantics.PivotmodelAttributeMaker {
   
   /*
@@ -130,7 +140,15 @@ trait OclStaticSemantics extends ocl.semantics.OclAttributeMaker with pivotmodel
   
   protected def lookupVariableFuzzy(name : String, container : Attributable) : List[Variable] = {
     container->variables match {
-      case Full((_, explicitVariables)) => explicitVariables.filter(v => v.getName.startsWith(name))
+      case Full((implicitVariableBox, explicitVariables)) => implicitVariableBox match {
+        case Full(implicitVariable) => {
+	        if (implicitVariable.getName.startsWith(name))
+	          implicitVariable::(explicitVariables.filter(v => v.getName.startsWith(name)))
+	        else
+	        	explicitVariables.filter(v => v.getName.startsWith(name))
+        }
+        case _ => List()
+      }
       case Failure(_, _, _) | Empty => List()
     }
   }
@@ -645,7 +663,7 @@ trait OclStaticSemantics extends ocl.semantics.OclAttributeMaker with pivotmodel
 			            Full(
 			              // implicit variable
 			            	if (iteratorVariables.isEmpty) // TODO: add unique identifier
-				            	Full(factory.createVariable("$implicitVariable$", determineTypeOf(se), null))
+				            	Full(factory.createVariable("$implicitVariable" + ImplicitVariableNumberGenerator.getNumber + "$", determineTypeOf(se), null))
 				            else
 			                Full(iteratorVariablesEOcl.first)
 			              ,
@@ -712,6 +730,17 @@ trait OclStaticSemantics extends ocl.semantics.OclAttributeMaker with pivotmodel
       }
       case t@TypePathNameNestedCS(typePathName) => {
         typePathName->oclType
+      }
+      case t@TupleTypeCS(variableDeclarationList) => {
+        val properties = variableDeclarationList.getVariableDeclarations.flatMap{vd =>
+          (vd->computeFeature).flatMap{case (feature, _) =>
+            Full(feature.asInstanceOf[Property])
+          }
+        }
+        if (variableDeclarationList.getVariableDeclarations.size != properties.size)
+          Empty
+        else
+        	Full(oclLibrary.makeTupleType(properties))
       }
       case c@CollectionTypeIdentifierCS(genericType) => {
         val `type` = c.getTypeName
@@ -789,7 +818,7 @@ trait OclStaticSemantics extends ocl.semantics.OclAttributeMaker with pivotmodel
       case IntegerLiteralExpCS(_) => {
         Full(oclLibrary.getOclInteger)
       }
-      case RealLiteralExpCS(_) => {
+      case RealLiteralExpCS(_, _, _) => {
         Full(oclLibrary.getOclReal)
       }
       case BooleanLiteralExpCS(_) => {
@@ -1007,6 +1036,16 @@ trait OclStaticSemantics extends ocl.semantics.OclAttributeMaker with pivotmodel
         }
       }
       
+      case v@VariableDeclarationWithoutInitCS(variableName, typeName) => {
+        (typeName->oclType).flatMap{tipe =>
+          val property = PivotModelFactory.eINSTANCE.createProperty
+			    property.setName(variableName.getSimpleName)
+			    // TODO: does not work yet for nested collections
+			    determineMultiplicities(tipe, property)
+			    Full(property, null)
+        }
+      }
+      
       case d@DefinitionExpOperationCS(operationDefinition, oclExpression) => {
         val operation = operationDefinition.getOperation
         if (operation.eIsProxy)
@@ -1039,9 +1078,13 @@ trait OclStaticSemantics extends ocl.semantics.OclAttributeMaker with pivotmodel
         Full(factory.createIntegerLiteralExp(integerLiteral))
       }
       
-      case r@RealLiteralExpCS(realLiteral) => {
-        // TODO: parse Double, but use Float
-        Full(factory.createRealLiteralExp(realLiteral.toFloat))
+      case r@RealLiteralExpCS(intValue, realValue, navigationOperator) => {
+        import java.lang.Math._
+        if (navigationOperator == "->") 
+          yieldFailure("Cannot use '->' in a real expression.", r)
+        else {
+          Full(factory.createRealLiteralExp(intValue  + (realValue / pow(10, ("" + realValue).length)).toFloat))
+        }
       }
       
       case s@StringLiteralExpCS(stringLiteral) => {
@@ -1058,6 +1101,21 @@ trait OclStaticSemantics extends ocl.semantics.OclAttributeMaker with pivotmodel
      
   	  case n@NullLiteralExpCS() => {
   	    Full(factory.createUndefinedLiteralExp)
+  	  }
+     
+  	  case t@TupleLiteralExpCS(variableDeclarationList) => {
+  	    val properties = variableDeclarationList.getVariableDeclarations.flatMap(vd => vd->computeFeature)
+  	    if (properties.size != variableDeclarationList.getVariableDeclarations.size)
+          Empty
+       else {
+         val tupleLiteralParts = properties.map{case(property, initExpression) =>
+           val tupleLiteralPart = ExpressionsFactory.INSTANCE.createTupleLiteralPart
+           tupleLiteralPart.setProperty(property.asInstanceOf[Property])
+           tupleLiteralPart.setValue(initExpression)
+           tupleLiteralPart
+         }
+         Full(factory.createTupleLiteralExp(tupleLiteralParts.toArray : _*))
+       }
   	  }
   	  
   	  case o@OperationCallBinaryExpCS(source, target, isMarkedPre, operationName) => {
@@ -1190,7 +1248,7 @@ trait OclStaticSemantics extends ocl.semantics.OclAttributeMaker with pivotmodel
 				   					  oce.getArgument.add(arg.open_!)
 				   					}
 	                  val iteratorVar = ExpressionsFactory.INSTANCE.createVariable
-	                  iteratorVar.setName("$implicitCollect$")
+	                  iteratorVar.setName("$implicitCollect" + ImplicitVariableNumberGenerator.getNumber + "$")
 	                  iteratorVar.setType(sourceExpression.getType.asInstanceOf[CollectionType].getElementType)
 	                  oce.setSource(factory.createVariableExp(iteratorVar))
 				   					oce.setOclLibrary(oclLibrary)
@@ -1211,7 +1269,10 @@ trait OclStaticSemantics extends ocl.semantics.OclAttributeMaker with pivotmodel
 				   					  	if (sourceExpression.eContainer != null) {
 				   					  		sourceExpression match {
 				   					  		  case v : VariableExp =>
-				   					  		    factory.createVariableExp(factory.createVariable(v.getReferredVariable.getName, v.getReferredVariable.getType, null))
+				   					  		    factory.createVariableExp(
+				   					  		      factory.createVariable(v.getReferredVariable.getName, 
+                                             					 v.getReferredVariable.getType, 
+                                             					 v.getReferredVariable.getInitExpression))
 				   					  		}
 				   					  	}
 				   					  	else
@@ -1320,13 +1381,10 @@ trait OclStaticSemantics extends ocl.semantics.OclAttributeMaker with pivotmodel
       }
       
       case l@LetExpCS(variableDeclarations, oclExpression) => {
-        variableDeclarations.foldRight (oclExpression->computeOclExpression) {(vd1, vd2) =>
-        	vd2.flatMap{vd2 =>
-        	  (vd1.getInitialization->computeOclExpression).flatMap{initExp =>
-        	  	checkVariableDeclarationType(vd1).flatMap{tipe =>
-        	  	  val variable = factory.createVariable(vd1.getVariableName.getSimpleName, tipe, initExp)
-		        	  Full(factory.createLetExp(variable, vd2))
-        	  	}
+        (oclExpression->variables).flatMap{ case (_, explicitVariables) =>
+          explicitVariables.take(variableDeclarations.size).foldRight (oclExpression->computeOclExpression) { (explicitVariable, expression) =>
+            expression.flatMap{expression =>
+              Full(factory.createLetExp(explicitVariable, expression))
             }
           }
         }
@@ -1464,7 +1522,7 @@ trait OclStaticSemantics extends ocl.semantics.OclAttributeMaker with pivotmodel
 	        	yieldFailure("Expected type " + tipe.getName + ", but found " + 
 	                        initExp.getType.getName, vd)
 	        else
-	          Full(tipe)
+	          Full(initExp.getType)
         }
       }
     }

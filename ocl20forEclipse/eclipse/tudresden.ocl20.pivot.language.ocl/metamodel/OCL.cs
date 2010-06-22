@@ -34,8 +34,8 @@ TOKENS {
 	DEFINE COLLECTION_TYPES			$ 'Set' | 'Bag' | 'Sequence' | 'Collection' | 'OrderedSet' $;
 	DEFINE ITERATOR_NAME			$ 'select' | 'reject' | 'collect' | 'forAll' | 'any' | 'exists' | 'one' | 'isUnique' | 'collectNested' | 'sortedBy' $;
 	DEFINE STATIC					$ 'static'$;
+	DEFINE INTEGER_0				$ '0'+ ('0'..'9')$;
 	DEFINE INTEGER_LITERAL			$ ('1'..'9') ('0'..'9')* | '0'$;
-	DEFINE REAL_LITERAL 			$ (('1'..'9') ('0'..'9')* | '0') '.' ('0'..'9')+$;
 	DEFINE SIMPLE_NAME				$ ('A'..'Z'|'a'..'z'|'_') ('A'..'Z'|'a'..'z'|'0'..'9'|'_')*$;
 	DEFINE WHITESPACE 				$(' '|'\t'|'\f')$;
 	DEFINE LINEBREAKS 				$('\r\n'|'\r'|'\n')$;
@@ -152,7 +152,7 @@ RULES {
 	
 	TypePathNameNestedCS				::= namespace[SIMPLE_NAME] #0 "::" #0 typePathName;
 	
-	TupleTypeCS							::= "TupleType" "(" #0 variableDeclarationList? #0 ")";
+	TupleTypeCS							::= "Tuple" "(" #0 variableDeclarationList? #0 ")";
 	
 	CollectionTypeIdentifierCS			::= typeName[COLLECTION_TYPES] ( #0 "(" #0 genericType #0 ")")?;
 	
@@ -211,7 +211,7 @@ RULES {
 	IntegerLiteralExpCS					::= integerLiteral[INTEGER_LITERAL];
 	
 	@operator(type="primitive", weight="20", superclass="OclExpressionCS")
-	RealLiteralExpCS					::= realLiteral[REAL_LITERAL];
+	RealLiteralExpCS					::= intValue[INTEGER_LITERAL] #0 navigationOperator[NAVIGATION_OPERATOR] #0 (realValue[INTEGER_0] | realValue[INTEGER_LITERAL]);
 	
 	@operator(type="primitive", weight="20", superclass="OclExpressionCS")
 	BooleanLiteralExpCS					::= booleanLiteral[BOOLEAN_LITERAL];

@@ -20,10 +20,10 @@ public interface ILogManager {
    * The default file name for the log4j configuration file.
    * 
    * <p>
-   * Constant field value: <code>"logger.properties"</code>
+   * Constant field value: <code>"log4j.properties"</code>
    * </p>
    */
-  String DEFAULT_CONFIG_FILE_NAME = "logger.properties"; //$NON-NLS-1$
+  String DEFAULT_CONFIG_FILE_NAME = "log4j.properties"; //$NON-NLS-1$
 
   /**
    * Returns the log4j logger with the given name.

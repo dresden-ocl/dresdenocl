@@ -148,7 +148,9 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute OCL.ecore#//IntegerLiteralExpCS/integerLiteral"/>
     </genClasses>
     <genClasses ecoreClass="OCL.ecore#//RealLiteralExpCS">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute OCL.ecore#//RealLiteralExpCS/realLiteral"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute OCL.ecore#//RealLiteralExpCS/intValue"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute OCL.ecore#//RealLiteralExpCS/realValue"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute OCL.ecore#//RealLiteralExpCS/navigationOperator"/>
     </genClasses>
     <genClasses ecoreClass="OCL.ecore#//BooleanLiteralExpCS">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute OCL.ecore#//BooleanLiteralExpCS/booleanLiteral"/>
