@@ -115,6 +115,11 @@
     </genClasses>
     <genClasses image="false" ecoreClass="OCL.ecore#//OperationCallExpCS"/>
     <genClasses ecoreClass="OCL.ecore#//OperationCallOnSelfExpCS"/>
+    <genClasses ecoreClass="OCL.ecore#//StaticOperationCallExpCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//StaticOperationCallExpCS/typeName"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference OCL.ecore#//StaticOperationCallExpCS/operationName"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//StaticOperationCallExpCS/arguments"/>
+    </genClasses>
     <genClasses ecoreClass="OCL.ecore#//UnaryOperationCallExpCS">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute OCL.ecore#//UnaryOperationCallExpCS/operationName"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//UnaryOperationCallExpCS/target"/>

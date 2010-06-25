@@ -108,8 +108,8 @@
         eType="#//OclExpressionCS" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="IterateExpCS" eSuperTypes="#//LoopExpCS #//ImplicitFeatureCallCS">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="iteratorVariable" lowerBound="1"
-        eType="#//IteratorExpVariableCS" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="iteratorVariable" eType="#//IteratorExpVariableCS"
+        containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="resultVariable" lowerBound="1"
         eType="#//VariableDeclarationWithInitCS" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="bodyExpression" lowerBound="1"
@@ -153,6 +153,14 @@
   <eClassifiers xsi:type="ecore:EClass" name="OperationCallExpCS" abstract="true"
       eSuperTypes="#//FeatureCallExpCS"/>
   <eClassifiers xsi:type="ecore:EClass" name="OperationCallOnSelfExpCS" eSuperTypes="#//OperationCallExpCS #//OperationCallBaseExpCS"/>
+  <eClassifiers xsi:type="ecore:EClass" name="StaticOperationCallExpCS" eSuperTypes="#//OperationCallExpCS">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="typeName" lowerBound="1"
+        eType="#//TypePathNameCS" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="operationName" lowerBound="1"
+        eType="ecore:EClass ../../tudresden.ocl20.pivot.pivotmodel/model/pivotmodel.ecore#//Operation"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="arguments" upperBound="-1"
+        eType="#//OclExpressionCS" containment="true"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="UnaryOperationCallExpCS" eSuperTypes="#//OperationCallExpCS">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="operationName" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -252,7 +260,7 @@
         eType="#//TypePathNameCS" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="property" lowerBound="1"
         eType="ecore:EClass ../../tudresden.ocl20.pivot.pivotmodel/model/pivotmodel.ecore#//Property"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1" eType="#//TypeCS"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//TypeCS"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="initOrDeriveValue" lowerBound="1"
         upperBound="2" eType="#//InitOrDeriveValueCS" containment="true"/>

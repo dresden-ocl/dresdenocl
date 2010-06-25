@@ -67,10 +67,10 @@ public class OclReferenceResolveHelper implements IOclReferenceResolveHelper {
 	@Override
 	public List<Operation> resolveOperation(String identifier,
 			boolean resolveFuzzy, EObject container, EReference reference,
-			List<OclExpressionCS> parameters) {
+			List<OclExpressionCS> parameters, boolean isStatic) {
 		List<Operation> ret = OclStaticSemanticsProvider.getStaticSemantics(
 				(OclResource) container.eResource()).resolveOperation(identifier,
-				resolveFuzzy, container, reference, parameters);
+				resolveFuzzy, container, reference, parameters, isStatic);
 		return ret;
 	}
 

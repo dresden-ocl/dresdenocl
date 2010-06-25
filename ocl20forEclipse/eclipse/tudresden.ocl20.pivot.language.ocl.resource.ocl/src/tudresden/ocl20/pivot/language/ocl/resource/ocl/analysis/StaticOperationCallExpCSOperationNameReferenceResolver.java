@@ -12,15 +12,15 @@ import tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclReferenceResolveHelpe
 import tudresden.ocl20.pivot.language.ocl.resource.ocl.OclReferenceResolveHelperProvider;
 import tudresden.ocl20.pivot.pivotmodel.Operation;
 
-public class OperationCallBaseExpCSOperationNameReferenceResolver
+public class StaticOperationCallExpCSOperationNameReferenceResolver
 		implements
-		tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclReferenceResolver<tudresden.ocl20.pivot.language.ocl.OperationCallBaseExpCS, tudresden.ocl20.pivot.pivotmodel.Operation> {
+		tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclReferenceResolver<tudresden.ocl20.pivot.language.ocl.StaticOperationCallExpCS, tudresden.ocl20.pivot.pivotmodel.Operation> {
 
-	private tudresden.ocl20.pivot.language.ocl.resource.ocl.analysis.OclDefaultResolverDelegate<tudresden.ocl20.pivot.language.ocl.OperationCallBaseExpCS, tudresden.ocl20.pivot.pivotmodel.Operation> delegate = new tudresden.ocl20.pivot.language.ocl.resource.ocl.analysis.OclDefaultResolverDelegate<tudresden.ocl20.pivot.language.ocl.OperationCallBaseExpCS, tudresden.ocl20.pivot.pivotmodel.Operation>();
+	private tudresden.ocl20.pivot.language.ocl.resource.ocl.analysis.OclDefaultResolverDelegate<tudresden.ocl20.pivot.language.ocl.StaticOperationCallExpCS, tudresden.ocl20.pivot.pivotmodel.Operation> delegate = new tudresden.ocl20.pivot.language.ocl.resource.ocl.analysis.OclDefaultResolverDelegate<tudresden.ocl20.pivot.language.ocl.StaticOperationCallExpCS, tudresden.ocl20.pivot.pivotmodel.Operation>();
 
 	public void resolve(
 			java.lang.String identifier,
-			tudresden.ocl20.pivot.language.ocl.OperationCallBaseExpCS container,
+			tudresden.ocl20.pivot.language.ocl.StaticOperationCallExpCS container,
 			org.eclipse.emf.ecore.EReference reference,
 			int position,
 			boolean resolveFuzzy,
@@ -29,7 +29,7 @@ public class OperationCallBaseExpCSOperationNameReferenceResolver
 				.getOclReferenceResolveHelper();
 		if (rrHelper != null) {
 			List<Operation> operations = rrHelper.resolveOperation(identifier,
-					resolveFuzzy, container, reference, container.getArguments(), false);
+					resolveFuzzy, container, reference, container.getArguments(), true);
 			for (Operation operation : operations) {
 				if (!resolveFuzzy)
 					result.addMapping(identifier, operation);
@@ -41,7 +41,7 @@ public class OperationCallBaseExpCSOperationNameReferenceResolver
 
 	public java.lang.String deResolve(
 			tudresden.ocl20.pivot.pivotmodel.Operation element,
-			tudresden.ocl20.pivot.language.ocl.OperationCallBaseExpCS container,
+			tudresden.ocl20.pivot.language.ocl.StaticOperationCallExpCS container,
 			org.eclipse.emf.ecore.EReference reference) {
 		return delegate.deResolve(element, container, reference);
 	}

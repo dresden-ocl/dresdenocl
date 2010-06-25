@@ -17,6 +17,6 @@ Require-Bundle: tudresden.attributegrammar.integration.kiama;bundle-version="1.0
  tudresden.ocl20.pivot.model;bundle-version="2.2.0",
  tudresden.ocl20.pivot.essentialocl;bundle-version="2.1.0",
  tudresden.ocl20.pivot.modelbus;bundle-version="2.1.0",
- tudresden.ocl20.pivot.ocl2parser;bundle-version="2.1.0"
+ tudresden.ocl20.pivot.ocl2parser;bundle-version="2.2.0"
 Bundle-ActivationPolicy: lazy
 Export-Package: tudresden.ocl20.pivot.language.ocl.resource.ocl

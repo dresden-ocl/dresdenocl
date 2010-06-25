@@ -771,10 +771,10 @@ public class EssentialOclFactory {
 		if (operation == null) {
 			StringBuilder paramTypeNames = new StringBuilder();
 			if (paramTypes.size() == 0)
-				paramTypeNames.append(" with no argument type ");
+				paramTypeNames.append(" with no argument");
 			if (paramTypes.size() == 1)
 				paramTypeNames.append(" with argument type ");
-			else
+			if (paramTypes.size() > 1)
 				paramTypeNames.append(" with argument types ");
 			for (int i = 0; i < paramTypes.size(); i++) {
 				Type paramType = paramTypes.get(i);
