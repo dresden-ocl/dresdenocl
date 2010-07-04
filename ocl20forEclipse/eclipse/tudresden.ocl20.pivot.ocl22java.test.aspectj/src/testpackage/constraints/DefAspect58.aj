@@ -12,18 +12,18 @@ public privileged aspect DefAspect58 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testOrderedSetAsSet(java.util.List<Object> source)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testOclIsUndefined01(testpackage.Class1 source)}.</p>
      */
-    protected pointcut testOrderedSetAsSetCaller(testpackage.Class1 aClass, java.util.List<Object> source):
-    	call(* testpackage.Class1.testOrderedSetAsSet(java.util.List<Object>))
+    protected pointcut testOclIsUndefined01Caller(testpackage.Class1 aClass, testpackage.Class1 source):
+    	call(* testpackage.Class1.testOclIsUndefined01(testpackage.Class1))
     	&& target(aClass) && args(source);
     
     /**
-     * <p>Defines the method testOrderedSetAsSet(java.util.List<Object> source) defined by the constraint
+     * <p>Defines the method testOclIsUndefined01(testpackage.Class1 source) defined by the constraint
      * <code>context Class1
-     *       def: testOrderedSetAsSet = source[].asSet()</code></p>
+     *       def: testOclIsUndefined01 = source[].oclIsUndefined()</code></p>
      */
-    java.util.Set<Object> around(testpackage.Class1 aClass, java.util.List<Object> source): testOrderedSetAsSetCaller(aClass, source) {
-        return tudresden.ocl20.pivot.ocl22java.types.util.OclOrderedSets.asSet(source);
+    Boolean around(testpackage.Class1 aClass, testpackage.Class1 source): testOclIsUndefined01Caller(aClass, source) {
+        return (source == null);
     }
 }

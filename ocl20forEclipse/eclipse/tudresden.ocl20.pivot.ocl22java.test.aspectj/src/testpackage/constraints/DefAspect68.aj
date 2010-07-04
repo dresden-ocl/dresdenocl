@@ -12,18 +12,18 @@ public privileged aspect DefAspect68 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testRealDivision01(Float source, Float arg01)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testOrderedSetInsertAt(java.util.List<Object> source, Integer arg01, Object arg02)}.</p>
      */
-    protected pointcut testRealDivision01Caller(testpackage.Class1 aClass, Float source, Float arg01):
-    	call(* testpackage.Class1.testRealDivision01(Float, Float))
-    	&& target(aClass) && args(source, arg01);
+    protected pointcut testOrderedSetInsertAtCaller(testpackage.Class1 aClass, java.util.List<Object> source, Integer arg01, Object arg02):
+    	call(* testpackage.Class1.testOrderedSetInsertAt(java.util.List<Object>, Integer, Object))
+    	&& target(aClass) && args(source, arg01, arg02);
     
     /**
-     * <p>Defines the method testRealDivision01(Float source, Float arg01) defined by the constraint
+     * <p>Defines the method testOrderedSetInsertAt(java.util.List<Object> source, Integer arg01, Object arg02) defined by the constraint
      * <code>context Class1
-     *       def: testRealDivision01 = source[]./( arg01[])</code></p>
+     *       def: testOrderedSetInsertAt = source[].insertAt( arg01[], arg02[])</code></p>
      */
-    Float around(testpackage.Class1 aClass, Float source, Float arg01): testRealDivision01Caller(aClass, source, arg01) {
-        return (source / arg01);
+    java.util.List<Object> around(testpackage.Class1 aClass, java.util.List<Object> source, Integer arg01, Object arg02): testOrderedSetInsertAtCaller(aClass, source, arg01, arg02) {
+        return tudresden.ocl20.pivot.ocl22java.types.util.OclOrderedSets.insertAt(source, arg01, arg02);
     }
 }

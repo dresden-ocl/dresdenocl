@@ -1,11 +1,15 @@
 Changes and Bugs fixed during the different Releases
 ====================================================
 
-Release 2.2.1 (not scheduled yet)
+Release 3.0 (not scheduled yet)
 =================================
 * Some bugs in the UML2 meta-model were fixed.
   - Loading UML models containing references to other models should now work appropriately.
   - Reload of UML models now reloads changes of referenced external model elements as well.
+
+* Some bugs in Ocl22Java were fixed.
+  - OclAny.oclIsInvalid() is now transformed into working Java code.
+  - OclCollection.sum() is now transformed into working Java code. 
 
 Release 2.2 (June 16th 2010)
 ============================

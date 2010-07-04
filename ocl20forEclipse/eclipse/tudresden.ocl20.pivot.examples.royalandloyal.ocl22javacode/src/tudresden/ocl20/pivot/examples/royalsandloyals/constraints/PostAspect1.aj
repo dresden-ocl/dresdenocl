@@ -35,7 +35,7 @@ public privileged aspect PostAspect1 {
         Boolean result;
         result = proceed(aClass, c);
     
-        if (!aClass.participants.equals(tudresden.ocl20.pivot.ocl22java.types.util.OclSets.including(atPreValue1, c))) {
+        if (!tudresden.ocl20.pivot.ocl22java.types.util.OclSets.equals(aClass.participants, tudresden.ocl20.pivot.ocl22java.types.util.OclSets.including(atPreValue1, c))) {
         	// TODO Auto-generated code executed when constraint is violated.
         	throw new RuntimeException("Error: Constraint was violated.");
         }

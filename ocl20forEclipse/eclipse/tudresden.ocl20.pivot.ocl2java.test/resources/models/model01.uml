@@ -49,5 +49,8 @@
       </ownedParameter>
     </ownedOperation>
     <ownedOperation xmi:id="_HXd_UE1PEd-UlNzXZQNjJA" name="postOperation02"/>
+    <ownedOperation xmi:id="_z4FAIIdyEd-jP82yEy3VXg" name="postOperation03">
+      <ownedParameter xmi:id="_DIhEUIdzEd-jP82yEy3VXg" type="_HtFR8BvWEd-lK-Yjl_N2xQ" direction="return"/>
+    </ownedOperation>
   </packagedElement>
 </uml:Package>

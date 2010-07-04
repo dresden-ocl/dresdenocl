@@ -12,18 +12,18 @@ public privileged aspect DefAspect125 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testStringToInteger(String source)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testStringEqualsIgnoreCase(String source, String arg01)}.</p>
      */
-    protected pointcut testStringToIntegerCaller(testpackage.Class1 aClass, String source):
-    	call(* testpackage.Class1.testStringToInteger(String))
-    	&& target(aClass) && args(source);
+    protected pointcut testStringEqualsIgnoreCaseCaller(testpackage.Class1 aClass, String source, String arg01):
+    	call(* testpackage.Class1.testStringEqualsIgnoreCase(String, String))
+    	&& target(aClass) && args(source, arg01);
     
     /**
-     * <p>Defines the method testStringToInteger(String source) defined by the constraint
+     * <p>Defines the method testStringEqualsIgnoreCase(String source, String arg01) defined by the constraint
      * <code>context Class1
-     *       def: testStringToInteger = source[].toInteger()</code></p>
+     *       def: testStringEqualsIgnoreCase = source[].equalsIgnoreCase( arg01[])</code></p>
      */
-    Integer around(testpackage.Class1 aClass, String source): testStringToIntegerCaller(aClass, source) {
-        return Integer.parseInt(source);
+    Boolean around(testpackage.Class1 aClass, String source, String arg01): testStringEqualsIgnoreCaseCaller(aClass, source, arg01) {
+        return source.equalsIgnoreCase(arg01);
     }
 }

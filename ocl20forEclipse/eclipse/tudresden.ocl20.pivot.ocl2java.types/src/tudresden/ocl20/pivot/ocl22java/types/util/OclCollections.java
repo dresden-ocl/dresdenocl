@@ -1317,47 +1317,28 @@ public class OclCollections {
 	 *            The {@link Collection} representing self.
 	 * @return The addition of all elements in self.
 	 */
-	public static Float sum(Collection<Float> self) {
+	public static <T extends Number> Number sum(Collection<T> self) {
 
-		Float result;
-		result = new Float(0);
-
-		/* OCL Collections cannot be null. */
-		if (self == null) {
-			return result;
-		}
-		// no else.
-
-		for (Float element : self) {
-			result += element;
-		}
-		// end for.
-
-		return result;
-	}
-
-	/**
-	 * <p>
-	 * Returns the addition of all elements in self.
-	 * </p>
-	 * 
-	 * @param self
-	 *            The {@link Collection} representing self.
-	 * @return The addition of all elements in self.
-	 */
-	public static Integer sum(Collection<Integer> self) {
-
-		Integer result;
-		result = 0;
+		Number result;
+		result = new Double(0);
 
 		/* OCL Collections cannot be null. */
 		if (self == null) {
-			return result;
+			return new Double(0);
 		}
 		// no else.
 
-		for (Integer element : self) {
-			result += element;
+		for (T element : self) {
+			if (element instanceof Number) {
+				result = result.doubleValue()
+						+ ((Number) element).doubleValue();
+			}
+
+			else {
+				throw new InvalidException(
+						"Operation Collection.sum() is not defined for elements of the type "
+								+ element.getClass().getCanonicalName() + ".");
+			}
 		}
 		// end for.
 
@@ -1373,23 +1354,15 @@ public class OclCollections {
 	 *            The array representing self.
 	 * @return The addition of all elements in self.
 	 */
-	public static Integer sum(Integer[] self) {
-
-		Integer result;
-		result = 0;
+	public static Number sum(Integer[] self) {
 
 		/* OCL Collections cannot be null. */
 		if (self == null) {
-			return result;
+			return new Double(0);
 		}
 		// no else.
 
-		for (Integer element : self) {
-			result += element;
-		}
-		// end for.
-
-		return result;
+		return sum(Arrays.asList(self));
 	}
 
 	/**
@@ -1401,22 +1374,14 @@ public class OclCollections {
 	 *            The array representing self.
 	 * @return The addition of all elements in self.
 	 */
-	public static Float sum(Float[] self) {
-
-		Float result;
-		result = new Float(0);
+	public static Number sum(Float[] self) {
 
 		/* OCL Collections cannot be null. */
 		if (self == null) {
-			return result;
+			return new Double(0);
 		}
 		// no else.
 
-		for (Float element : self) {
-			result += element;
-		}
-		// end for.
-
-		return result;
+		return sum(Arrays.asList(self));
 	}
 }

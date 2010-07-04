@@ -12,18 +12,18 @@ public privileged aspect DefAspect71 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testRealGreaterThanEqual01(Float source, Float arg01)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testOrderedSetReverse(java.util.List<Object> source)}.</p>
      */
-    protected pointcut testRealGreaterThanEqual01Caller(testpackage.Class1 aClass, Float source, Float arg01):
-    	call(* testpackage.Class1.testRealGreaterThanEqual01(Float, Float))
-    	&& target(aClass) && args(source, arg01);
+    protected pointcut testOrderedSetReverseCaller(testpackage.Class1 aClass, java.util.List<Object> source):
+    	call(* testpackage.Class1.testOrderedSetReverse(java.util.List<Object>))
+    	&& target(aClass) && args(source);
     
     /**
-     * <p>Defines the method testRealGreaterThanEqual01(Float source, Float arg01) defined by the constraint
+     * <p>Defines the method testOrderedSetReverse(java.util.List<Object> source) defined by the constraint
      * <code>context Class1
-     *       def: testRealGreaterThanEqual01 = source[].>=( arg01[])</code></p>
+     *       def: testOrderedSetReverse = source[].reverse()</code></p>
      */
-    Boolean around(testpackage.Class1 aClass, Float source, Float arg01): testRealGreaterThanEqual01Caller(aClass, source, arg01) {
-        return (source >= arg01);
+    java.util.List<Object> around(testpackage.Class1 aClass, java.util.List<Object> source): testOrderedSetReverseCaller(aClass, source) {
+        return tudresden.ocl20.pivot.ocl22java.types.util.OclOrderedSets.reverse(source);
     }
 }

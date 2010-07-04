@@ -12,18 +12,18 @@ public privileged aspect DefAspect86 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testSequenceAsSet(java.util.List<Object> source)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testRealRound01(Float source)}.</p>
      */
-    protected pointcut testSequenceAsSetCaller(testpackage.Class1 aClass, java.util.List<Object> source):
-    	call(* testpackage.Class1.testSequenceAsSet(java.util.List<Object>))
+    protected pointcut testRealRound01Caller(testpackage.Class1 aClass, Float source):
+    	call(* testpackage.Class1.testRealRound01(Float))
     	&& target(aClass) && args(source);
     
     /**
-     * <p>Defines the method testSequenceAsSet(java.util.List<Object> source) defined by the constraint
+     * <p>Defines the method testRealRound01(Float source) defined by the constraint
      * <code>context Class1
-     *       def: testSequenceAsSet = source[].asSet()</code></p>
+     *       def: testRealRound01 = source[].round()</code></p>
      */
-    java.util.Set<Object> around(testpackage.Class1 aClass, java.util.List<Object> source): testSequenceAsSetCaller(aClass, source) {
-        return tudresden.ocl20.pivot.ocl22java.types.util.OclSequences.asSet(source);
+    Integer around(testpackage.Class1 aClass, Float source): testRealRound01Caller(aClass, source) {
+        return java.lang.Math.round(source);
     }
 }

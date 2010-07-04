@@ -38,6 +38,6 @@ public privileged aspect DeriveAspect2 {
             result1.add(anElement1.points);
         }
     
-        aClass.totalPointsEarned = tudresden.ocl20.pivot.ocl22java.types.util.OclCollections.sum(result1);
+        aClass.totalPointsEarned = new Integer(tudresden.ocl20.pivot.ocl22java.types.util.OclCollections.sum(result1).intValue());
     }
 }

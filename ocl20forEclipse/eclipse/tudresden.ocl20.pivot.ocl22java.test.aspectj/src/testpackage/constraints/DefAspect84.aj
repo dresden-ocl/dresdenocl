@@ -12,18 +12,18 @@ public privileged aspect DefAspect84 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testSequenceAsOrderedSet(java.util.List<Object> source)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testRealNegation01(Float source)}.</p>
      */
-    protected pointcut testSequenceAsOrderedSetCaller(testpackage.Class1 aClass, java.util.List<Object> source):
-    	call(* testpackage.Class1.testSequenceAsOrderedSet(java.util.List<Object>))
+    protected pointcut testRealNegation01Caller(testpackage.Class1 aClass, Float source):
+    	call(* testpackage.Class1.testRealNegation01(Float))
     	&& target(aClass) && args(source);
     
     /**
-     * <p>Defines the method testSequenceAsOrderedSet(java.util.List<Object> source) defined by the constraint
+     * <p>Defines the method testRealNegation01(Float source) defined by the constraint
      * <code>context Class1
-     *       def: testSequenceAsOrderedSet = source[].asOrderedSet()</code></p>
+     *       def: testRealNegation01 = source[].-()</code></p>
      */
-    java.util.List<Object> around(testpackage.Class1 aClass, java.util.List<Object> source): testSequenceAsOrderedSetCaller(aClass, source) {
-        return tudresden.ocl20.pivot.ocl22java.types.util.OclSequences.asOrderedSet(source);
+    Float around(testpackage.Class1 aClass, Float source): testRealNegation01Caller(aClass, source) {
+        return -(source);
     }
 }

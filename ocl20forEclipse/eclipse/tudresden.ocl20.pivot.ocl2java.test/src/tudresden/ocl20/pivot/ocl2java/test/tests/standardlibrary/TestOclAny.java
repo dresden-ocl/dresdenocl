@@ -24,9 +24,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import tudresden.ocl20.pivot.model.ModelAccessException;
-import tudresden.ocl20.pivot.ocl2java.exception.Ocl22CodeException;
 import tudresden.ocl20.pivot.ocl2java.test.tests.AbstractDiffTest;
-import tudresden.ocl20.pivot.parser.ParseException;
 
 /**
  * <p>
@@ -73,15 +71,10 @@ public class TestOclAny extends AbstractDiffTest {
 	 * Tests the instrumentation of a constraint.
 	 * </p>
 	 * 
-	 * @throws ModelAccessException
-	 * @throws ParseException
-	 * @throws IllegalArgumentException
-	 * @throws Ocl22CodeException
+	 * @throws Exception
 	 */
 	@Test
-	public void testAllInstancesInstrumented01()
-			throws IllegalArgumentException, ParseException,
-			ModelAccessException, Ocl22CodeException {
+	public void testAllInstances01() throws Exception {
 
 		this.compareFragmentCodeGeneration("sltest/oclany", "allInstances01");
 		this.compareInstrumentationCodeGeneration("sltest/oclany",
@@ -93,19 +86,13 @@ public class TestOclAny extends AbstractDiffTest {
 	 * Tests the instrumentation of a constraint.
 	 * </p>
 	 * 
-	 * @throws ModelAccessException
-	 * @throws ParseException
-	 * @throws IllegalArgumentException
-	 * @throws Ocl22CodeException
+	 * @throws Exception
 	 */
 	@Test
-	public void testAtPre01()
-			throws IllegalArgumentException, ParseException,
-			ModelAccessException, Ocl22CodeException {
-	
+	public void testAtPre01() throws Exception {
+
 		this.compareFragmentCodeGeneration("sltest/oclany", "atPre01");
-		this.compareInstrumentationCodeGeneration("sltest/oclany",
-				"atPre01");
+		this.compareInstrumentationCodeGeneration("sltest/oclany", "atPre01");
 	}
 
 	/**
@@ -113,19 +100,25 @@ public class TestOclAny extends AbstractDiffTest {
 	 * Tests the instrumentation of a constraint.
 	 * </p>
 	 * 
-	 * @throws ModelAccessException
-	 * @throws ParseException
-	 * @throws IllegalArgumentException
-	 * @throws Ocl22CodeException
+	 * @throws Exception
 	 */
 	@Test
-	public void testAtPre02()
-			throws IllegalArgumentException, ParseException,
-			ModelAccessException, Ocl22CodeException {
+	public void testEquals01() throws Exception {
+
+		this.compareFragmentCodeGeneration("sltest/oclany", "equals01");
+	}
+
+	/**
+	 * <p>
+	 * Tests the instrumentation of a constraint.
+	 * </p>
+	 * 
+	 * @throws Exception
+	 */
+	@Test
+	public void testNotEquals01() throws Exception {
 	
-		this.compareFragmentCodeGeneration("sltest/oclany", "atPre02");
-		this.compareInstrumentationCodeGeneration("sltest/oclany",
-				"atPre02");
+		this.compareFragmentCodeGeneration("sltest/oclany", "notEquals01");
 	}
 
 	/**
@@ -133,14 +126,102 @@ public class TestOclAny extends AbstractDiffTest {
 	 * Tests the instrumentation of a constraint.
 	 * </p>
 	 * 
-	 * @throws ModelAccessException
-	 * @throws ParseException
-	 * @throws IllegalArgumentException
-	 * @throws Ocl22CodeException
+	 * @throws Exception
 	 */
 	@Test
-	public void testOclType01() throws IllegalArgumentException,
-			ParseException, ModelAccessException, Ocl22CodeException {
+	public void testOclAsType01() throws Exception {
+	
+		this.compareFragmentCodeGeneration("sltest/oclany", "oclAsType01");
+	}
+
+	/**
+	 * <p>
+	 * Tests the instrumentation of a constraint.
+	 * </p>
+	 * 
+	 * @throws Exception
+	 */
+	@Test
+	public void testOclIsInvalid01() throws Exception {
+	
+		this.compareFragmentCodeGeneration("sltest/oclany", "oclIsInvalid01");
+	}
+
+	/**
+	 * <p>
+	 * Tests the instrumentation of a constraint.
+	 * </p>
+	 * 
+	 * @throws Exception
+	 */
+	@Test
+	public void testOclIsInvalid02() throws Exception {
+	
+		this.compareFragmentCodeGeneration("sltest/oclany", "oclIsInvalid02");
+	}
+
+	/**
+	 * <p>
+	 * Tests the instrumentation of a constraint.
+	 * </p>
+	 * 
+	 * @throws Exception
+	 */
+	@Test
+	public void testOclIsNew01() throws Exception {
+	
+		this.compareFragmentCodeGeneration("sltest/oclany", "oclIsNew01");
+		this.compareInstrumentationCodeGeneration("sltest/oclany", "oclIsNew01");
+	}
+
+	/**
+	 * <p>
+	 * Tests the instrumentation of a constraint.
+	 * </p>
+	 * 
+	 * @throws Exception
+	 */
+	@Test
+	public void testOclIsKindOf01() throws Exception {
+	
+		this.compareFragmentCodeGeneration("sltest/oclany", "oclIsKindOf01");
+	}
+
+	/**
+	 * <p>
+	 * Tests the instrumentation of a constraint.
+	 * </p>
+	 * 
+	 * @throws Exception
+	 */
+	@Test
+	public void testOclIsTypeOf01() throws Exception {
+	
+		this.compareFragmentCodeGeneration("sltest/oclany", "oclIsTypeOf01");
+	}
+
+	/**
+	 * <p>
+	 * Tests the instrumentation of a constraint.
+	 * </p>
+	 * 
+	 * @throws Exception
+	 */
+	@Test
+	public void testOclIsUndefined01() throws Exception {
+	
+		this.compareFragmentCodeGeneration("sltest/oclany", "oclIsUndefined01");
+	}
+
+	/**
+	 * <p>
+	 * Tests the instrumentation of a constraint.
+	 * </p>
+	 * 
+	 * @throws Exception
+	 */
+	@Test
+	public void testOclType01() throws Exception {
 
 		this.compareFragmentCodeGeneration("sltest/oclany", "oclType01");
 	}

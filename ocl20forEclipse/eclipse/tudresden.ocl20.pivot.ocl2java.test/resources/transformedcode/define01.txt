@@ -31,6 +31,6 @@ public privileged aspect DefAspect1 {
             result1.add(anElement1.amount);
         }
     
-        aClass.turnover = tudresden.ocl20.pivot.ocl22java.types.util.OclCollections.sum(result1);
+        aClass.turnover = new Float(tudresden.ocl20.pivot.ocl22java.types.util.OclCollections.sum(result1).floatValue());
     }
 }

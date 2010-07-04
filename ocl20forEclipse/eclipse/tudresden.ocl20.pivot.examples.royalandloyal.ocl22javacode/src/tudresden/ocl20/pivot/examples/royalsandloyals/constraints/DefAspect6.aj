@@ -42,6 +42,6 @@ public privileged aspect DefAspect6 {
             result1.add(anElement1.points);
         }
     
-        return tudresden.ocl20.pivot.ocl22java.types.util.OclCollections.sum(result1);
+        return new Integer(tudresden.ocl20.pivot.ocl22java.types.util.OclCollections.sum(result1).intValue());
     }
 }

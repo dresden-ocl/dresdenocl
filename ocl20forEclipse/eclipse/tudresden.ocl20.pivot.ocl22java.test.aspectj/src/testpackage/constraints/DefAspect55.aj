@@ -12,18 +12,18 @@ public privileged aspect DefAspect55 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testOrderedSetAsBag(java.util.List<Object> source)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testOclAsType01(testpackage.Class1 source)}.</p>
      */
-    protected pointcut testOrderedSetAsBagCaller(testpackage.Class1 aClass, java.util.List<Object> source):
-    	call(* testpackage.Class1.testOrderedSetAsBag(java.util.List<Object>))
+    protected pointcut testOclAsType01Caller(testpackage.Class1 aClass, testpackage.Class1 source):
+    	call(* testpackage.Class1.testOclAsType01(testpackage.Class1))
     	&& target(aClass) && args(source);
     
     /**
-     * <p>Defines the method testOrderedSetAsBag(java.util.List<Object> source) defined by the constraint
+     * <p>Defines the method testOclAsType01(testpackage.Class1 source) defined by the constraint
      * <code>context Class1
-     *       def: testOrderedSetAsBag = source[].asBag()</code></p>
+     *       def: testOclAsType01 = source[].oclAsType( Class1[])</code></p>
      */
-    java.util.List<Object> around(testpackage.Class1 aClass, java.util.List<Object> source): testOrderedSetAsBagCaller(aClass, source) {
-        return tudresden.ocl20.pivot.ocl22java.types.util.OclOrderedSets.asBag(source);
+    testpackage.Class1 around(testpackage.Class1 aClass, testpackage.Class1 source): testOclAsType01Caller(aClass, source) {
+        return ((testpackage.Class1) source);
     }
 }

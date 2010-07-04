@@ -41,7 +41,7 @@ public privileged aspect InvAspect1 {
             result1.add(anElement1.points);
         }
     
-        if (!(tudresden.ocl20.pivot.ocl22java.types.util.OclCollections.sum(result1) < new Integer(10000))) {
+        if (!(new Integer(tudresden.ocl20.pivot.ocl22java.types.util.OclCollections.sum(result1).intValue()) < new Integer(10000))) {
         	// TODO Auto-generated code executed when constraint is violated.
         	throw new RuntimeException("Error: Constraint was violated.");
         }

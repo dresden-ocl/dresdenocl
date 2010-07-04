@@ -486,8 +486,24 @@ oclAsTypeOperation(sourceExp, argsExp) ::= <<
 
 
 // --- OclIsInvalid Operation ---
-oclIsInvalidOperation(sourceExp) ::= <<
-($sourceExp$ == null)
+oclIsInvalidOperation(sourceExp, resultVar, sourceHasType) ::= <<
+Boolean $resultVar$;
+
+/* Check if the expression results in invalid. */
+try {
+    $if(sourceHasType)$
+    /* DUMMY variable is necessary to form literals into a statement. */
+    Object DUMMY = $sourceExp$; 
+    $else$
+    $sourceExp$;
+    $endif$
+    $resultVar$ = false;
+}
+
+catch (Exception e) {
+    $resultVar$ = true;
+}
+
 >>
 
 
@@ -595,8 +611,8 @@ $sourceExp$.substring($argsExp:{arg | $arg$}; separator = " - 1, "$)
 >>
 
 // --- Collection.sum() ---
-sumOperationOnCollection(sourceExp, argsExp) ::= <<
-$collectionUtility()$.sum($sourceExp$)
+sumOperationOnCollection(sourceExp, argsExp, resultType, typeConversion) ::= <<
+new $resultType$($collectionUtility()$.sum($sourceExp$)$typeConversion$)
 >>
 
 // --- Set.symmatricDifference(Set(T)) ---
@@ -719,4 +735,14 @@ tudresden.ocl20.pivot.ocl22java.types.util.OclSequences
 // --- Utility Class for Set Operations ---
 setUtility() ::= <<
 tudresden.ocl20.pivot.ocl22java.types.util.OclSets
+>>
+
+// --- Conversion operation from Number to Integer. */
+numberConversionToInteger() ::= <<
+.intValue()
+>>
+
+// --- Conversion operation from Number to Float. */
+numberConversionToFloat() ::= <<
+.floatValue()
 >>

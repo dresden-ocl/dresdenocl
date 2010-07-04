@@ -1369,7 +1369,7 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 
 				if (operation != null
 						&& operation.getOwningType().equals(bagType)) {
-					
+
 					/* Probably rename the operation. */
 					if (renamedOperationNames.containsKey(operationName)) {
 						operationName = renamedOperationNames
@@ -1405,7 +1405,7 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 
 				if (operation != null
 						&& operation.getOwningType().equals(orderedSetType)) {
-					
+
 					/* Probably rename the operation. */
 					if (renamedOperationNames.containsKey(operationName)) {
 						operationName = renamedOperationNames
@@ -1544,6 +1544,28 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 							+ "OperationOnCollection");
 				}
 				// no else.
+
+				/*
+				 * Sum operation requires special argument because result must
+				 * be cast to result type.
+				 */
+				if (template != null && operationName.equals("sum")) {
+					String resultType;
+					resultType = this.transformType(
+							anOperationCallExp.getType()).toString();
+
+					template.setAttribute("resultType", resultType);
+
+					/*
+					 * Set additional parameter to convert from number to result
+					 * type.
+					 */
+					template.setAttribute("typeConversion",
+							this.myTemplateGroup.getTemplate(
+									"numberConversionTo" + resultType)
+									.toString());
+				}
+				// no else.
 			}
 			// no else.
 
@@ -1578,8 +1600,21 @@ public final class Ocl22Java extends ExpressionsSwitch<ITransformedCode>
 				}
 
 				else if (operationName.equals("oclIsInvalid")) {
+					String resultVar;
+					resultVar = this.myCodeTransEnv.getNewResultVarName();
+
 					template = this.myTemplateGroup
 							.getTemplate("oclIsInvalidOperation");
+					template.setAttribute("sourceExp", sourceCode.getResultExp());
+					template.setAttribute("resultVar", resultVar);
+					
+					if (sourceExp.getType() != null) {
+						template.setAttribute("sourceHasType", "true");
+					}
+					// no else.
+					
+					result.addCode(template.toString());
+					resultExp = resultVar;
 				}
 
 				else if (operationName.equals("allInstances")) {

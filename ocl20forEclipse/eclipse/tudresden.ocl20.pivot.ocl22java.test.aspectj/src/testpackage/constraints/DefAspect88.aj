@@ -12,18 +12,18 @@ public privileged aspect DefAspect88 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testSequenceCount01(java.util.List<Object> source, Object arg01)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testSequenceAppend(java.util.List<Object> source, Object arg01)}.</p>
      */
-    protected pointcut testSequenceCount01Caller(testpackage.Class1 aClass, java.util.List<Object> source, Object arg01):
-    	call(* testpackage.Class1.testSequenceCount01(java.util.List<Object>, Object))
+    protected pointcut testSequenceAppendCaller(testpackage.Class1 aClass, java.util.List<Object> source, Object arg01):
+    	call(* testpackage.Class1.testSequenceAppend(java.util.List<Object>, Object))
     	&& target(aClass) && args(source, arg01);
     
     /**
-     * <p>Defines the method testSequenceCount01(java.util.List<Object> source, Object arg01) defined by the constraint
+     * <p>Defines the method testSequenceAppend(java.util.List<Object> source, Object arg01) defined by the constraint
      * <code>context Class1
-     *       def: testSequenceCount01 = source[].count( arg01[])</code></p>
+     *       def: testSequenceAppend = source[].append( arg01[])</code></p>
      */
-    Integer around(testpackage.Class1 aClass, java.util.List<Object> source, Object arg01): testSequenceCount01Caller(aClass, source, arg01) {
-        return tudresden.ocl20.pivot.ocl22java.types.util.OclSequences.count(source, arg01);
+    java.util.List<Object> around(testpackage.Class1 aClass, java.util.List<Object> source, Object arg01): testSequenceAppendCaller(aClass, source, arg01) {
+        return tudresden.ocl20.pivot.ocl22java.types.util.OclSequences.append(source, arg01);
     }
 }

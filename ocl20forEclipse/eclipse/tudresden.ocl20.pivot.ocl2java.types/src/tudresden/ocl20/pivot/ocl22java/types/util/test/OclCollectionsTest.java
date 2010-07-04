@@ -1331,16 +1331,20 @@ public class OclCollectionsTest {
 		Float elem1 = new Float(1.0);
 		Float elem2 = new Float(0.5);
 
-		assertEquals(new Float(0), OclCollections.sum(col1));
+		assertEquals(new Float(0), new Float(OclCollections.sum(col1)
+				.doubleValue()));
 
 		col1 = new ArrayList<Float>();
-		assertEquals(new Float(0), OclCollections.sum(col1));
+		assertEquals(new Float(0), new Float(OclCollections.sum(col1)
+				.doubleValue()));
 
 		col1.add(elem1);
-		assertEquals(new Float(1.0), OclCollections.sum(col1));
+		assertEquals(new Float(1.0), new Float(OclCollections.sum(col1)
+				.doubleValue()));
 
 		col1.add(elem2);
-		assertEquals(new Float(1.5), OclCollections.sum(col1));
+		assertEquals(new Float(1.5), new Float(OclCollections.sum(col1)
+				.doubleValue()));
 	}
 
 	@Test
@@ -1350,16 +1354,20 @@ public class OclCollectionsTest {
 		Integer elem1 = new Integer(1);
 		Integer elem2 = new Integer(2);
 
-		assertEquals(new Integer(0), OclCollections.sum(col1));
+		assertEquals(new Integer(0), new Integer(OclCollections.sum(col1)
+				.intValue()));
 
 		col1 = new ArrayList<Integer>();
-		assertEquals(new Integer(0), OclCollections.sum(col1));
+		assertEquals(new Integer(0), new Integer(OclCollections.sum(col1)
+				.intValue()));
 
 		col1.add(elem1);
-		assertEquals(new Integer(1), OclCollections.sum(col1));
+		assertEquals(new Integer(1), new Integer(OclCollections.sum(col1)
+				.intValue()));
 
 		col1.add(elem2);
-		assertEquals(new Integer(3), OclCollections.sum(col1));
+		assertEquals(new Integer(3), new Integer(OclCollections.sum(col1)
+				.intValue()));
 	}
 
 	@Test
@@ -1369,16 +1377,20 @@ public class OclCollectionsTest {
 		Float elem1 = new Float(1.0);
 		Float elem2 = new Float(0.5);
 
-		assertEquals(new Float(0), OclCollections.sum(col1));
+		assertEquals(new Float(0), new Float(OclCollections.sum(col1)
+				.doubleValue()));
 
 		col1 = new Float[] {};
-		assertEquals(new Float(0), OclCollections.sum(col1));
+		assertEquals(new Float(0), new Float(OclCollections.sum(col1)
+				.doubleValue()));
 
 		col1 = new Float[] { elem1 };
-		assertEquals(new Float(1.0), OclCollections.sum(col1));
+		assertEquals(new Float(1.0), new Float(OclCollections.sum(col1)
+				.doubleValue()));
 
 		col1 = new Float[] { elem1, elem2 };
-		assertEquals(new Float(1.5), OclCollections.sum(col1));
+		assertEquals(new Float(1.5), new Float(OclCollections.sum(col1)
+				.doubleValue()));
 	}
 
 	@Test
@@ -1388,15 +1400,19 @@ public class OclCollectionsTest {
 		Integer elem1 = new Integer(1);
 		Integer elem2 = new Integer(2);
 
-		assertEquals(new Integer(0), OclCollections.sum(col1));
+		assertEquals(new Integer(0), new Integer(OclCollections.sum(col1)
+				.intValue()));
 
 		col1 = new Integer[] {};
-		assertEquals(new Integer(0), OclCollections.sum(col1));
+		assertEquals(new Integer(0), new Integer(OclCollections.sum(col1)
+				.intValue()));
 
 		col1 = new Integer[] { elem1 };
-		assertEquals(new Integer(1), OclCollections.sum(col1));
+		assertEquals(new Integer(1), new Integer(OclCollections.sum(col1)
+				.intValue()));
 
 		col1 = new Integer[] { elem1, elem2 };
-		assertEquals(new Integer(3), OclCollections.sum(col1));
+		assertEquals(new Integer(3), new Integer(OclCollections.sum(col1)
+				.intValue()));
 	}
 }

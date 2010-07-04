@@ -12,18 +12,18 @@ public privileged aspect DefAspect82 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testSequenceAppend(java.util.List<Object> source, Object arg01)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testRealMinus01(Float source, Float arg01)}.</p>
      */
-    protected pointcut testSequenceAppendCaller(testpackage.Class1 aClass, java.util.List<Object> source, Object arg01):
-    	call(* testpackage.Class1.testSequenceAppend(java.util.List<Object>, Object))
+    protected pointcut testRealMinus01Caller(testpackage.Class1 aClass, Float source, Float arg01):
+    	call(* testpackage.Class1.testRealMinus01(Float, Float))
     	&& target(aClass) && args(source, arg01);
     
     /**
-     * <p>Defines the method testSequenceAppend(java.util.List<Object> source, Object arg01) defined by the constraint
+     * <p>Defines the method testRealMinus01(Float source, Float arg01) defined by the constraint
      * <code>context Class1
-     *       def: testSequenceAppend = source[].append( arg01[])</code></p>
+     *       def: testRealMinus01 = source[].-( arg01[])</code></p>
      */
-    java.util.List<Object> around(testpackage.Class1 aClass, java.util.List<Object> source, Object arg01): testSequenceAppendCaller(aClass, source, arg01) {
-        return tudresden.ocl20.pivot.ocl22java.types.util.OclSequences.append(source, arg01);
+    Float around(testpackage.Class1 aClass, Float source, Float arg01): testRealMinus01Caller(aClass, source, arg01) {
+        return (source - arg01);
     }
 }

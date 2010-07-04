@@ -28,6 +28,9 @@ package testpackage;
  */
 public class Class1 {
 
+	/** private field used in constraints. */
+	private Integer anInteger01 = 42;
+	
 	/**
 	 * <p>
 	 * Empty constructor required for most test cases.
@@ -87,6 +90,28 @@ public class Class1 {
 	 */
 	public Integer postOperation01(Integer in1) {
 		return in1 + 2;
+	}
+
+	/**
+	 * <p>
+	 * Used to test a post constraint.
+	 * </p>
+	 * 
+	 * @return What defined in the generated AspectJ aspect.
+	 */
+	public void postOperation02() {
+		this.anInteger01++;
+	}
+
+	/**
+	 * <p>
+	 * Used to test a post constraint.
+	 * </p>
+	 * 
+	 * @return What defined in the generated AspectJ aspect.
+	 */
+	public Class1 postOperation03() {
+		return new Class1();
 	}
 
 	/**

@@ -153,6 +153,20 @@ public class GenerateAspectJCode extends AbstractDiffTest {
 		constraints.add(new String[] { "sltest/integer", "toString01" });
 
 		constraints.add(new String[] { "sltest/oclany", "allInstances01" });
+		constraints.add(new String[] { "sltest/oclany", "atPre01" });
+		constraints.add(new String[] { "sltest/oclany", "equals01" });
+		constraints.add(new String[] { "sltest/oclany", "notEquals01" });
+		constraints.add(new String[] { "sltest/oclany", "oclAsType01" });
+		constraints.add(new String[] { "sltest/oclany", "oclIsInvalid01" });
+		constraints.add(new String[] { "sltest/oclany", "oclIsInvalid02" });
+		/*
+		 * FIXME Test uncommented operations when problems during parsing have
+		 * been fixed.
+		 */
+		// constraints.add(new String[] { "sltest/oclany", "oclIsKindOf01" });
+		constraints.add(new String[] { "sltest/oclany", "oclIsNew01" });
+		// constraints.add(new String[] { "sltest/oclany", "oclIsTypeOf01" });
+		constraints.add(new String[] { "sltest/oclany", "oclIsUndefined01" });
 		constraints.add(new String[] { "sltest/oclany", "oclType01" });
 
 		constraints.add(new String[] { "sltest/orderedset", "append01" });

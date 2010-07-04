@@ -12,18 +12,29 @@ public privileged aspect DefAspect123 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testStringSubstring01(String source, Integer arg01, Integer arg02)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testStringCharacters(String source)}.</p>
      */
-    protected pointcut testStringSubstring01Caller(testpackage.Class1 aClass, String source, Integer arg01, Integer arg02):
-    	call(* testpackage.Class1.testStringSubstring01(String, Integer, Integer))
-    	&& target(aClass) && args(source, arg01, arg02);
+    protected pointcut testStringCharactersCaller(testpackage.Class1 aClass, String source):
+    	call(* testpackage.Class1.testStringCharacters(String))
+    	&& target(aClass) && args(source);
     
     /**
-     * <p>Defines the method testStringSubstring01(String source, Integer arg01, Integer arg02) defined by the constraint
+     * <p>Defines the method testStringCharacters(String source) defined by the constraint
      * <code>context Class1
-     *       def: testStringSubstring01 = source[].substring( arg01[], arg02[])</code></p>
+     *       def: testStringCharacters = source[].characters()</code></p>
      */
-    String around(testpackage.Class1 aClass, String source, Integer arg01, Integer arg02): testStringSubstring01Caller(aClass, source, arg01, arg02) {
-        return source.substring(arg01 - 1, arg02);
+    java.util.List<String> around(testpackage.Class1 aClass, String source): testStringCharactersCaller(aClass, source) {
+        java.util.List<String> result1;
+        result1 = new java.util.ArrayList<String>();
+        
+        /* Compute the result of a characters operation. */
+        for (String anElement1 : source.split("")) {
+            result1.add(anElement1);
+        }
+        
+        /* Remove the first element ''. */
+        result1.remove(tudresden.ocl20.pivot.ocl22java.types.util.OclSequences.first(result1));
+    
+        return result1;
     }
 }

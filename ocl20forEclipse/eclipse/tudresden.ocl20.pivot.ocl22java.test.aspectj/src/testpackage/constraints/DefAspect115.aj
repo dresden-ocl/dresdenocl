@@ -12,18 +12,18 @@ public privileged aspect DefAspect115 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testSetUnion02(java.util.Set<Object> source, java.util.List<Object> arg01)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testSetIncluding01(java.util.Set<Object> source, Object arg01)}.</p>
      */
-    protected pointcut testSetUnion02Caller(testpackage.Class1 aClass, java.util.Set<Object> source, java.util.List<Object> arg01):
-    	call(* testpackage.Class1.testSetUnion02(java.util.Set<Object>, java.util.List<Object>))
+    protected pointcut testSetIncluding01Caller(testpackage.Class1 aClass, java.util.Set<Object> source, Object arg01):
+    	call(* testpackage.Class1.testSetIncluding01(java.util.Set<Object>, Object))
     	&& target(aClass) && args(source, arg01);
     
     /**
-     * <p>Defines the method testSetUnion02(java.util.Set<Object> source, java.util.List<Object> arg01) defined by the constraint
+     * <p>Defines the method testSetIncluding01(java.util.Set<Object> source, Object arg01) defined by the constraint
      * <code>context Class1
-     *       def: testSetUnion02 = source[].union( arg01[])</code></p>
+     *       def: testSetIncluding01 = source[].including( arg01[])</code></p>
      */
-    java.util.List<Object> around(testpackage.Class1 aClass, java.util.Set<Object> source, java.util.List<Object> arg01): testSetUnion02Caller(aClass, source, arg01) {
-        return tudresden.ocl20.pivot.ocl22java.types.util.OclSets.unionWithBag(source, arg01);
+    java.util.Set<Object> around(testpackage.Class1 aClass, java.util.Set<Object> source, Object arg01): testSetIncluding01Caller(aClass, source, arg01) {
+        return tudresden.ocl20.pivot.ocl22java.types.util.OclSets.including(source, arg01);
     }
 }

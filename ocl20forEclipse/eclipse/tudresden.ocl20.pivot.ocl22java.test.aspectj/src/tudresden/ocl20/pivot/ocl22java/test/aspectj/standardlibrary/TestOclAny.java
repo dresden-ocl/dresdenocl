@@ -20,6 +20,7 @@ with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
 package tudresden.ocl20.pivot.ocl22java.test.aspectj.standardlibrary;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
@@ -51,6 +52,133 @@ public class TestOclAny {
 		assertNotNull(class1.testOclAnyAllInstances());
 		assertTrue(class1.testOclAnyAllInstances().size() > 0);
 		assertTrue(class1.testOclAnyAllInstances().contains(class1));
+	}
+
+	/**
+	 * <p>
+	 * Tests the generated code for the special OCL operation <code>@pre</code>
+	 * .
+	 * </p>
+	 */
+	@Test
+	public void testAtPre01() {
+
+		Class1 class1;
+		class1 = new Class1();
+
+		class1.postOperation02();
+	}
+
+	/**
+	 * <p>
+	 * Tests the generated code for the method <code>OclAny.=(OclAny)</code> .
+	 * </p>
+	 */
+	@Test
+	public void testEquals01() {
+
+		Class1 class1;
+		class1 = new Class1();
+
+		Class1 class2;
+		class2 = new Class1();
+
+		assertTrue(class1.testOclAnyEquals01(class1, class1));
+		assertFalse(class1.testOclAnyEquals01(class1, class2));
+	}
+
+	/**
+	 * <p>
+	 * Tests the generated code for the method <code>OclAny.<>(OclAny)</code> .
+	 * </p>
+	 */
+	@Test
+	public void testNotEquals01() {
+
+		Class1 class1;
+		class1 = new Class1();
+
+		Class1 class2;
+		class2 = new Class1();
+
+		assertFalse(class1.testOclAnyNotEquals01(class1, class1));
+		assertTrue(class1.testOclAnyNotEquals01(class1, class2));
+	}
+
+	/**
+	 * <p>
+	 * Tests the generated code for the method
+	 * <code>OclAny.oclAsType(Type)</code> .
+	 * </p>
+	 */
+	@Test
+	public void testOclAsType01() {
+
+		Class1 class1;
+		class1 = new Class1();
+
+		class1.testOclAsType01(class1);
+	}
+
+	/**
+	 * <p>
+	 * Tests the generated code for the special OCL operation
+	 * <code>OclAny.oclIsNew()</code> .
+	 * </p>
+	 */
+	@Test
+	public void testOclIsNew01() {
+
+		Class1 class1;
+		class1 = new Class1();
+
+		class1.postOperation03();
+	}
+
+	/**
+	 * <p>
+	 * Tests the generated code for the special OCL operation
+	 * <code>OclAny.oclIsInvalid()</code> .
+	 * </p>
+	 */
+	@Test
+	public void testOclIsInvalid01() {
+	
+		Class1 class1;
+		class1 = new Class1();
+	
+		assertFalse(class1.testOclIsInvalid01());
+	}
+
+	/**
+	 * <p>
+	 * Tests the generated code for the special OCL operation
+	 * <code>OclAny.oclIsInvalid()</code> .
+	 * </p>
+	 */
+	@Test
+	public void testOclIsInvalid02() {
+	
+		Class1 class1;
+		class1 = new Class1();
+	
+		assertTrue(class1.testOclIsInvalid02());
+	}
+
+	/**
+	 * <p>
+	 * Tests the generated code for the special OCL operation
+	 * <code>OclAny.oclIsUndefined()</code> .
+	 * </p>
+	 */
+	@Test
+	public void testOclIsUndefined01() {
+
+		Class1 class1;
+		class1 = new Class1();
+
+		assertFalse(class1.testOclIsUndefined01(class1));
+		assertTrue(class1.testOclIsUndefined01(null));
 	}
 
 	/**

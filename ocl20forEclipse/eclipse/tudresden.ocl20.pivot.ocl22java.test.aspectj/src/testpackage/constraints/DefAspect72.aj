@@ -12,18 +12,18 @@ public privileged aspect DefAspect72 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testRealLessThan01(Float source, Float arg01)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testOrderedSetSubOrderedSet(java.util.List<Object> source, Integer arg01, Integer arg02)}.</p>
      */
-    protected pointcut testRealLessThan01Caller(testpackage.Class1 aClass, Float source, Float arg01):
-    	call(* testpackage.Class1.testRealLessThan01(Float, Float))
-    	&& target(aClass) && args(source, arg01);
+    protected pointcut testOrderedSetSubOrderedSetCaller(testpackage.Class1 aClass, java.util.List<Object> source, Integer arg01, Integer arg02):
+    	call(* testpackage.Class1.testOrderedSetSubOrderedSet(java.util.List<Object>, Integer, Integer))
+    	&& target(aClass) && args(source, arg01, arg02);
     
     /**
-     * <p>Defines the method testRealLessThan01(Float source, Float arg01) defined by the constraint
+     * <p>Defines the method testOrderedSetSubOrderedSet(java.util.List<Object> source, Integer arg01, Integer arg02) defined by the constraint
      * <code>context Class1
-     *       def: testRealLessThan01 = source[].<( arg01[])</code></p>
+     *       def: testOrderedSetSubOrderedSet = source[].subOrderedSet( arg01[], arg02[])</code></p>
      */
-    Boolean around(testpackage.Class1 aClass, Float source, Float arg01): testRealLessThan01Caller(aClass, source, arg01) {
-        return (source < arg01);
+    java.util.List<Object> around(testpackage.Class1 aClass, java.util.List<Object> source, Integer arg01, Integer arg02): testOrderedSetSubOrderedSetCaller(aClass, source, arg01, arg02) {
+        return tudresden.ocl20.pivot.ocl22java.types.util.OclOrderedSets.subOrderedSet(source, arg01, arg02);
     }
 }

@@ -12,18 +12,18 @@ public privileged aspect DefAspect83 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testSequenceAsBag(java.util.List<Object> source)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testRealMultiply01(Float source, Float arg01)}.</p>
      */
-    protected pointcut testSequenceAsBagCaller(testpackage.Class1 aClass, java.util.List<Object> source):
-    	call(* testpackage.Class1.testSequenceAsBag(java.util.List<Object>))
-    	&& target(aClass) && args(source);
+    protected pointcut testRealMultiply01Caller(testpackage.Class1 aClass, Float source, Float arg01):
+    	call(* testpackage.Class1.testRealMultiply01(Float, Float))
+    	&& target(aClass) && args(source, arg01);
     
     /**
-     * <p>Defines the method testSequenceAsBag(java.util.List<Object> source) defined by the constraint
+     * <p>Defines the method testRealMultiply01(Float source, Float arg01) defined by the constraint
      * <code>context Class1
-     *       def: testSequenceAsBag = source[].asBag()</code></p>
+     *       def: testRealMultiply01 = source[].*( arg01[])</code></p>
      */
-    java.util.List<Object> around(testpackage.Class1 aClass, java.util.List<Object> source): testSequenceAsBagCaller(aClass, source) {
-        return tudresden.ocl20.pivot.ocl22java.types.util.OclSequences.asBag(source);
+    Float around(testpackage.Class1 aClass, Float source, Float arg01): testRealMultiply01Caller(aClass, source, arg01) {
+        return (source * arg01);
     }
 }

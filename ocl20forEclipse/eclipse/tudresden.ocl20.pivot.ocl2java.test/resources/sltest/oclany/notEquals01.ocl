@@ -1,0 +1,7 @@
+package testpackage
+
+context Class1
+def: testOclAnyNotEquals01(source: Class1, arg01: Class1): Boolean =
+source <> arg01
+
+endpackage

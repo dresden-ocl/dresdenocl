@@ -12,18 +12,18 @@ public privileged aspect DefAspect54 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testOrderedSetAppend(java.util.List<Object> source, Object arg01)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testOclAnyNotEquals01(testpackage.Class1 source, testpackage.Class1 arg01)}.</p>
      */
-    protected pointcut testOrderedSetAppendCaller(testpackage.Class1 aClass, java.util.List<Object> source, Object arg01):
-    	call(* testpackage.Class1.testOrderedSetAppend(java.util.List<Object>, Object))
+    protected pointcut testOclAnyNotEquals01Caller(testpackage.Class1 aClass, testpackage.Class1 source, testpackage.Class1 arg01):
+    	call(* testpackage.Class1.testOclAnyNotEquals01(testpackage.Class1, testpackage.Class1))
     	&& target(aClass) && args(source, arg01);
     
     /**
-     * <p>Defines the method testOrderedSetAppend(java.util.List<Object> source, Object arg01) defined by the constraint
+     * <p>Defines the method testOclAnyNotEquals01(testpackage.Class1 source, testpackage.Class1 arg01) defined by the constraint
      * <code>context Class1
-     *       def: testOrderedSetAppend = source[].append( arg01[])</code></p>
+     *       def: testOclAnyNotEquals01 = source[].<>( arg01[])</code></p>
      */
-    java.util.List<Object> around(testpackage.Class1 aClass, java.util.List<Object> source, Object arg01): testOrderedSetAppendCaller(aClass, source, arg01) {
-        return tudresden.ocl20.pivot.ocl22java.types.util.OclOrderedSets.append(source, arg01);
+    Boolean around(testpackage.Class1 aClass, testpackage.Class1 source, testpackage.Class1 arg01): testOclAnyNotEquals01Caller(aClass, source, arg01) {
+        return !source.equals(arg01);
     }
 }

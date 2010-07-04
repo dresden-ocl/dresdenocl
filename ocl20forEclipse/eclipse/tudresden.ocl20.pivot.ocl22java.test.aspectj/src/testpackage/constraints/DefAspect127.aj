@@ -12,18 +12,18 @@ public privileged aspect DefAspect127 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testStringToReal(String source)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testStringPlus(String source, String arg01)}.</p>
      */
-    protected pointcut testStringToRealCaller(testpackage.Class1 aClass, String source):
-    	call(* testpackage.Class1.testStringToReal(String))
-    	&& target(aClass) && args(source);
+    protected pointcut testStringPlusCaller(testpackage.Class1 aClass, String source, String arg01):
+    	call(* testpackage.Class1.testStringPlus(String, String))
+    	&& target(aClass) && args(source, arg01);
     
     /**
-     * <p>Defines the method testStringToReal(String source) defined by the constraint
+     * <p>Defines the method testStringPlus(String source, String arg01) defined by the constraint
      * <code>context Class1
-     *       def: testStringToReal = source[].toReal()</code></p>
+     *       def: testStringPlus = source[].+( arg01[])</code></p>
      */
-    Float around(testpackage.Class1 aClass, String source): testStringToRealCaller(aClass, source) {
-        return Float.parseFloat(source);
+    String around(testpackage.Class1 aClass, String source, String arg01): testStringPlusCaller(aClass, source, arg01) {
+        return source.concat(arg01);
     }
 }

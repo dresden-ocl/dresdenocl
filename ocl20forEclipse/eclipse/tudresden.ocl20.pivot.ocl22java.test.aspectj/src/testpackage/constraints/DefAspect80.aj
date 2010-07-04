@@ -12,18 +12,18 @@ public privileged aspect DefAspect80 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testRealRound01(Float source)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testRealMax01(Float source, Float arg01)}.</p>
      */
-    protected pointcut testRealRound01Caller(testpackage.Class1 aClass, Float source):
-    	call(* testpackage.Class1.testRealRound01(Float))
-    	&& target(aClass) && args(source);
+    protected pointcut testRealMax01Caller(testpackage.Class1 aClass, Float source, Float arg01):
+    	call(* testpackage.Class1.testRealMax01(Float, Float))
+    	&& target(aClass) && args(source, arg01);
     
     /**
-     * <p>Defines the method testRealRound01(Float source) defined by the constraint
+     * <p>Defines the method testRealMax01(Float source, Float arg01) defined by the constraint
      * <code>context Class1
-     *       def: testRealRound01 = source[].round()</code></p>
+     *       def: testRealMax01 = source[].max( arg01[])</code></p>
      */
-    Integer around(testpackage.Class1 aClass, Float source): testRealRound01Caller(aClass, source) {
-        return java.lang.Math.round(source);
+    Float around(testpackage.Class1 aClass, Float source, Float arg01): testRealMax01Caller(aClass, source, arg01) {
+        return java.lang.Math.max(source, arg01);
     }
 }

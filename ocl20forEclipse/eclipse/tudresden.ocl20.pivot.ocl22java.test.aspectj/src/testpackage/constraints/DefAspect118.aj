@@ -12,18 +12,18 @@ public privileged aspect DefAspect118 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testStringConcat01(String source, String arg01)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testSetMinus(java.util.Set<Object> source, java.util.Set<Object> arg01)}.</p>
      */
-    protected pointcut testStringConcat01Caller(testpackage.Class1 aClass, String source, String arg01):
-    	call(* testpackage.Class1.testStringConcat01(String, String))
+    protected pointcut testSetMinusCaller(testpackage.Class1 aClass, java.util.Set<Object> source, java.util.Set<Object> arg01):
+    	call(* testpackage.Class1.testSetMinus(java.util.Set<Object>, java.util.Set<Object>))
     	&& target(aClass) && args(source, arg01);
     
     /**
-     * <p>Defines the method testStringConcat01(String source, String arg01) defined by the constraint
+     * <p>Defines the method testSetMinus(java.util.Set<Object> source, java.util.Set<Object> arg01) defined by the constraint
      * <code>context Class1
-     *       def: testStringConcat01 = source[].concat( arg01[])</code></p>
+     *       def: testSetMinus = source[].-( arg01[])</code></p>
      */
-    String around(testpackage.Class1 aClass, String source, String arg01): testStringConcat01Caller(aClass, source, arg01) {
-        return source.concat(arg01);
+    java.util.Set<Object> around(testpackage.Class1 aClass, java.util.Set<Object> source, java.util.Set<Object> arg01): testSetMinusCaller(aClass, source, arg01) {
+        return tudresden.ocl20.pivot.ocl22java.types.util.OclSets.minus(source, arg01);
     }
 }

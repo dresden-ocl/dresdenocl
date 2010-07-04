@@ -5,7 +5,7 @@ package testpackage.constraints;
  * The class {@link testpackage.constraints.ExtendedClass1} provides some newly defined attributes and methods class {@link Class1}.
  * </p>
  */
-public class ExtendedClass1  {
+public class ExtendedClass1 extends Object {
 
     protected Integer defProperty01;    
     
@@ -465,6 +465,60 @@ public class ExtendedClass1  {
      *</p>
      */
     public java.util.Set<testpackage.Class1> testOclAnyAllInstances() {
+        return null;
+    }
+
+    /**
+     *<p>
+     *A method signature implemented by an aspect.
+     *</p>
+     */
+    public Boolean testOclAnyEquals01(testpackage.Class1 source, testpackage.Class1 arg01) {
+        return null;
+    }
+
+    /**
+     *<p>
+     *A method signature implemented by an aspect.
+     *</p>
+     */
+    public Boolean testOclAnyNotEquals01(testpackage.Class1 source, testpackage.Class1 arg01) {
+        return null;
+    }
+
+    /**
+     *<p>
+     *A method signature implemented by an aspect.
+     *</p>
+     */
+    public testpackage.Class1 testOclAsType01(testpackage.Class1 source) {
+        return null;
+    }
+
+    /**
+     *<p>
+     *A method signature implemented by an aspect.
+     *</p>
+     */
+    public Boolean testOclIsInvalid01() {
+        return null;
+    }
+
+    /**
+     *<p>
+     *A method signature implemented by an aspect.
+     *</p>
+     */
+    public Boolean testOclIsInvalid02() {
+        return null;
+    }
+
+    /**
+     *<p>
+     *A method signature implemented by an aspect.
+     *</p>
+     */
+    public Boolean testOclIsUndefined01(testpackage.Class1 source) {
         return null;
     }
 

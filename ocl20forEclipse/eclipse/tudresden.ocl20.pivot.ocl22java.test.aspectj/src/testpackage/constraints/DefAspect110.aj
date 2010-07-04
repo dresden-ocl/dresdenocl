@@ -12,18 +12,18 @@ public privileged aspect DefAspect110 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testSetIntersection01(java.util.Set<Object> source, java.util.Set<Object> arg01)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testSetAsSet(java.util.Set<Object> source)}.</p>
      */
-    protected pointcut testSetIntersection01Caller(testpackage.Class1 aClass, java.util.Set<Object> source, java.util.Set<Object> arg01):
-    	call(* testpackage.Class1.testSetIntersection01(java.util.Set<Object>, java.util.Set<Object>))
-    	&& target(aClass) && args(source, arg01);
+    protected pointcut testSetAsSetCaller(testpackage.Class1 aClass, java.util.Set<Object> source):
+    	call(* testpackage.Class1.testSetAsSet(java.util.Set<Object>))
+    	&& target(aClass) && args(source);
     
     /**
-     * <p>Defines the method testSetIntersection01(java.util.Set<Object> source, java.util.Set<Object> arg01) defined by the constraint
+     * <p>Defines the method testSetAsSet(java.util.Set<Object> source) defined by the constraint
      * <code>context Class1
-     *       def: testSetIntersection01 = source[].intersection( arg01[])</code></p>
+     *       def: testSetAsSet = source[].asSet()</code></p>
      */
-    java.util.Set<Object> around(testpackage.Class1 aClass, java.util.Set<Object> source, java.util.Set<Object> arg01): testSetIntersection01Caller(aClass, source, arg01) {
-        return tudresden.ocl20.pivot.ocl22java.types.util.OclSets.intersection(source, arg01);
+    java.util.Set<Object> around(testpackage.Class1 aClass, java.util.Set<Object> source): testSetAsSetCaller(aClass, source) {
+        return tudresden.ocl20.pivot.ocl22java.types.util.OclSets.asSet(source);
     }
 }

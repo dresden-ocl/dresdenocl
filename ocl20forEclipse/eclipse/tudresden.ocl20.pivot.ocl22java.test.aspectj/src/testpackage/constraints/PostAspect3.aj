@@ -6,7 +6,7 @@ package testpackage.constraints;
  * @author OCL22Java of Dresden OCL2 for Eclipse
  * @Generated
  */
-public privileged aspect PostAspect1 {
+public privileged aspect PostAspect3 {
 
     /**
      * <p>Pointcut for all calls on {@link testpackage.Class1#postOperation02()}.</p>
