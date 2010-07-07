@@ -181,8 +181,8 @@ trait OclReferenceResolver { selfType : OclStaticSemantics =>
                 sourceExpression.getType match {
                   case c : CollectionType => {
                     // TODO: lookupOperationOnType!!!
-                    (!!(c.getElementType.lookupOperation(identifier, parameters.map(_.getType))) ?~
-	              			("Cannot find operation " + identifier + " with parameters " + parameters + " on type " + 
+                    (!!(c.getElementType.lookupOperation(identifier, parameters.map(determineMultiplicityElementType(_)))) ?~
+	              			("Cannot find operation " + identifier + " with parameters " + parameters.mkString(", ") + " on type " + 
 	                    c.getElementType.getName)).flatMap{o =>
 	                      if (o.isStatic == static) {
 	                      	addWarning("implicit collect() on " + o.getName, aeo)
