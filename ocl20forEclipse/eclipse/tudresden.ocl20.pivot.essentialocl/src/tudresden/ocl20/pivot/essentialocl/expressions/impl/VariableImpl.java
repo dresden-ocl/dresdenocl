@@ -39,10 +39,12 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
+import tudresden.ocl20.pivot.essentialocl.EssentialOclPlugin;
 import tudresden.ocl20.pivot.essentialocl.expressions.ExpressionsFactory;
 import tudresden.ocl20.pivot.essentialocl.expressions.OclExpression;
 import tudresden.ocl20.pivot.essentialocl.expressions.Variable;
 import tudresden.ocl20.pivot.essentialocl.expressions.WellformednessException;
+import tudresden.ocl20.pivot.essentialocl.expressions.util.CollectionConverterUtil;
 import tudresden.ocl20.pivot.pivotmodel.NamedElement;
 import tudresden.ocl20.pivot.pivotmodel.Parameter;
 import tudresden.ocl20.pivot.pivotmodel.ParameterDirectionKind;
@@ -52,16 +54,20 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
 import tudresden.ocl20.pivot.pivotmodel.impl.TypedElementImpl;
 
 /**
- * <!-- begin-user-doc --> An implementation of the model object '<em><b>Variable</b></em>'.
- * <!-- end-user-doc -->
+ * <!-- begin-user-doc --> An implementation of the model object '
+ * <em><b>Variable</b></em>'. <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.VariableImpl#getRepresentedParameter <em>Represented Parameter</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.VariableImpl#getInitExpression <em>Init Expression</em>}</li>
+ * <li>
+ * {@link tudresden.ocl20.pivot.essentialocl.expressions.impl.VariableImpl#getRepresentedParameter
+ * <em>Represented Parameter</em>}</li>
+ * <li>
+ * {@link tudresden.ocl20.pivot.essentialocl.expressions.impl.VariableImpl#getInitExpression
+ * <em>Init Expression</em>}</li>
  * </ul>
  * </p>
- *
+ * 
  * @generated
  */
 public class VariableImpl extends TypedElementImpl implements Variable {
@@ -72,8 +78,10 @@ public class VariableImpl extends TypedElementImpl implements Variable {
 	private static final Logger logger = Logger.getLogger(VariableImpl.class);
 
 	/**
-	 * The cached value of the '{@link #getRepresentedParameter() <em>Represented Parameter</em>}' reference.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getRepresentedParameter()
+	 * <em>Represented Parameter</em>}' reference. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * 
 	 * @see #getRepresentedParameter()
 	 * @generated
 	 * @ordered
@@ -81,8 +89,10 @@ public class VariableImpl extends TypedElementImpl implements Variable {
 	protected Parameter representedParameter;
 
 	/**
-	 * The cached value of the '{@link #getInitExpression() <em>Init Expression</em>}' containment reference.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getInitExpression()
+	 * <em>Init Expression</em>}' containment reference. <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
 	 * @see #getInitExpression()
 	 * @generated
 	 * @ordered
@@ -97,6 +107,7 @@ public class VariableImpl extends TypedElementImpl implements Variable {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected VariableImpl() {
@@ -105,9 +116,9 @@ public class VariableImpl extends TypedElementImpl implements Variable {
 	}
 
 	/**
-	 * Overridden to return the name of the
-	 * {@link #getRepresentedParameter() represented parameter} if this
-	 * <code>Variable</code> represents a {@link Parameter}.
+	 * Overridden to return the name of the {@link #getRepresentedParameter()
+	 * represented parameter} if this <code>Variable</code> represents a
+	 * {@link Parameter}.
 	 * 
 	 * @see tudresden.ocl20.pivot.pivotmodel.impl.NamedElementImpl#getName()
 	 */
@@ -134,11 +145,11 @@ public class VariableImpl extends TypedElementImpl implements Variable {
 	}
 
 	/**
-	 * Determines the type of this <code>Variable</code>. This is either the
-	 * type of a {@link #getRepresentedParameter() represented parameter}, the
-	 * type of the init expression or simply the type directly set when creating
-	 * the variable. This method will additionally check the wellformedness rule
-	 * of the OCL Specification, Section 8.3:
+	 * Determines the type of this <code>Variable</code>. This is either the type
+	 * of a {@link #getRepresentedParameter() represented parameter}, the type of
+	 * the init expression or simply the type directly set when creating the
+	 * variable. This method will additionally check the wellformedness rule of
+	 * the OCL Specification, Section 8.3:
 	 * 
 	 * <p>
 	 * For initialized variable declarations, the type of the initExpression must
@@ -161,7 +172,9 @@ public class VariableImpl extends TypedElementImpl implements Variable {
 		Type evaluatedType = null;
 
 		if (representedParameter != null) {
-			evaluatedType = representedParameter.getType();
+			CollectionConverterUtil ccu = new CollectionConverterUtil(
+					EssentialOclPlugin.getOclLibraryProvider().getOclLibrary());
+			evaluatedType = ccu.convertPivotModelTypeToOclType(representedParameter);
 		}
 
 		else if (type != null || initExpression != null) {
@@ -230,6 +243,7 @@ public class VariableImpl extends TypedElementImpl implements Variable {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public Parameter getRepresentedParameter() {
@@ -239,6 +253,7 @@ public class VariableImpl extends TypedElementImpl implements Variable {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public void setRepresentedParameter(Parameter newRepresentedParameter) {
@@ -253,6 +268,7 @@ public class VariableImpl extends TypedElementImpl implements Variable {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public OclExpression getInitExpression() {
@@ -262,6 +278,7 @@ public class VariableImpl extends TypedElementImpl implements Variable {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public NotificationChain basicSetInitExpression(
@@ -270,10 +287,9 @@ public class VariableImpl extends TypedElementImpl implements Variable {
 		OclExpression oldInitExpression = initExpression;
 		initExpression = newInitExpression;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification =
-					new ENotificationImpl(this, Notification.SET,
-							ExpressionsPackageImpl.VARIABLE__INIT_EXPRESSION,
-							oldInitExpression, newInitExpression);
+			ENotificationImpl notification = new ENotificationImpl(this,
+					Notification.SET, ExpressionsPackageImpl.VARIABLE__INIT_EXPRESSION,
+					oldInitExpression, newInitExpression);
 			if (msgs == null)
 				msgs = notification;
 			else
@@ -284,6 +300,7 @@ public class VariableImpl extends TypedElementImpl implements Variable {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public void setInitExpression(OclExpression newInitExpression) {
@@ -291,22 +308,17 @@ public class VariableImpl extends TypedElementImpl implements Variable {
 		if (newInitExpression != initExpression) {
 			NotificationChain msgs = null;
 			if (initExpression != null)
-				msgs =
-						((InternalEObject) initExpression).eInverseRemove(this,
-								EOPPOSITE_FEATURE_BASE
-										- ExpressionsPackageImpl.VARIABLE__INIT_EXPRESSION, null,
-								msgs);
+				msgs = ((InternalEObject) initExpression).eInverseRemove(this,
+						EOPPOSITE_FEATURE_BASE
+								- ExpressionsPackageImpl.VARIABLE__INIT_EXPRESSION, null, msgs);
 			if (newInitExpression != null)
-				msgs =
-						((InternalEObject) newInitExpression).eInverseAdd(this,
-								EOPPOSITE_FEATURE_BASE
-										- ExpressionsPackageImpl.VARIABLE__INIT_EXPRESSION, null,
-								msgs);
+				msgs = ((InternalEObject) newInitExpression).eInverseAdd(this,
+						EOPPOSITE_FEATURE_BASE
+								- ExpressionsPackageImpl.VARIABLE__INIT_EXPRESSION, null, msgs);
 			msgs = basicSetInitExpression(newInitExpression, msgs);
 			if (msgs != null)
 				msgs.dispatch();
-		}
-		else if (eNotificationRequired())
+		} else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
 					ExpressionsPackageImpl.VARIABLE__INIT_EXPRESSION, newInitExpression,
 					newInitExpression));
@@ -362,6 +374,7 @@ public class VariableImpl extends TypedElementImpl implements Variable {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -377,6 +390,7 @@ public class VariableImpl extends TypedElementImpl implements Variable {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -393,6 +407,7 @@ public class VariableImpl extends TypedElementImpl implements Variable {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -411,6 +426,7 @@ public class VariableImpl extends TypedElementImpl implements Variable {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -429,6 +445,7 @@ public class VariableImpl extends TypedElementImpl implements Variable {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -445,6 +462,7 @@ public class VariableImpl extends TypedElementImpl implements Variable {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -454,9 +472,9 @@ public class VariableImpl extends TypedElementImpl implements Variable {
 	}
 
 	/**
-	 * This method clones a variable, but not it references.
-	 * This was added by Nils to support adding parameters to
-	 * the ExpressionInOcl instance.
+	 * This method clones a variable, but not it references. This was added by
+	 * Nils to support adding parameters to the ExpressionInOcl instance.
+	 * 
 	 * @return a cloned version of the variable
 	 */
 	public Variable clone() {

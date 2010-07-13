@@ -92,13 +92,13 @@ trait OclReferenceResolver { selfType : OclStaticSemantics =>
 	      }
         case aeo : AttributableEObject => {
           (aeo->sourceExpression).flatMap{sourceExpression =>
-            (aeo->variables).flatMap{case (implicitVariableBox, explicitVariables) =>
+            (aeo->variables).flatMap{case (implicitVariables, explicitVariables) =>
           		if (!fuzzy) {
           			val sourceType = sourceExpression.getType
 	              sourceExpression match {
 	                // if the sourceExpression is an implicit variable (e.g., self or an iterator variable),
 	                // the named element can be a variable, a property on the implicit variable or a type
-	                case ve : VariableExp if implicitVariableBox.filter(_ == ve.getReferredVariable).isDefined => {
+	                case ve : VariableExp if !implicitVariables.filter(_ == ve.getReferredVariable).isEmpty => {
 	                  lookupVariable(identifier, aeo) match {
 		                  case Full(variable) => Full(List(variable))
 		                  case Empty | Failure(_, _, _) => {
@@ -141,7 +141,7 @@ trait OclReferenceResolver { selfType : OclStaticSemantics =>
 		          else {
 		            sourceExpression match {
 		              // SourceExpression is an implicit variable -> lookup of variables, properties on implicit variable or types 
-		              case ve : VariableExp if implicitVariableBox.filter(_ == ve.getReferredVariable).isDefined => {
+		              case ve : VariableExp if !implicitVariables.filter(_ == ve.getReferredVariable).isEmpty => {
 		                (aeo->namespace).flatMap{namespace =>
 		                  // TODO: add fuzzy type lookup
 		                	Full(lookupVariableFuzzy(identifier, aeo):::

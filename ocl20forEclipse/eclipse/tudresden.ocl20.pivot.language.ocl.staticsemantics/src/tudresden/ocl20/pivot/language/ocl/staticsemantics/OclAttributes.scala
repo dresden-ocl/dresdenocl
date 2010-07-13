@@ -146,32 +146,32 @@ trait OclAttributes { selfType : OclStaticSemantics =>
   }
   
   /**
-   * @return a Tuple2 with the first tuple element yielding the current implicit variable,
+   * @return a Tuple2 with the first tuple element yielding the List of implicit variables,
    * 				 and the second tuple element a List of explicit variables.
    */
-  protected val variables : Attributable ==> Box[Tuple2[Box[Variable], List[Variable]]] = {
+  protected val variables : Attributable ==> Box[Tuple2[List[Variable], List[Variable]]] = {
     childAttr {
       case child : AttributableEObject => {
-        case null => Full(Empty, List())
+        case null => Full(List(), List())
         
         case c@ClassifierContextDeclarationCS(typeCS, _) if child != typeCS =>
-          for (self <- child->self) yield (Full(self), List())
+          for (self <- child->self) yield (List(self), List())
         
         case o@OperationContextDeclarationCS(operation, _) if child != operation =>
-          for (self <- child->self) yield (Full(self), List())
+          for (self <- child->self) yield (List(self), List())
         
         case a : AttributeContextDeclarationCS =>
-          for (self <- child->self) yield (Full(self), List())
+          for (self <- child->self) yield (List(self), List())
         
         case p : PostConditionDeclarationCS => {
           (p->context).flatMap {context =>
 	          context match {
 	            case o : Operation => {
-	              (p->variables).flatMap{otherVars =>
+	              (p->variables).flatMap{case (implicitVariables, explicitVariables) =>
 		              val result = ExpressionsFactory.INSTANCE.createVariable
 				          result.setName("result")
 				          result.setType(o.getType)
-				          Full((otherVars._1, result::(otherVars._2)))
+				          Full((implicitVariables, result::(explicitVariables)))
 			          }
 	            }
 	            case other => yieldFailure("Post conditions are only allowed on operations.", p)
@@ -181,7 +181,7 @@ trait OclAttributes { selfType : OclStaticSemantics =>
         }
         
         case d@DefinitionExpOperationCS(operation, _) => {
-          (d->variables).flatMap{otherVars =>
+          (d->variables).flatMap{case (implicitVariables, explicitVariables) =>
 	          val parametersEOcl = operation.getParameters.map(p => p.getParameter)
 				    parametersEOcl.find(_.eIsProxy) match {
 				      case Some(couldNotResolve) => Empty
@@ -192,7 +192,7 @@ trait OclAttributes { selfType : OclStaticSemantics =>
 					        variable.setRepresentedParameter(param)
 					        variable
 				        }
-				        Full(otherVars._1, newVars:::otherVars._2)
+				        Full(implicitVariables, newVars:::explicitVariables)
 				      }
 		        }
           }
@@ -200,10 +200,10 @@ trait OclAttributes { selfType : OclStaticSemantics =>
         
         case l@LetExpCS(variableDeclarations, _) if !variableDeclarations.contains(child.getEObject) => {
           val last = variableDeclarations.last
-          (last->variables).flatMap{case (implicitVariableBox, explicitVariables) =>
+          (last->variables).flatMap{case (implicitVariables, explicitVariables) =>
             (last.getInitialization->computeOclExpression).flatMap{initExp =>
 	            checkVariableDeclarationType(last).flatMap{tipe =>
-	              Full(implicitVariableBox, factory.createVariable(last.getVariableName.getSimpleName, tipe, initExp)::explicitVariables)
+	              Full(implicitVariables, factory.createVariable(last.getVariableName.getSimpleName, tipe, initExp)::explicitVariables)
 	            }
 	          }
           }
@@ -215,10 +215,10 @@ trait OclAttributes { selfType : OclStaticSemantics =>
             l->variables
           else {
             val prev = child.prev.asInstanceOf[VariableDeclarationWithInitCS]
-            ((prev)->variables).flatMap{ case (implicitVariableBox, explicitVariables) =>
+            ((prev)->variables).flatMap{ case (implicitVariables, explicitVariables) =>
               (prev.getInitialization->computeOclExpression).flatMap{initExp =>
 		            checkVariableDeclarationType(prev).flatMap{tipe =>
-		              Full(implicitVariableBox, factory.createVariable(prev.getVariableName.getSimpleName, tipe, initExp)::explicitVariables)
+		              Full(implicitVariables, factory.createVariable(prev.getVariableName.getSimpleName, tipe, initExp)::explicitVariables)
 		            }
 		          }
             }
@@ -227,69 +227,66 @@ trait OclAttributes { selfType : OclStaticSemantics =>
         
         case i@IteratorExpCS(iteratorVariables, _, _) => {
         	(i->sourceExpression).flatMap{se =>
-	          (i->variables).flatMap{case (implicitVariableBox, explicitVariables) =>
-	            implicitVariableBox.flatMap{implicitVariable =>
-		            val iteratorVariablesEOcl = iteratorVariables.flatMap{iv =>
-		              if (iv.getTypeName != null) {
-			              (iv.getTypeName->oclType).flatMap{tipe =>
-				              if (!tipe.conformsTo(determineTypeOf(se)))
-				              	yieldFailure("Expected type " + tipe.getName + ", but found " + 
-		                                determineTypeOf(se).getName, iv)
-				              else
-				              	Full(factory.createVariable(iv.getVariableName.getSimpleName, tipe, null))
-				            }
-		              }
-		              else
-		                Full(factory.createVariable(iv.getVariableName.getSimpleName, determineTypeOf(se), null))
-		            }
-		            // if something went wrong on iterator variable evaluation, return Empty
-		            if (iteratorVariablesEOcl.size != iteratorVariables.size)
-	                Empty
+	          (i->variables).flatMap{case (implicitVariables, explicitVariables) =>
+	            val iteratorVariablesEOcl = iteratorVariables.flatMap{iv =>
+	              if (iv.getTypeName != null) {
+		              (iv.getTypeName->oclType).flatMap{tipe =>
+			              if (!tipe.conformsTo(determineTypeOf(se)))
+			              	yieldFailure("Expected type " + tipe.getName + ", but found " + 
+	                                determineTypeOf(se).getName, iv)
+			              else
+			              	Full(factory.createVariable(iv.getVariableName.getSimpleName, tipe, null))
+			            }
+	              }
 	              else
-			            Full(
-			              // implicit variable
-			            	if (iteratorVariables.isEmpty) // TODO: add unique identifier
-				            	Full(factory.createVariable("$implicitVariable" + ImplicitVariableNumberGenerator.getNumber + "$", determineTypeOf(se), null))
-				            else
-			                Full(iteratorVariablesEOcl.first)
-			              ,
-			              // explicit variables
-			              if (iteratorVariables.size == 2)
-		                  iteratorVariablesEOcl.get(1)::implicitVariable::explicitVariables
-		                else
-		                  implicitVariable::explicitVariables
-				          )
-		          }
-            }
+	                Full(factory.createVariable(iv.getVariableName.getSimpleName, determineTypeOf(se), null))
+	            }
+	            // if something went wrong on iterator variable evaluation, return Empty
+	            if (iteratorVariablesEOcl.size != iteratorVariables.size)
+                Empty
+              else
+		            Full(
+		              // FIXME: are iterator variables automatically implicit?
+		              // implicit variables
+		            	if (iteratorVariables.isEmpty)
+			            	(factory.createVariable("$implicitVariable" + ImplicitVariableNumberGenerator.getNumber + "$", determineTypeOf(se), null))::implicitVariables
+			            else
+		                (iteratorVariablesEOcl.first)::implicitVariables
+		              ,
+		              // explicit variables
+		              if (iteratorVariables.size == 2)
+	                  iteratorVariablesEOcl.get(1)::explicitVariables
+	                else
+	                  explicitVariables
+			          )
+	          }
 	        }
         }
         
-        case i@IterateExpCS(iteratorVariable, resultVariable, _) => {
-          (i->variables).flatMap{case (implicitVariableBox, explicitVariables) =>
-            implicitVariableBox.flatMap{implicitVariable =>
-	            (i->sourceExpression).flatMap{se =>
-	              if (iteratorVariable != null) {
-		              if (iteratorVariable.getTypeName != null) {
-			              (iteratorVariable.getTypeName->oclType).flatMap{tipe =>
-				              if (!tipe.conformsTo(determineTypeOf(se)))
-				              	yieldFailure("Expected type " + tipe.getName + ", but found " + 
-		                                determineTypeOf(se).getName, iteratorVariable)
-				              else
-				              	Full(factory.createVariable(iteratorVariable.getVariableName.getSimpleName, tipe, null))
-				            }
-		              }
-		              else
-		                Full(factory.createVariable(iteratorVariable.getVariableName.getSimpleName, determineTypeOf(se), null))
-	              } else {
-	              	Full(factory.createVariable("$implicitIterateVar" + ImplicitVariableNumberGenerator.getNumber + "$", determineTypeOf(se), null))
+        case i@IterateExpCS(iteratorVariable, resultVariable, _) if child != resultVariable => {
+          (i->variables).flatMap{case (implicitVariables, explicitVariables) =>
+            (i->sourceExpression).flatMap{se =>
+              if (iteratorVariable != null) {
+	              if (iteratorVariable.getTypeName != null) {
+		              (iteratorVariable.getTypeName->oclType).flatMap{tipe =>
+			              if (!tipe.conformsTo(determineTypeOf(se)))
+			              	yieldFailure("Expected type " + tipe.getName + ", but found " + 
+	                                determineTypeOf(se).getName, iteratorVariable)
+			              else
+			              	Full(factory.createVariable(iteratorVariable.getVariableName.getSimpleName, tipe, null))
+			            }
 	              }
-	            }.flatMap{iv =>
-	              (resultVariable.getInitialization->computeOclExpression).flatMap{initExp =>
-		              checkVariableDeclarationType(resultVariable).flatMap{tipe =>
-		              	Full(Full(iv), factory.createVariable(resultVariable.getVariableName.getSimpleName, tipe, initExp)::implicitVariable::explicitVariables)
-		              }
+	              else
+	                Full(factory.createVariable(iteratorVariable.getVariableName.getSimpleName, determineTypeOf(se), null))
+              } else {
+              	Full(factory.createVariable("$implicitIterateVar" + ImplicitVariableNumberGenerator.getNumber + "$", determineTypeOf(se), null))
+              }
+            }.flatMap{iv =>
+              (resultVariable.getInitialization->computeOclExpression).flatMap{initExp =>
+	              checkVariableDeclarationType(resultVariable).flatMap{tipe =>
+	              	Full(iv::implicitVariables, factory.createVariable(resultVariable.getVariableName.getSimpleName, tipe, initExp)::explicitVariables)
 	              }
-	            }
+              }
             }
           }
         }
@@ -433,18 +430,18 @@ trait OclAttributes { selfType : OclStaticSemantics =>
             child.prev->computeOclExpression
         }
         case o@OperationCallBaseExpCS(arguments, _) if arguments.contains(child.getEObject) => {
-          (child->variables).flatMap{case (implicitVariableBox, explicitVariables) =>
-            Full(factory.createVariableExp(implicitVariableBox.open_!))
+          (child->variables).flatMap{case (implicitVariables, explicitVariables) =>
+            Full(factory.createVariableExp(implicitVariables.first))
           }
         }
         case i@IteratorExpCS(iteratorVariables, bodyExpression, _) if child == bodyExpression => {
-          (child->variables).flatMap{case (implicitVariableBox, explicitVariables) =>
-            Full(factory.createVariableExp(implicitVariableBox.open_!))
+          (child->variables).flatMap{case (implicitVariables, explicitVariables) =>
+            Full(factory.createVariableExp(implicitVariables.first))
           }
         }
-        case i@IterateExpCS(_, _, bodyExpression) if child == bodyExpression => {
-          (child->variables).flatMap{case (implicitVariableBox, explicitVariables) =>
-            Full(factory.createVariableExp(implicitVariableBox.open_!))
+        case i@IterateExpCS(_, resultVariable, bodyExpression) if child == bodyExpression || child == resultVariable => {
+          (child->variables).flatMap{case (implicitVariables, explicitVariables) =>
+            Full(factory.createVariableExp(implicitVariables.first))
           }
         }
         case passOn => passOn->sourceExpression
