@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: OCL22java Code Generator Plug-in
-Bundle-SymbolicName: tudresden.ocl20.pivot.ocl2java
+Bundle-Name: OCL2java Code Generator Plug-in
+Bundle-SymbolicName: tudresden.ocl20.pivot.tools.codgen.ocl2java
 Bundle-Version: 2.2.0.qualifier
 Bundle-Activator: tudresden.ocl20.pivot.ocl2java.Ocl22JavaPlugin
 Require-Bundle: org.eclipse.core.runtime;bundle-version="3.4.0",
