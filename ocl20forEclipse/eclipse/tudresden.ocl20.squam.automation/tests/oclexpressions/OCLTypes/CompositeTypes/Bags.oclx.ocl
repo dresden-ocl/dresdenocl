@@ -1,0 +1,74 @@
+--------------------------------------------------------------------
+-- exported by the SQUAM OCLEditor v0.8.0.x (OCLLib to standard OCL)
+--------------------------------------------------------------------
+package uml 
+
+
+-- Library: Bags
+
+--------------------------------------------------------
+-- tests (queries with boolean result)
+--------------------------------------------------------
+--	Tests operations for a single Bag.
+-- 
+context Model
+
+inv tBag_1: let b : Bag(Integer) = Bag{1,2,3,4,4,5,6,6,7} in b->any(x | x.mod(2) = 0).mod(2) = 0
+
+context Model
+
+inv tBag_2: let b : Bag(Integer) = Bag{1,2,3,4,4,5,6,6,7} in b->select(x | x.mod(2) = 0) = Bag{2,4,4,6,6}
+
+context Model
+
+inv tBag_3: let b : Bag(Integer) = Bag{1,2,3,4,4,5,6,6,7} in b->reject(x | x.mod(2) = 0) = Bag{1,3,5,7}
+
+context Model
+
+inv tBag_4: let b : Bag(Integer) = Bag{1,2,3,4,4,5,6,6,7} in b->including(6) = Bag{1,2,3,4,4,5,6,6,6,7}
+
+context Model
+
+inv tBag_5: let b : Bag(Integer) = Bag{1,2,3,4,4,5,6,6,7} in b->excluding(7) = Bag{1,2,3,4,4,5,6,6}
+
+--	Tests the uniqueness property of a Bag.
+-- The bag may consist duplicated elements. If a bag is converted to a set, it is no more the case.
+context Model
+
+inv tBagProperties_1: let b : Bag(Integer) = Bag{1,2,3,4,4,5,6,6,7} in not b->isUnique(x|x)
+
+context Model
+
+inv tBagProperties_2: let b : Bag(Integer) = Bag{1,2,3,4,4,5,6,6,7} in b->asSet()->isUnique(x|x)
+
+context Model
+
+inv tBagProperties_3: let b : Bag(Integer) = Bag{1,2,3,4,4,5,6,6,7} in b->one(x|x=7)
+
+context Model
+
+inv tBagProperties_4: let b : Bag(Integer) = Bag{1,2,3,4,4,5,6,6,7} in not b->one(x|x=4)
+
+--	Tests operations on a nested Bag.
+-- 
+context Model
+
+inv tBagCollectNested_1: let s : Bag(Bag(Integer)) = Bag{Bag{1}, Bag{1,1}, Bag{1,1,1}, Bag{1}} in s->collectNested(e|e->size()) = Bag{1, 2, 3,1}
+
+context Model
+
+inv tBagCollectNested_2: let s : Bag(Bag(Integer)) = Bag{Bag{1}, Bag{1,1}, Bag{1,1,1}, Bag{1}} in s->collectNested(e|e->forAll(x|e->isUnique(x))) = Bag{true, false, false, true}
+
+--	Tests operations on two Bags.
+-- For operations on a Bag and a Set see SetsBags.oclx
+context Model
+
+inv tBagComparison_1: let s1 :  Bag(Integer) = Bag{1,1,3,5} in
+    		  let s2 :  Bag(Integer) = Bag{1,1,4} in s1->union(s2) = Bag{1,1,1,1,3,4,5}
+
+context Model
+
+inv tBagComparison_2: let s1 :  Bag(Integer) = Bag{1,1,3,5} in
+    		  let s2 :  Bag(Integer) = Bag{1,1,4} in s1->intersection(s2) = Bag{1,1}
+
+endpackage
