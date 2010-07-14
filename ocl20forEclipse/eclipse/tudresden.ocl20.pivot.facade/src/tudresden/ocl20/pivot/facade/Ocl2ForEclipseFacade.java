@@ -40,6 +40,7 @@ import tudresden.ocl20.pivot.interpreter.OclInterpreterPlugin;
 import tudresden.ocl20.pivot.metamodels.ecore.EcoreMetamodelPlugin;
 import tudresden.ocl20.pivot.metamodels.java.JavaMetaModelPlugin;
 import tudresden.ocl20.pivot.metamodels.uml2.UML2MetamodelPlugin;
+import tudresden.ocl20.pivot.metamodels.xsd.XSDMetamodelPlugin;
 import tudresden.ocl20.pivot.model.IModel;
 import tudresden.ocl20.pivot.model.ModelAccessException;
 import tudresden.ocl20.pivot.model.metamodel.IMetamodel;
@@ -49,6 +50,7 @@ import tudresden.ocl20.pivot.modelinstance.IModelInstanceType;
 import tudresden.ocl20.pivot.modelinstancetype.ecore.EcoreModelInstanceTypePlugin;
 import tudresden.ocl20.pivot.modelinstancetype.java.JavaModelInstanceTypePlugin;
 import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement;
+import tudresden.ocl20.pivot.modelinstancetype.xml.XmlModelInstanceTypePlugin;
 import tudresden.ocl20.pivot.ocl2parser.parser.Ocl2Parser;
 import tudresden.ocl20.pivot.parser.ParseException;
 import tudresden.ocl20.pivot.pivotmodel.Constraint;
@@ -87,6 +89,12 @@ public class Ocl2ForEclipseFacade {
 
 	/** The ID of the Eclipse MDT UML2 {@link IMetamodel}. */
 	public final static String UML2_MetaModel = UML2MetamodelPlugin.ID;
+
+	/** The ID of the XML Schema (XSD) {@link IMetamodel}. */
+	public final static String XSD_META_MODEL = XSDMetamodelPlugin.ID;
+
+	/** The ID of the XML {@link IModelInstanceType}. */
+	public final static String XML_MODEL_INSTANCE_TYPE = XmlModelInstanceTypePlugin.PLUGIN_ID;
 
 	/**
 	 * Cached interpreters for interpretation. They are stored in a
