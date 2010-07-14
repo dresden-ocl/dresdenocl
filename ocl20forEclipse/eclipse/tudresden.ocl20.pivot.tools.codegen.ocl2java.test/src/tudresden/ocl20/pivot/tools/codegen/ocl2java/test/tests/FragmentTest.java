@@ -17,17 +17,17 @@ You should have received a copy of the GNU Lesser General Public License along
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package tudresden.ocl20.pivot.ocl2java.test.tests;
+package tudresden.ocl20.pivot.tools.codegen.ocl2java.test.tests;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import tudresden.ocl20.pivot.ocl2java.Ocl22JavaPlugin;
-import tudresden.ocl20.pivot.ocl2java.exception.Ocl22CodeException;
+import tudresden.ocl20.pivot.tools.codegen.exception.Ocl2CodeException;
+import tudresden.ocl20.pivot.tools.codegen.ocl2java.Ocl2JavaPlugin;
 
 /**
  * <p>
- * This class provides some test cases which tests the {@link Ocl22JavaPlugin}.
+ * This class provides some test cases which tests the {@link Ocl2JavaPlugin}.
  * </p>
  * 
  * @author Claas Wilke
@@ -51,7 +51,7 @@ public class FragmentTest {
 	 * @throws Ocl22CodeException
 	 */
 	@BeforeClass
-	public static void setUp() throws Ocl22CodeException {
+	public static void setUp() throws Ocl2CodeException {
 		testPerformer = CodegenTestPerformer.getInstance();
 		testPerformer.reset();
 	}

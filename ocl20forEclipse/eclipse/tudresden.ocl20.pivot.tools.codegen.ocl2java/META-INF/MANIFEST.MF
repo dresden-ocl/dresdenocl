@@ -1,16 +1,16 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: OCL2java Code Generator Plug-in
-Bundle-SymbolicName: tudresden.ocl20.pivot.tools.codgen.ocl2java
+Bundle-Name: OCL22java Code Generator Plug-in
+Bundle-SymbolicName: tudresden.ocl20.pivot.tools.codegen.ocl2java
 Bundle-Version: 2.2.0.qualifier
-Bundle-Activator: tudresden.ocl20.pivot.ocl2java.Ocl22JavaPlugin
+Bundle-Activator: tudresden.ocl20.pivot.tools.codegen.ocl2java.Ocl2JavaPlugin
 Require-Bundle: org.eclipse.core.runtime;bundle-version="3.4.0",
  tudresden.ocl20.pivot.modelbus;bundle-version="2.1.0",
- tudresden.ocl20.pivot.tools.template;bundle-version="2.1.0"
+ tudresden.ocl20.pivot.tools.template;bundle-version="2.1.0",
+ tudresden.ocl20.pivot.tools.codegen;bundle-version="2.1.0"
 Bundle-ActivationPolicy: lazy
-Export-Package: tudresden.ocl20.pivot.ocl2java,
- tudresden.ocl20.pivot.ocl2java.code,
- tudresden.ocl20.pivot.ocl2java.exception
+Export-Package: tudresden.ocl20.pivot.tools.codegen.ocl2java,
+ tudresden.ocl20.pivot.tools.codegen.ocl2java.code
 Bundle-ClassPath: .
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-Vendor: TU Dresden, Software Technology Group

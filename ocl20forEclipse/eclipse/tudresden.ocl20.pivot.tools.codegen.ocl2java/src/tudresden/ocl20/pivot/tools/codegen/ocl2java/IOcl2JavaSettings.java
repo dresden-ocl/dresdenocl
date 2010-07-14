@@ -16,10 +16,11 @@ for more details.
 You should have received a copy of the GNU Lesser General Public License along 
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
-package tudresden.ocl20.pivot.ocl2java;
+package tudresden.ocl20.pivot.tools.codegen.ocl2java;
 
-import tudresden.ocl20.pivot.ocl2java.code.ITransformedCode;
 import tudresden.ocl20.pivot.pivotmodel.Constraint;
+import tudresden.ocl20.pivot.tools.codegen.IOcl2CodeSettings;
+import tudresden.ocl20.pivot.tools.codegen.code.ITransformedCode;
 
 /**
  * <p>
@@ -28,10 +29,10 @@ import tudresden.ocl20.pivot.pivotmodel.Constraint;
  * 
  * @author Claas Wilke
  */
-public interface IOcl22CodeSettings {
+public interface IOcl2JavaSettings extends IOcl2CodeSettings {
 
 	/**
-	 * Constants to define the diferent check modes for invariants in the
+	 * Constants to define the different check modes for invariants in the
 	 * instrumentation code.
 	 */
 	public final static int INVARIANT_CHECK_AFTER_CONSTRUCT_AND_ATTRIBUTE_CHANGE =
@@ -94,10 +95,7 @@ public interface IOcl22CodeSettings {
 	 */
 	public boolean isInheritanceDisabled(Constraint aConstraint);
 
-	/**
-	 * @return Whether or not the transformed code shall be saved into files.
-	 */
-	public boolean isSaveCode();
+
 
 	/**
 	 * <p>
@@ -152,12 +150,6 @@ public interface IOcl22CodeSettings {
 	 */
 	public void setInheritanceDisabled(Constraint aConstraint, boolean disable);
 
-	/**
-	 * <p>
-	 * Enables whether or not the transformed code shall be saved into files.
-	 * </p>
-	 */
-	public void setSaveCode(boolean saveCode);
 
 	/**
 	 * <p>

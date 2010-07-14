@@ -17,16 +17,16 @@ You should have received a copy of the GNU Lesser General Public License along
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package tudresden.ocl20.pivot.ocl2java.test.tests.standardlibrary;
+package tudresden.ocl20.pivot.tools.codegen.ocl2java.test.tests.standardlibrary;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 import tudresden.ocl20.pivot.model.ModelAccessException;
-import tudresden.ocl20.pivot.ocl2java.exception.Ocl22CodeException;
-import tudresden.ocl20.pivot.ocl2java.test.tests.AbstractDiffTest;
 import tudresden.ocl20.pivot.parser.ParseException;
+import tudresden.ocl20.pivot.tools.codegen.exception.Ocl2CodeException;
+import tudresden.ocl20.pivot.tools.codegen.ocl2java.test.tests.AbstractDiffTest;
 
 /**
  * <p>
@@ -76,11 +76,11 @@ public class TestBag extends AbstractDiffTest {
 	 * @throws ModelAccessException
 	 * @throws ParseException
 	 * @throws IllegalArgumentException
-	 * @throws Ocl22CodeException
+	 * @throws Ocl2CodeException
 	 */
 	@Test
 	public void testAsBag01() throws IllegalArgumentException, ParseException,
-			ModelAccessException, Ocl22CodeException {
+			ModelAccessException, Ocl2CodeException {
 	
 		this.compareFragmentCodeGeneration("sltest/bag", "asBag01");
 	}
@@ -93,11 +93,11 @@ public class TestBag extends AbstractDiffTest {
 	 * @throws ModelAccessException
 	 * @throws ParseException
 	 * @throws IllegalArgumentException
-	 * @throws Ocl22CodeException
+	 * @throws Ocl2CodeException
 	 */
 	@Test
 	public void testAsOrderedSet01() throws IllegalArgumentException,
-			ParseException, ModelAccessException, Ocl22CodeException {
+			ParseException, ModelAccessException, Ocl2CodeException {
 	
 		this.compareFragmentCodeGeneration("sltest/bag", "asOrderedSet01");
 	}
@@ -110,11 +110,11 @@ public class TestBag extends AbstractDiffTest {
 	 * @throws ModelAccessException
 	 * @throws ParseException
 	 * @throws IllegalArgumentException
-	 * @throws Ocl22CodeException
+	 * @throws Ocl2CodeException
 	 */
 	@Test
 	public void testAsSequence01() throws IllegalArgumentException,
-			ParseException, ModelAccessException, Ocl22CodeException {
+			ParseException, ModelAccessException, Ocl2CodeException {
 	
 		this.compareFragmentCodeGeneration("sltest/bag", "asSequence01");
 	}
@@ -127,11 +127,11 @@ public class TestBag extends AbstractDiffTest {
 	 * @throws ModelAccessException
 	 * @throws ParseException
 	 * @throws IllegalArgumentException
-	 * @throws Ocl22CodeException
+	 * @throws Ocl2CodeException
 	 */
 	@Test
 	public void testAsSet01() throws IllegalArgumentException, ParseException,
-			ModelAccessException, Ocl22CodeException {
+			ModelAccessException, Ocl2CodeException {
 	
 		this.compareFragmentCodeGeneration("sltest/bag", "asSet01");
 	}
@@ -144,11 +144,11 @@ public class TestBag extends AbstractDiffTest {
 	 * @throws ModelAccessException
 	 * @throws ParseException
 	 * @throws IllegalArgumentException
-	 * @throws Ocl22CodeException
+	 * @throws Ocl2CodeException
 	 */
 	@Test
 	public void testCount01() throws IllegalArgumentException, ParseException,
-			ModelAccessException, Ocl22CodeException {
+			ModelAccessException, Ocl2CodeException {
 	
 		this.compareFragmentCodeGeneration("sltest/bag", "count01");
 	}
@@ -161,11 +161,11 @@ public class TestBag extends AbstractDiffTest {
 	 * @throws ModelAccessException
 	 * @throws ParseException
 	 * @throws IllegalArgumentException
-	 * @throws Ocl22CodeException
+	 * @throws Ocl2CodeException
 	 */
 	@Test
 	public void testEquals01() throws IllegalArgumentException, ParseException,
-			ModelAccessException, Ocl22CodeException {
+			ModelAccessException, Ocl2CodeException {
 	
 		this.compareFragmentCodeGeneration("sltest/bag", "equals01");
 	}
@@ -178,11 +178,11 @@ public class TestBag extends AbstractDiffTest {
 	 * @throws ModelAccessException
 	 * @throws ParseException
 	 * @throws IllegalArgumentException
-	 * @throws Ocl22CodeException
+	 * @throws Ocl2CodeException
 	 */
 	@Test
 	public void testExcluding01() throws IllegalArgumentException,
-			ParseException, ModelAccessException, Ocl22CodeException {
+			ParseException, ModelAccessException, Ocl2CodeException {
 	
 		this.compareFragmentCodeGeneration("sltest/bag", "excluding01");
 	}
@@ -195,11 +195,11 @@ public class TestBag extends AbstractDiffTest {
 	 * @throws ModelAccessException
 	 * @throws ParseException
 	 * @throws IllegalArgumentException
-	 * @throws Ocl22CodeException
+	 * @throws Ocl2CodeException
 	 */
 	@Test
 	public void testFlatten01() throws IllegalArgumentException,
-			ParseException, ModelAccessException, Ocl22CodeException {
+			ParseException, ModelAccessException, Ocl2CodeException {
 	
 		this.compareFragmentCodeGeneration("sltest/bag", "flatten01");
 	}
@@ -212,11 +212,11 @@ public class TestBag extends AbstractDiffTest {
 	 * @throws ModelAccessException
 	 * @throws ParseException
 	 * @throws IllegalArgumentException
-	 * @throws Ocl22CodeException
+	 * @throws Ocl2CodeException
 	 */
 	@Test
 	public void testIncluding01() throws IllegalArgumentException,
-			ParseException, ModelAccessException, Ocl22CodeException {
+			ParseException, ModelAccessException, Ocl2CodeException {
 	
 		this.compareFragmentCodeGeneration("sltest/bag", "including01");
 	}
@@ -229,11 +229,11 @@ public class TestBag extends AbstractDiffTest {
 	 * @throws ModelAccessException
 	 * @throws ParseException
 	 * @throws IllegalArgumentException
-	 * @throws Ocl22CodeException
+	 * @throws Ocl2CodeException
 	 */
 	@Test
 	public void testIntersection01() throws IllegalArgumentException,
-			ParseException, ModelAccessException, Ocl22CodeException {
+			ParseException, ModelAccessException, Ocl2CodeException {
 	
 		this.compareFragmentCodeGeneration("sltest/bag", "intersection01");
 	}
@@ -246,11 +246,11 @@ public class TestBag extends AbstractDiffTest {
 	 * @throws ModelAccessException
 	 * @throws ParseException
 	 * @throws IllegalArgumentException
-	 * @throws Ocl22CodeException
+	 * @throws Ocl2CodeException
 	 */
 	@Test
 	public void testIntersection02() throws IllegalArgumentException,
-			ParseException, ModelAccessException, Ocl22CodeException {
+			ParseException, ModelAccessException, Ocl2CodeException {
 	
 		this.compareFragmentCodeGeneration("sltest/bag", "intersection02");
 	}
@@ -263,11 +263,11 @@ public class TestBag extends AbstractDiffTest {
 	 * @throws ModelAccessException
 	 * @throws ParseException
 	 * @throws IllegalArgumentException
-	 * @throws Ocl22CodeException
+	 * @throws Ocl2CodeException
 	 */
 	@Test
 	public void testUnion01() throws IllegalArgumentException, ParseException,
-			ModelAccessException, Ocl22CodeException {
+			ModelAccessException, Ocl2CodeException {
 	
 		this.compareFragmentCodeGeneration("sltest/bag", "union01");
 	}
@@ -280,11 +280,11 @@ public class TestBag extends AbstractDiffTest {
 	 * @throws ModelAccessException
 	 * @throws ParseException
 	 * @throws IllegalArgumentException
-	 * @throws Ocl22CodeException
+	 * @throws Ocl2CodeException
 	 */
 	@Test
 	public void testUnion02() throws IllegalArgumentException, ParseException,
-			ModelAccessException, Ocl22CodeException {
+			ModelAccessException, Ocl2CodeException {
 	
 		this.compareFragmentCodeGeneration("sltest/bag", "union02");
 	}

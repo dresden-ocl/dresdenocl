@@ -17,18 +17,18 @@ You should have received a copy of the GNU Lesser General Public License along
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package tudresden.ocl20.pivot.ocl2java.test.tests.constraintkinds;
+package tudresden.ocl20.pivot.tools.codegen.ocl2java.test.tests.constraintkinds;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 import tudresden.ocl20.pivot.model.ModelAccessException;
-import tudresden.ocl20.pivot.ocl2java.exception.Ocl22CodeException;
-import tudresden.ocl20.pivot.ocl2java.test.tests.AbstractDiffTest;
 import tudresden.ocl20.pivot.parser.ParseException;
 import tudresden.ocl20.pivot.pivotmodel.Constraint;
 import tudresden.ocl20.pivot.pivotmodel.ConstraintKind;
+import tudresden.ocl20.pivot.tools.codegen.exception.Ocl2CodeException;
+import tudresden.ocl20.pivot.tools.codegen.ocl2java.test.tests.AbstractDiffTest;
 
 /**
  * <p>
@@ -82,7 +82,7 @@ public class TestDef extends AbstractDiffTest {
 	 */
 	@Test
 	public void testDef01() throws IllegalArgumentException, ParseException,
-			ModelAccessException, Ocl22CodeException {
+			ModelAccessException, Ocl2CodeException {
 
 		this.compareInstrumentationCodeGeneration("constraintkindtest/def",
 				"def01");
@@ -100,7 +100,7 @@ public class TestDef extends AbstractDiffTest {
 	 */
 	@Test
 	public void testDef02() throws IllegalArgumentException, ParseException,
-			ModelAccessException, Ocl22CodeException {
+			ModelAccessException, Ocl2CodeException {
 
 		this.compareInstrumentationCodeGeneration("constraintkindtest/def",
 				"def02");
@@ -118,7 +118,7 @@ public class TestDef extends AbstractDiffTest {
 	 */
 	@Test
 	public void testDef03() throws IllegalArgumentException, ParseException,
-			ModelAccessException, Ocl22CodeException {
+			ModelAccessException, Ocl2CodeException {
 
 		this.compareInstrumentationCodeGeneration("constraintkindtest/def",
 				"def03");

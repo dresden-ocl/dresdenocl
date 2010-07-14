@@ -17,7 +17,7 @@ You should have received a copy of the GNU Lesser General Public License along
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package tudresden.ocl20.pivot.ocl2java.ui.actions;
+package tudresden.ocl20.pivot.tools.codegen.ocl2java.ui.actions;
 
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.viewers.ISelection;
@@ -27,12 +27,12 @@ import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.IWorkbenchWindowActionDelegate;
 
 import tudresden.ocl20.pivot.model.IModel;
-import tudresden.ocl20.pivot.ocl2java.ui.internal.wizards.TransformCodeWizard;
 import tudresden.ocl20.pivot.pivotmodel.Constraint;
+import tudresden.ocl20.pivot.tools.codegen.ocl2java.ui.internal.wizards.JavaCodeWizard;
 
 /**
  * <p>
- * This class implements an action which starts the {@link TransformCodeWizard}
+ * This class implements an action which starts the {@link JavaCodeWizard}
  * to generate AspectJ code for imported {@link IModel}s and {@link Constraint}
  * s.
  * </p>
@@ -62,7 +62,7 @@ public class JavaCodeGenAction implements IWorkbenchWindowActionDelegate {
 	 */
 	public void run(IAction action) {
 
-		TransformCodeWizard wizard;
+		JavaCodeWizard wizard;
 		WizardDialog dialog;
 
 		ISelection currentSelection;
@@ -80,7 +80,7 @@ public class JavaCodeGenAction implements IWorkbenchWindowActionDelegate {
 		}
 
 		/* Initialize and start the depending code gen wizard. */
-		wizard = new TransformCodeWizard();
+		wizard = new JavaCodeWizard();
 		wizard.init(this.window.getWorkbench(), currentStructuredSelection);
 
 		/* Instantiates the wizard container with the wizard and opens it. */

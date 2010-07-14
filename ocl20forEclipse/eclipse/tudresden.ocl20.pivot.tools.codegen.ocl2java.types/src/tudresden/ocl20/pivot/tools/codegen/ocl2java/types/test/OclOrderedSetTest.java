@@ -16,7 +16,7 @@ for more details.
 You should have received a copy of the GNU Lesser General Public License along 
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
-package tudresden.ocl20.pivot.ocl2java.types.test;
+package tudresden.ocl20.pivot.tools.codegen.ocl2java.types.test;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
@@ -25,10 +25,10 @@ import static org.junit.Assert.fail;
 
 import org.junit.Test;
 
-import tudresden.ocl20.pivot.ocl2java.types.OclBag;
-import tudresden.ocl20.pivot.ocl2java.types.OclOrderedSet;
-import tudresden.ocl20.pivot.ocl2java.types.OclSequence;
-import tudresden.ocl20.pivot.ocl2java.types.OclSet;
+import tudresden.ocl20.pivot.tools.codegen.ocl2java.types.OclBag;
+import tudresden.ocl20.pivot.tools.codegen.ocl2java.types.OclOrderedSet;
+import tudresden.ocl20.pivot.tools.codegen.ocl2java.types.OclSequence;
+import tudresden.ocl20.pivot.tools.codegen.ocl2java.types.OclSet;
 
 /**
  * <p>

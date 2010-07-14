@@ -16,7 +16,7 @@ for more details.
 You should have received a copy of the GNU Lesser General Public License along 
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
-package tudresden.ocl20.pivot.ocl2java.code;
+package tudresden.ocl20.pivot.tools.codegen.ocl2java.code;
 
 import java.util.Map;
 import java.util.Set;
@@ -25,6 +25,8 @@ import tudresden.ocl20.pivot.pivotmodel.Constraint;
 import tudresden.ocl20.pivot.pivotmodel.Expression;
 import tudresden.ocl20.pivot.pivotmodel.Property;
 import tudresden.ocl20.pivot.pivotmodel.Type;
+import tudresden.ocl20.pivot.tools.codegen.code.IOcl2CodeEnvironment;
+import tudresden.ocl20.pivot.tools.codegen.code.ITransformedCode;
 import tudresden.ocl20.pivot.tools.template.ITemplate;
 
 /**
@@ -35,11 +37,11 @@ import tudresden.ocl20.pivot.tools.template.ITemplate;
  * 
  * @author Claas Wilke
  */
-public interface IOcl22CodeEnvironment {
+public interface IOcl2JavaEnvironment extends IOcl2CodeEnvironment {
 
 	/**
 	 * <p>
-	 * Resets all counters and collections of the {@link IOcl22CodeEnvironment}
+	 * Resets all counters and collections of the {@link IOcl2JavaEnvironment}
 	 * which are constraint specific. I. e. the counters for variable names or
 	 * the Set of called properties.
 	 * </p>

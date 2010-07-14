@@ -17,7 +17,7 @@ You should have received a copy of the GNU Lesser General Public License along
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package tudresden.ocl20.pivot.ocl2java.test.tests;
+package tudresden.ocl20.pivot.tools.codegen.ocl2java.test.tests;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,8 +27,8 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import tudresden.ocl20.pivot.model.ModelAccessException;
-import tudresden.ocl20.pivot.ocl2java.exception.Ocl22CodeException;
 import tudresden.ocl20.pivot.parser.ParseException;
+import tudresden.ocl20.pivot.tools.codegen.exception.Ocl2CodeException;
 
 /**
  * <p>
@@ -82,7 +82,7 @@ public class GenerateAspectJCode extends AbstractDiffTest {
 	 */
 	@Test
 	public void generateCode() throws IllegalArgumentException, ParseException,
-			ModelAccessException, Ocl22CodeException {
+			ModelAccessException, Ocl2CodeException {
 
 		List<String[]> constraints;
 		constraints = new ArrayList<String[]>();

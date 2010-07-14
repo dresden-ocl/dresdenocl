@@ -17,7 +17,7 @@ You should have received a copy of the GNU Lesser General Public License along
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package tudresden.ocl20.pivot.ocl2java.test.tests;
+package tudresden.ocl20.pivot.tools.codegen.ocl2java.test.tests;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -33,11 +33,11 @@ import org.osgi.framework.Bundle;
 import tudresden.ocl20.pivot.facade.Ocl2ForEclipseFacade;
 import tudresden.ocl20.pivot.model.IModel;
 import tudresden.ocl20.pivot.model.ModelAccessException;
-import tudresden.ocl20.pivot.ocl2java.IOcl22CodeSettings;
-import tudresden.ocl20.pivot.ocl2java.exception.Ocl22CodeException;
-import tudresden.ocl20.pivot.ocl2java.test.Ocl2CodeTestPlugin;
 import tudresden.ocl20.pivot.parser.ParseException;
 import tudresden.ocl20.pivot.pivotmodel.Constraint;
+import tudresden.ocl20.pivot.tools.codegen.exception.Ocl2CodeException;
+import tudresden.ocl20.pivot.tools.codegen.ocl2java.IOcl2JavaSettings;
+import tudresden.ocl20.pivot.tools.codegen.ocl2java.test.Ocl2CodeTestPlugin;
 
 /**
  * <p>
@@ -131,7 +131,7 @@ public abstract class AbstractDiffTest {
 	 */
 	protected void compareFragmentCodeGeneration(String directory,
 			String fileName) throws ParseException, ModelAccessException,
-			Ocl22CodeException {
+			Ocl2CodeException {
 
 		/* Parse the constraint. */
 		File constraintFile;
@@ -173,7 +173,7 @@ public abstract class AbstractDiffTest {
 	 */
 	protected void compareInstrumentationCodeGeneration(String directory,
 			String fileName) throws ParseException, ModelAccessException,
-			Ocl22CodeException {
+			Ocl2CodeException {
 
 		/* Parse the constraint. */
 		File constraintFile;
@@ -221,7 +221,7 @@ public abstract class AbstractDiffTest {
 	 */
 	protected void createInstrumentationCode(String targetBundleId,
 			List<String[]> fileNames) throws ParseException,
-			ModelAccessException, Ocl22CodeException {
+			ModelAccessException, Ocl2CodeException {
 
 		/* Get the bundle location for the model files. */
 		String sourceDirectory;
@@ -231,7 +231,7 @@ public abstract class AbstractDiffTest {
 		sourceDirectory = sourceDirectory.substring(15);
 		sourceDirectory += "src/";
 
-		IOcl22CodeSettings settings;
+		IOcl2JavaSettings settings;
 		settings = Ocl2ForEclipseFacade.getJavaCodeGeneratorSettings();
 		settings.setSourceDirectory(sourceDirectory);
 		settings.setSaveCode(true);

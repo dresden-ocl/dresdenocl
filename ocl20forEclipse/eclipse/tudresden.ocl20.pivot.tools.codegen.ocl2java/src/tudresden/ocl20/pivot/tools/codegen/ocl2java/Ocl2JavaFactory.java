@@ -16,14 +16,14 @@ for more details.
 You should have received a copy of the GNU Lesser General Public License along 
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
-package tudresden.ocl20.pivot.ocl2java;
+package tudresden.ocl20.pivot.tools.codegen.ocl2java;
 
 import tudresden.ocl20.pivot.model.IModel;
-import tudresden.ocl20.pivot.ocl2java.code.ITransformedCode;
-import tudresden.ocl20.pivot.ocl2java.code.impl.TransformedCodeImpl;
-import tudresden.ocl20.pivot.ocl2java.exception.Ocl22CodeException;
-import tudresden.ocl20.pivot.ocl2java.internal.Ocl22Java;
-import tudresden.ocl20.pivot.ocl2java.internal.Ocl22JavaSettings;
+import tudresden.ocl20.pivot.tools.codegen.code.ITransformedCode;
+import tudresden.ocl20.pivot.tools.codegen.code.impl.TransformedCodeImpl;
+import tudresden.ocl20.pivot.tools.codegen.exception.Ocl2CodeException;
+import tudresden.ocl20.pivot.tools.codegen.ocl2java.internal.Ocl2Java;
+import tudresden.ocl20.pivot.tools.codegen.ocl2java.internal.Ocl2JavaSettings;
 
 /**
  * <p>
@@ -33,27 +33,27 @@ import tudresden.ocl20.pivot.ocl2java.internal.Ocl22JavaSettings;
  * 
  * @author Claas Wilke
  */
-public class Ocl22JavaFactory {
+public class Ocl2JavaFactory {
 
-	private static Ocl22JavaFactory myInstance;
+	private static Ocl2JavaFactory myInstance;
 
 	/**
 	 * <p>
 	 * A private constructor to enforce the Singleton.
 	 * </p>
 	 */
-	private Ocl22JavaFactory() {
+	private Ocl2JavaFactory() {
 
 		/* Remains empty. */
 	}
 
 	/**
-	 * @return The only instance of {@link Ocl22JavaFactory}.
+	 * @return The only instance of {@link Ocl2JavaFactory}.
 	 */
-	public static Ocl22JavaFactory getInstance() {
+	public static Ocl2JavaFactory getInstance() {
 
 		if (myInstance == null) {
-			myInstance = new Ocl22JavaFactory();
+			myInstance = new Ocl2JavaFactory();
 		}
 		// no else.
 
@@ -62,7 +62,7 @@ public class Ocl22JavaFactory {
 
 	/**
 	 * <p>
-	 * Creates an {@link IOcl22Code} code generator.
+	 * Creates an {@link IOcl2Java} code generator.
 	 * </p>
 	 * 
 	 * @return A code generator which generates Java code for loaded OCL
@@ -70,18 +70,18 @@ public class Ocl22JavaFactory {
 	 * @throws Ocl22CodeException
 	 *           Thrown if the initialization of a new Java code generator fails.
 	 */
-	public IOcl22Code createJavaCodeGenerator() throws Ocl22CodeException {
+	public IOcl2Java<?> createJavaCodeGenerator() throws Ocl2CodeException {
 
-		IOcl22Code result;
+		IOcl2Java<?> result;
 
-		result = new Ocl22Java();
+		result = new Ocl2Java();
 
 		return result;
 	}
 
 	/**
 	 * <p>
-	 * Creates an {@link IOcl22Code} code generator with given
+	 * Creates an {@link IOcl2Java} code generator with given
 	 * {@link IOcl22CodeSettings}.
 	 * </p>
 	 * 
@@ -90,12 +90,12 @@ public class Ocl22JavaFactory {
 	 * @throws Ocl22CodeException
 	 *           Thrown if the initialization of a new Java code generator fails.
 	 */
-	public IOcl22Code createJavaCodeGenerator(IOcl22CodeSettings settings)
-			throws Ocl22CodeException {
+	public IOcl2Java<?> createJavaCodeGenerator(IOcl2JavaSettings settings)
+			throws Ocl2CodeException {
 
-		IOcl22Code result;
+		IOcl2Java<?> result;
 
-		result = new Ocl22Java();
+		result = new Ocl2Java();
 		result.setSettings(settings);
 
 		return result;
@@ -110,11 +110,11 @@ public class Ocl22JavaFactory {
 	 * @return {@link IOcl22CodeSettings} that can be used to configure a Java
 	 *         code generator.
 	 */
-	public IOcl22CodeSettings createJavaCodeGeneratorSettings() {
+	public IOcl2JavaSettings createJavaCodeGeneratorSettings() {
 
-		IOcl22CodeSettings result;
+		IOcl2JavaSettings result;
 
-		result = new Ocl22JavaSettings();
+		result = new Ocl2JavaSettings();
 
 		return result;
 	}

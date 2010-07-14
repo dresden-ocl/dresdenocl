@@ -16,7 +16,7 @@ for more details.
 You should have received a copy of the GNU Lesser General Public License along 
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
-package tudresden.ocl20.pivot.ocl2java.code.impl;
+package tudresden.ocl20.pivot.tools.codegen.ocl2java.code.impl;
 
 import java.util.IdentityHashMap;
 import java.util.Map;
@@ -24,9 +24,9 @@ import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
-import tudresden.ocl20.pivot.ocl2java.code.IOcl22CodeEnvironment;
-import tudresden.ocl20.pivot.ocl2java.code.ITransformedCode;
 import tudresden.ocl20.pivot.pivotmodel.Type;
+import tudresden.ocl20.pivot.tools.codegen.code.ITransformedCode;
+import tudresden.ocl20.pivot.tools.codegen.ocl2java.code.IOcl2JavaEnvironment;
 import tudresden.ocl20.pivot.tools.template.ITemplate;
 
 /**
@@ -37,7 +37,7 @@ import tudresden.ocl20.pivot.tools.template.ITemplate;
  * 
  * @author Claas Wilke
  */
-public class Ocl22JavaEnvironment implements IOcl22CodeEnvironment {
+public class Ocl2JavaEnvironment implements IOcl2JavaEnvironment {
 
 	protected static final String AT_PRE_VAR_NAME = "atPreValue";
 	protected int atPreVarNameCounter = 0;

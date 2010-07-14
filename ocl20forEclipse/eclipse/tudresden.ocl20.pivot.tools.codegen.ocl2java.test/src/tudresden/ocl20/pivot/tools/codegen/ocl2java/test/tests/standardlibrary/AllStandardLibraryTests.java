@@ -17,17 +17,17 @@ You should have received a copy of the GNU Lesser General Public License along
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package tudresden.ocl20.pivot.ocl2java.test.tests.standardlibrary;
+package tudresden.ocl20.pivot.tools.codegen.ocl2java.test.tests.standardlibrary;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
-import tudresden.ocl20.pivot.ocl2java.Ocl22JavaPlugin;
+import tudresden.ocl20.pivot.tools.codegen.ocl2java.Ocl2JavaPlugin;
 
 /**
  * <p>
  * Provides a jUnit Test Suite containing all standard library tests of the OCL
- * 2 Java Code transformer ({@link Ocl22JavaPlugin}).
+ * 2 Java Code transformer ({@link Ocl2JavaPlugin}).
  * </p>
  * 
  * @author Claas Wilke

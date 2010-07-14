@@ -17,7 +17,7 @@ You should have received a copy of the GNU Lesser General Public License along
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package tudresden.ocl20.pivot.ocl2java.ui;
+package tudresden.ocl20.pivot.tools.codegen.ocl2java.ui;
 
 import org.apache.log4j.Logger;
 import org.eclipse.jface.resource.ImageDescriptor;
@@ -36,7 +36,7 @@ import tudresden.ocl20.logging.LoggingPlugin;
 public class Ocl2JavaUIPlugIn extends AbstractUIPlugin {
 
 	/** The plug-in ID. */
-	public static final String PLUGIN_ID = "tudresden.ocl20.pivot.ocl2java.ui";
+	public static final String PLUGIN_ID = "tudresden.ocl20.pivot.tools.codegen.ocl2java.ui";
 
 	/** The shared instance. */
 	private static Ocl2JavaUIPlugIn plugin;
@@ -56,6 +56,7 @@ public class Ocl2JavaUIPlugIn extends AbstractUIPlugin {
 	 * org.eclipse.ui.plugin.AbstractUIPlugin#start(org.osgi.framework.BundleContext
 	 * )
 	 */
+	@Override
 	public void start(BundleContext context) throws Exception {
 		super.start(context);
 		plugin = this;
@@ -71,6 +72,7 @@ public class Ocl2JavaUIPlugIn extends AbstractUIPlugin {
 	 * org.eclipse.ui.plugin.AbstractUIPlugin#stop(org.osgi.framework.BundleContext
 	 * )
 	 */
+	@Override
 	public void stop(BundleContext context) throws Exception {
 		plugin = null;
 		super.stop(context);

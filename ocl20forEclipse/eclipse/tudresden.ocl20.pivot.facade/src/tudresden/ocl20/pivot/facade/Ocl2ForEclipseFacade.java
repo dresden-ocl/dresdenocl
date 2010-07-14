@@ -49,10 +49,6 @@ import tudresden.ocl20.pivot.modelinstance.IModelInstanceType;
 import tudresden.ocl20.pivot.modelinstancetype.ecore.EcoreModelInstanceTypePlugin;
 import tudresden.ocl20.pivot.modelinstancetype.java.JavaModelInstanceTypePlugin;
 import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement;
-import tudresden.ocl20.pivot.ocl2java.IOcl22Code;
-import tudresden.ocl20.pivot.ocl2java.IOcl22CodeSettings;
-import tudresden.ocl20.pivot.ocl2java.Ocl22JavaFactory;
-import tudresden.ocl20.pivot.ocl2java.exception.Ocl22CodeException;
 import tudresden.ocl20.pivot.ocl2parser.parser.Ocl2Parser;
 import tudresden.ocl20.pivot.parser.ParseException;
 import tudresden.ocl20.pivot.pivotmodel.Constraint;
@@ -60,6 +56,10 @@ import tudresden.ocl20.pivot.pivotmodel.ConstraintKind;
 import tudresden.ocl20.pivot.pivotmodel.Operation;
 import tudresden.ocl20.pivot.pivotmodel.Parameter;
 import tudresden.ocl20.pivot.pivotmodel.Type;
+import tudresden.ocl20.pivot.tools.codegen.exception.Ocl2CodeException;
+import tudresden.ocl20.pivot.tools.codegen.ocl2java.IOcl2Java;
+import tudresden.ocl20.pivot.tools.codegen.ocl2java.IOcl2JavaSettings;
+import tudresden.ocl20.pivot.tools.codegen.ocl2java.Ocl2JavaFactory;
 
 /**
  * <p>
@@ -95,8 +95,8 @@ public class Ocl2ForEclipseFacade {
 	 */
 	private static Map<IModelInstance, IOclInterpreter> cachedInterpreters = new WeakHashMap<IModelInstance, IOclInterpreter>();
 
-	/** The {@link IOcl22Code} representing the Java/AspectJ code generator. */
-	private static IOcl22Code javaCodeGenerator = null;
+	/** The {@link IOcl2Java} representing the Java/AspectJ code generator. */
+	private static IOcl2Java javaCodeGenerator = null;
 
 	/**
 	 * <p>
@@ -116,8 +116,8 @@ public class Ocl2ForEclipseFacade {
 	 * @throws Ocl22CodeException
 	 */
 	public static List<String> generateAspectJCode(
-			List<Constraint> constraints, IOcl22CodeSettings settings)
-			throws IllegalArgumentException, Ocl22CodeException {
+			List<Constraint> constraints, IOcl2JavaSettings settings)
+			throws IllegalArgumentException, Ocl2CodeException {
 
 		if (constraints == null || constraints.size() == 0) {
 			throw new IllegalArgumentException(
@@ -126,7 +126,7 @@ public class Ocl2ForEclipseFacade {
 		// no else.
 
 		if (javaCodeGenerator == null) {
-			javaCodeGenerator = Ocl22JavaFactory.getInstance()
+			javaCodeGenerator = Ocl2JavaFactory.getInstance()
 					.createJavaCodeGenerator();
 		}
 		// no else.
@@ -139,7 +139,7 @@ public class Ocl2ForEclipseFacade {
 
 		else {
 			/* Necessary to replace possibly altered settings. */
-			javaCodeGenerator.setSettings(Ocl22JavaFactory.getInstance()
+			javaCodeGenerator.setSettings(Ocl2JavaFactory.getInstance()
 					.createJavaCodeGeneratorSettings());
 		}
 
@@ -164,8 +164,8 @@ public class Ocl2ForEclipseFacade {
 	 * @throws Ocl22CodeException
 	 */
 	public static String generateAspectJCode(Constraint constraint,
-			IOcl22CodeSettings settings) throws IllegalArgumentException,
-			Ocl22CodeException {
+			IOcl2JavaSettings settings) throws IllegalArgumentException,
+			Ocl2CodeException {
 
 		if (constraint == null) {
 			throw new IllegalArgumentException(
@@ -198,8 +198,8 @@ public class Ocl2ForEclipseFacade {
 	 * @throws Ocl22CodeException
 	 */
 	public static List<String> generateJavaFragmentCode(
-			List<Constraint> constraints, IOcl22CodeSettings settings)
-			throws IllegalArgumentException, Ocl22CodeException {
+			List<Constraint> constraints, IOcl2JavaSettings settings)
+			throws IllegalArgumentException, Ocl2CodeException {
 
 		if (constraints == null || constraints.size() == 0) {
 			throw new IllegalArgumentException(
@@ -208,7 +208,7 @@ public class Ocl2ForEclipseFacade {
 		// no else.
 
 		if (javaCodeGenerator == null) {
-			javaCodeGenerator = Ocl22JavaFactory.getInstance()
+			javaCodeGenerator = Ocl2JavaFactory.getInstance()
 					.createJavaCodeGenerator();
 		}
 		// no else.
@@ -221,7 +221,7 @@ public class Ocl2ForEclipseFacade {
 
 		else {
 			/* Necessary to replace possibly altered settings. */
-			javaCodeGenerator.setSettings(Ocl22JavaFactory.getInstance()
+			javaCodeGenerator.setSettings(Ocl2JavaFactory.getInstance()
 					.createJavaCodeGeneratorSettings());
 		}
 
@@ -246,8 +246,8 @@ public class Ocl2ForEclipseFacade {
 	 * @throws Ocl22CodeException
 	 */
 	public static String generateJavaFragmentCode(Constraint constraint,
-			IOcl22CodeSettings settings) throws IllegalArgumentException,
-			Ocl22CodeException {
+			IOcl2JavaSettings settings) throws IllegalArgumentException,
+			Ocl2CodeException {
 
 		if (constraint == null) {
 			throw new IllegalArgumentException(
@@ -271,9 +271,9 @@ public class Ocl2ForEclipseFacade {
 	 * @return An {@link IOcl22CodeSettings} instance to configure Java or
 	 *         AspectJ code generation.
 	 */
-	public static IOcl22CodeSettings getJavaCodeGeneratorSettings() {
+	public static IOcl2JavaSettings getJavaCodeGeneratorSettings() {
 
-		return Ocl22JavaFactory.getInstance().createJavaCodeGeneratorSettings();
+		return Ocl2JavaFactory.getInstance().createJavaCodeGeneratorSettings();
 	}
 
 	/**

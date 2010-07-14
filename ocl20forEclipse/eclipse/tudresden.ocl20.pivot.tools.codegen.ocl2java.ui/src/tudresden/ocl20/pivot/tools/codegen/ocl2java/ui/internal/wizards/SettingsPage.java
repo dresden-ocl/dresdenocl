@@ -17,7 +17,7 @@ You should have received a copy of the GNU Lesser General Public License along
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package tudresden.ocl20.pivot.ocl2java.ui.internal.wizards;
+package tudresden.ocl20.pivot.tools.codegen.ocl2java.ui.internal.wizards;
 
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.wizard.WizardPage;
@@ -32,10 +32,11 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Text;
 
-import tudresden.ocl20.pivot.ocl2java.IOcl22CodeSettings;
-import tudresden.ocl20.pivot.ocl2java.Ocl22JavaFactory;
-import tudresden.ocl20.pivot.ocl2java.code.ITransformedCode;
-import tudresden.ocl20.pivot.ocl2java.ui.internal.Ocl2JavaUIMessages;
+import tudresden.ocl20.pivot.tools.codegen.code.ITransformedCode;
+import tudresden.ocl20.pivot.tools.codegen.ocl2java.IOcl2JavaSettings;
+import tudresden.ocl20.pivot.tools.codegen.ocl2java.Ocl2JavaFactory;
+import tudresden.ocl20.pivot.tools.codegen.ocl2java.ui.internal.Ocl2JavaUIMessages;
+import tudresden.ocl20.pivot.tools.codegen.ui.impl.wizards.AbstractMouseListener;
 
 /**
  * <p>
@@ -61,7 +62,7 @@ public class SettingsPage extends WizardPage {
 	private Button invariantMode3;
 
 	/** The settings of the code generator associated with this wizard page. */
-	private IOcl22CodeSettings settings;
+	private IOcl2JavaSettings settings;
 
 	/** The Text field containing the violation macro. */
 	private Text violationMacroText;
@@ -72,17 +73,17 @@ public class SettingsPage extends WizardPage {
 	 * code generation.
 	 * </p>
 	 * 
-	 * @param settings
+	 * @param iOcl2CodeSettings
 	 *            The settings of the code generator associated with this wizard
 	 *            page.
 	 */
-	public SettingsPage(IOcl22CodeSettings settings) {
+	public SettingsPage(IOcl2JavaSettings iOcl2JavaSettings) {
 		super("SettingsPage");
 
 		setTitle(Ocl2JavaUIMessages.SettingsPage_Title);
 		setDescription(Ocl2JavaUIMessages.SettingsPage_Description);
 
-		this.settings = settings;
+		this.settings = iOcl2JavaSettings;
 	}
 
 	/**
@@ -157,6 +158,7 @@ public class SettingsPage extends WizardPage {
 	 * org.eclipse.jface.dialogs.IDialogPage#createControl(org.eclipse.swt.widgets
 	 * .Composite)
 	 */
+	@Override
 	public void createControl(Composite parent) {
 
 		Composite panel;
@@ -235,6 +237,7 @@ public class SettingsPage extends WizardPage {
 		violationMacroText.addModifyListener(new ModifyListener() {
 
 			// @Override   mt: commented out to be compatible with Java 1.5
+			@Override
 			public void modifyText(ModifyEvent e) {
 				updatePageComplete();
 			}
@@ -321,7 +324,7 @@ public class SettingsPage extends WizardPage {
 		ITransformedCode violationCode;
 
 		/* Restore the violation macro. */
-		violationCode = Ocl22JavaFactory.getInstance().createTransformedCode();
+		violationCode = Ocl2JavaFactory.getInstance().createTransformedCode();
 		violationCode
 				.addCode(Ocl2JavaUIMessages.SettingsPage_DefaultViolationMacro);
 
@@ -335,7 +338,7 @@ public class SettingsPage extends WizardPage {
 
 		/* Restore the invariant check mode. */
 		this.settings
-				.setDefaultInvariantCheckMode(IOcl22CodeSettings.INVARIANT_CHECK_AFTER_CONSTRUCT_AND_ATTRIBUTE_CHANGE);
+				.setDefaultInvariantCheckMode(IOcl2JavaSettings.INVARIANT_CHECK_AFTER_CONSTRUCT_AND_ATTRIBUTE_CHANGE);
 		this.invariantMode1.setSelection(true);
 		this.invariantMode2.setSelection(false);
 		this.invariantMode3.setSelection(false);
@@ -382,17 +385,17 @@ public class SettingsPage extends WizardPage {
 
 		if (this.invariantMode2.getSelection()) {
 			this.settings
-					.setDefaultInvariantCheckMode(IOcl22CodeSettings.INVARIANT_CHECK_AFTER_CONSTRUCT_AND_PUBLIC_METHOD_EXECUTION);
+					.setDefaultInvariantCheckMode(IOcl2JavaSettings.INVARIANT_CHECK_AFTER_CONSTRUCT_AND_PUBLIC_METHOD_EXECUTION);
 		}
 
 		else if (this.invariantMode3.getSelection()) {
 			this.settings
-					.setDefaultInvariantCheckMode(IOcl22CodeSettings.INVARIANT_CHECK_AFTER_SPECIAL_METHOD_INVOCATION);
+					.setDefaultInvariantCheckMode(IOcl2JavaSettings.INVARIANT_CHECK_AFTER_SPECIAL_METHOD_INVOCATION);
 		}
 
 		else {
 			this.settings
-					.setDefaultInvariantCheckMode(IOcl22CodeSettings.INVARIANT_CHECK_AFTER_CONSTRUCT_AND_ATTRIBUTE_CHANGE);
+					.setDefaultInvariantCheckMode(IOcl2JavaSettings.INVARIANT_CHECK_AFTER_CONSTRUCT_AND_ATTRIBUTE_CHANGE);
 		}
 	}
 
@@ -417,7 +420,7 @@ public class SettingsPage extends WizardPage {
 
 			ITransformedCode violationCode;
 
-			violationCode = Ocl22JavaFactory.getInstance()
+			violationCode = Ocl2JavaFactory.getInstance()
 					.createTransformedCode();
 			violationCode.addCode(this.violationMacroText.getText());
 

@@ -16,16 +16,16 @@ for more details.
 You should have received a copy of the GNU Lesser General Public License along 
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
-package tudresden.ocl20.pivot.ocl2java.test.tests.constraintkinds;
+package tudresden.ocl20.pivot.tools.codegen.ocl2java.test.tests.constraintkinds;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 import tudresden.ocl20.pivot.model.ModelAccessException;
-import tudresden.ocl20.pivot.ocl2java.test.tests.AbstractDiffTest;
 import tudresden.ocl20.pivot.pivotmodel.Constraint;
 import tudresden.ocl20.pivot.pivotmodel.ConstraintKind;
+import tudresden.ocl20.pivot.tools.codegen.ocl2java.test.tests.AbstractDiffTest;
 
 /**
  * <p>

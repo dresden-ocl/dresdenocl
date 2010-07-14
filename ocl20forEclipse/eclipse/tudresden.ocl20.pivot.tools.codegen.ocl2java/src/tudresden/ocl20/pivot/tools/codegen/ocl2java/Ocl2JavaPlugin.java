@@ -16,7 +16,7 @@ for more details.
 You should have received a copy of the GNU Lesser General Public License along 
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
-package tudresden.ocl20.pivot.ocl2java;
+package tudresden.ocl20.pivot.tools.codegen.ocl2java;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.Plugin;
@@ -31,20 +31,20 @@ import tudresden.ocl20.logging.LoggingPlugin;
  * 
  * @author Claas Wilke
  */
-public class Ocl22JavaPlugin extends Plugin {
+public class Ocl2JavaPlugin extends Plugin {
 
 	/** The plug-in ID. */
 	public static final String PLUGIN_ID = "tudresden.ocl20.pivot.ocl2java";
 
 	/** The shared instance. */
-	private static Ocl22JavaPlugin plugin;
+	private static Ocl2JavaPlugin plugin;
 
 	/**
 	 * <p>
-	 * Creates a new {@link Ocl22JavaPlugin}.
+	 * Creates a new {@link Ocl2JavaPlugin}.
 	 * </p>
 	 */
-	public Ocl22JavaPlugin() {
+	public Ocl2JavaPlugin() {
 	}
 
 	/*
@@ -75,7 +75,7 @@ public class Ocl22JavaPlugin extends Plugin {
 	/**
 	 * @return the shared instance
 	 */
-	public static Ocl22JavaPlugin getDefault() {
+	public static Ocl2JavaPlugin getDefault() {
 		return plugin;
 	}
 

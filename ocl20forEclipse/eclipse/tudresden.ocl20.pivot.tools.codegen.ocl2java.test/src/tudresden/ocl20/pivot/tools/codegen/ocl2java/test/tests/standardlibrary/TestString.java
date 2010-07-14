@@ -17,16 +17,16 @@ You should have received a copy of the GNU Lesser General Public License along
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package tudresden.ocl20.pivot.ocl2java.test.tests.standardlibrary;
+package tudresden.ocl20.pivot.tools.codegen.ocl2java.test.tests.standardlibrary;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 import tudresden.ocl20.pivot.model.ModelAccessException;
-import tudresden.ocl20.pivot.ocl2java.exception.Ocl22CodeException;
-import tudresden.ocl20.pivot.ocl2java.test.tests.AbstractDiffTest;
 import tudresden.ocl20.pivot.parser.ParseException;
+import tudresden.ocl20.pivot.tools.codegen.exception.Ocl2CodeException;
+import tudresden.ocl20.pivot.tools.codegen.ocl2java.test.tests.AbstractDiffTest;
 
 /**
  * <p>
@@ -76,11 +76,11 @@ public class TestString extends AbstractDiffTest {
 	 * @throws ModelAccessException
 	 * @throws ParseException
 	 * @throws IllegalArgumentException
-	 * @throws Ocl22CodeException
+	 * @throws Ocl2CodeException
 	 */
 	@Test
 	public void testAt01() throws IllegalArgumentException, ParseException,
-			ModelAccessException, Ocl22CodeException {
+			ModelAccessException, Ocl2CodeException {
 
 		this.compareFragmentCodeGeneration("sltest/string", "at01");
 	}
@@ -93,11 +93,11 @@ public class TestString extends AbstractDiffTest {
 	 * @throws ModelAccessException
 	 * @throws ParseException
 	 * @throws IllegalArgumentException
-	 * @throws Ocl22CodeException
+	 * @throws Ocl2CodeException
 	 */
 	@Test
 	public void testCharacters01() throws IllegalArgumentException,
-			ParseException, ModelAccessException, Ocl22CodeException {
+			ParseException, ModelAccessException, Ocl2CodeException {
 
 		this.compareFragmentCodeGeneration("sltest/string", "characters01");
 	}
@@ -123,11 +123,11 @@ public class TestString extends AbstractDiffTest {
 	 * @throws ModelAccessException
 	 * @throws ParseException
 	 * @throws IllegalArgumentException
-	 * @throws Ocl22CodeException
+	 * @throws Ocl2CodeException
 	 */
 	@Test
 	public void testEqualsIgnoreCase01() throws IllegalArgumentException,
-			ParseException, ModelAccessException, Ocl22CodeException {
+			ParseException, ModelAccessException, Ocl2CodeException {
 
 		this.compareFragmentCodeGeneration("sltest/string",
 				"equalsIgnoreCase01");
@@ -141,11 +141,11 @@ public class TestString extends AbstractDiffTest {
 	 * @throws ModelAccessException
 	 * @throws ParseException
 	 * @throws IllegalArgumentException
-	 * @throws Ocl22CodeException
+	 * @throws Ocl2CodeException
 	 */
 	@Test
 	public void testIndexOf01() throws IllegalArgumentException,
-			ParseException, ModelAccessException, Ocl22CodeException {
+			ParseException, ModelAccessException, Ocl2CodeException {
 
 		this.compareFragmentCodeGeneration("sltest/string", "indexOf01");
 	}
@@ -158,11 +158,11 @@ public class TestString extends AbstractDiffTest {
 	 * @throws ModelAccessException
 	 * @throws ParseException
 	 * @throws IllegalArgumentException
-	 * @throws Ocl22CodeException
+	 * @throws Ocl2CodeException
 	 */
 	@Test
 	public void testPlus01() throws IllegalArgumentException, ParseException,
-			ModelAccessException, Ocl22CodeException {
+			ModelAccessException, Ocl2CodeException {
 
 		this.compareFragmentCodeGeneration("sltest/string", "plus01");
 	}
@@ -201,11 +201,11 @@ public class TestString extends AbstractDiffTest {
 	 * @throws ModelAccessException
 	 * @throws ParseException
 	 * @throws IllegalArgumentException
-	 * @throws Ocl22CodeException
+	 * @throws Ocl2CodeException
 	 */
 	@Test
 	public void testToBoolean01() throws IllegalArgumentException,
-			ParseException, ModelAccessException, Ocl22CodeException {
+			ParseException, ModelAccessException, Ocl2CodeException {
 
 		this.compareFragmentCodeGeneration("sltest/string", "toBoolean01");
 	}
@@ -231,11 +231,11 @@ public class TestString extends AbstractDiffTest {
 	 * @throws ModelAccessException
 	 * @throws ParseException
 	 * @throws IllegalArgumentException
-	 * @throws Ocl22CodeException
+	 * @throws Ocl2CodeException
 	 */
 	@Test
 	public void testToLowerCase01() throws IllegalArgumentException,
-			ParseException, ModelAccessException, Ocl22CodeException {
+			ParseException, ModelAccessException, Ocl2CodeException {
 
 		this.compareFragmentCodeGeneration("sltest/string", "toLowerCase01");
 	}
@@ -261,11 +261,11 @@ public class TestString extends AbstractDiffTest {
 	 * @throws ModelAccessException
 	 * @throws ParseException
 	 * @throws IllegalArgumentException
-	 * @throws Ocl22CodeException
+	 * @throws Ocl2CodeException
 	 */
 	@Test
 	public void testToUpperCase01() throws IllegalArgumentException,
-			ParseException, ModelAccessException, Ocl22CodeException {
+			ParseException, ModelAccessException, Ocl2CodeException {
 
 		this.compareFragmentCodeGeneration("sltest/string", "toUpperCase01");
 	}

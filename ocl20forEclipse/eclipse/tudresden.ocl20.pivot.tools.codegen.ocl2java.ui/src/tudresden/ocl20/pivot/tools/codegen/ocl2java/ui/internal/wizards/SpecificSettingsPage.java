@@ -17,7 +17,7 @@ You should have received a copy of the GNU Lesser General Public License along
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package tudresden.ocl20.pivot.ocl2java.ui.internal.wizards;
+package tudresden.ocl20.pivot.tools.codegen.ocl2java.ui.internal.wizards;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,12 +43,15 @@ import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Text;
 
 import tudresden.ocl20.pivot.model.IModel;
-import tudresden.ocl20.pivot.ocl2java.IOcl22CodeSettings;
-import tudresden.ocl20.pivot.ocl2java.Ocl22JavaFactory;
-import tudresden.ocl20.pivot.ocl2java.code.ITransformedCode;
-import tudresden.ocl20.pivot.ocl2java.ui.internal.Ocl2JavaUIMessages;
 import tudresden.ocl20.pivot.pivotmodel.Constraint;
 import tudresden.ocl20.pivot.pivotmodel.ConstraintKind;
+import tudresden.ocl20.pivot.tools.codegen.code.ITransformedCode;
+import tudresden.ocl20.pivot.tools.codegen.ocl2java.IOcl2JavaSettings;
+import tudresden.ocl20.pivot.tools.codegen.ocl2java.Ocl2JavaFactory;
+import tudresden.ocl20.pivot.tools.codegen.ocl2java.ui.internal.Ocl2JavaUIMessages;
+import tudresden.ocl20.pivot.tools.codegen.ui.impl.wizards.AbstractMouseListener;
+import tudresden.ocl20.pivot.tools.codegen.ui.impl.wizards.ConstraintLabelProvider;
+import tudresden.ocl20.pivot.tools.codegen.ui.impl.wizards.ConstraintViewPage;
 
 /**
  * <p>
@@ -57,10 +60,10 @@ import tudresden.ocl20.pivot.pivotmodel.ConstraintKind;
  * 
  * @author Claas Wilke
  */
-public class SpecificSettingsPage extends WizardPage {
+public class SpecificSettingsPage extends ConstraintViewPage {
 
 	/** The settings of the code generator associated with this wizard page. */
-	private IOcl22CodeSettings mySettings;
+	private IOcl2JavaSettings mySettings;
 
 	/** The viewer displaying the registered meta models. */
 	private StructuredViewer constraintViewer;
@@ -90,13 +93,13 @@ public class SpecificSettingsPage extends WizardPage {
 	 * 
 	 * @param selection
 	 */
-	public SpecificSettingsPage(IOcl22CodeSettings settings) {
+	public SpecificSettingsPage(IOcl2JavaSettings iOcl2CodeSettings) {
 		super("SpecificSettingsPage");
 
 		setTitle(Ocl2JavaUIMessages.SpecificSettingsPage_Title);
 		setDescription(Ocl2JavaUIMessages.SpecificSettingsPage_Description);
 
-		this.mySettings = settings;
+		this.mySettings = iOcl2CodeSettings;
 	}
 
 	/*
@@ -106,6 +109,7 @@ public class SpecificSettingsPage extends WizardPage {
 	 * org.eclipse.jface.dialogs.IDialogPage#createControl(org.eclipse.swt.widgets
 	 * .Composite)
 	 */
+	@Override
 	public void createControl(Composite parent) {
 		Composite panel;
 		GridLayout layout;
@@ -203,6 +207,7 @@ public class SpecificSettingsPage extends WizardPage {
 		constraintViewer
 				.addSelectionChangedListener(new ISelectionChangedListener() {
 
+					@Override
 					public void selectionChanged(SelectionChangedEvent event) {
 
 						displayNewSettings();
@@ -304,6 +309,7 @@ public class SpecificSettingsPage extends WizardPage {
 		violationMacroText.addModifyListener(new ModifyListener() {
 
 			// @Override   mt: commented out to be compatible with Java 1.5
+			@Override
 			public void modifyText(ModifyEvent e) {
 				updateSettings();
 			}
@@ -363,9 +369,9 @@ public class SpecificSettingsPage extends WizardPage {
 				this.invariantMode3.setEnabled(true);
 
 				this.invariantMode2
-						.setSelection(invariantCheckMode == IOcl22CodeSettings.INVARIANT_CHECK_AFTER_CONSTRUCT_AND_PUBLIC_METHOD_EXECUTION);
+						.setSelection(invariantCheckMode == IOcl2JavaSettings.INVARIANT_CHECK_AFTER_CONSTRUCT_AND_PUBLIC_METHOD_EXECUTION);
 				this.invariantMode3
-						.setSelection(invariantCheckMode == IOcl22CodeSettings.INVARIANT_CHECK_AFTER_SPECIAL_METHOD_INVOCATION);
+						.setSelection(invariantCheckMode == IOcl2JavaSettings.INVARIANT_CHECK_AFTER_SPECIAL_METHOD_INVOCATION);
 				this.invariantMode1.setSelection(!(this.invariantMode2
 						.getSelection() || this.invariantMode3.getSelection()));
 			}
@@ -392,7 +398,7 @@ public class SpecificSettingsPage extends WizardPage {
 		Constraint result;
 		List<Constraint> selectedConstraints;
 
-		selectedConstraints = (List<Constraint>) ((IStructuredSelection) constraintViewer
+		selectedConstraints = ((IStructuredSelection) constraintViewer
 				.getSelection()).toList();
 
 		if (selectedConstraints != null && selectedConstraints.size() > 0) {
@@ -414,6 +420,7 @@ public class SpecificSettingsPage extends WizardPage {
 	 * @param newConstraints
 	 *            The new selected {@link Constraint}s.
 	 */
+	@Override
 	public void updateConstraintViewer(List<Constraint> newConstraints) {
 
 		if (this.constraintViewer != null) {
@@ -444,7 +451,7 @@ public class SpecificSettingsPage extends WizardPage {
 			boolean inheritanceStatus;
 			int invariantCheckMode;
 
-			violationCode = Ocl22JavaFactory.getInstance()
+			violationCode = Ocl2JavaFactory.getInstance()
 					.createTransformedCode();
 			violationCode.addCode(this.violationMacroText.getText());
 
@@ -460,15 +467,15 @@ public class SpecificSettingsPage extends WizardPage {
 
 			if (selectedConstraint.getKind() == ConstraintKind.INVARIANT) {
 				if (this.invariantMode2.getSelection()) {
-					invariantCheckMode = IOcl22CodeSettings.INVARIANT_CHECK_AFTER_CONSTRUCT_AND_PUBLIC_METHOD_EXECUTION;
+					invariantCheckMode = IOcl2JavaSettings.INVARIANT_CHECK_AFTER_CONSTRUCT_AND_PUBLIC_METHOD_EXECUTION;
 				}
 
 				else if (this.invariantMode3.getSelection()) {
-					invariantCheckMode = IOcl22CodeSettings.INVARIANT_CHECK_AFTER_SPECIAL_METHOD_INVOCATION;
+					invariantCheckMode = IOcl2JavaSettings.INVARIANT_CHECK_AFTER_SPECIAL_METHOD_INVOCATION;
 				}
 
 				else {
-					invariantCheckMode = IOcl22CodeSettings.INVARIANT_CHECK_AFTER_CONSTRUCT_AND_ATTRIBUTE_CHANGE;
+					invariantCheckMode = IOcl2JavaSettings.INVARIANT_CHECK_AFTER_CONSTRUCT_AND_ATTRIBUTE_CHANGE;
 				}
 			}
 

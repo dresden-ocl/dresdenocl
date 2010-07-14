@@ -16,13 +16,15 @@ for more details.
 You should have received a copy of the GNU Lesser General Public License along 
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
-package tudresden.ocl20.pivot.ocl2java;
+package tudresden.ocl20.pivot.tools.codegen.ocl2java;
 
 import java.util.List;
 
 import tudresden.ocl20.pivot.model.IModel;
-import tudresden.ocl20.pivot.ocl2java.exception.Ocl22CodeException;
 import tudresden.ocl20.pivot.pivotmodel.Constraint;
+import tudresden.ocl20.pivot.tools.codegen.IOcl2Code;
+import tudresden.ocl20.pivot.tools.codegen.IOcl2CodeSettings;
+import tudresden.ocl20.pivot.tools.codegen.exception.Ocl2CodeException;
 
 /**
  * <p>
@@ -32,39 +34,8 @@ import tudresden.ocl20.pivot.pivotmodel.Constraint;
  * 
  * @author Claas Wilke
  */
-public interface IOcl22Code {
+public interface IOcl2Java<T extends IOcl2JavaSettings> extends IOcl2Code<IOcl2CodeSettings>{
 
-	/**
-	 * @return The {@link IOcl22CodeSettings} of this {@link IOcl22Code} object.
-	 */
-	public IOcl22CodeSettings getSettings();
-
-	/**
-	 * <p>
-	 * Sets the {@link IOcl22CodeSettings} of this {@link IOcl22Code} object.
-	 * </p>
-	 * 
-	 * @param settings
-	 *          The {@link IOcl22CodeSettings} to be set.
-	 */
-	public void setSettings(IOcl22CodeSettings settings);
-
-	/**
-	 * <p>
-	 * Transforms the code fragments for a given {@link List} of
-	 * {@link Constraint}s.
-	 * </p>
-	 * 
-	 * @param constraints
-	 *          The {@link List} of the {@link Constraint}s whose code fragments
-	 *          shall be transformed.
-	 * @return A {@link List} containing the transformed fragment code of the
-	 *         given {@link Constraint}s.
-	 * @throws Ocl22CodeException
-	 *           Thrown, if an error during code transformation occurs.
-	 */
-	public List<String> transformFragmentCode(List<Constraint> constraints)
-			throws Ocl22CodeException;
 
 	/**
 	 * <p>
@@ -81,14 +52,6 @@ public interface IOcl22Code {
 	 *           Thrown, if an error during code transformation occurs.
 	 */
 	public List<String> transformInstrumentationCode(List<Constraint> constraints)
-			throws Ocl22CodeException;
+			throws Ocl2CodeException;
 
-	/**
-	 * <p>
-	 * Resets the code generators environment. The environment can be used for
-	 * code generation specific information such as incremented numbers for file
-	 * names or similar information.
-	 * </p>
-	 */
-	public void resetEnvironment();
 }

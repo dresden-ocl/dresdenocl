@@ -17,18 +17,18 @@ You should have received a copy of the GNU Lesser General Public License along
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package tudresden.ocl20.pivot.ocl2java.test.tests.constraintkinds;
+package tudresden.ocl20.pivot.tools.codegen.ocl2java.test.tests.constraintkinds;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
-import tudresden.ocl20.pivot.ocl2java.Ocl22JavaPlugin;
+import tudresden.ocl20.pivot.tools.codegen.ocl2java.Ocl2JavaPlugin;
 
 /**
  * <p>
  * Provides a jUnit Test Suite containing tests to test the transformation of
  * different kind of OCL constraints using the OCL 2 Java Code transformer (
- * {@link Ocl22JavaPlugin}).
+ * {@link Ocl2JavaPlugin}).
  * </p>
  * 
  * @author Claas Wilke

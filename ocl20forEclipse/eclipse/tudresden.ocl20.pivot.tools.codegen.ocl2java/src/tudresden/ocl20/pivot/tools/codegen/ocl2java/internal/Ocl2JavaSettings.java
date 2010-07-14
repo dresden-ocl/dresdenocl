@@ -16,17 +16,18 @@ for more details.
 You should have received a copy of the GNU Lesser General Public License along 
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
-package tudresden.ocl20.pivot.ocl2java.internal;
+package tudresden.ocl20.pivot.tools.codegen.ocl2java.internal;
 
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import tudresden.ocl20.pivot.ocl2java.IOcl22CodeSettings;
-import tudresden.ocl20.pivot.ocl2java.code.ITransformedCode;
-import tudresden.ocl20.pivot.ocl2java.code.impl.TransformedCodeImpl;
 import tudresden.ocl20.pivot.pivotmodel.Constraint;
+import tudresden.ocl20.pivot.tools.codegen.code.ITransformedCode;
+import tudresden.ocl20.pivot.tools.codegen.code.impl.TransformedCodeImpl;
+import tudresden.ocl20.pivot.tools.codegen.ocl2java.IOcl2JavaSettings;
+import tudresden.ocl20.pivot.tools.template.ITemplateGroup;
 
 /**
  * <p>
@@ -35,7 +36,7 @@ import tudresden.ocl20.pivot.pivotmodel.Constraint;
  * 
  * @author Claas Wilke
  */
-public class Ocl22JavaSettings implements IOcl22CodeSettings {
+public class Ocl2JavaSettings implements IOcl2JavaSettings {
 
 	/**
 	 * Specifies whether or not the transformed Code shall be saved in files.
@@ -88,10 +89,10 @@ public class Ocl22JavaSettings implements IOcl22CodeSettings {
 
 	/**
 	 * <p>
-	 * Creates a new {@link Ocl22JavaSettings}.
+	 * Creates a new {@link Ocl2JavaSettings}.
 	 * </p>
 	 */
-	public Ocl22JavaSettings() {
+	public Ocl2JavaSettings() {
 
 		this.sourceDirectory = "";
 
@@ -106,7 +107,7 @@ public class Ocl22JavaSettings implements IOcl22CodeSettings {
 		this.disabledInheritance = new HashSet<Constraint>();
 
 		this.defaultInvariantCheckMode =
-				IOcl22CodeSettings.INVARIANT_CHECK_AFTER_CONSTRUCT_AND_ATTRIBUTE_CHANGE;
+				IOcl2JavaSettings.INVARIANT_CHECK_AFTER_CONSTRUCT_AND_ATTRIBUTE_CHANGE;
 
 		this.invariantCheckMode = new HashMap<Constraint, Integer>();
 
@@ -328,5 +329,17 @@ public class Ocl22JavaSettings implements IOcl22CodeSettings {
 		}
 
 		return result;
+	}
+
+	@Override
+	public ITemplateGroup getTemplateGroup() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setTemplateGroup(ITemplateGroup templateGroup) {
+		// TODO Auto-generated method stub
+		
 	}
 }
