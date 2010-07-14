@@ -24,6 +24,6 @@ public privileged aspect DefAspect69 {
      *       def: testOrderedSetLast = source[].last()</code></p>
      */
     Object around(testpackage.Class1 aClass, java.util.List<Object> source): testOrderedSetLastCaller(aClass, source) {
-        return tudresden.ocl20.pivot.ocl22java.types.util.OclOrderedSets.last(source);
+        return tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclOrderedSets.last(source);
     }
 }

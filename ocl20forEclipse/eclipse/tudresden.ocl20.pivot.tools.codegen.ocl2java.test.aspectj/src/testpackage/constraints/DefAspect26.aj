@@ -24,6 +24,6 @@ public privileged aspect DefAspect26 {
      *       def: testCollectionAsSet = source[].asSet()</code></p>
      */
     java.util.Set<Object> around(testpackage.Class1 aClass, java.util.Collection<Object> source): testCollectionAsSetCaller(aClass, source) {
-        return tudresden.ocl20.pivot.ocl22java.types.util.OclCollections.asSet(source);
+        return tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclCollections.asSet(source);
     }
 }

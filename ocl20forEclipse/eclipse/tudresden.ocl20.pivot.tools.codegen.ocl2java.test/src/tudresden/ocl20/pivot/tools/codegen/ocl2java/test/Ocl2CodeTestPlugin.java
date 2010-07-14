@@ -32,7 +32,7 @@ import org.osgi.framework.BundleContext;
 public class Ocl2CodeTestPlugin extends Plugin {
 
 	/** The plug-in ID. */
-	public static final String PLUGIN_ID = "tudresden.ocl20.pivot.ocl2java.test";
+	public static final String PLUGIN_ID = "tudresden.ocl20.pivot.tools.codegen.ocl2java.test";
 
 	/** The shared instance. */
 	private static Ocl2CodeTestPlugin plugin;

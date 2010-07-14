@@ -24,6 +24,6 @@ public privileged aspect DefAspect104 {
      *       def: testSequenceReverse = source[].reverse()</code></p>
      */
     java.util.List<Object> around(testpackage.Class1 aClass, java.util.List<Object> source): testSequenceReverseCaller(aClass, source) {
-        return tudresden.ocl20.pivot.ocl22java.types.util.OclSequences.reverse(source);
+        return tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclSequences.reverse(source);
     }
 }

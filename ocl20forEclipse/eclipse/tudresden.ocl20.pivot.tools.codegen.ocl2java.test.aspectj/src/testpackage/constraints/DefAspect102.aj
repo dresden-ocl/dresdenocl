@@ -24,6 +24,6 @@ public privileged aspect DefAspect102 {
      *       def: testSequenceLast = source[].last()</code></p>
      */
     Object around(testpackage.Class1 aClass, java.util.List<Object> source): testSequenceLastCaller(aClass, source) {
-        return tudresden.ocl20.pivot.ocl22java.types.util.OclSequences.last(source);
+        return tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclSequences.last(source);
     }
 }

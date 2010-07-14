@@ -20,4 +20,4 @@ collection3.add(new Integer(1));
 collection3.add(new Integer(5));
 collection3.add(new Integer(10));
 
-tudresden.ocl20.pivot.ocl22java.types.util.OclSets.equals(tudresden.ocl20.pivot.ocl22java.types.util.OclSets.symmetricDifference(collection1, collection2), collection3)
+tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclSets.equals(tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclSets.symmetricDifference(collection1, collection2), collection3)

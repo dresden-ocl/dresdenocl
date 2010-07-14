@@ -24,6 +24,6 @@ public privileged aspect DefAspect23 {
      *       def: testCollectionAsBag = source[].asBag()</code></p>
      */
     java.util.List<Object> around(testpackage.Class1 aClass, java.util.Collection<Object> source): testCollectionAsBagCaller(aClass, source) {
-        return tudresden.ocl20.pivot.ocl22java.types.util.OclCollections.asBag(source);
+        return tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclCollections.asBag(source);
     }
 }

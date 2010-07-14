@@ -37,7 +37,7 @@ public privileged aspect InvAspect6 {
             // no else
         }
     
-        if (!((Object) tudresden.ocl20.pivot.ocl22java.types.util.OclCollections.size(aClass.programs)).equals(tudresden.ocl20.pivot.ocl22java.types.util.OclCollections.size(result1))) {
+        if (!((Object) tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclCollections.size(aClass.programs)).equals(tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclCollections.size(result1))) {
         	// TODO Auto-generated code executed when constraint is violated.
         	throw new RuntimeException("Error: Constraint was violated.");
         }

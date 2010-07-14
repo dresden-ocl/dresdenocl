@@ -24,6 +24,6 @@ public privileged aspect DefAspect7 {
      *       def: testBagAsSet = source[].asSet()</code></p>
      */
     java.util.Set<Object> around(testpackage.Class1 aClass, java.util.List<Object> source): testBagAsSetCaller(aClass, source) {
-        return tudresden.ocl20.pivot.ocl22java.types.util.OclBags.asSet(source);
+        return tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclBags.asSet(source);
     }
 }

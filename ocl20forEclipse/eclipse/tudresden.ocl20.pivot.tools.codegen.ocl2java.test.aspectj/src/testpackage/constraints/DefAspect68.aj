@@ -24,6 +24,6 @@ public privileged aspect DefAspect68 {
      *       def: testOrderedSetInsertAt = source[].insertAt( arg01[], arg02[])</code></p>
      */
     java.util.List<Object> around(testpackage.Class1 aClass, java.util.List<Object> source, Integer arg01, Object arg02): testOrderedSetInsertAtCaller(aClass, source, arg01, arg02) {
-        return tudresden.ocl20.pivot.ocl22java.types.util.OclOrderedSets.insertAt(source, arg01, arg02);
+        return tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclOrderedSets.insertAt(source, arg01, arg02);
     }
 }

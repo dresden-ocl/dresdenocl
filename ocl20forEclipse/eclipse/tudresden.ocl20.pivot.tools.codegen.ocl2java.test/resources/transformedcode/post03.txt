@@ -34,7 +34,7 @@ public privileged aspect PostAspect1 {
             result1.addAll(anElement1.availableServices);
         }
     
-        if (!tudresden.ocl20.pivot.ocl22java.types.util.OclCollections.includes(result1, aService)) {
+        if (!tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclCollections.includes(result1, aService)) {
         	// TODO Auto-generated code executed when constraint is violated.
         	throw new RuntimeException("Error: Constraint was violated.");
         }

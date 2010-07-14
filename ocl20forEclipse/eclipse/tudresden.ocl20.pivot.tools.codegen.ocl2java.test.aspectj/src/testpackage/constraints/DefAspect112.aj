@@ -24,6 +24,6 @@ public privileged aspect DefAspect112 {
      *       def: testSetEquals01 = source[].=( arg01[])</code></p>
      */
     Boolean around(testpackage.Class1 aClass, java.util.Set<Object> source, java.util.Set<Object> arg01): testSetEquals01Caller(aClass, source, arg01) {
-        return tudresden.ocl20.pivot.ocl22java.types.util.OclSets.equals(source, arg01);
+        return tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclSets.equals(source, arg01);
     }
 }

@@ -24,6 +24,6 @@ public privileged aspect DefAspect36 {
      *       def: testCollectionMax = source[].max()</code></p>
      */
     Object around(testpackage.Class1 aClass, java.util.Collection<Object> source): testCollectionMaxCaller(aClass, source) {
-        return tudresden.ocl20.pivot.ocl22java.types.util.OclCollections.max(source);
+        return tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclCollections.max(source);
     }
 }

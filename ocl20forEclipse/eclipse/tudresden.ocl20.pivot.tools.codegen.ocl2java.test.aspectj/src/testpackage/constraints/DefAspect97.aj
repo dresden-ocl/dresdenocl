@@ -24,6 +24,6 @@ public privileged aspect DefAspect97 {
      *       def: testSequenceFirst = source[].first()</code></p>
      */
     Object around(testpackage.Class1 aClass, java.util.List<Object> source): testSequenceFirstCaller(aClass, source) {
-        return tudresden.ocl20.pivot.ocl22java.types.util.OclSequences.first(source);
+        return tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclSequences.first(source);
     }
 }

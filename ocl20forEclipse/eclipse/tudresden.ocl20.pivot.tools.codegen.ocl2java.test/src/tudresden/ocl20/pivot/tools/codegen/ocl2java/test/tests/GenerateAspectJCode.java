@@ -251,6 +251,6 @@ public class GenerateAspectJCode extends AbstractDiffTest {
 		constraints.add(new String[] { "sltest/string", "toLowerCase01" });
 
 		this.createInstrumentationCode(
-				"tudresden.ocl20.pivot.ocl22java.test.aspectj", constraints);
+				"tudresden.ocl20.pivot.tools.codegen.ocl2java.test.aspectj", constraints);
 	}
 }

@@ -34,7 +34,7 @@ public privileged aspect InvAspect4 {
             result1.addAll(anElement1.cards);
         }
     
-        if (!tudresden.ocl20.pivot.ocl22java.types.util.OclCollections.includes((java.util.List<tudresden.ocl20.pivot.examples.royalsandloyals.CustomerCard>) tudresden.ocl20.pivot.ocl22java.types.util.OclBags.flatten(result1), aClass.card)) {
+        if (!tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclCollections.includes((java.util.List<tudresden.ocl20.pivot.examples.royalsandloyals.CustomerCard>) tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclBags.flatten(result1), aClass.card)) {
         	// TODO Auto-generated code executed when constraint is violated.
         	throw new RuntimeException("Error: Constraint was violated.");
         }

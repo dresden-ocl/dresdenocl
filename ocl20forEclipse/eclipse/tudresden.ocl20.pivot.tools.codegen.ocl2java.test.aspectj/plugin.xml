@@ -4,7 +4,7 @@
    <extension
          point="tudresden.ocl20.pivot.testsuite">
       <testSuites
-            testSuite="tudresden.ocl20.pivot.ocl22java.test.aspectj.AllAspectJTests">
+            testSuite="tudresden.ocl20.pivot.tools.codegen.ocl2java.test.aspectj.AllAspectJTests">
       </testSuites>
    </extension>
 

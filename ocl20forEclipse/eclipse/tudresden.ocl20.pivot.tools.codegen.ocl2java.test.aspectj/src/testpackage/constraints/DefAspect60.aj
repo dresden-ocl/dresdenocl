@@ -24,6 +24,6 @@ public privileged aspect DefAspect60 {
      *       def: testOrderedSetAppend = source[].append( arg01[])</code></p>
      */
     java.util.List<Object> around(testpackage.Class1 aClass, java.util.List<Object> source, Object arg01): testOrderedSetAppendCaller(aClass, source, arg01) {
-        return tudresden.ocl20.pivot.ocl22java.types.util.OclOrderedSets.append(source, arg01);
+        return tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclOrderedSets.append(source, arg01);
     }
 }

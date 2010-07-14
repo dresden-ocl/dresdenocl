@@ -34,7 +34,7 @@ public privileged aspect InvAspect1 {
             result1.addAll(anElement1.participants);
         }
     
-        if (!((Object) aClass.numberOfCustomers).equals(tudresden.ocl20.pivot.ocl22java.types.util.OclCollections.size(result1))) {
+        if (!((Object) aClass.numberOfCustomers).equals(tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclCollections.size(result1))) {
         	// TODO Auto-generated code executed when constraint is violated.
         	throw new RuntimeException("Error: Constraint was violated.");
         }

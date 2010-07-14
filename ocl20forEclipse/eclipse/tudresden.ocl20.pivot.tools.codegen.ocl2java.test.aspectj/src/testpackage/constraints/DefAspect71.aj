@@ -24,6 +24,6 @@ public privileged aspect DefAspect71 {
      *       def: testOrderedSetReverse = source[].reverse()</code></p>
      */
     java.util.List<Object> around(testpackage.Class1 aClass, java.util.List<Object> source): testOrderedSetReverseCaller(aClass, source) {
-        return tudresden.ocl20.pivot.ocl22java.types.util.OclOrderedSets.reverse(source);
+        return tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclOrderedSets.reverse(source);
     }
 }

@@ -8,4 +8,4 @@ collection1.add("c");
 collection1.add("d");
 collection1.add("e");
 
-((Object) tudresden.ocl20.pivot.ocl22java.types.util.OclSequences.indexOf(collection1, "c")).equals(new Integer(3))
+((Object) tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclSequences.indexOf(collection1, "c")).equals(new Integer(3))

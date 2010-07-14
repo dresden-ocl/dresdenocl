@@ -24,6 +24,6 @@ public privileged aspect DefAspect99 {
      *       def: testSequenceIncluding01 = source[].including( arg01[])</code></p>
      */
     java.util.List<Object> around(testpackage.Class1 aClass, java.util.List<Object> source, Object arg01): testSequenceIncluding01Caller(aClass, source, arg01) {
-        return tudresden.ocl20.pivot.ocl22java.types.util.OclSequences.including(source, arg01);
+        return tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclSequences.including(source, arg01);
     }
 }

@@ -31,6 +31,6 @@ public privileged aspect DefAspect1 {
             result1.add(anElement1.service);
         }
     
-        aClass.usedServices = tudresden.ocl20.pivot.ocl22java.types.util.OclBags.asSet(result1);
+        aClass.usedServices = tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclBags.asSet(result1);
     }
 }

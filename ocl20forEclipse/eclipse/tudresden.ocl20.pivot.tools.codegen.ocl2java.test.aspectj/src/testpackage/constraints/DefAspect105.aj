@@ -24,6 +24,6 @@ public privileged aspect DefAspect105 {
      *       def: testSequenceSubSequence = source[].subSequence( arg01[], arg02[])</code></p>
      */
     java.util.List<Object> around(testpackage.Class1 aClass, java.util.List<Object> source, Integer arg01, Integer arg02): testSequenceSubSequenceCaller(aClass, source, arg01, arg02) {
-        return tudresden.ocl20.pivot.ocl22java.types.util.OclSequences.subSequence(source, arg01, arg02);
+        return tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclSequences.subSequence(source, arg01, arg02);
     }
 }

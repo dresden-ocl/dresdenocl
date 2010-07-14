@@ -1,1 +1,1 @@
-(java.util.Collection<Object>) tudresden.ocl20.pivot.ocl22java.types.util.OclCollections.flatten(source)
+(java.util.Collection<Object>) tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclCollections.flatten(source)

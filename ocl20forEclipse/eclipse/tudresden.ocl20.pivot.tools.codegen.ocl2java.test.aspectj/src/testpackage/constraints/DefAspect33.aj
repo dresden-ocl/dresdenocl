@@ -24,6 +24,6 @@ public privileged aspect DefAspect33 {
      *       def: testCollectionIncludesAll = source[].includesAll( arg01[])</code></p>
      */
     Boolean around(testpackage.Class1 aClass, java.util.Collection<Object> source, java.util.Collection<Object> arg01): testCollectionIncludesAllCaller(aClass, source, arg01) {
-        return tudresden.ocl20.pivot.ocl22java.types.util.OclCollections.includesAll(source, arg01);
+        return tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclCollections.includesAll(source, arg01);
     }
 }

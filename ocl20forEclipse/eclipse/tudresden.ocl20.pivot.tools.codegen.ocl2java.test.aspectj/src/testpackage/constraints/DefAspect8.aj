@@ -24,6 +24,6 @@ public privileged aspect DefAspect8 {
      *       def: testBagCount01 = source[].count( arg01[])</code></p>
      */
     Integer around(testpackage.Class1 aClass, java.util.List<Object> source, Object arg01): testBagCount01Caller(aClass, source, arg01) {
-        return tudresden.ocl20.pivot.ocl22java.types.util.OclBags.count(source, arg01);
+        return tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclBags.count(source, arg01);
     }
 }

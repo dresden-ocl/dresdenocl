@@ -24,6 +24,6 @@ public privileged aspect DefAspect113 {
      *       def: testSetExcluding01 = source[].excluding( arg01[])</code></p>
      */
     java.util.Set<Object> around(testpackage.Class1 aClass, java.util.Set<Object> source, Object arg01): testSetExcluding01Caller(aClass, source, arg01) {
-        return tudresden.ocl20.pivot.ocl22java.types.util.OclSets.excluding(source, arg01);
+        return tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclSets.excluding(source, arg01);
     }
 }

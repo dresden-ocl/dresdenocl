@@ -6,4 +6,4 @@ for (tudresden.ocl20.pivot.examples.royalsandloyals.Service anElement1 : aClass.
     result1.add(anElement1.partner);
 }
 
-((Object) tudresden.ocl20.pivot.ocl22java.types.util.OclCollections.excludesAll(aClass.program.partners, result1)).equals(new Boolean(false))
+((Object) tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclCollections.excludesAll(aClass.program.partners, result1)).equals(new Boolean(false))

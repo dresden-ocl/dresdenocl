@@ -24,6 +24,6 @@ public privileged aspect DefAspect35 {
      *       def: testCollectionMin = source[].min()</code></p>
      */
     Object around(testpackage.Class1 aClass, java.util.Collection<Object> source): testCollectionMinCaller(aClass, source) {
-        return tudresden.ocl20.pivot.ocl22java.types.util.OclCollections.min(source);
+        return tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclCollections.min(source);
     }
 }

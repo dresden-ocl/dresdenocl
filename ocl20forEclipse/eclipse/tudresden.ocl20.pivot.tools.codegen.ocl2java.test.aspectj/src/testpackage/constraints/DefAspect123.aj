@@ -33,7 +33,7 @@ public privileged aspect DefAspect123 {
         }
         
         /* Remove the first element ''. */
-        result1.remove(tudresden.ocl20.pivot.ocl22java.types.util.OclSequences.first(result1));
+        result1.remove(tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclSequences.first(result1));
     
         return result1;
     }

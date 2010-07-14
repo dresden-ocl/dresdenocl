@@ -24,6 +24,6 @@ public privileged aspect DefAspect98 {
      *       def: testSequenceFlatten = source[].flatten()</code></p>
      */
     java.util.List<Object> around(testpackage.Class1 aClass, java.util.List<Object> source): testSequenceFlattenCaller(aClass, source) {
-        return (java.util.List<Object>) tudresden.ocl20.pivot.ocl22java.types.util.OclSequences.flatten(source);
+        return (java.util.List<Object>) tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclSequences.flatten(source);
     }
 }

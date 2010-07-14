@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Ocl22Java Test Plug-in for generated AspectJ code
 Bundle-SymbolicName: tudresden.ocl20.pivot.tools.codegen.ocl2java.test.aspectj;singleton:=true
 Bundle-Version: 2.2.0.qualifier
-Bundle-Activator: tudresden.ocl20.pivot.ocl22java.test.aspectj.Ocl22JavaAspectJTestPlugin
+Bundle-Activator: tudresden.ocl20.pivot.tools.codegen.ocl2java.test.aspectj.Ocl22JavaAspectJTestPlugin
 Bundle-Vendor: TU Dresden, Software Technology Group
 Require-Bundle: org.eclipse.ui;bundle-version="3.4.0",
  org.eclipse.core.runtime;bundle-version="3.4.0",

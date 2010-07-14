@@ -42,6 +42,6 @@ public privileged aspect DefAspect1 {
             result1.addAll(anElement1.availableServices);
         }
     
-        return tudresden.ocl20.pivot.ocl22java.types.util.OclSequences.asSet((java.util.List<tudresden.ocl20.pivot.examples.royalsandloyals.Service>) tudresden.ocl20.pivot.ocl22java.types.util.OclSequences.flatten(result1));
+        return tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclSequences.asSet((java.util.List<tudresden.ocl20.pivot.examples.royalsandloyals.Service>) tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclSequences.flatten(result1));
     }
 }

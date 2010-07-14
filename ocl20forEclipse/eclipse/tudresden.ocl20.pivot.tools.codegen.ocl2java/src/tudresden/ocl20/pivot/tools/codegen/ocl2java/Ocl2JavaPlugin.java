@@ -34,7 +34,7 @@ import tudresden.ocl20.logging.LoggingPlugin;
 public class Ocl2JavaPlugin extends Plugin {
 
 	/** The plug-in ID. */
-	public static final String PLUGIN_ID = "tudresden.ocl20.pivot.ocl2java";
+	public static final String PLUGIN_ID = "tudresden.ocl20.pivot.tools.codegen.ocl2java";
 
 	/** The shared instance. */
 	private static Ocl2JavaPlugin plugin;

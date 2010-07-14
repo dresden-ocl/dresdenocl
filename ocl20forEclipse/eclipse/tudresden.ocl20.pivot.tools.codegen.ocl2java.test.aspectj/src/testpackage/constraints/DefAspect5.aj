@@ -24,6 +24,6 @@ public privileged aspect DefAspect5 {
      *       def: testBagAsOrderedSet = source[].asOrderedSet()</code></p>
      */
     java.util.List<Object> around(testpackage.Class1 aClass, java.util.List<Object> source): testBagAsOrderedSetCaller(aClass, source) {
-        return tudresden.ocl20.pivot.ocl22java.types.util.OclBags.asOrderedSet(source);
+        return tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclBags.asOrderedSet(source);
     }
 }

@@ -32,7 +32,7 @@ public privileged aspect DefAspect57 {
         /* Check if the expression results in invalid. */
         try {
             /* DUMMY variable is necessary to form literals into a statement. */
-            Object DUMMY = tudresden.ocl20.pivot.ocl22java.types.util.OclSequences.first(collection1); 
+            Object DUMMY = tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclSequences.first(collection1); 
             result1 = false;
         }
         

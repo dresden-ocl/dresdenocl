@@ -24,6 +24,6 @@ public privileged aspect DefAspect66 {
      *       def: testOrderedSetFirst = source[].first()</code></p>
      */
     Object around(testpackage.Class1 aClass, java.util.List<Object> source): testOrderedSetFirstCaller(aClass, source) {
-        return tudresden.ocl20.pivot.ocl22java.types.util.OclOrderedSets.first(source);
+        return tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclOrderedSets.first(source);
     }
 }

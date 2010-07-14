@@ -24,6 +24,6 @@ public privileged aspect DefAspect34 {
      *       def: testCollectionIsEmpty = source[].isEmpty()</code></p>
      */
     Boolean around(testpackage.Class1 aClass, java.util.Collection<Object> source): testCollectionIsEmptyCaller(aClass, source) {
-        return tudresden.ocl20.pivot.ocl22java.types.util.OclCollections.isEmpty(source);
+        return tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclCollections.isEmpty(source);
     }
 }

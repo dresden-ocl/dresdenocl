@@ -41,7 +41,7 @@ public privileged aspect InvAspect12 {
             result1.add(anElement1.owner);
         }
     
-        if (!((Object) tudresden.ocl20.pivot.ocl22java.types.util.OclCollections.size(tudresden.ocl20.pivot.ocl22java.types.util.OclBags.asSet(result1))).equals(new Integer(1))) {
+        if (!((Object) tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclCollections.size(tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclBags.asSet(result1))).equals(new Integer(1))) {
         	// TODO Auto-generated code executed when constraint is violated.
         	throw new RuntimeException("Error: Constraint was violated.");
         }

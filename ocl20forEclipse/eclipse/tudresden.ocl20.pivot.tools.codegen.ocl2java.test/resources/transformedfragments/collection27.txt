@@ -6,4 +6,4 @@ collection1.add("b");
 collection1.add("c");
 collection1.add("d");
 
-tudresden.ocl20.pivot.ocl22java.types.util.OclOrderedSets.last(collection1).equals("d")
+tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclOrderedSets.last(collection1).equals("d")

@@ -24,6 +24,6 @@ public privileged aspect DefAspect115 {
      *       def: testSetIncluding01 = source[].including( arg01[])</code></p>
      */
     java.util.Set<Object> around(testpackage.Class1 aClass, java.util.Set<Object> source, Object arg01): testSetIncluding01Caller(aClass, source, arg01) {
-        return tudresden.ocl20.pivot.ocl22java.types.util.OclSets.including(source, arg01);
+        return tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclSets.including(source, arg01);
     }
 }

@@ -1,1 +1,1 @@
-tudresden.ocl20.pivot.ocl22java.types.util.OclSets.intersection(source, arg01)
+tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclSets.intersection(source, arg01)

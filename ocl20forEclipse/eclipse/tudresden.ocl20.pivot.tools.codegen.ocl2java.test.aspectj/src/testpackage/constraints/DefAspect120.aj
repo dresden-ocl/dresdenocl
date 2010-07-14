@@ -24,6 +24,6 @@ public privileged aspect DefAspect120 {
      *       def: testSetUnion01 = source[].union( arg01[])</code></p>
      */
     java.util.Set<Object> around(testpackage.Class1 aClass, java.util.Set<Object> source, java.util.Set<Object> arg01): testSetUnion01Caller(aClass, source, arg01) {
-        return tudresden.ocl20.pivot.ocl22java.types.util.OclSets.unionWithSet(source, arg01);
+        return tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclSets.unionWithSet(source, arg01);
     }
 }

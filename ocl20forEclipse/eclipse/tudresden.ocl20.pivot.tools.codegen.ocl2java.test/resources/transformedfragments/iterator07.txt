@@ -9,4 +9,4 @@ for (tudresden.ocl20.pivot.examples.royalsandloyals.Transaction anElement1 : aCl
     // no else
 }
 
-tudresden.ocl20.pivot.ocl22java.types.util.OclCollections.notEmpty(result1)
+tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclCollections.notEmpty(result1)
