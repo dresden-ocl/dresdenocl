@@ -3,6 +3,7 @@ package tudresden.ocl20.pivot.tools.template;
 import java.util.List;
 
 import tudresden.ocl20.pivot.tools.template.event.ITemplateGroupRegistryListener;
+import tudresden.ocl20.pivot.tools.template.exception.TemplateException;
 
 /**
  * <p>
@@ -23,6 +24,24 @@ public interface ITemplateGroupRegistry {
 	 *          The {@link ITemplateGroup} that shall be added.
 	 */
 	public void addTemplateGroup(ITemplateGroup templateGroup);
+
+	/**
+	 * <p>
+	 * Adds an {@link ITemplateGroup} to this {@link ITemplateGroupRegistry} and return this.
+	 * </p>
+	 * @param templateName
+	 *          The template group name.
+	 * @param templateEngineName
+	 * 			the name of the template engine
+	 * @param superGroup
+	 * 			the super template group of the new template group
+ 	 * @return
+	 * 		The new added template group
+	 * @throws
+	 * 		TemplateException if there no template engine or gives a template group with the name
+	 */
+	public ITemplateGroup addDefaultTemplateGroup(String templateName, String templateEngineName, ITemplateGroup superGroup) throws TemplateException;
+	
 	
 	/**
 	 * <p>

@@ -36,11 +36,9 @@ import java.util.LinkedList;
 import org.junit.Test;
 
 import tudresden.ocl20.pivot.tools.template.ITemplate;
-import tudresden.ocl20.pivot.tools.template.ITemplateEngine;
 import tudresden.ocl20.pivot.tools.template.ITemplateGroup;
 import tudresden.ocl20.pivot.tools.template.TemplatePlugin;
 import tudresden.ocl20.pivot.tools.template.exception.TemplateException;
-import tudresden.ocl20.pivot.tools.template.impl.TemplateGroup;
 
 /**
  * This test will test the class StringTemplateEngine.java of the package
@@ -63,9 +61,9 @@ public class TestStringTemplateEngine {
 			
 			// Create DeclarativeTemplateEngine with the List containing one template
 			ITemplateGroup general;
-			ITemplateEngine engine = TemplatePlugin.getTemplateEngineRegistry().getNewTemplateEngine("StringTemplate");
 			try {
-				general = new TemplateGroup("Test1", null, engine, groups);
+				general = TemplatePlugin.getTemplateGroupRegistry().addDefaultTemplateGroup("Test1", "StringTemplate", null);
+				general.addFiles(groups);
 				// Check the operations getTemplate with the parameters 'general' and 'specific'
 				// The called operation toString of the template should return the value
 				// 'generalTemplate' in both cases (as specified in the file testGeneral.stg).
@@ -84,7 +82,8 @@ public class TestStringTemplateEngine {
 			groups.add(TestStringTemplateEngine.class.getResource("/resources/templates/testSpecific.stg"));
 			ITemplateGroup specific = null;
 			try {
-				specific = new TemplateGroup("Test2", null, engine, groups);
+				specific = TemplatePlugin.getTemplateGroupRegistry().addDefaultTemplateGroup("Test2", "StringTemplate", null);
+				specific.addFiles(groups);
 				ITemplate generalTemplate = specific.getTemplate("general");
 				assertEquals(generalTemplate.toString(), "generalTemplate");
 				

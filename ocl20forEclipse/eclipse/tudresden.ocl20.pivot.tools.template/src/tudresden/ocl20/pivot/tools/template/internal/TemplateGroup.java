@@ -1,7 +1,6 @@
-package tudresden.ocl20.pivot.tools.template.impl;
+package tudresden.ocl20.pivot.tools.template.internal;
 
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -48,59 +47,16 @@ public class TemplateGroup implements ITemplateGroup {
 	 * 			the super group of this template group or <code>null</code> is there no super group
 	 * @param templateEngine
 	 * 			the template engine of the template group
-	 * @param files
-	 * 			the full file paths of the Templates
 	 * @throws TemplateException
 	 * 			if the engine can't read the files
 	 */
-	public TemplateGroup(String name, ITemplateGroup superGroup, ITemplateEngine templateEngine, List<URL> files) throws TemplateException {
+	public TemplateGroup(String name, ITemplateGroup superGroup, ITemplateEngine templateEngine) throws TemplateException {
 		this.name = name;
 		this.superGroup = superGroup;
 		this.files = new LinkedList<URL>();
-		try {
-			this.templateEngine = templateEngine.getClass().newInstance();
-		} catch (InstantiationException e) {
-			e.printStackTrace();
-			throw new TemplateException("No template engine set bescause "+e.getMessage());
-		} catch (IllegalAccessException e) {
-			e.printStackTrace();
-			throw new TemplateException("No template engine set bescause "+e.getMessage());
-		}
-		addFiles(files);
-		
+		this.templateEngine = templateEngine;
 	}
-	
-	/**
-	 * The constructor for a new Template group.
-	 * 	
-	 * @param name
-	 * 			the name of the template group
-	 * @param superGroup
-	 * 			the super group of this template group or <code>null</code> is there no super group
-	 * @param templateEngine
-	 * 			the template engine of the template group
-	 * @param files
-	 * 			the full file path of the Templates
-	 * @throws TemplateException
-	 * 			if the engine can't read the file
-	 */
-	public TemplateGroup(String name, ITemplateGroup superGroup, ITemplateEngine templateEngine, URL file) throws TemplateException {
-		this.name = name;
-		files = new ArrayList<URL>();
-		this.superGroup = superGroup;
-		try {
-			this.templateEngine = templateEngine.getClass().newInstance();
-		} catch (InstantiationException e) {
-			e.printStackTrace();
-			throw new TemplateException("No template engine set bescause "+e.getMessage());
-		} catch (IllegalAccessException e) {
-			e.printStackTrace();
-			throw new TemplateException("No template engine set bescause "+e.getMessage());
-		}
-		addFile(file);
 		
-	}
-	
 	/**
 	 * @see tudresden.ocl20.pivot.tools.template.ITemplateGroup#getDisplayName()
 	 */

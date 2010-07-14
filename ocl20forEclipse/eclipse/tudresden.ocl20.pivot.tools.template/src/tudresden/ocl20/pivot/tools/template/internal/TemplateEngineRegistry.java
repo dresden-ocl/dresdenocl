@@ -403,7 +403,7 @@ public class TemplateEngineRegistry implements ITemplateEngineRegistry, IRegistr
 	 * A helper method to get the worklist task {@link IExtensionPoint}.
 	 * </p>
 	 * 
-	 * @return The {@link IMetamodel} {@link IExtensionPoint}.
+	 * @return The {@link ITemplateEngine} {@link IExtensionPoint}.
 	 */
 	private IExtensionPoint getExtensionPoint() {
 
@@ -417,7 +417,7 @@ public class TemplateEngineRegistry implements ITemplateEngineRegistry, IRegistr
 		/* This should not happen unless the id changes. */
 		if (result == null) {
 			throw new IllegalStateException(
-					"The extension point for new metamodels could not be found under the id " //$NON-NLS-1$
+					"The extension point for new template engines could not be found under the id " //$NON-NLS-1$
 							+ TEMPLATEENGINE_EXTENSION_POINT_ID);
 		}
 		// no else.

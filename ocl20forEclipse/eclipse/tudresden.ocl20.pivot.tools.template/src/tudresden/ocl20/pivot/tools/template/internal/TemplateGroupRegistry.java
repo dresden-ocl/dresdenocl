@@ -9,11 +9,13 @@ import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.ListenerList;
 
 import tudresden.ocl20.pivot.tools.template.ITemplate;
+import tudresden.ocl20.pivot.tools.template.ITemplateEngine;
 import tudresden.ocl20.pivot.tools.template.ITemplateGroup;
 import tudresden.ocl20.pivot.tools.template.ITemplateGroupRegistry;
 import tudresden.ocl20.pivot.tools.template.TemplatePlugin;
 import tudresden.ocl20.pivot.tools.template.event.ITemplateGroupRegistryListener;
 import tudresden.ocl20.pivot.tools.template.event.TemplateGroupRegistryEvent;
+import tudresden.ocl20.pivot.tools.template.exception.TemplateException;
 
 /**
  * Default implementation of the {@link ITemplateGroupRegistry}
@@ -157,10 +159,10 @@ public class TemplateGroupRegistry implements ITemplateGroupRegistry {
 	 * A helper method that informs all listeners about an added {@link ITemplateGroup}.
 	 * </p>
 	 * 
-	 * @param model
+	 * @param templateGroup
 	 *          The {@link ITemplateGroup} that has been added.
 	 */
-	private void fireTemplateGroupAdded(ITemplateGroup model) {
+	private void fireTemplateGroupAdded(ITemplateGroup templateGroup) {
 
 		TemplateGroupRegistryEvent event;
 		event = null;
@@ -174,7 +176,7 @@ public class TemplateGroupRegistry implements ITemplateGroupRegistry {
 
 				/* Lazily create the event. */
 				if (event == null) {
-					event = new TemplateGroupRegistryEvent(this, model);
+					event = new TemplateGroupRegistryEvent(this, templateGroup);
 				}
 				// no else.
 
@@ -242,6 +244,20 @@ public class TemplateGroupRegistry implements ITemplateGroupRegistry {
 		// no else.
 
 		return this.listeners;
+	}
+
+
+	/**
+	 * @see tudresden.ocl20.pivot.tools.template.ITemplateGroupRegistry#addDefaultTemplateGroup(String, String, ITemplateGroup)
+	 */
+	public ITemplateGroup addDefaultTemplateGroup(String templateName,
+			String templateEngineName, ITemplateGroup superGroup ) throws TemplateException {
+		ITemplateEngine templateEngine = TemplatePlugin.getTemplateEngineRegistry().getNewTemplateEngine(templateEngineName);
+		if (templateEngine == null) throw new TemplateException("No template engine with this name");
+		if (templateGroups.containsKey(templateName)) throw new TemplateException("The template group name is existing.");
+		ITemplateGroup returnGroup = new TemplateGroup(templateName,superGroup,templateEngine);
+		this.addTemplateGroup(returnGroup);
+		return returnGroup;
 	}
 
 }
