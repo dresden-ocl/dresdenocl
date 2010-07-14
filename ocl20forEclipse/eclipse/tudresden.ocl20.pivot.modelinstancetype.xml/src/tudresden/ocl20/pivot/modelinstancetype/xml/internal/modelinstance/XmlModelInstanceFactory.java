@@ -31,8 +31,8 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 
 import tudresden.ocl20.pivot.essentialocl.types.CollectionType;
-import tudresden.ocl20.pivot.model.ModelAccessException;
 import tudresden.ocl20.pivot.model.IModel;
+import tudresden.ocl20.pivot.model.ModelAccessException;
 import tudresden.ocl20.pivot.modelinstancetype.exception.TypeNotFoundInModelException;
 import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceBoolean;
 import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement;
@@ -626,10 +626,40 @@ public class XmlModelInstanceFactory extends BasisJavaModelInstanceFactory {
 		/* FIXME Claas: Probably handle the node's name space. */
 		try {
 			result = this.model.findType(pathName);
+
+			/*
+			 * FIXME Claas: This is a very hacky dependency to the XSD
+			 * meta-model and should be fixed in the Meta-model instead.
+			 */
+			/*
+			 * change the first character into an upper case character and try
+			 * again.
+			 */
+			if (result == null) {
+
+				String typeName = pathName.remove(pathName.size() - 1);
+				pathName.add(typeName.substring(0, 1).toUpperCase()
+						+ typeName.substring(1, typeName.length()));
+				result = this.model.findType(pathName);
+			}
+			// no else.
+
+			/*
+			 * FIXME Claas: This is a very hacky dependency to the XSD
+			 * meta-model and should be fixed in the Meta-model instead.
+			 */
+			/* Add a 'Type' to the node name and try again. */
+			if (result == null) {
+
+				pathName.add(pathName.remove(pathName.size() - 1) + "Type");
+				result = this.model.findType(pathName);
+			}
+			// no else.
 		}
 		// end try.
 
 		catch (ModelAccessException e) {
+
 			throw new TypeNotFoundInModelException(
 					NLS
 							.bind(
