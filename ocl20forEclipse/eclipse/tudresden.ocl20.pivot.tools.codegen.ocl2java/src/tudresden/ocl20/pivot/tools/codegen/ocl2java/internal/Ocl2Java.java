@@ -202,9 +202,12 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 			templatePaths.add(this.getClass().getResource(
 					TEMPLATE_PATH + INSTRUMENTATION_TEMPLATE_FILE));
 
-			TemplatePlugin.getTemplateGroupRegistry().removeTemplateGroup("Ocl2Java");
-			this.myTemplateGroup = TemplatePlugin.getTemplateGroupRegistry().addDefaultTemplateGroup("Ocl2Java", "StringTemplate", null);
-			
+			TemplatePlugin.getTemplateGroupRegistry().removeTemplateGroup(
+					"Ocl2Java");
+			this.myTemplateGroup = TemplatePlugin
+					.getTemplateGroupRegistry()
+					.addDefaultTemplateGroup("Ocl2Java", "StringTemplate", null);
+
 			this.myTemplateGroup.addFiles(templatePaths);
 
 			this.mySettings = new Ocl2JavaSettings();
@@ -261,8 +264,6 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 
 		this.mySettings = settings;
 	}
-
-	
 
 	/**
 	 * <p>
@@ -1319,7 +1320,7 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 
 				if (operation != null
 						&& operation.getOwningType().equals(bagType)) {
-					
+
 					/* Probably rename the operation. */
 					if (renamedOperationNames.containsKey(operationName)) {
 						operationName = renamedOperationNames
@@ -1355,7 +1356,7 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 
 				if (operation != null
 						&& operation.getOwningType().equals(orderedSetType)) {
-					
+
 					/* Probably rename the operation. */
 					if (renamedOperationNames.containsKey(operationName)) {
 						operationName = renamedOperationNames
@@ -1555,14 +1556,15 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 
 					template = this.myTemplateGroup
 							.getTemplate("oclIsInvalidOperation");
-					template.setAttribute("sourceExp", sourceCode.getResultExp());
+					template.setAttribute("sourceExp", sourceCode
+							.getResultExp());
 					template.setAttribute("resultVar", resultVar);
-					
+
 					if (sourceExp.getType() != null) {
 						template.setAttribute("sourceHasType", "true");
 					}
 					// no else.
-					
+
 					result.addCode(template.toString());
 					resultExp = resultVar;
 				}
@@ -1934,7 +1936,6 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 		/* Get parameters for property call code. */
 		referredProperty = aPropertyCallExp.getReferredProperty();
 		refPropertyName = referredProperty.getName();
-		referredProperty.isMultiple();
 
 		/* Transform the code for the sourceExp. */
 		/* Check if the referred property is static. */
@@ -4592,7 +4593,7 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 	@Override
 	public void setSettings(IOcl2CodeSettings settings) {
 		setSettings((IOcl2JavaSettings) settings);
-		
+
 	}
 
 	/*
