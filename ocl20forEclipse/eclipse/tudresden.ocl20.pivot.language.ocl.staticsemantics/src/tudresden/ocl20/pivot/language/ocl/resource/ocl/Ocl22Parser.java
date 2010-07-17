@@ -1,7 +1,6 @@
 package tudresden.ocl20.pivot.language.ocl.resource.ocl;
 
 import java.io.IOException;
-import java.io.Reader;
 import java.util.Collections;
 import java.util.List;
 
@@ -13,9 +12,9 @@ import tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclResource;
 import tudresden.ocl20.pivot.language.ocl.staticsemantics.OclStaticSemanticsException;
 import tudresden.ocl20.pivot.language.ocl.staticsemantics.postporcessor.OclStaticSemanticsProvider;
 import tudresden.ocl20.pivot.model.IModel;
-import tudresden.ocl20.pivot.ocl2parser.parser.exceptions.SemanticException;
 import tudresden.ocl20.pivot.parser.IOclParser;
 import tudresden.ocl20.pivot.parser.ParseException;
+import tudresden.ocl20.pivot.parser.SemanticException;
 import tudresden.ocl20.pivot.pivotmodel.Constraint;
 
 public class Ocl22Parser implements IOclParser {
@@ -34,8 +33,7 @@ public class Ocl22Parser implements IOclParser {
 
 	public static Ocl22Parser INSTANCE = instance();
 
-	public List<Constraint> doParse(IModel model, Reader reader)
-			throws ParseException {
+	public List<Constraint> doParse(IModel model, URI uri) throws ParseException {
 		// return doParse(model, reader, false);
 		return null;
 	}
@@ -54,8 +52,8 @@ public class Ocl22Parser implements IOclParser {
 					.getStaticSemantics(resource);
 			List<Constraint> constraints;
 			try {
-				 constraints = staticSemantics.cs2EssentialOcl(resource
-						.getContents().get(0));
+				constraints = staticSemantics.cs2EssentialOcl(resource.getContents()
+						.get(0));
 			} catch (OclStaticSemanticsException e) {
 				throw new SemanticException(e.getMessage(), e);
 			}

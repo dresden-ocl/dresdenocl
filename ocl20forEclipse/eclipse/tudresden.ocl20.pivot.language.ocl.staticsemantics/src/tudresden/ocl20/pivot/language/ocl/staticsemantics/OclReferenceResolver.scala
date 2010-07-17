@@ -280,7 +280,7 @@ trait OclReferenceResolver { selfType : OclStaticSemantics =>
                                  reference : EReference, parameters : java.util.List[ParameterCS], 
                                  returnType : TypeCS) : java.util.List[Operation] = {
     container match {
-      case OperationDefinitionInContextCS(_, _, tn) => {
+      case o@OperationDefinitionInContextCS(_, _, tn) => {
         val parametersEOcl = parameters.map(p => p.getParameter)
 		    parametersEOcl.find(_.eIsProxy) match {
 		      case Some(couldNotResolve) => List()
@@ -296,9 +296,9 @@ trait OclReferenceResolver { selfType : OclStaticSemantics =>
 				        if (returnType != null) {
 				        	(returnType->oclType).flatMap{returnType =>
 				        		if (!fuzzy)
-				        			if (!operationList.first.getType.conformsTo(returnType))
-				        				Failure("Operation return type " + operationList.first.getType.getName + 
-		                             " does not conform to given type " + returnType.getName + ".")
+				        			if (!operationList.first.getType.equals(returnType))
+				        				yieldFailure("Operation return type " + operationList.first.getType.getName + 
+		                             " is not equal to given type " + returnType.getName + ".", o)
 				        			else
 				        				Full(operationList)
 				        		else
@@ -335,8 +335,10 @@ trait OclReferenceResolver { selfType : OclStaticSemantics =>
 		          rt.flatMap{rt =>
 	            	if (identifier != null && !identifier.isEmpty && context.isInstanceOf[Type]) {
 	            		val contextType = context.asInstanceOf[Type]
-	            		// TODO: add parameter check 
-	            	  contextType.allOperations.find(o => o.getName == identifier
+                  // this is some crude hack to ensure the descendency from OclAny for the type
+	            	  val operations = contextType.allOperations.union(oclLibrary.getOclAny.allOperations)
+                  operations.find(o => o.getName == identifier 
+                                                && o.hasMatchingSignature(parametersEOcl.map(_.getType))
               																	&& o.getType.conformsTo(rt))
               		match {
 								  	case Some(_) => Failure("Operation " + identifier + " is already defined on " +
