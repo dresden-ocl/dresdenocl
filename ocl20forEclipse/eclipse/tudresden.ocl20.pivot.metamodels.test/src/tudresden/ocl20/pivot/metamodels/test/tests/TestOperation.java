@@ -51,10 +51,10 @@ public class TestOperation {
 			.getLogger(TestOperation.class);
 
 	/** A {@link Type} of the current {@link IModel} under test. */
-	private static Type class1;
+	private static Type testTypeClass1;
 
 	/** A {@link Type} of the current {@link IModel} under test. */
-	private static Type class4;
+	private static Type testOperationAndParameterClass;
 
 	/** An {@link Operation} of the current {@link IModel} under test. */
 	private static Operation operation1;
@@ -92,16 +92,17 @@ public class TestOperation {
 	@BeforeClass
 	public static void setUp() {
 
-		class1 = MetaModelTestServices.getInstance().getTypeUnderTest(
+		testTypeClass1 = MetaModelTestServices.getInstance().getTypeUnderTest(
 				MetaModelTestServices.TYPE_QUALIFIED_NAME_TESTTYPECLASS1);
 
-		class4 = MetaModelTestServices
+		testOperationAndParameterClass = MetaModelTestServices
 				.getInstance()
 				.getTypeUnderTest(
 						MetaModelTestServices.TYPE_QUALIFIED_NAME_TESTOPERATIONANDPARAMETERCLASS);
 
 		/* Find some operations in the class. */
-		for (Operation anOperation : class4.getOwnedOperation()) {
+		for (Operation anOperation : testOperationAndParameterClass
+				.getOwnedOperation()) {
 
 			if (anOperation
 					.getName()
@@ -443,7 +444,8 @@ public class TestOperation {
 		assertNotNull(msg, operation1.getReturnParameter());
 
 		/* The operation must have class1 as return parameter type. */
-		assertEquals(msg, class1, operation1.getReturnParameter().getType());
+		assertEquals(msg, testTypeClass1, operation1.getReturnParameter()
+				.getType());
 	}
 
 	/**
@@ -487,7 +489,7 @@ public class TestOperation {
 		msg = "The adaptation of Operation.getOwner() seems to be wrong.";
 
 		/* The operation must be owned by the type its belongs to. */
-		assertEquals(msg, class4, operation1.getOwner());
+		assertEquals(msg, testOperationAndParameterClass, operation1.getOwner());
 	}
 
 	/**
@@ -503,7 +505,8 @@ public class TestOperation {
 		msg = "The adaptation of Operation.getOwningType() seems to be wrong.";
 
 		/* The operation must be owned by the type its belongs to. */
-		assertEquals(msg, class4, operation1.getOwningType());
+		assertEquals(msg, testOperationAndParameterClass, operation1
+				.getOwningType());
 	}
 
 	/**
@@ -609,14 +612,14 @@ public class TestOperation {
 	 * </p>
 	 */
 	@Test
-	public void testGetType1() {
+	public void testGetType01() {
 
 		String msg;
 
 		msg = "The adaptation of Operation.getType() seems to be wrong.";
 
 		/* The operation must have the same type as in the model. */
-		assertEquals(msg, class1, operation1.getType());
+		assertEquals(msg, testTypeClass1, operation1.getType());
 	}
 
 	/**
@@ -625,7 +628,7 @@ public class TestOperation {
 	 * </p>
 	 */
 	@Test
-	public void testGetType2() {
+	public void testGetType02() {
 
 		String msg;
 
@@ -649,7 +652,7 @@ public class TestOperation {
 	 * </p>
 	 */
 	@Test
-	public void testGetType3() {
+	public void testGetType03() {
 
 		/*
 		 * Only execute this test case if the current model under test supports
@@ -661,7 +664,7 @@ public class TestOperation {
 			msg = "The adaptation of Operation.getType() seems to be wrong.";
 
 			/* The operation must have the same type as in the model. */
-			assertEquals(msg, class1, staticOperation.getType());
+			assertEquals(msg, testTypeClass1, staticOperation.getType());
 		}
 		// no else.
 	}
@@ -672,14 +675,20 @@ public class TestOperation {
 	 * </p>
 	 */
 	@Test
-	public void testGetType4() {
+	public void testGetType04() {
 
-		String msg;
+		if (multipleOperation != null) {
+			String msg;
 
-		msg = "The adaptation of Operation.getType() seems to be wrong.";
+			msg = "The adaptation of Operation.getType() for "
+					+ "'TestOperationAndParameterClass.multipleOperation(TestTypeClass1)' seems to be wrong.";
 
-		/* The operation must have the same type as in the model. */
-		assertEquals(msg, class1, multipleOperation.getType());
+			/* The operation must be multiple. */
+			assertEquals(msg, EssentialOclPlugin.getOclLibraryProvider()
+					.getOclLibrary().getCollectionType(testTypeClass1),
+					multipleOperation.getType());
+		}
+		// no else.
 	}
 
 	/**
@@ -688,95 +697,17 @@ public class TestOperation {
 	 * </p>
 	 */
 	@Test
-	public void testGetType5() {
+	public void testGetType05() {
 
 		String msg;
 
-		msg = "The adaptation of Operation.getType() seems to be wrong.";
-
-		/* The operation must have the same type as in the model. */
-		assertEquals(msg, class1, orderedMultipleOperation.getType());
-	}
-
-	/**
-	 * <p>
-	 * A test case testing the operation {@link Operation#getType()}.
-	 * </p>
-	 */
-	@Test
-	public void testGetType6() {
-
-		String msg;
-
-		msg = "The adaptation of Operation.getType() seems to be wrong.";
-
-		/* The operation must have the same type as in the model. */
-		assertEquals(msg, class1, unorderedMultipleOperation.getType());
-	}
-
-	/**
-	 * <p>
-	 * A test case testing the operation {@link Operation#getType()}.
-	 * </p>
-	 */
-	@Test
-	public void testGetType7() {
-
-		String msg;
-
-		msg = "The adaptation of Operation.getType() seems to be wrong.";
-
-		/* The operation must have the same type as in the model. */
-		assertEquals(msg, class1, uniqueMultipleOperation.getType());
-	}
-
-	/**
-	 * <p>
-	 * A test case testing the operation {@link Operation#getType()}.
-	 * </p>
-	 */
-	@Test
-	public void testGetType8() {
-
-		String msg;
-
-		msg = "The adaptation of Operation.getType() seems to be wrong.";
-
-		/* The operation must have the same type as in the model. */
-		assertEquals(msg, class1, nonuniqueMultipleOperation.getType());
-	}
-
-	/**
-	 * <p>
-	 * A test case testing the operation {@link Operation#isMultiple()}.
-	 * </p>
-	 */
-	@Test
-	public void testIsMultiple1() {
-
-		String msg;
-
-		msg = "The adaptation of Operation.isMultiple() seems to be wrong. ";
-		msg += "Class3.operation1() should not be multiple.";
-
-		/* The operation must not be multiple. */
-		assertFalse(msg, operation1.isMultiple());
-	}
-
-	/**
-	 * <p>
-	 * A test case testing the operation {@link Operation#isMultiple()}.
-	 * </p>
-	 */
-	@Test
-	public void testIsMultiple2() {
-
-		String msg;
-
-		msg = "The adaptation of Operation.isMultiple() seems to be wrong.";
+		msg = "The adaptation of Operation.getType() for "
+				+ "'TestOperationAndParameterClass.orderedMultipleOperation(TestTypeClass1)' seems to be wrong.";
 
 		/* The operation must be multiple. */
-		assertTrue(msg, multipleOperation.isMultiple());
+		assertEquals(msg, EssentialOclPlugin.getOclLibraryProvider()
+				.getOclLibrary().getSequenceType(testTypeClass1),
+				orderedMultipleOperation.getType());
 	}
 
 	/**
@@ -785,47 +716,69 @@ public class TestOperation {
 	 * </p>
 	 */
 	@Test
-	public void testIsOrdered1() {
+	public void testGetType06() {
 
-		String msg;
+		if (unorderedMultipleOperation != null) {
+			String msg;
 
-		msg = "The adaptation of Operation.isMultiple() seems to be wrong. ";
-		msg += "Operations with non-multiple results should have ordered results.";
+			msg = "The adaptation of Operation.getType() for "
+					+ "'unorderedMultipleOperation(TestTypeClass1)' seems to be wrong.";
 
-		/* The operation must be ordered. */
-		assertTrue(msg, operation1.isOrdered());
+			/* The operation must be multiple. */
+			assertEquals(msg, EssentialOclPlugin.getOclLibraryProvider()
+					.getOclLibrary().getSetType(testTypeClass1),
+					unorderedMultipleOperation.getType());
+		}
+
+		else {
+			LOGGER
+					.warn("Operation 'unorderedMultipleOperation' was not found. Probably, type adaptation of Operations has not been tested completely.");
+		}
 	}
 
 	/**
 	 * <p>
-	 * A test case testing the operation {@link Operation#isOrdered()}.
+	 * A test case testing the operation {@link Operation#getType()}.
 	 * </p>
 	 */
 	@Test
-	public void testIsOrdered2() {
+	public void testGetType07() {
 
 		String msg;
 
-		msg = "The adaptation of Operation.isMultiple() seems to be wrong. ";
+		msg = "The adaptation of Operation.getType() for "
+				+ "'uniqueMultipleOperation(TestTypeClass1)' seems to be wrong.";
 
-		/* The operation must be ordered. */
-		assertTrue(msg, orderedMultipleOperation.isOrdered());
+		/* The operation must be multiple. */
+		assertEquals(msg, EssentialOclPlugin.getOclLibraryProvider()
+				.getOclLibrary().getSetType(testTypeClass1),
+				uniqueMultipleOperation.getType());
 	}
 
 	/**
 	 * <p>
-	 * A test case testing the operation {@link Operation#isOrdered()}.
+	 * A test case testing the operation {@link Operation#getType()}.
 	 * </p>
 	 */
 	@Test
-	public void testIsOrdered3() {
+	public void testGetType08() {
 
-		String msg;
+		if (unorderedMultipleOperation != null) {
+			String msg;
 
-		msg = "The adaptation of Operation.isMultiple() seems to be wrong. ";
+			msg = "The adaptation of Operation.getType() for "
+					+ "'nonuniqueMultipleOperation(TestTypeClass1)' seems to be wrong.";
 
-		/* The operation must not be ordered. */
-		assertFalse(msg, unorderedMultipleOperation.isOrdered());
+			/* The operation must be multiple. */
+			assertEquals(msg, EssentialOclPlugin.getOclLibraryProvider()
+					.getOclLibrary().getSequenceType(testTypeClass1),
+					nonuniqueMultipleOperation.getType());
+		}
+
+		else {
+			LOGGER
+					.warn("Operation 'nonuniqueMultipleOperation' was not found. Probably, type adaptation of Operations has not been tested completely.");
+		}
 	}
 
 	/**
@@ -865,54 +818,5 @@ public class TestOperation {
 			assertTrue(msg, staticOperation.isStatic());
 		}
 		// no else.
-	}
-
-	/**
-	 * <p>
-	 * A test case testing the operation {@link Operation#isUnique()}.
-	 * </p>
-	 */
-	@Test
-	public void testIsUnique1() {
-
-		String msg;
-
-		msg = "The adaptation of Operation.isUnique() seems to be wrong. ";
-		msg += "Operations with non-multiple results should have unique results.";
-
-		/* The operation must be unique. */
-		assertTrue(msg, operation1.isUnique());
-	}
-
-	/**
-	 * <p>
-	 * A test case testing the operation {@link Operation#isUnique()}.
-	 * </p>
-	 */
-	@Test
-	public void testIsUnique2() {
-
-		String msg;
-
-		msg = "The adaptation of Operation.isUnique() seems to be wrong. ";
-
-		/* The operation must be unique. */
-		assertTrue(msg, uniqueMultipleOperation.isUnique());
-	}
-
-	/**
-	 * <p>
-	 * A test case testing the operation {@link Operation#isUnique()}.
-	 * </p>
-	 */
-	@Test
-	public void testIsUnique3() {
-
-		String msg;
-
-		msg = "The adaptation of Operation.isUnique() seems to be wrong. ";
-
-		/* The operation must not be unique. */
-		assertFalse(msg, nonuniqueMultipleOperation.isUnique());
 	}
 }

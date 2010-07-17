@@ -14,6 +14,7 @@
 package package1.package2;
 
 import java.lang.reflect.Method;
+import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
@@ -60,7 +61,7 @@ public class TestOperationAndParameterClass {
 	 * An Operation to test the adaptation of Operations with multiple results.
 	 * </p>
 	 */
-	public TestTypeClass1[] multipleOperation() {
+	public Collection<TestTypeClass1> multipleOperation() {
 
 		return null;
 	}
@@ -71,18 +72,7 @@ public class TestOperationAndParameterClass {
 	 * results.
 	 * </p>
 	 */
-	public TestTypeClass1[] orderedMultipleOperation() {
-
-		return null;
-	}
-
-	/**
-	 * <p>
-	 * An Operation to test the adaptation of Operations with unordered multiple
-	 * results.
-	 * </p>
-	 */
-	public Set<TestTypeClass1> unorderedMultipleOperation() {
+	public List<TestTypeClass1> orderedMultipleOperation() {
 
 		return null;
 	}
@@ -94,17 +84,6 @@ public class TestOperationAndParameterClass {
 	 * </p>
 	 */
 	public Set<TestTypeClass1> uniqueMultipleOperation() {
-
-		return null;
-	}
-
-	/**
-	 * <p>
-	 * An Operation to test the adaptation of Operations with non-unique multiple
-	 * results.
-	 * </p>
-	 */
-	public List<TestTypeClass1> nonuniqueMultipleOperation() {
 
 		return null;
 	}

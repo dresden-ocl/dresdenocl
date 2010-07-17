@@ -14,19 +14,18 @@
 package tudresden.ocl20.pivot.metamodels.test.tests;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
 
 import org.apache.log4j.Logger;
 import org.eclipse.osgi.util.NLS;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import tudresden.ocl20.pivot.essentialocl.EssentialOclPlugin;
 import tudresden.ocl20.pivot.metamodels.test.MetaModelTestPlugin;
 import tudresden.ocl20.pivot.metamodels.test.MetaModelTestServices;
 import tudresden.ocl20.pivot.metamodels.test.msg.MetaModelTestSuiteMessages;
-import tudresden.ocl20.pivot.model.metamodel.IMetamodel;
 import tudresden.ocl20.pivot.model.IModel;
+import tudresden.ocl20.pivot.model.metamodel.IMetamodel;
 import tudresden.ocl20.pivot.pivotmodel.Operation;
 import tudresden.ocl20.pivot.pivotmodel.Parameter;
 import tudresden.ocl20.pivot.pivotmodel.ParameterDirectionKind;
@@ -45,11 +44,11 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
 public class TestParameter {
 
 	/** The {@link Logger} for this class. */
-	private static final Logger LOGGER =
-			MetaModelTestPlugin.getLogger(TestParameter.class);
+	private static final Logger LOGGER = MetaModelTestPlugin
+			.getLogger(TestParameter.class);
 
 	/** A {@link Type} of the current {@link IModel} under test. */
-	private static Type class1;
+	private static Type testTypeClass1;
 
 	/** A {@link Type} of the current {@link IModel} under test. */
 	private static Type class4;
@@ -110,46 +109,52 @@ public class TestParameter {
 
 	/**
 	 * <p>
-	 * Loads some elements from the current {@link IModel} under test required for
-	 * the tests contained in this Class.
+	 * Loads some elements from the current {@link IModel} under test required
+	 * for the tests contained in this Class.
 	 * </p>
 	 */
 	@BeforeClass
 	public static void setUp() {
 
-		class1 =
-				MetaModelTestServices.getInstance().getTypeUnderTest(
-						MetaModelTestServices.TYPE_QUALIFIED_NAME_TESTTYPECLASS1);
+		testTypeClass1 = MetaModelTestServices.getInstance().getTypeUnderTest(
+				MetaModelTestServices.TYPE_QUALIFIED_NAME_TESTTYPECLASS1);
 
-		class4 =
-				MetaModelTestServices
-						.getInstance()
-						.getTypeUnderTest(
-								MetaModelTestServices.TYPE_QUALIFIED_NAME_TESTOPERATIONANDPARAMETERCLASS);
+		class4 = MetaModelTestServices
+				.getInstance()
+				.getTypeUnderTest(
+						MetaModelTestServices.TYPE_QUALIFIED_NAME_TESTOPERATIONANDPARAMETERCLASS);
 
 		/* Find some operations in the class. */
 		for (Operation anOperation : class4.getOwnedOperation()) {
 
-			if (anOperation.getName().equals(
-					MetaModelTestServices.OPERATION_NAME_OPERATIONWITHOUTPARAMETERS)) {
+			if (anOperation
+					.getName()
+					.equals(
+							MetaModelTestServices.OPERATION_NAME_OPERATIONWITHOUTPARAMETERS)) {
 				operation1 = anOperation;
 			}
 			// no else.
 
-			if (anOperation.getName().equals(
-					MetaModelTestServices.OPERATION_NAME_VOIDOPERATIONWITHPARAMETER)) {
+			if (anOperation
+					.getName()
+					.equals(
+							MetaModelTestServices.OPERATION_NAME_VOIDOPERATIONWITHPARAMETER)) {
 				operation2 = anOperation;
 			}
 			// no else.
 
-			if (anOperation.getName().equals(
-					MetaModelTestServices.OPERATION_NAME_INPUTOUTPUTPARAMETEROPERATION)) {
+			if (anOperation
+					.getName()
+					.equals(
+							MetaModelTestServices.OPERATION_NAME_INPUTOUTPUTPARAMETEROPERATION)) {
 				inputOutputParameterOperation = anOperation;
 			}
 			// no else.
 
-			if (anOperation.getName().equals(
-					MetaModelTestServices.OPERATION_NAME_OUTPUTPARAMETEROPERATION)) {
+			if (anOperation
+					.getName()
+					.equals(
+							MetaModelTestServices.OPERATION_NAME_OUTPUTPARAMETEROPERATION)) {
 				outputParameterOperation = anOperation;
 			}
 			// no else.
@@ -160,26 +165,34 @@ public class TestParameter {
 			}
 			// no else.
 
-			if (anOperation.getName().equals(
-					MetaModelTestServices.OPERATION_NAME_ORDEREDMULTIPLEOPERATION)) {
+			if (anOperation
+					.getName()
+					.equals(
+							MetaModelTestServices.OPERATION_NAME_ORDEREDMULTIPLEOPERATION)) {
 				orderedMultipleOperation = anOperation;
 			}
 			// no else.
 
-			if (anOperation.getName().equals(
-					MetaModelTestServices.OPERATION_NAME_UNORDEREDMULTIPLEOPERATION)) {
+			if (anOperation
+					.getName()
+					.equals(
+							MetaModelTestServices.OPERATION_NAME_UNORDEREDMULTIPLEOPERATION)) {
 				unorderedMultipleOperation = anOperation;
 			}
 			// no else.
 
-			if (anOperation.getName().equals(
-					MetaModelTestServices.OPERATION_NAME_UNIQUEMULTIPLEOPERATION)) {
+			if (anOperation
+					.getName()
+					.equals(
+							MetaModelTestServices.OPERATION_NAME_UNIQUEMULTIPLEOPERATION)) {
 				uniqueMultipleOperation = anOperation;
 			}
 			// no else.
 
-			if (anOperation.getName().equals(
-					MetaModelTestServices.OPERATION_NAME_NONUNIQUEMULTIPLEOPERATION)) {
+			if (anOperation
+					.getName()
+					.equals(
+							MetaModelTestServices.OPERATION_NAME_NONUNIQUEMULTIPLEOPERATION)) {
 				nonuniqueMultipleOperation = anOperation;
 			}
 			// no else.
@@ -192,19 +205,17 @@ public class TestParameter {
 			if (LOGGER.isInfoEnabled()) {
 				String msg;
 
-				msg =
-						NLS
+				msg = NLS
+						.bind(
+								MetaModelTestSuiteMessages.MetaModelTestSuite_OperationNotFoundInModel,
+								MetaModelTestServices.OPERATION_NAME_INPUTOUTPUTPARAMETEROPERATION,
+								"Parameter.getKind()");
+				msg += " "
+						+ NLS
 								.bind(
-										MetaModelTestSuiteMessages.MetaModelTestSuite_OperationNotFoundInModel,
-										MetaModelTestServices.OPERATION_NAME_INPUTOUTPUTPARAMETEROPERATION,
-										"Parameter.getKind()");
-				msg +=
-						" "
-								+ NLS
-										.bind(
-												MetaModelTestSuiteMessages.MetaModelTestSuite_CurrentlyTestedMetaModel,
-												MetaModelTestServices.getInstance()
-														.getMetaModelUnderTestID());
+										MetaModelTestSuiteMessages.MetaModelTestSuite_CurrentlyTestedMetaModel,
+										MetaModelTestServices.getInstance()
+												.getMetaModelUnderTestID());
 
 				LOGGER.warn(msg);
 			}
@@ -213,8 +224,8 @@ public class TestParameter {
 		}
 
 		else {
-			inputOutputParameter1 =
-					inputOutputParameterOperation.getInputParameter().get(0);
+			inputOutputParameter1 = inputOutputParameterOperation
+					.getInputParameter().get(0);
 		}
 
 		if (outputParameterOperation == null) {
@@ -223,19 +234,17 @@ public class TestParameter {
 			if (LOGGER.isInfoEnabled()) {
 				String msg;
 
-				msg =
-						NLS
+				msg = NLS
+						.bind(
+								MetaModelTestSuiteMessages.MetaModelTestSuite_OperationNotFoundInModel,
+								MetaModelTestServices.OPERATION_NAME_OUTPUTPARAMETEROPERATION,
+								"Parameter.getKind()");
+				msg += " "
+						+ NLS
 								.bind(
-										MetaModelTestSuiteMessages.MetaModelTestSuite_OperationNotFoundInModel,
-										MetaModelTestServices.OPERATION_NAME_OUTPUTPARAMETEROPERATION,
-										"Parameter.getKind()");
-				msg +=
-						" "
-								+ NLS
-										.bind(
-												MetaModelTestSuiteMessages.MetaModelTestSuite_CurrentlyTestedMetaModel,
-												MetaModelTestServices.getInstance()
-														.getMetaModelUnderTestID());
+										MetaModelTestSuiteMessages.MetaModelTestSuite_CurrentlyTestedMetaModel,
+										MetaModelTestServices.getInstance()
+												.getMetaModelUnderTestID());
 
 				LOGGER.warn(msg);
 			}
@@ -244,24 +253,35 @@ public class TestParameter {
 		}
 
 		else {
-			outputParameter1 = outputParameterOperation.getOutputParameter().get(0);
+			outputParameter1 = outputParameterOperation.getOutputParameter()
+					.get(0);
 		}
 
 		inputParameter1 = operation2.getInputParameter().get(0);
 
 		returnParameter1 = operation1.getReturnParameter();
 
-		multipleParameter = multipleOperation.getReturnParameter();
+		if (multipleOperation != null) {
+			multipleParameter = multipleOperation.getReturnParameter();
+		}
+		// no else.
 
-		orderedMultipleParameter = orderedMultipleOperation.getReturnParameter();
+		orderedMultipleParameter = orderedMultipleOperation
+				.getReturnParameter();
 
-		unorderedMultipleParameter =
-				unorderedMultipleOperation.getReturnParameter();
+		if (unorderedMultipleOperation != null) {
+			unorderedMultipleParameter = unorderedMultipleOperation
+					.getReturnParameter();
+		}
+		// no else.
 
 		uniqueMultipleParameter = uniqueMultipleOperation.getReturnParameter();
 
-		nonuniqueMultipleParameter =
-				nonuniqueMultipleOperation.getReturnParameter();
+		if (nonuniqueMultipleParameter != null) {
+			nonuniqueMultipleParameter = nonuniqueMultipleOperation
+					.getReturnParameter();
+		}
+		// no else.
 	}
 
 	/**
@@ -298,7 +318,8 @@ public class TestParameter {
 			msg = "The adaptation of Parameter.getKind() seems to be wrong.";
 
 			/* The parameter must have the same kind as in the model. */
-			assertEquals(msg, ParameterDirectionKind.OUT, outputParameter1.getKind());
+			assertEquals(msg, ParameterDirectionKind.OUT, outputParameter1
+					.getKind());
 		}
 		// no else.
 	}
@@ -316,7 +337,8 @@ public class TestParameter {
 		msg = "The adaptation of Parameter.getKind() seems to be wrong.";
 
 		/* The parameter must have the same kind as in the model. */
-		assertEquals(msg, ParameterDirectionKind.RETURN, returnParameter1.getKind());
+		assertEquals(msg, ParameterDirectionKind.RETURN, returnParameter1
+				.getKind());
 	}
 
 	/**
@@ -337,8 +359,8 @@ public class TestParameter {
 			msg = "The adaptation of Parameter.getKind() seems to be wrong.";
 
 			/* The parameter must have the same kind as in the model. */
-			assertEquals(msg, ParameterDirectionKind.INOUT, inputOutputParameter1
-					.getKind());
+			assertEquals(msg, ParameterDirectionKind.INOUT,
+					inputOutputParameter1.getKind());
 		}
 		// no else.
 	}
@@ -416,143 +438,116 @@ public class TestParameter {
 	 * </p>
 	 */
 	@Test
-	public void testGetType1() {
+	public void testGetType01() {
 
 		String msg;
 
 		msg = "The adaptation of Parameter.getType() seems to be wrong.";
 
 		/* The parameter must have the same type as in the model. */
-		assertEquals(msg, class1, returnParameter1.getType());
+		assertEquals(msg, testTypeClass1, returnParameter1.getType());
 	}
 
 	/**
 	 * <p>
-	 * A test case testing the operation {@link Parameter#getName()}.
+	 * A test case testing the operation {@link Parameter#getType()}.
 	 * </p>
 	 */
 	@Test
-	public void testIsMultiple1() {
+	public void testGetType02() {
 
-		String msg;
+		if (multipleParameter != null) {
+			String msg;
 
-		msg = "The adaptation of Parameter.isMultiple() seems to be wrong.";
+			msg = "The adaptation of Parameter.getType() seems to be wrong.";
 
-		/* The parameter must not be multiple. */
-		assertFalse(msg, returnParameter1.isMultiple());
+			/* The parameter must be multiple. */
+			assertEquals(msg, EssentialOclPlugin.getOclLibraryProvider()
+					.getOclLibrary().getCollectionType(testTypeClass1),
+					multipleParameter.getType());
+		}
+		// no else.
 	}
 
 	/**
 	 * <p>
-	 * A test case testing the operation {@link Parameter#getName()}.
+	 * A test case testing the operation {@link Parameter#getType()}.
 	 * </p>
 	 */
 	@Test
-	public void testIsMultiple2() {
+	public void testGetType03() {
 
 		String msg;
 
-		msg = "The adaptation of Parameter.isMultiple() seems to be wrong.";
+		msg = "The adaptation of Parameter.getType() seems to be wrong.";
 
-		/* The parameter must be multiple. */
-		assertTrue(msg, multipleParameter.isMultiple());
+		assertEquals(msg, EssentialOclPlugin.getOclLibraryProvider()
+				.getOclLibrary().getSequenceType(testTypeClass1),
+				orderedMultipleParameter.getType());
 	}
 
 	/**
 	 * <p>
-	 * A test case testing the operation {@link Parameter#isOrdered()}.
+	 * A test case testing the operation {@link Parameter#getType()}.
 	 * </p>
 	 */
 	@Test
-	public void testIsOrdered1() {
+	public void testGetType04() {
 
-		String msg;
+		if (unorderedMultipleOperation != null) {
+			String msg;
 
-		msg = "The adaptation of Parameter.isOrdered() seems to be wrong. ";
-		msg += "Non-multiple parameters should be ordered.";
+			msg = "The adaptation of Parameter.getType() seems to be wrong.";
 
-		/* The parameter must be ordered. */
-		assertTrue(msg, returnParameter1.isOrdered());
+			assertEquals(msg, EssentialOclPlugin.getOclLibraryProvider()
+					.getOclLibrary().getSetType(testTypeClass1),
+					unorderedMultipleParameter.getType());
+		}
+
+		else {
+			LOGGER
+					.warn("Operation 'unorderedMultipleOperation' was not found. Probably, type adaptation of Parameters has not been tested completely.");
+		}
 	}
 
 	/**
 	 * <p>
-	 * A test case testing the operation {@link Parameter#isOrdered()}.
+	 * A test case testing the operation {@link Parameter#getType()}.
 	 * </p>
 	 */
 	@Test
-	public void testIsOrdered2() {
+	public void testGetType05() {
 
 		String msg;
 
-		msg = "The adaptation of Parameter.isOrdered() seems to be wrong. ";
+		msg = "The adaptation of Parameter.getType() seems to be wrong.";
 
-		/* The parameter must be ordered. */
-		assertTrue(msg, orderedMultipleParameter.isOrdered());
+		assertEquals(msg, EssentialOclPlugin.getOclLibraryProvider()
+				.getOclLibrary().getSetType(testTypeClass1),
+				uniqueMultipleParameter.getType());
 	}
 
 	/**
 	 * <p>
-	 * A test case testing the operation {@link Parameter#isOrdered()}.
+	 * A test case testing the operation {@link Parameter#getType()}.
 	 * </p>
 	 */
 	@Test
-	public void testIsOrdered3() {
+	public void testGetType06() {
 
-		String msg;
+		if (nonuniqueMultipleParameter != null) {
+			String msg;
 
-		msg = "The adaptation of Parameter.isOrdered() seems to be wrong. ";
+			msg = "The adaptation of Parameter.getType() seems to be wrong.";
 
-		/* The parameter must not be ordered. */
-		assertFalse(msg, unorderedMultipleParameter.isOrdered());
-	}
+			assertEquals(msg, EssentialOclPlugin.getOclLibraryProvider()
+					.getOclLibrary().getBagType(testTypeClass1),
+					nonuniqueMultipleParameter.getType());
+		}
 
-	/**
-	 * <p>
-	 * A test case testing the operation {@link Parameter#isUnique()}.
-	 * </p>
-	 */
-	@Test
-	public void testIsUnique1() {
-
-		String msg;
-
-		msg = "The adaptation of Parameter.isUnique() seems to be wrong. ";
-		msg += "Non-multiple Parameters should be unique.";
-
-		/* The parameter must be unique. */
-		assertTrue(msg, returnParameter1.isUnique());
-	}
-
-	/**
-	 * <p>
-	 * A test case testing the operation {@link Parameter#isUnique()}.
-	 * </p>
-	 */
-	@Test
-	public void testIsUnique2() {
-
-		String msg;
-
-		msg = "The adaptation of Parameter.isUnique() seems to be wrong. ";
-
-		/* The parameter must be unique. */
-		assertTrue(msg, uniqueMultipleParameter.isUnique());
-	}
-
-	/**
-	 * <p>
-	 * A test case testing the operation {@link Parameter#isUnique()}.
-	 * </p>
-	 */
-	@Test
-	public void testIsUnique3() {
-
-		String msg;
-
-		msg = "The adaptation of Parameter.isUnique() seems to be wrong. ";
-
-		/* The parameter must not be unique. */
-		assertFalse(msg, nonuniqueMultipleParameter.isUnique());
+		else {
+			LOGGER
+					.warn("Operation 'nonuniqueMultipleParameter' was not found. Probably, type adaptation of Parameters has not been tested completely.");
+		}
 	}
 }

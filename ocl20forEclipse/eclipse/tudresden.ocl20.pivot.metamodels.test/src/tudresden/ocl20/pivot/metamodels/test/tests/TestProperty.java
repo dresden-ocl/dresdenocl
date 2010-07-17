@@ -23,6 +23,7 @@ import org.eclipse.osgi.util.NLS;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import tudresden.ocl20.pivot.essentialocl.EssentialOclPlugin;
 import tudresden.ocl20.pivot.metamodels.test.MetaModelTestPlugin;
 import tudresden.ocl20.pivot.metamodels.test.MetaModelTestServices;
 import tudresden.ocl20.pivot.metamodels.test.msg.MetaModelTestSuiteMessages;
@@ -44,8 +45,8 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
 public class TestProperty {
 
 	/** The {@link Logger} for this class. */
-	private static final Logger LOGGER =
-			MetaModelTestPlugin.getLogger(TestProperty.class);
+	private static final Logger LOGGER = MetaModelTestPlugin
+			.getLogger(TestProperty.class);
 
 	/** A {@link Type} of the current {@link IModel} under test. */
 	private static Type class1;
@@ -91,20 +92,18 @@ public class TestProperty {
 
 	/**
 	 * <p>
-	 * Loads some elements from the current {@link IModel} under test required for
-	 * the tests contained in this Class.
+	 * Loads some elements from the current {@link IModel} under test required
+	 * for the tests contained in this Class.
 	 * </p>
 	 */
 	@BeforeClass
 	public static void setUp() {
 
-		class1 =
-				MetaModelTestServices.getInstance().getTypeUnderTest(
-						MetaModelTestServices.TYPE_QUALIFIED_NAME_TESTTYPECLASS1);
+		class1 = MetaModelTestServices.getInstance().getTypeUnderTest(
+				MetaModelTestServices.TYPE_QUALIFIED_NAME_TESTTYPECLASS1);
 
-		class3 =
-				MetaModelTestServices.getInstance().getTypeUnderTest(
-						MetaModelTestServices.TYPE_QUALIFIED_NAME_TESTPROPERTYCLASS);
+		class3 = MetaModelTestServices.getInstance().getTypeUnderTest(
+				MetaModelTestServices.TYPE_QUALIFIED_NAME_TESTPROPERTYCLASS);
 
 		/* Find some properties in the class. */
 		for (Property aProperty : class3.getOwnedProperty()) {
@@ -121,14 +120,18 @@ public class TestProperty {
 			}
 			// no else.
 
-			if (aProperty.getName().equals(
-					MetaModelTestServices.PROPERTY_NAME_ORDEREDMULTIPLEPROPERTY)) {
+			if (aProperty
+					.getName()
+					.equals(
+							MetaModelTestServices.PROPERTY_NAME_ORDEREDMULTIPLEPROPERTY)) {
 				orderedMultipleProperty = aProperty;
 			}
 			// no else.
 
-			if (aProperty.getName().equals(
-					MetaModelTestServices.PROPERTY_NAME_UNORDEREDMULTIPLEPROPERTY)) {
+			if (aProperty
+					.getName()
+					.equals(
+							MetaModelTestServices.PROPERTY_NAME_UNORDEREDMULTIPLEPROPERTY)) {
 				unorderedMultipleProperty = aProperty;
 			}
 			// no else.
@@ -139,14 +142,18 @@ public class TestProperty {
 			}
 			// no else.
 
-			if (aProperty.getName().equals(
-					MetaModelTestServices.PROPERTY_NAME_NONUNIQUEMULTIPLEPROPERTY)) {
+			if (aProperty
+					.getName()
+					.equals(
+							MetaModelTestServices.PROPERTY_NAME_NONUNIQUEMULTIPLEPROPERTY)) {
 				nonuniqueMultipleProperty = aProperty;
 			}
 			// no else.
 
-			if (aProperty.getName().equals(
-					MetaModelTestServices.PROPERTY_NAME_NONMULTIPLEASSOCIATONEND)) {
+			if (aProperty
+					.getName()
+					.equals(
+							MetaModelTestServices.PROPERTY_NAME_NONMULTIPLEASSOCIATONEND)) {
 				associationEnd1 = aProperty;
 			}
 			// no else.
@@ -157,26 +164,34 @@ public class TestProperty {
 			}
 			// no else.
 
-			if (aProperty.getName().equals(
-					MetaModelTestServices.PROPERTY_NAME_ORDEREDMULTIPLEASSOCIATONEND)) {
+			if (aProperty
+					.getName()
+					.equals(
+							MetaModelTestServices.PROPERTY_NAME_ORDEREDMULTIPLEASSOCIATONEND)) {
 				orderedMultipleAssociationEnd = aProperty;
 			}
 			// no else.
 
-			if (aProperty.getName().equals(
-					MetaModelTestServices.PROPERTY_NAME_UNORDEREDMULTIPLEASSOCIATONEND)) {
+			if (aProperty
+					.getName()
+					.equals(
+							MetaModelTestServices.PROPERTY_NAME_UNORDEREDMULTIPLEASSOCIATONEND)) {
 				unorderedMultipleAssociationEnd = aProperty;
 			}
 			// no else.
 
-			if (aProperty.getName().equals(
-					MetaModelTestServices.PROPERTY_NAME_UNIQUEMULTIPLEASSOCIATONEND)) {
+			if (aProperty
+					.getName()
+					.equals(
+							MetaModelTestServices.PROPERTY_NAME_UNIQUEMULTIPLEASSOCIATONEND)) {
 				uniqueMultipleAssociationEnd = aProperty;
 			}
 			// no else.
 
-			if (aProperty.getName().equals(
-					MetaModelTestServices.PROPERTY_NAME_NONUNIQUEMULTIPLEASSOCIATONEND)) {
+			if (aProperty
+					.getName()
+					.equals(
+							MetaModelTestServices.PROPERTY_NAME_NONUNIQUEMULTIPLEASSOCIATONEND)) {
 				nonuniqueMultipleAssociationEnd = aProperty;
 			}
 			// no else.
@@ -191,15 +206,13 @@ public class TestProperty {
 			if (LOGGER.isInfoEnabled()) {
 				String msg;
 
-				msg =
-						MetaModelTestSuiteMessages.MetaModelTestSuite_AssociationEndNotFound;
-				msg +=
-						" "
-								+ NLS
-										.bind(
-												MetaModelTestSuiteMessages.MetaModelTestSuite_CurrentlyTestedMetaModel,
-												MetaModelTestServices.getInstance()
-														.getMetaModelUnderTestID());
+				msg = MetaModelTestSuiteMessages.MetaModelTestSuite_AssociationEndNotFound;
+				msg += " "
+						+ NLS
+								.bind(
+										MetaModelTestSuiteMessages.MetaModelTestSuite_CurrentlyTestedMetaModel,
+										MetaModelTestServices.getInstance()
+												.getMetaModelUnderTestID());
 
 				LOGGER.warn(msg);
 			}
@@ -213,19 +226,17 @@ public class TestProperty {
 			if (LOGGER.isInfoEnabled()) {
 				String msg;
 
-				msg =
-						NLS
+				msg = NLS
+						.bind(
+								MetaModelTestSuiteMessages.MetaModelTestSuite_PropertyNotFoundInModel,
+								MetaModelTestServices.PROPERTY_NAME_STATICPROPERTY,
+								"Property.isStatic()");
+				msg += " "
+						+ NLS
 								.bind(
-										MetaModelTestSuiteMessages.MetaModelTestSuite_PropertyNotFoundInModel,
-										MetaModelTestServices.PROPERTY_NAME_STATICPROPERTY,
-										"Property.isStatic()");
-				msg +=
-						" "
-								+ NLS
-										.bind(
-												MetaModelTestSuiteMessages.MetaModelTestSuite_CurrentlyTestedMetaModel,
-												MetaModelTestServices.getInstance()
-														.getMetaModelUnderTestID());
+										MetaModelTestSuiteMessages.MetaModelTestSuite_CurrentlyTestedMetaModel,
+										MetaModelTestServices.getInstance()
+												.getMetaModelUnderTestID());
 
 				LOGGER.warn(msg);
 			}
@@ -247,7 +258,8 @@ public class TestProperty {
 		msg = "The adaptation of Property.getName() seems to be wrong.";
 
 		/* The property must have been found by the given name. */
-		assertEquals(msg, MetaModelTestServices.PROPERTY_NAME_NONMULTIPLEPROPERTY,
+		assertEquals(msg,
+				MetaModelTestServices.PROPERTY_NAME_NONMULTIPLEPROPERTY,
 				nonmultipleProperty.getName());
 	}
 
@@ -267,11 +279,11 @@ public class TestProperty {
 
 			String msg;
 
-			msg =
-					"The adaptation of Property.getName() seems to be wrong for Associations.";
+			msg = "The adaptation of Property.getName() seems to be wrong for Associations.";
 
 			/* The property must have been found by the given name. */
-			assertEquals(msg,
+			assertEquals(
+					msg,
 					MetaModelTestServices.PROPERTY_NAME_NONMULTIPLEASSOCIATONEND,
 					associationEnd1.getName());
 		}
@@ -311,8 +323,7 @@ public class TestProperty {
 
 			String msg;
 
-			msg =
-					"The adaptation of Property.getOwner() seems to be wrong for Associations. ";
+			msg = "The adaptation of Property.getOwner() seems to be wrong for Associations. ";
 			msg += "A Property must be owned by the Type to which it belongs.";
 
 			/* The property must be owned by the same type as in the model. */
@@ -353,8 +364,7 @@ public class TestProperty {
 
 			String msg;
 
-			msg =
-					"The adaptation of Property.getOwningType() seems to be wrong for Associations.";
+			msg = "The adaptation of Property.getOwningType() seems to be wrong for Associations.";
 
 			/* The property must be owned by the same type as in the model. */
 			assertEquals(msg, class3, associationEnd1.getOwningType());
@@ -368,7 +378,7 @@ public class TestProperty {
 	 * </p>
 	 */
 	@Test
-	public void testGetType1() {
+	public void testGetType01() {
 
 		String msg;
 
@@ -385,7 +395,7 @@ public class TestProperty {
 	 * </p>
 	 */
 	@Test
-	public void testGetType2() {
+	public void testGetType02() {
 
 		/*
 		 * Only execute this test if the current model under test supports
@@ -406,6 +416,191 @@ public class TestProperty {
 
 	/**
 	 * <p>
+	 * A test case testing the operation {@link Property#getType()}.
+	 * </p>
+	 */
+	@Test
+	public void testGetType03() {
+
+		String msg;
+
+		msg = "The adaptation of Property.getType() seems to be wrong.";
+
+		/* The property must be multiple. */
+		assertEquals(msg, EssentialOclPlugin.getOclLibraryProvider()
+				.getOclLibrary().getSequenceType(class1),
+				orderedMultipleProperty.getType());
+	}
+
+	/**
+	 * <p>
+	 * A test case testing the operation {@link Property#getType()}.
+	 * </p>
+	 */
+	@Test
+	public void testGetType04() {
+
+		/*
+		 * Only execute this test if the current model under test supports
+		 * associations.
+		 */
+		if (orderedMultipleAssociationEnd != null) {
+
+			String msg;
+
+			msg = "The adaptation of Property.getType() seems to be wrong.";
+
+			/* The property must be multiple. */
+			assertEquals(msg, EssentialOclPlugin.getOclLibraryProvider()
+					.getOclLibrary().getSequenceType(class1),
+					orderedMultipleAssociationEnd.getType());
+		}
+	}
+
+	/**
+	 * <p>
+	 * A test case testing the operation {@link Property#getType()}.
+	 * </p>
+	 */
+	@Test
+	public void testGetType05() {
+
+		/*
+		 * Only execute this test if the current model under test supports
+		 * associations.
+		 */
+		if (unorderedMultipleProperty != null) {
+			String msg;
+
+			msg = "The adaptation of Property.getType() seems to be wrong.";
+
+			/* The property must be multiple. */
+			assertEquals(msg, EssentialOclPlugin.getOclLibraryProvider()
+					.getOclLibrary().getBagType(class1),
+					unorderedMultipleProperty.getType());
+		}
+	}
+
+	/**
+	 * <p>
+	 * A test case testing the operation {@link Property#getType()}.
+	 * </p>
+	 */
+	@Test
+	public void testGetType06() {
+
+		/*
+		 * Only execute this test if the current model under test supports
+		 * associations.
+		 */
+		if (unorderedMultipleAssociationEnd != null) {
+
+			String msg;
+
+			msg = "The adaptation of Property.getType() seems to be wrong.";
+
+			/* The property must be multiple. */
+			assertEquals(msg, EssentialOclPlugin.getOclLibraryProvider()
+					.getOclLibrary().getBagType(class1),
+					unorderedMultipleAssociationEnd.getType());
+		}
+		// no else.
+	}
+
+	/**
+	 * <p>
+	 * A test case testing the operation {@link Property#getType()}.
+	 * </p>
+	 */
+	@Test
+	public void testGetType07() {
+
+		String msg;
+
+		msg = "The adaptation of Property.getType() seems to be wrong.";
+
+		/* The property must be multiple. */
+		assertEquals(msg, EssentialOclPlugin.getOclLibraryProvider()
+				.getOclLibrary().getSetType(class1), uniqueMultipleProperty
+				.getType());
+	}
+
+	/**
+	 * <p>
+	 * A test case testing the operation {@link Property#getType()}.
+	 * </p>
+	 */
+	@Test
+	public void testGetType08() {
+
+		/*
+		 * Only execute this test if the current model under test supports
+		 * associations and static properties.
+		 */
+		if (uniqueMultipleAssociationEnd != null) {
+			String msg;
+
+			msg = "The adaptation of Property.getType() seems to be wrong.";
+
+			/* The property must be multiple. */
+			assertEquals(msg, EssentialOclPlugin.getOclLibraryProvider()
+					.getOclLibrary().getSetType(class1),
+					uniqueMultipleAssociationEnd.getType());
+		}
+		// no else.
+	}
+
+	/**
+	 * <p>
+	 * A test case testing the operation {@link Property#getType()}.
+	 * </p>
+	 */
+	@Test
+	public void testGetType09() {
+
+		/*
+		 * Only execute this test if the current model under test supports
+		 * associations.
+		 */
+		if (nonuniqueMultipleProperty != null) {
+			String msg;
+
+			msg = "The adaptation of Property.getType() seems to be wrong.";
+
+			/* The property must be multiple. */
+			assertEquals(msg, EssentialOclPlugin.getOclLibraryProvider()
+					.getOclLibrary().getBagType(class1),
+					nonuniqueMultipleProperty.getType());
+		}
+	}
+
+	/**
+	 * <p>
+	 * A test case testing the operation {@link Property#getType()}.
+	 * </p>
+	 */
+	@Test
+	public void testGetType10() {
+
+		/*
+		 * Only execute this test if the current model under test supports
+		 * associations and static properties.
+		 */
+		if (nonuniqueMultipleAssociationEnd != null) {
+			String msg;
+
+			msg = "The adaptation of Property.getType() seems to be wrong.";
+
+			/* The property must be multiple. */
+			assertEquals(msg, EssentialOclPlugin.getOclLibraryProvider()
+					.getOclLibrary().getBagType(class1),
+					nonuniqueMultipleAssociationEnd.getType());
+		}
+		// no else.
+	}
+
+	/**
+	 * <p>
 	 * A test case testing the operation {@link Property#getQualifiedName()}.
 	 * </p>
 	 */
@@ -417,7 +612,8 @@ public class TestProperty {
 		msg = "The adaptation of Property.getQualifiedName() seems to be wrong.";
 
 		/* The property must have the same name as in the model. */
-		assertEquals(msg,
+		assertEquals(
+				msg,
 				MetaModelTestServices.PROPERTY_QUALIFIED_NAME_NONMULTIPLEPROPERTY,
 				nonmultipleProperty.getQualifiedName());
 	}
@@ -438,221 +634,13 @@ public class TestProperty {
 
 			String msg;
 
-			msg =
-					"The adaptation of Property.getQualifiedName() seems to be wrong for Associations.";
+			msg = "The adaptation of Property.getQualifiedName() seems to be wrong for Associations.";
 
 			/* The property must have the same name as in the model. */
 			assertEquals(
 					msg,
 					MetaModelTestServices.PROPERTY_QUALIFIED_NAME_NONMULTIPLEASSOCIATIONEND,
 					associationEnd1.getQualifiedName());
-		}
-		// no else.
-	}
-
-	/**
-	 * <p>
-	 * A test case testing the operation {@link Property#isMultiple()}.
-	 * </p>
-	 */
-	@Test
-	public void testIsMultiple1() {
-
-		String msg;
-
-		msg = "The adaptation of Property.isMultiple() seems to be wrong.";
-
-		/* The property must not be multiple. */
-		assertFalse(msg, nonmultipleProperty.isMultiple());
-	}
-
-	/**
-	 * <p>
-	 * A test case testing the operation {@link Property#isMultiple()}.
-	 * </p>
-	 */
-	@Test
-	public void testIsMultiple2() {
-
-		/*
-		 * Only execute this test if the current model under test supports
-		 * associations.
-		 */
-		if (associationEnd1 != null) {
-
-			String msg;
-
-			msg =
-					"The adaptation of Property.isMultiple() seems to be wrong for Associations.";
-
-			/* The property must not be multiple. */
-			assertFalse(msg, associationEnd1.isMultiple());
-		}
-		// no else.
-	}
-
-	/**
-	 * <p>
-	 * A test case testing the operation {@link Property#isMultiple()}.
-	 * </p>
-	 */
-	@Test
-	public void testIsMultiple3() {
-
-		String msg;
-
-		msg = "The adaptation of Property.isMultiple() seems to be wrong.";
-
-		/* The property must be multiple. */
-		assertTrue(msg, orderedMultipleProperty.isMultiple());
-	}
-
-	/**
-	 * <p>
-	 * A test case testing the operation {@link Property#isMultiple()}.
-	 * </p>
-	 */
-	@Test
-	public void testIsMultiple4() {
-
-		/*
-		 * Only execute this test if the current model under test supports
-		 * associations.
-		 */
-		if (orderedMultipleAssociationEnd != null) {
-
-			String msg;
-
-			msg =
-					"The adaptation of Property.isMultiple() seems to be wrong for Associations.";
-
-			/* The property must not be multiple. */
-			assertTrue(msg, orderedMultipleAssociationEnd.isMultiple());
-		}
-		// no else.
-	}
-
-	/**
-	 * <p>
-	 * A test case testing the operation {@link Property#isOrdered()}.
-	 * </p>
-	 */
-	@Test
-	public void testIsOrdered1() {
-
-		String msg;
-
-		msg = "The adaptation of Property.isOrdered() seems to be wrong.";
-		msg += "Non-multiple Properties must be ordered.";
-
-		/* The property must be ordered. */
-		assertTrue(msg, nonmultipleProperty.isOrdered());
-	}
-
-	/**
-	 * <p>
-	 * A test case testing the operation {@link Property#isOrdered()}.
-	 * </p>
-	 */
-	@Test
-	public void testIsOrdered2() {
-
-		/*
-		 * Only execute this test if the current model under test supports
-		 * associations.
-		 */
-		if (associationEnd1 != null) {
-
-			String msg;
-
-			msg =
-					"The adaptation of Property.isOrdered() seems to be wrong for Associations.";
-			msg += "Non-multiple Properties must be ordered.";
-
-			/* The property must be ordered. */
-			assertTrue(msg, associationEnd1.isOrdered());
-		}
-		// no else.
-	}
-
-	/**
-	 * <p>
-	 * A test case testing the operation {@link Property#isOrdered()}.
-	 * </p>
-	 */
-	@Test
-	public void testIsOrdered3() {
-
-		String msg;
-
-		msg = "The adaptation of Property.isOrdered() seems to be wrong.";
-
-		/* The property must be ordered. */
-		assertTrue(msg, orderedMultipleProperty.isOrdered());
-	}
-
-	/**
-	 * <p>
-	 * A test case testing the operation {@link Property#isOrdered()}.
-	 * </p>
-	 */
-	@Test
-	public void testIsOrdered4() {
-
-		/*
-		 * Only execute this test if the current model under test supports
-		 * associations.
-		 */
-		if (orderedMultipleAssociationEnd != null) {
-
-			String msg;
-
-			msg =
-					"The adaptation of Property.isOrdered() seems to be wrong for Associations.";
-
-			/* The property must be ordered. */
-			assertTrue(msg, orderedMultipleAssociationEnd.isOrdered());
-		}
-		// no else.
-	}
-
-	/**
-	 * <p>
-	 * A test case testing the operation {@link Property#isOrdered()}.
-	 * </p>
-	 */
-	@Test
-	public void testIsOrdered5() {
-
-		String msg;
-
-		msg = "The adaptation of Property.isOrdered() seems to be wrong.";
-
-		/* The property must not be ordered. */
-		assertFalse(msg, unorderedMultipleProperty.isOrdered());
-	}
-
-	/**
-	 * <p>
-	 * A test case testing the operation {@link Property#isOrdered()}.
-	 * </p>
-	 */
-	@Test
-	public void testIsOrdered6() {
-
-		/*
-		 * Only execute this test if the current model under test supports
-		 * associations.
-		 */
-		if (unorderedMultipleAssociationEnd != null) {
-
-			String msg;
-
-			msg =
-					"The adaptation of Property.isOrdered() seems to be wrong for Associations.";
-
-			/* The property must not be ordered. */
-			assertFalse(msg, unorderedMultipleAssociationEnd.isOrdered());
 		}
 		// no else.
 	}
@@ -689,8 +677,7 @@ public class TestProperty {
 
 			String msg;
 
-			msg =
-					"The adaptation of Property.isStatic() seems to be wrong for Associations.";
+			msg = "The adaptation of Property.isStatic() seems to be wrong for Associations.";
 
 			/* The property must not be static. */
 			assertFalse(msg, associationEnd1.isStatic());
@@ -707,8 +694,8 @@ public class TestProperty {
 	public void testIsStatic3() {
 
 		/*
-		 * Only execute this test if the current IModel under test contains static
-		 * properties.
+		 * Only execute this test if the current IModel under test contains
+		 * static properties.
 		 */
 		if (staticProperty != null) {
 			String msg;
@@ -737,133 +724,10 @@ public class TestProperty {
 
 			String msg;
 
-			msg =
-					"The adaptation of Property.isStatic() seems to be wrong for Associations.";
+			msg = "The adaptation of Property.isStatic() seems to be wrong for Associations.";
 
 			/* The property must not be static. */
 			assertTrue(msg, staticAssociationEnd.isStatic());
-		}
-		// no else.
-	}
-
-	/**
-	 * <p>
-	 * A test case testing the operation {@link Property#isUnique()}.
-	 * </p>
-	 */
-	@Test
-	public void testIsUnique1() {
-
-		String msg;
-
-		msg = "The adaptation of Property.isUnique() seems to be wrong. ";
-		msg += "Non-multiple Properties must be unique.";
-
-		/* The property must be unique. */
-		assertTrue(msg, nonmultipleProperty.isUnique());
-	}
-
-	/**
-	 * <p>
-	 * A test case testing the operation {@link Property#isUnique()}.
-	 * </p>
-	 */
-	@Test
-	public void testIsUnique2() {
-
-		/*
-		 * Only execute this test if the current model under test supports
-		 * associations and static properties.
-		 */
-		if (associationEnd1 != null) {
-			String msg;
-
-			msg =
-					"The adaptation of Property.isUnique() seems to be wrong for Associations. ";
-			msg += "Non-multiple Properties must be unique.";
-
-			/* The property must be unique. */
-			assertTrue(msg, associationEnd1.isUnique());
-		}
-		// no else.
-	}
-
-	/**
-	 * <p>
-	 * A test case testing the operation {@link Property#isUnique()}.
-	 * </p>
-	 */
-	@Test
-	public void testIsUnique3() {
-
-		String msg;
-
-		msg = "The adaptation of Property.isUnique() seems to be wrong.";
-
-		/* The property must be unique. */
-		assertTrue(msg, uniqueMultipleProperty.isUnique());
-	}
-
-	/**
-	 * <p>
-	 * A test case testing the operation {@link Property#isUnique()}.
-	 * </p>
-	 */
-	@Test
-	public void testIsUnique4() {
-
-		/*
-		 * Only execute this test if the current model under test supports
-		 * associations and static properties.
-		 */
-		if (uniqueMultipleAssociationEnd != null) {
-			String msg;
-
-			msg =
-					"The adaptation of Property.isUnique() seems to be wrong for Associations. ";
-
-			/* The property must be unique. */
-			assertTrue(msg, uniqueMultipleAssociationEnd.isUnique());
-		}
-		// no else.
-	}
-
-	/**
-	 * <p>
-	 * A test case testing the operation {@link Property#isUnique()}.
-	 * </p>
-	 */
-	@Test
-	public void testIsUnique5() {
-
-		String msg;
-
-		msg = "The adaptation of Property.isUnique() seems to be wrong.";
-
-		/* The property must not be unique. */
-		assertFalse(msg, nonuniqueMultipleProperty.isUnique());
-	}
-
-	/**
-	 * <p>
-	 * A test case testing the operation {@link Property#isUnique()}.
-	 * </p>
-	 */
-	@Test
-	public void testIsUnique6() {
-
-		/*
-		 * Only execute this test if the current model under test supports
-		 * associations and static properties.
-		 */
-		if (nonuniqueMultipleAssociationEnd != null) {
-			String msg;
-
-			msg =
-					"The adaptation of Property.isUnique() seems to be wrong for Associations. ";
-
-			/* The property must not be unique. */
-			assertFalse(msg, nonuniqueMultipleAssociationEnd.isUnique());
 		}
 		// no else.
 	}

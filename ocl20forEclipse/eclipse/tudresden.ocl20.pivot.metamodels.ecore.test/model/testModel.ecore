@@ -77,34 +77,39 @@
       <eOperations name="voidOperationWithParameter">
         <eParameters name="in1" eType="#//package2/TestTypeClass1"/>
       </eOperations>
-      <eOperations name="multipleOperation" upperBound="-1" eType="#//package2/TestTypeClass1"/>
-      <eOperations name="orderedMultipleOperation" upperBound="-1" eType="#//package2/TestTypeClass1"/>
+      <eOperations name="orderedMultipleOperation" unique="false" upperBound="-1"
+          eType="#//package2/TestTypeClass1"/>
       <eOperations name="unorderedMultipleOperation" ordered="false" upperBound="-1"
           eType="#//package2/TestTypeClass1"/>
-      <eOperations name="uniqueMultipleOperation" upperBound="-1" eType="#//package2/TestTypeClass1"/>
+      <eOperations name="uniqueMultipleOperation" ordered="false" upperBound="-1"
+          eType="#//package2/TestTypeClass1"/>
       <eOperations name="nonuniqueMultipleOperation" unique="false" upperBound="-1"
           eType="#//package2/TestTypeClass1"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="TestPropertyClass">
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="nonmultipleProperty"
-          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="orderedMultipleProperty"
-          upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="unorderedMultipleProperty"
-          ordered="false" upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="uniqueMultipleProperty"
-          upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="nonuniqueMultipleProperty"
-          unique="false" upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="nonmultipleProperty"
+          eType="#//package2/TestTypeClass1"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="orderedMultipleProperty"
+          unique="false" upperBound="-1" eType="#//package2/TestTypeClass1" unsettable="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="unorderedMultipleProperty"
+          ordered="false" unique="false" upperBound="-1" eType="#//package2/TestTypeClass1"
+          unsettable="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="uniqueMultipleProperty"
+          ordered="false" upperBound="-1" eType="#//package2/TestTypeClass1" unsettable="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="nonuniqueMultipleProperty"
+          ordered="false" unique="false" upperBound="-1" eType="#//package2/TestTypeClass1"
+          unsettable="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="associationEnd1" eType="#//package2/TestTypeClass1"/>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="orderedMultipleAssociationEnd"
-          upperBound="-1" eType="#//package2/TestTypeClass1"/>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="unorderedMultipleAssociationEnd"
-          ordered="false" upperBound="-1" eType="#//package2/TestTypeClass1"/>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="uniqueMultipleAssociationEnd"
-          upperBound="-1" eType="#//package2/TestTypeClass1"/>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="nonuniqueMultipleAssociationEnd"
-          unique="false" upperBound="-1" eType="#//package2/TestTypeClass1"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="orderedMultiplePropertyAssociationEnd"
+          unique="false" upperBound="-1" eType="#//package2/TestTypeClass1" unsettable="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="unorderedMultiplePropertyAssociationEnd"
+          ordered="false" unique="false" upperBound="-1" eType="#//package2/TestTypeClass1"
+          unsettable="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="uniqueMultiplePropertyAssociationEnd"
+          ordered="false" upperBound="-1" eType="#//package2/TestTypeClass1" unsettable="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="nonuniqueMultiplePropertyAssociationEnd"
+          ordered="false" unique="false" upperBound="-1" eType="#//package2/TestTypeClass1"
+          unsettable="true"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EDataType" name="NonPrimitiveDataType" instanceClassName="java.lang.Object"/>
     <eSubpackages name="primitivetypes" nsURI="package1.package2.primitiveTypes" nsPrefix="">
