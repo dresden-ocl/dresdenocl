@@ -39,6 +39,7 @@ import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EParameter;
 
+import tudresden.ocl20.pivot.essentialocl.EssentialOclPlugin;
 import tudresden.ocl20.pivot.metamodels.ecore.EcoreMetamodelPlugin;
 import tudresden.ocl20.pivot.pivotmodel.Operation;
 import tudresden.ocl20.pivot.pivotmodel.Parameter;
@@ -55,8 +56,8 @@ import tudresden.ocl20.pivot.pivotmodel.base.AbstractOperation;
 public class EcoreOperation extends AbstractOperation implements Operation {
 
 	/** The {@link Logger} for this class. */
-	private static final Logger LOGGER =
-			EcoreMetamodelPlugin.getLogger(EcoreOperation.class);
+	private static final Logger LOGGER = EcoreMetamodelPlugin
+			.getLogger(EcoreOperation.class);
 
 	/** The adapted {@link EOperation}. */
 	private EOperation eOperation;
@@ -67,7 +68,7 @@ public class EcoreOperation extends AbstractOperation implements Operation {
 	 * </p>
 	 * 
 	 * @param eOperation
-	 *          The adapted {@link EOperation}.
+	 *            The adapted {@link EOperation}.
 	 */
 	public EcoreOperation(EOperation eOperation) {
 
@@ -99,46 +100,62 @@ public class EcoreOperation extends AbstractOperation implements Operation {
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractOperation#getType()
 	 */
 	@Override
 	public Type getType() {
 
-		return EcoreAdapterFactory.INSTANCE.createType(eOperation.getEType());
+		Type result;
+
+		Type elementType;
+		elementType = EcoreAdapterFactory.INSTANCE.createType(eOperation
+				.getEType());
+
+		/* Probably put the type into a collection. */
+		if (this.eOperation.isMany()) {
+
+			if (this.eOperation.isUnique()) {
+
+				/* Adapt to OrderedSet. */
+				if (this.eOperation.isOrdered()) {
+					result = EssentialOclPlugin.getOclLibraryProvider()
+							.getOclLibrary().getOrderedSetType(elementType);
+				}
+
+				/* Adapt to Set. */
+				else {
+					result = EssentialOclPlugin.getOclLibraryProvider()
+							.getOclLibrary().getSetType(elementType);
+				}
+			}
+
+			else {
+
+				/* Adapt to Sequence. */
+				if (this.eOperation.isOrdered()) {
+					result = EssentialOclPlugin.getOclLibraryProvider()
+							.getOclLibrary().getSequenceType(elementType);
+				}
+
+				/* Adapt to Bag. */
+				else {
+					result = EssentialOclPlugin.getOclLibraryProvider()
+							.getOclLibrary().getBagType(elementType);
+				}
+			}
+		}
+
+		else {
+			result = elementType;
+		}
+
+		return result;
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.OperationImpl#isMultiple()
-	 */
-	@Override
-	public boolean isMultiple() {
-
-		return this.eOperation.isMany();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.OperationImpl#isOrdered()
-	 */
-	@Override
-	public boolean isOrdered() {
-
-		return this.eOperation.isOrdered();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.OperationImpl#isUnique()
-	 */
-	@Override
-	public boolean isUnique() {
-
-		return this.eOperation.isUnique();
-	}
-
-	/*
-	 * (non-Javadoc)
+	 * 
 	 * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractOperation#getName()
 	 */
 	@Override
@@ -149,6 +166,7 @@ public class EcoreOperation extends AbstractOperation implements Operation {
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.pivotmodel.base.AbstractOperation#getOwnedParameter
 	 * ()
@@ -173,6 +191,7 @@ public class EcoreOperation extends AbstractOperation implements Operation {
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.pivotmodel.base.AbstractOperation#getOwningType()
 	 */

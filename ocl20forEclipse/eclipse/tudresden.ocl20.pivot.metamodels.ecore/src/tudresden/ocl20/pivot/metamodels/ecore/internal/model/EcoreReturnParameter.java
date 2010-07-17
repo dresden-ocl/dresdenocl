@@ -17,6 +17,7 @@ import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EParameter;
 
+import tudresden.ocl20.pivot.essentialocl.EssentialOclPlugin;
 import tudresden.ocl20.pivot.metamodels.ecore.EcoreMetamodelPlugin;
 import tudresden.ocl20.pivot.pivotmodel.Operation;
 import tudresden.ocl20.pivot.pivotmodel.Parameter;
@@ -36,8 +37,8 @@ public class EcoreReturnParameter extends AbstractParameter implements
 		Parameter {
 
 	/** The {@link Logger} for this class. */
-	private static final Logger LOGGER =
-			EcoreMetamodelPlugin.getLogger(EcoreReturnParameter.class);
+	private static final Logger LOGGER = EcoreMetamodelPlugin
+			.getLogger(EcoreReturnParameter.class);
 
 	/** The adapted {@link EParameter}. */
 	private EOperation eOperation;
@@ -48,7 +49,7 @@ public class EcoreReturnParameter extends AbstractParameter implements
 	 * </p>
 	 * 
 	 * @param eOperation
-	 *          The adapted {@link EOperation}.
+	 *            The adapted {@link EOperation}.
 	 */
 	public EcoreReturnParameter(EOperation eOperation) {
 
@@ -80,6 +81,7 @@ public class EcoreReturnParameter extends AbstractParameter implements
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractParameter#getName()
 	 */
 	@Override
@@ -90,7 +92,9 @@ public class EcoreReturnParameter extends AbstractParameter implements
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractParameter#getOperation()
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.pivotmodel.base.AbstractParameter#getOperation()
 	 */
 	@Override
 	public Operation getOperation() {
@@ -100,51 +104,67 @@ public class EcoreReturnParameter extends AbstractParameter implements
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractParameter#getType()
 	 */
 	@Override
 	public Type getType() {
 
-		return EcoreAdapterFactory.INSTANCE.createType(this.eOperation.getEType());
+		Type result;
+
+		Type elementType;
+		elementType = EcoreAdapterFactory.INSTANCE.createType(eOperation
+				.getEType());
+
+		/* Probably put the type into a collection. */
+		if (this.eOperation.isMany()) {
+
+			if (this.eOperation.isUnique()) {
+
+				/* Adapt to OrderedSet. */
+				if (this.eOperation.isOrdered()) {
+					result = EssentialOclPlugin.getOclLibraryProvider()
+							.getOclLibrary().getOrderedSetType(elementType);
+				}
+
+				/* Adapt to Set. */
+				else {
+					result = EssentialOclPlugin.getOclLibraryProvider()
+							.getOclLibrary().getSetType(elementType);
+				}
+			}
+
+			else {
+
+				/* Adapt to Sequence. */
+				if (this.eOperation.isOrdered()) {
+					result = EssentialOclPlugin.getOclLibraryProvider()
+							.getOclLibrary().getSequenceType(elementType);
+				}
+
+				/* Adapt to Bag. */
+				else {
+					result = EssentialOclPlugin.getOclLibraryProvider()
+							.getOclLibrary().getBagType(elementType);
+				}
+			}
+		}
+
+		else {
+			result = elementType;
+		}
+
+		return result;
 	}
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see tudresden.ocl20.pivot.pivotmodel.impl.ParameterImpl#getKind()
 	 */
 	@Override
 	public ParameterDirectionKind getKind() {
 
 		return ParameterDirectionKind.RETURN;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.ParameterImpl#isMultiple()
-	 */
-	@Override
-	public boolean isMultiple() {
-
-		return this.eOperation.isMany();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.ParameterImpl#isOrdered()
-	 */
-	@Override
-	public boolean isOrdered() {
-
-		return this.eOperation.isOrdered();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.ParameterImpl#isUnique()
-	 */
-	@Override
-	public boolean isUnique() {
-
-		return this.eOperation.isUnique();
 	}
 }
