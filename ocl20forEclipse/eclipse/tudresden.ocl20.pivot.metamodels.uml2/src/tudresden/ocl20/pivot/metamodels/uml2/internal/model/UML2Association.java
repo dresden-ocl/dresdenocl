@@ -18,6 +18,7 @@ import org.eclipse.osgi.util.NLS;
 import org.eclipse.uml2.uml.Element;
 import org.eclipse.uml2.uml.TypedElement;
 
+import tudresden.ocl20.pivot.essentialocl.EssentialOclPlugin;
 import tudresden.ocl20.pivot.metamodels.uml2.UML2MetamodelPlugin;
 import tudresden.ocl20.pivot.pivotmodel.Property;
 import tudresden.ocl20.pivot.pivotmodel.Type;
@@ -109,7 +110,49 @@ public class UML2Association extends AbstractProperty implements Property {
 	@Override
 	public Type getType() {
 
-		return this.factory.createType(dslProperty.getEndTypes().get(0));
+		Type result;
+		Type elementType;
+
+		elementType = this.factory.createType(dslProperty.getEndTypes().get(0));
+
+		/* Probably adapt type into a collection. */
+		if (this.dslProperty.getMemberEnds().get(0).isMultivalued()) {
+
+			if (this.dslProperty.getMemberEnds().get(0).isOrdered()) {
+
+				/* OrderedSet. */
+				if (this.dslProperty.getMemberEnds().get(0).isUnique()) {
+					result = EssentialOclPlugin.getOclLibraryProvider()
+							.getOclLibrary().getOrderedSetType(elementType);
+				}
+
+				/* Sequence. */
+				else {
+					result = EssentialOclPlugin.getOclLibraryProvider()
+							.getOclLibrary().getSequenceType(elementType);
+				}
+			}
+
+			else {
+				/* Set. */
+				if (this.dslProperty.getMemberEnds().get(0).isUnique()) {
+					result = EssentialOclPlugin.getOclLibraryProvider()
+							.getOclLibrary().getSetType(elementType);
+				}
+
+				/* Bag. */
+				else {
+					result = EssentialOclPlugin.getOclLibraryProvider()
+							.getOclLibrary().getBagType(elementType);
+				}
+			}
+		}
+
+		else {
+			result = elementType;
+		}
+
+		return result;
 	}
 
 	/**
@@ -154,38 +197,5 @@ public class UML2Association extends AbstractProperty implements Property {
 		}
 
 		return result;
-	}
-
-	/**
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.PropertyImpl#isMultiple()
-	 * 
-	 * @generated NOT
-	 */
-	@Override
-	public boolean isMultiple() {
-
-		return this.dslProperty.getMemberEnds().get(0).isMultivalued();
-	}
-
-	/**
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.PropertyImpl#isOrdered()
-	 * 
-	 * @generated NOT
-	 */
-	@Override
-	public boolean isOrdered() {
-
-		return this.dslProperty.getMemberEnds().get(0).isOrdered();
-	}
-
-	/**
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.PropertyImpl#isUnique()
-	 * 
-	 * @generated NOT
-	 */
-	@Override
-	public boolean isUnique() {
-
-		return this.dslProperty.getMemberEnds().get(0).isUnique();
 	}
 }

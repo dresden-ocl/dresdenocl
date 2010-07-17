@@ -771,7 +771,7 @@ public class TestOperation {
 
 			/* The operation must be multiple. */
 			assertEquals(msg, EssentialOclPlugin.getOclLibraryProvider()
-					.getOclLibrary().getSequenceType(testTypeClass1),
+					.getOclLibrary().getBagType(testTypeClass1),
 					nonuniqueMultipleOperation.getType());
 		}
 

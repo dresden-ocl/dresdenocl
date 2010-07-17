@@ -6,6 +6,7 @@ import org.eclipse.osgi.util.NLS;
 import org.eclipse.uml2.uml.Element;
 import org.eclipse.uml2.uml.TypedElement;
 
+import tudresden.ocl20.pivot.essentialocl.EssentialOclPlugin;
 import tudresden.ocl20.pivot.metamodels.uml2.UML2MetamodelPlugin;
 import tudresden.ocl20.pivot.pivotmodel.Property;
 import tudresden.ocl20.pivot.pivotmodel.Type;
@@ -184,29 +185,49 @@ public class UML2Property extends AbstractProperty implements Property {
 	@Override
 	public Type getType() {
 
-		return this.factory.createType(this.dslProperty.getType());
-	}
+		Type result;
+		Type elementType;
 
-	/**
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.PropertyImpl#isMultiple()
-	 * 
-	 * @generated NOT
-	 */
-	@Override
-	public boolean isMultiple() {
+		elementType = this.factory.createType(this.dslProperty.getType());
 
-		return this.dslProperty.isMultivalued();
-	}
+		/* Probably adapt type into a collection. */
+		if (this.dslProperty.isMultivalued()) {
 
-	/**
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.PropertyImpl#isOrdered()
-	 * 
-	 * @generated NOT
-	 */
-	@Override
-	public boolean isOrdered() {
+			if (this.dslProperty.isOrdered()) {
 
-		return this.dslProperty.isOrdered();
+				/* OrderedSet. */
+				if (this.dslProperty.isUnique()) {
+					result = EssentialOclPlugin.getOclLibraryProvider()
+							.getOclLibrary().getOrderedSetType(elementType);
+				}
+
+				/* Sequence. */
+				else {
+					result = EssentialOclPlugin.getOclLibraryProvider()
+							.getOclLibrary().getSequenceType(elementType);
+				}
+			}
+
+			else {
+				/* Set. */
+				if (this.dslProperty.isUnique()) {
+					result = EssentialOclPlugin.getOclLibraryProvider()
+							.getOclLibrary().getSetType(elementType);
+				}
+
+				/* Bag. */
+				else {
+					result = EssentialOclPlugin.getOclLibraryProvider()
+							.getOclLibrary().getBagType(elementType);
+				}
+			}
+		}
+
+		else {
+			result = elementType;
+		}
+
+		return result;
 	}
 
 	/**
@@ -218,16 +239,5 @@ public class UML2Property extends AbstractProperty implements Property {
 	public boolean isStatic() {
 
 		return this.dslProperty.isStatic();
-	}
-
-	/**
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.PropertyImpl#isUnique()
-	 * 
-	 * @generated NOT
-	 */
-	@Override
-	public boolean isUnique() {
-
-		return this.dslProperty.isUnique();
 	}
 }

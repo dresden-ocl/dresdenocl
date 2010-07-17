@@ -147,37 +147,4 @@ public class UML2VoidReturnParameter extends AbstractParameter implements
 
 		return ParameterDirectionKind.RETURN;
 	}
-
-	/**
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.ParameterImpl#isMultiple()
-	 * 
-	 * @generated NOT
-	 */
-	@Override
-	public boolean isMultiple() {
-
-		return false;
-	}
-
-	/**
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.ParameterImpl#isOrdered()
-	 * 
-	 * @generated NOT
-	 */
-	@Override
-	public boolean isOrdered() {
-
-		return true;
-	}
-
-	/**
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.ParameterImpl#isUnique()
-	 * 
-	 * @generated NOT
-	 */
-	@Override
-	public boolean isUnique() {
-
-		return true;
-	}
 }

@@ -15,6 +15,7 @@ package tudresden.ocl20.pivot.metamodels.uml2.internal.model;
 
 import org.apache.log4j.Logger;
 
+import tudresden.ocl20.pivot.essentialocl.EssentialOclPlugin;
 import tudresden.ocl20.pivot.metamodels.uml2.UML2MetamodelPlugin;
 import tudresden.ocl20.pivot.pivotmodel.Operation;
 import tudresden.ocl20.pivot.pivotmodel.Parameter;
@@ -121,7 +122,49 @@ public class UML2Parameter extends AbstractParameter implements Parameter {
 	@Override
 	public Type getType() {
 
-		return this.factory.createType(this.dslParameter.getType());
+		Type result;
+		Type elementType;
+
+		elementType = this.factory.createType(this.dslParameter.getType());
+
+		/* Probably adapt type into a collection. */
+		if (this.dslParameter.isMultivalued()) {
+
+			if (this.dslParameter.isOrdered()) {
+
+				/* OrderedSet. */
+				if (this.dslParameter.isUnique()) {
+					result = EssentialOclPlugin.getOclLibraryProvider()
+							.getOclLibrary().getOrderedSetType(elementType);
+				}
+
+				/* Sequence. */
+				else {
+					result = EssentialOclPlugin.getOclLibraryProvider()
+							.getOclLibrary().getSequenceType(elementType);
+				}
+			}
+
+			else {
+				/* Set. */
+				if (this.dslParameter.isUnique()) {
+					result = EssentialOclPlugin.getOclLibraryProvider()
+							.getOclLibrary().getSetType(elementType);
+				}
+
+				/* Bag. */
+				else {
+					result = EssentialOclPlugin.getOclLibraryProvider()
+							.getOclLibrary().getBagType(elementType);
+				}
+			}
+		}
+
+		else {
+			result = elementType;
+		}
+
+		return result;
 	}
 
 	/*
@@ -153,38 +196,5 @@ public class UML2Parameter extends AbstractParameter implements Parameter {
 		}
 
 		return this.kind;
-	}
-
-	/**
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.ParameterImpl#isMultiple()
-	 * 
-	 * @generated NOT
-	 */
-	@Override
-	public boolean isMultiple() {
-
-		return this.dslParameter.isMultivalued();
-	}
-
-	/**
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.ParameterImpl#isOrdered()
-	 * 
-	 * @generated NOT
-	 */
-	@Override
-	public boolean isOrdered() {
-
-		return this.dslParameter.isOrdered();
-	}
-
-	/**
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.ParameterImpl#isUnique()
-	 * 
-	 * @generated NOT
-	 */
-	@Override
-	public boolean isUnique() {
-
-		return this.dslParameter.isUnique();
 	}
 }

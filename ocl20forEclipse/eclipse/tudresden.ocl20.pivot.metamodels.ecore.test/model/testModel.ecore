@@ -83,8 +83,8 @@
           eType="#//package2/TestTypeClass1"/>
       <eOperations name="uniqueMultipleOperation" ordered="false" upperBound="-1"
           eType="#//package2/TestTypeClass1"/>
-      <eOperations name="nonuniqueMultipleOperation" unique="false" upperBound="-1"
-          eType="#//package2/TestTypeClass1"/>
+      <eOperations name="nonuniqueMultipleOperation" ordered="false" unique="false"
+          upperBound="-1" eType="#//package2/TestTypeClass1"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="TestPropertyClass">
       <eStructuralFeatures xsi:type="ecore:EReference" name="nonmultipleProperty"

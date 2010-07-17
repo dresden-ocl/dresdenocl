@@ -20,6 +20,7 @@ import org.apache.log4j.Logger;
 import org.eclipse.osgi.util.NLS;
 import org.eclipse.uml2.uml.LiteralUnlimitedNatural;
 
+import tudresden.ocl20.pivot.essentialocl.EssentialOclPlugin;
 import tudresden.ocl20.pivot.metamodels.uml2.UML2MetamodelPlugin;
 import tudresden.ocl20.pivot.pivotmodel.Operation;
 import tudresden.ocl20.pivot.pivotmodel.Parameter;
@@ -168,7 +169,50 @@ public class UML2Operation extends AbstractOperation implements Operation {
 	@Override
 	public Type getType() {
 
-		return this.factory.createType(dslOperation.getType());
+		Type result;
+		Type elementType;
+
+		elementType = this.factory.createType(this.dslOperation.getType());
+
+		/* Probably adapt type into a collection. */
+		if (this.dslOperation.getUpper() > 1
+				|| this.dslOperation.getUpper() == LiteralUnlimitedNatural.UNLIMITED) {
+
+			if (this.dslOperation.isOrdered()) {
+
+				/* OrderedSet. */
+				if (this.dslOperation.isUnique()) {
+					result = EssentialOclPlugin.getOclLibraryProvider()
+							.getOclLibrary().getOrderedSetType(elementType);
+				}
+
+				/* Sequence. */
+				else {
+					result = EssentialOclPlugin.getOclLibraryProvider()
+							.getOclLibrary().getSequenceType(elementType);
+				}
+			}
+
+			else {
+				/* Set. */
+				if (this.dslOperation.isUnique()) {
+					result = EssentialOclPlugin.getOclLibraryProvider()
+							.getOclLibrary().getSetType(elementType);
+				}
+
+				/* Bag. */
+				else {
+					result = EssentialOclPlugin.getOclLibraryProvider()
+							.getOclLibrary().getBagType(elementType);
+				}
+			}
+		}
+
+		else {
+			result = elementType;
+		}
+
+		return result;
 	}
 
 	/**
@@ -195,38 +239,6 @@ public class UML2Operation extends AbstractOperation implements Operation {
 	}
 
 	/**
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.OperationImpl#isMultiple()
-	 * 
-	 * @generated NOT
-	 */
-	@Override
-	public boolean isMultiple() {
-
-		boolean result;
-
-		/*
-		 * see: UML Infrastructure (07-11-04), p. 97: There is no operation
-		 * isMultiple(), since Operation does not directly inherit from
-		 * MultiplicityElement.
-		 */
-		result = this.dslOperation.getUpper() > 1
-				|| this.dslOperation.getUpper() == LiteralUnlimitedNatural.UNLIMITED;
-
-		return result;
-	}
-
-	/**
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.OperationImpl#isOrdered()
-	 * 
-	 * @generated NOT
-	 */
-	@Override
-	public boolean isOrdered() {
-
-		return this.dslOperation.isOrdered();
-	}
-
-	/**
 	 * @see tudresden.ocl20.pivot.pivotmodel.impl.FeatureImpl#isStatic()
 	 * 
 	 * @generated NOT
@@ -234,16 +246,5 @@ public class UML2Operation extends AbstractOperation implements Operation {
 	public boolean isStatic() {
 
 		return this.dslOperation.isStatic();
-	}
-
-	/**
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.OperationImpl#isUnique()
-	 * 
-	 * @generated NOT
-	 */
-	@Override
-	public boolean isUnique() {
-
-		return this.dslOperation.isUnique();
 	}
 }
