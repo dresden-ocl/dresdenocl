@@ -121,7 +121,7 @@ trait OclParseTreeToEssentialOcl { selfType : OclStaticSemantics =>
 	        (i->context).flatMap{context =>
 	          (oclExpression->computeOclExpression).flatMap{oclExpressionEOcl =>
 	            val property = context.asInstanceOf[Property]
-	            if (!oclExpressionEOcl.getType.conformsTo(determineMultiplicityElementType(property)))
+	            if (!oclExpressionEOcl.getType.conformsTo(property.getType))
 	              yieldFailure("Expected type " + property.getType.getName + ", but found " + oclExpressionEOcl.getType.getName, oclExpression)
 	            else {
 		        		val expression = factory.createExpressionInOcl(
@@ -175,13 +175,20 @@ trait OclParseTreeToEssentialOcl { selfType : OclStaticSemantics =>
 	          val property = PivotModelFactory.eINSTANCE.createProperty
 			      property.setName(variableName.getSimpleName)
 			      // TODO: does not work yet for nested collections
-			      determineMultiplicities(tipe, property)
-			      (v->self).flatMap{self =>
-			      	self.getType.allProperties.find(_.getName == property.getName) match {
-			      	  case Some(p) => yieldFailure("Property " + p.getName + " is already defined on " + 
-                                           		self.getType.getName, v)
-			      	  case None => Full((property, oclExpressionEOcl))
-			      	}
+			      property.setType(tipe)
+			      v.parent match {
+			        case v : VariableDeclarationWithInitListCS => v.parent match {
+			          case _ : TupleLiteralExpCS => Full((property, oclExpressionEOcl))
+             }
+			        case _ => {
+			          (v->self).flatMap{self =>
+					      	self.getType.allProperties.find(_.getName == property.getName) match {
+					      	  case Some(p) => yieldFailure("Property " + p.getName + " is already defined on " + 
+		                                           		self.getType.getName, v)
+					      	  case None => Full((property, oclExpressionEOcl))
+					      	}
+					      }
+			        }
 			      }
           }
         }
@@ -192,7 +199,7 @@ trait OclParseTreeToEssentialOcl { selfType : OclStaticSemantics =>
           val property = PivotModelFactory.eINSTANCE.createProperty
 			    property.setName(variableName.getSimpleName)
 			    // TODO: does not work yet for nested collections
-			    determineMultiplicities(tipe, property)
+			    property.setType(tipe)
 			    Full(property, null)
         }
       }
@@ -452,8 +459,13 @@ trait OclParseTreeToEssentialOcl { selfType : OclStaticSemantics =>
          		    		case _ : CollectionType => se
          		    		case _ : Type => se.withAsSet
          		    	}, iteratorName, bodyEOcl,
-         		  		(implicitVariables.first ::
-         		  			explicitVariables.filter(ev => iteratorNames.contains(ev.getName))).toArray : _*)
+         		  		(if (iteratorVariables.isEmpty)
+         		  		  	Array(implicitVariables.first)
+         		  		  else
+         		  		  	if (iteratorVariables.size == 1)
+         		  		  		Array(explicitVariables.first)
+         		  		  	else
+         		  		  		Array(explicitVariables.first, explicitVariables.get(1))) : _*)
          		  // triggers WFR checks in EssentialOcl -> if WFRException is thrown yield a Failure
          		  try {
          		    iteratorExp.getType
@@ -466,14 +478,16 @@ trait OclParseTreeToEssentialOcl { selfType : OclStaticSemantics =>
         }
       }
       
-      case i@IterateExpCS(_, _, bodyExpression) => {
+      case i@IterateExpCS(iterateVar, _, bodyExpression) => {
         (i->sourceExpression).flatMap{se =>
 	        (bodyExpression->variables).flatMap {case (implicitVariables, explicitVariables) =>
 	          (bodyExpression->computeOclExpression).flatMap{bodyEOcl =>
 	            val iteratorExp = factory.createIterateExp(se.getType match {
          		    		case _ : CollectionType => se
          		    		case _ : Type => se.withAsSet
-         		    	}, bodyEOcl, explicitVariables.first, implicitVariables.first)
+         		    	}, bodyEOcl, 
+         		    	if (iterateVar != null) explicitVariables.get(1) else explicitVariables.first,
+         		    	if (iterateVar != null) explicitVariables.first else implicitVariables.first)
          		  // triggers WFR checks in EssentialOcl -> if WFRException is thrown yield a Failure
          		  try {
          		    iteratorExp.getType
@@ -489,24 +503,22 @@ trait OclParseTreeToEssentialOcl { selfType : OclStaticSemantics =>
       case c@CollectionLiteralExpCS(collectionType, collectionLiteralParts) => {
         val literalPartsEOcl = collectionLiteralParts.map(clp => clp->computeLiteralPart)
         literalPartsEOcl.find(!_.isDefined) match {
-          case Some(failure) => failure match {
-            case Failure(msg, _, _) => Failure(msg, Empty, Empty)
-            case Empty => Empty
-            case Full(_) => Empty // this cannot happen, but to prevent a warning the case is here
-          } 
+          case Some(Failure(msg, _, _)) => Failure(msg, Empty, Empty)
+          case Some(_) => Empty
           case None => {
             (collectionType->oclType).flatMap{ct =>
               val unboxedLiteralParts = literalPartsEOcl.flatten(l => l)
-              val genericType = ct.asInstanceOf[CollectionType].getElementType
-              val typeConformance = if (genericType != null && !unboxedLiteralParts.isEmpty) {
-                val commonSuperType = unboxedLiteralParts.map(_.getType).reduceLeft((a, b) => a.commonSuperType(b))
-                if (!commonSuperType.conformsTo(genericType))
-                  yieldFailure("Exprected type " + genericType.getName + ", but found " + commonSuperType.getName, c)
-                else
-                  Full(true)
-              } else
-                Full(true)
-              typeConformance.flatMap{_ =>
+              // Michael: type conformance testing is done in CollectionLiteralExp.getType()
+//              val genericType = ct.asInstanceOf[CollectionType].getElementType
+//              val typeConformance = if (genericType != null && !unboxedLiteralParts.isEmpty) {
+//                val commonSuperType = unboxedLiteralParts.map(_.getType).reduceLeft((a, b) => a.commonSuperType(b))
+//                if (!commonSuperType.conformsTo(genericType))
+//                  yieldFailure("Exprected type " + genericType.getName + ", but found " + commonSuperType.getName, c)
+//                else
+//                  Full(true)
+//              } else
+//                Full(true)
+//              typeConformance.flatMap{_ =>
                 val collectionKind = ct match {
 	                case b : BagType => Full(CollectionKind.BAG)
 	                case s : SetType => Full(CollectionKind.SET)
@@ -515,10 +527,16 @@ trait OclParseTreeToEssentialOcl { selfType : OclStaticSemantics =>
 	                case c : CollectionType => yieldFailure("'Collection' cannot be initialised.", c)
 	              }
                 collectionKind.flatMap{collectionKind =>
-	              	Full(factory.createCollectionLiteralExp(collectionKind, unboxedLiteralParts.toArray : _*))
+	              	val result = factory.createCollectionLiteralExp(collectionKind, ct.asInstanceOf[CollectionType].getElementType, unboxedLiteralParts.toArray : _*)
+                  try {
+                    result.getType
+                    Full(result)
+                  } catch {
+                    case e : WellformednessException => yieldFailure(e.getMessage, c); Failure(e.getMessage, Empty, Empty)
+                  }
 	              }
               }
-            }
+//            }
           }
         }
       }

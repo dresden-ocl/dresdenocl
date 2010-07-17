@@ -91,15 +91,15 @@ trait OclLookUpFunctions { selfType : OclStaticSemantics =>
     }
   }
   
-  protected def lookupOperationOnType(t : Type, name : String, static : Boolean, parameters : List[Parameter]) : Box[Operation] = {
-    val parameterTypes = parameters.map(determineMultiplicityElementType(_))
-    !!(t.lookupOperation(name, parameterTypes)).flatMap{o => if (o.isStatic == static) Full(o) else Empty} or {
+  protected def lookupOperationOnType(t : Type, name : String, static : Boolean, parameters : List[Type]) : Box[Operation] = {
+    !!(t.lookupOperation(name, parameters)).flatMap{o => if (o.isStatic == static) Full(o) else Empty} or {
       val d = getAllDefs._2.filter(d => t.conformsTo(d._1))
-      if (d.isEmpty) Failure("Cannot find operation " + name + " on " + t.getName + " with parameters + " + parameters.mkString(", "))
+      if (d.isEmpty) 
+        Failure("Cannot find operation " + name + " on " + t.getName + " with parameters " + parameters.mkString(", "))
       else {
       	d.flatMap{d =>
       	  d._2.map(_._1.getOperation).find(o => o.getName == name && o.isStatic == static &&
-                                           o.hasMatchingSignature(parameterTypes)).flatMap{operation =>
+                                           o.hasMatchingSignature(parameters)).flatMap{operation =>
       		  Full(operation)
       		}
       	}.toList.firstOption
@@ -108,7 +108,7 @@ trait OclLookUpFunctions { selfType : OclStaticSemantics =>
   }
   
   protected def lookupOperationOnType(tipe : Type, identifier : String, 
-                                    parameters : List[Parameter], static : Boolean,
+                                    parameters : List[Type], static : Boolean,
                                     element : EObject,
                                     warning: Box[String]) : Box[List[Operation]] = {
     lookupOperationOnType(tipe, identifier, static, parameters)
@@ -156,7 +156,7 @@ trait OclLookUpFunctions { selfType : OclStaticSemantics =>
     if (vd.getTypeName != null) {
       (vd.getTypeName->oclType).flatMap{tipe =>
         val property = PivotModelFactory.eINSTANCE.createProperty
-        determineMultiplicities(tipe, property)
+        property.setType(tipe)
         if (property.getType == null) {
           // this can happen for not fully qualified collections, e.g., Set instead of Set(Integer)
           resolveTypeByComputingFeature(vd, name, t)

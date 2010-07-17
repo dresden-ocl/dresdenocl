@@ -8,6 +8,7 @@ import tudresden.ocl20.pivot.pivotmodel._
 import tudresden.ocl20.pivot.pivotmodel.semantics._
 import tudresden.ocl20.pivot.essentialocl._
 import expressions._
+import expressions.util._
 import types._
 import factory._
 import tudresden.ocl20.pivot.model._
@@ -102,52 +103,6 @@ trait OclStaticSemantics extends ocl.semantics.OclAttributeMaker
     }
     resource.addWarning(message, eObject)
   }
-
-  /**
-   * If the given type is a CollectionType, set MuliplicityElement features
-   */
-  protected def determineMultiplicities(tipe : Type, multiplicityElement : MultiplicityElement with TypedElement) = {
-    tipe match {
-      case c : CollectionType => {
-        multiplicityElement.setMultiple(true)
-        if (c.getKind == CollectionKind.SET) {
-          multiplicityElement.setUnique(true)
-          multiplicityElement.setOrdered(false)
-        } else if (c.getKind == CollectionKind.SEQUENCE) {
-          multiplicityElement.setUnique(false)
-          multiplicityElement.setOrdered(true)
-        } else if (c.getKind == CollectionKind.ORDERED_SET) {
-          multiplicityElement.setUnique(true)
-          multiplicityElement.setOrdered(true)
-        } else if (c.getKind == CollectionKind.BAG) {
-          multiplicityElement.setUnique(false)
-          multiplicityElement.setOrdered(false)
-        }
-        if (c.getElementType != null)
-        	multiplicityElement.setType(c.getElementType)
-      }
-      case _ => multiplicityElement.setType(tipe)
-    }
-  }
-  
-  protected def determineMultiplicityElementType(multiplicityElement : MultiplicityElement with TypedElement) = {
-    if (multiplicityElement.isMultiple) {
-      if (multiplicityElement.isUnique) {
-        if (multiplicityElement.isOrdered)
-          oclLibrary.getOrderedSetType(multiplicityElement.getType)
-        else
-          oclLibrary.getSetType(multiplicityElement.getType) 
-      }
-      else {
-        if (multiplicityElement.isOrdered)
-          oclLibrary.getSequenceType(multiplicityElement.getType)
-        else
-          oclLibrary.getBagType(multiplicityElement.getType) 
-      }
-    }
-    else
-      multiplicityElement.getType
-  }
   
   protected def determineTypeOf(oclExpression : OclExpression) = {
 		oclExpression.getType match {
@@ -163,8 +118,8 @@ trait OclStaticSemantics extends ocl.semantics.OclAttributeMaker
 	        if (!initExp.getType.conformsTo(tipe))
 	        	yieldFailure("Expected type " + tipe.getName + ", but found " + 
 	                        initExp.getType.getName, vd)
-	        else
-	          Full(initExp.getType)
+	        else 
+	        	Full(tipe)
         }
       }
     }

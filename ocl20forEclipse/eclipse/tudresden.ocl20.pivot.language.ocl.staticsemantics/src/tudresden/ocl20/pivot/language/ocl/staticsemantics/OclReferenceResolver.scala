@@ -162,7 +162,7 @@ trait OclReferenceResolver { selfType : OclStaticSemantics =>
     }
   }
   
-  protected val _resolveOperation : Tuple4[String, Boolean, List[Parameter], Boolean] => Attributable ==> Box[List[Operation]] = {
+  protected val _resolveOperation : Tuple4[String, Boolean, List[Type], Boolean] => Attributable ==> Box[List[Operation]] = {
     case (identifier, fuzzy, parameters, static) => {
       case aeo : AttributableEObject => {
         (aeo->sourceExpression).flatMap{sourceExpression =>
@@ -180,17 +180,8 @@ trait OclReferenceResolver { selfType : OclStaticSemantics =>
               case Full(false) => {
                 sourceExpression.getType match {
                   case c : CollectionType => {
-                    // TODO: lookupOperationOnType!!!
-                    (!!(c.getElementType.lookupOperation(identifier, parameters.map(determineMultiplicityElementType(_)))) ?~
-	              			("Cannot find operation " + identifier + " with parameters " + parameters.mkString(", ") + " on type " + 
-	                    c.getElementType.getName)).flatMap{o =>
-	                      if (o.isStatic == static) {
-	                      	addWarning("implicit collect() on " + o.getName, aeo)
-	                      	Full(List(o))
-	                    	} else {
-	                    	  Failure("Found operation " + identifier + ", but was " + (if (static) " static." else " not static."))
-                      	}
-                  		}
+                    lookupOperationOnType(c.getElementType, identifier, 
+                                          parameters, static, aeo, Full("implicit collect()"))
                   }
                   case notMultiple =>
                     lookupOperationOnType(notMultiple, identifier, parameters, static, aeo, Empty)
@@ -275,14 +266,10 @@ trait OclReferenceResolver { selfType : OclStaticSemantics =>
       for (parameter <- parameters;
       		 parameterEOcl <- parameter->computeOclExpression)
       yield {
-      	val parameter = PivotModelFactory.eINSTANCE.createParameter
-      	parameter.setName(parameterEOcl.getName)
-      	determineMultiplicities(parameterEOcl.getType, parameter)
-      	parameter.setKind(ParameterDirectionKind.IN)
-      	parameter
+      	parameterEOcl
       }
 
-    _resolveOperation(identifier, fuzzy, parametersEOcl, static) (container) match {
+    _resolveOperation(identifier, fuzzy, parametersEOcl.map(_.getType), static) (container) match {
       case Full(operationList) => operationList
       case Failure(msg, _, _) => resource.addError(msg, container); List()
       case Empty => List()
@@ -300,7 +287,7 @@ trait OclReferenceResolver { selfType : OclStaticSemantics =>
 		      case None => {
 		        (tn->oclType).flatMap{tipe =>
 				      if (!fuzzy)
-				      	lookupOperationOnType(tipe, identifier, false, parametersEOcl)
+				      	lookupOperationOnType(tipe, identifier, false, parametersEOcl.map(_.getType))
 		              .flatMap(o => Full(List(o)))
 				      else
 				       Full(lookupOperationOnTypeFuzzy(tipe, identifier, false))
@@ -357,11 +344,11 @@ trait OclReferenceResolver { selfType : OclStaticSemantics =>
 								  	case None => {
 			            	  val operation = PivotModelFactory.eINSTANCE.createOperation
 						          operation.setName(identifier)
-						          determineMultiplicities(rt, operation)
+						          operation.setType(rt)
 						          parametersEOcl.foreach(p => operation.addParameter(p))
 						          val retParameter = PivotModelFactory.eINSTANCE.createParameter
 						          retParameter.setKind(ParameterDirectionKind.RETURN)
-						          determineMultiplicities(rt, retParameter)
+						          retParameter.setType(rt)
 						          operation.addParameter(retParameter)
 						          Full(List(operation))
 									  }
@@ -385,7 +372,7 @@ trait OclReferenceResolver { selfType : OclStaticSemantics =>
   															 reference : EReference, parameterType : TypeCS) : java.util.List[Parameter] = {
     (parameterType->oclType).flatMap{parameterType =>
       val parameter = PivotModelFactory.eINSTANCE.createParameter
-      determineMultiplicities(parameterType, parameter)
+      parameter.setType(parameterType)
       parameter.setName(identifier)
       parameter.setKind(ParameterDirectionKind.IN)
       Full(parameter)

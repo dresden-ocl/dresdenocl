@@ -246,18 +246,20 @@ trait OclAttributes { selfType : OclStaticSemantics =>
                 Empty
               else
 		            Full(
-		              // FIXME: are iterator variables automatically implicit?
 		              // implicit variables
 		            	if (iteratorVariables.isEmpty)
 			            	(factory.createVariable("$implicitVariable" + ImplicitVariableNumberGenerator.getNumber + "$", determineTypeOf(se), null))::implicitVariables
 			            else
-		                (iteratorVariablesEOcl.first)::implicitVariables
+		                implicitVariables
 		              ,
 		              // explicit variables
 		              if (iteratorVariables.size == 2)
-	                  iteratorVariablesEOcl.get(1)::explicitVariables
+	                  iteratorVariablesEOcl.first::iteratorVariablesEOcl.get(1)::explicitVariables
 	                else
-	                  explicitVariables
+	                  if (iteratorVariables.isEmpty)
+	                  	explicitVariables
+                    else
+                      iteratorVariablesEOcl.first::explicitVariables
 			          )
 	          }
 	        }
@@ -284,7 +286,17 @@ trait OclAttributes { selfType : OclStaticSemantics =>
             }.flatMap{iv =>
               (resultVariable.getInitialization->computeOclExpression).flatMap{initExp =>
 	              checkVariableDeclarationType(resultVariable).flatMap{tipe =>
-	              	Full(iv::implicitVariables, factory.createVariable(resultVariable.getVariableName.getSimpleName, tipe, initExp)::explicitVariables)
+	              	Full(
+	              	  if (iteratorVariable != null)
+	              	  	implicitVariables
+	              	  else
+	              	  	iv::implicitVariables
+                    ,
+                    if (iteratorVariable != null)
+                    	iv::factory.createVariable(resultVariable.getVariableName.getSimpleName, tipe, initExp)::explicitVariables
+                    else
+                      factory.createVariable(resultVariable.getVariableName.getSimpleName, tipe, initExp)::explicitVariables
+	              	)
 	              }
               }
             }
