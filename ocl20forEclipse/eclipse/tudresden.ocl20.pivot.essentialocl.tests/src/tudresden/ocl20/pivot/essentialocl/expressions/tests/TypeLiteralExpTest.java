@@ -46,56 +46,56 @@ import tudresden.ocl20.pivot.essentialocl.expressions.impl.ExpressionsFactoryImp
  */
 public class TypeLiteralExpTest extends LiteralExpTest {
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public static void main(String[] args) {
-    TestRunner.run(TypeLiteralExpTest.class);
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static void main(String[] args) {
+		TestRunner.run(TypeLiteralExpTest.class);
+	}
 
-  /**
-   * Constructs a new Type Literal Exp test case with the given name.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public TypeLiteralExpTest(String name) {
-    super(name);
-  }
+	/**
+	 * Constructs a new Type Literal Exp test case with the given name.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public TypeLiteralExpTest(String name) {
+		super(name);
+	}
 
-  /**
-   * Returns the fixture for this Type Literal Exp test case.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  protected TypeLiteralExp getFixture() {
-    return (TypeLiteralExp) fixture;
-  }
+	/**
+	 * Returns the fixture for this Type Literal Exp test case.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected TypeLiteralExp getFixture() {
+		return (TypeLiteralExp) fixture;
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see junit.framework.TestCase#setUp()
-   * @generated
-   */
-  @Override
-  protected void setUp() throws Exception {
-    setFixture(ExpressionsFactoryImpl.eINSTANCE.createTypeLiteralExp());
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see junit.framework.TestCase#setUp()
+	 * @generated
+	 */
+	@Override
+	protected void setUp() throws Exception {
+		setFixture(ExpressionsFactoryImpl.eINSTANCE.createTypeLiteralExp());
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see junit.framework.TestCase#tearDown()
-   * @generated
-   */
-  @Override
-  protected void tearDown() throws Exception {
-    setFixture(null);
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see junit.framework.TestCase#tearDown()
+	 * @generated
+	 */
+	@Override
+	protected void tearDown() throws Exception {
+		setFixture(null);
+	}
 
 } //TypeLiteralExpTest

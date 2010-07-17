@@ -48,73 +48,73 @@ import tudresden.ocl20.pivot.essentialocl.types.impl.TypesFactoryImpl;
  */
 public class VoidTypeTest extends TestCase {
 
-  /**
-   * The fixture for this Void Type test case.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  protected VoidType fixture = null;
+	/**
+	 * The fixture for this Void Type test case.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected VoidType fixture = null;
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public static void main(String[] args) {
-    TestRunner.run(VoidTypeTest.class);
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static void main(String[] args) {
+		TestRunner.run(VoidTypeTest.class);
+	}
 
-  /**
-   * Constructs a new Void Type test case with the given name.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public VoidTypeTest(String name) {
-    super(name);
-  }
+	/**
+	 * Constructs a new Void Type test case with the given name.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public VoidTypeTest(String name) {
+		super(name);
+	}
 
-  /**
-   * Sets the fixture for this Void Type test case.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  protected void setFixture(VoidType fixture) {
-    this.fixture = fixture;
-  }
+	/**
+	 * Sets the fixture for this Void Type test case.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void setFixture(VoidType fixture) {
+		this.fixture = fixture;
+	}
 
-  /**
-   * Returns the fixture for this Void Type test case.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  protected VoidType getFixture() {
-    return fixture;
-  }
+	/**
+	 * Returns the fixture for this Void Type test case.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected VoidType getFixture() {
+		return fixture;
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see junit.framework.TestCase#setUp()
-   * @generated
-   */
-  @Override
-  protected void setUp() throws Exception {
-    setFixture(TypesFactoryImpl.eINSTANCE.createVoidType());
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see junit.framework.TestCase#setUp()
+	 * @generated
+	 */
+	@Override
+	protected void setUp() throws Exception {
+		setFixture(TypesFactoryImpl.eINSTANCE.createVoidType());
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see junit.framework.TestCase#tearDown()
-   * @generated
-   */
-  @Override
-  protected void tearDown() throws Exception {
-    setFixture(null);
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see junit.framework.TestCase#tearDown()
+	 * @generated
+	 */
+	@Override
+	protected void tearDown() throws Exception {
+		setFixture(null);
+	}
 
 } //VoidTypeTest

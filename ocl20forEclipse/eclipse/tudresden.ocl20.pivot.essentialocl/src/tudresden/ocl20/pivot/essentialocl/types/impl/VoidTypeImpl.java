@@ -82,7 +82,6 @@ public class VoidTypeImpl extends TypeImpl implements VoidType {
 	 * @generated
 	 */
 	protected VoidTypeImpl() {
-
 		super();
 	}
 
@@ -143,7 +142,8 @@ public class VoidTypeImpl extends TypeImpl implements VoidType {
 		if (operation == null) {
 
 			if (logger.isInfoEnabled()) {
-				logger.info("Creating implicit operation '" + name + "' for VoidType"); //$NON-NLS-1$//$NON-NLS-2$
+				logger
+						.info("Creating implicit operation '" + name + "' for VoidType"); //$NON-NLS-1$//$NON-NLS-2$
 			}
 
 			operation = PivotModelFactory.eINSTANCE.createOperation();
@@ -151,8 +151,9 @@ public class VoidTypeImpl extends TypeImpl implements VoidType {
 
 			// set the type of the new operation to invalid
 			if (getOclLibrary() == null) {
-				throw new IllegalStateException("The VoidType called '" + getName() //$NON-NLS-1$
-						+ "' is not contained in the OCL Library."); //$NON-NLS-1$
+				throw new IllegalStateException(
+						"The VoidType called '" + getName() //$NON-NLS-1$
+								+ "' is not contained in the OCL Library."); //$NON-NLS-1$
 			}
 
 			operation.setType(getOclLibrary().getOclInvalid());
@@ -176,7 +177,8 @@ public class VoidTypeImpl extends TypeImpl implements VoidType {
 	public Property lookupProperty(String name) {
 
 		if (logger.isInfoEnabled()) {
-			logger.info("Creating implicit property '" + name + "' for VoidType"); //$NON-NLS-1$//$NON-NLS-2$
+			logger
+					.info("Creating implicit property '" + name + "' for VoidType"); //$NON-NLS-1$//$NON-NLS-2$
 		}
 
 		Property property = PivotModelFactory.eINSTANCE.createProperty();
@@ -184,8 +186,9 @@ public class VoidTypeImpl extends TypeImpl implements VoidType {
 
 		// set the type of the new property to invalid
 		if (getOclLibrary() == null) {
-			throw new IllegalStateException("The InvalidType called '" + getName() //$NON-NLS-1$
-					+ "' is not contained in the OCL Library."); //$NON-NLS-1$
+			throw new IllegalStateException(
+					"The InvalidType called '" + getName() //$NON-NLS-1$
+							+ "' is not contained in the OCL Library."); //$NON-NLS-1$
 		}
 
 		property.setType(getOclLibrary().getOclInvalid());
@@ -212,15 +215,14 @@ public class VoidTypeImpl extends TypeImpl implements VoidType {
 	 * @generated
 	 */
 	public OclLibrary getOclLibrary() {
-
 		if (oclLibrary != null && oclLibrary.eIsProxy()) {
 			InternalEObject oldOclLibrary = (InternalEObject) oclLibrary;
 			oclLibrary = (OclLibrary) eResolveProxy(oldOclLibrary);
 			if (oclLibrary != oldOclLibrary) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE,
-							TypesPackageImpl.VOID_TYPE__OCL_LIBRARY, oldOclLibrary,
-							oclLibrary));
+							TypesPackageImpl.VOID_TYPE__OCL_LIBRARY,
+							oldOclLibrary, oclLibrary));
 			}
 		}
 		return oclLibrary;
@@ -231,7 +233,6 @@ public class VoidTypeImpl extends TypeImpl implements VoidType {
 	 * @generated
 	 */
 	public OclLibrary basicGetOclLibrary() {
-
 		return oclLibrary;
 	}
 
@@ -240,12 +241,12 @@ public class VoidTypeImpl extends TypeImpl implements VoidType {
 	 * @generated
 	 */
 	public void setOclLibrary(OclLibrary newOclLibrary) {
-
 		OclLibrary oldOclLibrary = oclLibrary;
 		oclLibrary = newOclLibrary;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
-					TypesPackageImpl.VOID_TYPE__OCL_LIBRARY, oldOclLibrary, oclLibrary));
+					TypesPackageImpl.VOID_TYPE__OCL_LIBRARY, oldOclLibrary,
+					oclLibrary));
 	}
 
 	/**
@@ -254,7 +255,6 @@ public class VoidTypeImpl extends TypeImpl implements VoidType {
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-
 		switch (featureID) {
 		case TypesPackageImpl.VOID_TYPE__OCL_LIBRARY:
 			if (resolve)
@@ -270,7 +270,6 @@ public class VoidTypeImpl extends TypeImpl implements VoidType {
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-
 		switch (featureID) {
 		case TypesPackageImpl.VOID_TYPE__OCL_LIBRARY:
 			setOclLibrary((OclLibrary) newValue);
@@ -285,7 +284,6 @@ public class VoidTypeImpl extends TypeImpl implements VoidType {
 	 */
 	@Override
 	public void eUnset(int featureID) {
-
 		switch (featureID) {
 		case TypesPackageImpl.VOID_TYPE__OCL_LIBRARY:
 			setOclLibrary((OclLibrary) null);
@@ -300,7 +298,6 @@ public class VoidTypeImpl extends TypeImpl implements VoidType {
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-
 		switch (featureID) {
 		case TypesPackageImpl.VOID_TYPE__OCL_LIBRARY:
 			return oclLibrary != null;
@@ -314,7 +311,6 @@ public class VoidTypeImpl extends TypeImpl implements VoidType {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-
 		return TypesPackageImpl.Literals.VOID_TYPE;
 	}
 

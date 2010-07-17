@@ -54,7 +54,6 @@ public abstract class NumericLiteralExpImpl extends PrimitiveLiteralExpImpl
 	 * @generated
 	 */
 	protected NumericLiteralExpImpl() {
-
 		super();
 	}
 
@@ -65,7 +64,6 @@ public abstract class NumericLiteralExpImpl extends PrimitiveLiteralExpImpl
 	 */
 	@Override
 	protected EClass eStaticClass() {
-
 		return ExpressionsPackageImpl.Literals.NUMERIC_LITERAL_EXP;
 	}
 

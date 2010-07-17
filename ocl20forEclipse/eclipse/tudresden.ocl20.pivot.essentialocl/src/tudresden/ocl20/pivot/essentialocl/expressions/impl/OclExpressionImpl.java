@@ -74,8 +74,8 @@ public abstract class OclExpressionImpl extends TypedElementImpl implements
 	/**
 	 * Logger for this class
 	 */
-	private static final Logger logger =
-			Logger.getLogger(OclExpressionImpl.class);
+	private static final Logger logger = Logger
+			.getLogger(OclExpressionImpl.class);
 
 	/**
 	 * The cached value of the '{@link #getOclLibrary() <em>Ocl Library</em>}' reference.
@@ -91,7 +91,6 @@ public abstract class OclExpressionImpl extends TypedElementImpl implements
 	 * @generated
 	 */
 	protected OclExpressionImpl() {
-
 		super();
 	}
 
@@ -139,7 +138,6 @@ public abstract class OclExpressionImpl extends TypedElementImpl implements
 	 * @generated
 	 */
 	public OclLibrary getOclLibrary() {
-
 		return oclLibrary;
 	}
 
@@ -148,13 +146,12 @@ public abstract class OclExpressionImpl extends TypedElementImpl implements
 	 * @generated
 	 */
 	public void setOclLibrary(OclLibrary newOclLibrary) {
-
 		OclLibrary oldOclLibrary = oclLibrary;
 		oclLibrary = newOclLibrary;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
-					ExpressionsPackageImpl.OCL_EXPRESSION__OCL_LIBRARY, oldOclLibrary,
-					oclLibrary));
+					ExpressionsPackageImpl.OCL_EXPRESSION__OCL_LIBRARY,
+					oldOclLibrary, oclLibrary));
 	}
 
 	/**
@@ -233,8 +230,8 @@ public abstract class OclExpressionImpl extends TypedElementImpl implements
 		}
 
 		// lookup the asSet operation
-		Operation asSetOperation =
-				getType().lookupOperation("asSet", new ArrayList<Type>()); //$NON-NLS-1$
+		Operation asSetOperation = getType().lookupOperation(
+				"asSet", new ArrayList<Type>()); //$NON-NLS-1$
 
 		if (asSetOperation == null) {
 			throw new IllegalStateException(
@@ -250,13 +247,13 @@ public abstract class OclExpressionImpl extends TypedElementImpl implements
 		}
 
 		// bind the type parameter with the type of this operation
-		asSetOperation =
-				asSetOperation.bindTypeParameter(new ArrayList<TypeParameter>(
-						asSetOperation.getOwnedTypeParameter()), Arrays.asList(getType()));
+		asSetOperation = asSetOperation.bindTypeParameter(
+				new ArrayList<TypeParameter>(asSetOperation
+						.getOwnedTypeParameter()), Arrays.asList(getType()));
 
 		// create a new operation call expression
-		OperationCallExp withAsSet =
-				ExpressionsFactory.INSTANCE.createOperationCallExp();
+		OperationCallExp withAsSet = ExpressionsFactory.INSTANCE
+				.createOperationCallExp();
 
 		withAsSet.setName("asSet"); //$NON-NLS-1$
 		withAsSet.setSource(this);
@@ -310,7 +307,8 @@ public abstract class OclExpressionImpl extends TypedElementImpl implements
 		// check parameter (note that a type of null does NOT imply a conversion to
 		// OclVoid because null and OclVoid are defined on different meta layers)
 		if (type == null) {
-			throw new IllegalArgumentException("Parameter 'type' must not be null"); //$NON-NLS-1$
+			throw new IllegalArgumentException(
+					"Parameter 'type' must not be null"); //$NON-NLS-1$
 		}
 
 		// make sure we have access to the OCL library
@@ -368,7 +366,8 @@ public abstract class OclExpressionImpl extends TypedElementImpl implements
 		}
 
 		if (logger.isDebugEnabled()) {
-			logger.debug("mapPrimitiveType() - exit - return value=" + mappedType); //$NON-NLS-1$
+			logger
+					.debug("mapPrimitiveType() - exit - return value=" + mappedType); //$NON-NLS-1$
 		}
 
 		return mappedType;
@@ -432,7 +431,6 @@ public abstract class OclExpressionImpl extends TypedElementImpl implements
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-
 		switch (featureID) {
 		case ExpressionsPackageImpl.OCL_EXPRESSION__OCL_LIBRARY:
 			return getOclLibrary();
@@ -446,7 +444,6 @@ public abstract class OclExpressionImpl extends TypedElementImpl implements
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-
 		switch (featureID) {
 		case ExpressionsPackageImpl.OCL_EXPRESSION__OCL_LIBRARY:
 			setOclLibrary((OclLibrary) newValue);
@@ -461,7 +458,6 @@ public abstract class OclExpressionImpl extends TypedElementImpl implements
 	 */
 	@Override
 	public void eUnset(int featureID) {
-
 		switch (featureID) {
 		case ExpressionsPackageImpl.OCL_EXPRESSION__OCL_LIBRARY:
 			setOclLibrary((OclLibrary) null);
@@ -476,7 +472,6 @@ public abstract class OclExpressionImpl extends TypedElementImpl implements
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-
 		switch (featureID) {
 		case ExpressionsPackageImpl.OCL_EXPRESSION__OCL_LIBRARY:
 			return oclLibrary != null;
@@ -490,7 +485,6 @@ public abstract class OclExpressionImpl extends TypedElementImpl implements
 	 */
 	@Override
 	protected EClass eStaticClass() {
-
 		return ExpressionsPackageImpl.Literals.OCL_EXPRESSION;
 	}
 

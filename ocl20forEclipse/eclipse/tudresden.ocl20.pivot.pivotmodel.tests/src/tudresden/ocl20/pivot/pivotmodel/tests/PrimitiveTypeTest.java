@@ -34,6 +34,7 @@ package tudresden.ocl20.pivot.pivotmodel.tests;
 
 import junit.textui.TestRunner;
 
+import tudresden.ocl20.pivot.pivotmodel.PivotModelFactory;
 import tudresden.ocl20.pivot.pivotmodel.PrimitiveType;
 
 import tudresden.ocl20.pivot.pivotmodel.impl.PivotModelFactoryImpl;
@@ -52,7 +53,6 @@ public class PrimitiveTypeTest extends TypeTest {
 	 * @generated
 	 */
 	public static void main(String[] args) {
-
 		TestRunner.run(PrimitiveTypeTest.class);
 	}
 
@@ -63,7 +63,6 @@ public class PrimitiveTypeTest extends TypeTest {
 	 * @generated
 	 */
 	public PrimitiveTypeTest(String name) {
-
 		super(name);
 	}
 
@@ -75,7 +74,6 @@ public class PrimitiveTypeTest extends TypeTest {
 	 */
 	@Override
 	protected PrimitiveType getFixture() {
-
 		return (PrimitiveType) fixture;
 	}
 
@@ -87,8 +85,7 @@ public class PrimitiveTypeTest extends TypeTest {
 	 */
 	@Override
 	protected void setUp() throws Exception {
-
-		setFixture(PivotModelFactoryImpl.eINSTANCE.createPrimitiveType());
+		setFixture(PivotModelFactory.eINSTANCE.createPrimitiveType());
 	}
 
 	/**
@@ -99,7 +96,6 @@ public class PrimitiveTypeTest extends TypeTest {
 	 */
 	@Override
 	protected void tearDown() throws Exception {
-
 		setFixture(null);
 	}
 

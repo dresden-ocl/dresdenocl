@@ -74,6 +74,9 @@
         <genOperations ecoreOperation="essentialocl.ecore#//types/OclLibrary/getOrderedSetType">
           <genParameters ecoreParameter="essentialocl.ecore#//types/OclLibrary/getOrderedSetType/elementType"/>
         </genOperations>
+        <genOperations ecoreOperation="essentialocl.ecore#//types/OclLibrary/getTypeType">
+          <genParameters ecoreParameter="essentialocl.ecore#//types/OclLibrary/getTypeType/representedType"/>
+        </genOperations>
       </genClasses>
       <genClasses ecoreClass="essentialocl.ecore#//types/AnyType"/>
     </nestedGenPackages>

@@ -36,6 +36,7 @@ import junit.textui.TestRunner;
 
 import tudresden.ocl20.pivot.pivotmodel.EnumerationLiteral;
 
+import tudresden.ocl20.pivot.pivotmodel.PivotModelFactory;
 import tudresden.ocl20.pivot.pivotmodel.impl.PivotModelFactoryImpl;
 
 /**
@@ -52,7 +53,6 @@ public class EnumerationLiteralTest extends NamedElementTest {
 	 * @generated
 	 */
 	public static void main(String[] args) {
-
 		TestRunner.run(EnumerationLiteralTest.class);
 	}
 
@@ -63,7 +63,6 @@ public class EnumerationLiteralTest extends NamedElementTest {
 	 * @generated
 	 */
 	public EnumerationLiteralTest(String name) {
-
 		super(name);
 	}
 
@@ -75,7 +74,6 @@ public class EnumerationLiteralTest extends NamedElementTest {
 	 */
 	@Override
 	protected EnumerationLiteral getFixture() {
-
 		return (EnumerationLiteral) fixture;
 	}
 
@@ -87,8 +85,7 @@ public class EnumerationLiteralTest extends NamedElementTest {
 	 */
 	@Override
 	protected void setUp() throws Exception {
-
-		setFixture(PivotModelFactoryImpl.eINSTANCE.createEnumerationLiteral());
+		setFixture(PivotModelFactory.eINSTANCE.createEnumerationLiteral());
 	}
 
 	/**
@@ -99,7 +96,6 @@ public class EnumerationLiteralTest extends NamedElementTest {
 	 */
 	@Override
 	protected void tearDown() throws Exception {
-
 		setFixture(null);
 	}
 

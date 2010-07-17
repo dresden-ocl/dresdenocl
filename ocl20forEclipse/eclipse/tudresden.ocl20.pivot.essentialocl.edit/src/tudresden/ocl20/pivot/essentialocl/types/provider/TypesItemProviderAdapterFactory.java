@@ -61,410 +61,424 @@ import tudresden.ocl20.pivot.essentialocl.types.util.TypesAdapterFactory;
  * <!-- end-user-doc -->
  * @generated
  */
-public class TypesItemProviderAdapterFactory extends TypesAdapterFactory implements
-    ComposeableAdapterFactory, IChangeNotifier, IDisposable {
+public class TypesItemProviderAdapterFactory extends TypesAdapterFactory
+		implements ComposeableAdapterFactory, IChangeNotifier, IDisposable {
 
-  /**
-   * This keeps track of the root adapter factory that delegates to this adapter factory.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  protected ComposedAdapterFactory parentAdapterFactory;
+	/**
+	 * This keeps track of the root adapter factory that delegates to this adapter factory.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected ComposedAdapterFactory parentAdapterFactory;
 
-  /**
-   * This is used to implement {@link org.eclipse.emf.edit.provider.IChangeNotifier}.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  protected IChangeNotifier changeNotifier = new ChangeNotifier();
+	/**
+	 * This is used to implement {@link org.eclipse.emf.edit.provider.IChangeNotifier}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected IChangeNotifier changeNotifier = new ChangeNotifier();
 
-  /**
-   * This keeps track of all the supported types checked by {@link #isFactoryForType isFactoryForType}.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  protected Collection<Object> supportedTypes = new ArrayList<Object>();
+	/**
+	 * This keeps track of all the supported types checked by {@link #isFactoryForType isFactoryForType}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected Collection<Object> supportedTypes = new ArrayList<Object>();
 
-  /**
-   * This constructs an instance.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public TypesItemProviderAdapterFactory() {
-    supportedTypes.add(IEditingDomainItemProvider.class);
-    supportedTypes.add(IStructuredItemContentProvider.class);
-    supportedTypes.add(ITreeItemContentProvider.class);
-    supportedTypes.add(IItemLabelProvider.class);
-    supportedTypes.add(IItemPropertySource.class);
-  }
+	/**
+	 * This constructs an instance.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public TypesItemProviderAdapterFactory() {
+		supportedTypes.add(IEditingDomainItemProvider.class);
+		supportedTypes.add(IStructuredItemContentProvider.class);
+		supportedTypes.add(ITreeItemContentProvider.class);
+		supportedTypes.add(IItemLabelProvider.class);
+		supportedTypes.add(IItemPropertySource.class);
+	}
 
-  /**
-   * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.essentialocl.types.BagType} instances.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  protected BagTypeItemProvider bagTypeItemProvider;
+	/**
+	 * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.essentialocl.types.BagType} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected BagTypeItemProvider bagTypeItemProvider;
 
-  /**
-   * This creates an adapter for a {@link tudresden.ocl20.pivot.essentialocl.types.BagType}.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public Adapter createBagTypeAdapter() {
-    if (bagTypeItemProvider == null) {
-      bagTypeItemProvider = new BagTypeItemProvider(this);
-    }
+	/**
+	 * This creates an adapter for a {@link tudresden.ocl20.pivot.essentialocl.types.BagType}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createBagTypeAdapter() {
+		if (bagTypeItemProvider == null) {
+			bagTypeItemProvider = new BagTypeItemProvider(this);
+		}
 
-    return bagTypeItemProvider;
-  }
+		return bagTypeItemProvider;
+	}
 
-  /**
-   * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.essentialocl.types.TupleType} instances.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  protected TupleTypeItemProvider tupleTypeItemProvider;
+	/**
+	 * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.essentialocl.types.TupleType} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected TupleTypeItemProvider tupleTypeItemProvider;
 
-  /**
-   * This creates an adapter for a {@link tudresden.ocl20.pivot.essentialocl.types.TupleType}.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public Adapter createTupleTypeAdapter() {
-    if (tupleTypeItemProvider == null) {
-      tupleTypeItemProvider = new TupleTypeItemProvider(this);
-    }
+	/**
+	 * This creates an adapter for a {@link tudresden.ocl20.pivot.essentialocl.types.TupleType}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createTupleTypeAdapter() {
+		if (tupleTypeItemProvider == null) {
+			tupleTypeItemProvider = new TupleTypeItemProvider(this);
+		}
 
-    return tupleTypeItemProvider;
-  }
+		return tupleTypeItemProvider;
+	}
 
-  /**
-   * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.essentialocl.types.CollectionType} instances.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  protected CollectionTypeItemProvider collectionTypeItemProvider;
+	/**
+	 * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.essentialocl.types.CollectionType} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected CollectionTypeItemProvider collectionTypeItemProvider;
 
-  /**
-   * This creates an adapter for a {@link tudresden.ocl20.pivot.essentialocl.types.CollectionType}.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public Adapter createCollectionTypeAdapter() {
-    if (collectionTypeItemProvider == null) {
-      collectionTypeItemProvider = new CollectionTypeItemProvider(this);
-    }
+	/**
+	 * This creates an adapter for a {@link tudresden.ocl20.pivot.essentialocl.types.CollectionType}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createCollectionTypeAdapter() {
+		if (collectionTypeItemProvider == null) {
+			collectionTypeItemProvider = new CollectionTypeItemProvider(this);
+		}
 
-    return collectionTypeItemProvider;
-  }
+		return collectionTypeItemProvider;
+	}
 
-  /**
-   * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.essentialocl.types.InvalidType} instances.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  protected InvalidTypeItemProvider invalidTypeItemProvider;
+	/**
+	 * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.essentialocl.types.InvalidType} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected InvalidTypeItemProvider invalidTypeItemProvider;
 
-  /**
-   * This creates an adapter for a {@link tudresden.ocl20.pivot.essentialocl.types.InvalidType}.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public Adapter createInvalidTypeAdapter() {
-    if (invalidTypeItemProvider == null) {
-      invalidTypeItemProvider = new InvalidTypeItemProvider(this);
-    }
+	/**
+	 * This creates an adapter for a {@link tudresden.ocl20.pivot.essentialocl.types.InvalidType}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createInvalidTypeAdapter() {
+		if (invalidTypeItemProvider == null) {
+			invalidTypeItemProvider = new InvalidTypeItemProvider(this);
+		}
 
-    return invalidTypeItemProvider;
-  }
+		return invalidTypeItemProvider;
+	}
 
-  /**
-   * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.essentialocl.types.OrderedSetType} instances.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  protected OrderedSetTypeItemProvider orderedSetTypeItemProvider;
+	/**
+	 * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.essentialocl.types.OrderedSetType} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected OrderedSetTypeItemProvider orderedSetTypeItemProvider;
 
-  /**
-   * This creates an adapter for a {@link tudresden.ocl20.pivot.essentialocl.types.OrderedSetType}.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public Adapter createOrderedSetTypeAdapter() {
-    if (orderedSetTypeItemProvider == null) {
-      orderedSetTypeItemProvider = new OrderedSetTypeItemProvider(this);
-    }
+	/**
+	 * This creates an adapter for a {@link tudresden.ocl20.pivot.essentialocl.types.OrderedSetType}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createOrderedSetTypeAdapter() {
+		if (orderedSetTypeItemProvider == null) {
+			orderedSetTypeItemProvider = new OrderedSetTypeItemProvider(this);
+		}
 
-    return orderedSetTypeItemProvider;
-  }
+		return orderedSetTypeItemProvider;
+	}
 
-  /**
-   * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.essentialocl.types.SequenceType} instances.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  protected SequenceTypeItemProvider sequenceTypeItemProvider;
+	/**
+	 * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.essentialocl.types.SequenceType} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected SequenceTypeItemProvider sequenceTypeItemProvider;
 
-  /**
-   * This creates an adapter for a {@link tudresden.ocl20.pivot.essentialocl.types.SequenceType}.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public Adapter createSequenceTypeAdapter() {
-    if (sequenceTypeItemProvider == null) {
-      sequenceTypeItemProvider = new SequenceTypeItemProvider(this);
-    }
+	/**
+	 * This creates an adapter for a {@link tudresden.ocl20.pivot.essentialocl.types.SequenceType}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createSequenceTypeAdapter() {
+		if (sequenceTypeItemProvider == null) {
+			sequenceTypeItemProvider = new SequenceTypeItemProvider(this);
+		}
 
-    return sequenceTypeItemProvider;
-  }
+		return sequenceTypeItemProvider;
+	}
 
-  /**
-   * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.essentialocl.types.SetType} instances.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  protected SetTypeItemProvider setTypeItemProvider;
+	/**
+	 * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.essentialocl.types.SetType} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected SetTypeItemProvider setTypeItemProvider;
 
-  /**
-   * This creates an adapter for a {@link tudresden.ocl20.pivot.essentialocl.types.SetType}.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public Adapter createSetTypeAdapter() {
-    if (setTypeItemProvider == null) {
-      setTypeItemProvider = new SetTypeItemProvider(this);
-    }
+	/**
+	 * This creates an adapter for a {@link tudresden.ocl20.pivot.essentialocl.types.SetType}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createSetTypeAdapter() {
+		if (setTypeItemProvider == null) {
+			setTypeItemProvider = new SetTypeItemProvider(this);
+		}
 
-    return setTypeItemProvider;
-  }
+		return setTypeItemProvider;
+	}
 
-  /**
-   * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.essentialocl.types.VoidType} instances.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  protected VoidTypeItemProvider voidTypeItemProvider;
+	/**
+	 * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.essentialocl.types.VoidType} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected VoidTypeItemProvider voidTypeItemProvider;
 
-  /**
-   * This creates an adapter for a {@link tudresden.ocl20.pivot.essentialocl.types.VoidType}.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public Adapter createVoidTypeAdapter() {
-    if (voidTypeItemProvider == null) {
-      voidTypeItemProvider = new VoidTypeItemProvider(this);
-    }
+	/**
+	 * This creates an adapter for a {@link tudresden.ocl20.pivot.essentialocl.types.VoidType}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createVoidTypeAdapter() {
+		if (voidTypeItemProvider == null) {
+			voidTypeItemProvider = new VoidTypeItemProvider(this);
+		}
 
-    return voidTypeItemProvider;
-  }
+		return voidTypeItemProvider;
+	}
 
-  /**
-   * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.essentialocl.types.TypeType} instances.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  protected TypeTypeItemProvider typeTypeItemProvider;
+	/**
+	 * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.essentialocl.types.TypeType} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected TypeTypeItemProvider typeTypeItemProvider;
 
-  /**
-   * This creates an adapter for a {@link tudresden.ocl20.pivot.essentialocl.types.TypeType}.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public Adapter createTypeTypeAdapter() {
-    if (typeTypeItemProvider == null) {
-      typeTypeItemProvider = new TypeTypeItemProvider(this);
-    }
+	/**
+	 * This creates an adapter for a {@link tudresden.ocl20.pivot.essentialocl.types.TypeType}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createTypeTypeAdapter() {
+		if (typeTypeItemProvider == null) {
+			typeTypeItemProvider = new TypeTypeItemProvider(this);
+		}
 
-    return typeTypeItemProvider;
-  }
+		return typeTypeItemProvider;
+	}
 
-  /**
-   * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.essentialocl.types.OclLibrary} instances.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  protected OclLibraryItemProvider oclLibraryItemProvider;
+	/**
+	 * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.essentialocl.types.OclLibrary} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected OclLibraryItemProvider oclLibraryItemProvider;
 
-  /**
-   * This creates an adapter for a {@link tudresden.ocl20.pivot.essentialocl.types.OclLibrary}.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public Adapter createOclLibraryAdapter() {
-    if (oclLibraryItemProvider == null) {
-      oclLibraryItemProvider = new OclLibraryItemProvider(this);
-    }
+	/**
+	 * This creates an adapter for a {@link tudresden.ocl20.pivot.essentialocl.types.OclLibrary}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createOclLibraryAdapter() {
+		if (oclLibraryItemProvider == null) {
+			oclLibraryItemProvider = new OclLibraryItemProvider(this);
+		}
 
-    return oclLibraryItemProvider;
-  }
+		return oclLibraryItemProvider;
+	}
 
-  /**
-   * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.essentialocl.types.AnyType} instances.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  protected AnyTypeItemProvider anyTypeItemProvider;
+	/**
+	 * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.essentialocl.types.AnyType} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected AnyTypeItemProvider anyTypeItemProvider;
 
-  /**
-   * This creates an adapter for a {@link tudresden.ocl20.pivot.essentialocl.types.AnyType}.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public Adapter createAnyTypeAdapter() {
-    if (anyTypeItemProvider == null) {
-      anyTypeItemProvider = new AnyTypeItemProvider(this);
-    }
+	/**
+	 * This creates an adapter for a {@link tudresden.ocl20.pivot.essentialocl.types.AnyType}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createAnyTypeAdapter() {
+		if (anyTypeItemProvider == null) {
+			anyTypeItemProvider = new AnyTypeItemProvider(this);
+		}
 
-    return anyTypeItemProvider;
-  }
+		return anyTypeItemProvider;
+	}
 
-  /**
-   * This returns the root adapter factory that contains this factory.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public ComposeableAdapterFactory getRootAdapterFactory() {
-    return parentAdapterFactory == null ? this : parentAdapterFactory.getRootAdapterFactory();
-  }
+	/**
+	 * This returns the root adapter factory that contains this factory.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ComposeableAdapterFactory getRootAdapterFactory() {
+		return parentAdapterFactory == null ? this : parentAdapterFactory
+				.getRootAdapterFactory();
+	}
 
-  /**
-   * This sets the composed adapter factory that contains this factory.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setParentAdapterFactory(ComposedAdapterFactory parentAdapterFactory) {
-    this.parentAdapterFactory = parentAdapterFactory;
-  }
+	/**
+	 * This sets the composed adapter factory that contains this factory.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setParentAdapterFactory(
+			ComposedAdapterFactory parentAdapterFactory) {
+		this.parentAdapterFactory = parentAdapterFactory;
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public boolean isFactoryForType(Object type) {
-    return supportedTypes.contains(type) || super.isFactoryForType(type);
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean isFactoryForType(Object type) {
+		return supportedTypes.contains(type) || super.isFactoryForType(type);
+	}
 
-  /**
-   * This implementation substitutes the factory itself as the key for the adapter.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public Adapter adapt(Notifier notifier, Object type) {
-    return super.adapt(notifier,this);
-  }
+	/**
+	 * This implementation substitutes the factory itself as the key for the adapter.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter adapt(Notifier notifier, Object type) {
+		return super.adapt(notifier, this);
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public Object adapt(Object object, Object type) {
-    if (isFactoryForType(type)) {
-      Object adapter = super.adapt(object,type);
-      if (!(type instanceof Class) || (((Class<?>) type).isInstance(adapter))) {
-        return adapter;
-      }
-    }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object adapt(Object object, Object type) {
+		if (isFactoryForType(type)) {
+			Object adapter = super.adapt(object, type);
+			if (!(type instanceof Class<?>)
+					|| (((Class<?>) type).isInstance(adapter))) {
+				return adapter;
+			}
+		}
 
-    return null;
-  }
+		return null;
+	}
 
-  /**
-   * This adds a listener.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void addListener(INotifyChangedListener notifyChangedListener) {
-    changeNotifier.addListener(notifyChangedListener);
-  }
+	/**
+	 * This adds a listener.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void addListener(INotifyChangedListener notifyChangedListener) {
+		changeNotifier.addListener(notifyChangedListener);
+	}
 
-  /**
-   * This removes a listener.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void removeListener(INotifyChangedListener notifyChangedListener) {
-    changeNotifier.removeListener(notifyChangedListener);
-  }
+	/**
+	 * This removes a listener.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void removeListener(INotifyChangedListener notifyChangedListener) {
+		changeNotifier.removeListener(notifyChangedListener);
+	}
 
-  /**
-   * This delegates to {@link #changeNotifier} and to {@link #parentAdapterFactory}.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void fireNotifyChanged(Notification notification) {
-    changeNotifier.fireNotifyChanged(notification);
+	/**
+	 * This delegates to {@link #changeNotifier} and to {@link #parentAdapterFactory}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void fireNotifyChanged(Notification notification) {
+		changeNotifier.fireNotifyChanged(notification);
 
-    if (parentAdapterFactory != null) {
-      parentAdapterFactory.fireNotifyChanged(notification);
-    }
-  }
+		if (parentAdapterFactory != null) {
+			parentAdapterFactory.fireNotifyChanged(notification);
+		}
+	}
 
-  /**
-   * This disposes all of the item providers created by this factory. 
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void dispose() {
-    if (bagTypeItemProvider != null) bagTypeItemProvider.dispose();
-    if (tupleTypeItemProvider != null) tupleTypeItemProvider.dispose();
-    if (collectionTypeItemProvider != null) collectionTypeItemProvider.dispose();
-    if (invalidTypeItemProvider != null) invalidTypeItemProvider.dispose();
-    if (orderedSetTypeItemProvider != null) orderedSetTypeItemProvider.dispose();
-    if (sequenceTypeItemProvider != null) sequenceTypeItemProvider.dispose();
-    if (setTypeItemProvider != null) setTypeItemProvider.dispose();
-    if (voidTypeItemProvider != null) voidTypeItemProvider.dispose();
-    if (typeTypeItemProvider != null) typeTypeItemProvider.dispose();
-    if (oclLibraryItemProvider != null) oclLibraryItemProvider.dispose();
-    if (anyTypeItemProvider != null) anyTypeItemProvider.dispose();
-  }
+	/**
+	 * This disposes all of the item providers created by this factory. 
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void dispose() {
+		if (bagTypeItemProvider != null)
+			bagTypeItemProvider.dispose();
+		if (tupleTypeItemProvider != null)
+			tupleTypeItemProvider.dispose();
+		if (collectionTypeItemProvider != null)
+			collectionTypeItemProvider.dispose();
+		if (invalidTypeItemProvider != null)
+			invalidTypeItemProvider.dispose();
+		if (orderedSetTypeItemProvider != null)
+			orderedSetTypeItemProvider.dispose();
+		if (sequenceTypeItemProvider != null)
+			sequenceTypeItemProvider.dispose();
+		if (setTypeItemProvider != null)
+			setTypeItemProvider.dispose();
+		if (voidTypeItemProvider != null)
+			voidTypeItemProvider.dispose();
+		if (typeTypeItemProvider != null)
+			typeTypeItemProvider.dispose();
+		if (oclLibraryItemProvider != null)
+			oclLibraryItemProvider.dispose();
+		if (anyTypeItemProvider != null)
+			anyTypeItemProvider.dispose();
+	}
 
 }

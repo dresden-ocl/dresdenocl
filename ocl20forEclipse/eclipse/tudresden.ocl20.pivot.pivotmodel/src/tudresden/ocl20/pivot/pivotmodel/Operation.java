@@ -64,7 +64,7 @@ import org.eclipse.emf.common.util.EList;
  * @generated
  */
 public interface Operation extends Feature, TypedElement, NamedElement,
-		MultiplicityElement, ConstrainableElement, GenericElement {
+		ConstrainableElement, GenericElement {
 
 	/**
 	 * Returns the value of the '<em><b>Owning Type</b></em>' container reference. It is

@@ -154,43 +154,10 @@ public class JavaOperation extends AbstractOperation implements Operation {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.FeatureImpl#isMultiple()
-	 */
-	@Override
-	public boolean isMultiple() {
-
-		return JavaAdapterFactory.isMultiple(this.myMethod.getReturnType());
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.FeatureImpl#isOrdered()
-	 */
-	@Override
-	public boolean isOrdered() {
-
-		return JavaAdapterFactory.isOrdered(this.myMethod.getReturnType());
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
 	 * @see tudresden.ocl20.pivot.pivotmodel.impl.FeatureImpl#isStatic()
 	 */
 	public boolean isStatic() {
 
 		return Modifier.isStatic(this.myMethod.getModifiers());
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.FeatureImpl#isUnique()
-	 */
-	@Override
-	public boolean isUnique() {
-
-		return JavaAdapterFactory.isUnique(this.myMethod.getReturnType());
 	}
 }

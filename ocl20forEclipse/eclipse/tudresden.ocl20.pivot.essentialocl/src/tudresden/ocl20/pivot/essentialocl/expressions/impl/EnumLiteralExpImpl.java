@@ -61,8 +61,8 @@ public class EnumLiteralExpImpl extends LiteralExpImpl implements
 	/**
 	 * Logger for this class
 	 */
-	private static final Logger logger =
-			Logger.getLogger(EnumLiteralExpImpl.class);
+	private static final Logger logger = Logger
+			.getLogger(EnumLiteralExpImpl.class);
 
 	/**
 	 * The cached value of the '{@link #getReferredEnumLiteral() <em>Referred Enum Literal</em>}' reference.
@@ -78,7 +78,6 @@ public class EnumLiteralExpImpl extends LiteralExpImpl implements
 	 * @generated
 	 */
 	protected EnumLiteralExpImpl() {
-
 		super();
 	}
 
@@ -125,7 +124,6 @@ public class EnumLiteralExpImpl extends LiteralExpImpl implements
 	 * @generated
 	 */
 	public EnumerationLiteral getReferredEnumLiteral() {
-
 		return referredEnumLiteral;
 	}
 
@@ -134,11 +132,12 @@ public class EnumLiteralExpImpl extends LiteralExpImpl implements
 	 * @generated
 	 */
 	public void setReferredEnumLiteral(EnumerationLiteral newReferredEnumLiteral) {
-
 		EnumerationLiteral oldReferredEnumLiteral = referredEnumLiteral;
 		referredEnumLiteral = newReferredEnumLiteral;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
+			eNotify(new ENotificationImpl(
+					this,
+					Notification.SET,
 					ExpressionsPackageImpl.ENUM_LITERAL_EXP__REFERRED_ENUM_LITERAL,
 					oldReferredEnumLiteral, referredEnumLiteral));
 	}
@@ -149,7 +148,6 @@ public class EnumLiteralExpImpl extends LiteralExpImpl implements
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-
 		switch (featureID) {
 		case ExpressionsPackageImpl.ENUM_LITERAL_EXP__REFERRED_ENUM_LITERAL:
 			return getReferredEnumLiteral();
@@ -163,7 +161,6 @@ public class EnumLiteralExpImpl extends LiteralExpImpl implements
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-
 		switch (featureID) {
 		case ExpressionsPackageImpl.ENUM_LITERAL_EXP__REFERRED_ENUM_LITERAL:
 			setReferredEnumLiteral((EnumerationLiteral) newValue);
@@ -178,7 +175,6 @@ public class EnumLiteralExpImpl extends LiteralExpImpl implements
 	 */
 	@Override
 	public void eUnset(int featureID) {
-
 		switch (featureID) {
 		case ExpressionsPackageImpl.ENUM_LITERAL_EXP__REFERRED_ENUM_LITERAL:
 			setReferredEnumLiteral((EnumerationLiteral) null);
@@ -193,7 +189,6 @@ public class EnumLiteralExpImpl extends LiteralExpImpl implements
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-
 		switch (featureID) {
 		case ExpressionsPackageImpl.ENUM_LITERAL_EXP__REFERRED_ENUM_LITERAL:
 			return referredEnumLiteral != null;
@@ -207,7 +202,6 @@ public class EnumLiteralExpImpl extends LiteralExpImpl implements
 	 */
 	@Override
 	protected EClass eStaticClass() {
-
 		return ExpressionsPackageImpl.Literals.ENUM_LITERAL_EXP;
 	}
 

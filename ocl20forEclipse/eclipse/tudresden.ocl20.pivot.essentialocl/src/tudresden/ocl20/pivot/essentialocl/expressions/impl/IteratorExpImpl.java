@@ -57,7 +57,6 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp {
 	 * @generated
 	 */
 	protected IteratorExpImpl() {
-
 		super();
 	}
 
@@ -135,7 +134,8 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp {
 		// additional rule missing in the spec
 		else if (name.equals("sortedBy")) { //$NON-NLS-1$
 
-			if (sourceType instanceof SetType || sourceType instanceof OrderedSetType) {
+			if (sourceType instanceof SetType
+					|| sourceType instanceof OrderedSetType) {
 				type = getValidOclLibrary().getOrderedSetType(elementType);
 			}
 
@@ -163,7 +163,8 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp {
 
 			// flatten the type of the body expression
 			if (bodyType instanceof CollectionType) {
-				resultElementType = ((CollectionType) bodyType).getElementType();
+				resultElementType = ((CollectionType) bodyType)
+						.getElementType();
 			}
 
 			else {
@@ -216,8 +217,11 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp {
 				|| name.equals("reject") || name.equals("any") || name.equals("one")) { //$NON-NLS-1$//$NON-NLS-2$ //$NON-NLS-3$
 
 			if (body.getType() != oclLibrary.getOclBoolean()) {
-				throw new WellformednessException(this, "The body expression of an '" //$NON-NLS-1$
-						+ name + "' iterator expression must have the type Boolean."); //$NON-NLS-1$
+				throw new WellformednessException(
+						this,
+						"The body expression of an '" //$NON-NLS-1$
+								+ name
+								+ "' iterator expression must have the type Boolean."); //$NON-NLS-1$
 			}
 		}
 	}
@@ -228,7 +232,6 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-
 		return ExpressionsPackageImpl.Literals.ITERATOR_EXP;
 	}
 

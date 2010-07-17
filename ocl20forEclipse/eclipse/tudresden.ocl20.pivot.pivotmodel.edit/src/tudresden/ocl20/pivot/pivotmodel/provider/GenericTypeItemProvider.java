@@ -66,7 +66,6 @@ public class GenericTypeItemProvider extends NamedElementItemProvider implements
 	 * @generated
 	 */
 	public GenericTypeItemProvider(AdapterFactory adapterFactory) {
-
 		super(adapterFactory);
 	}
 
@@ -78,7 +77,6 @@ public class GenericTypeItemProvider extends NamedElementItemProvider implements
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
-
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
@@ -99,7 +97,8 @@ public class GenericTypeItemProvider extends NamedElementItemProvider implements
 	@Override
 	public Object getImage(Object object) {
 
-		EReference eContainmentFeature = ((EObject) object).eContainmentFeature();
+		EReference eContainmentFeature = ((EObject) object)
+				.eContainmentFeature();
 
 		if (eContainmentFeature == PivotModelPackageImpl.Literals.TYPE__GENERIC_SUPER_TYPE) {
 			return overlayImage(object, getResourceLocator().getImage(
@@ -134,7 +133,6 @@ public class GenericTypeItemProvider extends NamedElementItemProvider implements
 	 */
 	@Override
 	public void notifyChanged(Notification notification) {
-
 		updateChildren(notification);
 		super.notifyChanged(notification);
 	}
@@ -149,7 +147,6 @@ public class GenericTypeItemProvider extends NamedElementItemProvider implements
 	@Override
 	protected void collectNewChildDescriptors(
 			Collection<Object> newChildDescriptors, Object object) {
-
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 	}
 

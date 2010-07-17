@@ -57,7 +57,6 @@ public class SetTypeImpl extends CollectionTypeImpl implements SetType {
 	 * @generated
 	 */
 	protected SetTypeImpl() {
-
 		super();
 	}
 
@@ -67,7 +66,6 @@ public class SetTypeImpl extends CollectionTypeImpl implements SetType {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-
 		return TypesPackageImpl.Literals.SET_TYPE;
 	}
 

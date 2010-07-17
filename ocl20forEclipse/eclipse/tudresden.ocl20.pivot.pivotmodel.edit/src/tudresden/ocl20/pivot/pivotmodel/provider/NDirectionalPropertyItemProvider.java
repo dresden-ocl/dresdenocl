@@ -51,6 +51,7 @@ import org.eclipse.emf.edit.provider.ViewerNotification;
 import tudresden.ocl20.pivot.pivotmodel.NDirectionalProperty;
 import tudresden.ocl20.pivot.pivotmodel.PivotModelFactory;
 
+import tudresden.ocl20.pivot.pivotmodel.PivotModelPackage;
 import tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl;
 
 /**
@@ -101,7 +102,7 @@ public class NDirectionalPropertyItemProvider extends PropertyItemProvider
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
 			childrenFeatures
-					.add(PivotModelPackageImpl.Literals.NDIRECTIONAL_PROPERTY__INVERSE_NDIRECTIONAL_PROPERTIES);
+					.add(PivotModelPackage.Literals.NDIRECTIONAL_PROPERTY__INVERSE_NDIRECTIONAL_PROPERTIES);
 		}
 		return childrenFeatures;
 	}
@@ -156,7 +157,7 @@ public class NDirectionalPropertyItemProvider extends PropertyItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(NDirectionalProperty.class)) {
-		case PivotModelPackageImpl.NDIRECTIONAL_PROPERTY__INVERSE_NDIRECTIONAL_PROPERTIES:
+		case PivotModelPackage.NDIRECTIONAL_PROPERTY__INVERSE_NDIRECTIONAL_PROPERTIES:
 			fireNotifyChanged(new ViewerNotification(notification, notification
 					.getNotifier(), true, false));
 			return;
@@ -178,8 +179,9 @@ public class NDirectionalPropertyItemProvider extends PropertyItemProvider
 
 		newChildDescriptors
 				.add(createChildParameter(
-						PivotModelPackageImpl.Literals.NDIRECTIONAL_PROPERTY__INVERSE_NDIRECTIONAL_PROPERTIES,
-						PivotModelFactory.eINSTANCE.createNDirectionalProperty()));
+						PivotModelPackage.Literals.NDIRECTIONAL_PROPERTY__INVERSE_NDIRECTIONAL_PROPERTIES,
+						PivotModelFactory.eINSTANCE
+								.createNDirectionalProperty()));
 	}
 
 }

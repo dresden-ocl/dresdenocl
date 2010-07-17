@@ -36,6 +36,7 @@ import junit.textui.TestRunner;
 
 import tudresden.ocl20.pivot.pivotmodel.Namespace;
 
+import tudresden.ocl20.pivot.pivotmodel.PivotModelFactory;
 import tudresden.ocl20.pivot.pivotmodel.impl.PivotModelFactoryImpl;
 
 /**
@@ -67,7 +68,6 @@ public class NamespaceTest extends NamedElementTest {
 	 * @generated
 	 */
 	public static void main(String[] args) {
-
 		TestRunner.run(NamespaceTest.class);
 	}
 
@@ -78,7 +78,6 @@ public class NamespaceTest extends NamedElementTest {
 	 * @generated
 	 */
 	public NamespaceTest(String name) {
-
 		super(name);
 	}
 
@@ -90,7 +89,6 @@ public class NamespaceTest extends NamedElementTest {
 	 */
 	@Override
 	protected Namespace getFixture() {
-
 		return (Namespace) fixture;
 	}
 
@@ -102,8 +100,7 @@ public class NamespaceTest extends NamedElementTest {
 	 */
 	@Override
 	protected void setUp() throws Exception {
-
-		setFixture(PivotModelFactoryImpl.eINSTANCE.createNamespace());
+		setFixture(PivotModelFactory.eINSTANCE.createNamespace());
 	}
 
 	/**
@@ -114,7 +111,6 @@ public class NamespaceTest extends NamedElementTest {
 	 */
 	@Override
 	protected void tearDown() throws Exception {
-
 		setFixture(null);
 	}
 
@@ -126,7 +122,6 @@ public class NamespaceTest extends NamedElementTest {
 	 * @generated
 	 */
 	public void testAddType__Type() {
-
 		// TODO: implement this operation test method
 		// Ensure that you remove @generated or mark it @generated NOT
 		fail();
@@ -140,7 +135,6 @@ public class NamespaceTest extends NamedElementTest {
 	 * @generated
 	 */
 	public void testAddRule__Constraint() {
-
 		// TODO: implement this operation test method
 		// Ensure that you remove @generated or mark it @generated NOT
 		fail();
@@ -154,7 +148,6 @@ public class NamespaceTest extends NamedElementTest {
 	 * @generated
 	 */
 	public void testAddNestedNamespace__Namespace() {
-
 		// TODO: implement this operation test method
 		// Ensure that you remove @generated or mark it @generated NOT
 		fail();
@@ -168,7 +161,6 @@ public class NamespaceTest extends NamedElementTest {
 	 * @generated
 	 */
 	public void testGetOwnedAndNestedRules() {
-
 		// TODO: implement this operation test method
 		// Ensure that you remove @generated or mark it @generated NOT
 		fail();
@@ -182,7 +174,6 @@ public class NamespaceTest extends NamedElementTest {
 	 * @generated
 	 */
 	public void testLookupType__String() {
-
 		// TODO: implement this operation test method
 		// Ensure that you remove @generated or mark it @generated NOT
 		fail();
@@ -196,7 +187,6 @@ public class NamespaceTest extends NamedElementTest {
 	 * @generated
 	 */
 	public void testLookupNamespace__String() {
-
 		// TODO: implement this operation test method
 		// Ensure that you remove @generated or mark it @generated NOT
 		fail();
@@ -210,7 +200,6 @@ public class NamespaceTest extends NamedElementTest {
 	 * @generated
 	 */
 	public void testRemoveOwnedAndNestedRules() {
-
 		// TODO: implement this operation test method
 		// Ensure that you remove @generated or mark it @generated NOT
 		fail();
@@ -224,7 +213,6 @@ public class NamespaceTest extends NamedElementTest {
 	 * @generated
 	 */
 	public void testRemoveOwnedAndNestedRules__List() {
-
 		// TODO: implement this operation test method
 		// Ensure that you remove @generated or mark it @generated NOT
 		fail();
@@ -238,7 +226,6 @@ public class NamespaceTest extends NamedElementTest {
 	 * @generated
 	 */
 	public void testAddTypeParameter__TypeParameter() {
-
 		// TODO: implement this operation test method
 		// Ensure that you remove @generated or mark it @generated NOT
 		fail();
@@ -252,7 +239,6 @@ public class NamespaceTest extends NamedElementTest {
 	 * @generated
 	 */
 	public void testBindTypeParameter__List_List() {
-
 		// TODO: implement this operation test method
 		// Ensure that you remove @generated or mark it @generated NOT
 		fail();

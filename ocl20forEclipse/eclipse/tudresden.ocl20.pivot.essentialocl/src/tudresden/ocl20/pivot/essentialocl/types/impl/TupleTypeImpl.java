@@ -106,7 +106,8 @@ public class TupleTypeImpl extends TypeImpl implements TupleType {
 							propertyChangeAdapter);
 					break;
 				case Notification.ADD_MANY:
-					for (PropertyImpl p : ((List<PropertyImpl>) msg.getNewValue())) {
+					for (PropertyImpl p : ((List<PropertyImpl>) msg
+							.getNewValue())) {
 						p.eAdapters().add(propertyChangeAdapter);
 					}
 					break;
@@ -115,7 +116,8 @@ public class TupleTypeImpl extends TypeImpl implements TupleType {
 							propertyChangeAdapter);
 					break;
 				case Notification.REMOVE_MANY:
-					for (PropertyImpl p : ((List<PropertyImpl>) msg.getNewValue())) {
+					for (PropertyImpl p : ((List<PropertyImpl>) msg
+							.getNewValue())) {
 						p.eAdapters().remove(propertyChangeAdapter);
 					}
 					break;
@@ -140,8 +142,8 @@ public class TupleTypeImpl extends TypeImpl implements TupleType {
 	private static Map<String, TupleType> tupleTypes;
 
 	// a logger for this class
-	private static final Logger logger =
-			EssentialOclPlugin.getLogger(TupleTypeImpl.class);
+	private static final Logger logger = EssentialOclPlugin
+			.getLogger(TupleTypeImpl.class);
 
 	/**
 	 * This is an additional operation defined in the OCL 2.0 Specification
@@ -265,7 +267,8 @@ public class TupleTypeImpl extends TypeImpl implements TupleType {
 		name.append(')');
 
 		if (logger.isDebugEnabled()) {
-			logger.debug("determineTupleTypeName() - exit - return value=" + name); //$NON-NLS-1$
+			logger
+					.debug("determineTupleTypeName() - exit - return value=" + name); //$NON-NLS-1$
 		}
 
 		return name.toString();
@@ -282,10 +285,9 @@ public class TupleTypeImpl extends TypeImpl implements TupleType {
 
 		// tuples may not have operations, so we prevent this with an unmodifiable
 		// list
-		ownedOperation =
-				new EcoreEList.UnmodifiableEList<Operation>(this,
-						PivotModelPackageImpl.Literals.TYPE__OWNED_OPERATION, 0,
-						new Operation[] {});
+		ownedOperation = new EcoreEList.UnmodifiableEList<Operation>(this,
+				PivotModelPackageImpl.Literals.TYPE__OWNED_OPERATION, 0,
+				new Operation[] {});
 
 		// add an adapter that listens for changes to the owned properties
 		eAdapters().add(new PropertiesChangedAdapter());
@@ -373,7 +375,6 @@ public class TupleTypeImpl extends TypeImpl implements TupleType {
 	 * @generated
 	 */
 	public OclLibrary getOclLibrary() {
-
 		return oclLibrary;
 	}
 
@@ -385,12 +386,12 @@ public class TupleTypeImpl extends TypeImpl implements TupleType {
 	 * @generated
 	 */
 	public void setOclLibrary(OclLibrary newOclLibrary) {
-
 		OclLibrary oldOclLibrary = oclLibrary;
 		oclLibrary = newOclLibrary;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
-					TypesPackageImpl.TUPLE_TYPE__OCL_LIBRARY, oldOclLibrary, oclLibrary));
+					TypesPackageImpl.TUPLE_TYPE__OCL_LIBRARY, oldOclLibrary,
+					oclLibrary));
 	}
 
 	/**
@@ -450,9 +451,8 @@ public class TupleTypeImpl extends TypeImpl implements TupleType {
 
 				else {
 					Type ownPropertyType = ownProperty.getType();
-					conformant =
-							(ownPropertyType != null) ? ownPropertyType
-									.conformsTo(otherProperty.getType()) : false;
+					conformant = (ownPropertyType != null) ? ownPropertyType
+							.conformsTo(otherProperty.getType()) : false;
 				}
 			}
 		}
@@ -519,14 +519,14 @@ public class TupleTypeImpl extends TypeImpl implements TupleType {
 					Type propertyType = ownProperty.getType();
 
 					if (propertyType != null) {
-						propertyType =
-								propertyType.commonSuperType(otherProperty.getType());
+						propertyType = propertyType
+								.commonSuperType(otherProperty.getType());
 
 						// we found a common super type, create a new property with name and
 						// this type
 						if (propertyType != null) {
-							Property commmonProperty =
-									PivotModelFactory.eINSTANCE.createProperty();
+							Property commmonProperty = PivotModelFactory.eINSTANCE
+									.createProperty();
 							commmonProperty.setName(propertyName);
 							commmonProperty.setType(propertyType);
 							commonProperties.add(commmonProperty);
@@ -566,7 +566,8 @@ public class TupleTypeImpl extends TypeImpl implements TupleType {
 			logger.debug("addOperation(o=" + o + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 
-		throw new UnsupportedOperationException("Tuples may not own operations!"); //$NON-NLS-1$
+		throw new UnsupportedOperationException(
+				"Tuples may not own operations!"); //$NON-NLS-1$
 	}
 
 	/*
@@ -612,7 +613,6 @@ public class TupleTypeImpl extends TypeImpl implements TupleType {
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-
 		switch (featureID) {
 		case TypesPackageImpl.TUPLE_TYPE__OCL_LIBRARY:
 			return getOclLibrary();
@@ -626,7 +626,6 @@ public class TupleTypeImpl extends TypeImpl implements TupleType {
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-
 		switch (featureID) {
 		case TypesPackageImpl.TUPLE_TYPE__OCL_LIBRARY:
 			setOclLibrary((OclLibrary) newValue);
@@ -641,7 +640,6 @@ public class TupleTypeImpl extends TypeImpl implements TupleType {
 	 */
 	@Override
 	public void eUnset(int featureID) {
-
 		switch (featureID) {
 		case TypesPackageImpl.TUPLE_TYPE__OCL_LIBRARY:
 			setOclLibrary((OclLibrary) null);
@@ -677,7 +675,6 @@ public class TupleTypeImpl extends TypeImpl implements TupleType {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-
 		return TypesPackageImpl.Literals.TUPLE_TYPE;
 	}
 

@@ -42,25 +42,25 @@ import tudresden.ocl20.pivot.essentialocl.expressions.PrimitiveLiteralExp;
  */
 public abstract class PrimitiveLiteralExpTest extends LiteralExpTest {
 
-  /**
-   * Constructs a new Primitive Literal Exp test case with the given name.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public PrimitiveLiteralExpTest(String name) {
-    super(name);
-  }
+	/**
+	 * Constructs a new Primitive Literal Exp test case with the given name.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public PrimitiveLiteralExpTest(String name) {
+		super(name);
+	}
 
-  /**
-   * Returns the fixture for this Primitive Literal Exp test case.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  protected PrimitiveLiteralExp getFixture() {
-    return (PrimitiveLiteralExp) fixture;
-  }
+	/**
+	 * Returns the fixture for this Primitive Literal Exp test case.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected PrimitiveLiteralExp getFixture() {
+		return (PrimitiveLiteralExp) fixture;
+	}
 
 } //PrimitiveLiteralExpTest

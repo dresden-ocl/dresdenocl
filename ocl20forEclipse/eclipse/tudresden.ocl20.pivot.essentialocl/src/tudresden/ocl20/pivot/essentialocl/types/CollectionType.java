@@ -55,7 +55,7 @@ import tudresden.ocl20.pivot.pivotmodel.TypeParameter;
  *
  * @generated
  */
-public interface CollectionType extends EObject, Type {
+public interface CollectionType extends Type {
 
 	/**
 	 * Returns the value of the '<em><b>Element Type</b></em>' reference.

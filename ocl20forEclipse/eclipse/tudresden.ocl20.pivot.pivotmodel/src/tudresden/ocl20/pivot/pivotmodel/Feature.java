@@ -57,7 +57,7 @@ package tudresden.ocl20.pivot.pivotmodel;
  * @model abstract="true"
  * @generated
  */
-public interface Feature extends TypedElement, MultiplicityElement {
+public interface Feature extends TypedElement {
 
 	/**
 	 * Returns the value of the '<em><b>Static</b></em>' attribute.

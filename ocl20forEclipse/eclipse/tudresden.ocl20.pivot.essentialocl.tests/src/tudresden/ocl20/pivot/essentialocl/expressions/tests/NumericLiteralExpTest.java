@@ -42,25 +42,25 @@ import tudresden.ocl20.pivot.essentialocl.expressions.NumericLiteralExp;
  */
 public abstract class NumericLiteralExpTest extends PrimitiveLiteralExpTest {
 
-  /**
-   * Constructs a new Numeric Literal Exp test case with the given name.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public NumericLiteralExpTest(String name) {
-    super(name);
-  }
+	/**
+	 * Constructs a new Numeric Literal Exp test case with the given name.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NumericLiteralExpTest(String name) {
+		super(name);
+	}
 
-  /**
-   * Returns the fixture for this Numeric Literal Exp test case.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  protected NumericLiteralExp getFixture() {
-    return (NumericLiteralExp) fixture;
-  }
+	/**
+	 * Returns the fixture for this Numeric Literal Exp test case.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected NumericLiteralExp getFixture() {
+		return (NumericLiteralExp) fixture;
+	}
 
 } //NumericLiteralExpTest

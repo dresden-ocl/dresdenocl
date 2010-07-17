@@ -49,7 +49,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="genericType" eType="#//GenericType"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Feature" abstract="true" eSuperTypes="#//TypedElement #//MultiplicityElement">
+  <eClassifiers xsi:type="ecore:EClass" name="Feature" abstract="true" eSuperTypes="#//TypedElement">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="&lt;p>&#xD;&#xA;An additional metaclass in comparison with &#xD;&#xA;UML::Core::Basic, a &lt;code>Feature&lt;/code> introduces &#xD;&#xA;the notion of a class-scope (i.e. static) feature in a {@link &#xD;&#xA;Type}.&#xD;&#xA;&lt;/p>"/>
     </eAnnotations>
@@ -57,30 +57,6 @@
         defaultValueLiteral="false">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="&lt;code>&#xD;&#xA;Specifies whether this feature characterizes individual &#xD;&#xA;instances classified by a {@link Type} &#xD;&#xA;(&lt;code>false&lt;/code>) or the type itself &#xD;&#xA;(&lt;code>true&lt;/code>). Default value is &#xD;&#xA;&lt;code>false&lt;/code>.&#xD;&#xA;&lt;/code>"/>
-      </eAnnotations>
-    </eStructuralFeatures>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="MultiplicityElement" abstract="true"
-      interface="true">
-    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="&lt;p>&#xD;&#xA;A &lt;code>MultiplicityElement&lt;/code> is an abstract &#xD;&#xA;metaclass which includes optional attributes for defining &#xD;&#xA;properties related to the multiplicity of an element.&#xD;&#xA;&lt;/p>&#xD;&#xA;"/>
-    </eAnnotations>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="ordered" eType="ecore:EDataType datatypes.ecore#//Boolean"
-        defaultValueLiteral="false">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="&lt;p>&#xD;&#xA;For a multivalued multiplicity, this attribute specifies whether &#xD;&#xA;the values in an instantiation of this element are&#xD;&#xA;sequentially ordered. Default is &lt;code>false&lt;/code>.&#xD;&#xA;&lt;/p>"/>
-      </eAnnotations>
-    </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="unique" eType="ecore:EDataType datatypes.ecore#//Boolean"
-        defaultValueLiteral="true">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="&lt;p>&#xD;&#xA;For a multivalued multiplicity, this attributes specifies &#xD;&#xA;whether the values in an instantiation of this element are &#xD;&#xA;unique. Default is &lt;code>true&lt;/code>.&#xD;&#xA;&lt;/p>"/>
-      </eAnnotations>
-    </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="multiple" eType="ecore:EDataType datatypes.ecore#//Boolean"
-        defaultValueLiteral="false">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="&lt;p>&#xD;&#xA;Specifies whether this multiplity element has an upper bound larger than 1. Default is &lt;code>false&lt;/code>.&#xD;&#xA;&#xD;&#xA;The reason for not including concrete lower and upper &#xD;&#xA;bounds in the Pivot Model is that for an evaluation with &#xD;&#xA;OCL this information is not needed. The distinction between &#xD;&#xA;single-valued and multi-valued multiplicities suffices.&#xD;&#xA;&lt;/p>"/>
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
@@ -355,7 +331,7 @@
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Property" eSuperTypes="#//Feature #//TypedElement #//NamedElement #//MultiplicityElement #//ConstrainableElement">
+  <eClassifiers xsi:type="ecore:EClass" name="Property" eSuperTypes="#//Feature #//TypedElement #//NamedElement #//ConstrainableElement">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="&lt;p>&#xD;&#xA;A &lt;code>Property&lt;/code> is a {@link TypedElement} &#xD;&#xA;typed element that represents an attribute of a {@link &#xD;&#xA;Type} or an association to another type.&#xD;&#xA;&lt;/p>"/>
     </eAnnotations>
@@ -372,7 +348,7 @@
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Operation" eSuperTypes="#//Feature #//TypedElement #//NamedElement #//MultiplicityElement #//ConstrainableElement #//GenericElement">
+  <eClassifiers xsi:type="ecore:EClass" name="Operation" eSuperTypes="#//Feature #//TypedElement #//NamedElement #//ConstrainableElement #//GenericElement">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="&lt;p>&#xD;&#xA;An operation is a behavioral feature of a {@link Type} that &#xD;&#xA;specifies the name, type, parameters, and constraints for &#xD;&#xA;invoking an associated behavior.&#xD;&#xA;&lt;/p>"/>
     </eAnnotations>
@@ -429,7 +405,7 @@
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Parameter" eSuperTypes="#//TypedElement #//NamedElement #//MultiplicityElement">
+  <eClassifiers xsi:type="ecore:EClass" name="Parameter" eSuperTypes="#//TypedElement #//NamedElement">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="&lt;p>&#xD;&#xA;A &lt;code>Parameter&lt;/code> is a specification of an argument used to pass information into or out of an invocation of an {@link Operation}.&#xD;&#xA;&lt;/p>"/>
     </eAnnotations>

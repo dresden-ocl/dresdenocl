@@ -34,6 +34,7 @@ package tudresden.ocl20.pivot.pivotmodel.tests;
 
 import junit.textui.TestRunner;
 
+import tudresden.ocl20.pivot.pivotmodel.PivotModelFactory;
 import tudresden.ocl20.pivot.pivotmodel.TypeParameter;
 
 import tudresden.ocl20.pivot.pivotmodel.impl.PivotModelFactoryImpl;
@@ -52,7 +53,6 @@ public class TypeParameterTest extends NamedElementTest {
 	 * @generated
 	 */
 	public static void main(String[] args) {
-
 		TestRunner.run(TypeParameterTest.class);
 	}
 
@@ -63,7 +63,6 @@ public class TypeParameterTest extends NamedElementTest {
 	 * @generated
 	 */
 	public TypeParameterTest(String name) {
-
 		super(name);
 	}
 
@@ -75,7 +74,6 @@ public class TypeParameterTest extends NamedElementTest {
 	 */
 	@Override
 	protected TypeParameter getFixture() {
-
 		return (TypeParameter) fixture;
 	}
 
@@ -87,8 +85,7 @@ public class TypeParameterTest extends NamedElementTest {
 	 */
 	@Override
 	protected void setUp() throws Exception {
-
-		setFixture(PivotModelFactoryImpl.eINSTANCE.createTypeParameter());
+		setFixture(PivotModelFactory.eINSTANCE.createTypeParameter());
 	}
 
 	/**
@@ -99,7 +96,6 @@ public class TypeParameterTest extends NamedElementTest {
 	 */
 	@Override
 	protected void tearDown() throws Exception {
-
 		setFixture(null);
 	}
 

@@ -42,25 +42,25 @@ import tudresden.ocl20.pivot.essentialocl.expressions.LoopExp;
  */
 public abstract class LoopExpTest extends CallExpTest {
 
-  /**
-   * Constructs a new Loop Exp test case with the given name.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public LoopExpTest(String name) {
-    super(name);
-  }
+	/**
+	 * Constructs a new Loop Exp test case with the given name.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public LoopExpTest(String name) {
+		super(name);
+	}
 
-  /**
-   * Returns the fixture for this Loop Exp test case.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  protected LoopExp getFixture() {
-    return (LoopExp) fixture;
-  }
+	/**
+	 * Returns the fixture for this Loop Exp test case.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected LoopExp getFixture() {
+		return (LoopExp) fixture;
+	}
 
 } //LoopExpTest

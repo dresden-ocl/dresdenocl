@@ -34,34 +34,34 @@ package tudresden.ocl20.pivot.essentialocl.expressions.impl;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import tudresden.ocl20.pivot.essentialocl.expressions.FeatureCallExp;
 import tudresden.ocl20.pivot.essentialocl.expressions.WellformednessException;
 import tudresden.ocl20.pivot.pivotmodel.Feature;
-import tudresden.ocl20.pivot.pivotmodel.MultiplicityElement;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 
 /**
- * <!-- begin-user-doc --> An implementation of the model object '<em><b>Feature Call Exp</b></em>'.
- * <!-- end-user-doc -->
+ * <!-- begin-user-doc --> An implementation of the model object '
+ * <em><b>Feature Call Exp</b></em>'. <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.FeatureCallExpImpl#getSourceType <em>Source Type</em>}</li>
+ * <li>
+ * {@link tudresden.ocl20.pivot.essentialocl.expressions.impl.FeatureCallExpImpl#getSourceType
+ * <em>Source Type</em>}</li>
  * </ul>
  * </p>
- *
+ * 
  * @generated
  */
 public abstract class FeatureCallExpImpl extends CallExpImpl implements
 		FeatureCallExp {
 
 	/**
-	 * The cached value of the '{@link #getSourceType() <em>Source Type</em>}' reference. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getSourceType() <em>Source Type</em>}'
+	 * reference. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getSourceType()
 	 * @generated
@@ -71,76 +71,25 @@ public abstract class FeatureCallExpImpl extends CallExpImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected FeatureCallExpImpl() {
-
 		super();
 	}
 
 	/**
-	 * Overridden to additionally convert the type into a collection type if necessary.
-	 * 
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.OclExpressionImpl#getOclType(tudresden.ocl20.pivot.pivotmodel.Type)
-	 */
-	@Override
-	protected Type getOclType(Type type) {
-
-		// use super implementation
-		type = super.getOclType(type);
-
-		// convert to collection type if necessary
-		type = convertToCollectionType(type, getFeature());
-
-		return type;
-	}
-
-	/**
-	 * Helper method for subclasses to convert the given type into a collection type if necessary
-	 * based on the multiplicity attributes of the given feature.
-	 */
-	private Type convertToCollectionType(Type type, MultiplicityElement element) {
-
-		if (element.isMultiple()) {
-
-			if (element.isUnique()) {
-
-				if (element.isOrdered()) {
-					type = oclLibrary.getOrderedSetType(type);
-				}
-
-				else {
-					type = oclLibrary.getSetType(type);
-				}
-
-			}
-
-			else {
-
-				if (element.isOrdered()) {
-					type = oclLibrary.getSequenceType(type);
-				}
-
-				else {
-					type = oclLibrary.getBagType(type);
-				}
-			}
-		}
-
-		return type;
-	}
-
-	/**
-	 * Returns the {@link Feature feature}referenced by this <code>FeatureCallExp</code>. Needs to
-	 * be implemented in subclasses.
+	 * Returns the {@link Feature feature}referenced by this
+	 * <code>FeatureCallExp</code>. Needs to be implemented in subclasses.
 	 * 
 	 * @return a <code>Feature</code> instance.
 	 */
 	protected abstract Feature getFeature();
 
 	/**
-	 * The EMF implementation is altered to return the type of the {@link #getSource() source} of this
-	 * <code>FeatureCallExp</code> if no explicit source type has been set.
+	 * The EMF implementation is altered to return the type of the
+	 * {@link #getSource() source} of this <code>FeatureCallExp</code> if no
+	 * explicit source type has been set.
 	 * 
 	 * @see tudresden.ocl20.pivot.essentialocl.expressions.FeatureCallExp#getSourceType()
 	 * 
@@ -150,7 +99,8 @@ public abstract class FeatureCallExpImpl extends CallExpImpl implements
 
 		Type srcType;
 
-		// determine the source type either via the source or via the sourceType field
+		// determine the source type either via the source or via the sourceType
+		// field
 		srcType = source != null ? source.getType() : sourceType;
 
 		if (srcType == null) {
@@ -162,18 +112,20 @@ public abstract class FeatureCallExpImpl extends CallExpImpl implements
 	}
 
 	/**
-	 * <!-- begin-user-doc --> The code for {@link #getSourceType()} is forwarded to this method. <!--
-	 * end-user-doc -->
+	 * <!-- begin-user-doc --> The code for {@link #getSourceType()} is
+	 * forwarded to this method. <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public Type getSourceTypeGen() {
-
-		if (sourceType != null && ((EObject) sourceType).eIsProxy()) {
+		if (sourceType != null && sourceType.eIsProxy()) {
 			InternalEObject oldSourceType = (InternalEObject) sourceType;
 			sourceType = (Type) eResolveProxy(oldSourceType);
 			if (sourceType != oldSourceType) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE,
+					eNotify(new ENotificationImpl(
+							this,
+							Notification.RESOLVE,
 							ExpressionsPackageImpl.FEATURE_CALL_EXP__SOURCE_TYPE,
 							oldSourceType, sourceType));
 			}
@@ -183,34 +135,34 @@ public abstract class FeatureCallExpImpl extends CallExpImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public Type basicGetSourceType() {
-
 		return sourceType;
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public void setSourceType(Type newSourceType) {
-
 		Type oldSourceType = sourceType;
 		sourceType = newSourceType;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
-					ExpressionsPackageImpl.FEATURE_CALL_EXP__SOURCE_TYPE, oldSourceType,
-					sourceType));
+					ExpressionsPackageImpl.FEATURE_CALL_EXP__SOURCE_TYPE,
+					oldSourceType, sourceType));
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-
 		switch (featureID) {
 		case ExpressionsPackageImpl.FEATURE_CALL_EXP__SOURCE_TYPE:
 			if (resolve)
@@ -222,11 +174,11 @@ public abstract class FeatureCallExpImpl extends CallExpImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-
 		switch (featureID) {
 		case ExpressionsPackageImpl.FEATURE_CALL_EXP__SOURCE_TYPE:
 			setSourceType((Type) newValue);
@@ -237,11 +189,11 @@ public abstract class FeatureCallExpImpl extends CallExpImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public void eUnset(int featureID) {
-
 		switch (featureID) {
 		case ExpressionsPackageImpl.FEATURE_CALL_EXP__SOURCE_TYPE:
 			setSourceType((Type) null);
@@ -252,11 +204,11 @@ public abstract class FeatureCallExpImpl extends CallExpImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-
 		switch (featureID) {
 		case ExpressionsPackageImpl.FEATURE_CALL_EXP__SOURCE_TYPE:
 			return sourceType != null;
@@ -266,11 +218,11 @@ public abstract class FeatureCallExpImpl extends CallExpImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	protected EClass eStaticClass() {
-
 		return ExpressionsPackageImpl.Literals.FEATURE_CALL_EXP;
 	}
 

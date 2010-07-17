@@ -43,5 +43,5 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
  *
  * @generated
  */
-public interface AnyType extends EObject, Type {
+public interface AnyType extends Type {
 } // AnyType

@@ -44,42 +44,42 @@ import tudresden.ocl20.pivot.essentialocl.expressions.CollectionLiteralPart;
  */
 public abstract class CollectionLiteralPartTest extends TestCase {
 
-  /**
-   * The fixture for this Collection Literal Part test case.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  protected CollectionLiteralPart fixture = null;
+	/**
+	 * The fixture for this Collection Literal Part test case.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected CollectionLiteralPart fixture = null;
 
-  /**
-   * Constructs a new Collection Literal Part test case with the given name.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public CollectionLiteralPartTest(String name) {
-    super(name);
-  }
+	/**
+	 * Constructs a new Collection Literal Part test case with the given name.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public CollectionLiteralPartTest(String name) {
+		super(name);
+	}
 
-  /**
-   * Sets the fixture for this Collection Literal Part test case.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  protected void setFixture(CollectionLiteralPart fixture) {
-    this.fixture = fixture;
-  }
+	/**
+	 * Sets the fixture for this Collection Literal Part test case.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void setFixture(CollectionLiteralPart fixture) {
+		this.fixture = fixture;
+	}
 
-  /**
-   * Returns the fixture for this Collection Literal Part test case.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  protected CollectionLiteralPart getFixture() {
-    return fixture;
-  }
+	/**
+	 * Returns the fixture for this Collection Literal Part test case.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected CollectionLiteralPart getFixture() {
+		return fixture;
+	}
 
 } //CollectionLiteralPartTest

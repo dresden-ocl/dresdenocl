@@ -53,6 +53,7 @@ import org.eclipse.emf.edit.provider.ViewerNotification;
 import tudresden.ocl20.pivot.pivotmodel.Operation;
 import tudresden.ocl20.pivot.pivotmodel.Parameter;
 import tudresden.ocl20.pivot.pivotmodel.PivotModelFactory;
+import tudresden.ocl20.pivot.pivotmodel.PivotModelPackage;
 import tudresden.ocl20.pivot.pivotmodel.TypeParameter;
 import tudresden.ocl20.pivot.pivotmodel.TypedElement;
 import tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl;
@@ -73,7 +74,6 @@ public class OperationItemProvider extends FeatureItemProvider implements
 	 * @generated
 	 */
 	public OperationItemProvider(AdapterFactory adapterFactory) {
-
 		super(adapterFactory);
 	}
 
@@ -85,7 +85,6 @@ public class OperationItemProvider extends FeatureItemProvider implements
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
-
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
@@ -104,7 +103,6 @@ public class OperationItemProvider extends FeatureItemProvider implements
 	 * @generated
 	 */
 	protected void addInputParameterPropertyDescriptor(Object object) {
-
 		itemPropertyDescriptors
 				.add(createItemPropertyDescriptor(
 						((ComposeableAdapterFactory) adapterFactory)
@@ -113,8 +111,8 @@ public class OperationItemProvider extends FeatureItemProvider implements
 						getString("_UI_Operation_inputParameter_feature"), //$NON-NLS-1$
 						getString(
 								"_UI_PropertyDescriptor_description", "_UI_Operation_inputParameter_feature", "_UI_Operation_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-						PivotModelPackageImpl.Literals.OPERATION__INPUT_PARAMETER, false,
-						false, false, null, null, null));
+						PivotModelPackage.Literals.OPERATION__INPUT_PARAMETER,
+						false, false, false, null, null, null));
 	}
 
 	/**
@@ -124,7 +122,6 @@ public class OperationItemProvider extends FeatureItemProvider implements
 	 * @generated
 	 */
 	protected void addOutputParameterPropertyDescriptor(Object object) {
-
 		itemPropertyDescriptors
 				.add(createItemPropertyDescriptor(
 						((ComposeableAdapterFactory) adapterFactory)
@@ -133,8 +130,8 @@ public class OperationItemProvider extends FeatureItemProvider implements
 						getString("_UI_Operation_outputParameter_feature"), //$NON-NLS-1$
 						getString(
 								"_UI_PropertyDescriptor_description", "_UI_Operation_outputParameter_feature", "_UI_Operation_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-						PivotModelPackageImpl.Literals.OPERATION__OUTPUT_PARAMETER, false,
-						false, false, null, null, null));
+						PivotModelPackage.Literals.OPERATION__OUTPUT_PARAMETER,
+						false, false, false, null, null, null));
 	}
 
 	/**
@@ -144,7 +141,6 @@ public class OperationItemProvider extends FeatureItemProvider implements
 	 * @generated
 	 */
 	protected void addReturnParameterPropertyDescriptor(Object object) {
-
 		itemPropertyDescriptors
 				.add(createItemPropertyDescriptor(
 						((ComposeableAdapterFactory) adapterFactory)
@@ -153,8 +149,8 @@ public class OperationItemProvider extends FeatureItemProvider implements
 						getString("_UI_Operation_returnParameter_feature"), //$NON-NLS-1$
 						getString(
 								"_UI_PropertyDescriptor_description", "_UI_Operation_returnParameter_feature", "_UI_Operation_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-						PivotModelPackageImpl.Literals.OPERATION__RETURN_PARAMETER, false,
-						false, false, null, null, null));
+						PivotModelPackage.Literals.OPERATION__RETURN_PARAMETER,
+						false, false, false, null, null, null));
 	}
 
 	/**
@@ -164,7 +160,6 @@ public class OperationItemProvider extends FeatureItemProvider implements
 	 * @generated
 	 */
 	protected void addSignatureParameterPropertyDescriptor(Object object) {
-
 		itemPropertyDescriptors
 				.add(createItemPropertyDescriptor(
 						((ComposeableAdapterFactory) adapterFactory)
@@ -173,7 +168,7 @@ public class OperationItemProvider extends FeatureItemProvider implements
 						getString("_UI_Operation_signatureParameter_feature"), //$NON-NLS-1$
 						getString(
 								"_UI_PropertyDescriptor_description", "_UI_Operation_signatureParameter_feature", "_UI_Operation_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-						PivotModelPackageImpl.Literals.OPERATION__SIGNATURE_PARAMETER,
+						PivotModelPackage.Literals.OPERATION__SIGNATURE_PARAMETER,
 						false, false, false, null, null, null));
 	}
 
@@ -189,13 +184,12 @@ public class OperationItemProvider extends FeatureItemProvider implements
 	@Override
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(
 			Object object) {
-
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
 			childrenFeatures
-					.add(PivotModelPackageImpl.Literals.GENERIC_ELEMENT__OWNED_TYPE_PARAMETER);
+					.add(PivotModelPackage.Literals.GENERIC_ELEMENT__OWNED_TYPE_PARAMETER);
 			childrenFeatures
-					.add(PivotModelPackageImpl.Literals.OPERATION__OWNED_PARAMETER);
+					.add(PivotModelPackage.Literals.OPERATION__OWNED_PARAMETER);
 		}
 		return childrenFeatures;
 	}
@@ -206,7 +200,6 @@ public class OperationItemProvider extends FeatureItemProvider implements
 	 */
 	@Override
 	protected EStructuralFeature getChildFeature(Object object, Object child) {
-
 		// Check the type of the specified child object and return the proper feature to use for
 		// adding (see {@link AddCommand}) it as a child.
 
@@ -220,7 +213,6 @@ public class OperationItemProvider extends FeatureItemProvider implements
 	 */
 	@Override
 	public Object getImage(Object object) {
-
 		return overlayImage(object, getResourceLocator().getImage(
 				"full/obj16/Operation")); //$NON-NLS-1$
 	}
@@ -263,8 +255,8 @@ public class OperationItemProvider extends FeatureItemProvider implements
 		if (!operation.getOwnedTypeParameter().isEmpty()) {
 			name.append(getTypeParameterListOpeningDelimiter());
 
-			for (Iterator<TypeParameter> it =
-					operation.getOwnedTypeParameter().iterator(); it.hasNext();) {
+			for (Iterator<TypeParameter> it = operation.getOwnedTypeParameter()
+					.iterator(); it.hasNext();) {
 				name.append(it.next().getName());
 
 				if (it.hasNext()) {
@@ -281,8 +273,8 @@ public class OperationItemProvider extends FeatureItemProvider implements
 		// append parameters
 		name.append('(');
 
-		for (Iterator<Parameter> it = operation.getSignatureParameter().iterator(); it
-				.hasNext();) {
+		for (Iterator<Parameter> it = operation.getSignatureParameter()
+				.iterator(); it.hasNext();) {
 			Parameter parameter = it.next();
 
 			// use the parameter-specific label provider for rendering the text
@@ -338,15 +330,15 @@ public class OperationItemProvider extends FeatureItemProvider implements
 	@Override
 	protected void collectNewChildDescriptors(
 			Collection<Object> newChildDescriptors, Object object) {
-
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 
-		newChildDescriptors.add(createChildParameter(
-				PivotModelPackageImpl.Literals.GENERIC_ELEMENT__OWNED_TYPE_PARAMETER,
-				PivotModelFactory.eINSTANCE.createTypeParameter()));
+		newChildDescriptors
+				.add(createChildParameter(
+						PivotModelPackage.Literals.GENERIC_ELEMENT__OWNED_TYPE_PARAMETER,
+						PivotModelFactory.eINSTANCE.createTypeParameter()));
 
 		newChildDescriptors.add(createChildParameter(
-				PivotModelPackageImpl.Literals.OPERATION__OWNED_PARAMETER,
+				PivotModelPackage.Literals.OPERATION__OWNED_PARAMETER,
 				PivotModelFactory.eINSTANCE.createParameter()));
 	}
 

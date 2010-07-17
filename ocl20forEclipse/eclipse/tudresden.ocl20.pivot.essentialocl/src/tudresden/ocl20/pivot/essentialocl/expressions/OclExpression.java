@@ -51,7 +51,7 @@ import tudresden.ocl20.pivot.pivotmodel.TypedElement;
  *
  * @generated
  */
-public interface OclExpression extends EObject, TypedElement, NamedElement {
+public interface OclExpression extends TypedElement, NamedElement {
 
 	/**
 	 * Returns the value of the '<em><b>Ocl Library</b></em>' reference.

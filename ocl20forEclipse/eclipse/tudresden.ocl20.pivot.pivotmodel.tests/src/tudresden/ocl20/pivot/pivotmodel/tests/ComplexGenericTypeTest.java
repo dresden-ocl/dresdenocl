@@ -36,6 +36,7 @@ import junit.textui.TestRunner;
 
 import tudresden.ocl20.pivot.pivotmodel.ComplexGenericType;
 
+import tudresden.ocl20.pivot.pivotmodel.PivotModelFactory;
 import tudresden.ocl20.pivot.pivotmodel.impl.PivotModelFactoryImpl;
 
 /**
@@ -58,7 +59,6 @@ public class ComplexGenericTypeTest extends GenericTypeTest {
 	 * @generated
 	 */
 	public static void main(String[] args) {
-
 		TestRunner.run(ComplexGenericTypeTest.class);
 	}
 
@@ -69,7 +69,6 @@ public class ComplexGenericTypeTest extends GenericTypeTest {
 	 * @generated
 	 */
 	public ComplexGenericTypeTest(String name) {
-
 		super(name);
 	}
 
@@ -81,7 +80,6 @@ public class ComplexGenericTypeTest extends GenericTypeTest {
 	 */
 	@Override
 	protected ComplexGenericType getFixture() {
-
 		return (ComplexGenericType) fixture;
 	}
 
@@ -93,8 +91,7 @@ public class ComplexGenericTypeTest extends GenericTypeTest {
 	 */
 	@Override
 	protected void setUp() throws Exception {
-
-		setFixture(PivotModelFactoryImpl.eINSTANCE.createComplexGenericType());
+		setFixture(PivotModelFactory.eINSTANCE.createComplexGenericType());
 	}
 
 	/**
@@ -105,7 +102,6 @@ public class ComplexGenericTypeTest extends GenericTypeTest {
 	 */
 	@Override
 	protected void tearDown() throws Exception {
-
 		setFixture(null);
 	}
 
@@ -117,7 +113,6 @@ public class ComplexGenericTypeTest extends GenericTypeTest {
 	 * @generated
 	 */
 	public void testAddTypeArgument__TypeArgument() {
-
 		// TODO: implement this operation test method
 		// Ensure that you remove @generated or mark it @generated NOT
 		fail();

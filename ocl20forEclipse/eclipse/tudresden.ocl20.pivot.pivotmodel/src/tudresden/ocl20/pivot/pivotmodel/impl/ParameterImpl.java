@@ -37,104 +37,41 @@ import org.apache.commons.lang.builder.ToStringStyle;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
 import tudresden.ocl20.pivot.pivotmodel.GenericType;
-import tudresden.ocl20.pivot.pivotmodel.MultiplicityElement;
 import tudresden.ocl20.pivot.pivotmodel.NamedElement;
 import tudresden.ocl20.pivot.pivotmodel.Operation;
 import tudresden.ocl20.pivot.pivotmodel.Parameter;
 import tudresden.ocl20.pivot.pivotmodel.ParameterDirectionKind;
-import tudresden.ocl20.pivot.pivotmodel.PivotModelPackage;
 import tudresden.ocl20.pivot.pivotmodel.PivotModelFactory;
+import tudresden.ocl20.pivot.pivotmodel.PivotModelPackage;
 import tudresden.ocl20.pivot.pivotmodel.Property;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 
 /**
- * <!-- begin-user-doc --> An implementation of the model object '<em><b>Parameter</b></em>'.
- * <!-- end-user-doc -->
+ * <!-- begin-user-doc --> An implementation of the model object '
+ * <em><b>Parameter</b></em>'. <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.ParameterImpl#isOrdered <em>Ordered</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.ParameterImpl#isUnique <em>Unique</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.ParameterImpl#isMultiple <em>Multiple</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.ParameterImpl#getKind <em>Kind</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.ParameterImpl#getOperation <em>Operation</em>}</li>
+ * <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.ParameterImpl#getKind <em>
+ * Kind</em>}</li>
+ * <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.ParameterImpl#getOperation
+ * <em>Operation</em>}</li>
  * </ul>
  * </p>
- *
+ * 
  * @generated
  */
 public class ParameterImpl extends TypedElementImpl implements Parameter {
 
 	/**
-	 * The default value of the '{@link #isOrdered() <em>Ordered</em>}' attribute. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @see #isOrdered()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final boolean ORDERED_EDEFAULT = false;
-
-	/**
-	 * The cached value of the '{@link #isOrdered() <em>Ordered</em>}' attribute. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @see #isOrdered()
-	 * @generated
-	 * @ordered
-	 */
-	protected boolean ordered = ORDERED_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #isUnique() <em>Unique</em>}' attribute.
-	 * <!-- begin-user-doc
-	 * --> <!-- end-user-doc -->
-	 * @see #isUnique()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final boolean UNIQUE_EDEFAULT = true;
-
-	/**
-	 * The cached value of the '{@link #isUnique() <em>Unique</em>}' attribute.
-	 * <!-- begin-user-doc
-	 * --> <!-- end-user-doc -->
-	 * @see #isUnique()
-	 * @generated
-	 * @ordered
-	 */
-	protected boolean unique = UNIQUE_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #isMultiple() <em>Multiple</em>}' attribute. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @see #isMultiple()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final boolean MULTIPLE_EDEFAULT = false;
-
-	/**
-	 * The cached value of the '{@link #isMultiple() <em>Multiple</em>}' attribute. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @see #isMultiple()
-	 * @generated
-	 * @ordered
-	 */
-	protected boolean multiple = MULTIPLE_EDEFAULT;
-
-	/**
 	 * The default value of the '{@link #getKind() <em>Kind</em>}' attribute.
-	 * <!-- begin-user-doc
-	 * --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getKind()
 	 * @generated
 	 * @ordered
@@ -143,8 +80,8 @@ public class ParameterImpl extends TypedElementImpl implements Parameter {
 
 	/**
 	 * The cached value of the '{@link #getKind() <em>Kind</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getKind()
 	 * @generated
 	 * @ordered
@@ -153,6 +90,7 @@ public class ParameterImpl extends TypedElementImpl implements Parameter {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected ParameterImpl() {
@@ -161,6 +99,7 @@ public class ParameterImpl extends TypedElementImpl implements Parameter {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -169,8 +108,8 @@ public class ParameterImpl extends TypedElementImpl implements Parameter {
 	}
 
 	/**
-	 * Overridden to change the type of the owning {@link Operation} if the type of a return parameter
-	 * is changed.
+	 * Overridden to change the type of the owning {@link Operation} if the type
+	 * of a return parameter is changed.
 	 * 
 	 * @see tudresden.ocl20.pivot.pivotmodel.impl.TypedElementImpl#setType(tudresden.ocl20.pivot.pivotmodel.Type)
 	 */
@@ -196,8 +135,8 @@ public class ParameterImpl extends TypedElementImpl implements Parameter {
 	}
 
 	/**
-	 * Overridden to change the generic type of the owning {@link Operation} if the generic type of a
-	 * return parameter is changed.
+	 * Overridden to change the generic type of the owning {@link Operation} if
+	 * the generic type of a return parameter is changed.
 	 * 
 	 * @see tudresden.ocl20.pivot.pivotmodel.impl.TypedElementImpl#setGenericType(tudresden.ocl20.pivot.pivotmodel.GenericType)
 	 */
@@ -223,8 +162,8 @@ public class ParameterImpl extends TypedElementImpl implements Parameter {
 	}
 
 	/**
-	 * Overridden to return the {@link #getOperation() operation} that contains this
-	 * <code>Parameter</code>.
+	 * Overridden to return the {@link #getOperation() operation} that contains
+	 * this <code>Parameter</code>.
 	 * 
 	 * @see tudresden.ocl20.pivot.pivotmodel.impl.NamedElementImpl#getOwner()
 	 */
@@ -236,67 +175,7 @@ public class ParameterImpl extends TypedElementImpl implements Parameter {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean isOrdered() {
-		return ordered;
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setOrdered(boolean newOrdered) {
-		boolean oldOrdered = ordered;
-		ordered = newOrdered;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-					PivotModelPackage.PARAMETER__ORDERED, oldOrdered, ordered));
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean isUnique() {
-		return unique;
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setUnique(boolean newUnique) {
-		boolean oldUnique = unique;
-		unique = newUnique;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-					PivotModelPackage.PARAMETER__UNIQUE, oldUnique, unique));
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean isMultiple() {
-		return multiple;
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setMultiple(boolean newMultiple) {
-		boolean oldMultiple = multiple;
-		multiple = newMultiple;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-					PivotModelPackage.PARAMETER__MULTIPLE, oldMultiple,
-					multiple));
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public ParameterDirectionKind getKind() {
@@ -305,6 +184,7 @@ public class ParameterImpl extends TypedElementImpl implements Parameter {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public void setKind(ParameterDirectionKind newKind) {
@@ -317,6 +197,7 @@ public class ParameterImpl extends TypedElementImpl implements Parameter {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public Operation getOperation() {
@@ -327,6 +208,7 @@ public class ParameterImpl extends TypedElementImpl implements Parameter {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public NotificationChain basicSetOperation(Operation newOperation,
@@ -338,6 +220,7 @@ public class ParameterImpl extends TypedElementImpl implements Parameter {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public void setOperation(Operation newOperation) {
@@ -377,9 +260,6 @@ public class ParameterImpl extends TypedElementImpl implements Parameter {
 		// set properties
 		property.setName(getName());
 		property.setType(getType());
-		property.setMultiple(isMultiple());
-		property.setOrdered(isOrdered());
-		property.setUnique(isUnique());
 
 		return property;
 	}
@@ -405,15 +285,13 @@ public class ParameterImpl extends TypedElementImpl implements Parameter {
 		super.initialize(clone);
 
 		clone.setKind(getKind());
-		clone.setMultiple(isMultiple());
-		clone.setOrdered(isOrdered());
-		clone.setUnique(isUnique());
 
 		return clone;
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -430,6 +308,7 @@ public class ParameterImpl extends TypedElementImpl implements Parameter {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -444,6 +323,7 @@ public class ParameterImpl extends TypedElementImpl implements Parameter {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -460,17 +340,12 @@ public class ParameterImpl extends TypedElementImpl implements Parameter {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-		case PivotModelPackage.PARAMETER__ORDERED:
-			return isOrdered();
-		case PivotModelPackage.PARAMETER__UNIQUE:
-			return isUnique();
-		case PivotModelPackage.PARAMETER__MULTIPLE:
-			return isMultiple();
 		case PivotModelPackage.PARAMETER__KIND:
 			return getKind();
 		case PivotModelPackage.PARAMETER__OPERATION:
@@ -481,20 +356,12 @@ public class ParameterImpl extends TypedElementImpl implements Parameter {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-		case PivotModelPackage.PARAMETER__ORDERED:
-			setOrdered((Boolean) newValue);
-			return;
-		case PivotModelPackage.PARAMETER__UNIQUE:
-			setUnique((Boolean) newValue);
-			return;
-		case PivotModelPackage.PARAMETER__MULTIPLE:
-			setMultiple((Boolean) newValue);
-			return;
 		case PivotModelPackage.PARAMETER__KIND:
 			setKind((ParameterDirectionKind) newValue);
 			return;
@@ -507,20 +374,12 @@ public class ParameterImpl extends TypedElementImpl implements Parameter {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-		case PivotModelPackage.PARAMETER__ORDERED:
-			setOrdered(ORDERED_EDEFAULT);
-			return;
-		case PivotModelPackage.PARAMETER__UNIQUE:
-			setUnique(UNIQUE_EDEFAULT);
-			return;
-		case PivotModelPackage.PARAMETER__MULTIPLE:
-			setMultiple(MULTIPLE_EDEFAULT);
-			return;
 		case PivotModelPackage.PARAMETER__KIND:
 			setKind(KIND_EDEFAULT);
 			return;
@@ -533,17 +392,12 @@ public class ParameterImpl extends TypedElementImpl implements Parameter {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-		case PivotModelPackage.PARAMETER__ORDERED:
-			return ordered != ORDERED_EDEFAULT;
-		case PivotModelPackage.PARAMETER__UNIQUE:
-			return unique != UNIQUE_EDEFAULT;
-		case PivotModelPackage.PARAMETER__MULTIPLE:
-			return multiple != MULTIPLE_EDEFAULT;
 		case PivotModelPackage.PARAMETER__KIND:
 			return kind != KIND_EDEFAULT;
 		case PivotModelPackage.PARAMETER__OPERATION:
@@ -553,51 +407,10 @@ public class ParameterImpl extends TypedElementImpl implements Parameter {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
-		if (baseClass == MultiplicityElement.class) {
-			switch (derivedFeatureID) {
-			case PivotModelPackage.PARAMETER__ORDERED:
-				return PivotModelPackage.MULTIPLICITY_ELEMENT__ORDERED;
-			case PivotModelPackage.PARAMETER__UNIQUE:
-				return PivotModelPackage.MULTIPLICITY_ELEMENT__UNIQUE;
-			case PivotModelPackage.PARAMETER__MULTIPLE:
-				return PivotModelPackage.MULTIPLICITY_ELEMENT__MULTIPLE;
-			default:
-				return -1;
-			}
-		}
-		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
-		if (baseClass == MultiplicityElement.class) {
-			switch (baseFeatureID) {
-			case PivotModelPackage.MULTIPLICITY_ELEMENT__ORDERED:
-				return PivotModelPackage.PARAMETER__ORDERED;
-			case PivotModelPackage.MULTIPLICITY_ELEMENT__UNIQUE:
-				return PivotModelPackage.PARAMETER__UNIQUE;
-			case PivotModelPackage.MULTIPLICITY_ELEMENT__MULTIPLE:
-				return PivotModelPackage.PARAMETER__MULTIPLE;
-			default:
-				return -1;
-			}
-		}
-		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
-	}
-
-	/**
-	 * Changed EMF implementation in order to use a consistent style. In addition, the getter methods
-	 * are used to get attribute values. This is important if repository-specific subclasses have
-	 * alternative ways of obtaining their attribute values.
+	 * Changed EMF implementation in order to use a consistent style. In
+	 * addition, the getter methods are used to get attribute values. This is
+	 * important if repository-specific subclasses have alternative ways of
+	 * obtaining their attribute values.
 	 * 
 	 * @generated NOT
 	 */
@@ -606,8 +419,7 @@ public class ParameterImpl extends TypedElementImpl implements Parameter {
 
 		return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
 				.appendToString(super.toString())
-				.append("ordered", isOrdered()).append("unique", isUnique()).append("multiple", //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-						isMultiple()).append("kind", getKind()).toString(); //$NON-NLS-1$
+				.append("kind", kind).toString(); //$NON-NLS-1$
 	}
 
 } // ParameterImpl

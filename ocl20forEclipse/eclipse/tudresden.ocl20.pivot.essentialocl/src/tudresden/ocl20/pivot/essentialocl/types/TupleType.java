@@ -49,7 +49,7 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
  *
  * @generated
  */
-public interface TupleType extends EObject, Type {
+public interface TupleType extends Type {
 
 	/**
 	 * Returns the value of the '<em><b>Ocl Library</b></em>' reference.

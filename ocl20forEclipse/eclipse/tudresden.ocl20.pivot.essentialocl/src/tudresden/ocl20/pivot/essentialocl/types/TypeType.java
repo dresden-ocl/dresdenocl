@@ -55,7 +55,7 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
  *
  * @generated
  */
-public interface TypeType extends EObject, Type {
+public interface TypeType extends Type {
 
 	/**
 	 * Returns the value of the '<em><b>Represented Type</b></em>' reference.

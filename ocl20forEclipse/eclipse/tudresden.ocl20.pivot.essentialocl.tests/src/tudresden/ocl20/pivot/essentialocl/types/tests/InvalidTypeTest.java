@@ -48,73 +48,73 @@ import tudresden.ocl20.pivot.essentialocl.types.impl.TypesFactoryImpl;
  */
 public class InvalidTypeTest extends TestCase {
 
-  /**
-   * The fixture for this Invalid Type test case.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  protected InvalidType fixture = null;
+	/**
+	 * The fixture for this Invalid Type test case.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected InvalidType fixture = null;
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public static void main(String[] args) {
-    TestRunner.run(InvalidTypeTest.class);
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static void main(String[] args) {
+		TestRunner.run(InvalidTypeTest.class);
+	}
 
-  /**
-   * Constructs a new Invalid Type test case with the given name.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public InvalidTypeTest(String name) {
-    super(name);
-  }
+	/**
+	 * Constructs a new Invalid Type test case with the given name.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public InvalidTypeTest(String name) {
+		super(name);
+	}
 
-  /**
-   * Sets the fixture for this Invalid Type test case.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  protected void setFixture(InvalidType fixture) {
-    this.fixture = fixture;
-  }
+	/**
+	 * Sets the fixture for this Invalid Type test case.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void setFixture(InvalidType fixture) {
+		this.fixture = fixture;
+	}
 
-  /**
-   * Returns the fixture for this Invalid Type test case.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  protected InvalidType getFixture() {
-    return fixture;
-  }
+	/**
+	 * Returns the fixture for this Invalid Type test case.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected InvalidType getFixture() {
+		return fixture;
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see junit.framework.TestCase#setUp()
-   * @generated
-   */
-  @Override
-  protected void setUp() throws Exception {
-    setFixture(TypesFactoryImpl.eINSTANCE.createInvalidType());
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see junit.framework.TestCase#setUp()
+	 * @generated
+	 */
+	@Override
+	protected void setUp() throws Exception {
+		setFixture(TypesFactoryImpl.eINSTANCE.createInvalidType());
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see junit.framework.TestCase#tearDown()
-   * @generated
-   */
-  @Override
-  protected void tearDown() throws Exception {
-    setFixture(null);
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see junit.framework.TestCase#tearDown()
+	 * @generated
+	 */
+	@Override
+	protected void tearDown() throws Exception {
+		setFixture(null);
+	}
 
 } //InvalidTypeTest

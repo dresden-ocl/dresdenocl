@@ -66,7 +66,6 @@ public class PropertyItemProvider extends FeatureItemProvider implements
 	 * @generated
 	 */
 	public PropertyItemProvider(AdapterFactory adapterFactory) {
-
 		super(adapterFactory);
 	}
 
@@ -78,7 +77,6 @@ public class PropertyItemProvider extends FeatureItemProvider implements
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
-
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
@@ -93,7 +91,6 @@ public class PropertyItemProvider extends FeatureItemProvider implements
 	 */
 	@Override
 	public Object getImage(Object object) {
-
 		return overlayImage(object, getResourceLocator().getImage(
 				"full/obj16/Property")); //$NON-NLS-1$
 	}
@@ -122,7 +119,6 @@ public class PropertyItemProvider extends FeatureItemProvider implements
 	 */
 	@Override
 	public void notifyChanged(Notification notification) {
-
 		updateChildren(notification);
 		super.notifyChanged(notification);
 	}
@@ -137,7 +133,6 @@ public class PropertyItemProvider extends FeatureItemProvider implements
 	@Override
 	protected void collectNewChildDescriptors(
 			Collection<Object> newChildDescriptors, Object object) {
-
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 	}
 

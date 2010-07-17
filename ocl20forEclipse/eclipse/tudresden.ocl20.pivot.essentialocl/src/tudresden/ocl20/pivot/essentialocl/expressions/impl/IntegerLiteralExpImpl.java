@@ -62,8 +62,8 @@ public class IntegerLiteralExpImpl extends NumericLiteralExpImpl implements
 	/**
 	 * Logger for this class
 	 */
-	private static final Logger logger =
-			Logger.getLogger(IntegerLiteralExpImpl.class);
+	private static final Logger logger = Logger
+			.getLogger(IntegerLiteralExpImpl.class);
 
 	/**
 	 * The default value of the '{@link #getIntegerSymbol() <em>Integer Symbol</em>}' attribute.
@@ -89,7 +89,6 @@ public class IntegerLiteralExpImpl extends NumericLiteralExpImpl implements
 	 * @generated
 	 */
 	protected IntegerLiteralExpImpl() {
-
 		super();
 	}
 
@@ -130,7 +129,6 @@ public class IntegerLiteralExpImpl extends NumericLiteralExpImpl implements
 	 * @generated
 	 */
 	public int getIntegerSymbol() {
-
 		return integerSymbol;
 	}
 
@@ -139,7 +137,6 @@ public class IntegerLiteralExpImpl extends NumericLiteralExpImpl implements
 	 * @generated
 	 */
 	public void setIntegerSymbol(int newIntegerSymbol) {
-
 		int oldIntegerSymbol = integerSymbol;
 		integerSymbol = newIntegerSymbol;
 		if (eNotificationRequired())
@@ -154,7 +151,6 @@ public class IntegerLiteralExpImpl extends NumericLiteralExpImpl implements
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-
 		switch (featureID) {
 		case ExpressionsPackageImpl.INTEGER_LITERAL_EXP__INTEGER_SYMBOL:
 			return getIntegerSymbol();
@@ -168,7 +164,6 @@ public class IntegerLiteralExpImpl extends NumericLiteralExpImpl implements
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-
 		switch (featureID) {
 		case ExpressionsPackageImpl.INTEGER_LITERAL_EXP__INTEGER_SYMBOL:
 			setIntegerSymbol((Integer) newValue);
@@ -183,7 +178,6 @@ public class IntegerLiteralExpImpl extends NumericLiteralExpImpl implements
 	 */
 	@Override
 	public void eUnset(int featureID) {
-
 		switch (featureID) {
 		case ExpressionsPackageImpl.INTEGER_LITERAL_EXP__INTEGER_SYMBOL:
 			setIntegerSymbol(INTEGER_SYMBOL_EDEFAULT);
@@ -198,7 +192,6 @@ public class IntegerLiteralExpImpl extends NumericLiteralExpImpl implements
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-
 		switch (featureID) {
 		case ExpressionsPackageImpl.INTEGER_LITERAL_EXP__INTEGER_SYMBOL:
 			return integerSymbol != INTEGER_SYMBOL_EDEFAULT;
@@ -212,7 +205,6 @@ public class IntegerLiteralExpImpl extends NumericLiteralExpImpl implements
 	 */
 	@Override
 	protected EClass eStaticClass() {
-
 		return ExpressionsPackageImpl.Literals.INTEGER_LITERAL_EXP;
 	}
 
@@ -226,8 +218,8 @@ public class IntegerLiteralExpImpl extends NumericLiteralExpImpl implements
 	public String toString() {
 
 		return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
-				.appendSuper(super.toString())
-				.append("integerSymbol", integerSymbol).toString(); //$NON-NLS-1$
+				.appendSuper(super.toString()).append(
+						"integerSymbol", integerSymbol).toString(); //$NON-NLS-1$
 	}
 
 } // IntegerLiteralExpImpl

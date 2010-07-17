@@ -46,56 +46,56 @@ import tudresden.ocl20.pivot.essentialocl.expressions.impl.ExpressionsFactoryImp
  */
 public class InvalidLiteralExpTest extends LiteralExpTest {
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public static void main(String[] args) {
-    TestRunner.run(InvalidLiteralExpTest.class);
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static void main(String[] args) {
+		TestRunner.run(InvalidLiteralExpTest.class);
+	}
 
-  /**
-   * Constructs a new Invalid Literal Exp test case with the given name.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public InvalidLiteralExpTest(String name) {
-    super(name);
-  }
+	/**
+	 * Constructs a new Invalid Literal Exp test case with the given name.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public InvalidLiteralExpTest(String name) {
+		super(name);
+	}
 
-  /**
-   * Returns the fixture for this Invalid Literal Exp test case.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  protected InvalidLiteralExp getFixture() {
-    return (InvalidLiteralExp) fixture;
-  }
+	/**
+	 * Returns the fixture for this Invalid Literal Exp test case.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected InvalidLiteralExp getFixture() {
+		return (InvalidLiteralExp) fixture;
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see junit.framework.TestCase#setUp()
-   * @generated
-   */
-  @Override
-  protected void setUp() throws Exception {
-    setFixture(ExpressionsFactoryImpl.eINSTANCE.createInvalidLiteralExp());
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see junit.framework.TestCase#setUp()
+	 * @generated
+	 */
+	@Override
+	protected void setUp() throws Exception {
+		setFixture(ExpressionsFactoryImpl.eINSTANCE.createInvalidLiteralExp());
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see junit.framework.TestCase#tearDown()
-   * @generated
-   */
-  @Override
-  protected void tearDown() throws Exception {
-    setFixture(null);
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see junit.framework.TestCase#tearDown()
+	 * @generated
+	 */
+	@Override
+	protected void tearDown() throws Exception {
+		setFixture(null);
+	}
 
 } //InvalidLiteralExpTest

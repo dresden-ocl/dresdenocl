@@ -55,7 +55,7 @@ import tudresden.ocl20.pivot.pivotmodel.TypedElement;
  *
  * @generated
  */
-public interface Variable extends EObject, TypedElement, NamedElement {
+public interface Variable extends TypedElement, NamedElement {
 
 	/**
 	 * Returns the value of the '<em><b>Represented Parameter</b></em>' reference.

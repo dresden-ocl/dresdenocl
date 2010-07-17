@@ -51,68 +51,68 @@ import tudresden.ocl20.pivot.essentialocl.expressions.OclExpression;
  */
 public abstract class OclExpressionTest extends TestCase {
 
-  /**
-   * The fixture for this Ocl Expression test case.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  protected OclExpression fixture = null;
+	/**
+	 * The fixture for this Ocl Expression test case.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected OclExpression fixture = null;
 
-  /**
-   * Constructs a new Ocl Expression test case with the given name.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public OclExpressionTest(String name) {
-    super(name);
-  }
+	/**
+	 * Constructs a new Ocl Expression test case with the given name.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public OclExpressionTest(String name) {
+		super(name);
+	}
 
-  /**
-   * Sets the fixture for this Ocl Expression test case.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  protected void setFixture(OclExpression fixture) {
-    this.fixture = fixture;
-  }
+	/**
+	 * Sets the fixture for this Ocl Expression test case.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void setFixture(OclExpression fixture) {
+		this.fixture = fixture;
+	}
 
-  /**
-   * Returns the fixture for this Ocl Expression test case.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  protected OclExpression getFixture() {
-    return fixture;
-  }
+	/**
+	 * Returns the fixture for this Ocl Expression test case.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected OclExpression getFixture() {
+		return fixture;
+	}
 
-  /**
-   * Tests the '{@link tudresden.ocl20.pivot.essentialocl.expressions.OclExpression#withAtPre() <em>With At Pre</em>}' operation.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see tudresden.ocl20.pivot.essentialocl.expressions.OclExpression#withAtPre()
-   * @generated
-   */
-  public void testWithAtPre() {
-    // TODO: implement this operation test method
-    // Ensure that you remove @generated or mark it @generated NOT
-    fail();
-  }
+	/**
+	 * Tests the '{@link tudresden.ocl20.pivot.essentialocl.expressions.OclExpression#withAtPre() <em>With At Pre</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see tudresden.ocl20.pivot.essentialocl.expressions.OclExpression#withAtPre()
+	 * @generated
+	 */
+	public void testWithAtPre() {
+		// TODO: implement this operation test method
+		// Ensure that you remove @generated or mark it @generated NOT
+		fail();
+	}
 
-  /**
-   * Tests the '{@link tudresden.ocl20.pivot.essentialocl.expressions.OclExpression#withAsSet() <em>With As Set</em>}' operation.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see tudresden.ocl20.pivot.essentialocl.expressions.OclExpression#withAsSet()
-   * @generated
-   */
-  public void testWithAsSet() {
-    // TODO: implement this operation test method
-    // Ensure that you remove @generated or mark it @generated NOT
-    fail();
-  }
+	/**
+	 * Tests the '{@link tudresden.ocl20.pivot.essentialocl.expressions.OclExpression#withAsSet() <em>With As Set</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see tudresden.ocl20.pivot.essentialocl.expressions.OclExpression#withAsSet()
+	 * @generated
+	 */
+	public void testWithAsSet() {
+		// TODO: implement this operation test method
+		// Ensure that you remove @generated or mark it @generated NOT
+		fail();
+	}
 
 } //OclExpressionTest

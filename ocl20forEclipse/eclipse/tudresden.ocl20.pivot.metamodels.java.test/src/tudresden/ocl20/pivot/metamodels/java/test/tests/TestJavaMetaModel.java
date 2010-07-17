@@ -31,7 +31,7 @@ import tudresden.ocl20.pivot.metamodels.test.MetaModelTestSuite;
  * @generated NOT
  */
 @Suite.SuiteClasses(value = { MetaModelTestSuite.class, TestInnerTypes.class,
-		TestJarArchiveReference.class })
+		TestJarArchiveReference.class, TestCollectionAdaptation.class })
 public class TestJavaMetaModel extends MetaModelTestSuite {
 
 	/** The id of the {@link IMetamodel} which shall be tested. */

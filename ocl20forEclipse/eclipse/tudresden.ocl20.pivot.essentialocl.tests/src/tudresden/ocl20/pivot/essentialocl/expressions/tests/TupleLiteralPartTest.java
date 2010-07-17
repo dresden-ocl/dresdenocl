@@ -48,73 +48,73 @@ import tudresden.ocl20.pivot.essentialocl.expressions.impl.ExpressionsFactoryImp
  */
 public class TupleLiteralPartTest extends TestCase {
 
-  /**
-   * The fixture for this Tuple Literal Part test case.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  protected TupleLiteralPart fixture = null;
+	/**
+	 * The fixture for this Tuple Literal Part test case.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected TupleLiteralPart fixture = null;
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public static void main(String[] args) {
-    TestRunner.run(TupleLiteralPartTest.class);
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static void main(String[] args) {
+		TestRunner.run(TupleLiteralPartTest.class);
+	}
 
-  /**
-   * Constructs a new Tuple Literal Part test case with the given name.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public TupleLiteralPartTest(String name) {
-    super(name);
-  }
+	/**
+	 * Constructs a new Tuple Literal Part test case with the given name.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public TupleLiteralPartTest(String name) {
+		super(name);
+	}
 
-  /**
-   * Sets the fixture for this Tuple Literal Part test case.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  protected void setFixture(TupleLiteralPart fixture) {
-    this.fixture = fixture;
-  }
+	/**
+	 * Sets the fixture for this Tuple Literal Part test case.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void setFixture(TupleLiteralPart fixture) {
+		this.fixture = fixture;
+	}
 
-  /**
-   * Returns the fixture for this Tuple Literal Part test case.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  protected TupleLiteralPart getFixture() {
-    return fixture;
-  }
+	/**
+	 * Returns the fixture for this Tuple Literal Part test case.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected TupleLiteralPart getFixture() {
+		return fixture;
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see junit.framework.TestCase#setUp()
-   * @generated
-   */
-  @Override
-  protected void setUp() throws Exception {
-    setFixture(ExpressionsFactoryImpl.eINSTANCE.createTupleLiteralPart());
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see junit.framework.TestCase#setUp()
+	 * @generated
+	 */
+	@Override
+	protected void setUp() throws Exception {
+		setFixture(ExpressionsFactoryImpl.eINSTANCE.createTupleLiteralPart());
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see junit.framework.TestCase#tearDown()
-   * @generated
-   */
-  @Override
-  protected void tearDown() throws Exception {
-    setFixture(null);
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see junit.framework.TestCase#tearDown()
+	 * @generated
+	 */
+	@Override
+	protected void tearDown() throws Exception {
+		setFixture(null);
+	}
 
 } //TupleLiteralPartTest

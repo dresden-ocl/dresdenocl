@@ -68,14 +68,14 @@ public class InvalidTypeImpl extends TypeImpl implements InvalidType {
 	/**
 	 * Logger for this class
 	 */
-	private static final Logger logger = Logger.getLogger(InvalidTypeImpl.class);
+	private static final Logger logger = Logger
+			.getLogger(InvalidTypeImpl.class);
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	protected InvalidTypeImpl() {
-
 		super();
 	}
 
@@ -158,8 +158,9 @@ public class InvalidTypeImpl extends TypeImpl implements InvalidType {
 
 			// set the type of the new operation to invalid
 			if (getOclLibrary() == null) {
-				throw new IllegalStateException("The InvalidType called '" + getName() //$NON-NLS-1$
-						+ "' is not contained in the OCL Library."); //$NON-NLS-1$
+				throw new IllegalStateException(
+						"The InvalidType called '" + getName() //$NON-NLS-1$
+								+ "' is not contained in the OCL Library."); //$NON-NLS-1$
 			}
 
 			operation.setType(getOclLibrary().getOclInvalid());
@@ -183,7 +184,8 @@ public class InvalidTypeImpl extends TypeImpl implements InvalidType {
 	public Property lookupProperty(String name) {
 
 		if (logger.isInfoEnabled()) {
-			logger.info("Creating implicit property '" + name + "' for InvalidType"); //$NON-NLS-1$//$NON-NLS-2$
+			logger
+					.info("Creating implicit property '" + name + "' for InvalidType"); //$NON-NLS-1$//$NON-NLS-2$
 		}
 
 		Property property = PivotModelFactory.eINSTANCE.createProperty();
@@ -191,8 +193,9 @@ public class InvalidTypeImpl extends TypeImpl implements InvalidType {
 
 		// set the type of the new property to invalid
 		if (getOclLibrary() == null) {
-			throw new IllegalStateException("The InvalidType called '" + getName() //$NON-NLS-1$
-					+ "' is not contained in the OCL Library."); //$NON-NLS-1$
+			throw new IllegalStateException(
+					"The InvalidType called '" + getName() //$NON-NLS-1$
+							+ "' is not contained in the OCL Library."); //$NON-NLS-1$
 		}
 
 		property.setType(getOclLibrary().getOclInvalid());
@@ -205,7 +208,6 @@ public class InvalidTypeImpl extends TypeImpl implements InvalidType {
 	 * @generated
 	 */
 	public OclLibrary getOclLibrary() {
-
 		if (eContainerFeatureID() != TypesPackageImpl.INVALID_TYPE__OCL_LIBRARY)
 			return null;
 		return (OclLibrary) eContainer();
@@ -217,10 +219,8 @@ public class InvalidTypeImpl extends TypeImpl implements InvalidType {
 	 */
 	public NotificationChain basicSetOclLibrary(OclLibrary newOclLibrary,
 			NotificationChain msgs) {
-
-		msgs =
-				eBasicSetContainer((InternalEObject) newOclLibrary,
-						TypesPackageImpl.INVALID_TYPE__OCL_LIBRARY, msgs);
+		msgs = eBasicSetContainer((InternalEObject) newOclLibrary,
+				TypesPackageImpl.INVALID_TYPE__OCL_LIBRARY, msgs);
 		return msgs;
 	}
 
@@ -229,7 +229,6 @@ public class InvalidTypeImpl extends TypeImpl implements InvalidType {
 	 * @generated
 	 */
 	public void setOclLibrary(OclLibrary newOclLibrary) {
-
 		if (newOclLibrary != eInternalContainer()
 				|| (eContainerFeatureID() != TypesPackageImpl.INVALID_TYPE__OCL_LIBRARY && newOclLibrary != null)) {
 			if (EcoreUtil.isAncestor(this, newOclLibrary))
@@ -239,15 +238,13 @@ public class InvalidTypeImpl extends TypeImpl implements InvalidType {
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newOclLibrary != null)
-				msgs =
-						((InternalEObject) newOclLibrary).eInverseAdd(this,
-								TypesPackageImpl.OCL_LIBRARY__OCL_INVALID, OclLibrary.class,
-								msgs);
+				msgs = ((InternalEObject) newOclLibrary).eInverseAdd(this,
+						TypesPackageImpl.OCL_LIBRARY__OCL_INVALID,
+						OclLibrary.class, msgs);
 			msgs = basicSetOclLibrary(newOclLibrary, msgs);
 			if (msgs != null)
 				msgs.dispatch();
-		}
-		else if (eNotificationRequired())
+		} else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
 					TypesPackageImpl.INVALID_TYPE__OCL_LIBRARY, newOclLibrary,
 					newOclLibrary));
@@ -258,9 +255,8 @@ public class InvalidTypeImpl extends TypeImpl implements InvalidType {
 	 * @generated
 	 */
 	@Override
-	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID,
-			NotificationChain msgs) {
-
+	public NotificationChain eInverseAdd(InternalEObject otherEnd,
+			int featureID, NotificationChain msgs) {
 		switch (featureID) {
 		case TypesPackageImpl.INVALID_TYPE__OCL_LIBRARY:
 			if (eInternalContainer() != null)
@@ -277,7 +273,6 @@ public class InvalidTypeImpl extends TypeImpl implements InvalidType {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd,
 			int featureID, NotificationChain msgs) {
-
 		switch (featureID) {
 		case TypesPackageImpl.INVALID_TYPE__OCL_LIBRARY:
 			return basicSetOclLibrary(null, msgs);
@@ -292,11 +287,11 @@ public class InvalidTypeImpl extends TypeImpl implements InvalidType {
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(
 			NotificationChain msgs) {
-
 		switch (eContainerFeatureID()) {
 		case TypesPackageImpl.INVALID_TYPE__OCL_LIBRARY:
 			return eInternalContainer().eInverseRemove(this,
-					TypesPackageImpl.OCL_LIBRARY__OCL_INVALID, OclLibrary.class, msgs);
+					TypesPackageImpl.OCL_LIBRARY__OCL_INVALID,
+					OclLibrary.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -307,7 +302,6 @@ public class InvalidTypeImpl extends TypeImpl implements InvalidType {
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-
 		switch (featureID) {
 		case TypesPackageImpl.INVALID_TYPE__OCL_LIBRARY:
 			return getOclLibrary();
@@ -321,7 +315,6 @@ public class InvalidTypeImpl extends TypeImpl implements InvalidType {
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-
 		switch (featureID) {
 		case TypesPackageImpl.INVALID_TYPE__OCL_LIBRARY:
 			setOclLibrary((OclLibrary) newValue);
@@ -336,7 +329,6 @@ public class InvalidTypeImpl extends TypeImpl implements InvalidType {
 	 */
 	@Override
 	public void eUnset(int featureID) {
-
 		switch (featureID) {
 		case TypesPackageImpl.INVALID_TYPE__OCL_LIBRARY:
 			setOclLibrary((OclLibrary) null);
@@ -351,7 +343,6 @@ public class InvalidTypeImpl extends TypeImpl implements InvalidType {
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-
 		switch (featureID) {
 		case TypesPackageImpl.INVALID_TYPE__OCL_LIBRARY:
 			return getOclLibrary() != null;
@@ -365,7 +356,6 @@ public class InvalidTypeImpl extends TypeImpl implements InvalidType {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-
 		return TypesPackageImpl.Literals.INVALID_TYPE;
 	}
 

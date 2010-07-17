@@ -49,7 +49,6 @@ public abstract class TypedElementTest extends NamedElementTest {
 	 * @generated
 	 */
 	public TypedElementTest(String name) {
-
 		super(name);
 	}
 
@@ -61,7 +60,6 @@ public abstract class TypedElementTest extends NamedElementTest {
 	 */
 	@Override
 	protected TypedElement getFixture() {
-
 		return (TypedElement) fixture;
 	}
 

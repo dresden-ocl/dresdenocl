@@ -45,43 +45,43 @@ import junit.textui.TestRunner;
  */
 public class TypesTests extends TestSuite {
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public static void main(String[] args) {
-    TestRunner.run(suite());
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static void main(String[] args) {
+		TestRunner.run(suite());
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public static Test suite() {
-    TestSuite suite = new TypesTests("types Tests"); //$NON-NLS-1$
-    suite.addTestSuite(BagTypeTest.class);
-    suite.addTestSuite(TupleTypeTest.class);
-    suite.addTestSuite(CollectionTypeTest.class);
-    suite.addTestSuite(InvalidTypeTest.class);
-    suite.addTestSuite(OrderedSetTypeTest.class);
-    suite.addTestSuite(SequenceTypeTest.class);
-    suite.addTestSuite(SetTypeTest.class);
-    suite.addTestSuite(VoidTypeTest.class);
-    suite.addTestSuite(TypeTypeTest.class);
-    suite.addTestSuite(OclLibraryTest.class);
-    suite.addTestSuite(AnyTypeTest.class);
-    return suite;
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static Test suite() {
+		TestSuite suite = new TypesTests("types Tests"); //$NON-NLS-1$
+		suite.addTestSuite(BagTypeTest.class);
+		suite.addTestSuite(TupleTypeTest.class);
+		suite.addTestSuite(CollectionTypeTest.class);
+		suite.addTestSuite(InvalidTypeTest.class);
+		suite.addTestSuite(OrderedSetTypeTest.class);
+		suite.addTestSuite(SequenceTypeTest.class);
+		suite.addTestSuite(SetTypeTest.class);
+		suite.addTestSuite(VoidTypeTest.class);
+		suite.addTestSuite(TypeTypeTest.class);
+		suite.addTestSuite(OclLibraryTest.class);
+		suite.addTestSuite(AnyTypeTest.class);
+		return suite;
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public TypesTests(String name) {
-    super(name);
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public TypesTests(String name) {
+		super(name);
+	}
 
 } //TypesTests

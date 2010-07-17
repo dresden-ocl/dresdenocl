@@ -49,7 +49,7 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
  *
  * @generated
  */
-public interface VoidType extends EObject, Type {
+public interface VoidType extends Type {
 
 	/**
 	 * Returns the value of the '<em><b>Ocl Library</b></em>' reference.

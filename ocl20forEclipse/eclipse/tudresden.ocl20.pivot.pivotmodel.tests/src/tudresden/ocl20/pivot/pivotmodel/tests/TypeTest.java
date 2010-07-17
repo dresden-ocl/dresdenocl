@@ -34,6 +34,7 @@ package tudresden.ocl20.pivot.pivotmodel.tests;
 
 import junit.textui.TestRunner;
 
+import tudresden.ocl20.pivot.pivotmodel.PivotModelFactory;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 
 import tudresden.ocl20.pivot.pivotmodel.impl.PivotModelFactoryImpl;
@@ -70,7 +71,6 @@ public class TypeTest extends NamedElementTest {
 	 * @generated
 	 */
 	public static void main(String[] args) {
-
 		TestRunner.run(TypeTest.class);
 	}
 
@@ -81,7 +81,6 @@ public class TypeTest extends NamedElementTest {
 	 * @generated
 	 */
 	public TypeTest(String name) {
-
 		super(name);
 	}
 
@@ -93,7 +92,6 @@ public class TypeTest extends NamedElementTest {
 	 */
 	@Override
 	protected Type getFixture() {
-
 		return (Type) fixture;
 	}
 
@@ -105,8 +103,7 @@ public class TypeTest extends NamedElementTest {
 	 */
 	@Override
 	protected void setUp() throws Exception {
-
-		setFixture(PivotModelFactoryImpl.eINSTANCE.createType());
+		setFixture(PivotModelFactory.eINSTANCE.createType());
 	}
 
 	/**
@@ -117,7 +114,6 @@ public class TypeTest extends NamedElementTest {
 	 */
 	@Override
 	protected void tearDown() throws Exception {
-
 		setFixture(null);
 	}
 
@@ -129,7 +125,6 @@ public class TypeTest extends NamedElementTest {
 	 * @generated
 	 */
 	public void testConformsTo__Type() {
-
 		// TODO: implement this operation test method
 		// Ensure that you remove @generated or mark it @generated NOT
 		fail();
@@ -143,7 +138,6 @@ public class TypeTest extends NamedElementTest {
 	 * @generated
 	 */
 	public void testCommonSuperType__Type() {
-
 		// TODO: implement this operation test method
 		// Ensure that you remove @generated or mark it @generated NOT
 		fail();
@@ -157,7 +151,6 @@ public class TypeTest extends NamedElementTest {
 	 * @generated
 	 */
 	public void testAllProperties() {
-
 		// TODO: implement this operation test method
 		// Ensure that you remove @generated or mark it @generated NOT
 		fail();
@@ -171,7 +164,6 @@ public class TypeTest extends NamedElementTest {
 	 * @generated
 	 */
 	public void testAllOperations() {
-
 		// TODO: implement this operation test method
 		// Ensure that you remove @generated or mark it @generated NOT
 		fail();
@@ -185,7 +177,6 @@ public class TypeTest extends NamedElementTest {
 	 * @generated
 	 */
 	public void testLookupProperty__String() {
-
 		// TODO: implement this operation test method
 		// Ensure that you remove @generated or mark it @generated NOT
 		fail();
@@ -199,7 +190,6 @@ public class TypeTest extends NamedElementTest {
 	 * @generated
 	 */
 	public void testLookupOperation__String_List() {
-
 		// TODO: implement this operation test method
 		// Ensure that you remove @generated or mark it @generated NOT
 		fail();
@@ -213,7 +203,6 @@ public class TypeTest extends NamedElementTest {
 	 * @generated
 	 */
 	public void testAddProperty__Property() {
-
 		// TODO: implement this operation test method
 		// Ensure that you remove @generated or mark it @generated NOT
 		fail();
@@ -227,7 +216,6 @@ public class TypeTest extends NamedElementTest {
 	 * @generated
 	 */
 	public void testAddOperation__Operation() {
-
 		// TODO: implement this operation test method
 		// Ensure that you remove @generated or mark it @generated NOT
 		fail();
@@ -241,7 +229,6 @@ public class TypeTest extends NamedElementTest {
 	 * @generated
 	 */
 	public void testAddSuperType__Type() {
-
 		// TODO: implement this operation test method
 		// Ensure that you remove @generated or mark it @generated NOT
 		fail();
@@ -255,7 +242,6 @@ public class TypeTest extends NamedElementTest {
 	 * @generated
 	 */
 	public void testRemoveProperty__Property() {
-
 		// TODO: implement this operation test method
 		// Ensure that you remove @generated or mark it @generated NOT
 		fail();
@@ -269,7 +255,6 @@ public class TypeTest extends NamedElementTest {
 	 * @generated
 	 */
 	public void testRemoveOperation__Operation() {
-
 		// TODO: implement this operation test method
 		// Ensure that you remove @generated or mark it @generated NOT
 		fail();
@@ -283,7 +268,6 @@ public class TypeTest extends NamedElementTest {
 	 * @generated
 	 */
 	public void testAddTypeParameter__TypeParameter() {
-
 		// TODO: implement this operation test method
 		// Ensure that you remove @generated or mark it @generated NOT
 		fail();
@@ -297,7 +281,6 @@ public class TypeTest extends NamedElementTest {
 	 * @generated
 	 */
 	public void testBindTypeParameter__List_List() {
-
 		// TODO: implement this operation test method
 		// Ensure that you remove @generated or mark it @generated NOT
 		fail();

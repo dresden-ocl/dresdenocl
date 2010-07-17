@@ -57,7 +57,6 @@ public abstract class GenericTypeTest extends NamedElementTest {
 	 * @generated
 	 */
 	public GenericTypeTest(String name) {
-
 		super(name);
 	}
 
@@ -69,7 +68,6 @@ public abstract class GenericTypeTest extends NamedElementTest {
 	 */
 	@Override
 	protected GenericType getFixture() {
-
 		return (GenericType) fixture;
 	}
 
@@ -81,7 +79,6 @@ public abstract class GenericTypeTest extends NamedElementTest {
 	 * @generated
 	 */
 	public void testBindGenericType__List_List_TypedElement() {
-
 		// TODO: implement this operation test method
 		// Ensure that you remove @generated or mark it @generated NOT
 		fail();
@@ -95,7 +92,6 @@ public abstract class GenericTypeTest extends NamedElementTest {
 	 * @generated
 	 */
 	public void testBindGenericSuperType__List_List_Type() {
-
 		// TODO: implement this operation test method
 		// Ensure that you remove @generated or mark it @generated NOT
 		fail();
@@ -109,7 +105,6 @@ public abstract class GenericTypeTest extends NamedElementTest {
 	 * @generated
 	 */
 	public void testIsConformant__Type() {
-
 		// TODO: implement this operation test method
 		// Ensure that you remove @generated or mark it @generated NOT
 		fail();

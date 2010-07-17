@@ -51,11 +51,6 @@
     <genClasses image="false" ecoreClass="pivotmodel.ecore#//Feature">
       <genFeatures notify="false" createChild="false" ecoreFeature="ecore:EAttribute pivotmodel.ecore#//Feature/static"/>
     </genClasses>
-    <genClasses image="false" ecoreClass="pivotmodel.ecore#//MultiplicityElement">
-      <genFeatures notify="false" createChild="false" ecoreFeature="ecore:EAttribute pivotmodel.ecore#//MultiplicityElement/ordered"/>
-      <genFeatures notify="false" createChild="false" ecoreFeature="ecore:EAttribute pivotmodel.ecore#//MultiplicityElement/unique"/>
-      <genFeatures notify="false" createChild="false" ecoreFeature="ecore:EAttribute pivotmodel.ecore#//MultiplicityElement/multiple"/>
-    </genClasses>
     <genClasses image="false" ecoreClass="pivotmodel.ecore#//GenericElement">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference pivotmodel.ecore#//GenericElement/ownedTypeParameter"/>
       <genOperations ecoreOperation="pivotmodel.ecore#//GenericElement/bindTypeParameter">

@@ -47,6 +47,7 @@ import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 
 import tudresden.ocl20.pivot.pivotmodel.ParameterGenericType;
+import tudresden.ocl20.pivot.pivotmodel.PivotModelPackage;
 import tudresden.ocl20.pivot.pivotmodel.TypeParameter;
 import tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl;
 
@@ -67,7 +68,6 @@ public class ParameterGenericTypeItemProvider extends GenericTypeItemProvider
 	 * @generated
 	 */
 	public ParameterGenericTypeItemProvider(AdapterFactory adapterFactory) {
-
 		super(adapterFactory);
 	}
 
@@ -79,7 +79,6 @@ public class ParameterGenericTypeItemProvider extends GenericTypeItemProvider
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
-
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
@@ -95,7 +94,6 @@ public class ParameterGenericTypeItemProvider extends GenericTypeItemProvider
 	 * @generated
 	 */
 	protected void addTypeParameterPropertyDescriptor(Object object) {
-
 		itemPropertyDescriptors
 				.add(createItemPropertyDescriptor(
 						((ComposeableAdapterFactory) adapterFactory)
@@ -104,7 +102,7 @@ public class ParameterGenericTypeItemProvider extends GenericTypeItemProvider
 						getString("_UI_ParameterGenericType_typeParameter_feature"), //$NON-NLS-1$
 						getString(
 								"_UI_PropertyDescriptor_description", "_UI_ParameterGenericType_typeParameter_feature", "_UI_ParameterGenericType_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-						PivotModelPackageImpl.Literals.PARAMETER_GENERIC_TYPE__TYPE_PARAMETER,
+						PivotModelPackage.Literals.PARAMETER_GENERIC_TYPE__TYPE_PARAMETER,
 						true, false, true, null, null, null));
 	}
 
@@ -144,7 +142,6 @@ public class ParameterGenericTypeItemProvider extends GenericTypeItemProvider
 	 */
 	@Override
 	public void notifyChanged(Notification notification) {
-
 		updateChildren(notification);
 		super.notifyChanged(notification);
 	}
@@ -159,7 +156,6 @@ public class ParameterGenericTypeItemProvider extends GenericTypeItemProvider
 	@Override
 	protected void collectNewChildDescriptors(
 			Collection<Object> newChildDescriptors, Object object) {
-
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 	}
 

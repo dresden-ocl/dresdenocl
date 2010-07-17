@@ -116,41 +116,11 @@ public class JavaField extends AbstractProperty implements Property {
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.FeatureImpl#isMultiple()
-	 */
-	@Override
-	public boolean isMultiple() {
-
-		return JavaAdapterFactory.isMultiple(this.myField.getType());
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.FeatureImpl#isOrdered()
-	 */
-	@Override
-	public boolean isOrdered() {
-
-		return JavaAdapterFactory.isOrdered(this.myField.getType());
-	}
-
-	/*
-	 * (non-Javadoc)
 	 * @see tudresden.ocl20.pivot.pivotmodel.impl.FeatureImpl#isStatic()
 	 */
 	@Override
 	public boolean isStatic() {
 
 		return Modifier.isStatic(this.myField.getModifiers());
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.FeatureImpl#isUnique()
-	 */
-	@Override
-	public boolean isUnique() {
-
-		return JavaAdapterFactory.isUnique(this.myField.getType());
 	}
 }

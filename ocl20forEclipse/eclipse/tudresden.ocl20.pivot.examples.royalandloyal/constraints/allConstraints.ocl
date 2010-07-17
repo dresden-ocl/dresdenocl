@@ -38,7 +38,7 @@ def: getTotalPoints(d: Date) : Integer = transactions->select(date.isAfter(d)).p
 
 -- Definition 7:
 context CustomerCard
-def: getAllInstances() : Set(CustomerCard) = self.allInstances()
+def: getAllInstances() : Set(CustomerCard) = CustomerCard.allInstances()
 
 -- Definition 8:
 context ProgramPartner

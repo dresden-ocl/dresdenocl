@@ -82,7 +82,6 @@ public class CollectionRangeImpl extends CollectionLiteralPartImpl implements
 	 * @generated
 	 */
 	protected CollectionRangeImpl() {
-
 		super();
 	}
 
@@ -92,7 +91,6 @@ public class CollectionRangeImpl extends CollectionLiteralPartImpl implements
 	 */
 	@Override
 	protected EClass eStaticClass() {
-
 		return ExpressionsPackageImpl.Literals.COLLECTION_RANGE;
 	}
 
@@ -130,7 +128,6 @@ public class CollectionRangeImpl extends CollectionLiteralPartImpl implements
 	 * @generated
 	 */
 	public OclExpression getFirst() {
-
 		return first;
 	}
 
@@ -140,14 +137,13 @@ public class CollectionRangeImpl extends CollectionLiteralPartImpl implements
 	 */
 	public NotificationChain basicSetFirst(OclExpression newFirst,
 			NotificationChain msgs) {
-
 		OclExpression oldFirst = first;
 		first = newFirst;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification =
-					new ENotificationImpl(this, Notification.SET,
-							ExpressionsPackageImpl.COLLECTION_RANGE__FIRST, oldFirst,
-							newFirst);
+			ENotificationImpl notification = new ENotificationImpl(this,
+					Notification.SET,
+					ExpressionsPackageImpl.COLLECTION_RANGE__FIRST, oldFirst,
+					newFirst);
 			if (msgs == null)
 				msgs = notification;
 			else
@@ -161,28 +157,29 @@ public class CollectionRangeImpl extends CollectionLiteralPartImpl implements
 	 * @generated
 	 */
 	public void setFirst(OclExpression newFirst) {
-
 		if (newFirst != first) {
 			NotificationChain msgs = null;
 			if (first != null)
-				msgs =
-						((InternalEObject) first).eInverseRemove(this,
+				msgs = ((InternalEObject) first)
+						.eInverseRemove(
+								this,
 								EOPPOSITE_FEATURE_BASE
-										- ExpressionsPackageImpl.COLLECTION_RANGE__FIRST, null,
-								msgs);
+										- ExpressionsPackageImpl.COLLECTION_RANGE__FIRST,
+								null, msgs);
 			if (newFirst != null)
-				msgs =
-						((InternalEObject) newFirst).eInverseAdd(this,
+				msgs = ((InternalEObject) newFirst)
+						.eInverseAdd(
+								this,
 								EOPPOSITE_FEATURE_BASE
-										- ExpressionsPackageImpl.COLLECTION_RANGE__FIRST, null,
-								msgs);
+										- ExpressionsPackageImpl.COLLECTION_RANGE__FIRST,
+								null, msgs);
 			msgs = basicSetFirst(newFirst, msgs);
 			if (msgs != null)
 				msgs.dispatch();
-		}
-		else if (eNotificationRequired())
+		} else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
-					ExpressionsPackageImpl.COLLECTION_RANGE__FIRST, newFirst, newFirst));
+					ExpressionsPackageImpl.COLLECTION_RANGE__FIRST, newFirst,
+					newFirst));
 	}
 
 	/**
@@ -190,7 +187,6 @@ public class CollectionRangeImpl extends CollectionLiteralPartImpl implements
 	 * @generated
 	 */
 	public OclExpression getLast() {
-
 		return last;
 	}
 
@@ -200,13 +196,13 @@ public class CollectionRangeImpl extends CollectionLiteralPartImpl implements
 	 */
 	public NotificationChain basicSetLast(OclExpression newLast,
 			NotificationChain msgs) {
-
 		OclExpression oldLast = last;
 		last = newLast;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification =
-					new ENotificationImpl(this, Notification.SET,
-							ExpressionsPackageImpl.COLLECTION_RANGE__LAST, oldLast, newLast);
+			ENotificationImpl notification = new ENotificationImpl(this,
+					Notification.SET,
+					ExpressionsPackageImpl.COLLECTION_RANGE__LAST, oldLast,
+					newLast);
 			if (msgs == null)
 				msgs = notification;
 			else
@@ -220,26 +216,29 @@ public class CollectionRangeImpl extends CollectionLiteralPartImpl implements
 	 * @generated
 	 */
 	public void setLast(OclExpression newLast) {
-
 		if (newLast != last) {
 			NotificationChain msgs = null;
 			if (last != null)
-				msgs =
-						((InternalEObject) last)
-								.eInverseRemove(this, EOPPOSITE_FEATURE_BASE
-										- ExpressionsPackageImpl.COLLECTION_RANGE__LAST, null, msgs);
+				msgs = ((InternalEObject) last)
+						.eInverseRemove(
+								this,
+								EOPPOSITE_FEATURE_BASE
+										- ExpressionsPackageImpl.COLLECTION_RANGE__LAST,
+								null, msgs);
 			if (newLast != null)
-				msgs =
-						((InternalEObject) newLast)
-								.eInverseAdd(this, EOPPOSITE_FEATURE_BASE
-										- ExpressionsPackageImpl.COLLECTION_RANGE__LAST, null, msgs);
+				msgs = ((InternalEObject) newLast)
+						.eInverseAdd(
+								this,
+								EOPPOSITE_FEATURE_BASE
+										- ExpressionsPackageImpl.COLLECTION_RANGE__LAST,
+								null, msgs);
 			msgs = basicSetLast(newLast, msgs);
 			if (msgs != null)
 				msgs.dispatch();
-		}
-		else if (eNotificationRequired())
+		} else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
-					ExpressionsPackageImpl.COLLECTION_RANGE__LAST, newLast, newLast));
+					ExpressionsPackageImpl.COLLECTION_RANGE__LAST, newLast,
+					newLast));
 	}
 
 	/**
@@ -249,7 +248,6 @@ public class CollectionRangeImpl extends CollectionLiteralPartImpl implements
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd,
 			int featureID, NotificationChain msgs) {
-
 		switch (featureID) {
 		case ExpressionsPackageImpl.COLLECTION_RANGE__FIRST:
 			return basicSetFirst(null, msgs);
@@ -265,7 +263,6 @@ public class CollectionRangeImpl extends CollectionLiteralPartImpl implements
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-
 		switch (featureID) {
 		case ExpressionsPackageImpl.COLLECTION_RANGE__FIRST:
 			return getFirst();
@@ -281,7 +278,6 @@ public class CollectionRangeImpl extends CollectionLiteralPartImpl implements
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-
 		switch (featureID) {
 		case ExpressionsPackageImpl.COLLECTION_RANGE__FIRST:
 			setFirst((OclExpression) newValue);
@@ -299,7 +295,6 @@ public class CollectionRangeImpl extends CollectionLiteralPartImpl implements
 	 */
 	@Override
 	public void eUnset(int featureID) {
-
 		switch (featureID) {
 		case ExpressionsPackageImpl.COLLECTION_RANGE__FIRST:
 			setFirst((OclExpression) null);
@@ -317,7 +312,6 @@ public class CollectionRangeImpl extends CollectionLiteralPartImpl implements
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-
 		switch (featureID) {
 		case ExpressionsPackageImpl.COLLECTION_RANGE__FIRST:
 			return first != null;

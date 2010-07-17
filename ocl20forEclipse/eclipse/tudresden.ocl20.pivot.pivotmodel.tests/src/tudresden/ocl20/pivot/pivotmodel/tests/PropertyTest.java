@@ -34,6 +34,7 @@ package tudresden.ocl20.pivot.pivotmodel.tests;
 
 import junit.textui.TestRunner;
 
+import tudresden.ocl20.pivot.pivotmodel.PivotModelFactory;
 import tudresden.ocl20.pivot.pivotmodel.Property;
 
 import tudresden.ocl20.pivot.pivotmodel.impl.PivotModelFactoryImpl;
@@ -58,7 +59,6 @@ public class PropertyTest extends FeatureTest {
 	 * @generated
 	 */
 	public static void main(String[] args) {
-
 		TestRunner.run(PropertyTest.class);
 	}
 
@@ -69,7 +69,6 @@ public class PropertyTest extends FeatureTest {
 	 * @generated
 	 */
 	public PropertyTest(String name) {
-
 		super(name);
 	}
 
@@ -81,7 +80,6 @@ public class PropertyTest extends FeatureTest {
 	 */
 	@Override
 	protected Property getFixture() {
-
 		return (Property) fixture;
 	}
 
@@ -93,8 +91,7 @@ public class PropertyTest extends FeatureTest {
 	 */
 	@Override
 	protected void setUp() throws Exception {
-
-		setFixture(PivotModelFactoryImpl.eINSTANCE.createProperty());
+		setFixture(PivotModelFactory.eINSTANCE.createProperty());
 	}
 
 	/**
@@ -105,7 +102,6 @@ public class PropertyTest extends FeatureTest {
 	 */
 	@Override
 	protected void tearDown() throws Exception {
-
 		setFixture(null);
 	}
 
@@ -117,7 +113,6 @@ public class PropertyTest extends FeatureTest {
 	 * @generated
 	 */
 	public void testCmpSlots__Property() {
-
 		// TODO: implement this operation test method
 		// Ensure that you remove @generated or mark it @generated NOT
 		fail();

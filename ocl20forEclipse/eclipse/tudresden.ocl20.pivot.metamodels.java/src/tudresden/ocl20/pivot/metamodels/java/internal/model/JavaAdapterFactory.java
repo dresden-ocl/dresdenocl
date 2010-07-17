@@ -647,7 +647,7 @@ public class JavaAdapterFactory {
 	 * A helper method which adapts a given Java {@link Class} as a pivot model
 	 * {@link Type}.
 	 * 
-	 * @param aType
+	 * @param aClass
 	 *            The Java {@link Class} which shall be adapted.
 	 * @param aGenericType
 	 *            The generic {@link java.lang.reflect.Type} to the given
@@ -655,46 +655,102 @@ public class JavaAdapterFactory {
 	 *            a generic type.
 	 * @return The adapted {@link Type}.
 	 */
-	protected Type adaptJavaType(Class<?> aType,
+	protected Type adaptJavaType(Class<?> aClass,
 			java.lang.reflect.Type aGenericType) {
 
 		Type result;
 
 		/* If the type is an array get its component type. */
-		if (aType.isArray()) {
-			aType = aType.getComponentType();
+		if (aClass.isArray()) {
+			aClass = aClass.getComponentType();
+
+			Type genericType;
+			genericType = this.createType(aClass);
+
+			result = EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+					.getSequenceType(genericType);
 		}
 
 		/* Else if the type is a collection get its generic type. */
-		else if (Collection.class.isAssignableFrom(aType)) {
+		else if (Collection.class.isAssignableFrom(aClass)) {
+
+			Type genericType;
 
 			if (aGenericType instanceof ParameterizedType) {
-
-				java.lang.reflect.Type arguments[];
-				java.lang.reflect.Type argument;
-
-				arguments = ((ParameterizedType) aGenericType)
-						.getActualTypeArguments();
-
-				/* Use the first generic type of the collection as type. */
-				argument = arguments[0];
-
-				if (argument instanceof Class<?>) {
-					aType = (Class<?>) arguments[0];
-				}
-
-				else if (argument instanceof TypeVariable<?>) {
-					aType = (Class<?>) ((TypeVariable<?>) argument).getBounds()[0];
-				}
+				genericType = adaptGenericClass((ParameterizedType) aGenericType);
 			}
 
 			else {
-				aType = Object.class;
+				genericType = this.createType(Object.class);
 			}
-		}
-		// no else.
 
-		result = this.createType(aType);
+			result = this.adaptCollectionClass(aClass, genericType);
+		}
+
+		else {
+			result = this.createType(aClass);
+		}
+
+		return result;
+	}
+
+	private Type adaptCollectionClass(Class<?> aClass, Type genericType) {
+
+		Type result;
+
+		if (List.class.isAssignableFrom(aClass)) {
+			result = EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+					.getSequenceType(genericType);
+		}
+
+		else if (Set.class.isAssignableFrom(aClass)) {
+			result = EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+					.getSetType(genericType);
+		}
+
+		else {
+			result = EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+					.getCollectionType(genericType);
+		}
+
+		return result;
+	}
+
+	private Type adaptGenericClass(ParameterizedType parameterizedType) {
+
+		Type result;
+
+		java.lang.reflect.Type arguments[];
+		java.lang.reflect.Type argument;
+
+		arguments = parameterizedType.getActualTypeArguments();
+
+		/* Use the first generic type of the collection as type. */
+		argument = arguments[0];
+
+		if (argument instanceof Class<?>) {
+			result = this.createType((Class<?>) arguments[0]);
+		}
+
+		else if (argument instanceof TypeVariable<?>) {
+			result = this.createType((Class<?>) ((TypeVariable<?>) argument)
+					.getBounds()[0]);
+		}
+
+		else if (argument instanceof ParameterizedType) {
+			Type genericType;
+			genericType = this.adaptGenericClass((ParameterizedType) argument);
+
+			result = this.adaptCollectionClass(
+					(Class<?>) ((ParameterizedType) argument).getRawType(),
+					genericType);
+		}
+
+		else {
+			LOGGER.warn("Adapted Generic Type " + argument
+					+ " to java.lang.Object.");
+			result = this.createType(Object.class);
+		}
 
 		return result;
 	}

@@ -47,34 +47,34 @@ import tudresden.ocl20.pivot.essentialocl.expressions.tests.ExpressionsTests;
  */
 public class EssentialOCLAllTests extends TestSuite {
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public static void main(String[] args) {
-    TestRunner.run(suite());
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static void main(String[] args) {
+		TestRunner.run(suite());
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public static Test suite() {
-    TestSuite suite = new EssentialOCLAllTests("Essential OCL Tests"); //$NON-NLS-1$
-    suite.addTest(TypesTests.suite());
-    suite.addTest(ExpressionsTests.suite());
-    return suite;
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static Test suite() {
+		TestSuite suite = new EssentialOCLAllTests("Essential OCL Tests"); //$NON-NLS-1$
+		suite.addTest(TypesTests.suite());
+		suite.addTest(ExpressionsTests.suite());
+		return suite;
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EssentialOCLAllTests(String name) {
-    super(name);
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EssentialOCLAllTests(String name) {
+		super(name);
+	}
 
 } //EssentialOCLAllTests

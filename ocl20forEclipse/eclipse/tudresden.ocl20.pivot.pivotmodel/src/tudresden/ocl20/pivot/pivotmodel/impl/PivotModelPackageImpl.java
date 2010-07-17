@@ -36,7 +36,6 @@ import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EEnum;
-import org.eclipse.emf.ecore.EFactory;
 import org.eclipse.emf.ecore.EGenericType;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
@@ -55,7 +54,6 @@ import tudresden.ocl20.pivot.pivotmodel.Expression;
 import tudresden.ocl20.pivot.pivotmodel.Feature;
 import tudresden.ocl20.pivot.pivotmodel.GenericElement;
 import tudresden.ocl20.pivot.pivotmodel.GenericType;
-import tudresden.ocl20.pivot.pivotmodel.MultiplicityElement;
 import tudresden.ocl20.pivot.pivotmodel.NDirectionalProperty;
 import tudresden.ocl20.pivot.pivotmodel.NamedElement;
 import tudresden.ocl20.pivot.pivotmodel.Namespace;
@@ -109,13 +107,6 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 * @generated
 	 */
 	private EClass operationEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass multiplicityElementEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -460,45 +451,6 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 */
 	public EReference getOperation_SignatureParameter() {
 		return (EReference) operationEClass.getEStructuralFeatures().get(5);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getMultiplicityElement() {
-		return multiplicityElementEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getMultiplicityElement_Ordered() {
-		return (EAttribute) multiplicityElementEClass.getEStructuralFeatures()
-				.get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getMultiplicityElement_Unique() {
-		return (EAttribute) multiplicityElementEClass.getEStructuralFeatures()
-				.get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getMultiplicityElement_Multiple() {
-		return (EAttribute) multiplicityElementEClass.getEStructuralFeatures()
-				.get(2);
 	}
 
 	/**
@@ -1034,14 +986,6 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 		featureEClass = createEClass(FEATURE);
 		createEAttribute(featureEClass, FEATURE__STATIC);
 
-		multiplicityElementEClass = createEClass(MULTIPLICITY_ELEMENT);
-		createEAttribute(multiplicityElementEClass,
-				MULTIPLICITY_ELEMENT__ORDERED);
-		createEAttribute(multiplicityElementEClass,
-				MULTIPLICITY_ELEMENT__UNIQUE);
-		createEAttribute(multiplicityElementEClass,
-				MULTIPLICITY_ELEMENT__MULTIPLE);
-
 		genericElementEClass = createEClass(GENERIC_ELEMENT);
 		createEReference(genericElementEClass,
 				GENERIC_ELEMENT__OWNED_TYPE_PARAMETER);
@@ -1164,7 +1108,6 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 		// Add supertypes to classes
 		typedElementEClass.getESuperTypes().add(this.getNamedElement());
 		featureEClass.getESuperTypes().add(this.getTypedElement());
-		featureEClass.getESuperTypes().add(this.getMultiplicityElement());
 		genericElementEClass.getESuperTypes().add(this.getNamedElement());
 		namespaceEClass.getESuperTypes().add(this.getNamedElement());
 		namespaceEClass.getESuperTypes().add(this.getGenericElement());
@@ -1177,17 +1120,14 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 		propertyEClass.getESuperTypes().add(this.getFeature());
 		propertyEClass.getESuperTypes().add(this.getTypedElement());
 		propertyEClass.getESuperTypes().add(this.getNamedElement());
-		propertyEClass.getESuperTypes().add(this.getMultiplicityElement());
 		propertyEClass.getESuperTypes().add(this.getConstrainableElement());
 		operationEClass.getESuperTypes().add(this.getFeature());
 		operationEClass.getESuperTypes().add(this.getTypedElement());
 		operationEClass.getESuperTypes().add(this.getNamedElement());
-		operationEClass.getESuperTypes().add(this.getMultiplicityElement());
 		operationEClass.getESuperTypes().add(this.getConstrainableElement());
 		operationEClass.getESuperTypes().add(this.getGenericElement());
 		parameterEClass.getESuperTypes().add(this.getTypedElement());
 		parameterEClass.getESuperTypes().add(this.getNamedElement());
-		parameterEClass.getESuperTypes().add(this.getMultiplicityElement());
 		genericTypeEClass.getESuperTypes().add(this.getNamedElement());
 		parameterGenericTypeEClass.getESuperTypes().add(this.getGenericType());
 		complexGenericTypeEClass.getESuperTypes().add(this.getGenericType());
@@ -1245,23 +1185,6 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 				getFeature_Static(),
 				theDatatypesPackage.getBoolean(),
 				"static", "false", 0, 1, Feature.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$ //$NON-NLS-2$
-
-		initEClass(
-				multiplicityElementEClass,
-				MultiplicityElement.class,
-				"MultiplicityElement", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
-		initEAttribute(
-				getMultiplicityElement_Ordered(),
-				theDatatypesPackage.getBoolean(),
-				"ordered", "false", 0, 1, MultiplicityElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$ //$NON-NLS-2$
-		initEAttribute(
-				getMultiplicityElement_Unique(),
-				theDatatypesPackage.getBoolean(),
-				"unique", "true", 0, 1, MultiplicityElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$ //$NON-NLS-2$
-		initEAttribute(
-				getMultiplicityElement_Multiple(),
-				theDatatypesPackage.getBoolean(),
-				"multiple", "false", 0, 1, MultiplicityElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$ //$NON-NLS-2$
 
 		initEClass(
 				genericElementEClass,

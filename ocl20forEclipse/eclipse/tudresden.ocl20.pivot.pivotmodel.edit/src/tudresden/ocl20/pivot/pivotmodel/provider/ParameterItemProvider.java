@@ -49,6 +49,7 @@ import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
 import tudresden.ocl20.pivot.pivotmodel.Parameter;
+import tudresden.ocl20.pivot.pivotmodel.PivotModelPackage;
 import tudresden.ocl20.pivot.pivotmodel.ParameterDirectionKind;
 import tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl;
 
@@ -68,7 +69,6 @@ public class ParameterItemProvider extends TypedElementItemProvider implements
 	 * @generated
 	 */
 	public ParameterItemProvider(AdapterFactory adapterFactory) {
-
 		super(adapterFactory);
 	}
 
@@ -80,79 +80,12 @@ public class ParameterItemProvider extends TypedElementItemProvider implements
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
-
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addOrderedPropertyDescriptor(object);
-			addUniquePropertyDescriptor(object);
-			addMultiplePropertyDescriptor(object);
 			addKindPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
-	}
-
-	/**
-	 * This adds a property descriptor for the Ordered feature.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
-	 * @generated
-	 */
-	protected void addOrderedPropertyDescriptor(Object object) {
-
-		itemPropertyDescriptors
-				.add(createItemPropertyDescriptor(
-						((ComposeableAdapterFactory) adapterFactory)
-								.getRootAdapterFactory(),
-						getResourceLocator(),
-						getString("_UI_MultiplicityElement_ordered_feature"), //$NON-NLS-1$
-						getString(
-								"_UI_PropertyDescriptor_description", "_UI_MultiplicityElement_ordered_feature", "_UI_MultiplicityElement_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-						PivotModelPackageImpl.Literals.MULTIPLICITY_ELEMENT__ORDERED, true,
-						false, false, ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE, null,
-						null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Unique feature.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
-	 * @generated
-	 */
-	protected void addUniquePropertyDescriptor(Object object) {
-
-		itemPropertyDescriptors
-				.add(createItemPropertyDescriptor(
-						((ComposeableAdapterFactory) adapterFactory)
-								.getRootAdapterFactory(),
-						getResourceLocator(),
-						getString("_UI_MultiplicityElement_unique_feature"), //$NON-NLS-1$
-						getString(
-								"_UI_PropertyDescriptor_description", "_UI_MultiplicityElement_unique_feature", "_UI_MultiplicityElement_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-						PivotModelPackageImpl.Literals.MULTIPLICITY_ELEMENT__UNIQUE, true,
-						false, false, ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE, null,
-						null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Multiple feature.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
-	 * @generated
-	 */
-	protected void addMultiplePropertyDescriptor(Object object) {
-
-		itemPropertyDescriptors
-				.add(createItemPropertyDescriptor(
-						((ComposeableAdapterFactory) adapterFactory)
-								.getRootAdapterFactory(),
-						getResourceLocator(),
-						getString("_UI_MultiplicityElement_multiple_feature"), //$NON-NLS-1$
-						getString(
-								"_UI_PropertyDescriptor_description", "_UI_MultiplicityElement_multiple_feature", "_UI_MultiplicityElement_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-						PivotModelPackageImpl.Literals.MULTIPLICITY_ELEMENT__MULTIPLE,
-						true, false, false, ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
-						null, null));
 	}
 
 	/**
@@ -162,7 +95,6 @@ public class ParameterItemProvider extends TypedElementItemProvider implements
 	 * @generated
 	 */
 	protected void addKindPropertyDescriptor(Object object) {
-
 		itemPropertyDescriptors
 				.add(createItemPropertyDescriptor(
 						((ComposeableAdapterFactory) adapterFactory)
@@ -171,7 +103,8 @@ public class ParameterItemProvider extends TypedElementItemProvider implements
 						getString("_UI_Parameter_kind_feature"), //$NON-NLS-1$
 						getString(
 								"_UI_PropertyDescriptor_description", "_UI_Parameter_kind_feature", "_UI_Parameter_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-						PivotModelPackageImpl.Literals.PARAMETER__KIND, true, false, false,
+						PivotModelPackage.Literals.PARAMETER__KIND, true,
+						false, false,
 						ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
 	}
 
@@ -237,8 +170,8 @@ public class ParameterItemProvider extends TypedElementItemProvider implements
 			// the return parameter was changed, the operation signature must be updated
 			if (notification.getOldValue() == ParameterDirectionKind.RETURN
 					|| notification.getNewValue() == ParameterDirectionKind.RETURN) {
-				fireNotifyChanged(new ViewerNotification(notification, parameter
-						.getOperation(), false, true));
+				fireNotifyChanged(new ViewerNotification(notification,
+						parameter.getOperation(), false, true));
 			}
 
 			return;
@@ -266,7 +199,6 @@ public class ParameterItemProvider extends TypedElementItemProvider implements
 	@Override
 	protected void collectNewChildDescriptors(
 			Collection<Object> newChildDescriptors, Object object) {
-
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 	}
 

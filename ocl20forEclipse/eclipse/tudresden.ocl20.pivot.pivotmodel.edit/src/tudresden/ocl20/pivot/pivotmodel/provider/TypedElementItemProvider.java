@@ -51,6 +51,7 @@ import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
+import tudresden.ocl20.pivot.pivotmodel.PivotModelPackage;
 import tudresden.ocl20.pivot.pivotmodel.ComplexGenericType;
 import tudresden.ocl20.pivot.pivotmodel.GenericElement;
 import tudresden.ocl20.pivot.pivotmodel.GenericType;
@@ -80,7 +81,6 @@ public class TypedElementItemProvider extends NamedElementItemProvider
 	 * @generated
 	 */
 	public TypedElementItemProvider(AdapterFactory adapterFactory) {
-
 		super(adapterFactory);
 	}
 
@@ -92,7 +92,6 @@ public class TypedElementItemProvider extends NamedElementItemProvider
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
-
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
@@ -129,7 +128,6 @@ public class TypedElementItemProvider extends NamedElementItemProvider
 	 * @generated
 	 */
 	protected void addGenericTypePropertyDescriptor(Object object) {
-
 		itemPropertyDescriptors
 				.add(createItemPropertyDescriptor(
 						((ComposeableAdapterFactory) adapterFactory)
@@ -138,8 +136,8 @@ public class TypedElementItemProvider extends NamedElementItemProvider
 						getString("_UI_TypedElement_genericType_feature"), //$NON-NLS-1$
 						getString(
 								"_UI_PropertyDescriptor_description", "_UI_TypedElement_genericType_feature", "_UI_TypedElement_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-						PivotModelPackageImpl.Literals.TYPED_ELEMENT__GENERIC_TYPE, false,
-						false, false, null, null, null));
+						PivotModelPackage.Literals.TYPED_ELEMENT__GENERIC_TYPE,
+						false, false, false, null, null, null));
 	}
 
 	/**
@@ -155,9 +153,10 @@ public class TypedElementItemProvider extends NamedElementItemProvider
 		public TypePropertyDescriptor(String displayName, String description) {
 
 			super(((ComposeableAdapterFactory) getAdapterFactory())
-					.getRootAdapterFactory(), getResourceLocator(), displayName,
-					description, PivotModelPackageImpl.Literals.TYPED_ELEMENT__TYPE,
-					true, false, true, null, null, null);
+					.getRootAdapterFactory(), getResourceLocator(),
+					displayName, description,
+					PivotModelPackageImpl.Literals.TYPED_ELEMENT__TYPE, true,
+					false, true, null, null, null);
 		}
 
 		/**
@@ -169,11 +168,12 @@ public class TypedElementItemProvider extends NamedElementItemProvider
 		@Override
 		public Collection<?> getChoiceOfValues(Object object) {
 
-			Collection<Object> result =
-					new ArrayList<Object>(super.getChoiceOfValues(object));
+			Collection<Object> result = new ArrayList<Object>(super
+					.getChoiceOfValues(object));
 
 			// go up the containment hierachy and collect all type parameters
-			for (NamedElement e = (NamedElement) object; e != null; e = e.getOwner()) {
+			for (NamedElement e = (NamedElement) object; e != null; e = e
+					.getOwner()) {
 
 				// the owner (operation, type, namespace) should usually be a
 				// GenericElement
@@ -202,8 +202,8 @@ public class TypedElementItemProvider extends NamedElementItemProvider
 
 				// create a new generic type for type parameters and set its
 				// referenced type parameter
-				ParameterGenericType genericType =
-						PivotModelFactory.eINSTANCE.createParameterGenericType();
+				ParameterGenericType genericType = PivotModelFactory.eINSTANCE
+						.createParameterGenericType();
 				genericType.setTypeParameter(typeParameter);
 
 				setGenericType(typedElement, genericType);
@@ -218,14 +218,15 @@ public class TypedElementItemProvider extends NamedElementItemProvider
 
 					// create a new complex generic type and set the given type
 					// as a reference
-					ComplexGenericType genericType =
-							PivotModelFactory.eINSTANCE.createComplexGenericType();
+					ComplexGenericType genericType = PivotModelFactory.eINSTANCE
+							.createComplexGenericType();
 					genericType.setUnboundType(type);
 
 					// append type arguments for each type parameter
 					for (int i = 0, size = type.getOwnedTypeParameter().size(); i < size; i++) {
 						genericType.getTypeArgument().add(
-								PivotModelFactory.eINSTANCE.createTypeArgument());
+								PivotModelFactory.eINSTANCE
+										.createTypeArgument());
 					}
 
 					setGenericType(typedElement, genericType);
@@ -253,10 +254,15 @@ public class TypedElementItemProvider extends NamedElementItemProvider
 			EditingDomain editingDomain = getEditingDomain(typedElement);
 
 			if (editingDomain != null) {
-				editingDomain.getCommandStack().execute(
-						SetCommand.create(editingDomain, typedElement,
-								PivotModelPackageImpl.Literals.TYPED_ELEMENT__GENERIC_TYPE,
-								genericType));
+				editingDomain
+						.getCommandStack()
+						.execute(
+								SetCommand
+										.create(
+												editingDomain,
+												typedElement,
+												PivotModelPackageImpl.Literals.TYPED_ELEMENT__GENERIC_TYPE,
+												genericType));
 			}
 
 			else {
@@ -286,8 +292,8 @@ public class TypedElementItemProvider extends NamedElementItemProvider
 		// ComplexGenericType
 		if (typedElement.getGenericType() != null
 				&& typedElement.getGenericType() instanceof ComplexGenericType) {
-			ComplexGenericType genericType =
-					(ComplexGenericType) typedElement.getGenericType();
+			ComplexGenericType genericType = (ComplexGenericType) typedElement
+					.getGenericType();
 
 			// check if the generic type has type arguments
 			if (!genericType.getTypeArgument().isEmpty()) {
@@ -381,7 +387,8 @@ public class TypedElementItemProvider extends NamedElementItemProvider
 	 */
 	protected CharSequence getTypedElementTypeName(TypedElement typedElement) {
 
-		return typedElement.getType() != null ? getTypeName(typedElement.getType())
+		return typedElement.getType() != null ? getTypeName(typedElement
+				.getType())
 				: (typedElement.getGenericType() != null ? getGenericTypeName(typedElement
 						.getGenericType())
 						: ""); //$NON-NLS-1$
@@ -427,12 +434,11 @@ public class TypedElementItemProvider extends NamedElementItemProvider
 	 */
 	@Override
 	public void notifyChanged(Notification notification) {
-
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(TypedElement.class)) {
-		case PivotModelPackageImpl.TYPED_ELEMENT__TYPE:
-		case PivotModelPackageImpl.TYPED_ELEMENT__GENERIC_TYPE:
+		case PivotModelPackage.TYPED_ELEMENT__TYPE:
+		case PivotModelPackage.TYPED_ELEMENT__GENERIC_TYPE:
 			fireNotifyChanged(new ViewerNotification(notification, notification
 					.getNotifier(), false, true));
 			return;
@@ -450,7 +456,6 @@ public class TypedElementItemProvider extends NamedElementItemProvider
 	@Override
 	protected void collectNewChildDescriptors(
 			Collection<Object> newChildDescriptors, Object object) {
-
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 	}
 

@@ -48,6 +48,7 @@ import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
+import tudresden.ocl20.pivot.pivotmodel.PivotModelPackage;
 import tudresden.ocl20.pivot.pivotmodel.PrimitiveType;
 import tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl;
 
@@ -68,7 +69,6 @@ public class PrimitiveTypeItemProvider extends TypeItemProvider implements
 	 * @generated
 	 */
 	public PrimitiveTypeItemProvider(AdapterFactory adapterFactory) {
-
 		super(adapterFactory);
 	}
 
@@ -80,7 +80,6 @@ public class PrimitiveTypeItemProvider extends TypeItemProvider implements
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
-
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
@@ -96,7 +95,6 @@ public class PrimitiveTypeItemProvider extends TypeItemProvider implements
 	 * @generated
 	 */
 	protected void addKindPropertyDescriptor(Object object) {
-
 		itemPropertyDescriptors
 				.add(createItemPropertyDescriptor(
 						((ComposeableAdapterFactory) adapterFactory)
@@ -105,8 +103,9 @@ public class PrimitiveTypeItemProvider extends TypeItemProvider implements
 						getString("_UI_PrimitiveType_kind_feature"), //$NON-NLS-1$
 						getString(
 								"_UI_PropertyDescriptor_description", "_UI_PrimitiveType_kind_feature", "_UI_PrimitiveType_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-						PivotModelPackageImpl.Literals.PRIMITIVE_TYPE__KIND, true, false,
-						false, ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
+						PivotModelPackage.Literals.PRIMITIVE_TYPE__KIND, true,
+						false, false,
+						ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
 	}
 
 	/**
@@ -117,7 +116,6 @@ public class PrimitiveTypeItemProvider extends TypeItemProvider implements
 	 */
 	@Override
 	public Object getImage(Object object) {
-
 		return overlayImage(object, getResourceLocator().getImage(
 				"full/obj16/PrimitiveType")); //$NON-NLS-1$
 	}
@@ -146,11 +144,10 @@ public class PrimitiveTypeItemProvider extends TypeItemProvider implements
 	 */
 	@Override
 	public void notifyChanged(Notification notification) {
-
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(PrimitiveType.class)) {
-		case PivotModelPackageImpl.PRIMITIVE_TYPE__KIND:
+		case PivotModelPackage.PRIMITIVE_TYPE__KIND:
 			fireNotifyChanged(new ViewerNotification(notification, notification
 					.getNotifier(), false, true));
 			return;
@@ -168,7 +165,6 @@ public class PrimitiveTypeItemProvider extends TypeItemProvider implements
 	@Override
 	protected void collectNewChildDescriptors(
 			Collection<Object> newChildDescriptors, Object object) {
-
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 	}
 

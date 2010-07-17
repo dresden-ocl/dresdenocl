@@ -49,7 +49,7 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
  *
  * @generated
  */
-public interface InvalidType extends EObject, Type {
+public interface InvalidType extends Type {
 
 	/**
 	 * Returns the value of the '<em><b>Ocl Library</b></em>' container reference.

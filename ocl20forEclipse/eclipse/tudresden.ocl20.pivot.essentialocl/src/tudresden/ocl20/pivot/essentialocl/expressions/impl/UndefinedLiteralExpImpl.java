@@ -53,15 +53,14 @@ public class UndefinedLiteralExpImpl extends LiteralExpImpl implements
 	/**
 	 * Logger for this class
 	 */
-	private static final Logger logger =
-			Logger.getLogger(UndefinedLiteralExpImpl.class);
+	private static final Logger logger = Logger
+			.getLogger(UndefinedLiteralExpImpl.class);
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	protected UndefinedLiteralExpImpl() {
-
 		super();
 	}
 
@@ -103,7 +102,6 @@ public class UndefinedLiteralExpImpl extends LiteralExpImpl implements
 	 */
 	@Override
 	protected EClass eStaticClass() {
-
 		return ExpressionsPackageImpl.Literals.UNDEFINED_LITERAL_EXP;
 	}
 

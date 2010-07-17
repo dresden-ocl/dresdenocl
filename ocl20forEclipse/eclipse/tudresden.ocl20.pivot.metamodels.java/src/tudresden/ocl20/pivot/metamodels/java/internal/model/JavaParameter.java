@@ -127,36 +127,6 @@ public class JavaParameter extends AbstractParameter implements Parameter {
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.ParameterImpl#isMultiple()
-	 */
-	@Override
-	public boolean isMultiple() {
-
-		return JavaAdapterFactory.isMultiple(this.myClass);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.ParameterImpl#isOrdered()
-	 */
-	@Override
-	public boolean isOrdered() {
-
-		return JavaAdapterFactory.isOrdered(this.myClass);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.ParameterImpl#isUnique()
-	 */
-	@Override
-	public boolean isUnique() {
-
-		return JavaAdapterFactory.isUnique(this.myClass);
-	}
-
-	/*
-	 * (non-Javadoc)
 	 * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractParameter#getName()
 	 */
 	@Override

@@ -82,7 +82,6 @@ public class TypeTypeImpl extends TypeImpl implements TypeType {
 	 * @generated
 	 */
 	protected TypeTypeImpl() {
-
 		super();
 	}
 
@@ -92,7 +91,6 @@ public class TypeTypeImpl extends TypeImpl implements TypeType {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-
 		return TypesPackageImpl.Literals.TYPE_TYPE;
 	}
 
@@ -101,7 +99,6 @@ public class TypeTypeImpl extends TypeImpl implements TypeType {
 	 * @generated
 	 */
 	public Type getRepresentedType() {
-
 		return representedType;
 	}
 
@@ -140,13 +137,12 @@ public class TypeTypeImpl extends TypeImpl implements TypeType {
 	 * @generated
 	 */
 	public void setRepresentedTypeGen(Type newRepresentedType) {
-
 		Type oldRepresentedType = representedType;
 		representedType = newRepresentedType;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
-					TypesPackageImpl.TYPE_TYPE__REPRESENTED_TYPE, oldRepresentedType,
-					representedType));
+					TypesPackageImpl.TYPE_TYPE__REPRESENTED_TYPE,
+					oldRepresentedType, representedType));
 	}
 
 	/**
@@ -173,7 +169,8 @@ public class TypeTypeImpl extends TypeImpl implements TypeType {
 			int index;
 
 			// find the TypeParameter that corresponds to the element type
-			index = ListUtil.indexOf(parameters, getOwnedTypeParameter().get(0));
+			index = ListUtil
+					.indexOf(parameters, getOwnedTypeParameter().get(0));
 
 			if (index != -1) {
 				representedType = types.get(index);
@@ -194,7 +191,6 @@ public class TypeTypeImpl extends TypeImpl implements TypeType {
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-
 		switch (featureID) {
 		case TypesPackageImpl.TYPE_TYPE__REPRESENTED_TYPE:
 			return getRepresentedType();
@@ -208,7 +204,6 @@ public class TypeTypeImpl extends TypeImpl implements TypeType {
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-
 		switch (featureID) {
 		case TypesPackageImpl.TYPE_TYPE__REPRESENTED_TYPE:
 			setRepresentedType((Type) newValue);
@@ -223,7 +218,6 @@ public class TypeTypeImpl extends TypeImpl implements TypeType {
 	 */
 	@Override
 	public void eUnset(int featureID) {
-
 		switch (featureID) {
 		case TypesPackageImpl.TYPE_TYPE__REPRESENTED_TYPE:
 			setRepresentedType((Type) null);
@@ -238,7 +232,6 @@ public class TypeTypeImpl extends TypeImpl implements TypeType {
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-
 		switch (featureID) {
 		case TypesPackageImpl.TYPE_TYPE__REPRESENTED_TYPE:
 			return representedType != null;

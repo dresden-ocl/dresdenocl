@@ -47,8 +47,7 @@ public interface TypesFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	TypesFactory INSTANCE =
-			tudresden.ocl20.pivot.essentialocl.types.impl.TypesFactoryImpl.eINSTANCE;
+	TypesFactory INSTANCE = tudresden.ocl20.pivot.essentialocl.types.impl.TypesFactoryImpl.eINSTANCE;
 
 	/**
 	 * Returns a new object of class '<em>Bag Type</em>'.

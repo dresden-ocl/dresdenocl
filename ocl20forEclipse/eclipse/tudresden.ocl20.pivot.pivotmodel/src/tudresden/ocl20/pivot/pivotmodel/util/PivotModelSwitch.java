@@ -37,7 +37,6 @@ import java.util.List;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 
-import tudresden.ocl20.pivot.pivotmodel.*;
 import tudresden.ocl20.pivot.pivotmodel.ComplexGenericType;
 import tudresden.ocl20.pivot.pivotmodel.ConstrainableElement;
 import tudresden.ocl20.pivot.pivotmodel.Constraint;
@@ -47,19 +46,19 @@ import tudresden.ocl20.pivot.pivotmodel.Expression;
 import tudresden.ocl20.pivot.pivotmodel.Feature;
 import tudresden.ocl20.pivot.pivotmodel.GenericElement;
 import tudresden.ocl20.pivot.pivotmodel.GenericType;
-import tudresden.ocl20.pivot.pivotmodel.MultiplicityElement;
+import tudresden.ocl20.pivot.pivotmodel.NDirectionalProperty;
 import tudresden.ocl20.pivot.pivotmodel.NamedElement;
 import tudresden.ocl20.pivot.pivotmodel.Namespace;
 import tudresden.ocl20.pivot.pivotmodel.Operation;
 import tudresden.ocl20.pivot.pivotmodel.Parameter;
 import tudresden.ocl20.pivot.pivotmodel.ParameterGenericType;
+import tudresden.ocl20.pivot.pivotmodel.PivotModelPackage;
 import tudresden.ocl20.pivot.pivotmodel.PrimitiveType;
 import tudresden.ocl20.pivot.pivotmodel.Property;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 import tudresden.ocl20.pivot.pivotmodel.TypeArgument;
 import tudresden.ocl20.pivot.pivotmodel.TypeParameter;
 import tudresden.ocl20.pivot.pivotmodel.TypedElement;
-import tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl;
 
 /**
  * <!-- begin-user-doc -->
@@ -155,16 +154,7 @@ public class PivotModelSwitch<T> {
 			if (result == null)
 				result = caseTypedElement(feature);
 			if (result == null)
-				result = caseMultiplicityElement(feature);
-			if (result == null)
 				result = caseNamedElement(feature);
-			if (result == null)
-				result = defaultCase(theEObject);
-			return result;
-		}
-		case PivotModelPackage.MULTIPLICITY_ELEMENT: {
-			MultiplicityElement multiplicityElement = (MultiplicityElement) theEObject;
-			T result = caseMultiplicityElement(multiplicityElement);
 			if (result == null)
 				result = defaultCase(theEObject);
 			return result;
@@ -258,8 +248,6 @@ public class PivotModelSwitch<T> {
 			if (result == null)
 				result = caseTypedElement(property);
 			if (result == null)
-				result = caseMultiplicityElement(property);
-			if (result == null)
 				result = caseNamedElement(property);
 			if (result == null)
 				result = defaultCase(theEObject);
@@ -277,8 +265,6 @@ public class PivotModelSwitch<T> {
 			if (result == null)
 				result = caseTypedElement(operation);
 			if (result == null)
-				result = caseMultiplicityElement(operation);
-			if (result == null)
 				result = caseNamedElement(operation);
 			if (result == null)
 				result = defaultCase(theEObject);
@@ -289,8 +275,6 @@ public class PivotModelSwitch<T> {
 			T result = caseParameter(parameter);
 			if (result == null)
 				result = caseTypedElement(parameter);
-			if (result == null)
-				result = caseMultiplicityElement(parameter);
 			if (result == null)
 				result = caseNamedElement(parameter);
 			if (result == null)
@@ -376,8 +360,6 @@ public class PivotModelSwitch<T> {
 			if (result == null)
 				result = caseTypedElement(nDirectionalProperty);
 			if (result == null)
-				result = caseMultiplicityElement(nDirectionalProperty);
-			if (result == null)
 				result = caseNamedElement(nDirectionalProperty);
 			if (result == null)
 				result = defaultCase(theEObject);
@@ -433,22 +415,6 @@ public class PivotModelSwitch<T> {
 	 */
 	@SuppressWarnings("unused")
 	public T caseOperation(Operation object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Multiplicity Element</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Multiplicity Element</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	@SuppressWarnings("unused")
-	public T caseMultiplicityElement(MultiplicityElement object) {
 		return null;
 	}
 

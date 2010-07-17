@@ -51,7 +51,7 @@ import tudresden.ocl20.pivot.pivotmodel.TypedElement;
  *
  * @generated
  */
-public interface TupleLiteralPart extends EObject, TypedElement {
+public interface TupleLiteralPart extends TypedElement {
 
 	/**
 	 * Returns the value of the '<em><b>Property</b></em>' containment reference.

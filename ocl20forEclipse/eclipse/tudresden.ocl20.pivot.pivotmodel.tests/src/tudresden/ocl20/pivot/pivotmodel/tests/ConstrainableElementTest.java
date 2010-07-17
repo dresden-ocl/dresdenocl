@@ -59,7 +59,6 @@ public abstract class ConstrainableElementTest extends TestCase {
 	 * @generated
 	 */
 	public ConstrainableElementTest(String name) {
-
 		super(name);
 	}
 
@@ -70,7 +69,6 @@ public abstract class ConstrainableElementTest extends TestCase {
 	 * @generated
 	 */
 	protected void setFixture(ConstrainableElement fixture) {
-
 		this.fixture = fixture;
 	}
 
@@ -81,7 +79,6 @@ public abstract class ConstrainableElementTest extends TestCase {
 	 * @generated
 	 */
 	protected ConstrainableElement getFixture() {
-
 		return fixture;
 	}
 

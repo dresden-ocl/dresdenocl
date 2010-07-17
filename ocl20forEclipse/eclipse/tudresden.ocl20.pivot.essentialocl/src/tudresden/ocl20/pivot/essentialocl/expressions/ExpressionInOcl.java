@@ -54,7 +54,7 @@ import tudresden.ocl20.pivot.pivotmodel.Expression;
  *
  * @generated
  */
-public interface ExpressionInOcl extends EObject, Expression {
+public interface ExpressionInOcl extends Expression {
 
 	/**
 	 * Returns the value of the '<em><b>Body Expression</b></em>' containment reference.

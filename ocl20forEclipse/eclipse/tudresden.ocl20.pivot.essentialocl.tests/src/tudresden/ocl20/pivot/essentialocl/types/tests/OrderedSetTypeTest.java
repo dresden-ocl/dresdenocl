@@ -46,56 +46,56 @@ import tudresden.ocl20.pivot.essentialocl.types.impl.TypesFactoryImpl;
  */
 public class OrderedSetTypeTest extends CollectionTypeTest {
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public static void main(String[] args) {
-    TestRunner.run(OrderedSetTypeTest.class);
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static void main(String[] args) {
+		TestRunner.run(OrderedSetTypeTest.class);
+	}
 
-  /**
-   * Constructs a new Ordered Set Type test case with the given name.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public OrderedSetTypeTest(String name) {
-    super(name);
-  }
+	/**
+	 * Constructs a new Ordered Set Type test case with the given name.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public OrderedSetTypeTest(String name) {
+		super(name);
+	}
 
-  /**
-   * Returns the fixture for this Ordered Set Type test case.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  protected OrderedSetType getFixture() {
-    return (OrderedSetType) fixture;
-  }
+	/**
+	 * Returns the fixture for this Ordered Set Type test case.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected OrderedSetType getFixture() {
+		return (OrderedSetType) fixture;
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see junit.framework.TestCase#setUp()
-   * @generated
-   */
-  @Override
-  protected void setUp() throws Exception {
-    setFixture(TypesFactoryImpl.eINSTANCE.createOrderedSetType());
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see junit.framework.TestCase#setUp()
+	 * @generated
+	 */
+	@Override
+	protected void setUp() throws Exception {
+		setFixture(TypesFactoryImpl.eINSTANCE.createOrderedSetType());
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see junit.framework.TestCase#tearDown()
-   * @generated
-   */
-  @Override
-  protected void tearDown() throws Exception {
-    setFixture(null);
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see junit.framework.TestCase#tearDown()
+	 * @generated
+	 */
+	@Override
+	protected void tearDown() throws Exception {
+		setFixture(null);
+	}
 
 } //OrderedSetTypeTest

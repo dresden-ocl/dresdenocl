@@ -43,5 +43,5 @@ import tudresden.ocl20.pivot.pivotmodel.TypedElement;
  *
  * @generated
  */
-public interface CollectionLiteralPart extends EObject, TypedElement {
+public interface CollectionLiteralPart extends TypedElement {
 } // CollectionLiteralPart

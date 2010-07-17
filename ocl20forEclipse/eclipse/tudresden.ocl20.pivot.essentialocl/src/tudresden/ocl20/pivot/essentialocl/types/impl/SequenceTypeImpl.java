@@ -58,7 +58,6 @@ public class SequenceTypeImpl extends CollectionTypeImpl implements
 	 * @generated
 	 */
 	protected SequenceTypeImpl() {
-
 		super();
 	}
 
@@ -68,7 +67,6 @@ public class SequenceTypeImpl extends CollectionTypeImpl implements
 	 */
 	@Override
 	protected EClass eStaticClass() {
-
 		return TypesPackageImpl.Literals.SEQUENCE_TYPE;
 	}
 
@@ -119,7 +117,8 @@ public class SequenceTypeImpl extends CollectionTypeImpl implements
 	@Override
 	public SequenceType clone() {
 
-		return (SequenceType) initialize(TypesFactory.INSTANCE.createSequenceType());
+		return (SequenceType) initialize(TypesFactory.INSTANCE
+				.createSequenceType());
 	}
 
 } // SequenceTypeImpl

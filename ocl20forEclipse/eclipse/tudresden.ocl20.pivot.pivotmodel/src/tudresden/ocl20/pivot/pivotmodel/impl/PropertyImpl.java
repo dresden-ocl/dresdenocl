@@ -38,27 +38,27 @@ import org.apache.log4j.Logger;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
-import tudresden.ocl20.pivot.pivotmodel.PivotModelPackage;
 import tudresden.ocl20.pivot.pivotmodel.NamedElement;
 import tudresden.ocl20.pivot.pivotmodel.PivotModelFactory;
+import tudresden.ocl20.pivot.pivotmodel.PivotModelPackage;
 import tudresden.ocl20.pivot.pivotmodel.Property;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 
 /**
- * <!-- begin-user-doc --> An implementation of the model object '<em><b>Property</b></em>'.
- * <!-- end-user-doc -->
+ * <!-- begin-user-doc --> An implementation of the model object '
+ * <em><b>Property</b></em>'. <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.PropertyImpl#getOwningType <em>Owning Type</em>}</li>
+ * <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.PropertyImpl#getOwningType
+ * <em>Owning Type</em>}</li>
  * </ul>
  * </p>
- *
+ * 
  * @generated
  */
 public class PropertyImpl extends FeatureImpl implements Property {
@@ -70,6 +70,7 @@ public class PropertyImpl extends FeatureImpl implements Property {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected PropertyImpl() {
@@ -78,6 +79,7 @@ public class PropertyImpl extends FeatureImpl implements Property {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -86,7 +88,8 @@ public class PropertyImpl extends FeatureImpl implements Property {
 	}
 
 	/**
-	 * Overridden to return the {@link #getOwningType() owning type} of this <code>Property</code>.
+	 * Overridden to return the {@link #getOwningType() owning type} of this
+	 * <code>Property</code>.
 	 * 
 	 * @see tudresden.ocl20.pivot.pivotmodel.impl.NamedElementImpl#getOwner()
 	 */
@@ -98,6 +101,7 @@ public class PropertyImpl extends FeatureImpl implements Property {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public Type getOwningType() {
@@ -108,6 +112,7 @@ public class PropertyImpl extends FeatureImpl implements Property {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public NotificationChain basicSetOwningType(Type newOwningType,
@@ -119,6 +124,7 @@ public class PropertyImpl extends FeatureImpl implements Property {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public void setOwningType(Type newOwningType) {
@@ -156,7 +162,8 @@ public class PropertyImpl extends FeatureImpl implements Property {
 
 		boolean result;
 
-		// compare name and type (note that we require the type of the property to be non-null)
+		// compare name and type (note that we require the type of the property
+		// to be non-null)
 		result = getName().equals(p.getName()) && getType() != null
 				&& getType().equals(p.getType());
 
@@ -187,15 +194,12 @@ public class PropertyImpl extends FeatureImpl implements Property {
 
 		super.initialize(clone);
 
-		clone.setMultiple(isMultiple());
-		clone.setOrdered(isOrdered());
-		clone.setUnique(isUnique());
-
 		return clone;
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -212,6 +216,7 @@ public class PropertyImpl extends FeatureImpl implements Property {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -226,6 +231,7 @@ public class PropertyImpl extends FeatureImpl implements Property {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -241,6 +247,7 @@ public class PropertyImpl extends FeatureImpl implements Property {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -254,6 +261,7 @@ public class PropertyImpl extends FeatureImpl implements Property {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -268,6 +276,7 @@ public class PropertyImpl extends FeatureImpl implements Property {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -282,6 +291,7 @@ public class PropertyImpl extends FeatureImpl implements Property {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -302,8 +312,6 @@ public class PropertyImpl extends FeatureImpl implements Property {
 	public String toString() {
 
 		return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
-				.appendToString(super.toString())
-				.append("ordered", ordered).append("unique", unique).append("multiple", //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-						multiple).toString();
+				.appendToString(super.toString()).toString();
 	}
 } // PropertyImpl

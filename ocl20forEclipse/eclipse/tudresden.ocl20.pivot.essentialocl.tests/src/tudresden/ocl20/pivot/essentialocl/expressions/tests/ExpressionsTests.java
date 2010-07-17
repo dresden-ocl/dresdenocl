@@ -45,54 +45,54 @@ import junit.textui.TestRunner;
  */
 public class ExpressionsTests extends TestSuite {
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public static void main(String[] args) {
-    TestRunner.run(suite());
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static void main(String[] args) {
+		TestRunner.run(suite());
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public static Test suite() {
-    TestSuite suite = new ExpressionsTests("expressions Tests"); //$NON-NLS-1$
-    suite.addTestSuite(VariableExpTest.class);
-    suite.addTestSuite(VariableTest.class);
-    suite.addTestSuite(UnlimitedNaturalExpTest.class);
-    suite.addTestSuite(TypeLiteralExpTest.class);
-    suite.addTestSuite(TupleLiteralPartTest.class);
-    suite.addTestSuite(TupleLiteralExpTest.class);
-    suite.addTestSuite(StringLiteralExpTest.class);
-    suite.addTestSuite(RealLiteralExpTest.class);
-    suite.addTestSuite(PropertyCallExpTest.class);
-    suite.addTestSuite(OperationCallExpTest.class);
-    suite.addTestSuite(UndefinedLiteralExpTest.class);
-    suite.addTestSuite(LetExpTest.class);
-    suite.addTestSuite(IteratorExpTest.class);
-    suite.addTestSuite(IterateExpTest.class);
-    suite.addTestSuite(InvalidLiteralExpTest.class);
-    suite.addTestSuite(IntegerLiteralExpTest.class);
-    suite.addTestSuite(IfExpTest.class);
-    suite.addTestSuite(BooleanLiteralExpTest.class);
-    suite.addTestSuite(CollectionItemTest.class);
-    suite.addTestSuite(CollectionLiteralExpTest.class);
-    suite.addTestSuite(CollectionRangeTest.class);
-    suite.addTestSuite(EnumLiteralExpTest.class);
-    return suite;
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static Test suite() {
+		TestSuite suite = new ExpressionsTests("expressions Tests"); //$NON-NLS-1$
+		suite.addTestSuite(VariableExpTest.class);
+		suite.addTestSuite(VariableTest.class);
+		suite.addTestSuite(UnlimitedNaturalExpTest.class);
+		suite.addTestSuite(TypeLiteralExpTest.class);
+		suite.addTestSuite(TupleLiteralPartTest.class);
+		suite.addTestSuite(TupleLiteralExpTest.class);
+		suite.addTestSuite(StringLiteralExpTest.class);
+		suite.addTestSuite(RealLiteralExpTest.class);
+		suite.addTestSuite(PropertyCallExpTest.class);
+		suite.addTestSuite(OperationCallExpTest.class);
+		suite.addTestSuite(UndefinedLiteralExpTest.class);
+		suite.addTestSuite(LetExpTest.class);
+		suite.addTestSuite(IteratorExpTest.class);
+		suite.addTestSuite(IterateExpTest.class);
+		suite.addTestSuite(InvalidLiteralExpTest.class);
+		suite.addTestSuite(IntegerLiteralExpTest.class);
+		suite.addTestSuite(IfExpTest.class);
+		suite.addTestSuite(BooleanLiteralExpTest.class);
+		suite.addTestSuite(CollectionItemTest.class);
+		suite.addTestSuite(CollectionLiteralExpTest.class);
+		suite.addTestSuite(CollectionRangeTest.class);
+		suite.addTestSuite(EnumLiteralExpTest.class);
+		return suite;
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public ExpressionsTests(String name) {
-    super(name);
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ExpressionsTests(String name) {
+		super(name);
+	}
 
 } //ExpressionsTests

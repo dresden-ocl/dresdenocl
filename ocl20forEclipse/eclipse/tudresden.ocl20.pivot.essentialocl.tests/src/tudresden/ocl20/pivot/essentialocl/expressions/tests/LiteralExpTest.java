@@ -42,25 +42,25 @@ import tudresden.ocl20.pivot.essentialocl.expressions.LiteralExp;
  */
 public abstract class LiteralExpTest extends OclExpressionTest {
 
-  /**
-   * Constructs a new Literal Exp test case with the given name.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public LiteralExpTest(String name) {
-    super(name);
-  }
+	/**
+	 * Constructs a new Literal Exp test case with the given name.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public LiteralExpTest(String name) {
+		super(name);
+	}
 
-  /**
-   * Returns the fixture for this Literal Exp test case.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  protected LiteralExp getFixture() {
-    return (LiteralExp) fixture;
-  }
+	/**
+	 * Returns the fixture for this Literal Exp test case.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected LiteralExp getFixture() {
+		return (LiteralExp) fixture;
+	}
 
 } //LiteralExpTest
