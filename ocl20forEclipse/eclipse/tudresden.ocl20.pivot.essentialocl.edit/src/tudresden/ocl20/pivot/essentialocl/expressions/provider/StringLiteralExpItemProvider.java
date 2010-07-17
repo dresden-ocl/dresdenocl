@@ -105,8 +105,8 @@ public class StringLiteralExpItemProvider extends
 						getString(
 								"_UI_PropertyDescriptor_description", "_UI_StringLiteralExp_stringSymbol_feature", "_UI_StringLiteralExp_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 						ExpressionsPackageImpl.Literals.STRING_LITERAL_EXP__STRING_SYMBOL,
-						true, false, false,
-						ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
+						true, false, false, ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+						null, null));
 	}
 
 	/**

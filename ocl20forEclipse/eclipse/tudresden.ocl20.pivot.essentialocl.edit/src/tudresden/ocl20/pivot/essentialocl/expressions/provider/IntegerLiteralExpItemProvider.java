@@ -105,8 +105,8 @@ public class IntegerLiteralExpItemProvider extends
 						getString(
 								"_UI_PropertyDescriptor_description", "_UI_IntegerLiteralExp_integerSymbol_feature", "_UI_IntegerLiteralExp_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 						ExpressionsPackageImpl.Literals.INTEGER_LITERAL_EXP__INTEGER_SYMBOL,
-						true, false, false,
-						ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE, null, null));
+						true, false, false, ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE,
+						null, null));
 	}
 
 	/**

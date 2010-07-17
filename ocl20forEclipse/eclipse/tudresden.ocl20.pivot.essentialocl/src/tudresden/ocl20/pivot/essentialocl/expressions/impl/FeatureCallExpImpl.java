@@ -48,21 +48,18 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>
- * {@link tudresden.ocl20.pivot.essentialocl.expressions.impl.FeatureCallExpImpl#getSourceType
- * <em>Source Type</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.FeatureCallExpImpl#getSourceType <em>Source Type</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @generated
  */
 public abstract class FeatureCallExpImpl extends CallExpImpl implements
 		FeatureCallExp {
 
 	/**
-	 * The cached value of the '{@link #getSourceType() <em>Source Type</em>}'
-	 * reference. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The cached value of the '{@link #getSourceType() <em>Source Type</em>}' reference.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getSourceType()
 	 * @generated
 	 * @ordered
@@ -71,7 +68,6 @@ public abstract class FeatureCallExpImpl extends CallExpImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	protected FeatureCallExpImpl() {
@@ -114,7 +110,6 @@ public abstract class FeatureCallExpImpl extends CallExpImpl implements
 	/**
 	 * <!-- begin-user-doc --> The code for {@link #getSourceType()} is
 	 * forwarded to this method. <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public Type getSourceTypeGen() {
@@ -123,9 +118,7 @@ public abstract class FeatureCallExpImpl extends CallExpImpl implements
 			sourceType = (Type) eResolveProxy(oldSourceType);
 			if (sourceType != oldSourceType) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(
-							this,
-							Notification.RESOLVE,
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE,
 							ExpressionsPackageImpl.FEATURE_CALL_EXP__SOURCE_TYPE,
 							oldSourceType, sourceType));
 			}
@@ -135,7 +128,6 @@ public abstract class FeatureCallExpImpl extends CallExpImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public Type basicGetSourceType() {
@@ -144,7 +136,6 @@ public abstract class FeatureCallExpImpl extends CallExpImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public void setSourceType(Type newSourceType) {
@@ -152,13 +143,12 @@ public abstract class FeatureCallExpImpl extends CallExpImpl implements
 		sourceType = newSourceType;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
-					ExpressionsPackageImpl.FEATURE_CALL_EXP__SOURCE_TYPE,
-					oldSourceType, sourceType));
+					ExpressionsPackageImpl.FEATURE_CALL_EXP__SOURCE_TYPE, oldSourceType,
+					sourceType));
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -174,7 +164,6 @@ public abstract class FeatureCallExpImpl extends CallExpImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -189,7 +178,6 @@ public abstract class FeatureCallExpImpl extends CallExpImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -204,7 +192,6 @@ public abstract class FeatureCallExpImpl extends CallExpImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -218,7 +205,6 @@ public abstract class FeatureCallExpImpl extends CallExpImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override

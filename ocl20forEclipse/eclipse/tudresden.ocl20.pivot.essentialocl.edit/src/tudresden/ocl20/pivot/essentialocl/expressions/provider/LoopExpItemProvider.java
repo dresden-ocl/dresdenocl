@@ -99,10 +99,8 @@ public class LoopExpItemProvider extends CallExpItemProvider implements
 			Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures
-					.add(ExpressionsPackageImpl.Literals.LOOP_EXP__BODY);
-			childrenFeatures
-					.add(ExpressionsPackageImpl.Literals.LOOP_EXP__ITERATOR);
+			childrenFeatures.add(ExpressionsPackageImpl.Literals.LOOP_EXP__BODY);
+			childrenFeatures.add(ExpressionsPackageImpl.Literals.LOOP_EXP__ITERATOR);
 		}
 		return childrenFeatures;
 	}

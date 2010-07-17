@@ -1547,8 +1547,7 @@ public class TypesPackageImpl extends EPackageImpl {
 		// Obtain or create and register package
 		TypesPackageImpl theTypesPackage = (TypesPackageImpl) (EPackage.Registry.INSTANCE
 				.get(eNS_URI) instanceof TypesPackageImpl ? EPackage.Registry.INSTANCE
-				.get(eNS_URI)
-				: new TypesPackageImpl());
+				.get(eNS_URI) : new TypesPackageImpl());
 
 		isInited = true;
 
@@ -1574,8 +1573,7 @@ public class TypesPackageImpl extends EPackageImpl {
 		theTypesPackage.freeze();
 
 		// Update the registry and return the package
-		EPackage.Registry.INSTANCE.put(TypesPackageImpl.eNS_URI,
-				theTypesPackage);
+		EPackage.Registry.INSTANCE.put(TypesPackageImpl.eNS_URI, theTypesPackage);
 		return theTypesPackage;
 	}
 
@@ -1638,8 +1636,7 @@ public class TypesPackageImpl extends EPackageImpl {
 	 * @generated
 	 */
 	public EReference getCollectionType_ElementType() {
-		return (EReference) collectionTypeEClass.getEStructuralFeatures()
-				.get(0);
+		return (EReference) collectionTypeEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -1652,8 +1649,7 @@ public class TypesPackageImpl extends EPackageImpl {
 	 * @generated
 	 */
 	public EReference getCollectionType_OclLibrary() {
-		return (EReference) collectionTypeEClass.getEStructuralFeatures()
-				.get(1);
+		return (EReference) collectionTypeEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -1666,8 +1662,7 @@ public class TypesPackageImpl extends EPackageImpl {
 	 * @generated
 	 */
 	public EAttribute getCollectionType_Kind() {
-		return (EAttribute) collectionTypeEClass.getEStructuralFeatures()
-				.get(2);
+		return (EAttribute) collectionTypeEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -2101,8 +2096,7 @@ public class TypesPackageImpl extends EPackageImpl {
 		// Add supertypes to classes
 		bagTypeEClass.getESuperTypes().add(this.getCollectionType());
 		tupleTypeEClass.getESuperTypes().add(thePivotModelPackage.getType());
-		collectionTypeEClass.getESuperTypes().add(
-				thePivotModelPackage.getType());
+		collectionTypeEClass.getESuperTypes().add(thePivotModelPackage.getType());
 		invalidTypeEClass.getESuperTypes().add(thePivotModelPackage.getType());
 		orderedSetTypeEClass.getESuperTypes().add(this.getCollectionType());
 		sequenceTypeEClass.getESuperTypes().add(this.getCollectionType());
@@ -2112,14 +2106,10 @@ public class TypesPackageImpl extends EPackageImpl {
 		anyTypeEClass.getESuperTypes().add(thePivotModelPackage.getType());
 
 		// Initialize classes and features; add operations and parameters
-		initEClass(
-				bagTypeEClass,
-				BagType.class,
+		initEClass(bagTypeEClass, BagType.class,
 				"BagType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 
-		initEClass(
-				tupleTypeEClass,
-				TupleType.class,
+		initEClass(tupleTypeEClass, TupleType.class,
 				"TupleType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 		initEReference(
 				getTupleType_OclLibrary(),
@@ -2146,9 +2136,7 @@ public class TypesPackageImpl extends EPackageImpl {
 				theExpressionsPackage.getCollectionKind(),
 				"kind", null, 1, 1, CollectionType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
-		initEClass(
-				invalidTypeEClass,
-				InvalidType.class,
+		initEClass(invalidTypeEClass, InvalidType.class,
 				"InvalidType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 		initEReference(
 				getInvalidType_OclLibrary(),
@@ -2166,14 +2154,10 @@ public class TypesPackageImpl extends EPackageImpl {
 				SequenceType.class,
 				"SequenceType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 
-		initEClass(
-				setTypeEClass,
-				SetType.class,
+		initEClass(setTypeEClass, SetType.class,
 				"SetType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 
-		initEClass(
-				voidTypeEClass,
-				VoidType.class,
+		initEClass(voidTypeEClass, VoidType.class,
 				"VoidType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 		initEReference(
 				getVoidType_OclLibrary(),
@@ -2181,9 +2165,7 @@ public class TypesPackageImpl extends EPackageImpl {
 				null,
 				"oclLibrary", null, 1, 1, VoidType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
-		initEClass(
-				typeTypeEClass,
-				TypeType.class,
+		initEClass(typeTypeEClass, TypeType.class,
 				"TypeType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 		initEReference(
 				getTypeType_RepresentedType(),
@@ -2191,9 +2173,7 @@ public class TypesPackageImpl extends EPackageImpl {
 				null,
 				"representedType", null, 0, 1, TypeType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
-		initEClass(
-				oclLibraryEClass,
-				OclLibrary.class,
+		initEClass(oclLibraryEClass, OclLibrary.class,
 				"OclLibrary", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 		initEReference(
 				getOclLibrary_OclBoolean(),
@@ -2303,9 +2283,7 @@ public class TypesPackageImpl extends EPackageImpl {
 		addEParameter(op, thePivotModelPackage.getType(),
 				"representedType", 1, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
-		initEClass(
-				anyTypeEClass,
-				AnyType.class,
+		initEClass(anyTypeEClass, AnyType.class,
 				"AnyType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 
 		// Create resource
@@ -2363,8 +2341,7 @@ public class TypesPackageImpl extends EPackageImpl {
 		 * @see tudresden.ocl20.pivot.essentialocl.types.impl.TypesPackageImpl#getCollectionType()
 		 * @generated
 		 */
-		public static final EClass COLLECTION_TYPE = eINSTANCE
-				.getCollectionType();
+		public static final EClass COLLECTION_TYPE = eINSTANCE.getCollectionType();
 
 		/**
 		 * The meta object literal for the '<em><b>Element Type</b></em>' reference feature.
@@ -2420,8 +2397,7 @@ public class TypesPackageImpl extends EPackageImpl {
 		 * @see tudresden.ocl20.pivot.essentialocl.types.impl.TypesPackageImpl#getOrderedSetType()
 		 * @generated
 		 */
-		public static final EClass ORDERED_SET_TYPE = eINSTANCE
-				.getOrderedSetType();
+		public static final EClass ORDERED_SET_TYPE = eINSTANCE.getOrderedSetType();
 
 		/**
 		 * The meta object literal for the '{@link tudresden.ocl20.pivot.essentialocl.types.impl.SequenceTypeImpl <em>Sequence Type</em>}' class.

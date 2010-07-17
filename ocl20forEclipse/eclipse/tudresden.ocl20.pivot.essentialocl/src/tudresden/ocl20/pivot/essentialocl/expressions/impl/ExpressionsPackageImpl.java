@@ -2497,13 +2497,22 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 	public static final int COLLECTION_LITERAL_EXP__KIND = LITERAL_EXP_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Element Type</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int COLLECTION_LITERAL_EXP__ELEMENT_TYPE = LITERAL_EXP_FEATURE_COUNT + 2;
+
+	/**
 	 * The number of structural features of the '<em>Collection Literal Exp</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	public static final int COLLECTION_LITERAL_EXP_FEATURE_COUNT = LITERAL_EXP_FEATURE_COUNT + 2;
+	public static final int COLLECTION_LITERAL_EXP_FEATURE_COUNT = LITERAL_EXP_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.CollectionRangeImpl <em>Collection Range</em>}' class.
@@ -3148,8 +3157,8 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 	 * @generated
 	 */
 	public EAttribute getUnlimitedNaturalExp_Symbol() {
-		return (EAttribute) unlimitedNaturalExpEClass.getEStructuralFeatures()
-				.get(0);
+		return (EAttribute) unlimitedNaturalExpEClass.getEStructuralFeatures().get(
+				0);
 	}
 
 	/**
@@ -3174,8 +3183,7 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 	 * @generated
 	 */
 	public EReference getTypeLiteralExp_ReferredType() {
-		return (EReference) typeLiteralExpEClass.getEStructuralFeatures()
-				.get(0);
+		return (EReference) typeLiteralExpEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -3200,8 +3208,7 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 	 * @generated
 	 */
 	public EReference getTupleLiteralPart_Property() {
-		return (EReference) tupleLiteralPartEClass.getEStructuralFeatures()
-				.get(0);
+		return (EReference) tupleLiteralPartEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -3214,8 +3221,7 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 	 * @generated
 	 */
 	public EReference getTupleLiteralPart_Value() {
-		return (EReference) tupleLiteralPartEClass.getEStructuralFeatures()
-				.get(1);
+		return (EReference) tupleLiteralPartEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -3240,8 +3246,7 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 	 * @generated
 	 */
 	public EReference getTupleLiteralExp_Part() {
-		return (EReference) tupleLiteralExpEClass.getEStructuralFeatures().get(
-				0);
+		return (EReference) tupleLiteralExpEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -3266,8 +3271,7 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 	 * @generated
 	 */
 	public EAttribute getStringLiteralExp_StringSymbol() {
-		return (EAttribute) stringLiteralExpEClass.getEStructuralFeatures()
-				.get(0);
+		return (EAttribute) stringLiteralExpEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -3292,8 +3296,7 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 	 * @generated
 	 */
 	public EAttribute getRealLiteralExp_RealSymbol() {
-		return (EAttribute) realLiteralExpEClass.getEStructuralFeatures()
-				.get(0);
+		return (EAttribute) realLiteralExpEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -3318,8 +3321,7 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 	 * @generated
 	 */
 	public EReference getPropertyCallExp_ReferredProperty() {
-		return (EReference) propertyCallExpEClass.getEStructuralFeatures().get(
-				0);
+		return (EReference) propertyCallExpEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -3332,8 +3334,7 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 	 * @generated
 	 */
 	public EReference getPropertyCallExp_Qualifier() {
-		return (EReference) propertyCallExpEClass.getEStructuralFeatures().get(
-				1);
+		return (EReference) propertyCallExpEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -3370,8 +3371,7 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 	 * @generated
 	 */
 	public EReference getOperationCallExp_Argument() {
-		return (EReference) operationCallExpEClass.getEStructuralFeatures()
-				.get(0);
+		return (EReference) operationCallExpEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -3384,8 +3384,7 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 	 * @generated
 	 */
 	public EReference getOperationCallExp_ReferredOperation() {
-		return (EReference) operationCallExpEClass.getEStructuralFeatures()
-				.get(1);
+		return (EReference) operationCallExpEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -3596,8 +3595,7 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 	 * @generated
 	 */
 	public EAttribute getIntegerLiteralExp_IntegerSymbol() {
-		return (EAttribute) integerLiteralExpEClass.getEStructuralFeatures()
-				.get(0);
+		return (EAttribute) integerLiteralExpEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -3673,8 +3671,7 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 	 * @generated
 	 */
 	public EReference getFeatureCallExp_SourceType() {
-		return (EReference) featureCallExpEClass.getEStructuralFeatures()
-				.get(0);
+		return (EReference) featureCallExpEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -3699,8 +3696,7 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 	 * @generated
 	 */
 	public EAttribute getBooleanLiteralExp_BooleanSymbol() {
-		return (EAttribute) booleanLiteralExpEClass.getEStructuralFeatures()
-				.get(0);
+		return (EAttribute) booleanLiteralExpEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -3750,8 +3746,7 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 	 * @generated
 	 */
 	public EReference getCollectionItem_Item() {
-		return (EReference) collectionItemEClass.getEStructuralFeatures()
-				.get(0);
+		return (EReference) collectionItemEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -3795,6 +3790,20 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 	}
 
 	/**
+	 * Returns the meta object for the reference '{@link tudresden.ocl20.pivot.essentialocl.expressions.CollectionLiteralExp#getElementType <em>Element Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Element Type</em>'.
+	 * @see tudresden.ocl20.pivot.essentialocl.expressions.CollectionLiteralExp#getElementType()
+	 * @see #getCollectionLiteralExp()
+	 * @generated
+	 */
+	public EReference getCollectionLiteralExp_ElementType() {
+		return (EReference) collectionLiteralExpEClass.getEStructuralFeatures()
+				.get(2);
+	}
+
+	/**
 	 * Returns the meta object for class '{@link tudresden.ocl20.pivot.essentialocl.expressions.CollectionLiteralPart <em>Collection Literal Part</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3828,8 +3837,7 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 	 * @generated
 	 */
 	public EReference getCollectionRange_First() {
-		return (EReference) collectionRangeEClass.getEStructuralFeatures().get(
-				0);
+		return (EReference) collectionRangeEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -3842,8 +3850,7 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 	 * @generated
 	 */
 	public EReference getCollectionRange_Last() {
-		return (EReference) collectionRangeEClass.getEStructuralFeatures().get(
-				1);
+		return (EReference) collectionRangeEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -3868,8 +3875,7 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 	 * @generated
 	 */
 	public EReference getEnumLiteralExp_ReferredEnumLiteral() {
-		return (EReference) enumLiteralExpEClass.getEStructuralFeatures()
-				.get(0);
+		return (EReference) enumLiteralExpEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -3894,8 +3900,7 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 	 * @generated
 	 */
 	public EReference getExpressionInOcl_BodyExpression() {
-		return (EReference) expressionInOclEClass.getEStructuralFeatures().get(
-				0);
+		return (EReference) expressionInOclEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -3908,8 +3913,7 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 	 * @generated
 	 */
 	public EReference getExpressionInOcl_Context() {
-		return (EReference) expressionInOclEClass.getEStructuralFeatures().get(
-				1);
+		return (EReference) expressionInOclEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -3922,8 +3926,7 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 	 * @generated
 	 */
 	public EReference getExpressionInOcl_Result() {
-		return (EReference) expressionInOclEClass.getEStructuralFeatures().get(
-				2);
+		return (EReference) expressionInOclEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -3936,8 +3939,7 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 	 * @generated
 	 */
 	public EReference getExpressionInOcl_Parameter() {
-		return (EReference) expressionInOclEClass.getEStructuralFeatures().get(
-				3);
+		return (EReference) expressionInOclEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -3991,8 +3993,7 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 		createEReference(variableEClass, VARIABLE__INIT_EXPRESSION);
 
 		unlimitedNaturalExpEClass = createEClass(UNLIMITED_NATURAL_EXP);
-		createEAttribute(unlimitedNaturalExpEClass,
-				UNLIMITED_NATURAL_EXP__SYMBOL);
+		createEAttribute(unlimitedNaturalExpEClass, UNLIMITED_NATURAL_EXP__SYMBOL);
 
 		typeLiteralExpEClass = createEClass(TYPE_LITERAL_EXP);
 		createEReference(typeLiteralExpEClass, TYPE_LITERAL_EXP__REFERRED_TYPE);
@@ -4005,8 +4006,7 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 		createEReference(tupleLiteralExpEClass, TUPLE_LITERAL_EXP__PART);
 
 		stringLiteralExpEClass = createEClass(STRING_LITERAL_EXP);
-		createEAttribute(stringLiteralExpEClass,
-				STRING_LITERAL_EXP__STRING_SYMBOL);
+		createEAttribute(stringLiteralExpEClass, STRING_LITERAL_EXP__STRING_SYMBOL);
 
 		realLiteralExpEClass = createEClass(REAL_LITERAL_EXP);
 		createEAttribute(realLiteralExpEClass, REAL_LITERAL_EXP__REAL_SYMBOL);
@@ -4070,10 +4070,10 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 		createEReference(collectionItemEClass, COLLECTION_ITEM__ITEM);
 
 		collectionLiteralExpEClass = createEClass(COLLECTION_LITERAL_EXP);
+		createEReference(collectionLiteralExpEClass, COLLECTION_LITERAL_EXP__PART);
+		createEAttribute(collectionLiteralExpEClass, COLLECTION_LITERAL_EXP__KIND);
 		createEReference(collectionLiteralExpEClass,
-				COLLECTION_LITERAL_EXP__PART);
-		createEAttribute(collectionLiteralExpEClass,
-				COLLECTION_LITERAL_EXP__KIND);
+				COLLECTION_LITERAL_EXP__ELEMENT_TYPE);
 
 		collectionLiteralPartEClass = createEClass(COLLECTION_LITERAL_PART);
 
@@ -4086,8 +4086,7 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 				ENUM_LITERAL_EXP__REFERRED_ENUM_LITERAL);
 
 		expressionInOclEClass = createEClass(EXPRESSION_IN_OCL);
-		createEReference(expressionInOclEClass,
-				EXPRESSION_IN_OCL__BODY_EXPRESSION);
+		createEReference(expressionInOclEClass, EXPRESSION_IN_OCL__BODY_EXPRESSION);
 		createEReference(expressionInOclEClass, EXPRESSION_IN_OCL__CONTEXT);
 		createEReference(expressionInOclEClass, EXPRESSION_IN_OCL__RESULT);
 		createEReference(expressionInOclEClass, EXPRESSION_IN_OCL__PARAMETER);
@@ -4134,18 +4133,14 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 
 		// Add supertypes to classes
 		variableExpEClass.getESuperTypes().add(this.getOclExpression());
-		variableEClass.getESuperTypes().add(
-				thePivotModelPackage.getTypedElement());
-		variableEClass.getESuperTypes().add(
-				thePivotModelPackage.getNamedElement());
-		unlimitedNaturalExpEClass.getESuperTypes().add(
-				this.getNumericLiteralExp());
+		variableEClass.getESuperTypes().add(thePivotModelPackage.getTypedElement());
+		variableEClass.getESuperTypes().add(thePivotModelPackage.getNamedElement());
+		unlimitedNaturalExpEClass.getESuperTypes().add(this.getNumericLiteralExp());
 		typeLiteralExpEClass.getESuperTypes().add(this.getLiteralExp());
 		tupleLiteralPartEClass.getESuperTypes().add(
 				thePivotModelPackage.getTypedElement());
 		tupleLiteralExpEClass.getESuperTypes().add(this.getLiteralExp());
-		stringLiteralExpEClass.getESuperTypes().add(
-				this.getPrimitiveLiteralExp());
+		stringLiteralExpEClass.getESuperTypes().add(this.getPrimitiveLiteralExp());
 		realLiteralExpEClass.getESuperTypes().add(this.getNumericLiteralExp());
 		propertyCallExpEClass.getESuperTypes().add(this.getFeatureCallExp());
 		primitiveLiteralExpEClass.getESuperTypes().add(this.getLiteralExp());
@@ -4154,8 +4149,7 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 				thePivotModelPackage.getTypedElement());
 		oclExpressionEClass.getESuperTypes().add(
 				thePivotModelPackage.getNamedElement());
-		numericLiteralExpEClass.getESuperTypes().add(
-				this.getPrimitiveLiteralExp());
+		numericLiteralExpEClass.getESuperTypes().add(this.getPrimitiveLiteralExp());
 		undefinedLiteralExpEClass.getESuperTypes().add(this.getLiteralExp());
 		loopExpEClass.getESuperTypes().add(this.getCallExp());
 		literalExpEClass.getESuperTypes().add(this.getOclExpression());
@@ -4163,28 +4157,22 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 		iteratorExpEClass.getESuperTypes().add(this.getLoopExp());
 		iterateExpEClass.getESuperTypes().add(this.getLoopExp());
 		invalidLiteralExpEClass.getESuperTypes().add(this.getLiteralExp());
-		integerLiteralExpEClass.getESuperTypes().add(
-				this.getNumericLiteralExp());
+		integerLiteralExpEClass.getESuperTypes().add(this.getNumericLiteralExp());
 		ifExpEClass.getESuperTypes().add(this.getOclExpression());
 		featureCallExpEClass.getESuperTypes().add(this.getCallExp());
-		booleanLiteralExpEClass.getESuperTypes().add(
-				this.getPrimitiveLiteralExp());
+		booleanLiteralExpEClass.getESuperTypes().add(this.getPrimitiveLiteralExp());
 		callExpEClass.getESuperTypes().add(this.getOclExpression());
-		collectionItemEClass.getESuperTypes().add(
-				this.getCollectionLiteralPart());
+		collectionItemEClass.getESuperTypes().add(this.getCollectionLiteralPart());
 		collectionLiteralExpEClass.getESuperTypes().add(this.getLiteralExp());
 		collectionLiteralPartEClass.getESuperTypes().add(
 				thePivotModelPackage.getTypedElement());
-		collectionRangeEClass.getESuperTypes().add(
-				this.getCollectionLiteralPart());
+		collectionRangeEClass.getESuperTypes().add(this.getCollectionLiteralPart());
 		enumLiteralExpEClass.getESuperTypes().add(this.getLiteralExp());
 		expressionInOclEClass.getESuperTypes().add(
 				thePivotModelPackage.getExpression());
 
 		// Initialize classes and features; add operations and parameters
-		initEClass(
-				variableExpEClass,
-				VariableExp.class,
+		initEClass(variableExpEClass, VariableExp.class,
 				"VariableExp", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 		initEReference(
 				getVariableExp_ReferredVariable(),
@@ -4192,9 +4180,7 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 				null,
 				"referredVariable", null, 0, 1, VariableExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
-		initEClass(
-				variableEClass,
-				Variable.class,
+		initEClass(variableEClass, Variable.class,
 				"Variable", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 		initEReference(
 				getVariable_RepresentedParameter(),
@@ -4336,9 +4322,7 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 				UndefinedLiteralExp.class,
 				"UndefinedLiteralExp", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 
-		initEClass(
-				loopExpEClass,
-				LoopExp.class,
+		initEClass(loopExpEClass, LoopExp.class,
 				"LoopExp", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 		initEReference(
 				getLoopExp_Body(),
@@ -4351,14 +4335,10 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 				null,
 				"iterator", null, 0, -1, LoopExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
-		initEClass(
-				literalExpEClass,
-				LiteralExp.class,
+		initEClass(literalExpEClass, LiteralExp.class,
 				"LiteralExp", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 
-		initEClass(
-				letExpEClass,
-				LetExp.class,
+		initEClass(letExpEClass, LetExp.class,
 				"LetExp", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 		initEReference(
 				getLetExp_In(),
@@ -4371,14 +4351,10 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 				null,
 				"variable", null, 1, 1, LetExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
-		initEClass(
-				iteratorExpEClass,
-				IteratorExp.class,
+		initEClass(iteratorExpEClass, IteratorExp.class,
 				"IteratorExp", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 
-		initEClass(
-				iterateExpEClass,
-				IterateExp.class,
+		initEClass(iterateExpEClass, IterateExp.class,
 				"IterateExp", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 		initEReference(
 				getIterateExp_Result(),
@@ -4400,9 +4376,7 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 				theDatatypesPackage.getInteger(),
 				"integerSymbol", null, 0, 1, IntegerLiteralExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
-		initEClass(
-				ifExpEClass,
-				IfExp.class,
+		initEClass(ifExpEClass, IfExp.class,
 				"IfExp", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 		initEReference(
 				getIfExp_Condition(),
@@ -4439,9 +4413,7 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 				theDatatypesPackage.getBoolean(),
 				"booleanSymbol", null, 0, 1, BooleanLiteralExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
-		initEClass(
-				callExpEClass,
-				CallExp.class,
+		initEClass(callExpEClass, CallExp.class,
 				"CallExp", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 		initEReference(
 				getCallExp_Source(),
@@ -4472,6 +4444,11 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 				getCollectionLiteralExp_Kind(),
 				this.getCollectionKind(),
 				"kind", null, 0, 1, CollectionLiteralExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+		initEReference(
+				getCollectionLiteralExp_ElementType(),
+				thePivotModelPackage.getType(),
+				null,
+				"elementType", null, 0, 1, CollectionLiteralExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
 		initEClass(
 				collectionLiteralPartEClass,
@@ -4629,8 +4606,7 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 		 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.ExpressionsPackageImpl#getTypeLiteralExp()
 		 * @generated
 		 */
-		public static final EClass TYPE_LITERAL_EXP = eINSTANCE
-				.getTypeLiteralExp();
+		public static final EClass TYPE_LITERAL_EXP = eINSTANCE.getTypeLiteralExp();
 
 		/**
 		 * The meta object literal for the '<em><b>Referred Type</b></em>' reference feature.
@@ -4718,8 +4694,7 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 		 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.ExpressionsPackageImpl#getRealLiteralExp()
 		 * @generated
 		 */
-		public static final EClass REAL_LITERAL_EXP = eINSTANCE
-				.getRealLiteralExp();
+		public static final EClass REAL_LITERAL_EXP = eINSTANCE.getRealLiteralExp();
 
 		/**
 		 * The meta object literal for the '<em><b>Real Symbol</b></em>' attribute feature.
@@ -4807,8 +4782,7 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 		 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.ExpressionsPackageImpl#getOclExpression()
 		 * @generated
 		 */
-		public static final EClass OCL_EXPRESSION = eINSTANCE
-				.getOclExpression();
+		public static final EClass OCL_EXPRESSION = eINSTANCE.getOclExpression();
 
 		/**
 		 * The meta object literal for the '<em><b>Ocl Library</b></em>' reference feature.
@@ -4857,8 +4831,7 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		public static final EReference LOOP_EXP__BODY = eINSTANCE
-				.getLoopExp_Body();
+		public static final EReference LOOP_EXP__BODY = eINSTANCE.getLoopExp_Body();
 
 		/**
 		 * The meta object literal for the '<em><b>Iterator</b></em>' containment reference list feature.
@@ -5011,8 +4984,7 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 		 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.ExpressionsPackageImpl#getFeatureCallExp()
 		 * @generated
 		 */
-		public static final EClass FEATURE_CALL_EXP = eINSTANCE
-				.getFeatureCallExp();
+		public static final EClass FEATURE_CALL_EXP = eINSTANCE.getFeatureCallExp();
 
 		/**
 		 * The meta object literal for the '<em><b>Source Type</b></em>' reference feature.
@@ -5070,8 +5042,7 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 		 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.ExpressionsPackageImpl#getCollectionItem()
 		 * @generated
 		 */
-		public static final EClass COLLECTION_ITEM = eINSTANCE
-				.getCollectionItem();
+		public static final EClass COLLECTION_ITEM = eINSTANCE.getCollectionItem();
 
 		/**
 		 * The meta object literal for the '<em><b>Item</b></em>' containment reference feature.
@@ -5110,6 +5081,15 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 		 */
 		public static final EAttribute COLLECTION_LITERAL_EXP__KIND = eINSTANCE
 				.getCollectionLiteralExp_Kind();
+
+		/**
+		 * The meta object literal for the '<em><b>Element Type</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		public static final EReference COLLECTION_LITERAL_EXP__ELEMENT_TYPE = eINSTANCE
+				.getCollectionLiteralExp_ElementType();
 
 		/**
 		 * The meta object literal for the '{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.CollectionLiteralPartImpl <em>Collection Literal Part</em>}' class.
@@ -5159,8 +5139,7 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 		 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.ExpressionsPackageImpl#getEnumLiteralExp()
 		 * @generated
 		 */
-		public static final EClass ENUM_LITERAL_EXP = eINSTANCE
-				.getEnumLiteralExp();
+		public static final EClass ENUM_LITERAL_EXP = eINSTANCE.getEnumLiteralExp();
 
 		/**
 		 * The meta object literal for the '<em><b>Referred Enum Literal</b></em>' reference feature.
@@ -5226,8 +5205,7 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 		 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.ExpressionsPackageImpl#getCollectionKind()
 		 * @generated
 		 */
-		public static final EEnum COLLECTION_KIND = eINSTANCE
-				.getCollectionKind();
+		public static final EEnum COLLECTION_KIND = eINSTANCE.getCollectionKind();
 
 	}
 

@@ -105,8 +105,8 @@ public class CollectionTypeItemProvider extends TypeItemProvider implements
 						getString("_UI_CollectionType_oclLibrary_feature"), //$NON-NLS-1$
 						getString(
 								"_UI_PropertyDescriptor_description", "_UI_CollectionType_oclLibrary_feature", "_UI_CollectionType_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-						TypesPackageImpl.Literals.COLLECTION_TYPE__OCL_LIBRARY,
-						true, false, true, null, null, null));
+						TypesPackageImpl.Literals.COLLECTION_TYPE__OCL_LIBRARY, true,
+						false, true, null, null, null));
 	}
 
 	/**
@@ -124,9 +124,8 @@ public class CollectionTypeItemProvider extends TypeItemProvider implements
 						getString("_UI_CollectionType_kind_feature"), //$NON-NLS-1$
 						getString(
 								"_UI_PropertyDescriptor_description", "_UI_CollectionType_kind_feature", "_UI_CollectionType_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-						TypesPackageImpl.Literals.COLLECTION_TYPE__KIND, true,
-						false, false,
-						ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
+						TypesPackageImpl.Literals.COLLECTION_TYPE__KIND, true, false,
+						false, ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
 	}
 
 	/**
@@ -164,8 +163,7 @@ public class CollectionTypeItemProvider extends TypeItemProvider implements
 
 			// append element type
 			name.append(getTypeParameterListOpeningDelimiter()).append(
-					elementType.getName()).append(
-					getTypeParameterListClosingDelimiter());
+					elementType.getName()).append(getTypeParameterListClosingDelimiter());
 
 			return name;
 		}

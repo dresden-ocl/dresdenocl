@@ -158,8 +158,8 @@ public class TupleLiteralPartImpl extends TypedElementImpl implements
 		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this,
 					Notification.SET,
-					ExpressionsPackageImpl.TUPLE_LITERAL_PART__PROPERTY,
-					oldProperty, newProperty);
+					ExpressionsPackageImpl.TUPLE_LITERAL_PART__PROPERTY, oldProperty,
+					newProperty);
 			if (msgs == null)
 				msgs = notification;
 			else
@@ -176,26 +176,22 @@ public class TupleLiteralPartImpl extends TypedElementImpl implements
 		if (newProperty != property) {
 			NotificationChain msgs = null;
 			if (property != null)
-				msgs = ((InternalEObject) property)
-						.eInverseRemove(
-								this,
-								EOPPOSITE_FEATURE_BASE
-										- ExpressionsPackageImpl.TUPLE_LITERAL_PART__PROPERTY,
-								null, msgs);
+				msgs = ((InternalEObject) property).eInverseRemove(this,
+						EOPPOSITE_FEATURE_BASE
+								- ExpressionsPackageImpl.TUPLE_LITERAL_PART__PROPERTY, null,
+						msgs);
 			if (newProperty != null)
-				msgs = ((InternalEObject) newProperty)
-						.eInverseAdd(
-								this,
-								EOPPOSITE_FEATURE_BASE
-										- ExpressionsPackageImpl.TUPLE_LITERAL_PART__PROPERTY,
-								null, msgs);
+				msgs = ((InternalEObject) newProperty).eInverseAdd(this,
+						EOPPOSITE_FEATURE_BASE
+								- ExpressionsPackageImpl.TUPLE_LITERAL_PART__PROPERTY, null,
+						msgs);
 			msgs = basicSetProperty(newProperty, msgs);
 			if (msgs != null)
 				msgs.dispatch();
 		} else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
-					ExpressionsPackageImpl.TUPLE_LITERAL_PART__PROPERTY,
-					newProperty, newProperty));
+					ExpressionsPackageImpl.TUPLE_LITERAL_PART__PROPERTY, newProperty,
+					newProperty));
 	}
 
 	/**
@@ -216,9 +212,8 @@ public class TupleLiteralPartImpl extends TypedElementImpl implements
 		value = newValue;
 		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this,
-					Notification.SET,
-					ExpressionsPackageImpl.TUPLE_LITERAL_PART__VALUE, oldValue,
-					newValue);
+					Notification.SET, ExpressionsPackageImpl.TUPLE_LITERAL_PART__VALUE,
+					oldValue, newValue);
 			if (msgs == null)
 				msgs = notification;
 			else
@@ -235,26 +230,19 @@ public class TupleLiteralPartImpl extends TypedElementImpl implements
 		if (newValue != value) {
 			NotificationChain msgs = null;
 			if (value != null)
-				msgs = ((InternalEObject) value)
-						.eInverseRemove(
-								this,
-								EOPPOSITE_FEATURE_BASE
-										- ExpressionsPackageImpl.TUPLE_LITERAL_PART__VALUE,
-								null, msgs);
+				msgs = ((InternalEObject) value).eInverseRemove(this,
+						EOPPOSITE_FEATURE_BASE
+								- ExpressionsPackageImpl.TUPLE_LITERAL_PART__VALUE, null, msgs);
 			if (newValue != null)
-				msgs = ((InternalEObject) newValue)
-						.eInverseAdd(
-								this,
-								EOPPOSITE_FEATURE_BASE
-										- ExpressionsPackageImpl.TUPLE_LITERAL_PART__VALUE,
-								null, msgs);
+				msgs = ((InternalEObject) newValue).eInverseAdd(this,
+						EOPPOSITE_FEATURE_BASE
+								- ExpressionsPackageImpl.TUPLE_LITERAL_PART__VALUE, null, msgs);
 			msgs = basicSetValue(newValue, msgs);
 			if (msgs != null)
 				msgs.dispatch();
 		} else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
-					ExpressionsPackageImpl.TUPLE_LITERAL_PART__VALUE, newValue,
-					newValue));
+					ExpressionsPackageImpl.TUPLE_LITERAL_PART__VALUE, newValue, newValue));
 	}
 
 	/**

@@ -274,6 +274,7 @@
       <eStructuralFeatures xsi:type="ecore:EReference" name="part" upperBound="-1"
           eType="#//expressions/CollectionLiteralPart" containment="true" resolveProxies="false"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="kind" eType="#//expressions/CollectionKind"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="elementType" eType="ecore:EClass ../../tudresden.ocl20.pivot.pivotmodel/model/pivotmodel.ecore#//Type"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="CollectionLiteralPart" abstract="true"
         eSuperTypes="../../tudresden.ocl20.pivot.pivotmodel/model/pivotmodel.ecore#//TypedElement"/>

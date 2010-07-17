@@ -104,8 +104,8 @@ public class RealLiteralExpItemProvider extends NumericLiteralExpItemProvider
 						getString(
 								"_UI_PropertyDescriptor_description", "_UI_RealLiteralExp_realSymbol_feature", "_UI_RealLiteralExp_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 						ExpressionsPackageImpl.Literals.REAL_LITERAL_EXP__REAL_SYMBOL,
-						true, false, false,
-						ItemPropertyDescriptor.REAL_VALUE_IMAGE, null, null));
+						true, false, false, ItemPropertyDescriptor.REAL_VALUE_IMAGE, null,
+						null));
 	}
 
 	/**

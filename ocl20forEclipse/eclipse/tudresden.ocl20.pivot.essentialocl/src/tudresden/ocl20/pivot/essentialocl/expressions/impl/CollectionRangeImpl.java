@@ -141,9 +141,8 @@ public class CollectionRangeImpl extends CollectionLiteralPartImpl implements
 		first = newFirst;
 		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this,
-					Notification.SET,
-					ExpressionsPackageImpl.COLLECTION_RANGE__FIRST, oldFirst,
-					newFirst);
+					Notification.SET, ExpressionsPackageImpl.COLLECTION_RANGE__FIRST,
+					oldFirst, newFirst);
 			if (msgs == null)
 				msgs = notification;
 			else
@@ -160,26 +159,19 @@ public class CollectionRangeImpl extends CollectionLiteralPartImpl implements
 		if (newFirst != first) {
 			NotificationChain msgs = null;
 			if (first != null)
-				msgs = ((InternalEObject) first)
-						.eInverseRemove(
-								this,
-								EOPPOSITE_FEATURE_BASE
-										- ExpressionsPackageImpl.COLLECTION_RANGE__FIRST,
-								null, msgs);
+				msgs = ((InternalEObject) first).eInverseRemove(this,
+						EOPPOSITE_FEATURE_BASE
+								- ExpressionsPackageImpl.COLLECTION_RANGE__FIRST, null, msgs);
 			if (newFirst != null)
-				msgs = ((InternalEObject) newFirst)
-						.eInverseAdd(
-								this,
-								EOPPOSITE_FEATURE_BASE
-										- ExpressionsPackageImpl.COLLECTION_RANGE__FIRST,
-								null, msgs);
+				msgs = ((InternalEObject) newFirst).eInverseAdd(this,
+						EOPPOSITE_FEATURE_BASE
+								- ExpressionsPackageImpl.COLLECTION_RANGE__FIRST, null, msgs);
 			msgs = basicSetFirst(newFirst, msgs);
 			if (msgs != null)
 				msgs.dispatch();
 		} else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
-					ExpressionsPackageImpl.COLLECTION_RANGE__FIRST, newFirst,
-					newFirst));
+					ExpressionsPackageImpl.COLLECTION_RANGE__FIRST, newFirst, newFirst));
 	}
 
 	/**
@@ -200,9 +192,8 @@ public class CollectionRangeImpl extends CollectionLiteralPartImpl implements
 		last = newLast;
 		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this,
-					Notification.SET,
-					ExpressionsPackageImpl.COLLECTION_RANGE__LAST, oldLast,
-					newLast);
+					Notification.SET, ExpressionsPackageImpl.COLLECTION_RANGE__LAST,
+					oldLast, newLast);
 			if (msgs == null)
 				msgs = notification;
 			else
@@ -219,26 +210,19 @@ public class CollectionRangeImpl extends CollectionLiteralPartImpl implements
 		if (newLast != last) {
 			NotificationChain msgs = null;
 			if (last != null)
-				msgs = ((InternalEObject) last)
-						.eInverseRemove(
-								this,
-								EOPPOSITE_FEATURE_BASE
-										- ExpressionsPackageImpl.COLLECTION_RANGE__LAST,
-								null, msgs);
+				msgs = ((InternalEObject) last).eInverseRemove(this,
+						EOPPOSITE_FEATURE_BASE
+								- ExpressionsPackageImpl.COLLECTION_RANGE__LAST, null, msgs);
 			if (newLast != null)
-				msgs = ((InternalEObject) newLast)
-						.eInverseAdd(
-								this,
-								EOPPOSITE_FEATURE_BASE
-										- ExpressionsPackageImpl.COLLECTION_RANGE__LAST,
-								null, msgs);
+				msgs = ((InternalEObject) newLast).eInverseAdd(this,
+						EOPPOSITE_FEATURE_BASE
+								- ExpressionsPackageImpl.COLLECTION_RANGE__LAST, null, msgs);
 			msgs = basicSetLast(newLast, msgs);
 			if (msgs != null)
 				msgs.dispatch();
 		} else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
-					ExpressionsPackageImpl.COLLECTION_RANGE__LAST, newLast,
-					newLast));
+					ExpressionsPackageImpl.COLLECTION_RANGE__LAST, newLast, newLast));
 	}
 
 	/**

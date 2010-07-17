@@ -105,8 +105,8 @@ public class BooleanLiteralExpItemProvider extends
 						getString(
 								"_UI_PropertyDescriptor_description", "_UI_BooleanLiteralExp_booleanSymbol_feature", "_UI_BooleanLiteralExp_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 						ExpressionsPackageImpl.Literals.BOOLEAN_LITERAL_EXP__BOOLEAN_SYMBOL,
-						true, false, false,
-						ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE, null, null));
+						true, false, false, ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
+						null, null));
 	}
 
 	/**

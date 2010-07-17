@@ -105,8 +105,8 @@ public abstract class CallExpImpl extends OclExpressionImpl implements CallExp {
 		source = newSource;
 		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this,
-					Notification.SET, ExpressionsPackageImpl.CALL_EXP__SOURCE,
-					oldSource, newSource);
+					Notification.SET, ExpressionsPackageImpl.CALL_EXP__SOURCE, oldSource,
+					newSource);
 			if (msgs == null)
 				msgs = notification;
 			else
@@ -125,21 +125,18 @@ public abstract class CallExpImpl extends OclExpressionImpl implements CallExp {
 			NotificationChain msgs = null;
 			if (source != null)
 				msgs = ((InternalEObject) source).eInverseRemove(this,
-						EOPPOSITE_FEATURE_BASE
-								- ExpressionsPackageImpl.CALL_EXP__SOURCE,
+						EOPPOSITE_FEATURE_BASE - ExpressionsPackageImpl.CALL_EXP__SOURCE,
 						null, msgs);
 			if (newSource != null)
 				msgs = ((InternalEObject) newSource).eInverseAdd(this,
-						EOPPOSITE_FEATURE_BASE
-								- ExpressionsPackageImpl.CALL_EXP__SOURCE,
+						EOPPOSITE_FEATURE_BASE - ExpressionsPackageImpl.CALL_EXP__SOURCE,
 						null, msgs);
 			msgs = basicSetSource(newSource, msgs);
 			if (msgs != null)
 				msgs.dispatch();
 		} else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
-					ExpressionsPackageImpl.CALL_EXP__SOURCE, newSource,
-					newSource));
+					ExpressionsPackageImpl.CALL_EXP__SOURCE, newSource, newSource));
 	}
 
 	/**

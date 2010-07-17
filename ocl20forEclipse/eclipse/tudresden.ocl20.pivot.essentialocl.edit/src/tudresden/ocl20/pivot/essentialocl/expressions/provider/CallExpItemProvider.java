@@ -99,8 +99,7 @@ public class CallExpItemProvider extends OclExpressionItemProvider implements
 			Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures
-					.add(ExpressionsPackageImpl.Literals.CALL_EXP__SOURCE);
+			childrenFeatures.add(ExpressionsPackageImpl.Literals.CALL_EXP__SOURCE);
 		}
 		return childrenFeatures;
 	}

@@ -142,8 +142,7 @@ public class VoidTypeImpl extends TypeImpl implements VoidType {
 		if (operation == null) {
 
 			if (logger.isInfoEnabled()) {
-				logger
-						.info("Creating implicit operation '" + name + "' for VoidType"); //$NON-NLS-1$//$NON-NLS-2$
+				logger.info("Creating implicit operation '" + name + "' for VoidType"); //$NON-NLS-1$//$NON-NLS-2$
 			}
 
 			operation = PivotModelFactory.eINSTANCE.createOperation();
@@ -151,9 +150,8 @@ public class VoidTypeImpl extends TypeImpl implements VoidType {
 
 			// set the type of the new operation to invalid
 			if (getOclLibrary() == null) {
-				throw new IllegalStateException(
-						"The VoidType called '" + getName() //$NON-NLS-1$
-								+ "' is not contained in the OCL Library."); //$NON-NLS-1$
+				throw new IllegalStateException("The VoidType called '" + getName() //$NON-NLS-1$
+						+ "' is not contained in the OCL Library."); //$NON-NLS-1$
 			}
 
 			operation.setType(getOclLibrary().getOclInvalid());
@@ -177,8 +175,7 @@ public class VoidTypeImpl extends TypeImpl implements VoidType {
 	public Property lookupProperty(String name) {
 
 		if (logger.isInfoEnabled()) {
-			logger
-					.info("Creating implicit property '" + name + "' for VoidType"); //$NON-NLS-1$//$NON-NLS-2$
+			logger.info("Creating implicit property '" + name + "' for VoidType"); //$NON-NLS-1$//$NON-NLS-2$
 		}
 
 		Property property = PivotModelFactory.eINSTANCE.createProperty();
@@ -186,9 +183,8 @@ public class VoidTypeImpl extends TypeImpl implements VoidType {
 
 		// set the type of the new property to invalid
 		if (getOclLibrary() == null) {
-			throw new IllegalStateException(
-					"The InvalidType called '" + getName() //$NON-NLS-1$
-							+ "' is not contained in the OCL Library."); //$NON-NLS-1$
+			throw new IllegalStateException("The InvalidType called '" + getName() //$NON-NLS-1$
+					+ "' is not contained in the OCL Library."); //$NON-NLS-1$
 		}
 
 		property.setType(getOclLibrary().getOclInvalid());
@@ -221,8 +217,8 @@ public class VoidTypeImpl extends TypeImpl implements VoidType {
 			if (oclLibrary != oldOclLibrary) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE,
-							TypesPackageImpl.VOID_TYPE__OCL_LIBRARY,
-							oldOclLibrary, oclLibrary));
+							TypesPackageImpl.VOID_TYPE__OCL_LIBRARY, oldOclLibrary,
+							oclLibrary));
 			}
 		}
 		return oclLibrary;
@@ -245,8 +241,7 @@ public class VoidTypeImpl extends TypeImpl implements VoidType {
 		oclLibrary = newOclLibrary;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
-					TypesPackageImpl.VOID_TYPE__OCL_LIBRARY, oldOclLibrary,
-					oclLibrary));
+					TypesPackageImpl.VOID_TYPE__OCL_LIBRARY, oldOclLibrary, oclLibrary));
 	}
 
 	/**

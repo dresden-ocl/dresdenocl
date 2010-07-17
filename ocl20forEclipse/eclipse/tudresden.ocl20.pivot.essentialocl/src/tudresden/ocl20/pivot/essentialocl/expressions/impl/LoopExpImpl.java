@@ -186,8 +186,8 @@ public abstract class LoopExpImpl extends CallExpImpl implements LoopExp {
 		body = newBody;
 		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this,
-					Notification.SET, ExpressionsPackageImpl.LOOP_EXP__BODY,
-					oldBody, newBody);
+					Notification.SET, ExpressionsPackageImpl.LOOP_EXP__BODY, oldBody,
+					newBody);
 			if (msgs == null)
 				msgs = notification;
 			else
@@ -205,14 +205,12 @@ public abstract class LoopExpImpl extends CallExpImpl implements LoopExp {
 			NotificationChain msgs = null;
 			if (body != null)
 				msgs = ((InternalEObject) body).eInverseRemove(this,
-						EOPPOSITE_FEATURE_BASE
-								- ExpressionsPackageImpl.LOOP_EXP__BODY, null,
-						msgs);
+						EOPPOSITE_FEATURE_BASE - ExpressionsPackageImpl.LOOP_EXP__BODY,
+						null, msgs);
 			if (newBody != null)
 				msgs = ((InternalEObject) newBody).eInverseAdd(this,
-						EOPPOSITE_FEATURE_BASE
-								- ExpressionsPackageImpl.LOOP_EXP__BODY, null,
-						msgs);
+						EOPPOSITE_FEATURE_BASE - ExpressionsPackageImpl.LOOP_EXP__BODY,
+						null, msgs);
 			msgs = basicSetBody(newBody, msgs);
 			if (msgs != null)
 				msgs.dispatch();
@@ -227,8 +225,8 @@ public abstract class LoopExpImpl extends CallExpImpl implements LoopExp {
 	 */
 	public List<Variable> getIterator() {
 		if (iterator == null) {
-			iterator = new EObjectContainmentEList<Variable>(Variable.class,
-					this, ExpressionsPackageImpl.LOOP_EXP__ITERATOR);
+			iterator = new EObjectContainmentEList<Variable>(Variable.class, this,
+					ExpressionsPackageImpl.LOOP_EXP__ITERATOR);
 		}
 		return iterator;
 	}
@@ -244,8 +242,7 @@ public abstract class LoopExpImpl extends CallExpImpl implements LoopExp {
 		case ExpressionsPackageImpl.LOOP_EXP__BODY:
 			return basicSetBody(null, msgs);
 		case ExpressionsPackageImpl.LOOP_EXP__ITERATOR:
-			return ((InternalEList<?>) getIterator()).basicRemove(otherEnd,
-					msgs);
+			return ((InternalEList<?>) getIterator()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}

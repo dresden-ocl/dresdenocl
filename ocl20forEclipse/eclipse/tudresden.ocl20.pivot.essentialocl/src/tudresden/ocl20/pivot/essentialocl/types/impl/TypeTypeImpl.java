@@ -141,8 +141,8 @@ public class TypeTypeImpl extends TypeImpl implements TypeType {
 		representedType = newRepresentedType;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
-					TypesPackageImpl.TYPE_TYPE__REPRESENTED_TYPE,
-					oldRepresentedType, representedType));
+					TypesPackageImpl.TYPE_TYPE__REPRESENTED_TYPE, oldRepresentedType,
+					representedType));
 	}
 
 	/**
@@ -169,8 +169,7 @@ public class TypeTypeImpl extends TypeImpl implements TypeType {
 			int index;
 
 			// find the TypeParameter that corresponds to the element type
-			index = ListUtil
-					.indexOf(parameters, getOwnedTypeParameter().get(0));
+			index = ListUtil.indexOf(parameters, getOwnedTypeParameter().get(0));
 
 			if (index != -1) {
 				representedType = types.get(index);

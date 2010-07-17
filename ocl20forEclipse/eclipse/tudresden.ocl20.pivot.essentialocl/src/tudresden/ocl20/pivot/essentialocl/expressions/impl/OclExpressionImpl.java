@@ -150,8 +150,8 @@ public abstract class OclExpressionImpl extends TypedElementImpl implements
 		oclLibrary = newOclLibrary;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
-					ExpressionsPackageImpl.OCL_EXPRESSION__OCL_LIBRARY,
-					oldOclLibrary, oclLibrary));
+					ExpressionsPackageImpl.OCL_EXPRESSION__OCL_LIBRARY, oldOclLibrary,
+					oclLibrary));
 	}
 
 	/**
@@ -248,8 +248,8 @@ public abstract class OclExpressionImpl extends TypedElementImpl implements
 
 		// bind the type parameter with the type of this operation
 		asSetOperation = asSetOperation.bindTypeParameter(
-				new ArrayList<TypeParameter>(asSetOperation
-						.getOwnedTypeParameter()), Arrays.asList(getType()));
+				new ArrayList<TypeParameter>(asSetOperation.getOwnedTypeParameter()),
+				Arrays.asList(getType()));
 
 		// create a new operation call expression
 		OperationCallExp withAsSet = ExpressionsFactory.INSTANCE
@@ -307,8 +307,7 @@ public abstract class OclExpressionImpl extends TypedElementImpl implements
 		// check parameter (note that a type of null does NOT imply a conversion to
 		// OclVoid because null and OclVoid are defined on different meta layers)
 		if (type == null) {
-			throw new IllegalArgumentException(
-					"Parameter 'type' must not be null"); //$NON-NLS-1$
+			throw new IllegalArgumentException("Parameter 'type' must not be null"); //$NON-NLS-1$
 		}
 
 		// make sure we have access to the OCL library
@@ -366,8 +365,7 @@ public abstract class OclExpressionImpl extends TypedElementImpl implements
 		}
 
 		if (logger.isDebugEnabled()) {
-			logger
-					.debug("mapPrimitiveType() - exit - return value=" + mappedType); //$NON-NLS-1$
+			logger.debug("mapPrimitiveType() - exit - return value=" + mappedType); //$NON-NLS-1$
 		}
 
 		return mappedType;

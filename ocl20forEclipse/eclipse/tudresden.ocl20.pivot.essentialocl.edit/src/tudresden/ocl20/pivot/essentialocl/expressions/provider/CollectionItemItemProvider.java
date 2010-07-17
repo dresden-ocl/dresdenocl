@@ -58,9 +58,9 @@ import tudresden.ocl20.pivot.essentialocl.types.provider.EssentialOCLEditPlugin;
  * @generated
  */
 public class CollectionItemItemProvider extends
-		CollectionLiteralPartItemProvider implements
-		IEditingDomainItemProvider, IStructuredItemContentProvider,
-		ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
+		CollectionLiteralPartItemProvider implements IEditingDomainItemProvider,
+		IStructuredItemContentProvider, ITreeItemContentProvider,
+		IItemLabelProvider, IItemPropertySource {
 
 	/**
 	 * This constructs an instance from a factory and a notifier.

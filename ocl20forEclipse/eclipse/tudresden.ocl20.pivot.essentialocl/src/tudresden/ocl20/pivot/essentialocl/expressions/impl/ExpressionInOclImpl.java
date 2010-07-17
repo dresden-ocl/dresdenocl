@@ -176,19 +176,15 @@ public class ExpressionInOclImpl extends ExpressionImpl implements
 		if (newBodyExpression != bodyExpression) {
 			NotificationChain msgs = null;
 			if (bodyExpression != null)
-				msgs = ((InternalEObject) bodyExpression)
-						.eInverseRemove(
-								this,
-								EOPPOSITE_FEATURE_BASE
-										- ExpressionsPackageImpl.EXPRESSION_IN_OCL__BODY_EXPRESSION,
-								null, msgs);
+				msgs = ((InternalEObject) bodyExpression).eInverseRemove(this,
+						EOPPOSITE_FEATURE_BASE
+								- ExpressionsPackageImpl.EXPRESSION_IN_OCL__BODY_EXPRESSION,
+						null, msgs);
 			if (newBodyExpression != null)
-				msgs = ((InternalEObject) newBodyExpression)
-						.eInverseAdd(
-								this,
-								EOPPOSITE_FEATURE_BASE
-										- ExpressionsPackageImpl.EXPRESSION_IN_OCL__BODY_EXPRESSION,
-								null, msgs);
+				msgs = ((InternalEObject) newBodyExpression).eInverseAdd(this,
+						EOPPOSITE_FEATURE_BASE
+								- ExpressionsPackageImpl.EXPRESSION_IN_OCL__BODY_EXPRESSION,
+						null, msgs);
 			msgs = basicSetBodyExpression(newBodyExpression, msgs);
 			if (msgs != null)
 				msgs.dispatch();
@@ -216,8 +212,7 @@ public class ExpressionInOclImpl extends ExpressionImpl implements
 		context = newContext;
 		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this,
-					Notification.SET,
-					ExpressionsPackageImpl.EXPRESSION_IN_OCL__CONTEXT,
+					Notification.SET, ExpressionsPackageImpl.EXPRESSION_IN_OCL__CONTEXT,
 					oldContext, newContext);
 			if (msgs == null)
 				msgs = notification;
@@ -236,25 +231,19 @@ public class ExpressionInOclImpl extends ExpressionImpl implements
 			NotificationChain msgs = null;
 			if (context != null)
 				msgs = ((InternalEObject) context)
-						.eInverseRemove(
-								this,
-								EOPPOSITE_FEATURE_BASE
-										- ExpressionsPackageImpl.EXPRESSION_IN_OCL__CONTEXT,
-								null, msgs);
+						.eInverseRemove(this, EOPPOSITE_FEATURE_BASE
+								- ExpressionsPackageImpl.EXPRESSION_IN_OCL__CONTEXT, null, msgs);
 			if (newContext != null)
 				msgs = ((InternalEObject) newContext)
-						.eInverseAdd(
-								this,
-								EOPPOSITE_FEATURE_BASE
-										- ExpressionsPackageImpl.EXPRESSION_IN_OCL__CONTEXT,
-								null, msgs);
+						.eInverseAdd(this, EOPPOSITE_FEATURE_BASE
+								- ExpressionsPackageImpl.EXPRESSION_IN_OCL__CONTEXT, null, msgs);
 			msgs = basicSetContext(newContext, msgs);
 			if (msgs != null)
 				msgs.dispatch();
 		} else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
-					ExpressionsPackageImpl.EXPRESSION_IN_OCL__CONTEXT,
-					newContext, newContext));
+					ExpressionsPackageImpl.EXPRESSION_IN_OCL__CONTEXT, newContext,
+					newContext));
 	}
 
 	/**
@@ -275,8 +264,7 @@ public class ExpressionInOclImpl extends ExpressionImpl implements
 		result = newResult;
 		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this,
-					Notification.SET,
-					ExpressionsPackageImpl.EXPRESSION_IN_OCL__RESULT,
+					Notification.SET, ExpressionsPackageImpl.EXPRESSION_IN_OCL__RESULT,
 					oldResult, newResult);
 			if (msgs == null)
 				msgs = notification;
@@ -294,26 +282,20 @@ public class ExpressionInOclImpl extends ExpressionImpl implements
 		if (newResult != result) {
 			NotificationChain msgs = null;
 			if (result != null)
-				msgs = ((InternalEObject) result)
-						.eInverseRemove(
-								this,
-								EOPPOSITE_FEATURE_BASE
-										- ExpressionsPackageImpl.EXPRESSION_IN_OCL__RESULT,
-								null, msgs);
+				msgs = ((InternalEObject) result).eInverseRemove(this,
+						EOPPOSITE_FEATURE_BASE
+								- ExpressionsPackageImpl.EXPRESSION_IN_OCL__RESULT, null, msgs);
 			if (newResult != null)
-				msgs = ((InternalEObject) newResult)
-						.eInverseAdd(
-								this,
-								EOPPOSITE_FEATURE_BASE
-										- ExpressionsPackageImpl.EXPRESSION_IN_OCL__RESULT,
-								null, msgs);
+				msgs = ((InternalEObject) newResult).eInverseAdd(this,
+						EOPPOSITE_FEATURE_BASE
+								- ExpressionsPackageImpl.EXPRESSION_IN_OCL__RESULT, null, msgs);
 			msgs = basicSetResult(newResult, msgs);
 			if (msgs != null)
 				msgs.dispatch();
 		} else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
-					ExpressionsPackageImpl.EXPRESSION_IN_OCL__RESULT,
-					newResult, newResult));
+					ExpressionsPackageImpl.EXPRESSION_IN_OCL__RESULT, newResult,
+					newResult));
 	}
 
 	/**
@@ -322,8 +304,8 @@ public class ExpressionInOclImpl extends ExpressionImpl implements
 	 */
 	public List<Variable> getParameter() {
 		if (parameter == null) {
-			parameter = new EObjectContainmentEList<Variable>(Variable.class,
-					this, ExpressionsPackageImpl.EXPRESSION_IN_OCL__PARAMETER);
+			parameter = new EObjectContainmentEList<Variable>(Variable.class, this,
+					ExpressionsPackageImpl.EXPRESSION_IN_OCL__PARAMETER);
 		}
 		return parameter;
 	}
@@ -343,8 +325,7 @@ public class ExpressionInOclImpl extends ExpressionImpl implements
 		case ExpressionsPackageImpl.EXPRESSION_IN_OCL__RESULT:
 			return basicSetResult(null, msgs);
 		case ExpressionsPackageImpl.EXPRESSION_IN_OCL__PARAMETER:
-			return ((InternalEList<?>) getParameter()).basicRemove(otherEnd,
-					msgs);
+			return ((InternalEList<?>) getParameter()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}

@@ -85,6 +85,7 @@ public class CollectionLiteralExpItemProvider extends LiteralExpItemProvider
 			super.getPropertyDescriptors(object);
 
 			addKindPropertyDescriptor(object);
+			addElementTypePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -104,9 +105,28 @@ public class CollectionLiteralExpItemProvider extends LiteralExpItemProvider
 						getString("_UI_CollectionLiteralExp_kind_feature"), //$NON-NLS-1$
 						getString(
 								"_UI_PropertyDescriptor_description", "_UI_CollectionLiteralExp_kind_feature", "_UI_CollectionLiteralExp_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-						ExpressionsPackageImpl.Literals.COLLECTION_LITERAL_EXP__KIND,
-						true, false, false,
-						ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
+						ExpressionsPackageImpl.Literals.COLLECTION_LITERAL_EXP__KIND, true,
+						false, false, ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null,
+						null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Element Type feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addElementTypePropertyDescriptor(Object object) {
+		itemPropertyDescriptors
+				.add(createItemPropertyDescriptor(
+						((ComposeableAdapterFactory) adapterFactory)
+								.getRootAdapterFactory(),
+						getResourceLocator(),
+						getString("_UI_CollectionLiteralExp_elementType_feature"), //$NON-NLS-1$
+						getString(
+								"_UI_PropertyDescriptor_description", "_UI_CollectionLiteralExp_elementType_feature", "_UI_CollectionLiteralExp_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+						ExpressionsPackageImpl.Literals.COLLECTION_LITERAL_EXP__ELEMENT_TYPE,
+						true, false, true, null, null, null));
 	}
 
 	/**

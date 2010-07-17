@@ -100,8 +100,7 @@ public class LetExpItemProvider extends OclExpressionItemProvider implements
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(ExpressionsPackageImpl.Literals.LET_EXP__IN);
-			childrenFeatures
-					.add(ExpressionsPackageImpl.Literals.LET_EXP__VARIABLE);
+			childrenFeatures.add(ExpressionsPackageImpl.Literals.LET_EXP__VARIABLE);
 		}
 		return childrenFeatures;
 	}

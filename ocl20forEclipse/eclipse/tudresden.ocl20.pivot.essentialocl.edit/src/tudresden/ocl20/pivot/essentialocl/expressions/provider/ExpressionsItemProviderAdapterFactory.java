@@ -213,8 +213,7 @@ public class ExpressionsItemProviderAdapterFactory extends
 	@Override
 	public Adapter createTupleLiteralPartAdapter() {
 		if (tupleLiteralPartItemProvider == null) {
-			tupleLiteralPartItemProvider = new TupleLiteralPartItemProvider(
-					this);
+			tupleLiteralPartItemProvider = new TupleLiteralPartItemProvider(this);
 		}
 
 		return tupleLiteralPartItemProvider;
@@ -260,8 +259,7 @@ public class ExpressionsItemProviderAdapterFactory extends
 	@Override
 	public Adapter createStringLiteralExpAdapter() {
 		if (stringLiteralExpItemProvider == null) {
-			stringLiteralExpItemProvider = new StringLiteralExpItemProvider(
-					this);
+			stringLiteralExpItemProvider = new StringLiteralExpItemProvider(this);
 		}
 
 		return stringLiteralExpItemProvider;
@@ -330,8 +328,7 @@ public class ExpressionsItemProviderAdapterFactory extends
 	@Override
 	public Adapter createOperationCallExpAdapter() {
 		if (operationCallExpItemProvider == null) {
-			operationCallExpItemProvider = new OperationCallExpItemProvider(
-					this);
+			operationCallExpItemProvider = new OperationCallExpItemProvider(this);
 		}
 
 		return operationCallExpItemProvider;
@@ -447,8 +444,7 @@ public class ExpressionsItemProviderAdapterFactory extends
 	@Override
 	public Adapter createInvalidLiteralExpAdapter() {
 		if (invalidLiteralExpItemProvider == null) {
-			invalidLiteralExpItemProvider = new InvalidLiteralExpItemProvider(
-					this);
+			invalidLiteralExpItemProvider = new InvalidLiteralExpItemProvider(this);
 		}
 
 		return invalidLiteralExpItemProvider;
@@ -471,8 +467,7 @@ public class ExpressionsItemProviderAdapterFactory extends
 	@Override
 	public Adapter createIntegerLiteralExpAdapter() {
 		if (integerLiteralExpItemProvider == null) {
-			integerLiteralExpItemProvider = new IntegerLiteralExpItemProvider(
-					this);
+			integerLiteralExpItemProvider = new IntegerLiteralExpItemProvider(this);
 		}
 
 		return integerLiteralExpItemProvider;
@@ -518,8 +513,7 @@ public class ExpressionsItemProviderAdapterFactory extends
 	@Override
 	public Adapter createBooleanLiteralExpAdapter() {
 		if (booleanLiteralExpItemProvider == null) {
-			booleanLiteralExpItemProvider = new BooleanLiteralExpItemProvider(
-					this);
+			booleanLiteralExpItemProvider = new BooleanLiteralExpItemProvider(this);
 		}
 
 		return booleanLiteralExpItemProvider;

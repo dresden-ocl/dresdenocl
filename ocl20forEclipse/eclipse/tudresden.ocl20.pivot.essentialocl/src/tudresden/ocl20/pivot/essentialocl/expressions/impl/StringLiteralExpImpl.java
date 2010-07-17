@@ -220,8 +220,8 @@ public class StringLiteralExpImpl extends PrimitiveLiteralExpImpl implements
 	public String toString() {
 
 		return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
-				.appendSuper(super.toString()).append(
-						"stringSymbol", stringSymbol).toString(); //$NON-NLS-1$
+				.appendSuper(super.toString())
+				.append("stringSymbol", stringSymbol).toString(); //$NON-NLS-1$
 	}
 
 } // StringLiteralExpImpl

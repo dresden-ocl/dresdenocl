@@ -141,8 +141,8 @@ public class RealLiteralExpImpl extends NumericLiteralExpImpl implements
 		realSymbol = newRealSymbol;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
-					ExpressionsPackageImpl.REAL_LITERAL_EXP__REAL_SYMBOL,
-					oldRealSymbol, realSymbol));
+					ExpressionsPackageImpl.REAL_LITERAL_EXP__REAL_SYMBOL, oldRealSymbol,
+					realSymbol));
 	}
 
 	/**

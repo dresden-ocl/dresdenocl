@@ -249,8 +249,8 @@ public class OclLibraryImpl extends EObjectImpl implements OclLibrary {
 		oclVoid = newOclVoid;
 		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this,
-					Notification.SET, TypesPackageImpl.OCL_LIBRARY__OCL_VOID,
-					oldOclVoid, newOclVoid);
+					Notification.SET, TypesPackageImpl.OCL_LIBRARY__OCL_VOID, oldOclVoid,
+					newOclVoid);
 			if (msgs == null)
 				msgs = notification;
 			else
@@ -268,21 +268,18 @@ public class OclLibraryImpl extends EObjectImpl implements OclLibrary {
 			NotificationChain msgs = null;
 			if (oclVoid != null)
 				msgs = ((InternalEObject) oclVoid).eInverseRemove(this,
-						EOPPOSITE_FEATURE_BASE
-								- TypesPackageImpl.OCL_LIBRARY__OCL_VOID, null,
-						msgs);
+						EOPPOSITE_FEATURE_BASE - TypesPackageImpl.OCL_LIBRARY__OCL_VOID,
+						null, msgs);
 			if (newOclVoid != null)
 				msgs = ((InternalEObject) newOclVoid).eInverseAdd(this,
-						EOPPOSITE_FEATURE_BASE
-								- TypesPackageImpl.OCL_LIBRARY__OCL_VOID, null,
-						msgs);
+						EOPPOSITE_FEATURE_BASE - TypesPackageImpl.OCL_LIBRARY__OCL_VOID,
+						null, msgs);
 			msgs = basicSetOclVoid(newOclVoid, msgs);
 			if (msgs != null)
 				msgs.dispatch();
 		} else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
-					TypesPackageImpl.OCL_LIBRARY__OCL_VOID, newOclVoid,
-					newOclVoid));
+					TypesPackageImpl.OCL_LIBRARY__OCL_VOID, newOclVoid, newOclVoid));
 	}
 
 	/**
@@ -303,8 +300,8 @@ public class OclLibraryImpl extends EObjectImpl implements OclLibrary {
 		oclAny = newOclAny;
 		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this,
-					Notification.SET, TypesPackageImpl.OCL_LIBRARY__OCL_ANY,
-					oldOclAny, newOclAny);
+					Notification.SET, TypesPackageImpl.OCL_LIBRARY__OCL_ANY, oldOclAny,
+					newOclAny);
 			if (msgs == null)
 				msgs = notification;
 			else
@@ -322,14 +319,12 @@ public class OclLibraryImpl extends EObjectImpl implements OclLibrary {
 			NotificationChain msgs = null;
 			if (oclAny != null)
 				msgs = ((InternalEObject) oclAny).eInverseRemove(this,
-						EOPPOSITE_FEATURE_BASE
-								- TypesPackageImpl.OCL_LIBRARY__OCL_ANY, null,
-						msgs);
+						EOPPOSITE_FEATURE_BASE - TypesPackageImpl.OCL_LIBRARY__OCL_ANY,
+						null, msgs);
 			if (newOclAny != null)
 				msgs = ((InternalEObject) newOclAny).eInverseAdd(this,
-						EOPPOSITE_FEATURE_BASE
-								- TypesPackageImpl.OCL_LIBRARY__OCL_ANY, null,
-						msgs);
+						EOPPOSITE_FEATURE_BASE - TypesPackageImpl.OCL_LIBRARY__OCL_ANY,
+						null, msgs);
 			msgs = basicSetOclAny(newOclAny, msgs);
 			if (msgs != null)
 				msgs.dispatch();
@@ -356,8 +351,7 @@ public class OclLibraryImpl extends EObjectImpl implements OclLibrary {
 		oclCollection = newOclCollection;
 		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this,
-					Notification.SET,
-					TypesPackageImpl.OCL_LIBRARY__OCL_COLLECTION,
+					Notification.SET, TypesPackageImpl.OCL_LIBRARY__OCL_COLLECTION,
 					oldOclCollection, newOclCollection);
 			if (msgs == null)
 				msgs = notification;
@@ -377,20 +371,18 @@ public class OclLibraryImpl extends EObjectImpl implements OclLibrary {
 			if (oclCollection != null)
 				msgs = ((InternalEObject) oclCollection).eInverseRemove(this,
 						EOPPOSITE_FEATURE_BASE
-								- TypesPackageImpl.OCL_LIBRARY__OCL_COLLECTION,
-						null, msgs);
+								- TypesPackageImpl.OCL_LIBRARY__OCL_COLLECTION, null, msgs);
 			if (newOclCollection != null)
 				msgs = ((InternalEObject) newOclCollection).eInverseAdd(this,
 						EOPPOSITE_FEATURE_BASE
-								- TypesPackageImpl.OCL_LIBRARY__OCL_COLLECTION,
-						null, msgs);
+								- TypesPackageImpl.OCL_LIBRARY__OCL_COLLECTION, null, msgs);
 			msgs = basicSetOclCollection(newOclCollection, msgs);
 			if (msgs != null)
 				msgs.dispatch();
 		} else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
-					TypesPackageImpl.OCL_LIBRARY__OCL_COLLECTION,
-					newOclCollection, newOclCollection));
+					TypesPackageImpl.OCL_LIBRARY__OCL_COLLECTION, newOclCollection,
+					newOclCollection));
 	}
 
 	/**
@@ -411,9 +403,8 @@ public class OclLibraryImpl extends EObjectImpl implements OclLibrary {
 		oclSequence = newOclSequence;
 		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this,
-					Notification.SET,
-					TypesPackageImpl.OCL_LIBRARY__OCL_SEQUENCE, oldOclSequence,
-					newOclSequence);
+					Notification.SET, TypesPackageImpl.OCL_LIBRARY__OCL_SEQUENCE,
+					oldOclSequence, newOclSequence);
 			if (msgs == null)
 				msgs = notification;
 			else
@@ -430,15 +421,13 @@ public class OclLibraryImpl extends EObjectImpl implements OclLibrary {
 		if (newOclSequence != oclSequence) {
 			NotificationChain msgs = null;
 			if (oclSequence != null)
-				msgs = ((InternalEObject) oclSequence).eInverseRemove(this,
-						EOPPOSITE_FEATURE_BASE
-								- TypesPackageImpl.OCL_LIBRARY__OCL_SEQUENCE,
-						null, msgs);
+				msgs = ((InternalEObject) oclSequence)
+						.eInverseRemove(this, EOPPOSITE_FEATURE_BASE
+								- TypesPackageImpl.OCL_LIBRARY__OCL_SEQUENCE, null, msgs);
 			if (newOclSequence != null)
-				msgs = ((InternalEObject) newOclSequence).eInverseAdd(this,
-						EOPPOSITE_FEATURE_BASE
-								- TypesPackageImpl.OCL_LIBRARY__OCL_SEQUENCE,
-						null, msgs);
+				msgs = ((InternalEObject) newOclSequence)
+						.eInverseAdd(this, EOPPOSITE_FEATURE_BASE
+								- TypesPackageImpl.OCL_LIBRARY__OCL_SEQUENCE, null, msgs);
 			msgs = basicSetOclSequence(newOclSequence, msgs);
 			if (msgs != null)
 				msgs.dispatch();
@@ -466,8 +455,8 @@ public class OclLibraryImpl extends EObjectImpl implements OclLibrary {
 		oclBag = newOclBag;
 		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this,
-					Notification.SET, TypesPackageImpl.OCL_LIBRARY__OCL_BAG,
-					oldOclBag, newOclBag);
+					Notification.SET, TypesPackageImpl.OCL_LIBRARY__OCL_BAG, oldOclBag,
+					newOclBag);
 			if (msgs == null)
 				msgs = notification;
 			else
@@ -485,14 +474,12 @@ public class OclLibraryImpl extends EObjectImpl implements OclLibrary {
 			NotificationChain msgs = null;
 			if (oclBag != null)
 				msgs = ((InternalEObject) oclBag).eInverseRemove(this,
-						EOPPOSITE_FEATURE_BASE
-								- TypesPackageImpl.OCL_LIBRARY__OCL_BAG, null,
-						msgs);
+						EOPPOSITE_FEATURE_BASE - TypesPackageImpl.OCL_LIBRARY__OCL_BAG,
+						null, msgs);
 			if (newOclBag != null)
 				msgs = ((InternalEObject) newOclBag).eInverseAdd(this,
-						EOPPOSITE_FEATURE_BASE
-								- TypesPackageImpl.OCL_LIBRARY__OCL_BAG, null,
-						msgs);
+						EOPPOSITE_FEATURE_BASE - TypesPackageImpl.OCL_LIBRARY__OCL_BAG,
+						null, msgs);
 			msgs = basicSetOclBag(newOclBag, msgs);
 			if (msgs != null)
 				msgs.dispatch();
@@ -519,8 +506,8 @@ public class OclLibraryImpl extends EObjectImpl implements OclLibrary {
 		oclSet = newOclSet;
 		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this,
-					Notification.SET, TypesPackageImpl.OCL_LIBRARY__OCL_SET,
-					oldOclSet, newOclSet);
+					Notification.SET, TypesPackageImpl.OCL_LIBRARY__OCL_SET, oldOclSet,
+					newOclSet);
 			if (msgs == null)
 				msgs = notification;
 			else
@@ -538,14 +525,12 @@ public class OclLibraryImpl extends EObjectImpl implements OclLibrary {
 			NotificationChain msgs = null;
 			if (oclSet != null)
 				msgs = ((InternalEObject) oclSet).eInverseRemove(this,
-						EOPPOSITE_FEATURE_BASE
-								- TypesPackageImpl.OCL_LIBRARY__OCL_SET, null,
-						msgs);
+						EOPPOSITE_FEATURE_BASE - TypesPackageImpl.OCL_LIBRARY__OCL_SET,
+						null, msgs);
 			if (newOclSet != null)
 				msgs = ((InternalEObject) newOclSet).eInverseAdd(this,
-						EOPPOSITE_FEATURE_BASE
-								- TypesPackageImpl.OCL_LIBRARY__OCL_SET, null,
-						msgs);
+						EOPPOSITE_FEATURE_BASE - TypesPackageImpl.OCL_LIBRARY__OCL_SET,
+						null, msgs);
 			msgs = basicSetOclSet(newOclSet, msgs);
 			if (msgs != null)
 				msgs.dispatch();
@@ -572,8 +557,7 @@ public class OclLibraryImpl extends EObjectImpl implements OclLibrary {
 		oclOrderedSet = newOclOrderedSet;
 		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this,
-					Notification.SET,
-					TypesPackageImpl.OCL_LIBRARY__OCL_ORDERED_SET,
+					Notification.SET, TypesPackageImpl.OCL_LIBRARY__OCL_ORDERED_SET,
 					oldOclOrderedSet, newOclOrderedSet);
 			if (msgs == null)
 				msgs = notification;
@@ -591,26 +575,20 @@ public class OclLibraryImpl extends EObjectImpl implements OclLibrary {
 		if (newOclOrderedSet != oclOrderedSet) {
 			NotificationChain msgs = null;
 			if (oclOrderedSet != null)
-				msgs = ((InternalEObject) oclOrderedSet)
-						.eInverseRemove(
-								this,
-								EOPPOSITE_FEATURE_BASE
-										- TypesPackageImpl.OCL_LIBRARY__OCL_ORDERED_SET,
-								null, msgs);
+				msgs = ((InternalEObject) oclOrderedSet).eInverseRemove(this,
+						EOPPOSITE_FEATURE_BASE
+								- TypesPackageImpl.OCL_LIBRARY__OCL_ORDERED_SET, null, msgs);
 			if (newOclOrderedSet != null)
-				msgs = ((InternalEObject) newOclOrderedSet)
-						.eInverseAdd(
-								this,
-								EOPPOSITE_FEATURE_BASE
-										- TypesPackageImpl.OCL_LIBRARY__OCL_ORDERED_SET,
-								null, msgs);
+				msgs = ((InternalEObject) newOclOrderedSet).eInverseAdd(this,
+						EOPPOSITE_FEATURE_BASE
+								- TypesPackageImpl.OCL_LIBRARY__OCL_ORDERED_SET, null, msgs);
 			msgs = basicSetOclOrderedSet(newOclOrderedSet, msgs);
 			if (msgs != null)
 				msgs.dispatch();
 		} else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
-					TypesPackageImpl.OCL_LIBRARY__OCL_ORDERED_SET,
-					newOclOrderedSet, newOclOrderedSet));
+					TypesPackageImpl.OCL_LIBRARY__OCL_ORDERED_SET, newOclOrderedSet,
+					newOclOrderedSet));
 	}
 
 	/**
@@ -619,8 +597,8 @@ public class OclLibraryImpl extends EObjectImpl implements OclLibrary {
 	 */
 	public List<TupleType> getOclTuple() {
 		if (oclTuple == null) {
-			oclTuple = new EObjectContainmentEList<TupleType>(TupleType.class,
-					this, TypesPackageImpl.OCL_LIBRARY__OCL_TUPLE);
+			oclTuple = new EObjectContainmentEList<TupleType>(TupleType.class, this,
+					TypesPackageImpl.OCL_LIBRARY__OCL_TUPLE);
 		}
 		return oclTuple;
 	}
@@ -643,9 +621,8 @@ public class OclLibraryImpl extends EObjectImpl implements OclLibrary {
 		oclBoolean = newOclBoolean;
 		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this,
-					Notification.SET,
-					TypesPackageImpl.OCL_LIBRARY__OCL_BOOLEAN, oldOclBoolean,
-					newOclBoolean);
+					Notification.SET, TypesPackageImpl.OCL_LIBRARY__OCL_BOOLEAN,
+					oldOclBoolean, newOclBoolean);
 			if (msgs == null)
 				msgs = notification;
 			else
@@ -663,13 +640,11 @@ public class OclLibraryImpl extends EObjectImpl implements OclLibrary {
 			NotificationChain msgs = null;
 			if (oclBoolean != null)
 				msgs = ((InternalEObject) oclBoolean).eInverseRemove(this,
-						EOPPOSITE_FEATURE_BASE
-								- TypesPackageImpl.OCL_LIBRARY__OCL_BOOLEAN,
+						EOPPOSITE_FEATURE_BASE - TypesPackageImpl.OCL_LIBRARY__OCL_BOOLEAN,
 						null, msgs);
 			if (newOclBoolean != null)
 				msgs = ((InternalEObject) newOclBoolean).eInverseAdd(this,
-						EOPPOSITE_FEATURE_BASE
-								- TypesPackageImpl.OCL_LIBRARY__OCL_BOOLEAN,
+						EOPPOSITE_FEATURE_BASE - TypesPackageImpl.OCL_LIBRARY__OCL_BOOLEAN,
 						null, msgs);
 			msgs = basicSetOclBoolean(newOclBoolean, msgs);
 			if (msgs != null)
@@ -717,21 +692,18 @@ public class OclLibraryImpl extends EObjectImpl implements OclLibrary {
 			NotificationChain msgs = null;
 			if (oclString != null)
 				msgs = ((InternalEObject) oclString).eInverseRemove(this,
-						EOPPOSITE_FEATURE_BASE
-								- TypesPackageImpl.OCL_LIBRARY__OCL_STRING,
+						EOPPOSITE_FEATURE_BASE - TypesPackageImpl.OCL_LIBRARY__OCL_STRING,
 						null, msgs);
 			if (newOclString != null)
 				msgs = ((InternalEObject) newOclString).eInverseAdd(this,
-						EOPPOSITE_FEATURE_BASE
-								- TypesPackageImpl.OCL_LIBRARY__OCL_STRING,
+						EOPPOSITE_FEATURE_BASE - TypesPackageImpl.OCL_LIBRARY__OCL_STRING,
 						null, msgs);
 			msgs = basicSetOclString(newOclString, msgs);
 			if (msgs != null)
 				msgs.dispatch();
 		} else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
-					TypesPackageImpl.OCL_LIBRARY__OCL_STRING, newOclString,
-					newOclString));
+					TypesPackageImpl.OCL_LIBRARY__OCL_STRING, newOclString, newOclString));
 	}
 
 	/**
@@ -752,9 +724,8 @@ public class OclLibraryImpl extends EObjectImpl implements OclLibrary {
 		oclInteger = newOclInteger;
 		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this,
-					Notification.SET,
-					TypesPackageImpl.OCL_LIBRARY__OCL_INTEGER, oldOclInteger,
-					newOclInteger);
+					Notification.SET, TypesPackageImpl.OCL_LIBRARY__OCL_INTEGER,
+					oldOclInteger, newOclInteger);
 			if (msgs == null)
 				msgs = notification;
 			else
@@ -772,13 +743,11 @@ public class OclLibraryImpl extends EObjectImpl implements OclLibrary {
 			NotificationChain msgs = null;
 			if (oclInteger != null)
 				msgs = ((InternalEObject) oclInteger).eInverseRemove(this,
-						EOPPOSITE_FEATURE_BASE
-								- TypesPackageImpl.OCL_LIBRARY__OCL_INTEGER,
+						EOPPOSITE_FEATURE_BASE - TypesPackageImpl.OCL_LIBRARY__OCL_INTEGER,
 						null, msgs);
 			if (newOclInteger != null)
 				msgs = ((InternalEObject) newOclInteger).eInverseAdd(this,
-						EOPPOSITE_FEATURE_BASE
-								- TypesPackageImpl.OCL_LIBRARY__OCL_INTEGER,
+						EOPPOSITE_FEATURE_BASE - TypesPackageImpl.OCL_LIBRARY__OCL_INTEGER,
 						null, msgs);
 			msgs = basicSetOclInteger(newOclInteger, msgs);
 			if (msgs != null)
@@ -807,8 +776,8 @@ public class OclLibraryImpl extends EObjectImpl implements OclLibrary {
 		oclReal = newOclReal;
 		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this,
-					Notification.SET, TypesPackageImpl.OCL_LIBRARY__OCL_REAL,
-					oldOclReal, newOclReal);
+					Notification.SET, TypesPackageImpl.OCL_LIBRARY__OCL_REAL, oldOclReal,
+					newOclReal);
 			if (msgs == null)
 				msgs = notification;
 			else
@@ -826,21 +795,18 @@ public class OclLibraryImpl extends EObjectImpl implements OclLibrary {
 			NotificationChain msgs = null;
 			if (oclReal != null)
 				msgs = ((InternalEObject) oclReal).eInverseRemove(this,
-						EOPPOSITE_FEATURE_BASE
-								- TypesPackageImpl.OCL_LIBRARY__OCL_REAL, null,
-						msgs);
+						EOPPOSITE_FEATURE_BASE - TypesPackageImpl.OCL_LIBRARY__OCL_REAL,
+						null, msgs);
 			if (newOclReal != null)
 				msgs = ((InternalEObject) newOclReal).eInverseAdd(this,
-						EOPPOSITE_FEATURE_BASE
-								- TypesPackageImpl.OCL_LIBRARY__OCL_REAL, null,
-						msgs);
+						EOPPOSITE_FEATURE_BASE - TypesPackageImpl.OCL_LIBRARY__OCL_REAL,
+						null, msgs);
 			msgs = basicSetOclReal(newOclReal, msgs);
 			if (msgs != null)
 				msgs.dispatch();
 		} else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
-					TypesPackageImpl.OCL_LIBRARY__OCL_REAL, newOclReal,
-					newOclReal));
+					TypesPackageImpl.OCL_LIBRARY__OCL_REAL, newOclReal, newOclReal));
 	}
 
 	/**
@@ -861,9 +827,8 @@ public class OclLibraryImpl extends EObjectImpl implements OclLibrary {
 		oclInvalid = newOclInvalid;
 		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this,
-					Notification.SET,
-					TypesPackageImpl.OCL_LIBRARY__OCL_INVALID, oldOclInvalid,
-					newOclInvalid);
+					Notification.SET, TypesPackageImpl.OCL_LIBRARY__OCL_INVALID,
+					oldOclInvalid, newOclInvalid);
 			if (msgs == null)
 				msgs = notification;
 			else
@@ -880,13 +845,13 @@ public class OclLibraryImpl extends EObjectImpl implements OclLibrary {
 		if (newOclInvalid != oclInvalid) {
 			NotificationChain msgs = null;
 			if (oclInvalid != null)
-				msgs = ((InternalEObject) oclInvalid).eInverseRemove(this,
-						TypesPackageImpl.INVALID_TYPE__OCL_LIBRARY,
-						InvalidType.class, msgs);
+				msgs = ((InternalEObject) oclInvalid)
+						.eInverseRemove(this, TypesPackageImpl.INVALID_TYPE__OCL_LIBRARY,
+								InvalidType.class, msgs);
 			if (newOclInvalid != null)
-				msgs = ((InternalEObject) newOclInvalid).eInverseAdd(this,
-						TypesPackageImpl.INVALID_TYPE__OCL_LIBRARY,
-						InvalidType.class, msgs);
+				msgs = ((InternalEObject) newOclInvalid)
+						.eInverseAdd(this, TypesPackageImpl.INVALID_TYPE__OCL_LIBRARY,
+								InvalidType.class, msgs);
 			msgs = basicSetOclInvalid(newOclInvalid, msgs);
 			if (msgs != null)
 				msgs.dispatch();
@@ -914,8 +879,8 @@ public class OclLibraryImpl extends EObjectImpl implements OclLibrary {
 		oclType = newOclType;
 		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this,
-					Notification.SET, TypesPackageImpl.OCL_LIBRARY__OCL_TYPE,
-					oldOclType, newOclType);
+					Notification.SET, TypesPackageImpl.OCL_LIBRARY__OCL_TYPE, oldOclType,
+					newOclType);
 			if (msgs == null)
 				msgs = notification;
 			else
@@ -933,21 +898,18 @@ public class OclLibraryImpl extends EObjectImpl implements OclLibrary {
 			NotificationChain msgs = null;
 			if (oclType != null)
 				msgs = ((InternalEObject) oclType).eInverseRemove(this,
-						EOPPOSITE_FEATURE_BASE
-								- TypesPackageImpl.OCL_LIBRARY__OCL_TYPE, null,
-						msgs);
+						EOPPOSITE_FEATURE_BASE - TypesPackageImpl.OCL_LIBRARY__OCL_TYPE,
+						null, msgs);
 			if (newOclType != null)
 				msgs = ((InternalEObject) newOclType).eInverseAdd(this,
-						EOPPOSITE_FEATURE_BASE
-								- TypesPackageImpl.OCL_LIBRARY__OCL_TYPE, null,
-						msgs);
+						EOPPOSITE_FEATURE_BASE - TypesPackageImpl.OCL_LIBRARY__OCL_TYPE,
+						null, msgs);
 			msgs = basicSetOclType(newOclType, msgs);
 			if (msgs != null)
 				msgs.dispatch();
 		} else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
-					TypesPackageImpl.OCL_LIBRARY__OCL_TYPE, newOclType,
-					newOclType));
+					TypesPackageImpl.OCL_LIBRARY__OCL_TYPE, newOclType, newOclType));
 	}
 
 	/**
@@ -985,8 +947,7 @@ public class OclLibraryImpl extends EObjectImpl implements OclLibrary {
 
 		// precondition check
 		if (elementType == null || elementType.equals(getOclInvalid())) {
-			throw new IllegalArgumentException(
-					"Illegal element type " + elementType); //$NON-NLS-1$
+			throw new IllegalArgumentException("Illegal element type " + elementType); //$NON-NLS-1$
 		}
 
 		// get the template type and check it
@@ -999,8 +960,8 @@ public class OclLibraryImpl extends EObjectImpl implements OclLibrary {
 
 		// bind the template type and set the element type
 		collectionType = collectionType.bindTypeParameter(
-				new ArrayList<TypeParameter>(collectionType
-						.getOwnedTypeParameter()), Arrays.asList(elementType));
+				new ArrayList<TypeParameter>(collectionType.getOwnedTypeParameter()),
+				Arrays.asList(elementType));
 
 		if (logger.isDebugEnabled()) {
 			logger.debug("getCollectionType() - exit - return value=" //$NON-NLS-1$
@@ -1018,16 +979,14 @@ public class OclLibraryImpl extends EObjectImpl implements OclLibrary {
 	public SequenceType getSequenceType(Type elementType) {
 
 		if (logger.isDebugEnabled()) {
-			logger
-					.debug("getSequenceType(elementType=" + elementType + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
+			logger.debug("getSequenceType(elementType=" + elementType + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 
 		SequenceType sequenceType;
 
 		// precondition check
 		if (elementType == null || elementType.equals(getOclInvalid())) {
-			throw new IllegalArgumentException(
-					"Illegal element type " + elementType); //$NON-NLS-1$
+			throw new IllegalArgumentException("Illegal element type " + elementType); //$NON-NLS-1$
 		}
 
 		// check that the OCL SequenceType has been modeled
@@ -1037,13 +996,11 @@ public class OclLibraryImpl extends EObjectImpl implements OclLibrary {
 		}
 
 		// bind the template type and set the element type
-		sequenceType = oclSequence.bindTypeParameter(
-				new ArrayList<TypeParameter>(oclSequence
-						.getOwnedTypeParameter()), Arrays.asList(elementType));
+		sequenceType = oclSequence.bindTypeParameter(new ArrayList<TypeParameter>(
+				oclSequence.getOwnedTypeParameter()), Arrays.asList(elementType));
 
 		if (logger.isDebugEnabled()) {
-			logger
-					.debug("getSequenceType() - exit - return value=" + sequenceType); //$NON-NLS-1$
+			logger.debug("getSequenceType() - exit - return value=" + sequenceType); //$NON-NLS-1$
 		}
 
 		return sequenceType;
@@ -1064,8 +1021,7 @@ public class OclLibraryImpl extends EObjectImpl implements OclLibrary {
 
 		// precondition check
 		if (elementType == null || elementType.equals(getOclInvalid())) {
-			throw new IllegalArgumentException(
-					"Illegal element type " + elementType); //$NON-NLS-1$
+			throw new IllegalArgumentException("Illegal element type " + elementType); //$NON-NLS-1$
 		}
 
 		// check the the OclBag type has been modelled
@@ -1100,8 +1056,7 @@ public class OclLibraryImpl extends EObjectImpl implements OclLibrary {
 
 		// precondition check
 		if (elementType == null || elementType.equals(getOclInvalid())) {
-			throw new IllegalArgumentException(
-					"Illegal element type " + elementType); //$NON-NLS-1$
+			throw new IllegalArgumentException("Illegal element type " + elementType); //$NON-NLS-1$
 		}
 
 		// check that the SetType has been modeled
@@ -1137,8 +1092,7 @@ public class OclLibraryImpl extends EObjectImpl implements OclLibrary {
 
 		// precondition check
 		if (elementType == null || elementType.equals(oclInvalid)) {
-			throw new IllegalArgumentException(
-					"Illegal element type " + elementType); //$NON-NLS-1$
+			throw new IllegalArgumentException("Illegal element type " + elementType); //$NON-NLS-1$
 		}
 
 		// check that the OrderedSetType has been modeled
@@ -1149,8 +1103,8 @@ public class OclLibraryImpl extends EObjectImpl implements OclLibrary {
 
 		// bind the template type and set the element type
 		orderedSetType = oclOrderedSet.bindTypeParameter(
-				new ArrayList<TypeParameter>(oclOrderedSet
-						.getOwnedTypeParameter()), Arrays.asList(elementType));
+				new ArrayList<TypeParameter>(oclOrderedSet.getOwnedTypeParameter()),
+				Arrays.asList(elementType));
 
 		if (logger.isDebugEnabled()) {
 			logger.debug("getOrderedSetType() - exit - return value=" //$NON-NLS-1$
@@ -1168,8 +1122,7 @@ public class OclLibraryImpl extends EObjectImpl implements OclLibrary {
 	public TypeType getTypeType(Type representedType) {
 
 		if (logger.isDebugEnabled()) {
-			logger
-					.debug("getTypeType(elementType=" + representedType + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
+			logger.debug("getTypeType(elementType=" + representedType + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 
 		TypeType typeType = TypesFactory.INSTANCE.createTypeType();
@@ -1202,14 +1155,13 @@ public class OclLibraryImpl extends EObjectImpl implements OclLibrary {
 	 * @generated
 	 */
 	@Override
-	public NotificationChain eInverseAdd(InternalEObject otherEnd,
-			int featureID, NotificationChain msgs) {
+	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID,
+			NotificationChain msgs) {
 		switch (featureID) {
 		case TypesPackageImpl.OCL_LIBRARY__OCL_INVALID:
 			if (oclInvalid != null)
 				msgs = ((InternalEObject) oclInvalid).eInverseRemove(this,
-						EOPPOSITE_FEATURE_BASE
-								- TypesPackageImpl.OCL_LIBRARY__OCL_INVALID,
+						EOPPOSITE_FEATURE_BASE - TypesPackageImpl.OCL_LIBRARY__OCL_INVALID,
 						null, msgs);
 			return basicSetOclInvalid((InvalidType) otherEnd, msgs);
 		}
@@ -1251,8 +1203,7 @@ public class OclLibraryImpl extends EObjectImpl implements OclLibrary {
 		case TypesPackageImpl.OCL_LIBRARY__OCL_ORDERED_SET:
 			return basicSetOclOrderedSet(null, msgs);
 		case TypesPackageImpl.OCL_LIBRARY__OCL_TUPLE:
-			return ((InternalEList<?>) getOclTuple()).basicRemove(otherEnd,
-					msgs);
+			return ((InternalEList<?>) getOclTuple()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}

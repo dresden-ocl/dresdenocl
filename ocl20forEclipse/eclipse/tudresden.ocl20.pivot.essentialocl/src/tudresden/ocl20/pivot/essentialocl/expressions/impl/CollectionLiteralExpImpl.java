@@ -57,16 +57,23 @@ import org.apache.commons.lang.builder.ToStringStyle;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
 /**
- * <!-- begin-user-doc --> An implementation of the model object '<em><b>Collection Literal Exp</b></em>'.
- * <!-- end-user-doc -->
+ * <!-- begin-user-doc --> An implementation of the model object '
+ * <em><b>Collection Literal Exp</b></em>'. <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.CollectionLiteralExpImpl#getPart <em>Part</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.CollectionLiteralExpImpl#getKind <em>Kind</em>}</li>
+ * <li>
+ * {@link tudresden.ocl20.pivot.essentialocl.expressions.impl.CollectionLiteralExpImpl#getPart
+ * <em>Part</em>}</li>
+ * <li>
+ * {@link tudresden.ocl20.pivot.essentialocl.expressions.impl.CollectionLiteralExpImpl#getKind
+ * <em>Kind</em>}</li>
+ * <li>
+ * {@link tudresden.ocl20.pivot.essentialocl.expressions.impl.CollectionLiteralExpImpl#getElementType
+ * <em>Element Type</em>}</li>
  * </ul>
  * </p>
- *
+ * 
  * @generated
  */
 public class CollectionLiteralExpImpl extends LiteralExpImpl implements
@@ -79,8 +86,9 @@ public class CollectionLiteralExpImpl extends LiteralExpImpl implements
 			.getLogger(CollectionLiteralExpImpl.class);
 
 	/**
-	 * The cached value of the '{@link #getPart() <em>Part</em>}' containment reference list.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getPart() <em>Part</em>}' containment
+	 * reference list. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getPart()
 	 * @generated
 	 * @ordered
@@ -88,8 +96,9 @@ public class CollectionLiteralExpImpl extends LiteralExpImpl implements
 	protected EList<CollectionLiteralPart> part;
 
 	/**
-	 * The default value of the '{@link #getKind() <em>Kind</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The default value of the '{@link #getKind() <em>Kind</em>}' attribute. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getKind()
 	 * @generated
 	 * @ordered
@@ -97,8 +106,9 @@ public class CollectionLiteralExpImpl extends LiteralExpImpl implements
 	protected static final CollectionKind KIND_EDEFAULT = CollectionKind.COLLECTION;
 
 	/**
-	 * The cached value of the '{@link #getKind() <em>Kind</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getKind() <em>Kind</em>}' attribute. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getKind()
 	 * @generated
 	 * @ordered
@@ -106,7 +116,18 @@ public class CollectionLiteralExpImpl extends LiteralExpImpl implements
 	protected CollectionKind kind = KIND_EDEFAULT;
 
 	/**
+	 * The cached value of the '{@link #getElementType() <em>Element Type</em>}'
+	 * reference. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @see #getElementType()
+	 * @generated
+	 * @ordered
+	 */
+	protected Type elementType;
+
+	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected CollectionLiteralExpImpl() {
@@ -152,7 +173,7 @@ public class CollectionLiteralExpImpl extends LiteralExpImpl implements
 			logger.debug("evaluateType() - enter"); //$NON-NLS-1$
 		}
 
-		Type elementType;
+		Type inferredElementType;
 		Type type;
 
 		// check that the expression has the correct kind
@@ -165,28 +186,38 @@ public class CollectionLiteralExpImpl extends LiteralExpImpl implements
 		OclLibrary oclLibrary = getValidOclLibrary();
 
 		// the common supertype of all parts is the collection's element type
-		elementType = oclLibrary.getOclVoid();
+		inferredElementType = oclLibrary.getOclVoid();
 
 		for (CollectionLiteralPart literalPart : part) {
-			elementType = elementType.commonSuperType(literalPart.getType());
+			inferredElementType = inferredElementType.commonSuperType(literalPart
+					.getType());
+		}
+
+		if (elementType != null) {
+			if (!inferredElementType.conformsTo(elementType))
+				throw new WellformednessException(this,
+						"Wrong element type of CollectionLiteralExp. Found: "
+								+ inferredElementType + ", but was expecting " + elementType);
+			// use the original type as the inferred type might be to special
+			inferredElementType = elementType;
 		}
 
 		// determine the correct collection type
 		switch (kind) {
 		case SEQUENCE:
-			type = oclLibrary.getSequenceType(elementType);
+			type = oclLibrary.getSequenceType(inferredElementType);
 			break;
 
 		case BAG:
-			type = oclLibrary.getBagType(elementType);
+			type = oclLibrary.getBagType(inferredElementType);
 			break;
 
 		case SET:
-			type = oclLibrary.getSetType(elementType);
+			type = oclLibrary.getSetType(inferredElementType);
 			break;
 
 		case ORDERED_SET:
-			type = oclLibrary.getOrderedSetType(elementType);
+			type = oclLibrary.getOrderedSetType(inferredElementType);
 			break;
 
 		default:
@@ -204,6 +235,7 @@ public class CollectionLiteralExpImpl extends LiteralExpImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public List<CollectionLiteralPart> getPart() {
@@ -217,6 +249,7 @@ public class CollectionLiteralExpImpl extends LiteralExpImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public CollectionKind getKind() {
@@ -225,6 +258,7 @@ public class CollectionLiteralExpImpl extends LiteralExpImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public void setKind(CollectionKind newKind) {
@@ -232,12 +266,54 @@ public class CollectionLiteralExpImpl extends LiteralExpImpl implements
 		kind = newKind == null ? KIND_EDEFAULT : newKind;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
-					ExpressionsPackageImpl.COLLECTION_LITERAL_EXP__KIND,
-					oldKind, kind));
+					ExpressionsPackageImpl.COLLECTION_LITERAL_EXP__KIND, oldKind, kind));
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public Type getElementType() {
+		if (elementType != null && elementType.eIsProxy()) {
+			InternalEObject oldElementType = (InternalEObject) elementType;
+			elementType = (Type) eResolveProxy(oldElementType);
+			if (elementType != oldElementType) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE,
+							ExpressionsPackageImpl.COLLECTION_LITERAL_EXP__ELEMENT_TYPE,
+							oldElementType, elementType));
+			}
+		}
+		return elementType;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public Type basicGetElementType() {
+		return elementType;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public void setElementType(Type newElementType) {
+		Type oldElementType = elementType;
+		elementType = newElementType;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET,
+					ExpressionsPackageImpl.COLLECTION_LITERAL_EXP__ELEMENT_TYPE,
+					oldElementType, elementType));
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -252,6 +328,7 @@ public class CollectionLiteralExpImpl extends LiteralExpImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -261,12 +338,17 @@ public class CollectionLiteralExpImpl extends LiteralExpImpl implements
 			return getPart();
 		case ExpressionsPackageImpl.COLLECTION_LITERAL_EXP__KIND:
 			return getKind();
+		case ExpressionsPackageImpl.COLLECTION_LITERAL_EXP__ELEMENT_TYPE:
+			if (resolve)
+				return getElementType();
+			return basicGetElementType();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
@@ -275,11 +357,13 @@ public class CollectionLiteralExpImpl extends LiteralExpImpl implements
 		switch (featureID) {
 		case ExpressionsPackageImpl.COLLECTION_LITERAL_EXP__PART:
 			getPart().clear();
-			getPart().addAll(
-					(Collection<? extends CollectionLiteralPart>) newValue);
+			getPart().addAll((Collection<? extends CollectionLiteralPart>) newValue);
 			return;
 		case ExpressionsPackageImpl.COLLECTION_LITERAL_EXP__KIND:
 			setKind((CollectionKind) newValue);
+			return;
+		case ExpressionsPackageImpl.COLLECTION_LITERAL_EXP__ELEMENT_TYPE:
+			setElementType((Type) newValue);
 			return;
 		}
 		super.eSet(featureID, newValue);
@@ -287,6 +371,7 @@ public class CollectionLiteralExpImpl extends LiteralExpImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -298,12 +383,16 @@ public class CollectionLiteralExpImpl extends LiteralExpImpl implements
 		case ExpressionsPackageImpl.COLLECTION_LITERAL_EXP__KIND:
 			setKind(KIND_EDEFAULT);
 			return;
+		case ExpressionsPackageImpl.COLLECTION_LITERAL_EXP__ELEMENT_TYPE:
+			setElementType((Type) null);
+			return;
 		}
 		super.eUnset(featureID);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -313,12 +402,15 @@ public class CollectionLiteralExpImpl extends LiteralExpImpl implements
 			return part != null && !part.isEmpty();
 		case ExpressionsPackageImpl.COLLECTION_LITERAL_EXP__KIND:
 			return kind != KIND_EDEFAULT;
+		case ExpressionsPackageImpl.COLLECTION_LITERAL_EXP__ELEMENT_TYPE:
+			return elementType != null;
 		}
 		return super.eIsSet(featureID);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override

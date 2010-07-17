@@ -84,8 +84,7 @@ public class CollectionLiteralExpTest extends LiteralExpTest {
 	 */
 	@Override
 	protected void setUp() throws Exception {
-		setFixture(ExpressionsFactoryImpl.eINSTANCE
-				.createCollectionLiteralExp());
+		setFixture(ExpressionsFactoryImpl.eINSTANCE.createCollectionLiteralExp());
 	}
 
 	/**

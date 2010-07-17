@@ -128,8 +128,7 @@ public class TypesActionBarContributor extends
 		@Override
 		public void run() {
 			if (activeEditorPart instanceof IViewerProvider) {
-				Viewer viewer = ((IViewerProvider) activeEditorPart)
-						.getViewer();
+				Viewer viewer = ((IViewerProvider) activeEditorPart).getViewer();
 				if (viewer != null) {
 					viewer.refresh();
 				}
@@ -208,8 +207,7 @@ public class TypesActionBarContributor extends
 		super.contributeToMenu(menuManager);
 
 		IMenuManager submenuManager = new MenuManager(
-				EssentialOCLEditorPlugin.INSTANCE
-						.getString("_UI_TypesEditor_menu"), "tudresden.ocl20.pivot.essentialocl.typesMenuID"); //$NON-NLS-1$ //$NON-NLS-2$
+				EssentialOCLEditorPlugin.INSTANCE.getString("_UI_TypesEditor_menu"), "tudresden.ocl20.pivot.essentialocl.typesMenuID"); //$NON-NLS-1$ //$NON-NLS-2$
 		menuManager.insertAfter("additions", submenuManager); //$NON-NLS-1$
 		submenuManager.add(new Separator("settings")); //$NON-NLS-1$
 		submenuManager.add(new Separator("actions")); //$NON-NLS-1$
@@ -218,9 +216,8 @@ public class TypesActionBarContributor extends
 
 		// Prepare for CreateChild item addition or removal.
 		//
-		createChildMenuManager = new MenuManager(
-				EssentialOCLEditorPlugin.INSTANCE
-						.getString("_UI_CreateChild_menu_item")); //$NON-NLS-1$
+		createChildMenuManager = new MenuManager(EssentialOCLEditorPlugin.INSTANCE
+				.getString("_UI_CreateChild_menu_item")); //$NON-NLS-1$
 		submenuManager.insertBefore("additions", createChildMenuManager); //$NON-NLS-1$
 
 		// Prepare for CreateSibling item addition or removal.
@@ -298,8 +295,7 @@ public class TypesActionBarContributor extends
 		ISelection selection = event.getSelection();
 		if (selection instanceof IStructuredSelection
 				&& ((IStructuredSelection) selection).size() == 1) {
-			Object object = ((IStructuredSelection) selection)
-					.getFirstElement();
+			Object object = ((IStructuredSelection) selection).getFirstElement();
 
 			EditingDomain domain = ((IEditingDomainProvider) activeEditorPart)
 					.getEditingDomain();
@@ -312,16 +308,15 @@ public class TypesActionBarContributor extends
 		//
 		createChildActions = generateCreateChildActions(newChildDescriptors,
 				selection);
-		createSiblingActions = generateCreateSiblingActions(
-				newSiblingDescriptors, selection);
+		createSiblingActions = generateCreateSiblingActions(newSiblingDescriptors,
+				selection);
 
 		if (createChildMenuManager != null) {
 			populateManager(createChildMenuManager, createChildActions, null);
 			createChildMenuManager.update(true);
 		}
 		if (createSiblingMenuManager != null) {
-			populateManager(createSiblingMenuManager, createSiblingActions,
-					null);
+			populateManager(createSiblingMenuManager, createSiblingActions, null);
 			createSiblingMenuManager.update(true);
 		}
 	}
@@ -357,8 +352,8 @@ public class TypesActionBarContributor extends
 		Collection<IAction> actions = new ArrayList<IAction>();
 		if (descriptors != null) {
 			for (Object descriptor : descriptors) {
-				actions.add(new CreateSiblingAction(activeEditorPart,
-						selection, descriptor));
+				actions.add(new CreateSiblingAction(activeEditorPart, selection,
+						descriptor));
 			}
 		}
 		return actions;

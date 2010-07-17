@@ -170,9 +170,7 @@ public class PropertyCallExpImpl extends FeatureCallExpImpl implements
 		Property oldReferredProperty = referredProperty;
 		referredProperty = newReferredProperty;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(
-					this,
-					Notification.SET,
+			eNotify(new ENotificationImpl(this, Notification.SET,
 					ExpressionsPackageImpl.PROPERTY_CALL_EXP__REFERRED_PROPERTY,
 					oldReferredProperty, referredProperty));
 	}
@@ -199,8 +197,7 @@ public class PropertyCallExpImpl extends FeatureCallExpImpl implements
 			int featureID, NotificationChain msgs) {
 		switch (featureID) {
 		case ExpressionsPackageImpl.PROPERTY_CALL_EXP__QUALIFIER:
-			return ((InternalEList<?>) getQualifier()).basicRemove(otherEnd,
-					msgs);
+			return ((InternalEList<?>) getQualifier()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -233,8 +230,7 @@ public class PropertyCallExpImpl extends FeatureCallExpImpl implements
 			return;
 		case ExpressionsPackageImpl.PROPERTY_CALL_EXP__QUALIFIER:
 			getQualifier().clear();
-			getQualifier().addAll(
-					(Collection<? extends OclExpression>) newValue);
+			getQualifier().addAll((Collection<? extends OclExpression>) newValue);
 			return;
 		}
 		super.eSet(featureID, newValue);

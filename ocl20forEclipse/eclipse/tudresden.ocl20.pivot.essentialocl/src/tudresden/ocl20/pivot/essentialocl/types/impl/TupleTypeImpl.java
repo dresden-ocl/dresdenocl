@@ -106,8 +106,7 @@ public class TupleTypeImpl extends TypeImpl implements TupleType {
 							propertyChangeAdapter);
 					break;
 				case Notification.ADD_MANY:
-					for (PropertyImpl p : ((List<PropertyImpl>) msg
-							.getNewValue())) {
+					for (PropertyImpl p : ((List<PropertyImpl>) msg.getNewValue())) {
 						p.eAdapters().add(propertyChangeAdapter);
 					}
 					break;
@@ -116,8 +115,7 @@ public class TupleTypeImpl extends TypeImpl implements TupleType {
 							propertyChangeAdapter);
 					break;
 				case Notification.REMOVE_MANY:
-					for (PropertyImpl p : ((List<PropertyImpl>) msg
-							.getNewValue())) {
+					for (PropertyImpl p : ((List<PropertyImpl>) msg.getNewValue())) {
 						p.eAdapters().remove(propertyChangeAdapter);
 					}
 					break;
@@ -267,8 +265,7 @@ public class TupleTypeImpl extends TypeImpl implements TupleType {
 		name.append(')');
 
 		if (logger.isDebugEnabled()) {
-			logger
-					.debug("determineTupleTypeName() - exit - return value=" + name); //$NON-NLS-1$
+			logger.debug("determineTupleTypeName() - exit - return value=" + name); //$NON-NLS-1$
 		}
 
 		return name.toString();
@@ -390,8 +387,7 @@ public class TupleTypeImpl extends TypeImpl implements TupleType {
 		oclLibrary = newOclLibrary;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
-					TypesPackageImpl.TUPLE_TYPE__OCL_LIBRARY, oldOclLibrary,
-					oclLibrary));
+					TypesPackageImpl.TUPLE_TYPE__OCL_LIBRARY, oldOclLibrary, oclLibrary));
 	}
 
 	/**
@@ -566,8 +562,7 @@ public class TupleTypeImpl extends TypeImpl implements TupleType {
 			logger.debug("addOperation(o=" + o + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 
-		throw new UnsupportedOperationException(
-				"Tuples may not own operations!"); //$NON-NLS-1$
+		throw new UnsupportedOperationException("Tuples may not own operations!"); //$NON-NLS-1$
 	}
 
 	/*

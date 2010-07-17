@@ -104,8 +104,8 @@ public class TupleTypeItemProvider extends TypeItemProvider implements
 						getString("_UI_TupleType_oclLibrary_feature"), //$NON-NLS-1$
 						getString(
 								"_UI_PropertyDescriptor_description", "_UI_TupleType_oclLibrary_feature", "_UI_TupleType_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-						TypesPackageImpl.Literals.TUPLE_TYPE__OCL_LIBRARY,
-						true, false, true, null, null, null));
+						TypesPackageImpl.Literals.TUPLE_TYPE__OCL_LIBRARY, true, false,
+						true, null, null, null));
 	}
 
 	/**

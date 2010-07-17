@@ -57,15 +57,11 @@ import tudresden.ocl20.pivot.pivotmodel.impl.TypedElementImpl;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>
- * {@link tudresden.ocl20.pivot.essentialocl.expressions.impl.VariableImpl#getRepresentedParameter
- * <em>Represented Parameter</em>}</li>
- * <li>
- * {@link tudresden.ocl20.pivot.essentialocl.expressions.impl.VariableImpl#getInitExpression
- * <em>Init Expression</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.VariableImpl#getRepresentedParameter <em>Represented Parameter</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.VariableImpl#getInitExpression <em>Init Expression</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @generated
  */
 public class VariableImpl extends TypedElementImpl implements Variable {
@@ -76,10 +72,9 @@ public class VariableImpl extends TypedElementImpl implements Variable {
 	private static final Logger logger = Logger.getLogger(VariableImpl.class);
 
 	/**
-	 * The cached value of the '{@link #getRepresentedParameter()
-	 * <em>Represented Parameter</em>}' reference. <!-- begin-user-doc --> <!--
+	 * The cached value of the '{@link #getRepresentedParameter() <em>Represented Parameter</em>}' reference.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @see #getRepresentedParameter()
 	 * @generated
 	 * @ordered
@@ -87,10 +82,9 @@ public class VariableImpl extends TypedElementImpl implements Variable {
 	protected Parameter representedParameter;
 
 	/**
-	 * The cached value of the '{@link #getInitExpression()
-	 * <em>Init Expression</em>}' containment reference. <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getInitExpression() <em>Init Expression</em>}' containment reference.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @see #getInitExpression()
 	 * @generated
 	 * @ordered
@@ -105,7 +99,6 @@ public class VariableImpl extends TypedElementImpl implements Variable {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	protected VariableImpl() {
@@ -202,8 +195,7 @@ public class VariableImpl extends TypedElementImpl implements Variable {
 		typeEvaluated = true;
 
 		if (logger.isDebugEnabled()) {
-			logger
-					.debug("evaluateType() - exit - return value=" + evaluatedType); //$NON-NLS-1$
+			logger.debug("evaluateType() - exit - return value=" + evaluatedType); //$NON-NLS-1$
 		}
 
 		return evaluatedType;
@@ -239,7 +231,6 @@ public class VariableImpl extends TypedElementImpl implements Variable {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public Parameter getRepresentedParameter() {
@@ -248,7 +239,6 @@ public class VariableImpl extends TypedElementImpl implements Variable {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public void setRepresentedParameter(Parameter newRepresentedParameter) {
@@ -262,7 +252,6 @@ public class VariableImpl extends TypedElementImpl implements Variable {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public OclExpression getInitExpression() {
@@ -271,7 +260,6 @@ public class VariableImpl extends TypedElementImpl implements Variable {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public NotificationChain basicSetInitExpression(
@@ -280,8 +268,7 @@ public class VariableImpl extends TypedElementImpl implements Variable {
 		initExpression = newInitExpression;
 		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this,
-					Notification.SET,
-					ExpressionsPackageImpl.VARIABLE__INIT_EXPRESSION,
+					Notification.SET, ExpressionsPackageImpl.VARIABLE__INIT_EXPRESSION,
 					oldInitExpression, newInitExpression);
 			if (msgs == null)
 				msgs = notification;
@@ -293,33 +280,26 @@ public class VariableImpl extends TypedElementImpl implements Variable {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public void setInitExpression(OclExpression newInitExpression) {
 		if (newInitExpression != initExpression) {
 			NotificationChain msgs = null;
 			if (initExpression != null)
-				msgs = ((InternalEObject) initExpression)
-						.eInverseRemove(
-								this,
-								EOPPOSITE_FEATURE_BASE
-										- ExpressionsPackageImpl.VARIABLE__INIT_EXPRESSION,
-								null, msgs);
+				msgs = ((InternalEObject) initExpression).eInverseRemove(this,
+						EOPPOSITE_FEATURE_BASE
+								- ExpressionsPackageImpl.VARIABLE__INIT_EXPRESSION, null, msgs);
 			if (newInitExpression != null)
-				msgs = ((InternalEObject) newInitExpression)
-						.eInverseAdd(
-								this,
-								EOPPOSITE_FEATURE_BASE
-										- ExpressionsPackageImpl.VARIABLE__INIT_EXPRESSION,
-								null, msgs);
+				msgs = ((InternalEObject) newInitExpression).eInverseAdd(this,
+						EOPPOSITE_FEATURE_BASE
+								- ExpressionsPackageImpl.VARIABLE__INIT_EXPRESSION, null, msgs);
 			msgs = basicSetInitExpression(newInitExpression, msgs);
 			if (msgs != null)
 				msgs.dispatch();
 		} else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
-					ExpressionsPackageImpl.VARIABLE__INIT_EXPRESSION,
-					newInitExpression, newInitExpression));
+					ExpressionsPackageImpl.VARIABLE__INIT_EXPRESSION, newInitExpression,
+					newInitExpression));
 	}
 
 	/**
@@ -372,7 +352,6 @@ public class VariableImpl extends TypedElementImpl implements Variable {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -387,7 +366,6 @@ public class VariableImpl extends TypedElementImpl implements Variable {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -403,7 +381,6 @@ public class VariableImpl extends TypedElementImpl implements Variable {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -421,7 +398,6 @@ public class VariableImpl extends TypedElementImpl implements Variable {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -439,7 +415,6 @@ public class VariableImpl extends TypedElementImpl implements Variable {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -455,7 +430,6 @@ public class VariableImpl extends TypedElementImpl implements Variable {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override

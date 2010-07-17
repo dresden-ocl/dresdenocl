@@ -68,8 +68,7 @@ public class InvalidTypeImpl extends TypeImpl implements InvalidType {
 	/**
 	 * Logger for this class
 	 */
-	private static final Logger logger = Logger
-			.getLogger(InvalidTypeImpl.class);
+	private static final Logger logger = Logger.getLogger(InvalidTypeImpl.class);
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -158,9 +157,8 @@ public class InvalidTypeImpl extends TypeImpl implements InvalidType {
 
 			// set the type of the new operation to invalid
 			if (getOclLibrary() == null) {
-				throw new IllegalStateException(
-						"The InvalidType called '" + getName() //$NON-NLS-1$
-								+ "' is not contained in the OCL Library."); //$NON-NLS-1$
+				throw new IllegalStateException("The InvalidType called '" + getName() //$NON-NLS-1$
+						+ "' is not contained in the OCL Library."); //$NON-NLS-1$
 			}
 
 			operation.setType(getOclLibrary().getOclInvalid());
@@ -184,8 +182,7 @@ public class InvalidTypeImpl extends TypeImpl implements InvalidType {
 	public Property lookupProperty(String name) {
 
 		if (logger.isInfoEnabled()) {
-			logger
-					.info("Creating implicit property '" + name + "' for InvalidType"); //$NON-NLS-1$//$NON-NLS-2$
+			logger.info("Creating implicit property '" + name + "' for InvalidType"); //$NON-NLS-1$//$NON-NLS-2$
 		}
 
 		Property property = PivotModelFactory.eINSTANCE.createProperty();
@@ -193,9 +190,8 @@ public class InvalidTypeImpl extends TypeImpl implements InvalidType {
 
 		// set the type of the new property to invalid
 		if (getOclLibrary() == null) {
-			throw new IllegalStateException(
-					"The InvalidType called '" + getName() //$NON-NLS-1$
-							+ "' is not contained in the OCL Library."); //$NON-NLS-1$
+			throw new IllegalStateException("The InvalidType called '" + getName() //$NON-NLS-1$
+					+ "' is not contained in the OCL Library."); //$NON-NLS-1$
 		}
 
 		property.setType(getOclLibrary().getOclInvalid());
@@ -239,8 +235,7 @@ public class InvalidTypeImpl extends TypeImpl implements InvalidType {
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newOclLibrary != null)
 				msgs = ((InternalEObject) newOclLibrary).eInverseAdd(this,
-						TypesPackageImpl.OCL_LIBRARY__OCL_INVALID,
-						OclLibrary.class, msgs);
+						TypesPackageImpl.OCL_LIBRARY__OCL_INVALID, OclLibrary.class, msgs);
 			msgs = basicSetOclLibrary(newOclLibrary, msgs);
 			if (msgs != null)
 				msgs.dispatch();
@@ -255,8 +250,8 @@ public class InvalidTypeImpl extends TypeImpl implements InvalidType {
 	 * @generated
 	 */
 	@Override
-	public NotificationChain eInverseAdd(InternalEObject otherEnd,
-			int featureID, NotificationChain msgs) {
+	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID,
+			NotificationChain msgs) {
 		switch (featureID) {
 		case TypesPackageImpl.INVALID_TYPE__OCL_LIBRARY:
 			if (eInternalContainer() != null)
@@ -290,8 +285,7 @@ public class InvalidTypeImpl extends TypeImpl implements InvalidType {
 		switch (eContainerFeatureID()) {
 		case TypesPackageImpl.INVALID_TYPE__OCL_LIBRARY:
 			return eInternalContainer().eInverseRemove(this,
-					TypesPackageImpl.OCL_LIBRARY__OCL_INVALID,
-					OclLibrary.class, msgs);
+					TypesPackageImpl.OCL_LIBRARY__OCL_INVALID, OclLibrary.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}

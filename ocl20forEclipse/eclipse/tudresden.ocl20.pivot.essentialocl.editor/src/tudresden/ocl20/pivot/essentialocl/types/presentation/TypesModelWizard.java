@@ -111,9 +111,8 @@ public class TypesModelWizard extends Wizard implements INewWizard {
 	 * @generated
 	 */
 	public static final List<String> FILE_EXTENSIONS = Collections
-			.unmodifiableList(Arrays
-					.asList(EssentialOCLEditorPlugin.INSTANCE
-							.getString("_UI_TypesEditorFilenameExtensions").split("\\s*,\\s*"))); //$NON-NLS-1$ //$NON-NLS-2$
+			.unmodifiableList(Arrays.asList(EssentialOCLEditorPlugin.INSTANCE
+					.getString("_UI_TypesEditorFilenameExtensions").split("\\s*,\\s*"))); //$NON-NLS-1$ //$NON-NLS-2$
 
 	/**
 	 * A formatted list of supported file extensions, suitable for display.
@@ -251,8 +250,7 @@ public class TypesModelWizard extends Wizard implements INewWizard {
 		if (!(rootObject instanceof EObject)) {
 			throw new OperationCanceledException(
 					"Unable to create the model root because the element " //$NON-NLS-1$
-							+ rootObject
-							+ " created by the model factory is not an EObject!"); //$NON-NLS-1$
+							+ rootObject + " created by the model factory is not an EObject!"); //$NON-NLS-1$
 		}
 
 		return (EObject) rootObject;
@@ -282,8 +280,8 @@ public class TypesModelWizard extends Wizard implements INewWizard {
 
 						// Get the URI of the model file.
 						//
-						URI fileURI = URI.createPlatformResourceURI(modelFile
-								.getFullPath().toString(), true);
+						URI fileURI = URI.createPlatformResourceURI(modelFile.getFullPath()
+								.toString(), true);
 
 						// Create a resource for this file.
 						//
@@ -299,8 +297,8 @@ public class TypesModelWizard extends Wizard implements INewWizard {
 						// Save the contents of the resource to the file system.
 						//
 						Map<Object, Object> options = new HashMap<Object, Object>();
-						options.put(XMLResource.OPTION_ENCODING,
-								initialObjectCreationPage.getEncoding());
+						options.put(XMLResource.OPTION_ENCODING, initialObjectCreationPage
+								.getEncoding());
 						resource.save(options);
 					} catch (Exception exception) {
 						EssentialOCLEditorPlugin.INSTANCE.log(exception);
@@ -314,17 +312,14 @@ public class TypesModelWizard extends Wizard implements INewWizard {
 
 			// Select the new file resource in the current view.
 			//
-			IWorkbenchWindow workbenchWindow = workbench
-					.getActiveWorkbenchWindow();
+			IWorkbenchWindow workbenchWindow = workbench.getActiveWorkbenchWindow();
 			IWorkbenchPage page = workbenchWindow.getActivePage();
 			final IWorkbenchPart activePart = page.getActivePart();
 			if (activePart instanceof ISetSelectionTarget) {
-				final ISelection targetSelection = new StructuredSelection(
-						modelFile);
+				final ISelection targetSelection = new StructuredSelection(modelFile);
 				getShell().getDisplay().asyncExec(new Runnable() {
 					public void run() {
-						((ISetSelectionTarget) activePart)
-								.selectReveal(targetSelection);
+						((ISetSelectionTarget) activePart).selectReveal(targetSelection);
 					}
 				});
 			}
@@ -381,9 +376,8 @@ public class TypesModelWizard extends Wizard implements INewWizard {
 				String extension = new Path(getFileName()).getFileExtension();
 				if (extension == null || !FILE_EXTENSIONS.contains(extension)) {
 					String key = FILE_EXTENSIONS.size() > 1 ? "_WARN_FilenameExtensions" : "_WARN_FilenameExtension"; //$NON-NLS-1$ //$NON-NLS-2$
-					setErrorMessage(EssentialOCLEditorPlugin.INSTANCE
-							.getString(key,
-									new Object[] { FORMATTED_FILE_EXTENSIONS }));
+					setErrorMessage(EssentialOCLEditorPlugin.INSTANCE.getString(key,
+							new Object[] { FORMATTED_FILE_EXTENSIONS }));
 					return false;
 				}
 				return true;
@@ -650,8 +644,7 @@ public class TypesModelWizard extends Wizard implements INewWizard {
 					//
 					String defaultModelBaseFilename = EssentialOCLEditorPlugin.INSTANCE
 							.getString("_UI_TypesEditorFilenameDefaultBase"); //$NON-NLS-1$
-					String defaultModelFilenameExtension = FILE_EXTENSIONS
-							.get(0);
+					String defaultModelFilenameExtension = FILE_EXTENSIONS.get(0);
 					String modelFilename = defaultModelBaseFilename
 							+ "." + defaultModelFilenameExtension; //$NON-NLS-1$
 					for (int i = 1; ((IContainer) selectedResource)
@@ -667,9 +660,8 @@ public class TypesModelWizard extends Wizard implements INewWizard {
 				"Whatever2"); //$NON-NLS-1$
 		initialObjectCreationPage.setTitle(EssentialOCLEditorPlugin.INSTANCE
 				.getString("_UI_TypesModelWizard_label")); //$NON-NLS-1$
-		initialObjectCreationPage
-				.setDescription(EssentialOCLEditorPlugin.INSTANCE
-						.getString("_UI_Wizard_initial_object_description")); //$NON-NLS-1$
+		initialObjectCreationPage.setDescription(EssentialOCLEditorPlugin.INSTANCE
+				.getString("_UI_Wizard_initial_object_description")); //$NON-NLS-1$
 		addPage(initialObjectCreationPage);
 	}
 

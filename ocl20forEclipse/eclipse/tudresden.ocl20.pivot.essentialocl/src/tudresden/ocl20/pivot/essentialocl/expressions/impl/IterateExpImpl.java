@@ -134,8 +134,7 @@ public class IterateExpImpl extends LoopExpImpl implements IterateExp {
 		}
 
 		if (!body.getType().conformsTo(result.getType())) {
-			throw new WellformednessException(
-					this,
+			throw new WellformednessException(this,
 					"The type of the body expression ('" + body.getType() //$NON-NLS-1$
 							+ "') must conform to the type of the result variable ('" //$NON-NLS-1$
 							+ result.getType() + "')."); //$NON-NLS-1$
@@ -201,9 +200,8 @@ public class IterateExpImpl extends LoopExpImpl implements IterateExp {
 		result = newResult;
 		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this,
-					Notification.SET,
-					ExpressionsPackageImpl.ITERATE_EXP__RESULT, oldResult,
-					newResult);
+					Notification.SET, ExpressionsPackageImpl.ITERATE_EXP__RESULT,
+					oldResult, newResult);
 			if (msgs == null)
 				msgs = notification;
 			else
@@ -220,22 +218,19 @@ public class IterateExpImpl extends LoopExpImpl implements IterateExp {
 		if (newResult != result) {
 			NotificationChain msgs = null;
 			if (result != null)
-				msgs = ((InternalEObject) result).eInverseRemove(this,
-						EOPPOSITE_FEATURE_BASE
-								- ExpressionsPackageImpl.ITERATE_EXP__RESULT,
-						null, msgs);
+				msgs = ((InternalEObject) result)
+						.eInverseRemove(this, EOPPOSITE_FEATURE_BASE
+								- ExpressionsPackageImpl.ITERATE_EXP__RESULT, null, msgs);
 			if (newResult != null)
-				msgs = ((InternalEObject) newResult).eInverseAdd(this,
-						EOPPOSITE_FEATURE_BASE
-								- ExpressionsPackageImpl.ITERATE_EXP__RESULT,
-						null, msgs);
+				msgs = ((InternalEObject) newResult)
+						.eInverseAdd(this, EOPPOSITE_FEATURE_BASE
+								- ExpressionsPackageImpl.ITERATE_EXP__RESULT, null, msgs);
 			msgs = basicSetResult(newResult, msgs);
 			if (msgs != null)
 				msgs.dispatch();
 		} else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
-					ExpressionsPackageImpl.ITERATE_EXP__RESULT, newResult,
-					newResult));
+					ExpressionsPackageImpl.ITERATE_EXP__RESULT, newResult, newResult));
 	}
 
 	/**

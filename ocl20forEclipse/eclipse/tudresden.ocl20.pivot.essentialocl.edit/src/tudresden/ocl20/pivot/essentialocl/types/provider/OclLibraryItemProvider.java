@@ -103,34 +103,22 @@ public class OclLibraryItemProvider extends ItemProviderAdapter implements
 			Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures
-					.add(TypesPackageImpl.Literals.OCL_LIBRARY__OCL_BOOLEAN);
-			childrenFeatures
-					.add(TypesPackageImpl.Literals.OCL_LIBRARY__OCL_STRING);
-			childrenFeatures
-					.add(TypesPackageImpl.Literals.OCL_LIBRARY__OCL_INTEGER);
-			childrenFeatures
-					.add(TypesPackageImpl.Literals.OCL_LIBRARY__OCL_REAL);
-			childrenFeatures
-					.add(TypesPackageImpl.Literals.OCL_LIBRARY__OCL_ANY);
-			childrenFeatures
-					.add(TypesPackageImpl.Literals.OCL_LIBRARY__OCL_VOID);
-			childrenFeatures
-					.add(TypesPackageImpl.Literals.OCL_LIBRARY__OCL_INVALID);
-			childrenFeatures
-					.add(TypesPackageImpl.Literals.OCL_LIBRARY__OCL_TYPE);
+			childrenFeatures.add(TypesPackageImpl.Literals.OCL_LIBRARY__OCL_BOOLEAN);
+			childrenFeatures.add(TypesPackageImpl.Literals.OCL_LIBRARY__OCL_STRING);
+			childrenFeatures.add(TypesPackageImpl.Literals.OCL_LIBRARY__OCL_INTEGER);
+			childrenFeatures.add(TypesPackageImpl.Literals.OCL_LIBRARY__OCL_REAL);
+			childrenFeatures.add(TypesPackageImpl.Literals.OCL_LIBRARY__OCL_ANY);
+			childrenFeatures.add(TypesPackageImpl.Literals.OCL_LIBRARY__OCL_VOID);
+			childrenFeatures.add(TypesPackageImpl.Literals.OCL_LIBRARY__OCL_INVALID);
+			childrenFeatures.add(TypesPackageImpl.Literals.OCL_LIBRARY__OCL_TYPE);
 			childrenFeatures
 					.add(TypesPackageImpl.Literals.OCL_LIBRARY__OCL_COLLECTION);
-			childrenFeatures
-					.add(TypesPackageImpl.Literals.OCL_LIBRARY__OCL_SEQUENCE);
-			childrenFeatures
-					.add(TypesPackageImpl.Literals.OCL_LIBRARY__OCL_BAG);
-			childrenFeatures
-					.add(TypesPackageImpl.Literals.OCL_LIBRARY__OCL_SET);
+			childrenFeatures.add(TypesPackageImpl.Literals.OCL_LIBRARY__OCL_SEQUENCE);
+			childrenFeatures.add(TypesPackageImpl.Literals.OCL_LIBRARY__OCL_BAG);
+			childrenFeatures.add(TypesPackageImpl.Literals.OCL_LIBRARY__OCL_SET);
 			childrenFeatures
 					.add(TypesPackageImpl.Literals.OCL_LIBRARY__OCL_ORDERED_SET);
-			childrenFeatures
-					.add(TypesPackageImpl.Literals.OCL_LIBRARY__OCL_TUPLE);
+			childrenFeatures.add(TypesPackageImpl.Literals.OCL_LIBRARY__OCL_TUPLE);
 		}
 		return childrenFeatures;
 	}
@@ -220,8 +208,8 @@ public class OclLibraryItemProvider extends ItemProviderAdapter implements
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 
 		newChildDescriptors.add(createChildParameter(
-				TypesPackageImpl.Literals.OCL_LIBRARY__OCL_VOID,
-				TypesFactory.INSTANCE.createVoidType()));
+				TypesPackageImpl.Literals.OCL_LIBRARY__OCL_VOID, TypesFactory.INSTANCE
+						.createVoidType()));
 
 		newChildDescriptors.add(createChildParameter(
 				TypesPackageImpl.Literals.OCL_LIBRARY__OCL_BOOLEAN,
@@ -244,12 +232,12 @@ public class OclLibraryItemProvider extends ItemProviderAdapter implements
 				TypesFactory.INSTANCE.createInvalidType()));
 
 		newChildDescriptors.add(createChildParameter(
-				TypesPackageImpl.Literals.OCL_LIBRARY__OCL_TYPE,
-				TypesFactory.INSTANCE.createTypeType()));
+				TypesPackageImpl.Literals.OCL_LIBRARY__OCL_TYPE, TypesFactory.INSTANCE
+						.createTypeType()));
 
 		newChildDescriptors.add(createChildParameter(
-				TypesPackageImpl.Literals.OCL_LIBRARY__OCL_ANY,
-				TypesFactory.INSTANCE.createAnyType()));
+				TypesPackageImpl.Literals.OCL_LIBRARY__OCL_ANY, TypesFactory.INSTANCE
+						.createAnyType()));
 
 		newChildDescriptors.add(createChildParameter(
 				TypesPackageImpl.Literals.OCL_LIBRARY__OCL_COLLECTION,
@@ -260,20 +248,20 @@ public class OclLibraryItemProvider extends ItemProviderAdapter implements
 				TypesFactory.INSTANCE.createSequenceType()));
 
 		newChildDescriptors.add(createChildParameter(
-				TypesPackageImpl.Literals.OCL_LIBRARY__OCL_BAG,
-				TypesFactory.INSTANCE.createBagType()));
+				TypesPackageImpl.Literals.OCL_LIBRARY__OCL_BAG, TypesFactory.INSTANCE
+						.createBagType()));
 
 		newChildDescriptors.add(createChildParameter(
-				TypesPackageImpl.Literals.OCL_LIBRARY__OCL_SET,
-				TypesFactory.INSTANCE.createSetType()));
+				TypesPackageImpl.Literals.OCL_LIBRARY__OCL_SET, TypesFactory.INSTANCE
+						.createSetType()));
 
 		newChildDescriptors.add(createChildParameter(
 				TypesPackageImpl.Literals.OCL_LIBRARY__OCL_ORDERED_SET,
 				TypesFactory.INSTANCE.createOrderedSetType()));
 
 		newChildDescriptors.add(createChildParameter(
-				TypesPackageImpl.Literals.OCL_LIBRARY__OCL_TUPLE,
-				TypesFactory.INSTANCE.createTupleType()));
+				TypesPackageImpl.Literals.OCL_LIBRARY__OCL_TUPLE, TypesFactory.INSTANCE
+						.createTupleType()));
 	}
 
 	/**
@@ -287,8 +275,8 @@ public class OclLibraryItemProvider extends ItemProviderAdapter implements
 	 * @generated NOT
 	 */
 	@Override
-	public String getCreateChildText(Object owner, Object feature,
-			Object child, Collection<?> selection) {
+	public String getCreateChildText(Object owner, Object feature, Object child,
+			Collection<?> selection) {
 		Object childFeature = feature;
 		Object childObject = child;
 

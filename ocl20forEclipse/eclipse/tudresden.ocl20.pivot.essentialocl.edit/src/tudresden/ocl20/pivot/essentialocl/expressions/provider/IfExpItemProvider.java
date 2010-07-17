@@ -99,8 +99,7 @@ public class IfExpItemProvider extends OclExpressionItemProvider implements
 			Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures
-					.add(ExpressionsPackageImpl.Literals.IF_EXP__CONDITION);
+			childrenFeatures.add(ExpressionsPackageImpl.Literals.IF_EXP__CONDITION);
 			childrenFeatures
 					.add(ExpressionsPackageImpl.Literals.IF_EXP__THEN_EXPRESSION);
 			childrenFeatures

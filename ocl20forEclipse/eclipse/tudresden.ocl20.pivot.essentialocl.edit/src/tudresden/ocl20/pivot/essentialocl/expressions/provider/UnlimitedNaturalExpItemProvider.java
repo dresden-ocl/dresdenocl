@@ -105,8 +105,8 @@ public class UnlimitedNaturalExpItemProvider extends
 						getString(
 								"_UI_PropertyDescriptor_description", "_UI_UnlimitedNaturalExp_symbol_feature", "_UI_UnlimitedNaturalExp_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 						ExpressionsPackageImpl.Literals.UNLIMITED_NATURAL_EXP__SYMBOL,
-						true, false, false,
-						ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE, null, null));
+						true, false, false, ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE,
+						null, null));
 	}
 
 	/**

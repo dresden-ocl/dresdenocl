@@ -135,9 +135,7 @@ public class EnumLiteralExpImpl extends LiteralExpImpl implements
 		EnumerationLiteral oldReferredEnumLiteral = referredEnumLiteral;
 		referredEnumLiteral = newReferredEnumLiteral;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(
-					this,
-					Notification.SET,
+			eNotify(new ENotificationImpl(this, Notification.SET,
 					ExpressionsPackageImpl.ENUM_LITERAL_EXP__REFERRED_ENUM_LITERAL,
 					oldReferredEnumLiteral, referredEnumLiteral));
 	}

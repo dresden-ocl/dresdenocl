@@ -99,8 +99,7 @@ public class IterateExpItemProvider extends LoopExpItemProvider implements
 			Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures
-					.add(ExpressionsPackageImpl.Literals.ITERATE_EXP__RESULT);
+			childrenFeatures.add(ExpressionsPackageImpl.Literals.ITERATE_EXP__RESULT);
 		}
 		return childrenFeatures;
 	}

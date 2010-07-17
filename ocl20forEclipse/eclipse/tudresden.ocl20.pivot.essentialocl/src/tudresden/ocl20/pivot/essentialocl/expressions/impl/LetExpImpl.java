@@ -148,8 +148,7 @@ public class LetExpImpl extends OclExpressionImpl implements LetExp {
 		in = newIn;
 		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this,
-					Notification.SET, ExpressionsPackageImpl.LET_EXP__IN,
-					oldIn, newIn);
+					Notification.SET, ExpressionsPackageImpl.LET_EXP__IN, oldIn, newIn);
 			if (msgs == null)
 				msgs = notification;
 			else
@@ -167,13 +166,11 @@ public class LetExpImpl extends OclExpressionImpl implements LetExp {
 			NotificationChain msgs = null;
 			if (in != null)
 				msgs = ((InternalEObject) in).eInverseRemove(this,
-						EOPPOSITE_FEATURE_BASE
-								- ExpressionsPackageImpl.LET_EXP__IN, null,
+						EOPPOSITE_FEATURE_BASE - ExpressionsPackageImpl.LET_EXP__IN, null,
 						msgs);
 			if (newIn != null)
 				msgs = ((InternalEObject) newIn).eInverseAdd(this,
-						EOPPOSITE_FEATURE_BASE
-								- ExpressionsPackageImpl.LET_EXP__IN, null,
+						EOPPOSITE_FEATURE_BASE - ExpressionsPackageImpl.LET_EXP__IN, null,
 						msgs);
 			msgs = basicSetIn(newIn, msgs);
 			if (msgs != null)
@@ -220,21 +217,18 @@ public class LetExpImpl extends OclExpressionImpl implements LetExp {
 			NotificationChain msgs = null;
 			if (variable != null)
 				msgs = ((InternalEObject) variable).eInverseRemove(this,
-						EOPPOSITE_FEATURE_BASE
-								- ExpressionsPackageImpl.LET_EXP__VARIABLE,
+						EOPPOSITE_FEATURE_BASE - ExpressionsPackageImpl.LET_EXP__VARIABLE,
 						null, msgs);
 			if (newVariable != null)
 				msgs = ((InternalEObject) newVariable).eInverseAdd(this,
-						EOPPOSITE_FEATURE_BASE
-								- ExpressionsPackageImpl.LET_EXP__VARIABLE,
+						EOPPOSITE_FEATURE_BASE - ExpressionsPackageImpl.LET_EXP__VARIABLE,
 						null, msgs);
 			msgs = basicSetVariable(newVariable, msgs);
 			if (msgs != null)
 				msgs.dispatch();
 		} else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
-					ExpressionsPackageImpl.LET_EXP__VARIABLE, newVariable,
-					newVariable));
+					ExpressionsPackageImpl.LET_EXP__VARIABLE, newVariable, newVariable));
 	}
 
 	/**

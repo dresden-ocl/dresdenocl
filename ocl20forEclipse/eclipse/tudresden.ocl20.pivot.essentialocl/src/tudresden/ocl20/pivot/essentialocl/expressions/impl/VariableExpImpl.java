@@ -60,8 +60,7 @@ public class VariableExpImpl extends OclExpressionImpl implements VariableExp {
 	/**
 	 * Logger for this class
 	 */
-	private static final Logger logger = Logger
-			.getLogger(VariableExpImpl.class);
+	private static final Logger logger = Logger.getLogger(VariableExpImpl.class);
 
 	/**
 	 * The cached value of the '{@link #getReferredVariable() <em>Referred Variable</em>}' reference.

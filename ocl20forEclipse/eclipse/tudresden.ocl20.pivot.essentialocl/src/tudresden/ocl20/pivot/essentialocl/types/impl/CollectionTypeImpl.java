@@ -256,8 +256,8 @@ public class CollectionTypeImpl extends TypeImpl implements CollectionType {
 		elementType = newElementType;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
-					TypesPackageImpl.COLLECTION_TYPE__ELEMENT_TYPE,
-					oldElementType, elementType));
+					TypesPackageImpl.COLLECTION_TYPE__ELEMENT_TYPE, oldElementType,
+					elementType));
 	}
 
 	/**
@@ -277,8 +277,8 @@ public class CollectionTypeImpl extends TypeImpl implements CollectionType {
 		oclLibrary = newOclLibrary;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
-					TypesPackageImpl.COLLECTION_TYPE__OCL_LIBRARY,
-					oldOclLibrary, oclLibrary));
+					TypesPackageImpl.COLLECTION_TYPE__OCL_LIBRARY, oldOclLibrary,
+					oclLibrary));
 	}
 
 	/**
@@ -503,8 +503,7 @@ public class CollectionTypeImpl extends TypeImpl implements CollectionType {
 			int index;
 
 			// find the TypeParameter that corresponds to the element type
-			index = ListUtil
-					.indexOf(parameters, getOwnedTypeParameter().get(0));
+			index = ListUtil.indexOf(parameters, getOwnedTypeParameter().get(0));
 
 			if (index != -1) {
 				elementType = types.get(index);
@@ -663,8 +662,7 @@ public class CollectionTypeImpl extends TypeImpl implements CollectionType {
 	public String toString() {
 
 		return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
-				.appendSuper(super.toString()).append(
-						"elementType", elementType) //$NON-NLS-1$
+				.appendSuper(super.toString()).append("elementType", elementType) //$NON-NLS-1$
 				.append("kind", kind).toString(); //$NON-NLS-1$
 	}
 

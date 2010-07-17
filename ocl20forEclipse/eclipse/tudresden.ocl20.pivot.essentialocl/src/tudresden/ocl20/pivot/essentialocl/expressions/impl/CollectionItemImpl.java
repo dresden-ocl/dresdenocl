@@ -131,9 +131,8 @@ public class CollectionItemImpl extends CollectionLiteralPartImpl implements
 		item = newItem;
 		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this,
-					Notification.SET,
-					ExpressionsPackageImpl.COLLECTION_ITEM__ITEM, oldItem,
-					newItem);
+					Notification.SET, ExpressionsPackageImpl.COLLECTION_ITEM__ITEM,
+					oldItem, newItem);
 			if (msgs == null)
 				msgs = notification;
 			else
@@ -152,20 +151,17 @@ public class CollectionItemImpl extends CollectionLiteralPartImpl implements
 			if (item != null)
 				msgs = ((InternalEObject) item).eInverseRemove(this,
 						EOPPOSITE_FEATURE_BASE
-								- ExpressionsPackageImpl.COLLECTION_ITEM__ITEM,
-						null, msgs);
+								- ExpressionsPackageImpl.COLLECTION_ITEM__ITEM, null, msgs);
 			if (newItem != null)
 				msgs = ((InternalEObject) newItem).eInverseAdd(this,
 						EOPPOSITE_FEATURE_BASE
-								- ExpressionsPackageImpl.COLLECTION_ITEM__ITEM,
-						null, msgs);
+								- ExpressionsPackageImpl.COLLECTION_ITEM__ITEM, null, msgs);
 			msgs = basicSetItem(newItem, msgs);
 			if (msgs != null)
 				msgs.dispatch();
 		} else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
-					ExpressionsPackageImpl.COLLECTION_ITEM__ITEM, newItem,
-					newItem));
+					ExpressionsPackageImpl.COLLECTION_ITEM__ITEM, newItem, newItem));
 	}
 
 	/**
