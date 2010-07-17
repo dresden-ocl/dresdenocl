@@ -28,6 +28,7 @@ import org.eclipse.osgi.util.NLS;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import tudresden.ocl20.pivot.essentialocl.types.CollectionType;
 import tudresden.ocl20.pivot.modelinstance.base.AbstractModelInstance;
 import tudresden.ocl20.pivot.modelinstancetype.exception.AsTypeCastException;
 import tudresden.ocl20.pivot.modelinstancetype.exception.CopyForAtPreException;
@@ -278,7 +279,7 @@ public class XmlModelInstanceObject extends AbstractModelInstanceObject
 		if (!this.isUndefined()) {
 
 			/* Probably handle non-multiple primitive properties. */
-			if (!property.isMultiple()
+			if ((!(property.getType() instanceof CollectionType))
 					&& (property.getType() instanceof PrimitiveType)
 					|| property.getType() instanceof Enumeration) {
 
@@ -291,7 +292,7 @@ public class XmlModelInstanceObject extends AbstractModelInstanceObject
 					if (propertyNode.getNodeName().equalsIgnoreCase(
 							property.getName())) {
 						result = AbstractModelInstance.adaptInvocationResult(
-								propertyNode, property.getType(), property,
+								propertyNode, property.getType(),
 								this.modelInstanceFactory);
 						break;
 					}
@@ -309,7 +310,7 @@ public class XmlModelInstanceObject extends AbstractModelInstanceObject
 					 * (is done inside the factory).
 					 */
 					result = AbstractModelInstance.adaptInvocationResult(
-							this.adaptedNode, property.getType(), property,
+							this.adaptedNode, property.getType(),
 							this.modelInstanceFactory);
 				}
 				// no else.
@@ -340,20 +341,21 @@ public class XmlModelInstanceObject extends AbstractModelInstanceObject
 				}
 				// end for (on nodes).
 
-				if (property.isMultiple()) {
+				if (property.getType() instanceof CollectionType) {
 
 					List<IModelInstanceElement> imiList;
 					imiList = new ArrayList<IModelInstanceElement>();
 
 					for (Node node : propertyNodes) {
 						imiList.add(this.modelInstanceFactory
-								.createModelInstanceElement(node, property
-										.getType()));
+								.createModelInstanceElement(node,
+										((CollectionType) property.getType())
+												.getElementType()));
 					}
 					// end for.
 
 					result = AbstractModelInstance.adaptInvocationResult(
-							imiList, property.getType(), property,
+							imiList, property.getType(),
 							this.modelInstanceFactory);
 				}
 
@@ -361,12 +363,12 @@ public class XmlModelInstanceObject extends AbstractModelInstanceObject
 					if (propertyNodes.size() > 0) {
 						result = AbstractModelInstance.adaptInvocationResult(
 								propertyNodes.get(0), property.getType(),
-								property, this.modelInstanceFactory);
+								this.modelInstanceFactory);
 					}
 
 					else {
 						result = AbstractModelInstance.adaptInvocationResult(
-								null, property.getType(), property,
+								null, property.getType(),
 								this.modelInstanceFactory);
 					}
 				}

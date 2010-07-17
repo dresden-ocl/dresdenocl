@@ -49,8 +49,9 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
 @Suite.SuiteClasses( { TestModelInstanceBoolean.class,
 		TestModelInstanceInteger.class, TestModelInstanceReal.class,
 		TestModelInstanceString.class, TestModelInstanceCollection.class,
-		TestModelInstanceEnumerationLiteral.class, TestModelInstanceProvider.class,
-		TestModelInstanceObject.class, TestModelInstance.class })
+		TestModelInstanceEnumerationLiteral.class,
+		TestModelInstanceProvider.class, TestModelInstanceObject.class,
+		TestModelInstance.class })
 public class AllTests {
 
 	/**
@@ -67,16 +68,15 @@ public class AllTests {
 
 		IModelInstanceObject containerClassInstance;
 
-		containerClassType =
-				ModelInstanceTypeTestServices.getInstance().getModelType(
-						TestModelTypesNames.TYPE_NAME_CONTAINER_CLASS);
+		containerClassType = ModelInstanceTypeTestServices.getInstance()
+				.getModelType(TestModelTypesNames.TYPE_NAME_CONTAINER_CLASS);
 
 		/* Try to get an instance of the container class. */
 		if (containerClassType != null) {
 
-			allContainerClassInstances =
-					ModelInstanceTypeTestServices.getInstance()
-							.getModelInstanceObjectsOfType(containerClassType);
+			allContainerClassInstances = ModelInstanceTypeTestServices
+					.getInstance().getModelInstanceObjectsOfType(
+							containerClassType);
 
 			if (allContainerClassInstances.size() > 0) {
 				Property primitiveTypeProviderClassProperty = null;
@@ -91,12 +91,14 @@ public class AllTests {
 				Property copyableClassProperty = null;
 				Property nonCopyableClassProperty = null;
 
-				containerClassInstance = allContainerClassInstances.iterator().next();
+				containerClassInstance = allContainerClassInstances.iterator()
+						.next();
 
 				/* Find the instances properties. */
 				for (Property property : containerClassType.allProperties()) {
 
-					if (property.getName().equals("primitiveTypeProviderClassInstances")) {
+					if (property.getName().equals(
+							"primitiveTypeProviderClassInstances")) {
 						primitiveTypeProviderClassProperty = property;
 					}
 
@@ -135,11 +137,13 @@ public class AllTests {
 						interface3Property = property;
 					}
 
-					else if (property.getName().equals("copyableClassInstances")) {
+					else if (property.getName()
+							.equals("copyableClassInstances")) {
 						copyableClassProperty = property;
 					}
 
-					else if (property.getName().equals("nonCopyableClassInstances")) {
+					else if (property.getName().equals(
+							"nonCopyableClassInstances")) {
 						nonCopyableClassProperty = property;
 					}
 					// no else.
@@ -156,11 +160,16 @@ public class AllTests {
 				addInstancesOfProperty(containerClassInstance, class2Property);
 				addInstancesOfProperty(containerClassInstance,
 						staticPropertyAndOperationClassProperty);
-				addInstancesOfProperty(containerClassInstance, interface1Property);
-				addInstancesOfProperty(containerClassInstance, interface2Property);
-				addInstancesOfProperty(containerClassInstance, interface3Property);
-				addInstancesOfProperty(containerClassInstance, copyableClassProperty);
-				addInstancesOfProperty(containerClassInstance, nonCopyableClassProperty);
+				addInstancesOfProperty(containerClassInstance,
+						interface1Property);
+				addInstancesOfProperty(containerClassInstance,
+						interface2Property);
+				addInstancesOfProperty(containerClassInstance,
+						interface3Property);
+				addInstancesOfProperty(containerClassInstance,
+						copyableClassProperty);
+				addInstancesOfProperty(containerClassInstance,
+						nonCopyableClassProperty);
 			}
 			// no else.
 		}
@@ -176,11 +185,11 @@ public class AllTests {
 	 * </p>
 	 * 
 	 * @param containerClassInstance
-	 *          The <code>ContainerClass</code> which {@link Property} shall be
-	 *          invoked.
+	 *            The <code>ContainerClass</code> which {@link Property} shall
+	 *            be invoked.
 	 * @param primitiveTypeProviderClassProperty
-	 *          The {@link Property} whose value shall be added as
-	 *          {@link IModelInstanceObject}s.
+	 *            The {@link Property} whose value shall be added as
+	 *            {@link IModelInstanceObject}s.
 	 */
 	private static void addInstancesOfProperty(
 			IModelInstanceObject containerClassInstance,
@@ -191,9 +200,8 @@ public class AllTests {
 			IModelInstanceElement propertyValue;
 
 			/* Try to get the property's value. */
-			propertyValue =
-					containerClassInstance
-							.getProperty(primitiveTypeProviderClassProperty);
+			propertyValue = containerClassInstance
+					.getProperty(primitiveTypeProviderClassProperty);
 
 			/* If the value is a collection add all its instances. */
 			if (propertyValue instanceof IModelInstanceCollection<?>) {
@@ -209,8 +217,10 @@ public class AllTests {
 						modelInstanceObject = (IModelInstanceObject) anElement;
 
 						try {
-							ModelInstanceTypeTestServices.getInstance().getModelInstance()
-									.addModelInstanceElement(modelInstanceObject.getObject());
+							ModelInstanceTypeTestServices.getInstance()
+									.getModelInstance()
+									.addModelInstanceElement(
+											modelInstanceObject.getObject());
 						} catch (TypeNotFoundInModelException e) {
 							/* Do nothing. */
 						}
@@ -226,13 +236,17 @@ public class AllTests {
 				IModelInstanceObject modelInstanceObject;
 				modelInstanceObject = (IModelInstanceObject) propertyValue;
 
-				try {
-					ModelInstanceTypeTestServices.getInstance().getModelInstance()
-							.addModelInstanceElement(modelInstanceObject.getObject());
-				} catch (TypeNotFoundInModelException e) {
-					/* Do nothing. */
+				if (!modelInstanceObject.isUndefined()) {
+					try {
+						ModelInstanceTypeTestServices.getInstance()
+								.getModelInstance().addModelInstanceElement(
+										modelInstanceObject.getObject());
+					} catch (TypeNotFoundInModelException e) {
+						/* Do nothing. */
+					}
+					// end catch.
 				}
-				// end catch.
+				// no else.
 			}
 			// no else (cannot add the value).
 		}

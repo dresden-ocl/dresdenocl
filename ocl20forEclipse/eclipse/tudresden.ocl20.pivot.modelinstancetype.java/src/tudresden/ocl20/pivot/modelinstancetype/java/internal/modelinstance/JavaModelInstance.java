@@ -1162,7 +1162,6 @@ public class JavaModelInstance extends AbstractModelInstance {
 						result = adaptInvocationResult(
 								propertyValue,
 								property.getType(),
-								property,
 								(JavaModelInstanceFactory) this.myModelInstanceFactory);
 					}
 					// end try.
@@ -1284,7 +1283,7 @@ public class JavaModelInstance extends AbstractModelInstance {
 
 			/* Adapt the result to the expected result type. */
 			result = JavaModelInstance.adaptInvocationResult(adapteeResult,
-					operation.getType(), operation,
+					operation.getType(),
 					(JavaModelInstanceFactory) this.myModelInstanceFactory);
 		}
 

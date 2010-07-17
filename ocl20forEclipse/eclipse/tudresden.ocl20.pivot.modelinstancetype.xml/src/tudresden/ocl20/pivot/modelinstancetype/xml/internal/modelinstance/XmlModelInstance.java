@@ -242,7 +242,7 @@ public class XmlModelInstance extends AbstractModelInstance {
 	protected void addModelInstanceObject(IModelInstanceObject imiObject) {
 
 		this.myModelInstanceObjects.add(imiObject);
-		this.addAssoicatedElementsAssWell(imiObject);
+		this.addAssociatedElementsAsWell(imiObject);
 		this.initializeTypeMapping();
 	}
 
@@ -259,7 +259,7 @@ public class XmlModelInstance extends AbstractModelInstance {
 	 *            {@link IModelInstanceObject}s shall be added as well.
 	 */
 	@SuppressWarnings("unchecked")
-	private void addAssoicatedElementsAssWell(IModelInstanceObject imiObject) {
+	private void addAssociatedElementsAsWell(IModelInstanceObject imiObject) {
 
 		/* Probably adapt recursively associated elements. */
 		if (!imiObject.isUndefined()) {

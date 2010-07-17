@@ -575,7 +575,16 @@ public class XmlModelInstanceFactory extends BasisJavaModelInstanceFactory {
 					for (Property property : properties) {
 						if (property.getName().equalsIgnoreCase(
 								aNode.getNodeName().trim())) {
-							result = property.getType();
+
+							if (property.getType() instanceof CollectionType) {
+								result = ((CollectionType) property.getType())
+										.getElementType();
+							}
+
+							else {
+								result = property.getType();
+							}
+
 							break;
 						}
 						// no else.

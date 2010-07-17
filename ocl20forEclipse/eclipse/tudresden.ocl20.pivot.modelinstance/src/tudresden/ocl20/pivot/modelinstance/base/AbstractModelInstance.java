@@ -45,7 +45,6 @@ import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement;
 import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceFactory;
 import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceObject;
 import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceVoid;
-import tudresden.ocl20.pivot.pivotmodel.MultiplicityElement;
 import tudresden.ocl20.pivot.pivotmodel.Operation;
 import tudresden.ocl20.pivot.pivotmodel.Property;
 import tudresden.ocl20.pivot.pivotmodel.Type;
@@ -94,17 +93,12 @@ public abstract class AbstractModelInstance implements IModelInstance {
 	 *            The {@link Object} result that shall be adapted.
 	 * @param type
 	 *            The Type to which the result shall be adapted.
-	 * @param multiplicityElement
-	 *            The {@link MultiplicityElement} whose result shall be adapted
-	 *            (could be a {@link Property} or an {@link Operation}).
 	 * @param factory
 	 *            The {@link JavaModelInstanceFactory} used to adapt the result.
 	 * @return The adapted results as an {@link IModelInstanceElement}.
 	 */
 	public static IModelInstanceElement adaptInvocationResult(
-			Object adapteeResult, Type type,
-			MultiplicityElement multiplicityElement,
-			IModelInstanceFactory factory) {
+			Object adapteeResult, Type type, IModelInstanceFactory factory) {
 
 		IModelInstanceElement result;
 
@@ -114,54 +108,6 @@ public abstract class AbstractModelInstance implements IModelInstance {
 			result = IModelInstanceVoid.INSTANCE;
 		}
 
-		/*
-		 * Else if the result is multiple, the result must be adapted to a
-		 * collection.
-		 */
-		else if (multiplicityElement.isMultiple()) {
-
-			/*
-			 * Compute the type of collection that is required for the
-			 * adaptation.
-			 */
-
-			/* If the operation is unique, adapt to a set. */
-			if (multiplicityElement.isUnique()) {
-
-				if (multiplicityElement.isOrdered()) {
-					result = factory.createModelInstanceElement(adapteeResult,
-							EssentialOclPlugin.getOclLibraryProvider()
-									.getOclLibrary().getOrderedSetType((type)));
-				}
-
-				else {
-					result = factory.createModelInstanceElement(adapteeResult,
-							EssentialOclPlugin.getOclLibraryProvider()
-									.getOclLibrary().getSetType(type));
-				}
-				// end. else
-			}
-
-			/* Else adapt to a list. */
-			else {
-
-				if (multiplicityElement.isOrdered()) {
-					result = factory.createModelInstanceElement(adapteeResult,
-							EssentialOclPlugin.getOclLibraryProvider()
-									.getOclLibrary().getSequenceType(type));
-				}
-
-				else {
-					result = factory.createModelInstanceElement(adapteeResult,
-							EssentialOclPlugin.getOclLibraryProvider()
-									.getOclLibrary().getBagType(type));
-				}
-				// end else.
-			}
-			// end else.
-		}
-
-		/* Else adapt to the result type of the operation. */
 		else {
 			result = factory.createModelInstanceElement(adapteeResult, type);
 		}

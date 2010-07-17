@@ -429,8 +429,7 @@ public class JavaModelInstanceObject extends AbstractModelInstanceObject
 
 				/* Adapt the result to the expected result type. */
 				result = AbstractModelInstance.adaptInvocationResult(
-						adapteeResult, operation.getType(), operation,
-						this.myFactory);
+						adapteeResult, operation.getType(), this.myFactory);
 			}
 
 			catch (IllegalArgumentException e) {
@@ -532,8 +531,7 @@ public class JavaModelInstanceObject extends AbstractModelInstanceObject
 					propertyValue = propertyField.get(this.myAdaptedObject);
 
 					result = JavaModelInstance.adaptInvocationResult(
-							propertyValue, property.getType(), property,
-							this.myFactory);
+							propertyValue, property.getType(), this.myFactory);
 				}
 
 				catch (IllegalArgumentException e) {
