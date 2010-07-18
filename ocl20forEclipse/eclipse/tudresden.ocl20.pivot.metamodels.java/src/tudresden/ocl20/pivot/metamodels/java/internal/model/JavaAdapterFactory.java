@@ -14,6 +14,7 @@
 package tudresden.ocl20.pivot.metamodels.java.internal.model;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.GenericArrayType;
 import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.TypeVariable;
@@ -28,6 +29,7 @@ import java.util.WeakHashMap;
 import org.apache.log4j.Logger;
 
 import tudresden.ocl20.pivot.essentialocl.EssentialOclPlugin;
+import tudresden.ocl20.pivot.essentialocl.types.CollectionType;
 import tudresden.ocl20.pivot.metamodels.java.JavaMetaModelPlugin;
 import tudresden.ocl20.pivot.pivotmodel.EnumerationLiteral;
 import tudresden.ocl20.pivot.pivotmodel.Namespace;
@@ -660,15 +662,54 @@ public class JavaAdapterFactory {
 
 		Type result;
 
-		/* If the type is an array get its component type. */
+		/* If the type is an array convert the array to a collection. */
 		if (aClass.isArray()) {
-			aClass = aClass.getComponentType();
 
-			Type genericType;
-			genericType = this.createType(aClass);
+			if (aGenericType instanceof GenericArrayType) {
 
-			result = EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
-					.getSequenceType(genericType);
+				GenericArrayType genericArrayType;
+				genericArrayType = (GenericArrayType) aGenericType;
+
+				java.lang.reflect.Type componentType = genericArrayType
+						.getGenericComponentType();
+
+				Type elementType;
+
+				if (componentType instanceof ParameterizedType) {
+
+					ParameterizedType paramterizedType;
+					paramterizedType = (ParameterizedType) componentType;
+
+					elementType = this.adaptParameterizedType(paramterizedType);
+					elementType = this.adaptCollectionClass(
+							(Class<?>) paramterizedType.getRawType(),
+							elementType);
+				}
+
+				else if (componentType instanceof Class<?>) {
+					Class<?> componentClass;
+					componentClass = (Class<?>) componentType;
+
+					if (componentClass.isArray()) {
+						elementType = this.adaptArrayClass(componentClass);
+					}
+
+					else {
+						elementType = this.createType(componentClass);
+					}
+				}
+
+				else {
+					elementType = this.createType(Object.class);
+				}
+
+				result = EssentialOclPlugin.getOclLibraryProvider()
+						.getOclLibrary().getSequenceType(elementType);
+			}
+
+			else {
+				result = this.adaptArrayClass(aClass);
+			}
 		}
 
 		/* Else if the type is a collection get its generic type. */
@@ -677,7 +718,7 @@ public class JavaAdapterFactory {
 			Type genericType;
 
 			if (aGenericType instanceof ParameterizedType) {
-				genericType = adaptGenericClass((ParameterizedType) aGenericType);
+				genericType = adaptParameterizedType((ParameterizedType) aGenericType);
 			}
 
 			else {
@@ -694,6 +735,56 @@ public class JavaAdapterFactory {
 		return result;
 	}
 
+	/**
+	 * <p>
+	 * Adapts a given array {@link Class} to a {@link CollectionType}.
+	 * </p>
+	 * 
+	 * @param aClass
+	 *            The array {@link Class} that shall be converted into a
+	 *            {@link CollectionType}.
+	 * @return A {@link CollectionType} (probably nesting further
+	 *         {@link CollectionType}s).
+	 */
+	private Type adaptArrayClass(Class<?> aClass) {
+
+		Type result;
+		Class<?> elementClass;
+
+		/* Get the class of the elements. */
+		elementClass = aClass.getComponentType();
+
+		Type elementType;
+
+		/* Recall method recursively, if element type is an array again. */
+		if (elementClass.isArray()) {
+			elementType = this.adaptArrayClass(elementClass);
+		}
+
+		else {
+			elementType = this.createType(elementClass);
+		}
+
+		result = EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+				.getSequenceType(elementType);
+
+		return result;
+	}
+
+	/**
+	 * <p>
+	 * Adapts a given {@link Class} to a {@link CollectionType} having the given
+	 * {@link Type} as its element {@link Type}.
+	 * </p>
+	 * 
+	 * @param aClass
+	 *            The {@link Class} that shall be converted into a
+	 *            {@link CollectionType}.
+	 * @param genericType
+	 *            The element {@link Type} of the collection.
+	 * @return A {@link CollectionType} (probably nesting further
+	 *         {@link CollectionType}s).
+	 */
 	private Type adaptCollectionClass(Class<?> aClass, Type genericType) {
 
 		Type result;
@@ -716,7 +807,17 @@ public class JavaAdapterFactory {
 		return result;
 	}
 
-	private Type adaptGenericClass(ParameterizedType parameterizedType) {
+	/**
+	 * <p>
+	 * Converts a given {@link ParameterizedType} to a {@link CollectionType}.
+	 * </p>
+	 * 
+	 * @param parameterizedType
+	 *            The {@link ParameterizedType} that shall be converted to a
+	 *            {@link CollectionType}.
+	 * @return The converted {@link CollectionType}.
+	 */
+	private Type adaptParameterizedType(ParameterizedType parameterizedType) {
 
 		Type result;
 
@@ -729,7 +830,11 @@ public class JavaAdapterFactory {
 		argument = arguments[0];
 
 		if (argument instanceof Class<?>) {
-			result = this.createType((Class<?>) arguments[0]);
+
+			Class<?> elementClass;
+			elementClass = (Class<?>) argument;
+
+			result = this.createType(elementClass);
 		}
 
 		else if (argument instanceof TypeVariable<?>) {
@@ -739,11 +844,48 @@ public class JavaAdapterFactory {
 
 		else if (argument instanceof ParameterizedType) {
 			Type genericType;
-			genericType = this.adaptGenericClass((ParameterizedType) argument);
+			genericType = this
+					.adaptParameterizedType((ParameterizedType) argument);
 
 			result = this.adaptCollectionClass(
 					(Class<?>) ((ParameterizedType) argument).getRawType(),
 					genericType);
+		}
+
+		else if (argument instanceof GenericArrayType) {
+
+			GenericArrayType genericArrayType;
+			genericArrayType = (GenericArrayType) argument;
+
+			java.lang.reflect.Type componentType = genericArrayType
+					.getGenericComponentType();
+
+			Type elementType;
+
+			if (componentType instanceof ParameterizedType) {
+				elementType = this
+						.adaptParameterizedType((ParameterizedType) componentType);
+			}
+
+			else if (componentType instanceof Class<?>) {
+				Class<?> componentClass;
+				componentClass = (Class<?>) componentType;
+
+				if (componentClass.isArray()) {
+					elementType = this.adaptArrayClass(componentClass);
+				}
+
+				else {
+					elementType = this.createType(componentClass);
+				}
+			}
+
+			else {
+				elementType = this.createType(Object.class);
+			}
+
+			result = EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+					.getSequenceType(elementType);
 		}
 
 		else {

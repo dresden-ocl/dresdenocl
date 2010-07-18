@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2009 by Claas Wilke (claaswilke@gmx.net) This file is part of
+ * Copyright (C) 2010 by Claas Wilke (claaswilke@gmx.net) This file is part of
  * the Java Meta Model of Dresden OCL2 for Eclipse. Dresden OCL2 for Eclipse is
  * free software: you can redistribute it and/or modify it under the terms of
  * the GNU Lesser General Public License as published by the Free Software
@@ -268,6 +268,32 @@ public class TestCollectionAdaptation extends AbstractJavaModelTest {
 				.getOclLibrary().getSequenceType(
 						EssentialOclPlugin.getOclLibraryProvider()
 								.getOclLibrary().getCollectionType(testType));
+
+		assertEquals(msg, expectedType, operationUnderTest.getType());
+	}
+
+	/**
+	 * <p>
+	 * Tests the adaptation of a {@link EDataType} which is not primitive.
+	 * </p>
+	 */
+	@Test
+	public void testAdaptation09() {
+
+		String msg;
+		msg = "The operation 'getArrayArray' has a wrong return type. ";
+
+		Operation operationUnderTest;
+		operationUnderTest = testType.lookupOperation("getArrayArray",
+				new ArrayList<Type>());
+
+		assertNotNull(operationUnderTest);
+
+		Type expectedType;
+		expectedType = EssentialOclPlugin.getOclLibraryProvider()
+				.getOclLibrary().getSequenceType(
+						EssentialOclPlugin.getOclLibraryProvider()
+								.getOclLibrary().getSequenceType(testType));
 
 		assertEquals(msg, expectedType, operationUnderTest.getType());
 	}

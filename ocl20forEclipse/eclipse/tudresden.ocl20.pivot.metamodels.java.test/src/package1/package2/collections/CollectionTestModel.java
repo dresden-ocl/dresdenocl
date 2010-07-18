@@ -64,20 +64,25 @@ public class CollectionTestModel {
 	public Collection<List<Set<CollectionTestModel>>> getCollectionListSet() {
 		return new ArrayList<List<Set<CollectionTestModel>>>();
 	}
-	
+
 	/**
-	 * Should be adapted to
-	 * CollectionType<SequenceType<CollectionTestModel>>.
+	 * Should be adapted to CollectionType<SequenceType<CollectionTestModel>>.
 	 */
 	public Collection<CollectionTestModel[]> getCollectionArray() {
 		return new ArrayList<CollectionTestModel[]>();
 	}
 
 	/**
-	 * Should be adapted to
-	 * SequenceType<CollectionType<CollectionTestModel>>.
+	 * Should be adapted to SequenceType<CollectionType<CollectionTestModel>>.
 	 */
 	public Collection<CollectionTestModel>[] getArrayCollection() {
 		return null;
+	}
+
+	/**
+	 * Should be adapted to SequenceType<SequenceType<CollectionTestModel>>.
+	 */
+	public CollectionTestModel[][] getArrayArray() {
+		return new CollectionTestModel[0][0];
 	}
 }

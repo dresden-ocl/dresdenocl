@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2009 by Claas Wilke (claaswilke@gmx.net) This file is part of
+ * Copyright (C) 2010 by Claas Wilke (claaswilke@gmx.net) This file is part of
  * the Java Meta Model of Dresden OCL2 for Eclipse. Dresden OCL2 for Eclipse is
  * free software: you can redistribute it and/or modify it under the terms of
  * the GNU Lesser General Public License as published by the Free Software
@@ -27,8 +27,6 @@ import tudresden.ocl20.pivot.metamodels.test.MetaModelTestSuite;
  * {@link MetaModelTestSuite}.
  * 
  * @author Claas Wilke
- * 
- * @generated NOT
  */
 @Suite.SuiteClasses(value = { MetaModelTestSuite.class, TestInnerTypes.class,
 		TestJarArchiveReference.class, TestCollectionAdaptation.class })
