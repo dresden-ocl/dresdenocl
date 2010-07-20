@@ -9,7 +9,7 @@ import tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp._
 
 object OclStaticSemanticsTransactions {
 
-  private val parsedConstraints = new collection.jcl.IdentityHashMap[OclResource, java.util.List[Constraint]]()
+  private val parsedConstraints = new collection.jcl.IdentityHashMap[IOclResource, java.util.List[Constraint]]()
   
   /**
    * If there are constraints and defined operations/properties in the model,
@@ -69,7 +69,7 @@ object OclStaticSemanticsTransactions {
    * After the semantic analysis, the parsed constraints and defined
    * properties/operations are added to the model.
    */
-  def endStaticSemanticsAnalysis(model : IModel, resource : OclResource, constraints : java.util.List[Constraint]) = {
+  def endStaticSemanticsAnalysis(model : IModel, resource : IOclResource, constraints : java.util.List[Constraint]) = {
     val iter = constraints.iterator
     while (iter.hasNext) {
       val constraint = iter.next

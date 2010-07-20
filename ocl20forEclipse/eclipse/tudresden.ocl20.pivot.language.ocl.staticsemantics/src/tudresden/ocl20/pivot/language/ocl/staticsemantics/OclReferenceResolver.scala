@@ -202,7 +202,7 @@ trait OclReferenceResolver { selfType : OclStaticSemantics =>
     val result = _resolveNamespace(identifier, fuzzy) (container) match {
       case Full(namespaceList) => namespaceList
       case Failure(msg, _, _) => {
-        resource.addError(msg, container)
+        iResource.addError(msg, container)
         List()
       }
       case Empty => List()
@@ -214,7 +214,7 @@ trait OclReferenceResolver { selfType : OclStaticSemantics =>
     _resolveType(identifier, fuzzy) (container) match {
       case Full(typeList) => typeList
       case Failure(msg, _, _) => {
-        resource.addError(msg, container)
+        iResource.addError(msg, container)
         List()
       }
       case Empty => List()
@@ -236,7 +236,7 @@ trait OclReferenceResolver { selfType : OclStaticSemantics =>
       	  case _ => None
         }
       }
-      case Failure(msg, _, _) => resource.addError(msg, container); List()
+      case Failure(msg, _, _) => iResource.addError(msg, container); List()
       case Empty => List()
     }
   }
@@ -252,7 +252,7 @@ trait OclReferenceResolver { selfType : OclStaticSemantics =>
           }
         } match {
           case Full(propertyList) => propertyList
-          case Failure(msg, _, _) => resource.addError(msg, container); List()
+          case Failure(msg, _, _) => iResource.addError(msg, container); List()
           case Empty => List()
         }
       }
@@ -271,7 +271,7 @@ trait OclReferenceResolver { selfType : OclStaticSemantics =>
 
     _resolveOperation(identifier, fuzzy, parametersEOcl.map(_.getType), static) (container) match {
       case Full(operationList) => operationList
-      case Failure(msg, _, _) => resource.addError(msg, container); List()
+      case Failure(msg, _, _) => iResource.addError(msg, container); List()
       case Empty => List()
     }
   }
@@ -308,7 +308,7 @@ trait OclReferenceResolver { selfType : OclStaticSemantics =>
 				        else
 				        	operationList
 				      }
-				      case Failure(msg, _, _) => resource.addError(msg, container); List()
+				      case Failure(msg, _, _) => iResource.addError(msg, container); List()
 				      case Empty => List()
 				    }
 		      }
@@ -362,7 +362,7 @@ trait OclReferenceResolver { selfType : OclStaticSemantics =>
 	          }
 		      } match {
 		        case Full(opList) => opList
-		        case Failure(msg, _, _) => resource.addError(msg, container); List()
+		        case Failure(msg, _, _) => iResource.addError(msg, container); List()
 		        case Empty => List() 
 		      }
 	      }
@@ -380,7 +380,7 @@ trait OclReferenceResolver { selfType : OclStaticSemantics =>
       Full(parameter)
     } match {
       case Full(parameter) => List(parameter)
-      case Failure(msg, _, _) => resource.addError(msg, parameterType); List()
+      case Failure(msg, _, _) => iResource.addError(msg, parameterType); List()
       case Empty => List()
     }
   }

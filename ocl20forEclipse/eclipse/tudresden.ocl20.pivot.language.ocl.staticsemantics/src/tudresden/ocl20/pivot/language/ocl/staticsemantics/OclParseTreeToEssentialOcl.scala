@@ -266,6 +266,8 @@ trait OclParseTreeToEssentialOcl { selfType : OclStaticSemantics =>
   	    if (properties.size != variableDeclarationList.getVariableDeclarations.size)
           Empty
        else {
+         if(properties.size != properties.map(_._1.getName).removeDuplicates.size)
+           yieldFailure("Cannot have tuple elements with the same name.", t)
          val tupleLiteralParts = properties.map{case(property, initExpression) =>
            val tupleLiteralPart = ExpressionsFactory.INSTANCE.createTupleLiteralPart
            tupleLiteralPart.setProperty(property.asInstanceOf[Property])
@@ -612,7 +614,7 @@ trait OclParseTreeToEssentialOcl { selfType : OclStaticSemantics =>
       
   	  case unknown => {
   	    unknown match {
-  	      case u : AttributableEObject => resource.addError("unknown element", u.getEObject)
+  	      case u : AttributableEObject => iResource.addError("unknown element", u.getEObject)
   	      case _ => //ignore
   	    }
   	    Failure("unknown element: " + unknown)

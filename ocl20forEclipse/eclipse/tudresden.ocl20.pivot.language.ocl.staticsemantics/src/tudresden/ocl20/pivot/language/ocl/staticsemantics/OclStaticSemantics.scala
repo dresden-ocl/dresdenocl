@@ -1,5 +1,7 @@
 package tudresden.ocl20.pivot.language.ocl.staticsemantics
 
+import org.emftext.access._
+import org.emftext.access.resource._
 import org.eclipse.emf.ecore._
 import org.eclipse.emf.ecore.util._
 import tudresden.attributegrammar.integration.kiama._
@@ -10,7 +12,7 @@ import tudresden.ocl20.pivot.essentialocl._
 import expressions._
 import expressions.util._
 import types._
-import factory._
+import expressions.factory._
 import tudresden.ocl20.pivot.model._
 import Box._
 
@@ -64,7 +66,7 @@ trait OclStaticSemantics extends ocl.semantics.OclAttributeMaker
   /*
    * Do not use resource directly. Instead refer to yieldFailure and addWarning.
    */
-  protected[staticsemantics] val resource : OclResource
+  protected[staticsemantics] val resource : IOclResource
   
   /*
    * EssentialOclFactory to create essential OCL expressions
@@ -75,6 +77,11 @@ trait OclStaticSemantics extends ocl.semantics.OclAttributeMaker
    * Holds all definitions for a type; Should not be accessed directly! Use getAllDefs instead!
    */
   protected var allDefs : Tuple2[collection.mutable.MultiMap[Type, VariableDeclarationWithInitCS], collection.mutable.MultiMap[Type, Tuple2[OperationDefinitionInDefCS, OclExpressionCS]]] = _
+  
+  /**
+   * For access to general methods of the resource interface
+   */
+  protected val iResource : IResource = EMFTextAccessProxy.get(resource, classOf[IResource]).asInstanceOf[IResource]
   
   /*
    * For cached attributes.
@@ -89,7 +96,7 @@ trait OclStaticSemantics extends ocl.semantics.OclAttributeMaker
       case a : AttributableEObject => a.getEObject
       case eObject => eObject
     }
-    resource.addError(message, eObject)
+    iResource.addError(message, eObject)
     Failure(message)
   }
   
@@ -101,7 +108,7 @@ trait OclStaticSemantics extends ocl.semantics.OclAttributeMaker
       case a : AttributableEObject => a.getEObject
       case eObject => eObject
     }
-    resource.addWarning(message, eObject)
+    iResource.addWarning(message, eObject)
   }
   
   protected def determineTypeOf(oclExpression : OclExpression) = {
@@ -132,7 +139,7 @@ trait OclStaticSemantics extends ocl.semantics.OclAttributeMaker
   @throws(classOf[OclStaticSemanticsException])
   def cs2EssentialOcl(root : EObject) : java.util.List[Constraint] = {
     resetMemo
-    OclStaticSemanticsTransactions.startStaticSemanticsAnalysis(this, resource.getContents.get(0))
+    OclStaticSemanticsTransactions.startStaticSemanticsAnalysis(this, iResource.getContents.get(0))
     val constraints = computeConstraints(root)
     // to avoid the conversion of Scala List to Java List multiple times
     val result : java.util.List[Constraint] = constraints.openOr {throw new OclStaticSemanticsException}
@@ -143,7 +150,7 @@ trait OclStaticSemantics extends ocl.semantics.OclAttributeMaker
   
   def getAllDefs = {
     if (allDefs == null) 
-      allDefs = OclStaticSemanticsTransactions.getAllDefs(this, resource.getContents.get(0))
+      allDefs = OclStaticSemanticsTransactions.getAllDefs(this, iResource.getContents.get(0))
     allDefs
   }
 }
