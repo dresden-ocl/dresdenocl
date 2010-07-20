@@ -50,8 +50,8 @@ public class Ocl2JavaSettings implements IOcl2JavaSettings {
 	protected String constraintFolder;
 
 	/**
-	 * Specifies whether or not getter methods shall be generated for new defined
-	 * attributes.
+	 * Specifies whether or not getter methods shall be generated for new
+	 * defined attributes.
 	 */
 	protected boolean createGettersForDefinedAttributes;
 
@@ -71,13 +71,14 @@ public class Ocl2JavaSettings implements IOcl2JavaSettings {
 	protected int defaultInvariantCheckMode;
 
 	/**
-	 * Contains the invariant check mode of all invariants with a special setting.
+	 * Contains the invariant check mode of all invariants with a special
+	 * setting.
 	 */
 	protected Map<Constraint, Integer> invariantCheckMode;
 
 	/**
-	 * Contains the default violation macro for all {@link Constraint}s without a
-	 * special setting.
+	 * Contains the default violation macro for all {@link Constraint}s without
+	 * a special setting.
 	 */
 	protected ITransformedCode defaultViolationMacro;
 
@@ -106,8 +107,7 @@ public class Ocl2JavaSettings implements IOcl2JavaSettings {
 
 		this.disabledInheritance = new HashSet<Constraint>();
 
-		this.defaultInvariantCheckMode =
-				IOcl2JavaSettings.INVARIANT_CHECK_AFTER_CONSTRUCT_AND_ATTRIBUTE_CHANGE;
+		this.defaultInvariantCheckMode = IOcl2JavaSettings.INVARIANT_CHECK_AFTER_CONSTRUCT_AND_ATTRIBUTE_CHANGE;
 
 		this.invariantCheckMode = new HashMap<Constraint, Integer>();
 
@@ -122,7 +122,9 @@ public class Ocl2JavaSettings implements IOcl2JavaSettings {
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.ocl2java.IOcl2CodeSettings#getSourceDirectory()
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.ocl2java.IOcl2CodeSettings#getSourceDirectory()
 	 */
 	public String getSourceDirectory() {
 
@@ -131,6 +133,7 @@ public class Ocl2JavaSettings implements IOcl2JavaSettings {
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.ocl2java.IOcl2CodeSettings#setSourceDirectory(java
 	 * .lang.String)
@@ -147,6 +150,7 @@ public class Ocl2JavaSettings implements IOcl2JavaSettings {
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.ocl2java.IOcl2CodeSettings#getConstraintDirectory()
 	 */
@@ -157,6 +161,7 @@ public class Ocl2JavaSettings implements IOcl2JavaSettings {
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.ocl2java.IOcl2CodeSettings#setConstraintDirectory
 	 * (java.lang.String)
@@ -168,6 +173,7 @@ public class Ocl2JavaSettings implements IOcl2JavaSettings {
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see tudresden.ocl20.pivot.ocl2java.IOcl2CodeSettings#isSaveCode()
 	 */
 	public boolean isSaveCode() {
@@ -177,7 +183,9 @@ public class Ocl2JavaSettings implements IOcl2JavaSettings {
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.ocl2java.IOcl2CodeSettings#setSaveCode(boolean)
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.ocl2java.IOcl2CodeSettings#setSaveCode(boolean)
 	 */
 	public void setSaveCode(boolean saveCode) {
 
@@ -186,6 +194,7 @@ public class Ocl2JavaSettings implements IOcl2JavaSettings {
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.ocl2java.IOcl2CodeSettings#getViolationMacro(tudresden
 	 * .ocl20.pivot.pivotmodel.Constraint)
@@ -207,6 +216,7 @@ public class Ocl2JavaSettings implements IOcl2JavaSettings {
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.ocl2java.IOcl2CodeSettings#setDefaultViolationMacro
 	 * (tudresden.ocl20.pivot.ocl2java.code.ITransformedCode)
@@ -218,6 +228,7 @@ public class Ocl2JavaSettings implements IOcl2JavaSettings {
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.ocl2java.IOcl2CodeSettings#setViolationMacro(tudresden
 	 * .ocl20.pivot.ocl2java.code.ITransformedCode,
@@ -230,6 +241,7 @@ public class Ocl2JavaSettings implements IOcl2JavaSettings {
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @seetudresden.ocl20.pivot.ocl2java.IOcl2CodeSettings#
 	 * isGettersForDefinedAttributesEnabled()
 	 */
@@ -240,6 +252,7 @@ public class Ocl2JavaSettings implements IOcl2JavaSettings {
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @seetudresden.ocl20.pivot.ocl2java.IOcl2CodeSettings#
 	 * setGettersForDefinedAttributesEnabled(boolean)
 	 */
@@ -255,6 +268,7 @@ public class Ocl2JavaSettings implements IOcl2JavaSettings {
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.ocl2java.IOcl2CodeSettings#disableInheritance(tudresden
 	 * .ocl20.pivot.pivotmodel.Constraint)
@@ -272,14 +286,17 @@ public class Ocl2JavaSettings implements IOcl2JavaSettings {
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.ocl2java.IOcl2CodeSettings#isInheritanceDisabled
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.ocl2java.IOcl2CodeSettings#isInheritanceDisabled
 	 * (tudresden.ocl20.pivot.pivotmodel.Constraint)
 	 */
 	public boolean isInheritanceDisabled(Constraint aConstraint) {
 
 		boolean result;
 
-		if (aConstraint != null && this.disabledInheritance.contains(aConstraint)) {
+		if (aConstraint != null
+				&& this.disabledInheritance.contains(aConstraint)) {
 			result = true;
 		}
 
@@ -292,6 +309,7 @@ public class Ocl2JavaSettings implements IOcl2JavaSettings {
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.ocl2java.IOcl2CodeSettings#setDefaultInvariantCheckMode
 	 * (int)
@@ -303,7 +321,9 @@ public class Ocl2JavaSettings implements IOcl2JavaSettings {
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.ocl2java.IOcl2CodeSettings#setInvariantCheckMode
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.ocl2java.IOcl2CodeSettings#setInvariantCheckMode
 	 * (tudresden.ocl20.pivot.pivotmodel.Constraint, int)
 	 */
 	public void setInvariantCheckMode(Constraint aConstraint, int mode) {
@@ -313,7 +333,9 @@ public class Ocl2JavaSettings implements IOcl2JavaSettings {
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.ocl2java.IOcl2CodeSettings#getInvariantCheckMode
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.ocl2java.IOcl2CodeSettings#getInvariantCheckMode
 	 * (tudresden.ocl20.pivot.pivotmodel.Constraint)
 	 */
 	public int getInvariantCheckMode(Constraint aConstraint) {
@@ -331,15 +353,25 @@ public class Ocl2JavaSettings implements IOcl2JavaSettings {
 		return result;
 	}
 
-	@Override
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.tools.codegen.IOcl2CodeSettings#getTemplateGroup()
+	 */
 	public ITemplateGroup getTemplateGroup() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.tools.codegen.IOcl2CodeSettings#setTemplateGroup
+	 * (tudresden.ocl20.pivot.tools.template.ITemplateGroup)
+	 */
 	public void setTemplateGroup(ITemplateGroup templateGroup) {
 		// TODO Auto-generated method stub
-		
 	}
 }

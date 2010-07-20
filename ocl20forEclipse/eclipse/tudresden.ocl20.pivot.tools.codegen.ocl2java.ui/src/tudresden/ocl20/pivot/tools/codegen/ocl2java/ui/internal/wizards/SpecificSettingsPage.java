@@ -109,7 +109,6 @@ public class SpecificSettingsPage extends ConstraintViewPage {
 	 * org.eclipse.jface.dialogs.IDialogPage#createControl(org.eclipse.swt.widgets
 	 * .Composite)
 	 */
-	@Override
 	public void createControl(Composite parent) {
 		Composite panel;
 		GridLayout layout;
@@ -207,9 +206,14 @@ public class SpecificSettingsPage extends ConstraintViewPage {
 		constraintViewer
 				.addSelectionChangedListener(new ISelectionChangedListener() {
 
-					@Override
+					/*
+					 * (non-Javadoc)
+					 * 
+					 * @see org.eclipse.jface.viewers.ISelectionChangedListener#
+					 * selectionChanged
+					 * (org.eclipse.jface.viewers.SelectionChangedEvent)
+					 */
 					public void selectionChanged(SelectionChangedEvent event) {
-
 						displayNewSettings();
 					}
 				});
@@ -308,8 +312,13 @@ public class SpecificSettingsPage extends ConstraintViewPage {
 		/* Add a change listener to react on updates. */
 		violationMacroText.addModifyListener(new ModifyListener() {
 
-			// @Override   mt: commented out to be compatible with Java 1.5
-			@Override
+			/*
+			 * (non-Javadoc)
+			 * 
+			 * @see
+			 * org.eclipse.swt.events.ModifyListener#modifyText(org.eclipse.
+			 * swt.events.ModifyEvent)
+			 */
 			public void modifyText(ModifyEvent e) {
 				updateSettings();
 			}

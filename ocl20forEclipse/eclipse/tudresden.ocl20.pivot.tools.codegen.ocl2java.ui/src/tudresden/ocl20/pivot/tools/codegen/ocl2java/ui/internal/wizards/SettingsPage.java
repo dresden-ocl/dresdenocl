@@ -158,7 +158,6 @@ public class SettingsPage extends WizardPage {
 	 * org.eclipse.jface.dialogs.IDialogPage#createControl(org.eclipse.swt.widgets
 	 * .Composite)
 	 */
-	@Override
 	public void createControl(Composite parent) {
 
 		Composite panel;
@@ -236,8 +235,13 @@ public class SettingsPage extends WizardPage {
 		/* Add a change listener to react on updates. */
 		violationMacroText.addModifyListener(new ModifyListener() {
 
-			// @Override   mt: commented out to be compatible with Java 1.5
-			@Override
+			/*
+			 * (non-Javadoc)
+			 * 
+			 * @see
+			 * org.eclipse.swt.events.ModifyListener#modifyText(org.eclipse.
+			 * swt.events.ModifyEvent)
+			 */
 			public void modifyText(ModifyEvent e) {
 				updatePageComplete();
 			}

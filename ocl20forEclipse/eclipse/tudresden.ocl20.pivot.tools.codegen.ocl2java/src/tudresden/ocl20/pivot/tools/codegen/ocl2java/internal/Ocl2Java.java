@@ -455,8 +455,8 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 		literalValue = "";
 		literalValue += aBooleanLiteralExp.isBooleanSymbol();
 
-		template.setAttribute("type", this.transformType(
-				aBooleanLiteralExp.getType()).toString());
+		template.setAttribute("type",
+				this.transformType(aBooleanLiteralExp.getType()).toString());
 		template.setAttribute("value", literalValue);
 
 		result = new TransformedCodeImpl();
@@ -483,8 +483,7 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 			CollectionLiteralExp aCollectionLiteralExp) {
 
 		if (LOGGER.isDebugEnabled()) {
-			LOGGER
-					.debug("caseCollectionLiteralExp(CollectionLiteralExp) - start");
+			LOGGER.debug("caseCollectionLiteralExp(CollectionLiteralExp) - start");
 		}
 		// no else.
 
@@ -572,11 +571,11 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 				elemTemplate = this.myTemplateGroup
 						.getTemplate("collectionLiteralExp_collectionRange");
 				elemTemplate.setAttribute("collectionName", collectionName);
-				elemTemplate.setAttribute("indexVar", this.myCodeTransEnv
-						.getNewIndexVarName());
+				elemTemplate.setAttribute("indexVar",
+						this.myCodeTransEnv.getNewIndexVarName());
 				elemTemplate.setAttribute("indexType", firstExpType.toString());
-				elemTemplate.setAttribute("firstExp", firstExpCode
-						.getResultExp());
+				elemTemplate.setAttribute("firstExp",
+						firstExpCode.getResultExp());
 				elemTemplate
 						.setAttribute("lastExp", lastExpCode.getResultExp());
 
@@ -747,9 +746,7 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 		result.addCode(template.toString());
 
 		if (LOGGER.isDebugEnabled()) {
-			LOGGER
-					.debug("caseIfExp(IfExp)" + " - end - return value="
-							+ result);
+			LOGGER.debug("caseIfExp(IfExp)" + " - end - return value=" + result);
 		}
 		// no else.
 
@@ -782,8 +779,8 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 		literalValue = "";
 		literalValue += anIntegerLiteralExp.getIntegerSymbol();
 
-		template.setAttribute("type", this.transformType(
-				anIntegerLiteralExp.getType()).toString());
+		template.setAttribute("type",
+				this.transformType(anIntegerLiteralExp.getType()).toString());
 		template.setAttribute("value", literalValue);
 
 		result = new TransformedCodeImpl();
@@ -920,8 +917,8 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 		template.setAttribute("bodyCode", bodyCode.getCode());
 		template.setAttribute("bodyExp", bodyCode.getResultExp());
 		template.setAttribute("resultVarInitCode", resultVarInitCode.getCode());
-		template.setAttribute("resultVarInitExp", resultVarInitCode
-				.getResultExp());
+		template.setAttribute("resultVarInitExp",
+				resultVarInitCode.getResultExp());
 		/* FIXME Claas: Use initializable type here. */
 		template.setAttribute("resultType", resultType.toString());
 		template.setAttribute("resultVar", resultVar);
@@ -1062,8 +1059,8 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 			/* Set iterator specific template attributes. */
 			template.setAttribute("itType", sourceType.getGenericType()
 					.toString());
-			template.setAttribute("collectionVar", this.myCodeTransEnv
-					.getNewCollectionVarName());
+			template.setAttribute("collectionVar",
+					this.myCodeTransEnv.getNewCollectionVarName());
 		}
 
 		else if (itName.equals("collect")) {
@@ -1103,10 +1100,10 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 			/* Set iterator specific template attributes. */
 			template.setAttribute("itType", sourceType.getGenericType()
 					.toString());
-			template.setAttribute("comparatorName", this.myCodeTransEnv
-					.getNewComparatorName());
-			template.setAttribute("compareResult", this.myCodeTransEnv
-					.getNewResultVarName());
+			template.setAttribute("comparatorName",
+					this.myCodeTransEnv.getNewComparatorName());
+			template.setAttribute("compareResult",
+					this.myCodeTransEnv.getNewResultVarName());
 			template.setAttribute("resultType", resultType.toString());
 
 			template.setAttribute("itVar2", itVarName2);
@@ -1511,7 +1508,8 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 					 * Set additional parameter to convert from number to result
 					 * type.
 					 */
-					template.setAttribute("typeConversion",
+					template.setAttribute(
+							"typeConversion",
 							this.myTemplateGroup.getTemplate(
 									"numberConversionTo" + resultType)
 									.toString());
@@ -1525,8 +1523,9 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 			 * be cast to result type.
 			 */
 			if (template != null && operationName.equals("flatten")) {
-				template.setAttribute("resultType", this.transformType(
-						anOperationCallExp.getType()).toString());
+				template.setAttribute("resultType",
+						this.transformType(anOperationCallExp.getType())
+								.toString());
 			}
 			// no else.
 
@@ -1556,8 +1555,8 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 
 					template = this.myTemplateGroup
 							.getTemplate("oclIsInvalidOperation");
-					template.setAttribute("sourceExp", sourceCode
-							.getResultExp());
+					template.setAttribute("sourceExp",
+							sourceCode.getResultExp());
 					template.setAttribute("resultVar", resultVar);
 
 					if (sourceExp.getType() != null) {
@@ -1683,8 +1682,8 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 						template = this.myTemplateGroup
 								.getTemplate("charactersOperation");
 
-						template.setAttribute("sourceExp", sourceCode
-								.getResultExp());
+						template.setAttribute("sourceExp",
+								sourceCode.getResultExp());
 						template.setAttribute("resultVar", resultVar);
 						template.setAttribute("elementName",
 								this.myCodeTransEnv.getNewIteratorVarName());
@@ -2032,8 +2031,8 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 		literalValue = "";
 		literalValue += aRealLiteralExp.getRealSymbol();
 
-		template.setAttribute("type", this.transformType(
-				aRealLiteralExp.getType()).toString());
+		template.setAttribute("type",
+				this.transformType(aRealLiteralExp.getType()).toString());
 		template.setAttribute("value", literalValue);
 
 		result = new TransformedCodeImpl();
@@ -2195,8 +2194,7 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 			UndefinedLiteralExp anUndefinedLiteralExp) {
 
 		if (LOGGER.isDebugEnabled()) {
-			LOGGER
-					.debug("caseUndefinedLiteralExp(UndefinedLiteralExp) - start");
+			LOGGER.debug("caseUndefinedLiteralExp(UndefinedLiteralExp) - start");
 		}
 		// no else.
 
@@ -2229,8 +2227,7 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 			UnlimitedNaturalExp anUnlimitedNaturalExp) {
 
 		if (LOGGER.isDebugEnabled()) {
-			LOGGER
-					.debug("caseUnlimitedNaturalExp(UnlimitedNaturalExp) - start");
+			LOGGER.debug("caseUnlimitedNaturalExp(UnlimitedNaturalExp) - start");
 		}
 		// no else.
 
@@ -2244,8 +2241,8 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 		literalValue = "";
 		literalValue += anUnlimitedNaturalExp.getSymbol();
 
-		template.setAttribute("type", this.transformType(
-				anUnlimitedNaturalExp.getType()).toString());
+		template.setAttribute("type",
+				this.transformType(anUnlimitedNaturalExp.getType()).toString());
 		template.setAttribute("value", literalValue);
 
 		result = new TransformedCodeImpl();
@@ -2464,8 +2461,7 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 
 		/* Probably log the entry into this method. */
 		if (LOGGER.isDebugEnabled()) {
-			LOGGER
-					.debug("transformInitializableCollectionType(CollectionType) - start");
+			LOGGER.debug("transformInitializableCollectionType(CollectionType) - start");
 		}
 		// no else.
 
@@ -2923,8 +2919,8 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 		contextPackage = this.getPackagePath(aConstraint);
 
 		aspectTemplate = this.myTemplateGroup.getTemplate("aspectFile");
-		aspectTemplate.setAttribute("package", this
-				.getConstraintPackage(contextPackage));
+		aspectTemplate.setAttribute("package",
+				this.getConstraintPackage(contextPackage));
 		aspectTemplate.setAttribute("name", aspectName);
 
 		/* Probably collect allInstances for some classes. */
@@ -2970,10 +2966,10 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 				adviceTemplate
 						.setAttribute("class", constrainedClass.getName());
 				adviceTemplate.setAttribute("package", contextPackage);
-				adviceTemplate.setAttribute("constCode", constrainedCode
-						.getCode());
-				adviceTemplate.setAttribute("constExp", constrainedCode
-						.getResultExp());
+				adviceTemplate.setAttribute("constCode",
+						constrainedCode.getCode());
+				adviceTemplate.setAttribute("constExp",
+						constrainedCode.getResultExp());
 				adviceTemplate.setAttribute("oclBody", aConstraint
 						.getSpecification().getBody());
 				adviceTemplate.setAttribute("method", operationName);
@@ -3018,8 +3014,8 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 
 		/* Probably save the generated Code. */
 		if (this.mySettings.isSaveCode()) {
-			this.saveTransformedCode(result, aspectName + ".aj", this
-					.getConstraintPackage(contextPackage));
+			this.saveTransformedCode(result, aspectName + ".aj",
+					this.getConstraintPackage(contextPackage));
 		}
 		// no else.
 
@@ -3080,8 +3076,8 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 
 		/* Begin with aspect specification. */
 		aspectTemplate = this.myTemplateGroup.getTemplate("aspectFile");
-		aspectTemplate.setAttribute("package", this
-				.getConstraintPackage(contextPackage));
+		aspectTemplate.setAttribute("package",
+				this.getConstraintPackage(contextPackage));
 		aspectTemplate.setAttribute("name", aspectName);
 
 		/* Probably collect allInstances for some classes. */
@@ -3143,7 +3139,8 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 					superClassName = "Extended" + aType.getName();
 					superClassCanonicalName = this
 							.getConstraintPackage(contextPackage)
-							+ "." + superClassName;
+							+ "."
+							+ superClassName;
 
 					/* Check if the SuperClass has already been defined. */
 					if (this.myCodeTransEnv
@@ -3166,8 +3163,8 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 					attributeTemplate.setAttribute("type", propertyType);
 
 					/* Add the attribute to the class' template. */
-					classTemplate.setAttribute("attributes", attributeTemplate
-							.toString());
+					classTemplate.setAttribute("attributes",
+							attributeTemplate.toString());
 
 					/*
 					 * Probably also create a new getter method for the new
@@ -3183,8 +3180,8 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 										+ propertyName.substring(1));
 						attributeTemplate.setAttribute("type", propertyType);
 
-						classTemplate.setAttribute("methods", attributeTemplate
-								.toString());
+						classTemplate.setAttribute("methods",
+								attributeTemplate.toString());
 					}
 					// no else.
 
@@ -3226,7 +3223,8 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 					superClassName = "Extended" + aType.getName();
 					superClassCanonicalName = this
 							.getConstraintPackage(contextPackage)
-							+ "." + superClassName;
+							+ "."
+							+ superClassName;
 
 					/* Check if the SuperClass has already been defined. */
 					if (this.myCodeTransEnv
@@ -3262,8 +3260,8 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 					}
 
 					/* Add the operation to the class' template. */
-					classTemplate.setAttribute("methods", methodTemplate
-							.toString());
+					classTemplate.setAttribute("methods",
+							methodTemplate.toString());
 
 					/* IMPLEMENTATION OF NEW DEFINED OPERATION. */
 					/* Create a template for the advice code. */
@@ -3309,12 +3307,12 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 				adviceTemplate.setAttribute("class", aType.getName());
 				adviceTemplate.setAttribute("package", contextPackage);
 				adviceTemplate.setAttribute("superClass", superClassName);
-				adviceTemplate.setAttribute("constFolder", this.mySettings
-						.getConstraintDirectory());
-				adviceTemplate.setAttribute("constCode", constrainedCode
-						.getCode());
-				adviceTemplate.setAttribute("constExp", constrainedCode
-						.getResultExp());
+				adviceTemplate.setAttribute("constFolder",
+						this.mySettings.getConstraintDirectory());
+				adviceTemplate.setAttribute("constCode",
+						constrainedCode.getCode());
+				adviceTemplate.setAttribute("constExp",
+						constrainedCode.getResultExp());
 				adviceTemplate.setAttribute("oclBody", aConstraint
 						.getSpecification().getBody());
 
@@ -3340,8 +3338,8 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 
 		/* Probably save the generated Code. */
 		if (this.mySettings.isSaveCode()) {
-			this.saveTransformedCode(result, aspectName + ".aj", this
-					.getConstraintPackage(contextPackage));
+			this.saveTransformedCode(result, aspectName + ".aj",
+					this.getConstraintPackage(contextPackage));
 		}
 		// no else.
 
@@ -3397,8 +3395,8 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 		contextPackage = this.getPackagePath(aConstraint);
 
 		aspectTemplate = this.myTemplateGroup.getTemplate("aspectFile");
-		aspectTemplate.setAttribute("package", this
-				.getConstraintPackage(contextPackage));
+		aspectTemplate.setAttribute("package",
+				this.getConstraintPackage(contextPackage));
 		aspectTemplate.setAttribute("name", aspectName);
 
 		/* Probably collect allInstances for some classes. */
@@ -3459,10 +3457,10 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 				adviceTemplate
 						.setAttribute("class", constrainedClass.getName());
 				adviceTemplate.setAttribute("package", contextPackage);
-				adviceTemplate.setAttribute("constCode", constrainedCode
-						.getCode());
-				adviceTemplate.setAttribute("constExp", constrainedCode
-						.getResultExp());
+				adviceTemplate.setAttribute("constCode",
+						constrainedCode.getCode());
+				adviceTemplate.setAttribute("constExp",
+						constrainedCode.getResultExp());
 				adviceTemplate.setAttribute("oclBody", aConstraint
 						.getSpecification().getBody());
 
@@ -3494,8 +3492,8 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 
 		/* Probably save the generated Code. */
 		if (this.mySettings.isSaveCode()) {
-			this.saveTransformedCode(result, aspectName + ".aj", this
-					.getConstraintPackage(contextPackage));
+			this.saveTransformedCode(result, aspectName + ".aj",
+					this.getConstraintPackage(contextPackage));
 		}
 		// no else.
 
@@ -3554,8 +3552,8 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 		contextPackage = this.getPackagePath(aConstraint);
 
 		aspectTemplate = this.myTemplateGroup.getTemplate("aspectFile");
-		aspectTemplate.setAttribute("package", this
-				.getConstraintPackage(contextPackage));
+		aspectTemplate.setAttribute("package",
+				this.getConstraintPackage(contextPackage));
 		aspectTemplate.setAttribute("name", aspectName);
 
 		/* Probably collect allInstances for some classes. */
@@ -3612,10 +3610,10 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 				adviceTemplate.setAttribute("class", className);
 				adviceTemplate.setAttribute("package", contextPackage);
 				adviceTemplate.setAttribute("attribute", aProperty.getName());
-				adviceTemplate.setAttribute("constCode", constrainedCode
-						.getCode());
-				adviceTemplate.setAttribute("constExp", constrainedCode
-						.getResultExp());
+				adviceTemplate.setAttribute("constCode",
+						constrainedCode.getCode());
+				adviceTemplate.setAttribute("constExp",
+						constrainedCode.getResultExp());
 				adviceTemplate.setAttribute("oclBody", aConstraint
 						.getSpecification().getBody());
 
@@ -3640,8 +3638,8 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 
 		/* Probably save the generated Code. */
 		if (this.mySettings.isSaveCode()) {
-			this.saveTransformedCode(result, aspectName + ".aj", this
-					.getConstraintPackage(contextPackage));
+			this.saveTransformedCode(result, aspectName + ".aj",
+					this.getConstraintPackage(contextPackage));
 		}
 		// no else.
 
@@ -3698,8 +3696,8 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 		contextPackage = this.getPackagePath(aConstraint);
 
 		aspectTemplate = this.myTemplateGroup.getTemplate("aspectFile");
-		aspectTemplate.setAttribute("package", this
-				.getConstraintPackage(contextPackage));
+		aspectTemplate.setAttribute("package",
+				this.getConstraintPackage(contextPackage));
 		aspectTemplate.setAttribute("name", aspectName);
 
 		/* Probably collect allInstances for some classes. */
@@ -3752,10 +3750,10 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 				adviceTemplate
 						.setAttribute("class", constrainedClass.getName());
 				adviceTemplate.setAttribute("package", contextPackage);
-				adviceTemplate.setAttribute("constCode", constrainedCode
-						.getCode());
-				adviceTemplate.setAttribute("constExp", constrainedCode
-						.getResultExp());
+				adviceTemplate.setAttribute("constCode",
+						constrainedCode.getCode());
+				adviceTemplate.setAttribute("constExp",
+						constrainedCode.getResultExp());
 				adviceTemplate.setAttribute("oclBody", aConstraint
 						.getSpecification().getBody());
 				adviceTemplate.setAttribute("errorCode", this.mySettings
@@ -3801,7 +3799,8 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 					superClassName = "Extended" + constrainedClass.getName();
 					superClassCanonicalName = this
 							.getConstraintPackage(contextPackage)
-							+ "." + superClassName;
+							+ "."
+							+ superClassName;
 
 					/* Check if the SuperClass has already been defined. */
 					if (this.myCodeTransEnv
@@ -3827,12 +3826,12 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 
 						methodTemplate.setAttribute("name", operationName);
 
-						classTemplate.setAttribute("methods", methodTemplate
-								.toString());
+						classTemplate.setAttribute("methods",
+								methodTemplate.toString());
 					}
 
-					adviceTemplate.setAttribute("constFolder", mySettings
-							.getConstraintDirectory());
+					adviceTemplate.setAttribute("constFolder",
+							mySettings.getConstraintDirectory());
 					adviceTemplate.setAttribute("superClass", superClassName);
 				}
 				// no else.
@@ -3865,8 +3864,8 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 
 		/* Probably save the generated Code. */
 		if (this.mySettings.isSaveCode()) {
-			this.saveTransformedCode(result, aspectName + ".aj", this
-					.getConstraintPackage(contextPackage));
+			this.saveTransformedCode(result, aspectName + ".aj",
+					this.getConstraintPackage(contextPackage));
 		}
 		// no else.
 
@@ -3923,8 +3922,8 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 		contextPackage = this.getPackagePath(aConstraint);
 
 		aspectTemplate = this.myTemplateGroup.getTemplate("aspectFile");
-		aspectTemplate.setAttribute("package", this
-				.getConstraintPackage(contextPackage));
+		aspectTemplate.setAttribute("package",
+				this.getConstraintPackage(contextPackage));
 		aspectTemplate.setAttribute("name", aspectName);
 
 		/* Probably collect allInstances for some classes. */
@@ -3982,10 +3981,10 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 				adviceTemplate
 						.setAttribute("class", constrainedClass.getName());
 				adviceTemplate.setAttribute("package", contextPackage);
-				adviceTemplate.setAttribute("constCode", constrainedCode
-						.getCode());
-				adviceTemplate.setAttribute("constExp", constrainedCode
-						.getResultExp());
+				adviceTemplate.setAttribute("constCode",
+						constrainedCode.getCode());
+				adviceTemplate.setAttribute("constExp",
+						constrainedCode.getResultExp());
 				adviceTemplate.setAttribute("oclBody", aConstraint
 						.getSpecification().getBody());
 				adviceTemplate.setAttribute("method", operationName);
@@ -4045,8 +4044,8 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 						else {
 							adviceTemplate.setAttribute("atPreCodes",
 									aValueCode.getCode());
-							adviceTemplate.setAttribute("atPreExps", aValueCode
-									.getResultExp());
+							adviceTemplate.setAttribute("atPreExps",
+									aValueCode.getResultExp());
 							adviceTemplate.setAttribute("atPreTypes",
 									transformedType);
 							adviceTemplate.setAttribute("atPreVars",
@@ -4116,8 +4115,8 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 
 		/* Probably save the generated Code. */
 		if (this.mySettings.isSaveCode()) {
-			this.saveTransformedCode(result, aspectName + ".aj", this
-					.getConstraintPackage(contextPackage));
+			this.saveTransformedCode(result, aspectName + ".aj",
+					this.getConstraintPackage(contextPackage));
 		}
 		// no else.
 
@@ -4174,8 +4173,8 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 		contextPackage = this.getPackagePath(aConstraint);
 
 		aspectTemplate = this.myTemplateGroup.getTemplate("aspectFile");
-		aspectTemplate.setAttribute("package", this
-				.getConstraintPackage(contextPackage));
+		aspectTemplate.setAttribute("package",
+				this.getConstraintPackage(contextPackage));
 		aspectTemplate.setAttribute("name", aspectName);
 
 		/* Probably collect allInstances for some classes. */
@@ -4221,10 +4220,10 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 				adviceTemplate
 						.setAttribute("class", constrainedClass.getName());
 				adviceTemplate.setAttribute("package", contextPackage);
-				adviceTemplate.setAttribute("constCode", constrainedCode
-						.getCode());
-				adviceTemplate.setAttribute("constExp", constrainedCode
-						.getResultExp());
+				adviceTemplate.setAttribute("constCode",
+						constrainedCode.getCode());
+				adviceTemplate.setAttribute("constExp",
+						constrainedCode.getResultExp());
 				adviceTemplate.setAttribute("oclBody", aConstraint
 						.getSpecification().getBody());
 				adviceTemplate.setAttribute("method", operationName);
@@ -4283,8 +4282,8 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 
 		/* Probably save the generated Code. */
 		if (this.mySettings.isSaveCode()) {
-			this.saveTransformedCode(result, aspectName + ".aj", this
-					.getConstraintPackage(contextPackage));
+			this.saveTransformedCode(result, aspectName + ".aj",
+					this.getConstraintPackage(contextPackage));
 		}
 		// no else.
 
@@ -4590,10 +4589,15 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 		// end for.
 	}
 
-	@Override
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.tools.codegen.IOcl2Code#setSettings(tudresden.ocl20
+	 * .pivot.tools.codegen.IOcl2CodeSettings)
+	 */
 	public void setSettings(IOcl2CodeSettings settings) {
 		setSettings((IOcl2JavaSettings) settings);
-
 	}
 
 	/*
