@@ -8,7 +8,7 @@ package tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp;
 
 import tudresden.ocl20.pivot.model.IModel;
 
-public class OclResource extends org.eclipse.emf.ecore.resource.impl.ResourceImpl implements tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextResource {
+public class OclResource extends org.eclipse.emf.ecore.resource.impl.ResourceImpl implements tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextResource, IOclResource {
 	
 	private IModel model;
 	

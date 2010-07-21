@@ -5,7 +5,7 @@ import tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp._
 object OclStaticSemanticsFactoryImplHelper {
 
   def createOclStaticSemantics(_resource : IOclResource) : OclStaticSemantics = 
-    new OclStaticSemantics() with OclAttributesImpl {
+    new OclStaticSemantics() with OclAttributesImpl with OclParseTreeToEssentialOclImpl {
       val resource = _resource
     }
   

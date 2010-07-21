@@ -23,45 +23,10 @@ import kiama.attribution.Attribution._
 
 trait OclParseTreeToEssentialOcl { selfType : OclStaticSemantics =>
 
-    protected val computeConstraints : Attributable ==> Box[List[Constraint]] = {
+  protected val computeConstraints = __computeConstraints
+  protected def __computeConstraints : Attributable ==> Box[List[Constraint]] = {
     attr {
-      case p@PackageDeclarationCS(contexts) => {
-        Full(contexts.flatMap{c =>
-          c->computeConstraints
-        }.flatten(i => i))
-      }
-      
-      case c@ClassifierContextDeclarationCS(_, invAndDefs) => {
-        Full(invAndDefs.flatMap{iad =>
-          computeConstraint(iad)
-        })
-      }
-      
-      case o@OperationContextDeclarationCS(_, prePostOrBodyDecls) => {
-        Full(prePostOrBodyDecls.flatMap{ppb =>
-          computeConstraint(ppb)
-        })
-      }
-      
-      case a@AttributeContextDeclarationCS(_, _, initOrDeriveValues) => {
-        if (initOrDeriveValues.size == 2) {
-          if (initOrDeriveValues(0).isInstanceOf[InitValueCS] && 
-              initOrDeriveValues(1).isInstanceOf[InitValueCS])
-            yieldFailure("Cannot have more than one 'init' definition for an attribute.", a)
-          else if (initOrDeriveValues(0).isInstanceOf[DeriveValueCS] && 
-                   initOrDeriveValues(1).isInstanceOf[DeriveValueCS])
-            yieldFailure("Cannot have more than one 'derive' definition for an attribute.", a)
-          else Full(List())
-        } else {
-          Full(List())
-        }.flatMap{_ =>
-	        Full(initOrDeriveValues.flatMap{idv =>
-	          computeConstraint(idv)
-	        })
-        }
-      }
-      
-      case unknown => Empty
+      case unknown : AttributableEObject => yieldFailure("Cannot compute constraints for " + unknown, unknown.getEObject)
     }
   }
   
