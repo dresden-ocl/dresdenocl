@@ -151,8 +151,23 @@ trait OclAttributesImpl extends OclAttributes {selfType : OclStaticSemantics =>
         case c@ClassifierContextDeclarationCS(typeCS, _) if child != typeCS =>
           for (self <- child->self) yield (List(self), List())
         
-        case o@OperationContextDeclarationCS(operation, _) if child != operation =>
-          for (self <- child->self) yield (List(self), List())
+        case o@OperationContextDeclarationCS(operation, _) if child != operation => {
+          (child->self).flatMap{self =>
+	          val parametersEOcl = operation.getParameters.map(p => p.getParameter)
+				    parametersEOcl.find(_.eIsProxy) match {
+				      case Some(couldNotResolve) => Empty
+				      case None => {
+				        val newVars = parametersEOcl.map{param =>
+					        val variable = ExpressionsFactory.INSTANCE.createVariable
+					        variable.setName(param.getName)
+					        variable.setRepresentedParameter(param)
+					        variable
+				        }
+				        Full(List(self), newVars)
+				      }
+		        }
+          }
+        }
         
         case a : AttributeContextDeclarationCS =>
           for (self <- child->self) yield (List(self), List())

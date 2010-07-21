@@ -102,37 +102,26 @@ trait OclReferenceResolver { selfType : OclStaticSemantics =>
 	                  lookupVariable(identifier, aeo) match {
 		                  case Full(variable) => Full(List(variable))
 		                  case Empty | Failure(_, _, _) => {
-		                    lookupPropertyOnType(sourceType, identifier, false) match {
-		                      case Full(property) => Full(List(property)) 
-		                      case Empty | Failure(_, _, _) => {
-		                        (aeo->namespace).flatMap{namespace =>
-		                          lookupType(identifier, namespace).flatMap{t =>
-	                             	Full(List(t))
-		                          }
+		                    val allProperties = implicitVariables.map{iv =>
+                        	lookupPropertyOnType(iv.getType, identifier, false)
+		                    }.filter(p => p.isDefined)
+		                    if (!allProperties.isEmpty)
+		                    	Full(List(allProperties.first.open_!))
+		                    else {
+	                        (aeo->namespace).flatMap{namespace =>
+	                          lookupType(identifier, namespace).flatMap{t =>
+                             	Full(List(t))
 	                          }
-		                      }
-		                    }
+                          }
+	                      }
 		                  }
 	                  }
 	                }
 	                // in the other cases, the source is part of a navigation call -> only properties have
 	                // to be considered
 	                case other => {
-	                  (aeo->isMultipleNavigationCall).flatMap{isMultiple =>
-		                  if ((isMultiple && sourceType.isInstanceOf[CollectionType]) || (!isMultiple && !sourceType.isInstanceOf[CollectionType]))
-		                    lookupPropertyOnType(sourceType, identifier, false).flatMap{p =>
-			                    Full(List(p))
-			                  }
-		                  else if (isMultiple) // implicit asSet
-                      	lookupPropertyOnType(sourceExpression.withAsSet.getType, identifier, false).flatMap{p =>
-                         	addWarning("implicit asSet() on " + aeo, aeo)
-                      	  Full(List(p))
-                       	}
-		                  else // implicit collect
-		                  	lookupPropertyOnType(sourceType.asInstanceOf[CollectionType].getElementType, identifier, false).flatMap{p =>
-		                  		addWarning("implicit collect() on " + aeo, aeo)
-		                  	  Full(List(p))
-                      	}
+	                  lookupProperty(sourceExpression, aeo, identifier, false).flatMap{p =>
+	                    Full(List(p))
 	                  }
 	                }
 	              }
@@ -143,15 +132,16 @@ trait OclReferenceResolver { selfType : OclStaticSemantics =>
 		              // SourceExpression is an implicit variable -> lookup of variables, properties on implicit variable or types 
 		              case ve : VariableExp if !implicitVariables.filter(_ == ve.getReferredVariable).isEmpty => {
 		                (aeo->namespace).flatMap{namespace =>
-		                  // TODO: add fuzzy type lookup
 		                	Full(lookupVariableFuzzy(identifier, aeo):::
-                          lookupPropertyOnTypeFuzzy(ve.getType, identifier, false):::
+                          implicitVariables.flatMap{iv =>
+                          	lookupPropertyOnTypeFuzzy(factory.createVariableExp(iv), aeo, identifier, false)
+                          }.flatten(p => p):::
                           lookupTypeFuzzy(identifier, namespace))
 		                }
 		              }
 		              // SourceExpression not equal an implicit variable -> lookup in a navigation call
 		              case other => {
-		                Full(lookupPropertyOnTypeFuzzy(other.getType, identifier, false))
+		                lookupPropertyOnTypeFuzzy(other, aeo, identifier, false)
 		              }
 		            }
 		          }
@@ -163,38 +153,34 @@ trait OclReferenceResolver { selfType : OclStaticSemantics =>
   }
   
   protected val _resolveOperation : Tuple4[String, Boolean, List[Type], Boolean] => Attributable ==> Box[List[Operation]] = {
-    case (identifier, fuzzy, parameters, static) => {
-      case aeo : AttributableEObject => {
-        (aeo->sourceExpression).flatMap{sourceExpression =>
-          if (!fuzzy) {
-            isMultipleNavigationCall(aeo) match {
-              case Full(true) => {
-                sourceExpression.getType match {
-                  case c : CollectionType =>
-                    lookupOperationOnType(c, identifier, parameters, static, aeo, Empty)
-                  case notMultiple : Type =>
-                     lookupOperationOnType(oclLibrary.getSetType(sourceExpression.getType), identifier, 
-                                          parameters, static, aeo, Full("implicit as Set()"))
-                }
-              }
-              case Full(false) => {
-                sourceExpression.getType match {
-                  case c : CollectionType => {
-                    lookupOperationOnType(c.getElementType, identifier, 
-                                          parameters, static, aeo, Full("implicit collect()"))
-                  }
-                  case notMultiple =>
-                    lookupOperationOnType(notMultiple, identifier, parameters, static, aeo, Empty)
-                }
-              }
-              case Failure(msg, _, _) => Failure(msg, Empty, Empty)
-              case Empty => Failure("Cannot determine sourceExpression.")
-            }
-          }
-          else
-            Full(lookupOperationOnTypeFuzzy(sourceExpression.getType, identifier, static))
-        }
-      }
+    paramAttr {
+	    case (identifier, fuzzy, parameters, static) => {
+	      case aeo : AttributableEObject => {
+	        (aeo->sourceExpression).flatMap{sourceExpression =>
+	          (aeo->variables).flatMap{case (implicitVariables, _) =>
+		          if (!fuzzy) {
+		            sourceExpression match {
+		              case ve : VariableExp if !implicitVariables.filter(_ == ve.getReferredVariable).isEmpty => {
+		                val allOperations = implicitVariables.map{iv =>
+		                  lookupOperation(factory.createVariableExp(iv), aeo, identifier, static, parameters)
+		                }.filter(_.isDefined)
+		                if (allOperations.isEmpty)
+		                	yieldFailure("Unable to resolve operation " + identifier + " with parameters " + parameters.mkString(", "), aeo.getEObject)
+                    else
+                      Full(List(allOperations.first.open_!))
+		              }
+		              case _ =>
+		                lookupOperation(sourceExpression, aeo, identifier, static, parameters).flatMap{operation =>
+				              Full(List(operation))
+				            }
+		            }
+		          }
+		          else
+		            Full(lookupOperationOnTypeFuzzy(sourceExpression.getType, identifier, static))
+		        }
+		      }
+	      }
+	    }
     }
   }
   

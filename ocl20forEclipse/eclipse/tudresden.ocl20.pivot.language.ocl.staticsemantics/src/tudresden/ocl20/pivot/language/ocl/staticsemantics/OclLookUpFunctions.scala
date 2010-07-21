@@ -91,6 +91,23 @@ trait OclLookUpFunctions { selfType : OclStaticSemantics =>
     }
   }
   
+  protected def lookupProperty(sourceExpression : OclExpression, element : AttributableEObject,
+                               identifier : String, static : Boolean) : Box[Property] = {
+    (element->isMultipleNavigationCall).flatMap{isMultipleNavigationCall =>
+	    val sourceType = sourceExpression.getType
+	    if ((isMultipleNavigationCall && sourceType.isInstanceOf[CollectionType]) || (!isMultipleNavigationCall && !sourceType.isInstanceOf[CollectionType]))
+	      lookupPropertyOnType(sourceType, identifier, static)
+	    else if (isMultipleNavigationCall) {// implicit asSet
+	    	addWarning("implicit asSet() on " + element, element.getEObject)
+       	lookupPropertyOnType(sourceExpression.withAsSet.getType, identifier, static)
+	    }
+	    else {// implicit collect
+	    	addWarning("implicit collect() on " + element, element.getEObject)
+	      lookupPropertyOnType(sourceType.asInstanceOf[CollectionType].getElementType, identifier, static)
+      }
+    }
+  }
+  
   protected def lookupOperationOnType(t : Type, name : String, static : Boolean, parameters : List[Type]) : Box[Operation] = {
     !!(t.lookupOperation(name, parameters)).flatMap{o => if (o.isStatic == static) Full(o) else Empty} or {
       val d = getAllDefs._2.filter(d => t.conformsTo(d._1))
@@ -107,18 +124,21 @@ trait OclLookUpFunctions { selfType : OclStaticSemantics =>
     }
   }
   
-  protected def lookupOperationOnType(tipe : Type, identifier : String, 
-                                    parameters : List[Type], static : Boolean,
-                                    element : EObject,
-                                    warning: Box[String]) : Box[List[Operation]] = {
-    lookupOperationOnType(tipe, identifier, static, parameters)
-      .flatMap{o =>
-      	warning match {
-      	  case Full(w) => addWarning(w + " on " + o.getName, element)
-      	  case Failure(_, _, _) | Empty => // ignore
-      	}
-      	Full(List(o))
+  protected def lookupOperation(sourceExpression : OclExpression, element : AttributableEObject,
+                                identifier : String, static : Boolean, parameters : List[Type]) : Box[Operation] = {
+    (element->isMultipleNavigationCall).flatMap{isMultipleNavigationCall =>
+	    val sourceType = sourceExpression.getType
+	    if ((isMultipleNavigationCall && sourceType.isInstanceOf[CollectionType]) || (!isMultipleNavigationCall && !sourceType.isInstanceOf[CollectionType]))
+	      lookupOperationOnType(sourceType, identifier, static, parameters)
+	    else if (isMultipleNavigationCall) {// implicit asSet
+	    	addWarning("implicit asSet() on " + element, element.getEObject)
+       	lookupOperationOnType(sourceExpression.withAsSet.getType, identifier, static, parameters)
+	    }
+	    else {// implicit collect
+	    	addWarning("implicit collect() on " + element, element.getEObject)
+	      lookupOperationOnType(sourceType.asInstanceOf[CollectionType].getElementType, identifier, static, parameters)
       }
+    }
   }
   
   protected def lookupOperationOnTypeFuzzy(t : Type, name : String, static : Boolean) : List[Operation] = {
@@ -141,6 +161,19 @@ trait OclLookUpFunctions { selfType : OclStaticSemantics =>
 		} catch {
 		  case i : IllegalStateException => yieldFailure("Recursive property definition.", v)
 		}
+  }
+  
+  protected def lookupPropertyOnTypeFuzzy(sourceExpression : OclExpression, element : AttributableEObject,
+                                          identifier : String, static : Boolean) : Box[List[Property]] = {
+    (element->isMultipleNavigationCall).flatMap{isMultipleNavigationCall =>
+	    val sourceType = sourceExpression.getType
+	    if ((isMultipleNavigationCall && sourceType.isInstanceOf[CollectionType]) || (!isMultipleNavigationCall && !sourceType.isInstanceOf[CollectionType]))
+	      Full(lookupPropertyOnTypeFuzzy(sourceType, identifier, static))
+	    else if (isMultipleNavigationCall) // implicit asSet
+       	Full(lookupPropertyOnTypeFuzzy(sourceExpression.withAsSet.getType, identifier, static))
+	    else // implicit collect
+	      Full(lookupPropertyOnTypeFuzzy(sourceType.asInstanceOf[CollectionType].getElementType, identifier, static))
+    }
   }
   
   protected def lookupPropertyOnTypeFuzzy(t : Type, name : String, static : Boolean) : List[Property] = {
