@@ -1,0 +1,11 @@
+FORM "Demo Form"
+  GROUP "Personal Information"
+    ITEM "name" "Enter your Name here:" : FREETEXT
+    ITEM "titles" "Selct your titles here:" : 
+      CHOICE multiple ( "Dr. Ing.", "Dr. rer. nat.", "Prof.", "habil.")
+    ITEM "age" "Enter your age here:" : NUMBER
+    ITEM "birthday" "Enter your date of birth here" : DATE
+    ITEM "gender" "Select your gender here:" : CHOICE ( "male", "female" )
+  GROUP "Spam"
+    ITEM "wantsSpam" "Are you interested in SPAM mails? :" :
+      DECISION ( "yes", "no" )
