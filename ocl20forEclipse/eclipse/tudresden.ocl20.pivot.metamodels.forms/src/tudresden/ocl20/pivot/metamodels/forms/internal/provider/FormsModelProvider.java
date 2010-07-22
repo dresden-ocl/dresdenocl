@@ -100,6 +100,28 @@ public class FormsModelProvider extends AbstractModelProvider implements
 		return result;
 	}
 
+	@Override
+	public IModel getModel(org.eclipse.emf.ecore.resource.Resource resource) {
+		IModel result;
+
+		/* Probably log the entry into this method. */
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("getModel(modelURL=" + resource + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
+		}
+		// no else.
+
+		result = new FormsModel(resource, ModelBusPlugin.getMetamodelRegistry()
+				.getMetamodel(FormsMetaModelPlugin.ID));
+
+		/* Probably log the exit from this method. */
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("getModel() - exit - return value=" + result); //$NON-NLS-1$
+		}
+		// no else.
+
+		return result;
+	};
+
 	/**
 	 * <p>
 	 * A helper method that lazily creates a resource set.

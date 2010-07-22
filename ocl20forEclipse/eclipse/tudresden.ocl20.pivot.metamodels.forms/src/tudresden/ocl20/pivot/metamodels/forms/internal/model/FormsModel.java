@@ -21,6 +21,7 @@ package tudresden.ocl20.pivot.metamodels.forms.internal.model;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.emftext.language.forms.Form;
 import org.emftext.language.forms.resource.forms.mopp.FormsResource;
 
@@ -44,7 +45,7 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
 public class FormsModel extends AbstractModel implements IModel {
 
 	/** The {@link FormsResource} containing the corresponding Forms model. */
-	private FormsResource resource;
+	private Resource resource;
 
 	/** The adapter for the top package of the associated Forms model. */
 	private Namespace rootNamespace;
@@ -60,7 +61,7 @@ public class FormsModel extends AbstractModel implements IModel {
 	 * @param metamodel
 	 *            The {@link IMetamodel} of the {@link FormsModel}.
 	 */
-	public FormsModel(FormsResource resource, IMetamodel metamodel) {
+	public FormsModel(Resource resource, IMetamodel metamodel) {
 
 		super(resource.getURI().toString(), metamodel);
 
