@@ -26,14 +26,14 @@ trait OclParseTreeToEssentialOcl { selfType : OclStaticSemantics =>
   protected val computeConstraints = __computeConstraints
   protected def __computeConstraints : Attributable ==> Box[List[Constraint]] = {
     attr {
-      case unknown : AttributableEObject => yieldFailure("Cannot compute constraints for " + unknown, unknown.getEObject)
+      case unknown : AttributableEObject => yieldFailure("Cannot compute constraints for " + unknown, unknown)
     }
   }
   
   protected val computeConstraint : Attributable ==> Box[Constraint] = {
     attr {
       case i@InvariantExpCS(name, oclExpression) => {
-	      computeBooleanConstraint(i, name, oclExpression, ConstraintKind.INVARIANT)
+      	computeBooleanConstraint(i, name, oclExpression, ConstraintKind.INVARIANT)
       }
       
       case d@DefinitionExpCS(definitionExpPart, static) => {
@@ -42,7 +42,7 @@ trait OclParseTreeToEssentialOcl { selfType : OclStaticSemantics =>
           yield {
 	          feature.setStatic(static)
 	          val expression = factory.createExpressionInOcl(
-		        	init.toString, init, self, null)
+		        	printOclExpression(d), init, self, null)
 		        val constraint = factory.createConstraint(
 		        	"", ConstraintKind.DEFINITION, expression, feature, self.getType)
 		        constraint
@@ -68,7 +68,7 @@ trait OclParseTreeToEssentialOcl { selfType : OclStaticSemantics =>
 		            val result = factory.createVariable(operation.getReturnParameter)
 		            val parameters = operation.getInputParameter.map(p => factory.createVariable(p)).toArray
 		        		val expression = factory.createExpressionInOcl(
-				        	oclExpression.toString, oclExpressionEOcl, self, result, parameters : _*)
+				        	printOclExpression(b), oclExpressionEOcl, self, result, parameters : _*)
 				        var constraintName : String = ""
 				        if (name != null)
 				          constraintName = name.getSimpleName
@@ -90,7 +90,7 @@ trait OclParseTreeToEssentialOcl { selfType : OclStaticSemantics =>
 	              yieldFailure("Expected type " + property.getType.getName + ", but found " + oclExpressionEOcl.getType.getName, oclExpression)
 	            else {
 		        		val expression = factory.createExpressionInOcl(
-				        	oclExpression.toString, oclExpressionEOcl, self, null)
+				        	printOclExpression(i), oclExpressionEOcl, self, null)
 				        val constraint = factory.createConstraint(
 				        	"", i match {
 				        	  case _ : InitValueCS => ConstraintKind.INITIAL
@@ -117,7 +117,7 @@ trait OclParseTreeToEssentialOcl { selfType : OclStaticSemantics =>
       for(self <- element->self;
       		context <- element->context) yield {
       	val expression = factory.createExpressionInOcl(
-        	oclExpression.toString, oclExpressionEOcl, self, null)
+        	printOclExpression(element), oclExpressionEOcl, self, null)
         var constraintName : String = ""
         if (name != null)
           constraintName = name.getSimpleName

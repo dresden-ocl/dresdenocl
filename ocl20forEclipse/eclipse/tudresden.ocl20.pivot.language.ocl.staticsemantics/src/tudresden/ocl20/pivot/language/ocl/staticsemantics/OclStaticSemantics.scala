@@ -100,6 +100,15 @@ trait OclStaticSemantics extends ocl.semantics.OclAttributeMaker
     Failure(message)
   }
   
+  protected def yieldFailure(exception : Exception, element : EObject) = {
+    val eObject = element match {
+      case a : AttributableEObject => a.getEObject
+      case eObject => eObject
+    }
+    iResource.addError(exception.getMessage, eObject)
+    Failure(exception.getMessage, Full(exception), Empty)
+  }
+  
   /**
    * Adds a warning to the resource.
    */
@@ -109,6 +118,19 @@ trait OclStaticSemantics extends ocl.semantics.OclAttributeMaker
       case eObject => eObject
     }
     iResource.addWarning(message, eObject)
+  }
+  
+  protected def printOclExpression(expression : EObject) = {
+    // FIXME: this is a hack, so that OclExpressions can be printed in pure OCL
+    resource match {
+      case or : OclResource => {
+        val baos = new java.io.ByteArrayOutputStream
+        val printer = or.getMetaInformation.createPrinter(baos, or)
+        printer.print(expression)
+        baos.toString
+      }
+      case _ => "" // do nothing
+    }
   }
   
   protected def determineTypeOf(oclExpression : OclExpression) = {

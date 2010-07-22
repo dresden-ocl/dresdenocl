@@ -52,7 +52,7 @@ public class OclStaticSemanticsPostProcessor implements
 	}
 
 	private void printExpression(ExpressionInOcl specification) {
-		printBodyExpression(specification.getBodyExpression());
+		System.out.println(specification.getBody());
 	}
 
 	private void printBodyExpression(OclExpression bodyExpression) {

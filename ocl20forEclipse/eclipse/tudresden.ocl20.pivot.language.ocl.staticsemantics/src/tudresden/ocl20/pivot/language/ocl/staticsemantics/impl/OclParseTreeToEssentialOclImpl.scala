@@ -27,19 +27,31 @@ trait OclParseTreeToEssentialOclImpl extends OclParseTreeToEssentialOcl {selfTyp
     attr {
       case p@PackageDeclarationCS(contexts) => {
         Full(contexts.flatMap{c =>
-          c->computeConstraints
+          try {
+          	c->computeConstraints
+          } catch {
+            case e : Exception => yieldFailure(e, c)
+          }
         }.flatten(i => i))
       }
       
       case c@ClassifierContextDeclarationCS(_, invAndDefs) => {
         Full(invAndDefs.flatMap{iad =>
-          computeConstraint(iad)
+          try {
+            computeConstraint(iad)
+          } catch {
+            case e : Exception => yieldFailure(e, iad)
+          }
         })
       }
       
       case o@OperationContextDeclarationCS(_, prePostOrBodyDecls) => {
         Full(prePostOrBodyDecls.flatMap{ppb =>
-          computeConstraint(ppb)
+          try {
+          	computeConstraint(ppb)
+          } catch {
+            case e : Exception => yieldFailure(e, ppb)
+          }
         })
       }
       
@@ -56,7 +68,11 @@ trait OclParseTreeToEssentialOclImpl extends OclParseTreeToEssentialOcl {selfTyp
           Full(List())
         }.flatMap{_ =>
 	        Full(initOrDeriveValues.flatMap{idv =>
-	          computeConstraint(idv)
+	          try {
+	          	computeConstraint(idv)
+	          } catch {
+	            case e : Exception => yieldFailure(e, idv)
+	          }
 	        })
         }
       }
