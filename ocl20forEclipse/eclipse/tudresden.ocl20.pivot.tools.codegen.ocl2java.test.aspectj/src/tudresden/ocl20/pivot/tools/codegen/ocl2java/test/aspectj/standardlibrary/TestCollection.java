@@ -24,6 +24,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -249,14 +250,18 @@ public class TestCollection {
 		oclSet.add(containedSet01);
 		oclSet.add(containedSet02);
 
-		List<Object> expectedCollection;
-		expectedCollection = new ArrayList<Object>();
-		expectedCollection.add(1);
-		expectedCollection.add(2);
-		expectedCollection.add(1);
-		expectedCollection.add(3);
+		Collection<?> flattenedCollection;
+		flattenedCollection = class1.testCollectionFlatten(oclSet);
 
-		assertEquals(expectedCollection, class1.testCollectionFlatten(oclSet));
+		int countOfOne = 0;
+		for (Object elem : flattenedCollection) {
+			if (elem.equals(1)) countOfOne++;
+		}
+		// end for.
+		
+		assertEquals(2, countOfOne);
+		assertTrue(flattenedCollection.contains(2));
+		assertTrue(flattenedCollection.contains(3));
 	}
 
 	/**

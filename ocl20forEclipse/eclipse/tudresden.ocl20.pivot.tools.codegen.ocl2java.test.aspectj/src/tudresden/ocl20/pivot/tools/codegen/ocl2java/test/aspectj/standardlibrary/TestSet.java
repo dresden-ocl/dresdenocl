@@ -433,14 +433,18 @@ public class TestSet {
 		bag01 = new ArrayList<Object>();
 		bag01.add(1);
 		bag01.add(3);
+		
+		List<?> unitedCollection;
+		unitedCollection = class1.testSetUnion02(set01, bag01);
 
-		List<Object> bag02;
-		bag02 = new ArrayList<Object>();
-		bag02.add(1);
-		bag02.add(2);
-		bag02.add(1);
-		bag02.add(3);
-
-		assertEquals(bag02, class1.testSetUnion02(set01, bag01));
+		int countOfOne = 0;
+		for (Object elem : unitedCollection) {
+			if (elem.equals(1)) countOfOne++;
+		}
+		// end for.
+		
+		assertEquals(2, countOfOne);
+		assertTrue(unitedCollection.contains(2));
+		assertTrue(unitedCollection.contains(3));
 	}
 }

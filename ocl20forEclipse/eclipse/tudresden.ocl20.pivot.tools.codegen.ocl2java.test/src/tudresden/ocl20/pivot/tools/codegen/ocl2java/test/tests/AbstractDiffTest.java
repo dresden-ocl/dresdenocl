@@ -24,18 +24,18 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import java.io.File;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.Platform;
 import org.osgi.framework.Bundle;
 
 import tudresden.ocl20.pivot.facade.Ocl2ForEclipseFacade;
 import tudresden.ocl20.pivot.model.IModel;
 import tudresden.ocl20.pivot.model.ModelAccessException;
-import tudresden.ocl20.pivot.parser.ParseException;
 import tudresden.ocl20.pivot.pivotmodel.Constraint;
-import tudresden.ocl20.pivot.tools.codegen.exception.Ocl2CodeException;
 import tudresden.ocl20.pivot.tools.codegen.ocl2java.IOcl2JavaSettings;
 import tudresden.ocl20.pivot.tools.codegen.ocl2java.test.Ocl2CodeTestPlugin;
 
@@ -60,11 +60,9 @@ public abstract class AbstractDiffTest {
 	 * Initializes the test cases.
 	 * </p>
 	 * 
-	 * @throws ModelAccessException
-	 * @throws IllegalArgumentException
+	 * @throws Exception
 	 */
-	protected static void setUp() throws IllegalArgumentException,
-			ModelAccessException {
+	protected static void setUp() throws Exception {
 
 		File modelFile;
 		modelFile = AbstractDiffTest.getFile(MODEL_NAME);
@@ -96,23 +94,21 @@ public abstract class AbstractDiffTest {
 	 * @param path
 	 *            The path of the resource.
 	 * @return The found {@link File} object.
+	 * @throws Exception Thrown, if the opening fails.
 	 */
-	private static File getFile(String path) {
+	private static File getFile(String path) throws Exception {
 
-		String filePath;
-		filePath = Ocl2CodeTestPlugin.getDefault().getBundle().getLocation();
-		/* Remove 'reference:file:/' */
-		filePath = filePath.substring(16);
+		URL fileLocation;
+		fileLocation = Ocl2CodeTestPlugin.getDefault().getBundle().getResource(
+				path);
+		fileLocation = FileLocator.resolve(fileLocation);
 
-		filePath += Ocl2CodeTestPlugin.getDefault().getBundle().getResource(
-				path).getPath().substring(1);
+		File file;
+		file = new File(fileLocation.getFile());
 
-		File constraintFile;
-		constraintFile = new File(filePath);
+		assertTrue(file.exists());
 
-		assertTrue(constraintFile.exists());
-
-		return constraintFile;
+		return file;
 	}
 
 	/**
@@ -125,13 +121,10 @@ public abstract class AbstractDiffTest {
 	 *            the directory of the file relative to <code>resources/</code>
 	 * @param fileName
 	 *            The name of the file that shall be checked.
-	 * @throws ParseException
-	 * @throws ModelAccessException
-	 * @throws Ocl22CodeException
+	 * @throws Exception
 	 */
 	protected void compareFragmentCodeGeneration(String directory,
-			String fileName) throws ParseException, ModelAccessException,
-			Ocl2CodeException {
+			String fileName) throws Exception {
 
 		/* Parse the constraint. */
 		File constraintFile;
@@ -167,13 +160,10 @@ public abstract class AbstractDiffTest {
 	 *            the directory of the file relative to <code>resources/</code>
 	 * @param fileName
 	 *            The name of the file that shall be checked.
-	 * @throws ParseException
-	 * @throws ModelAccessException
-	 * @throws Ocl22CodeException
+	 * @throws Exception
 	 */
 	protected void compareInstrumentationCodeGeneration(String directory,
-			String fileName) throws ParseException, ModelAccessException,
-			Ocl2CodeException {
+			String fileName) throws Exception {
 
 		/* Parse the constraint. */
 		File constraintFile;
@@ -215,13 +205,10 @@ public abstract class AbstractDiffTest {
 	 *            <code>resources/</code> and the names of the files for that
 	 *            code shall be generated as a {@link List} containing
 	 *            {@link String} arrays.
-	 * @throws ParseException
-	 * @throws ModelAccessException
-	 * @throws Ocl22CodeException
+	 * @throws Exception
 	 */
 	protected void createInstrumentationCode(String targetBundleId,
-			List<String[]> fileNames) throws ParseException,
-			ModelAccessException, Ocl2CodeException {
+			List<String[]> fileNames) throws Exception {
 
 		/* Get the bundle location for the model files. */
 		String sourceDirectory;

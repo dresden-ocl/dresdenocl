@@ -24,10 +24,8 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import tudresden.ocl20.pivot.model.ModelAccessException;
-import tudresden.ocl20.pivot.parser.ParseException;
 import tudresden.ocl20.pivot.pivotmodel.Constraint;
 import tudresden.ocl20.pivot.pivotmodel.ConstraintKind;
-import tudresden.ocl20.pivot.tools.codegen.exception.Ocl2CodeException;
 import tudresden.ocl20.pivot.tools.codegen.ocl2java.test.tests.AbstractDiffTest;
 
 /**
@@ -45,12 +43,10 @@ public class TestPost extends AbstractDiffTest {
 	 * Initializes the test cases.
 	 * </p>
 	 * 
-	 * @throws ModelAccessException
-	 * @throws IllegalArgumentException
+	 * @throws Exception
 	 */
 	@BeforeClass
-	public static void setUp() throws IllegalArgumentException,
-			ModelAccessException {
+	public static void setUp() throws Exception {
 
 		AbstractDiffTest.setUp();
 	}
@@ -75,14 +71,10 @@ public class TestPost extends AbstractDiffTest {
 	 * Tests the instrumentation of the constraint.
 	 * </p>
 	 * 
-	 * @throws ModelAccessException
-	 * @throws ParseException
-	 * @throws IllegalArgumentException
-	 * @throws Ocl22CodeException
+	 * @throws Exception
 	 */
 	@Test
-	public void testPost01() throws IllegalArgumentException, ParseException,
-			ModelAccessException, Ocl2CodeException {
+	public void testPost01() throws Exception {
 
 		this.compareInstrumentationCodeGeneration("constraintkindtest/post",
 				"post01");
@@ -93,14 +85,10 @@ public class TestPost extends AbstractDiffTest {
 	 * Tests the instrumentation of the constraint.
 	 * </p>
 	 * 
-	 * @throws ModelAccessException
-	 * @throws ParseException
-	 * @throws IllegalArgumentException
-	 * @throws Ocl22CodeException
+	 * @throws Exception
 	 */
 	@Test
-	public void testPost02() throws IllegalArgumentException, ParseException,
-			ModelAccessException, Ocl2CodeException {
+	public void testPost02() throws Exception {
 	
 		this.compareInstrumentationCodeGeneration("constraintkindtest/post",
 				"post02");

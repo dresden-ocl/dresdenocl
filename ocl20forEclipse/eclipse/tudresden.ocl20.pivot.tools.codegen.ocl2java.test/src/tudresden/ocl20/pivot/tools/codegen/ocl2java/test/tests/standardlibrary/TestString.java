@@ -24,8 +24,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import tudresden.ocl20.pivot.model.ModelAccessException;
-import tudresden.ocl20.pivot.parser.ParseException;
-import tudresden.ocl20.pivot.tools.codegen.exception.Ocl2CodeException;
 import tudresden.ocl20.pivot.tools.codegen.ocl2java.test.tests.AbstractDiffTest;
 
 /**
@@ -43,12 +41,10 @@ public class TestString extends AbstractDiffTest {
 	 * Initializes the test cases.
 	 * </p>
 	 * 
-	 * @throws ModelAccessException
-	 * @throws IllegalArgumentException
+	 * @throws Exception
 	 */
 	@BeforeClass
-	public static void setUp() throws IllegalArgumentException,
-			ModelAccessException {
+	public static void setUp() throws Exception {
 
 		AbstractDiffTest.setUp();
 	}
@@ -73,14 +69,10 @@ public class TestString extends AbstractDiffTest {
 	 * Tests the instrumentation of the constraint.
 	 * </p>
 	 * 
-	 * @throws ModelAccessException
-	 * @throws ParseException
-	 * @throws IllegalArgumentException
-	 * @throws Ocl2CodeException
+	 * @throws Exception
 	 */
 	@Test
-	public void testAt01() throws IllegalArgumentException, ParseException,
-			ModelAccessException, Ocl2CodeException {
+	public void testAt01() throws Exception {
 
 		this.compareFragmentCodeGeneration("sltest/string", "at01");
 	}
@@ -90,14 +82,10 @@ public class TestString extends AbstractDiffTest {
 	 * Tests the instrumentation of the constraint.
 	 * </p>
 	 * 
-	 * @throws ModelAccessException
-	 * @throws ParseException
-	 * @throws IllegalArgumentException
-	 * @throws Ocl2CodeException
+	 * @throws Exception
 	 */
 	@Test
-	public void testCharacters01() throws IllegalArgumentException,
-			ParseException, ModelAccessException, Ocl2CodeException {
+	public void testCharacters01() throws Exception {
 
 		this.compareFragmentCodeGeneration("sltest/string", "characters01");
 	}
@@ -111,7 +99,7 @@ public class TestString extends AbstractDiffTest {
 	 */
 	@Test
 	public void testConcat01() throws Exception {
-	
+
 		this.compareFragmentCodeGeneration("sltest/string", "concat01");
 	}
 
@@ -120,14 +108,10 @@ public class TestString extends AbstractDiffTest {
 	 * Tests the instrumentation of the constraint.
 	 * </p>
 	 * 
-	 * @throws ModelAccessException
-	 * @throws ParseException
-	 * @throws IllegalArgumentException
-	 * @throws Ocl2CodeException
+	 * @throws Exception
 	 */
 	@Test
-	public void testEqualsIgnoreCase01() throws IllegalArgumentException,
-			ParseException, ModelAccessException, Ocl2CodeException {
+	public void testEqualsIgnoreCase01() throws Exception {
 
 		this.compareFragmentCodeGeneration("sltest/string",
 				"equalsIgnoreCase01");
@@ -138,14 +122,10 @@ public class TestString extends AbstractDiffTest {
 	 * Tests the instrumentation of the constraint.
 	 * </p>
 	 * 
-	 * @throws ModelAccessException
-	 * @throws ParseException
-	 * @throws IllegalArgumentException
-	 * @throws Ocl2CodeException
+	 * @throws Exception
 	 */
 	@Test
-	public void testIndexOf01() throws IllegalArgumentException,
-			ParseException, ModelAccessException, Ocl2CodeException {
+	public void testIndexOf01() throws Exception {
 
 		this.compareFragmentCodeGeneration("sltest/string", "indexOf01");
 	}
@@ -155,14 +135,10 @@ public class TestString extends AbstractDiffTest {
 	 * Tests the instrumentation of the constraint.
 	 * </p>
 	 * 
-	 * @throws ModelAccessException
-	 * @throws ParseException
-	 * @throws IllegalArgumentException
-	 * @throws Ocl2CodeException
+	 * @throws Exception
 	 */
 	@Test
-	public void testPlus01() throws IllegalArgumentException, ParseException,
-			ModelAccessException, Ocl2CodeException {
+	public void testPlus01() throws Exception {
 
 		this.compareFragmentCodeGeneration("sltest/string", "plus01");
 	}
@@ -176,7 +152,7 @@ public class TestString extends AbstractDiffTest {
 	 */
 	@Test
 	public void testSize01() throws Exception {
-	
+
 		this.compareFragmentCodeGeneration("sltest/string", "size01");
 	}
 
@@ -189,7 +165,7 @@ public class TestString extends AbstractDiffTest {
 	 */
 	@Test
 	public void testSubstring01() throws Exception {
-	
+
 		this.compareFragmentCodeGeneration("sltest/string", "substring01");
 	}
 
@@ -198,14 +174,10 @@ public class TestString extends AbstractDiffTest {
 	 * Tests the instrumentation of the constraint.
 	 * </p>
 	 * 
-	 * @throws ModelAccessException
-	 * @throws ParseException
-	 * @throws IllegalArgumentException
-	 * @throws Ocl2CodeException
+	 * @throws Exception
 	 */
 	@Test
-	public void testToBoolean01() throws IllegalArgumentException,
-			ParseException, ModelAccessException, Ocl2CodeException {
+	public void testToBoolean01() throws Exception {
 
 		this.compareFragmentCodeGeneration("sltest/string", "toBoolean01");
 	}
@@ -219,7 +191,7 @@ public class TestString extends AbstractDiffTest {
 	 */
 	@Test
 	public void testToInteger01() throws Exception {
-	
+
 		this.compareFragmentCodeGeneration("sltest/string", "toInteger01");
 	}
 
@@ -228,14 +200,10 @@ public class TestString extends AbstractDiffTest {
 	 * Tests the instrumentation of the constraint.
 	 * </p>
 	 * 
-	 * @throws ModelAccessException
-	 * @throws ParseException
-	 * @throws IllegalArgumentException
-	 * @throws Ocl2CodeException
+	 * @throws Exception
 	 */
 	@Test
-	public void testToLowerCase01() throws IllegalArgumentException,
-			ParseException, ModelAccessException, Ocl2CodeException {
+	public void testToLowerCase01() throws Exception {
 
 		this.compareFragmentCodeGeneration("sltest/string", "toLowerCase01");
 	}
@@ -249,7 +217,7 @@ public class TestString extends AbstractDiffTest {
 	 */
 	@Test
 	public void testToReal01() throws Exception {
-	
+
 		this.compareFragmentCodeGeneration("sltest/string", "toReal01");
 	}
 
@@ -258,14 +226,10 @@ public class TestString extends AbstractDiffTest {
 	 * Tests the instrumentation of the constraint.
 	 * </p>
 	 * 
-	 * @throws ModelAccessException
-	 * @throws ParseException
-	 * @throws IllegalArgumentException
-	 * @throws Ocl2CodeException
+	 * @throws Exception
 	 */
 	@Test
-	public void testToUpperCase01() throws IllegalArgumentException,
-			ParseException, ModelAccessException, Ocl2CodeException {
+	public void testToUpperCase01() throws Exception {
 
 		this.compareFragmentCodeGeneration("sltest/string", "toUpperCase01");
 	}

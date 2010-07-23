@@ -227,14 +227,18 @@ public class TestBag {
 		bag01.add(containedSet01);
 		bag01.add(containedSet02);
 
-		List<Object> expectedBag;
-		expectedBag = new ArrayList<Object>();
-		expectedBag.add(1);
-		expectedBag.add(2);
-		expectedBag.add(1);
-		expectedBag.add(3);
+		List<?> flattenedBag;
+		flattenedBag = class1.testBagFlatten(bag01);
 
-		assertEquals(expectedBag, class1.testBagFlatten(bag01));
+		int countOfOne = 0;
+		for (Object elem : flattenedBag) {
+			if (elem.equals(1)) countOfOne++;
+		}
+		// end for.
+		
+		assertEquals(2, countOfOne);
+		assertTrue(flattenedBag.contains(2));
+		assertTrue(flattenedBag.contains(3));
 	}
 
 	/**

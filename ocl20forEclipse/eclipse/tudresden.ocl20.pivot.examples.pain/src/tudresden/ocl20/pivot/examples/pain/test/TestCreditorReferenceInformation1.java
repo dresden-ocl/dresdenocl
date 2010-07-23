@@ -43,12 +43,10 @@ public class TestCreditorReferenceInformation1 extends AbstractPainTest {
 	 * Initializes the test cases.
 	 * </p>
 	 * 
-	 * @throws ModelAccessException
-	 * @throws IllegalArgumentException
+	 * @throws Exception
 	 */
 	@BeforeClass
-	public static void setUp() throws IllegalArgumentException,
-			ModelAccessException {
+	public static void setUp() throws Exception {
 
 		AbstractPainTest.setUp();
 	}

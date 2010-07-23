@@ -24,8 +24,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import tudresden.ocl20.pivot.model.ModelAccessException;
-import tudresden.ocl20.pivot.parser.ParseException;
-import tudresden.ocl20.pivot.tools.codegen.exception.Ocl2CodeException;
 import tudresden.ocl20.pivot.tools.codegen.ocl2java.test.tests.AbstractDiffTest;
 
 /**
@@ -43,12 +41,10 @@ public class TestCollection extends AbstractDiffTest {
 	 * Initializes the test cases.
 	 * </p>
 	 * 
-	 * @throws ModelAccessException
-	 * @throws IllegalArgumentException
+	 * @throws Exception
 	 */
 	@BeforeClass
-	public static void setUp() throws IllegalArgumentException,
-			ModelAccessException {
+	public static void setUp() throws Exception {
 
 		AbstractDiffTest.setUp();
 	}
@@ -73,14 +69,10 @@ public class TestCollection extends AbstractDiffTest {
 	 * Tests the instrumentation of the constraint.
 	 * </p>
 	 * 
-	 * @throws ModelAccessException
-	 * @throws ParseException
-	 * @throws IllegalArgumentException
-	 * @throws Ocl2CodeException
+	 * @throws Exception
 	 */
 	@Test
-	public void testAsBag01() throws IllegalArgumentException, ParseException,
-			ModelAccessException, Ocl2CodeException {
+	public void testAsBag01() throws Exception {
 
 		this.compareFragmentCodeGeneration("sltest/collection", "asBag01");
 	}
@@ -90,14 +82,10 @@ public class TestCollection extends AbstractDiffTest {
 	 * Tests the instrumentation of the constraint.
 	 * </p>
 	 * 
-	 * @throws ModelAccessException
-	 * @throws ParseException
-	 * @throws IllegalArgumentException
-	 * @throws Ocl2CodeException
+	 * @throws Exception
 	 */
 	@Test
-	public void testAsOrderedSet01() throws IllegalArgumentException,
-			ParseException, ModelAccessException, Ocl2CodeException {
+	public void testAsOrderedSet01() throws Exception {
 
 		this.compareFragmentCodeGeneration("sltest/collection",
 				"asOrderedSet01");
@@ -108,14 +96,10 @@ public class TestCollection extends AbstractDiffTest {
 	 * Tests the instrumentation of the constraint.
 	 * </p>
 	 * 
-	 * @throws ModelAccessException
-	 * @throws ParseException
-	 * @throws IllegalArgumentException
-	 * @throws Ocl2CodeException
+	 * @throws eException
 	 */
 	@Test
-	public void testAsSequence01() throws IllegalArgumentException,
-			ParseException, ModelAccessException, Ocl2CodeException {
+	public void testAsSequence01() throws Exception {
 
 		this.compareFragmentCodeGeneration("sltest/collection", "asSequence01");
 	}
@@ -125,14 +109,10 @@ public class TestCollection extends AbstractDiffTest {
 	 * Tests the instrumentation of the constraint.
 	 * </p>
 	 * 
-	 * @throws ModelAccessException
-	 * @throws ParseException
-	 * @throws IllegalArgumentException
-	 * @throws Ocl2CodeException
+	 * @throws EException
 	 */
 	@Test
-	public void testAsSet01() throws IllegalArgumentException, ParseException,
-			ModelAccessException, Ocl2CodeException {
+	public void testAsSet01() throws Exception {
 
 		this.compareFragmentCodeGeneration("sltest/collection", "asSet01");
 	}
@@ -142,14 +122,10 @@ public class TestCollection extends AbstractDiffTest {
 	 * Tests the instrumentation of the constraint.
 	 * </p>
 	 * 
-	 * @throws ModelAccessException
-	 * @throws ParseException
-	 * @throws IllegalArgumentException
-	 * @throws Ocl2CodeException
+	 * @throws Exception
 	 */
 	@Test
-	public void testCount01() throws IllegalArgumentException, ParseException,
-			ModelAccessException, Ocl2CodeException {
+	public void testCount01() throws Exception {
 
 		this.compareFragmentCodeGeneration("sltest/collection", "count01");
 	}
@@ -159,14 +135,10 @@ public class TestCollection extends AbstractDiffTest {
 	 * Tests the instrumentation of the constraint.
 	 * </p>
 	 * 
-	 * @throws ModelAccessException
-	 * @throws ParseException
-	 * @throws IllegalArgumentException
-	 * @throws Ocl2CodeException
+	 * @throws Exception
 	 */
 	@Test
-	public void testEquals01() throws IllegalArgumentException, ParseException,
-			ModelAccessException, Ocl2CodeException {
+	public void testEquals01() throws Exception {
 
 		this.compareFragmentCodeGeneration("sltest/collection", "equals01");
 	}
@@ -176,14 +148,10 @@ public class TestCollection extends AbstractDiffTest {
 	 * Tests the instrumentation of the constraint.
 	 * </p>
 	 * 
-	 * @throws ModelAccessException
-	 * @throws ParseException
-	 * @throws IllegalArgumentException
-	 * @throws Ocl2CodeException
+	 * @throws Exception
 	 */
 	@Test
-	public void testExcludes01() throws IllegalArgumentException,
-			ParseException, ModelAccessException, Ocl2CodeException {
+	public void testExcludes01() throws Exception {
 
 		this.compareFragmentCodeGeneration("sltest/collection", "excludes01");
 	}
@@ -193,18 +161,12 @@ public class TestCollection extends AbstractDiffTest {
 	 * Tests the instrumentation of the constraint.
 	 * </p>
 	 * 
-	 * @throws ModelAccessException
-	 * @throws ParseException
-	 * @throws IllegalArgumentException
-	 * @throws Ocl2CodeException
+	 * @throws Exception
 	 */
 	@Test
-	public void testExcludesAll01() throws IllegalArgumentException,
-			ParseException, ModelAccessException, Ocl2CodeException {
+	public void testExcludesAll01() throws Exception {
 
-		this
-				.compareFragmentCodeGeneration("sltest/collection",
-						"excludesAll01");
+		this.compareFragmentCodeGeneration("sltest/collection", "excludesAll01");
 	}
 
 	/**
@@ -212,15 +174,11 @@ public class TestCollection extends AbstractDiffTest {
 	 * Tests the instrumentation of the constraint.
 	 * </p>
 	 * 
-	 * @throws ModelAccessException
-	 * @throws ParseException
-	 * @throws IllegalArgumentException
-	 * @throws Ocl2CodeException
+	 * @throws Exception
 	 */
 	@Test
-	public void testFlatten01() throws IllegalArgumentException, ParseException,
-			ModelAccessException, Ocl2CodeException {
-	
+	public void testFlatten01() throws Exception {
+
 		this.compareFragmentCodeGeneration("sltest/collection", "flatten01");
 	}
 
@@ -229,18 +187,12 @@ public class TestCollection extends AbstractDiffTest {
 	 * Tests the instrumentation of the constraint.
 	 * </p>
 	 * 
-	 * @throws ModelAccessException
-	 * @throws ParseException
-	 * @throws IllegalArgumentException
-	 * @throws Ocl2CodeException
+	 * @throws Exception
 	 */
 	@Test
-	public void testIncludesAll01() throws IllegalArgumentException,
-			ParseException, ModelAccessException, Ocl2CodeException {
+	public void testIncludesAll01() throws Exception {
 
-		this
-				.compareFragmentCodeGeneration("sltest/collection",
-						"includesAll01");
+		this.compareFragmentCodeGeneration("sltest/collection", "includesAll01");
 	}
 
 	/**
@@ -248,14 +200,10 @@ public class TestCollection extends AbstractDiffTest {
 	 * Tests the instrumentation of the constraint.
 	 * </p>
 	 * 
-	 * @throws ModelAccessException
-	 * @throws ParseException
-	 * @throws IllegalArgumentException
-	 * @throws Ocl2CodeException
+	 * @throws Exception
 	 */
 	@Test
-	public void testIncludes01() throws IllegalArgumentException,
-			ParseException, ModelAccessException, Ocl2CodeException {
+	public void testIncludes01() throws Exception {
 
 		this.compareFragmentCodeGeneration("sltest/collection", "includes01");
 	}
@@ -265,14 +213,10 @@ public class TestCollection extends AbstractDiffTest {
 	 * Tests the instrumentation of the constraint.
 	 * </p>
 	 * 
-	 * @throws ModelAccessException
-	 * @throws ParseException
-	 * @throws IllegalArgumentException
-	 * @throws Ocl2CodeException
+	 * @throws Exception
 	 */
 	@Test
-	public void testIsEmpty01() throws IllegalArgumentException,
-			ParseException, ModelAccessException, Ocl2CodeException {
+	public void testIsEmpty01() throws Exception {
 
 		this.compareFragmentCodeGeneration("sltest/collection", "isEmpty01");
 	}
@@ -282,14 +226,10 @@ public class TestCollection extends AbstractDiffTest {
 	 * Tests the instrumentation of the constraint.
 	 * </p>
 	 * 
-	 * @throws ModelAccessException
-	 * @throws ParseException
-	 * @throws IllegalArgumentException
-	 * @throws Ocl2CodeException
+	 * @throws Exception
 	 */
 	@Test
-	public void testMax01() throws IllegalArgumentException, ParseException,
-			ModelAccessException, Ocl2CodeException {
+	public void testMax01() throws Exception {
 
 		this.compareFragmentCodeGeneration("sltest/collection", "max01");
 	}
@@ -299,14 +239,10 @@ public class TestCollection extends AbstractDiffTest {
 	 * Tests the instrumentation of the constraint.
 	 * </p>
 	 * 
-	 * @throws ModelAccessException
-	 * @throws ParseException
-	 * @throws IllegalArgumentException
-	 * @throws Ocl2CodeException
+	 * @throws Exception
 	 */
 	@Test
-	public void testMin01() throws IllegalArgumentException, ParseException,
-			ModelAccessException, Ocl2CodeException {
+	public void testMin01() throws Exception {
 
 		this.compareFragmentCodeGeneration("sltest/collection", "min01");
 	}
@@ -316,14 +252,10 @@ public class TestCollection extends AbstractDiffTest {
 	 * Tests the instrumentation of the constraint.
 	 * </p>
 	 * 
-	 * @throws ModelAccessException
-	 * @throws ParseException
-	 * @throws IllegalArgumentException
-	 * @throws Ocl2CodeException
+	 * @throws Exception
 	 */
 	@Test
-	public void testNotEmpty01() throws IllegalArgumentException,
-			ParseException, ModelAccessException, Ocl2CodeException {
+	public void testNotEmpty01() throws Exception {
 
 		this.compareFragmentCodeGeneration("sltest/collection", "notEmpty01");
 	}
@@ -333,14 +265,10 @@ public class TestCollection extends AbstractDiffTest {
 	 * Tests the instrumentation of the constraint.
 	 * </p>
 	 * 
-	 * @throws ModelAccessException
-	 * @throws ParseException
-	 * @throws IllegalArgumentException
-	 * @throws Ocl2CodeException
+	 * @throws Exception
 	 */
 	@Test
-	public void testNotEquals01() throws IllegalArgumentException,
-			ParseException, ModelAccessException, Ocl2CodeException {
+	public void testNotEquals01() throws Exception {
 
 		this.compareFragmentCodeGeneration("sltest/collection", "notEquals01");
 	}
@@ -350,14 +278,10 @@ public class TestCollection extends AbstractDiffTest {
 	 * Tests the instrumentation of the constraint.
 	 * </p>
 	 * 
-	 * @throws ModelAccessException
-	 * @throws ParseException
-	 * @throws IllegalArgumentException
-	 * @throws Ocl2CodeException
+	 * @throws Exception
 	 */
 	@Test
-	public void testProduct01() throws IllegalArgumentException,
-			ParseException, ModelAccessException, Ocl2CodeException {
+	public void testProduct01() throws Exception {
 
 		this.compareFragmentCodeGeneration("sltest/collection", "product01");
 	}
@@ -367,14 +291,10 @@ public class TestCollection extends AbstractDiffTest {
 	 * Tests the instrumentation of the constraint.
 	 * </p>
 	 * 
-	 * @throws ModelAccessException
-	 * @throws ParseException
-	 * @throws IllegalArgumentException
-	 * @throws Ocl2CodeException
+	 * @throws Exception
 	 */
 	@Test
-	public void testSize01() throws IllegalArgumentException, ParseException,
-			ModelAccessException, Ocl2CodeException {
+	public void testSize01() throws Exception {
 
 		this.compareFragmentCodeGeneration("sltest/collection", "size01");
 	}
@@ -384,14 +304,10 @@ public class TestCollection extends AbstractDiffTest {
 	 * Tests the instrumentation of the constraint.
 	 * </p>
 	 * 
-	 * @throws ModelAccessException
-	 * @throws ParseException
-	 * @throws IllegalArgumentException
-	 * @throws Ocl2CodeException
+	 * @throws Exception
 	 */
 	@Test
-	public void testSum01() throws IllegalArgumentException, ParseException,
-			ModelAccessException, Ocl2CodeException {
+	public void testSum01() throws Exception {
 
 		this.compareFragmentCodeGeneration("sltest/collection", "sum01");
 	}

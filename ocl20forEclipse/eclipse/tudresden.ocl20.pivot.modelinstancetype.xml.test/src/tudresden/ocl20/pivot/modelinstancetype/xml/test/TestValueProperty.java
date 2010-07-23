@@ -61,12 +61,10 @@ public class TestValueProperty extends AbstractXmlModelInstanceTest {
 	 * Initializes the test cases of this test suite.
 	 * </p>
 	 * 
-	 * @throws ModelAccessException
-	 * @throws IllegalArgumentException
+	 * @throws Exception
 	 */
 	@BeforeClass
-	public static void setUp() throws IllegalArgumentException,
-			ModelAccessException {
+	public static void setUp() throws Exception {
 
 		File modelFile;
 		modelFile = TestValueProperty.getFile("model/test01.ecore");
@@ -185,8 +183,9 @@ public class TestValueProperty extends AbstractXmlModelInstanceTest {
 		adaptedValue = anEnumerationValue.getProperty(valueProperty);
 
 		assertNotNull(msg, adaptedValue);
-		assertEquals(msg, testModel
-				.findType(Arrays.asList(new String[] {
+		assertEquals(
+				msg,
+				testModel.findType(Arrays.asList(new String[] {
 						ModelConstants.ROOT_PACKAGE_NAME, "package1",
 						"Enumeration1" })), adaptedValue.getType());
 		assertFalse(msg, adaptedValue.isUndefined());

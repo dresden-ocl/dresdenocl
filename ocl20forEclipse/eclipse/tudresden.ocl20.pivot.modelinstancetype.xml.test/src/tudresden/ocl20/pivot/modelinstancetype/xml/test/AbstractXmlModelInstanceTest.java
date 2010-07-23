@@ -16,6 +16,9 @@ package tudresden.ocl20.pivot.modelinstancetype.xml.test;
 import static org.junit.Assert.assertTrue;
 
 import java.io.File;
+import java.net.URL;
+
+import org.eclipse.core.runtime.FileLocator;
 
 /**
  * <p>
@@ -35,23 +38,21 @@ public abstract class AbstractXmlModelInstanceTest {
 	 * @param path
 	 *            The path of the resource.
 	 * @return The found {@link File} object.
+	 * @throws Exception
+	 *             If loading of File fails.
 	 */
-	protected static File getFile(String path) {
+	protected static File getFile(String path) throws Exception {
 
-		String filePath;
-		filePath = XmlModelInstanceTypeTestPlugin.getDefault().getBundle()
-				.getLocation();
-		/* Remove 'reference:file:/' */
-		filePath = filePath.substring(16);
+		URL fileLocation;
+		fileLocation = XmlModelInstanceTypeTestPlugin.getDefault().getBundle()
+				.getResource(path);
+		fileLocation = FileLocator.resolve(fileLocation);
 
-		filePath += XmlModelInstanceTypeTestPlugin.getDefault().getBundle()
-				.getResource(path).getPath().substring(1);
+		File file;
+		file = new File(fileLocation.getFile());
 
-		File constraintFile;
-		constraintFile = new File(filePath);
+		assertTrue(file.exists());
 
-		assertTrue(constraintFile.exists());
-
-		return constraintFile;
+		return file;
 	}
 }
