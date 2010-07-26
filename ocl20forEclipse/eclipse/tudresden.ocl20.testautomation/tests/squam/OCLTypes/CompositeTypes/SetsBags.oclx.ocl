@@ -1,0 +1,43 @@
+--------------------------------------------------------------------
+-- exported by the SQUAM OCLEditor v0.8.0.x (OCLLib to standard OCL)
+--------------------------------------------------------------------
+package uml 
+
+
+-- Library: SetsBags
+
+--	Examples with Set and Bag types to see the differences between them.
+-- 
+--	Author: Joanna Chimiak-Opoka
+--	Author: Hannes Mösl
+--------------------------------------------------------
+-- tests (queries with boolean result)
+--------------------------------------------------------
+--	Tests comparison between a Set and a Bag.
+-- 
+context Model
+
+inv tSetBagComparison_1: let b : Bag(Integer) = Bag{1,1,2,3,4} in
+  		  let s : Set(Integer) = Set{4,3,2,1} in not (s->asBag() = b)
+
+context Model
+
+inv tSetBagComparison_2: let b : Bag(Integer) = Bag{1,1,2,3,4} in
+  		  let s : Set(Integer) = Set{4,3,2,1} in (s = b->asSet())
+
+context Model
+
+inv tSetBagComparison_3: let b : Bag(Integer) = Bag{1,1,2,3,4} in
+  		  let s : Set(Integer) = Set{4,3,2,1} in b->union(s)->includesAll(s)
+
+context Model
+
+inv tSetBagComparison_4: let b : Bag(Integer) = Bag{1,1,2,3,4} in
+  		  let s : Set(Integer) = Set{4,3,2,1} in s->union(b)->includesAll(s)
+
+context Model
+
+inv tSetBagComparison_5: let b : Bag(Integer) = Bag{1,1,2,3,4} in
+  		  let s : Set(Integer) = Set{4,3,2,1} in b->intersection(s)->notEmpty()
+
+end package

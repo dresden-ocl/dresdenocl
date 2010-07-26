@@ -1,0 +1,175 @@
+--------------------------------------------------------------------
+-- exported by the SQUAM OCLEditor v0.8.0.x (OCLLib to standard OCL)
+--------------------------------------------------------------------
+package uml 
+
+
+-- Library: Collections
+
+--	A library with examples for an abstract type: Collection.
+--  Operations for Collection must be called for particular Collection types and in the examples it is show for composite types: Set, Bag, OrderedSet, Sequence.
+--	Author: Joanna Chimiak-Opoka
+--	Author: Hannes Mösl
+--------------------------------------------------------
+-- tests (queries with boolean result)
+--------------------------------------------------------
+--	Tests operation on a single Collection.
+-- 
+context Model
+
+inv tCollectionSingle_1: let c: Set(Integer) = Set{1,2,3} in c = c
+
+context Model
+
+inv tCollectionSingle_2: let c: Set(Integer) = Set{1,2,3} in c->size() = 3
+
+context Model
+
+inv tCollectionSingle_3: let c: Set(Integer) = Set{1,2,3} in not c->isEmpty()
+
+context Model
+
+inv tCollectionSingle_4: let c: Set(Integer) = Set{1,2,3} in c->notEmpty()
+
+context Model
+
+inv tCollectionSingle_5: let c: Set(Integer) = Set{1,2,3} in false
+
+context Model
+
+inv tCollectionSingle_6: let c: Set(Integer) = Set{1,2,3} in not c->sum().oclIsUndefined()
+
+--	Tests convertion of a Collection to a specific Type of Collection.
+-- The generic conversion operation is defined for OclAny, see OCLSpecial.oclx.
+context Model
+
+inv tCollection2CollectionType_1: let c: Set(Integer) = Set{1,2,3} in c->asSet()->size() <= c->size()
+
+context Model
+
+inv tCollection2CollectionType_2: let c: Set(Integer) = Set{1,2,3} in c->asOrderedSet()->size() <= c->size()
+
+context Model
+
+inv tCollection2CollectionType_3: let c: Set(Integer) = Set{1,2,3} in c->asSequence()->size()  = c->size()
+
+context Model
+
+inv tCollection2CollectionType_4: let c: Set(Integer) = Set{1,2,3} in c->asBag()->size() = c->size()
+
+--	Tests operation for comparison of two collections and investigating their content.
+-- 
+context Model
+
+inv tCollectionsComparison_1: let c1: Bag(Integer) = Bag{1,2,2} in let c2: Bag(Integer) = Bag{2,2,2} in let c3 : Bag(Integer) = Bag{4,5}
+			-- let c1: OrderedSet(Integer) = OrderedSet{1,2,3} in let c2: OrderedSet(Integer) = OrderedSet{1,2} in let c3 : OrderedSet(Integer) = OrderedSet{4,5}
+			-- let c1: Sequence(Integer) = Sequence{1,2,2} in let c2: Sequence(Integer) = Sequence{2,2,2} in let c3 : Sequence(Integer) = Sequence{4,5}
+			  in let e1 : Integer = 1 in let e2: Integer = 4 in c1 <> c2
+
+context Model
+
+inv tCollectionsComparison_2: let c1: Bag(Integer) = Bag{1,2,2} in let c2: Bag(Integer) = Bag{2,2,2} in let c3 : Bag(Integer) = Bag{4,5}
+			-- let c1: OrderedSet(Integer) = OrderedSet{1,2,3} in let c2: OrderedSet(Integer) = OrderedSet{1,2} in let c3 : OrderedSet(Integer) = OrderedSet{4,5}
+			-- let c1: Sequence(Integer) = Sequence{1,2,2} in let c2: Sequence(Integer) = Sequence{2,2,2} in let c3 : Sequence(Integer) = Sequence{4,5}
+			  in let e1 : Integer = 1 in let e2: Integer = 4 in c1->includes(e1)
+
+context Model
+
+inv tCollectionsComparison_3: let c1: Bag(Integer) = Bag{1,2,2} in let c2: Bag(Integer) = Bag{2,2,2} in let c3 : Bag(Integer) = Bag{4,5}
+			-- let c1: OrderedSet(Integer) = OrderedSet{1,2,3} in let c2: OrderedSet(Integer) = OrderedSet{1,2} in let c3 : OrderedSet(Integer) = OrderedSet{4,5}
+			-- let c1: Sequence(Integer) = Sequence{1,2,2} in let c2: Sequence(Integer) = Sequence{2,2,2} in let c3 : Sequence(Integer) = Sequence{4,5}
+			  in let e1 : Integer = 1 in let e2: Integer = 4 in c1->excludes(e2)
+
+context Model
+
+inv tCollectionsComparison_4: let c1: Bag(Integer) = Bag{1,2,2} in let c2: Bag(Integer) = Bag{2,2,2} in let c3 : Bag(Integer) = Bag{4,5}
+			-- let c1: OrderedSet(Integer) = OrderedSet{1,2,3} in let c2: OrderedSet(Integer) = OrderedSet{1,2} in let c3 : OrderedSet(Integer) = OrderedSet{4,5}
+			-- let c1: Sequence(Integer) = Sequence{1,2,2} in let c2: Sequence(Integer) = Sequence{2,2,2} in let c3 : Sequence(Integer) = Sequence{4,5}
+			  in let e1 : Integer = 1 in let e2: Integer = 4 in c1->count(e1) = 1
+
+context Model
+
+inv tCollectionsComparison_5: let c1: Bag(Integer) = Bag{1,2,2} in let c2: Bag(Integer) = Bag{2,2,2} in let c3 : Bag(Integer) = Bag{4,5}
+			-- let c1: OrderedSet(Integer) = OrderedSet{1,2,3} in let c2: OrderedSet(Integer) = OrderedSet{1,2} in let c3 : OrderedSet(Integer) = OrderedSet{4,5}
+			-- let c1: Sequence(Integer) = Sequence{1,2,2} in let c2: Sequence(Integer) = Sequence{2,2,2} in let c3 : Sequence(Integer) = Sequence{4,5}
+			  in let e1 : Integer = 1 in let e2: Integer = 4 in c1->includesAll(c2)
+
+context Model
+
+inv tCollectionsComparison_6: let c1: Bag(Integer) = Bag{1,2,2} in let c2: Bag(Integer) = Bag{2,2,2} in let c3 : Bag(Integer) = Bag{4,5}
+			-- let c1: OrderedSet(Integer) = OrderedSet{1,2,3} in let c2: OrderedSet(Integer) = OrderedSet{1,2} in let c3 : OrderedSet(Integer) = OrderedSet{4,5}
+			-- let c1: Sequence(Integer) = Sequence{1,2,2} in let c2: Sequence(Integer) = Sequence{2,2,2} in let c3 : Sequence(Integer) = Sequence{4,5}
+			  in let e1 : Integer = 1 in let e2: Integer = 4 in c1->excludesAll(c3)
+
+--	Tests predefined iteratiors for Collection.
+-- More iterators are defined in particular composite types.
+context Model
+
+inv tCollectionIterators_1: let c: OrderedSet(Integer) = OrderedSet{1,2,3} in c->exists(e| e>1)
+
+context Model
+
+inv tCollectionIterators_2: let c: OrderedSet(Integer) = OrderedSet{1,2,3} in c->forAll(e| e>0)
+
+context Model
+
+inv tCollectionIterators_3: let c: OrderedSet(Integer) = OrderedSet{1,2,3} in c->isUnique(e| e)
+
+context Model
+
+inv tCollectionIterators_4: let c: OrderedSet(Integer) = OrderedSet{1,2,3} in c->one(e| e>2)
+
+context Model
+
+inv tCollectionIterators_5: let c: OrderedSet(Integer) = OrderedSet{1,2,3} in c->collect(e| e*2)->sum() = 2*(c->sum())
+
+--	Tests nested Collections and the flatten operation.
+-- 
+context Model
+
+inv tCollectionNested_1: let s : Set(Set(Integer)) = Set{Set{1}, Set{1,2}, Set{1,3,5}} in s->flatten() = Set{1,2,3,5}
+
+context Model
+
+inv tCollectionNested_2: let s : Set(Set(Integer)) = Set{Set{1}, Set{1,2}, Set{1,3,5}} in s->asBag()->flatten() = Bag{1,1,1,2,3,5}
+
+context Model
+
+inv tCollectionNested_3: let s : Set(Set(Integer)) = Set{Set{1}, Set{1,2}, Set{1,3,5}} in s->asSequence()->flatten() = Sequence{1,1,2,1,3,5}
+
+context Model
+
+inv tCollectionNested_4: let s : Set(Set(Integer)) = Set{Set{1}, Set{1,2}, Set{1,3,5}} in s->asOrderedSet()->flatten() = OrderedSet{1,1,2,1,3,5}
+
+--	Tests twice nested Collections and the flatten operation.
+-- 
+context Model
+
+inv tCollectionTwiceNested_1: let s : Set(Set(Set(Integer))) = Set{Set{Set{1}, Set{1,2}, Set{1,3,5}}, Set{Set{1}}} in s->flatten() = Set{1,2,3,5}
+
+context Model
+
+inv tCollectionTwiceNested_2: let s : Set(Set(Set(Integer))) = Set{Set{Set{1}, Set{1,2}, Set{1,3,5}}, Set{Set{1}}} in s->asBag()->flatten() = Bag{1,1,1,1,2,3,5}
+
+--	Tests a product of Collections resulting in Tuple.
+-- For more operations on tuples see Tuples.oclx.
+context Model
+
+inv tCollectionsProduct: let c1 : Set(Integer) = Set{1} in let c2 : Set(String) = Set{'a'} in c1->product(c2) = Set{Tuple{first : Integer = 1, second : String = 'a'}}
+
+--	Tests a product of Collections resulting in Tuple.
+-- For more operations on tuples see Tuples.oclx.
+context Model
+
+inv tCollectionsProducts_1: let c1 : Set(Integer) = Set{1,2} in let c2 : Set(String) = Set{'a','b'} in c1->product(c2) = Set{
+    		       Tuple{first : Integer = 1, second : String = 'a'},
+    		       Tuple{first : Integer = 2, second : String = 'a'},
+    		       Tuple{first : Integer = 1, second : String = 'b'},
+    		       Tuple{first : Integer = 2, second : String = 'b'}
+    		       }
+
+context Model
+
+inv tCollectionsProducts_2: let c1 : Set(Integer) = Set{1,2} in let c2 : Set(String) = Set{'a','b'} in c1->product(c2)->size() = 4
+
+endpackage

@@ -1,0 +1,76 @@
+package tudresden::ocl20::benchmark::testdata::common
+
+-- OR
+context Dummy inv:
+	true or Sequence{true}->excluding(true)->last() 
+		= true -- expected result
+	
+context Dummy inv:
+	Sequence{true}->excluding(true)->last() or true 
+		= true -- expected result
+
+context Dummy inv:
+	let B=Set{Sequence{true}->excluding(true)->last(),false,true} in
+      B->iterate(b1,b2:Boolean; 
+      			 r:Sequence(Boolean)=oclEmpty(Sequence(Boolean))|
+       			 r->including(b1 or b2))
+	    = Sequence{Undefined, Undefined, true, Undefined, 
+	    	false, true, true, true, true} -- expected result
+	
+-- AND
+    	
+context Dummy inv:
+	false and Sequence{true}->excluding(true)->last()
+		= false -- expected result
+		
+context Dummy inv:
+	Sequence{true}->excluding(true)->last() and false
+		= false -- expected result
+		
+context Dummy inv:
+	let B=Set{Sequence{true}->excluding(true)->last(),false,true} in
+      B->iterate(b1,b2:Boolean;
+                 r:Sequence(Boolean)=oclEmpty(Sequence(Boolean))|
+        r->including(b1 and b2))
+        
+     = Sequence{Undefined, false, Undefined, false, false, false,
+              Undefined, false, true} -- expected result
+              
+              
+
+-- IMPLIES
+context Dummy inv query_IMPL1: 
+	false implies Sequence{true}->excluding(true)->last()
+		= false -- expected result
+		
+context Dummy inv query_IMPL2:
+	Sequence{true}->excluding(true)->last() implies true
+     	= true -- expected result
+     	
+context Dummy inv query_IMPL3:
+	let B=Set{Sequence{true}->excluding(true)->last(),false,true} in
+      B->iterate(b1,b2:Boolean;
+                 r:Sequence(Boolean)=oclEmpty(Sequence(Boolean))|
+        r->including(b1 implies b2))
+     = Sequence{Undefined, Undefined, true, true, true, true,
+              Undefined, false, true}
+              
+-- IF THEN ELSE ENDIF
+context Dummy inv query_IFELSE1:
+	if true then false 
+      else Sequence{true}->excluding(true)->last() endif
+     = false -- expected result
+
+context Dummy inv query_IFELSE2:
+	if false then Sequence{true}->excluding(true)->last() 
+      else true endif
+     = true -- expected result
+     
+     
+-- OCLISUNDEFINED
+context Dummy inv query_undef1:
+	Sequence{true}->excluding(true)->last().oclIsUndefined()
+     = true -- expected result
+     
+     
+endpackage

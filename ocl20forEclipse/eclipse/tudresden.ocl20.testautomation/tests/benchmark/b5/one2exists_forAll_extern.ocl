@@ -1,0 +1,282 @@
+package tudresden::ocl20::benchmark::testdata::common
+
+-------------------------------------
+-- B5: one2exists_forAll_extern
+-------------------------------------
+
+-- Collection Operations
+
+-- -- Logic
+
+-- -- -- one to exists and forAll (extern)
+
+-- -- -- -- Empty
+
+-- -- -- -- -- Set ------------------------------------------------
+
+context Dummy inv: 
+	let c:Set(Integer) = Set{} in
+   c->one(i|i<4) =
+         (c->exists(i|i<4) and c->forAll(x,y|x<4 and y<4 implies x = y))
+
+  
+-- -- -- -- -- Bag
+
+context Dummy inv: 
+	let c:Bag(Integer) = Bag{} in
+   c->one(i|i<4) =
+         (c->exists(i|i<4) and c->forAll(x,y|x<4 and y<4 implies x = y))
+
+  
+-- -- -- -- -- Sequence
+
+context Dummy inv: 
+	let c:Sequence(Integer) = Sequence{} in
+   c->one(i|i<4) =
+         (c->exists(i|i<4) and c->forAll(x,y|x<4 and y<4 implies x = y))
+
+  
+-- -- -- -- Singleton
+
+-- -- -- -- -- Includes Undefined
+
+-- -- -- -- -- -- Set ---------------------------------------------
+
+context Dummy inv: 
+	let c:Set(Integer) = Set{ oclUndefined } in
+   c->one(i|i<4) =
+         (c->exists(i|i<4) and c->forAll(x,y|x<4 and y<4 implies x = y))
+
+  
+-- -- -- -- -- -- Bag
+
+context Dummy inv: 
+	let c:Bag(Integer) = Bag{ oclUndefined } in
+   c->one(i|i<4) =
+         (c->exists(i|i<4) and c->forAll(x,y|x<4 and y<4 implies x = y))
+
+  
+-- -- -- -- -- -- Sequence
+
+context Dummy inv: 
+	let c:Sequence(Integer) = Sequence{ oclUndefined } in
+   c->one(i|i<4) =
+         (c->exists(i|i<4) and c->forAll(x,y|x<4 and y<4 implies x = y))
+
+  
+-- -- -- -- -- Excludes Undefined
+
+-- -- -- -- -- -- Expression e fulfilled
+
+-- -- -- -- -- -- -- Set ------------------------------------------------
+
+context Dummy inv: 
+	let c:Set(Integer) = Set{1} in
+   c->one(i|i<4) =
+         (c->exists(i|i<4) and c->forAll(x,y|x<4 and y<4 implies x = y))
+
+  
+-- -- -- -- -- -- -- Bag
+
+context Dummy inv: 
+	let c:Bag(Integer) = Bag{1} in
+   c->one(i|i<4) =
+         (c->exists(i|i<4) and c->forAll(x,y|x<4 and y<4 implies x = y))
+
+  
+-- -- -- -- -- -- -- Sequence
+
+context Dummy inv: 
+	let c:Sequence(Integer) = Sequence{1} in
+   c->one(i|i<4) =
+         (c->exists(i|i<4) and c->forAll(x,y|x<4 and y<4 implies x = y))
+
+  
+-- -- -- -- -- -- Expression e not fulfilled
+
+-- -- -- -- -- -- -- Set ------------------------------------------
+
+context Dummy inv: 
+	let c:Set(Integer) = Set{4} in
+   c->one(i|i<4) =
+         (c->exists(i|i<4) and c->forAll(x,y|x<4 and y<4 implies x = y))
+
+  
+-- -- -- -- -- -- -- Bag
+
+context Dummy inv: 
+	let c:Bag(Integer) = Bag{4} in
+   c->one(i|i<4) =
+         (c->exists(i|i<4) and c->forAll(x,y|x<4 and y<4 implies x = y))
+
+  
+-- -- -- -- -- -- -- Sequence
+
+context Dummy inv: 
+	let c:Sequence(Integer) = Sequence{4} in
+   c->one(i|i<4) =
+         (c->exists(i|i<4) and c->forAll(x,y|x<4 and y<4 implies x = y))
+
+  
+-- -- -- -- Many Elements
+
+-- -- -- -- -- Includes Undefined
+
+-- -- -- -- -- -- Set ---------------------------------------------
+
+context Dummy inv: 
+	let c:Set(Integer) = Set{ oclUndefined , 1, 4, 5} in
+   c->one(i|i<4) =
+         (c->exists(i|i<4) and c->forAll(x,y|x<4 and y<4 implies x = y))
+
+  
+-- -- -- -- -- -- Bag
+
+-- -- -- -- -- -- -- Equal Values
+
+context Dummy inv: 
+	let c:Bag(Integer) = Bag{ oclUndefined , 1, 4, 5, 
+                   oclUndefined } in
+   c->one(i|i<4) =
+         (c->exists(i|i<4) and c->forAll(x,y|x<4 and y<4 implies x = y))
+
+  
+-- -- -- -- -- -- -- No Equal Values
+
+context Dummy inv: 
+	let c:Bag(Integer) = Bag{ oclUndefined , 1, 4, 5} in
+   c->one(i|i<4) =
+         (c->exists(i|i<4) and c->forAll(x,y|x<4 and y<4 implies x = y))
+
+  
+-- -- -- -- -- -- Sequence
+
+-- -- -- -- -- -- -- Equal Values
+
+context Dummy inv: 
+	let c:Sequence(Integer) = Sequence{ oclUndefined , 1, 4, 5, 
+                        oclUndefined } in
+   c->one(i|i<4) =
+         (c->exists(i|i<4) and c->forAll(x,y|x<4 and y<4 implies x = y))
+
+  
+-- -- -- -- -- -- -- No Equal Values
+
+context Dummy inv: 
+	let c:Sequence(Integer) = Sequence{ oclUndefined , 1, 4, 5} in
+   c->one(i|i<4) =
+         (c->exists(i|i<4) and c->forAll(x,y|x<4 and y<4 implies x = y))
+
+  
+-- -- -- -- -- Excludes Undefined
+
+-- -- -- -- -- -- Expression e fulfilled
+
+-- -- -- -- -- -- -- Set ------------------------------------------
+
+context Dummy inv: 
+	let c:Set(Integer) = Set{1, 4, 5} in
+   c->one(i|i<4) =
+         (c->exists(i|i<4) and c->forAll(x,y|x<4 and y<4 implies x = y))
+
+  
+-- -- -- -- -- -- -- Bag
+
+-- -- -- -- -- -- -- -- Equal Values
+
+context Dummy inv: 
+	let c:Bag(Integer) = Bag{1, 4, 5, 4} in
+   c->one(i|i<4) =
+         (c->exists(i|i<4) and c->forAll(x,y|x<4 and y<4 implies x = y))
+
+  
+-- -- -- -- -- -- -- -- No Equal Values
+
+context Dummy inv: 
+	let c:Bag(Integer) = Bag{1, 4, 5} in
+   c->one(i|i<4) =
+         (c->exists(i|i<4) and c->forAll(x,y|x<4 and y<4 implies x = y))
+
+  
+-- -- -- -- -- -- -- Sequence
+
+-- -- -- -- -- -- -- -- Equal Values
+
+context Dummy inv: 
+	let c:Sequence(Integer) = Sequence{1, 4, 5, 4} in
+   c->one(i|i<4) =
+         (c->exists(i|i<4) and c->forAll(x,y|x<4 and y<4 implies x = y))
+
+  
+-- -- -- -- -- -- -- -- No Equal Values
+
+context Dummy inv: 
+	let c:Sequence(Integer) = Sequence{1, 4, 5} in
+   c->one(i|i<4) =
+         (c->exists(i|i<4) and c->forAll(x,y|x<4 and y<4 implies x = y))
+
+  
+-- -- -- -- -- -- Expression e not fulfilled
+
+-- -- -- -- -- -- -- Set ------------------------------------------
+
+context Dummy inv: 
+	let c:Set(Integer) = Set{1, 2, 5} in
+   c->one(i|i<4) =
+         (c->exists(i|i<4) and c->forAll(x,y|x<4 and y<4 implies x = y))
+
+  
+-- -- -- -- -- -- -- Bag
+
+-- -- -- -- -- -- -- -- Equal Values (violating)
+
+context Dummy inv: 
+	let c:Bag(Integer) = Bag{1, 2, 5, 1} in
+   c->one(i|i<4) =
+         (c->exists(i|i<4) and c->forAll(x,y|x<4 and y<4 implies x = y))
+
+  
+-- -- -- -- -- -- -- -- Equal Values (not violating)
+
+context Dummy inv: 
+	let c:Bag(Integer) = Bag{1, 2, 5, 5} in
+   c->one(i|i<4) =
+         (c->exists(i|i<4) and c->forAll(x,y|x<4 and y<4 implies x = y))
+
+  
+-- -- -- -- -- -- -- -- No Equal Values
+
+context Dummy inv: 
+	let c:Bag(Integer) = Bag{1, 2, 5} in
+   c->one(i|i<4) =
+         (c->exists(i|i<4) and c->forAll(x,y|x<4 and y<4 implies x = y))
+
+  
+-- -- -- -- -- -- -- Sequence
+
+-- -- -- -- -- -- -- -- Equal Values (both violating)
+
+context Dummy inv: 
+	let c:Sequence(Integer) = Sequence{1, 2, 5, 1} in
+   c->one(i|i<4) =
+         (c->exists(i|i<4) and c->forAll(x,y|x<4 and y<4 implies x = y))
+
+  
+-- -- -- -- -- -- -- -- Equal Values (both not violating)
+
+context Dummy inv: 
+	let c:Sequence(Integer) = Sequence{1, 2, 5, 5} in
+   c->one(i|i<4) =
+         (c->exists(i|i<4) and c->forAll(x,y|x<4 and y<4 implies x = y))
+
+  
+-- -- -- -- -- -- -- -- No Equal Values
+
+context Dummy inv: 
+	let c:Sequence(Integer) = Sequence{1, 2, 5} in
+   c->one(i|i<4) =
+         (c->exists(i|i<4) and c->forAll(x,y|x<4 and y<4 implies x = y))
+
+  
+  
+endpackage

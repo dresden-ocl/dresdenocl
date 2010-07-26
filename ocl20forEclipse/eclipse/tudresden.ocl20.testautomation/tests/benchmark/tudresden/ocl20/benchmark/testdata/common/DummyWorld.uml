@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Package xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:uml="http://www.eclipse.org/uml2/3.0.0/UML" xmi:id="_wDS3cJf7Ed-XL_X1uhh7fA" name="tudresden">
+  <packagedElement xmi:type="uml:Package" xmi:id="_7S_DAJf7Ed-XL_X1uhh7fA" name="ocl20">
+    <packagedElement xmi:type="uml:Package" xmi:id="_40aHwJf7Ed-XL_X1uhh7fA" name="benchmark">
+      <packagedElement xmi:type="uml:Package" xmi:id="_40aHwZf7Ed-XL_X1uhh7fA" name="testdata">
+        <packagedElement xmi:type="uml:Package" xmi:id="_40au0Jf7Ed-XL_X1uhh7fA" name="common">
+          <elementImport xmi:id="_40au0Zf7Ed-XL_X1uhh7fA">
+            <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+          </elementImport>
+          <elementImport xmi:id="_40au0pf7Ed-XL_X1uhh7fA">
+            <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+          </elementImport>
+          <elementImport xmi:id="_40au05f7Ed-XL_X1uhh7fA">
+            <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+          </elementImport>
+          <elementImport xmi:id="_40au1Jf7Ed-XL_X1uhh7fA" alias="null">
+            <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#UnlimitedNatural"/>
+          </elementImport>
+          <packagedElement xmi:type="uml:Class" xmi:id="_40au1Zf7Ed-XL_X1uhh7fA" name="Dummy">
+            <ownedAttribute xmi:id="_40au1pf7Ed-XL_X1uhh7fA" name="name">
+              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+            </ownedAttribute>
+          </packagedElement>
+        </packagedElement>
+      </packagedElement>
+    </packagedElement>
+  </packagedElement>
+</uml:Package>
