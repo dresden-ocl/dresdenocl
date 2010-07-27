@@ -33,6 +33,7 @@
 package tudresden.ocl20.pivot.metamodels.ecore.internal.model;
 
 import java.io.IOException;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -40,9 +41,13 @@ import java.util.Set;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 import org.apache.log4j.Logger;
+import org.eclipse.emf.common.util.TreeIterator;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -81,13 +86,16 @@ public class EcoreModel extends AbstractModel implements IModel {
 	/** The adapter for the top package of the associated Ecore model. */
 	private Namespace rootNamespace;
 
+	/** Keep track what EClasses have already been considered by resolving. */
+	private Set<EClass> resolvedClasses = new HashSet<EClass>();
+
 	/**
 	 * <p>
 	 * Creates a new {@link EcoreModel} adapting the given {@link EPackage}.
 	 * </p>
 	 * 
 	 * @param resource
-	 *            The {@link Resource} containing the model.
+	 *          The {@link Resource} containing the model.
 	 */
 	public EcoreModel(Resource resource, IMetamodel metamodel) {
 
@@ -111,15 +119,14 @@ public class EcoreModel extends AbstractModel implements IModel {
 
 	/**
 	 * <p>
-	 * This method lazily creates a {@link Namespace} adapter for the virtual
-	 * root package in the associated Ecore model. Thus, any possible resource
-	 * loading errors will not happen until this method is called for the first
-	 * time.
+	 * This method lazily creates a {@link Namespace} adapter for the virtual root
+	 * package in the associated Ecore model. Thus, any possible resource loading
+	 * errors will not happen until this method is called for the first time.
 	 * </p>
 	 * 
 	 * @throws ModelAccessException
-	 *             If an error occurs when creating the adapter for the top name
-	 *             space.
+	 *           If an error occurs when creating the adapter for the top name
+	 *           space.
 	 * 
 	 * @see tudresden.ocl20.pivot.model.IModel#getRootNamespace()
 	 */
@@ -151,8 +158,7 @@ public class EcoreModel extends AbstractModel implements IModel {
 
 			anEcoreModel = (EcoreModel) anObject;
 
-			result = this.resource.getURI().equals(
-					anEcoreModel.resource.getURI());
+			result = this.resource.getURI().equals(anEcoreModel.resource.getURI());
 		}
 
 		else {
@@ -191,6 +197,44 @@ public class EcoreModel extends AbstractModel implements IModel {
 		return result;
 	}
 
+	private Set<EPackage> resolvePackages(EClass eClass) {
+
+		if (resolvedClasses.contains(eClass))
+			return Collections.emptySet();
+
+		Set<EPackage> result = new HashSet<EPackage>();
+
+		resolvedClasses.add(eClass);
+
+		if (eClass.eIsProxy()) {
+			EcoreUtil.resolve(eClass, resource);
+		}
+		EPackage ePackage;
+		ePackage = eClass.getEPackage();
+
+		if (ePackage != null) {
+			while (ePackage.getESuperPackage() != null)
+				ePackage = ePackage.getESuperPackage();
+
+			result.add(ePackage);
+		}
+
+		for (EReference eReference : eClass.getEReferences()) {
+			EClassifier eReferenceType = eReference.getEType();
+			if (eReferenceType instanceof EClass) {
+				result.addAll(resolvePackages((EClass) eReferenceType));
+			}
+		}
+		for (EOperation eOperation : eClass.getEOperations()) {
+			EClassifier eOperationType = eOperation.getEType();
+			if (eOperationType instanceof EClass) {
+				result.addAll(resolvePackages((EClass) eOperationType));
+			}
+		}
+
+		return result;
+	}
+
 	/**
 	 * <p>
 	 * Computes the {@link EPackage}s from referenced Ecore models of this
@@ -198,8 +242,8 @@ public class EcoreModel extends AbstractModel implements IModel {
 	 * </p>
 	 * 
 	 * @param rootPackage
-	 *            The {@link EPackage} that represents the root
-	 *            {@link Namespace} of this {@link EcoreModel}.
+	 *          The {@link EPackage} that represents the root {@link Namespace} of
+	 *          this {@link EcoreModel}.
 	 */
 	private void addNamespacesForReferencedPackages(EPackage rootPackage) {
 
@@ -207,63 +251,75 @@ public class EcoreModel extends AbstractModel implements IModel {
 		Set<EPackage> packagesToBeAdded;
 		packagesToBeAdded = new HashSet<EPackage>();
 
-		/* Iterate through all references EObjects. */
-		for (EObject eObject : EcoreUtil.ExternalCrossReferencer.find(resource)
-				.keySet()) {
-
-			/* Check the containing package of each EClassifier. */
-			if (eObject instanceof EClassifier) {
-
-				EClassifier eClassifier;
-				eClassifier = (EClassifier) eObject;
-
-				if (eClassifier.eIsProxy()) {
-					EcoreUtil.resolve(eClassifier, resource.getResourceSet());
-				}
-
-				EPackage containerPackage;
-				containerPackage = eClassifier.getEPackage();
-
-				/* Can happen if proxy resolving fails. */
-				if (containerPackage != null) {
-					/* Check if the classifier belongs to a package. */
-					while (containerPackage.getESuperPackage() != null) {
-						containerPackage = containerPackage.getESuperPackage();
-					}
-
-					if (!rootPackage.getESubpackages().contains(
-							containerPackage)
-							&& !packagesToBeAdded.contains(containerPackage)
-							&& !containerPackage.equals(rootPackage)) {
-
-						/*
-						 * Do not add the package directly because a copy is
-						 * required. Afterwards, the containment check fails for
-						 * the copy and the package may be added multiple times.
-						 */
-						packagesToBeAdded.add(containerPackage);
-					}
-					// no else.
-				}
-
-				else {
-					LOGGER
-							.warn("Could not resolve proxy for referenced element "
-									+ eObject + ". Model may be incomplete.");
-				}
+		/* Iterate through all references EClassifier. */
+		TreeIterator<EObject> iter = resource.getAllContents();
+		while (iter.hasNext()) {
+			EObject eObject = iter.next();
+			if (eObject instanceof EClass) {
+				packagesToBeAdded.addAll(this.resolvePackages((EClass) eObject));
 			}
 			// no else.
 		}
 
+		// for (EObject eObject : EcoreUtil.ExternalCrossReferencer.find(
+		// eClassifierList).keySet()) {
+		//
+		// /* Check the containing package of each EClassifier. */
+		// if (eObject instanceof EClassifier) {
+		//
+		// EClassifier eClassifier;
+		// eClassifier = (EClassifier) eObject;
+		//
+		// if (eClassifier.eIsProxy()) {
+		// EcoreUtil.resolve(eClassifier, resource.getResourceSet());
+		// }
+		//
+		// EPackage containerPackage;
+		// containerPackage = eClassifier.getEPackage();
+		//
+		// /* Can happen if proxy resolving fails. */
+		// if (containerPackage != null) {
+		// /* Check if the classifier belongs to a package. */
+		// while (containerPackage.getESuperPackage() != null) {
+		// containerPackage = containerPackage.getESuperPackage();
+		// }
+		//
+		// if (!rootPackage.getESubpackages().contains(containerPackage)
+		// && !packagesToBeAdded.contains(containerPackage)
+		// && !containerPackage.equals(rootPackage)) {
+		//
+		// /*
+		// * Do not add the package directly because a copy is required.
+		// * Afterwards, the containment check fails for the copy and the
+		// * package may be added multiple times.
+		// */
+		// packagesToBeAdded.add(containerPackage);
+		// }
+		// // no else.
+		// }
+		//
+		// else {
+		// LOGGER.warn("Could not resolve proxy for referenced element "
+		// + eObject + ". Model may be incomplete.");
+		// }
+		// }
+		// // no else.
+		// }
 		/*
-		 * Now copy and add the packages. Copy is required to avoid
-		 * bi-directional references.
+		 * Now copy and add the packages. Copy is required to avoid bi-directional
+		 * references.
 		 */
 		for (EPackage ePackage : packagesToBeAdded) {
-			rootPackage.getESubpackages().add(
-					(EPackage) EcoreUtil.copy(ePackage));
+			if (ePackage != rootPackage)
+				rootPackage.getESubpackages().add((EPackage) EcoreUtil.copy(ePackage));
 		}
 		// end for.
+
+		/*
+		 * now we can safely forget what EClasses have already been resolved, as
+		 * this is only called once.
+		 */
+		this.resolvedClasses.clear();
 	}
 
 	/**
@@ -274,7 +330,7 @@ public class EcoreModel extends AbstractModel implements IModel {
 	 * @return A {@link Namespace} instance.
 	 * 
 	 * @throws ModelAccessException
-	 *             If an error occurs while loading the adapted Ecore model.
+	 *           If an error occurs while loading the adapted Ecore model.
 	 */
 	private Namespace createRootNamespace() throws ModelAccessException {
 
@@ -286,8 +342,7 @@ public class EcoreModel extends AbstractModel implements IModel {
 
 			/* Probably inform the logger. */
 			if (LOGGER.isInfoEnabled()) {
-				LOGGER.info(NLS.bind(
-						EcoreModelMessages.EcoreModel_LoadingEcoreModel,
+				LOGGER.info(NLS.bind(EcoreModelMessages.EcoreModel_LoadingEcoreModel,
 						this.resource.getURI()));
 			}
 			// no else.

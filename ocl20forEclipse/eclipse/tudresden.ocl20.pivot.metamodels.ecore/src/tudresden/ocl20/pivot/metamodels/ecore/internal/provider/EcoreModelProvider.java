@@ -60,14 +60,15 @@ public class EcoreModelProvider extends AbstractModelProvider implements
 		IModelProvider {
 
 	/** The {@link Logger} for this class. */
-	private static final Logger LOGGER =
-			EcoreMetamodelPlugin.getLogger(EcoreModelProvider.class);
+	private static final Logger LOGGER = EcoreMetamodelPlugin
+			.getLogger(EcoreModelProvider.class);
 
 	/** A cached copy of the resource set used for loading models. */
 	protected ResourceSet resourceSet;
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see tudresden.ocl20.pivot.modelbus.IModelProvider#getModel(java.net.URL)
 	 */
 	public IModel getModel(URL modelURL) throws ModelAccessException {
@@ -102,10 +103,36 @@ public class EcoreModelProvider extends AbstractModelProvider implements
 		// no else.
 
 		/* Create the model from the resource. */
-		model =
-				new EcoreModel(getResourceSet().getResource(modelURI, false),
-						ModelBusPlugin.getMetamodelRegistry().getMetamodel(
-								EcoreMetamodelPlugin.ID));
+		model = new EcoreModel(getResourceSet().getResource(modelURI, false),
+				ModelBusPlugin.getMetamodelRegistry().getMetamodel(
+						EcoreMetamodelPlugin.ID));
+
+		/* Eventually log the exit from this method. */
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("getModel() - exit - return value=" + model); //$NON-NLS-1$
+		}
+		// no else.
+
+		return model;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.model.base.AbstractModelProvider#getModel(org.eclipse
+	 * .emf.ecore.resource.Resource)
+	 */
+	@Override
+	public IModel getModel(Resource resource) {
+		/* Eventually log the entry into this method. */
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("getModel(reosurce=" + resource + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
+		}
+		// no else.
+
+		IModel model = new EcoreModel(resource, ModelBusPlugin
+				.getMetamodelRegistry().getMetamodel(EcoreMetamodelPlugin.ID));
 
 		/* Eventually log the exit from this method. */
 		if (LOGGER.isDebugEnabled()) {
