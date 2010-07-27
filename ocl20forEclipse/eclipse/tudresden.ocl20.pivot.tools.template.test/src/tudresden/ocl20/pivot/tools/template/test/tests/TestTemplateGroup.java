@@ -36,7 +36,10 @@ import static org.junit.Assert.fail;
 import java.net.URL;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.List;
 
+import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -59,13 +62,20 @@ public class TestTemplateGroup {
 	
 	private static ITemplateGroup general = null;
 	
+	private static List<ITemplateGroup> tempGroup;
+	
 	@BeforeClass
 	public static void class_setup() {
 		LinkedList<URL> groups = new LinkedList<URL>();
 		groups.add(TestStringTemplateEngine.class.getResource("/resources/templates/testGeneral.stg"));
+		tempGroup = TemplatePlugin.getTemplateGroupRegistry().getTemplateGroups();
+		for (ITemplateGroup tg : tempGroup) {
+			TemplatePlugin.getTemplateGroupRegistry().removeTemplateGroup(tg);
+		}
 		try {
 			general = TemplatePlugin.getTemplateGroupRegistry().addDefaultTemplateGroup("Test1",templateEngineName, null);
 			general.addFiles(groups);
+			TemplatePlugin.getTemplateGroupRegistry().removeTemplateGroup(general);
 		} catch (TemplateException e) {
 			fail("Can't set a template group!");
 		}
@@ -73,16 +83,29 @@ public class TestTemplateGroup {
 	
 	@Before
 	public void setup() {
+		TemplatePlugin.getTemplateGroupRegistry().addTemplateGroup(general);
+		int size = TemplatePlugin.getTemplateGroupRegistry().getTemplateGroups().size();
+		assertEquals(1,size);
+	}
+	
+	@After
+	public void tear_down() {
 		Iterator<ITemplateGroup> iterTempEng = TemplatePlugin.getTemplateGroupRegistry().getTemplateGroups().iterator();
 		while (iterTempEng.hasNext()) {
 			TemplatePlugin.getTemplateGroupRegistry().removeTemplateGroup(iterTempEng.next());
 		}
 		int size = TemplatePlugin.getTemplateGroupRegistry().getTemplateGroups().size();
 		assertEquals(0,size);
-		TemplatePlugin.getTemplateGroupRegistry().addTemplateGroup(general);
-		size = TemplatePlugin.getTemplateGroupRegistry().getTemplateGroups().size();
-		assertEquals(1,size);
 	}
+	
+	@AfterClass
+	public static void class_tear_down() {
+		for (ITemplateGroup tg : tempGroup) {
+			TemplatePlugin.getTemplateGroupRegistry().addTemplateGroup(tg);
+		}
+		
+	}
+	
 	/**
 	 * <p>Implemented test checkAddGroup.<br /><br/>
 	 * Tests the ITemplateGroupRegistry for adding new TemplateGroups.</p>

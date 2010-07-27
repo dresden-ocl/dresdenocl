@@ -60,7 +60,7 @@ public class TestStringTemplateEngine {
 			groups.add(TestStringTemplateEngine.class.getResource("/resources/templates/testGeneral.stg"));
 			
 			// Create DeclarativeTemplateEngine with the List containing one template
-			ITemplateGroup general;
+			ITemplateGroup general = null;
 			try {
 				general = TemplatePlugin.getTemplateGroupRegistry().addDefaultTemplateGroup("Test1", "StringTemplate", null);
 				general.addFiles(groups);
@@ -78,7 +78,6 @@ public class TestStringTemplateEngine {
 			}
 
 			// Add the second template to the List of templates and create a new
-			// TODO: correct path!
 			groups.add(TestStringTemplateEngine.class.getResource("/resources/templates/testSpecific.stg"));
 			ITemplateGroup specific = null;
 			try {
@@ -94,7 +93,9 @@ public class TestStringTemplateEngine {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 				fail("Can't initialize STE specific");
-			}			
+			}	
+			if (specific != null) TemplatePlugin.getTemplateGroupRegistry().removeTemplateGroup(specific);
+			if (general != null) TemplatePlugin.getTemplateGroupRegistry().removeTemplateGroup(general);
 		
 	}
 	

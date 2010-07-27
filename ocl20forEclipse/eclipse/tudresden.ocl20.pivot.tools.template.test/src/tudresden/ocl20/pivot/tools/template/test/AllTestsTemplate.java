@@ -46,7 +46,7 @@ import tudresden.ocl20.pivot.tools.template.test.tests.TestTemplateEngineRegistr
 @Suite.SuiteClasses({
 	TestTemplateEngineRegistry.class,
 	TestStringTemplateEngine.class,
-	//TODO: Claas Remove comment when tests work. TestTemplateGroup.class
+	TestTemplateGroup.class
 })
 public class AllTestsTemplate {
     // this class remains completely empty, 
