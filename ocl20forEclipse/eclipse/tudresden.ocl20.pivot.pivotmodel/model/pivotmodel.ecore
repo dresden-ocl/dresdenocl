@@ -613,17 +613,17 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EDataType" name="CloneNotSupportedException" instanceClassName="java.lang.CloneNotSupportedException"
       serializable="false"/>
-  <eClassifiers xsi:type="ecore:EClass" name="NDirectionalProperty" eSuperTypes="#//Property">
+  <eClassifiers xsi:type="ecore:EClass" name="AssociationProperty" eSuperTypes="#//Property">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="&lt;p>&#xD;&#xA;A &lt;code>NDirectionalAssociation&lt;/code> is a {@link Property} &#xD;&#xA;typed element that represents an bidirectional association to another type.&#xD;&#xA;&lt;/p>"/>
+      <details key="documentation" value="&lt;p>&#xD;&#xA;A &lt;code>Association&lt;/code> is a {@link Property} &#xD;&#xA;typed element that represents an bidirectional association to another type.&#xD;&#xA;&lt;/p>"/>
     </eAnnotations>
     <eOperations name="addAssociation">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="&lt;p>&#xD;&#xA;The operation addAssociation added a &lt;code> NDirectionalAssociation&lt;/code> to the inverse association list.&#xD;&#xA;&lt;/p>"/>
       </eAnnotations>
-      <eParameters name="bProperty" eType="#//NDirectionalProperty"/>
+      <eParameters name="bProperty" eType="#//AssociationProperty"/>
     </eOperations>
-    <eOperations name="getAssociation" eType="#//NDirectionalProperty">
+    <eOperations name="getAssociation" eType="#//AssociationProperty">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="&lt;p>&#xD;&#xA;The operation removeAssociation removed a &lt;code>NDirectionalAssociation&lt;/code> from the inverse association list.&#xD;&#xA;&lt;/p>"/>
       </eAnnotations>
@@ -633,21 +633,21 @@
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="&lt;p>&#xD;&#xA;The operation removeAssociation removed a &lt;code>NDirectionalAssociation&lt;/code> from the inverse association list.&#xD;&#xA;&lt;/p>"/>
       </eAnnotations>
-      <eParameters name="bProperty" eType="#//NDirectionalProperty"/>
+      <eParameters name="bProperty" eType="#//AssociationProperty"/>
     </eOperations>
     <eOperations name="isInverseAssociation" eType="ecore:EDataType datatypes.ecore#//Boolean">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="&lt;p>&#xD;&#xA;The operation isInverseAssociation ckecked a &lt;code>NDirectionalAssociation&lt;/code> is in the inverse association list.&#xD;&#xA;&lt;/p>"/>
       </eAnnotations>
-      <eParameters name="bProperty" eType="#//NDirectionalProperty"/>
+      <eParameters name="bProperty" eType="#//AssociationProperty"/>
     </eOperations>
     <eOperations name="addAssociations">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="&lt;p>&#xD;&#xA;The operation addAssociation added a &lt;code>NDirectionalAssociation&lt;/code> to the inverse association list.&#xD;&#xA;&lt;/p>"/>
       </eAnnotations>
-      <eParameters name="bProperty" upperBound="-1" eType="#//NDirectionalProperty"/>
+      <eParameters name="bProperty" upperBound="-1" eType="#//AssociationProperty"/>
     </eOperations>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="inverseNDirectionalProperties"
-        upperBound="-1" eType="#//NDirectionalProperty" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="inverseAssociationProperties"
+        upperBound="-1" eType="#//AssociationProperty" containment="true"/>
   </eClassifiers>
 </ecore:EPackage>

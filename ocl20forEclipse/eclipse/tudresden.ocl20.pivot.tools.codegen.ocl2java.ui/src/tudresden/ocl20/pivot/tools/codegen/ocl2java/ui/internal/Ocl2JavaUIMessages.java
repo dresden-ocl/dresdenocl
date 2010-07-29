@@ -32,6 +32,8 @@ public class Ocl2JavaUIMessages extends NLS {
 
 	private static final String BUNDLE_NAME = "tudresden.ocl20.pivot.tools.codegen.ocl2java.ui.internal.messages";
 
+	public static String TransformCodeWizard_Title;
+
 	public static String SettingsPage_Title;
 
 	public static String SettingsPage_Description;

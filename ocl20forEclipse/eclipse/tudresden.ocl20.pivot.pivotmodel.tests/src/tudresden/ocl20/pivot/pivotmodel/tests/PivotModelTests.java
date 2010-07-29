@@ -73,7 +73,7 @@ public class PivotModelTests extends TestSuite {
 		suite.addTestSuite(TypeParameterTest.class);
 		suite.addTestSuite(TypeArgumentTest.class);
 		suite.addTestSuite(ConstraintTest.class);
-		suite.addTestSuite(NDirectionalPropertyTest.class);
+		suite.addTestSuite(AssociationPropertyTest.class);
 		return suite;
 	}
 

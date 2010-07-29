@@ -127,8 +127,8 @@ public class EnumerationItemProvider extends TypeItemProvider implements
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage(
-				"full/obj16/Enumeration")); //$NON-NLS-1$
+		return overlayImage(object,
+				getResourceLocator().getImage("full/obj16/Enumeration")); //$NON-NLS-1$
 	}
 
 	/**
@@ -155,8 +155,8 @@ public class EnumerationItemProvider extends TypeItemProvider implements
 
 		switch (notification.getFeatureID(Enumeration.class)) {
 		case PivotModelPackage.ENUMERATION__OWNED_LITERAL:
-			fireNotifyChanged(new ViewerNotification(notification, notification
-					.getNotifier(), true, false));
+			fireNotifyChanged(new ViewerNotification(notification,
+					notification.getNotifier(), true, false));
 			return;
 		}
 		super.notifyChanged(notification);

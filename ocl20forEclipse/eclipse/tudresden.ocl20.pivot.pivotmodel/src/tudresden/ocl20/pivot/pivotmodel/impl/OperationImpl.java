@@ -75,29 +75,16 @@ import tudresden.ocl20.pivot.pivotmodel.util.ListUtil;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>
- * {@link tudresden.ocl20.pivot.pivotmodel.impl.OperationImpl#getOwnedTypeParameter
- * <em>Owned Type Parameter</em>}</li>
- * <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.OperationImpl#getOwningType
- * <em>Owning Type</em>}</li>
- * <li>
- * {@link tudresden.ocl20.pivot.pivotmodel.impl.OperationImpl#getOwnedParameter
- * <em>Owned Parameter</em>}</li>
- * <li>
- * {@link tudresden.ocl20.pivot.pivotmodel.impl.OperationImpl#getInputParameter
- * <em>Input Parameter</em>}</li>
- * <li>
- * {@link tudresden.ocl20.pivot.pivotmodel.impl.OperationImpl#getOutputParameter
- * <em>Output Parameter</em>}</li>
- * <li>
- * {@link tudresden.ocl20.pivot.pivotmodel.impl.OperationImpl#getReturnParameter
- * <em>Return Parameter</em>}</li>
- * <li>
- * {@link tudresden.ocl20.pivot.pivotmodel.impl.OperationImpl#getSignatureParameter
- * <em>Signature Parameter</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.OperationImpl#getOwnedTypeParameter <em>Owned Type Parameter</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.OperationImpl#getOwningType <em>Owning Type</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.OperationImpl#getOwnedParameter <em>Owned Parameter</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.OperationImpl#getInputParameter <em>Input Parameter</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.OperationImpl#getOutputParameter <em>Output Parameter</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.OperationImpl#getReturnParameter <em>Return Parameter</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.OperationImpl#getSignatureParameter <em>Signature Parameter</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @generated
  */
 public class OperationImpl extends FeatureImpl implements Operation {
@@ -134,7 +121,6 @@ public class OperationImpl extends FeatureImpl implements Operation {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	protected OperationImpl() {
@@ -293,7 +279,6 @@ public class OperationImpl extends FeatureImpl implements Operation {
 	 * <!-- begin-user-doc -->The code generated for {
 	 * {@link #getOwnedTypeParameterGen()} is redirected to this method.<!--
 	 * end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	protected final List<TypeParameter> getOwnedTypeParameterGen() {
@@ -308,7 +293,6 @@ public class OperationImpl extends FeatureImpl implements Operation {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public Type getOwningType() {
@@ -319,7 +303,6 @@ public class OperationImpl extends FeatureImpl implements Operation {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public NotificationChain basicSetOwningType(Type newOwningType,
@@ -331,7 +314,6 @@ public class OperationImpl extends FeatureImpl implements Operation {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public void setOwningType(Type newOwningType) {
@@ -373,7 +355,6 @@ public class OperationImpl extends FeatureImpl implements Operation {
 	 * <!-- begin-user-doc -->The code generated for {
 	 * {@link #getOwnedParameter()} is redirected to this method. <!--
 	 * end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	protected final List<Parameter> getOwnedParameterGen() {
@@ -541,8 +522,7 @@ public class OperationImpl extends FeatureImpl implements Operation {
 		}
 
 		if (logger.isDebugEnabled()) {
-			logger
-					.debug("hasMatchingSignature() - exit - return value=" + match); //$NON-NLS-1$
+			logger.debug("hasMatchingSignature() - exit - return value=" + match); //$NON-NLS-1$
 		}
 
 		return match;
@@ -601,9 +581,8 @@ public class OperationImpl extends FeatureImpl implements Operation {
 			List<? extends Type> types) {
 
 		if (logger.isDebugEnabled()) {
-			logger
-					.debug("bindTypeParameter(parameters=" + parameters + ", types=" //$NON-NLS-1$ //$NON-NLS-2$
-							+ types + ") - enter"); //$NON-NLS-1$
+			logger.debug("bindTypeParameter(parameters=" + parameters + ", types=" //$NON-NLS-1$ //$NON-NLS-2$
+					+ types + ") - enter"); //$NON-NLS-1$
 		}
 
 		// precondition check
@@ -691,7 +670,6 @@ public class OperationImpl extends FeatureImpl implements Operation {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
@@ -715,7 +693,6 @@ public class OperationImpl extends FeatureImpl implements Operation {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -736,7 +713,6 @@ public class OperationImpl extends FeatureImpl implements Operation {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -752,7 +728,6 @@ public class OperationImpl extends FeatureImpl implements Operation {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -778,7 +753,6 @@ public class OperationImpl extends FeatureImpl implements Operation {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
@@ -804,7 +778,6 @@ public class OperationImpl extends FeatureImpl implements Operation {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -825,7 +798,6 @@ public class OperationImpl extends FeatureImpl implements Operation {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -851,7 +823,6 @@ public class OperationImpl extends FeatureImpl implements Operation {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -875,7 +846,6 @@ public class OperationImpl extends FeatureImpl implements Operation {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -899,7 +869,6 @@ public class OperationImpl extends FeatureImpl implements Operation {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override

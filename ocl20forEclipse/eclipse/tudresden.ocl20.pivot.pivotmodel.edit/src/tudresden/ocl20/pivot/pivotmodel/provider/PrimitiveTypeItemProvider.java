@@ -116,8 +116,8 @@ public class PrimitiveTypeItemProvider extends TypeItemProvider implements
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage(
-				"full/obj16/PrimitiveType")); //$NON-NLS-1$
+		return overlayImage(object,
+				getResourceLocator().getImage("full/obj16/PrimitiveType")); //$NON-NLS-1$
 	}
 
 	/**
@@ -148,8 +148,8 @@ public class PrimitiveTypeItemProvider extends TypeItemProvider implements
 
 		switch (notification.getFeatureID(PrimitiveType.class)) {
 		case PivotModelPackage.PRIMITIVE_TYPE__KIND:
-			fireNotifyChanged(new ViewerNotification(notification, notification
-					.getNotifier(), false, true));
+			fireNotifyChanged(new ViewerNotification(notification,
+					notification.getNotifier(), false, true));
 			return;
 		}
 		super.notifyChanged(notification);

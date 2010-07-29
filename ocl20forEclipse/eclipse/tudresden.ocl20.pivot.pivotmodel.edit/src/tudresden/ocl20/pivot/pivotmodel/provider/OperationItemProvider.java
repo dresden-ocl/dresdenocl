@@ -213,8 +213,8 @@ public class OperationItemProvider extends FeatureItemProvider implements
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage(
-				"full/obj16/Operation")); //$NON-NLS-1$
+		return overlayImage(object,
+				getResourceLocator().getImage("full/obj16/Operation")); //$NON-NLS-1$
 	}
 
 	/**
@@ -313,8 +313,8 @@ public class OperationItemProvider extends FeatureItemProvider implements
 		case PivotModelPackageImpl.OPERATION__GENERIC_TYPE:
 		case PivotModelPackageImpl.OPERATION__OWNED_PARAMETER:
 		case PivotModelPackageImpl.OPERATION__OWNED_TYPE_PARAMETER:
-			fireNotifyChanged(new ViewerNotification(notification, notification
-					.getNotifier(), true, true));
+			fireNotifyChanged(new ViewerNotification(notification,
+					notification.getNotifier(), true, true));
 			return;
 		}
 		super.notifyChanged(notification);

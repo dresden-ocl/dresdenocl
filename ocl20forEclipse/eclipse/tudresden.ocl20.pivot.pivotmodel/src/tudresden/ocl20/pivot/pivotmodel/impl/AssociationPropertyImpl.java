@@ -45,40 +45,40 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
-import tudresden.ocl20.pivot.pivotmodel.NDirectionalProperty;
+import tudresden.ocl20.pivot.pivotmodel.AssociationProperty;
 import tudresden.ocl20.pivot.pivotmodel.PivotModelPackage;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>NDirectional Property</b></em>'.
+ * An implementation of the model object '<em><b>Association Property</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.NDirectionalPropertyImpl#getInverseNDirectionalProperties <em>Inverse NDirectional Properties</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.AssociationPropertyImpl#getInverseAssociationProperties <em>Inverse Association Properties</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class NDirectionalPropertyImpl extends PropertyImpl implements
-		NDirectionalProperty {
+public class AssociationPropertyImpl extends PropertyImpl implements
+		AssociationProperty {
 	/**
-	 * The cached value of the '{@link #getInverseNDirectionalProperties() <em>Inverse NDirectional Properties</em>}' containment reference list.
+	 * The cached value of the '{@link #getInverseAssociationProperties() <em>Inverse Association Properties</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getInverseNDirectionalProperties()
+	 * @see #getInverseAssociationProperties()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<NDirectionalProperty> inverseNDirectionalProperties;
+	protected EList<AssociationProperty> inverseAssociationProperties;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected NDirectionalPropertyImpl() {
+	protected AssociationPropertyImpl() {
 		super();
 	}
 
@@ -89,7 +89,7 @@ public class NDirectionalPropertyImpl extends PropertyImpl implements
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return PivotModelPackage.Literals.NDIRECTIONAL_PROPERTY;
+		return PivotModelPackage.Literals.ASSOCIATION_PROPERTY;
 	}
 
 	/**
@@ -97,14 +97,14 @@ public class NDirectionalPropertyImpl extends PropertyImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public List<NDirectionalProperty> getInverseNDirectionalProperties() {
-		if (inverseNDirectionalProperties == null) {
-			inverseNDirectionalProperties = new EObjectContainmentEList<NDirectionalProperty>(
-					NDirectionalProperty.class,
+	public List<AssociationProperty> getInverseAssociationProperties() {
+		if (inverseAssociationProperties == null) {
+			inverseAssociationProperties = new EObjectContainmentEList<AssociationProperty>(
+					AssociationProperty.class,
 					this,
-					PivotModelPackage.NDIRECTIONAL_PROPERTY__INVERSE_NDIRECTIONAL_PROPERTIES);
+					PivotModelPackage.ASSOCIATION_PROPERTY__INVERSE_ASSOCIATION_PROPERTIES);
 		}
-		return inverseNDirectionalProperties;
+		return inverseAssociationProperties;
 	}
 
 	/**
@@ -112,7 +112,7 @@ public class NDirectionalPropertyImpl extends PropertyImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void addAssociation(NDirectionalProperty bProperty) {
+	public void addAssociation(AssociationProperty bProperty) {
 		// TODO: implement this method
 		// Ensure that you remove @generated or mark it @generated NOT
 		throw new UnsupportedOperationException();
@@ -123,7 +123,7 @@ public class NDirectionalPropertyImpl extends PropertyImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NDirectionalProperty getAssociation(String propName) {
+	public AssociationProperty getAssociation(String propName) {
 		// TODO: implement this method
 		// Ensure that you remove @generated or mark it @generated NOT
 		throw new UnsupportedOperationException();
@@ -134,7 +134,7 @@ public class NDirectionalPropertyImpl extends PropertyImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void removeAssociation(NDirectionalProperty bProperty) {
+	public void removeAssociation(AssociationProperty bProperty) {
 		// TODO: implement this method
 		// Ensure that you remove @generated or mark it @generated NOT
 		throw new UnsupportedOperationException();
@@ -145,7 +145,7 @@ public class NDirectionalPropertyImpl extends PropertyImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean isInverseAssociation(NDirectionalProperty bProperty) {
+	public boolean isInverseAssociation(AssociationProperty bProperty) {
 		// TODO: implement this method
 		// Ensure that you remove @generated or mark it @generated NOT
 		throw new UnsupportedOperationException();
@@ -156,7 +156,7 @@ public class NDirectionalPropertyImpl extends PropertyImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void addAssociations(List<NDirectionalProperty> bProperty) {
+	public void addAssociations(List<AssociationProperty> bProperty) {
 		// TODO: implement this method
 		// Ensure that you remove @generated or mark it @generated NOT
 		throw new UnsupportedOperationException();
@@ -171,8 +171,8 @@ public class NDirectionalPropertyImpl extends PropertyImpl implements
 	public NotificationChain eInverseRemove(InternalEObject otherEnd,
 			int featureID, NotificationChain msgs) {
 		switch (featureID) {
-		case PivotModelPackage.NDIRECTIONAL_PROPERTY__INVERSE_NDIRECTIONAL_PROPERTIES:
-			return ((InternalEList<?>) getInverseNDirectionalProperties())
+		case PivotModelPackage.ASSOCIATION_PROPERTY__INVERSE_ASSOCIATION_PROPERTIES:
+			return ((InternalEList<?>) getInverseAssociationProperties())
 					.basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -186,8 +186,8 @@ public class NDirectionalPropertyImpl extends PropertyImpl implements
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-		case PivotModelPackage.NDIRECTIONAL_PROPERTY__INVERSE_NDIRECTIONAL_PROPERTIES:
-			return getInverseNDirectionalProperties();
+		case PivotModelPackage.ASSOCIATION_PROPERTY__INVERSE_ASSOCIATION_PROPERTIES:
+			return getInverseAssociationProperties();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -201,10 +201,10 @@ public class NDirectionalPropertyImpl extends PropertyImpl implements
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-		case PivotModelPackage.NDIRECTIONAL_PROPERTY__INVERSE_NDIRECTIONAL_PROPERTIES:
-			getInverseNDirectionalProperties().clear();
-			getInverseNDirectionalProperties().addAll(
-					(Collection<? extends NDirectionalProperty>) newValue);
+		case PivotModelPackage.ASSOCIATION_PROPERTY__INVERSE_ASSOCIATION_PROPERTIES:
+			getInverseAssociationProperties().clear();
+			getInverseAssociationProperties().addAll(
+					(Collection<? extends AssociationProperty>) newValue);
 			return;
 		}
 		super.eSet(featureID, newValue);
@@ -218,8 +218,8 @@ public class NDirectionalPropertyImpl extends PropertyImpl implements
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-		case PivotModelPackage.NDIRECTIONAL_PROPERTY__INVERSE_NDIRECTIONAL_PROPERTIES:
-			getInverseNDirectionalProperties().clear();
+		case PivotModelPackage.ASSOCIATION_PROPERTY__INVERSE_ASSOCIATION_PROPERTIES:
+			getInverseAssociationProperties().clear();
 			return;
 		}
 		super.eUnset(featureID);
@@ -233,11 +233,11 @@ public class NDirectionalPropertyImpl extends PropertyImpl implements
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-		case PivotModelPackage.NDIRECTIONAL_PROPERTY__INVERSE_NDIRECTIONAL_PROPERTIES:
-			return inverseNDirectionalProperties != null
-					&& !inverseNDirectionalProperties.isEmpty();
+		case PivotModelPackage.ASSOCIATION_PROPERTY__INVERSE_ASSOCIATION_PROPERTIES:
+			return inverseAssociationProperties != null
+					&& !inverseAssociationProperties.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
 
-} //NDirectionalPropertyImpl
+} //AssociationPropertyImpl

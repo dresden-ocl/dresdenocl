@@ -32,6 +32,7 @@ import tudresden.ocl20.pivot.tools.codegen.exception.Ocl2CodeException;
 import tudresden.ocl20.pivot.tools.codegen.ocl2java.IOcl2JavaSettings;
 import tudresden.ocl20.pivot.tools.codegen.ocl2java.Ocl2JavaFactory;
 import tudresden.ocl20.pivot.tools.codegen.ocl2java.ui.Ocl2JavaUIPlugIn;
+import tudresden.ocl20.pivot.tools.codegen.ocl2java.ui.internal.Ocl2JavaUIMessages;
 import tudresden.ocl20.pivot.tools.codegen.ui.impl.CodegenUIMessages;
 import tudresden.ocl20.pivot.tools.codegen.ui.impl.wizards.CodegenJob;
 import tudresden.ocl20.pivot.tools.codegen.ui.impl.wizards.TransformCodeWizard;
@@ -57,10 +58,11 @@ public class JavaCodeWizard extends TransformCodeWizard implements INewWizard {
 	 * </p>
 	 */
 	public JavaCodeWizard() {
-		super();
+		super(Ocl2JavaUIMessages.TransformCodeWizard_Title);
 		/* Sets the image in the top right corner. */
 		setDefaultPageImageDescriptor(Ocl2JavaUIPlugIn
 				.getImageDescriptor(wizardImage));
+		
 	}
 
 	/*

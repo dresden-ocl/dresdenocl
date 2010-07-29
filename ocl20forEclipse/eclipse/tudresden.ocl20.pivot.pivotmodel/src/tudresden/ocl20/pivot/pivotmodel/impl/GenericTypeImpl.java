@@ -114,9 +114,8 @@ public abstract class GenericTypeImpl extends NamedElementImpl implements
 			List<? extends Type> types, TypedElement typedElement) {
 
 		if (logger.isDebugEnabled()) {
-			logger
-					.debug("bindGenericType(parameters=" + parameters + ", types=" + types //$NON-NLS-1$ //$NON-NLS-2$
-							+ ", typedElement=" + typedElement + ") - enter"); //$NON-NLS-1$//$NON-NLS-2$
+			logger.debug("bindGenericType(parameters=" + parameters + ", types=" + types //$NON-NLS-1$ //$NON-NLS-2$
+					+ ", typedElement=" + typedElement + ") - enter"); //$NON-NLS-1$//$NON-NLS-2$
 		}
 
 		// perform binding
@@ -147,17 +146,15 @@ public abstract class GenericTypeImpl extends NamedElementImpl implements
 			List<? extends Type> types, Type subType) {
 
 		if (logger.isDebugEnabled()) {
-			logger
-					.debug("bindGenericSuperType(parameters=" + parameters + ", types=" + types //$NON-NLS-1$ //$NON-NLS-2$
-							+ ", subType=" + subType + ") - enter"); //$NON-NLS-1$//$NON-NLS-2$
+			logger.debug("bindGenericSuperType(parameters=" + parameters + ", types=" + types //$NON-NLS-1$ //$NON-NLS-2$
+					+ ", subType=" + subType + ") - enter"); //$NON-NLS-1$//$NON-NLS-2$
 		}
 
 		// perform binding
 		boolean success = doBindGenericSuperType(parameters, types, subType);
 
 		if (logger.isDebugEnabled()) {
-			logger
-					.debug("bindGenericSuperType() - exit - return value=" + success); //$NON-NLS-1$
+			logger.debug("bindGenericSuperType() - exit - return value=" + success); //$NON-NLS-1$
 		}
 
 		return success;

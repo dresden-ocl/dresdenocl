@@ -246,7 +246,7 @@ public class PrimitiveTypeImpl extends TypeImpl implements PrimitiveType {
 				.appendToString(super.toString())
 				.append("kind", getKind()).toString(); //$NON-NLS-1$
 	}
-	
+
 	@Override
 	public boolean equals(Object other) {
 		if (other instanceof PrimitiveType) {

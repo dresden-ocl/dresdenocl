@@ -123,7 +123,6 @@ public class EcoreModelProvider extends AbstractModelProvider implements
 	 * tudresden.ocl20.pivot.model.base.AbstractModelProvider#getModel(org.eclipse
 	 * .emf.ecore.resource.Resource)
 	 */
-	@Override
 	public IModel getModel(Resource resource) {
 		/* Eventually log the entry into this method. */
 		if (LOGGER.isDebugEnabled()) {

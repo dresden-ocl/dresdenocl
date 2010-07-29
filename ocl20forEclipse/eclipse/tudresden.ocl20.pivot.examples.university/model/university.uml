@@ -4,15 +4,6 @@
     <packagedElement xmi:type="uml:Package" xmi:id="_BlraUMHiEd2UNuYhQ_ApoA" name="pivot">
       <packagedElement xmi:type="uml:Package" xmi:id="_Cff-QMHiEd2UNuYhQ_ApoA" name="examples">
         <packagedElement xmi:type="uml:Package" xmi:id="_DmIPIMHiEd2UNuYhQ_ApoA" name="university">
-          <elementImport xmi:id="_TGIkcLQFEd6jRpBYO5b3OQ">
-            <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
-          </elementImport>
-          <elementImport xmi:id="_TGbfYLQFEd6jRpBYO5b3OQ">
-            <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
-          </elementImport>
-          <elementImport xmi:id="_TGbfYbQFEd6jRpBYO5b3OQ">
-            <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
-          </elementImport>
           <packagedElement xmi:type="uml:Class" xmi:id="_cjU9YDXHEd-_J9pP9Zsbaw" name="Grade">
             <ownedAttribute xmi:id="_ePVMMDXHEd-_J9pP9Zsbaw" name="name" visibility="private">
               <type xmi:type="uml:PrimitiveType" href="pathmap://UML_METAMODELS/UML.metamodel.uml#String"/>
@@ -38,10 +29,6 @@
             </ownedAttribute>
             <ownedAttribute xmi:id="_Ppaa0MHiEd2UNuYhQ_ApoA" name="age" visibility="private">
               <type xmi:type="uml:PrimitiveType" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Integer"/>
-            </ownedAttribute>
-            <ownedAttribute xmi:id="_onYJ4DePEd-JXKTQMEgtig" name="salaries" visibility="private">
-              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Integer"/>
-              <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_w8L4sDePEd-JXKTQMEgtig" value="*"/>
             </ownedAttribute>
           </packagedElement>
           <packagedElement xmi:type="uml:Class" xmi:id="_Tagt4MHiEd2UNuYhQ_ApoA" name="Student">

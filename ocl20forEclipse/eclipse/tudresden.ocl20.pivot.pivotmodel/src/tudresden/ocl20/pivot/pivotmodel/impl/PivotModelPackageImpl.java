@@ -44,6 +44,7 @@ import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 import tudresden.ocl20.pivot.datatypes.DatatypesPackage;
 import tudresden.ocl20.pivot.datatypes.impl.DatatypesPackageImpl;
+import tudresden.ocl20.pivot.pivotmodel.AssociationProperty;
 import tudresden.ocl20.pivot.pivotmodel.ComplexGenericType;
 import tudresden.ocl20.pivot.pivotmodel.ConstrainableElement;
 import tudresden.ocl20.pivot.pivotmodel.Constraint;
@@ -54,7 +55,6 @@ import tudresden.ocl20.pivot.pivotmodel.Expression;
 import tudresden.ocl20.pivot.pivotmodel.Feature;
 import tudresden.ocl20.pivot.pivotmodel.GenericElement;
 import tudresden.ocl20.pivot.pivotmodel.GenericType;
-import tudresden.ocl20.pivot.pivotmodel.NDirectionalProperty;
 import tudresden.ocl20.pivot.pivotmodel.NamedElement;
 import tudresden.ocl20.pivot.pivotmodel.Namespace;
 import tudresden.ocl20.pivot.pivotmodel.Operation;
@@ -183,7 +183,7 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass nDirectionalPropertyEClass = null;
+	private EClass associationPropertyEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -308,8 +308,7 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 		// Obtain or create and register package
 		PivotModelPackageImpl thePivotModelPackage = (PivotModelPackageImpl) (EPackage.Registry.INSTANCE
 				.get(eNS_URI) instanceof PivotModelPackageImpl ? EPackage.Registry.INSTANCE
-				.get(eNS_URI)
-				: new PivotModelPackageImpl());
+				.get(eNS_URI) : new PivotModelPackageImpl());
 
 		isInited = true;
 
@@ -774,8 +773,8 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getNDirectionalProperty() {
-		return nDirectionalPropertyEClass;
+	public EClass getAssociationProperty() {
+		return associationPropertyEClass;
 	}
 
 	/**
@@ -783,8 +782,8 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getNDirectionalProperty_InverseNDirectionalProperties() {
-		return (EReference) nDirectionalPropertyEClass.getEStructuralFeatures()
+	public EReference getAssociationProperty_InverseAssociationProperties() {
+		return (EReference) associationPropertyEClass.getEStructuralFeatures()
 				.get(0);
 	}
 
@@ -1060,9 +1059,9 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 		createEAttribute(expressionEClass, EXPRESSION__LANGUAGE);
 		createEReference(expressionEClass, EXPRESSION__CONSTRAINT);
 
-		nDirectionalPropertyEClass = createEClass(NDIRECTIONAL_PROPERTY);
-		createEReference(nDirectionalPropertyEClass,
-				NDIRECTIONAL_PROPERTY__INVERSE_NDIRECTIONAL_PROPERTIES);
+		associationPropertyEClass = createEClass(ASSOCIATION_PROPERTY);
+		createEReference(associationPropertyEClass,
+				ASSOCIATION_PROPERTY__INVERSE_ASSOCIATION_PROPERTIES);
 
 		// Create enums
 		primitiveTypeKindEEnum = createEEnum(PRIMITIVE_TYPE_KIND);
@@ -1134,7 +1133,7 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 		typeParameterEClass.getESuperTypes().add(this.getNamedElement());
 		typeArgumentEClass.getESuperTypes().add(this.getTypedElement());
 		constraintEClass.getESuperTypes().add(this.getNamedElement());
-		nDirectionalPropertyEClass.getESuperTypes().add(this.getProperty());
+		associationPropertyEClass.getESuperTypes().add(this.getProperty());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(
@@ -1155,8 +1154,8 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 				null,
 				"owner", null, 0, 1, NamedElement.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
-		EOperation op = addEOperation(namedElementEClass, this
-				.getNamedElement(), "clone", 1, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		EOperation op = addEOperation(namedElementEClass,
+				this.getNamedElement(), "clone", 1, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 		addEException(op, this.getCloneNotSupportedException());
 
 		addEOperation(namedElementEClass, theDatatypesPackage.getString(),
@@ -1550,8 +1549,8 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 				this.getTypeArgument_OwningGenericType(),
 				"typeArgument", null, 0, -1, ComplexGenericType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
-		op = addEOperation(complexGenericTypeEClass, this
-				.getComplexGenericType(),
+		op = addEOperation(complexGenericTypeEClass,
+				this.getComplexGenericType(),
 				"addTypeArgument", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 		addEParameter(op, this.getTypeArgument(),
 				"typeArgument", 1, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
@@ -1629,40 +1628,40 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 				"constraint", null, 0, 1, Expression.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
 		initEClass(
-				nDirectionalPropertyEClass,
-				NDirectionalProperty.class,
-				"NDirectionalProperty", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+				associationPropertyEClass,
+				AssociationProperty.class,
+				"AssociationProperty", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 		initEReference(
-				getNDirectionalProperty_InverseNDirectionalProperties(),
-				this.getNDirectionalProperty(),
+				getAssociationProperty_InverseAssociationProperties(),
+				this.getAssociationProperty(),
 				null,
-				"inverseNDirectionalProperties", null, 0, -1, NDirectionalProperty.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+				"inverseAssociationProperties", null, 0, -1, AssociationProperty.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
-		op = addEOperation(nDirectionalPropertyEClass, null,
+		op = addEOperation(associationPropertyEClass, null,
 				"addAssociation", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
-		addEParameter(op, this.getNDirectionalProperty(),
+		addEParameter(op, this.getAssociationProperty(),
 				"bProperty", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
-		op = addEOperation(nDirectionalPropertyEClass, this
-				.getNDirectionalProperty(),
+		op = addEOperation(associationPropertyEClass,
+				this.getAssociationProperty(),
 				"getAssociation", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 		addEParameter(op, theDatatypesPackage.getString(),
 				"propName", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
-		op = addEOperation(nDirectionalPropertyEClass, null,
+		op = addEOperation(associationPropertyEClass, null,
 				"removeAssociation", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
-		addEParameter(op, this.getNDirectionalProperty(),
+		addEParameter(op, this.getAssociationProperty(),
 				"bProperty", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
-		op = addEOperation(nDirectionalPropertyEClass, theDatatypesPackage
-				.getBoolean(),
+		op = addEOperation(associationPropertyEClass,
+				theDatatypesPackage.getBoolean(),
 				"isInverseAssociation", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
-		addEParameter(op, this.getNDirectionalProperty(),
+		addEParameter(op, this.getAssociationProperty(),
 				"bProperty", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
-		op = addEOperation(nDirectionalPropertyEClass, null,
+		op = addEOperation(associationPropertyEClass, null,
 				"addAssociations", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
-		addEParameter(op, this.getNDirectionalProperty(),
+		addEParameter(op, this.getAssociationProperty(),
 				"bProperty", 0, -1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
 		// Initialize enums and add enum literals

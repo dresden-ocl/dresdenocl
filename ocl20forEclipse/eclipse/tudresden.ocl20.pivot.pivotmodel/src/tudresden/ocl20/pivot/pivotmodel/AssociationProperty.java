@@ -32,17 +32,16 @@
  */
 package tudresden.ocl20.pivot.pivotmodel;
 
-import org.eclipse.emf.common.util.EList;
 import java.util.List;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>NDirectional Property</b></em>'.
+ * A representation of the model object '<em><b>Association Property</b></em>'.
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
  * <p>
- * A <code>NDirectionalAssociation</code> is a {@link Property} 
+ * A <code>Association</code> is a {@link Property} 
  * typed element that represents an bidirectional association to another type.
  * </p>
  * <!-- end-model-doc -->
@@ -50,30 +49,30 @@ import java.util.List;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.pivotmodel.NDirectionalProperty#getInverseNDirectionalProperties <em>Inverse NDirectional Properties</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.pivotmodel.AssociationProperty#getInverseAssociationProperties <em>Inverse Association Properties</em>}</li>
  * </ul>
  * </p>
  *
- * @see tudresden.ocl20.pivot.pivotmodel.PivotModelPackage#getNDirectionalProperty()
+ * @see tudresden.ocl20.pivot.pivotmodel.PivotModelPackage#getAssociationProperty()
  * @model
  * @generated
  */
-public interface NDirectionalProperty extends Property {
+public interface AssociationProperty extends Property {
 	/**
-	 * Returns the value of the '<em><b>Inverse NDirectional Properties</b></em>' containment reference list.
-	 * The list contents are of type {@link tudresden.ocl20.pivot.pivotmodel.NDirectionalProperty}.
+	 * Returns the value of the '<em><b>Inverse Association Properties</b></em>' containment reference list.
+	 * The list contents are of type {@link tudresden.ocl20.pivot.pivotmodel.AssociationProperty}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Inverse NDirectional Properties</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Inverse Association Properties</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Inverse NDirectional Properties</em>' containment reference list.
-	 * @see tudresden.ocl20.pivot.pivotmodel.PivotModelPackage#getNDirectionalProperty_InverseNDirectionalProperties()
+	 * @return the value of the '<em>Inverse Association Properties</em>' containment reference list.
+	 * @see tudresden.ocl20.pivot.pivotmodel.PivotModelPackage#getAssociationProperty_InverseAssociationProperties()
 	 * @model containment="true"
 	 * @generated
 	 */
-	List<NDirectionalProperty> getInverseNDirectionalProperties();
+	List<AssociationProperty> getInverseAssociationProperties();
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -86,7 +85,7 @@ public interface NDirectionalProperty extends Property {
 	 * @model
 	 * @generated
 	 */
-	void addAssociation(NDirectionalProperty bProperty);
+	void addAssociation(AssociationProperty bProperty);
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -99,7 +98,7 @@ public interface NDirectionalProperty extends Property {
 	 * @model propNameDataType="tudresden.ocl20.pivot.datatypes.String"
 	 * @generated
 	 */
-	NDirectionalProperty getAssociation(String propName);
+	AssociationProperty getAssociation(String propName);
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -112,7 +111,7 @@ public interface NDirectionalProperty extends Property {
 	 * @model
 	 * @generated
 	 */
-	void removeAssociation(NDirectionalProperty bProperty);
+	void removeAssociation(AssociationProperty bProperty);
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -125,7 +124,7 @@ public interface NDirectionalProperty extends Property {
 	 * @model dataType="tudresden.ocl20.pivot.datatypes.Boolean"
 	 * @generated
 	 */
-	boolean isInverseAssociation(NDirectionalProperty bProperty);
+	boolean isInverseAssociation(AssociationProperty bProperty);
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -138,6 +137,6 @@ public interface NDirectionalProperty extends Property {
 	 * @model bPropertyMany="true"
 	 * @generated
 	 */
-	void addAssociations(List<NDirectionalProperty> bProperty);
+	void addAssociations(List<AssociationProperty> bProperty);
 
-} // NDirectionalProperty
+} // AssociationProperty

@@ -1540,14 +1540,14 @@ public interface PivotModelPackage extends EPackage {
 	int EXPRESSION_FEATURE_COUNT = 3;
 
 	/**
-	 * The meta object id for the '{@link tudresden.ocl20.pivot.pivotmodel.impl.NDirectionalPropertyImpl <em>NDirectional Property</em>}' class.
+	 * The meta object id for the '{@link tudresden.ocl20.pivot.pivotmodel.impl.AssociationPropertyImpl <em>Association Property</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.NDirectionalPropertyImpl
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl#getNDirectionalProperty()
+	 * @see tudresden.ocl20.pivot.pivotmodel.impl.AssociationPropertyImpl
+	 * @see tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl#getAssociationProperty()
 	 * @generated
 	 */
-	int NDIRECTIONAL_PROPERTY = 20;
+	int ASSOCIATION_PROPERTY = 20;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1556,7 +1556,7 @@ public interface PivotModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int NDIRECTIONAL_PROPERTY__NAME = PROPERTY__NAME;
+	int ASSOCIATION_PROPERTY__NAME = PROPERTY__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Qualified Name</b></em>' attribute.
@@ -1565,7 +1565,7 @@ public interface PivotModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int NDIRECTIONAL_PROPERTY__QUALIFIED_NAME = PROPERTY__QUALIFIED_NAME;
+	int ASSOCIATION_PROPERTY__QUALIFIED_NAME = PROPERTY__QUALIFIED_NAME;
 
 	/**
 	 * The feature id for the '<em><b>Owner</b></em>' reference.
@@ -1574,7 +1574,7 @@ public interface PivotModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int NDIRECTIONAL_PROPERTY__OWNER = PROPERTY__OWNER;
+	int ASSOCIATION_PROPERTY__OWNER = PROPERTY__OWNER;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' reference.
@@ -1583,7 +1583,7 @@ public interface PivotModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int NDIRECTIONAL_PROPERTY__TYPE = PROPERTY__TYPE;
+	int ASSOCIATION_PROPERTY__TYPE = PROPERTY__TYPE;
 
 	/**
 	 * The feature id for the '<em><b>Generic Type</b></em>' containment reference.
@@ -1592,7 +1592,7 @@ public interface PivotModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int NDIRECTIONAL_PROPERTY__GENERIC_TYPE = PROPERTY__GENERIC_TYPE;
+	int ASSOCIATION_PROPERTY__GENERIC_TYPE = PROPERTY__GENERIC_TYPE;
 
 	/**
 	 * The feature id for the '<em><b>Static</b></em>' attribute.
@@ -1601,7 +1601,7 @@ public interface PivotModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int NDIRECTIONAL_PROPERTY__STATIC = PROPERTY__STATIC;
+	int ASSOCIATION_PROPERTY__STATIC = PROPERTY__STATIC;
 
 	/**
 	 * The feature id for the '<em><b>Owning Type</b></em>' container reference.
@@ -1610,25 +1610,25 @@ public interface PivotModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int NDIRECTIONAL_PROPERTY__OWNING_TYPE = PROPERTY__OWNING_TYPE;
+	int ASSOCIATION_PROPERTY__OWNING_TYPE = PROPERTY__OWNING_TYPE;
 
 	/**
-	 * The feature id for the '<em><b>Inverse NDirectional Properties</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Inverse Association Properties</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int NDIRECTIONAL_PROPERTY__INVERSE_NDIRECTIONAL_PROPERTIES = PROPERTY_FEATURE_COUNT + 0;
+	int ASSOCIATION_PROPERTY__INVERSE_ASSOCIATION_PROPERTIES = PROPERTY_FEATURE_COUNT + 0;
 
 	/**
-	 * The number of structural features of the '<em>NDirectional Property</em>' class.
+	 * The number of structural features of the '<em>Association Property</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int NDIRECTIONAL_PROPERTY_FEATURE_COUNT = PROPERTY_FEATURE_COUNT + 1;
+	int ASSOCIATION_PROPERTY_FEATURE_COUNT = PROPERTY_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link tudresden.ocl20.pivot.pivotmodel.PrimitiveTypeKind <em>Primitive Type Kind</em>}' enum.
@@ -2322,25 +2322,25 @@ public interface PivotModelPackage extends EPackage {
 	EReference getExpression_Constraint();
 
 	/**
-	 * Returns the meta object for class '{@link tudresden.ocl20.pivot.pivotmodel.NDirectionalProperty <em>NDirectional Property</em>}'.
+	 * Returns the meta object for class '{@link tudresden.ocl20.pivot.pivotmodel.AssociationProperty <em>Association Property</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>NDirectional Property</em>'.
-	 * @see tudresden.ocl20.pivot.pivotmodel.NDirectionalProperty
+	 * @return the meta object for class '<em>Association Property</em>'.
+	 * @see tudresden.ocl20.pivot.pivotmodel.AssociationProperty
 	 * @generated
 	 */
-	EClass getNDirectionalProperty();
+	EClass getAssociationProperty();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link tudresden.ocl20.pivot.pivotmodel.NDirectionalProperty#getInverseNDirectionalProperties <em>Inverse NDirectional Properties</em>}'.
+	 * Returns the meta object for the containment reference list '{@link tudresden.ocl20.pivot.pivotmodel.AssociationProperty#getInverseAssociationProperties <em>Inverse Association Properties</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Inverse NDirectional Properties</em>'.
-	 * @see tudresden.ocl20.pivot.pivotmodel.NDirectionalProperty#getInverseNDirectionalProperties()
-	 * @see #getNDirectionalProperty()
+	 * @return the meta object for the containment reference list '<em>Inverse Association Properties</em>'.
+	 * @see tudresden.ocl20.pivot.pivotmodel.AssociationProperty#getInverseAssociationProperties()
+	 * @see #getAssociationProperty()
 	 * @generated
 	 */
-	EReference getNDirectionalProperty_InverseNDirectionalProperties();
+	EReference getAssociationProperty_InverseAssociationProperties();
 
 	/**
 	 * Returns the meta object for enum '{@link tudresden.ocl20.pivot.pivotmodel.PrimitiveTypeKind <em>Primitive Type Kind</em>}'.
@@ -2956,23 +2956,23 @@ public interface PivotModelPackage extends EPackage {
 				.getExpression_Constraint();
 
 		/**
-		 * The meta object literal for the '{@link tudresden.ocl20.pivot.pivotmodel.impl.NDirectionalPropertyImpl <em>NDirectional Property</em>}' class.
+		 * The meta object literal for the '{@link tudresden.ocl20.pivot.pivotmodel.impl.AssociationPropertyImpl <em>Association Property</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see tudresden.ocl20.pivot.pivotmodel.impl.NDirectionalPropertyImpl
-		 * @see tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl#getNDirectionalProperty()
+		 * @see tudresden.ocl20.pivot.pivotmodel.impl.AssociationPropertyImpl
+		 * @see tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl#getAssociationProperty()
 		 * @generated
 		 */
-		EClass NDIRECTIONAL_PROPERTY = eINSTANCE.getNDirectionalProperty();
+		EClass ASSOCIATION_PROPERTY = eINSTANCE.getAssociationProperty();
 
 		/**
-		 * The meta object literal for the '<em><b>Inverse NDirectional Properties</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Inverse Association Properties</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference NDIRECTIONAL_PROPERTY__INVERSE_NDIRECTIONAL_PROPERTIES = eINSTANCE
-				.getNDirectionalProperty_InverseNDirectionalProperties();
+		EReference ASSOCIATION_PROPERTY__INVERSE_ASSOCIATION_PROPERTIES = eINSTANCE
+				.getAssociationProperty_InverseAssociationProperties();
 
 		/**
 		 * The meta object literal for the '{@link tudresden.ocl20.pivot.pivotmodel.PrimitiveTypeKind <em>Primitive Type Kind</em>}' enum.

@@ -30,7 +30,7 @@ import tudresden.ocl20.pivot.essentialocl.EssentialOclPlugin;
 import tudresden.ocl20.pivot.metamodels.uml2.UML2MetamodelPlugin;
 import tudresden.ocl20.pivot.pivotmodel.Enumeration;
 import tudresden.ocl20.pivot.pivotmodel.EnumerationLiteral;
-import tudresden.ocl20.pivot.pivotmodel.NDirectionalProperty;
+import tudresden.ocl20.pivot.pivotmodel.AssociationProperty;
 import tudresden.ocl20.pivot.pivotmodel.NamedElement;
 import tudresden.ocl20.pivot.pivotmodel.Namespace;
 import tudresden.ocl20.pivot.pivotmodel.Operation;
@@ -408,38 +408,38 @@ public class UML2AdapterFactory {
 
 	/**
 	 * <p>
-	 * Creates a {@link BiDirectionalProperty} adapter for a
+	 * Creates a {@link AssociationProperty} adapter for a
 	 * {@link org.eclipse.uml2.uml.Property}.
 	 * </p>
 	 * 
 	 * @generated NOT
 	 */
-	public NDirectionalProperty createNDirectionalProperty(
+	public AssociationProperty createAssociationProperty(
 			org.eclipse.uml2.uml.Property dslProperty) {
 
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER
-					.debug("createBiDirectionalProperty(dslProperty=" + dslProperty + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
+					.debug("createAssociationProperty(dslProperty=" + dslProperty + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 
 		if (dslProperty == null) {
 			if (LOGGER.isDebugEnabled())
 				LOGGER
-						.debug("createBiDirectionalProperty() - exit: dslProperty is null");
+						.debug("createAssociationProperty() - exit: dslProperty is null");
 			return null;
 		}
 
-		NDirectionalProperty property = (NDirectionalProperty) adapters
+		AssociationProperty property = (AssociationProperty) adapters
 				.get(dslProperty);
 
 		if (property == null) {
-			property = new UML2NDirectionalProperty(dslProperty, this);
+			property = new UML2AssociationProperty(dslProperty, this);
 			adapters.put(dslProperty, property);
 		}
 
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER
-					.debug("createBiDirectionalProperty() - exit - return value=" + property); //$NON-NLS-1$
+					.debug("createAssociationProperty() - exit - return value=" + property); //$NON-NLS-1$
 		}
 
 		return property;
@@ -833,16 +833,14 @@ public class UML2AdapterFactory {
 
 		boolean allArentNavigable;
 
-		List<NDirectionalProperty> adaptedAssociations = new LinkedList<NDirectionalProperty>();
+		List<AssociationProperty> adaptedAssociations = new LinkedList<AssociationProperty>();
+		List<AssociationProperty> navigableAssociations = new LinkedList<AssociationProperty>();
 
 		/* Check if all properties aren't navigable. */
 		allArentNavigable = true;
-		int size = 0;
-
+		
 		for (org.eclipse.uml2.uml.Property aProperty : properties) {
 			allArentNavigable &= !aProperty.isNavigable();
-			if (aProperty.isNavigable())
-				++size;
 		}
 		// end for.
 
@@ -853,8 +851,7 @@ public class UML2AdapterFactory {
 		if (allArentNavigable) {
 			for (org.eclipse.uml2.uml.Property aProperty : properties) {
 
-				adaptedAssociations.addAll(this.addAllOtherAssciationEnds(
-						aProperty, properties, true));
+				adaptedAssociations.addAll(this.addAllOtherAssciationEnds(aProperty, properties));
 			}
 			// end for.
 		}
@@ -866,10 +863,9 @@ public class UML2AdapterFactory {
 		else {
 			for (org.eclipse.uml2.uml.Property aProperty : properties) {
 				if (aProperty.isNavigable()) {
-
-					adaptedAssociations.addAll(this.addAllOtherAssciationEnds(
-							aProperty, properties, (size > 1)));
-				}
+					adaptedAssociations.addAll(this.addAllOtherAssciationEnds(aProperty, properties));
+					navigableAssociations.add(this.createAssociationProperty(aProperty));
+				} 
 				// no else.
 			}
 			// end for.
@@ -879,11 +875,12 @@ public class UML2AdapterFactory {
 		/*
 		 * Add all association ends to the other properties.
 		 */
-		for (NDirectionalProperty prop : adaptedAssociations) {
-
+		for (AssociationProperty prop : adaptedAssociations) {
 			prop.addAssociations(adaptedAssociations);
+			prop.addAssociations(navigableAssociations);
 		}
 		// end for.
+		
 	}
 
 	/**
@@ -901,37 +898,28 @@ public class UML2AdapterFactory {
 	 *            which shall be added.
 	 * @param nDirectional
 	 *            If the parameter true, then created
-	 *            {@link NDirectionalProperty}s, otherwise {@link Property}s.
-	 * @return a list of all added {@link NDirectionalProperty}s.
+	 *            {@link AssociationProperty}s, otherwise {@link Property}s.
+	 * @return a list of all added {@link AssociationProperty}s.
 	 */
-	private List<NDirectionalProperty> addAllOtherAssciationEnds(
+	private List<AssociationProperty> addAllOtherAssciationEnds(
 			org.eclipse.uml2.uml.Property anOwner,
-			List<org.eclipse.uml2.uml.Property> allProperties,
-			boolean nDirectional) {
+			List<org.eclipse.uml2.uml.Property> allProperties) {
 
-		List<NDirectionalProperty> result = new LinkedList<NDirectionalProperty>();
-
+		List<AssociationProperty> result = new LinkedList<AssociationProperty>();
+		
 		for (org.eclipse.uml2.uml.Property aProperty : allProperties) {
 
 			/* Do not add the property to itself, but to all other properties. */
 			if (anOwner != aProperty) {
 				tudresden.ocl20.pivot.pivotmodel.Type ownerType;
-				tudresden.ocl20.pivot.pivotmodel.Property adaptedProperty;
+				tudresden.ocl20.pivot.pivotmodel.AssociationProperty adaptedProperty;
 
 				/* Create or get the owner's Type. */
 				ownerType = this.createType(anOwner.getType());
 
 				/* Create or get the property. */
-				if (nDirectional) {
-					adaptedProperty = this
-							.createNDirectionalProperty(aProperty);
-					result.add((NDirectionalProperty) adaptedProperty);
-				}
-
-				else {
-					adaptedProperty = this.createProperty(aProperty);
-				}
-
+				adaptedProperty = this.createAssociationProperty(aProperty);
+				result.add(adaptedProperty);
 				/*
 				 * Check if the property has already been added (could happen
 				 * for bidirectional associations between the same type).

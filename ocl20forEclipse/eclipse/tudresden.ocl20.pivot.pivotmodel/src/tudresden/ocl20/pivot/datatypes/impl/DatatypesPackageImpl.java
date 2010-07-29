@@ -180,8 +180,7 @@ public class DatatypesPackageImpl extends EPackageImpl implements
 		// Obtain or create and register package
 		DatatypesPackageImpl theDatatypesPackage = (DatatypesPackageImpl) (EPackage.Registry.INSTANCE
 				.get(eNS_URI) instanceof DatatypesPackageImpl ? EPackage.Registry.INSTANCE
-				.get(eNS_URI)
-				: new DatatypesPackageImpl());
+				.get(eNS_URI) : new DatatypesPackageImpl());
 
 		isInited = true;
 

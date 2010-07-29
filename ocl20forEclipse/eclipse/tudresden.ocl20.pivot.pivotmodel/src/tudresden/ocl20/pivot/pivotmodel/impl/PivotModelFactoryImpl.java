@@ -128,8 +128,8 @@ public class PivotModelFactoryImpl extends EFactoryImpl implements
 			return createConstraint();
 		case PivotModelPackage.EXPRESSION:
 			return createExpression();
-		case PivotModelPackage.NDIRECTIONAL_PROPERTY:
-			return createNDirectionalProperty();
+		case PivotModelPackage.ASSOCIATION_PROPERTY:
+			return createAssociationProperty();
 		default:
 			throw new IllegalArgumentException(
 					"The class '" + eClass.getName() + "' is not a valid classifier"); //$NON-NLS-1$ //$NON-NLS-2$
@@ -271,9 +271,9 @@ public class PivotModelFactoryImpl extends EFactoryImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NDirectionalProperty createNDirectionalProperty() {
-		NDirectionalPropertyImpl nDirectionalProperty = new NDirectionalPropertyImpl();
-		return nDirectionalProperty;
+	public AssociationProperty createAssociationProperty() {
+		AssociationPropertyImpl associationProperty = new AssociationPropertyImpl();
+		return associationProperty;
 	}
 
 	/**

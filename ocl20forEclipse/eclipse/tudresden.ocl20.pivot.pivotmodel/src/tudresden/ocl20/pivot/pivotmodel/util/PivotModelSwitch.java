@@ -37,6 +37,8 @@ import java.util.List;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 
+import tudresden.ocl20.pivot.pivotmodel.*;
+import tudresden.ocl20.pivot.pivotmodel.AssociationProperty;
 import tudresden.ocl20.pivot.pivotmodel.ComplexGenericType;
 import tudresden.ocl20.pivot.pivotmodel.ConstrainableElement;
 import tudresden.ocl20.pivot.pivotmodel.Constraint;
@@ -46,7 +48,6 @@ import tudresden.ocl20.pivot.pivotmodel.Expression;
 import tudresden.ocl20.pivot.pivotmodel.Feature;
 import tudresden.ocl20.pivot.pivotmodel.GenericElement;
 import tudresden.ocl20.pivot.pivotmodel.GenericType;
-import tudresden.ocl20.pivot.pivotmodel.NDirectionalProperty;
 import tudresden.ocl20.pivot.pivotmodel.NamedElement;
 import tudresden.ocl20.pivot.pivotmodel.Namespace;
 import tudresden.ocl20.pivot.pivotmodel.Operation;
@@ -348,19 +349,19 @@ public class PivotModelSwitch<T> {
 				result = defaultCase(theEObject);
 			return result;
 		}
-		case PivotModelPackage.NDIRECTIONAL_PROPERTY: {
-			NDirectionalProperty nDirectionalProperty = (NDirectionalProperty) theEObject;
-			T result = caseNDirectionalProperty(nDirectionalProperty);
+		case PivotModelPackage.ASSOCIATION_PROPERTY: {
+			AssociationProperty associationProperty = (AssociationProperty) theEObject;
+			T result = caseAssociationProperty(associationProperty);
 			if (result == null)
-				result = caseProperty(nDirectionalProperty);
+				result = caseProperty(associationProperty);
 			if (result == null)
-				result = caseFeature(nDirectionalProperty);
+				result = caseFeature(associationProperty);
 			if (result == null)
-				result = caseConstrainableElement(nDirectionalProperty);
+				result = caseConstrainableElement(associationProperty);
 			if (result == null)
-				result = caseTypedElement(nDirectionalProperty);
+				result = caseTypedElement(associationProperty);
 			if (result == null)
-				result = caseNamedElement(nDirectionalProperty);
+				result = caseNamedElement(associationProperty);
 			if (result == null)
 				result = defaultCase(theEObject);
 			return result;
@@ -579,17 +580,17 @@ public class PivotModelSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>NDirectional Property</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Association Property</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>NDirectional Property</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Association Property</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseNDirectionalProperty(NDirectionalProperty object) {
+	public T caseAssociationProperty(AssociationProperty object) {
 		return null;
 	}
 

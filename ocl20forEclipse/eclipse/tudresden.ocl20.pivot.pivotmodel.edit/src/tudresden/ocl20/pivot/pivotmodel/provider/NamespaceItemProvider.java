@@ -158,8 +158,8 @@ public class NamespaceItemProvider extends NamedElementItemProvider implements
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage(
-				"full/obj16/Namespace")); //$NON-NLS-1$
+		return overlayImage(object,
+				getResourceLocator().getImage("full/obj16/Namespace")); //$NON-NLS-1$
 	}
 
 	/**
@@ -182,8 +182,8 @@ public class NamespaceItemProvider extends NamedElementItemProvider implements
 		namespace = (Namespace) object;
 
 		// initialize with name
-		label = new StringBuilder(StringUtils.defaultIfEmpty(namespace
-				.getName(), "null")); //$NON-NLS-1$
+		label = new StringBuilder(StringUtils.defaultIfEmpty(
+				namespace.getName(), "null")); //$NON-NLS-1$
 
 		// append type parameters if there are any
 		if (!namespace.getOwnedTypeParameter().isEmpty()) {
@@ -222,14 +222,14 @@ public class NamespaceItemProvider extends NamedElementItemProvider implements
 
 		switch (notification.getFeatureID(Namespace.class)) {
 		case PivotModelPackageImpl.NAMESPACE__OWNED_TYPE_PARAMETER:
-			fireNotifyChanged(new ViewerNotification(notification, notification
-					.getNotifier(), true, true));
+			fireNotifyChanged(new ViewerNotification(notification,
+					notification.getNotifier(), true, true));
 			return;
 		case PivotModelPackageImpl.NAMESPACE__OWNED_TYPE:
 		case PivotModelPackageImpl.NAMESPACE__OWNED_RULE:
 		case PivotModelPackageImpl.NAMESPACE__NESTED_NAMESPACE:
-			fireNotifyChanged(new ViewerNotification(notification, notification
-					.getNotifier(), true, false));
+			fireNotifyChanged(new ViewerNotification(notification,
+					notification.getNotifier(), true, false));
 			return;
 		}
 		super.notifyChanged(notification);

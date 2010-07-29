@@ -592,8 +592,7 @@ public class TypeImpl extends NamedElementImpl implements Type {
 		}
 
 		if (logger.isDebugEnabled()) {
-			logger
-					.debug("lookupOperation() - exit - return value=" + operation); //$NON-NLS-1$
+			logger.debug("lookupOperation() - exit - return value=" + operation); //$NON-NLS-1$
 		}
 
 		return operation;
@@ -685,8 +684,7 @@ public class TypeImpl extends NamedElementImpl implements Type {
 		result = this.getOwnedPropertyGen().remove(property);
 
 		if (logger.isDebugEnabled()) {
-			logger
-					.debug("removeProperty(p=" + property + ") - exit - result = " + result); //$NON-NLS-1$ //$NON-NLS-2$
+			logger.debug("removeProperty(p=" + property + ") - exit - result = " + result); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 
 		return result;
@@ -711,8 +709,7 @@ public class TypeImpl extends NamedElementImpl implements Type {
 		result = this.getOwnedOperationGen().remove(operation);
 
 		if (logger.isDebugEnabled()) {
-			logger
-					.debug("removeOperation(o=" + operation + ") - exit - result = " + result); //$NON-NLS-1$ //$NON-NLS-2$
+			logger.debug("removeOperation(o=" + operation + ") - exit - result = " + result); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 
 		return result;
@@ -754,9 +751,8 @@ public class TypeImpl extends NamedElementImpl implements Type {
 			List<? extends Type> types) {
 
 		if (logger.isDebugEnabled()) {
-			logger
-					.debug("bindTypeParameter(parameters=" + parameters + ", types=" //$NON-NLS-1$ //$NON-NLS-2$
-							+ types + ") - enter"); //$NON-NLS-1$
+			logger.debug("bindTypeParameter(parameters=" + parameters + ", types=" //$NON-NLS-1$ //$NON-NLS-2$
+					+ types + ") - enter"); //$NON-NLS-1$
 		}
 
 		// precondition check
@@ -804,8 +800,7 @@ public class TypeImpl extends NamedElementImpl implements Type {
 		}
 
 		if (logger.isDebugEnabled()) {
-			logger
-					.debug("bindTypeParameter() - exit - return value=" + boundType); //$NON-NLS-1$
+			logger.debug("bindTypeParameter() - exit - return value=" + boundType); //$NON-NLS-1$
 		}
 
 		return boundType;

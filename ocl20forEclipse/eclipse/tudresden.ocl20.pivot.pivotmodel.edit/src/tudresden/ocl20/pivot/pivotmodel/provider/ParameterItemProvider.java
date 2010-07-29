@@ -123,11 +123,11 @@ public class ParameterItemProvider extends TypedElementItemProvider implements
 
 		switch (((Parameter) object).getKind()) {
 		case RETURN:
-			return overlayImage(object, getResourceLocator().getImage(
-					"full/obj16/ReturnParameter")); //$NON-NLS-1$
+			return overlayImage(object,
+					getResourceLocator().getImage("full/obj16/ReturnParameter")); //$NON-NLS-1$
 		default:
-			return overlayImage(object, getResourceLocator().getImage(
-					"full/obj16/Parameter")); //$NON-NLS-1$
+			return overlayImage(object,
+					getResourceLocator().getImage("full/obj16/Parameter")); //$NON-NLS-1$
 		}
 
 	}
@@ -181,8 +181,8 @@ public class ParameterItemProvider extends TypedElementItemProvider implements
 		case PivotModelPackageImpl.PARAMETER__NAME:
 		case PivotModelPackageImpl.PARAMETER__TYPE:
 		case PivotModelPackageImpl.PARAMETER__GENERIC_TYPE:
-			fireNotifyChanged(new ViewerNotification(notification, parameter
-					.getOperation(), false, true));
+			fireNotifyChanged(new ViewerNotification(notification,
+					parameter.getOperation(), false, true));
 			return;
 		}
 

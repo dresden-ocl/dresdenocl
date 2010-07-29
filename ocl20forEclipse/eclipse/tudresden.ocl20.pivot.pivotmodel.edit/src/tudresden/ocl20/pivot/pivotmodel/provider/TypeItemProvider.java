@@ -198,8 +198,7 @@ public class TypeItemProvider extends NamedElementItemProvider implements
 						.getCommandStack()
 						.execute(
 								SetCommand
-										.create(
-												editingDomain,
+										.create(editingDomain,
 												type,
 												PivotModelPackageImpl.Literals.TYPE__GENERIC_SUPER_TYPE,
 												genericSuperTypes));
@@ -257,8 +256,8 @@ public class TypeItemProvider extends NamedElementItemProvider implements
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage(
-				"full/obj16/Type")); //$NON-NLS-1$
+		return overlayImage(object,
+				getResourceLocator().getImage("full/obj16/Type")); //$NON-NLS-1$
 	}
 
 	/**
@@ -427,13 +426,13 @@ public class TypeItemProvider extends NamedElementItemProvider implements
 
 		switch (notification.getFeatureID(Type.class)) {
 		case PivotModelPackageImpl.TYPE__OWNED_TYPE_PARAMETER:
-			fireNotifyChanged(new ViewerNotification(notification, notification
-					.getNotifier(), true, true));
+			fireNotifyChanged(new ViewerNotification(notification,
+					notification.getNotifier(), true, true));
 			return;
 		case PivotModelPackageImpl.TYPE__OWNED_OPERATION:
 		case PivotModelPackageImpl.TYPE__OWNED_PROPERTY:
-			fireNotifyChanged(new ViewerNotification(notification, notification
-					.getNotifier(), true, false));
+			fireNotifyChanged(new ViewerNotification(notification,
+					notification.getNotifier(), true, false));
 			return;
 		}
 		super.notifyChanged(notification);
@@ -466,7 +465,7 @@ public class TypeItemProvider extends NamedElementItemProvider implements
 
 		newChildDescriptors.add(createChildParameter(
 				PivotModelPackage.Literals.TYPE__OWNED_PROPERTY,
-				PivotModelFactory.eINSTANCE.createNDirectionalProperty()));
+				PivotModelFactory.eINSTANCE.createAssociationProperty()));
 	}
 
 }

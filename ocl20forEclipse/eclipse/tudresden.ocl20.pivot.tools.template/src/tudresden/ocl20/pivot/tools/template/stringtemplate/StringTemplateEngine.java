@@ -113,6 +113,8 @@ public class StringTemplateEngine implements ITemplateEngine {
 	public ITemplate getTemplate(String name) {
 		try {
 			return new StringTemplateAdapter(templateGroup.getInstanceOf(name));
+		} catch (NullPointerException e) {
+			return null;
 		} catch (IllegalArgumentException e) {
 			return null;
 		}

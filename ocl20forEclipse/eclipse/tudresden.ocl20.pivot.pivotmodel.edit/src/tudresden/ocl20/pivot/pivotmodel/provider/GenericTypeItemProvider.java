@@ -101,12 +101,13 @@ public class GenericTypeItemProvider extends NamedElementItemProvider implements
 				.eContainmentFeature();
 
 		if (eContainmentFeature == PivotModelPackageImpl.Literals.TYPE__GENERIC_SUPER_TYPE) {
-			return overlayImage(object, getResourceLocator().getImage(
-					"full/obj16/GenericSuperType")); //$NON-NLS-1$
+			return overlayImage(object,
+					getResourceLocator()
+							.getImage("full/obj16/GenericSuperType")); //$NON-NLS-1$
 		}
 
-		return overlayImage(object, getResourceLocator().getImage(
-				"full/obj16/GenericType")); //$NON-NLS-1$
+		return overlayImage(object,
+				getResourceLocator().getImage("full/obj16/GenericType")); //$NON-NLS-1$
 	}
 
 	/**

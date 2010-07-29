@@ -146,9 +146,8 @@ public class ParameterGenericTypeImpl extends GenericTypeImpl implements
 			Type type = types.get(index);
 
 			if (logger.isInfoEnabled()) {
-				logger
-						.info("Binding type of '" + typedElement.getQualifiedName() //$NON-NLS-1$
-								+ "' with '" + type.getName() + "'."); //$NON-NLS-1$ //$NON-NLS-2$
+				logger.info("Binding type of '" + typedElement.getQualifiedName() //$NON-NLS-1$
+						+ "' with '" + type.getName() + "'."); //$NON-NLS-1$ //$NON-NLS-2$
 			}
 
 			// reset the generic type, then set the type (the order is important)

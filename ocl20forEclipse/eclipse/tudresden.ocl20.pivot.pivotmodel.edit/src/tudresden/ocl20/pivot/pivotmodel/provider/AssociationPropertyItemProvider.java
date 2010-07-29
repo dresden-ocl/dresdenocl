@@ -48,19 +48,17 @@ import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
-import tudresden.ocl20.pivot.pivotmodel.NDirectionalProperty;
+import tudresden.ocl20.pivot.pivotmodel.AssociationProperty;
 import tudresden.ocl20.pivot.pivotmodel.PivotModelFactory;
-
 import tudresden.ocl20.pivot.pivotmodel.PivotModelPackage;
-import tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl;
 
 /**
- * This is the item provider adapter for a {@link tudresden.ocl20.pivot.pivotmodel.NDirectionalProperty} object.
+ * This is the item provider adapter for a {@link tudresden.ocl20.pivot.pivotmodel.AssociationProperty} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class NDirectionalPropertyItemProvider extends PropertyItemProvider
+public class AssociationPropertyItemProvider extends PropertyItemProvider
 		implements IEditingDomainItemProvider, IStructuredItemContentProvider,
 		ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
 	/**
@@ -69,7 +67,7 @@ public class NDirectionalPropertyItemProvider extends PropertyItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NDirectionalPropertyItemProvider(AdapterFactory adapterFactory) {
+	public AssociationPropertyItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -102,7 +100,7 @@ public class NDirectionalPropertyItemProvider extends PropertyItemProvider
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
 			childrenFeatures
-					.add(PivotModelPackage.Literals.NDIRECTIONAL_PROPERTY__INVERSE_NDIRECTIONAL_PROPERTIES);
+					.add(PivotModelPackage.Literals.ASSOCIATION_PROPERTY__INVERSE_ASSOCIATION_PROPERTIES);
 		}
 		return childrenFeatures;
 	}
@@ -121,15 +119,15 @@ public class NDirectionalPropertyItemProvider extends PropertyItemProvider
 	}
 
 	/**
-	 * This returns NDirectionalProperty.gif.
+	 * This returns AssociationProperty.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage(
-				"full/obj16/NDirectionalProperty")); //$NON-NLS-1$
+		return overlayImage(object,
+				getResourceLocator().getImage("full/obj16/AssociationProperty")); //$NON-NLS-1$
 	}
 
 	/**
@@ -140,9 +138,9 @@ public class NDirectionalPropertyItemProvider extends PropertyItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((NDirectionalProperty) object).getName();
-		return label == null || label.length() == 0 ? getString("_UI_NDirectionalProperty_type") : //$NON-NLS-1$
-				getString("_UI_NDirectionalProperty_type") + " " + label; //$NON-NLS-1$ //$NON-NLS-2$
+		String label = ((AssociationProperty) object).getName();
+		return label == null || label.length() == 0 ? getString("_UI_AssociationProperty_type") : //$NON-NLS-1$
+				getString("_UI_AssociationProperty_type") + " " + label; //$NON-NLS-1$ //$NON-NLS-2$
 	}
 
 	/**
@@ -156,10 +154,10 @@ public class NDirectionalPropertyItemProvider extends PropertyItemProvider
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(NDirectionalProperty.class)) {
-		case PivotModelPackage.NDIRECTIONAL_PROPERTY__INVERSE_NDIRECTIONAL_PROPERTIES:
-			fireNotifyChanged(new ViewerNotification(notification, notification
-					.getNotifier(), true, false));
+		switch (notification.getFeatureID(AssociationProperty.class)) {
+		case PivotModelPackage.ASSOCIATION_PROPERTY__INVERSE_ASSOCIATION_PROPERTIES:
+			fireNotifyChanged(new ViewerNotification(notification,
+					notification.getNotifier(), true, false));
 			return;
 		}
 		super.notifyChanged(notification);
@@ -179,9 +177,8 @@ public class NDirectionalPropertyItemProvider extends PropertyItemProvider
 
 		newChildDescriptors
 				.add(createChildParameter(
-						PivotModelPackage.Literals.NDIRECTIONAL_PROPERTY__INVERSE_NDIRECTIONAL_PROPERTIES,
-						PivotModelFactory.eINSTANCE
-								.createNDirectionalProperty()));
+						PivotModelPackage.Literals.ASSOCIATION_PROPERTY__INVERSE_ASSOCIATION_PROPERTIES,
+						PivotModelFactory.eINSTANCE.createAssociationProperty()));
 	}
 
 }

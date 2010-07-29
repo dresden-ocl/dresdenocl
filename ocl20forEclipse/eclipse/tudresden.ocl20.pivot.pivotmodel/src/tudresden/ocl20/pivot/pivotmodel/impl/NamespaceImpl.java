@@ -363,8 +363,7 @@ public class NamespaceImpl extends NamedElementImpl implements Namespace {
 	public Namespace addNestedNamespace(Namespace namespace) {
 
 		if (logger.isDebugEnabled()) {
-			logger
-					.debug("addNestedNamespace(namespace=" + namespace + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
+			logger.debug("addNestedNamespace(namespace=" + namespace + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 
 		// use the generated method instead of the client-specific one
@@ -448,8 +447,7 @@ public class NamespaceImpl extends NamedElementImpl implements Namespace {
 		}
 
 		if (logger.isDebugEnabled()) {
-			logger
-					.debug("lookupNamespace() - exit - return value=" + namespace); //$NON-NLS-1$
+			logger.debug("lookupNamespace() - exit - return value=" + namespace); //$NON-NLS-1$
 		}
 
 		return namespace;
@@ -570,8 +568,7 @@ public class NamespaceImpl extends NamedElementImpl implements Namespace {
 	public Namespace addTypeParameter(TypeParameter typeParameter) {
 
 		if (logger.isDebugEnabled()) {
-			logger
-					.debug("addTypeParameter(typeParameter=" + typeParameter + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
+			logger.debug("addTypeParameter(typeParameter=" + typeParameter + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 
 		// use the generated method instead of the client-specific one

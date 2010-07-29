@@ -37,6 +37,8 @@ import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
 
+import tudresden.ocl20.pivot.pivotmodel.*;
+import tudresden.ocl20.pivot.pivotmodel.AssociationProperty;
 import tudresden.ocl20.pivot.pivotmodel.ComplexGenericType;
 import tudresden.ocl20.pivot.pivotmodel.ConstrainableElement;
 import tudresden.ocl20.pivot.pivotmodel.Constraint;
@@ -46,7 +48,6 @@ import tudresden.ocl20.pivot.pivotmodel.Expression;
 import tudresden.ocl20.pivot.pivotmodel.Feature;
 import tudresden.ocl20.pivot.pivotmodel.GenericElement;
 import tudresden.ocl20.pivot.pivotmodel.GenericType;
-import tudresden.ocl20.pivot.pivotmodel.NDirectionalProperty;
 import tudresden.ocl20.pivot.pivotmodel.NamedElement;
 import tudresden.ocl20.pivot.pivotmodel.Namespace;
 import tudresden.ocl20.pivot.pivotmodel.Operation;
@@ -217,8 +218,8 @@ public class PivotModelAdapterFactory extends AdapterFactoryImpl {
 		}
 
 		@Override
-		public Adapter caseNDirectionalProperty(NDirectionalProperty object) {
-			return createNDirectionalPropertyAdapter();
+		public Adapter caseAssociationProperty(AssociationProperty object) {
+			return createAssociationPropertyAdapter();
 		}
 
 		@Override
@@ -423,16 +424,16 @@ public class PivotModelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.pivotmodel.NDirectionalProperty <em>NDirectional Property</em>}'.
+	 * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.pivotmodel.AssociationProperty <em>Association Property</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see tudresden.ocl20.pivot.pivotmodel.NDirectionalProperty
+	 * @see tudresden.ocl20.pivot.pivotmodel.AssociationProperty
 	 * @generated
 	 */
-	public Adapter createNDirectionalPropertyAdapter() {
+	public Adapter createAssociationPropertyAdapter() {
 		return null;
 	}
 

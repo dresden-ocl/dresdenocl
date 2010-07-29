@@ -214,9 +214,8 @@ public class ComplexGenericTypeImpl extends GenericTypeImpl implements
 		// if all type parameters have been bound set the typed element's type
 		if (boundType.getOwnedTypeParameter().isEmpty()) {
 			if (logger.isInfoEnabled()) {
-				logger
-						.info("Binding type of '" + typedElement.getQualifiedName() //$NON-NLS-1$
-								+ "' with '" + boundType.getName() + "'."); //$NON-NLS-1$ //$NON-NLS-2$
+				logger.info("Binding type of '" + typedElement.getQualifiedName() //$NON-NLS-1$
+						+ "' with '" + boundType.getName() + "'."); //$NON-NLS-1$ //$NON-NLS-2$
 			}
 
 			// reset the generic type first

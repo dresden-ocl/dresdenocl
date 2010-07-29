@@ -168,8 +168,8 @@ public class TypedElementItemProvider extends NamedElementItemProvider
 		@Override
 		public Collection<?> getChoiceOfValues(Object object) {
 
-			Collection<Object> result = new ArrayList<Object>(super
-					.getChoiceOfValues(object));
+			Collection<Object> result = new ArrayList<Object>(
+					super.getChoiceOfValues(object));
 
 			// go up the containment hierachy and collect all type parameters
 			for (NamedElement e = (NamedElement) object; e != null; e = e
@@ -258,8 +258,7 @@ public class TypedElementItemProvider extends NamedElementItemProvider
 						.getCommandStack()
 						.execute(
 								SetCommand
-										.create(
-												editingDomain,
+										.create(editingDomain,
 												typedElement,
 												PivotModelPackageImpl.Literals.TYPED_ELEMENT__GENERIC_TYPE,
 												genericType));
@@ -388,10 +387,9 @@ public class TypedElementItemProvider extends NamedElementItemProvider
 	protected CharSequence getTypedElementTypeName(TypedElement typedElement) {
 
 		return typedElement.getType() != null ? getTypeName(typedElement
-				.getType())
+				.getType()) 
 				: (typedElement.getGenericType() != null ? getGenericTypeName(typedElement
-						.getGenericType())
-						: ""); //$NON-NLS-1$
+						.getGenericType()) : ""); //$NON-NLS-1$
 	}
 
 	/**
@@ -439,8 +437,8 @@ public class TypedElementItemProvider extends NamedElementItemProvider
 		switch (notification.getFeatureID(TypedElement.class)) {
 		case PivotModelPackage.TYPED_ELEMENT__TYPE:
 		case PivotModelPackage.TYPED_ELEMENT__GENERIC_TYPE:
-			fireNotifyChanged(new ViewerNotification(notification, notification
-					.getNotifier(), false, true));
+			fireNotifyChanged(new ViewerNotification(notification,
+					notification.getNotifier(), false, true));
 			return;
 		}
 		super.notifyChanged(notification);

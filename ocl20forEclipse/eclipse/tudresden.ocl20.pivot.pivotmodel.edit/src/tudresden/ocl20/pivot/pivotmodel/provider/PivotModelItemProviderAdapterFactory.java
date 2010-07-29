@@ -335,27 +335,27 @@ public class PivotModelItemProviderAdapterFactory extends
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.pivotmodel.NDirectionalProperty} instances.
+	 * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.pivotmodel.AssociationProperty} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected NDirectionalPropertyItemProvider nDirectionalPropertyItemProvider;
+	protected AssociationPropertyItemProvider associationPropertyItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link tudresden.ocl20.pivot.pivotmodel.NDirectionalProperty}.
+	 * This creates an adapter for a {@link tudresden.ocl20.pivot.pivotmodel.AssociationProperty}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	public Adapter createNDirectionalPropertyAdapter() {
-		if (nDirectionalPropertyItemProvider == null) {
-			nDirectionalPropertyItemProvider = new NDirectionalPropertyItemProvider(
+	public Adapter createAssociationPropertyAdapter() {
+		if (associationPropertyItemProvider == null) {
+			associationPropertyItemProvider = new AssociationPropertyItemProvider(
 					this);
 		}
 
-		return nDirectionalPropertyItemProvider;
+		return associationPropertyItemProvider;
 	}
 
 	/**
@@ -582,8 +582,8 @@ public class PivotModelItemProviderAdapterFactory extends
 			constraintItemProvider.dispose();
 		if (expressionItemProvider != null)
 			expressionItemProvider.dispose();
-		if (nDirectionalPropertyItemProvider != null)
-			nDirectionalPropertyItemProvider.dispose();
+		if (associationPropertyItemProvider != null)
+			associationPropertyItemProvider.dispose();
 	}
 
 }

@@ -321,8 +321,7 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 			ConstrainableElement constrainedElement) {
 
 		if (logger.isDebugEnabled()) {
-			logger
-					.debug("addConstrainedElement(constrainedElement=" + constrainedElement + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
+			logger.debug("addConstrainedElement(constrainedElement=" + constrainedElement + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 
 		// use the generated method, not the one which may be overridden by clients

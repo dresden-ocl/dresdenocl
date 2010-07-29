@@ -144,13 +144,13 @@ public interface PivotModelFactory extends EFactory {
 	Expression createExpression();
 
 	/**
-	 * Returns a new object of class '<em>NDirectional Property</em>'.
+	 * Returns a new object of class '<em>Association Property</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>NDirectional Property</em>'.
+	 * @return a new object of class '<em>Association Property</em>'.
 	 * @generated
 	 */
-	NDirectionalProperty createNDirectionalProperty();
+	AssociationProperty createAssociationProperty();
 
 	/**
 	 * Returns the package supported by this factory.

@@ -34,28 +34,26 @@ package tudresden.ocl20.pivot.pivotmodel.tests;
 
 import junit.textui.TestRunner;
 
-import tudresden.ocl20.pivot.pivotmodel.NDirectionalProperty;
-
+import tudresden.ocl20.pivot.pivotmodel.AssociationProperty;
 import tudresden.ocl20.pivot.pivotmodel.PivotModelFactory;
-import tudresden.ocl20.pivot.pivotmodel.impl.PivotModelFactoryImpl;
 
 /**
  * <!-- begin-user-doc -->
- * A test case for the model object '<em><b>NDirectional Property</b></em>'.
+ * A test case for the model object '<em><b>Association Property</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following operations are tested:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.pivotmodel.NDirectionalProperty#addAssociation(tudresden.ocl20.pivot.pivotmodel.NDirectionalProperty) <em>Add Association</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.pivotmodel.NDirectionalProperty#getAssociation(java.lang.String) <em>Get Association</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.pivotmodel.NDirectionalProperty#removeAssociation(tudresden.ocl20.pivot.pivotmodel.NDirectionalProperty) <em>Remove Association</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.pivotmodel.NDirectionalProperty#isInverseAssociation(tudresden.ocl20.pivot.pivotmodel.NDirectionalProperty) <em>Is Inverse Association</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.pivotmodel.NDirectionalProperty#addAssociations(java.util.List) <em>Add Associations</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.pivotmodel.AssociationProperty#addAssociation(tudresden.ocl20.pivot.pivotmodel.AssociationProperty) <em>Add Association</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.pivotmodel.AssociationProperty#getAssociation(java.lang.String) <em>Get Association</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.pivotmodel.AssociationProperty#removeAssociation(tudresden.ocl20.pivot.pivotmodel.AssociationProperty) <em>Remove Association</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.pivotmodel.AssociationProperty#isInverseAssociation(tudresden.ocl20.pivot.pivotmodel.AssociationProperty) <em>Is Inverse Association</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.pivotmodel.AssociationProperty#addAssociations(java.util.List) <em>Add Associations</em>}</li>
  * </ul>
  * </p>
  * @generated
  */
-public class NDirectionalPropertyTest extends PropertyTest {
+public class AssociationPropertyTest extends PropertyTest {
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -63,28 +61,28 @@ public class NDirectionalPropertyTest extends PropertyTest {
 	 * @generated
 	 */
 	public static void main(String[] args) {
-		TestRunner.run(NDirectionalPropertyTest.class);
+		TestRunner.run(AssociationPropertyTest.class);
 	}
 
 	/**
-	 * Constructs a new NDirectional Property test case with the given name.
+	 * Constructs a new Association Property test case with the given name.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NDirectionalPropertyTest(String name) {
+	public AssociationPropertyTest(String name) {
 		super(name);
 	}
 
 	/**
-	 * Returns the fixture for this NDirectional Property test case.
+	 * Returns the fixture for this Association Property test case.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	protected NDirectionalProperty getFixture() {
-		return (NDirectionalProperty) fixture;
+	protected AssociationProperty getFixture() {
+		return (AssociationProperty) fixture;
 	}
 
 	/**
@@ -95,7 +93,7 @@ public class NDirectionalPropertyTest extends PropertyTest {
 	 */
 	@Override
 	protected void setUp() throws Exception {
-		setFixture(PivotModelFactory.eINSTANCE.createNDirectionalProperty());
+		setFixture(PivotModelFactory.eINSTANCE.createAssociationProperty());
 	}
 
 	/**
@@ -110,23 +108,23 @@ public class NDirectionalPropertyTest extends PropertyTest {
 	}
 
 	/**
-	 * Tests the '{@link tudresden.ocl20.pivot.pivotmodel.NDirectionalProperty#addAssociation(tudresden.ocl20.pivot.pivotmodel.NDirectionalProperty) <em>Add Association</em>}' operation.
+	 * Tests the '{@link tudresden.ocl20.pivot.pivotmodel.AssociationProperty#addAssociation(tudresden.ocl20.pivot.pivotmodel.AssociationProperty) <em>Add Association</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see tudresden.ocl20.pivot.pivotmodel.NDirectionalProperty#addAssociation(tudresden.ocl20.pivot.pivotmodel.NDirectionalProperty)
+	 * @see tudresden.ocl20.pivot.pivotmodel.AssociationProperty#addAssociation(tudresden.ocl20.pivot.pivotmodel.AssociationProperty)
 	 * @generated
 	 */
-	public void testAddAssociation__NDirectionalProperty() {
+	public void testAddAssociation__AssociationProperty() {
 		// TODO: implement this operation test method
 		// Ensure that you remove @generated or mark it @generated NOT
 		fail();
 	}
 
 	/**
-	 * Tests the '{@link tudresden.ocl20.pivot.pivotmodel.NDirectionalProperty#getAssociation(java.lang.String) <em>Get Association</em>}' operation.
+	 * Tests the '{@link tudresden.ocl20.pivot.pivotmodel.AssociationProperty#getAssociation(java.lang.String) <em>Get Association</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see tudresden.ocl20.pivot.pivotmodel.NDirectionalProperty#getAssociation(java.lang.String)
+	 * @see tudresden.ocl20.pivot.pivotmodel.AssociationProperty#getAssociation(java.lang.String)
 	 * @generated
 	 */
 	public void testGetAssociation__String() {
@@ -136,36 +134,36 @@ public class NDirectionalPropertyTest extends PropertyTest {
 	}
 
 	/**
-	 * Tests the '{@link tudresden.ocl20.pivot.pivotmodel.NDirectionalProperty#removeAssociation(tudresden.ocl20.pivot.pivotmodel.NDirectionalProperty) <em>Remove Association</em>}' operation.
+	 * Tests the '{@link tudresden.ocl20.pivot.pivotmodel.AssociationProperty#removeAssociation(tudresden.ocl20.pivot.pivotmodel.AssociationProperty) <em>Remove Association</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see tudresden.ocl20.pivot.pivotmodel.NDirectionalProperty#removeAssociation(tudresden.ocl20.pivot.pivotmodel.NDirectionalProperty)
+	 * @see tudresden.ocl20.pivot.pivotmodel.AssociationProperty#removeAssociation(tudresden.ocl20.pivot.pivotmodel.AssociationProperty)
 	 * @generated
 	 */
-	public void testRemoveAssociation__NDirectionalProperty() {
+	public void testRemoveAssociation__AssociationProperty() {
 		// TODO: implement this operation test method
 		// Ensure that you remove @generated or mark it @generated NOT
 		fail();
 	}
 
 	/**
-	 * Tests the '{@link tudresden.ocl20.pivot.pivotmodel.NDirectionalProperty#isInverseAssociation(tudresden.ocl20.pivot.pivotmodel.NDirectionalProperty) <em>Is Inverse Association</em>}' operation.
+	 * Tests the '{@link tudresden.ocl20.pivot.pivotmodel.AssociationProperty#isInverseAssociation(tudresden.ocl20.pivot.pivotmodel.AssociationProperty) <em>Is Inverse Association</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see tudresden.ocl20.pivot.pivotmodel.NDirectionalProperty#isInverseAssociation(tudresden.ocl20.pivot.pivotmodel.NDirectionalProperty)
+	 * @see tudresden.ocl20.pivot.pivotmodel.AssociationProperty#isInverseAssociation(tudresden.ocl20.pivot.pivotmodel.AssociationProperty)
 	 * @generated
 	 */
-	public void testIsInverseAssociation__NDirectionalProperty() {
+	public void testIsInverseAssociation__AssociationProperty() {
 		// TODO: implement this operation test method
 		// Ensure that you remove @generated or mark it @generated NOT
 		fail();
 	}
 
 	/**
-	 * Tests the '{@link tudresden.ocl20.pivot.pivotmodel.NDirectionalProperty#addAssociations(java.util.List) <em>Add Associations</em>}' operation.
+	 * Tests the '{@link tudresden.ocl20.pivot.pivotmodel.AssociationProperty#addAssociations(java.util.List) <em>Add Associations</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see tudresden.ocl20.pivot.pivotmodel.NDirectionalProperty#addAssociations(java.util.List)
+	 * @see tudresden.ocl20.pivot.pivotmodel.AssociationProperty#addAssociations(java.util.List)
 	 * @generated
 	 */
 	public void testAddAssociations__List() {
@@ -174,4 +172,4 @@ public class NDirectionalPropertyTest extends PropertyTest {
 		fail();
 	}
 
-} //NDirectionalPropertyTest
+} //AssociationPropertyTest

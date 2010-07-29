@@ -89,8 +89,8 @@ public class EnumerationLiteralItemProvider extends NamedElementItemProvider
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage(
-				"full/obj16/EnumerationLiteral")); //$NON-NLS-1$
+		return overlayImage(object,
+				getResourceLocator().getImage("full/obj16/EnumerationLiteral")); //$NON-NLS-1$
 	}
 
 	/**

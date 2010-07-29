@@ -221,8 +221,8 @@ public class NamedElementItemProvider extends ItemProviderAdapter implements
 		switch (notification.getFeatureID(NamedElement.class)) {
 		case PivotModelPackage.NAMED_ELEMENT__NAME:
 		case PivotModelPackage.NAMED_ELEMENT__QUALIFIED_NAME:
-			fireNotifyChanged(new ViewerNotification(notification, notification
-					.getNotifier(), false, true));
+			fireNotifyChanged(new ViewerNotification(notification,
+					notification.getNotifier(), false, true));
 			return;
 		}
 		super.notifyChanged(notification);
