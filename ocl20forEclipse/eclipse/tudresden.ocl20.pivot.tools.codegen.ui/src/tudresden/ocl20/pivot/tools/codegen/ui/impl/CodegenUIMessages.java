@@ -32,8 +32,6 @@ public class CodegenUIMessages extends NLS {
 
 	private static final String BUNDLE_NAME = "tudresden.ocl20.pivot.tools.codegen.ui.impl.messages";
 
-	public static String TransformCodeWizard_Title;
-
 	public static String TransformCodeWizard_ErrorMessageDialogTitle;
 
 	public static String TransformCodeWizard_InitErrorOccured;

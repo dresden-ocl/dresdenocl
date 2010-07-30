@@ -49,15 +49,16 @@ public abstract class TransformCodeWizard extends Wizard implements INewWizard {
 
 	/** The code generator associated with this wizard. */
 	protected IOcl2Code<?> myCodeGenerator;
+	
 
 	/**
 	 * <p>
 	 * Creates a new {@link TransformCodeWizard}.
 	 * </p>
 	 */
-	public TransformCodeWizard() {
+	public TransformCodeWizard(String title) {
 		super();
-		
+		setWindowTitle(title);		
 	}
 
 	/*
@@ -92,7 +93,6 @@ public abstract class TransformCodeWizard extends Wizard implements INewWizard {
 		}
 		// no else.
 
-		setWindowTitle(CodegenUIMessages.TransformCodeWizard_Title);
 
 		setCodeGenerator();
 
