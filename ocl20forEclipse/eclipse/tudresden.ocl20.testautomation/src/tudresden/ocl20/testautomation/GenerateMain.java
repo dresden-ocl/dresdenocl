@@ -33,11 +33,11 @@ public class GenerateMain {
 						"tests/squam/");
 
 		// Bremen Benchmark (B5)
-		String benchmarkSubdir =
-				"tudresden.ocl20.testautomation/bin/tudresden/ocl20/benchmark/testdata/";
-		me.buildInvarianceTests("benchmark", benchmarkSubdir + "common/DummyWorld.uml",
-				benchmarkSubdir + "common/ModelInstance.class",
-				"tests/benchmark");
+//		String benchmarkSubdir =
+//				"tudresden.ocl20.testautomation/bin/tudresden/ocl20/benchmark/testdata/";
+//		me.buildInvarianceTests("benchmark", benchmarkSubdir + "common/DummyWorld.uml",
+//				benchmarkSubdir + "common/ModelInstance.class",
+//				"tests/benchmark");
 
 
 	}

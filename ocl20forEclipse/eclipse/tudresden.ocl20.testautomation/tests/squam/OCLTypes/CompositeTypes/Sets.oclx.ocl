@@ -45,14 +45,21 @@ inv tSetSingle_7: let s : Set(Integer) = Set{1,3,5} in Set{3,5}->includes(s->any
 
 --	Tests a set with elements of mixed types.
 -- 
+-- XXX this is invalid ocl, since a collection containing OclInvalid is invalid itself
+-- context Model
+-- inv tSetMixedTypes: let s : Set(OclAny) = Set{1, 3.4, 'c', true, null, 1/0} in s->size() = 6
+
 context Model
+inv tInvalid_1: let i:OclInvalid = invalid in i.oclIsInvalid()
 
-inv tSetMixedTypes: let s : Set(OclAny) = Set{1, 3.4, 'c', true, null, 1/0} in s->size() = 6
-
+context Model
+inv tInvalid_2: let i:OclInvalid = invalid in let
+        s : Set(OclAny) = Set{i} in true
+        
+        
 --	Tests operations on two Sets.
 -- For operations on a Bag and a Set see SetsBags.oclx
 context Model
-
 inv tSetComparison_1: let s1 :  Set(Integer) = Set{1,3,5} in
     		  let s2 :  Set(Integer) = Set{1,4} in s1->union(s2) = Set{1,3,4,5}
 
@@ -113,4 +120,4 @@ context Model
 
 inv tSetType_3: let s : Set(Integer) = Set{1,3,5} in s.oclIsKindOf(Integer)->forAll(e|e=true)
 
-end package
+endpackage

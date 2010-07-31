@@ -210,16 +210,16 @@ public class TestPerformer {
 	 * @throws TestExecutionException
 	 * @throws ParseException
 	 */
-	public Constraint parseConstraint(String statement) throws TestExecutionException {
+	public Constraint parseConstraint(String statement)
+			throws TestExecutionException {
 
 		ResourceSet rs = new ResourceSetImpl();
 		OclResource resource = new OclResource(dummyFile);
-		
-		this.modelRegistry.setActiveModel(this.testModel);
+
+		modelRegistry.setActiveModel(this.testModel);
 
 		try {
-			InputStream inputStream =
-					this.createStatementInStream(statement);
+			InputStream inputStream = this.createStatementInStream(statement);
 			resource.reload(inputStream, null);
 
 			rs.getResources().add(resource);
@@ -263,7 +263,9 @@ public class TestPerformer {
 		return builder.toString();
 	}
 
-	private InputStream createStatementInStream(String statement) throws UnsupportedEncodingException {
+	private InputStream createStatementInStream(String statement)
+			throws UnsupportedEncodingException {
+
 		log.debug(statement);
 
 		return new ByteArrayInputStream(statement.getBytes("UTF-8"));

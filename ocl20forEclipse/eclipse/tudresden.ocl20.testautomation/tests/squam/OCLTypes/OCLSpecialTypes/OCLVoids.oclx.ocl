@@ -27,6 +27,25 @@ context Model
 
 inv tOCLAnyUndefined_3: let v:OclVoid = null in v = v
 
+
+-- OclSpec:
+-- However, by virtue of the implicit conversion to a collection
+-- literal, an expression evaluating to null can be used as 
+-- source of collection operations (such as ‘isEmpty’). If the source is
+-- the null literal, it is implicitly converted to Bag{}.
+
+
+-- parse-error
+context Model
+inv tOclAnyUndefined_3a: let v:OclVoid = null in
+  let w:Bag(OclAny) = Bag{} in v.isEmpty() = w
+  
+-- parse-error
+context Model 
+inv tOCLAnyUndefined_3b: let v:OclVoid = null in v.isOclInvalid()
+
+
+
 context Model
 
 inv tOCLAnyUndefined_4: let v:OclVoid = null in not (v <> 1)
