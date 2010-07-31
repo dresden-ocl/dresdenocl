@@ -148,7 +148,7 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 			throw new IllegalArgumentException(
 					"Cannot create OclAny with \'null\' as given IModelInstanceElement.");
 		}
-
+	
 		else if (modelInstanceElement instanceof IModelInstanceVoid) {
 			if (cachedUndefinedOrInvalid.containsKey(modelInstanceElement))
 				result = cachedUndefinedOrInvalid.get(modelInstanceElement);
@@ -211,6 +211,8 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 				result = new JavaOclModelInstanceObject(modelInstanceObject,
 						modelInstanceObject.getType());
 			}
+		}else if (modelInstanceElement instanceof IModelInstanceTuple){
+			result = new JavaOclTuple((IModelInstanceTuple) modelInstanceElement); 
 		}
 
 		else {

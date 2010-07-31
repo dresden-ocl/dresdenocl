@@ -158,6 +158,7 @@ public abstract class JavaOclAny implements OclAny {
 		Map<String, String> unaryOperations;
 		unaryOperations = new HashMap<String, String>();
 		unaryOperations.put("-", "negative");
+		unaryOperations.put("toString", "convertToString");
 		operationNames.put(1, unaryOperations);
 
 		Map<String, String> binaryOperations;
@@ -682,13 +683,14 @@ public abstract class JavaOclAny implements OclAny {
 
 		/* Iterate through all methods. */
 		for (int index = 0; index < allMethods.length; index++) {
+			Method curMethod = allMethods[index];
 
 			/* Check if the name match. */
-			if (allMethods[index].getName().equals(methodName)) {
+			if (curMethod.getName().equals(methodName)) {
 
 				/* Check if the parameters match. */
 				Class<?>[] aMethodsParams;
-				aMethodsParams = allMethods[index].getParameterTypes();
+				aMethodsParams = curMethod.getParameterTypes();
 
 				/* Check the count of parameters. */
 				if (aMethodsParams.length == parameterTypes.length) {
@@ -709,7 +711,7 @@ public abstract class JavaOclAny implements OclAny {
 					}
 
 					if (isConform) {
-						result = allMethods[index];
+						result = curMethod;
 						break;
 					}
 				}
