@@ -61,7 +61,6 @@ public class Ocl22Parser implements IOclParser {
 				throw new SemanticException(resource.getErrors().get(0).getMessage());
 			return constraints;
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			throw new ParseException(e.getMessage(), e);
 		}
 	}

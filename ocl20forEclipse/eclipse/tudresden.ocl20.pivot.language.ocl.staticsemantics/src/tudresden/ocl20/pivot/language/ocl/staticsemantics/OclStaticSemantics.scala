@@ -45,7 +45,7 @@ trait OclStaticSemantics extends ocl.semantics.OclAttributeMaker
   /*
    * Used for type lookup and adding defs.
    */
-  protected[staticsemantics] val model : IModel = {
+  protected[staticsemantics] lazy val model : IModel = {
     var m = resource.getModel
     if (m == null) {
       m = modelbus.ModelBusPlugin.getModelRegistry.getActiveModel
@@ -161,6 +161,7 @@ trait OclStaticSemantics extends ocl.semantics.OclAttributeMaker
   @throws(classOf[OclStaticSemanticsException])
   def cs2EssentialOcl(root : EObject) : java.util.List[Constraint] = {
     resetMemo
+    model.getRootNamespace
     OclStaticSemanticsTransactions.startStaticSemanticsAnalysis(this, iResource.getContents.get(0))
     val constraints = computeConstraints(root)
     // to avoid the conversion of Scala List to Java List multiple times

@@ -273,10 +273,11 @@ trait OclReferenceResolver { selfType : OclStaticSemantics =>
 		      case None => {
 		        (tn->oclType).flatMap{tipe =>
 				      if (!fuzzy)
-				      	lookupOperationOnType(tipe, identifier, false, parametersEOcl.map(_.getType))
+				      	(lookupOperationOnType(tipe, identifier, false, parametersEOcl.map(_.getType)) or
+				      			lookupOperationOnType(tipe, identifier, true, parametersEOcl.map(_.getType)))
 		              .flatMap(o => Full(List(o)))
 				      else
-				       Full(lookupOperationOnTypeFuzzy(tipe, identifier, false))
+				       Full(lookupOperationOnTypeFuzzy(tipe, identifier, false):::lookupOperationOnTypeFuzzy(tipe, identifier, true))
 				    } match {
 				      case Full(operationList) => {
 				        if (returnType != null) {

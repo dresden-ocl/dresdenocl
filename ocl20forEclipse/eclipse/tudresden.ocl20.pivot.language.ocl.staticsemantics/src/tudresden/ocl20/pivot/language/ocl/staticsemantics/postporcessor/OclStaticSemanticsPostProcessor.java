@@ -28,7 +28,7 @@ public class OclStaticSemanticsPostProcessor implements
 
 				List<Constraint> result = oclStaticSemantics.cs2EssentialOcl(root);
 
-				printResult(result);
+				//printResult(result);
 
 			} catch (OclStaticSemanticsException e) {
 				e.printStackTrace();
