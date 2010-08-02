@@ -155,6 +155,23 @@ trait OclReferenceResolver { selfType : OclStaticSemantics =>
   protected val _resolveOperation : Tuple4[String, Boolean, List[Type], Boolean] => Attributable ==> Box[List[Operation]] = {
     paramAttr {
 	    case (identifier, fuzzy, parameters, static) => {
+	      case soc@StaticOperationCallExpCS(typeName, arguments) => {
+	        (typeName->oclType).flatMap{sourceType =>
+	          val argumentsEOcl = arguments.flatMap(arg => arg->computeOclExpression)
+	          if (arguments.size != argumentsEOcl.size)
+	          	Failure("Parameters for operation " + identifier + " cannot be computed.")
+	          else {
+	          	if (!fuzzy) {
+	          		lookupOperationOnType(sourceType, identifier, true, argumentsEOcl.map(_.getType)).flatMap{o =>
+	          		  Full(List(o))
+	          		}
+	          	}
+	          	else {
+	          		Full(lookupOperationOnTypeFuzzy(sourceType, identifier, true))
+	          	}
+	          }
+	        }
+        }
 	      case aeo : AttributableEObject => {
 	        (aeo->sourceExpression).flatMap{sourceExpression =>
 	          (aeo->variables).flatMap{case (implicitVariables, _) =>

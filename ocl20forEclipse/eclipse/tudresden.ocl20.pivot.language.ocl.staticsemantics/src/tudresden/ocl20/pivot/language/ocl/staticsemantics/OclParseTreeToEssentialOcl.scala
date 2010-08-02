@@ -33,7 +33,7 @@ trait OclParseTreeToEssentialOcl { selfType : OclStaticSemantics =>
   protected val computeConstraint : Attributable ==> Box[Constraint] = {
     attr {
       case i@InvariantExpCS(name, oclExpression) => {
-      	computeBooleanConstraint(i, name, oclExpression, ConstraintKind.INVARIANT)
+      	computeBooleanConstraint(i, name, oclExpression, ConstraintKind.INVARIANT, null)
       }
       
       case d@DefinitionExpCS(definitionExpPart, static) => {
@@ -50,11 +50,19 @@ trait OclParseTreeToEssentialOcl { selfType : OclStaticSemantics =>
      	}
       
       case p@PreConditionDeclarationCS(name, oclExpression) => {
-        computeBooleanConstraint(p, name, oclExpression, ConstraintKind.PRECONDITION)
+        (p->context).flatMap{context =>
+          val o = context.asInstanceOf[Operation]
+          val parameters = o.getInputParameter
+			    computeBooleanConstraint(p, name, oclExpression, ConstraintKind.PRECONDITION, parameters.map(p => factory.createVariable(p)))
+        }
       }
       
       case p@PostConditionDeclarationCS(name, oclExpression) => {
-        computeBooleanConstraint(p, name, oclExpression, ConstraintKind.POSTCONDITION)
+        (p->context).flatMap{context =>
+          val o = context.asInstanceOf[Operation]
+          val parameters = o.getInputParameter
+			    computeBooleanConstraint(p, name, oclExpression, ConstraintKind.POSTCONDITION, parameters.map(p => factory.createVariable(p)))
+        }
       }
       
       case b@BodyDeclarationCS(name, oclExpression) => {
@@ -105,7 +113,9 @@ trait OclParseTreeToEssentialOcl { selfType : OclStaticSemantics =>
     }
   }
   
-  def computeBooleanConstraint(element : AttributableEObject, name : SimpleNameCS, oclExpression : OclExpressionCS, constraintKind : ConstraintKind) : Box[Constraint] = {
+  def computeBooleanConstraint(element : AttributableEObject, name : SimpleNameCS, 
+                               oclExpression : OclExpressionCS, constraintKind : ConstraintKind, 
+                               parameters : List[Variable]) : Box[Constraint] = {
     (oclExpression->computeOclExpression).flatMap{oclExpressionEOcl =>
       oclExpressionEOcl.getType match {
         case pt : PrimitiveType => if (pt.getKind != PrimitiveTypeKind.BOOLEAN) 
@@ -117,7 +127,7 @@ trait OclParseTreeToEssentialOcl { selfType : OclStaticSemantics =>
       for(self <- element->self;
       		context <- element->context) yield {
       	val expression = factory.createExpressionInOcl(
-        	printOclExpression(element), oclExpressionEOcl, self, null)
+        	printOclExpression(element), oclExpressionEOcl, self, null, if (parameters == null || parameters.isEmpty) null else (parameters.toArray))
         var constraintName : String = ""
         if (name != null)
           constraintName = name.getSimpleName
@@ -250,7 +260,10 @@ trait OclParseTreeToEssentialOcl { selfType : OclStaticSemantics =>
   	    			 result <- Full(factory.createOperationCallExp(sourceEOcl, operationName, targetEOcl))
   	    		 	)
   	    		yield {
-  	    			result
+  	    			if (isMarkedPre)
+  	    				result.withAtPre
+  	    			else
+  	    				result
   	     		}
         } catch {
   	    	case e : IllegalArgumentException => yieldFailure(e.getMessage, o) 
@@ -295,12 +308,26 @@ trait OclParseTreeToEssentialOcl { selfType : OclStaticSemantics =>
        					Full(pce)
        				}
        				else {
-       				  for (self <- v->self) yield {
+       				  for (sourceExpression <- v->sourceExpression) yield {
        				    // TODO: put this into the EssentialOclFactory
        				  	val pce = ExpressionsFactory.INSTANCE.createPropertyCallExp
          					pce.setReferredProperty(p)
-         					pce.setSourceType(self.getType)
-         					pce.setSource(factory.createVariableExp(self))
+         					pce.setSourceType(sourceExpression.getType)
+         					// make sure, the source is not already contained by another element
+		   					  // This can only happen if the sourceExpression is a VariableExp!
+		   					  val cleanSourceExpression = 
+		   					  	if (sourceExpression.eContainer != null) {
+		   					  		sourceExpression match {
+		   					  		  case v : VariableExp =>
+		   					  		    factory.createVariableExp(
+		   					  		      factory.createVariable(v.getReferredVariable.getName, 
+                                         					 v.getReferredVariable.getType, 
+                                         					 v.getReferredVariable.getInitExpression))
+		   					  		}
+		   					  	}
+		   					  	else
+		   					  		sourceExpression
+		   					  pce.setSource(cleanSourceExpression)
          					pce.setOclLibrary(oclLibrary)
          					pce
        				  }
@@ -345,9 +372,26 @@ trait OclParseTreeToEssentialOcl { selfType : OclStaticSemantics =>
 				          // TODO: put this into the EssentialOclFactory
 				 					val pce = ExpressionsFactory.INSTANCE.createPropertyCallExp
 				 					pce.setReferredProperty(property)
-				 					pce.setSource(sourceExpression)
+				 					// make sure, the source is not already contained by another element
+		   					  // This can only happen if the sourceExpression is a VariableExp!
+		   					  val cleanSourceExpression = 
+		   					  	if (sourceExpression.eContainer != null) {
+		   					  		sourceExpression match {
+		   					  		  case v : VariableExp =>
+		   					  		    factory.createVariableExp(
+		   					  		      factory.createVariable(v.getReferredVariable.getName, 
+                                         					 v.getReferredVariable.getType, 
+                                         					 v.getReferredVariable.getInitExpression))
+		   					  		}
+		   					  	}
+		   					  	else
+		   					  		sourceExpression
+		   					  pce.setSource(cleanSourceExpression)
 				 					pce.setOclLibrary(oclLibrary)
-				 					pce
+				 					if (isMarkedPre)
+				 					  pce.withAtPre
+				 					else
+				 						pce
 	              }
 		          }
 	        }
@@ -408,7 +452,10 @@ trait OclParseTreeToEssentialOcl { selfType : OclStaticSemantics =>
 				   					  oce.setSource(cleanSourceExpression)
 				   					}
 				   					oce.setOclLibrary(oclLibrary)
-				   					oce
+				   					if (isMarkedPre)
+				   						oce.withAtPre
+				   					else
+				   						oce
 	                }
 	              }
 		          }
