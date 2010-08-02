@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 
@@ -46,8 +47,9 @@ public class Ocl22Parser implements IOclParser {
 			rs.getResources().add(resource);
 			resource.setModel(model);
 			resource.load(Collections.EMPTY_MAP);
-			if (!resource.getErrors().isEmpty())
-				throw new SemanticException(resource.getErrors().get(0).getMessage());
+
+			checkForErrors(resource);
+
 			tudresden.ocl20.pivot.language.ocl.staticsemantics.OclStaticSemantics staticSemantics = OclStaticSemanticsProvider
 					.getStaticSemantics(resource);
 			List<Constraint> constraints;
@@ -57,12 +59,25 @@ public class Ocl22Parser implements IOclParser {
 			} catch (OclStaticSemanticsException e) {
 				throw new SemanticException(e.getMessage(), e);
 			}
-			if (!resource.getErrors().isEmpty())
-				throw new SemanticException(resource.getErrors().get(0).getMessage());
+
+			checkForErrors(resource);
+
 			return constraints;
 		} catch (IOException e) {
 			throw new ParseException(e.getMessage(), e);
 		}
 	}
 
+	private void checkForErrors(OclResource resource) throws ParseException {
+
+		if (!resource.getErrors().isEmpty()) {
+			StringBuffer errorMsg = new StringBuffer();
+			for (Resource.Diagnostic error : resource.getErrors()) {
+				errorMsg.append("line " + error.getLine() + ", coloumn "
+						+ error.getColumn() + ": " + error.getMessage()
+						+ System.getProperty("line.separator"));
+			}
+			throw new SemanticException(errorMsg.toString());
+		}
+	}
 }
