@@ -8,6 +8,7 @@
 	
 	<extension point="org.eclipse.ui.editors">
 		<editor class="tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclEditor" contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor" extensions="ocl" icon="icons/editor_icon.gif" id="tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclEditor" name="EMFText ocl Editor">
+			<contentTypeBinding contentTypeId="tudresden.ocl20.pivot.language.ocl.resource.ocl"/>
 		</editor>
 	</extension>
 	
@@ -41,6 +42,22 @@
 		</category>
 		<wizard category="org.emftext.runtime.ui.EMFTextFileCategory" icon="/icons/default_new_icon.gif" class="tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclNewFileWizard" id="tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclNewFileWizard" name="EMFText .ocl file">
 		</wizard>
+	</extension>
+	
+	<extension point="org.eclipse.ui.ide.markerResolution">
+		<markerResolutionGenerator class="tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclMarkerResolutionGenerator" markerType="tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.problem" />
+	</extension>
+	
+	<extension point="org.eclipse.core.filebuffers.annotationModelCreation">
+		<factory class="tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclAnnotationModelFactory" extensions="ocl" />
+	</extension>
+	
+	<extension point="org.eclipse.core.contenttype.contentTypes">
+		<content-type id="tudresden.ocl20.pivot.language.ocl.resource.ocl" name=".ocl File" base-type="org.eclipse.core.runtime.text" file-extensions="ocl"/>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.documentProviders">
+		<provider class="org.eclipse.ui.editors.text.TextFileDocumentProvider" extensions="ocl" id="tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.provider" />
 	</extension>
 	
 </plugin>

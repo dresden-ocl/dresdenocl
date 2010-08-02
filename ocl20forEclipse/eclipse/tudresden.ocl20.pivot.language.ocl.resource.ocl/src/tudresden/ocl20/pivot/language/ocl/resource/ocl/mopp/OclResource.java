@@ -130,6 +130,7 @@ public class OclResource extends org.eclipse.emf.ecore.resource.impl.ResourceImp
 	private int proxyCounter = 0;
 	private tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextParser parser;
 	private java.util.Map<java.lang.String, tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclContextDependentURIFragment<? extends org.eclipse.emf.ecore.EObject>> internalURIFragmentMap = new java.util.LinkedHashMap<java.lang.String, tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclContextDependentURIFragment<? extends org.eclipse.emf.ecore.EObject>>();
+	private java.util.Map<java.lang.String, tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclQuickFix> quickFixMap = new java.util.LinkedHashMap<java.lang.String, tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclQuickFix>();
 	
 	public OclResource() {
 		super();
@@ -417,6 +418,14 @@ public class OclResource extends org.eclipse.emf.ecore.resource.impl.ResourceImp
 	
 	public void addProblem(tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclProblem problem, org.eclipse.emf.ecore.EObject element) {
 		getDiagnostics(problem.getType()).add(new ElementBasedTextDiagnostic(locationMap, getURI(), problem, element));
+		java.util.Collection<tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclQuickFix> quickFixes = problem.getQuickFixes();
+		if (quickFixes != null) {
+			for (tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclQuickFix quickFix : quickFixes) {
+				if (quickFix != null) {
+					quickFixMap.put(quickFix.getContextAsString(), quickFix);
+				}
+			}
+		}
 	}
 	
 	public void addProblem(tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclProblem problem, int column, int line, int charStart, int charEnd) {
@@ -564,6 +573,10 @@ public class OclResource extends org.eclipse.emf.ecore.resource.impl.ResourceImp
 		for (org.eclipse.core.runtime.IStatus child : status.getChildren()) {
 			addStatus(child, root);
 		}
+	}
+	
+	public tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclQuickFix getQuickFix(String quickFixContext) {
+		return quickFixMap.get(quickFixContext);
 	}
 	
 }
