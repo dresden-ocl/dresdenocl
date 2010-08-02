@@ -69,7 +69,7 @@ public aspect CollectionLiteralExpASMComputation {
 	// literal part array computed so far.
 	CollectionLiteralExp expression = null;
 	try {
-		expression = factory.createCollectionLiteralExp(collectionKind, parts);
+		expression = factory.createCollectionLiteralExp(collectionKind, null, parts);
 	}
 	catch(Throwable th) {
 		String message = th.getMessage();
