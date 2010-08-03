@@ -522,13 +522,16 @@ public abstract class JavaOclAny implements OclAny {
 	protected OclBoolean checkIsEqualTo(OclAny that) {
 
 		OclBoolean result = null;
-
+		// both undefined
 		if (this.undefinedreason != null && that.getUndefinedReason() != null)
 			result = JavaOclBoolean.getInstance(true);
+		// both invalid
 		else if (this.invalidReason != null && that.getInvalidReason() != null)
 			result = JavaOclBoolean.getInstance(true);
+		// only one undefined
 		else if (this.undefinedreason != null || that.getUndefinedReason() != null)
 			result = JavaOclBoolean.getInstance(false);
+		// only one invalid
 		else if (this.invalidReason != null || that.getInvalidReason() != null)
 			result = JavaOclBoolean.getInstance(false);
 

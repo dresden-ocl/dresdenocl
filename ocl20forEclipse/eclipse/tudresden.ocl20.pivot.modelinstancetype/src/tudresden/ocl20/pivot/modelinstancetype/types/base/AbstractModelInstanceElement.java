@@ -61,6 +61,7 @@ public abstract class AbstractModelInstanceElement implements
 	 * The id of this {@link IModelInstanceElement}. Could be <code>null</code>.
 	 */
 	protected String myId;
+	
 
 	/**
 	 * <p>

@@ -37,12 +37,10 @@ inv tOCLAnyUndefined_3: let v:OclVoid = null in v = v
 
 -- parse-error
 context Model
-inv tOclAnyUndefined_3a: let v:OclVoid = null in
-  let w:Bag(OclAny) = Bag{} in v.isEmpty() = w
+inv tOclAnyUndefined_3a: let v:OclVoid = null in v.isEmpty()
   
--- parse-error
 context Model 
-inv tOCLAnyUndefined_3b: let v:OclVoid = null in v.isOclInvalid()
+inv tOCLAnyUndefined_3b: let v:OclVoid = null in not v.oclIsInvalid() and v.oclIsUndefined()
 
 
 

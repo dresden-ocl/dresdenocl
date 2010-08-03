@@ -18,6 +18,9 @@ with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
 package tudresden.ocl20.pivot.modelinstancetype.types.base;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 import org.apache.log4j.Logger;
 import org.eclipse.osgi.util.NLS;
 
@@ -46,6 +49,14 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
  */
 public class JavaModelInstanceReal extends AbstractModelInstanceReal implements
 		IModelInstanceReal {
+	
+	
+	/**
+	 * this is how many digits after floating point
+	 * are used. It's necessary to limit the precision
+	 * to avoid epsilon-caused errors when comparing floating point values
+	 */
+	private static final int DEFAULT_DECIMAL_SCALE = 5;
 
 	/** The {@link Logger} for this class. */
 	private static final Logger LOGGER =
@@ -166,19 +177,33 @@ public class JavaModelInstanceReal extends AbstractModelInstanceReal implements
 
 		return new JavaModelInstanceReal(this.myNumber);
 	}
-
+	
 	/*
 	 * (non-Javadoc)
 	 * @see
 	 * tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceReal#getReal()
 	 */
-	public Double getDouble() {
+	public Double getDouble()
+	{
+		return this.getDouble(DEFAULT_DECIMAL_SCALE);
+	}
+
+	
+	public Double getDouble(int scale) {
 
 		Double result;
 
 		/* Avoid null pointer exceptions. */
 		if (this.myNumber != null) {
-			result = this.myNumber.doubleValue();
+			/* 
+			 * when calling myNumber.getDouble()
+			 * the number is rounded oddly (e.g. 2.8 --> 2.7777777779) 
+			 */
+			BigDecimal dec = BigDecimal.valueOf(this.myNumber.doubleValue());
+			dec = dec.setScale(scale, RoundingMode.HALF_UP);
+			
+			result = Double.valueOf(dec.doubleValue());
+			
 		}
 
 		else {

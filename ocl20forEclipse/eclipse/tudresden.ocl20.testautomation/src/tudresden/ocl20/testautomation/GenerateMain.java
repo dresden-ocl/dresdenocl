@@ -25,12 +25,19 @@ public class GenerateMain {
 		GenerateMain me = new GenerateMain();
 
 		// SQUAM-Testsuite 
+//		me
+//				.buildInvarianceTests(
+//						"squam",
+//						"tudresden.ocl20.testautomation/bin/umlmodel.uml",
+//						"tudresden.ocl20.testautomation/bin/uml/ModelInstanceProviderClass.class",
+//						"tests/squam/");
+		
 		me
-				.buildInvarianceTests(
-						"squam",
-						"tudresden.ocl20.testautomation/bin/umlmodel.uml",
-						"tudresden.ocl20.testautomation/bin/uml/ModelInstanceProviderClass.class",
-						"tests/squam/");
+		.buildInvarianceTests(
+				"ocl20tests",
+				"tudresden.ocl20.testautomation/bin/umlmodel.uml",
+				"tudresden.ocl20.testautomation/bin/uml/ModelInstanceProviderClass.class",
+				"tests/ocl20tests/");
 
 		// Bremen Benchmark (B5)
 //		String benchmarkSubdir =

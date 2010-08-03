@@ -23,7 +23,7 @@ inv tRealAritmeticOperators_1: let v1: Real = 2.8 in
 context Model
 
 inv tRealAritmeticOperators_2: let v1: Real = 2.8 in 
-			  let v2: Real = 2.0 in v1 - v2 - 0.8 < 0.0001
+			  let v2: Real = 2.0 in v1 - v2 = 0.8
 
 context Model
 

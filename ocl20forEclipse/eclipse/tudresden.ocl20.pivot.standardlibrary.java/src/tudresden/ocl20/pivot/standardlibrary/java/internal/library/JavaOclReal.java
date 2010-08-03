@@ -55,7 +55,7 @@ import tudresden.ocl20.pivot.standardlibrary.java.factory.JavaStandardLibraryFac
  */
 public class JavaOclReal extends JavaOclLibraryObject implements OclReal,
 		IAddableElement {
-
+	
 	/**
 	 * <p>
 	 * Instantiates a new {@link JavaOclReal} set.
