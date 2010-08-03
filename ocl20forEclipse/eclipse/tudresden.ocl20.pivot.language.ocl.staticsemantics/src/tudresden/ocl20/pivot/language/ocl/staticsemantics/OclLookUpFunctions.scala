@@ -115,9 +115,13 @@ trait OclLookUpFunctions { selfType : OclStaticSemantics =>
         Failure("Cannot find operation " + name + " on " + t.getName + " with parameters " + parameters.mkString(", "))
       else {
       	d.flatMap{d =>
-      	  d._2.map(_._1.getOperation).find(o => o.getName == name && o.isStatic == static &&
-                                           o.hasMatchingSignature(parameters)).flatMap{operation =>
-      		  Full(operation)
+      	  val operationDefinitions = d._2.map(_._1)
+      	  operationDefinitions.find(o => o.getOperation.getName == name && o.getOperation.isStatic == static &&
+                                           o.getOperation.hasMatchingSignature(parameters)).flatMap{operationDefinition =>
+      		  (operationDefinition->context).flatMap{context =>
+      		    definedOperationsType.put(operationDefinition.getOperation, context.asInstanceOf[Type])
+      		    Full(operationDefinition.getOperation)
+      		  }
       		}
       	}.toList.firstOption
       }
@@ -198,6 +202,9 @@ trait OclLookUpFunctions { selfType : OclStaticSemantics =>
       }
     } else {
       resolveTypeByComputingFeature(vd, name, t)
+    }.flatMap{property =>
+      definedPropertysType.put(property, t)
+      Full(property)
     }
   }
 }

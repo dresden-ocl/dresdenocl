@@ -308,28 +308,37 @@ trait OclParseTreeToEssentialOcl { selfType : OclStaticSemantics =>
        					Full(pce)
        				}
        				else {
-       				  for (sourceExpression <- v->sourceExpression) yield {
-       				    // TODO: put this into the EssentialOclFactory
-       				  	val pce = ExpressionsFactory.INSTANCE.createPropertyCallExp
-         					pce.setReferredProperty(p)
-         					pce.setSourceType(sourceExpression.getType)
-         					// make sure, the source is not already contained by another element
-		   					  // This can only happen if the sourceExpression is a VariableExp!
-		   					  val cleanSourceExpression = 
-		   					  	if (sourceExpression.eContainer != null) {
-		   					  		sourceExpression match {
-		   					  		  case v : VariableExp =>
-		   					  		    factory.createVariableExp(
-		   					  		      factory.createVariable(v.getReferredVariable.getName, 
-                                         					 v.getReferredVariable.getType, 
-                                         					 v.getReferredVariable.getInitExpression))
-		   					  		}
-		   					  	}
-		   					  	else
-		   					  		sourceExpression
-		   					  pce.setSource(cleanSourceExpression)
-         					pce.setOclLibrary(oclLibrary)
-         					pce
+       				  (v->variables).flatMap{ case (implicitVariables, _) =>
+       				    val propertyOwner = if (p.getOwningType != null) p.getOwningType else definedPropertysType.get(p)
+       				    implicitVariables.flatMap {iv =>
+            		    if (iv.getType.conformsTo(propertyOwner))
+            		    	Full(iv)
+            		    else
+            		    	Empty
+                  }.firstOption.flatMap{iv =>
+                    val sourceExpression = factory.createVariableExp(iv)
+                    // TODO: put this into the EssentialOclFactory
+	       				  	val pce = ExpressionsFactory.INSTANCE.createPropertyCallExp
+	         					pce.setReferredProperty(p)
+	         					pce.setSourceType(sourceExpression.getType)
+	         					// make sure, the source is not already contained by another element
+			   					  // This can only happen if the sourceExpression is a VariableExp!
+			   					  val cleanSourceExpression = 
+			   					  	if (sourceExpression.eContainer != null) {
+			   					  		sourceExpression match {
+			   					  		  case v : VariableExp =>
+			   					  		    factory.createVariableExp(
+			   					  		      factory.createVariable(v.getReferredVariable.getName, 
+	                                         					 v.getReferredVariable.getType, 
+	                                         					 v.getReferredVariable.getInitExpression))
+			   					  		}
+			   					  	}
+			   					  	else
+			   					  		sourceExpression
+			   					  pce.setSource(cleanSourceExpression)
+	         					pce.setOclLibrary(oclLibrary)
+	         					Full(pce)
+                  }
        				  }
        				}
        			}
@@ -347,62 +356,82 @@ trait OclParseTreeToEssentialOcl { selfType : OclStaticSemantics =>
         featureCalls.last->computeOclExpression
   	  }
      
-  	  case i@PropertyCallBaseExpCS(isMarkedPre) => {
-        if (isMarkedPre && !(i->isInPostCondition))
-          yieldFailure("Cannot use @pre outside of a post condition.", i)
+  	  case p@PropertyCallBaseExpCS(isMarkedPre) => {
+        if (isMarkedPre && !(p->isInPostCondition))
+          yieldFailure("Cannot use @pre outside of a post condition.", p)
         else {
-	  	    val property = i.getProperty
+	        val property = p.getProperty
 	        if (property.eIsProxy) 
-           Empty
+	        	Empty
 	        else {
-	          for (sourceExpression <- i->sourceExpression;
-	          			multipleNavigationCall <- i->isMultipleNavigationCall)
-	            yield {
-	              if (sourceExpression.getType.isInstanceOf[CollectionType] && !multipleNavigationCall) {
-                  // implicit collect()
-                  val pce = ExpressionsFactory.INSTANCE.createPropertyCallExp
-			   					pce.setReferredProperty(property)
-                  val iteratorVar = ExpressionsFactory.INSTANCE.createVariable
-                  iteratorVar.setName("$implicitCollect" + ImplicitVariableNumberGenerator.getNumber + "$")
-                  iteratorVar.setType(sourceExpression.getType.asInstanceOf[CollectionType].getElementType)
-                  pce.setSource(factory.createVariableExp(iteratorVar))
-			   					pce.setOclLibrary(oclLibrary)
-			   					factory.createIteratorExp(sourceExpression, "collect", pce, iteratorVar)
-                } else {
-				          // TODO: put this into the EssentialOclFactory
-				 					val pce = ExpressionsFactory.INSTANCE.createPropertyCallExp
-				 					pce.setReferredProperty(property)
-				 					// make sure, the source is not already contained by another element
-		   					  // This can only happen if the sourceExpression is a VariableExp!
-		   					  val cleanSourceExpression = 
-		   					  	if (sourceExpression.eContainer != null) {
-		   					  		sourceExpression match {
-		   					  		  case v : VariableExp =>
-		   					  		    factory.createVariableExp(
-		   					  		      factory.createVariable(v.getReferredVariable.getName, 
-                                         					 v.getReferredVariable.getType, 
-                                         					 v.getReferredVariable.getInitExpression))
-		   					  		}
-		   					  	}
-		   					  	else
-		   					  		sourceExpression
-		   					  pce.setSource(cleanSourceExpression)
-				 					pce.setOclLibrary(oclLibrary)
-				 					if (isMarkedPre)
-				 					  pce.withAtPre
-				 					else
-				 						pce
+            // the owner is not set for defined operations; in that case use a helper Map
+	          val propertyOwner = if (property.getOwningType != null) property.getOwningType else definedPropertysType.get(property)
+            object PropertyExpressionForm extends scala.Enumeration {
+              type PropertyExpressionForm = Value
+              val Normal, ImplicitCollect, ImplicitAsSet = Value
+            }
+            import PropertyExpressionForm._
+            val pef = 
+              (p->sourceExpression).flatMap{sourceExpression =>
+	        	    (p->isMultipleNavigationCall).flatMap{isMultipleNavigationCall =>
+	          	    // Make sure, the source is not already contained by another element.
+		              // If it's a VariableExp, copy it; if it's not, then there has been
+		              // an implicit collect() or implicit asSet(), so go to the eContainer().
+		              val normalisedSourceExpression = 
+								  	if (sourceExpression.eContainer != null) {
+								  		sourceExpression match {
+								  		  case v : VariableExp =>
+								  		    factory.createVariableExp(
+								  		      factory.createVariable(v.getReferredVariable.getName, 
+				                         					 v.getReferredVariable.getType, 
+				                         					 v.getReferredVariable.getInitExpression))
+								  		  case unknown => unknown.eContainer.asInstanceOf[OclExpression]
+								  		}
+								  	}
+								  	else 
+								  		sourceExpression
+              
+	        	      val sourceType = normalisedSourceExpression.getType
+	          	    if ((isMultipleNavigationCall && sourceType.isInstanceOf[CollectionType]) || (!isMultipleNavigationCall && !sourceType.isInstanceOf[CollectionType]))
+	          	    	Full(Normal, normalisedSourceExpression)
+	          	    else if (isMultipleNavigationCall)
+	          		     Full(ImplicitAsSet, normalisedSourceExpression)
+	          		  else
+	        		      Full(ImplicitCollect, normalisedSourceExpression)
 	              }
-		          }
-	        }
+	        	  }
+            pef.flatMap{case (pef, sourceExpression) =>
+						  val pce = ExpressionsFactory.INSTANCE.createPropertyCallExp
+						  pce.setReferredProperty(property)
+        		  pce.setOclLibrary(oclLibrary)
+            
+						  if (pef == Normal) {
+						  	pce.setSource(sourceExpression)
+						  	if (isMarkedPre)
+						  		Full(pce.withAtPre)
+						  	else
+						  		Full(pce)
+        		  }
+						  else if (pef == ImplicitCollect) {
+                val iteratorVar = ExpressionsFactory.INSTANCE.createVariable
+                iteratorVar.setName("$implicitCollect" + ImplicitVariableNumberGenerator.getNumber + "$")
+                iteratorVar.setType(sourceExpression.getType.asInstanceOf[CollectionType].getElementType)
+                pce.setSource(factory.createVariableExp(iteratorVar))
+		   					Full(factory.createIteratorExp(sourceExpression, "collect", pce, iteratorVar))
+						  } else {
+		   					pce.setSource(sourceExpression.withAsSet)
+		   					Full(pce)
+						  }
+        		}
+          }
         }
       }
-     	
-      case i@OperationCallBaseExpCS(arguments, isMarkedPre) => {
-        if (isMarkedPre && !(i->isInPostCondition))
-          yieldFailure("Cannot use @pre outside of a post condition.", i)
+     
+      case o@OperationCallBaseExpCS(arguments, isMarkedPre) => {
+        if (isMarkedPre && !(o->isInPostCondition))
+          yieldFailure("Cannot use @pre outside of a post condition.", o)
         else {
-	        val operation = i.getOperationName
+	        val operation = o.getOperationName
 	        if (operation.eIsProxy) 
            Empty
 	        else {
@@ -410,55 +439,88 @@ trait OclParseTreeToEssentialOcl { selfType : OclStaticSemantics =>
 	          argumentsEOcl.find(!_.isDefined) match {
 	            case Some(f) => f.asInstanceOf[Box[FeatureCallExp]]
 	            case None => {
-	              for (sourceExpression <- i->sourceExpression;
-	              		 multipleNavigationCall <- i->isMultipleNavigationCall) yield {
-	                if (sourceExpression.getType.isInstanceOf[CollectionType] && !multipleNavigationCall) {
-	                  // implicit collect()
-	                  val oce = ExpressionsFactory.INSTANCE.createOperationCallExp
-				   					oce.setReferredOperation(operation)
-				   					argumentsEOcl.foreach {arg =>
-				   					  oce.getArgument.add(arg.open_!)
-				   					}
+	              // the owner is not set for defined operations; in that case use a helper Map
+	              val operationOwner = if (operation.getOwningType != null) operation.getOwningType else definedOperationsType.get(operation)
+	              object OperationExpressionForm extends scala.Enumeration {
+	                type OperationExpressionForm = Value
+	                val Normal, ImplicitCollect, ImplicitAsSet = Value
+	              }
+	              import OperationExpressionForm._
+	              val oef = o match {
+	              	case o: OperationCallOnSelfExpCS => {
+	              		(o->variables).flatMap {case (implicitVariables, _) =>
+	              		  implicitVariables.flatMap {iv =>
+	              		    if (iv.getType.conformsTo(operationOwner))
+	              		    	Full(Normal, factory.createVariableExp(iv))
+//	              		    else {
+//	              		      if (iv.getType.isInstanceOf[CollectionType] && iv.getType.asInstanceOf[CollectionType].getElementType.conformsTo(operationOwner))
+//	              		      	Full(ImplicitCollect, factory.createVariableExp(iv))
+//	              		      else
+//	              		      	if(operationOwner.isInstanceOf[SetType])
+//	              		      		Full(ImplicitAsSet, factory.createVariableExp(iv))
+	              		      	else
+	              		      		Empty
+//	              		    }	
+	              		  }.firstOption	// the first value is OK, since implicit variables are ordered from innermost to outermost
+	              		}
+	              	}
+	              	case i : ImplicitOperationCallCS => {
+	              	  (o->sourceExpression).flatMap{sourceExpression =>
+	              	    // Make sure, the source is not already contained by another element.
+		            			// If it's a VariableExp, copy it; if it's not, then there has been
+		            			// an implicit collect() or implicit asSet(), so go to the eContainer().
+			                val normalisedSourceExpression = 
+										  	if (sourceExpression.eContainer != null) {
+										  		sourceExpression match {
+										  		  case v : VariableExp =>
+										  		    factory.createVariableExp(
+										  		      factory.createVariable(v.getReferredVariable.getName, 
+						                         					 v.getReferredVariable.getType, 
+						                         					 v.getReferredVariable.getInitExpression))
+										  		  case unknown => unknown.eContainer.asInstanceOf[OclExpression]
+										  		}
+										  	}
+										  	else
+										  		sourceExpression
+	              	    (o->isMultipleNavigationCall).flatMap{isMultipleNavigationCall =>
+		              	    val sourceType = normalisedSourceExpression.getType
+		              	    if ((isMultipleNavigationCall && sourceType.isInstanceOf[CollectionType]) || (!isMultipleNavigationCall && !sourceType.isInstanceOf[CollectionType]))
+		              	    	Full(Normal, normalisedSourceExpression)
+		              	    else if (isMultipleNavigationCall)
+		              		     Full(ImplicitAsSet, normalisedSourceExpression)
+		              		  else
+		            		      Full(ImplicitCollect, normalisedSourceExpression)
+	                    }
+	              	  }
+	              	}
+	              }
+	              oef.flatMap{case (oef, sourceExpression) =>               
+								  val oce = ExpressionsFactory.INSTANCE.createOperationCallExp
+								  oce.setReferredOperation(operation)	
+			   					argumentsEOcl.foreach {arg =>
+			   					  oce.getArgument.add(arg.open_!)
+			   					}
+            		  oce.setOclLibrary(oclLibrary)
+                
+								  if (oef == Normal) {
+								  	oce.setSource(sourceExpression)
+								  	if (isMarkedPre)
+								  		Full(oce.withAtPre)
+								  	else
+								  		Full(oce)
+            		  }
+								  else if (oef == ImplicitCollect) {
 	                  val iteratorVar = ExpressionsFactory.INSTANCE.createVariable
 	                  iteratorVar.setName("$implicitCollect" + ImplicitVariableNumberGenerator.getNumber + "$")
 	                  iteratorVar.setType(sourceExpression.getType.asInstanceOf[CollectionType].getElementType)
 	                  oce.setSource(factory.createVariableExp(iteratorVar))
-				   					oce.setOclLibrary(oclLibrary)
-				   					factory.createIteratorExp(sourceExpression, "collect", oce, iteratorVar)
-	                } else {
-				   					val oce = ExpressionsFactory.INSTANCE.createOperationCallExp
-				   					oce.setReferredOperation(operation)	
-				   					argumentsEOcl.foreach {arg =>
-				   					  oce.getArgument.add(arg.open_!)
-				   					}
-	                	if (!sourceExpression.getType.isInstanceOf[CollectionType] && multipleNavigationCall)
-				   						// implicit asSet()
-				   						oce.setSource(sourceExpression.withAsSet)
-				   					else {
-				   						// make sure, the source is not already contained by another element
-				   					  // This can only happen if the sourceExpression is a VariableExp!
-				   					  val cleanSourceExpression = 
-				   					  	if (sourceExpression.eContainer != null) {
-				   					  		sourceExpression match {
-				   					  		  case v : VariableExp =>
-				   					  		    factory.createVariableExp(
-				   					  		      factory.createVariable(v.getReferredVariable.getName, 
-                                             					 v.getReferredVariable.getType, 
-                                             					 v.getReferredVariable.getInitExpression))
-				   					  		}
-				   					  	}
-				   					  	else
-				   					  		sourceExpression
-				   					  oce.setSource(cleanSourceExpression)
-				   					}
-				   					oce.setOclLibrary(oclLibrary)
-				   					if (isMarkedPre)
-				   						oce.withAtPre
-				   					else
-				   						oce
-	                }
-	              }
-		          }
+				   					Full(factory.createIteratorExp(sourceExpression, "collect", oce, iteratorVar))
+								  } else {
+				   					oce.setSource(sourceExpression.withAsSet)
+				   					Full(oce)
+								  }
+            		}
+	            }
 	          }
 	        }
         }

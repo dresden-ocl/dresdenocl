@@ -78,6 +78,16 @@ trait OclStaticSemantics extends ocl.semantics.OclAttributeMaker
    */
   protected var allDefs : Tuple2[collection.mutable.MultiMap[Type, VariableDeclarationWithInitCS], collection.mutable.MultiMap[Type, Tuple2[OperationDefinitionInDefCS, OclExpressionCS]]] = _
   
+  /*
+   * Holds all defined operations and their corresponding type
+   */
+  protected val definedOperationsType : java.util.Map[Operation, Type] = new java.util.IdentityHashMap[Operation, Type]
+  
+  /*
+   * Holds all defined properties and their corresponding type
+   */
+  protected val definedPropertysType : java.util.Map[Property, Type] = new java.util.IdentityHashMap[Property, Type]
+  
   /**
    * For access to general methods of the resource interface
    */
@@ -167,6 +177,7 @@ trait OclStaticSemantics extends ocl.semantics.OclAttributeMaker
     // to avoid the conversion of Scala List to Java List multiple times
     val result : java.util.List[Constraint] = constraints.openOr {throw new OclStaticSemanticsException}
     OclStaticSemanticsTransactions.endStaticSemanticsAnalysis(model, resource, result)
+    //definedOperationsType.clear
     allDefs = null
     result
   }
