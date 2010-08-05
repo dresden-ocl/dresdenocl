@@ -3,7 +3,6 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Staticsemantics
 Bundle-SymbolicName: tudresden.ocl20.pivot.language.ocl.staticsemantics;singleton:=true
 Bundle-Version: 1.0.0.qualifier
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Require-Bundle: tudresden.ocl20.pivot.language.ocl.semantics;bundle-version="1.0.0",
  scala.library;bundle-version="2.7.7";visibility:=reexport,
  org.eclipse.core.runtime;bundle-version="3.5.0",
