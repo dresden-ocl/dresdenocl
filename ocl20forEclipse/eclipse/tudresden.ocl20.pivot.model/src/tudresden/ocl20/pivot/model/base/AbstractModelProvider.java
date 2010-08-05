@@ -37,6 +37,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 import org.apache.log4j.Logger;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.osgi.util.NLS;
 
 import tudresden.ocl20.pivot.model.IModel;
@@ -57,11 +58,12 @@ import tudresden.ocl20.pivot.model.internal.ModelMessages;
 public abstract class AbstractModelProvider implements IModelProvider {
 
 	/** {@link Logger} for this class */
-	private static final Logger LOGGER =
-			Logger.getLogger(AbstractModelProvider.class);
+	private static final Logger LOGGER = Logger
+			.getLogger(AbstractModelProvider.class);
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see tudresden.ocl20.pivot.modelbus.IModelProvider#getModel(java.io.File)
 	 */
 	public IModel getModel(File modelFile) throws ModelAccessException {
@@ -141,5 +143,10 @@ public abstract class AbstractModelProvider implements IModelProvider {
 		// no else.
 
 		return model;
+	}
+
+	public IModel getModel(Resource resource) {
+		throw new UnsupportedOperationException(
+				"This kind of ModelProvider cannot load Ecore Resources.");
 	}
 }

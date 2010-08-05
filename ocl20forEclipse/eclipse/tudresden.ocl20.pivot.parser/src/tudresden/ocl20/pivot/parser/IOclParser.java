@@ -35,6 +35,8 @@ package tudresden.ocl20.pivot.parser;
 import java.io.Reader;
 import java.util.List;
 
+import org.eclipse.emf.common.util.URI;
+
 import tudresden.ocl20.pivot.model.IModel;
 import tudresden.ocl20.pivot.pivotmodel.Constraint;
 
@@ -55,18 +57,15 @@ public interface IOclParser {
 	 * </p>
 	 * 
 	 * @param model
-	 *            The {@link IModel} for that the OCL expressions shall be
-	 *            parsed.
-	 * @param reader
-	 *            A {@link Reader} from where to load OCL expressions.
+	 *          The {@link IModel} for that the OCL expressions shall be parsed.
+	 * @param uri
+	 *          A {@link URI} from where to load OCL expressions.
 	 * 
 	 * @throws ParseException
-	 *             When an error occurs, reasons include an invalid URL, a
-	 *             malformed OCL expression or problems relating to the
-	 *             {@link IModel}.
+	 *           When an error occurs, reasons include an invalid URL, a malformed
+	 *           OCL expression or problems relating to the {@link IModel}.
 	 */
-	public List<Constraint> doParse(IModel model, Reader reader)
-			throws ParseException;
+	public List<Constraint> doParse(IModel model, URI uri) throws ParseException;
 
 	/**
 	 * <p>
@@ -77,19 +76,17 @@ public interface IOclParser {
 	 * </p>
 	 * 
 	 * @param model
-	 *            The {@link IModel} for that the OCL expressions shall be
-	 *            parsed.
-	 * @param reader
-	 *            A {@link Reader} from where to load OCL expressions.
+	 *          The {@link IModel} for that the OCL expressions shall be parsed.
+	 * @param uri
+	 *          A {@link URI} from where to load OCL expressions.
 	 * @param addToModel
-	 *            Indicates whether or not the parsed {@link Constraint}s, its
-	 *            defined fields and functions to the given {@link IModel}.
+	 *          Indicates whether or not the parsed {@link Constraint}s, its
+	 *          defined fields and functions to the given {@link IModel}.
 	 * 
 	 * @throws ParseException
-	 *             When an error occurs, reasons include an invalid URL, a
-	 *             malformed OCL expression or problems relating to the
-	 *             {@link IModel}.
+	 *           When an error occurs, reasons include an invalid URL, a malformed
+	 *           OCL expression or problems relating to the {@link IModel}.
 	 */
-	public List<Constraint> doParse(IModel model, Reader reader,
-			boolean addToModel) throws ParseException;
+	public List<Constraint> doParse(IModel model, URI uri, boolean addToModel)
+			throws ParseException;
 }

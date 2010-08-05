@@ -35,6 +35,8 @@ package tudresden.ocl20.pivot.model;
 import java.io.File;
 import java.net.URL;
 
+import org.eclipse.emf.ecore.resource.Resource;
+
 import tudresden.ocl20.pivot.model.metamodel.IMetamodel;
 
 /**
@@ -87,4 +89,14 @@ public interface IModelProvider {
 	 *           Thrown, if the {@link IModel} cannot be loaded.
 	 */
 	IModel getModel(URL modelURL) throws ModelAccessException;
+
+	/**
+	 * Used for embedding OCL in other languages that already have a
+	 * {@link Resource} representation of the {@link IModel}.
+	 * 
+	 * @param resource
+	 *          the {@link Resource} that is already defined
+	 * @return An {@link IModel} instance.
+	 */
+	IModel getModel(Resource resource);
 }
