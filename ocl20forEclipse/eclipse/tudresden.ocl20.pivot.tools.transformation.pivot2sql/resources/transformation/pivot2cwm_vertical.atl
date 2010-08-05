@@ -1,0 +1,18 @@
+module pivot2cwm_vertical;
+create OUT : CWM from IN : pivotmodel;
+
+rule Type2Table {
+	from
+		c : pivotmodel!Type
+	to
+		out : CWM!Table (
+			name <- c.name,
+			col <- Sequence {key}->union(c.ownedProperty->select(e | not e.multiple and e.type.oclisTypeOf(pivotmodel!PrimitiveType))),
+			key <- Set {key}
+		),
+		key : CWM!Column (
+			owner <- out
+			name <- 'PK_' + c.name,
+			type <- thisModule.objectIdType
+		)
+}

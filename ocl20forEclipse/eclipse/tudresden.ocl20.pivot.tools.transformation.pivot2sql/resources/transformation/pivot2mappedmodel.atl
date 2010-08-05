@@ -1,0 +1,23 @@
+module pivot2mappedmodel;
+create OUT : mappedmodel from IN : pivotmodel;
+
+rule Type2MappedClass {
+	from
+		c : pivotmodel!Type
+	to
+		out : mappedModel!MappedClass (
+			name <- c.name,
+			classGuide <- classGuideKey,
+			ag <- Sequence {key}->union(c.ownedProperty->select(e | not e.multiple and e.type.oclisTypeOf(pivotmodel!PrimitiveType))),
+			key <- Set {key}
+		),
+		classGuideKey : mappedModel!Guide (
+			navigation <- false,
+			steps <- Set{stepsValue}
+		)
+		stepsValue : mappedModel!Step (
+			select <- 'PK_'+ c.name,
+			from <- 'OV_' + c.name,
+			where <- 'PK_'+c.name
+		)
+}

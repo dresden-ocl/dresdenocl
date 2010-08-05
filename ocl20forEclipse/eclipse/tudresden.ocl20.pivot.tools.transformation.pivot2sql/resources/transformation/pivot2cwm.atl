@@ -1,0 +1,63 @@
+module pivot2cwm;
+create OUT : CWM from IN : pivotmodel;
+
+
+rule PrimitiveType2Column {
+	from
+		p : pivotmodel!Property (
+			p.type.oclIsKindOf(pivotmodel!PrimitiveType) and not p.multiple 
+		)
+	to
+		out : Relational!Column (
+			name <- p.name,
+			owner <- p.owner,
+			type <- simpleType
+						
+		)
+		simpleType : Relational:SQLSimpleType (
+			name <- p.type
+		)
+}
+
+rule 1to1Association2KeyRelationship {
+	from 
+		p : pivotmodel!NDirectionalProperty (
+			not p.multiple and p.inverseNDirectionalProperties.forAll(not e.multiple))
+	to 
+		fk : Relational!ForeignKey(
+			name <- 'FK_' + p.name,
+			namespace <- p.inverseNDirectionalProperties.get(0).owner)
+			uniqueKey <- p.inverseNDirectionalProperties.get(0)
+		]
+	
+}
+
+rule 1toNAssociation2KeyRelationship {
+	from 
+		p : pivotmodel!NDirectionalProperty (
+			not p.multiple and p.inverseNDirectionalProperties.forAll(e.multiple))
+	to 
+		out : Relational!Column ()
+		
+}
+
+rule 1toNAssociationReverse2KeyRelationship {
+	from 
+		p : pivotmodel!NDirectionalProperty (
+			p.multiple and not p.inverseNDirectionalProperties.forAll(e.multiple))
+	to 
+		out : Relational!Column ()
+		
+}
+
+rule MtoNAssociation2KeyRelationship {
+	from 
+		p : pivotmodel!NDirectionalProperty (
+			p.multiple and p.inverseNDirectionalProperties.forAll(e.multiple))
+	to 
+		out : Relational!Table (
+			name <- 'ASS_'+p.name+'_'+'helper',
+			column <- 
+			)
+		
+}

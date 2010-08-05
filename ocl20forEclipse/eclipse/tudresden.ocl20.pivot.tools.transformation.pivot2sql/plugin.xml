@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+<plugin>
+   <extension
+         point="tudresden.ocl20.pivot.tools.transformation.transformations">
+      <transformation
+            class="tudresden.ocl20.pivot.tools.transformation.pivot2sql.impl.Pivot2CwmImpl">
+      </transformation>
+      <transformation
+            class="tudresden.ocl20.pivot.tools.transformation.pivot2sql.impl.Cwm2DdlImpl">
+      </transformation>
+      <transformation
+            class="tudresden.ocl20.pivot.tools.transformation.pivot2sql.impl.Pivot2Ddl">
+      </transformation>
+      <transformation
+            class="tudresden.ocl20.pivot.tools.transformation.pivot2sql.impl.Pivot2MappedModelImpl">
+      </transformation>
+      <transformation
+            class="tudresden.ocl20.pivot.tools.transformation.pivot2sql.impl.Pivot2CwmAndMappedModel">
+      </transformation>
+   </extension>
+</plugin>
