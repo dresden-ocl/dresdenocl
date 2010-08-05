@@ -96,7 +96,7 @@ trait OclStaticSemantics extends ocl.semantics.OclAttributeMaker
   /*
    * For cached attributes.
    */
-  import kiama.attribution.Attribution._
+  import org.kiama.attribution.Attribution._
   
   /**
    * Adds an error to the resource and returns a Failure with the given message.

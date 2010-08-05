@@ -18,7 +18,7 @@ import tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp._
 import tudresden.attributegrammar.integration.kiama.util.CollectionConverterS2J._
 import tudresden.attributegrammar.integration.kiama.util.CollectionConverterJ2S._
 
-import kiama.attribution.Attribution._
+import org.kiama.attribution.Attribution._
 
 
 trait OclAttributes { selfType : OclStaticSemantics =>

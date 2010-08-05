@@ -19,7 +19,7 @@ import tudresden.attributegrammar.integration.kiama.util.CollectionConverterS2J.
 import tudresden.attributegrammar.integration.kiama.util.CollectionConverterJ2S._
 
 
-import kiama.attribution.Attribution._
+import org.kiama.attribution.Attribution._
 
 trait OclLookUpFunctions { selfType : OclStaticSemantics =>
 	

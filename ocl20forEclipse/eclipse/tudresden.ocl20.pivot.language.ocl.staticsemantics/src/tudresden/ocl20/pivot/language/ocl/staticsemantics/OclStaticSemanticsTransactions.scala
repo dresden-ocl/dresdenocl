@@ -1,6 +1,6 @@
 package tudresden.ocl20.pivot.language.ocl.staticsemantics
 
-import kiama.attribution.Attribution._
+import org.kiama.attribution.Attribution._
 import org.eclipse.emf.ecore._
 import tudresden.ocl20.pivot.language.ocl.semantics._
 import tudresden.ocl20.pivot.model._

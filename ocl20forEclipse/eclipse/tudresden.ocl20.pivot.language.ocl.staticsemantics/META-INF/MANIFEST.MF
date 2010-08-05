@@ -6,7 +6,6 @@ Bundle-Version: 1.0.0.qualifier
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Require-Bundle: tudresden.ocl20.pivot.language.ocl.semantics;bundle-version="1.0.0",
  scala.library;bundle-version="2.7.7";visibility:=reexport,
- kiama.attribution;bundle-version="1.0.0";visibility:=reexport,
  org.eclipse.core.runtime;bundle-version="3.5.0",
  tudresden.ocl20.pivot.essentialocl.standardlibrary;bundle-version="2.1.0",
  tudresden.ocl20.pivot.language.ocl.resource.ocl;bundle-version="1.0.0",
@@ -15,7 +14,8 @@ Require-Bundle: tudresden.ocl20.pivot.language.ocl.semantics;bundle-version="1.0
  tudresden.ocl20.pivot.model;bundle-version="2.2.0",
  tudresden.ocl20.pivot.essentialocl;bundle-version="2.1.0",
  tudresden.ocl20.pivot.modelbus;bundle-version="2.1.0",
- org.emftext.access;bundle-version="1.2.0"
+ org.emftext.access;bundle-version="1.2.0",
+ org.kiama.attribution
 Bundle-ActivationPolicy: lazy
 Export-Package: tudresden.ocl20.pivot.language.ocl.resource.ocl,
  tudresden.ocl20.pivot.language.ocl.staticsemantics,
