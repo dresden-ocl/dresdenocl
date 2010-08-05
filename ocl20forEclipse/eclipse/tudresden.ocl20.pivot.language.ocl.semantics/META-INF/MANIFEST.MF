@@ -5,7 +5,7 @@ Bundle-SymbolicName: tudresden.ocl20.pivot.language.ocl.semantics;singleton:=tru
 Bundle-Version: 1.0.0.qualifier
 Require-Bundle: tudresden.ocl20.pivot.language.ocl;visibility:=reexport,
  scala.library,
- kiama.attribution,
+ org.kiama.attribution,
  tudresden.ocl20.pivot.pivotmodel
 Bundle-ActivationPolicy: lazy
 Bundle-Vendor: www.langems.org
