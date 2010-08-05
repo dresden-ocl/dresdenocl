@@ -30,7 +30,6 @@ import org.eclipse.ui.IWorkbench;
 import tudresden.ocl20.pivot.pivotmodel.Constraint;
 import tudresden.ocl20.pivot.tools.codegen.IOcl2Code;
 import tudresden.ocl20.pivot.tools.codegen.ui.Ocl2CodeUIPlugIn;
-import tudresden.ocl20.pivot.tools.codegen.ui.impl.CodegenUIMessages;
 
 public abstract class TransformCodeWizard extends Wizard implements INewWizard {
 

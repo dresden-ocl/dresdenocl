@@ -1,17 +1,21 @@
 group postgre;
 
 typeMap ::= [
-        "int":"INT",
-        "long":"BIGINT",
-        "float":"FLOAT",
-        "double":"DOUBLE",
-        "boolean":"BOOL",
-        "short":"INT",
-        "char":"CHAR",
+        "Integer":"INT",
+        "Long":"BIGINT",
+        "Float":"FLOAT",
+        "Double":"DOUBLE",
+        "Boolean":"BOOL",
+        "Short":"INT",
+        "Char":"CHAR",
         "String":"VARCHAR(255)",
         "Date":"DATE",
         default:"VARCHAR(255)"
 ]
+
+createType(type) ::= <<
+$typeMap.(type)$
+>>
 
 selectStmt(columns, tables, where) ::= <<
 SELECT $columns; separator=", "$ 

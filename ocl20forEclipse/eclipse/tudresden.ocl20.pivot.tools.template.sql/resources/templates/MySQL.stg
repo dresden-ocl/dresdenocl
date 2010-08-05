@@ -1,17 +1,21 @@
 group mysql;
 
 typeMap ::= [
-        "int":"INT",
-        "long":"BIGINT",
-        "float":"FLOAT",
-        "double":"DOUBLE",
-        "boolean":"BOOL",
-        "short":"INT",
-        "char":"CHAR",
+        "Integer":"INT",
+        "Long":"BIGINT",
+        "Float":"FLOAT",
+        "Double":"DOUBLE",
+        "Boolean":"BOOL",
+        "Short":"INT",
+        "Char":"CHAR",
         "String":"VARCHAR(512)",
         "Date":"DATE",
         default:"VARCHAR (512)"
 ]
+
+createType(type) ::= <<
+$typeMap.(type)$
+>>
 
 createView(viewname, body) ::= <<
 CREATE VIEW `$viewname$` 
@@ -19,7 +23,7 @@ AS ( $body$ );
 >>
 
 createColumn(name, type, primaryKey, foreignKey) ::= <<
-`$name$` $typeMap.(type)$$if(primaryKey)$ PRIMARY KEY $endif$$if(foreignKey)$ REFERENCES $foreignKey$ $endif$
+`$name$` $type$$if(primaryKey)$ PRIMARY KEY $endif$$if(foreignKey)$ REFERENCES $foreignKey$ $endif$
 >>
 
 createTable(tablename, columns) ::= <<

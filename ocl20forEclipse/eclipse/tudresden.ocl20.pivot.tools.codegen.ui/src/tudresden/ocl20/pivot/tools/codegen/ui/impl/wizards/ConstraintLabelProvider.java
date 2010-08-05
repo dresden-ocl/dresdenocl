@@ -92,8 +92,12 @@ public class ConstraintLabelProvider extends LabelProvider implements
 		aConstraint = (Constraint) element;
 
 		aKind = aConstraint.getKind().getName();
-		aBody = aConstraint.getSpecification().getBody();
-
+		if (aConstraint.getName() != null && !aConstraint.getName().equals("")) {
+			aBody = aConstraint.getName();
+		} else {
+			aBody = aConstraint.getSpecification().getBody();
+		}
+		
 		result = aKind;
 		result += ": " + aBody;
 

@@ -72,6 +72,8 @@ public class SelectDirectoryPage extends WizardPage {
 
 	/** The text field that contains the constraint sub directory for output. */
 	private Text subDirectoryTextBox;
+	
+	private Group directoryConstraintGroup;
 
 	/**
 	 * <p>
@@ -153,8 +155,7 @@ public class SelectDirectoryPage extends WizardPage {
 	private void createConstraintDirectoryGroup(Composite parent) {
 
 		Composite constraintDirectoryGroupComposite;
-		Group directoryGroup;
-
+		
 		Label locationLabel;
 		GridLayout layout;
 
@@ -168,24 +169,24 @@ public class SelectDirectoryPage extends WizardPage {
 		constraintDirectoryGroupComposite.setLayout(layout);
 
 		/* Create directory group and specify properties. */
-		directoryGroup = new Group(constraintDirectoryGroupComposite, SWT.NONE);
-		directoryGroup
+		directoryConstraintGroup = new Group(constraintDirectoryGroupComposite, SWT.NONE);
+		directoryConstraintGroup
 				.setText(CodegenUIMessages.SelectDirectoryPage_SubDirectoryGroupText);
-		directoryGroup.setLayoutData(new GridData(SWT.FILL, SWT.NONE, true,
+		directoryConstraintGroup.setLayoutData(new GridData(SWT.FILL, SWT.NONE, true,
 				false));
 
 		layout = new GridLayout(4, false);
 		layout.horizontalSpacing = 10;
-		directoryGroup.setLayout(layout);
-		directoryGroup.setFont(parent.getFont());
+		directoryConstraintGroup.setLayout(layout);
+		directoryConstraintGroup.setFont(parent.getFont());
 
 		/* Create text label. */
-		locationLabel = new Label(directoryGroup, SWT.None);
+		locationLabel = new Label(directoryConstraintGroup, SWT.None);
 		locationLabel
 				.setText(CodegenUIMessages.SelectDirectoryPage_SubDirectoryLabelText);
 
 		/* Create text box. */
-		this.subDirectoryTextBox = new Text(directoryGroup, SWT.SINGLE
+		this.subDirectoryTextBox = new Text(directoryConstraintGroup, SWT.SINGLE
 				| SWT.BORDER);
 		this.subDirectoryTextBox.setLayoutData(new GridData(SWT.FILL,
 				SWT.NORMAL, true, false, 3, 1));
@@ -571,5 +572,9 @@ public class SelectDirectoryPage extends WizardPage {
 				directoryTextBox.setText(fileLoc);
 			}
 		}
+	}
+
+	public Group getDirectoryConstraintGroup() {
+		return directoryConstraintGroup;
 	}
 }

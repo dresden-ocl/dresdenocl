@@ -1,17 +1,21 @@
 group oracle;
 
 typeMap ::= [
-        "int":"INT",
-        "long":"BIGINT",
-        "float":"FLOAT",
-        "double":"DOUBLE",
-        "boolean":"NUMBER(1)",
-        "short":"INT",
-        "char":"CHAR",
+        "Integer":"INT",
+        "Long":"BIGINT",
+        "Float":"FLOAT",
+        "Double":"DOUBLE",
+        "Boolean":"NUMBER(1)",
+        "Short":"INT",
+        "Char":"CHAR",
         "String":"VARCHAR(255)",
         "Date":"DATE",
         default:"VARCHAR(255)"
 ]
+
+createType(type) ::= <<
+$typeMap.(type)$
+>>
 
 selectStmt(columns, tables, where) ::= <<
 SELECT $columns$ 
@@ -27,7 +31,7 @@ AS ( $body$ );
 >>
 
 createColumn(name, type, primaryKey, foreignKey) ::= <<
-$name$ $typeMap.(type)$$if(primaryKey)$ PRIMARY KEY $endif$
+$name$ $type$$if(primaryKey)$ PRIMARY KEY $endif$
 >>
 
 createTable(tablename, columns) ::= <<
