@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+ <copyright>
+ </copyright>
+
+ $Id$
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <package
+            uri="http:///orgomg/cwm/objectmodel/core.ecore"
+            class="orgomg.cwm.objectmodel.core.CorePackage"
+            genModel="resources/model/CWM.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <package
+            uri="http:///orgomg/cwm/objectmodel/behavioral.ecore"
+            class="orgomg.cwm.objectmodel.behavioral.BehavioralPackage"
+            genModel="resources/model/CWM.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <package
+            uri="http:///orgomg/cwm/objectmodel/relationships.ecore"
+            class="orgomg.cwm.objectmodel.relationships.RelationshipsPackage"
+            genModel="resources/model/CWM.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <package
+            uri="http:///orgomg/cwm/objectmodel/instance.ecore"
+            class="orgomg.cwm.objectmodel.instance.InstancePackage"
+            genModel="resources/model/CWM.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <package
+            uri="http:///orgomg/cwm/foundation/businessinformation.ecore"
+            class="orgomg.cwm.foundation.businessinformation.BusinessinformationPackage"
+            genModel="resources/model/CWM.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <package
+            uri="http:///orgomg/cwm/foundation/datatypes.ecore"
+            class="orgomg.cwm.foundation.datatypes.DatatypesPackage"
+            genModel="resources/model/CWM.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <package
+            uri="http:///orgomg/cwm/foundation/expressions.ecore"
+            class="orgomg.cwm.foundation.expressions.ExpressionsPackage"
+            genModel="resources/model/CWM.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <package
+            uri="http:///orgomg/cwm/foundation/keysindexes.ecore"
+            class="orgomg.cwm.foundation.keysindexes.KeysindexesPackage"
+            genModel="resources/model/CWM.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <package
+            uri="http:///orgomg/cwm/foundation/softwaredeployment.ecore"
+            class="orgomg.cwm.foundation.softwaredeployment.SoftwaredeploymentPackage"
+            genModel="resources/model/CWM.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <package
+            uri="http:///orgomg/cwm/foundation/typemapping.ecore"
+            class="orgomg.cwm.foundation.typemapping.TypemappingPackage"
+            genModel="resources/model/CWM.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <package
+            uri="http:///orgomg/cwm/resource/relational.ecore"
+            class="orgomg.cwm.resource.relational.RelationalPackage"
+            genModel="resources/model/CWM.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <package
+            uri="http:///orgomg/cwm/resource/relational/enumerations.ecore"
+            class="orgomg.cwm.resource.relational.enumerations.EnumerationsPackage"
+            genModel="resources/model/CWM.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <package
+            uri="http:///orgomg/cwm/resource/record.ecore"
+            class="orgomg.cwm.resource.record.RecordPackage"
+            genModel="resources/model/CWM.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <package
+            uri="http:///orgomg/cwm/resource/multidimensional.ecore"
+            class="orgomg.cwm.resource.multidimensional.MultidimensionalPackage"
+            genModel="resources/model/CWM.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <package
+            uri="http:///orgomg/cwm/resource/xml.ecore"
+            class="orgomg.cwm.resource.xml.XmlPackage"
+            genModel="resources/model/CWM.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <package
+            uri="http:///orgomg/cwm/analysis/transformation.ecore"
+            class="orgomg.cwm.analysis.transformation.TransformationPackage"
+            genModel="resources/model/CWM.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <package
+            uri="http:///orgomg/cwm/analysis/olap.ecore"
+            class="orgomg.cwm.analysis.olap.OlapPackage"
+            genModel="resources/model/CWM.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <package
+            uri="http:///orgomg/cwm/analysis/informationvisualization.ecore"
+            class="orgomg.cwm.analysis.informationvisualization.InformationvisualizationPackage"
+            genModel="resources/model/CWM.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <package
+            uri="http:///orgomg/cwm/analysis/businessnomenclature.ecore"
+            class="orgomg.cwm.analysis.businessnomenclature.BusinessnomenclaturePackage"
+            genModel="resources/model/CWM.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <package
+            uri="http:///orgomg/cwm/management/warehouseprocess.ecore"
+            class="orgomg.cwm.management.warehouseprocess.WarehouseprocessPackage"
+            genModel="resources/model/CWM.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <package
+            uri="http:///orgomg/cwm/management/warehouseprocess/datatype.ecore"
+            class="orgomg.cwm.management.warehouseprocess.datatype.DatatypePackage"
+            genModel="resources/model/CWM.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <package
+            uri="http:///orgomg/cwm/management/warehouseprocess/events.ecore"
+            class="orgomg.cwm.management.warehouseprocess.events.EventsPackage"
+            genModel="resources/model/CWM.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <package
+            uri="http:///orgomg/cwm/management/warehouseoperation.ecore"
+            class="orgomg.cwm.management.warehouseoperation.WarehouseoperationPackage"
+            genModel="resources/model/CWM.genmodel"/>
+   </extension>
+
+
+</plugin>
