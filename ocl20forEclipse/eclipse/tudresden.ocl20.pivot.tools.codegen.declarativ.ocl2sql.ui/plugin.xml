@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+
+   <extension
+         point="org.eclipse.ui.actionSets">
+      <actionSet
+            label="Codegen Action Set"
+            visible="true"
+            id="tudresden.ocl20.pivot.tools.codegen.declarativ.ocl2sql.ui.actionSet">
+         <menu
+               label="Dresden OCL2"
+               id="tudresden.ocl20.pivot.modelbus.ui.menu">
+            <separator
+                  name="tudresden.ocl20.pivot.modelbus.ui.menu.import">
+            </separator>
+            <separator
+                  name="tudresden.ocl20.pivot.modelbus.ui.menu.tools">
+            </separator>
+         </menu>
+         <action
+               label="Generate SQL Code"
+               class="tudresden.ocl20.pivot.tools.codegen.declarativ.ocl2sql.ui.actions.SQLCodeGenAction"
+               tooltip="Creates SQL code to instrument constraints for a given model and given OCL constraints."
+               menubarPath="tudresden.ocl20.pivot.modelbus.ui.menu/tudresden.ocl20.pivot.modelbus.ui.menu.tools"
+               id="tudresden.ocl20.pivot.tools.codegen.declarativ.ocl2sql.ui.actions.SQLCodeGenAction">
+         </action>
+      </actionSet>
+   </extension>
+
+   <extension
+         point="org.eclipse.ui.newWizards">
+      <wizard
+            category="tudresden.ocl20.pivot.modelbus.ui.newWizards.category"
+            class="tudresden.ocl20.pivot.tools.codegen.declarativ.ocl2sql.ui.internal.wizards.SQLCodeWizard"
+            hasPages="true"
+            icon="icons/codegen.gif"
+            id="tudresden.ocl20.pivot.tools.codegen.declarativ.ocl2sql.ui.importWizards.loadModelWizard"
+            name="Generate SQL Constraint Code">
+         <description>
+            Creates AspectJ code to instrument constraints for a given model and given OCL constraints.
+         </description>
+      </wizard>
+   </extension>
+
+</plugin>
