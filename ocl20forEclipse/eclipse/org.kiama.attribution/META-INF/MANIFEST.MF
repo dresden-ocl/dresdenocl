@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Kiama Attribution
+Bundle-SymbolicName: org.kiama.attribution
+Bundle-Version: 3.0.0.qualifier
+Bundle-Vendor: TU Dresden, Software Technology Group
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Require-Bundle: scala.library;bundle-version="2.7.7",
+ org.eclipse.core.runtime;bundle-version="3.5.0",
+ org.eclipse.emf.ecore;bundle-version="2.5.0"
+Export-Package: org.kiama.attribution,
+ tudresden.attributegrammar.integration.kiama,
+ tudresden.attributegrammar.integration.kiama.util
