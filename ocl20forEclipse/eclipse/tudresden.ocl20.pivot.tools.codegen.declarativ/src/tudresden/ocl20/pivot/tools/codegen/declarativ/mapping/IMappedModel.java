@@ -28,33 +28,34 @@
 package tudresden.ocl20.pivot.tools.codegen.declarativ.mapping;
 
 /**
- * The MappedModel acts as a bridge between the DeclarativeCodeGenerator (which has access
- * to the elements of the model from the repository) and the model in the target language.
+ * The MappedModel acts as a bridge between the DeclarativeCodeGenerator (which
+ * has access to the elements of the model from the repository) and the model in
+ * the target language.
  * 
- * Using the MappedModel, you can get target model representations of the Classifiers from 
- * the base model.
+ * Using the MappedModel, you can get target model representations of the
+ * Classifiers from the base model.
  * 
  * @author Florian Heidenreich
- *
+ * 
  */
 public interface IMappedModel {
 
 	/**
-	 * This method returns the IMappedClass for the given class name from the MappedModel
+	 * This method returns the IMappedClass for the given class name from the
+	 * MappedModel
 	 * 
-	 * @param name the name of the class
+	 * @param name
+	 *          the name of the class
 	 * @return the IMappedClass for the given class name from the MappedModel
 	 */
 	public IMappedClass getClass(String name);
-	
-	
+
 	/**
 	 * Returns a unique alias which may be used in the declarative target language
 	 * 
 	 * @return unique alias which may be used in the declarative target language
 	 */
 	public String getUniqueAlias();
-
 
 	public boolean isClass(String classname);
 }

@@ -18,7 +18,6 @@ with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
 package tudresden.ocl20.pivot.tools.codegen.code;
 
-
 /**
  * <p>
  * Represents a Type of the target language transformed during code
@@ -36,7 +35,7 @@ public interface ITransformedType {
 
 	/**
 	 * @param aType
-	 *            The Type which was generated.
+	 *          The Type which was generated.
 	 */
 	public void setTypeName(String aType);
 
@@ -56,7 +55,7 @@ public interface ITransformedType {
 	 * </p>
 	 * 
 	 * @param aType
-	 *            The generic type this {@link ITransformedType}.
+	 *          The generic type this {@link ITransformedType}.
 	 */
 	public void setGenericType(ITransformedType aType);
 

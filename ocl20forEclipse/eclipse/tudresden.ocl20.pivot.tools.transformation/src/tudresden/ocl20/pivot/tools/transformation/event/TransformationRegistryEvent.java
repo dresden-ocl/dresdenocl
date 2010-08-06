@@ -41,8 +41,8 @@ import tudresden.ocl20.pivot.tools.transformation.ITransformationRegistry;
 
 /**
  * <p>
- * Represents events fired by the {@link ITransformationRegistry} if a new {@link ITransformation}
- * is added or removed.
+ * Represents events fired by the {@link ITransformationRegistry} if a new
+ * {@link ITransformation} is added or removed.
  * </p>
  * 
  * @author Bjoern Freitag
@@ -53,7 +53,7 @@ public class TransformationRegistryEvent extends EventObject {
 	private static final long serialVersionUID = -5135930083763176962L;
 
 	/** The affected {@link ITransformation}. */
-	private ITransformation<?,?> affectedTransformation;
+	private ITransformation<?, ?> affectedTransformation;
 
 	/**
 	 * <p>
@@ -63,10 +63,11 @@ public class TransformationRegistryEvent extends EventObject {
 	 * @param source
 	 *          The {@link IModelRegistry} that is the source of this event.
 	 * @param affectedTransformation
-	 *          The {@link ITransformation} affected by the operation that caused this
-	 *          event.
+	 *          The {@link ITransformation} affected by the operation that caused
+	 *          this event.
 	 */
-	public TransformationRegistryEvent(ITransformationRegistry source, ITransformation<?,?> affectedTransformation) {
+	public TransformationRegistryEvent(ITransformationRegistry source,
+			ITransformation<?, ?> affectedTransformation) {
 
 		super(source);
 		this.affectedTransformation = affectedTransformation;
@@ -74,26 +75,27 @@ public class TransformationRegistryEvent extends EventObject {
 
 	/**
 	 * <p>
-	 * Returns the {@link ITransformationRegistry} that is the source of this event.
+	 * Returns the {@link ITransformationRegistry} that is the source of this
+	 * event.
 	 * </p>
 	 * 
 	 * @see java.util.EventObject#getSource()
 	 */
 	@Override
 	public ITransformationRegistry getSource() {
-	
+
 		return (ITransformationRegistry) super.getSource();
 	}
 
 	/**
 	 * <p>
-	 * Returns the {@link ITransformation} that is affected by the operation that caused
-	 * this event.
+	 * Returns the {@link ITransformation} that is affected by the operation that
+	 * caused this event.
 	 * </p>
 	 * 
 	 * @return An {@link ITransformation} instance.
 	 */
-	public ITransformation<?,?> getAffectedTransformation() {
+	public ITransformation<?, ?> getAffectedTransformation() {
 
 		return this.affectedTransformation;
 	}
@@ -103,7 +105,8 @@ public class TransformationRegistryEvent extends EventObject {
 	 * Does the same as {@link #getSource()}, but has a more concise name.
 	 * </p>
 	 * 
-	 * @return The {@link ITransformationRegistry} that is the source of this event.
+	 * @return The {@link ITransformationRegistry} that is the source of this
+	 *         event.
 	 */
 	public ITransformationRegistry getTransformationRegistry() {
 

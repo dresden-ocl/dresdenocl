@@ -50,143 +50,176 @@ import tudresden.ocl20.pivot.tools.template.TemplatePlugin;
 import tudresden.ocl20.pivot.tools.template.exception.TemplateException;
 
 /**
- * This test will test the class ITemplateGroupRegistry.java and ITemplateGroup of the package
- * tudresden.ocl20.pivot.tools.template.
+ * This test will test the class ITemplateGroupRegistry.java and ITemplateGroup
+ * of the package tudresden.ocl20.pivot.tools.template.
  * 
- *@see tudresden.ocl20.pivot.tools.template.ITemplateGroup
- *@see tudresden.ocl20.pivot.tools.template.ITemplateGroupRegistry
+ * @see tudresden.ocl20.pivot.tools.template.ITemplateGroup
+ * @see tudresden.ocl20.pivot.tools.template.ITemplateGroupRegistry
  */
 public class TestTemplateGroup {
-	
+
 	private static String templateEngineName = "StringTemplate";
-	
+
 	private static ITemplateGroup general = null;
-	
+
 	private static List<ITemplateGroup> tempGroup;
-	
+
 	@BeforeClass
 	public static void class_setup() {
+
 		LinkedList<URL> groups = new LinkedList<URL>();
-		groups.add(TestStringTemplateEngine.class.getResource("/resources/templates/testGeneral.stg"));
+		groups.add(TestStringTemplateEngine.class
+				.getResource("/resources/templates/testGeneral.stg"));
 		tempGroup = TemplatePlugin.getTemplateGroupRegistry().getTemplateGroups();
 		for (ITemplateGroup tg : tempGroup) {
 			TemplatePlugin.getTemplateGroupRegistry().removeTemplateGroup(tg);
 		}
 		try {
-			general = TemplatePlugin.getTemplateGroupRegistry().addDefaultTemplateGroup("Test1",templateEngineName, null);
+			general =
+					TemplatePlugin.getTemplateGroupRegistry().addDefaultTemplateGroup(
+							"Test1", templateEngineName, null);
 			general.addFiles(groups);
 			TemplatePlugin.getTemplateGroupRegistry().removeTemplateGroup(general);
 		} catch (TemplateException e) {
 			fail("Can't set a template group!");
 		}
 	}
-	
+
 	@Before
 	public void setup() {
+
 		TemplatePlugin.getTemplateGroupRegistry().addTemplateGroup(general);
-		int size = TemplatePlugin.getTemplateGroupRegistry().getTemplateGroups().size();
-		assertEquals(1,size);
+		int size =
+				TemplatePlugin.getTemplateGroupRegistry().getTemplateGroups().size();
+		assertEquals(1, size);
 	}
-	
+
 	@After
 	public void tear_down() {
-		Iterator<ITemplateGroup> iterTempEng = TemplatePlugin.getTemplateGroupRegistry().getTemplateGroups().iterator();
+
+		Iterator<ITemplateGroup> iterTempEng =
+				TemplatePlugin.getTemplateGroupRegistry().getTemplateGroups()
+						.iterator();
 		while (iterTempEng.hasNext()) {
-			TemplatePlugin.getTemplateGroupRegistry().removeTemplateGroup(iterTempEng.next());
+			TemplatePlugin.getTemplateGroupRegistry().removeTemplateGroup(
+					iterTempEng.next());
 		}
-		int size = TemplatePlugin.getTemplateGroupRegistry().getTemplateGroups().size();
-		assertEquals(0,size);
+		int size =
+				TemplatePlugin.getTemplateGroupRegistry().getTemplateGroups().size();
+		assertEquals(0, size);
 	}
-	
+
 	@AfterClass
 	public static void class_tear_down() {
+
 		for (ITemplateGroup tg : tempGroup) {
 			TemplatePlugin.getTemplateGroupRegistry().addTemplateGroup(tg);
 		}
-		
+
 	}
-	
+
 	/**
-	 * <p>Implemented test checkAddGroup.<br /><br/>
-	 * Tests the ITemplateGroupRegistry for adding new TemplateGroups.</p>
+	 * <p>
+	 * Implemented test checkAddGroup.<br />
+	 * <br/>
+	 * Tests the ITemplateGroupRegistry for adding new TemplateGroups.
+	 * </p>
 	 * 
 	 */
-	@Test 
+	@Test
 	public void checkAddGroup() {
 
-		ITemplateGroup test = TemplatePlugin.getTemplateGroupRegistry().getTemplateGroup("Test1");
+		ITemplateGroup test =
+				TemplatePlugin.getTemplateGroupRegistry().getTemplateGroup("Test1");
 		assertNotNull(test);
-		
+
 		assertEquals(test.getDisplayName(), "Test1");
 		assertSame(test, general);
-		
+
 		test = TemplatePlugin.getTemplateGroupRegistry().getTemplateGroup("Test2");
 		assertNull(test);
-		
+
 	}
-	
+
 	/**
-	 * <p>Implemented test checkRemoveGroup.<br /><br/>
-	 * Tests the ITemplateGroupRegistry for removing TemplateGroups.</p>
+	 * <p>
+	 * Implemented test checkRemoveGroup.<br />
+	 * <br/>
+	 * Tests the ITemplateGroupRegistry for removing TemplateGroups.
+	 * </p>
 	 * 
 	 */
-	@Test 
+	@Test
 	public void checkRemoveGroup() {
+
 		TemplatePlugin.getTemplateGroupRegistry().removeTemplateGroup("Test2");
-		int size = TemplatePlugin.getTemplateGroupRegistry().getTemplateGroups().size();
-		assertEquals(1, size); 
-		ITemplateGroup temp = TemplatePlugin.getTemplateGroupRegistry().getTemplateGroup("Test1");
-		
+		int size =
+				TemplatePlugin.getTemplateGroupRegistry().getTemplateGroups().size();
+		assertEquals(1, size);
+		ITemplateGroup temp =
+				TemplatePlugin.getTemplateGroupRegistry().getTemplateGroup("Test1");
+
 		TemplatePlugin.getTemplateGroupRegistry().removeTemplateGroup(temp);
 		size = TemplatePlugin.getTemplateGroupRegistry().getTemplateGroups().size();
 		assertEquals(0, size);
-		
+
 		TemplatePlugin.getTemplateGroupRegistry().addTemplateGroup(temp);
 		size = TemplatePlugin.getTemplateGroupRegistry().getTemplateGroups().size();
 		assertEquals(1, size);
-		
+
 		TemplatePlugin.getTemplateGroupRegistry().removeTemplateGroup("Test1");
 		size = TemplatePlugin.getTemplateGroupRegistry().getTemplateGroups().size();
 		assertEquals(0, size);
 	}
-	
+
 	/**
-	 * <p>Implemented test checkGetTemplates.<br /><br/>
-	 * Tests the ITemplateGroup for get a Template.</p>
+	 * <p>
+	 * Implemented test checkGetTemplates.<br />
+	 * <br/>
+	 * Tests the ITemplateGroup for get a Template.
+	 * </p>
 	 * 
 	 */
-	@Test 
+	@Test
 	public void checkGetTemplates() {
+
 		ITemplate temp = general.getTemplate("specific");
-		assertEquals("generalTemplate",temp.toString());
-		
-		URL secondTemp = TestStringTemplateEngine.class.getResource("/resources/templates/testSpecific.stg");
+		assertEquals("generalTemplate", temp.toString());
+
+		URL secondTemp =
+				TestStringTemplateEngine.class
+						.getResource("/resources/templates/testSpecific.stg");
 		ITemplateGroup testSuper1 = null;
 		try {
-			testSuper1 = TemplatePlugin.getTemplateGroupRegistry().addDefaultTemplateGroup("TestSuper1",templateEngineName,general);
+			testSuper1 =
+					TemplatePlugin.getTemplateGroupRegistry().addDefaultTemplateGroup(
+							"TestSuper1", templateEngineName, general);
 			testSuper1.addFile(secondTemp);
 		} catch (TemplateException e) {
 			fail("Can't set TemplateGroup testSuper1");
 		}
-		
+
 		temp = testSuper1.getTemplate("specific");
-		assertEquals("specificTemplate",temp.toString());
-		
+		assertEquals("specificTemplate", temp.toString());
+
 		temp = general.getTemplate("specific2");
 		assertNull(temp);
-		
+
 		ITemplateGroup testSuper2 = null;
 		try {
-			testSuper2 = TemplatePlugin.getTemplateGroupRegistry().addDefaultTemplateGroup("TestSuper2",templateEngineName,testSuper1);
-			testSuper2.addFile(TestStringTemplateEngine.class.getResource("/resources/templates/testGeneral.stg"));
+			testSuper2 =
+					TemplatePlugin.getTemplateGroupRegistry().addDefaultTemplateGroup(
+							"TestSuper2", templateEngineName, testSuper1);
+			testSuper2.addFile(TestStringTemplateEngine.class
+					.getResource("/resources/templates/testGeneral.stg"));
 		} catch (TemplateException e) {
 			fail("Can't set TemplateGroup testSuper2");
 		}
-		
+
 		temp = testSuper2.getTemplate("specific2");
 		assertNotNull(temp);
-		assertEquals("specificTemplate",temp.toString());
-		
+		assertEquals("specificTemplate", temp.toString());
+
 	}
-	
+
 }

@@ -46,8 +46,8 @@ public interface ITemplateGroupRegistryListener {
 
 	/**
 	 * <p>
-	 * This method is called when a {@link ITemplateGroup templateGroup} has been added to a
-	 * {@link ITemplateGroupRegistry}.
+	 * This method is called when a {@link ITemplateGroup templateGroup} has been
+	 * added to a {@link ITemplateGroupRegistry}.
 	 * </p>
 	 * 
 	 * @param event
@@ -57,8 +57,8 @@ public interface ITemplateGroupRegistryListener {
 
 	/**
 	 * <p>
-	 * This method is called when a {@link ITemplateGroup templateGroup} has been removed from a
-	 * {@link ITemplateGroupRegistry}.
+	 * This method is called when a {@link ITemplateGroup templateGroup} has been
+	 * removed from a {@link ITemplateGroupRegistry}.
 	 * </p>
 	 * 
 	 * @param event

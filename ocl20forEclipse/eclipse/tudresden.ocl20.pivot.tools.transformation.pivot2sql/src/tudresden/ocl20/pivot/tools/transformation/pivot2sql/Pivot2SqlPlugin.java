@@ -27,6 +27,7 @@ public class Pivot2SqlPlugin extends Plugin {
 	 * </p>
 	 */
 	public Pivot2SqlPlugin() {
+
 		plugin = this;
 	}
 

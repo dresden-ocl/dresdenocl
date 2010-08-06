@@ -72,7 +72,7 @@ public class SelectDirectoryPage extends WizardPage {
 
 	/** The text field that contains the constraint sub directory for output. */
 	private Text subDirectoryTextBox;
-	
+
 	private Group directoryConstraintGroup;
 
 	/**
@@ -84,6 +84,7 @@ public class SelectDirectoryPage extends WizardPage {
 	 * @param selection
 	 */
 	public SelectDirectoryPage(IStructuredSelection selection) {
+
 		super("SelectDirectoryPage");
 
 		this.selection = selection;
@@ -94,7 +95,6 @@ public class SelectDirectoryPage extends WizardPage {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see
 	 * org.eclipse.jface.dialogs.IDialogPage#createControl(org.eclipse.swt.widgets
 	 * .Composite)
@@ -134,6 +134,7 @@ public class SelectDirectoryPage extends WizardPage {
 	 * </p>
 	 */
 	private Button createButton(Composite parent, String label) {
+
 		Button result;
 
 		result = new Button(parent, SWT.PUSH);
@@ -145,17 +146,16 @@ public class SelectDirectoryPage extends WizardPage {
 
 	/**
 	 * <p>
-	 * Creates the SWT group that allows selecting the a constraint sub
-	 * directory.
+	 * Creates the SWT group that allows selecting the a constraint sub directory.
 	 * </p>
 	 * 
 	 * @param parent
-	 *            The parent of this group.
+	 *          The parent of this group.
 	 */
 	private void createConstraintDirectoryGroup(Composite parent) {
 
 		Composite constraintDirectoryGroupComposite;
-		
+
 		Label locationLabel;
 		GridLayout layout;
 
@@ -169,11 +169,12 @@ public class SelectDirectoryPage extends WizardPage {
 		constraintDirectoryGroupComposite.setLayout(layout);
 
 		/* Create directory group and specify properties. */
-		directoryConstraintGroup = new Group(constraintDirectoryGroupComposite, SWT.NONE);
+		directoryConstraintGroup =
+				new Group(constraintDirectoryGroupComposite, SWT.NONE);
 		directoryConstraintGroup
 				.setText(CodegenUIMessages.SelectDirectoryPage_SubDirectoryGroupText);
-		directoryConstraintGroup.setLayoutData(new GridData(SWT.FILL, SWT.NONE, true,
-				false));
+		directoryConstraintGroup.setLayoutData(new GridData(SWT.FILL, SWT.NONE,
+				true, false));
 
 		layout = new GridLayout(4, false);
 		layout.horizontalSpacing = 10;
@@ -186,10 +187,10 @@ public class SelectDirectoryPage extends WizardPage {
 				.setText(CodegenUIMessages.SelectDirectoryPage_SubDirectoryLabelText);
 
 		/* Create text box. */
-		this.subDirectoryTextBox = new Text(directoryConstraintGroup, SWT.SINGLE
-				| SWT.BORDER);
-		this.subDirectoryTextBox.setLayoutData(new GridData(SWT.FILL,
-				SWT.NORMAL, true, false, 3, 1));
+		this.subDirectoryTextBox =
+				new Text(directoryConstraintGroup, SWT.SINGLE | SWT.BORDER);
+		this.subDirectoryTextBox.setLayoutData(new GridData(SWT.FILL, SWT.NORMAL,
+				true, false, 3, 1));
 		this.subDirectoryTextBox
 				.setText(CodegenUIMessages.SelectDirectoryPage_DefaultSubDirectory);
 
@@ -197,6 +198,7 @@ public class SelectDirectoryPage extends WizardPage {
 		this.subDirectoryTextBox.addModifyListener(new ModifyListener() {
 
 			public void modifyText(ModifyEvent e) {
+
 				updatePageComplete();
 			}
 
@@ -209,7 +211,7 @@ public class SelectDirectoryPage extends WizardPage {
 	 * </p>
 	 * 
 	 * @param parent
-	 *            The parent of this group.
+	 *          The parent of this group.
 	 */
 	private void createDirectoryFileGroup(Composite parent) {
 
@@ -222,8 +224,8 @@ public class SelectDirectoryPage extends WizardPage {
 
 		/* Create a composite around the group. */
 		directoryGroupComposite = new Composite(parent, SWT.None);
-		directoryGroupComposite.setLayoutData(new GridData(SWT.FILL, SWT.TOP,
-				true, false));
+		directoryGroupComposite.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true,
+				false));
 
 		/* We need another GridLayout to properly set additional margins. */
 		layout = new GridLayout();
@@ -233,8 +235,7 @@ public class SelectDirectoryPage extends WizardPage {
 		directoryGroup = new Group(directoryGroupComposite, SWT.NONE);
 		directoryGroup
 				.setText(CodegenUIMessages.SelectDirectoryPage_DirectoryFileGroupText);
-		directoryGroup.setLayoutData(new GridData(SWT.FILL, SWT.NONE, true,
-				false));
+		directoryGroup.setLayoutData(new GridData(SWT.FILL, SWT.NONE, true, false));
 
 		layout = new GridLayout(4, false);
 		layout.horizontalSpacing = 10;
@@ -255,6 +256,7 @@ public class SelectDirectoryPage extends WizardPage {
 		directoryTextBox.addModifyListener(new ModifyListener() {
 
 			public void modifyText(ModifyEvent e) {
+
 				updatePageComplete();
 			}
 
@@ -262,20 +264,18 @@ public class SelectDirectoryPage extends WizardPage {
 
 		/* The Spacing label. */
 		spacer = new Label(directoryGroup, SWT.NONE);
-		spacer.setLayoutData(new GridData(SWT.FILL, SWT.NORMAL, true, false, 2,
-				1));
+		spacer.setLayoutData(new GridData(SWT.FILL, SWT.NORMAL, true, false, 2, 1));
 
 		/* Create the buttons. */
-		fBrowseWorkspaceButton = createButton(
-				directoryGroup,
-				CodegenUIMessages.SelectDirectoryPage_BrowseWorkspaceButtonText);
-		fBrowseFileButton = createButton(
-				directoryGroup,
-				CodegenUIMessages.SelectDirectoryPage_BrowseFileSystemButtonText);
+		fBrowseWorkspaceButton =
+				createButton(directoryGroup,
+						CodegenUIMessages.SelectDirectoryPage_BrowseWorkspaceButtonText);
+		fBrowseFileButton =
+				createButton(directoryGroup,
+						CodegenUIMessages.SelectDirectoryPage_BrowseFileSystemButtonText);
 
 		/* Add listeners. */
-		fBrowseWorkspaceButton
-				.addSelectionListener(new BrowseWorkspaceListener());
+		fBrowseWorkspaceButton.addSelectionListener(new BrowseWorkspaceListener());
 		fBrowseFileButton.addSelectionListener(new BrowseFileListener());
 	}
 
@@ -287,8 +287,9 @@ public class SelectDirectoryPage extends WizardPage {
 	private String decodePath(String path) {
 
 		try {
-			path = VariablesPlugin.getDefault().getStringVariableManager()
-					.performStringSubstitution(path);
+			path =
+					VariablesPlugin.getDefault().getStringVariableManager()
+							.performStringSubstitution(path);
 		} catch (CoreException e) {
 			path = null;
 		}
@@ -302,11 +303,15 @@ public class SelectDirectoryPage extends WizardPage {
 	 * </p>
 	 */
 	private String encodePath(IResource resource) {
+
 		String result;
 
-		result = VariablesPlugin.getDefault().getStringVariableManager()
-				.generateVariableExpression("workspace_loc",
-						resource.getFullPath().toString());
+		result =
+				VariablesPlugin
+						.getDefault()
+						.getStringVariableManager()
+						.generateVariableExpression("workspace_loc",
+								resource.getFullPath().toString());
 
 		return result;
 	}
@@ -327,8 +332,8 @@ public class SelectDirectoryPage extends WizardPage {
 				IResource selectedResource = (IResource) selectedObject;
 
 				if (selectedResource.getType() == IResource.FILE) {
-					directoryTextBox.setText(selectedResource.getRawLocation()
-							.toString());
+					directoryTextBox
+							.setText(selectedResource.getRawLocation().toString());
 				}
 				// no else.
 			}
@@ -397,6 +402,7 @@ public class SelectDirectoryPage extends WizardPage {
 	 * </p>
 	 */
 	private String getDirectoryFileName() {
+
 		return directoryTextBox.getText().trim();
 	}
 
@@ -470,10 +476,12 @@ public class SelectDirectoryPage extends WizardPage {
 						/* Check if the sub directory is a valid name. */
 						if (this.isSubDirectoryValid()) {
 							complete = true;
-						} else {
+						}
+						else {
 							setErrorMessage(CodegenUIMessages.SelectDirectoryPage_ErrorMsgInvalidSubDirectory);
 						}
-					} else {
+					}
+					else {
 						complete = true;
 					}
 				}
@@ -498,13 +506,12 @@ public class SelectDirectoryPage extends WizardPage {
 
 		/*
 		 * (non-Javadoc)
-		 * 
-		 * @see
-		 * org.eclipse.swt.events.SelectionAdapter#widgetSelected(org.eclipse
+		 * @see org.eclipse.swt.events.SelectionAdapter#widgetSelected(org.eclipse
 		 * .swt.events.SelectionEvent)
 		 */
 		@Override
 		public void widgetSelected(SelectionEvent e) {
+
 			DirectoryDialog dialog;
 			String filePath;
 
@@ -529,9 +536,7 @@ public class SelectDirectoryPage extends WizardPage {
 
 		/*
 		 * (non-Javadoc)
-		 * 
-		 * @see
-		 * org.eclipse.swt.events.SelectionAdapter#widgetSelected(org.eclipse
+		 * @see org.eclipse.swt.events.SelectionAdapter#widgetSelected(org.eclipse
 		 * .swt.events.SelectionEvent)
 		 */
 		@Override
@@ -542,9 +547,9 @@ public class SelectDirectoryPage extends WizardPage {
 			int pressedButton;
 			IResource resource;
 
-			dialog = new ElementTreeSelectionDialog(getShell(),
-					new WorkbenchLabelProvider(),
-					new WorkbenchContentProvider());
+			dialog =
+					new ElementTreeSelectionDialog(getShell(),
+							new WorkbenchLabelProvider(), new WorkbenchContentProvider());
 
 			/* Configure dialog properties. */
 			dialog
@@ -552,9 +557,7 @@ public class SelectDirectoryPage extends WizardPage {
 			dialog
 					.setMessage(CodegenUIMessages.SelectDirectoryPage_BrowseWorkspaceDialogDescription);
 			dialog.setInput(ResourcesPlugin.getWorkspace().getRoot());
-			dialog
-					.setComparator(new ResourceComparator(
-							ResourceComparator.NAME));
+			dialog.setComparator(new ResourceComparator(ResourceComparator.NAME));
 			dialog.setAllowMultiple(false);
 
 			/* Open the dialog. */
@@ -575,6 +578,7 @@ public class SelectDirectoryPage extends WizardPage {
 	}
 
 	public Group getDirectoryConstraintGroup() {
+
 		return directoryConstraintGroup;
 	}
 }

@@ -85,8 +85,8 @@ public class SelectConstraintsPage extends WizardPage {
 	private Button allPreCheckBox;
 
 	/**
-	 * The {@link IModel} the {@link Constraint}s are stored for in a
-	 * {@link List}.
+	 * The {@link IModel} the {@link Constraint}s are stored for in a {@link List}
+	 * .
 	 */
 	private IModel lastActiveModel;
 
@@ -103,11 +103,12 @@ public class SelectConstraintsPage extends WizardPage {
 
 	/**
 	 * <p>
-	 * Creates a new SelectModelPage which provides a {@link Constraint}
-	 * selection for an already loaded {@link IModel}.
+	 * Creates a new SelectModelPage which provides a {@link Constraint} selection
+	 * for an already loaded {@link IModel}.
 	 * </p>
 	 */
 	public SelectConstraintsPage() {
+
 		super("SelectConstraintsPage");
 
 		setTitle(CodegenUIMessages.SelectConstraintsPage_Title);
@@ -116,7 +117,6 @@ public class SelectConstraintsPage extends WizardPage {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see
 	 * org.eclipse.jface.dialogs.IDialogPage#createControl(org.eclipse.swt.widgets
 	 * .Composite)
@@ -182,8 +182,8 @@ public class SelectConstraintsPage extends WizardPage {
 		viewerGroup.setLayout(viewerLayout);
 
 		/* Create the list viewer to display the models. */
-		constraintViewer = new TableViewer(viewerGroup, SWT.MULTI
-				| SWT.V_SCROLL | SWT.BORDER);
+		constraintViewer =
+				new TableViewer(viewerGroup, SWT.MULTI | SWT.V_SCROLL | SWT.BORDER);
 		constraintViewer.setContentProvider(new ArrayContentProvider());
 		constraintViewer.setLabelProvider(new ConstraintLabelProvider());
 		constraintViewer.getControl().setLayoutData(
@@ -200,6 +200,7 @@ public class SelectConstraintsPage extends WizardPage {
 				.addSelectionChangedListener(new ISelectionChangedListener() {
 
 					public void selectionChanged(SelectionChangedEvent event) {
+
 						updatePageComplete();
 					}
 				});
@@ -209,8 +210,8 @@ public class SelectConstraintsPage extends WizardPage {
 
 	/**
 	 * <p>
-	 * Creates the buttons to select all or a specific group of
-	 * {@link Constraint}s.
+	 * Creates the buttons to select all or a specific group of {@link Constraint}
+	 * s.
 	 * </p>
 	 */
 	private void createButtonGroup(Composite parent) {
@@ -231,27 +232,31 @@ public class SelectConstraintsPage extends WizardPage {
 		buttonGroup.setLayout(layout);
 
 		/* Create button to select all constraints. */
-		selectAllButton = createButton(buttonGroup,
-				CodegenUIMessages.SelectConstraintsPage_SelectAllConstraints);
+		selectAllButton =
+				createButton(buttonGroup,
+						CodegenUIMessages.SelectConstraintsPage_SelectAllConstraints);
 
 		/* Add selection listener. */
 		selectAllButton.addMouseListener(new AbstractMouseListener() {
 
 			@Override
 			public void mouseUp(MouseEvent e) {
+
 				selectAllConstraints();
 			}
 		});
 
 		/* Create button to deselect all constraints. */
-		deselectAllButton = createButton(buttonGroup,
-				CodegenUIMessages.SelectConstraintsPage_DeselectAllConstraints);
+		deselectAllButton =
+				createButton(buttonGroup,
+						CodegenUIMessages.SelectConstraintsPage_DeselectAllConstraints);
 
 		/* Add selection listener. */
 		deselectAllButton.addMouseListener(new AbstractMouseListener() {
 
 			@Override
 			public void mouseUp(MouseEvent e) {
+
 				deselectAllConstraints();
 			}
 		});
@@ -424,6 +429,7 @@ public class SelectConstraintsPage extends WizardPage {
 	 * </p>
 	 */
 	private Button createButton(Composite parent, String label) {
+
 		Button result;
 
 		result = new Button(parent, SWT.PUSH);
@@ -440,15 +446,15 @@ public class SelectConstraintsPage extends WizardPage {
 	 * .
 	 */
 	private boolean areConstraintsSelected() {
-		return !((IStructuredSelection) constraintViewer.getSelection())
-				.isEmpty();
+
+		return !((IStructuredSelection) constraintViewer.getSelection()).isEmpty();
 	}
 
 	/**
 	 * @param aKind
-	 *            The {@link ConstraintKind} which shall be checked.
-	 * @return True if the current selection contains all {@link Constraint}s of
-	 *         a given {@link ConstraintKind}.
+	 *          The {@link ConstraintKind} which shall be checked.
+	 * @return True if the current selection contains all {@link Constraint}s of a
+	 *         given {@link ConstraintKind}.
 	 */
 	private boolean areConstraintsSelected(ConstraintKind aKind) {
 
@@ -462,7 +468,8 @@ public class SelectConstraintsPage extends WizardPage {
 
 		if (constraintsOfKind.size() > 0) {
 			result = selectedConstraints.containsAll(constraintsOfKind);
-		} else {
+		}
+		else {
 			result = false;
 		}
 
@@ -475,6 +482,7 @@ public class SelectConstraintsPage extends WizardPage {
 	 * </p>
 	 */
 	private void deselectAllConstraints() {
+
 		this.constraintViewer.setSelection(null);
 	}
 
@@ -484,7 +492,7 @@ public class SelectConstraintsPage extends WizardPage {
 	 * </p>
 	 * 
 	 * @param aKind
-	 *            The {@link ConstraintKind} which shall be selected.
+	 *          The {@link ConstraintKind} which shall be selected.
 	 * 
 	 */
 	private void deselectAllConstraintsOfKind(ConstraintKind aKind) {
@@ -493,8 +501,8 @@ public class SelectConstraintsPage extends WizardPage {
 		List<Constraint> allConstraintsOfKind;
 
 		/* Get selected Constraints. */
-		selectedConstraints = new ArrayList<Constraint>(this
-				.getSelectedConstraints());
+		selectedConstraints =
+				new ArrayList<Constraint>(this.getSelectedConstraints());
 
 		allConstraintsOfKind = this.getConstraintsOfActiveModel(aKind);
 
@@ -511,6 +519,7 @@ public class SelectConstraintsPage extends WizardPage {
 	 * </p>
 	 */
 	private void selectAllConstraints() {
+
 		this.constraintViewer.setSelection(new StructuredSelection(this
 				.getConstraintsOfActiveModel()));
 	}
@@ -521,7 +530,7 @@ public class SelectConstraintsPage extends WizardPage {
 	 * </p>
 	 * 
 	 * @param aKind
-	 *            The {@link ConstraintKind} which shall be selected.
+	 *          The {@link ConstraintKind} which shall be selected.
 	 * 
 	 */
 	private void selectAllConstraintsOfKind(ConstraintKind aKind) {
@@ -530,14 +539,13 @@ public class SelectConstraintsPage extends WizardPage {
 		List<Constraint> allConstraintsOfKind;
 
 		/* Get selected Constraints. */
-		selectedConstraints = new ArrayList<Constraint>(this
-				.getSelectedConstraints());
+		selectedConstraints =
+				new ArrayList<Constraint>(this.getSelectedConstraints());
 
 		allConstraintsOfKind = this.getConstraintsOfActiveModel(aKind);
 
 		/*
-		 * Add all constraints of the given kind which have not been selected
-		 * yet.
+		 * Add all constraints of the given kind which have not been selected yet.
 		 */
 		for (Constraint aConstraint : allConstraintsOfKind) {
 
@@ -598,8 +606,8 @@ public class SelectConstraintsPage extends WizardPage {
 
 	/**
 	 * @param aKind
-	 *            The {@link ConstraintKind} which specifies the
-	 *            {@link Constraint}s which shall be returned.
+	 *          The {@link ConstraintKind} which specifies the {@link Constraint}s
+	 *          which shall be returned.
 	 * @return All {@link Constraint}s of the active {@link IModel} of a given
 	 *         {@link ConstraintKind}.
 	 */
@@ -622,8 +630,7 @@ public class SelectConstraintsPage extends WizardPage {
 
 	/**
 	 * @param aNamespace
-	 *            The {@link Namespace} which {@link Constraint}s shall be
-	 *            returned.
+	 *          The {@link Namespace} which {@link Constraint}s shall be returned.
 	 * @return All {@link Constraint}s of a given {@link Namespace}.
 	 */
 	private List<Constraint> getConstraintsOfNamespace(Namespace aNamespace) {
@@ -705,8 +712,7 @@ public class SelectConstraintsPage extends WizardPage {
 
 		List<Constraint> result;
 
-		result = ((IStructuredSelection) constraintViewer
-				.getSelection()).toList();
+		result = ((IStructuredSelection) constraintViewer.getSelection()).toList();
 
 		return result;
 	}
@@ -719,6 +725,7 @@ public class SelectConstraintsPage extends WizardPage {
 	 * @param aPage
 	 */
 	public void setObserver(ConstraintViewPage aPage) {
+
 		this.myObserver = aPage;
 	}
 
@@ -731,8 +738,7 @@ public class SelectConstraintsPage extends WizardPage {
 	private void notifyObserver() {
 
 		if (this.myObserver != null) {
-			this.myObserver.updateConstraintViewer(this
-					.getSelectedConstraints());
+			this.myObserver.updateConstraintViewer(this.getSelectedConstraints());
 		}
 		// no else.
 	}

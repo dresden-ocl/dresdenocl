@@ -27,6 +27,7 @@ public class TemplateTestPlugin extends Plugin {
 	 * </p>
 	 */
 	public TemplateTestPlugin() {
+
 		plugin = this;
 	}
 

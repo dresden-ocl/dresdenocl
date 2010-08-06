@@ -46,13 +46,13 @@ import tudresden.ocl20.pivot.tools.codegen.declarativ.impl.Ocl2DeclSettings;
 import tudresden.ocl20.pivot.tools.codegen.declarativ.mapping.IMappedModel;
 import tudresden.ocl20.pivot.tools.codegen.declarativ.ocl2sql.Ocl2SqlPlugin;
 import tudresden.ocl20.pivot.tools.codegen.exception.Ocl2CodeException;
+import tudresden.ocl20.pivot.tools.template.ITemplate;
 import tudresden.ocl20.pivot.tools.transformation.exception.InvalidModelException;
 import tudresden.ocl20.pivot.tools.transformation.exception.ModelAccessException;
 import tudresden.ocl20.pivot.tools.transformation.exception.TransformationException;
 import tudresden.ocl20.pivot.tools.transformation.impl.Tuple;
 import tudresden.ocl20.pivot.tools.transformation.pivot2sql.impl.Pivot2DdlAndMappedModel;
 import tudresden.ocl20.pivot.tools.transformation.pivot2sql.impl.Pivot2MappedModelImpl;
-
 
 /**
  * OCL2SQL-Compiler
@@ -61,47 +61,74 @@ import tudresden.ocl20.pivot.tools.transformation.pivot2sql.impl.Pivot2MappedMod
  * @author Bjoern Freitag
  */
 public class Ocl2Sql implements IOcl2DeclCode {
-	
+
 	private Logger LOGGER = Ocl2SqlPlugin.getLogger(Ocl2Sql.class);
 
 	private IOcl2DeclCode codeGenerator;
 	private IOcl2DeclSettings ocl2DeclSettings;
-	
+
 	public Ocl2Sql() {
+
 		this.resetEnvironment();
-		
+
 	}
-	
+
 	public String getTableSchema() {
+
 		return this.getSettings().getTemplateGroup().getDisplayName();
 	}
 
 	public IOcl2DeclSettings getSettings() {
+
 		return this.ocl2DeclSettings;
 	}
 
 	public void setSettings(IOcl2DeclSettings settings) {
+
 		this.ocl2DeclSettings = settings;
+	}
+
+	private String create_SQLCommentar(String text) {
+
+		ITemplate template =
+				this.getSettings().getTemplateGroup().getTemplate("createComment");
+		template.setAttribute("comment", text);
+		return template.toString() + "\n";
 	}
 
 	public List<String> transformFragmentCode(List<Constraint> constraints)
 			throws Ocl2CodeException {
-		
-		String dateString = new SimpleDateFormat("yyyy-MM-dd-HH-mm").format(new Date());
-		
+
+		String dateString =
+				new SimpleDateFormat("yyyy-MM-dd-HH-mm").format(new Date());
+		String sqlCommentar =
+				create_SQLCommentar("Generated from OCL2SQL generator(Dresden OCL2)");
+		sqlCommentar += create_SQLCommentar("Generation time: " + dateString);
+		sqlCommentar +=
+				create_SQLCommentar("Template: "
+						+ this.getSettings().getTemplateGroup().getDisplayName());
+		if (this.getSettings().getModus() == IOcl2DeclSettings.MODUS_TYPED) {
+			sqlCommentar += create_SQLCommentar("Modus: typed");
+		}
+		else {
+			sqlCommentar += create_SQLCommentar("Modus: vertical");
+		}
+
 		this.codeGenerator = new Ocl2DeclCode();
 		this.codeGenerator.setSettings(this.getSettings());
 		long date1 = System.currentTimeMillis();
 		if (this.getSettings().isSaveCode()) {
 			Pivot2DdlAndMappedModel pdamm;
 			try {
-				pdamm = new Pivot2DdlAndMappedModel(dateString,dateString+"_generated");
+				pdamm =
+						new Pivot2DdlAndMappedModel(dateString, dateString + "_generated");
 				pdamm.setSettings(ocl2DeclSettings);
-				pdamm.setParameterIN(ModelBusPlugin.getModelRegistry().getActiveModel().getRootNamespace());
+				pdamm.setParameterIN(ModelBusPlugin.getModelRegistry().getActiveModel()
+						.getRootNamespace());
 				pdamm.invoke();
-				Tuple<String,IMappedModel> tupleDdlMM = pdamm.getResult();
-				this.getSettings().setMappedModel(tupleDdlMM.getElem2());
-				saveToFile(tupleDdlMM.getElem1(),dateString.concat("_schema")+".sql");
+				Tuple<String, IMappedModel> tupleDdlMM = pdamm.getResult();
+				saveToFile(sqlCommentar + tupleDdlMM.getElem1(),
+						dateString.concat("_schema") + ".sql");
 			} catch (ModelAccessException e) {
 				e.printStackTrace();
 			} catch (TransformationException e) {
@@ -110,43 +137,48 @@ public class Ocl2Sql implements IOcl2DeclCode {
 				e.printStackTrace();
 			} catch (tudresden.ocl20.pivot.model.ModelAccessException e) {
 				e.printStackTrace();
-			} 
-					
-		} else {
-			try{
-				Pivot2MappedModelImpl pmm = new Pivot2MappedModelImpl(dateString,dateString+"_generated");
+			}
+
+		}
+		else {
+			try {
+				Pivot2MappedModelImpl pmm =
+						new Pivot2MappedModelImpl(dateString, dateString + "_generated");
 				pmm.setSettings(ocl2DeclSettings);
-				pmm.setParameterIN(ModelBusPlugin.getModelRegistry().getActiveModel().getRootNamespace());
+				pmm.setParameterIN(ModelBusPlugin.getModelRegistry().getActiveModel()
+						.getRootNamespace());
 				pmm.invoke();
-				this.getSettings().setMappedModel(pmm.getResult());
 			} catch (ModelAccessException e) {
 				e.printStackTrace();
 			} catch (InvalidModelException e) {
 				e.printStackTrace();
 			} catch (tudresden.ocl20.pivot.model.ModelAccessException e) {
 				e.printStackTrace();
-			} 
+			}
 		}
 		List<String> constraintList = null;
 		if (this.ocl2DeclSettings.getMappedModel() != null) {
 			constraintList = this.codeGenerator.transformFragmentCode(constraints);
-			String output = "";
+			String output = sqlCommentar;
 			for (String s : constraintList) {
-				output += s;
 				output += "\n";
+				output += s;
 			}
-			saveToFile(output,dateString.concat("_view")+".sql");
+			saveToFile(output, dateString.concat("_view") + ".sql");
 		}
-		System.out.println("ZEIT:" + (System.currentTimeMillis()-date1) + "ms");
+		System.out.println("ZEIT:" + (System.currentTimeMillis() - date1) + "ms");
 
-		return constraintList;	
+		return constraintList;
 	}
 
 	public void resetEnvironment() {
+
 		this.setSettings(new Ocl2DeclSettings());
 	}
-	
-	private void saveToFile(String text, String fileName) throws Ocl2CodeException{
+
+	private void saveToFile(String text, String fileName)
+			throws Ocl2CodeException {
+
 		/* Probably log the entry into this method. */
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("saveToFile(String, String)");
@@ -158,7 +190,7 @@ public class Ocl2Sql implements IOcl2DeclCode {
 		FileOutputStream fileOutputStream;
 
 		try {
-			
+
 			outputFolder = new File(this.ocl2DeclSettings.getSourceDirectory());
 
 			/* Check if output folder does exists. */
@@ -167,8 +199,7 @@ public class Ocl2Sql implements IOcl2DeclCode {
 			}
 			// no else.
 
-			outputFile = new File(outputFolder.getAbsolutePath() + "/"
-					+ fileName);
+			outputFile = new File(outputFolder.getAbsolutePath() + "/" + fileName);
 
 			/* Create the output file. */
 			fileOutputStream = new FileOutputStream(outputFile);

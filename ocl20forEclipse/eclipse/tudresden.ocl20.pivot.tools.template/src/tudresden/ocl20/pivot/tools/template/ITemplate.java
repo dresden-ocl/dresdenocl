@@ -36,9 +36,9 @@ public interface ITemplate {
 
 	/**
 	 * @param name
-	 *            The name of the attribute which shall be set.
+	 *          The name of the attribute which shall be set.
 	 * @param value
-	 *            The value of the attribute which shall be set.
+	 *          The value of the attribute which shall be set.
 	 */
 	public void setAttribute(String name, String value);
 

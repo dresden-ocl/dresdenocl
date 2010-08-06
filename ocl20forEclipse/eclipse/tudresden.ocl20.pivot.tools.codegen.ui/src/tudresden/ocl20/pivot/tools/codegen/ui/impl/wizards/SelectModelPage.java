@@ -71,6 +71,7 @@ public class SelectModelPage extends WizardPage {
 	 * </p>
 	 */
 	public SelectModelPage() {
+
 		super("SelectModelPage");
 
 		setTitle(CodegenUIMessages.SelectModelPage_Title);
@@ -122,8 +123,7 @@ public class SelectModelPage extends WizardPage {
 
 			/* Iterate through all nested name spaces. */
 			for (Namespace aNestedNamespace : nestedNamespaces) {
-				result = result
-						|| this.areConstraintsInNamespace(aNestedNamespace);
+				result = result || this.areConstraintsInNamespace(aNestedNamespace);
 
 				if (result) {
 					break;
@@ -138,12 +138,12 @@ public class SelectModelPage extends WizardPage {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see
 	 * org.eclipse.jface.dialogs.IDialogPage#createControl(org.eclipse.swt.widgets
 	 * .Composite)
 	 */
 	public void createControl(Composite parent) {
+
 		Composite panel;
 		GridLayout layout;
 
@@ -186,8 +186,8 @@ public class SelectModelPage extends WizardPage {
 		/* Create the model selection group and specify properties. */
 		modelSelectionGroup = new Composite(parent, SWT.NONE);
 		modelSelectionGroup.setFont(parent.getFont());
-		modelSelectionGroup.setLayoutData(new GridData(SWT.FILL, SWT.FILL,
-				true, true));
+		modelSelectionGroup.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true,
+				true));
 
 		layout = new GridLayout(1, false);
 		layout.verticalSpacing = 10;
@@ -195,12 +195,12 @@ public class SelectModelPage extends WizardPage {
 
 		/* Create the explanation label. */
 		explanationText = new Label(modelSelectionGroup, SWT.WRAP);
-		explanationText
-				.setText(CodegenUIMessages.SelectModelPage_SelectModelLabel);
+		explanationText.setText(CodegenUIMessages.SelectModelPage_SelectModelLabel);
 
 		/* Create the list viewer to display the models. */
-		modelViewer = new TableViewer(modelSelectionGroup, SWT.SINGLE
-				| SWT.V_SCROLL | SWT.BORDER);
+		modelViewer =
+				new TableViewer(modelSelectionGroup, SWT.SINGLE | SWT.V_SCROLL
+						| SWT.BORDER);
 		modelViewer.setContentProvider(new ArrayContentProvider());
 		modelViewer.setLabelProvider(new ModelLabelProvider());
 		modelViewer.getControl().setLayoutData(
@@ -223,13 +223,13 @@ public class SelectModelPage extends WizardPage {
 		// no else.
 
 		/* Add a change listener to react on updates. */
-		modelViewer
-				.addSelectionChangedListener(new ISelectionChangedListener() {
+		modelViewer.addSelectionChangedListener(new ISelectionChangedListener() {
 
-					public void selectionChanged(SelectionChangedEvent event) {
-						updatePageComplete();
-					}
-				});
+			public void selectionChanged(SelectionChangedEvent event) {
+
+				updatePageComplete();
+			}
+		});
 	}
 
 	/**
@@ -237,6 +237,7 @@ public class SelectModelPage extends WizardPage {
 	 *         selected.
 	 */
 	public IModel getSelectedModel() {
+
 		return (IModel) ((IStructuredSelection) modelViewer.getSelection())
 				.getFirstElement();
 	}
@@ -248,6 +249,7 @@ public class SelectModelPage extends WizardPage {
 	 * .
 	 */
 	private boolean isModelSelected() {
+
 		return !((IStructuredSelection) modelViewer.getSelection()).isEmpty();
 	}
 
@@ -309,23 +311,20 @@ public class SelectModelPage extends WizardPage {
 		private ResourceManager resources;
 
 		public ModelLabelProvider() {
-			this.resources = new LocalResourceManager(JFaceResources
-					.getResources());
+
+			this.resources = new LocalResourceManager(JFaceResources.getResources());
 		}
 
 		/*
 		 * (non-Javadoc)
-		 * 
-		 * @see
-		 * org.eclipse.jface.viewers.LabelProvider#getImage(java.lang.Object)
+		 * @see org.eclipse.jface.viewers.LabelProvider#getImage(java.lang.Object)
 		 */
 		@Override
 		public Image getImage(Object element) {
 
 			Image result;
 
-			result = Ocl2CodeUIPlugIn.getImageDescriptor(MODEL_IMAGE)
-					.createImage();
+			result = Ocl2CodeUIPlugIn.getImageDescriptor(MODEL_IMAGE).createImage();
 
 			return result;
 		}
@@ -352,11 +351,11 @@ public class SelectModelPage extends WizardPage {
 
 		/*
 		 * (non-Javadoc)
-		 * 
 		 * @see org.eclipse.jface.viewers.BaseLabelProvider#dispose()
 		 */
 		@Override
 		public void dispose() {
+
 			this.resources.dispose();
 		}
 

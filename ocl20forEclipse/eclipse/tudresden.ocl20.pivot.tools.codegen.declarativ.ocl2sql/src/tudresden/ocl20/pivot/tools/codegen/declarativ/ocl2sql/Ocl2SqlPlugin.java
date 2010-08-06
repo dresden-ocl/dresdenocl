@@ -11,12 +11,13 @@ import tudresden.ocl20.logging.LoggingPlugin;
  * The activator class controls the plug-in life cycle.
  * </p>
  * 
- * @author Matthias Braeuer
+ * @author Bjoern Freitag
  */
 public class Ocl2SqlPlugin extends Plugin {
 
 	/** The plug-in ID. */
-	public static final String ID = "tudresden.ocl20.pivot.tools.codegen.declarativ.ocl2sql"; //$NON-NLS-1$
+	public static final String ID =
+			"tudresden.ocl20.pivot.tools.codegen.declarativ.ocl2sql"; //$NON-NLS-1$
 
 	/** The shared instance. */
 	private static Ocl2SqlPlugin plugin;

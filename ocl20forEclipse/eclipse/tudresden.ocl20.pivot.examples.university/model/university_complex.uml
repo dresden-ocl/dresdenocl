@@ -120,7 +120,9 @@
           </packagedElement>
           <packagedElement xmi:type="uml:Association" xmi:id="_1562oDeSEd-JXKTQMEgtig" name="A_superFacility_subFacility" memberEnd="_S8JPsDeTEd-JXKTQMEgtig _bk7qcDeTEd-JXKTQMEgtig" navigableOwnedEnd="_S8JPsDeTEd-JXKTQMEgtig _bk7qcDeTEd-JXKTQMEgtig">
             <ownedEnd xmi:id="_S8JPsDeTEd-JXKTQMEgtig" name="superFacility" type="_tnYYsDeSEd-JXKTQMEgtig" association="_1562oDeSEd-JXKTQMEgtig"/>
-            <ownedEnd xmi:id="_bk7qcDeTEd-JXKTQMEgtig" name="subFacility" type="_tnYYsDeSEd-JXKTQMEgtig" association="_1562oDeSEd-JXKTQMEgtig"/>
+            <ownedEnd xmi:id="_bk7qcDeTEd-JXKTQMEgtig" name="subFacility" type="_tnYYsDeSEd-JXKTQMEgtig" association="_1562oDeSEd-JXKTQMEgtig">
+              <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_yawsoaGUEd-BSYoiO3Cqzw" value="*"/>
+            </ownedEnd>
           </packagedElement>
           <packagedElement xmi:type="uml:Association" xmi:id="_77EEQDeTEd-JXKTQMEgtig" name="A_owner_member" memberEnd="_Bpg00DeUEd-JXKTQMEgtig _ZzEOwDeUEd-JXKTQMEgtig" navigableOwnedEnd="_Bpg00DeUEd-JXKTQMEgtig _ZzEOwDeUEd-JXKTQMEgtig">
             <ownedEnd xmi:id="_Bpg00DeUEd-JXKTQMEgtig" name="owner" type="_tnYYsDeSEd-JXKTQMEgtig" association="_77EEQDeTEd-JXKTQMEgtig">

@@ -8,9 +8,8 @@ import tudresden.ocl20.pivot.pivotmodel.Constraint;
 
 public abstract class ConstraintViewPage extends WizardPage {
 
-	
-	
 	protected ConstraintViewPage(String pageName) {
+
 		super(pageName);
 		// TODO Auto-generated constructor stub
 	}

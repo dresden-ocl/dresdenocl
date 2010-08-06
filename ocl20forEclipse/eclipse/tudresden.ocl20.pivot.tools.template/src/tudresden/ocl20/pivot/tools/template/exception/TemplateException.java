@@ -5,9 +5,11 @@
 package tudresden.ocl20.pivot.tools.template.exception;
 
 /**
- * The TemplateException is thrown, when an error occurs while working with code templates.
+ * The TemplateException is thrown, when an error occurs while working with code
+ * templates.
+ * 
  * @author Christian Wende
- *
+ * 
  */
 public class TemplateException extends Exception {
 
@@ -15,9 +17,12 @@ public class TemplateException extends Exception {
 
 	/**
 	 * The standard constructor for a TemplateException.
-	 * @param message A helpful explanation why the Exception was thrown.
+	 * 
+	 * @param message
+	 *          A helpful explanation why the Exception was thrown.
 	 */
 	public TemplateException(String message) {
+
 		super(message);
 	}
 

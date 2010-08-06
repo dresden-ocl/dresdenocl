@@ -43,41 +43,43 @@ public interface ITemplateEngine {
 
 	/**
 	 * @param name
-	 *            The name of the {@link ITemplate} which shall be returned.
+	 *          The name of the {@link ITemplate} which shall be returned.
 	 * @return A new instance of {@link ITemplate} for the given template name.
 	 */
 	public ITemplate getTemplate(String name);
-	
+
 	/**
 	 * Returns the name of the {@link ITemplateGroup}.
-	 * @return
-	 * 		the name of the TemplateEngine
+	 * 
+	 * @return the name of the TemplateEngine
 	 */
 	public String getDisplayName();
-	
+
 	/**
 	 * Returns the version of the {@link ITemplateEngine}.
-	 * @return
-	 * 		the version of the TemplateEngine
+	 * 
+	 * @return the version of the TemplateEngine
 	 */
 	public String getVersion();
-	
+
 	/**
 	 * Added a new template file to this {@link ITemplateEngine}.
+	 * 
 	 * @param files
-	 * 		file path
+	 *          file path
 	 * @throws TemplateException
-	 * 		If the template engine can't read the file or is the file exits.
+	 *           If the template engine can't read the file or is the file exits.
 	 */
 	public void addFile(URL file) throws TemplateException;
 
 	/**
 	 * Added a new template file to this {@link ITemplateEngine}.
+	 * 
 	 * @param file
-	 * 		full file path
+	 *          full file path
 	 * @throws TemplateException
-	 * 		If the template engine can't read the file or is the file exits.
+	 *           If the template engine can't read the file or is the file exits.
 	 */
 	public void addFiles(LinkedList<URL> files) throws TemplateException;
-	
+
 }

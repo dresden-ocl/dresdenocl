@@ -45,55 +45,54 @@ public class TransformedTypeImpl implements ITransformedType {
 	 * </p>
 	 * 
 	 * @param aTypeName
-	 *            The Type which was generated.
+	 *          The Type which was generated.
 	 */
 	public TransformedTypeImpl(String aTypeName) {
+
 		this.typeName = aTypeName;
 		this.genericType = null;
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see tudresden.ocl20.pivot.ocl22code.IGeneratedType#getType()
 	 */
 	public String getTypeName() {
+
 		return this.typeName;
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * tudresden.ocl20.pivot.ocl22code.IGeneratedType#getGenericResultType()
+	 * @see tudresden.ocl20.pivot.ocl22code.IGeneratedType#getGenericResultType()
 	 */
 	public ITransformedType getGenericType() {
+
 		return this.genericType;
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.ocl22code.IGeneratedType#isResultTypeCollection()
 	 */
 	public boolean isGenericType() {
+
 		return (this.genericType != null);
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.ocl22code.IGeneratedType#setType(java.lang.String)
 	 */
 	public void setTypeName(String aTypeName) {
+
 		this.typeName = aTypeName;
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.ocl22code.IGeneratedType#setGenericResultType(tudresden
 	 * .ocl20.pivot.ocl22code.IGeneratedType)
@@ -105,7 +104,6 @@ public class TransformedTypeImpl implements ITransformedType {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	public String toString() {
@@ -114,8 +112,7 @@ public class TransformedTypeImpl implements ITransformedType {
 
 		result = this.typeName;
 
-		if (this.isGenericType()
-				&& this.genericType.toString().length() > 0) {
+		if (this.isGenericType() && this.genericType.toString().length() > 0) {
 
 			result += "<";
 			result += this.getGenericType().toString();

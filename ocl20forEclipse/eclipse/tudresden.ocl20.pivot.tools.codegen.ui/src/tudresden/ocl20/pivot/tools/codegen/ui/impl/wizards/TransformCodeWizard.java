@@ -48,7 +48,6 @@ public abstract class TransformCodeWizard extends Wizard implements INewWizard {
 
 	/** The code generator associated with this wizard. */
 	protected IOcl2Code<?> myCodeGenerator;
-	
 
 	/**
 	 * <p>
@@ -56,17 +55,18 @@ public abstract class TransformCodeWizard extends Wizard implements INewWizard {
 	 * </p>
 	 */
 	public TransformCodeWizard(String title) {
+
 		super();
-		setWindowTitle(title);		
+		setWindowTitle(title);
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see org.eclipse.jface.wizard.IWizard#addPages()
 	 */
 	@Override
 	public void addPages() {
+
 		super.addPages();
 
 		addPage(this.selectModelPage);
@@ -79,7 +79,6 @@ public abstract class TransformCodeWizard extends Wizard implements INewWizard {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see org.eclipse.ui.IWorkbenchWizard#init(org.eclipse.ui.IWorkbench,
 	 * org.eclipse.jface.viewers.IStructuredSelection)
 	 */
@@ -87,11 +86,9 @@ public abstract class TransformCodeWizard extends Wizard implements INewWizard {
 
 		/* Probably log the entry into this method. */
 		if (logger.isDebugEnabled()) {
-			logger
-					.debug("Enter method init(IWorkbench, IStructuredSelection).");
+			logger.debug("Enter method init(IWorkbench, IStructuredSelection).");
 		}
 		// no else.
-
 
 		setCodeGenerator();
 
@@ -111,7 +108,6 @@ public abstract class TransformCodeWizard extends Wizard implements INewWizard {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see org.eclipse.jface.wizard.Wizard#performFinish()
 	 */
 	@Override
@@ -139,8 +135,7 @@ public abstract class TransformCodeWizard extends Wizard implements INewWizard {
 		/* Try to initialize a code generator. */
 		myCodeGenerator.getSettings().setSourceDirectory(outputDirectory);
 
-		myCodeGenerator.getSettings().setConstraintDirectory(
-				constraintDirectory);
+		myCodeGenerator.getSettings().setConstraintDirectory(constraintDirectory);
 
 		myCodeGenerator.getSettings().setSaveCode(true);
 
@@ -153,15 +148,13 @@ public abstract class TransformCodeWizard extends Wizard implements INewWizard {
 
 		/* Probably log the exit from this method. */
 		if (logger.isDebugEnabled()) {
-			logger
-					.debug("Exit method performFinish() - result=" + result
-							+ ".");
+			logger.debug("Exit method performFinish() - result=" + result + ".");
 		}
 		// no else.
 
 		return result;
 	}
-	
+
 	protected abstract void setCodeGenerator();
 
 	protected abstract CodegenJob getCodegenJob(List<Constraint> constraints);

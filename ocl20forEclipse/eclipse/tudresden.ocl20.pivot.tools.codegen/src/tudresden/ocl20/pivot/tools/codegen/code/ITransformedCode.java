@@ -49,7 +49,7 @@ public interface ITransformedCode {
 	 * </p>
 	 * 
 	 * @param someCode
-	 *            The code which shall be added as a {@link String}.
+	 *          The code which shall be added as a {@link String}.
 	 */
 	public void addCode(String someCode);
 
@@ -64,8 +64,8 @@ public interface ITransformedCode {
 	 * </p>
 	 * 
 	 * @param someCode
-	 *            Some code naming the result expression of this
-	 *            {@link TransformedCodeImpl}.
+	 *          Some code naming the result expression of this
+	 *          {@link TransformedCodeImpl}.
 	 */
 	public void setResultExp(String someCode);
 

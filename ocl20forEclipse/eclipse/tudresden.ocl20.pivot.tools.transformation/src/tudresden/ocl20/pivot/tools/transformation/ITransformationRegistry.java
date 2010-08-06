@@ -36,8 +36,8 @@ import java.util.List;
 
 /**
  * <p>
- * The {@link ITransformationRegistry} manages a list of {@link ITransformation}s that are
- * currently available.
+ * The {@link ITransformationRegistry} manages a list of {@link ITransformation}
+ * s that are currently available.
  * </p>
  * 
  * @author Bjoern Freitag
@@ -53,7 +53,7 @@ public interface ITransformationRegistry {
 	 * @param metamodel
 	 *          The {@link ITransformation} that shall be added.
 	 */
-	void addTransformation(ITransformation<?,?> transformation);
+	void addTransformation(ITransformation<?, ?> transformation);
 
 	/**
 	 * <p>
@@ -64,8 +64,8 @@ public interface ITransformationRegistry {
 
 	/**
 	 * <p>
-	 * Returns the {@link ITransformation} with the given id or <code>null</code> if no
-	 * {@link ITransformation} with that id is registered.
+	 * Returns the {@link ITransformation} with the given id or <code>null</code>
+	 * if no {@link ITransformation} with that id is registered.
 	 * </p>
 	 * 
 	 * @param id
@@ -73,24 +73,26 @@ public interface ITransformationRegistry {
 	 * 
 	 * @return An {@link ITransformation} instance or <code>null</code>.
 	 */
-	ITransformation<?,?> getTransformation(String id);
+	ITransformation<?, ?> getTransformation(String id);
 
 	/**
 	 * <p>
-	 * Returns the {@link ITransformation} with the given id or <code>null</code> if no
-	 * {@link ITransformation} with that id is registered.
+	 * Returns the {@link ITransformation} with the given id or <code>null</code>
+	 * if no {@link ITransformation} with that id is registered.
 	 * </p>
 	 * 
 	 * @param id
-	 *          An identifier for a {@link ITransformation} is the simpleClassName.
+	 *          An identifier for a {@link ITransformation} is the
+	 *          simpleClassName.
 	 * @param model_inName
-	 * 			the name of the in model
+	 *          the name of the in model
 	 * @param model_OutName
-	 * 			the name of the out model 
+	 *          the name of the out model
 	 * @return An {@link ITransformation} instance or <code>null</code>.
 	 */
-	ITransformation<?,?> getTransformation(String id, String model_inName, String model_OutName);
-	
+	ITransformation<?, ?> getTransformation(String id, String model_inName,
+			String model_OutName);
+
 	/**
 	 * <p>
 	 * Returns all {@link ITransformation}s registered with this
@@ -99,8 +101,8 @@ public interface ITransformationRegistry {
 	 * 
 	 * @return A list of {@link ITransformation} instances.
 	 */
-	List<ITransformation<?,?>> getTransformations();
-	
+	List<ITransformation<?, ?>> getTransformations();
+
 	/**
 	 * <p>
 	 * Returns all Transformation registered with this

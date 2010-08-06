@@ -18,56 +18,58 @@ import tudresden.ocl20.pivot.tools.template.event.TemplateEngineRegistryEvent;
 /**
  * <p>
  * A simple implementation of the {@link ITemplateEngineRegistry} interface that
- * internally just uses a {@link Map} to keep track of registered template engines.
+ * internally just uses a {@link Map} to keep track of registered template
+ * engines.
  * </p>
  * <p>
- * In a stand-alone application of DresdenOCL, this implies that new template engines
- * have to be added by hand to this registry.
+ * In a stand-alone application of DresdenOCL, this implies that new template
+ * engines have to be added by hand to this registry.
  * </p>
  * 
  * @author Bjoern Freitag
  * 
  */
-public class StandaloneTemplateEngineRegistry implements ITemplateEngineRegistry {
-	
+public class StandaloneTemplateEngineRegistry implements
+		ITemplateEngineRegistry {
+
 	/** {@link Logger} for this class. */
-	private static final Logger LOGGER =
-			TemplatePlugin.getLogger(StandaloneTemplateEngineRegistry.class);
-	
+	private static final Logger LOGGER = TemplatePlugin
+			.getLogger(StandaloneTemplateEngineRegistry.class);
+
 	/**
 	 * the map of template engines
 	 */
-	private Map<String,ITemplateEngine> templateEngines;
-	
+	private Map<String, ITemplateEngine> templateEngines;
+
 	/** A list of listeners. */
 	private List<ITemplateEngineRegistryListener> listeners;
-	
+
 	/**
 	 * The constructor
 	 */
 	public StandaloneTemplateEngineRegistry() {
-		
+
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("TemplateEngineRegistry() - enter"); //$NON-NLS-1$
 		}
 		// no else.
-		
-		
-		
-		this.templateEngines = new HashMap<String,ITemplateEngine>();
+
+		this.templateEngines = new HashMap<String, ITemplateEngine>();
 
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("TemplateEngineRegistry() - exit"); //$NON-NLS-1$
 		}
-		
+
 	}
 
 	/**
 	 * @see tudresden.ocl20.pivot.tools.template.ITemplateEngineRegistry#addTemplateEngine(ITemplateEngine)
 	 */
 	public void addTemplateEngine(ITemplateEngine templateEngine) {
+
 		if (LOGGER.isDebugEnabled() || true) {
-			LOGGER.debug("addTemplateEngine(templateEngine=" + templateEngine + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
+			LOGGER
+					.debug("addTemplateEngine(templateEngine=" + templateEngine + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 		// no else.
 
@@ -100,13 +102,11 @@ public class StandaloneTemplateEngineRegistry implements ITemplateEngineRegistry
 		// no else.
 	}
 
-
-
 	/**
 	 * @see tudresden.ocl20.pivot.tools.template.ITemplateEngineRegistry#dispose()
 	 */
 	public void dispose() {
-		
+
 		if (this.templateEngines.size() != 0) {
 			this.templateEngines.clear();
 		}
@@ -117,6 +117,7 @@ public class StandaloneTemplateEngineRegistry implements ITemplateEngineRegistry
 	 * @see tudresden.ocl20.pivot.tools.template.ITemplateEngineRegistry#getNewTemplateEngine(String)
 	 */
 	public ITemplateEngine getNewTemplateEngine(String templateEngineName) {
+
 		if (templateEngineName == null) {
 			throw new IllegalArgumentException(
 					"The parameter templateEngineName must not be null.");
@@ -124,7 +125,8 @@ public class StandaloneTemplateEngineRegistry implements ITemplateEngineRegistry
 		// no else.
 		ITemplateEngine templateEngine;
 		try {
-			templateEngine = this.templateEngines.get(templateEngineName).getClass().newInstance();
+			templateEngine =
+					this.templateEngines.get(templateEngineName).getClass().newInstance();
 		} catch (InstantiationException e) {
 			templateEngine = null;
 		} catch (IllegalAccessException e) {
@@ -132,7 +134,7 @@ public class StandaloneTemplateEngineRegistry implements ITemplateEngineRegistry
 		} catch (NullPointerException e) {
 			templateEngine = null;
 		}
-		
+
 		return templateEngine;
 	}
 
@@ -140,6 +142,7 @@ public class StandaloneTemplateEngineRegistry implements ITemplateEngineRegistry
 	 * @see tudresden.ocl20.pivot.tools.template.ITemplateEngineRegistry#getTemplateEngines()
 	 */
 	public List<ITemplateEngine> getTemplateEngines() {
+
 		List<ITemplateEngine> tempGroup = new ArrayList<ITemplateEngine>();
 		for (ITemplateEngine tGroup : this.templateEngines.values()) {
 			tempGroup.add(tGroup);
@@ -151,6 +154,7 @@ public class StandaloneTemplateEngineRegistry implements ITemplateEngineRegistry
 	 * @see tudresden.ocl20.pivot.tools.template.ITemplateEngineRegistry#removeTemplateEngine(ITemplateEngine)
 	 */
 	public void removeTemplateEngine(ITemplateEngine templateEngine) {
+
 		if (templateEngine == null) {
 			throw new IllegalArgumentException(
 					"The parameter templateEngineName must not be null.");
@@ -158,15 +162,17 @@ public class StandaloneTemplateEngineRegistry implements ITemplateEngineRegistry
 		// no else.
 
 		this.templateEngines.remove(templateEngine.getDisplayName());
-		
-		this.fireTemplateEngineRemoved(this.templateEngines.remove(templateEngine.getDisplayName()));
-	
+
+		this.fireTemplateEngineRemoved(this.templateEngines.remove(templateEngine
+				.getDisplayName()));
+
 	}
 
 	/**
 	 * @see tudresden.ocl20.pivot.tools.template.ITemplateEngineRegistry#removeTemplateEngine(String)
 	 */
 	public void removeTemplateEngine(String templateEngineName) {
+
 		if (templateEngineName == null) {
 			throw new IllegalArgumentException(
 					"The parameter templateEngineName must not be null.");
@@ -179,14 +185,17 @@ public class StandaloneTemplateEngineRegistry implements ITemplateEngineRegistry
 	/**
 	 * @see tudresden.ocl20.pivot.tools.template.ITemplateEngineRegistry#addTemplateEngineRegistryListener(ITemplateEngineRegistryListener)
 	 */
-	public void addTemplateEngineRegistryListener(ITemplateEngineRegistryListener listener) {
+	public void addTemplateEngineRegistryListener(
+			ITemplateEngineRegistryListener listener) {
+
 		this.getListeners().add(listener);
-		
+
 	}
-	
+
 	/**
 	 * <p>
-	 * A helper method that informs all listeners about an added {@link ITemplateEngine}.
+	 * A helper method that informs all listeners about an added
+	 * {@link ITemplateEngine}.
 	 * </p>
 	 * 
 	 * @param model
@@ -213,10 +222,11 @@ public class StandaloneTemplateEngineRegistry implements ITemplateEngineRegistry
 		}
 		// no else.
 	}
-	
+
 	/**
 	 * <p>
-	 * A helper method that informs all listeners about a removed {@link ITemplateEngine}.
+	 * A helper method that informs all listeners about a removed
+	 * {@link ITemplateEngine}.
 	 * </p>
 	 * 
 	 * @param templateEngine
@@ -242,22 +252,24 @@ public class StandaloneTemplateEngineRegistry implements ITemplateEngineRegistry
 		}
 		// no else.
 	}
-	
+
 	/**
 	 * @see tudresden.ocl20.pivot.tools.template.ITemplateEngineRegistry#removeTemplateEngineRegistryListener(ITemplateEngineRegistryListener)
 	 * 
 	 */
-	public void removeTemplateEngineRegistryListener(ITemplateEngineRegistryListener listener) {
+	public void removeTemplateEngineRegistryListener(
+			ITemplateEngineRegistryListener listener) {
 
 		if (this.listeners != null) {
 			this.listeners.remove(listener);
 		}
 		// no else.
 	}
-	
+
 	/**
 	 * <p>
-	 * A helper method that lazily creates a list of {@link ITemplateEngineRegistryListener}.
+	 * A helper method that lazily creates a list of
+	 * {@link ITemplateEngineRegistryListener}.
 	 * </p>
 	 */
 	private List<ITemplateEngineRegistryListener> getListeners() {

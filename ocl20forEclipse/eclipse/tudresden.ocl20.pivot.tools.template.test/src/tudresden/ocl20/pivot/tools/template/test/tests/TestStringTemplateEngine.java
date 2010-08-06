@@ -44,59 +44,73 @@ import tudresden.ocl20.pivot.tools.template.exception.TemplateException;
  * This test will test the class StringTemplateEngine.java of the package
  * tudresden.ocl20.pivot.tools.template.stringtemplate.
  * 
- *@see tudresden.ocl20.pivot.tools.template.ITemplateEngine
+ * @see tudresden.ocl20.pivot.tools.template.ITemplateEngine
  */
 public class TestStringTemplateEngine {
 
 	/**
-	 * <p>Implemented test run 1.<br /><br/>
-	 * Tests the StringTemplateEngine with two templates.</p>
+	 * <p>
+	 * Implemented test run 1.<br />
+	 * <br/>
+	 * Tests the StringTemplateEngine with two templates.
+	 * </p>
 	 * 
 	 */
-	@Test 
+	@Test
 	public void run1() {
-			// Create a List with templates and add the first template
-			LinkedList<URL> groups = new LinkedList<URL>();
-			groups.add(TestStringTemplateEngine.class.getResource("/resources/templates/testGeneral.stg"));
-			
-			// Create DeclarativeTemplateEngine with the List containing one template
-			ITemplateGroup general = null;
-			try {
-				general = TemplatePlugin.getTemplateGroupRegistry().addDefaultTemplateGroup("Test1", "StringTemplate", null);
-				general.addFiles(groups);
-				// Check the operations getTemplate with the parameters 'general' and 'specific'
-				// The called operation toString of the template should return the value
-				// 'generalTemplate' in both cases (as specified in the file testGeneral.stg).
-				ITemplate generalTemplate2 = general.getTemplate("general");
-				assertEquals(generalTemplate2.toString(), "generalTemplate");
-				
-				ITemplate specificTemplate2 = general.getTemplate("specific");
-				assertEquals(specificTemplate2.toString(), "generalTemplate");
-			} catch (TemplateException e) {
-				e.printStackTrace();
-				fail("Can't initialize STE general");
-			}
 
-			// Add the second template to the List of templates and create a new
-			groups.add(TestStringTemplateEngine.class.getResource("/resources/templates/testSpecific.stg"));
-			ITemplateGroup specific = null;
-			try {
-				specific = TemplatePlugin.getTemplateGroupRegistry().addDefaultTemplateGroup("Test2", "StringTemplate", null);
-				specific.addFiles(groups);
-				ITemplate generalTemplate = specific.getTemplate("general");
-				assertEquals(generalTemplate.toString(), "generalTemplate");
-				
-				ITemplate specificTemplate = specific.getTemplate("specific");
-				assertEquals(specificTemplate.toString(), "specificTemplate");			
-				
-			} catch (TemplateException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-				fail("Can't initialize STE specific");
-			}	
-			if (specific != null) TemplatePlugin.getTemplateGroupRegistry().removeTemplateGroup(specific);
-			if (general != null) TemplatePlugin.getTemplateGroupRegistry().removeTemplateGroup(general);
-		
+		// Create a List with templates and add the first template
+		LinkedList<URL> groups = new LinkedList<URL>();
+		groups.add(TestStringTemplateEngine.class
+				.getResource("/resources/templates/testGeneral.stg"));
+
+		// Create DeclarativeTemplateEngine with the List containing one template
+		ITemplateGroup general = null;
+		try {
+			general =
+					TemplatePlugin.getTemplateGroupRegistry().addDefaultTemplateGroup(
+							"Test1", "StringTemplate", null);
+			general.addFiles(groups);
+			// Check the operations getTemplate with the parameters 'general' and
+			// 'specific'
+			// The called operation toString of the template should return the value
+			// 'generalTemplate' in both cases (as specified in the file
+			// testGeneral.stg).
+			ITemplate generalTemplate2 = general.getTemplate("general");
+			assertEquals(generalTemplate2.toString(), "generalTemplate");
+
+			ITemplate specificTemplate2 = general.getTemplate("specific");
+			assertEquals(specificTemplate2.toString(), "generalTemplate");
+		} catch (TemplateException e) {
+			e.printStackTrace();
+			fail("Can't initialize STE general");
+		}
+
+		// Add the second template to the List of templates and create a new
+		groups.add(TestStringTemplateEngine.class
+				.getResource("/resources/templates/testSpecific.stg"));
+		ITemplateGroup specific = null;
+		try {
+			specific =
+					TemplatePlugin.getTemplateGroupRegistry().addDefaultTemplateGroup(
+							"Test2", "StringTemplate", null);
+			specific.addFiles(groups);
+			ITemplate generalTemplate = specific.getTemplate("general");
+			assertEquals(generalTemplate.toString(), "generalTemplate");
+
+			ITemplate specificTemplate = specific.getTemplate("specific");
+			assertEquals(specificTemplate.toString(), "specificTemplate");
+
+		} catch (TemplateException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			fail("Can't initialize STE specific");
+		}
+		if (specific != null)
+			TemplatePlugin.getTemplateGroupRegistry().removeTemplateGroup(specific);
+		if (general != null)
+			TemplatePlugin.getTemplateGroupRegistry().removeTemplateGroup(general);
+
 	}
-	
+
 }

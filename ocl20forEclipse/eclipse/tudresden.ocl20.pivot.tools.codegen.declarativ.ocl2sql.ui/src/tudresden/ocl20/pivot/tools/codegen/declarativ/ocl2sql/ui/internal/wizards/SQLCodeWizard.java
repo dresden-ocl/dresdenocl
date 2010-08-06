@@ -55,6 +55,7 @@ public class SQLCodeWizard extends TransformCodeWizard implements INewWizard {
 	 * </p>
 	 */
 	public SQLCodeWizard() {
+
 		super(Ocl2SqlUIMessages.TransformCodeWizard_Title);
 		/* Sets the image in the top right corner. */
 		setDefaultPageImageDescriptor(Ocl2SQLUIPlugIn
@@ -63,20 +64,18 @@ public class SQLCodeWizard extends TransformCodeWizard implements INewWizard {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see org.eclipse.jface.wizard.IWizard#addPages()
 	 */
 	@Override
 	public void addPages() {
+
 		super.addPages();
 		addPage(this.settingsPage);
-
 
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see org.eclipse.ui.IWorkbenchWizard#init(org.eclipse.ui.IWorkbench,
 	 * org.eclipse.jface.viewers.IStructuredSelection)
 	 */
@@ -84,11 +83,11 @@ public class SQLCodeWizard extends TransformCodeWizard implements INewWizard {
 	public void init(IWorkbench workbench, IStructuredSelection selection) {
 
 		super.init(workbench, selection);
-		
-		//this.selectDirectoryPage.getDirectoryConstraintGroup().setVisible(false);
-		
-		
-		this.settingsPage = new SettingsPage((IOcl2DeclSettings) this.myCodeGenerator.getSettings());
+
+		// this.selectDirectoryPage.getDirectoryConstraintGroup().setVisible(false);
+
+		this.settingsPage =
+				new SettingsPage((IOcl2DeclSettings) this.myCodeGenerator.getSettings());
 
 		/* Probably log the exit from this method. */
 		if (logger.isDebugEnabled()) {
@@ -99,31 +98,31 @@ public class SQLCodeWizard extends TransformCodeWizard implements INewWizard {
 
 	@Override
 	protected void setCodeGenerator() {
+
 		/* Try Initialize the code generator. */
 		try {
-			myCodeGenerator = Ocl2SQLFactory.getInstance()
-					.createSQLCodeGenerator();
+			myCodeGenerator = Ocl2SQLFactory.getInstance().createSQLCodeGenerator();
 		}
 
 		/* Else show an exception. */
 		catch (Ocl2CodeException e) {
-			MessageDialog
-					.openError(
-							getShell(),
-							CodegenUIMessages.TransformCodeWizard_ErrorMessageDialogTitle,
-							CodegenUIMessages.TransformCodeWizard_InitErrorOccured
-									+ (e.getMessage() != null ? e.getMessage()
-											: CodegenUIMessages.TransformCodeWizard_CheckLog));
+			MessageDialog.openError(
+					getShell(),
+					CodegenUIMessages.TransformCodeWizard_ErrorMessageDialogTitle,
+					CodegenUIMessages.TransformCodeWizard_InitErrorOccured
+							+ (e.getMessage() != null ? e.getMessage()
+									: CodegenUIMessages.TransformCodeWizard_CheckLog));
 
 			String errorMsg = "An error occured during initialization.";
 			logger.error(errorMsg, e);
 		}
 	}
 
-
 	@Override
 	protected CodegenJob getCodegenJob(List<Constraint> constraints) {
-		CodegenSQLJob codegenJob = new CodegenSQLJob(constraints, this.myCodeGenerator);
+
+		CodegenSQLJob codegenJob =
+				new CodegenSQLJob(constraints, this.myCodeGenerator);
 		return codegenJob;
 
 	}

@@ -36,19 +36,15 @@ import tudresden.ocl20.pivot.tools.template.test.tests.TestTemplateEngineRegistr
 
 /**
  * This TestSuite runs all Tests testing the packages
- * <code>tudresden.ocl20.pivot.tools.template</code>
- * of the Dresden OCL2 Toolkit
+ * <code>tudresden.ocl20.pivot.tools.template</code> of the Dresden OCL2 Toolkit
  * 
  * @author Bjoern Freitag
- *
+ * 
  */
 @RunWith(Suite.class)
-@Suite.SuiteClasses({
-	TestTemplateEngineRegistry.class,
-	TestStringTemplateEngine.class,
-	TestTemplateGroup.class
-})
+@Suite.SuiteClasses({ TestTemplateEngineRegistry.class,
+		TestStringTemplateEngine.class, TestTemplateGroup.class })
 public class AllTestsTemplate {
-    // this class remains completely empty, 
-    // being used only as a holder for the above annotations
+	// this class remains completely empty,
+	// being used only as a holder for the above annotations
 }

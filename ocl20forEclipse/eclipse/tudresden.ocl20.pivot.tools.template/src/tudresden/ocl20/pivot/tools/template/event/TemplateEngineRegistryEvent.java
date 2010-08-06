@@ -40,8 +40,8 @@ import tudresden.ocl20.pivot.tools.template.ITemplateEngineRegistry;
 
 /**
  * <p>
- * Represents events fired by the {@link ITemplateEngineRegistry} if a new {@link ITemplateEngine}
- * is added or removed.
+ * Represents events fired by the {@link ITemplateEngineRegistry} if a new
+ * {@link ITemplateEngine} is added or removed.
  * </p>
  * 
  * @author Bjoern Freitag
@@ -62,10 +62,11 @@ public class TemplateEngineRegistryEvent extends EventObject {
 	 * @param source
 	 *          The {@link IModelRegistry} that is the source of this event.
 	 * @param affectedTemplateEngine
-	 *          The {@link ITemplateEngine} affected by the operation that caused this
-	 *          event.
+	 *          The {@link ITemplateEngine} affected by the operation that caused
+	 *          this event.
 	 */
-	public TemplateEngineRegistryEvent(ITemplateEngineRegistry source, ITemplateEngine affectedTemplateEngine) {
+	public TemplateEngineRegistryEvent(ITemplateEngineRegistry source,
+			ITemplateEngine affectedTemplateEngine) {
 
 		super(source);
 		this.affectedTemplateEngine = affectedTemplateEngine;
@@ -73,21 +74,22 @@ public class TemplateEngineRegistryEvent extends EventObject {
 
 	/**
 	 * <p>
-	 * Returns the {@link ITemplateEngineRegistry} that is the source of this event.
+	 * Returns the {@link ITemplateEngineRegistry} that is the source of this
+	 * event.
 	 * </p>
 	 * 
 	 * @see java.util.EventObject#getSource()
 	 */
 	@Override
 	public ITemplateEngineRegistry getSource() {
-	
+
 		return (ITemplateEngineRegistry) super.getSource();
 	}
 
 	/**
 	 * <p>
-	 * Returns the {@link ITemplateEngine} that is affected by the operation that caused
-	 * this event.
+	 * Returns the {@link ITemplateEngine} that is affected by the operation that
+	 * caused this event.
 	 * </p>
 	 * 
 	 * @return An {@link ITemplateEngine} instance.
@@ -102,7 +104,8 @@ public class TemplateEngineRegistryEvent extends EventObject {
 	 * Does the same as {@link #getSource()}, but has a more concise name.
 	 * </p>
 	 * 
-	 * @return The {@link ITemplateEngineRegistry} that is the source of this event.
+	 * @return The {@link ITemplateEngineRegistry} that is the source of this
+	 *         event.
 	 */
 	public ITemplateEngineRegistry getTemplateEngineRegistry() {
 

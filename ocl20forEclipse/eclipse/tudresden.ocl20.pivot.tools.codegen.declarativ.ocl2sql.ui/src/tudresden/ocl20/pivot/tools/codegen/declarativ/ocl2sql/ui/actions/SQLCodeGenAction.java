@@ -33,9 +33,8 @@ import tudresden.ocl20.pivot.tools.codegen.ui.impl.wizards.SelectDirectoryPage;
 
 /**
  * <p>
- * This class implements an action which starts the {@link SQLCodeWizard}
- * to generate AspectJ code for imported {@link IModel}s and {@link Constraint}
- * s.
+ * This class implements an action which starts the {@link SQLCodeWizard} to
+ * generate AspectJ code for imported {@link IModel}s and {@link Constraint} s.
  * </p>
  * 
  * @see IWorkbenchWindowActionDelegate
@@ -51,6 +50,7 @@ public class SQLCodeGenAction implements IWorkbenchWindowActionDelegate {
 	 * </p>
 	 */
 	public SQLCodeGenAction() {
+
 	}
 
 	/**
@@ -88,21 +88,23 @@ public class SQLCodeGenAction implements IWorkbenchWindowActionDelegate {
 		/* Instantiates the wizard container with the wizard and opens it. */
 		dialog = new WizardDialog(this.window.getShell(), wizard);
 		dialog.create();
-		((SelectDirectoryPage)(wizard.getPage("SelectDirectoryPage"))).getDirectoryConstraintGroup().setVisible(false);
+		((SelectDirectoryPage) (wizard.getPage("SelectDirectoryPage")))
+				.getDirectoryConstraintGroup().setVisible(false);
 		dialog.open();
 	}
 
 	/**
 	 * <p>
-	 * Selection in the workbench has been changed. We can change the state of
-	 * the 'real' action here if we want, but this can only happen after the
-	 * delegate has been created.
+	 * Selection in the workbench has been changed. We can change the state of the
+	 * 'real' action here if we want, but this can only happen after the delegate
+	 * has been created.
 	 * </p>
 	 * 
 	 * @see IWorkbenchWindowActionDelegate#selectionChanged
 	 */
 	@Override
 	public void selectionChanged(IAction action, ISelection selection) {
+
 	}
 
 	/**
@@ -115,18 +117,20 @@ public class SQLCodeGenAction implements IWorkbenchWindowActionDelegate {
 	 */
 	@Override
 	public void dispose() {
+
 	}
 
 	/**
 	 * <p>
-	 * We will cache window object in order to be able to provide parent shell
-	 * for the message dialog.
+	 * We will cache window object in order to be able to provide parent shell for
+	 * the message dialog.
 	 * </p>
 	 * 
 	 * @see IWorkbenchWindowActionDelegate#init
 	 */
 	@Override
 	public void init(IWorkbenchWindow window) {
+
 		this.window = window;
 	}
 }

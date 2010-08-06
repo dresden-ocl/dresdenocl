@@ -39,7 +39,7 @@ public class TransformationPlugin extends Plugin {
 
 	/** The shared instance. */
 	private static TransformationPlugin plugin;
-	
+
 	private ITransformationRegistry transformationRegistry;
 
 	/**
@@ -48,15 +48,16 @@ public class TransformationPlugin extends Plugin {
 	 * </p>
 	 */
 	public TransformationPlugin() {
+
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see
 	 * org.eclipse.core.runtime.Plugins#start(org.osgi.framework.BundleContext)
 	 */
 	public void start(BundleContext context) throws Exception {
+
 		super.start(context);
 		plugin = this;
 
@@ -66,11 +67,10 @@ public class TransformationPlugin extends Plugin {
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.eclipse.core.runtime.Plugin#stop(org.osgi.framework.BundleContext)
+	 * @see org.eclipse.core.runtime.Plugin#stop(org.osgi.framework.BundleContext)
 	 */
 	public void stop(BundleContext context) throws Exception {
+
 		plugin = null;
 		super.stop(context);
 	}
@@ -79,6 +79,7 @@ public class TransformationPlugin extends Plugin {
 	 * @return the shared instance
 	 */
 	public static TransformationPlugin getDefault() {
+
 		return plugin;
 	}
 
@@ -89,14 +90,15 @@ public class TransformationPlugin extends Plugin {
 	 * </p>
 	 * 
 	 * @param clazz
-	 *            the class to return the logger for
+	 *          the class to return the logger for
 	 * 
 	 * @return a log4j <code>Logger</code> instance
 	 */
 	public static Logger getLogger(Class<?> clazz) {
+
 		return LoggingPlugin.getLogManager(plugin).getLogger(clazz);
 	}
-	
+
 	/**
 	 * <p>
 	 * Returns the {@link ITransformationRegistry} managed by the
@@ -131,9 +133,10 @@ public class TransformationPlugin extends Plugin {
 	}
 
 	/**
-	 * Sets the {@link ITransformationRegistry} of the {@link TransformationPlugin}. This
-	 * method has to be called when using DresdenOCL stand-alone. The standard
-	 * argument should be {@link StandaloneTransformationRegistry}.
+	 * Sets the {@link ITransformationRegistry} of the
+	 * {@link TransformationPlugin}. This method has to be called when using
+	 * DresdenOCL stand-alone. The standard argument should be
+	 * {@link StandaloneTransformationRegistry}.
 	 * 
 	 * @param metamodelRegistry
 	 *          the {@link ITransformationRegistry} to set

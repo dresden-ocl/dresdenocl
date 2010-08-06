@@ -36,7 +36,6 @@ package tudresden.ocl20.pivot.tools.transformation.event;
 import tudresden.ocl20.pivot.tools.transformation.ITransformation;
 import tudresden.ocl20.pivot.tools.transformation.ITransformationRegistry;
 
-
 /**
  * An {@link ITransformationRegistryListener} is informed about activities in an
  * {@link ITransformationRegistry}, such as loading transformations.
@@ -47,8 +46,8 @@ public interface ITransformationRegistryListener {
 
 	/**
 	 * <p>
-	 * This method is called when a {@link ITransformation transformation} has been added to a
-	 * {@link ITransformationRegistry}.
+	 * This method is called when a {@link ITransformation transformation} has
+	 * been added to a {@link ITransformationRegistry}.
 	 * </p>
 	 * 
 	 * @param event
@@ -58,8 +57,8 @@ public interface ITransformationRegistryListener {
 
 	/**
 	 * <p>
-	 * This method is called when a {@link ITransformation transformation} has been removed from a
-	 * {@link ITransformationRegistry}.
+	 * This method is called when a {@link ITransformation transformation} has
+	 * been removed from a {@link ITransformationRegistry}.
 	 * </p>
 	 * 
 	 * @param event

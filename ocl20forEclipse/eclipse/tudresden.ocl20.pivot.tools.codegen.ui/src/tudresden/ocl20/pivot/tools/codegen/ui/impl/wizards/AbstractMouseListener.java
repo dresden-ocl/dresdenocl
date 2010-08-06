@@ -33,29 +33,26 @@ public abstract class AbstractMouseListener implements MouseListener {
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.eclipse.swt.events.MouseListener#mouseDoubleClick(org.eclipse.swt
+	 * @see org.eclipse.swt.events.MouseListener#mouseDoubleClick(org.eclipse.swt
 	 * .events.MouseEvent)
 	 */
 	public void mouseDoubleClick(MouseEvent e) {
+
 		/* Do nothing. */
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.eclipse.swt.events.MouseListener#mouseDown(org.eclipse.swt.events
+	 * @see org.eclipse.swt.events.MouseListener#mouseDown(org.eclipse.swt.events
 	 * .MouseEvent)
 	 */
 	public void mouseDown(MouseEvent e) {
+
 		/* Do nothing. */
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @seeorg.eclipse.swt.events.MouseListener#mouseUp(org.eclipse.swt.events.
 	 * MouseEvent)
 	 */

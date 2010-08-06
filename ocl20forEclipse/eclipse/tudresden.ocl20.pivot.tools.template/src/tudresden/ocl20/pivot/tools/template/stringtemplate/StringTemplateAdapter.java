@@ -51,24 +51,26 @@ public class StringTemplateAdapter implements ITemplate {
 	 * </p>
 	 * 
 	 * @param template
-	 *            The adapted {@link StringTemplate} object.
+	 *          The adapted {@link StringTemplate} object.
 	 */
 	public StringTemplateAdapter(StringTemplate template) {
+
 		this.template = template;
 	}
 
 	/**
 	 * <p>
-	 * Assign a value to an attributes' name. Please note, that you can call
-	 * this method multiple times for the same name to build lists of values.
+	 * Assign a value to an attributes' name. Please note, that you can call this
+	 * method multiple times for the same name to build lists of values.
 	 * </p>
 	 * 
 	 * @param name
-	 *            The name of the attribute which shall be set.
+	 *          The name of the attribute which shall be set.
 	 * @param value
-	 *            The value of the attribute which shall be set.
+	 *          The value of the attribute which shall be set.
 	 */
 	public void setAttribute(String name, String value) {
+
 		template.setAttribute(name, value);
 	}
 
@@ -76,6 +78,7 @@ public class StringTemplateAdapter implements ITemplate {
 	 * @return The evaluated template as a {@link String}.
 	 */
 	public String toString() {
+
 		return template.toString();
 	}
 }

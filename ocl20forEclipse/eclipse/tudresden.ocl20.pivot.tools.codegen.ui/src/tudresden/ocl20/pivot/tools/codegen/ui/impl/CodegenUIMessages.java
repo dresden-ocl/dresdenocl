@@ -30,7 +30,8 @@ import org.eclipse.osgi.util.NLS;
  */
 public class CodegenUIMessages extends NLS {
 
-	private static final String BUNDLE_NAME = "tudresden.ocl20.pivot.tools.codegen.ui.impl.messages";
+	private static final String BUNDLE_NAME =
+			"tudresden.ocl20.pivot.tools.codegen.ui.impl.messages";
 
 	public static String TransformCodeWizard_ErrorMessageDialogTitle;
 
@@ -120,6 +121,7 @@ public class CodegenUIMessages extends NLS {
 	}
 
 	private CodegenUIMessages() {
+
 		/* No implementation necessary. */
 	}
 }

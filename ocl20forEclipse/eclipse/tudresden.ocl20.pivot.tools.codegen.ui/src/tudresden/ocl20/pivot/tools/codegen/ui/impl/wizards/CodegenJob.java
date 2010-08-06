@@ -35,14 +35,16 @@ public abstract class CodegenJob extends Job {
 
 	/** A logger for this class. */
 	protected Logger logger;
-	
+
 	private String pluginid;
 
 	public String getPluginid() {
+
 		return pluginid;
 	}
 
 	public void setPluginid(String pluginid) {
+
 		this.pluginid = pluginid;
 	}
 
@@ -54,18 +56,19 @@ public abstract class CodegenJob extends Job {
 
 	/** The {@link IOcl2Code} used for code generation. */
 	protected IOcl2Code<?> codeGenerator;
-	
+
 	/**
 	 * <p>
 	 * Creates a new {@link CodegenJob}.
 	 * </p>
 	 * 
 	 * @param constraints
-	 *            The {@link Constraint}s for that code shall be generated.
+	 *          The {@link Constraint}s for that code shall be generated.
 	 * @param codeGenerator
-	 *            The {@link IOcl2Code} used for code generation.
+	 *          The {@link IOcl2Code} used for code generation.
 	 */
 	public CodegenJob(List<Constraint> constraints, IOcl2Code<?> codeGenerator) {
+
 		super("Generating Code ...");
 
 		if (constraints == null) {
@@ -85,7 +88,6 @@ public abstract class CodegenJob extends Job {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @seeorg.eclipse.core.runtime.jobs.Job#run(org.eclipse.core.runtime.
 	 * IProgressMonitor)
 	 */
@@ -104,8 +106,9 @@ public abstract class CodegenJob extends Job {
 
 			/* FIXME Claas: Evtl. refresh the altered workspace automatically. */
 
-			result = new Status(IStatus.OK, this.getPluginid(),
-					"Code Transformation finished successfully.");
+			result =
+					new Status(IStatus.OK, this.getPluginid(),
+							"Code Transformation finished successfully.");
 		}
 
 		catch (Ocl2CodeException e) {
@@ -113,12 +116,12 @@ public abstract class CodegenJob extends Job {
 			String errorMsg = "An error occured during code generation.";
 			logger.error(errorMsg, e);
 
-			result = new Status(IStatus.ERROR, this.pluginid,
-					errorMsg);
+			result = new Status(IStatus.ERROR, this.pluginid, errorMsg);
 		}
 
 		return result;
 	}
-	
-	abstract protected void runCodeGenerator(List<Constraint> constraints) throws Ocl2CodeException;
+
+	abstract protected void runCodeGenerator(List<Constraint> constraints)
+			throws Ocl2CodeException;
 }

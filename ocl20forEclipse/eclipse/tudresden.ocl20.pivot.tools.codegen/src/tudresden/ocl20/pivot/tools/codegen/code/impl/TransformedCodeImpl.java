@@ -47,7 +47,6 @@ public class TransformedCodeImpl implements ITransformedCode {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.ocl22code.IGeneratedCode#addLogicalCode(java.lang
 	 * .String)
@@ -67,7 +66,6 @@ public class TransformedCodeImpl implements ITransformedCode {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see tudresden.ocl20.pivot.ocl22code.IGeneratedCode#hasMoreThanOneLine()
 	 */
 	public boolean containsCode() {
@@ -81,7 +79,6 @@ public class TransformedCodeImpl implements ITransformedCode {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see tudresden.ocl20.pivot.ocl22code.IGeneratedCode#getGeneratedCode()
 	 */
 	public String getCode() {
@@ -91,18 +88,16 @@ public class TransformedCodeImpl implements ITransformedCode {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see tudresden.ocl20.pivot.ocl22code.IGeneratedCode#getResultVariable()
 	 */
 	public String getResultExp() {
+
 		return this.resultExp;
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * tudresden.ocl20.pivot.ocl22code.IGeneratedCode#setResultVariable(java
+	 * @see tudresden.ocl20.pivot.ocl22code.IGeneratedCode#setResultVariable(java
 	 * .lang.String)
 	 */
 	public void setResultExp(String someCode) {
@@ -112,10 +107,10 @@ public class TransformedCodeImpl implements ITransformedCode {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	public boolean equals(Object anObject) {
+
 		boolean result;
 
 		result = false;

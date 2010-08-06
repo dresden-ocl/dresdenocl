@@ -55,19 +55,19 @@ public class StringTemplateEngine implements ITemplateEngine {
 	 * The adapted template group.
 	 */
 	private StringTemplateGroup templateGroup;
-	
+
 	/**
 	 * The name of the TemplateEngine
 	 */
 	private String templateName = "StringTemplate";
-	
-	/** 
+
+	/**
 	 * The constructor of the StringTemplateEngine
 	 */
 	public StringTemplateEngine() {
-		
+
 	}
-	
+
 	/**
 	 * <p>
 	 * Creates a new {@link StringTemplateEngine} and loads a list of
@@ -76,18 +76,18 @@ public class StringTemplateEngine implements ITemplateEngine {
 	 * {@link ITemplate} groups.
 	 * 
 	 * @param groupFiles
-	 *            The names of the group files as full paths to the projects
-	 *            resource folder.
-	 * @throws TemplateException 
-	 *             Thrown, if a given File name can not be found.
+	 *          The names of the group files as full paths to the projects
+	 *          resource folder.
+	 * @throws TemplateException
+	 *           Thrown, if a given File name can not be found.
 	 */
 	public StringTemplateEngine(LinkedList<URL> groupFiles)
 			throws TemplateException {
-		
+
 		this();
 		addFiles(groupFiles);
 	}
-	
+
 	/**
 	 * <p>
 	 * Creates a new {@link StringTemplateEngine} and loads a list of
@@ -96,13 +96,12 @@ public class StringTemplateEngine implements ITemplateEngine {
 	 * {@link ITemplate} groups.
 	 * 
 	 * @param files
-	 *            The names of the file as full path
-	 *            resource folder.
+	 *          The names of the file as full path resource folder.
 	 * @throws TemplateException
-	 *             Thrown, if a given File name can not be found.
+	 *           Thrown, if a given File name can not be found.
 	 */
-	public StringTemplateEngine(URL file)
-	throws TemplateException {
+	public StringTemplateEngine(URL file) throws TemplateException {
+
 		this();
 		addFile(file);
 	}
@@ -111,6 +110,7 @@ public class StringTemplateEngine implements ITemplateEngine {
 	 * @see tudresden.ocl20.pivot.tools.template.ITemplateEngine#getTemplate(String)
 	 */
 	public ITemplate getTemplate(String name) {
+
 		try {
 			return new StringTemplateAdapter(templateGroup.getInstanceOf(name));
 		} catch (NullPointerException e) {
@@ -124,6 +124,7 @@ public class StringTemplateEngine implements ITemplateEngine {
 	 * @see tudresden.ocl20.pivot.tools.template.ITemplateEngine#getDisplayName()
 	 */
 	public String getDisplayName() {
+
 		return templateName;
 	}
 
@@ -131,6 +132,7 @@ public class StringTemplateEngine implements ITemplateEngine {
 	 * @see tudresden.ocl20.pivot.tools.template.ITemplateEngine#getVersion()
 	 */
 	public String getVersion() {
+
 		// TODO Auto-generated method stub
 		return StringTemplate.VERSION;
 	}
@@ -139,16 +141,18 @@ public class StringTemplateEngine implements ITemplateEngine {
 	 * @see tudresden.ocl20.pivot.tools.template.ITemplateEngine#addFile(URL)
 	 */
 	public void addFile(URL file) throws TemplateException {
+
 		LinkedList<URL> files = new LinkedList<URL>();
 		files.add(file);
 		addFiles(files);
-		
+
 	}
 
 	/**
 	 * @see tudresden.ocl20.pivot.tools.template.ITemplateEngine#addFiles(LinkedList)
 	 */
 	public void addFiles(LinkedList<URL> files) throws TemplateException {
+
 		assert (files.size() > 0);
 
 		Reader groupReader = null;
@@ -159,38 +163,38 @@ public class StringTemplateEngine implements ITemplateEngine {
 		} catch (IOException e) {
 			throw new TemplateException("Files not correctly added");
 		}
-		
-		if (templateGroup == null ) {
+
+		if (templateGroup == null) {
 			templateGroup = new StringTemplateGroup(groupReader);
-			
-		} else {
+
+		}
+		else {
 			lastGroup = templateGroup;
 			templateGroup = new StringTemplateGroup(groupReader);
 			lastGroup.setSuperGroup(templateGroup);
 		}
 
 		lastGroup = templateGroup;
-		
+
 		for (int i = 1; i < files.size(); i++) {
 
 			StringTemplateGroup superGroup;
 			URL templatePath;
 
 			templatePath = files.get(files.size() - i - 1);
-			
+
 			try {
 				groupReader = new InputStreamReader(templatePath.openStream());
 			} catch (IOException e) {
 				throw new TemplateException("Files not correctly added");
 			}
-			
+
 			superGroup = new StringTemplateGroup(groupReader);
-			
 
 			lastGroup.setSuperGroup(superGroup);
 			lastGroup = superGroup;
 		}
-		
+
 	}
 
 }

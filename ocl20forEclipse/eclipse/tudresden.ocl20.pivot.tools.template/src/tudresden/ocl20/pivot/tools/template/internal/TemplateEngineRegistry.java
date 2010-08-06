@@ -24,58 +24,58 @@ import tudresden.ocl20.pivot.tools.template.event.TemplateEngineRegistryEvent;
  * Default implementation of the {@link ITemplateEngineRegistr}
  * 
  * @author Bjoern Freitag
- *
+ * 
  */
-public class TemplateEngineRegistry implements ITemplateEngineRegistry, IRegistryEventListener {
-	
+public class TemplateEngineRegistry implements ITemplateEngineRegistry,
+		IRegistryEventListener {
+
 	/** {@link Logger} for this class. */
-	private static final Logger LOGGER =
-			TemplatePlugin.getLogger(TemplateEngineRegistry.class);
-	
+	private static final Logger LOGGER = TemplatePlugin
+			.getLogger(TemplateEngineRegistry.class);
+
 	/**
 	 * the map of template engines
 	 */
-	private Map<String,ITemplateEngine> templateEngines;
-	
+	private Map<String, ITemplateEngine> templateEngines;
+
 	/** The full identifier of the {@link ITemplateEngine}s' extension point. */
 	private static final String TEMPLATEENGINE_EXTENSION_POINT_ID =
 			TemplatePlugin.ID + ".templateEngines";
-	
+
 	/** A list of listeners. */
 	private ListenerList listeners;
-	
+
 	/**
 	 * The constructor
 	 */
 	public TemplateEngineRegistry() {
-		
+
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("TemplateEngineRegistry() - enter"); //$NON-NLS-1$
 		}
 		// no else.
-		
-		
-		
-		this.templateEngines = new HashMap<String,ITemplateEngine>();
+
+		this.templateEngines = new HashMap<String, ITemplateEngine>();
 		this.added(this.getExtensionPoint().getExtensions());
-		
-	
+
 		/* Register this registry as a listener for plug-in events. */
 		Platform.getExtensionRegistry().addListener(this,
 				TEMPLATEENGINE_EXTENSION_POINT_ID);
-		
+
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("TemplateEngineRegistry() - exit"); //$NON-NLS-1$
 		}
-		
+
 	}
 
 	/**
 	 * @see tudresden.ocl20.pivot.tools.template.ITemplateEngineRegistry#addTemplateEngine(ITemplateEngine)
 	 */
 	public void addTemplateEngine(ITemplateEngine templateEngine) {
+
 		if (LOGGER.isDebugEnabled() || true) {
-			LOGGER.debug("addTemplateEngine(templateEngine=" + templateEngine + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
+			LOGGER
+					.debug("addTemplateEngine(templateEngine=" + templateEngine + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 		// no else.
 
@@ -108,13 +108,11 @@ public class TemplateEngineRegistry implements ITemplateEngineRegistry, IRegistr
 		// no else.
 	}
 
-
-
 	/**
 	 * @see tudresden.ocl20.pivot.tools.template.ITemplateEngineRegistry#dispose()
 	 */
 	public void dispose() {
-		
+
 		if (this.templateEngines.size() != 0) {
 			this.templateEngines.clear();
 		}
@@ -125,6 +123,7 @@ public class TemplateEngineRegistry implements ITemplateEngineRegistry, IRegistr
 	 * @see tudresden.ocl20.pivot.tools.template.ITemplateEngineRegistry#getNewTemplateEngine(String)
 	 */
 	public ITemplateEngine getNewTemplateEngine(String templateEngineName) {
+
 		if (templateEngineName == null) {
 			throw new IllegalArgumentException(
 					"The parameter templateEngineName must not be null.");
@@ -132,7 +131,8 @@ public class TemplateEngineRegistry implements ITemplateEngineRegistry, IRegistr
 		// no else.
 		ITemplateEngine templateEngine;
 		try {
-			templateEngine = this.templateEngines.get(templateEngineName).getClass().newInstance();
+			templateEngine =
+					this.templateEngines.get(templateEngineName).getClass().newInstance();
 		} catch (InstantiationException e) {
 			templateEngine = null;
 		} catch (IllegalAccessException e) {
@@ -140,7 +140,7 @@ public class TemplateEngineRegistry implements ITemplateEngineRegistry, IRegistr
 		} catch (NullPointerException e) {
 			templateEngine = null;
 		}
-		
+
 		return templateEngine;
 	}
 
@@ -148,6 +148,7 @@ public class TemplateEngineRegistry implements ITemplateEngineRegistry, IRegistr
 	 * @see tudresden.ocl20.pivot.tools.template.ITemplateEngineRegistry#getTemplateEngines()
 	 */
 	public List<ITemplateEngine> getTemplateEngines() {
+
 		List<ITemplateEngine> tempGroup = new ArrayList<ITemplateEngine>();
 		for (ITemplateEngine tGroup : this.templateEngines.values()) {
 			tempGroup.add(tGroup);
@@ -159,6 +160,7 @@ public class TemplateEngineRegistry implements ITemplateEngineRegistry, IRegistr
 	 * @see tudresden.ocl20.pivot.tools.template.ITemplateEngineRegistry#removeTemplateEngine(ITemplateEngine)
 	 */
 	public void removeTemplateEngine(ITemplateEngine templateEngine) {
+
 		if (templateEngine == null) {
 			throw new IllegalArgumentException(
 					"The parameter templateEngineName must not be null.");
@@ -166,15 +168,17 @@ public class TemplateEngineRegistry implements ITemplateEngineRegistry, IRegistr
 		// no else.
 
 		this.templateEngines.remove(templateEngine.getDisplayName());
-		
-		this.fireTemplateEngineRemoved(this.templateEngines.remove(templateEngine.getDisplayName()));
-	
+
+		this.fireTemplateEngineRemoved(this.templateEngines.remove(templateEngine
+				.getDisplayName()));
+
 	}
 
 	/**
 	 * @see tudresden.ocl20.pivot.tools.template.ITemplateEngineRegistry#removeTemplateEngine(String)
 	 */
 	public void removeTemplateEngine(String templateEngineName) {
+
 		if (templateEngineName == null) {
 			throw new IllegalArgumentException(
 					"The parameter templateEngineName must not be null.");
@@ -187,14 +191,17 @@ public class TemplateEngineRegistry implements ITemplateEngineRegistry, IRegistr
 	/**
 	 * @see tudresden.ocl20.pivot.tools.template.ITemplateEngineRegistry#addTemplateEngineRegistryListener(ITemplateEngineRegistryListener)
 	 */
-	public void addTemplateEngineRegistryListener(ITemplateEngineRegistryListener listener) {
+	public void addTemplateEngineRegistryListener(
+			ITemplateEngineRegistryListener listener) {
+
 		this.getListeners().add(listener);
-		
+
 	}
-	
+
 	/**
 	 * <p>
-	 * A helper method that informs all listeners about an added {@link ITemplateEngine}.
+	 * A helper method that informs all listeners about an added
+	 * {@link ITemplateEngine}.
 	 * </p>
 	 * 
 	 * @param model
@@ -218,16 +225,18 @@ public class TemplateEngineRegistry implements ITemplateEngineRegistry, IRegistr
 				}
 				// no else.
 
-				((ITemplateEngineRegistryListener) listeners[index]).templateEngineAdded(event);
+				((ITemplateEngineRegistryListener) listeners[index])
+						.templateEngineAdded(event);
 			}
 			// end for.
 		}
 		// no else.
 	}
-	
+
 	/**
 	 * <p>
-	 * A helper method that informs all listeners about a removed {@link ITemplateEngine}.
+	 * A helper method that informs all listeners about a removed
+	 * {@link ITemplateEngine}.
 	 * </p>
 	 * 
 	 * @param templateEngine
@@ -250,25 +259,27 @@ public class TemplateEngineRegistry implements ITemplateEngineRegistry, IRegistr
 				}
 				// no else.
 
-				((ITemplateEngineRegistryListener) listeners[index]).templateEngineRemoved(event);
+				((ITemplateEngineRegistryListener) listeners[index])
+						.templateEngineRemoved(event);
 			}
 			// end for.
 		}
 		// no else.
 	}
-	
+
 	/**
 	 * @see tudresden.ocl20.pivot.tools.template.ITemplateEngineRegistry#removeTemplateEngineRegistryListener(ITemplateEngineRegistryListener)
 	 * 
 	 */
-	public void removeTemplateEngineRegistryListener(ITemplateEngineRegistryListener listener) {
+	public void removeTemplateEngineRegistryListener(
+			ITemplateEngineRegistryListener listener) {
 
 		if (this.listeners != null) {
 			this.listeners.remove(listener);
 		}
 		// no else.
 	}
-	
+
 	/**
 	 * <p>
 	 * A helper method that lazily creates the {@link ListenerList}.
@@ -290,6 +301,7 @@ public class TemplateEngineRegistry implements ITemplateEngineRegistry, IRegistr
 	 * @see org.eclipse.core.runtime.IRegistryEventListener#added(IExtension[])
 	 */
 	public void added(IExtension[] extensions) {
+
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("removed(extensions=" + extensions + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 		}
@@ -305,7 +317,9 @@ public class TemplateEngineRegistry implements ITemplateEngineRegistry, IRegistr
 
 					ITemplateEngine templateEngine;
 					try {
-						templateEngine = (ITemplateEngine)(Class.forName(this.getAttribute("class", configurationElement)).newInstance());
+						templateEngine =
+								(ITemplateEngine) (Class.forName(this.getAttribute("class",
+										configurationElement)).newInstance());
 					} catch (InstantiationException e) {
 						templateEngine = null;
 					} catch (IllegalAccessException e) {
@@ -329,7 +343,7 @@ public class TemplateEngineRegistry implements ITemplateEngineRegistry, IRegistr
 			LOGGER.debug("removed(IExtension[]) - exit"); //$NON-NLS-1$
 		}
 		// no else.
-		
+
 	}
 
 	/**
@@ -338,6 +352,7 @@ public class TemplateEngineRegistry implements ITemplateEngineRegistry, IRegistr
 	 * @see org.eclipse.core.runtime.IRegistryEventListener#added(IExtensionPoint[])
 	 */
 	public void added(IExtensionPoint[] extensionPoints) {
+
 		// Do nothing
 	}
 
@@ -347,6 +362,7 @@ public class TemplateEngineRegistry implements ITemplateEngineRegistry, IRegistr
 	 * @see org.eclipse.core.runtime.IRegistryEventListener#removed(IExtension[])
 	 */
 	public void removed(IExtension[] extensions) {
+
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("removed(extensions=" + extensions + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 		}
@@ -363,7 +379,8 @@ public class TemplateEngineRegistry implements ITemplateEngineRegistry, IRegistr
 					String templateEngineID;
 					try {
 						templateEngineID =
-								((ITemplateEngine)(Class.forName(this.getAttribute("class", configurationElement)).newInstance())).getDisplayName();
+								((ITemplateEngine) (Class.forName(this.getAttribute("class",
+										configurationElement)).newInstance())).getDisplayName();
 					} catch (InstantiationException e) {
 						templateEngineID = null;
 					} catch (IllegalAccessException e) {
@@ -395,9 +412,10 @@ public class TemplateEngineRegistry implements ITemplateEngineRegistry, IRegistr
 	 * @see org.eclipse.core.runtime.IRegistryEventListener#removed(IExtensionPoint[])
 	 */
 	public void removed(IExtensionPoint[] extensionPoints) {
-		//Do nothing	
+
+		// Do nothing
 	}
-	
+
 	/**
 	 * <p>
 	 * A helper method to get the worklist task {@link IExtensionPoint}.
@@ -424,7 +442,7 @@ public class TemplateEngineRegistry implements ITemplateEngineRegistry, IRegistr
 
 		return result;
 	}
-	
+
 	/**
 	 * <p>
 	 * Helper method that returns the value of an attribute of the given

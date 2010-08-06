@@ -28,51 +28,60 @@
 package tudresden.ocl20.pivot.tools.codegen.declarativ.mapping;
 
 /**
- * The MappedClass is a target model representation of the corresponding Classifier from 
- * the base model.
+ * The MappedClass is a target model representation of the corresponding
+ * Classifier from the base model.
  * 
- * It's the only class which actually know how to navigate through the target model and
- * is heavily used in the DeclarativeCodeGenerator.
+ * It's the only class which actually know how to navigate through the target
+ * model and is heavily used in the DeclarativeCodeGenerator.
  * 
  * @author Florian Heidenreich
  */
 public interface IMappedClass {
-	
+
 	/**
 	 * @return the name of the MappedClass
 	 */
 	public String getName();
-	
+
 	/**
 	 * Returns a Guide object to the given attribute name
-	 * @param attrName the name of the attribute
+	 * 
+	 * @param attrName
+	 *          the name of the attribute
 	 * @return a Guide object to the given attribute name
 	 */
 	public Guide getAttributeGuide(String attrName);
-	
+
 	/**
 	 * Returns a Guide object to the given association end name
-	 * @param assEndName the name of the association end
+	 * 
+	 * @param assEndName
+	 *          the name of the association end
 	 * @return a Guide object to the given association end name
 	 */
 	public Guide getAssociationEndGuide(String assEndName);
-	
+
 	/**
 	 * Returns a Guide object to the MappedClass in the target model
+	 * 
 	 * @return a Guide object to the MappedClass in the target model
 	 */
 	public Guide getClassGuide();
-	
+
 	/**
 	 * Returns true if the given parameter represents an attribute
-	 * @param attrName the name of the attribute
+	 * 
+	 * @param attrName
+	 *          the name of the attribute
 	 * @return true if the given parameter represents an attribute
 	 */
 	public boolean isAttribute(String attrName);
-	
+
 	/**
 	 * Returns true if the given parameter represents an association end
-	 * @param assEndName the name of the association end
+	 * 
+	 * @param assEndName
+	 *          the name of the association end
 	 * @return true if the given parameter represents an association end
 	 */
 	public boolean isAssociationEnd(String assEndName);

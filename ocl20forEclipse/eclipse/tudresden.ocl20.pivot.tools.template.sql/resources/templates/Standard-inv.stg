@@ -2,20 +2,20 @@ group sql;
 
 // --- OCL INVARIANT --- 
 constraint_body(constraint_name,context,context_alias,expression) ::= <<
-create or replace view $constraint_name$ as
-(select * from $context$ as $context_alias$
-where not ($expression$))
+CREATE OR REPLACE VIEW $constraint_name$ AS
+(SELECT * FROM $context$ AS $context_alias$
+WHERE NOT ($expression$))
 >>
 
 
 // --- NAVIGATION (CLASS AND ATTRIBUTE) --- 
 feature_call_navigation(object,context1,ref_object,context2) ::= <<
-(select $object$ from $context1$ where $ref_object$ in 
-  $context2$)
+(SELECT $object$ FROM $context1$ 
+ WHERE $ref_object$ in $context2$)
 >>
 
 feature_call_navigation_context(object,context1,ref_object,context_alias,context_object) ::= <<
-(select $object$ from $context1$ where $ref_object$ = $context_alias$.$context_object$)
+(SELECT $object$ FROM $context1$ WHERE $ref_object$ = $context_alias$.$context_object$)
 >>
 
 
@@ -67,7 +67,7 @@ literal_variable(value) ::= <<
 
 // ---  COLLECTIONS - BAG (QUERY) --- 
 literal_collection_bag(items) ::= <<
-$items:literal_collection_bag_item(); separator="\nunion all\n"$
+$items:literal_collection_bag_item(); separator="\nUNION ALL\n"$
 >>
 
 literal_collection_bag_item(item) ::= <<
@@ -77,17 +77,17 @@ $item$
 
 // ---  COLLECTIONS - SEQUENCE (QUERY) --- 
 literal_collection_sequence(items) ::= <<
-$items:literal_collection_sequence_item(); separator="\nunion\n"$
+$items:literal_collection_sequence_item(); separator="\nUNION\n"$
 >>
 
 literal_collection_sequence_item(item) ::= <<
-select elem, seqno from (values ($item$, $i$) as SEQ)(elem, seqno)
+SELECT elem, seqno FROM (values ($item$, $i$) AS SEQ)(elem, seqno)
 >>
 
 
 // ---  COLLECTIONS - SET (QUERY) --- 
 literal_collection_set(items) ::= <<
-$items:literal_collection_set_item(); separator="\nunion\n"$
+$items:literal_collection_set_item(); separator="\nUNION\n"$
 >>
 
 literal_collection_set_item(item) ::= <<
@@ -115,10 +115,10 @@ arithmetic_expression_plus(operand1,operand2) ::= <<
 
 // --- IF EXPRESSION ---
 if_expression(if_branch,then_branch,else_branch) ::= <<
-case
-  when $if_branch$ then $then_branch$
-  else $else_branch$
-end
+CASE
+  WHEN $if_branch$ THEN $then_branch$
+  ELSE $ELSE_branch$
+END
 >>
 
 
@@ -129,51 +129,51 @@ $expression$
 
 // -- ITERATOR FORALL (QUERY) ---
 feature_call_forall(source,alias,object,collection,expression) ::= <<
-not exists (
-  select $object$ from $collection$
-  where $object$ in (
-    select $object$ from $source$ as $alias$
-    where not $expression$
+NOT exists (
+  SELECT $object$ FROM $collection$
+  WHERE $object$ IN (
+    SELECT $object$ FROM $source$ AS $alias$
+    WHERE NOT $expression$
   )
 )
 >>
 
 // -- ITERATOR REJECT (QUERY) ---
 feature_call_reject(source,alias,object,collection,expression) ::= <<
-(select $object$ from $collection$
-  where $object$ in (
-    select $object$ from $source$ as $alias$
-    where not ($expression$)
+(SELECT $object$ FROM $collection$
+  WHERE $object$ IN (
+    SELECT $object$ FROM $source$ AS $alias$
+    WHERE NOT ($expression$)
   )
 )
 >>
 
 // -- ITERATOR SELECT (QUERY) ---
 feature_call_select(source,alias,object,collection,expression) ::= <<
-(select $object$ from $collection$
-  where $object$ in (
-    select $object$ from $source$ as $alias$
-    where ($expression$)
+(SELECT $object$ FROM $collection$
+  WHERE $object$ IN (
+    SELECT $object$ FROM $source$ AS $alias$
+    WHERE ($expression$)
   )
 )
 >>
 
 // --- OCLISKINDOF (CLASS AND ATTRIBUTE) ---
-feature_call_ocliskindof(source,object,alias) ::= <<
+feature_call_oclistypeof(source,object,alias) ::= <<
 exists (
-  select $object$ from $source$
-  where $object$ = $alias$.$object$)
+  SELECT $object$ FROM $source$
+  WHERE $object$ = $alias$.$object$)
 >>
   
 // --- OCLISTYPEOF (CLASS AND ATTRIBUTE) ---
-feature_call_oclistypeof(source,source2,object,alias) ::= <<
+feature_call_ocliskindof(source,source2,object,alias) ::= <<
 exists (
-  select $object$ from $source$
-  where $object$ = $alias$.$object$)
+  SELECT $object$ FROM $source$
+  WHERE $object$ = $alias$.$object$)
 $if(source2)$
-  and not exists (
-  select $object$ from $source2$
-  where $object$ = $alias$.$object$)
+  AND NOT exists (
+  SELECT $object$ FROM $source2$
+  WHERE $object$ = $alias$.$object$)
 $endif$
 >>
 
@@ -351,152 +351,152 @@ logical_expression_implies(expression1,expression2) ::= <<
 
 // --- COLLECTION RELATED OPERATIONS ---
 feature_call_count(source,element,collection,object) ::= <<
-(select
-  case 
-    when count($element$) is null then 0 
-    else count($element$)
-  end
-  from ($source$)
-  where $element$ in $collection$
-  and $element$ = $object$)
+(SELECT
+  CASE 
+    WHEN COUNT($element$) IS NULL THEN 0 
+    ELSE COUNT($element$)
+  END
+  FROM ($source$)
+  WHERE $element$ IN $collection$
+  AND $element$ = $object$)
 >>
 
 feature_call_exists(source,object,collection,expression) ::= <<
-not exists (
-  select $object$ from $collection$
-  where $object$ in (
-    select $object$ from $source$
-    where not $expression$
+NOT EXISTS (
+  SELECT $object$ FROM $collection$
+  WHERE $object$ IN (
+    SELECT $object$ FROM $source$
+    WHERE NOT $expression$
   )
 )
 >>
 
 feature_call_size(source,element,collection) ::= <<
-(select
-  case
-    when count($element$) is null then 0 
-    else count($element$)
-  end
-  from ($source$)
-  where $element$ in $collection$)  
+(SELECT
+  CASE
+    WHEN COUNT($element$) IS NULL THEN 0 
+    ELSE COUNT($element$)
+  END
+  FROM ($source$)
+  WHERE $element$ IN $collection$)  
 >>
 
 feature_call_sum(source,element,collection) ::= <<
-(select
-  case 
-    when sum($element$) is null then 0 
-    else sum($element$)
-  end
-  from $source$
-  where $element$ in $collection$)
+(SELECT
+  CASE 
+    WHEN sum($element$) IS NULL THEN 0 
+    ELSE sum($element$)
+  END
+  FROM $source$
+  WHERE $element$ IN $collection$)
 >>
 
 feature_call_excludes(object,collection) ::= <<
-$object$ not in
+$object$ NOT IN
   ($collection$)
 >>
 
 feature_call_includes(object,collection) ::= <<
-$object$ in
+$object$ IN
   ($collection$)
 >>
 
 feature_call_excludesall(collection,collection2) ::= <<
-not exists (
+NOT EXISTS (
   ($collection2$)
-  intersect
+  INTERSECT
   ($collection$))
 >>
 
 feature_call_includesall(collection,collection2) ::= <<
-not exists (
+NOT EXISTS (
   ($collection2$)
-  except
+  EXCEPT
   ($collection$))
 >>
 
 feature_call_isempty(collection) ::= <<
-not exists ($collection$)
+NOT EXISTS ($collection$)
 >>
 
 feature_call_notempty(collection) ::= <<
-exists ($collection$)
+EXISTS ($collection$)
 >>
 
 feature_call_intersection_bag(collection,collection2) ::= <<
-($collection2$ intersect all
+($collection2$ INTERSECT ALL
   $collection$)
 >>
 
 feature_call_intersection_set(collection,collection2) ::= <<
-($collection2$ intersect
+($collection2$ INTERSECT
   $collection$)
 >>
 
 feature_call_including_bag(collection,object) ::= <<
-($collection$ union all
+($collection$ UNION ALL
   ($object$))
 >>
 
 feature_call_including_sequence(collection,object) ::= <<
 ($collection$)
-  union
-  (select $object$, ((select max(SEQNO) from ($collection$)) + 1) as SEQNO)
+  UNION
+  (SELECT $object$, ((SELECT MAX(SEQNO) FROM ($collection$)) + 1) AS SEQNO)
 >>
 
 feature_call_including_set(collection,object) ::= <<
-($collection$ union
+($collection$ UNION
   ($object$))
 >>
 
 feature_call_excluding_bag(collection,object,element) ::= <<
-($collection$ except all
+($collection$ EXCEPT all
   ($object$))
 >>
 
 feature_call_excluding_sequence(collection,object,element) ::= <<
-select $element$,
-  (select count(*)+1 from (
-    select $element$, SEQNO
-    from $collection$
-    where not ($element$ = $object$)
-  ) where SEQNO < s.SEQNO) as SEQNO
-  from (
-    select $element$, SEQNO
-    from $collection$
-    where not ($element$ = $object$)
+SELECT $element$,
+  (SELECT COUNT(*)+1 FROM (
+    SELECT $element$, SEQNO
+    FROM $collection$
+    WHERE NOT ($element$ = $object$)
+  ) WHERE SEQNO < s.SEQNO) AS SEQNO
+  FROM (
+    SELECT $element$, SEQNO
+    FROM $collection$
+    WHERE NOT ($element$ = $object$)
   ) s
 >>
 
 feature_call_excluding_set(collection,object,element) ::= <<
-($collection$ except
+($collection$ EXCEPT
   ($object$))
 >>
 
 feature_call_union_bag(collection,collection2,element) ::= <<
-($collection$ union all
+($collection$ UNION ALL
   $collection2$)
 >>
 
 feature_call_union_sequence(collection,collection2,element) ::= <<
 ($collection$)
-  union
-  (select $element$, (select max(SEQNO) from ($collection$)) + SEQNO
-   from $collection2$)
+  UNION
+  (SELECT $element$, (SELECT MAX(SEQNO) FROM ($collection$)) + SEQNO
+   FROM $collection2$)
 >>
 
 feature_call_union_set(collection,collection2,element) ::= <<
-($collection$ union
+($collection$ UNION
   $collection2$)
 >>
 
 feature_call_allinstances(object,source) ::= <<
-(select $object$ from $source$)
+(SELECT $object$ FROM $source$)
 >>
 
 feature_call_symmetricdifference(collection,collection2) ::= <<
-($collection$ except $collection2$
- $collection2$ except $collection$)
+($collection$ EXCEPT $collection2$
+ $collection2$ EXCEPT $collection$)
 >>
 
 feature_call_string_concat(operand1,operand2) ::= <<
@@ -532,17 +532,17 @@ feature_call_int_div(operand1,operand2) ::= <<
 >>
 
 feature_call_int_max(operand1,operand2) ::= <<
-case
-  when $operand1$ > $operand2$ then $operand1$ 
-  else $operand2$
-end
+CASE
+  WHEN $operand1$ > $operand2$ THEN $operand1$ 
+  ELSE $operand2$
+END
 >>
 
 feature_call_int_min(operand1,operand2) ::= <<
-case 
-  when $operand1$ < $operand2$ then $operand1$ 
-  else $operand2$
-end
+CASE 
+  WHEN $operand1$ < $operand2$ THEN $operand1$ 
+  ELSE $operand2$
+END
 >>
 
 feature_call_int_mod(operand1,operand2) ::= <<

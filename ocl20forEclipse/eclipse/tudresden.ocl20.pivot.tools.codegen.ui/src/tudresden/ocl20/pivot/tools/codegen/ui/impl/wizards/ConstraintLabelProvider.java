@@ -19,7 +19,6 @@ with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
 
 package tudresden.ocl20.pivot.tools.codegen.ui.impl.wizards;
 
-
 import org.eclipse.jface.resource.JFaceResources;
 import org.eclipse.jface.resource.LocalResourceManager;
 import org.eclipse.jface.resource.ResourceManager;
@@ -55,12 +54,12 @@ public class ConstraintLabelProvider extends LabelProvider implements
 	 * </p>
 	 */
 	public ConstraintLabelProvider() {
+
 		this.resources = new LocalResourceManager(JFaceResources.getResources());
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see org.eclipse.jface.viewers.LabelProvider#getImage(java.lang.Object)
 	 */
 	@Override
@@ -68,8 +67,8 @@ public class ConstraintLabelProvider extends LabelProvider implements
 
 		Image result;
 
-		result = Ocl2CodeUIPlugIn.getImageDescriptor(CONSTRAINT_IMAGE)
-				.createImage();
+		result =
+				Ocl2CodeUIPlugIn.getImageDescriptor(CONSTRAINT_IMAGE).createImage();
 
 		return result;
 	}
@@ -94,10 +93,11 @@ public class ConstraintLabelProvider extends LabelProvider implements
 		aKind = aConstraint.getKind().getName();
 		if (aConstraint.getName() != null && !aConstraint.getName().equals("")) {
 			aBody = aConstraint.getName();
-		} else {
+		}
+		else {
 			aBody = aConstraint.getSpecification().getBody();
 		}
-		
+
 		result = aKind;
 		result += ": " + aBody;
 
@@ -106,11 +106,11 @@ public class ConstraintLabelProvider extends LabelProvider implements
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see org.eclipse.jface.viewers.BaseLabelProvider#dispose()
 	 */
 	@Override
 	public void dispose() {
+
 		this.resources.dispose();
 	}
 }

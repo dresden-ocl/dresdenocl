@@ -30,12 +30,13 @@ import org.eclipse.osgi.util.NLS;
  */
 public class Ocl2SqlUIMessages extends NLS {
 
-	private static final String BUNDLE_NAME = "tudresden.ocl20.pivot.tools.codegen.declarativ.ocl2sql.ui.internal.messages";
+	private static final String BUNDLE_NAME =
+			"tudresden.ocl20.pivot.tools.codegen.declarativ.ocl2sql.ui.internal.messages";
 
 	public static String SettingsPage_Description;
 
 	public static String SettingsPage_Title;
-	
+
 	public static String SettingsPage_DestinationLanguageLabel;
 
 	public static String SettingsPage_TablePrefixLabel;
@@ -74,6 +75,7 @@ public class Ocl2SqlUIMessages extends NLS {
 	}
 
 	private Ocl2SqlUIMessages() {
+
 		/* No implementation necessary. */
 	}
 }

@@ -37,11 +37,12 @@ public class CodegenSQLJob extends CodegenJob {
 	 * </p>
 	 * 
 	 * @param constraints
-	 *            The {@link Constraint}s for that code shall be generated.
+	 *          The {@link Constraint}s for that code shall be generated.
 	 * @param codeGenerator
-	 *            The {@link IOcl2Code} used for code generation.
+	 *          The {@link IOcl2Code} used for code generation.
 	 */
 	public CodegenSQLJob(List<Constraint> constraints, IOcl2Code<?> codeGenerator) {
+
 		super(constraints, codeGenerator);
 		logger = Ocl2SQLUIPlugIn.getLogger(CodegenSQLJob.class);
 		this.setPluginid(Ocl2SqlPlugin.ID);
@@ -60,8 +61,10 @@ public class CodegenSQLJob extends CodegenJob {
 		this.codeGenerator = codeGenerator;
 	}
 
-	protected void runCodeGenerator(List<Constraint> constraints) throws Ocl2CodeException {
-		((IOcl2DeclCode)this.codeGenerator).transformFragmentCode(constraints);
+	protected void runCodeGenerator(List<Constraint> constraints)
+			throws Ocl2CodeException {
+
+		((IOcl2DeclCode) this.codeGenerator).transformFragmentCode(constraints);
 	}
 
 }

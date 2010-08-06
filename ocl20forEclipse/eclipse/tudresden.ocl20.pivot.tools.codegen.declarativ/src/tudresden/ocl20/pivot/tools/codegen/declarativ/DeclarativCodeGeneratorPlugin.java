@@ -16,7 +16,8 @@ import tudresden.ocl20.logging.LoggingPlugin;
 public class DeclarativCodeGeneratorPlugin extends Plugin {
 
 	/** The plug-in ID. */
-	public static final String ID = "tudresden.ocl20.pivot.tools.codegen.declarativ"; //$NON-NLS-1$
+	public static final String ID =
+			"tudresden.ocl20.pivot.tools.codegen.declarativ"; //$NON-NLS-1$
 
 	/** The shared instance. */
 	private static DeclarativCodeGeneratorPlugin plugin;
@@ -27,6 +28,7 @@ public class DeclarativCodeGeneratorPlugin extends Plugin {
 	 * </p>
 	 */
 	public DeclarativCodeGeneratorPlugin() {
+
 		plugin = this;
 	}
 

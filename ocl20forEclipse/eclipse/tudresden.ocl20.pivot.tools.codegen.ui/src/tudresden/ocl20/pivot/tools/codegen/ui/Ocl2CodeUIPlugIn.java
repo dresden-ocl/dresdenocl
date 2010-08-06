@@ -36,7 +36,8 @@ import tudresden.ocl20.logging.LoggingPlugin;
 public class Ocl2CodeUIPlugIn extends AbstractUIPlugin {
 
 	/** The plug-in ID. */
-	public static final String PLUGIN_ID = "tudresden.ocl20.pivot.tools.codegen.ui";
+	public static final String PLUGIN_ID =
+			"tudresden.ocl20.pivot.tools.codegen.ui";
 
 	/** The shared instance. */
 	private static Ocl2CodeUIPlugIn plugin;
@@ -47,17 +48,18 @@ public class Ocl2CodeUIPlugIn extends AbstractUIPlugin {
 	 * </p>
 	 */
 	public Ocl2CodeUIPlugIn() {
+
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see
 	 * org.eclipse.ui.plugin.AbstractUIPlugin#start(org.osgi.framework.BundleContext
 	 * )
 	 */
 	@Override
 	public void start(BundleContext context) throws Exception {
+
 		super.start(context);
 		plugin = this;
 
@@ -67,13 +69,13 @@ public class Ocl2CodeUIPlugIn extends AbstractUIPlugin {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see
 	 * org.eclipse.ui.plugin.AbstractUIPlugin#stop(org.osgi.framework.BundleContext
 	 * )
 	 */
 	@Override
 	public void stop(BundleContext context) throws Exception {
+
 		plugin = null;
 		super.stop(context);
 	}
@@ -86,6 +88,7 @@ public class Ocl2CodeUIPlugIn extends AbstractUIPlugin {
 	 * @return the shared instance
 	 */
 	public static Ocl2CodeUIPlugIn getDefault() {
+
 		return plugin;
 	}
 
@@ -96,10 +99,11 @@ public class Ocl2CodeUIPlugIn extends AbstractUIPlugin {
 	 * </p>
 	 * 
 	 * @param path
-	 *            the path
+	 *          the path
 	 * @return the image descriptor
 	 */
 	public static ImageDescriptor getImageDescriptor(String path) {
+
 		return imageDescriptorFromPlugin(PLUGIN_ID, path);
 	}
 
@@ -110,11 +114,12 @@ public class Ocl2CodeUIPlugIn extends AbstractUIPlugin {
 	 * </p>
 	 * 
 	 * @param clazz
-	 *            the class to return the logger for
+	 *          the class to return the logger for
 	 * 
 	 * @return a log4j <code>Logger</code> instance
 	 */
 	public static Logger getLogger(Class<?> clazz) {
+
 		return LoggingPlugin.getLogManager(plugin).getLogger(clazz);
 	}
 }

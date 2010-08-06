@@ -46,8 +46,8 @@ public interface ITemplateEngineRegistryListener {
 
 	/**
 	 * <p>
-	 * This method is called when a {@link ITemplateEngine templateEngine} has been added to a
-	 * {@link ITemplateEngineRegistry}.
+	 * This method is called when a {@link ITemplateEngine templateEngine} has
+	 * been added to a {@link ITemplateEngineRegistry}.
 	 * </p>
 	 * 
 	 * @param event
@@ -57,8 +57,8 @@ public interface ITemplateEngineRegistryListener {
 
 	/**
 	 * <p>
-	 * This method is called when a {@link ITemplateEngine templateEngine} has been removed from a
-	 * {@link ITemplateEngineRegistry}.
+	 * This method is called when a {@link ITemplateEngine templateEngine} has
+	 * been removed from a {@link ITemplateEngineRegistry}.
 	 * </p>
 	 * 
 	 * @param event

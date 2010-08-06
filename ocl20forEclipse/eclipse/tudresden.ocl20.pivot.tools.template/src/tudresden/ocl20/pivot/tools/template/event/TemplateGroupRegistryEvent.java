@@ -40,8 +40,8 @@ import tudresden.ocl20.pivot.tools.template.ITemplateGroupRegistry;
 
 /**
  * <p>
- * Represents events fired by the {@link ITemplateGroupRegistry} if a new {@link ITemplateGroup}
- * is added or removed.
+ * Represents events fired by the {@link ITemplateGroupRegistry} if a new
+ * {@link ITemplateGroup} is added or removed.
  * </p>
  * 
  * @author Bjoern Freitag
@@ -62,10 +62,11 @@ public class TemplateGroupRegistryEvent extends EventObject {
 	 * @param source
 	 *          The {@link IModelRegistry} that is the source of this event.
 	 * @param affectedTemplateGroup
-	 *          The {@link ITemplateGroup} affected by the operation that caused this
-	 *          event.
+	 *          The {@link ITemplateGroup} affected by the operation that caused
+	 *          this event.
 	 */
-	public TemplateGroupRegistryEvent(ITemplateGroupRegistry source, ITemplateGroup affectedTemplateGroup) {
+	public TemplateGroupRegistryEvent(ITemplateGroupRegistry source,
+			ITemplateGroup affectedTemplateGroup) {
 
 		super(source);
 		this.affectedTemplateGroup = affectedTemplateGroup;
@@ -73,21 +74,22 @@ public class TemplateGroupRegistryEvent extends EventObject {
 
 	/**
 	 * <p>
-	 * Returns the {@link ITemplateGroupRegistry} that is the source of this event.
+	 * Returns the {@link ITemplateGroupRegistry} that is the source of this
+	 * event.
 	 * </p>
 	 * 
 	 * @see java.util.EventObject#getSource()
 	 */
 	@Override
 	public ITemplateGroupRegistry getSource() {
-	
+
 		return (ITemplateGroupRegistry) super.getSource();
 	}
 
 	/**
 	 * <p>
-	 * Returns the {@link ITemplateGroup} that is affected by the operation that caused
-	 * this event.
+	 * Returns the {@link ITemplateGroup} that is affected by the operation that
+	 * caused this event.
 	 * </p>
 	 * 
 	 * @return An {@link ITemplateGroup} instance.
@@ -102,7 +104,8 @@ public class TemplateGroupRegistryEvent extends EventObject {
 	 * Does the same as {@link #getSource()}, but has a more concise name.
 	 * </p>
 	 * 
-	 * @return The {@link ITemplateGroupRegistry} that is the source of this event.
+	 * @return The {@link ITemplateGroupRegistry} that is the source of this
+	 *         event.
 	 */
 	public ITemplateGroupRegistry getTemplateGroupRegistry() {
 
