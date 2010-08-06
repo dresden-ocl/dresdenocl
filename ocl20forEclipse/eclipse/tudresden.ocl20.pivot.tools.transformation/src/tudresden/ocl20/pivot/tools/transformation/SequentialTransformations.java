@@ -6,7 +6,6 @@ import tudresden.ocl20.pivot.tools.codegen.IOcl2CodeSettings;
 import tudresden.ocl20.pivot.tools.transformation.exception.InvalidModelException;
 import tudresden.ocl20.pivot.tools.transformation.exception.ModelAccessException;
 import tudresden.ocl20.pivot.tools.transformation.exception.TransformationException;
-import tudresden.ocl20.pivot.tools.transformation.impl.TransformationEngine;
 /**
  * SequentialTransformations is a abstract implementation of a sequential transformation composition.
  * @author Christian Wende
@@ -24,8 +23,8 @@ public abstract class SequentialTransformations<IN extends EObject,BET,OUT> exte
 	public SequentialTransformations(String modelInName, String outName, String tid1, String tid2) throws ModelAccessException  {
 		super(modelInName, outName);
 		
-		trans1 = (ITransformation<IN, BET>) TransformationEngine.loadTransformation(tid1, modelInName, "intermediateResult");
-		trans2 = (ITransformation<BET, OUT>) TransformationEngine.loadTransformation(tid2, "intermediateResult", outName);
+		trans1 = (ITransformation<IN, BET>) TransformationPlugin.getTransformationRegistry().getTransformation(tid1, modelInName, "intermediateResult");
+		trans2 = (ITransformation<BET, OUT>) TransformationPlugin.getTransformationRegistry().getTransformation(tid2, "intermediateResult", outName);
 			
 	}
 

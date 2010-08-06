@@ -77,6 +77,22 @@ public interface ITransformationRegistry {
 
 	/**
 	 * <p>
+	 * Returns the {@link ITransformation} with the given id or <code>null</code> if no
+	 * {@link ITransformation} with that id is registered.
+	 * </p>
+	 * 
+	 * @param id
+	 *          An identifier for a {@link ITransformation} is the simpleClassName.
+	 * @param model_inName
+	 * 			the name of the in model
+	 * @param model_OutName
+	 * 			the name of the out model 
+	 * @return An {@link ITransformation} instance or <code>null</code>.
+	 */
+	ITransformation<?,?> getTransformation(String id, String model_inName, String model_OutName);
+	
+	/**
+	 * <p>
 	 * Returns all {@link ITransformation}s registered with this
 	 * {@link ITransformationRegistry}.
 	 * </p>

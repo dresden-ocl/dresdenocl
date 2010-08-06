@@ -10,7 +10,6 @@ import tudresden.ocl20.pivot.tools.codegen.IOcl2CodeSettings;
 import tudresden.ocl20.pivot.tools.transformation.exception.InvalidModelException;
 import tudresden.ocl20.pivot.tools.transformation.exception.ModelAccessException;
 import tudresden.ocl20.pivot.tools.transformation.exception.TransformationException;
-import tudresden.ocl20.pivot.tools.transformation.impl.TransformationEngine;
 import tudresden.ocl20.pivot.tools.transformation.impl.Tuple;
 
 /**
@@ -43,8 +42,8 @@ public abstract class ParallelTransformations<IN extends EObject, A ,B> extends 
 	protected ParallelTransformations(String modelInName, String outName, String tid1, String tid2) throws ModelAccessException {
 		super(modelInName, outName);
 		
-		trans1 = (ITransformation<IN, A>) TransformationEngine.loadTransformation(tid1, modelInName, outName);
-		trans2 = (ITransformation<IN, B>) TransformationEngine.loadTransformation(tid2, modelInName, outName);
+		trans1 = (ITransformation<IN, A>) TransformationPlugin.getTransformationRegistry().getTransformation(tid1, modelInName, outName);
+		trans2 = (ITransformation<IN, B>) TransformationPlugin.getTransformationRegistry().getTransformation(tid2, modelInName, outName);
 			
 		
 	}

@@ -1267,7 +1267,7 @@ public class RelationalPackageImpl extends EPackageImpl implements RelationalPac
 	 * method is guarded to have no affect on any invocation but its first.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public void initializePackageContents() {
 		if (isInitialized) return;
@@ -1288,6 +1288,7 @@ public class RelationalPackageImpl extends EPackageImpl implements RelationalPac
 
 		// Add subpackages
 		getESubpackages().add(theEnumerationsPackage);
+		getESubpackages().add(theDatatypesPackage);
 
 		// Create type parameters
 
