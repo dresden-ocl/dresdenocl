@@ -116,7 +116,6 @@ public class Ocl2Sql implements IOcl2DeclCode {
 
 		this.codeGenerator = new Ocl2DeclCode();
 		this.codeGenerator.setSettings(this.getSettings());
-		long date1 = System.currentTimeMillis();
 		if (this.getSettings().isSaveCode()) {
 			Pivot2DdlAndMappedModel pdamm;
 			try {
@@ -166,8 +165,7 @@ public class Ocl2Sql implements IOcl2DeclCode {
 			}
 			saveToFile(output, dateString.concat("_view") + ".sql");
 		}
-		System.out.println("ZEIT:" + (System.currentTimeMillis() - date1) + "ms");
-
+		
 		return constraintList;
 	}
 
