@@ -41,7 +41,10 @@ public class Pivot2MappedModelImpl extends
 			.getLogger(Pivot2MappedModelImpl.class);
 
 	private static final String PART_CLASS =
-			"The partitipants of an Association must be UmlClasses.";
+			"The partitipants of an Association must be Types.";
+	
+	private static final String ASS_ROLE =
+		"The Roles at the AssociationEnds must be named.";
 
 	private IOcl2DeclSettings ocl2DeclSettings;
 
@@ -270,55 +273,53 @@ public class Pivot2MappedModelImpl extends
 		return mc;
 	}
 
-	private int assTabCounter = 0;
-
-	private String getUniqueAssTabName() {
-
-		assTabCounter++;
-		return "ASSTAB" + assTabCounter;
-	}
-
 	private void map_association2guide(AssociationProperty property)
 			throws InvalidModelException {
 
-		String assName = property.getName();
-		if (assName == null)
-			assName = getUniqueAssTabName();
-
 		String assTableName =
-				this.ocl2DeclSettings.getAssociationTablePrefix() + assName;
+				ocl2DeclSettings.getUniqueAssociationTableName(property);
 
-		Type cA = property.getType();
+		Type tA = property.getType();
 		String nameA = property.getName();
 
 		Property pB = property.getInverseAssociationProperties().get(0);
-		Type cB = pB.getType();
+		Type tB = pB.getType();
 		String nameB = pB.getName();
 
+		if (nameA == null || nameA.equals("")) {
+			throw new InvalidModelException(ASS_ROLE + "[" + assTableName + ", "
+					+ tA.getName() + "]", this.model_in, this);
+		}
+
+		if (nameB == null || nameB.equals("")) {
+			throw new InvalidModelException(ASS_ROLE + "[" + assTableName + ", "
+					+ tB.getName() + "]", this.model_in, this);
+		}
+		
 		Type typeA = null;
-		if (!(pivotModelAnalyser.instanceIsOfType(cA, Type.class))) {
-			throw new InvalidModelException(PART_CLASS + "[" + assName + ", "
-					+ cA.getName() + "]", this.model_in, this);
+		if (!(pivotModelAnalyser.instanceIsOfType(tA, Type.class))) {
+			throw new InvalidModelException(PART_CLASS + "[" + assTableName + ", "
+					+ tA.getName() + "]", this.model_in, this);
 		}
 		else {
-			if (!pivotModelAnalyser.instanceIsOfType(cA, CollectionType.class)) {
-				typeA = (Type) cA;
+			if (!pivotModelAnalyser.instanceIsOfType(tA, CollectionType.class)) {
+				typeA = (Type) tA;
 			}
 			else {
-				typeA = ((CollectionType) cA).getElementType();
+				typeA = ((CollectionType) tA).getElementType();
 			}
 		}
 		Type typeB = null;
-		if (!(pivotModelAnalyser.instanceIsOfType(cB, Type.class))) {
-			throw new InvalidModelException(PART_CLASS + "[" + assName + ", "
-					+ cB.getName() + "]", this.model_in, this);
+		if (!(pivotModelAnalyser.instanceIsOfType(tB, Type.class))) {
+			throw new InvalidModelException(PART_CLASS + "[" + assTableName + ", "
+					+ tB.getName() + "]", this.model_in, this);
 		}
 		else {
-			if (!pivotModelAnalyser.instanceIsOfType(cB, CollectionType.class)) {
-				typeB = (Type) cB;
+			if (!pivotModelAnalyser.instanceIsOfType(tB, CollectionType.class)) {
+				typeB = (Type) tB;
 			}
 			else {
-				typeB = ((CollectionType) cB).getElementType();
+				typeB = ((CollectionType) tB).getElementType();
 			}
 		}
 

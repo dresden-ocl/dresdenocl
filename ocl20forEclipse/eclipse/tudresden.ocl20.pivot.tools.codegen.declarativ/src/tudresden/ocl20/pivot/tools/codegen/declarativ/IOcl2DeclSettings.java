@@ -1,5 +1,6 @@
 package tudresden.ocl20.pivot.tools.codegen.declarativ;
 
+import tudresden.ocl20.pivot.pivotmodel.Property;
 import tudresden.ocl20.pivot.tools.codegen.IOcl2CodeSettings;
 import tudresden.ocl20.pivot.tools.codegen.declarativ.mapping.IMappedModel;
 
@@ -35,5 +36,7 @@ public interface IOcl2DeclSettings extends IOcl2CodeSettings {
 	public void setForeignKeyPrefix(String foreignKeyPrefix);
 
 	public String getForeignKeyPrefix();
-
+	
+	public String getUniqueAssociationTableName(Property property);
+	
 }

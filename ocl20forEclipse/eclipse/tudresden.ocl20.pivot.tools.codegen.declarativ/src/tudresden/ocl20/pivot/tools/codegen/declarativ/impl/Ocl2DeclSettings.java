@@ -1,8 +1,13 @@
 package tudresden.ocl20.pivot.tools.codegen.declarativ.impl;
 
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
+import tudresden.ocl20.pivot.pivotmodel.AssociationProperty;
+import tudresden.ocl20.pivot.pivotmodel.Property;
 import tudresden.ocl20.pivot.tools.codegen.declarativ.IOcl2DeclSettings;
 import tudresden.ocl20.pivot.tools.codegen.declarativ.mapping.IMappedModel;
 import tudresden.ocl20.pivot.tools.template.ITemplateGroup;
@@ -25,6 +30,8 @@ public class Ocl2DeclSettings implements IOcl2DeclSettings {
 
 	protected boolean saveCode;
 
+	protected Map<Property, String> associationTableName;
+
 	public Ocl2DeclSettings() {
 
 		this.constraintFolder = "constraint";
@@ -32,6 +39,7 @@ public class Ocl2DeclSettings implements IOcl2DeclSettings {
 		this.templateGroup = null;
 		this.mappedModel = null;
 		this.prefix = new HashMap<String, String>();
+		this.associationTableName = new HashMap<Property,String>();
 		setDefaultPrefix();
 	}
 
@@ -155,5 +163,60 @@ public class Ocl2DeclSettings implements IOcl2DeclSettings {
 		prefix.put("primarykey", "PK_");
 		prefix.put("foreignkey", "FK_");
 	}
+
+	public String getUniqueAssociationTableName(
+			Property property) {
+		String result = getUniqueAssTableName(property);
+		if (result == null) {
+				result = generateUniqueAssName(property);
+		}
+		return getAssociationTablePrefix() + result;
+	}
+
+	private String getUniqueAssTableName(Property property) {
+
+		return associationTableName.get(property);
+	}
+
+	private String generateUniqueAssName(Property property) {
+		
+		List<String> resultList = new LinkedList<String>();
+		String delimiter = "_";
+		String assName = "";
+
+		resultList.add(property.getName());
+		if (property instanceof AssociationProperty) {
+			for (AssociationProperty prop : ((AssociationProperty)property)
+					.getInverseAssociationProperties()) {
+				resultList.add(prop.getName());
+			}
+			Collections.sort(resultList);
+			for (String s : resultList) {
+				assName += delimiter + s;
+			}
+			assName = assName.substring(1);
+		} else {
+			resultList.remove(0);
+			assName = resultList.remove(0) + delimiter + property.getOwner().getName();
+		}
+		int i = 0;
+		String result = assName;
+		while (checkAssociationTableName(result)) {
+			result = assName + delimiter + ++i;
+		}
+		associationTableName.put(property, result);
+		if (property instanceof AssociationProperty) {
+			for (AssociationProperty prop : ((AssociationProperty)property).getInverseAssociationProperties()) {
+				associationTableName.put(prop,result);
+			}
+		}
+			
+		return result;
+	}
+	
+	private boolean checkAssociationTableName(String assName) {
+		return associationTableName.containsValue(assName);
+	}
+
 
 }

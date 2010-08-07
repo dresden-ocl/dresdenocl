@@ -97,8 +97,6 @@ public class Pivot2CwmImpl extends M2MTransformation<Namespace, Schema> {
 
 	private PivotModelAnalyser pivotModelAnalyser;
 
-	private int assTabCounter = 0;
-
 	public Pivot2CwmImpl() {
 
 		super();
@@ -194,12 +192,6 @@ public class Pivot2CwmImpl extends M2MTransformation<Namespace, Schema> {
 
 	}
 
-	private String getUniqueAssTabName() {
-
-		assTabCounter++;
-		return "ASSTAB" + assTabCounter;
-	}
-
 	private void map_type2table(Type type) throws InvalidModelException {
 
 		if (this.ocl2DeclSettings.getModus() == Ocl2DeclSettings.MODUS_TYPED) {
@@ -261,12 +253,9 @@ public class Pivot2CwmImpl extends M2MTransformation<Namespace, Schema> {
 
 		/** INITIALISATION PHASE **/
 
-		String assName = property.getName();
-		if (assName == null)
-			assName = getUniqueAssTabName();
-
 		String assTableName =
-				this.ocl2DeclSettings.getAssociationTablePrefix() + assName;
+			ocl2DeclSettings.getUniqueAssociationTableName(property);
+
 
 		Type tA = property.getType();
 		String nameA = property.getName();
@@ -277,18 +266,18 @@ public class Pivot2CwmImpl extends M2MTransformation<Namespace, Schema> {
 		String nameB = pB.getName();
 
 		if (nameA == null || nameA.equals("")) {
-			throw new InvalidModelException(ASS_ROLE + "[" + assName + ", "
+			throw new InvalidModelException(ASS_ROLE + "[" + assTableName + ", "
 					+ tA.getName() + "]", this.model_in, this);
 		}
 
 		if (nameB == null || nameB.equals("")) {
-			throw new InvalidModelException(ASS_ROLE + "[" + assName + ", "
+			throw new InvalidModelException(ASS_ROLE + "[" + assTableName + ", "
 					+ tB.getName() + "]", this.model_in, this);
 		}
 
 		Type typeA = null;
 		if (!(pivotModelAnalyser.instanceIsOfType(tA, Type.class))) {
-			throw new InvalidModelException(PART_CLASS + "[" + assName + ", "
+			throw new InvalidModelException(PART_CLASS + "[" + assTableName + ", "
 					+ tA.getName() + "]", this.model_in, this);
 		}
 		else {
@@ -301,7 +290,7 @@ public class Pivot2CwmImpl extends M2MTransformation<Namespace, Schema> {
 		}
 		Type typeB = null;
 		if (!(pivotModelAnalyser.instanceIsOfType(tB, Type.class))) {
-			throw new InvalidModelException(PART_CLASS + "[" + assName + ", "
+			throw new InvalidModelException(PART_CLASS + "[" + assTableName + ", "
 					+ tB.getName() + "]", this.model_in, this);
 		}
 		else {
