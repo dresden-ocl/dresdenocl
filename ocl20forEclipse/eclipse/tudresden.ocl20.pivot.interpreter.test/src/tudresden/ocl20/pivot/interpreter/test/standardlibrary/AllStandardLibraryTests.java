@@ -30,7 +30,7 @@ import org.junit.runners.Suite;
  * @author Claas Wilke
  */
 @RunWith(Suite.class)
-@Suite.SuiteClasses( { TestBoolean.class, TestCollection.class,
+@Suite.SuiteClasses({ TestBag.class, TestBoolean.class, TestCollection.class,
 		TestIterator.class, TestOrderedSet.class })
 public class AllStandardLibraryTests {
 	/*

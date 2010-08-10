@@ -1,0 +1,8 @@
+package package1
+
+context Class1
+-- The order of bags is not necessary.
+inv testBagEquals01:
+	Bag{{1, 2, 3, 4, 5}} = Bag{{5, 4, 3, 2, 1}}
+
+endpackage
