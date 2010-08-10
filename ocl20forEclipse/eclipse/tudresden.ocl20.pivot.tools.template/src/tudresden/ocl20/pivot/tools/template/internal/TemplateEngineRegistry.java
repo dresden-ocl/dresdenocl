@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IExtension;
 import org.eclipse.core.runtime.IExtensionPoint;
@@ -303,7 +304,7 @@ public class TemplateEngineRegistry implements ITemplateEngineRegistry,
 	public void added(IExtension[] extensions) {
 
 		if (LOGGER.isDebugEnabled()) {
-			LOGGER.debug("removed(extensions=" + extensions + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+			LOGGER.debug("added(extensions=" + extensions + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 		}
 		// no else.
 
@@ -318,14 +319,9 @@ public class TemplateEngineRegistry implements ITemplateEngineRegistry,
 					ITemplateEngine templateEngine;
 					try {
 						templateEngine =
-								(ITemplateEngine) (Class.forName(this.getAttribute("class",
-										configurationElement)).newInstance());
-					} catch (InstantiationException e) {
-						templateEngine = null;
-					} catch (IllegalAccessException e) {
-						templateEngine = null;
-					} catch (ClassNotFoundException e) {
-						templateEngine = null;
+								(ITemplateEngine) configurationElement.createExecutableExtension("class");
+					} catch (CoreException e) {
+						continue;
 					}
 
 					if (templateEngine != null) {
@@ -340,7 +336,7 @@ public class TemplateEngineRegistry implements ITemplateEngineRegistry,
 		// no else.
 
 		if (LOGGER.isDebugEnabled()) {
-			LOGGER.debug("removed(IExtension[]) - exit"); //$NON-NLS-1$
+			LOGGER.debug("added(IExtension[]) - exit"); //$NON-NLS-1$
 		}
 		// no else.
 

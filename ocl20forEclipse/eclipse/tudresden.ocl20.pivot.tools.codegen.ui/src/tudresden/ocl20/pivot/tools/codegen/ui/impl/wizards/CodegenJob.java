@@ -91,7 +91,6 @@ public abstract class CodegenJob extends Job {
 	 * @seeorg.eclipse.core.runtime.jobs.Job#run(org.eclipse.core.runtime.
 	 * IProgressMonitor)
 	 */
-	@Override
 	protected IStatus run(IProgressMonitor monitor) {
 
 		IStatus result;

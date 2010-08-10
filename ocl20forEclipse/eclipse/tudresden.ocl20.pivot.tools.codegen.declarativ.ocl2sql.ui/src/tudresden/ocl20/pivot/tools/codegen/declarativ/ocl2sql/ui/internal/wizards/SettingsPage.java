@@ -109,7 +109,7 @@ public class SettingsPage extends WizardPage {
 
 		desLangCombo = new Combo(desLangGroup, SWT.READ_ONLY);
 		desLangCombo.setSize(new Point(12, 10000));
-
+		
 		for (ITemplateGroup templateGroup : TemplatePlugin
 				.getTemplateGroupRegistry().getTemplateGroups()) {
 			if (templateGroup.getDisplayName().contains("SQL")) {
@@ -122,7 +122,6 @@ public class SettingsPage extends WizardPage {
 
 		desLangCombo.addModifyListener(new ModifyListener() {
 
-			@Override
 			public void modifyText(ModifyEvent e) {
 
 				settings.setTemplateGroup(TemplatePlugin.getTemplateGroupRegistry()
@@ -165,13 +164,11 @@ public class SettingsPage extends WizardPage {
 
 		verticalButton.addSelectionListener(new SelectionListener() {
 
-			@Override
 			public void widgetSelected(SelectionEvent e) {
 
 				settings.setModus(IOcl2DeclSettings.MODUS_VERTICAL);
 			}
 
-			@Override
 			public void widgetDefaultSelected(SelectionEvent e) {
 
 				// TODO Auto-generated method stub
@@ -214,13 +211,11 @@ public class SettingsPage extends WizardPage {
 
 		intiButton.addSelectionListener(new SelectionListener() {
 
-			@Override
 			public void widgetSelected(SelectionEvent e) {
 
 				settings.setSaveCode(false);
 			}
 
-			@Override
 			public void widgetDefaultSelected(SelectionEvent e) {
 
 				// TODO Auto-generated method stub
@@ -267,7 +262,6 @@ public class SettingsPage extends WizardPage {
 
 		tablePrefixCombo.addModifyListener(new ModifyListener() {
 
-			@Override
 			public void modifyText(ModifyEvent e) {
 
 				settings.setTablePrefix(tablePrefixCombo.getText());
@@ -286,7 +280,6 @@ public class SettingsPage extends WizardPage {
 		objectViewPrefixCombo.setText(settings.getObjectViewPrefix());
 		objectViewPrefixCombo.addModifyListener(new ModifyListener() {
 
-			@Override
 			public void modifyText(ModifyEvent e) {
 
 				settings.setObjectViewPrefix(objectViewPrefixCombo.getText());
@@ -306,7 +299,6 @@ public class SettingsPage extends WizardPage {
 
 		associationPrefixCombo.addModifyListener(new ModifyListener() {
 
-			@Override
 			public void modifyText(ModifyEvent e) {
 
 				settings.setAssociationTablePrefix(associationPrefixCombo.getText());
@@ -346,7 +338,6 @@ public class SettingsPage extends WizardPage {
 
 		primaryPrefixCombo.addModifyListener(new ModifyListener() {
 
-			@Override
 			public void modifyText(ModifyEvent e) {
 
 				settings.setPrimaryKeyPrefix(primaryPrefixCombo.getText());
@@ -365,7 +356,6 @@ public class SettingsPage extends WizardPage {
 
 		foreignPrefixCombo.addModifyListener(new ModifyListener() {
 
-			@Override
 			public void modifyText(ModifyEvent e) {
 
 				settings.setForeignKeyPrefix(foreignPrefixCombo.getText());
@@ -396,7 +386,6 @@ public class SettingsPage extends WizardPage {
 	 * org.eclipse.jface.dialogs.IDialogPage#createControl(org.eclipse.swt.widgets
 	 * .Composite)
 	 */
-	@Override
 	public void createControl(Composite parent) {
 
 		Composite panel;
@@ -425,7 +414,6 @@ public class SettingsPage extends WizardPage {
 		/* Add selection listener. */
 		restoreDefaultsButton.addMouseListener(new AbstractMouseListener() {
 
-			@Override
 			public void mouseUp(MouseEvent e) {
 
 				restoreDefaults();

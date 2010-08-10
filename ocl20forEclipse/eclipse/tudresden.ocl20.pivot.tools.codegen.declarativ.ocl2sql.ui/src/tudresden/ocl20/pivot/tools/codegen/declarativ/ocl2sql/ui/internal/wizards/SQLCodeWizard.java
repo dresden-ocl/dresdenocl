@@ -66,7 +66,6 @@ public class SQLCodeWizard extends TransformCodeWizard implements INewWizard {
 	 * (non-Javadoc)
 	 * @see org.eclipse.jface.wizard.IWizard#addPages()
 	 */
-	@Override
 	public void addPages() {
 
 		super.addPages();
@@ -79,7 +78,6 @@ public class SQLCodeWizard extends TransformCodeWizard implements INewWizard {
 	 * @see org.eclipse.ui.IWorkbenchWizard#init(org.eclipse.ui.IWorkbench,
 	 * org.eclipse.jface.viewers.IStructuredSelection)
 	 */
-	@Override
 	public void init(IWorkbench workbench, IStructuredSelection selection) {
 
 		super.init(workbench, selection);
@@ -96,7 +94,6 @@ public class SQLCodeWizard extends TransformCodeWizard implements INewWizard {
 		// no else.
 	}
 
-	@Override
 	protected void setCodeGenerator() {
 
 		/* Try Initialize the code generator. */
@@ -118,7 +115,6 @@ public class SQLCodeWizard extends TransformCodeWizard implements INewWizard {
 		}
 	}
 
-	@Override
 	protected CodegenJob getCodegenJob(List<Constraint> constraints) {
 
 		CodegenSQLJob codegenJob =
