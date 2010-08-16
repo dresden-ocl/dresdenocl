@@ -1,0 +1,29 @@
+<project>
+	<import file="./../scala.library/build.xml"/>
+	
+	<target name="Clean org.kiama.attribution">
+		<delete>
+			<fileset dir="./../org.kiama.attribution/bin">
+				<include name="**/*.class"/>
+			</fileset>
+		</delete>
+		<antcall target="Compile org.kiama.attribution" />
+	</target>
+	
+	<target name="Compile org.kiama.attribution" depends="Scala Compiler Init">		
+		
+		<echo message="Compile Scala Code" />
+		<scalac
+				srcdir="./../org.kiama.attribution/src"
+				destdir="./../org.kiama.attribution/bin"
+				classpathref="build.classpath"
+				includes="**/*.scala">
+		</scalac>
+		
+		<!-- delete scala source files in output folder -->
+		<echo message="Delete .scala files from bin folder" />
+		<delete>
+			<fileset dir="./../org.kiama.attribution/bin" includes="**/*.scala" />
+		</delete>
+	</target>
+</project>

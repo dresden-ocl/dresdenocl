@@ -106,4 +106,7 @@ trait AttributableEObject extends EObject with Attributable {
   
   override def eSetDeliver(b : Boolean) = eObject.eSetDeliver(b)
   
+  // this is due to EMF 2.6
+  override def eInvoke(operation : EOperation, arguments : EList[_]) = eObject.eInvoke(operation, arguments)
+  
 }
