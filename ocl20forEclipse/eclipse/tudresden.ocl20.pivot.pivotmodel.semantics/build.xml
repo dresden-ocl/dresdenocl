@@ -1,0 +1,28 @@
+<project>
+	<import file="./../scala.library/build.xml"/>
+	<import file="./../org.kiama.attribution/build.xml"/>
+	
+	<target name="Clean tudresden.ocl20.pivot.pivotmodel.semantics" depends="Clean org.kiama.attribution">
+		<delete>
+			<fileset dir="./../tudresden.ocl20.pivot.pivotmodel.semantics/bin">
+				<include name="**/*.class"/>
+			</fileset>
+		</delete>
+		<antcall target="Compile tudresden.ocl20.pivot.pivotmodel.semantics" />
+	</target>
+	
+	<target name="Compile tudresden.ocl20.pivot.pivotmodel.semantics" depends="Scala Compiler Init,Compile org.kiama.attribution">
+		<!-- scala compiler -->
+			<scalac
+				srcdir="./../tudresden.ocl20.pivot.pivotmodel.semantics/src-gen"
+				destdir="./../tudresden.ocl20.pivot.pivotmodel.semantics/bin"
+				classpathref="build.classpath">
+				<include name="**/*.scala" />
+			</scalac>
+		 
+		<!-- delete scala source files in output folder -->
+		<delete>
+			<fileset dir="./../tudresden.ocl20.pivot.pivotmodel.semantics/bin" includes="**/*.scala" />
+		</delete>
+	</target>
+</project>
