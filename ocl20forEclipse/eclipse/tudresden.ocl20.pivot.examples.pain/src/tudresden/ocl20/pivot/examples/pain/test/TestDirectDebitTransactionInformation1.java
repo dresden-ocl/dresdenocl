@@ -20,7 +20,6 @@ package tudresden.ocl20.pivot.examples.pain.test;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.fail;
 
 import java.util.Arrays;
 import java.util.List;
@@ -1672,8 +1671,6 @@ public class TestDirectDebitTransactionInformation1 extends AbstractPainTest {
 	 */
 	@Test
 	public void testUltimateDebtorGuideline01() throws Throwable {
-	
-		fail("The parsing of this constraint fails for some reason.");
 		
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(CONSTRAINT_DIRECTORY
@@ -1696,8 +1693,6 @@ public class TestDirectDebitTransactionInformation1 extends AbstractPainTest {
 	 */
 	@Test
 	public void testUltimateDebtorGuideline02() throws Throwable {
-	
-		fail("The parsing of this constraint fails for some reason.");
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(CONSTRAINT_DIRECTORY
@@ -1721,8 +1716,6 @@ public class TestDirectDebitTransactionInformation1 extends AbstractPainTest {
 	 */
 	@Test
 	public void testUltimateDebtorGuideline03() throws Throwable {
-	
-		fail("The parsing of this constraint fails for some reason.");
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(CONSTRAINT_DIRECTORY

@@ -337,6 +337,8 @@ public class ModelInstancesView extends ViewPart implements
 	 */
 	public void selectionChanged(IWorkbenchPart part, ISelection selection) {
 
+		this.myModelObjectFilter.clearFilter();
+		
 		/*
 		 * TODO Claas: Disabled filter because it is more confusing then helpful
 		 * here.

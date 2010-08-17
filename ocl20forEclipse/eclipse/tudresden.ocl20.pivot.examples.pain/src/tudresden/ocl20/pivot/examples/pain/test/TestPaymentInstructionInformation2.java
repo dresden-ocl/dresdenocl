@@ -20,7 +20,6 @@ package tudresden.ocl20.pivot.examples.pain.test;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.fail;
 
 import java.util.Arrays;
 import java.util.List;
@@ -993,8 +992,6 @@ public class TestPaymentInstructionInformation2 extends AbstractPainTest {
 	@Test
 	public void testEpcCdtrSchemeIdUnusedFull01() throws Throwable {
 
-		fail("The parser does not like this constraint and crashes for some reason.");
-
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(CONSTRAINT_DIRECTORY
 				+ "/epcCdtrSchemeIdUnusedFull", MODELINSTANCE_NAME_01, Arrays
@@ -1017,8 +1014,6 @@ public class TestPaymentInstructionInformation2 extends AbstractPainTest {
 	@Test
 	public void testEpcCdtrSchemeIdUnusedFull02() throws Throwable {
 
-		fail("The parser does not like this constraint and crashes for some reason.");
-
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(CONSTRAINT_DIRECTORY
 				+ "/epcCdtrSchemeIdUnusedFull", MODELINSTANCE_NAME_02, Arrays
@@ -1039,8 +1034,6 @@ public class TestPaymentInstructionInformation2 extends AbstractPainTest {
 	 */
 	@Test
 	public void testEpcCdtrSchemeIdUnusedFull03() throws Throwable {
-
-		fail("The parser does not like this constraint and crashes for some reason.");
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(CONSTRAINT_DIRECTORY
@@ -1584,8 +1577,6 @@ public class TestPaymentInstructionInformation2 extends AbstractPainTest {
 	@Test
 	public void testUltimateCreditorGuideline01() throws Throwable {
 	
-		fail("The parsing of this constraint fails for some reason.");
-
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(CONSTRAINT_DIRECTORY
 				+ "/ultimateCreditorGuideline", MODELINSTANCE_NAME_01, Arrays
@@ -1607,8 +1598,6 @@ public class TestPaymentInstructionInformation2 extends AbstractPainTest {
 	 */
 	@Test
 	public void testUltimateCreditorGuideline02() throws Throwable {
-	
-		fail("The parsing of this constraint fails for some reason.");
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(CONSTRAINT_DIRECTORY
@@ -1630,8 +1619,6 @@ public class TestPaymentInstructionInformation2 extends AbstractPainTest {
 	 */
 	@Test
 	public void testUltimateCreditorGuideline03() throws Throwable {
-	
-		fail("The parsing of this constraint fails for some reason.");
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(CONSTRAINT_DIRECTORY
@@ -1654,8 +1641,6 @@ public class TestPaymentInstructionInformation2 extends AbstractPainTest {
 	 */
 	@Test
 	public void testUltimateCreditorIndrctDbtTxInfGuideline01() throws Throwable {
-	
-		fail("The parsing of this constraint fails for some reason.");
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(CONSTRAINT_DIRECTORY
@@ -1678,8 +1663,6 @@ public class TestPaymentInstructionInformation2 extends AbstractPainTest {
 	 */
 	@Test
 	public void testUltimateCreditorIndrctDbtTxInfGuideline02() throws Throwable {
-	
-		fail("The parsing of this constraint fails for some reason.");
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(CONSTRAINT_DIRECTORY
@@ -1701,8 +1684,6 @@ public class TestPaymentInstructionInformation2 extends AbstractPainTest {
 	 */
 	@Test
 	public void testUltimateCreditorIndrctDbtTxInfGuideline03() throws Throwable {
-	
-		fail("The parsing of this constraint fails for some reason.");
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(CONSTRAINT_DIRECTORY

@@ -2,6 +2,6 @@ package tudresden::ocl20::pivot::examples::royalsandloyals
 
 -- Check static property calls.
 context Transaction
-inv: date.isBefore(Date.now)
+inv: date.isBefore(Date::now)
 
 endpackage
