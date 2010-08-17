@@ -1,9 +1,12 @@
 <project>
 	<import file="./../scala.library/build.xml"/>
 	
+	<property name="attributionBin" value="./../org.kiama.attribution/bin"/>
+	
 	<target name="Clean org.kiama.attribution">
+		<mkdir dir="${attributionBin}"/>
 		<delete>
-			<fileset dir="./../org.kiama.attribution/bin">
+			<fileset dir="${attributionBin}">
 				<include name="**/*.class"/>
 			</fileset>
 		</delete>
@@ -13,9 +16,10 @@
 	<target name="Compile org.kiama.attribution" depends="Scala Compiler Init">		
 		
 		<echo message="Compile Scala Code" />
+		<mkdir dir="${attributionBin}"/>
 		<scalac
 				srcdir="./../org.kiama.attribution/src"
-				destdir="./../org.kiama.attribution/bin"
+				destdir="${attributionBin}"
 				classpathref="build.classpath"
 				includes="**/*.scala">
 		</scalac>
@@ -23,7 +27,7 @@
 		<!-- delete scala source files in output folder -->
 		<echo message="Delete .scala files from bin folder" />
 		<delete>
-			<fileset dir="./../org.kiama.attribution/bin" includes="**/*.scala" />
+			<fileset dir="${attributionBin}" includes="**/*.scala" />
 		</delete>
 	</target>
 </project>

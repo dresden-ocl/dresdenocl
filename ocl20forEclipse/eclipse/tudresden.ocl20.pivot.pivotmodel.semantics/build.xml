@@ -1,10 +1,13 @@
-<project>
+<project>	
 	<import file="./../scala.library/build.xml"/>
 	<import file="./../org.kiama.attribution/build.xml"/>
 	
+	<property name="pivotmodelBin" value="./../tudresden.ocl20.pivot.pivotmodel.semantics/bin"/>
+	
 	<target name="Clean tudresden.ocl20.pivot.pivotmodel.semantics" depends="Clean org.kiama.attribution">
+		<mkdir dir="${pivotmodelBin}"/>
 		<delete>
-			<fileset dir="./../tudresden.ocl20.pivot.pivotmodel.semantics/bin">
+			<fileset dir="${pivotmodelBin}">
 				<include name="**/*.class"/>
 			</fileset>
 		</delete>
@@ -12,17 +15,18 @@
 	</target>
 	
 	<target name="Compile tudresden.ocl20.pivot.pivotmodel.semantics" depends="Scala Compiler Init,Compile org.kiama.attribution">
+		<mkdir dir="${pivotmodelBin}"/>
 		<!-- scala compiler -->
 			<scalac
 				srcdir="./../tudresden.ocl20.pivot.pivotmodel.semantics/src-gen"
-				destdir="./../tudresden.ocl20.pivot.pivotmodel.semantics/bin"
+				destdir="${pivotmodelBin}"
 				classpathref="build.classpath">
 				<include name="**/*.scala" />
 			</scalac>
 		 
 		<!-- delete scala source files in output folder -->
 		<delete>
-			<fileset dir="./../tudresden.ocl20.pivot.pivotmodel.semantics/bin" includes="**/*.scala" />
+			<fileset dir="${pivotmodelBin}" includes="**/*.scala" />
 		</delete>
 	</target>
 </project>
