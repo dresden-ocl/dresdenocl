@@ -1000,8 +1000,8 @@ public class TestPaymentInstructionInformation2 extends AbstractPainTest {
 		assertNotNull(results);
 		assertEquals(2, results.size());
 
-		this.assertIsTrue(results.get(0));
-		this.assertIsTrue(results.get(1));
+		this.assertIsInvalid(results.get(0));
+		this.assertIsInvalid(results.get(1));
 	}
 
 	/**
@@ -1022,7 +1022,7 @@ public class TestPaymentInstructionInformation2 extends AbstractPainTest {
 		assertNotNull(results);
 		assertEquals(1, results.size());
 
-		this.assertIsTrue(results.get(0));
+		this.assertIsInvalid(results.get(0));
 	}
 
 	/**
@@ -1043,8 +1043,8 @@ public class TestPaymentInstructionInformation2 extends AbstractPainTest {
 		assertNotNull(results);
 		assertEquals(2, results.size());
 
-		this.assertIsTrue(results.get(0));
-		this.assertIsTrue(results.get(1));
+		this.assertIsInvalid(results.get(0));
+		this.assertIsInvalid(results.get(1));
 	}
 
 	/**

@@ -153,6 +153,21 @@ public abstract class AbstractPainTest {
 	/**
 	 * <p>
 	 * Helper method to assert that a given {@link IInterpretationResult} is
+	 * <code>invalid</code>.
+	 * </p>
+	 * 
+	 * @param result
+	 *            The {@link IInterpretationResult} to be checked.
+	 * @throws Throwable
+	 */
+	protected void assertIsInvalid(IInterpretationResult result) throws Throwable {
+	
+		assertTrue(result.getResult().oclIsInvalid().isTrue());
+	}
+
+	/**
+	 * <p>
+	 * Helper method to assert that a given {@link IInterpretationResult} is
 	 * <code>true</code>.
 	 * </p>
 	 * 
