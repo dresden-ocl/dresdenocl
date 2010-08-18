@@ -22,9 +22,9 @@ package tudresden.ocl20.pivot.ocl2parser.test.expressions;
 import org.junit.Test;
 
 import tudresden.ocl20.pivot.essentialocl.expressions.WellformednessException;
-import tudresden.ocl20.pivot.ocl2parser.parser.exceptions.SemanticException;
 import tudresden.ocl20.pivot.ocl2parser.test.TestPerformer;
 import tudresden.ocl20.pivot.parser.ParseException;
+import tudresden.ocl20.pivot.parser.SemanticException;
 
 /**
  * <p>
@@ -124,7 +124,7 @@ public class TestIterateExpressions {
 	 * appropriately.
 	 * </p>
 	 */
-	@Test(expected = WellformednessException.class)
+	@Test(expected = SemanticException.class)
 	public void testIterateExpressionNegative02() throws Exception {
 
 		TestPerformer testPerformer;

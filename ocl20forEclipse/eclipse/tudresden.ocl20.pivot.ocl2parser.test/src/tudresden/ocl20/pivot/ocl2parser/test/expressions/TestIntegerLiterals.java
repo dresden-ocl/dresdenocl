@@ -26,9 +26,9 @@ import java.io.FileNotFoundException;
 import org.junit.Test;
 
 import tudresden.ocl20.pivot.model.ModelAccessException;
-import tudresden.ocl20.pivot.ocl2parser.parser.exceptions.SemanticException;
 import tudresden.ocl20.pivot.ocl2parser.test.TestPerformer;
 import tudresden.ocl20.pivot.ocl2parser.test.exception.MetaModelNotFoundException;
+import tudresden.ocl20.pivot.parser.SemanticException;
 
 /**
  * <p>

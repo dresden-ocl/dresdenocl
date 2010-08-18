@@ -23,6 +23,7 @@ import org.junit.Test;
 
 import tudresden.ocl20.pivot.ocl2parser.test.TestPerformer;
 import tudresden.ocl20.pivot.parser.ParseException;
+import tudresden.ocl20.pivot.parser.SemanticException;
 
 /**
  * <p>
@@ -228,7 +229,7 @@ public class TestDefinition {
 	 * A test case to parse an definition that should not be parsed appropriately.
 	 * </p>
 	 */
-	@Test(expected = ParseException.class)
+	@Test(expected = SemanticException.class)
 	public void testDefinitionNegative06() throws Exception {
 	
 		TestPerformer testPerformer;

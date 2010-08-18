@@ -21,8 +21,8 @@ package tudresden.ocl20.pivot.ocl2parser.test.expressions;
 
 import org.junit.Test;
 
-import tudresden.ocl20.pivot.essentialocl.expressions.WellformednessException;
 import tudresden.ocl20.pivot.ocl2parser.test.TestPerformer;
+import tudresden.ocl20.pivot.parser.SemanticException;
 
 /**
  * <p>
@@ -68,7 +68,7 @@ public class TestTupleLiterals {
 	 * appropriately.
 	 * </p>
 	 */
-	@Test(expected = WellformednessException.class)
+	@Test(expected = SemanticException.class)
 	public void testTupleNegative01() throws Exception {
 
 		TestPerformer testPerformer;

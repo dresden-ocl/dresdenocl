@@ -19,19 +19,19 @@ package tudresden.ocl20.pivot.ocl2parser.test;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.util.HashMap;
 import java.util.Map;
 
 import org.eclipse.core.runtime.Platform;
+import org.eclipse.emf.common.util.URI;
 import org.osgi.framework.Bundle;
 
 import tudresden.ocl20.pivot.facade.Ocl2ForEclipseFacade;
-import tudresden.ocl20.pivot.model.metamodel.IMetamodel;
+import tudresden.ocl20.pivot.language.ocl.resource.ocl.Ocl22Parser;
 import tudresden.ocl20.pivot.model.IModel;
 import tudresden.ocl20.pivot.model.IModelProvider;
 import tudresden.ocl20.pivot.model.ModelAccessException;
-import tudresden.ocl20.pivot.ocl2parser.parser.Ocl2Parser;
+import tudresden.ocl20.pivot.model.metamodel.IMetamodel;
 import tudresden.ocl20.pivot.ocl2parser.test.exception.MetaModelNotFoundException;
 import tudresden.ocl20.pivot.parser.ParseException;
 
@@ -219,11 +219,10 @@ public class TestPerformer {
 		}
 		// no else.
 
-		FileReader oclFileReader;
-		oclFileReader = new FileReader(oclFile);
-
+		URI uri = URI.createFileURI(oclFile.getAbsolutePath());
+		
 		/* Not replaced by facade method to test the different exception types. */
-		Ocl2Parser.INSTANCE.doParse(this.myModel, oclFileReader, addToModel);
+		Ocl22Parser.INSTANCE.doParse(this.myModel, uri, addToModel);
 	}
 
 	/**

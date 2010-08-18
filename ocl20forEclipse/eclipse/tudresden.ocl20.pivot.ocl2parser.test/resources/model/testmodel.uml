@@ -66,7 +66,7 @@
         </ownedParameter>
       </ownedOperation>
       <ownedOperation xmi:id="_fBjeAM22Ed62LvZ-4azseA" name="getBag">
-        <ownedParameter xmi:id="_fBjeAc22Ed62LvZ-4azseA" isUnique="false" direction="return">
+        <ownedParameter xmi:id="_fBjeAc22Ed62LvZ-4azseA" type="_RZqW4M20Ed62LvZ-4azseA" isUnique="false" direction="return">
           <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_fBjeAs22Ed62LvZ-4azseA" value="*"/>
         </ownedParameter>
       </ownedOperation>
@@ -76,17 +76,17 @@
         </ownedParameter>
       </ownedOperation>
       <ownedOperation xmi:id="_fOmbgM22Ed62LvZ-4azseA" name="getOrderedSet">
-        <ownedParameter xmi:id="_fOmbgc22Ed62LvZ-4azseA" isOrdered="true" direction="return">
+        <ownedParameter xmi:id="_fOmbgc22Ed62LvZ-4azseA" type="_RZqW4M20Ed62LvZ-4azseA" isOrdered="true" direction="return">
           <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_fOmbgs22Ed62LvZ-4azseA" value="*"/>
         </ownedParameter>
       </ownedOperation>
       <ownedOperation xmi:id="_a6CPAM22Ed62LvZ-4azseA" name="getSequence">
-        <ownedParameter xmi:id="_c9y2gM22Ed62LvZ-4azseA" isOrdered="true" isUnique="false" direction="return">
+        <ownedParameter xmi:id="_c9y2gM22Ed62LvZ-4azseA" type="_RZqW4M20Ed62LvZ-4azseA" isOrdered="true" isUnique="false" direction="return">
           <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_c9y2gc22Ed62LvZ-4azseA" value="*"/>
         </ownedParameter>
       </ownedOperation>
       <ownedOperation xmi:id="_fICggM22Ed62LvZ-4azseA" name="getSet">
-        <ownedParameter xmi:id="_fICggc22Ed62LvZ-4azseA" direction="return">
+        <ownedParameter xmi:id="_fICggc22Ed62LvZ-4azseA" type="_RZqW4M20Ed62LvZ-4azseA" direction="return">
           <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_fICggs22Ed62LvZ-4azseA" value="*"/>
         </ownedParameter>
       </ownedOperation>
