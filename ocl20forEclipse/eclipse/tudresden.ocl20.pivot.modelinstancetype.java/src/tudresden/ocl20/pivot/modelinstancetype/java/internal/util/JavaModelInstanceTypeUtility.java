@@ -9,6 +9,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import tudresden.ocl20.pivot.essentialocl.EssentialOclPlugin;
+import tudresden.ocl20.pivot.essentialocl.types.CollectionType;
 import tudresden.ocl20.pivot.model.IModel;
 import tudresden.ocl20.pivot.model.ModelConstants;
 import tudresden.ocl20.pivot.modelinstancetype.java.JavaModelInstanceTypePlugin;
@@ -96,8 +97,15 @@ public class JavaModelInstanceTypeUtility {
 
 			/* Check if exactly one generic parameter is set. */
 			if (parameterizedType.getActualTypeArguments().length == 1) {
-				result = conformsTypeToType(parameterizedType
-						.getActualTypeArguments()[0], type);
+				if (type instanceof CollectionType) {
+					// FIXME Check specific collection type here.
+					result = conformsTypeToType(parameterizedType
+							.getActualTypeArguments()[0], ((CollectionType) type).getElementType());					
+				}
+				
+				else {
+					result = false;
+				}
 			}
 
 			/*
