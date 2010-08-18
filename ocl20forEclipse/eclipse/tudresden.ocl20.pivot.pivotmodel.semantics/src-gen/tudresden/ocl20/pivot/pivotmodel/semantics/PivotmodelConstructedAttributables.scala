@@ -166,6 +166,8 @@ package tudresden.ocl20.pivot.pivotmodel.semantics
 		override def setStatic(_Boolean : Boolean) = eObject.setStatic(_Boolean : Boolean)
 		override def getOwningType() = eObject.getOwningType()
 		override def setOwningType(_Type : tudresden.ocl20.pivot.pivotmodel.Type) = eObject.setOwningType(_Type : tudresden.ocl20.pivot.pivotmodel.Type)
+		override def getDefinition = eObject.getDefinition
+		override def setDefinition(definition : tudresden.ocl20.pivot.pivotmodel.Constraint) = eObject.setDefinition(definition)
 	}
 
 
@@ -195,6 +197,8 @@ package tudresden.ocl20.pivot.pivotmodel.semantics
 		override def getOutputParameter() = eObject.getOutputParameter()
 		override def getReturnParameter() = eObject.getReturnParameter()
 		override def getSignatureParameter() = eObject.getSignatureParameter()
+		override def getDefinition = eObject.getDefinition
+		override def setDefinition(definition : tudresden.ocl20.pivot.pivotmodel.Constraint) = eObject.setDefinition(definition)
 	}
 
 
@@ -340,5 +344,7 @@ package tudresden.ocl20.pivot.pivotmodel.semantics
 		override def getOwningType() = eObject.getOwningType()
 		override def setOwningType(_Type : tudresden.ocl20.pivot.pivotmodel.Type) = eObject.setOwningType(_Type : tudresden.ocl20.pivot.pivotmodel.Type)
 		override def getInverseAssociationProperties() = eObject.getInverseAssociationProperties()
+		override def getDefinition = eObject.getDefinition
+		override def setDefinition(definition : tudresden.ocl20.pivot.pivotmodel.Constraint) = eObject.setDefinition(definition)
 	}
 
