@@ -14,9 +14,10 @@ public class OclIS_MARKED_PRETokenResolver implements
 	public java.lang.String deResolve(java.lang.Object value,
 			org.eclipse.emf.ecore.EStructuralFeature feature,
 			org.eclipse.emf.ecore.EObject container) {
-		java.lang.String result = defaultTokenResolver.deResolve(value, feature,
-				container);
-		return result;
+		if (value.equals(true))
+			return "@pre";
+		else
+			return "";
 	}
 
 	public void resolve(
