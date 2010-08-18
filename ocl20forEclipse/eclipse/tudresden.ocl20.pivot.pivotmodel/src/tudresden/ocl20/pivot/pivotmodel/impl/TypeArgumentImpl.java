@@ -176,8 +176,7 @@ public class TypeArgumentImpl extends TypedElementImpl implements TypeArgument {
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newOwningGenericType != null)
-				msgs = ((InternalEObject) newOwningGenericType).eInverseAdd(
-						this,
+				msgs = ((InternalEObject) newOwningGenericType).eInverseAdd(this,
 						PivotModelPackage.COMPLEX_GENERIC_TYPE__TYPE_ARGUMENT,
 						ComplexGenericType.class, msgs);
 			msgs = basicSetOwningGenericType(newOwningGenericType, msgs);
@@ -194,14 +193,13 @@ public class TypeArgumentImpl extends TypedElementImpl implements TypeArgument {
 	 * @generated
 	 */
 	@Override
-	public NotificationChain eInverseAdd(InternalEObject otherEnd,
-			int featureID, NotificationChain msgs) {
+	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID,
+			NotificationChain msgs) {
 		switch (featureID) {
 		case PivotModelPackage.TYPE_ARGUMENT__OWNING_GENERIC_TYPE:
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
-			return basicSetOwningGenericType((ComplexGenericType) otherEnd,
-					msgs);
+			return basicSetOwningGenericType((ComplexGenericType) otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}

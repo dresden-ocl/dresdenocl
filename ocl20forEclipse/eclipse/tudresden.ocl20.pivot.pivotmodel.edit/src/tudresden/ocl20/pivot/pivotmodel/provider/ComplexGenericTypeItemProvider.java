@@ -181,16 +181,16 @@ public class ComplexGenericTypeItemProvider extends GenericTypeItemProvider
 		label.append(typeItemProvider.getTypeParameterListOpeningDelimiter());
 
 		// append the type arguments
-		for (Iterator<TypeArgument> it = genericType.getTypeArgument()
-				.iterator(); it.hasNext();) {
+		for (Iterator<TypeArgument> it = genericType.getTypeArgument().iterator(); it
+				.hasNext();) {
 			TypeArgument typeArg = it.next();
 
 			// append the type or generic type name, or a '?' if nothing bound
-			label.append(typeArg.getType() != null ? typeArg.getType()
-					.getName()
-					: (typeArg.getGenericType() != null ? getLabelProvider(
-							typeArg.getGenericType()).getText(
-							typeArg.getGenericType()) : '?'));
+			label
+					.append(typeArg.getType() != null ? typeArg.getType().getName()
+							: (typeArg.getGenericType() != null ? getLabelProvider(
+									typeArg.getGenericType()).getText(typeArg.getGenericType())
+									: '?'));
 
 			if (it.hasNext()) {
 				label.append(", "); //$NON-NLS-1$

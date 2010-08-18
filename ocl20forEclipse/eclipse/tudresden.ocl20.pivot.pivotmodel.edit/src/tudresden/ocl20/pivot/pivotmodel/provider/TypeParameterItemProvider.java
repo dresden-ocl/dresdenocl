@@ -129,8 +129,8 @@ public class TypeParameterItemProvider extends NamedElementItemProvider
 		switch (notification.getFeatureID(TypeParameter.class)) {
 		case PivotModelPackageImpl.TYPE_PARAMETER__NAME: {
 			fireNotifyChanged(new ViewerNotification(notification,
-					((TypeParameter) notification.getNotifier())
-							.getGenericElement(), true, true));
+					((TypeParameter) notification.getNotifier()).getGenericElement(),
+					true, true));
 			return;
 		}
 		}

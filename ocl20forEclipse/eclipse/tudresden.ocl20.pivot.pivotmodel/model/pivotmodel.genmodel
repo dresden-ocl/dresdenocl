@@ -215,22 +215,22 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute pivotmodel.ecore#//Expression/language"/>
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference pivotmodel.ecore#//Expression/constraint"/>
     </genClasses>
-    <genClasses ecoreClass="pivotmodel.ecore#//NDirectionalProperty">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference pivotmodel.ecore#//NDirectionalProperty/inverseNDirectionalProperties"/>
-      <genOperations ecoreOperation="pivotmodel.ecore#//NDirectionalProperty/addAssociation">
-        <genParameters ecoreParameter="pivotmodel.ecore#//NDirectionalProperty/addAssociation/bProperty"/>
+    <genClasses ecoreClass="pivotmodel.ecore#//AssociationProperty">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference pivotmodel.ecore#//AssociationProperty/inverseAssociationProperties"/>
+      <genOperations ecoreOperation="pivotmodel.ecore#//AssociationProperty/addAssociation">
+        <genParameters ecoreParameter="pivotmodel.ecore#//AssociationProperty/addAssociation/bProperty"/>
       </genOperations>
-      <genOperations ecoreOperation="pivotmodel.ecore#//NDirectionalProperty/getAssociation">
-        <genParameters ecoreParameter="pivotmodel.ecore#//NDirectionalProperty/getAssociation/propName"/>
+      <genOperations ecoreOperation="pivotmodel.ecore#//AssociationProperty/getAssociation">
+        <genParameters ecoreParameter="pivotmodel.ecore#//AssociationProperty/getAssociation/propName"/>
       </genOperations>
-      <genOperations ecoreOperation="pivotmodel.ecore#//NDirectionalProperty/removeAssociation">
-        <genParameters ecoreParameter="pivotmodel.ecore#//NDirectionalProperty/removeAssociation/bProperty"/>
+      <genOperations ecoreOperation="pivotmodel.ecore#//AssociationProperty/removeAssociation">
+        <genParameters ecoreParameter="pivotmodel.ecore#//AssociationProperty/removeAssociation/bProperty"/>
       </genOperations>
-      <genOperations ecoreOperation="pivotmodel.ecore#//NDirectionalProperty/isInverseAssociation">
-        <genParameters ecoreParameter="pivotmodel.ecore#//NDirectionalProperty/isInverseAssociation/bProperty"/>
+      <genOperations ecoreOperation="pivotmodel.ecore#//AssociationProperty/isInverseAssociation">
+        <genParameters ecoreParameter="pivotmodel.ecore#//AssociationProperty/isInverseAssociation/bProperty"/>
       </genOperations>
-      <genOperations ecoreOperation="pivotmodel.ecore#//NDirectionalProperty/addAssociations">
-        <genParameters ecoreParameter="pivotmodel.ecore#//NDirectionalProperty/addAssociations/bProperty"/>
+      <genOperations ecoreOperation="pivotmodel.ecore#//AssociationProperty/addAssociations">
+        <genParameters ecoreParameter="pivotmodel.ecore#//AssociationProperty/addAssociations/bProperty"/>
       </genOperations>
     </genClasses>
   </genPackages>

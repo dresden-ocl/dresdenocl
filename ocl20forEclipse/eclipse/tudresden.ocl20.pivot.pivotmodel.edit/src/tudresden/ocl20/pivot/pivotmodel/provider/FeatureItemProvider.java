@@ -83,6 +83,7 @@ public class FeatureItemProvider extends TypedElementItemProvider implements
 			super.getPropertyDescriptors(object);
 
 			addStaticPropertyDescriptor(object);
+			addDefinitionPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -102,9 +103,27 @@ public class FeatureItemProvider extends TypedElementItemProvider implements
 						getString("_UI_Feature_static_feature"), //$NON-NLS-1$
 						getString(
 								"_UI_PropertyDescriptor_description", "_UI_Feature_static_feature", "_UI_Feature_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-						PivotModelPackage.Literals.FEATURE__STATIC, true,
-						false, false,
+						PivotModelPackage.Literals.FEATURE__STATIC, true, false, false,
 						ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE, null, null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Definition feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addDefinitionPropertyDescriptor(Object object) {
+		itemPropertyDescriptors
+				.add(createItemPropertyDescriptor(
+						((ComposeableAdapterFactory) adapterFactory)
+								.getRootAdapterFactory(),
+						getResourceLocator(),
+						getString("_UI_Feature_definition_feature"), //$NON-NLS-1$
+						getString(
+								"_UI_PropertyDescriptor_description", "_UI_Feature_definition_feature", "_UI_Feature_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+						PivotModelPackage.Literals.FEATURE__DEFINITION, true, false, true,
+						null, null, null));
 	}
 
 	/**

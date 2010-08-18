@@ -105,8 +105,7 @@ public class ExpressionItemProvider extends ItemProviderAdapter implements
 						getString("_UI_Expression_body_feature"), //$NON-NLS-1$
 						getString(
 								"_UI_PropertyDescriptor_description", "_UI_Expression_body_feature", "_UI_Expression_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-						PivotModelPackage.Literals.EXPRESSION__BODY, true,
-						false, false,
+						PivotModelPackage.Literals.EXPRESSION__BODY, true, false, false,
 						ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
 	}
 
@@ -125,9 +124,8 @@ public class ExpressionItemProvider extends ItemProviderAdapter implements
 						getString("_UI_Expression_language_feature"), //$NON-NLS-1$
 						getString(
 								"_UI_PropertyDescriptor_description", "_UI_Expression_language_feature", "_UI_Expression_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-						PivotModelPackage.Literals.EXPRESSION__LANGUAGE, true,
-						false, false,
-						ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
+						PivotModelPackage.Literals.EXPRESSION__LANGUAGE, true, false,
+						false, ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
 	}
 
 	/**

@@ -97,13 +97,11 @@ public class GenericTypeItemProvider extends NamedElementItemProvider implements
 	@Override
 	public Object getImage(Object object) {
 
-		EReference eContainmentFeature = ((EObject) object)
-				.eContainmentFeature();
+		EReference eContainmentFeature = ((EObject) object).eContainmentFeature();
 
 		if (eContainmentFeature == PivotModelPackageImpl.Literals.TYPE__GENERIC_SUPER_TYPE) {
 			return overlayImage(object,
-					getResourceLocator()
-							.getImage("full/obj16/GenericSuperType")); //$NON-NLS-1$
+					getResourceLocator().getImage("full/obj16/GenericSuperType")); //$NON-NLS-1$
 		}
 
 		return overlayImage(object,

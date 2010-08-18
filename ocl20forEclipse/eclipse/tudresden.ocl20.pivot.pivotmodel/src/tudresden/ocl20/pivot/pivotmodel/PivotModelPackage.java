@@ -263,13 +263,22 @@ public interface PivotModelPackage extends EPackage {
 	int FEATURE__STATIC = TYPED_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Definition</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FEATURE__DEFINITION = TYPED_ELEMENT_FEATURE_COUNT + 1;
+
+	/**
 	 * The number of structural features of the '<em>Feature</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FEATURE_FEATURE_COUNT = TYPED_ELEMENT_FEATURE_COUNT + 1;
+	int FEATURE_FEATURE_COUNT = TYPED_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link tudresden.ocl20.pivot.pivotmodel.GenericElement <em>Generic Element</em>}' class.
@@ -874,6 +883,15 @@ public interface PivotModelPackage extends EPackage {
 	int PROPERTY__STATIC = FEATURE__STATIC;
 
 	/**
+	 * The feature id for the '<em><b>Definition</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY__DEFINITION = FEATURE__DEFINITION;
+
+	/**
 	 * The feature id for the '<em><b>Owning Type</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -954,6 +972,15 @@ public interface PivotModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int OPERATION__STATIC = FEATURE__STATIC;
+
+	/**
+	 * The feature id for the '<em><b>Definition</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION__DEFINITION = FEATURE__DEFINITION;
 
 	/**
 	 * The feature id for the '<em><b>Owned Type Parameter</b></em>' containment reference list.
@@ -1604,6 +1631,15 @@ public interface PivotModelPackage extends EPackage {
 	int ASSOCIATION_PROPERTY__STATIC = PROPERTY__STATIC;
 
 	/**
+	 * The feature id for the '<em><b>Definition</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASSOCIATION_PROPERTY__DEFINITION = PROPERTY__DEFINITION;
+
+	/**
 	 * The feature id for the '<em><b>Owning Type</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1765,6 +1801,17 @@ public interface PivotModelPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getFeature_Static();
+
+	/**
+	 * Returns the meta object for the reference '{@link tudresden.ocl20.pivot.pivotmodel.Feature#getDefinition <em>Definition</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Definition</em>'.
+	 * @see tudresden.ocl20.pivot.pivotmodel.Feature#getDefinition()
+	 * @see #getFeature()
+	 * @generated
+	 */
+	EReference getFeature_Definition();
 
 	/**
 	 * Returns the meta object for class '{@link tudresden.ocl20.pivot.pivotmodel.GenericElement <em>Generic Element</em>}'.
@@ -2486,6 +2533,14 @@ public interface PivotModelPackage extends EPackage {
 		EAttribute FEATURE__STATIC = eINSTANCE.getFeature_Static();
 
 		/**
+		 * The meta object literal for the '<em><b>Definition</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference FEATURE__DEFINITION = eINSTANCE.getFeature_Definition();
+
+		/**
 		 * The meta object literal for the '{@link tudresden.ocl20.pivot.pivotmodel.GenericElement <em>Generic Element</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2606,8 +2661,7 @@ public interface PivotModelPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference TYPE__GENERIC_SUPER_TYPE = eINSTANCE
-				.getType_GenericSuperType();
+		EReference TYPE__GENERIC_SUPER_TYPE = eINSTANCE.getType_GenericSuperType();
 
 		/**
 		 * The meta object literal for the '{@link tudresden.ocl20.pivot.pivotmodel.impl.PrimitiveTypeImpl <em>Primitive Type</em>}' class.
@@ -2952,8 +3006,7 @@ public interface PivotModelPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference EXPRESSION__CONSTRAINT = eINSTANCE
-				.getExpression_Constraint();
+		EReference EXPRESSION__CONSTRAINT = eINSTANCE.getExpression_Constraint();
 
 		/**
 		 * The meta object literal for the '{@link tudresden.ocl20.pivot.pivotmodel.impl.AssociationPropertyImpl <em>Association Property</em>}' class.

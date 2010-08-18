@@ -50,6 +50,7 @@ package tudresden.ocl20.pivot.pivotmodel;
  * The following features are supported:
  * <ul>
  *   <li>{@link tudresden.ocl20.pivot.pivotmodel.Feature#isStatic <em>Static</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.pivotmodel.Feature#getDefinition <em>Definition</em>}</li>
  * </ul>
  * </p>
  *
@@ -90,5 +91,33 @@ public interface Feature extends TypedElement {
 	 * @generated
 	 */
 	void setStatic(boolean value);
+
+	/**
+	 * Returns the value of the '<em><b>Definition</b></em>' reference.
+	 * It is bidirectional and its opposite is '{@link tudresden.ocl20.pivot.pivotmodel.Constraint#getDefinedFeature <em>Defined Feature</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Definition</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Definition</em>' reference.
+	 * @see #setDefinition(Constraint)
+	 * @see tudresden.ocl20.pivot.pivotmodel.PivotModelPackage#getFeature_Definition()
+	 * @see tudresden.ocl20.pivot.pivotmodel.Constraint#getDefinedFeature
+	 * @model opposite="definedFeature"
+	 * @generated
+	 */
+	Constraint getDefinition();
+
+	/**
+	 * Sets the value of the '{@link tudresden.ocl20.pivot.pivotmodel.Feature#getDefinition <em>Definition</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Definition</em>' reference.
+	 * @see #getDefinition()
+	 * @generated
+	 */
+	void setDefinition(Constraint value);
 
 } // Feature

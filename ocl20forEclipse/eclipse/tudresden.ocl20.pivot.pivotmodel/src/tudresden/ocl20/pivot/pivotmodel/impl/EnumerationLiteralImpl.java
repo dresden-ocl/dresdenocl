@@ -138,15 +138,15 @@ public class EnumerationLiteralImpl extends NamedElementImpl implements
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newEnumeration != null)
 				msgs = ((InternalEObject) newEnumeration).eInverseAdd(this,
-						PivotModelPackage.ENUMERATION__OWNED_LITERAL,
-						Enumeration.class, msgs);
+						PivotModelPackage.ENUMERATION__OWNED_LITERAL, Enumeration.class,
+						msgs);
 			msgs = basicSetEnumeration(newEnumeration, msgs);
 			if (msgs != null)
 				msgs.dispatch();
 		} else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
-					PivotModelPackage.ENUMERATION_LITERAL__ENUMERATION,
-					newEnumeration, newEnumeration));
+					PivotModelPackage.ENUMERATION_LITERAL__ENUMERATION, newEnumeration,
+					newEnumeration));
 	}
 
 	/**
@@ -154,8 +154,8 @@ public class EnumerationLiteralImpl extends NamedElementImpl implements
 	 * @generated
 	 */
 	@Override
-	public NotificationChain eInverseAdd(InternalEObject otherEnd,
-			int featureID, NotificationChain msgs) {
+	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID,
+			NotificationChain msgs) {
 		switch (featureID) {
 		case PivotModelPackage.ENUMERATION_LITERAL__ENUMERATION:
 			if (eInternalContainer() != null)
@@ -188,9 +188,9 @@ public class EnumerationLiteralImpl extends NamedElementImpl implements
 			NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
 		case PivotModelPackage.ENUMERATION_LITERAL__ENUMERATION:
-			return eInternalContainer().eInverseRemove(this,
-					PivotModelPackage.ENUMERATION__OWNED_LITERAL,
-					Enumeration.class, msgs);
+			return eInternalContainer()
+					.eInverseRemove(this, PivotModelPackage.ENUMERATION__OWNED_LITERAL,
+							Enumeration.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}

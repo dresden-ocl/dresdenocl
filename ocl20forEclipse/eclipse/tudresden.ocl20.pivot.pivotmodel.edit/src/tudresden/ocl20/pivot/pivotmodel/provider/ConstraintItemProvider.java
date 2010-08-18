@@ -107,8 +107,7 @@ public class ConstraintItemProvider extends NamedElementItemProvider implements
 						getString("_UI_Constraint_kind_feature"), //$NON-NLS-1$
 						getString(
 								"_UI_PropertyDescriptor_description", "_UI_Constraint_kind_feature", "_UI_Constraint_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-						PivotModelPackage.Literals.CONSTRAINT__KIND, true,
-						false, false,
+						PivotModelPackage.Literals.CONSTRAINT__KIND, true, false, false,
 						ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
 	}
 
@@ -127,8 +126,8 @@ public class ConstraintItemProvider extends NamedElementItemProvider implements
 						getString("_UI_Constraint_constrainedElement_feature"), //$NON-NLS-1$
 						getString(
 								"_UI_PropertyDescriptor_description", "_UI_Constraint_constrainedElement_feature", "_UI_Constraint_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-						PivotModelPackage.Literals.CONSTRAINT__CONSTRAINED_ELEMENT,
-						true, false, true, null, null, null));
+						PivotModelPackage.Literals.CONSTRAINT__CONSTRAINED_ELEMENT, true,
+						false, true, null, null, null));
 	}
 
 	/**
@@ -146,8 +145,8 @@ public class ConstraintItemProvider extends NamedElementItemProvider implements
 						getString("_UI_Constraint_definedFeature_feature"), //$NON-NLS-1$
 						getString(
 								"_UI_PropertyDescriptor_description", "_UI_Constraint_definedFeature_feature", "_UI_Constraint_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-						PivotModelPackage.Literals.CONSTRAINT__DEFINED_FEATURE,
-						true, false, true, null, null, null));
+						PivotModelPackage.Literals.CONSTRAINT__DEFINED_FEATURE, true,
+						false, true, null, null, null));
 	}
 
 	/**

@@ -120,8 +120,7 @@ public class ParameterImpl extends TypedElementImpl implements Parameter {
 				Type operationType = operation.getType();
 
 				if ((operationType == null && newType != null)
-						|| (operationType != null && !operationType
-								.equals(newType))) {
+						|| (operationType != null && !operationType.equals(newType))) {
 					operation.setType(newType);
 				}
 			}
@@ -222,16 +221,15 @@ public class ParameterImpl extends TypedElementImpl implements Parameter {
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newOperation != null)
-				msgs = ((InternalEObject) newOperation).eInverseAdd(this,
-						PivotModelPackage.OPERATION__OWNED_PARAMETER,
-						Operation.class, msgs);
+				msgs = ((InternalEObject) newOperation)
+						.eInverseAdd(this, PivotModelPackage.OPERATION__OWNED_PARAMETER,
+								Operation.class, msgs);
 			msgs = basicSetOperation(newOperation, msgs);
 			if (msgs != null)
 				msgs.dispatch();
 		} else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
-					PivotModelPackage.PARAMETER__OPERATION, newOperation,
-					newOperation));
+					PivotModelPackage.PARAMETER__OPERATION, newOperation, newOperation));
 	}
 
 	/**
@@ -283,8 +281,8 @@ public class ParameterImpl extends TypedElementImpl implements Parameter {
 	 * @generated
 	 */
 	@Override
-	public NotificationChain eInverseAdd(InternalEObject otherEnd,
-			int featureID, NotificationChain msgs) {
+	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID,
+			NotificationChain msgs) {
 		switch (featureID) {
 		case PivotModelPackage.PARAMETER__OPERATION:
 			if (eInternalContainer() != null)
@@ -318,8 +316,7 @@ public class ParameterImpl extends TypedElementImpl implements Parameter {
 		switch (eContainerFeatureID()) {
 		case PivotModelPackage.PARAMETER__OPERATION:
 			return eInternalContainer().eInverseRemove(this,
-					PivotModelPackage.OPERATION__OWNED_PARAMETER,
-					Operation.class, msgs);
+					PivotModelPackage.OPERATION__OWNED_PARAMETER, Operation.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -400,8 +397,7 @@ public class ParameterImpl extends TypedElementImpl implements Parameter {
 	public String toString() {
 
 		return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
-				.appendToString(super.toString())
-				.append("kind", kind).toString(); //$NON-NLS-1$
+				.appendToString(super.toString()).append("kind", kind).toString(); //$NON-NLS-1$
 	}
 
 } // ParameterImpl

@@ -187,8 +187,7 @@ public class DatatypesPackageImpl extends EPackageImpl implements
 		// Obtain or create and register interdependencies
 		PivotModelPackageImpl thePivotModelPackage = (PivotModelPackageImpl) (EPackage.Registry.INSTANCE
 				.getEPackage(PivotModelPackage.eNS_URI) instanceof PivotModelPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(PivotModelPackage.eNS_URI)
-				: PivotModelPackage.eINSTANCE);
+				.getEPackage(PivotModelPackage.eNS_URI) : PivotModelPackage.eINSTANCE);
 
 		// Create package meta-data objects
 		theDatatypesPackage.createPackageContents();
@@ -371,9 +370,7 @@ public class DatatypesPackageImpl extends EPackageImpl implements
 				"Real", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 		initEDataType(stringEDataType, String.class,
 				"String", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
-		initEDataType(
-				unlimitedNaturalEDataType,
-				long.class,
+		initEDataType(unlimitedNaturalEDataType, long.class,
 				"UnlimitedNatural", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 		initEDataType(collectionEDataType, Collection.class,
 				"Collection", !IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$

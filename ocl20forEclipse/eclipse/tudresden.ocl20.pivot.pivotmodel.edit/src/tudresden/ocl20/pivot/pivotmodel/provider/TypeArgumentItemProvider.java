@@ -134,11 +134,10 @@ public class TypeArgumentItemProvider extends TypedElementItemProvider
 		case PivotModelPackageImpl.TYPE_ARGUMENT__GENERIC_TYPE: {
 
 			// update all element labels until we arrive at the Type that contains the type argument
-			for (NamedElement element = (NamedElement) notification
-					.getNotifier(); // start at notifier 
+			for (NamedElement element = (NamedElement) notification.getNotifier(); // start at notifier 
 			element != null; element = element.getOwner()) {
-				fireNotifyChanged(new ViewerNotification(notification, element,
-						false, true));
+				fireNotifyChanged(new ViewerNotification(notification, element, false,
+						true));
 
 				// stop iteration when we have reached the type
 				if (element instanceof Type) {

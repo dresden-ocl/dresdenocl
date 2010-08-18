@@ -96,13 +96,13 @@ public enum PrimitiveTypeKind implements Enumerator {
 	 * @ordered
 	 */
 	STRING(4, "String", "String"), /**
-									 * The '<em><b>Void</b></em>' literal object.
-									 * <!-- begin-user-doc -->
-									 * <!-- end-user-doc -->
-									 * @see #VOID_VALUE
-									 * @generated
-									 * @ordered
-									 */
+																	 * The '<em><b>Void</b></em>' literal object.
+																	 * <!-- begin-user-doc -->
+																	 * <!-- end-user-doc -->
+																	 * @see #VOID_VALUE
+																	 * @generated
+																	 * @ordered
+																	 */
 	VOID(5, "Void", "Void"); //$NON-NLS-1$ //$NON-NLS-2$
 
 	/**

@@ -105,8 +105,7 @@ public class NamedElementItemProvider extends ItemProviderAdapter implements
 						getString("_UI_NamedElement_name_feature"), //$NON-NLS-1$
 						getString(
 								"_UI_PropertyDescriptor_description", "_UI_NamedElement_name_feature", "_UI_NamedElement_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-						PivotModelPackage.Literals.NAMED_ELEMENT__NAME, true,
-						false, false,
+						PivotModelPackage.Literals.NAMED_ELEMENT__NAME, true, false, false,
 						ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
 	}
 
@@ -125,9 +124,9 @@ public class NamedElementItemProvider extends ItemProviderAdapter implements
 						getString("_UI_NamedElement_qualifiedName_feature"), //$NON-NLS-1$
 						getString(
 								"_UI_PropertyDescriptor_description", "_UI_NamedElement_qualifiedName_feature", "_UI_NamedElement_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-						PivotModelPackage.Literals.NAMED_ELEMENT__QUALIFIED_NAME,
-						false, false, false,
-						ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
+						PivotModelPackage.Literals.NAMED_ELEMENT__QUALIFIED_NAME, false,
+						false, false, ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null,
+						null));
 	}
 
 	/**
@@ -192,8 +191,7 @@ public class NamedElementItemProvider extends ItemProviderAdapter implements
 	protected IItemLabelProvider getLabelProvider(NamedElement namedElement) {
 
 		return (IItemLabelProvider) ((ComposeableAdapterFactory) getAdapterFactory())
-				.getRootAdapterFactory().adapt(namedElement,
-						IItemLabelProvider.class);
+				.getRootAdapterFactory().adapt(namedElement, IItemLabelProvider.class);
 	}
 
 	/**

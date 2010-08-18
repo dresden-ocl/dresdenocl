@@ -293,8 +293,7 @@ public abstract class NamedElementImpl extends EObjectImpl implements
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 		case PivotModelPackage.NAMED_ELEMENT__NAME:
-			return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT
-					.equals(name);
+			return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 		case PivotModelPackage.NAMED_ELEMENT__QUALIFIED_NAME:
 			return QUALIFIED_NAME_EDEFAULT == null ? getQualifiedName() != null
 					: !QUALIFIED_NAME_EDEFAULT.equals(getQualifiedName());
@@ -315,8 +314,8 @@ public abstract class NamedElementImpl extends EObjectImpl implements
 	@Override
 	public String toString() {
 
-		return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
-				.append("name", getName()).toString(); //$NON-NLS-1$
+		return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE).append(
+				"name", getName()).toString(); //$NON-NLS-1$
 	}
 
 } // NamedElementImpl

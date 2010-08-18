@@ -149,10 +149,9 @@ public class OperationImpl extends FeatureImpl implements Operation {
 			Parameter parameter = it.next();
 
 			// append the type name or the generic type name
-			qualifiedName.append(parameter.getType() != null ? parameter
-					.getType().getQualifiedName()
-					: (parameter.getGenericType() != null ? parameter
-							.getGenericType().getName() : "null")); //$NON-NLS-1$
+			qualifiedName.append(parameter.getType() != null ? parameter.getType()
+					.getQualifiedName() : (parameter.getGenericType() != null ? parameter
+					.getGenericType().getName() : "null")); //$NON-NLS-1$
 
 			if (it.hasNext()) {
 				qualifiedName.append(',');
@@ -251,8 +250,7 @@ public class OperationImpl extends FeatureImpl implements Operation {
 		Parameter returnParameter = getReturnParameter();
 
 		if (returnParameter != null) {
-			GenericType returnParameterGenericType = returnParameter
-					.getGenericType();
+			GenericType returnParameterGenericType = returnParameter.getGenericType();
 
 			if ((returnParameterGenericType == null && newGenericType != null)
 					|| (returnParameterGenericType != null && !returnParameterGenericType
@@ -327,8 +325,7 @@ public class OperationImpl extends FeatureImpl implements Operation {
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newOwningType != null)
 				msgs = ((InternalEObject) newOwningType).eInverseAdd(this,
-						PivotModelPackage.TYPE__OWNED_OPERATION, Type.class,
-						msgs);
+						PivotModelPackage.TYPE__OWNED_OPERATION, Type.class, msgs);
 			msgs = basicSetOwningType(newOwningType, msgs);
 			if (msgs != null)
 				msgs.dispatch();
@@ -360,8 +357,7 @@ public class OperationImpl extends FeatureImpl implements Operation {
 	protected final List<Parameter> getOwnedParameterGen() {
 		if (ownedParameter == null) {
 			ownedParameter = new EObjectContainmentWithInverseEList<Parameter>(
-					Parameter.class, this,
-					PivotModelPackage.OPERATION__OWNED_PARAMETER,
+					Parameter.class, this, PivotModelPackage.OPERATION__OWNED_PARAMETER,
 					PivotModelPackage.PARAMETER__OPERATION);
 		}
 		return ownedParameter;
@@ -374,8 +370,8 @@ public class OperationImpl extends FeatureImpl implements Operation {
 	 */
 	public List<Parameter> getInputParameter() {
 
-		return getFilteredParameters(EnumSet.of(ParameterDirectionKind.IN,
-				ParameterDirectionKind.INOUT),
+		return getFilteredParameters(
+				EnumSet.of(ParameterDirectionKind.IN, ParameterDirectionKind.INOUT),
 				PivotModelPackageImpl.Literals.OPERATION__INPUT_PARAMETER);
 	}
 
@@ -386,8 +382,8 @@ public class OperationImpl extends FeatureImpl implements Operation {
 	 */
 	public List<Parameter> getOutputParameter() {
 
-		return getFilteredParameters(EnumSet.of(ParameterDirectionKind.OUT,
-				ParameterDirectionKind.INOUT),
+		return getFilteredParameters(
+				EnumSet.of(ParameterDirectionKind.OUT, ParameterDirectionKind.INOUT),
 				PivotModelPackageImpl.Literals.OPERATION__OUTPUT_PARAMETER);
 	}
 
@@ -437,9 +433,8 @@ public class OperationImpl extends FeatureImpl implements Operation {
 		// we return an EcoreEList here to support the EMF framework (editor,
 		// notification etc.) subclasses may override if they provide their own
 		// container visualization options
-		return new EcoreEList.UnmodifiableEList<Parameter>(this,
-				structuralFeature, filteredParameters.size(),
-				filteredParameters.toArray());
+		return new EcoreEList.UnmodifiableEList<Parameter>(this, structuralFeature,
+				filteredParameters.size(), filteredParameters.toArray());
 	}
 
 	/**
@@ -491,8 +486,7 @@ public class OperationImpl extends FeatureImpl implements Operation {
 		// check type conformance of each parameter
 		else {
 
-			for (ListIterator<Type> it = paramTypes.listIterator(); it
-					.hasNext();) {
+			for (ListIterator<Type> it = paramTypes.listIterator(); it.hasNext();) {
 				Type type = it.next();
 
 				// get the next input parameter of this operation
@@ -606,8 +600,7 @@ public class OperationImpl extends FeatureImpl implements Operation {
 			boundOperations.put(binding, boundOperation);
 
 			// remove the type parameters that are going to be bound
-			ListUtil.removeAll(boundOperation.getOwnedTypeParameter(),
-					parameters);
+			ListUtil.removeAll(boundOperation.getOwnedTypeParameter(), parameters);
 
 			// bind the operation
 			GenericElements.bindOperation(boundOperation, parameters, types);
@@ -674,8 +667,8 @@ public class OperationImpl extends FeatureImpl implements Operation {
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public NotificationChain eInverseAdd(InternalEObject otherEnd,
-			int featureID, NotificationChain msgs) {
+	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID,
+			NotificationChain msgs) {
 		switch (featureID) {
 		case PivotModelPackage.OPERATION__OWNED_TYPE_PARAMETER:
 			return ((InternalEList<InternalEObject>) (InternalEList<?>) getOwnedTypeParameter())
@@ -700,13 +693,13 @@ public class OperationImpl extends FeatureImpl implements Operation {
 			int featureID, NotificationChain msgs) {
 		switch (featureID) {
 		case PivotModelPackage.OPERATION__OWNED_TYPE_PARAMETER:
-			return ((InternalEList<?>) getOwnedTypeParameter()).basicRemove(
-					otherEnd, msgs);
+			return ((InternalEList<?>) getOwnedTypeParameter()).basicRemove(otherEnd,
+					msgs);
 		case PivotModelPackage.OPERATION__OWNING_TYPE:
 			return basicSetOwningType(null, msgs);
 		case PivotModelPackage.OPERATION__OWNED_PARAMETER:
-			return ((InternalEList<?>) getOwnedParameter()).basicRemove(
-					otherEnd, msgs);
+			return ((InternalEList<?>) getOwnedParameter()).basicRemove(otherEnd,
+					msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -769,8 +762,7 @@ public class OperationImpl extends FeatureImpl implements Operation {
 			return;
 		case PivotModelPackage.OPERATION__OWNED_PARAMETER:
 			getOwnedParameter().clear();
-			getOwnedParameter().addAll(
-					(Collection<? extends Parameter>) newValue);
+			getOwnedParameter().addAll((Collection<? extends Parameter>) newValue);
 			return;
 		}
 		super.eSet(featureID, newValue);

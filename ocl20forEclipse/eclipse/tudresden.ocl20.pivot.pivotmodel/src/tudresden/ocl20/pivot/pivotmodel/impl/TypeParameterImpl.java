@@ -113,18 +113,16 @@ public class TypeParameterImpl extends NamedElementImpl implements
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newGenericElement != null)
-				msgs = ((InternalEObject) newGenericElement)
-						.eInverseAdd(
-								this,
-								PivotModelPackage.GENERIC_ELEMENT__OWNED_TYPE_PARAMETER,
-								GenericElement.class, msgs);
+				msgs = ((InternalEObject) newGenericElement).eInverseAdd(this,
+						PivotModelPackage.GENERIC_ELEMENT__OWNED_TYPE_PARAMETER,
+						GenericElement.class, msgs);
 			msgs = basicSetGenericElement(newGenericElement, msgs);
 			if (msgs != null)
 				msgs.dispatch();
 		} else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
-					PivotModelPackage.TYPE_PARAMETER__GENERIC_ELEMENT,
-					newGenericElement, newGenericElement));
+					PivotModelPackage.TYPE_PARAMETER__GENERIC_ELEMENT, newGenericElement,
+					newGenericElement));
 	}
 
 	/**
@@ -181,8 +179,7 @@ public class TypeParameterImpl extends NamedElementImpl implements
 	 */
 	private String getIdentifyingName() {
 
-		return getGenericElement() != null ? getGenericElement().getName()
-				+ "::" //$NON-NLS-1$
+		return getGenericElement() != null ? getGenericElement().getName() + "::" //$NON-NLS-1$
 				+ getName() : getName();
 	}
 
@@ -191,8 +188,8 @@ public class TypeParameterImpl extends NamedElementImpl implements
 	 * @generated
 	 */
 	@Override
-	public NotificationChain eInverseAdd(InternalEObject otherEnd,
-			int featureID, NotificationChain msgs) {
+	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID,
+			NotificationChain msgs) {
 		switch (featureID) {
 		case PivotModelPackage.TYPE_PARAMETER__GENERIC_ELEMENT:
 			if (eInternalContainer() != null)

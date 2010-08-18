@@ -103,8 +103,7 @@ public class ParameterItemProvider extends TypedElementItemProvider implements
 						getString("_UI_Parameter_kind_feature"), //$NON-NLS-1$
 						getString(
 								"_UI_PropertyDescriptor_description", "_UI_Parameter_kind_feature", "_UI_Parameter_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-						PivotModelPackage.Literals.PARAMETER__KIND, true,
-						false, false,
+						PivotModelPackage.Literals.PARAMETER__KIND, true, false, false,
 						ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
 	}
 

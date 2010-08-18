@@ -147,8 +147,7 @@ public abstract class TypedElementImpl extends NamedElementImpl implements
 		genericType = newGenericType;
 		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this,
-					Notification.SET,
-					PivotModelPackage.TYPED_ELEMENT__GENERIC_TYPE,
+					Notification.SET, PivotModelPackage.TYPED_ELEMENT__GENERIC_TYPE,
 					oldGenericType, newGenericType);
 			if (msgs == null)
 				msgs = notification;
@@ -190,26 +189,20 @@ public abstract class TypedElementImpl extends NamedElementImpl implements
 		if (newGenericType != genericType) {
 			NotificationChain msgs = null;
 			if (genericType != null)
-				msgs = ((InternalEObject) genericType)
-						.eInverseRemove(
-								this,
-								EOPPOSITE_FEATURE_BASE
-										- PivotModelPackage.TYPED_ELEMENT__GENERIC_TYPE,
-								null, msgs);
+				msgs = ((InternalEObject) genericType).eInverseRemove(this,
+						EOPPOSITE_FEATURE_BASE
+								- PivotModelPackage.TYPED_ELEMENT__GENERIC_TYPE, null, msgs);
 			if (newGenericType != null)
-				msgs = ((InternalEObject) newGenericType)
-						.eInverseAdd(
-								this,
-								EOPPOSITE_FEATURE_BASE
-										- PivotModelPackage.TYPED_ELEMENT__GENERIC_TYPE,
-								null, msgs);
+				msgs = ((InternalEObject) newGenericType).eInverseAdd(this,
+						EOPPOSITE_FEATURE_BASE
+								- PivotModelPackage.TYPED_ELEMENT__GENERIC_TYPE, null, msgs);
 			msgs = basicSetGenericType(newGenericType, msgs);
 			if (msgs != null)
 				msgs.dispatch();
 		} else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
-					PivotModelPackage.TYPED_ELEMENT__GENERIC_TYPE,
-					newGenericType, newGenericType));
+					PivotModelPackage.TYPED_ELEMENT__GENERIC_TYPE, newGenericType,
+					newGenericType));
 	}
 
 	/**

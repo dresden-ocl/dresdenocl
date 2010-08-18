@@ -141,8 +141,8 @@ public class ComplexGenericTypeImpl extends GenericTypeImpl implements
 		unboundType = newUnboundType;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
-					PivotModelPackage.COMPLEX_GENERIC_TYPE__UNBOUND_TYPE,
-					oldUnboundType, unboundType));
+					PivotModelPackage.COMPLEX_GENERIC_TYPE__UNBOUND_TYPE, oldUnboundType,
+					unboundType));
 	}
 
 	/**
@@ -280,8 +280,7 @@ public class ComplexGenericTypeImpl extends GenericTypeImpl implements
 		}
 
 		// number of type arguments must equal number of type parameters
-		if (getTypeArgument().size() != unboundType.getOwnedTypeParameter()
-				.size()) {
+		if (getTypeArgument().size() != unboundType.getOwnedTypeParameter().size()) {
 			throw new IllegalStateException(
 					"The number of type arguments for " + this //$NON-NLS-1$
 							+ " does not match the number of type parameters of " //$NON-NLS-1$
@@ -299,14 +298,13 @@ public class ComplexGenericTypeImpl extends GenericTypeImpl implements
 
 			// bind the type argument first if it has a generic type
 			if (argument.getType() == null && argument.getGenericType() != null) {
-				argument.getGenericType().bindGenericType(parameters, types,
-						argument);
+				argument.getGenericType().bindGenericType(parameters, types, argument);
 			}
 
 			// if type argument has a non-generic type now, add it to the new bindings
 			if (argument.getType() != null) {
-				unboundTypeParameters.add(unboundType.getOwnedTypeParameter()
-						.get(it.previousIndex()));
+				unboundTypeParameters.add(unboundType.getOwnedTypeParameter().get(
+						it.previousIndex()));
 				typeArgumentTypes.add(argument.getType());
 			}
 		}
@@ -346,8 +344,7 @@ public class ComplexGenericTypeImpl extends GenericTypeImpl implements
 	@Override
 	public ComplexGenericType clone() {
 
-		return initialize(PivotModelFactory.eINSTANCE
-				.createComplexGenericType());
+		return initialize(PivotModelFactory.eINSTANCE.createComplexGenericType());
 	}
 
 	/**
@@ -373,8 +370,8 @@ public class ComplexGenericTypeImpl extends GenericTypeImpl implements
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public NotificationChain eInverseAdd(InternalEObject otherEnd,
-			int featureID, NotificationChain msgs) {
+	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID,
+			NotificationChain msgs) {
 		switch (featureID) {
 		case PivotModelPackage.COMPLEX_GENERIC_TYPE__TYPE_ARGUMENT:
 			return ((InternalEList<InternalEObject>) (InternalEList<?>) getTypeArgument())
@@ -392,8 +389,7 @@ public class ComplexGenericTypeImpl extends GenericTypeImpl implements
 			int featureID, NotificationChain msgs) {
 		switch (featureID) {
 		case PivotModelPackage.COMPLEX_GENERIC_TYPE__TYPE_ARGUMENT:
-			return ((InternalEList<?>) getTypeArgument()).basicRemove(otherEnd,
-					msgs);
+			return ((InternalEList<?>) getTypeArgument()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -426,8 +422,7 @@ public class ComplexGenericTypeImpl extends GenericTypeImpl implements
 			return;
 		case PivotModelPackage.COMPLEX_GENERIC_TYPE__TYPE_ARGUMENT:
 			getTypeArgument().clear();
-			getTypeArgument().addAll(
-					(Collection<? extends TypeArgument>) newValue);
+			getTypeArgument().addAll((Collection<? extends TypeArgument>) newValue);
 			return;
 		}
 		super.eSet(featureID, newValue);
