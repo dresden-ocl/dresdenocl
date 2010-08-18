@@ -36,6 +36,8 @@ import tudresden.ocl20.pivot.modelinstancetype.exception.PropertyNotFoundExcepti
 import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceCollection;
 import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement;
 import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceObject;
+import tudresden.ocl20.pivot.pivotmodel.Constraint;
+import tudresden.ocl20.pivot.pivotmodel.Feature;
 import tudresden.ocl20.pivot.pivotmodel.Property;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 
@@ -88,8 +90,8 @@ public class ModelObjectContentProvider implements IStructuredContentProvider,
 			List<Type> implementedTypes;
 
 			anIModelInstance = (IModelInstance) parentElement;
-			implementedTypes = new ArrayList<Type>(anIModelInstance
-					.getAllImplementedTypes());
+			implementedTypes = new ArrayList<Type>(
+					anIModelInstance.getAllImplementedTypes());
 
 			/* Sort the types by their name. */
 			Collections.sort(implementedTypes, new Comparator<Type>() {
@@ -126,27 +128,35 @@ public class ModelObjectContentProvider implements IStructuredContentProvider,
 
 			/* If the element has at least on children it has elements. */
 			for (Property property : imiObject.getType().allProperties()) {
-				IModelInstanceElement propertyValue;
 
-				try {
-					propertyValue = imiObject.getProperty(property);
-				}
+				/*
+				 * TODO This check is necessary, since a property in the pivot
+				 * model does not know if its is defined by itself.
+				 */
+				if (this.getFeatureSemanticInOcl(property) == null) {
+					IModelInstanceElement propertyValue;
 
-				catch (PropertyAccessException e) {
-					propertyValue = null;
-				}
+					try {
+						propertyValue = imiObject.getProperty(property);
+					}
 
-				catch (PropertyNotFoundException e) {
-					propertyValue = null;
-				}
+					catch (PropertyAccessException e) {
+						propertyValue = null;
+					}
 
-				if (!adaptedFeatures.containsKey(property)) {
-					ModelInstanceObjectProperty modelInstanceObjectProperty;
-					modelInstanceObjectProperty = new ModelInstanceObjectProperty(
-							imiObject, property, propertyValue);
+					catch (PropertyNotFoundException e) {
+						propertyValue = null;
+					}
 
-					adaptedFeatures.put(property.getName(),
-							modelInstanceObjectProperty);
+					if (!adaptedFeatures.containsKey(property)) {
+						ModelInstanceObjectProperty modelInstanceObjectProperty;
+						modelInstanceObjectProperty = new ModelInstanceObjectProperty(
+								imiObject, property, propertyValue);
+
+						adaptedFeatures.put(property.getName(),
+								modelInstanceObjectProperty);
+					}
+					// no else.
 				}
 				// no else.
 			}
@@ -311,9 +321,28 @@ public class ModelObjectContentProvider implements IStructuredContentProvider,
 			IModelInstanceObject imiObject;
 			imiObject = (IModelInstanceObject) anElement;
 
-			/* If the element has at least on children it has elements. */
-			result = !imiObject.isUndefined()
-					&& imiObject.getType().allProperties().size() > 0;
+			result = false;
+
+			if (!imiObject.isUndefined()) {
+
+				/*
+				 * Check if the element has at least one non-OCL defined
+				 * property.
+				 */
+				for (Property property : imiObject.getType().allProperties()) {
+					/*
+					 * TODO This check is necessary, since a property in the
+					 * pivot model does not know if its is defined by itself.
+					 */
+					if (this.getFeatureSemanticInOcl(property) == null) {
+						result = true;
+						break;
+					}
+					// no else.
+				}
+				// end for.
+			}
+			// no else.
 		}
 
 		/* Else check if the given element is a ModelInstanceObjectProperty. */
@@ -382,5 +411,49 @@ public class ModelObjectContentProvider implements IStructuredContentProvider,
 			this.myModelInstance = (IModelInstance) newInput;
 		}
 		// no else.
+	}
+
+	/**
+	 * <p>
+	 * Checks whether or not a given {@link Feature}'s semantic is defined by an
+	 * {@link Constraint} and returns this {@link Constraint} or
+	 * <code>null</code> .
+	 * 
+	 * TODO This method would be unnecessary if {@link Feature}s would know
+	 * their {@link Constraint}s if they exist.
+	 * 
+	 * @param feature
+	 *            The {@link Feature} that shall be checked.
+	 * @return The found {@link Constraint} or <code>null</code>.
+	 */
+	private Constraint getFeatureSemanticInOcl(Feature feature) {
+
+		Constraint result;
+		result = null;
+
+		Type owningType;
+		owningType = (Type) feature.getOwner();
+
+		if (owningType != null && owningType.getNamespace() != null) {
+			for (Constraint constraint : owningType.getNamespace()
+					.getOwnedRule()) {
+
+				/*
+				 * For definitions, the features is defined by the constraint,
+				 * for init, derive and body expressions, the feature is
+				 * constrained by the constraint.
+				 */
+				if (feature.equals(constraint.getDefinedFeature())
+						|| constraint.getConstrainedElement().contains(feature)) {
+					result = constraint;
+					break;
+				}
+				// no else.
+			}
+			// end for.
+		}
+		// no else.
+
+		return result;
 	}
 }

@@ -18,6 +18,13 @@ Release 3.0 (not scheduled yet)
   - OclAny.oclIsInvalid() is now transformed into working Java code.
   - OclCollection.sum() is now transformed into working Java code. 
 
+GUI
+---
+* A bug in the Model Instance Browser has been fixed.
+  - OCL-defined features are not displayed as undefined in the Model Instance Browser 
+    anymore.
+
+
 Release 2.2 (June 16th 2010)
 ============================
 

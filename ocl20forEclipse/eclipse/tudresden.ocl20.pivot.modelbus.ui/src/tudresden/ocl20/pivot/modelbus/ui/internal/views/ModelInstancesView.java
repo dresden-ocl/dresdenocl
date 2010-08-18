@@ -105,7 +105,6 @@ public class ModelInstancesView extends ViewPart implements
 	 * 
 	 * The actual filter to show {@link IModelInstanceElement}s.
 	 */
-	@SuppressWarnings("unused")
 	private ModelObjectFilter myModelObjectFilter = new ModelObjectFilter();
 
 	/** The selected {@link ModelInstanceSelectionAction}. */
