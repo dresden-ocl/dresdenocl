@@ -7,6 +7,15 @@
   \providecommand{\doi}[1]{doi: #1}\else
   \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
 
+\bibitem[BD07]{braeuerEA:OCL2007}
+\textsc{Br\"auer}, Matthias; \textsc{Demuth}, Birgit:
+\newblock Model-Level Integration of the OCL Standard Library Using a Pivot
+  Model with Generics Support.
+\newblock {In: }\textsc{Akehurst}, David~H. (ed.); \textsc{Gogolla}, Martin
+  (ed.) ; \textsc{Zschaler}, Steffen (ed.): \emph{Ocl4All: Modelling Systems
+  with OCL Workshop at MoDELS 2007}.
+\newblock Berlin, Germany : Technische Universit\"at Berlin, October 2007
+
 \bibitem[Br‰07]{GB:Braeuer}
 \textsc{Br‰uer}, Matthias:
 \newblock \emph{Models and Metamodels in a QVT/OCL Development Environment},
@@ -29,12 +38,11 @@
 \newblock 2nd.
 \newblock Addison-Wesley Professional, Indianapolis, IN, USA, 1995
 
-\bibitem[OMG06]{spec:MOF}
-Object Management Group (OMG), Needham, MA, USA:
-\newblock \emph{Meta Object Facility (MOF) Core Specification, OMG Available
-  Specification}.
-\newblock \url{http://www.omg.org/spec/MOF/2.0/}.
-\newblock \,Version:\,2.0, January 2006
+\bibitem[OMG06]{spec:MOF2.0}
+; Object Management Group (OMG) (Veranst.):
+\newblock \emph{Meta Object Facility (MOF) Core Specification}.
+\newblock \,Version:\,January 2006.
+\newblock \url{http://www.omg.org/spec/MOF/2.0/}
 
 \bibitem[OMG09]{spec:UML2-2Inf}
 Object Management Group (OMG), Needham, MA, USA:
@@ -61,37 +69,49 @@ Object Management Group (OMG), Needham, MA, USA:
 \newblock \url{http://www.eclipse.org/aspectj/}.
 \newblock \,Version:\,2010
 
-\bibitem[URL10c]{WWW:eclipse}
+\bibitem[URL10c]{WWW:MDT}
+\emph{Eclipse Model Development Tools}.
+\newblock Eclipse Project Website.
+\newblock \url{http://www.eclipse.org/modeling/mdt/}.
+\newblock \,Version:\,2010
+
+\bibitem[URL10d]{WWW:EMF}
+\emph{Eclipse Modeling Framework}.
+\newblock Eclipse project Website.
+\newblock \url{http://www.eclipse.org/emf/}.
+\newblock \,Version:\,2010
+
+\bibitem[URL10e]{WWW:eclipse}
 \emph{Eclipse project Website}.
 \newblock Eclipse project Website.
 \newblock \url{http://www.eclipse.org/}.
 \newblock \,Version:\,2010
 
-\bibitem[URL10d]{WWW:eclipseSubversive}
+\bibitem[URL10f]{WWW:eclipseSubversive}
 \emph{Polarion Software: Subversive}.
 \newblock Polarion.org Community.
 \newblock \url{http://www.polarion.com/products/svn/subversive.php}.
 \newblock \,Version:\,2010
 
-\bibitem[URL10e]{WWW:toolkitSourceforge}
+\bibitem[URL10g]{WWW:toolkitSourceforge}
 \emph{Sourceforge Project Site of the Dresden OCL Toolkit}.
 \newblock Sourceforge project website.
 \newblock \url{http://sourceforge.net/projects/dresden-ocl/}.
 \newblock \,Version:\,2010
 
-\bibitem[URL10f]{WWW:toolkitSVN}
+\bibitem[URL10h]{WWW:toolkitSVN}
 \emph{SVN of the Dresden OCL Toolkit}.
 \newblock Subversion Repository.
 \newblock \url{http://dresden-ocl.svn.sourceforge.net/svnroot/dresden-ocl}.
 \newblock \,Version:\,2010
 
-\bibitem[URL10g]{WWW:toolkitUpdatesite}
+\bibitem[URL10i]{WWW:toolkitUpdatesite}
 \emph{Update Site of the Dresden OCL Toolkit}.
 \newblock Eclipse Update Site.
 \newblock \url{http://dresden-ocl.sourceforge.net/downloads/updatesite/}.
 \newblock \,Version:\,2010
 
-\bibitem[URL10h]{WWW:toolkit}
+\bibitem[URL10j]{WWW:toolkit}
 \emph{Website of the Dresden OCL Toolkit}.
 \newblock Project website.
 \newblock \url{http://dresden-ocl.sourceforge.net/}.
@@ -101,5 +121,19 @@ Object Management Group (OMG), Needham, MA, USA:
 \textsc{Wilke}, Claas:
 \newblock \emph{Java Code Generation for Dresden OCL2 for Eclipse}, Technische
   Universit‰t Dresden, Germany, Groﬂer Beleg (Minor Thesis), February 2009
+
+\bibitem[WK03]{warmerEA:ocl03}
+\textsc{Warmer}, Jos; \textsc{Kleppe}, Anneke:
+\newblock \emph{{The Object Constraint Language - Getting Your Models Ready for
+  MDA}}.
+\newblock 2nd.
+\newblock Boston, MA, USA : Pearson Education Inc., 2003
+
+\bibitem[WTW10]{wilkeEA:MODELS2010}
+\textsc{Wilke}, Claas; \textsc{Thiele}, Michael ; \textsc{Wende}, Christian:
+\newblock Extending Variability for OCL Interpretation.
+\newblock {In: }\emph{Proceedings of the ACM/IEEE 13th International Conference
+  on Model Driven Engineering Languages and Systems (MoDELS2010), Oslo, October
+  3-8, 2010}, 2010, To be published in Springer LNCS series.
 
 \end{thebibliography}
