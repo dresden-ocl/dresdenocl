@@ -1,5 +1,5 @@
-SIMPLE EXAMPLE PROVIDED WITH DRESDEN OCL2 FOR ECLIPSE
-=====================================================
+PML EXAMPLE PROVIDED WITH DRESDEN OCL2 FOR ECLIPSE
+==================================================
 
 This plug-in contains the PML example that is provided with Dresden OCL2
 for Eclipse. The PML example provides an EMF Ecore and an EMF Ecore Model
@@ -15,7 +15,7 @@ Provided Model(s)
 =================
 The model provided by this example exists as EMF Ecore Model.
 
-* To import the EMF Ecore2 Model use the file
+* To import the EMF Ecore Model use the file
   /model/pml.ecore
 
 Provided Model Instance
