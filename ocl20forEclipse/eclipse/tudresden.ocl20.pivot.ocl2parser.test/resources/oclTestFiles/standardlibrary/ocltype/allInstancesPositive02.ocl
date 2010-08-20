@@ -1,0 +1,9 @@
+package package1::package2
+
+-- Test of special operation allInstances().
+-- Operation calls should be supported on the special operation.
+context Type1
+def: testAllInstancesPositive02(): Set(Type1) =
+Type1.allInstances()->asSet()
+
+endpackage

@@ -274,7 +274,7 @@ public class TestIterators {
 	 * </p>
 	 */
 	@Test
-	public void testAnyCollect01() throws Exception {
+	public void testCollectPositive01() throws Exception {
 
 		TestPerformer testPerformer;
 
@@ -300,7 +300,7 @@ public class TestIterators {
 	 * </p>
 	 */
 	@Test
-	public void testAnyCollect02() throws Exception {
+	public void testCollectPositive02() throws Exception {
 
 		TestPerformer testPerformer;
 
@@ -326,7 +326,7 @@ public class TestIterators {
 	 * </p>
 	 */
 	@Test
-	public void testAnyCollect03() throws Exception {
+	public void testCollectPositive03() throws Exception {
 
 		TestPerformer testPerformer;
 
@@ -352,7 +352,7 @@ public class TestIterators {
 	 * </p>
 	 */
 	@Test
-	public void testAnyCollect04() throws Exception {
+	public void testCollectPositive04() throws Exception {
 
 		TestPerformer testPerformer;
 
@@ -378,7 +378,7 @@ public class TestIterators {
 	 * </p>
 	 */
 	@Test
-	public void testAnyCollect05() throws Exception {
+	public void testCollectPositive05() throws Exception {
 
 		TestPerformer testPerformer;
 
@@ -395,6 +395,32 @@ public class TestIterators {
 						AllStandardLibraryTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
+		testPerformer.parseFile(oclFileName);
+	}
+
+	/**
+	 * <p>
+	 * A test case testing the iterator <code>Collection->collect(..)</code>.
+	 * </p>
+	 */
+	@Test
+	public void testCollectPositive06() throws Exception {
+	
+		TestPerformer testPerformer;
+	
+		String modelFileName;
+		String oclFileName;
+	
+		oclFileName = "standardlibrary/iterators/collectPositive06.ocl";
+		modelFileName = "testmodel.uml";
+	
+		/* Try to get the TestPerformer. */
+		testPerformer =
+				TestPerformer.getInstance(AllStandardLibraryTests.META_MODEL_ID,
+						AllStandardLibraryTests.MODEL_BUNDLE,
+						AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer.setModel(modelFileName);
+	
 		testPerformer.parseFile(oclFileName);
 	}
 

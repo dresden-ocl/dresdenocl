@@ -1,0 +1,7 @@
+package package1::package2
+
+-- @pre is not allowed on self since self is a variable and not a property.
+context Type1::getInteger(): Integer
+post: self@pre = self
+
+endpackage
