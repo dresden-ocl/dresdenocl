@@ -81,7 +81,7 @@ trait OclParseTreeToEssentialOcl { selfType : OclStaticSemantics =>
 				        if (name != null)
 				          constraintName = name.getSimpleName
 				        val constraint = factory.createConstraint(
-				        	constraintName, ConstraintKind.BODY, expression, null, context)
+				        	constraintName, ConstraintKind.BODY, expression, operation, context)
 				        Full(constraint)
               }
         		}
@@ -103,7 +103,7 @@ trait OclParseTreeToEssentialOcl { selfType : OclStaticSemantics =>
 				        	"", i match {
 				        	  case _ : InitValueCS => ConstraintKind.INITIAL
 				        	  case _ : DeriveValueCS => ConstraintKind.DERIVED
-				        	}, expression, null, context)
+				        	}, expression, property, context)
 				        Full(constraint)
 	            }
 	          }

@@ -324,10 +324,10 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 			NotificationChain msgs = null;
 			if (definedFeature != null)
 				msgs = ((InternalEObject) definedFeature).eInverseRemove(this,
-						PivotModelPackage.FEATURE__DEFINITION, Feature.class, msgs);
+						PivotModelPackage.FEATURE__SEMANTICS, Feature.class, msgs);
 			if (newDefinedFeature != null)
 				msgs = ((InternalEObject) newDefinedFeature).eInverseAdd(this,
-						PivotModelPackage.FEATURE__DEFINITION, Feature.class, msgs);
+						PivotModelPackage.FEATURE__SEMANTICS, Feature.class, msgs);
 			msgs = basicSetDefinedFeature(newDefinedFeature, msgs);
 			if (msgs != null)
 				msgs.dispatch();
@@ -426,7 +426,7 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 		case PivotModelPackage.CONSTRAINT__DEFINED_FEATURE:
 			if (definedFeature != null)
 				msgs = ((InternalEObject) definedFeature).eInverseRemove(this,
-						PivotModelPackage.FEATURE__DEFINITION, Feature.class, msgs);
+						PivotModelPackage.FEATURE__SEMANTICS, Feature.class, msgs);
 			return basicSetDefinedFeature((Feature) otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);

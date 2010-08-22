@@ -183,12 +183,22 @@ trait OclReferenceResolver { selfType : OclStaticSemantics =>
 		                }.filter(_.isDefined)
 		                if (allOperations.isEmpty)
 		                	yieldFailure("Unable to resolve operation " + identifier + " with parameters " + parameters.mkString(", "), aeo.getEObject)
-                    else
-                      Full(List(allOperations.first.open_!))
+		                else {
+                      val operation = allOperations.first.open_!
+                      if (operation.getName == "oclIsNew" && operation.getInputParameter.isEmpty && operation.getType == oclLibrary.getOclBoolean &&
+                      		!(aeo->isInPostCondition))
+                      	yieldFailure("The use of 'oclIsNew' outside of a postcondition is not allowed.", aeo)
+                      else
+                      	Full(List(operation))
+                    }
 		              }
 		              case _ =>
 		                lookupOperation(sourceExpression, aeo, identifier, static, parameters).flatMap{operation =>
-				              Full(List(operation))
+				              if (operation.getName == "oclIsNew" && operation.getInputParameter.isEmpty && operation.getType == oclLibrary.getOclBoolean &&
+                      		!(aeo->isInPostCondition))
+                      	yieldFailure("The use of 'oclIsNew' outside of a postcondition is not allowed.", aeo)
+                      else
+                      	Full(List(operation))
 				            }
 		            }
 		          }

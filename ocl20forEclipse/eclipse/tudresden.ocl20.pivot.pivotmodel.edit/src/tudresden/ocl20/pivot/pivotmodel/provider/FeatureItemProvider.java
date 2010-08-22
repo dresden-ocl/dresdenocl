@@ -83,7 +83,7 @@ public class FeatureItemProvider extends TypedElementItemProvider implements
 			super.getPropertyDescriptors(object);
 
 			addStaticPropertyDescriptor(object);
-			addDefinitionPropertyDescriptor(object);
+			addSemanticsPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -108,21 +108,21 @@ public class FeatureItemProvider extends TypedElementItemProvider implements
 	}
 
 	/**
-	 * This adds a property descriptor for the Definition feature.
+	 * This adds a property descriptor for the Semantics feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addDefinitionPropertyDescriptor(Object object) {
+	protected void addSemanticsPropertyDescriptor(Object object) {
 		itemPropertyDescriptors
 				.add(createItemPropertyDescriptor(
 						((ComposeableAdapterFactory) adapterFactory)
 								.getRootAdapterFactory(),
 						getResourceLocator(),
-						getString("_UI_Feature_definition_feature"), //$NON-NLS-1$
+						getString("_UI_Feature_semantics_feature"), //$NON-NLS-1$
 						getString(
-								"_UI_PropertyDescriptor_description", "_UI_Feature_definition_feature", "_UI_Feature_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-						PivotModelPackage.Literals.FEATURE__DEFINITION, true, false, true,
+								"_UI_PropertyDescriptor_description", "_UI_Feature_semantics_feature", "_UI_Feature_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+						PivotModelPackage.Literals.FEATURE__SEMANTICS, true, false, true,
 						null, null, null));
 	}
 

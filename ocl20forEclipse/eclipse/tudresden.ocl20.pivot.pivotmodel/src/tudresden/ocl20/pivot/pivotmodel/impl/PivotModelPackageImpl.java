@@ -682,7 +682,7 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getFeature_Definition() {
+	public EReference getFeature_Semantics() {
 		return (EReference) featureEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -991,7 +991,7 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 
 		featureEClass = createEClass(FEATURE);
 		createEAttribute(featureEClass, FEATURE__STATIC);
-		createEReference(featureEClass, FEATURE__DEFINITION);
+		createEReference(featureEClass, FEATURE__SEMANTICS);
 
 		genericElementEClass = createEClass(GENERIC_ELEMENT);
 		createEReference(genericElementEClass,
@@ -1186,10 +1186,10 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 				theDatatypesPackage.getBoolean(),
 				"static", "false", 0, 1, Feature.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$ //$NON-NLS-2$
 		initEReference(
-				getFeature_Definition(),
+				getFeature_Semantics(),
 				this.getConstraint(),
 				this.getConstraint_DefinedFeature(),
-				"definition", null, 0, 1, Feature.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+				"semantics", null, 0, 1, Feature.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
 		initEClass(
 				genericElementEClass,
@@ -1587,7 +1587,7 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 		initEReference(
 				getConstraint_DefinedFeature(),
 				this.getFeature(),
-				this.getFeature_Definition(),
+				this.getFeature_Semantics(),
 				"definedFeature", null, 0, 1, Constraint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
 		op = addEOperation(constraintEClass, this.getConstraint(),

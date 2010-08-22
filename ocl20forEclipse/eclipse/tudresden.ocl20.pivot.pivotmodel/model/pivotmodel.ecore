@@ -59,7 +59,7 @@
         <details key="documentation" value="&lt;code>&#xD;&#xA;Specifies whether this feature characterizes individual &#xD;&#xA;instances classified by a {@link Type} &#xD;&#xA;(&lt;code>false&lt;/code>) or the type itself &#xD;&#xA;(&lt;code>true&lt;/code>). Default value is &#xD;&#xA;&lt;code>false&lt;/code>.&#xD;&#xA;&lt;/code>"/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="definition" eType="#//Constraint"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="semantics" eType="#//Constraint"
         eOpposite="#//Constraint/definedFeature"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="GenericElement" abstract="true" interface="true"
@@ -550,7 +550,7 @@
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="definedFeature" eType="#//Feature"
-        resolveProxies="false" eOpposite="#//Feature/definition">
+        resolveProxies="false" eOpposite="#//Feature/semantics">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="&lt;p>&#xD;&#xA;References the defined feature of a {@link &#xD;&#xA;ConstraintKind#DEFINITION} constraint.&#xD;&#xA;&lt;/p>"/>
       </eAnnotations>

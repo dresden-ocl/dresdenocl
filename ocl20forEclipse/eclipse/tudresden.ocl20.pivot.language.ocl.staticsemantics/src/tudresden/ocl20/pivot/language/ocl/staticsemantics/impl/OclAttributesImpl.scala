@@ -477,4 +477,27 @@ trait OclAttributesImpl extends OclAttributes {selfType : OclStaticSemantics =>
       }
     }
   }
+  
+  abstract override def __isInStaticContext : Attributable ==> Boolean = {
+    childAttr {
+      case child => {
+        case DefinitionExpCS(_, true) => true
+        case OperationContextDeclarationCS(operationDefinition, _) => {
+          val operation = operationDefinition.getOperation
+          if (operation.eIsProxy)
+            false
+          else
+            operation.isStatic
+        }
+        case a : AttributeContextDeclarationCS => {
+          val property = a.getProperty
+          if (property.eIsProxy)
+            false
+          else
+            property.isStatic
+        }
+        case _ => super.__isInStaticContext(child)
+      }
+    }
+  }
 }

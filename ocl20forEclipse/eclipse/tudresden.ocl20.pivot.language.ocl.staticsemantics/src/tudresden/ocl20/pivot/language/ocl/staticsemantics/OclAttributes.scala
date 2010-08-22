@@ -110,4 +110,14 @@ trait OclAttributes { selfType : OclStaticSemantics =>
     }
   }
   
+  protected val isInStaticContext = __isInStaticContext
+  protected def __isInStaticContext : Attributable ==> Boolean = {
+    childAttr {
+      case child => {
+        case null => false
+        case passOn => passOn->isInStaticContext
+      }
+    }
+  }
+  
 }

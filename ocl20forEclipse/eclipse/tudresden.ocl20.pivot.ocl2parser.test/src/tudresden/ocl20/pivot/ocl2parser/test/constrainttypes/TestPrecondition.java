@@ -172,4 +172,32 @@ public class TestPrecondition {
 		/* Try to parse the constraint file. */
 		testPerformer.parseFile(oclFileName);
 	}
+	
+	/**
+	 * <p>
+	 * A test case to parse a postcondition that should not be parsed
+	 * appropriately.
+	 * </p>
+	 */
+	@Test(expected = SemanticException.class)
+	public void testPreconditionNegative04() throws Exception {
+
+		TestPerformer testPerformer;
+
+		String modelFileName;
+		String oclFileName;
+
+		oclFileName = "constrainttypes/preconditionNegative04.ocl";
+		modelFileName = "testmodel.uml";
+
+		/* Try to get the TestPerformer. */
+		testPerformer = TestPerformer.getInstance(
+				AllConstraintTypeTests.META_MODEL_ID,
+				AllConstraintTypeTests.MODEL_BUNDLE,
+				AllConstraintTypeTests.MODEL_DIRECTORY);
+		testPerformer.setModel(modelFileName);
+
+		/* Try to parse the constraint file. */
+		testPerformer.parseFile(oclFileName);
+	}
 }

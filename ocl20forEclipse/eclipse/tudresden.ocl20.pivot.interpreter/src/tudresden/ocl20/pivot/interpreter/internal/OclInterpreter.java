@@ -2593,7 +2593,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		if (result == null) {
 
 			Constraint operationSemanticInOcl;
-			operationSemanticInOcl = referredOperation.getDefinition();
+			operationSemanticInOcl = referredOperation.getSemantics();
 
 			OclAny[] oclAnyParameters;
 			oclAnyParameters = computeParameters(operationCallExp,
@@ -2687,7 +2687,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			sourceType = (OclType<?>) source;
 
 			Constraint operationSemanticInOcl;
-			operationSemanticInOcl = referredOperation.getDefinition();
+			operationSemanticInOcl = referredOperation.getSemantics();
 
 			OclAny[] oclAnyParameters;
 			oclAnyParameters = computeParameters(operationCallExp,
@@ -3127,7 +3127,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 				sourceObject = (OclModelInstanceObject) source;
 
 				Constraint propertySemanticInOcl;
-				propertySemanticInOcl = referredProperty.getDefinition();
+				propertySemanticInOcl = referredProperty.getSemantics();
 
 				/*
 				 * Probably interpret the result of a definition, derive or init
@@ -3232,7 +3232,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			sourceType = (OclType<?>) source;
 
 			Constraint propertySemanticInOcl;
-			propertySemanticInOcl = referredProperty.getDefinition();
+			propertySemanticInOcl = referredProperty.getSemantics();
 
 			/*
 			 * Probably interpret the result of a definition, derive or init

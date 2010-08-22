@@ -184,7 +184,7 @@ public interface Constraint extends NamedElement {
 
 	/**
 	 * Returns the value of the '<em><b>Defined Feature</b></em>' reference.
-	 * It is bidirectional and its opposite is '{@link tudresden.ocl20.pivot.pivotmodel.Feature#getDefinition <em>Definition</em>}'.
+	 * It is bidirectional and its opposite is '{@link tudresden.ocl20.pivot.pivotmodel.Feature#getSemantics <em>Semantics</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
@@ -196,8 +196,8 @@ public interface Constraint extends NamedElement {
 	 * @return the value of the '<em>Defined Feature</em>' reference.
 	 * @see #setDefinedFeature(Feature)
 	 * @see tudresden.ocl20.pivot.pivotmodel.PivotModelPackage#getConstraint_DefinedFeature()
-	 * @see tudresden.ocl20.pivot.pivotmodel.Feature#getDefinition
-	 * @model opposite="definition" resolveProxies="false"
+	 * @see tudresden.ocl20.pivot.pivotmodel.Feature#getSemantics
+	 * @model opposite="semantics" resolveProxies="false"
 	 * @generated
 	 */
 	Feature getDefinedFeature();

@@ -263,13 +263,13 @@ public interface PivotModelPackage extends EPackage {
 	int FEATURE__STATIC = TYPED_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Definition</b></em>' reference.
+	 * The feature id for the '<em><b>Semantics</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FEATURE__DEFINITION = TYPED_ELEMENT_FEATURE_COUNT + 1;
+	int FEATURE__SEMANTICS = TYPED_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Feature</em>' class.
@@ -883,13 +883,13 @@ public interface PivotModelPackage extends EPackage {
 	int PROPERTY__STATIC = FEATURE__STATIC;
 
 	/**
-	 * The feature id for the '<em><b>Definition</b></em>' reference.
+	 * The feature id for the '<em><b>Semantics</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PROPERTY__DEFINITION = FEATURE__DEFINITION;
+	int PROPERTY__SEMANTICS = FEATURE__SEMANTICS;
 
 	/**
 	 * The feature id for the '<em><b>Owning Type</b></em>' container reference.
@@ -974,13 +974,13 @@ public interface PivotModelPackage extends EPackage {
 	int OPERATION__STATIC = FEATURE__STATIC;
 
 	/**
-	 * The feature id for the '<em><b>Definition</b></em>' reference.
+	 * The feature id for the '<em><b>Semantics</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATION__DEFINITION = FEATURE__DEFINITION;
+	int OPERATION__SEMANTICS = FEATURE__SEMANTICS;
 
 	/**
 	 * The feature id for the '<em><b>Owned Type Parameter</b></em>' containment reference list.
@@ -1631,13 +1631,13 @@ public interface PivotModelPackage extends EPackage {
 	int ASSOCIATION_PROPERTY__STATIC = PROPERTY__STATIC;
 
 	/**
-	 * The feature id for the '<em><b>Definition</b></em>' reference.
+	 * The feature id for the '<em><b>Semantics</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ASSOCIATION_PROPERTY__DEFINITION = PROPERTY__DEFINITION;
+	int ASSOCIATION_PROPERTY__SEMANTICS = PROPERTY__SEMANTICS;
 
 	/**
 	 * The feature id for the '<em><b>Owning Type</b></em>' container reference.
@@ -1803,15 +1803,15 @@ public interface PivotModelPackage extends EPackage {
 	EAttribute getFeature_Static();
 
 	/**
-	 * Returns the meta object for the reference '{@link tudresden.ocl20.pivot.pivotmodel.Feature#getDefinition <em>Definition</em>}'.
+	 * Returns the meta object for the reference '{@link tudresden.ocl20.pivot.pivotmodel.Feature#getSemantics <em>Semantics</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Definition</em>'.
-	 * @see tudresden.ocl20.pivot.pivotmodel.Feature#getDefinition()
+	 * @return the meta object for the reference '<em>Semantics</em>'.
+	 * @see tudresden.ocl20.pivot.pivotmodel.Feature#getSemantics()
 	 * @see #getFeature()
 	 * @generated
 	 */
-	EReference getFeature_Definition();
+	EReference getFeature_Semantics();
 
 	/**
 	 * Returns the meta object for class '{@link tudresden.ocl20.pivot.pivotmodel.GenericElement <em>Generic Element</em>}'.
@@ -2533,12 +2533,12 @@ public interface PivotModelPackage extends EPackage {
 		EAttribute FEATURE__STATIC = eINSTANCE.getFeature_Static();
 
 		/**
-		 * The meta object literal for the '<em><b>Definition</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Semantics</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference FEATURE__DEFINITION = eINSTANCE.getFeature_Definition();
+		EReference FEATURE__SEMANTICS = eINSTANCE.getFeature_Semantics();
 
 		/**
 		 * The meta object literal for the '{@link tudresden.ocl20.pivot.pivotmodel.GenericElement <em>Generic Element</em>}' class.

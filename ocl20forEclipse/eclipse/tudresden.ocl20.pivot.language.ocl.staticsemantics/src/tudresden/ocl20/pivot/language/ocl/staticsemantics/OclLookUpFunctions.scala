@@ -63,14 +63,22 @@ trait OclLookUpFunctions { selfType : OclStaticSemantics =>
   
   protected def lookupVariable(name : String, container : Attributable) : Box[Variable] = {
     (container->variables).flatMap{case (implicitVariables, explicitVariables) =>
-      Box(implicitVariables.filter(_.getName == name)) or explicitVariables.find(v => v.getName == name)
+      Box(
+        if (container->isInStaticContext)
+        	implicitVariables.filter(iv => iv.getName != "self" && iv.getName == name)
+        else
+          implicitVariables.filter(_.getName == name))
+      .or (explicitVariables.find(v => v.getName == name))
     }
   }
   
   protected def lookupVariableFuzzy(name : String, container : Attributable) : List[Variable] = {
     container->variables match {
       case Full((implicitVariables, explicitVariables)) =>
-	      implicitVariables.filter(v => v.getName.startsWith(name)):::(explicitVariables.filter(v => v.getName.startsWith(name)))
+	      (if (container->isInStaticContext)
+	      	implicitVariables.filter(v => v.getName != "self" && v.getName.startsWith(name))
+	      else
+	      	implicitVariables.filter(v => v.getName.startsWith(name))) :::(explicitVariables.filter(v => v.getName.startsWith(name)))
       case Failure(_, _, _) | Empty => List()
     }
   }
