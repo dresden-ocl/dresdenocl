@@ -18,7 +18,6 @@ public class OclLoadOptionsProvider implements IOclOptionProvider {
 		oclReferenceResolveHelper = new OclReferenceResolveHelper();
 	}
 
-	@Override
 	public Map<?, ?> getOptions() {
 		
 		Map<String, Object> result = new HashMap<String, Object>();

@@ -12,7 +12,6 @@ public class OclResourcePostProcessorProvider implements
 		oclResourcePostProcessor = new OclStaticSemanticsPostProcessor();
 	}
 
-	@Override
 	public IOclResourcePostProcessor getResourcePostProcessor() {
 		return oclResourcePostProcessor;
 	}

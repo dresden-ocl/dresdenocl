@@ -19,7 +19,6 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
 
 public class OclReferenceResolveHelper implements IOclReferenceResolveHelper {
 
-	@Override
 	public List<Namespace> resolveNamespace(String identifier,
 			boolean resolveFuzzy, EObject container) {
 		List<Namespace> ret = OclStaticSemanticsProvider.getStaticSemantics(
@@ -28,7 +27,6 @@ public class OclReferenceResolveHelper implements IOclReferenceResolveHelper {
 		return ret;
 	}
 
-	@Override
 	public List<Type> resolveType(String identifier, boolean resolveFuzzy,
 			EObject container) {
 		List<Type> ret = OclStaticSemanticsProvider.getStaticSemantics(
@@ -37,7 +35,6 @@ public class OclReferenceResolveHelper implements IOclReferenceResolveHelper {
 		return ret;
 	}
 
-	@Override
 	public List<NamedElement> resolveNamedElement(String identifier,
 			boolean resolveFuzzy, EObject container) {
 		List<NamedElement> ret = OclStaticSemanticsProvider.getStaticSemantics(
@@ -46,7 +43,6 @@ public class OclReferenceResolveHelper implements IOclReferenceResolveHelper {
 		return ret;
 	}
 
-	@Override
 	public List<Property> resolveProperty(String identifier,
 			boolean resolveFuzzy, EObject container) {
 		List<Property> ret = OclStaticSemanticsProvider.getStaticSemantics(
@@ -55,7 +51,6 @@ public class OclReferenceResolveHelper implements IOclReferenceResolveHelper {
 		return ret;
 	}
 
-	@Override
 	public List<Property> resolvePropertyDefinition(String identifier,
 			boolean resolveFuzzy, EObject container) {
 		List<Property> ret = OclStaticSemanticsProvider.getStaticSemantics(
@@ -64,7 +59,6 @@ public class OclReferenceResolveHelper implements IOclReferenceResolveHelper {
 		return ret;
 	}
 
-	@Override
 	public List<Operation> resolveOperation(String identifier,
 			boolean resolveFuzzy, EObject container, EReference reference,
 			List<OclExpressionCS> parameters, boolean isStatic) {
@@ -74,7 +68,6 @@ public class OclReferenceResolveHelper implements IOclReferenceResolveHelper {
 		return ret;
 	}
 
-	@Override
 	public List<Operation> resolveOperationDefinition(String identifier,
 			boolean resolveFuzzy, EObject container, EReference reference,
 			List<ParameterCS> parameters, TypeCS returnType) {
@@ -85,7 +78,6 @@ public class OclReferenceResolveHelper implements IOclReferenceResolveHelper {
 		return ret;
 	}
 
-	@Override
 	public List<Parameter> resolveParameterDefinition(String identifier,
 			boolean resolveFuzzy, EObject container, EReference reference,
 			TypeCS parameterType) {

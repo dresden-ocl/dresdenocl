@@ -15,7 +15,6 @@ import tudresden.ocl20.pivot.pivotmodel.Constraint;
 public class OclStaticSemanticsPostProcessor implements
 		IOclResourcePostProcessor {
 
-	@Override
 	public void process(OclResource resource) {
 		EList<EObject> contents = resource.getContents();
 		if (!contents.isEmpty()) {
