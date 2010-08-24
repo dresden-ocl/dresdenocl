@@ -22,6 +22,7 @@ import java.awt.Image;
 
 import org.apache.log4j.Logger;
 import org.eclipse.jface.resource.ImageDescriptor;
+import org.eclipse.ui.IStartup;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
@@ -35,7 +36,7 @@ import tudresden.ocl20.pivot.modelbus.ui.internal.views.ModelsView;
  * 
  * @author Matthias Bräuer
  */
-public class ModelBusUIPlugin extends AbstractUIPlugin {
+public class ModelBusUIPlugin extends AbstractUIPlugin implements IStartup {
 
 	/** The plug-in ID. */
 	public static final String ID = "tudresden.ocl20.pivot.modelbus.ui"; //$NON-NLS-1$
@@ -58,6 +59,19 @@ public class ModelBusUIPlugin extends AbstractUIPlugin {
 
 	/*
 	 * (non-Javadoc)
+	 * 
+	 * @see org.eclipse.ui.IStartup#earlyStartup()
+	 */
+	public void earlyStartup() {
+		/*
+		 * Remains empty. Interface only implemented to avoid CastClassException
+		 * caused by Eclipse.
+		 */
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see
 	 * org.eclipse.ui.plugin.AbstractUIPlugin#start(org.osgi.framework.BundleContext
 	 * )
@@ -71,6 +85,7 @@ public class ModelBusUIPlugin extends AbstractUIPlugin {
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see
 	 * org.eclipse.ui.plugin.AbstractUIPlugin#stop(org.osgi.framework.BundleContext
 	 * )
@@ -96,12 +111,12 @@ public class ModelBusUIPlugin extends AbstractUIPlugin {
 
 	/**
 	 * <p>
-	 * Returns an {@link ImageDescriptor} for the {@link Image} file at the given
-	 * plug-in relative path.
+	 * Returns an {@link ImageDescriptor} for the {@link Image} file at the
+	 * given plug-in relative path.
 	 * </p>
 	 * 
 	 * @param aPath
-	 *          The path whose {@link ImageDescriptor} shall be returned.
+	 *            The path whose {@link ImageDescriptor} shall be returned.
 	 * @return The {@link ImageDescriptor} for the given path.
 	 */
 	public static ImageDescriptor getImageDescriptor(String aPath) {
@@ -115,7 +130,7 @@ public class ModelBusUIPlugin extends AbstractUIPlugin {
 	 * from the <code>tudresden.ocl20.logging</code> plug-in.
 	 * 
 	 * @param aClass
-	 *          The class to return the {@link Logger} for.
+	 *            The class to return the {@link Logger} for.
 	 * 
 	 * @return A log4j {@link Logger} instance.
 	 */

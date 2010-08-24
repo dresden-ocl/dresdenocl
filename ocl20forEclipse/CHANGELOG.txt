@@ -23,6 +23,9 @@ GUI
 * A bug in the Model Instance Browser has been fixed.
   - OCL-defined features are not displayed as undefined in the Model Instance Browser 
     anymore.
+    
+* The Eclipse Package Explorer and Navigator now provide functionalities for Model and Model
+  Instance Import in their pop-up menus.
 
 
 Release 2.2 (June 16th 2010)

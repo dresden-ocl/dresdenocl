@@ -20,17 +20,17 @@
          </menu>
          <action
                class="tudresden.ocl20.pivot.modelbus.ui.actions.LoadModelInstanceWizardAction"
-               icon="icons/models.gif"
+               icon="icons/instance.gif"
                id="tudresden.ocl20.pivot.modelbus.ui.actions.LoadModelInstanceWizardAction"
                label="Load Model Instance"
                menubarPath="tudresden.ocl20.pivot.modelbus.ui.menu/tudresden.ocl20.pivot.modelbus.ui.menu.import"
-               tooltip="Load a Model Instance into Dresden OCL2 for Eclipse.">
+               tooltip="Loads a Model Instance into DresdenOCL">
          </action>
          <action
                label="Load Model"
                icon="icons/models.gif"
                class="tudresden.ocl20.pivot.modelbus.ui.actions.LoadModelWizardAction"
-               tooltip="Load a domain-specific model into Dresden OCL2 for Eclipse"
+               tooltip="Loads a domain-specific model into DresdenOCL"
                menubarPath="tudresden.ocl20.pivot.modelbus.ui.menu/tudresden.ocl20.pivot.modelbus.ui.menu.import"
                id="tudresden.ocl20.pivot.modelbus.ui.actions.LoadModelWizardAction">
          </action>
@@ -90,6 +90,50 @@
             id="tudresden.ocl20.pivot.modelbus.ui.newWizards.category"
             name="Dresden OCL2 for Eclipse">
       </category>
+   </extension>
+   <extension
+         id="tudresden.ocl20.pivot.modelbus.ui.contextmenu"
+         name="DresdenOCL Context Menu"
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            allPopups="false"
+            locationURI="popup:org.eclipse.ui.popup.any?after=additions">
+         <menu
+               label="DresdenOCL"
+               tooltip="Tools of DresdenOCL">
+            <command
+                  commandId="tudresden.ocl20.pivot.modelbus.ui.loadModelCommand"
+                  icon="icons/models.gif"
+                  label="Load as Model ..."
+                  mnemonic="M"
+                  style="push"
+                  tooltip="Loads a domain-specific model into DresdenOCL">
+            </command>
+            <command
+                  commandId="tudresden.ocl20.pivot.modelbus.ui.loadModelInstanceCommand"
+                  icon="icons/instance.gif"
+                  label="Load as Model Instance ..."
+                  mnemonic="I"
+                  style="push"
+                  tooltip="Loads a Model Instance into DresdenOCL">
+            </command>
+         </menu>
+      </menuContribution>
+   </extension>
+   <extension
+         point="org.eclipse.ui.commands">
+      <command
+            defaultHandler="tudresden.ocl20.pivot.modelbus.ui.command.LoadModelWizardCommand"
+            description="Loads a domain-specific model into DresdenOCL"
+            id="tudresden.ocl20.pivot.modelbus.ui.loadModelCommand"
+            name="LoadModelCommand">
+      </command>
+      <command
+            defaultHandler="tudresden.ocl20.pivot.modelbus.ui.command.LoadModelInstanceWizardCommand"
+            description="Loads a Model Instance into DresdenOCL"
+            id="tudresden.ocl20.pivot.modelbus.ui.loadModelInstanceCommand"
+            name="LoadModelCommand">
+      </command>
    </extension>
    
 </plugin>
