@@ -18,6 +18,7 @@
       <pathelement location="${scala-library.jar}"   />
 			<fileset dir="${eclipse.home}">
 				<include name="plugins/org.eclipse.*.jar" />
+				<include name="plugins/org.emftext.access*.jar" />
 			</fileset>
 			<dirset dir="./..">
       	<include name="tudresden.ocl20.**/bin"/>
