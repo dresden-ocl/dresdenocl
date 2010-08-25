@@ -1,0 +1,21 @@
+package package1
+
+context Class1
+-- Computes Fibonacci Numbers recursively.
+def: getFib(n : Integer) : Integer =
+  if n.oclIsInvalid() or n.oclIsUndefined() then n
+    else if n = 0 then 0
+      else if n = 1 then 1
+        else getFib(n - 1) + getFib(n - 2)
+      endif
+    endif 
+  endif
+
+inv: getFib(0) = 0
+inv: getFib(1) = 1
+inv: getFib(2) = 1
+inv: getFib(3) = 2
+inv: getFib(4) = 3
+inv: getFib(5) = 5
+
+endpackage

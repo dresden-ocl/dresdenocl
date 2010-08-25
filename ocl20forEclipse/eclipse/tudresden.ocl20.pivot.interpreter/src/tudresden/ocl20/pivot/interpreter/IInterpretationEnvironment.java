@@ -31,6 +31,7 @@
 package tudresden.ocl20.pivot.interpreter;
 
 import tudresden.ocl20.pivot.essentialocl.expressions.OperationCallExp;
+import tudresden.ocl20.pivot.essentialocl.expressions.Variable;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclModelInstanceObject;
 import tudresden.ocl20.pivot.modelinstance.IModelInstance;
@@ -49,33 +50,60 @@ public interface IInterpretationEnvironment extends Cloneable {
 
 	/**
 	 * <p>
-	 * Saves a variable in the environment.
+	 * Creates a new child {@link IInterpretationEnvironment}.
 	 * </p>
-	 * 
-	 * @param path
-	 *            The path of the variable or simply the name (e.g. "self")
-	 * @param anOclRoot
-	 *            The variable to be saved.
-	 */
-	public void addVar(String path, OclAny anOclRoot);
-
-	/**
-	 * <p>
-	 * Clones an {@link IInterpretationEnvironment}. Used for creating local
-	 * environments.
 	 * 
 	 * @return A copy of the {@link IInterpretationEnvironment}.
 	 */
-	public IInterpretationEnvironment clone();
+	public IInterpretationEnvironment createChildEnvironment();
 
 	/**
 	 * <p>
-	 * Gets the {@link IModelInstance} for the current interpretation.
+	 * Returns the {@link IModelInstance} of this
+	 * {@link IInterpretationEnvironment}.
 	 * </p>
 	 * 
-	 * @return The actual {@link IModelInstance}.
+	 * @return The {@link IModelInstance} of this
+	 *         {@link IInterpretationEnvironment}.
 	 */
 	public IModelInstance getModelInstance();
+
+	/**
+	 * <p>
+	 * Gets saved variables with given name.
+	 * </p>
+	 * 
+	 * @param identifier
+	 *            The identifier of the variable or simply the name (e.g.
+	 *            <code>self</code>).
+	 * 
+	 * @return Saved variables with given name.
+	 */
+	public OclAny getVariableValue(String identifier);
+
+	/**
+	 * <p>
+	 * Sets the {@link IModelInstance} of this {@link IInterpretationEnvironment}.
+	 * </p>
+	 * 
+	 * @param modelInstance
+	 *            The {@link IModelInstance} of this {@link IInterpretationEnvironment}.
+	 */
+	public void setModelInstance(IModelInstance modelInstance);
+
+	/**
+	 * <p>
+	 * Sets the {@link OclAny} value of a {@link Variable} visible in this
+	 * {@link IInterpretationEnvironment}.
+	 * </p>
+	 * 
+	 * @param identifier
+	 *            The identifier of the variable or simply the name (e.g.
+	 *            <code>self</code>).
+	 * @param value
+	 *            The {@link Variable}'s value.
+	 */
+	public void setVariableValue(String identifier, OclAny value);
 
 	/**
 	 * <p>
@@ -89,18 +117,6 @@ public interface IInterpretationEnvironment extends Cloneable {
 	 * @return The postcondition result for that operation.
 	 */
 	public OclAny getPostconditionValue(OperationCallExp anOperationCallExp);
-
-	/**
-	 * <p>
-	 * Gets saved variables with given name.
-	 * </p>
-	 * 
-	 * @param path
-	 *            The path of the variable or simply the name (e.g. "self").
-	 * 
-	 * @return Saved variables with given name.
-	 */
-	public OclAny getVar(String path);
 
 	/**
 	 * <p>
@@ -146,14 +162,4 @@ public interface IInterpretationEnvironment extends Cloneable {
 	 */
 	public void savePostconditionValue(OperationCallExp anOperationCallExp,
 			OclAny source);
-
-	/**
-	 * <p>
-	 * Sets the {@link IModelInstance} to be used during interpretation.
-	 * </p>
-	 * 
-	 * @param aModelInstance
-	 *            The new {@link IModelInstance}.
-	 */
-	public void setModelInstance(IModelInstance aModelInstance);
 }

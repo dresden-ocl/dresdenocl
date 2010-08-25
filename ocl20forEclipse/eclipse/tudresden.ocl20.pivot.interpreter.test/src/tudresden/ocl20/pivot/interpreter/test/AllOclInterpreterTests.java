@@ -33,7 +33,8 @@ import tudresden.ocl20.pivot.interpreter.test.standardlibrary.AllStandardLibrary
  * @author Claas Wilke
  */
 @RunWith(Suite.class)
-@Suite.SuiteClasses( { TestInterpretation.class, AllStandardLibraryTests.class })
+@Suite.SuiteClasses({ TestInterpretation.class, AllStandardLibraryTests.class,
+		TestRecursion.class })
 public class AllOclInterpreterTests {
 	/*
 	 * This class remains completely empty, being used only as a holder for the

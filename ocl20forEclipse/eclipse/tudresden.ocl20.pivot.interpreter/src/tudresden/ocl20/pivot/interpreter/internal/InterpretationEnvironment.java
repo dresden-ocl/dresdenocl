@@ -1,32 +1,20 @@
-/**
- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
- * Copyright (C) 2007 Ronny Brandt (Ronny_Brandt@web.de).                    *
- * All rights reserved.                                                      *
- *                                                                           *
- * This work was done as a project at the Chair for Software Technology,     *
- * Dresden University Of Technology, Germany (http://st.inf.tu-dresden.de).  *
- * It is understood that any modification not identified as such is not      *
- * covered by the preceding statement.                                       *
- *                                                                           *
- * This work is free software; you can redistribute it and/or modify it      *
- * under the terms of the GNU Library General Public License as published    *
- * by the Free Software Foundation; either version 2 of the License, or      *
- * (at your option) any later version.                                       *
- *                                                                           *
- * This work is distributed in the hope that it will be useful, but WITHOUT  *
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or     *
- * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Library General Public     *
- * License for more details.                                                 *
- *                                                                           *
- * You should have received a copy of the GNU Library General Public License *
- * along with this library; if not, you can view it online at                *
- * http://www.fsf.org/licensing/licenses/gpl.html.                           *
- *                                                                           *
- * To submit a bug report, send a comment, or get the latest news on this    *
- * project, please visit the website: http://dresden-ocl.sourceforge.net.    *
- * For more information on OCL and related projects visit the OCL Portal:    *
- * http://st.inf.tu-dresden.de/ocl                                           *
- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+/*
+Copyright (C) 2010 by Claas Wilke (claaswilke@gmx.net)
+
+This file is part of the OCL Interpreter of DresdenOCL.
+
+DresdenOCL is free software: you can redistribute it and/or modify 
+it under the terms of the GNU Lesser General Public License as published by the 
+Free Software Foundation, either version 3 of the License, or (at your option)
+any later version.
+
+DresdenOCL is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
+or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License 
+for more details.
+
+You should have received a copy of the GNU Lesser General Public License along 
+with DresdenOCL. If not, see <http://www.gnu.org/licenses/>.
  */
 package tudresden.ocl20.pivot.interpreter.internal;
 
@@ -36,6 +24,7 @@ import java.util.Set;
 import java.util.WeakHashMap;
 
 import tudresden.ocl20.pivot.essentialocl.expressions.OperationCallExp;
+import tudresden.ocl20.pivot.essentialocl.expressions.Variable;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclModelInstanceObject;
 import tudresden.ocl20.pivot.interpreter.IInterpretationEnvironment;
@@ -47,18 +36,91 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
 
 /**
  * <p>
- * This Environment is used to save data needed for interpretation.
+ * This Environment is used to save data needed for interpretation. E.g., values
+ * of parameters, variables, expressions, @pre values etc.
  * </p>
  * 
- * @author Ronny Brandt.
+ * @author Claas Wilke (first version by Ronny Brandt).
  */
 public class InterpretationEnvironment implements IInterpretationEnvironment {
 
+	/** The {@link IModelInstance} of this {@link InterpretationEnvironment}. */
+	protected IModelInstance modelInstance;
+
+	/** Containes variables already computed {@link Variable}'s values. */
+	protected HashMap<String, OclAny> visibleVariableValues = new HashMap<String, OclAny>();
+
+	/**
+	 * A probably existing parent {@link InterpretationEnvironment} of this
+	 * {@link InterpretationEnvironment}.
+	 */
+	protected InterpretationEnvironment parentEnvironment = null;
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.interpreter.IInterpretationEnvironment#getModelInstance
+	 * ()
+	 */
+	public IModelInstance getModelInstance() {
+
+		return this.modelInstance;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.interpreter.IInterpretationEnvironment#getVariableValue
+	 * (java.lang.String)
+	 */
+	public OclAny getVariableValue(String identifier) {
+
+		OclAny result = visibleVariableValues.get(identifier);
+
+		/*
+		 * Probably delegate to parent environment (Variables are visible for
+		 * children as well).
+		 */
+		if (result == null && this.parentEnvironment != null) {
+			result = this.parentEnvironment.getVariableValue(identifier);
+		}
+		// no else.
+
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.interpreter.IInterpretationEnvironment#setModelInstance
+	 * (tudresden.ocl20.pivot.modelinstance.IModelInstance)
+	 */
+	public void setModelInstance(IModelInstance modelInstance) {
+
+		this.modelInstance = modelInstance;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.interpreter.IInterpretationEnvironment#setVariableValue
+	 * (java.lang.String,
+	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny)
+	 */
+	public void setVariableValue(String identifier, OclAny oclRoot) {
+
+		this.visibleVariableValues.put(identifier, oclRoot);
+	}
+
+	// FIXME Claas: Continue refactoring from here. //
+	private int REFACTOR_ME = 0;
+
 	/** The global instance of the {@link InterpretationEnvironment}. */
 	private static IInterpretationEnvironment GLOBAL;
-
-	/** the actual model instance. */
-	protected IModelInstance modelInstance;
 
 	/**
 	 * Special values for postcondition constraints. Use
@@ -72,45 +134,6 @@ public class InterpretationEnvironment implements IInterpretationEnvironment {
 	 * invocation (required for <code>oclIsNew()</code>).
 	 */
 	protected Map<Type, Set<IModelInstanceObject>> savedInstances = new WeakHashMap<Type, Set<IModelInstanceObject>>();
-
-	/** Saved variables. */
-	protected HashMap<String, OclAny> savedVariables = new HashMap<String, OclAny>();
-
-	/**
-	 * <p>
-	 * Gets a new local {@link InterpretationEnvironment} which is a copy of the
-	 * global {@link InterpretationEnvironment}.
-	 * </p>
-	 * 
-	 * @return A new local {@link InterpretationEnvironment} which is a copy of
-	 *         the global {@link InterpretationEnvironment}.
-	 */
-	public static IInterpretationEnvironment getNewLocalEnvironment() {
-
-		return GLOBAL.clone();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * tudresden.ocl20.pivot.interpreter.IEnvironment#addVar(java.lang.String,
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny)
-	 */
-	public void addVar(String path, OclAny oclRoot) {
-
-		this.savedVariables.put(path, oclRoot);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see tudresden.ocl20.pivot.interpreter.IEnvironment#getModelInstance()
-	 */
-	public IModelInstance getModelInstance() {
-
-		return this.modelInstance;
-	}
 
 	/*
 	 * (non-Javadoc)
@@ -131,7 +154,8 @@ public class InterpretationEnvironment implements IInterpretationEnvironment {
 			HashMap<OperationCallExp, OclAny> objectSpecificValues;
 
 			/* Get the object for which the value is stored. */
-			contextObject = this.getVar(IOclInterpreter.SELF_VARIABLE_NAME);
+			contextObject = this
+					.getVariableValue(IOclInterpreter.SELF_VARIABLE_NAME);
 
 			objectSpecificValues = this.postconditionValues.get(contextObject
 					.getModelInstanceElement());
@@ -143,21 +167,6 @@ public class InterpretationEnvironment implements IInterpretationEnvironment {
 			// no else.
 		}
 		// no else.
-
-		return result;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * tudresden.ocl20.pivot.interpreter.IEnvironment#getVar(java.lang.String)
-	 */
-	public OclAny getVar(String path) {
-
-		OclAny result;
-
-		result = savedVariables.get(path);
 
 		return result;
 	}
@@ -224,7 +233,8 @@ public class InterpretationEnvironment implements IInterpretationEnvironment {
 		// no else.
 
 		/* Get the object for which the value is stored. */
-		contextObject = this.getVar(IOclInterpreter.SELF_VARIABLE_NAME);
+		contextObject = this
+				.getVariableValue(IOclInterpreter.SELF_VARIABLE_NAME);
 
 		objectSpecificValues = this.postconditionValues.get(contextObject
 				.getModelInstanceElement());
@@ -246,37 +256,27 @@ public class InterpretationEnvironment implements IInterpretationEnvironment {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * tudresden.ocl20.pivot.interpreter.IEnvironment#setModelInstance(tudresden
-	 * .ocl20 .pivot.modelbus.IModelInstance)
+	 * @see tudresden.ocl20.pivot.interpreter.IInterpretationEnvironment#
+	 * createChildEnvironment()
 	 */
-	public void setModelInstance(IModelInstance aModelInstance) {
+	public IInterpretationEnvironment createChildEnvironment() {
 
-		this.modelInstance = aModelInstance;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#clone()
-	 */
-	@SuppressWarnings("unchecked")
-	public IInterpretationEnvironment clone() {
-
-		InterpretationEnvironment result;
-
-		result = new InterpretationEnvironment();
+		InterpretationEnvironment result = new InterpretationEnvironment();
+		result.parentEnvironment = this;
 
 		result.modelInstance = this.modelInstance;
-		result.postconditionValues = this.postconditionValues;
 
 		/*
-		 * The Map of variables must be cloned. Otherwise new declared variables
-		 * are visible global.
+		 * Variables have not to be copied since requests are probably delegated
+		 * to the parent environment.
 		 */
-		result.savedVariables = (HashMap<String, OclAny>) this.savedVariables
-				.clone();
 
+		// TODO What about parameters?
+
+		// TODO What about postcondition values?
+		result.postconditionValues = this.postconditionValues;
+
+		// TODO What about saved instances?
 		result.savedInstances = this.savedInstances;
 
 		return result;

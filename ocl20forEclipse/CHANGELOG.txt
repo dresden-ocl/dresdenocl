@@ -14,6 +14,9 @@ Release 3.0 (not scheduled yet)
   - Loading UML models containing references to other models should now work appropriately.
   - Reload of UML models now reloads changes of referenced external model elements as well.
 
+* Some bugs in the OCL Interpreter were fixed.
+  - The Interpreter now supports interpretation of recursive operations.
+  
 * Some bugs in Ocl22Java were fixed.
   - OclAny.oclIsInvalid() is now transformed into working Java code.
   - OclCollection.sum() is now transformed into working Java code. 
