@@ -1,0 +1,7 @@
+package package1::package2
+
+-- Operations defined on OclAny should be call-able using self. Also in preconditions.
+context Type1::getInteger(): Integer
+pre: not self.anInteger.oclIsUndefined()
+
+endpackage
