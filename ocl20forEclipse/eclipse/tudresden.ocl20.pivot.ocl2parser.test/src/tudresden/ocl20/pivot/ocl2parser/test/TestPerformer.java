@@ -20,6 +20,7 @@ package tudresden.ocl20.pivot.ocl2parser.test;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.eclipse.core.runtime.Platform;
@@ -34,6 +35,7 @@ import tudresden.ocl20.pivot.model.ModelAccessException;
 import tudresden.ocl20.pivot.model.metamodel.IMetamodel;
 import tudresden.ocl20.pivot.ocl2parser.test.exception.MetaModelNotFoundException;
 import tudresden.ocl20.pivot.parser.ParseException;
+import tudresden.ocl20.pivot.pivotmodel.Constraint;
 
 /**
  * <p>
@@ -174,12 +176,13 @@ public class TestPerformer {
 	 *             Thrown, if a exception occurred during parsing.
 	 * @throws FileNotFoundException
 	 *             Thrown, if the required {@link File} cannot be found.
-	 * 
+	 * @return A {@link List} containing the parsed {@link Constraint}s as
+	 *         specified in the parsed file.
 	 */
-	public void parseFile(String filename) throws ParseException,
+	public List<Constraint> parseFile(String filename) throws ParseException,
 			FileNotFoundException {
 
-		this.parseFile(filename, false);
+		return this.parseFile(filename, false);
 	}
 
 	/**
@@ -197,9 +200,10 @@ public class TestPerformer {
 	 *             Thrown, if a exception occurred during parsing.
 	 * @throws FileNotFoundException
 	 *             Thrown, if the required {@link File} cannot be found.
-	 * 
+	 * @return A {@link List} containing the parsed {@link Constraint}s as
+	 *         specified in the parsed file.
 	 */
-	public void parseFile(String filename, boolean addToModel)
+	public List<Constraint> parseFile(String filename, boolean addToModel)
 			throws ParseException, FileNotFoundException {
 
 		String fileDirectory;
@@ -220,9 +224,9 @@ public class TestPerformer {
 		// no else.
 
 		URI uri = URI.createFileURI(oclFile.getAbsolutePath());
-		
+
 		/* Not replaced by facade method to test the different exception types. */
-		Ocl22Parser.INSTANCE.doParse(this.myModel, uri, addToModel);
+		return Ocl22Parser.INSTANCE.doParse(this.myModel, uri, addToModel);
 	}
 
 	/**

@@ -116,6 +116,33 @@ public class TestLetExpressions {
 
 	/**
 	 * <p>
+	 * A test case to check that a LetExpression is parsed appropriately.
+	 * </p>
+	 */
+	@Test
+	public void testLetPositive04() throws Exception {
+	
+		TestPerformer testPerformer;
+	
+		String modelFileName;
+		String oclFileName;
+	
+		oclFileName = "expressions/letPositive04.ocl";
+		modelFileName = "testmodel02.uml";
+	
+		/* Try to get the TestPerformer. */
+		testPerformer = TestPerformer.getInstance(
+				AllExpressionTests.META_MODEL_ID,
+				AllExpressionTests.MODEL_BUNDLE,
+				AllExpressionTests.MODEL_DIRECTORY);
+		testPerformer.setModel(modelFileName);
+	
+		/* Try to parse the constraint file. */
+		testPerformer.parseFile(oclFileName);
+	}
+
+	/**
+	 * <p>
 	 * A test case to check that a LetExpression is not parsed appropriately.
 	 * </p>
 	 */

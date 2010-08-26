@@ -19,9 +19,18 @@ with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
 
 package tudresden.ocl20.pivot.ocl2parser.test.standardlibrary;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
+import java.util.List;
+
 import org.junit.Test;
 
+import tudresden.ocl20.pivot.essentialocl.expressions.ExpressionInOcl;
+import tudresden.ocl20.pivot.essentialocl.expressions.OclExpression;
+import tudresden.ocl20.pivot.essentialocl.expressions.OperationCallExp;
 import tudresden.ocl20.pivot.ocl2parser.test.TestPerformer;
+import tudresden.ocl20.pivot.pivotmodel.Constraint;
 
 /**
  * <p>
@@ -50,10 +59,10 @@ public class TestInteger {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllStandardLibraryTests.META_MODEL_ID,
-						AllStandardLibraryTests.MODEL_BUNDLE,
-						AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllStandardLibraryTests.META_MODEL_ID,
+				AllStandardLibraryTests.MODEL_BUNDLE,
+				AllStandardLibraryTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		/* Try to parse the constraint file. */
@@ -77,10 +86,10 @@ public class TestInteger {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllStandardLibraryTests.META_MODEL_ID,
-						AllStandardLibraryTests.MODEL_BUNDLE,
-						AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllStandardLibraryTests.META_MODEL_ID,
+				AllStandardLibraryTests.MODEL_BUNDLE,
+				AllStandardLibraryTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		/* Try to parse the constraint file. */
@@ -104,10 +113,10 @@ public class TestInteger {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllStandardLibraryTests.META_MODEL_ID,
-						AllStandardLibraryTests.MODEL_BUNDLE,
-						AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllStandardLibraryTests.META_MODEL_ID,
+				AllStandardLibraryTests.MODEL_BUNDLE,
+				AllStandardLibraryTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		/* Try to parse the constraint file. */
@@ -131,10 +140,10 @@ public class TestInteger {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllStandardLibraryTests.META_MODEL_ID,
-						AllStandardLibraryTests.MODEL_BUNDLE,
-						AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllStandardLibraryTests.META_MODEL_ID,
+				AllStandardLibraryTests.MODEL_BUNDLE,
+				AllStandardLibraryTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		/* Try to parse the constraint file. */
@@ -158,10 +167,10 @@ public class TestInteger {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllStandardLibraryTests.META_MODEL_ID,
-						AllStandardLibraryTests.MODEL_BUNDLE,
-						AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllStandardLibraryTests.META_MODEL_ID,
+				AllStandardLibraryTests.MODEL_BUNDLE,
+				AllStandardLibraryTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		/* Try to parse the constraint file. */
@@ -185,10 +194,10 @@ public class TestInteger {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllStandardLibraryTests.META_MODEL_ID,
-						AllStandardLibraryTests.MODEL_BUNDLE,
-						AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllStandardLibraryTests.META_MODEL_ID,
+				AllStandardLibraryTests.MODEL_BUNDLE,
+				AllStandardLibraryTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		/* Try to parse the constraint file. */
@@ -197,54 +206,56 @@ public class TestInteger {
 
 	/**
 	 * <p>
-	 * A test case testing the method <code>Integer.greaterThanEqual(Integer)</code>.
+	 * A test case testing the method
+	 * <code>Integer.greaterThanEqual(Integer)</code>.
 	 * </p>
 	 */
 	@Test
 	public void testGreaterThanEqualPositive01() throws Exception {
-	
+
 		TestPerformer testPerformer;
-	
+
 		String modelFileName;
 		String oclFileName;
-	
+
 		oclFileName = "standardlibrary/integer/greaterThanEqualPositive01.ocl";
 		modelFileName = "testmodel.uml";
-	
+
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllStandardLibraryTests.META_MODEL_ID,
-						AllStandardLibraryTests.MODEL_BUNDLE,
-						AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllStandardLibraryTests.META_MODEL_ID,
+				AllStandardLibraryTests.MODEL_BUNDLE,
+				AllStandardLibraryTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
-	
+
 		/* Try to parse the constraint file. */
 		testPerformer.parseFile(oclFileName);
 	}
 
 	/**
 	 * <p>
-	 * A test case testing the method <code>Integer.greaterThanEqual(Integer)</code>.
+	 * A test case testing the method
+	 * <code>Integer.greaterThanEqual(Integer)</code>.
 	 * </p>
 	 */
 	@Test
 	public void testGreaterThanEqualPositive02() throws Exception {
-	
+
 		TestPerformer testPerformer;
-	
+
 		String modelFileName;
 		String oclFileName;
-	
+
 		oclFileName = "standardlibrary/integer/greaterThanEqualPositive02.ocl";
 		modelFileName = "testmodel.uml";
-	
+
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllStandardLibraryTests.META_MODEL_ID,
-						AllStandardLibraryTests.MODEL_BUNDLE,
-						AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllStandardLibraryTests.META_MODEL_ID,
+				AllStandardLibraryTests.MODEL_BUNDLE,
+				AllStandardLibraryTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
-	
+
 		/* Try to parse the constraint file. */
 		testPerformer.parseFile(oclFileName);
 	}
@@ -256,22 +267,22 @@ public class TestInteger {
 	 */
 	@Test
 	public void testGreaterThanPositive01() throws Exception {
-	
+
 		TestPerformer testPerformer;
-	
+
 		String modelFileName;
 		String oclFileName;
-	
+
 		oclFileName = "standardlibrary/integer/greaterThanPositive01.ocl";
 		modelFileName = "testmodel.uml";
-	
+
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllStandardLibraryTests.META_MODEL_ID,
-						AllStandardLibraryTests.MODEL_BUNDLE,
-						AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllStandardLibraryTests.META_MODEL_ID,
+				AllStandardLibraryTests.MODEL_BUNDLE,
+				AllStandardLibraryTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
-	
+
 		/* Try to parse the constraint file. */
 		testPerformer.parseFile(oclFileName);
 	}
@@ -283,76 +294,78 @@ public class TestInteger {
 	 */
 	@Test
 	public void testGreaterThanPositive02() throws Exception {
-	
+
 		TestPerformer testPerformer;
-	
+
 		String modelFileName;
 		String oclFileName;
-	
+
 		oclFileName = "standardlibrary/integer/greaterThanPositive02.ocl";
 		modelFileName = "testmodel.uml";
-	
+
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllStandardLibraryTests.META_MODEL_ID,
-						AllStandardLibraryTests.MODEL_BUNDLE,
-						AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllStandardLibraryTests.META_MODEL_ID,
+				AllStandardLibraryTests.MODEL_BUNDLE,
+				AllStandardLibraryTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
-	
+
 		/* Try to parse the constraint file. */
 		testPerformer.parseFile(oclFileName);
 	}
 
 	/**
 	 * <p>
-	 * A test case testing the method <code>Integer.lessThanEqual(Integer)</code>.
+	 * A test case testing the method
+	 * <code>Integer.lessThanEqual(Integer)</code>.
 	 * </p>
 	 */
 	@Test
 	public void testLessThanEqualPositive01() throws Exception {
-	
+
 		TestPerformer testPerformer;
-	
+
 		String modelFileName;
 		String oclFileName;
-	
+
 		oclFileName = "standardlibrary/integer/lessThanEqualPositive01.ocl";
 		modelFileName = "testmodel.uml";
-	
+
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllStandardLibraryTests.META_MODEL_ID,
-						AllStandardLibraryTests.MODEL_BUNDLE,
-						AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllStandardLibraryTests.META_MODEL_ID,
+				AllStandardLibraryTests.MODEL_BUNDLE,
+				AllStandardLibraryTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
-	
+
 		/* Try to parse the constraint file. */
 		testPerformer.parseFile(oclFileName);
 	}
 
 	/**
 	 * <p>
-	 * A test case testing the method <code>Integer.lessThanEqual(Integer)</code>.
+	 * A test case testing the method
+	 * <code>Integer.lessThanEqual(Integer)</code>.
 	 * </p>
 	 */
 	@Test
 	public void testLessThanEqualPositive02() throws Exception {
-	
+
 		TestPerformer testPerformer;
-	
+
 		String modelFileName;
 		String oclFileName;
-	
+
 		oclFileName = "standardlibrary/integer/lessThanEqualPositive02.ocl";
 		modelFileName = "testmodel.uml";
-	
+
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllStandardLibraryTests.META_MODEL_ID,
-						AllStandardLibraryTests.MODEL_BUNDLE,
-						AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllStandardLibraryTests.META_MODEL_ID,
+				AllStandardLibraryTests.MODEL_BUNDLE,
+				AllStandardLibraryTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
-	
+
 		/* Try to parse the constraint file. */
 		testPerformer.parseFile(oclFileName);
 	}
@@ -364,22 +377,22 @@ public class TestInteger {
 	 */
 	@Test
 	public void testLessThanPositive01() throws Exception {
-	
+
 		TestPerformer testPerformer;
-	
+
 		String modelFileName;
 		String oclFileName;
-	
+
 		oclFileName = "standardlibrary/integer/lessThanPositive01.ocl";
 		modelFileName = "testmodel.uml";
-	
+
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllStandardLibraryTests.META_MODEL_ID,
-						AllStandardLibraryTests.MODEL_BUNDLE,
-						AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllStandardLibraryTests.META_MODEL_ID,
+				AllStandardLibraryTests.MODEL_BUNDLE,
+				AllStandardLibraryTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
-	
+
 		/* Try to parse the constraint file. */
 		testPerformer.parseFile(oclFileName);
 	}
@@ -391,22 +404,22 @@ public class TestInteger {
 	 */
 	@Test
 	public void testLessThanPositive02() throws Exception {
-	
+
 		TestPerformer testPerformer;
-	
+
 		String modelFileName;
 		String oclFileName;
-	
+
 		oclFileName = "standardlibrary/integer/lessThanPositive02.ocl";
 		modelFileName = "testmodel.uml";
-	
+
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllStandardLibraryTests.META_MODEL_ID,
-						AllStandardLibraryTests.MODEL_BUNDLE,
-						AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllStandardLibraryTests.META_MODEL_ID,
+				AllStandardLibraryTests.MODEL_BUNDLE,
+				AllStandardLibraryTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
-	
+
 		/* Try to parse the constraint file. */
 		testPerformer.parseFile(oclFileName);
 	}
@@ -428,10 +441,10 @@ public class TestInteger {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllStandardLibraryTests.META_MODEL_ID,
-						AllStandardLibraryTests.MODEL_BUNDLE,
-						AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllStandardLibraryTests.META_MODEL_ID,
+				AllStandardLibraryTests.MODEL_BUNDLE,
+				AllStandardLibraryTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		/* Try to parse the constraint file. */
@@ -455,10 +468,10 @@ public class TestInteger {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllStandardLibraryTests.META_MODEL_ID,
-						AllStandardLibraryTests.MODEL_BUNDLE,
-						AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllStandardLibraryTests.META_MODEL_ID,
+				AllStandardLibraryTests.MODEL_BUNDLE,
+				AllStandardLibraryTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		/* Try to parse the constraint file. */
@@ -482,10 +495,10 @@ public class TestInteger {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllStandardLibraryTests.META_MODEL_ID,
-						AllStandardLibraryTests.MODEL_BUNDLE,
-						AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllStandardLibraryTests.META_MODEL_ID,
+				AllStandardLibraryTests.MODEL_BUNDLE,
+				AllStandardLibraryTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		/* Try to parse the constraint file. */
@@ -509,10 +522,10 @@ public class TestInteger {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllStandardLibraryTests.META_MODEL_ID,
-						AllStandardLibraryTests.MODEL_BUNDLE,
-						AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllStandardLibraryTests.META_MODEL_ID,
+				AllStandardLibraryTests.MODEL_BUNDLE,
+				AllStandardLibraryTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		/* Try to parse the constraint file. */
@@ -536,10 +549,10 @@ public class TestInteger {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllStandardLibraryTests.META_MODEL_ID,
-						AllStandardLibraryTests.MODEL_BUNDLE,
-						AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllStandardLibraryTests.META_MODEL_ID,
+				AllStandardLibraryTests.MODEL_BUNDLE,
+				AllStandardLibraryTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		/* Try to parse the constraint file. */
@@ -563,10 +576,10 @@ public class TestInteger {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllStandardLibraryTests.META_MODEL_ID,
-						AllStandardLibraryTests.MODEL_BUNDLE,
-						AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllStandardLibraryTests.META_MODEL_ID,
+				AllStandardLibraryTests.MODEL_BUNDLE,
+				AllStandardLibraryTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		/* Try to parse the constraint file. */
@@ -590,10 +603,10 @@ public class TestInteger {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllStandardLibraryTests.META_MODEL_ID,
-						AllStandardLibraryTests.MODEL_BUNDLE,
-						AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllStandardLibraryTests.META_MODEL_ID,
+				AllStandardLibraryTests.MODEL_BUNDLE,
+				AllStandardLibraryTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		/* Try to parse the constraint file. */
@@ -617,10 +630,10 @@ public class TestInteger {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllStandardLibraryTests.META_MODEL_ID,
-						AllStandardLibraryTests.MODEL_BUNDLE,
-						AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllStandardLibraryTests.META_MODEL_ID,
+				AllStandardLibraryTests.MODEL_BUNDLE,
+				AllStandardLibraryTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		/* Try to parse the constraint file. */
@@ -644,14 +657,65 @@ public class TestInteger {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllStandardLibraryTests.META_MODEL_ID,
-						AllStandardLibraryTests.MODEL_BUNDLE,
-						AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllStandardLibraryTests.META_MODEL_ID,
+				AllStandardLibraryTests.MODEL_BUNDLE,
+				AllStandardLibraryTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		/* Try to parse the constraint file. */
 		testPerformer.parseFile(oclFileName);
+	}
+
+	/**
+	 * <p>
+	 * A test case testing the method <code>Integer.-()</code>.
+	 * </p>
+	 */
+	@Test
+	public void testNegationPositive03() throws Exception {
+
+		TestPerformer testPerformer;
+
+		String modelFileName;
+		String oclFileName;
+
+		oclFileName = "standardlibrary/integer/negationPositive03.ocl";
+		modelFileName = "testmodel.uml";
+
+		/* Try to get the TestPerformer. */
+		testPerformer = TestPerformer.getInstance(
+				AllStandardLibraryTests.META_MODEL_ID,
+				AllStandardLibraryTests.MODEL_BUNDLE,
+				AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer.setModel(modelFileName);
+
+		/* Try to parse the constraint file. */
+		List<Constraint> parsedConstraints;
+		parsedConstraints = testPerformer.parseFile(oclFileName);
+
+		assertEquals(1, parsedConstraints.size());
+
+		/* Check that the parsed expression is correct. */
+		OclExpression exp = ((ExpressionInOcl) parsedConstraints.iterator()
+				.next().getSpecification()).getBodyExpression();
+		
+		/* Root should be an OperationCallExp on =. */
+		assertTrue(exp instanceof OperationCallExp);
+		OperationCallExp opCallExp = (OperationCallExp) exp;
+		assertEquals("=", opCallExp.getReferredOperation().getName());
+		
+		/* Source should be an OperationCallExp on abs. */
+		exp = opCallExp.getSource();
+		assertTrue(exp instanceof OperationCallExp);
+		opCallExp = (OperationCallExp) exp;
+		assertEquals("abs", opCallExp.getReferredOperation().getName());
+		
+		/* Source should be OperationCallExp on - */ 
+		exp = opCallExp.getSource();
+		assertTrue(exp instanceof OperationCallExp);
+		opCallExp = (OperationCallExp) exp;
+		assertEquals("-", opCallExp.getReferredOperation().getName());
 	}
 
 	/**
@@ -671,10 +735,10 @@ public class TestInteger {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllStandardLibraryTests.META_MODEL_ID,
-						AllStandardLibraryTests.MODEL_BUNDLE,
-						AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllStandardLibraryTests.META_MODEL_ID,
+				AllStandardLibraryTests.MODEL_BUNDLE,
+				AllStandardLibraryTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		/* Try to parse the constraint file. */

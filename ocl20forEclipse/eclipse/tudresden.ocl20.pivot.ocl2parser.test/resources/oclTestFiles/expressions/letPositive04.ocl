@@ -1,0 +1,16 @@
+package test
+
+-- Parsing should end (issue #3007222).
+context ClassA 
+inv prop1:
+  let execs : Sequence(ClassB) = 
+    	self.stmts->select(s | s.oclIsKindOf(ClassB))
+    	  ->collect(s | s.oclAsType(ClassB))
+    	  ->asSequence(),
+	  a : Integer = 
+	    execs->collect(e | e.attr1)
+	      ->select(a | a > 0)->sum()
+  in
+    true
+
+endpackage
