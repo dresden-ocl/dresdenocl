@@ -202,9 +202,6 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 				context = null;
 			}
 
-			/* Add self variable to environment. */
-			this.myEnvironment.setVariableValue("self", context);
-
 			/* Compute the result. */
 			oclResult = this.interpretConstraint(constraint, context);
 
@@ -249,7 +246,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		this.isPreparationRun = false;
 
 		/* Add self variable to environment. */
-		this.myEnvironment.setVariableValue("self", context);
+		this.myEnvironment.setVariableValue(IOclInterpreter.SELF_VARIABLE_NAME, context);
 
 		/* Compute the result. */
 		EObject constraintSpecification;
@@ -472,9 +469,6 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 		result = new ArrayList<IInterpretationResult>();
 
-		/* Add a local environment containing the result variable. */
-		this.pushLocalEnvironment();
-
 		/* Set the result variable to null or its result. */
 		if (resultValue != null) {
 			OclAny oclResult;
@@ -512,8 +506,8 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		}
 		// end for.
 
-		/* Remove the local environment containing the result variable. */
-		this.popEnvironment();
+		/* Reset result variable. */
+		this.myEnvironment.setVariableValue(RESULT_VARIABLE_NAME, null);
 
 		/* Probably log the exit of this method. */
 		if (LOGGER.isDebugEnabled()) {
@@ -2979,7 +2973,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			if (this.isPreparationRun) {
 				String msg;
 
-				this.myEnvironment.savePostconditionValue(anOperationCallExp,
+				this.myEnvironment.saveAtPreValue(anOperationCallExp,
 						source);
 
 				msg = "@Pre is not available during constraint preparation.";
@@ -2989,7 +2983,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 			else {
 				result = this.myEnvironment
-						.getPostconditionValue(anOperationCallExp);
+						.getAtPreValue(anOperationCallExp);
 
 				if (result == null) {
 					String msg;
