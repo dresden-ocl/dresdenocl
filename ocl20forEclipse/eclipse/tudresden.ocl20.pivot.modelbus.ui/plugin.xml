@@ -9,7 +9,7 @@
             label="Dresden OCL2 Action Set"
             visible="true">
          <menu
-               label="Dresden OCL2"
+               label="DresdenOCL"
                id="tudresden.ocl20.pivot.modelbus.ui.menu">
             <separator
                   name="tudresden.ocl20.pivot.modelbus.ui.menu.import">
@@ -39,7 +39,7 @@
    <extension
          point="org.eclipse.ui.views">
       <category
-            name="Dresden OCL2 for Eclipse"
+            name="DresdenOCL"
             id="tudresden.ocl20.views.category">
       </category>
       <view
@@ -61,7 +61,7 @@
          point="org.eclipse.ui.importWizards">
       <category
             id="tudresden.ocl20.pivot.modelbus.ui.importWizards.category"
-            name="Dresden OCL2 for Eclipse">
+            name="DresdenOCL">
       </category>
       <wizard
             category="tudresden.ocl20.pivot.modelbus.ui.importWizards.category"
@@ -88,7 +88,7 @@
          point="org.eclipse.ui.newWizards">
       <category
             id="tudresden.ocl20.pivot.modelbus.ui.newWizards.category"
-            name="Dresden OCL2 for Eclipse">
+            name="DresdenOCL">
       </category>
    </extension>
    <extension

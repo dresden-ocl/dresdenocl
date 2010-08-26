@@ -8,7 +8,7 @@
             label="Interpreter Action Set"
             visible="true">
          <menu
-               label="Dresden OCL2"
+               label="DresdenOCL"
                id="tudresden.ocl20.pivot.modelbus.ui.menu">
             <separator
                   name="tudresden.ocl20.pivot.modelbus.ui.menu.import">
@@ -32,7 +32,7 @@
          point="org.eclipse.ui.views">
       <category
             id="tudresden.ocl20.views.category"
-            name="Dresden OCL2 for Eclipse">
+            name="DresdenOCL">
       </category>
       <view
             category="tudresden.ocl20.views.category"

@@ -9,7 +9,7 @@
             visible="true"
             id="tudresden.ocl20.pivot.tools.codegen.declarativ.ocl2sql.ui.actionSet">
          <menu
-               label="Dresden OCL2"
+               label="DresdenOCL"
                id="tudresden.ocl20.pivot.modelbus.ui.menu">
             <separator
                   name="tudresden.ocl20.pivot.modelbus.ui.menu.import">

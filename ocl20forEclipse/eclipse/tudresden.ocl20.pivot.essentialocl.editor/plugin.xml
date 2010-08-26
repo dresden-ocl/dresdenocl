@@ -40,14 +40,14 @@
   <extension
     point = "org.eclipse.ui.newWizards">
     <category
-      id = "tudresden.ocl20.newWizards.category"
-      name="%_UI_Wizard_category">
+      id = "tudresden.ocl20.pivot.modelbus.ui.newWizards.category"
+      name="DresdenOCL">
     </category>
     <wizard
       id = "tudresden.ocl20.pivot.essentialocl.editor.typesModelWizard"
       name = "%_UI_TypesModelWizard_label"
       class = "tudresden.ocl20.pivot.essentialocl.types.presentation.TypesModelWizard"
-      category = "tudresden.ocl20.newWizards.category"
+      category = "tudresden.ocl20.pivot.modelbus.ui.newWizards.category"
       icon = "icons/full/obj16/TypesModelFile.gif">
       <description>%_UI_TypesModelWizard_description</description>
       <selection class = "org.eclipse.core.resources.IResource" />

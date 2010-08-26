@@ -7,7 +7,7 @@
 	</extension>
 	
 	<extension point="org.eclipse.ui.editors">
-		<editor class="tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclEditor" contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor" extensions="ocl" icon="icons/editor_icon.gif" id="tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclEditor" name="EMFText ocl Editor">
+		<editor class="tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclEditor" contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor" extensions="ocl" icon="icons/editor_icon.gif" id="tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclEditor" name="DresdenOCL Editor">
 			<contentTypeBinding contentTypeId="tudresden.ocl20.pivot.language.ocl.resource.ocl"/>
 		</editor>
 	</extension>
@@ -27,7 +27,7 @@
 	</extension>
 	
 	<extension point="org.eclipse.ui.preferencePages">
-		<page name="Ocl Text Editor" id="tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclPreferencePage" class="tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclPreferencePage" category="org.eclipse.ui.preferencePages.GeneralTextEditor">
+		<page name="DresdenOCL Editor" id="tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclPreferencePage" class="tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclPreferencePage" category="org.eclipse.ui.preferencePages.GeneralTextEditor">
 		</page>
 		<page name="Syntax Coloring" id="tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclSyntaxColoringPreferencePage" class="tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclSyntaxColoringPreferencePage" category="tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclPreferencePage">
 		</page>
@@ -38,9 +38,9 @@
 	</extension>
 	
 	<extension point="org.eclipse.ui.newWizards">
-		<category id="org.emftext.runtime.ui.EMFTextFileCategory" name="EMFText File">
+		<category id="tudresden.ocl20.pivot.modelbus.ui.newWizards.category" name="DresdenOCL">
 		</category>
-		<wizard category="org.emftext.runtime.ui.EMFTextFileCategory" icon="/icons/default_new_icon.gif" class="tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclNewFileWizard" id="tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclNewFileWizard" name="EMFText .ocl file">
+		<wizard category="tudresden.ocl20.pivot.modelbus.ui.newWizards.category" icon="/icons/default_new_icon.gif" class="tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclNewFileWizard" id="tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclNewFileWizard" name="DresdenOCL Constraint File (.ocl)">
 		</wizard>
 	</extension>
 	
