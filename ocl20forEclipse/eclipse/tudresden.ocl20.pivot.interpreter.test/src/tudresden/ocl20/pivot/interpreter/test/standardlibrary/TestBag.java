@@ -98,4 +98,28 @@ public class TestBag extends AbstractInterpreterTest {
 
 		this.assertIsTrue(results.get(0));
 	}
+
+	/**
+	 * <p>
+	 * Tests the operation <code>Collection.product(Collection)</code>.
+	 * </p>
+	 * 
+	 * @throws ParseException
+	 * @throws ModelAccessException
+	 * @throws IllegalArgumentException
+	 */
+	@Test
+	public void testEquals02() throws IllegalArgumentException,
+			ModelAccessException, ParseException {
+	
+		List<IInterpretationResult> results;
+		results = super.interpretConstraintsForInstance(MODEL1_NAME,
+				CONSTRAINT_DIRECTORY + "/equals02", INSTANCE1_NAME, Arrays
+						.asList(new String[] { "Class1" }));
+	
+		assertNotNull(results);
+		assertEquals(1, results.size());
+	
+		this.assertIsTrue(results.get(0));
+	}
 }

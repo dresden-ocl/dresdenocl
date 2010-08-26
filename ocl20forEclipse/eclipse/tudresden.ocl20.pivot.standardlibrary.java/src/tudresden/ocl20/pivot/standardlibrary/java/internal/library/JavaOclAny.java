@@ -79,17 +79,18 @@ public abstract class JavaOclAny implements OclAny {
 	 * <p>
 	 * <strong>Note:</strong> Since <code>OclUndefined</code> is typed, i.e.
 	 * according to the OCL standard it conforms to all other types except
-	 * <code>OclInvalid</code>, <strong>every subclass of {@link OclAny} needs to
-	 * implement this constructor</strong>.
+	 * <code>OclInvalid</code>, <strong>every subclass of {@link OclAny} needs
+	 * to implement this constructor</strong>.
 	 * </p>
 	 * 
 	 * @param undefinedReason
-	 *          the reason why this element is undefined
+	 *            the reason why this element is undefined
 	 */
 	public JavaOclAny(String undefinedReason) {
 
 		if (undefinedReason == null)
-			throw new IllegalArgumentException("Undefined reason cannot be null.");
+			throw new IllegalArgumentException(
+					"Undefined reason cannot be null.");
 
 		this.undefinedreason = undefinedReason;
 
@@ -109,8 +110,8 @@ public abstract class JavaOclAny implements OclAny {
 	 * </p>
 	 * 
 	 * @param invalidReason
-	 *          the reason why this element is invalid, given by a
-	 *          {@link Throwable}
+	 *            the reason why this element is invalid, given by a
+	 *            {@link Throwable}
 	 */
 	public JavaOclAny(Throwable invalidReason) {
 
@@ -127,7 +128,7 @@ public abstract class JavaOclAny implements OclAny {
 	 * <code>undefined</code> nor <code>invalid</code>.
 	 * 
 	 * @param imiElement
-	 *          the {@link IModelInstanceElement} to adapt.
+	 *            the {@link IModelInstanceElement} to adapt.
 	 */
 	public JavaOclAny(IModelInstanceElement imiElement) {
 
@@ -138,7 +139,8 @@ public abstract class JavaOclAny implements OclAny {
 		this.imiElement = imiElement;
 	}
 
-	// FIXME Michael: Bad smell! Each class should have its own static map -> what
+	// FIXME Michael: Bad smell! Each class should have its own static map ->
+	// what
 	// to do with getOperationNames; operations of supertypes have to be
 	// considered
 	/**
@@ -146,8 +148,7 @@ public abstract class JavaOclAny implements OclAny {
 	 * than in the OCL specification. The names are separated in sub maps
 	 * depending on their number of arguments.
 	 */
-	protected static Map<Integer, Map<String, String>> operationNames =
-			new HashMap<Integer, Map<String, String>>();
+	protected static Map<Integer, Map<String, String>> operationNames = new HashMap<Integer, Map<String, String>>();
 
 	/* Initializes the operation names map. */
 	static {
@@ -185,6 +186,7 @@ public abstract class JavaOclAny implements OclAny {
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.modelbus.IModelInstance#getOperationName(java.lang
 	 * .String, int)
@@ -238,6 +240,7 @@ public abstract class JavaOclAny implements OclAny {
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot#getUndefinedreason
 	 * ()
@@ -254,6 +257,7 @@ public abstract class JavaOclAny implements OclAny {
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot#isNotEqualTo
 	 * (tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot)
@@ -265,6 +269,7 @@ public abstract class JavaOclAny implements OclAny {
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot#isOclUndefined
 	 * ()
@@ -272,8 +277,8 @@ public abstract class JavaOclAny implements OclAny {
 	public OclBoolean oclIsUndefined() {
 
 		/*
-		 * see standard, p. 139; here, we use a different semantics, since invalid
-		 * should not be catched by an undefined check
+		 * see standard, p. 139; here, we use a different semantics, since
+		 * invalid should not be catched by an undefined check
 		 */
 		if (this.invalidReason != null)
 			return JavaStandardLibraryFactory.INSTANCE.createOclInvalid(
@@ -285,6 +290,7 @@ public abstract class JavaOclAny implements OclAny {
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot#oclIsInvalid()
 	 */
@@ -295,6 +301,7 @@ public abstract class JavaOclAny implements OclAny {
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny#oclAsType(tudresden
 	 * .ocl20.pivot.essentialocl.standardlibrary.OclType)
@@ -315,12 +322,12 @@ public abstract class JavaOclAny implements OclAny {
 			try {
 
 				castedTo = imiElement.asType(type.getType());
-				result = (T) JavaStandardLibraryFactory.INSTANCE.createOclAny(castedTo);
+				result = (T) JavaStandardLibraryFactory.INSTANCE
+						.createOclAny(castedTo);
 
 			} catch (AsTypeCastException e) {
-				result =
-						JavaStandardLibraryFactory.INSTANCE.createOclInvalid(
-								type.getType(), e);
+				result = JavaStandardLibraryFactory.INSTANCE.createOclInvalid(
+						type.getType(), e);
 			}
 		}
 
@@ -330,31 +337,34 @@ public abstract class JavaOclAny implements OclAny {
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny#oclIsKindOf(tudresden
-	 * .ocl20.pivot.essentialocl.standardlibrary.OclType)
+	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny#oclIsKindOf
+	 * (tudresden .ocl20.pivot.essentialocl.standardlibrary.OclType)
 	 */
 	public <T extends OclAny> OclBoolean oclIsKindOf(OclType<T> typespec) {
 
 		OclBoolean result = null;
 
-		result =
-				checkInvalid(EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
-						.getOclBoolean(), this, typespec);
+		result = checkInvalid(EssentialOclPlugin.getOclLibraryProvider()
+				.getOclLibrary().getOclBoolean(), this, typespec);
 
 		if (result == null)
-			result =
-					checkUndefined("oclIsKindOf", EssentialOclPlugin
-							.getOclLibraryProvider().getOclLibrary().getOclBoolean(), this);
+			result = checkUndefined("oclIsKindOf", EssentialOclPlugin
+					.getOclLibraryProvider().getOclLibrary().getOclBoolean(),
+					this);
 
 		if (result == null) {
 			if (typespec.getType().equals(
 					EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
 							.getOclAny()))
-				result = JavaStandardLibraryFactory.INSTANCE.createOclBoolean(true);
+				result = JavaStandardLibraryFactory.INSTANCE
+						.createOclBoolean(true);
 			else {
-				final boolean isKindOf = imiElement.isKindOf(typespec.getType());
-				result = JavaStandardLibraryFactory.INSTANCE.createOclBoolean(isKindOf);
+				final boolean isKindOf = imiElement
+						.isKindOf(typespec.getType());
+				result = JavaStandardLibraryFactory.INSTANCE
+						.createOclBoolean(isKindOf);
 			}
 		}
 
@@ -363,27 +373,28 @@ public abstract class JavaOclAny implements OclAny {
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny#oclIsTypeOf(tudresden
-	 * .ocl20.pivot.essentialocl.standardlibrary.OclType)
+	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny#oclIsTypeOf
+	 * (tudresden .ocl20.pivot.essentialocl.standardlibrary.OclType)
 	 */
 	public <T extends OclAny> OclBoolean oclIsTypeOf(OclType<T> typespec) {
 
 		OclBoolean result = null;
 
-		result =
-				checkInvalid(EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
-						.getOclBoolean(), this, typespec);
+		result = checkInvalid(EssentialOclPlugin.getOclLibraryProvider()
+				.getOclLibrary().getOclBoolean(), this, typespec);
 
 		if (result == null)
-			result =
-					checkUndefined("oclIsTypeOf", EssentialOclPlugin
-							.getOclLibraryProvider().getOclLibrary().getOclBoolean(), this);
+			result = checkUndefined("oclIsTypeOf", EssentialOclPlugin
+					.getOclLibraryProvider().getOclLibrary().getOclBoolean(),
+					this);
 
 		if (result == null) {
 
 			final boolean isTypeOf = imiElement.isTypeOf(typespec.getType());
-			result = JavaStandardLibraryFactory.INSTANCE.createOclBoolean(isTypeOf);
+			result = JavaStandardLibraryFactory.INSTANCE
+					.createOclBoolean(isTypeOf);
 		}
 
 		return result;
@@ -391,6 +402,7 @@ public abstract class JavaOclAny implements OclAny {
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny#oclType()
 	 */
 	public <T extends OclAny> OclType<T> oclType() {
@@ -398,14 +410,12 @@ public abstract class JavaOclAny implements OclAny {
 		OclType<T> result;
 		Type type = this.getModelInstanceElement().getType();
 
-		result =
-				checkInvalid(EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
-						.getOclType(), this);
+		result = checkInvalid(EssentialOclPlugin.getOclLibraryProvider()
+				.getOclLibrary().getOclType(), this);
 
 		if (result == null)
-			result =
-					checkUndefined("oclType", EssentialOclPlugin.getOclLibraryProvider()
-							.getOclLibrary().getOclType(), this);
+			result = checkUndefined("oclType", EssentialOclPlugin
+					.getOclLibraryProvider().getOclLibrary().getOclType(), this);
 
 		if (result == null)
 			result = JavaStandardLibraryFactory.INSTANCE.createOclType(type);
@@ -415,6 +425,7 @@ public abstract class JavaOclAny implements OclAny {
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @seetudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny#
 	 * getModelInstanceElement()
 	 */
@@ -424,19 +435,20 @@ public abstract class JavaOclAny implements OclAny {
 	}
 
 	/**
-	 * This methods checks for all given {@link OclAny}s whether they are invalid.
-	 * If one of them is, the typed <code>invalid</code> value is returned based
-	 * on the given return {@link Type}.
+	 * This methods checks for all given {@link OclAny}s whether they are
+	 * invalid. If one of them is, the typed <code>invalid</code> value is
+	 * returned based on the given return {@link Type}.
 	 * 
 	 * @param <T>
-	 *          a concrete subclass of {@link OclAny}
+	 *            a concrete subclass of {@link OclAny}
 	 * @param returnType
-	 *          the {@link Type} of the returned <code>invalid</code> value
+	 *            the {@link Type} of the returned <code>invalid</code> value
 	 * @param objects
-	 *          the {@link OclAny}s to check whether they are invalid
+	 *            the {@link OclAny}s to check whether they are invalid
 	 * @return the typed <code>invalid</code> if one of the given objects is
 	 *         <code>invalid</code>, or <code>null</code> (the Java
-	 *         <code>null</code>) if there is no given <code>invalid</code> value
+	 *         <code>null</code>) if there is no given <code>invalid</code>
+	 *         value
 	 */
 	protected <T extends OclAny> T checkInvalid(Type returnType,
 			OclAny... objects) {
@@ -446,9 +458,8 @@ public abstract class JavaOclAny implements OclAny {
 		for (OclAny object : objects) {
 
 			if (object.getInvalidReason() != null) {
-				result =
-						JavaStandardLibraryFactory.INSTANCE.createOclInvalid(returnType,
-								object.getInvalidReason());
+				result = JavaStandardLibraryFactory.INSTANCE.createOclInvalid(
+						returnType, object.getInvalidReason());
 				break;
 			}
 		}
@@ -462,18 +473,18 @@ public abstract class JavaOclAny implements OclAny {
 	 * <code>invalid</code> value is returned.
 	 * 
 	 * @param <T>
-	 *          a concrete subclass of {@link OclAny}
+	 *            a concrete subclass of {@link OclAny}
 	 * @param methodName
-	 *          the name of the method that needs to be checked for undefined/null
-	 *          values; the method's name is used in the error message of the
-	 *          returned <code>undefined</code> value
+	 *            the name of the method that needs to be checked for
+	 *            undefined/null values; the method's name is used in the error
+	 *            message of the returned <code>undefined</code> value
 	 * @param returnType
-	 *          the {@link Type} of the returned <code>undefined</code> value
+	 *            the {@link Type} of the returned <code>undefined</code> value
 	 * @param object
-	 *          the object on which the method is called
+	 *            the object on which the method is called
 	 * @param args
-	 *          the arguments of the method that should also be checked for
-	 *          <code>undefined</code> values
+	 *            the arguments of the method that should also be checked for
+	 *            <code>undefined</code> values
 	 * @return the typed <code>undefined</code> value if there is a given
 	 *         <code>undefined</code> value or <code>null</code> (the Java
 	 *         <code>null</code>) if there is no given <code>undefined</code>
@@ -486,21 +497,24 @@ public abstract class JavaOclAny implements OclAny {
 
 		if (object != null && object.getUndefinedReason() != null) {
 
-			result =
-					JavaStandardLibraryFactory.INSTANCE.createOclInvalid(returnType,
-							new RuntimeException("Cannot invoke operation " + methodName
-									+ " on null. Reason: " + object.getUndefinedReason()));
-		}
-		else {
+			result = JavaStandardLibraryFactory.INSTANCE.createOclInvalid(
+					returnType,
+					new RuntimeException("Cannot invoke operation "
+							+ methodName + " on null. Reason: "
+							+ object.getUndefinedReason()));
+		} else {
 			for (OclAny arg : args) {
 
 				if (arg.getUndefinedReason() != null) {
 
-					result =
-							JavaStandardLibraryFactory.INSTANCE.createOclInvalid(returnType,
-									new RuntimeException("Cannot invoke operation " + methodName
-											+ " with null as one of its arguments. Reason: "
-											+ arg.getUndefinedReason()));
+					result = JavaStandardLibraryFactory.INSTANCE
+							.createOclInvalid(
+									returnType,
+									new RuntimeException(
+											"Cannot invoke operation "
+													+ methodName
+													+ " with null as one of its arguments. Reason: "
+													+ arg.getUndefinedReason()));
 					break;
 				}
 			}
@@ -510,14 +524,16 @@ public abstract class JavaOclAny implements OclAny {
 	}
 
 	/**
-	 * Helper method that can be used by every subclass of {@link OclAny} to check
-	 * whether the object itself and its argument are both null or one of them is.
+	 * Helper method that can be used by every subclass of {@link OclAny} to
+	 * check whether the object itself and its argument are both null or one of
+	 * them is.
 	 * 
 	 * @param that
-	 *          the object to compare to
-	 * @return <code>true</code> if this and that are both undefined or invalid or
-	 *         <code>false</code> if one of them is. Returns <code>null</code> if
-	 *         both elements are neither undefined nor invalid.
+	 *            the object to compare to
+	 * @return <code>true</code> if this and that are both undefined or invalid
+	 *         or <code>false</code> if one of them is. Returns
+	 *         <code>null</code> if both elements are neither undefined nor
+	 *         invalid.
 	 */
 	protected OclBoolean checkIsEqualTo(OclAny that) {
 
@@ -529,7 +545,8 @@ public abstract class JavaOclAny implements OclAny {
 		else if (this.invalidReason != null && that.getInvalidReason() != null)
 			result = JavaOclBoolean.getInstance(true);
 		// only one undefined
-		else if (this.undefinedreason != null || that.getUndefinedReason() != null)
+		else if (this.undefinedreason != null
+				|| that.getUndefinedReason() != null)
 			result = JavaOclBoolean.getInstance(false);
 		// only one invalid
 		else if (this.invalidReason != null || that.getInvalidReason() != null)
@@ -540,15 +557,15 @@ public abstract class JavaOclAny implements OclAny {
 
 	/**
 	 * The method {@link OclAny#asSet()} is used in implicit conversions. Since
-	 * <code>undefined</code> is allowed to be a source of collection operations,
-	 * this method checks whether this object is <code>undefined</code> and if so,
-	 * it returns an empty {@link OclSet}.
+	 * <code>undefined</code> is allowed to be a source of collection
+	 * operations, this method checks whether this object is
+	 * <code>undefined</code> and if so, it returns an empty {@link OclSet}.
 	 * 
 	 * @param <T>
-	 *          a subclass of {@link OclAny} that represents the generic type of
-	 *          the {@link OclSet}
+	 *            a subclass of {@link OclAny} that represents the generic type
+	 *            of the {@link OclSet}
 	 * @param genericType
-	 *          the {@link Type} of the element in question
+	 *            the {@link Type} of the element in question
 	 * @return an empty {@link OclSet} if this is <code>undefined</code> or
 	 *         <code>null</code> if this is defined
 	 */
@@ -557,15 +574,15 @@ public abstract class JavaOclAny implements OclAny {
 		OclSet<T> result = null;
 
 		if (this.undefinedreason != null)
-			result =
-					JavaStandardLibraryFactory.INSTANCE.createOclSet(
-							new HashSet<Object>(), genericType);
+			result = JavaStandardLibraryFactory.INSTANCE.createOclSet(
+					new HashSet<Object>(), genericType);
 
 		return result;
 	}
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny#invokeOperation
 	 * (tudresden.ocl20.pivot.pivotmodel.Operation,
@@ -586,8 +603,7 @@ public abstract class JavaOclAny implements OclAny {
 		opName = getOperationName(opName, args.length + 1);
 
 		/* translate arguments */
-		List<Class<? extends OclAny>> argClasses =
-				new LinkedList<Class<? extends OclAny>>();
+		List<Class<? extends OclAny>> argClasses = new LinkedList<Class<? extends OclAny>>();
 		for (OclAny arg : args) {
 			argClasses.add(arg.getClass());
 		}
@@ -596,43 +612,37 @@ public abstract class JavaOclAny implements OclAny {
 
 		/* try to invoke the operation */
 		try {
-			Method methodToInvoke =
-					findMethod(opName, thisClass, argClasses.toArray(new Class[0]));
+			Method methodToInvoke = findMethod(opName, thisClass,
+					argClasses.toArray(new Class[0]));
 
-			Object invocationResult = methodToInvoke.invoke(this, (Object[]) args);
+			Object invocationResult = methodToInvoke.invoke(this,
+					(Object[]) args);
 
 			result = (OclAny) invocationResult;
 
 		}
 		/* if anything goes wrong, wrap it in an InvalidException */
 		catch (SecurityException e) {
-			result =
-					JavaStandardLibraryFactory.INSTANCE.createOclInvalid(operation
-							.getType(), e);
+			result = JavaStandardLibraryFactory.INSTANCE.createOclInvalid(
+					operation.getType(), e);
 		} catch (NoSuchMethodException e) {
-			result =
-					JavaStandardLibraryFactory.INSTANCE.createOclInvalid(operation
-							.getType(), e);
+			result = JavaStandardLibraryFactory.INSTANCE.createOclInvalid(
+					operation.getType(), e);
 		} catch (IllegalArgumentException e) {
-			result =
-					JavaStandardLibraryFactory.INSTANCE.createOclInvalid(operation
-							.getType(), e);
+			result = JavaStandardLibraryFactory.INSTANCE.createOclInvalid(
+					operation.getType(), e);
 		} catch (IllegalAccessException e) {
-			result =
-					JavaStandardLibraryFactory.INSTANCE.createOclInvalid(operation
-							.getType(), e);
+			result = JavaStandardLibraryFactory.INSTANCE.createOclInvalid(
+					operation.getType(), e);
 		} catch (InvocationTargetException e) {
 
 			Throwable cause = e.getCause();
 			if (cause != null) {
-				result =
-						JavaStandardLibraryFactory.INSTANCE.createOclInvalid(operation
-								.getType(), cause);
-			}
-			else {
-				result =
-						JavaStandardLibraryFactory.INSTANCE.createOclInvalid(operation
-								.getType(), e);
+				result = JavaStandardLibraryFactory.INSTANCE.createOclInvalid(
+						operation.getType(), cause);
+			} else {
+				result = JavaStandardLibraryFactory.INSTANCE.createOclInvalid(
+						operation.getType(), e);
 			}
 		}
 
@@ -640,9 +650,8 @@ public abstract class JavaOclAny implements OclAny {
 		 * Just in case, if the return type is not an instance of OclAny.
 		 */
 		catch (ClassCastException e) {
-			result =
-					JavaStandardLibraryFactory.INSTANCE.createOclInvalid(operation
-							.getType(), e);
+			result = JavaStandardLibraryFactory.INSTANCE.createOclInvalid(
+					operation.getType(), e);
 		}
 		// }
 		// no else.
@@ -657,25 +666,26 @@ public abstract class JavaOclAny implements OclAny {
 	 * </p>
 	 * 
 	 * @param methodName
-	 *          The name of the method to search for.
+	 *            The name of the method to search for.
 	 * @param sourceType
-	 *          The source type on which the operation shall be invoked.
+	 *            The source type on which the operation shall be invoked.
 	 * @param parameterTypes
-	 *          An Array representing the number and types of parameters to look
-	 *          for in the method's signature. A null array is treated as a
-	 *          zero-length array.
+	 *            An Array representing the number and types of parameters to
+	 *            look for in the method's signature. A null array is treated as
+	 *            a zero-length array.
 	 * @param isModelMethod
-	 *          Specifies whether or not the method which shall be found is an OCL
-	 *          defined method or a model defined method.
+	 *            Specifies whether or not the method which shall be found is an
+	 *            OCL defined method or a model defined method.
 	 * @return Method object satisfying the given conditions.
 	 * @throws NoSuchMethodException
-	 *           Thrown if no methods match the criteria, or if the reflective
-	 *           call is ambiguous based on the parameter types, or if methodName
-	 *           is null.
+	 *             Thrown if no methods match the criteria, or if the reflective
+	 *             call is ambiguous based on the parameter types, or if
+	 *             methodName is null.
 	 */
 	protected Method findMethod(String methodName,
 			Class<? extends OclAny> sourceType,
-			Class<? extends OclAny>... parameterTypes) throws NoSuchMethodException {
+			Class<? extends OclAny>... parameterTypes)
+			throws NoSuchMethodException {
 
 		Method result;
 		Method[] allMethods;
@@ -747,19 +757,23 @@ public abstract class JavaOclAny implements OclAny {
 
 	/**
 	 * <p>
-	 * Overrides the method {@link Object#equals(Object)}. Has the same semantics
-	 * as {@link OclAny#isEqualTo(OclAny)} but results in <code>false</code> if
-	 * the result is <code>invalid</code> or <code>undefined</code>.
+	 * Overrides the method {@link Object#equals(Object)}. Has the same
+	 * semantics as {@link OclAny#isEqualTo(OclAny)} but results in
+	 * <code>false</code> if the result is <code>invalid</code> or
+	 * <code>undefined</code>.
 	 * </p>
 	 * 
 	 * <p>
-	 * <strong>This semantics is required to support {@link Collection} operations
-	 * such as {@link Collection#contains(Object)} in interpretation of iterate
-	 * expressions!</strong>
+	 * <strong>This semantics is required to support {@link Collection}
+	 * operations such as {@link Collection#contains(Object)} in interpretation
+	 * of iterate expressions!</strong>
 	 * </p>
 	 * 
 	 * @param other
-	 *          The {@link Object} to be compared.
+	 *            The {@link Object} to be compared.
+	 * 
+	 *            FIXME Claas: Where is the {@link Object#hashCode()}
+	 *            implementation?
 	 */
 	@Override
 	public boolean equals(Object other) {

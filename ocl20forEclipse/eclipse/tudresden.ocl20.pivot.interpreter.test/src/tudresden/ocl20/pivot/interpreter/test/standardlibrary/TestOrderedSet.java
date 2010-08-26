@@ -98,4 +98,28 @@ public class TestOrderedSet extends AbstractInterpreterTest {
 
 		this.assertIsTrue(results.get(0));
 	}
+
+	/**
+	 * <p>
+	 * Tests the operation <code>Collection.product(Collection)</code>.
+	 * </p>
+	 * 
+	 * @throws ParseException
+	 * @throws ModelAccessException
+	 * @throws IllegalArgumentException
+	 */
+	@Test
+	public void testEqualsNegative01() throws IllegalArgumentException,
+			ModelAccessException, ParseException {
+	
+		List<IInterpretationResult> results;
+		results = super.interpretConstraintsForInstance(MODEL1_NAME,
+				CONSTRAINT_DIRECTORY + "/equalsNegative01", INSTANCE1_NAME, Arrays
+						.asList(new String[] { "Class1" }));
+	
+		assertNotNull(results);
+		assertEquals(1, results.size());
+	
+		this.assertIsFalse(results.get(0));
+	}
 }
