@@ -215,14 +215,11 @@ Wizard} \eclipse{General > Archive File}. In the following window select the
 \reference{tudresden.ocl20.pivot.examples.\linebreak[0]simple\_<version\_nr>.jar}
 and push the \eclipse{Finish} button.
 
-Now you can load a model. Select the menu option \eclipse{Dresden OCL2 > Load 
-Model}. In the opened wizard you have to select a model file and a meta-model 
-for the model\footnote{Section~\ref{sect:info:models} gives an overview over 
-the different meta-models supported by DresdenOCL.} (see 
-Figure~\ref{pic:intro:loadmodel01}). Push the button \eclipse{Browse 
-Workspace...} and select the file \reference{model/simple.uml} inside the 
-Simple Example Project. Then select the meta-model \acs{UML}2 and push the 
-\eclipse{Finish} button.
+Now you can load a model. Select the \reference{model/simple.uml} file in the
+\eclipse{Package Explorer} and open the popup menu with a right mouse click on
+it. Select the menu option \eclipse{DresdenOCL > Load 
+Model}. In the opened wizard you have to select the meta-model \acs{UML}2 and
+push the \eclipse{Finish} button (see Figure~\ref{pic:intro:loadmodel01}).
 
 Figure~\ref{pic:intro:loadmodel02} shows the loaded Simple Example model, which
 uses \acs{UML}2 as its meta-model. Via the menu button of the \eclipse{Model 
@@ -254,14 +251,15 @@ After loading a model, you can load a an instance of this model using another
 wizard. The model instance is required to interpret OCL constraints on
 elements instantiating the classes described in the opened model. Which kinds
 of model instances are supported in DresdenOCL is documented in
-Section~\ref{sect:info:modelinstances}. Use the menu option \eclipse{Dresden 
-OCL2 > Load Model Instance}. In the opened wizard you have to select a model 
-instance (in this tutorial we used the file 
+Section~\ref{sect:info:modelinstances}. 
+Select the file 
 \reference{bin/tudresden/ocl20/\linebreak[0]pivot/examples/\linebreak[0]sim\-ple/\linebreak[0]in\-stance/\linebreak[0]Mo\-del\-InstanceProviderClass\linebreak[0].class}
-of the Simple Example (see Figure~\ref{pic:intro:loadInstance01}). Besides the
-model instance resource you have to select a model for which the model instance 
-shall be loaded and the type of model instance you want to load (we want to 
-load a \keyword{Java Instance}).
+of the Simple Example in the \eclipse{Package Explorer}, open the popup menu 
+on it and select the menu option \eclipse{DresdenOCL > Load Model Instance}.
+In the opened wizard you have to select a model for which the model instance 
+shall be loaded and the type of model instance you want to load (see
+Figure~\ref{pic:intro:loadInstance01}). Select the \keyword{Java Instance} type
+and push the \eclipse{Finish} button.
 
 \begin{figure}[!p]
 	\centering
