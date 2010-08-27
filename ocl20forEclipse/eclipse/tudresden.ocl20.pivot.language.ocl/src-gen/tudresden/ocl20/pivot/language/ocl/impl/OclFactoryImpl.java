@@ -67,6 +67,8 @@ public class OclFactoryImpl extends EFactoryImpl implements OclFactory {
 			case OclPackage.TYPE_PATH_NAME_SIMPLE_CS: return createTypePathNameSimpleCS();
 			case OclPackage.TYPE_PATH_NAME_NESTED_CS: return createTypePathNameNestedCS();
 			case OclPackage.TUPLE_TYPE_CS: return createTupleTypeCS();
+			case OclPackage.COLLECTION_TYPE_LITERAL_EXP_CS: return createCollectionTypeLiteralExpCS();
+			case OclPackage.TUPLE_TYPE_LITERAL_EXP_CS: return createTupleTypeLiteralExpCS();
 			case OclPackage.VARIABLE_DECLARATION_WITH_INIT_CS: return createVariableDeclarationWithInitCS();
 			case OclPackage.VARIABLE_DECLARATION_WITHOUT_INIT_CS: return createVariableDeclarationWithoutInitCS();
 			case OclPackage.VARIABLE_DECLARATION_WITH_INIT_LIST_CS: return createVariableDeclarationWithInitListCS();
@@ -200,6 +202,26 @@ public class OclFactoryImpl extends EFactoryImpl implements OclFactory {
 	public TupleTypeCS createTupleTypeCS() {
 		TupleTypeCSImpl tupleTypeCS = new TupleTypeCSImpl();
 		return tupleTypeCS;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public CollectionTypeLiteralExpCS createCollectionTypeLiteralExpCS() {
+		CollectionTypeLiteralExpCSImpl collectionTypeLiteralExpCS = new CollectionTypeLiteralExpCSImpl();
+		return collectionTypeLiteralExpCS;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public TupleTypeLiteralExpCS createTupleTypeLiteralExpCS() {
+		TupleTypeLiteralExpCSImpl tupleTypeLiteralExpCS = new TupleTypeLiteralExpCSImpl();
+		return tupleTypeLiteralExpCS;
 	}
 
 	/**

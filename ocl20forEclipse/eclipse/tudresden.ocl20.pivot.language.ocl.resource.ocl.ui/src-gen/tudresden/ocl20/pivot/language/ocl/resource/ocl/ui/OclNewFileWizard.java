@@ -50,7 +50,7 @@ public class OclNewFileWizard extends org.eclipse.jface.wizard.Wizard implements
 		try {
 			file = getFile(fileName, containerName);
 		} catch (org.eclipse.core.runtime.CoreException e1) {
-			tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclUIPlugin.logError("java.lang.Exception while initializing new file", e1);
+			tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclUIPlugin.logError("Exception while initializing new file", e1);
 			return false;
 		}
 		
@@ -83,7 +83,7 @@ public class OclNewFileWizard extends org.eclipse.jface.wizard.Wizard implements
 		} catch (java.lang.reflect.InvocationTargetException e) {
 			Throwable realException = e.getTargetException();
 			org.eclipse.jface.dialogs.MessageDialog.openError(getShell(), "Error", realException.getMessage());
-			tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclUIPlugin.logError("java.lang.Exception while initializing new file", e);
+			tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclUIPlugin.logError("Exception while initializing new file", e);
 			return false;
 		}
 		return true;
@@ -155,7 +155,7 @@ public class OclNewFileWizard extends org.eclipse.jface.wizard.Wizard implements
 		this.selection = selection;
 	}
 	
-	public java.lang.String getFileExtension() {
+	public String getFileExtension() {
 		return new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclMetaInformation().getSyntaxName();
 	}
 	

@@ -67,6 +67,22 @@ package tudresden.ocl20.pivot.language.ocl.semantics
 	}
 
 
+	private trait CollectionTypeLiteralExpCSAttributable extends tudresden.ocl20.pivot.language.ocl.CollectionTypeLiteralExpCS with tudresden.attributegrammar.integration.kiama.AttributableEObject {
+		type T = tudresden.ocl20.pivot.language.ocl.CollectionTypeLiteralExpCS
+	
+		override def getCollectionType() = eObject.getCollectionType()
+		override def setCollectionType(_CollectionTypeIdentifierCS : tudresden.ocl20.pivot.language.ocl.CollectionTypeIdentifierCS) = eObject.setCollectionType(_CollectionTypeIdentifierCS : tudresden.ocl20.pivot.language.ocl.CollectionTypeIdentifierCS)
+	}
+
+
+	private trait TupleTypeLiteralExpCSAttributable extends tudresden.ocl20.pivot.language.ocl.TupleTypeLiteralExpCS with tudresden.attributegrammar.integration.kiama.AttributableEObject {
+		type T = tudresden.ocl20.pivot.language.ocl.TupleTypeLiteralExpCS
+	
+		override def getTupleType() = eObject.getTupleType()
+		override def setTupleType(_TupleTypeCS : tudresden.ocl20.pivot.language.ocl.TupleTypeCS) = eObject.setTupleType(_TupleTypeCS : tudresden.ocl20.pivot.language.ocl.TupleTypeCS)
+	}
+
+
 
 
 	private trait VariableDeclarationWithInitCSAttributable extends tudresden.ocl20.pivot.language.ocl.VariableDeclarationWithInitCS with tudresden.attributegrammar.integration.kiama.AttributableEObject {

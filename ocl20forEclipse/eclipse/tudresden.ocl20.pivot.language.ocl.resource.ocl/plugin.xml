@@ -6,6 +6,15 @@
 		</metaInformationProvider>
 	</extension>
 	
+	<extension id="tudresden.ocl20.pivot.language.ocl.resource.ocl.problem" name="EMFText Problem" point="org.eclipse.core.resources.markers">
+		<persistent value="true">
+		</persistent>
+		<super type="org.eclipse.core.resources.problemmarker">
+		</super>
+		<super type="org.eclipse.core.resources.textmarker">
+		</super>
+	</extension>
+	
 	<extension id="tudresden.ocl20.pivot.language.ocl.resource.ocl.nature" name="ocl nature" point="org.eclipse.core.resources.natures">
 		<runtime>
 			<run class="tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclNature" />

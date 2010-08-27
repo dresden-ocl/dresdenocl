@@ -18,7 +18,7 @@ public class OclCopiedEObjectInternalEList extends tudresden.ocl20.pivot.languag
 		this.copy.addAll(this.original);
 	}
 	
-	public boolean basicContains(java.lang.Object object) {
+	public boolean basicContains(Object object) {
 		return copy.basicContains(object);
 	}
 	
@@ -30,7 +30,7 @@ public class OclCopiedEObjectInternalEList extends tudresden.ocl20.pivot.languag
 		return copy.basicGet(index);
 	}
 	
-	public int basicIndexOf(java.lang.Object object) {
+	public int basicIndexOf(Object object) {
 		return copy.basicIndexOf(object);
 	}
 	
@@ -38,7 +38,7 @@ public class OclCopiedEObjectInternalEList extends tudresden.ocl20.pivot.languag
 		return copy.basicIterator();
 	}
 	
-	public int basicLastIndexOf(java.lang.Object object) {
+	public int basicLastIndexOf(Object object) {
 		return copy.basicLastIndexOf(object);
 	}
 	
@@ -54,7 +54,7 @@ public class OclCopiedEObjectInternalEList extends tudresden.ocl20.pivot.languag
 		return copy.basicListIterator(index);
 	}
 	
-	public java.lang.Object[] basicToArray() {
+	public Object[] basicToArray() {
 		return copy.basicToArray();
 	}
 	
@@ -62,7 +62,7 @@ public class OclCopiedEObjectInternalEList extends tudresden.ocl20.pivot.languag
 		return copy.basicToArray(array);
 	}
 	
-	public boolean equals(java.lang.Object o) {
+	public boolean equals(Object o) {
 		return copy.equals(o);
 	}
 	
@@ -95,7 +95,7 @@ public class OclCopiedEObjectInternalEList extends tudresden.ocl20.pivot.languag
 		return original.basicAdd(object, notifications);
 	}
 	
-	public org.eclipse.emf.common.notify.NotificationChain basicRemove(java.lang.Object object,
+	public org.eclipse.emf.common.notify.NotificationChain basicRemove(Object object,
 	org.eclipse.emf.common.notify.NotificationChain notifications) {
 		copy.basicRemove(object, notifications);
 		return original.basicRemove(object, notifications);

@@ -16,14 +16,14 @@ package tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp;
  */
 public class OclDummyEObject extends org.eclipse.emf.ecore.impl.EObjectImpl  {
 	
-	private java.util.Map<org.eclipse.emf.ecore.EStructuralFeature, java.lang.Object> keyValueMap;
+	private java.util.Map<org.eclipse.emf.ecore.EStructuralFeature, Object> keyValueMap;
 	private String recurseFeatureName;
 	private org.eclipse.emf.ecore.EClass type;
 	
 	public OclDummyEObject(org.eclipse.emf.ecore.EClass type, String recurseFeatureName) {
 		this.recurseFeatureName = recurseFeatureName;
 		this.type = type;
-		keyValueMap = new java.util.LinkedHashMap<org.eclipse.emf.ecore.EStructuralFeature, java.lang.Object>();
+		keyValueMap = new java.util.LinkedHashMap<org.eclipse.emf.ecore.EStructuralFeature, Object>();
 	}
 	
 	public org.eclipse.emf.ecore.EObject applyTo(org.eclipse.emf.ecore.EObject currentTarget) {
@@ -38,7 +38,7 @@ public class OclDummyEObject extends org.eclipse.emf.ecore.impl.EObjectImpl  {
 		return newObject;
 	}
 	
-	public java.lang.Object getValueByName(String name) {
+	public Object getValueByName(String name) {
 		for (org.eclipse.emf.ecore.EStructuralFeature f : this.keyValueMap.keySet()) {
 			if (f.getName().equals(name)) return this.keyValueMap.get(f);
 		}
@@ -52,7 +52,7 @@ public class OclDummyEObject extends org.eclipse.emf.ecore.impl.EObjectImpl  {
 		return type;
 	}
 	
-	public void eSet(org.eclipse.emf.ecore.EStructuralFeature structuralFeature, java.lang.Object a0) {
+	public void eSet(org.eclipse.emf.ecore.EStructuralFeature structuralFeature, Object a0) {
 		this.keyValueMap.put(structuralFeature, a0);
 	}
 	

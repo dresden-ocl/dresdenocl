@@ -61,6 +61,8 @@ public class OclSyntaxCoverageInformationProvider {
 			tudresden.ocl20.pivot.language.ocl.OclPackage.eINSTANCE.getCollectionLiteralExpCS(),
 			tudresden.ocl20.pivot.language.ocl.OclPackage.eINSTANCE.getCollectionRangeCS(),
 			tudresden.ocl20.pivot.language.ocl.OclPackage.eINSTANCE.getCollectionLiteralPartsOclExpCS(),
+			tudresden.ocl20.pivot.language.ocl.OclPackage.eINSTANCE.getCollectionTypeLiteralExpCS(),
+			tudresden.ocl20.pivot.language.ocl.OclPackage.eINSTANCE.getTupleTypeLiteralExpCS(),
 			tudresden.ocl20.pivot.language.ocl.OclPackage.eINSTANCE.getPropertyCallOnSelfExpCS(),
 			tudresden.ocl20.pivot.language.ocl.OclPackage.eINSTANCE.getLetExpCS(),
 			tudresden.ocl20.pivot.language.ocl.OclPackage.eINSTANCE.getRealLiteralExpCS(),

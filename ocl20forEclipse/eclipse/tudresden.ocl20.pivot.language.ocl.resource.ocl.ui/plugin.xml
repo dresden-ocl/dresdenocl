@@ -7,18 +7,9 @@
 	</extension>
 	
 	<extension point="org.eclipse.ui.editors">
-		<editor class="tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclEditor" contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor" extensions="ocl" icon="icons/editor_icon.gif" id="tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclEditor" name="DresdenOCL Editor">
+		<editor class="tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclEditor" contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor" extensions="ocl" icon="icons/editor_icon.gif" id="tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclEditor" name="EMFText ocl Editor">
 			<contentTypeBinding contentTypeId="tudresden.ocl20.pivot.language.ocl.resource.ocl"/>
 		</editor>
-	</extension>
-	
-	<extension id="tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.problem" name="EMFText Problem" point="org.eclipse.core.resources.markers">
-		<persistent value="true">
-		</persistent>
-		<super type="org.eclipse.core.resources.problemmarker">
-		</super>
-		<super type="org.eclipse.core.resources.textmarker">
-		</super>
 	</extension>
 	
 	<extension point="org.eclipse.core.runtime.preferences">
@@ -27,25 +18,23 @@
 	</extension>
 	
 	<extension point="org.eclipse.ui.preferencePages">
-		<page name="DresdenOCL Editor" id="tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclPreferencePage" class="tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclPreferencePage" category="org.eclipse.ui.preferencePages.GeneralTextEditor">
+		<page name="Ocl Text Editor" id="tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclPreferencePage" class="tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclPreferencePage" category="org.eclipse.ui.preferencePages.GeneralTextEditor">
 		</page>
 		<page name="Syntax Coloring" id="tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclSyntaxColoringPreferencePage" class="tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclSyntaxColoringPreferencePage" category="tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclPreferencePage">
 		</page>
 		<page name="Brackets" id="tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclBracketPreferencePage" class="tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclBracketPreferencePage" category="tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclPreferencePage">
 		</page>
-		<page name="Occurrence" id="tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclOccurrencePreferencePage" class="tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclOccurrencePreferencePage" category="tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclPreferencePage">
-		</page>
 	</extension>
 	
 	<extension point="org.eclipse.ui.newWizards">
-		<category id="tudresden.ocl20.pivot.modelbus.ui.newWizards.category" name="DresdenOCL">
+		<category id="org.emftext.runtime.ui.EMFTextFileCategory" name="EMFText File">
 		</category>
-		<wizard category="tudresden.ocl20.pivot.modelbus.ui.newWizards.category" icon="/icons/default_new_icon.gif" class="tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclNewFileWizard" id="tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclNewFileWizard" name="DresdenOCL Constraint File (.ocl)">
+		<wizard category="org.emftext.runtime.ui.EMFTextFileCategory" icon="/icons/default_new_icon.gif" class="tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclNewFileWizard" id="tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclNewFileWizard" name="EMFText .ocl file">
 		</wizard>
 	</extension>
 	
 	<extension point="org.eclipse.ui.ide.markerResolution">
-		<markerResolutionGenerator class="tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclMarkerResolutionGenerator" markerType="tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.problem" />
+		<markerResolutionGenerator class="tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclMarkerResolutionGenerator" markerType="tudresden.ocl20.pivot.language.ocl.resource.ocl.problem" />
 	</extension>
 	
 	<extension point="org.eclipse.core.filebuffers.annotationModelCreation">
@@ -58,6 +47,16 @@
 	
 	<extension point="org.eclipse.ui.editors.documentProviders">
 		<provider class="org.eclipse.ui.editors.text.TextFileDocumentProvider" extensions="ocl" id="tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.provider" />
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.annotationTypes">
+		<type name="tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.occurences" />
+		<type name="tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.occurences.declaration" super="tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.occurences" />
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.markerAnnotationSpecification">
+		<specification annotationType="tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.occurences" label="Occurrences (in .ocl files)" icon="/icons/occurrence_icon.gif" textPreferenceKey="ocl.occurrenceIndication" textPreferenceValue="false" highlightPreferenceKey="ocl.occurrenceHighlighting" highlightPreferenceValue="true" contributesToHeader="false" overviewRulerPreferenceKey="ocl.occurrenceIndicationInOverviewRuler" overviewRulerPreferenceValue="true" verticalRulerPreferenceKey="ocl.occurrenceIndicationInVerticalRuler" verticalRulerPreferenceValue="false" colorPreferenceKey="ocl.occurrenceIndicationColor" colorPreferenceValue="212,212,212" presentationLayer="4" showInNextPrevDropdownToolbarActionKey="ocl.showOccurrenceInNextPrevDropdownToolbarAction" showInNextPrevDropdownToolbarAction="true" isGoToNextNavigationTargetKey="ocl.isOccurrenceGoToNextNavigationTarget" isGoToNextNavigationTarget="false" isGoToPreviousNavigationTargetKey="ocl.isOccurrenceGoToPreviousNavigationTarget" isGoToPreviousNavigationTarget="false" textStylePreferenceKey="ocl.occurrenceTextStyle" textStylePreferenceValue="NONE" />
+		<specification annotationType="tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.occurences.declaration" label="Declarations (in .ocl files)" textPreferenceKey="ocl.declarationIndication" textPreferenceValue="false" highlightPreferenceKey="ocl.declarationHighlighting" highlightPreferenceValue="true" overviewRulerPreferenceKey="ocl.declarationIndicationInOverviewRuler" overviewRulerPreferenceValue="true" verticalRulerPreferenceKey="ocl.declarationIndicationInVerticalRuler" verticalRulerPreferenceValue="false" colorPreferenceKey="ocl.declarationIndicationColor" colorPreferenceValue="240,216,168" presentationLayer="4" textStylePreferenceKey="ocl.declarationTextStyle" textStylePreferenceValue="NONE" />
 	</extension>
 	
 </plugin>

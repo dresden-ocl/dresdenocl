@@ -28,7 +28,7 @@ public class OclPrinter2 implements tudresden.ocl20.pivot.language.ocl.resource.
 		
 	}
 	
-	public final static java.lang.String NEW_LINE = java.lang.System.getProperties().getProperty("line.separator");
+	public final static String NEW_LINE = java.lang.System.getProperties().getProperty("line.separator");
 	
 	/**
 	 * Holds the resource that is associated with this printer. May be null if the
@@ -51,14 +51,14 @@ public class OclPrinter2 implements tudresden.ocl20.pivot.language.ocl.resource.
 	private boolean startedPrintingObject = false;
 	/**
 	 * The number of tab characters that were printed before the current line. This
-	 * number is used to calculate the relative indendation when printing contained
-	 * objects, because all contained objects must start with this indendation
+	 * number is used to calculate the relative indentation when printing contained
+	 * objects, because all contained objects must start with this indentation
 	 * (tabsBeforeCurrentObject + currentTabs).
 	 */
 	private int currentTabs;
 	/**
 	 * The number of tab characters that must be printed before the current object.
-	 * This number is used to calculate the indendation of new lines, when line breaks
+	 * This number is used to calculate the indentation of new lines, when line breaks
 	 * are printed within one object.
 	 */
 	private int tabsBeforeCurrentObject;
@@ -297,44 +297,52 @@ public class OclPrinter2 implements tudresden.ocl20.pivot.language.ocl.resource.
 			printInternal(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_50, foundFormattingElements);
 			return;
 		}
-		if (element instanceof tudresden.ocl20.pivot.language.ocl.PropertyCallOnSelfExpCS) {
+		if (element instanceof tudresden.ocl20.pivot.language.ocl.CollectionTypeLiteralExpCS) {
 			printInternal(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_51, foundFormattingElements);
 			return;
 		}
-		if (element instanceof tudresden.ocl20.pivot.language.ocl.LetExpCS) {
+		if (element instanceof tudresden.ocl20.pivot.language.ocl.TupleTypeLiteralExpCS) {
 			printInternal(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_52, foundFormattingElements);
 			return;
 		}
-		if (element instanceof tudresden.ocl20.pivot.language.ocl.RealLiteralExpCS) {
+		if (element instanceof tudresden.ocl20.pivot.language.ocl.PropertyCallOnSelfExpCS) {
 			printInternal(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_53, foundFormattingElements);
 			return;
 		}
-		if (element instanceof tudresden.ocl20.pivot.language.ocl.IntegerLiteralExpCS) {
+		if (element instanceof tudresden.ocl20.pivot.language.ocl.LetExpCS) {
 			printInternal(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_54, foundFormattingElements);
 			return;
 		}
-		if (element instanceof tudresden.ocl20.pivot.language.ocl.BooleanLiteralExpCS) {
+		if (element instanceof tudresden.ocl20.pivot.language.ocl.RealLiteralExpCS) {
 			printInternal(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_55, foundFormattingElements);
 			return;
 		}
-		if (element instanceof tudresden.ocl20.pivot.language.ocl.StringLiteralExpCS) {
+		if (element instanceof tudresden.ocl20.pivot.language.ocl.IntegerLiteralExpCS) {
 			printInternal(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_56, foundFormattingElements);
 			return;
 		}
-		if (element instanceof tudresden.ocl20.pivot.language.ocl.InvalidLiteralExpCS) {
+		if (element instanceof tudresden.ocl20.pivot.language.ocl.BooleanLiteralExpCS) {
 			printInternal(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_57, foundFormattingElements);
 			return;
 		}
-		if (element instanceof tudresden.ocl20.pivot.language.ocl.NullLiteralExpCS) {
+		if (element instanceof tudresden.ocl20.pivot.language.ocl.StringLiteralExpCS) {
 			printInternal(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_58, foundFormattingElements);
 			return;
 		}
-		if (element instanceof tudresden.ocl20.pivot.language.ocl.NamedLiteralExpCS) {
+		if (element instanceof tudresden.ocl20.pivot.language.ocl.InvalidLiteralExpCS) {
 			printInternal(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_59, foundFormattingElements);
 			return;
 		}
-		if (element instanceof tudresden.ocl20.pivot.language.ocl.BracketExpCS) {
+		if (element instanceof tudresden.ocl20.pivot.language.ocl.NullLiteralExpCS) {
 			printInternal(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_60, foundFormattingElements);
+			return;
+		}
+		if (element instanceof tudresden.ocl20.pivot.language.ocl.NamedLiteralExpCS) {
+			printInternal(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_61, foundFormattingElements);
+			return;
+		}
+		if (element instanceof tudresden.ocl20.pivot.language.ocl.BracketExpCS) {
+			printInternal(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_62, foundFormattingElements);
 			return;
 		}
 		
@@ -369,7 +377,7 @@ public class OclPrinter2 implements tudresden.ocl20.pivot.language.ocl.resource.
 	}
 	
 	public void decorateTree(tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclSyntaxElementDecorator decorator, org.eclipse.emf.ecore.EObject eObject) {
-		java.util.Map<java.lang.String, java.lang.Integer> printCountingMap = initializePrintCountingMap(eObject);
+		java.util.Map<String, Integer> printCountingMap = initializePrintCountingMap(eObject);
 		java.util.List<tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclSyntaxElementDecorator> keywordsToPrint = new java.util.ArrayList<tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclSyntaxElementDecorator>();
 		decorateTreeBasic(decorator, eObject, printCountingMap, keywordsToPrint);
 		for (tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclSyntaxElementDecorator keywordToPrint : keywordsToPrint) {
@@ -383,7 +391,7 @@ public class OclPrinter2 implements tudresden.ocl20.pivot.language.ocl.resource.
 	 * Tries to decorate the decorator with an attribute value, or reference holded by
 	 * eObject. Returns true if an attribute value or reference was found.
 	 */
-	public boolean decorateTreeBasic(tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclSyntaxElementDecorator decorator, org.eclipse.emf.ecore.EObject eObject, java.util.Map<java.lang.String, java.lang.Integer> printCountingMap, java.util.List<tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclSyntaxElementDecorator> keywordsToPrint) {
+	public boolean decorateTreeBasic(tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclSyntaxElementDecorator decorator, org.eclipse.emf.ecore.EObject eObject, java.util.Map<String, Integer> printCountingMap, java.util.List<tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclSyntaxElementDecorator> keywordsToPrint) {
 		boolean foundFeatureToPrint = false;
 		tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclSyntaxElement syntaxElement = decorator.getDecoratedElement();
 		tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclCardinality cardinality = syntaxElement.getCardinality();
@@ -459,7 +467,7 @@ public class OclPrinter2 implements tudresden.ocl20.pivot.language.ocl.resource.
 	 * multiple choices are available. We pick the choice that prints at least one
 	 * attribute or reference.
 	 */
-	public boolean doesPrintFeature(tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclSyntaxElementDecorator decorator, org.eclipse.emf.ecore.EObject eObject, java.util.Map<java.lang.String, java.lang.Integer> printCountingMap) {
+	public boolean doesPrintFeature(tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclSyntaxElementDecorator decorator, org.eclipse.emf.ecore.EObject eObject, java.util.Map<String, Integer> printCountingMap) {
 		tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclSyntaxElement syntaxElement = decorator.getDecoratedElement();
 		if (syntaxElement instanceof tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclTerminal) {
 			tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclTerminal terminal = (tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclTerminal) syntaxElement;
@@ -490,7 +498,7 @@ public class OclPrinter2 implements tudresden.ocl20.pivot.language.ocl.resource.
 		boolean foundSomethingToPrint;
 		while (true) {
 			foundSomethingToPrint = false;
-			java.lang.Integer indexToPrint = decorator.getNextIndexToPrint();
+			Integer indexToPrint = decorator.getNextIndexToPrint();
 			if (indexToPrint != null) {
 				if (printElement instanceof tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclKeyword) {
 					printKeyword(eObject, (tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclKeyword) printElement, foundFormattingElements, layoutInformations);
@@ -553,10 +561,10 @@ public class OclPrinter2 implements tudresden.ocl20.pivot.language.ocl.resource.
 	}
 	
 	public void printAttribute(org.eclipse.emf.ecore.EObject eObject, org.eclipse.emf.ecore.EAttribute attribute, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclPlaceholder placeholder, int count, java.util.List<tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFormattingElement> foundFormattingElements, java.util.List<tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclLayoutInformation> layoutInformations) {
-		java.lang.String result;
-		java.lang.Object attributeValue = getValue(eObject, attribute, count);
+		String result;
+		Object attributeValue = getValue(eObject, attribute, count);
 		tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclLayoutInformation layoutInformation = getLayoutInformation(layoutInformations, placeholder, attributeValue, eObject);
-		java.lang.String visibleTokenText = getVisibleTokenText(layoutInformation);
+		String visibleTokenText = getVisibleTokenText(layoutInformation);
 		// if there is text for the attribute we use it
 		if (visibleTokenText != null) {
 			result = visibleTokenText;
@@ -565,7 +573,7 @@ public class OclPrinter2 implements tudresden.ocl20.pivot.language.ocl.resource.
 			// representation
 			tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver(placeholder.getTokenName());
 			tokenResolver.setOptions(getOptions());
-			java.lang.String deResolvedValue = tokenResolver.deResolve(attributeValue, attribute, eObject);
+			String deResolvedValue = tokenResolver.deResolve(attributeValue, attribute, eObject);
 			result = deResolvedValue;
 		}
 		if (result != null && !"".equals(result)) {
@@ -577,7 +585,7 @@ public class OclPrinter2 implements tudresden.ocl20.pivot.language.ocl.resource.
 	
 	public void printContainedObject(org.eclipse.emf.ecore.EObject eObject, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclContainment containment, int count, java.util.List<tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFormattingElement> foundFormattingElements, java.util.List<tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclLayoutInformation> layoutInformations) {
 		org.eclipse.emf.ecore.EStructuralFeature reference = containment.getFeature();
-		java.lang.Object o = getValue(eObject, reference, count);
+		Object o = getValue(eObject, reference, count);
 		// save current number of tabs to restore them after printing the contained object
 		int oldTabsBeforeCurrentObject = tabsBeforeCurrentObject;
 		int oldCurrentTabs = currentTabs;
@@ -589,11 +597,12 @@ public class OclPrinter2 implements tudresden.ocl20.pivot.language.ocl.resource.
 		doPrint((org.eclipse.emf.ecore.EObject) o, foundFormattingElements);
 		// restore number of tabs after printing the contained object
 		tabsBeforeCurrentObject = oldTabsBeforeCurrentObject;
+		newTabsBeforeCurrentObject = tabsBeforeCurrentObject;
 		currentTabs = oldCurrentTabs;
 	}
 	
 	public void printFormattingElements(java.util.List<tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFormattingElement> foundFormattingElements, java.util.List<tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclLayoutInformation> layoutInformations, tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclLayoutInformation layoutInformation) {
-		java.lang.String hiddenTokenText = getHiddenTokenText(layoutInformation);
+		String hiddenTokenText = getHiddenTokenText(layoutInformation);
 		if (hiddenTokenText != null) {
 			// removed used information
 			layoutInformations.remove(layoutInformation);
@@ -638,7 +647,7 @@ public class OclPrinter2 implements tudresden.ocl20.pivot.language.ocl.resource.
 	
 	private Object getValue(org.eclipse.emf.ecore.EObject eObject, org.eclipse.emf.ecore.EStructuralFeature feature, int count) {
 		// get value of feature
-		java.lang.Object o = eObject.eGet(feature);
+		Object o = eObject.eGet(feature);
 		if (o instanceof java.util.List<?>) {
 			java.util.List<?> list = (java.util.List<?>) o;
 			int index = list.size() - count;
@@ -649,7 +658,7 @@ public class OclPrinter2 implements tudresden.ocl20.pivot.language.ocl.resource.
 	
 	@SuppressWarnings("unchecked")	
 	public void printReference(org.eclipse.emf.ecore.EObject eObject, org.eclipse.emf.ecore.EReference reference, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclPlaceholder placeholder, int count, java.util.List<tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFormattingElement> foundFormattingElements, java.util.List<tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclLayoutInformation> layoutInformations) {
-		java.lang.Object referencedObject = getValue(eObject, reference, count);
+		Object referencedObject = getValue(eObject, reference, count);
 		tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclLayoutInformation layoutInformation = getLayoutInformation(layoutInformations, placeholder, referencedObject, eObject);
 		printFormattingElements(foundFormattingElements, layoutInformations, layoutInformation);
 		// NC-References must always be printed by deresolving the reference. We cannot
@@ -661,23 +670,23 @@ public class OclPrinter2 implements tudresden.ocl20.pivot.language.ocl.resource.
 		@SuppressWarnings("rawtypes")		
 		tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclReferenceResolver referenceResolver = getReferenceResolverSwitch().getResolver(reference);
 		referenceResolver.setOptions(getOptions());
-		java.lang.String deresolvedReference = referenceResolver.deResolve((org.eclipse.emf.ecore.EObject) referencedObject, eObject, reference);
-		java.lang.String deresolvedToken = tokenResolver.deResolve(deresolvedReference, reference, eObject);
+		String deresolvedReference = referenceResolver.deResolve((org.eclipse.emf.ecore.EObject) referencedObject, eObject, reference);
+		String deresolvedToken = tokenResolver.deResolve(deresolvedReference, reference, eObject);
 		// write result to output stream
 		tokenOutputStream.add(new PrintToken(deresolvedToken, tokenName));
 	}
 	
-	public java.util.Map<java.lang.String, java.lang.Integer> initializePrintCountingMap(org.eclipse.emf.ecore.EObject eObject) {
+	public java.util.Map<String, Integer> initializePrintCountingMap(org.eclipse.emf.ecore.EObject eObject) {
 		// The printCountingMap contains a mapping from feature names to the number of
 		// remaining elements that still need to be printed. The map is initialized with
 		// the number of elements stored in each structural feature. For lists this is the
 		// list size. For non-multiple features it is either 1 (if the feature is set) or
 		// 0 (if the feature is null).
-		java.util.Map<java.lang.String, java.lang.Integer> printCountingMap = new java.util.LinkedHashMap<java.lang.String, java.lang.Integer>();
+		java.util.Map<String, Integer> printCountingMap = new java.util.LinkedHashMap<String, Integer>();
 		java.util.List<org.eclipse.emf.ecore.EStructuralFeature> features = eObject.eClass().getEAllStructuralFeatures();
 		for (org.eclipse.emf.ecore.EStructuralFeature feature : features) {
 			int count = 0;
-			java.lang.Object featureValue = eObject.eGet(feature);
+			Object featureValue = eObject.eGet(feature);
 			if (featureValue != null) {
 				if (featureValue instanceof java.util.List<?>) {
 					count = ((java.util.List<?>) featureValue).size();
@@ -706,7 +715,7 @@ public class OclPrinter2 implements tudresden.ocl20.pivot.language.ocl.resource.
 		return (tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclReferenceResolverSwitch) new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclMetaInformation().getReferenceResolverSwitch();
 	}
 	
-	protected void addWarningToResource(final java.lang.String errorMessage, org.eclipse.emf.ecore.EObject cause) {
+	protected void addWarningToResource(final String errorMessage, org.eclipse.emf.ecore.EObject cause) {
 		tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextResource resource = getResource();
 		if (resource == null) {
 			// the resource can be null if the printer is used stand alone
@@ -726,7 +735,7 @@ public class OclPrinter2 implements tudresden.ocl20.pivot.language.ocl.resource.
 		return newAdapter;
 	}
 	
-	private tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclLayoutInformation getLayoutInformation(java.util.List<tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclLayoutInformation> layoutInformations, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclSyntaxElement syntaxElement, java.lang.Object object, org.eclipse.emf.ecore.EObject container) {
+	private tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclLayoutInformation getLayoutInformation(java.util.List<tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclLayoutInformation> layoutInformations, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclSyntaxElement syntaxElement, Object object, org.eclipse.emf.ecore.EObject container) {
 		for (tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclLayoutInformation layoutInformation : layoutInformations) {
 			if (syntaxElement == layoutInformation.getSyntaxElement()) {
 				if (object == null) {
@@ -739,7 +748,7 @@ public class OclPrinter2 implements tudresden.ocl20.pivot.language.ocl.resource.
 		return null;
 	}
 	
-	private java.lang.String getHiddenTokenText(tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclLayoutInformation layoutInformation) {
+	private String getHiddenTokenText(tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclLayoutInformation layoutInformation) {
 		if (layoutInformation != null) {
 			return layoutInformation.getHiddenTokenText();
 		} else {
@@ -747,7 +756,7 @@ public class OclPrinter2 implements tudresden.ocl20.pivot.language.ocl.resource.
 		}
 	}
 	
-	private java.lang.String getVisibleTokenText(tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclLayoutInformation layoutInformation) {
+	private String getVisibleTokenText(tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclLayoutInformation layoutInformation) {
 		if (layoutInformation != null) {
 			return layoutInformation.getVisibleTokenText();
 		} else {

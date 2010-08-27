@@ -18,19 +18,29 @@ public class OclCompletionProcessor implements org.eclipse.jface.text.contentass
 		
 		org.eclipse.emf.ecore.resource.Resource resource = editor.getResource();
 		tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextResource textResource = (tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextResource) resource;
-		java.lang.String content = viewer.getDocument().get();
+		String content = viewer.getDocument().get();
 		tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclCodeCompletionHelper helper = new tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclCodeCompletionHelper();
-		tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclCompletionProposal[] proposals = helper.computeCompletionProposals(textResource, content, offset);
+		tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclCompletionProposal[] computedProposals = helper.computeCompletionProposals(textResource, content, offset);
 		
 		// call completion proposal post processor to allow for customizing the proposals
 		tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclProposalPostProcessor proposalPostProcessor = new tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclProposalPostProcessor();
-		proposals = proposalPostProcessor.process(proposals);
-		org.eclipse.jface.text.contentassist.ICompletionProposal[] result = new org.eclipse.jface.text.contentassist.ICompletionProposal[proposals.length];
+		java.util.List<tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclCompletionProposal> computedProposalList = java.util.Arrays.asList(computedProposals);
+		java.util.List<tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclCompletionProposal> extendedProposalList = proposalPostProcessor.process(computedProposalList);
+		if (extendedProposalList == null) {
+			extendedProposalList = java.util.Collections.emptyList();
+		}
+		java.util.List<tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclCompletionProposal> finalProposalList = new java.util.ArrayList<tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclCompletionProposal>();
+		for (tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclCompletionProposal proposal : extendedProposalList) {
+			if (proposal.getMatchesPrefix()) {
+				finalProposalList.add(proposal);
+			}
+		}
+		org.eclipse.jface.text.contentassist.ICompletionProposal[] result = new org.eclipse.jface.text.contentassist.ICompletionProposal[finalProposalList.size()];
 		int i = 0;
-		for (tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclCompletionProposal proposal : proposals) {
-			java.lang.String proposalString = proposal.getInsertString();
-			java.lang.String displayString = proposal.getDisplayString();
-			java.lang.String prefix = proposal.getPrefix();
+		for (tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclCompletionProposal proposal : finalProposalList) {
+			String proposalString = proposal.getInsertString();
+			String displayString = proposal.getDisplayString();
+			String prefix = proposal.getPrefix();
 			org.eclipse.swt.graphics.Image image = proposal.getImage();
 			org.eclipse.jface.text.contentassist.IContextInformation info;
 			info = new org.eclipse.jface.text.contentassist.ContextInformation(image, proposalString, proposalString);
@@ -39,7 +49,7 @@ public class OclCompletionProcessor implements org.eclipse.jface.text.contentass
 			// if a closing bracket was automatically inserted right before, we enlarge the
 			// replacement length in order to overwrite the bracket.
 			tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.IOclBracketHandler bracketHandler = editor.getBracketHandler();
-			java.lang.String closingBracket = bracketHandler.getClosingBracket();
+			String closingBracket = bracketHandler.getClosingBracket();
 			if (bracketHandler.addedClosingBracket() && proposalString.endsWith(closingBracket)) {
 				replacementLength += closingBracket.length();
 			}

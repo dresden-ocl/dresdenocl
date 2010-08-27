@@ -686,6 +686,24 @@ trait OclParseTreeToEssentialOcl { selfType : OclStaticSemantics =>
         }
       }
       
+      case CollectionTypeLiteralExpCS(collectionType) => {
+        (collectionType->oclType).flatMap{oclType =>
+          val tle = ExpressionsFactory.INSTANCE.createTypeLiteralExp
+          tle.setReferredType(oclType)
+          tle.setOclLibrary(oclLibrary)
+          Full(tle)
+        }
+      }
+      
+      case TupleTypeLiteralExpCS(tupleType) => {
+        (tupleType->oclType).flatMap{oclType =>
+          val tle = ExpressionsFactory.INSTANCE.createTypeLiteralExp
+          tle.setReferredType(oclType)
+          tle.setOclLibrary(oclLibrary)
+          Full(tle)
+        }
+      }
+      
   	  case unknown => {
   	    unknown match {
   	      case u : AttributableEObject => iResource.addError("unknown element", u.getEObject)

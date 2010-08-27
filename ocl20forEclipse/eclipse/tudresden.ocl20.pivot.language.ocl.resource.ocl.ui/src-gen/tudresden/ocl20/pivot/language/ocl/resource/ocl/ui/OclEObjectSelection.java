@@ -29,7 +29,7 @@ public class OclEObjectSelection implements org.eclipse.jface.viewers.IStructure
 		return false;
 	}
 	
-	public java.lang.Object getFirstElement() {
+	public Object getFirstElement() {
 		return selectedObject;
 	}
 	
@@ -56,8 +56,8 @@ public class OclEObjectSelection implements org.eclipse.jface.viewers.IStructure
 		return 1;
 	}
 	
-	public java.lang.Object[] toArray() {
-		return new java.lang.Object[] {selectedObject};
+	public Object[] toArray() {
+		return new Object[] {selectedObject};
 	}
 	
 	public java.util.List<?> toList() {

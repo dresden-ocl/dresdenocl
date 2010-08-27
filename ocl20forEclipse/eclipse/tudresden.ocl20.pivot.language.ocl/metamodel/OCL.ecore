@@ -38,6 +38,14 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="variableDeclarationList"
         eType="#//VariableDeclarationWithoutInitListCS" containment="true"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CollectionTypeLiteralExpCS" eSuperTypes="#//LiteralExpCS">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="collectionType" lowerBound="1"
+        eType="#//CollectionTypeIdentifierCS" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TupleTypeLiteralExpCS" eSuperTypes="#//LiteralExpCS">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="tupleType" lowerBound="1"
+        eType="#//TupleTypeCS" containment="true"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="VariableDeclarationCS" abstract="true">
     <eStructuralFeatures xsi:type="ecore:EReference" name="variableName" lowerBound="1"
         eType="#//SimpleNameCS" containment="true"/>

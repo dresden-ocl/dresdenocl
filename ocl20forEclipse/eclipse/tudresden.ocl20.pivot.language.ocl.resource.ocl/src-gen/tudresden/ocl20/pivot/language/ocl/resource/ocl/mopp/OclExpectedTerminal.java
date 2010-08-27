@@ -19,7 +19,7 @@ public class OclExpectedTerminal {
 	private tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclExpectedElement terminal;
 	private int startIncludingHiddenTokens;
 	private int startExcludingHiddenTokens;
-	private java.lang.String prefix;
+	private String prefix;
 	private org.eclipse.emf.ecore.EStructuralFeature[] containmentTrace;
 	
 	public OclExpectedTerminal(tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclExpectedElement terminal, int followSetID, org.eclipse.emf.ecore.EStructuralFeature... containmentTrace) {
@@ -37,11 +37,11 @@ public class OclExpectedTerminal {
 		return terminal;
 	}
 	
-	public java.lang.String toString() {
+	public String toString() {
 		return terminal == null ? "null" : terminal.toString();
 	}
 	
-	public boolean equals(java.lang.Object o) {
+	public boolean equals(Object o) {
 		return this.terminal.equals(((OclExpectedTerminal) o).terminal);
 	}
 	
@@ -60,11 +60,11 @@ public class OclExpectedTerminal {
 		return startExcludingHiddenTokens;
 	}
 	
-	public java.lang.String getPrefix() {
+	public String getPrefix() {
 		return prefix;
 	}
 	
-	public void setPrefix(java.lang.String prefix) {
+	public void setPrefix(String prefix) {
 		this.prefix = prefix;
 	}
 	

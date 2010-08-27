@@ -506,6 +506,12 @@ public class AbstractOclInterpreter<ResultType, ContextType> {
 		if (result != null) {
 			return result;
 		}
+		if (object instanceof tudresden.ocl20.pivot.language.ocl.FeatureCallExpCS) {
+			result = interprete_tudresden_ocl20_pivot_language_ocl_FeatureCallExpCS((tudresden.ocl20.pivot.language.ocl.FeatureCallExpCS) object, context);
+		}
+		if (result != null) {
+			return result;
+		}
 		if (object instanceof tudresden.ocl20.pivot.language.ocl.IterateExpCS) {
 			result = interprete_tudresden_ocl20_pivot_language_ocl_IterateExpCS((tudresden.ocl20.pivot.language.ocl.IterateExpCS) object, context);
 		}
@@ -538,12 +544,6 @@ public class AbstractOclInterpreter<ResultType, ContextType> {
 		}
 		if (object instanceof tudresden.ocl20.pivot.language.ocl.NavigationCallExp) {
 			result = interprete_tudresden_ocl20_pivot_language_ocl_NavigationCallExp((tudresden.ocl20.pivot.language.ocl.NavigationCallExp) object, context);
-		}
-		if (result != null) {
-			return result;
-		}
-		if (object instanceof tudresden.ocl20.pivot.language.ocl.FeatureCallExpCS) {
-			result = interprete_tudresden_ocl20_pivot_language_ocl_FeatureCallExpCS((tudresden.ocl20.pivot.language.ocl.FeatureCallExpCS) object, context);
 		}
 		if (result != null) {
 			return result;
@@ -634,6 +634,18 @@ public class AbstractOclInterpreter<ResultType, ContextType> {
 		}
 		if (object instanceof tudresden.ocl20.pivot.language.ocl.VariableDeclarationCS) {
 			result = interprete_tudresden_ocl20_pivot_language_ocl_VariableDeclarationCS((tudresden.ocl20.pivot.language.ocl.VariableDeclarationCS) object, context);
+		}
+		if (result != null) {
+			return result;
+		}
+		if (object instanceof tudresden.ocl20.pivot.language.ocl.TupleTypeLiteralExpCS) {
+			result = interprete_tudresden_ocl20_pivot_language_ocl_TupleTypeLiteralExpCS((tudresden.ocl20.pivot.language.ocl.TupleTypeLiteralExpCS) object, context);
+		}
+		if (result != null) {
+			return result;
+		}
+		if (object instanceof tudresden.ocl20.pivot.language.ocl.CollectionTypeLiteralExpCS) {
+			result = interprete_tudresden_ocl20_pivot_language_ocl_CollectionTypeLiteralExpCS((tudresden.ocl20.pivot.language.ocl.CollectionTypeLiteralExpCS) object, context);
 		}
 		if (result != null) {
 			return result;
@@ -738,6 +750,14 @@ public class AbstractOclInterpreter<ResultType, ContextType> {
 	}
 	
 	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_TupleTypeCS(tudresden.ocl20.pivot.language.ocl.TupleTypeCS object, ContextType context) {
+		return null;
+	}
+	
+	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_CollectionTypeLiteralExpCS(tudresden.ocl20.pivot.language.ocl.CollectionTypeLiteralExpCS object, ContextType context) {
+		return null;
+	}
+	
+	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_TupleTypeLiteralExpCS(tudresden.ocl20.pivot.language.ocl.TupleTypeLiteralExpCS object, ContextType context) {
 		return null;
 	}
 	

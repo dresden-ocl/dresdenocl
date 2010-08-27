@@ -8,11 +8,11 @@ package tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp;
 
 public class OclMetaInformation implements tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclMetaInformation {
 	
-	public java.lang.String getSyntaxName() {
+	public String getSyntaxName() {
 		return "ocl";
 	}
 	
-	public java.lang.String getURI() {
+	public String getURI() {
 		return "http://www.tu-dresden.de/ocl20/pivot/language/ocl";
 	}
 	
@@ -20,7 +20,7 @@ public class OclMetaInformation implements tudresden.ocl20.pivot.language.ocl.re
 		return new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclAntlrScanner(new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclLexer());
 	}
 	
-	public tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextParser createParser(java.io.InputStream inputStream, java.lang.String encoding) {
+	public tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextParser createParser(java.io.InputStream inputStream, String encoding) {
 		return new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclParser().createInstance(inputStream, encoding);
 	}
 	
@@ -44,15 +44,15 @@ public class OclMetaInformation implements tudresden.ocl20.pivot.language.ocl.re
 		return new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclTokenResolverFactory();
 	}
 	
-	public java.lang.String getPathToCSDefinition() {
+	public String getPathToCSDefinition() {
 		return "tudresden.ocl20.pivot.language.ocl/metamodel/OCL.cs";
 	}
 	
-	public java.lang.String[] getTokenNames() {
+	public String[] getTokenNames() {
 		return new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclParser(null).getTokenNames();
 	}
 	
-	public tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenStyle getDefaultTokenStyle(java.lang.String tokenName) {
+	public tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenStyle getDefaultTokenStyle(String tokenName) {
 		return new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclTokenStyleInformationProvider().getDefaultTokenStyle(tokenName);
 	}
 	

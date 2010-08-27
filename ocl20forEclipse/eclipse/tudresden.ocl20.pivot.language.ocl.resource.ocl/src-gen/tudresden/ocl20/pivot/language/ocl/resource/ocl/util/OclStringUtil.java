@@ -86,7 +86,7 @@ public class OclStringUtil {
 	/**
 	 * Concatenates the given parts and puts 'glue' between them.
 	 */
-	public static String explode(java.util.Collection<Object> parts, String glue) {
+	public static String explode(java.util.Collection<? extends Object> parts, String glue) {
 		return explode(parts.toArray(new Object[parts.size()]), glue);
 	}
 	
@@ -200,7 +200,7 @@ public class OclStringUtil {
 			return null;
 		}
 		String result = text.replaceAll("\\\\", "\\\\\\\\").replaceAll("\"", "\\\\\"").replace("\b", "\\b").replace("\f", "\\f").replace("\n", "\\n").replace("\r", "\\r").replace("\t", "\\t");
-		java.lang.StringBuilder complete = new java.lang.StringBuilder();
+		StringBuilder complete = new StringBuilder();
 		for (int i = 0; i < result.length(); i++) {
 			int codePointI = result.codePointAt(i);
 			if (codePointI >= 32 && codePointI <= 127) {
@@ -265,7 +265,7 @@ public class OclStringUtil {
 	}
 	
 	public static String getRepeatingString(int count, char character) {
-		java.lang.StringBuilder result = new java.lang.StringBuilder();
+		StringBuilder result = new StringBuilder();
 		for (int i = 0; i < count; i++) {
 			result.append(character);
 		}

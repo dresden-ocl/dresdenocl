@@ -23,24 +23,13 @@ public class OclEditor extends org.eclipse.ui.editors.text.TextEditor implements
 	private tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclPropertySheetPage propertySheetPage;
 	private org.eclipse.emf.edit.domain.EditingDomain editingDomain;
 	private org.eclipse.emf.edit.provider.ComposedAdapterFactory adapterFactory;
-	private org.eclipse.swt.widgets.Display display;
 	private tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.IOclBracketHandler bracketHandler;
 	
 	public OclEditor() {
 		super();
 		setSourceViewerConfiguration(new tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclEditorConfiguration(this, colorManager));
 		initializeEditingDomain();
-		addBackgroundParsingListener(new MarkerUpdateListener());
 		org.eclipse.core.resources.ResourcesPlugin.getWorkspace().addResourceChangeListener(resourceChangeListener, org.eclipse.core.resources.IResourceChangeEvent.POST_CHANGE);
-	}
-	
-	private final class MarkerUpdateListener implements tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclBackgroundParsingListener {
-		public void parsingCompleted(org.eclipse.emf.ecore.resource.Resource parsedResource) {
-			if (parsedResource != null && parsedResource.getErrors().isEmpty()) {
-				org.eclipse.emf.ecore.util.EcoreUtil.resolveAll(parsedResource);
-			}
-			refreshMarkers(parsedResource);
-		}
 	}
 	
 	/**
@@ -87,7 +76,6 @@ public class OclEditor extends org.eclipse.ui.editors.text.TextEditor implements
 								if (currentResource != null && currentResource.getErrors().isEmpty()) {
 									org.eclipse.emf.ecore.util.EcoreUtil.resolveAll(currentResource);
 								}
-								refreshMarkers(currentResource);
 								// reset the selected element in outline and properties by text position
 								if (highlighting != null) {
 									highlighting.setEObjectSelection();
@@ -112,7 +100,7 @@ public class OclEditor extends org.eclipse.ui.editors.text.TextEditor implements
 		setEditorContextMenuId("tudresden.ocl20.pivot.language.ocl.resource.ocl.EditorContext");
 	}
 	
-	public java.lang.Object getAdapter(@SuppressWarnings("rawtypes") Class required) {
+	public Object getAdapter(@SuppressWarnings("rawtypes") Class required) {
 		if (org.eclipse.ui.views.contentoutline.IContentOutlinePage.class.equals(required)) {
 			return getOutlinePage();
 		} else if (required.equals(org.eclipse.ui.views.properties.IPropertySheetPage.class)) {
@@ -123,10 +111,6 @@ public class OclEditor extends org.eclipse.ui.editors.text.TextEditor implements
 	
 	public void createPartControl(org.eclipse.swt.widgets.Composite parent) {
 		super.createPartControl(parent);
-		display = parent.getShell().getDisplay();
-		// we might need to refresh the markers, because the display was not set before,
-		// which prevents updates of the markers
-		refreshMarkers(getResource());
 		
 		// Code Folding
 		org.eclipse.jface.text.source.projection.ProjectionViewer viewer = (org.eclipse.jface.text.source.projection.ProjectionViewer) getSourceViewer();
@@ -176,7 +160,7 @@ public class OclEditor extends org.eclipse.ui.editors.text.TextEditor implements
 					// close this editor because it can not present the resource
 					close(false);
 				}
-			} catch (java.lang.Exception e) {
+			} catch (Exception e) {
 				tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclUIPlugin.logError("Exception while loading resource in " + this.getClass().getSimpleName() + ".", e);
 			}
 		} else {
@@ -192,8 +176,6 @@ public class OclEditor extends org.eclipse.ui.editors.text.TextEditor implements
 	protected void performSave(boolean overwrite, org.eclipse.core.runtime.IProgressMonitor progressMonitor) {
 		
 		super.performSave(overwrite, progressMonitor);
-		// update markers after the resource has been reloaded
-		refreshMarkers(getResource());
 		
 		// Save code folding state
 		codeFoldingManager.saveCodeFoldingStateFile(getResource().getURI().toString());
@@ -248,7 +230,7 @@ public class OclEditor extends org.eclipse.ui.editors.text.TextEditor implements
 				if (newFile.getErrors().isEmpty()) {
 					newFile.save(null);
 				}
-			} catch (java.lang.Exception e) {
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
@@ -269,10 +251,9 @@ public class OclEditor extends org.eclipse.ui.editors.text.TextEditor implements
 		if (this.resource.getErrors().isEmpty()) {
 			org.eclipse.emf.ecore.util.EcoreUtil.resolveAll(this.resource);
 		}
-		refreshMarkers(this.resource);
 	}
 	
-	private java.lang.Object getOutlinePage() {
+	private Object getOutlinePage() {
 		if (outlinePage == null) {
 			outlinePage = new tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclOutlinePage(this);
 			outlinePage.addSelectionChangedListener(highlighting);
@@ -285,9 +266,9 @@ public class OclEditor extends org.eclipse.ui.editors.text.TextEditor implements
 		if (propertySheetPage == null) {
 			propertySheetPage = new tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclPropertySheetPage();
 			// add a slightly modified adapter factory that does not return any editors for
-			// properties. this way, a model can never be modified through the propertiesview.
+			// properties. this way, a model can never be modified through the properties view.
 			propertySheetPage.setPropertySourceProvider(new org.eclipse.emf.edit.ui.provider.AdapterFactoryContentProvider(adapterFactory) {
-				protected org.eclipse.ui.views.properties.IPropertySource createPropertySource(java.lang.Object object, org.eclipse.emf.edit.provider.IItemPropertySource itemPropertySource) {
+				protected org.eclipse.ui.views.properties.IPropertySource createPropertySource(Object object, org.eclipse.emf.edit.provider.IItemPropertySource itemPropertySource) {
 					return new org.eclipse.emf.edit.ui.provider.PropertySource(object, itemPropertySource) {
 						protected org.eclipse.ui.views.properties.IPropertyDescriptor createPropertyDescriptor(org.eclipse.emf.edit.provider.IItemPropertyDescriptor itemPropertyDescriptor) {
 							return new org.eclipse.emf.edit.ui.provider.PropertyDescriptor(object, itemPropertyDescriptor) {
@@ -356,8 +337,8 @@ public class OclEditor extends org.eclipse.ui.editors.text.TextEditor implements
 				destination = 0;
 			}
 			viewer.getTextWidget().setSelection(destination);
-		} catch (java.lang.Exception e) {
-			tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclUIPlugin.logError("java.lang.Exception in setCaret()", e);
+		} catch (Exception e) {
+			tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclUIPlugin.logError("Exception in setCaret()", e);
 		}
 	}
 	
@@ -375,24 +356,6 @@ public class OclEditor extends org.eclipse.ui.editors.text.TextEditor implements
 	public void notifyBackgroundParsingFinished() {
 		for (tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclBackgroundParsingListener listener : bgParsingListeners) {
 			listener.parsingCompleted(getResource());
-		}
-	}
-	
-	private void refreshMarkers(final org.eclipse.emf.ecore.resource.Resource resourceToRefresh) {
-		if (resourceToRefresh == null) {
-			return;
-		}
-		if (display != null) {
-			display.asyncExec(new java.lang.Runnable() {
-				public void run() {
-					try {
-						tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclMarkerHelper.unmark(resourceToRefresh);
-						tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclMarkerHelper.mark(resourceToRefresh);
-					} catch (org.eclipse.core.runtime.CoreException e) {
-						tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclUIPlugin.logError("Exception while updating markers on resource", e);
-					}
-				}
-			});
 		}
 	}
 	

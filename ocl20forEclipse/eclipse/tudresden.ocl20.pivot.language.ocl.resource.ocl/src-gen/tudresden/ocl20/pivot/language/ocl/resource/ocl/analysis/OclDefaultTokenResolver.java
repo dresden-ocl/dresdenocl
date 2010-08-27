@@ -14,7 +14,7 @@ public class OclDefaultTokenResolver implements tudresden.ocl20.pivot.language.o
 	
 	private java.util.Map<?, ?> options;
 	
-	public String deResolve(java.lang.Object value, org.eclipse.emf.ecore.EStructuralFeature feature, org.eclipse.emf.ecore.EObject container) {
+	public String deResolve(Object value, org.eclipse.emf.ecore.EStructuralFeature feature, org.eclipse.emf.ecore.EObject container) {
 		if (value == null) {
 			return "null";
 		}

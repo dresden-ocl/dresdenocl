@@ -338,7 +338,122 @@ public interface OclPackage extends EPackage {
 	 * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getVariableDeclarationCS()
 	 * @generated
 	 */
-	int VARIABLE_DECLARATION_CS = 10;
+	int VARIABLE_DECLARATION_CS = 12;
+
+	/**
+	 * The meta object id for the '{@link tudresden.ocl20.pivot.language.ocl.impl.VariableDeclarationWithInitCSImpl <em>Variable Declaration With Init CS</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see tudresden.ocl20.pivot.language.ocl.impl.VariableDeclarationWithInitCSImpl
+	 * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getVariableDeclarationWithInitCS()
+	 * @generated
+	 */
+	int VARIABLE_DECLARATION_WITH_INIT_CS = 13;
+
+	/**
+	 * The meta object id for the '{@link tudresden.ocl20.pivot.language.ocl.impl.VariableDeclarationWithoutInitCSImpl <em>Variable Declaration Without Init CS</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see tudresden.ocl20.pivot.language.ocl.impl.VariableDeclarationWithoutInitCSImpl
+	 * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getVariableDeclarationWithoutInitCS()
+	 * @generated
+	 */
+	int VARIABLE_DECLARATION_WITHOUT_INIT_CS = 14;
+
+	/**
+	 * The meta object id for the '{@link tudresden.ocl20.pivot.language.ocl.impl.VariableDeclarationWithInitListCSImpl <em>Variable Declaration With Init List CS</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see tudresden.ocl20.pivot.language.ocl.impl.VariableDeclarationWithInitListCSImpl
+	 * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getVariableDeclarationWithInitListCS()
+	 * @generated
+	 */
+	int VARIABLE_DECLARATION_WITH_INIT_LIST_CS = 15;
+
+	/**
+	 * The meta object id for the '{@link tudresden.ocl20.pivot.language.ocl.impl.VariableDeclarationWithoutInitListCSImpl <em>Variable Declaration Without Init List CS</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see tudresden.ocl20.pivot.language.ocl.impl.VariableDeclarationWithoutInitListCSImpl
+	 * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getVariableDeclarationWithoutInitListCS()
+	 * @generated
+	 */
+	int VARIABLE_DECLARATION_WITHOUT_INIT_LIST_CS = 16;
+
+	/**
+	 * The meta object id for the '{@link tudresden.ocl20.pivot.language.ocl.impl.LiteralExpCSImpl <em>Literal Exp CS</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see tudresden.ocl20.pivot.language.ocl.impl.LiteralExpCSImpl
+	 * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getLiteralExpCS()
+	 * @generated
+	 */
+	int LITERAL_EXP_CS = 17;
+
+	/**
+	 * The number of structural features of the '<em>Literal Exp CS</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LITERAL_EXP_CS_FEATURE_COUNT = OCL_EXPRESSION_CS_FEATURE_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link tudresden.ocl20.pivot.language.ocl.impl.CollectionTypeLiteralExpCSImpl <em>Collection Type Literal Exp CS</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see tudresden.ocl20.pivot.language.ocl.impl.CollectionTypeLiteralExpCSImpl
+	 * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getCollectionTypeLiteralExpCS()
+	 * @generated
+	 */
+	int COLLECTION_TYPE_LITERAL_EXP_CS = 10;
+
+	/**
+	 * The feature id for the '<em><b>Collection Type</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COLLECTION_TYPE_LITERAL_EXP_CS__COLLECTION_TYPE = LITERAL_EXP_CS_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Collection Type Literal Exp CS</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COLLECTION_TYPE_LITERAL_EXP_CS_FEATURE_COUNT = LITERAL_EXP_CS_FEATURE_COUNT + 1;
+
+	/**
+	 * The meta object id for the '{@link tudresden.ocl20.pivot.language.ocl.impl.TupleTypeLiteralExpCSImpl <em>Tuple Type Literal Exp CS</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see tudresden.ocl20.pivot.language.ocl.impl.TupleTypeLiteralExpCSImpl
+	 * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getTupleTypeLiteralExpCS()
+	 * @generated
+	 */
+	int TUPLE_TYPE_LITERAL_EXP_CS = 11;
+
+	/**
+	 * The feature id for the '<em><b>Tuple Type</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TUPLE_TYPE_LITERAL_EXP_CS__TUPLE_TYPE = LITERAL_EXP_CS_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Tuple Type Literal Exp CS</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TUPLE_TYPE_LITERAL_EXP_CS_FEATURE_COUNT = LITERAL_EXP_CS_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Variable Name</b></em>' containment reference.
@@ -357,16 +472,6 @@ public interface OclPackage extends EPackage {
 	 * @ordered
 	 */
 	int VARIABLE_DECLARATION_CS_FEATURE_COUNT = 1;
-
-	/**
-	 * The meta object id for the '{@link tudresden.ocl20.pivot.language.ocl.impl.VariableDeclarationWithInitCSImpl <em>Variable Declaration With Init CS</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see tudresden.ocl20.pivot.language.ocl.impl.VariableDeclarationWithInitCSImpl
-	 * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getVariableDeclarationWithInitCS()
-	 * @generated
-	 */
-	int VARIABLE_DECLARATION_WITH_INIT_CS = 11;
 
 	/**
 	 * The feature id for the '<em><b>Variable Name</b></em>' containment reference.
@@ -414,16 +519,6 @@ public interface OclPackage extends EPackage {
 	int VARIABLE_DECLARATION_WITH_INIT_CS_FEATURE_COUNT = VARIABLE_DECLARATION_CS_FEATURE_COUNT + 3;
 
 	/**
-	 * The meta object id for the '{@link tudresden.ocl20.pivot.language.ocl.impl.VariableDeclarationWithoutInitCSImpl <em>Variable Declaration Without Init CS</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see tudresden.ocl20.pivot.language.ocl.impl.VariableDeclarationWithoutInitCSImpl
-	 * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getVariableDeclarationWithoutInitCS()
-	 * @generated
-	 */
-	int VARIABLE_DECLARATION_WITHOUT_INIT_CS = 12;
-
-	/**
 	 * The feature id for the '<em><b>Variable Name</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -451,16 +546,6 @@ public interface OclPackage extends EPackage {
 	int VARIABLE_DECLARATION_WITHOUT_INIT_CS_FEATURE_COUNT = VARIABLE_DECLARATION_CS_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link tudresden.ocl20.pivot.language.ocl.impl.VariableDeclarationWithInitListCSImpl <em>Variable Declaration With Init List CS</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see tudresden.ocl20.pivot.language.ocl.impl.VariableDeclarationWithInitListCSImpl
-	 * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getVariableDeclarationWithInitListCS()
-	 * @generated
-	 */
-	int VARIABLE_DECLARATION_WITH_INIT_LIST_CS = 13;
-
-	/**
 	 * The feature id for the '<em><b>Variable Declarations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -477,16 +562,6 @@ public interface OclPackage extends EPackage {
 	 * @ordered
 	 */
 	int VARIABLE_DECLARATION_WITH_INIT_LIST_CS_FEATURE_COUNT = 1;
-
-	/**
-	 * The meta object id for the '{@link tudresden.ocl20.pivot.language.ocl.impl.VariableDeclarationWithoutInitListCSImpl <em>Variable Declaration Without Init List CS</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see tudresden.ocl20.pivot.language.ocl.impl.VariableDeclarationWithoutInitListCSImpl
-	 * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getVariableDeclarationWithoutInitListCS()
-	 * @generated
-	 */
-	int VARIABLE_DECLARATION_WITHOUT_INIT_LIST_CS = 14;
 
 	/**
 	 * The feature id for the '<em><b>Variable Declarations</b></em>' containment reference list.
@@ -507,25 +582,6 @@ public interface OclPackage extends EPackage {
 	int VARIABLE_DECLARATION_WITHOUT_INIT_LIST_CS_FEATURE_COUNT = 1;
 
 	/**
-	 * The meta object id for the '{@link tudresden.ocl20.pivot.language.ocl.impl.LiteralExpCSImpl <em>Literal Exp CS</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see tudresden.ocl20.pivot.language.ocl.impl.LiteralExpCSImpl
-	 * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getLiteralExpCS()
-	 * @generated
-	 */
-	int LITERAL_EXP_CS = 15;
-
-	/**
-	 * The number of structural features of the '<em>Literal Exp CS</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LITERAL_EXP_CS_FEATURE_COUNT = OCL_EXPRESSION_CS_FEATURE_COUNT + 0;
-
-	/**
 	 * The meta object id for the '{@link tudresden.ocl20.pivot.language.ocl.impl.EnumLiteralOrStaticPropertyExpCSImpl <em>Enum Literal Or Static Property Exp CS</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -533,7 +589,7 @@ public interface OclPackage extends EPackage {
 	 * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getEnumLiteralOrStaticPropertyExpCS()
 	 * @generated
 	 */
-	int ENUM_LITERAL_OR_STATIC_PROPERTY_EXP_CS = 16;
+	int ENUM_LITERAL_OR_STATIC_PROPERTY_EXP_CS = 18;
 
 	/**
 	 * The feature id for the '<em><b>Type Name</b></em>' containment reference.
@@ -570,7 +626,7 @@ public interface OclPackage extends EPackage {
 	 * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getCollectionLiteralExpCS()
 	 * @generated
 	 */
-	int COLLECTION_LITERAL_EXP_CS = 17;
+	int COLLECTION_LITERAL_EXP_CS = 19;
 
 	/**
 	 * The feature id for the '<em><b>Collection Type</b></em>' containment reference.
@@ -607,7 +663,7 @@ public interface OclPackage extends EPackage {
 	 * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getCollectionTypeIdentifierCS()
 	 * @generated
 	 */
-	int COLLECTION_TYPE_IDENTIFIER_CS = 18;
+	int COLLECTION_TYPE_IDENTIFIER_CS = 20;
 
 	/**
 	 * The feature id for the '<em><b>Type Name</b></em>' reference.
@@ -644,7 +700,7 @@ public interface OclPackage extends EPackage {
 	 * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getCollectionLiteralPartsCS()
 	 * @generated
 	 */
-	int COLLECTION_LITERAL_PARTS_CS = 19;
+	int COLLECTION_LITERAL_PARTS_CS = 21;
 
 	/**
 	 * The number of structural features of the '<em>Collection Literal Parts CS</em>' class.
@@ -663,7 +719,7 @@ public interface OclPackage extends EPackage {
 	 * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getCollectionLiteralPartsOclExpCS()
 	 * @generated
 	 */
-	int COLLECTION_LITERAL_PARTS_OCL_EXP_CS = 20;
+	int COLLECTION_LITERAL_PARTS_OCL_EXP_CS = 22;
 
 	/**
 	 * The feature id for the '<em><b>Ocl Expression</b></em>' containment reference.
@@ -691,7 +747,7 @@ public interface OclPackage extends EPackage {
 	 * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getCollectionRangeCS()
 	 * @generated
 	 */
-	int COLLECTION_RANGE_CS = 21;
+	int COLLECTION_RANGE_CS = 23;
 
 	/**
 	 * The feature id for the '<em><b>From</b></em>' containment reference.
@@ -728,7 +784,7 @@ public interface OclPackage extends EPackage {
 	 * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getCallExpCS()
 	 * @generated
 	 */
-	int CALL_EXP_CS = 22;
+	int CALL_EXP_CS = 24;
 
 	/**
 	 * The number of structural features of the '<em>Call Exp CS</em>' class.
@@ -747,7 +803,7 @@ public interface OclPackage extends EPackage {
 	 * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getLoopExpCS()
 	 * @generated
 	 */
-	int LOOP_EXP_CS = 23;
+	int LOOP_EXP_CS = 25;
 
 	/**
 	 * The number of structural features of the '<em>Loop Exp CS</em>' class.
@@ -766,7 +822,7 @@ public interface OclPackage extends EPackage {
 	 * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getIteratorExpVariableCS()
 	 * @generated
 	 */
-	int ITERATOR_EXP_VARIABLE_CS = 24;
+	int ITERATOR_EXP_VARIABLE_CS = 26;
 
 	/**
 	 * The feature id for the '<em><b>Variable Name</b></em>' containment reference.
@@ -803,7 +859,7 @@ public interface OclPackage extends EPackage {
 	 * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getIteratorExpCS()
 	 * @generated
 	 */
-	int ITERATOR_EXP_CS = 25;
+	int ITERATOR_EXP_CS = 27;
 
 	/**
 	 * The feature id for the '<em><b>Iterator Name</b></em>' attribute.
@@ -849,7 +905,7 @@ public interface OclPackage extends EPackage {
 	 * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getIterateExpCS()
 	 * @generated
 	 */
-	int ITERATE_EXP_CS = 26;
+	int ITERATE_EXP_CS = 28;
 
 	/**
 	 * The feature id for the '<em><b>Iterator Variable</b></em>' containment reference.
@@ -895,7 +951,7 @@ public interface OclPackage extends EPackage {
 	 * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getFeatureCallExpCS()
 	 * @generated
 	 */
-	int FEATURE_CALL_EXP_CS = 27;
+	int FEATURE_CALL_EXP_CS = 29;
 
 	/**
 	 * The meta object id for the '{@link tudresden.ocl20.pivot.language.ocl.impl.NavigationCallExpImpl <em>Navigation Call Exp</em>}' class.
@@ -905,7 +961,7 @@ public interface OclPackage extends EPackage {
 	 * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getNavigationCallExp()
 	 * @generated
 	 */
-	int NAVIGATION_CALL_EXP = 28;
+	int NAVIGATION_CALL_EXP = 30;
 
 	/**
 	 * The meta object id for the '{@link tudresden.ocl20.pivot.language.ocl.impl.ImplicitFeatureCallCSImpl <em>Implicit Feature Call CS</em>}' class.
@@ -915,7 +971,7 @@ public interface OclPackage extends EPackage {
 	 * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getImplicitFeatureCallCS()
 	 * @generated
 	 */
-	int IMPLICIT_FEATURE_CALL_CS = 31;
+	int IMPLICIT_FEATURE_CALL_CS = 33;
 
 	/**
 	 * The number of structural features of the '<em>Feature Call Exp CS</em>' class.
@@ -970,7 +1026,7 @@ public interface OclPackage extends EPackage {
 	 * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getOperationCallBaseExpCS()
 	 * @generated
 	 */
-	int OPERATION_CALL_BASE_EXP_CS = 29;
+	int OPERATION_CALL_BASE_EXP_CS = 31;
 
 	/**
 	 * The feature id for the '<em><b>Operation Name</b></em>' reference.
@@ -1016,7 +1072,7 @@ public interface OclPackage extends EPackage {
 	 * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getPropertyCallBaseExpCS()
 	 * @generated
 	 */
-	int PROPERTY_CALL_BASE_EXP_CS = 30;
+	int PROPERTY_CALL_BASE_EXP_CS = 32;
 
 	/**
 	 * The feature id for the '<em><b>Property</b></em>' reference.
@@ -1062,7 +1118,7 @@ public interface OclPackage extends EPackage {
 	 * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getPropertyCallExpCS()
 	 * @generated
 	 */
-	int PROPERTY_CALL_EXP_CS = 34;
+	int PROPERTY_CALL_EXP_CS = 36;
 
 	/**
 	 * The meta object id for the '{@link tudresden.ocl20.pivot.language.ocl.impl.ImplicitPropertyCallCSImpl <em>Implicit Property Call CS</em>}' class.
@@ -1072,7 +1128,7 @@ public interface OclPackage extends EPackage {
 	 * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getImplicitPropertyCallCS()
 	 * @generated
 	 */
-	int IMPLICIT_PROPERTY_CALL_CS = 32;
+	int IMPLICIT_PROPERTY_CALL_CS = 34;
 
 	/**
 	 * The feature id for the '<em><b>Property</b></em>' reference.
@@ -1109,7 +1165,7 @@ public interface OclPackage extends EPackage {
 	 * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getPropertyCallExplicitPathExpCS()
 	 * @generated
 	 */
-	int PROPERTY_CALL_EXPLICIT_PATH_EXP_CS = 36;
+	int PROPERTY_CALL_EXPLICIT_PATH_EXP_CS = 38;
 
 	/**
 	 * The meta object id for the '{@link tudresden.ocl20.pivot.language.ocl.impl.OperationCallExpCSImpl <em>Operation Call Exp CS</em>}' class.
@@ -1119,7 +1175,7 @@ public interface OclPackage extends EPackage {
 	 * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getOperationCallExpCS()
 	 * @generated
 	 */
-	int OPERATION_CALL_EXP_CS = 37;
+	int OPERATION_CALL_EXP_CS = 39;
 
 	/**
 	 * The meta object id for the '{@link tudresden.ocl20.pivot.language.ocl.impl.UnaryOperationCallExpCSImpl <em>Unary Operation Call Exp CS</em>}' class.
@@ -1129,7 +1185,7 @@ public interface OclPackage extends EPackage {
 	 * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getUnaryOperationCallExpCS()
 	 * @generated
 	 */
-	int UNARY_OPERATION_CALL_EXP_CS = 40;
+	int UNARY_OPERATION_CALL_EXP_CS = 42;
 
 	/**
 	 * The meta object id for the '{@link tudresden.ocl20.pivot.language.ocl.impl.LogicalNotOperationCallExpCSImpl <em>Logical Not Operation Call Exp CS</em>}' class.
@@ -1139,7 +1195,7 @@ public interface OclPackage extends EPackage {
 	 * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getLogicalNotOperationCallExpCS()
 	 * @generated
 	 */
-	int LOGICAL_NOT_OPERATION_CALL_EXP_CS = 41;
+	int LOGICAL_NOT_OPERATION_CALL_EXP_CS = 43;
 
 	/**
 	 * The meta object id for the '{@link tudresden.ocl20.pivot.language.ocl.impl.OperationCallWithSourceExpCSImpl <em>Operation Call With Source Exp CS</em>}' class.
@@ -1149,7 +1205,7 @@ public interface OclPackage extends EPackage {
 	 * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getOperationCallWithSourceExpCS()
 	 * @generated
 	 */
-	int OPERATION_CALL_WITH_SOURCE_EXP_CS = 42;
+	int OPERATION_CALL_WITH_SOURCE_EXP_CS = 44;
 
 	/**
 	 * The meta object id for the '{@link tudresden.ocl20.pivot.language.ocl.impl.OperationCallBinaryExpCSImpl <em>Operation Call Binary Exp CS</em>}' class.
@@ -1159,7 +1215,7 @@ public interface OclPackage extends EPackage {
 	 * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getOperationCallBinaryExpCS()
 	 * @generated
 	 */
-	int OPERATION_CALL_BINARY_EXP_CS = 43;
+	int OPERATION_CALL_BINARY_EXP_CS = 45;
 
 	/**
 	 * The meta object id for the '{@link tudresden.ocl20.pivot.language.ocl.impl.AdditiveOperationCallExpCSImpl <em>Additive Operation Call Exp CS</em>}' class.
@@ -1169,7 +1225,7 @@ public interface OclPackage extends EPackage {
 	 * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getAdditiveOperationCallExpCS()
 	 * @generated
 	 */
-	int ADDITIVE_OPERATION_CALL_EXP_CS = 44;
+	int ADDITIVE_OPERATION_CALL_EXP_CS = 46;
 
 	/**
 	 * The meta object id for the '{@link tudresden.ocl20.pivot.language.ocl.impl.MultOperationCallExpCSImpl <em>Mult Operation Call Exp CS</em>}' class.
@@ -1179,7 +1235,7 @@ public interface OclPackage extends EPackage {
 	 * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getMultOperationCallExpCS()
 	 * @generated
 	 */
-	int MULT_OPERATION_CALL_EXP_CS = 45;
+	int MULT_OPERATION_CALL_EXP_CS = 47;
 
 	/**
 	 * The meta object id for the '{@link tudresden.ocl20.pivot.language.ocl.impl.RelationalOperationCallExpCSImpl <em>Relational Operation Call Exp CS</em>}' class.
@@ -1189,7 +1245,7 @@ public interface OclPackage extends EPackage {
 	 * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getRelationalOperationCallExpCS()
 	 * @generated
 	 */
-	int RELATIONAL_OPERATION_CALL_EXP_CS = 46;
+	int RELATIONAL_OPERATION_CALL_EXP_CS = 48;
 
 	/**
 	 * The meta object id for the '{@link tudresden.ocl20.pivot.language.ocl.impl.EqualityOperationCallExpCSImpl <em>Equality Operation Call Exp CS</em>}' class.
@@ -1199,7 +1255,7 @@ public interface OclPackage extends EPackage {
 	 * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getEqualityOperationCallExpCS()
 	 * @generated
 	 */
-	int EQUALITY_OPERATION_CALL_EXP_CS = 47;
+	int EQUALITY_OPERATION_CALL_EXP_CS = 49;
 
 	/**
 	 * The meta object id for the '{@link tudresden.ocl20.pivot.language.ocl.impl.LogicalAndOperationCallExpCSImpl <em>Logical And Operation Call Exp CS</em>}' class.
@@ -1209,7 +1265,7 @@ public interface OclPackage extends EPackage {
 	 * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getLogicalAndOperationCallExpCS()
 	 * @generated
 	 */
-	int LOGICAL_AND_OPERATION_CALL_EXP_CS = 48;
+	int LOGICAL_AND_OPERATION_CALL_EXP_CS = 50;
 
 	/**
 	 * The meta object id for the '{@link tudresden.ocl20.pivot.language.ocl.impl.LogicalOrOperationCallExpCSImpl <em>Logical Or Operation Call Exp CS</em>}' class.
@@ -1219,7 +1275,7 @@ public interface OclPackage extends EPackage {
 	 * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getLogicalOrOperationCallExpCS()
 	 * @generated
 	 */
-	int LOGICAL_OR_OPERATION_CALL_EXP_CS = 49;
+	int LOGICAL_OR_OPERATION_CALL_EXP_CS = 51;
 
 	/**
 	 * The meta object id for the '{@link tudresden.ocl20.pivot.language.ocl.impl.LogicalXorOperationCallExpCSImpl <em>Logical Xor Operation Call Exp CS</em>}' class.
@@ -1229,7 +1285,7 @@ public interface OclPackage extends EPackage {
 	 * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getLogicalXorOperationCallExpCS()
 	 * @generated
 	 */
-	int LOGICAL_XOR_OPERATION_CALL_EXP_CS = 50;
+	int LOGICAL_XOR_OPERATION_CALL_EXP_CS = 52;
 
 	/**
 	 * The meta object id for the '{@link tudresden.ocl20.pivot.language.ocl.impl.LogicalImpliesOperationCallExpCSImpl <em>Logical Implies Operation Call Exp CS</em>}' class.
@@ -1239,7 +1295,7 @@ public interface OclPackage extends EPackage {
 	 * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getLogicalImpliesOperationCallExpCS()
 	 * @generated
 	 */
-	int LOGICAL_IMPLIES_OPERATION_CALL_EXP_CS = 51;
+	int LOGICAL_IMPLIES_OPERATION_CALL_EXP_CS = 53;
 
 	/**
 	 * The meta object id for the '{@link tudresden.ocl20.pivot.language.ocl.impl.OperationCallWithImlicitSourceExpCSImpl <em>Operation Call With Imlicit Source Exp CS</em>}' class.
@@ -1249,7 +1305,7 @@ public interface OclPackage extends EPackage {
 	 * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getOperationCallWithImlicitSourceExpCS()
 	 * @generated
 	 */
-	int OPERATION_CALL_WITH_IMLICIT_SOURCE_EXP_CS = 52;
+	int OPERATION_CALL_WITH_IMLICIT_SOURCE_EXP_CS = 54;
 
 	/**
 	 * The meta object id for the '{@link tudresden.ocl20.pivot.language.ocl.impl.ImplicitOperationCallCSImpl <em>Implicit Operation Call CS</em>}' class.
@@ -1259,7 +1315,7 @@ public interface OclPackage extends EPackage {
 	 * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getImplicitOperationCallCS()
 	 * @generated
 	 */
-	int IMPLICIT_OPERATION_CALL_CS = 33;
+	int IMPLICIT_OPERATION_CALL_CS = 35;
 
 	/**
 	 * The feature id for the '<em><b>Operation Name</b></em>' reference.
@@ -1314,7 +1370,7 @@ public interface OclPackage extends EPackage {
 	 * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getPropertyCallOnSelfExpCS()
 	 * @generated
 	 */
-	int PROPERTY_CALL_ON_SELF_EXP_CS = 35;
+	int PROPERTY_CALL_ON_SELF_EXP_CS = 37;
 
 	/**
 	 * The feature id for the '<em><b>Property</b></em>' reference.
@@ -1405,7 +1461,7 @@ public interface OclPackage extends EPackage {
 	 * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getOperationCallOnSelfExpCS()
 	 * @generated
 	 */
-	int OPERATION_CALL_ON_SELF_EXP_CS = 38;
+	int OPERATION_CALL_ON_SELF_EXP_CS = 40;
 
 	/**
 	 * The feature id for the '<em><b>Operation Name</b></em>' reference.
@@ -1451,7 +1507,7 @@ public interface OclPackage extends EPackage {
 	 * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getStaticOperationCallExpCS()
 	 * @generated
 	 */
-	int STATIC_OPERATION_CALL_EXP_CS = 39;
+	int STATIC_OPERATION_CALL_EXP_CS = 41;
 
 	/**
 	 * The feature id for the '<em><b>Type Name</b></em>' containment reference.
@@ -2019,7 +2075,7 @@ public interface OclPackage extends EPackage {
 	 * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getTupleLiteralExpCS()
 	 * @generated
 	 */
-	int TUPLE_LITERAL_EXP_CS = 53;
+	int TUPLE_LITERAL_EXP_CS = 55;
 
 	/**
 	 * The feature id for the '<em><b>Variable Declarations</b></em>' containment reference.
@@ -2047,7 +2103,7 @@ public interface OclPackage extends EPackage {
 	 * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getPrimitiveLiteralExpCS()
 	 * @generated
 	 */
-	int PRIMITIVE_LITERAL_EXP_CS = 54;
+	int PRIMITIVE_LITERAL_EXP_CS = 56;
 
 	/**
 	 * The number of structural features of the '<em>Primitive Literal Exp CS</em>' class.
@@ -2066,7 +2122,7 @@ public interface OclPackage extends EPackage {
 	 * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getIntegerLiteralExpCS()
 	 * @generated
 	 */
-	int INTEGER_LITERAL_EXP_CS = 55;
+	int INTEGER_LITERAL_EXP_CS = 57;
 
 	/**
 	 * The feature id for the '<em><b>Integer Literal</b></em>' attribute.
@@ -2094,7 +2150,7 @@ public interface OclPackage extends EPackage {
 	 * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getRealLiteralExpCS()
 	 * @generated
 	 */
-	int REAL_LITERAL_EXP_CS = 56;
+	int REAL_LITERAL_EXP_CS = 58;
 
 	/**
 	 * The feature id for the '<em><b>Int Value</b></em>' attribute.
@@ -2140,7 +2196,7 @@ public interface OclPackage extends EPackage {
 	 * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getBooleanLiteralExpCS()
 	 * @generated
 	 */
-	int BOOLEAN_LITERAL_EXP_CS = 57;
+	int BOOLEAN_LITERAL_EXP_CS = 59;
 
 	/**
 	 * The feature id for the '<em><b>Boolean Literal</b></em>' attribute.
@@ -2168,7 +2224,7 @@ public interface OclPackage extends EPackage {
 	 * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getStringLiteralExpCS()
 	 * @generated
 	 */
-	int STRING_LITERAL_EXP_CS = 58;
+	int STRING_LITERAL_EXP_CS = 60;
 
 	/**
 	 * The feature id for the '<em><b>String Literal</b></em>' attribute.
@@ -2196,7 +2252,7 @@ public interface OclPackage extends EPackage {
 	 * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getInvalidLiteralExpCS()
 	 * @generated
 	 */
-	int INVALID_LITERAL_EXP_CS = 59;
+	int INVALID_LITERAL_EXP_CS = 61;
 
 	/**
 	 * The number of structural features of the '<em>Invalid Literal Exp CS</em>' class.
@@ -2215,7 +2271,7 @@ public interface OclPackage extends EPackage {
 	 * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getNullLiteralExpCS()
 	 * @generated
 	 */
-	int NULL_LITERAL_EXP_CS = 60;
+	int NULL_LITERAL_EXP_CS = 62;
 
 	/**
 	 * The number of structural features of the '<em>Null Literal Exp CS</em>' class.
@@ -2234,7 +2290,7 @@ public interface OclPackage extends EPackage {
 	 * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getLetExpCS()
 	 * @generated
 	 */
-	int LET_EXP_CS = 61;
+	int LET_EXP_CS = 63;
 
 	/**
 	 * The feature id for the '<em><b>Variable Declarations</b></em>' containment reference list.
@@ -2271,7 +2327,7 @@ public interface OclPackage extends EPackage {
 	 * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getIfExpCS()
 	 * @generated
 	 */
-	int IF_EXP_CS = 62;
+	int IF_EXP_CS = 64;
 
 	/**
 	 * The feature id for the '<em><b>Condition</b></em>' containment reference.
@@ -2317,7 +2373,7 @@ public interface OclPackage extends EPackage {
 	 * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getPackageDeclarationCS()
 	 * @generated
 	 */
-	int PACKAGE_DECLARATION_CS = 63;
+	int PACKAGE_DECLARATION_CS = 65;
 
 	/**
 	 * The feature id for the '<em><b>Context Declarations</b></em>' containment reference list.
@@ -2345,7 +2401,7 @@ public interface OclPackage extends EPackage {
 	 * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getPackageDeclarationWithNamespaceCS()
 	 * @generated
 	 */
-	int PACKAGE_DECLARATION_WITH_NAMESPACE_CS = 64;
+	int PACKAGE_DECLARATION_WITH_NAMESPACE_CS = 66;
 
 	/**
 	 * The feature id for the '<em><b>Context Declarations</b></em>' containment reference list.
@@ -2382,7 +2438,7 @@ public interface OclPackage extends EPackage {
 	 * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getPackageDeclarationNestedNamespaceCS()
 	 * @generated
 	 */
-	int PACKAGE_DECLARATION_NESTED_NAMESPACE_CS = 65;
+	int PACKAGE_DECLARATION_NESTED_NAMESPACE_CS = 67;
 
 	/**
 	 * The feature id for the '<em><b>Namespace</b></em>' reference.
@@ -2419,7 +2475,7 @@ public interface OclPackage extends EPackage {
 	 * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getPackageDeclarationWithoutNamespaceCS()
 	 * @generated
 	 */
-	int PACKAGE_DECLARATION_WITHOUT_NAMESPACE_CS = 66;
+	int PACKAGE_DECLARATION_WITHOUT_NAMESPACE_CS = 68;
 
 	/**
 	 * The feature id for the '<em><b>Context Declarations</b></em>' containment reference list.
@@ -2447,7 +2503,7 @@ public interface OclPackage extends EPackage {
 	 * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getContextDeclarationCS()
 	 * @generated
 	 */
-	int CONTEXT_DECLARATION_CS = 67;
+	int CONTEXT_DECLARATION_CS = 69;
 
 	/**
 	 * The number of structural features of the '<em>Context Declaration CS</em>' class.
@@ -2466,7 +2522,7 @@ public interface OclPackage extends EPackage {
 	 * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getAttributeContextDeclarationCS()
 	 * @generated
 	 */
-	int ATTRIBUTE_CONTEXT_DECLARATION_CS = 68;
+	int ATTRIBUTE_CONTEXT_DECLARATION_CS = 70;
 
 	/**
 	 * The feature id for the '<em><b>Type Name</b></em>' containment reference.
@@ -2521,7 +2577,7 @@ public interface OclPackage extends EPackage {
 	 * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getClassifierContextDeclarationCS()
 	 * @generated
 	 */
-	int CLASSIFIER_CONTEXT_DECLARATION_CS = 69;
+	int CLASSIFIER_CONTEXT_DECLARATION_CS = 71;
 
 	/**
 	 * The feature id for the '<em><b>Type Name</b></em>' containment reference.
@@ -2558,7 +2614,7 @@ public interface OclPackage extends EPackage {
 	 * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getOperationContextDeclarationCS()
 	 * @generated
 	 */
-	int OPERATION_CONTEXT_DECLARATION_CS = 70;
+	int OPERATION_CONTEXT_DECLARATION_CS = 72;
 
 	/**
 	 * The feature id for the '<em><b>Operation</b></em>' containment reference.
@@ -2595,7 +2651,7 @@ public interface OclPackage extends EPackage {
 	 * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getInitOrDeriveValueCS()
 	 * @generated
 	 */
-	int INIT_OR_DERIVE_VALUE_CS = 71;
+	int INIT_OR_DERIVE_VALUE_CS = 73;
 
 	/**
 	 * The feature id for the '<em><b>Ocl Expression</b></em>' containment reference.
@@ -2623,7 +2679,7 @@ public interface OclPackage extends EPackage {
 	 * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getInitValueCS()
 	 * @generated
 	 */
-	int INIT_VALUE_CS = 72;
+	int INIT_VALUE_CS = 74;
 
 	/**
 	 * The feature id for the '<em><b>Ocl Expression</b></em>' containment reference.
@@ -2651,7 +2707,7 @@ public interface OclPackage extends EPackage {
 	 * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getDeriveValueCS()
 	 * @generated
 	 */
-	int DERIVE_VALUE_CS = 73;
+	int DERIVE_VALUE_CS = 75;
 
 	/**
 	 * The feature id for the '<em><b>Ocl Expression</b></em>' containment reference.
@@ -2679,7 +2735,7 @@ public interface OclPackage extends EPackage {
 	 * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getInvariantOrDefinitionCS()
 	 * @generated
 	 */
-	int INVARIANT_OR_DEFINITION_CS = 74;
+	int INVARIANT_OR_DEFINITION_CS = 76;
 
 	/**
 	 * The number of structural features of the '<em>Invariant Or Definition CS</em>' class.
@@ -2698,7 +2754,7 @@ public interface OclPackage extends EPackage {
 	 * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getInvariantExpCS()
 	 * @generated
 	 */
-	int INVARIANT_EXP_CS = 75;
+	int INVARIANT_EXP_CS = 77;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' containment reference.
@@ -2735,7 +2791,7 @@ public interface OclPackage extends EPackage {
 	 * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getDefinitionExpCS()
 	 * @generated
 	 */
-	int DEFINITION_EXP_CS = 76;
+	int DEFINITION_EXP_CS = 78;
 
 	/**
 	 * The feature id for the '<em><b>Static</b></em>' attribute.
@@ -2772,7 +2828,7 @@ public interface OclPackage extends EPackage {
 	 * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getDefinitionExpPartCS()
 	 * @generated
 	 */
-	int DEFINITION_EXP_PART_CS = 77;
+	int DEFINITION_EXP_PART_CS = 79;
 
 	/**
 	 * The number of structural features of the '<em>Definition Exp Part CS</em>' class.
@@ -2791,7 +2847,7 @@ public interface OclPackage extends EPackage {
 	 * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getDefinitionExpPropertyCS()
 	 * @generated
 	 */
-	int DEFINITION_EXP_PROPERTY_CS = 78;
+	int DEFINITION_EXP_PROPERTY_CS = 80;
 
 	/**
 	 * The feature id for the '<em><b>Variable Declaration</b></em>' containment reference.
@@ -2819,7 +2875,7 @@ public interface OclPackage extends EPackage {
 	 * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getDefinitionExpOperationCS()
 	 * @generated
 	 */
-	int DEFINITION_EXP_OPERATION_CS = 79;
+	int DEFINITION_EXP_OPERATION_CS = 81;
 
 	/**
 	 * The feature id for the '<em><b>Operation</b></em>' containment reference.
@@ -2856,7 +2912,7 @@ public interface OclPackage extends EPackage {
 	 * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getPrePostOrBodyDeclarationCS()
 	 * @generated
 	 */
-	int PRE_POST_OR_BODY_DECLARATION_CS = 80;
+	int PRE_POST_OR_BODY_DECLARATION_CS = 82;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' containment reference.
@@ -2893,7 +2949,7 @@ public interface OclPackage extends EPackage {
 	 * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getPreConditionDeclarationCS()
 	 * @generated
 	 */
-	int PRE_CONDITION_DECLARATION_CS = 81;
+	int PRE_CONDITION_DECLARATION_CS = 83;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' containment reference.
@@ -2930,7 +2986,7 @@ public interface OclPackage extends EPackage {
 	 * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getPostConditionDeclarationCS()
 	 * @generated
 	 */
-	int POST_CONDITION_DECLARATION_CS = 82;
+	int POST_CONDITION_DECLARATION_CS = 84;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' containment reference.
@@ -2967,7 +3023,7 @@ public interface OclPackage extends EPackage {
 	 * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getBodyDeclarationCS()
 	 * @generated
 	 */
-	int BODY_DECLARATION_CS = 83;
+	int BODY_DECLARATION_CS = 85;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' containment reference.
@@ -3004,7 +3060,7 @@ public interface OclPackage extends EPackage {
 	 * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getOperationDefinitionCS()
 	 * @generated
 	 */
-	int OPERATION_DEFINITION_CS = 84;
+	int OPERATION_DEFINITION_CS = 86;
 
 	/**
 	 * The feature id for the '<em><b>Operation</b></em>' reference.
@@ -3050,7 +3106,7 @@ public interface OclPackage extends EPackage {
 	 * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getOperationDefinitionInContextCS()
 	 * @generated
 	 */
-	int OPERATION_DEFINITION_IN_CONTEXT_CS = 85;
+	int OPERATION_DEFINITION_IN_CONTEXT_CS = 87;
 
 	/**
 	 * The feature id for the '<em><b>Operation</b></em>' reference.
@@ -3105,7 +3161,7 @@ public interface OclPackage extends EPackage {
 	 * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getOperationDefinitionInDefCS()
 	 * @generated
 	 */
-	int OPERATION_DEFINITION_IN_DEF_CS = 86;
+	int OPERATION_DEFINITION_IN_DEF_CS = 88;
 
 	/**
 	 * The feature id for the '<em><b>Operation</b></em>' reference.
@@ -3151,7 +3207,7 @@ public interface OclPackage extends EPackage {
 	 * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getParameterCS()
 	 * @generated
 	 */
-	int PARAMETER_CS = 87;
+	int PARAMETER_CS = 89;
 
 	/**
 	 * The feature id for the '<em><b>Parameter</b></em>' reference.
@@ -3379,6 +3435,48 @@ public interface OclPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getTupleTypeCS_VariableDeclarationList();
+
+	/**
+	 * Returns the meta object for class '{@link tudresden.ocl20.pivot.language.ocl.CollectionTypeLiteralExpCS <em>Collection Type Literal Exp CS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Collection Type Literal Exp CS</em>'.
+	 * @see tudresden.ocl20.pivot.language.ocl.CollectionTypeLiteralExpCS
+	 * @generated
+	 */
+	EClass getCollectionTypeLiteralExpCS();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link tudresden.ocl20.pivot.language.ocl.CollectionTypeLiteralExpCS#getCollectionType <em>Collection Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Collection Type</em>'.
+	 * @see tudresden.ocl20.pivot.language.ocl.CollectionTypeLiteralExpCS#getCollectionType()
+	 * @see #getCollectionTypeLiteralExpCS()
+	 * @generated
+	 */
+	EReference getCollectionTypeLiteralExpCS_CollectionType();
+
+	/**
+	 * Returns the meta object for class '{@link tudresden.ocl20.pivot.language.ocl.TupleTypeLiteralExpCS <em>Tuple Type Literal Exp CS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Tuple Type Literal Exp CS</em>'.
+	 * @see tudresden.ocl20.pivot.language.ocl.TupleTypeLiteralExpCS
+	 * @generated
+	 */
+	EClass getTupleTypeLiteralExpCS();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link tudresden.ocl20.pivot.language.ocl.TupleTypeLiteralExpCS#getTupleType <em>Tuple Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Tuple Type</em>'.
+	 * @see tudresden.ocl20.pivot.language.ocl.TupleTypeLiteralExpCS#getTupleType()
+	 * @see #getTupleTypeLiteralExpCS()
+	 * @generated
+	 */
+	EReference getTupleTypeLiteralExpCS_TupleType();
 
 	/**
 	 * Returns the meta object for class '{@link tudresden.ocl20.pivot.language.ocl.VariableDeclarationCS <em>Variable Declaration CS</em>}'.
@@ -5310,6 +5408,42 @@ public interface OclPackage extends EPackage {
 		 * @generated
 		 */
 		EReference TUPLE_TYPE_CS__VARIABLE_DECLARATION_LIST = eINSTANCE.getTupleTypeCS_VariableDeclarationList();
+
+		/**
+		 * The meta object literal for the '{@link tudresden.ocl20.pivot.language.ocl.impl.CollectionTypeLiteralExpCSImpl <em>Collection Type Literal Exp CS</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see tudresden.ocl20.pivot.language.ocl.impl.CollectionTypeLiteralExpCSImpl
+		 * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getCollectionTypeLiteralExpCS()
+		 * @generated
+		 */
+		EClass COLLECTION_TYPE_LITERAL_EXP_CS = eINSTANCE.getCollectionTypeLiteralExpCS();
+
+		/**
+		 * The meta object literal for the '<em><b>Collection Type</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference COLLECTION_TYPE_LITERAL_EXP_CS__COLLECTION_TYPE = eINSTANCE.getCollectionTypeLiteralExpCS_CollectionType();
+
+		/**
+		 * The meta object literal for the '{@link tudresden.ocl20.pivot.language.ocl.impl.TupleTypeLiteralExpCSImpl <em>Tuple Type Literal Exp CS</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see tudresden.ocl20.pivot.language.ocl.impl.TupleTypeLiteralExpCSImpl
+		 * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getTupleTypeLiteralExpCS()
+		 * @generated
+		 */
+		EClass TUPLE_TYPE_LITERAL_EXP_CS = eINSTANCE.getTupleTypeLiteralExpCS();
+
+		/**
+		 * The meta object literal for the '<em><b>Tuple Type</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TUPLE_TYPE_LITERAL_EXP_CS__TUPLE_TYPE = eINSTANCE.getTupleTypeLiteralExpCS_TupleType();
 
 		/**
 		 * The meta object literal for the '{@link tudresden.ocl20.pivot.language.ocl.impl.VariableDeclarationCSImpl <em>Variable Declaration CS</em>}' class.

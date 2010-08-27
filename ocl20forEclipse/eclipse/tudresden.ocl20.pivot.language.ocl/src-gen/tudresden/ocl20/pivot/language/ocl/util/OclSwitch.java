@@ -155,6 +155,22 @@ public class OclSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case OclPackage.COLLECTION_TYPE_LITERAL_EXP_CS: {
+				CollectionTypeLiteralExpCS collectionTypeLiteralExpCS = (CollectionTypeLiteralExpCS)theEObject;
+				T result = caseCollectionTypeLiteralExpCS(collectionTypeLiteralExpCS);
+				if (result == null) result = caseLiteralExpCS(collectionTypeLiteralExpCS);
+				if (result == null) result = caseOclExpressionCS(collectionTypeLiteralExpCS);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case OclPackage.TUPLE_TYPE_LITERAL_EXP_CS: {
+				TupleTypeLiteralExpCS tupleTypeLiteralExpCS = (TupleTypeLiteralExpCS)theEObject;
+				T result = caseTupleTypeLiteralExpCS(tupleTypeLiteralExpCS);
+				if (result == null) result = caseLiteralExpCS(tupleTypeLiteralExpCS);
+				if (result == null) result = caseOclExpressionCS(tupleTypeLiteralExpCS);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case OclPackage.VARIABLE_DECLARATION_CS: {
 				VariableDeclarationCS variableDeclarationCS = (VariableDeclarationCS)theEObject;
 				T result = caseVariableDeclarationCS(variableDeclarationCS);
@@ -939,6 +955,36 @@ public class OclSwitch<T> {
 	 * @generated
 	 */
 	public T caseTupleTypeCS(TupleTypeCS object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Collection Type Literal Exp CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Collection Type Literal Exp CS</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseCollectionTypeLiteralExpCS(CollectionTypeLiteralExpCS object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Tuple Type Literal Exp CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Tuple Type Literal Exp CS</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseTupleTypeLiteralExpCS(TupleTypeLiteralExpCS object) {
 		return null;
 	}
 

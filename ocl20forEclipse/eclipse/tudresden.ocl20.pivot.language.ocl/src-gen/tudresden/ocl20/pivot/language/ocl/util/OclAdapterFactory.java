@@ -112,6 +112,14 @@ public class OclAdapterFactory extends AdapterFactoryImpl {
 				return createTupleTypeCSAdapter();
 			}
 			@Override
+			public Adapter caseCollectionTypeLiteralExpCS(CollectionTypeLiteralExpCS object) {
+				return createCollectionTypeLiteralExpCSAdapter();
+			}
+			@Override
+			public Adapter caseTupleTypeLiteralExpCS(TupleTypeLiteralExpCS object) {
+				return createTupleTypeLiteralExpCSAdapter();
+			}
+			@Override
 			public Adapter caseVariableDeclarationCS(VariableDeclarationCS object) {
 				return createVariableDeclarationCSAdapter();
 			}
@@ -580,6 +588,34 @@ public class OclAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createTupleTypeCSAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.language.ocl.CollectionTypeLiteralExpCS <em>Collection Type Literal Exp CS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see tudresden.ocl20.pivot.language.ocl.CollectionTypeLiteralExpCS
+	 * @generated
+	 */
+	public Adapter createCollectionTypeLiteralExpCSAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.language.ocl.TupleTypeLiteralExpCS <em>Tuple Type Literal Exp CS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see tudresden.ocl20.pivot.language.ocl.TupleTypeLiteralExpCS
+	 * @generated
+	 */
+	public Adapter createTupleTypeLiteralExpCSAdapter() {
 		return null;
 	}
 

@@ -11,7 +11,7 @@ package tudresden.ocl20.pivot.language.ocl.resource.ocl.ui;
  */
 public class OclProposalPostProcessor {
 	
-	public tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclCompletionProposal[] process(tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclCompletionProposal[] proposals) {
+	public java.util.List<tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclCompletionProposal> process(java.util.List<tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclCompletionProposal> proposals) {
 		// the default implementation does returns the proposals as they are
 		return proposals;
 	}

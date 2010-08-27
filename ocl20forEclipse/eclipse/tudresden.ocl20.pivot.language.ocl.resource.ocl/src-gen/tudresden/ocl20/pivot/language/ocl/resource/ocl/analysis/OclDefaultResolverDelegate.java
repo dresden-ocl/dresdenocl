@@ -10,14 +10,14 @@ public class OclDefaultResolverDelegate<ContainerType extends org.eclipse.emf.ec
 	
 	private static class ReferenceCache implements tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclReferenceCache, org.eclipse.emf.common.notify.Adapter {
 		
-		private java.util.Map<java.lang.String, java.lang.Object> cache = new java.util.LinkedHashMap<java.lang.String, java.lang.Object>();
+		private java.util.Map<String, Object> cache = new java.util.LinkedHashMap<String, Object>();
 		private org.eclipse.emf.common.notify.Notifier target;
 		
 		public org.eclipse.emf.common.notify.Notifier getTarget() {
 			return target;
 		}
 		
-		public boolean isAdapterForType(java.lang.Object arg0) {
+		public boolean isAdapterForType(Object arg0) {
 			return false;
 		}
 		
@@ -28,23 +28,23 @@ public class OclDefaultResolverDelegate<ContainerType extends org.eclipse.emf.ec
 			target = arg0;
 		}
 		
-		public java.lang.Object get(java.lang.String identifier) {
+		public Object get(String identifier) {
 			return cache.get(identifier);
 		}
 		
-		public void put(java.lang.String identifier, java.lang.Object newObject) {
+		public void put(String identifier, Object newObject) {
 			cache.put(identifier, newObject);
 		}
 		
 	}
 	
-	public final static java.lang.String NAME_FEATURE = "name";
+	public final static String NAME_FEATURE = "name";
 	
 	/**
 	 * This standard implementation searches the tree for objects of the correct type
 	 * with a name attribute matching the identifier.
 	 */
-	protected void resolve(java.lang.String identifier, ContainerType container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclReferenceResolveResult<ReferenceType> result) {
+	protected void resolve(String identifier, ContainerType container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclReferenceResolveResult<ReferenceType> result) {
 		try {
 			org.eclipse.emf.ecore.EClass type = reference.getEReferenceType();
 			org.eclipse.emf.ecore.EObject root = tudresden.ocl20.pivot.language.ocl.resource.ocl.util.OclEObjectUtil.findRootContainer(container);
@@ -78,7 +78,7 @@ public class OclDefaultResolverDelegate<ContainerType extends org.eclipse.emf.ec
 		}
 	}
 	
-	private boolean checkElement(org.eclipse.emf.ecore.EObject element, org.eclipse.emf.ecore.EClass type, java.lang.String identifier, boolean resolveFuzzy, boolean checkStringWise, tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclReferenceResolveResult<ReferenceType> result) {
+	private boolean checkElement(org.eclipse.emf.ecore.EObject element, org.eclipse.emf.ecore.EClass type, String identifier, boolean resolveFuzzy, boolean checkStringWise, tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclReferenceResolveResult<ReferenceType> result) {
 		if (element.eIsProxy()) {
 			return true;
 		}
@@ -88,7 +88,7 @@ public class OclDefaultResolverDelegate<ContainerType extends org.eclipse.emf.ec
 			return true;
 		}
 		
-		java.lang.String match;
+		String match;
 		// do not compare string-wise if identifier is a URI
 		if (checkStringWise) {
 			match = matches(element, identifier, resolveFuzzy);
@@ -119,24 +119,24 @@ public class OclDefaultResolverDelegate<ContainerType extends org.eclipse.emf.ec
 		return (ReferenceType) element;
 	}
 	
-	protected java.lang.String produceDeResolveErrorMessage(org.eclipse.emf.ecore.EObject refObject, org.eclipse.emf.ecore.EObject container, org.eclipse.emf.ecore.EReference reference, tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextResource resource) {
-		java.lang.String msg = getClass().getSimpleName() + ": " + reference.getEType().getName() + " \"" + refObject.toString() + "\" not de-resolveable";
+	protected String produceDeResolveErrorMessage(org.eclipse.emf.ecore.EObject refObject, org.eclipse.emf.ecore.EObject container, org.eclipse.emf.ecore.EReference reference, tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextResource resource) {
+		String msg = getClass().getSimpleName() + ": " + reference.getEType().getName() + " \"" + refObject.toString() + "\" not de-resolveable";
 		return msg;
 	}
 	
-	protected java.lang.String deResolve(ReferenceType element, ContainerType container, org.eclipse.emf.ecore.EReference reference) {
+	protected String deResolve(ReferenceType element, ContainerType container, org.eclipse.emf.ecore.EReference reference) {
 		return getName(element);
 	}
 	
-	private java.lang.String matches(org.eclipse.emf.ecore.EObject element, java.lang.String identifier, boolean matchFuzzy) {
+	private String matches(org.eclipse.emf.ecore.EObject element, String identifier, boolean matchFuzzy) {
 		// first check for attributes that have set the ID flag to true
 		java.util.List<org.eclipse.emf.ecore.EStructuralFeature> features = element.eClass().getEStructuralFeatures();
 		for (org.eclipse.emf.ecore.EStructuralFeature feature : features) {
 			if (feature instanceof org.eclipse.emf.ecore.EAttribute) {
 				org.eclipse.emf.ecore.EAttribute attribute = (org.eclipse.emf.ecore.EAttribute) feature;
 				if (attribute.isID()) {
-					java.lang.Object attributeValue = element.eGet(attribute);
-					java.lang.String match = matches(identifier, attributeValue, matchFuzzy);
+					Object attributeValue = element.eGet(attribute);
+					String match = matches(identifier, attributeValue, matchFuzzy);
 					if (match != null) {
 						return match;
 					}
@@ -147,14 +147,14 @@ public class OclDefaultResolverDelegate<ContainerType extends org.eclipse.emf.ec
 		// then check for an attribute that is called 'name'
 		org.eclipse.emf.ecore.EStructuralFeature nameAttr = element.eClass().getEStructuralFeature(NAME_FEATURE);
 		if (nameAttr instanceof org.eclipse.emf.ecore.EAttribute) {
-			java.lang.Object attributeValue = element.eGet(nameAttr);
+			Object attributeValue = element.eGet(nameAttr);
 			return matches(identifier, attributeValue, matchFuzzy);
 		} else {
 			// try any other string attribute found
 			for (org.eclipse.emf.ecore.EAttribute stringAttribute : element.eClass().getEAllAttributes()) {
-				if (stringAttribute.getEType().getInstanceClassName().equals("java.lang.String")) {
-					java.lang.Object attributeValue = element.eGet(stringAttribute);
-					java.lang.String match = matches(identifier, attributeValue, matchFuzzy);
+				if (stringAttribute.getEType().getInstanceClassName().equals("String")) {
+					Object attributeValue = element.eGet(stringAttribute);
+					String match = matches(identifier, attributeValue, matchFuzzy);
 					if (match != null) {
 						return match;
 					}
@@ -163,8 +163,8 @@ public class OclDefaultResolverDelegate<ContainerType extends org.eclipse.emf.ec
 			
 			for (org.eclipse.emf.ecore.EOperation o : element.eClass().getEAllOperations()) {
 				if (o.getName().toLowerCase().endsWith(NAME_FEATURE) && o.getEParameters().size() == 0 ) {
-					java.lang.String result = (java.lang.String) tudresden.ocl20.pivot.language.ocl.resource.ocl.util.OclEObjectUtil.invokeOperation(element, o);
-					java.lang.String match = matches(identifier, result, matchFuzzy);
+					String result = (String) tudresden.ocl20.pivot.language.ocl.resource.ocl.util.OclEObjectUtil.invokeOperation(element, o);
+					String match = matches(identifier, result, matchFuzzy);
 					if (match != null) {
 						return match;
 					}
@@ -174,9 +174,9 @@ public class OclDefaultResolverDelegate<ContainerType extends org.eclipse.emf.ec
 		return null;
 	}
 	
-	private java.lang.String matches(java.lang.String identifier, java.lang.Object attributeValue, boolean matchFuzzy) {
-		if (attributeValue != null && attributeValue instanceof java.lang.String) {
-			java.lang.String name = (java.lang.String) attributeValue;
+	private String matches(String identifier, Object attributeValue, boolean matchFuzzy) {
+		if (attributeValue != null && attributeValue instanceof String) {
+			String name = (String) attributeValue;
 			if (name.equals(identifier) || matchFuzzy) {
 				return name;
 			}
@@ -184,10 +184,10 @@ public class OclDefaultResolverDelegate<ContainerType extends org.eclipse.emf.ec
 		return null;
 	}
 	
-	private java.lang.String getName(ReferenceType element) {
+	private String getName(ReferenceType element) {
 		org.eclipse.emf.ecore.EStructuralFeature nameAttr = element.eClass().getEStructuralFeature(NAME_FEATURE);
 		if(element.eIsProxy()) {
-			java.lang.String fragment = ((org.eclipse.emf.ecore.InternalEObject) element).eProxyURI().fragment();
+			String fragment = ((org.eclipse.emf.ecore.InternalEObject) element).eProxyURI().fragment();
 			if (fragment != null && fragment.startsWith(tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclContextDependentURIFragment.INTERNAL_URI_FRAGMENT_PREFIX)) {
 				fragment = fragment.substring(tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclContextDependentURIFragment.INTERNAL_URI_FRAGMENT_PREFIX.length());
 				fragment = fragment.substring(fragment.indexOf("_") + 1);
@@ -195,17 +195,17 @@ public class OclDefaultResolverDelegate<ContainerType extends org.eclipse.emf.ec
 			return fragment;
 		}
 		else if (nameAttr instanceof org.eclipse.emf.ecore.EAttribute) {
-			return (java.lang.String) element.eGet(nameAttr);
+			return (String) element.eGet(nameAttr);
 		} else {
 			// try any other string attribute found
 			for (org.eclipse.emf.ecore.EAttribute strAttribute : element.eClass().getEAllAttributes()) {
-				if (!strAttribute.isMany() &&				strAttribute.getEType().getInstanceClassName().equals("java.lang.String")) {
-					return (java.lang.String) element.eGet(strAttribute);
+				if (!strAttribute.isMany() &&				strAttribute.getEType().getInstanceClassName().equals("String")) {
+					return (String) element.eGet(strAttribute);
 				}
 			}
 			for (org.eclipse.emf.ecore.EOperation o : element.eClass().getEAllOperations()) {
 				if (o.getName().toLowerCase().endsWith(NAME_FEATURE) && o.getEParameters().size() == 0 ) {
-					java.lang.String result = (java.lang.String) tudresden.ocl20.pivot.language.ocl.resource.ocl.util.OclEObjectUtil.invokeOperation(element, o);
+					String result = (String) tudresden.ocl20.pivot.language.ocl.resource.ocl.util.OclEObjectUtil.invokeOperation(element, o);
 					if (result != null) {
 						return result;
 					}
@@ -233,7 +233,7 @@ public class OclDefaultResolverDelegate<ContainerType extends org.eclipse.emf.ec
 		return null;
 	}
 	
-	private org.eclipse.emf.common.util.URI getURI(java.lang.String identifier, org.eclipse.emf.common.util.URI baseURI) {
+	private org.eclipse.emf.common.util.URI getURI(String identifier, org.eclipse.emf.common.util.URI baseURI) {
 		if (identifier == null) {
 			return null;
 		}

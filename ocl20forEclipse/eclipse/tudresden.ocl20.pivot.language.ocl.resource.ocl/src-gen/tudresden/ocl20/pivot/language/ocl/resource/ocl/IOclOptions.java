@@ -32,4 +32,14 @@ public interface IOclOptions {
 	 */
 	public final String RESOURCE_CONTENT_TYPE = "RESOURCE_CONTENT_TYPE";
 	
+	/**
+	 * The key for the options to disable marker creation for resource problems. If
+	 * this options is set (the value does not matter) when loading resources,
+	 * reported problems will not be added as Eclipse workspace markers. This option
+	 * is used by the MarkerResolutionGenerator class, which will end up in an
+	 * infinite loop if marker are created when loading resources as this creation
+	 * triggers the loading of the same resource and so on.
+	 */
+	public final String DISABLE_CREATING_MARKERS_FOR_PROBLEMS = "DISABLE_CREATING_MARKERS_FOR_PROBLEMS";
+	
 }

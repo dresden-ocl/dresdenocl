@@ -27,11 +27,11 @@ public class OclExpectedStructuralFeature extends tudresden.ocl20.pivot.language
 		return placeholder.getTokenName();
 	}
 	
-	public java.lang.String toString() {
+	public String toString() {
 		return "EFeature " + getFeature().getEContainingClass().getName() + "." + getFeature().getName();
 	}
 	
-	public boolean equals(java.lang.Object o) {
+	public boolean equals(Object o) {
 		if (o instanceof OclExpectedStructuralFeature) {
 			return getFeature().equals(((OclExpectedStructuralFeature) o).getFeature());
 		}

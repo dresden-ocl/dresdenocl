@@ -23,13 +23,6 @@ public class OclPreferenceInitializer extends org.eclipse.core.runtime.preferenc
 		store.setDefault(tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclPreferenceConstants.EDITOR_MATCHING_BRACKETS_COLOR, "192,192,192");
 		store.setDefault(tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclPreferenceConstants.EDITOR_MATCHING_BRACKETS_CHECKBOX, true);
 		
-		// Set default value for occurrences
-		store.setDefault(tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclPreferenceConstants.EDITOR_OCCURRENCE_CHECKBOX, true);
-		store.setDefault(tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclPreferenceConstants.EDITOR_DEFINITION_COLOR, "240,216,168");
-		store.setDefault(tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclPreferenceConstants.EDITOR_PROXY_COLOR, "212,212,212");
-		
-		// store.setDefault(AbstractDecoratedTextEditorPreferenceConstants.EDITOR_OVERVIEW_
-		// RULER, true);
 	}
 	
 	private void initializeDefaultBrackets() {

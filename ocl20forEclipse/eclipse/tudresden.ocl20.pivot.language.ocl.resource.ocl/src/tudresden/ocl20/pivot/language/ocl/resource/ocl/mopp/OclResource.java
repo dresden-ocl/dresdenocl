@@ -35,7 +35,7 @@ public class OclResource extends org.eclipse.emf.ecore.resource.impl.ResourceImp
 			this.problem = problem;
 		}
 		
-		public java.lang.String getMessage() {
+		public String getMessage() {
 			return problem.getMessage();
 		}
 		
@@ -43,7 +43,7 @@ public class OclResource extends org.eclipse.emf.ecore.resource.impl.ResourceImp
 			return problem;
 		}
 		
-		public java.lang.String getLocation() {
+		public String getLocation() {
 			return uri.toString();
 		}
 		
@@ -68,6 +68,10 @@ public class OclResource extends org.eclipse.emf.ecore.resource.impl.ResourceImp
 				return false;
 			}
 			return this.element.equals(element);
+		}
+		
+		public String toString() {
+			return getMessage() + " at " + getLocation() + " line " + getLine() + ", column " + getColumn();
 		}
 	}
 	
@@ -112,16 +116,20 @@ public class OclResource extends org.eclipse.emf.ecore.resource.impl.ResourceImp
 			return line;
 		}
 		
-		public java.lang.String getLocation() {
+		public String getLocation() {
 			return uri.toString();
 		}
 		
-		public java.lang.String getMessage() {
+		public String getMessage() {
 			return problem.getMessage();
 		}
 		
 		public boolean wasCausedBy(org.eclipse.emf.ecore.EObject element) {
 			return false;
+		}
+		
+		public String toString() {
+			return getMessage() + " at " + getLocation() + " line " + getLine() + ", column " + getColumn();
 		}
 	}
 	
@@ -129,8 +137,9 @@ public class OclResource extends org.eclipse.emf.ecore.resource.impl.ResourceImp
 	private tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclLocationMap locationMap;
 	private int proxyCounter = 0;
 	private tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextParser parser;
-	private java.util.Map<java.lang.String, tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclContextDependentURIFragment<? extends org.eclipse.emf.ecore.EObject>> internalURIFragmentMap = new java.util.LinkedHashMap<java.lang.String, tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclContextDependentURIFragment<? extends org.eclipse.emf.ecore.EObject>>();
-	private java.util.Map<java.lang.String, tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclQuickFix> quickFixMap = new java.util.LinkedHashMap<java.lang.String, tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclQuickFix>();
+	private java.util.Map<String, tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclContextDependentURIFragment<? extends org.eclipse.emf.ecore.EObject>> internalURIFragmentMap = new java.util.LinkedHashMap<String, tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclContextDependentURIFragment<? extends org.eclipse.emf.ecore.EObject>>();
+	private java.util.Map<String, tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclQuickFix> quickFixMap = new java.util.LinkedHashMap<String, tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclQuickFix>();
+	private java.util.Map<?, ?> loadOptions;
 	
 	public OclResource() {
 		super();
@@ -143,9 +152,10 @@ public class OclResource extends org.eclipse.emf.ecore.resource.impl.ResourceImp
 	}
 	
 	protected void doLoad(java.io.InputStream inputStream, java.util.Map<?,?> options) throws java.io.IOException {
-		java.lang.String encoding = null;
+		this.loadOptions = options;
+		String encoding = null;
 		java.io.InputStream actualInputStream = inputStream;
-		java.lang.Object inputStreamPreProcessorProvider = null;
+		Object inputStreamPreProcessorProvider = null;
 		if (options!=null) {
 			inputStreamPreProcessorProvider = options.get(tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclOptions.INPUT_STREAM_PREPROCESSOR_PROVIDER);
 		}
@@ -190,7 +200,7 @@ public class OclResource extends org.eclipse.emf.ecore.resource.impl.ResourceImp
 	public void reload(java.io.InputStream inputStream, java.util.Map<?,?> options) throws java.io.IOException {
 		try {
 			isLoaded = false;
-			java.util.Map<java.lang.Object, java.lang.Object> loadOptions = addDefaultLoadOptions(options);
+			java.util.Map<Object, Object> loadOptions = addDefaultLoadOptions(options);
 			doLoad(inputStream, loadOptions);
 		} catch (tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclTerminateParsingException tpe) {
 			// do nothing - the resource is left unchanged if this exception is thrown
@@ -231,17 +241,17 @@ public class OclResource extends org.eclipse.emf.ecore.resource.impl.ResourceImp
 		locationMap = new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclLocationMap();
 	}
 	
-	public void addURIFragment(java.lang.String internalURIFragment, tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclContextDependentURIFragment<? extends org.eclipse.emf.ecore.EObject> uriFragment) {
+	public void addURIFragment(String internalURIFragment, tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclContextDependentURIFragment<? extends org.eclipse.emf.ecore.EObject> uriFragment) {
 		internalURIFragmentMap.put(internalURIFragment, uriFragment);
 	}
 	
-	public <ContainerType extends org.eclipse.emf.ecore.EObject, ReferenceType extends org.eclipse.emf.ecore.EObject> void registerContextDependentProxy(tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclContextDependentURIFragmentFactory<ContainerType, ReferenceType> factory, ContainerType container, org.eclipse.emf.ecore.EReference reference, java.lang.String id, org.eclipse.emf.ecore.EObject proxyElement) {
+	public <ContainerType extends org.eclipse.emf.ecore.EObject, ReferenceType extends org.eclipse.emf.ecore.EObject> void registerContextDependentProxy(tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclContextDependentURIFragmentFactory<ContainerType, ReferenceType> factory, ContainerType container, org.eclipse.emf.ecore.EReference reference, String id, org.eclipse.emf.ecore.EObject proxyElement) {
 		int pos = -1;
 		if (reference.isMany()) {
 			pos = ((java.util.List<?>)container.eGet(reference)).size();
 		}
 		org.eclipse.emf.ecore.InternalEObject proxy = (org.eclipse.emf.ecore.InternalEObject) proxyElement;
-		java.lang.String internalURIFragment = tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclContextDependentURIFragment.INTERNAL_URI_FRAGMENT_PREFIX + (proxyCounter++) + "_" + id;
+		String internalURIFragment = tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclContextDependentURIFragment.INTERNAL_URI_FRAGMENT_PREFIX + (proxyCounter++) + "_" + id;
 		tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclContextDependentURIFragment<?> uriFragment = factory.create(id, container, reference, pos, proxy);
 		proxy.eSetProxyURI(getURI().appendFragment(internalURIFragment));
 		addURIFragment(internalURIFragment, uriFragment);
@@ -288,14 +298,14 @@ public class OclResource extends org.eclipse.emf.ecore.resource.impl.ResourceImp
 		}
 	}
 	
-	private org.eclipse.emf.ecore.EObject getResultElement(tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclContextDependentURIFragment<? extends org.eclipse.emf.ecore.EObject> uriFragment, tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclReferenceMapping<? extends org.eclipse.emf.ecore.EObject> mapping, org.eclipse.emf.ecore.EObject proxy, final java.lang.String errorMessage) {
+	private org.eclipse.emf.ecore.EObject getResultElement(tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclContextDependentURIFragment<? extends org.eclipse.emf.ecore.EObject> uriFragment, tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclReferenceMapping<? extends org.eclipse.emf.ecore.EObject> mapping, org.eclipse.emf.ecore.EObject proxy, final String errorMessage) {
 		if (mapping instanceof tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclURIMapping<?>) {
 			org.eclipse.emf.common.util.URI uri = ((tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclURIMapping<? extends org.eclipse.emf.ecore.EObject>)mapping).getTargetIdentifier();
 			if (uri != null) {
 				org.eclipse.emf.ecore.EObject result = null;
 				try {
 					result = this.getResourceSet().getEObject(uri, true);
-				} catch (java.lang.Exception e) {
+				} catch (Exception e) {
 					// we can catch exceptions here, because EMF will try to resolve again and handle
 					// the exception
 				}
@@ -331,7 +341,7 @@ public class OclResource extends org.eclipse.emf.ecore.resource.impl.ResourceImp
 	}
 	
 	private void removeDiagnostics(org.eclipse.emf.ecore.EObject proxy, java.util.List<org.eclipse.emf.ecore.resource.Resource.Diagnostic> diagnostics) {
-		// remove all errors/warnings this resource
+		// remove all errors/warnings from this resource
 		for (org.eclipse.emf.ecore.resource.Resource.Diagnostic errorCand : new org.eclipse.emf.common.util.BasicEList<org.eclipse.emf.ecore.resource.Resource.Diagnostic>(diagnostics)) {
 			if (errorCand instanceof tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextDiagnostic) {
 				if (((tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextDiagnostic) errorCand).wasCausedBy(proxy)) {
@@ -344,7 +354,7 @@ public class OclResource extends org.eclipse.emf.ecore.resource.impl.ResourceImp
 	private void attachErrors(tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclReferenceResolveResult<?> result, org.eclipse.emf.ecore.EObject proxy) {
 		// attach errors to this resource
 		assert result != null;
-		final java.lang.String errorMessage = result.getErrorMessage();
+		final String errorMessage = result.getErrorMessage();
 		if (errorMessage == null) {
 			assert(false);
 		} else {
@@ -357,7 +367,7 @@ public class OclResource extends org.eclipse.emf.ecore.resource.impl.ResourceImp
 		assert result.wasResolved();
 		if (result.wasResolved()) {
 			for (tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclReferenceMapping<? extends org.eclipse.emf.ecore.EObject> mapping : result.getMappings()) {
-				final java.lang.String warningMessage = mapping.getWarning();
+				final String warningMessage = mapping.getWarning();
 				if (warningMessage == null) {
 					continue;
 				}
@@ -373,13 +383,14 @@ public class OclResource extends org.eclipse.emf.ecore.resource.impl.ResourceImp
 	protected void doUnload() {
 		super.doUnload();
 		clearState();
+		loadOptions = null;
 	}
 	
 	protected void runPostProcessors(java.util.Map<?, ?> loadOptions) {
 		if (loadOptions == null) {
 			return;
 		}
-		java.lang.Object resourcePostProcessorProvider = loadOptions.get(tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclOptions.RESOURCE_POSTPROCESSOR_PROVIDER);
+		Object resourcePostProcessorProvider = loadOptions.get(tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclOptions.RESOURCE_POSTPROCESSOR_PROVIDER);
 		if (resourcePostProcessorProvider != null) {
 			if (resourcePostProcessorProvider instanceof tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclResourcePostProcessorProvider) {
 				((tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclResourcePostProcessorProvider) resourcePostProcessorProvider).getResourcePostProcessor().process(this);
@@ -391,7 +402,7 @@ public class OclResource extends org.eclipse.emf.ecore.resource.impl.ResourceImp
 						tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclResourcePostProcessor postProcessor = csProcessorProvider.getResourcePostProcessor();
 						try {
 							postProcessor.process(this);
-						} catch (java.lang.Exception e) {
+						} catch (Exception e) {
 							tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclPlugin.logError("Exception while running a post-processor.", e);
 						}
 					}
@@ -401,7 +412,7 @@ public class OclResource extends org.eclipse.emf.ecore.resource.impl.ResourceImp
 	}
 	
 	public void load(java.util.Map<?, ?> options) throws java.io.IOException {
-		java.util.Map<java.lang.Object, java.lang.Object> loadOptions = addDefaultLoadOptions(options);
+		java.util.Map<Object, Object> loadOptions = addDefaultLoadOptions(options);
 		super.load(loadOptions);
 	}
 	
@@ -417,7 +428,11 @@ public class OclResource extends org.eclipse.emf.ecore.resource.impl.ResourceImp
 	}
 	
 	public void addProblem(tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclProblem problem, org.eclipse.emf.ecore.EObject element) {
-		getDiagnostics(problem.getType()).add(new ElementBasedTextDiagnostic(locationMap, getURI(), problem, element));
+		ElementBasedTextDiagnostic diagnostic = new ElementBasedTextDiagnostic(locationMap, getURI(), problem, element);
+		getDiagnostics(problem.getType()).add(diagnostic);
+		if (isMarkerCreationEnabled()) {
+			tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclMarkerHelper.mark(this, diagnostic);
+		}
 		java.util.Collection<tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclQuickFix> quickFixes = problem.getQuickFixes();
 		if (quickFixes != null) {
 			for (tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclQuickFix quickFix : quickFixes) {
@@ -429,14 +444,18 @@ public class OclResource extends org.eclipse.emf.ecore.resource.impl.ResourceImp
 	}
 	
 	public void addProblem(tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclProblem problem, int column, int line, int charStart, int charEnd) {
-		getDiagnostics(problem.getType()).add(new PositionBasedTextDiagnostic(getURI(), problem, column, line, charStart, charEnd));
+		PositionBasedTextDiagnostic diagnostic = new PositionBasedTextDiagnostic(getURI(), problem, column, line, charStart, charEnd);
+		getDiagnostics(problem.getType()).add(diagnostic);
+		if (isMarkerCreationEnabled()) {
+			tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclMarkerHelper.mark(this, diagnostic);
+		}
 	}
 	
-	public void addError(java.lang.String message, org.eclipse.emf.ecore.EObject cause) {
+	public void addError(String message, org.eclipse.emf.ecore.EObject cause) {
 		addProblem(new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclProblem(message, tudresden.ocl20.pivot.language.ocl.resource.ocl.OclEProblemType.ERROR), cause);
 	}
 	
-	public void addWarning(java.lang.String message, org.eclipse.emf.ecore.EObject cause) {
+	public void addWarning(String message, org.eclipse.emf.ecore.EObject cause) {
 		addProblem(new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclProblem(message, tudresden.ocl20.pivot.language.ocl.resource.ocl.OclEProblemType.WARNING), cause);
 	}
 	
@@ -448,8 +467,8 @@ public class OclResource extends org.eclipse.emf.ecore.resource.impl.ResourceImp
 		}
 	}
 	
-	protected java.util.Map<java.lang.Object, java.lang.Object> addDefaultLoadOptions(java.util.Map<?, ?> loadOptions) {
-		java.util.Map<java.lang.Object, java.lang.Object> loadOptionsCopy = tudresden.ocl20.pivot.language.ocl.resource.ocl.util.OclMapUtil.copySafelyToObjectToObjectMap(loadOptions);
+	protected java.util.Map<Object, Object> addDefaultLoadOptions(java.util.Map<?, ?> loadOptions) {
+		java.util.Map<Object, Object> loadOptionsCopy = tudresden.ocl20.pivot.language.ocl.resource.ocl.util.OclMapUtil.copySafelyToObjectToObjectMap(loadOptions);
 		if (org.eclipse.core.runtime.Platform.isRunning()) {
 			// find default load option providers
 			org.eclipse.core.runtime.IExtensionRegistry extensionRegistry = org.eclipse.core.runtime.Platform.getExtensionRegistry();
@@ -459,7 +478,7 @@ public class OclResource extends org.eclipse.emf.ecore.resource.impl.ResourceImp
 					tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclOptionProvider provider = (tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclOptionProvider) element.createExecutableExtension("class");
 					final java.util.Map<?, ?> options = provider.getOptions();
 					final java.util.Collection<?> keys = options.keySet();
-					for (java.lang.Object key : keys) {
+					for (Object key : keys) {
 						addLoadOption(loadOptionsCopy, key, options.get(key));
 					}
 				} catch (org.eclipse.core.runtime.CoreException ce) {
@@ -474,14 +493,14 @@ public class OclResource extends org.eclipse.emf.ecore.resource.impl.ResourceImp
 	 * Adds a new key,value pair to the list of options. If there is already an option
 	 * with the same key, the two values are collected in a list.
 	 */
-	private void addLoadOption(java.util.Map<java.lang.Object, java.lang.Object> options,java.lang.Object key, java.lang.Object value) {
+	private void addLoadOption(java.util.Map<Object, Object> options,Object key, Object value) {
 		// check if there is already an option set
 		if (options.containsKey(key)) {
-			java.lang.Object currentValue = options.get(key);
+			Object currentValue = options.get(key);
 			if (currentValue instanceof java.util.List<?>) {
 				// if the current value is a list, we add the new value to this list
 				java.util.List<?> currentValueAsList = (java.util.List<?>) currentValue;
-				java.util.List<java.lang.Object> currentValueAsObjectList = tudresden.ocl20.pivot.language.ocl.resource.ocl.util.OclListUtil.copySafelyToObjectList(currentValueAsList);
+				java.util.List<Object> currentValueAsObjectList = tudresden.ocl20.pivot.language.ocl.resource.ocl.util.OclListUtil.copySafelyToObjectList(currentValueAsList);
 				if (value instanceof java.util.Collection<?>) {
 					currentValueAsObjectList.addAll((java.util.Collection<?>) value);
 				} else {
@@ -491,7 +510,7 @@ public class OclResource extends org.eclipse.emf.ecore.resource.impl.ResourceImp
 			} else {
 				// if the current value is not a list, we create a fresh list and add both the old
 				// (current) and the new value to this list
-				java.util.List<java.lang.Object> newValueList = new java.util.ArrayList<java.lang.Object>();
+				java.util.List<Object> newValueList = new java.util.ArrayList<Object>();
 				newValueList.add(currentValue);
 				if (value instanceof java.util.Collection<?>) {
 					newValueList.addAll((java.util.Collection<?>) value);
@@ -515,6 +534,9 @@ public class OclResource extends org.eclipse.emf.ecore.resource.impl.ResourceImp
 		internalURIFragmentMap.clear();
 		getErrors().clear();
 		getWarnings().clear();
+		if (isMarkerCreationEnabled()) {
+			tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclMarkerHelper.unmark(this);
+		}
 		proxyCounter = 0;
 		resolverSwitch = null;
 	}
@@ -531,22 +553,28 @@ public class OclResource extends org.eclipse.emf.ecore.resource.impl.ResourceImp
 		return new tudresden.ocl20.pivot.language.ocl.resource.ocl.util.OclCopiedEList<org.eclipse.emf.ecore.resource.Resource.Diagnostic>(super.getErrors());
 	}
 	
+	@SuppressWarnings("restriction")	
 	private void runValidators(org.eclipse.emf.ecore.EObject root) {
 		// checking constraints provided by EMF validator classes was disabled
+		
 		// check EMF validation constraints
 		// EMF validation does not work if OSGi is not running
+		// The EMF validation framework code throws a NPE if the validation plug-in is not
+		// loaded. This is a bug, which is fixed in the Helios release. Nonetheless, we
+		// need to catch the exception here.
 		if (org.eclipse.core.runtime.Platform.isRunning()) {
 			// The EMF validation framework code throws a NPE if the validation plug-in is not
-			// loaded. This is a bug, which is fixed in the helios release. Nonetheless, we
-			// need to catch the exception here.
-			try {
-				org.eclipse.emf.validation.service.ModelValidationService service = org.eclipse.emf.validation.service.ModelValidationService.getInstance();
-				org.eclipse.emf.validation.service.IBatchValidator validator = (org.eclipse.emf.validation.service.IBatchValidator) service.newValidator(org.eclipse.emf.validation.model.EvaluationMode.BATCH);
-				validator.setIncludeLiveConstraints(true);
-				org.eclipse.core.runtime.IStatus status = validator.validate(root);
-				addStatus(status, root);
-			} catch (java.lang.Throwable t) {
-				tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclPlugin.logError("Exception while checking contraints provided by EMF validator classes.", t);
+			// loaded. This is a workaround for bug 322079.
+			if (org.eclipse.emf.validation.internal.EMFModelValidationPlugin.getPlugin() != null) {
+				try {
+					org.eclipse.emf.validation.service.ModelValidationService service = org.eclipse.emf.validation.service.ModelValidationService.getInstance();
+					org.eclipse.emf.validation.service.IBatchValidator validator = (org.eclipse.emf.validation.service.IBatchValidator) service.newValidator(org.eclipse.emf.validation.model.EvaluationMode.BATCH);
+					validator.setIncludeLiveConstraints(true);
+					org.eclipse.core.runtime.IStatus status = validator.validate(root);
+					addStatus(status, root);
+				} catch (Throwable t) {
+					tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclPlugin.logError("Exception while checking contraints provided by EMF validator classes.", t);
+				}
 			}
 		}
 	}
@@ -579,4 +607,10 @@ public class OclResource extends org.eclipse.emf.ecore.resource.impl.ResourceImp
 		return quickFixMap.get(quickFixContext);
 	}
 	
+	public boolean isMarkerCreationEnabled() {
+		if (loadOptions == null) {
+			return true;
+		}
+		return !loadOptions.containsKey(tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclOptions.DISABLE_CREATING_MARKERS_FOR_PROBLEMS);
+	}
 }

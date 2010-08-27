@@ -11,7 +11,11 @@ package tudresden.ocl20.pivot.language.ocl.resource.ocl.ui;
  */
 public class OclOccurrence {
 	
+	public final static String OCCURRENCE_ANNOTATION_ID = "tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.occurences";
+	public final static String DECLARATION_ANNOTATION_ID = "tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.occurences.declaration";
+	
 	private final static tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclPositionHelper positionHelper = new tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclPositionHelper();
+	
 	private tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclTokenScanner tokenScanner;
 	private java.util.List<String> quotedTokenArray;
 	private org.eclipse.jface.text.source.projection.ProjectionViewer projectionViewer;
@@ -195,7 +199,7 @@ public class OclOccurrence {
 				String text = tokenScanner.getTokenText();
 				if (text.equals(tokenText)) {
 					defPosition = tokenScanner.getTokenOffset();
-					addPosition(document, tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclPositionCategory.DEFINTION.toString());
+					addAnnotation(document, tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclPositionCategory.DEFINTION, text);
 					break;
 				}
 				token = tokenScanner.nextToken();
@@ -210,7 +214,7 @@ public class OclOccurrence {
 				occEO = tryToResolve(locationMap.getElementsAt(tokenScanner.getTokenOffset()));
 				if (occEO != null) {
 					if ((isNull && elementsAtDefinition.contains(occEO)) || !isNull && definitionElement.equals(occEO)) {
-						addPosition(document, tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclPositionCategory.PROXY.toString());
+						addAnnotation(document, tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclPositionCategory.PROXY, text);
 					}
 				}
 			}
@@ -218,10 +222,22 @@ public class OclOccurrence {
 		}
 	}
 	
-	private void addPosition(org.eclipse.jface.text.IDocument document, String positionCategory) {
+	private void addAnnotation(org.eclipse.jface.text.IDocument document, tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclPositionCategory type, String text) {
 		int tokenOffset = tokenScanner.getTokenOffset();
 		int tokenLength = tokenScanner.getTokenLength();
-		positionHelper.addPosition(document, positionCategory, tokenOffset, tokenLength);
+		// for declarations and occurrences we do not need to add the position to the
+		// document
+		org.eclipse.jface.text.Position position = positionHelper.createPosition(tokenOffset, tokenLength);
+		// instead, an annotation is created
+		org.eclipse.jface.text.source.Annotation annotation = new org.eclipse.jface.text.source.Annotation(false);
+		if (type == tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclPositionCategory.DEFINTION) {
+			annotation.setText("Declaration of " + text);
+			annotation.setType(DECLARATION_ANNOTATION_ID);
+		} else {
+			annotation.setText("Occurrence of " + text);
+			annotation.setType(OCCURRENCE_ANNOTATION_ID);
+		}
+		projectionViewer.getAnnotationModel().addAnnotation(annotation, position);
 	}
 	
 	/**

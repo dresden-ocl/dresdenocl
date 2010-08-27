@@ -32,7 +32,7 @@ public interface IOclReferenceResolveResult<ReferenceType> {
 	 * 
 	 * @param message the error that prevented resolving the reference
 	 */
-	public void setErrorMessage(java.lang.String message);
+	public void setErrorMessage(String message);
 	
 	/**
 	 * Adds a mapping from the given identifier to the given object. Adding such a
@@ -45,13 +45,13 @@ public interface IOclReferenceResolveResult<ReferenceType> {
 	 * Optionally a warning can be passed to this method if resolving the reference
 	 * was successful, but not accurate.
 	 */
-	public void addMapping(java.lang.String identifier, ReferenceType target, java.lang.String warning);
+	public void addMapping(String identifier, ReferenceType target, String warning);
 	
 	/**
 	 * 
 	 * @see addMapping(String, ReferenceType, String)
 	 */
-	public void addMapping(java.lang.String identifier, ReferenceType target);
+	public void addMapping(String identifier, ReferenceType target);
 	
 	/**
 	 * Adds a mapping from the given identifier to another identifier. This is useful
@@ -64,13 +64,13 @@ public interface IOclReferenceResolveResult<ReferenceType> {
 	 * @param identifier
 	 * @param newIdentifier
 	 */
-	public void addMapping(java.lang.String identifier, org.eclipse.emf.common.util.URI newIdentifier, java.lang.String warning);
+	public void addMapping(String identifier, org.eclipse.emf.common.util.URI newIdentifier, String warning);
 	
 	/**
 	 * 
 	 * @see addMapping(String, org.eclipse.emf.common.util.URI, String)
 	 */
-	public void addMapping(java.lang.String identifier, org.eclipse.emf.common.util.URI newIdentifier);
+	public void addMapping(String identifier, org.eclipse.emf.common.util.URI newIdentifier);
 	
 	/**
 	 * Indicates the type of the result. Depending on the type of the result different

@@ -23,11 +23,11 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 		this.resource = resource;
 	}
 	
-	protected static int matchCount(java.util.Map<java.lang.String, java.lang.Integer> featureCounter, java.util.Collection<java.lang.String> needed){
+	protected static int matchCount(java.util.Map<String, Integer> featureCounter, java.util.Collection<String> needed){
 		int pos = 0;
 		int neg = 0;
 		
-		for(java.lang.String featureName:featureCounter.keySet()){
+		for(String featureName:featureCounter.keySet()){
 			if(needed.contains(featureName)){
 				int value = featureCounter.get(featureName);
 				if (value == 0) {
@@ -40,7 +40,7 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 		return neg > 0 ? -neg : pos;
 	}
 	
-	protected void doPrint(org.eclipse.emf.ecore.EObject element, java.io.PrintWriter out, java.lang.String globaltab) {
+	protected void doPrint(org.eclipse.emf.ecore.EObject element, java.io.PrintWriter out, String globaltab) {
 		if (element == null) {
 			throw new java.lang.IllegalArgumentException("Nothing to write.");
 		}
@@ -252,6 +252,14 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 			print_tudresden_ocl20_pivot_language_ocl_CollectionLiteralPartsOclExpCS((tudresden.ocl20.pivot.language.ocl.CollectionLiteralPartsOclExpCS) element, globaltab, out);
 			return;
 		}
+		if (element instanceof tudresden.ocl20.pivot.language.ocl.CollectionTypeLiteralExpCS) {
+			print_tudresden_ocl20_pivot_language_ocl_CollectionTypeLiteralExpCS((tudresden.ocl20.pivot.language.ocl.CollectionTypeLiteralExpCS) element, globaltab, out);
+			return;
+		}
+		if (element instanceof tudresden.ocl20.pivot.language.ocl.TupleTypeLiteralExpCS) {
+			print_tudresden_ocl20_pivot_language_ocl_TupleTypeLiteralExpCS((tudresden.ocl20.pivot.language.ocl.TupleTypeLiteralExpCS) element, globaltab, out);
+			return;
+		}
 		if (element instanceof tudresden.ocl20.pivot.language.ocl.PropertyCallOnSelfExpCS) {
 			print_tudresden_ocl20_pivot_language_ocl_PropertyCallOnSelfExpCS((tudresden.ocl20.pivot.language.ocl.PropertyCallOnSelfExpCS) element, globaltab, out);
 			return;
@@ -300,7 +308,7 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 		return (tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclReferenceResolverSwitch) new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclMetaInformation().getReferenceResolverSwitch();
 	}
 	
-	protected void addWarningToResource(final java.lang.String errorMessage, org.eclipse.emf.ecore.EObject cause) {
+	protected void addWarningToResource(final String errorMessage, org.eclipse.emf.ecore.EObject cause) {
 		tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextResource resource = getResource();
 		if (resource == null) {
 			// the resource can be null if the printer is used stand alone
@@ -332,14 +340,14 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 		out.close();
 	}
 	
-	public void print_tudresden_ocl20_pivot_language_ocl_SimpleNameCS(tudresden.ocl20.pivot.language.ocl.SimpleNameCS element, java.lang.String outertab, java.io.PrintWriter out) {
+	public void print_tudresden_ocl20_pivot_language_ocl_SimpleNameCS(tudresden.ocl20.pivot.language.ocl.SimpleNameCS element, String outertab, java.io.PrintWriter out) {
 		// The printCountingMap contains a mapping from feature names to the number of
 		// remaining elements that still need to be printed. The map is initialized with
 		// the number of elements stored in each structural feature. For lists this is the
 		// list size. For non-multiple features it is either 1 (if the feature is set) or
 		// 0 (if the feature is null).
-		java.util.Map<java.lang.String, java.lang.Integer> printCountingMap = new java.util.LinkedHashMap<java.lang.String, java.lang.Integer>(1);
-		java.lang.Object temp;
+		java.util.Map<String, Integer> printCountingMap = new java.util.LinkedHashMap<String, Integer>(1);
+		Object temp;
 		temp = element.eGet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.SIMPLE_NAME_CS__SIMPLE_NAME));
 		printCountingMap.put("simpleName", temp == null ? 0 : 1);
 		// print collected hidden tokens
@@ -351,22 +359,22 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 			if (o != null) {
 				tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenResolver resolver = tokenResolverFactory.createTokenResolver("SIMPLE_NAME");
 				resolver.setOptions(getOptions());
-				out.print(resolver.deResolve((java.lang.Object) o, element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.SIMPLE_NAME_CS__SIMPLE_NAME), element));
+				out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.SIMPLE_NAME_CS__SIMPLE_NAME), element));
 				out.print(" ");
 			}
 			printCountingMap.put("simpleName", count - 1);
 		}
 	}
 	
-	public void print_tudresden_ocl20_pivot_language_ocl_PackageDeclarationWithNamespaceCS(tudresden.ocl20.pivot.language.ocl.PackageDeclarationWithNamespaceCS element, java.lang.String outertab, java.io.PrintWriter out) {
-		java.lang.String localtab = outertab;
+	public void print_tudresden_ocl20_pivot_language_ocl_PackageDeclarationWithNamespaceCS(tudresden.ocl20.pivot.language.ocl.PackageDeclarationWithNamespaceCS element, String outertab, java.io.PrintWriter out) {
+		String localtab = outertab;
 		// The printCountingMap contains a mapping from feature names to the number of
 		// remaining elements that still need to be printed. The map is initialized with
 		// the number of elements stored in each structural feature. For lists this is the
 		// list size. For non-multiple features it is either 1 (if the feature is set) or
 		// 0 (if the feature is null).
-		java.util.Map<java.lang.String, java.lang.Integer> printCountingMap = new java.util.LinkedHashMap<java.lang.String, java.lang.Integer>(2);
-		java.lang.Object temp;
+		java.util.Map<String, Integer> printCountingMap = new java.util.LinkedHashMap<String, Integer>(2);
+		Object temp;
 		temp = element.eGet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.PACKAGE_DECLARATION_WITH_NAMESPACE_CS__CONTEXT_DECLARATIONS));
 		printCountingMap.put("contextDeclarations", temp == null ? 0 : ((java.util.Collection<?>) temp).size());
 		temp = element.eGet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.PACKAGE_DECLARATION_WITH_NAMESPACE_CS__NESTED_NAMESPACE));
@@ -376,7 +384,7 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 		boolean iterate = true;
 		java.io.StringWriter sWriter = null;
 		java.io.PrintWriter out1 = null;
-		java.util.Map<java.lang.String, java.lang.Integer> printCountingMap1 = null;
+		java.util.Map<String, Integer> printCountingMap1 = null;
 		// DEFINITION PART BEGINS (CsString)
 		out.print("package");
 		out.print(" ");
@@ -397,7 +405,7 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 		while (iterate) {
 			sWriter = new java.io.StringWriter();
 			out1 = new java.io.PrintWriter(sWriter);
-			printCountingMap1 = new java.util.LinkedHashMap<java.lang.String, java.lang.Integer>(printCountingMap);
+			printCountingMap1 = new java.util.LinkedHashMap<String, Integer>(printCountingMap);
 			print_tudresden_ocl20_pivot_language_ocl_PackageDeclarationWithNamespaceCS_0(element, localtab, out1, printCountingMap1);
 			if (printCountingMap.equals(printCountingMap1)) {
 				iterate = false;
@@ -416,8 +424,8 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 		out.print("endpackage");
 		out.print(" ");
 	}
-	public void print_tudresden_ocl20_pivot_language_ocl_PackageDeclarationWithNamespaceCS_0(tudresden.ocl20.pivot.language.ocl.PackageDeclarationWithNamespaceCS element, java.lang.String outertab, java.io.PrintWriter out, java.util.Map<java.lang.String, java.lang.Integer> printCountingMap){
-		java.lang.String localtab = outertab;
+	public void print_tudresden_ocl20_pivot_language_ocl_PackageDeclarationWithNamespaceCS_0(tudresden.ocl20.pivot.language.ocl.PackageDeclarationWithNamespaceCS element, String outertab, java.io.PrintWriter out, java.util.Map<String, Integer> printCountingMap){
+		String localtab = outertab;
 		int count;
 		// DEFINITION PART BEGINS (Containment)
 		count = printCountingMap.get("contextDeclarations");
@@ -437,15 +445,15 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 		}
 	}
 	
-	public void print_tudresden_ocl20_pivot_language_ocl_PackageDeclarationNestedNamespaceCS(tudresden.ocl20.pivot.language.ocl.PackageDeclarationNestedNamespaceCS element, java.lang.String outertab, java.io.PrintWriter out) {
-		java.lang.String localtab = outertab;
+	public void print_tudresden_ocl20_pivot_language_ocl_PackageDeclarationNestedNamespaceCS(tudresden.ocl20.pivot.language.ocl.PackageDeclarationNestedNamespaceCS element, String outertab, java.io.PrintWriter out) {
+		String localtab = outertab;
 		// The printCountingMap contains a mapping from feature names to the number of
 		// remaining elements that still need to be printed. The map is initialized with
 		// the number of elements stored in each structural feature. For lists this is the
 		// list size. For non-multiple features it is either 1 (if the feature is set) or
 		// 0 (if the feature is null).
-		java.util.Map<java.lang.String, java.lang.Integer> printCountingMap = new java.util.LinkedHashMap<java.lang.String, java.lang.Integer>(2);
-		java.lang.Object temp;
+		java.util.Map<String, Integer> printCountingMap = new java.util.LinkedHashMap<String, Integer>(2);
+		Object temp;
 		temp = element.eGet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.PACKAGE_DECLARATION_NESTED_NAMESPACE_CS__NAMESPACE));
 		printCountingMap.put("namespace", temp == null ? 0 : 1);
 		temp = element.eGet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.PACKAGE_DECLARATION_NESTED_NAMESPACE_CS__NESTED_NAMESPACE));
@@ -454,7 +462,7 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 		int count;
 		java.io.StringWriter sWriter = null;
 		java.io.PrintWriter out1 = null;
-		java.util.Map<java.lang.String, java.lang.Integer> printCountingMap1 = null;
+		java.util.Map<String, Integer> printCountingMap1 = null;
 		// DEFINITION PART BEGINS (PlaceholderUsingSpecifiedToken)
 		count = printCountingMap.get("namespace");
 		if (count > 0) {
@@ -470,7 +478,7 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 		// DEFINITION PART BEGINS (CompoundDefinition)
 		sWriter = new java.io.StringWriter();
 		out1 = new java.io.PrintWriter(sWriter);
-		printCountingMap1 = new java.util.LinkedHashMap<java.lang.String, java.lang.Integer>(printCountingMap);
+		printCountingMap1 = new java.util.LinkedHashMap<String, Integer>(printCountingMap);
 		print_tudresden_ocl20_pivot_language_ocl_PackageDeclarationNestedNamespaceCS_0(element, localtab, out1, printCountingMap1);
 		if (printCountingMap.equals(printCountingMap1)) {
 			out1.close();
@@ -481,8 +489,8 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 			printCountingMap.putAll(printCountingMap1);
 		}
 	}
-	public void print_tudresden_ocl20_pivot_language_ocl_PackageDeclarationNestedNamespaceCS_0(tudresden.ocl20.pivot.language.ocl.PackageDeclarationNestedNamespaceCS element, java.lang.String outertab, java.io.PrintWriter out, java.util.Map<java.lang.String, java.lang.Integer> printCountingMap){
-		java.lang.String localtab = outertab;
+	public void print_tudresden_ocl20_pivot_language_ocl_PackageDeclarationNestedNamespaceCS_0(tudresden.ocl20.pivot.language.ocl.PackageDeclarationNestedNamespaceCS element, String outertab, java.io.PrintWriter out, java.util.Map<String, Integer> printCountingMap){
+		String localtab = outertab;
 		int count;
 		// DEFINITION PART BEGINS (CsString)
 		out.print("::");
@@ -498,15 +506,15 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 		}
 	}
 	
-	public void print_tudresden_ocl20_pivot_language_ocl_PackageDeclarationWithoutNamespaceCS(tudresden.ocl20.pivot.language.ocl.PackageDeclarationWithoutNamespaceCS element, java.lang.String outertab, java.io.PrintWriter out) {
-		java.lang.String localtab = outertab;
+	public void print_tudresden_ocl20_pivot_language_ocl_PackageDeclarationWithoutNamespaceCS(tudresden.ocl20.pivot.language.ocl.PackageDeclarationWithoutNamespaceCS element, String outertab, java.io.PrintWriter out) {
+		String localtab = outertab;
 		// The printCountingMap contains a mapping from feature names to the number of
 		// remaining elements that still need to be printed. The map is initialized with
 		// the number of elements stored in each structural feature. For lists this is the
 		// list size. For non-multiple features it is either 1 (if the feature is set) or
 		// 0 (if the feature is null).
-		java.util.Map<java.lang.String, java.lang.Integer> printCountingMap = new java.util.LinkedHashMap<java.lang.String, java.lang.Integer>(1);
-		java.lang.Object temp;
+		java.util.Map<String, Integer> printCountingMap = new java.util.LinkedHashMap<String, Integer>(1);
+		Object temp;
 		temp = element.eGet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.PACKAGE_DECLARATION_WITHOUT_NAMESPACE_CS__CONTEXT_DECLARATIONS));
 		printCountingMap.put("contextDeclarations", temp == null ? 0 : ((java.util.Collection<?>) temp).size());
 		// print collected hidden tokens
@@ -521,22 +529,22 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 			}
 			java.util.ListIterator<?> it  = list.listIterator(index);
 			while (it.hasNext()) {
-				java.lang.Object o = it.next();
+				Object o = it.next();
 				doPrint((org.eclipse.emf.ecore.EObject) o, out, localtab);
 			}
 			printCountingMap.put("contextDeclarations", 0);
 		}
 	}
 	
-	public void print_tudresden_ocl20_pivot_language_ocl_OperationContextDeclarationCS(tudresden.ocl20.pivot.language.ocl.OperationContextDeclarationCS element, java.lang.String outertab, java.io.PrintWriter out) {
-		java.lang.String localtab = outertab;
+	public void print_tudresden_ocl20_pivot_language_ocl_OperationContextDeclarationCS(tudresden.ocl20.pivot.language.ocl.OperationContextDeclarationCS element, String outertab, java.io.PrintWriter out) {
+		String localtab = outertab;
 		// The printCountingMap contains a mapping from feature names to the number of
 		// remaining elements that still need to be printed. The map is initialized with
 		// the number of elements stored in each structural feature. For lists this is the
 		// list size. For non-multiple features it is either 1 (if the feature is set) or
 		// 0 (if the feature is null).
-		java.util.Map<java.lang.String, java.lang.Integer> printCountingMap = new java.util.LinkedHashMap<java.lang.String, java.lang.Integer>(2);
-		java.lang.Object temp;
+		java.util.Map<String, Integer> printCountingMap = new java.util.LinkedHashMap<String, Integer>(2);
+		Object temp;
 		temp = element.eGet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.OPERATION_CONTEXT_DECLARATION_CS__OPERATION));
 		printCountingMap.put("operation", temp == null ? 0 : 1);
 		temp = element.eGet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.OPERATION_CONTEXT_DECLARATION_CS__PRE_POST_OR_BODY_DECLARATIONS));
@@ -568,22 +576,22 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 			}
 			java.util.ListIterator<?> it  = list.listIterator(index);
 			while (it.hasNext()) {
-				java.lang.Object o = it.next();
+				Object o = it.next();
 				doPrint((org.eclipse.emf.ecore.EObject) o, out, localtab);
 			}
 			printCountingMap.put("prePostOrBodyDeclarations", 0);
 		}
 	}
 	
-	public void print_tudresden_ocl20_pivot_language_ocl_AttributeContextDeclarationCS(tudresden.ocl20.pivot.language.ocl.AttributeContextDeclarationCS element, java.lang.String outertab, java.io.PrintWriter out) {
-		java.lang.String localtab = outertab;
+	public void print_tudresden_ocl20_pivot_language_ocl_AttributeContextDeclarationCS(tudresden.ocl20.pivot.language.ocl.AttributeContextDeclarationCS element, String outertab, java.io.PrintWriter out) {
+		String localtab = outertab;
 		// The printCountingMap contains a mapping from feature names to the number of
 		// remaining elements that still need to be printed. The map is initialized with
 		// the number of elements stored in each structural feature. For lists this is the
 		// list size. For non-multiple features it is either 1 (if the feature is set) or
 		// 0 (if the feature is null).
-		java.util.Map<java.lang.String, java.lang.Integer> printCountingMap = new java.util.LinkedHashMap<java.lang.String, java.lang.Integer>(4);
-		java.lang.Object temp;
+		java.util.Map<String, Integer> printCountingMap = new java.util.LinkedHashMap<String, Integer>(4);
+		Object temp;
 		temp = element.eGet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.ATTRIBUTE_CONTEXT_DECLARATION_CS__TYPE_NAME));
 		printCountingMap.put("typeName", temp == null ? 0 : 1);
 		temp = element.eGet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.ATTRIBUTE_CONTEXT_DECLARATION_CS__PROPERTY));
@@ -596,7 +604,7 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 		int count;
 		java.io.StringWriter sWriter = null;
 		java.io.PrintWriter out1 = null;
-		java.util.Map<java.lang.String, java.lang.Integer> printCountingMap1 = null;
+		java.util.Map<String, Integer> printCountingMap1 = null;
 		// DEFINITION PART BEGINS (CsString)
 		out.print("context");
 		out.print(" ");
@@ -627,7 +635,7 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 		// DEFINITION PART BEGINS (CompoundDefinition)
 		sWriter = new java.io.StringWriter();
 		out1 = new java.io.PrintWriter(sWriter);
-		printCountingMap1 = new java.util.LinkedHashMap<java.lang.String, java.lang.Integer>(printCountingMap);
+		printCountingMap1 = new java.util.LinkedHashMap<String, Integer>(printCountingMap);
 		print_tudresden_ocl20_pivot_language_ocl_AttributeContextDeclarationCS_0(element, localtab, out1, printCountingMap1);
 		if (printCountingMap.equals(printCountingMap1)) {
 			out1.close();
@@ -673,8 +681,8 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 			printCountingMap.put("initOrDeriveValue", count - 1);
 		}
 	}
-	public void print_tudresden_ocl20_pivot_language_ocl_AttributeContextDeclarationCS_0(tudresden.ocl20.pivot.language.ocl.AttributeContextDeclarationCS element, java.lang.String outertab, java.io.PrintWriter out, java.util.Map<java.lang.String, java.lang.Integer> printCountingMap){
-		java.lang.String localtab = outertab;
+	public void print_tudresden_ocl20_pivot_language_ocl_AttributeContextDeclarationCS_0(tudresden.ocl20.pivot.language.ocl.AttributeContextDeclarationCS element, String outertab, java.io.PrintWriter out, java.util.Map<String, Integer> printCountingMap){
+		String localtab = outertab;
 		int count;
 		// DEFINITION PART BEGINS (CsString)
 		out.print(":");
@@ -690,15 +698,15 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 		}
 	}
 	
-	public void print_tudresden_ocl20_pivot_language_ocl_ClassifierContextDeclarationCS(tudresden.ocl20.pivot.language.ocl.ClassifierContextDeclarationCS element, java.lang.String outertab, java.io.PrintWriter out) {
-		java.lang.String localtab = outertab;
+	public void print_tudresden_ocl20_pivot_language_ocl_ClassifierContextDeclarationCS(tudresden.ocl20.pivot.language.ocl.ClassifierContextDeclarationCS element, String outertab, java.io.PrintWriter out) {
+		String localtab = outertab;
 		// The printCountingMap contains a mapping from feature names to the number of
 		// remaining elements that still need to be printed. The map is initialized with
 		// the number of elements stored in each structural feature. For lists this is the
 		// list size. For non-multiple features it is either 1 (if the feature is set) or
 		// 0 (if the feature is null).
-		java.util.Map<java.lang.String, java.lang.Integer> printCountingMap = new java.util.LinkedHashMap<java.lang.String, java.lang.Integer>(2);
-		java.lang.Object temp;
+		java.util.Map<String, Integer> printCountingMap = new java.util.LinkedHashMap<String, Integer>(2);
+		Object temp;
 		temp = element.eGet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.CLASSIFIER_CONTEXT_DECLARATION_CS__TYPE_NAME));
 		printCountingMap.put("typeName", temp == null ? 0 : 1);
 		temp = element.eGet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.CLASSIFIER_CONTEXT_DECLARATION_CS__INVARIANTS_AND_DEFINITIONS));
@@ -730,22 +738,22 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 			}
 			java.util.ListIterator<?> it  = list.listIterator(index);
 			while (it.hasNext()) {
-				java.lang.Object o = it.next();
+				Object o = it.next();
 				doPrint((org.eclipse.emf.ecore.EObject) o, out, localtab);
 			}
 			printCountingMap.put("invariantsAndDefinitions", 0);
 		}
 	}
 	
-	public void print_tudresden_ocl20_pivot_language_ocl_InitValueCS(tudresden.ocl20.pivot.language.ocl.InitValueCS element, java.lang.String outertab, java.io.PrintWriter out) {
-		java.lang.String localtab = outertab;
+	public void print_tudresden_ocl20_pivot_language_ocl_InitValueCS(tudresden.ocl20.pivot.language.ocl.InitValueCS element, String outertab, java.io.PrintWriter out) {
+		String localtab = outertab;
 		// The printCountingMap contains a mapping from feature names to the number of
 		// remaining elements that still need to be printed. The map is initialized with
 		// the number of elements stored in each structural feature. For lists this is the
 		// list size. For non-multiple features it is either 1 (if the feature is set) or
 		// 0 (if the feature is null).
-		java.util.Map<java.lang.String, java.lang.Integer> printCountingMap = new java.util.LinkedHashMap<java.lang.String, java.lang.Integer>(1);
-		java.lang.Object temp;
+		java.util.Map<String, Integer> printCountingMap = new java.util.LinkedHashMap<String, Integer>(1);
+		Object temp;
 		temp = element.eGet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.INIT_VALUE_CS__OCL_EXPRESSION));
 		printCountingMap.put("oclExpression", temp == null ? 0 : 1);
 		// print collected hidden tokens
@@ -767,15 +775,15 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 		}
 	}
 	
-	public void print_tudresden_ocl20_pivot_language_ocl_DeriveValueCS(tudresden.ocl20.pivot.language.ocl.DeriveValueCS element, java.lang.String outertab, java.io.PrintWriter out) {
-		java.lang.String localtab = outertab;
+	public void print_tudresden_ocl20_pivot_language_ocl_DeriveValueCS(tudresden.ocl20.pivot.language.ocl.DeriveValueCS element, String outertab, java.io.PrintWriter out) {
+		String localtab = outertab;
 		// The printCountingMap contains a mapping from feature names to the number of
 		// remaining elements that still need to be printed. The map is initialized with
 		// the number of elements stored in each structural feature. For lists this is the
 		// list size. For non-multiple features it is either 1 (if the feature is set) or
 		// 0 (if the feature is null).
-		java.util.Map<java.lang.String, java.lang.Integer> printCountingMap = new java.util.LinkedHashMap<java.lang.String, java.lang.Integer>(1);
-		java.lang.Object temp;
+		java.util.Map<String, Integer> printCountingMap = new java.util.LinkedHashMap<String, Integer>(1);
+		Object temp;
 		temp = element.eGet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.DERIVE_VALUE_CS__OCL_EXPRESSION));
 		printCountingMap.put("oclExpression", temp == null ? 0 : 1);
 		// print collected hidden tokens
@@ -797,15 +805,15 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 		}
 	}
 	
-	public void print_tudresden_ocl20_pivot_language_ocl_InvariantExpCS(tudresden.ocl20.pivot.language.ocl.InvariantExpCS element, java.lang.String outertab, java.io.PrintWriter out) {
-		java.lang.String localtab = outertab;
+	public void print_tudresden_ocl20_pivot_language_ocl_InvariantExpCS(tudresden.ocl20.pivot.language.ocl.InvariantExpCS element, String outertab, java.io.PrintWriter out) {
+		String localtab = outertab;
 		// The printCountingMap contains a mapping from feature names to the number of
 		// remaining elements that still need to be printed. The map is initialized with
 		// the number of elements stored in each structural feature. For lists this is the
 		// list size. For non-multiple features it is either 1 (if the feature is set) or
 		// 0 (if the feature is null).
-		java.util.Map<java.lang.String, java.lang.Integer> printCountingMap = new java.util.LinkedHashMap<java.lang.String, java.lang.Integer>(2);
-		java.lang.Object temp;
+		java.util.Map<String, Integer> printCountingMap = new java.util.LinkedHashMap<String, Integer>(2);
+		Object temp;
 		temp = element.eGet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.INVARIANT_EXP_CS__NAME));
 		printCountingMap.put("name", temp == null ? 0 : 1);
 		temp = element.eGet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.INVARIANT_EXP_CS__OCL_EXPRESSION));
@@ -839,15 +847,15 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 		}
 	}
 	
-	public void print_tudresden_ocl20_pivot_language_ocl_DefinitionExpCS(tudresden.ocl20.pivot.language.ocl.DefinitionExpCS element, java.lang.String outertab, java.io.PrintWriter out) {
-		java.lang.String localtab = outertab;
+	public void print_tudresden_ocl20_pivot_language_ocl_DefinitionExpCS(tudresden.ocl20.pivot.language.ocl.DefinitionExpCS element, String outertab, java.io.PrintWriter out) {
+		String localtab = outertab;
 		// The printCountingMap contains a mapping from feature names to the number of
 		// remaining elements that still need to be printed. The map is initialized with
 		// the number of elements stored in each structural feature. For lists this is the
 		// list size. For non-multiple features it is either 1 (if the feature is set) or
 		// 0 (if the feature is null).
-		java.util.Map<java.lang.String, java.lang.Integer> printCountingMap = new java.util.LinkedHashMap<java.lang.String, java.lang.Integer>(2);
-		java.lang.Object temp;
+		java.util.Map<String, Integer> printCountingMap = new java.util.LinkedHashMap<String, Integer>(2);
+		Object temp;
 		temp = element.eGet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.DEFINITION_EXP_CS__STATIC));
 		printCountingMap.put("static", temp == null ? 0 : 1);
 		temp = element.eGet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.DEFINITION_EXP_CS__DEFINITION_EXP_PART));
@@ -856,11 +864,11 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 		int count;
 		java.io.StringWriter sWriter = null;
 		java.io.PrintWriter out1 = null;
-		java.util.Map<java.lang.String, java.lang.Integer> printCountingMap1 = null;
+		java.util.Map<String, Integer> printCountingMap1 = null;
 		// DEFINITION PART BEGINS (CompoundDefinition)
 		sWriter = new java.io.StringWriter();
 		out1 = new java.io.PrintWriter(sWriter);
-		printCountingMap1 = new java.util.LinkedHashMap<java.lang.String, java.lang.Integer>(printCountingMap);
+		printCountingMap1 = new java.util.LinkedHashMap<String, Integer>(printCountingMap);
 		print_tudresden_ocl20_pivot_language_ocl_DefinitionExpCS_0(element, localtab, out1, printCountingMap1);
 		if (printCountingMap.equals(printCountingMap1)) {
 			out1.close();
@@ -886,7 +894,7 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 			printCountingMap.put("definitionExpPart", count - 1);
 		}
 	}
-	public void print_tudresden_ocl20_pivot_language_ocl_DefinitionExpCS_0(tudresden.ocl20.pivot.language.ocl.DefinitionExpCS element, java.lang.String outertab, java.io.PrintWriter out, java.util.Map<java.lang.String, java.lang.Integer> printCountingMap){
+	public void print_tudresden_ocl20_pivot_language_ocl_DefinitionExpCS_0(tudresden.ocl20.pivot.language.ocl.DefinitionExpCS element, String outertab, java.io.PrintWriter out, java.util.Map<String, Integer> printCountingMap){
 		int count;
 		// DEFINITION PART BEGINS (PlaceholderUsingSpecifiedToken)
 		count = printCountingMap.get("static");
@@ -895,22 +903,22 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 			if (o != null) {
 				tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenResolver resolver = tokenResolverFactory.createTokenResolver("STATIC");
 				resolver.setOptions(getOptions());
-				out.print(resolver.deResolve((java.lang.Object) o, element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.DEFINITION_EXP_CS__STATIC), element));
+				out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.DEFINITION_EXP_CS__STATIC), element));
 				out.print(" ");
 			}
 			printCountingMap.put("static", count - 1);
 		}
 	}
 	
-	public void print_tudresden_ocl20_pivot_language_ocl_DefinitionExpPropertyCS(tudresden.ocl20.pivot.language.ocl.DefinitionExpPropertyCS element, java.lang.String outertab, java.io.PrintWriter out) {
-		java.lang.String localtab = outertab;
+	public void print_tudresden_ocl20_pivot_language_ocl_DefinitionExpPropertyCS(tudresden.ocl20.pivot.language.ocl.DefinitionExpPropertyCS element, String outertab, java.io.PrintWriter out) {
+		String localtab = outertab;
 		// The printCountingMap contains a mapping from feature names to the number of
 		// remaining elements that still need to be printed. The map is initialized with
 		// the number of elements stored in each structural feature. For lists this is the
 		// list size. For non-multiple features it is either 1 (if the feature is set) or
 		// 0 (if the feature is null).
-		java.util.Map<java.lang.String, java.lang.Integer> printCountingMap = new java.util.LinkedHashMap<java.lang.String, java.lang.Integer>(1);
-		java.lang.Object temp;
+		java.util.Map<String, Integer> printCountingMap = new java.util.LinkedHashMap<String, Integer>(1);
+		Object temp;
 		temp = element.eGet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.DEFINITION_EXP_PROPERTY_CS__VARIABLE_DECLARATION));
 		printCountingMap.put("variableDeclaration", temp == null ? 0 : 1);
 		// print collected hidden tokens
@@ -926,15 +934,15 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 		}
 	}
 	
-	public void print_tudresden_ocl20_pivot_language_ocl_DefinitionExpOperationCS(tudresden.ocl20.pivot.language.ocl.DefinitionExpOperationCS element, java.lang.String outertab, java.io.PrintWriter out) {
-		java.lang.String localtab = outertab;
+	public void print_tudresden_ocl20_pivot_language_ocl_DefinitionExpOperationCS(tudresden.ocl20.pivot.language.ocl.DefinitionExpOperationCS element, String outertab, java.io.PrintWriter out) {
+		String localtab = outertab;
 		// The printCountingMap contains a mapping from feature names to the number of
 		// remaining elements that still need to be printed. The map is initialized with
 		// the number of elements stored in each structural feature. For lists this is the
 		// list size. For non-multiple features it is either 1 (if the feature is set) or
 		// 0 (if the feature is null).
-		java.util.Map<java.lang.String, java.lang.Integer> printCountingMap = new java.util.LinkedHashMap<java.lang.String, java.lang.Integer>(2);
-		java.lang.Object temp;
+		java.util.Map<String, Integer> printCountingMap = new java.util.LinkedHashMap<String, Integer>(2);
+		Object temp;
 		temp = element.eGet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.DEFINITION_EXP_OPERATION_CS__OPERATION));
 		printCountingMap.put("operation", temp == null ? 0 : 1);
 		temp = element.eGet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.DEFINITION_EXP_OPERATION_CS__OCL_EXPRESSION));
@@ -964,15 +972,15 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 		}
 	}
 	
-	public void print_tudresden_ocl20_pivot_language_ocl_PreConditionDeclarationCS(tudresden.ocl20.pivot.language.ocl.PreConditionDeclarationCS element, java.lang.String outertab, java.io.PrintWriter out) {
-		java.lang.String localtab = outertab;
+	public void print_tudresden_ocl20_pivot_language_ocl_PreConditionDeclarationCS(tudresden.ocl20.pivot.language.ocl.PreConditionDeclarationCS element, String outertab, java.io.PrintWriter out) {
+		String localtab = outertab;
 		// The printCountingMap contains a mapping from feature names to the number of
 		// remaining elements that still need to be printed. The map is initialized with
 		// the number of elements stored in each structural feature. For lists this is the
 		// list size. For non-multiple features it is either 1 (if the feature is set) or
 		// 0 (if the feature is null).
-		java.util.Map<java.lang.String, java.lang.Integer> printCountingMap = new java.util.LinkedHashMap<java.lang.String, java.lang.Integer>(2);
-		java.lang.Object temp;
+		java.util.Map<String, Integer> printCountingMap = new java.util.LinkedHashMap<String, Integer>(2);
+		Object temp;
 		temp = element.eGet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.PRE_CONDITION_DECLARATION_CS__NAME));
 		printCountingMap.put("name", temp == null ? 0 : 1);
 		temp = element.eGet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.PRE_CONDITION_DECLARATION_CS__OCL_EXPRESSION));
@@ -981,14 +989,14 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 		int count;
 		java.io.StringWriter sWriter = null;
 		java.io.PrintWriter out1 = null;
-		java.util.Map<java.lang.String, java.lang.Integer> printCountingMap1 = null;
+		java.util.Map<String, Integer> printCountingMap1 = null;
 		// DEFINITION PART BEGINS (CsString)
 		out.print("pre");
 		out.print(" ");
 		// DEFINITION PART BEGINS (CompoundDefinition)
 		sWriter = new java.io.StringWriter();
 		out1 = new java.io.PrintWriter(sWriter);
-		printCountingMap1 = new java.util.LinkedHashMap<java.lang.String, java.lang.Integer>(printCountingMap);
+		printCountingMap1 = new java.util.LinkedHashMap<String, Integer>(printCountingMap);
 		print_tudresden_ocl20_pivot_language_ocl_PreConditionDeclarationCS_0(element, localtab, out1, printCountingMap1);
 		if (printCountingMap.equals(printCountingMap1)) {
 			out1.close();
@@ -1012,8 +1020,8 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 			printCountingMap.put("oclExpression", count - 1);
 		}
 	}
-	public void print_tudresden_ocl20_pivot_language_ocl_PreConditionDeclarationCS_0(tudresden.ocl20.pivot.language.ocl.PreConditionDeclarationCS element, java.lang.String outertab, java.io.PrintWriter out, java.util.Map<java.lang.String, java.lang.Integer> printCountingMap){
-		java.lang.String localtab = outertab;
+	public void print_tudresden_ocl20_pivot_language_ocl_PreConditionDeclarationCS_0(tudresden.ocl20.pivot.language.ocl.PreConditionDeclarationCS element, String outertab, java.io.PrintWriter out, java.util.Map<String, Integer> printCountingMap){
+		String localtab = outertab;
 		int count;
 		// DEFINITION PART BEGINS (Containment)
 		count = printCountingMap.get("name");
@@ -1026,15 +1034,15 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 		}
 	}
 	
-	public void print_tudresden_ocl20_pivot_language_ocl_PostConditionDeclarationCS(tudresden.ocl20.pivot.language.ocl.PostConditionDeclarationCS element, java.lang.String outertab, java.io.PrintWriter out) {
-		java.lang.String localtab = outertab;
+	public void print_tudresden_ocl20_pivot_language_ocl_PostConditionDeclarationCS(tudresden.ocl20.pivot.language.ocl.PostConditionDeclarationCS element, String outertab, java.io.PrintWriter out) {
+		String localtab = outertab;
 		// The printCountingMap contains a mapping from feature names to the number of
 		// remaining elements that still need to be printed. The map is initialized with
 		// the number of elements stored in each structural feature. For lists this is the
 		// list size. For non-multiple features it is either 1 (if the feature is set) or
 		// 0 (if the feature is null).
-		java.util.Map<java.lang.String, java.lang.Integer> printCountingMap = new java.util.LinkedHashMap<java.lang.String, java.lang.Integer>(2);
-		java.lang.Object temp;
+		java.util.Map<String, Integer> printCountingMap = new java.util.LinkedHashMap<String, Integer>(2);
+		Object temp;
 		temp = element.eGet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.POST_CONDITION_DECLARATION_CS__NAME));
 		printCountingMap.put("name", temp == null ? 0 : 1);
 		temp = element.eGet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.POST_CONDITION_DECLARATION_CS__OCL_EXPRESSION));
@@ -1043,14 +1051,14 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 		int count;
 		java.io.StringWriter sWriter = null;
 		java.io.PrintWriter out1 = null;
-		java.util.Map<java.lang.String, java.lang.Integer> printCountingMap1 = null;
+		java.util.Map<String, Integer> printCountingMap1 = null;
 		// DEFINITION PART BEGINS (CsString)
 		out.print("post");
 		out.print(" ");
 		// DEFINITION PART BEGINS (CompoundDefinition)
 		sWriter = new java.io.StringWriter();
 		out1 = new java.io.PrintWriter(sWriter);
-		printCountingMap1 = new java.util.LinkedHashMap<java.lang.String, java.lang.Integer>(printCountingMap);
+		printCountingMap1 = new java.util.LinkedHashMap<String, Integer>(printCountingMap);
 		print_tudresden_ocl20_pivot_language_ocl_PostConditionDeclarationCS_0(element, localtab, out1, printCountingMap1);
 		if (printCountingMap.equals(printCountingMap1)) {
 			out1.close();
@@ -1074,8 +1082,8 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 			printCountingMap.put("oclExpression", count - 1);
 		}
 	}
-	public void print_tudresden_ocl20_pivot_language_ocl_PostConditionDeclarationCS_0(tudresden.ocl20.pivot.language.ocl.PostConditionDeclarationCS element, java.lang.String outertab, java.io.PrintWriter out, java.util.Map<java.lang.String, java.lang.Integer> printCountingMap){
-		java.lang.String localtab = outertab;
+	public void print_tudresden_ocl20_pivot_language_ocl_PostConditionDeclarationCS_0(tudresden.ocl20.pivot.language.ocl.PostConditionDeclarationCS element, String outertab, java.io.PrintWriter out, java.util.Map<String, Integer> printCountingMap){
+		String localtab = outertab;
 		int count;
 		// DEFINITION PART BEGINS (Containment)
 		count = printCountingMap.get("name");
@@ -1088,15 +1096,15 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 		}
 	}
 	
-	public void print_tudresden_ocl20_pivot_language_ocl_BodyDeclarationCS(tudresden.ocl20.pivot.language.ocl.BodyDeclarationCS element, java.lang.String outertab, java.io.PrintWriter out) {
-		java.lang.String localtab = outertab;
+	public void print_tudresden_ocl20_pivot_language_ocl_BodyDeclarationCS(tudresden.ocl20.pivot.language.ocl.BodyDeclarationCS element, String outertab, java.io.PrintWriter out) {
+		String localtab = outertab;
 		// The printCountingMap contains a mapping from feature names to the number of
 		// remaining elements that still need to be printed. The map is initialized with
 		// the number of elements stored in each structural feature. For lists this is the
 		// list size. For non-multiple features it is either 1 (if the feature is set) or
 		// 0 (if the feature is null).
-		java.util.Map<java.lang.String, java.lang.Integer> printCountingMap = new java.util.LinkedHashMap<java.lang.String, java.lang.Integer>(2);
-		java.lang.Object temp;
+		java.util.Map<String, Integer> printCountingMap = new java.util.LinkedHashMap<String, Integer>(2);
+		Object temp;
 		temp = element.eGet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.BODY_DECLARATION_CS__NAME));
 		printCountingMap.put("name", temp == null ? 0 : 1);
 		temp = element.eGet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.BODY_DECLARATION_CS__OCL_EXPRESSION));
@@ -1105,14 +1113,14 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 		int count;
 		java.io.StringWriter sWriter = null;
 		java.io.PrintWriter out1 = null;
-		java.util.Map<java.lang.String, java.lang.Integer> printCountingMap1 = null;
+		java.util.Map<String, Integer> printCountingMap1 = null;
 		// DEFINITION PART BEGINS (CsString)
 		out.print("body");
 		out.print(" ");
 		// DEFINITION PART BEGINS (CompoundDefinition)
 		sWriter = new java.io.StringWriter();
 		out1 = new java.io.PrintWriter(sWriter);
-		printCountingMap1 = new java.util.LinkedHashMap<java.lang.String, java.lang.Integer>(printCountingMap);
+		printCountingMap1 = new java.util.LinkedHashMap<String, Integer>(printCountingMap);
 		print_tudresden_ocl20_pivot_language_ocl_BodyDeclarationCS_0(element, localtab, out1, printCountingMap1);
 		if (printCountingMap.equals(printCountingMap1)) {
 			out1.close();
@@ -1136,8 +1144,8 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 			printCountingMap.put("oclExpression", count - 1);
 		}
 	}
-	public void print_tudresden_ocl20_pivot_language_ocl_BodyDeclarationCS_0(tudresden.ocl20.pivot.language.ocl.BodyDeclarationCS element, java.lang.String outertab, java.io.PrintWriter out, java.util.Map<java.lang.String, java.lang.Integer> printCountingMap){
-		java.lang.String localtab = outertab;
+	public void print_tudresden_ocl20_pivot_language_ocl_BodyDeclarationCS_0(tudresden.ocl20.pivot.language.ocl.BodyDeclarationCS element, String outertab, java.io.PrintWriter out, java.util.Map<String, Integer> printCountingMap){
+		String localtab = outertab;
 		int count;
 		// DEFINITION PART BEGINS (Containment)
 		count = printCountingMap.get("name");
@@ -1150,15 +1158,15 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 		}
 	}
 	
-	public void print_tudresden_ocl20_pivot_language_ocl_OperationDefinitionInContextCS(tudresden.ocl20.pivot.language.ocl.OperationDefinitionInContextCS element, java.lang.String outertab, java.io.PrintWriter out) {
-		java.lang.String localtab = outertab;
+	public void print_tudresden_ocl20_pivot_language_ocl_OperationDefinitionInContextCS(tudresden.ocl20.pivot.language.ocl.OperationDefinitionInContextCS element, String outertab, java.io.PrintWriter out) {
+		String localtab = outertab;
 		// The printCountingMap contains a mapping from feature names to the number of
 		// remaining elements that still need to be printed. The map is initialized with
 		// the number of elements stored in each structural feature. For lists this is the
 		// list size. For non-multiple features it is either 1 (if the feature is set) or
 		// 0 (if the feature is null).
-		java.util.Map<java.lang.String, java.lang.Integer> printCountingMap = new java.util.LinkedHashMap<java.lang.String, java.lang.Integer>(4);
-		java.lang.Object temp;
+		java.util.Map<String, Integer> printCountingMap = new java.util.LinkedHashMap<String, Integer>(4);
+		Object temp;
 		temp = element.eGet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.OPERATION_DEFINITION_IN_CONTEXT_CS__OPERATION));
 		printCountingMap.put("operation", temp == null ? 0 : 1);
 		temp = element.eGet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.OPERATION_DEFINITION_IN_CONTEXT_CS__PARAMETERS));
@@ -1171,7 +1179,7 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 		int count;
 		java.io.StringWriter sWriter = null;
 		java.io.PrintWriter out1 = null;
-		java.util.Map<java.lang.String, java.lang.Integer> printCountingMap1 = null;
+		java.util.Map<String, Integer> printCountingMap1 = null;
 		// DEFINITION PART BEGINS (Containment)
 		count = printCountingMap.get("typeName");
 		if (count > 0) {
@@ -1203,7 +1211,7 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 		// DEFINITION PART BEGINS (CompoundDefinition)
 		sWriter = new java.io.StringWriter();
 		out1 = new java.io.PrintWriter(sWriter);
-		printCountingMap1 = new java.util.LinkedHashMap<java.lang.String, java.lang.Integer>(printCountingMap);
+		printCountingMap1 = new java.util.LinkedHashMap<String, Integer>(printCountingMap);
 		print_tudresden_ocl20_pivot_language_ocl_OperationDefinitionInContextCS_0(element, localtab, out1, printCountingMap1);
 		if (printCountingMap.equals(printCountingMap1)) {
 			out1.close();
@@ -1220,7 +1228,7 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 		// DEFINITION PART BEGINS (CompoundDefinition)
 		sWriter = new java.io.StringWriter();
 		out1 = new java.io.PrintWriter(sWriter);
-		printCountingMap1 = new java.util.LinkedHashMap<java.lang.String, java.lang.Integer>(printCountingMap);
+		printCountingMap1 = new java.util.LinkedHashMap<String, Integer>(printCountingMap);
 		print_tudresden_ocl20_pivot_language_ocl_OperationDefinitionInContextCS_1(element, localtab, out1, printCountingMap1);
 		if (printCountingMap.equals(printCountingMap1)) {
 			out1.close();
@@ -1231,13 +1239,13 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 			printCountingMap.putAll(printCountingMap1);
 		}
 	}
-	public void print_tudresden_ocl20_pivot_language_ocl_OperationDefinitionInContextCS_0(tudresden.ocl20.pivot.language.ocl.OperationDefinitionInContextCS element, java.lang.String outertab, java.io.PrintWriter out, java.util.Map<java.lang.String, java.lang.Integer> printCountingMap){
-		java.lang.String localtab = outertab;
+	public void print_tudresden_ocl20_pivot_language_ocl_OperationDefinitionInContextCS_0(tudresden.ocl20.pivot.language.ocl.OperationDefinitionInContextCS element, String outertab, java.io.PrintWriter out, java.util.Map<String, Integer> printCountingMap){
+		String localtab = outertab;
 		int count;
 		boolean iterate = true;
 		java.io.StringWriter sWriter = null;
 		java.io.PrintWriter out1 = null;
-		java.util.Map<java.lang.String, java.lang.Integer> printCountingMap1 = null;
+		java.util.Map<String, Integer> printCountingMap1 = null;
 		// DEFINITION PART BEGINS (Containment)
 		count = printCountingMap.get("parameters");
 		if (count > 0) {
@@ -1259,7 +1267,7 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 		while (iterate) {
 			sWriter = new java.io.StringWriter();
 			out1 = new java.io.PrintWriter(sWriter);
-			printCountingMap1 = new java.util.LinkedHashMap<java.lang.String, java.lang.Integer>(printCountingMap);
+			printCountingMap1 = new java.util.LinkedHashMap<String, Integer>(printCountingMap);
 			print_tudresden_ocl20_pivot_language_ocl_OperationDefinitionInContextCS_0_0(element, localtab, out1, printCountingMap1);
 			if (printCountingMap.equals(printCountingMap1)) {
 				iterate = false;
@@ -1272,8 +1280,8 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 			}
 		}
 	}
-	public void print_tudresden_ocl20_pivot_language_ocl_OperationDefinitionInContextCS_0_0(tudresden.ocl20.pivot.language.ocl.OperationDefinitionInContextCS element, java.lang.String outertab, java.io.PrintWriter out, java.util.Map<java.lang.String, java.lang.Integer> printCountingMap){
-		java.lang.String localtab = outertab;
+	public void print_tudresden_ocl20_pivot_language_ocl_OperationDefinitionInContextCS_0_0(tudresden.ocl20.pivot.language.ocl.OperationDefinitionInContextCS element, String outertab, java.io.PrintWriter out, java.util.Map<String, Integer> printCountingMap){
+		String localtab = outertab;
 		int count;
 		// DEFINITION PART BEGINS (WhiteSpaces)
 		// DEFINITION PART BEGINS (CsString)
@@ -1296,8 +1304,8 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 			printCountingMap.put("parameters", count - 1);
 		}
 	}
-	public void print_tudresden_ocl20_pivot_language_ocl_OperationDefinitionInContextCS_1(tudresden.ocl20.pivot.language.ocl.OperationDefinitionInContextCS element, java.lang.String outertab, java.io.PrintWriter out, java.util.Map<java.lang.String, java.lang.Integer> printCountingMap){
-		java.lang.String localtab = outertab;
+	public void print_tudresden_ocl20_pivot_language_ocl_OperationDefinitionInContextCS_1(tudresden.ocl20.pivot.language.ocl.OperationDefinitionInContextCS element, String outertab, java.io.PrintWriter out, java.util.Map<String, Integer> printCountingMap){
+		String localtab = outertab;
 		int count;
 		// DEFINITION PART BEGINS (CsString)
 		out.print(":");
@@ -1313,15 +1321,15 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 		}
 	}
 	
-	public void print_tudresden_ocl20_pivot_language_ocl_OperationDefinitionInDefCS(tudresden.ocl20.pivot.language.ocl.OperationDefinitionInDefCS element, java.lang.String outertab, java.io.PrintWriter out) {
-		java.lang.String localtab = outertab;
+	public void print_tudresden_ocl20_pivot_language_ocl_OperationDefinitionInDefCS(tudresden.ocl20.pivot.language.ocl.OperationDefinitionInDefCS element, String outertab, java.io.PrintWriter out) {
+		String localtab = outertab;
 		// The printCountingMap contains a mapping from feature names to the number of
 		// remaining elements that still need to be printed. The map is initialized with
 		// the number of elements stored in each structural feature. For lists this is the
 		// list size. For non-multiple features it is either 1 (if the feature is set) or
 		// 0 (if the feature is null).
-		java.util.Map<java.lang.String, java.lang.Integer> printCountingMap = new java.util.LinkedHashMap<java.lang.String, java.lang.Integer>(3);
-		java.lang.Object temp;
+		java.util.Map<String, Integer> printCountingMap = new java.util.LinkedHashMap<String, Integer>(3);
+		Object temp;
 		temp = element.eGet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.OPERATION_DEFINITION_IN_DEF_CS__OPERATION));
 		printCountingMap.put("operation", temp == null ? 0 : 1);
 		temp = element.eGet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.OPERATION_DEFINITION_IN_DEF_CS__PARAMETERS));
@@ -1332,7 +1340,7 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 		int count;
 		java.io.StringWriter sWriter = null;
 		java.io.PrintWriter out1 = null;
-		java.util.Map<java.lang.String, java.lang.Integer> printCountingMap1 = null;
+		java.util.Map<String, Integer> printCountingMap1 = null;
 		// DEFINITION PART BEGINS (PlaceholderUsingSpecifiedToken)
 		count = printCountingMap.get("operation");
 		if (count > 0) {
@@ -1351,7 +1359,7 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 		// DEFINITION PART BEGINS (CompoundDefinition)
 		sWriter = new java.io.StringWriter();
 		out1 = new java.io.PrintWriter(sWriter);
-		printCountingMap1 = new java.util.LinkedHashMap<java.lang.String, java.lang.Integer>(printCountingMap);
+		printCountingMap1 = new java.util.LinkedHashMap<String, Integer>(printCountingMap);
 		print_tudresden_ocl20_pivot_language_ocl_OperationDefinitionInDefCS_0(element, localtab, out1, printCountingMap1);
 		if (printCountingMap.equals(printCountingMap1)) {
 			out1.close();
@@ -1367,7 +1375,7 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 		// DEFINITION PART BEGINS (CompoundDefinition)
 		sWriter = new java.io.StringWriter();
 		out1 = new java.io.PrintWriter(sWriter);
-		printCountingMap1 = new java.util.LinkedHashMap<java.lang.String, java.lang.Integer>(printCountingMap);
+		printCountingMap1 = new java.util.LinkedHashMap<String, Integer>(printCountingMap);
 		print_tudresden_ocl20_pivot_language_ocl_OperationDefinitionInDefCS_1(element, localtab, out1, printCountingMap1);
 		if (printCountingMap.equals(printCountingMap1)) {
 			out1.close();
@@ -1378,13 +1386,13 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 			printCountingMap.putAll(printCountingMap1);
 		}
 	}
-	public void print_tudresden_ocl20_pivot_language_ocl_OperationDefinitionInDefCS_0(tudresden.ocl20.pivot.language.ocl.OperationDefinitionInDefCS element, java.lang.String outertab, java.io.PrintWriter out, java.util.Map<java.lang.String, java.lang.Integer> printCountingMap){
-		java.lang.String localtab = outertab;
+	public void print_tudresden_ocl20_pivot_language_ocl_OperationDefinitionInDefCS_0(tudresden.ocl20.pivot.language.ocl.OperationDefinitionInDefCS element, String outertab, java.io.PrintWriter out, java.util.Map<String, Integer> printCountingMap){
+		String localtab = outertab;
 		int count;
 		boolean iterate = true;
 		java.io.StringWriter sWriter = null;
 		java.io.PrintWriter out1 = null;
-		java.util.Map<java.lang.String, java.lang.Integer> printCountingMap1 = null;
+		java.util.Map<String, Integer> printCountingMap1 = null;
 		// DEFINITION PART BEGINS (Containment)
 		count = printCountingMap.get("parameters");
 		if (count > 0) {
@@ -1406,7 +1414,7 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 		while (iterate) {
 			sWriter = new java.io.StringWriter();
 			out1 = new java.io.PrintWriter(sWriter);
-			printCountingMap1 = new java.util.LinkedHashMap<java.lang.String, java.lang.Integer>(printCountingMap);
+			printCountingMap1 = new java.util.LinkedHashMap<String, Integer>(printCountingMap);
 			print_tudresden_ocl20_pivot_language_ocl_OperationDefinitionInDefCS_0_0(element, localtab, out1, printCountingMap1);
 			if (printCountingMap.equals(printCountingMap1)) {
 				iterate = false;
@@ -1419,8 +1427,8 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 			}
 		}
 	}
-	public void print_tudresden_ocl20_pivot_language_ocl_OperationDefinitionInDefCS_0_0(tudresden.ocl20.pivot.language.ocl.OperationDefinitionInDefCS element, java.lang.String outertab, java.io.PrintWriter out, java.util.Map<java.lang.String, java.lang.Integer> printCountingMap){
-		java.lang.String localtab = outertab;
+	public void print_tudresden_ocl20_pivot_language_ocl_OperationDefinitionInDefCS_0_0(tudresden.ocl20.pivot.language.ocl.OperationDefinitionInDefCS element, String outertab, java.io.PrintWriter out, java.util.Map<String, Integer> printCountingMap){
+		String localtab = outertab;
 		int count;
 		// DEFINITION PART BEGINS (CsString)
 		out.print(",");
@@ -1442,8 +1450,8 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 			printCountingMap.put("parameters", count - 1);
 		}
 	}
-	public void print_tudresden_ocl20_pivot_language_ocl_OperationDefinitionInDefCS_1(tudresden.ocl20.pivot.language.ocl.OperationDefinitionInDefCS element, java.lang.String outertab, java.io.PrintWriter out, java.util.Map<java.lang.String, java.lang.Integer> printCountingMap){
-		java.lang.String localtab = outertab;
+	public void print_tudresden_ocl20_pivot_language_ocl_OperationDefinitionInDefCS_1(tudresden.ocl20.pivot.language.ocl.OperationDefinitionInDefCS element, String outertab, java.io.PrintWriter out, java.util.Map<String, Integer> printCountingMap){
+		String localtab = outertab;
 		int count;
 		// DEFINITION PART BEGINS (CsString)
 		out.print(":");
@@ -1459,15 +1467,15 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 		}
 	}
 	
-	public void print_tudresden_ocl20_pivot_language_ocl_ParameterCS(tudresden.ocl20.pivot.language.ocl.ParameterCS element, java.lang.String outertab, java.io.PrintWriter out) {
-		java.lang.String localtab = outertab;
+	public void print_tudresden_ocl20_pivot_language_ocl_ParameterCS(tudresden.ocl20.pivot.language.ocl.ParameterCS element, String outertab, java.io.PrintWriter out) {
+		String localtab = outertab;
 		// The printCountingMap contains a mapping from feature names to the number of
 		// remaining elements that still need to be printed. The map is initialized with
 		// the number of elements stored in each structural feature. For lists this is the
 		// list size. For non-multiple features it is either 1 (if the feature is set) or
 		// 0 (if the feature is null).
-		java.util.Map<java.lang.String, java.lang.Integer> printCountingMap = new java.util.LinkedHashMap<java.lang.String, java.lang.Integer>(2);
-		java.lang.Object temp;
+		java.util.Map<String, Integer> printCountingMap = new java.util.LinkedHashMap<String, Integer>(2);
+		Object temp;
 		temp = element.eGet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.PARAMETER_CS__PARAMETER));
 		printCountingMap.put("parameter", temp == null ? 0 : 1);
 		temp = element.eGet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.PARAMETER_CS__PARAMETER_TYPE));
@@ -1500,15 +1508,15 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 		}
 	}
 	
-	public void print_tudresden_ocl20_pivot_language_ocl_LogicalImpliesOperationCallExpCS(tudresden.ocl20.pivot.language.ocl.LogicalImpliesOperationCallExpCS element, java.lang.String outertab, java.io.PrintWriter out) {
-		java.lang.String localtab = outertab;
+	public void print_tudresden_ocl20_pivot_language_ocl_LogicalImpliesOperationCallExpCS(tudresden.ocl20.pivot.language.ocl.LogicalImpliesOperationCallExpCS element, String outertab, java.io.PrintWriter out) {
+		String localtab = outertab;
 		// The printCountingMap contains a mapping from feature names to the number of
 		// remaining elements that still need to be printed. The map is initialized with
 		// the number of elements stored in each structural feature. For lists this is the
 		// list size. For non-multiple features it is either 1 (if the feature is set) or
 		// 0 (if the feature is null).
-		java.util.Map<java.lang.String, java.lang.Integer> printCountingMap = new java.util.LinkedHashMap<java.lang.String, java.lang.Integer>(4);
-		java.lang.Object temp;
+		java.util.Map<String, Integer> printCountingMap = new java.util.LinkedHashMap<String, Integer>(4);
+		Object temp;
 		temp = element.eGet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.LOGICAL_IMPLIES_OPERATION_CALL_EXP_CS__SOURCE));
 		printCountingMap.put("source", temp == null ? 0 : 1);
 		temp = element.eGet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.LOGICAL_IMPLIES_OPERATION_CALL_EXP_CS__IS_MARKED_PRE));
@@ -1535,7 +1543,7 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 			if (o != null) {
 				tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenResolver resolver = tokenResolverFactory.createTokenResolver("IMPLIES_OPERATOR");
 				resolver.setOptions(getOptions());
-				out.print(resolver.deResolve((java.lang.Object) o, element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.LOGICAL_IMPLIES_OPERATION_CALL_EXP_CS__OPERATION_NAME), element));
+				out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.LOGICAL_IMPLIES_OPERATION_CALL_EXP_CS__OPERATION_NAME), element));
 				out.print(" ");
 			}
 			printCountingMap.put("operationName", count - 1);
@@ -1551,15 +1559,15 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 		}
 	}
 	
-	public void print_tudresden_ocl20_pivot_language_ocl_LogicalXorOperationCallExpCS(tudresden.ocl20.pivot.language.ocl.LogicalXorOperationCallExpCS element, java.lang.String outertab, java.io.PrintWriter out) {
-		java.lang.String localtab = outertab;
+	public void print_tudresden_ocl20_pivot_language_ocl_LogicalXorOperationCallExpCS(tudresden.ocl20.pivot.language.ocl.LogicalXorOperationCallExpCS element, String outertab, java.io.PrintWriter out) {
+		String localtab = outertab;
 		// The printCountingMap contains a mapping from feature names to the number of
 		// remaining elements that still need to be printed. The map is initialized with
 		// the number of elements stored in each structural feature. For lists this is the
 		// list size. For non-multiple features it is either 1 (if the feature is set) or
 		// 0 (if the feature is null).
-		java.util.Map<java.lang.String, java.lang.Integer> printCountingMap = new java.util.LinkedHashMap<java.lang.String, java.lang.Integer>(4);
-		java.lang.Object temp;
+		java.util.Map<String, Integer> printCountingMap = new java.util.LinkedHashMap<String, Integer>(4);
+		Object temp;
 		temp = element.eGet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.LOGICAL_XOR_OPERATION_CALL_EXP_CS__SOURCE));
 		printCountingMap.put("source", temp == null ? 0 : 1);
 		temp = element.eGet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.LOGICAL_XOR_OPERATION_CALL_EXP_CS__IS_MARKED_PRE));
@@ -1586,7 +1594,7 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 			if (o != null) {
 				tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenResolver resolver = tokenResolverFactory.createTokenResolver("XOR_OPERATOR");
 				resolver.setOptions(getOptions());
-				out.print(resolver.deResolve((java.lang.Object) o, element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.LOGICAL_XOR_OPERATION_CALL_EXP_CS__OPERATION_NAME), element));
+				out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.LOGICAL_XOR_OPERATION_CALL_EXP_CS__OPERATION_NAME), element));
 				out.print(" ");
 			}
 			printCountingMap.put("operationName", count - 1);
@@ -1602,15 +1610,15 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 		}
 	}
 	
-	public void print_tudresden_ocl20_pivot_language_ocl_LogicalOrOperationCallExpCS(tudresden.ocl20.pivot.language.ocl.LogicalOrOperationCallExpCS element, java.lang.String outertab, java.io.PrintWriter out) {
-		java.lang.String localtab = outertab;
+	public void print_tudresden_ocl20_pivot_language_ocl_LogicalOrOperationCallExpCS(tudresden.ocl20.pivot.language.ocl.LogicalOrOperationCallExpCS element, String outertab, java.io.PrintWriter out) {
+		String localtab = outertab;
 		// The printCountingMap contains a mapping from feature names to the number of
 		// remaining elements that still need to be printed. The map is initialized with
 		// the number of elements stored in each structural feature. For lists this is the
 		// list size. For non-multiple features it is either 1 (if the feature is set) or
 		// 0 (if the feature is null).
-		java.util.Map<java.lang.String, java.lang.Integer> printCountingMap = new java.util.LinkedHashMap<java.lang.String, java.lang.Integer>(4);
-		java.lang.Object temp;
+		java.util.Map<String, Integer> printCountingMap = new java.util.LinkedHashMap<String, Integer>(4);
+		Object temp;
 		temp = element.eGet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.LOGICAL_OR_OPERATION_CALL_EXP_CS__SOURCE));
 		printCountingMap.put("source", temp == null ? 0 : 1);
 		temp = element.eGet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.LOGICAL_OR_OPERATION_CALL_EXP_CS__IS_MARKED_PRE));
@@ -1637,7 +1645,7 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 			if (o != null) {
 				tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenResolver resolver = tokenResolverFactory.createTokenResolver("OR_OPERATOR");
 				resolver.setOptions(getOptions());
-				out.print(resolver.deResolve((java.lang.Object) o, element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.LOGICAL_OR_OPERATION_CALL_EXP_CS__OPERATION_NAME), element));
+				out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.LOGICAL_OR_OPERATION_CALL_EXP_CS__OPERATION_NAME), element));
 				out.print(" ");
 			}
 			printCountingMap.put("operationName", count - 1);
@@ -1653,15 +1661,15 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 		}
 	}
 	
-	public void print_tudresden_ocl20_pivot_language_ocl_LogicalAndOperationCallExpCS(tudresden.ocl20.pivot.language.ocl.LogicalAndOperationCallExpCS element, java.lang.String outertab, java.io.PrintWriter out) {
-		java.lang.String localtab = outertab;
+	public void print_tudresden_ocl20_pivot_language_ocl_LogicalAndOperationCallExpCS(tudresden.ocl20.pivot.language.ocl.LogicalAndOperationCallExpCS element, String outertab, java.io.PrintWriter out) {
+		String localtab = outertab;
 		// The printCountingMap contains a mapping from feature names to the number of
 		// remaining elements that still need to be printed. The map is initialized with
 		// the number of elements stored in each structural feature. For lists this is the
 		// list size. For non-multiple features it is either 1 (if the feature is set) or
 		// 0 (if the feature is null).
-		java.util.Map<java.lang.String, java.lang.Integer> printCountingMap = new java.util.LinkedHashMap<java.lang.String, java.lang.Integer>(4);
-		java.lang.Object temp;
+		java.util.Map<String, Integer> printCountingMap = new java.util.LinkedHashMap<String, Integer>(4);
+		Object temp;
 		temp = element.eGet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.LOGICAL_AND_OPERATION_CALL_EXP_CS__SOURCE));
 		printCountingMap.put("source", temp == null ? 0 : 1);
 		temp = element.eGet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.LOGICAL_AND_OPERATION_CALL_EXP_CS__IS_MARKED_PRE));
@@ -1688,7 +1696,7 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 			if (o != null) {
 				tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenResolver resolver = tokenResolverFactory.createTokenResolver("AND_OPERATOR");
 				resolver.setOptions(getOptions());
-				out.print(resolver.deResolve((java.lang.Object) o, element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.LOGICAL_AND_OPERATION_CALL_EXP_CS__OPERATION_NAME), element));
+				out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.LOGICAL_AND_OPERATION_CALL_EXP_CS__OPERATION_NAME), element));
 				out.print(" ");
 			}
 			printCountingMap.put("operationName", count - 1);
@@ -1704,15 +1712,15 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 		}
 	}
 	
-	public void print_tudresden_ocl20_pivot_language_ocl_EqualityOperationCallExpCS(tudresden.ocl20.pivot.language.ocl.EqualityOperationCallExpCS element, java.lang.String outertab, java.io.PrintWriter out) {
-		java.lang.String localtab = outertab;
+	public void print_tudresden_ocl20_pivot_language_ocl_EqualityOperationCallExpCS(tudresden.ocl20.pivot.language.ocl.EqualityOperationCallExpCS element, String outertab, java.io.PrintWriter out) {
+		String localtab = outertab;
 		// The printCountingMap contains a mapping from feature names to the number of
 		// remaining elements that still need to be printed. The map is initialized with
 		// the number of elements stored in each structural feature. For lists this is the
 		// list size. For non-multiple features it is either 1 (if the feature is set) or
 		// 0 (if the feature is null).
-		java.util.Map<java.lang.String, java.lang.Integer> printCountingMap = new java.util.LinkedHashMap<java.lang.String, java.lang.Integer>(4);
-		java.lang.Object temp;
+		java.util.Map<String, Integer> printCountingMap = new java.util.LinkedHashMap<String, Integer>(4);
+		Object temp;
 		temp = element.eGet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.EQUALITY_OPERATION_CALL_EXP_CS__SOURCE));
 		printCountingMap.put("source", temp == null ? 0 : 1);
 		temp = element.eGet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.EQUALITY_OPERATION_CALL_EXP_CS__IS_MARKED_PRE));
@@ -1744,7 +1752,7 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 			printCountingMap.put("target", count - 1);
 		}
 	}
-	public void print_tudresden_ocl20_pivot_language_ocl_EqualityOperationCallExpCS_0(tudresden.ocl20.pivot.language.ocl.EqualityOperationCallExpCS element, java.lang.String outertab, java.io.PrintWriter out, java.util.Map<java.lang.String, java.lang.Integer> printCountingMap){
+	public void print_tudresden_ocl20_pivot_language_ocl_EqualityOperationCallExpCS_0(tudresden.ocl20.pivot.language.ocl.EqualityOperationCallExpCS element, String outertab, java.io.PrintWriter out, java.util.Map<String, Integer> printCountingMap){
 		int count;
 		int alt = -1;
 		alt=0;
@@ -1764,7 +1772,7 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 					if (o != null) {
 						tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenResolver resolver = tokenResolverFactory.createTokenResolver("NEQUALITY_OPERATOR");
 						resolver.setOptions(getOptions());
-						out.print(resolver.deResolve((java.lang.Object) o, element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.EQUALITY_OPERATION_CALL_EXP_CS__OPERATION_NAME), element));
+						out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.EQUALITY_OPERATION_CALL_EXP_CS__OPERATION_NAME), element));
 						out.print(" ");
 					}
 					printCountingMap.put("operationName", count - 1);
@@ -1778,7 +1786,7 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 				if (o != null) {
 					tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenResolver resolver = tokenResolverFactory.createTokenResolver("EQUALITY_OPERATOR");
 					resolver.setOptions(getOptions());
-					out.print(resolver.deResolve((java.lang.Object) o, element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.EQUALITY_OPERATION_CALL_EXP_CS__OPERATION_NAME), element));
+					out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.EQUALITY_OPERATION_CALL_EXP_CS__OPERATION_NAME), element));
 					out.print(" ");
 				}
 				printCountingMap.put("operationName", count - 1);
@@ -1786,15 +1794,15 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 		}
 	}
 	
-	public void print_tudresden_ocl20_pivot_language_ocl_RelationalOperationCallExpCS(tudresden.ocl20.pivot.language.ocl.RelationalOperationCallExpCS element, java.lang.String outertab, java.io.PrintWriter out) {
-		java.lang.String localtab = outertab;
+	public void print_tudresden_ocl20_pivot_language_ocl_RelationalOperationCallExpCS(tudresden.ocl20.pivot.language.ocl.RelationalOperationCallExpCS element, String outertab, java.io.PrintWriter out) {
+		String localtab = outertab;
 		// The printCountingMap contains a mapping from feature names to the number of
 		// remaining elements that still need to be printed. The map is initialized with
 		// the number of elements stored in each structural feature. For lists this is the
 		// list size. For non-multiple features it is either 1 (if the feature is set) or
 		// 0 (if the feature is null).
-		java.util.Map<java.lang.String, java.lang.Integer> printCountingMap = new java.util.LinkedHashMap<java.lang.String, java.lang.Integer>(4);
-		java.lang.Object temp;
+		java.util.Map<String, Integer> printCountingMap = new java.util.LinkedHashMap<String, Integer>(4);
+		Object temp;
 		temp = element.eGet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.RELATIONAL_OPERATION_CALL_EXP_CS__SOURCE));
 		printCountingMap.put("source", temp == null ? 0 : 1);
 		temp = element.eGet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.RELATIONAL_OPERATION_CALL_EXP_CS__IS_MARKED_PRE));
@@ -1821,7 +1829,7 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 			if (o != null) {
 				tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenResolver resolver = tokenResolverFactory.createTokenResolver("RELATIONAL_OPERATOR");
 				resolver.setOptions(getOptions());
-				out.print(resolver.deResolve((java.lang.Object) o, element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.RELATIONAL_OPERATION_CALL_EXP_CS__OPERATION_NAME), element));
+				out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.RELATIONAL_OPERATION_CALL_EXP_CS__OPERATION_NAME), element));
 				out.print(" ");
 			}
 			printCountingMap.put("operationName", count - 1);
@@ -1837,15 +1845,15 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 		}
 	}
 	
-	public void print_tudresden_ocl20_pivot_language_ocl_AdditiveOperationCallExpCS(tudresden.ocl20.pivot.language.ocl.AdditiveOperationCallExpCS element, java.lang.String outertab, java.io.PrintWriter out) {
-		java.lang.String localtab = outertab;
+	public void print_tudresden_ocl20_pivot_language_ocl_AdditiveOperationCallExpCS(tudresden.ocl20.pivot.language.ocl.AdditiveOperationCallExpCS element, String outertab, java.io.PrintWriter out) {
+		String localtab = outertab;
 		// The printCountingMap contains a mapping from feature names to the number of
 		// remaining elements that still need to be printed. The map is initialized with
 		// the number of elements stored in each structural feature. For lists this is the
 		// list size. For non-multiple features it is either 1 (if the feature is set) or
 		// 0 (if the feature is null).
-		java.util.Map<java.lang.String, java.lang.Integer> printCountingMap = new java.util.LinkedHashMap<java.lang.String, java.lang.Integer>(4);
-		java.lang.Object temp;
+		java.util.Map<String, Integer> printCountingMap = new java.util.LinkedHashMap<String, Integer>(4);
+		Object temp;
 		temp = element.eGet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.ADDITIVE_OPERATION_CALL_EXP_CS__SOURCE));
 		printCountingMap.put("source", temp == null ? 0 : 1);
 		temp = element.eGet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.ADDITIVE_OPERATION_CALL_EXP_CS__IS_MARKED_PRE));
@@ -1872,7 +1880,7 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 			if (o != null) {
 				tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenResolver resolver = tokenResolverFactory.createTokenResolver("ADDITIVE_OPERATOR");
 				resolver.setOptions(getOptions());
-				out.print(resolver.deResolve((java.lang.Object) o, element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.ADDITIVE_OPERATION_CALL_EXP_CS__OPERATION_NAME), element));
+				out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.ADDITIVE_OPERATION_CALL_EXP_CS__OPERATION_NAME), element));
 				out.print(" ");
 			}
 			printCountingMap.put("operationName", count - 1);
@@ -1888,15 +1896,15 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 		}
 	}
 	
-	public void print_tudresden_ocl20_pivot_language_ocl_MultOperationCallExpCS(tudresden.ocl20.pivot.language.ocl.MultOperationCallExpCS element, java.lang.String outertab, java.io.PrintWriter out) {
-		java.lang.String localtab = outertab;
+	public void print_tudresden_ocl20_pivot_language_ocl_MultOperationCallExpCS(tudresden.ocl20.pivot.language.ocl.MultOperationCallExpCS element, String outertab, java.io.PrintWriter out) {
+		String localtab = outertab;
 		// The printCountingMap contains a mapping from feature names to the number of
 		// remaining elements that still need to be printed. The map is initialized with
 		// the number of elements stored in each structural feature. For lists this is the
 		// list size. For non-multiple features it is either 1 (if the feature is set) or
 		// 0 (if the feature is null).
-		java.util.Map<java.lang.String, java.lang.Integer> printCountingMap = new java.util.LinkedHashMap<java.lang.String, java.lang.Integer>(4);
-		java.lang.Object temp;
+		java.util.Map<String, Integer> printCountingMap = new java.util.LinkedHashMap<String, Integer>(4);
+		Object temp;
 		temp = element.eGet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.MULT_OPERATION_CALL_EXP_CS__SOURCE));
 		printCountingMap.put("source", temp == null ? 0 : 1);
 		temp = element.eGet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.MULT_OPERATION_CALL_EXP_CS__IS_MARKED_PRE));
@@ -1923,7 +1931,7 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 			if (o != null) {
 				tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenResolver resolver = tokenResolverFactory.createTokenResolver("MULT_OPERATOR");
 				resolver.setOptions(getOptions());
-				out.print(resolver.deResolve((java.lang.Object) o, element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.MULT_OPERATION_CALL_EXP_CS__OPERATION_NAME), element));
+				out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.MULT_OPERATION_CALL_EXP_CS__OPERATION_NAME), element));
 				out.print(" ");
 			}
 			printCountingMap.put("operationName", count - 1);
@@ -1939,15 +1947,15 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 		}
 	}
 	
-	public void print_tudresden_ocl20_pivot_language_ocl_UnaryOperationCallExpCS(tudresden.ocl20.pivot.language.ocl.UnaryOperationCallExpCS element, java.lang.String outertab, java.io.PrintWriter out) {
-		java.lang.String localtab = outertab;
+	public void print_tudresden_ocl20_pivot_language_ocl_UnaryOperationCallExpCS(tudresden.ocl20.pivot.language.ocl.UnaryOperationCallExpCS element, String outertab, java.io.PrintWriter out) {
+		String localtab = outertab;
 		// The printCountingMap contains a mapping from feature names to the number of
 		// remaining elements that still need to be printed. The map is initialized with
 		// the number of elements stored in each structural feature. For lists this is the
 		// list size. For non-multiple features it is either 1 (if the feature is set) or
 		// 0 (if the feature is null).
-		java.util.Map<java.lang.String, java.lang.Integer> printCountingMap = new java.util.LinkedHashMap<java.lang.String, java.lang.Integer>(2);
-		java.lang.Object temp;
+		java.util.Map<String, Integer> printCountingMap = new java.util.LinkedHashMap<String, Integer>(2);
+		Object temp;
 		temp = element.eGet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.UNARY_OPERATION_CALL_EXP_CS__OPERATION_NAME));
 		printCountingMap.put("operationName", temp == null ? 0 : 1);
 		temp = element.eGet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.UNARY_OPERATION_CALL_EXP_CS__TARGET));
@@ -1961,7 +1969,7 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 			if (o != null) {
 				tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenResolver resolver = tokenResolverFactory.createTokenResolver("ADDITIVE_OPERATOR");
 				resolver.setOptions(getOptions());
-				out.print(resolver.deResolve((java.lang.Object) o, element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.UNARY_OPERATION_CALL_EXP_CS__OPERATION_NAME), element));
+				out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.UNARY_OPERATION_CALL_EXP_CS__OPERATION_NAME), element));
 			}
 			printCountingMap.put("operationName", count - 1);
 		}
@@ -1977,15 +1985,15 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 		}
 	}
 	
-	public void print_tudresden_ocl20_pivot_language_ocl_LogicalNotOperationCallExpCS(tudresden.ocl20.pivot.language.ocl.LogicalNotOperationCallExpCS element, java.lang.String outertab, java.io.PrintWriter out) {
-		java.lang.String localtab = outertab;
+	public void print_tudresden_ocl20_pivot_language_ocl_LogicalNotOperationCallExpCS(tudresden.ocl20.pivot.language.ocl.LogicalNotOperationCallExpCS element, String outertab, java.io.PrintWriter out) {
+		String localtab = outertab;
 		// The printCountingMap contains a mapping from feature names to the number of
 		// remaining elements that still need to be printed. The map is initialized with
 		// the number of elements stored in each structural feature. For lists this is the
 		// list size. For non-multiple features it is either 1 (if the feature is set) or
 		// 0 (if the feature is null).
-		java.util.Map<java.lang.String, java.lang.Integer> printCountingMap = new java.util.LinkedHashMap<java.lang.String, java.lang.Integer>(2);
-		java.lang.Object temp;
+		java.util.Map<String, Integer> printCountingMap = new java.util.LinkedHashMap<String, Integer>(2);
+		Object temp;
 		temp = element.eGet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.LOGICAL_NOT_OPERATION_CALL_EXP_CS__OPERATION_NAME));
 		printCountingMap.put("operationName", temp == null ? 0 : 1);
 		temp = element.eGet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.LOGICAL_NOT_OPERATION_CALL_EXP_CS__TARGET));
@@ -1999,7 +2007,7 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 			if (o != null) {
 				tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenResolver resolver = tokenResolverFactory.createTokenResolver("NOT_OPERATOR");
 				resolver.setOptions(getOptions());
-				out.print(resolver.deResolve((java.lang.Object) o, element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.LOGICAL_NOT_OPERATION_CALL_EXP_CS__OPERATION_NAME), element));
+				out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.LOGICAL_NOT_OPERATION_CALL_EXP_CS__OPERATION_NAME), element));
 			}
 			printCountingMap.put("operationName", count - 1);
 		}
@@ -2015,15 +2023,15 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 		}
 	}
 	
-	public void print_tudresden_ocl20_pivot_language_ocl_NavigationCallExp(tudresden.ocl20.pivot.language.ocl.NavigationCallExp element, java.lang.String outertab, java.io.PrintWriter out) {
-		java.lang.String localtab = outertab;
+	public void print_tudresden_ocl20_pivot_language_ocl_NavigationCallExp(tudresden.ocl20.pivot.language.ocl.NavigationCallExp element, String outertab, java.io.PrintWriter out) {
+		String localtab = outertab;
 		// The printCountingMap contains a mapping from feature names to the number of
 		// remaining elements that still need to be printed. The map is initialized with
 		// the number of elements stored in each structural feature. For lists this is the
 		// list size. For non-multiple features it is either 1 (if the feature is set) or
 		// 0 (if the feature is null).
-		java.util.Map<java.lang.String, java.lang.Integer> printCountingMap = new java.util.LinkedHashMap<java.lang.String, java.lang.Integer>(3);
-		java.lang.Object temp;
+		java.util.Map<String, Integer> printCountingMap = new java.util.LinkedHashMap<String, Integer>(3);
+		Object temp;
 		temp = element.eGet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.NAVIGATION_CALL_EXP__SOURCE));
 		printCountingMap.put("source", temp == null ? 0 : 1);
 		temp = element.eGet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.NAVIGATION_CALL_EXP__NAVIGATION_OPERATOR));
@@ -2035,7 +2043,7 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 		boolean iterate = true;
 		java.io.StringWriter sWriter = null;
 		java.io.PrintWriter out1 = null;
-		java.util.Map<java.lang.String, java.lang.Integer> printCountingMap1 = null;
+		java.util.Map<String, Integer> printCountingMap1 = null;
 		// DEFINITION PART BEGINS (Containment)
 		count = printCountingMap.get("source");
 		if (count > 0) {
@@ -2060,7 +2068,7 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 			if (o != null) {
 				tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenResolver resolver = tokenResolverFactory.createTokenResolver("NAVIGATION_OPERATOR");
 				resolver.setOptions(getOptions());
-				out.print(resolver.deResolve((java.lang.Object) o, element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.NAVIGATION_CALL_EXP__NAVIGATION_OPERATOR), element));
+				out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.NAVIGATION_CALL_EXP__NAVIGATION_OPERATOR), element));
 			}
 			printCountingMap.put("navigationOperator", count - 1);
 		}
@@ -2086,7 +2094,7 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 		while (iterate) {
 			sWriter = new java.io.StringWriter();
 			out1 = new java.io.PrintWriter(sWriter);
-			printCountingMap1 = new java.util.LinkedHashMap<java.lang.String, java.lang.Integer>(printCountingMap);
+			printCountingMap1 = new java.util.LinkedHashMap<String, Integer>(printCountingMap);
 			print_tudresden_ocl20_pivot_language_ocl_NavigationCallExp_0(element, localtab, out1, printCountingMap1);
 			if (printCountingMap.equals(printCountingMap1)) {
 				iterate = false;
@@ -2099,8 +2107,8 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 			}
 		}
 	}
-	public void print_tudresden_ocl20_pivot_language_ocl_NavigationCallExp_0(tudresden.ocl20.pivot.language.ocl.NavigationCallExp element, java.lang.String outertab, java.io.PrintWriter out, java.util.Map<java.lang.String, java.lang.Integer> printCountingMap){
-		java.lang.String localtab = outertab;
+	public void print_tudresden_ocl20_pivot_language_ocl_NavigationCallExp_0(tudresden.ocl20.pivot.language.ocl.NavigationCallExp element, String outertab, java.io.PrintWriter out, java.util.Map<String, Integer> printCountingMap){
+		String localtab = outertab;
 		int count;
 		// DEFINITION PART BEGINS (WhiteSpaces)
 		// DEFINITION PART BEGINS (PlaceholderUsingSpecifiedToken)
@@ -2117,7 +2125,7 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 			if (o != null) {
 				tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenResolver resolver = tokenResolverFactory.createTokenResolver("NAVIGATION_OPERATOR");
 				resolver.setOptions(getOptions());
-				out.print(resolver.deResolve((java.lang.Object) o, element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.NAVIGATION_CALL_EXP__NAVIGATION_OPERATOR), element));
+				out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.NAVIGATION_CALL_EXP__NAVIGATION_OPERATOR), element));
 			}
 			printCountingMap.put("navigationOperator", count - 1);
 		}
@@ -2140,15 +2148,15 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 		}
 	}
 	
-	public void print_tudresden_ocl20_pivot_language_ocl_ImplicitOperationCallCS(tudresden.ocl20.pivot.language.ocl.ImplicitOperationCallCS element, java.lang.String outertab, java.io.PrintWriter out) {
-		java.lang.String localtab = outertab;
+	public void print_tudresden_ocl20_pivot_language_ocl_ImplicitOperationCallCS(tudresden.ocl20.pivot.language.ocl.ImplicitOperationCallCS element, String outertab, java.io.PrintWriter out) {
+		String localtab = outertab;
 		// The printCountingMap contains a mapping from feature names to the number of
 		// remaining elements that still need to be printed. The map is initialized with
 		// the number of elements stored in each structural feature. For lists this is the
 		// list size. For non-multiple features it is either 1 (if the feature is set) or
 		// 0 (if the feature is null).
-		java.util.Map<java.lang.String, java.lang.Integer> printCountingMap = new java.util.LinkedHashMap<java.lang.String, java.lang.Integer>(3);
-		java.lang.Object temp;
+		java.util.Map<String, Integer> printCountingMap = new java.util.LinkedHashMap<String, Integer>(3);
+		Object temp;
 		temp = element.eGet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.IMPLICIT_OPERATION_CALL_CS__OPERATION_NAME));
 		printCountingMap.put("operationName", temp == null ? 0 : 1);
 		temp = element.eGet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.IMPLICIT_OPERATION_CALL_CS__ARGUMENTS));
@@ -2158,7 +2166,7 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 		// print collected hidden tokens
 		java.io.StringWriter sWriter = null;
 		java.io.PrintWriter out1 = null;
-		java.util.Map<java.lang.String, java.lang.Integer> printCountingMap1 = null;
+		java.util.Map<String, Integer> printCountingMap1 = null;
 		// DEFINITION PART BEGINS (CompoundDefinition)
 		print_tudresden_ocl20_pivot_language_ocl_ImplicitOperationCallCS_0(element, localtab, out, printCountingMap);
 		// DEFINITION PART BEGINS (WhiteSpaces)
@@ -2168,7 +2176,7 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 		// DEFINITION PART BEGINS (CompoundDefinition)
 		sWriter = new java.io.StringWriter();
 		out1 = new java.io.PrintWriter(sWriter);
-		printCountingMap1 = new java.util.LinkedHashMap<java.lang.String, java.lang.Integer>(printCountingMap);
+		printCountingMap1 = new java.util.LinkedHashMap<String, Integer>(printCountingMap);
 		print_tudresden_ocl20_pivot_language_ocl_ImplicitOperationCallCS_1(element, localtab, out1, printCountingMap1);
 		if (printCountingMap.equals(printCountingMap1)) {
 			out1.close();
@@ -2183,7 +2191,7 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 		out.print(")");
 		out.print(" ");
 	}
-	public void print_tudresden_ocl20_pivot_language_ocl_ImplicitOperationCallCS_0(tudresden.ocl20.pivot.language.ocl.ImplicitOperationCallCS element, java.lang.String outertab, java.io.PrintWriter out, java.util.Map<java.lang.String, java.lang.Integer> printCountingMap){
+	public void print_tudresden_ocl20_pivot_language_ocl_ImplicitOperationCallCS_0(tudresden.ocl20.pivot.language.ocl.ImplicitOperationCallCS element, String outertab, java.io.PrintWriter out, java.util.Map<String, Integer> printCountingMap){
 		int count;
 		int alt = -1;
 		alt=0;
@@ -2344,13 +2352,13 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 			}
 		}
 	}
-	public void print_tudresden_ocl20_pivot_language_ocl_ImplicitOperationCallCS_1(tudresden.ocl20.pivot.language.ocl.ImplicitOperationCallCS element, java.lang.String outertab, java.io.PrintWriter out, java.util.Map<java.lang.String, java.lang.Integer> printCountingMap){
-		java.lang.String localtab = outertab;
+	public void print_tudresden_ocl20_pivot_language_ocl_ImplicitOperationCallCS_1(tudresden.ocl20.pivot.language.ocl.ImplicitOperationCallCS element, String outertab, java.io.PrintWriter out, java.util.Map<String, Integer> printCountingMap){
+		String localtab = outertab;
 		int count;
 		boolean iterate = true;
 		java.io.StringWriter sWriter = null;
 		java.io.PrintWriter out1 = null;
-		java.util.Map<java.lang.String, java.lang.Integer> printCountingMap1 = null;
+		java.util.Map<String, Integer> printCountingMap1 = null;
 		// DEFINITION PART BEGINS (WhiteSpaces)
 		// DEFINITION PART BEGINS (Containment)
 		count = printCountingMap.get("arguments");
@@ -2373,7 +2381,7 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 		while (iterate) {
 			sWriter = new java.io.StringWriter();
 			out1 = new java.io.PrintWriter(sWriter);
-			printCountingMap1 = new java.util.LinkedHashMap<java.lang.String, java.lang.Integer>(printCountingMap);
+			printCountingMap1 = new java.util.LinkedHashMap<String, Integer>(printCountingMap);
 			print_tudresden_ocl20_pivot_language_ocl_ImplicitOperationCallCS_1_0(element, localtab, out1, printCountingMap1);
 			if (printCountingMap.equals(printCountingMap1)) {
 				iterate = false;
@@ -2386,8 +2394,8 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 			}
 		}
 	}
-	public void print_tudresden_ocl20_pivot_language_ocl_ImplicitOperationCallCS_1_0(tudresden.ocl20.pivot.language.ocl.ImplicitOperationCallCS element, java.lang.String outertab, java.io.PrintWriter out, java.util.Map<java.lang.String, java.lang.Integer> printCountingMap){
-		java.lang.String localtab = outertab;
+	public void print_tudresden_ocl20_pivot_language_ocl_ImplicitOperationCallCS_1_0(tudresden.ocl20.pivot.language.ocl.ImplicitOperationCallCS element, String outertab, java.io.PrintWriter out, java.util.Map<String, Integer> printCountingMap){
+		String localtab = outertab;
 		int count;
 		// DEFINITION PART BEGINS (CsString)
 		out.print(",");
@@ -2410,15 +2418,15 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 		}
 	}
 	
-	public void print_tudresden_ocl20_pivot_language_ocl_ImplicitPropertyCallCS(tudresden.ocl20.pivot.language.ocl.ImplicitPropertyCallCS element, java.lang.String outertab, java.io.PrintWriter out) {
-		java.lang.String localtab = outertab;
+	public void print_tudresden_ocl20_pivot_language_ocl_ImplicitPropertyCallCS(tudresden.ocl20.pivot.language.ocl.ImplicitPropertyCallCS element, String outertab, java.io.PrintWriter out) {
+		String localtab = outertab;
 		// The printCountingMap contains a mapping from feature names to the number of
 		// remaining elements that still need to be printed. The map is initialized with
 		// the number of elements stored in each structural feature. For lists this is the
 		// list size. For non-multiple features it is either 1 (if the feature is set) or
 		// 0 (if the feature is null).
-		java.util.Map<java.lang.String, java.lang.Integer> printCountingMap = new java.util.LinkedHashMap<java.lang.String, java.lang.Integer>(2);
-		java.lang.Object temp;
+		java.util.Map<String, Integer> printCountingMap = new java.util.LinkedHashMap<String, Integer>(2);
+		Object temp;
 		temp = element.eGet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.IMPLICIT_PROPERTY_CALL_CS__PROPERTY));
 		printCountingMap.put("property", temp == null ? 0 : 1);
 		temp = element.eGet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.IMPLICIT_PROPERTY_CALL_CS__IS_MARKED_PRE));
@@ -2427,7 +2435,7 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 		int count;
 		java.io.StringWriter sWriter = null;
 		java.io.PrintWriter out1 = null;
-		java.util.Map<java.lang.String, java.lang.Integer> printCountingMap1 = null;
+		java.util.Map<String, Integer> printCountingMap1 = null;
 		// DEFINITION PART BEGINS (PlaceholderUsingSpecifiedToken)
 		count = printCountingMap.get("property");
 		if (count > 0) {
@@ -2443,7 +2451,7 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 		// DEFINITION PART BEGINS (CompoundDefinition)
 		sWriter = new java.io.StringWriter();
 		out1 = new java.io.PrintWriter(sWriter);
-		printCountingMap1 = new java.util.LinkedHashMap<java.lang.String, java.lang.Integer>(printCountingMap);
+		printCountingMap1 = new java.util.LinkedHashMap<String, Integer>(printCountingMap);
 		print_tudresden_ocl20_pivot_language_ocl_ImplicitPropertyCallCS_0(element, localtab, out1, printCountingMap1);
 		if (printCountingMap.equals(printCountingMap1)) {
 			out1.close();
@@ -2454,7 +2462,7 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 			printCountingMap.putAll(printCountingMap1);
 		}
 	}
-	public void print_tudresden_ocl20_pivot_language_ocl_ImplicitPropertyCallCS_0(tudresden.ocl20.pivot.language.ocl.ImplicitPropertyCallCS element, java.lang.String outertab, java.io.PrintWriter out, java.util.Map<java.lang.String, java.lang.Integer> printCountingMap){
+	public void print_tudresden_ocl20_pivot_language_ocl_ImplicitPropertyCallCS_0(tudresden.ocl20.pivot.language.ocl.ImplicitPropertyCallCS element, String outertab, java.io.PrintWriter out, java.util.Map<String, Integer> printCountingMap){
 		int count;
 		// DEFINITION PART BEGINS (WhiteSpaces)
 		// DEFINITION PART BEGINS (PlaceholderUsingSpecifiedToken)
@@ -2464,22 +2472,22 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 			if (o != null) {
 				tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenResolver resolver = tokenResolverFactory.createTokenResolver("IS_MARKED_PRE");
 				resolver.setOptions(getOptions());
-				out.print(resolver.deResolve((java.lang.Object) o, element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.IMPLICIT_PROPERTY_CALL_CS__IS_MARKED_PRE), element));
+				out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.IMPLICIT_PROPERTY_CALL_CS__IS_MARKED_PRE), element));
 				out.print(" ");
 			}
 			printCountingMap.put("isMarkedPre", count - 1);
 		}
 	}
 	
-	public void print_tudresden_ocl20_pivot_language_ocl_IteratorExpCS(tudresden.ocl20.pivot.language.ocl.IteratorExpCS element, java.lang.String outertab, java.io.PrintWriter out) {
-		java.lang.String localtab = outertab;
+	public void print_tudresden_ocl20_pivot_language_ocl_IteratorExpCS(tudresden.ocl20.pivot.language.ocl.IteratorExpCS element, String outertab, java.io.PrintWriter out) {
+		String localtab = outertab;
 		// The printCountingMap contains a mapping from feature names to the number of
 		// remaining elements that still need to be printed. The map is initialized with
 		// the number of elements stored in each structural feature. For lists this is the
 		// list size. For non-multiple features it is either 1 (if the feature is set) or
 		// 0 (if the feature is null).
-		java.util.Map<java.lang.String, java.lang.Integer> printCountingMap = new java.util.LinkedHashMap<java.lang.String, java.lang.Integer>(3);
-		java.lang.Object temp;
+		java.util.Map<String, Integer> printCountingMap = new java.util.LinkedHashMap<String, Integer>(3);
+		Object temp;
 		temp = element.eGet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.ITERATOR_EXP_CS__ITERATOR_NAME));
 		printCountingMap.put("iteratorName", temp == null ? 0 : 1);
 		temp = element.eGet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.ITERATOR_EXP_CS__ITERATOR_VARIABLES));
@@ -2490,7 +2498,7 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 		int count;
 		java.io.StringWriter sWriter = null;
 		java.io.PrintWriter out1 = null;
-		java.util.Map<java.lang.String, java.lang.Integer> printCountingMap1 = null;
+		java.util.Map<String, Integer> printCountingMap1 = null;
 		// DEFINITION PART BEGINS (PlaceholderUsingSpecifiedToken)
 		count = printCountingMap.get("iteratorName");
 		if (count > 0) {
@@ -2498,7 +2506,7 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 			if (o != null) {
 				tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenResolver resolver = tokenResolverFactory.createTokenResolver("ITERATOR_NAME");
 				resolver.setOptions(getOptions());
-				out.print(resolver.deResolve((java.lang.Object) o, element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.ITERATOR_EXP_CS__ITERATOR_NAME), element));
+				out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.ITERATOR_EXP_CS__ITERATOR_NAME), element));
 			}
 			printCountingMap.put("iteratorName", count - 1);
 		}
@@ -2509,7 +2517,7 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 		// DEFINITION PART BEGINS (CompoundDefinition)
 		sWriter = new java.io.StringWriter();
 		out1 = new java.io.PrintWriter(sWriter);
-		printCountingMap1 = new java.util.LinkedHashMap<java.lang.String, java.lang.Integer>(printCountingMap);
+		printCountingMap1 = new java.util.LinkedHashMap<String, Integer>(printCountingMap);
 		print_tudresden_ocl20_pivot_language_ocl_IteratorExpCS_0(element, localtab, out1, printCountingMap1);
 		if (printCountingMap.equals(printCountingMap1)) {
 			out1.close();
@@ -2539,12 +2547,12 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 		out.print(")");
 		out.print(" ");
 	}
-	public void print_tudresden_ocl20_pivot_language_ocl_IteratorExpCS_0(tudresden.ocl20.pivot.language.ocl.IteratorExpCS element, java.lang.String outertab, java.io.PrintWriter out, java.util.Map<java.lang.String, java.lang.Integer> printCountingMap){
-		java.lang.String localtab = outertab;
+	public void print_tudresden_ocl20_pivot_language_ocl_IteratorExpCS_0(tudresden.ocl20.pivot.language.ocl.IteratorExpCS element, String outertab, java.io.PrintWriter out, java.util.Map<String, Integer> printCountingMap){
+		String localtab = outertab;
 		int count;
 		java.io.StringWriter sWriter = null;
 		java.io.PrintWriter out1 = null;
-		java.util.Map<java.lang.String, java.lang.Integer> printCountingMap1 = null;
+		java.util.Map<String, Integer> printCountingMap1 = null;
 		// DEFINITION PART BEGINS (WhiteSpaces)
 		// DEFINITION PART BEGINS (Containment)
 		count = printCountingMap.get("iteratorVariables");
@@ -2565,7 +2573,7 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 		// DEFINITION PART BEGINS (CompoundDefinition)
 		sWriter = new java.io.StringWriter();
 		out1 = new java.io.PrintWriter(sWriter);
-		printCountingMap1 = new java.util.LinkedHashMap<java.lang.String, java.lang.Integer>(printCountingMap);
+		printCountingMap1 = new java.util.LinkedHashMap<String, Integer>(printCountingMap);
 		print_tudresden_ocl20_pivot_language_ocl_IteratorExpCS_0_0(element, localtab, out1, printCountingMap1);
 		if (printCountingMap.equals(printCountingMap1)) {
 			out1.close();
@@ -2579,8 +2587,8 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 		out.print("|");
 		out.print(" ");
 	}
-	public void print_tudresden_ocl20_pivot_language_ocl_IteratorExpCS_0_0(tudresden.ocl20.pivot.language.ocl.IteratorExpCS element, java.lang.String outertab, java.io.PrintWriter out, java.util.Map<java.lang.String, java.lang.Integer> printCountingMap){
-		java.lang.String localtab = outertab;
+	public void print_tudresden_ocl20_pivot_language_ocl_IteratorExpCS_0_0(tudresden.ocl20.pivot.language.ocl.IteratorExpCS element, String outertab, java.io.PrintWriter out, java.util.Map<String, Integer> printCountingMap){
+		String localtab = outertab;
 		int count;
 		// DEFINITION PART BEGINS (WhiteSpaces)
 		// DEFINITION PART BEGINS (CsString)
@@ -2604,15 +2612,15 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 		}
 	}
 	
-	public void print_tudresden_ocl20_pivot_language_ocl_IterateExpCS(tudresden.ocl20.pivot.language.ocl.IterateExpCS element, java.lang.String outertab, java.io.PrintWriter out) {
-		java.lang.String localtab = outertab;
+	public void print_tudresden_ocl20_pivot_language_ocl_IterateExpCS(tudresden.ocl20.pivot.language.ocl.IterateExpCS element, String outertab, java.io.PrintWriter out) {
+		String localtab = outertab;
 		// The printCountingMap contains a mapping from feature names to the number of
 		// remaining elements that still need to be printed. The map is initialized with
 		// the number of elements stored in each structural feature. For lists this is the
 		// list size. For non-multiple features it is either 1 (if the feature is set) or
 		// 0 (if the feature is null).
-		java.util.Map<java.lang.String, java.lang.Integer> printCountingMap = new java.util.LinkedHashMap<java.lang.String, java.lang.Integer>(3);
-		java.lang.Object temp;
+		java.util.Map<String, Integer> printCountingMap = new java.util.LinkedHashMap<String, Integer>(3);
+		Object temp;
 		temp = element.eGet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.ITERATE_EXP_CS__ITERATOR_VARIABLE));
 		printCountingMap.put("iteratorVariable", temp == null ? 0 : 1);
 		temp = element.eGet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.ITERATE_EXP_CS__RESULT_VARIABLE));
@@ -2624,7 +2632,7 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 		boolean iterate = true;
 		java.io.StringWriter sWriter = null;
 		java.io.PrintWriter out1 = null;
-		java.util.Map<java.lang.String, java.lang.Integer> printCountingMap1 = null;
+		java.util.Map<String, Integer> printCountingMap1 = null;
 		// DEFINITION PART BEGINS (CsString)
 		out.print("iterate");
 		// DEFINITION PART BEGINS (WhiteSpaces)
@@ -2634,7 +2642,7 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 		// DEFINITION PART BEGINS (CompoundDefinition)
 		sWriter = new java.io.StringWriter();
 		out1 = new java.io.PrintWriter(sWriter);
-		printCountingMap1 = new java.util.LinkedHashMap<java.lang.String, java.lang.Integer>(printCountingMap);
+		printCountingMap1 = new java.util.LinkedHashMap<String, Integer>(printCountingMap);
 		print_tudresden_ocl20_pivot_language_ocl_IterateExpCS_0(element, localtab, out1, printCountingMap1);
 		if (printCountingMap.equals(printCountingMap1)) {
 			out1.close();
@@ -2670,8 +2678,8 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 		out.print(")");
 		out.print(" ");
 	}
-	public void print_tudresden_ocl20_pivot_language_ocl_IterateExpCS_0(tudresden.ocl20.pivot.language.ocl.IterateExpCS element, java.lang.String outertab, java.io.PrintWriter out, java.util.Map<java.lang.String, java.lang.Integer> printCountingMap){
-		java.lang.String localtab = outertab;
+	public void print_tudresden_ocl20_pivot_language_ocl_IterateExpCS_0(tudresden.ocl20.pivot.language.ocl.IterateExpCS element, String outertab, java.io.PrintWriter out, java.util.Map<String, Integer> printCountingMap){
+		String localtab = outertab;
 		int count;
 		// DEFINITION PART BEGINS (Containment)
 		count = printCountingMap.get("iteratorVariable");
@@ -2688,15 +2696,15 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 		out.print(" ");
 	}
 	
-	public void print_tudresden_ocl20_pivot_language_ocl_IteratorExpVariableCS(tudresden.ocl20.pivot.language.ocl.IteratorExpVariableCS element, java.lang.String outertab, java.io.PrintWriter out) {
-		java.lang.String localtab = outertab;
+	public void print_tudresden_ocl20_pivot_language_ocl_IteratorExpVariableCS(tudresden.ocl20.pivot.language.ocl.IteratorExpVariableCS element, String outertab, java.io.PrintWriter out) {
+		String localtab = outertab;
 		// The printCountingMap contains a mapping from feature names to the number of
 		// remaining elements that still need to be printed. The map is initialized with
 		// the number of elements stored in each structural feature. For lists this is the
 		// list size. For non-multiple features it is either 1 (if the feature is set) or
 		// 0 (if the feature is null).
-		java.util.Map<java.lang.String, java.lang.Integer> printCountingMap = new java.util.LinkedHashMap<java.lang.String, java.lang.Integer>(2);
-		java.lang.Object temp;
+		java.util.Map<String, Integer> printCountingMap = new java.util.LinkedHashMap<String, Integer>(2);
+		Object temp;
 		temp = element.eGet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.ITERATOR_EXP_VARIABLE_CS__VARIABLE_NAME));
 		printCountingMap.put("variableName", temp == null ? 0 : 1);
 		temp = element.eGet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.ITERATOR_EXP_VARIABLE_CS__TYPE_NAME));
@@ -2705,7 +2713,7 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 		int count;
 		java.io.StringWriter sWriter = null;
 		java.io.PrintWriter out1 = null;
-		java.util.Map<java.lang.String, java.lang.Integer> printCountingMap1 = null;
+		java.util.Map<String, Integer> printCountingMap1 = null;
 		// DEFINITION PART BEGINS (Containment)
 		count = printCountingMap.get("variableName");
 		if (count > 0) {
@@ -2718,7 +2726,7 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 		// DEFINITION PART BEGINS (CompoundDefinition)
 		sWriter = new java.io.StringWriter();
 		out1 = new java.io.PrintWriter(sWriter);
-		printCountingMap1 = new java.util.LinkedHashMap<java.lang.String, java.lang.Integer>(printCountingMap);
+		printCountingMap1 = new java.util.LinkedHashMap<String, Integer>(printCountingMap);
 		print_tudresden_ocl20_pivot_language_ocl_IteratorExpVariableCS_0(element, localtab, out1, printCountingMap1);
 		if (printCountingMap.equals(printCountingMap1)) {
 			out1.close();
@@ -2729,8 +2737,8 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 			printCountingMap.putAll(printCountingMap1);
 		}
 	}
-	public void print_tudresden_ocl20_pivot_language_ocl_IteratorExpVariableCS_0(tudresden.ocl20.pivot.language.ocl.IteratorExpVariableCS element, java.lang.String outertab, java.io.PrintWriter out, java.util.Map<java.lang.String, java.lang.Integer> printCountingMap){
-		java.lang.String localtab = outertab;
+	public void print_tudresden_ocl20_pivot_language_ocl_IteratorExpVariableCS_0(tudresden.ocl20.pivot.language.ocl.IteratorExpVariableCS element, String outertab, java.io.PrintWriter out, java.util.Map<String, Integer> printCountingMap){
+		String localtab = outertab;
 		int count;
 		// DEFINITION PART BEGINS (CsString)
 		out.print(":");
@@ -2746,14 +2754,14 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 		}
 	}
 	
-	public void print_tudresden_ocl20_pivot_language_ocl_TypePathNameSimpleCS(tudresden.ocl20.pivot.language.ocl.TypePathNameSimpleCS element, java.lang.String outertab, java.io.PrintWriter out) {
+	public void print_tudresden_ocl20_pivot_language_ocl_TypePathNameSimpleCS(tudresden.ocl20.pivot.language.ocl.TypePathNameSimpleCS element, String outertab, java.io.PrintWriter out) {
 		// The printCountingMap contains a mapping from feature names to the number of
 		// remaining elements that still need to be printed. The map is initialized with
 		// the number of elements stored in each structural feature. For lists this is the
 		// list size. For non-multiple features it is either 1 (if the feature is set) or
 		// 0 (if the feature is null).
-		java.util.Map<java.lang.String, java.lang.Integer> printCountingMap = new java.util.LinkedHashMap<java.lang.String, java.lang.Integer>(1);
-		java.lang.Object temp;
+		java.util.Map<String, Integer> printCountingMap = new java.util.LinkedHashMap<String, Integer>(1);
+		Object temp;
 		temp = element.eGet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.TYPE_PATH_NAME_SIMPLE_CS__TYPE_NAME));
 		printCountingMap.put("typeName", temp == null ? 0 : 1);
 		// print collected hidden tokens
@@ -2772,15 +2780,15 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 		}
 	}
 	
-	public void print_tudresden_ocl20_pivot_language_ocl_TypePathNameNestedCS(tudresden.ocl20.pivot.language.ocl.TypePathNameNestedCS element, java.lang.String outertab, java.io.PrintWriter out) {
-		java.lang.String localtab = outertab;
+	public void print_tudresden_ocl20_pivot_language_ocl_TypePathNameNestedCS(tudresden.ocl20.pivot.language.ocl.TypePathNameNestedCS element, String outertab, java.io.PrintWriter out) {
+		String localtab = outertab;
 		// The printCountingMap contains a mapping from feature names to the number of
 		// remaining elements that still need to be printed. The map is initialized with
 		// the number of elements stored in each structural feature. For lists this is the
 		// list size. For non-multiple features it is either 1 (if the feature is set) or
 		// 0 (if the feature is null).
-		java.util.Map<java.lang.String, java.lang.Integer> printCountingMap = new java.util.LinkedHashMap<java.lang.String, java.lang.Integer>(2);
-		java.lang.Object temp;
+		java.util.Map<String, Integer> printCountingMap = new java.util.LinkedHashMap<String, Integer>(2);
+		Object temp;
 		temp = element.eGet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.TYPE_PATH_NAME_NESTED_CS__NAMESPACE));
 		printCountingMap.put("namespace", temp == null ? 0 : 1);
 		temp = element.eGet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.TYPE_PATH_NAME_NESTED_CS__TYPE_PATH_NAME));
@@ -2813,15 +2821,15 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 		}
 	}
 	
-	public void print_tudresden_ocl20_pivot_language_ocl_TupleTypeCS(tudresden.ocl20.pivot.language.ocl.TupleTypeCS element, java.lang.String outertab, java.io.PrintWriter out) {
-		java.lang.String localtab = outertab;
+	public void print_tudresden_ocl20_pivot_language_ocl_TupleTypeCS(tudresden.ocl20.pivot.language.ocl.TupleTypeCS element, String outertab, java.io.PrintWriter out) {
+		String localtab = outertab;
 		// The printCountingMap contains a mapping from feature names to the number of
 		// remaining elements that still need to be printed. The map is initialized with
 		// the number of elements stored in each structural feature. For lists this is the
 		// list size. For non-multiple features it is either 1 (if the feature is set) or
 		// 0 (if the feature is null).
-		java.util.Map<java.lang.String, java.lang.Integer> printCountingMap = new java.util.LinkedHashMap<java.lang.String, java.lang.Integer>(1);
-		java.lang.Object temp;
+		java.util.Map<String, Integer> printCountingMap = new java.util.LinkedHashMap<String, Integer>(1);
+		Object temp;
 		temp = element.eGet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.TUPLE_TYPE_CS__VARIABLE_DECLARATION_LIST));
 		printCountingMap.put("variableDeclarationList", temp == null ? 0 : 1);
 		// print collected hidden tokens
@@ -2847,15 +2855,15 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 		out.print(" ");
 	}
 	
-	public void print_tudresden_ocl20_pivot_language_ocl_CollectionTypeIdentifierCS(tudresden.ocl20.pivot.language.ocl.CollectionTypeIdentifierCS element, java.lang.String outertab, java.io.PrintWriter out) {
-		java.lang.String localtab = outertab;
+	public void print_tudresden_ocl20_pivot_language_ocl_CollectionTypeIdentifierCS(tudresden.ocl20.pivot.language.ocl.CollectionTypeIdentifierCS element, String outertab, java.io.PrintWriter out) {
+		String localtab = outertab;
 		// The printCountingMap contains a mapping from feature names to the number of
 		// remaining elements that still need to be printed. The map is initialized with
 		// the number of elements stored in each structural feature. For lists this is the
 		// list size. For non-multiple features it is either 1 (if the feature is set) or
 		// 0 (if the feature is null).
-		java.util.Map<java.lang.String, java.lang.Integer> printCountingMap = new java.util.LinkedHashMap<java.lang.String, java.lang.Integer>(2);
-		java.lang.Object temp;
+		java.util.Map<String, Integer> printCountingMap = new java.util.LinkedHashMap<String, Integer>(2);
+		Object temp;
 		temp = element.eGet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.COLLECTION_TYPE_IDENTIFIER_CS__TYPE_NAME));
 		printCountingMap.put("typeName", temp == null ? 0 : 1);
 		temp = element.eGet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.COLLECTION_TYPE_IDENTIFIER_CS__GENERIC_TYPE));
@@ -2864,7 +2872,7 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 		int count;
 		java.io.StringWriter sWriter = null;
 		java.io.PrintWriter out1 = null;
-		java.util.Map<java.lang.String, java.lang.Integer> printCountingMap1 = null;
+		java.util.Map<String, Integer> printCountingMap1 = null;
 		// DEFINITION PART BEGINS (PlaceholderUsingSpecifiedToken)
 		count = printCountingMap.get("typeName");
 		if (count > 0) {
@@ -2880,7 +2888,7 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 		// DEFINITION PART BEGINS (CompoundDefinition)
 		sWriter = new java.io.StringWriter();
 		out1 = new java.io.PrintWriter(sWriter);
-		printCountingMap1 = new java.util.LinkedHashMap<java.lang.String, java.lang.Integer>(printCountingMap);
+		printCountingMap1 = new java.util.LinkedHashMap<String, Integer>(printCountingMap);
 		print_tudresden_ocl20_pivot_language_ocl_CollectionTypeIdentifierCS_0(element, localtab, out1, printCountingMap1);
 		if (printCountingMap.equals(printCountingMap1)) {
 			out1.close();
@@ -2891,8 +2899,8 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 			printCountingMap.putAll(printCountingMap1);
 		}
 	}
-	public void print_tudresden_ocl20_pivot_language_ocl_CollectionTypeIdentifierCS_0(tudresden.ocl20.pivot.language.ocl.CollectionTypeIdentifierCS element, java.lang.String outertab, java.io.PrintWriter out, java.util.Map<java.lang.String, java.lang.Integer> printCountingMap){
-		java.lang.String localtab = outertab;
+	public void print_tudresden_ocl20_pivot_language_ocl_CollectionTypeIdentifierCS_0(tudresden.ocl20.pivot.language.ocl.CollectionTypeIdentifierCS element, String outertab, java.io.PrintWriter out, java.util.Map<String, Integer> printCountingMap){
+		String localtab = outertab;
 		int count;
 		// DEFINITION PART BEGINS (WhiteSpaces)
 		// DEFINITION PART BEGINS (CsString)
@@ -2913,15 +2921,15 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 		out.print(" ");
 	}
 	
-	public void print_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithoutInitCS(tudresden.ocl20.pivot.language.ocl.VariableDeclarationWithoutInitCS element, java.lang.String outertab, java.io.PrintWriter out) {
-		java.lang.String localtab = outertab;
+	public void print_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithoutInitCS(tudresden.ocl20.pivot.language.ocl.VariableDeclarationWithoutInitCS element, String outertab, java.io.PrintWriter out) {
+		String localtab = outertab;
 		// The printCountingMap contains a mapping from feature names to the number of
 		// remaining elements that still need to be printed. The map is initialized with
 		// the number of elements stored in each structural feature. For lists this is the
 		// list size. For non-multiple features it is either 1 (if the feature is set) or
 		// 0 (if the feature is null).
-		java.util.Map<java.lang.String, java.lang.Integer> printCountingMap = new java.util.LinkedHashMap<java.lang.String, java.lang.Integer>(2);
-		java.lang.Object temp;
+		java.util.Map<String, Integer> printCountingMap = new java.util.LinkedHashMap<String, Integer>(2);
+		Object temp;
 		temp = element.eGet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.VARIABLE_DECLARATION_WITHOUT_INIT_CS__VARIABLE_NAME));
 		printCountingMap.put("variableName", temp == null ? 0 : 1);
 		temp = element.eGet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.VARIABLE_DECLARATION_WITHOUT_INIT_CS__TYPE_NAME));
@@ -2951,15 +2959,15 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 		}
 	}
 	
-	public void print_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithoutInitListCS(tudresden.ocl20.pivot.language.ocl.VariableDeclarationWithoutInitListCS element, java.lang.String outertab, java.io.PrintWriter out) {
-		java.lang.String localtab = outertab;
+	public void print_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithoutInitListCS(tudresden.ocl20.pivot.language.ocl.VariableDeclarationWithoutInitListCS element, String outertab, java.io.PrintWriter out) {
+		String localtab = outertab;
 		// The printCountingMap contains a mapping from feature names to the number of
 		// remaining elements that still need to be printed. The map is initialized with
 		// the number of elements stored in each structural feature. For lists this is the
 		// list size. For non-multiple features it is either 1 (if the feature is set) or
 		// 0 (if the feature is null).
-		java.util.Map<java.lang.String, java.lang.Integer> printCountingMap = new java.util.LinkedHashMap<java.lang.String, java.lang.Integer>(1);
-		java.lang.Object temp;
+		java.util.Map<String, Integer> printCountingMap = new java.util.LinkedHashMap<String, Integer>(1);
+		Object temp;
 		temp = element.eGet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.VARIABLE_DECLARATION_WITHOUT_INIT_LIST_CS__VARIABLE_DECLARATIONS));
 		printCountingMap.put("variableDeclarations", temp == null ? 0 : ((java.util.Collection<?>) temp).size());
 		// print collected hidden tokens
@@ -2967,7 +2975,7 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 		boolean iterate = true;
 		java.io.StringWriter sWriter = null;
 		java.io.PrintWriter out1 = null;
-		java.util.Map<java.lang.String, java.lang.Integer> printCountingMap1 = null;
+		java.util.Map<String, Integer> printCountingMap1 = null;
 		// DEFINITION PART BEGINS (Containment)
 		count = printCountingMap.get("variableDeclarations");
 		if (count > 0) {
@@ -2989,7 +2997,7 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 		while (iterate) {
 			sWriter = new java.io.StringWriter();
 			out1 = new java.io.PrintWriter(sWriter);
-			printCountingMap1 = new java.util.LinkedHashMap<java.lang.String, java.lang.Integer>(printCountingMap);
+			printCountingMap1 = new java.util.LinkedHashMap<String, Integer>(printCountingMap);
 			print_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithoutInitListCS_0(element, localtab, out1, printCountingMap1);
 			if (printCountingMap.equals(printCountingMap1)) {
 				iterate = false;
@@ -3002,8 +3010,8 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 			}
 		}
 	}
-	public void print_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithoutInitListCS_0(tudresden.ocl20.pivot.language.ocl.VariableDeclarationWithoutInitListCS element, java.lang.String outertab, java.io.PrintWriter out, java.util.Map<java.lang.String, java.lang.Integer> printCountingMap){
-		java.lang.String localtab = outertab;
+	public void print_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithoutInitListCS_0(tudresden.ocl20.pivot.language.ocl.VariableDeclarationWithoutInitListCS element, String outertab, java.io.PrintWriter out, java.util.Map<String, Integer> printCountingMap){
+		String localtab = outertab;
 		int count;
 		// DEFINITION PART BEGINS (WhiteSpaces)
 		// DEFINITION PART BEGINS (CsString)
@@ -3027,15 +3035,15 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 		}
 	}
 	
-	public void print_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithInitCS(tudresden.ocl20.pivot.language.ocl.VariableDeclarationWithInitCS element, java.lang.String outertab, java.io.PrintWriter out) {
-		java.lang.String localtab = outertab;
+	public void print_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithInitCS(tudresden.ocl20.pivot.language.ocl.VariableDeclarationWithInitCS element, String outertab, java.io.PrintWriter out) {
+		String localtab = outertab;
 		// The printCountingMap contains a mapping from feature names to the number of
 		// remaining elements that still need to be printed. The map is initialized with
 		// the number of elements stored in each structural feature. For lists this is the
 		// list size. For non-multiple features it is either 1 (if the feature is set) or
 		// 0 (if the feature is null).
-		java.util.Map<java.lang.String, java.lang.Integer> printCountingMap = new java.util.LinkedHashMap<java.lang.String, java.lang.Integer>(4);
-		java.lang.Object temp;
+		java.util.Map<String, Integer> printCountingMap = new java.util.LinkedHashMap<String, Integer>(4);
+		Object temp;
 		temp = element.eGet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.VARIABLE_DECLARATION_WITH_INIT_CS__VARIABLE_NAME));
 		printCountingMap.put("variableName", temp == null ? 0 : 1);
 		temp = element.eGet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.VARIABLE_DECLARATION_WITH_INIT_CS__TYPE_NAME));
@@ -3048,7 +3056,7 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 		int count;
 		java.io.StringWriter sWriter = null;
 		java.io.PrintWriter out1 = null;
-		java.util.Map<java.lang.String, java.lang.Integer> printCountingMap1 = null;
+		java.util.Map<String, Integer> printCountingMap1 = null;
 		// DEFINITION PART BEGINS (Containment)
 		count = printCountingMap.get("variableName");
 		if (count > 0) {
@@ -3061,7 +3069,7 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 		// DEFINITION PART BEGINS (CompoundDefinition)
 		sWriter = new java.io.StringWriter();
 		out1 = new java.io.PrintWriter(sWriter);
-		printCountingMap1 = new java.util.LinkedHashMap<java.lang.String, java.lang.Integer>(printCountingMap);
+		printCountingMap1 = new java.util.LinkedHashMap<String, Integer>(printCountingMap);
 		print_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithInitCS_0(element, localtab, out1, printCountingMap1);
 		if (printCountingMap.equals(printCountingMap1)) {
 			out1.close();
@@ -3078,7 +3086,7 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 			if (o != null) {
 				tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenResolver resolver = tokenResolverFactory.createTokenResolver("EQUALITY_OPERATOR");
 				resolver.setOptions(getOptions());
-				out.print(resolver.deResolve((java.lang.Object) o, element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.VARIABLE_DECLARATION_WITH_INIT_CS__EQUAL), element));
+				out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.VARIABLE_DECLARATION_WITH_INIT_CS__EQUAL), element));
 				out.print(" ");
 			}
 			printCountingMap.put("equal", count - 1);
@@ -3093,8 +3101,8 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 			printCountingMap.put("initialization", count - 1);
 		}
 	}
-	public void print_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithInitCS_0(tudresden.ocl20.pivot.language.ocl.VariableDeclarationWithInitCS element, java.lang.String outertab, java.io.PrintWriter out, java.util.Map<java.lang.String, java.lang.Integer> printCountingMap){
-		java.lang.String localtab = outertab;
+	public void print_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithInitCS_0(tudresden.ocl20.pivot.language.ocl.VariableDeclarationWithInitCS element, String outertab, java.io.PrintWriter out, java.util.Map<String, Integer> printCountingMap){
+		String localtab = outertab;
 		int count;
 		// DEFINITION PART BEGINS (CsString)
 		out.print(":");
@@ -3110,15 +3118,15 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 		}
 	}
 	
-	public void print_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithInitListCS(tudresden.ocl20.pivot.language.ocl.VariableDeclarationWithInitListCS element, java.lang.String outertab, java.io.PrintWriter out) {
-		java.lang.String localtab = outertab;
+	public void print_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithInitListCS(tudresden.ocl20.pivot.language.ocl.VariableDeclarationWithInitListCS element, String outertab, java.io.PrintWriter out) {
+		String localtab = outertab;
 		// The printCountingMap contains a mapping from feature names to the number of
 		// remaining elements that still need to be printed. The map is initialized with
 		// the number of elements stored in each structural feature. For lists this is the
 		// list size. For non-multiple features it is either 1 (if the feature is set) or
 		// 0 (if the feature is null).
-		java.util.Map<java.lang.String, java.lang.Integer> printCountingMap = new java.util.LinkedHashMap<java.lang.String, java.lang.Integer>(1);
-		java.lang.Object temp;
+		java.util.Map<String, Integer> printCountingMap = new java.util.LinkedHashMap<String, Integer>(1);
+		Object temp;
 		temp = element.eGet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.VARIABLE_DECLARATION_WITH_INIT_LIST_CS__VARIABLE_DECLARATIONS));
 		printCountingMap.put("variableDeclarations", temp == null ? 0 : ((java.util.Collection<?>) temp).size());
 		// print collected hidden tokens
@@ -3126,7 +3134,7 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 		boolean iterate = true;
 		java.io.StringWriter sWriter = null;
 		java.io.PrintWriter out1 = null;
-		java.util.Map<java.lang.String, java.lang.Integer> printCountingMap1 = null;
+		java.util.Map<String, Integer> printCountingMap1 = null;
 		// DEFINITION PART BEGINS (Containment)
 		count = printCountingMap.get("variableDeclarations");
 		if (count > 0) {
@@ -3148,7 +3156,7 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 		while (iterate) {
 			sWriter = new java.io.StringWriter();
 			out1 = new java.io.PrintWriter(sWriter);
-			printCountingMap1 = new java.util.LinkedHashMap<java.lang.String, java.lang.Integer>(printCountingMap);
+			printCountingMap1 = new java.util.LinkedHashMap<String, Integer>(printCountingMap);
 			print_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithInitListCS_0(element, localtab, out1, printCountingMap1);
 			if (printCountingMap.equals(printCountingMap1)) {
 				iterate = false;
@@ -3161,8 +3169,8 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 			}
 		}
 	}
-	public void print_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithInitListCS_0(tudresden.ocl20.pivot.language.ocl.VariableDeclarationWithInitListCS element, java.lang.String outertab, java.io.PrintWriter out, java.util.Map<java.lang.String, java.lang.Integer> printCountingMap){
-		java.lang.String localtab = outertab;
+	public void print_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithInitListCS_0(tudresden.ocl20.pivot.language.ocl.VariableDeclarationWithInitListCS element, String outertab, java.io.PrintWriter out, java.util.Map<String, Integer> printCountingMap){
+		String localtab = outertab;
 		int count;
 		// DEFINITION PART BEGINS (WhiteSpaces)
 		// DEFINITION PART BEGINS (CsString)
@@ -3186,15 +3194,15 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 		}
 	}
 	
-	public void print_tudresden_ocl20_pivot_language_ocl_OperationCallOnSelfExpCS(tudresden.ocl20.pivot.language.ocl.OperationCallOnSelfExpCS element, java.lang.String outertab, java.io.PrintWriter out) {
-		java.lang.String localtab = outertab;
+	public void print_tudresden_ocl20_pivot_language_ocl_OperationCallOnSelfExpCS(tudresden.ocl20.pivot.language.ocl.OperationCallOnSelfExpCS element, String outertab, java.io.PrintWriter out) {
+		String localtab = outertab;
 		// The printCountingMap contains a mapping from feature names to the number of
 		// remaining elements that still need to be printed. The map is initialized with
 		// the number of elements stored in each structural feature. For lists this is the
 		// list size. For non-multiple features it is either 1 (if the feature is set) or
 		// 0 (if the feature is null).
-		java.util.Map<java.lang.String, java.lang.Integer> printCountingMap = new java.util.LinkedHashMap<java.lang.String, java.lang.Integer>(3);
-		java.lang.Object temp;
+		java.util.Map<String, Integer> printCountingMap = new java.util.LinkedHashMap<String, Integer>(3);
+		Object temp;
 		temp = element.eGet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.OPERATION_CALL_ON_SELF_EXP_CS__OPERATION_NAME));
 		printCountingMap.put("operationName", temp == null ? 0 : 1);
 		temp = element.eGet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.OPERATION_CALL_ON_SELF_EXP_CS__ARGUMENTS));
@@ -3204,14 +3212,14 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 		// print collected hidden tokens
 		java.io.StringWriter sWriter = null;
 		java.io.PrintWriter out1 = null;
-		java.util.Map<java.lang.String, java.lang.Integer> printCountingMap1 = null;
+		java.util.Map<String, Integer> printCountingMap1 = null;
 		// DEFINITION PART BEGINS (CompoundDefinition)
 		print_tudresden_ocl20_pivot_language_ocl_OperationCallOnSelfExpCS_0(element, localtab, out, printCountingMap);
 		// DEFINITION PART BEGINS (WhiteSpaces)
 		// DEFINITION PART BEGINS (CompoundDefinition)
 		sWriter = new java.io.StringWriter();
 		out1 = new java.io.PrintWriter(sWriter);
-		printCountingMap1 = new java.util.LinkedHashMap<java.lang.String, java.lang.Integer>(printCountingMap);
+		printCountingMap1 = new java.util.LinkedHashMap<String, Integer>(printCountingMap);
 		print_tudresden_ocl20_pivot_language_ocl_OperationCallOnSelfExpCS_1(element, localtab, out1, printCountingMap1);
 		if (printCountingMap.equals(printCountingMap1)) {
 			out1.close();
@@ -3227,7 +3235,7 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 		// DEFINITION PART BEGINS (CompoundDefinition)
 		sWriter = new java.io.StringWriter();
 		out1 = new java.io.PrintWriter(sWriter);
-		printCountingMap1 = new java.util.LinkedHashMap<java.lang.String, java.lang.Integer>(printCountingMap);
+		printCountingMap1 = new java.util.LinkedHashMap<String, Integer>(printCountingMap);
 		print_tudresden_ocl20_pivot_language_ocl_OperationCallOnSelfExpCS_2(element, localtab, out1, printCountingMap1);
 		if (printCountingMap.equals(printCountingMap1)) {
 			out1.close();
@@ -3242,7 +3250,7 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 		out.print(")");
 		out.print(" ");
 	}
-	public void print_tudresden_ocl20_pivot_language_ocl_OperationCallOnSelfExpCS_0(tudresden.ocl20.pivot.language.ocl.OperationCallOnSelfExpCS element, java.lang.String outertab, java.io.PrintWriter out, java.util.Map<java.lang.String, java.lang.Integer> printCountingMap){
+	public void print_tudresden_ocl20_pivot_language_ocl_OperationCallOnSelfExpCS_0(tudresden.ocl20.pivot.language.ocl.OperationCallOnSelfExpCS element, String outertab, java.io.PrintWriter out, java.util.Map<String, Integer> printCountingMap){
 		int count;
 		int alt = -1;
 		alt=0;
@@ -3403,7 +3411,7 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 			}
 		}
 	}
-	public void print_tudresden_ocl20_pivot_language_ocl_OperationCallOnSelfExpCS_1(tudresden.ocl20.pivot.language.ocl.OperationCallOnSelfExpCS element, java.lang.String outertab, java.io.PrintWriter out, java.util.Map<java.lang.String, java.lang.Integer> printCountingMap){
+	public void print_tudresden_ocl20_pivot_language_ocl_OperationCallOnSelfExpCS_1(tudresden.ocl20.pivot.language.ocl.OperationCallOnSelfExpCS element, String outertab, java.io.PrintWriter out, java.util.Map<String, Integer> printCountingMap){
 		int count;
 		// DEFINITION PART BEGINS (PlaceholderUsingSpecifiedToken)
 		count = printCountingMap.get("isMarkedPre");
@@ -3412,19 +3420,19 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 			if (o != null) {
 				tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenResolver resolver = tokenResolverFactory.createTokenResolver("IS_MARKED_PRE");
 				resolver.setOptions(getOptions());
-				out.print(resolver.deResolve((java.lang.Object) o, element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.OPERATION_CALL_ON_SELF_EXP_CS__IS_MARKED_PRE), element));
+				out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.OPERATION_CALL_ON_SELF_EXP_CS__IS_MARKED_PRE), element));
 			}
 			printCountingMap.put("isMarkedPre", count - 1);
 		}
 		// DEFINITION PART BEGINS (WhiteSpaces)
 	}
-	public void print_tudresden_ocl20_pivot_language_ocl_OperationCallOnSelfExpCS_2(tudresden.ocl20.pivot.language.ocl.OperationCallOnSelfExpCS element, java.lang.String outertab, java.io.PrintWriter out, java.util.Map<java.lang.String, java.lang.Integer> printCountingMap){
-		java.lang.String localtab = outertab;
+	public void print_tudresden_ocl20_pivot_language_ocl_OperationCallOnSelfExpCS_2(tudresden.ocl20.pivot.language.ocl.OperationCallOnSelfExpCS element, String outertab, java.io.PrintWriter out, java.util.Map<String, Integer> printCountingMap){
+		String localtab = outertab;
 		int count;
 		boolean iterate = true;
 		java.io.StringWriter sWriter = null;
 		java.io.PrintWriter out1 = null;
-		java.util.Map<java.lang.String, java.lang.Integer> printCountingMap1 = null;
+		java.util.Map<String, Integer> printCountingMap1 = null;
 		// DEFINITION PART BEGINS (WhiteSpaces)
 		// DEFINITION PART BEGINS (Containment)
 		count = printCountingMap.get("arguments");
@@ -3447,7 +3455,7 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 		while (iterate) {
 			sWriter = new java.io.StringWriter();
 			out1 = new java.io.PrintWriter(sWriter);
-			printCountingMap1 = new java.util.LinkedHashMap<java.lang.String, java.lang.Integer>(printCountingMap);
+			printCountingMap1 = new java.util.LinkedHashMap<String, Integer>(printCountingMap);
 			print_tudresden_ocl20_pivot_language_ocl_OperationCallOnSelfExpCS_2_0(element, localtab, out1, printCountingMap1);
 			if (printCountingMap.equals(printCountingMap1)) {
 				iterate = false;
@@ -3460,8 +3468,8 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 			}
 		}
 	}
-	public void print_tudresden_ocl20_pivot_language_ocl_OperationCallOnSelfExpCS_2_0(tudresden.ocl20.pivot.language.ocl.OperationCallOnSelfExpCS element, java.lang.String outertab, java.io.PrintWriter out, java.util.Map<java.lang.String, java.lang.Integer> printCountingMap){
-		java.lang.String localtab = outertab;
+	public void print_tudresden_ocl20_pivot_language_ocl_OperationCallOnSelfExpCS_2_0(tudresden.ocl20.pivot.language.ocl.OperationCallOnSelfExpCS element, String outertab, java.io.PrintWriter out, java.util.Map<String, Integer> printCountingMap){
+		String localtab = outertab;
 		int count;
 		// DEFINITION PART BEGINS (CsString)
 		out.print(",");
@@ -3484,15 +3492,15 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 		}
 	}
 	
-	public void print_tudresden_ocl20_pivot_language_ocl_StaticOperationCallExpCS(tudresden.ocl20.pivot.language.ocl.StaticOperationCallExpCS element, java.lang.String outertab, java.io.PrintWriter out) {
-		java.lang.String localtab = outertab;
+	public void print_tudresden_ocl20_pivot_language_ocl_StaticOperationCallExpCS(tudresden.ocl20.pivot.language.ocl.StaticOperationCallExpCS element, String outertab, java.io.PrintWriter out) {
+		String localtab = outertab;
 		// The printCountingMap contains a mapping from feature names to the number of
 		// remaining elements that still need to be printed. The map is initialized with
 		// the number of elements stored in each structural feature. For lists this is the
 		// list size. For non-multiple features it is either 1 (if the feature is set) or
 		// 0 (if the feature is null).
-		java.util.Map<java.lang.String, java.lang.Integer> printCountingMap = new java.util.LinkedHashMap<java.lang.String, java.lang.Integer>(3);
-		java.lang.Object temp;
+		java.util.Map<String, Integer> printCountingMap = new java.util.LinkedHashMap<String, Integer>(3);
+		Object temp;
 		temp = element.eGet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.STATIC_OPERATION_CALL_EXP_CS__TYPE_NAME));
 		printCountingMap.put("typeName", temp == null ? 0 : 1);
 		temp = element.eGet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.STATIC_OPERATION_CALL_EXP_CS__OPERATION_NAME));
@@ -3503,7 +3511,7 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 		int count;
 		java.io.StringWriter sWriter = null;
 		java.io.PrintWriter out1 = null;
-		java.util.Map<java.lang.String, java.lang.Integer> printCountingMap1 = null;
+		java.util.Map<String, Integer> printCountingMap1 = null;
 		// DEFINITION PART BEGINS (Containment)
 		count = printCountingMap.get("typeName");
 		if (count > 0) {
@@ -3535,7 +3543,7 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 		// DEFINITION PART BEGINS (CompoundDefinition)
 		sWriter = new java.io.StringWriter();
 		out1 = new java.io.PrintWriter(sWriter);
-		printCountingMap1 = new java.util.LinkedHashMap<java.lang.String, java.lang.Integer>(printCountingMap);
+		printCountingMap1 = new java.util.LinkedHashMap<String, Integer>(printCountingMap);
 		print_tudresden_ocl20_pivot_language_ocl_StaticOperationCallExpCS_0(element, localtab, out1, printCountingMap1);
 		if (printCountingMap.equals(printCountingMap1)) {
 			out1.close();
@@ -3550,13 +3558,13 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 		out.print(")");
 		out.print(" ");
 	}
-	public void print_tudresden_ocl20_pivot_language_ocl_StaticOperationCallExpCS_0(tudresden.ocl20.pivot.language.ocl.StaticOperationCallExpCS element, java.lang.String outertab, java.io.PrintWriter out, java.util.Map<java.lang.String, java.lang.Integer> printCountingMap){
-		java.lang.String localtab = outertab;
+	public void print_tudresden_ocl20_pivot_language_ocl_StaticOperationCallExpCS_0(tudresden.ocl20.pivot.language.ocl.StaticOperationCallExpCS element, String outertab, java.io.PrintWriter out, java.util.Map<String, Integer> printCountingMap){
+		String localtab = outertab;
 		int count;
 		boolean iterate = true;
 		java.io.StringWriter sWriter = null;
 		java.io.PrintWriter out1 = null;
-		java.util.Map<java.lang.String, java.lang.Integer> printCountingMap1 = null;
+		java.util.Map<String, Integer> printCountingMap1 = null;
 		// DEFINITION PART BEGINS (WhiteSpaces)
 		// DEFINITION PART BEGINS (Containment)
 		count = printCountingMap.get("arguments");
@@ -3579,7 +3587,7 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 		while (iterate) {
 			sWriter = new java.io.StringWriter();
 			out1 = new java.io.PrintWriter(sWriter);
-			printCountingMap1 = new java.util.LinkedHashMap<java.lang.String, java.lang.Integer>(printCountingMap);
+			printCountingMap1 = new java.util.LinkedHashMap<String, Integer>(printCountingMap);
 			print_tudresden_ocl20_pivot_language_ocl_StaticOperationCallExpCS_0_0(element, localtab, out1, printCountingMap1);
 			if (printCountingMap.equals(printCountingMap1)) {
 				iterate = false;
@@ -3592,8 +3600,8 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 			}
 		}
 	}
-	public void print_tudresden_ocl20_pivot_language_ocl_StaticOperationCallExpCS_0_0(tudresden.ocl20.pivot.language.ocl.StaticOperationCallExpCS element, java.lang.String outertab, java.io.PrintWriter out, java.util.Map<java.lang.String, java.lang.Integer> printCountingMap){
-		java.lang.String localtab = outertab;
+	public void print_tudresden_ocl20_pivot_language_ocl_StaticOperationCallExpCS_0_0(tudresden.ocl20.pivot.language.ocl.StaticOperationCallExpCS element, String outertab, java.io.PrintWriter out, java.util.Map<String, Integer> printCountingMap){
+		String localtab = outertab;
 		int count;
 		// DEFINITION PART BEGINS (CsString)
 		out.print(",");
@@ -3616,15 +3624,15 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 		}
 	}
 	
-	public void print_tudresden_ocl20_pivot_language_ocl_EnumLiteralOrStaticPropertyExpCS(tudresden.ocl20.pivot.language.ocl.EnumLiteralOrStaticPropertyExpCS element, java.lang.String outertab, java.io.PrintWriter out) {
-		java.lang.String localtab = outertab;
+	public void print_tudresden_ocl20_pivot_language_ocl_EnumLiteralOrStaticPropertyExpCS(tudresden.ocl20.pivot.language.ocl.EnumLiteralOrStaticPropertyExpCS element, String outertab, java.io.PrintWriter out) {
+		String localtab = outertab;
 		// The printCountingMap contains a mapping from feature names to the number of
 		// remaining elements that still need to be printed. The map is initialized with
 		// the number of elements stored in each structural feature. For lists this is the
 		// list size. For non-multiple features it is either 1 (if the feature is set) or
 		// 0 (if the feature is null).
-		java.util.Map<java.lang.String, java.lang.Integer> printCountingMap = new java.util.LinkedHashMap<java.lang.String, java.lang.Integer>(2);
-		java.lang.Object temp;
+		java.util.Map<String, Integer> printCountingMap = new java.util.LinkedHashMap<String, Integer>(2);
+		Object temp;
 		temp = element.eGet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.ENUM_LITERAL_OR_STATIC_PROPERTY_EXP_CS__TYPE_NAME));
 		printCountingMap.put("typeName", temp == null ? 0 : 1);
 		temp = element.eGet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.ENUM_LITERAL_OR_STATIC_PROPERTY_EXP_CS__ENUM_LITERAL_OR_STATIC_PROPERTY));
@@ -3657,15 +3665,15 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 		}
 	}
 	
-	public void print_tudresden_ocl20_pivot_language_ocl_TupleLiteralExpCS(tudresden.ocl20.pivot.language.ocl.TupleLiteralExpCS element, java.lang.String outertab, java.io.PrintWriter out) {
-		java.lang.String localtab = outertab;
+	public void print_tudresden_ocl20_pivot_language_ocl_TupleLiteralExpCS(tudresden.ocl20.pivot.language.ocl.TupleLiteralExpCS element, String outertab, java.io.PrintWriter out) {
+		String localtab = outertab;
 		// The printCountingMap contains a mapping from feature names to the number of
 		// remaining elements that still need to be printed. The map is initialized with
 		// the number of elements stored in each structural feature. For lists this is the
 		// list size. For non-multiple features it is either 1 (if the feature is set) or
 		// 0 (if the feature is null).
-		java.util.Map<java.lang.String, java.lang.Integer> printCountingMap = new java.util.LinkedHashMap<java.lang.String, java.lang.Integer>(1);
-		java.lang.Object temp;
+		java.util.Map<String, Integer> printCountingMap = new java.util.LinkedHashMap<String, Integer>(1);
+		Object temp;
 		temp = element.eGet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.TUPLE_LITERAL_EXP_CS__VARIABLE_DECLARATIONS));
 		printCountingMap.put("variableDeclarations", temp == null ? 0 : 1);
 		// print collected hidden tokens
@@ -3690,15 +3698,15 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 		out.print(" ");
 	}
 	
-	public void print_tudresden_ocl20_pivot_language_ocl_IfExpCS(tudresden.ocl20.pivot.language.ocl.IfExpCS element, java.lang.String outertab, java.io.PrintWriter out) {
-		java.lang.String localtab = outertab;
+	public void print_tudresden_ocl20_pivot_language_ocl_IfExpCS(tudresden.ocl20.pivot.language.ocl.IfExpCS element, String outertab, java.io.PrintWriter out) {
+		String localtab = outertab;
 		// The printCountingMap contains a mapping from feature names to the number of
 		// remaining elements that still need to be printed. The map is initialized with
 		// the number of elements stored in each structural feature. For lists this is the
 		// list size. For non-multiple features it is either 1 (if the feature is set) or
 		// 0 (if the feature is null).
-		java.util.Map<java.lang.String, java.lang.Integer> printCountingMap = new java.util.LinkedHashMap<java.lang.String, java.lang.Integer>(3);
-		java.lang.Object temp;
+		java.util.Map<String, Integer> printCountingMap = new java.util.LinkedHashMap<String, Integer>(3);
+		Object temp;
 		temp = element.eGet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.IF_EXP_CS__CONDITION));
 		printCountingMap.put("condition", temp == null ? 0 : 1);
 		temp = element.eGet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.IF_EXP_CS__THEN_BRANCH));
@@ -3765,15 +3773,15 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 		out.print(" ");
 	}
 	
-	public void print_tudresden_ocl20_pivot_language_ocl_CollectionLiteralExpCS(tudresden.ocl20.pivot.language.ocl.CollectionLiteralExpCS element, java.lang.String outertab, java.io.PrintWriter out) {
-		java.lang.String localtab = outertab;
+	public void print_tudresden_ocl20_pivot_language_ocl_CollectionLiteralExpCS(tudresden.ocl20.pivot.language.ocl.CollectionLiteralExpCS element, String outertab, java.io.PrintWriter out) {
+		String localtab = outertab;
 		// The printCountingMap contains a mapping from feature names to the number of
 		// remaining elements that still need to be printed. The map is initialized with
 		// the number of elements stored in each structural feature. For lists this is the
 		// list size. For non-multiple features it is either 1 (if the feature is set) or
 		// 0 (if the feature is null).
-		java.util.Map<java.lang.String, java.lang.Integer> printCountingMap = new java.util.LinkedHashMap<java.lang.String, java.lang.Integer>(2);
-		java.lang.Object temp;
+		java.util.Map<String, Integer> printCountingMap = new java.util.LinkedHashMap<String, Integer>(2);
+		Object temp;
 		temp = element.eGet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.COLLECTION_LITERAL_EXP_CS__COLLECTION_TYPE));
 		printCountingMap.put("collectionType", temp == null ? 0 : 1);
 		temp = element.eGet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.COLLECTION_LITERAL_EXP_CS__COLLECTION_LITERAL_PARTS));
@@ -3782,7 +3790,7 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 		int count;
 		java.io.StringWriter sWriter = null;
 		java.io.PrintWriter out1 = null;
-		java.util.Map<java.lang.String, java.lang.Integer> printCountingMap1 = null;
+		java.util.Map<String, Integer> printCountingMap1 = null;
 		// DEFINITION PART BEGINS (Containment)
 		count = printCountingMap.get("collectionType");
 		if (count > 0) {
@@ -3798,7 +3806,7 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 		// DEFINITION PART BEGINS (CompoundDefinition)
 		sWriter = new java.io.StringWriter();
 		out1 = new java.io.PrintWriter(sWriter);
-		printCountingMap1 = new java.util.LinkedHashMap<java.lang.String, java.lang.Integer>(printCountingMap);
+		printCountingMap1 = new java.util.LinkedHashMap<String, Integer>(printCountingMap);
 		print_tudresden_ocl20_pivot_language_ocl_CollectionLiteralExpCS_0(element, localtab, out1, printCountingMap1);
 		if (printCountingMap.equals(printCountingMap1)) {
 			out1.close();
@@ -3812,13 +3820,13 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 		out.print("}");
 		out.print(" ");
 	}
-	public void print_tudresden_ocl20_pivot_language_ocl_CollectionLiteralExpCS_0(tudresden.ocl20.pivot.language.ocl.CollectionLiteralExpCS element, java.lang.String outertab, java.io.PrintWriter out, java.util.Map<java.lang.String, java.lang.Integer> printCountingMap){
-		java.lang.String localtab = outertab;
+	public void print_tudresden_ocl20_pivot_language_ocl_CollectionLiteralExpCS_0(tudresden.ocl20.pivot.language.ocl.CollectionLiteralExpCS element, String outertab, java.io.PrintWriter out, java.util.Map<String, Integer> printCountingMap){
+		String localtab = outertab;
 		int count;
 		boolean iterate = true;
 		java.io.StringWriter sWriter = null;
 		java.io.PrintWriter out1 = null;
-		java.util.Map<java.lang.String, java.lang.Integer> printCountingMap1 = null;
+		java.util.Map<String, Integer> printCountingMap1 = null;
 		// DEFINITION PART BEGINS (Containment)
 		count = printCountingMap.get("collectionLiteralParts");
 		if (count > 0) {
@@ -3840,7 +3848,7 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 		while (iterate) {
 			sWriter = new java.io.StringWriter();
 			out1 = new java.io.PrintWriter(sWriter);
-			printCountingMap1 = new java.util.LinkedHashMap<java.lang.String, java.lang.Integer>(printCountingMap);
+			printCountingMap1 = new java.util.LinkedHashMap<String, Integer>(printCountingMap);
 			print_tudresden_ocl20_pivot_language_ocl_CollectionLiteralExpCS_0_0(element, localtab, out1, printCountingMap1);
 			if (printCountingMap.equals(printCountingMap1)) {
 				iterate = false;
@@ -3853,8 +3861,8 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 			}
 		}
 	}
-	public void print_tudresden_ocl20_pivot_language_ocl_CollectionLiteralExpCS_0_0(tudresden.ocl20.pivot.language.ocl.CollectionLiteralExpCS element, java.lang.String outertab, java.io.PrintWriter out, java.util.Map<java.lang.String, java.lang.Integer> printCountingMap){
-		java.lang.String localtab = outertab;
+	public void print_tudresden_ocl20_pivot_language_ocl_CollectionLiteralExpCS_0_0(tudresden.ocl20.pivot.language.ocl.CollectionLiteralExpCS element, String outertab, java.io.PrintWriter out, java.util.Map<String, Integer> printCountingMap){
+		String localtab = outertab;
 		int count;
 		// DEFINITION PART BEGINS (WhiteSpaces)
 		// DEFINITION PART BEGINS (CsString)
@@ -3878,15 +3886,15 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 		}
 	}
 	
-	public void print_tudresden_ocl20_pivot_language_ocl_CollectionRangeCS(tudresden.ocl20.pivot.language.ocl.CollectionRangeCS element, java.lang.String outertab, java.io.PrintWriter out) {
-		java.lang.String localtab = outertab;
+	public void print_tudresden_ocl20_pivot_language_ocl_CollectionRangeCS(tudresden.ocl20.pivot.language.ocl.CollectionRangeCS element, String outertab, java.io.PrintWriter out) {
+		String localtab = outertab;
 		// The printCountingMap contains a mapping from feature names to the number of
 		// remaining elements that still need to be printed. The map is initialized with
 		// the number of elements stored in each structural feature. For lists this is the
 		// list size. For non-multiple features it is either 1 (if the feature is set) or
 		// 0 (if the feature is null).
-		java.util.Map<java.lang.String, java.lang.Integer> printCountingMap = new java.util.LinkedHashMap<java.lang.String, java.lang.Integer>(2);
-		java.lang.Object temp;
+		java.util.Map<String, Integer> printCountingMap = new java.util.LinkedHashMap<String, Integer>(2);
+		Object temp;
 		temp = element.eGet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.COLLECTION_RANGE_CS__FROM));
 		printCountingMap.put("from", temp == null ? 0 : 1);
 		temp = element.eGet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.COLLECTION_RANGE_CS__TO));
@@ -3917,15 +3925,15 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 		}
 	}
 	
-	public void print_tudresden_ocl20_pivot_language_ocl_CollectionLiteralPartsOclExpCS(tudresden.ocl20.pivot.language.ocl.CollectionLiteralPartsOclExpCS element, java.lang.String outertab, java.io.PrintWriter out) {
-		java.lang.String localtab = outertab;
+	public void print_tudresden_ocl20_pivot_language_ocl_CollectionLiteralPartsOclExpCS(tudresden.ocl20.pivot.language.ocl.CollectionLiteralPartsOclExpCS element, String outertab, java.io.PrintWriter out) {
+		String localtab = outertab;
 		// The printCountingMap contains a mapping from feature names to the number of
 		// remaining elements that still need to be printed. The map is initialized with
 		// the number of elements stored in each structural feature. For lists this is the
 		// list size. For non-multiple features it is either 1 (if the feature is set) or
 		// 0 (if the feature is null).
-		java.util.Map<java.lang.String, java.lang.Integer> printCountingMap = new java.util.LinkedHashMap<java.lang.String, java.lang.Integer>(1);
-		java.lang.Object temp;
+		java.util.Map<String, Integer> printCountingMap = new java.util.LinkedHashMap<String, Integer>(1);
+		Object temp;
 		temp = element.eGet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.COLLECTION_LITERAL_PARTS_OCL_EXP_CS__OCL_EXPRESSION));
 		printCountingMap.put("oclExpression", temp == null ? 0 : 1);
 		// print collected hidden tokens
@@ -3941,14 +3949,62 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 		}
 	}
 	
-	public void print_tudresden_ocl20_pivot_language_ocl_PropertyCallOnSelfExpCS(tudresden.ocl20.pivot.language.ocl.PropertyCallOnSelfExpCS element, java.lang.String outertab, java.io.PrintWriter out) {
+	public void print_tudresden_ocl20_pivot_language_ocl_CollectionTypeLiteralExpCS(tudresden.ocl20.pivot.language.ocl.CollectionTypeLiteralExpCS element, String outertab, java.io.PrintWriter out) {
+		String localtab = outertab;
 		// The printCountingMap contains a mapping from feature names to the number of
 		// remaining elements that still need to be printed. The map is initialized with
 		// the number of elements stored in each structural feature. For lists this is the
 		// list size. For non-multiple features it is either 1 (if the feature is set) or
 		// 0 (if the feature is null).
-		java.util.Map<java.lang.String, java.lang.Integer> printCountingMap = new java.util.LinkedHashMap<java.lang.String, java.lang.Integer>(2);
-		java.lang.Object temp;
+		java.util.Map<String, Integer> printCountingMap = new java.util.LinkedHashMap<String, Integer>(1);
+		Object temp;
+		temp = element.eGet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.COLLECTION_TYPE_LITERAL_EXP_CS__COLLECTION_TYPE));
+		printCountingMap.put("collectionType", temp == null ? 0 : 1);
+		// print collected hidden tokens
+		int count;
+		// DEFINITION PART BEGINS (Containment)
+		count = printCountingMap.get("collectionType");
+		if (count > 0) {
+			Object o = element.eGet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.COLLECTION_TYPE_LITERAL_EXP_CS__COLLECTION_TYPE));
+			if (o != null) {
+				doPrint((org.eclipse.emf.ecore.EObject) o, out, localtab);
+			}
+			printCountingMap.put("collectionType", count - 1);
+		}
+	}
+	
+	public void print_tudresden_ocl20_pivot_language_ocl_TupleTypeLiteralExpCS(tudresden.ocl20.pivot.language.ocl.TupleTypeLiteralExpCS element, String outertab, java.io.PrintWriter out) {
+		String localtab = outertab;
+		// The printCountingMap contains a mapping from feature names to the number of
+		// remaining elements that still need to be printed. The map is initialized with
+		// the number of elements stored in each structural feature. For lists this is the
+		// list size. For non-multiple features it is either 1 (if the feature is set) or
+		// 0 (if the feature is null).
+		java.util.Map<String, Integer> printCountingMap = new java.util.LinkedHashMap<String, Integer>(1);
+		Object temp;
+		temp = element.eGet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.TUPLE_TYPE_LITERAL_EXP_CS__TUPLE_TYPE));
+		printCountingMap.put("tupleType", temp == null ? 0 : 1);
+		// print collected hidden tokens
+		int count;
+		// DEFINITION PART BEGINS (Containment)
+		count = printCountingMap.get("tupleType");
+		if (count > 0) {
+			Object o = element.eGet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.TUPLE_TYPE_LITERAL_EXP_CS__TUPLE_TYPE));
+			if (o != null) {
+				doPrint((org.eclipse.emf.ecore.EObject) o, out, localtab);
+			}
+			printCountingMap.put("tupleType", count - 1);
+		}
+	}
+	
+	public void print_tudresden_ocl20_pivot_language_ocl_PropertyCallOnSelfExpCS(tudresden.ocl20.pivot.language.ocl.PropertyCallOnSelfExpCS element, String outertab, java.io.PrintWriter out) {
+		// The printCountingMap contains a mapping from feature names to the number of
+		// remaining elements that still need to be printed. The map is initialized with
+		// the number of elements stored in each structural feature. For lists this is the
+		// list size. For non-multiple features it is either 1 (if the feature is set) or
+		// 0 (if the feature is null).
+		java.util.Map<String, Integer> printCountingMap = new java.util.LinkedHashMap<String, Integer>(2);
+		Object temp;
 		temp = element.eGet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.PROPERTY_CALL_ON_SELF_EXP_CS__PROPERTY));
 		printCountingMap.put("property", temp == null ? 0 : 1);
 		temp = element.eGet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.PROPERTY_CALL_ON_SELF_EXP_CS__IS_MARKED_PRE));
@@ -3974,22 +4030,22 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 			if (o != null) {
 				tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenResolver resolver = tokenResolverFactory.createTokenResolver("IS_MARKED_PRE");
 				resolver.setOptions(getOptions());
-				out.print(resolver.deResolve((java.lang.Object) o, element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.PROPERTY_CALL_ON_SELF_EXP_CS__IS_MARKED_PRE), element));
+				out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.PROPERTY_CALL_ON_SELF_EXP_CS__IS_MARKED_PRE), element));
 				out.print(" ");
 			}
 			printCountingMap.put("isMarkedPre", count - 1);
 		}
 	}
 	
-	public void print_tudresden_ocl20_pivot_language_ocl_LetExpCS(tudresden.ocl20.pivot.language.ocl.LetExpCS element, java.lang.String outertab, java.io.PrintWriter out) {
-		java.lang.String localtab = outertab;
+	public void print_tudresden_ocl20_pivot_language_ocl_LetExpCS(tudresden.ocl20.pivot.language.ocl.LetExpCS element, String outertab, java.io.PrintWriter out) {
+		String localtab = outertab;
 		// The printCountingMap contains a mapping from feature names to the number of
 		// remaining elements that still need to be printed. The map is initialized with
 		// the number of elements stored in each structural feature. For lists this is the
 		// list size. For non-multiple features it is either 1 (if the feature is set) or
 		// 0 (if the feature is null).
-		java.util.Map<java.lang.String, java.lang.Integer> printCountingMap = new java.util.LinkedHashMap<java.lang.String, java.lang.Integer>(2);
-		java.lang.Object temp;
+		java.util.Map<String, Integer> printCountingMap = new java.util.LinkedHashMap<String, Integer>(2);
+		Object temp;
 		temp = element.eGet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.LET_EXP_CS__VARIABLE_DECLARATIONS));
 		printCountingMap.put("variableDeclarations", temp == null ? 0 : ((java.util.Collection<?>) temp).size());
 		temp = element.eGet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.LET_EXP_CS__OCL_EXPRESSION));
@@ -3999,7 +4055,7 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 		boolean iterate = true;
 		java.io.StringWriter sWriter = null;
 		java.io.PrintWriter out1 = null;
-		java.util.Map<java.lang.String, java.lang.Integer> printCountingMap1 = null;
+		java.util.Map<String, Integer> printCountingMap1 = null;
 		// DEFINITION PART BEGINS (CsString)
 		out.print("let");
 		out.print(" ");
@@ -4024,7 +4080,7 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 		while (iterate) {
 			sWriter = new java.io.StringWriter();
 			out1 = new java.io.PrintWriter(sWriter);
-			printCountingMap1 = new java.util.LinkedHashMap<java.lang.String, java.lang.Integer>(printCountingMap);
+			printCountingMap1 = new java.util.LinkedHashMap<String, Integer>(printCountingMap);
 			print_tudresden_ocl20_pivot_language_ocl_LetExpCS_0(element, localtab, out1, printCountingMap1);
 			if (printCountingMap.equals(printCountingMap1)) {
 				iterate = false;
@@ -4056,8 +4112,8 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 		out.println();
 		out.print(localtab);
 	}
-	public void print_tudresden_ocl20_pivot_language_ocl_LetExpCS_0(tudresden.ocl20.pivot.language.ocl.LetExpCS element, java.lang.String outertab, java.io.PrintWriter out, java.util.Map<java.lang.String, java.lang.Integer> printCountingMap){
-		java.lang.String localtab = outertab;
+	public void print_tudresden_ocl20_pivot_language_ocl_LetExpCS_0(tudresden.ocl20.pivot.language.ocl.LetExpCS element, String outertab, java.io.PrintWriter out, java.util.Map<String, Integer> printCountingMap){
+		String localtab = outertab;
 		int count;
 		// DEFINITION PART BEGINS (WhiteSpaces)
 		// DEFINITION PART BEGINS (CsString)
@@ -4081,15 +4137,15 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 		}
 	}
 	
-	public void print_tudresden_ocl20_pivot_language_ocl_RealLiteralExpCS(tudresden.ocl20.pivot.language.ocl.RealLiteralExpCS element, java.lang.String outertab, java.io.PrintWriter out) {
-		java.lang.String localtab = outertab;
+	public void print_tudresden_ocl20_pivot_language_ocl_RealLiteralExpCS(tudresden.ocl20.pivot.language.ocl.RealLiteralExpCS element, String outertab, java.io.PrintWriter out) {
+		String localtab = outertab;
 		// The printCountingMap contains a mapping from feature names to the number of
 		// remaining elements that still need to be printed. The map is initialized with
 		// the number of elements stored in each structural feature. For lists this is the
 		// list size. For non-multiple features it is either 1 (if the feature is set) or
 		// 0 (if the feature is null).
-		java.util.Map<java.lang.String, java.lang.Integer> printCountingMap = new java.util.LinkedHashMap<java.lang.String, java.lang.Integer>(3);
-		java.lang.Object temp;
+		java.util.Map<String, Integer> printCountingMap = new java.util.LinkedHashMap<String, Integer>(3);
+		Object temp;
 		temp = element.eGet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.REAL_LITERAL_EXP_CS__INT_VALUE));
 		printCountingMap.put("intValue", temp == null ? 0 : 1);
 		temp = element.eGet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.REAL_LITERAL_EXP_CS__REAL_VALUE));
@@ -4105,7 +4161,7 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 			if (o != null) {
 				tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenResolver resolver = tokenResolverFactory.createTokenResolver("INTEGER_LITERAL");
 				resolver.setOptions(getOptions());
-				out.print(resolver.deResolve((java.lang.Object) o, element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.REAL_LITERAL_EXP_CS__INT_VALUE), element));
+				out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.REAL_LITERAL_EXP_CS__INT_VALUE), element));
 			}
 			printCountingMap.put("intValue", count - 1);
 		}
@@ -4117,7 +4173,7 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 			if (o != null) {
 				tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenResolver resolver = tokenResolverFactory.createTokenResolver("NAVIGATION_OPERATOR");
 				resolver.setOptions(getOptions());
-				out.print(resolver.deResolve((java.lang.Object) o, element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.REAL_LITERAL_EXP_CS__NAVIGATION_OPERATOR), element));
+				out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.REAL_LITERAL_EXP_CS__NAVIGATION_OPERATOR), element));
 			}
 			printCountingMap.put("navigationOperator", count - 1);
 		}
@@ -4125,7 +4181,7 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 		// DEFINITION PART BEGINS (CompoundDefinition)
 		print_tudresden_ocl20_pivot_language_ocl_RealLiteralExpCS_0(element, localtab, out, printCountingMap);
 	}
-	public void print_tudresden_ocl20_pivot_language_ocl_RealLiteralExpCS_0(tudresden.ocl20.pivot.language.ocl.RealLiteralExpCS element, java.lang.String outertab, java.io.PrintWriter out, java.util.Map<java.lang.String, java.lang.Integer> printCountingMap){
+	public void print_tudresden_ocl20_pivot_language_ocl_RealLiteralExpCS_0(tudresden.ocl20.pivot.language.ocl.RealLiteralExpCS element, String outertab, java.io.PrintWriter out, java.util.Map<String, Integer> printCountingMap){
 		int count;
 		int alt = -1;
 		alt=0;
@@ -4145,7 +4201,7 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 					if (o != null) {
 						tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenResolver resolver = tokenResolverFactory.createTokenResolver("INTEGER_LITERAL");
 						resolver.setOptions(getOptions());
-						out.print(resolver.deResolve((java.lang.Object) o, element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.REAL_LITERAL_EXP_CS__REAL_VALUE), element));
+						out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.REAL_LITERAL_EXP_CS__REAL_VALUE), element));
 						out.print(" ");
 					}
 					printCountingMap.put("realValue", count - 1);
@@ -4159,7 +4215,7 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 				if (o != null) {
 					tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenResolver resolver = tokenResolverFactory.createTokenResolver("INTEGER_0");
 					resolver.setOptions(getOptions());
-					out.print(resolver.deResolve((java.lang.Object) o, element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.REAL_LITERAL_EXP_CS__REAL_VALUE), element));
+					out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.REAL_LITERAL_EXP_CS__REAL_VALUE), element));
 					out.print(" ");
 				}
 				printCountingMap.put("realValue", count - 1);
@@ -4167,14 +4223,14 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 		}
 	}
 	
-	public void print_tudresden_ocl20_pivot_language_ocl_IntegerLiteralExpCS(tudresden.ocl20.pivot.language.ocl.IntegerLiteralExpCS element, java.lang.String outertab, java.io.PrintWriter out) {
+	public void print_tudresden_ocl20_pivot_language_ocl_IntegerLiteralExpCS(tudresden.ocl20.pivot.language.ocl.IntegerLiteralExpCS element, String outertab, java.io.PrintWriter out) {
 		// The printCountingMap contains a mapping from feature names to the number of
 		// remaining elements that still need to be printed. The map is initialized with
 		// the number of elements stored in each structural feature. For lists this is the
 		// list size. For non-multiple features it is either 1 (if the feature is set) or
 		// 0 (if the feature is null).
-		java.util.Map<java.lang.String, java.lang.Integer> printCountingMap = new java.util.LinkedHashMap<java.lang.String, java.lang.Integer>(1);
-		java.lang.Object temp;
+		java.util.Map<String, Integer> printCountingMap = new java.util.LinkedHashMap<String, Integer>(1);
+		Object temp;
 		temp = element.eGet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.INTEGER_LITERAL_EXP_CS__INTEGER_LITERAL));
 		printCountingMap.put("integerLiteral", temp == null ? 0 : 1);
 		// print collected hidden tokens
@@ -4186,21 +4242,21 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 			if (o != null) {
 				tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenResolver resolver = tokenResolverFactory.createTokenResolver("INTEGER_LITERAL");
 				resolver.setOptions(getOptions());
-				out.print(resolver.deResolve((java.lang.Object) o, element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.INTEGER_LITERAL_EXP_CS__INTEGER_LITERAL), element));
+				out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.INTEGER_LITERAL_EXP_CS__INTEGER_LITERAL), element));
 				out.print(" ");
 			}
 			printCountingMap.put("integerLiteral", count - 1);
 		}
 	}
 	
-	public void print_tudresden_ocl20_pivot_language_ocl_BooleanLiteralExpCS(tudresden.ocl20.pivot.language.ocl.BooleanLiteralExpCS element, java.lang.String outertab, java.io.PrintWriter out) {
+	public void print_tudresden_ocl20_pivot_language_ocl_BooleanLiteralExpCS(tudresden.ocl20.pivot.language.ocl.BooleanLiteralExpCS element, String outertab, java.io.PrintWriter out) {
 		// The printCountingMap contains a mapping from feature names to the number of
 		// remaining elements that still need to be printed. The map is initialized with
 		// the number of elements stored in each structural feature. For lists this is the
 		// list size. For non-multiple features it is either 1 (if the feature is set) or
 		// 0 (if the feature is null).
-		java.util.Map<java.lang.String, java.lang.Integer> printCountingMap = new java.util.LinkedHashMap<java.lang.String, java.lang.Integer>(1);
-		java.lang.Object temp;
+		java.util.Map<String, Integer> printCountingMap = new java.util.LinkedHashMap<String, Integer>(1);
+		Object temp;
 		temp = element.eGet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.BOOLEAN_LITERAL_EXP_CS__BOOLEAN_LITERAL));
 		printCountingMap.put("booleanLiteral", temp == null ? 0 : 1);
 		// print collected hidden tokens
@@ -4212,21 +4268,21 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 			if (o != null) {
 				tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenResolver resolver = tokenResolverFactory.createTokenResolver("BOOLEAN_LITERAL");
 				resolver.setOptions(getOptions());
-				out.print(resolver.deResolve((java.lang.Object) o, element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.BOOLEAN_LITERAL_EXP_CS__BOOLEAN_LITERAL), element));
+				out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.BOOLEAN_LITERAL_EXP_CS__BOOLEAN_LITERAL), element));
 				out.print(" ");
 			}
 			printCountingMap.put("booleanLiteral", count - 1);
 		}
 	}
 	
-	public void print_tudresden_ocl20_pivot_language_ocl_StringLiteralExpCS(tudresden.ocl20.pivot.language.ocl.StringLiteralExpCS element, java.lang.String outertab, java.io.PrintWriter out) {
+	public void print_tudresden_ocl20_pivot_language_ocl_StringLiteralExpCS(tudresden.ocl20.pivot.language.ocl.StringLiteralExpCS element, String outertab, java.io.PrintWriter out) {
 		// The printCountingMap contains a mapping from feature names to the number of
 		// remaining elements that still need to be printed. The map is initialized with
 		// the number of elements stored in each structural feature. For lists this is the
 		// list size. For non-multiple features it is either 1 (if the feature is set) or
 		// 0 (if the feature is null).
-		java.util.Map<java.lang.String, java.lang.Integer> printCountingMap = new java.util.LinkedHashMap<java.lang.String, java.lang.Integer>(1);
-		java.lang.Object temp;
+		java.util.Map<String, Integer> printCountingMap = new java.util.LinkedHashMap<String, Integer>(1);
+		Object temp;
 		temp = element.eGet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.STRING_LITERAL_EXP_CS__STRING_LITERAL));
 		printCountingMap.put("stringLiteral", temp == null ? 0 : 1);
 		// print collected hidden tokens
@@ -4238,14 +4294,14 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 			if (o != null) {
 				tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenResolver resolver = tokenResolverFactory.createTokenResolver("QUOTED_39_39");
 				resolver.setOptions(getOptions());
-				out.print(resolver.deResolve((java.lang.Object) o, element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.STRING_LITERAL_EXP_CS__STRING_LITERAL), element));
+				out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.STRING_LITERAL_EXP_CS__STRING_LITERAL), element));
 				out.print(" ");
 			}
 			printCountingMap.put("stringLiteral", count - 1);
 		}
 	}
 	
-	public void print_tudresden_ocl20_pivot_language_ocl_InvalidLiteralExpCS(tudresden.ocl20.pivot.language.ocl.InvalidLiteralExpCS element, java.lang.String outertab, java.io.PrintWriter out) {
+	public void print_tudresden_ocl20_pivot_language_ocl_InvalidLiteralExpCS(tudresden.ocl20.pivot.language.ocl.InvalidLiteralExpCS element, String outertab, java.io.PrintWriter out) {
 		// The printCountingMap contains a mapping from feature names to the number of
 		// remaining elements that still need to be printed. The map is initialized with
 		// the number of elements stored in each structural feature. For lists this is the
@@ -4257,7 +4313,7 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 		out.print(" ");
 	}
 	
-	public void print_tudresden_ocl20_pivot_language_ocl_NullLiteralExpCS(tudresden.ocl20.pivot.language.ocl.NullLiteralExpCS element, java.lang.String outertab, java.io.PrintWriter out) {
+	public void print_tudresden_ocl20_pivot_language_ocl_NullLiteralExpCS(tudresden.ocl20.pivot.language.ocl.NullLiteralExpCS element, String outertab, java.io.PrintWriter out) {
 		// The printCountingMap contains a mapping from feature names to the number of
 		// remaining elements that still need to be printed. The map is initialized with
 		// the number of elements stored in each structural feature. For lists this is the
@@ -4269,14 +4325,14 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 		out.print(" ");
 	}
 	
-	public void print_tudresden_ocl20_pivot_language_ocl_NamedLiteralExpCS(tudresden.ocl20.pivot.language.ocl.NamedLiteralExpCS element, java.lang.String outertab, java.io.PrintWriter out) {
+	public void print_tudresden_ocl20_pivot_language_ocl_NamedLiteralExpCS(tudresden.ocl20.pivot.language.ocl.NamedLiteralExpCS element, String outertab, java.io.PrintWriter out) {
 		// The printCountingMap contains a mapping from feature names to the number of
 		// remaining elements that still need to be printed. The map is initialized with
 		// the number of elements stored in each structural feature. For lists this is the
 		// list size. For non-multiple features it is either 1 (if the feature is set) or
 		// 0 (if the feature is null).
-		java.util.Map<java.lang.String, java.lang.Integer> printCountingMap = new java.util.LinkedHashMap<java.lang.String, java.lang.Integer>(1);
-		java.lang.Object temp;
+		java.util.Map<String, Integer> printCountingMap = new java.util.LinkedHashMap<String, Integer>(1);
+		Object temp;
 		temp = element.eGet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.NAMED_LITERAL_EXP_CS__NAMED_ELEMENT));
 		printCountingMap.put("namedElement", temp == null ? 0 : 1);
 		// print collected hidden tokens
@@ -4295,15 +4351,15 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 		}
 	}
 	
-	public void print_tudresden_ocl20_pivot_language_ocl_BracketExpCS(tudresden.ocl20.pivot.language.ocl.BracketExpCS element, java.lang.String outertab, java.io.PrintWriter out) {
-		java.lang.String localtab = outertab;
+	public void print_tudresden_ocl20_pivot_language_ocl_BracketExpCS(tudresden.ocl20.pivot.language.ocl.BracketExpCS element, String outertab, java.io.PrintWriter out) {
+		String localtab = outertab;
 		// The printCountingMap contains a mapping from feature names to the number of
 		// remaining elements that still need to be printed. The map is initialized with
 		// the number of elements stored in each structural feature. For lists this is the
 		// list size. For non-multiple features it is either 1 (if the feature is set) or
 		// 0 (if the feature is null).
-		java.util.Map<java.lang.String, java.lang.Integer> printCountingMap = new java.util.LinkedHashMap<java.lang.String, java.lang.Integer>(1);
-		java.lang.Object temp;
+		java.util.Map<String, Integer> printCountingMap = new java.util.LinkedHashMap<String, Integer>(1);
+		Object temp;
 		temp = element.eGet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.BRACKET_EXP_CS__OCL_EXPRESSION));
 		printCountingMap.put("oclExpression", temp == null ? 0 : 1);
 		// print collected hidden tokens

@@ -25,6 +25,7 @@ import tudresden.ocl20.pivot.language.ocl.CollectionLiteralPartsCS;
 import tudresden.ocl20.pivot.language.ocl.CollectionLiteralPartsOclExpCS;
 import tudresden.ocl20.pivot.language.ocl.CollectionRangeCS;
 import tudresden.ocl20.pivot.language.ocl.CollectionTypeIdentifierCS;
+import tudresden.ocl20.pivot.language.ocl.CollectionTypeLiteralExpCS;
 import tudresden.ocl20.pivot.language.ocl.ContextDeclarationCS;
 import tudresden.ocl20.pivot.language.ocl.DefinitionExpCS;
 import tudresden.ocl20.pivot.language.ocl.DefinitionExpOperationCS;
@@ -93,6 +94,7 @@ import tudresden.ocl20.pivot.language.ocl.StaticOperationCallExpCS;
 import tudresden.ocl20.pivot.language.ocl.StringLiteralExpCS;
 import tudresden.ocl20.pivot.language.ocl.TupleLiteralExpCS;
 import tudresden.ocl20.pivot.language.ocl.TupleTypeCS;
+import tudresden.ocl20.pivot.language.ocl.TupleTypeLiteralExpCS;
 import tudresden.ocl20.pivot.language.ocl.TypeCS;
 import tudresden.ocl20.pivot.language.ocl.TypePathNameCS;
 import tudresden.ocl20.pivot.language.ocl.TypePathNameNestedCS;
@@ -181,6 +183,20 @@ public class OclPackageImpl extends EPackageImpl implements OclPackage {
 	 * @generated
 	 */
 	private EClass tupleTypeCSEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass collectionTypeLiteralExpCSEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass tupleTypeLiteralExpCSEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -962,6 +978,42 @@ public class OclPackageImpl extends EPackageImpl implements OclPackage {
 	 */
 	public EReference getTupleTypeCS_VariableDeclarationList() {
 		return (EReference)tupleTypeCSEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getCollectionTypeLiteralExpCS() {
+		return collectionTypeLiteralExpCSEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getCollectionTypeLiteralExpCS_CollectionType() {
+		return (EReference)collectionTypeLiteralExpCSEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getTupleTypeLiteralExpCS() {
+		return tupleTypeLiteralExpCSEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getTupleTypeLiteralExpCS_TupleType() {
+		return (EReference)tupleTypeLiteralExpCSEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -2506,6 +2558,12 @@ public class OclPackageImpl extends EPackageImpl implements OclPackage {
 		tupleTypeCSEClass = createEClass(TUPLE_TYPE_CS);
 		createEReference(tupleTypeCSEClass, TUPLE_TYPE_CS__VARIABLE_DECLARATION_LIST);
 
+		collectionTypeLiteralExpCSEClass = createEClass(COLLECTION_TYPE_LITERAL_EXP_CS);
+		createEReference(collectionTypeLiteralExpCSEClass, COLLECTION_TYPE_LITERAL_EXP_CS__COLLECTION_TYPE);
+
+		tupleTypeLiteralExpCSEClass = createEClass(TUPLE_TYPE_LITERAL_EXP_CS);
+		createEReference(tupleTypeLiteralExpCSEClass, TUPLE_TYPE_LITERAL_EXP_CS__TUPLE_TYPE);
+
 		variableDeclarationCSEClass = createEClass(VARIABLE_DECLARATION_CS);
 		createEReference(variableDeclarationCSEClass, VARIABLE_DECLARATION_CS__VARIABLE_NAME);
 
@@ -2787,6 +2845,8 @@ public class OclPackageImpl extends EPackageImpl implements OclPackage {
 		typePathNameSimpleCSEClass.getESuperTypes().add(this.getTypePathNameCS());
 		typePathNameNestedCSEClass.getESuperTypes().add(this.getTypePathNameCS());
 		tupleTypeCSEClass.getESuperTypes().add(this.getTypeCS());
+		collectionTypeLiteralExpCSEClass.getESuperTypes().add(this.getLiteralExpCS());
+		tupleTypeLiteralExpCSEClass.getESuperTypes().add(this.getLiteralExpCS());
 		variableDeclarationWithInitCSEClass.getESuperTypes().add(this.getVariableDeclarationCS());
 		variableDeclarationWithoutInitCSEClass.getESuperTypes().add(this.getVariableDeclarationCS());
 		literalExpCSEClass.getESuperTypes().add(this.getOclExpressionCS());
@@ -2884,6 +2944,12 @@ public class OclPackageImpl extends EPackageImpl implements OclPackage {
 
 		initEClass(tupleTypeCSEClass, TupleTypeCS.class, "TupleTypeCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getTupleTypeCS_VariableDeclarationList(), this.getVariableDeclarationWithoutInitListCS(), null, "variableDeclarationList", null, 0, 1, TupleTypeCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(collectionTypeLiteralExpCSEClass, CollectionTypeLiteralExpCS.class, "CollectionTypeLiteralExpCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getCollectionTypeLiteralExpCS_CollectionType(), this.getCollectionTypeIdentifierCS(), null, "collectionType", null, 1, 1, CollectionTypeLiteralExpCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(tupleTypeLiteralExpCSEClass, TupleTypeLiteralExpCS.class, "TupleTypeLiteralExpCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getTupleTypeLiteralExpCS_TupleType(), this.getTupleTypeCS(), null, "tupleType", null, 1, 1, TupleTypeLiteralExpCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(variableDeclarationCSEClass, VariableDeclarationCS.class, "VariableDeclarationCS", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getVariableDeclarationCS_VariableName(), this.getSimpleNameCS(), null, "variableName", null, 1, 1, VariableDeclarationCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

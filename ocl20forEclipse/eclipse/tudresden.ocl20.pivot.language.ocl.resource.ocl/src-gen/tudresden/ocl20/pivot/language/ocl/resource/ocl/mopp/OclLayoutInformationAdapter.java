@@ -15,7 +15,7 @@ public class OclLayoutInformationAdapter implements org.eclipse.emf.common.notif
 		return target;
 	}
 	
-	public boolean isAdapterForType(java.lang.Object type) {
+	public boolean isAdapterForType(Object type) {
 		return false;
 	}
 	

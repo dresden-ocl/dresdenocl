@@ -69,7 +69,7 @@ public class OclLocationMap implements tudresden.ocl20.pivot.language.ocl.resour
 	
 	private int getMapValue(java.util.Map<org.eclipse.emf.ecore.EObject, Integer> map, org.eclipse.emf.ecore.EObject element) {
 		if (!map.containsKey(element)) return -1;
-		java.lang.Integer value = map.get(element);
+		Integer value = map.get(element);
 		return value == null ? -1 : value.intValue();
 	}
 	
@@ -134,8 +134,8 @@ public class OclLocationMap implements tudresden.ocl20.pivot.language.ocl.resour
 		// the map concurrently.
 		synchronized (this) {
 			for (org.eclipse.emf.ecore.EObject next : charStartMap.keySet()) {
-				java.lang.Integer start = charStartMap.get(next);
-				java.lang.Integer end = charEndMap.get(next);
+				Integer start = charStartMap.get(next);
+				Integer end = charEndMap.get(next);
 				if (start == null || end == null) {
 					continue;
 				}

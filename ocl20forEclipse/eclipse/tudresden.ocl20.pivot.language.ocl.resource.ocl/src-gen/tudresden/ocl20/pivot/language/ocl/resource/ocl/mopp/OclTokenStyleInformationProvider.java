@@ -46,7 +46,7 @@ public class OclTokenStyleInformationProvider {
 		}
 	}
 	
-	public tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenStyle getDefaultTokenStyle(java.lang.String tokenName) {
+	public tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenStyle getDefaultTokenStyle(String tokenName) {
 		if ("ML_COMMENT".equals(tokenName)) {
 			return new TokenStyleImpl(new int[] {0x00, 0x80, 0x00}, false, true, false, false);
 		}

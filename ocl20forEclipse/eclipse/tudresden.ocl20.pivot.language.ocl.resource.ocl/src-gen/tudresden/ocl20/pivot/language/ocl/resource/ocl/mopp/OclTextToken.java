@@ -15,7 +15,7 @@ public class OclTextToken implements tudresden.ocl20.pivot.language.ocl.resource
 		this.antlrToken = antlrToken;
 	}
 	
-	public java.lang.String getName() {
+	public String getName() {
 		return getTokenName(metaInformation.getTokenNames(), antlrToken.getType());
 	}
 	
@@ -47,15 +47,15 @@ public class OclTextToken implements tudresden.ocl20.pivot.language.ocl.resource
 		return true;
 	}
 	
-	public java.lang.String getText() {
+	public String getText() {
 		return antlrToken.getText();
 	}
 	
-	public java.lang.String getTokenName(java.lang.String[] tokenNames, int index) {
+	public String getTokenName(String[] tokenNames, int index) {
 		if (tokenNames == null) {
 			return null;
 		}
-		java.lang.String tokenName = tokenNames[index];
+		String tokenName = tokenNames[index];
 		if (tokenName != null && tokenName.startsWith("'")) {
 			tokenName = tokenName.substring(1, tokenName.length() - 1).trim();
 		}

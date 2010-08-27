@@ -84,13 +84,13 @@ public class OclReferenceResolverSwitch implements tudresden.ocl20.pivot.languag
 		namedLiteralExpCSNamedElementReferenceResolver.setOptions(options);
 	}
 	
-	public void resolveFuzzy(java.lang.String identifier, org.eclipse.emf.ecore.EObject container, org.eclipse.emf.ecore.EReference reference, int position, tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclReferenceResolveResult<org.eclipse.emf.ecore.EObject> result) {
+	public void resolveFuzzy(String identifier, org.eclipse.emf.ecore.EObject container, org.eclipse.emf.ecore.EReference reference, int position, tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclReferenceResolveResult<org.eclipse.emf.ecore.EObject> result) {
 		if (container == null) {
 			return;
 		}
 		if (tudresden.ocl20.pivot.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationNestedNamespaceCS().isInstance(container)) {
 			OclFuzzyResolveResult<tudresden.ocl20.pivot.pivotmodel.Namespace> frr = new OclFuzzyResolveResult<tudresden.ocl20.pivot.pivotmodel.Namespace>(result);
-			java.lang.String referenceName = reference.getName();
+			String referenceName = reference.getName();
 			org.eclipse.emf.ecore.EStructuralFeature feature = container.eClass().getEStructuralFeature(referenceName);
 			if (feature != null && feature instanceof org.eclipse.emf.ecore.EReference && referenceName != null && referenceName.equals("namespace")) {
 				packageDeclarationNestedNamespaceCSNamespaceReferenceResolver.resolve(identifier, (tudresden.ocl20.pivot.language.ocl.PackageDeclarationNestedNamespaceCS) container, (org.eclipse.emf.ecore.EReference) feature, position, true, frr);
@@ -98,7 +98,7 @@ public class OclReferenceResolverSwitch implements tudresden.ocl20.pivot.languag
 		}
 		if (tudresden.ocl20.pivot.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS().isInstance(container)) {
 			OclFuzzyResolveResult<tudresden.ocl20.pivot.pivotmodel.Property> frr = new OclFuzzyResolveResult<tudresden.ocl20.pivot.pivotmodel.Property>(result);
-			java.lang.String referenceName = reference.getName();
+			String referenceName = reference.getName();
 			org.eclipse.emf.ecore.EStructuralFeature feature = container.eClass().getEStructuralFeature(referenceName);
 			if (feature != null && feature instanceof org.eclipse.emf.ecore.EReference && referenceName != null && referenceName.equals("property")) {
 				attributeContextDeclarationCSPropertyReferenceResolver.resolve(identifier, (tudresden.ocl20.pivot.language.ocl.AttributeContextDeclarationCS) container, (org.eclipse.emf.ecore.EReference) feature, position, true, frr);
@@ -106,7 +106,7 @@ public class OclReferenceResolverSwitch implements tudresden.ocl20.pivot.languag
 		}
 		if (tudresden.ocl20.pivot.language.ocl.OclPackage.eINSTANCE.getOperationDefinitionCS().isInstance(container)) {
 			OclFuzzyResolveResult<tudresden.ocl20.pivot.pivotmodel.Operation> frr = new OclFuzzyResolveResult<tudresden.ocl20.pivot.pivotmodel.Operation>(result);
-			java.lang.String referenceName = reference.getName();
+			String referenceName = reference.getName();
 			org.eclipse.emf.ecore.EStructuralFeature feature = container.eClass().getEStructuralFeature(referenceName);
 			if (feature != null && feature instanceof org.eclipse.emf.ecore.EReference && referenceName != null && referenceName.equals("operation")) {
 				operationDefinitionCSOperationReferenceResolver.resolve(identifier, (tudresden.ocl20.pivot.language.ocl.OperationDefinitionCS) container, (org.eclipse.emf.ecore.EReference) feature, position, true, frr);
@@ -114,7 +114,7 @@ public class OclReferenceResolverSwitch implements tudresden.ocl20.pivot.languag
 		}
 		if (tudresden.ocl20.pivot.language.ocl.OclPackage.eINSTANCE.getParameterCS().isInstance(container)) {
 			OclFuzzyResolveResult<tudresden.ocl20.pivot.pivotmodel.Parameter> frr = new OclFuzzyResolveResult<tudresden.ocl20.pivot.pivotmodel.Parameter>(result);
-			java.lang.String referenceName = reference.getName();
+			String referenceName = reference.getName();
 			org.eclipse.emf.ecore.EStructuralFeature feature = container.eClass().getEStructuralFeature(referenceName);
 			if (feature != null && feature instanceof org.eclipse.emf.ecore.EReference && referenceName != null && referenceName.equals("parameter")) {
 				parameterCSParameterReferenceResolver.resolve(identifier, (tudresden.ocl20.pivot.language.ocl.ParameterCS) container, (org.eclipse.emf.ecore.EReference) feature, position, true, frr);
@@ -122,7 +122,7 @@ public class OclReferenceResolverSwitch implements tudresden.ocl20.pivot.languag
 		}
 		if (tudresden.ocl20.pivot.language.ocl.OclPackage.eINSTANCE.getOperationCallBaseExpCS().isInstance(container)) {
 			OclFuzzyResolveResult<tudresden.ocl20.pivot.pivotmodel.Operation> frr = new OclFuzzyResolveResult<tudresden.ocl20.pivot.pivotmodel.Operation>(result);
-			java.lang.String referenceName = reference.getName();
+			String referenceName = reference.getName();
 			org.eclipse.emf.ecore.EStructuralFeature feature = container.eClass().getEStructuralFeature(referenceName);
 			if (feature != null && feature instanceof org.eclipse.emf.ecore.EReference && referenceName != null && referenceName.equals("operationName")) {
 				operationCallBaseExpCSOperationNameReferenceResolver.resolve(identifier, (tudresden.ocl20.pivot.language.ocl.OperationCallBaseExpCS) container, (org.eclipse.emf.ecore.EReference) feature, position, true, frr);
@@ -130,7 +130,7 @@ public class OclReferenceResolverSwitch implements tudresden.ocl20.pivot.languag
 		}
 		if (tudresden.ocl20.pivot.language.ocl.OclPackage.eINSTANCE.getPropertyCallBaseExpCS().isInstance(container)) {
 			OclFuzzyResolveResult<tudresden.ocl20.pivot.pivotmodel.Property> frr = new OclFuzzyResolveResult<tudresden.ocl20.pivot.pivotmodel.Property>(result);
-			java.lang.String referenceName = reference.getName();
+			String referenceName = reference.getName();
 			org.eclipse.emf.ecore.EStructuralFeature feature = container.eClass().getEStructuralFeature(referenceName);
 			if (feature != null && feature instanceof org.eclipse.emf.ecore.EReference && referenceName != null && referenceName.equals("property")) {
 				propertyCallBaseExpCSPropertyReferenceResolver.resolve(identifier, (tudresden.ocl20.pivot.language.ocl.PropertyCallBaseExpCS) container, (org.eclipse.emf.ecore.EReference) feature, position, true, frr);
@@ -138,7 +138,7 @@ public class OclReferenceResolverSwitch implements tudresden.ocl20.pivot.languag
 		}
 		if (tudresden.ocl20.pivot.language.ocl.OclPackage.eINSTANCE.getTypePathNameSimpleCS().isInstance(container)) {
 			OclFuzzyResolveResult<tudresden.ocl20.pivot.pivotmodel.Type> frr = new OclFuzzyResolveResult<tudresden.ocl20.pivot.pivotmodel.Type>(result);
-			java.lang.String referenceName = reference.getName();
+			String referenceName = reference.getName();
 			org.eclipse.emf.ecore.EStructuralFeature feature = container.eClass().getEStructuralFeature(referenceName);
 			if (feature != null && feature instanceof org.eclipse.emf.ecore.EReference && referenceName != null && referenceName.equals("typeName")) {
 				typePathNameSimpleCSTypeNameReferenceResolver.resolve(identifier, (tudresden.ocl20.pivot.language.ocl.TypePathNameSimpleCS) container, (org.eclipse.emf.ecore.EReference) feature, position, true, frr);
@@ -146,7 +146,7 @@ public class OclReferenceResolverSwitch implements tudresden.ocl20.pivot.languag
 		}
 		if (tudresden.ocl20.pivot.language.ocl.OclPackage.eINSTANCE.getTypePathNameNestedCS().isInstance(container)) {
 			OclFuzzyResolveResult<tudresden.ocl20.pivot.pivotmodel.Namespace> frr = new OclFuzzyResolveResult<tudresden.ocl20.pivot.pivotmodel.Namespace>(result);
-			java.lang.String referenceName = reference.getName();
+			String referenceName = reference.getName();
 			org.eclipse.emf.ecore.EStructuralFeature feature = container.eClass().getEStructuralFeature(referenceName);
 			if (feature != null && feature instanceof org.eclipse.emf.ecore.EReference && referenceName != null && referenceName.equals("namespace")) {
 				typePathNameNestedCSNamespaceReferenceResolver.resolve(identifier, (tudresden.ocl20.pivot.language.ocl.TypePathNameNestedCS) container, (org.eclipse.emf.ecore.EReference) feature, position, true, frr);
@@ -154,7 +154,7 @@ public class OclReferenceResolverSwitch implements tudresden.ocl20.pivot.languag
 		}
 		if (tudresden.ocl20.pivot.language.ocl.OclPackage.eINSTANCE.getCollectionTypeIdentifierCS().isInstance(container)) {
 			OclFuzzyResolveResult<tudresden.ocl20.pivot.pivotmodel.Type> frr = new OclFuzzyResolveResult<tudresden.ocl20.pivot.pivotmodel.Type>(result);
-			java.lang.String referenceName = reference.getName();
+			String referenceName = reference.getName();
 			org.eclipse.emf.ecore.EStructuralFeature feature = container.eClass().getEStructuralFeature(referenceName);
 			if (feature != null && feature instanceof org.eclipse.emf.ecore.EReference && referenceName != null && referenceName.equals("typeName")) {
 				collectionTypeIdentifierCSTypeNameReferenceResolver.resolve(identifier, (tudresden.ocl20.pivot.language.ocl.CollectionTypeIdentifierCS) container, (org.eclipse.emf.ecore.EReference) feature, position, true, frr);
@@ -162,7 +162,7 @@ public class OclReferenceResolverSwitch implements tudresden.ocl20.pivot.languag
 		}
 		if (tudresden.ocl20.pivot.language.ocl.OclPackage.eINSTANCE.getStaticOperationCallExpCS().isInstance(container)) {
 			OclFuzzyResolveResult<tudresden.ocl20.pivot.pivotmodel.Operation> frr = new OclFuzzyResolveResult<tudresden.ocl20.pivot.pivotmodel.Operation>(result);
-			java.lang.String referenceName = reference.getName();
+			String referenceName = reference.getName();
 			org.eclipse.emf.ecore.EStructuralFeature feature = container.eClass().getEStructuralFeature(referenceName);
 			if (feature != null && feature instanceof org.eclipse.emf.ecore.EReference && referenceName != null && referenceName.equals("operationName")) {
 				staticOperationCallExpCSOperationNameReferenceResolver.resolve(identifier, (tudresden.ocl20.pivot.language.ocl.StaticOperationCallExpCS) container, (org.eclipse.emf.ecore.EReference) feature, position, true, frr);
@@ -170,7 +170,7 @@ public class OclReferenceResolverSwitch implements tudresden.ocl20.pivot.languag
 		}
 		if (tudresden.ocl20.pivot.language.ocl.OclPackage.eINSTANCE.getEnumLiteralOrStaticPropertyExpCS().isInstance(container)) {
 			OclFuzzyResolveResult<tudresden.ocl20.pivot.pivotmodel.NamedElement> frr = new OclFuzzyResolveResult<tudresden.ocl20.pivot.pivotmodel.NamedElement>(result);
-			java.lang.String referenceName = reference.getName();
+			String referenceName = reference.getName();
 			org.eclipse.emf.ecore.EStructuralFeature feature = container.eClass().getEStructuralFeature(referenceName);
 			if (feature != null && feature instanceof org.eclipse.emf.ecore.EReference && referenceName != null && referenceName.equals("enumLiteralOrStaticProperty")) {
 				enumLiteralOrStaticPropertyExpCSEnumLiteralOrStaticPropertyReferenceResolver.resolve(identifier, (tudresden.ocl20.pivot.language.ocl.EnumLiteralOrStaticPropertyExpCS) container, (org.eclipse.emf.ecore.EReference) feature, position, true, frr);
@@ -178,7 +178,7 @@ public class OclReferenceResolverSwitch implements tudresden.ocl20.pivot.languag
 		}
 		if (tudresden.ocl20.pivot.language.ocl.OclPackage.eINSTANCE.getNamedLiteralExpCS().isInstance(container)) {
 			OclFuzzyResolveResult<tudresden.ocl20.pivot.pivotmodel.NamedElement> frr = new OclFuzzyResolveResult<tudresden.ocl20.pivot.pivotmodel.NamedElement>(result);
-			java.lang.String referenceName = reference.getName();
+			String referenceName = reference.getName();
 			org.eclipse.emf.ecore.EStructuralFeature feature = container.eClass().getEStructuralFeature(referenceName);
 			if (feature != null && feature instanceof org.eclipse.emf.ecore.EReference && referenceName != null && referenceName.equals("namedElement")) {
 				namedLiteralExpCSNamedElementReferenceResolver.resolve(identifier, (tudresden.ocl20.pivot.language.ocl.NamedLiteralExpCS) container, (org.eclipse.emf.ecore.EReference) feature, position, true, frr);

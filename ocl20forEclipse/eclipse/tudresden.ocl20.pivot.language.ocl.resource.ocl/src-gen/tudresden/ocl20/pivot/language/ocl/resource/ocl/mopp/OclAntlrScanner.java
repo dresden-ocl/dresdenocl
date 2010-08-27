@@ -23,7 +23,7 @@ public class OclAntlrScanner implements tudresden.ocl20.pivot.language.ocl.resou
 		return result;
 	}
 	
-	public void setText(java.lang.String text) {
+	public void setText(String text) {
 		antlrLexer.setCharStream(new org.antlr.runtime3_2_0.ANTLRStringStream(text));
 	}
 	

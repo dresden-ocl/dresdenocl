@@ -72,7 +72,7 @@ public class OclMinimalModelHelper {
 							continue;
 						}
 						
-						java.lang.Object value = root.eGet(reference);
+						Object value = root.eGet(reference);
 						if (value instanceof java.util.List<?>) {
 							java.util.List<org.eclipse.emf.ecore.EObject> list = tudresden.ocl20.pivot.language.ocl.resource.ocl.util.OclListUtil.castListUnchecked(value);
 							list.add(subModel);
@@ -91,7 +91,7 @@ public class OclMinimalModelHelper {
 					else {
 						initialValue = "some" + tudresden.ocl20.pivot.language.ocl.resource.ocl.util.OclStringUtil.capitalize(attribute.getName());
 					}
-					java.lang.Object value = root.eGet(attribute);
+					Object value = root.eGet(attribute);
 					if (value instanceof java.util.List<?>) {
 						java.util.List<String> list = tudresden.ocl20.pivot.language.ocl.resource.ocl.util.OclListUtil.castListUnchecked(value);
 						list.add(initialValue);

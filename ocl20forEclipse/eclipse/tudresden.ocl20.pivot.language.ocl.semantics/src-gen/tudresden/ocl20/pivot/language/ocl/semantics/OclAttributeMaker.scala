@@ -64,6 +64,8 @@ trait OclAttributeMaker extends tudresden.attributegrammar.integration.kiama.Att
 		case s : tudresden.ocl20.pivot.language.ocl.VariableDeclarationWithInitListCS => new {val attributeMaker = self; val eObject = s} with VariableDeclarationWithInitListCSAttributable
 		case s : tudresden.ocl20.pivot.language.ocl.VariableDeclarationWithoutInitCS => new {val attributeMaker = self; val eObject = s} with VariableDeclarationWithoutInitCSAttributable
 		case s : tudresden.ocl20.pivot.language.ocl.VariableDeclarationWithInitCS => new {val attributeMaker = self; val eObject = s} with VariableDeclarationWithInitCSAttributable
+		case s : tudresden.ocl20.pivot.language.ocl.TupleTypeLiteralExpCS => new {val attributeMaker = self; val eObject = s} with TupleTypeLiteralExpCSAttributable
+		case s : tudresden.ocl20.pivot.language.ocl.CollectionTypeLiteralExpCS => new {val attributeMaker = self; val eObject = s} with CollectionTypeLiteralExpCSAttributable
 		case s : tudresden.ocl20.pivot.language.ocl.TupleTypeCS => new {val attributeMaker = self; val eObject = s} with TupleTypeCSAttributable
 		case s : tudresden.ocl20.pivot.language.ocl.TypePathNameNestedCS => new {val attributeMaker = self; val eObject = s} with TypePathNameNestedCSAttributable
 		case s : tudresden.ocl20.pivot.language.ocl.TypePathNameSimpleCS => new {val attributeMaker = self; val eObject = s} with TypePathNameSimpleCSAttributable

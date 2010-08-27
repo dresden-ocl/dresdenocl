@@ -8,19 +8,19 @@ package tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp;
 
 public class OclProblem implements tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclProblem {
 	
-	private java.lang.String message;
+	private String message;
 	private tudresden.ocl20.pivot.language.ocl.resource.ocl.OclEProblemType type;
 	private java.util.Collection<tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclQuickFix> quickFixes;
 	
-	public OclProblem(java.lang.String message, tudresden.ocl20.pivot.language.ocl.resource.ocl.OclEProblemType type) {
+	public OclProblem(String message, tudresden.ocl20.pivot.language.ocl.resource.ocl.OclEProblemType type) {
 		this(message, type, java.util.Collections.<tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclQuickFix>emptySet());
 	}
 	
-	public OclProblem(java.lang.String message, tudresden.ocl20.pivot.language.ocl.resource.ocl.OclEProblemType type, tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclQuickFix quickFix) {
+	public OclProblem(String message, tudresden.ocl20.pivot.language.ocl.resource.ocl.OclEProblemType type, tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclQuickFix quickFix) {
 		this(message, type, java.util.Collections.singleton(quickFix));
 	}
 	
-	public OclProblem(java.lang.String message, tudresden.ocl20.pivot.language.ocl.resource.ocl.OclEProblemType type, java.util.Collection<tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclQuickFix> quickFixes) {
+	public OclProblem(String message, tudresden.ocl20.pivot.language.ocl.resource.ocl.OclEProblemType type, java.util.Collection<tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclQuickFix> quickFixes) {
 		super();
 		this.message = message;
 		this.type = type;
@@ -32,7 +32,7 @@ public class OclProblem implements tudresden.ocl20.pivot.language.ocl.resource.o
 		return type;
 	}
 	
-	public java.lang.String getMessage() {
+	public String getMessage() {
 		return message;
 	}
 	

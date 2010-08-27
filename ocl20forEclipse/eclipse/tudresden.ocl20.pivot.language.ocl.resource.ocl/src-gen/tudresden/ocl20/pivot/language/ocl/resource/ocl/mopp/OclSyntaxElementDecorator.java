@@ -22,7 +22,7 @@ public class OclSyntaxElementDecorator {
 	/**
 	 * a list of the indices that must be printed
 	 */
-	private java.util.List<java.lang.Integer> indicesToPrint = new java.util.ArrayList<java.lang.Integer>();
+	private java.util.List<Integer> indicesToPrint = new java.util.ArrayList<Integer>();
 	
 	public OclSyntaxElementDecorator(tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclSyntaxElement decoratedElement, OclSyntaxElementDecorator[] childDecorators) {
 		super();
@@ -30,7 +30,7 @@ public class OclSyntaxElementDecorator {
 		this.childDecorators = childDecorators;
 	}
 	
-	public void addIndexToPrint(java.lang.Integer index) {
+	public void addIndexToPrint(Integer index) {
 		indicesToPrint.add(index);
 	}
 	
@@ -42,7 +42,7 @@ public class OclSyntaxElementDecorator {
 		return childDecorators;
 	}
 	
-	public java.lang.Integer getNextIndexToPrint() {
+	public Integer getNextIndexToPrint() {
 		if (indicesToPrint.size() == 0) {
 			return null;
 		}

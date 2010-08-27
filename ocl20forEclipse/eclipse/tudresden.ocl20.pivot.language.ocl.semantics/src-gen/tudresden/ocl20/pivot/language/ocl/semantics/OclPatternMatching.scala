@@ -186,6 +186,50 @@ object TupleTypeCS {
 }
 
 
+object CollectionTypeLiteralExpCS {
+	def apply(
+	          _collectionType : tudresden.ocl20.pivot.language.ocl.CollectionTypeIdentifierCS	          
+	          ) = {
+		
+		val __collectionTypeLiteralExpCS = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createCollectionTypeLiteralExpCS
+		
+			__collectionTypeLiteralExpCS.setCollectionType(_collectionType)
+		
+		__collectionTypeLiteralExpCS
+		
+	}
+
+	def unapply(__collectionTypeLiteralExpCS : tudresden.ocl20.pivot.language.ocl.CollectionTypeLiteralExpCS) : Some[tudresden.ocl20.pivot.language.ocl.CollectionTypeIdentifierCS] = {
+		Some(
+			__collectionTypeLiteralExpCS.getCollectionType		
+		)
+	}
+
+}
+
+
+object TupleTypeLiteralExpCS {
+	def apply(
+	          _tupleType : tudresden.ocl20.pivot.language.ocl.TupleTypeCS	          
+	          ) = {
+		
+		val __tupleTypeLiteralExpCS = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createTupleTypeLiteralExpCS
+		
+			__tupleTypeLiteralExpCS.setTupleType(_tupleType)
+		
+		__tupleTypeLiteralExpCS
+		
+	}
+
+	def unapply(__tupleTypeLiteralExpCS : tudresden.ocl20.pivot.language.ocl.TupleTypeLiteralExpCS) : Some[tudresden.ocl20.pivot.language.ocl.TupleTypeCS] = {
+		Some(
+			__tupleTypeLiteralExpCS.getTupleType		
+		)
+	}
+
+}
+
+
 object VariableDeclarationCS {
 
 	def unapply(__variableDeclarationCS : tudresden.ocl20.pivot.language.ocl.VariableDeclarationCS) : Some[tudresden.ocl20.pivot.language.ocl.SimpleNameCS] = {

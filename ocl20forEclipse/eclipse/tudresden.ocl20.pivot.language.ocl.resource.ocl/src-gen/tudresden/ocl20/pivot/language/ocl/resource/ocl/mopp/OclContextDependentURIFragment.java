@@ -65,7 +65,7 @@ public abstract class OclContextDependentURIFragment<ContainerType extends org.e
 	
 	private void handleMultipleResults() {
 		org.eclipse.emf.common.util.EList<org.eclipse.emf.ecore.EObject> list = null;
-		java.lang.Object temp = container.eGet(reference);
+		Object temp = container.eGet(reference);
 		if (temp instanceof org.eclipse.emf.common.util.EList<?>) {
 			list = tudresden.ocl20.pivot.language.ocl.resource.ocl.util.OclCastUtil.cast(temp);
 		}

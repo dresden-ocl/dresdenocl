@@ -33,6 +33,12 @@
     <genClasses ecoreClass="OCL.ecore#//TupleTypeCS">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//TupleTypeCS/variableDeclarationList"/>
     </genClasses>
+    <genClasses ecoreClass="OCL.ecore#//CollectionTypeLiteralExpCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//CollectionTypeLiteralExpCS/collectionType"/>
+    </genClasses>
+    <genClasses ecoreClass="OCL.ecore#//TupleTypeLiteralExpCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//TupleTypeLiteralExpCS/tupleType"/>
+    </genClasses>
     <genClasses ecoreClass="OCL.ecore#//VariableDeclarationCS">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//VariableDeclarationCS/variableName"/>
     </genClasses>

@@ -97,7 +97,7 @@ public class OclCodeFoldingManager {
 		addCloseListener(textEditor);
 		try {
 			restoreCodeFoldingStateFromFile(editor.getResource().getURI().toString());
-		} catch (java.lang.Exception e) {
+		} catch (Exception e) {
 			calculatePositions();
 		}
 	}
@@ -258,7 +258,7 @@ public class OclCodeFoldingManager {
 			return;
 		}
 		org.eclipse.core.runtime.SafeRunner.run(new org.eclipse.jface.util.SafeRunnable("Unable to read code folding state. The state will be reset.") {
-			public void run() throws java.lang.Exception {
+			public void run() throws Exception {
 				java.io.FileInputStream input = new java.io.FileInputStream(stateFile);
 				java.io.BufferedReader reader = new java.io.BufferedReader(new java.io.InputStreamReader(input, "utf-8"));
 				org.eclipse.ui.IMemento memento = org.eclipse.ui.XMLMemento.createReadRoot(reader);
@@ -390,7 +390,7 @@ public class OclCodeFoldingManager {
 				positions.add(new org.eclipse.jface.text.Position(offset, length));
 			}
 		}
-		org.eclipse.swt.widgets.Display.getDefault().asyncExec(new java.lang.Runnable() {
+		org.eclipse.swt.widgets.Display.getDefault().asyncExec(new Runnable() {
 			public void run() {
 				updateCodefolding(positions);
 			}

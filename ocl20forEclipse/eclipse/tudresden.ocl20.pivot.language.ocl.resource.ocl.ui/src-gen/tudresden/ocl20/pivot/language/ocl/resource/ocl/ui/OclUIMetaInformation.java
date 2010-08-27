@@ -12,6 +12,10 @@ public class OclUIMetaInformation extends tudresden.ocl20.pivot.language.ocl.res
 		return new tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclHoverTextProvider();
 	}
 	
+	public tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclImageProvider getImageProvider() {
+		return tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclImageProvider.INSTANCE;
+	}
+	
 	public tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclColorManager createColorManager() {
 		return new tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclColorManager();
 	}

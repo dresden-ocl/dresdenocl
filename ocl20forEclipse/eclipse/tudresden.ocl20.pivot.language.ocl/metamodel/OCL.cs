@@ -204,6 +204,12 @@ RULES {
 	
 	
 	@Operator(type="primitive", weight="20", superclass="OclExpressionCS")
+	CollectionTypeLiteralExpCS			::= collectionType;
+	
+	@Operator(type="primitive", weight="20", superclass="OclExpressionCS")
+	TupleTypeLiteralExpCS				::= tupleType;
+	
+	@Operator(type="primitive", weight="20", superclass="OclExpressionCS")
 	PropertyCallOnSelfExpCS				::= property[SIMPLE_NAME] #0 isMarkedPre[IS_MARKED_PRE];
 	
 	

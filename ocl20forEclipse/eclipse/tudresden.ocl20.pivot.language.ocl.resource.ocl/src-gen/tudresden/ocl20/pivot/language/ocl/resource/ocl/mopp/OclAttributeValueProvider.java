@@ -12,15 +12,15 @@ package tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp;
  */
 public class OclAttributeValueProvider {
 	
-	public java.lang.Object[] getDefaultValues(org.eclipse.emf.ecore.EAttribute attribute) {
+	public Object[] getDefaultValues(org.eclipse.emf.ecore.EAttribute attribute) {
 		String typeName = attribute.getEType().getName();
 		if ("EString".equals(typeName)) {
-			return new java.lang.Object[] {"some" + tudresden.ocl20.pivot.language.ocl.resource.ocl.util.OclStringUtil.capitalize(attribute.getName())};
+			return new Object[] {"some" + tudresden.ocl20.pivot.language.ocl.resource.ocl.util.OclStringUtil.capitalize(attribute.getName())};
 		}
 		if ("EBoolean".equals(typeName)) {
-			return new java.lang.Object[] {Boolean.TRUE, Boolean.FALSE};
+			return new Object[] {Boolean.TRUE, Boolean.FALSE};
 		}
-		return new java.lang.Object[] {attribute.getDefaultValue()};
+		return new Object[] {attribute.getDefaultValue()};
 	}
 	
 }

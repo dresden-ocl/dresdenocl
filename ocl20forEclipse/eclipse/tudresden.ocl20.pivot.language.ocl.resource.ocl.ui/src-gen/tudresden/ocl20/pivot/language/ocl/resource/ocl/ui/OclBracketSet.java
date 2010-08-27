@@ -15,7 +15,7 @@ public class OclBracketSet {
 	 * the separator between a bracket pair, should not contain escape needed
 	 * character, it will be used as regular expression
 	 */
-	public final static java.lang.String BRACKET_SEPARATOR = " and ";
+	public final static String BRACKET_SEPARATOR = " and ";
 	private final static tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclPositionHelper positionHelper = new tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclPositionHelper();
 	private java.util.ArrayList<tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclBracketPair> bracketPairs;
 	private org.eclipse.jface.text.source.ISourceViewer viewer;
@@ -28,19 +28,19 @@ public class OclBracketSet {
 	 */
 	private class BracketPair implements tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclBracketPair {
 		
-		private final java.lang.String[] brackets;
+		private final String[] brackets;
 		private boolean closingEnabledInside;
 		
-		public BracketPair(java.lang.String opening, java.lang.String closing, boolean closingEnabledInside) {
-			brackets = new java.lang.String[] { opening, closing };
+		public BracketPair(String opening, String closing, boolean closingEnabledInside) {
+			brackets = new String[] { opening, closing };
 			this.closingEnabledInside = closingEnabledInside;
 		}
 		
-		public java.lang.String getClosingBracket() {
+		public String getClosingBracket() {
 			return brackets[1];
 		}
 		
-		public java.lang.String getOpeningBracket() {
+		public String getOpeningBracket() {
 			return brackets[0];
 		}
 		
@@ -199,7 +199,7 @@ public class OclBracketSet {
 	public tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclBracketPair getBracketPair(int index) {
 		try {
 			return bracketPairs.get(index);
-		} catch (java.lang.Exception e) {
+		} catch (Exception e) {
 			return null;
 		}
 	}
@@ -328,13 +328,13 @@ public class OclBracketSet {
 	 * 
 	 * @see org.eclipse.jface.preference.IPreferenceStore
 	 */
-	public java.lang.String getBracketString() {
+	public String getBracketString() {
 		if (bracketPairs.size() < 1) {
 			return "";
 		}
-		java.lang.String result = "";
+		String result = "";
 		for (tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclBracketPair bracketPair : bracketPairs) {
-			java.lang.String isClosingStr = "0";
+			String isClosingStr = "0";
 			if (bracketPair.isClosingEnabledInside()) {
 				isClosingStr = "1";
 			}

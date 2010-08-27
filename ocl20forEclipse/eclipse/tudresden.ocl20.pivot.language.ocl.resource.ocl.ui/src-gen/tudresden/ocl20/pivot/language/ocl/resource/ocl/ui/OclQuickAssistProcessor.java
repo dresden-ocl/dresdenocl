@@ -50,8 +50,7 @@ public class OclQuickAssistProcessor implements org.eclipse.jface.text.quickassi
 			}
 			
 			public org.eclipse.swt.graphics.Image getImage() {
-				// TODO Auto-generated method stub
-				return null;
+				return new tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclUIMetaInformation().getImageProvider().getImage(quickFix.getImageKey());
 			}
 			
 			public String getDisplayString() {
@@ -105,10 +104,6 @@ public class OclQuickAssistProcessor implements org.eclipse.jface.text.quickassi
 		return foundFixes;
 	}
 	
-	private org.eclipse.jface.text.source.IAnnotationModel getAnnotationModel() {
-		return editor.getDocumentProvider().getAnnotationModel(editor.getEditorInput());
-	}
-	
 	private java.util.Collection<tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclQuickFix> getQuickFixes(org.eclipse.jface.text.source.Annotation annotation) {
 		
 		java.util.Collection<tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclQuickFix> foundQuickFixes = new java.util.ArrayList<tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclQuickFix>();
@@ -119,28 +114,13 @@ public class OclQuickAssistProcessor implements org.eclipse.jface.text.quickassi
 		if (annotation instanceof tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclMarkerAnnotation) {
 			tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclMarkerAnnotation markerAnnotation = (tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclMarkerAnnotation) annotation;
 			org.eclipse.core.resources.IMarker marker = markerAnnotation.getMarker();
-			try {
-				Object quickFixValue = marker.getAttribute(org.eclipse.core.resources.IMarker.SOURCE_ID);
-				if (quickFixValue != null && quickFixValue instanceof String) {
-					String quickFixContexts = (String) quickFixValue;
-					String[] quickFixContextParts = quickFixContexts.split("\\|");
-					for (String quickFixContext : quickFixContextParts) {
-						tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclQuickFix quickFix = editor.getResource().getQuickFix(quickFixContext);
-						if (quickFix != null) {
-							foundQuickFixes.add(quickFix);
-						}
-					}
-				}
-			} catch (org.eclipse.core.runtime.CoreException ce) {
-				if (ce.getMessage().matches("Marker.*not found.")) {
-					// ignore
-					System.out.println("getQuickFixes() marker not found: " + ce.getMessage());
-				} else {
-					ce.printStackTrace();
-				}
-			}
+			foundQuickFixes.addAll(new tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclMarkerResolutionGenerator().getQuickFixes(editor.getResource(), marker));
 		}
 		return foundQuickFixes;
+	}
+	
+	private org.eclipse.jface.text.source.IAnnotationModel getAnnotationModel() {
+		return editor.getDocumentProvider().getAnnotationModel(editor.getEditorInput());
 	}
 	
 	public String getErrorMessage() {

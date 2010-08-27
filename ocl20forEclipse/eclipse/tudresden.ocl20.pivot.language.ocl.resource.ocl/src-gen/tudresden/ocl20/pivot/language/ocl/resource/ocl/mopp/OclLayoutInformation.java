@@ -10,12 +10,12 @@ public class OclLayoutInformation {
 	
 	private final tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclSyntaxElement syntaxElement;
 	private final int startOffset;
-	private final java.lang.String hiddenTokenText;
-	private final java.lang.String visibleTokenText;
-	private java.lang.Object object;
+	private final String hiddenTokenText;
+	private final String visibleTokenText;
+	private Object object;
 	private boolean wasResolved;
 	
-	public OclLayoutInformation(tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclSyntaxElement syntaxElement, java.lang.Object object, int startOffset, java.lang.String hiddenTokenText, java.lang.String visibleTokenText) {
+	public OclLayoutInformation(tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclSyntaxElement syntaxElement, Object object, int startOffset, String hiddenTokenText, String visibleTokenText) {
 		super();
 		this.syntaxElement = syntaxElement;
 		this.object = object;
@@ -32,7 +32,7 @@ public class OclLayoutInformation {
 		return startOffset;
 	}
 	
-	public java.lang.Object getObject(org.eclipse.emf.ecore.EObject container) {
+	public Object getObject(org.eclipse.emf.ecore.EObject container) {
 		if (wasResolved) {
 			return object;
 		}
@@ -57,11 +57,11 @@ public class OclLayoutInformation {
 		return object;
 	}
 	
-	public java.lang.String getHiddenTokenText() {
+	public String getHiddenTokenText() {
 		return hiddenTokenText;
 	}
 	
-	public java.lang.String getVisibleTokenText() {
+	public String getVisibleTokenText() {
 		return visibleTokenText;
 	}
 	

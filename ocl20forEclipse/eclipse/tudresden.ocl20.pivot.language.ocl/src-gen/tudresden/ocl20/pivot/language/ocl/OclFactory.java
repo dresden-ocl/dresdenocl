@@ -89,6 +89,24 @@ public interface OclFactory extends EFactory {
 	TupleTypeCS createTupleTypeCS();
 
 	/**
+	 * Returns a new object of class '<em>Collection Type Literal Exp CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Collection Type Literal Exp CS</em>'.
+	 * @generated
+	 */
+	CollectionTypeLiteralExpCS createCollectionTypeLiteralExpCS();
+
+	/**
+	 * Returns a new object of class '<em>Tuple Type Literal Exp CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Tuple Type Literal Exp CS</em>'.
+	 * @generated
+	 */
+	TupleTypeLiteralExpCS createTupleTypeLiteralExpCS();
+
+	/**
 	 * Returns a new object of class '<em>Variable Declaration With Init CS</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
