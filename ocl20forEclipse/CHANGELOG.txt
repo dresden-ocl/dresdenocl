@@ -23,6 +23,9 @@ Release 3.0 (not scheduled yet)
 
 GUI
 ---
+* Improvements of the Model Browser
+  - Static operations and properties are now highlighted with different symbols.
+  
 * A bug in the Model Instance Browser has been fixed.
   - OCL-defined features are not displayed as undefined in the Model Instance Browser 
     anymore.
