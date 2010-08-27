@@ -2,7 +2,7 @@ package package1::package2
 
 -- oclIsKindOf and oclIsTypeOf should accept Variables of the Type OclType as Parameter (issue #3025086).
 context Type1
-def: testOclIsKindOfPositive05(source: Class1, arg01: OclType): Boolean =
+def: testOclIsKindOfPositive05(source: Type1, arg01: OclType): Boolean =
 source.oclIsKindOf(arg01)
 
 endpackage

@@ -2,6 +2,6 @@ package package1::package2
 
 -- The operation .oclAsType() should be available for all types.
 context Type1
-inv: not aBag->oclAsType(Set)->oclIsInvalid()
+inv: not aBag->oclAsType(Set(Type1))->oclIsInvalid()
 
 endpackage
