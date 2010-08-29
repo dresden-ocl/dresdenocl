@@ -498,6 +498,58 @@ public class TestContext {
 
 	/**
 	 * <p>
+	 * A test case to parse a context that should be parsed appropriately.
+	 * </p>
+	 */
+	@Test
+	public void testContextPositive18() throws Exception {
+	
+		TestPerformer testPerformer;
+	
+		String modelFileName;
+		String oclFileName;
+	
+		oclFileName = "context/contextPositive18.ocl";
+		modelFileName = "testmodel.uml";
+	
+		/* Try to get the TestPerformer. */
+		testPerformer = TestPerformer.getInstance(
+				AllContextTests.META_MODEL_ID, AllContextTests.MODEL_BUNDLE,
+				AllContextTests.MODEL_DIRECTORY);
+		testPerformer.setModel(modelFileName);
+	
+		/* Try to parse the constraint file. */
+		testPerformer.parseFile(oclFileName);
+	}
+
+	/**
+	 * <p>
+	 * A test case to parse a context that should be parsed appropriately.
+	 * </p>
+	 */
+	@Test
+	public void testContextPositive19() throws Exception {
+	
+		TestPerformer testPerformer;
+	
+		String modelFileName;
+		String oclFileName;
+	
+		oclFileName = "context/contextPositive19.ocl";
+		modelFileName = "testmodel.uml";
+	
+		/* Try to get the TestPerformer. */
+		testPerformer = TestPerformer.getInstance(
+				AllContextTests.META_MODEL_ID, AllContextTests.MODEL_BUNDLE,
+				AllContextTests.MODEL_DIRECTORY);
+		testPerformer.setModel(modelFileName);
+	
+		/* Try to parse the constraint file. */
+		testPerformer.parseFile(oclFileName);
+	}
+
+	/**
+	 * <p>
 	 * A test case to parse a context that should not be parsed appropriately.
 	 * </p>
 	 */
