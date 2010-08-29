@@ -139,7 +139,7 @@ public class JavaOclOrderedSetTest {
 				.isTrue());
 		assertTrue(emptyOrderedSet.isEmpty().isTrue());
 		assertTrue(oclOrderedSet.insertAt(integer2, undefined).insertAt(integer2,
-				oclReal1_5).insertAt(integer2, oclReal2_5).insertAt(integer2,
+				oclReal1_5).insertAt(integer3, oclReal2_5).insertAt(integer2,
 				oclReal0_5).isEqualTo(oclOrderedSet3).isTrue());
 		assertTrue(oclOrderedSet.size().isEqualTo(integer1).isTrue());
 		assertTrue(oclOrderedSet.insertAt(integer1, oclReal0_5).insertAt(integer4,
