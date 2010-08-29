@@ -19,10 +19,17 @@ with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
 
 package tudresden.ocl20.pivot.ocl2parser.test.context;
 
+import static org.junit.Assert.assertEquals;
+
+import java.util.List;
+
 import org.junit.Test;
 
+import tudresden.ocl20.pivot.essentialocl.expressions.ExpressionInOcl;
+import tudresden.ocl20.pivot.essentialocl.expressions.Variable;
 import tudresden.ocl20.pivot.ocl2parser.test.TestPerformer;
 import tudresden.ocl20.pivot.parser.SemanticException;
+import tudresden.ocl20.pivot.pivotmodel.Constraint;
 
 /**
  * <p>
@@ -51,9 +58,9 @@ public class TestContext {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllContextTests.META_MODEL_ID,
-						AllContextTests.MODEL_BUNDLE, AllContextTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllContextTests.META_MODEL_ID, AllContextTests.MODEL_BUNDLE,
+				AllContextTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		/* Try to parse the constraint file. */
@@ -77,9 +84,9 @@ public class TestContext {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllContextTests.META_MODEL_ID,
-						AllContextTests.MODEL_BUNDLE, AllContextTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllContextTests.META_MODEL_ID, AllContextTests.MODEL_BUNDLE,
+				AllContextTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		/* Try to parse the constraint file. */
@@ -103,9 +110,9 @@ public class TestContext {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllContextTests.META_MODEL_ID,
-						AllContextTests.MODEL_BUNDLE, AllContextTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllContextTests.META_MODEL_ID, AllContextTests.MODEL_BUNDLE,
+				AllContextTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		/* Try to parse the constraint file. */
@@ -129,9 +136,9 @@ public class TestContext {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllContextTests.META_MODEL_ID,
-						AllContextTests.MODEL_BUNDLE, AllContextTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllContextTests.META_MODEL_ID, AllContextTests.MODEL_BUNDLE,
+				AllContextTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		/* Try to parse the constraint file. */
@@ -155,9 +162,9 @@ public class TestContext {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllContextTests.META_MODEL_ID,
-						AllContextTests.MODEL_BUNDLE, AllContextTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllContextTests.META_MODEL_ID, AllContextTests.MODEL_BUNDLE,
+				AllContextTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		/* Try to parse the constraint file. */
@@ -181,9 +188,9 @@ public class TestContext {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllContextTests.META_MODEL_ID,
-						AllContextTests.MODEL_BUNDLE, AllContextTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllContextTests.META_MODEL_ID, AllContextTests.MODEL_BUNDLE,
+				AllContextTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		/* Try to parse the constraint file. */
@@ -207,9 +214,9 @@ public class TestContext {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllContextTests.META_MODEL_ID,
-						AllContextTests.MODEL_BUNDLE, AllContextTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllContextTests.META_MODEL_ID, AllContextTests.MODEL_BUNDLE,
+				AllContextTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		/* Try to parse the constraint file. */
@@ -233,9 +240,9 @@ public class TestContext {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllContextTests.META_MODEL_ID,
-						AllContextTests.MODEL_BUNDLE, AllContextTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllContextTests.META_MODEL_ID, AllContextTests.MODEL_BUNDLE,
+				AllContextTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		/* Try to parse the constraint file. */
@@ -259,9 +266,9 @@ public class TestContext {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllContextTests.META_MODEL_ID,
-						AllContextTests.MODEL_BUNDLE, AllContextTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllContextTests.META_MODEL_ID, AllContextTests.MODEL_BUNDLE,
+				AllContextTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		/* Try to parse the constraint file. */
@@ -285,9 +292,9 @@ public class TestContext {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllContextTests.META_MODEL_ID,
-						AllContextTests.MODEL_BUNDLE, AllContextTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllContextTests.META_MODEL_ID, AllContextTests.MODEL_BUNDLE,
+				AllContextTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		/* Try to parse the constraint file. */
@@ -311,9 +318,9 @@ public class TestContext {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllContextTests.META_MODEL_ID,
-						AllContextTests.MODEL_BUNDLE, AllContextTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllContextTests.META_MODEL_ID, AllContextTests.MODEL_BUNDLE,
+				AllContextTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		/* Try to parse the constraint file. */
@@ -337,9 +344,9 @@ public class TestContext {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllContextTests.META_MODEL_ID,
-						AllContextTests.MODEL_BUNDLE, AllContextTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllContextTests.META_MODEL_ID, AllContextTests.MODEL_BUNDLE,
+				AllContextTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		/* Try to parse the constraint file. */
@@ -363,9 +370,9 @@ public class TestContext {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllContextTests.META_MODEL_ID,
-						AllContextTests.MODEL_BUNDLE, AllContextTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllContextTests.META_MODEL_ID, AllContextTests.MODEL_BUNDLE,
+				AllContextTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		/* Try to parse the constraint file. */
@@ -389,9 +396,9 @@ public class TestContext {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllContextTests.META_MODEL_ID,
-						AllContextTests.MODEL_BUNDLE, AllContextTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllContextTests.META_MODEL_ID, AllContextTests.MODEL_BUNDLE,
+				AllContextTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		/* Try to parse the constraint file. */
@@ -415,9 +422,9 @@ public class TestContext {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllContextTests.META_MODEL_ID,
-						AllContextTests.MODEL_BUNDLE, AllContextTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllContextTests.META_MODEL_ID, AllContextTests.MODEL_BUNDLE,
+				AllContextTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		/* Try to parse the constraint file. */
@@ -441,13 +448,52 @@ public class TestContext {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllContextTests.META_MODEL_ID,
-						AllContextTests.MODEL_BUNDLE, AllContextTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllContextTests.META_MODEL_ID, AllContextTests.MODEL_BUNDLE,
+				AllContextTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		/* Try to parse the constraint file. */
 		testPerformer.parseFile(oclFileName);
+	}
+
+	/**
+	 * <p>
+	 * A test case to parse a context that should be parsed appropriately.
+	 * </p>
+	 */
+	@Test
+	public void testContextPositive17() throws Exception {
+
+		TestPerformer testPerformer;
+
+		String modelFileName;
+		String oclFileName;
+
+		oclFileName = "context/contextPositive17.ocl";
+		modelFileName = "testmodel.uml";
+
+		/* Try to get the TestPerformer. */
+		testPerformer = TestPerformer.getInstance(
+				AllContextTests.META_MODEL_ID, AllContextTests.MODEL_BUNDLE,
+				AllContextTests.MODEL_DIRECTORY);
+		testPerformer.setModel(modelFileName);
+
+		/* Try to parse the constraint file. */
+		List<Constraint> constraints;
+		constraints = testPerformer.parseFile(oclFileName);
+
+		assertEquals(1, constraints.size());
+
+		Constraint constraint = constraints.get(0);
+
+		/* Check the name of the parameter of the context. */
+		List<Variable> parameters;
+		parameters = ((ExpressionInOcl) constraint.getSpecification())
+				.getParameter();
+
+		assertEquals(1, parameters.size());
+		assertEquals("testInput", parameters.get(0).getName());
 	}
 
 	/**
@@ -467,9 +513,9 @@ public class TestContext {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllContextTests.META_MODEL_ID,
-						AllContextTests.MODEL_BUNDLE, AllContextTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllContextTests.META_MODEL_ID, AllContextTests.MODEL_BUNDLE,
+				AllContextTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		/* Try to parse the constraint file. */
@@ -493,9 +539,9 @@ public class TestContext {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllContextTests.META_MODEL_ID,
-						AllContextTests.MODEL_BUNDLE, AllContextTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllContextTests.META_MODEL_ID, AllContextTests.MODEL_BUNDLE,
+				AllContextTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		/* Try to parse the constraint file. */
@@ -519,9 +565,9 @@ public class TestContext {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllContextTests.META_MODEL_ID,
-						AllContextTests.MODEL_BUNDLE, AllContextTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllContextTests.META_MODEL_ID, AllContextTests.MODEL_BUNDLE,
+				AllContextTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		/* Try to parse the constraint file. */
@@ -545,9 +591,9 @@ public class TestContext {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllContextTests.META_MODEL_ID,
-						AllContextTests.MODEL_BUNDLE, AllContextTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllContextTests.META_MODEL_ID, AllContextTests.MODEL_BUNDLE,
+				AllContextTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		/* Try to parse the constraint file. */
@@ -571,9 +617,9 @@ public class TestContext {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllContextTests.META_MODEL_ID,
-						AllContextTests.MODEL_BUNDLE, AllContextTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllContextTests.META_MODEL_ID, AllContextTests.MODEL_BUNDLE,
+				AllContextTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		/* Try to parse the constraint file. */
@@ -597,9 +643,9 @@ public class TestContext {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllContextTests.META_MODEL_ID,
-						AllContextTests.MODEL_BUNDLE, AllContextTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllContextTests.META_MODEL_ID, AllContextTests.MODEL_BUNDLE,
+				AllContextTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		/* Try to parse the constraint file. */
@@ -623,9 +669,9 @@ public class TestContext {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllContextTests.META_MODEL_ID,
-						AllContextTests.MODEL_BUNDLE, AllContextTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllContextTests.META_MODEL_ID, AllContextTests.MODEL_BUNDLE,
+				AllContextTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		/* Try to parse the constraint file. */
@@ -649,9 +695,9 @@ public class TestContext {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllContextTests.META_MODEL_ID,
-						AllContextTests.MODEL_BUNDLE, AllContextTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllContextTests.META_MODEL_ID, AllContextTests.MODEL_BUNDLE,
+				AllContextTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		/* Try to parse the constraint file. */
@@ -675,9 +721,9 @@ public class TestContext {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllContextTests.META_MODEL_ID,
-						AllContextTests.MODEL_BUNDLE, AllContextTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllContextTests.META_MODEL_ID, AllContextTests.MODEL_BUNDLE,
+				AllContextTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		/* Try to parse the constraint file. */
@@ -701,9 +747,9 @@ public class TestContext {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllContextTests.META_MODEL_ID,
-						AllContextTests.MODEL_BUNDLE, AllContextTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllContextTests.META_MODEL_ID, AllContextTests.MODEL_BUNDLE,
+				AllContextTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		/* Try to parse the constraint file. */
