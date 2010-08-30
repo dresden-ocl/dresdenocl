@@ -104,9 +104,8 @@ public class JavaOclEnumLiteral extends JavaOclLibraryObject implements
 			if (that instanceof JavaOclEnumLiteral) {
 				JavaOclEnumLiteral enumLiteral = (JavaOclEnumLiteral) that;
 				boolean boolResult = getModelInstanceEnumerationLiteral()
-						.equals(
-								enumLiteral
-										.getModelInstanceEnumerationLiteral());
+						.equals(enumLiteral
+								.getModelInstanceEnumerationLiteral());
 				result = JavaOclBoolean.getInstance(boolResult);
 			} else {
 				result = JavaOclBoolean.getInstance(false);
@@ -140,7 +139,11 @@ public class JavaOclEnumLiteral extends JavaOclLibraryObject implements
 		return result;
 	}
 
-	@Override
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
 	public String toString() {
 
 		StringBuilder result = new StringBuilder();
@@ -149,11 +152,11 @@ public class JavaOclEnumLiteral extends JavaOclLibraryObject implements
 		result.append("[");
 
 		if (!toStringUndefinedOrInvalid(result))
-			result.append(getModelInstanceEnumerationLiteral().getName());
+			result.append(this.getModelInstanceEnumerationLiteral()
+					.getLiteral().getName());
 
 		result.append("]");
 
 		return result.toString();
 	}
-
 }

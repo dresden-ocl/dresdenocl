@@ -146,44 +146,44 @@ public abstract class JavaOclSortedCollection<T extends OclAny> extends
 	/*
 	 * (non-Javadoc)
 	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSortedCollection
-	 * #last()
-	 */
-	public T last() {
-
-		return this.at(this.size());
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSortedCollection
 	 * #indexOf(java.lang.Object)
 	 */
 	public OclInteger indexOf(T anObject) {
-
+	
 		OclInteger result;
-
+	
 		result =
 				checkInvalid(EssentialOclPlugin.getOclLibraryProvider().getOclLibrary().getOclInteger(), this, anObject);
-
+	
 		if (result == null)
 			result = checkUndefined("indexOf", EssentialOclPlugin.getOclLibraryProvider().getOclLibrary().getOclInteger(), this);
-
+	
 		if (result == null) {
 			/* Else compute the result. */
 			int intResult;
-
+	
 			intResult =
 					((List<IModelInstanceElement>) getModelInstanceCollection()
 							.getCollection()).indexOf(anObject.getModelInstanceElement()) + 1;
 			// FIXME Michael: -1 / not found? / invalid?
-
+	
 			IModelInstanceInteger imiResult =
 					BasisJavaModelInstanceFactory.createModelInstanceInteger(new Long(
 							intResult));
 			result = new JavaOclInteger(imiResult);
 		}
-
+	
 		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSortedCollection
+	 * #last()
+	 */
+	public T last() {
+
+		return this.at(this.size());
 	}
 
 }

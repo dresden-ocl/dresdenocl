@@ -70,11 +70,6 @@ public class JavaOclInteger extends JavaOclReal implements OclInteger {
 		super(invalidReason);
 	}
 
-	public IModelInstanceInteger getModelInstanceInteger() {
-
-		return (IModelInstanceInteger) this.imiElement;
-	}
-
 	/*
 	 * (non-Javadoc)
 	 * @see
@@ -82,18 +77,18 @@ public class JavaOclInteger extends JavaOclReal implements OclInteger {
 	 * .ocl20.pivot.essentialocl.standardlibrary.OclInteger)
 	 */
 	public OclInteger add(OclInteger that) {
-
+	
 		OclInteger result = null;
-
+	
 		result =
 				checkInvalid(EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
 						.getOclInteger(), this, that);
-
+	
 		if (result == null)
 			result =
 					checkUndefined("add", EssentialOclPlugin.getOclLibraryProvider()
 							.getOclLibrary().getOclInteger(), this, that);
-
+	
 		if (result == null) {
 			/* Else compute the result. */
 			Long summand1 = this.getModelInstanceInteger().getLong();
@@ -102,7 +97,7 @@ public class JavaOclInteger extends JavaOclReal implements OclInteger {
 					JavaStandardLibraryFactory.INSTANCE.createOclInteger(summand1
 							+ summand2);
 		}
-
+	
 		return result;
 	}
 
@@ -113,23 +108,23 @@ public class JavaOclInteger extends JavaOclReal implements OclInteger {
 	 * .ocl20.pivot.essentialocl.standardlibrary.OclInteger)
 	 */
 	public OclInteger div(OclInteger that) {
-
+	
 		OclInteger result = null;
-
+	
 		result =
 				checkInvalid(EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
 						.getOclInteger(), this, that);
-
+	
 		if (result == null)
 			result =
 					checkUndefined("div", EssentialOclPlugin.getOclLibraryProvider()
 							.getOclLibrary().getOclInteger(), this, that);
-
+	
 		if (result == null) {
 			/* Else compute the result. */
 			Long dividend = this.getModelInstanceInteger().getLong();
 			Long divisor = that.getModelInstanceInteger().getLong();
-
+	
 			try {
 				result =
 						JavaStandardLibraryFactory.INSTANCE.createOclInteger(dividend
@@ -141,7 +136,7 @@ public class JavaOclInteger extends JavaOclReal implements OclInteger {
 										.getOclInteger(), e);
 			}
 		}
-
+	
 		return result;
 	}
 
@@ -151,21 +146,26 @@ public class JavaOclInteger extends JavaOclReal implements OclInteger {
 	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger)
 	 */
 	public OclReal divide(OclInteger anInteger) {
-
+	
 		OclReal result = checkInvalid(EssentialOclPlugin.getOclLibraryProvider().getOclLibrary().getOclReal(), this, anInteger);
-
+	
 		if (result == null)
 			result = checkUndefined("/", EssentialOclPlugin.getOclLibraryProvider().getOclLibrary().getOclReal(), this, anInteger);
-
+	
 		if (result == null) {
 			Long longValue = anInteger.getModelInstanceInteger().getLong();
-
+	
 			result =
 					super.divide(JavaStandardLibraryFactory.INSTANCE
 							.createOclReal(longValue));
 		}
-
+	
 		return result;
+	}
+
+	public IModelInstanceInteger getModelInstanceInteger() {
+
+		return (IModelInstanceInteger) this.imiElement;
 	}
 
 	/*
@@ -361,6 +361,29 @@ public class JavaOclInteger extends JavaOclReal implements OclInteger {
 	 * (non-Javadoc)
 	 * @see
 	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclReal
+	 * #convertToString()
+	 */
+	public OclString convertToString() {
+	
+		OclString result;
+	
+		result = checkInvalid(EssentialOclPlugin.getOclLibraryProvider().getOclLibrary().getOclString(), this);
+	
+		if (result == null)
+			result = checkUndefined("toString", EssentialOclPlugin.getOclLibraryProvider().getOclLibrary().getOclString(), this);
+	
+		if (result == null)
+			result =
+					JavaStandardLibraryFactory.INSTANCE
+							.createOclString(getModelInstanceInteger().getLong().toString());
+	
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclReal
 	 * #negative()
 	 */
 	@Override
@@ -405,28 +428,5 @@ public class JavaOclInteger extends JavaOclReal implements OclInteger {
 		result.append("]");
 
 		return result.toString();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclReal
-	 * #convertToString()
-	 */
-	public OclString convertToString() {
-
-		OclString result;
-
-		result = checkInvalid(EssentialOclPlugin.getOclLibraryProvider().getOclLibrary().getOclString(), this);
-
-		if (result == null)
-			result = checkUndefined("toString", EssentialOclPlugin.getOclLibraryProvider().getOclLibrary().getOclString(), this);
-
-		if (result == null)
-			result =
-					JavaStandardLibraryFactory.INSTANCE
-							.createOclString(getModelInstanceInteger().getLong().toString());
-
-		return result;
 	}
 }

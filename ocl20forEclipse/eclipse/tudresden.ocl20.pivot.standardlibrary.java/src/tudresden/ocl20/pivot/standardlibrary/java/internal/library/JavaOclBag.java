@@ -77,82 +77,6 @@ public class JavaOclBag<T extends OclAny> extends JavaOclUnsortedCollection<T>
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny#isEqualTo(tudresden
-	 * .ocl20.pivot.essentialocl.standardlibrary.OclAny)
-	 */
-	public OclBoolean isEqualTo(OclAny that) {
-
-		OclBoolean result = null;
-
-		result = checkIsEqualTo(that);
-
-		if (result == null) {
-
-			/* Check if the given object is no OclBag. */
-			if (!(that instanceof OclBag)) {
-				result = JavaOclBoolean.getInstance(false);
-			}
-
-			/* Else compare the two Bags. */
-			else {
-
-				boolean booleanResult;
-
-				// bagList needs to be a copy
-				Collection<IModelInstanceElement> bagList1 = new ArrayList<IModelInstanceElement>(
-						this.getModelInstanceCollection().getCollection());
-				Collection<IModelInstanceElement> bagList2 = ((IModelInstanceCollection) that
-						.getModelInstanceElement()).getCollection();
-
-				/* Check if bagList1 and bagList2 have the same size. */
-				if (bagList1.size() != bagList2.size()) {
-					booleanResult = false;
-				} else if (bagList1.isEmpty() && bagList2.isEmpty()) {
-					booleanResult = true;
-				}
-
-				/* Else iterate over the elements and compare them. */
-				else {
-					for (IModelInstanceElement anElement : bagList2) {
-
-						/* check if anElement is in both lists. */
-						/*
-						 * FIXME Claas: Contains cannot be used here since it
-						 * uses hasCode and equals implementation. Problem: has
-						 * to be implemented for all Classes of the Standard
-						 * Library :(
-						 * 
-						 * This causes the bug issue #3042478
-						 */
-						if (bagList1.contains(anElement)) {
-							bagList1.remove(anElement);
-						}
-
-						else {
-							booleanResult = false;
-							break;
-						}
-					}
-
-					/*
-					 * If bagList1 is not empty, there are more elements in
-					 * bagList1 -> not equal
-					 */
-					booleanResult = bagList1.isEmpty();
-
-				}
-
-				result = JavaOclBoolean.getInstance(booleanResult);
-			}
-		}
-
-		return result;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
 	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBag#excluding(java
 	 * .lang.Object)
 	 */
@@ -303,6 +227,74 @@ public class JavaOclBag<T extends OclAny> extends JavaOclUnsortedCollection<T>
 
 		result = JavaStandardLibraryFactory.INSTANCE.createOclBag(intersection,
 				genericType);
+
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny#isEqualTo(tudresden
+	 * .ocl20.pivot.essentialocl.standardlibrary.OclAny)
+	 */
+	public OclBoolean isEqualTo(OclAny that) {
+
+		OclBoolean result = null;
+
+		result = checkIsEqualTo(that);
+
+		if (result == null) {
+
+			/* Check if the given object is no OclBag. */
+			if (!(that instanceof OclBag)) {
+				result = JavaOclBoolean.getInstance(false);
+			}
+
+			/* Else compare the two Bags. */
+			else {
+
+				boolean booleanResult;
+
+				// bagList needs to be a copy
+				Collection<IModelInstanceElement> bagList1 = new ArrayList<IModelInstanceElement>(
+						this.getModelInstanceCollection().getCollection());
+				Collection<IModelInstanceElement> bagList2 = ((IModelInstanceCollection) that
+						.getModelInstanceElement()).getCollection();
+
+				/* Check if bagList1 and bagList2 have the same size. */
+				if (bagList1.size() != bagList2.size()) {
+					booleanResult = false;
+				} else if (bagList1.isEmpty() && bagList2.isEmpty()) {
+					booleanResult = true;
+				}
+
+				/* Else iterate over the elements and compare them. */
+				else {
+					for (IModelInstanceElement anElement : bagList2) {
+
+						/* check if anElement is in both lists. */
+						if (bagList1.contains(anElement)) {
+							bagList1.remove(anElement);
+						}
+
+						else {
+							booleanResult = false;
+							break;
+						}
+					}
+
+					/*
+					 * If bagList1 is not empty, there are more elements in
+					 * bagList1 -> not equal
+					 */
+					booleanResult = bagList1.isEmpty();
+
+				}
+
+				result = JavaOclBoolean.getInstance(booleanResult);
+			}
+		}
 
 		return result;
 	}

@@ -63,26 +63,26 @@ public class JavaOclInvalid extends JavaOclAny implements OclInvalid {
 	/*
 	 * (non-Javadoc)
 	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny#isEqualTo(tudresden
+	 * .ocl20.pivot.essentialocl.standardlibrary.OclAny)
+	 */
+	public OclBoolean isEqualTo(OclAny object2) {
+	
+		if (object2 instanceof OclInvalid)
+			return JavaOclBoolean.getInstance(true);
+		else
+			return JavaOclBoolean.getInstance(false);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see
 	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclAny#
 	 * getModelInstanceElement()
 	 */
 	public IModelInstanceElement getModelInstanceElement() {
 
 		return IModelInstanceInvalid.INSTANCE;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny#isEqualTo(tudresden
-	 * .ocl20.pivot.essentialocl.standardlibrary.OclAny)
-	 */
-	public OclBoolean isEqualTo(OclAny object2) {
-
-		if (object2 instanceof OclInvalid)
-			return JavaOclBoolean.getInstance(true);
-		else
-			return JavaOclBoolean.getInstance(false);
 	}
 
 	/*
@@ -102,24 +102,24 @@ public class JavaOclInvalid extends JavaOclAny implements OclInvalid {
 	 * (non-Javadoc)
 	 * @see
 	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclAny#
-	 * oclIsInvalid()
+	 * oclIsKindOf(tudresden.ocl20.pivot.essentialocl.standardlibrary.OclType)
 	 */
-	public OclBoolean oclIsInvalid() {
-
-		return JavaOclBoolean.getInstance(true);
+	public <T extends OclAny> OclBoolean oclIsKindOf(OclType<T> typespec) {
+	
+		return JavaStandardLibraryFactory.INSTANCE.createOclInvalid(
+				EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+						.getOclBoolean(), invalidReason);
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * @see
 	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclAny#
-	 * oclIsKindOf(tudresden.ocl20.pivot.essentialocl.standardlibrary.OclType)
+	 * oclIsInvalid()
 	 */
-	public <T extends OclAny> OclBoolean oclIsKindOf(OclType<T> typespec) {
+	public OclBoolean oclIsInvalid() {
 
-		return JavaStandardLibraryFactory.INSTANCE.createOclInvalid(
-				EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
-						.getOclBoolean(), invalidReason);
+		return JavaOclBoolean.getInstance(true);
 	}
 
 	/*
@@ -158,5 +158,4 @@ public class JavaOclInvalid extends JavaOclAny implements OclInvalid {
 
 		return "invalid";
 	}
-
 }

@@ -63,7 +63,7 @@ public class JavaOclSet<T extends OclAny> extends JavaOclUnsortedCollection<T>
 	 * </p>
 	 * 
 	 * @param adaptee
-	 *          The adapted model instance object of this {@link JavaOclSet}.
+	 *            The adapted model instance object of this {@link JavaOclSet}.
 	 */
 	public JavaOclSet(
 			IModelInstanceCollection<IModelInstanceElement> imiCollection,
@@ -84,34 +84,34 @@ public class JavaOclSet<T extends OclAny> extends JavaOclUnsortedCollection<T>
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSet#complement(
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSet#complement(
 	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSet)
 	 */
 	public OclSet<T> complement(OclSet<T> that) {
 
 		OclSet<T> result = null;
 
-		result = checkInvalid(EssentialOclPlugin.getOclLibraryProvider().getOclLibrary().getSetType(genericType), this, that);
+		result = checkInvalid(EssentialOclPlugin.getOclLibraryProvider()
+				.getOclLibrary().getSetType(genericType), this, that);
 
 		if (result == null)
-			result =
-					checkUndefined("complement", EssentialOclPlugin.getOclLibraryProvider().getOclLibrary().getSetType(genericType), this,
-							that);
+			result = checkUndefined("complement",
+					EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+							.getSetType(genericType), this, that);
 
 		if (result == null) {
-			Set<IModelInstanceElement> complement =
-					new HashSet<IModelInstanceElement>();
+			Set<IModelInstanceElement> complement = new HashSet<IModelInstanceElement>();
 
-			Collection<IModelInstanceElement> otherCollection =
-					(Collection<IModelInstanceElement>) that.getModelInstanceCollection()
-							.getCollection();
+			Collection<IModelInstanceElement> otherCollection = (Collection<IModelInstanceElement>) that
+					.getModelInstanceCollection().getCollection();
 
 			complement.addAll(getModelInstanceCollection().getCollection());
 			complement.removeAll(otherCollection);
 
-			result =
-					JavaStandardLibraryFactory.INSTANCE.createOclSet(complement,
-							genericType);
+			result = JavaStandardLibraryFactory.INSTANCE.createOclSet(
+					complement, genericType);
 		}
 
 		return result;
@@ -119,6 +119,7 @@ public class JavaOclSet<T extends OclAny> extends JavaOclUnsortedCollection<T>
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSet#excluding(java
 	 * .lang.Object)
@@ -127,11 +128,13 @@ public class JavaOclSet<T extends OclAny> extends JavaOclUnsortedCollection<T>
 
 		OclSet<T> result = null;
 
-		result = checkInvalid(EssentialOclPlugin.getOclLibraryProvider().getOclLibrary().getSetType(genericType), this, that);
+		result = checkInvalid(EssentialOclPlugin.getOclLibraryProvider()
+				.getOclLibrary().getSetType(genericType), this, that);
 
 		if (result == null)
-			result =
-					checkUndefined("excluding", EssentialOclPlugin.getOclLibraryProvider().getOclLibrary().getSetType(genericType), this);
+			result = checkUndefined("excluding",
+					EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+							.getSetType(genericType), this);
 
 		if (result == null) {
 			Set<IModelInstanceElement> exclude = new HashSet<IModelInstanceElement>();
@@ -139,9 +142,8 @@ public class JavaOclSet<T extends OclAny> extends JavaOclUnsortedCollection<T>
 			exclude.addAll(getModelInstanceCollection().getCollection());
 			exclude.remove(that.getModelInstanceElement());
 
-			result =
-					JavaStandardLibraryFactory.INSTANCE
-							.createOclSet(exclude, genericType);
+			result = JavaStandardLibraryFactory.INSTANCE.createOclSet(exclude,
+					genericType);
 		}
 
 		return result;
@@ -149,26 +151,31 @@ public class JavaOclSet<T extends OclAny> extends JavaOclUnsortedCollection<T>
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection#flatten ()
+	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection#flatten
+	 * ()
 	 */
 	public <T2 extends OclAny> OclSet<T2> flatten() {
 
 		OclSet<T2> result = null;
 
-		result = checkInvalid(EssentialOclPlugin.getOclLibraryProvider().getOclLibrary().getSetType(genericType), this);
+		result = checkInvalid(EssentialOclPlugin.getOclLibraryProvider()
+				.getOclLibrary().getSetType(genericType), this);
 
 		if (result == null)
-			result = checkUndefined("flatten", EssentialOclPlugin.getOclLibraryProvider().getOclLibrary().getSetType(genericType), this);
+			result = checkUndefined("flatten",
+					EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+							.getSetType(genericType), this);
 
 		if (result == null) {
 			Set<IModelInstanceElement> flat = new HashSet<IModelInstanceElement>();
 
-			Type resultType =
-					flatRec(this.getModelInstanceCollection().getCollection(), flat);
+			Type resultType = flatRec(this.getModelInstanceCollection()
+					.getCollection(), flat);
 
-			result =
-					JavaStandardLibraryFactory.INSTANCE.createOclSet(flat, resultType);
+			result = JavaStandardLibraryFactory.INSTANCE.createOclSet(flat,
+					resultType);
 		}
 
 		return result;
@@ -176,6 +183,7 @@ public class JavaOclSet<T extends OclAny> extends JavaOclUnsortedCollection<T>
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSet#including(java
 	 * .lang.Object)
@@ -184,11 +192,13 @@ public class JavaOclSet<T extends OclAny> extends JavaOclUnsortedCollection<T>
 
 		OclSet<T> result = null;
 
-		result = checkInvalid(EssentialOclPlugin.getOclLibraryProvider().getOclLibrary().getSetType(genericType), this, that);
+		result = checkInvalid(EssentialOclPlugin.getOclLibraryProvider()
+				.getOclLibrary().getSetType(genericType), this, that);
 
 		if (result == null)
-			result =
-					checkUndefined("including", EssentialOclPlugin.getOclLibraryProvider().getOclLibrary().getSetType(genericType), this);
+			result = checkUndefined("including",
+					EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+							.getSetType(genericType), this);
 
 		if (result == null) {
 			Set<IModelInstanceElement> include = new HashSet<IModelInstanceElement>();
@@ -196,9 +206,8 @@ public class JavaOclSet<T extends OclAny> extends JavaOclUnsortedCollection<T>
 			include.addAll(getModelInstanceCollection().getCollection());
 			include.add(that.getModelInstanceElement());
 
-			result =
-					JavaStandardLibraryFactory.INSTANCE
-							.createOclSet(include, genericType);
+			result = JavaStandardLibraryFactory.INSTANCE.createOclSet(include,
+					genericType);
 		}
 
 		return result;
@@ -206,6 +215,7 @@ public class JavaOclSet<T extends OclAny> extends JavaOclUnsortedCollection<T>
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSet#intersection(
 	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBag)
@@ -217,6 +227,7 @@ public class JavaOclSet<T extends OclAny> extends JavaOclUnsortedCollection<T>
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclCollection
 	 * #isEqualTo(tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny)
@@ -239,13 +250,11 @@ public class JavaOclSet<T extends OclAny> extends JavaOclUnsortedCollection<T>
 				boolean booleanResult;
 
 				// copy, since elements are removed later
-				Set<IModelInstanceElement> set1 =
-						new HashSet<IModelInstanceElement>(
-								(Set<IModelInstanceElement>) this.getModelInstanceCollection()
-										.getCollection());
-				Set<IModelInstanceElement> set2 =
-						(Set<IModelInstanceElement>) ((IModelInstanceCollection) that
-								.getModelInstanceElement()).getCollection();
+				Set<IModelInstanceElement> set1 = new HashSet<IModelInstanceElement>(
+						(Set<IModelInstanceElement>) this
+								.getModelInstanceCollection().getCollection());
+				Set<IModelInstanceElement> set2 = (Set<IModelInstanceElement>) ((IModelInstanceCollection) that
+						.getModelInstanceElement()).getCollection();
 
 				if (set1.size() != set2.size()) {
 					booleanResult = false;
@@ -275,6 +284,7 @@ public class JavaOclSet<T extends OclAny> extends JavaOclUnsortedCollection<T>
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSet#symmetricDifference
 	 * (tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSet)
@@ -283,39 +293,40 @@ public class JavaOclSet<T extends OclAny> extends JavaOclUnsortedCollection<T>
 
 		OclSet<T> result = null;
 
-		result = checkInvalid(EssentialOclPlugin.getOclLibraryProvider().getOclLibrary().getSetType(genericType), this, that);
+		result = checkInvalid(EssentialOclPlugin.getOclLibraryProvider()
+				.getOclLibrary().getSetType(genericType), this, that);
 
 		if (result == null)
-			result =
-					checkUndefined("symmetricDifference", EssentialOclPlugin.getOclLibraryProvider().getOclLibrary().getSetType(genericType),
-							this, that);
+			result = checkUndefined("symmetricDifference",
+					EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+							.getSetType(genericType), this, that);
 
 		if (result == null) {
-			Set<IModelInstanceElement> symmetricDifference =
-					new HashSet<IModelInstanceElement>();
+			Set<IModelInstanceElement> symmetricDifference = new HashSet<IModelInstanceElement>();
 
-			Collection<IModelInstanceElement> otherCollectionCopy =
-					new ArrayList<IModelInstanceElement>(that
-							.getModelInstanceCollection().getCollection());
+			Collection<IModelInstanceElement> otherCollectionCopy = new ArrayList<IModelInstanceElement>(
+					that.getModelInstanceCollection().getCollection());
 
 			/* Iterate over this bag. */
 			for (IModelInstanceElement element : getModelInstanceCollection()
 					.getCollection()) {
 				/*
-				 * if other collection has not the same element, then it is in the
-				 * symmetric difference; remove it, so that it is not counted multiple
-				 * times
+				 * if other collection has not the same element, then it is in
+				 * the symmetric difference; remove it, so that it is not
+				 * counted multiple times
 				 */
 				if (!otherCollectionCopy.remove(element)) {
 					symmetricDifference.add(element);
 				}
 			}
-			/* add the other collection that is already without intersection elements */
+			/*
+			 * add the other collection that is already without intersection
+			 * elements
+			 */
 			symmetricDifference.addAll(otherCollectionCopy);
 
-			result =
-					JavaStandardLibraryFactory.INSTANCE.createOclSet(symmetricDifference,
-							genericType);
+			result = JavaStandardLibraryFactory.INSTANCE.createOclSet(
+					symmetricDifference, genericType);
 		}
 
 		return result;
@@ -323,6 +334,7 @@ public class JavaOclSet<T extends OclAny> extends JavaOclUnsortedCollection<T>
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSet#union(tudresden
 	 * .ocl20.pivot.essentialocl.standardlibrary.OclSet)
@@ -331,24 +343,25 @@ public class JavaOclSet<T extends OclAny> extends JavaOclUnsortedCollection<T>
 
 		OclSet<T> result = null;
 
-		result = checkInvalid(EssentialOclPlugin.getOclLibraryProvider().getOclLibrary().getSetType(genericType), this, that);
+		result = checkInvalid(EssentialOclPlugin.getOclLibraryProvider()
+				.getOclLibrary().getSetType(genericType), this, that);
 
 		if (result == null)
-			result =
-					checkUndefined("union", EssentialOclPlugin.getOclLibraryProvider()
-							.getOclLibrary().getSetType(genericType), this, that);
+			result = checkUndefined("union",
+					EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+							.getSetType(genericType), this, that);
 
 		if (result == null) {
 			Set<IModelInstanceElement> union = new HashSet<IModelInstanceElement>();
 
-			Collection<IModelInstanceElement> otherCollection =
-					that.getModelInstanceCollection().getCollection();
+			Collection<IModelInstanceElement> otherCollection = that
+					.getModelInstanceCollection().getCollection();
 
 			union.addAll(getModelInstanceCollection().getCollection());
 			union.addAll(otherCollection);
 
-			result =
-					JavaStandardLibraryFactory.INSTANCE.createOclSet(union, genericType);
+			result = JavaStandardLibraryFactory.INSTANCE.createOclSet(union,
+					genericType);
 		}
 
 		return result;
@@ -360,7 +373,7 @@ public class JavaOclSet<T extends OclAny> extends JavaOclUnsortedCollection<T>
 	 * </p>
 	 * 
 	 * @param aSet
-	 *          The {@link OclSet} which shall be subtracted.
+	 *            The {@link OclSet} which shall be subtracted.
 	 * 
 	 * @return The {@link OclSet} which is the result of the subtraction.
 	 */

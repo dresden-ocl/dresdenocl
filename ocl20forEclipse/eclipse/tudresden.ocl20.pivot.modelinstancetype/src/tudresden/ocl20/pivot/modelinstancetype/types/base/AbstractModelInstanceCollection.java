@@ -19,9 +19,14 @@ with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
 package tudresden.ocl20.pivot.modelinstancetype.types.base;
 
 import java.util.Collection;
+import java.util.LinkedList;
 
 import tudresden.ocl20.pivot.essentialocl.expressions.CollectionKind;
+import tudresden.ocl20.pivot.essentialocl.types.BagType;
 import tudresden.ocl20.pivot.essentialocl.types.CollectionType;
+import tudresden.ocl20.pivot.essentialocl.types.OrderedSetType;
+import tudresden.ocl20.pivot.essentialocl.types.SequenceType;
+import tudresden.ocl20.pivot.essentialocl.types.SetType;
 import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceCollection;
 import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement;
 import tudresden.ocl20.pivot.pivotmodel.Type;
@@ -35,10 +40,12 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
  * @author Claas Wilke
  */
 public abstract class AbstractModelInstanceCollection<T extends IModelInstanceElement>
-		extends AbstractModelInstanceElement implements IModelInstanceCollection<T> {
+		extends AbstractModelInstanceElement implements
+		IModelInstanceCollection<T> {
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @seetudresden.ocl20.pivot.modelbus.modelinstance.types.impl.
 	 * AbstractModelInstanceElement#getName()
 	 */
@@ -95,7 +102,8 @@ public abstract class AbstractModelInstanceCollection<T extends IModelInstanceEl
 				}
 
 				if (element instanceof IModelInstanceElement) {
-					resultBuffer.append(((IModelInstanceElement) element).getName());
+					resultBuffer.append(((IModelInstanceElement) element)
+							.getName());
 				}
 
 				else {
@@ -112,6 +120,7 @@ public abstract class AbstractModelInstanceCollection<T extends IModelInstanceEl
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @seetudresden.ocl20.pivot.modelbus.modelinstance.types.base.
 	 * AbstractModelInstanceElement#equals(java.lang.Object)
 	 */
@@ -134,7 +143,8 @@ public abstract class AbstractModelInstanceCollection<T extends IModelInstanceEl
 			other = (AbstractModelInstanceCollection<?>) object;
 
 			/*
-			 * This should not happen. But anyway, null == null results in false.
+			 * This should not happen. But anyway, null == null results in
+			 * false.
 			 */
 			if (this.isUndefined() || other.isUndefined()) {
 				result = false;
@@ -152,8 +162,59 @@ public abstract class AbstractModelInstanceCollection<T extends IModelInstanceEl
 				/* Check if both collections have the same type. */
 				result &= this.getType().equals(other.getType());
 
-				/* Check if both collections have the same elements. */
-				result &= this.getCollection().equals(other.getCollection());
+				/* Compare collections depends on the type of collection. */
+				if (this.getType() instanceof BagType) {
+
+					if (this.getCollection().size() == other.getCollection()
+							.size()) {
+						/*
+						 * Check that both collections contain the same amount
+						 * of each element.
+						 */
+						LinkedList<Object> copy = new LinkedList<Object>(
+								this.getCollection());
+
+						for (Object element : other.getCollection()) {
+							if (copy.contains(element)) {
+								copy.remove(element);
+							}
+
+							else {
+								result = false;
+							}
+						}
+						// end for.
+
+						result &= copy.isEmpty();
+					}
+
+					else {
+						result = false;
+					}
+				}
+
+				else if (this.getType() instanceof OrderedSetType) {
+					/* Collections should have the same order. */
+					result &= this.getCollection()
+							.equals(other.getCollection());
+				}
+
+				else if (this.getType() instanceof SequenceType) {
+					/* Collections should have the same order. */
+					result &= this.getCollection()
+							.equals(other.getCollection());
+				}
+
+				else if (this.getType() instanceof SetType) {
+					/* Collections should contain the same elements. */
+					result &= this.getCollection().containsAll(
+							(other.getCollection()));
+				}
+
+				else {
+					result &= this.getCollection()
+							.equals(other.getCollection());
+				}
 			}
 		}
 
@@ -166,6 +227,7 @@ public abstract class AbstractModelInstanceCollection<T extends IModelInstanceEl
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @seetudresden.ocl20.pivot.modelbus.modelinstance.types.base.
 	 * AbstractModelInstanceElement#hashCode()
 	 */
@@ -214,12 +276,15 @@ public abstract class AbstractModelInstanceCollection<T extends IModelInstanceEl
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @seetudresden.ocl20.pivot.modelbus.modelinstance.types.base.
 	 * AbstractModelInstanceElement#hashCode()
 	 */
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceCollection
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceCollection
 	 * #isOrdered()
 	 */
 	public boolean isOrdered() {
@@ -242,6 +307,7 @@ public abstract class AbstractModelInstanceCollection<T extends IModelInstanceEl
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement
 	 * #isUndefined()
 	 */
@@ -252,6 +318,7 @@ public abstract class AbstractModelInstanceCollection<T extends IModelInstanceEl
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement#isKindOf
 	 * (tudresden.ocl20.pivot.pivotmodel.Type)
@@ -263,7 +330,9 @@ public abstract class AbstractModelInstanceCollection<T extends IModelInstanceEl
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceCollection
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceCollection
 	 * #isUnique()
 	 */
 	public boolean isUnique() {

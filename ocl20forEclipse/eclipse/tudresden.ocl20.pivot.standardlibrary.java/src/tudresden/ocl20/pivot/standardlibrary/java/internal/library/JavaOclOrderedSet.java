@@ -380,5 +380,4 @@ public class JavaOclOrderedSet<T extends OclAny> extends
 
 		return result;
 	}
-
 }

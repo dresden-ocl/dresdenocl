@@ -78,6 +78,50 @@ public abstract class JavaOclUnsortedCollection<T extends OclAny> extends
 	 * (non-Javadoc)
 	 * @see
 	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclUnsortedCollection
+	 * #intersection(tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSet)
+	 */
+	public OclSet<T> intersection(OclSet<T> aSet) {
+	
+		OclSet<T> result;
+	
+		result =
+				checkInvalid(EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+						.getSetType(genericType), this, aSet);
+	
+		if (result == null)
+			result =
+					checkUndefined("intersection", EssentialOclPlugin
+							.getOclLibraryProvider().getOclLibrary().getSetType(genericType),
+							this, aSet);
+	
+		if (result == null) {
+			/* Else compute the result. */
+			Collection<IModelInstanceElement> otherSet;
+			Set<IModelInstanceElement> intersection;
+	
+			otherSet = aSet.getModelInstanceCollection().getCollection();
+			intersection = new HashSet<IModelInstanceElement>();
+	
+			for (IModelInstanceElement anElement : otherSet) {
+				if (this.getModelInstanceCollection().getCollection().contains(
+						anElement)
+						&& !intersection.contains(anElement)) {
+					intersection.add(anElement);
+				}
+			}
+	
+			result =
+					JavaStandardLibraryFactory.INSTANCE.createOclSet(intersection,
+							genericType);
+		}
+	
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclUnsortedCollection
 	 * #union(tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBag)
 	 */
 	public OclBag<T> union(OclBag<T> aBag) {
@@ -103,50 +147,6 @@ public abstract class JavaOclUnsortedCollection<T extends OclAny> extends
 
 			result =
 					JavaStandardLibraryFactory.INSTANCE.createOclBag(union, genericType);
-		}
-
-		return result;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclUnsortedCollection
-	 * #intersection(tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSet)
-	 */
-	public OclSet<T> intersection(OclSet<T> aSet) {
-
-		OclSet<T> result;
-
-		result =
-				checkInvalid(EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
-						.getSetType(genericType), this, aSet);
-
-		if (result == null)
-			result =
-					checkUndefined("intersection", EssentialOclPlugin
-							.getOclLibraryProvider().getOclLibrary().getSetType(genericType),
-							this, aSet);
-
-		if (result == null) {
-			/* Else compute the result. */
-			Collection<IModelInstanceElement> otherSet;
-			Set<IModelInstanceElement> intersection;
-
-			otherSet = aSet.getModelInstanceCollection().getCollection();
-			intersection = new HashSet<IModelInstanceElement>();
-
-			for (IModelInstanceElement anElement : otherSet) {
-				if (this.getModelInstanceCollection().getCollection().contains(
-						anElement)
-						&& !intersection.contains(anElement)) {
-					intersection.add(anElement);
-				}
-			}
-
-			result =
-					JavaStandardLibraryFactory.INSTANCE.createOclSet(intersection,
-							genericType);
 		}
 
 		return result;

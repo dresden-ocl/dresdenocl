@@ -184,58 +184,20 @@ public abstract class JavaOclAny implements OclAny {
 		operationNames.put(2, binaryOperations);
 	}
 
+	public Throwable getInvalidReason() {
+
+		return invalidReason;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * tudresden.ocl20.pivot.modelbus.IModelInstance#getOperationName(java.lang
-	 * .String, int)
+	 * @seetudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny#
+	 * getModelInstanceElement()
 	 */
-	protected String getOperationName(String name, int operatorCount) {
-
-		String result;
-		Map<String, String> operationMap;
-
-		result = null;
-		operationMap = operationNames.get(operatorCount);
-
-		if (operationMap != null) {
-
-			result = operationMap.get(name);
-		}
-		// no else.
-
-		if (result == null) {
-			result = name;
-		}
-		// no else.
-
-		return result;
-	}
-
-	// FIXME Michael: Is this the right place for this code?
-	protected Type commonSuperType(Type type1, Type type2) {
-
-		Type result;
-
-		if (type1 == null && type2 == null)
-			throw new IllegalArgumentException(
-					"Cannot determine common super type of null values.");
-
-		else if (type1 == null
-				|| type1.equals(EssentialOclPlugin.getOclLibraryProvider()
-						.getOclLibrary().getOclAny()))
-			result = type2;
-
-		else if (type2 == null
-				|| type2.equals(EssentialOclPlugin.getOclLibraryProvider()
-						.getOclLibrary().getOclAny()))
-			result = type1;
-
-		else
-			result = type1.commonSuperType(type2);
-
-		return result;
+	public IModelInstanceElement getModelInstanceElement() {
+	
+		return imiElement;
 	}
 
 	/*
@@ -246,13 +208,87 @@ public abstract class JavaOclAny implements OclAny {
 	 * ()
 	 */
 	public String getUndefinedReason() {
-
+	
 		return undefinedreason;
 	}
 
-	public Throwable getInvalidReason() {
-
-		return invalidReason;
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny#invokeOperation
+	 * (tudresden.ocl20.pivot.pivotmodel.Operation,
+	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny[])
+	 */
+	@SuppressWarnings("unchecked")
+	public OclAny invokeOperation(Operation operation, OclAny... args) {
+	
+		OclAny result = null;
+	
+		String opName;
+	
+		opName = operation.getName();
+		/*
+		 * possibly map from operation name to standard library operation name
+		 * (e.g., "+" -> "add")
+		 */
+		opName = getOperationName(opName, args.length + 1);
+	
+		/* translate arguments */
+		List<Class<? extends OclAny>> argClasses = new LinkedList<Class<? extends OclAny>>();
+		for (OclAny arg : args) {
+			argClasses.add(arg.getClass());
+		}
+	
+		Class<? extends OclAny> thisClass = this.getClass();
+	
+		/* try to invoke the operation */
+		try {
+			Method methodToInvoke = findMethod(opName, thisClass,
+					argClasses.toArray(new Class[0]));
+	
+			Object invocationResult = methodToInvoke.invoke(this,
+					(Object[]) args);
+	
+			result = (OclAny) invocationResult;
+	
+		}
+		/* if anything goes wrong, wrap it in an InvalidException */
+		catch (SecurityException e) {
+			result = JavaStandardLibraryFactory.INSTANCE.createOclInvalid(
+					operation.getType(), e);
+		} catch (NoSuchMethodException e) {
+			result = JavaStandardLibraryFactory.INSTANCE.createOclInvalid(
+					operation.getType(), e);
+		} catch (IllegalArgumentException e) {
+			result = JavaStandardLibraryFactory.INSTANCE.createOclInvalid(
+					operation.getType(), e);
+		} catch (IllegalAccessException e) {
+			result = JavaStandardLibraryFactory.INSTANCE.createOclInvalid(
+					operation.getType(), e);
+		} catch (InvocationTargetException e) {
+	
+			Throwable cause = e.getCause();
+			if (cause != null) {
+				result = JavaStandardLibraryFactory.INSTANCE.createOclInvalid(
+						operation.getType(), cause);
+			} else {
+				result = JavaStandardLibraryFactory.INSTANCE.createOclInvalid(
+						operation.getType(), e);
+			}
+		}
+	
+		/*
+		 * Just in case, if the return type is not an instance of OclAny.
+		 */
+		catch (ClassCastException e) {
+			result = JavaStandardLibraryFactory.INSTANCE.createOclInvalid(
+					operation.getType(), e);
+		}
+		// }
+		// no else.
+	
+		return result;
 	}
 
 	/*
@@ -423,17 +459,78 @@ public abstract class JavaOclAny implements OclAny {
 		return result;
 	}
 
-	/*
-	 * (non-Javadoc)
+	/**
+	 * <p>
+	 * <strong>This method is required to support {@link Collection} operations
+	 * such as {@link Collection#contains(Object)}!</strong>
+	 * </p>
 	 * 
-	 * @seetudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny#
-	 * getModelInstanceElement()
+	 * @see tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclAny#equals(java.lang.Object)
 	 */
-	public IModelInstanceElement getModelInstanceElement() {
+	@Override
+	public boolean equals(Object other) {
 
-		return imiElement;
+		boolean result;
+
+		if (other == null) {
+			result = false;
+		}
+
+		else if (other instanceof OclAny) {
+			OclBoolean oclResult;
+			oclResult = this.isEqualTo((OclAny) other);
+
+			if (oclResult.oclIsUndefined().isTrue()
+					|| oclResult.oclIsInvalid().isTrue()) {
+				result = false;
+			}
+
+			else {
+				result = oclResult.isTrue();
+			}
+		}
+
+		else {
+			result = false;
+		}
+
+		return result;
 	}
 
+	/**
+	 * <p>
+	 * <strong>This method is required to support {@link Collection} operations
+	 * such as {@link Collection#contains(Object)}!</strong>
+	 * </p>
+	 * 
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+
+		final int prime = 31;
+		int result = 1;
+
+		result = prime * result;
+
+		if (this.imiElement != null) {
+			result = prime * result + imiElement.hashCode();
+		}
+		// no else.
+
+		if (this.invalidReason != null) {
+			result = prime * result + this.oclIsInvalid().hashCode();
+		}
+		// no else.
+
+		if (this.undefinedreason != null) {
+			result = prime * result + this.oclIsUndefined().hashCode();
+		}
+		// no else.
+
+		return result;
+	}
+	
 	/**
 	 * This methods checks for all given {@link OclAny}s whether they are
 	 * invalid. If one of them is, the typed <code>invalid</code> value is
@@ -464,6 +561,38 @@ public abstract class JavaOclAny implements OclAny {
 			}
 		}
 
+		return result;
+	}
+
+	/**
+	 * Helper method that can be used by every subclass of {@link OclAny} to
+	 * check whether the object itself and its argument are both null or one of
+	 * them is.
+	 * 
+	 * @param that
+	 *            the object to compare to
+	 * @return <code>true</code> if this and that are both undefined or invalid
+	 *         or <code>false</code> if one of them is. Returns
+	 *         <code>null</code> if both elements are neither undefined nor
+	 *         invalid.
+	 */
+	protected OclBoolean checkIsEqualTo(OclAny that) {
+	
+		OclBoolean result = null;
+		// both undefined
+		if (this.undefinedreason != null && that.getUndefinedReason() != null)
+			result = JavaOclBoolean.getInstance(true);
+		// both invalid
+		else if (this.invalidReason != null && that.getInvalidReason() != null)
+			result = JavaOclBoolean.getInstance(true);
+		// only one undefined
+		else if (this.undefinedreason != null
+				|| that.getUndefinedReason() != null)
+			result = JavaOclBoolean.getInstance(false);
+		// only one invalid
+		else if (this.invalidReason != null || that.getInvalidReason() != null)
+			result = JavaOclBoolean.getInstance(false);
+	
 		return result;
 	}
 
@@ -524,38 +653,6 @@ public abstract class JavaOclAny implements OclAny {
 	}
 
 	/**
-	 * Helper method that can be used by every subclass of {@link OclAny} to
-	 * check whether the object itself and its argument are both null or one of
-	 * them is.
-	 * 
-	 * @param that
-	 *            the object to compare to
-	 * @return <code>true</code> if this and that are both undefined or invalid
-	 *         or <code>false</code> if one of them is. Returns
-	 *         <code>null</code> if both elements are neither undefined nor
-	 *         invalid.
-	 */
-	protected OclBoolean checkIsEqualTo(OclAny that) {
-
-		OclBoolean result = null;
-		// both undefined
-		if (this.undefinedreason != null && that.getUndefinedReason() != null)
-			result = JavaOclBoolean.getInstance(true);
-		// both invalid
-		else if (this.invalidReason != null && that.getInvalidReason() != null)
-			result = JavaOclBoolean.getInstance(true);
-		// only one undefined
-		else if (this.undefinedreason != null
-				|| that.getUndefinedReason() != null)
-			result = JavaOclBoolean.getInstance(false);
-		// only one invalid
-		else if (this.invalidReason != null || that.getInvalidReason() != null)
-			result = JavaOclBoolean.getInstance(false);
-
-		return result;
-	}
-
-	/**
 	 * The method {@link OclAny#asSet()} is used in implicit conversions. Since
 	 * <code>undefined</code> is allowed to be a source of collection
 	 * operations, this method checks whether this object is
@@ -580,82 +677,28 @@ public abstract class JavaOclAny implements OclAny {
 		return result;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny#invokeOperation
-	 * (tudresden.ocl20.pivot.pivotmodel.Operation,
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny[])
-	 */
-	@SuppressWarnings("unchecked")
-	public OclAny invokeOperation(Operation operation, OclAny... args) {
-
-		OclAny result = null;
-
-		String opName;
-
-		opName = operation.getName();
-		/*
-		 * possibly map from operation name to standard library operation name
-		 * (e.g., "+" -> "add")
-		 */
-		opName = getOperationName(opName, args.length + 1);
-
-		/* translate arguments */
-		List<Class<? extends OclAny>> argClasses = new LinkedList<Class<? extends OclAny>>();
-		for (OclAny arg : args) {
-			argClasses.add(arg.getClass());
-		}
-
-		Class<? extends OclAny> thisClass = this.getClass();
-
-		/* try to invoke the operation */
-		try {
-			Method methodToInvoke = findMethod(opName, thisClass,
-					argClasses.toArray(new Class[0]));
-
-			Object invocationResult = methodToInvoke.invoke(this,
-					(Object[]) args);
-
-			result = (OclAny) invocationResult;
-
-		}
-		/* if anything goes wrong, wrap it in an InvalidException */
-		catch (SecurityException e) {
-			result = JavaStandardLibraryFactory.INSTANCE.createOclInvalid(
-					operation.getType(), e);
-		} catch (NoSuchMethodException e) {
-			result = JavaStandardLibraryFactory.INSTANCE.createOclInvalid(
-					operation.getType(), e);
-		} catch (IllegalArgumentException e) {
-			result = JavaStandardLibraryFactory.INSTANCE.createOclInvalid(
-					operation.getType(), e);
-		} catch (IllegalAccessException e) {
-			result = JavaStandardLibraryFactory.INSTANCE.createOclInvalid(
-					operation.getType(), e);
-		} catch (InvocationTargetException e) {
-
-			Throwable cause = e.getCause();
-			if (cause != null) {
-				result = JavaStandardLibraryFactory.INSTANCE.createOclInvalid(
-						operation.getType(), cause);
-			} else {
-				result = JavaStandardLibraryFactory.INSTANCE.createOclInvalid(
-						operation.getType(), e);
-			}
-		}
-
-		/*
-		 * Just in case, if the return type is not an instance of OclAny.
-		 */
-		catch (ClassCastException e) {
-			result = JavaStandardLibraryFactory.INSTANCE.createOclInvalid(
-					operation.getType(), e);
-		}
-		// }
-		// no else.
-
+	// FIXME Michael: Is this the right place for this code?
+	protected Type commonSuperType(Type type1, Type type2) {
+	
+		Type result;
+	
+		if (type1 == null && type2 == null)
+			throw new IllegalArgumentException(
+					"Cannot determine common super type of null values.");
+	
+		else if (type1 == null
+				|| type1.equals(EssentialOclPlugin.getOclLibraryProvider()
+						.getOclLibrary().getOclAny()))
+			result = type2;
+	
+		else if (type2 == null
+				|| type2.equals(EssentialOclPlugin.getOclLibraryProvider()
+						.getOclLibrary().getOclAny()))
+			result = type1;
+	
+		else
+			result = type1.commonSuperType(type2);
+	
 		return result;
 	}
 
@@ -755,53 +798,32 @@ public abstract class JavaOclAny implements OclAny {
 		return result;
 	}
 
-	/**
-	 * <p>
-	 * Overrides the method {@link Object#equals(Object)}. Has the same
-	 * semantics as {@link OclAny#isEqualTo(OclAny)} but results in
-	 * <code>false</code> if the result is <code>invalid</code> or
-	 * <code>undefined</code>.
-	 * </p>
+	/*
+	 * (non-Javadoc)
 	 * 
-	 * <p>
-	 * <strong>This semantics is required to support {@link Collection}
-	 * operations such as {@link Collection#contains(Object)} in interpretation
-	 * of iterate expressions!</strong>
-	 * </p>
-	 * 
-	 * @param other
-	 *            The {@link Object} to be compared.
-	 * 
-	 *            FIXME Claas: Where is the {@link Object#hashCode()}
-	 *            implementation?
+	 * @see
+	 * tudresden.ocl20.pivot.modelbus.IModelInstance#getOperationName(java.lang
+	 * .String, int)
 	 */
-	@Override
-	public boolean equals(Object other) {
-
-		boolean result;
-
-		if (other == null) {
-			result = false;
+	protected String getOperationName(String name, int operatorCount) {
+	
+		String result;
+		Map<String, String> operationMap;
+	
+		result = null;
+		operationMap = operationNames.get(operatorCount);
+	
+		if (operationMap != null) {
+	
+			result = operationMap.get(name);
 		}
-
-		else if (other instanceof OclAny) {
-			OclBoolean oclResult;
-			oclResult = this.isEqualTo((OclAny) other);
-
-			if (oclResult.oclIsUndefined().isTrue()
-					|| oclResult.oclIsInvalid().isTrue()) {
-				result = false;
-			}
-
-			else {
-				result = oclResult.isTrue();
-			}
+		// no else.
+	
+		if (result == null) {
+			result = name;
 		}
-
-		else {
-			result = false;
-		}
-
+		// no else.
+	
 		return result;
 	}
 

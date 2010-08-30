@@ -305,4 +305,21 @@ public class JavaModelInstanceCollection<T extends IModelInstanceElement>
 
 		return this.myContainedObjects;
 	}
+	
+	/*
+	 * (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		
+		StringBuffer result = new StringBuffer();
+		
+		result.append(this.getClass().getName());
+		result.append("[");
+		result.append(this.getCollection().toString());
+		result.append("]");
+		
+		return result.toString();
+	}
 }

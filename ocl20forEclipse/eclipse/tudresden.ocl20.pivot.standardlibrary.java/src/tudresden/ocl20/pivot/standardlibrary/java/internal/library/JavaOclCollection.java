@@ -127,23 +127,99 @@ public abstract class JavaOclCollection<T extends OclAny> extends
 
 	/*
 	 * (non-Javadoc)
-	 * @seetudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection#
-	 * getModelInstanceCollection()
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection#asBag()
 	 */
-	@SuppressWarnings("unchecked")
-	public IModelInstanceCollection<IModelInstanceElement> getModelInstanceCollection() {
-
-		return (IModelInstanceCollection<IModelInstanceElement>) imiElement;
+	public OclBag<T> asBag() {
+	
+		OclBag<T> result = null;
+	
+		result =
+				checkInvalid(EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+						.getBagType(genericType), this);
+	
+		if (result == null)
+			result =
+					checkUndefined("asBag", EssentialOclPlugin.getOclLibraryProvider()
+							.getOclLibrary().getBagType(genericType), this);
+	
+		if (result == null) {
+			IModelInstanceCollection<IModelInstanceElement> imiCollectionResult =
+					BasisJavaModelInstanceFactory.createModelInstanceCollection(
+							getModelInstanceCollection().getCollection(), EssentialOclPlugin
+									.getOclLibraryProvider().getOclLibrary().getSequenceType(
+											genericType));
+	
+			result = new JavaOclBag<T>(imiCollectionResult, genericType);
+		}
+	
+		return result;
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * @seetudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection#
-	 * getGenericType ()
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection#asOrderedSet
+	 * ()
 	 */
-	public Type getGenericType() {
+	public OclOrderedSet<T> asOrderedSet() {
+	
+		OclOrderedSet<T> result = null;
+	
+		result =
+				checkInvalid(EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+						.getOrderedSetType(genericType), this);
+	
+		if (result == null)
+			result =
+					checkUndefined("asOrderedSet", EssentialOclPlugin
+							.getOclLibraryProvider().getOclLibrary().getOrderedSetType(
+									genericType), this);
+	
+		if (result == null) {
+			IModelInstanceCollection<IModelInstanceElement> imiCollectionResult =
+					BasisJavaModelInstanceFactory.createModelInstanceCollection(
+							getModelInstanceCollection().getCollection(), EssentialOclPlugin
+									.getOclLibraryProvider().getOclLibrary().getOrderedSetType(
+											(genericType)));
+	
+			result = new JavaOclOrderedSet<T>(imiCollectionResult, genericType);
+		}
+	
+		return result;
+	}
 
-		return genericType;
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection#asSequence
+	 * ()
+	 */
+	public OclSequence<T> asSequence() {
+	
+		OclSequence<T> result = null;
+	
+		result =
+				checkInvalid(EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+						.getSequenceType(genericType), this);
+	
+		if (result == null)
+			result =
+					checkUndefined("asSequence", EssentialOclPlugin
+							.getOclLibraryProvider().getOclLibrary().getSequenceType(
+									genericType), this);
+	
+		if (result == null) {
+			IModelInstanceCollection<IModelInstanceElement> imiCollectionResult =
+					BasisJavaModelInstanceFactory.createModelInstanceCollection(
+							getModelInstanceCollection().getCollection(), EssentialOclPlugin
+									.getOclLibraryProvider().getOclLibrary().getSequenceType(
+											(genericType)));
+	
+			result = new JavaOclSequence<T>(imiCollectionResult, genericType);
+		}
+	
+		return result;
 	}
 
 	/*
@@ -169,103 +245,6 @@ public abstract class JavaOclCollection<T extends OclAny> extends
 											(genericType)));
 
 			result = new JavaOclSet<T>(imiCollectionResult, genericType);
-		}
-
-		return result;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection#asBag()
-	 */
-	public OclBag<T> asBag() {
-
-		OclBag<T> result = null;
-
-		result =
-				checkInvalid(EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
-						.getBagType(genericType), this);
-
-		if (result == null)
-			result =
-					checkUndefined("asBag", EssentialOclPlugin.getOclLibraryProvider()
-							.getOclLibrary().getBagType(genericType), this);
-
-		if (result == null) {
-			IModelInstanceCollection<IModelInstanceElement> imiCollectionResult =
-					BasisJavaModelInstanceFactory.createModelInstanceCollection(
-							getModelInstanceCollection().getCollection(), EssentialOclPlugin
-									.getOclLibraryProvider().getOclLibrary().getSequenceType(
-											genericType));
-
-			result = new JavaOclBag<T>(imiCollectionResult, genericType);
-		}
-
-		return result;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection#asOrderedSet
-	 * ()
-	 */
-	public OclOrderedSet<T> asOrderedSet() {
-
-		OclOrderedSet<T> result = null;
-
-		result =
-				checkInvalid(EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
-						.getOrderedSetType(genericType), this);
-
-		if (result == null)
-			result =
-					checkUndefined("asOrderedSet", EssentialOclPlugin
-							.getOclLibraryProvider().getOclLibrary().getOrderedSetType(
-									genericType), this);
-
-		if (result == null) {
-			IModelInstanceCollection<IModelInstanceElement> imiCollectionResult =
-					BasisJavaModelInstanceFactory.createModelInstanceCollection(
-							getModelInstanceCollection().getCollection(), EssentialOclPlugin
-									.getOclLibraryProvider().getOclLibrary().getOrderedSetType(
-											(genericType)));
-
-			result = new JavaOclOrderedSet<T>(imiCollectionResult, genericType);
-		}
-
-		return result;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection#asSequence
-	 * ()
-	 */
-	public OclSequence<T> asSequence() {
-
-		OclSequence<T> result = null;
-
-		result =
-				checkInvalid(EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
-						.getSequenceType(genericType), this);
-
-		if (result == null)
-			result =
-					checkUndefined("asSequence", EssentialOclPlugin
-							.getOclLibraryProvider().getOclLibrary().getSequenceType(
-									genericType), this);
-
-		if (result == null) {
-			IModelInstanceCollection<IModelInstanceElement> imiCollectionResult =
-					BasisJavaModelInstanceFactory.createModelInstanceCollection(
-							getModelInstanceCollection().getCollection(), EssentialOclPlugin
-									.getOclLibraryProvider().getOclLibrary().getSequenceType(
-											(genericType)));
-
-			result = new JavaOclSequence<T>(imiCollectionResult, genericType);
 		}
 
 		return result;
@@ -376,6 +355,38 @@ public abstract class JavaOclCollection<T extends OclAny> extends
 		}
 
 		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @seetudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection#
+	 * getGenericType ()
+	 */
+	public Type getGenericType() {
+	
+		return genericType;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection#getIterator
+	 * ()
+	 */
+	public OclIterator<T> getIterator() {
+	
+		return new JavaOclIterator<T>(this);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @seetudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection#
+	 * getModelInstanceCollection()
+	 */
+	@SuppressWarnings("unchecked")
+	public IModelInstanceCollection<IModelInstanceElement> getModelInstanceCollection() {
+	
+		return (IModelInstanceCollection<IModelInstanceElement>) imiElement;
 	}
 
 	/*
@@ -505,6 +516,132 @@ public abstract class JavaOclCollection<T extends OclAny> extends
 
 	/*
 	 * (non-Javadoc)
+	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection#max()
+	 */
+	@SuppressWarnings("unchecked")
+	public T max() {
+	
+		T result = null;
+	
+		result = checkInvalid(genericType, this);
+	
+		if (result == null)
+			result = checkUndefined("max", genericType, this);
+	
+		if (result == null) {
+	
+			if (this.isEmpty().isTrue())
+				result = (T) JavaStandardLibraryFactory.INSTANCE.createOclInteger(0L);
+	
+			else {
+				OclIterator<T> oclIterator = this.getIterator();
+	
+				/*
+				 * safe, since collection is not empty
+				 */
+				T maxElement = oclIterator.next();
+	
+				final OclInteger integer1 =
+						JavaStandardLibraryFactory.INSTANCE.createOclInteger(1L);
+	
+				while (oclIterator.hasNext().isTrue()) {
+					T element = oclIterator.next();
+	
+					if (element instanceof OclComparable) {
+						/*
+						 * We should not compare the element to an undefined value.
+						 */
+						if (!maxElement.oclIsUndefined().isTrue()) {
+	
+							if (((OclComparable) element).compareTo(
+									(OclComparable) maxElement).isEqualTo(integer1).isTrue())
+								maxElement = element;
+						}
+						else {
+							maxElement = element;
+						}
+					}
+				}
+	
+				/*
+				 * In case there were only undefined values, the return should be zero.
+				 */
+				if (maxElement.oclIsUndefined().isTrue())
+					result = (T) JavaStandardLibraryFactory.INSTANCE.createOclInteger(0L);
+				else
+					result = maxElement;
+	
+			}
+		}
+	
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection#min()
+	 */
+	@SuppressWarnings("unchecked")
+	public T min() {
+	
+		T result = null;
+	
+		result = checkInvalid(genericType, this);
+	
+		if (result == null)
+			result = checkUndefined("min", genericType, this);
+	
+		if (result == null) {
+	
+			if (this.isEmpty().isTrue())
+				result = (T) JavaStandardLibraryFactory.INSTANCE.createOclInteger(0L);
+	
+			else {
+				OclIterator<T> oclIterator = this.getIterator();
+	
+				/*
+				 * safe, since collection is not empty
+				 */
+				T minElement = oclIterator.next();
+	
+				final OclInteger integer_1 =
+						JavaStandardLibraryFactory.INSTANCE.createOclInteger(-1L);
+	
+				while (oclIterator.hasNext().isTrue()) {
+					T element = oclIterator.next();
+	
+					if (element instanceof OclComparable) {
+						/*
+						 * We should not compare the element to an undefined value.
+						 */
+						if (!minElement.oclIsUndefined().isTrue()) {
+	
+							if (((OclComparable) element).compareTo(
+									(OclComparable) minElement).isEqualTo(integer_1).isTrue())
+								minElement = element;
+						}
+						else {
+							minElement = element;
+						}
+					}
+				}
+	
+				/*
+				 * In case there were only undefined values, the return should be zero.
+				 */
+				if (minElement.oclIsUndefined().isTrue())
+					result = (T) JavaStandardLibraryFactory.INSTANCE.createOclInteger(0L);
+				else
+					result = minElement;
+	
+			}
+		}
+	
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
 	 * @see
 	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection#notEmpty
 	 * ()
@@ -562,6 +699,155 @@ public abstract class JavaOclCollection<T extends OclAny> extends
 		return JavaStandardLibraryFactory.INSTANCE.createOclSet(tuples, tupleType);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection#size()
+	 */
+	public OclInteger size() {
+	
+		OclInteger result = null;
+	
+		result =
+				checkInvalid(EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+						.getOclInteger(), this);
+	
+		if (result == null)
+			result =
+					checkUndefined("size", EssentialOclPlugin.getOclLibraryProvider()
+							.getOclLibrary().getOclInteger(), this);
+	
+		if (result == null) {
+			Long intResult;
+	
+			intResult =
+					Long.valueOf(getModelInstanceCollection().getCollection().size());
+	
+			result = JavaStandardLibraryFactory.INSTANCE.createOclInteger(intResult);
+		}
+	
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection#sum()
+	 */
+	@SuppressWarnings("unchecked")
+	public T sum() {
+	
+		T result = null;
+	
+		result = checkInvalid(genericType, this);
+	
+		if (result == null)
+			result = checkUndefined("sum", genericType, this);
+	
+		if (result == null) {
+			/* Else check if this collection is empty. */
+			if (this.isEmpty().isTrue()) {
+				// TODO: future work; neutral element for addition of T's
+				result = (T) JavaStandardLibraryFactory.INSTANCE.createOclInteger(0L);
+			}
+	
+			/* Else iterate through the collection and compute the sum. */
+			else {
+				/* Try to add the elements of this collection to a sum. */
+				for (IModelInstanceElement anElement : getModelInstanceCollection()
+						.getCollection()) {
+	
+					// undefined values are ignored
+					if (!anElement.isUndefined()) {
+	
+						T oclElement =
+								(T) JavaStandardLibraryFactory.INSTANCE.createOclAny(anElement);
+	
+						// first element cannot be added to something
+						if (result == null) {
+							result = oclElement;
+						}
+						else {
+							try {
+								result = (T) ((IAddableElement) result).add(oclElement);
+							} catch (ClassCastException e) {
+								result =
+										(T) JavaStandardLibraryFactory.INSTANCE.createOclInvalid(
+												EssentialOclPlugin.getOclLibraryProvider()
+														.getOclLibrary().getOclReal(), e);
+							}
+						}
+					}
+				}
+			}
+		}
+	
+		return result;
+	}
+
+	@Override
+	public String toString() {
+	
+		StringBuilder result = new StringBuilder();
+	
+		result.append(this.getClass().getSimpleName());
+		result.append("[");
+	
+		if (!toStringUndefinedOrInvalid(result)) {
+			OclIterator<T> iter = getIterator();
+	
+			while (iter.hasNext().isTrue()) {
+				T element = iter.next();
+				result.append(element);
+				if (iter.hasNext().isTrue()) {
+					result.append(", ");
+				}
+			}
+		}
+		// no else
+		result.append("]");
+	
+		return result.toString();
+	}
+
+	@SuppressWarnings("unchecked")
+	protected Type flatRec(Collection<IModelInstanceElement> imiCollection,
+			Collection<IModelInstanceElement> returnList) {
+	
+		Type result = null;
+	
+		/* Iterate over this bag. */
+		for (IModelInstanceElement element : imiCollection) {
+	
+			/*
+			 * nested collections are flattened, i.e. their elements are added to the
+			 * result
+			 */
+			if (element instanceof IModelInstanceCollection<?>) {
+				IModelInstanceCollection<IModelInstanceElement> collection;
+				collection =
+						((IModelInstanceCollection<IModelInstanceElement>) element);
+	
+				result =
+						this.commonSuperType(result, flatRec(collection.getCollection(),
+								returnList));
+			}
+	
+			/* other elements are simply added */
+			else {
+				returnList.add(element);
+				result = this.commonSuperType(result, element.getType());
+			}
+		}
+	
+		// FIXME Michael: Should this be OclAny or something else?
+		if (result == null)
+			result =
+					EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+							.getOclAny();
+	
+		return result;
+	}
+
 	/**
 	 * Helper function to create tuple type for the type of this collection to
 	 * another
@@ -588,6 +874,21 @@ public abstract class JavaOclCollection<T extends OclAny> extends
 	}
 
 	/**
+	 * Returns a property for a given name and type
+	 * 
+	 * @TODO: this method should be moved to a factory class since it is used
+	 *        probably somewhere else, too!
+	 */
+	private Property createPropertyByNameAndType(String name, Type type) {
+	
+		Property prop = PivotModelFactory.eINSTANCE.createProperty();
+		prop.setName(name);
+		prop.setType(type);
+	
+		return prop;
+	}
+
+	/**
 	 * helper function to create a list of tuple keys
 	 * 
 	 * @param keys
@@ -601,306 +902,5 @@ public abstract class JavaOclCollection<T extends OclAny> extends
 			keyList.add(BasisJavaModelInstanceFactory.createModelInstanceString(key));
 		}
 		return keyList;
-	}
-
-	/**
-	 * Returns a property for a given name and type
-	 * 
-	 * @TODO: this method should be moved to a factory class since it is used
-	 *        probably somewhere else, too!
-	 */
-	private Property createPropertyByNameAndType(String name, Type type) {
-
-		Property prop = PivotModelFactory.eINSTANCE.createProperty();
-		prop.setName(name);
-		prop.setType(type);
-
-		return prop;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection#size()
-	 */
-	public OclInteger size() {
-
-		OclInteger result = null;
-
-		result =
-				checkInvalid(EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
-						.getOclInteger(), this);
-
-		if (result == null)
-			result =
-					checkUndefined("size", EssentialOclPlugin.getOclLibraryProvider()
-							.getOclLibrary().getOclInteger(), this);
-
-		if (result == null) {
-			Long intResult;
-
-			intResult =
-					Long.valueOf(getModelInstanceCollection().getCollection().size());
-
-			result = JavaStandardLibraryFactory.INSTANCE.createOclInteger(intResult);
-		}
-
-		return result;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection#sum()
-	 */
-	@SuppressWarnings("unchecked")
-	public T sum() {
-
-		T result = null;
-
-		result = checkInvalid(genericType, this);
-
-		if (result == null)
-			result = checkUndefined("sum", genericType, this);
-
-		if (result == null) {
-			/* Else check if this collection is empty. */
-			if (this.isEmpty().isTrue()) {
-				// TODO: future work; neutral element for addition of T's
-				result = (T) JavaStandardLibraryFactory.INSTANCE.createOclInteger(0L);
-			}
-
-			/* Else iterate through the collection and compute the sum. */
-			else {
-				/* Try to add the elements of this collection to a sum. */
-				for (IModelInstanceElement anElement : getModelInstanceCollection()
-						.getCollection()) {
-
-					// undefined values are ignored
-					if (!anElement.isUndefined()) {
-
-						T oclElement =
-								(T) JavaStandardLibraryFactory.INSTANCE.createOclAny(anElement);
-
-						// first element cannot be added to something
-						if (result == null) {
-							result = oclElement;
-						}
-						else {
-							try {
-								result = (T) ((IAddableElement) result).add(oclElement);
-							} catch (ClassCastException e) {
-								result =
-										(T) JavaStandardLibraryFactory.INSTANCE.createOclInvalid(
-												EssentialOclPlugin.getOclLibraryProvider()
-														.getOclLibrary().getOclReal(), e);
-							}
-						}
-					}
-				}
-			}
-		}
-
-		return result;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection#getIterator
-	 * ()
-	 */
-	public OclIterator<T> getIterator() {
-
-		return new JavaOclIterator<T>(this);
-	}
-
-	@Override
-	public String toString() {
-
-		StringBuilder result = new StringBuilder();
-
-		result.append(this.getClass().getSimpleName());
-		result.append("[");
-
-		if (!toStringUndefinedOrInvalid(result)) {
-			OclIterator<T> iter = getIterator();
-
-			while (iter.hasNext().isTrue()) {
-				T element = iter.next();
-				result.append(element);
-				if (iter.hasNext().isTrue()) {
-					result.append(", ");
-				}
-			}
-		}
-		// no else
-		result.append("]");
-
-		return result.toString();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection#max()
-	 */
-	@SuppressWarnings("unchecked")
-	public T max() {
-
-		T result = null;
-
-		result = checkInvalid(genericType, this);
-
-		if (result == null)
-			result = checkUndefined("max", genericType, this);
-
-		if (result == null) {
-
-			if (this.isEmpty().isTrue())
-				result = (T) JavaStandardLibraryFactory.INSTANCE.createOclInteger(0L);
-
-			else {
-				OclIterator<T> oclIterator = this.getIterator();
-
-				/*
-				 * safe, since collection is not empty
-				 */
-				T maxElement = oclIterator.next();
-
-				final OclInteger integer1 =
-						JavaStandardLibraryFactory.INSTANCE.createOclInteger(1L);
-
-				while (oclIterator.hasNext().isTrue()) {
-					T element = oclIterator.next();
-
-					if (element instanceof OclComparable) {
-						/*
-						 * We should not compare the element to an undefined value.
-						 */
-						if (!maxElement.oclIsUndefined().isTrue()) {
-
-							if (((OclComparable) element).compareTo(
-									(OclComparable) maxElement).isEqualTo(integer1).isTrue())
-								maxElement = element;
-						}
-						else {
-							maxElement = element;
-						}
-					}
-				}
-
-				/*
-				 * In case there were only undefined values, the return should be zero.
-				 */
-				if (maxElement.oclIsUndefined().isTrue())
-					result = (T) JavaStandardLibraryFactory.INSTANCE.createOclInteger(0L);
-				else
-					result = maxElement;
-
-			}
-		}
-
-		return result;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection#min()
-	 */
-	@SuppressWarnings("unchecked")
-	public T min() {
-
-		T result = null;
-
-		result = checkInvalid(genericType, this);
-
-		if (result == null)
-			result = checkUndefined("min", genericType, this);
-
-		if (result == null) {
-
-			if (this.isEmpty().isTrue())
-				result = (T) JavaStandardLibraryFactory.INSTANCE.createOclInteger(0L);
-
-			else {
-				OclIterator<T> oclIterator = this.getIterator();
-
-				/*
-				 * safe, since collection is not empty
-				 */
-				T minElement = oclIterator.next();
-
-				final OclInteger integer_1 =
-						JavaStandardLibraryFactory.INSTANCE.createOclInteger(-1L);
-
-				while (oclIterator.hasNext().isTrue()) {
-					T element = oclIterator.next();
-
-					if (element instanceof OclComparable) {
-						/*
-						 * We should not compare the element to an undefined value.
-						 */
-						if (!minElement.oclIsUndefined().isTrue()) {
-
-							if (((OclComparable) element).compareTo(
-									(OclComparable) minElement).isEqualTo(integer_1).isTrue())
-								minElement = element;
-						}
-						else {
-							minElement = element;
-						}
-					}
-				}
-
-				/*
-				 * In case there were only undefined values, the return should be zero.
-				 */
-				if (minElement.oclIsUndefined().isTrue())
-					result = (T) JavaStandardLibraryFactory.INSTANCE.createOclInteger(0L);
-				else
-					result = minElement;
-
-			}
-		}
-
-		return result;
-	}
-
-	@SuppressWarnings("unchecked")
-	protected Type flatRec(Collection<IModelInstanceElement> imiCollection,
-			Collection<IModelInstanceElement> returnList) {
-
-		Type result = null;
-
-		/* Iterate over this bag. */
-		for (IModelInstanceElement element : imiCollection) {
-
-			/*
-			 * nested collections are flattened, i.e. their elements are added to the
-			 * result
-			 */
-			if (element instanceof IModelInstanceCollection<?>) {
-				IModelInstanceCollection<IModelInstanceElement> collection;
-				collection =
-						((IModelInstanceCollection<IModelInstanceElement>) element);
-
-				result =
-						this.commonSuperType(result, flatRec(collection.getCollection(),
-								returnList));
-			}
-
-			/* other elements are simply added */
-			else {
-				returnList.add(element);
-				result = this.commonSuperType(result, element.getType());
-			}
-		}
-
-		// FIXME Michael: Should this be OclAny or something else?
-		if (result == null)
-			result =
-					EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
-							.getOclAny();
-
-		return result;
 	}
 }

@@ -81,17 +81,6 @@ public class JavaOclReal extends JavaOclLibraryObject implements OclReal,
 
 	/*
 	 * (non-Javadoc)
-	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclReal#getModelInstanceReal
-	 * ()
-	 */
-	public IModelInstanceReal getModelInstanceReal() {
-
-		return (IModelInstanceReal) this.imiElement;
-	}
-
-	/*
-	 * (non-Javadoc)
 	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclReal#abs()
 	 */
 	public OclReal abs() {
@@ -113,6 +102,30 @@ public class JavaOclReal extends JavaOclLibraryObject implements OclReal,
 			result = JavaStandardLibraryFactory.INSTANCE.createOclReal(doubleResult);
 		}
 
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.IAddableElement
+	 * #add(tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny)
+	 */
+	public OclAny add(OclAny that) {
+	
+		OclAny result;
+	
+		try {
+	
+			result = add((OclReal) that);
+	
+		} catch (ClassCastException e) {
+			result =
+					JavaStandardLibraryFactory.INSTANCE.createOclInvalid(
+							EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+									.getOclReal(), e);
+		}
+	
 		return result;
 	}
 
@@ -148,41 +161,72 @@ public class JavaOclReal extends JavaOclLibraryObject implements OclReal,
 
 	/*
 	 * (non-Javadoc)
+	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny#asSet()
+	 */
+	public <T extends OclAny> OclSet<T> asSet() {
+	
+		OclSet<T> result = null;
+	
+		result =
+				checkInvalid(EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+						.getSetType(
+								EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+										.getOclReal()), this);
+	
+		if (result == null)
+			result =
+					checkAsSet(EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+							.getOclReal());
+	
+		if (result == null) {
+			Set<IModelInstanceElement> imiSet = new HashSet<IModelInstanceElement>();
+			imiSet.add(getModelInstanceElement());
+			result =
+					JavaStandardLibraryFactory.INSTANCE.createOclSet(imiSet,
+							EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+									.getOclReal());
+		}
+	
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
 	 * @see
 	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclComparable#compareTo
 	 * (tudresden.ocl20.pivot.essentialocl.standardlibrary.OclComparable)
 	 */
 	public OclInteger compareTo(OclComparable that) {
-
+	
 		OclInteger result = null;
-
+	
 		result =
 				checkInvalid(EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
 						.getOclInteger(), this, that);
-
+	
 		if (result == null)
 			result =
 					checkUndefined("compareTo", EssentialOclPlugin
 							.getOclLibraryProvider().getOclLibrary().getOclInteger(), this,
 							that);
-
+	
 		if (result == null) {
-
+	
 			try {
-
+	
 				OclReal aReal;
-
+	
 				/* Cast the given object to real. */
 				aReal = (OclReal) that;
-
+	
 				if (isGreaterThan(aReal).isTrue()) {
 					result = JavaStandardLibraryFactory.INSTANCE.createOclInteger(1L);
 				}
-
+	
 				else if (isLessThan(aReal).isTrue()) {
 					result = JavaStandardLibraryFactory.INSTANCE.createOclInteger(-1L);
 				}
-
+	
 				else {
 					result = JavaStandardLibraryFactory.INSTANCE.createOclInteger(0L);
 				}
@@ -193,7 +237,34 @@ public class JavaOclReal extends JavaOclLibraryObject implements OclReal,
 										.getOclInteger(), e);
 			}
 		}
+	
+		return result;
+	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclReal#convertToString
+	 * ()
+	 */
+	public OclString convertToString() {
+	
+		OclString result;
+	
+		result =
+				checkInvalid(EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+						.getOclString(), this);
+	
+		if (result == null)
+			result =
+					checkUndefined("toString", EssentialOclPlugin.getOclLibraryProvider()
+							.getOclLibrary().getOclString(), this);
+	
+		if (result == null)
+			result =
+					JavaStandardLibraryFactory.INSTANCE
+							.createOclString(getModelInstanceReal().getDouble().toString());
+	
 		return result;
 	}
 
@@ -204,23 +275,23 @@ public class JavaOclReal extends JavaOclLibraryObject implements OclReal,
 	 * .ocl20.pivot.essentialocl.standardlibrary.OclReal)
 	 */
 	public OclReal divide(OclReal that) {
-
+	
 		OclReal result = null;
-
+	
 		result =
 				checkInvalid(EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
 						.getOclReal(), this, that);
-
+	
 		if (result == null)
 			result =
 					checkUndefined("/", EssentialOclPlugin.getOclLibraryProvider()
 							.getOclLibrary().getOclReal(), this, that);
-
+	
 		if (result == null) {
 			/* Else compute the result. */
 			Double dividend = this.getModelInstanceReal().getDouble();
 			Double divisor = that.getModelInstanceReal().getDouble();
-
+	
 			try {
 				Double doubleResult = dividend / divisor;
 				if (doubleResult.isInfinite() || doubleResult.isNaN())
@@ -239,7 +310,7 @@ public class JavaOclReal extends JavaOclLibraryObject implements OclReal,
 										.getOclReal(), e);
 			}
 		}
-
+	
 		return result;
 	}
 
@@ -248,25 +319,75 @@ public class JavaOclReal extends JavaOclLibraryObject implements OclReal,
 	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclReal#floor()
 	 */
 	public OclInteger floor() {
-
+	
 		OclInteger result = null;
-
+	
 		result =
 				checkInvalid(EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
 						.getOclInteger(), this);
-
+	
 		if (result == null)
 			result =
 					checkUndefined("floor", EssentialOclPlugin.getOclLibraryProvider()
 							.getOclLibrary().getOclInteger(), this);
-
+	
 		if (result == null) { /* Else compute the result. */
 			Double doubleResult = Math.floor(getModelInstanceReal().getDouble());
 			result =
 					JavaStandardLibraryFactory.INSTANCE.createOclInteger(doubleResult
 							.longValue());
 		}
+	
+		return result;
+	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclReal#getModelInstanceReal
+	 * ()
+	 */
+	public IModelInstanceReal getModelInstanceReal() {
+	
+		return (IModelInstanceReal) this.imiElement;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.IAddableElement
+	 * #getNeutralElement()
+	 */
+	public OclAny getNeutralElement() {
+	
+		return JavaStandardLibraryFactory.INSTANCE.createOclReal(0);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclAny
+	 * #isEqualTo(tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot)
+	 */
+	public OclBoolean isEqualTo(OclAny that) {
+	
+		OclBoolean result = null;
+	
+		result = checkIsEqualTo(that);
+	
+		if (result == null) {
+			if (!(that instanceof OclReal)) {
+				result = JavaOclBoolean.getInstance(false);
+			}
+			/* Else compute the result. */
+			else {
+	
+				Double double1 = this.getModelInstanceReal().getDouble();
+				Double double2 =
+						((IModelInstanceReal) that.getModelInstanceElement()).getDouble();
+				result = JavaOclBoolean.getInstance(double1.equals(double2));
+			}
+		}
+	
 		return result;
 	}
 
@@ -562,100 +683,6 @@ public class JavaOclReal extends JavaOclLibraryObject implements OclReal,
 	/*
 	 * (non-Javadoc)
 	 * @see tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclAny
-	 * #isEqualTo(tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot)
-	 */
-	public OclBoolean isEqualTo(OclAny that) {
-
-		OclBoolean result = null;
-
-		result = checkIsEqualTo(that);
-
-		if (result == null) {
-			if (!(that instanceof OclReal)) {
-				result = JavaOclBoolean.getInstance(false);
-			}
-			/* Else compute the result. */
-			else {
-
-				Double double1 = this.getModelInstanceReal().getDouble();
-				Double double2 =
-						((IModelInstanceReal) that.getModelInstanceElement()).getDouble();
-				result = JavaOclBoolean.getInstance(double1.equals(double2));
-			}
-		}
-
-		return result;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny#asSet()
-	 */
-	public <T extends OclAny> OclSet<T> asSet() {
-
-		OclSet<T> result = null;
-
-		result =
-				checkInvalid(EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
-						.getSetType(
-								EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
-										.getOclReal()), this);
-
-		if (result == null)
-			result =
-					checkAsSet(EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
-							.getOclReal());
-
-		if (result == null) {
-			Set<IModelInstanceElement> imiSet = new HashSet<IModelInstanceElement>();
-			imiSet.add(getModelInstanceElement());
-			result =
-					JavaStandardLibraryFactory.INSTANCE.createOclSet(imiSet,
-							EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
-									.getOclReal());
-		}
-
-		return result;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.IAddableElement
-	 * #add(tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny)
-	 */
-	public OclAny add(OclAny that) {
-
-		OclAny result;
-
-		try {
-
-			result = add((OclReal) that);
-
-		} catch (ClassCastException e) {
-			result =
-					JavaStandardLibraryFactory.INSTANCE.createOclInvalid(
-							EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
-									.getOclReal(), e);
-		}
-
-		return result;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.IAddableElement
-	 * #getNeutralElement()
-	 */
-	public OclAny getNeutralElement() {
-
-		return JavaStandardLibraryFactory.INSTANCE.createOclReal(0);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclAny
 	 * #toString()
 	 */
 	public String toString() {
@@ -672,32 +699,4 @@ public class JavaOclReal extends JavaOclLibraryObject implements OclReal,
 
 		return result.toString();
 	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclReal#convertToString
-	 * ()
-	 */
-	public OclString convertToString() {
-
-		OclString result;
-
-		result =
-				checkInvalid(EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
-						.getOclString(), this);
-
-		if (result == null)
-			result =
-					checkUndefined("toString", EssentialOclPlugin.getOclLibraryProvider()
-							.getOclLibrary().getOclString(), this);
-
-		if (result == null)
-			result =
-					JavaStandardLibraryFactory.INSTANCE
-							.createOclString(getModelInstanceReal().getDouble().toString());
-
-		return result;
-	}
-
 }

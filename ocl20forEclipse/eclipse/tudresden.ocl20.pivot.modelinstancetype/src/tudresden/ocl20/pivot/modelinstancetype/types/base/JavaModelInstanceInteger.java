@@ -179,9 +179,22 @@ public class JavaModelInstanceInteger extends AbstractModelInstanceInteger
 		return this.myLong;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceReal#getDouble()
+	 */
 	public Double getDouble() {
 
 		return this.myLong.doubleValue();
 
+	}
+	
+	/*
+	 * (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {	
+		return this.getLong().toString();
 	}
 }

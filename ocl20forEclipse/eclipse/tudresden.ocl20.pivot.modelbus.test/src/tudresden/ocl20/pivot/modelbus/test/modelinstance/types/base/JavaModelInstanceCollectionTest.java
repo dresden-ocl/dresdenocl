@@ -1589,6 +1589,88 @@ public class JavaModelInstanceCollectionTest {
 
 	/**
 	 * <p>
+	 * Tests the method {@link JavaModelInstanceCollection#equals(Object)}.
+	 * </p>
+	 */
+	@Test
+	public void testEquals23() {
+
+		List<IModelInstanceString> elements01;
+		elements01 = new ArrayList<IModelInstanceString>();
+
+		elements01.add(BasisJavaModelInstanceFactory
+				.createModelInstanceString("one"));
+		elements01.add(BasisJavaModelInstanceFactory
+				.createModelInstanceString("two"));
+		elements01.add(BasisJavaModelInstanceFactory
+				.createModelInstanceString("three"));
+
+		IModelInstanceCollection<IModelInstanceString> modelInstanceCollection01;
+		modelInstanceCollection01 =
+				BasisJavaModelInstanceFactory.createModelInstanceCollection(elements01,
+						typeBag);
+
+		List<IModelInstanceString> elements02;
+		elements02 = new ArrayList<IModelInstanceString>();
+
+		elements02.add(BasisJavaModelInstanceFactory
+				.createModelInstanceString("one"));
+		elements02.add(BasisJavaModelInstanceFactory
+				.createModelInstanceString("three"));
+		elements02.add(BasisJavaModelInstanceFactory
+				.createModelInstanceString("two"));
+
+		IModelInstanceCollection<IModelInstanceString> modelInstanceCollection02;
+		modelInstanceCollection02 =
+				BasisJavaModelInstanceFactory.createModelInstanceCollection(elements02,
+						typeBag);
+
+		assertTrue(modelInstanceCollection01.equals(modelInstanceCollection02));
+	}
+	
+	/**
+	 * <p>
+	 * Tests the method {@link JavaModelInstanceCollection#equals(Object)}.
+	 * </p>
+	 */
+	@Test
+	public void testEquals24() {
+
+		List<IModelInstanceString> elements01;
+		elements01 = new ArrayList<IModelInstanceString>();
+
+		elements01.add(BasisJavaModelInstanceFactory
+				.createModelInstanceString("one"));
+		elements01.add(BasisJavaModelInstanceFactory
+				.createModelInstanceString("two"));
+		elements01.add(BasisJavaModelInstanceFactory
+				.createModelInstanceString("three"));
+
+		IModelInstanceCollection<IModelInstanceString> modelInstanceCollection01;
+		modelInstanceCollection01 =
+				BasisJavaModelInstanceFactory.createModelInstanceCollection(elements01,
+						typeSet);
+
+		List<IModelInstanceString> elements02;
+		elements02 = new ArrayList<IModelInstanceString>();
+
+		elements02.add(BasisJavaModelInstanceFactory
+				.createModelInstanceString("one"));
+		elements02.add(BasisJavaModelInstanceFactory
+				.createModelInstanceString("three"));
+		elements02.add(BasisJavaModelInstanceFactory
+				.createModelInstanceString("two"));
+
+		IModelInstanceCollection<IModelInstanceString> modelInstanceCollection02;
+		modelInstanceCollection02 =
+				BasisJavaModelInstanceFactory.createModelInstanceCollection(elements02,
+						typeSet);
+
+		assertTrue(modelInstanceCollection01.equals(modelInstanceCollection02));
+	}
+	
+	/**
+	 * <p>
 	 * Tests the method {@link IModelInstanceCollection#getCollection()}.
 	 * </p>
 	 */

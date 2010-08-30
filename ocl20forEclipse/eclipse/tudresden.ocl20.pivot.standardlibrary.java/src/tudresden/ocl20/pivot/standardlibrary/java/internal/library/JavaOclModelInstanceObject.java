@@ -96,12 +96,193 @@ public class JavaOclModelInstanceObject extends JavaOclAny implements
 	 * (non-Javadoc)
 	 * 
 	 * @see
+	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.IAddableElement
+	 * #add(tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny)
+	 */
+	public OclAny add(OclAny that) {
+	
+		/*
+		 * convention: any ModelInstanceElement that has an operation called
+		 * "+", "add" or "plus" is considered to be addable. Else return
+		 * invalid.
+		 */
+		OclAny result;
+	
+		result = checkInvalid(metaType, this, that);
+	
+		if (result == null)
+			result = checkUndefined("+", metaType, this, that);
+	
+		if (result == null) {
+			if (that.getModelInstanceElement().isKindOf(metaType)) {
+				result = findMethod("+", that);
+				if (result == null)
+					result = findMethod("add", that);
+				if (result == null)
+					result = findMethod("plus", that);
+				if (result == null)
+					// not found any matching method -> invalid
+					result = JavaStandardLibraryFactory.INSTANCE
+							.createOclInvalid(metaType,
+									new NoSuchMethodException(
+											"Cannot find operation +, add or plus on "
+													+ this));
+			}
+		}
+	
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny#asSet()
+	 */
+	@SuppressWarnings("unchecked")
+	public OclSet<OclModelInstanceObject> asSet() {
+	
+		OclSet<OclModelInstanceObject> result;
+	
+		result = checkInvalid(EssentialOclPlugin.getOclLibraryProvider()
+				.getOclLibrary().getSetType(metaType), this);
+	
+		if (result == null)
+			result = checkAsSet(metaType);
+	
+		if (result == null) {
+			Set<IModelInstanceElement> resultSet = new HashSet<IModelInstanceElement>();
+			resultSet.add(this.getModelInstanceObject());
+	
+			result = JavaStandardLibraryFactory.INSTANCE.createOclSet(
+					resultSet, EssentialOclPlugin.getOclLibraryProvider()
+							.getOclLibrary().getSetType(metaType));
+		}
+	
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
 	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclModelInstanceObject
 	 * #getModelInstanceObject()
 	 */
 	public IModelInstanceObject getModelInstanceObject() {
 
 		return (IModelInstanceObject) this.imiElement;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.IAddableElement
+	 * #getNeutralElement()
+	 */
+	public OclAny getNeutralElement() {
+	
+		// FIXME Michael: how to get an instance of an unknown neutral element?
+		return null;
+	}
+
+	/**
+	 * <p>
+	 * Returns the {@link OclAny} of a given {@link Property} that is defined on
+	 * this {@link IModelInstanceObject}.
+	 * </p>
+	 * 
+	 * @param property
+	 *            The {@link Property} whose value shall be returned.
+	 * @return The result as an {@link OclAny}.
+	 */
+	public OclAny getProperty(Property property) {
+	
+		OclAny result;
+	
+		/* Check if the source is invalid. */
+		if (this.oclIsInvalid().isTrue()) {
+			result = JavaStandardLibraryFactory.INSTANCE.createOclInvalid(
+					property.getType(), this.getInvalidReason());
+		}
+	
+		else if (this.oclIsUndefined().isTrue()) {
+			result = JavaStandardLibraryFactory.INSTANCE.createOclInvalid(
+					property.getType(), new NullPointerException(this
+							.getUndefinedReason()));
+		}
+	
+		/* Else try to get the property. */
+		else {
+	
+			IModelInstanceElement imiResult;
+	
+			try {
+				imiResult = getModelInstanceObject().getProperty(property);
+	
+				if (imiResult.isUndefined()) {
+					result = JavaStandardLibraryFactory.INSTANCE
+							.createOclUndefined(property.getType(), imiResult
+									.getName()
+									+ " is null.");
+				}
+	
+				else {
+					result = JavaStandardLibraryFactory.INSTANCE
+							.createOclAny(imiResult);
+				}
+			}
+	
+			/* Probably create an undefined or invalid result. */
+			catch (PropertyNotFoundException e) {
+	
+				result = JavaStandardLibraryFactory.INSTANCE.createOclInvalid(
+						property.getType(), e);
+			}
+	
+			catch (PropertyAccessException e) {
+	
+				result = JavaStandardLibraryFactory.INSTANCE.createOclInvalid(
+						property.getType(), e);
+			}
+			// end catch.
+		}
+		// end else.
+	
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny#isEqualTo(tudresden
+	 * .ocl20.pivot.essentialocl.standardlibrary.OclAny)
+	 */
+	public OclBoolean isEqualTo(OclAny that) {
+	
+		OclBoolean result;
+	
+		result = checkIsEqualTo(that);
+	
+		if (result == null) {
+			if (!(that instanceof OclModelInstanceObject)) {
+				result = JavaOclBoolean.getInstance(false);
+			}
+	
+			else {
+				Object thatObject = ((IModelInstanceObject) that
+						.getModelInstanceElement()).getObject();
+	
+				if (getModelInstanceObject().getObject().equals(thatObject)) {
+					result = JavaOclBoolean.getInstance(true);
+				} else {
+					result = JavaOclBoolean.getInstance(false);
+				}
+			}
+		}
+	
+		return result;
 	}
 
 	/*
@@ -186,6 +367,27 @@ public class JavaOclModelInstanceObject extends JavaOclAny implements
 		return result;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+	
+		StringBuilder result = new StringBuilder();
+	
+		result.append(this.getClass().getSimpleName());
+		result.append("[");
+	
+		if (!toStringUndefinedOrInvalid(result)) {
+			result.append(getModelInstanceObject().toString());
+		}
+	
+		result.append("]");
+	
+		return result.toString();
+	}
+
 	/**
 	 * Used to determine invalid return values for {@link Operation}s.
 	 * <code>this</code> is checked to be <code>undefined</code> or
@@ -246,191 +448,6 @@ public class JavaOclModelInstanceObject extends JavaOclAny implements
 		return result;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny#asSet()
-	 */
-	@SuppressWarnings("unchecked")
-	public OclSet<OclModelInstanceObject> asSet() {
-
-		OclSet<OclModelInstanceObject> result;
-
-		result = checkInvalid(EssentialOclPlugin.getOclLibraryProvider()
-				.getOclLibrary().getSetType(metaType), this);
-
-		if (result == null)
-			result = checkAsSet(metaType);
-
-		if (result == null) {
-			Set<IModelInstanceElement> resultSet = new HashSet<IModelInstanceElement>();
-			resultSet.add(this.getModelInstanceObject());
-
-			result = JavaStandardLibraryFactory.INSTANCE.createOclSet(
-					resultSet, EssentialOclPlugin.getOclLibraryProvider()
-							.getOclLibrary().getSetType(metaType));
-		}
-
-		return result;
-	}
-
-	/**
-	 * <p>
-	 * Returns the {@link OclAny} of a given {@link Property} that is defined on
-	 * this {@link IModelInstanceObject}.
-	 * </p>
-	 * 
-	 * @param property
-	 *            The {@link Property} whose value shall be returned.
-	 * @return The result as an {@link OclAny}.
-	 */
-	public OclAny getProperty(Property property) {
-
-		OclAny result;
-
-		/* Check if the source is invalid. */
-		if (this.oclIsInvalid().isTrue()) {
-			result = JavaStandardLibraryFactory.INSTANCE.createOclInvalid(
-					property.getType(), this.getInvalidReason());
-		}
-
-		else if (this.oclIsUndefined().isTrue()) {
-			result = JavaStandardLibraryFactory.INSTANCE.createOclInvalid(
-					property.getType(), new NullPointerException(this
-							.getUndefinedReason()));
-		}
-
-		/* Else try to get the property. */
-		else {
-
-			IModelInstanceElement imiResult;
-
-			try {
-				imiResult = getModelInstanceObject().getProperty(property);
-
-				if (imiResult.isUndefined()) {
-					result = JavaStandardLibraryFactory.INSTANCE
-							.createOclUndefined(property.getType(), imiResult
-									.getName()
-									+ " is null.");
-				}
-
-				else {
-					result = JavaStandardLibraryFactory.INSTANCE
-							.createOclAny(imiResult);
-				}
-			}
-
-			/* Probably create an undefined or invalid result. */
-			catch (PropertyNotFoundException e) {
-
-				result = JavaStandardLibraryFactory.INSTANCE.createOclInvalid(
-						property.getType(), e);
-			}
-
-			catch (PropertyAccessException e) {
-
-				result = JavaStandardLibraryFactory.INSTANCE.createOclInvalid(
-						property.getType(), e);
-			}
-			// end catch.
-		}
-		// end else.
-
-		return result;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny#isEqualTo(tudresden
-	 * .ocl20.pivot.essentialocl.standardlibrary.OclAny)
-	 */
-	public OclBoolean isEqualTo(OclAny that) {
-
-		OclBoolean result;
-
-		result = checkIsEqualTo(that);
-
-		if (result == null) {
-			if (!(that instanceof OclModelInstanceObject)) {
-				result = JavaOclBoolean.getInstance(false);
-			}
-
-			else {
-				Object thatObject = ((IModelInstanceObject) that
-						.getModelInstanceElement()).getObject();
-
-				if (getModelInstanceObject().getObject().equals(thatObject)) {
-					result = JavaOclBoolean.getInstance(true);
-				} else {
-					result = JavaOclBoolean.getInstance(false);
-				}
-			}
-		}
-
-		return result;
-	}
-
-	@Override
-	public String toString() {
-
-		StringBuilder result = new StringBuilder();
-
-		result.append(this.getClass().getSimpleName());
-		result.append("[");
-
-		if (!toStringUndefinedOrInvalid(result)) {
-			result.append(getModelInstanceObject().toString());
-		}
-
-		result.append("]");
-
-		return result.toString();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.IAddableElement
-	 * #add(tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny)
-	 */
-	public OclAny add(OclAny that) {
-
-		/*
-		 * convention: any ModelInstanceElement that has an operation called
-		 * "+", "add" or "plus" is considered to be addable. Else return
-		 * invalid.
-		 */
-		OclAny result;
-
-		result = checkInvalid(metaType, this, that);
-
-		if (result == null)
-			result = checkUndefined("+", metaType, this, that);
-
-		if (result == null) {
-			if (that.getModelInstanceElement().isKindOf(metaType)) {
-				result = findMethod("+", that);
-				if (result == null)
-					result = findMethod("add", that);
-				if (result == null)
-					result = findMethod("plus", that);
-				if (result == null)
-					// not found any matching method -> invalid
-					result = JavaStandardLibraryFactory.INSTANCE
-							.createOclInvalid(metaType,
-									new NoSuchMethodException(
-											"Cannot find operation +, add or plus on "
-													+ this));
-			}
-		}
-
-		return result;
-	}
-
 	@SuppressWarnings("unchecked")
 	private OclAny findMethod(String methodName, OclAny that) {
 
@@ -460,18 +477,5 @@ public class JavaOclModelInstanceObject extends JavaOclAny implements
 		}
 
 		return result;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.IAddableElement
-	 * #getNeutralElement()
-	 */
-	public OclAny getNeutralElement() {
-
-		// FIXME Michael: how to get an instance of an unknown neutral element?
-		return null;
 	}
 }

@@ -63,7 +63,7 @@ public class JavaOclTuple extends JavaOclLibraryObject implements OclTuple {
 	 * </p>
 	 * 
 	 * @param imiTuple
-	 *          the {@link IModelInstanceTuple} to adapt
+	 *            the {@link IModelInstanceTuple} to adapt
 	 */
 	public JavaOclTuple(IModelInstanceTuple imiTuple) {
 
@@ -82,6 +82,34 @@ public class JavaOclTuple extends JavaOclLibraryObject implements OclTuple {
 
 	/*
 	 * (non-Javadoc)
+	 * 
+	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny#asSet()
+	 */
+	public <T extends OclAny> OclSet<T> asSet() {
+
+		OclSet<T> result;
+		TupleType tupleType = TypesFactory.INSTANCE.createTupleType();
+
+		result = checkInvalid(EssentialOclPlugin.getOclLibraryProvider()
+				.getOclLibrary().getSetType(tupleType), this);
+
+		if (result == null)
+			result = checkAsSet(tupleType);
+
+		if (result == null) {
+			Set<IModelInstanceElement> imiSet = new HashSet<IModelInstanceElement>();
+			imiSet.add(getModelInstanceTuple());
+
+			result = JavaStandardLibraryFactory.INSTANCE.createOclSet(imiSet,
+					tupleType);
+		}
+
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @seetudresden.ocl20.pivot.essentialocl.standardlibrary.OclTuple#
 	 * getModelInstanceTuple()
 	 */
@@ -92,34 +120,7 @@ public class JavaOclTuple extends JavaOclLibraryObject implements OclTuple {
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclAny
-	 * #isEqualTo(tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot)
-	 */
-	public OclBoolean isEqualTo(OclAny that) {
-
-		OclBoolean result;
-
-		result = checkIsEqualTo(that);
-
-		if (result == null) {
-			/* Else compute the result. */
-			if (!(that instanceof OclTuple)) {
-				result = JavaOclBoolean.getInstance(false);
-			}
-
-			else {
-
-				result =
-						JavaOclBoolean.getInstance(getModelInstanceTuple().equals(
-								that.getModelInstanceElement()));
-			}
-		}
-
-		return result;
-	}
-
-	/*
-	 * (non-Javadoc)
+	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclTuple#getPropertyValue
 	 * (java.lang.String)
@@ -137,14 +138,15 @@ public class JavaOclTuple extends JavaOclLibraryObject implements OclTuple {
 		if (result == null) {
 			try {
 
-				IModelInstanceElement imiResult =
-						getModelInstanceTuple().get(
-								(IModelInstanceString) pathname.getModelInstanceElement());
-				result = JavaStandardLibraryFactory.INSTANCE.createOclAny(imiResult);
+				IModelInstanceElement imiResult = getModelInstanceTuple().get(
+						(IModelInstanceString) pathname
+								.getModelInstanceElement());
+				result = JavaStandardLibraryFactory.INSTANCE
+						.createOclAny(imiResult);
 
 			} catch (IllegalArgumentException e) {
-				result =
-						JavaStandardLibraryFactory.INSTANCE.createOclInvalid(anyType, e);
+				result = JavaStandardLibraryFactory.INSTANCE.createOclInvalid(
+						anyType, e);
 			}
 		}
 
@@ -153,31 +155,38 @@ public class JavaOclTuple extends JavaOclLibraryObject implements OclTuple {
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny#asSet()
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclAny
+	 * #isEqualTo(tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot)
 	 */
-	public <T extends OclAny> OclSet<T> asSet() {
+	public OclBoolean isEqualTo(OclAny that) {
 
-		OclSet<T> result;
-		TupleType tupleType = TypesFactory.INSTANCE.createTupleType();
+		OclBoolean result;
 
-		result =
-				checkInvalid(EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
-						.getSetType(tupleType), this);
-
-		if (result == null)
-			result = checkAsSet(tupleType);
+		result = checkIsEqualTo(that);
 
 		if (result == null) {
-			Set<IModelInstanceElement> imiSet = new HashSet<IModelInstanceElement>();
-			imiSet.add(getModelInstanceTuple());
+			/* Else compute the result. */
+			if (!(that instanceof OclTuple)) {
+				result = JavaOclBoolean.getInstance(false);
+			}
 
-			result =
-					JavaStandardLibraryFactory.INSTANCE.createOclSet(imiSet, tupleType);
+			else {
+
+				result = JavaOclBoolean.getInstance(getModelInstanceTuple()
+						.equals(that.getModelInstanceElement()));
+			}
 		}
 
 		return result;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 

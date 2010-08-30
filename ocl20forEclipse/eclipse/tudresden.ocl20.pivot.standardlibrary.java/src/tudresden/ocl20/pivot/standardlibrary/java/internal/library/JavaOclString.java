@@ -64,7 +64,8 @@ public class JavaOclString extends JavaOclLibraryObject implements OclString {
 	 * </p>
 	 * 
 	 * @param adaptee
-	 *          The adapted model instance object of this {@link JavaOclString}.
+	 *            The adapted model instance object of this
+	 *            {@link JavaOclString}.
 	 */
 	public JavaOclString(IModelInstanceString imiString) {
 
@@ -81,13 +82,114 @@ public class JavaOclString extends JavaOclLibraryObject implements OclString {
 		super(invalidReason);
 	}
 
-	public IModelInstanceString getModelInstanceString() {
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny#asSet()
+	 */
+	public <T extends OclAny> OclSet<T> asSet() {
 
-		return (IModelInstanceString) this.imiElement;
+		OclSet<T> result = null;
+
+		result = checkInvalid(
+				EssentialOclPlugin
+						.getOclLibraryProvider()
+						.getOclLibrary()
+						.getSetType(
+								EssentialOclPlugin.getOclLibraryProvider()
+										.getOclLibrary().getOclString()), this);
+
+		if (result == null)
+			result = checkAsSet(EssentialOclPlugin.getOclLibraryProvider()
+					.getOclLibrary().getOclString());
+
+		if (result == null) {
+			Set<IModelInstanceElement> imiSet = new HashSet<IModelInstanceElement>();
+			imiSet.add(getModelInstanceString());
+
+			result = JavaStandardLibraryFactory.INSTANCE.createOclSet(imiSet,
+					EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+							.getOclInteger());
+		}
+
+		return result;
+	}
+
+	public OclString at(OclInteger i) {
+
+		OclString result;
+
+		result = checkInvalid(EssentialOclPlugin.getOclLibraryProvider()
+				.getOclLibrary().getOclString(), this, i);
+
+		if (result == null)
+			result = checkUndefined("at", EssentialOclPlugin
+					.getOclLibraryProvider().getOclLibrary().getOclString(),
+					this, i);
+
+		if (result == null) {
+			int javaIndex = i.getModelInstanceInteger().getLong().intValue() - 1;
+
+			try {
+				Character c = this.getModelInstanceString().getString()
+						.charAt(javaIndex);
+				result = JavaStandardLibraryFactory.INSTANCE.createOclString(c
+						.toString());
+
+			} catch (IndexOutOfBoundsException e) {
+				result = JavaStandardLibraryFactory.INSTANCE.createOclInvalid(
+						EssentialOclPlugin.getOclLibraryProvider()
+								.getOclLibrary().getOclString(), e);
+			}
+		}
+
+		return result;
+	}
+
+	public OclSequence<OclString> characters() {
+
+		OclSequence<OclString> result;
+
+		result = checkInvalid(
+				EssentialOclPlugin
+						.getOclLibraryProvider()
+						.getOclLibrary()
+						.getSequenceType(
+								EssentialOclPlugin.getOclLibraryProvider()
+										.getOclLibrary().getOclString()), this);
+
+		if (result == null)
+			result = checkUndefined(
+					"characters",
+					EssentialOclPlugin
+							.getOclLibraryProvider()
+							.getOclLibrary()
+							.getSequenceType(
+									EssentialOclPlugin.getOclLibraryProvider()
+											.getOclLibrary().getOclString()),
+					this);
+
+		if (result == null) {
+			List<OclString> oclCharacters = new ArrayList<OclString>();
+
+			for (Character aChar : getModelInstanceString().getString()
+					.toCharArray()) {
+				OclString oclChar = JavaStandardLibraryFactory.INSTANCE
+						.createOclString(aChar.toString());
+				oclCharacters.add(oclChar);
+			}
+
+			result = JavaStandardLibraryFactory.INSTANCE.createOclSequence(
+					oclCharacters, EssentialOclPlugin.getOclLibraryProvider()
+							.getOclLibrary().getOclString());
+		}
+
+		return result;
 	}
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclString#concat(tudresden
 	 * .ocl20.pivot.essentialocl.standardlibrary.OclString)
@@ -96,14 +198,13 @@ public class JavaOclString extends JavaOclLibraryObject implements OclString {
 
 		OclString result = null;
 
-		result =
-				checkInvalid(EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
-						.getOclString(), this, aString);
+		result = checkInvalid(EssentialOclPlugin.getOclLibraryProvider()
+				.getOclLibrary().getOclString(), this, aString);
 
 		if (result == null)
-			result =
-					checkUndefined("concat", EssentialOclPlugin.getOclLibraryProvider()
-							.getOclLibrary().getOclString(), this, aString);
+			result = checkUndefined("concat", EssentialOclPlugin
+					.getOclLibraryProvider().getOclLibrary().getOclString(),
+					this, aString);
 
 		if (result == null) {
 			StringBuilder concat = new StringBuilder();
@@ -111,85 +212,80 @@ public class JavaOclString extends JavaOclLibraryObject implements OclString {
 			concat.append(getModelInstanceString().getString());
 			concat.append(aString.getModelInstanceString().getString());
 
-			result =
-					JavaStandardLibraryFactory.INSTANCE
-							.createOclString(concat.toString());
+			result = JavaStandardLibraryFactory.INSTANCE.createOclString(concat
+					.toString());
 		}
 
 		return result;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclString#size()
-	 */
-	public OclInteger size() {
+	public OclBoolean equalsIgnoreCase(OclString s) {
 
-		OclInteger result = null;
+		OclBoolean result;
 
-		result =
-				checkInvalid(EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
-						.getOclInteger(), this);
+		result = checkInvalid(EssentialOclPlugin.getOclLibraryProvider()
+				.getOclLibrary().getOclBoolean(), this, s);
 
 		if (result == null)
-			result =
-					checkUndefined("size", EssentialOclPlugin.getOclLibraryProvider()
-							.getOclLibrary().getOclInteger(), this);
+			result = checkUndefined("equalsIgnoreCase", EssentialOclPlugin
+					.getOclLibraryProvider().getOclLibrary().getOclBoolean(),
+					this, s);
 
-		if (result == null) {
-			/* Else compute the result. */
-			Long size = Long.valueOf(getModelInstanceString().getString().length());
-			result = JavaStandardLibraryFactory.INSTANCE.createOclInteger(size);
-		}
+		if (result == null)
+			result = JavaStandardLibraryFactory.INSTANCE.createOclBoolean(this
+					.getModelInstanceString().getString()
+					.equalsIgnoreCase(s.getModelInstanceString().getString()));
 
 		return result;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclString#substring
-	 * (tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger,
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger)
-	 */
-	public OclString substring(OclInteger lower, OclInteger upper) {
+	public IModelInstanceString getModelInstanceString() {
 
-		OclString result = null;
+		return (IModelInstanceString) this.imiElement;
+	}
 
-		result =
-				checkInvalid(EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
-						.getOclString(), this, lower, upper);
+	public OclInteger indexOf(OclString s) {
+
+		OclInteger result;
+
+		result = checkInvalid(EssentialOclPlugin.getOclLibraryProvider()
+				.getOclLibrary().getOclInteger(), this, s);
 
 		if (result == null)
-			result =
-					checkUndefined("substring", EssentialOclPlugin
-							.getOclLibraryProvider().getOclLibrary().getOclString(), this,
-							lower, upper);
+			result = checkUndefined("indexOf", EssentialOclPlugin
+					.getOclLibraryProvider().getOclLibrary().getOclInteger(),
+					this, s);
 
 		if (result == null) {
-			/* Indices in OCL are different from Java indices! */
-			int intLower =
-					((IModelInstanceInteger) lower.getModelInstanceElement()).getLong()
-							.intValue() - 1;
+			String thisString = this.getModelInstanceString().getString();
+			String thatString = s.getModelInstanceString().getString();
 
-			int intUpper =
-					((IModelInstanceInteger) upper.getModelInstanceElement()).getLong()
-							.intValue();
+			/*
+			 * "No string is a substring of the empty string." (standard, p.145)
+			 */
+			if (thisString.equals(""))
+				result = JavaStandardLibraryFactory.INSTANCE
+						.createOclInteger(0L);
 
-			try {
-				if (intLower >= intUpper)
-					throw new IndexOutOfBoundsException(
-							"Cannot use substring() with greater lower bound.");
+			else {
 
-				result =
-						JavaStandardLibraryFactory.INSTANCE
-								.createOclString(getModelInstanceString().getString()
-										.substring(intLower, intUpper));
-			} catch (IndexOutOfBoundsException e) {
-				result =
-						JavaStandardLibraryFactory.INSTANCE.createOclInvalid(
-								EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
-										.getOclString(), e);
+				/*
+				 * "The empty string is considered to be a substring of every
+				 * string but the empty string, at index 1." (standard, p.145)
+				 */
+				if (thatString.equals(""))
+					result = JavaStandardLibraryFactory.INSTANCE
+							.createOclInteger(1L);
+
+				else {
+
+					int javaResult = this.getModelInstanceString().getString()
+							.indexOf(s.getModelInstanceString().getString()) + 1;
+					result = JavaStandardLibraryFactory.INSTANCE
+							.createOclInteger(Long.valueOf(javaResult));
+				}
 			}
+
 		}
 
 		return result;
@@ -197,81 +293,9 @@ public class JavaOclString extends JavaOclLibraryObject implements OclString {
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclString#toInteger()
-	 */
-	public OclInteger toInteger() {
-
-		OclInteger result = null;
-
-		result =
-				checkInvalid(EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
-						.getOclInteger(), this);
-
-		if (result == null)
-			result =
-					checkUndefined("toInteger", EssentialOclPlugin
-							.getOclLibraryProvider().getOclLibrary().getOclInteger(), this);
-
-		if (result == null) {
-			/* Else compute the result. */
-			try {
-				Long toInteger = new Long(getModelInstanceString().getString());
-
-				result =
-						JavaStandardLibraryFactory.INSTANCE.createOclInteger(toInteger);
-			}
-
-			catch (NumberFormatException e) {
-				result =
-						JavaStandardLibraryFactory.INSTANCE.createOclInvalid(
-								EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
-										.getOclInteger(), e);
-			}
-		}
-
-		return result;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclString#toReal()
-	 */
-	public OclReal toReal() {
-
-		OclReal result = null;
-
-		result =
-				checkInvalid(EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
-						.getOclReal(), this);
-
-		if (result == null)
-			result =
-					checkUndefined("toReal", EssentialOclPlugin.getOclLibraryProvider()
-							.getOclLibrary().getOclReal(), this);
-
-		if (result == null) {
-			/* Else compute the result. */
-			try {
-				Double toReal = new Double(getModelInstanceString().getString());
-
-				result = JavaStandardLibraryFactory.INSTANCE.createOclReal(toReal);
-			}
-
-			catch (NumberFormatException e) {
-				result =
-						JavaStandardLibraryFactory.INSTANCE.createOclInvalid(
-								EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
-										.getOclReal(), e);
-			}
-		}
-
-		return result;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclAny
+	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclAny
 	 * #isEqualTo(tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot)
 	 */
 	public OclBoolean isEqualTo(OclAny that) {
@@ -287,13 +311,12 @@ public class JavaOclString extends JavaOclLibraryObject implements OclString {
 			}
 
 			else {
-				String thatString =
-						((IModelInstanceString) that.getModelInstanceElement()).getString();
+				String thatString = ((IModelInstanceString) that
+						.getModelInstanceElement()).getString();
 
 				if (getModelInstanceString().getString().equals(thatString)) {
 					result = JavaOclBoolean.getInstance(true);
-				}
-				else {
+				} else {
 					result = JavaOclBoolean.getInstance(false);
 				}
 			}
@@ -302,38 +325,226 @@ public class JavaOclString extends JavaOclLibraryObject implements OclString {
 		return result;
 	}
 
+	public OclString plus(OclString s) {
+
+		return concat(s);
+	}
+
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny#asSet()
+	 * 
+	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclString#size()
 	 */
-	public <T extends OclAny> OclSet<T> asSet() {
+	public OclInteger size() {
 
-		OclSet<T> result = null;
+		OclInteger result = null;
 
-		result =
-				checkInvalid(EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
-						.getSetType(
-								EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
-										.getOclString()), this);
+		result = checkInvalid(EssentialOclPlugin.getOclLibraryProvider()
+				.getOclLibrary().getOclInteger(), this);
 
 		if (result == null)
-			result =
-					checkAsSet(EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
-							.getOclString());
+			result = checkUndefined("size", EssentialOclPlugin
+					.getOclLibraryProvider().getOclLibrary().getOclInteger(),
+					this);
 
 		if (result == null) {
-			Set<IModelInstanceElement> imiSet = new HashSet<IModelInstanceElement>();
-			imiSet.add(getModelInstanceString());
-
-			result =
-					JavaStandardLibraryFactory.INSTANCE.createOclSet(imiSet,
-							EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
-									.getOclInteger());
+			/* Else compute the result. */
+			Long size = Long.valueOf(getModelInstanceString().getString()
+					.length());
+			result = JavaStandardLibraryFactory.INSTANCE.createOclInteger(size);
 		}
 
 		return result;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclString#substring
+	 * (tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger,
+	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger)
+	 */
+	public OclString substring(OclInteger lower, OclInteger upper) {
+
+		OclString result = null;
+
+		result = checkInvalid(EssentialOclPlugin.getOclLibraryProvider()
+				.getOclLibrary().getOclString(), this, lower, upper);
+
+		if (result == null)
+			result = checkUndefined("substring", EssentialOclPlugin
+					.getOclLibraryProvider().getOclLibrary().getOclString(),
+					this, lower, upper);
+
+		if (result == null) {
+			/* Indices in OCL are different from Java indices! */
+			int intLower = ((IModelInstanceInteger) lower
+					.getModelInstanceElement()).getLong().intValue() - 1;
+
+			int intUpper = ((IModelInstanceInteger) upper
+					.getModelInstanceElement()).getLong().intValue();
+
+			try {
+				if (intLower >= intUpper)
+					throw new IndexOutOfBoundsException(
+							"Cannot use substring() with greater lower bound.");
+
+				result = JavaStandardLibraryFactory.INSTANCE
+						.createOclString(getModelInstanceString().getString()
+								.substring(intLower, intUpper));
+			} catch (IndexOutOfBoundsException e) {
+				result = JavaStandardLibraryFactory.INSTANCE.createOclInvalid(
+						EssentialOclPlugin.getOclLibraryProvider()
+								.getOclLibrary().getOclString(), e);
+			}
+		}
+
+		return result;
+	}
+
+	public OclBoolean toBoolean() {
+
+		OclBoolean result;
+
+		result = checkInvalid(EssentialOclPlugin.getOclLibraryProvider()
+				.getOclLibrary().getOclBoolean(), this);
+
+		if (result == null)
+			result = checkUndefined("toBoolean", EssentialOclPlugin
+					.getOclLibraryProvider().getOclLibrary().getOclBoolean(),
+					this);
+
+		if (result == null) {
+			if (this.getModelInstanceString().getString().equals("true"))
+				result = JavaStandardLibraryFactory.INSTANCE
+						.createOclBoolean(true);
+			else
+				result = JavaStandardLibraryFactory.INSTANCE
+						.createOclBoolean(false);
+		}
+
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclString#toInteger()
+	 */
+	public OclInteger toInteger() {
+
+		OclInteger result = null;
+
+		result = checkInvalid(EssentialOclPlugin.getOclLibraryProvider()
+				.getOclLibrary().getOclInteger(), this);
+
+		if (result == null)
+			result = checkUndefined("toInteger", EssentialOclPlugin
+					.getOclLibraryProvider().getOclLibrary().getOclInteger(),
+					this);
+
+		if (result == null) {
+			/* Else compute the result. */
+			try {
+				Long toInteger = new Long(getModelInstanceString().getString());
+
+				result = JavaStandardLibraryFactory.INSTANCE
+						.createOclInteger(toInteger);
+			}
+
+			catch (NumberFormatException e) {
+				result = JavaStandardLibraryFactory.INSTANCE.createOclInvalid(
+						EssentialOclPlugin.getOclLibraryProvider()
+								.getOclLibrary().getOclInteger(), e);
+			}
+		}
+
+		return result;
+	}
+
+	public OclString toLowerCase() {
+
+		OclString result;
+
+		result = checkInvalid(EssentialOclPlugin.getOclLibraryProvider()
+				.getOclLibrary().getOclString(), this);
+
+		if (result == null)
+			result = checkUndefined("toLowerCase", EssentialOclPlugin
+					.getOclLibraryProvider().getOclLibrary().getOclString(),
+					this);
+
+		if (result == null) {
+			result = JavaStandardLibraryFactory.INSTANCE.createOclString(this
+					.getModelInstanceString().getString().toLowerCase());
+		}
+
+		return result;
+	}
+
+	public OclString toUpperCase() {
+
+		OclString result;
+
+		result = checkInvalid(EssentialOclPlugin.getOclLibraryProvider()
+				.getOclLibrary().getOclString(), this);
+
+		if (result == null)
+			result = checkUndefined("toUpperCase", EssentialOclPlugin
+					.getOclLibraryProvider().getOclLibrary().getOclString(),
+					this);
+
+		if (result == null) {
+			result = JavaStandardLibraryFactory.INSTANCE.createOclString(this
+					.getModelInstanceString().getString().toUpperCase());
+		}
+
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclString#toReal()
+	 */
+	public OclReal toReal() {
+
+		OclReal result = null;
+
+		result = checkInvalid(EssentialOclPlugin.getOclLibraryProvider()
+				.getOclLibrary().getOclReal(), this);
+
+		if (result == null)
+			result = checkUndefined("toReal", EssentialOclPlugin
+					.getOclLibraryProvider().getOclLibrary().getOclReal(), this);
+
+		if (result == null) {
+			/* Else compute the result. */
+			try {
+				Double toReal = new Double(getModelInstanceString().getString());
+
+				result = JavaStandardLibraryFactory.INSTANCE
+						.createOclReal(toReal);
+			}
+
+			catch (NumberFormatException e) {
+				result = JavaStandardLibraryFactory.INSTANCE.createOclInvalid(
+						EssentialOclPlugin.getOclLibraryProvider()
+								.getOclLibrary().getOclReal(), e);
+			}
+		}
+
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 
@@ -348,215 +559,5 @@ public class JavaOclString extends JavaOclLibraryObject implements OclString {
 		result.append("]");
 
 		return result.toString();
-	}
-
-	public OclString at(OclInteger i) {
-
-		OclString result;
-
-		result =
-				checkInvalid(EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
-						.getOclString(), this, i);
-
-		if (result == null)
-			result =
-					checkUndefined("at", EssentialOclPlugin.getOclLibraryProvider()
-							.getOclLibrary().getOclString(), this, i);
-
-		if (result == null) {
-			int javaIndex = i.getModelInstanceInteger().getLong().intValue() - 1;
-
-			try {
-				Character c =
-						this.getModelInstanceString().getString().charAt(javaIndex);
-				result =
-						JavaStandardLibraryFactory.INSTANCE.createOclString(c.toString());
-
-			} catch (IndexOutOfBoundsException e) {
-				result =
-						JavaStandardLibraryFactory.INSTANCE.createOclInvalid(
-								EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
-										.getOclString(), e);
-			}
-		}
-
-		return result;
-	}
-
-	public OclSequence<OclString> characters() {
-
-		OclSequence<OclString> result;
-
-		result =
-				checkInvalid(EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
-						.getSequenceType(
-								EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
-										.getOclString()), this);
-
-		if (result == null)
-			result =
-					checkUndefined("characters", EssentialOclPlugin.getOclLibraryProvider()
-.getOclLibrary().getSequenceType(EssentialOclPlugin.getOclLibraryProvider()
-									.getOclLibrary().getOclString()), this);
-
-		if (result == null) {
-			List<OclString> oclCharacters = new ArrayList<OclString>();
-
-			for (Character aChar : getModelInstanceString().getString().toCharArray()) {
-				OclString oclChar =
-						JavaStandardLibraryFactory.INSTANCE.createOclString(aChar
-								.toString());
-				oclCharacters.add(oclChar);
-			}
-
-			result =
-					JavaStandardLibraryFactory.INSTANCE.createOclSequence(oclCharacters,
-							EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
-									.getOclString());
-		}
-
-		return result;
-	}
-
-	public OclBoolean equalsIgnoreCase(OclString s) {
-
-		OclBoolean result;
-
-		result =
-				checkInvalid(EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
-						.getOclBoolean(), this, s);
-
-		if (result == null)
-			result =
-					checkUndefined("equalsIgnoreCase", EssentialOclPlugin
-							.getOclLibraryProvider().getOclLibrary().getOclBoolean(), this, s);
-
-		if (result == null)
-			result =
-					JavaStandardLibraryFactory.INSTANCE.createOclBoolean(this
-							.getModelInstanceString().getString().equalsIgnoreCase(
-									s.getModelInstanceString().getString()));
-
-		return result;
-	}
-
-	public OclInteger indexOf(OclString s) {
-
-		OclInteger result;
-
-		result =
-				checkInvalid(EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
-						.getOclInteger(), this, s);
-
-		if (result == null)
-			result =
-					checkUndefined("indexOf", EssentialOclPlugin.getOclLibraryProvider()
-							.getOclLibrary().getOclInteger(), this, s);
-
-		if (result == null) {
-			String thisString = this.getModelInstanceString().getString();
-			String thatString = s.getModelInstanceString().getString();
-
-			/*
-			 * "No string is a substring of the empty string." (standard, p.145)
-			 */
-			if (thisString.equals(""))
-				result = JavaStandardLibraryFactory.INSTANCE.createOclInteger(0L);
-
-			else {
-
-				/*
-				 * "The empty string is considered to be a substring of every string but
-				 * the empty string, at index 1." (standard, p.145)
-				 */
-				if (thatString.equals(""))
-					result = JavaStandardLibraryFactory.INSTANCE.createOclInteger(1L);
-
-				else {
-
-					int javaResult =
-							this.getModelInstanceString().getString().indexOf(
-									s.getModelInstanceString().getString()) + 1;
-					result =
-							JavaStandardLibraryFactory.INSTANCE.createOclInteger(Long
-									.valueOf(javaResult));
-				}
-			}
-
-		}
-
-		return result;
-	}
-
-	public OclString plus(OclString s) {
-
-		return concat(s);
-	}
-
-	public OclBoolean toBoolean() {
-
-		OclBoolean result;
-
-		result =
-				checkInvalid(EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
-						.getOclBoolean(), this);
-
-		if (result == null)
-			result =
-					checkUndefined("toBoolean", EssentialOclPlugin
-							.getOclLibraryProvider().getOclLibrary().getOclBoolean(), this);
-
-		if (result == null) {
-			if (this.getModelInstanceString().getString().equals("true"))
-				result = JavaStandardLibraryFactory.INSTANCE.createOclBoolean(true);
-			else
-				result = JavaStandardLibraryFactory.INSTANCE.createOclBoolean(false);
-		}
-
-		return result;
-	}
-
-	public OclString toLowerCase() {
-
-		OclString result;
-
-		result =
-				checkInvalid(EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
-						.getOclString(), this);
-
-		if (result == null)
-			result =
-					checkUndefined("toLowerCase", EssentialOclPlugin
-							.getOclLibraryProvider().getOclLibrary().getOclString(), this);
-
-		if (result == null) {
-			result =
-					JavaStandardLibraryFactory.INSTANCE.createOclString(this
-							.getModelInstanceString().getString().toLowerCase());
-		}
-
-		return result;
-	}
-
-	public OclString toUpperCase() {
-
-		OclString result;
-
-		result =
-				checkInvalid(EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
-						.getOclString(), this);
-
-		if (result == null)
-			result =
-					checkUndefined("toUpperCase", EssentialOclPlugin
-							.getOclLibraryProvider().getOclLibrary().getOclString(), this);
-
-		if (result == null) {
-			result =
-					JavaStandardLibraryFactory.INSTANCE.createOclString(this
-							.getModelInstanceString().getString().toUpperCase());
-		}
-
-		return result;
 	}
 }

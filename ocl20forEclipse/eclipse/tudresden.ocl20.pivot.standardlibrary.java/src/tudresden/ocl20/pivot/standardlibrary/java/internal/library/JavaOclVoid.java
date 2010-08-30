@@ -39,7 +39,7 @@ public class JavaOclVoid extends JavaOclAny implements OclVoid {
 	 * invalid.
 	 * 
 	 * @param invalidReason
-	 *          the {@link Throwable} that caused this element to be invalid
+	 *            the {@link Throwable} that caused this element to be invalid
 	 */
 	public JavaOclVoid(Throwable invalidReason) {
 
@@ -48,16 +48,18 @@ public class JavaOclVoid extends JavaOclAny implements OclVoid {
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny#asSet()
 	 */
 	public <T extends OclAny> OclSet<T> asSet() {
 
-		return JavaStandardLibraryFactory.INSTANCE.createOclSet(new HashSet<T>(),
-				TypesFactory.INSTANCE.createAnyType());
+		return JavaStandardLibraryFactory.INSTANCE.createOclSet(
+				new HashSet<T>(), TypesFactory.INSTANCE.createAnyType());
 	}
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny#isEqualTo(tudresden
 	 * .ocl20.pivot.essentialocl.standardlibrary.OclAny)
@@ -67,16 +69,19 @@ public class JavaOclVoid extends JavaOclAny implements OclVoid {
 		// standard, p. 140f
 		if (object2 instanceof OclVoid) {
 			return JavaOclBoolean.getInstance(true);
-		}
-		else {
+		} else {
 			return JavaOclBoolean.getInstance(false);
 		}
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 
 		return "null";
 	}
-
 }
