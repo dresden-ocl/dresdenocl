@@ -37,7 +37,6 @@ import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.util.ResourceLocator;
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
@@ -50,12 +49,12 @@ import org.eclipse.emf.edit.provider.ViewerNotification;
 
 import tudresden.ocl20.pivot.essentialocl.expressions.RealLiteralExp;
 import tudresden.ocl20.pivot.essentialocl.expressions.impl.ExpressionsPackageImpl;
-import tudresden.ocl20.pivot.essentialocl.types.provider.EssentialOCLEditPlugin;
 
 /**
- * This is the item provider adapter for a {@link tudresden.ocl20.pivot.essentialocl.expressions.RealLiteralExp} object.
- * <!-- begin-user-doc -->
- * <!-- end-user-doc -->
+ * This is the item provider adapter for a
+ * {@link tudresden.ocl20.pivot.essentialocl.expressions.RealLiteralExp} object.
+ * <!-- begin-user-doc --> <!-- end-user-doc -->
+ * 
  * @generated
  */
 public class RealLiteralExpItemProvider extends NumericLiteralExpItemProvider
@@ -63,9 +62,9 @@ public class RealLiteralExpItemProvider extends NumericLiteralExpItemProvider
 		ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
 
 	/**
-	 * This constructs an instance from a factory and a notifier.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This constructs an instance from a factory and a notifier. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public RealLiteralExpItemProvider(AdapterFactory adapterFactory) {
@@ -73,9 +72,9 @@ public class RealLiteralExpItemProvider extends NumericLiteralExpItemProvider
 	}
 
 	/**
-	 * This returns the property descriptors for the adapted class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This returns the property descriptors for the adapted class. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -89,9 +88,9 @@ public class RealLiteralExpItemProvider extends NumericLiteralExpItemProvider
 	}
 
 	/**
-	 * This adds a property descriptor for the Real Symbol feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This adds a property descriptor for the Real Symbol feature. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected void addRealSymbolPropertyDescriptor(Object object) {
@@ -104,40 +103,40 @@ public class RealLiteralExpItemProvider extends NumericLiteralExpItemProvider
 						getString(
 								"_UI_PropertyDescriptor_description", "_UI_RealLiteralExp_realSymbol_feature", "_UI_RealLiteralExp_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 						ExpressionsPackageImpl.Literals.REAL_LITERAL_EXP__REAL_SYMBOL,
-						true, false, false, ItemPropertyDescriptor.REAL_VALUE_IMAGE, null,
-						null));
+						true, false, false,
+						ItemPropertyDescriptor.REAL_VALUE_IMAGE, null, null));
 	}
 
 	/**
-	 * This returns RealLiteralExp.gif.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This returns RealLiteralExp.gif. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage(
-				"full/obj16/RealLiteralExp")); //$NON-NLS-1$
+		return overlayImage(object,
+				getResourceLocator().getImage("full/obj16/RealLiteralExp")); //$NON-NLS-1$
 	}
 
 	/**
-	 * This returns the label text for the adapted class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
+	 * This returns the label text for the adapted class. <!-- begin-user-doc
+	 * --> <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((RealLiteralExp) object).getName();
-		return label == null || label.length() == 0 ? getString("_UI_RealLiteralExp_type") : //$NON-NLS-1$
-				getString("_UI_RealLiteralExp_type") + " " + label; //$NON-NLS-1$ //$NON-NLS-2$
+		String label = ((RealLiteralExp) object).getRealSymbol() + "";
+		return label;
 	}
 
 	/**
-	 * This handles model notifications by calling {@link #updateChildren} to update any cached
-	 * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This handles model notifications by calling {@link #updateChildren} to
+	 * update any cached children and by creating a viewer notification, which
+	 * it passes to {@link #fireNotifyChanged}. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -146,18 +145,18 @@ public class RealLiteralExpItemProvider extends NumericLiteralExpItemProvider
 
 		switch (notification.getFeatureID(RealLiteralExp.class)) {
 		case ExpressionsPackageImpl.REAL_LITERAL_EXP__REAL_SYMBOL:
-			fireNotifyChanged(new ViewerNotification(notification, notification
-					.getNotifier(), false, true));
+			fireNotifyChanged(new ViewerNotification(notification,
+					notification.getNotifier(), false, true));
 			return;
 		}
 		super.notifyChanged(notification);
 	}
 
 	/**
-	 * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s describing the children
-	 * that can be created under this object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s
+	 * describing the children that can be created under this object. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override

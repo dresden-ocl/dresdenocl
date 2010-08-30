@@ -37,7 +37,6 @@ import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.util.ResourceLocator;
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
@@ -48,12 +47,12 @@ import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 
 import tudresden.ocl20.pivot.essentialocl.expressions.VariableExp;
 import tudresden.ocl20.pivot.essentialocl.expressions.impl.ExpressionsPackageImpl;
-import tudresden.ocl20.pivot.essentialocl.types.provider.EssentialOCLEditPlugin;
 
 /**
- * This is the item provider adapter for a {@link tudresden.ocl20.pivot.essentialocl.expressions.VariableExp} object.
- * <!-- begin-user-doc -->
- * <!-- end-user-doc -->
+ * This is the item provider adapter for a
+ * {@link tudresden.ocl20.pivot.essentialocl.expressions.VariableExp} object.
+ * <!-- begin-user-doc --> <!-- end-user-doc -->
+ * 
  * @generated
  */
 public class VariableExpItemProvider extends OclExpressionItemProvider
@@ -61,9 +60,9 @@ public class VariableExpItemProvider extends OclExpressionItemProvider
 		ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
 
 	/**
-	 * This constructs an instance from a factory and a notifier.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This constructs an instance from a factory and a notifier. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public VariableExpItemProvider(AdapterFactory adapterFactory) {
@@ -71,9 +70,9 @@ public class VariableExpItemProvider extends OclExpressionItemProvider
 	}
 
 	/**
-	 * This returns the property descriptors for the adapted class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This returns the property descriptors for the adapted class. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -87,9 +86,9 @@ public class VariableExpItemProvider extends OclExpressionItemProvider
 	}
 
 	/**
-	 * This adds a property descriptor for the Referred Variable feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This adds a property descriptor for the Referred Variable feature. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected void addReferredVariablePropertyDescriptor(Object object) {
@@ -106,35 +105,35 @@ public class VariableExpItemProvider extends OclExpressionItemProvider
 	}
 
 	/**
-	 * This returns VariableExp.gif.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This returns VariableExp.gif. <!-- begin-user-doc --> <!-- end-user-doc
+	 * -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage(
-				"full/obj16/VariableExp")); //$NON-NLS-1$
+		return overlayImage(object,
+				getResourceLocator().getImage("full/obj16/VariableExp")); //$NON-NLS-1$
 	}
 
 	/**
-	 * This returns the label text for the adapted class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
+	 * This returns the label text for the adapted class. <!-- begin-user-doc
+	 * --> <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((VariableExp) object).getName();
-		return label == null || label.length() == 0 ? getString("_UI_VariableExp_type") : //$NON-NLS-1$
-				getString("_UI_VariableExp_type") + " " + label; //$NON-NLS-1$ //$NON-NLS-2$
+		String label = ((VariableExp) object).getReferredVariable().getName();
+		return label;
 	}
 
 	/**
-	 * This handles model notifications by calling {@link #updateChildren} to update any cached
-	 * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This handles model notifications by calling {@link #updateChildren} to
+	 * update any cached children and by creating a viewer notification, which
+	 * it passes to {@link #fireNotifyChanged}. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -144,10 +143,10 @@ public class VariableExpItemProvider extends OclExpressionItemProvider
 	}
 
 	/**
-	 * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s describing the children
-	 * that can be created under this object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s
+	 * describing the children that can be created under this object. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override

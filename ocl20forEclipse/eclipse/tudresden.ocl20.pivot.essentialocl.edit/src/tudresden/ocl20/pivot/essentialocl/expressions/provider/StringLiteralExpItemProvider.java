@@ -37,7 +37,6 @@ import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.util.ResourceLocator;
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
@@ -50,12 +49,12 @@ import org.eclipse.emf.edit.provider.ViewerNotification;
 
 import tudresden.ocl20.pivot.essentialocl.expressions.StringLiteralExp;
 import tudresden.ocl20.pivot.essentialocl.expressions.impl.ExpressionsPackageImpl;
-import tudresden.ocl20.pivot.essentialocl.types.provider.EssentialOCLEditPlugin;
 
 /**
- * This is the item provider adapter for a {@link tudresden.ocl20.pivot.essentialocl.expressions.StringLiteralExp} object.
- * <!-- begin-user-doc -->
- * <!-- end-user-doc -->
+ * This is the item provider adapter for a
+ * {@link tudresden.ocl20.pivot.essentialocl.expressions.StringLiteralExp}
+ * object. <!-- begin-user-doc --> <!-- end-user-doc -->
+ * 
  * @generated
  */
 public class StringLiteralExpItemProvider extends
@@ -64,9 +63,9 @@ public class StringLiteralExpItemProvider extends
 		IItemLabelProvider, IItemPropertySource {
 
 	/**
-	 * This constructs an instance from a factory and a notifier.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This constructs an instance from a factory and a notifier. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public StringLiteralExpItemProvider(AdapterFactory adapterFactory) {
@@ -74,9 +73,9 @@ public class StringLiteralExpItemProvider extends
 	}
 
 	/**
-	 * This returns the property descriptors for the adapted class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This returns the property descriptors for the adapted class. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -90,9 +89,9 @@ public class StringLiteralExpItemProvider extends
 	}
 
 	/**
-	 * This adds a property descriptor for the String Symbol feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This adds a property descriptor for the String Symbol feature. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected void addStringSymbolPropertyDescriptor(Object object) {
@@ -105,40 +104,40 @@ public class StringLiteralExpItemProvider extends
 						getString(
 								"_UI_PropertyDescriptor_description", "_UI_StringLiteralExp_stringSymbol_feature", "_UI_StringLiteralExp_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 						ExpressionsPackageImpl.Literals.STRING_LITERAL_EXP__STRING_SYMBOL,
-						true, false, false, ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-						null, null));
+						true, false, false,
+						ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
 	}
 
 	/**
-	 * This returns StringLiteralExp.gif.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This returns StringLiteralExp.gif. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage(
-				"full/obj16/StringLiteralExp")); //$NON-NLS-1$
+		return overlayImage(object,
+				getResourceLocator().getImage("full/obj16/StringLiteralExp")); //$NON-NLS-1$
 	}
 
 	/**
-	 * This returns the label text for the adapted class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
+	 * This returns the label text for the adapted class. <!-- begin-user-doc
+	 * --> <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((StringLiteralExp) object).getName();
-		return label == null || label.length() == 0 ? getString("_UI_StringLiteralExp_type") : //$NON-NLS-1$
-				getString("_UI_StringLiteralExp_type") + " " + label; //$NON-NLS-1$ //$NON-NLS-2$
+		String label = ((StringLiteralExp) object).getStringSymbol();
+		return label;
 	}
 
 	/**
-	 * This handles model notifications by calling {@link #updateChildren} to update any cached
-	 * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This handles model notifications by calling {@link #updateChildren} to
+	 * update any cached children and by creating a viewer notification, which
+	 * it passes to {@link #fireNotifyChanged}. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -147,18 +146,18 @@ public class StringLiteralExpItemProvider extends
 
 		switch (notification.getFeatureID(StringLiteralExp.class)) {
 		case ExpressionsPackageImpl.STRING_LITERAL_EXP__STRING_SYMBOL:
-			fireNotifyChanged(new ViewerNotification(notification, notification
-					.getNotifier(), false, true));
+			fireNotifyChanged(new ViewerNotification(notification,
+					notification.getNotifier(), false, true));
 			return;
 		}
 		super.notifyChanged(notification);
 	}
 
 	/**
-	 * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s describing the children
-	 * that can be created under this object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s
+	 * describing the children that can be created under this object. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override

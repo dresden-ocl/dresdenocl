@@ -37,7 +37,6 @@ import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.util.ResourceLocator;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
@@ -49,7 +48,6 @@ import org.eclipse.emf.edit.provider.ViewerNotification;
 
 import tudresden.ocl20.pivot.essentialocl.expressions.CollectionRange;
 import tudresden.ocl20.pivot.essentialocl.expressions.impl.ExpressionsPackageImpl;
-import tudresden.ocl20.pivot.essentialocl.types.provider.EssentialOCLEditPlugin;
 
 /**
  * This is the item provider adapter for a {@link tudresden.ocl20.pivot.essentialocl.expressions.CollectionRange} object.
@@ -137,13 +135,11 @@ public class CollectionRangeItemProvider extends
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((CollectionRange) object).getName();
-		return label == null || label.length() == 0 ? getString("_UI_CollectionRange_type") : //$NON-NLS-1$
-				getString("_UI_CollectionRange_type") + " " + label; //$NON-NLS-1$ //$NON-NLS-2$
+		return "range";
 	}
 
 	/**

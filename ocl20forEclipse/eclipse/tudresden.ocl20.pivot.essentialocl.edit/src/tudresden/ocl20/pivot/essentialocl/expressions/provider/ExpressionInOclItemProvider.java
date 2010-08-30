@@ -141,13 +141,11 @@ public class ExpressionInOclItemProvider extends ExpressionItemProvider
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((ExpressionInOcl) object).getBody();
-		return label == null || label.length() == 0 ? getString("_UI_ExpressionInOcl_type") : //$NON-NLS-1$
-				getString("_UI_ExpressionInOcl_type") + " " + label; //$NON-NLS-1$ //$NON-NLS-2$
+		return "OCL";
 	}
 
 	/**

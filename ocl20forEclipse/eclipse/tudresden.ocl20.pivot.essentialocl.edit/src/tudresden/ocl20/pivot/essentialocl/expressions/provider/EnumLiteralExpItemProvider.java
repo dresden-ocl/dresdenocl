@@ -37,7 +37,6 @@ import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.util.ResourceLocator;
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
@@ -48,12 +47,12 @@ import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 
 import tudresden.ocl20.pivot.essentialocl.expressions.EnumLiteralExp;
 import tudresden.ocl20.pivot.essentialocl.expressions.impl.ExpressionsPackageImpl;
-import tudresden.ocl20.pivot.essentialocl.types.provider.EssentialOCLEditPlugin;
 
 /**
- * This is the item provider adapter for a {@link tudresden.ocl20.pivot.essentialocl.expressions.EnumLiteralExp} object.
- * <!-- begin-user-doc -->
- * <!-- end-user-doc -->
+ * This is the item provider adapter for a
+ * {@link tudresden.ocl20.pivot.essentialocl.expressions.EnumLiteralExp} object.
+ * <!-- begin-user-doc --> <!-- end-user-doc -->
+ * 
  * @generated
  */
 public class EnumLiteralExpItemProvider extends LiteralExpItemProvider
@@ -61,9 +60,9 @@ public class EnumLiteralExpItemProvider extends LiteralExpItemProvider
 		ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
 
 	/**
-	 * This constructs an instance from a factory and a notifier.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This constructs an instance from a factory and a notifier. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public EnumLiteralExpItemProvider(AdapterFactory adapterFactory) {
@@ -71,9 +70,9 @@ public class EnumLiteralExpItemProvider extends LiteralExpItemProvider
 	}
 
 	/**
-	 * This returns the property descriptors for the adapted class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This returns the property descriptors for the adapted class. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -88,8 +87,8 @@ public class EnumLiteralExpItemProvider extends LiteralExpItemProvider
 
 	/**
 	 * This adds a property descriptor for the Referred Enum Literal feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected void addReferredEnumLiteralPropertyDescriptor(Object object) {
@@ -106,35 +105,37 @@ public class EnumLiteralExpItemProvider extends LiteralExpItemProvider
 	}
 
 	/**
-	 * This returns EnumLiteralExp.gif.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This returns EnumLiteralExp.gif. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage(
-				"full/obj16/EnumLiteralExp")); //$NON-NLS-1$
+		return overlayImage(object,
+				getResourceLocator().getImage("full/obj16/EnumLiteralExp")); //$NON-NLS-1$
 	}
 
 	/**
-	 * This returns the label text for the adapted class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
+	 * This returns the label text for the adapted class. <!-- begin-user-doc
+	 * --> <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((EnumLiteralExp) object).getName();
-		return label == null || label.length() == 0 ? getString("_UI_EnumLiteralExp_type") : //$NON-NLS-1$
-				getString("_UI_EnumLiteralExp_type") + " " + label; //$NON-NLS-1$ //$NON-NLS-2$
+		String result = ((EnumLiteralExp) object).getReferredEnumLiteral()
+				.getName();
+
+		return result;
 	}
 
 	/**
-	 * This handles model notifications by calling {@link #updateChildren} to update any cached
-	 * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This handles model notifications by calling {@link #updateChildren} to
+	 * update any cached children and by creating a viewer notification, which
+	 * it passes to {@link #fireNotifyChanged}. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -144,10 +145,10 @@ public class EnumLiteralExpItemProvider extends LiteralExpItemProvider
 	}
 
 	/**
-	 * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s describing the children
-	 * that can be created under this object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s
+	 * describing the children that can be created under this object. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
