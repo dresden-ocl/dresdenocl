@@ -1,8 +1,17 @@
 Changes and Bugs fixed during the different Releases
 ====================================================
 
-Release 3.0 (not scheduled yet)
-===============================
+Release 3.0 (planned for September, 9th, 2010)
+==============================================
+
+* A new OCL Editor/Parser is now available with Dresden OCL
+  - The editor includes
+    - Syntax Highlighting
+    - Code completion
+    - Outline view of OCL Abstract Syntax
+  - The parser includes
+    - Type inference wherever possible
+    
 * Some modifications of the pivot model were done.
   - MultiplicityElements are now removed. Multiple elements are now adapted to 
     CollectionTypes.
@@ -14,8 +23,13 @@ Release 3.0 (not scheduled yet)
   - Loading UML models containing references to other models should now work appropriately.
   - Reload of UML models now reloads changes of referenced external model elements as well.
 
+* Some bugs in the OCL Parser were fixed.
+  - Recursive operations can now be defined.
+  - For a detailed issue list investigate bug tracker on SourceForge.
+  
 * Some bugs in the OCL Interpreter were fixed.
   - The Interpreter now supports interpretation of recursive operations.
+  - The comparison of nested collections should now work correctly.
   
 * Some bugs in Ocl22Java were fixed.
   - OclAny.oclIsInvalid() is now transformed into working Java code.
@@ -23,8 +37,11 @@ Release 3.0 (not scheduled yet)
 
 GUI
 ---
+* Introduction of the new OCL Editor (see above)
+
 * Improvements of the Model Browser
   - Static operations and properties are now highlighted with different symbols.
+  - Constraints and their expressions are now highlighted with sensible symbols.
   
 * A bug in the Model Instance Browser has been fixed.
   - OCL-defined features are not displayed as undefined in the Model Instance Browser 
