@@ -35,7 +35,7 @@ public privileged aspect InvAspect1 {
     /**
      * <p><code>Checks an invariant on the class CustomerCard defined by the constraint
      * <code>context CustomerCard
-     *       inv: validFrom[].isBefore( validThru[])</code></p>
+     *       inv checkDates: validFrom.isBefore(validThru)</code></p>
      */
     after(tudresden.ocl20.pivot.examples.royalsandloyals.CustomerCard aClass) : allCustomerCardConstructors(aClass) || allSetters(aClass) {
         /* Disable this constraint for subclasses of CustomerCard. */

@@ -21,7 +21,7 @@ public privileged aspect InvAspect1 {
     /**
      * <p><code>Checks an invariant on the class LoyaltyProgram defined by the constraint
      * <code>context LoyaltyProgram
-     *       inv: levels[].first().name[].=( 'Silver')</code></p>
+     *       inv firstLevel: levels->first().name = 'Silver'</code></p>
      */
     after(tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyProgram aClass) : checkInvariantsCaller(aClass) {
         /* Disable this constraint for subclasses of LoyaltyProgram. */

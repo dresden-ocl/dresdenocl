@@ -1,7 +1,7 @@
 /*
-Copyright (C) 2008-2009 by Claas Wilke (claaswilke@gmx.net)
+Copyright (C) 2008-2010 by Claas Wilke (claas.wilke@tu-dresden.de)
 
-This file is part of the OCL 2 Java Code Generator of Dresden OCL2 for Eclipse.
+This file is part of the OCL 2 Java Code Generator of DresdenOCL.
 
 Dresden OCL2 for Eclipse is free software: you can redistribute it and/or modify 
 it under the terms of the GNU Lesser General Public License as published by the 
@@ -860,7 +860,6 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 		List<Variable> iteratorList;
 		Variable iterateVariable;
 
-		String itVar;
 		String resultVar;
 		String sourceGenericType;
 
@@ -879,17 +878,11 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 		/* Get the list with all iterator variables. */
 		iteratorList = anIterateExp.getIterator();
 
-		/* Get unique name iterateResultName and iterateVarName. */
-		itVar = this.myCodeTransEnv.getNewIteratorVarName();
-
-		if (iteratorList.size() > 0) {
-			/* Get the first iterator variable. */
-			iterateVariable = iteratorList.remove(0);
-
-			/* Used to get nicer names for iterateVariables in generated code. */
-			iterateVariable.setName(itVar);
-		}
-		// no else.
+		/*
+		 * Get the first iterator variable (probaly further exist during
+		 * recursive calls).
+		 */
+		iterateVariable = iteratorList.remove(0);
 
 		/*
 		 * If the Expression has more than one iterator variable. Create an
@@ -913,7 +906,7 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 
 		template.setAttribute("sourceCode", sourceCode.getCode());
 		template.setAttribute("sourceExp", sourceCode.getResultExp());
-		template.setAttribute("itVar", itVar);
+		template.setAttribute("itVar", iterateVariable.getName());
 		template.setAttribute("bodyCode", bodyCode.getCode());
 		template.setAttribute("bodyExp", bodyCode.getResultExp());
 		template.setAttribute("resultVarInitCode", resultVarInitCode.getCode());
@@ -972,7 +965,6 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 		List<Variable> itVarList;
 		Variable itVariable;
 
-		String oldItVarName;
 		String itName;
 		String itVarName;
 		String itVarName2;
@@ -994,10 +986,7 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 
 		/* Get the first iterator variable. */
 		itVariable = itVarList.remove(0);
-
-		/* Used to get nicer names for iterateVariables in generated code. */
-		oldItVarName = itVariable.getName();
-		itVariable.setName(itVarName);
+		itVarName = itVariable.getName();
 
 		/* Transform code for source of the iteratorExp. */
 		sourceExp = anIteratorExp.getSource();
@@ -1038,9 +1027,7 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 			bodyCode2 = this.doSwitch((EObject) bodyExp);
 		}
 
-		/* Rebuild the model instance! */
-		/* Rename variables and add them to the model again. */
-		itVariable.setName(oldItVarName);
+		/* Add the iterator Variable to the model again. */
 		itVarList.add(0, itVariable);
 
 		/* Begin code transformation of IteratorExp. */
@@ -1252,29 +1239,10 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 		OclLibrary oclLibrary;
 		oclLibrary = EssentialOclPlugin.getOclLibraryProvider().getOclLibrary();
 
-		/* Check if the type of the source expression has not been set. */
-		/*
-		 * FIXME Claas: This is a bug in the parser. Remove this code when the
-		 * bug is fixed.
-		 */
-		if (anOperationCallExp.getReferredOperation() != null
-				&& (sourceExp == null || anOperationCallExp
-						.getReferredOperation().isStatic())) {
-			ITransformedType transformedSourceType;
-
-			/* The type of the source becomes the source expression. */
-			sourceType = anOperationCallExp.getSourceType();
-			transformedSourceType = this.transformType(sourceType);
-
-			sourceCode = new TransformedCodeImpl();
-			sourceCode.setResultExp(transformedSourceType.toString());
-		}
-
-		else {
-			sourceType = sourceExp.getType();
-			sourceCode = this.doSwitch((EObject) sourceExp);
-			result.addCode(sourceCode.getCode());
-		}
+		/* Compute the source expression. */
+		sourceType = sourceExp.getType();
+		sourceCode = this.doSwitch((EObject) sourceExp);
+		result.addCode(sourceCode.getCode());
 
 		/* Get the operation name and handle the special case @pre. */
 		if (anOperationCallExp.getName().equals("atPre")) {
@@ -1858,16 +1826,8 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 
 		/* Code for operations on non OclTypes. */
 		if (template == null) {
-
-			// /* Check if the referred operation is static */
-			// if (anOperationCallExp.getReferredOperation().isStatic()) {
-			//
-			// }
-			//
-			// else {
 			template = this.myTemplateGroup.getTemplate("umlOperation");
 			template.setAttribute("operationName", operationName);
-			// }
 		}
 
 		/* Probably set more attributes of the template. */
@@ -1937,22 +1897,8 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 		refPropertyName = referredProperty.getName();
 
 		/* Transform the code for the sourceExp. */
-		/* Check if the referred property is static. */
-		if (referredProperty.isStatic()) {
-			ITransformedType sourceType;
-
-			sourceExp = null;
-			sourceType = this.transformType(aPropertyCallExp.getSourceType());
-
-			/* The source expressions becomes a type expression. */
-			sourceCode = new TransformedCodeImpl();
-			sourceCode.setResultExp(sourceType.toString());
-		}
-
-		else {
-			sourceExp = aPropertyCallExp.getSource();
-			sourceCode = doSwitch((EObject) sourceExp);
-		}
+		sourceExp = aPropertyCallExp.getSource();
+		sourceCode = doSwitch((EObject) sourceExp);
 
 		/* Add source code to result. */
 		result.addCode(sourceCode.getCode());
@@ -2971,7 +2917,7 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 				adviceTemplate.setAttribute("constExp",
 						constrainedCode.getResultExp());
 				adviceTemplate.setAttribute("oclBody", aConstraint
-						.getSpecification().getBody());
+						.getSpecification().getBody().trim());
 				adviceTemplate.setAttribute("method", operationName);
 
 				/* Probably set the returnType. */
@@ -3314,7 +3260,7 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 				adviceTemplate.setAttribute("constExp",
 						constrainedCode.getResultExp());
 				adviceTemplate.setAttribute("oclBody", aConstraint
-						.getSpecification().getBody());
+						.getSpecification().getBody().trim());
 
 				/* Add the advice code to the aspect template. */
 				aspectTemplate
@@ -3462,7 +3408,7 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 				adviceTemplate.setAttribute("constExp",
 						constrainedCode.getResultExp());
 				adviceTemplate.setAttribute("oclBody", aConstraint
-						.getSpecification().getBody());
+						.getSpecification().getBody().trim());
 
 				/* Probably set that the constrained attribute is static. */
 				if (aProperty.isStatic()) {
@@ -3615,7 +3561,7 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 				adviceTemplate.setAttribute("constExp",
 						constrainedCode.getResultExp());
 				adviceTemplate.setAttribute("oclBody", aConstraint
-						.getSpecification().getBody());
+						.getSpecification().getBody().trim());
 
 				aspectTemplate
 						.setAttribute("advice", adviceTemplate.toString());
@@ -3755,7 +3701,7 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 				adviceTemplate.setAttribute("constExp",
 						constrainedCode.getResultExp());
 				adviceTemplate.setAttribute("oclBody", aConstraint
-						.getSpecification().getBody());
+						.getSpecification().getBody().trim());
 				adviceTemplate.setAttribute("errorCode", this.mySettings
 						.getViolationMacro(aConstraint).getCode());
 
@@ -3986,7 +3932,7 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 				adviceTemplate.setAttribute("constExp",
 						constrainedCode.getResultExp());
 				adviceTemplate.setAttribute("oclBody", aConstraint
-						.getSpecification().getBody());
+						.getSpecification().getBody().trim());
 				adviceTemplate.setAttribute("method", operationName);
 				adviceTemplate.setAttribute("errorCode", this.mySettings
 						.getViolationMacro(aConstraint).getCode());
@@ -4225,7 +4171,7 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 				adviceTemplate.setAttribute("constExp",
 						constrainedCode.getResultExp());
 				adviceTemplate.setAttribute("oclBody", aConstraint
-						.getSpecification().getBody());
+						.getSpecification().getBody().trim());
 				adviceTemplate.setAttribute("method", operationName);
 				adviceTemplate.setAttribute("errorCode", this.mySettings
 						.getViolationMacro(aConstraint).getCode());

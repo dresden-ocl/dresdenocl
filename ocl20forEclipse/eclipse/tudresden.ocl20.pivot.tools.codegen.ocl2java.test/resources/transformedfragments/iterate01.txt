@@ -7,8 +7,8 @@ collection1.add(new Integer(3));
 Integer sum;
 sum = new Integer(0);
 /* IterateExp: Iterate through all elements and perform an operation on them. */
-for (Integer anElement1 : collection1) {
-    sum = (sum + anElement1);
+for (Integer i : collection1) {
+    sum = (sum + i);
 }
 
 ((Object) sum).equals(new Integer(6))

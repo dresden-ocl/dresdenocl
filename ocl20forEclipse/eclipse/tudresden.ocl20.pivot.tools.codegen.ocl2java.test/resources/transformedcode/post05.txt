@@ -18,7 +18,7 @@ public privileged aspect PostAspect1 {
     /**
      * <p>Checks a postcondition for the operation {@link LoyaltyAccount#isEmpty()} defined by the constraint
      * <code>context LoyaltyAccount::isEmpty() : Boolean
-     *       post: result[].=( points[].=( 0))</code></p>
+     *       post: result = (points = 0)</code></p>
      */
     Boolean around(tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyAccount aClass): isEmptyCaller(aClass) {
         /* Disable this constraint for subclasses of LoyaltyAccount. */

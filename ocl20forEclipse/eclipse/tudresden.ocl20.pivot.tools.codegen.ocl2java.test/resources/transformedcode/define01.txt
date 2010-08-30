@@ -20,15 +20,15 @@ public privileged aspect DefAspect1 {
     /**
      * <p>Initializes the attribute turnover defined by the constraint
      * <code>context LoyaltyAccount
-     *       def: turnover = transactions[].amount[].sum()</code></p>
+     *       def: turnover : Real = transactions.amount->sum()</code></p>
      */
     before(tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyAccount aClass): turnoverGetter(aClass) {
         java.util.ArrayList<Float> result1;
         result1 = new java.util.ArrayList<Float>();
         
         /* Iterator Collect: Iterate through all elements and collect them. Elements which are collections are flattened. */
-        for (tudresden.ocl20.pivot.examples.royalsandloyals.Transaction anElement1 : aClass.transactions) {
-            result1.add(anElement1.amount);
+        for (tudresden.ocl20.pivot.examples.royalsandloyals.Transaction $implicitCollect0$ : aClass.transactions) {
+            result1.add($implicitCollect0$.amount);
         }
     
         aClass.turnover = new Float(tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclCollections.sum(result1).floatValue());

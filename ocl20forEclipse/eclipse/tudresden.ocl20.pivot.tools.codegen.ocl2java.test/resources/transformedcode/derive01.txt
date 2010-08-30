@@ -17,7 +17,7 @@ public privileged aspect DeriveAspect1 {
     /**
      * <p>Derives the attribute printedName defined by the constraint
      * <code>context CustomerCard
-     *       def: printedName = owner[].title[].concat( ' ').concat( owner[].name[])</code></p>
+     *       derive: owner.title.concat(' ').concat(owner.name)</code></p>
      */
     before(tudresden.ocl20.pivot.examples.royalsandloyals.CustomerCard aClass): printedNameGetter(aClass) {
         aClass.printedName = aClass.owner.title.concat(" ").concat(aClass.owner.name);

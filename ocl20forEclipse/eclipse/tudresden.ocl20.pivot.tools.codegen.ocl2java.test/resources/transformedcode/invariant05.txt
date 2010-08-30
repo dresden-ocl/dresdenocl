@@ -21,7 +21,10 @@ public privileged aspect InvAspect1 {
     /**
      * <p><code>Checks an invariant on the class Membership defined by the constraint
      * <code>context Membership
-     *       inv: currentLevel[].name[].=( 'Silver').implies( card[].color[].=( Color::silver[])).and( currentLevel[].name[].=( 'Gold').implies( card[].color[].=( Color::gold[])))</code></p>
+     *       inv levelAndColor:
+      (currentLevel.name = 'Silver' implies card.color = Color::silver)
+      and
+      (currentLevel.name = 'Gold' implies card.color = Color::gold)</code></p>
      */
     after(tudresden.ocl20.pivot.examples.royalsandloyals.Membership aClass) : checkInvariantsCaller(aClass) {
         /* Disable this constraint for subclasses of Membership. */

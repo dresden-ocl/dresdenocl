@@ -2,9 +2,9 @@ java.util.HashSet<tudresden.ocl20.pivot.examples.royalsandloyals.Transaction> re
 result1 = new java.util.HashSet<tudresden.ocl20.pivot.examples.royalsandloyals.Transaction>();
 
 /* Iterator Select: Select all elements which fulfill the condition. */
-for (tudresden.ocl20.pivot.examples.royalsandloyals.Transaction anElement1 : aClass.transactions) {
-    if ((anElement1.points > new Integer(100))) {
-        result1.add(anElement1);
+for (tudresden.ocl20.pivot.examples.royalsandloyals.Transaction $implicitVariable0$ : aClass.transactions) {
+    if (($implicitVariable0$.points > new Integer(100))) {
+        result1.add($implicitVariable0$);
     }
     // no else
 }

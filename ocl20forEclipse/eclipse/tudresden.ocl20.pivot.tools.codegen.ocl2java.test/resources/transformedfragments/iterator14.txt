@@ -2,15 +2,15 @@ java.util.ArrayList<Integer> result2;
 result2 = new java.util.ArrayList<Integer>();
 
 /* Iterator Collect: Iterate through all elements and collect them. Elements which are collections are flattened. */
-for (tudresden.ocl20.pivot.examples.royalsandloyals.Transaction anElement2 : aClass.transactions) {
-    result2.add(anElement2.points);
+for (tudresden.ocl20.pivot.examples.royalsandloyals.Transaction $implicitVariable0$ : aClass.transactions) {
+    result2.add($implicitVariable0$.points);
 }
 Boolean result1;
 result1 = false;
 
 /* Iterator Exists: Iterate and check, if any element fulfills the condition. */
-for (Integer anElement1 : result2) {
-    if (((Object) anElement1).equals(new Integer(500))) {
+for (Integer p : result2) {
+    if (((Object) p).equals(new Integer(500))) {
         result1 = true;
         break;
     }

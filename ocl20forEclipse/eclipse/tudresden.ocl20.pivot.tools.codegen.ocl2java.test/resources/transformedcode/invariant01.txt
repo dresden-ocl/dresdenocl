@@ -19,11 +19,11 @@ public privileged aspect InvAspect1 {
      */
     protected pointcut allCustomerPublicMethods(tudresden.ocl20.pivot.examples.royalsandloyals.Customer aClass):
         execution(public * tudresden.ocl20.pivot.examples.royalsandloyals.Customer.*(..)) && this(aClass);
-    	
+    
     /**
      * <p><code>Checks an invariant on the class Customer defined by the constraint
      * <code>context Customer
-     *       inv: age[].>=( 18)</code>
+     *       inv ofAge: age >= 18</code>
      * before execution of public methods.</p>
      */
     before(tudresden.ocl20.pivot.examples.royalsandloyals.Customer aClass) : allCustomerPublicMethods(aClass) {
@@ -41,7 +41,7 @@ public privileged aspect InvAspect1 {
     /**
      * <p><code>Checks an invariant on the class Customer defined by the constraint
      * <code>context Customer
-     *       inv: age[].>=( 18)</code>
+     *       inv ofAge: age >= 18</code>
      * after execution of public methods and constructors.</p>
      */
     after(tudresden.ocl20.pivot.examples.royalsandloyals.Customer aClass) : allCustomerConstructors(aClass) || allCustomerPublicMethods(aClass) {
@@ -59,7 +59,7 @@ public privileged aspect InvAspect1 {
     /**
      * <p><code>Checks an invariant on the class Customer defined by the constraint
      * <code>context Customer
-     *       inv: age[].>=( 18)</code>
+     *       inv ofAge: age >= 18</code>
      * after execution of public methods throwing any Exception.</p>
      */
     after(tudresden.ocl20.pivot.examples.royalsandloyals.Customer aClass) throwing : allCustomerPublicMethods(aClass) {

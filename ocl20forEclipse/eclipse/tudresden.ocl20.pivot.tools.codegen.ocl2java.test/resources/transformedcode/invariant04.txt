@@ -21,7 +21,7 @@ public privileged aspect InvAspect1 {
     /**
      * <p><code>Checks an invariant on the class Membership defined by the constraint
      * <code>context Membership
-     *       inv: program[].participants[].cards[].flatten().includes( self[].card[])</code></p>
+     *       inv correctCard: program.participants.cards->flatten()->includes(self.card)</code></p>
      */
     after(tudresden.ocl20.pivot.examples.royalsandloyals.Membership aClass) : checkInvariantsCaller(aClass) {
         /* Disable this constraint for subclasses of Membership. */
@@ -30,8 +30,8 @@ public privileged aspect InvAspect1 {
         result1 = new java.util.ArrayList<tudresden.ocl20.pivot.examples.royalsandloyals.CustomerCard>();
         
         /* Iterator Collect: Iterate through all elements and collect them. Elements which are collections are flattened. */
-        for (tudresden.ocl20.pivot.examples.royalsandloyals.Customer anElement1 : aClass.program.participants) {
-            result1.addAll(anElement1.cards);
+        for (tudresden.ocl20.pivot.examples.royalsandloyals.Customer $implicitCollect0$ : aClass.program.participants) {
+            result1.addAll($implicitCollect0$.cards);
         }
     
         if (!tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclCollections.includes((java.util.List<tudresden.ocl20.pivot.examples.royalsandloyals.CustomerCard>) tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclBags.flatten(result1), aClass.card)) {

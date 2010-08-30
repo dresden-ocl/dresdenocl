@@ -94,13 +94,14 @@ public abstract class AbstractDiffTest {
 	 * @param path
 	 *            The path of the resource.
 	 * @return The found {@link File} object.
-	 * @throws Exception Thrown, if the opening fails.
+	 * @throws Exception
+	 *             Thrown, if the opening fails.
 	 */
 	private static File getFile(String path) throws Exception {
 
 		URL fileLocation;
-		fileLocation = Ocl2CodeTestPlugin.getDefault().getBundle().getResource(
-				path);
+		fileLocation = Ocl2CodeTestPlugin.getDefault().getBundle()
+				.getResource(path);
 		fileLocation = FileLocator.resolve(fileLocation);
 
 		File file;
@@ -126,6 +127,9 @@ public abstract class AbstractDiffTest {
 	protected void compareFragmentCodeGeneration(String directory,
 			String fileName) throws Exception {
 
+		/* Remove existing constraints from the model to avoid side effects. */
+		testModel.removeAllConstraints();
+
 		/* Parse the constraint. */
 		File constraintFile;
 		constraintFile = AbstractDiffTest.getFile("resources/" + directory
@@ -140,8 +144,8 @@ public abstract class AbstractDiffTest {
 
 		String generatedCode;
 		generatedCode = Ocl2ForEclipseFacade.generateJavaFragmentCode(
-				parsedConstraints.iterator().next(), Ocl2ForEclipseFacade
-						.getJavaCodeGeneratorSettings());
+				parsedConstraints.iterator().next(),
+				Ocl2ForEclipseFacade.getJavaCodeGeneratorSettings());
 
 		assertNotNull(generatedCode);
 
@@ -165,6 +169,9 @@ public abstract class AbstractDiffTest {
 	protected void compareInstrumentationCodeGeneration(String directory,
 			String fileName) throws Exception {
 
+		/* Remove existing constraints from the model to avoid side effects. */
+		testModel.removeAllConstraints();
+
 		/* Parse the constraint. */
 		File constraintFile;
 		constraintFile = AbstractDiffTest.getFile("resources/" + directory
@@ -179,8 +186,8 @@ public abstract class AbstractDiffTest {
 
 		String generatedCode;
 		generatedCode = Ocl2ForEclipseFacade.generateAspectJCode(
-				parsedConstraints.iterator().next(), Ocl2ForEclipseFacade
-						.getJavaCodeGeneratorSettings());
+				parsedConstraints.iterator().next(),
+				Ocl2ForEclipseFacade.getJavaCodeGeneratorSettings());
 
 		assertNotNull(generatedCode);
 

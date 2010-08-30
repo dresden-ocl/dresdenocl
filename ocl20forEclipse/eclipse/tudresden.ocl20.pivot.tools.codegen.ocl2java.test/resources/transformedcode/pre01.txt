@@ -18,7 +18,7 @@ public privileged aspect PreAspect1 {
     /**
      * <p>Checks a precondition for the {@link LoyaltyProgram#enroll(, tudresden.ocl20.pivot.examples.royalsandloyals.Customer c)} defined by the constraint
      * <code>context LoyaltyProgram::enroll(c: tudresden.ocl20.pivot.examples.royalsandloyals.Customer) : Boolean
-     *       pre: c[].name[].<>( '')</code></p>
+     *       pre: c.name <> ''</code></p>
      */
     before(tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyProgram aClass, tudresden.ocl20.pivot.examples.royalsandloyals.Customer c): enrollCaller(aClass, c) {
         /* Disable this constraint for subclasses of LoyaltyProgram. */

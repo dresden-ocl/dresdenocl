@@ -18,7 +18,7 @@ public privileged aspect BodyAspect1 {
     /**
      * <p>Defines the body of the method getCustomerName() defined by the constraint
      * <code>context LoyaltyAccount::getCustomerName(): String
-     *       body: membership[].card[].owner[].name[]</code></p>
+     *       body: membership.card.owner.name</code></p>
      */
     String around(tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyAccount aClass): getCustomerNameCaller(aClass) {
         return aClass.membership.card.owner.name;

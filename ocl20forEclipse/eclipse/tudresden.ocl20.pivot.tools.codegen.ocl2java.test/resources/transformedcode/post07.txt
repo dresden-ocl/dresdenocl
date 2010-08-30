@@ -18,7 +18,7 @@ public privileged aspect PostAspect1 {
     /**
      * <p>Checks a postcondition for the operation {@link Service#upgradePointsEarned(, Integer amount)} defined by the constraint
      * <code>context Service::upgradePointsEarned(amount: Integer) : 
-     *       post: calcPoints().=( calcPoints@pre().+( amount[]))</code></p>
+     *       post: calcPoints() = calcPoints@pre() + amount</code></p>
      */
     void around(tudresden.ocl20.pivot.examples.royalsandloyals.Service aClass, Integer amount): upgradePointsEarnedCaller(aClass, amount) {
         /* Disable this constraint for subclasses of Service. */

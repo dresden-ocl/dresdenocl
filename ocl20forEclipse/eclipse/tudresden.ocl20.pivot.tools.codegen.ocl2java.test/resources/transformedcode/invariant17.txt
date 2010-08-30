@@ -21,7 +21,7 @@ public privileged aspect InvAspect1 {
     /**
      * <p><code>Checks an invariant on the class Service defined by the constraint
      * <code>context Service
-     *       inv: self[].oclIsInvalid().=( false)</code></p>
+     *       inv: self.oclIsInvalid() = false</code></p>
      */
     after(tudresden.ocl20.pivot.examples.royalsandloyals.Service aClass) : checkInvariantsCaller(aClass) {
         /* Disable this constraint for subclasses of Service. */

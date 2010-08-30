@@ -20,7 +20,7 @@ public privileged aspect DefAspect1 {
     /**
      * <p>Initializes the attribute initial defined by the constraint
      * <code>context Customer
-     *       def: initial = name[].substring( 1, 1)</code></p>
+     *       def: initial: String = name.substring(1, 1)</code></p>
      */
     before(tudresden.ocl20.pivot.examples.royalsandloyals.Customer aClass): initialGetter(aClass) {
         aClass.initial = aClass.name.substring(new Integer(1) - 1, new Integer(1));

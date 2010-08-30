@@ -521,7 +521,7 @@ oclIsKindOfOperation(sourceExp, argsExp) ::= <<
 
 // --- OclIsTypeOf Operation ---
 oclIsTypeOfOperation(sourceExp, argsExp) ::= <<
-$sourceExp$.getClass().getCanonicalName().equals("$argsExp$")
+$sourceExp$.getClass().getCanonicalName().equals($argsExp$.getCanonicalName())
 >>
 
 

@@ -18,7 +18,7 @@ public privileged aspect PostAspect1 {
     /**
      * <p>Checks a postcondition for the operation {@link Transaction#getProgram()} defined by the constraint
      * <code>context Transaction::getProgram() : tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyProgram
-     *       post: self[].oclIsTypeOf( Transaction[])</code></p>
+     *       post: self.oclIsTypeOf(Transaction)</code></p>
      */
     tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyProgram around(tudresden.ocl20.pivot.examples.royalsandloyals.Transaction aClass): getProgramCaller(aClass) {
         /* Disable this constraint for subclasses of Transaction. */
@@ -27,7 +27,7 @@ public privileged aspect PostAspect1 {
         tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyProgram result;
         result = proceed(aClass);
     
-        if (!aClass.getClass().getCanonicalName().equals("tudresden.ocl20.pivot.examples.royalsandloyals.Transaction")) {
+        if (!aClass.getClass().getCanonicalName().equals(tudresden.ocl20.pivot.examples.royalsandloyals.Transaction.getCanonicalName())) {
         	// TODO Auto-generated code executed when constraint is violated.
         	throw new RuntimeException("Error: Constraint was violated.");
         }

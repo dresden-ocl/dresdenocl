@@ -18,7 +18,7 @@ public privileged aspect PostAspect1 {
     /**
      * <p>Checks a postcondition for the operation {@link Transaction#getProgram()} defined by the constraint
      * <code>context Transaction::getProgram() : tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyProgram
-     *       post: result[].=( self[].card[].membership[].program[])</code></p>
+     *       post: result = self.card.membership.program</code></p>
      */
     tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyProgram around(tudresden.ocl20.pivot.examples.royalsandloyals.Transaction aClass): getProgramCaller(aClass) {
         /* Disable this constraint for subclasses of Transaction. */

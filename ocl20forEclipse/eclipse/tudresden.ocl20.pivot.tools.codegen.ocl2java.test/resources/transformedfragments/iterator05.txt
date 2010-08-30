@@ -6,14 +6,14 @@ result2 = aClass.membership.accounts;
 comparator1 = new java.util.Comparator<tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyAccount>() {
 
     /** Method which compares two elements of the collection. */
-    public int compare(tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyAccount anElement2, tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyAccount anElement3) {
+    public int compare(tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyAccount $implicitVariable0$, tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyAccount anElement3) {
         int result3;
 
         result3 = 0;
 
-        if (anElement2.number < anElement3.number) {
+        if ($implicitVariable0$.number < anElement3.number) {
             result3 = -1;
-        } else if (anElement2.number > anElement3.number) {
+        } else if ($implicitVariable0$.number > anElement3.number) {
             result3 = 1;
         }
 
@@ -30,14 +30,14 @@ result1 = result2;
 comparator2 = new java.util.Comparator<tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyAccount>() {
 
     /** Method which compares two elements of the collection. */
-    public int compare(tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyAccount anElement1, tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyAccount anElement4) {
+    public int compare(tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyAccount $implicitVariable0$, tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyAccount anElement4) {
         int result4;
 
         result4 = 0;
 
-        if (anElement1.number < anElement4.number) {
+        if ($implicitVariable0$.number < anElement4.number) {
             result4 = -1;
-        } else if (anElement1.number > anElement4.number) {
+        } else if ($implicitVariable0$.number > anElement4.number) {
             result4 = 1;
         }
 

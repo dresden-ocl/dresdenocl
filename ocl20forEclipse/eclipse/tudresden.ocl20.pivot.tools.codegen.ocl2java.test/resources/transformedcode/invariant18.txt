@@ -21,7 +21,7 @@ public privileged aspect InvAspect1 {
     /**
      * <p><code>Checks an invariant on the class Burning defined by the constraint
      * <code>context Burning
-     *       inv: self[].points[].=( self[].oclAsType( Transaction[]).points[])</code></p>
+     *       inv: self.points = self.oclAsType(Transaction).points</code></p>
      */
     after(tudresden.ocl20.pivot.examples.royalsandloyals.Burning aClass) : checkInvariantsCaller(aClass) {
         /* Disable this constraint for subclasses of Burning. */

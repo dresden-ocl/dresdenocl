@@ -18,7 +18,7 @@ public privileged aspect PostAspect1 {
     /**
      * <p>Checks a postcondition for the operation {@link LoyaltyProgram#addService(, tudresden.ocl20.pivot.examples.royalsandloyals.ProgramPartner aPartner, tudresden.ocl20.pivot.examples.royalsandloyals.ServiceLevel aLevel, tudresden.ocl20.pivot.examples.royalsandloyals.Service aService)} defined by the constraint
      * <code>context LoyaltyProgram::addService(aPartner: tudresden.ocl20.pivot.examples.royalsandloyals.ProgramPartner, aLevel: tudresden.ocl20.pivot.examples.royalsandloyals.ServiceLevel, aService: tudresden.ocl20.pivot.examples.royalsandloyals.Service) : 
-     *       post: partners[].deliveredServices[].includes( aService[]).and( levels[].availableServices[].includes( aService[]))</code></p>
+     *       post: partners.deliveredServices->includes(aService) and levels.availableServices->includes(aService)</code></p>
      */
     void around(tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyProgram aClass, tudresden.ocl20.pivot.examples.royalsandloyals.ProgramPartner aPartner, tudresden.ocl20.pivot.examples.royalsandloyals.ServiceLevel aLevel, tudresden.ocl20.pivot.examples.royalsandloyals.Service aService): addServiceCaller(aClass, aPartner, aLevel, aService) {
         /* Disable this constraint for subclasses of LoyaltyProgram. */
@@ -30,16 +30,16 @@ public privileged aspect PostAspect1 {
         result1 = new java.util.ArrayList<tudresden.ocl20.pivot.examples.royalsandloyals.Service>();
         
         /* Iterator Collect: Iterate through all elements and collect them. Elements which are collections are flattened. */
-        for (tudresden.ocl20.pivot.examples.royalsandloyals.ProgramPartner anElement1 : aClass.partners) {
-            result1.addAll(anElement1.deliveredServices);
+        for (tudresden.ocl20.pivot.examples.royalsandloyals.ProgramPartner $implicitCollect0$ : aClass.partners) {
+            result1.addAll($implicitCollect0$.deliveredServices);
         }
 
         java.util.ArrayList<tudresden.ocl20.pivot.examples.royalsandloyals.Service> result2;
         result2 = new java.util.ArrayList<tudresden.ocl20.pivot.examples.royalsandloyals.Service>();
         
         /* Iterator Collect: Iterate through all elements and collect them. Elements which are collections are flattened. */
-        for (tudresden.ocl20.pivot.examples.royalsandloyals.ServiceLevel anElement2 : aClass.levels) {
-            result2.addAll(anElement2.availableServices);
+        for (tudresden.ocl20.pivot.examples.royalsandloyals.ServiceLevel $implicitCollect0$ : aClass.levels) {
+            result2.addAll($implicitCollect0$.availableServices);
         }
     
         if (!(tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclCollections.includes(result1, aService) && tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclCollections.includes(result2, aService))) {

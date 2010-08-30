@@ -18,7 +18,7 @@ public privileged aspect PostAspect1 {
     /**
      * <p>Checks a postcondition for the operation {@link Class1#postOperation02()} defined by the constraint
      * <code>context Class1::postOperation02() : 
-     *       post: self[].anInteger01[]@pre.=( self[].anInteger01[].-( 1))</code></p>
+     *       post testAtPre02: self.anInteger01@pre = self.anInteger01 - 1</code></p>
      */
     void around(testpackage.Class1 aClass): postOperation02Caller(aClass) {
         /* Disable this constraint for subclasses of Class1. */

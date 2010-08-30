@@ -218,7 +218,7 @@ $endif$
 /**
  * <p>Defines the body of the method $method$($if(args)$$args, argTypes:{arg, type | $type$ $arg$}; separator = ", "$$endif$) defined by the constraint
  * <code>context $class$::$method$($if(args)$$args, argTypes:{arg, type | $arg$: $type$}; separator = ", "$$endif$)$if(returnType)$: $returnType$$endif$
- *       body: $oclBody$</code></p>
+ *       $oclBody$</code></p>
  */
 $if(returnType)$$returnType$$else$void$endif$ around($if(opIsStatic)$$else$$package$.$class$ $selfVariable()$$if(args)$, $endif$$endif$$if(args)$$args, argTypes:{arg, type | $type$ $arg$};separator=", "$$endif$): $method$Caller($if(opIsStatic)$$else$$selfVariable()$$if(args)$, $endif$$endif$$args:{arg | $arg$};separator=", "$) {
     $constCode$
@@ -241,7 +241,7 @@ $getterPointcut(class = class, package = package, atName = attribute, atType = a
 /**
  * <p>Initializes the attribute $attribute$ defined by the constraint
  * <code>context $class$
- *       def: $attribute$ = $oclBody$</code></p>
+ *       $oclBody$</code></p>
  */
 before($package$.$class$ $selfVariable()$): $attribute$Getter($selfVariable()$) {
     $constCode$
@@ -259,7 +259,7 @@ $methodCallPointcut(class = class, package = package, method = method, args = ar
 /**
  * <p>Defines the method $method$($if(args)$$args, argTypes:{arg, type | $type$ $arg$}; separator= ", "$$endif$) defined by the constraint
  * <code>context $class$
- *       def: $method$ = $oclBody$</code></p>
+ *       $oclBody$</code></p>
  */
 $if(returnType)$$returnType$$else$void$endif$ around($package$.$class$ $selfVariable()$$if(args)$$args, argTypes:{arg, type | , $type$ $arg$}$$endif$): $method$Caller($selfVariable()$$args:{arg | , $arg$}$) {
     $constCode$
@@ -286,7 +286,7 @@ $endif$
 /**
  * <p>Derives the attribute $attribute$ defined by the constraint
  * <code>context $class$
- *       def: $attribute$ = $oclBody$</code></p>
+ *       $oclBody$</code></p>
  */
 before($if(attIsStatic)$$else$$package$.$class$ $selfVariable()$$endif$): $attribute$Getter($if(attIsStatic)$$else$$selfVariable()$$endif$) {
     $constCode$
@@ -306,7 +306,7 @@ $allConstructorsPointcut(class = class, package = package)$
 /**
  * <p><code>Initializes the attribute $attribute$ defined by the constraint
  * <code>context $class$::$attribute$
- *       init: $oclBody$</code></p>
+ *       $oclBody$</code></p>
  */
 after($package$.$class$ $selfVariable()$) : all$class$Constructors($selfVariable()$) {
     $constCode$
@@ -328,7 +328,7 @@ $endif$
 /**
  * <p><code>Checks an invariant on the class $class$ defined by the constraint
  * <code>context $class$
- *       inv: $oclBody$</code></p>
+ *       $oclBody$</code></p>
  */
 after($package$.$class$ $selfVariable()$) : all$class$Constructors($selfVariable()$) $if(calledAttPaths)$|| allSetters($selfVariable()$) $endif${
     $if(disableInheritance)$
@@ -357,7 +357,7 @@ $allPublicMethodsPointcut(class = class, package = package)$
 /**
  * <p><code>Checks an invariant on the class $class$ defined by the constraint
  * <code>context $class$
- *       inv: $oclBody$</code>
+ *       $oclBody$</code>
  * before execution of public methods.</p>
  */
 before($package$.$class$ $selfVariable()$) : all$class$PublicMethods($selfVariable()$) {
@@ -379,7 +379,7 @@ before($package$.$class$ $selfVariable()$) : all$class$PublicMethods($selfVariab
 /**
  * <p><code>Checks an invariant on the class $class$ defined by the constraint
  * <code>context $class$
- *       inv: $oclBody$</code>
+ *       $oclBody$</code>
  * after execution of public methods and constructors.</p>
  */
 after($package$.$class$ $selfVariable()$) : all$class$Constructors($selfVariable()$) || all$class$PublicMethods($selfVariable()$) {
@@ -401,7 +401,7 @@ after($package$.$class$ $selfVariable()$) : all$class$Constructors($selfVariable
 /**
  * <p><code>Checks an invariant on the class $class$ defined by the constraint
  * <code>context $class$
- *       inv: $oclBody$</code>
+ *       $oclBody$</code>
  * after execution of public methods throwing any Exception.</p>
  */
 after($package$.$class$ $selfVariable()$) throwing : all$class$PublicMethods($selfVariable()$) {
@@ -431,7 +431,7 @@ $invInstrumentation3_methodCallPointcut(class = class, package = package)$
 /**
  * <p><code>Checks an invariant on the class $class$ defined by the constraint
  * <code>context $class$
- *       inv: $oclBody$</code></p>
+ *       $oclBody$</code></p>
  */
 after($package$.$class$ $selfVariable()$) : $checkInvariantsOperationName()$Caller($selfVariable()$) {
     $if(disableInheritance)$
@@ -476,7 +476,7 @@ $endif$
 /**
  * <p>Checks a precondition for the {@link $class$#$method$($if(args)$$args, argTypes:{arg, type | , $type$ $arg$}$$endif$)} defined by the constraint
  * <code>context $class$::$method$($if(args)$$args, argTypes:{arg, type | $arg$: $type$}; separator = ", "$$endif$) : $returnType$
- *       pre: $oclBody$</code></p>
+ *       $oclBody$</code></p>
  */
 before($if(opIsStatic)$$else$$package$.$class$ $selfVariable()$$if(args)$, $endif$$endif$$if(args)$$args, argTypes:{arg, type | $type$ $arg$};separator=", "$$endif$): $method$Caller($if(opIsStatic)$$else$$selfVariable()$$if(args)$, $endif$$endif$$args:{arg | $arg$};separator=", "$) {
     $if(disableInheritance)$
@@ -522,7 +522,7 @@ $endif$
 /**
  * <p>Checks a postcondition for the operation {@link $class$#$method$($if(args)$$args, argTypes:{arg, type | , $type$ $arg$}$$endif$)} defined by the constraint
  * <code>context $class$::$method$($if(args)$$args, argTypes:{arg, type | $arg$: $type$}; separator = ", "$$endif$) : $returnType$
- *       post: $oclBody$</code></p>
+ *       $oclBody$</code></p>
  */
 $if(returnType)$$returnType$$else$void$endif$ around($if(opIsStatic)$$else$$package$.$class$ $selfVariable()$$if(args)$, $endif$$endif$$if(args)$$args, argTypes:{arg, type | $type$ $arg$};separator=", "$$endif$): $method$Caller($if(opIsStatic)$$else$$selfVariable()$$if(args)$, $endif$$endif$$args:{arg | $arg$};separator=", "$) {
     $if(disableInheritance)$
@@ -615,7 +615,7 @@ protected pointcut static$class$Init():
 /**
  * <p><code>Initializes the static attribute $attribute$ defined by the constraint
  * <code>context $class$::$attribute$
- *       init: $oclBody$</code></p>
+ *       $oclBody$</code></p>
  */
 after(): static$class$Init() {
     $constCode$

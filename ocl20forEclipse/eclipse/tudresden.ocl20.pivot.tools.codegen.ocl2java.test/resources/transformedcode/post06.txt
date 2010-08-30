@@ -18,7 +18,7 @@ public privileged aspect PostAspect1 {
     /**
      * <p>Checks a postcondition for the operation {@link Customer#birthdayHappens()} defined by the constraint
      * <code>context Customer::birthdayHappens() : 
-     *       post: age[].=( age[]@pre.+( 1))</code></p>
+     *       post: age = age@pre + 1</code></p>
      */
     void around(tudresden.ocl20.pivot.examples.royalsandloyals.Customer aClass): birthdayHappensCaller(aClass) {
         /* Disable this constraint for subclasses of Customer. */

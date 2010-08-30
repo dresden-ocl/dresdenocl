@@ -20,9 +20,15 @@
 			<arguments>
 			</arguments>
 		</buildCommand>
+		<buildCommand>
+			<name>tudresden.ocl20.pivot.language.ocl.resource.ocl.builder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
 	</buildSpec>
 	<natures>
 		<nature>org.eclipse.pde.PluginNature</nature>
 		<nature>org.eclipse.jdt.core.javanature</nature>
+		<nature>tudresden.ocl20.pivot.language.ocl.resource.ocl.nature</nature>
 	</natures>
 </projectDescription>

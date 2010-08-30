@@ -21,7 +21,7 @@ public privileged aspect DefAspect1 {
     /**
      * <p>Defines the method getCurrentLevelName() defined by the constraint
      * <code>context Membership
-     *       def: getCurrentLevelName = currentLevel[].name[]</code></p>
+     *       def: getCurrentLevelName() : String = currentLevel.name</code></p>
      */
     String around(tudresden.ocl20.pivot.examples.royalsandloyals.Membership aClass): getCurrentLevelNameCaller(aClass) {
         return aClass.currentLevel.name;

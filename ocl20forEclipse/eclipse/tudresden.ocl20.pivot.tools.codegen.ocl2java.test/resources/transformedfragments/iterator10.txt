@@ -2,11 +2,11 @@ Boolean result1;
 result1 = true;
 
 /* Iterator ForAll: Iterate and check, if all elements fulfill the condition. */
-for (tudresden.ocl20.pivot.examples.royalsandloyals.Customer anElement1 : aClass.participants) {
-    if (!(anElement1.age <= new Integer(70))) {
+for (tudresden.ocl20.pivot.examples.royalsandloyals.Customer $implicitVariable0$ : aClass.participants) {
+    if (!($implicitVariable0$.age <= new Integer(70))) {
         result1 = false;
         break;
-    } 
+    }
     // no else
 }
 

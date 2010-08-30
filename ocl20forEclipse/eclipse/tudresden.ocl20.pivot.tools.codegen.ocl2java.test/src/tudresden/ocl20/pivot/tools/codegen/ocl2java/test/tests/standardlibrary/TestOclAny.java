@@ -115,7 +115,7 @@ public class TestOclAny extends AbstractDiffTest {
 	 */
 	@Test
 	public void testNotEquals01() throws Exception {
-	
+
 		this.compareFragmentCodeGeneration("sltest/oclany", "notEquals01");
 	}
 
@@ -128,7 +128,7 @@ public class TestOclAny extends AbstractDiffTest {
 	 */
 	@Test
 	public void testOclAsType01() throws Exception {
-	
+
 		this.compareFragmentCodeGeneration("sltest/oclany", "oclAsType01");
 	}
 
@@ -141,7 +141,7 @@ public class TestOclAny extends AbstractDiffTest {
 	 */
 	@Test
 	public void testOclIsInvalid01() throws Exception {
-	
+
 		this.compareFragmentCodeGeneration("sltest/oclany", "oclIsInvalid01");
 	}
 
@@ -154,7 +154,7 @@ public class TestOclAny extends AbstractDiffTest {
 	 */
 	@Test
 	public void testOclIsInvalid02() throws Exception {
-	
+
 		this.compareFragmentCodeGeneration("sltest/oclany", "oclIsInvalid02");
 	}
 
@@ -167,7 +167,7 @@ public class TestOclAny extends AbstractDiffTest {
 	 */
 	@Test
 	public void testOclIsNew01() throws Exception {
-	
+
 		this.compareFragmentCodeGeneration("sltest/oclany", "oclIsNew01");
 		this.compareInstrumentationCodeGeneration("sltest/oclany", "oclIsNew01");
 	}
@@ -181,7 +181,7 @@ public class TestOclAny extends AbstractDiffTest {
 	 */
 	@Test
 	public void testOclIsKindOf01() throws Exception {
-	
+
 		this.compareFragmentCodeGeneration("sltest/oclany", "oclIsKindOf01");
 	}
 
@@ -194,7 +194,7 @@ public class TestOclAny extends AbstractDiffTest {
 	 */
 	@Test
 	public void testOclIsTypeOf01() throws Exception {
-	
+
 		this.compareFragmentCodeGeneration("sltest/oclany", "oclIsTypeOf01");
 	}
 
@@ -207,7 +207,7 @@ public class TestOclAny extends AbstractDiffTest {
 	 */
 	@Test
 	public void testOclIsUndefined01() throws Exception {
-	
+
 		this.compareFragmentCodeGeneration("sltest/oclany", "oclIsUndefined01");
 	}
 

@@ -2,15 +2,15 @@ java.util.ArrayList<tudresden.ocl20.pivot.examples.royalsandloyals.ProgramPartne
 result2 = new java.util.ArrayList<tudresden.ocl20.pivot.examples.royalsandloyals.ProgramPartner>();
 
 /* Iterator Collect: Iterate through all elements and collect them. Elements which are collections are flattened. */
-for (tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyProgram anElement2 : aClass.programs) {
-    result2.addAll(anElement2.partners);
+for (tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyProgram $implicitVariable0$ : aClass.programs) {
+    result2.addAll($implicitVariable0$.partners);
 }
 java.util.ArrayList<java.util.Set<tudresden.ocl20.pivot.examples.royalsandloyals.Service>> resultVar;
 result1 = new java.util.ArrayList<java.util.Set<tudresden.ocl20.pivot.examples.royalsandloyals.Service>>();
 
 /* Iterator CollectNested: Iterate through all elements and collect them. */
-for (tudresden.ocl20.pivot.examples.royalsandloyals.ProgramPartner anElement1 : result2) {
-    result1.add(anElement1.deliveredServices);
+for (tudresden.ocl20.pivot.examples.royalsandloyals.ProgramPartner $implicitVariable0$ : result2) {
+    result1.add($implicitVariable0$.deliveredServices);
 }
 
 (tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclCollections.size(result1) > new Integer(0))

@@ -21,7 +21,8 @@ public privileged aspect InvAspect1 {
     /**
      * <p><code>Checks an invariant on the class Customer defined by the constraint
      * <code>context Customer
-     *       inv: programs[].size().=( cards[] -> select (  | valid[].=( true)).size())</code></p>
+     *       inv sizesAgree:
+        programs->size() = cards->select( valid = true )->size()</code></p>
      */
     after(tudresden.ocl20.pivot.examples.royalsandloyals.Customer aClass) : checkInvariantsCaller(aClass) {
         /* Disable this constraint for subclasses of Customer. */
@@ -30,9 +31,9 @@ public privileged aspect InvAspect1 {
         result1 = new java.util.HashSet<tudresden.ocl20.pivot.examples.royalsandloyals.CustomerCard>();
         
         /* Iterator Select: Select all elements which fulfill the condition. */
-        for (tudresden.ocl20.pivot.examples.royalsandloyals.CustomerCard anElement1 : aClass.cards) {
-            if (((Object) anElement1.valid).equals(new Boolean(true))) {
-                result1.add(anElement1);
+        for (tudresden.ocl20.pivot.examples.royalsandloyals.CustomerCard $implicitVariable0$ : aClass.cards) {
+            if (((Object) $implicitVariable0$.valid).equals(new Boolean(true))) {
+                result1.add($implicitVariable0$);
             }
             // no else
         }
