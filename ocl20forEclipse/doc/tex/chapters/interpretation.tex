@@ -161,25 +161,15 @@ explained below.
 	\caption{The OCL2 Interpreter View containing no results.}
 	\label{pic:interpret:interpret01}
 
-  \vspace{2.0em}
+  \vspace{3.0em}
   
 	\centering
 	\includegraphics[width=0.5\linewidth]{figures/interpreter/interpret02}
 	\caption{The Buttons to Control the OCL2 Interpreter.}
 	\label{pic:interpret:interpret02}
-	
-  \vspace{2.0em}
 
-	\centering
-	\includegraphics[width=0.6\linewidth]{figures/interpreter/interpret03}
-	\caption{The three Invariants selected in the Model Browser.}
-	\label{pic:interpret:interpret03}
-\end{figure}
+  \vspace{3.0em}
 
-
-\subsection{Interpretation of Constraints}
-
-\begin{figure}[!p]
 	\centering
 	\includegraphics[width=1.0\linewidth]{figures/interpreter/interpret04}
 	\caption{The results of the three Invariants for all Model Instance Elements.}
@@ -188,24 +178,20 @@ explained below.
   \vspace{3.0em}
 
 	\centering
-	\includegraphics[width=0.4\linewidth]{figures/interpreter/interpret06}
-	\caption{The Definition selected in the Model Browser.}
-	\label{pic:interpret:interpret06}
-
-  \vspace{3.0em}
-  
-	\centering
 	\includegraphics[width=1.0\linewidth]{figures/interpreter/interpret07}
 	\caption{The results of the Definition for all Model Instance Elements.}
 	\label{pic:interpret:interpret07}
+
 \end{figure}
+
+
+\subsection{Interpretation of Constraints}
 
 To interpret constraints, we simple select them in the \eclipse{Model Browser} 
 and push the button to interpret constraints (the third button from the left). 
 First, we want to interpret the three invariants defining the range of the 
 \model{age} of \model{Persons}, \model{Students} and \model{Professors}. We 
-select them in the \eclipse{Model Browser} (see 
-Figure~\ref{pic:interpret:interpret03}) and push the \eclipse{Interpret} button.
+select them in the \eclipse{Model Browser} and push the \eclipse{Interpret} button.
 The result of the interpretation is now shown in the \eclipse{\acs{OCL}
 Interpreter View} (see Figure~\ref{pic:interpret:interpret04}).
 
@@ -229,8 +215,7 @@ define new attributes and methods or to initialize attributes and methods. Such
 constraints that shall be interpreted. The \model{allConstraints.ocl} file 
 contains a definition constraint, which defines the method \model{getAge()} for 
 the class \model{Person}. Now, we want to interpret this definition constraint. 
-We select the constraint in the \eclipse{Model Browser} (see 
-Figure~\ref{pic:interpret:interpret06}) and push the \eclipse{Interpret} button.
+We select the constraint in the \eclipse{Model Browser} and push the \eclipse{Interpret} button.
 The result of the interpretation is shown in 
 Figure~\ref{pic:interpret:interpret07}. The interpretation finishes for all
 three instances successfully because the attribute \model{age} has been set for 
