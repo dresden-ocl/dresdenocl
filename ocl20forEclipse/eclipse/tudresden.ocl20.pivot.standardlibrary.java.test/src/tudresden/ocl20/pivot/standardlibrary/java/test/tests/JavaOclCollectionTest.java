@@ -1,11 +1,12 @@
 package tudresden.ocl20.pivot.standardlibrary.java.test.tests;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
@@ -23,7 +24,17 @@ import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclOrderedSet;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclReal;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSequence;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSet;
+import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclTuple;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.factory.IStandardLibraryFactory;
+import tudresden.ocl20.pivot.essentialocl.types.CollectionType;
+import tudresden.ocl20.pivot.essentialocl.types.OclLibrary;
+import tudresden.ocl20.pivot.essentialocl.types.SetType;
+import tudresden.ocl20.pivot.essentialocl.types.TupleType;
+import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceCollection;
+import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement;
+import tudresden.ocl20.pivot.modelinstancetype.types.base.BasisJavaModelInstanceFactory;
+import tudresden.ocl20.pivot.pivotmodel.PivotModelFactory;
+import tudresden.ocl20.pivot.pivotmodel.Property;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 
 /**
@@ -384,58 +395,457 @@ public class JavaOclCollectionTest {
 		assertTrue(oclSequence.notEmpty().isTrue());
 	}
 
+	/**
+	 * <p>
+	 * Test case to test the Method <code>JavaOclCollection.product(...)</code>.
+	 * </p>
+	 */
 	@Test
-	public void testProduct() {
+	public void testProduct01() {
 
-		fail("Method is not yet implemented.");
+		/*
+		 * Product on empty collections result in an empty set (OCL 2.2 Spec. p.
+		 * 149).
+		 */
+		assertTrue(emptySet.product(emptySet).isEqualTo(emptySet).isTrue());
+		assertTrue(emptyOrderedSet.product(emptyOrderedSet).isEqualTo(emptySet)
+				.isTrue());
+		assertTrue(emptyBag.product(emptyBag).isEqualTo(emptySet).isTrue());
+		assertTrue(emptySequence.product(emptySequence).isEqualTo(emptySet)
+				.isTrue());
+	}
 
-		// /*
-		// * Product on empty collections result in an empty set (OCL 2.2 Spec.
-		// p.
-		// * 149).
-		// */
-		// assertTrue(emptySet.product(emptySet).isEqualTo(emptySet).isTrue());
-		// assertTrue(emptyOrderedSet.product(emptyOrderedSet).isEqualTo(emptySet)
-		// .isTrue());
-		// assertTrue(emptyBag.product(emptyBag).isEqualTo(emptySet).isTrue());
-		// assertTrue(emptySequence.product(emptySequence).isEqualTo(emptySet)
-		// .isTrue());
-		//
-		// /* Hack to create tuple type. */
-		// RealLiteralExp realExp01 = ExpressionsFactory.INSTANCE
-		// .createRealLiteralExp();
-		// realExp01.setRealSymbol(new Float(0.5));
-		// realExp01.setOclLibrary(EssentialOclPlugin.getOclLibraryProvider()
-		// .getOclLibrary());
-		//
-		// Variable variable = ExpressionsFactory.INSTANCE.createVariable();
-		// variable.setName("first");
-		// variable.setInitExpression(realExp01);
-		//
-		// Type expectedType = EssentialOclPlugin.getOclLibraryProvider()
-		// .getOclLibrary().makeTupleType(
-		// Arrays.asList(new Property[] { variable.asProperty(),
-		// variable.asProperty() }));
-		//
-		// /* Build Set(Tuple(first -> 0.5, second -> 0.5)) */
-		// List<String> names = new ArrayList<String>();
-		// names.add("first");
-		// names.add("second");
-		//
-		// List<Object> values = new ArrayList<Object>();
-		// values.add(0.5);
-		// values.add(0.5);
-		//
-		// OclTuple expectedTuple =
-		// myStandardLibraryFactory.createOclTupleObject(
-		// names, values, expectedType);
-		//
-		// Set<OclTuple> elements = new HashSet<OclTuple>();
-		// elements.add(expectedTuple);
-		//
-		// OclSet<OclTuple> expectedResult = myStandardLibraryFactory
-		// .createOclSet(elements, expectedType);
-		// assertTrue(oclSet.product(oclSet).isEqualTo(expectedResult).isTrue());
+	/**
+	 * <p>
+	 * Test case to test the Method <code>JavaOclCollection.product(...)</code>.
+	 * </p>
+	 */
+	@Test
+	public void testProduct02() {
+
+		/*
+		 * Product on non-empty collection and empty collection results in empty
+		 * set.
+		 */
+		assertTrue(oclSet.product(emptySet).isEqualTo(emptySet).isTrue());
+		assertTrue(oclOrderedSet.product(emptyOrderedSet).isEqualTo(emptySet)
+				.isTrue());
+		assertTrue(oclBag.product(emptyBag).isEqualTo(emptySet).isTrue());
+		assertTrue(oclSequence.product(emptySequence).isEqualTo(emptySet)
+				.isTrue());
+
+		assertTrue(emptySet.product(oclSet).isEqualTo(emptySet).isTrue());
+		assertTrue(emptyOrderedSet.product(oclOrderedSet).isEqualTo(emptySet)
+				.isTrue());
+		assertTrue(emptyBag.product(oclBag).isEqualTo(emptySet).isTrue());
+		assertTrue(emptySequence.product(oclSequence).isEqualTo(emptySet)
+				.isTrue());
+	}
+
+	/**
+	 * <p>
+	 * Test case to test the Method <code>JavaOclCollection.product(...)</code>.
+	 * </p>
+	 * 
+	 * <p>
+	 * Tests:
+	 * <code>Bag { 0.5 } -> product ( Bag { 0.5 } ) = Set { Tuple (first -> 0.5, second -> 0.5)</code>
+	 * .
+	 * </p>
+	 */
+	@Test
+	public void testProduct03() {
+
+		OclLibrary oclLib = EssentialOclPlugin.getOclLibraryProvider()
+				.getOclLibrary();
+
+		/* Create the expected result type. */
+		List<Property> properties = new ArrayList<Property>();
+
+		properties.add(this.createPropertyByNameAndType("first",
+				EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+						.getOclReal()));
+		properties.add(this.createPropertyByNameAndType("second",
+				EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+						.getOclReal()));
+
+		/* -> Create Element Type. */
+		TupleType expectedElementType = oclLib.makeTupleType(properties);
+
+		/* -> Create Result Type. */
+		SetType expectedResultType = oclLib.getSetType(expectedElementType);
+
+		/* Create expected result. */
+		List<IModelInstanceElement> adaptedExpectedResult;
+		adaptedExpectedResult = new LinkedList<IModelInstanceElement>();
+
+		/* -> Create Tuple. */
+		List<String> names = new LinkedList<String>();
+		names.add("first");
+		names.add("second");
+
+		List<Object> values = new LinkedList<Object>();
+		values.add(0.5d);
+		values.add(0.5d);
+
+		adaptedExpectedResult.add(this.myStandardLibraryFactory
+				.createOclTupleObject(names, values, expectedElementType)
+				.getModelInstanceElement());
+
+		/* -> Create IMICollection. */
+		IModelInstanceCollection<IModelInstanceElement> expectedIMIResult;
+		expectedIMIResult = BasisJavaModelInstanceFactory
+				.createModelInstanceCollection(adaptedExpectedResult,
+						expectedElementType);
+
+		/* -> Create OclCollection. */
+		OclCollection<OclReal> expectedResult = myStandardLibraryFactory
+				.createOclSet(expectedIMIResult, expectedElementType);
+
+		/* Compute result. */
+		OclSet<OclTuple> result = oclBag.product(oclBag);
+
+		/* Compare element type. */
+		assertEquals(expectedElementType, ((CollectionType) result.oclType()
+				.getType()).getElementType());
+
+		/* Compare result type. */
+		assertEquals(expectedResultType, result.oclType().getType());
+
+		/* Compare result. */
+		assertTrue(result.isEqualTo(expectedResult).isTrue());
+	}
+
+	/**
+	 * <p>
+	 * Test case to test the Method <code>JavaOclCollection.product(...)</code>.
+	 * </p>
+	 * 
+	 * <p>
+	 * Tests:
+	 * <code>OrderedSet { 0.5 } -> product( OrderedSet { 0.5 } ) = Set { Tuple (first -> 0.5, second -> 0.5)</code>
+	 * .
+	 * </p>
+	 */
+	@Test
+	public void testProduct04() {
+
+		OclLibrary oclLib = EssentialOclPlugin.getOclLibraryProvider()
+				.getOclLibrary();
+
+		/* Create the expected result type. */
+		List<Property> properties = new ArrayList<Property>();
+
+		properties.add(this.createPropertyByNameAndType("first",
+				EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+						.getOclReal()));
+		properties.add(this.createPropertyByNameAndType("second",
+				EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+						.getOclReal()));
+
+		/* -> Create Element Type. */
+		TupleType expectedElementType = oclLib.makeTupleType(properties);
+
+		/* -> Create Result Type. */
+		SetType expectedResultType = oclLib.getSetType(expectedElementType);
+
+		/* Create expected result. */
+		List<IModelInstanceElement> adaptedExpectedResult;
+		adaptedExpectedResult = new LinkedList<IModelInstanceElement>();
+
+		/* -> Create Tuple. */
+		List<String> names = new LinkedList<String>();
+		names.add("first");
+		names.add("second");
+
+		List<Object> values = new LinkedList<Object>();
+		values.add(0.5d);
+		values.add(0.5d);
+
+		adaptedExpectedResult.add(this.myStandardLibraryFactory
+				.createOclTupleObject(names, values, expectedElementType)
+				.getModelInstanceElement());
+
+		/* -> Create IMICollection. */
+		IModelInstanceCollection<IModelInstanceElement> expectedIMIResult;
+		expectedIMIResult = BasisJavaModelInstanceFactory
+				.createModelInstanceCollection(adaptedExpectedResult,
+						expectedElementType);
+
+		/* -> Create OclCollection. */
+		OclCollection<OclReal> expectedResult = myStandardLibraryFactory
+				.createOclSet(expectedIMIResult, expectedElementType);
+
+		/* Compute result. */
+		OclSet<OclTuple> result = oclOrderedSet.product(oclOrderedSet);
+
+		/* Compare element type. */
+		assertEquals(expectedElementType, ((CollectionType) result.oclType()
+				.getType()).getElementType());
+
+		/* Compare result type. */
+		assertEquals(expectedResultType, result.oclType().getType());
+
+		/* Compare result. */
+		assertTrue(result.isEqualTo(expectedResult).isTrue());
+	}
+
+	/**
+	 * <p>
+	 * Test case to test the Method <code>JavaOclCollection.product(...)</code>.
+	 * </p>
+	 * 
+	 * <p>
+	 * Tests:
+	 * <code>Set { 0.5 } -> product ( Sequence { 0.5 } ) = Set { Tuple (first -> 0.5, second -> 0.5)</code>
+	 * .
+	 * </p>
+	 */
+	@Test
+	public void testProduct05() {
+
+		OclLibrary oclLib = EssentialOclPlugin.getOclLibraryProvider()
+				.getOclLibrary();
+
+		/* Create the expected result type. */
+		List<Property> properties = new ArrayList<Property>();
+
+		properties.add(this.createPropertyByNameAndType("first",
+				EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+						.getOclReal()));
+		properties.add(this.createPropertyByNameAndType("second",
+				EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+						.getOclReal()));
+
+		/* -> Create Element Type. */
+		TupleType expectedElementType = oclLib.makeTupleType(properties);
+
+		/* -> Create Result Type. */
+		SetType expectedResultType = oclLib.getSetType(expectedElementType);
+
+		/* Create expected result. */
+		List<IModelInstanceElement> adaptedExpectedResult;
+		adaptedExpectedResult = new LinkedList<IModelInstanceElement>();
+
+		/* -> Create Tuple. */
+		List<String> names = new LinkedList<String>();
+		names.add("first");
+		names.add("second");
+
+		List<Object> values = new LinkedList<Object>();
+		values.add(0.5d);
+		values.add(0.5d);
+
+		adaptedExpectedResult.add(this.myStandardLibraryFactory
+				.createOclTupleObject(names, values, expectedElementType)
+				.getModelInstanceElement());
+
+		/* -> Create IMICollection. */
+		IModelInstanceCollection<IModelInstanceElement> expectedIMIResult;
+		expectedIMIResult = BasisJavaModelInstanceFactory
+				.createModelInstanceCollection(adaptedExpectedResult,
+						expectedElementType);
+
+		/* -> Create OclCollection. */
+		OclCollection<OclReal> expectedResult = myStandardLibraryFactory
+				.createOclSet(expectedIMIResult, expectedElementType);
+
+		/* Compute result. */
+		OclSet<OclTuple> result = oclSequence.product(oclSequence);
+
+		/* Compare element type. */
+		assertEquals(expectedElementType, ((CollectionType) result.oclType()
+				.getType()).getElementType());
+
+		/* Compare result type. */
+		assertEquals(expectedResultType, result.oclType().getType());
+
+		/* Compare result. */
+		assertTrue(result.isEqualTo(expectedResult).isTrue());
+	}
+
+	/**
+	 * <p>
+	 * Test case to test the Method <code>JavaOclCollection.product(...)</code>.
+	 * </p>
+	 * 
+	 * <p>
+	 * Tests:
+	 * <code>Set { 0.5 } -> product ( Set { 0.5 } ) = Set { Tuple (first -> 0.5, second -> 0.5)</code>
+	 * .
+	 * </p>
+	 */
+	@Test
+	public void testProduct06() {
+
+		OclLibrary oclLib = EssentialOclPlugin.getOclLibraryProvider()
+				.getOclLibrary();
+
+		/* Create the expected result type. */
+		List<Property> properties = new ArrayList<Property>();
+
+		properties.add(this.createPropertyByNameAndType("first",
+				EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+						.getOclReal()));
+		properties.add(this.createPropertyByNameAndType("second",
+				EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+						.getOclReal()));
+
+		/* -> Create Element Type. */
+		TupleType expectedElementType = oclLib.makeTupleType(properties);
+
+		/* -> Create Result Type. */
+		SetType expectedResultType = oclLib.getSetType(expectedElementType);
+
+		/* Create expected result. */
+		List<IModelInstanceElement> adaptedExpectedResult;
+		adaptedExpectedResult = new LinkedList<IModelInstanceElement>();
+
+		/* -> Create Tuple. */
+		List<String> names = new LinkedList<String>();
+		names.add("first");
+		names.add("second");
+
+		List<Object> values = new LinkedList<Object>();
+		values.add(0.5d);
+		values.add(0.5d);
+
+		adaptedExpectedResult.add(this.myStandardLibraryFactory
+				.createOclTupleObject(names, values, expectedElementType)
+				.getModelInstanceElement());
+
+		/* -> Create IMICollection. */
+		IModelInstanceCollection<IModelInstanceElement> expectedIMIResult;
+		expectedIMIResult = BasisJavaModelInstanceFactory
+				.createModelInstanceCollection(adaptedExpectedResult,
+						expectedElementType);
+
+		/* -> Create OclCollection. */
+		OclCollection<OclReal> expectedResult = myStandardLibraryFactory
+				.createOclSet(expectedIMIResult, expectedElementType);
+
+		/* Compute result. */
+		OclSet<OclTuple> result = oclSet.product(oclSet);
+
+		/* Compare element type. */
+		assertEquals(expectedElementType, ((CollectionType) result.oclType()
+				.getType()).getElementType());
+
+		/* Compare result type. */
+		assertEquals(expectedResultType, result.oclType().getType());
+
+		/* Compare result. */
+		assertTrue(result.isEqualTo(expectedResult).isTrue());
+	}
+
+	/**
+	 * <p>
+	 * Test case to test the Method <code>JavaOclCollection.product(...)</code>.
+	 * </p>
+	 * 
+	 * <p>
+	 * Tests: <code>Set { 0.5, 1.5 } -> product ( Set { 0.5, 1.5 } ) = 
+	 * Set { Tuple (first -> 0.5, second -> 0.5),
+	 * Tuple (first -> 1.5, second -> 0.5),
+	 * Tuple (first -> 0.5, second -> 1.5),
+	 * Tuple (first -> 1.5, second -> 1.5) }</code> .
+	 * </p>
+	 */
+	@Test
+	public void testProduct07() {
+
+		OclLibrary oclLib = EssentialOclPlugin.getOclLibraryProvider()
+				.getOclLibrary();
+
+		/* Create the expected result type. */
+		List<Property> properties = new ArrayList<Property>();
+
+		properties.add(this.createPropertyByNameAndType("first",
+				EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+						.getOclReal()));
+		properties.add(this.createPropertyByNameAndType("second",
+				EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+						.getOclReal()));
+
+		/* -> Create Element Type. */
+		TupleType expectedElementType = oclLib.makeTupleType(properties);
+
+		/* -> Create Result Type. */
+		SetType expectedResultType = oclLib.getSetType(expectedElementType);
+
+		/* Create expected result. */
+		List<IModelInstanceElement> adaptedExpectedResult;
+		adaptedExpectedResult = new LinkedList<IModelInstanceElement>();
+
+		/* -> Create Tuples. */
+		List<String> names = new LinkedList<String>();
+		names.add("first");
+		names.add("second");
+
+		List<Object> values = new LinkedList<Object>();
+		values.add(0.5d);
+		values.add(0.5d);
+
+		adaptedExpectedResult.add(this.myStandardLibraryFactory
+				.createOclTupleObject(names, values, expectedElementType)
+				.getModelInstanceElement());
+
+		values.clear();
+		values.add(0.5d);
+		values.add(1.5d);
+
+		adaptedExpectedResult.add(this.myStandardLibraryFactory
+				.createOclTupleObject(names, values, expectedElementType)
+				.getModelInstanceElement());
+
+		values.clear();
+		values.add(1.5d);
+		values.add(0.5d);
+
+		adaptedExpectedResult.add(this.myStandardLibraryFactory
+				.createOclTupleObject(names, values, expectedElementType)
+				.getModelInstanceElement());
+
+		values.clear();
+		values.add(1.5d);
+		values.add(1.5d);
+
+		adaptedExpectedResult.add(this.myStandardLibraryFactory
+				.createOclTupleObject(names, values, expectedElementType)
+				.getModelInstanceElement());
+
+		/* -> Create IMICollection. */
+		IModelInstanceCollection<IModelInstanceElement> expectedIMIResult;
+		expectedIMIResult = BasisJavaModelInstanceFactory
+				.createModelInstanceCollection(adaptedExpectedResult,
+						expectedElementType);
+
+		/* -> Create OclCollection. */
+		OclCollection<OclReal> expectedResult = myStandardLibraryFactory
+				.createOclSet(expectedIMIResult, expectedElementType);
+
+		/* Compute result. */
+		IModelInstanceCollection<IModelInstanceElement> oclSetIMICollection;
+		oclSetIMICollection = BasisJavaModelInstanceFactory
+				.createModelInstanceCollection(
+						new LinkedList<IModelInstanceElement>(),
+						oclLib.getOclReal());
+		OclSet<OclReal> oclSet = myStandardLibraryFactory.createOclSet(
+				oclSetIMICollection, oclLib.getOclReal());
+		oclSet = oclSet.including(oclReal0_5);
+		oclSet = oclSet.including(oclReal1_5);
+
+		OclSet<OclTuple> result = oclSet.product(oclSet);
+
+		/* Compare element type. */
+		assertEquals(expectedElementType, ((CollectionType) result.oclType()
+				.getType()).getElementType());
+
+		/* Compare result type. */
+		assertEquals(expectedResultType, result.oclType().getType());
+
+		/* Compare result. */
+		assertTrue(result.isEqualTo(expectedResult).isTrue());
 	}
 
 	@Test
@@ -671,7 +1081,7 @@ public class JavaOclCollectionTest {
 		realOrderedSet1.add(oclReal1_5);
 		realOrderedSet1.add(oclReal2_5);
 		realOrderedSet1.add(undefined2);
-		
+
 		OclOrderedSet<OclReal> oclResultOrderedSet = myStandardLibraryFactory
 				.createOclOrderedSet(realOrderedSet1, EssentialOclPlugin
 						.getOclLibraryProvider().getOclLibrary().getOclReal());
@@ -891,4 +1301,20 @@ public class JavaOclCollectionTest {
 		assertTrue(oclBag2.min().isEqualTo(oclReal0_5).isTrue());
 		assertTrue(oclSequence2.min().isEqualTo(oclReal0_5).isTrue());
 	}
+
+	/**
+	 * Returns a property for a given name and type
+	 * 
+	 * @TODO: this method should be moved to a factory class since it is used
+	 *        probably somewhere else, too!
+	 */
+	private Property createPropertyByNameAndType(String name, Type type) {
+
+		Property prop = PivotModelFactory.eINSTANCE.createProperty();
+		prop.setName(name);
+		prop.setType(type);
+
+		return prop;
+	}
+
 }
