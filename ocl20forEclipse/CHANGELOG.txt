@@ -39,6 +39,8 @@ GUI
 ---
 * Introduction of the new OCL Editor (see above)
 
+* DresdenOCL now provides its own Eclipse perspective.
+
 * Improvements of the Model Browser
   - Static operations and properties are now highlighted with different symbols.
   - Constraints and their expressions are now highlighted with sensible symbols.

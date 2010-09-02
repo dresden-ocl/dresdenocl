@@ -42,5 +42,14 @@
          </description>
       </wizard>
    </extension>
+   <extension
+         point="org.eclipse.ui.perspectiveExtensions">
+      <perspectiveExtension
+            targetID="tudresden.ocl20.pivot.ui.perspective">
+         <newWizardShortcut
+               id="tudresden.ocl20.pivot.tools.codegen.declarativ.ocl2sql.ui.importWizards.loadModelWizard">
+         </newWizardShortcut>
+      </perspectiveExtension>
+   </extension>
 
 </plugin>

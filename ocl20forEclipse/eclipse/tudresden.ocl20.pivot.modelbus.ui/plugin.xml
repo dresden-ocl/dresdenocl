@@ -135,5 +135,16 @@
             name="LoadModelCommand">
       </command>
    </extension>
+   <extension
+         point="org.eclipse.ui.perspectives">
+      <perspective
+            class="tudresden.ocl20.pivot.modelbus.ui.internal.perspective.DresdenOclPerspectiveFactory"
+            id="tudresden.ocl20.pivot.ui.perspective"
+            name="DresdenOCL">
+         <description>
+            The perspective of DresdenOCL. Contains the Model Browser, the Model Instance Browser and further installed tools of DresdenOCL.
+         </description>
+      </perspective>
+   </extension>
    
 </plugin>
