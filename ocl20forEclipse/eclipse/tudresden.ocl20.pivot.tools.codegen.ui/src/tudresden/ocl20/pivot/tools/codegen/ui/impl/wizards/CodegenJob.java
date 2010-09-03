@@ -30,6 +30,7 @@ import org.eclipse.core.runtime.jobs.Job;
 import tudresden.ocl20.pivot.pivotmodel.Constraint;
 import tudresden.ocl20.pivot.tools.codegen.IOcl2Code;
 import tudresden.ocl20.pivot.tools.codegen.exception.Ocl2CodeException;
+import tudresden.ocl20.pivot.tools.codegen.ui.Ocl2CodeUIPlugIn;
 
 public abstract class CodegenJob extends Job {
 
@@ -63,9 +64,9 @@ public abstract class CodegenJob extends Job {
 	 * </p>
 	 * 
 	 * @param constraints
-	 *          The {@link Constraint}s for that code shall be generated.
+	 *            The {@link Constraint}s for that code shall be generated.
 	 * @param codeGenerator
-	 *          The {@link IOcl2Code} used for code generation.
+	 *            The {@link IOcl2Code} used for code generation.
 	 */
 	public CodegenJob(List<Constraint> constraints, IOcl2Code<?> codeGenerator) {
 
@@ -88,6 +89,7 @@ public abstract class CodegenJob extends Job {
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @seeorg.eclipse.core.runtime.jobs.Job#run(org.eclipse.core.runtime.
 	 * IProgressMonitor)
 	 */
@@ -105,9 +107,12 @@ public abstract class CodegenJob extends Job {
 
 			/* FIXME Claas: Evtl. refresh the altered workspace automatically. */
 
-			result =
-					new Status(IStatus.OK, this.getPluginid(),
-							"Code Transformation finished successfully.");
+			/*
+			 * TODO Method getPluginID does not work here in binary
+			 * distribution.
+			 */
+			result = new Status(IStatus.OK, Ocl2CodeUIPlugIn.PLUGIN_ID,
+					"Code Transformation finished successfully.");
 		}
 
 		catch (Ocl2CodeException e) {

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
       id="tudresden.ocl20.feature.metamodels"
-      label="DresdenOCL Metamodels"
-      version="2.2.0.qualifier"
+      label="Dresden OCL Metamodels"
+      version="3.0.0.qualifier"
       provider-name="TU Dresden, Software Technology Group">
 
    <description url="http://dresden-ocl.sourceforge.net/4eclipse_intro.html">
@@ -191,10 +191,8 @@ Library.
       <import plugin="org.eclipse.uml2.uml"/>
       <import plugin="org.eclipse.ui" version="3.4.0" match="greaterOrEqual"/>
       <import plugin="org.junit4" version="4.0.0" match="greaterOrEqual"/>
-      <import plugin="tudresden.ocl20.pivot.metamodels.test" version="2.1.0" match="greaterOrEqual"/>
-      <import plugin="tudresden.ocl20.pivot.metamodels.ecore" version="2.1.0" match="greaterOrEqual"/>
       <import plugin="tudresden.ocl20.pivot.facade" version="2.1.0" match="greaterOrEqual"/>
-      <import plugin="tudresden.ocl20.pivot.metamodels.uml2" version="2.1.0" match="greaterOrEqual"/>
+      <import plugin="tudresden.ocl20.pivot.testsuite" version="2.2.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.emf.codegen.ecore" version="2.3.1" match="compatible"/>
       <import plugin="org.eclipse.core.resources" version="3.4.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.jdt.core" version="3.4.0" match="greaterOrEqual"/>
@@ -203,8 +201,6 @@ Library.
       <import plugin="org.eclipse.emf.common.ui"/>
       <import plugin="org.eclipse.emf.ecore.xmi"/>
       <import plugin="org.eclipse.xsd"/>
-      <import plugin="tudresden.ocl20.pivot.metamodels.java" version="2.1.0" match="greaterOrEqual"/>
-      <import plugin="tudresden.ocl20.pivot.testsuite" version="2.2.0" match="greaterOrEqual"/>
    </requires>
 
    <plugin

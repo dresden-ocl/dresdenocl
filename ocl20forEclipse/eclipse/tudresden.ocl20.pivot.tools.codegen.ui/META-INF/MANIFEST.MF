@@ -1,15 +1,15 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Codegenerator UI
+Bundle-Name: Generic Codegenerator UI
 Bundle-SymbolicName: tudresden.ocl20.pivot.tools.codegen.ui;singleton:=true
-Bundle-Version: 2.2.0.qualifier
+Bundle-Version: 3.0.0.qualifier
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
-Require-Bundle: tudresden.ocl20.pivot.tools.codegen;bundle-version="2.1.0",
- tudresden.ocl20.pivot.pivotmodel;bundle-version="2.2.0",
+Require-Bundle: tudresden.ocl20.pivot.tools.codegen,
+ tudresden.ocl20.pivot.pivotmodel,
  org.eclipse.core.runtime,
  org.eclipse.ui,
- tudresden.ocl20.pivot.model;bundle-version="2.2.0",
- tudresden.ocl20.pivot.modelbus;bundle-version="2.2.0",
+ tudresden.ocl20.pivot.model,
+ tudresden.ocl20.pivot.modelbus,
  org.eclipse.core.resources,
  org.eclipse.core.variables,
  org.eclipse.ui.ide
@@ -17,3 +17,4 @@ Export-Package: tudresden.ocl20.pivot.tools.codegen.ui.impl,
  tudresden.ocl20.pivot.tools.codegen.ui.impl.wizards
 Bundle-Activator: tudresden.ocl20.pivot.tools.codegen.ui.Ocl2CodeUIPlugIn
 Bundle-ActivationPolicy: lazy
+Bundle-Vendor: TU Dresden, Software Technology Group

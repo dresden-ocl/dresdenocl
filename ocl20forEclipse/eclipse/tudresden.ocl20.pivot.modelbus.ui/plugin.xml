@@ -6,7 +6,7 @@
          point="org.eclipse.ui.actionSets">
       <actionSet
             id="tudresden.ocl20.pivot.modelbus.ui.actionSet"
-            label="Dresden OCL2 Action Set"
+            label="Dresden OCL Action Set"
             visible="true">
          <menu
                label="DresdenOCL"
@@ -24,13 +24,13 @@
                id="tudresden.ocl20.pivot.modelbus.ui.actions.LoadModelInstanceWizardAction"
                label="Load Model Instance"
                menubarPath="tudresden.ocl20.pivot.modelbus.ui.menu/tudresden.ocl20.pivot.modelbus.ui.menu.import"
-               tooltip="Loads a Model Instance into DresdenOCL">
+               tooltip="Loads a Model Instance into Dresden OCL">
          </action>
          <action
                label="Load Model"
                icon="icons/models.gif"
                class="tudresden.ocl20.pivot.modelbus.ui.actions.LoadModelWizardAction"
-               tooltip="Loads a domain-specific model into DresdenOCL"
+               tooltip="Loads a domain-specific model into Dresden OCL"
                menubarPath="tudresden.ocl20.pivot.modelbus.ui.menu/tudresden.ocl20.pivot.modelbus.ui.menu.import"
                id="tudresden.ocl20.pivot.modelbus.ui.actions.LoadModelWizardAction">
          </action>
@@ -39,7 +39,7 @@
    <extension
          point="org.eclipse.ui.views">
       <category
-            name="DresdenOCL"
+            name="Dresden OCL"
             id="tudresden.ocl20.views.category">
       </category>
       <view
@@ -61,16 +61,16 @@
          point="org.eclipse.ui.importWizards">
       <category
             id="tudresden.ocl20.pivot.modelbus.ui.importWizards.category"
-            name="DresdenOCL">
+            name="Dresden OCL">
       </category>
       <wizard
             category="tudresden.ocl20.pivot.modelbus.ui.importWizards.category"
             class="tudresden.ocl20.pivot.modelbus.ui.internal.wizards.LoadModelWizard"
             icon="icons/models.gif"
             id="tudresden.ocl20.pivot.modelbus.ui.importWizards.loadModelWizard"
-            name="Domain-Specific Model">
+            name="Model">
          <description>
-            Load a domain-specific model into the Model Browser view.
+            Loads a Model into Dresden OCL.
          </description>
       </wizard>
       <wizard
@@ -78,9 +78,9 @@
             class="tudresden.ocl20.pivot.modelbus.ui.internal.wizards.LoadModelInstanceWizard"
             icon="icons/models.gif"
             id="tudresden.ocl20.pivot.modelbus.ui.importWizards.loadModelInstanceWizard"
-            name="Modelinstance">
+            name="Model Instance">
          <description>
-            Load a model instance for specific model.
+            Loads a Model Instance into Dresden OCL.
          </description>
       </wizard>
    </extension>
@@ -88,19 +88,19 @@
          point="org.eclipse.ui.newWizards">
       <category
             id="tudresden.ocl20.pivot.modelbus.ui.newWizards.category"
-            name="DresdenOCL">
+            name="Dresden OCL">
       </category>
    </extension>
    <extension
          id="tudresden.ocl20.pivot.modelbus.ui.contextmenu"
-         name="DresdenOCL Context Menu"
+         name="Dresden OCL Context Menu"
          point="org.eclipse.ui.menus">
       <menuContribution
             allPopups="false"
             locationURI="popup:org.eclipse.ui.popup.any?after=additions">
          <menu
-               label="DresdenOCL"
-               tooltip="Tools of DresdenOCL">
+               label="Dresden OCL"
+               tooltip="Tools of Dresden OCL">
             <command
                   commandId="tudresden.ocl20.pivot.modelbus.ui.loadModelCommand"
                   icon="icons/models.gif"
@@ -124,13 +124,13 @@
          point="org.eclipse.ui.commands">
       <command
             defaultHandler="tudresden.ocl20.pivot.modelbus.ui.command.LoadModelWizardCommand"
-            description="Loads a domain-specific model into DresdenOCL"
+            description="Loads a Model into Dresden OCL"
             id="tudresden.ocl20.pivot.modelbus.ui.loadModelCommand"
             name="LoadModelCommand">
       </command>
       <command
             defaultHandler="tudresden.ocl20.pivot.modelbus.ui.command.LoadModelInstanceWizardCommand"
-            description="Loads a Model Instance into DresdenOCL"
+            description="Loads a Model Instance into Dresden OCL"
             id="tudresden.ocl20.pivot.modelbus.ui.loadModelInstanceCommand"
             name="LoadModelCommand">
       </command>
@@ -140,9 +140,9 @@
       <perspective
             class="tudresden.ocl20.pivot.modelbus.ui.internal.perspective.DresdenOclPerspectiveFactory"
             id="tudresden.ocl20.pivot.ui.perspective"
-            name="DresdenOCL">
+            name="Dresden OCL">
          <description>
-            The perspective of DresdenOCL. Contains the Model Browser, the Model Instance Browser and further installed tools of DresdenOCL.
+            The perspective of Dresden OCL. Contains the Model Browser, the Model Instance Browser and further installed tools of Dresden OCL.
          </description>
       </perspective>
    </extension>

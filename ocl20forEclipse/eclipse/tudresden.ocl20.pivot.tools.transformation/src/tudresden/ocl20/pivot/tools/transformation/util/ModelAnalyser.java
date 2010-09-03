@@ -87,22 +87,24 @@ public abstract class ModelAnalyser<K extends EObject, V> {
 	 * generic of the List 'newInterfaces' from List<Class> to List<Class<?>> and
 	 * the type of the for lopp in the else case from Class to Class<?>.
 	 */
-	@SuppressWarnings("rawtypes")
 	public boolean instanceIsOfType(Object instance, Class<?> type) {
 
-		List<Class> interfaces = Arrays.asList(instance.getClass().getInterfaces());
+		List<Class<?>> interfaces = Arrays.asList(instance.getClass().getInterfaces());
+		
 		while (interfaces.size() > 0) {
-			List<Class> newInterfaces = new ArrayList<Class>();
+			
+			List<Class<?>> newInterfaces = new ArrayList<Class<?>>();
 			if (interfaces.contains(type)) {
 				return true;
 			}
 			else {
-				for (Class inf : interfaces) {
+				for (Class<?> inf : interfaces) {
 					newInterfaces.addAll(Arrays.asList(inf.getInterfaces()));
 				}
 			}
 			interfaces = newInterfaces;
 		}
+		
 		return false;
 	}
 

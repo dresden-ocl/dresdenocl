@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Simple Example Generated Java Code and Test Cases
 Bundle-SymbolicName: tudresden.ocl20.pivot.examples.simple.ocl22javacode
-Bundle-Version: 2.2.0.qualifier
+Bundle-Version: 3.0.0.qualifier
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Require-Bundle: org.junit4;bundle-version="4.0.0",
  org.aspectj.runtime

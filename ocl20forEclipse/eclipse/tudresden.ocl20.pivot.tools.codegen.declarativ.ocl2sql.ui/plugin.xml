@@ -38,7 +38,7 @@
             id="tudresden.ocl20.pivot.tools.codegen.declarativ.ocl2sql.ui.importWizards.loadModelWizard"
             name="Generate SQL Constraint Code">
          <description>
-            Creates AspectJ code to instrument constraints for a given model and given OCL constraints.
+            Creates SQL code for a Model and given OCL Constraints.
          </description>
       </wizard>
    </extension>

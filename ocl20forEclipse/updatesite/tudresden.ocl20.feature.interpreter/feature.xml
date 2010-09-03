@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
       id="tudresden.ocl20.feature.interpreter"
-      label="DresdenOCL Interpreter"
-      version="2.2.0.qualifier"
+      label="Dresden OCL Interpreter"
+      version="3.0.0.qualifier"
       provider-name="TU Dresden, Software Technology Group">
 
    <description url="http://dresden-ocl.sourceforge.net/4eclipse_packages.html">
@@ -194,7 +194,6 @@ Library.
       <import plugin="tudresden.ocl20.pivot.testsuite" version="2.1.0" match="greaterOrEqual"/>
       <import plugin="tudresden.ocl20.pivot.facade" version="2.1.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.ui" version="3.4.0" match="greaterOrEqual"/>
-      <import plugin="tudresden.ocl20.pivot.interpreter" version="2.1.0" match="greaterOrEqual"/>
       <import plugin="tudresden.ocl20.pivot.modelbus.ui" version="2.1.0" match="greaterOrEqual"/>
    </requires>
 

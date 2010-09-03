@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
       id="tudresden.ocl20.feature.parser"
-      label="DresdenOCL2 Parser Feature"
-      version="2.2.0.qualifier"
+      label="Dresden OCL Parser and Editor Feature"
+      version="3.0.0.qualifier"
       provider-name="TU Dresden, Software Technology Group">
 
    <description url="http://dresden-ocl.sourceforge.net/4eclipse_packages.html">
-      The OCL2 Parser has been developed by Nils Thieme and can be used to open text files and parse them as OCL2 constraints. The constraints parsed by the parser are added to the model in the toolkit on which they have been defined.
+      The OCL Parser/Editor has been developed by Michael Thile and can be
+used to open and edit OCL files and parse them as OCL constraints. The
+constraints parsed by the parser/editor are added to the model in the
+toolkit on which they have been defined.
+Furthermore, the OCL Editor provides syntax highlighting, code completion, code folding etc.
    </description>
 
    <copyright url="http://www.example.com/copyright">
@@ -182,22 +186,77 @@ Library.
    </license>
 
    <requires>
-      <import plugin="tudresden.ocl20.pivot.modelbus" version="2.1.0" match="greaterOrEqual"/>
-      <import plugin="tudresden.ocl20.pivot.parser" version="2.1.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.core.runtime" version="3.4.0" match="greaterOrEqual"/>
       <import plugin="org.junit4" version="4.0.0" match="greaterOrEqual"/>
       <import plugin="tudresden.ocl20.pivot.testsuite" version="2.1.0" match="greaterOrEqual"/>
       <import plugin="tudresden.ocl20.pivot.facade" version="2.1.0" match="greaterOrEqual"/>
       <import plugin="tudresden.ocl20.pivot.essentialocl" version="2.1.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.core.runtime" version="3.5.0" match="greaterOrEqual"/>
+      <import plugin="tudresden.ocl20.pivot.modelbus" version="2.1.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.core.resources" version="3.5.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.ui" version="3.5.0" match="greaterOrEqual"/>
-      <import plugin="tudresden.ocl20.pivot.modelbus.ui" version="2.1.0" match="greaterOrEqual"/>
-      <import plugin="tudresden.ocl20.pivot.ocl2parser" version="2.1.0" match="greaterOrEqual"/>
+      <import plugin="scala.library" version="2.7.7" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.emf.ecore"/>
+      <import plugin="tudresden.ocl20.pivot.pivotmodel"/>
+      <import plugin="org.eclipse.emf"/>
+      <import plugin="org.eclipse.emf.codegen.ecore"/>
+      <import plugin="org.eclipse.emf.ecore.edit"/>
+      <import plugin="org.eclipse.emf.edit.ui"/>
+      <import plugin="org.eclipse.emf.workspace"/>
+      <import plugin="org.emftext.commons.antlr3_2_0"/>
+      <import plugin="org.eclipse.jface"/>
+      <import plugin="org.eclipse.jface.text"/>
+      <import plugin="org.eclipse.ui.editors"/>
+      <import plugin="org.eclipse.ui.ide"/>
+      <import plugin="org.eclipse.ui.views"/>
+      <import plugin="tudresden.ocl20.pivot.language.ocl.semantics" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="tudresden.ocl20.pivot.essentialocl.standardlibrary"/>
+      <import plugin="tudresden.ocl20.pivot.model"/>
+      <import plugin="org.emftext.access"/>
    </requires>
 
    <plugin
-         id="tudresden.ocl20.pivot.ocl2parser"
+         id="org.kiama.attribution"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="scala.library"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"/>
+
+   <plugin
+         id="tudresden.ocl20.pivot.language.ocl"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="tudresden.ocl20.pivot.language.ocl.resource.ocl"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="tudresden.ocl20.pivot.language.ocl.resource.ocl.ui"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="tudresden.ocl20.pivot.language.ocl.semantics"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="tudresden.ocl20.pivot.language.ocl.staticsemantics"
          download-size="0"
          install-size="0"
          version="0.0.0"
@@ -218,7 +277,7 @@ Library.
          unpack="false"/>
 
    <plugin
-         id="tudresden.ocl20.pivot.parser.ui"
+         id="tudresden.ocl20.pivot.pivotmodel.semantics"
          download-size="0"
          install-size="0"
          version="0.0.0"

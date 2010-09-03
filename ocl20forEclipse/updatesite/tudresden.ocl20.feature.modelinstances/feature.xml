@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
       id="tudresden.ocl20.feature.modelinstances"
-      label="DresdenOCL Model Instances"
-      version="2.2.0.qualifier"
+      label="Dresden OCL Model Instances"
+      version="3.0.0.qualifier"
       provider-name="TU Dresden, Software Technology Group">
 
    <description url="http://dresden-ocl.sourceforge.net/4eclipse_intro.html">
@@ -186,15 +186,10 @@ Library.
       <import plugin="tudresden.ocl20.pivot.modelbus" version="2.1.0" match="greaterOrEqual"/>
       <import plugin="org.junit4" version="4.0.0" match="greaterOrEqual"/>
       <import plugin="tudresden.ocl20.pivot.pivotmodel" version="2.1.0" match="greaterOrEqual"/>
-      <import plugin="tudresden.ocl20.pivot.modelinstancetype.ecore" version="2.1.0" match="greaterOrEqual"/>
       <import plugin="tudresden.ocl20.pivot.testsuite" version="2.1.0" match="greaterOrEqual"/>
-      <import plugin="tudresden.ocl20.pivot.modelinstancetype.test" version="2.1.0" match="greaterOrEqual"/>
       <import plugin="tudresden.ocl20.pivot.metamodels.uml2" version="2.1.0" match="greaterOrEqual"/>
       <import plugin="tudresden.ocl20.pivot.facade" version="2.1.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.emf.ecore.xmi" version="2.5.0" match="greaterOrEqual"/>
-      <import plugin="tudresden.ocl20.pivot.modelinstancetype.xml" version="2.1.0" match="greaterOrEqual"/>
-      <import plugin="tudresden.ocl20.pivot.testsuite" version="2.2.0" match="greaterOrEqual"/>
-      <import plugin="tudresden.ocl20.pivot.modelinstancetype.java" version="2.1.0" match="greaterOrEqual"/>
    </requires>
 
    <plugin

@@ -2,11 +2,11 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Model Instance
 Bundle-SymbolicName: tudresden.ocl20.pivot.modelinstancetype
-Bundle-Version: 2.2.0.qualifier
+Bundle-Version: 3.0.0.qualifier
 Bundle-Activator: tudresden.ocl20.pivot.modelinstancetype.ModelInstanceTypePlugin
 Require-Bundle: org.eclipse.core.runtime,
- tudresden.ocl20.pivot.essentialocl;bundle-version="2.1.0";visibility:=reexport,
- tudresden.ocl20.pivot.pivotmodel;bundle-version="2.1.0"
+ tudresden.ocl20.pivot.essentialocl;visibility:=reexport,
+ tudresden.ocl20.pivot.pivotmodel
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: tudresden.ocl20.pivot.modelinstancetype.exception,

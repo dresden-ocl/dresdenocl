@@ -2,11 +2,11 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: OCL2 Interpreter Plug-in
 Bundle-SymbolicName: tudresden.ocl20.pivot.interpreter
-Bundle-Version: 2.2.0.qualifier
+Bundle-Version: 3.0.0.qualifier
 Bundle-Activator: tudresden.ocl20.pivot.interpreter.OclInterpreterPlugin
-Require-Bundle: org.eclipse.core.runtime;bundle-version="3.4.0",
- tudresden.ocl20.pivot.standardlibrary.java;bundle-version="2.1.0",
- tudresden.ocl20.pivot.modelbus;bundle-version="2.1.0"
+Require-Bundle: org.eclipse.core.runtime,
+ tudresden.ocl20.pivot.standardlibrary.java,
+ tudresden.ocl20.pivot.modelbus
 Bundle-ActivationPolicy: lazy
 Export-Package: tudresden.ocl20.pivot.interpreter,
  tudresden.ocl20.pivot.interpreter.event

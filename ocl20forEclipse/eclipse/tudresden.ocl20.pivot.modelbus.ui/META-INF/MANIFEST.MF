@@ -2,16 +2,16 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Model Bus GUI Plug-in
 Bundle-SymbolicName: tudresden.ocl20.pivot.modelbus.ui; singleton:=true
-Bundle-Version: 2.2.0.qualifier
+Bundle-Version: 3.0.0.qualifier
 Bundle-Activator: tudresden.ocl20.pivot.modelbus.ui.ModelBusUIPlugin
 Bundle-Vendor: TU Dresden, Software Technology Group
-Require-Bundle: org.eclipse.core.runtime;bundle-version="3.4.0",
- org.eclipse.core.resources;bundle-version="3.4.0",
- org.eclipse.ui.ide;bundle-version="3.4.0",
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.core.resources,
+ org.eclipse.ui.ide,
  org.eclipse.emf.edit.ui,
- tudresden.ocl20.pivot.modelbus;bundle-version="2.1.0",
- tudresden.ocl20.pivot.essentialocl.edit;bundle-version="2.1.0",
- org.eclipse.core.variables;bundle-version="3.2.0"
+ tudresden.ocl20.pivot.modelbus,
+ tudresden.ocl20.pivot.essentialocl.edit,
+ org.eclipse.core.variables
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: tudresden.ocl20.pivot.modelbus.ui,

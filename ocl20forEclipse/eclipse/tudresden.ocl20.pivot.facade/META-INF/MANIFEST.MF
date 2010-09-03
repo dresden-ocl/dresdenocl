@@ -2,23 +2,24 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Dresden OCL2 for Eclipse Facade
 Bundle-SymbolicName: tudresden.ocl20.pivot.facade
-Bundle-Version: 2.2.0.qualifier
+Bundle-Version: 3.0.0.qualifier
 Bundle-Activator: tudresden.ocl20.pivot.facade.Activator
 Bundle-Vendor: TU Dresden, Software Technology Group
-Require-Bundle: org.eclipse.core.runtime;bundle-version="3.4.0",
- tudresden.ocl20.pivot.modelbus;bundle-version="2.1.0";visibility:=reexport,
- tudresden.ocl20.pivot.metamodels.ecore;bundle-version="2.1.0",
- tudresden.ocl20.pivot.metamodels.java;bundle-version="2.1.0",
- tudresden.ocl20.pivot.metamodels.uml2;bundle-version="2.1.0",
- tudresden.ocl20.pivot.modelinstancetype.ecore;bundle-version="2.1.0",
- tudresden.ocl20.pivot.modelinstancetype.java;bundle-version="2.1.0",
- tudresden.ocl20.pivot.language.ocl.staticsemantics;bundle-version="1.0.0";visibility:=reexport,
- tudresden.ocl20.pivot.parser;bundle-version="2.2.0";visibility:=reexport,
- tudresden.ocl20.pivot.interpreter;bundle-version="2.1.0";visibility:=reexport,
- tudresden.ocl20.pivot.tools.codegen.ocl2java;bundle-version="2.2.0";visibility:=reexport,
- tudresden.ocl20.pivot.tools.codegen;bundle-version="2.1.0",
+Require-Bundle: org.eclipse.core.runtime,
+ tudresden.ocl20.pivot.modelbus;visibility:=reexport,
+ tudresden.ocl20.pivot.metamodels.ecore,
+ tudresden.ocl20.pivot.metamodels.java,
+ tudresden.ocl20.pivot.metamodels.uml2,
+ tudresden.ocl20.pivot.modelinstancetype.ecore,
+ tudresden.ocl20.pivot.modelinstancetype.java,
+ tudresden.ocl20.pivot.language.ocl.staticsemantics;visibility:=reexport,
+ tudresden.ocl20.pivot.parser;visibility:=reexport,
+ tudresden.ocl20.pivot.interpreter;visibility:=reexport,
+ tudresden.ocl20.pivot.tools.codegen.ocl2java;visibility:=reexport,
+ tudresden.ocl20.pivot.tools.codegen,
  tudresden.ocl20.pivot.metamodels.xsd,
- tudresden.ocl20.pivot.modelinstancetype.xml
+ tudresden.ocl20.pivot.modelinstancetype.xml,
+ tudresden.ocl20.pivot.language.ocl.resource.ocl
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy
 Export-Package: tudresden.ocl20.pivot.facade

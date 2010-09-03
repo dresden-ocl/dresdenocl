@@ -111,12 +111,16 @@ public class PivotModelAnalyser extends ModelAnalyser<Namespace, Type> {
 	@SuppressWarnings("rawtypes")
 	public boolean instanceIsOfType(Object instance, Class<?> type) {
 
-		List<Class> interfaces = Arrays.asList(instance.getClass().getInterfaces());
+		List<Class<?>> interfaces = Arrays.asList(instance.getClass().getInterfaces());
+		
 		while (interfaces.size() > 0) {
-			List<Class> newInterfaces = new ArrayList<Class>();
+			
+			List<Class<?>> newInterfaces = new ArrayList<Class<?>>();
+			
 			if (interfaces.contains(type)) {
 				return true;
 			}
+			
 			else {
 				for (Class<?> inf : interfaces) {
 					newInterfaces.addAll(Arrays.asList(inf.getInterfaces()));
@@ -124,6 +128,7 @@ public class PivotModelAnalyser extends ModelAnalyser<Namespace, Type> {
 			}
 			interfaces = newInterfaces;
 		}
+		
 		return false;
 	}
 

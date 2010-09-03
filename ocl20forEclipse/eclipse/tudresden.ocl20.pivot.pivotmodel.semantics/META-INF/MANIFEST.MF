@@ -2,12 +2,12 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Pivot Model Semantics Plug-in
 Bundle-SymbolicName: tudresden.ocl20.pivot.pivotmodel.semantics;singleton:=true
-Bundle-Version: 1.0.0.qualifier
+Bundle-Version: 3.0.0.qualifier
 Require-Bundle: tudresden.ocl20.pivot.pivotmodel;visibility:=reexport,
  scala.library,
  org.kiama.attribution
 Bundle-ActivationPolicy: lazy
-Bundle-Vendor: www.langems.org
+Bundle-Vendor: TU Dresden, Software Technology Group
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: tudresden.ocl20.pivot.pivotmodel.semantics,
  tudresden.ocl20.pivot.datatypes.semantics

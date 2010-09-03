@@ -1,20 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
-      id="tudresden.ocl20.feature.examples.ocl22java"
-      label="Dresden OCL Ocl22Java Examples"
+      id="tudresden.ocl20.feature.ocl22sql"
+      label="Dresden OCL Ocl22Sql"
       version="3.0.0.qualifier"
-      provider-name="TU Dresden, Software Technology Group">
+      provider-name="TU Dresden, Software Technoloy Group">
 
    <description url="http://www.example.com/description">
-      Examples for the OCL22Java Code Generator of DresdenOCL2. Requires the installation of the AspectJ Development
-Tools (AJDT)!
+      Contains the Ocl22Sql code generator developed by Björn Freitag.
    </description>
 
    <copyright url="http://www.example.com/copyright">
       [Enter Copyright Description here.]
    </copyright>
 
-   <license url="http://www.example.com/license">
+   <license url="http://www.gnu.org/licenses/lgpl.html">
       GNU LESSER GENERAL PUBLIC LICENSE
 Version 3, 29 June 2007
 Copyright (C) 2007 Free Software Foundation, Inc. &lt;http://fsf.org/&gt;
@@ -184,30 +183,64 @@ Library.
    </license>
 
    <requires>
-      <import plugin="org.aspectj.runtime"/>
-      <import plugin="org.junit4" version="4.0.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.ui" version="3.4.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.core.runtime" version="3.4.0" match="greaterOrEqual"/>
-      <import plugin="tudresden.ocl20.pivot.testsuite" version="2.1.0" match="greaterOrEqual"/>
-      <import plugin="tudresden.ocl20.pivot.tools.codegen.ocl2java.types" version="2.1.0" match="greaterOrEqual"/>
+      <import plugin="tudresden.ocl20.logging"/>
+      <import plugin="org.eclipse.core.runtime"/>
+      <import plugin="tudresden.ocl20.pivot.tools.codegen"/>
+      <import plugin="tudresden.ocl20.pivot.tools.template"/>
+      <import plugin="tudresden.ocl20.pivot.essentialocl"/>
+      <import plugin="tudresden.ocl20.pivot.modelbus"/>
+      <import plugin="org.eclipse.osgi"/>
+      <import plugin="org.eclipse.ui"/>
+      <import plugin="tudresden.ocl20.pivot.tools.codegen.ui"/>
+      <import plugin="org.eclipse.emf.ecore"/>
+      <import plugin="tudresden.ocl20.pivot.pivotmodel"/>
+      <import plugin="tudresden.ocl20.pivot.metamodels.uml2"/>
    </requires>
 
    <plugin
-         id="tudresden.ocl20.pivot.examples.royalandloyal.ocl22javacode"
+         id="tudresden.ocl20.pivot.tools.codegen.declarativ"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="tudresden.ocl20.pivot.examples.simple.ocl22javacode"
+         id="tudresden.ocl20.pivot.tools.codegen.declarativ.ocl2sql"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="tudresden.ocl20.pivot.tools.codegen.ocl2java.test.aspectj"
+         id="tudresden.ocl20.pivot.tools.codegen.declarativ.ocl2sql.ui"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="tudresden.ocl20.pivot.tools.CWM"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="tudresden.ocl20.pivot.tools.template.sql"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="tudresden.ocl20.pivot.tools.transformation"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="tudresden.ocl20.pivot.tools.transformation.pivot2sql"
          download-size="0"
          install-size="0"
          version="0.0.0"

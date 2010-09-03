@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
       id="tudresden.ocl20.feature.facade"
-      label="DresdenOCL Eclipse Integration Facade"
-      version="2.2.0.qualifier"
+      label="Dresden OCL Eclipse Integration Facade"
+      version="3.0.0.qualifier"
       provider-name="TU Dresden, Software Technology Group">
 
    <description url="http://www.example.com/description">
@@ -191,9 +191,14 @@ Library.
       <import plugin="tudresden.ocl20.pivot.metamodels.uml2" version="2.1.0" match="greaterOrEqual"/>
       <import plugin="tudresden.ocl20.pivot.modelinstancetype.ecore" version="2.1.0" match="greaterOrEqual"/>
       <import plugin="tudresden.ocl20.pivot.modelinstancetype.java" version="2.1.0" match="greaterOrEqual"/>
-      <import plugin="tudresden.ocl20.pivot.ocl2parser" version="2.1.0" match="greaterOrEqual"/>
-      <import plugin="tudresden.ocl20.pivot.ocl2java" version="2.1.0" match="greaterOrEqual"/>
       <import plugin="tudresden.ocl20.pivot.interpreter" version="2.1.0" match="greaterOrEqual"/>
+      <import plugin="tudresden.ocl20.pivot.tools.codegen.ocl2java" version="2.2.0" match="greaterOrEqual"/>
+      <import plugin="tudresden.ocl20.pivot.tools.codegen" version="2.1.0" match="greaterOrEqual"/>
+      <import plugin="tudresden.ocl20.pivot.metamodels.xsd"/>
+      <import plugin="tudresden.ocl20.pivot.modelinstancetype.xml"/>
+      <import plugin="tudresden.ocl20.pivot.language.ocl.staticsemantics"/>
+      <import plugin="tudresden.ocl20.pivot.parser"/>
+      <import plugin="tudresden.ocl20.pivot.language.ocl.resource.ocl"/>
    </requires>
 
    <plugin

@@ -41,7 +41,7 @@
     point = "org.eclipse.ui.newWizards">
     <category
       id = "tudresden.ocl20.pivot.modelbus.ui.newWizards.category"
-      name="DresdenOCL">
+      name="Dresden OCL">
     </category>
     <wizard
       id = "tudresden.ocl20.pivot.essentialocl.editor.typesModelWizard"
