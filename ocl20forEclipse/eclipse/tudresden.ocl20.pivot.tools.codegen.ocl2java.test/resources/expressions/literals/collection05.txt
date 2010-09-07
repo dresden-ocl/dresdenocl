@@ -1,0 +1,8 @@
+java.util.HashSet<Integer> collection1;
+collection1 = new java.util.HashSet<Integer>();
+
+collection1.add(new Integer(0));
+collection1.add(new Integer(1));
+collection1.add(new Integer(2));
+
+collection1

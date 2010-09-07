@@ -1,0 +1,9 @@
+Integer ifExpResult1;
+
+if (new Boolean(true)) {
+    ifExpResult1 = new Integer(1);
+} else {
+    ifExpResult1 = -(new Integer(1));
+}
+
+ifExpResult1

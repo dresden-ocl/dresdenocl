@@ -53,4 +53,8 @@
       <ownedParameter xmi:id="_DIhEUIdzEd-jP82yEy3VXg" type="_HtFR8BvWEd-lK-Yjl_N2xQ" direction="return"/>
     </ownedOperation>
   </packagedElement>
+  <packagedElement xmi:type="uml:Enumeration" xmi:id="_-PlakLp3Ed-Ma_UOIldEog" name="Enumeration1">
+    <ownedLiteral xmi:id="_A8RqULp4Ed-Ma_UOIldEog" name="literal1"/>
+    <ownedLiteral xmi:id="_CdOfsLp4Ed-Ma_UOIldEog" name="literal2"/>
+  </packagedElement>
 </uml:Package>
