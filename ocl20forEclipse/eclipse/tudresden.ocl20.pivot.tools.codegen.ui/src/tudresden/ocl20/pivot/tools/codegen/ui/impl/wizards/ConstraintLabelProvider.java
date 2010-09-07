@@ -86,7 +86,7 @@ public class ConstraintLabelProvider extends LabelProvider implements
 		Constraint aConstraint;
 		aConstraint = (Constraint) element;
 
-		result = aConstraint.getSpecification().getBody();
+		result = aConstraint.getSpecification().getBody().trim();
 
 		return result;
 	}
