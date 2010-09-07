@@ -76,7 +76,7 @@ String
 
 // --- Type Type ---
 typeType() ::= <<
-Class
+Class<?>
 >>
 
 // --- Tuple Type ---

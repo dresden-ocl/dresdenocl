@@ -515,7 +515,7 @@ this.newInstances.containsKey($sourceExp$)
 
 // --- OclIsKindOf Operation ---
 oclIsKindOfOperation(sourceExp, argsExp) ::= <<
-($sourceExp$ instanceof $argsExp$)
+($argsExp$.isAssignableFrom($sourceExp$.getClass()))
 >>
 
 

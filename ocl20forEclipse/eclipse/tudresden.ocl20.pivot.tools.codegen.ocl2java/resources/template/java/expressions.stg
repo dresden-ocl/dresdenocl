@@ -51,7 +51,7 @@ $ifCode$if ($ifExp$) {
 
 // --- InvalidLiteralExp ---
 invalidLiteralExp() ::= <<
-null
+new tudresden.ocl20.pivot.tools.codegen.ocl2java.types.OclInvalidException("Invalid literal in OCL constraint.");
 >>
 
 
