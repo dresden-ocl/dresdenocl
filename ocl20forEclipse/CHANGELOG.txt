@@ -1,16 +1,18 @@
 Changes and Bugs fixed during the different Releases
 ====================================================
 
-Release 3.0 (planned for September, 9th, 2010)
-==============================================
+Release 3.0 (planned for September, 14th, 2010)
+===============================================
 
-* A new OCL Editor/Parser is now available with Dresden OCL
+* A new OCL Editor/Parser is now available with Dresden OCL.
   - The editor includes
     - Syntax Highlighting
     - Code completion
     - Outline view of OCL Abstract Syntax
   - The parser includes
     - Type inference wherever possible
+    
+* A new version of the Ocl2Sql Code Generator is now available with Dresden OCL.
     
 * Some modifications of the pivot model were done.
   - MultiplicityElements are now removed. Multiple elements are now adapted to 
@@ -31,7 +33,7 @@ Release 3.0 (planned for September, 9th, 2010)
   - The Interpreter now supports interpretation of recursive operations.
   - The comparison of nested collections should now work correctly.
   
-* Some bugs in Ocl22Java were fixed.
+* Some bugs in Ocl2Java were fixed.
   - Invalid literals are now transformed into the right working Java code.
   - OclAny.oclIsInvalid() is now transformed into working Java code.
   - OclAny.oclIsKindOf() is now transformed into working Java code.
