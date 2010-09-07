@@ -182,6 +182,14 @@ permanent authorization for you to choose that version for the
 Library.
    </license>
 
+   <includes
+         id="tudresden.ocl20.feature.core"
+         version="0.0.0"/>
+
+   <includes
+         id="tudresden.ocl20.feature.metamodels"
+         version="0.0.0"/>
+
    <requires>
       <import plugin="org.eclipse.core.runtime"/>
       <import plugin="tudresden.ocl20.logging"/>
@@ -220,6 +228,20 @@ Library.
 
    <plugin
          id="tudresden.ocl20.pivot.tools.template.test"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="tudresden.ocl20.pivot.tools.transformation"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="tudresden.ocl20.pivot.tools.transformation.test"
          download-size="0"
          install-size="0"
          version="0.0.0"

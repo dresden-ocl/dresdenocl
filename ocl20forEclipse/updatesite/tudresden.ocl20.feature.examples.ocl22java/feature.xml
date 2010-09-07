@@ -183,6 +183,10 @@ permanent authorization for you to choose that version for the
 Library.
    </license>
 
+   <includes
+         id="tudresden.ocl20.feature.codegen"
+         version="0.0.0"/>
+
    <requires>
       <import plugin="org.aspectj.runtime"/>
       <import plugin="org.junit4" version="4.0.0" match="greaterOrEqual"/>
