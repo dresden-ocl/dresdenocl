@@ -32,7 +32,9 @@ Release 3.0 (planned for September, 9th, 2010)
   - The comparison of nested collections should now work correctly.
   
 * Some bugs in Ocl22Java were fixed.
+  - Invalid literals are now transformed into the right working Java code.
   - OclAny.oclIsInvalid() is now transformed into working Java code.
+  - OclAny.oclIsKindOf() is now transformed into working Java code.
   - OclCollection.sum() is now transformed into working Java code. 
 
 GUI
