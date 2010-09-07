@@ -21,7 +21,8 @@ public privileged aspect DefAspect17 {
     /**
      * <p>Defines the method testBooleanAnd01(Boolean source, Boolean arg01) defined by the constraint
      * <code>context Class1
-     *       def: testBooleanAnd01 = source[].and( arg01[])</code></p>
+     *       def: testBooleanAnd01(source: Boolean, arg01: Boolean): Boolean =
+    source and arg01</code></p>
      */
     Boolean around(testpackage.Class1 aClass, Boolean source, Boolean arg01): testBooleanAnd01Caller(aClass, source, arg01) {
         return (source && arg01);

@@ -21,7 +21,9 @@ public privileged aspect DefAspect6 {
     /**
      * <p>Defines the method testBagAsSequence(java.util.List<Object> source) defined by the constraint
      * <code>context Class1
-     *       def: testBagAsSequence = source[].asSequence()</code></p>
+     *       def: testBagAsSequence(source: Bag(OclAny)): 
+      Sequence(OclAny) =
+    source ->asSequence()</code></p>
      */
     java.util.List<Object> around(testpackage.Class1 aClass, java.util.List<Object> source): testBagAsSequenceCaller(aClass, source) {
         return tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclBags.asSequence(source);

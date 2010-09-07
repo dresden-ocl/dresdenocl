@@ -12,18 +12,19 @@ public privileged aspect DefAspect59 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testOclAnyOclType(Object source)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testOclIsTypeOf01(testpackage.Class1 source, Class<?> arg01)}.</p>
      */
-    protected pointcut testOclAnyOclTypeCaller(testpackage.Class1 aClass, Object source):
-    	call(* testpackage.Class1.testOclAnyOclType(Object))
-    	&& target(aClass) && args(source);
+    protected pointcut testOclIsTypeOf01Caller(testpackage.Class1 aClass, testpackage.Class1 source, Class<?> arg01):
+    	call(* testpackage.Class1.testOclIsTypeOf01(testpackage.Class1, Class<?>))
+    	&& target(aClass) && args(source, arg01);
     
     /**
-     * <p>Defines the method testOclAnyOclType(Object source) defined by the constraint
+     * <p>Defines the method testOclIsTypeOf01(testpackage.Class1 source, Class<?> arg01) defined by the constraint
      * <code>context Class1
-     *       def: testOclAnyOclType = source[].oclType()</code></p>
+     *       def: testOclIsTypeOf01(source: Class1, arg01: OclType): Boolean =
+    source.oclIsTypeOf(arg01)</code></p>
      */
-    Class around(testpackage.Class1 aClass, Object source): testOclAnyOclTypeCaller(aClass, source) {
-        return source.getClass();
+    Boolean around(testpackage.Class1 aClass, testpackage.Class1 source, Class<?> arg01): testOclIsTypeOf01Caller(aClass, source, arg01) {
+        return source.getClass().getCanonicalName().equals(arg01.getCanonicalName());
     }
 }

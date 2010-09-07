@@ -1,0 +1,8 @@
+package testpackage
+
+context Class1
+def: testLetExp01: Integer =
+let senseOfLife = 42
+in senseOfLife
+
+endpackage

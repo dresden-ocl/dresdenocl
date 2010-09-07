@@ -12,18 +12,19 @@ public privileged aspect DefAspect98 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testSequenceFlatten(java.util.List<Object> source)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testSequenceExcluding01(java.util.List<Object> source, Object arg01)}.</p>
      */
-    protected pointcut testSequenceFlattenCaller(testpackage.Class1 aClass, java.util.List<Object> source):
-    	call(* testpackage.Class1.testSequenceFlatten(java.util.List<Object>))
-    	&& target(aClass) && args(source);
+    protected pointcut testSequenceExcluding01Caller(testpackage.Class1 aClass, java.util.List<Object> source, Object arg01):
+    	call(* testpackage.Class1.testSequenceExcluding01(java.util.List<Object>, Object))
+    	&& target(aClass) && args(source, arg01);
     
     /**
-     * <p>Defines the method testSequenceFlatten(java.util.List<Object> source) defined by the constraint
+     * <p>Defines the method testSequenceExcluding01(java.util.List<Object> source, Object arg01) defined by the constraint
      * <code>context Class1
-     *       def: testSequenceFlatten = source[].flatten()</code></p>
+     *       def: testSequenceExcluding01(source: Sequence(OclAny), arg01: OclAny): Sequence(OclAny) =
+    source ->excluding(arg01)</code></p>
      */
-    java.util.List<Object> around(testpackage.Class1 aClass, java.util.List<Object> source): testSequenceFlattenCaller(aClass, source) {
-        return (java.util.List<Object>) tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclSequences.flatten(source);
+    java.util.List<Object> around(testpackage.Class1 aClass, java.util.List<Object> source, Object arg01): testSequenceExcluding01Caller(aClass, source, arg01) {
+        return tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclSequences.excluding(source, arg01);
     }
 }

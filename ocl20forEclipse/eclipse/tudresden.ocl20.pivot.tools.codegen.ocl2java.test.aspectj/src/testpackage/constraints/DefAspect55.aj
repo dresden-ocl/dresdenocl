@@ -21,7 +21,8 @@ public privileged aspect DefAspect55 {
     /**
      * <p>Defines the method testOclAsType01(testpackage.Class1 source) defined by the constraint
      * <code>context Class1
-     *       def: testOclAsType01 = source[].oclAsType( Class1[])</code></p>
+     *       def: testOclAsType01(source: Class1): Class1 =
+    source.oclAsType(Class1)</code></p>
      */
     testpackage.Class1 around(testpackage.Class1 aClass, testpackage.Class1 source): testOclAsType01Caller(aClass, source) {
         return ((testpackage.Class1) source);

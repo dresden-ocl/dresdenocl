@@ -12,18 +12,19 @@ public privileged aspect DefAspect75 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testRealFloor01(Float source)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testRealAbs01(Float source)}.</p>
      */
-    protected pointcut testRealFloor01Caller(testpackage.Class1 aClass, Float source):
-    	call(* testpackage.Class1.testRealFloor01(Float))
+    protected pointcut testRealAbs01Caller(testpackage.Class1 aClass, Float source):
+    	call(* testpackage.Class1.testRealAbs01(Float))
     	&& target(aClass) && args(source);
     
     /**
-     * <p>Defines the method testRealFloor01(Float source) defined by the constraint
+     * <p>Defines the method testRealAbs01(Float source) defined by the constraint
      * <code>context Class1
-     *       def: testRealFloor01 = source[].floor()</code></p>
+     *       def: testRealAbs01(source: Real): Real =
+    source.abs()</code></p>
      */
-    Integer around(testpackage.Class1 aClass, Float source): testRealFloor01Caller(aClass, source) {
-        return (new Integer(new Double(java.lang.Math.floor(source)).intValue()));
+    Float around(testpackage.Class1 aClass, Float source): testRealAbs01Caller(aClass, source) {
+        return java.lang.Math.abs(source);
     }
 }

@@ -29,7 +29,7 @@ public privileged aspect PostAspect4 {
     /**
      * <p>Checks a postcondition for the operation {@link Class1#postOperation03()} defined by the constraint
      * <code>context Class1::postOperation03() : testpackage.Class1
-     *       post: result[].oclIsNew()</code></p>
+     *       post testOclIsNew: result.oclIsNew()</code></p>
      */
     testpackage.Class1 around(testpackage.Class1 aClass): postOperation03Caller(aClass) {
         /* Disable this constraint for subclasses of Class1. */

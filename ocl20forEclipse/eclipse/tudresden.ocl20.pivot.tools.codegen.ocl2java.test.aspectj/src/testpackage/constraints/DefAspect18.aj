@@ -21,7 +21,8 @@ public privileged aspect DefAspect18 {
     /**
      * <p>Defines the method testBooleanImplies01(Boolean source, Boolean arg01) defined by the constraint
      * <code>context Class1
-     *       def: testBooleanImplies01 = source[].implies( arg01[])</code></p>
+     *       def: testBooleanImplies01(source: Boolean, arg01: Boolean): Boolean =
+    source implies arg01</code></p>
      */
     Boolean around(testpackage.Class1 aClass, Boolean source, Boolean arg01): testBooleanImplies01Caller(aClass, source, arg01) {
         return (!source || arg01);

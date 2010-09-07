@@ -21,7 +21,8 @@ public privileged aspect DefAspect19 {
     /**
      * <p>Defines the method testBooleanNot01(Boolean source) defined by the constraint
      * <code>context Class1
-     *       def: testBooleanNot01 = source[].not()</code></p>
+     *       def: testBooleanNot01(source: Boolean): Boolean =
+    not source</code></p>
      */
     Boolean around(testpackage.Class1 aClass, Boolean source): testBooleanNot01Caller(aClass, source) {
         return !source;

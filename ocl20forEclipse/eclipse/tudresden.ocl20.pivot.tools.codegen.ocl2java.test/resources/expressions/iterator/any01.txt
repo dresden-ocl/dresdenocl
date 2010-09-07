@@ -1,0 +1,19 @@
+java.util.HashSet<Integer> collection1;
+collection1 = new java.util.HashSet<Integer>();
+
+collection1.add(new Integer(1));
+collection1.add(new Integer(2));
+collection1.add(new Integer(3));
+Integer result1;
+result1 = null;
+
+/* Iterator Any: Iterate through the elements and return one element that fulfills the condition. */
+for (Integer i : collection1) {
+    if (((Object) i).equals(new Integer(2))) {
+        result1 = i;
+        break;
+    }
+    // no else
+}
+
+result1

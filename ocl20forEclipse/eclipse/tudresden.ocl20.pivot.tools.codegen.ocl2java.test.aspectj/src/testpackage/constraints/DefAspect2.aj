@@ -21,7 +21,7 @@ public privileged aspect DefAspect2 {
     /**
      * <p>Defines the method defOperation01() defined by the constraint
      * <code>context Class1
-     *       def: defOperation01 = 42</code></p>
+     *       def: defOperation01(): Integer = 42</code></p>
      */
     Integer around(testpackage.Class1 aClass): defOperation01Caller(aClass) {
         return new Integer(42);

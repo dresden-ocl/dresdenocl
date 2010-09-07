@@ -12,18 +12,19 @@ public privileged aspect DefAspect130 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testStringToBoolean(String source)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testStringSize01(String source)}.</p>
      */
-    protected pointcut testStringToBooleanCaller(testpackage.Class1 aClass, String source):
-    	call(* testpackage.Class1.testStringToBoolean(String))
+    protected pointcut testStringSize01Caller(testpackage.Class1 aClass, String source):
+    	call(* testpackage.Class1.testStringSize01(String))
     	&& target(aClass) && args(source);
     
     /**
-     * <p>Defines the method testStringToBoolean(String source) defined by the constraint
+     * <p>Defines the method testStringSize01(String source) defined by the constraint
      * <code>context Class1
-     *       def: testStringToBoolean = source[].toBoolean()</code></p>
+     *       def: testStringSize01(source: String): Integer =
+    source.size()</code></p>
      */
-    Boolean around(testpackage.Class1 aClass, String source): testStringToBooleanCaller(aClass, source) {
-        return Boolean.parseBoolean(source);
+    Integer around(testpackage.Class1 aClass, String source): testStringSize01Caller(aClass, source) {
+        return source.length();
     }
 }

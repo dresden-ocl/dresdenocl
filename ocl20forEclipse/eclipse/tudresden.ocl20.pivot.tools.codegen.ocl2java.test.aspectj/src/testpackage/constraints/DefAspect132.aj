@@ -12,18 +12,19 @@ public privileged aspect DefAspect132 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testStringToUpperCase(String source)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testStringToBoolean(String source)}.</p>
      */
-    protected pointcut testStringToUpperCaseCaller(testpackage.Class1 aClass, String source):
-    	call(* testpackage.Class1.testStringToUpperCase(String))
+    protected pointcut testStringToBooleanCaller(testpackage.Class1 aClass, String source):
+    	call(* testpackage.Class1.testStringToBoolean(String))
     	&& target(aClass) && args(source);
     
     /**
-     * <p>Defines the method testStringToUpperCase(String source) defined by the constraint
+     * <p>Defines the method testStringToBoolean(String source) defined by the constraint
      * <code>context Class1
-     *       def: testStringToUpperCase = source[].toUpperCase()</code></p>
+     *       def: testStringToBoolean(source: String): Boolean =
+    source.toBoolean()</code></p>
      */
-    String around(testpackage.Class1 aClass, String source): testStringToUpperCaseCaller(aClass, source) {
-        return source.toUpperCase();
+    Boolean around(testpackage.Class1 aClass, String source): testStringToBooleanCaller(aClass, source) {
+        return Boolean.parseBoolean(source);
     }
 }

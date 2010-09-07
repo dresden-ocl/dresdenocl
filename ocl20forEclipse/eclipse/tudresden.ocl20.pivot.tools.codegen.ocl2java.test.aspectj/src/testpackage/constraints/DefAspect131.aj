@@ -12,18 +12,19 @@ public privileged aspect DefAspect131 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testStringToInteger(String source)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testStringSubstring01(String source, Integer arg01, Integer arg02)}.</p>
      */
-    protected pointcut testStringToIntegerCaller(testpackage.Class1 aClass, String source):
-    	call(* testpackage.Class1.testStringToInteger(String))
-    	&& target(aClass) && args(source);
+    protected pointcut testStringSubstring01Caller(testpackage.Class1 aClass, String source, Integer arg01, Integer arg02):
+    	call(* testpackage.Class1.testStringSubstring01(String, Integer, Integer))
+    	&& target(aClass) && args(source, arg01, arg02);
     
     /**
-     * <p>Defines the method testStringToInteger(String source) defined by the constraint
+     * <p>Defines the method testStringSubstring01(String source, Integer arg01, Integer arg02) defined by the constraint
      * <code>context Class1
-     *       def: testStringToInteger = source[].toInteger()</code></p>
+     *       def: testStringSubstring01(source: String, arg01: Integer, arg02: Integer): String =
+    source.substring(arg01, arg02)</code></p>
      */
-    Integer around(testpackage.Class1 aClass, String source): testStringToIntegerCaller(aClass, source) {
-        return Integer.parseInt(source);
+    String around(testpackage.Class1 aClass, String source, Integer arg01, Integer arg02): testStringSubstring01Caller(aClass, source, arg01, arg02) {
+        return source.substring(arg01 - 1, arg02);
     }
 }

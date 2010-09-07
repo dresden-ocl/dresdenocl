@@ -1,0 +1,7 @@
+package testpackage
+
+context Class1
+def: testOperationCallExp01: Integer =
+self.getInteger()
+
+endpackage

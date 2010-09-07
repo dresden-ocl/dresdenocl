@@ -518,6 +518,24 @@ public class ExtendedClass1 extends Object {
      *A method signature implemented by an aspect.
      *</p>
      */
+    public Boolean testOclIsKindOf01(testpackage.Class1 source, Class<?> arg01) {
+        return null;
+    }
+
+    /**
+     *<p>
+     *A method signature implemented by an aspect.
+     *</p>
+     */
+    public Boolean testOclIsTypeOf01(testpackage.Class1 source, Class<?> arg01) {
+        return null;
+    }
+
+    /**
+     *<p>
+     *A method signature implemented by an aspect.
+     *</p>
+     */
     public Boolean testOclIsUndefined01(testpackage.Class1 source) {
         return null;
     }
@@ -527,7 +545,7 @@ public class ExtendedClass1 extends Object {
      *A method signature implemented by an aspect.
      *</p>
      */
-    public Class testOclAnyOclType(Object source) {
+    public Class<?> testOclAnyOclType(Object source) {
         return null;
     }
 

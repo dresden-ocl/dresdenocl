@@ -12,18 +12,19 @@ public privileged aspect DefAspect58 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testOclIsUndefined01(testpackage.Class1 source)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testOclIsKindOf01(testpackage.Class1 source, Class<?> arg01)}.</p>
      */
-    protected pointcut testOclIsUndefined01Caller(testpackage.Class1 aClass, testpackage.Class1 source):
-    	call(* testpackage.Class1.testOclIsUndefined01(testpackage.Class1))
-    	&& target(aClass) && args(source);
+    protected pointcut testOclIsKindOf01Caller(testpackage.Class1 aClass, testpackage.Class1 source, Class<?> arg01):
+    	call(* testpackage.Class1.testOclIsKindOf01(testpackage.Class1, Class<?>))
+    	&& target(aClass) && args(source, arg01);
     
     /**
-     * <p>Defines the method testOclIsUndefined01(testpackage.Class1 source) defined by the constraint
+     * <p>Defines the method testOclIsKindOf01(testpackage.Class1 source, Class<?> arg01) defined by the constraint
      * <code>context Class1
-     *       def: testOclIsUndefined01 = source[].oclIsUndefined()</code></p>
+     *       def: testOclIsKindOf01(source: Class1, arg01: OclType): Boolean =
+    source.oclIsKindOf(arg01)</code></p>
      */
-    Boolean around(testpackage.Class1 aClass, testpackage.Class1 source): testOclIsUndefined01Caller(aClass, source) {
-        return (source == null);
+    Boolean around(testpackage.Class1 aClass, testpackage.Class1 source, Class<?> arg01): testOclIsKindOf01Caller(aClass, source, arg01) {
+        return (arg01.isAssignableFrom(source.getClass()));
     }
 }

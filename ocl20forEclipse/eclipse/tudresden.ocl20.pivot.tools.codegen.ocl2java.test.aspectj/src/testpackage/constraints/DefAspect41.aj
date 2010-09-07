@@ -21,7 +21,8 @@ public privileged aspect DefAspect41 {
     /**
      * <p>Defines the method testCollectionSum(java.util.Collection<Integer> source) defined by the constraint
      * <code>context Class1
-     *       def: testCollectionSum = source[].sum()</code></p>
+     *       def: testCollectionSum(source: Collection(Integer)): Integer =
+    source ->sum()</code></p>
      */
     Integer around(testpackage.Class1 aClass, java.util.Collection<Integer> source): testCollectionSumCaller(aClass, source) {
         return new Integer(tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclCollections.sum(source).intValue());

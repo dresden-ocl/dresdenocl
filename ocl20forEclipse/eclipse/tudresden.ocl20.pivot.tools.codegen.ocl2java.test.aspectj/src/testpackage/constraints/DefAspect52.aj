@@ -42,7 +42,8 @@ public privileged aspect DefAspect52 {
     /**
      * <p>Defines the method testOclAnyAllInstances() defined by the constraint
      * <code>context Class1
-     *       def: testOclAnyAllInstances = Class1[].allInstances()</code></p>
+     *       def: testOclAnyAllInstances(): Set(Class1) =
+    Class1.allInstances()</code></p>
      */
     java.util.Set<testpackage.Class1> around(testpackage.Class1 aClass): testOclAnyAllInstancesCaller(aClass) {
         return (new java.util.HashSet<testpackage.Class1>((java.util.Set<testpackage.Class1>) allInstances.get(testpackage.Class1.class.getCanonicalName()).keySet()));

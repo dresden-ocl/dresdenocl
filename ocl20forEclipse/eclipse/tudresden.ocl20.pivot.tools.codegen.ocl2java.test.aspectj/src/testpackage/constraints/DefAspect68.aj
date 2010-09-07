@@ -12,18 +12,19 @@ public privileged aspect DefAspect68 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testOrderedSetInsertAt(java.util.List<Object> source, Integer arg01, Object arg02)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testOrderedSetFirst(java.util.List<Object> source)}.</p>
      */
-    protected pointcut testOrderedSetInsertAtCaller(testpackage.Class1 aClass, java.util.List<Object> source, Integer arg01, Object arg02):
-    	call(* testpackage.Class1.testOrderedSetInsertAt(java.util.List<Object>, Integer, Object))
-    	&& target(aClass) && args(source, arg01, arg02);
+    protected pointcut testOrderedSetFirstCaller(testpackage.Class1 aClass, java.util.List<Object> source):
+    	call(* testpackage.Class1.testOrderedSetFirst(java.util.List<Object>))
+    	&& target(aClass) && args(source);
     
     /**
-     * <p>Defines the method testOrderedSetInsertAt(java.util.List<Object> source, Integer arg01, Object arg02) defined by the constraint
+     * <p>Defines the method testOrderedSetFirst(java.util.List<Object> source) defined by the constraint
      * <code>context Class1
-     *       def: testOrderedSetInsertAt = source[].insertAt( arg01[], arg02[])</code></p>
+     *       def: testOrderedSetFirst(source: OrderedSet(OclAny)): OclAny =
+    source ->first()</code></p>
      */
-    java.util.List<Object> around(testpackage.Class1 aClass, java.util.List<Object> source, Integer arg01, Object arg02): testOrderedSetInsertAtCaller(aClass, source, arg01, arg02) {
-        return tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclOrderedSets.insertAt(source, arg01, arg02);
+    Object around(testpackage.Class1 aClass, java.util.List<Object> source): testOrderedSetFirstCaller(aClass, source) {
+        return tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclOrderedSets.first(source);
     }
 }

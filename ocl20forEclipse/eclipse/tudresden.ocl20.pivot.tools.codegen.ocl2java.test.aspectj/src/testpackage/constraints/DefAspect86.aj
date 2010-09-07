@@ -12,18 +12,19 @@ public privileged aspect DefAspect86 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testRealRound01(Float source)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testRealNegation01(Float source)}.</p>
      */
-    protected pointcut testRealRound01Caller(testpackage.Class1 aClass, Float source):
-    	call(* testpackage.Class1.testRealRound01(Float))
+    protected pointcut testRealNegation01Caller(testpackage.Class1 aClass, Float source):
+    	call(* testpackage.Class1.testRealNegation01(Float))
     	&& target(aClass) && args(source);
     
     /**
-     * <p>Defines the method testRealRound01(Float source) defined by the constraint
+     * <p>Defines the method testRealNegation01(Float source) defined by the constraint
      * <code>context Class1
-     *       def: testRealRound01 = source[].round()</code></p>
+     *       def: testRealNegation01(source: Real): Real =
+    - source</code></p>
      */
-    Integer around(testpackage.Class1 aClass, Float source): testRealRound01Caller(aClass, source) {
-        return java.lang.Math.round(source);
+    Float around(testpackage.Class1 aClass, Float source): testRealNegation01Caller(aClass, source) {
+        return -(source);
     }
 }

@@ -21,7 +21,8 @@ public privileged aspect DefAspect51 {
     /**
      * <p>Defines the method testIntegerToString(Integer source) defined by the constraint
      * <code>context Class1
-     *       def: testIntegerToString = source[].toString()</code></p>
+     *       def: testIntegerToString(source: Integer): String =
+    source.toString()</code></p>
      */
     String around(testpackage.Class1 aClass, Integer source): testIntegerToStringCaller(aClass, source) {
         return source.toString();

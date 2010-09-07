@@ -38,7 +38,11 @@ import tudresden.ocl20.pivot.tools.codegen.ocl2java.Ocl2JavaPlugin;
 @Suite.SuiteClasses({ TestBooleanLiteralExp.class,
 		TestCollectionLiteralExp.class, TestEnumerationLiteralExp.class,
 		TestIfExp.class, TestIntegerLiteralExp.class,
-		TestInvalidLiteralExp.class })
+		TestInvalidLiteralExp.class, TestIterateExp.class,
+		TestIteratorExp.class, TestLetExp.class, TestOperationCallExp.class,
+		TestPropertyCallExp.class, TestRealLiteralExp.class,
+		TestStringLiteralExp.class, TestTupleLiteralExp.class,
+		TestTypeLiteralExp.class, TestUndefinedLiteralExp.class })
 public class AllExpressionsTests {
 	/*
 	 * This class remains completely empty, being used only as a holder for the

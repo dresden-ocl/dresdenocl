@@ -21,7 +21,8 @@ public privileged aspect DefAspect22 {
     /**
      * <p>Defines the method testBooleanXor01(Boolean source, Boolean arg01) defined by the constraint
      * <code>context Class1
-     *       def: testBooleanXor01 = source[].xor( arg01[])</code></p>
+     *       def: testBooleanXor01(source: Boolean, arg01: Boolean): Boolean =
+    source xor arg01</code></p>
      */
     Boolean around(testpackage.Class1 aClass, Boolean source, Boolean arg01): testBooleanXor01Caller(aClass, source, arg01) {
         return (source ^ arg01);

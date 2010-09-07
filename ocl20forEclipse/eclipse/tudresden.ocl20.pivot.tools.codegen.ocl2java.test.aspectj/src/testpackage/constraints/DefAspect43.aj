@@ -21,7 +21,8 @@ public privileged aspect DefAspect43 {
     /**
      * <p>Defines the method testIntegerDivide01(Integer source, Integer arg01) defined by the constraint
      * <code>context Class1
-     *       def: testIntegerDivide01 = source[]./( arg01[])</code></p>
+     *       def: testIntegerDivide01(source: Integer, arg01: Integer): Real =
+    source / arg01</code></p>
      */
     Float around(testpackage.Class1 aClass, Integer source, Integer arg01): testIntegerDivide01Caller(aClass, source, arg01) {
         return (new Float (source) / new Float (arg01));

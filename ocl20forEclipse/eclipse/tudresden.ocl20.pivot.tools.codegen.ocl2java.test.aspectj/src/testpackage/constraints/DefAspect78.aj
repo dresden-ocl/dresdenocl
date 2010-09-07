@@ -12,18 +12,19 @@ public privileged aspect DefAspect78 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testRealLessThan01(Float source, Float arg01)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testRealGreaterThan01(Float source, Float arg01)}.</p>
      */
-    protected pointcut testRealLessThan01Caller(testpackage.Class1 aClass, Float source, Float arg01):
-    	call(* testpackage.Class1.testRealLessThan01(Float, Float))
+    protected pointcut testRealGreaterThan01Caller(testpackage.Class1 aClass, Float source, Float arg01):
+    	call(* testpackage.Class1.testRealGreaterThan01(Float, Float))
     	&& target(aClass) && args(source, arg01);
     
     /**
-     * <p>Defines the method testRealLessThan01(Float source, Float arg01) defined by the constraint
+     * <p>Defines the method testRealGreaterThan01(Float source, Float arg01) defined by the constraint
      * <code>context Class1
-     *       def: testRealLessThan01 = source[].<( arg01[])</code></p>
+     *       def: testRealGreaterThan01(source: Real, arg01: Real): Boolean =
+    source > arg01</code></p>
      */
-    Boolean around(testpackage.Class1 aClass, Float source, Float arg01): testRealLessThan01Caller(aClass, source, arg01) {
-        return (source < arg01);
+    Boolean around(testpackage.Class1 aClass, Float source, Float arg01): testRealGreaterThan01Caller(aClass, source, arg01) {
+        return (source > arg01);
     }
 }

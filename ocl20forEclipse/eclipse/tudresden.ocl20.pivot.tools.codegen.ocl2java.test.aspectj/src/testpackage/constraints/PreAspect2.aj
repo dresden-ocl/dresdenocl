@@ -9,17 +9,17 @@ package testpackage.constraints;
 public privileged aspect PreAspect2 {
 
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#Class1(Integer anInt)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#Class1(Integer in1)}.</p>
      */
-    protected pointcut Class1Caller(Integer anInt):
-    	execution(testpackage.Class1.new(Integer)) && args(anInt);
+    protected pointcut Class1Caller(Integer in1):
+    	execution(testpackage.Class1.new(Integer)) && args(in1);
     
     /**
-     * <p>Checks a precondition for the {@link Class1#Class1(, Integer anInt)} defined by the constraint
-     * <code>context Class1::Class1(anInt: Integer) : 
-     *       pre: anInt[].oclIsUndefined().not()</code></p>
+     * <p>Checks a precondition for the {@link Class1#Class1(, Integer in1)} defined by the constraint
+     * <code>context Class1::Class1(in1: Integer) : 
+     *       pre: not anInt.oclIsUndefined()</code></p>
      */
-    before(Integer anInt): Class1Caller(anInt) {
+    before(Integer in1): Class1Caller(in1) {
         if (!!(anInt == null)) {
         	// TODO Auto-generated code executed when constraint is violated.
         	throw new RuntimeException("Error: Constraint was violated.");

@@ -12,18 +12,19 @@ public privileged aspect DefAspect84 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testRealNegation01(Float source)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testRealMinus01(Float source, Float arg01)}.</p>
      */
-    protected pointcut testRealNegation01Caller(testpackage.Class1 aClass, Float source):
-    	call(* testpackage.Class1.testRealNegation01(Float))
-    	&& target(aClass) && args(source);
+    protected pointcut testRealMinus01Caller(testpackage.Class1 aClass, Float source, Float arg01):
+    	call(* testpackage.Class1.testRealMinus01(Float, Float))
+    	&& target(aClass) && args(source, arg01);
     
     /**
-     * <p>Defines the method testRealNegation01(Float source) defined by the constraint
+     * <p>Defines the method testRealMinus01(Float source, Float arg01) defined by the constraint
      * <code>context Class1
-     *       def: testRealNegation01 = source[].-()</code></p>
+     *       def: testRealMinus01(source: Real, arg01: Real): Real =
+    source - arg01</code></p>
      */
-    Float around(testpackage.Class1 aClass, Float source): testRealNegation01Caller(aClass, source) {
-        return -(source);
+    Float around(testpackage.Class1 aClass, Float source, Float arg01): testRealMinus01Caller(aClass, source, arg01) {
+        return (source - arg01);
     }
 }

@@ -21,7 +21,8 @@ public privileged aspect DefAspect53 {
     /**
      * <p>Defines the method testOclAnyEquals01(testpackage.Class1 source, testpackage.Class1 arg01) defined by the constraint
      * <code>context Class1
-     *       def: testOclAnyEquals01 = source[].=( arg01[])</code></p>
+     *       def: testOclAnyEquals01(source: Class1, arg01: Class1): Boolean =
+    source = arg01</code></p>
      */
     Boolean around(testpackage.Class1 aClass, testpackage.Class1 source, testpackage.Class1 arg01): testOclAnyEquals01Caller(aClass, source, arg01) {
         return source.equals(arg01);

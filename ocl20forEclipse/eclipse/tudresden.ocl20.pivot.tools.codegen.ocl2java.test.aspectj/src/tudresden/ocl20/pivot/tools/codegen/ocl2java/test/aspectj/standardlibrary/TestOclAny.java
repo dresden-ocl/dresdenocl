@@ -27,6 +27,7 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 import testpackage.Class1;
+import testpackage.Class2;
 
 /**
  * <p>
@@ -118,6 +119,129 @@ public class TestOclAny {
 		class1 = new Class1();
 
 		class1.testOclAsType01(class1);
+	}
+
+	/**
+	 * <p>
+	 * Tests the generated code for the special OCL operation
+	 * <code>OclAny.oclIsKindOf(OclType)</code> .
+	 * </p>
+	 */
+	@Test
+	public void testOclIsKindOf01_1() {
+	
+		Class1 class1;
+		class1 = new Class1();
+	
+		assertTrue(class1.testOclIsKindOf01(class1, Class1.class));
+	}
+
+	/**
+	 * <p>
+	 * Tests the generated code for the special OCL operation
+	 * <code>OclAny.oclIsKindOf(OclType)</code> .
+	 * </p>
+	 */
+	@Test
+	public void testOclIsKindOf01_2() {
+	
+		Class1 class1;
+		class1 = new Class1();
+	
+		assertFalse(class1.testOclIsKindOf01(class1, Class2.class));
+
+	}
+
+	/**
+	 * <p>
+	 * Tests the generated code for the special OCL operation
+	 * <code>OclAny.oclIsOf(OclType)</code> .
+	 * </p>
+	 */
+	@Test
+	public void testOclIsKindOf01_3() {
+	
+		Class2 class2;
+		class2 = new Class2();
+	
+		assertTrue(class2.testOclIsKindOf01(class2, Class1.class));
+	}
+
+	/**
+	 * <p>
+	 * Tests the generated code for the special OCL operation
+	 * <code>OclAny.oclIsKindOf(OclType)</code> .
+	 * </p>
+	 */
+	@Test
+	public void testOclIsKindOf01_4() {
+	
+		Class2 class2;
+		class2 = new Class2();
+	
+		assertTrue(class2.testOclIsKindOf01(class2, Class2.class));
+
+	}
+
+	/**
+	 * <p>
+	 * Tests the generated code for the special OCL operation
+	 * <code>OclAny.oclIsTypeOf(OclType)</code> .
+	 * </p>
+	 */
+	@Test
+	public void testOclIsTypeOf01_1() {
+	
+		Class1 class1;
+		class1 = new Class1();
+	
+		assertTrue(class1.testOclIsTypeOf01(class1, Class1.class));
+	}
+
+	/**
+	 * <p>
+	 * Tests the generated code for the special OCL operation
+	 * <code>OclAny.oclIsTypeOf(OclType)</code> .
+	 * </p>
+	 */
+	@Test
+	public void testOclIsTypeOf01_2() {
+	
+		Class1 class1;
+		class1 = new Class1();
+	
+		assertFalse(class1.testOclIsTypeOf01(class1, Class2.class));
+
+	}
+
+	/**
+	 * <p>
+	 * Tests the generated code for the special OCL operation
+	 * <code>OclAny.oclIsTypeOf(OclType)</code> .
+	 * </p>
+	 */
+	@Test
+	public void testOclIsTypeOf01_3() {
+	
+		Class2 class2;
+		class2 = new Class2();
+	
+		assertFalse(class2.testOclIsTypeOf01(class2, Class1.class));
+	}
+
+	/**
+	 * <p>
+	 * Tests the generated code for the special OCL operation
+	 * <code>OclAny.oclIsTypeOf(OclType)</code> .
+	 * </p>
+	 */
+	@Test
+	public void testOclIsTypeOf01_4() {
+	
+		Class2 class2;
+		class2 = new Class2();
+	
+		assertTrue(class2.testOclIsTypeOf01(class2, Class2.class));
 	}
 
 	/**

@@ -21,7 +21,8 @@ public privileged aspect DefAspect21 {
     /**
      * <p>Defines the method testBooleanToString(Boolean source) defined by the constraint
      * <code>context Class1
-     *       def: testBooleanToString = source[].toString()</code></p>
+     *       def: testBooleanToString(source: Boolean): String =
+    source.toString()</code></p>
      */
     String around(testpackage.Class1 aClass, Boolean source): testBooleanToStringCaller(aClass, source) {
         return source.toString();

@@ -1,0 +1,7 @@
+package testpackage
+
+context Class1
+def: testSortedByIteratorExp01 : OrderedSet(Integer) =
+OrderedSet{3, 2, 1}->sortedBy(i: Integer | i)
+
+endpackage

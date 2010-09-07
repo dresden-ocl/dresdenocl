@@ -12,18 +12,30 @@ public privileged aspect DefAspect125 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testStringEqualsIgnoreCase(String source, String arg01)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testStringCharacters(String source)}.</p>
      */
-    protected pointcut testStringEqualsIgnoreCaseCaller(testpackage.Class1 aClass, String source, String arg01):
-    	call(* testpackage.Class1.testStringEqualsIgnoreCase(String, String))
-    	&& target(aClass) && args(source, arg01);
+    protected pointcut testStringCharactersCaller(testpackage.Class1 aClass, String source):
+    	call(* testpackage.Class1.testStringCharacters(String))
+    	&& target(aClass) && args(source);
     
     /**
-     * <p>Defines the method testStringEqualsIgnoreCase(String source, String arg01) defined by the constraint
+     * <p>Defines the method testStringCharacters(String source) defined by the constraint
      * <code>context Class1
-     *       def: testStringEqualsIgnoreCase = source[].equalsIgnoreCase( arg01[])</code></p>
+     *       def: testStringCharacters(source: String): Sequence(String) =
+    source.characters()</code></p>
      */
-    Boolean around(testpackage.Class1 aClass, String source, String arg01): testStringEqualsIgnoreCaseCaller(aClass, source, arg01) {
-        return source.equalsIgnoreCase(arg01);
+    java.util.List<String> around(testpackage.Class1 aClass, String source): testStringCharactersCaller(aClass, source) {
+        java.util.List<String> result1;
+        result1 = new java.util.ArrayList<String>();
+        
+        /* Compute the result of a characters operation. */
+        for (String anElement1 : source.split("")) {
+            result1.add(anElement1);
+        }
+        
+        /* Remove the first element ''. */
+        result1.remove(tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclSequences.first(result1));
+    
+        return result1;
     }
 }

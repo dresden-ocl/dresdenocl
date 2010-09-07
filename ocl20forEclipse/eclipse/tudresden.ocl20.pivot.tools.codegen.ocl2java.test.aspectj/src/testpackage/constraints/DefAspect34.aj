@@ -21,7 +21,8 @@ public privileged aspect DefAspect34 {
     /**
      * <p>Defines the method testCollectionIsEmpty(java.util.Collection<Object> source) defined by the constraint
      * <code>context Class1
-     *       def: testCollectionIsEmpty = source[].isEmpty()</code></p>
+     *       def: testCollectionIsEmpty(source: Collection(OclAny)): Boolean =
+    source ->isEmpty()</code></p>
      */
     Boolean around(testpackage.Class1 aClass, java.util.Collection<Object> source): testCollectionIsEmptyCaller(aClass, source) {
         return tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclCollections.isEmpty(source);

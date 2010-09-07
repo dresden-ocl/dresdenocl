@@ -21,7 +21,8 @@ public privileged aspect DefAspect49 {
     /**
      * <p>Defines the method testIntegerNegation01(Integer source) defined by the constraint
      * <code>context Class1
-     *       def: testIntegerNegation01 = source[].-()</code></p>
+     *       def: testIntegerNegation01(source: Integer): Integer =
+    - source</code></p>
      */
     Integer around(testpackage.Class1 aClass, Integer source): testIntegerNegation01Caller(aClass, source) {
         return -(source);

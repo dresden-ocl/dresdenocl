@@ -21,7 +21,8 @@ public privileged aspect DefAspect57 {
     /**
      * <p>Defines the method testOclIsInvalid02() defined by the constraint
      * <code>context Class1
-     *       def: testOclIsInvalid02 = Sequence{}.first().oclIsInvalid()</code></p>
+     *       def: testOclIsInvalid02(): Boolean =
+    (Sequence { } ->first()).oclIsInvalid()</code></p>
      */
     Boolean around(testpackage.Class1 aClass): testOclIsInvalid02Caller(aClass) {
         java.util.ArrayList collection1;

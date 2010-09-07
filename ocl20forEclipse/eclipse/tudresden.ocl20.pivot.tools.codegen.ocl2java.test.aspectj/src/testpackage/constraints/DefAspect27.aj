@@ -21,7 +21,9 @@ public privileged aspect DefAspect27 {
     /**
      * <p>Defines the method testCollectionCount(java.util.Collection<Object> source, Object arg01) defined by the constraint
      * <code>context Class1
-     *       def: testCollectionCount = source[].count( arg01[])</code></p>
+     *       def: testCollectionCount(source: Collection(OclAny), arg01: OclAny): 
+      Integer =
+    source ->count(arg01)</code></p>
      */
     Integer around(testpackage.Class1 aClass, java.util.Collection<Object> source, Object arg01): testCollectionCountCaller(aClass, source, arg01) {
         return tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclCollections.count(source, arg01);

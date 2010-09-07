@@ -1,1 +1,1 @@
-(source instanceof arg01)
+(arg01.isAssignableFrom(source.getClass()))

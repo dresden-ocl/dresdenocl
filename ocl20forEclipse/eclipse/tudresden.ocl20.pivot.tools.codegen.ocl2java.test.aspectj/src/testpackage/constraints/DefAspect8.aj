@@ -21,7 +21,8 @@ public privileged aspect DefAspect8 {
     /**
      * <p>Defines the method testBagCount01(java.util.List<Object> source, Object arg01) defined by the constraint
      * <code>context Class1
-     *       def: testBagCount01 = source[].count( arg01[])</code></p>
+     *       def: testBagCount01(source: Bag(OclAny), arg01: OclAny): Integer =
+    source ->count(arg01)</code></p>
      */
     Integer around(testpackage.Class1 aClass, java.util.List<Object> source, Object arg01): testBagCount01Caller(aClass, source, arg01) {
         return tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclBags.count(source, arg01);

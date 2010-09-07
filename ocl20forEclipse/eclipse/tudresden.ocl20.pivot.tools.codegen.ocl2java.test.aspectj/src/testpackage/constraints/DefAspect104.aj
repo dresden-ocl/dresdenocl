@@ -12,18 +12,19 @@ public privileged aspect DefAspect104 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testSequenceReverse(java.util.List<Object> source)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testSequenceLast(java.util.List<Object> source)}.</p>
      */
-    protected pointcut testSequenceReverseCaller(testpackage.Class1 aClass, java.util.List<Object> source):
-    	call(* testpackage.Class1.testSequenceReverse(java.util.List<Object>))
+    protected pointcut testSequenceLastCaller(testpackage.Class1 aClass, java.util.List<Object> source):
+    	call(* testpackage.Class1.testSequenceLast(java.util.List<Object>))
     	&& target(aClass) && args(source);
     
     /**
-     * <p>Defines the method testSequenceReverse(java.util.List<Object> source) defined by the constraint
+     * <p>Defines the method testSequenceLast(java.util.List<Object> source) defined by the constraint
      * <code>context Class1
-     *       def: testSequenceReverse = source[].reverse()</code></p>
+     *       def: testSequenceLast(source: Sequence(OclAny)): OclAny =
+    source ->last()</code></p>
      */
-    java.util.List<Object> around(testpackage.Class1 aClass, java.util.List<Object> source): testSequenceReverseCaller(aClass, source) {
-        return tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclSequences.reverse(source);
+    Object around(testpackage.Class1 aClass, java.util.List<Object> source): testSequenceLastCaller(aClass, source) {
+        return tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclSequences.last(source);
     }
 }

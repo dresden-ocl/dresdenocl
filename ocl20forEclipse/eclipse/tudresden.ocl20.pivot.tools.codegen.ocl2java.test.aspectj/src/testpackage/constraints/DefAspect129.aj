@@ -12,18 +12,19 @@ public privileged aspect DefAspect129 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testStringSubstring01(String source, Integer arg01, Integer arg02)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testStringPlus(String source, String arg01)}.</p>
      */
-    protected pointcut testStringSubstring01Caller(testpackage.Class1 aClass, String source, Integer arg01, Integer arg02):
-    	call(* testpackage.Class1.testStringSubstring01(String, Integer, Integer))
-    	&& target(aClass) && args(source, arg01, arg02);
+    protected pointcut testStringPlusCaller(testpackage.Class1 aClass, String source, String arg01):
+    	call(* testpackage.Class1.testStringPlus(String, String))
+    	&& target(aClass) && args(source, arg01);
     
     /**
-     * <p>Defines the method testStringSubstring01(String source, Integer arg01, Integer arg02) defined by the constraint
+     * <p>Defines the method testStringPlus(String source, String arg01) defined by the constraint
      * <code>context Class1
-     *       def: testStringSubstring01 = source[].substring( arg01[], arg02[])</code></p>
+     *       def: testStringPlus(source: String, arg01: String): String =
+    source + arg01</code></p>
      */
-    String around(testpackage.Class1 aClass, String source, Integer arg01, Integer arg02): testStringSubstring01Caller(aClass, source, arg01, arg02) {
-        return source.substring(arg01 - 1, arg02);
+    String around(testpackage.Class1 aClass, String source, String arg01): testStringPlusCaller(aClass, source, arg01) {
+        return source.concat(arg01);
     }
 }

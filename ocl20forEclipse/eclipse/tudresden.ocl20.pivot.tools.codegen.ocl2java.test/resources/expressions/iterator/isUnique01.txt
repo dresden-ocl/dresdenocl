@@ -1,0 +1,23 @@
+java.util.HashSet<Integer> collection1;
+collection1 = new java.util.HashSet<Integer>();
+
+collection1.add(new Integer(1));
+collection1.add(new Integer(2));
+collection1.add(new Integer(3));
+java.util.Set<Integer> collection2;
+Boolean result1;
+
+collection2 = new java.util.Set<Integer>();
+result1 = true;
+
+/* Iterator IsUnique: Iterate and check, if all elements are unique. */
+for (Integer i : collection1) {
+    if (collection2.includes(i)) {
+        result1 = false;
+        break;
+    } else {
+        collection2.add(i);
+    }
+}
+
+result1

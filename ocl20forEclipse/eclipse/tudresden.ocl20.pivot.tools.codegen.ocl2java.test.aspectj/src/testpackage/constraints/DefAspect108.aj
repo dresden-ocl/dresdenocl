@@ -12,18 +12,19 @@ public privileged aspect DefAspect108 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testSetAsOrderedSet(java.util.Set<Object> source)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testSequenceUnion01(java.util.List<Object> source, java.util.List<Object> arg01)}.</p>
      */
-    protected pointcut testSetAsOrderedSetCaller(testpackage.Class1 aClass, java.util.Set<Object> source):
-    	call(* testpackage.Class1.testSetAsOrderedSet(java.util.Set<Object>))
-    	&& target(aClass) && args(source);
+    protected pointcut testSequenceUnion01Caller(testpackage.Class1 aClass, java.util.List<Object> source, java.util.List<Object> arg01):
+    	call(* testpackage.Class1.testSequenceUnion01(java.util.List<Object>, java.util.List<Object>))
+    	&& target(aClass) && args(source, arg01);
     
     /**
-     * <p>Defines the method testSetAsOrderedSet(java.util.Set<Object> source) defined by the constraint
+     * <p>Defines the method testSequenceUnion01(java.util.List<Object> source, java.util.List<Object> arg01) defined by the constraint
      * <code>context Class1
-     *       def: testSetAsOrderedSet = source[].asOrderedSet()</code></p>
+     *       def: testSequenceUnion01(source: Sequence(OclAny), arg01: Sequence(OclAny)): Sequence(OclAny) =
+    source ->union(arg01)</code></p>
      */
-    java.util.List<Object> around(testpackage.Class1 aClass, java.util.Set<Object> source): testSetAsOrderedSetCaller(aClass, source) {
-        return tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclSets.asOrderedSet(source);
+    java.util.List<Object> around(testpackage.Class1 aClass, java.util.List<Object> source, java.util.List<Object> arg01): testSequenceUnion01Caller(aClass, source, arg01) {
+        return tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclSequences.union(source, arg01);
     }
 }

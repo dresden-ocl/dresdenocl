@@ -12,18 +12,19 @@ public privileged aspect DefAspect60 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testOrderedSetAppend(java.util.List<Object> source, Object arg01)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testOclIsUndefined01(testpackage.Class1 source)}.</p>
      */
-    protected pointcut testOrderedSetAppendCaller(testpackage.Class1 aClass, java.util.List<Object> source, Object arg01):
-    	call(* testpackage.Class1.testOrderedSetAppend(java.util.List<Object>, Object))
-    	&& target(aClass) && args(source, arg01);
+    protected pointcut testOclIsUndefined01Caller(testpackage.Class1 aClass, testpackage.Class1 source):
+    	call(* testpackage.Class1.testOclIsUndefined01(testpackage.Class1))
+    	&& target(aClass) && args(source);
     
     /**
-     * <p>Defines the method testOrderedSetAppend(java.util.List<Object> source, Object arg01) defined by the constraint
+     * <p>Defines the method testOclIsUndefined01(testpackage.Class1 source) defined by the constraint
      * <code>context Class1
-     *       def: testOrderedSetAppend = source[].append( arg01[])</code></p>
+     *       def: testOclIsUndefined01(source: Class1): Boolean =
+    source.oclIsUndefined()</code></p>
      */
-    java.util.List<Object> around(testpackage.Class1 aClass, java.util.List<Object> source, Object arg01): testOrderedSetAppendCaller(aClass, source, arg01) {
-        return tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclOrderedSets.append(source, arg01);
+    Boolean around(testpackage.Class1 aClass, testpackage.Class1 source): testOclIsUndefined01Caller(aClass, source) {
+        return (source == null);
     }
 }

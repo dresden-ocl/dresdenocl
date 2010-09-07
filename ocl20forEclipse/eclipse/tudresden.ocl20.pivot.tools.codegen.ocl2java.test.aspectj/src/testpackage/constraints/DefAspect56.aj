@@ -21,7 +21,8 @@ public privileged aspect DefAspect56 {
     /**
      * <p>Defines the method testOclIsInvalid01() defined by the constraint
      * <code>context Class1
-     *       def: testOclIsInvalid01 = self[].oclIsInvalid()</code></p>
+     *       def: testOclIsInvalid01(): Boolean =
+    self.oclIsInvalid()</code></p>
      */
     Boolean around(testpackage.Class1 aClass): testOclIsInvalid01Caller(aClass) {
         Boolean result1;

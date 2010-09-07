@@ -21,7 +21,8 @@ public privileged aspect DefAspect44 {
     /**
      * <p>Defines the method testIntegerMax01(Integer source, Integer arg01) defined by the constraint
      * <code>context Class1
-     *       def: testIntegerMax01 = source[].max( arg01[])</code></p>
+     *       def: testIntegerMax01(source: Integer, arg01: Integer): Integer =
+    source.max(arg01)</code></p>
      */
     Integer around(testpackage.Class1 aClass, Integer source, Integer arg01): testIntegerMax01Caller(aClass, source, arg01) {
         return java.lang.Math.max(source, arg01);

@@ -21,7 +21,8 @@ public privileged aspect DefAspect42 {
     /**
      * <p>Defines the method testIntegerDiv01(Integer source, Integer arg01) defined by the constraint
      * <code>context Class1
-     *       def: testIntegerDiv01 = source[].div( arg01[])</code></p>
+     *       def: testIntegerDiv01(source: Integer, arg01: Integer): Integer =
+    source.div(arg01)</code></p>
      */
     Integer around(testpackage.Class1 aClass, Integer source, Integer arg01): testIntegerDiv01Caller(aClass, source, arg01) {
         return (source / arg01);

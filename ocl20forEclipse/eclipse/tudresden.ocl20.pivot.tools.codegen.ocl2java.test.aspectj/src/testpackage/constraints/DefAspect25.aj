@@ -21,7 +21,9 @@ public privileged aspect DefAspect25 {
     /**
      * <p>Defines the method testCollectionAsSequence(java.util.Collection<Object> source) defined by the constraint
      * <code>context Class1
-     *       def: testCollectionAsSequence = source[].asSequence()</code></p>
+     *       def: testCollectionAsSequence(source: Collection(OclAny)): 
+      Sequence(OclAny) =
+    source ->asSequence()</code></p>
      */
     java.util.List<Object> around(testpackage.Class1 aClass, java.util.Collection<Object> source): testCollectionAsSequenceCaller(aClass, source) {
         return tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclCollections.asSequence(source);

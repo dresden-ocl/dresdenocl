@@ -21,7 +21,8 @@ public privileged aspect DefAspect28 {
     /**
      * <p>Defines the method testCollectionEquals(java.util.Collection<Object> source, java.util.Collection<Object> arg01) defined by the constraint
      * <code>context Class1
-     *       def: testCollectionEquals = source[].=( arg01[])</code></p>
+     *       def: testCollectionEquals(source: Collection(OclAny), arg01: Collection(OclAny)): Boolean =
+    source = arg01</code></p>
      */
     Boolean around(testpackage.Class1 aClass, java.util.Collection<Object> source, java.util.Collection<Object> arg01): testCollectionEqualsCaller(aClass, source, arg01) {
         return tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclCollections.equals(source, arg01);

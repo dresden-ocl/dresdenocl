@@ -21,7 +21,9 @@ public privileged aspect DefAspect39 {
     /**
      * <p>Defines the method testCollectionProduct(java.util.Collection<Object> source, java.util.Collection<Object> arg01) defined by the constraint
      * <code>context Class1
-     *       def: testCollectionProduct = source[].product( arg01[]).size()</code></p>
+     *       def: testCollectionProduct(source: Collection(OclAny), arg01: Collection(OclAny)): 
+      Integer =
+    source ->product(arg01) ->size()</code></p>
      */
     Integer around(testpackage.Class1 aClass, java.util.Collection<Object> source, java.util.Collection<Object> arg01): testCollectionProductCaller(aClass, source, arg01) {
         return tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclCollections.size(tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclCollections.product(source, arg01));

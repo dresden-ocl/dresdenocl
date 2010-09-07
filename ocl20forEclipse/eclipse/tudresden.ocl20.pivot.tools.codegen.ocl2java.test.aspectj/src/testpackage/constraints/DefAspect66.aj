@@ -12,18 +12,20 @@ public privileged aspect DefAspect66 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testOrderedSetFirst(java.util.List<Object> source)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testOrderedSetAsSet(java.util.List<Object> source)}.</p>
      */
-    protected pointcut testOrderedSetFirstCaller(testpackage.Class1 aClass, java.util.List<Object> source):
-    	call(* testpackage.Class1.testOrderedSetFirst(java.util.List<Object>))
+    protected pointcut testOrderedSetAsSetCaller(testpackage.Class1 aClass, java.util.List<Object> source):
+    	call(* testpackage.Class1.testOrderedSetAsSet(java.util.List<Object>))
     	&& target(aClass) && args(source);
     
     /**
-     * <p>Defines the method testOrderedSetFirst(java.util.List<Object> source) defined by the constraint
+     * <p>Defines the method testOrderedSetAsSet(java.util.List<Object> source) defined by the constraint
      * <code>context Class1
-     *       def: testOrderedSetFirst = source[].first()</code></p>
+     *       def: testOrderedSetAsSet(source: OrderedSet(OclAny)): 
+      Set(OclAny) =
+    source ->asSet()</code></p>
      */
-    Object around(testpackage.Class1 aClass, java.util.List<Object> source): testOrderedSetFirstCaller(aClass, source) {
-        return tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclOrderedSets.first(source);
+    java.util.Set<Object> around(testpackage.Class1 aClass, java.util.List<Object> source): testOrderedSetAsSetCaller(aClass, source) {
+        return tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclOrderedSets.asSet(source);
     }
 }
