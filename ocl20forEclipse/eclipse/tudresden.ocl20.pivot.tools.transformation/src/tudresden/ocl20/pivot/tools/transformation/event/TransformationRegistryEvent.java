@@ -53,7 +53,7 @@ public class TransformationRegistryEvent extends EventObject {
 	private static final long serialVersionUID = -5135930083763176962L;
 
 	/** The affected {@link ITransformation}. */
-	private ITransformation<?, ?> affectedTransformation;
+	private Class<?> affectedTransformation;
 
 	/**
 	 * <p>
@@ -67,7 +67,7 @@ public class TransformationRegistryEvent extends EventObject {
 	 *          this event.
 	 */
 	public TransformationRegistryEvent(ITransformationRegistry source,
-			ITransformation<?, ?> affectedTransformation) {
+			Class<?> affectedTransformation) {
 
 		super(source);
 		this.affectedTransformation = affectedTransformation;
@@ -95,7 +95,7 @@ public class TransformationRegistryEvent extends EventObject {
 	 * 
 	 * @return An {@link ITransformation} instance.
 	 */
-	public ITransformation<?, ?> getAffectedTransformation() {
+	public Class<?> getAffectedTransformation() {
 
 		return this.affectedTransformation;
 	}

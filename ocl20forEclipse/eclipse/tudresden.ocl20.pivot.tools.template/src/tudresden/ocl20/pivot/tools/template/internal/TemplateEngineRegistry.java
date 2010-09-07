@@ -319,7 +319,8 @@ public class TemplateEngineRegistry implements ITemplateEngineRegistry,
 					ITemplateEngine templateEngine;
 					try {
 						templateEngine =
-								(ITemplateEngine) configurationElement.createExecutableExtension("class");
+								(ITemplateEngine) configurationElement
+										.createExecutableExtension("class");
 					} catch (CoreException e) {
 						continue;
 					}

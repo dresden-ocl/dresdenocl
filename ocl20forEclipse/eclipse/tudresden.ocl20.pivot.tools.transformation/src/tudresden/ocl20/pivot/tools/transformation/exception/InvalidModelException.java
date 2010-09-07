@@ -20,7 +20,7 @@ public class InvalidModelException extends Exception {
 	private static final long serialVersionUID = -7842393918104473120L;
 
 	private EObject errorModel;
-	private ITransformation<?, ?> errorTransformation;
+	private ITransformation<?, ?, ?> errorTransformation;
 
 	/**
 	 * The standard constructor for the InvalidModelException.
@@ -33,7 +33,7 @@ public class InvalidModelException extends Exception {
 	 *          The transformation, in which the Exception occured.
 	 */
 	public InvalidModelException(final String message, final EObject errorModel,
-			final ITransformation<?, ?> transformation) {
+			final ITransformation<?, ?, ?> transformation) {
 
 		super(message);
 		this.errorModel = errorModel;
@@ -58,7 +58,7 @@ public class InvalidModelException extends Exception {
 	/**
 	 * @return Returns the errorTransformation.
 	 */
-	public ITransformation<?, ?> getErrorTransformation() {
+	public ITransformation<?, ?, ?> getErrorTransformation() {
 
 		return errorTransformation;
 	}

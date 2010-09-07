@@ -1,17 +1,18 @@
 package tudresden.ocl20.pivot.tools.transformation.pivot2sql.util;
 
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.eclipse.emf.ecore.EObject;
 import orgomg.cwm.objectmodel.core.ModelElement;
 import orgomg.cwm.objectmodel.core.Namespace;
 import orgomg.cwm.objectmodel.core.Package;
 
 import tudresden.ocl20.pivot.tools.transformation.util.ModelAnalyser;
 
-public class CwmModelAnalyser extends ModelAnalyser<Package, ModelElement> {
+public class CwmModelAnalyser extends
+		ModelAnalyser<Package, ModelElement, ModelElement> {
 
 	private Set<ModelElement> globalAllModelElements = null;
 
@@ -38,9 +39,9 @@ public class CwmModelAnalyser extends ModelAnalyser<Package, ModelElement> {
 		return this.globalAllModelElements;
 	}
 
-	public Set<EObject> getAllInstances() {
+	public Set<ModelElement> getAllInstances() {
 
-		Set<EObject> instances = new HashSet<EObject>();
+		Set<ModelElement> instances = new HashSet<ModelElement>();
 
 		for (ModelElement cls : getAllElements()) {
 			instances.add(cls);
@@ -48,6 +49,11 @@ public class CwmModelAnalyser extends ModelAnalyser<Package, ModelElement> {
 				instances.addAll(((Namespace) cls).getOwnedElement());
 		}
 		return instances;
+	}
+
+	protected Comparator<ModelElement> createComparator() {
+
+		return new ModelElementComparator();
 	}
 
 }

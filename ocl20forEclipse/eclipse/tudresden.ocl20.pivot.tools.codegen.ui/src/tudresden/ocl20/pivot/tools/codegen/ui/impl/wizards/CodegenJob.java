@@ -64,9 +64,9 @@ public abstract class CodegenJob extends Job {
 	 * </p>
 	 * 
 	 * @param constraints
-	 *            The {@link Constraint}s for that code shall be generated.
+	 *          The {@link Constraint}s for that code shall be generated.
 	 * @param codeGenerator
-	 *            The {@link IOcl2Code} used for code generation.
+	 *          The {@link IOcl2Code} used for code generation.
 	 */
 	public CodegenJob(List<Constraint> constraints, IOcl2Code<?> codeGenerator) {
 
@@ -89,7 +89,6 @@ public abstract class CodegenJob extends Job {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @seeorg.eclipse.core.runtime.jobs.Job#run(org.eclipse.core.runtime.
 	 * IProgressMonitor)
 	 */
@@ -98,21 +97,16 @@ public abstract class CodegenJob extends Job {
 		IStatus result;
 
 		try {
-			monitor.beginTask("Transform AspectJ Code ...", 100);
+			monitor.beginTask("Transform Code ...", 100);
 
 			runCodeGenerator(this.constraints);
 
 			monitor.worked(100);
 			monitor.done();
 
-			/* FIXME Claas: Evtl. refresh the altered workspace automatically. */
-
-			/*
-			 * TODO Method getPluginID does not work here in binary
-			 * distribution.
-			 */
-			result = new Status(IStatus.OK, Ocl2CodeUIPlugIn.PLUGIN_ID,
-					"Code Transformation finished successfully.");
+			result =
+					new Status(IStatus.OK, Ocl2CodeUIPlugIn.PLUGIN_ID,
+							"Code Transformation finished successfully.");
 		}
 
 		catch (Ocl2CodeException e) {

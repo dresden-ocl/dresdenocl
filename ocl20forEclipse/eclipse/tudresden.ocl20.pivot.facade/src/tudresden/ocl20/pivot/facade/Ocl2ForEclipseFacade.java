@@ -55,10 +55,20 @@ import tudresden.ocl20.pivot.pivotmodel.ConstraintKind;
 import tudresden.ocl20.pivot.pivotmodel.Operation;
 import tudresden.ocl20.pivot.pivotmodel.Parameter;
 import tudresden.ocl20.pivot.pivotmodel.Type;
+import tudresden.ocl20.pivot.tools.codegen.declarativ.IOcl2DeclSettings;
+import tudresden.ocl20.pivot.tools.codegen.declarativ.Ocl2DeclCodeFactory;
+import tudresden.ocl20.pivot.tools.codegen.declarativ.ocl2sql.IOcl2Sql;
+import tudresden.ocl20.pivot.tools.codegen.declarativ.ocl2sql.Ocl2SQLFactory;
 import tudresden.ocl20.pivot.tools.codegen.exception.Ocl2CodeException;
 import tudresden.ocl20.pivot.tools.codegen.ocl2java.IOcl2Java;
 import tudresden.ocl20.pivot.tools.codegen.ocl2java.IOcl2JavaSettings;
 import tudresden.ocl20.pivot.tools.codegen.ocl2java.Ocl2JavaFactory;
+import tudresden.ocl20.pivot.tools.template.ITemplateGroup;
+import tudresden.ocl20.pivot.tools.template.TemplatePlugin;
+import tudresden.ocl20.pivot.tools.transformation.ITransformation;
+import tudresden.ocl20.pivot.tools.transformation.TransformationFactory;
+import tudresden.ocl20.pivot.tools.transformation.TransformationPlugin;
+import tudresden.ocl20.pivot.tools.transformation.impl.Tuple;
 
 /**
  * <p>
@@ -76,13 +86,15 @@ public class Ocl2ForEclipseFacade {
 	public final static String ECORE_META_MODEL = EcoreMetamodelPlugin.ID;
 
 	/** The ID of the EMF Ecore {@link IModelInstanceType}. */
-	public final static String ECORE_MODEL_INSTANCE_TYPE = EcoreModelInstanceTypePlugin.PLUGIN_ID;
+	public final static String ECORE_MODEL_INSTANCE_TYPE =
+			EcoreModelInstanceTypePlugin.PLUGIN_ID;
 
 	/** The ID of the reflective Java {@link IMetamodel}. */
 	public final static String JAVA_META_MODEL = JavaMetaModelPlugin.ID;
 
 	/** The ID of the Java {@link IModelInstanceType}. */
-	public final static String JAVA_MODEL_INSTANCE_TYPE = JavaModelInstanceTypePlugin.PLUGIN_ID;
+	public final static String JAVA_MODEL_INSTANCE_TYPE =
+			JavaModelInstanceTypePlugin.PLUGIN_ID;
 
 	/** The ID of the Eclipse MDT UML2 {@link IMetamodel}. */
 	public final static String UML2_MetaModel = UML2MetamodelPlugin.ID;
@@ -91,17 +103,22 @@ public class Ocl2ForEclipseFacade {
 	public final static String XSD_META_MODEL = XSDMetamodelPlugin.ID;
 
 	/** The ID of the XML {@link IModelInstanceType}. */
-	public final static String XML_MODEL_INSTANCE_TYPE = XmlModelInstanceTypePlugin.PLUGIN_ID;
+	public final static String XML_MODEL_INSTANCE_TYPE =
+			XmlModelInstanceTypePlugin.PLUGIN_ID;
 
 	/**
 	 * Cached interpreters for interpretation. They are stored in a
 	 * {@link WeakHashMap}. If an {@link IModelInstance} becomes garbage, its
 	 * {@link IOclInterpreter} becomes garbage as well.
 	 */
-	private static Map<IModelInstance, IOclInterpreter> cachedInterpreters = new WeakHashMap<IModelInstance, IOclInterpreter>();
+	private static Map<IModelInstance, IOclInterpreter> cachedInterpreters =
+			new WeakHashMap<IModelInstance, IOclInterpreter>();
 
 	/** The {@link IOcl2Java} representing the Java/AspectJ code generator. */
 	private static IOcl2Java javaCodeGenerator = null;
+
+	/** The {@link IOcl2Sql} representing the Java/AspectJ code generator. */
+	private static IOcl2Sql sqlCodeGenerator = null;
 
 	/**
 	 * <p>
@@ -110,19 +127,19 @@ public class Ocl2ForEclipseFacade {
 	 * </p>
 	 * 
 	 * @param constraints
-	 *            The {@link Constraint}s used for code generation.
+	 *          The {@link Constraint}s used for code generation.
 	 * @param settings
-	 *            The {@link IOcl22CodeSettings} used for code generation (can
-	 *            be <code>null</code> if default settings shall be used).
+	 *          The {@link IOcl22CodeSettings} used for code generation (can be
+	 *          <code>null</code> if default settings shall be used).
 	 * @return The generated AspectJ code as a set of {@link String}s.
 	 * @throws IllegalArgumentException
-	 *             Thrown if the {@link List} of {@link Constraint}s is empty or
-	 *             <code>null</code>.
+	 *           Thrown if the {@link List} of {@link Constraint}s is empty or
+	 *           <code>null</code>.
 	 * @throws Ocl22CodeException
 	 */
-	public static List<String> generateAspectJCode(
-			List<Constraint> constraints, IOcl2JavaSettings settings)
-			throws IllegalArgumentException, Ocl2CodeException {
+	public static List<String> generateAspectJCode(List<Constraint> constraints,
+			IOcl2JavaSettings settings) throws IllegalArgumentException,
+			Ocl2CodeException {
 
 		if (constraints == null || constraints.size() == 0) {
 			throw new IllegalArgumentException(
@@ -131,8 +148,8 @@ public class Ocl2ForEclipseFacade {
 		// no else.
 
 		if (javaCodeGenerator == null) {
-			javaCodeGenerator = Ocl2JavaFactory.getInstance()
-					.createJavaCodeGenerator();
+			javaCodeGenerator =
+					Ocl2JavaFactory.getInstance().createJavaCodeGenerator();
 		}
 		// no else.
 
@@ -212,8 +229,8 @@ public class Ocl2ForEclipseFacade {
 		// no else.
 
 		if (javaCodeGenerator == null) {
-			javaCodeGenerator = Ocl2JavaFactory.getInstance()
-					.createJavaCodeGenerator();
+			javaCodeGenerator =
+					Ocl2JavaFactory.getInstance().createJavaCodeGenerator();
 		}
 		// no else.
 
@@ -277,6 +294,212 @@ public class Ocl2ForEclipseFacade {
 	public static IOcl2JavaSettings getJavaCodeGeneratorSettings() {
 
 		return Ocl2JavaFactory.getInstance().createJavaCodeGeneratorSettings();
+	}
+
+	/**
+	 * <p>
+	 * Generates the SQL code for a given {@link List} of {@link Constraint} s and
+	 * a given {@link IOcl2DeclSettings}.
+	 * </p>
+	 * 
+	 * @param constraints
+	 *          The {@link Constraint}s used for code generation.
+	 * @param settings
+	 *          The {@link IOcl2DeclSettings} used for code generation (can be
+	 *          <code>null</code> if default settings shall be used).
+	 * @param model
+	 *          The {@link IModel} for code generation
+	 * @return The generated SQL code as a set of {@link String}s.
+	 * @throws IllegalArgumentException
+	 *           Thrown if the {@link List} of {@link Constraint}s is empty or
+	 *           <code>null</code>.
+	 * @throws Ocl2CodeException
+	 */
+	public static List<String> generateSQLCode(List<Constraint> constraints,
+			IOcl2DeclSettings settings, IModel model)
+			throws IllegalArgumentException, Ocl2CodeException {
+
+		if (constraints == null || constraints.size() == 0) {
+			throw new IllegalArgumentException(
+					"The list of constraints must not be emtpy.");
+		}
+		// no else.
+
+		if (sqlCodeGenerator == null) {
+			sqlCodeGenerator = Ocl2SQLFactory.getInstance().createSQLCodeGenerator();
+		}
+		// no else.
+
+		sqlCodeGenerator.resetEnvironment();
+
+		if (settings != null) {
+			sqlCodeGenerator.setSettings(settings);
+		}
+
+		else {
+			/* Necessary to replace possibly altered settings. */
+			sqlCodeGenerator.setSettings(getDeclCodeGeneratorSettings());
+		}
+		sqlCodeGenerator.setInputModel(model);
+		return sqlCodeGenerator.transformFragmentCode(constraints);
+	}
+
+	/**
+	 * <p>
+	 * Generates the SQL code for a given {@link Constraint} and a given
+	 * {@link IOcl2DeclSettings}.
+	 * </p>
+	 * 
+	 * @param constraint
+	 *          The {@link Constraint} used for code generation.
+	 * @param settings
+	 *          The {@link IOcl2DeclSettings} used for code generation (can be
+	 *          <code>null</code> if default settings shall be used).
+	 * @param model
+	 *          The {@link IModel} for code generation
+	 * @return The generated SQL code as a {@link String}s.
+	 * @throws IllegalArgumentException
+	 *           Thrown if the {@link List} of {@link Constraint}s is empty or
+	 *           <code>null</code>.
+	 * @throws Ocl2CodeException
+	 */
+	public static String generateSQLCode(Constraint constraint,
+			IOcl2DeclSettings settings, IModel model)
+			throws IllegalArgumentException, Ocl2CodeException {
+
+		if (constraint == null) {
+			throw new IllegalArgumentException("The constraint must not be null.");
+		}
+		// no else.
+
+		List<Constraint> constraints;
+		constraints = new ArrayList<Constraint>();
+		constraints.add(constraint);
+
+		return generateSQLCode(constraints, settings, model).get(0);
+	}
+
+	/**
+	 * <p>
+	 * Returns an {@link IOcl2DeclSettings} instance to configure SQL code
+	 * generation.
+	 * </p>
+	 * 
+	 * @return An {@link IOcl2DeclSettings} instance to configure SQL code
+	 *         generation.
+	 */
+	public static IOcl2DeclSettings getDeclCodeGeneratorSettings() {
+
+		return Ocl2DeclCodeFactory.getInstance().createOcl2DeclCodeSettings();
+	}
+
+	/**
+	 * <p>
+	 * Return an {@link ITemplateGroup} instance with template for code
+	 * generation.
+	 * </p>
+	 * 
+	 * @param templateGroupName
+	 *          The name of template group
+	 * @return a instance of the template group or <i>null</i> if there no
+	 *         template group with the name
+	 */
+	public static ITemplateGroup getTemplateGroup(String templateGroupName) {
+
+		return TemplatePlugin.getTemplateGroupRegistry().getTemplateGroup(
+				templateGroupName);
+	}
+
+	/**
+	 * <p>
+	 * Return a list with the names of transformation.
+	 * </P>
+	 * 
+	 * @return the list with names.
+	 */
+	public static List<String> getTransformationList() {
+
+		return TransformationPlugin.getTransformationRegistry()
+				.getTransformationList();
+	}
+
+	/**
+	 * <p>
+	 * Returns a name list of transformation which transform a in_type to a
+	 * out_type. The settings of transformation must implements the
+	 * IOcl2DeclSettings.
+	 * </p>
+	 * 
+	 * @param in_type
+	 *          the type of transformation input
+	 * @param out_type
+	 *          the type of transformation output
+	 * @return the list with names
+	 */
+	public static List<String> getTransformation(Class<?> in_type,
+			Class<?> out_type) {
+
+		return TransformationPlugin.getTransformationRegistry()
+				.getTransformationList(in_type, out_type, IOcl2DeclSettings.class);
+	}
+
+	/**
+	 * <p>
+	 * Returns an {@link ITransformation} instance with the parameters.
+	 * </p>
+	 * 
+	 * @param transId
+	 *          the name of the transformation
+	 * @param modelIn
+	 *          the type of the transformation input
+	 * @param modelOut
+	 *          the type of the transformation output
+	 * @param settings
+	 *          the settings of the transformation
+	 * @param modelInName
+	 *          the input name of the transformation
+	 * @param modelOutName
+	 *          the output name of the transformation
+	 * @return a new instance of {@link ITransformation} or <i>null</i> if there
+	 *         no transformation with the parameters.
+	 */
+	public static <I, S, O> ITransformation<I, S, O> getTransformation(
+			String transId, Class<I> modelIn, Class<O> modelOut, Class<S> settings,
+			String modelInName, String modelOutName) {
+
+		return TransformationFactory.getInstance().getTransformation(transId,
+				modelIn, modelOut, settings, modelInName, modelOutName);
+	}
+
+	/**
+	 * <p>
+	 * Returns an {@link ITransformation} instance with the parameters.
+	 * </p>
+	 * 
+	 * @param transId
+	 *          the name of the transformation
+	 * @param modelIn
+	 *          the type of the transformation input
+	 * @param modelOut1
+	 *          the type of the first element of the output tuple
+	 * @param modelOut2
+	 *          the type of the second element of the output tuple
+	 * @param settings
+	 *          the settings of the transformation
+	 * @param modelInName
+	 *          the input name of the transformation
+	 * @param modelOutName
+	 *          the output name of the transformation
+	 * @return a new instance of {@link ITransformation} or <i>null</i> if there
+	 *         no transformation with the parameters.
+	 */
+	public static <I, S, O1, O2> ITransformation<I, S, Tuple<O1, O2>> getParallelTransformation(
+			String transId, Class<I> modelIn, Class<O1> modelOut1,
+			Class<O2> modelOut2, Class<S> settings, String modelInName,
+			String modelOutName) {
+
+		return TransformationFactory.getInstance().getTransformation(transId,
+				modelIn, modelOut1, modelOut2, settings, modelInName, modelOutName);
 	}
 
 	/**
@@ -524,8 +747,9 @@ public class Ocl2ForEclipseFacade {
 
 		IModelInstance result;
 
-		result = modelInstanceType.getModelInstanceProvider()
-				.createEmptyModelInstance(model);
+		result =
+				modelInstanceType.getModelInstanceProvider().createEmptyModelInstance(
+						model);
 
 		return result;
 	}
@@ -561,8 +785,9 @@ public class Ocl2ForEclipseFacade {
 
 		IModelInstance result;
 
-		result = modelInstanceType.getModelInstanceProvider()
-				.createEmptyModelInstance(model);
+		result =
+				modelInstanceType.getModelInstanceProvider().createEmptyModelInstance(
+						model);
 
 		return result;
 	}
@@ -612,8 +837,9 @@ public class Ocl2ForEclipseFacade {
 
 		IModelInstance result;
 
-		result = modelInstanceType.getModelInstanceProvider().getModelInstance(
-				file, model);
+		result =
+				modelInstanceType.getModelInstanceProvider().getModelInstance(file,
+						model);
 
 		return result;
 	}
@@ -655,8 +881,9 @@ public class Ocl2ForEclipseFacade {
 
 		IModelInstance result;
 
-		result = modelInstanceType.getModelInstanceProvider().getModelInstance(
-				file, model);
+		result =
+				modelInstanceType.getModelInstanceProvider().getModelInstance(file,
+						model);
 
 		return result;
 	}
@@ -707,8 +934,9 @@ public class Ocl2ForEclipseFacade {
 
 		IModelInstance result;
 
-		result = modelInstanceType.getModelInstanceProvider().getModelInstance(
-				location, model);
+		result =
+				modelInstanceType.getModelInstanceProvider().getModelInstance(location,
+						model);
 
 		return result;
 	}
@@ -750,8 +978,9 @@ public class Ocl2ForEclipseFacade {
 
 		IModelInstance result;
 
-		result = modelInstanceType.getModelInstanceProvider().getModelInstance(
-				location, model);
+		result =
+				modelInstanceType.getModelInstanceProvider().getModelInstance(location,
+						model);
 
 		return result;
 	}
@@ -791,8 +1020,8 @@ public class Ocl2ForEclipseFacade {
 		// no else.
 
 		IModelInstanceType result;
-		result = ModelBusPlugin.getModelInstanceTypeRegistry()
-				.getModelInstanceType(id);
+		result =
+				ModelBusPlugin.getModelInstanceTypeRegistry().getModelInstanceType(id);
 
 		if (result == null) {
 			throw new IllegalArgumentException(
@@ -904,8 +1133,8 @@ public class Ocl2ForEclipseFacade {
 
 		for (Constraint constraint : constraints) {
 			IInterpretationResult aResult;
-			aResult = interpretConstraint(constraint, modelInstance,
-					modelInstanceElement);
+			aResult =
+					interpretConstraint(constraint, modelInstance, modelInstanceElement);
 
 			if (aResult != null) {
 				result.add(aResult);
@@ -999,9 +1228,10 @@ public class Ocl2ForEclipseFacade {
 			cachedInterpreters.put(modelInstance, interpreter);
 		}
 
-		result = interpreter.interpretPostConditions(modelInstanceElement,
-				operation, parameters.toArray(new IModelInstanceElement[0]),
-				resultValue, postConditions);
+		result =
+				interpreter.interpretPostConditions(modelInstanceElement, operation,
+						parameters.toArray(new IModelInstanceElement[0]), resultValue,
+						postConditions);
 
 		return result;
 	}
@@ -1075,9 +1305,9 @@ public class Ocl2ForEclipseFacade {
 			cachedInterpreters.put(modelInstance, interpreter);
 		}
 
-		result = interpreter.interpretPreConditions(modelInstanceElement,
-				operation, parameters.toArray(new IModelInstanceElement[0]),
-				preConditions);
+		result =
+				interpreter.interpretPreConditions(modelInstanceElement, operation,
+						parameters.toArray(new IModelInstanceElement[0]), preConditions);
 
 		return result;
 	}

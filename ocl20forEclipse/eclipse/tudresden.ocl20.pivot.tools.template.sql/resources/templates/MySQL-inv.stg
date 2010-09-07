@@ -1,0 +1,108 @@
+group mysql;
+
+// --- NAVIGATION (CLASS AND ATTRIBUTE) --- 
+feature_call_navigation(object,context1,ref_object,context2) ::= <<
+SELECT $object$ FROM $context1$
+ WHERE $ref_object$ IN ($context2$)
+>>
+
+feature_call_navigation_context(object,context1,ref_object,context_alias,context_object) ::= <<
+SELECT $object$ FROM $context1$ WHERE $ref_object$ = $context_alias$.$context_object$
+>>
+
+
+// --- ATTRIBUTE ACCESS (CLASS AND ATTRIBUTE) --- 
+feature_call_attribute_boolean(attribute) ::= <<
+($attribute$ = true)
+>>
+
+feature_call_operand(operand) ::= <<
+($operand$)
+>>
+
+// ---  BOOLEAN (BASIC TYPE) --- 
+literal_boolean_true() ::= <<
+(true)
+>>
+
+literal_boolean_false() ::= <<
+(false)
+>>
+
+// ---  COLLECTIONS - SET (QUERY) --- 
+literal_collection_set(items) ::= <<
+$items:literal_collection_set_item(); separator=", "$
+>>
+
+literal_collection_set_item(item) ::= <<
+$item$
+>>
+
+// --- IF EXPRESSION ---
+if_expression(if_branch,then_branch,else_branch) ::= <<
+IF($if_branch$,$then_branch$,$else_branch$)
+>>
+
+
+// -- ITERATOR COLLECT (QUERY) ---
+feature_call_collect(expression) ::= <<
+$expression$
+>>
+
+// -- ITERATOR FORALL (QUERY) ---
+feature_call_forall(source,alias,object,collection,expression) ::= <<
+NOT EXISTS (
+  $collection$
+  AND $object$ IN (
+    SELECT $object$ FROM $source$ AS $alias$
+    WHERE NOT ($expression$)
+  )
+)
+>>
+
+// -- ITERATOR REJECT (QUERY) ---
+feature_call_reject(source,alias,object,collection,expression) ::= <<
+($collection$
+  AND $object$ IN (
+    SELECT $object$ FROM $source$ AS $alias$
+    WHERE NOT ($expression$)
+  )
+)
+>>
+
+// -- ITERATOR SELECT (QUERY) ---
+feature_call_select(source,alias,object,collection,expression) ::= <<
+($collection$
+  AND $object$ IN (
+    SELECT $object$ FROM $source$ AS $alias$
+    WHERE ($expression$)
+  )
+)
+>>
+
+// --- COLLECTION RELATED OPERATIONS ---
+feature_call_count(source,element,collection,object) ::= <<
+SELECT
+  IF(COUNT($element$) IS NULL,0,COUNT($element$)) AS 'COUNT($element$)'
+  FROM ($source$)
+  WHERE $element$ IN ($collection$)
+  AND $element$ = ($object$)
+>>
+
+feature_call_size(source,element,collection) ::= <<
+SELECT
+  IF(COUNT($element$) IS NULL,0,COUNT($element$)) AS 'COUNT($element$)'
+  FROM ($source$)
+  WHERE $element$ IN ($collection$) 
+>>
+
+feature_call_sum(source,element,collection) ::= <<
+SELECT
+  IF(SUM($element$) IS NULL,0,SUM($element$)) AS 'SUM($element$)'
+  FROM $source$
+  WHERE $element$ IN ($collection$)
+>>
+
+feature_call_string_concat(operand1,operand2) ::= <<
+CONCAT($operand1$,$operand2$)
+>>

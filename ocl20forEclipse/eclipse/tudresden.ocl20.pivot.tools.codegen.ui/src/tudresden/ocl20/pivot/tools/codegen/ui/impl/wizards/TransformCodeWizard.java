@@ -144,6 +144,9 @@ public abstract class TransformCodeWizard extends Wizard implements INewWizard {
 		transformationJob = getCodegenJob(constraints);
 
 		transformationJob.schedule();
+
+		this.selectDirectoryPage.refreshDirectory();
+
 		result = true;
 
 		/* Probably log the exit from this method. */

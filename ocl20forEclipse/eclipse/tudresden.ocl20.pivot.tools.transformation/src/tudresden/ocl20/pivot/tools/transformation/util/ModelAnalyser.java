@@ -4,14 +4,14 @@
  */
 package tudresden.ocl20.pivot.tools.transformation.util;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.HashSet;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -22,7 +22,7 @@ import org.eclipse.emf.ecore.EObject;
  * @author Bjoern Freitag
  * 
  */
-public abstract class ModelAnalyser<K extends EObject, V> {
+public abstract class ModelAnalyser<K extends EObject, C, V> {
 
 	protected K model;
 
@@ -40,41 +40,28 @@ public abstract class ModelAnalyser<K extends EObject, V> {
 	 *          The model in which the instances should be searched.
 	 * @return Returns all instances of all classes in the given model
 	 */
-	public abstract Set<EObject> getAllInstances();
+	public abstract Set<C> getAllInstances();
 
-	/**
-	 * Returns all Packages in the given model.
-	 * 
-	 * @param model
-	 *          The model in which the packages should be searched.
-	 * @return Returns all Packages in the given model.
-	 */
-	protected EList<EObject> getObjects(EObject model) {
+	public <T extends C> Set<T> getInstancesOfType(Class<T> type) {
 
-		return model.eContents();
-	}
-
-	@SuppressWarnings("unchecked")
-	public <T> Set<T> getInstancesOfType(Class<T> type) {
-
-		Set<T> instancesOfType = new HashSet<T>();
-		Set<EObject> instances = getAllInstances();
-		for (EObject instance : instances) {
-			if (Arrays.asList(instance.getClass().getInterfaces()).contains(type)) {
-				instancesOfType.add((T) instance);
+		SortedSet<T> instancesOfType = new TreeSet<T>(createComparator());
+		Set<C> instances = getAllInstances();
+		for (C instance : instances) {
+			if (instanceIsOfType(instance, type)) {
+				instancesOfType.add(type.cast(instance));
 			}
 		}
 		return instancesOfType;
 	}
 
-	@SuppressWarnings("unchecked")
-	public <T> Set<T> getInstancesOfType(List<?> selection, Class<T> type) {
+	public <T extends C> Set<T> getInstancesOfType(List<?> selection,
+			Class<T> type) {
 
-		Set<T> instancesOfType = new HashSet<T>();
+		SortedSet<T> instancesOfType = new TreeSet<T>(createComparator());
 
 		for (Object instance : selection) {
 			if (instanceIsOfType(instance, type)) {
-				instancesOfType.add((T) instance);
+				instancesOfType.add(type.cast(instance));
 			}
 		}
 		return instancesOfType;
@@ -89,23 +76,14 @@ public abstract class ModelAnalyser<K extends EObject, V> {
 	 */
 	public boolean instanceIsOfType(Object instance, Class<?> type) {
 
-		List<Class<?>> interfaces = Arrays.asList(instance.getClass().getInterfaces());
-		
-		while (interfaces.size() > 0) {
-			
-			List<Class<?>> newInterfaces = new ArrayList<Class<?>>();
-			if (interfaces.contains(type)) {
-				return true;
-			}
-			else {
-				for (Class<?> inf : interfaces) {
-					newInterfaces.addAll(Arrays.asList(inf.getInterfaces()));
-				}
-			}
-			interfaces = newInterfaces;
+		List<Class<?>> interfaces =
+				Arrays.asList(instance.getClass().getInterfaces());
+		if (interfaces.contains(type)) {
+			return true;
 		}
-		
 		return false;
 	}
+
+	protected abstract <T extends C> Comparator<T> createComparator();
 
 }

@@ -4,7 +4,6 @@
  */
 package tudresden.ocl20.pivot.tools.transformation;
 
-import tudresden.ocl20.pivot.tools.codegen.IOcl2CodeSettings;
 import tudresden.ocl20.pivot.tools.transformation.exception.InvalidModelException;
 import tudresden.ocl20.pivot.tools.transformation.exception.TransformationException;
 
@@ -16,7 +15,7 @@ import tudresden.ocl20.pivot.tools.transformation.exception.TransformationExcept
  * @author Christian Wende
  * @author Bjoern Freitag
  */
-public interface ITransformation<IN, OUT> {
+public interface ITransformation<IN, SETTINGS, OUT> {
 
 	/**
 	 * Returns the result of the transformation.
@@ -39,6 +38,6 @@ public interface ITransformation<IN, OUT> {
 
 	public String getDisplayName();
 
-	public void setSettings(IOcl2CodeSettings ocl2CodeSettings);
+	public void setSettings(SETTINGS settings);
 
 }

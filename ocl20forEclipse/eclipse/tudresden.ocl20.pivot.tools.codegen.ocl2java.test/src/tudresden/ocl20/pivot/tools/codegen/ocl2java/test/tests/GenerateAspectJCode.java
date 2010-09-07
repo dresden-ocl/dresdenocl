@@ -70,6 +70,7 @@ public class GenerateAspectJCode extends AbstractDiffTest {
 	 * <p>
 	 * Tests the instrumentation of the constraint.
 	 * </p>
+	 * 
 	 * @throws Exception
 	 */
 	@Test
@@ -151,8 +152,8 @@ public class GenerateAspectJCode extends AbstractDiffTest {
 		constraints.add(new String[] { "sltest/oclany", "oclIsInvalid01" });
 		constraints.add(new String[] { "sltest/oclany", "oclIsInvalid02" });
 		/*
-		 * FIXME Test uncommented operations when problems during parsing have
-		 * been fixed.
+		 * FIXME Test uncommented operations when problems during parsing have been
+		 * fixed.
 		 */
 		// constraints.add(new String[] { "sltest/oclany", "oclIsKindOf01" });
 		constraints.add(new String[] { "sltest/oclany", "oclIsNew01" });
@@ -172,8 +173,7 @@ public class GenerateAspectJCode extends AbstractDiffTest {
 		constraints.add(new String[] { "sltest/orderedset", "last01" });
 		constraints.add(new String[] { "sltest/orderedset", "prepend01" });
 		constraints.add(new String[] { "sltest/orderedset", "reverse01" });
-		constraints
-				.add(new String[] { "sltest/orderedset", "subOrderedSet01" });
+		constraints.add(new String[] { "sltest/orderedset", "subOrderedSet01" });
 
 		constraints.add(new String[] { "sltest/real", "abs01" });
 		constraints.add(new String[] { "sltest/real", "division01" });
@@ -242,6 +242,7 @@ public class GenerateAspectJCode extends AbstractDiffTest {
 		constraints.add(new String[] { "sltest/string", "toLowerCase01" });
 
 		this.createInstrumentationCode(
-				"tudresden.ocl20.pivot.tools.codegen.ocl2java.test.aspectj", constraints);
+				"tudresden.ocl20.pivot.tools.codegen.ocl2java.test.aspectj",
+				constraints);
 	}
 }

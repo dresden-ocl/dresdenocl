@@ -34,6 +34,9 @@ package tudresden.ocl20.pivot.tools.transformation;
 
 import java.util.List;
 
+import tudresden.ocl20.pivot.model.metamodel.IMetamodel;
+import tudresden.ocl20.pivot.tools.transformation.event.ITransformationRegistryListener;
+
 /**
  * <p>
  * The {@link ITransformationRegistry} manages a list of {@link ITransformation}
@@ -53,55 +56,45 @@ public interface ITransformationRegistry {
 	 * @param metamodel
 	 *          The {@link ITransformation} that shall be added.
 	 */
-	void addTransformation(ITransformation<?, ?> transformation);
+	public void addTransformation(ITransformation<?, ?, ?> transformation);
+
+	/**
+	 * <p>
+	 * Adds an {@link ITransformationRegistryListener} to this
+	 * {@link ITransformationRegistry}.
+	 * </p>
+	 * 
+	 * @param listener
+	 *          The {@link ITransformationRegistryListener} to be added.
+	 */
+	void addTransformationRegistryListener(
+			ITransformationRegistryListener listener);
 
 	/**
 	 * <p>
 	 * Disposes this {@link ITransformationRegistry}.
 	 * </p>
 	 */
-	void dispose();
+	public void dispose();
 
 	/**
 	 * <p>
-	 * Returns the {@link ITransformation} with the given id or <code>null</code>
-	 * if no {@link ITransformation} with that id is registered.
+	 * Returns a name list of transformation which transform a in_type to a
+	 * out_type. The settings of transformation must implements the
+	 * IOcl2DeclSettings.
 	 * </p>
 	 * 
-	 * @param id
-	 *          An identifier for a {@link ITransformation}.
+	 * @param modelIn
+	 *          the type of transformation input
+	 * @param modelOut
+	 *          the type of transformation output
+	 * @param settings
+	 *          the type of transformation settings
 	 * 
-	 * @return An {@link ITransformation} instance or <code>null</code>.
+	 * @return the list with names
 	 */
-	ITransformation<?, ?> getTransformation(String id);
-
-	/**
-	 * <p>
-	 * Returns the {@link ITransformation} with the given id or <code>null</code>
-	 * if no {@link ITransformation} with that id is registered.
-	 * </p>
-	 * 
-	 * @param id
-	 *          An identifier for a {@link ITransformation} is the
-	 *          simpleClassName.
-	 * @param model_inName
-	 *          the name of the in model
-	 * @param model_OutName
-	 *          the name of the out model
-	 * @return An {@link ITransformation} instance or <code>null</code>.
-	 */
-	ITransformation<?, ?> getTransformation(String id, String model_inName,
-			String model_OutName);
-
-	/**
-	 * <p>
-	 * Returns all {@link ITransformation}s registered with this
-	 * {@link ITransformationRegistry}.
-	 * </p>
-	 * 
-	 * @return A list of {@link ITransformation} instances.
-	 */
-	List<ITransformation<?, ?>> getTransformations();
+	public List<String> getTransformationList(Class<?> modelIn,
+			Class<?> modelOut, Class<?> settings);
 
 	/**
 	 * <p>
@@ -112,4 +105,47 @@ public interface ITransformationRegistry {
 	 * @return A list of {@link ITransformation} instances.
 	 */
 	List<String> getTransformationList();
+
+	/**
+	 * <p>
+	 * Removes an {@link ITransformationRegistryListener} from this
+	 * {@link ITransformationRegistry}.
+	 * </p>
+	 * 
+	 * @param listener
+	 *          The {@link ITransformationRegistryListener} to be removed.
+	 */
+	void removeTransformationRegistryListener(
+			ITransformationRegistryListener listener);
+
+	/**
+	 * <p>
+	 * Removes an {@link ITransformation} from this
+	 * {@link ITransformationRegistry}.
+	 * </p>
+	 * 
+	 * @param transformation
+	 *          The {@link ITransformation} that shall be removed.
+	 */
+	public void removeTransformation(ITransformation<?, ?, ?> transformation);
+
+	/**
+	 * <p>
+	 * Removes an {@link ITransformation} from this
+	 * {@link ITransformationRegistry}.
+	 * </p>
+	 * 
+	 * @param transName
+	 *          An identifier name for an {@link ITransformationEngine}.
+	 */
+	public void removeTransformation(String transName);
+
+	/**
+	 * Returns the
+	 * 
+	 * @param transformationId
+	 * @return
+	 */
+	public Class<?> getTransformationClass(String transformationId);
+
 }

@@ -3,7 +3,9 @@ package tudresden.ocl20.pivot.tools.transformation.pivot2sql.impl;
 import orgomg.cwm.resource.relational.Schema;
 
 import tudresden.ocl20.pivot.pivotmodel.Namespace;
-import tudresden.ocl20.pivot.tools.transformation.SequentialTransformations;
+import tudresden.ocl20.pivot.tools.codegen.declarativ.IOcl2DeclSettings;
+import tudresden.ocl20.pivot.tools.transformation.ITransformation;
+import tudresden.ocl20.pivot.tools.transformation.SequentialTransformation;
 
 /**
  * The Uml2Ddl transformation implements the serial composition of the Uml2Cwm
@@ -14,16 +16,8 @@ import tudresden.ocl20.pivot.tools.transformation.SequentialTransformations;
  * 
  */
 public class Pivot2Ddl extends
-		SequentialTransformations<Namespace, Schema, String> {
-
-	/**
-	 * The type of the transformations in model.
-	 */
-	public static String in_type = "PM";
-	/**
-	 * The type of the transformations out model.
-	 */
-	public static String out_type = "A DDL";
+		SequentialTransformation<Namespace, IOcl2DeclSettings, Schema, String>
+		implements ITransformation<Namespace, IOcl2DeclSettings, String> {
 
 	/**
 	 * The constructor for a Uml2Ddl transformation.
@@ -34,16 +28,12 @@ public class Pivot2Ddl extends
 	 *          The name of the out entity.
 	 * @throws Exception
 	 */
-	public Pivot2Ddl(String modelInName, String outName) throws Exception {
+	public Pivot2Ddl(String modelInName, String outName) {
 
 		super(modelInName, outName, Pivot2CwmImpl.class.getSimpleName(),
-				Cwm2DdlImpl.class.getSimpleName());
+				Cwm2DdlImpl.class.getSimpleName(), Namespace.class, String.class,
+				Schema.class, IOcl2DeclSettings.class);
 
-	}
-
-	public Pivot2Ddl() {
-
-		super();
 	}
 
 }

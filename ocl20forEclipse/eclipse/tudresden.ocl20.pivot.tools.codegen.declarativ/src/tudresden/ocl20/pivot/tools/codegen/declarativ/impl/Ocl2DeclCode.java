@@ -380,9 +380,6 @@ public class Ocl2DeclCode extends ExpressionsSwitch<String> implements
 			constraintName = "UNAMED CONSTRAINT";
 		}
 
-		if (constraintName.contains("v3")) {
-			System.out.println("");
-		}
 		/* Transform bodyCode. */
 		String bodyExpression =
 				this.doSwitch((EObject) anExpressionInOcl.getBodyExpression());
@@ -515,7 +512,11 @@ public class Ocl2DeclCode extends ExpressionsSwitch<String> implements
 			List<Guide> nav = new LinkedList<Guide>();
 			nav.add(guideArg);
 			nav.add(guideSrc);
+			String lastString = aliasList.removeLast();
+			guideSrc.setAlias(aliasList.getLast());
 			result = handleIterCollect(createNavigation(nav));
+			aliasList.addLast(lastString);
+			guideSrc.reset();
 		}
 		else if (operationName.equals("forAll")) {
 			result =
@@ -532,6 +533,10 @@ public class Ocl2DeclCode extends ExpressionsSwitch<String> implements
 					assignClassGuide(anIteratorExp,
 							((CollectionType) sourceExp.getType()));
 			result = handleIterSelect(sourceCode, guides.get(0), arg);
+		}
+		else if (operationName.equals("exists")) {
+			result =
+					handleCollExists(sourceCode, navigationMap.get(sourceExp).get(0), arg);
 		}
 		else if (operationName.equals("iterate")) {
 			throw new UnsupportedOperationException(
@@ -732,8 +737,9 @@ public class Ocl2DeclCode extends ExpressionsSwitch<String> implements
 		// collection related operations - MODEL TYPE QUERY
 		else if (operationName.equals("allInstances")) {
 			List<Guide> guides =
-					assignClassGuide(anOperationCallExp,
-							anOperationCallExp.getSourceType()); // create Guide object
+					assignClassGuide(anOperationCallExp, anOperationCallExp.getType()); // create
+																																							// Guide
+																																							// object
 			// to the return
 			// value of
 			// allInstances for
@@ -959,9 +965,14 @@ public class Ocl2DeclCode extends ExpressionsSwitch<String> implements
 		ITemplate template =
 				this.mySettings.getTemplateGroup().getTemplate(
 						"arithmetic_expression_" + name);
-
-		template.setAttribute("operand1", sourceCode);
-		template.setAttribute("operand2", firstArg);
+		ITemplate operand1 =
+				this.mySettings.getTemplateGroup().getTemplate("feature_call_operand");
+		operand1.setAttribute("operand", sourceCode);
+		ITemplate operand2 =
+				this.mySettings.getTemplateGroup().getTemplate("feature_call_operand");
+		operand2.setAttribute("operand", firstArg);
+		template.setAttribute("operand1", operand1.toString());
+		template.setAttribute("operand2", operand2.toString());
 
 		return template.toString();
 	}
@@ -983,7 +994,6 @@ public class Ocl2DeclCode extends ExpressionsSwitch<String> implements
 
 		template.setAttribute("object", guide.getSelect());
 		template.setAttribute("source", guide.getFrom());
-
 		return template.toString();
 	}
 
@@ -1174,9 +1184,14 @@ public class Ocl2DeclCode extends ExpressionsSwitch<String> implements
 		ITemplate template =
 				this.mySettings.getTemplateGroup().getTemplate(
 						"feature_call_includesall");
-
-		template.setAttribute("collection", sourceCode);
-		template.setAttribute("collection2", firstArg);
+		ITemplate operand1 =
+				this.mySettings.getTemplateGroup().getTemplate("feature_call_operand");
+		operand1.setAttribute("operand", sourceCode);
+		ITemplate operand2 =
+				this.mySettings.getTemplateGroup().getTemplate("feature_call_operand");
+		operand2.setAttribute("operand", firstArg);
+		template.setAttribute("collection", operand1.toString());
+		template.setAttribute("collection2", operand2.toString());
 
 		return template.toString();
 	}
@@ -1262,8 +1277,14 @@ public class Ocl2DeclCode extends ExpressionsSwitch<String> implements
 					"Unhandled collection type for intesection operation!");
 		}
 
-		template.setAttribute("collection", sourceCode);
-		template.setAttribute("collection2", firstArg);
+		ITemplate operand1 =
+				this.mySettings.getTemplateGroup().getTemplate("feature_call_operand");
+		operand1.setAttribute("operand", sourceCode);
+		ITemplate operand2 =
+				this.mySettings.getTemplateGroup().getTemplate("feature_call_operand");
+		operand2.setAttribute("operand", firstArg);
+		template.setAttribute("collection", operand1.toString());
+		template.setAttribute("collection2", operand2.toString());
 
 		return template.toString();
 	}
@@ -1368,8 +1389,14 @@ public class Ocl2DeclCode extends ExpressionsSwitch<String> implements
 				this.mySettings.getTemplateGroup().getTemplate(
 						"feature_call_symmetricdifference");
 
-		template.setAttribute("collection", firstArg);
-		template.setAttribute("collection2", sourceCode);
+		ITemplate operand1 =
+				this.mySettings.getTemplateGroup().getTemplate("feature_call_operand");
+		operand1.setAttribute("operand", sourceCode);
+		ITemplate operand2 =
+				this.mySettings.getTemplateGroup().getTemplate("feature_call_operand");
+		operand2.setAttribute("operand", firstArg);
+		template.setAttribute("collection", operand1.toString());
+		template.setAttribute("collection2", operand2.toString());
 
 		return template.toString();
 	}
@@ -1420,8 +1447,14 @@ public class Ocl2DeclCode extends ExpressionsSwitch<String> implements
 				mySettings.getMappedModel()
 						.getClass(collType.getElementType().getName()).getClassGuide()
 						.getSelect());
-		template.setAttribute("collection", sourceCode);
-		template.setAttribute("collection2", firstArg);
+		ITemplate operand1 =
+				this.mySettings.getTemplateGroup().getTemplate("feature_call_operand");
+		operand1.setAttribute("operand", sourceCode);
+		ITemplate operand2 =
+				this.mySettings.getTemplateGroup().getTemplate("feature_call_operand");
+		operand2.setAttribute("operand", firstArg);
+		template.setAttribute("collection", operand1.toString());
+		template.setAttribute("collection2", operand2.toString());
 
 		return template.toString();
 	}
@@ -1459,9 +1492,14 @@ public class Ocl2DeclCode extends ExpressionsSwitch<String> implements
 		ITemplate template =
 				this.mySettings.getTemplateGroup().getTemplate("feature_call_int_div");
 
-		template.setAttribute("operand1", sourceCode);
-		template.setAttribute("operand2", firstArg);
-
+		ITemplate operand1 =
+				this.mySettings.getTemplateGroup().getTemplate("feature_call_operand");
+		operand1.setAttribute("operand", sourceCode);
+		ITemplate operand2 =
+				this.mySettings.getTemplateGroup().getTemplate("feature_call_operand");
+		operand2.setAttribute("operand", firstArg);
+		template.setAttribute("operand1", operand1.toString());
+		template.setAttribute("operand2", operand2.toString());
 		return template.toString();
 	}
 
@@ -1500,8 +1538,14 @@ public class Ocl2DeclCode extends ExpressionsSwitch<String> implements
 		ITemplate template =
 				this.mySettings.getTemplateGroup().getTemplate("feature_call_int_max");
 
-		template.setAttribute("operand1", sourceCode);
-		template.setAttribute("operand2", firstArg);
+		ITemplate operand1 =
+				this.mySettings.getTemplateGroup().getTemplate("feature_call_operand");
+		operand1.setAttribute("operand", sourceCode);
+		ITemplate operand2 =
+				this.mySettings.getTemplateGroup().getTemplate("feature_call_operand");
+		operand2.setAttribute("operand", firstArg);
+		template.setAttribute("operand1", operand1.toString());
+		template.setAttribute("operand2", operand2.toString());
 
 		return template.toString();
 	}
@@ -1522,8 +1566,14 @@ public class Ocl2DeclCode extends ExpressionsSwitch<String> implements
 		ITemplate template =
 				this.mySettings.getTemplateGroup().getTemplate("feature_call_int_min");
 
-		template.setAttribute("operand1", sourceCode);
-		template.setAttribute("operand2", firstArg);
+		ITemplate operand1 =
+				this.mySettings.getTemplateGroup().getTemplate("feature_call_operand");
+		operand1.setAttribute("operand", sourceCode);
+		ITemplate operand2 =
+				this.mySettings.getTemplateGroup().getTemplate("feature_call_operand");
+		operand2.setAttribute("operand", firstArg);
+		template.setAttribute("operand1", operand1.toString());
+		template.setAttribute("operand2", operand2.toString());
 
 		return template.toString();
 	}
@@ -1544,8 +1594,14 @@ public class Ocl2DeclCode extends ExpressionsSwitch<String> implements
 		ITemplate template =
 				this.mySettings.getTemplateGroup().getTemplate("feature_call_int_mod");
 
-		template.setAttribute("operand1", sourceCode);
-		template.setAttribute("operand2", firstArg);
+		ITemplate operand1 =
+				this.mySettings.getTemplateGroup().getTemplate("feature_call_operand");
+		operand1.setAttribute("operand", sourceCode);
+		ITemplate operand2 =
+				this.mySettings.getTemplateGroup().getTemplate("feature_call_operand");
+		operand2.setAttribute("operand", firstArg);
+		template.setAttribute("operand1", operand1.toString());
+		template.setAttribute("operand2", operand2.toString());
 
 		return template.toString();
 	}
@@ -1688,8 +1744,14 @@ public class Ocl2DeclCode extends ExpressionsSwitch<String> implements
 				this.mySettings.getTemplateGroup().getTemplate(
 						"logical_expression_" + name);
 
-		template.setAttribute("expression1", sourceCode);
-		template.setAttribute("expression2", firstArg);
+		ITemplate operand1 =
+				this.mySettings.getTemplateGroup().getTemplate("feature_call_operand");
+		operand1.setAttribute("operand", sourceCode);
+		ITemplate operand2 =
+				this.mySettings.getTemplateGroup().getTemplate("feature_call_operand");
+		operand2.setAttribute("operand", firstArg);
+		template.setAttribute("expression1", operand1.toString());
+		template.setAttribute("expression2", operand2.toString());
 
 		return template.toString();
 	}
@@ -1777,6 +1839,9 @@ public class Ocl2DeclCode extends ExpressionsSwitch<String> implements
 		else if (srcExp instanceof PrimitiveLiteralExp) {
 			attrType = ((PrimitiveLiteralExp) srcExp).getType();
 		}
+		else if (srcExp instanceof VariableExp) {
+			attrType = ((VariableExp) srcExp).getType();
+		}
 		else {
 			throw new IllegalStateException(
 					"Unhandled attribute type for relational expression: "
@@ -1829,8 +1894,14 @@ public class Ocl2DeclCode extends ExpressionsSwitch<String> implements
 		ITemplate template =
 				this.getSettings().getTemplateGroup()
 						.getTemplate(templateName.toString());
-		template.setAttribute("operand1", operand1);
-		template.setAttribute("operand2", operand2);
+		ITemplate tempOperand1 =
+				this.mySettings.getTemplateGroup().getTemplate("feature_call_operand");
+		tempOperand1.setAttribute("operand", operand1);
+		ITemplate tempOperand2 =
+				this.mySettings.getTemplateGroup().getTemplate("feature_call_operand");
+		tempOperand2.setAttribute("operand", operand2);
+		template.setAttribute("operand1", tempOperand1.toString());
+		template.setAttribute("operand2", tempOperand2.toString());
 
 		return template.toString();
 	}
@@ -1851,8 +1922,14 @@ public class Ocl2DeclCode extends ExpressionsSwitch<String> implements
 		ITemplate template =
 				mySettings.getTemplateGroup().getTemplate("feature_call_string_concat");
 
-		template.setAttribute("operand1", sourceCode);
-		template.setAttribute("operand2", firstArg);
+		ITemplate tempOperand1 =
+				this.mySettings.getTemplateGroup().getTemplate("feature_call_operand");
+		tempOperand1.setAttribute("operand", sourceCode);
+		ITemplate tempOperand2 =
+				this.mySettings.getTemplateGroup().getTemplate("feature_call_operand");
+		tempOperand2.setAttribute("operand", firstArg);
+		template.setAttribute("operand1", tempOperand1.toString());
+		template.setAttribute("operand2", tempOperand2.toString());
 
 		return template.toString();
 	}
@@ -1893,8 +1970,10 @@ public class Ocl2DeclCode extends ExpressionsSwitch<String> implements
 		ITemplate template =
 				mySettings.getTemplateGroup().getTemplate(
 						"feature_call_string_substring");
-
-		template.setAttribute("operand", sourceCode);
+		ITemplate tempOperand =
+				this.mySettings.getTemplateGroup().getTemplate("feature_call_operand");
+		tempOperand.setAttribute("operand", sourceCode);
+		template.setAttribute("operand", tempOperand.toString());
 		template.setAttribute("start", start);
 		template.setAttribute("end", end);
 

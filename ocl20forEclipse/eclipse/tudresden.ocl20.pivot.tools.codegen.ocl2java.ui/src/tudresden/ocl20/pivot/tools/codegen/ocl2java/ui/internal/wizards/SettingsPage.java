@@ -69,15 +69,16 @@ public class SettingsPage extends WizardPage {
 
 	/**
 	 * <p>
-	 * Creates a new {@link SettingsPage} which provides general settings for
-	 * code generation.
+	 * Creates a new {@link SettingsPage} which provides general settings for code
+	 * generation.
 	 * </p>
 	 * 
 	 * @param iOcl2CodeSettings
-	 *            The settings of the code generator associated with this wizard
-	 *            page.
+	 *          The settings of the code generator associated with this wizard
+	 *          page.
 	 */
 	public SettingsPage(IOcl2JavaSettings iOcl2JavaSettings) {
+
 		super("SettingsPage");
 
 		setTitle(Ocl2JavaUIMessages.SettingsPage_Title);
@@ -92,6 +93,7 @@ public class SettingsPage extends WizardPage {
 	 * </p>
 	 */
 	private Button createButton(Composite parent, String label) {
+
 		Button result;
 
 		result = new Button(parent, SWT.PUSH);
@@ -114,8 +116,7 @@ public class SettingsPage extends WizardPage {
 		/* Create the model selection group and specify properties. */
 		buttonGroup = new Group(parent, SWT.NONE);
 		buttonGroup.setText(Ocl2JavaUIMessages.SettingsPage_ButtonGroupLabel);
-		buttonGroup
-				.setLayoutData(new GridData(SWT.FILL, SWT.NONE, true, false));
+		buttonGroup.setLayoutData(new GridData(SWT.FILL, SWT.NONE, true, false));
 
 		layout = new GridLayout(1, false);
 		layout.verticalSpacing = 10;
@@ -129,8 +130,10 @@ public class SettingsPage extends WizardPage {
 
 		/* Add selection listener. */
 		inheritanceCheckBox.addMouseListener(new AbstractMouseListener() {
+
 			@Override
 			public void mouseUp(MouseEvent e) {
+
 				setInheritanceEnabled(inheritanceCheckBox.getSelection());
 			}
 		});
@@ -143,17 +146,17 @@ public class SettingsPage extends WizardPage {
 
 		/* Add selection listener. */
 		generateGettersCheckBox.addMouseListener(new AbstractMouseListener() {
+
 			@Override
 			public void mouseUp(MouseEvent e) {
-				setGenerateGettersEnabled(generateGettersCheckBox
-						.getSelection());
+
+				setGenerateGettersEnabled(generateGettersCheckBox.getSelection());
 			}
 		});
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see
 	 * org.eclipse.jface.dialogs.IDialogPage#createControl(org.eclipse.swt.widgets
 	 * .Composite)
@@ -180,14 +183,15 @@ public class SettingsPage extends WizardPage {
 		this.createViolationMacroGroup(panel);
 
 		/* Create button to restore default settings. */
-		restoreDefaultsButton = createButton(panel,
-				Ocl2JavaUIMessages.SettingsPage_RestoreDefaults);
+		restoreDefaultsButton =
+				createButton(panel, Ocl2JavaUIMessages.SettingsPage_RestoreDefaults);
 
 		/* Add selection listener. */
 		restoreDefaultsButton.addMouseListener(new AbstractMouseListener() {
 
 			@Override
 			public void mouseUp(MouseEvent e) {
+
 				restoreDefaults();
 			}
 		});
@@ -217,32 +221,29 @@ public class SettingsPage extends WizardPage {
 		violationMacroGroup = new Group(parent, SWT.NONE);
 		violationMacroGroup
 				.setText(Ocl2JavaUIMessages.SettingsPage_ViolationMacroGroupLabel);
-		violationMacroGroup.setLayoutData(new GridData(SWT.FILL, SWT.NONE,
-				true, true));
+		violationMacroGroup.setLayoutData(new GridData(SWT.FILL, SWT.NONE, true,
+				true));
 
 		layout = new GridLayout(1, false);
 		layout.verticalSpacing = 10;
 		violationMacroGroup.setLayout(layout);
 
 		/* Create the text field to enter a violation macro. */
-		violationMacroText = new Text(violationMacroGroup, SWT.MULTI
-				| SWT.BORDER);
+		violationMacroText = new Text(violationMacroGroup, SWT.MULTI | SWT.BORDER);
 		violationMacroText.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true,
 				true));
-		violationMacroText.setText(this.settings.getViolationMacro(null)
-				.getCode());
+		violationMacroText.setText(this.settings.getViolationMacro(null).getCode());
 
 		/* Add a change listener to react on updates. */
 		violationMacroText.addModifyListener(new ModifyListener() {
 
 			/*
 			 * (non-Javadoc)
-			 * 
-			 * @see
-			 * org.eclipse.swt.events.ModifyListener#modifyText(org.eclipse.
+			 * @see org.eclipse.swt.events.ModifyListener#modifyText(org.eclipse.
 			 * swt.events.ModifyEvent)
 			 */
 			public void modifyText(ModifyEvent e) {
+
 				updatePageComplete();
 			}
 		});
@@ -262,8 +263,7 @@ public class SettingsPage extends WizardPage {
 		selectionGroup = new Group(parent, SWT.NONE);
 		selectionGroup
 				.setText(Ocl2JavaUIMessages.SettingsPage_InvariantModeGroupLabel);
-		selectionGroup.setLayoutData(new GridData(SWT.FILL, SWT.NONE, true,
-				false));
+		selectionGroup.setLayoutData(new GridData(SWT.FILL, SWT.NONE, true, false));
 
 		layout = new GridLayout(1, false);
 		layout.horizontalSpacing = 10;
@@ -277,8 +277,10 @@ public class SettingsPage extends WizardPage {
 
 		/* Add selection listener. */
 		invariantMode1.addMouseListener(new AbstractMouseListener() {
+
 			@Override
 			public void mouseUp(MouseEvent e) {
+
 				updateInvariantMode();
 			}
 		});
@@ -289,8 +291,10 @@ public class SettingsPage extends WizardPage {
 
 		/* Add selection listener. */
 		invariantMode2.addMouseListener(new AbstractMouseListener() {
+
 			@Override
 			public void mouseUp(MouseEvent e) {
+
 				updateInvariantMode();
 			}
 		});
@@ -301,8 +305,10 @@ public class SettingsPage extends WizardPage {
 
 		/* Add selection listener. */
 		invariantMode3.addMouseListener(new AbstractMouseListener() {
+
 			@Override
 			public void mouseUp(MouseEvent e) {
+
 				updateInvariantMode();
 			}
 		});
@@ -315,6 +321,7 @@ public class SettingsPage extends WizardPage {
 	 * </p>
 	 */
 	private boolean isViolationMacroSet() {
+
 		return this.settings.getViolationMacro(null).getCode().length() > 0;
 	}
 
@@ -362,9 +369,10 @@ public class SettingsPage extends WizardPage {
 	 * </p>
 	 * 
 	 * @param enabled
-	 *            If true generation of getters is set enabled.
+	 *          If true generation of getters is set enabled.
 	 */
 	private void setGenerateGettersEnabled(boolean enabled) {
+
 		this.settings.setGettersForDefinedAttributesEnabled(enabled);
 	}
 
@@ -374,9 +382,10 @@ public class SettingsPage extends WizardPage {
 	 * </p>
 	 * 
 	 * @param enabled
-	 *            If true inheritance is disabled for some constraints.
+	 *          If true inheritance is disabled for some constraints.
 	 */
 	private void setInheritanceEnabled(boolean enabled) {
+
 		this.settings.setDefaultInheritanceDisabled(enabled);
 	}
 
@@ -424,8 +433,7 @@ public class SettingsPage extends WizardPage {
 
 			ITransformedCode violationCode;
 
-			violationCode = Ocl2JavaFactory.getInstance()
-					.createTransformedCode();
+			violationCode = Ocl2JavaFactory.getInstance().createTransformedCode();
 			violationCode.addCode(this.violationMacroText.getText());
 
 			this.settings.setDefaultViolationMacro(violationCode);

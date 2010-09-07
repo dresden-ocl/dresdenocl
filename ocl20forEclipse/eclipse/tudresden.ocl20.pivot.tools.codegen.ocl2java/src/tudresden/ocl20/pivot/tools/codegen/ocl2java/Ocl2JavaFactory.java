@@ -70,9 +70,9 @@ public class Ocl2JavaFactory {
 	 * @throws Ocl22CodeException
 	 *           Thrown if the initialization of a new Java code generator fails.
 	 */
-	public IOcl2Java<?> createJavaCodeGenerator() throws Ocl2CodeException {
+	public IOcl2Java createJavaCodeGenerator() throws Ocl2CodeException {
 
-		IOcl2Java<?> result;
+		IOcl2Java result;
 
 		result = new Ocl2Java();
 
@@ -90,10 +90,10 @@ public class Ocl2JavaFactory {
 	 * @throws Ocl22CodeException
 	 *           Thrown if the initialization of a new Java code generator fails.
 	 */
-	public IOcl2Java<?> createJavaCodeGenerator(IOcl2JavaSettings settings)
+	public IOcl2Java createJavaCodeGenerator(IOcl2JavaSettings settings)
 			throws Ocl2CodeException {
 
-		IOcl2Java<?> result;
+		IOcl2Java result;
 
 		result = new Ocl2Java();
 		result.setSettings(settings);

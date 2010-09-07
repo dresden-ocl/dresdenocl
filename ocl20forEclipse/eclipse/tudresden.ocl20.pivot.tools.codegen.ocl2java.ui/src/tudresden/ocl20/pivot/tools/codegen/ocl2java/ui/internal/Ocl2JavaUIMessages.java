@@ -30,7 +30,8 @@ import org.eclipse.osgi.util.NLS;
  */
 public class Ocl2JavaUIMessages extends NLS {
 
-	private static final String BUNDLE_NAME = "tudresden.ocl20.pivot.tools.codegen.ocl2java.ui.internal.messages";
+	private static final String BUNDLE_NAME =
+			"tudresden.ocl20.pivot.tools.codegen.ocl2java.ui.internal.messages";
 
 	public static String TransformCodeWizard_Title;
 
@@ -78,6 +79,7 @@ public class Ocl2JavaUIMessages extends NLS {
 	}
 
 	private Ocl2JavaUIMessages() {
+
 		/* No implementation necessary. */
 	}
 }

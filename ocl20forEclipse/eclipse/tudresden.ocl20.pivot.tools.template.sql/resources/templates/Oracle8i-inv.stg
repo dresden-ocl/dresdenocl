@@ -3,8 +3,8 @@ group oracle;
 // --- OCL INVARIANT --- 
 constraint_body(constraint_name,context,context_alias,expression) ::= <<
 CREATE OR REPLACE VIEW $constraint_name$ AS
-(SELECT * FROM $context$ $context_aliAS$
-WHERE NOT ($expression$))
+(SELECT * FROM $context$ $context_alias$
+WHERE NOT ($expression$));
 >>
 
 literal_collection_bag_item(item) ::= <<
@@ -131,7 +131,7 @@ feature_call_including_set(collection,object) ::= <<
 >>
 
 feature_call_excluding_bag(collection,object,element) ::= <<
-($collection$ minus
+($collection$ MINUS
   SELECT $object$ FROM DUAL)
 >>
 
@@ -146,7 +146,7 @@ SELECT $element$,
     SELECT $element$, SEQNO
     FROM $collection$
     WHERE NOT ($element$ = $object$)
-  ) s
+  )
 >>
 
 feature_call_excluding_set(collection,object,element) ::= <<

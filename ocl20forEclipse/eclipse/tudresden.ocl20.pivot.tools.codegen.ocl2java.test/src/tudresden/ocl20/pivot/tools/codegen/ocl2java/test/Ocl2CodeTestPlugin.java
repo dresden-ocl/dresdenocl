@@ -32,7 +32,8 @@ import org.osgi.framework.BundleContext;
 public class Ocl2CodeTestPlugin extends Plugin {
 
 	/** The plug-in ID. */
-	public static final String PLUGIN_ID = "tudresden.ocl20.pivot.tools.codegen.ocl2java.test";
+	public static final String PLUGIN_ID =
+			"tudresden.ocl20.pivot.tools.codegen.ocl2java.test";
 
 	/** The shared instance. */
 	private static Ocl2CodeTestPlugin plugin;
@@ -43,26 +44,26 @@ public class Ocl2CodeTestPlugin extends Plugin {
 	 * </p>
 	 */
 	public Ocl2CodeTestPlugin() {
+
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see
 	 * org.eclipse.core.runtime.Plugins#start(org.osgi.framework.BundleContext)
 	 */
 	public void start(BundleContext context) throws Exception {
+
 		super.start(context);
 		plugin = this;
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.eclipse.core.runtime.Plugin#stop(org.osgi.framework.BundleContext)
+	 * @see org.eclipse.core.runtime.Plugin#stop(org.osgi.framework.BundleContext)
 	 */
 	public void stop(BundleContext context) throws Exception {
+
 		plugin = null;
 		super.stop(context);
 	}
@@ -75,6 +76,7 @@ public class Ocl2CodeTestPlugin extends Plugin {
 	 * @return the shared instance
 	 */
 	public static Ocl2CodeTestPlugin getDefault() {
+
 		return plugin;
 	}
 }

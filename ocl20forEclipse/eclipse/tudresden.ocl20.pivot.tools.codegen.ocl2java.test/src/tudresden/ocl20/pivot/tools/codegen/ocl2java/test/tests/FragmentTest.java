@@ -52,14 +52,15 @@ public class FragmentTest {
 	 */
 	@BeforeClass
 	public static void setUp() throws Ocl2CodeException {
+
 		testPerformer = CodegenTestPerformer.getInstance();
 		testPerformer.reset();
 	}
 
 	/**
 	 * <p>
-	 * A test case testing the code generation a operationCallexpression using
-	 * an operation of OclAny contained in any01.ocl.
+	 * A test case testing the code generation a operationCallexpression using an
+	 * operation of OclAny contained in any01.ocl.
 	 * </p>
 	 */
 	@Test
@@ -73,8 +74,8 @@ public class FragmentTest {
 
 	/**
 	 * <p>
-	 * A test case testing the code generation a operationCallexpression using
-	 * an operation of OclAny contained in any02.ocl.
+	 * A test case testing the code generation a operationCallexpression using an
+	 * operation of OclAny contained in any02.ocl.
 	 * </p>
 	 */
 	@Test
@@ -88,8 +89,8 @@ public class FragmentTest {
 
 	/**
 	 * <p>
-	 * A test case testing the code generation a operationCallexpression using
-	 * an operation of OclAny contained in any03.ocl.
+	 * A test case testing the code generation a operationCallexpression using an
+	 * operation of OclAny contained in any03.ocl.
 	 * </p>
 	 */
 	@Test
@@ -103,8 +104,8 @@ public class FragmentTest {
 
 	/**
 	 * <p>
-	 * A test case testing the code generation a operationCallexpression using
-	 * an operation of OclAny contained in any04.ocl.
+	 * A test case testing the code generation a operationCallexpression using an
+	 * operation of OclAny contained in any04.ocl.
 	 * </p>
 	 */
 	@Test
@@ -118,8 +119,8 @@ public class FragmentTest {
 
 	/**
 	 * <p>
-	 * A test case testing the code generation a operationCallexpression using
-	 * an operation of OclAny contained in any05.ocl.
+	 * A test case testing the code generation a operationCallexpression using an
+	 * operation of OclAny contained in any05.ocl.
 	 * </p>
 	 */
 	@Test
@@ -1157,8 +1158,8 @@ public class FragmentTest {
 
 	/**
 	 * <p>
-	 * A test case testing the code generation a static operation call
-	 * contained in static01.ocl.
+	 * A test case testing the code generation a static operation call contained
+	 * in static01.ocl.
 	 * </p>
 	 */
 	@Test
@@ -1172,8 +1173,8 @@ public class FragmentTest {
 
 	/**
 	 * <p>
-	 * A test case testing the code generation a static property call
-	 * contained in static02.ocl.
+	 * A test case testing the code generation a static property call contained in
+	 * static02.ocl.
 	 * </p>
 	 */
 	@Test
@@ -1187,8 +1188,8 @@ public class FragmentTest {
 
 	/**
 	 * <p>
-	 * A test case testing the code generation a static operation call
-	 * contained in static03.ocl.
+	 * A test case testing the code generation a static operation call contained
+	 * in static03.ocl.
 	 * </p>
 	 */
 	@Test
@@ -1202,8 +1203,8 @@ public class FragmentTest {
 
 	/**
 	 * <p>
-	 * A test case testing the code generation a static property call
-	 * contained in static04.ocl.
+	 * A test case testing the code generation a static property call contained in
+	 * static04.ocl.
 	 * </p>
 	 */
 	@Test

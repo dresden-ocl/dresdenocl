@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.Plugin;
+import org.eclipse.ui.IStartup;
 import org.osgi.framework.BundleContext;
 
 import tudresden.ocl20.logging.LoggingPlugin;
@@ -26,7 +27,7 @@ import tudresden.ocl20.pivot.tools.template.exception.TemplateException;
  * @author Bjoern Freitag
  * 
  */
-public class SQLTemplatePlugin extends Plugin {
+public class SQLTemplatePlugin extends Plugin implements IStartup {
 
 	/**
 	 * The id of this plugin
@@ -67,12 +68,18 @@ public class SQLTemplatePlugin extends Plugin {
 		}
 		stream =
 				SQLTemplatePlugin.class.getResource("/resources/templates/MySQL.stg");
+		stream2 =
+				SQLTemplatePlugin.class
+						.getResource("/resources/templates/MySQL-inv.stg");
+		streams = new LinkedList<URL>();
+		streams.add(stream);
+		streams.add(stream2);
 		ITemplateGroup mysqlGroup;
 		try {
 			mysqlGroup =
 					TemplatePlugin.getTemplateGroupRegistry().addDefaultTemplateGroup(
 							"MySQL(SQL)", templateEngineName, standardGroup);
-			mysqlGroup.addFile(stream);
+			mysqlGroup.addFiles(streams);
 		} catch (TemplateException e) {
 			e.printStackTrace();
 		}
@@ -153,6 +160,10 @@ public class SQLTemplatePlugin extends Plugin {
 	public static Logger getLogger(Class<?> clazz) {
 
 		return LoggingPlugin.getLogManager(plugin).getLogger(clazz);
+	}
+
+	public void earlyStartup() {
+
 	}
 
 }

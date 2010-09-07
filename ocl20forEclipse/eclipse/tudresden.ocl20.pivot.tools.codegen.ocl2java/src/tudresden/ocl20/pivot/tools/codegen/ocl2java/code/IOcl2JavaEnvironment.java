@@ -42,8 +42,8 @@ public interface IOcl2JavaEnvironment extends IOcl2CodeEnvironment {
 	/**
 	 * <p>
 	 * Resets all counters and collections of the {@link IOcl2JavaEnvironment}
-	 * which are constraint specific. I. e. the counters for variable names or
-	 * the Set of called properties.
+	 * which are constraint specific. I. e. the counters for variable names or the
+	 * Set of called properties.
 	 * </p>
 	 */
 	public void resetEnvironmentForNextConstraint();
@@ -128,19 +128,19 @@ public interface IOcl2JavaEnvironment extends IOcl2CodeEnvironment {
 	 * </p>
 	 * 
 	 * @param canonicalName
-	 *            The {@link ITemplate}s are referenced by the canonical name of
-	 *            the created classes.
+	 *          The {@link ITemplate}s are referenced by the canonical name of the
+	 *          created classes.
 	 * @param aClassTemplate
-	 *            The {@link ITemplate}s of a new defined class during code
-	 *            transformation which is used to extend constrained classes.
+	 *          The {@link ITemplate}s of a new defined class during code
+	 *          transformation which is used to extend constrained classes.
 	 */
 	public void addSuperClassTemplate(String canonicalName,
 			ITemplate aClassTemplate);
 
 	/**
 	 * @param canonicalName
-	 *            The canonical name of the class whose {@link ITemplate} shall
-	 *            be checked.
+	 *          The canonical name of the class whose {@link ITemplate} shall be
+	 *          checked.
 	 * @return True if the Map containing the {@link ITemplate}s of all new
 	 *         defined classes contains a given canonical class name.
 	 */
@@ -153,25 +153,25 @@ public interface IOcl2JavaEnvironment extends IOcl2CodeEnvironment {
 	 * </p>
 	 * 
 	 * @param canonicalName
-	 *            The {@link ITemplate}s are referenced by the canonical name of
-	 *            the created classes.
-	 * @return A Map containing the {@link ITemplate}s of all new defined
-	 *         classes during code transformation which are used to extend
-	 *         constrained classes.
+	 *          The {@link ITemplate}s are referenced by the canonical name of the
+	 *          created classes.
+	 * @return A Map containing the {@link ITemplate}s of all new defined classes
+	 *         during code transformation which are used to extend constrained
+	 *         classes.
 	 */
 	public ITemplate getSuperClassTemplate(String canonicalName);
 
 	/**
 	 * <p>
-	 * Returns a Map containing the {@link ITemplate}s of all new defined
-	 * classes during code transformation which are used to extend constrained
-	 * classes. The {@link ITemplate}s are referenced by the canonical name of
-	 * the created classes.
+	 * Returns a Map containing the {@link ITemplate}s of all new defined classes
+	 * during code transformation which are used to extend constrained classes.
+	 * The {@link ITemplate}s are referenced by the canonical name of the created
+	 * classes.
 	 * </p>
 	 * 
-	 * @return A Map containing the {@link ITemplate}s of all new defined
-	 *         classes during code transformation which are used to extend
-	 *         constrained classes.
+	 * @return A Map containing the {@link ITemplate}s of all new defined classes
+	 *         during code transformation which are used to extend constrained
+	 *         classes.
 	 */
 	public Map<String, ITemplate> getSuperClassTemplates();
 
@@ -184,7 +184,7 @@ public interface IOcl2JavaEnvironment extends IOcl2CodeEnvironment {
 	 * </p>
 	 * 
 	 * @param canonicalName
-	 *            The canonical name of the class which shall be added. public
+	 *          The canonical name of the class which shall be added. public
 	 */
 	public void addAllInstancesClass(String canonicalName);
 
@@ -197,9 +197,8 @@ public interface IOcl2JavaEnvironment extends IOcl2CodeEnvironment {
 	/**
 	 * @return A {@link Set} containing the canonical name of all classes for
 	 *         which the operation allInstances must be implemented and
-	 *         instrumented (needed for all classes, those allInstances
-	 *         operation is called by the actual transformed {@link Constraint}
-	 *         ).
+	 *         instrumented (needed for all classes, those allInstances operation
+	 *         is called by the actual transformed {@link Constraint} ).
 	 */
 	public Set<String> getAllInstancesClasses();
 
@@ -207,14 +206,13 @@ public interface IOcl2JavaEnvironment extends IOcl2CodeEnvironment {
 	 * <p>
 	 * Adds a transformed source expression and it's type to the expressions for
 	 * which atPre values must be saved during code instrumentation and returns
-	 * the name of the variable which provides the atPre value for property
-	 * calls.
+	 * the name of the variable which provides the atPre value for property calls.
 	 * </p>
 	 * 
 	 * @param sourceCode
-	 *            The {@link ITransformedCode} of the sourceExp of the Property.
+	 *          The {@link ITransformedCode} of the sourceExp of the Property.
 	 * @param type
-	 *            The {@link Type} of the sourceExp of the Property.
+	 *          The {@link Type} of the sourceExp of the Property.
 	 * @return The name of the Variable which stores the atPre Value of the
 	 *         Property as a {@link String}.
 	 */
@@ -227,24 +225,22 @@ public interface IOcl2JavaEnvironment extends IOcl2CodeEnvironment {
 	public boolean hasAtPreValues();
 
 	/**
-	 * @return A {@link Map} containing the transformed code of
-	 *         {@link Expression}s which atPre values shall be saved as key and
-	 *         a {@link Object} array containing the {@link Type} of the
-	 *         {@link Expression} and the name of the variable in which the
-	 *         atPre value shall be stored.
+	 * @return A {@link Map} containing the transformed code of {@link Expression}
+	 *         s which atPre values shall be saved as key and a {@link Object}
+	 *         array containing the {@link Type} of the {@link Expression} and the
+	 *         name of the variable in which the atPre value shall be stored.
 	 */
 	public Map<ITransformedCode, Object[]> getAtPreValues();
 
 	/**
 	 * <p>
-	 * Adds the canonical name of the class for which the operation oclIsNew
-	 * must be implemented and instrumented (needed for all classes, those
-	 * oclIsNew operation is called by the actual transformed {@link Constraint}
-	 * ).
+	 * Adds the canonical name of the class for which the operation oclIsNew must
+	 * be implemented and instrumented (needed for all classes, those oclIsNew
+	 * operation is called by the actual transformed {@link Constraint} ).
 	 * </p>
 	 * 
 	 * @param canonicalName
-	 *            The canonical name of the class which shall be added. public
+	 *          The canonical name of the class which shall be added. public
 	 */
 	public void addIsNewClass(String instanceType);
 
@@ -257,8 +253,8 @@ public interface IOcl2JavaEnvironment extends IOcl2CodeEnvironment {
 	/**
 	 * @return A {@link Set} containing the canonical name of all classes for
 	 *         which the operation oclIsNew must be implemented and instrumented
-	 *         (needed for all classes, those oclIsNew operation is called by
-	 *         the actual transformed {@link Constraint} ).
+	 *         (needed for all classes, those oclIsNew operation is called by the
+	 *         actual transformed {@link Constraint} ).
 	 */
 	public Set<String> getIsNewClasses();
 
@@ -270,7 +266,7 @@ public interface IOcl2JavaEnvironment extends IOcl2CodeEnvironment {
 	 * </p>
 	 * 
 	 * @param callPath
-	 *            The canonical name of the class which shall be added. public
+	 *          The canonical name of the class which shall be added. public
 	 */
 	public void addCalledProperty(String callPath);
 

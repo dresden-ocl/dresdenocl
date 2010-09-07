@@ -87,8 +87,7 @@ public class TestCollection extends AbstractDiffTest {
 	@Test
 	public void testAsOrderedSet01() throws Exception {
 
-		this.compareFragmentCodeGeneration("sltest/collection",
-				"asOrderedSet01");
+		this.compareFragmentCodeGeneration("sltest/collection", "asOrderedSet01");
 	}
 
 	/**

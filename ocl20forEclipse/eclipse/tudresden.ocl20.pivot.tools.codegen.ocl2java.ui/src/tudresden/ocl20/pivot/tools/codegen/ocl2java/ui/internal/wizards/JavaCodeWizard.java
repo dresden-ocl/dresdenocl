@@ -58,20 +58,21 @@ public class JavaCodeWizard extends TransformCodeWizard implements INewWizard {
 	 * </p>
 	 */
 	public JavaCodeWizard() {
+
 		super(Ocl2JavaUIMessages.TransformCodeWizard_Title);
 		/* Sets the image in the top right corner. */
 		setDefaultPageImageDescriptor(Ocl2JavaUIPlugIn
 				.getImageDescriptor(wizardImage));
-		
+
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see org.eclipse.jface.wizard.IWizard#addPages()
 	 */
 	@Override
 	public void addPages() {
+
 		super.addPages();
 
 		addPage(this.settingsPage);
@@ -82,7 +83,6 @@ public class JavaCodeWizard extends TransformCodeWizard implements INewWizard {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see org.eclipse.ui.IWorkbenchWizard#init(org.eclipse.ui.IWorkbench,
 	 * org.eclipse.jface.viewers.IStructuredSelection)
 	 */
@@ -90,11 +90,13 @@ public class JavaCodeWizard extends TransformCodeWizard implements INewWizard {
 	public void init(IWorkbench workbench, IStructuredSelection selection) {
 
 		super.init(workbench, selection);
-		
-		this.settingsPage = new SettingsPage((IOcl2JavaSettings) this.myCodeGenerator.getSettings());
 
-		this.specificSettingsPage = new SpecificSettingsPage(
-				(IOcl2JavaSettings)this.myCodeGenerator.getSettings());
+		this.settingsPage =
+				new SettingsPage((IOcl2JavaSettings) this.myCodeGenerator.getSettings());
+
+		this.specificSettingsPage =
+				new SpecificSettingsPage(
+						(IOcl2JavaSettings) this.myCodeGenerator.getSettings());
 
 		/* This page must observe the Constraint selection. */
 		this.selectConstraintsPage.setObserver(this.specificSettingsPage);
@@ -108,31 +110,31 @@ public class JavaCodeWizard extends TransformCodeWizard implements INewWizard {
 
 	@Override
 	protected void setCodeGenerator() {
+
 		/* Try Initialize the code generator. */
 		try {
-			myCodeGenerator = Ocl2JavaFactory.getInstance()
-					.createJavaCodeGenerator();
+			myCodeGenerator = Ocl2JavaFactory.getInstance().createJavaCodeGenerator();
 		}
 
 		/* Else show an exception. */
 		catch (Ocl2CodeException e) {
-			MessageDialog
-					.openError(
-							getShell(),
-							CodegenUIMessages.TransformCodeWizard_ErrorMessageDialogTitle,
-							CodegenUIMessages.TransformCodeWizard_InitErrorOccured
-									+ (e.getMessage() != null ? e.getMessage()
-											: CodegenUIMessages.TransformCodeWizard_CheckLog));
+			MessageDialog.openError(
+					getShell(),
+					CodegenUIMessages.TransformCodeWizard_ErrorMessageDialogTitle,
+					CodegenUIMessages.TransformCodeWizard_InitErrorOccured
+							+ (e.getMessage() != null ? e.getMessage()
+									: CodegenUIMessages.TransformCodeWizard_CheckLog));
 
 			String errorMsg = "An error occured during initialization.";
 			logger.error(errorMsg, e);
 		}
 	}
 
-
 	@Override
 	protected CodegenJob getCodegenJob(List<Constraint> constraints) {
-		CodegenJavaJob codegenJob = new CodegenJavaJob(constraints, this.myCodeGenerator);
+
+		CodegenJavaJob codegenJob =
+				new CodegenJavaJob(constraints, this.myCodeGenerator);
 		return codegenJob;
 
 	}

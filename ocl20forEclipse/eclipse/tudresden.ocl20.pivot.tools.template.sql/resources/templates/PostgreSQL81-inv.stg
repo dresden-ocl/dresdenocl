@@ -2,12 +2,12 @@ group postgre;
 
 // --- NAVIGATION (CLASS AND ATTRIBUTE) --- 
 feature_call_navigation(object,context1,ref_object,context2) ::= <<
-(SELECT $object$ FROM $context1$ 
+(SELECT $object$ FROM $context1$ AS foo
  WHERE $ref_object$ IN $context2$)
 >>
 
 feature_call_navigation_context(object,context1,ref_object,context_alias,context_object) ::= <<
-(SELECT $object$ FROM $context1$ 
+(SELECT $object$ FROM $context1$ AS foo
  WHERE $ref_object$ = $context_alias$.$context_object$)
 >>
 
@@ -40,7 +40,7 @@ $item$
 // -- ITERATOR FORALL (QUERY) ---
 feature_call_forall(source,alias,object,collection,expression) ::= <<
 NOT EXISTS (
-  SELECT $object$ FROM $collection$
+  SELECT $object$ FROM $collection$ AS foo
   WHERE $object$ IN (
     SELECT $object$ FROM $source$ AS $alias$
     WHERE NOT $expression$
@@ -50,7 +50,7 @@ NOT EXISTS (
 
 // -- ITERATOR REJECT (QUERY) ---
 feature_call_reject(source,alias,object,collection,expression) ::= <<
-(SELECT $object$ FROM $collection$
+(SELECT $object$ FROM $collection$ AS foo
   WHERE $object$ IN (
     SELECT $object$ FROM $source$ AS $alias$
     WHERE NOT ($expression$)
@@ -60,9 +60,9 @@ feature_call_reject(source,alias,object,collection,expression) ::= <<
 
 // -- ITERATOR SELECT (QUERY) ---
 feature_call_select(source,alias,object,collection,expression) ::= <<
-(SELECT $object$ FROM $collection$
-  WHERE $object$ in (
-    SELECT $object$ FROM $source$ as $alias$
+(SELECT $object$ FROM $collection$ AS foo
+  WHERE $object$ IN (
+    SELECT $object$ FROM $source$ AS $alias$
     WHERE ($expression$)
   )
 )
@@ -76,14 +76,14 @@ feature_call_count(source,element,collection,object) ::= <<
     ELSE COUNT($element$)
   END
   FROM $source$
-  WHERE $element$ in $collection$
-  and $element$ = $object$)
+  WHERE $element$ IN $collection$
+  AND $element$ = $object$)
 >>
 
 feature_call_exists(source,object,collection,expression) ::= <<
 NOT exists (
-  SELECT $object$ FROM $collection$
-  WHERE $object$ in (
+  SELECT $object$ FROM $collection$ AS foo
+  WHERE $object$ IN (
     SELECT $object$ FROM $source$
     WHERE NOT $expression$
   )
@@ -93,21 +93,21 @@ NOT exists (
 feature_call_size(source,element,collection) ::= <<
 (SELECT 
   CASE
-    WHEN COUNT($element$) IS NULL THEN 0 
+    WHEN COUNT($element$) IS NULL THEN 0
     ELSE COUNT($element$) 
   END
   FROM $source$
-  WHERE $element$ in $collection$)
+  WHERE $element$ IN $collection$)
 >>
 
 feature_call_sum(source,element,collection) ::= <<
 (SELECT 
   CASE
-    WHEN SUM($element$) IS NULL THEN 0 
+    WHEN SUM($element$) IS NULL THEN 0
     ELSE SUM($element$)
   END
   FROM $source$
-  WHERE $element$ in $collection$)
+  WHERE $element$ IN $collection$)
 >>
 
 feature_call_excluding_sequence(collection,object,element) ::= <<
@@ -116,21 +116,21 @@ SELECT $element$,
     SELECT $element$, SEQNO
     FROM $collection$
     WHERE NOT ($element$ = $object$)
-  ) WHERE SEQNO < s.SEQNO) as SEQNO
+  ) AS foo WHERE SEQNO < s.SEQNO) AS SEQNO
   FROM (
     SELECT $element$, SEQNO
     FROM $collection$
     WHERE NOT ($element$ = $object$)
-  ) s
+  ) AS foo
 >>
 
 feature_call_union_sequence(collection,collection2,element) ::= <<
 ($collection$)
-  union
+  UNION
   (SELECT $element$, (SELECT MAX(SEQNO) FROM ($collection$)) + SEQNO
    FROM $collection2$)
 >>
 
 feature_call_allinstances(object,source) ::= <<
-(SELECT $object$ FROM $source$)
+(SELECT $object$ FROM $source$) 
 >>

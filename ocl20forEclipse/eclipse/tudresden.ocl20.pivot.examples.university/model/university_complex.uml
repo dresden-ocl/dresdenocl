@@ -24,9 +24,7 @@
             <ownedAttribute xmi:id="_Y5dQgDXDEd-_J9pP9Zsbaw" name="isMarried" visibility="private">
               <type xmi:type="uml:PrimitiveType" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Boolean"/>
             </ownedAttribute>
-            <ownedAttribute xmi:id="_HRNAYDXDEd-_J9pP9Zsbaw" name="birthDate" visibility="private">
-              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Integer"/>
-            </ownedAttribute>
+            <ownedAttribute xmi:id="_HRNAYDXDEd-_J9pP9Zsbaw" name="birthDate" visibility="private" type="_hRZwELnfEd-wmYSW0rs3Tw"/>
             <ownedAttribute xmi:id="_Ppaa0MHiEd2UNuYhQ_ApoA" name="age" visibility="private">
               <type xmi:type="uml:PrimitiveType" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Integer"/>
             </ownedAttribute>
@@ -40,9 +38,7 @@
             <ownedAttribute xmi:id="_6H5LUDXDEd-_J9pP9Zsbaw" name="matNr" visibility="private">
               <type xmi:type="uml:PrimitiveType" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Integer"/>
             </ownedAttribute>
-            <ownedAttribute xmi:id="_9LuIsDXDEd-_J9pP9Zsbaw" name="matDate" visibility="private">
-              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Integer"/>
-            </ownedAttribute>
+            <ownedAttribute xmi:id="_9LuIsDXDEd-_J9pP9Zsbaw" name="matDate" visibility="private" type="_hRZwELnfEd-wmYSW0rs3Tw"/>
           </packagedElement>
           <packagedElement xmi:type="uml:Class" xmi:id="_XPL5YMHiEd2UNuYhQ_ApoA" name="Employee">
             <generalization xmi:id="_XrWQ8MHiEd2UNuYhQ_ApoA" general="_J0lVcMHiEd2UNuYhQ_ApoA"/>
@@ -136,6 +132,7 @@
             <ownedEnd xmi:id="_wOAx0DeUEd-JXKTQMEgtig" name="theFacility" type="_tnYYsDeSEd-JXKTQMEgtig" association="_qkaFADeUEd-JXKTQMEgtig"/>
             <ownedEnd xmi:id="_3dLHMDeUEd-JXKTQMEgtig" name="headOfFacility" type="_J0lVcMHiEd2UNuYhQ_ApoA" association="_qkaFADeUEd-JXKTQMEgtig"/>
           </packagedElement>
+          <packagedElement xmi:type="uml:PrimitiveType" xmi:id="_hRZwELnfEd-wmYSW0rs3Tw" name="Date"/>
         </packagedElement>
       </packagedElement>
     </packagedElement>

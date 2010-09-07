@@ -17,12 +17,16 @@ createComment(comment) ::= <<
 -- $comment$
 >>
 
+createSubType(type) ::= <<
+type = "$type$"
+>>
+
 createType(type) ::= <<
 $typeMap.(type)$
 >>
 
 selectStmt(columns, tables, where) ::= <<
-SELECT $columns$ 
+SELECT $columns$
 FROM $tables$
 $if(where)$
 WHERE $where$
@@ -30,21 +34,25 @@ $endif$
 >>
 
 createView(viewname, body) ::= <<
-CREATE VIEW $viewname$ 
+CREATE VIEW $viewname$
 AS ( $body$ );
 >>
 
 createColumn(name, type, primaryKey, foreignKey) ::= <<
-$name$ $type$$if(primaryKey)$ PRIMARY KEY $endif$
+$name$ $type$$if(primaryKey)$ PRIMARY KEY$endif$
 >>
 
 createTable(tablename, columns) ::= <<
 CREATE TABLE $tablename$ (
-$columns$ 
+$columns$
 );
 >>
 
 createForeignKeyConstraint(tablename, columnname, reference) ::= <<
 ALTER TABLE $tablename$ ADD CONSTRAINT CON$tablename$$columnname$
 FOREIGN KEY ($columnname$) REFERENCES $reference$;
+>>
+
+createProperty(tablename,columnname,asname) ::= <<
+$if(tablename)$$tablename$.$endif$$columnname$$if(asname)$ AS $columnname$$endif$
 >>

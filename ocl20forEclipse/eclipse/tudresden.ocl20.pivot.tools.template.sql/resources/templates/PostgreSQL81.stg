@@ -17,6 +17,10 @@ createType(type) ::= <<
 $typeMap.(type)$
 >>
 
+createSubType(type) ::= <<
+type = '$type$'
+>>
+
 selectStmt(columns, tables, where) ::= <<
 SELECT $columns; separator=", "$ 
 FROM $tables; separator=", "$
@@ -27,5 +31,5 @@ $endif$
 
 createForeignKeyConstraint(tablename, columnname, reference) ::= <<
 ALTER TABLE $tablename$ ADD CONSTRAINT CON$tablename$$columnname$
-FOREIGN KEY ($columnname$) REFERENCES $reference$; 
+FOREIGN KEY ($columnname$) REFERENCES $reference$;
 >>

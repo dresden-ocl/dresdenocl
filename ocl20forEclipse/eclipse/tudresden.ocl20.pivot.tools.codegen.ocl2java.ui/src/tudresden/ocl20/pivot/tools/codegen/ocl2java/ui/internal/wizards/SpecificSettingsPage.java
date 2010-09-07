@@ -87,13 +87,14 @@ public class SpecificSettingsPage extends ConstraintViewPage {
 
 	/**
 	 * <p>
-	 * Creates a new {@link SpecificSettingsPage} which provides a selection of
-	 * an already loaded {@link IModel}.
+	 * Creates a new {@link SpecificSettingsPage} which provides a selection of an
+	 * already loaded {@link IModel}.
 	 * </p>
 	 * 
 	 * @param selection
 	 */
 	public SpecificSettingsPage(IOcl2JavaSettings iOcl2CodeSettings) {
+
 		super("SpecificSettingsPage");
 
 		setTitle(Ocl2JavaUIMessages.SpecificSettingsPage_Title);
@@ -104,12 +105,12 @@ public class SpecificSettingsPage extends ConstraintViewPage {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see
 	 * org.eclipse.jface.dialogs.IDialogPage#createControl(org.eclipse.swt.widgets
 	 * .Composite)
 	 */
 	public void createControl(Composite parent) {
+
 		Composite panel;
 		GridLayout layout;
 
@@ -152,8 +153,7 @@ public class SpecificSettingsPage extends ConstraintViewPage {
 		buttonGroup = new Group(parent, SWT.NONE);
 		buttonGroup
 				.setText(Ocl2JavaUIMessages.SpecificSettingsPage_ButtonGroupLabel);
-		buttonGroup
-				.setLayoutData(new GridData(SWT.FILL, SWT.NONE, true, false));
+		buttonGroup.setLayoutData(new GridData(SWT.FILL, SWT.NONE, true, false));
 
 		layout = new GridLayout(1, false);
 		layout.verticalSpacing = 10;
@@ -167,8 +167,10 @@ public class SpecificSettingsPage extends ConstraintViewPage {
 
 		/* Add selection listener. */
 		inheritanceCheckBox.addMouseListener(new AbstractMouseListener() {
+
 			@Override
 			public void mouseUp(MouseEvent e) {
+
 				updateSettings();
 			}
 		});
@@ -195,8 +197,8 @@ public class SpecificSettingsPage extends ConstraintViewPage {
 		viewerGroup.setLayout(viewerLayout);
 
 		/* Create the list viewer to display the models. */
-		constraintViewer = new TableViewer(viewerGroup, SWT.SINGLE
-				| SWT.V_SCROLL | SWT.BORDER);
+		constraintViewer =
+				new TableViewer(viewerGroup, SWT.SINGLE | SWT.V_SCROLL | SWT.BORDER);
 		constraintViewer.setContentProvider(new ArrayContentProvider());
 		constraintViewer.setLabelProvider(new ConstraintLabelProvider());
 		constraintViewer.getControl().setLayoutData(
@@ -208,12 +210,11 @@ public class SpecificSettingsPage extends ConstraintViewPage {
 
 					/*
 					 * (non-Javadoc)
-					 * 
 					 * @see org.eclipse.jface.viewers.ISelectionChangedListener#
-					 * selectionChanged
-					 * (org.eclipse.jface.viewers.SelectionChangedEvent)
+					 * selectionChanged (org.eclipse.jface.viewers.SelectionChangedEvent)
 					 */
 					public void selectionChanged(SelectionChangedEvent event) {
+
 						displayNewSettings();
 					}
 				});
@@ -233,8 +234,7 @@ public class SpecificSettingsPage extends ConstraintViewPage {
 		selectionGroup = new Group(parent, SWT.NONE);
 		selectionGroup
 				.setText(Ocl2JavaUIMessages.SettingsPage_InvariantModeGroupLabel);
-		selectionGroup.setLayoutData(new GridData(SWT.FILL, SWT.NONE, true,
-				false));
+		selectionGroup.setLayoutData(new GridData(SWT.FILL, SWT.NONE, true, false));
 
 		layout = new GridLayout(1, false);
 		layout.horizontalSpacing = 10;
@@ -249,8 +249,10 @@ public class SpecificSettingsPage extends ConstraintViewPage {
 
 		/* Add selection listener. */
 		invariantMode1.addMouseListener(new AbstractMouseListener() {
+
 			@Override
 			public void mouseUp(MouseEvent e) {
+
 				updateSettings();
 			}
 		});
@@ -262,8 +264,10 @@ public class SpecificSettingsPage extends ConstraintViewPage {
 
 		/* Add selection listener. */
 		invariantMode2.addMouseListener(new AbstractMouseListener() {
+
 			@Override
 			public void mouseUp(MouseEvent e) {
+
 				updateSettings();
 			}
 		});
@@ -275,8 +279,10 @@ public class SpecificSettingsPage extends ConstraintViewPage {
 
 		/* Add selection listener. */
 		invariantMode3.addMouseListener(new AbstractMouseListener() {
+
 			@Override
 			public void mouseUp(MouseEvent e) {
+
 				updateSettings();
 			}
 		});
@@ -296,16 +302,15 @@ public class SpecificSettingsPage extends ConstraintViewPage {
 		violationMacroGroup = new Group(parent, SWT.NONE);
 		violationMacroGroup
 				.setText(Ocl2JavaUIMessages.SpecificSettingsPage_ViolationMacroGroupLabel);
-		violationMacroGroup.setLayoutData(new GridData(SWT.FILL, SWT.NONE,
-				true, true));
+		violationMacroGroup.setLayoutData(new GridData(SWT.FILL, SWT.NONE, true,
+				true));
 
 		layout = new GridLayout(1, true);
 		layout.verticalSpacing = 10;
 		violationMacroGroup.setLayout(layout);
 
 		/* Create the text field to enter a violation macro. */
-		violationMacroText = new Text(violationMacroGroup, SWT.MULTI
-				| SWT.BORDER);
+		violationMacroText = new Text(violationMacroGroup, SWT.MULTI | SWT.BORDER);
 		violationMacroText.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true,
 				true));
 
@@ -314,12 +319,11 @@ public class SpecificSettingsPage extends ConstraintViewPage {
 
 			/*
 			 * (non-Javadoc)
-			 * 
-			 * @see
-			 * org.eclipse.swt.events.ModifyListener#modifyText(org.eclipse.
+			 * @see org.eclipse.swt.events.ModifyListener#modifyText(org.eclipse.
 			 * swt.events.ModifyEvent)
 			 */
 			public void modifyText(ModifyEvent e) {
+
 				updateSettings();
 			}
 		});
@@ -347,14 +351,13 @@ public class SpecificSettingsPage extends ConstraintViewPage {
 			boolean inheritanceStatus;
 			int invariantCheckMode;
 
-			violationMacro = this.mySettings
-					.getViolationMacro(selectedConstraint);
+			violationMacro = this.mySettings.getViolationMacro(selectedConstraint);
 
-			inheritanceStatus = this.mySettings
-					.isInheritanceDisabled(selectedConstraint);
+			inheritanceStatus =
+					this.mySettings.isInheritanceDisabled(selectedConstraint);
 
-			invariantCheckMode = this.mySettings
-					.getInvariantCheckMode(selectedConstraint);
+			invariantCheckMode =
+					this.mySettings.getInvariantCheckMode(selectedConstraint);
 
 			/* Update the display for the violation macro. */
 			this.violationMacroText.setText(violationMacro.getCode());
@@ -381,8 +384,9 @@ public class SpecificSettingsPage extends ConstraintViewPage {
 						.setSelection(invariantCheckMode == IOcl2JavaSettings.INVARIANT_CHECK_AFTER_CONSTRUCT_AND_PUBLIC_METHOD_EXECUTION);
 				this.invariantMode3
 						.setSelection(invariantCheckMode == IOcl2JavaSettings.INVARIANT_CHECK_AFTER_SPECIAL_METHOD_INVOCATION);
-				this.invariantMode1.setSelection(!(this.invariantMode2
-						.getSelection() || this.invariantMode3.getSelection()));
+				this.invariantMode1
+						.setSelection(!(this.invariantMode2.getSelection() || this.invariantMode3
+								.getSelection()));
 			}
 
 			else {
@@ -407,8 +411,8 @@ public class SpecificSettingsPage extends ConstraintViewPage {
 		Constraint result;
 		List<Constraint> selectedConstraints;
 
-		selectedConstraints = ((IStructuredSelection) constraintViewer
-				.getSelection()).toList();
+		selectedConstraints =
+				((IStructuredSelection) constraintViewer.getSelection()).toList();
 
 		if (selectedConstraints != null && selectedConstraints.size() > 0) {
 			result = selectedConstraints.get(0);
@@ -427,7 +431,7 @@ public class SpecificSettingsPage extends ConstraintViewPage {
 	 * {@link List} of {@link Constraint}s.
 	 * 
 	 * @param newConstraints
-	 *            The new selected {@link Constraint}s.
+	 *          The new selected {@link Constraint}s.
 	 */
 	@Override
 	public void updateConstraintViewer(List<Constraint> newConstraints) {
@@ -443,8 +447,8 @@ public class SpecificSettingsPage extends ConstraintViewPage {
 
 	/**
 	 * <p>
-	 * A helper method called, when a property of the selected
-	 * {@link Constraint} has been changed.
+	 * A helper method called, when a property of the selected {@link Constraint}
+	 * has been changed.
 	 * </p>
 	 */
 	private void updateSettings() {
@@ -460,8 +464,7 @@ public class SpecificSettingsPage extends ConstraintViewPage {
 			boolean inheritanceStatus;
 			int invariantCheckMode;
 
-			violationCode = Ocl2JavaFactory.getInstance()
-					.createTransformedCode();
+			violationCode = Ocl2JavaFactory.getInstance().createTransformedCode();
 			violationCode.addCode(this.violationMacroText.getText());
 
 			if (selectedConstraint.getKind() == ConstraintKind.INVARIANT
@@ -476,15 +479,18 @@ public class SpecificSettingsPage extends ConstraintViewPage {
 
 			if (selectedConstraint.getKind() == ConstraintKind.INVARIANT) {
 				if (this.invariantMode2.getSelection()) {
-					invariantCheckMode = IOcl2JavaSettings.INVARIANT_CHECK_AFTER_CONSTRUCT_AND_PUBLIC_METHOD_EXECUTION;
+					invariantCheckMode =
+							IOcl2JavaSettings.INVARIANT_CHECK_AFTER_CONSTRUCT_AND_PUBLIC_METHOD_EXECUTION;
 				}
 
 				else if (this.invariantMode3.getSelection()) {
-					invariantCheckMode = IOcl2JavaSettings.INVARIANT_CHECK_AFTER_SPECIAL_METHOD_INVOCATION;
+					invariantCheckMode =
+							IOcl2JavaSettings.INVARIANT_CHECK_AFTER_SPECIAL_METHOD_INVOCATION;
 				}
 
 				else {
-					invariantCheckMode = IOcl2JavaSettings.INVARIANT_CHECK_AFTER_CONSTRUCT_AND_ATTRIBUTE_CHANGE;
+					invariantCheckMode =
+							IOcl2JavaSettings.INVARIANT_CHECK_AFTER_CONSTRUCT_AND_ATTRIBUTE_CHANGE;
 				}
 			}
 
@@ -493,8 +499,7 @@ public class SpecificSettingsPage extends ConstraintViewPage {
 			}
 
 			/* Update the violation macro for the selected constraint. */
-			this.mySettings
-					.setViolationMacro(violationCode, selectedConstraint);
+			this.mySettings.setViolationMacro(violationCode, selectedConstraint);
 
 			/* Update the inheritance status for the selected constraint. */
 			this.mySettings.setInheritanceDisabled(selectedConstraint,

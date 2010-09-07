@@ -37,22 +37,23 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
-import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
+import tudresden.ocl20.pivot.model.IModel;
+import tudresden.ocl20.pivot.model.ModelAccessException;
 import tudresden.ocl20.pivot.pivotmodel.Constraint;
+import tudresden.ocl20.pivot.pivotmodel.Namespace;
 import tudresden.ocl20.pivot.tools.codegen.declarativ.IOcl2DeclCode;
 import tudresden.ocl20.pivot.tools.codegen.declarativ.IOcl2DeclSettings;
-import tudresden.ocl20.pivot.tools.codegen.declarativ.impl.Ocl2DeclCode;
-import tudresden.ocl20.pivot.tools.codegen.declarativ.impl.Ocl2DeclSettings;
+import tudresden.ocl20.pivot.tools.codegen.declarativ.Ocl2DeclCodeFactory;
 import tudresden.ocl20.pivot.tools.codegen.declarativ.mapping.IMappedModel;
+import tudresden.ocl20.pivot.tools.codegen.declarativ.ocl2sql.IOcl2Sql;
 import tudresden.ocl20.pivot.tools.codegen.declarativ.ocl2sql.Ocl2SqlPlugin;
 import tudresden.ocl20.pivot.tools.codegen.exception.Ocl2CodeException;
 import tudresden.ocl20.pivot.tools.template.ITemplate;
+import tudresden.ocl20.pivot.tools.transformation.ITransformation;
+import tudresden.ocl20.pivot.tools.transformation.TransformationFactory;
 import tudresden.ocl20.pivot.tools.transformation.exception.InvalidModelException;
-import tudresden.ocl20.pivot.tools.transformation.exception.ModelAccessException;
 import tudresden.ocl20.pivot.tools.transformation.exception.TransformationException;
 import tudresden.ocl20.pivot.tools.transformation.impl.Tuple;
-import tudresden.ocl20.pivot.tools.transformation.pivot2sql.impl.Pivot2DdlAndMappedModel;
-import tudresden.ocl20.pivot.tools.transformation.pivot2sql.impl.Pivot2MappedModelImpl;
 
 /**
  * OCL2SQL-Compiler
@@ -60,12 +61,14 @@ import tudresden.ocl20.pivot.tools.transformation.pivot2sql.impl.Pivot2MappedMod
  * @author Florian Heidenreich
  * @author Bjoern Freitag
  */
-public class Ocl2Sql implements IOcl2DeclCode {
+public class Ocl2Sql implements IOcl2Sql {
 
 	private Logger LOGGER = Ocl2SqlPlugin.getLogger(Ocl2Sql.class);
 
 	private IOcl2DeclCode codeGenerator;
 	private IOcl2DeclSettings ocl2DeclSettings;
+
+	private IModel model;
 
 	public Ocl2Sql() {
 
@@ -114,16 +117,19 @@ public class Ocl2Sql implements IOcl2DeclCode {
 			sqlCommentar += create_SQLCommentar("Modus: vertical");
 		}
 
-		this.codeGenerator = new Ocl2DeclCode();
+		this.codeGenerator =
+				Ocl2DeclCodeFactory.getInstance().createOcl2DeclCodeGenerator();
 		this.codeGenerator.setSettings(this.getSettings());
 		if (this.getSettings().isSaveCode()) {
-			Pivot2DdlAndMappedModel pdamm;
 			try {
+				ITransformation<Namespace, IOcl2DeclSettings, Tuple<String, IMappedModel>> pdamm;
 				pdamm =
-						new Pivot2DdlAndMappedModel(dateString, dateString + "_generated");
+						TransformationFactory.getInstance().getTransformation(
+								"Pivot2DdlAndMappedModel", Namespace.class, String.class,
+								IMappedModel.class, IOcl2DeclSettings.class, dateString,
+								dateString + "_generated");
 				pdamm.setSettings(ocl2DeclSettings);
-				pdamm.setParameterIN(ModelBusPlugin.getModelRegistry().getActiveModel()
-						.getRootNamespace());
+				pdamm.setParameterIN(model.getRootNamespace());
 				pdamm.invoke();
 				Tuple<String, IMappedModel> tupleDdlMM = pdamm.getResult();
 				saveToFile(sqlCommentar + tupleDdlMM.getElem1(),
@@ -134,24 +140,24 @@ public class Ocl2Sql implements IOcl2DeclCode {
 				e.printStackTrace();
 			} catch (InvalidModelException e) {
 				e.printStackTrace();
-			} catch (tudresden.ocl20.pivot.model.ModelAccessException e) {
-				e.printStackTrace();
 			}
 
 		}
 		else {
 			try {
-				Pivot2MappedModelImpl pmm =
-						new Pivot2MappedModelImpl(dateString, dateString + "_generated");
+				ITransformation<Namespace, IOcl2DeclSettings, IMappedModel> pmm;
+				pmm =
+						TransformationFactory.getInstance().getTransformation(
+								"Pivot2MappedModelImpl", Namespace.class, IMappedModel.class,
+								IOcl2DeclSettings.class, dateString, dateString + "_generated");
 				pmm.setSettings(ocl2DeclSettings);
-				pmm.setParameterIN(ModelBusPlugin.getModelRegistry().getActiveModel()
-						.getRootNamespace());
+				pmm.setParameterIN(model.getRootNamespace());
 				pmm.invoke();
 			} catch (ModelAccessException e) {
 				e.printStackTrace();
 			} catch (InvalidModelException e) {
 				e.printStackTrace();
-			} catch (tudresden.ocl20.pivot.model.ModelAccessException e) {
+			} catch (TransformationException e) {
 				e.printStackTrace();
 			}
 		}
@@ -165,13 +171,14 @@ public class Ocl2Sql implements IOcl2DeclCode {
 			}
 			saveToFile(output, dateString.concat("_view") + ".sql");
 		}
-		
+
 		return constraintList;
 	}
 
 	public void resetEnvironment() {
 
-		this.setSettings(new Ocl2DeclSettings());
+		this.setSettings(Ocl2DeclCodeFactory.getInstance()
+				.createOcl2DeclCodeSettings());
 	}
 
 	private void saveToFile(String text, String fileName)
@@ -236,5 +243,10 @@ public class Ocl2Sql implements IOcl2DeclCode {
 			LOGGER.debug("saveToFile(String, String,) - end");
 		}
 		// no else.
+	}
+
+	public void setInputModel(IModel inputModel) {
+
+		model = inputModel;
 	}
 }

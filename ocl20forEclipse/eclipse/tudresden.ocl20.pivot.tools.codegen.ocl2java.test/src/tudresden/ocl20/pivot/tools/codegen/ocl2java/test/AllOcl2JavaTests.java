@@ -17,27 +17,31 @@ You should have received a copy of the GNU Lesser General Public License along
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package tudresden.ocl20.pivot.tools.codegen.ocl2java.test.tests.constraintkinds;
+package tudresden.ocl20.pivot.tools.codegen.ocl2java.test;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
 import tudresden.ocl20.pivot.tools.codegen.ocl2java.Ocl2JavaPlugin;
+import tudresden.ocl20.pivot.tools.codegen.ocl2java.test.tests.FragmentTest;
+import tudresden.ocl20.pivot.tools.codegen.ocl2java.test.tests.InstrumentationTest;
+import tudresden.ocl20.pivot.tools.codegen.ocl2java.test.tests.constraintkinds.AllConstraintsKindTests;
+import tudresden.ocl20.pivot.tools.codegen.ocl2java.test.tests.standardlibrary.AllStandardLibraryTests;
 
 /**
  * <p>
- * Provides a jUnit Test Suite containing tests to test the transformation of
- * different kind of OCL constraints using the OCL 2 Java Code transformer (
- * {@link Ocl2JavaPlugin}).
+ * Provides a jUnit Test Suite containing all plug-in tests of the OCL 2 Java
+ * Code transformer ({@link Ocl2JavaPlugin}).
  * </p>
  * 
  * @author Claas Wilke
  * 
  */
 @RunWith(Suite.class)
-@Suite.SuiteClasses({ TestBody.class, TestDef.class, TestPre.class,
-		TestPost.class })
-public class AllConstraintsKindTests {
+@Suite.SuiteClasses({ AllConstraintsKindTests.class,
+		AllStandardLibraryTests.class, InstrumentationTest.class,
+		FragmentTest.class })
+public class AllOcl2JavaTests {
 	/*
 	 * This class remains completely empty, being used only as a holder for the
 	 * above annotations.

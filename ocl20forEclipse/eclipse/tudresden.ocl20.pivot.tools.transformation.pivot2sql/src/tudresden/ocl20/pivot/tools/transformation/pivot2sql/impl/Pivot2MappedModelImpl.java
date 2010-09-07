@@ -11,17 +11,17 @@ import java.util.Set;
 import org.apache.log4j.Logger;
 
 import tudresden.ocl20.pivot.essentialocl.types.CollectionType;
+import tudresden.ocl20.pivot.model.ModelAccessException;
 import tudresden.ocl20.pivot.pivotmodel.AssociationProperty;
 import tudresden.ocl20.pivot.pivotmodel.Namespace;
 import tudresden.ocl20.pivot.pivotmodel.Property;
 import tudresden.ocl20.pivot.pivotmodel.Type;
-import tudresden.ocl20.pivot.tools.codegen.IOcl2CodeSettings;
 import tudresden.ocl20.pivot.tools.codegen.declarativ.IOcl2DeclSettings;
 import tudresden.ocl20.pivot.tools.codegen.declarativ.mapping.Guide;
 import tudresden.ocl20.pivot.tools.codegen.declarativ.mapping.IMappedModel;
+import tudresden.ocl20.pivot.tools.transformation.ITransformation;
 import tudresden.ocl20.pivot.tools.transformation.M2XTransformation;
 import tudresden.ocl20.pivot.tools.transformation.exception.InvalidModelException;
-import tudresden.ocl20.pivot.tools.transformation.exception.ModelAccessException;
 import tudresden.ocl20.pivot.tools.transformation.pivot2sql.Pivot2SqlPlugin;
 import tudresden.ocl20.pivot.tools.transformation.pivot2sql.mapping.MappedClassImpl;
 import tudresden.ocl20.pivot.tools.transformation.pivot2sql.mapping.MappedModelImpl;
@@ -35,27 +35,17 @@ import tudresden.ocl20.pivot.tools.transformation.pivot2sql.util.PivotModelAnaly
  * 
  */
 public class Pivot2MappedModelImpl extends
-		M2XTransformation<Namespace, IMappedModel> {
+		M2XTransformation<Namespace, IOcl2DeclSettings, IMappedModel> implements
+		ITransformation<Namespace, IOcl2DeclSettings, IMappedModel> {
 
 	private Logger LOGGER = Pivot2SqlPlugin
 			.getLogger(Pivot2MappedModelImpl.class);
 
 	private static final String PART_CLASS =
 			"The partitipants of an Association must be Types.";
-	
+
 	private static final String ASS_ROLE =
-		"The Roles at the AssociationEnds must be named.";
-
-	private IOcl2DeclSettings ocl2DeclSettings;
-
-	/**
-	 * The type of the transformations in model.
-	 */
-	public static String in_type = "Pivotmodel";
-	/**
-	 * The type of the transformations out model.
-	 */
-	public static String out_type = "A Mapped Model";
+			"The Roles at the AssociationEnds must be named.";
 
 	private PivotModelAnalyser pivotModelAnalyser;
 
@@ -69,8 +59,7 @@ public class Pivot2MappedModelImpl extends
 	 * @throws ModelAccessException
 	 * @throws Exception
 	 */
-	public Pivot2MappedModelImpl(String modelInName, String outname)
-			throws ModelAccessException {
+	public Pivot2MappedModelImpl(String modelInName, String outname) {
 
 		super(modelInName, outname);
 		if (LOGGER.isDebugEnabled()) {
@@ -82,42 +71,34 @@ public class Pivot2MappedModelImpl extends
 		}
 	}
 
-	public Pivot2MappedModelImpl() {
-
-		super();
-	}
-
 	@Override
 	public void invoke() throws InvalidModelException {
 
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("Starting pivot to mappedmodel transformation");
-			String settings =
-					"TablePrefix:" + this.ocl2DeclSettings.getTablePrefix() + "\n";
+			String settings = "TablePrefix:" + this.settings.getTablePrefix() + "\n";
 			settings +=
-					"ObjectViewPrefix:" + this.ocl2DeclSettings.getObjectViewPrefix()
+					"ObjectViewPrefix:" + this.settings.getObjectViewPrefix() + "\n";
+			settings +=
+					"AssociationTablePrefix:" + this.settings.getAssociationTablePrefix()
 							+ "\n";
 			settings +=
-					"AssociationTablePrefix:"
-							+ this.ocl2DeclSettings.getAssociationTablePrefix() + "\n";
+					"PrimaryKeyPrefix:" + this.settings.getPrimaryKeyPrefix() + "\n";
 			settings +=
-					"PrimaryKeyPrefix:" + this.ocl2DeclSettings.getPrimaryKeyPrefix()
-							+ "\n";
+					"ForeignKeyPrefix:" + this.settings.getForeignKeyPrefix() + "\n";
 			settings +=
-					"ForeignKeyPrefix:" + this.ocl2DeclSettings.getForeignKeyPrefix()
-							+ "\n";
-			settings +=
-					"Modus:" + this.ocl2DeclSettings.getModus()
-							+ "(1 =typed, 2=vertical)";
+					"Modus:" + this.settings.getModus() + "(1 =typed, 2=vertical)";
 			LOGGER.debug(settings);
 		}
 
 		this.pivotModelAnalyser = new PivotModelAnalyser(model_in);
 
-		this.ocl2DeclSettings.setMappedModel(new MappedModelImpl());
+		this.settings.setMappedModel(new MappedModelImpl());
 
 		Set<Type> types = pivotModelAnalyser.getInstancesOfType(Type.class);
 		for (Type type : types) {
+			if (pivotModelAnalyser.isPrimitive(type))
+				continue;
 			map_Type2MappedClass(type);
 		}
 		Set<AssociationProperty> filterAssociation =
@@ -130,7 +111,7 @@ public class Pivot2MappedModelImpl extends
 			filterAssociation.addAll(association.getInverseAssociationProperties());
 		}
 
-		this.out = this.ocl2DeclSettings.getMappedModel();
+		this.out = this.settings.getMappedModel();
 
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("Stop Transformation");
@@ -169,7 +150,7 @@ public class Pivot2MappedModelImpl extends
 	private String query_pkNameForType(Type type) throws InvalidModelException {
 
 		String pkname =
-				this.ocl2DeclSettings.getPrimaryKeyPrefix() + query_nameOfGenroot(type);
+				this.settings.getPrimaryKeyPrefix() + query_nameOfGenroot(type);
 		return pkname;
 	}
 
@@ -195,7 +176,7 @@ public class Pivot2MappedModelImpl extends
 
 		String typename = type.getName();
 		String pkname = query_pkNameForType(type);
-		String ovname = this.ocl2DeclSettings.getObjectViewPrefix() + typename;
+		String ovname = this.settings.getObjectViewPrefix() + typename;
 		List<Property> attributes = query_propertiesForType(type);
 		Set<Type> subtypes = query_subtypesForType(type);
 
@@ -217,8 +198,7 @@ public class Pivot2MappedModelImpl extends
 
 			for (Type subType : subtypes) {
 				String typename_sub = subType.getName();
-				String ovname_sub =
-						this.ocl2DeclSettings.getObjectViewPrefix() + typename_sub;
+				String ovname_sub = this.settings.getObjectViewPrefix() + typename_sub;
 
 				MappedClassImpl sub = accessMappedClass(subType);
 
@@ -242,14 +222,12 @@ public class Pivot2MappedModelImpl extends
 
 		String typename = type.getName();
 		String pkname = query_pkNameForType(type);
-		String ovname = this.ocl2DeclSettings.getObjectViewPrefix() + typename;
+		String ovname = this.settings.getObjectViewPrefix() + typename;
 
 		MappedClassImpl mc;
 
-		if (this.ocl2DeclSettings.getMappedModel().isClass(typename)) {
-			mc =
-					(MappedClassImpl) this.ocl2DeclSettings.getMappedModel().getClass(
-							typename);
+		if (this.settings.getMappedModel().isClass(typename)) {
+			mc = (MappedClassImpl) this.settings.getMappedModel().getClass(typename);
 		}
 		else {
 			if (LOGGER.isDebugEnabled()) {
@@ -258,8 +236,8 @@ public class Pivot2MappedModelImpl extends
 
 			mc = new MappedClassImpl(typename);
 			Guide g = new Guide(false);
-			((MappedModelImpl) this.ocl2DeclSettings.getMappedModel())
-					.addMappedClass(typename, mc);
+			((MappedModelImpl) this.settings.getMappedModel()).addMappedClass(
+					typename, mc);
 
 			if (LOGGER.isDebugEnabled()) {
 				LOGGER.debug("Creating Class Guide for Type " + type.getName() + "\n"
@@ -276,8 +254,7 @@ public class Pivot2MappedModelImpl extends
 	private void map_association2guide(AssociationProperty property)
 			throws InvalidModelException {
 
-		String assTableName =
-				ocl2DeclSettings.getUniqueAssociationTableName(property);
+		String assTableName = settings.getUniqueAssociationTableName(property);
 
 		Type tA = property.getType();
 		String nameA = property.getName();
@@ -295,19 +272,22 @@ public class Pivot2MappedModelImpl extends
 			throw new InvalidModelException(ASS_ROLE + "[" + assTableName + ", "
 					+ tB.getName() + "]", this.model_in, this);
 		}
-		
+
+		if (pivotModelAnalyser.isMultiple(property)) {
+			tA = ((CollectionType) tA).getElementType();
+		}
+
 		Type typeA = null;
 		if (!(pivotModelAnalyser.instanceIsOfType(tA, Type.class))) {
 			throw new InvalidModelException(PART_CLASS + "[" + assTableName + ", "
 					+ tA.getName() + "]", this.model_in, this);
 		}
 		else {
-			if (!pivotModelAnalyser.instanceIsOfType(tA, CollectionType.class)) {
-				typeA = (Type) tA;
-			}
-			else {
-				typeA = ((CollectionType) tA).getElementType();
-			}
+			typeA = (Type) tA;
+		}
+
+		if (pivotModelAnalyser.isMultiple(pB)) {
+			tB = ((CollectionType) tB).getElementType();
 		}
 		Type typeB = null;
 		if (!(pivotModelAnalyser.instanceIsOfType(tB, Type.class))) {
@@ -315,12 +295,7 @@ public class Pivot2MappedModelImpl extends
 					+ tB.getName() + "]", this.model_in, this);
 		}
 		else {
-			if (!pivotModelAnalyser.instanceIsOfType(tB, CollectionType.class)) {
-				typeB = (Type) tB;
-			}
-			else {
-				typeB = ((CollectionType) tB).getElementType();
-			}
+			typeB = (Type) tB;
 		}
 
 		/** MAPPING PHASE **/
@@ -347,9 +322,8 @@ public class Pivot2MappedModelImpl extends
 			String nameA) throws InvalidModelException {
 
 		String pknameA = query_pkNameForType(typeA);
-		String ovnameA =
-				this.ocl2DeclSettings.getObjectViewPrefix() + typeA.getName();
-		String fknameB = this.ocl2DeclSettings.getForeignKeyPrefix() + nameB;
+		String ovnameA = this.settings.getObjectViewPrefix() + typeA.getName();
+		String fknameB = this.settings.getForeignKeyPrefix() + nameB;
 
 		Set<Type> subtypesA = query_subtypesForType(typeA);
 		Set<Type> subtypesB = query_subtypesForType(typeB);
@@ -366,7 +340,7 @@ public class Pivot2MappedModelImpl extends
 
 			Guide sa2b = new Guide(true);
 			String ovnameA_sub =
-					this.ocl2DeclSettings.getObjectViewPrefix() + subType.getName();
+					this.settings.getObjectViewPrefix() + subType.getName();
 
 			sa2b.add(fknameB, ovnameA_sub, pknameA);
 			mcA_sub.addAssociationEndGuide(nameB, sa2b);
@@ -391,25 +365,21 @@ public class Pivot2MappedModelImpl extends
 	private void map_MtoN_Association2Guide(Type typeA, String nameA, Type typeB,
 			String nameB, String assTableName) throws InvalidModelException {
 
-		String pknameA =
-				this.ocl2DeclSettings.getPrimaryKeyPrefix() + typeA.getName();
-		String pknameB =
-				this.ocl2DeclSettings.getPrimaryKeyPrefix() + typeB.getName();
-		String ovnameA =
-				this.ocl2DeclSettings.getObjectViewPrefix() + typeA.getName();
-		String ovnameB =
-				this.ocl2DeclSettings.getObjectViewPrefix() + typeB.getName();
-		String fknameA = this.ocl2DeclSettings.getForeignKeyPrefix() + nameA;
-		String fknameB = this.ocl2DeclSettings.getForeignKeyPrefix() + nameB;
+		String pknameA = this.settings.getPrimaryKeyPrefix() + typeA.getName();
+		String pknameB = this.settings.getPrimaryKeyPrefix() + typeB.getName();
+		String ovnameA = this.settings.getObjectViewPrefix() + typeA.getName();
+		String ovnameB = this.settings.getObjectViewPrefix() + typeB.getName();
+		String fknameA = this.settings.getForeignKeyPrefix() + nameA;
+		String fknameB = this.settings.getForeignKeyPrefix() + nameB;
 		Set<Type> subtypesA = query_subtypesForType(typeA);
 		Set<Type> subtypesB = query_subtypesForType(typeB);
 
 		MappedClassImpl mcA =
-				(MappedClassImpl) ((MappedModelImpl) this.ocl2DeclSettings
-						.getMappedModel()).getClass(typeA.getName());
+				(MappedClassImpl) ((MappedModelImpl) this.settings.getMappedModel())
+						.getClass(typeA.getName());
 		MappedClassImpl mcB =
-				(MappedClassImpl) ((MappedModelImpl) this.ocl2DeclSettings
-						.getMappedModel()).getClass(typeB.getName());
+				(MappedClassImpl) ((MappedModelImpl) this.settings.getMappedModel())
+						.getClass(typeB.getName());
 
 		Guide a2b = new Guide(true);
 
@@ -422,7 +392,7 @@ public class Pivot2MappedModelImpl extends
 
 			Guide sa2b = new Guide(true);
 			String ovnameA_sub =
-					this.ocl2DeclSettings.getObjectViewPrefix() + subType.getName();
+					this.settings.getObjectViewPrefix() + subType.getName();
 
 			sa2b.add(pknameB, ovnameB, pknameB);
 			sa2b.add(fknameB, assTableName, fknameA);
@@ -442,7 +412,7 @@ public class Pivot2MappedModelImpl extends
 
 			Guide sb2a = new Guide(true);
 			String ovnameB_sub =
-					this.ocl2DeclSettings.getObjectViewPrefix() + subType.getName();
+					this.settings.getObjectViewPrefix() + subType.getName();
 
 			sb2a.add(fknameA, ovnameA, pknameA);
 			sb2a.add(fknameA, assTableName, fknameB);
@@ -456,21 +426,19 @@ public class Pivot2MappedModelImpl extends
 
 		String pknameA = query_pkNameForType(typeA);
 		String pknameB = query_pkNameForType(typeB);
-		String ovnameA =
-				this.ocl2DeclSettings.getObjectViewPrefix() + typeA.getName();
-		String ovnameB =
-				this.ocl2DeclSettings.getObjectViewPrefix() + typeB.getName();
-		String fknameA = this.ocl2DeclSettings.getForeignKeyPrefix() + nameA;
-		String fknameB = this.ocl2DeclSettings.getForeignKeyPrefix() + nameB;
+		String ovnameA = this.settings.getObjectViewPrefix() + typeA.getName();
+		String ovnameB = this.settings.getObjectViewPrefix() + typeB.getName();
+		String fknameA = this.settings.getForeignKeyPrefix() + nameA;
+		String fknameB = this.settings.getForeignKeyPrefix() + nameB;
 		Set<Type> subtypesA = query_subtypesForType(typeA);
 		Set<Type> subtypesB = query_subtypesForType(typeB);
 
 		MappedClassImpl mcA =
-				(MappedClassImpl) ((MappedModelImpl) this.ocl2DeclSettings
-						.getMappedModel()).getClass(typeA.getName());
+				(MappedClassImpl) ((MappedModelImpl) this.settings.getMappedModel())
+						.getClass(typeA.getName());
 		MappedClassImpl mcB =
-				(MappedClassImpl) ((MappedModelImpl) this.ocl2DeclSettings
-						.getMappedModel()).getClass(typeB.getName());
+				(MappedClassImpl) ((MappedModelImpl) this.settings.getMappedModel())
+						.getClass(typeB.getName());
 
 		Guide a2b = new Guide(true);
 		a2b.add(fknameB, ovnameA, pknameA);
@@ -496,14 +464,6 @@ public class Pivot2MappedModelImpl extends
 			sb2a.add(fknameA, ovnameB, pknameB);
 			mcB_sub.addAssociationEndGuide(nameA, sb2a);
 
-		}
-
-	}
-
-	public void setSettings(IOcl2CodeSettings ocl2CodeSettings) {
-
-		if (ocl2CodeSettings instanceof IOcl2DeclSettings) {
-			this.ocl2DeclSettings = (IOcl2DeclSettings) ocl2CodeSettings;
 		}
 
 	}

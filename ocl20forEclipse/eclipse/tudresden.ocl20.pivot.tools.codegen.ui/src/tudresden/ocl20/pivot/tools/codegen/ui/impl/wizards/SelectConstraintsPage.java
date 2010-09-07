@@ -187,13 +187,16 @@ public class SelectConstraintsPage extends WizardPage {
 		constraintViewer.setContentProvider(new ArrayContentProvider());
 		constraintViewer.setLabelProvider(new ConstraintLabelProvider());
 		constraintViewer.getControl().setLayoutData(
-				new GridData(SWT.FILL, SWT.FILL, true, true));
+				new GridData(SWT.FILL, SWT.FILL, false, true));
 
 		/* Set the selection data. */
 		constraintViewer.setInput(this.getConstraintsOfActiveModel());
 
 		/* By default select all constraints. */
 		this.selectAllConstraints();
+
+		/* Set width of strucered view */
+		constraintViewer.getControl().setSize(700, 0);
 
 		/* Add a change listener to react on updates. */
 		constraintViewer

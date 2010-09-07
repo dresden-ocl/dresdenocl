@@ -109,7 +109,7 @@ public class SettingsPage extends WizardPage {
 
 		desLangCombo = new Combo(desLangGroup, SWT.READ_ONLY);
 		desLangCombo.setSize(new Point(12, 10000));
-		
+
 		for (ITemplateGroup templateGroup : TemplatePlugin
 				.getTemplateGroupRegistry().getTemplateGroups()) {
 			if (templateGroup.getDisplayName().contains("SQL")) {

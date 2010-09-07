@@ -17,7 +17,7 @@ public class TransformationException extends Exception {
 
 	private static final long serialVersionUID = -8882468425456595874L;
 
-	private ITransformation<?, ?> transformation;
+	private ITransformation<?, ?, ?> transformation;
 
 	/**
 	 * The standard constructor for a TransformationException.
@@ -27,7 +27,7 @@ public class TransformationException extends Exception {
 	 * @param impl
 	 *          The transformation in which the error occured.
 	 */
-	public TransformationException(String message, ITransformation<?, ?> impl) {
+	public TransformationException(String message, ITransformation<?, ?, ?> impl) {
 
 		super(message);
 		this.transformation = impl;
@@ -39,7 +39,7 @@ public class TransformationException extends Exception {
 	 * @return The transformation in which the error occured.
 	 * 
 	 */
-	public ITransformation<?, ?> getTransformation() {
+	public ITransformation<?, ?, ?> getTransformation() {
 
 		return transformation;
 	}

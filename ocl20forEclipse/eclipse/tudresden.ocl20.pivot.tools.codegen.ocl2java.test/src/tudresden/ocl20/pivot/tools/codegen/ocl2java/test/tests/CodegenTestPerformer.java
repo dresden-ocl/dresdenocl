@@ -39,7 +39,7 @@ import tudresden.ocl20.pivot.pivotmodel.Namespace;
 import tudresden.ocl20.pivot.tools.codegen.exception.Ocl2CodeException;
 import tudresden.ocl20.pivot.tools.codegen.ocl2java.IOcl2Java;
 import tudresden.ocl20.pivot.tools.codegen.ocl2java.IOcl2JavaSettings;
-import tudresden.ocl20.pivot.tools.codegen.ocl2java.test.Ocl2CodeTestPlugin;
+import tudresden.ocl20.pivot.tools.codegen.ocl2java.test.Ocl2JavaTestPlugin;
 
 /**
  * <p>
@@ -256,12 +256,8 @@ public final class CodegenTestPerformer {
 	public void doDiffTest(String constraintFileName, String expectedFileName,
 			boolean disableInheritance) throws Ocl2CodeException {
 
-		this
-				.doDiffTest(
-						constraintFileName,
-						expectedFileName,
-						disableInheritance,
-						IOcl2JavaSettings.INVARIANT_CHECK_AFTER_CONSTRUCT_AND_ATTRIBUTE_CHANGE);
+		this.doDiffTest(constraintFileName, expectedFileName, disableInheritance,
+				IOcl2JavaSettings.INVARIANT_CHECK_AFTER_CONSTRUCT_AND_ATTRIBUTE_CHANGE);
 	}
 
 	/**
@@ -426,7 +422,7 @@ public final class CodegenTestPerformer {
 
 		/* Get the bundle location for the difference file. */
 		expectedCodeBundleDirectory =
-				Platform.getBundle(Ocl2CodeTestPlugin.PLUGIN_ID).getLocation();
+				Platform.getBundle(Ocl2JavaTestPlugin.PLUGIN_ID).getLocation();
 
 		/* Remove the 'reference:file:' from the beginning. */
 		expectedCodeBundleDirectory = expectedCodeBundleDirectory.substring(15);

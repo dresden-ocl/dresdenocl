@@ -16,36 +16,34 @@ for more details.
 You should have received a copy of the GNU Lesser General Public License along 
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
-package tudresden.ocl20.pivot.tools.codegen.ocl2java;
 
-import org.apache.log4j.Logger;
+package tudresden.ocl20.pivot.tools.codegen.ocl2java.test;
+
 import org.eclipse.core.runtime.Plugin;
 import org.osgi.framework.BundleContext;
 
-import tudresden.ocl20.logging.LoggingPlugin;
-
 /**
  * <p>
- * Activates the Ocl2Java plug-in.
+ * Activates the Ocl2CodeTest plug-in.
  * </p>
  * 
- * @author Claas Wilke
+ * @author Claas Wilke.
  */
-public class Ocl2JavaPlugin extends Plugin {
+public class Ocl2JavaTestPlugin extends Plugin {
 
 	/** The plug-in ID. */
 	public static final String PLUGIN_ID =
-			"tudresden.ocl20.pivot.tools.codegen.ocl2java";
+			"tudresden.ocl20.pivot.tools.codegen.ocl2java.test";
 
 	/** The shared instance. */
-	private static Ocl2JavaPlugin plugin;
+	private static Ocl2JavaTestPlugin plugin;
 
 	/**
 	 * <p>
-	 * Creates a new {@link Ocl2JavaPlugin}.
+	 * Creates a new {@link Ocl2JavaTestPlugin}.
 	 * </p>
 	 */
-	public Ocl2JavaPlugin() {
+	public Ocl2JavaTestPlugin() {
 
 	}
 
@@ -58,9 +56,6 @@ public class Ocl2JavaPlugin extends Plugin {
 
 		super.start(context);
 		plugin = this;
-
-		/* Configure custom logging properties. */
-		LoggingPlugin.configureDefaultLogging(plugin);
 	}
 
 	/*
@@ -74,26 +69,14 @@ public class Ocl2JavaPlugin extends Plugin {
 	}
 
 	/**
-	 * @return the shared instance
-	 */
-	public static Ocl2JavaPlugin getDefault() {
-
-		return plugin;
-	}
-
-	/**
 	 * <p>
-	 * Facade method for the classes in this plug-in that hides the dependency
-	 * from the <code>tudresden.ocl20.logging</code> plug-in.
+	 * Returns the shared instance.
 	 * </p>
 	 * 
-	 * @param clazz
-	 *          the class to return the logger for
-	 * 
-	 * @return a log4j <code>Logger</code> instance
+	 * @return the shared instance
 	 */
-	public static Logger getLogger(Class<?> clazz) {
+	public static Ocl2JavaTestPlugin getDefault() {
 
-		return LoggingPlugin.getLogManager(plugin).getLogger(clazz);
+		return plugin;
 	}
 }

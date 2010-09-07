@@ -62,6 +62,11 @@ import tudresden.ocl20.pivot.tools.codegen.ui.impl.CodegenUIMessages;
 public class SelectDirectoryPage extends WizardPage {
 
 	/**
+	 * The directory is in the workspace of eclipse runtime.
+	 */
+	private IResource workspaceDirectory;
+
+	/**
 	 * The selection in the workspace, cached to automatically suggest the
 	 * selected file.
 	 */
@@ -88,6 +93,8 @@ public class SelectDirectoryPage extends WizardPage {
 		super("SelectDirectoryPage");
 
 		this.selection = selection;
+
+		this.workspaceDirectory = null;
 
 		setTitle(CodegenUIMessages.SelectDirectoryPage_Title);
 		setDescription(CodegenUIMessages.SelectDirectoryPage_Description);
@@ -286,15 +293,16 @@ public class SelectDirectoryPage extends WizardPage {
 	 */
 	private String decodePath(String path) {
 
+		String returnPath;
 		try {
-			path =
+			returnPath =
 					VariablesPlugin.getDefault().getStringVariableManager()
 							.performStringSubstitution(path);
 		} catch (CoreException e) {
-			path = null;
+			returnPath = null;
 		}
 
-		return path;
+		return returnPath;
 	}
 
 	/**
@@ -521,6 +529,7 @@ public class SelectDirectoryPage extends WizardPage {
 
 			/* If file was selected set path. */
 			if (filePath != null) {
+				workspaceDirectory = null;
 				directoryTextBox.setText(filePath);
 			}
 		}
@@ -545,7 +554,6 @@ public class SelectDirectoryPage extends WizardPage {
 			ElementTreeSelectionDialog dialog;
 
 			int pressedButton;
-			IResource resource;
 
 			dialog =
 					new ElementTreeSelectionDialog(getShell(),
@@ -563,15 +571,15 @@ public class SelectDirectoryPage extends WizardPage {
 			/* Open the dialog. */
 			do {
 				pressedButton = dialog.open();
-				resource = (IResource) dialog.getFirstResult();
+				workspaceDirectory = (IResource) dialog.getFirstResult();
 			}
 
 			while (pressedButton != IDialogConstants.CANCEL_ID
-					&& resource.getType() != IResource.FOLDER);
+					&& workspaceDirectory.getType() != IResource.FOLDER);
 
 			/* If OK was pressed set path. */
 			if (pressedButton == IDialogConstants.OK_ID) {
-				String fileLoc = encodePath(resource);
+				String fileLoc = encodePath(workspaceDirectory);
 				directoryTextBox.setText(fileLoc);
 			}
 		}
@@ -581,4 +589,19 @@ public class SelectDirectoryPage extends WizardPage {
 
 		return directoryConstraintGroup;
 	}
+
+	public void refreshDirectory() {
+
+		if (this.workspaceDirectory != null) {
+			try {
+				Thread.sleep(1000);
+				this.workspaceDirectory.refreshLocal(IResource.DEPTH_ONE, null);
+			} catch (CoreException e) {
+				e.printStackTrace();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
 }

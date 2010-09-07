@@ -75,8 +75,7 @@ public class TestOclAny extends AbstractDiffTest {
 	public void testAllInstances01() throws Exception {
 
 		this.compareFragmentCodeGeneration("sltest/oclany", "allInstances01");
-		this.compareInstrumentationCodeGeneration("sltest/oclany",
-				"allInstances01");
+		this.compareInstrumentationCodeGeneration("sltest/oclany", "allInstances01");
 	}
 
 	/**

@@ -73,7 +73,7 @@ public class TestBag extends AbstractDiffTest {
 	 */
 	@Test
 	public void testAsBag01() throws Exception {
-	
+
 		this.compareFragmentCodeGeneration("sltest/bag", "asBag01");
 	}
 
@@ -86,7 +86,7 @@ public class TestBag extends AbstractDiffTest {
 	 */
 	@Test
 	public void testAsOrderedSet01() throws Exception {
-	
+
 		this.compareFragmentCodeGeneration("sltest/bag", "asOrderedSet01");
 	}
 
@@ -99,7 +99,7 @@ public class TestBag extends AbstractDiffTest {
 	 */
 	@Test
 	public void testAsSequence01() throws Exception {
-	
+
 		this.compareFragmentCodeGeneration("sltest/bag", "asSequence01");
 	}
 
@@ -112,7 +112,7 @@ public class TestBag extends AbstractDiffTest {
 	 */
 	@Test
 	public void testAsSet01() throws Exception {
-	
+
 		this.compareFragmentCodeGeneration("sltest/bag", "asSet01");
 	}
 
@@ -125,7 +125,7 @@ public class TestBag extends AbstractDiffTest {
 	 */
 	@Test
 	public void testCount01() throws Exception {
-	
+
 		this.compareFragmentCodeGeneration("sltest/bag", "count01");
 	}
 
@@ -138,7 +138,7 @@ public class TestBag extends AbstractDiffTest {
 	 */
 	@Test
 	public void testEquals01() throws Exception {
-	
+
 		this.compareFragmentCodeGeneration("sltest/bag", "equals01");
 	}
 
@@ -151,7 +151,7 @@ public class TestBag extends AbstractDiffTest {
 	 */
 	@Test
 	public void testExcluding01() throws Exception {
-	
+
 		this.compareFragmentCodeGeneration("sltest/bag", "excluding01");
 	}
 
@@ -164,7 +164,7 @@ public class TestBag extends AbstractDiffTest {
 	 */
 	@Test
 	public void testFlatten01() throws Exception {
-	
+
 		this.compareFragmentCodeGeneration("sltest/bag", "flatten01");
 	}
 
@@ -177,7 +177,7 @@ public class TestBag extends AbstractDiffTest {
 	 */
 	@Test
 	public void testIncluding01() throws Exception {
-	
+
 		this.compareFragmentCodeGeneration("sltest/bag", "including01");
 	}
 
@@ -190,7 +190,7 @@ public class TestBag extends AbstractDiffTest {
 	 */
 	@Test
 	public void testIntersection01() throws Exception {
-	
+
 		this.compareFragmentCodeGeneration("sltest/bag", "intersection01");
 	}
 
@@ -203,7 +203,7 @@ public class TestBag extends AbstractDiffTest {
 	 */
 	@Test
 	public void testIntersection02() throws Exception {
-	
+
 		this.compareFragmentCodeGeneration("sltest/bag", "intersection02");
 	}
 
@@ -216,7 +216,7 @@ public class TestBag extends AbstractDiffTest {
 	 */
 	@Test
 	public void testUnion01() throws Exception {
-	
+
 		this.compareFragmentCodeGeneration("sltest/bag", "union01");
 	}
 
@@ -229,7 +229,7 @@ public class TestBag extends AbstractDiffTest {
 	 */
 	@Test
 	public void testUnion02() throws Exception {
-	
+
 		this.compareFragmentCodeGeneration("sltest/bag", "union02");
 	}
 }

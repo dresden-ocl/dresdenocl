@@ -86,7 +86,7 @@ public class TestTemplateGroup {
 	}
 
 	@Before
-	public void setup() {
+	public void setUp() {
 
 		TemplatePlugin.getTemplateGroupRegistry().addTemplateGroup(general);
 		int size =

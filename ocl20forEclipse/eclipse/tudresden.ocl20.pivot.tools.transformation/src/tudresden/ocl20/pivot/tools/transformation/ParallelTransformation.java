@@ -6,9 +6,7 @@ package tudresden.ocl20.pivot.tools.transformation;
 
 import org.eclipse.emf.ecore.EObject;
 
-import tudresden.ocl20.pivot.tools.codegen.IOcl2CodeSettings;
 import tudresden.ocl20.pivot.tools.transformation.exception.InvalidModelException;
-import tudresden.ocl20.pivot.tools.transformation.exception.ModelAccessException;
 import tudresden.ocl20.pivot.tools.transformation.exception.TransformationException;
 import tudresden.ocl20.pivot.tools.transformation.impl.Tuple;
 
@@ -24,14 +22,14 @@ import tudresden.ocl20.pivot.tools.transformation.impl.Tuple;
  * @author Christian Wende
  * 
  */
-public abstract class ParallelTransformations<IN extends EObject, A, B> extends
-		M2XTransformation<IN, Tuple<A, B>> {
+public abstract class ParallelTransformation<IN extends EObject, SETTINGS, A, B>
+		extends M2XTransformation<IN, SETTINGS, Tuple<A, B>> {
 
-	private ITransformation<IN, A> trans1;
-	private ITransformation<IN, B> trans2;
+	private ITransformation<IN, SETTINGS, A> trans1;
+	private ITransformation<IN, SETTINGS, B> trans2;
 
 	/**
-	 * The constructor for ParallelTransformations.
+	 * The constructor for ParallelTransformation.
 	 * 
 	 * @param modelInName
 	 *          The name of the in model.
@@ -41,28 +39,28 @@ public abstract class ParallelTransformations<IN extends EObject, A, B> extends
 	 *          The id of the first transformation.
 	 * @param tid2
 	 *          The id of the second transformation.
-	 * @throws ModelAccessException
+	 * @param in
+	 *          the type of the input
+	 * @param out1
+	 *          the type of the first element of output tuple
+	 * @param out2
+	 *          the type of the second element of output tuple
+	 * @param settings
+	 *          the type of the settings
 	 */
-	@SuppressWarnings("unchecked")
-	protected ParallelTransformations(String modelInName, String outName,
-			String tid1, String tid2) throws ModelAccessException {
+	protected ParallelTransformation(String modelInName, String outName,
+			String tid1, String tid2, Class<IN> in, Class<A> out1, Class<B> out2,
+			Class<SETTINGS> settings) {
 
 		super(modelInName, outName);
 
 		trans1 =
-				(ITransformation<IN, A>) TransformationPlugin
-						.getTransformationRegistry().getTransformation(tid1, modelInName,
-								outName);
+				TransformationFactory.getInstance().getTransformation(tid1, in, out1,
+						settings, modelInName, outName);
 		trans2 =
-				(ITransformation<IN, B>) TransformationPlugin
-						.getTransformationRegistry().getTransformation(tid2, modelInName,
-								outName);
+				TransformationFactory.getInstance().getTransformation(tid2, in, out2,
+						settings, modelInName, outName);
 
-	}
-
-	public ParallelTransformations() {
-
-		super();
 	}
 
 	public void invoke() throws TransformationException, InvalidModelException {
@@ -77,10 +75,11 @@ public abstract class ParallelTransformations<IN extends EObject, A, B> extends
 
 	}
 
-	public void setSettings(IOcl2CodeSettings ocl2CodeSettings) {
+	public void setSettings(SETTINGS settings) {
 
-		trans1.setSettings(ocl2CodeSettings);
-		trans2.setSettings(ocl2CodeSettings);
+		super.setSettings(settings);
+		trans1.setSettings(settings);
+		trans2.setSettings(settings);
 	}
 
 	public void setParameterIN(IN in) {

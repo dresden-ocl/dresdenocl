@@ -17,10 +17,10 @@ import orgomg.cwm.resource.relational.Schema;
 import orgomg.cwm.resource.relational.Table;
 import orgomg.cwm.resource.relational.View;
 
-import tudresden.ocl20.pivot.tools.codegen.IOcl2CodeSettings;
 import tudresden.ocl20.pivot.tools.codegen.declarativ.IOcl2DeclSettings;
 import tudresden.ocl20.pivot.tools.template.ITemplate;
 import tudresden.ocl20.pivot.tools.template.impl.TemplateHelper;
+import tudresden.ocl20.pivot.tools.transformation.ITransformation;
 import tudresden.ocl20.pivot.tools.transformation.M2XTransformation;
 import tudresden.ocl20.pivot.tools.transformation.exception.TransformationException;
 import tudresden.ocl20.pivot.tools.transformation.pivot2sql.Pivot2SqlPlugin;
@@ -34,26 +34,11 @@ import tudresden.ocl20.pivot.tools.transformation.pivot2sql.util.CwmModelAnalyse
  * @author Bjoern Freitag
  * 
  */
-public class Cwm2DdlImpl extends M2XTransformation<Schema, String> {
+public class Cwm2DdlImpl extends
+		M2XTransformation<Schema, IOcl2DeclSettings, String> implements
+		ITransformation<Schema, IOcl2DeclSettings, String> {
 
 	private Logger LOGGER = Pivot2SqlPlugin.getLogger(Cwm2DdlImpl.class);
-
-	/**
-	 * The unique ID of the transformation
-	 */
-	public static String transformationID = "CWM2DDL";
-	/**
-	 * The type of the transformations in model.
-	 */
-	public static String in_type = "CWM";
-	/**
-	 * The type of the transformations out model.
-	 */
-	public static String out_type = "A DDL";
-
-	private IOcl2DeclSettings ocl2DeclSettings;
-
-	private String output = "";
 
 	private CwmModelAnalyser cwmModelAnalyser;
 
@@ -67,14 +52,9 @@ public class Cwm2DdlImpl extends M2XTransformation<Schema, String> {
 	 * @param ocl2DeclSettings
 	 * @throws Exception
 	 */
-	public Cwm2DdlImpl(String modelInName, String outname) throws Exception {
+	public Cwm2DdlImpl(String modelInName, String outname) {
 
 		super(modelInName, outname);
-	}
-
-	public Cwm2DdlImpl() {
-
-		super();
 	}
 
 	public void invoke() throws TransformationException {
@@ -83,6 +63,9 @@ public class Cwm2DdlImpl extends M2XTransformation<Schema, String> {
 			LOGGER.debug("Started CWM to DDL transformation");
 		}
 		this.cwmModelAnalyser = new CwmModelAnalyser(model_in);
+
+		if (out == null)
+			out = "";
 
 		Set<Table> tables = cwmModelAnalyser.getInstancesOfType(Table.class);
 		for (Table table : tables) {
@@ -98,9 +81,8 @@ public class Cwm2DdlImpl extends M2XTransformation<Schema, String> {
 			map_fk2ddlFkConstraint(fk);
 		}
 
-		this.out = output;
 		if (LOGGER.isDebugEnabled()) {
-			LOGGER.debug("\n" + output);
+			LOGGER.debug("\n" + out);
 			LOGGER.debug("Finished CWM to DDL transformation");
 		}
 	}
@@ -108,7 +90,7 @@ public class Cwm2DdlImpl extends M2XTransformation<Schema, String> {
 	private void map_fk2ddlFkConstraint(ForeignKey fk) {
 
 		ITemplate createFKCon =
-				this.ocl2DeclSettings.getTemplateGroup().getTemplate(
+				this.settings.getTemplateGroup().getTemplate(
 						"createForeignKeyConstraint");
 		PrimaryKey pk = (PrimaryKey) fk.getUniqueKey();
 		Table pkt = (Table) pk.getNamespace();
@@ -119,7 +101,7 @@ public class Cwm2DdlImpl extends M2XTransformation<Schema, String> {
 		createFKCon.setAttribute("reference", pkt.getName() + "(" + pk.getName()
 				+ ")");
 
-		output += "\n\n" + createFKCon.toString();
+		out += "\n\n" + createFKCon.toString();
 
 	}
 
@@ -148,10 +130,10 @@ public class Cwm2DdlImpl extends M2XTransformation<Schema, String> {
 			LOGGER.debug("Create database view for CwmView " + view.getName());
 		}
 		ITemplate createView =
-				this.ocl2DeclSettings.getTemplateGroup().getTemplate("createView");
+				this.settings.getTemplateGroup().getTemplate("createView");
 		createView.setAttribute("viewname", view.getName());
 		createView.setAttribute("body", view.getQueryExpression().getBody());
-		output += "\n\n" + createView.toString();
+		out += "\n\n" + createView.toString();
 	}
 
 	private void map_table2ddlTable(Table table) {
@@ -168,7 +150,7 @@ public class Cwm2DdlImpl extends M2XTransformation<Schema, String> {
 
 		for (Column column : pk_columns) {
 			ITemplate createColumn =
-					this.ocl2DeclSettings.getTemplateGroup().getTemplate("createColumn");
+					this.settings.getTemplateGroup().getTemplate("createColumn");
 
 			createColumn.setAttribute("name", column.getName());
 			createColumn.setAttribute("primaryKey", "true");
@@ -194,7 +176,7 @@ public class Cwm2DdlImpl extends M2XTransformation<Schema, String> {
 
 		for (ForeignKey fk : fks) {
 			ITemplate createColumn =
-					this.ocl2DeclSettings.getTemplateGroup().getTemplate("createColumn");
+					this.settings.getTemplateGroup().getTemplate("createColumn");
 
 			fk_columns.addAll(query_columnsForFK(fk));
 			PrimaryKey pk = (PrimaryKey) fk.getUniqueKey();
@@ -209,7 +191,7 @@ public class Cwm2DdlImpl extends M2XTransformation<Schema, String> {
 
 		for (Column column : columns) {
 			ITemplate createColumn =
-					this.ocl2DeclSettings.getTemplateGroup().getTemplate("createColumn");
+					this.settings.getTemplateGroup().getTemplate("createColumn");
 			createColumn.setAttribute("name", column.getName());
 			createColumn.setAttribute("type", getTypeString(column.getType()
 					.getName()));
@@ -220,11 +202,11 @@ public class Cwm2DdlImpl extends M2XTransformation<Schema, String> {
 				TemplateHelper.getValuesCommaSeparated(concreteColumns);
 
 		ITemplate createTable =
-				this.ocl2DeclSettings.getTemplateGroup().getTemplate("createTable");
+				this.settings.getTemplateGroup().getTemplate("createTable");
 		createTable.setAttribute("tablename", table.getName());
 		createTable.setAttribute("columns", columnsString);
 
-		output += "\n\n" + createTable.toString();
+		out += "\n\n" + createTable.toString();
 	}
 
 	private Set<Column> query_columnsForFK(ForeignKey fk) {
@@ -245,16 +227,14 @@ public class Cwm2DdlImpl extends M2XTransformation<Schema, String> {
 	private String getTypeString(String type) {
 
 		ITemplate createType =
-				this.ocl2DeclSettings.getTemplateGroup().getTemplate("createType");
+				this.settings.getTemplateGroup().getTemplate("createType");
 		createType.setAttribute("type", type);
 		return createType.toString();
 	}
 
-	public void setSettings(IOcl2CodeSettings ocl2CodeSettings) {
+	public void setSettings(IOcl2DeclSettings ocl2CodeSettings) {
 
-		if (ocl2CodeSettings instanceof IOcl2DeclSettings) {
-			this.ocl2DeclSettings = (IOcl2DeclSettings) ocl2CodeSettings;
-		}
+		this.settings = ocl2CodeSettings;
 
 	}
 

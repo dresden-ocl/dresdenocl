@@ -21,9 +21,10 @@ package tudresden.ocl20.pivot.tools.codegen.declarativ.ocl2sql.ui.internal.wizar
 
 import java.util.List;
 
+import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
 import tudresden.ocl20.pivot.pivotmodel.Constraint;
 import tudresden.ocl20.pivot.tools.codegen.IOcl2Code;
-import tudresden.ocl20.pivot.tools.codegen.declarativ.IOcl2DeclCode;
+import tudresden.ocl20.pivot.tools.codegen.declarativ.ocl2sql.IOcl2Sql;
 import tudresden.ocl20.pivot.tools.codegen.declarativ.ocl2sql.Ocl2SqlPlugin;
 import tudresden.ocl20.pivot.tools.codegen.declarativ.ocl2sql.ui.Ocl2SQLUIPlugIn;
 import tudresden.ocl20.pivot.tools.codegen.exception.Ocl2CodeException;
@@ -64,7 +65,9 @@ public class CodegenSQLJob extends CodegenJob {
 	protected void runCodeGenerator(List<Constraint> constraints)
 			throws Ocl2CodeException {
 
-		((IOcl2DeclCode) this.codeGenerator).transformFragmentCode(constraints);
+		((IOcl2Sql) this.codeGenerator).setInputModel(ModelBusPlugin
+				.getModelRegistry().getActiveModel());
+		((IOcl2Sql) this.codeGenerator).transformFragmentCode(constraints);
 	}
 
 }

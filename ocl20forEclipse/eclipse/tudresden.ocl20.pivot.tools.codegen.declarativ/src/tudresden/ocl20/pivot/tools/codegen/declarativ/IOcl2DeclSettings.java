@@ -36,7 +36,7 @@ public interface IOcl2DeclSettings extends IOcl2CodeSettings {
 	public void setForeignKeyPrefix(String foreignKeyPrefix);
 
 	public String getForeignKeyPrefix();
-	
+
 	public String getUniqueAssociationTableName(Property property);
-	
+
 }

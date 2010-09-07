@@ -95,8 +95,6 @@ public interface IOcl2JavaSettings extends IOcl2CodeSettings {
 	 */
 	public boolean isInheritanceDisabled(Constraint aConstraint);
 
-
-
 	/**
 	 * <p>
 	 * Sets the The location, where transformed constraints shall be saved
@@ -149,7 +147,6 @@ public interface IOcl2JavaSettings extends IOcl2CodeSettings {
 	 *          If true, inheritance is disabled by default.
 	 */
 	public void setInheritanceDisabled(Constraint aConstraint, boolean disable);
-
 
 	/**
 	 * <p>

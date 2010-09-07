@@ -18,6 +18,10 @@ Require-Bundle: org.eclipse.core.runtime,
  tudresden.ocl20.pivot.tools.codegen.ocl2java;visibility:=reexport,
  tudresden.ocl20.pivot.tools.codegen,
  tudresden.ocl20.pivot.metamodels.xsd,
+ tudresden.ocl20.pivot.tools.codegen.declarativ.ocl2sql,
+ tudresden.ocl20.pivot.tools.codegen.declarativ,
+ tudresden.ocl20.pivot.tools.template,
+ tudresden.ocl20.pivot.tools.transformation,
  tudresden.ocl20.pivot.modelinstancetype.xml,
  tudresden.ocl20.pivot.language.ocl.resource.ocl
 Bundle-RequiredExecutionEnvironment: J2SE-1.5

@@ -18,16 +18,16 @@ $typeMap.(type)$
 >>
 
 createView(viewname, body) ::= <<
-CREATE VIEW `$viewname$` 
+CREATE VIEW `$viewname$`
 AS ( $body$ );
 >>
 
 createColumn(name, type, primaryKey, foreignKey) ::= <<
-`$name$` $type$$if(primaryKey)$ PRIMARY KEY $endif$$if(foreignKey)$ REFERENCES $foreignKey$ $endif$
+`$name$` $type$$if(primaryKey)$ PRIMARY KEY$endif$$if(foreignKey)$ REFERENCES $foreignKey$ $endif$
 >>
 
 createTable(tablename, columns) ::= <<
 CREATE TABLE `$tablename$` (
-$columns$ 
+$columns$
 ) TYPE = InnoDB;
 >>

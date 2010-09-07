@@ -24,7 +24,9 @@ public class TemplateHelper {
 		for (String c : stringCollection) {
 			string += c + ",";
 		}
-		string = string.substring(0, string.length() - 1);
+		if (string.length() > 0) {
+			string = string.substring(0, string.length() - 1);
+		}
 
 		return string;
 

@@ -29,20 +29,20 @@ import orgomg.cwm.resource.relational.View;
 import orgomg.cwm.resource.relational.impl.RelationalPackageImpl;
 
 import tudresden.ocl20.pivot.essentialocl.types.CollectionType;
+import tudresden.ocl20.pivot.model.ModelAccessException;
 import tudresden.ocl20.pivot.pivotmodel.AssociationProperty;
 import tudresden.ocl20.pivot.pivotmodel.Namespace;
-import tudresden.ocl20.pivot.pivotmodel.PrimitiveType;
 import tudresden.ocl20.pivot.pivotmodel.Property;
 import tudresden.ocl20.pivot.pivotmodel.Type;
-import tudresden.ocl20.pivot.tools.codegen.IOcl2CodeSettings;
 import tudresden.ocl20.pivot.tools.codegen.declarativ.IOcl2DeclSettings;
-import tudresden.ocl20.pivot.tools.codegen.declarativ.impl.Ocl2DeclSettings;
 import tudresden.ocl20.pivot.tools.template.ITemplate;
 import tudresden.ocl20.pivot.tools.template.impl.TemplateHelper;
+import tudresden.ocl20.pivot.tools.transformation.ITransformation;
 import tudresden.ocl20.pivot.tools.transformation.M2MTransformation;
 import tudresden.ocl20.pivot.tools.transformation.exception.InvalidModelException;
 import tudresden.ocl20.pivot.tools.transformation.exception.TransformationException;
 import tudresden.ocl20.pivot.tools.transformation.pivot2sql.Pivot2SqlPlugin;
+import tudresden.ocl20.pivot.tools.transformation.pivot2sql.util.CwmModelAnalyser;
 import tudresden.ocl20.pivot.tools.transformation.pivot2sql.util.PivotModelAnalyser;
 
 /**
@@ -54,7 +54,9 @@ import tudresden.ocl20.pivot.tools.transformation.pivot2sql.util.PivotModelAnaly
  * @author Bjoern Freitag
  * 
  */
-public class Pivot2CwmImpl extends M2MTransformation<Namespace, Schema> {
+public class Pivot2CwmImpl extends
+		M2MTransformation<Namespace, IOcl2DeclSettings, Schema> implements
+		ITransformation<Namespace, IOcl2DeclSettings, Schema> {
 
 	private Logger LOGGER = Pivot2SqlPlugin.getLogger(Pivot2CwmImpl.class);
 
@@ -68,17 +70,6 @@ public class Pivot2CwmImpl extends M2MTransformation<Namespace, Schema> {
 			"The Roles at the AssociationEnds must be named.";
 	private static final String ONLY_SINGE_INHERIT =
 			"The model has multiple inheritance structures. ";
-
-	/**
-	 * The type of the transformations in model.
-	 */
-	public static String in_type = "pivotmodel";
-	/**
-	 * The type of the transformations out model.
-	 */
-	public static String out_type = "cwm";
-
-	private IOcl2DeclSettings ocl2DeclSettings;
 
 	/* Factory that is used to create model elements in the target model */
 	private RelationalPackage elementPackage;
@@ -97,10 +88,7 @@ public class Pivot2CwmImpl extends M2MTransformation<Namespace, Schema> {
 
 	private PivotModelAnalyser pivotModelAnalyser;
 
-	public Pivot2CwmImpl() {
-
-		super();
-	}
+	private CwmModelAnalyser cwmModelAnalyser;
 
 	/**
 	 * The constructor for a Uml2Cwm transformation.
@@ -109,12 +97,12 @@ public class Pivot2CwmImpl extends M2MTransformation<Namespace, Schema> {
 	 *          The name for the in model.
 	 * @param modelOutName
 	 *          The name for the out model.
+	 * @throws ModelAccessException
 	 * @throws Exception
 	 */
-	public Pivot2CwmImpl(String modelInName, String modelOutName)
-			throws Exception {
+	public Pivot2CwmImpl(String modelInName, String modelOutName) {
 
-		super(modelInName, modelOutName, out_type);
+		super(modelInName, modelOutName);
 		elementPackage = RelationalPackageImpl.init();
 		this.setParameterOUT((Schema) elementPackage.getEFactoryInstance().create(
 				elementPackage.getSchema()));
@@ -124,26 +112,22 @@ public class Pivot2CwmImpl extends M2MTransformation<Namespace, Schema> {
 
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("Starting Pivot to CWM Transformation");
-			String settings =
-					"TablePrefix:" + this.ocl2DeclSettings.getTablePrefix() + "\n";
+			String settings = "TablePrefix:" + this.settings.getTablePrefix() + "\n";
 			settings +=
-					"ObjectViewPrefix:" + this.ocl2DeclSettings.getObjectViewPrefix()
+					"ObjectViewPrefix:" + this.settings.getObjectViewPrefix() + "\n";
+			settings +=
+					"AssociationTablePrefix:" + this.settings.getAssociationTablePrefix()
 							+ "\n";
 			settings +=
-					"AssociationTablePrefix:"
-							+ this.ocl2DeclSettings.getAssociationTablePrefix() + "\n";
+					"PrimaryKeyPrefix:" + this.settings.getPrimaryKeyPrefix() + "\n";
 			settings +=
-					"PrimaryKeyPrefix:" + this.ocl2DeclSettings.getPrimaryKeyPrefix()
-							+ "\n";
+					"ForeignKeyPrefix:" + this.settings.getForeignKeyPrefix() + "\n";
 			settings +=
-					"ForeignKeyPrefix:" + this.ocl2DeclSettings.getForeignKeyPrefix()
-							+ "\n";
-			settings +=
-					"Modus:" + this.ocl2DeclSettings.getModus()
-							+ "(1 =typed, 2=vertical)";
+					"Modus:" + this.settings.getModus() + "(1 =typed, 2=vertical)";
 			LOGGER.debug(settings);
 		}
 		this.pivotModelAnalyser = new PivotModelAnalyser(model_in);
+		this.cwmModelAnalyser = new CwmModelAnalyser(out);
 
 		/** HELPERS **/
 
@@ -154,6 +138,8 @@ public class Pivot2CwmImpl extends M2MTransformation<Namespace, Schema> {
 		Set<Type> types = pivotModelAnalyser.getInstancesOfType(Type.class);
 
 		for (Type type : types) {
+			if (pivotModelAnalyser.isPrimitive(type))
+				continue;
 			map_type2table(type);
 			typename2fknames.put(type.getName(), new ArrayList<String>());
 		}
@@ -176,6 +162,8 @@ public class Pivot2CwmImpl extends M2MTransformation<Namespace, Schema> {
 		}
 
 		for (Type type : types) {
+			if (pivotModelAnalyser.isPrimitive(type))
+				continue;
 			map_type2view(type);
 		}
 
@@ -184,30 +172,28 @@ public class Pivot2CwmImpl extends M2MTransformation<Namespace, Schema> {
 		}
 	}
 
-	public void setSettings(IOcl2CodeSettings ocl2CodeSettings) {
+	public void setSettings(IOcl2DeclSettings ocl2CodeSettings) {
 
-		if (ocl2CodeSettings instanceof IOcl2DeclSettings) {
-			this.ocl2DeclSettings = (IOcl2DeclSettings) ocl2CodeSettings;
-		}
+		this.settings = ocl2CodeSettings;
 
 	}
 
 	private void map_type2table(Type type) throws InvalidModelException {
 
-		if (this.ocl2DeclSettings.getModus() == Ocl2DeclSettings.MODUS_TYPED) {
+		if (this.settings.getModus() == IOcl2DeclSettings.MODUS_TYPED) {
 			map_type2table_typed(type);
 		}
-		else if (this.ocl2DeclSettings.getModus() == Ocl2DeclSettings.MODUS_VERTICAL) {
+		else if (this.settings.getModus() == IOcl2DeclSettings.MODUS_VERTICAL) {
 			map_type2table_vertical(type);
 		}
 	}
 
 	private void map_type2view(Type type) throws InvalidModelException {
 
-		if (this.ocl2DeclSettings.getModus() == IOcl2DeclSettings.MODUS_TYPED) {
+		if (this.settings.getModus() == IOcl2DeclSettings.MODUS_TYPED) {
 			map_type2view_typed(type);
 		}
-		if (this.ocl2DeclSettings.getModus() == IOcl2DeclSettings.MODUS_VERTICAL) {
+		if (this.settings.getModus() == IOcl2DeclSettings.MODUS_VERTICAL) {
 			map_type2view_vertical(type);
 		}
 	}
@@ -229,7 +215,7 @@ public class Pivot2CwmImpl extends M2MTransformation<Namespace, Schema> {
 						+ owningTable.getName());
 			}
 
-			if (type instanceof PrimitiveType) {
+			if (pivotModelAnalyser.isPrimitive(type)) {
 				create_Column(name, owningTable, create_SQLSimpleType(type.getName()));
 			}
 			else if (type instanceof CollectionType) {
@@ -253,9 +239,7 @@ public class Pivot2CwmImpl extends M2MTransformation<Namespace, Schema> {
 
 		/** INITIALISATION PHASE **/
 
-		String assTableName =
-			ocl2DeclSettings.getUniqueAssociationTableName(property);
-
+		String assTableName = settings.getUniqueAssociationTableName(property);
 
 		Type tA = property.getType();
 		String nameA = property.getName();
@@ -275,31 +259,30 @@ public class Pivot2CwmImpl extends M2MTransformation<Namespace, Schema> {
 					+ tB.getName() + "]", this.model_in, this);
 		}
 
+		if (pivotModelAnalyser.isMultiple(property)) {
+			tA = ((CollectionType) tA).getElementType();
+		}
+
 		Type typeA = null;
 		if (!(pivotModelAnalyser.instanceIsOfType(tA, Type.class))) {
 			throw new InvalidModelException(PART_CLASS + "[" + assTableName + ", "
 					+ tA.getName() + "]", this.model_in, this);
 		}
 		else {
-			if (!pivotModelAnalyser.instanceIsOfType(tA, CollectionType.class)) {
-				typeA = (Type) tA;
-			}
-			else {
-				typeA = ((CollectionType) tA).getElementType();
-			}
+			typeA = (Type) tA;
 		}
+
+		if (pivotModelAnalyser.isMultiple(pB)) {
+			tB = ((CollectionType) tB).getElementType();
+		}
+
 		Type typeB = null;
 		if (!(pivotModelAnalyser.instanceIsOfType(tB, Type.class))) {
 			throw new InvalidModelException(PART_CLASS + "[" + assTableName + ", "
 					+ tB.getName() + "]", this.model_in, this);
 		}
 		else {
-			if (!pivotModelAnalyser.instanceIsOfType(tB, CollectionType.class)) {
-				typeB = (Type) tB;
-			}
-			else {
-				typeB = ((CollectionType) tB).getElementType();
-			}
+			typeB = (Type) tB;
 		}
 
 		/** MAPPING PHASE **/
@@ -401,8 +384,8 @@ public class Pivot2CwmImpl extends M2MTransformation<Namespace, Schema> {
 
 		/** INITIALISATION PHASE **/
 		String typename = type.getName();
-		String tablename = this.ocl2DeclSettings.getTablePrefix() + typename;
-		String pkname = this.ocl2DeclSettings.getPrimaryKeyPrefix() + typename;
+		String tablename = this.settings.getTablePrefix() + typename;
+		String pkname = this.settings.getPrimaryKeyPrefix() + typename;
 		String typeColumnName = "type";
 		List<Type> superTypes = query_supertypesForType(type, true);
 		boolean hasSuperTypes = superTypes.size() > 0;
@@ -451,9 +434,9 @@ public class Pivot2CwmImpl extends M2MTransformation<Namespace, Schema> {
 		List<Type> superTypes = query_supertypesForType(type, true);
 		boolean hasSuperTypes = superTypes.size() > 0;
 		String classname = type.getName();
-		String viewname = this.ocl2DeclSettings.getObjectViewPrefix() + classname;
+		String viewname = this.settings.getObjectViewPrefix() + classname;
 		String pkname = query_pkNameForType(type);
-		Set<String> persistentTables = new HashSet<String>();
+		SortedSet<String> persistentTables = new TreeSet<String>();
 		SortedSet<String> columns = new TreeSet<String>();
 		SortedSet<String> pks = new TreeSet<String>();
 		SortedSet<String> fks = new TreeSet<String>();
@@ -472,7 +455,7 @@ public class Pivot2CwmImpl extends M2MTransformation<Namespace, Schema> {
 			String tableName = table.getName();
 			for (Property a : query_propertyForType(forType)) {
 				// add attributes of superTypes
-				columns.add(tableName + "." + a.getName() + " as " + a.getName());
+				columns.add(create_Property(tableName, a.getName(), true));
 			}
 			for (String fk : typename2fknames.get(forType.getName())) {
 				// add fks for associations and attributes that refer to internal types
@@ -494,8 +477,7 @@ public class Pivot2CwmImpl extends M2MTransformation<Namespace, Schema> {
 		allColumns.addAll(columns);
 		allColumns.addAll(fks);
 
-		ITemplate body =
-				ocl2DeclSettings.getTemplateGroup().getTemplate("selectStmt");
+		ITemplate body = settings.getTemplateGroup().getTemplate("selectStmt");
 
 		String columnstring = TemplateHelper.getValuesCommaSeparated(allColumns);
 		String tableString =
@@ -504,7 +486,10 @@ public class Pivot2CwmImpl extends M2MTransformation<Namespace, Schema> {
 		body.setAttribute("columns", columnstring);
 		body.setAttribute("tables", tableString);
 		if (hasSuperTypes) {
-			body.setAttribute("where", "type=\"" + type.getName() + "\"");
+			ITemplate typeTemplate =
+					this.settings.getTemplateGroup().getTemplate("createSubType");
+			typeTemplate.setAttribute("type", type.getName());
+			body.setAttribute("where", typeTemplate.toString());
 		}
 
 		create_View(viewname, body.toString());
@@ -521,7 +506,7 @@ public class Pivot2CwmImpl extends M2MTransformation<Namespace, Schema> {
 
 		/** INITIALISATION PHASE **/
 		String classname = type.getName();
-		String tablename = this.ocl2DeclSettings.getTablePrefix() + classname;
+		String tablename = this.settings.getTablePrefix() + classname;
 		String pkname = query_pkNameForType(type);
 		List<Type> directSuperClass = query_supertypesForType(type, false);
 		boolean hasDirectSuperClass = directSuperClass.size() > 0;
@@ -562,27 +547,27 @@ public class Pivot2CwmImpl extends M2MTransformation<Namespace, Schema> {
 		List<Type> directSuperType = query_supertypesForType(type, false);
 		boolean hasDirectSuperType = directSuperType.size() > 0;
 		String classname = type.getName();
-		String viewname = this.ocl2DeclSettings.getObjectViewPrefix() + classname;
+		String viewname = this.settings.getObjectViewPrefix() + classname;
 
-		Set<String> persistentTables = new HashSet<String>();
+		SortedSet<String> persistentTables = new TreeSet<String>();
 		SortedSet<String> columns = new TreeSet<String>();
 		SortedSet<String> pks = new TreeSet<String>();
 		SortedSet<String> fks = new TreeSet<String>();
 
 		Table tab = typename2table.get(type.getName());
 		PrimaryKey pk = query_pkForTable(tab);
-		pks.add(tab.getName() + "." + pk.getName());
+		pks.add(create_Property(tab.getName(), pk.getName(), false));
 
 		// also consider the actual class when constructing the view
 		Table subClassTable = typename2table.get(type.getName());
 		String subTypeTableName = subClassTable.getName();
 		for (Property a : query_propertyForType(type)) {
 			// add attributes
-			columns.add(subTypeTableName + "." + a.getName() + " as " + a.getName());
+			columns.add(create_Property(subTypeTableName, a.getName(), true));
 		}
 		for (String fk : typename2fknames.get(type.getName())) {
 			// add fks for associations
-			fks.add(subTypeTableName + "." + fk + " as " + fk);
+			fks.add(create_Property(subTypeTableName, fk, true));
 		}
 		persistentTables.add(subTypeTableName);
 
@@ -600,11 +585,11 @@ public class Pivot2CwmImpl extends M2MTransformation<Namespace, Schema> {
 				String tableName = table.getName();
 				for (Property a : query_propertyForType(superType)) {
 					// add attributes of superTypes
-					columns.add(tableName + "." + a.getName() + " as " + a.getName());
+					columns.add(create_Property(tableName, a.getName(), true));
 				}
 				for (String fk : typename2fknames.get(superType.getName())) {
 					// add fks for associations of superclass
-					fks.add(tableName + "." + fk + " as " + fk);
+					fks.add(create_Property(tableName, fk, true));
 				}
 				// add where statement to join this class with its superclass over the
 				// generalisation key
@@ -612,7 +597,8 @@ public class Pivot2CwmImpl extends M2MTransformation<Namespace, Schema> {
 				String ref_name = pkname;
 
 				whereString +=
-						subTypeTableName + "." + ref_name + "=" + tableName + "." + pkname;
+						create_Property(subTypeTableName, ref_name, false) + "="
+								+ create_Property(tableName, pkname, false);
 				persistentTables.add(tableName);
 
 				// query next superclass
@@ -634,8 +620,7 @@ public class Pivot2CwmImpl extends M2MTransformation<Namespace, Schema> {
 		allColumns.addAll(columns);
 		allColumns.addAll(fks);
 
-		ITemplate body =
-				ocl2DeclSettings.getTemplateGroup().getTemplate("selectStmt");
+		ITemplate body = settings.getTemplateGroup().getTemplate("selectStmt");
 		String columnstring = TemplateHelper.getValuesCommaSeparated(allColumns);
 		String tableString =
 				TemplateHelper.getValuesCommaSeparated(persistentTables);
@@ -686,6 +671,9 @@ public class Pivot2CwmImpl extends M2MTransformation<Namespace, Schema> {
 
 		Column c = create_Column(columnName, owningTable);
 		c.setType(propertyType);
+		if (owningTable == null) {
+			System.out.println("");
+		}
 		owningTable.getOwnedElement().add(c);
 		return c;
 	}
@@ -743,7 +731,7 @@ public class Pivot2CwmImpl extends M2MTransformation<Namespace, Schema> {
 	private ForeignKey create_FK(PrimaryKey associatedPK, String foreignName,
 			Table destTable) {
 
-		String fkname = this.ocl2DeclSettings.getForeignKeyPrefix() + foreignName;
+		String fkname = this.settings.getForeignKeyPrefix() + foreignName;
 
 		ForeignKey fk = create_ForeignKey(fkname, destTable, associatedPK);
 		Column fkCol = create_Column(fkname, destTable);
@@ -758,6 +746,17 @@ public class Pivot2CwmImpl extends M2MTransformation<Namespace, Schema> {
 		Table destTable = typename2table.get(destType.getName());
 		ForeignKey fk = create_FK(associatedPK, foreignName, destTable);
 		typename2fknames.get(destType.getName()).add(fk.getName());
+	}
+
+	private String create_Property(String tablename, String columnname,
+			boolean asname) {
+
+		ITemplate template =
+				this.settings.getTemplateGroup().getTemplate("createProperty");
+		template.setAttribute("tablename", tablename);
+		template.setAttribute("columnname", columnname);
+		template.setAttribute("asname", asname);
+		return template.toString();
 	}
 
 	private List<Type> query_supertypesForType(Type type, boolean recurse) {
@@ -784,7 +783,7 @@ public class Pivot2CwmImpl extends M2MTransformation<Namespace, Schema> {
 
 		Set<Property> properties = new HashSet<Property>();
 		for (Property prop : pivotModelAnalyser.getInstancesOfType(
-				type.allProperties(), Property.class)) {
+				type.getOwnedProperty(), Property.class)) {
 			if (!(prop instanceof AssociationProperty))
 				properties.add(prop);
 		}
@@ -807,14 +806,13 @@ public class Pivot2CwmImpl extends M2MTransformation<Namespace, Schema> {
 
 	private String query_pkNameForType(Type type) throws InvalidModelException {
 
-		return this.ocl2DeclSettings.getPrimaryKeyPrefix()
-				+ query_nameOfGenroot(type);
+		return this.settings.getPrimaryKeyPrefix() + query_nameOfGenroot(type);
 	}
 
 	private PrimaryKey query_pkForTable(Table table) throws InvalidModelException {
 
 		Set<PrimaryKey> pks =
-				pivotModelAnalyser.getInstancesOfType(table.getOwnedElement(),
+				cwmModelAnalyser.getInstancesOfType(table.getOwnedElement(),
 						PrimaryKey.class);
 		if (pks.size() > 1) {
 			throw new InvalidModelException(ONE_PK + "[" + table.getName() + "]",

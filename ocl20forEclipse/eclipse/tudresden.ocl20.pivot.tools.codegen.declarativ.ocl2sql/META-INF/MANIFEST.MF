@@ -10,10 +10,11 @@ Export-Package: tudresden.ocl20.pivot.tools.codegen.declarativ.ocl2sql
 Require-Bundle: org.eclipse.core.runtime,
  tudresden.ocl20.logging,
  tudresden.ocl20.pivot.tools.template,
- tudresden.ocl20.pivot.modelbus,
  tudresden.ocl20.pivot.tools.codegen,
  tudresden.ocl20.pivot.tools.transformation,
  tudresden.ocl20.pivot.tools.transformation.pivot2sql,
- tudresden.ocl20.pivot.tools.codegen.declarativ
+ tudresden.ocl20.pivot.tools.codegen.declarativ,
+ tudresden.ocl20.pivot.pivotmodel,
+ tudresden.ocl20.pivot.model
 Bundle-ActivationPolicy: lazy
 Bundle-Vendor: TU Dresden, Software Technology Group

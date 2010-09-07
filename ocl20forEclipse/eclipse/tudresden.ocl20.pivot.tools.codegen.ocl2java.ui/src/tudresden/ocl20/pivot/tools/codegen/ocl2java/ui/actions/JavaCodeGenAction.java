@@ -32,9 +32,8 @@ import tudresden.ocl20.pivot.tools.codegen.ocl2java.ui.internal.wizards.JavaCode
 
 /**
  * <p>
- * This class implements an action which starts the {@link JavaCodeWizard}
- * to generate AspectJ code for imported {@link IModel}s and {@link Constraint}
- * s.
+ * This class implements an action which starts the {@link JavaCodeWizard} to
+ * generate AspectJ code for imported {@link IModel}s and {@link Constraint} s.
  * </p>
  * 
  * @see IWorkbenchWindowActionDelegate
@@ -50,6 +49,7 @@ public class JavaCodeGenAction implements IWorkbenchWindowActionDelegate {
 	 * </p>
 	 */
 	public JavaCodeGenAction() {
+
 	}
 
 	/**
@@ -91,14 +91,15 @@ public class JavaCodeGenAction implements IWorkbenchWindowActionDelegate {
 
 	/**
 	 * <p>
-	 * Selection in the workbench has been changed. We can change the state of
-	 * the 'real' action here if we want, but this can only happen after the
-	 * delegate has been created.
+	 * Selection in the workbench has been changed. We can change the state of the
+	 * 'real' action here if we want, but this can only happen after the delegate
+	 * has been created.
 	 * </p>
 	 * 
 	 * @see IWorkbenchWindowActionDelegate#selectionChanged
 	 */
 	public void selectionChanged(IAction action, ISelection selection) {
+
 	}
 
 	/**
@@ -110,17 +111,19 @@ public class JavaCodeGenAction implements IWorkbenchWindowActionDelegate {
 	 * @see IWorkbenchWindowActionDelegate#dispose
 	 */
 	public void dispose() {
+
 	}
 
 	/**
 	 * <p>
-	 * We will cache window object in order to be able to provide parent shell
-	 * for the message dialog.
+	 * We will cache window object in order to be able to provide parent shell for
+	 * the message dialog.
 	 * </p>
 	 * 
 	 * @see IWorkbenchWindowActionDelegate#init
 	 */
 	public void init(IWorkbenchWindow window) {
+
 		this.window = window;
 	}
 }

@@ -4,14 +4,14 @@ group sql;
 constraint_body(constraint_name,context,context_alias,expression) ::= <<
 CREATE OR REPLACE VIEW $constraint_name$ AS
 (SELECT * FROM $context$ AS $context_alias$
-WHERE NOT ($expression$))
+WHERE NOT ($expression$));
 >>
 
 
 // --- NAVIGATION (CLASS AND ATTRIBUTE) --- 
 feature_call_navigation(object,context1,ref_object,context2) ::= <<
-(SELECT $object$ FROM $context1$ 
- WHERE $ref_object$ in $context2$)
+(SELECT $object$ FROM $context1$
+ WHERE $ref_object$ IN $context2$)
 >>
 
 feature_call_navigation_context(object,context1,ref_object,context_alias,context_object) ::= <<
@@ -28,6 +28,9 @@ feature_call_attribute_boolean(attribute) ::= <<
 ($attribute$ = 1)
 >>
 
+feature_call_operand(operand) ::= <<
+$operand$
+>>
 
 // ---  BOOLEAN (BASIC TYPE) --- 
 literal_boolean_true() ::= <<
@@ -62,6 +65,7 @@ literal_string(value) ::= <<
 
 // --- VARIABLE (BASIC TYPE) ---
 literal_variable(value) ::= <<
+$value$
 >>
 
 
@@ -117,7 +121,7 @@ arithmetic_expression_plus(operand1,operand2) ::= <<
 if_expression(if_branch,then_branch,else_branch) ::= <<
 CASE
   WHEN $if_branch$ THEN $then_branch$
-  ELSE $ELSE_branch$
+  ELSE $else_branch$
 END
 >>
 
@@ -129,7 +133,7 @@ $expression$
 
 // -- ITERATOR FORALL (QUERY) ---
 feature_call_forall(source,alias,object,collection,expression) ::= <<
-NOT exists (
+NOT EXISTS (
   SELECT $object$ FROM $collection$
   WHERE $object$ IN (
     SELECT $object$ FROM $source$ AS $alias$
@@ -171,15 +175,15 @@ exists (
   SELECT $object$ FROM $source$
   WHERE $object$ = $alias$.$object$)
 $if(source2)$
-  AND NOT exists (
+  AND NOT EXISTS (
   SELECT $object$ FROM $source2$
   WHERE $object$ = $alias$.$object$)
 $endif$
 >>
 
-//
+
 // --- RELATIONAL EXPRESSIONS ---
-//
+
 
 // --- EQUAL ---
 relational_expression_equals_any(operand1,operand2) ::= <<
@@ -353,7 +357,7 @@ logical_expression_implies(expression1,expression2) ::= <<
 feature_call_count(source,element,collection,object) ::= <<
 (SELECT
   CASE 
-    WHEN COUNT($element$) IS NULL THEN 0 
+    WHEN COUNT($element$) IS NULL THEN 0
     ELSE COUNT($element$)
   END
   FROM ($source$)
@@ -374,7 +378,7 @@ NOT EXISTS (
 feature_call_size(source,element,collection) ::= <<
 (SELECT
   CASE
-    WHEN COUNT($element$) IS NULL THEN 0 
+    WHEN COUNT($element$) IS NULL THEN 0
     ELSE COUNT($element$)
   END
   FROM ($source$)
@@ -384,11 +388,11 @@ feature_call_size(source,element,collection) ::= <<
 feature_call_sum(source,element,collection) ::= <<
 (SELECT
   CASE 
-    WHEN sum($element$) IS NULL THEN 0 
-    ELSE sum($element$)
+    WHEN SUM($element$) IS NULL THEN 0
+    ELSE SUM($element$)
   END
   FROM $source$
-  WHERE $element$ IN $collection$)
+  WHERE $element$ IN ($collection$))
 >>
 
 feature_call_excludes(object,collection) ::= <<
@@ -450,7 +454,7 @@ feature_call_including_set(collection,object) ::= <<
 >>
 
 feature_call_excluding_bag(collection,object,element) ::= <<
-($collection$ EXCEPT all
+($collection$ EXCEPT ALL
   ($object$))
 >>
 
@@ -465,7 +469,7 @@ SELECT $element$,
     SELECT $element$, SEQNO
     FROM $collection$
     WHERE NOT ($element$ = $object$)
-  ) s
+  )
 >>
 
 feature_call_excluding_set(collection,object,element) ::= <<
@@ -533,14 +537,14 @@ feature_call_int_div(operand1,operand2) ::= <<
 
 feature_call_int_max(operand1,operand2) ::= <<
 CASE
-  WHEN $operand1$ > $operand2$ THEN $operand1$ 
+  WHEN $operand1$ > $operand2$ THEN $operand1$
   ELSE $operand2$
 END
 >>
 
 feature_call_int_min(operand1,operand2) ::= <<
 CASE 
-  WHEN $operand1$ < $operand2$ THEN $operand1$ 
+  WHEN $operand1$ < $operand2$ THEN $operand1$
   ELSE $operand2$
 END
 >>

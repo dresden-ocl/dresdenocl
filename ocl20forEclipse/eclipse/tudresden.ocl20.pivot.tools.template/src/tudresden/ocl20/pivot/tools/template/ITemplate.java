@@ -40,7 +40,7 @@ public interface ITemplate {
 	 * @param value
 	 *          The value of the attribute which shall be set.
 	 */
-	public void setAttribute(String name, String value);
+	public void setAttribute(String name, Object value);
 
 	/**
 	 * @return The evaluated template as a {@link String}.

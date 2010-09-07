@@ -6,8 +6,8 @@ package tudresden.ocl20.pivot.tools.transformation;
 
 import org.eclipse.emf.ecore.EObject;
 
+import tudresden.ocl20.pivot.model.ModelAccessException;
 import tudresden.ocl20.pivot.tools.transformation.exception.InvalidModelException;
-import tudresden.ocl20.pivot.tools.transformation.exception.ModelAccessException;
 import tudresden.ocl20.pivot.tools.transformation.exception.TransformationException;
 
 /**
@@ -21,9 +21,11 @@ import tudresden.ocl20.pivot.tools.transformation.exception.TransformationExcept
  * 
  * @param <M_IN>
  * @param <M_OUT>
+ * @param <SETTINGS>
  */
-public abstract class M2MTransformation<M_IN extends EObject, M_OUT extends EObject>
-		extends M2XTransformation<M_IN, M_OUT> {
+public abstract class M2MTransformation<M_IN extends EObject, SETTINGS, M_OUT extends EObject>
+		extends M2XTransformation<M_IN, SETTINGS, M_OUT> implements
+		ITransformation<M_IN, SETTINGS, M_OUT> {
 
 	protected String transformationId;
 
@@ -38,15 +40,9 @@ public abstract class M2MTransformation<M_IN extends EObject, M_OUT extends EObj
 	 *          The type of the out model.
 	 * @throws ModelAccessException
 	 */
-	public M2MTransformation(String modelInName, String modelOutName,
-			String modelOutType) throws ModelAccessException {
+	public M2MTransformation(String modelInName, String modelOutName) {
 
 		super(modelInName, modelOutName);
-	}
-
-	public M2MTransformation() {
-
-		super();
 	}
 
 	public M_OUT getResult() {
@@ -56,15 +52,5 @@ public abstract class M2MTransformation<M_IN extends EObject, M_OUT extends EObj
 
 	public abstract void invoke() throws InvalidModelException,
 			TransformationException;
-
-	public String getInModelType() {
-
-		return in_type;
-	}
-
-	public String getOutType() {
-
-		return out_type;
-	}
 
 }

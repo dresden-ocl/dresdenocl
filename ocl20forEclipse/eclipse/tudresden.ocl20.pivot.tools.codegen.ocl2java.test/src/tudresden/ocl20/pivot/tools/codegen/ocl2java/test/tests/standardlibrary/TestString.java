@@ -113,8 +113,7 @@ public class TestString extends AbstractDiffTest {
 	@Test
 	public void testEqualsIgnoreCase01() throws Exception {
 
-		this.compareFragmentCodeGeneration("sltest/string",
-				"equalsIgnoreCase01");
+		this.compareFragmentCodeGeneration("sltest/string", "equalsIgnoreCase01");
 	}
 
 	/**

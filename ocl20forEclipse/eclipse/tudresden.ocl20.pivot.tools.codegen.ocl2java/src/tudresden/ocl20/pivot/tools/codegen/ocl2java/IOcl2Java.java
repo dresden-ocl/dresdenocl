@@ -23,7 +23,6 @@ import java.util.List;
 import tudresden.ocl20.pivot.model.IModel;
 import tudresden.ocl20.pivot.pivotmodel.Constraint;
 import tudresden.ocl20.pivot.tools.codegen.IOcl2Code;
-import tudresden.ocl20.pivot.tools.codegen.IOcl2CodeSettings;
 import tudresden.ocl20.pivot.tools.codegen.exception.Ocl2CodeException;
 
 /**
@@ -34,8 +33,7 @@ import tudresden.ocl20.pivot.tools.codegen.exception.Ocl2CodeException;
  * 
  * @author Claas Wilke
  */
-public interface IOcl2Java<T extends IOcl2JavaSettings> extends IOcl2Code<IOcl2CodeSettings>{
-
+public interface IOcl2Java extends IOcl2Code<IOcl2JavaSettings> {
 
 	/**
 	 * <p>

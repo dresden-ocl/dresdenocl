@@ -38,7 +38,7 @@ import tudresden.ocl20.pivot.tools.codegen.ocl2java.test.tests.standardlibrary.A
  * 
  */
 @RunWith(Suite.class)
-@Suite.SuiteClasses( { AllConstraintsKindTests.class,
+@Suite.SuiteClasses({ AllConstraintsKindTests.class,
 		AllStandardLibraryTests.class, InstrumentationTest.class,
 		FragmentTest.class })
 public class AllOcl22JavaTests {

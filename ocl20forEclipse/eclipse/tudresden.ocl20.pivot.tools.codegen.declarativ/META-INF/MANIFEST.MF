@@ -14,6 +14,5 @@ Require-Bundle: tudresden.ocl20.logging,
  tudresden.ocl20.pivot.modelbus
 Bundle-ActivationPolicy: lazy
 Export-Package: tudresden.ocl20.pivot.tools.codegen.declarativ,
- tudresden.ocl20.pivot.tools.codegen.declarativ.impl,
  tudresden.ocl20.pivot.tools.codegen.declarativ.mapping
 Bundle-Vendor: TU Dresden, Software Technology Group

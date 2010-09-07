@@ -36,11 +36,12 @@ public class CodegenJavaJob extends CodegenJob {
 	 * </p>
 	 * 
 	 * @param constraints
-	 *            The {@link Constraint}s for that code shall be generated.
+	 *          The {@link Constraint}s for that code shall be generated.
 	 * @param codeGenerator
-	 *            The {@link IOcl2Code} used for code generation.
+	 *          The {@link IOcl2Code} used for code generation.
 	 */
 	public CodegenJavaJob(List<Constraint> constraints, IOcl2Code<?> codeGenerator) {
+
 		super(constraints, codeGenerator);
 		logger = Ocl2JavaUIPlugIn.getLogger(CodegenJavaJob.class);
 
@@ -59,8 +60,10 @@ public class CodegenJavaJob extends CodegenJob {
 		this.codeGenerator = codeGenerator;
 	}
 
-	protected void runCodeGenerator(List<Constraint> constraints) throws Ocl2CodeException {
-		((IOcl2Java<?>)this.codeGenerator).transformInstrumentationCode(constraints);
+	protected void runCodeGenerator(List<Constraint> constraints)
+			throws Ocl2CodeException {
+
+		((IOcl2Java) this.codeGenerator).transformInstrumentationCode(constraints);
 	}
 
 }

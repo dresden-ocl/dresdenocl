@@ -230,8 +230,7 @@ public class TestSet extends AbstractDiffTest {
 	@Test
 	public void testSymmetricDifference01() throws Exception {
 
-		this.compareFragmentCodeGeneration("sltest/set",
-				"symmetricDifference01");
+		this.compareFragmentCodeGeneration("sltest/set", "symmetricDifference01");
 	}
 
 	/**

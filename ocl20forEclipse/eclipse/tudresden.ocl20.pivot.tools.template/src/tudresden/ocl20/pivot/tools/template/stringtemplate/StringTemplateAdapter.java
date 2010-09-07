@@ -69,7 +69,7 @@ public class StringTemplateAdapter implements ITemplate {
 	 * @param value
 	 *          The value of the attribute which shall be set.
 	 */
-	public void setAttribute(String name, String value) {
+	public void setAttribute(String name, Object value) {
 
 		template.setAttribute(name, value);
 	}

@@ -1,7 +1,7 @@
 package tudresden.ocl20.pivot.tools.transformation.internal;
 
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -14,11 +14,13 @@ import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IExtension;
 import org.eclipse.core.runtime.IExtensionPoint;
 import org.eclipse.core.runtime.IRegistryEventListener;
+import org.eclipse.core.runtime.InvalidRegistryObjectException;
 import org.eclipse.core.runtime.ListenerList;
 import org.eclipse.core.runtime.Platform;
 
 import tudresden.ocl20.pivot.tools.transformation.ITransformation;
 import tudresden.ocl20.pivot.tools.transformation.ITransformationRegistry;
+import tudresden.ocl20.pivot.tools.transformation.ParallelTransformation;
 import tudresden.ocl20.pivot.tools.transformation.TransformationPlugin;
 import tudresden.ocl20.pivot.tools.transformation.event.ITransformationRegistryListener;
 import tudresden.ocl20.pivot.tools.transformation.event.TransformationRegistryEvent;
@@ -39,7 +41,7 @@ public class TransformationRegistry implements ITransformationRegistry,
 	/**
 	 * the map of template engines
 	 */
-	private Map<String, ITransformation<?, ?>> transformations;
+	private Map<String, Class<?>> transformations;
 
 	/** The full identifier of the {@link ITransformation}s' extension point. */
 	private static final String TRANSFORMATION_EXTENSION_POINT_ID =
@@ -58,7 +60,7 @@ public class TransformationRegistry implements ITransformationRegistry,
 		}
 		// no else.
 
-		this.transformations = new HashMap<String, ITransformation<?, ?>>();
+		this.transformations = new HashMap<String, Class<?>>();
 		this.added(this.getExtensionPoint().getExtensions());
 
 		/* Register this registry as a listener for plug-in events. */
@@ -74,7 +76,7 @@ public class TransformationRegistry implements ITransformationRegistry,
 	/**
 	 * @see tudresden.ocl20.pivot.tools.transformation.ITransformationRegistry#addTransformation(ITransformation)
 	 */
-	public void addTransformation(ITransformation<?, ?> transformation) {
+	public void addTransformation(ITransformation<?, ?, ?> transformation) {
 
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER
@@ -99,17 +101,20 @@ public class TransformationRegistry implements ITransformationRegistry,
 		}
 		// no else.
 
-		/* Add the model. */
-		this.transformations.put(transformation.getClass().getSimpleName(),
-				transformation);
+		addTransformation(transformation.getClass());
 
 		/* Inform listeners. */
-		this.fireTransformationAdded(transformation);
+		this.fireTransformationAdded(transformation.getClass());
 
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("addTransformation() - exit"); //$NON-NLS-1$
 		}
 		// no else.
+	}
+
+	private void addTransformation(Class<?> clazz) {
+
+		this.transformations.put(clazz.getSimpleName(), clazz);
 	}
 
 	/**
@@ -124,84 +129,22 @@ public class TransformationRegistry implements ITransformationRegistry,
 	}
 
 	/**
-	 * @see tudresden.ocl20.pivot.tools.template.ITransformationRegistry#getNewTransformation(String)
+	 * @see tudresden.ocl20.pivot.tools.template.ITransformationRegistry#getTransformationClass(String)
 	 */
-	public ITransformation<?, ?> getTransformation(String transformationName) {
+	public Class<?> getTransformationClass(String transformationName) {
 
 		if (transformationName == null) {
 			throw new IllegalArgumentException(
 					"The parameter transformationName must not be null.");
 		}
 		// no else.
-
 		return this.transformations.get(transformationName);
-	}
-
-	/**
-	 * Instanciates a transformation for the given transformationId with the given
-	 * out and in modelnames.
-	 * 
-	 * @param transformationID
-	 *          The transformationId for which a new instance should be created
-	 *          for.
-	 * @param model_inName
-	 *          the name of the model_in
-	 * @param model_outName
-	 *          the name of the output
-	 * @return Returns a unique runtime identifier for the instanciated
-	 *         transformation
-	 */
-	@SuppressWarnings("unchecked")
-	public ITransformation<?, ?> getTransformation(String transformationId,
-			String model_inName, String model_outName) {
-
-		ITransformation<?, ?> t = getTransformation(transformationId);
-
-		try {
-			Constructor<? extends ITransformation<?, ?>> cons;
-			cons =
-					(Constructor<? extends ITransformation<?, ?>>) t.getClass()
-							.getConstructor(new Class[] { String.class, String.class });
-			return cons.newInstance(new Object[] { model_inName, model_outName });
-		} catch (SecurityException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (NoSuchMethodException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IllegalArgumentException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (InstantiationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (InvocationTargetException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return null;
-	}
-
-	/**
-	 * @see tudresden.ocl20.pivot.tools.template.ITransformationRegistry#getTransformations()
-	 */
-	public List<ITransformation<?, ?>> getTransformations() {
-
-		List<ITransformation<?, ?>> tempGroup =
-				new ArrayList<ITransformation<?, ?>>();
-		for (ITransformation<?, ?> tGroup : this.transformations.values()) {
-			tempGroup.add(tGroup);
-		}
-		return tempGroup;
 	}
 
 	/**
 	 * @see tudresden.ocl20.pivot.tools.template.ITransformationRegistry#removeTransformation(ITransformation)
 	 */
-	public void removeTransformation(ITransformation<?, ?> transformation) {
+	public void removeTransformation(ITransformation<?, ?, ?> transformation) {
 
 		if (transformation == null) {
 			throw new IllegalArgumentException(
@@ -209,10 +152,8 @@ public class TransformationRegistry implements ITransformationRegistry,
 		}
 		// no else.
 
-		this.transformations.remove(transformation.getDisplayName());
-
 		this.fireTransformationRemoved(this.transformations.remove(transformation
-				.getDisplayName()));
+				.getClass().getSimpleName()));
 
 	}
 
@@ -249,7 +190,7 @@ public class TransformationRegistry implements ITransformationRegistry,
 	 * @param transformation
 	 *          The {@link ITransformation} that has been added.
 	 */
-	private void fireTransformationAdded(ITransformation<?, ?> transformation) {
+	private void fireTransformationAdded(Class<?> transformation) {
 
 		TransformationRegistryEvent event;
 		event = null;
@@ -284,7 +225,7 @@ public class TransformationRegistry implements ITransformationRegistry,
 	 * @param transformation
 	 *          The {@link ITemplate} that has been removed.
 	 */
-	private void fireTransformationRemoved(ITransformation<?, ?> transformation) {
+	private void fireTransformationRemoved(Class<?> transformation) {
 
 		TransformationRegistryEvent event = null;
 
@@ -351,24 +292,20 @@ public class TransformationRegistry implements ITransformationRegistry,
 
 		/* Remove all registered objects from the meta-model cache. */
 		if (this.transformations != null) {
-
 			for (IExtension extension : extensions) {
 
 				for (IConfigurationElement configurationElement : extension
 						.getConfigurationElements()) {
-
-					ITransformation<?, ?> transformation;
 					try {
-						transformation =
-								(ITransformation<?, ?>) configurationElement
-										.createExecutableExtension("class");
-					} catch (CoreException e) {
+						Class<?> clazz =
+								Platform.getBundle(extension.getNamespaceIdentifier())
+										.loadClass(configurationElement.getAttribute("class"));
+						this.addTransformation(clazz);
+					} catch (InvalidRegistryObjectException e) {
 						e.printStackTrace();
-						continue;
-
+					} catch (ClassNotFoundException e) {
+						e.printStackTrace();
 					}
-
-					this.addTransformation(transformation);
 
 					// no else.
 				}
@@ -418,7 +355,7 @@ public class TransformationRegistry implements ITransformationRegistry,
 					String transformationID;
 					try {
 						transformationID =
-								((ITransformation<?, ?>) configurationElement
+								((ITransformation<?, ?, ?>) configurationElement
 										.createExecutableExtension("class")).getDisplayName();
 					} catch (CoreException e) {
 						continue;
@@ -478,6 +415,36 @@ public class TransformationRegistry implements ITransformationRegistry,
 	public List<String> getTransformationList() {
 
 		return new LinkedList<String>(this.transformations.keySet());
+	}
+
+	public List<String> getTransformationList(Class<?> modelIn,
+			Class<?> modelOut, Class<?> settings) {
+
+		List<String> itransList = new ArrayList<String>();
+		for (String s : this.transformations.keySet()) {
+			Class<?> clazz = this.transformations.get(s);
+			ParameterizedType superclass =
+					((ParameterizedType) clazz.getGenericSuperclass());
+			Type[] types = superclass.getActualTypeArguments();
+			if (types[0].equals(modelIn)) {
+				if (types[1].equals(settings)) {
+					if (superclass.getRawType().equals(ParallelTransformation.class)) {
+						if (types[2].equals(modelOut)) {
+							itransList.add(s);
+						}
+						else if (types[3].equals(modelOut)) {
+							itransList.add(s);
+						}
+					}
+					else {
+						if (types[types.length - 1].equals(modelOut)) {
+							itransList.add(s);
+						}
+					}
+				}
+			}
+		}
+		return itransList;
 	}
 
 }

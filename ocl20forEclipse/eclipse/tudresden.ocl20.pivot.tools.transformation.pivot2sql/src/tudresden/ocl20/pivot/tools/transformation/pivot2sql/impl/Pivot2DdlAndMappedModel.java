@@ -4,10 +4,13 @@
  */
 package tudresden.ocl20.pivot.tools.transformation.pivot2sql.impl;
 
+import tudresden.ocl20.pivot.model.ModelAccessException;
 import tudresden.ocl20.pivot.pivotmodel.Namespace;
+import tudresden.ocl20.pivot.tools.codegen.declarativ.IOcl2DeclSettings;
 import tudresden.ocl20.pivot.tools.codegen.declarativ.mapping.IMappedModel;
-import tudresden.ocl20.pivot.tools.transformation.ParallelTransformations;
-import tudresden.ocl20.pivot.tools.transformation.exception.ModelAccessException;
+import tudresden.ocl20.pivot.tools.transformation.ITransformation;
+import tudresden.ocl20.pivot.tools.transformation.ParallelTransformation;
+import tudresden.ocl20.pivot.tools.transformation.impl.Tuple;
 
 /**
  * The class Pivot2DdlAndMappedModel represents the parallel composition of
@@ -17,16 +20,9 @@ import tudresden.ocl20.pivot.tools.transformation.exception.ModelAccessException
  * 
  */
 public class Pivot2DdlAndMappedModel extends
-		ParallelTransformations<Namespace, String, IMappedModel> {
-
-	/**
-	 * PO The type of the transformations in model.
-	 */
-	public static String in_type = "PM";
-	/**
-	 * The type of the transformations out model.
-	 */
-	public static String out_type = "CWM and MappedModel";
+		ParallelTransformation<Namespace, IOcl2DeclSettings, String, IMappedModel>
+		implements
+		ITransformation<Namespace, IOcl2DeclSettings, Tuple<String, IMappedModel>> {
 
 	/**
 	 * The Standard constructor for a Uml2CwmAndMappedModel transformation.
@@ -37,11 +33,11 @@ public class Pivot2DdlAndMappedModel extends
 	 *          The name for the out model.
 	 * @throws ModelAccessException
 	 */
-	public Pivot2DdlAndMappedModel(String modelInName, String outName)
-			throws ModelAccessException {
+	public Pivot2DdlAndMappedModel(String modelInName, String outName) {
 
 		super(modelInName, outName, Pivot2Ddl.class.getSimpleName(),
-				Pivot2MappedModelImpl.class.getSimpleName());
+				Pivot2MappedModelImpl.class.getSimpleName(), Namespace.class,
+				String.class, IMappedModel.class, IOcl2DeclSettings.class);
 	}
 
 }

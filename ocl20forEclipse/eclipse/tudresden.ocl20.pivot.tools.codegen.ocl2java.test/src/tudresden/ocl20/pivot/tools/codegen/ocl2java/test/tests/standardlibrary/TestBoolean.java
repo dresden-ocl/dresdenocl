@@ -73,7 +73,7 @@ public class TestBoolean extends AbstractDiffTest {
 	 */
 	@Test
 	public void testAnd01() throws Exception {
-	
+
 		this.compareFragmentCodeGeneration("sltest/boolean", "and01");
 	}
 
@@ -86,7 +86,7 @@ public class TestBoolean extends AbstractDiffTest {
 	 */
 	@Test
 	public void testImplies01() throws Exception {
-	
+
 		this.compareFragmentCodeGeneration("sltest/boolean", "implies01");
 	}
 
@@ -99,7 +99,7 @@ public class TestBoolean extends AbstractDiffTest {
 	 */
 	@Test
 	public void testNot01() throws Exception {
-	
+
 		this.compareFragmentCodeGeneration("sltest/boolean", "not01");
 	}
 

@@ -39,7 +39,7 @@ public class Ocl2DeclSettings implements IOcl2DeclSettings {
 		this.templateGroup = null;
 		this.mappedModel = null;
 		this.prefix = new HashMap<String, String>();
-		this.associationTableName = new HashMap<Property,String>();
+		this.associationTableName = new HashMap<Property, String>();
 		setDefaultPrefix();
 	}
 
@@ -164,11 +164,11 @@ public class Ocl2DeclSettings implements IOcl2DeclSettings {
 		prefix.put("foreignkey", "FK_");
 	}
 
-	public String getUniqueAssociationTableName(
-			Property property) {
+	public String getUniqueAssociationTableName(Property property) {
+
 		String result = getUniqueAssTableName(property);
 		if (result == null) {
-				result = generateUniqueAssName(property);
+			result = generateUniqueAssName(property);
 		}
 		return getAssociationTablePrefix() + result;
 	}
@@ -179,14 +179,14 @@ public class Ocl2DeclSettings implements IOcl2DeclSettings {
 	}
 
 	private String generateUniqueAssName(Property property) {
-		
+
 		List<String> resultList = new LinkedList<String>();
 		String delimiter = "_";
 		String assName = "";
 
 		resultList.add(property.getName());
 		if (property instanceof AssociationProperty) {
-			for (AssociationProperty prop : ((AssociationProperty)property)
+			for (AssociationProperty prop : ((AssociationProperty) property)
 					.getInverseAssociationProperties()) {
 				resultList.add(prop.getName());
 			}
@@ -195,9 +195,11 @@ public class Ocl2DeclSettings implements IOcl2DeclSettings {
 				assName += delimiter + s;
 			}
 			assName = assName.substring(1);
-		} else {
+		}
+		else {
 			resultList.remove(0);
-			assName = resultList.remove(0) + delimiter + property.getOwner().getName();
+			assName =
+					resultList.remove(0) + delimiter + property.getOwner().getName();
 		}
 		int i = 0;
 		String result = assName;
@@ -206,17 +208,18 @@ public class Ocl2DeclSettings implements IOcl2DeclSettings {
 		}
 		associationTableName.put(property, result);
 		if (property instanceof AssociationProperty) {
-			for (AssociationProperty prop : ((AssociationProperty)property).getInverseAssociationProperties()) {
-				associationTableName.put(prop,result);
+			for (AssociationProperty prop : ((AssociationProperty) property)
+					.getInverseAssociationProperties()) {
+				associationTableName.put(prop, result);
 			}
 		}
-			
+
 		return result;
 	}
-	
+
 	private boolean checkAssociationTableName(String assName) {
+
 		return associationTableName.containsValue(assName);
 	}
-
 
 }

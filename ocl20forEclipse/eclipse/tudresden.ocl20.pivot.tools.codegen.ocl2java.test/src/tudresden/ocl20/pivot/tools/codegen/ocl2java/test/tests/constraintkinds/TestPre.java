@@ -75,8 +75,7 @@ public class TestPre extends AbstractDiffTest {
 	@Test
 	public void testPre01() throws Exception {
 
-		this.compareInstrumentationCodeGeneration("constraintkindtest/pre",
-				"pre01");
+		this.compareInstrumentationCodeGeneration("constraintkindtest/pre", "pre01");
 	}
 
 	/**
@@ -89,7 +88,6 @@ public class TestPre extends AbstractDiffTest {
 	@Test
 	public void testPre02() throws Exception {
 
-		this.compareInstrumentationCodeGeneration("constraintkindtest/pre",
-				"pre02");
+		this.compareInstrumentationCodeGeneration("constraintkindtest/pre", "pre02");
 	}
 }

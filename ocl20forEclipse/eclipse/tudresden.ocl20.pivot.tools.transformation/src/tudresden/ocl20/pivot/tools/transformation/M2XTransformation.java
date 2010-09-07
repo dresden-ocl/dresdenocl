@@ -7,7 +7,6 @@ package tudresden.ocl20.pivot.tools.transformation;
 import org.eclipse.emf.ecore.EObject;
 
 import tudresden.ocl20.pivot.tools.transformation.exception.InvalidModelException;
-import tudresden.ocl20.pivot.tools.transformation.exception.ModelAccessException;
 import tudresden.ocl20.pivot.tools.transformation.exception.TransformationException;
 
 /**
@@ -19,28 +18,22 @@ import tudresden.ocl20.pivot.tools.transformation.exception.TransformationExcept
  * @author Christian Wende
  * 
  **/
-public abstract class M2XTransformation<M_IN extends EObject, OUT> implements
-		ITransformation<M_IN, OUT> {
+public abstract class M2XTransformation<M_IN extends EObject, SETTINGS, OUT>
+		implements ITransformation<M_IN, SETTINGS, OUT> {
 
 	protected M_IN model_in;
 	protected OUT out;
 
-	protected static String in_type;
-	protected static String out_type;
-
+	protected static String in_name;
 	protected static String out_name;
 
-	public M2XTransformation(String modelIn, String modelOut)
-			throws ModelAccessException {
+	protected SETTINGS settings;
 
-		in_type = modelIn;
+	public M2XTransformation(String modelIn, String modelOut) {
+
+		in_name = modelIn;
 		out_name = modelOut;
 
-	}
-
-	public M2XTransformation() {
-
-		super();
 	}
 
 	public OUT getResult() {
@@ -50,11 +43,6 @@ public abstract class M2XTransformation<M_IN extends EObject, OUT> implements
 
 	public abstract void invoke() throws TransformationException,
 			InvalidModelException;
-
-	public String getInModelType() {
-
-		return in_type;
-	}
 
 	public void setParameterIN(M_IN in) {
 
@@ -68,7 +56,31 @@ public abstract class M2XTransformation<M_IN extends EObject, OUT> implements
 
 	public String getDisplayName() {
 
-		return in_type + " to " + out_type;
+		return in_name + " To " + out_name;
+	}
+
+	public void setSettings(SETTINGS settings) {
+
+		this.settings = settings;
+
+	}
+
+	public Class<M_IN> getInType() {
+
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Class<SETTINGS> getSettingsType() {
+
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Class<OUT> getOutType() {
+
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

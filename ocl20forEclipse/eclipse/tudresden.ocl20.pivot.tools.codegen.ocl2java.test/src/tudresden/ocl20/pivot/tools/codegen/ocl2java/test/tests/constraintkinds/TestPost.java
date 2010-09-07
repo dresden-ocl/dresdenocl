@@ -89,7 +89,7 @@ public class TestPost extends AbstractDiffTest {
 	 */
 	@Test
 	public void testPost02() throws Exception {
-	
+
 		this.compareInstrumentationCodeGeneration("constraintkindtest/post",
 				"post02");
 	}

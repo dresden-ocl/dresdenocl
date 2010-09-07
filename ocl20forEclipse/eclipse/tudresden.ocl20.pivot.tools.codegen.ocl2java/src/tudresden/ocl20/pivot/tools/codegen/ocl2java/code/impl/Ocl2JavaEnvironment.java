@@ -30,7 +30,7 @@ import tudresden.ocl20.pivot.tools.codegen.ocl2java.code.IOcl2JavaEnvironment;
 import tudresden.ocl20.pivot.tools.template.ITemplate;
 
 /**
- *<p>
+ * <p>
  * This class provides methods to get name for variables and fields during code
  * transformation.
  * </p>
@@ -81,7 +81,8 @@ public class Ocl2JavaEnvironment implements IOcl2JavaEnvironment {
 	 * Contains {@link ITemplate}s of transformed Java classes which are used to
 	 * extend constrained classes.
 	 */
-	protected Map<String, ITemplate> classTemplates = new TreeMap<String, ITemplate>();
+	protected Map<String, ITemplate> classTemplates =
+			new TreeMap<String, ITemplate>();
 
 	/**
 	 * The canonical names of all classes which use the special OCL operation
@@ -97,10 +98,11 @@ public class Ocl2JavaEnvironment implements IOcl2JavaEnvironment {
 
 	/**
 	 * The {@link ITransformedCode} of Expressions whose atPre value shall be
-	 * stored as key, and their transformed type and name of the variable in
-	 * which they shall be stored as {@link String} array.
+	 * stored as key, and their transformed type and name of the variable in which
+	 * they shall be stored as {@link String} array.
 	 */
-	protected Map<ITransformedCode, Object[]> atPreValues = new IdentityHashMap<ITransformedCode, Object[]>();
+	protected Map<ITransformedCode, Object[]> atPreValues =
+			new IdentityHashMap<ITransformedCode, Object[]>();
 
 	/**
 	 * The call paths of all properties which are called for Constraint
@@ -110,10 +112,8 @@ public class Ocl2JavaEnvironment implements IOcl2JavaEnvironment {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.ocl2java.code.ICodeGenEnvironment#resetAllCounters
-	 * ()
+	 * tudresden.ocl20.pivot.ocl2java.code.ICodeGenEnvironment#resetAllCounters ()
 	 */
 	public void resetEnvironmentForNextConstraint() {
 
@@ -149,7 +149,6 @@ public class Ocl2JavaEnvironment implements IOcl2JavaEnvironment {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @seetudresden.ocl20.pivot.ocl2java.code.ICodeGenEnvironment#
 	 * getNewIteratorExpCollectionVarName()
 	 */
@@ -167,7 +166,6 @@ public class Ocl2JavaEnvironment implements IOcl2JavaEnvironment {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.ocl2java.code.ICodeGenEnvironment#getNewComparatorName
 	 * ()
@@ -186,7 +184,6 @@ public class Ocl2JavaEnvironment implements IOcl2JavaEnvironment {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.ocl2java.code.ICodeGenEnvironment#getNewIndexVarName
 	 * ()
@@ -205,7 +202,6 @@ public class Ocl2JavaEnvironment implements IOcl2JavaEnvironment {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.ocl22code.ICodeGenEnvironment#getNewIfExpResultName
 	 * ()
@@ -224,7 +220,6 @@ public class Ocl2JavaEnvironment implements IOcl2JavaEnvironment {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @seetudresden.ocl20.pivot.ocl22code.ICodeGenEnvironment#
 	 * getNewIteratorExpIteratorVarName()
 	 */
@@ -242,7 +237,6 @@ public class Ocl2JavaEnvironment implements IOcl2JavaEnvironment {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.ocl2java.code.ICodeGenEnvironment#getNewResultVarName
 	 * ()
@@ -261,7 +255,6 @@ public class Ocl2JavaEnvironment implements IOcl2JavaEnvironment {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @seetudresden.ocl20.pivot.ocl2java.code.ICodeTransformationEnvironment#
 	 * getNewTupleVarName()
 	 */
@@ -279,7 +272,6 @@ public class Ocl2JavaEnvironment implements IOcl2JavaEnvironment {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @seetudresden.ocl20.pivot.ocl2java.code.ICodeTransformationEnvironment#
 	 * getNewBodyAspectName()
 	 */
@@ -297,7 +289,6 @@ public class Ocl2JavaEnvironment implements IOcl2JavaEnvironment {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @seetudresden.ocl20.pivot.ocl2java.code.ICodeTransformationEnvironment#
 	 * getNewDefAspectName()
 	 */
@@ -315,7 +306,6 @@ public class Ocl2JavaEnvironment implements IOcl2JavaEnvironment {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @seetudresden.ocl20.pivot.ocl2java.code.ICodeTransformationEnvironment#
 	 * getNewDeriveAspectName()
 	 */
@@ -333,7 +323,6 @@ public class Ocl2JavaEnvironment implements IOcl2JavaEnvironment {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.ocl2java.code.ICodeGenEnvironment#getNewInitAspectName
 	 * ()
@@ -352,7 +341,6 @@ public class Ocl2JavaEnvironment implements IOcl2JavaEnvironment {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.ocl2java.code.IOcl22JavaEnvironment#getNewInvAspectName
 	 * ()
@@ -371,7 +359,6 @@ public class Ocl2JavaEnvironment implements IOcl2JavaEnvironment {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @seetudresden.ocl20.pivot.ocl2java.code.IOcl22JavaEnvironment#
 	 * getNewPostAspectName()
 	 */
@@ -389,7 +376,6 @@ public class Ocl2JavaEnvironment implements IOcl2JavaEnvironment {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.ocl2java.code.IOcl22JavaEnvironment#getNewPreAspectName
 	 * ()
@@ -408,113 +394,112 @@ public class Ocl2JavaEnvironment implements IOcl2JavaEnvironment {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @seetudresden.ocl20.pivot.ocl2java.code.IOcl22JavaEnvironment#
 	 * addSuperClassTemplate(java.lang.String,
 	 * tudresden.ocl20.pivot.ocl2java.template.ITemplate)
 	 */
 	public void addSuperClassTemplate(String canonicalName,
 			ITemplate aClassTemplate) {
+
 		this.classTemplates.put(canonicalName, aClassTemplate);
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.ocl2java.code.IOcl22JavaEnvironment#existsClassTemplate
 	 * (java.lang.String)
 	 */
 	public boolean existsClassTemplate(String canonicalName) {
+
 		return this.classTemplates.containsKey(canonicalName);
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @seetudresden.ocl20.pivot.ocl2java.code.IOcl22JavaEnvironment#
 	 * getSuperClassTemplate(java.lang.String)
 	 */
 	public ITemplate getSuperClassTemplate(String canonicalName) {
+
 		return this.classTemplates.get(canonicalName);
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @seetudresden.ocl20.pivot.ocl2java.code.IOcl22JavaEnvironment#
 	 * getSuperClassTemplates()
 	 */
 	public Map<String, ITemplate> getSuperClassTemplates() {
+
 		return this.classTemplates;
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @seetudresden.ocl20.pivot.ocl2java.code.IOcl22JavaEnvironment#
 	 * addAllInstancesClass(java.lang.String)
 	 */
 	public void addAllInstancesClass(String canonicalName) {
+
 		this.allInstancesClasses.add(canonicalName);
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @seetudresden.ocl20.pivot.ocl2java.code.IOcl22JavaEnvironment#
 	 * hasAllInstancesClasses()
 	 */
 	public boolean hasAllInstancesClasses() {
+
 		return !this.allInstancesClasses.isEmpty();
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @seetudresden.ocl20.pivot.ocl2java.code.IOcl22JavaEnvironment#
 	 * getAllInstancesClasses()
 	 */
 	public Set<String> getAllInstancesClasses() {
+
 		return this.allInstancesClasses;
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.ocl2java.code.IOcl22JavaEnvironment#addIsNewClass
 	 * (java.lang.String)
 	 */
 	public void addIsNewClass(String canonicalName) {
+
 		this.oclIsNewClasses.add(canonicalName);
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.ocl2java.code.IOcl22JavaEnvironment#hasIsNewClasses
 	 * ()
 	 */
 	public boolean hasIsNewClasses() {
+
 		return !this.oclIsNewClasses.isEmpty();
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.ocl2java.code.IOcl22JavaEnvironment#getIsNewClasses
 	 * ()
 	 */
 	public Set<String> getIsNewClasses() {
+
 		return this.oclIsNewClasses;
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.ocl2java.code.IOcl22JavaEnvironment#addAtPreValue
 	 * (tudresden.ocl20.pivot.ocl2java.code.ITransformedCode,
@@ -545,56 +530,54 @@ public class Ocl2JavaEnvironment implements IOcl2JavaEnvironment {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.ocl2java.code.IOcl22JavaEnvironment#hasAtPreValues
-	 * ()
+	 * tudresden.ocl20.pivot.ocl2java.code.IOcl22JavaEnvironment#hasAtPreValues ()
 	 */
 	public boolean hasAtPreValues() {
+
 		return this.atPreValues.size() > 0;
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.ocl2java.code.IOcl22JavaEnvironment#getAtPreValues
-	 * ()
+	 * tudresden.ocl20.pivot.ocl2java.code.IOcl22JavaEnvironment#getAtPreValues ()
 	 */
 	public Map<ITransformedCode, Object[]> getAtPreValues() {
+
 		return this.atPreValues;
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.ocl2java.code.IOcl22JavaEnvironment#addCalledProperty
 	 * (java.lang.String)
 	 */
 	public void addCalledProperty(String callPath) {
+
 		this.calledProperties.add(callPath);
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.ocl2java.code.IOcl22JavaEnvironment#hasCalledProperties
 	 * ()
 	 */
 	public boolean hasCalledProperties() {
+
 		return this.calledProperties.size() > 0;
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.ocl2java.code.IOcl22JavaEnvironment#getCalledProperties
 	 * ()
 	 */
 	public Set<String> getCalledProperties() {
+
 		return this.calledProperties;
 	}
 }

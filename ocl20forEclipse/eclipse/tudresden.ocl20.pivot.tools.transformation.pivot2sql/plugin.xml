@@ -18,5 +18,8 @@
       <transformation
             class="tudresden.ocl20.pivot.tools.transformation.pivot2sql.impl.Pivot2CwmAndMappedModel">
       </transformation>
+      <transformation
+            class="tudresden.ocl20.pivot.tools.transformation.pivot2sql.impl.Pivot2DdlAndMappedModel">
+      </transformation>
    </extension>
 </plugin>
