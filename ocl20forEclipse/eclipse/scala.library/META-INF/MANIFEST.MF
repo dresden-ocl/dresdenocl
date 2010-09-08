@@ -49,4 +49,4 @@ Export-Package: scala,
  scala.xml.transform
 Created-By: 1.5.0_16-b02 (Sun Microsystems Inc.)
 Ant-Version: Apache Ant 1.7.0
-Eclipse-LazyStart: true
+Bundle-ActivationPolicy: lazy
