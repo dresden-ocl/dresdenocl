@@ -498,7 +498,7 @@ public class Ocl2ForEclipseFacade {
 			Class<O2> modelOut2, Class<S> settings, String modelInName,
 			String modelOutName) {
 
-		return TransformationFactory.getInstance().getTransformation(transId,
+		return TransformationFactory.getInstance().getParallelTransformation(transId,
 				modelIn, modelOut1, modelOut2, settings, modelInName, modelOutName);
 	}
 
