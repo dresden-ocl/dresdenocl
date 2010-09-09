@@ -176,27 +176,27 @@ public class SelectConstraintsPage extends WizardPage {
 		viewerGroup
 				.setText(CodegenUIMessages.SelectConstraintsPage_SelectConstraintsLabel);
 		viewerGroup.setLayoutData(new GridData(SWT.FILL, SWT.NONE, true, true));
-
+		
 		viewerLayout = new GridLayout(2, false);
 		viewerLayout.verticalSpacing = 10;
 		viewerGroup.setLayout(viewerLayout);
 
 		/* Create the list viewer to display the models. */
 		constraintViewer =
-				new TableViewer(viewerGroup, SWT.MULTI | SWT.V_SCROLL | SWT.BORDER);
+				new TableViewer(viewerGroup, SWT.MULTI | SWT.V_SCROLL | SWT.BORDER | SWT.RESIZE);
 		constraintViewer.setContentProvider(new ArrayContentProvider());
 		constraintViewer.setLabelProvider(new ConstraintLabelProvider());
-		constraintViewer.getControl().setLayoutData(
-				new GridData(SWT.FILL, SWT.FILL, false, true));
-
+			
 		/* Set the selection data. */
 		constraintViewer.setInput(this.getConstraintsOfActiveModel());
 
+		GridData gd = new GridData(SWT.FILL, SWT.FILL, true,true);
+		gd.widthHint = 700;
+		constraintViewer.getControl().setLayoutData(gd);
+		
 		/* By default select all constraints. */
 		this.selectAllConstraints();
 
-		/* Set width of strucered view */
-		constraintViewer.getControl().setSize(700, 0);
 
 		/* Add a change listener to react on updates. */
 		constraintViewer
@@ -208,7 +208,9 @@ public class SelectConstraintsPage extends WizardPage {
 					}
 				});
 
+		
 		this.createButtonGroup(viewerGroup);
+	
 	}
 
 	/**
@@ -228,8 +230,9 @@ public class SelectConstraintsPage extends WizardPage {
 		/* Create the model selection group and specify properties. */
 		buttonGroup = new Composite(parent, SWT.NONE);
 		buttonGroup.setFont(parent.getFont());
-		buttonGroup.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
-
+		GridData gd = new GridData(SWT.FILL, SWT.FILL, false, false);
+		gd.widthHint = 150;
+		buttonGroup.setLayoutData(gd);		
 		layout = new GridLayout(1, false);
 		layout.verticalSpacing = 10;
 		buttonGroup.setLayout(layout);
