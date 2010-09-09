@@ -22,7 +22,6 @@ package tudresden.ocl20.pivot.tools.codegen.declarativ.ocl2sql.ui.internal.wizar
 import java.util.List;
 
 import org.apache.log4j.Logger;
-import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.ui.INewWizard;
 import org.eclipse.ui.IWorkbench;
@@ -32,8 +31,6 @@ import tudresden.ocl20.pivot.tools.codegen.declarativ.IOcl2DeclSettings;
 import tudresden.ocl20.pivot.tools.codegen.declarativ.ocl2sql.Ocl2SQLFactory;
 import tudresden.ocl20.pivot.tools.codegen.declarativ.ocl2sql.ui.Ocl2SQLUIPlugIn;
 import tudresden.ocl20.pivot.tools.codegen.declarativ.ocl2sql.ui.internal.Ocl2SqlUIMessages;
-import tudresden.ocl20.pivot.tools.codegen.exception.Ocl2CodeException;
-import tudresden.ocl20.pivot.tools.codegen.ui.impl.CodegenUIMessages;
 import tudresden.ocl20.pivot.tools.codegen.ui.impl.wizards.CodegenJob;
 import tudresden.ocl20.pivot.tools.codegen.ui.impl.wizards.TransformCodeWizard;
 
@@ -96,23 +93,7 @@ public class SQLCodeWizard extends TransformCodeWizard implements INewWizard {
 
 	protected void setCodeGenerator() {
 
-		/* Try Initialize the code generator. */
-		try {
-			myCodeGenerator = Ocl2SQLFactory.getInstance().createSQLCodeGenerator();
-		}
-
-		/* Else show an exception. */
-		catch (Ocl2CodeException e) {
-			MessageDialog.openError(
-					getShell(),
-					CodegenUIMessages.TransformCodeWizard_ErrorMessageDialogTitle,
-					CodegenUIMessages.TransformCodeWizard_InitErrorOccured
-							+ (e.getMessage() != null ? e.getMessage()
-									: CodegenUIMessages.TransformCodeWizard_CheckLog));
-
-			String errorMsg = "An error occured during initialization.";
-			logger.error(errorMsg, e);
-		}
+		myCodeGenerator = Ocl2SQLFactory.getInstance().createSQLCodeGenerator();
 	}
 
 	protected CodegenJob getCodegenJob(List<Constraint> constraints) {

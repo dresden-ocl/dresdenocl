@@ -37,13 +37,13 @@ import java.util.Map;
 
 import org.junit.Before;
 
-import tudresden.ocl20.pivot.facade.Ocl2ForEclipseFacade;
 import tudresden.ocl20.pivot.model.IModel;
 import tudresden.ocl20.pivot.model.ModelAccessException;
 import tudresden.ocl20.pivot.pivotmodel.Namespace;
 import tudresden.ocl20.pivot.tools.codegen.declarativ.IOcl2DeclSettings;
 import tudresden.ocl20.pivot.tools.codegen.declarativ.mapping.IMappedModel;
 import tudresden.ocl20.pivot.tools.transformation.ITransformation;
+import tudresden.ocl20.pivot.tools.transformation.TransformationFactory;
 import tudresden.ocl20.pivot.tools.transformation.exception.InvalidModelException;
 import tudresden.ocl20.pivot.tools.transformation.exception.TransformationException;
 import tudresden.ocl20.pivot.tools.transformation.pivot2sql.test.tests.util.ModelChecker;
@@ -402,7 +402,7 @@ public class Pivot2MappedModelTest extends TransformationTest {
 	private IMappedModel generateMappedModel(File file) throws IllegalArgumentException, ModelAccessException, TransformationException, InvalidModelException {
 
 		IModel model = TestPerformer.addUMLModel(file);
-		ITransformation<Namespace,IOcl2DeclSettings,IMappedModel> p2mmi = Ocl2ForEclipseFacade.getTransformation("Pivot2MappedModelImpl",Namespace.class,IMappedModel.class,IOcl2DeclSettings.class,"pivot","mappedmodel");
+		ITransformation<Namespace,IOcl2DeclSettings,IMappedModel> p2mmi = TransformationFactory.getInstance().getTransformation("Pivot2MappedModelImpl",Namespace.class,IMappedModel.class,IOcl2DeclSettings.class,"pivot","mappedmodel");
 		p2mmi.setParameterIN(model.getRootNamespace());
 		p2mmi.setSettings(TestPerformer.getSettings());
 		p2mmi.invoke();

@@ -30,13 +30,18 @@ import java.util.List;
 
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.Platform;
+import org.eclipse.emf.common.util.URI;
 import org.osgi.framework.Bundle;
 
-import tudresden.ocl20.pivot.facade.Ocl2ForEclipseFacade;
+import tudresden.ocl20.pivot.language.ocl.resource.ocl.Ocl22Parser;
+import tudresden.ocl20.pivot.metamodels.uml2.UML2MetamodelPlugin;
 import tudresden.ocl20.pivot.model.IModel;
 import tudresden.ocl20.pivot.model.ModelAccessException;
+import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
 import tudresden.ocl20.pivot.pivotmodel.Constraint;
+import tudresden.ocl20.pivot.tools.codegen.ocl2java.IOcl2Java;
 import tudresden.ocl20.pivot.tools.codegen.ocl2java.IOcl2JavaSettings;
+import tudresden.ocl20.pivot.tools.codegen.ocl2java.Ocl2JavaFactory;
 import tudresden.ocl20.pivot.tools.codegen.ocl2java.test.Ocl2JavaTestPlugin;
 
 /**
@@ -67,9 +72,7 @@ public abstract class AbstractDiffTest {
 		File modelFile;
 		modelFile = AbstractDiffTest.getFile(MODEL_NAME);
 
-		testModel =
-				Ocl2ForEclipseFacade.getModel(modelFile,
-						Ocl2ForEclipseFacade.UML2_MetaModel);
+		testModel = ModelBusPlugin.getMetamodelRegistry().getMetamodel(UML2MetamodelPlugin.ID).getModelProvider().getModel(modelFile);
 	}
 
 	/**
@@ -83,7 +86,7 @@ public abstract class AbstractDiffTest {
 	protected static void tearDown() throws IllegalArgumentException,
 			ModelAccessException {
 
-		Ocl2ForEclipseFacade.removeModel(testModel);
+		ModelBusPlugin.getModelRegistry().removeModel(testModel);
 	}
 
 	/**
@@ -138,17 +141,16 @@ public abstract class AbstractDiffTest {
 						+ ".ocl");
 
 		List<Constraint> parsedConstraints;
-		parsedConstraints =
-				Ocl2ForEclipseFacade.parseConstraints(constraintFile, testModel, true);
+		parsedConstraints = Ocl22Parser.INSTANCE.doParse(testModel, URI.createFileURI(constraintFile.getAbsolutePath()), true);
 
 		assertNotNull(parsedConstraints);
 		assertEquals(1, parsedConstraints.size());
 
 		String generatedCode;
-		generatedCode =
-				Ocl2ForEclipseFacade.generateJavaFragmentCode(parsedConstraints
-						.iterator().next(), Ocl2ForEclipseFacade
-						.getJavaCodeGeneratorSettings());
+		IOcl2Java ocl2Java = Ocl2JavaFactory.getInstance().createJavaCodeGenerator();
+		ocl2Java.resetEnvironment();
+		ocl2Java.setSettings(Ocl2JavaFactory.getInstance().createJavaCodeGeneratorSettings());
+		generatedCode = ocl2Java.transformFragmentCode(parsedConstraints).iterator().next();
 
 		assertNotNull(generatedCode);
 
@@ -181,16 +183,17 @@ public abstract class AbstractDiffTest {
 						+ ".ocl");
 
 		List<Constraint> parsedConstraints;
-		parsedConstraints =
-				Ocl2ForEclipseFacade.parseConstraints(constraintFile, testModel, true);
+		parsedConstraints = Ocl22Parser.INSTANCE.doParse(testModel, URI.createFileURI(constraintFile.getAbsolutePath()), true);
+
 
 		assertNotNull(parsedConstraints);
 		assertEquals(1, parsedConstraints.size());
 
 		String generatedCode;
-		generatedCode =
-				Ocl2ForEclipseFacade.generateAspectJCode(parsedConstraints.iterator()
-						.next(), Ocl2ForEclipseFacade.getJavaCodeGeneratorSettings());
+		IOcl2Java ocl2Java = Ocl2JavaFactory.getInstance().createJavaCodeGenerator();
+		ocl2Java.resetEnvironment();
+		ocl2Java.setSettings(Ocl2JavaFactory.getInstance().createJavaCodeGeneratorSettings());
+		generatedCode = ocl2Java.transformInstrumentationCode(parsedConstraints).iterator().next();
 
 		assertNotNull(generatedCode);
 
@@ -228,7 +231,7 @@ public abstract class AbstractDiffTest {
 		sourceDirectory += "src/";
 
 		IOcl2JavaSettings settings;
-		settings = Ocl2ForEclipseFacade.getJavaCodeGeneratorSettings();
+		settings = Ocl2JavaFactory.getInstance().createJavaCodeGeneratorSettings();
 		settings.setSourceDirectory(sourceDirectory);
 		settings.setSaveCode(true);
 
@@ -243,12 +246,14 @@ public abstract class AbstractDiffTest {
 					AbstractDiffTest.getFile("resources/" + constraintFilePair[0] + "/"
 							+ constraintFilePair[1] + ".ocl");
 
-			parsedConstraints.addAll(Ocl2ForEclipseFacade.parseConstraints(
-					constraintFile, testModel, true));
+			parsedConstraints.addAll(Ocl22Parser.INSTANCE.doParse(testModel, URI.createFileURI(constraintFile.getAbsolutePath()), true));
 		}
 		// end for.
 
 		/* Generate and save the code. */
-		Ocl2ForEclipseFacade.generateAspectJCode(parsedConstraints, settings);
+		IOcl2Java ocl2Java = Ocl2JavaFactory.getInstance().createJavaCodeGenerator();
+		ocl2Java.resetEnvironment();
+		ocl2Java.setSettings(settings);
+		ocl2Java.transformInstrumentationCode(parsedConstraints);
 	}
 }

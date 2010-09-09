@@ -155,7 +155,7 @@ public class TransformationFactory {
 	 *         no transformation with the parameters.
 	 */
 	@SuppressWarnings("unchecked")
-	public <I, S, O1, O2> ITransformation<I, S, Tuple<O1, O2>> getTransformation(
+	public <I, S, O1, O2> ITransformation<I, S, Tuple<O1, O2>> getParallelTransformation(
 			String transId, Class<I> modelIn, Class<O1> modelOut1,
 			Class<O2> modelOut2, Class<S> settings, String modelInName,
 			String modelOutName) {

@@ -11,12 +11,12 @@ import java.util.Map;
 import org.junit.Before;
 import orgomg.cwm.resource.relational.Schema;
 
-import tudresden.ocl20.pivot.facade.Ocl2ForEclipseFacade;
 import tudresden.ocl20.pivot.model.IModel;
 import tudresden.ocl20.pivot.model.ModelAccessException;
 import tudresden.ocl20.pivot.pivotmodel.Namespace;
 import tudresden.ocl20.pivot.tools.codegen.declarativ.IOcl2DeclSettings;
 import tudresden.ocl20.pivot.tools.transformation.ITransformation;
+import tudresden.ocl20.pivot.tools.transformation.TransformationFactory;
 import tudresden.ocl20.pivot.tools.transformation.exception.InvalidModelException;
 import tudresden.ocl20.pivot.tools.transformation.exception.TransformationException;
 import tudresden.ocl20.pivot.tools.transformation.impl.Tuple;
@@ -51,7 +51,7 @@ public abstract class CWMTest extends TransformationTest {
 	
 	protected Schema generateCWMModel(File file, int modus) throws ModelAccessException, InvalidModelException, TransformationException {
 		IModel model = TestPerformer.addUMLModel(file);
-		ITransformation<Namespace,IOcl2DeclSettings,Schema> p2cwm = Ocl2ForEclipseFacade.getTransformation("Pivot2CwmImpl",Namespace.class, Schema.class, IOcl2DeclSettings.class,"pivot","cwm");		
+		ITransformation<Namespace,IOcl2DeclSettings,Schema> p2cwm = TransformationFactory.getInstance().getTransformation("Pivot2CwmImpl",Namespace.class, Schema.class, IOcl2DeclSettings.class,"pivot","cwm");		
 		p2cwm.setParameterIN(model.getRootNamespace());
 		IOcl2DeclSettings oclSettings = TestPerformer.getSettings();
 		oclSettings.setModus(modus);

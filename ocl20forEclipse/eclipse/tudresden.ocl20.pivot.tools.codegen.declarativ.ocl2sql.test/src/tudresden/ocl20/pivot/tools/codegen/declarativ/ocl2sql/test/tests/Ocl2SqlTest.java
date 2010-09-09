@@ -12,19 +12,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.core.runtime.Platform;
+import org.eclipse.emf.common.util.URI;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import tudresden.ocl20.pivot.facade.Ocl2ForEclipseFacade;
+import tudresden.ocl20.pivot.language.ocl.resource.ocl.Ocl22Parser;
+import tudresden.ocl20.pivot.metamodels.uml2.UML2MetamodelPlugin;
 import tudresden.ocl20.pivot.model.IModel;
 import tudresden.ocl20.pivot.model.ModelAccessException;
+import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
 import tudresden.ocl20.pivot.parser.ParseException;
 import tudresden.ocl20.pivot.pivotmodel.Constraint;
 import tudresden.ocl20.pivot.tools.codegen.declarativ.IOcl2DeclSettings;
+import tudresden.ocl20.pivot.tools.codegen.declarativ.Ocl2DeclCodeFactory;
+import tudresden.ocl20.pivot.tools.codegen.declarativ.ocl2sql.IOcl2Sql;
+import tudresden.ocl20.pivot.tools.codegen.declarativ.ocl2sql.Ocl2SQLFactory;
 import tudresden.ocl20.pivot.tools.codegen.declarativ.ocl2sql.test.Ocl2SqlTestPlugin;
 import tudresden.ocl20.pivot.tools.codegen.exception.Ocl2CodeException;
+import tudresden.ocl20.pivot.tools.template.TemplatePlugin;
 
 public class Ocl2SqlTest {
 
@@ -63,9 +70,8 @@ public class Ocl2SqlTest {
 	public void setUp() {
 
 		try {
-			model =	Ocl2ForEclipseFacade.getModel(new File(filePath
-						+ "model/university_complex.uml"),
-						Ocl2ForEclipseFacade.UML2_MetaModel);
+			model =	ModelBusPlugin.getMetamodelRegistry().getMetamodel(UML2MetamodelPlugin.ID).getModelProvider().getModel(new File(filePath
+						+ "model/university_complex.uml"));
 		} catch (IllegalArgumentException e) {
 			fail("Wrong parameter");
 		} catch (ModelAccessException e) {
@@ -85,7 +91,7 @@ public class Ocl2SqlTest {
 	public void tear_down() {
 		
 		if (model != null) {
-			Ocl2ForEclipseFacade.removeModel(model);
+			ModelBusPlugin.getModelRegistry().removeModel(model);
 		}
 
 		boolean exists = (new File(sourcePath)).exists();
@@ -116,24 +122,23 @@ public class Ocl2SqlTest {
 
 		List<Constraint> constraints = null;
 		try {
-			constraints =
-					Ocl2ForEclipseFacade.parseConstraints(new File(filePath
-							+ "constraints/university_complex.ocl"), model, true);
+			constraints = Ocl22Parser.INSTANCE.doParse(model, URI.createFileURI(filePath
+							+ "constraints/university_complex.ocl"), true);
 		} catch (ParseException e) {
 			fail("Can't parse the constraints");
 		}
 		IOcl2DeclSettings settings =
-				Ocl2ForEclipseFacade.getDeclCodeGeneratorSettings();
+				Ocl2DeclCodeFactory.getInstance().createOcl2DeclCodeSettings();
 		settings.setSaveCode(false);
 		settings.setModus(IOcl2DeclSettings.MODUS_TYPED);
 		settings.setSourceDirectory(sourcePath);
-		settings.setTemplateGroup(Ocl2ForEclipseFacade
+		settings.setTemplateGroup(TemplatePlugin.getTemplateGroupRegistry()
 				.getTemplateGroup("Standard(SQL)"));
 		List<String> result = null;
+		IOcl2Sql ocl2Sql = Ocl2SQLFactory.getInstance().createSQLCodeGenerator(settings);
+		ocl2Sql.setInputModel(model);
 		try {
-			result = Ocl2ForEclipseFacade.generateSQLCode(constraints, settings, model);
-		} catch (IllegalArgumentException e) {
-			fail("A empty constraint list");
+			result = ocl2Sql.transformFragmentCode(constraints);
 		} catch (Ocl2CodeException e) {
 			fail("Can't generate sql code");
 		}
@@ -154,25 +159,23 @@ public class Ocl2SqlTest {
 						.replace("reference:file:", "");
 		List<Constraint> constraints = null;
 		try {
-			constraints =
-					Ocl2ForEclipseFacade.parseConstraints(new File(filePath
-							+ "constraints/university_complex.ocl"), model, true);
+			constraints = Ocl22Parser.INSTANCE.doParse(model, URI.createFileURI(filePath
+					+ "constraints/university_complex.ocl"), true);
 		} catch (ParseException e) {
 			fail("Can't parse the constraints");
 		}
 		IOcl2DeclSettings settings =
-				Ocl2ForEclipseFacade.getDeclCodeGeneratorSettings();
+			Ocl2DeclCodeFactory.getInstance().createOcl2DeclCodeSettings();
 		settings.setModus(IOcl2DeclSettings.MODUS_TYPED);
 		settings.setSaveCode(true);
 		settings.setSourceDirectory(sourcePath);
-		settings.setTemplateGroup(Ocl2ForEclipseFacade
+		settings.setTemplateGroup(TemplatePlugin.getTemplateGroupRegistry()
 				.getTemplateGroup("Standard(SQL)"));
 		List<String> result = null;
+		IOcl2Sql ocl2Sql = Ocl2SQLFactory.getInstance().createSQLCodeGenerator(settings);
+		ocl2Sql.setInputModel(model);
 		try {
-			result =
-					Ocl2ForEclipseFacade.generateSQLCode(constraints, settings, model);
-		} catch (IllegalArgumentException e) {
-			fail("A empty constraint list");
+			result = ocl2Sql.transformFragmentCode(constraints);
 		} catch (Ocl2CodeException e) {
 			fail("Can't generate sql code");
 		}
@@ -191,28 +194,27 @@ public class Ocl2SqlTest {
 						.replace("reference:file:", "");
 		List<Constraint> constraints = null;
 		try {
-			constraints =
-					Ocl2ForEclipseFacade.parseConstraints(new File(filePath
-							+ "constraints/university_complex.ocl"), model, true);
+			constraints = Ocl22Parser.INSTANCE.doParse(model, URI.createFileURI(filePath
+					+ "constraints/university_complex.ocl"), true);
 		} catch (ParseException e) {
 			fail("Can't parse the constraints");
 		}
 		IOcl2DeclSettings settings =
-				Ocl2ForEclipseFacade.getDeclCodeGeneratorSettings();
+			Ocl2DeclCodeFactory.getInstance().createOcl2DeclCodeSettings();
 		settings.setModus(IOcl2DeclSettings.MODUS_TYPED);
 		settings.setSaveCode(true);
 		settings.setSourceDirectory(sourcePath);
-		settings.setTemplateGroup(Ocl2ForEclipseFacade
+		settings.setTemplateGroup(TemplatePlugin.getTemplateGroupRegistry()
 				.getTemplateGroup("Standard(SQL)"));
 		settings.setTablePrefix("TB_");
 		settings.setObjectViewPrefix("O_");
 		settings.setAssociationTablePrefix("AS_");
 		settings.setPrimaryKeyPrefix("P_");
 		settings.setForeignKeyPrefix("F_");
+		IOcl2Sql ocl2Sql = Ocl2SQLFactory.getInstance().createSQLCodeGenerator(settings);
+		ocl2Sql.setInputModel(model);
 		try {
-			Ocl2ForEclipseFacade.generateSQLCode(constraints, settings, model);
-		} catch (IllegalArgumentException e) {
-			fail("A empty constraint list");
+			ocl2Sql.transformFragmentCode(constraints);
 		} catch (Ocl2CodeException e) {
 			fail("Can't generate sql code");
 		}

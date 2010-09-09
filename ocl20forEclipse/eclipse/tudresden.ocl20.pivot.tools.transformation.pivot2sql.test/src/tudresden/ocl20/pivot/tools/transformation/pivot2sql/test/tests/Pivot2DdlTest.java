@@ -7,12 +7,12 @@ import org.junit.Before;
 import org.junit.Test;
 import orgomg.cwm.resource.relational.Schema;
 
-import tudresden.ocl20.pivot.facade.Ocl2ForEclipseFacade;
 import tudresden.ocl20.pivot.model.IModel;
 import tudresden.ocl20.pivot.model.ModelAccessException;
 import tudresden.ocl20.pivot.pivotmodel.Namespace;
 import tudresden.ocl20.pivot.tools.codegen.declarativ.IOcl2DeclSettings;
 import tudresden.ocl20.pivot.tools.transformation.ITransformation;
+import tudresden.ocl20.pivot.tools.transformation.TransformationFactory;
 import tudresden.ocl20.pivot.tools.transformation.pivot2sql.test.tests.util.ModelChecker;
 import tudresden.ocl20.pivot.tools.transformation.pivot2sql.test.tests.util.TestPerformer;
 import tudresden.ocl20.pivot.tools.transformation.pivot2sql.test.tests.util.TransformationTest;
@@ -53,7 +53,7 @@ public class Pivot2DdlTest {
 		oclSettings.setModus(modus);
 		
 		//run Pivot2Ddl:
-		ITransformation<Namespace,IOcl2DeclSettings,String> p2di = Ocl2ForEclipseFacade.getTransformation("Pivot2Ddl",Namespace.class,String.class,IOcl2DeclSettings.class,"pivot","ddl");
+		ITransformation<Namespace,IOcl2DeclSettings,String> p2di = TransformationFactory.getInstance().getTransformation("Pivot2Ddl",Namespace.class,String.class,IOcl2DeclSettings.class,"pivot","ddl");
 		p2di.setSettings(oclSettings);
 		try {
 			p2di.setParameterIN(model.getRootNamespace());
@@ -68,7 +68,7 @@ public class Pivot2DdlTest {
 		}
 		
 		//run Pivot2CWM & CWM2Ddl
-		ITransformation<Namespace,IOcl2DeclSettings,Schema> p2ci = Ocl2ForEclipseFacade.getTransformation("Pivot2CwmImpl",Namespace.class,Schema.class,IOcl2DeclSettings.class,"pivot","cwm");
+		ITransformation<Namespace,IOcl2DeclSettings,Schema> p2ci = TransformationFactory.getInstance().getTransformation("Pivot2CwmImpl",Namespace.class,Schema.class,IOcl2DeclSettings.class,"pivot","cwm");
 		p2ci.setSettings(oclSettings);
 		try {
 			p2ci.setParameterIN(model.getRootNamespace());
@@ -81,7 +81,7 @@ public class Pivot2DdlTest {
 		} catch (Exception e) {
 			fail("Can't transformation namespace in Pivot2Cwm");
 		}
-		ITransformation<Schema,IOcl2DeclSettings,String> c2di = Ocl2ForEclipseFacade.getTransformation("Cwm2DdlImpl",Schema.class,String.class,IOcl2DeclSettings.class,"cwm","ddl");
+		ITransformation<Schema,IOcl2DeclSettings,String> c2di = TransformationFactory.getInstance().getTransformation("Cwm2DdlImpl",Schema.class,String.class,IOcl2DeclSettings.class,"cwm","ddl");
 		c2di.setSettings(oclSettings);
 		c2di.setParameterIN(p2ci.getResult());
 		try {

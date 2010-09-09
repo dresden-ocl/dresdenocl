@@ -13,11 +13,11 @@ import orgomg.cwm.resource.relational.Schema;
 import orgomg.cwm.resource.relational.Table;
 import orgomg.cwm.resource.relational.impl.RelationalPackageImpl;
 
-import tudresden.ocl20.pivot.facade.Ocl2ForEclipseFacade;
-import tudresden.ocl20.pivot.model.ModelAccessException;
 import tudresden.ocl20.pivot.tools.codegen.declarativ.IOcl2DeclSettings;
 import tudresden.ocl20.pivot.tools.transformation.ITransformation;
+import tudresden.ocl20.pivot.tools.transformation.TransformationFactory;
 import tudresden.ocl20.pivot.tools.transformation.exception.InvalidModelException;
+import tudresden.ocl20.pivot.tools.transformation.exception.ModelAccessException;
 import tudresden.ocl20.pivot.tools.transformation.exception.TransformationException;
 import tudresden.ocl20.pivot.tools.transformation.pivot2sql.test.tests.util.ModelChecker;
 import tudresden.ocl20.pivot.tools.transformation.pivot2sql.test.tests.util.TestPerformer;
@@ -171,7 +171,7 @@ public class CWM2DdlTest {
 	}
 	
 	protected String generateCWMDdl(Schema schema) throws ModelAccessException, InvalidModelException, TransformationException {
-		ITransformation<Schema,IOcl2DeclSettings,String> cwm2Ddl = Ocl2ForEclipseFacade.getTransformation("Cwm2DdlImpl", Schema.class, String.class, IOcl2DeclSettings.class, "CWM", "DDL");	
+		ITransformation<Schema,IOcl2DeclSettings,String> cwm2Ddl = TransformationFactory.getInstance().getTransformation("Cwm2DdlImpl", Schema.class, String.class, IOcl2DeclSettings.class, "CWM", "DDL");	
 		cwm2Ddl.setParameterIN(schema);
 		IOcl2DeclSettings oclSettings = TestPerformer.getSettings();
 		cwm2Ddl.setSettings(oclSettings);

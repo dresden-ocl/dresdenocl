@@ -20,6 +20,7 @@ package tudresden.ocl20.pivot.tools.codegen;
 
 import java.util.List;
 
+import tudresden.ocl20.pivot.model.IModel;
 import tudresden.ocl20.pivot.pivotmodel.Constraint;
 import tudresden.ocl20.pivot.tools.codegen.exception.Ocl2CodeException;
 
@@ -34,17 +35,17 @@ import tudresden.ocl20.pivot.tools.codegen.exception.Ocl2CodeException;
 public interface IOcl2Code<T extends IOcl2CodeSettings> {
 
 	/**
-	 * @return The {@link IOcl22CodeSettings} of this {@link IOcl22Code} object.
+	 * @return The {@link T} of this {@link IOcl2Code} object.
 	 */
 	public T getSettings();
 
 	/**
 	 * <p>
-	 * Sets the {@link IOcl2CodeSettings} of this {@link IOcl22Code} object.
+	 * Sets the {@link T} of this {@link IOcl2Code} object.
 	 * </p>
 	 * 
 	 * @param settings
-	 *          The {@link IOcl2CodeSettings} to be set.
+	 *          The {@link T} to be set.
 	 */
 	public void setSettings(T settings);
 
@@ -59,7 +60,7 @@ public interface IOcl2Code<T extends IOcl2CodeSettings> {
 	 *          shall be transformed.
 	 * @return A {@link List} containing the transformed fragment code of the
 	 *         given {@link Constraint}s.
-	 * @throws Ocl22CodeException
+	 * @throws Ocl2CodeException
 	 *           Thrown, if an error during code transformation occurs.
 	 */
 	public List<String> transformFragmentCode(List<Constraint> constraints)

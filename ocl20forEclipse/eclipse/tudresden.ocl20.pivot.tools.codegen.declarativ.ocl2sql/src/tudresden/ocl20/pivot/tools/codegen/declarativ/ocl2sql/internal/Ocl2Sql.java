@@ -124,7 +124,7 @@ public class Ocl2Sql implements IOcl2Sql {
 			try {
 				ITransformation<Namespace, IOcl2DeclSettings, Tuple<String, IMappedModel>> pdamm;
 				pdamm =
-						TransformationFactory.getInstance().getTransformation(
+						TransformationFactory.getInstance().getParallelTransformation(
 								"Pivot2DdlAndMappedModel", Namespace.class, String.class,
 								IMappedModel.class, IOcl2DeclSettings.class, dateString,
 								dateString + "_generated");

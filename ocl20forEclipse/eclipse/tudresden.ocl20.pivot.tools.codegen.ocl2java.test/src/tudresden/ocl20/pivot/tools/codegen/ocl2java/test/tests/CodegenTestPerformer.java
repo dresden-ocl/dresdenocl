@@ -29,8 +29,10 @@ import java.io.IOException;
 import java.util.List;
 
 import org.eclipse.core.runtime.Platform;
+import org.eclipse.emf.common.util.URI;
 
-import tudresden.ocl20.pivot.facade.Ocl2ForEclipseFacade;
+import tudresden.ocl20.pivot.language.ocl.resource.ocl.Ocl22Parser;
+import tudresden.ocl20.pivot.metamodels.uml2.UML2MetamodelPlugin;
 import tudresden.ocl20.pivot.model.IModel;
 import tudresden.ocl20.pivot.model.ModelAccessException;
 import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
@@ -39,6 +41,7 @@ import tudresden.ocl20.pivot.pivotmodel.Namespace;
 import tudresden.ocl20.pivot.tools.codegen.exception.Ocl2CodeException;
 import tudresden.ocl20.pivot.tools.codegen.ocl2java.IOcl2Java;
 import tudresden.ocl20.pivot.tools.codegen.ocl2java.IOcl2JavaSettings;
+import tudresden.ocl20.pivot.tools.codegen.ocl2java.Ocl2JavaFactory;
 import tudresden.ocl20.pivot.tools.codegen.ocl2java.test.Ocl2JavaTestPlugin;
 
 /**
@@ -147,11 +150,8 @@ public final class CodegenTestPerformer {
 		}
 
 		try {
-			result =
-					Ocl2ForEclipseFacade.parseConstraints(oclFile, this.myModel, true);
-		}
-
-		catch (Exception e) {
+			result = Ocl22Parser.INSTANCE.doParse(myModel, URI.createFileURI(oclFile.getAbsolutePath()), true);;
+		} catch (Exception e) {
 			String msg;
 
 			msg = "Exception during parsing of given OCL constraints. ";
@@ -201,8 +201,10 @@ public final class CodegenTestPerformer {
 			allConstraints = this.getAllConstraints();
 
 			this.myCodeGeneratorSettings.setSaveCode(true);
-			Ocl2ForEclipseFacade.generateAspectJCode(allConstraints,
-					this.myCodeGeneratorSettings);
+			IOcl2Java ocl2Java = Ocl2JavaFactory.getInstance().createJavaCodeGenerator();
+			ocl2Java.resetEnvironment();
+			ocl2Java.setSettings(myCodeGeneratorSettings);
+			ocl2Java.transformInstrumentationCode(allConstraints);
 			this.myCodeGeneratorSettings.setSaveCode(false);
 		}
 
@@ -298,9 +300,10 @@ public final class CodegenTestPerformer {
 		this.myCodeGeneratorSettings.setInvariantCheckMode(constraint, checkMode);
 
 		/* Transform the instrumentation code. */
-		this.transformedCode =
-				Ocl2ForEclipseFacade.generateAspectJCode(constraint,
-						this.myCodeGeneratorSettings);
+		IOcl2Java ocl2Java = Ocl2JavaFactory.getInstance().createJavaCodeGenerator();
+		ocl2Java.resetEnvironment();
+		ocl2Java.setSettings(myCodeGeneratorSettings);
+		this.transformedCode = ocl2Java.transformInstrumentationCode(constraints).get(constraints.size() -1 );
 
 		/* To the real difference test. */
 		this.compareStringAndFile(expectedFileName, transformedCode);
@@ -322,16 +325,15 @@ public final class CodegenTestPerformer {
 
 		try {
 			List<Constraint> constraints;
-			Constraint constraint;
-
+			
 			/* Load the OCL file. */
 			constraints = this.addOclConstraintsToModel(constraintFileName);
-			constraint = constraints.get(constraints.size() - 1);
-
+			
 			/* Transform the fragment code. */
-			this.transformedCode =
-					Ocl2ForEclipseFacade.generateJavaFragmentCode(constraint,
-							this.myCodeGeneratorSettings);
+			IOcl2Java ocl2Java = Ocl2JavaFactory.getInstance().createJavaCodeGenerator();
+			ocl2Java.resetEnvironment();
+			ocl2Java.setSettings(myCodeGeneratorSettings);
+			this.transformedCode = ocl2Java.transformFragmentCode(constraints).get(constraints.size() -1);
 
 			/* Do the real difference test. */
 			this.compareStringAndFile(expectedFileName, transformedCode);
@@ -379,7 +381,7 @@ public final class CodegenTestPerformer {
 	public void resetCodeGenerator() throws Ocl2CodeException {
 
 		this.myCodeGeneratorSettings =
-				Ocl2ForEclipseFacade.getJavaCodeGeneratorSettings();
+				Ocl2JavaFactory.getInstance().createJavaCodeGeneratorSettings();
 	}
 
 	/**
@@ -582,9 +584,7 @@ public final class CodegenTestPerformer {
 		// no else;
 
 		try {
-			this.myModel =
-					Ocl2ForEclipseFacade.getModel(this.myModelFile,
-							Ocl2ForEclipseFacade.UML2_MetaModel);
+			this.myModel = ModelBusPlugin.getMetamodelRegistry().getMetamodel(UML2MetamodelPlugin.ID).getModelProvider().getModel(this.myModelFile);
 		}
 
 		catch (ModelAccessException e) {

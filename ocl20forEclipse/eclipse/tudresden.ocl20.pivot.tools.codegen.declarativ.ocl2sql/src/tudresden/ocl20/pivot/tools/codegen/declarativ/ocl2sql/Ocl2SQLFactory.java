@@ -70,7 +70,7 @@ public class Ocl2SQLFactory {
 	 * @throws Ocl22CodeException
 	 *           Thrown if the initialization of a new Java code generator fails.
 	 */
-	public IOcl2Sql createSQLCodeGenerator() throws Ocl2CodeException {
+	public IOcl2Sql createSQLCodeGenerator() {
 
 		IOcl2Sql result;
 
@@ -90,8 +90,7 @@ public class Ocl2SQLFactory {
 	 * @throws Ocl2CodeException
 	 *           Thrown if the initialization of a new sql code generator fails.
 	 */
-	public IOcl2Sql createSQLCodeGenerator(IOcl2DeclSettings settings)
-			throws Ocl2CodeException {
+	public IOcl2Sql createSQLCodeGenerator(IOcl2DeclSettings settings) {
 
 		IOcl2Sql result;
 

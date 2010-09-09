@@ -56,9 +56,9 @@ public class TestTransformationFactory {
 	
 	@Test
 	public void checkGetTransformationParameterParallel() {		
-		ITransformation<Namespace,IOcl2DeclSettings,Tuple<String,IMappedModel>> trans = TransformationFactory.getInstance().getTransformation(itrans.getClass().getSimpleName(), Namespace.class, String.class,IMappedModel.class, IOcl2DeclSettings.class, "", "");
+		ITransformation<Namespace,IOcl2DeclSettings,Tuple<String,IMappedModel>> trans = TransformationFactory.getInstance().getParallelTransformation(itrans.getClass().getSimpleName(), Namespace.class, String.class,IMappedModel.class, IOcl2DeclSettings.class, "", "");
 		assertNull("The transformation is created with false paramter",trans);
-		trans = TransformationFactory.getInstance().getTransformation("Pivot2DdlAndMappedModel", Namespace.class, String.class,IMappedModel.class, IOcl2DeclSettings.class, "", "");
+		trans = TransformationFactory.getInstance().getParallelTransformation("Pivot2DdlAndMappedModel", Namespace.class, String.class,IMappedModel.class, IOcl2DeclSettings.class, "", "");
 		assertNotNull(trans);
 		assertEquals("Isn't of same transformation type.",trans.getClass().getSimpleName(),"Pivot2DdlAndMappedModel");
 	
