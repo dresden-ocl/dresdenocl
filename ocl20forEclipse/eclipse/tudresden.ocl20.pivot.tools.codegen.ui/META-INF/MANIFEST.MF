@@ -5,10 +5,8 @@ Bundle-SymbolicName: tudresden.ocl20.pivot.tools.codegen.ui;singleton:=true
 Bundle-Version: 3.0.0.qualifier
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Require-Bundle: tudresden.ocl20.pivot.tools.codegen,
- tudresden.ocl20.pivot.pivotmodel,
  org.eclipse.core.runtime,
  org.eclipse.ui,
- tudresden.ocl20.pivot.model,
  tudresden.ocl20.pivot.modelbus,
  org.eclipse.core.resources,
  org.eclipse.core.variables,

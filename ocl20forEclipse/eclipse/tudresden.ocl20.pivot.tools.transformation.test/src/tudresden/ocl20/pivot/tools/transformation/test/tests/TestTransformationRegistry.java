@@ -29,16 +29,17 @@ package tudresden.ocl20.pivot.tools.transformation.test.tests;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import java.util.List;
 
+import org.eclipse.emf.ecore.EObject;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import tudresden.ocl20.pivot.pivotmodel.Namespace;
-import tudresden.ocl20.pivot.tools.codegen.declarativ.IOcl2DeclSettings;
+import tudresden.ocl20.pivot.tools.codegen.IOcl2CodeSettings;
 import tudresden.ocl20.pivot.tools.transformation.ITransformation;
 import tudresden.ocl20.pivot.tools.transformation.TransformationFactory;
 import tudresden.ocl20.pivot.tools.transformation.TransformationPlugin;
@@ -55,13 +56,13 @@ public class TestTransformationRegistry {
 	
 	@Before
 	public void setUp() {
-		itrans = TransformationFactory.getInstance().getTransformation("Pivot2Ddl", "", "");
+		itrans = TransformationFactory.getInstance().getTransformation("TestTrans", "", "");
 		TransformationPlugin.getTransformationRegistry().removeTransformation(itrans);
 	}
 
 	@After
 	public void tear_down() {
-		if (!TransformationPlugin.getTransformationRegistry().getTransformationList().contains("Pivot2Ddl")) {
+		if (!TransformationPlugin.getTransformationRegistry().getTransformationList().contains("TestTrans")) {
 			TransformationPlugin.getTransformationRegistry().addTransformation(itrans);
 		}
 
@@ -79,6 +80,10 @@ public class TestTransformationRegistry {
 		TransformationPlugin.getTransformationRegistry().addTransformation(itrans);
 		trans = TransformationPlugin.getTransformationRegistry().getTransformationList();
 		assertEquals("The transformation add extra.", trans.size(),size+1);
+		
+		//Check work extension add.
+		assertNotNull("The extension add isn't work.",TransformationPlugin.getTransformationRegistry().getTransformationClass("TestFalseTrans"));
+		
 	}
 	
 	@Test 
@@ -114,13 +119,18 @@ public class TestTransformationRegistry {
 		assertFalse("A extra transformation is in the list",trans.contains(itrans.getClass().getSimpleName()));
 		TransformationPlugin.getTransformationRegistry().addTransformation(itrans);
 		trans = TransformationPlugin.getTransformationRegistry().getTransformationList();
-		assertTrue("The transformation is in the list",trans.contains(itrans.getClass().getSimpleName()));
+		assertTrue("The transformation isn't in the list",trans.contains(itrans.getClass().getSimpleName()));
 		
 		//Check get with Types
-		trans = TransformationPlugin.getTransformationRegistry().getTransformationList(Namespace.class, String.class, IOcl2DeclSettings.class);
-		assertTrue("The transformation is in the list",trans.contains(itrans.getClass().getSimpleName()));
-		assertTrue("The parallel transformation is in the list",trans.contains("Pivot2DdlAndMappedModel"));
-		assertFalse("A extra transformation is in the list",trans.contains("Pivot2Cwm"));
+		trans = TransformationPlugin.getTransformationRegistry().getTransformationList(EObject.class, String.class, IOcl2CodeSettings.class);
+		assertTrue("The transformation TestTrans isn't in the list",trans.contains(itrans.getClass().getSimpleName()));
+		assertTrue("The parallel transformation isn't in the list with first parameter",trans.contains("TestParallelTrans"));
+		assertFalse("A extra transformation is in the list",trans.contains("TestFalseTrans"));
+		
+		trans = TransformationPlugin.getTransformationRegistry().getTransformationList(EObject.class, EObject.class, IOcl2CodeSettings.class);
+		assertTrue("The transformation TestFalseTrans isn't in the list",trans.contains("TestFalseTrans"));
+		assertTrue("The parallel transformation isn't in the list with second parameter",trans.contains("TestParallelTrans"));
+		assertFalse("A extra transformation is in the list",trans.contains(itrans.getClass().getSimpleName()));
 	}
 	
 }

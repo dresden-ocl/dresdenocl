@@ -5,15 +5,13 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertNull;
 
+import org.eclipse.emf.ecore.EObject;
 import org.junit.Before;
 import org.junit.Test;
 
-import tudresden.ocl20.pivot.pivotmodel.Namespace;
-import tudresden.ocl20.pivot.tools.codegen.declarativ.IOcl2DeclSettings;
-import tudresden.ocl20.pivot.tools.codegen.declarativ.mapping.IMappedModel;
+import tudresden.ocl20.pivot.tools.codegen.IOcl2CodeSettings;
 import tudresden.ocl20.pivot.tools.transformation.ITransformation;
 import tudresden.ocl20.pivot.tools.transformation.TransformationFactory;
-import tudresden.ocl20.pivot.tools.transformation.TransformationPlugin;
 import tudresden.ocl20.pivot.tools.transformation.impl.Tuple;
 
 /**
@@ -24,44 +22,62 @@ import tudresden.ocl20.pivot.tools.transformation.impl.Tuple;
  */
 public class TestTransformationFactory {
 
-	private ITransformation<?,?,?> itrans;
-	
+	private ITransformation<?, ?, ?> itrans;
+
 	@Before
 	public void setUp() {
-		itrans = TransformationFactory.getInstance().getTransformation("Pivot2Ddl", "", "");
+		itrans = TransformationFactory.getInstance().getTransformation(
+				"TestTrans", "", "");
 	}
-	
+
 	@Test
 	public void checkGetTransformationSimple() {
-		TransformationPlugin.getTransformationRegistry().addTransformation(itrans);
-		ITransformation<?,?,?> trans = TransformationFactory.getInstance().getTransformation("Pivot2DdlAndMappedModelX", "","");
-		assertNull("A not exists transformation is created",trans);
-		trans = TransformationFactory.getInstance().getTransformation("Pivot2DdlAndMappedModel", "","");
+		ITransformation<?, ?, ?> trans = TransformationFactory.getInstance()
+				.getTransformation("TestTrans1X", "", "");
+		assertNull("A not exists transformation is created", trans);
+		trans = TransformationFactory.getInstance().getTransformation(
+				"TestParallelTrans", "", "");
 		assertNotNull(trans);
-		trans = TransformationFactory.getInstance().getTransformation(itrans.getClass().getSimpleName(), "","");
+		assertNotSame("Is same transformation type.", trans.getClass()
+				.getName(), itrans.getClass().getName());
+		trans = TransformationFactory.getInstance().getTransformation(
+				itrans.getClass().getSimpleName(), "", "");
 		assertNotNull(trans);
-		assertNotSame("Isn't generate a new instance",trans,itrans);
-		assertEquals("Isn't of same transformation type.",trans.getClass().getName(),itrans.getClass().getName());
+		assertNotSame("Isn't generate a new instance", trans, itrans);
+		assertEquals("Isn't same transformation type.", trans.getClass()
+				.getName(), itrans.getClass().getName());
 	}
-	
+
 	@Test
 	public void checkGetTransformationParameter() {
-		
-		ITransformation<Namespace,IOcl2DeclSettings,String> trans = TransformationFactory.getInstance().getTransformation("Pivot2DdlAndMappedModel", Namespace.class, String.class, IOcl2DeclSettings.class, "", "");
-		assertNull("The transformation is created with false paramter",trans);
-		trans = TransformationFactory.getInstance().getTransformation(itrans.getClass().getSimpleName(), Namespace.class, String.class, IOcl2DeclSettings.class, "", "");
+
+		ITransformation<EObject, IOcl2CodeSettings, String> trans = TransformationFactory
+				.getInstance().getTransformation("TestParallelTrans",
+						EObject.class, String.class, IOcl2CodeSettings.class,
+						"", "");
+		assertNull("The transformation is created with false paramter", trans);
+		trans = TransformationFactory.getInstance().getTransformation(
+				itrans.getClass().getSimpleName(), EObject.class,
+				String.class, IOcl2CodeSettings.class, "", "");
 		assertNotNull(trans);
-		assertEquals("Isn't of same transformation type.",trans.getClass().getName(),itrans.getClass().getName());
+		assertEquals("Isn't of same transformation type.", trans.getClass()
+				.getName(), itrans.getClass().getName());
 	}
-	
+
 	@Test
-	public void checkGetTransformationParameterParallel() {		
-		ITransformation<Namespace,IOcl2DeclSettings,Tuple<String,IMappedModel>> trans = TransformationFactory.getInstance().getParallelTransformation(itrans.getClass().getSimpleName(), Namespace.class, String.class,IMappedModel.class, IOcl2DeclSettings.class, "", "");
-		assertNull("The transformation is created with false paramter",trans);
-		trans = TransformationFactory.getInstance().getParallelTransformation("Pivot2DdlAndMappedModel", Namespace.class, String.class,IMappedModel.class, IOcl2DeclSettings.class, "", "");
+	public void checkGetTransformationParameterParallel() {
+		ITransformation<EObject, IOcl2CodeSettings, Tuple<String, EObject>> trans = TransformationFactory
+				.getInstance().getParallelTransformation(
+						itrans.getClass().getSimpleName(), EObject.class,
+						String.class, EObject.class, IOcl2CodeSettings.class,
+						"", "");
+		assertNull("The transformation is created with false paramter", trans);
+		trans = TransformationFactory.getInstance().getParallelTransformation(
+				"TestParallelTrans", EObject.class, String.class,
+				EObject.class, IOcl2CodeSettings.class, "", "");
 		assertNotNull(trans);
-		assertEquals("Isn't of same transformation type.",trans.getClass().getSimpleName(),"Pivot2DdlAndMappedModel");
-	
-		
+		assertEquals("Isn't of same transformation type.", trans.getClass()
+				.getSimpleName(), "TestParallelTrans");
+
 	}
 }

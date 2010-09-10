@@ -34,7 +34,6 @@ package tudresden.ocl20.pivot.tools.transformation;
 
 import java.util.List;
 
-import tudresden.ocl20.pivot.model.metamodel.IMetamodel;
 import tudresden.ocl20.pivot.tools.transformation.event.ITransformationRegistryListener;
 
 /**
@@ -49,7 +48,7 @@ public interface ITransformationRegistry {
 
 	/**
 	 * <p>
-	 * Adds a {@link IMetamodel} to this {@link ITransformationRegistry}.
+	 * Adds a {@link ITransformation} to this {@link ITransformationRegistry}.
 	 * </p>
 	 * .
 	 * 

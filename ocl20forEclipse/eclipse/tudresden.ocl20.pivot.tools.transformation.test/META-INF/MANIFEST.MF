@@ -10,6 +10,5 @@ Require-Bundle: tudresden.ocl20.logging,
  org.junit4,
  org.eclipse.core.runtime,
  tudresden.ocl20.pivot.tools.transformation,
- tudresden.ocl20.pivot.pivotmodel,
- tudresden.ocl20.pivot.tools.codegen.declarativ
+ org.eclipse.emf.ecore
 Bundle-ActivationPolicy: lazy

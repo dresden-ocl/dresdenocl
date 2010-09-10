@@ -194,33 +194,30 @@ Library.
          id="tudresden.ocl20.feature.codegen"
          version="0.0.0"/>
 
+   <includes
+         id="tudresden.ocl20.feature.metamodels"
+         version="0.0.0"/>
+
    <requires>
-      <import plugin="tudresden.ocl20.logging"/>
       <import plugin="org.eclipse.core.runtime"/>
-      <import plugin="tudresden.ocl20.pivot.tools.codegen"/>
-      <import plugin="tudresden.ocl20.pivot.tools.template"/>
-      <import plugin="tudresden.ocl20.pivot.essentialocl"/>
-      <import plugin="tudresden.ocl20.pivot.modelbus"/>
-      <import plugin="org.eclipse.osgi"/>
+      <import plugin="tudresden.ocl20.logging"/>
       <import plugin="tudresden.ocl20.pivot.pivotmodel"/>
+      <import plugin="tudresden.ocl20.pivot.model"/>
+      <import plugin="org.eclipse.osgi"/>
       <import plugin="org.eclipse.ui"/>
+      <import plugin="tudresden.ocl20.pivot.modelbus"/>
       <import plugin="tudresden.ocl20.pivot.tools.codegen.ui"/>
       <import plugin="org.eclipse.emf.ecore"/>
-      <import plugin="tudresden.ocl20.pivot.metamodels.uml2"/>
+      <import plugin="tudresden.ocl20.pivot.tools.template"/>
       <import plugin="tudresden.ocl20.pivot.tools.transformation"/>
-      <import plugin="tudresden.ocl20.pivot.model"/>
       <import plugin="tudresden.ocl20.pivot.testsuite"/>
       <import plugin="org.junit4"/>
+      <import plugin="tudresden.ocl20.pivot.metamodels.uml2"/>
       <import plugin="tudresden.ocl20.pivot.parser"/>
       <import plugin="tudresden.ocl20.pivot.language.ocl.staticsemantics"/>
+      <import plugin="tudresden.ocl20.pivot.tools.codegen"/>
+      <import plugin="tudresden.ocl20.pivot.essentialocl"/>
    </requires>
-
-   <plugin
-         id="tudresden.ocl20.pivot.tools.codegen.declarativ"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
 
    <plugin
          id="tudresden.ocl20.pivot.tools.codegen.declarativ.ocl2sql"
@@ -266,6 +263,13 @@ Library.
 
    <plugin
          id="tudresden.ocl20.pivot.tools.codegen.declarativ.ocl2sql.test"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="tudresden.ocl20.pivot.tools.codegen.declarativ"
          download-size="0"
          install-size="0"
          version="0.0.0"
