@@ -9,8 +9,9 @@
             label="Dresden OCL Action Set"
             visible="true">
          <menu
-               label="DresdenOCL"
-               id="tudresden.ocl20.pivot.modelbus.ui.menu">
+               icon="icons/dresdenocl.gif"
+               id="tudresden.ocl20.pivot.modelbus.ui.menu"
+               label="DresdenOCL">
             <separator
                   name="tudresden.ocl20.pivot.modelbus.ui.menu.import">
             </separator>
@@ -99,6 +100,7 @@
             allPopups="false"
             locationURI="popup:org.eclipse.ui.popup.any?after=additions">
          <menu
+               icon="icons/dresdenocl.gif"
                label="Dresden OCL"
                tooltip="Tools of Dresden OCL">
             <command
@@ -139,6 +141,7 @@
          point="org.eclipse.ui.perspectives">
       <perspective
             class="tudresden.ocl20.pivot.modelbus.ui.internal.perspective.DresdenOclPerspectiveFactory"
+            icon="icons/dresdenocl.gif"
             id="tudresden.ocl20.pivot.ui.perspective"
             name="Dresden OCL">
          <description>
