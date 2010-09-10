@@ -1,6 +1,7 @@
 package tudresden.ocl20.pivot.tools.codegen.declarativ.ocl2sql.test.tests;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
@@ -32,6 +33,7 @@ import tudresden.ocl20.pivot.tools.codegen.declarativ.ocl2sql.Ocl2SQLFactory;
 import tudresden.ocl20.pivot.tools.codegen.declarativ.ocl2sql.test.Ocl2SqlTestPlugin;
 import tudresden.ocl20.pivot.tools.codegen.exception.Ocl2CodeException;
 import tudresden.ocl20.pivot.tools.template.TemplatePlugin;
+import tudresden.ocl20.pivot.tools.transformation.exception.TransformationException;
 
 public class Ocl2SqlTest {
 
@@ -44,6 +46,8 @@ public class Ocl2SqlTest {
 	private static String filePath =
 		Platform.getBundle(Ocl2SqlTestPlugin.PLUGIN_ID).getLocation()
 				.replace("reference:file:", "");
+	
+	public List<Constraint> constraints = null;
 
 	@BeforeClass
 	public static void setUpClass() {
@@ -114,34 +118,94 @@ public class Ocl2SqlTest {
 		}
 	}
 	
-	/**
-	 * Test if no schema created and check the created views.
-	 */
-	@Test
-	public void runTestNotSave() {
-
-		List<Constraint> constraints = null;
+	private List<String> runCodeGenerator(IOcl2DeclSettings settings) throws Ocl2CodeException {
+		settings.setModus(IOcl2DeclSettings.MODUS_TYPED);
+		settings.setSourceDirectory(sourcePath);
+		settings.setTemplateGroup(TemplatePlugin.getTemplateGroupRegistry()
+				.getTemplateGroup("Standard(SQL)"));
 		try {
 			constraints = Ocl22Parser.INSTANCE.doParse(model, URI.createFileURI(filePath
 							+ "constraints/university_complex.ocl"), true);
 		} catch (ParseException e) {
 			fail("Can't parse the constraints");
 		}
+		IOcl2Sql ocl2Sql = Ocl2SQLFactory.getInstance().createSQLCodeGenerator(settings);
+		ocl2Sql.setInputModel(model);
+		return ocl2Sql.transformFragmentCode(constraints);
+	}
+	
+	/**
+	 * check throw TransformationEception.
+	 */
+	@Test 
+	public void runExceptionTest() {
+		IOcl2DeclSettings settings =
+			Ocl2DeclCodeFactory.getInstance().createOcl2DeclCodeSettings();
+		try {
+			runCodeGenerator(settings);
+		} catch (Ocl2CodeException e1) {
+			fail("A execption throw!");
+		}
+		settings.setSaveCode(true);
+		settings.setModus(0);
+		IOcl2Sql ocl2Sql = Ocl2SQLFactory.getInstance().createSQLCodeGenerator(settings);
+		ocl2Sql.setInputModel(model);
+		try {
+			ocl2Sql.transformFragmentCode(constraints);
+			fail("No TransformationException throw, because no modus are set.");
+		} catch (Ocl2CodeException e) {
+			if (!(e.getCause() instanceof TransformationException)) {
+				fail("No TransformationException throw, because no modus are set.");
+			}
+		}
+		settings.setModus(IOcl2DeclSettings.MODUS_TYPED);
+		settings.setObjectViewPrefix("T_");
+		try {
+			ocl2Sql.transformFragmentCode(constraints);
+			fail("No TransformationException throw, because set table prefix and object view prefix to same prefix");
+		} catch (Ocl2CodeException e) {
+			if (!(e.getCause() instanceof TransformationException)) {
+				fail("No TransformationException throw, because "+e.getCause().getMessage());
+			}
+		}
+		settings.setObjectViewPrefix("OV_");
+		settings.setPrimaryKeyPrefix("");
+		try {
+			ocl2Sql.transformFragmentCode(constraints);
+			fail("No TransformationException throw, because primary key prefix is null");
+		} catch (Ocl2CodeException e) {
+			if (!(e.getCause() instanceof TransformationException)) {
+				fail("No TransformationException throw, because "+e.getCause().getMessage());
+			}
+		}
+		settings.setPrimaryKeyPrefix("FK_");
+		try {
+			ocl2Sql.transformFragmentCode(constraints);
+			fail("No TransformationException throw, because primary key and foreign key has the same prefix");
+		} catch (Ocl2CodeException e) {
+			if (!(e.getCause() instanceof TransformationException)) {
+				fail("No TransformationException throw, because "+e.getCause().getMessage());
+			}
+		}
+	}
+	
+	/**
+	 * Test if no schema created and check the created views.
+	 */
+	@Test
+	public void runTestNotSave() {
+
 		IOcl2DeclSettings settings =
 				Ocl2DeclCodeFactory.getInstance().createOcl2DeclCodeSettings();
 		settings.setSaveCode(false);
 		settings.setModus(IOcl2DeclSettings.MODUS_TYPED);
-		settings.setSourceDirectory(sourcePath);
-		settings.setTemplateGroup(TemplatePlugin.getTemplateGroupRegistry()
-				.getTemplateGroup("Standard(SQL)"));
 		List<String> result = null;
-		IOcl2Sql ocl2Sql = Ocl2SQLFactory.getInstance().createSQLCodeGenerator(settings);
-		ocl2Sql.setInputModel(model);
 		try {
-			result = ocl2Sql.transformFragmentCode(constraints);
+			result = runCodeGenerator(settings);
 		} catch (Ocl2CodeException e) {
 			fail("Can't generate sql code");
 		}
+		assertNotNull("No result",result);
 		testStringList(result,expected);
 		String[] files = (new File(sourcePath)).list();
 		assertEquals(1, files.length);
@@ -154,31 +218,16 @@ public class Ocl2SqlTest {
 	@Test
 	public void runTestWithSave() {
 
-		String filePath =
-				Platform.getBundle(Ocl2SqlTestPlugin.PLUGIN_ID).getLocation()
-						.replace("reference:file:", "");
-		List<Constraint> constraints = null;
-		try {
-			constraints = Ocl22Parser.INSTANCE.doParse(model, URI.createFileURI(filePath
-					+ "constraints/university_complex.ocl"), true);
-		} catch (ParseException e) {
-			fail("Can't parse the constraints");
-		}
 		IOcl2DeclSettings settings =
 			Ocl2DeclCodeFactory.getInstance().createOcl2DeclCodeSettings();
-		settings.setModus(IOcl2DeclSettings.MODUS_TYPED);
 		settings.setSaveCode(true);
-		settings.setSourceDirectory(sourcePath);
-		settings.setTemplateGroup(TemplatePlugin.getTemplateGroupRegistry()
-				.getTemplateGroup("Standard(SQL)"));
 		List<String> result = null;
-		IOcl2Sql ocl2Sql = Ocl2SQLFactory.getInstance().createSQLCodeGenerator(settings);
-		ocl2Sql.setInputModel(model);
 		try {
-			result = ocl2Sql.transformFragmentCode(constraints);
+			result = runCodeGenerator(settings);
 		} catch (Ocl2CodeException e) {
 			fail("Can't generate sql code");
 		}
+		assertNotNull("No result",result);
 		testStringList(result,expected);
 		String[] files = (new File(sourcePath)).list();
 		assertEquals(2, files.length);
@@ -189,32 +238,16 @@ public class Ocl2SqlTest {
 	@Test
 	public void runTestWithSaveAndOtherParameter() {
 
-		String filePath =
-				Platform.getBundle(Ocl2SqlTestPlugin.PLUGIN_ID).getLocation()
-						.replace("reference:file:", "");
-		List<Constraint> constraints = null;
-		try {
-			constraints = Ocl22Parser.INSTANCE.doParse(model, URI.createFileURI(filePath
-					+ "constraints/university_complex.ocl"), true);
-		} catch (ParseException e) {
-			fail("Can't parse the constraints");
-		}
 		IOcl2DeclSettings settings =
 			Ocl2DeclCodeFactory.getInstance().createOcl2DeclCodeSettings();
-		settings.setModus(IOcl2DeclSettings.MODUS_TYPED);
 		settings.setSaveCode(true);
-		settings.setSourceDirectory(sourcePath);
-		settings.setTemplateGroup(TemplatePlugin.getTemplateGroupRegistry()
-				.getTemplateGroup("Standard(SQL)"));
 		settings.setTablePrefix("TB_");
 		settings.setObjectViewPrefix("O_");
 		settings.setAssociationTablePrefix("AS_");
 		settings.setPrimaryKeyPrefix("P_");
 		settings.setForeignKeyPrefix("F_");
-		IOcl2Sql ocl2Sql = Ocl2SQLFactory.getInstance().createSQLCodeGenerator(settings);
-		ocl2Sql.setInputModel(model);
 		try {
-			ocl2Sql.transformFragmentCode(constraints);
+			runCodeGenerator(settings);
 		} catch (Ocl2CodeException e) {
 			fail("Can't generate sql code");
 		}
@@ -234,15 +267,15 @@ public class Ocl2SqlTest {
 				if (zeile.startsWith("--")) continue;
 				if (temp == null) {
 					temp = zeile;
+				} else if (zeile.equals("")) {
+					retValue.add(temp);
+					temp = null;
 				} else {
 					temp += "\n"+zeile;
 				}
-				if (zeile.equals("")) {
-					retValue.add(temp);
-					temp = null;
-				}
+				
 			}
-			retValue.add(temp+"\n");
+			retValue.add(temp);
 			in.close();
 		} catch (IOException e) {
 			e.printStackTrace();

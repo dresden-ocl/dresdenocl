@@ -129,6 +129,20 @@ public class Pivot2CwmImpl extends
 		this.pivotModelAnalyser = new PivotModelAnalyser(model_in);
 		this.cwmModelAnalyser = new CwmModelAnalyser(out);
 
+		/** CHECK SETTINGS **/
+		if (!((this.settings.getModus() == IOcl2DeclSettings.MODUS_TYPED) || (this.settings.getModus() == IOcl2DeclSettings.MODUS_VERTICAL))) {
+			throw new TransformationException("No modus set.",this);
+		}
+		if (this.settings.getPrimaryKeyPrefix().equals("")) {
+			throw new TransformationException("No primary key prefix set.",this);
+		}
+		if (this.settings.getPrimaryKeyPrefix().equals(this.settings.getForeignKeyPrefix())) {
+			throw new TransformationException("Primary Key and Foreign Key prefix equals",this);
+		} 
+		if (this.settings.getTablePrefix().equals(this.settings.getObjectViewPrefix())) {
+			throw new TransformationException("Table and ObjectView prefix equal", this);
+		}
+		
 		/** HELPERS **/
 
 		typename2table = new HashMap<String, Table>();

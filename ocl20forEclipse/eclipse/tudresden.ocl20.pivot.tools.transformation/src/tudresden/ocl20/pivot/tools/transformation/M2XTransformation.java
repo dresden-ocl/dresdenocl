@@ -65,22 +65,4 @@ public abstract class M2XTransformation<M_IN extends EObject, SETTINGS, OUT>
 
 	}
 
-	public Class<M_IN> getInType() {
-
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public Class<SETTINGS> getSettingsType() {
-
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public Class<OUT> getOutType() {
-
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 }

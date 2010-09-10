@@ -153,7 +153,11 @@ public class PivotModelAnalyser extends
 		primitives.add("Date");
 		boolean retValue = type instanceof PrimitiveType;
 		if (!retValue) {
-			retValue = primitives.contains(type.getName());
+			if (type.getOwnedProperty().size() == 0) {
+				if (type.getOwnedOperation().size() == 0) {
+					retValue = primitives.contains(type.getName());
+				}
+			}
 		}
 		return retValue;
 	}

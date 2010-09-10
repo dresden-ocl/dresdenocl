@@ -63,6 +63,7 @@ import tudresden.ocl20.pivot.essentialocl.types.SequenceType;
 import tudresden.ocl20.pivot.essentialocl.types.SetType;
 import tudresden.ocl20.pivot.pivotmodel.AssociationProperty;
 import tudresden.ocl20.pivot.pivotmodel.Constraint;
+import tudresden.ocl20.pivot.pivotmodel.ConstraintKind;
 import tudresden.ocl20.pivot.pivotmodel.Operation;
 import tudresden.ocl20.pivot.pivotmodel.PrimitiveType;
 import tudresden.ocl20.pivot.pivotmodel.Property;
@@ -207,11 +208,8 @@ public class Ocl2DeclCode extends ExpressionsSwitch<String> implements
 
 			String aResult = this.transformFragmentCode(aConstraint);
 
-			if (aResult.length() > 0) {
-				aResult += "\n";
-			}
-			// no else.
-
+			if (aResult == null) continue;
+			
 			result.add(aResult);
 		}
 
@@ -243,9 +241,15 @@ public class Ocl2DeclCode extends ExpressionsSwitch<String> implements
 		}
 		// no else.
 
+		//Check of generated Constraint Types:
+		if (aConstraint.getKind() != ConstraintKind.INVARIANT) {
+			return null;
+		}
+			
+		
 		String result;
 		EObject anExpression;
-
+		
 		anExpression = (EObject) aConstraint.getSpecification();
 		result = this.doSwitch(anExpression);
 

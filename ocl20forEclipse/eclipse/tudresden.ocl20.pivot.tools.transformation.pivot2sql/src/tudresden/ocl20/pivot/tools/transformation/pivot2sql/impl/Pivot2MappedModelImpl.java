@@ -22,6 +22,7 @@ import tudresden.ocl20.pivot.tools.codegen.declarativ.mapping.IMappedModel;
 import tudresden.ocl20.pivot.tools.transformation.ITransformation;
 import tudresden.ocl20.pivot.tools.transformation.M2XTransformation;
 import tudresden.ocl20.pivot.tools.transformation.exception.InvalidModelException;
+import tudresden.ocl20.pivot.tools.transformation.exception.TransformationException;
 import tudresden.ocl20.pivot.tools.transformation.pivot2sql.Pivot2SqlPlugin;
 import tudresden.ocl20.pivot.tools.transformation.pivot2sql.mapping.MappedClassImpl;
 import tudresden.ocl20.pivot.tools.transformation.pivot2sql.mapping.MappedModelImpl;
@@ -72,7 +73,7 @@ public class Pivot2MappedModelImpl extends
 	}
 
 	@Override
-	public void invoke() throws InvalidModelException {
+	public void invoke() throws InvalidModelException, TransformationException {
 
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("Starting pivot to mappedmodel transformation");
@@ -91,6 +92,17 @@ public class Pivot2MappedModelImpl extends
 			LOGGER.debug(settings);
 		}
 
+		/** CHECK SETTINGS **/
+		if (this.settings.getPrimaryKeyPrefix().equals("")) {
+			throw new TransformationException("No primary key prefix set.",this);
+		}
+		if (this.settings.getPrimaryKeyPrefix().equals(this.settings.getForeignKeyPrefix())) {
+			throw new TransformationException("Primary Key and Foreign Key prefix equals",this);
+		} 
+		if (this.settings.getTablePrefix().equals(this.settings.getObjectViewPrefix())) {
+			throw new TransformationException("Table and ObjectView prefix equal", this);
+		}
+		
 		this.pivotModelAnalyser = new PivotModelAnalyser(model_in);
 
 		this.settings.setMappedModel(new MappedModelImpl());

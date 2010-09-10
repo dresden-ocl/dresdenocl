@@ -115,6 +115,8 @@ public class Pivot2MappedModelTest extends TransformationTest {
 		IMappedModel mm = null;
 		try {
 			mm = generateMappedModel(TEST_PROPERTY);
+		} catch (TransformationException e) {
+			fail(e.getMessage());
 		} catch (Exception e) {
 			fail("The mapped model can't generate");
 		}

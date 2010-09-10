@@ -17,5 +17,6 @@ Require-Bundle: org.eclipse.core.runtime,
  tudresden.ocl20.pivot.tools.codegen.declarativ.ocl2sql,
  tudresden.ocl20.pivot.metamodels.uml2,
  tudresden.ocl20.pivot.parser,
- tudresden.ocl20.pivot.language.ocl.staticsemantics
+ tudresden.ocl20.pivot.language.ocl.staticsemantics,
+ tudresden.ocl20.pivot.tools.transformation
 Bundle-ActivationPolicy: lazy

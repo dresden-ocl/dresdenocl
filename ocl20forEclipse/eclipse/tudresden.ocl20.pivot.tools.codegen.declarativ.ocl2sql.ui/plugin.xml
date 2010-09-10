@@ -19,11 +19,12 @@
             </separator>
          </menu>
          <action
-               label="Generate SQL Code"
                class="tudresden.ocl20.pivot.tools.codegen.declarativ.ocl2sql.ui.actions.SQLCodeGenAction"
-               tooltip="Creates SQL code to instrument constraints for a given model and given OCL constraints."
+               icon="icons/codegen.gif"
+               id="tudresden.ocl20.pivot.tools.codegen.declarativ.ocl2sql.ui.actions.SQLCodeGenAction"
+               label="Generate SQL Code"
                menubarPath="tudresden.ocl20.pivot.modelbus.ui.menu/tudresden.ocl20.pivot.modelbus.ui.menu.tools"
-               id="tudresden.ocl20.pivot.tools.codegen.declarativ.ocl2sql.ui.actions.SQLCodeGenAction">
+               tooltip="Creates SQL code to instrument constraints for a given model and given OCL constraints.">
          </action>
       </actionSet>
    </extension>
