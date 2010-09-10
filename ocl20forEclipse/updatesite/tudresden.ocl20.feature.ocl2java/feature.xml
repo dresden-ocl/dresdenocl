@@ -181,18 +181,25 @@ permanent authorization for you to choose that version for the
 Library.
    </license>
 
+   <includes
+         id="tudresden.ocl20.feature.codegen"
+         version="0.0.0"/>
+
    <requires>
       <import plugin="org.eclipse.core.runtime" version="3.4.0" match="greaterOrEqual"/>
       <import plugin="tudresden.ocl20.pivot.modelbus" version="2.1.0" match="greaterOrEqual"/>
       <import plugin="tudresden.ocl20.pivot.tools.template" version="2.1.0" match="greaterOrEqual"/>
       <import plugin="tudresden.ocl20.pivot.tools.codegen" version="2.1.0" match="greaterOrEqual"/>
       <import plugin="org.junit4" version="4.0.0" match="greaterOrEqual"/>
-      <import plugin="tudresden.ocl20.pivot.facade" version="2.1.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.core.resources" version="3.4.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.core.variables"/>
       <import plugin="org.eclipse.ui" version="3.4.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.ui.ide" version="3.4.0" match="greaterOrEqual"/>
       <import plugin="tudresden.ocl20.pivot.tools.codegen.ui" version="2.2.0" match="greaterOrEqual"/>
+      <import plugin="tudresden.ocl20.pivot.model"/>
+      <import plugin="tudresden.ocl20.pivot.metamodels.uml2"/>
+      <import plugin="tudresden.ocl20.pivot.language.ocl.staticsemantics"/>
+      <import plugin="tudresden.ocl20.pivot.parser"/>
    </requires>
 
    <plugin
