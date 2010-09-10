@@ -40,9 +40,6 @@ public class SQLCodeWizard extends TransformCodeWizard implements INewWizard {
 	private static final Logger logger = Ocl2SQLUIPlugIn
 			.getLogger(SQLCodeWizard.class);
 
-	/** The icon in the top right corner. */
-	private static final String wizardImage = "icons/transform_wizard.png";
-
 	/** A page to select settings for code transformation. */
 	private SettingsPage settingsPage;
 
@@ -54,9 +51,6 @@ public class SQLCodeWizard extends TransformCodeWizard implements INewWizard {
 	public SQLCodeWizard() {
 
 		super(Ocl2SqlUIMessages.TransformCodeWizard_Title);
-		/* Sets the image in the top right corner. */
-		setDefaultPageImageDescriptor(Ocl2SQLUIPlugIn
-				.getImageDescriptor(wizardImage));
 	}
 
 	/*

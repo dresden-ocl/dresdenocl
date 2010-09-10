@@ -43,8 +43,6 @@ public class JavaCodeWizard extends TransformCodeWizard implements INewWizard {
 	private static final Logger logger = Ocl2JavaUIPlugIn
 			.getLogger(JavaCodeWizard.class);
 
-	/** The icon in the top right corner. */
-	private static final String wizardImage = "icons/transform_wizard.png";
 
 	/** A page to select settings for code transformation. */
 	private SettingsPage settingsPage;
@@ -60,10 +58,6 @@ public class JavaCodeWizard extends TransformCodeWizard implements INewWizard {
 	public JavaCodeWizard() {
 
 		super(Ocl2JavaUIMessages.TransformCodeWizard_Title);
-		/* Sets the image in the top right corner. */
-		setDefaultPageImageDescriptor(Ocl2JavaUIPlugIn
-				.getImageDescriptor(wizardImage));
-
 	}
 
 	/*
