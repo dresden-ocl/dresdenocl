@@ -672,6 +672,7 @@ public class TestBoolean extends AbstractInterpreterTest {
 		assertNotNull(results);
 		assertEquals(1, results.size());
 
+		/* null -> false = invalid */
 		this.assertIsInvalid(results.get(0));
 	}
 
@@ -696,7 +697,8 @@ public class TestBoolean extends AbstractInterpreterTest {
 		assertNotNull(results);
 		assertEquals(1, results.size());
 
-		this.assertIsInvalid(results.get(0));
+		/* null -> true = true */
+		this.assertIsTrue(results.get(0));
 	}
 
 	/**
@@ -720,6 +722,7 @@ public class TestBoolean extends AbstractInterpreterTest {
 		assertNotNull(results);
 		assertEquals(1, results.size());
 
+		/* null -> null = invalid */
 		this.assertIsInvalid(results.get(0));
 	}
 
@@ -744,6 +747,7 @@ public class TestBoolean extends AbstractInterpreterTest {
 		assertNotNull(results);
 		assertEquals(1, results.size());
 
+		/* null -> invalid = invalid */
 		this.assertIsInvalid(results.get(0));
 	}
 
@@ -768,6 +772,7 @@ public class TestBoolean extends AbstractInterpreterTest {
 		assertNotNull(results);
 		assertEquals(1, results.size());
 
+		/* invalid -> false = invalid */
 		this.assertIsInvalid(results.get(0));
 	}
 
@@ -792,7 +797,8 @@ public class TestBoolean extends AbstractInterpreterTest {
 		assertNotNull(results);
 		assertEquals(1, results.size());
 
-		this.assertIsInvalid(results.get(0));
+		/* invalid -> true = true */
+		this.assertIsTrue(results.get(0));
 	}
 
 	/**
@@ -816,6 +822,7 @@ public class TestBoolean extends AbstractInterpreterTest {
 		assertNotNull(results);
 		assertEquals(1, results.size());
 
+		/* invalid -> null = invalid */
 		this.assertIsInvalid(results.get(0));
 	}
 
@@ -840,6 +847,7 @@ public class TestBoolean extends AbstractInterpreterTest {
 		assertNotNull(results);
 		assertEquals(1, results.size());
 
+		/* Invalid -> Invalid = Invalid. */
 		this.assertIsInvalid(results.get(0));
 	}
 

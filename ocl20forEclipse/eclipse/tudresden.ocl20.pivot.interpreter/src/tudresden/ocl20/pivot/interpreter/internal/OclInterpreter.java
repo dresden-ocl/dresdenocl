@@ -3170,43 +3170,10 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 				/* Handle implies operation. */
 				else if (referredOperation.getName().equals("implies")) {
 
-					/* invalid implies anything = invalid. */
-					if (booleanSource.oclIsInvalid().isTrue()) {
-						if (LOGGER.isDebugEnabled()) {
-							LOGGER.debug(this.logOffset
-									+ "Source of implies is invalid. Result in invalid.");
-						}
-						// no else.
-
-						result = this.myStandardLibraryFactory
-								.createOclInvalid(EssentialOclPlugin
-										.getOclLibraryProvider()
-										.getOclLibrary().getOclBoolean(),
-										booleanSource.getInvalidReason());
-					}
-
-					/* undefined implies anything = invalid. */
-					else if (booleanSource.oclIsUndefined().isTrue()) {
-						if (LOGGER.isDebugEnabled()) {
-							LOGGER.debug(this.logOffset
-									+ "Source of implies is undefined. Result in invalid.");
-						}
-						// no else.
-
-						result = this.myStandardLibraryFactory
-								.createOclInvalid(
-										EssentialOclPlugin
-												.getOclLibraryProvider()
-												.getOclLibrary()
-												.getOclBoolean(),
-										new NullPointerException(
-												"Implies on undefined is not allowed. "
-														+ booleanSource
-																.getUndefinedReason()));
-					}
-
 					/* false implies anything = true. */
-					else if (!booleanSource.isTrue()) {
+					if (!booleanSource.oclIsInvalid().isTrue()
+							&& !booleanSource.oclIsUndefined().isTrue()
+							&& !booleanSource.isTrue()) {
 						if (LOGGER.isDebugEnabled()) {
 							LOGGER.debug(this.logOffset
 									+ "Source of implies is false. Result in true.");
