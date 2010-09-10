@@ -5,7 +5,7 @@
 \textit{Chapter written by Claas Wilke}
 \end{flushright}
 
-To test the adaptation of a model instance type to DresdenOCL, the toolkit
+To test the adaptation of a model instance type to Dresden OCL, the toolkit
 provides a generic test suite that can be simply instantiated by each adapted 
 model instance type. This chapter shortly presents, how the generic model
 instance type test suite can be instantiated to test an adapted model 
@@ -19,8 +19,8 @@ The generic model instance type test suite is located in the plug-in
 \code{tudresden.ocl20\linebreak[0].pi\-vot\linebreak[0].mo\-del\-in\-stance\-type\linebreak[0].test}.
 The test suite provides a set of JUnit tests, that check the functionality of
 all operations that must be adapted by every model instance type that
-shall be supported for DresdenOCL. The adaptation of a model instance type
-to DresdenOCL is explained in Chapter~\ref{chapter:modelInstanceTypeAdaptation}.  
+shall be supported for Dresden OCL. The adaptation of a model instance type
+to Dresden OCL is explained in Chapter~\ref{chapter:modelInstanceTypeAdaptation}.  
 The test suite contains about 100 JUnit tests.
 
 To instantiate the generic test suite for a newly adapted model instance type,
@@ -138,7 +138,7 @@ provide properties that should be handled as Booleans, Integers, Reals and
 Strings.
 
 Because some model instance types provide different types that shall be mapped
-to the same kind of type in DresdenOCL (e.g., the types \code{int} and
+to the same kind of type in Dresden OCL (e.g., the types \code{int} and
 \code{java.lang.Integer} of Java should both be mapped to the primitive type 
 \code{Integer}), these classes can provide multiple properties for the same 
 type. The properties should then be numbered, ignoring the number for the first 
@@ -271,7 +271,7 @@ were not implemented intentionally--can be ignored.
 \section{Summary}
 
 This chapter shortly introduced into the generic model instance type test suite
-of DresdenOCL. For further details of the test suite investigate the test suite
+of Dresden OCL. For further details of the test suite investigate the test suite
 plug-in
 \code{tudresden.ocl20\linebreak[0].pi\-vot\linebreak[0].modelinstancetype.test} 
 or the existing test suite instantiations in the plug-in 

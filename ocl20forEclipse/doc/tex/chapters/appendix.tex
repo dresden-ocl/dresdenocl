@@ -3,8 +3,6 @@
 \addcontentsline{toc}{chapter}{Tables}
 \chapter*{Tables}
 
-\todomt{Is Table~\ref{tab:software} complete?}
-
 \begin{table}[h]
 \begin{tabular}{|p{7cm}|p{7cm}|}
     \hline
@@ -29,12 +27,12 @@
     \url{http://www.eclipse.org/ajdt/} \\
     \hline
 \end{tabular}
-\caption{Software required to run DresdenOCL (v. 3.0.0) with Eclipse \newline(Most parts are con\-tained in the Eclipse MDT Distribution).}
+\caption{Software required to run Dresden OCL (v. 3.0.0) with Eclipse \newline(Most parts are con\-tained in the Eclipse MDT Distribution).}
 \label{tab:software}
 \end{table}
 
 
-\begin{table}[h]
+\begin{table}[p]
 \begin{tabular}{|p{4cm}|p{10cm}|}
     \hline
     \textbf{Feature} & \textbf{Plug-ins} \\
@@ -45,7 +43,9 @@
     tudresden.ocl20.pivot.codegen\newline
     tudresden.ocl20.pivot.codegen.ui\newline
     tudresden.ocl20.pivot.template\newline
-    tudresden.ocl20.pivot.template.test\\
+    tudresden.ocl20.pivot.template.test\newline
+    tudresden.ocl20.pivot.tools.transformation\newline
+    tudresden.ocl20.pivot.tools.transformation.test\\
     \hline
 
     \textbf{Core} & 
@@ -106,11 +106,11 @@
     \hline
  
 \end{tabular}
-\caption{The plug-ins of DresdenOCL (v. 3.0.0) related to their features (part 1).}
+\caption{The plug-ins of Dresden OCL (v. 3.0.0) related to their features (part 1).}
 \label{tab:plugins}
 \end{table}
 
-\begin{table}[h]
+\begin{table}[p]
 \begin{tabular}{|p{4cm}|p{10cm}|}
     \hline
     \textbf{Feature} & \textbf{Plug-ins} \\
@@ -127,15 +127,16 @@
     tudresden.ocl20.pivot.modelinstancetype.xml\\
     \hline
  
-    \textbf{Ocl22Sql} &
+    \textbf{Ocl2Sql} &
     (Required SQL code generation)\newline
     tudresden.ocl20.pivot.tools.codegen.declarativ\newline
     tudresden.ocl20.pivot.tools.codegen.declarativ.ocl2sql\newline
+    tudresden.ocl20.pivot.tools.codegen.declarativ.ocl2sql.test\newline
     tudresden.ocl20.pivot.tools.codegen.declarativ.ocl2sql.ui\newline
     tudresden.ocl20.pivot.tools.CWM\newline
     tudresden.ocl20.pivot.tools.template.sql\newline
-    tudresden.ocl20.pivot.tools.transformation\newline
-    tudresden.ocl20.pivot.tools.transformation.pivot2sql\\
+    tudresden.ocl20.pivot.tools.transformation.pivot2sql\newline
+    tudresden.ocl20.pivot.tools.transformation.pivot2sql.test\\
     \hline
 
     \textbf{Ocl2Java} &
@@ -167,14 +168,11 @@
     tudresden.ocl20.pivot.pivotmodel.semantics\\
     \hline
 \end{tabular}
-\caption{The plug-ins of DresdenOCL (v. 3.0.0) related to their features (part 2).}
+\caption{The plug-ins of Dresden OCL (v. 3.0.0) related to their features (part 2).}
 \end{table}
 
 
-\todocw{Add University example to Table~\ref{tab:examples} when OCL22SQL is
-available.}
-
-\begin{table}[h]
+\begin{table}[p]
 \begin{tabular}{|p{3.5cm}|p{10.5cm}|}
   \hline
 
@@ -226,8 +224,17 @@ available.}
   Generated\newline AspectJ Code & tudresden.ocl20.pivot.examples.simple.ocl22javacode\\
   \hline
 
+  \textbf{University Example} & \\
+  Plug-in Package & tudresden.ocl20.pivot.examples.university\\
+  Meta-Models & MDT UML2\\
+  Model & model/university.uml, model/university\_complex.uml \\
+  OCL Expressions & constraints/*.ocl\\
+  Model Instance Type & --\\
+  Model Instance & --\\
+  \hline
+
 \end{tabular}
-\caption{The examples provided with DresdenOCL.}
+\caption{The examples provided with Dresden OCL.}
 \label{tab:examples}
 \end{table}
 

@@ -5,8 +5,8 @@
 \textit{Chapter written by Claas Wilke}
 \end{flushright}
 
-DresdenOCL uses a \keyword{Log4j Logger} to log method entries, exits and
-errors during DresdenOCL's execution. Each plug-in of DresdenOCL provides a
+Dresden OCL uses a \keyword{Log4j Logger} to log method entries, exits and
+errors during Dresden OCL's execution. Each plug-in of Dresden OCL provides a
 \code{log4j.properties} file that can be used to configure the logger for the
 plug-in. Listing~\ref{logging:lst:log4j} shows such file of the Model Bus
 plug-in.
@@ -23,7 +23,7 @@ can configure the logger to log messages of three different levels
 (\code{info}, \code{debug} and \code{error}). Furthermore, you can use different
 appenders to collect the logging messages such as the console (\code{stdout}) or
 an socket-based logging service (\code{socket}). The standard configuration of
-DresdenOCL's plug-ins is to log only error messages using the \code{stdout}
+Dresden OCL's plug-ins is to log only error messages using the \code{stdout}
 appender.
 
 If you use the \code{socket} appender instead, you might

@@ -201,12 +201,14 @@
     \interlinepenalty\@M%
     \dinBold\Huge\bfseries{%
         \ifnum \c@secnumdepth >\m@ne\if@mainmatter%
+        	{\includegraphics[height=18mm,width=18mm]{figures/ocl-logo-02.pdf}}
+		    \vskip 1.5em
             \begin{list}{}{\setlength{\topsep}{0pt}\setlength{\partopsep}{0pt}\setlength{\parskip}{0pt}\setlength{\parsep}{0pt}%
                            \settowidth{\labelwidth}{\thepart}\setlength{\leftmargin}{2em}%
                            \setlength{\labelsep}{2em}\addtolength{\labelsep}{-\labelwidth}}
                 \item[\thepart]\MakeUppercase{#1}%
             \end{list}%
-        \fi\fi%
+          \fi\fi%
     }\par\nobreak%
     \vskip 2ex}%
     \vfill\pagebreak%

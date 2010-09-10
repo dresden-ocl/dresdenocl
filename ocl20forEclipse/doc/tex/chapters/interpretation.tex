@@ -5,17 +5,17 @@
 \textit{Chapter written by Claas Wilke}
 \end{flushright}
 
-This chapter describes how the \acs{OCL} Interpreter provided with DresdenOCL 
-can be used. How to install and run \keyword{Dresden OCL2 for Eclipse} and how 
+This chapter describes how the \acs{OCL} Interpreter provided with Dresden OCL 
+can be used. How to install and run Dresden OCL and how 
 to load models and OCL constraints was explained in 
 Chapter~\ref{chapter:introduction}. If you are not familiar with such basic uses
-of DresdenOCL, read Chapter~\ref{chapter:introduction} first.
+of Dresden OCL, read Chapter~\ref{chapter:introduction} first.
 
 
 
 \section{The Simple Example}
 
-This Chapter uses the \keyword{Simple Example} which is provided with 
+This chapter uses the \keyword{Simple Example} which is provided with 
 \acl{DOT4Eclipse} located in the plug-in 
 \reference{tudresden.ocl20.pivot.examples.\linebreak[0]simple}. An overview over
 all examples provided with \acl{DOT4Eclipse} can be found in 
@@ -25,28 +25,19 @@ of the example defines three classes: The class \model{Person} has the
 attributes \model{age} and \model{name}. Two subclasses of \model{Person} are 
 defined, \model{Student} and \model{Professor}.
 
-To import the Simple Example into our Eclipse workspace we create a new Java 
-project called \model{tudresden.ocl20.pivot.examples.\linebreak[0]simple} and 
-use the import wizard \eclipse{General > Archive File} to import the example 
-provided as a jar archive. In the following window we select the directory where
-the jar file is located (probably the \model{plugins} directory into the Eclipse
-root folder), select the archive 
-\model{tudresden.ocl20.pivot.examples.simple.\linebreak[0]jar} and push the 
-\eclipse{Finish} button (if you use a source code distribution of 
-\acl{DOT4Eclipse} instead, you can simply import the project 
-\model{tudresden.ocl20.\linebreak[0]pivot.examples.simple} using the import 
-wizard \eclipse{General -> Existing Projects into Workspace}). 
-Figure~\ref{pic:example:simple02} shows the \eclipse{Package Explorer}
-containing the imported project.
+To run this tutorial, import the Simple Example as explained in
+Section~\ref{intro:simpleExample}. Figure~\ref{pic:example:simple02} shows the
+\eclipse{Project Explorer} containing the imported project.
 
-\begin{figure}[!p]
+\begin{figure}[!t]
 	\centering
 	\includegraphics[width=0.5\linewidth]{figures/examples/simple02}
-	\caption{The Package Explorer containing the Project which is required to run this Tutorial.}
+	\caption{The Project Explorer containing the Project which is required to run
+	this Tutorial.}
 	\label{pic:example:simple02}
+\end{figure}
 	
-	\vspace{4.0em}
-
+\begin{figure}[!t]
   \lstset{
     language=OCL
   }
@@ -103,7 +94,7 @@ postcondition which checks, whether or not the result of the operation
 
 To prepare the interpretation we have to import the model 
 \model{model/simple.uml} for which we want to interpret constraints into the
-\eclipse{Model Browser}. We use the model import wizard of DresdenOCL to import
+\eclipse{Model Browser}. We use the model import wizard of Dresden OCL to import
 the model. This procedure is explained in Section~\ref{intro:loadModel}. 
 Furthermore, we have to import a model instance for which the constraints shall 
 be interpreted into the \eclipse{Model Instance Browser}. We use another import 
@@ -323,11 +314,11 @@ post: age = age@pre + 1
 \end{figure}
 
 The preparation of postconditions is not that useful when interpreting 
-constraints from the GUI of DresdenOCL because you cannot invoke your 
+constraints from the GUI of Dresden OCL because you cannot invoke your 
 operations here to alter your model instance's state. Nevertheless, like the 
 possibility to add variables to the Interpreter's environment you can prepare 
 postconditions from the GUI. These operations are much more useful when using 
-DresdenOCL via its API and using the \acs{OCL} Interpreter to check \acs{OCL} 
+Dresden OCL via its API and using the \acs{OCL} Interpreter to check \acs{OCL} 
 constraints during the runtime of other software. Then you can prepare
 constraints before methods are invoked and check postconditions afterwards, 
 e.g., by using \emph{\acf{AOP}}.
@@ -337,10 +328,10 @@ e.g., by using \emph{\acf{AOP}}.
 \section{Summary}
   
 This chapter described how \acs{OCL} constraints can be interpreted using the 
-\acs{OCL} Interpreter of DresdenOCL. The preparation and interpretation of 
+\acs{OCL} Interpreter of Dresden OCL. The preparation and interpretation of 
 constraints has been explained, the addition of new variables to the 
 Interpreter Environment has been shown. Besides the use of the Interpreter via 
-DresdenOCL's GUI, you can also invoke the Interpreter via DresdenOCL's 
-\acs{API}. The easiest way to connect to DresdenOCL is via its \emph{Facade} 
-providing interfaces for all services of DresdenOCL. How to use DresdenOCL's 
+Dresden OCL's GUI, you can also invoke the Interpreter via Dresden OCL's 
+\acs{API}. The easiest way to connect to Dresden OCL is via its \emph{Facade} 
+providing interfaces for all services of Dresden OCL. How to use Dresden OCL's 
 facade is documented in Chapter~\ref{chapter:integration}.

@@ -5,9 +5,9 @@
 \textit{Chapter written by Claas Wilke}
 \end{flushright}
 
-This chapter introduces into the highly generic architecture of DresdenOCL.
+This chapter introduces into the highly generic architecture of Dresden OCL.
 Before the architecture is explained, some theoretical background is shortly 
-presented. Further details of DresdenOCL's architecture can be found
+presented. Further details of Dresden OCL's architecture can be found
 in~\cite{braeuerEA:OCL2007} and~\cite{wilkeEA:MODELS2010}.
 
 
@@ -94,7 +94,7 @@ with the names of \code{Type}s existing in the model).
 
 \section{Dresden OCL's Package Architecture}
 
-The package architecture of DresdenOCL is shown in
+The package architecture of Dresden OCL is shown in
 Figure~\ref{pic:architecture:modules}. The architecture can be separated into
 five layers: 
 
@@ -109,45 +109,45 @@ five layers:
 \begin{figure}[!b]
 	\centering
 	\includegraphics[width=1.0\linewidth]{figures/architecture/modules}
-	\caption{The package architecture of DresdenOCL.}
+	\caption{The package architecture of Dresden OCL.}
 	\label{pic:architecture:modules}
 \end{figure}
 
-The API layer provides the Facade of DresdenOCL that can be used by other
-plug-ins to access the \acs{OCL} tools of DresdenOCL. The Facade of DresdenOCL
+The API layer provides the Facade of Dresden OCL that can be used by other
+plug-ins to access the \acs{OCL} tools of Dresden OCL. The Facade of Dresden OCL
 is introduced in Chapter~\ref{chapter:integration}.
 
-The Tools Layer contains the Tools provided by DresdenOCL. These are: The
+The Tools Layer contains the Tools provided by Dresden OCL. These are: The
 \acs{OCL} Parser/Editor introduced in Section~\ref{intro:oclEditor}, the
 \acs{OCL} Interpreter introduced in Chapter~\ref{chapter:interpretation} and the
 \acs{OCL}22Java Code Generator introduced in
 Chapter~\ref{chapter:codeGeneration}. Finally, the \keyword{Model Browser} can
 be used to store imported models, and model instances. The backend of the Model
 Browser is the \keyword{Model Bus} that manages all meta-models and model
-instance types currently provided by DresdenOCL. The model bus is located at the
+instance types currently provided by Dresden OCL. The model bus is located at the
 Registry Layer.
 \todocw{Add OCL22SQL here when available.}
 
 The \acs{OCL} layer contains the \acs{OCL} syntax and semantics used by the
 tools of Dresden OCL. The \acs{OCL} syntax and semantics are separated into
 three different packages. \keyword{Essential OCL} contains the abstract syntax
-(or meta-model) of \acs{OCL} that is used by DresdenOCL and its tools. The
+(or meta-model) of \acs{OCL} that is used by Dresden OCL and its tools. The
 \keyword{OCL Standard Library Model} provides a modeled description of all
 operations that are provided by the \acs{OCL} Standard Library (as defined in
 \cite[Ch.~11]{spec:OCL2-2}). Finally the \keyword{OCL Standard Library
 Semantics} provides an implementation of all these operations that are used by
-the \acs{OCL} Interpreter of DresdenOCL for \acs{OCL} interpretation.
+the \acs{OCL} Interpreter of Dresden OCL for \acs{OCL} interpretation.
 
 The last layer is the Variability Layer. The Variability layer contains the
 \keyword{Pivot Model} and the \keyword{Model Instance Types} that are used to
-connect DresdenOCL with various meta-models or types of model instances,
+connect Dresden OCL with various meta-models or types of model instances,
 respectively. The Pivot Model is described more detailed in
 Section~\ref{architecture:metaModelAdaptation}, the Model Instance Types are
 explained in Section~\ref{architecture:modelInstanceAdaptation}. Further details
 on both the Pivot Model and the Model Instance Types can be found 
 in~\cite{braeuerEA:OCL2007} and~\cite{wilkeEA:MODELS2010}.
 
-DresdenOCL has been developed as a set of Eclipse/\acs{OSGi} plug-ins. All
+Dresden OCL has been developed as a set of Eclipse/\acs{OSGi} plug-ins. All
 packages represent different Eclipse plug-ins. Additionally, \acl{DOT4Eclipse}
 contains some plug-ins to provide \acs{GUI} elements such as wizards and 
 examples to run \acl{DOT4Eclipse} with some simple models and \acs{OCL} 
@@ -162,13 +162,13 @@ be found in Table~\ref{tab:plugins} in the appendix of this manual.
 \begin{sidewaysfigure}
 	\centering
 	\includegraphics[width=1.0\linewidth]{figures/architecture/modeladaptation}
-	\caption{The architecture of DresdenOCL with respect to the Generic Three Layer
+	\caption{The architecture of Dresden OCL with respect to the Generic Three Layer
 	Metadata Architecture.}
 	\label{pic:architecture:genericArchitecture}
 \end{sidewaysfigure}
 
 Figure~\ref{pic:architecture:genericArchitecture} shows the architecture of 
-DresdenOCL with respect to the Generic Three Layer Metadata Architecture
+Dresden OCL with respect to the Generic Three Layer Metadata Architecture
 (introduced in Section~\ref{architecture:genericLayers}). At the first sight, 
 the architecture seems to be very complex. But do not be afraid! The 
 architecture will now be explained step by step.
@@ -179,11 +179,11 @@ architecture will now be explained step by step.
 As you can see, the left part of 
 Figure~\ref{pic:architecture:genericArchitecture} shows the Generic Three Layer
 Metadata Architecture. Meta-models, models and model instances are adapted and 
-loaded into DresdenOCL. It could be argued that such an adaptation is expensive
-and costly, but the opposite is the truth. The architecture of DresdenOCL allows
+loaded into Dresden OCL. It could be argued that such an adaptation is expensive
+and costly, but the opposite is the truth. The architecture of Dresden OCL allows
 its users to adapt the toolkit to every meta-model and model instance type they 
 want to. After the adaptation of a new meta-model or model-instance type, they
-can reuse the complete set of tools provided by DresdenOCL! Thus,
+can reuse the complete set of tools provided by Dresden OCL! Thus,
 to adapt the \acs{OCL} Interpreter to a new type of model instance, only one 
 adaptation is required. The rest comes for free!
 
@@ -191,7 +191,7 @@ adaptation is required. The rest comes for free!
 \subsection{How Meta-Models and Models are Adapted}
 \label{architecture:metaModelAdaptation}
 
-As already said, the core feature of DresdenOCL is the \keyword{Pivot Model}
+As already said, the core feature of Dresden OCL is the \keyword{Pivot Model}
 (a.k.a. \keyword{Model Types}). The pivot model is a meta-model that abstracts
 from all other meta-models. It contains interfaces to define the structural 
 parts of a model such as
@@ -208,7 +208,7 @@ the meta-model element \code{UML2Class}. Besides the adaptation of the pivot
 model, each meta-model must provide a \code{ModelProvider} that provides 
 methods to load model resources of the adapted meta-model and adapts them to 
 its pivot model implementation. The result is an \keyword{Adapted Model},
-DresdenOCL can work with. Further details about the adaptation of meta-models to
+Dresden OCL can work with. Further details about the adaptation of meta-models to
 the pivot model can be found in Chapter~\ref{chapter:pivotModelAdaptation}.
 
 
@@ -229,7 +229,7 @@ become exchangeable\footnote{To be honest, the interpreter does not access the
 model instance element directly but uses the \acs{OCL} standard library
 semantics instead which delegate the request to the model instance element. But
 this is a technical detail and not important in this context.}. Thus,
-DresdenOCL contains a second model the \keyword{Model Instance Types}
+Dresden OCL contains a second model the \keyword{Model Instance Types}
 that can be considered as an abstraction of all model instance types. The model 
 instance types define a set of interfaces to describe the elements of a model 
 instance (e.g., \code{IModelInstancePrimitiveType} and 
@@ -244,9 +244,9 @@ Each model instance type users want to work with must be adapted to the model
 instance types. Besides an adaptation of the interfaces, also a 
 \code{ModelInstanceProvider} must be implemented that is responsible to adapt 
 model instance objects to the implemented interfaces. Due to the fact of this 
-second adaptation, DresdenOCL is able to use the same \acs{OCL} Interpreter for
+second adaptation, Dresden OCL is able to use the same \acs{OCL} Interpreter for
 different types of model instances! More details about the adaptation of model 
-instances to DresdenOCL are available in 
+instances to Dresden OCL are available in 
 Chapter~\ref{chapter:modelInstanceTypeAdaptation}.
 
 
@@ -256,7 +256,7 @@ As mentioned above, different types of models can be connected with different
 types of instances. E.g., a \acs{UML} class diagram could be implemented by a 
 set of Java Classes (and their objects) or by an \acs{XML} document. To 
 maintain this loose coupling, meta-models and model implementation types do not 
-know each other. If a model instance is imported into DresdenOCL, a model (and
+know each other. If a model instance is imported into Dresden OCL, a model (and
 thus also a meta-model) has to be selected, to that the instance belongs to. The
 objects of the instance are matched to the types of the selected model by the 
 name of their types. E.g., a Java instance's \code{Object}s are matched by
@@ -268,12 +268,12 @@ selected model.
 \section{Summary}
 
 This Chapter introduced into the architecture and package structure of
-DresdenOCL. The \keyword{Pivot Model} and the \keyword{Model Instance Types} 
+Dresden OCL. The \keyword{Pivot Model} and the \keyword{Model Instance Types} 
 have been explained shortly. Also the relationships between the pivot model, 
 \keyword{Essential \acs{OCL}} and the \keyword{\acs{OCL} Standard Library} have
 been presented. One may argue that the architecture seems to be complex and 
-complicate. Nevertheless, it should be remembered that DresdenOCL was 
-designed as generic as possible. Thus, DresdenOCL can be adapted to various
+complicate. Nevertheless, it should be remembered that Dresden OCL was 
+designed as generic as possible. Thus, Dresden OCL can be adapted to various
 different kinds of meta-models and model instances without changing the
 \acs{OCL} Parser nor the \acs{OCL} Interpreter! The currently existing
 adaptations to meta-models and model instances are documented in

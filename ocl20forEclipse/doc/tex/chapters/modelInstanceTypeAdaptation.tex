@@ -5,10 +5,10 @@
 \textit{Chapter written by Claas Wilke}
 \end{flushright}
 
-As mentioned in Chapter~\ref{chapter:architecture}, DresdenOCL is able to
+As mentioned in Chapter~\ref{chapter:architecture}, Dresden OCL is able to
 interpret \acs{OCL} constraints on different types of model instances. E.g., 
 the same constraints can be interpreted on Java \code{Object}s, \acs{EMF}
-\code{EObject}s and \acs{XML} files. This is possible because DresdenOCL
+\code{EObject}s and \acs{XML} files. This is possible because Dresden OCL
 abstracts the instance's elements as \code{IModelInstanceElements}. Thus, each
 type of model instance that shall be connected with the \acs{OCL} Interpreter 
 requires its own Model Instance Type Adaptation. How such an adaptation has to
@@ -22,7 +22,7 @@ belong to a model instance type are presented. Afterwards, the
 
 Similar to a model, a model instance can have different types of elements. The
 element types are similar to the different types that can be expressed in 
-models adapted to DresdenOCL. 
+models adapted to Dresden OCL. 
 Figure~\ref{pic:modelInstanceTypeAdaptation:typeHierarchy} shows all different 
 types of \code{IModelInstanceElement}s that can exist. The different types are
 explained in the following.
@@ -337,15 +337,15 @@ implementations for \acs{EMF} Ecore, Java and \acs{XML}.
 
 
 
-\section{Adapting an own Model Implementation Type}
+\section{Adapting an own Model Instance Type}
 
-We know that adapting a model implementation type sounds easy but can be a lot
+We know that adapting a model instance type sounds easy but can be a lot
 of pain. Every kind of model instance comes with its own problems and solutions.
 Some may be simple, others may be complicate or impossible. But never forget, if
 you adapted your own type of model instance, you can connect your instances with
-DresdenOCL and you can reuse the \acs{OCL} Parser and \acs{OCL} Interpreter!
+Dresden OCL and you can reuse the \acs{OCL} Parser and \acs{OCL} Interpreter!
 
-If you are confused and still do not know how to adapt your model implementation
+If you are confused and still do not know how to adapt your model instance
 type, investigate the existing adaptations for Java 
 (\code{tudresden.ocl20.pivot.modelinstancetype.java}), \acs{EMF} Ecore
 (\code{tudresden.ocl20.pivot.modelinstancetype.ecore}) and \acs{XML}
