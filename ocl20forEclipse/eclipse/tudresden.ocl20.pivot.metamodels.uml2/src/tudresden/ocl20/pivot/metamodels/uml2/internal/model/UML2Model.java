@@ -97,17 +97,18 @@ public class UML2Model extends AbstractModel implements IModel {
 		/* Unload referenced resources and the resource. */
 		Set<Resource> resourcesToUnload = new HashSet<Resource>();
 		resourcesToUnload.add(this.resource);
-		
-		for (EObject eObject : EcoreUtil.ExternalCrossReferencer.find(this.resource).keySet()) {
+
+		for (EObject eObject : EcoreUtil.ExternalCrossReferencer.find(
+				this.resource).keySet()) {
 			resourcesToUnload.add(eObject.eResource());
 		}
 		// end for.
-		
+
 		for (Resource resource : resourcesToUnload) {
 			resource.unload();
 		}
-		// end for.		
-		
+		// end for.
+
 		/* Reset the root name space to avoid caching. */
 		this.rootNamespace = null;
 		/* Reset the factory as well. */
@@ -229,7 +230,9 @@ public class UML2Model extends AbstractModel implements IModel {
 				Package containerPackage;
 				containerPackage = classifier.getNearestPackage();
 
-				if (containerPackage == null || containerPackage instanceof Model || containerPackage instanceof Profile) {
+				if (containerPackage == null
+						|| containerPackage instanceof Model
+						|| containerPackage instanceof Profile) {
 
 					// FIXME Claas: This will probably cause problems. Types do
 					// not know their right name space now if they should be
@@ -381,16 +384,21 @@ public class UML2Model extends AbstractModel implements IModel {
 
 					for (Package umlPackage : ((Model) eObject)
 							.getNestedPackages()) {
-						this.rootNamespace
-								.addNestedNamespace(this.factory
-										.createNamespace(umlPackage,
-												this.rootNamespace));
+						Namespace adaptedNamespace = this.factory
+								.createNamespace(umlPackage);
+						if (adaptedNamespace != null)
+							this.rootNamespace
+									.addNestedNamespace(adaptedNamespace);
+						// no else.
 					}
 					// end for.
 
 					for (Type umlType : ((Model) eObject).getOwnedTypes()) {
-						this.rootNamespace.addType(this.factory
-								.createType(umlType));
+						tudresden.ocl20.pivot.pivotmodel.Type adaptedType = this.factory
+								.createType(umlType);
+						if (adaptedType != null)
+							this.rootNamespace.addType(adaptedType);
+						// no else.
 					}
 					// end for.
 				}
@@ -403,29 +411,39 @@ public class UML2Model extends AbstractModel implements IModel {
 
 					for (Package umlPackage : ((Profile) eObject)
 							.getNestedPackages()) {
-						this.rootNamespace
-								.addNestedNamespace(this.factory
-										.createNamespace(umlPackage,
-												this.rootNamespace));
+						Namespace adaptedNamespace = this.factory
+								.createNamespace(umlPackage);
+						if (adaptedNamespace != null)
+							this.rootNamespace
+									.addNestedNamespace(adaptedNamespace);
+						// no else.
 					}
 					// end for.
 
 					for (Type umlType : ((Profile) eObject).getOwnedTypes()) {
-						this.rootNamespace.addType(this.factory
-								.createType(umlType));
+						tudresden.ocl20.pivot.pivotmodel.Type adaptedType = this.factory
+								.createType(umlType);
+						if (adaptedType != null)
+							this.rootNamespace.addType(adaptedType);
+						// no else.
 					}
 					// end for.
 				}
 
 				else if (eObject instanceof Package) {
-					this.rootNamespace.addNestedNamespace(this.factory
-							.createNamespace((Package) eObject,
-									this.rootNamespace));
+					Namespace adaptedNamespace = this.factory
+							.createNamespace((Package) eObject);
+					if (adaptedNamespace != null)
+						this.rootNamespace.addNestedNamespace(adaptedNamespace);
+					// no else.
 				}
 
 				else if (eObject instanceof Type) {
-					this.rootNamespace.addType(this.factory
-							.createType((Type) eObject));
+					tudresden.ocl20.pivot.pivotmodel.Type adaptedType = this.factory
+							.createType((Type) eObject);
+					if (adaptedType != null)
+						this.rootNamespace.addType(adaptedType);
+					// no else.
 				}
 				// no else.
 			}

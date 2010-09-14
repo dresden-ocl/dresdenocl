@@ -1,15 +1,15 @@
 /*
- * Copyright (C) 2008-2009 by Michael Thiele & Claas Wilke (claaswilke@gmx.net)
- * This file is part of the UML2 Meta Model of Dresden OCL2 for Eclipse. Dresden
- * OCL2 for Eclipse is free software: you can redistribute it and/or modify it
+ * Copyright (C) 2008-2010 by Michael Thiele & Claas Wilke (claas.wilke@tu-dresden.de)
+ * This file is part of the UML2 Meta Model of Dresden OCL. Dresden
+ * OCL is free software: you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by the
  * Free Software Foundation, either version 3 of the License, or (at your
- * option) any later version. Dresden OCL2 for Eclipse is distributed in the
+ * option) any later version. Dresden OCL is distributed in the
  * hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
  * implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See
  * the GNU Lesser General Public License for more details. You should have
  * received a copy of the GNU Lesser General Public License along with Dresden
- * OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
+ * OCL. If not, see <http://www.gnu.org/licenses/>.
  */
 package tudresden.ocl20.pivot.metamodels.uml2.internal.provider;
 
@@ -36,6 +36,7 @@ import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
  * </p>
  * 
  * @author Michael Thiele
+ * @author Claas Wilke
  * @generated NOT
  */
 public class UML2ModelProvider extends AbstractModelProvider implements
@@ -59,7 +60,7 @@ public class UML2ModelProvider extends AbstractModelProvider implements
 	 */
 	public IModel getModel(URL modelURL) throws ModelAccessException {
 
-		/* Eventually debug the entry of this method. */
+		/* Probably debug the entry of this method. */
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("getModel(modelURL=" + modelURL + ") - enter");
 		}
@@ -96,7 +97,7 @@ public class UML2ModelProvider extends AbstractModelProvider implements
 						ModelBusPlugin.getMetamodelRegistry().getMetamodel(
 								UML2MetamodelPlugin.ID));
 
-		/* Eventually debug the exit of this method. */
+		/* Probably debug the exit of this method. */
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("getModel() - exit - return value=" + result); //$NON-NLS-1$
 		}
@@ -114,7 +115,7 @@ public class UML2ModelProvider extends AbstractModelProvider implements
 	 */
 	protected ResourceSet getResourceSet() {
 
-		/* Eventually initialize the resource set. */
+		/* Probably initialize the resource set. */
 		if (this.resourceSet == null) {
 			this.resourceSet = new ResourceSetImpl();
 		}
