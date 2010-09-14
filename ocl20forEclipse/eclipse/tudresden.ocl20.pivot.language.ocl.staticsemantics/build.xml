@@ -5,6 +5,10 @@
 	<property name="oclStaticSemanticsBin" value="./../tudresden.ocl20.pivot.language.ocl.staticsemantics/bin"/>
 	<property name="oclStaticSemanticsSrc" value="./../tudresden.ocl20.pivot.language.ocl.staticsemantics/src"/>
 	
+	<target name="Clean all" depends="Clean all tudresden.ocl20.pivot.language.ocl.semantics">
+		<antcall target="Clean tudresden.ocl20.pivot.language.ocl.staticsemantics" />
+	</target>
+	
 	<target name="Clean tudresden.ocl20.pivot.language.ocl.staticsemantics" >
 		<mkdir dir="${oclStaticSemanticsBin}"/>
 		<delete>
@@ -16,7 +20,7 @@
 	</target>
 	
 	<target name="Compile tudresden.ocl20.pivot.language.ocl.staticsemantics" depends="Scala Compiler Init">		
-		
+
 		<mkdir dir="${oclStaticSemanticsBin}"/>
 		<echo message="Compile OclStaticSemanticsException.java" />
 		<javac
@@ -24,9 +28,10 @@
 			srcdir="${oclStaticSemanticsSrc}"
 			destdir="${oclStaticSemanticsBin}"
 			classpathref="build.classpath"
-			debug="off"
-			includes="**/OclStaticSemanticsException.java"
-		/>
+			debug="on"
+			includes="**/OclStaticSemanticsException.java">
+			<compilerarg compiler="org.eclipse.jdt.core.JDTCompilerAdapter" line="-1.5 -g -warn:+boxing"/>
+		</javac>
 		
 		<echo message="Compile Scala Code" />
 		<scalac
@@ -42,10 +47,11 @@
 			srcdir="${oclStaticSemanticsSrc}"
 			destdir="${oclStaticSemanticsBin}"
 			classpathref="build.classpath"
-			debug="off"
+			debug="on"
 			includes="**/*.java"
-			excludes="**/OclStaticSemanticsException.java"
-		/>	
+			excludes="**/OclStaticSemanticsException.java">
+			<compilerarg compiler="org.eclipse.jdt.core.JDTCompilerAdapter" line="-1.5 -g -warn:+boxing"/>
+		</javac>
 		
 		<!-- delete scala source files in output folder -->
 		<echo message="Delete .scala files from bin folder" />

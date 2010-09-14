@@ -35,8 +35,7 @@ public class Ocl22Parser implements IOclParser {
 	public static Ocl22Parser INSTANCE = instance();
 
 	public List<Constraint> doParse(IModel model, URI uri) throws ParseException {
-		// return doParse(model, reader, false);
-		return null;
+		return doParse(model, uri, true);
 	}
 
 	public List<Constraint> doParse(IModel model, URI uri, boolean addToModel)

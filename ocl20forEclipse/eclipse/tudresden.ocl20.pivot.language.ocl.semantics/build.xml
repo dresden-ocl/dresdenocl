@@ -4,7 +4,11 @@
 	
 	<property name="oclSemanticsBin" value="./../tudresden.ocl20.pivot.language.ocl.semantics/bin"/>
 	
-	<target name="Clean tudresden.ocl20.pivot.language.ocl.semantics" depends="Clean tudresden.ocl20.pivot.pivotmodel.semantics">
+	<target name="Clean all tudresden.ocl20.pivot.language.ocl.semantics" depends="Clean all tudresden.ocl.pivot.pivotmodel.semantics">
+		<antcall target="Clean tudresden.ocl20.pivot.language.ocl.semantics" />
+	</target>
+	
+	<target name="Clean tudresden.ocl20.pivot.language.ocl.semantics">
 		<mkdir dir="${oclSemanticsBin}"/>
 		<delete>
 			<fileset dir="${oclSemanticsBin}">

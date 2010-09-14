@@ -4,7 +4,11 @@
 	
 	<property name="pivotmodelBin" value="./../tudresden.ocl20.pivot.pivotmodel.semantics/bin"/>
 	
-	<target name="Clean tudresden.ocl20.pivot.pivotmodel.semantics" depends="Clean org.kiama.attribution">
+	<target name="Clean all tudresden.ocl.pivot.pivotmodel.semantics" depends="Clean org.kiama.attribution">
+		<antcall target="Clean tudresden.ocl20.pivot.pivotmodel.semantics" />
+	</target>
+	
+	<target name="Clean tudresden.ocl20.pivot.pivotmodel.semantics">
 		<mkdir dir="${pivotmodelBin}"/>
 		<delete>
 			<fileset dir="${pivotmodelBin}">
