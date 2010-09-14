@@ -116,7 +116,7 @@ function in the context menu (see Figure \ref{pic:intro:svn02}).
 \end{figure}
 
 
-\subsection{Which Plug-ins do You need at least?}
+\subsection{Which Plug-ins do you need at least?}
 
 Often people wonder which plug-ins of \acl{DOT4Eclipse} they require for a
 minimum installation. The answer to this question depends on the things you 
@@ -135,10 +135,49 @@ this manual. We recommend to install all provided features.
 
 
 \subsection{Building the OCL2 Parser}
-\todomt{Revise this section and adapt it to the new OCL Editor/Parser.}	
-If you decided to run \acl{DOT4Eclipse} as source code plug-ins from an Eclipse work\-space, you need to build the \keyword{OCL2 Parser} via an \keyword{Ant} build script. If you installed the Toolkit using the update site, you can skip this section.
-  
-To build the \acs{OCL} Parser select the file \reference{build.xml} in the project \reference{tudresden.\linebreak[0]ocl20.pivot.ocl2\-par\-ser} and open the context menu. Select the function \eclipse{Run As ... > Ant Build ...} (see Figure~\ref{pic:intro:parserbuild01}).
+The new \acl{DOT4Eclipse} parser/editor is partially written in Scala. In order
+to build the sources of the parser without having to have the \reference{Scala
+IDE} installed, \acl{DOT4Eclipse} comes with various \keyword{Ant} scripts that
+compile the Scala code to byte code.
+
+After a checkout, the build script should be called automatically. Be aware that
+the compilation might take a while to finish. If other projects that depend on
+the parser like the facade still do not compile correctly, try to perform a 
+\keyword{refresh} on the plug-ins that contain Scala code.
+
+If the \keyword{Ant} script is not invoked automatically, you can call it either
+be cleaning the \reference{tudresden.ocl20.pivot.language.ocl.staticsemantics}
+plug-in or by running the \keyword{Ant} task \reference{clean all} of the same
+plug-in.
+
+Each plug-in that contains Scala code (\reference{org.kiama.attribution},
+\reference{tudresden.ocl20.pivot.language.ocl.semantics},
+\reference{tudresden.ocl20.pivot.language.ocl.staticsemantics} and
+\reference{tudresden.ocl20.pivot.pivotmodel.semantics}) contains a
+\keyword{build.xml} file that comes with three targets: \reference{clean all}
+to clean the selected project and all dependent projects, \reference{clean} to
+only clean the selected project and \reference{compile} to simply compile changes
+that have been made since the last build.
+
+In either case, you have to run the \keyword{ANT} scripts in the same 
+\keyword{JRE} as Eclipse. Figures~\ref{pic:intro:parserbuild01} and 
+\ref{pic:intro:parserbuild02} show how to achieve this. If an error like
+``Unable to find javac compiler.'' occurs, you might be trying to run the
+\keyword{Ant} script with a \keyword{\acl{JRE}} instead of a 
+\keyword{\acs{JDK}} (For errors like this one) use the \eclipse{Installed
+JREs...} button in the same window to select a \acs{JDK} instead.
+
+If you want to make changes to the static semantics evaluation of the parser you
+should consider installing the \reference{Scala IDE} from 
+\url{http://www.scala-lang.org/scala-eclipse-plugin}. Be aware that the Scala
+code is version 2.7.7 which is not compatible with Scala 2.8 and therefore you
+cannot use the current \reference{Scala IDE} which supports only Scala 2.8. The
+\reference{Scala IDE} runs with \reference{Eclipse 3.5}.
+
+In order to use the Scala compiler of the IDE, you have to go to the
+\eclipse{Properties} of each Scala plug-in, select the tab \eclipse{Builders},
+check the \eclipse{Scala Builder} and possibly uncheck the \keyword{Ant} script
+for building.
 
 \begin{figure}[p]
 	\centering
@@ -153,19 +192,7 @@ To build the \acs{OCL} Parser select the file \reference{build.xml} in the proje
 	\caption{Settings of the JRE for the Ant build script.}
 	\label{pic:intro:parserbuild02}
 
-  \vspace{4.0em}
-
-	\centering
-	\includegraphics[width=0.8\linewidth]{figures/introduction/parserbuild03}
-	\caption{Refreshing the project ``tudresden.ocl20.pivot.oclparser''.}
-	\label{pic:intro:parserbuild03}
 \end{figure}
-	
-A new window should open. Switch to the tab \keyword{\acs{JRE}}, select the check box \keyword{Run in the same \acs{JRE} as the workspace} and push the \keyword{OK} button (see Figure~\ref{pic:intro:parserbuild02}). Afterwards, the \acs{OCL}2 Parser should be generated without errors. If an error like ``Unable to find javac compiler.'' occurs, you might be trying to run the \keyword{Ant} script with a \keyword{\acl{JRE}} instead of a \keyword{\acs{JDK}} (For errors like this one) use the \eclipse{Installed JREs...} button in the same window to select a \acs{JDK} instead.
-	
-After executing the build script successfully you need to update the projects in your workspace. Update the project \reference{tudresden.ocl20.pivot.oclparser} via context menu (\eclipse{Refresh}, see Figure~\ref{pic:intro:parserbuild03}).
-	
-Additionally, you need to recompile all depending projects. Select the function \eclipse{Project > Clean...~> Clean all projects} in the Eclipse menu to clean all projects. Now all the projects should not contain any errors any more and should be executable.
 
 
 
@@ -215,7 +242,7 @@ should now switch to the Dresden OCL perspective. Select the menu option
 \begin{figure}[!htbp]
 	\centering
 	\includegraphics[width=1.0\linewidth]{figures/introduction/perspective}
-	\caption{A class diagram describing the Simple Example model.}
+	\caption{The Dresden OCL Perspective.}
 	\label{pic:introduction:perspective}
 \end{figure}
 
@@ -338,41 +365,24 @@ of model instances available in the model instance browser.
 	
 \subsection{Parsing OCL Expressions}
 \label{intro:oclEditor}
-\todomt{Revise this Section and adapt it to the new OCL Editor.}	
-Before you can work with \acs{OCL} constraints, you have to load them like the model and the model instance into Dresden OCL. Use the menu option \eclipse{Dresden OCL2 > Parse OCL Constraints} and select an \acs{OCL} file. In this tutorial we use the \acs{OCL} file \reference{constraints/invariants.ocl} of the Simple Example. (see Figure \ref{pic:intro:loadconstraints01}). The constraints of the file \reference{constraints/invariants.ocl} are shown in Listing \ref{list:intro:constraints01}.
+Any file with the file extension \keyword{ocl} can be opened with the
+\keyword{Dresden OCL Editor}. Once opened, syntactic checks are performed
+to analyse whether the given file contains valid OCL code. If currently there is
+no active model selected in the \eclipse{Model Browser}, the editor will fail to perform the
+static semantics analysis and will yield that there is no active model. You can
+load a model and then re-parse the OCL file by changing the OCL file (e.g., by
+introducing and immediately deleting a whitespace character).
 
-The expressions of the selected \acs{OCL} file are parsed and added to the actually selected model. Figure~\ref{pic:intro:loadconstraints02} shows the \eclipse{Model Browser} containing the model and the parsed expressions. Using the icons depicted in Figure~\ref{pic:intro:loadconstraints03}, you can remove selected or all parsed OCL constraints from the model again.
-
-\begin{figure}[b]	
-\lstset{
-  language=OCL
-}
-\begin{lstlisting}[caption={The invariants of the simple examples.}, captionpos=b, label=list:intro:constraints01]
-package tudresden::ocl20::pivot::examples::simple
-
--- The age of Person can't be negative.
-context Person
-inv: age >= 0
-
--- Students should be 16 or older.
-context Student
-inv: age > 16
-
--- Proffesors should be at least 30.
-context Professor
-inv: not (age < 30)
-
-endpackage
-\end{lstlisting}
-\end{figure}
+The editor/parser will automatically add parsed constraints to the
+model as well as \keyword{definitions} to the appropriate
+classes. You can inspect the changes on the model in the \eclipse{Model
+Browser}. Note that the \keyword{definitions} and constraints are not added to
+your model -- they belong to the view of Dresden OCL on the model. The result
+can be seen in Figure~\ref{pic:intro:loadconstraints02}. You also can remove
+parsed constraints from the model which is shown in
+Figure~\ref{pic:intro:loadconstraints03}.
 
 \begin{figure}[p]
-	\centering
-	\includegraphics[width=0.6\linewidth]{figures/introduction/loadconstraints01}
-	\caption{The import of OCL expressions.}
-	\label{pic:intro:loadconstraints01}
-	
-	\vspace{3.0em}
 	
 	\centering
 	\includegraphics[width=0.4\linewidth]{figures/introduction/loadconstraints02}

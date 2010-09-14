@@ -193,17 +193,23 @@ the \keyword{Model Instance Browser} of Dresden OCL's GUI.
 
 
 \section{How to access the OCL Parser}
-\todomt{Revise this section and adapt it to the new OCL Parser/Editor.}
-The \acs{OCL}2 Parser of \acl{DOT4Eclipse} is located in the plug-in \code{tudresden.ocl20.pivot.\linebreak[0]ocl\-2\-Parser}. The parser provides a very simple interface and can be used as shown in Listing \ref{lst:integration:parserConstraints}. First a \code{Reader} used to read all constraints that shall be parsed has to be created, and an \code{IModel} for that the constraints shall be parsed has to be loaded. Afterwards, the method \code{OCL2Parser.doParse()} can be invoke on the singleton instance of the parser to parse the constraints.
+The \acs{OCL}2 Parser of \acl{DOT4Eclipse} is located in the plug-in 
+\code{tudresden.ocl20.pivot.\linebreak[0]language.ocl.staticsemantics} in the
+package \code{tudresden.ocl20.pivot.language.ocl.resource.ocl}. The parser
+provides a very simple interface and can be used as shown in Listing 
+\ref{lst:integration:parserConstraints}. You have to provide an \code{IModel}
+and an \code{URI} where the \acs{OCL} file can be found. You can specify whether
+constraints and definitions should be added to the \code{IModel} by a third
+parameter named \code{addToModel}. It can be left out and is then assumed to be
+\code{true}.
 
 \begin{figure}[!b]
 \begin{lstlisting}[caption={How to parse constraints.}, captionpos=b, label=lst:integration:parserConstraints]
-FileReader oclFileReader;
-OCL2Parser parser;
+URI uri = URI.createFileURI(oclFile);
+boolean addToModel = true;
 List<Constraint> parsedConstraints;
 
-oclFileReader = new FileReader(oclFile);
-parsedConstraints = Ocl2Parser.INSTANCE.doParse(model, reader);
+parsedConstraints = Ocl22Parser.INSTANCE.doParse(model, uri, addToModel)
 \end{lstlisting}
 \end{figure}
 
