@@ -207,7 +207,6 @@ Library.
       <import plugin="tudresden.ocl20.pivot.essentialocl.standardlibrary"/>
       <import plugin="tudresden.ocl20.pivot.model"/>
       <import plugin="tudresden.ocl20.pivot.essentialocl" version="2.1.0" match="greaterOrEqual"/>
-      <import plugin="org.emftext.access"/>
       <import plugin="org.junit4" version="4.0.0" match="greaterOrEqual"/>
       <import plugin="tudresden.ocl20.pivot.testsuite" version="2.1.0" match="greaterOrEqual"/>
       <import plugin="tudresden.ocl20.pivot.facade" version="2.1.0" match="greaterOrEqual"/>
@@ -284,6 +283,13 @@ Library.
 
    <plugin
          id="org.emftext.commons.antlr3_2_0"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.emftext.access"
          download-size="0"
          install-size="0"
          version="0.0.0"
