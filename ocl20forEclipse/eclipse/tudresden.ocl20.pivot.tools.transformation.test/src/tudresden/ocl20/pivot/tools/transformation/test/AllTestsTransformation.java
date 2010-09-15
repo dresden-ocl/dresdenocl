@@ -44,28 +44,34 @@ import tudresden.ocl20.pivot.tools.transformation.test.util.TestTrans;
  * of the Dresden OCL2 Toolkit
  * 
  * @author Bjoern Freitag
- *
+ * 
  */
 @RunWith(Suite.class)
-@Suite.SuiteClasses({
-		TestTransformationFactory.class,
+@Suite.SuiteClasses({ TestTransformationFactory.class,
 		TestTransformationRegistry.class
 
 })
 public class AllTestsTransformation {
-	
-   @BeforeClass
-   public static void setUp() {
-	   TransformationPlugin.getTransformationRegistry().addTransformation(new TestTrans("",""));
-	   TransformationPlugin.getTransformationRegistry().addTransformation(new TestParallelTrans("",""));
-   }
-   
-   @AfterClass
-   public static void tear_down() {
-	   TransformationPlugin.getTransformationRegistry().removeTransformation("TestParallelTrans");
-	   TransformationPlugin.getTransformationRegistry().removeTransformation("TestTrans");
-	   TransformationPlugin.getTransformationRegistry().removeTransformation("TestFalseTrans");
-	   
-   }
-	
+
+	@BeforeClass
+	public static void setUp() {
+
+		TransformationPlugin.getTransformationRegistry().addTransformation(
+				new TestTrans("", ""));
+		TransformationPlugin.getTransformationRegistry().addTransformation(
+				new TestParallelTrans("", ""));
+	}
+
+	@AfterClass
+	public static void tear_down() {
+
+		TransformationPlugin.getTransformationRegistry().removeTransformation(
+				"TestParallelTrans");
+		TransformationPlugin.getTransformationRegistry().removeTransformation(
+				"TestTrans");
+		TransformationPlugin.getTransformationRegistry().removeTransformation(
+				"TestFalseTrans");
+
+	}
+
 }

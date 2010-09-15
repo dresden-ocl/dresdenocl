@@ -8,8 +8,9 @@ import tudresden.ocl20.pivot.tools.transformation.ITransformation;
 import tudresden.ocl20.pivot.tools.transformation.SequentialTransformation;
 
 /**
- * The Uml2Ddl transformation implements the serial composition of the Uml2Cwm
- * transformation and the Cwm2Ddl transformation.
+ * The Pivot2Ddl transformation implements the serial composition of the
+ * {@link Pivot2CwmImpl} transformation and the {@link Cwm2DdlImpl}
+ * transformation.
  * 
  * @author Christian Wende
  * @author Bjoern Freitag

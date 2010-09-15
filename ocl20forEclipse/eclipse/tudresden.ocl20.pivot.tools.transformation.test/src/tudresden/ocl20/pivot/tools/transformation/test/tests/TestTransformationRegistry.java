@@ -51,86 +51,140 @@ import tudresden.ocl20.pivot.tools.transformation.TransformationPlugin;
  * @see tudresden.ocl20.pivot.tools.transformation.ITransformationRegistry
  */
 public class TestTransformationRegistry {
-	
-	private ITransformation<?,?,?> itrans;
-	
+
+	private ITransformation<?, ?, ?> itrans;
+
 	@Before
 	public void setUp() {
-		itrans = TransformationFactory.getInstance().getTransformation("TestTrans", "", "");
-		TransformationPlugin.getTransformationRegistry().removeTransformation(itrans);
+
+		itrans =
+				TransformationFactory.getInstance().getTransformation("TestTrans", "",
+						"");
+		TransformationPlugin.getTransformationRegistry().removeTransformation(
+				itrans);
 	}
 
 	@After
 	public void tear_down() {
-		if (!TransformationPlugin.getTransformationRegistry().getTransformationList().contains("TestTrans")) {
-			TransformationPlugin.getTransformationRegistry().addTransformation(itrans);
+
+		if (!TransformationPlugin.getTransformationRegistry()
+				.getTransformationList().contains("TestTrans")) {
+			TransformationPlugin.getTransformationRegistry()
+					.addTransformation(itrans);
 		}
 
 	}
 
 	@Test
 	public void checkAdd() {
-		int size = TransformationPlugin.getTransformationRegistry().getTransformationList().size();
+
+		int size =
+				TransformationPlugin.getTransformationRegistry()
+						.getTransformationList().size();
 		TransformationPlugin.getTransformationRegistry().addTransformation(itrans);
-		List<String> trans = TransformationPlugin.getTransformationRegistry().getTransformationList();
-		assertEquals("The transformation isn't add.", trans.size(),size+1);
-		assertTrue("The transformation isn't add correctly", trans.contains(itrans.getClass().getSimpleName()));
-		
-		//Check is transformation added twice
+		List<String> trans =
+				TransformationPlugin.getTransformationRegistry()
+						.getTransformationList();
+		assertEquals("The transformation isn't add.", trans.size(), size + 1);
+		assertTrue("The transformation isn't add correctly",
+				trans.contains(itrans.getClass().getSimpleName()));
+
+		// Check is transformation added twice
 		TransformationPlugin.getTransformationRegistry().addTransformation(itrans);
-		trans = TransformationPlugin.getTransformationRegistry().getTransformationList();
-		assertEquals("The transformation add extra.", trans.size(),size+1);
-		
-		//Check work extension add.
-		assertNotNull("The extension add isn't work.",TransformationPlugin.getTransformationRegistry().getTransformationClass("TestFalseTrans"));
-		
+		trans =
+				TransformationPlugin.getTransformationRegistry()
+						.getTransformationList();
+		assertEquals("The transformation add extra.", trans.size(), size + 1);
+
+		// Check work extension add.
+		assertNotNull("The extension add isn't work.", TransformationPlugin
+				.getTransformationRegistry().getTransformationClass("TestFalseTrans"));
+
 	}
-	
-	@Test 
+
+	@Test
 	public void checkRemove() {
+
 		TransformationPlugin.getTransformationRegistry().addTransformation(itrans);
-		int size = TransformationPlugin.getTransformationRegistry().getTransformationList().size();
-		TransformationPlugin.getTransformationRegistry().removeTransformation(itrans);
-		List<String> trans = TransformationPlugin.getTransformationRegistry().getTransformationList();
-		assertEquals("The transformation isn't add.", trans.size(),size-1);
-		assertFalse("The transformation registry removes a other transformation", trans.contains(itrans.getClass().getSimpleName()));
-		
-		//Check is transformation remove twice
-		TransformationPlugin.getTransformationRegistry().removeTransformation(itrans);
-		trans = TransformationPlugin.getTransformationRegistry().getTransformationList();
-		assertEquals("The transformation add extra.", trans.size(),size-1);
-		
+		int size =
+				TransformationPlugin.getTransformationRegistry()
+						.getTransformationList().size();
+		TransformationPlugin.getTransformationRegistry().removeTransformation(
+				itrans);
+		List<String> trans =
+				TransformationPlugin.getTransformationRegistry()
+						.getTransformationList();
+		assertEquals("The transformation isn't add.", trans.size(), size - 1);
+		assertFalse("The transformation registry removes a other transformation",
+				trans.contains(itrans.getClass().getSimpleName()));
+
+		// Check is transformation remove twice
+		TransformationPlugin.getTransformationRegistry().removeTransformation(
+				itrans);
+		trans =
+				TransformationPlugin.getTransformationRegistry()
+						.getTransformationList();
+		assertEquals("The transformation add extra.", trans.size(), size - 1);
+
 		TransformationPlugin.getTransformationRegistry().addTransformation(itrans);
-		size = TransformationPlugin.getTransformationRegistry().getTransformationList().size();
-		TransformationPlugin.getTransformationRegistry().removeTransformation(itrans.getClass().getSimpleName());
-		trans = TransformationPlugin.getTransformationRegistry().getTransformationList();
-		assertEquals("The transformation isn't add.", trans.size(),size-1);
-		assertFalse("The transformation registry removes a other transformation", trans.contains(itrans.getClass().getSimpleName()));
-		
-		//Check is transformation remove twice
-		TransformationPlugin.getTransformationRegistry().removeTransformation(itrans.getClass().getSimpleName());
-		trans = TransformationPlugin.getTransformationRegistry().getTransformationList();
-		assertEquals("The transformation add extra.", trans.size(),size-1);
+		size =
+				TransformationPlugin.getTransformationRegistry()
+						.getTransformationList().size();
+		TransformationPlugin.getTransformationRegistry().removeTransformation(
+				itrans.getClass().getSimpleName());
+		trans =
+				TransformationPlugin.getTransformationRegistry()
+						.getTransformationList();
+		assertEquals("The transformation isn't add.", trans.size(), size - 1);
+		assertFalse("The transformation registry removes a other transformation",
+				trans.contains(itrans.getClass().getSimpleName()));
+
+		// Check is transformation remove twice
+		TransformationPlugin.getTransformationRegistry().removeTransformation(
+				itrans.getClass().getSimpleName());
+		trans =
+				TransformationPlugin.getTransformationRegistry()
+						.getTransformationList();
+		assertEquals("The transformation add extra.", trans.size(), size - 1);
 	}
-	
+
 	@Test
 	public void checkGetTransformationList() {
-		List<String> trans = TransformationPlugin.getTransformationRegistry().getTransformationList();
-		assertFalse("A extra transformation is in the list",trans.contains(itrans.getClass().getSimpleName()));
+
+		List<String> trans =
+				TransformationPlugin.getTransformationRegistry()
+						.getTransformationList();
+		assertFalse("A extra transformation is in the list",
+				trans.contains(itrans.getClass().getSimpleName()));
 		TransformationPlugin.getTransformationRegistry().addTransformation(itrans);
-		trans = TransformationPlugin.getTransformationRegistry().getTransformationList();
-		assertTrue("The transformation isn't in the list",trans.contains(itrans.getClass().getSimpleName()));
-		
-		//Check get with Types
-		trans = TransformationPlugin.getTransformationRegistry().getTransformationList(EObject.class, String.class, IOcl2CodeSettings.class);
-		assertTrue("The transformation TestTrans isn't in the list",trans.contains(itrans.getClass().getSimpleName()));
-		assertTrue("The parallel transformation isn't in the list with first parameter",trans.contains("TestParallelTrans"));
-		assertFalse("A extra transformation is in the list",trans.contains("TestFalseTrans"));
-		
-		trans = TransformationPlugin.getTransformationRegistry().getTransformationList(EObject.class, EObject.class, IOcl2CodeSettings.class);
-		assertTrue("The transformation TestFalseTrans isn't in the list",trans.contains("TestFalseTrans"));
-		assertTrue("The parallel transformation isn't in the list with second parameter",trans.contains("TestParallelTrans"));
-		assertFalse("A extra transformation is in the list",trans.contains(itrans.getClass().getSimpleName()));
+		trans =
+				TransformationPlugin.getTransformationRegistry()
+						.getTransformationList();
+		assertTrue("The transformation isn't in the list",
+				trans.contains(itrans.getClass().getSimpleName()));
+
+		// Check get with Types
+		trans =
+				TransformationPlugin.getTransformationRegistry().getTransformationList(
+						EObject.class, String.class, IOcl2CodeSettings.class);
+		assertTrue("The transformation TestTrans isn't in the list",
+				trans.contains(itrans.getClass().getSimpleName()));
+		assertTrue(
+				"The parallel transformation isn't in the list with first parameter",
+				trans.contains("TestParallelTrans"));
+		assertFalse("A extra transformation is in the list",
+				trans.contains("TestFalseTrans"));
+
+		trans =
+				TransformationPlugin.getTransformationRegistry().getTransformationList(
+						EObject.class, EObject.class, IOcl2CodeSettings.class);
+		assertTrue("The transformation TestFalseTrans isn't in the list",
+				trans.contains("TestFalseTrans"));
+		assertTrue(
+				"The parallel transformation isn't in the list with second parameter",
+				trans.contains("TestParallelTrans"));
+		assertFalse("A extra transformation is in the list",
+				trans.contains(itrans.getClass().getSimpleName()));
 	}
-	
+
 }

@@ -26,39 +26,46 @@ public class TestTransformationFactory {
 
 	@Before
 	public void setUp() {
-		itrans = TransformationFactory.getInstance().getTransformation(
-				"TestTrans", "", "");
+
+		itrans =
+				TransformationFactory.getInstance().getTransformation("TestTrans", "",
+						"");
 	}
 
 	@Test
 	public void checkGetTransformationSimple() {
-		ITransformation<?, ?, ?> trans = TransformationFactory.getInstance()
-				.getTransformation("TestTrans1X", "", "");
+
+		ITransformation<?, ?, ?> trans =
+				TransformationFactory.getInstance().getTransformation("TestTrans1X",
+						"", "");
 		assertNull("A not exists transformation is created", trans);
-		trans = TransformationFactory.getInstance().getTransformation(
-				"TestParallelTrans", "", "");
+		trans =
+				TransformationFactory.getInstance().getTransformation(
+						"TestParallelTrans", "", "");
 		assertNotNull(trans);
-		assertNotSame("Is same transformation type.", trans.getClass()
-				.getName(), itrans.getClass().getName());
-		trans = TransformationFactory.getInstance().getTransformation(
-				itrans.getClass().getSimpleName(), "", "");
+		assertNotSame("Is same transformation type.", trans.getClass().getName(),
+				itrans.getClass().getName());
+		trans =
+				TransformationFactory.getInstance().getTransformation(
+						itrans.getClass().getSimpleName(), "", "");
 		assertNotNull(trans);
 		assertNotSame("Isn't generate a new instance", trans, itrans);
-		assertEquals("Isn't same transformation type.", trans.getClass()
-				.getName(), itrans.getClass().getName());
+		assertEquals("Isn't same transformation type.", trans.getClass().getName(),
+				itrans.getClass().getName());
 	}
 
 	@Test
 	public void checkGetTransformationParameter() {
 
-		ITransformation<EObject, IOcl2CodeSettings, String> trans = TransformationFactory
-				.getInstance().getTransformation("TestParallelTrans",
-						EObject.class, String.class, IOcl2CodeSettings.class,
-						"", "");
+		ITransformation<EObject, IOcl2CodeSettings, String> trans =
+				TransformationFactory.getInstance().getTransformation(
+						"TestParallelTrans", EObject.class, String.class,
+						IOcl2CodeSettings.class, "", "");
 		assertNull("The transformation is created with false paramter", trans);
-		trans = TransformationFactory.getInstance().getTransformation(
-				itrans.getClass().getSimpleName(), EObject.class,
-				String.class, IOcl2CodeSettings.class, "", "");
+		trans =
+				TransformationFactory.getInstance().getTransformation(
+						itrans.getClass().getSimpleName(), EObject.class, String.class,
+						IOcl2CodeSettings.class, "", "");
 		assertNotNull(trans);
 		assertEquals("Isn't of same transformation type.", trans.getClass()
 				.getName(), itrans.getClass().getName());
@@ -66,15 +73,16 @@ public class TestTransformationFactory {
 
 	@Test
 	public void checkGetTransformationParameterParallel() {
-		ITransformation<EObject, IOcl2CodeSettings, Tuple<String, EObject>> trans = TransformationFactory
-				.getInstance().getParallelTransformation(
-						itrans.getClass().getSimpleName(), EObject.class,
-						String.class, EObject.class, IOcl2CodeSettings.class,
-						"", "");
+
+		ITransformation<EObject, IOcl2CodeSettings, Tuple<String, EObject>> trans =
+				TransformationFactory.getInstance().getParallelTransformation(
+						itrans.getClass().getSimpleName(), EObject.class, String.class,
+						EObject.class, IOcl2CodeSettings.class, "", "");
 		assertNull("The transformation is created with false paramter", trans);
-		trans = TransformationFactory.getInstance().getParallelTransformation(
-				"TestParallelTrans", EObject.class, String.class,
-				EObject.class, IOcl2CodeSettings.class, "", "");
+		trans =
+				TransformationFactory.getInstance().getParallelTransformation(
+						"TestParallelTrans", EObject.class, String.class, EObject.class,
+						IOcl2CodeSettings.class, "", "");
 		assertNotNull(trans);
 		assertEquals("Isn't of same transformation type.", trans.getClass()
 				.getSimpleName(), "TestParallelTrans");

@@ -16,7 +16,8 @@ import tudresden.ocl20.logging.LoggingPlugin;
 public class Pivot2SqlTestPlugin extends Plugin {
 
 	/** The plug-in ID. */
-	public static final String ID = "tudresden.ocl20.pivot.tools.transformation.pivot2sql.test"; //$NON-NLS-1$
+	public static final String ID =
+			"tudresden.ocl20.pivot.tools.transformation.pivot2sql.test"; //$NON-NLS-1$
 
 	/** The shared instance. */
 	private static Pivot2SqlTestPlugin plugin;
@@ -27,6 +28,7 @@ public class Pivot2SqlTestPlugin extends Plugin {
 	 * </p>
 	 */
 	public Pivot2SqlTestPlugin() {
+
 		plugin = this;
 	}
 

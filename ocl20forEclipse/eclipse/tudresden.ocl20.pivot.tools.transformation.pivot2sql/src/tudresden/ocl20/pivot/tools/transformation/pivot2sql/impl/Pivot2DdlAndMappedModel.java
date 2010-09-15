@@ -14,7 +14,8 @@ import tudresden.ocl20.pivot.tools.transformation.impl.Tuple;
 
 /**
  * The class Pivot2DdlAndMappedModel represents the parallel composition of
- * Pivot2Ddl transformation and a Pivot2MappedModel transformation.
+ * {@link Pivot2Ddl} transformation and a {@link Pivot2MappedModelImpl}
+ * transformation.
  * 
  * @author Bjoern Freitag
  * 

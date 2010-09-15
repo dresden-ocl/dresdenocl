@@ -15,10 +15,12 @@ import tudresden.ocl20.pivot.tools.transformation.ParallelTransformation;
 import tudresden.ocl20.pivot.tools.transformation.impl.Tuple;
 
 /**
- * The class Uml2CwmAndMappedModel represents the parallel composition of a
- * Uml2Cwm transformation and a Uml2MappedModel transformation.
+ * The class Pivot2CwmAndMappedModel represents the parallel composition of a
+ * {@link Pivot2Cwm} transformation and a {@link Pivot2MappedModelImpl}
+ * transformation.
  * 
  * @author Christian Wende
+ * @author Bjoern Freitag
  * 
  */
 public class Pivot2CwmAndMappedModel extends

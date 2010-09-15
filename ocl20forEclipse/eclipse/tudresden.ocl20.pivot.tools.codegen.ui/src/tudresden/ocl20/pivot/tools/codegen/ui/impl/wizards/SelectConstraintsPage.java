@@ -176,27 +176,27 @@ public class SelectConstraintsPage extends WizardPage {
 		viewerGroup
 				.setText(CodegenUIMessages.SelectConstraintsPage_SelectConstraintsLabel);
 		viewerGroup.setLayoutData(new GridData(SWT.FILL, SWT.NONE, true, true));
-		
+
 		viewerLayout = new GridLayout(2, false);
 		viewerLayout.verticalSpacing = 10;
 		viewerGroup.setLayout(viewerLayout);
 
 		/* Create the list viewer to display the models. */
 		constraintViewer =
-				new TableViewer(viewerGroup, SWT.MULTI | SWT.V_SCROLL | SWT.BORDER | SWT.RESIZE);
+				new TableViewer(viewerGroup, SWT.MULTI | SWT.V_SCROLL | SWT.BORDER
+						| SWT.RESIZE);
 		constraintViewer.setContentProvider(new ArrayContentProvider());
 		constraintViewer.setLabelProvider(new ConstraintLabelProvider());
-			
+
 		/* Set the selection data. */
 		constraintViewer.setInput(this.getConstraintsOfActiveModel());
 
-		GridData gd = new GridData(SWT.FILL, SWT.FILL, true,true);
+		GridData gd = new GridData(SWT.FILL, SWT.FILL, true, true);
 		gd.widthHint = 700;
 		constraintViewer.getControl().setLayoutData(gd);
-		
+
 		/* By default select all constraints. */
 		this.selectAllConstraints();
-
 
 		/* Add a change listener to react on updates. */
 		constraintViewer
@@ -208,9 +208,8 @@ public class SelectConstraintsPage extends WizardPage {
 					}
 				});
 
-		
 		this.createButtonGroup(viewerGroup);
-	
+
 	}
 
 	/**
@@ -232,7 +231,7 @@ public class SelectConstraintsPage extends WizardPage {
 		buttonGroup.setFont(parent.getFont());
 		GridData gd = new GridData(SWT.FILL, SWT.FILL, false, false);
 		gd.widthHint = 150;
-		buttonGroup.setLayoutData(gd);		
+		buttonGroup.setLayoutData(gd);
 		layout = new GridLayout(1, false);
 		layout.verticalSpacing = 10;
 		buttonGroup.setLayout(layout);

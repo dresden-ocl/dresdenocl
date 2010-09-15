@@ -119,18 +119,18 @@ WHERE NOT (((SELECT
   WHERE P_Paper IN (SELECT P_Paper FROM O_Paper
  WHERE P_Paper IN (SELECT F_papers FROM AS_author_papers
  WHERE F_author IN (SELECT P_Person FROM O_Student WHERE P_Person = SELF.P_Person)))
-  AND P_Paper = (SELECT F_currentPaper FROM O_Person WHERE P_Person = SELF.P_Person)) = 1)));
+  AND P_Paper = SELF.F_currentPaper) = 1)));
 
 CREATE OR REPLACE VIEW tudOclInv10_2 AS
 (SELECT * FROM O_Student AS SELF
-WHERE NOT ((SELECT F_currentPaper FROM O_Person WHERE P_Person = SELF.P_Person) IN
+WHERE NOT (SELF.F_currentPaper IN
   ((SELECT P_Paper FROM O_Paper
  WHERE P_Paper IN (SELECT F_papers FROM AS_author_papers
  WHERE F_author IN (SELECT P_Person FROM O_Student WHERE P_Person = SELF.P_Person))))));
 
 CREATE OR REPLACE VIEW tudOclInv10_3 AS
 (SELECT * FROM O_Student AS SELF
-WHERE NOT ((NOT ((SELECT F_currentPaper FROM O_Person WHERE P_Person = SELF.P_Person) NOT IN
+WHERE NOT ((NOT (SELF.F_currentPaper NOT IN
   ((SELECT P_Paper FROM O_Paper
  WHERE P_Paper IN (SELECT F_papers FROM AS_author_papers
  WHERE F_author IN (SELECT P_Person FROM O_Student WHERE P_Person = SELF.P_Person))))))));
@@ -206,14 +206,14 @@ CREATE OR REPLACE VIEW tudOclInv11_2 AS
 WHERE NOT (EXISTS (((SELECT P_Paper FROM O_Paper
  WHERE P_Paper IN (SELECT F_papers FROM AS_author_papers
  WHERE F_author IN (SELECT P_Person FROM O_Student WHERE P_Person = SELF.P_Person))) UNION
-  ((SELECT F_currentPaper FROM O_Person WHERE P_Person = SELF.P_Person))))));
+  (SELF.F_currentPaper)))));
 
 CREATE OR REPLACE VIEW tudOclInv11_3 AS
 (SELECT * FROM O_Student AS SELF
 WHERE NOT (EXISTS (((SELECT P_Paper FROM O_Paper
  WHERE P_Paper IN (SELECT F_papers FROM AS_author_papers
  WHERE F_author IN (SELECT P_Person FROM O_Student WHERE P_Person = SELF.P_Person))) EXCEPT
-  ((SELECT F_currentPaper FROM O_Person WHERE P_Person = SELF.P_Person))))));
+  (SELF.F_currentPaper)))));
 
 CREATE OR REPLACE VIEW tudOclInv11_4 AS
 (SELECT * FROM O_Student AS SELF
@@ -236,7 +236,7 @@ CREATE OR REPLACE VIEW tudOclInv12_2 AS
 (SELECT * FROM O_Student AS SELF
 WHERE NOT (EXISTS (()
   UNION
-  (SELECT (SELECT F_currentPaper FROM O_Person WHERE P_Person = SELF.P_Person), ((SELECT MAX(SEQNO) FROM ()) + 1) AS SEQNO))));
+  (SELECT SELF.F_currentPaper, ((SELECT MAX(SEQNO) FROM ()) + 1) AS SEQNO))));
 
 CREATE OR REPLACE VIEW tudOclInv12_3 AS
 (SELECT * FROM O_Student AS SELF
@@ -244,12 +244,12 @@ WHERE NOT (EXISTS (SELECT P_Paper,
   (SELECT COUNT(*)+1 FROM (
     SELECT P_Paper, SEQNO
     FROM 
-    WHERE NOT (P_Paper = (SELECT F_currentPaper FROM O_Person WHERE P_Person = SELF.P_Person))
+    WHERE NOT (P_Paper = SELF.F_currentPaper)
   ) WHERE SEQNO < s.SEQNO) AS SEQNO
   FROM (
     SELECT P_Paper, SEQNO
     FROM 
-    WHERE NOT (P_Paper = (SELECT F_currentPaper FROM O_Person WHERE P_Person = SELF.P_Person))
+    WHERE NOT (P_Paper = SELF.F_currentPaper)
   ))));
 
 CREATE OR REPLACE VIEW tudOclInv13_1 AS

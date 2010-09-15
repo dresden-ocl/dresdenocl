@@ -7,6 +7,11 @@ CREATE OR REPLACE VIEW $constraint_name$ AS
 WHERE NOT ($expression$));
 >>
 
+constraint_comment(context,expression) ::= <<
+-- Context: $context$
+-- Expression: $expression$
+>>
+
 
 // --- NAVIGATION (CLASS AND ATTRIBUTE) --- 
 feature_call_navigation(object,context1,ref_object,context2) ::= <<
@@ -194,10 +199,6 @@ relational_expression_equals_boolean(operand1,operand2) ::= <<
 (($operand1$ AND $operand2$) OR (NOT $operand1$ AND NOT $operand2$))
 >>
 
-relational_expression_equals_enumeration(operand1,operand2) ::= <<
-($operand1$ = $operand2$)
->>
-
 relational_expression_equals_integer(operand1,operand2) ::= <<
 ($operand1$ = $operand2$)
 >>
@@ -212,37 +213,29 @@ relational_expression_equals_string(operand1,operand2) ::= <<
 
 
 // --- NEQUAL ---
-relational_expression_nequal_any(operand1,operand2) ::= <<
+relational_expression_nequals_any(operand1,operand2) ::= <<
 NOT ($operand1$ = $operand2$)
 >>
 
-relational_expression_nequal_boolean(operand1,operand2) ::= <<
+relational_expression_nequals_boolean(operand1,operand2) ::= <<
 ((NOT $operand1$ AND $operand2$) OR ($operand1$ AND NOT $operand2$))
 >>
 
-relational_expression_nequal_enumeration(operand1,operand2) ::= <<
+relational_expression_nequals_integer(operand1,operand2) ::= <<
 NOT ($operand1$ = $operand2$)
 >>
 
-relational_expression_nequal_integer(operand1,operand2) ::= <<
+relational_expression_nequals_real(operand1,operand2) ::= <<
 NOT ($operand1$ = $operand2$)
 >>
 
-relational_expression_nequal_real(operand1,operand2) ::= <<
-NOT ($operand1$ = $operand2$)
->>
-
-relational_expression_nequal_string(operand1,operand2) ::= <<
+relational_expression_nequals_string(operand1,operand2) ::= <<
 NOT ($operand1$ = $operand2$)
 >>
 
 
 // --- GREATER ---
 relational_expression_greater_any(operand1,operand2) ::= <<
-($operand1$ > $operand2$)
->>
-
-relational_expression_greater_enumeration(operand1,operand2) ::= <<
 ($operand1$ > $operand2$)
 >>
 
@@ -264,10 +257,6 @@ relational_expression_greaterequal_any(operand1,operand2) ::= <<
 ($operand1$ >= $operand2$)
 >>
 
-relational_expression_greaterequal_enumeration(operand1,operand2) ::= <<
-($operand1$ >= $operand2$)
->>
-
 relational_expression_greaterequal_integer(operand1,operand2) ::= <<
 ($operand1$ >= $operand2$)
 >>
@@ -286,10 +275,6 @@ relational_expression_lesser_any(operand1,operand2) ::= <<
 ($operand1$ < $operand2$)
 >>
 
-relational_expression_lesser_enumeration(operand1,operand2) ::= <<
-($operand1$ < $operand2$)
->>
-
 relational_expression_lesser_integer(operand1,operand2) ::= <<
 ($operand1$ < $operand2$)
 >>
@@ -305,10 +290,6 @@ relational_expression_lesser_string(operand1,operand2) ::= <<
 
 // --- LESSER OR EQUAL ---
 relational_expression_lesserequal_any(operand1,operand2) ::= <<
-($operand1$ <= $operand2$)
->>
-
-relational_expression_lesserequal_enumeration(operand1,operand2) ::= <<
 ($operand1$ <= $operand2$)
 >>
 

@@ -111,7 +111,8 @@ public abstract class CodegenJob extends Job {
 
 		catch (Ocl2CodeException e) {
 
-			String errorMsg = "An error occured during code generation.";
+			String errorMsg = "An error occured during code generation.\n";
+			errorMsg += e.getMessage();
 			logger.error(errorMsg, e);
 
 			result = new Status(IStatus.ERROR, this.pluginid, errorMsg);

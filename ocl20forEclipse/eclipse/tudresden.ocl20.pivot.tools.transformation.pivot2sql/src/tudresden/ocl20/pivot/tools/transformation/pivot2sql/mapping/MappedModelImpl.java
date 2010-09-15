@@ -12,7 +12,7 @@ import tudresden.ocl20.pivot.tools.codegen.declarativ.mapping.IMappedModel;
 
 /**
  * This class implements the interface MappedModel. This implementation is used
- * by the Uml2MappedModel transformation to provide the the navigation
+ * by the Pivot2MappedModel transformation to provide the the navigation
  * information needed by the DeclarativeCodeGenerator.
  * 
  * @author Christian Wende

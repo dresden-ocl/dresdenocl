@@ -55,8 +55,7 @@ import tudresden.ocl20.pivot.tools.transformation.pivot2sql.test.tests.util.Tran
  * This test class tests the MappedModel & Pivot2MappedModel.
  * </p>
  * 
- * @see tudresden.ocl20.pivot.tools.transformation.MappedModelImpl;
- *      ;
+ * @see tudresden.ocl20.pivot.tools.transformation.MappedModelImpl; ;
  */
 public class Pivot2MappedModelTest extends TransformationTest {
 
@@ -171,13 +170,12 @@ public class Pivot2MappedModelTest extends TransformationTest {
 	 * </p>
 	 * 
 	 * <p>
-	 * Checks if a 1to1 relation mapped correctly.
+	 * Checks if a navigable 1to1 relation mapped correctly.
 	 * </p>
 	 */
 	public void testRelation1to1() {
 
 		List<String> assEnds1 = new ArrayList<String>();
-		List<String> assEnds2 = new ArrayList<String>();
 		IMappedModel mm = null;
 		try {
 			mm = generateMappedModel(TEST_RELATION_1TO1);
@@ -189,8 +187,6 @@ public class Pivot2MappedModelTest extends TransformationTest {
 		assEnds1.add("currentPaper");
 		class2assEnds.put(classes.get(0), assEnds1);
 		classes.add("Paper");
-		assEnds2.add("person");
-		class2assEnds.put(classes.get(1), assEnds2);
 		ModelChecker.checkMappedModel(mm, classes, class2attributes, class2assEnds);
 	}
 
@@ -351,7 +347,6 @@ public class Pivot2MappedModelTest extends TransformationTest {
 		classes.add("Grade");
 		attributes.add("name");
 		attributes.add("value");
-		assEnds.add("person");
 		class2attributes.put(classes.get(4), attributes);
 		class2assEnds.put(classes.get(4), assEnds);
 
@@ -365,7 +360,6 @@ public class Pivot2MappedModelTest extends TransformationTest {
 		attributes.add("purpose");
 		attributes.add("category");
 		attributes.add("inProgress");
-		assEnds.add("person");
 		assEnds.add("author");
 		class2attributes.put(classes.get(5), attributes);
 		class2assEnds.put(classes.get(5), assEnds);
@@ -401,10 +395,15 @@ public class Pivot2MappedModelTest extends TransformationTest {
 		ModelChecker.checkMappedModel(mm, classes, class2attributes, class2assEnds);
 	}
 
-	private IMappedModel generateMappedModel(File file) throws IllegalArgumentException, ModelAccessException, TransformationException, InvalidModelException {
+	private IMappedModel generateMappedModel(File file)
+			throws IllegalArgumentException, ModelAccessException,
+			TransformationException, InvalidModelException {
 
 		IModel model = TestPerformer.addUMLModel(file);
-		ITransformation<Namespace,IOcl2DeclSettings,IMappedModel> p2mmi = TransformationFactory.getInstance().getTransformation("Pivot2MappedModelImpl",Namespace.class,IMappedModel.class,IOcl2DeclSettings.class,"pivot","mappedmodel");
+		ITransformation<Namespace, IOcl2DeclSettings, IMappedModel> p2mmi =
+				TransformationFactory.getInstance().getTransformation(
+						"Pivot2MappedModelImpl", Namespace.class, IMappedModel.class,
+						IOcl2DeclSettings.class, "pivot", "mappedmodel");
 		p2mmi.setParameterIN(model.getRootNamespace());
 		p2mmi.setSettings(TestPerformer.getSettings());
 		p2mmi.invoke();

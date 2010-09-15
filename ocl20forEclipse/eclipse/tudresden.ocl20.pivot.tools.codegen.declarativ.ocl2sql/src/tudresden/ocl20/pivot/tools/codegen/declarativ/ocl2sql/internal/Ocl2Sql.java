@@ -135,11 +135,11 @@ public class Ocl2Sql implements IOcl2Sql {
 				saveToFile(sqlCommentar + tupleDdlMM.getElem1(),
 						dateString.concat("_schema") + ".sql");
 			} catch (ModelAccessException e) {
-				throw new Ocl2CodeException("Get not a namespace of active model",e);
+				throw new Ocl2CodeException("Get not a namespace of active model", e);
 			} catch (TransformationException e) {
-				throw new Ocl2CodeException("Can't transformation the model",e);
+				throw new Ocl2CodeException("Can't transformation the model", e);
 			} catch (InvalidModelException e) {
-				throw new Ocl2CodeException("Wrong model set",e);
+				throw new Ocl2CodeException("Wrong model set", e);
 			}
 
 		}
@@ -154,11 +154,11 @@ public class Ocl2Sql implements IOcl2Sql {
 				pmm.setParameterIN(model.getRootNamespace());
 				pmm.invoke();
 			} catch (ModelAccessException e) {
-				throw new Ocl2CodeException("Get not a namespace of active model",e);
+				throw new Ocl2CodeException("Get not a namespace of active model", e);
 			} catch (TransformationException e) {
-				throw new Ocl2CodeException("Can't transformation the model",e);
+				throw new Ocl2CodeException("Can't transformation the model", e);
 			} catch (InvalidModelException e) {
-				throw new Ocl2CodeException("Wrong model set",e);
+				throw new Ocl2CodeException("Wrong model set", e);
 			}
 		}
 		List<String> constraintList = null;

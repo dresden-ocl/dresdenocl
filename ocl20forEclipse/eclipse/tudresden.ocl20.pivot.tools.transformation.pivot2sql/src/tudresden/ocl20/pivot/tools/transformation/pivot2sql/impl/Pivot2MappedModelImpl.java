@@ -5,7 +5,6 @@
 package tudresden.ocl20.pivot.tools.transformation.pivot2sql.impl;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
@@ -29,10 +28,11 @@ import tudresden.ocl20.pivot.tools.transformation.pivot2sql.mapping.MappedModelI
 import tudresden.ocl20.pivot.tools.transformation.pivot2sql.util.PivotModelAnalyser;
 
 /**
- * The class Uml2MappedModelImpl implements the transformation of an instance of
- * the Uml Metamodel to a MappedModel.
+ * The class Pivot2MappedModelImpl implements the transformation of an instance
+ * of the pivotmodel to a MappedModel.
  * 
  * @author Christian Wende
+ * @author Bjoern Freitag
  * 
  */
 public class Pivot2MappedModelImpl extends
@@ -64,15 +64,10 @@ public class Pivot2MappedModelImpl extends
 
 		super(modelInName, outname);
 		if (LOGGER.isDebugEnabled()) {
-			LOGGER.debug("init() - start");
-		}
-
-		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("init() - stop");
 		}
 	}
 
-	@Override
 	public void invoke() throws InvalidModelException, TransformationException {
 
 		if (LOGGER.isDebugEnabled()) {
@@ -94,24 +89,34 @@ public class Pivot2MappedModelImpl extends
 
 		/** CHECK SETTINGS **/
 		if (this.settings.getPrimaryKeyPrefix().equals("")) {
-			throw new TransformationException("No primary key prefix set.",this);
+			throw new TransformationException("No primary key prefix set.", this);
 		}
-		if (this.settings.getPrimaryKeyPrefix().equals(this.settings.getForeignKeyPrefix())) {
-			throw new TransformationException("Primary Key and Foreign Key prefix equals",this);
-		} 
-		if (this.settings.getTablePrefix().equals(this.settings.getObjectViewPrefix())) {
-			throw new TransformationException("Table and ObjectView prefix equal", this);
+		if (this.settings.getPrimaryKeyPrefix().equals(
+				this.settings.getForeignKeyPrefix())) {
+			throw new TransformationException(
+					"Primary Key and Foreign Key prefix equals", this);
 		}
-		
-		this.pivotModelAnalyser = new PivotModelAnalyser(model_in);
+		if (this.settings.getTablePrefix().equals(
+				this.settings.getObjectViewPrefix())) {
+			throw new TransformationException("Table and ObjectView prefix equal",
+					this);
+		}
 
-		this.settings.setMappedModel(new MappedModelImpl());
+		pivotModelAnalyser = new PivotModelAnalyser(model_in);
+
+		settings.setMappedModel(new MappedModelImpl());
 
 		Set<Type> types = pivotModelAnalyser.getInstancesOfType(Type.class);
 		for (Type type : types) {
 			if (pivotModelAnalyser.isPrimitive(type))
 				continue;
 			map_Type2MappedClass(type);
+		}
+
+		Set<Property> properties =
+				pivotModelAnalyser.getInstancesOfType(Property.class);
+		for (Property property : properties) {
+			map_property2Guide(property);
 		}
 		Set<AssociationProperty> filterAssociation =
 				new HashSet<AssociationProperty>();
@@ -123,59 +128,10 @@ public class Pivot2MappedModelImpl extends
 			filterAssociation.addAll(association.getInverseAssociationProperties());
 		}
 
-		this.out = this.settings.getMappedModel();
+		out = settings.getMappedModel();
 
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("Stop Transformation");
-		}
-
-	}
-
-	private Set<Type> query_subtypesForType(Type type) {
-
-		if (LOGGER.isDebugEnabled()) {
-			LOGGER.debug("Query all subtypes for Type: " + type.getName());
-		}
-
-		return pivotModelAnalyser.query_subtypesForType(type);
-	}
-
-	private Set<AssociationProperty> query_allAssociations() {
-
-		if (LOGGER.isDebugEnabled()) {
-			LOGGER.debug("Query all associations of input model");
-		}
-
-		return pivotModelAnalyser.getInstancesOfType(AssociationProperty.class);
-	}
-
-	private List<Property> query_propertiesForType(Type type) {
-
-		if (LOGGER.isDebugEnabled()) {
-			LOGGER.debug("Query all attributes for Type: " + type.getName());
-		}
-
-		List<Property> properties = type.allProperties();
-		return properties;
-	}
-
-	private String query_pkNameForType(Type type) throws InvalidModelException {
-
-		String pkname =
-				this.settings.getPrimaryKeyPrefix() + query_nameOfGenroot(type);
-		return pkname;
-	}
-
-	private String query_nameOfGenroot(Type type) throws InvalidModelException {
-
-		if (LOGGER.isDebugEnabled()) {
-			LOGGER.debug("Query the name of genroot for Type: " + type.getName());
-		}
-
-		try {
-			return pivotModelAnalyser.query_nameOfGenroot(type);
-		} catch (InvalidModelException ime) {
-			throw new InvalidModelException(ime.getMessage(), model_in, this);
 		}
 
 	}
@@ -186,47 +142,117 @@ public class Pivot2MappedModelImpl extends
 			LOGGER.debug("Mapping of Type: " + type.getName());
 		}
 
-		String typename = type.getName();
-		String pkname = query_pkNameForType(type);
-		String ovname = this.settings.getObjectViewPrefix() + typename;
-		List<Property> attributes = query_propertiesForType(type);
 		Set<Type> subtypes = query_subtypesForType(type);
+
+		accessMappedClass(type);
+
+		for (Type subType : subtypes) {
+			accessMappedClass(subType);
+		}
+	}
+
+	private void map_property2Guide(Property property)
+			throws InvalidModelException {
+
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("Mapping of Property: " + property.getName());
+		}
+		if (property instanceof AssociationProperty)
+			return;
+
+		if (isAssociation(property)) {
+			map_property2Guide(property, property.getType(), property.getOwningType());
+		}
+		else {
+			Type type = property.getOwningType();
+
+			String pkname = query_pkNameForType(type);
+			Set<Type> subtypes = query_subtypesForType(type);
+
+			create_PropertyGuide(property, type, pkname);
+
+			for (Type subType : subtypes) {
+				create_PropertyGuide(property, subType, pkname);
+			}
+		}
+	}
+
+	private void create_PropertyGuide(Property property, Type type, String pkname)
+			throws InvalidModelException {
+
+		MappedClassImpl mc = accessMappedClass(type);
+		String ovname = this.settings.getObjectViewPrefix() + type.getName();
+		Guide guide = new Guide(false);
+		guide.add(property.getName(), ovname, pkname);
+
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("Creating Attribute Guide for Attribute: "
+					+ property.getName() + " in MappedClass " + mc.getName() + "\n"
+					+ guide);
+		}
+
+		mc.addAttributeGuide(property.getName(), guide);
+	}
+
+	private Guide create_AssociationGuide(String name, Type type, String pkname,
+			String fkname, String ovname) throws InvalidModelException {
 
 		MappedClassImpl mc = accessMappedClass(type);
 
-		for (Property attribute : attributes) {
-			if (attribute instanceof AssociationProperty)
-				continue;
-			Guide ag = new Guide(false);
-			ag.add(attribute.getName(), ovname, pkname);
+		Guide guide = new Guide(true);
 
-			if (LOGGER.isDebugEnabled()) {
-				LOGGER.debug("Creating Attribute Guide for Attribute: "
-						+ attribute.getName() + " in MappedClass " + mc.getName() + "\n"
-						+ ag);
-			}
+		addToGuide(guide, fkname, ovname, pkname);
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("Creating Association Guide for Attribute: " + name
+					+ " in MappedClass " + mc.getName() + "\n" + guide);
+		}
+		mc.addAssociationEndGuide(name, guide);
+		return guide;
+	}
 
-			mc.addAttributeGuide(attribute.getName(), ag);
+	private void addToGuide(Guide guide, String select, String from, String where) {
 
-			for (Type subType : subtypes) {
-				String typename_sub = subType.getName();
-				String ovname_sub = this.settings.getObjectViewPrefix() + typename_sub;
+		guide.add(select, from, where);
+	}
 
-				MappedClassImpl sub = accessMappedClass(subType);
+	private void map_property2Guide(Property property, Type type, Type owningType)
+			throws InvalidModelException {
 
-				Guide ag_sub = new Guide(false);
-				ag_sub.add(attribute.getName(), ovname_sub, pkname);
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER
+					.debug("Mapping association "
+							+ property.getName()
+							+ " between "
+							+ owningType.getName()
+							+ " and "
+							+ type.getName()
+							+ " by putting a Foreign Key to the PrimaryKey of each side into the opposite site");
+		}
 
-				if (LOGGER.isDebugEnabled()) {
-					LOGGER.debug("Creating Attribute Guide for Attribute: "
-							+ attribute.getName() + " in MappedClass " + sub.getName() + "\n"
-							+ ag_sub);
-				}
+		String name = property.getName();
+		if (type instanceof CollectionType) {
+			map_MtoN_Association2Guide(((CollectionType) type).getElementType(),
+					((CollectionType) type).getElementType().getName(), owningType,
+					owningType.getName(),
+					settings.getUniqueAssociationTableName(property));
+		}
+		else {
+			map_1toN_Association2Guide(type, name, owningType, null);
+		}
+	}
 
-				sub.addAttributeGuide(attribute.getName(), ag_sub);
+	private boolean isAssociation(Property property) {
 
+		if (property.getType() instanceof CollectionType) {
+			if (settings.getMappedModel().isClass(
+					((CollectionType) property.getType()).getElementType().getName())) {
+				return true;
 			}
 		}
+		else if (settings.getMappedModel().isClass(property.getType().getName())) {
+			return true;
+		}
+		return false;
 	}
 
 	private MappedClassImpl accessMappedClass(Type type)
@@ -330,6 +356,30 @@ public class Pivot2MappedModelImpl extends
 
 	}
 
+	private void map_1to1_Association2Guide(Type typeA, String nameA, Type typeB,
+			String nameB) throws InvalidModelException {
+
+		String pknameA = query_pkNameForType(typeA);
+		String pknameB = query_pkNameForType(typeB);
+		String ovnameA = this.settings.getObjectViewPrefix() + typeA.getName();
+		String ovnameB = this.settings.getObjectViewPrefix() + typeB.getName();
+		String fknameA = this.settings.getForeignKeyPrefix() + nameA;
+		String fknameB = this.settings.getForeignKeyPrefix() + nameB;
+		Set<Type> subtypesA = query_subtypesForType(typeA);
+		Set<Type> subtypesB = query_subtypesForType(typeB);
+
+		create_AssociationGuide(nameB, typeA, pknameA, fknameB, ovnameA);
+		for (Type subType : subtypesA) {
+			create_AssociationGuide(nameB, subType, pknameA, fknameB, ovnameA);
+		}
+
+		create_AssociationGuide(nameA, typeB, pknameB, fknameA, ovnameB);
+		for (Type subType : subtypesB) {
+			create_AssociationGuide(nameA, subType, pknameB, fknameA, ovnameB);
+		}
+
+	}
+
 	private void map_1toN_Association2Guide(Type typeB, String nameB, Type typeA,
 			String nameA) throws InvalidModelException {
 
@@ -340,36 +390,24 @@ public class Pivot2MappedModelImpl extends
 		Set<Type> subtypesA = query_subtypesForType(typeA);
 		Set<Type> subtypesB = query_subtypesForType(typeB);
 
-		MappedClassImpl mcA = accessMappedClass(typeA);
-		MappedClassImpl mcB = accessMappedClass(typeB);
-
-		Guide a2b = new Guide(true);
-
-		a2b.add(fknameB, ovnameA, pknameA);
-		mcA.addAssociationEndGuide(nameB, a2b);
+		create_AssociationGuide(nameB, typeA, pknameA, fknameB, ovnameA);
 		for (Type subType : subtypesA) {
-			MappedClassImpl mcA_sub = accessMappedClass(subType);
-
-			Guide sa2b = new Guide(true);
-			String ovnameA_sub =
-					this.settings.getObjectViewPrefix() + subType.getName();
-
-			sa2b.add(fknameB, ovnameA_sub, pknameA);
-			mcA_sub.addAssociationEndGuide(nameB, sa2b);
-
+			if (nameA != null) {
+				create_AssociationGuide(nameB, subType, pknameA, fknameB,
+						this.settings.getObjectViewPrefix() + subType.getName());
+			}
+			else {
+				create_AssociationGuide(nameB, subType, pknameA, fknameB, ovnameA);
+			}
 		}
 
-		Guide b2a = new Guide(true);
-		b2a.add(pknameA, ovnameA, fknameB);
-		mcB.addAssociationEndGuide(nameA, b2a);
-		for (Type subType : subtypesB) {
-			MappedClassImpl mcB_sub = accessMappedClass(subType);
+		if (nameA != null) {
+			create_AssociationGuide(nameA, typeB, fknameB, pknameA, ovnameA);
 
-			Guide sb2a = new Guide(true);
+			for (Type subType : subtypesB) {
+				create_AssociationGuide(nameA, subType, fknameB, pknameA, ovnameA);
 
-			sb2a.add(pknameA, ovnameA, fknameB);
-			mcB_sub.addAssociationEndGuide(nameA, sb2a);
-
+			}
 		}
 
 	}
@@ -386,96 +424,72 @@ public class Pivot2MappedModelImpl extends
 		Set<Type> subtypesA = query_subtypesForType(typeA);
 		Set<Type> subtypesB = query_subtypesForType(typeB);
 
-		MappedClassImpl mcA =
-				(MappedClassImpl) ((MappedModelImpl) this.settings.getMappedModel())
-						.getClass(typeA.getName());
-		MappedClassImpl mcB =
-				(MappedClassImpl) ((MappedModelImpl) this.settings.getMappedModel())
-						.getClass(typeB.getName());
-
-		Guide a2b = new Guide(true);
-
-		a2b.add(pknameB, ovnameB, pknameB);
-		a2b.add(fknameB, assTableName, fknameA);
-		a2b.add(pknameA, ovnameA, pknameA);
-		mcA.addAssociationEndGuide(nameB, a2b);
+		Guide a2b =
+				create_AssociationGuide(nameB, typeA, pknameB, pknameB, ovnameB);
+		addToGuide(a2b, fknameB, assTableName, fknameA);
+		addToGuide(a2b, pknameA, ovnameA, pknameA);
 		for (Type subType : subtypesA) {
-			MappedClassImpl mcA_sub = accessMappedClass(subType);
-
-			Guide sa2b = new Guide(true);
+			Guide sa2b =
+					create_AssociationGuide(nameB, subType, pknameB, pknameB, ovnameB);
 			String ovnameA_sub =
 					this.settings.getObjectViewPrefix() + subType.getName();
 
-			sa2b.add(pknameB, ovnameB, pknameB);
-			sa2b.add(fknameB, assTableName, fknameA);
-			sa2b.add(pknameA, ovnameA_sub, pknameA);
-			mcA_sub.addAssociationEndGuide(nameB, sa2b);
+			addToGuide(sa2b, fknameB, assTableName, fknameA);
+			addToGuide(sa2b, pknameA, ovnameA_sub, pknameA);
 
 		}
 
-		Guide b2a = new Guide(true);
-
-		b2a.add(pknameA, ovnameA, pknameA);
-		b2a.add(fknameA, assTableName, fknameB);
-		b2a.add(pknameB, ovnameB, pknameB);
-		mcB.addAssociationEndGuide(nameA, b2a);
+		Guide b2a =
+				create_AssociationGuide(nameA, typeB, pknameA, pknameA, ovnameA);
+		addToGuide(b2a, fknameA, assTableName, fknameB);
+		addToGuide(b2a, pknameB, ovnameB, pknameB);
 		for (Type subType : subtypesB) {
-			MappedClassImpl mcB_sub = accessMappedClass(subType);
-
-			Guide sb2a = new Guide(true);
+			Guide sb2a =
+					create_AssociationGuide(nameA, subType, pknameA, pknameA, ovnameA);
 			String ovnameB_sub =
 					this.settings.getObjectViewPrefix() + subType.getName();
 
-			sb2a.add(fknameA, ovnameA, pknameA);
-			sb2a.add(fknameA, assTableName, fknameB);
-			sb2a.add(pknameB, ovnameB_sub, pknameB);
-			mcB_sub.addAssociationEndGuide(nameA, sb2a);
+			addToGuide(sb2a, fknameA, assTableName, fknameB);
+			addToGuide(sb2a, pknameB, ovnameB_sub, pknameB);
+
 		}
 	}
 
-	private void map_1to1_Association2Guide(Type typeA, String nameA, Type typeB,
-			String nameB) throws InvalidModelException {
+	private Set<Type> query_subtypesForType(Type type) {
 
-		String pknameA = query_pkNameForType(typeA);
-		String pknameB = query_pkNameForType(typeB);
-		String ovnameA = this.settings.getObjectViewPrefix() + typeA.getName();
-		String ovnameB = this.settings.getObjectViewPrefix() + typeB.getName();
-		String fknameA = this.settings.getForeignKeyPrefix() + nameA;
-		String fknameB = this.settings.getForeignKeyPrefix() + nameB;
-		Set<Type> subtypesA = query_subtypesForType(typeA);
-		Set<Type> subtypesB = query_subtypesForType(typeB);
-
-		MappedClassImpl mcA =
-				(MappedClassImpl) ((MappedModelImpl) this.settings.getMappedModel())
-						.getClass(typeA.getName());
-		MappedClassImpl mcB =
-				(MappedClassImpl) ((MappedModelImpl) this.settings.getMappedModel())
-						.getClass(typeB.getName());
-
-		Guide a2b = new Guide(true);
-		a2b.add(fknameB, ovnameA, pknameA);
-		mcA.addAssociationEndGuide(nameB, a2b);
-		for (Type subType : subtypesA) {
-			MappedClassImpl mcA_sub = accessMappedClass(subType);
-
-			Guide sa2b = new Guide(true);
-
-			sa2b.add(fknameB, ovnameA, pknameA);
-			mcA_sub.addAssociationEndGuide(nameB, sa2b);
-
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("Query all subtypes for Type: " + type.getName());
 		}
 
-		Guide b2a = new Guide(true);
-		b2a.add(fknameA, ovnameB, pknameB);
-		mcB.addAssociationEndGuide(nameA, b2a);
-		for (Type subType : subtypesB) {
-			MappedClassImpl mcB_sub = accessMappedClass(subType);
+		return pivotModelAnalyser.query_subtypesForType(type);
+	}
 
-			Guide sb2a = new Guide(true);
+	private Set<AssociationProperty> query_allAssociations() {
 
-			sb2a.add(fknameA, ovnameB, pknameB);
-			mcB_sub.addAssociationEndGuide(nameA, sb2a);
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("Query all associations of input model");
+		}
 
+		return pivotModelAnalyser.getInstancesOfType(AssociationProperty.class);
+	}
+
+	private String query_pkNameForType(Type type) throws InvalidModelException {
+
+		String pkname =
+				this.settings.getPrimaryKeyPrefix() + query_nameOfGenroot(type);
+		return pkname;
+	}
+
+	private String query_nameOfGenroot(Type type) throws InvalidModelException {
+
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("Query the name of genroot for Type: " + type.getName());
+		}
+
+		try {
+			return pivotModelAnalyser.query_nameOfGenroot(type);
+		} catch (InvalidModelException ime) {
+			throw new InvalidModelException(ime.getMessage(), model_in, this);
 		}
 
 	}

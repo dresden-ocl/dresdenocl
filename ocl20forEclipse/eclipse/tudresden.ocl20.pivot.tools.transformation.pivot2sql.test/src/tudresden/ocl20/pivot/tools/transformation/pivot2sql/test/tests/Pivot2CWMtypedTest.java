@@ -105,7 +105,6 @@ public class Pivot2CWMtypedTest extends CWMTest {
 		super.testRelation1to1();
 		String view;
 		List<String> foreignKeys1 = new ArrayList<String>();
-		List<String> foreignKeys2 = new ArrayList<String>();
 		tables.add("T_Person");
 		views.add("OV_Person");
 		foreignKeys1.add("FK_currentPaper");
@@ -115,10 +114,8 @@ public class Pivot2CWMtypedTest extends CWMTest {
 		view2queryexpression.put(views.get(0), view);
 		tables.add("T_Paper");
 		views.add("OV_Paper");
-		foreignKeys2.add("FK_person");
-		view = "SELECT PK_Paper,FK_person\nFROM T_Paper\n";
+		view = "SELECT PK_Paper\nFROM T_Paper\n";
 		table2PrimaryKey.put(tables.get(1), "PK_Paper");
-		table2ForeignKey.put(tables.get(1), foreignKeys2);
 		view2queryexpression.put(views.get(1), view);
 		checkCWM();
 	}
@@ -281,13 +278,11 @@ public class Pivot2CWMtypedTest extends CWMTest {
 		views.add("OV_Grade");
 		attributes.add(new Tuple<String, String>("name", "String"));
 		attributes.add(new Tuple<String, String>("value", "Integer"));
-		foreignKeys.add("FK_person");
-		view = "SELECT PK_Grade,T_Grade.name AS name,T_Grade.value AS value,";
-		view += "FK_person\nFROM T_Grade\n";
+		view = "SELECT PK_Grade,T_Grade.name AS name,T_Grade.value AS value";
+		view += "\nFROM T_Grade\n";
 		view2queryexpression.put(views.get(4), view);
 		table2properties.put(tables.get(1), attributes);
 		table2PrimaryKey.put(tables.get(1), "PK_Grade");
-		table2ForeignKey.put(tables.get(1), foreignKeys);
 
 		attributes = new ArrayList<Tuple<String, String>>();
 		foreignKeys = new ArrayList<String>();
@@ -300,15 +295,13 @@ public class Pivot2CWMtypedTest extends CWMTest {
 		attributes.add(new Tuple<String, String>("purpose", "String"));
 		attributes.add(new Tuple<String, String>("category", "String"));
 		attributes.add(new Tuple<String, String>("inProgress", "Boolean"));
-		foreignKeys.add("FK_person");
 		view =
 				"SELECT PK_Paper,T_Paper.category AS category,T_Paper.edition AS edition,";
 		view += "T_Paper.inProgress AS inProgress,T_Paper.purpose AS purpose,";
-		view += "T_Paper.title AS title,FK_person\nFROM T_Paper\n";
+		view += "T_Paper.title AS title\nFROM T_Paper\n";
 		view2queryexpression.put(views.get(5), view);
 		table2properties.put(tables.get(2), attributes);
 		table2PrimaryKey.put(tables.get(2), "PK_Paper");
-		table2ForeignKey.put(tables.get(2), foreignKeys);
 
 		attributes = new ArrayList<Tuple<String, String>>();
 		foreignKeys = new ArrayList<String>();

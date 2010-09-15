@@ -11,11 +11,11 @@ P_Facility VARCHAR(255) PRIMARY KEY,F_headOfFacility VARCHAR(255),F_superFacilit
 );
 
 CREATE TABLE TB_Grade (
-P_Grade VARCHAR(255) PRIMARY KEY,F_person VARCHAR(255),name VARCHAR(255),value INT
+P_Grade VARCHAR(255) PRIMARY KEY,name VARCHAR(255),value INT
 );
 
 CREATE TABLE TB_Paper (
-P_Paper VARCHAR(255) PRIMARY KEY,F_person VARCHAR(255),category VARCHAR(255),edition VARCHAR(255),inProgress NUMBER(1),purpose VARCHAR(255),title VARCHAR(255)
+P_Paper VARCHAR(255) PRIMARY KEY,category VARCHAR(255),edition VARCHAR(255),inProgress NUMBER(1),purpose VARCHAR(255),title VARCHAR(255)
 );
 
 CREATE TABLE TB_Person (
@@ -43,7 +43,7 @@ FROM TB_Facility
 WHERE type = "Faculty" );
 
 CREATE VIEW O_Grade
-AS ( SELECT P_Grade,TB_Grade.name AS name,TB_Grade.value AS value,F_person
+AS ( SELECT P_Grade,TB_Grade.name AS name,TB_Grade.value AS value
 FROM TB_Grade
  );
 
@@ -53,7 +53,7 @@ FROM TB_Facility
 WHERE type = "Institute" );
 
 CREATE VIEW O_Paper
-AS ( SELECT P_Paper,TB_Paper.category AS category,TB_Paper.edition AS edition,TB_Paper.inProgress AS inProgress,TB_Paper.purpose AS purpose,TB_Paper.title AS title,F_person
+AS ( SELECT P_Paper,TB_Paper.category AS category,TB_Paper.edition AS edition,TB_Paper.inProgress AS inProgress,TB_Paper.purpose AS purpose,TB_Paper.title AS title
 FROM TB_Paper
  );
 
@@ -92,12 +92,6 @@ FOREIGN KEY (F_owner) REFERENCES TB_Facility(P_Facility);
 
 ALTER TABLE AS_author_papers ADD CONSTRAINT CONAS_author_papersF_papers
 FOREIGN KEY (F_papers) REFERENCES TB_Paper(P_Paper);
-
-ALTER TABLE TB_Grade ADD CONSTRAINT CONTB_GradeF_person
-FOREIGN KEY (F_person) REFERENCES TB_Person(P_Person);
-
-ALTER TABLE TB_Paper ADD CONSTRAINT CONTB_PaperF_person
-FOREIGN KEY (F_person) REFERENCES TB_Person(P_Person);
 
 ALTER TABLE TB_Facility ADD CONSTRAINT CONTB_FacilityF_superFacility
 FOREIGN KEY (F_superFacility) REFERENCES TB_Facility(P_Facility);

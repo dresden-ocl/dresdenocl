@@ -10,6 +10,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.eclipse.core.runtime.Platform;
@@ -41,18 +42,18 @@ public class Ocl2SqlTest {
 			+ "ocl2sqltest";
 
 	private static List<String> expected;
-	
+
 	private IModel model;
-	private static String filePath =
-		Platform.getBundle(Ocl2SqlTestPlugin.PLUGIN_ID).getLocation()
-				.replace("reference:file:", "");
-	
+	private static String filePath = Platform
+			.getBundle(Ocl2SqlTestPlugin.PLUGIN_ID).getLocation()
+			.replace("reference:file:", "");
+
 	public List<Constraint> constraints = null;
 
 	@BeforeClass
 	public static void setUpClass() {
 
-		expected = parseFile(filePath +"solution/view.sql");
+		expected = parseFile(filePath + "solution/view.sql");
 	}
 
 	private boolean deleteDir(File dir) {
@@ -74,14 +75,16 @@ public class Ocl2SqlTest {
 	public void setUp() {
 
 		try {
-			model =	ModelBusPlugin.getMetamodelRegistry().getMetamodel(UML2MetamodelPlugin.ID).getModelProvider().getModel(new File(filePath
-						+ "model/university_complex.uml"));
+			model =
+					ModelBusPlugin.getMetamodelRegistry()
+							.getMetamodel(UML2MetamodelPlugin.ID).getModelProvider()
+							.getModel(new File(filePath + "model/university_complex.uml"));
 		} catch (IllegalArgumentException e) {
 			fail("Wrong parameter");
 		} catch (ModelAccessException e) {
 			fail("The model can't generate");
-		} 
-		
+		}
+
 		boolean exists = (new File(sourcePath)).exists();
 		if (!exists) {
 			new File(sourcePath).mkdir();
@@ -93,7 +96,7 @@ public class Ocl2SqlTest {
 
 	@After
 	public void tear_down() {
-		
+
 		if (model != null) {
 			ModelBusPlugin.getModelRegistry().removeModel(model);
 		}
@@ -108,39 +111,47 @@ public class Ocl2SqlTest {
 	}
 
 	private void testStringList(List<String> actual, List<String> expected) {
-		for(String s : actual) {
-			if (s.equals("")) continue;
-			assertTrue("A extra view is generated\n"+s,expected.contains(s));
+
+		for (String s : actual) {
+			if (s.equals(""))
+				continue;
+			assertTrue("A extra view is generated\n" + s, expected.contains(s));
 		}
-		for(String s : expected) {
-			if (s.equals("")) continue;
-			assertTrue("A view isn't generate\n"+s,actual.contains(s));
+		for (String s : expected) {
+			if (s.equals(""))
+				continue;
+			assertTrue("A view isn't generate\n" + s, actual.contains(s));
 		}
 	}
-	
-	private List<String> runCodeGenerator(IOcl2DeclSettings settings) throws Ocl2CodeException {
+
+	private List<String> runCodeGenerator(IOcl2DeclSettings settings)
+			throws Ocl2CodeException {
+
 		settings.setModus(IOcl2DeclSettings.MODUS_TYPED);
 		settings.setSourceDirectory(sourcePath);
 		settings.setTemplateGroup(TemplatePlugin.getTemplateGroupRegistry()
 				.getTemplateGroup("Standard(SQL)"));
 		try {
-			constraints = Ocl22Parser.INSTANCE.doParse(model, URI.createFileURI(filePath
+			constraints =
+					Ocl22Parser.INSTANCE.doParse(model, URI.createFileURI(filePath
 							+ "constraints/university_complex.ocl"), true);
 		} catch (ParseException e) {
 			fail("Can't parse the constraints");
 		}
-		IOcl2Sql ocl2Sql = Ocl2SQLFactory.getInstance().createSQLCodeGenerator(settings);
+		IOcl2Sql ocl2Sql =
+				Ocl2SQLFactory.getInstance().createSQLCodeGenerator(settings);
 		ocl2Sql.setInputModel(model);
 		return ocl2Sql.transformFragmentCode(constraints);
 	}
-	
+
 	/**
 	 * check throw TransformationEception.
 	 */
-	@Test 
+	@Test
 	public void runExceptionTest() {
+
 		IOcl2DeclSettings settings =
-			Ocl2DeclCodeFactory.getInstance().createOcl2DeclCodeSettings();
+				Ocl2DeclCodeFactory.getInstance().createOcl2DeclCodeSettings();
 		try {
 			runCodeGenerator(settings);
 		} catch (Ocl2CodeException e1) {
@@ -148,7 +159,8 @@ public class Ocl2SqlTest {
 		}
 		settings.setSaveCode(true);
 		settings.setModus(0);
-		IOcl2Sql ocl2Sql = Ocl2SQLFactory.getInstance().createSQLCodeGenerator(settings);
+		IOcl2Sql ocl2Sql =
+				Ocl2SQLFactory.getInstance().createSQLCodeGenerator(settings);
 		ocl2Sql.setInputModel(model);
 		try {
 			ocl2Sql.transformFragmentCode(constraints);
@@ -165,7 +177,8 @@ public class Ocl2SqlTest {
 			fail("No TransformationException throw, because set table prefix and object view prefix to same prefix");
 		} catch (Ocl2CodeException e) {
 			if (!(e.getCause() instanceof TransformationException)) {
-				fail("No TransformationException throw, because "+e.getCause().getMessage());
+				fail("No TransformationException throw, because "
+						+ e.getCause().getMessage());
 			}
 		}
 		settings.setObjectViewPrefix("OV_");
@@ -175,7 +188,8 @@ public class Ocl2SqlTest {
 			fail("No TransformationException throw, because primary key prefix is null");
 		} catch (Ocl2CodeException e) {
 			if (!(e.getCause() instanceof TransformationException)) {
-				fail("No TransformationException throw, because "+e.getCause().getMessage());
+				fail("No TransformationException throw, because "
+						+ e.getCause().getMessage());
 			}
 		}
 		settings.setPrimaryKeyPrefix("FK_");
@@ -184,11 +198,12 @@ public class Ocl2SqlTest {
 			fail("No TransformationException throw, because primary key and foreign key has the same prefix");
 		} catch (Ocl2CodeException e) {
 			if (!(e.getCause() instanceof TransformationException)) {
-				fail("No TransformationException throw, because "+e.getCause().getMessage());
+				fail("No TransformationException throw, because "
+						+ e.getCause().getMessage());
 			}
 		}
 	}
-	
+
 	/**
 	 * Test if no schema created and check the created views.
 	 */
@@ -205,13 +220,14 @@ public class Ocl2SqlTest {
 		} catch (Ocl2CodeException e) {
 			fail("Can't generate sql code");
 		}
-		assertNotNull("No result",result);
-		testStringList(result,expected);
+		assertNotNull("No result", result);
+		testStringList(removeComments(result), expected);
 		String[] files = (new File(sourcePath)).list();
 		assertEquals(1, files.length);
-		testStringList(parseFile(sourcePath+"\\"+files[0]),parseFile(filePath+"solution/view.sql"));
+		testStringList(parseFile(sourcePath + "\\" + files[0]), parseFile(filePath
+				+ "solution/view.sql"));
 	}
-	
+
 	/**
 	 * Test if check the created views and schema.
 	 */
@@ -219,7 +235,7 @@ public class Ocl2SqlTest {
 	public void runTestWithSave() {
 
 		IOcl2DeclSettings settings =
-			Ocl2DeclCodeFactory.getInstance().createOcl2DeclCodeSettings();
+				Ocl2DeclCodeFactory.getInstance().createOcl2DeclCodeSettings();
 		settings.setSaveCode(true);
 		List<String> result = null;
 		try {
@@ -227,19 +243,21 @@ public class Ocl2SqlTest {
 		} catch (Ocl2CodeException e) {
 			fail("Can't generate sql code");
 		}
-		assertNotNull("No result",result);
-		testStringList(result,expected);
+		assertNotNull("No result", result);
+		testStringList(removeComments(result), expected);
 		String[] files = (new File(sourcePath)).list();
 		assertEquals(2, files.length);
-		testStringList(parseFile(sourcePath+"\\"+files[0]),parseFile(filePath+"solution/schema.sql"));
-		testStringList(parseFile(sourcePath+"\\"+files[1]),parseFile(filePath+"solution/view.sql"));
+		testStringList(parseFile(sourcePath + "\\" + files[0]), parseFile(filePath
+				+ "solution/schema.sql"));
+		testStringList(parseFile(sourcePath + "\\" + files[1]), parseFile(filePath
+				+ "solution/view.sql"));
 	}
-	
+
 	@Test
 	public void runTestWithSaveAndOtherParameter() {
 
 		IOcl2DeclSettings settings =
-			Ocl2DeclCodeFactory.getInstance().createOcl2DeclCodeSettings();
+				Ocl2DeclCodeFactory.getInstance().createOcl2DeclCodeSettings();
 		settings.setSaveCode(true);
 		settings.setTablePrefix("TB_");
 		settings.setObjectViewPrefix("O_");
@@ -253,27 +271,33 @@ public class Ocl2SqlTest {
 		}
 		String[] files = (new File(sourcePath)).list();
 		assertEquals(2, files.length);
-		testStringList(parseFile(sourcePath+"\\"+files[0]),parseFile(filePath+"solution/schema_para.sql"));
-		testStringList(parseFile(sourcePath+"\\"+files[1]),parseFile(filePath+"solution/view_para.sql"));
+		testStringList(parseFile(sourcePath + "\\" + files[0]), parseFile(filePath
+				+ "solution/schema_para.sql"));
+		testStringList(parseFile(sourcePath + "\\" + files[1]), parseFile(filePath
+				+ "solution/view_para.sql"));
 	}
-	
+
 	private static List<String> parseFile(String file) {
+
 		List<String> retValue = new ArrayList<String>();
 		try {
 			BufferedReader in = new BufferedReader(new FileReader(file));
 			String zeile = null;
 			String temp = null;
 			while ((zeile = in.readLine()) != null) {
-				if (zeile.startsWith("--")) continue;
+				if (zeile.startsWith("--"))
+					continue;
 				if (temp == null) {
 					temp = zeile;
-				} else if (zeile.equals("")) {
+				}
+				else if (zeile.equals("")) {
 					retValue.add(temp);
 					temp = null;
-				} else {
-					temp += "\n"+zeile;
 				}
-				
+				else {
+					temp += "\n" + zeile;
+				}
+
 			}
 			retValue.add(temp);
 			in.close();
@@ -282,5 +306,25 @@ public class Ocl2SqlTest {
 		}
 
 		return retValue;
+	}
+
+	private String removeComment(String view) {
+
+		String result = "";
+		for (String s : Arrays.asList(view.split("\n"))) {
+			if (s.startsWith("--"))
+				continue;
+			result += s + "\n";
+		}
+		return result.trim();
+	}
+
+	private List<String> removeComments(List<String> views) {
+
+		List<String> result = new ArrayList<String>();
+		for (String s : views) {
+			result.add(removeComment(s));
+		}
+		return result;
 	}
 }

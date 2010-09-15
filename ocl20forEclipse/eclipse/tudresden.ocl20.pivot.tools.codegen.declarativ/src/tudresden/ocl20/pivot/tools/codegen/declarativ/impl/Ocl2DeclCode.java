@@ -66,6 +66,7 @@ import tudresden.ocl20.pivot.pivotmodel.Constraint;
 import tudresden.ocl20.pivot.pivotmodel.ConstraintKind;
 import tudresden.ocl20.pivot.pivotmodel.Operation;
 import tudresden.ocl20.pivot.pivotmodel.PrimitiveType;
+import tudresden.ocl20.pivot.pivotmodel.PrimitiveTypeKind;
 import tudresden.ocl20.pivot.pivotmodel.Property;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 import tudresden.ocl20.pivot.tools.codegen.declarativ.IOcl2DeclCode;
@@ -208,8 +209,9 @@ public class Ocl2DeclCode extends ExpressionsSwitch<String> implements
 
 			String aResult = this.transformFragmentCode(aConstraint);
 
-			if (aResult == null) continue;
-			
+			if (aResult == null)
+				continue;
+
 			result.add(aResult);
 		}
 
@@ -241,15 +243,14 @@ public class Ocl2DeclCode extends ExpressionsSwitch<String> implements
 		}
 		// no else.
 
-		//Check of generated Constraint Types:
+		// Check of generated Constraint Types:
 		if (aConstraint.getKind() != ConstraintKind.INVARIANT) {
 			return null;
 		}
-			
-		
+
 		String result;
 		EObject anExpression;
-		
+
 		anExpression = (EObject) aConstraint.getSpecification();
 		result = this.doSwitch(anExpression);
 
@@ -388,6 +389,14 @@ public class Ocl2DeclCode extends ExpressionsSwitch<String> implements
 		String bodyExpression =
 				this.doSwitch((EObject) anExpressionInOcl.getBodyExpression());
 
+		ITemplate comment =
+				mySettings.getTemplateGroup().getTemplate("constraint_comment");
+		comment.setAttribute("context", anExpressionInOcl.getContext().getType()
+				.getName());
+		comment.setAttribute("expression",
+				anExpressionInOcl.getBody().replace("\r\n ", "").replace(" \r\n", "")
+						.replace("\r\n", ""));
+
 		ITemplate template =
 				mySettings.getTemplateGroup().getTemplate("constraint_body");
 		template.setAttribute("constraint_name", constraintName);
@@ -401,7 +410,7 @@ public class Ocl2DeclCode extends ExpressionsSwitch<String> implements
 		}
 		// no else.
 
-		return template.toString();
+		return comment.toString() + "\n" + template.toString();
 	}
 
 	/*
@@ -742,8 +751,8 @@ public class Ocl2DeclCode extends ExpressionsSwitch<String> implements
 		else if (operationName.equals("allInstances")) {
 			List<Guide> guides =
 					assignClassGuide(anOperationCallExp, anOperationCallExp.getType()); // create
-																																							// Guide
-																																							// object
+			// Guide
+			// object
 			// to the return
 			// value of
 			// allInstances for
@@ -1853,19 +1862,16 @@ public class Ocl2DeclCode extends ExpressionsSwitch<String> implements
 		}
 
 		if (attrType instanceof PrimitiveType) {
-			if (attrType.getName().equals("Boolean")) {
+			if (((PrimitiveType) attrType).getKind() == PrimitiveTypeKind.BOOLEAN) {
 				templateName.append("boolean");
 			}
-			else if (attrType.getName().equals("Enumeration")) {
-				templateName.append("enumeration");
-			}
-			else if (attrType.getName().equals("Integer")) {
+			else if (((PrimitiveType) attrType).getKind() == PrimitiveTypeKind.INTEGER) {
 				templateName.append("integer");
 			}
-			else if (attrType.getName().equals("Real")) {
+			else if (((PrimitiveType) attrType).getKind() == PrimitiveTypeKind.REAL) {
 				templateName.append("real");
 			}
-			else if (attrType.getName().equals("String")) {
+			else if (((PrimitiveType) attrType).getKind() == PrimitiveTypeKind.STRING) {
 				templateName.append("string");
 			}
 			else {
@@ -2225,7 +2231,22 @@ public class Ocl2DeclCode extends ExpressionsSwitch<String> implements
 				featureName = ac.getReferredProperty().getName();
 				startType = tmpNext.getType().getName();
 				IMappedClass ic = this.mySettings.getMappedModel().getClass(startType);
+				boolean findAssociation = false;
 				if (ac.getReferredProperty() instanceof AssociationProperty) {
+					findAssociation = true;
+				}
+				else if (ac.getReferredProperty().getType() instanceof CollectionType) {
+					findAssociation =
+							mySettings.getMappedModel().isClass(
+									((CollectionType) ac.getReferredProperty().getType())
+											.getElementType().getName());
+				}
+				else {
+					findAssociation =
+							mySettings.getMappedModel().isClass(
+									ac.getReferredProperty().getType().getName());
+				}
+				if (findAssociation) {
 					guide = ic.getAssociationEndGuide(featureName);
 				}
 				else

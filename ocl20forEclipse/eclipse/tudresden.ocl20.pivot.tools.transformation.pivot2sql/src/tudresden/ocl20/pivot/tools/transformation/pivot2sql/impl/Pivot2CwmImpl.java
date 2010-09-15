@@ -46,8 +46,8 @@ import tudresden.ocl20.pivot.tools.transformation.pivot2sql.util.CwmModelAnalyse
 import tudresden.ocl20.pivot.tools.transformation.pivot2sql.util.PivotModelAnalyser;
 
 /**
- * The class Uml2CwmImpl realises the transformation of an instance of the Uml
- * Metamodel into an instance of the CWM Metamodel. The Implementation contains
+ * The class Pivot2CwmImpl realises the transformation of an instance of the
+ * pivotmodel into an instance of the CWM Metamodel. The Implementation contains
  * the objectrelational mapping.
  * 
  * @author Christian Wende
@@ -130,19 +130,24 @@ public class Pivot2CwmImpl extends
 		this.cwmModelAnalyser = new CwmModelAnalyser(out);
 
 		/** CHECK SETTINGS **/
-		if (!((this.settings.getModus() == IOcl2DeclSettings.MODUS_TYPED) || (this.settings.getModus() == IOcl2DeclSettings.MODUS_VERTICAL))) {
-			throw new TransformationException("No modus set.",this);
+		if (!((this.settings.getModus() == IOcl2DeclSettings.MODUS_TYPED) || (this.settings
+				.getModus() == IOcl2DeclSettings.MODUS_VERTICAL))) {
+			throw new TransformationException("No modus set.", this);
 		}
 		if (this.settings.getPrimaryKeyPrefix().equals("")) {
-			throw new TransformationException("No primary key prefix set.",this);
+			throw new TransformationException("No primary key prefix set.", this);
 		}
-		if (this.settings.getPrimaryKeyPrefix().equals(this.settings.getForeignKeyPrefix())) {
-			throw new TransformationException("Primary Key and Foreign Key prefix equals",this);
-		} 
-		if (this.settings.getTablePrefix().equals(this.settings.getObjectViewPrefix())) {
-			throw new TransformationException("Table and ObjectView prefix equal", this);
+		if (this.settings.getPrimaryKeyPrefix().equals(
+				this.settings.getForeignKeyPrefix())) {
+			throw new TransformationException(
+					"Primary Key and Foreign Key prefix equals", this);
 		}
-		
+		if (this.settings.getTablePrefix().equals(
+				this.settings.getObjectViewPrefix())) {
+			throw new TransformationException("Table and ObjectView prefix equal",
+					this);
+		}
+
 		/** HELPERS **/
 
 		typename2table = new HashMap<String, Table>();
@@ -171,7 +176,7 @@ public class Pivot2CwmImpl extends
 		for (AssociationProperty association : associations) {
 			if (filterAssociation.contains(association))
 				continue;
-			map_property2keyRelationship(association);
+			map_associationProperty2keyRelationship(association);
 			filterAssociation.addAll(association.getInverseAssociationProperties());
 		}
 
@@ -213,16 +218,14 @@ public class Pivot2CwmImpl extends
 	}
 
 	private void map_property2column(Property property)
-			throws TransformationException {
+			throws TransformationException, InvalidModelException {
 
-		/** INITIALISATION PHASE **/
 		if (!(property instanceof AssociationProperty)) {
 			String name = property.getName();
 			Type type = property.getType();
 			Type owningType = (Type) property.getOwner();
 			Table owningTable = typename2table.get(owningType.getName());
 
-			/** MAPPING PHASE **/
 			if (LOGGER.isDebugEnabled()) {
 				LOGGER.debug("Mapping attribute " + property.getName()
 						+ " to a column of type " + type.getName() + " in Table "
@@ -231,6 +234,9 @@ public class Pivot2CwmImpl extends
 
 			if (pivotModelAnalyser.isPrimitive(type)) {
 				create_Column(name, owningTable, create_SQLSimpleType(type.getName()));
+			}
+			else if (this.isAssociation(property)) {
+				map_property2keyRelationship(property, type, owningType);
 			}
 			else if (type instanceof CollectionType) {
 				create_Column(name, owningTable, create_SQLSimpleType("String"));
@@ -242,8 +248,34 @@ public class Pivot2CwmImpl extends
 		}
 	}
 
-	private void map_property2keyRelationship(AssociationProperty property)
-			throws InvalidModelException {
+	private void map_property2keyRelationship(Property property, Type type,
+			Type owningType) throws InvalidModelException {
+
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER
+					.debug("Mapping association "
+							+ property.getName()
+							+ " between "
+							+ owningType.getName()
+							+ " and "
+							+ type.getName()
+							+ " by putting a Foreign Key to the PrimaryKey of each side into the opposite site");
+		}
+
+		String name = property.getName();
+		if (type instanceof CollectionType) {
+			map_MtoN_Association2KeyRelationship(
+					((CollectionType) type).getElementType(), ((CollectionType) type)
+							.getElementType().getName(), owningType, owningType.getName(),
+					settings.getUniqueAssociationTableName(property));
+		}
+		else {
+			map_1toN_Association2KeyRelationship(type, name, owningType, null);
+		}
+	}
+
+	private void map_associationProperty2keyRelationship(
+			AssociationProperty property) throws InvalidModelException {
 
 		/** TRACING **/
 		if (LOGGER.isDebugEnabled()) {
@@ -407,8 +439,9 @@ public class Pivot2CwmImpl extends
 		boolean hasSubTypes = subTypes.size() > 0;
 
 		/** MAPPING PHASE **/
-		if (!hasSuperTypes) { // if generalisation root is found the persitent table
-													// can be created
+		if (!hasSuperTypes) { // if generalisation root is found the persitent
+			// table
+			// can be created
 			if (LOGGER.isDebugEnabled()) {
 				LOGGER.debug("Mapping Type " + typename + " to persitent table "
 						+ tablename
@@ -419,8 +452,9 @@ public class Pivot2CwmImpl extends
 
 			create_PrimaryKey(pkname, table);
 
-			if (hasSubTypes) { // if subTypes exists the must be a column to distinct
-													// the different object types
+			if (hasSubTypes) { // if subTypes exists the must be a column to
+				// distinct
+				// the different object types
 				if (LOGGER.isDebugEnabled()) {
 					LOGGER.debug("Creating a type column to discint subtypes of Type "
 							+ typename + "in persistent table " + tablename + ".");
@@ -460,7 +494,8 @@ public class Pivot2CwmImpl extends
 
 		pks.add(pkname);
 
-		// The view contains all attributes and associations of supeTypes and the
+		// The view contains all attributes and associations of supeTypes and
+		// the
 		// actual class and
 		// the primary key of the generalisation root.
 		for (Type forType : superTypes) {
@@ -468,11 +503,14 @@ public class Pivot2CwmImpl extends
 			Table table = typename2table.get(classname);
 			String tableName = table.getName();
 			for (Property a : query_propertyForType(forType)) {
+				if (isAssociation(a))
+					continue;
 				// add attributes of superTypes
 				columns.add(create_Property(tableName, a.getName(), true));
 			}
 			for (String fk : typename2fknames.get(forType.getName())) {
-				// add fks for associations and attributes that refer to internal types
+				// add fks for associations and attributes that refer to
+				// internal types
 				fks.add(fk);
 			}
 
@@ -576,6 +614,8 @@ public class Pivot2CwmImpl extends
 		Table subClassTable = typename2table.get(type.getName());
 		String subTypeTableName = subClassTable.getName();
 		for (Property a : query_propertyForType(type)) {
+			if (isAssociation(a))
+				continue;
 			// add attributes
 			columns.add(create_Property(subTypeTableName, a.getName(), true));
 		}
@@ -598,6 +638,8 @@ public class Pivot2CwmImpl extends
 				Table table = typename2table.get(superType.getName());
 				String tableName = table.getName();
 				for (Property a : query_propertyForType(superType)) {
+					if (isAssociation(a))
+						continue;
 					// add attributes of superTypes
 					columns.add(create_Property(tableName, a.getName(), true));
 				}
@@ -605,7 +647,8 @@ public class Pivot2CwmImpl extends
 					// add fks for associations of superclass
 					fks.add(create_Property(tableName, fk, true));
 				}
-				// add where statement to join this class with its superclass over the
+				// add where statement to join this class with its superclass
+				// over the
 				// generalisation key
 				String pkname = query_pkForTable(table).getName();
 				String ref_name = pkname;
@@ -771,6 +814,20 @@ public class Pivot2CwmImpl extends
 		template.setAttribute("columnname", columnname);
 		template.setAttribute("asname", asname);
 		return template.toString();
+	}
+
+	private boolean isAssociation(Property property) {
+
+		if (property.getType() instanceof CollectionType) {
+			if (typename2table.containsKey(((CollectionType) property.getType())
+					.getElementType().getName())) {
+				return true;
+			}
+		}
+		else if (typename2table.containsKey(property.getType().getName())) {
+			return true;
+		}
+		return false;
 	}
 
 	private List<Type> query_supertypesForType(Type type, boolean recurse) {

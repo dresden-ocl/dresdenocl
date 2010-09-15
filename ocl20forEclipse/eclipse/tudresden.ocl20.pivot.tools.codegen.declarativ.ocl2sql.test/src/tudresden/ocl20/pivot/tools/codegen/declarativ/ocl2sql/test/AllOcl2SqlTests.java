@@ -24,7 +24,6 @@ import org.junit.runners.Suite;
 
 import tudresden.ocl20.pivot.tools.codegen.declarativ.ocl2sql.test.tests.Ocl2SqlTest;
 
-
 /**
  * <p>
  * Provides a jUnit Test Suite containing all plug-in tests of the OCL 2 Java
@@ -35,9 +34,7 @@ import tudresden.ocl20.pivot.tools.codegen.declarativ.ocl2sql.test.tests.Ocl2Sql
  * 
  */
 @RunWith(Suite.class)
-@Suite.SuiteClasses( {
-	Ocl2SqlTest.class
-})
+@Suite.SuiteClasses({ Ocl2SqlTest.class })
 public class AllOcl2SqlTests {
 	/*
 	 * This class remains completely empty, being used only as a holder for the

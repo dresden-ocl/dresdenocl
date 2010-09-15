@@ -39,22 +39,17 @@ import tudresden.ocl20.pivot.tools.transformation.pivot2sql.test.tests.Pivot2Map
 
 /**
  * This TestSuite runs all Tests testing the package
- * <code>tudresden.ocl20.pivot.tools.transformation.pivot2sql</code> and its subpackages
- * of the Dresden OCL2 Toolkit
+ * <code>tudresden.ocl20.pivot.tools.transformation.pivot2sql</code> and its
+ * subpackages of the Dresden OCL2 Toolkit
  * 
  * @author Bjoern Freitag
- *
+ * 
  */
 @RunWith(Suite.class)
-@Suite.SuiteClasses({
-	Pivot2MappedModelTest.class,
-	Pivot2CWMtypedTest.class,
-	Pivot2CWMverticalTest.class,
-	CWM2DdlTest.class,
-	Pivot2DdlTest.class,
-	Pivot2DdlAndMappedModelTest.class
-})
+@Suite.SuiteClasses({ Pivot2MappedModelTest.class, Pivot2CWMtypedTest.class,
+		Pivot2CWMverticalTest.class, CWM2DdlTest.class, Pivot2DdlTest.class,
+		Pivot2DdlAndMappedModelTest.class })
 public class AllTestsPivot2Sql {
-    // this class remains completely empty, 
-    // being used only as a holder for the above annotations
+	// this class remains completely empty,
+	// being used only as a holder for the above annotations
 }

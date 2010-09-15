@@ -48,7 +48,7 @@ public abstract class TransformCodeWizard extends Wizard implements INewWizard {
 
 	/** The code generator associated with this wizard. */
 	protected IOcl2Code<?> myCodeGenerator;
-	
+
 	/** The icon in the top right corner. */
 	private static final String wizardImage = "icons/transform_wizard.png";
 

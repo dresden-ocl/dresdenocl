@@ -197,9 +197,7 @@ public class Ocl2DeclSettings implements IOcl2DeclSettings {
 			assName = assName.substring(1);
 		}
 		else {
-			resultList.remove(0);
-			assName =
-					resultList.remove(0) + delimiter + property.getOwner().getName();
+			assName = property.getOwner().getName() + delimiter + resultList.get(0);
 		}
 		int i = 0;
 		String result = assName;

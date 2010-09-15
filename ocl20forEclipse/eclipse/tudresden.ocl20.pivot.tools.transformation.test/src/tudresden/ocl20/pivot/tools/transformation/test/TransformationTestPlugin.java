@@ -16,7 +16,8 @@ import tudresden.ocl20.logging.LoggingPlugin;
 public class TransformationTestPlugin extends Plugin {
 
 	/** The plug-in ID. */
-	public static final String ID = "tudresden.ocl20.pivot.tools.transformation.test"; //$NON-NLS-1$
+	public static final String ID =
+			"tudresden.ocl20.pivot.tools.transformation.test"; //$NON-NLS-1$
 
 	/** The shared instance. */
 	private static TransformationTestPlugin plugin;
@@ -27,6 +28,7 @@ public class TransformationTestPlugin extends Plugin {
 	 * </p>
 	 */
 	public TransformationTestPlugin() {
+
 		plugin = this;
 	}
 
