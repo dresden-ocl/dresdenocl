@@ -385,7 +385,7 @@ public class UML2Model extends AbstractModel implements IModel {
 					for (Package umlPackage : ((Model) eObject)
 							.getNestedPackages()) {
 						Namespace adaptedNamespace = this.factory
-								.createNamespace(umlPackage);
+								.createNamespace(umlPackage, this.rootNamespace);
 						if (adaptedNamespace != null)
 							this.rootNamespace
 									.addNestedNamespace(adaptedNamespace);
@@ -412,7 +412,7 @@ public class UML2Model extends AbstractModel implements IModel {
 					for (Package umlPackage : ((Profile) eObject)
 							.getNestedPackages()) {
 						Namespace adaptedNamespace = this.factory
-								.createNamespace(umlPackage);
+								.createNamespace(umlPackage, this.rootNamespace);
 						if (adaptedNamespace != null)
 							this.rootNamespace
 									.addNestedNamespace(adaptedNamespace);
@@ -432,7 +432,7 @@ public class UML2Model extends AbstractModel implements IModel {
 
 				else if (eObject instanceof Package) {
 					Namespace adaptedNamespace = this.factory
-							.createNamespace((Package) eObject);
+							.createNamespace((Package) eObject, this.rootNamespace);
 					if (adaptedNamespace != null)
 						this.rootNamespace.addNestedNamespace(adaptedNamespace);
 					// no else.
