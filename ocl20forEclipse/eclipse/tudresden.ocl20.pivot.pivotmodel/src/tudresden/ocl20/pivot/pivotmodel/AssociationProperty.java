@@ -139,4 +139,12 @@ public interface AssociationProperty extends Property {
 	 */
 	void addAssociations(List<AssociationProperty> bProperty);
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation" dataType="tudresden.ocl20.pivot.datatypes.Boolean"
+	 * @generated
+	 */
+	boolean isNavigable();
+
 } // AssociationProperty

@@ -186,11 +186,12 @@ public class UML2AdapterFactory {
 		else {
 			UML2Package umlPackageResult;
 
+			//TODO: remove because if/else
 			/* Check if the dsl package is null. */
-			if (dslPackage == null) {
-				throw new IllegalArgumentException(
-						"The Package to be adpated cannot be null.");
-			}
+			//if (dslPackage == null) {
+			//	throw new IllegalArgumentException(
+			//			"The Package to be adpated cannot be null.");
+			//}
 			// no else.
 
 			/* Probably reuse or merge with other package. */
@@ -834,13 +835,15 @@ public class UML2AdapterFactory {
 		boolean allArentNavigable;
 
 		List<AssociationProperty> adaptedAssociations = new LinkedList<AssociationProperty>();
-		List<AssociationProperty> navigableAssociations = new LinkedList<AssociationProperty>();
 
 		/* Check if all properties aren't navigable. */
 		allArentNavigable = true;
-		
+		int size = 0;
+
 		for (org.eclipse.uml2.uml.Property aProperty : properties) {
 			allArentNavigable &= !aProperty.isNavigable();
+			if (aProperty.isNavigable())
+				++size;
 		}
 		// end for.
 
@@ -851,7 +854,8 @@ public class UML2AdapterFactory {
 		if (allArentNavigable) {
 			for (org.eclipse.uml2.uml.Property aProperty : properties) {
 
-				adaptedAssociations.addAll(this.addAllOtherAssciationEnds(aProperty, properties));
+				adaptedAssociations.addAll(this.addAllOtherAssociationEnds(
+						aProperty, properties, true));
 			}
 			// end for.
 		}
@@ -863,9 +867,11 @@ public class UML2AdapterFactory {
 		else {
 			for (org.eclipse.uml2.uml.Property aProperty : properties) {
 				if (aProperty.isNavigable()) {
-					adaptedAssociations.addAll(this.addAllOtherAssciationEnds(aProperty, properties));
-					navigableAssociations.add(this.createAssociationProperty(aProperty));
-				} 
+
+
+					adaptedAssociations.addAll(this.addAllOtherAssociationEnds(
+							aProperty, properties, (size > 1)));
+				}
 				// no else.
 			}
 			// end for.
@@ -877,7 +883,6 @@ public class UML2AdapterFactory {
 		 */
 		for (AssociationProperty prop : adaptedAssociations) {
 			prop.addAssociations(adaptedAssociations);
-			prop.addAssociations(navigableAssociations);
 		}
 		// end for.
 		
@@ -896,14 +901,15 @@ public class UML2AdapterFactory {
 	 * @param allProperties
 	 *            The {@link List} of {@link org.eclipse.uml2.uml.Property}s
 	 *            which shall be added.
-	 * @param nDirectional
+	 * @param association
 	 *            If the parameter true, then created
 	 *            {@link AssociationProperty}s, otherwise {@link Property}s.
 	 * @return a list of all added {@link AssociationProperty}s.
 	 */
-	private List<AssociationProperty> addAllOtherAssciationEnds(
+	private List<AssociationProperty> addAllOtherAssociationEnds(
 			org.eclipse.uml2.uml.Property anOwner,
-			List<org.eclipse.uml2.uml.Property> allProperties) {
+			List<org.eclipse.uml2.uml.Property> allProperties,
+			boolean association) {
 
 		List<AssociationProperty> result = new LinkedList<AssociationProperty>();
 		
@@ -912,14 +918,22 @@ public class UML2AdapterFactory {
 			/* Do not add the property to itself, but to all other properties. */
 			if (anOwner != aProperty) {
 				tudresden.ocl20.pivot.pivotmodel.Type ownerType;
-				tudresden.ocl20.pivot.pivotmodel.AssociationProperty adaptedProperty;
+				tudresden.ocl20.pivot.pivotmodel.Property adaptedProperty;
 
 				/* Create or get the owner's Type. */
 				ownerType = this.createType(anOwner.getType());
 
 				/* Create or get the property. */
-				adaptedProperty = this.createAssociationProperty(aProperty);
-				result.add(adaptedProperty);
+				if (association) {
+					adaptedProperty = this
+							.createAssociationProperty(aProperty);
+					result.add((AssociationProperty) adaptedProperty);
+				}
+
+				else {
+					adaptedProperty = this.createProperty(aProperty);
+				}
+
 				/*
 				 * Check if the property has already been added (could happen
 				 * for bidirectional associations between the same type).

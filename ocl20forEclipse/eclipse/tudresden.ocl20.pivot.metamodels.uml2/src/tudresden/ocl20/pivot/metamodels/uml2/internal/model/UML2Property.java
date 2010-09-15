@@ -38,9 +38,9 @@ public class UML2Property extends AbstractProperty implements Property {
 	 * the adapted org.eclipse.uml2.uml.Property data type
 	 * </p>
 	 * 
-	 * @generated
+	 * @generated NOT
 	 */
-	private org.eclipse.uml2.uml.Property dslProperty;
+	protected org.eclipse.uml2.uml.Property dslProperty;
 
 	/**
 	 * <p>

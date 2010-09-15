@@ -262,8 +262,8 @@ public enum ConstraintKind implements Enumerator {
 	 * @generated
 	 */
 	private static final ConstraintKind[] VALUES_ARRAY = new ConstraintKind[] {
-			INVARIANT, DEFINITION, PRECONDITION, POSTCONDITION, INITIAL, DERIVED,
-			BODY, };
+			INVARIANT, DEFINITION, PRECONDITION, POSTCONDITION, INITIAL,
+			DERIVED, BODY, };
 
 	/**
 	 * A public read-only list of all the '<em><b>Constraint Kind</b></em>' enumerators.

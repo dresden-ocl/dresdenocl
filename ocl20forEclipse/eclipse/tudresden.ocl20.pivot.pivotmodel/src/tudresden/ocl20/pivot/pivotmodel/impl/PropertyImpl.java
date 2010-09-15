@@ -132,13 +132,15 @@ public class PropertyImpl extends FeatureImpl implements Property {
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newOwningType != null)
 				msgs = ((InternalEObject) newOwningType).eInverseAdd(this,
-						PivotModelPackage.TYPE__OWNED_PROPERTY, Type.class, msgs);
+						PivotModelPackage.TYPE__OWNED_PROPERTY, Type.class,
+						msgs);
 			msgs = basicSetOwningType(newOwningType, msgs);
 			if (msgs != null)
 				msgs.dispatch();
 		} else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
-					PivotModelPackage.PROPERTY__OWNING_TYPE, newOwningType, newOwningType));
+					PivotModelPackage.PROPERTY__OWNING_TYPE, newOwningType,
+					newOwningType));
 	}
 
 	/**
@@ -194,8 +196,8 @@ public class PropertyImpl extends FeatureImpl implements Property {
 	 * @generated
 	 */
 	@Override
-	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID,
-			NotificationChain msgs) {
+	public NotificationChain eInverseAdd(InternalEObject otherEnd,
+			int featureID, NotificationChain msgs) {
 		switch (featureID) {
 		case PivotModelPackage.PROPERTY__OWNING_TYPE:
 			if (eInternalContainer() != null)

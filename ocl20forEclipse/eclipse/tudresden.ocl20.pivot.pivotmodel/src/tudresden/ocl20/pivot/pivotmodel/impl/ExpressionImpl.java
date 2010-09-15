@@ -160,7 +160,8 @@ public class ExpressionImpl extends EObjectImpl implements Expression {
 		language = newLanguage;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
-					PivotModelPackage.EXPRESSION__LANGUAGE, oldLanguage, language));
+					PivotModelPackage.EXPRESSION__LANGUAGE, oldLanguage,
+					language));
 	}
 
 	/**
@@ -198,9 +199,9 @@ public class ExpressionImpl extends EObjectImpl implements Expression {
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newConstraint != null)
-				msgs = ((InternalEObject) newConstraint)
-						.eInverseAdd(this, PivotModelPackage.CONSTRAINT__SPECIFICATION,
-								Constraint.class, msgs);
+				msgs = ((InternalEObject) newConstraint).eInverseAdd(this,
+						PivotModelPackage.CONSTRAINT__SPECIFICATION,
+						Constraint.class, msgs);
 			msgs = basicSetConstraint(newConstraint, msgs);
 			if (msgs != null)
 				msgs.dispatch();
@@ -215,8 +216,8 @@ public class ExpressionImpl extends EObjectImpl implements Expression {
 	 * @generated
 	 */
 	@Override
-	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID,
-			NotificationChain msgs) {
+	public NotificationChain eInverseAdd(InternalEObject otherEnd,
+			int featureID, NotificationChain msgs) {
 		switch (featureID) {
 		case PivotModelPackage.EXPRESSION__CONSTRAINT:
 			if (eInternalContainer() != null)
@@ -250,7 +251,8 @@ public class ExpressionImpl extends EObjectImpl implements Expression {
 		switch (eContainerFeatureID()) {
 		case PivotModelPackage.EXPRESSION__CONSTRAINT:
 			return eInternalContainer().eInverseRemove(this,
-					PivotModelPackage.CONSTRAINT__SPECIFICATION, Constraint.class, msgs);
+					PivotModelPackage.CONSTRAINT__SPECIFICATION,
+					Constraint.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -320,10 +322,11 @@ public class ExpressionImpl extends EObjectImpl implements Expression {
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 		case PivotModelPackage.EXPRESSION__BODY:
-			return BODY_EDEFAULT == null ? body != null : !BODY_EDEFAULT.equals(body);
+			return BODY_EDEFAULT == null ? body != null : !BODY_EDEFAULT
+					.equals(body);
 		case PivotModelPackage.EXPRESSION__LANGUAGE:
-			return LANGUAGE_EDEFAULT == null ? language != null : !LANGUAGE_EDEFAULT
-					.equals(language);
+			return LANGUAGE_EDEFAULT == null ? language != null
+					: !LANGUAGE_EDEFAULT.equals(language);
 		case PivotModelPackage.EXPRESSION__CONSTRAINT:
 			return getConstraint() != null;
 		}

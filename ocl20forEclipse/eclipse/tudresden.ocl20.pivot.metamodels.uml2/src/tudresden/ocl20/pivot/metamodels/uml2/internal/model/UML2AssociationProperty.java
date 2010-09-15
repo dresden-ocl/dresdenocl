@@ -53,7 +53,6 @@ public class UML2AssociationProperty extends UML2Property implements Association
 	public UML2AssociationProperty(org.eclipse.uml2.uml.Property dslProperty, UML2AdapterFactory factory) {
 
 		super(dslProperty, factory);
-		
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("UML2AssociationProperty(dslProperty=" + dslProperty + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
@@ -128,5 +127,9 @@ public class UML2AssociationProperty extends UML2Property implements Association
 		for (AssociationProperty prob : bProperty) {
 			addAssociation(prob);
 		}
+	}
+
+	public boolean isNavigable() {
+		return dslProperty.isNavigable();
 	}
 }

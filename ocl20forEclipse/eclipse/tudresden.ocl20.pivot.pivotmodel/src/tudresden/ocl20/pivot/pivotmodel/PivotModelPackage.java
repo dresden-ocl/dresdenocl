@@ -2661,7 +2661,8 @@ public interface PivotModelPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference TYPE__GENERIC_SUPER_TYPE = eINSTANCE.getType_GenericSuperType();
+		EReference TYPE__GENERIC_SUPER_TYPE = eINSTANCE
+				.getType_GenericSuperType();
 
 		/**
 		 * The meta object literal for the '{@link tudresden.ocl20.pivot.pivotmodel.impl.PrimitiveTypeImpl <em>Primitive Type</em>}' class.
@@ -3006,7 +3007,8 @@ public interface PivotModelPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference EXPRESSION__CONSTRAINT = eINSTANCE.getExpression_Constraint();
+		EReference EXPRESSION__CONSTRAINT = eINSTANCE
+				.getExpression_Constraint();
 
 		/**
 		 * The meta object literal for the '{@link tudresden.ocl20.pivot.pivotmodel.impl.AssociationPropertyImpl <em>Association Property</em>}' class.

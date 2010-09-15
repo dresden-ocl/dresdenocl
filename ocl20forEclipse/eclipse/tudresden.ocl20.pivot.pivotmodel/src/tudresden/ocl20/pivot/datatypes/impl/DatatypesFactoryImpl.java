@@ -193,7 +193,8 @@ public class DatatypesFactoryImpl extends EFactoryImpl implements
 	 * @generated NOT
 	 */
 	@SuppressWarnings("unused")
-	public String convertIntegerToString(EDataType eDataType, Object instanceValue) {
+	public String convertIntegerToString(EDataType eDataType,
+			Object instanceValue) {
 
 		return instanceValue == null ? null : instanceValue.toString();
 	}
@@ -216,7 +217,8 @@ public class DatatypesFactoryImpl extends EFactoryImpl implements
 	 * @generated NOT
 	 */
 	@SuppressWarnings("unused")
-	public String convertBooleanToString(EDataType eDataType, Object instanceValue) {
+	public String convertBooleanToString(EDataType eDataType,
+			Object instanceValue) {
 
 		return instanceValue == null ? null : instanceValue.toString();
 	}
@@ -227,7 +229,8 @@ public class DatatypesFactoryImpl extends EFactoryImpl implements
 	 * @generated NOT
 	 */
 	@SuppressWarnings("unused")
-	public String createStringFromString(EDataType eDataType, String initialValue) {
+	public String createStringFromString(EDataType eDataType,
+			String initialValue) {
 
 		return initialValue;
 	}
@@ -238,7 +241,8 @@ public class DatatypesFactoryImpl extends EFactoryImpl implements
 	 * @generated NOT
 	 */
 	@SuppressWarnings("unused")
-	public String convertStringToString(EDataType eDataType, Object instanceValue) {
+	public String convertStringToString(EDataType eDataType,
+			Object instanceValue) {
 
 		return (String) instanceValue;
 	}

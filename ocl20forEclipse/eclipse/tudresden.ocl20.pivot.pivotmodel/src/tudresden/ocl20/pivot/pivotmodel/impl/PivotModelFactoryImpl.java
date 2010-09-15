@@ -146,7 +146,8 @@ public class PivotModelFactoryImpl extends EFactoryImpl implements
 		case PivotModelPackage.PRIMITIVE_TYPE_KIND:
 			return createPrimitiveTypeKindFromString(eDataType, initialValue);
 		case PivotModelPackage.PARAMETER_DIRECTION_KIND:
-			return createParameterDirectionKindFromString(eDataType, initialValue);
+			return createParameterDirectionKindFromString(eDataType,
+					initialValue);
 		case PivotModelPackage.CONSTRAINT_KIND:
 			return createConstraintKindFromString(eDataType, initialValue);
 		default:
@@ -165,7 +166,8 @@ public class PivotModelFactoryImpl extends EFactoryImpl implements
 		case PivotModelPackage.PRIMITIVE_TYPE_KIND:
 			return convertPrimitiveTypeKindToString(eDataType, instanceValue);
 		case PivotModelPackage.PARAMETER_DIRECTION_KIND:
-			return convertParameterDirectionKindToString(eDataType, instanceValue);
+			return convertParameterDirectionKindToString(eDataType,
+					instanceValue);
 		case PivotModelPackage.CONSTRAINT_KIND:
 			return convertConstraintKindToString(eDataType, instanceValue);
 		default:
@@ -316,7 +318,8 @@ public class PivotModelFactoryImpl extends EFactoryImpl implements
 	 */
 	public ParameterDirectionKind createParameterDirectionKindFromString(
 			EDataType eDataType, String initialValue) {
-		ParameterDirectionKind result = ParameterDirectionKind.get(initialValue);
+		ParameterDirectionKind result = ParameterDirectionKind
+				.get(initialValue);
 		if (result == null)
 			throw new IllegalArgumentException(
 					"The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$

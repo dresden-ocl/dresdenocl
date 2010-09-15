@@ -209,7 +209,8 @@ public class ParameterGenericTypeImpl extends GenericTypeImpl implements
 	@Override
 	public ParameterGenericType clone() {
 
-		return initialize(PivotModelFactory.eINSTANCE.createParameterGenericType());
+		return initialize(PivotModelFactory.eINSTANCE
+				.createParameterGenericType());
 	}
 
 	/**

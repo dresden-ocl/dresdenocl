@@ -201,13 +201,15 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newNamespace != null)
 				msgs = ((InternalEObject) newNamespace).eInverseAdd(this,
-						PivotModelPackage.NAMESPACE__OWNED_RULE, Namespace.class, msgs);
+						PivotModelPackage.NAMESPACE__OWNED_RULE,
+						Namespace.class, msgs);
 			msgs = basicSetNamespace(newNamespace, msgs);
 			if (msgs != null)
 				msgs.dispatch();
 		} else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
-					PivotModelPackage.CONSTRAINT__NAMESPACE, newNamespace, newNamespace));
+					PivotModelPackage.CONSTRAINT__NAMESPACE, newNamespace,
+					newNamespace));
 	}
 
 	/**
@@ -228,7 +230,8 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 		specification = newSpecification;
 		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this,
-					Notification.SET, PivotModelPackage.CONSTRAINT__SPECIFICATION,
+					Notification.SET,
+					PivotModelPackage.CONSTRAINT__SPECIFICATION,
 					oldSpecification, newSpecification);
 			if (msgs == null)
 				msgs = notification;
@@ -247,17 +250,19 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 			NotificationChain msgs = null;
 			if (specification != null)
 				msgs = ((InternalEObject) specification).eInverseRemove(this,
-						PivotModelPackage.EXPRESSION__CONSTRAINT, Expression.class, msgs);
+						PivotModelPackage.EXPRESSION__CONSTRAINT,
+						Expression.class, msgs);
 			if (newSpecification != null)
 				msgs = ((InternalEObject) newSpecification).eInverseAdd(this,
-						PivotModelPackage.EXPRESSION__CONSTRAINT, Expression.class, msgs);
+						PivotModelPackage.EXPRESSION__CONSTRAINT,
+						Expression.class, msgs);
 			msgs = basicSetSpecification(newSpecification, msgs);
 			if (msgs != null)
 				msgs.dispatch();
 		} else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
-					PivotModelPackage.CONSTRAINT__SPECIFICATION, newSpecification,
-					newSpecification));
+					PivotModelPackage.CONSTRAINT__SPECIFICATION,
+					newSpecification, newSpecification));
 	}
 
 	/**
@@ -305,7 +310,8 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 		definedFeature = newDefinedFeature;
 		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this,
-					Notification.SET, PivotModelPackage.CONSTRAINT__DEFINED_FEATURE,
+					Notification.SET,
+					PivotModelPackage.CONSTRAINT__DEFINED_FEATURE,
 					oldDefinedFeature, newDefinedFeature);
 			if (msgs == null)
 				msgs = notification;
@@ -324,17 +330,19 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 			NotificationChain msgs = null;
 			if (definedFeature != null)
 				msgs = ((InternalEObject) definedFeature).eInverseRemove(this,
-						PivotModelPackage.FEATURE__SEMANTICS, Feature.class, msgs);
+						PivotModelPackage.FEATURE__SEMANTICS, Feature.class,
+						msgs);
 			if (newDefinedFeature != null)
 				msgs = ((InternalEObject) newDefinedFeature).eInverseAdd(this,
-						PivotModelPackage.FEATURE__SEMANTICS, Feature.class, msgs);
+						PivotModelPackage.FEATURE__SEMANTICS, Feature.class,
+						msgs);
 			msgs = basicSetDefinedFeature(newDefinedFeature, msgs);
 			if (msgs != null)
 				msgs.dispatch();
 		} else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
-					PivotModelPackage.CONSTRAINT__DEFINED_FEATURE, newDefinedFeature,
-					newDefinedFeature));
+					PivotModelPackage.CONSTRAINT__DEFINED_FEATURE,
+					newDefinedFeature, newDefinedFeature));
 	}
 
 	/**
@@ -346,8 +354,7 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 			ConstrainableElement constrainedElement) {
 
 		if (logger.isDebugEnabled()) {
-			logger
-					.debug("addConstrainedElement(constrainedElement=" + constrainedElement + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
+			logger.debug("addConstrainedElement(constrainedElement=" + constrainedElement + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 
 		// use the generated method, not the one which may be overridden by clients
@@ -410,8 +417,8 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 	 * @generated
 	 */
 	@Override
-	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID,
-			NotificationChain msgs) {
+	public NotificationChain eInverseAdd(InternalEObject otherEnd,
+			int featureID, NotificationChain msgs) {
 		switch (featureID) {
 		case PivotModelPackage.CONSTRAINT__NAMESPACE:
 			if (eInternalContainer() != null)
@@ -421,12 +428,14 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 			if (specification != null)
 				msgs = ((InternalEObject) specification).eInverseRemove(this,
 						EOPPOSITE_FEATURE_BASE
-								- PivotModelPackage.CONSTRAINT__SPECIFICATION, null, msgs);
+								- PivotModelPackage.CONSTRAINT__SPECIFICATION,
+						null, msgs);
 			return basicSetSpecification((Expression) otherEnd, msgs);
 		case PivotModelPackage.CONSTRAINT__DEFINED_FEATURE:
 			if (definedFeature != null)
 				msgs = ((InternalEObject) definedFeature).eInverseRemove(this,
-						PivotModelPackage.FEATURE__SEMANTICS, Feature.class, msgs);
+						PivotModelPackage.FEATURE__SEMANTICS, Feature.class,
+						msgs);
 			return basicSetDefinedFeature((Feature) otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
@@ -460,7 +469,8 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 		switch (eContainerFeatureID()) {
 		case PivotModelPackage.CONSTRAINT__NAMESPACE:
 			return eInternalContainer().eInverseRemove(this,
-					PivotModelPackage.NAMESPACE__OWNED_RULE, Namespace.class, msgs);
+					PivotModelPackage.NAMESPACE__OWNED_RULE, Namespace.class,
+					msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}

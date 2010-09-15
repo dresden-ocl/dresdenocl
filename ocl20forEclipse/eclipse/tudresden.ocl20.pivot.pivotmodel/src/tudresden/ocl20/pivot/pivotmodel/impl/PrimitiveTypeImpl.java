@@ -243,7 +243,8 @@ public class PrimitiveTypeImpl extends TypeImpl implements PrimitiveType {
 	public String toString() {
 
 		return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
-				.appendToString(super.toString()).append("kind", getKind()).toString(); //$NON-NLS-1$
+				.appendToString(super.toString())
+				.append("kind", getKind()).toString(); //$NON-NLS-1$
 	}
 
 	@Override

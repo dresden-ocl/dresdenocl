@@ -649,6 +649,7 @@
       </eAnnotations>
       <eParameters name="bProperty" upperBound="-1" eType="#//AssociationProperty"/>
     </eOperations>
+    <eOperations name="isNavigable" eType="ecore:EDataType datatypes.ecore#//Boolean"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="inverseAssociationProperties"
         upperBound="-1" eType="#//AssociationProperty" containment="true"/>
   </eClassifiers>

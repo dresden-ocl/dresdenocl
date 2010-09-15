@@ -65,7 +65,8 @@ public class EnumerationImpl extends TypeImpl implements Enumeration {
 	/**
 	 * Logger for this class
 	 */
-	private static final Logger logger = Logger.getLogger(EnumerationImpl.class);
+	private static final Logger logger = Logger
+			.getLogger(EnumerationImpl.class);
 
 	/**
 	 * The cached value of the '{@link #getOwnedLiteral() <em>Owned Literal</em>}' containment reference list.
@@ -203,8 +204,8 @@ public class EnumerationImpl extends TypeImpl implements Enumeration {
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID,
-			NotificationChain msgs) {
+	public NotificationChain eInverseAdd(InternalEObject otherEnd,
+			int featureID, NotificationChain msgs) {
 		switch (featureID) {
 		case PivotModelPackage.ENUMERATION__OWNED_LITERAL:
 			return ((InternalEList<InternalEObject>) (InternalEList<?>) getOwnedLiteral())
@@ -222,7 +223,8 @@ public class EnumerationImpl extends TypeImpl implements Enumeration {
 			int featureID, NotificationChain msgs) {
 		switch (featureID) {
 		case PivotModelPackage.ENUMERATION__OWNED_LITERAL:
-			return ((InternalEList<?>) getOwnedLiteral()).basicRemove(otherEnd, msgs);
+			return ((InternalEList<?>) getOwnedLiteral()).basicRemove(otherEnd,
+					msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
