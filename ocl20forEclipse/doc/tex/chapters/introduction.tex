@@ -135,9 +135,9 @@ this manual. We recommend to install all provided features.
 
 
 \subsection{Building the OCL2 Parser}
-The new \acl{DOT4Eclipse} parser/editor is partially written in Scala. In order
+The new Dresden OCL parser/editor is partially written in Scala. In order
 to build the sources of the parser without having to have the \reference{Scala
-IDE} installed, \acl{DOT4Eclipse} comes with various \keyword{Ant} scripts that
+IDE} installed, Dresden OCL comes with various \keyword{Ant} scripts that
 compile the Scala code to byte code.
 
 After a checkout, the build script should be called automatically. Be aware that
@@ -146,26 +146,27 @@ the parser like the facade still do not compile correctly, try to perform a
 \keyword{refresh} on the plug-ins that contain Scala code.
 
 If the \keyword{Ant} script is not invoked automatically, you can call it either
-be cleaning the \reference{tudresden.ocl20.pivot.language.ocl.staticsemantics}
-plug-in or by running the \keyword{Ant} task \reference{clean all} of the same
-plug-in.
+be cleaning the
+\reference{tudresden\linebreak[0].ocl\-20\linebreak[0].pivot.language.ocl.staticsemantics}
+plug-in or by running the \keyword{Ant} task \reference{clean all} of the same plug-in.
 
 Each plug-in that contains Scala code (\reference{org.kiama.attribution},
-\reference{tudresden.ocl20.pivot.language.ocl.semantics},
+\reference{tudresden.ocl20.pivot\linebreak[0].lan\-guage\linebreak[0].ocl.semantics},
 \reference{tudresden.ocl20.pivot.language.ocl.staticsemantics} and
-\reference{tudresden.ocl20.pivot.pivotmodel.semantics}) contains a
+\reference{tu\-dres\-den\linebreak[0].ocl20.pivot.pivotmodel.semantics})
+contains a
 \keyword{build.xml} file that comes with three targets: \reference{clean all}
 to clean the selected project and all dependent projects, \reference{clean} to
 only clean the selected project and \reference{compile} to simply compile changes
 that have been made since the last build.
 
 In either case, you have to run the \keyword{ANT} scripts in the same 
-\keyword{JRE} as Eclipse. Figures~\ref{pic:intro:parserbuild01} and 
-\ref{pic:intro:parserbuild02} show how to achieve this. If an error like
+\keyword{JRE} as Eclipse. Figures~\ref{pic:intro:parserbuild01} 
+and~\ref{pic:intro:parserbuild02} show how to achieve this. If an error like 
 ``Unable to find javac compiler.'' occurs, you might be trying to run the
-\keyword{Ant} script with a \keyword{\acl{JRE}} instead of a 
-\keyword{\acs{JDK}} (For errors like this one) use the \eclipse{Installed
-JREs...} button in the same window to select a \acs{JDK} instead.
+\keyword{Ant} script with a \keyword{\acl{JRE}} instead of a \keyword{\acs{JDK}}
+(For errors like this one) use the \eclipse{Installed JREs...} button in the
+same window to select a \acs{JDK} instead.
 
 If you want to make changes to the static semantics evaluation of the parser you
 should consider installing the \reference{Scala IDE} from 
@@ -192,6 +193,12 @@ for building.
 	\caption{Settings of the JRE for the Ant build script.}
 	\label{pic:intro:parserbuild02}
 
+  \vspace{4.0em}
+
+	\centering
+	\includegraphics[width=0.5\linewidth]{figures/examples/simple01}
+	\caption{A class diagram describing the Simple Example model.}
+	\label{pic:examples:simple01}
 \end{figure}
 
 
@@ -215,13 +222,6 @@ which is located in the plug-in
 \reference{tudresden.ocl20.pivot.examples.\linebreak[0]simple}. 
 Figure~\ref{pic:examples:simple01} shows a class diagram of the Simple Example.
 
-\begin{figure}[!htbp]
-	\centering
-	\includegraphics[width=0.5\linewidth]{figures/examples/simple01}
-	\caption{A class diagram describing the Simple Example model.}
-	\label{pic:examples:simple01}
-\end{figure}
-
 Dresden OCL provides more examples than the Simple Example. The different 
 examples use different meta-models which is possible with the \textit{Pivot
 Model} architecture of the Toolkit. An overview about all examples provided 
@@ -239,7 +239,7 @@ should now switch to the Dresden OCL perspective. Select the menu option
 \eclipse{Window -> Open Perspective -> Other \ldots} and select the perspective
 \eclipse{Dresden OCL} (see Figure~\ref{pic:introduction:perspective})
 	
-\begin{figure}[!htbp]
+\begin{figure}[!t]
 	\centering
 	\includegraphics[width=1.0\linewidth]{figures/introduction/perspective}
 	\caption{The Dresden OCL Perspective.}
@@ -355,11 +355,18 @@ only shows the model instances of the model actually selected in the model
 browser. By switching the model in the model browser, you also switch the pool 
 of model instances available in the model instance browser.
 
-\begin{figure}[!t]
+\begin{figure}[!p]
 	\centering
 	\includegraphics[width=0.6\linewidth]{figures/introduction/loadinstance02}
 	\caption{A simple model instance in the Model Instance Browser.}
 	\label{pic:intro:loadInstance02}
+
+	\vspace{4.0em}
+	
+	\centering
+	\includegraphics[width=0.4\linewidth]{figures/introduction/loadconstraints02}
+	\caption{Parsed expressions and the model in the Model Browser.}
+	\label{pic:intro:loadconstraints02}
 \end{figure}
 	
 	
@@ -367,11 +374,12 @@ of model instances available in the model instance browser.
 \label{intro:oclEditor}
 Any file with the file extension \keyword{ocl} can be opened with the
 \keyword{Dresden OCL Editor}. Once opened, syntactic checks are performed
-to analyse whether the given file contains valid OCL code. If currently there is
-no active model selected in the \eclipse{Model Browser}, the editor will fail to perform the
-static semantics analysis and will yield that there is no active model. You can
-load a model and then re-parse the OCL file by changing the OCL file (e.g., by
-introducing and immediately deleting a whitespace character).
+to analyse whether the given file contains valid \acs{OCL} code. If currently
+there is no active model selected in the \eclipse{Model Browser}, the editor
+will fail to perform the static semantics analysis and will yield that there is
+no active model. You can load a model and then re-parse the \acs{OCL} file by
+changing the \acs{OCL} file (e.g., by introducing and immediately deleting a
+whitespace character).
 
 The editor/parser will automatically add parsed constraints to the
 model as well as \keyword{definitions} to the appropriate
@@ -382,14 +390,6 @@ can be seen in Figure~\ref{pic:intro:loadconstraints02}. You also can remove
 parsed constraints from the model which is shown in
 Figure~\ref{pic:intro:loadconstraints03}.
 
-\begin{figure}[p]
-	
-	\centering
-	\includegraphics[width=0.4\linewidth]{figures/introduction/loadconstraints02}
-	\caption{Parsed expressions and the model in the Model Browser.}
-	\label{pic:intro:loadconstraints02}
-\end{figure}
-	
 \begin{figure}[t]
 	\centering
 	\includegraphics[width=0.4\linewidth]{figures/introduction/loadconstraints03}
@@ -411,7 +411,7 @@ constraints for a given model and model instance (as explained in
 Chapter~\ref{chapter:interpretation}) or you can use the \keyword{OCL22Java
 Code Generator} to generate \keyword{AspectJ} code for a loaded model and 
 \acs{OCL} constraints (as explained in Chapter~\ref{chapter:codeGeneration}).
-\todocw{Mention OCL22SQL here when available.}
+%\todocw{Mention OCL22SQL here when available.}
 
 If you do not want to use Eclipse, but still want to interpret OCL constraints 
 or generate AspectJ code, you can use Dresden OCL as a stand-alone library
