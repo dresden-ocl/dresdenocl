@@ -109,8 +109,8 @@ public class OperationItemProvider extends FeatureItemProvider implements
 						getString("_UI_Operation_inputParameter_feature"), //$NON-NLS-1$
 						getString(
 								"_UI_PropertyDescriptor_description", "_UI_Operation_inputParameter_feature", "_UI_Operation_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-						PivotModelPackage.Literals.OPERATION__INPUT_PARAMETER, false,
-						false, false, null, null, null));
+						PivotModelPackage.Literals.OPERATION__INPUT_PARAMETER,
+						false, false, false, null, null, null));
 	}
 
 	/**
@@ -128,8 +128,8 @@ public class OperationItemProvider extends FeatureItemProvider implements
 						getString("_UI_Operation_outputParameter_feature"), //$NON-NLS-1$
 						getString(
 								"_UI_PropertyDescriptor_description", "_UI_Operation_outputParameter_feature", "_UI_Operation_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-						PivotModelPackage.Literals.OPERATION__OUTPUT_PARAMETER, false,
-						false, false, null, null, null));
+						PivotModelPackage.Literals.OPERATION__OUTPUT_PARAMETER,
+						false, false, false, null, null, null));
 	}
 
 	/**
@@ -147,8 +147,8 @@ public class OperationItemProvider extends FeatureItemProvider implements
 						getString("_UI_Operation_returnParameter_feature"), //$NON-NLS-1$
 						getString(
 								"_UI_PropertyDescriptor_description", "_UI_Operation_returnParameter_feature", "_UI_Operation_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-						PivotModelPackage.Literals.OPERATION__RETURN_PARAMETER, false,
-						false, false, null, null, null));
+						PivotModelPackage.Literals.OPERATION__RETURN_PARAMETER,
+						false, false, false, null, null, null));
 	}
 
 	/**
@@ -166,8 +166,8 @@ public class OperationItemProvider extends FeatureItemProvider implements
 						getString("_UI_Operation_signatureParameter_feature"), //$NON-NLS-1$
 						getString(
 								"_UI_PropertyDescriptor_description", "_UI_Operation_signatureParameter_feature", "_UI_Operation_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-						PivotModelPackage.Literals.OPERATION__SIGNATURE_PARAMETER, false,
-						false, false, null, null, null));
+						PivotModelPackage.Literals.OPERATION__SIGNATURE_PARAMETER,
+						false, false, false, null, null, null));
 	}
 
 	/**
@@ -211,7 +211,7 @@ public class OperationItemProvider extends FeatureItemProvider implements
 	 */
 	@Override
 	public Object getImage(Object object) {
-		
+
 		Object result;
 
 		if (object instanceof Operation && ((Operation) object).isStatic()) {
@@ -223,7 +223,7 @@ public class OperationItemProvider extends FeatureItemProvider implements
 			result = overlayImage(object,
 					getResourceLocator().getImage("full/obj16/Operation"));
 		}
-		
+
 		return result;
 	}
 
@@ -283,8 +283,8 @@ public class OperationItemProvider extends FeatureItemProvider implements
 		// append parameters
 		name.append('(');
 
-		for (Iterator<Parameter> it = operation.getSignatureParameter().iterator(); it
-				.hasNext();) {
+		for (Iterator<Parameter> it = operation.getSignatureParameter()
+				.iterator(); it.hasNext();) {
 			Parameter parameter = it.next();
 
 			// use the parameter-specific label provider for rendering the text
@@ -342,9 +342,10 @@ public class OperationItemProvider extends FeatureItemProvider implements
 			Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 
-		newChildDescriptors.add(createChildParameter(
-				PivotModelPackage.Literals.GENERIC_ELEMENT__OWNED_TYPE_PARAMETER,
-				PivotModelFactory.eINSTANCE.createTypeParameter()));
+		newChildDescriptors
+				.add(createChildParameter(
+						PivotModelPackage.Literals.GENERIC_ELEMENT__OWNED_TYPE_PARAMETER,
+						PivotModelFactory.eINSTANCE.createTypeParameter()));
 
 		newChildDescriptors.add(createChildParameter(
 				PivotModelPackage.Literals.OPERATION__OWNED_PARAMETER,

@@ -49,6 +49,7 @@ import tudresden.ocl20.pivot.pivotmodel.PivotModelFactory;
  *   <li>{@link tudresden.ocl20.pivot.pivotmodel.AssociationProperty#removeAssociation(tudresden.ocl20.pivot.pivotmodel.AssociationProperty) <em>Remove Association</em>}</li>
  *   <li>{@link tudresden.ocl20.pivot.pivotmodel.AssociationProperty#isInverseAssociation(tudresden.ocl20.pivot.pivotmodel.AssociationProperty) <em>Is Inverse Association</em>}</li>
  *   <li>{@link tudresden.ocl20.pivot.pivotmodel.AssociationProperty#addAssociations(java.util.List) <em>Add Associations</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.pivotmodel.AssociationProperty#isNavigable() <em>Is Navigable</em>}</li>
  * </ul>
  * </p>
  * @generated
@@ -167,6 +168,19 @@ public class AssociationPropertyTest extends PropertyTest {
 	 * @generated
 	 */
 	public void testAddAssociations__List() {
+		// TODO: implement this operation test method
+		// Ensure that you remove @generated or mark it @generated NOT
+		fail();
+	}
+
+	/**
+	 * Tests the '{@link tudresden.ocl20.pivot.pivotmodel.AssociationProperty#isNavigable() <em>Is Navigable</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see tudresden.ocl20.pivot.pivotmodel.AssociationProperty#isNavigable()
+	 * @generated
+	 */
+	public void testIsNavigable() {
 		// TODO: implement this operation test method
 		// Ensure that you remove @generated or mark it @generated NOT
 		fail();

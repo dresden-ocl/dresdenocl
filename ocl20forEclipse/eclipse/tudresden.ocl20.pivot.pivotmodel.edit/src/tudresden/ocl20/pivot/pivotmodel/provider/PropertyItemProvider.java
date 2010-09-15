@@ -48,10 +48,9 @@ import tudresden.ocl20.pivot.pivotmodel.Operation;
 import tudresden.ocl20.pivot.pivotmodel.Property;
 
 /**
- * This is the item provider adapter for a
- * {@link tudresden.ocl20.pivot.pivotmodel.Property} object. <!-- begin-user-doc
+ * This is the item provider adapter for a {@link tudresden.ocl20.pivot.pivotmodel.Property} object.
+ * <!-- begin-user-doc
  * --> <!-- end-user-doc -->
- * 
  * @generated
  */
 public class PropertyItemProvider extends FeatureItemProvider implements
@@ -123,11 +122,10 @@ public class PropertyItemProvider extends FeatureItemProvider implements
 	}
 
 	/**
-	 * This handles model notifications by calling {@link #updateChildren} to
-	 * update any cached children and by creating a viewer notification, which
-	 * it passes to {@link #fireNotifyChanged}. <!-- begin-user-doc --> <!--
+	 * This handles model notifications by calling {@link #updateChildren} to update any cached
+	 * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override

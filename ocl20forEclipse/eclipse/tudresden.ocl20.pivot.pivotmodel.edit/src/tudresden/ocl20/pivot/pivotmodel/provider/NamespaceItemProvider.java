@@ -108,8 +108,8 @@ public class NamespaceItemProvider extends NamedElementItemProvider implements
 						getString("_UI_Namespace_nestingNamespace_feature"), //$NON-NLS-1$
 						getString(
 								"_UI_PropertyDescriptor_description", "_UI_Namespace_nestingNamespace_feature", "_UI_Namespace_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-						PivotModelPackage.Literals.NAMESPACE__NESTING_NAMESPACE, false,
-						false, false, null, null, null));
+						PivotModelPackage.Literals.NAMESPACE__NESTING_NAMESPACE,
+						false, false, false, null, null, null));
 	}
 
 	/**
@@ -127,8 +127,10 @@ public class NamespaceItemProvider extends NamedElementItemProvider implements
 			super.getChildrenFeatures(object);
 			childrenFeatures
 					.add(PivotModelPackage.Literals.GENERIC_ELEMENT__OWNED_TYPE_PARAMETER);
-			childrenFeatures.add(PivotModelPackage.Literals.NAMESPACE__OWNED_TYPE);
-			childrenFeatures.add(PivotModelPackage.Literals.NAMESPACE__OWNED_RULE);
+			childrenFeatures
+					.add(PivotModelPackage.Literals.NAMESPACE__OWNED_TYPE);
+			childrenFeatures
+					.add(PivotModelPackage.Literals.NAMESPACE__OWNED_RULE);
 			childrenFeatures
 					.add(PivotModelPackage.Literals.NAMESPACE__NESTED_NAMESPACE);
 		}
@@ -180,8 +182,8 @@ public class NamespaceItemProvider extends NamedElementItemProvider implements
 		namespace = (Namespace) object;
 
 		// initialize with name
-		label = new StringBuilder(StringUtils.defaultIfEmpty(namespace.getName(),
-				"null")); //$NON-NLS-1$
+		label = new StringBuilder(StringUtils.defaultIfEmpty(
+				namespace.getName(), "null")); //$NON-NLS-1$
 
 		// append type parameters if there are any
 		if (!namespace.getOwnedTypeParameter().isEmpty()) {
@@ -250,9 +252,10 @@ public class NamespaceItemProvider extends NamedElementItemProvider implements
 
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 
-		newChildDescriptors.add(createChildParameter(
-				PivotModelPackageImpl.Literals.GENERIC_ELEMENT__OWNED_TYPE_PARAMETER,
-				PivotModelFactory.eINSTANCE.createTypeParameter()));
+		newChildDescriptors
+				.add(createChildParameter(
+						PivotModelPackageImpl.Literals.GENERIC_ELEMENT__OWNED_TYPE_PARAMETER,
+						PivotModelFactory.eINSTANCE.createTypeParameter()));
 
 		newChildDescriptors.add(createChildParameter(
 				PivotModelPackageImpl.Literals.NAMESPACE__NESTED_NAMESPACE,

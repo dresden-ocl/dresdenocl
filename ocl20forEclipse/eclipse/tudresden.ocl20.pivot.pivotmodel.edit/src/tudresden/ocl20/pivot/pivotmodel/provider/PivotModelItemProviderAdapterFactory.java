@@ -235,7 +235,8 @@ public class PivotModelItemProviderAdapterFactory extends
 	@Override
 	public Adapter createEnumerationLiteralAdapter() {
 		if (enumerationLiteralItemProvider == null) {
-			enumerationLiteralItemProvider = new EnumerationLiteralItemProvider(this);
+			enumerationLiteralItemProvider = new EnumerationLiteralItemProvider(
+					this);
 		}
 
 		return enumerationLiteralItemProvider;
@@ -444,7 +445,8 @@ public class PivotModelItemProviderAdapterFactory extends
 	@Override
 	public Adapter createComplexGenericTypeAdapter() {
 		if (complexGenericTypeItemProvider == null) {
-			complexGenericTypeItemProvider = new ComplexGenericTypeItemProvider(this);
+			complexGenericTypeItemProvider = new ComplexGenericTypeItemProvider(
+					this);
 		}
 
 		return complexGenericTypeItemProvider;

@@ -126,11 +126,13 @@ public class TypeItemProvider extends NamedElementItemProvider implements
 		/**
 		 * Creates a new <code>TypePropertyDescriptor</code> instance using the default EMF
 		 */
-		public SuperTypePropertyDescriptor(String displayName, String description) {
+		public SuperTypePropertyDescriptor(String displayName,
+				String description) {
 
 			super(((ComposeableAdapterFactory) getAdapterFactory())
-					.getRootAdapterFactory(), getResourceLocator(), displayName,
-					description, PivotModelPackageImpl.Literals.TYPE__SUPER_TYPE, true,
+					.getRootAdapterFactory(), getResourceLocator(),
+					displayName, description,
+					PivotModelPackageImpl.Literals.TYPE__SUPER_TYPE, true,
 					false, true, null, null, null);
 		}
 
@@ -164,7 +166,8 @@ public class TypeItemProvider extends NamedElementItemProvider implements
 					// append type arguments for each type parameter
 					for (int i = 0, size = type.getOwnedTypeParameter().size(); i < size; i++) {
 						genericType.getTypeArgument().add(
-								PivotModelFactory.eINSTANCE.createTypeArgument());
+								PivotModelFactory.eINSTANCE
+										.createTypeArgument());
 					}
 
 					// add the new generic type to the list of generic super types
@@ -191,10 +194,14 @@ public class TypeItemProvider extends NamedElementItemProvider implements
 			EditingDomain editingDomain = getEditingDomain(type);
 
 			if (editingDomain != null) {
-				editingDomain.getCommandStack().execute(
-						SetCommand.create(editingDomain, type,
-								PivotModelPackageImpl.Literals.TYPE__GENERIC_SUPER_TYPE,
-								genericSuperTypes));
+				editingDomain
+						.getCommandStack()
+						.execute(
+								SetCommand
+										.create(editingDomain,
+												type,
+												PivotModelPackageImpl.Literals.TYPE__GENERIC_SUPER_TYPE,
+												genericSuperTypes));
 			}
 
 			else {
@@ -220,9 +227,12 @@ public class TypeItemProvider extends NamedElementItemProvider implements
 			super.getChildrenFeatures(object);
 			childrenFeatures
 					.add(PivotModelPackage.Literals.GENERIC_ELEMENT__OWNED_TYPE_PARAMETER);
-			childrenFeatures.add(PivotModelPackage.Literals.TYPE__OWNED_OPERATION);
-			childrenFeatures.add(PivotModelPackage.Literals.TYPE__OWNED_PROPERTY);
-			childrenFeatures.add(PivotModelPackage.Literals.TYPE__GENERIC_SUPER_TYPE);
+			childrenFeatures
+					.add(PivotModelPackage.Literals.TYPE__OWNED_OPERATION);
+			childrenFeatures
+					.add(PivotModelPackage.Literals.TYPE__OWNED_PROPERTY);
+			childrenFeatures
+					.add(PivotModelPackage.Literals.TYPE__GENERIC_SUPER_TYPE);
 		}
 		return childrenFeatures;
 	}
@@ -246,8 +256,8 @@ public class TypeItemProvider extends NamedElementItemProvider implements
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator()
-				.getImage("full/obj16/Type")); //$NON-NLS-1$
+		return overlayImage(object,
+				getResourceLocator().getImage("full/obj16/Type")); //$NON-NLS-1$
 	}
 
 	/**
@@ -276,7 +286,8 @@ public class TypeItemProvider extends NamedElementItemProvider implements
 		if (!type.getSuperType().isEmpty()) {
 			label.append(" -> "); //$NON-NLS-1$
 
-			for (Iterator<Type> it = type.getSuperType().iterator(); it.hasNext();) {
+			for (Iterator<Type> it = type.getSuperType().iterator(); it
+					.hasNext();) {
 				label.append(it.next().getName());
 
 				if (it.hasNext()) {
@@ -297,8 +308,8 @@ public class TypeItemProvider extends NamedElementItemProvider implements
 				label.append(", "); //$NON-NLS-1$
 			}
 
-			for (Iterator<GenericType> it = type.getGenericSuperType().iterator(); it
-					.hasNext();) {
+			for (Iterator<GenericType> it = type.getGenericSuperType()
+					.iterator(); it.hasNext();) {
 				GenericType genericType = it.next();
 				label.append(getLabel(genericType));
 
@@ -328,8 +339,8 @@ public class TypeItemProvider extends NamedElementItemProvider implements
 		if (!type.getOwnedTypeParameter().isEmpty()) {
 			name.append(getTypeParameterListOpeningDelimiter());
 
-			for (Iterator<TypeParameter> it = type.getOwnedTypeParameter().iterator(); it
-					.hasNext();) {
+			for (Iterator<TypeParameter> it = type.getOwnedTypeParameter()
+					.iterator(); it.hasNext();) {
 				name.append(it.next().getName());
 
 				if (it.hasNext()) {
@@ -385,14 +396,16 @@ public class TypeItemProvider extends NamedElementItemProvider implements
 							PivotModelFactory.eINSTANCE.createTypeArgument());
 				}
 
-				return new CreateChildCommand(domain, owner,
+				return new CreateChildCommand(
+						domain,
+						owner,
 						PivotModelPackageImpl.Literals.TYPE__GENERIC_SUPER_TYPE,
 						genericType, index, collection, this);
 			}
 		}
 
-		return super.createCreateChildCommand(domain, owner, feature, value, index,
-				collection);
+		return super.createCreateChildCommand(domain, owner, feature, value,
+				index, collection);
 	}
 
 	/**
@@ -437,9 +450,10 @@ public class TypeItemProvider extends NamedElementItemProvider implements
 			Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 
-		newChildDescriptors.add(createChildParameter(
-				PivotModelPackage.Literals.GENERIC_ELEMENT__OWNED_TYPE_PARAMETER,
-				PivotModelFactory.eINSTANCE.createTypeParameter()));
+		newChildDescriptors
+				.add(createChildParameter(
+						PivotModelPackage.Literals.GENERIC_ELEMENT__OWNED_TYPE_PARAMETER,
+						PivotModelFactory.eINSTANCE.createTypeParameter()));
 
 		newChildDescriptors.add(createChildParameter(
 				PivotModelPackage.Literals.TYPE__OWNED_OPERATION,
