@@ -164,10 +164,10 @@ package tudresden.ocl20.pivot.pivotmodel.semantics
 		override def setGenericType(_GenericType : tudresden.ocl20.pivot.pivotmodel.GenericType) = eObject.setGenericType(_GenericType : tudresden.ocl20.pivot.pivotmodel.GenericType)
 		override def isStatic() = eObject.isStatic()
 		override def setStatic(_Boolean : Boolean) = eObject.setStatic(_Boolean : Boolean)
+		override def getSemantics() = eObject.getSemantics()
+		override def setSemantics(_Constraint : tudresden.ocl20.pivot.pivotmodel.Constraint) = eObject.setSemantics(_Constraint : tudresden.ocl20.pivot.pivotmodel.Constraint)
 		override def getOwningType() = eObject.getOwningType()
 		override def setOwningType(_Type : tudresden.ocl20.pivot.pivotmodel.Type) = eObject.setOwningType(_Type : tudresden.ocl20.pivot.pivotmodel.Type)
-		override def getSemantics = eObject.getSemantics
-		override def setSemantics(semantics : tudresden.ocl20.pivot.pivotmodel.Constraint) = eObject.setSemantics(semantics)
 	}
 
 
@@ -189,6 +189,8 @@ package tudresden.ocl20.pivot.pivotmodel.semantics
 		override def setGenericType(_GenericType : tudresden.ocl20.pivot.pivotmodel.GenericType) = eObject.setGenericType(_GenericType : tudresden.ocl20.pivot.pivotmodel.GenericType)
 		override def isStatic() = eObject.isStatic()
 		override def setStatic(_Boolean : Boolean) = eObject.setStatic(_Boolean : Boolean)
+		override def getSemantics() = eObject.getSemantics()
+		override def setSemantics(_Constraint : tudresden.ocl20.pivot.pivotmodel.Constraint) = eObject.setSemantics(_Constraint : tudresden.ocl20.pivot.pivotmodel.Constraint)
 		override def getOwnedTypeParameter() = eObject.getOwnedTypeParameter()
 		override def getOwningType() = eObject.getOwningType()
 		override def setOwningType(_Type : tudresden.ocl20.pivot.pivotmodel.Type) = eObject.setOwningType(_Type : tudresden.ocl20.pivot.pivotmodel.Type)
@@ -197,8 +199,6 @@ package tudresden.ocl20.pivot.pivotmodel.semantics
 		override def getOutputParameter() = eObject.getOutputParameter()
 		override def getReturnParameter() = eObject.getReturnParameter()
 		override def getSignatureParameter() = eObject.getSignatureParameter()
-		override def getSemantics = eObject.getSemantics
-		override def setSemantics(semantics : tudresden.ocl20.pivot.pivotmodel.Constraint) = eObject.setSemantics(semantics)
 	}
 
 
@@ -321,7 +321,7 @@ package tudresden.ocl20.pivot.pivotmodel.semantics
 	}
 
 
-	private trait NDirectionalPropertyAttributable extends tudresden.ocl20.pivot.pivotmodel.AssociationProperty with tudresden.attributegrammar.integration.kiama.AttributableEObject {
+	private trait AssociationPropertyAttributable extends tudresden.ocl20.pivot.pivotmodel.AssociationProperty with tudresden.attributegrammar.integration.kiama.AttributableEObject {
 		type T = tudresden.ocl20.pivot.pivotmodel.AssociationProperty
 	
 		override def addAssociation(_bProperty : tudresden.ocl20.pivot.pivotmodel.AssociationProperty) : Unit = eObject.addAssociation( _bProperty )
@@ -329,6 +329,7 @@ package tudresden.ocl20.pivot.pivotmodel.semantics
 		override def removeAssociation(_bProperty : tudresden.ocl20.pivot.pivotmodel.AssociationProperty) : Unit = eObject.removeAssociation( _bProperty )
 		override def isInverseAssociation(_bProperty : tudresden.ocl20.pivot.pivotmodel.AssociationProperty) : Boolean = eObject.isInverseAssociation( _bProperty )
 		override def addAssociations(_bProperty : java.util.List[tudresden.ocl20.pivot.pivotmodel.AssociationProperty]) : Unit = eObject.addAssociations( _bProperty )
+		override def isNavigable() : Boolean = eObject.isNavigable()
 		override def cmpSlots(_p : tudresden.ocl20.pivot.pivotmodel.Property) : Boolean = eObject.cmpSlots( _p )
 		override def getQualifiedNameList() : java.util.List[String] = eObject.getQualifiedNameList()
 		override def getName() = eObject.getName()
@@ -341,10 +342,10 @@ package tudresden.ocl20.pivot.pivotmodel.semantics
 		override def setGenericType(_GenericType : tudresden.ocl20.pivot.pivotmodel.GenericType) = eObject.setGenericType(_GenericType : tudresden.ocl20.pivot.pivotmodel.GenericType)
 		override def isStatic() = eObject.isStatic()
 		override def setStatic(_Boolean : Boolean) = eObject.setStatic(_Boolean : Boolean)
+		override def getSemantics() = eObject.getSemantics()
+		override def setSemantics(_Constraint : tudresden.ocl20.pivot.pivotmodel.Constraint) = eObject.setSemantics(_Constraint : tudresden.ocl20.pivot.pivotmodel.Constraint)
 		override def getOwningType() = eObject.getOwningType()
 		override def setOwningType(_Type : tudresden.ocl20.pivot.pivotmodel.Type) = eObject.setOwningType(_Type : tudresden.ocl20.pivot.pivotmodel.Type)
 		override def getInverseAssociationProperties() = eObject.getInverseAssociationProperties()
-		override def getSemantics = eObject.getSemantics
-		override def setSemantics(semantics : tudresden.ocl20.pivot.pivotmodel.Constraint) = eObject.setSemantics(semantics)
 	}
 

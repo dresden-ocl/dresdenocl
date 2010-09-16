@@ -33,7 +33,7 @@ trait OclLookUpFunctions { selfType : OclStaticSemantics =>
   }
   
   protected def lookupType(name : String, namespace : Namespace) : Box[Type] = {
-    if (name == null || name.isEmpty)
+    if (name == null || name == "")
       Failure("Cannot resolve Type with no name.")
     else {
       lookupLibraryType(name) match {

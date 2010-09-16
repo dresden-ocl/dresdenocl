@@ -347,7 +347,7 @@ trait OclReferenceResolver { selfType : OclStaticSemantics =>
 			        	} else
 			        	  returnType->oclType
 		          rt.flatMap{rt =>
-	            	if (identifier != null && !identifier.isEmpty && context.isInstanceOf[Type]) {
+	            	if (identifier != null && identifier != "" && context.isInstanceOf[Type]) {
 	            		val contextType = context.asInstanceOf[Type]
                   // this is some crude hack to ensure the descendency from OclAny for the type
 	            	  val operations = contextType.allOperations.union(oclLibrary.getOclAny.allOperations)

@@ -267,6 +267,7 @@ object Property {
 	          _type : tudresden.ocl20.pivot.pivotmodel.Type,
 	          _genericType : tudresden.ocl20.pivot.pivotmodel.GenericType,
 	          _static : Boolean,
+	          _semantics : tudresden.ocl20.pivot.pivotmodel.Constraint,
 	          _owningType : tudresden.ocl20.pivot.pivotmodel.Type	          
 	          ) = {
 		
@@ -276,6 +277,7 @@ object Property {
 			__property.setType(_type)
 			__property.setGenericType(_genericType)
 			__property.setStatic(_static)
+			__property.setSemantics(_semantics)
 			__property.setOwningType(_owningType)
 		
 		__property
@@ -299,6 +301,7 @@ object Operation {
 	          _type : tudresden.ocl20.pivot.pivotmodel.Type,
 	          _genericType : tudresden.ocl20.pivot.pivotmodel.GenericType,
 	          _static : Boolean,
+	          _semantics : tudresden.ocl20.pivot.pivotmodel.Constraint,
 	          _ownedTypeParameter : List[tudresden.ocl20.pivot.pivotmodel.TypeParameter],
 	          _owningType : tudresden.ocl20.pivot.pivotmodel.Type,
 	          _ownedParameter : List[tudresden.ocl20.pivot.pivotmodel.Parameter]	          
@@ -310,6 +313,7 @@ object Operation {
 			__operation.setType(_type)
 			__operation.setGenericType(_genericType)
 			__operation.setStatic(_static)
+			__operation.setSemantics(_semantics)
 		if (_ownedTypeParameter != null)
 			__operation.getOwnedTypeParameter.addAll(_ownedTypeParameter)
 			__operation.setOwningType(_owningType)
@@ -549,8 +553,9 @@ object AssociationProperty {
 	          _type : tudresden.ocl20.pivot.pivotmodel.Type,
 	          _genericType : tudresden.ocl20.pivot.pivotmodel.GenericType,
 	          _static : Boolean,
+	          _semantics : tudresden.ocl20.pivot.pivotmodel.Constraint,
 	          _owningType : tudresden.ocl20.pivot.pivotmodel.Type,
-	          _inverseNDirectionalProperties : List[tudresden.ocl20.pivot.pivotmodel.AssociationProperty]	          
+	          _inverseAssociationProperties : List[tudresden.ocl20.pivot.pivotmodel.AssociationProperty]	          
 	          ) = {
 		
 		val __associationProperty = tudresden.ocl20.pivot.pivotmodel.PivotModelFactory.eINSTANCE.createAssociationProperty
@@ -559,9 +564,10 @@ object AssociationProperty {
 			__associationProperty.setType(_type)
 			__associationProperty.setGenericType(_genericType)
 			__associationProperty.setStatic(_static)
+			__associationProperty.setSemantics(_semantics)
 			__associationProperty.setOwningType(_owningType)
-		if (_inverseNDirectionalProperties != null)
-			__associationProperty.getInverseAssociationProperties.addAll(_inverseNDirectionalProperties)
+		if (_inverseAssociationProperties != null)
+			__associationProperty.getInverseAssociationProperties.addAll(_inverseAssociationProperties)
 		
 		__associationProperty
 		

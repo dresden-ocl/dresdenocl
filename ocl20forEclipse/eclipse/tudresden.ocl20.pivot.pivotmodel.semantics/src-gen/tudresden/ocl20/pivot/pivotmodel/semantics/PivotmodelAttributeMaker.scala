@@ -4,7 +4,7 @@ trait PivotmodelAttributeMaker extends tudresden.attributegrammar.integration.ki
 	self : tudresden.attributegrammar.integration.kiama.AttributeMaker =>
 	
 	protected abstract override def registeredAttributables : PartialFunction[org.eclipse.emf.ecore.EObject, tudresden.attributegrammar.integration.kiama.AttributableEObject] = {
-		case s : tudresden.ocl20.pivot.pivotmodel.AssociationProperty => new {val attributeMaker = self; val eObject = s} with NDirectionalPropertyAttributable
+		case s : tudresden.ocl20.pivot.pivotmodel.AssociationProperty => new {val attributeMaker = self; val eObject = s} with AssociationPropertyAttributable
 		case s : tudresden.ocl20.pivot.pivotmodel.Enumeration => new {val attributeMaker = self; val eObject = s} with EnumerationAttributable
 		case s : tudresden.ocl20.pivot.pivotmodel.PrimitiveType => new {val attributeMaker = self; val eObject = s} with PrimitiveTypeAttributable
 		case s : tudresden.ocl20.pivot.pivotmodel.Expression => new {val attributeMaker = self; val eObject = s} with ExpressionAttributable
