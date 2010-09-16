@@ -237,7 +237,7 @@ public class OclSequence<T> extends OclCollection<T> {
 	 * the contained {@link Collection}.
 	 * </p>
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public OclSequence<?> flatten() {
 		OclSequence result;
 

@@ -23,7 +23,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-import tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclBags;
 import tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclCollections;
 
 /**

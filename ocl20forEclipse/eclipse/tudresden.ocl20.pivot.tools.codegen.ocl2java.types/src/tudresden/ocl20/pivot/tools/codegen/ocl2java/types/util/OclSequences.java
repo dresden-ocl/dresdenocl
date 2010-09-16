@@ -1,20 +1,20 @@
 /*
-Copyright (C) 2008-2010 by Claas Wilke (claaswilke@gmx.net)
+Copyright (C) 2008-2010 by Claas Wilke (claas.wilke@tu-dresden.de)
 
-This file is part of the OCL 2 Java Code Generator of Dresden OCL2 for Eclipse.
+This file is part of the OCL 2 Java Code Generator of Dresden OCL.
 
-Dresden OCL2 for Eclipse is free software: you can redistribute it and/or modify 
+Dresden OCL is free software: you can redistribute it and/or modify 
 it under the terms of the GNU Lesser General Public License as published by the 
 Free Software Foundation, either version 3 of the License, or (at your option)
 any later version.
 
-Dresden OCL2 for Eclipse is distributed in the hope that it will be useful,
+Dresden OCL is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
 or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License 
 for more details.
 
 You should have received a copy of the GNU Lesser General Public License along 
-with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
+with Dresden OCL. If not, see <http://www.gnu.org/licenses/>.
  */
 package tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util;
 
@@ -22,6 +22,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
+
+import tudresden.ocl20.pivot.tools.codegen.ocl2java.types.OclInvalidException;
 
 /**
  * <p>
@@ -260,12 +262,12 @@ public class OclSequences {
 
 		/* OCL Collections cannot be null. */
 		if (self == null || self.size() == 0) {
-			throw new InvalidException("Cannot invoke at() on empty Sequences.");
+			throw new OclInvalidException("Cannot invoke at() on empty Sequences.");
 		}
 		// no else.
 
 		if (i < 1 || i > self.size()) {
-			throw new InvalidException("Index must lay between 1 and "
+			throw new OclInvalidException("Index must lay between 1 and "
 					+ self.size() + " but was " + i + ".");
 		}
 		// no else.
@@ -501,7 +503,7 @@ public class OclSequences {
 
 		/* OCL Collections cannot be null. */
 		if (self == null) {
-			throw new InvalidException("Parameter 'self' must not be null.");
+			throw new OclInvalidException("Parameter 'self' must not be null.");
 		}
 		// no else.
 
@@ -533,7 +535,7 @@ public class OclSequences {
 
 		/* OCL Collections cannot be null. */
 		if (self == null) {
-			throw new InvalidException("Parameter 'self' must not be null.");
+			throw new OclInvalidException("Parameter 'self' must not be null.");
 		}
 		// no else.
 
@@ -553,7 +555,7 @@ public class OclSequences {
 
 		/* OCL Collections cannot be null. */
 		if (self == null || self.size() == 0) {
-			throw new InvalidException(
+			throw new OclInvalidException(
 					"Cannot invoke operation first() on an empty Sequences.");
 		}
 		// no else.
@@ -574,7 +576,7 @@ public class OclSequences {
 
 		/* OCL Collections cannot be null. */
 		if (self == null || self.length == 0) {
-			throw new InvalidException(
+			throw new OclInvalidException(
 					"Cannot invoke operation first() on an empty Sequences.");
 		}
 		// no else.
@@ -637,7 +639,7 @@ public class OclSequences {
 
 		/* OCL Collections cannot be null. */
 		if (self == null) {
-			throw new InvalidException("Parameter 'self' must not be null.");
+			throw new OclInvalidException("Parameter 'self' must not be null.");
 		}
 		// no else.
 
@@ -663,7 +665,7 @@ public class OclSequences {
 
 		/* OCL Collections cannot be null. */
 		if (self == null) {
-			throw new InvalidException("Parameter 'self' must not be null.");
+			throw new OclInvalidException("Parameter 'self' must not be null.");
 		}
 		// no else.
 
@@ -690,7 +692,7 @@ public class OclSequences {
 
 		/* OCL Collections cannot be null. */
 		if (self == null || self.size() == 0 || !self.contains(object)) {
-			throw new InvalidException(
+			throw new OclInvalidException(
 					"The given object is not contained in self.");
 		}
 		// no else.
@@ -755,7 +757,7 @@ public class OclSequences {
 		// end else.
 
 		if (index < 1 || index > result.size() + 1) {
-			throw new InvalidException("Index must lay between 1 and "
+			throw new OclInvalidException("Index must lay between 1 and "
 					+ (result.size() + 1) + " but was " + index + ".");
 		}
 		// no else.
@@ -809,7 +811,7 @@ public class OclSequences {
 
 		/* OCL Collections cannot be null. */
 		if (self == null || self.size() == 0) {
-			throw new InvalidException(
+			throw new OclInvalidException(
 					"Cannot invoke operation first() on an empty Sequences.");
 		}
 		// no else.
@@ -830,7 +832,7 @@ public class OclSequences {
 
 		/* OCL Collections cannot be null. */
 		if (self == null || self.length == 0) {
-			throw new InvalidException(
+			throw new OclInvalidException(
 					"Cannot invoke operation last() on an empty Sequences.");
 		}
 		// no else.
@@ -975,7 +977,7 @@ public class OclSequences {
 
 		/* OCL Collections cannot be null. */
 		if (self == null || self.size() == 0) {
-			throw new InvalidException(
+			throw new OclInvalidException(
 					"Cannot invoke subSequence() on empty Sequences.");
 		}
 
@@ -985,19 +987,19 @@ public class OclSequences {
 		// end else.
 
 		if (lower < 1 || lower > self.size()) {
-			throw new InvalidException("Index lower must lay between 1 and "
+			throw new OclInvalidException("Index lower must lay between 1 and "
 					+ self.size() + " but was " + lower + ".");
 		}
 		// no else.
 
 		if (upper < 1 || upper > self.size()) {
-			throw new InvalidException("Index upper must lay between 1 and "
+			throw new OclInvalidException("Index upper must lay between 1 and "
 					+ self.size() + " but was " + upper + ".");
 		}
 		// no else.
 
 		if (lower > upper) {
-			throw new InvalidException(
+			throw new OclInvalidException(
 					"Index lower must be equal or less than upper.");
 		}
 		// no else.

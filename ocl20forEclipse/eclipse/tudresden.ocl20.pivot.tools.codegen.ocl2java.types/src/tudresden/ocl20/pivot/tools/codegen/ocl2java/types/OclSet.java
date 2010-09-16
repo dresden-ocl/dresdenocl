@@ -190,7 +190,7 @@ public class OclSet<T> extends OclCollection<T> implements Set<T> {
 	 * the elements of all the elements of the contained {@link Collection}.
 	 * </p>
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public OclSet<?> flatten() {
 		OclSet result;
 

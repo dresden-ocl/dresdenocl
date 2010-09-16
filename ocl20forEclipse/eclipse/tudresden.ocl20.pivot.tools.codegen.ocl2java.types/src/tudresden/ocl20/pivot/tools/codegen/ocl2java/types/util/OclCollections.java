@@ -1,20 +1,20 @@
 /*
-Copyright (C) 2008-2010 by Claas Wilke (claaswilke@gmx.net)
+Copyright (C) 2008-2010 by Claas Wilke (claas.wilke@tu-dresden.de)
 
-This file is part of the OCL 2 Java Code Generator of Dresden OCL2 for Eclipse.
+This file is part of the OCL 2 Java Code Generator of Dresden OCL.
 
-Dresden OCL2 for Eclipse is free software: you can redistribute it and/or modify 
+Dresden OCL is free software: you can redistribute it and/or modify 
 it under the terms of the GNU Lesser General Public License as published by the 
 Free Software Foundation, either version 3 of the License, or (at your option)
 any later version.
 
-Dresden OCL2 for Eclipse is distributed in the hope that it will be useful,
+Dresden OCL is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
 or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License 
 for more details.
 
 You should have received a copy of the GNU Lesser General Public License along 
-with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
+with Dresden OCL. If not, see <http://www.gnu.org/licenses/>.
  */
 package tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util;
 
@@ -28,6 +28,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
+import tudresden.ocl20.pivot.tools.codegen.ocl2java.types.OclInvalidException;
 
 /**
  * <p>
@@ -653,7 +655,7 @@ public class OclCollections {
 		}
 
 		else if (object == null) {
-			throw new InvalidException("Parameter 'object' must not be null.");
+			throw new OclInvalidException("Parameter 'object' must not be null.");
 		}
 		// no else.
 
@@ -681,7 +683,7 @@ public class OclCollections {
 		}
 
 		else if (object == null) {
-			throw new InvalidException("Parameter 'object' must not be null.");
+			throw new OclInvalidException("Parameter 'object' must not be null.");
 		}
 		// no else.
 
@@ -877,7 +879,7 @@ public class OclCollections {
 				// no else.
 
 				else {
-					throw new InvalidException(
+					throw new OclInvalidException(
 							"Cannot compare elements of collection.");
 				}
 			}
@@ -953,7 +955,7 @@ public class OclCollections {
 				// no else.
 
 				else {
-					throw new InvalidException(
+					throw new OclInvalidException(
 							"Cannot compare elements of collection.");
 				}
 			}
@@ -1335,7 +1337,7 @@ public class OclCollections {
 			}
 
 			else {
-				throw new InvalidException(
+				throw new OclInvalidException(
 						"Operation Collection.sum() is not defined for elements of the type "
 								+ element.getClass().getCanonicalName() + ".");
 			}

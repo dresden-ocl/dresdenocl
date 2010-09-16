@@ -242,7 +242,7 @@ public class OclOrderedSet<T> extends OclCollection<T> implements Set<T> {
 	 * the contained {@link Collection}.
 	 * </p>
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public OclOrderedSet<?> flatten() {
 		OclOrderedSet result;
 

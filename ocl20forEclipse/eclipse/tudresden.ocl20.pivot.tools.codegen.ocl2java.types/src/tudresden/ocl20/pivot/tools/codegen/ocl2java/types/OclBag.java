@@ -195,7 +195,7 @@ public class OclBag<T> extends OclCollection<T> {
 	 * the elements of all the elements of the contained {@link Collection}.
 	 * </p>
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public OclBag<?> flatten() {
 		OclBag result;
 

@@ -1,20 +1,20 @@
 /*
-Copyright (C) 2008-2010 by Claas Wilke (claaswilke@gmx.net)
+Copyright (C) 2008-2010 by Claas Wilke (claas.wilke@tu-dresden.de)
 
-This file is part of the OCL 2 Java Code Generator of Dresden OCL2 for Eclipse.
+This file is part of the OCL 2 Java Code Generator of Dresden OCL.
 
-Dresden OCL2 for Eclipse is free software: you can redistribute it and/or modify 
+Dresden OCL is free software: you can redistribute it and/or modify 
 it under the terms of the GNU Lesser General Public License as published by the 
 Free Software Foundation, either version 3 of the License, or (at your option)
 any later version.
 
-Dresden OCL2 for Eclipse is distributed in the hope that it will be useful,
+Dresden OCL is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
 or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License 
 for more details.
 
 You should have received a copy of the GNU Lesser General Public License along 
-with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
+with Dresden OCL. If not, see <http://www.gnu.org/licenses/>.
  */
 package tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.test;
 
@@ -25,7 +25,7 @@ import java.util.List;
 
 import org.junit.Test;
 
-import tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.InvalidException;
+import tudresden.ocl20.pivot.tools.codegen.ocl2java.types.OclInvalidException;
 import tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclOrderedSets;
 
 /**
@@ -296,21 +296,21 @@ public class OclOrderedSetsTest {
 		assertEquals("2", OclOrderedSets.at(col1, 2));
 	}
 
-	@Test(expected = InvalidException.class)
+	@Test(expected = OclInvalidException.class)
 	public void testAt03() {
 
 		List<String> col1 = new ArrayList<String>();
 		OclOrderedSets.at(col1, 1);
 	}
 
-	@Test(expected = InvalidException.class)
+	@Test(expected = OclInvalidException.class)
 	public void testAt04() {
 
 		String[] col1 = new String[] {};
 		OclOrderedSets.at(col1, 1);
 	}
 
-	@Test(expected = InvalidException.class)
+	@Test(expected = OclInvalidException.class)
 	public void testAt05() {
 
 		List<String> col1 = new ArrayList<String>();
@@ -318,14 +318,14 @@ public class OclOrderedSetsTest {
 		OclOrderedSets.at(col1, 0);
 	}
 
-	@Test(expected = InvalidException.class)
+	@Test(expected = OclInvalidException.class)
 	public void testAt06() {
 
 		String[] col1 = new String[] { "1" };
 		OclOrderedSets.at(col1, 0);
 	}
 
-	@Test(expected = InvalidException.class)
+	@Test(expected = OclInvalidException.class)
 	public void testAt07() {
 
 		List<String> col1 = new ArrayList<String>();
@@ -333,7 +333,7 @@ public class OclOrderedSetsTest {
 		OclOrderedSets.at(col1, 2);
 	}
 
-	@Test(expected = InvalidException.class)
+	@Test(expected = OclInvalidException.class)
 	public void testAt08() {
 
 		String[] col1 = new String[] { "1" };
@@ -358,7 +358,7 @@ public class OclOrderedSetsTest {
 		assertEquals("1", OclOrderedSets.first(col1));
 	}
 
-	@Test(expected = InvalidException.class)
+	@Test(expected = OclInvalidException.class)
 	public void testFirst03() {
 
 		List<String> col1 = new ArrayList<String>();
@@ -366,7 +366,7 @@ public class OclOrderedSetsTest {
 		OclOrderedSets.first(col1);
 	}
 
-	@Test(expected = InvalidException.class)
+	@Test(expected = OclInvalidException.class)
 	public void testFirst04() {
 
 		String[] col1 = new String[] {};
@@ -374,7 +374,7 @@ public class OclOrderedSetsTest {
 		OclOrderedSets.first(col1);
 	}
 
-	@Test(expected = InvalidException.class)
+	@Test(expected = OclInvalidException.class)
 	public void testFirst05() {
 
 		String[] col1 = null;
@@ -382,7 +382,7 @@ public class OclOrderedSetsTest {
 		OclOrderedSets.first(col1);
 	}
 
-	@Test(expected = InvalidException.class)
+	@Test(expected = OclInvalidException.class)
 	public void testFirst06() {
 
 		List<String> col1 = null;
@@ -410,7 +410,7 @@ public class OclOrderedSetsTest {
 		assertEquals(new Integer(2), OclOrderedSets.indexOf(col1, "2"));
 	}
 
-	@Test(expected = InvalidException.class)
+	@Test(expected = OclInvalidException.class)
 	public void testIndexOf03() {
 
 		List<String> col1 = new ArrayList<String>();
@@ -418,7 +418,7 @@ public class OclOrderedSetsTest {
 		OclOrderedSets.indexOf(col1, "1");
 	}
 
-	@Test(expected = InvalidException.class)
+	@Test(expected = OclInvalidException.class)
 	public void testIndexOf04() {
 
 		String[] col1 = new String[] {};
@@ -426,7 +426,7 @@ public class OclOrderedSetsTest {
 		OclOrderedSets.indexOf(col1, "1");
 	}
 
-	@Test(expected = InvalidException.class)
+	@Test(expected = OclInvalidException.class)
 	public void testIndexOf05() {
 
 		List<String> col1 = new ArrayList<String>();
@@ -435,7 +435,7 @@ public class OclOrderedSetsTest {
 		OclOrderedSets.indexOf(col1, "1");
 	}
 
-	@Test(expected = InvalidException.class)
+	@Test(expected = OclInvalidException.class)
 	public void testIndexOf06() {
 
 		String[] col1 = new String[] { "2" };
@@ -443,7 +443,7 @@ public class OclOrderedSetsTest {
 		OclOrderedSets.indexOf(col1, "1");
 	}
 
-	@Test(expected = InvalidException.class)
+	@Test(expected = OclInvalidException.class)
 	public void testIndexOf07() {
 
 		List<String> col1 = null;
@@ -451,7 +451,7 @@ public class OclOrderedSetsTest {
 		OclOrderedSets.indexOf(col1, "1");
 	}
 
-	@Test(expected = InvalidException.class)
+	@Test(expected = OclInvalidException.class)
 	public void testIndexOf08() {
 
 		String[] col1 = null;
@@ -499,7 +499,7 @@ public class OclOrderedSetsTest {
 		assertEquals("2", OclOrderedSets.insertAt(col1, 1, "2").get(0));
 	}
 
-	@Test(expected = InvalidException.class)
+	@Test(expected = OclInvalidException.class)
 	public void testInsertAt03() {
 
 		List<String> col1 = new ArrayList<String>();
@@ -507,7 +507,7 @@ public class OclOrderedSetsTest {
 		OclOrderedSets.insertAt(col1, 0, "1");
 	}
 
-	@Test(expected = InvalidException.class)
+	@Test(expected = OclInvalidException.class)
 	public void testInsertAt04() {
 
 		String[] col1 = new String[] {};
@@ -515,7 +515,7 @@ public class OclOrderedSetsTest {
 		OclOrderedSets.insertAt(col1, 0, "1");
 	}
 
-	@Test(expected = InvalidException.class)
+	@Test(expected = OclInvalidException.class)
 	public void testInsertAt05() {
 
 		List<String> col1 = new ArrayList<String>();
@@ -523,7 +523,7 @@ public class OclOrderedSetsTest {
 		OclOrderedSets.insertAt(col1, 2, "1");
 	}
 
-	@Test(expected = InvalidException.class)
+	@Test(expected = OclInvalidException.class)
 	public void testInsertAt06() {
 
 		String[] col1 = new String[] {};
@@ -549,7 +549,7 @@ public class OclOrderedSetsTest {
 		assertEquals("2", OclOrderedSets.last(col1));
 	}
 
-	@Test(expected = InvalidException.class)
+	@Test(expected = OclInvalidException.class)
 	public void testLast03() {
 
 		List<String> col1 = new ArrayList<String>();
@@ -557,7 +557,7 @@ public class OclOrderedSetsTest {
 		OclOrderedSets.last(col1);
 	}
 
-	@Test(expected = InvalidException.class)
+	@Test(expected = OclInvalidException.class)
 	public void testLast04() {
 
 		String[] col1 = new String[] {};
@@ -565,7 +565,7 @@ public class OclOrderedSetsTest {
 		OclOrderedSets.last(col1);
 	}
 
-	@Test(expected = InvalidException.class)
+	@Test(expected = OclInvalidException.class)
 	public void testLast05() {
 
 		String[] col1 = null;
@@ -573,7 +573,7 @@ public class OclOrderedSetsTest {
 		OclOrderedSets.last(col1);
 	}
 
-	@Test(expected = InvalidException.class)
+	@Test(expected = OclInvalidException.class)
 	public void testLast06() {
 
 		List<String> col1 = null;
@@ -686,21 +686,21 @@ public class OclOrderedSetsTest {
 		assertEquals(1, OclOrderedSets.subOrderedSet(col1, 2, 2).size());
 	}
 
-	@Test(expected = InvalidException.class)
+	@Test(expected = OclInvalidException.class)
 	public void testSubOrderedSet03() {
 
 		List<String> col1 = new ArrayList<String>();
 		OclOrderedSets.subOrderedSet(col1, 1, 1);
 	}
 
-	@Test(expected = InvalidException.class)
+	@Test(expected = OclInvalidException.class)
 	public void testSubOrderedSet04() {
 
 		String[] col1 = new String[] {};
 		OclOrderedSets.subOrderedSet(col1, 1, 1);
 	}
 
-	@Test(expected = InvalidException.class)
+	@Test(expected = OclInvalidException.class)
 	public void testSubOrderedSet05() {
 
 		List<String> col1 = new ArrayList<String>();
@@ -708,14 +708,14 @@ public class OclOrderedSetsTest {
 		OclOrderedSets.subOrderedSet(col1, 0, 1);
 	}
 
-	@Test(expected = InvalidException.class)
+	@Test(expected = OclInvalidException.class)
 	public void testSubOrderedSet06() {
 
 		String[] col1 = new String[] { "1" };
 		OclOrderedSets.subOrderedSet(col1, 0, 1);
 	}
 
-	@Test(expected = InvalidException.class)
+	@Test(expected = OclInvalidException.class)
 	public void testSubOrderedSet07() {
 
 		List<String> col1 = new ArrayList<String>();
@@ -723,14 +723,14 @@ public class OclOrderedSetsTest {
 		OclOrderedSets.subOrderedSet(col1, 1, 2);
 	}
 
-	@Test(expected = InvalidException.class)
+	@Test(expected = OclInvalidException.class)
 	public void testSubOrderedSet08() {
 
 		String[] col1 = new String[] { "1" };
 		OclOrderedSets.subOrderedSet(col1, 1, 2);
 	}
 
-	@Test(expected = InvalidException.class)
+	@Test(expected = OclInvalidException.class)
 	public void testSubOrderedSet09() {
 
 		List<String> col1 = new ArrayList<String>();
@@ -739,7 +739,7 @@ public class OclOrderedSetsTest {
 		OclOrderedSets.subOrderedSet(col1, 2, 1);
 	}
 
-	@Test(expected = InvalidException.class)
+	@Test(expected = OclInvalidException.class)
 	public void testSubOrderedSet10() {
 
 		String[] col1 = new String[] { "1", "2" };

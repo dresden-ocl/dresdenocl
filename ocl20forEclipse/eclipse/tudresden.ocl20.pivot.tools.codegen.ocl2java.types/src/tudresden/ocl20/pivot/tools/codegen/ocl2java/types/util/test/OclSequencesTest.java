@@ -1,20 +1,20 @@
 /*
-Copyright (C) 2008-2010 by Claas Wilke (claaswilke@gmx.net)
+Copyright (C) 2008-2010 by Claas Wilke (claas.wilke@tu-dresden.de)
 
-This file is part of the OCL 2 Java Code Generator of Dresden OCL2 for Eclipse.
+This file is part of the OCL 2 Java Code Generator of Dresden OCL.
 
-Dresden OCL2 for Eclipse is free software: you can redistribute it and/or modify 
+Dresden OCL is free software: you can redistribute it and/or modify 
 it under the terms of the GNU Lesser General Public License as published by the 
 Free Software Foundation, either version 3 of the License, or (at your option)
 any later version.
 
-Dresden OCL2 for Eclipse is distributed in the hope that it will be useful,
+Dresden OCL is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
 or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License 
 for more details.
 
 You should have received a copy of the GNU Lesser General Public License along 
-with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
+with Dresden OCL. If not, see <http://www.gnu.org/licenses/>.
  */
 package tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.test;
 
@@ -27,7 +27,7 @@ import java.util.List;
 
 import org.junit.Test;
 
-import tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.InvalidException;
+import tudresden.ocl20.pivot.tools.codegen.ocl2java.types.OclInvalidException;
 import tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclSequences;
 
 /**
@@ -280,21 +280,21 @@ public class OclSequencesTest {
 		assertEquals("2", OclSequences.at(col1, 2));
 	}
 
-	@Test(expected = InvalidException.class)
+	@Test(expected = OclInvalidException.class)
 	public void testAt03() {
 
 		List<String> col1 = new ArrayList<String>();
 		OclSequences.at(col1, 1);
 	}
 
-	@Test(expected = InvalidException.class)
+	@Test(expected = OclInvalidException.class)
 	public void testAt04() {
 
 		String[] col1 = new String[] {};
 		OclSequences.at(col1, 1);
 	}
 
-	@Test(expected = InvalidException.class)
+	@Test(expected = OclInvalidException.class)
 	public void testAt05() {
 
 		List<String> col1 = new ArrayList<String>();
@@ -302,14 +302,14 @@ public class OclSequencesTest {
 		OclSequences.at(col1, 0);
 	}
 
-	@Test(expected = InvalidException.class)
+	@Test(expected = OclInvalidException.class)
 	public void testAt06() {
 
 		String[] col1 = new String[] { "1" };
 		OclSequences.at(col1, 0);
 	}
 
-	@Test(expected = InvalidException.class)
+	@Test(expected = OclInvalidException.class)
 	public void testAt07() {
 
 		List<String> col1 = new ArrayList<String>();
@@ -317,7 +317,7 @@ public class OclSequencesTest {
 		OclSequences.at(col1, 2);
 	}
 
-	@Test(expected = InvalidException.class)
+	@Test(expected = OclInvalidException.class)
 	public void testAt08() {
 
 		String[] col1 = new String[] { "1" };
@@ -525,7 +525,7 @@ public class OclSequencesTest {
 		assertEquals(2, OclSequences.excluding(col1, "2").size());
 	}
 
-	@Test(expected = InvalidException.class)
+	@Test(expected = OclInvalidException.class)
 	public void testExcluding03() {
 
 		List<String> col1 = null;
@@ -533,7 +533,7 @@ public class OclSequencesTest {
 		OclSequences.excluding(col1, "1");
 	}
 
-	@Test(expected = InvalidException.class)
+	@Test(expected = OclInvalidException.class)
 	public void testExcluding04() {
 
 		String[] col1 = null;
@@ -575,7 +575,7 @@ public class OclSequencesTest {
 		assertEquals("1", OclSequences.first(col1));
 	}
 
-	@Test(expected = InvalidException.class)
+	@Test(expected = OclInvalidException.class)
 	public void testFirst03() {
 
 		List<String> col1 = new ArrayList<String>();
@@ -583,7 +583,7 @@ public class OclSequencesTest {
 		OclSequences.first(col1);
 	}
 
-	@Test(expected = InvalidException.class)
+	@Test(expected = OclInvalidException.class)
 	public void testFirst04() {
 
 		String[] col1 = new String[] {};
@@ -591,7 +591,7 @@ public class OclSequencesTest {
 		OclSequences.first(col1);
 	}
 
-	@Test(expected = InvalidException.class)
+	@Test(expected = OclInvalidException.class)
 	public void testFirst05() {
 
 		String[] col1 = null;
@@ -599,7 +599,7 @@ public class OclSequencesTest {
 		OclSequences.first(col1);
 	}
 
-	@Test(expected = InvalidException.class)
+	@Test(expected = OclInvalidException.class)
 	public void testFirst06() {
 
 		List<String> col1 = null;
@@ -717,7 +717,7 @@ public class OclSequencesTest {
 		assertEquals(2, OclSequences.including(col1, "2").size());
 	}
 
-	@Test(expected = InvalidException.class)
+	@Test(expected = OclInvalidException.class)
 	public void testIncluding03() {
 
 		List<String> col1 = null;
@@ -725,7 +725,7 @@ public class OclSequencesTest {
 		OclSequences.including(col1, "1");
 	}
 
-	@Test(expected = InvalidException.class)
+	@Test(expected = OclInvalidException.class)
 	public void testIncluding04() {
 
 		String[] col1 = null;
@@ -769,7 +769,7 @@ public class OclSequencesTest {
 		assertEquals(new Integer(2), OclSequences.indexOf(col1, "2"));
 	}
 
-	@Test(expected = InvalidException.class)
+	@Test(expected = OclInvalidException.class)
 	public void testIndexOf03() {
 
 		List<String> col1 = new ArrayList<String>();
@@ -777,7 +777,7 @@ public class OclSequencesTest {
 		OclSequences.indexOf(col1, "1");
 	}
 
-	@Test(expected = InvalidException.class)
+	@Test(expected = OclInvalidException.class)
 	public void testIndexOf04() {
 
 		String[] col1 = new String[] {};
@@ -785,7 +785,7 @@ public class OclSequencesTest {
 		OclSequences.indexOf(col1, "1");
 	}
 
-	@Test(expected = InvalidException.class)
+	@Test(expected = OclInvalidException.class)
 	public void testIndexOf05() {
 
 		List<String> col1 = new ArrayList<String>();
@@ -794,7 +794,7 @@ public class OclSequencesTest {
 		OclSequences.indexOf(col1, "1");
 	}
 
-	@Test(expected = InvalidException.class)
+	@Test(expected = OclInvalidException.class)
 	public void testIndexOf06() {
 
 		String[] col1 = new String[] { "2" };
@@ -802,7 +802,7 @@ public class OclSequencesTest {
 		OclSequences.indexOf(col1, "1");
 	}
 
-	@Test(expected = InvalidException.class)
+	@Test(expected = OclInvalidException.class)
 	public void testIndexOf07() {
 
 		List<String> col1 = null;
@@ -810,7 +810,7 @@ public class OclSequencesTest {
 		OclSequences.indexOf(col1, "1");
 	}
 
-	@Test(expected = InvalidException.class)
+	@Test(expected = OclInvalidException.class)
 	public void testIndexOf08() {
 
 		String[] col1 = null;
@@ -858,7 +858,7 @@ public class OclSequencesTest {
 		assertEquals("2", OclSequences.insertAt(col1, 1, "2").get(0));
 	}
 
-	@Test(expected = InvalidException.class)
+	@Test(expected = OclInvalidException.class)
 	public void testInsertAt03() {
 
 		List<String> col1 = new ArrayList<String>();
@@ -866,7 +866,7 @@ public class OclSequencesTest {
 		OclSequences.insertAt(col1, 0, "1");
 	}
 
-	@Test(expected = InvalidException.class)
+	@Test(expected = OclInvalidException.class)
 	public void testInsertAt04() {
 
 		String[] col1 = new String[] {};
@@ -874,7 +874,7 @@ public class OclSequencesTest {
 		OclSequences.insertAt(col1, 0, "1");
 	}
 
-	@Test(expected = InvalidException.class)
+	@Test(expected = OclInvalidException.class)
 	public void testInsertAt05() {
 
 		List<String> col1 = new ArrayList<String>();
@@ -882,7 +882,7 @@ public class OclSequencesTest {
 		OclSequences.insertAt(col1, 2, "1");
 	}
 
-	@Test(expected = InvalidException.class)
+	@Test(expected = OclInvalidException.class)
 	public void testInsertAt06() {
 
 		String[] col1 = new String[] {};
@@ -908,7 +908,7 @@ public class OclSequencesTest {
 		assertEquals("2", OclSequences.last(col1));
 	}
 
-	@Test(expected = InvalidException.class)
+	@Test(expected = OclInvalidException.class)
 	public void testLast03() {
 
 		List<String> col1 = new ArrayList<String>();
@@ -916,7 +916,7 @@ public class OclSequencesTest {
 		OclSequences.last(col1);
 	}
 
-	@Test(expected = InvalidException.class)
+	@Test(expected = OclInvalidException.class)
 	public void testLast04() {
 
 		String[] col1 = new String[] {};
@@ -924,7 +924,7 @@ public class OclSequencesTest {
 		OclSequences.last(col1);
 	}
 
-	@Test(expected = InvalidException.class)
+	@Test(expected = OclInvalidException.class)
 	public void testLast05() {
 
 		String[] col1 = null;
@@ -932,7 +932,7 @@ public class OclSequencesTest {
 		OclSequences.last(col1);
 	}
 
-	@Test(expected = InvalidException.class)
+	@Test(expected = OclInvalidException.class)
 	public void testLast06() {
 
 		List<String> col1 = null;
@@ -1045,21 +1045,21 @@ public class OclSequencesTest {
 		assertEquals(1, OclSequences.subSequence(col1, 2, 2).size());
 	}
 
-	@Test(expected = InvalidException.class)
+	@Test(expected = OclInvalidException.class)
 	public void testSubSequence03() {
 
 		List<String> col1 = new ArrayList<String>();
 		OclSequences.subSequence(col1, 1, 1);
 	}
 
-	@Test(expected = InvalidException.class)
+	@Test(expected = OclInvalidException.class)
 	public void testSubSequence04() {
 
 		String[] col1 = new String[] {};
 		OclSequences.subSequence(col1, 1, 1);
 	}
 
-	@Test(expected = InvalidException.class)
+	@Test(expected = OclInvalidException.class)
 	public void testSubSequence05() {
 
 		List<String> col1 = new ArrayList<String>();
@@ -1067,14 +1067,14 @@ public class OclSequencesTest {
 		OclSequences.subSequence(col1, 0, 1);
 	}
 
-	@Test(expected = InvalidException.class)
+	@Test(expected = OclInvalidException.class)
 	public void testSubSequence06() {
 
 		String[] col1 = new String[] { "1" };
 		OclSequences.subSequence(col1, 0, 1);
 	}
 
-	@Test(expected = InvalidException.class)
+	@Test(expected = OclInvalidException.class)
 	public void testSubSequence07() {
 
 		List<String> col1 = new ArrayList<String>();
@@ -1082,14 +1082,14 @@ public class OclSequencesTest {
 		OclSequences.subSequence(col1, 1, 2);
 	}
 
-	@Test(expected = InvalidException.class)
+	@Test(expected = OclInvalidException.class)
 	public void testSubSequence08() {
 
 		String[] col1 = new String[] { "1" };
 		OclSequences.subSequence(col1, 1, 2);
 	}
 
-	@Test(expected = InvalidException.class)
+	@Test(expected = OclInvalidException.class)
 	public void testSubSequence09() {
 
 		List<String> col1 = new ArrayList<String>();
@@ -1098,7 +1098,7 @@ public class OclSequencesTest {
 		OclSequences.subSequence(col1, 2, 1);
 	}
 
-	@Test(expected = InvalidException.class)
+	@Test(expected = OclInvalidException.class)
 	public void testSubSequence10() {
 
 		String[] col1 = new String[] { "1", "2" };
