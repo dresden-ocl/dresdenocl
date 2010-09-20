@@ -106,8 +106,15 @@ trait OclAttributesImpl extends OclAttributes {selfType : OclStaticSemantics =>
           val op = operation.getOperation
           if (op.eIsProxy)
             Empty
-          else
-            Full(factory.createVariable("self", op.getOwningType, null))
+          else {
+            // get the operations owning type; if not present, the operation is defined
+            // in a "def" -> get the owning type from the Map that keeps track of
+            // defined operations
+            var owningType = op.getOwningType
+            if (owningType == null)
+              owningType = definedOperationsType.get(op)
+            Full(factory.createVariable("self", owningType, null))
+          }
         }
         
         case o@AttributeContextDeclarationCS(typeName, _, _) if child != typeName => {
