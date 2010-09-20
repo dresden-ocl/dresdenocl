@@ -109,11 +109,30 @@ public class TestPerformer {
 	public TestPerformer(String modelPath, String modelInstancePath)
 			throws TestInitializationException {
 
-		this(URI.createURI(modelPath), URI.createURI(modelInstancePath));
+		this();
+
+		if (modelPath == null || modelPath.isEmpty()) {
+			throw new TestInitializationException("Model must not be null");
+		}
+
+		this.loadModel(URI.createURI(modelPath));
+
+		// model instance is not mandatory (e.g. for parse-only-tests)
+		if (modelInstancePath != null && !modelInstancePath.isEmpty()) {
+			this.initInstanceAndInterpreter(URI.createURI(modelInstancePath));
+		}
+
 	}
 
-	public TestPerformer(URI modelPath, URI modelInstancePath)
+	private void initInstanceAndInterpreter(URI modelInstancePath)
 			throws TestInitializationException {
+
+		this.loadModelInstance(modelInstancePath);
+
+		this.createInterpreter();
+	}
+
+	private TestPerformer() {
 
 		this.metaModel =
 				ModelBusPlugin.getMetamodelRegistry().getMetamodel(META_MODEL);
@@ -121,17 +140,9 @@ public class TestPerformer {
 		if (this.metaModel == null) {
 			throw new RuntimeException("Unable to load meta model during test.");
 		}
-
 		// initialize provider
 		this.modelProvider = this.metaModel.getModelProvider();
 		this.modelInstanceProvider = new JavaModelInstanceProvider();
-
-		this.loadModel(modelPath);
-
-		this.loadModelInstance(modelInstancePath);
-
-		this.createInterpreter();
-
 	}
 
 	private void createInterpreter() throws TestInitializationException {
@@ -148,29 +159,37 @@ public class TestPerformer {
 
 		// check if exists in environment
 		this.testModel = testEnv.getModelIfLoaded(modelPath);
-		if (this.testModel != null) {
-			return;
+		if (this.testModel == null) {
+			String absoluteModelPath = this.getAbsolutePathForRelativeURI(modelPath);
+			File modelFile = new File(absoluteModelPath);
+
+			if (!modelFile.exists()) {
+				throw new TestInitializationException("Model file "
+						+ modelFile.getAbsolutePath() + " doesn't exist");
+			}
+
+			try {
+				this.testModel = this.modelProvider.getModel(modelFile);
+				testEnv.addModel(modelPath, this.testModel);
+			} catch (ModelAccessException e) {
+				throw new TestInitializationException(e);
+			}
 		}
 
-		String absoluteModelPath = this.getAbsolutePathForRelativeURI(modelPath);
-		File modelFile = new File(absoluteModelPath);
+		this.refreshLoadedModel();
+	}
 
-		if (!modelFile.exists()) {
-			throw new TestInitializationException("Model file "
-					+ modelFile.getAbsolutePath() + " doesn't exist");
-		}
+	/**
+	 * TODO: doku
+	 */
+	public void refreshLoadedModel() {
 
-		try {
-			this.testModel = this.modelProvider.getModel(modelFile);
-
-			// TODO: move model registry to test environment and let it add models
-			// itself
-			modelRegistry.addModel(this.testModel);
-			testEnv.addModel(modelPath, this.testModel);
-
-		} catch (ModelAccessException e) {
-			throw new TestInitializationException(e);
-		}
+		// remove model if it was present to avoid
+		// redefining properties with "def" and getting
+		// errors
+		modelRegistry.removeModel(this.testModel);
+		modelRegistry.addModel(this.testModel);
+		modelRegistry.setActiveModel(this.testModel);
 	}
 
 	private void loadModelInstance(URI filePath)
@@ -215,8 +234,6 @@ public class TestPerformer {
 
 		ResourceSet rs = new ResourceSetImpl();
 		OclResource resource = new OclResource(dummyFile);
-
-		modelRegistry.setActiveModel(this.testModel);
 
 		try {
 			InputStream inputStream = this.createStatementInStream(statement);

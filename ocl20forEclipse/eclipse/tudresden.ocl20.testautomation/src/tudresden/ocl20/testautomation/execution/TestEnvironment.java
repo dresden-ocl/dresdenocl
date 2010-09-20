@@ -29,7 +29,7 @@ import org.osgi.framework.Bundle;
 
 import tudresden.ocl20.pivot.model.IModel;
 import tudresden.ocl20.pivot.modelinstance.IModelInstance;
-import tudresden.ocl20.testautomation.tools.StatementDefinition;
+import tudresden.ocl20.testautomation.tools.Statement;
 
 /**
  * the test environment stores data which is accessed by different objects but
@@ -41,7 +41,7 @@ public class TestEnvironment {
 	public String fileDirectory;
 
 	// list of statements
-	public List<StatementDefinition> loadedStatements;
+	public List<Statement> loadedStatements;
 
 	// all loaded model instances
 	// since the testperformer is used by differend test cases the instances
@@ -66,7 +66,7 @@ public class TestEnvironment {
 		
 		this.loadedModels = new HashMap<URI, IModel>();
 
-		this.loadedStatements = new LinkedList<StatementDefinition>();
+		this.loadedStatements = new LinkedList<Statement>();
 
 	}
 
@@ -119,23 +119,4 @@ public class TestEnvironment {
 		this.loadedInstances.put(filePath, model);
 	}
 
-	/**
-	 * Stores a constriant definition under it's name qualified name. Assert that
-	 * a name is not used twice!
-	 * 
-	 * @param packageInfo
-	 * @param specification
-	 */
-	public void storeStatementDefinition(String packageInfo,
-			String specification, String name) {
-
-		StatementDefinition statDef =
-				new StatementDefinition(packageInfo, name, specification);
-
-		// assert we have a unique name for each statement
-		assert (!this.loadedStatements.contains(statDef));
-
-		this.loadedStatements.add(statDef);
-
-	}
 }

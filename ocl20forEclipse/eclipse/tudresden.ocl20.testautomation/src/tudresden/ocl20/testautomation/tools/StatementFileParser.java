@@ -24,35 +24,28 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.LinkedList;
+import java.util.List;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import org.apache.log4j.Logger;
 
+import tudresden.ocl20.testautomation.exceptions.TestFileParseException;
 
 public class StatementFileParser {
 
-	// @ Regex-Pattern to get a constraint's name
-	private static Pattern patternStatementName;
+	private static Logger log = Logger.getLogger(StatementFileParser.class);
 
-	private String curStatementName;
+	private StatementFile currentUnit;
 
-	// @ independent number to assign as a constraint name
-	private int curStatementId;
-
-	private StatementFileUnit currentUnit;
-	// protected TestEnvironment testEnv;
-
-	private BufferedReader currentReader;
-
-	static {
-		patternStatementName =
-				Pattern.compile("(.*?)(inv|pre|post|def)\\s*([\\(\\)\\w]*?)\\s*:(.*)");
-	}
+	protected List<String> fileLines;
 
 	/**
 	 * needs to be instanciated, although it doesn't safe much since it works like
 	 * a statemachine. For every parsing operation it saves curStatementName and
 	 * curStatementId etc.
+	 * 
+	 * @throws IOException
+	 * @throws TestFileParseException
 	 */
 	public StatementFileParser() {
 
@@ -66,33 +59,63 @@ public class StatementFileParser {
 	 * 
 	 * @param fileName
 	 * @param type
-	 * @throws FileNotFoundException
+	 * @throws TestFileParseException
+	 * @throws IOException
 	 */
-	public synchronized StatementFileUnit parseConstraintFile(String fileName)
-			throws FileNotFoundException {
+	public synchronized StatementFile parseConstraintFile(String fileName)
+			throws TestFileParseException {
 
-		this.initParseRun(fileName);
+		try {
+			this.init(fileName);
 
-		// package information to be copied
-		// at the beginning of each statement
-		String packageInformation = this.getPackageFromReader();
+			this.currentUnit.setSourceFile(fileName);
 
-		this.currentUnit.setPackage(packageInformation);
+			int lastParsedLine = this.readPackageAndHead();
 
-		this.parseStatements(fileName);
+			this.parseStatements(lastParsedLine);
 
-		return this.currentUnit;
+			return this.currentUnit;
+		} finally {
+			this.deInit();
+		}
 	}
 
-	private void initParseRun(String fileName) throws FileNotFoundException {
+	private void init(String fileName) throws TestFileParseException {
 
-		this.currentUnit = new StatementFileUnit();
+		log.debug("Start parsing file " + fileName);
+		this.fileLines = new LinkedList<String>();
+		this.currentUnit = new StatementFile();
 
-		// start the curConstraintID at 1 for each file
-		this.curStatementId = 1;
+		this.readLines(fileName);
 
-		FileReader oclFileReader = this.safeOpenFileReader(fileName);
-		this.currentReader = new BufferedReader(oclFileReader);
+	}
+
+	private void readLines(String fileName) throws TestFileParseException {
+
+		try {
+			BufferedReader reader = this.safeOpenFileReader(fileName);
+
+			String line;
+			while ((line = reader.readLine()) != null) {
+				this.fileLines.add(line.trim());
+			}
+
+			if (this.fileLines.isEmpty()) {
+				throw new TestFileParseException("Test file " + fileName + " is empty!");
+			}
+
+			reader.close();
+		} catch (IOException e) {
+			throw new TestFileParseException("IOError opening or reading file "
+					+ fileName, e);
+		}
+
+	}
+
+	private void deInit() {
+
+		this.currentUnit = null;
+		this.fileLines = null;
 	}
 
 	/**
@@ -101,74 +124,73 @@ public class StatementFileParser {
 	 * @param source
 	 * @param packageInfo
 	 * @param fileName
+	 * @throws TestFileParseException
 	 */
-	private void parseStatements(String fileName) {
+	private void parseStatements(int startLine) throws TestFileParseException {
 
-		fileName = PathHelper.getFileNameFromPath(fileName);
+		String line;
 
-		String strLine;
-		StringBuilder oclStatementString = new StringBuilder();
-
-		while ((strLine = this.nextLine()) != null) {
-
-			// if line starts with context or endpackage
-			// --> parse the LAST statement
-			if ((strLine.startsWith("endpackage") || strLine.startsWith("context"))
-					&& oclStatementString.length() > 0) {
-
-				this.currentUnit.addStatementDefinition(this.curStatementName, oclStatementString.toString());
-
-				// empty ocl string
-				oclStatementString.setLength(0);
+		for (int i = startLine; i < this.fileLines.size(); ++i) {
+			line = this.fileLines.get(i);
+			if (line.startsWith("context")) {
+				this.handleStatement(i);
+				continue;
 			}
 
-			// EOF
-			if (strLine.startsWith("endpackage")) {
+			if (line.startsWith("endpackage") || line.startsWith("endpackage")) {
+				return;
+			}
+		}
+		throw new TestFileParseException(
+				"Expected `endpackage` at the end of the file");
+	}
+
+	private void handleStatement(int contextLine) {
+
+		// paranoia :)
+		assert (this.fileLines.get(contextLine).startsWith("context"));
+		assert (contextLine < this.fileLines.size());
+
+		Statement statement = this.currentUnit.createStatement();
+		// get comments above this line
+		for (int i = contextLine - 1; i >= 0; --i) {
+			String line = this.fileLines.get(i);
+			String comment = this.lineIsComment(line);
+			if (comment != null) {
+				statement.addTopComment(comment);
+			}
+			else {
+				break;
+			}
+		}
+
+		LinkedList<String> statementLines = new LinkedList<String>();
+
+		// get all the following lines until we see the next context or endpackage
+		for (int i = contextLine; i < this.fileLines.size(); ++i) {
+			String line = this.fileLines.get(i);
+
+			// take everything until
+			if (i != contextLine
+					&& (line.startsWith("context") || line.startsWith("endpackage"))) {
 				break;
 			}
 
-			// try to extract the constraint's name
-			strLine = this.getOrSetConstraintName(strLine, fileName);
-
-			oclStatementString.append(strLine);
-			oclStatementString.append("\n");
-
-		}
-	}
-
-	/**
-	 * returns the next line of the reader by omitting comments, empty lines etc.
-	 * It's throwing RuntimeException when the file seems corrupt.
-	 * 
-	 * @param source
-	 * 
-	 * @return next line or null in case of end
-	 */
-	private String nextLine() {
-
-		String line;
-		try {
-			// as long as there are lines to read
-			while ((line = this.currentReader.readLine()) != null) {
-				line = line.trim();
-				if (line.length() == 0 || line.startsWith("--")) {
-					continue;
-				}
-
-				if (line.startsWith("package")) {
-					throw new RuntimeException(
-							"Package information should be only once in an Ocl File");
-				}
-
-				return line;
-			}
-
-		} catch (IOException e) {
-			throw new RuntimeException("Error Reading Source File.", e);
+			// add the lines just raw
+			statementLines.add(line);
 		}
 
-		// file empty or EOF
-		return null;
+		// remove the last lines that begin with a comment as they
+		// proably belong to the next context until there's a new line
+		while (statementLines.getLast().startsWith("--")) {
+			statementLines.removeLast();
+		}
+
+		// now finally add the lines to new statement
+		statement.setStatementLines(statementLines);
+
+		this.currentUnit.addStatement(statement);
+
 	}
 
 	/**
@@ -204,12 +226,12 @@ public class StatementFileParser {
 	 * 
 	 * @throws RuntimeException
 	 */
-	private FileReader safeOpenFileReader(String fileName)
+	private BufferedReader safeOpenFileReader(String fileName)
 			throws FileNotFoundException {
 
 		File tmpFile = this.safeOpenFile(fileName);
 
-		FileReader tmpReader = new FileReader(tmpFile);
+		BufferedReader tmpReader = new BufferedReader(new FileReader(tmpFile));
 		return tmpReader;
 
 	}
@@ -220,85 +242,52 @@ public class StatementFileParser {
 	 * @param reader
 	 *          Input reader that contains package statement
 	 * 
-	 * @return
+	 * @return line number of package. the constraint searcher doesn't need to
+	 *         parse above this line to avoid confusion
 	 * 
-	 * @throws RuntimeException
+	 * @throws TestFileParseException
 	 */
-	private String getPackageFromReader() throws RuntimeException {
+	private int readPackageAndHead() throws TestFileParseException {
 
-		String line = "";
-		try {
-			while ((line = this.currentReader.readLine()) != null) {
-				line = line.trim();
-				// empty line or comment at the beginning
-				if (line.equals("") || line.startsWith("--")) {
-					continue;
-				}
+		String comment;
+		String line;
 
-				if (line.startsWith("package")) {
-					return line.substring(7).trim();
-				}
+		for (int i = 0; i < this.fileLines.size(); ++i) {
+			line = this.fileLines.get(i);
 
-				throw new RuntimeException(
-						"Cannot find the package-statement in the reader. This has to be the first statement!");
+			if (line.isEmpty()) {
+				continue;
 			}
 
-			throw new RuntimeException(
-					"Unexpected End of Reader, did not find a package");
-		} catch (IOException e) {
-			throw new RuntimeException(e);
+			// handle comments
+			comment = this.lineIsComment(line);
+			if (comment != null) {
+				this.currentUnit.addFileComment(comment);
+				continue;
+			}
+
+			// handle package deklaration
+			if (line.startsWith("package")) {
+				this.currentUnit.setPackage(line.substring(8).trim());
+
+				this.currentUnit.parseHeadComments();
+				return i + 1;
+			}
+
+			break;
 		}
+
+		// package must be the first statement!
+		throw new TestFileParseException(
+				"Expected package declaration to be the first statement!");
 	}
 
-	/**
-	 * analyzes a linen from the input and extracts the constraint's name, if
-	 * specified. If no name is given, a new name is generated and integrated inh
-	 * the line
-	 * 
-	 * @param line
-	 *          Line to be analyzed
-	 * @param fileName
-	 *          current scanned filename that is used to generate the new
-	 *          constraint name
-	 * 
-	 * @return
-	 */
-	private String getOrSetConstraintName(String line, String fileName) {
+	private String lineIsComment(String line) {
 
-		// try to capture the invariant's name
-		Matcher match = patternStatementName.matcher(line);
-
-		String conName;
-
-		if (match.matches()) {
-			// if pre or post add it to the name
-			String prefix;
-			if (match.group(2).equals("pre") || match.group(2).equals("post")
-					|| match.group(2).equals("def")) {
-				prefix = match.group(2) + "_";
-			}
-			else {
-				prefix = "";
-			}
-			// create or modify the testname to get a unique name
-			// specially identify pre and posts to test them separately
-			conName = match.group(3);
-
-			if (conName != null && conName.length() > 0) {
-				this.curStatementName = prefix + fileName + "_" + match.group(3);
-			}
-			else {
-				this.curStatementName =
-						prefix + fileName + "_" + (this.curStatementId++);
-			}
-
-			return match.group(1) + " " + match.group(2) + " "
-					+ this.curStatementName + ":" + match.group(4);
-
+		if (line.startsWith("--")) {
+			return line.substring(2).trim();
 		}
-		else {
-			return line;
-		}
+		return null;
 	}
 
 }

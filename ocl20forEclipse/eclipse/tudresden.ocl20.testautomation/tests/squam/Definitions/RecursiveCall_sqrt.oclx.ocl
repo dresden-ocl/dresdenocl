@@ -14,19 +14,19 @@ package uml
 -- definitions
 --------------------------------------------------------
 context Model
-
 def: sqrt_helper(num : Real, square : Real) : Real = 
 				if (num <> 0.0) then
-					let num2 : Real = (num+square/num)/2 in
-					if num2 <> num then
-						sqrt_helper(num2,square)
+					-- let num2 : Real = ((num+square/num)/2) in
+					if ((num+square/num)/2) <> num then
+						sqrt_helper(((num+square/num)/2),square)
 					else
-						num2
+						((num+square/num)/2)
 					endif
 				else
 					0.0
 				endif
 
+context Model
 def: sqrt(num : Real) : Real = self.sqrt_helper(num,num)
 
 --------------------------------------------------------
@@ -43,8 +43,9 @@ context Model
 inv test_sqrt2: let result:Real = sqrt(16) in result = 4.0
 
 --	calculate sqrt of 337
+-- this one ins gonna fail anyway...
+-- need to change the precision handling before something like that is possible
 context Model
-
-inv test_sqrt_real: let result:Real = sqrt(337) in result = 18.35755975068582
+inv test_sqrt_real: let result:Real = sqrt(337) in result = 18.35756975068582
 
 endpackage

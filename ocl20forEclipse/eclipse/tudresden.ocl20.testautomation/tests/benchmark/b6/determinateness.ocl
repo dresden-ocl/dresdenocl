@@ -1,4 +1,4 @@
-package tudresden::ocl20::benchmark::testdata::common
+package uml
 
 -------------------------------------
 -- B6: determinateness
@@ -15,42 +15,42 @@ package tudresden::ocl20::benchmark::testdata::common
 
 -- -- -- -- -- Set -----------------------------------------------------
 
-context Dummy inv:
+context Model inv:
 	let c:Set(Integer) = Set{} in
    c->any(true) = c->asBag()->any(true)
 
 	 
-context Dummy inv:
+context Model inv:
 	let c:Set(Integer) = Set{} in
    c->any(true) = c->asSequence()->any(true)
 
 	 
-context Dummy inv:
+context Model inv:
 	let c:Set(Integer) = Set{} in
    c->any(true) = c->asBag()->asSequence()->any(true)
 
 	 
-context Dummy inv:
+context Model inv:
 	let c:Set(Integer) = Set{} in
    c->any(true) = c->asSequence()->first()
 
 	 
-context Dummy inv:
+context Model inv:
 	let c:Set(Integer) = Set{} in
    c->any(true) = c->asSequence()->last()
 
 	 
-context Dummy inv:
+context Model inv:
 	let c:Set(Integer) = Set{} in
    c->any(true) = c->asBag()->asSequence()->first()
 
 	 
-context Dummy inv:
+context Model inv:
 	let c:Set(Integer) = Set{} in
    c->any(true) = c->asBag()->asSequence()->last()
 
 	 
-context Dummy inv:
+context Model inv:
 	let c:Set(Integer) = Set{} in
    c->any(true) = 
      c->iterate(elem:Integer;
@@ -58,19 +58,19 @@ context Dummy inv:
            r->including(elem))->first()
 
 	 
-context Dummy inv:
+context Model inv:
 	let c:Set(Integer) = Set{} in
        Sequence{c}->flatten() = c->asSequence()
 
 	 
-context Dummy inv:
+context Model inv:
 	let c:Set(Integer) = Set{} in
        Sequence{c}->flatten() = c->asBag()->asSequence()
 
 	 
 -- -- -- -- -- Bag
 
-context Dummy inv:
+context Model inv:
 	let c:Bag(Integer) = Bag{} in
    c->asSequence() = 
      c->iterate(elem:Integer;
@@ -78,22 +78,22 @@ context Dummy inv:
            r->including(elem))
 
 	 
-context Dummy inv:
+context Model inv:
 	let c:Bag(Integer) = Bag{} in
    c->any(true) = c->asSequence()->any(true)
 
 	 
-context Dummy inv:
+context Model inv:
 	let c:Bag(Integer) = Bag{} in
    c->any(true) = c->asSequence()->first()
 
 	 
-context Dummy inv:
+context Model inv:
 	let c:Bag(Integer) = Bag{} in
    c->any(true) = c->asSequence()->last()
 
 	 
-context Dummy inv:
+context Model inv:
 	let c:Bag(Integer) = Bag{} in
    c->any(true) = 
      c->iterate(elem:Integer;
@@ -101,7 +101,7 @@ context Dummy inv:
            r->including(elem))->first()
 
 	 
-context Dummy inv:
+context Model inv:
 	let c:Bag(Integer) = Bag{} in
        Sequence{c}->flatten() = c->asSequence()
 
@@ -114,94 +114,94 @@ context Dummy inv:
 
 -- -- -- -- -- -- Set --------------------------------------------------
 
-context Dummy inv:
-	let c:Set(Integer) = Set{oclUndefined} in
+context Model inv:
+	let c:Set(Integer) = Set{null} in
    c->any(true) = c->asBag()->any(true)
 
 	 
-context Dummy inv:
-	let c:Set(Integer) = Set{oclUndefined} in
+context Model inv:
+	let c:Set(Integer) = Set{null} in
    c->any(true) = c->asSequence()->any(true)
 
 	 
-context Dummy inv:
-	let c:Set(Integer) = Set{oclUndefined} in
+context Model inv:
+	let c:Set(Integer) = Set{null} in
    c->any(true) = c->asBag()->asSequence()->any(true)
 
 	 
-context Dummy inv:
-	let c:Set(Integer) = Set{oclUndefined} in
+context Model inv:
+	let c:Set(Integer) = Set{null} in
    c->any(true) = c->asSequence()->first()
 
 	 
-context Dummy inv:
-	let c:Set(Integer) = Set{oclUndefined} in
+context Model inv:
+	let c:Set(Integer) = Set{null} in
    c->any(true) = c->asSequence()->last()
 
 	 
-context Dummy inv:
-	let c:Set(Integer) = Set{oclUndefined} in
+context Model inv:
+	let c:Set(Integer) = Set{null} in
    c->any(true) = c->asBag()->asSequence()->first()
 
 	 
-context Dummy inv:
-	let c:Set(Integer) = Set{oclUndefined} in
+context Model inv:
+	let c:Set(Integer) = Set{null} in
    c->any(true) = c->asBag()->asSequence()->last()
 
 	 
-context Dummy inv:
-	let c:Set(Integer) = Set{oclUndefined} in
+context Model inv:
+	let c:Set(Integer) = Set{null} in
    c->any(true) = 
      c->iterate(elem:Integer;
                     r:Sequence(Integer) = Sequence{} |
            r->including(elem))->first()
 
 	 
-context Dummy inv:
-	let c:Set(Integer) = Set{oclUndefined} in
+context Model inv:
+	let c:Set(Integer) = Set{null} in
        Sequence{c}->flatten() = c->asSequence()
 
 	 
-context Dummy inv:
-	let c:Set(Integer) = Set{oclUndefined} in
+context Model inv:
+	let c:Set(Integer) = Set{null} in
        Sequence{c}->flatten() = c->asBag()->asSequence()
 
 	 
 -- -- -- -- -- -- Bag
 
-context Dummy inv:
-	let c:Bag(Integer) = Bag{oclUndefined} in
+context Model inv:
+	let c:Bag(Integer) = Bag{null} in
    c->asSequence() = 
      c->iterate(elem:Integer;
                     r:Sequence(Integer) = Sequence{} | 
            r->including(elem))
 
 	 
-context Dummy inv:
-	let c:Bag(Integer) = Bag{oclUndefined} in
+context Model inv:
+	let c:Bag(Integer) = Bag{null} in
    c->any(true) = c->asSequence()->any(true)
 
 	 
-context Dummy inv:
-	let c:Bag(Integer) = Bag{oclUndefined} in
+context Model inv:
+	let c:Bag(Integer) = Bag{null} in
    c->any(true) = c->asSequence()->first()
 
 	 
-context Dummy inv:
-	let c:Bag(Integer) = Bag{oclUndefined} in
+context Model inv:
+	let c:Bag(Integer) = Bag{null} in
    c->any(true) = c->asSequence()->last()
 
 	 
-context Dummy inv:
-	let c:Bag(Integer) = Bag{oclUndefined} in
+context Model inv:
+	let c:Bag(Integer) = Bag{null} in
    c->any(true) = 
      c->iterate(elem:Integer;
                     r:Sequence(Integer) = Sequence{} | 
            r->including(elem))->first()
 
 	 
-context Dummy inv:
-	let c:Bag(Integer) = Bag{oclUndefined} in
+context Model inv:
+	let c:Bag(Integer) = Bag{null} in
        Sequence{c}->flatten() = c->asSequence()
 
 	 
@@ -211,42 +211,42 @@ context Dummy inv:
 
 -- -- -- -- -- -- Set -----------------------------------------------
 
-context Dummy inv:
+context Model inv:
 	let c:Set(Integer) = Set{1} in
    c->any(true) = c->asBag()->any(true)
 
 	 
-context Dummy inv:
+context Model inv:
 	let c:Set(Integer) = Set{1} in
    c->any(true) = c->asSequence()->any(true)
 
 	 
-context Dummy inv:
+context Model inv:
 	let c:Set(Integer) = Set{1} in
    c->any(true) = c->asBag()->asSequence()->any(true)
 
 	 
-context Dummy inv:
+context Model inv:
 	let c:Set(Integer) = Set{1} in
    c->any(true) = c->asSequence()->first()
 
 	 
-context Dummy inv:
+context Model inv:
 	let c:Set(Integer) = Set{1} in
    c->any(true) = c->asSequence()->last()
 
 	 
-context Dummy inv:
+context Model inv:
 	let c:Set(Integer) = Set{1} in
    c->any(true) = c->asBag()->asSequence()->first()
 
 	 
-context Dummy inv:
+context Model inv:
 	let c:Set(Integer) = Set{1} in
    c->any(true) = c->asBag()->asSequence()->last()
 
 	 
-context Dummy inv:
+context Model inv:
 	let c:Set(Integer) = Set{1} in
    c->any(true) = 
      c->iterate(elem:Integer;
@@ -254,19 +254,19 @@ context Dummy inv:
            r->including(elem))->first()
 
 	 
-context Dummy inv:
+context Model inv:
 	let c:Set(Integer) = Set{1} in
        Sequence{c}->flatten() = c->asSequence()
 
 	 
-context Dummy inv:
+context Model inv:
 	let c:Set(Integer) = Set{1} in
        Sequence{c}->flatten() = c->asBag()->asSequence()
 
 	 
 -- -- -- -- -- -- Bag
 
-context Dummy inv:
+context Model inv:
 	let c:Bag(Integer) = Bag{1} in
    c->asSequence() = 
      c->iterate(elem:Integer;
@@ -274,22 +274,22 @@ context Dummy inv:
            r->including(elem))
 
 	 
-context Dummy inv:
+context Model inv:
 	let c:Bag(Integer) = Bag{1} in
    c->any(true) = c->asSequence()->any(true)
 
 	 
-context Dummy inv:
+context Model inv:
 	let c:Bag(Integer) = Bag{1} in
    c->any(true) = c->asSequence()->first()
 
 	 
-context Dummy inv:
+context Model inv:
 	let c:Bag(Integer) = Bag{1} in
    c->any(true) = c->asSequence()->last()
 
 	 
-context Dummy inv:
+context Model inv:
 	let c:Bag(Integer) = Bag{1} in
    c->any(true) = 
      c->iterate(elem:Integer;
@@ -297,7 +297,7 @@ context Dummy inv:
            r->including(elem))->first()
 
 	 
-context Dummy inv:
+context Model inv:
 	let c:Bag(Integer) = Bag{1} in
        Sequence{c}->flatten() = c->asSequence()
 
@@ -310,60 +310,60 @@ context Dummy inv:
 
 -- -- -- -- -- -- Set --------------------------------------------------
 
-context Dummy inv:
-	let c:Set(Integer) = Set{oclUndefined, 1, -1, 3, 2, 0} in
+context Model inv:
+	let c:Set(Integer) = Set{null, 1, -1, 3, 2, 0} in
    c->any(true) = c->asBag()->any(true)
      -- Expected Result:
 	 = false
 
-context Dummy inv:
-	let c:Set(Integer) = Set{oclUndefined, 1, -1, 3, 2, 0} in
+context Model inv:
+	let c:Set(Integer) = Set{null, 1, -1, 3, 2, 0} in
    c->any(true) = c->asSequence()->any(true)
 
 	 
-context Dummy inv:
-	let c:Set(Integer) = Set{oclUndefined, 1, -1, 3, 2, 0} in
+context Model inv:
+	let c:Set(Integer) = Set{null, 1, -1, 3, 2, 0} in
    c->any(true) = c->asBag()->asSequence()->any(true)
      -- Expected Result:
 	 = false
 
-context Dummy inv:
-	let c:Set(Integer) = Set{oclUndefined, 1, -1, 3, 2, 0} in
+context Model inv:
+	let c:Set(Integer) = Set{null, 1, -1, 3, 2, 0} in
    c->any(true) = c->asSequence()->first()
 
 	 
-context Dummy inv:
-	let c:Set(Integer) = Set{oclUndefined, 1, -1, 3, 2, 0} in
+context Model inv:
+	let c:Set(Integer) = Set{null, 1, -1, 3, 2, 0} in
    c->any(true) = c->asSequence()->last()
      -- Expected Result:
 	 = false
 
-context Dummy inv:
-	let c:Set(Integer) = Set{oclUndefined, 1, -1, 3, 2, 0} in
+context Model inv:
+	let c:Set(Integer) = Set{null, 1, -1, 3, 2, 0} in
    c->any(true) = c->asBag()->asSequence()->first()
      -- Expected Result:
 	 = false
 
-context Dummy inv:
-	let c:Set(Integer) = Set{oclUndefined, 1, -1, 3, 2, 0} in
+context Model inv:
+	let c:Set(Integer) = Set{null, 1, -1, 3, 2, 0} in
    c->any(true) = c->asBag()->asSequence()->last()
 
 	 
-context Dummy inv:
-	let c:Set(Integer) = Set{oclUndefined, 1, -1, 3, 2, 0} in
+context Model inv:
+	let c:Set(Integer) = Set{null, 1, -1, 3, 2, 0} in
    c->any(true) = 
      c->iterate(elem:Integer;
                     r:Sequence(Integer) = Sequence{} | 
            r->including(elem))->first()
 
 	 
-context Dummy inv:
-	let c:Set(Integer) = Set{oclUndefined, 1, -1, 3, 2, 0} in
+context Model inv:
+	let c:Set(Integer) = Set{null, 1, -1, 3, 2, 0} in
        Sequence{c}->flatten() = c->asSequence()
 
 	 
-context Dummy inv:
-	let c:Set(Integer) = Set{oclUndefined, 1, -1, 3, 2, 0} in
+context Model inv:
+	let c:Set(Integer) = Set{null, 1, -1, 3, 2, 0} in
        Sequence{c}->flatten() = c->asBag()->asSequence()
      -- Expected Result:
 	 = false
@@ -372,9 +372,9 @@ context Dummy inv:
 
 -- -- -- -- -- -- -- Equal Values
 
-context Dummy inv:
-	let c = Bag{oclUndefined, 1, -1, 3, 2, 0, 
-                  oclUndefined} in
+context Model inv:
+	let c = Bag{null, 1, -1, 3, 2, 0, 
+                  null} in
    c->asSequence() = 
      c->iterate(elem:Integer;
                     r:Sequence(Integer) = Sequence{} | 
@@ -382,76 +382,76 @@ context Dummy inv:
 )
 
 	 
-context Dummy inv:
-	let c = Bag{oclUndefined, 1, -1, 3, 2, 0, 
-                  oclUndefined} in
+context Model inv:
+	let c = Bag{null, 1, -1, 3, 2, 0, 
+                  null} in
    c->any(true) = c->asSequence()->any(true)
 
 	 
-context Dummy inv:
-	let c = Bag{oclUndefined, 1, -1, 3, 2, 0, 
-                  oclUndefined} in
+context Model inv:
+	let c = Bag{null, 1, -1, 3, 2, 0, 
+                  null} in
    c->any(true) = c->asSequence()->first()
 
 	 
-context Dummy inv:
-	let c = Bag{oclUndefined, 1, -1, 3, 2, 0, 
-                  oclUndefined} in
+context Model inv:
+	let c = Bag{null, 1, -1, 3, 2, 0, 
+                  null} in
    c->any(true) = c->asSequence()->last()
      -- Expected Result:
 	 = false
 
-context Dummy inv:
-	let c = Bag{oclUndefined, 1, -1, 3, 2, 0, 
-                  oclUndefined} in
+context Model inv:
+	let c = Bag{null, 1, -1, 3, 2, 0, 
+                  null} in
    c->any(true) = 
      c->iterate(elem:Integer;
                     r:Sequence(Integer) = Sequence{} | 
            r->including(elem))->first()
 
 	 
-context Dummy inv:
-	let c = Bag{oclUndefined, 1, -1, 3, 2, 0, 
-                  oclUndefined} in
+context Model inv:
+	let c = Bag{null, 1, -1, 3, 2, 0, 
+                  null} in
        Sequence{c}->flatten() = c->asSequence()
 
 	 
 -- -- -- -- -- -- -- No Equal Values
 
-context Dummy inv:
-	let c:Bag(Integer) = Bag{oclUndefined, 1, -1, 3, 2, 0} in
+context Model inv:
+	let c:Bag(Integer) = Bag{null, 1, -1, 3, 2, 0} in
    c->asSequence() = 
      c->iterate(elem:Integer;
                     r:Sequence(Integer) = Sequence{} | 
            r->including(elem))
 
 	 
-context Dummy inv:
-	let c:Bag(Integer) = Bag{oclUndefined, 1, -1, 3, 2, 0} in
+context Model inv:
+	let c:Bag(Integer) = Bag{null, 1, -1, 3, 2, 0} in
    c->any(true) = c->asSequence()->any(true)
 
 	 
-context Dummy inv:
-	let c:Bag(Integer) = Bag{oclUndefined, 1, -1, 3, 2, 0} in
+context Model inv:
+	let c:Bag(Integer) = Bag{null, 1, -1, 3, 2, 0} in
    c->any(true) = c->asSequence()->first()
 
 	 
-context Dummy inv:
-	let c:Bag(Integer) = Bag{oclUndefined, 1, -1, 3, 2, 0} in
+context Model inv:
+	let c:Bag(Integer) = Bag{null, 1, -1, 3, 2, 0} in
    c->any(true) = c->asSequence()->last()
      -- Expected Result:
 	 = false
 
-context Dummy inv:
-	let c:Bag(Integer) = Bag{oclUndefined, 1, -1, 3, 2, 0} in
+context Model inv:
+	let c:Bag(Integer) = Bag{null, 1, -1, 3, 2, 0} in
    c->any(true) = 
      c->iterate(elem:Integer;
                     r:Sequence(Integer) = Sequence{} | 
            r->including(elem))->first()
 
 	 
-context Dummy inv:
-	let c:Bag(Integer) = Bag{oclUndefined, 1, -1, 3, 2, 0} in
+context Model inv:
+	let c:Bag(Integer) = Bag{null, 1, -1, 3, 2, 0} in
        Sequence{c}->flatten() = c->asSequence()
 
 	 
@@ -465,46 +465,46 @@ context Dummy inv:
 
 -- -- -- -- -- -- Set -----------------------------------------------
 
-context Dummy inv:
+context Model inv:
 	let c:Set(Integer) = Set{1, -1, 3, 2, 0} in
    c->any(true) = c->asBag()->any(true)
      -- Expected Result:
 	 = false
 
-context Dummy inv:
+context Model inv:
 	let c:Set(Integer) = Set{1, -1, 3, 2, 0} in
    c->any(true) = c->asSequence()->any(true)
 
 	 
-context Dummy inv:
+context Model inv:
 	let c:Set(Integer) = Set{1, -1, 3, 2, 0} in
    c->any(true) = c->asBag()->asSequence()->any(true)
      -- Expected Result:
 	 = false
 
-context Dummy inv:
+context Model inv:
 	let c:Set(Integer) = Set{1, -1, 3, 2, 0} in
    c->any(true) = c->asSequence()->first()
 
 	 
-context Dummy inv:
+context Model inv:
 	let c:Set(Integer) = Set{1, -1, 3, 2, 0} in
    c->any(true) = c->asSequence()->last()
      -- Expected Result:
 	 = false
 
-context Dummy inv:
+context Model inv:
 	let c:Set(Integer) = Set{1, -1, 3, 2, 0} in
    c->any(true) = c->asBag()->asSequence()->first()
      -- Expected Result:
 	 = false
 
-context Dummy inv:
+context Model inv:
 	let c:Set(Integer) = Set{1, -1, 3, 2, 0} in
    c->any(true) = c->asBag()->asSequence()->last()
 
 	 
-context Dummy inv:
+context Model inv:
 	let c:Set(Integer) = Set{1, -1, 3, 2, 0} in
    c->any(true) = 
      c->iterate(elem:Integer;
@@ -512,12 +512,12 @@ context Dummy inv:
            r->including(elem))->first()
 
 	 
-context Dummy inv:
+context Model inv:
 	let c:Set(Integer) = Set{1, -1, 3, 2, 0} in
        Sequence{c}->flatten() = c->asSequence()
 
 	 
-context Dummy inv:
+context Model inv:
 	let c:Set(Integer) = Set{1, -1, 3, 2, 0} in
        Sequence{c}->flatten() = c->asBag()->asSequence()
      -- Expected Result:
@@ -527,7 +527,7 @@ context Dummy inv:
 
 -- -- -- -- -- -- -- Equal Values
 
-context Dummy inv:
+context Model inv:
 	let c:Bag(Integer) = Bag{1, -1, 3, 2, 0, 1} in
    c->asSequence() = 
      c->iterate(elem:Integer;
@@ -535,23 +535,23 @@ context Dummy inv:
            r->including(elem))
 
 	 
-context Dummy inv:
+context Model inv:
 	let c:Bag(Integer) = Bag{1, -1, 3, 2, 0, 1} in
    c->any(true) = c->asSequence()->any(true)
 
 	 
-context Dummy inv:
+context Model inv:
 	let c:Bag(Integer) = Bag{1, -1, 3, 2, 0, 1} in
    c->any(true) = c->asSequence()->first()
 
 	 
-context Dummy inv:
+context Model inv:
 	let c:Bag(Integer) = Bag{1, -1, 3, 2, 0, 1} in
    c->any(true) = c->asSequence()->last()
      -- Expected Result:
 	 = false
 
-context Dummy inv:
+context Model inv:
 	let c:Bag(Integer) = Bag{1, -1, 3, 2, 0, 1} in
    c->any(true) = 
      c->iterate(elem:Integer;
@@ -559,14 +559,14 @@ context Dummy inv:
            r->including(elem))->first()
 
 	 
-context Dummy inv:
+context Model inv:
 	let c:Bag(Integer) = Bag{1, -1, 3, 2, 0, 1} in
        Sequence{c}->flatten() = c->asSequence()
 
 	 
 -- -- -- -- -- -- -- No Equal Values
 
-context Dummy inv:
+context Model inv:
 	let c:Bag(Integer) = Bag{1, -1, 3, 2, 0} in
    c->asSequence() = 
      c->iterate(elem:Integer;
@@ -574,23 +574,23 @@ context Dummy inv:
            r->including(elem))
 
 	 
-context Dummy inv:
+context Model inv:
 	let c:Bag(Integer) = Bag{1, -1, 3, 2, 0} in
    c->any(true) = c->asSequence()->any(true)
 
 	 
-context Dummy inv:
+context Model inv:
 	let c:Bag(Integer) = Bag{1, -1, 3, 2, 0} in
    c->any(true) = c->asSequence()->first()
 
 	 
-context Dummy inv:
+context Model inv:
 	let c:Bag(Integer) = Bag{1, -1, 3, 2, 0} in
    c->any(true) = c->asSequence()->last()
      -- Expected Result:
 	 = false
 
-context Dummy inv:
+context Model inv:
 	let c:Bag(Integer) = Bag{1, -1, 3, 2, 0} in
    c->any(true) = 
      c->iterate(elem:Integer;
@@ -598,7 +598,7 @@ context Dummy inv:
            r->including(elem))->first()
 
 	 
-context Dummy inv:
+context Model inv:
 	let c:Bag(Integer) = Bag{1, -1, 3, 2, 0} in
        Sequence{c}->flatten() = c->asSequence()
 

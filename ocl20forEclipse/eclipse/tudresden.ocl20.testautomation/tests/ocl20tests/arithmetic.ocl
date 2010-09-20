@@ -1,4 +1,11 @@
-package uml 
+-----------------------------
+-- some tests for arithmetic
+-- parsing and interpretation
+-- All tests are to be parsed, 
+-- interpreted and successful
+-- (default -> no explicit options)
+-----------------------------
+package uml
 
 
 
@@ -11,8 +18,6 @@ context Model
 inv addRealReal2: let v1: Real = 1.9 in 
         let v2: Real = 1.0 in v1 + v2 = 2.9
         
-        
-
 context Model
 inv addRealReal3: let v1: Real = 2/3 in 
         let v2: Real = 2/3 in v1 + v2 - 4/3 < 0.00001

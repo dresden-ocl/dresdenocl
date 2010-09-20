@@ -17,5 +17,9 @@ public class TestCreationException extends Exception {
 	public TestCreationException(Throwable cause){
 		super(cause.getMessage(), cause);
 	}
+
+	public TestCreationException(String msg, TestFileParseException cause) {
+super(msg, cause);
+	}
 	
 }

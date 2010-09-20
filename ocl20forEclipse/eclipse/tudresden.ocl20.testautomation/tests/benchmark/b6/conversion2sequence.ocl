@@ -1,4 +1,4 @@
-package tudresden::ocl20::benchmark::testdata::common
+package uml
 
 -------------------------------------
 -- B6: conversion2sequence
@@ -12,12 +12,12 @@ package tudresden::ocl20::benchmark::testdata::common
 
 -- -- -- -- Set ---------------------------------------------------
 
-context Dummy inv:
+context Model inv:
 	let c:Set(Integer) = Set{} in 
    c->asSequence() = c->asBag()->asSequence()
 
 	 
-context Dummy inv:
+context Model inv:
 	let c:Set(Integer) = Set{} in 
    c->asSequence() = 
      c->iterate(elem:Integer; 
@@ -25,7 +25,7 @@ context Dummy inv:
            r->including(elem))
 
 	 
-context Dummy inv:
+context Model inv:
 	let c:Set(Integer) = Set{} in 
    c->asSequence() = 
      c->iterate(u:Integer;
@@ -36,7 +36,7 @@ context Dummy inv:
                    theSeq:r.theSeq->including(e)}).theSeq
 
 	 
-context Dummy inv:
+context Model inv:
 	let c:Set(Integer) = Set{} in 
    c->asSequence() = Sequence{c}->flatten()
 
@@ -47,21 +47,21 @@ context Dummy inv:
 
 -- -- -- -- -- Set ------------------------------------------------
 
-context Dummy inv:
-	let c:Set(Integer) = Set{oclUndefined} in 
+context Model inv:
+	let c:Set(Integer) = Set{null} in 
    c->asSequence() = c->asBag()->asSequence()
 
 	 
-context Dummy inv:
-	let c:Set(Integer) = Set{oclUndefined} in 
+context Model inv:
+	let c:Set(Integer) = Set{null} in 
    c->asSequence() = 
      c->iterate(elem:Integer; 
                     r:Sequence(Integer) = Sequence{} |
            r->including(elem))
 
 	 
-context Dummy inv:
-	let c:Set(Integer) = Set{oclUndefined} in 
+context Model inv:
+	let c:Set(Integer) = Set{null} in 
    c->asSequence() = 
      c->iterate(u:Integer;
            r:Tuple(theSet:Set(Integer),theSeq:Sequence(Integer)) = 
@@ -71,8 +71,8 @@ context Dummy inv:
                    theSeq:r.theSeq->including(e)}).theSeq
 
 	 
-context Dummy inv:
-	let c:Set(Integer) = Set{oclUndefined} in 
+context Model inv:
+	let c:Set(Integer) = Set{null} in 
    c->asSequence() = Sequence{c}->flatten()
 
 	 
@@ -80,11 +80,11 @@ context Dummy inv:
 
 -- -- -- -- -- Set ---------------------------------------------
 
-context Dummy inv:
+context Model inv:
 	let c:Set(Integer) = Set{1} in c->asSequence() = c->asBag()->asSequence()
 
 	 
-context Dummy inv:
+context Model inv:
 	let c:Set(Integer) = Set{1} in 
    c->asSequence() = 
      c->iterate(elem:Integer;
@@ -92,7 +92,7 @@ context Dummy inv:
            r->including(elem))
 
 	 
-context Dummy inv:
+context Model inv:
 	let c:Set(Integer) = Set{1} in 
    c->asSequence() = 
      c->iterate(u:Integer;
@@ -103,7 +103,7 @@ context Dummy inv:
                    theSeq:r.theSeq->including(e)}).theSeq
 
 	 
-context Dummy inv:
+context Model inv:
 	let c:Set(Integer) = Set{1} in c->asSequence() = Sequence{c}->flatten()
 
 	 
@@ -113,21 +113,21 @@ context Dummy inv:
 
 -- -- -- -- -- Set ---------------------------------------------
 
-context Dummy inv:
-	let c:Set(Integer) = Set{oclUndefined, 1, -1, 3, 2, 0} in 
+context Model inv:
+	let c:Set(Integer) = Set{null, 1, -1, 3, 2, 0} in 
    c->asSequence() = c->asBag()->asSequence()
 
 	 
-context Dummy inv:
-	let c:Set(Integer) = Set{oclUndefined, 1, -1, 3, 2, 0} in 
+context Model inv:
+	let c:Set(Integer) = Set{null, 1, -1, 3, 2, 0} in 
    c->asSequence() = 
      c->iterate(elem:Integer;
                     r:Sequence(Integer) = Sequence{} |
            r->including(elem))
 
 	 
-context Dummy inv:
-	let c:Set(Integer) = Set{oclUndefined, 1, -1, 3, 2, 0} in 
+context Model inv:
+	let c:Set(Integer) = Set{null, 1, -1, 3, 2, 0} in 
    c->asSequence() = 
      c->iterate(u:Integer;
            r:Tuple(theSet:Set(Integer),theSeq:Sequence(Integer)) = 
@@ -137,8 +137,8 @@ context Dummy inv:
                    theSeq:r.theSeq->including(e)}).theSeq
 
 	 
-context Dummy inv:
-	let c:Set(Integer) = Set{oclUndefined, 1, -1, 3, 2, 0} in 
+context Model inv:
+	let c:Set(Integer) = Set{null, 1, -1, 3, 2, 0} in 
    c->asSequence() = Sequence{c}->flatten()
 
 	 
@@ -146,12 +146,12 @@ context Dummy inv:
 
 -- -- -- -- -- Set ---------------------------------------------
 
-context Dummy inv:
+context Model inv:
 	let c:Set(Integer) = Set{1, -1, 3, 2, 0} in 
    c->asSequence() = c->asBag()->asSequence()
 
 	 
-context Dummy inv:
+context Model inv:
 	let c:Set(Integer) = Set{1, -1, 3, 2, 0} in 
    c->asSequence() = 
      c->iterate(elem:Integer;
@@ -159,7 +159,7 @@ context Dummy inv:
            r->including(elem))
 
 	 
-context Dummy inv:
+context Model inv:
 	let c:Set(Integer) = Set{1, -1, 3, 2, 0} in 
    c->asSequence() = 
      c->iterate(u:Integer;
@@ -170,7 +170,7 @@ context Dummy inv:
                    theSeq:r.theSeq->including(e)}).theSeq
 
 	 
-context Dummy inv:
+context Model inv:
 	let c:Set(Integer) = Set{1, -1, 3, 2, 0} in 
    c->asSequence() = Sequence{c}->flatten()
 

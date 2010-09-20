@@ -12,8 +12,8 @@ public class JavaTemplateAnalyser extends DefaultAnalyser implements
 	private static final String JAVA_END_DYNAMIC_TAG;
 
 	static {
-		String regexStart = "\\/\\*\\s*\\{\\s*";
-		String regexEnd = "\\s*\\}\\s*\\*\\/";
+		String regexStart = "(?:\\/\\*\\s*\\{\\s*|<\\{)";
+		String regexEnd = "(?:\\s*\\}\\s*\\*\\/|\\}>)";
 		String identifier = "\\s*([\\w]+)\\s*";
 
 		JAVA_VARIABLE_TAG = regexStart + identifier + regexEnd;

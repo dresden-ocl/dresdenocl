@@ -1,0 +1,30 @@
+-----------------------------
+-- These tests don't try anything new,
+-- they're intended to test the
+-- test generator itself
+-----------------------------
+package uml
+
+
+context Model
+	def: value : Real = 25+30
+	
+context Model
+	def: hello() : String = 'hello world'
+
+	
+	
+context Model
+	inv testDefValue:
+		self.value = 55
+		
+context Model
+	inv testHelloOp:
+		self.hello() = 'hello world'
+		
+
+context Model
+	inv testBoth: 
+		self.value = 55 and self.hello() = 'hello world'
+        
+endpackage

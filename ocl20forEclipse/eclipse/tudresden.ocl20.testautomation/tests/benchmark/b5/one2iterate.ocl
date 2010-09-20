@@ -1,4 +1,4 @@
-package tudresden::ocl20::benchmark::testdata::common
+package uml
 
 -------------------------------------
 -- B5: one2iterate
@@ -14,7 +14,7 @@ package tudresden::ocl20::benchmark::testdata::common
 
 -- -- -- -- -- Set ------------------------------------------------
 
-context Dummy inv: 
+context Model inv: 
 	let c:Set(Integer) = Set{} in 
    c->one(i|i<4) = 
      c->iterate(i:Integer; r:Sequence(Boolean) = Sequence{false,false} | 
@@ -25,7 +25,7 @@ context Dummy inv:
   
 -- -- -- -- -- Bag
 
-context Dummy inv: 
+context Model inv: 
 	let c:Bag(Integer) = Bag{} in 
    c->one(i|i<4) = 
      c->iterate(i:Integer; r:Sequence(Boolean) = Sequence{false,false} | 
@@ -36,7 +36,7 @@ context Dummy inv:
   
 -- -- -- -- -- Sequence
 
-context Dummy inv: 
+context Model inv: 
 	let c:Sequence(Integer) = Sequence{} in 
    c->one(i|i<4) = 
      c->iterate(i:Integer; r:Sequence(Boolean) = Sequence{false,false} | 
@@ -51,8 +51,8 @@ context Dummy inv:
 
 -- -- -- -- -- -- Set ---------------------------------------------
 
-context Dummy inv: 
-	let c:Set(Integer) = Set{ oclUndefined } in 
+context Model inv: 
+	let c:Set(Integer) = Set{ null } in 
    c->one(i|i<4) = 
      c->iterate(i:Integer; r:Sequence(Boolean) = Sequence{false,false} | 
            if r->first() then Sequence{true,false} 
@@ -62,8 +62,8 @@ context Dummy inv:
   
 -- -- -- -- -- -- Bag
 
-context Dummy inv: 
-	let c:Bag(Integer) = Bag{ oclUndefined } in 
+context Model inv: 
+	let c:Bag(Integer) = Bag{ null } in 
    c->one(i|i<4) = 
      c->iterate(i:Integer; r:Sequence(Boolean) = Sequence{false,false} | 
            if r->first() then Sequence{true,false} 
@@ -73,8 +73,8 @@ context Dummy inv:
   
 -- -- -- -- -- -- Sequence
 
-context Dummy inv: 
-	let c:Sequence(Integer) = Sequence{ oclUndefined } in 
+context Model inv: 
+	let c:Sequence(Integer) = Sequence{ null } in 
    c->one(i|i<4) = 
      c->iterate(i:Integer; r:Sequence(Boolean) = Sequence{false,false} | 
            if r->first() then Sequence{true,false} 
@@ -88,7 +88,7 @@ context Dummy inv:
 
 -- -- -- -- -- -- -- Set ------------------------------------------
 
-context Dummy inv: 
+context Model inv: 
 	let c:Set(Integer) = Set{1} in 
    c->one(i|i<4) = 
      c->iterate(i:Integer; r:Sequence(Boolean) = Sequence{false,false} | 
@@ -99,7 +99,7 @@ context Dummy inv:
   
 -- -- -- -- -- -- -- Bag
 
-context Dummy inv: 
+context Model inv: 
 	let c:Bag(Integer) = Bag{1} in 
    c->one(i|i<4) = 
      c->iterate(i:Integer; r:Sequence(Boolean) = Sequence{false,false} | 
@@ -110,7 +110,7 @@ context Dummy inv:
   
 -- -- -- -- -- -- -- Sequence
 
-context Dummy inv: 
+context Model inv: 
 	let c:Sequence(Integer) = Sequence{1} in 
    c->one(i|i<4) = 
      c->iterate(i:Integer; r:Sequence(Boolean) = Sequence{false,false} | 
@@ -123,7 +123,7 @@ context Dummy inv:
 
 -- -- -- -- -- -- -- Set ------------------------------------------
 
-context Dummy inv: 
+context Model inv: 
 	let c:Set(Integer) = Set{4} in 
    c->one(i|i<4) = 
      c->iterate(i:Integer; r:Sequence(Boolean) = Sequence{false,false} | 
@@ -134,7 +134,7 @@ context Dummy inv:
   
 -- -- -- -- -- -- -- Bag
 
-context Dummy inv: 
+context Model inv: 
 	let c:Bag(Integer) = Bag{4} in 
    c->one(i|i<4) = 
      c->iterate(i:Integer; r:Sequence(Boolean) = Sequence{false,false} | 
@@ -145,7 +145,7 @@ context Dummy inv:
   
 -- -- -- -- -- -- -- Sequence
 
-context Dummy inv: 
+context Model inv: 
 	let c:Sequence(Integer) = Sequence{4} in 
    c->one(i|i<4) = 
      c->iterate(i:Integer; r:Sequence(Boolean) = Sequence{false,false} | 
@@ -160,8 +160,8 @@ context Dummy inv:
 
 -- -- -- -- -- -- Set ---------------------------------------------
 
-context Dummy inv: 
-	let c:Set(Integer) = Set{ oclUndefined , 1, 4, 5} in 
+context Model inv: 
+	let c:Set(Integer) = Set{ null , 1, 4, 5} in 
    c->one(i|i<4) = 
      c->iterate(i:Integer; r:Sequence(Boolean) = Sequence{false,false} | 
            if r->first() then Sequence{true,false} 
@@ -173,9 +173,9 @@ context Dummy inv:
 
 -- -- -- -- -- -- -- Equal Values
 
-context Dummy inv: 
-	let c:Bag(Integer) = Bag{ oclUndefined , 1, 4, 5, 
-                   oclUndefined } in 
+context Model inv: 
+	let c:Bag(Integer) = Bag{ null , 1, 4, 5, 
+                   null } in 
    c->one(i|i<4) = 
      c->iterate(i:Integer; r:Sequence(Boolean) = Sequence{false,false} | 
            if r->first() then Sequence{true,false} 
@@ -185,8 +185,8 @@ context Dummy inv:
   
 -- -- -- -- -- -- -- No Equal Values
 
-context Dummy inv: 
-	let c:Bag(Integer) = Bag{ oclUndefined , 1, 4, 5} in 
+context Model inv: 
+	let c:Bag(Integer) = Bag{ null , 1, 4, 5} in 
    c->one(i|i<4) = 
      c->iterate(i:Integer; r:Sequence(Boolean) = Sequence{false,false} | 
            if r->first() then Sequence{true,false} 
@@ -198,9 +198,9 @@ context Dummy inv:
 
 -- -- -- -- -- -- -- Equal Values
 
-context Dummy inv: 
-	let c:Sequence(Integer) = Sequence{ oclUndefined , 1, 4, 5, 
-                        oclUndefined } in 
+context Model inv: 
+	let c:Sequence(Integer) = Sequence{ null , 1, 4, 5, 
+                        null } in 
    c->one(i|i<4) = 
      c->iterate(i:Integer; r:Sequence(Boolean) = Sequence{false,false} | 
            if r->first() then Sequence{true,false} 
@@ -210,8 +210,8 @@ context Dummy inv:
   
 -- -- -- -- -- -- -- No Equal Values
 
-context Dummy inv: 
-	let c:Sequence(Integer) = Sequence{ oclUndefined , 1, 4, 5} in 
+context Model inv: 
+	let c:Sequence(Integer) = Sequence{ null , 1, 4, 5} in 
    c->one(i|i<4) = 
      c->iterate(i:Integer; r:Sequence(Boolean) = Sequence{false,false} | 
            if r->first() then Sequence{true,false} 
@@ -225,7 +225,7 @@ context Dummy inv:
 
 -- -- -- -- -- -- -- Set ------------------------------------------
 
-context Dummy inv: 
+context Model inv: 
 	let c:Set(Integer) = Set{1, 4, 5} in 
    c->one(i|i<4) = 
      c->iterate(i:Integer; r:Sequence(Boolean) = Sequence{false,false} | 
@@ -238,7 +238,7 @@ context Dummy inv:
 
 -- -- -- -- -- -- -- -- Equal Values
 
-context Dummy inv: 
+context Model inv: 
 	let c:Bag(Integer) = Bag{1, 4, 5, 4} in 
    c->one(i|i<4) = 
      c->iterate(i:Integer; r:Sequence(Boolean) = Sequence{false,false} | 
@@ -249,7 +249,7 @@ context Dummy inv:
   
 -- -- -- -- -- -- -- -- No Equal Values
 
-context Dummy inv: 
+context Model inv: 
 	let c:Bag(Integer) = Bag{1, 4, 5} in 
    c->one(i|i<4) = 
      c->iterate(i:Integer; r:Sequence(Boolean) = Sequence{false,false} | 
@@ -262,7 +262,7 @@ context Dummy inv:
 
 -- -- -- -- -- -- -- -- Equal Values
 
-context Dummy inv: 
+context Model inv: 
 	let c:Sequence(Integer) = Sequence{1, 4, 5, 4} in 
    c->one(i|i<4) = 
      c->iterate(i:Integer; r:Sequence(Boolean) = Sequence{false,false} | 
@@ -273,7 +273,7 @@ context Dummy inv:
   
 -- -- -- -- -- -- -- -- No Equal Values
 
-context Dummy inv: 
+context Model inv: 
 	let c:Sequence(Integer) = Sequence{1, 4, 5} in 
    c->one(i|i<4) = 
      c->iterate(i:Integer; r:Sequence(Boolean) = Sequence{false,false} | 
@@ -286,7 +286,7 @@ context Dummy inv:
 
 -- -- -- -- -- -- -- Set ------------------------------------------
 
-context Dummy inv: 
+context Model inv: 
 	let c:Set(Integer) = Set{1, 2, 5} in 
    c->one(i|i<4) = 
      c->iterate(i:Integer; r:Sequence(Boolean) = Sequence{false,false} | 
@@ -299,7 +299,7 @@ context Dummy inv:
 
 -- -- -- -- -- -- -- -- Equal Values (both violating)
 
-context Dummy inv: 
+context Model inv: 
 	let c:Bag(Integer) = Bag{1, 2, 5, 1} in 
    c->one(i|i<4) = 
      c->iterate(i:Integer; r:Sequence(Boolean) = Sequence{false,false} | 
@@ -310,7 +310,7 @@ context Dummy inv:
   
 -- -- -- -- -- -- -- -- Equal Values (both not violating)
 
-context Dummy inv: 
+context Model inv: 
 	let c:Bag(Integer) = Bag{1, 2, 5, 5} in 
    c->one(i|i<4) = 
      c->iterate(i:Integer; r:Sequence(Boolean) = Sequence{false,false} | 
@@ -321,7 +321,7 @@ context Dummy inv:
   
 -- -- -- -- -- -- -- -- No Equal Values
 
-context Dummy inv: 
+context Model inv: 
 	let c:Bag(Integer) = Bag{1, 2, 5} in 
    c->one(i|i<4) = 
      c->iterate(i:Integer; r:Sequence(Boolean) = Sequence{false,false} | 
@@ -334,7 +334,7 @@ context Dummy inv:
 
 -- -- -- -- -- -- -- -- Equal Values (both violating)
 
-context Dummy inv: 
+context Model inv: 
 	let c:Sequence(Integer) = Sequence{1, 2, 5, 1} in 
    c->one(i|i<4) = 
      c->iterate(i:Integer; r:Sequence(Boolean) = Sequence{false,false} | 
@@ -345,7 +345,7 @@ context Dummy inv:
   
 -- -- -- -- -- -- -- -- Equal Values (both not violating)
 
-context Dummy inv: 
+context Model inv: 
 	let c:Sequence(Integer) = Sequence{1, 2, 5, 5} in 
    c->one(i|i<4) = 
      c->iterate(i:Integer; r:Sequence(Boolean) = Sequence{false,false} | 
@@ -356,7 +356,7 @@ context Dummy inv:
   
 -- -- -- -- -- -- -- -- No Equal Values
 
-context Dummy inv: 
+context Model inv: 
 	let c:Sequence(Integer) = Sequence{1, 2, 5} in 
    c->one(i|i<4) = 
      c->iterate(i:Integer; r:Sequence(Boolean) = Sequence{false,false} | 

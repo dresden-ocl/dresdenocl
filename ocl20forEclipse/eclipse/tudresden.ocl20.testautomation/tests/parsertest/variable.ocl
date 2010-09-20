@@ -1,0 +1,54 @@
+----------------------
+-- Parsertest
+-- These default options are overridden by statement's
+-- options.
+-- 
+-- @Options{parseonly}
+----------------------
+package parsertest::subpackage
+
+-----------------
+-- negative tests
+-----------------
+
+-- Test variables from Operation arguments.
+-- Should fail. Variable does not exist.
+-- @Options{fail}
+context Type1::addInteger(anInt01 : Integer)
+pre: 
+  anInt02 > 0 
+  
+-- Test the special variable result.
+-- Should fail. Result is only valid in postconditions.
+-- @Options{fail}
+context Type1::getInteger(): Integer
+pre: 
+  result.oclIsUndefined() 
+  
+-- Test the special variable result.
+-- Should fail. Result is only valid in postconditions.
+-- @Options{fail}
+context Type1::getInteger(): Integer
+body: 
+  result = 42 
+  
+-----------------
+-- positive tests (don't fail)
+-----------------
+
+-- Test the special variable self.
+context Type1::getType1(): Type1
+body: 
+  self  
+  
+-- Test variables from Operation arguments.
+context Type1::addInteger(anInt : Integer)
+pre: 
+  anInt > 0 
+
+-- Test the special variable result.
+context Type1::getInteger(): Integer
+post: 
+  result > 0
+
+endpackage

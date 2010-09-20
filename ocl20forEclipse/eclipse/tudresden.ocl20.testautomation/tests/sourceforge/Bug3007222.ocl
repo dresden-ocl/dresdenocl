@@ -1,0 +1,9 @@
+package sourceforge::bug3007222
+        
+context Parent inv 3007222_letExpression:
+let execs:Sequence(Child) = self.stmts->collect(s|s.oclIsKindOf(ClassB)),
+a:Integer= execs->collect(e|e.value > 0)-> sum()
+in
+true
+
+endpackage

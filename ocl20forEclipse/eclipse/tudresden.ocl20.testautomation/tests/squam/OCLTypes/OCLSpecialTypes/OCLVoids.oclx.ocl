@@ -24,20 +24,11 @@ context Model
 inv tOCLAnyUndefined_2: let v:OclVoid = null in not v.oclIsInvalid()
 
 context Model
+-- v = v must be oclInvalid as the =-operation called on OclVoid results in oclInvalid
+inv tOCLAnyUndefined_3: let v:OclVoid = null in (v = v).oclIsInvalid()
 
-inv tOCLAnyUndefined_3: let v:OclVoid = null in v = v
-
-
--- OclSpec:
--- However, by virtue of the implicit conversion to a collection
--- literal, an expression evaluating to null can be used as 
--- source of collection operations (such as ‘isEmpty’). If the source is
--- the null literal, it is implicitly converted to Bag{}.
-
-
--- parse-error
 context Model
-inv tOclAnyUndefined_3a: let v:OclVoid = null in v.isEmpty()
+inv tOclAnyUndefined_3a: let v:OclVoid = null in v->isEmpty()
   
 context Model 
 inv tOCLAnyUndefined_3b: let v:OclVoid = null in not v.oclIsInvalid() and v.oclIsUndefined()
@@ -45,11 +36,13 @@ inv tOCLAnyUndefined_3b: let v:OclVoid = null in not v.oclIsInvalid() and v.oclI
 
 
 context Model
-
-inv tOCLAnyUndefined_4: let v:OclVoid = null in not (v <> 1)
+inv tOCLAnyUndefined_4: let v:OclVoid = null in (v <> 1).oclIsInvalid()
+-- invalid constraint as all operation calls on voids or invalids result in invalids
+-- inv tOCLAnyUndefined_4: let v:OclVoid = null in not (v <> 1)
 
 context Model
-
-inv tOCLAnyUndefined_5: let v:OclVoid = null in Set{null}->size() = 0
+-- changed 0 to 1
+-- must be 1 since oclVoid is a valid member of a collection
+inv tOCLAnyUndefined_5: let v:OclVoid = null in Set{null}->size() = 1
 
 endpackage

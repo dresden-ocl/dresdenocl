@@ -1,0 +1,84 @@
+-- All tests in this file are meant to fail
+-- and are only parsed by default by the following Options:
+--
+-- @Options{fail parseonly}
+-- 
+package parsertest::subpackage
+
+
+-- Should fail. Operation does not exist.
+context Type1
+inv operationNegative01: self.getHinteger() > 0
+
+-- Should fail. Type does not match.
+context Type1
+inv operationNegative02: getType1() > 0
+
+-- Static operations should be accessed statically.
+-- Probably a warning instead of a fail would be okay as well.
+context Type1
+inv: self.aStaticOperation() > 0
+
+-- Non-static operations cannot be accessed statically.
+context Type1
+inv: self::getInteger() > 0
+
+-- Should fail. False argument type.
+context Type1
+inv: self.doSomething(42)
+
+-- Should fail. False argument count.
+context Type1
+inv: self.doSomething(true, false)
+
+-- Should fail. False return type.
+context Type1
+inv: self.getInteger()
+
+-- Should fail. No return type.
+context Type1
+inv: self.getVoid() 
+
+-- Should fail. allInstances() is not a static operation.
+context Type1
+inv: Type1::allInstances()->contains(self)
+
+-- Should fail. allInstances() is defined on types, not
+-- on type instances.
+context Type1
+inv: self.allInstaces()->contains(self)
+
+-- Should fail. allInstances() is defined on types, not
+-- on type instances.
+context Type1
+inv: self::allInstances()->contains(self)
+
+-- Should fail. @pre is not allowed on static properties.
+context Type1::getInteger(): Integer
+post: Type1::anStaticInteger@pre > 0
+
+-- Should fail. @pre is not allowed on operations.
+context Type1::getInteger(): Integer
+post: self.getInteger()@pre > 0
+
+-- Should fail @pre is only allowed in postconditions.
+context Type1::getInteger(): Integer
+pre: self.anInteger@pre > 0
+
+-- Should fail @pre is only allowed in postconditions.
+context Type1::getInteger(): Integer
+body: self.anInteger@pre
+
+-- Should fail: Self is not valid for static operations.
+context Type1
+inv: self::aStaticOperation() = 0
+
+-- Collection Operations should not be accessible using the . notation.
+context Type1
+inv: getInteger().size() > 0
+
+-- Non-Collection Operations should not be accessible using the -> notation.
+context Type1
+inv: self->getInteger() = 0
+
+endpackage

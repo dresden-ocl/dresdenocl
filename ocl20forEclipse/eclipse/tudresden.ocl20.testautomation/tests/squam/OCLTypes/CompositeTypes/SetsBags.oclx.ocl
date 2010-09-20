@@ -40,4 +40,4 @@ context Model
 inv tSetBagComparison_5: let b : Bag(Integer) = Bag{1,1,2,3,4} in
   		  let s : Set(Integer) = Set{4,3,2,1} in b->intersection(s)->notEmpty()
 
-end package
+endpackage

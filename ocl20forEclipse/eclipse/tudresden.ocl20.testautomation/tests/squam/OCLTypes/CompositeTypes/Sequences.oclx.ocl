@@ -66,4 +66,4 @@ context Model
 inv tSequenceTwiceNested: let s : Sequence(Sequence(Sequence(Integer))) 
    			      = Sequence{Sequence{Sequence{1}, Sequence{1,2}, Sequence{1,3,5}}, Sequence{Sequence{1}}} in s->flatten() = Sequence{1,1,2,1,3,5,1}
 
-end package
+endpackage

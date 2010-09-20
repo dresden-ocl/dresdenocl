@@ -2,17 +2,24 @@ package tudresden.ocl20.testautomation;
 
 import java.io.IOException;
 
-import tudresden.ocl20.testautomation.builder.SimpleInvarianceBuilder;
+import org.apache.log4j.PropertyConfigurator;
+
+import tudresden.ocl20.testautomation.builder.StaticTestBuilder;
 import tudresden.ocl20.testautomation.exceptions.TestCreationException;
-import tudresden.ocl20.testautomation.tools.TestingUnit;
+import tudresden.ocl20.testautomation.tools.TestGroup;
 
 public class GenerateMain {
 
-	private SimpleInvarianceBuilder invBuilder;
+	private StaticTestBuilder testBuilder;
+
+	static {
+		PropertyConfigurator.configure("log4j.properties");
+	}
 
 	public GenerateMain() throws TestCreationException {
 
-		this.invBuilder = new SimpleInvarianceBuilder();
+		this.testBuilder = new StaticTestBuilder();
+
 	}
 
 	/**
@@ -24,38 +31,77 @@ public class GenerateMain {
 
 		GenerateMain me = new GenerateMain();
 
-		// SQUAM-Testsuite 
-//		me
-//				.buildInvarianceTests(
-//						"squam",
-//						"tudresden.ocl20.testautomation/bin/umlmodel.uml",
-//						"tudresden.ocl20.testautomation/bin/uml/ModelInstanceProviderClass.class",
-//						"tests/squam/");
+		// SQUAM-Testsuite
+
+		TestGroup squamTestGroup =
+				new TestGroup(
+						"squam",
+						"tudresden.ocl20.testautomation/bin/umlmodel.uml", //
+						"tudresden.ocl20.testautomation/bin/uml/ModelInstanceProviderClass.class",//
+						"tests/squam/");
+		// Extending the Standardlibrary is not implemented currently
+		squamTestGroup.addPathToIgnore("/Definitions/StringExtensions.oclx.ocl");
 		
-		me
-		.buildInvarianceTests(
-				"ocl20tests",
-				"tudresden.ocl20.testautomation/bin/umlmodel.uml",
-				"tudresden.ocl20.testautomation/bin/uml/ModelInstanceProviderClass.class",
-				"tests/ocl20tests/");
+		squamTestGroup.createStatementTestUnits();
+		
+		me.testBuilder.generate(squamTestGroup);
 
-		// Bremen Benchmark (B5)
-//		String benchmarkSubdir =
-//				"tudresden.ocl20.testautomation/bin/tudresden/ocl20/benchmark/testdata/";
-//		me.buildInvarianceTests("benchmark", benchmarkSubdir + "common/DummyWorld.uml",
-//				benchmarkSubdir + "common/ModelInstance.class",
-//				"tests/benchmark");
+		//
+		 // ocl20-internal tests
+		 me
+		 .buildSimpleInvarianceTests(
+		 "ocl20tests",
+		 "tudresden.ocl20.testautomation/bin/umlmodel.uml",
+		 "tudresden.ocl20.testautomation/bin/uml/ModelInstanceProviderClass.class",
+		 "tests/ocl20tests/");
+		//		
+		// // bug3007222
+		// String dir =
+		// "tudresden.ocl20.testautomation/bin/sourceforge/bug3007222/";
+		// me
+		// .buildSimpleInvarianceTests(
+		// "bug3007222",
+		// dir + "model.uml",
+		// dir + "ModelInstanceProviderClass.class",
+		// "tests/sourceforge/Bug3007222.ocl");
+		//
+		 TestGroup benchmarkCommon =
+		 new TestGroup(
+		 "benchmark",
+		 "tudresden.ocl20.testautomation/bin/umlmodel.uml", //
+		 "tudresden.ocl20.testautomation/bin/uml/ModelInstanceProviderClass.class",//
+		 "tests/benchmark");
+		 benchmarkCommon.addPathToIgnore("/b1");
+		 benchmarkCommon.addPathToIgnore("/b2");
+		 benchmarkCommon.addPathToIgnore("/b3");
+		 benchmarkCommon.addPathToIgnore("/b4");
+		 benchmarkCommon.createStatementTestUnits();
+		 me.testBuilder.generate(benchmarkCommon);
 
+		// ----------------
+		// parser tests
+		// ----------------
+		// TestGroup parsertest =
+		// new TestGroup(
+		// "parsertests",
+		// "tudresden.ocl20.testautomation/bin/parsertest.model.uml", //
+		// "",//
+		// "tests/parsertest");
+		//		
+		//	
+		// parsertest.createStatementTestUnits();
+		//
+		// me.testBuilder.generate(parsertest);
 
 	}
 
-	protected void buildInvarianceTests(String name, String model,
+	protected void buildSimpleInvarianceTests(String name, String model,
 			String modelInstance, String statements) throws TestCreationException {
 
-		TestingUnit group = TestingUnit.createTestingUnit(name,//
-				model, modelInstance, statements);
+		TestGroup group = new TestGroup(name, model, modelInstance, statements);
+		group.createStatementTestUnits();
 
-		this.invBuilder.generate(group);
+		this.testBuilder.generate(group);
 
 	}
 }

@@ -1,4 +1,4 @@
-package tudresden::ocl20::benchmark::testdata::common
+package uml
 
 -------------------------------------
 -- B5: collect2iterate
@@ -15,7 +15,7 @@ package tudresden::ocl20::benchmark::testdata::common
 
 -- -- -- -- -- Set ------------------------------------------------
 
-context Dummy inv: 
+context Model inv: 
 	let c:Set(Integer) = Set{} in 
    c->collect(i|i*i) = 
      c->iterate(i:Integer; r:Bag(Integer) = Bag{} | 
@@ -24,7 +24,7 @@ context Dummy inv:
   
 -- -- -- -- -- Bag
 
-context Dummy inv: 
+context Model inv: 
 	let c:Bag(Integer) = Bag{} in 
    c->collect(i|i*i) = 
      c->iterate(i:Integer; r:Bag(Integer) = Bag{} | 
@@ -33,7 +33,7 @@ context Dummy inv:
   
 -- -- -- -- -- Sequence A
 
-context Dummy inv: 
+context Model inv: 
 	let c:Sequence(Integer) = Sequence{} in 
    c->collect(i|i*i) = 
      c->iterate(i:Integer;
@@ -43,7 +43,7 @@ context Dummy inv:
   
 -- -- -- -- -- Sequence B
 
-context Dummy inv: 
+context Model inv: 
 	let c:Sequence(Integer) = Sequence{} in 
    c->collect(i|i*i) = 
      c->iterate(i:Integer; 
@@ -57,26 +57,24 @@ context Dummy inv:
 
 -- -- -- -- -- -- Set ---------------------------------------------
 
-context Dummy inv: 
-	let c:Set(Integer) = Set{ oclUndefined } in 
+context Model inv: 
+	let c:Set(Integer) = Set{ null } in 
    c->collect(i|i*i) = 
      c->iterate(i:Integer; r:Bag(Integer) = Bag{} | 
            r->including(i*i))
 
   
 -- -- -- -- -- -- Bag
-
-context Dummy inv: 
-	let c:Bag(Integer) = Bag{ oclUndefined } in 
+context Model inv: 
+	let c:Bag(Integer) = Bag{ null } in 
    c->collect(i|i*i) = 
      c->iterate(i:Integer; r:Bag(Integer) = Bag{} | 
            r->including(i*i))
 
   
 -- -- -- -- -- -- Sequence A
-
-context Dummy inv: 
-	let c:Sequence(Integer) = Sequence{ oclUndefined } in 
+context Model inv: 
+	let c:Sequence(Integer) = Sequence{ null } in 
    c->collect(i|i*i) = 
      c->iterate(i:Integer;
                     r:Sequence(Integer) = Sequence{} | 
@@ -84,20 +82,18 @@ context Dummy inv:
 
   
 -- -- -- -- -- -- Sequence B
-
-context Dummy inv: 
-	let c:Sequence(Integer) = Sequence{ oclUndefined } in 
+context Model inv: 
+	let c:Sequence(Integer) = Sequence{ null } in 
    c->collect(i|i*i) = 
      c->iterate(i:Integer; 
                     r:Sequence(Integer) = Sequence{} |
            r->append(i*i))
-     false : Boolean
 
 -- -- -- -- -- Excludes Undefined
 
 -- -- -- -- -- -- Set ---------------------------------------------
 
-context Dummy inv: 
+context Model inv: 
 	let c:Set(Integer) = Set{2} in 
    c->collect(i|i*i) = 
      c->iterate(i:Integer; r:Bag(Integer) = Bag{} | 
@@ -106,7 +102,7 @@ context Dummy inv:
   
 -- -- -- -- -- -- Bag
 
-context Dummy inv: 
+context Model inv: 
 	let c:Bag(Integer) = Bag{2} in 
    c->collect(i|i*i) = 
      c->iterate(i:Integer; r:Bag(Integer) = Bag{} | 
@@ -115,7 +111,7 @@ context Dummy inv:
   
 -- -- -- -- -- -- Sequence A
 
-context Dummy inv: 
+context Model inv: 
 	let c:Sequence(Integer) = Sequence{2} in 
    c->collect(i|i*i) = 
      c->iterate(i:Integer; 
@@ -125,7 +121,7 @@ context Dummy inv:
   
 -- -- -- -- -- -- Sequence B
 
-context Dummy inv: 
+context Model inv: 
 	let c:Sequence(Integer) = Sequence{2} in 
    c->collect(i|i*i) = 
      c->iterate(i:Integer; 
@@ -139,8 +135,8 @@ context Dummy inv:
 
 -- -- -- -- -- -- Set ---------------------------------------------
 
-context Dummy inv: 
-	let c:Set(Integer) = Set{ oclUndefined , 0, 1, 2} in 
+context Model inv: 
+	let c:Set(Integer) = Set{ null , 0, 1, 2} in 
    c->collect(i|i*i) = 
      c->iterate(i:Integer; r:Bag(Integer) = Bag{} | 
            r->including(i*i))
@@ -150,9 +146,9 @@ context Dummy inv:
 
 -- -- -- -- -- -- -- Equal Values
 
-context Dummy inv: 
-	let c:Bag(Integer) = Bag{ oclUndefined , 0, 1, 2, 
-                   oclUndefined } in 
+context Model inv: 
+	let c:Bag(Integer) = Bag{ null , 0, 1, 2, 
+                   null } in 
    c->collect(i|i*i) = 
      c->iterate(i:Integer; r:Bag(Integer) = Bag{} | 
            r->including(i*i))
@@ -160,8 +156,8 @@ context Dummy inv:
   
 -- -- -- -- -- -- -- No Equal Values
 
-context Dummy inv: 
-	let c:Bag(Integer) = Bag{ oclUndefined , 0, 1, 2} in 
+context Model inv: 
+	let c:Bag(Integer) = Bag{ null , 0, 1, 2} in 
    c->collect(i|i*i) = 
      c->iterate(i:Integer; r:Bag(Integer) = Bag{} | 
            r->including(i*i))
@@ -171,9 +167,9 @@ context Dummy inv:
 
 -- -- -- -- -- -- -- Equal Values
 
-context Dummy inv: 
-	let c:Sequence(Integer) = Sequence{ oclUndefined , 0, 1, 2, 
-                        oclUndefined } in 
+context Model inv: 
+	let c:Sequence(Integer) = Sequence{ null , 0, 1, 2, 
+                        null } in 
    c->collect(i|i*i) = 
      c->iterate(i:Integer;r:Sequence(Integer) = Sequence{} | 
            r->including(i*i))
@@ -181,8 +177,8 @@ context Dummy inv:
   
 -- -- -- -- -- -- -- No Equal Values
 
-context Dummy inv: 
-	let c:Sequence(Integer) = Sequence{ oclUndefined , 0, 1, 2} in 
+context Model inv: 
+	let c:Sequence(Integer) = Sequence{ null , 0, 1, 2} in 
    c->collect(i|i*i) = 
      c->iterate(i:Integer;
                     r:Sequence(Integer) = Sequence{} | 
@@ -193,9 +189,9 @@ context Dummy inv:
 
 -- -- -- -- -- -- -- Equal Values
 
-context Dummy inv: 
-	let c:Sequence(Integer) = Sequence{ oclUndefined , 0, 1, 2, 
-                        oclUndefined } in 
+context Model inv: 
+	let c:Sequence(Integer) = Sequence{ null , 0, 1, 2, 
+                        null } in 
    c->collect(i|i*i) = 
      c->iterate(i:Integer;
                     r:Sequence(Integer) = Sequence{} |
@@ -204,8 +200,8 @@ context Dummy inv:
 
 -- -- -- -- -- -- -- No Equal Values
 
-context Dummy inv: 
-	let c:Sequence(Integer) = Sequence{ oclUndefined , 0, 1, 2} in 
+context Model inv: 
+	let c:Sequence(Integer) = Sequence{ null , 0, 1, 2} in 
    c->collect(i|i*i) = 
      c->iterate(i:Integer;
                     r:Sequence(Integer) = Sequence{} |
@@ -216,7 +212,7 @@ context Dummy inv:
 
 -- -- -- -- -- -- Set ---------------------------------------------
 
-context Dummy inv: 
+context Model inv: 
 	let c:Set(Integer) = Set{-1, 0, 1, 2} in 
    c->collect(i|i*i) = 
      c->iterate(i:Integer; r:Bag(Integer) = Bag{} | 
@@ -227,7 +223,7 @@ context Dummy inv:
 
 -- -- -- -- -- -- -- Equal Values
 
-context Dummy inv: 
+context Model inv: 
 	let c:Bag(Integer) = Bag{-1, 0, 1, 2, 1} in 
    c->collect(i|i*i) = 
      c->iterate(i:Integer; r:Bag(Integer) = Bag{} | 
@@ -236,7 +232,7 @@ context Dummy inv:
   
 -- -- -- -- -- -- -- No Equal Values
 
-context Dummy inv: 
+context Model inv: 
 	let c:Bag(Integer) = Bag{-1, 0, 1, 2} in 
    c->collect(i|i*i) = 
      c->iterate(i:Integer; r:Bag(Integer) = Bag{} | 
@@ -247,7 +243,7 @@ context Dummy inv:
 
 -- -- -- -- -- -- -- Equal Values
 
-context Dummy inv: 
+context Model inv: 
 	let c:Sequence(Integer) = Sequence{-1, 0, 1, 2, 1} in 
    c->collect(i|i*i) = 
      c->iterate(i:Integer;
@@ -257,7 +253,7 @@ context Dummy inv:
   
 -- -- -- -- -- -- -- No Equal Values
 
-context Dummy inv: 
+context Model inv: 
 	let c:Sequence(Integer) = Sequence{-1, 0, 1, 2} in 
    c->collect(i|i*i) = 
      c->iterate(i:Integer; 
@@ -269,7 +265,7 @@ context Dummy inv:
 
 -- -- -- -- -- -- -- Equal Values
 
-context Dummy inv: 
+context Model inv: 
 	let c:Sequence(Integer) = Sequence{-1, 0, 1, 2, 1} in 
    c->collect(i|i*i) = 
      c->iterate(i:Integer;
@@ -279,7 +275,7 @@ context Dummy inv:
   
 -- -- -- -- -- -- -- No Equal Values
 
-context Dummy inv: 
+context Model inv: 
 	let c:Sequence(Integer) = Sequence{-1, 0, 1, 2} in 
    c->collect(i|i*i) = 
      c->iterate(i:Integer;

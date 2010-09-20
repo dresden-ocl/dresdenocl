@@ -1,0 +1,14 @@
+----------------------
+-- Parsertest
+-- These default options are overridden by statement's
+-- options.
+-- 
+-- @Options{parseonly}
+----------------------
+package parsertest::subpackage
+
+-- Since Ocl 2.2. the InvalidLiteral explicitly exists in OCL.
+context Type1
+inv: invalid.oclIsInvalid()
+
+endpackage

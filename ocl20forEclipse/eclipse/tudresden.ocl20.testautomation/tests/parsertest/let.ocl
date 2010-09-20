@@ -1,0 +1,33 @@
+-- @Options{parseonly}
+package parsertest::subpackage
+
+-- @Options{fail}
+-- Should fail. Wrong Type
+context Type1
+inv: 
+  let boolean1: String = 'true'
+  in boolean1
+  
+context Type1
+inv: 
+  let boolean1: Boolean = true
+  in boolean1
+  
+  
+-- let expressions can be nested
+context Type1
+inv: 
+  let boolean1: Boolean = true
+  in 
+    let boolean2: Boolean = false
+    in boolean1 = boolean2
+    
+    
+-- @Options{fail}
+-- Should fail. Each let expression defines exactly one variable.
+context Type1
+inv: 
+  let boolean1: Boolean = true, boolean2: Boolean = false
+  in boolean1 = boolean2
+
+endpackage

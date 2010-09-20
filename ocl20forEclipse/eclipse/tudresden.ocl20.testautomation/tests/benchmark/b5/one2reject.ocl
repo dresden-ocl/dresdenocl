@@ -1,4 +1,4 @@
-package tudresden::ocl20::benchmark::testdata::common
+package uml
 
 -------------------------------------
 -- B5: one2reject
@@ -14,21 +14,21 @@ package tudresden::ocl20::benchmark::testdata::common
 
 -- -- -- -- -- Set ------------------------------------------------
 
-context Dummy inv: 
+context Model inv: 
 	let c:Set(Integer) = Set{} in
    c->one(i|i<4) = (c->reject(i|i<4)->size() = c->size()-1)
 
   
 -- -- -- -- -- Bag
 
-context Dummy inv: 
+context Model inv: 
 	let c:Bag(Integer) = Bag{} in
    c->one(i|i<4) = (c->reject(i|i<4)->size() = c->size()-1)
 
   
 -- -- -- -- -- Sequence
 
-context Dummy inv: 
+context Model inv: 
 	let c:Sequence(Integer) = Sequence{} in
    c->one(i|i<4) = (c->reject(i|i<4)->size() = c->size()-1)
 
@@ -36,26 +36,29 @@ context Dummy inv:
 -- -- -- -- Singleton
 
 -- -- -- -- -- Includes Undefined
+-- The operation `<` of null results in invalid.
+-- this is why all iterations result in oclInvalid. 
+-- But OclInvalid = OclInvalid is OclInvalid itself
 
 -- -- -- -- -- -- Set ---------------------------------------------
 
-context Dummy inv: 
-	let c:Set(Integer) = Set{ oclUndefined } in
-   c->one(i|i<4) = (c->reject(i|i<4)->size() = c->size()-1)
+context Model inv: 
+	let c:Set(Integer) = Set{ null } in
+	(c->one(i|i<4) = (c->reject(i|i<4)->size() = c->size()-1)).oclIsInvalid()
 
   
 -- -- -- -- -- -- Bag
 
-context Dummy inv: 
-	let c:Bag(Integer) = Bag{ oclUndefined } in
-   c->one(i|i<4) = (c->reject(i|i<4)->size() = c->size()-1)
+context Model inv: 
+	let c:Bag(Integer) = Bag{ null } in
+	(c->one(i|i<4) = (c->reject(i|i<4)->size() = c->size()-1)).oclIsInvalid()
 
   
 -- -- -- -- -- -- Sequence
 
-context Dummy inv: 
-	let c:Sequence(Integer) = Sequence{ oclUndefined } in
-   c->one(i|i<4) = (c->reject(i|i<4)->size() = c->size()-1)
+context Model inv: 
+	let c:Sequence(Integer) = Sequence{ null } in
+   (c->one(i|i<4) = (c->reject(i|i<4)->size() = c->size()-1)).oclIsInvalid()
 
   
 -- -- -- -- -- Excludes Undefined
@@ -64,21 +67,21 @@ context Dummy inv:
 
 -- -- -- -- -- -- -- Set ------------------------------------------
 
-context Dummy inv: 
+context Model inv: 
 	let c:Set(Integer) = Set{1} in
    c->one(i|i<4) = (c->reject(i|i<4)->size() = c->size()-1)
 
   
 -- -- -- -- -- -- -- Bag
 
-context Dummy inv: 
+context Model inv: 
 	let c:Bag(Integer) = Bag{1} in
    c->one(i|i<4) = (c->reject(i|i<4)->size() = c->size()-1)
 
   
 -- -- -- -- -- -- -- Sequence
 
-context Dummy inv: 
+context Model inv: 
 	let c:Sequence(Integer) = Sequence{1} in
    c->one(i|i<4) = (c->reject(i|i<4)->size() = c->size()-1)
 
@@ -87,21 +90,21 @@ context Dummy inv:
 
 -- -- -- -- -- -- -- Set ------------------------------------------
 
-context Dummy inv: 
+context Model inv: 
 	let c:Set(Integer) = Set{4} in
    c->one(i|i<4) = (c->reject(i|i<4)->size() = c->size()-1)
 
   
 -- -- -- -- -- -- -- Bag
 
-context Dummy inv: 
+context Model inv: 
 	let c:Bag(Integer) = Bag{4} in
    c->one(i|i<4) = (c->reject(i|i<4)->size() = c->size()-1)
 
   
 -- -- -- -- -- -- -- Sequence
 
-context Dummy inv: 
+context Model inv: 
 	let c:Sequence(Integer) = Sequence{4} in
    c->one(i|i<4) = (c->reject(i|i<4)->size() = c->size()-1)
 
@@ -109,46 +112,48 @@ context Dummy inv:
 -- -- -- -- Many Elements
 
 -- -- -- -- -- Includes Undefined
-
+-- The operation `<` of null results in invalid.
+-- this is why all iterations result in oclInvalid. 
+-- But OclInvalid = OclInvalid is OclInvalid itself
 -- -- -- -- -- -- Set ---------------------------------------------
 
-context Dummy inv: 
-	let c:Set(Integer) = Set{ oclUndefined , 1, 4, 5} in
-   c->one(i|i<4) = (c->reject(i|i<4)->size() = c->size()-1)
+context Model inv: 
+	let c:Set(Integer) = Set{ null , 1, 4, 5} in
+   (c->one(i|i<4) = (c->reject(i|i<4)->size() = c->size()-1)).oclIsUndefined()
 
   
 -- -- -- -- -- -- Bag
 
 -- -- -- -- -- -- -- Equal Values
 
-context Dummy inv: 
-	let c:Bag(Integer) = Bag{ oclUndefined , 1, 4, 5, 
-                   oclUndefined } in
-   c->one(i|i<4) = (c->reject(i|i<4)->size() = c->size()-1)
+context Model inv: 
+	let c:Bag(Integer) = Bag{ null , 1, 4, 5, 
+                   null } in
+   (c->one(i|i<4) = (c->reject(i|i<4)->size() = c->size()-1)).oclIsUndefined()
 
   
 -- -- -- -- -- -- -- No Equal Values
 
-context Dummy inv: 
-	let c:Bag(Integer) = Bag{ oclUndefined , 1, 4, 5} in
-   c->one(i|i<4) = (c->reject(i|i<4)->size() = c->size()-1)
+context Model inv: 
+	let c:Bag(Integer) = Bag{ null , 1, 4, 5} in
+   (c->one(i|i<4) = (c->reject(i|i<4)->size() = c->size()-1)).oclIsUndefined()
 
   
 -- -- -- -- -- -- Sequence
 
 -- -- -- -- -- -- -- Equal Values
 
-context Dummy inv: 
-	let c:Sequence(Integer) = Sequence{ oclUndefined , 1, 4, 5, 
-                        oclUndefined } in
-   c->one(i|i<4) = (c->reject(i|i<4)->size() = c->size()-1)
+context Model inv: 
+	let c:Sequence(Integer) = Sequence{ null , 1, 4, 5, 
+                        null } in
+   (c->one(i|i<4) = (c->reject(i|i<4)->size() = c->size()-1)).oclIsUndefined()
 
   
 -- -- -- -- -- -- -- No Equal Values
 
-context Dummy inv: 
-	let c:Sequence(Integer) = Sequence{ oclUndefined , 1, 4, 5} in
-   c->one(i|i<4) = (c->reject(i|i<4)->size() = c->size()-1)
+context Model inv: 
+	let c:Sequence(Integer) = Sequence{ null , 1, 4, 5} in
+   (c->one(i|i<4) = (c->reject(i|i<4)->size() = c->size()-1)).oclIsUndefined()
 
   
 -- -- -- -- -- Excludes Undefined
@@ -157,7 +162,7 @@ context Dummy inv:
 
 -- -- -- -- -- -- -- Set ------------------------------------------
 
-context Dummy inv: 
+context Model inv: 
 	let c:Set(Integer) = Set{1, 4, 5} in
    c->one(i|i<4) = (c->reject(i|i<4)->size() = c->size()-1)
 
@@ -166,14 +171,14 @@ context Dummy inv:
 
 -- -- -- -- -- -- -- -- Equal Values
 
-context Dummy inv: 
+context Model inv: 
 	let c:Bag(Integer) = Bag{1, 4, 5, 4} in
    c->one(i|i<4) = (c->reject(i|i<4)->size() = c->size()-1)
 
   
 -- -- -- -- -- -- -- -- No Equal Values
 
-context Dummy inv: 
+context Model inv: 
 	let c:Bag(Integer) = Bag{1, 4, 5} in
    c->one(i|i<4) = (c->reject(i|i<4)->size() = c->size()-1)
 
@@ -182,14 +187,14 @@ context Dummy inv:
 
 -- -- -- -- -- -- -- -- Equal Values
 
-context Dummy inv: 
+context Model inv: 
 	let c:Sequence(Integer) = Sequence{1, 4, 5, 4} in
    c->one(i|i<4) = (c->reject(i|i<4)->size() = c->size()-1)
 
   
 -- -- -- -- -- -- -- -- No Equal Values
 
-context Dummy inv: 
+context Model inv: 
 	let c:Sequence(Integer) = Sequence{1, 4, 5} in
    c->one(i|i<4) = (c->reject(i|i<4)->size() = c->size()-1)
 
@@ -198,7 +203,7 @@ context Dummy inv:
 
 -- -- -- -- -- -- -- Set ------------------------------------------
 
-context Dummy inv: 
+context Model inv: 
 	let c:Set(Integer) = Set{1, 2, 5} in
    c->one(i|i<4) = (c->reject(i|i<4)->size() = c->size()-1)
 
@@ -207,21 +212,21 @@ context Dummy inv:
 
 -- -- -- -- -- -- -- -- Equal Values (violating)
 
-context Dummy inv: 
+context Model inv: 
 	let c:Bag(Integer) = Bag{1, 2, 5, 1} in
    c->one(i|i<4) = (c->reject(i|i<4)->size() = c->size()-1)
 
   
 -- -- -- -- -- -- -- -- Equal Values (not violating)
 
-context Dummy inv: 
+context Model inv: 
 	let c:Bag(Integer) = Bag{1, 2, 5, 5} in
    c->one(i|i<4) = (c->reject(i|i<4)->size() = c->size()-1)
 
   
 -- -- -- -- -- -- -- -- No Equal Values
 
-context Dummy inv: 
+context Model inv: 
 	let c:Bag(Integer) = Bag{1, 2, 5} in
    c->one(i|i<4) = (c->reject(i|i<4)->size() = c->size()-1)
 
@@ -230,21 +235,21 @@ context Dummy inv:
 
 -- -- -- -- -- -- -- -- Equal Values (both violating)
 
-context Dummy inv: 
+context Model inv: 
 	let c:Sequence(Integer) = Sequence{1, 2, 5, 1} in
    c->one(i|i<4) = (c->reject(i|i<4)->size() = c->size()-1)
 
   
 -- -- -- -- -- -- -- -- Equal Values (both not violating)
 
-context Dummy inv: 
+context Model inv: 
 	let c:Sequence(Integer) = Sequence{1, 2, 5, 5} in
    c->one(i|i<4) = (c->reject(i|i<4)->size() = c->size()-1)
 
   
 -- -- -- -- -- -- -- -- No Equal Values
 
-context Dummy inv: 
+context Model inv: 
 	let c:Sequence(Integer) = Sequence{1, 2, 5} in
    c->one(i|i<4) = (c->reject(i|i<4)->size() = c->size()-1)
 

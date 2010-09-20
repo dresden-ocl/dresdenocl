@@ -1,4 +1,4 @@
-package tudresden::ocl20::benchmark::testdata::common
+package uml
 
 -------------------------------------
 -- B5: singleton2value
@@ -12,65 +12,65 @@ package tudresden::ocl20::benchmark::testdata::common
 
 -- -- -- -- Set ---------------------------------------------------
 
-context Dummy inv: 
+context Model inv: 
 	let c:Set(Integer) = Set{} in 
        if c->size() = 1 then c->any(true) 
-       else oclUndefined endif = 
+       else null endif = 
          if c->size() = 1 then
-       c->iterate(elem:Integer; r:Integer =  oclUndefined | elem) 
-         else  oclUndefined endif
+       c->iterate(elem:Integer; r:Integer =  null | elem) 
+         else  null endif
 
   
-context Dummy inv: 
+context Model inv: 
 	let c:Set(Integer) = Set{} in 
        if c->size() = 1 then c->any(true) 
-       else  oclUndefined endif = 
+       else  null endif = 
      c->iterate(elem:Integer;
-           r:Sequence(OclAny) = Sequence{ oclUndefined,false} |
+           r:Sequence(OclAny) = Sequence{ null,false} |
            if r->at(2) = false then Sequence{elem,true} 
-           else Sequence{ oclUndefined,true} endif)->at(1)
+           else Sequence{ null,true} endif)->at(1)
 
   
 -- -- -- -- Bag
 
-context Dummy inv: 
+context Model inv: 
 	let c:Bag(Integer) = Bag{} in 
        if c->size() = 1 then c->any(true) 
-       else  oclUndefined endif = 
+       else  null endif = 
          if c->size() = 1 then 
-       c->iterate(elem:Integer; r:Integer =  oclUndefined | elem) 
-         else  oclUndefined endif
+       c->iterate(elem:Integer; r:Integer =  null | elem) 
+         else  null endif
 
   
-context Dummy inv: 
+context Model inv: 
 	let c:Bag(Integer) = Bag{} in 
        if c->size() = 1 then c->any(true) 
-       else  oclUndefined endif = 
+       else  null endif = 
      c->iterate(elem:Integer;
-           r:Sequence(OclAny) = Sequence{ oclUndefined,false} |
+           r:Sequence(OclAny) = Sequence{ null,false} |
            if r->at(2) = false then Sequence{elem,true} 
-           else Sequence{ oclUndefined,true} endif)->at(1)
+           else Sequence{ null,true} endif)->at(1)
 
   
 -- -- -- -- Sequence
 
-context Dummy inv: 
+context Model inv: 
 let c = (Sequence) in 
        if c->size() = 1 then c->any(true) 
-       else  oclUndefined endif = 
+       else  null endif = 
          if c->size() = 1 then 
-       c->iterate(elem:Integer; r:Integer =  oclUndefined | elem) 
-         else  oclUndefined endif
+       c->iterate(elem:Integer; r:Integer =  null | elem) 
+         else  null endif
 
   
-context Dummy inv: 
+context Model inv: 
 	let c:Sequence(Integer) = Sequence{} in 
        if c->size() = 1 then c->any(true) 
-       else  oclUndefined endif = 
+       else  null endif = 
      c->iterate(elem:Integer;
-           r:Sequence(OclAny) = Sequence{ oclUndefined,false} |
+           r:Sequence(OclAny) = Sequence{ null,false} |
            if r->at(2) = false then Sequence{elem,true} 
-           else Sequence{ oclUndefined,true} endif)->at(1)
+           else Sequence{ null,true} endif)->at(1)
 
   
 -- -- -- Singleton
@@ -79,130 +79,130 @@ context Dummy inv:
 
 -- -- -- -- -- Set ------------------------------------------------
 
-context Dummy inv: 
-	let c:Set(Integer) = Set{ oclUndefined} in 
+context Model inv: 
+	let c:Set(Integer) = Set{ null} in 
        if c->size() = 1 then c->any(true) 
-       else  oclUndefined endif = 
+       else  null endif = 
          if c->size() = 1 then 
-       c->iterate(elem:Integer; r:Integer =  oclUndefined | elem) 
-         else  oclUndefined endif
+       c->iterate(elem:Integer; r:Integer =  null | elem) 
+         else  null endif
 
   
-context Dummy inv: 
-	let c:Set(Integer) = Set{ oclUndefined} in 
+context Model inv: 
+	let c:Set(Integer) = Set{ null} in 
        if c->size() = 1 then c->any(true) 
-       else  oclUndefined endif = 
+       else  null endif = 
      c->iterate(elem:Integer;
-           r:Sequence(OclAny) = Sequence{ oclUndefined,false} |
+           r:Sequence(OclAny) = Sequence{ null,false} |
            if r->at(2) = false then Sequence{elem,true} 
-           else Sequence{ oclUndefined,true} endif)->at(1)
+           else Sequence{ null,true} endif)->at(1)
 
   
 -- -- -- -- -- Bag
 
-context Dummy inv: 
-	let c:Bag(Integer) = Bag{ oclUndefined} in 
+context Model inv: 
+	let c:Bag(Integer) = Bag{ null} in 
        if c->size() = 1 then c->any(true) 
-       else  oclUndefined endif = 
+       else  null endif = 
          if c->size() = 1 then 
-       c->iterate(elem:Integer; r:Integer =  oclUndefined | elem) 
-         else  oclUndefined endif
+       c->iterate(elem:Integer; r:Integer =  null | elem) 
+         else  null endif
 
   
-context Dummy inv: 
-	let c:Bag(Integer) = Bag{ oclUndefined} in 
+context Model inv: 
+	let c:Bag(Integer) = Bag{ null} in 
        if c->size() = 1 then c->any(true) 
-       else  oclUndefined endif = 
+       else  null endif = 
      c->iterate(elem:Integer;
-           r:Sequence(OclAny) = Sequence{ oclUndefined,false} |
+           r:Sequence(OclAny) = Sequence{ null,false} |
              if r->at(2) = false then Sequence{elem,true} 
-             else Sequence{ oclUndefined,true} endif)->at(1)
+             else Sequence{ null,true} endif)->at(1)
 
   
 -- -- -- -- -- Sequence
 
-context Dummy inv: 
-	let c:Sequence(Integer) = Sequence{ oclUndefined} in 
+context Model inv: 
+	let c:Sequence(Integer) = Sequence{ null} in 
        if c->size() = 1 then c->any(true) 
-       else  oclUndefined endif = 
+       else  null endif = 
          if c->size() = 1 then 
-       c->iterate(elem:Integer; r:Integer =  oclUndefined | elem) 
-         else  oclUndefined endif
+       c->iterate(elem:Integer; r:Integer =  null | elem) 
+         else  null endif
 
   
-context Dummy inv: 
-	let c:Sequence(Integer) = Sequence{ oclUndefined} in 
+context Model inv: 
+	let c:Sequence(Integer) = Sequence{ null} in 
        if c->size() = 1 then c->any(true) 
-       else  oclUndefined endif = 
+       else  null endif = 
      c->iterate(elem:Integer; 
-           r:Sequence(OclAny) = Sequence{ oclUndefined,false} |
+           r:Sequence(OclAny) = Sequence{ null,false} |
            if r->at(2) = false then Sequence{elem,true} 
-           else Sequence{ oclUndefined,true} endif)->at(1)
+           else Sequence{ null,true} endif)->at(1)
 
   
 -- -- -- -- Excludes Undefined
 
 -- -- -- -- -- Set ------------------------------------------------
 
-context Dummy inv: 
+context Model inv: 
 	let c:Set(Integer) = Set{2} in 
        if c->size() = 1 then c->any(true) 
-       else  oclUndefined endif = 
+       else  null endif = 
          if c->size() = 1 then 
-       c->iterate(elem:Integer; r:Integer =  oclUndefined | elem) 
-         else  oclUndefined endif
+       c->iterate(elem:Integer; r:Integer =  null | elem) 
+         else  null endif
 
   
-context Dummy inv: 
+context Model inv: 
 	let c:Set(Integer) = Set{2} in 
        if c->size() = 1 then c->any(true) 
-       else  oclUndefined endif = 
+       else  null endif = 
      c->iterate(elem:Integer; 
-           r:Sequence(OclAny) = Sequence{ oclUndefined,false} |
+           r:Sequence(OclAny) = Sequence{ null,false} |
            if r->at(2) = false then Sequence{elem,true} 
-           else Sequence{ oclUndefined,true} endif)->at(1)
+           else Sequence{ null,true} endif)->at(1)
 
   
 -- -- -- -- -- Bag
 
-context Dummy inv: 
+context Model inv: 
 	let c:Bag(Integer) = Bag{2} in 
        if c->size() = 1 then c->any(true) 
-       else  oclUndefined endif = 
+       else  null endif = 
          if c->size() = 1 then 
-       c->iterate(elem:Integer; r:Integer =  oclUndefined | elem) 
-         else  oclUndefined endif
+       c->iterate(elem:Integer; r:Integer =  null | elem) 
+         else  null endif
 
   
-context Dummy inv: 
+context Model inv: 
 	let c:Bag(Integer) = Bag{2} in 
        if c->size() = 1 then c->any(true) 
-       else  oclUndefined endif = 
+       else  null endif = 
      c->iterate(elem:Integer; 
-           r:Sequence(OclAny) = Sequence{ oclUndefined,false} |
+           r:Sequence(OclAny) = Sequence{ null,false} |
            if r->at(2) = false then Sequence{elem,true} 
-           else Sequence{ oclUndefined,true} endif)->at(1)
+           else Sequence{ null,true} endif)->at(1)
 
   
 -- -- -- -- -- Sequence
 
-context Dummy inv: 
+context Model inv: 
 	let c:Sequence(Integer) = Sequence{2} in 
        if c->size() = 1 then c->any(true) 
-       else  oclUndefined endif = 
+       else  null endif = 
          if c->size() = 1 then 
-       c->iterate(elem:Integer; r:Integer =  oclUndefined | elem) 
-         else  oclUndefined endif
+       c->iterate(elem:Integer; r:Integer =  null | elem) 
+         else  null endif
 
   
-context Dummy inv: 
+context Model inv: 
 	let c:Sequence(Integer) = Sequence{2} in 
        if c->size() = 1 then c->any(true) 
-       else  oclUndefined endif = 
+       else  null endif = 
      c->iterate(elem:Integer; 
-           r:Sequence(OclAny) = Sequence{ oclUndefined,false} |
+           r:Sequence(OclAny) = Sequence{ null,false} |
            if r->at(2) = false then Sequence{elem,true} 
-           else Sequence{ oclUndefined,true} endif)->at(1)
+           else Sequence{ null,true} endif)->at(1)
 
   
 -- -- -- Many Elements
@@ -211,130 +211,130 @@ context Dummy inv:
 
 -- -- -- -- -- Set ------------------------------------------------
 
-context Dummy inv: 
-	let c:Set(Integer) = Set{ oclUndefined, 2} in 
+context Model inv: 
+	let c:Set(Integer) = Set{ null, 2} in 
        if c->size() = 1 then c->any(true) 
-       else  oclUndefined endif = 
+       else  null endif = 
          if c->size() = 1 then 
-       c->iterate(elem:Integer; r:Integer =  oclUndefined | elem) 
-         else  oclUndefined endif
+       c->iterate(elem:Integer; r:Integer =  null | elem) 
+         else  null endif
 
   
-context Dummy inv: 
-	let c:Set(Integer) = Set{ oclUndefined, 2} in 
+context Model inv: 
+	let c:Set(Integer) = Set{ null, 2} in 
        if c->size() = 1 then c->any(true) else 
-        oclUndefined endif = 
+        null endif = 
      c->iterate(elem:Integer; 
-           r:Sequence(OclAny) = Sequence{ oclUndefined,false} |
+           r:Sequence(OclAny) = Sequence{ null,false} |
            if r->at(2) = false then Sequence{elem,true} 
-           else Sequence{ oclUndefined,true} endif)->at(1)
+           else Sequence{ null,true} endif)->at(1)
 
   
 -- -- -- -- -- Bag
 
-context Dummy inv: 
-	let c:Bag(Integer) = Bag{ oclUndefined, 2} in 
+context Model inv: 
+	let c:Bag(Integer) = Bag{ null, 2} in 
        if c->size() = 1 then c->any(true) else 
-        oclUndefined endif = 
+        null endif = 
          if c->size() = 1 then 
-       c->iterate(elem:Integer; r:Integer =  oclUndefined | elem) 
-         else  oclUndefined endif
+       c->iterate(elem:Integer; r:Integer =  null | elem) 
+         else  null endif
 
   
-context Dummy inv: 
-	let c:Bag(Integer) = Bag{ oclUndefined, 2} in 
+context Model inv: 
+	let c:Bag(Integer) = Bag{ null, 2} in 
        if c->size() = 1 then c->any(true) 
-       else  oclUndefined endif = 
+       else  null endif = 
      c->iterate(elem:Integer;
-           r:Sequence(OclAny) = Sequence{ oclUndefined,false} |
+           r:Sequence(OclAny) = Sequence{ null,false} |
            if r->at(2) = false then Sequence{elem,true} 
-           else Sequence{ oclUndefined,true} endif)->at(1)
+           else Sequence{ null,true} endif)->at(1)
 
   
 -- -- -- -- -- Sequence
 
-context Dummy inv: 
-	let c:Sequence(Integer) = Sequence{ oclUndefined, 2} in 
+context Model inv: 
+	let c:Sequence(Integer) = Sequence{ null, 2} in 
        if c->size() = 1 then c->any(true) 
-       else  oclUndefined endif = 
+       else  null endif = 
          if c->size() = 1 then 
-       c->iterate(elem:Integer; r:Integer =  oclUndefined | elem) 
-         else  oclUndefined endif
+       c->iterate(elem:Integer; r:Integer =  null | elem) 
+         else  null endif
 
   
-context Dummy inv: 
-	let c:Bag(Integer) = Sequence{ oclUndefined, 2} in 
+context Model inv: 
+	let c:Bag(Integer) = Sequence{ null, 2} in 
        if c->size() = 1 then c->any(true) 
-       else  oclUndefined endif = 
+       else  null endif = 
      c->iterate(elem:Integer;
-           r:Sequence(OclAny) = Sequence{ oclUndefined,false} |
+           r:Sequence(OclAny) = Sequence{ null,false} |
            if r->at(2) = false then Sequence{elem,true} 
-           else Sequence{ oclUndefined,true} endif)->at(1)
+           else Sequence{ null,true} endif)->at(1)
 
   
 -- -- -- -- Excludes Undefined
 
 -- -- -- -- -- Set ------------------------------------------------
 
-context Dummy inv: 
+context Model inv: 
 	let c:Set(Integer) = Set{1, 2} in 
        if c->size() = 1 then c->any(true) 
-       else  oclUndefined endif = 
+       else  null endif = 
          if c->size() = 1 then 
-       c->iterate(elem:Integer; r:Integer =  oclUndefined | elem) 
-         else  oclUndefined endif
+       c->iterate(elem:Integer; r:Integer =  null | elem) 
+         else  null endif
 
   
-context Dummy inv: 
+context Model inv: 
 	let c:Set(Integer) = Set{1, 2} in 
        if c->size() = 1 then c->any(true) 
-       else  oclUndefined endif = 
+       else  null endif = 
      c->iterate(elem:Integer;
-           r:Sequence(OclAny) = Sequence{ oclUndefined,false} |
+           r:Sequence(OclAny) = Sequence{ null,false} |
            if r->at(2) = false then Sequence{elem,true} 
-           else Sequence{ oclUndefined,true} endif)->at(1)
+           else Sequence{ null,true} endif)->at(1)
 
   
 -- -- -- -- -- Bag
 
-context Dummy inv: 
+context Model inv: 
 	let c:Bag(Integer) = Bag{1, 2} in 
        if c->size() = 1 then c->any(true) 
-       else  oclUndefined endif = 
+       else  null endif = 
          if c->size() = 1 then 
-       c->iterate(elem:Integer; r:Integer =  oclUndefined | elem) 
-         else  oclUndefined endif
+       c->iterate(elem:Integer; r:Integer =  null | elem) 
+         else  null endif
 
   
-context Dummy inv: 
+context Model inv: 
 	let c:Bag(Integer) = Bag{1, 2} in 
        if c->size() = 1 then c->any(true) 
-       else  oclUndefined endif = 
+       else  null endif = 
      c->iterate(elem:Integer; 
-           r:Sequence(OclAny) = Sequence{ oclUndefined,false} |
+           r:Sequence(OclAny) = Sequence{ null,false} |
            if r->at(2) = false then Sequence{elem,true} 
-           else Sequence{ oclUndefined,true} endif)->at(1)
+           else Sequence{ null,true} endif)->at(1)
 
   
 -- -- -- -- -- Sequence
 
-context Dummy inv: 
+context Model inv: 
 	let c:Sequence(Integer) = Sequence{1, 2} in 
        if c->size() = 1 then c->any(true) 
-       else  oclUndefined endif = 
+       else  null endif = 
          if c->size() = 1 then 
-       c->iterate(elem:Integer; r:Integer =  oclUndefined | elem) 
-         else  oclUndefined endif
+       c->iterate(elem:Integer; r:Integer =  null | elem) 
+         else  null endif
 
   
-context Dummy inv: 
+context Model inv: 
 	let c:Sequence(Integer) = Sequence{1, 2} in 
        if c->size() = 1 then c->any(true) 
-       else  oclUndefined endif = 
+       else  null endif = 
      c->iterate(elem:Integer; 
-           r:Sequence(OclAny) = Sequence{ oclUndefined,false} |
+           r:Sequence(OclAny) = Sequence{ null,false} |
            if r->at(2) = false then Sequence{elem,true} 
-           else Sequence{ oclUndefined,true} endif)->at(1)
+           else Sequence{ null,true} endif)->at(1)
 
   
 endpackage

@@ -1,4 +1,4 @@
-package tudresden::ocl20::benchmark::testdata::common
+package uml
 
 -------------------------------------
 -- B5: forAll2collect_one
@@ -15,7 +15,7 @@ package tudresden::ocl20::benchmark::testdata::common
 
 -- -- -- -- -- Set ------------------------------------------------
 
-context Dummy inv: 
+context Model inv: 
 	let c:Set(Integer) = Set{} in 
    c->forAll(i|i<4) = 
          (let s = c->collect(i|i<4)->asSet() in 
@@ -24,7 +24,7 @@ context Dummy inv:
   
 -- -- -- -- -- Bag
 
-context Dummy inv: 
+context Model inv: 
 	let c:Bag(Integer) = Bag{} in 
    c->forAll(i|i<4) = 
          (let s = c->collect(i|i<4)->asSet() in
@@ -33,7 +33,7 @@ context Dummy inv:
   
 -- -- -- -- -- Sequence
 
-context Dummy inv: 
+context Model inv: 
 	let c:Sequence(Integer) = Sequence{} in 
    c->forAll(i|i<4) = 
          (let s = c->collect(i|i<4)->asSet() in
@@ -46,8 +46,8 @@ context Dummy inv:
 
 -- -- -- -- -- -- Set ---------------------------------------------
 
-context Dummy inv: 
-	let c:Set(Integer) = Set{ oclUndefined } in 
+context Model inv: 
+	let c:Set(Integer) = Set{ null } in 
    c->forAll(i|i<4) = 
          (let s = c->collect(i|i<4)->asSet() in
        c->notEmpty() implies s->one(true) and s->one(e|e))
@@ -55,8 +55,8 @@ context Dummy inv:
   
 -- -- -- -- -- -- Bag
 
-context Dummy inv: 
-	let c:Bag(Integer) = Bag{ oclUndefined } in 
+context Model inv: 
+	let c:Bag(Integer) = Bag{ null } in 
    c->forAll(i|i<4) = 
          (let s = c->collect(i|i<4)->asSet() in
        c->notEmpty() implies s->one(true) and s->one(e|e))
@@ -64,8 +64,8 @@ context Dummy inv:
   
 -- -- -- -- -- -- Sequence
 
-context Dummy inv: 
-	let c:Sequence(Integer) = Sequence{ oclUndefined } in 
+context Model inv: 
+	let c:Sequence(Integer) = Sequence{ null } in 
    c->forAll(i|i<4) = 
          (let s = c->collect(i|i<4)->asSet() in
        c->notEmpty() implies s->one(true) and s->one(e|e))
@@ -77,7 +77,7 @@ context Dummy inv:
 
 -- -- -- -- -- -- -- Set ------------------------------------------
 
-context Dummy inv: 
+context Model inv: 
 	let c:Set(Integer) = Set{1} in 
    c->forAll(i|i<4) = 
          (let s = c->collect(i|i<4)->asSet() in
@@ -86,7 +86,7 @@ context Dummy inv:
   
 -- -- -- -- -- -- -- Bag
 
-context Dummy inv: 
+context Model inv: 
 	let c:Bag(Integer) = Bag{1} in 
    c->forAll(i|i<4) = 
          (let s = c->collect(i|i<4)->asSet() in
@@ -95,7 +95,7 @@ context Dummy inv:
   
 -- -- -- -- -- -- -- Sequence
 
-context Dummy inv: 
+context Model inv: 
 	let c:Sequence(Integer) = Sequence{1} in 
    c->forAll(i|i<4) = 
          (let s = c->collect(i|i<4)->asSet() in
@@ -106,7 +106,7 @@ context Dummy inv:
 
 -- -- -- -- -- -- -- Set -------------------------------------------
 
-context Dummy inv: 
+context Model inv: 
 	let c:Set(Integer) = Set{4} in 
    c->forAll(i|i<4) = 
          (let s = c->collect(i|i<4)->asSet() in
@@ -115,7 +115,7 @@ context Dummy inv:
   
 -- -- -- -- -- -- -- Bag
 
-context Dummy inv: 
+context Model inv: 
 	let c:Bag(Integer) = Bag{4} in 
    c->forAll(i|i<4) =
          (let s = c->collect(i|i<4)->asSet() in
@@ -124,7 +124,7 @@ context Dummy inv:
   
 -- -- -- -- -- -- -- Sequence
 
-context Dummy inv: 
+context Model inv: 
 	let c:Sequence(Integer) = Sequence{4} in 
    c->forAll(i|i<4) = 
          (let s = c->collect(i|i<4)->asSet() in
@@ -137,8 +137,8 @@ context Dummy inv:
 
 -- -- -- -- -- -- Set ---------------------------------------------
 
-context Dummy inv: 
-	let c:Set(Integer) = Set{ oclUndefined , 1, 2, 3} in 
+context Model inv: 
+	let c:Set(Integer) = Set{ null , 1, 2, 3} in 
    c->forAll(i|i<4) =
          (let s = c->collect(i|i<4)->asSet() in
        c->notEmpty() implies s->one(true) and s->one(e|e))
@@ -148,9 +148,9 @@ context Dummy inv:
 
 -- -- -- -- -- -- -- Equal Values
 
-context Dummy inv: 
-	let c:Bag(Integer) = Bag{ oclUndefined , 1, 2, 3, 
-                   oclUndefined } in 
+context Model inv: 
+	let c:Bag(Integer) = Bag{ null , 1, 2, 3, 
+                   null } in 
    c->forAll(i|i<4) =
          (let s = c->collect(i|i<4)->asSet() in
        c->notEmpty() implies s->one(true) and s->one(e|e))
@@ -158,8 +158,8 @@ context Dummy inv:
   
 -- -- -- -- -- -- -- No Equal Values
 
-context Dummy inv: 
-	let c:Bag(Integer) = Bag{ oclUndefined , 1, 2, 3} in 
+context Model inv: 
+	let c:Bag(Integer) = Bag{ null , 1, 2, 3} in 
    c->forAll(i|i<4) =
          (let s = c->collect(i|i<4)->asSet() in
        c->notEmpty() implies s->one(true) and s->one(e|e))
@@ -169,9 +169,9 @@ context Dummy inv:
 
 -- -- -- -- -- -- -- Equal Values
 
-context Dummy inv: 
-	let c:Sequence(Integer) = Sequence{ oclUndefined , 1, 2, 3, 
-                        oclUndefined } in 
+context Model inv: 
+	let c:Sequence(Integer) = Sequence{ null , 1, 2, 3, 
+                        null } in 
    c->forAll(i|i<4) =
          (let s = c->collect(i|i<4)->asSet() in
        c->notEmpty() implies s->one(true) and s->one(e|e))
@@ -179,8 +179,8 @@ context Dummy inv:
   
 -- -- -- -- -- -- -- No Equal Values
 
-context Dummy inv: 
-	let c:Sequence(Integer) = Sequence{ oclUndefined , 1, 2, 3} in 
+context Model inv: 
+	let c:Sequence(Integer) = Sequence{ null , 1, 2, 3} in 
    c->forAll(i|i<4) =
          (let s = c->collect(i|i<4)->asSet() in
        c->notEmpty() implies s->one(true) and s->one(e|e))
@@ -192,7 +192,7 @@ context Dummy inv:
 
 -- -- -- -- -- -- -- Set ------------------------------------------
 
-context Dummy inv: 
+context Model inv: 
 	let c:Set(Integer) = Set{1, 2, 3} in 
    c->forAll(i|i<4) =
          (let s = c->collect(i|i<4)->asSet() in
@@ -203,7 +203,7 @@ context Dummy inv:
 
 -- -- -- -- -- -- -- -- Equal Values
 
-context Dummy inv: 
+context Model inv: 
 	let c:Bag(Integer) = Bag{1, 2, 3, 1} in 
    c->forAll(i|i<4) =
          (let s = c->collect(i|i<4)->asSet() in
@@ -212,7 +212,7 @@ context Dummy inv:
   
 -- -- -- -- -- -- -- -- No Equal Values
 
-context Dummy inv: 
+context Model inv: 
 	let c:Bag(Integer) = Bag{1, 2, 3} in 
    c->forAll(i|i<4) =
          (let s = c->collect(i|i<4)->asSet() in
@@ -223,7 +223,7 @@ context Dummy inv:
 
 -- -- -- -- -- -- -- -- Equal Values
 
-context Dummy inv: 
+context Model inv: 
 	let c:Sequence(Integer) = Sequence{1, 2, 3, 1} in 
    c->forAll(i|i<4) =
          (let s = c->collect(i|i<4)->asSet() in
@@ -232,7 +232,7 @@ context Dummy inv:
   
 -- -- -- -- -- -- -- -- No Equal Values
 
-context Dummy inv: 
+context Model inv: 
 	let c:Sequence(Integer) = Sequence{1, 2, 3} in 
    c->forAll(i|i<4) =
          (let s = c->collect(i|i<4)->asSet() in
@@ -243,7 +243,7 @@ context Dummy inv:
 
 -- -- -- -- -- -- -- Set ------------------------------------------
 
-context Dummy inv: 
+context Model inv: 
 	let c:Set(Integer) = Set{2, 3, 4, 5} in 
    c->forAll(i|i<4) =
          (let s = c->collect(i|i<4)->asSet() in
@@ -254,7 +254,7 @@ context Dummy inv:
 
 -- -- -- -- -- -- -- -- Equal Values (both violating)
 
-context Dummy inv: 
+context Model inv: 
 	let c:Bag(Integer) = Bag{2, 3, 4, 5, 4} in 
    c->forAll(i|i<4) =
          (let s = c->collect(i|i<4)->asSet() in
@@ -263,7 +263,7 @@ context Dummy inv:
   
 -- -- -- -- -- -- -- -- Equal Values (both not violating)
 
-context Dummy inv: 
+context Model inv: 
 	let c:Bag(Integer) = Bag{2, 3, 4, 5, 2} in 
    c->forAll(i|i<4) =
          (let s = c->collect(i|i<4)->asSet() in
@@ -272,7 +272,7 @@ context Dummy inv:
   
 -- -- -- -- -- -- -- -- No Equal Values
 
-context Dummy inv: 
+context Model inv: 
 	let c:Bag(Integer) = Bag{2, 3, 4, 5} in 
    c->forAll(i|i<4) =
          (let s = c->collect(i|i<4)->asSet() in
@@ -283,7 +283,7 @@ context Dummy inv:
 
 -- -- -- -- -- -- -- -- Equal Values (both violating)
 
-context Dummy inv: 
+context Model inv: 
 	let c:Sequence(Integer) = Sequence{2, 3, 4, 5, 4} in 
    c->forAll(i|i<4) =
          (let s = c->collect(i|i<4)->asSet() in
@@ -292,7 +292,7 @@ context Dummy inv:
   
 -- -- -- -- -- -- -- -- Equal Values (both not violating)
 
-context Dummy inv: 
+context Model inv: 
 	let c:Sequence(Integer) = Sequence{2, 3, 4, 5, 2} in 
    c->forAll(i|i<4) =
          (let s = c->collect(i|i<4)->asSet() in
@@ -301,7 +301,7 @@ context Dummy inv:
   
 -- -- -- -- -- -- -- -- No Equal Values
 
-context Dummy inv: 
+context Model inv: 
 	let c:Sequence(Integer) = Sequence{2, 3, 4, 5} in 
    c->forAll(i|i<4) =
          (let s = c->collect(i|i<4)->asSet() in

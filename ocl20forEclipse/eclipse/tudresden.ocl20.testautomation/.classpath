@@ -7,6 +7,7 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="generated"/>
 	<classpathentry kind="src" path="tests/benchmark"/>
-	<classpathentry kind="src" path="tests/squam/model"/>
+	<classpathentry kind="src" path="tests/sourceforge/model"/>
+	<classpathentry kind="src" path="tests/models"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

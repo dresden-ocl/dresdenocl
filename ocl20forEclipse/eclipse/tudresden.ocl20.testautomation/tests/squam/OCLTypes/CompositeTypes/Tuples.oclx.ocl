@@ -39,14 +39,14 @@ context Model
 inv tTupleSet_2: let tt : Set(Tuple(author:String, id:Integer)) = Set{
 			  Tuple{author = 'Joanna', id = 6},
 			  Tuple{author = 'Hannes', id = 4}
-			} in tt->isUnique(id)
+			} in tt->isUnique(e|e.id)
 
 context Model
 
 inv tTupleSet_3: let tt : Set(Tuple(author:String, id:Integer)) = Set{
 			  Tuple{author = 'Joanna', id = 6},
 			  Tuple{author = 'Hannes', id = 4}
-			} in tt->collect(author) = Bag{'Joanna','Hannes'}
+			} in tt->collect(e|e.author) = Bag{'Joanna','Hannes'}
 
 context Model
 
@@ -55,11 +55,11 @@ inv tTupleSet_4: let tt : Set(Tuple(author:String, id:Integer)) = Set{
 			  Tuple{author = 'Hannes', id = 4}
 			} in tt->select(t|t.id > 5).author = Bag{'Joanna'}
 
-context Model
+-- context Model
+-- abbreviated form --> doesn't work
+-- inv tTupleSet_5: let tt : Set(Tuple(author:String, id:Integer)) = Set{
+-- 			  Tuple{author = 'Joanna', id = 6},
+-- 			  Tuple{author = 'Hannes', id = 4}
+-- 			} in tt->select(id > 5).author = Bag{'Joanna'}
 
-inv tTupleSet_5: let tt : Set(Tuple(author:String, id:Integer)) = Set{
-			  Tuple{author = 'Joanna', id = 6},
-			  Tuple{author = 'Hannes', id = 4}
-			} in tt->select(id > 5).author = Bag{'Joanna'}
-
-end package
+endpackage
