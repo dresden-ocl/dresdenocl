@@ -1,0 +1,81 @@
+Car: 1 Person: 1
+Car.allInstances().model->forAll(m|m = '6')
+EOSPerformer:197ms
+Ocl2MySQL:146ms
+OCL2Sql typed :5ms
+OCL2Sql typed optimize:3ms
+OCL2Sql vertical :5ms
+OCL2Sql vertical optimize:4ms
+Car.allInstances().owner.name->exists(n|n = 'Teresa')
+EOSPerformer:5ms
+Ocl2MySQL:101ms
+OCL2Sql typed :6ms
+OCL2Sql typed optimize:4ms
+OCL2Sql vertical :6ms
+OCL2Sql vertical optimize:5ms
+
+Car: 10 Person: 1
+Car.allInstances().model->forAll(m|m = '6')
+EOSPerformer:180ms
+Ocl2MySQL:179ms
+OCL2Sql typed :6ms
+OCL2Sql typed optimize:4ms
+OCL2Sql vertical :6ms
+OCL2Sql vertical optimize:5ms
+Car.allInstances().owner.name->exists(n|n = 'Teresa')
+EOSPerformer:5ms
+Ocl2MySQL:117ms
+OCL2Sql typed :7ms
+OCL2Sql typed optimize:5ms
+OCL2Sql vertical :7ms
+OCL2Sql vertical optimize:7ms
+
+Car: 10 Person: 10
+Car.allInstances().model->forAll(m|m = '6')
+EOSPerformer:183ms
+Ocl2MySQL:178ms
+OCL2Sql typed :7ms
+OCL2Sql typed optimize:4ms
+OCL2Sql vertical :6ms
+OCL2Sql vertical optimize:6ms
+Car.allInstances().owner.name->exists(n|n = 'Teresa')
+EOSPerformer:5ms
+Ocl2MySQL:201ms
+OCL2Sql typed :14ms
+OCL2Sql typed optimize:10ms
+OCL2Sql vertical :15ms
+OCL2Sql vertical optimize:20ms
+
+Car: 100 Person: 10
+Car.allInstances().model->forAll(m|m = '6')
+EOSPerformer:183ms
+Ocl2MySQL:252ms
+OCL2Sql typed :41ms
+OCL2Sql typed optimize:6ms
+OCL2Sql vertical :43ms
+OCL2Sql vertical optimize:17ms
+Car.allInstances().owner.name->exists(n|n = 'Teresa')
+EOSPerformer:13ms
+Ocl2MySQL:513ms
+OCL2Sql typed :816ms
+OCL2Sql typed optimize:1121ms
+OCL2Sql vertical :823ms
+OCL2Sql vertical optimize:2002ms
+
+Car: 1000 Person:10
+Car.allInstances().model->forAll(m|m = '6')
+Type of typeChecker: Boolean
+EOSPerformer:347ms
+Ocl2MySQL:276ms
+OCL2Sql typed :4836ms
+OCL2Sql typed optimize:15ms
+OCL2Sql vertical :3931ms
+OCL2Sql vertical optimize:17ms
+Car.allInstances().owner.name->exists(n|n = 'Teresa')
+Type of typeChecker: Boolean
+EOSPerformer:179ms
+Ocl2MySQL:244ms
+OCL2Sql typed :88079ms
+OCL2Sql typed optimize:73813ms
+OCL2Sql vertical :82743ms
+OCL2Sql vertical optimize:74152ms
