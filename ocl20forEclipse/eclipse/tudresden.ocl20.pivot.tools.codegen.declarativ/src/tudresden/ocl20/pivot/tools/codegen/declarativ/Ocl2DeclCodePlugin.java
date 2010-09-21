@@ -13,21 +13,21 @@ import tudresden.ocl20.logging.LoggingPlugin;
  * 
  * @author Bjoern Freitag
  */
-public class DeclarativCodeGeneratorPlugin extends Plugin {
+public class Ocl2DeclCodePlugin extends Plugin {
 
 	/** The plug-in ID. */
 	public static final String ID =
 			"tudresden.ocl20.pivot.tools.codegen.declarativ"; //$NON-NLS-1$
 
 	/** The shared instance. */
-	private static DeclarativCodeGeneratorPlugin plugin;
+	private static Ocl2DeclCodePlugin plugin;
 
 	/**
 	 * <p>
-	 * Creates a new {@link DeclarativCodeGeneratorPlugin}.
+	 * Creates a new {@link Ocl2DeclCodePlugin}.
 	 * </p>
 	 */
-	public DeclarativCodeGeneratorPlugin() {
+	public Ocl2DeclCodePlugin() {
 
 		plugin = this;
 	}
@@ -39,7 +39,7 @@ public class DeclarativCodeGeneratorPlugin extends Plugin {
 	 * 
 	 * @return the shared instance
 	 */
-	public static DeclarativCodeGeneratorPlugin getDefault() {
+	public static Ocl2DeclCodePlugin getDefault() {
 
 		return plugin;
 	}

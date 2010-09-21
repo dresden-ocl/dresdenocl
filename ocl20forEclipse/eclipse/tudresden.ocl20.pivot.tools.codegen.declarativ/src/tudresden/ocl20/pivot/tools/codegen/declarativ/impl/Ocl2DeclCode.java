@@ -120,6 +120,7 @@ public class Ocl2DeclCode extends ExpressionsSwitch<String> implements
 
 	private LinkedList<String> aliasList;
 	private LinkedList<String> contextList;
+	private LinkedList<String> variableList;
 
 	/**
 	 * <p>
@@ -176,6 +177,7 @@ public class Ocl2DeclCode extends ExpressionsSwitch<String> implements
 		this.aliasList = new LinkedList<String>();
 		this.contextList = new LinkedList<String>();
 		this.navigationMap = new HashMap<OclExpression, List<Guide>>();
+		this.variableList = new LinkedList<String>();
 	}
 
 	/*
@@ -250,7 +252,7 @@ public class Ocl2DeclCode extends ExpressionsSwitch<String> implements
 
 		String result;
 		EObject anExpression;
-
+		this.reset();
 		anExpression = (EObject) aConstraint.getSpecification();
 		result = this.doSwitch(anExpression);
 
@@ -507,7 +509,7 @@ public class Ocl2DeclCode extends ExpressionsSwitch<String> implements
 
 		// get code for source expression
 		String sourceCode = doSwitch(sourceExp);
-
+		
 		aliasList.addLast(mySettings.getMappedModel().getUniqueAlias());
 
 		// evaluate the arguments
@@ -515,21 +517,33 @@ public class Ocl2DeclCode extends ExpressionsSwitch<String> implements
 
 		if (operationName.equals("collect")) {
 			// collect is special and weird, hackfix
+			List<Guide> nav = new LinkedList<Guide>();
 			Guide guideSrc = navigationMap.get(sourceExp).get(0);
 			guideSrc.reset();
 			Guide guideArg = navigationMap.get(anIteratorExp.getBody()).get(0);
 			guideArg.reset();
 			navigationMap.put(anIteratorExp,
-					navigationMap.get(anIteratorExp.getBody()));
-
-			List<Guide> nav = new LinkedList<Guide>();
+				navigationMap.get(anIteratorExp.getBody()));
 			nav.add(guideArg);
+			guideArg.reset();
 			nav.add(guideSrc);
 			String lastString = aliasList.removeLast();
 			guideSrc.setAlias(aliasList.getLast());
-			result = handleIterCollect(createNavigation(nav));
+			if ((anIteratorExp.getBody().getType() instanceof PrimitiveType) || !(anIteratorExp.getBody() instanceof PropertyCallExp)) {
+				//guideSrc.setAlias(aliasList.getFirst());
+				result = handleIterCollectOperation(guideArg,null,doSwitch(sourceExp));
+			}
+			else if (!(anIteratorExp.getBody().getType() instanceof PrimitiveType) || anIteratorExp.getBody() instanceof PropertyCallExp) {
+
+				result = handleIterCollect(createNavigation(nav));
+			}
+			else {
+				
+				result = handleIterCollectOperation(guideArg,doSwitch(anIteratorExp.getBody()),createNavigation(nav));
+			}
 			aliasList.addLast(lastString);
 			guideSrc.reset();
+
 		}
 		else if (operationName.equals("forAll")) {
 			result =
@@ -559,6 +573,10 @@ public class Ocl2DeclCode extends ExpressionsSwitch<String> implements
 		// remove last alias from alias list
 		aliasList.removeLast();
 
+		if (!operationName.equals("collect")) {
+			variableList.removeLast();
+		}
+		
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("caseIteratorExp(IteratorExp)" + " - end - return value="
 					+ result);
@@ -608,6 +626,8 @@ public class Ocl2DeclCode extends ExpressionsSwitch<String> implements
 		sourceExp = anOperationCallExp.getSource();
 		sourceCode = this.doSwitch((EObject) sourceExp);
 
+		navigationMap.put(anOperationCallExp, navigationMap.get(sourceExp));
+		
 		Operation anOperation = anOperationCallExp.getReferredOperation();
 		operationName = anOperation.getName();
 
@@ -803,10 +823,15 @@ public class Ocl2DeclCode extends ExpressionsSwitch<String> implements
 		}
 
 		else if (operationName.equals("asSet")) {
-			resultExp = "";
+			resultExp = sourceCode;
 			navigationMap.put(anOperationCallExp,
 					navigationMap.get(anOperationCallExp.getSource()));
 
+		}
+		else if (operationName.equals("asSequence")) {
+			resultExp = sourceCode;
+			navigationMap.put(anOperationCallExp,
+					navigationMap.get(anOperationCallExp.getSource()));
 		}
 		else if (operationName.equals("oclIsTypeOf")) {
 			Guide guide1 =
@@ -855,10 +880,15 @@ public class Ocl2DeclCode extends ExpressionsSwitch<String> implements
 		String result;
 		if (anPropertyCallExp.getReferredProperty() instanceof AssociationProperty) {
 			result = handlePropAssociation(guides);
+			guides.get(0).reset();
+			variableList.add(guides.get(0).getSelect());
 		}
 		else {
 			result =
 					handlePropProperty(anPropertyCallExp.getReferredProperty(), guides);
+			guides.get(0).reset();
+			variableList.add(guides.get(0).getWhere());
+			
 		}
 
 		if (LOGGER.isDebugEnabled()) {
@@ -949,7 +979,7 @@ public class Ocl2DeclCode extends ExpressionsSwitch<String> implements
 				mySettings.getTemplateGroup().getTemplate("literal_variable");
 
 		// parameterize the template engine
-		template.setAttribute("value", aVariableExp.getName());
+		template.setAttribute("value", variableList.getLast());
 
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("caseVariableExp(VariableExp)" + " - end - return value="
@@ -1654,6 +1684,31 @@ public class Ocl2DeclCode extends ExpressionsSwitch<String> implements
 
 		return template.toString();
 	}
+	
+	/**
+	 * Generates a declarative code fragment for a collect iterator.
+	 * 
+	 * @param codeSrcExp
+	 *          the code of the source expression
+	 * @return declarative code fragment for the collect iterator
+	 */
+	protected String handleIterCollectOperation(Guide guide, String where,String codeSrcExp) {
+
+		guide.reset();
+		
+		ITemplate template =
+				this.mySettings.getTemplateGroup().getTemplate("feature_call_collect_operation");
+
+		template.setAttribute("expression", codeSrcExp);
+		template.setAttribute("element", guide.getSelect());
+		template.setAttribute("alias", guide.getAlias());
+		template.setAttribute("from", guide.getFrom());
+		template.setAttribute("where1", guide.getWhere());
+		template.setAttribute("where2", where);
+
+		return template.toString();
+	}
+	
 
 	/**
 	 * Generates a declarative code fragment for a forAll iterator.
@@ -2108,8 +2163,10 @@ public class Ocl2DeclCode extends ExpressionsSwitch<String> implements
 		String firstAlias = aliasList.getFirst();
 		aliasList.clear();
 		aliasList.add(firstAlias);
-		contextList.remove();
+		this.mySettings.getMappedModel().resetUniqueAlias();
+		contextList.clear();
 		navigationMap.clear();
+		variableList.clear();
 	}
 
 	private List<Type> query_Supertypes(Type type) {

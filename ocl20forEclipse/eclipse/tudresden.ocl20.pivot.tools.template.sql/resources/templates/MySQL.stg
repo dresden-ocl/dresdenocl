@@ -8,9 +8,9 @@ typeMap ::= [
         "Boolean":"BOOL",
         "Short":"INT",
         "Char":"CHAR",
-        "String":"VARCHAR(512)",
+        "String":"VARCHAR(255)",
         "Date":"DATE",
-        default:"VARCHAR (512)"
+        default:"VARCHAR (255)"
 ]
 
 createType(type) ::= <<

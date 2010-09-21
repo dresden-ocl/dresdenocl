@@ -98,8 +98,8 @@ public class Cwm2DdlImpl extends
 
 		createFKCon.setAttribute("tablename", fkt.getName());
 		createFKCon.setAttribute("columnname", fk.getName());
-		createFKCon.setAttribute("reference", pkt.getName() + "(" + pk.getName()
-				+ ")");
+		createFKCon.setAttribute("pktablename", pkt.getName());
+		createFKCon.setAttribute("pkname", pk.getName());
 
 		out += "\n\n" + createFKCon.toString();
 

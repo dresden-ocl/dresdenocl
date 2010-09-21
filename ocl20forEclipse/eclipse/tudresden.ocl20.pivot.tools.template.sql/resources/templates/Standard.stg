@@ -48,9 +48,9 @@ $columns$
 );
 >>
 
-createForeignKeyConstraint(tablename, columnname, reference) ::= <<
-ALTER TABLE $tablename$ ADD CONSTRAINT CON$tablename$$columnname$
-FOREIGN KEY ($columnname$) REFERENCES $reference$;
+createForeignKeyConstraint(tablename, columnname, pktablename,pkname) ::= <<
+ALTER TABLE `$tablename$` ADD CONSTRAINT `CON$tablename$$columnname$`
+FOREIGN KEY (`$columnname$`) REFERENCES `$pktablename$`(`$pkname$`);
 >>
 
 createProperty(tablename,columnname,asname) ::= <<

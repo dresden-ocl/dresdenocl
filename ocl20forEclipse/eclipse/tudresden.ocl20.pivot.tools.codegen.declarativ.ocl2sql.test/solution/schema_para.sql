@@ -72,32 +72,32 @@ AS ( SELECT P_Person,TB_Person.age AS age,TB_Person.birthDate AS birthDate,TB_Pe
 FROM TB_Person
 WHERE type = "Student" );
 
-ALTER TABLE AS_author_papers ADD CONSTRAINT CONAS_author_papersF_author
-FOREIGN KEY (F_author) REFERENCES TB_Person(P_Person);
+ALTER TABLE `AS_author_papers` ADD CONSTRAINT `CONAS_author_papersF_author`
+FOREIGN KEY (`F_author`) REFERENCES `TB_Person`(`P_Person`);
 
-ALTER TABLE TB_Person ADD CONSTRAINT CONTB_PersonF_currentPaper
-FOREIGN KEY (F_currentPaper) REFERENCES TB_Paper(P_Paper);
+ALTER TABLE `TB_Person` ADD CONSTRAINT `CONTB_PersonF_currentPaper`
+FOREIGN KEY (`F_currentPaper`) REFERENCES `TB_Paper`(`P_Paper`);
 
-ALTER TABLE TB_Person ADD CONSTRAINT CONTB_PersonF_grade
-FOREIGN KEY (F_grade) REFERENCES TB_Grade(P_Grade);
+ALTER TABLE `TB_Person` ADD CONSTRAINT `CONTB_PersonF_grade`
+FOREIGN KEY (`F_grade`) REFERENCES `TB_Grade`(`P_Grade`);
 
-ALTER TABLE TB_Facility ADD CONSTRAINT CONTB_FacilityF_headOfFacility
-FOREIGN KEY (F_headOfFacility) REFERENCES TB_Person(P_Person);
+ALTER TABLE `TB_Facility` ADD CONSTRAINT `CONTB_FacilityF_headOfFacility`
+FOREIGN KEY (`F_headOfFacility`) REFERENCES `TB_Person`(`P_Person`);
 
-ALTER TABLE AS_member_owner ADD CONSTRAINT CONAS_member_ownerF_member
-FOREIGN KEY (F_member) REFERENCES TB_Person(P_Person);
+ALTER TABLE `AS_member_owner` ADD CONSTRAINT `CONAS_member_ownerF_member`
+FOREIGN KEY (`F_member`) REFERENCES `TB_Person`(`P_Person`);
 
-ALTER TABLE AS_member_owner ADD CONSTRAINT CONAS_member_ownerF_owner
-FOREIGN KEY (F_owner) REFERENCES TB_Facility(P_Facility);
+ALTER TABLE `AS_member_owner` ADD CONSTRAINT `CONAS_member_ownerF_owner`
+FOREIGN KEY (`F_owner`) REFERENCES `TB_Facility`(`P_Facility`);
 
-ALTER TABLE AS_author_papers ADD CONSTRAINT CONAS_author_papersF_papers
-FOREIGN KEY (F_papers) REFERENCES TB_Paper(P_Paper);
+ALTER TABLE `AS_author_papers` ADD CONSTRAINT `CONAS_author_papersF_papers`
+FOREIGN KEY (`F_papers`) REFERENCES `TB_Paper`(`P_Paper`);
 
-ALTER TABLE TB_Facility ADD CONSTRAINT CONTB_FacilityF_superFacility
-FOREIGN KEY (F_superFacility) REFERENCES TB_Facility(P_Facility);
+ALTER TABLE `TB_Facility` ADD CONSTRAINT `CONTB_FacilityF_superFacility`
+FOREIGN KEY (`F_superFacility`) REFERENCES `TB_Facility`(`P_Facility`);
 
-ALTER TABLE TB_Person ADD CONSTRAINT CONTB_PersonF_supervisor
-FOREIGN KEY (F_supervisor) REFERENCES TB_Person(P_Person);
+ALTER TABLE `TB_Person` ADD CONSTRAINT `CONTB_PersonF_supervisor`
+FOREIGN KEY (`F_supervisor`) REFERENCES `TB_Person`(`P_Person`);
 
-ALTER TABLE TB_Person ADD CONSTRAINT CONTB_PersonF_theFacility
-FOREIGN KEY (F_theFacility) REFERENCES TB_Facility(P_Facility);
+ALTER TABLE `TB_Person` ADD CONSTRAINT `CONTB_PersonF_theFacility`
+FOREIGN KEY (`F_theFacility`) REFERENCES `TB_Facility`(`P_Facility`);

@@ -48,10 +48,10 @@ WHERE NOT ((NOT ((SELF.purpose = 'Diplom') AND (((SELF.inProgress = 1) AND (1=1)
  WHERE PK_Person IN (SELECT FK_author FROM ASS_author_papers
  WHERE FK_papers IN (SELECT PK_Paper FROM OV_Paper WHERE PK_Paper = SELF.PK_Paper)))
   WHERE PK_Person IN (
-    SELECT PK_Person FROM OV_Person AS ALIAS3
+    SELECT PK_Person FROM OV_Person AS ALIAS2
     WHERE NOT exists (
   SELECT PK_Person FROM OV_Student
-  WHERE PK_Person = ALIAS3.PK_Person)
+  WHERE PK_Person = ALIAS2.PK_Person)
   )
 ))));
 
@@ -85,8 +85,8 @@ WHERE NOT ((NOT ((SELECT name FROM OV_Grade
  WHERE PK_Paper IN (SELECT FK_papers FROM ASS_author_papers
  WHERE FK_author IN (SELECT PK_Person FROM OV_Employee WHERE PK_Person = SELF.PK_Person)))
   WHERE PK_Paper IN (
-    SELECT PK_Paper FROM OV_Paper AS ALIAS4
-    WHERE ((ALIAS4.purpose = 'Dissertation'))
+    SELECT PK_Paper FROM OV_Paper AS ALIAS2
+    WHERE ((ALIAS2.purpose = 'Dissertation'))
   )
 ))   = 1))));
 
@@ -103,8 +103,8 @@ WHERE NOT ((NOT ((SELECT name FROM OV_Grade
  WHERE PK_Paper IN (SELECT FK_papers FROM ASS_author_papers
  WHERE FK_author IN (SELECT PK_Person FROM OV_Employee WHERE PK_Person = SELF.PK_Person)))
   WHERE PK_Paper IN (
-    SELECT PK_Paper FROM OV_Paper AS ALIAS5
-    WHERE NOT ((ALIAS5.purpose = 'Dissertation'))
+    SELECT PK_Paper FROM OV_Paper AS ALIAS2
+    WHERE NOT ((ALIAS2.purpose = 'Dissertation'))
   )
 ))   > 0))));
 
@@ -227,28 +227,43 @@ WHERE NOT (EXISTS (((SELECT PK_Paper FROM OV_Paper
 
 CREATE OR REPLACE VIEW tudOclInv12_1 AS
 (SELECT * FROM OV_Student AS SELF
-WHERE NOT (EXISTS (()
+WHERE NOT (EXISTS (((SELECT PK_Paper FROM OV_Paper
+ WHERE PK_Paper IN (SELECT FK_papers FROM ASS_author_papers
+ WHERE FK_author IN (SELECT PK_Person FROM OV_Student WHERE PK_Person = SELF.PK_Person))))
   UNION
-  (SELECT PK_Paper, (SELECT MAX(SEQNO) FROM ()) + SEQNO
-   FROM ))));
+  (SELECT PK_Paper, (SELECT MAX(SEQNO) FROM ((SELECT PK_Paper FROM OV_Paper
+ WHERE PK_Paper IN (SELECT FK_papers FROM ASS_author_papers
+ WHERE FK_author IN (SELECT PK_Person FROM OV_Student WHERE PK_Person = SELF.PK_Person))))) AS SEQNO
+   FROM (SELECT PK_Paper FROM OV_Paper
+ WHERE PK_Paper IN (SELECT FK_papers FROM ASS_author_papers
+ WHERE FK_author IN (SELECT PK_Person FROM OV_Person
+ WHERE PK_Person IN (SELECT FK_supervisor FROM OV_Student WHERE PK_Person = SELF.PK_Person))))))));
 
 CREATE OR REPLACE VIEW tudOclInv12_2 AS
 (SELECT * FROM OV_Student AS SELF
-WHERE NOT (EXISTS (()
+WHERE NOT (EXISTS (((SELECT PK_Paper FROM OV_Paper
+ WHERE PK_Paper IN (SELECT FK_papers FROM ASS_author_papers
+ WHERE FK_author IN (SELECT PK_Person FROM OV_Student WHERE PK_Person = SELF.PK_Person))))
   UNION
-  (SELECT SELF.FK_currentPaper, ((SELECT MAX(SEQNO) FROM ()) + 1) AS SEQNO))));
+  (SELECT SELF.FK_currentPaper, ((SELECT MAX(SEQNO) FROM ((SELECT PK_Paper FROM OV_Paper
+ WHERE PK_Paper IN (SELECT FK_papers FROM ASS_author_papers
+ WHERE FK_author IN (SELECT PK_Person FROM OV_Student WHERE PK_Person = SELF.PK_Person))))) + 1) AS SEQNO))));
 
 CREATE OR REPLACE VIEW tudOclInv12_3 AS
 (SELECT * FROM OV_Student AS SELF
 WHERE NOT (EXISTS (SELECT PK_Paper,
   (SELECT COUNT(*)+1 FROM (
     SELECT PK_Paper, SEQNO
-    FROM 
+    FROM (SELECT PK_Paper FROM OV_Paper
+ WHERE PK_Paper IN (SELECT FK_papers FROM ASS_author_papers
+ WHERE FK_author IN (SELECT PK_Person FROM OV_Student WHERE PK_Person = SELF.PK_Person)))
     WHERE NOT (PK_Paper = SELF.FK_currentPaper)
   ) WHERE SEQNO < s.SEQNO) AS SEQNO
   FROM (
     SELECT PK_Paper, SEQNO
-    FROM 
+    FROM (SELECT PK_Paper FROM OV_Paper
+ WHERE PK_Paper IN (SELECT FK_papers FROM ASS_author_papers
+ WHERE FK_author IN (SELECT PK_Person FROM OV_Student WHERE PK_Person = SELF.PK_Person)))
     WHERE NOT (PK_Paper = SELF.FK_currentPaper)
   ))));
 

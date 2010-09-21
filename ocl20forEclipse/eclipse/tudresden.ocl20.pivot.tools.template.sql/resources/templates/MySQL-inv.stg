@@ -43,12 +43,6 @@ if_expression(if_branch,then_branch,else_branch) ::= <<
 IF($if_branch$,$then_branch$,$else_branch$)
 >>
 
-
-// -- ITERATOR COLLECT (QUERY) ---
-feature_call_collect(expression) ::= <<
-$expression$
->>
-
 // -- ITERATOR FORALL (QUERY) ---
 feature_call_forall(source,alias,object,collection,expression) ::= <<
 NOT EXISTS (
@@ -76,6 +70,17 @@ feature_call_select(source,alias,object,collection,expression) ::= <<
   AND $object$ IN (
     SELECT $object$ FROM $source$ AS $alias$
     WHERE ($expression$)
+  )
+)
+>>
+
+// -- ITERATOR EXISTS (QUERY) ---
+feature_call_exists(source,object,collection,expression) ::= <<
+NOT EXISTS (
+  $collection$
+  AND $object$ IN (
+    SELECT $object$ FROM $source$
+    WHERE NOT $expression$
   )
 )
 >>

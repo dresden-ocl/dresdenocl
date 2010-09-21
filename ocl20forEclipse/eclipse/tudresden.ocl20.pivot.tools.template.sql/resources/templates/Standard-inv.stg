@@ -136,6 +136,13 @@ feature_call_collect(expression) ::= <<
 $expression$
 >>
 
+// -- ITERATOR COLLECT (QUERY) ---
+feature_call_collect_operation(expression,element,from,alias,where1,where2) ::= <<
+SELECT $element$ FROM $from$$if(where2)$ AS $alias$$endif$
+ WHERE $where1$ IN ($expression$) $if(where2)$
+ AND $where2$$endif$
+>>
+
 // -- ITERATOR FORALL (QUERY) ---
 feature_call_forall(source,alias,object,collection,expression) ::= <<
 NOT EXISTS (
@@ -167,16 +174,16 @@ feature_call_select(source,alias,object,collection,expression) ::= <<
 )
 >>
 
-// --- OCLISKINDOF (CLASS AND ATTRIBUTE) ---
+// --- OCLISTYPEOF (CLASS AND ATTRIBUTE) ---
 feature_call_oclistypeof(source,object,alias) ::= <<
 exists (
   SELECT $object$ FROM $source$
   WHERE $object$ = $alias$.$object$)
 >>
   
-// --- OCLISTYPEOF (CLASS AND ATTRIBUTE) ---
+// --- OCLISKINDOF (CLASS AND ATTRIBUTE) ---
 feature_call_ocliskindof(source,source2,object,alias) ::= <<
-exists (
+EXISTS (
   SELECT $object$ FROM $source$
   WHERE $object$ = $alias$.$object$)
 $if(source2)$
@@ -466,7 +473,7 @@ feature_call_union_bag(collection,collection2,element) ::= <<
 feature_call_union_sequence(collection,collection2,element) ::= <<
 ($collection$)
   UNION
-  (SELECT $element$, (SELECT MAX(SEQNO) FROM ($collection$)) + SEQNO
+  (SELECT $element$, (SELECT MAX(SEQNO) FROM ($collection$)) AS SEQNO
    FROM $collection2$)
 >>
 
