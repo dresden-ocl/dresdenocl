@@ -496,7 +496,7 @@ package tudresden.ocl20.pivot.language.ocl.semantics
 		override def getIntValue() = eObject.getIntValue()
 		override def setIntValue(_EInt : Int) = eObject.setIntValue(_EInt : Int)
 		override def getRealValue() = eObject.getRealValue()
-		override def setRealValue(_EInt : Int) = eObject.setRealValue(_EInt : Int)
+		override def setRealValue(_EString : String) = eObject.setRealValue(_EString : String)
 		override def getNavigationOperator() = eObject.getNavigationOperator()
 		override def setNavigationOperator(_EString : String) = eObject.setNavigationOperator(_EString : String)
 	}

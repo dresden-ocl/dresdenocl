@@ -14500,7 +14500,7 @@ public class OclParser extends OclANTLRParserBase {
                       if (resolvedObject == null) {
                       addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToken) a2).getLine(), ((org.antlr.runtime3_2_0.CommonToken) a2).getCharPositionInLine(), ((org.antlr.runtime3_2_0.CommonToken) a2).getStartIndex(), ((org.antlr.runtime3_2_0.CommonToken) a2).getStopIndex());
                       }
-                      java.lang.Integer resolved = (java.lang.Integer)resolvedObject;
+                      java.lang.String resolved = (java.lang.String)resolvedObject;
                       if (resolved != null) {
                       element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.REAL_LITERAL_EXP_CS__REAL_VALUE), resolved);
                       completedElement(resolved, false);
@@ -14585,7 +14585,7 @@ public class OclParser extends OclANTLRParserBase {
                       if (resolvedObject == null) {
                       addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToken) a3).getLine(), ((org.antlr.runtime3_2_0.CommonToken) a3).getCharPositionInLine(), ((org.antlr.runtime3_2_0.CommonToken) a3).getStartIndex(), ((org.antlr.runtime3_2_0.CommonToken) a3).getStopIndex());
                       }
-                      java.lang.Integer resolved = (java.lang.Integer)resolvedObject;
+                      java.lang.String resolved = (java.lang.String)resolvedObject;
                       if (resolved != null) {
                       element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.REAL_LITERAL_EXP_CS__REAL_VALUE), resolved);
                       completedElement(resolved, false);

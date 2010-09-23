@@ -53,8 +53,20 @@ trait OclParseTreeToEssentialOcl { selfType : OclStaticSemantics =>
         (p->context).flatMap{context =>
           val o = context.asInstanceOf[Operation]
           val parameters = o.getInputParameter
-			    computeBooleanConstraint(p, name, oclExpression, ConstraintKind.PRECONDITION, parameters.map(p => factory.createVariable(p)))
-        }
+          // FIXME Michael: wrong parameter names are still used
+//          val parameterList = new java.util.LinkedList[Variable]
+//          (p->variables).flatMap{case (_, explicitVariables) =>
+//            val variablesAndParameters = explicitVariables.map(_.getRepresentedParameter).zip(explicitVariables)
+//            variablesAndParameters.map(println)
+//            parameters.flatMap{param =>
+//              variablesAndParameters.find(param == _._1) match {
+//                case Some(vap) => Full(parameterList.add(vap._2))
+//                case None => yieldFailure("Cannot find parameter for " + param.getName, p)
+//              }
+//            }
+            computeBooleanConstraint(p, name, oclExpression, ConstraintKind.PRECONDITION, parameters.map(p => factory.createVariable(p)))
+          // }
+        } 
       }
       
       case p@PostConditionDeclarationCS(name, oclExpression) => {
@@ -216,7 +228,8 @@ trait OclParseTreeToEssentialOcl { selfType : OclStaticSemantics =>
         if (navigationOperator == "->") 
           yieldFailure("Cannot use '->' in a real expression.", r)
         else {
-          Full(factory.createRealLiteralExp(intValue  + (realValue / pow(10, ("" + realValue).length)).toFloat))
+          val realValueInt = Integer.parseInt(realValue)
+          Full(factory.createRealLiteralExp(intValue  + (realValueInt / pow(10, realValue.length)).toFloat))
         }
       }
       

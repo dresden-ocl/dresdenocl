@@ -86,8 +86,12 @@ object OclStaticSemanticsTransactions {
               case o : Operation => t.addOperation(o)
             }
           }
-          case o : Operation => o.getOwningType.getNamespace.addRule(constraint)
-          case p : Property => p.getOwningType.getNamespace.addRule(constraint)
+          case o : Operation => Box.!! (o.getOwningType).map{ot =>
+            ot.getNamespace.addRule(constraint)
+          }
+          case p : Property => Box.!! (p.getOwningType).map{ot =>
+            ot.getNamespace.addRule(constraint)
+          }
         }
       }
     }

@@ -63,12 +63,12 @@ public interface RealLiteralExpCS extends PrimitiveLiteralExpCS {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Real Value</em>' attribute.
-	 * @see #setRealValue(int)
+	 * @see #setRealValue(String)
 	 * @see tudresden.ocl20.pivot.language.ocl.OclPackage#getRealLiteralExpCS_RealValue()
 	 * @model required="true"
 	 * @generated
 	 */
-	int getRealValue();
+	String getRealValue();
 
 	/**
 	 * Sets the value of the '{@link tudresden.ocl20.pivot.language.ocl.RealLiteralExpCS#getRealValue <em>Real Value</em>}' attribute.
@@ -78,7 +78,7 @@ public interface RealLiteralExpCS extends PrimitiveLiteralExpCS {
 	 * @see #getRealValue()
 	 * @generated
 	 */
-	void setRealValue(int value);
+	void setRealValue(String value);
 
 	/**
 	 * Returns the value of the '<em><b>Navigation Operator</b></em>' attribute.

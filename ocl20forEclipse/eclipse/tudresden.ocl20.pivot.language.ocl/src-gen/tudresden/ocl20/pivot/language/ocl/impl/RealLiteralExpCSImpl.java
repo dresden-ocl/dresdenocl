@@ -60,7 +60,7 @@ public class RealLiteralExpCSImpl extends PrimitiveLiteralExpCSImpl implements R
 	 * @generated
 	 * @ordered
 	 */
-	protected static final int REAL_VALUE_EDEFAULT = 0;
+	protected static final String REAL_VALUE_EDEFAULT = null;
 
 	/**
 	 * The cached value of the '{@link #getRealValue() <em>Real Value</em>}' attribute.
@@ -70,7 +70,7 @@ public class RealLiteralExpCSImpl extends PrimitiveLiteralExpCSImpl implements R
 	 * @generated
 	 * @ordered
 	 */
-	protected int realValue = REAL_VALUE_EDEFAULT;
+	protected String realValue = REAL_VALUE_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getNavigationOperator() <em>Navigation Operator</em>}' attribute.
@@ -137,7 +137,7 @@ public class RealLiteralExpCSImpl extends PrimitiveLiteralExpCSImpl implements R
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public int getRealValue() {
+	public String getRealValue() {
 		return realValue;
 	}
 
@@ -146,8 +146,8 @@ public class RealLiteralExpCSImpl extends PrimitiveLiteralExpCSImpl implements R
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setRealValue(int newRealValue) {
-		int oldRealValue = realValue;
+	public void setRealValue(String newRealValue) {
+		String oldRealValue = realValue;
 		realValue = newRealValue;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, OclPackage.REAL_LITERAL_EXP_CS__REAL_VALUE, oldRealValue, realValue));
@@ -204,7 +204,7 @@ public class RealLiteralExpCSImpl extends PrimitiveLiteralExpCSImpl implements R
 				setIntValue((Integer)newValue);
 				return;
 			case OclPackage.REAL_LITERAL_EXP_CS__REAL_VALUE:
-				setRealValue((Integer)newValue);
+				setRealValue((String)newValue);
 				return;
 			case OclPackage.REAL_LITERAL_EXP_CS__NAVIGATION_OPERATOR:
 				setNavigationOperator((String)newValue);
@@ -245,7 +245,7 @@ public class RealLiteralExpCSImpl extends PrimitiveLiteralExpCSImpl implements R
 			case OclPackage.REAL_LITERAL_EXP_CS__INT_VALUE:
 				return intValue != INT_VALUE_EDEFAULT;
 			case OclPackage.REAL_LITERAL_EXP_CS__REAL_VALUE:
-				return realValue != REAL_VALUE_EDEFAULT;
+				return REAL_VALUE_EDEFAULT == null ? realValue != null : !REAL_VALUE_EDEFAULT.equals(realValue);
 			case OclPackage.REAL_LITERAL_EXP_CS__NAVIGATION_OPERATOR:
 				return NAVIGATION_OPERATOR_EDEFAULT == null ? navigationOperator != null : !NAVIGATION_OPERATOR_EDEFAULT.equals(navigationOperator);
 		}

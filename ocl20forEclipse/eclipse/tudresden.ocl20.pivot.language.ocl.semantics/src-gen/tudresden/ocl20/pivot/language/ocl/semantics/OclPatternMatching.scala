@@ -1284,7 +1284,7 @@ object IntegerLiteralExpCS {
 object RealLiteralExpCS {
 	def apply(
 	          _intValue : Int,
-	          _realValue : Int,
+	          _realValue : String,
 	          _navigationOperator : String	          
 	          ) = {
 		
@@ -1298,7 +1298,7 @@ object RealLiteralExpCS {
 		
 	}
 
-	def unapply(__realLiteralExpCS : tudresden.ocl20.pivot.language.ocl.RealLiteralExpCS) : Some[Tuple3[Int, Int, String]] = {
+	def unapply(__realLiteralExpCS : tudresden.ocl20.pivot.language.ocl.RealLiteralExpCS) : Some[Tuple3[Int, String, String]] = {
 		Some(
 			__realLiteralExpCS.getIntValue,
 			__realLiteralExpCS.getRealValue,
