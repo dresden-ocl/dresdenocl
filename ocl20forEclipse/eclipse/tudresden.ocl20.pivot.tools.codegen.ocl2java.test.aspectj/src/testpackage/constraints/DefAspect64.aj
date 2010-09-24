@@ -12,20 +12,19 @@ public privileged aspect DefAspect64 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testOrderedSetAsOrderedSet(java.util.List<Object> source)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testCollectionSum(java.util.Collection<Integer> source)}.</p>
      */
-    protected pointcut testOrderedSetAsOrderedSetCaller(testpackage.Class1 aClass, java.util.List<Object> source):
-    	call(* testpackage.Class1.testOrderedSetAsOrderedSet(java.util.List<Object>))
+    protected pointcut testCollectionSumCaller(testpackage.Class1 aClass, java.util.Collection<Integer> source):
+    	call(* testpackage.Class1.testCollectionSum(java.util.Collection<Integer>))
     	&& target(aClass) && args(source);
     
     /**
-     * <p>Defines the method testOrderedSetAsOrderedSet(java.util.List<Object> source) defined by the constraint
+     * <p>Defines the method testCollectionSum(java.util.Collection<Integer> source) defined by the constraint
      * <code>context Class1
-     *       def: testOrderedSetAsOrderedSet(source: OrderedSet(OclAny)): 
-      OrderedSet(OclAny) =
-    source ->asOrderedSet()</code></p>
+     *       def: testCollectionSum(source: Collection(Integer)): Integer =
+    source ->sum()</code></p>
      */
-    java.util.List<Object> around(testpackage.Class1 aClass, java.util.List<Object> source): testOrderedSetAsOrderedSetCaller(aClass, source) {
-        return tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclOrderedSets.asOrderedSet(source);
+    Integer around(testpackage.Class1 aClass, java.util.Collection<Integer> source): testCollectionSumCaller(aClass, source) {
+        return new Integer(tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclCollections.sum(source).intValue());
     }
 }

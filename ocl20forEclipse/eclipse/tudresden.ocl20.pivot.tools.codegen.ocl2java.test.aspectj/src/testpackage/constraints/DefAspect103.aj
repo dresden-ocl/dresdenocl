@@ -12,19 +12,19 @@ public privileged aspect DefAspect103 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testSequenceInsertAt(java.util.List<Object> source, Integer arg01, Object arg02)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testRealLessThan01(Float source, Float arg01)}.</p>
      */
-    protected pointcut testSequenceInsertAtCaller(testpackage.Class1 aClass, java.util.List<Object> source, Integer arg01, Object arg02):
-    	call(* testpackage.Class1.testSequenceInsertAt(java.util.List<Object>, Integer, Object))
-    	&& target(aClass) && args(source, arg01, arg02);
+    protected pointcut testRealLessThan01Caller(testpackage.Class1 aClass, Float source, Float arg01):
+    	call(* testpackage.Class1.testRealLessThan01(Float, Float))
+    	&& target(aClass) && args(source, arg01);
     
     /**
-     * <p>Defines the method testSequenceInsertAt(java.util.List<Object> source, Integer arg01, Object arg02) defined by the constraint
+     * <p>Defines the method testRealLessThan01(Float source, Float arg01) defined by the constraint
      * <code>context Class1
-     *       def: testSequenceInsertAt(source: Sequence(OclAny), arg01: Integer, arg02: OclAny): Sequence(OclAny) =
-    source ->insertAt(arg01, arg02)</code></p>
+     *       def: testRealLessThan01(source: Real, arg01: Real): Boolean =
+    source < arg01</code></p>
      */
-    java.util.List<Object> around(testpackage.Class1 aClass, java.util.List<Object> source, Integer arg01, Object arg02): testSequenceInsertAtCaller(aClass, source, arg01, arg02) {
-        return tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclSequences.insertAt(source, arg01, arg02);
+    Boolean around(testpackage.Class1 aClass, Float source, Float arg01): testRealLessThan01Caller(aClass, source, arg01) {
+        return (source < arg01);
     }
 }

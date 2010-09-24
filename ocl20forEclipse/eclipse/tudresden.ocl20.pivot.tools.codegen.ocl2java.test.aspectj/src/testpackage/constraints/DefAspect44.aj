@@ -12,19 +12,19 @@ public privileged aspect DefAspect44 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testIntegerMax01(Integer source, Integer arg01)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testBooleanToString(Boolean source)}.</p>
      */
-    protected pointcut testIntegerMax01Caller(testpackage.Class1 aClass, Integer source, Integer arg01):
-    	call(* testpackage.Class1.testIntegerMax01(Integer, Integer))
-    	&& target(aClass) && args(source, arg01);
+    protected pointcut testBooleanToStringCaller(testpackage.Class1 aClass, Boolean source):
+    	call(* testpackage.Class1.testBooleanToString(Boolean))
+    	&& target(aClass) && args(source);
     
     /**
-     * <p>Defines the method testIntegerMax01(Integer source, Integer arg01) defined by the constraint
+     * <p>Defines the method testBooleanToString(Boolean source) defined by the constraint
      * <code>context Class1
-     *       def: testIntegerMax01(source: Integer, arg01: Integer): Integer =
-    source.max(arg01)</code></p>
+     *       def: testBooleanToString(source: Boolean): String =
+    source.toString()</code></p>
      */
-    Integer around(testpackage.Class1 aClass, Integer source, Integer arg01): testIntegerMax01Caller(aClass, source, arg01) {
-        return java.lang.Math.max(source, arg01);
+    String around(testpackage.Class1 aClass, Boolean source): testBooleanToStringCaller(aClass, source) {
+        return source.toString();
     }
 }

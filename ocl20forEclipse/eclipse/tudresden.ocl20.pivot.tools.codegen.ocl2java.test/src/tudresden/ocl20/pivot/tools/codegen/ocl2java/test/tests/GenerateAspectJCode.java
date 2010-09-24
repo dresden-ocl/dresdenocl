@@ -92,6 +92,42 @@ public class GenerateAspectJCode extends AbstractDiffTest {
 		constraints.add(new String[] { "constraintkindtest/post", "post01" });
 		constraints.add(new String[] { "constraintkindtest/post", "post02" });
 
+		// FIXME Claas: Write test cases for code of the following expressions.
+		constraints.add(new String[] { "expressions/calls", "operation01" });
+		constraints.add(new String[] { "expressions/calls", "operation02" });
+		constraints.add(new String[] { "expressions/calls", "property01" });
+		constraints.add(new String[] { "expressions/calls", "property02" });
+		constraints.add(new String[] { "expressions/iterator", "any01" });
+		constraints.add(new String[] { "expressions/iterator", "collect01" });
+//		constraints.add(new String[] { "expressions/iterator", "collectNested01" });
+//		constraints.add(new String[] { "expressions/iterator", "exists01" });
+//		constraints.add(new String[] { "expressions/iterator", "exists02" });
+//		constraints.add(new String[] { "expressions/iterator", "forAll01" });
+//		constraints.add(new String[] { "expressions/iterator", "forAll02" });
+//		constraints.add(new String[] { "expressions/iterator", "isUnique01" });
+//		constraints.add(new String[] { "expressions/iterator", "iterate01" });
+//		constraints.add(new String[] { "expressions/iterator", "one01" });
+//		constraints.add(new String[] { "expressions/iterator", "reject01" });
+//		constraints.add(new String[] { "expressions/iterator", "select01" });
+//		constraints.add(new String[] { "expressions/iterator", "sortedBy01" });
+		constraints.add(new String[] { "expressions/literals", "boolean01" });
+		constraints.add(new String[] { "expressions/literals", "boolean02" });
+		constraints.add(new String[] { "expressions/literals", "collection01" });
+		constraints.add(new String[] { "expressions/literals", "collection02" });
+		constraints.add(new String[] { "expressions/literals", "collection03" });		
+		constraints.add(new String[] { "expressions/literals", "collection04" });
+		constraints.add(new String[] { "expressions/literals", "collection05" });
+		constraints.add(new String[] { "expressions/literals", "enumeration01" });
+		constraints.add(new String[] { "expressions/literals", "integer01" });
+		constraints.add(new String[] { "expressions/literals", "invalid01" });
+		constraints.add(new String[] { "expressions/literals", "real01" });
+		constraints.add(new String[] { "expressions/literals", "string01" });
+		constraints.add(new String[] { "expressions/literals", "tuple01" });
+		constraints.add(new String[] { "expressions/literals", "type01" });
+		constraints.add(new String[] { "expressions/literals", "undefined01" });
+		constraints.add(new String[] { "expressions", "if01" });
+		constraints.add(new String[] { "expressions", "let01" });	
+		
 		constraints.add(new String[] { "sltest/bag", "asBag01" });
 		constraints.add(new String[] { "sltest/bag", "asOrderedSet01" });
 		constraints.add(new String[] { "sltest/bag", "asSequence01" });

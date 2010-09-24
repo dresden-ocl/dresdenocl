@@ -12,35 +12,19 @@ public privileged aspect DefAspect57 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testOclIsInvalid02()}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testCollectionIsEmpty(java.util.Collection<Object> source)}.</p>
      */
-    protected pointcut testOclIsInvalid02Caller(testpackage.Class1 aClass):
-    	call(* testpackage.Class1.testOclIsInvalid02())
-    	&& target(aClass);
+    protected pointcut testCollectionIsEmptyCaller(testpackage.Class1 aClass, java.util.Collection<Object> source):
+    	call(* testpackage.Class1.testCollectionIsEmpty(java.util.Collection<Object>))
+    	&& target(aClass) && args(source);
     
     /**
-     * <p>Defines the method testOclIsInvalid02() defined by the constraint
+     * <p>Defines the method testCollectionIsEmpty(java.util.Collection<Object> source) defined by the constraint
      * <code>context Class1
-     *       def: testOclIsInvalid02(): Boolean =
-    (Sequence { } ->first()).oclIsInvalid()</code></p>
+     *       def: testCollectionIsEmpty(source: Collection(OclAny)): Boolean =
+    source ->isEmpty()</code></p>
      */
-    Boolean around(testpackage.Class1 aClass): testOclIsInvalid02Caller(aClass) {
-        java.util.ArrayList collection1;
-        collection1 = new java.util.ArrayList();
-
-        Boolean result1;
-        
-        /* Check if the expression results in invalid. */
-        try {
-            /* DUMMY variable is necessary to form literals into a statement. */
-            Object DUMMY = tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclSequences.first(collection1); 
-            result1 = false;
-        }
-        
-        catch (Exception e) {
-            result1 = true;
-        }
-    
-        return result1;
+    Boolean around(testpackage.Class1 aClass, java.util.Collection<Object> source): testCollectionIsEmptyCaller(aClass, source) {
+        return tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclCollections.isEmpty(source);
     }
 }

@@ -18,7 +18,7 @@ public privileged aspect BodyAspect1 {
     /**
      * <p>Defines the body of the method bodyOperation02(Integer anInt) defined by the constraint
      * <code>context Class1::bodyOperation02(anInt: Integer): Integer
-     *       body: anInt[].-()</code></p>
+     *       body: -anInt</code></p>
      */
     Integer around(testpackage.Class1 aClass, Integer anInt): bodyOperation02Caller(aClass, anInt) {
         return -(anInt);

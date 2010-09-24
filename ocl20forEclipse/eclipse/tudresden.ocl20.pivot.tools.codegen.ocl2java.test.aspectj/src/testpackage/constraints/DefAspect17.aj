@@ -12,19 +12,19 @@ public privileged aspect DefAspect17 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testBooleanAnd01(Boolean source, Boolean arg01)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testEnumerationLiteralExp01()}.</p>
      */
-    protected pointcut testBooleanAnd01Caller(testpackage.Class1 aClass, Boolean source, Boolean arg01):
-    	call(* testpackage.Class1.testBooleanAnd01(Boolean, Boolean))
-    	&& target(aClass) && args(source, arg01);
+    protected pointcut testEnumerationLiteralExp01Caller(testpackage.Class1 aClass):
+    	call(* testpackage.Class1.testEnumerationLiteralExp01())
+    	&& target(aClass);
     
     /**
-     * <p>Defines the method testBooleanAnd01(Boolean source, Boolean arg01) defined by the constraint
+     * <p>Defines the method testEnumerationLiteralExp01() defined by the constraint
      * <code>context Class1
-     *       def: testBooleanAnd01(source: Boolean, arg01: Boolean): Boolean =
-    source and arg01</code></p>
+     *       def: testEnumerationLiteralExp01(): Enumeration1 =
+    Enumeration1::literal1</code></p>
      */
-    Boolean around(testpackage.Class1 aClass, Boolean source, Boolean arg01): testBooleanAnd01Caller(aClass, source, arg01) {
-        return (source && arg01);
+    Enum around(testpackage.Class1 aClass): testEnumerationLiteralExp01Caller(aClass) {
+        return testpackage.Enumeration1.literal1;
     }
 }

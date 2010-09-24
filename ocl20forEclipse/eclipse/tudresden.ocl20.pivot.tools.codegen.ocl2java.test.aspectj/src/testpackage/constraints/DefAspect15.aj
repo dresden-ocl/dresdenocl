@@ -12,19 +12,27 @@ public privileged aspect DefAspect15 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testBagUnion01(java.util.List<Object> source, java.util.Set<Object> arg01)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testCollectionLiteralExp04()}.</p>
      */
-    protected pointcut testBagUnion01Caller(testpackage.Class1 aClass, java.util.List<Object> source, java.util.Set<Object> arg01):
-    	call(* testpackage.Class1.testBagUnion01(java.util.List<Object>, java.util.Set<Object>))
-    	&& target(aClass) && args(source, arg01);
+    protected pointcut testCollectionLiteralExp04Caller(testpackage.Class1 aClass):
+    	call(* testpackage.Class1.testCollectionLiteralExp04())
+    	&& target(aClass);
     
     /**
-     * <p>Defines the method testBagUnion01(java.util.List<Object> source, java.util.Set<Object> arg01) defined by the constraint
+     * <p>Defines the method testCollectionLiteralExp04() defined by the constraint
      * <code>context Class1
-     *       def: testBagUnion01(source: Bag(OclAny), arg01: Set(OclAny)): Bag(OclAny) =
-    source ->union(arg01)</code></p>
+     *       def: testCollectionLiteralExp04(): 
+      Sequence(Integer) =
+    Sequence { 0, 1, 2 }</code></p>
      */
-    java.util.List<Object> around(testpackage.Class1 aClass, java.util.List<Object> source, java.util.Set<Object> arg01): testBagUnion01Caller(aClass, source, arg01) {
-        return tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclBags.union(source, arg01);
+    java.util.List<Integer> around(testpackage.Class1 aClass): testCollectionLiteralExp04Caller(aClass) {
+        java.util.ArrayList<Integer> collection1;
+        collection1 = new java.util.ArrayList<Integer>();
+        
+        collection1.add(new Integer(0));
+        collection1.add(new Integer(1));
+        collection1.add(new Integer(2));
+    
+        return collection1;
     }
 }

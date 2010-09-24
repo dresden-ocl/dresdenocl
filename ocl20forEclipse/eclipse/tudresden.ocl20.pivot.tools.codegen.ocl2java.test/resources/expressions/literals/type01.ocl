@@ -1,7 +1,7 @@
 package testpackage
 
 context Class1
-def: testTypeLiteralExp01: OclType =
+def: testTypeLiteralExp01(): OclType =
 Class1
 
 endpackage

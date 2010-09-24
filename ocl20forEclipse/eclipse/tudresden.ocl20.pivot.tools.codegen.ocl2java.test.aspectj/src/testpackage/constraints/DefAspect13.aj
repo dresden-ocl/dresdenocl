@@ -12,19 +12,28 @@ public privileged aspect DefAspect13 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testBagIntersection01(java.util.List<Object> source, java.util.Set<Object> arg01)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testCollectionLiteralExp02()}.</p>
      */
-    protected pointcut testBagIntersection01Caller(testpackage.Class1 aClass, java.util.List<Object> source, java.util.Set<Object> arg01):
-    	call(* testpackage.Class1.testBagIntersection01(java.util.List<Object>, java.util.Set<Object>))
-    	&& target(aClass) && args(source, arg01);
+    protected pointcut testCollectionLiteralExp02Caller(testpackage.Class1 aClass):
+    	call(* testpackage.Class1.testCollectionLiteralExp02())
+    	&& target(aClass);
     
     /**
-     * <p>Defines the method testBagIntersection01(java.util.List<Object> source, java.util.Set<Object> arg01) defined by the constraint
+     * <p>Defines the method testCollectionLiteralExp02() defined by the constraint
      * <code>context Class1
-     *       def: testBagIntersection01(source: Bag(OclAny), arg01: Set(OclAny)): Bag(OclAny) =
-    source ->intersection(arg01)</code></p>
+     *       def: testCollectionLiteralExp02(): 
+      Bag(Integer) =
+    Bag { 0 ..2 }</code></p>
      */
-    java.util.List<Object> around(testpackage.Class1 aClass, java.util.List<Object> source, java.util.Set<Object> arg01): testBagIntersection01Caller(aClass, source, arg01) {
-        return tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclBags.intersection(source, arg01);
+    java.util.List<Integer> around(testpackage.Class1 aClass): testCollectionLiteralExp02Caller(aClass) {
+        java.util.ArrayList<Integer> collection1;
+        collection1 = new java.util.ArrayList<Integer>();
+        
+        /* TODO: Auto-generated initialization does only work for numeric values. */
+        for (Integer index1 = new Integer(0); index1 <= new Integer(2); index1++) {
+            collection1.add(index1);
+        }
+    
+        return collection1;
     }
 }

@@ -12,20 +12,19 @@ public privileged aspect DefAspect4 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testBagAsBag(java.util.List<Object> source)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testOperationCallExp01()}.</p>
      */
-    protected pointcut testBagAsBagCaller(testpackage.Class1 aClass, java.util.List<Object> source):
-    	call(* testpackage.Class1.testBagAsBag(java.util.List<Object>))
-    	&& target(aClass) && args(source);
+    protected pointcut testOperationCallExp01Caller(testpackage.Class1 aClass):
+    	call(* testpackage.Class1.testOperationCallExp01())
+    	&& target(aClass);
     
     /**
-     * <p>Defines the method testBagAsBag(java.util.List<Object> source) defined by the constraint
+     * <p>Defines the method testOperationCallExp01() defined by the constraint
      * <code>context Class1
-     *       def: testBagAsBag(source: Bag(OclAny)): 
-      Bag(OclAny) =
-    source ->asBag()</code></p>
+     *       def: testOperationCallExp01(): Integer =
+    self.getInteger()</code></p>
      */
-    java.util.List<Object> around(testpackage.Class1 aClass, java.util.List<Object> source): testBagAsBagCaller(aClass, source) {
-        return tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclBags.asBag(source);
+    Integer around(testpackage.Class1 aClass): testOperationCallExp01Caller(aClass) {
+        return aClass.getInteger();
     }
 }

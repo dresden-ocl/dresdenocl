@@ -28,9 +28,12 @@ package testpackage;
  */
 public class Class1 {
 
-	/** private field used in constraints. */
-	private Integer anInteger01 = 42;
+	/** Field used in constraints. */
+	public Integer anInteger01 = 42;
 	
+	/** Staitc field used in constraints. */
+	public static Integer aStaticInteger01 = 42;
+
 	/**
 	 * <p>
 	 * Empty constructor required for most test cases.
@@ -79,6 +82,28 @@ public class Class1 {
 		/* Implemented by AspectJ file. */
 		throw new RuntimeException(
 				"AspectJ body expression was not instrumented correctly.");
+	}
+	
+	/**
+	 * <p>
+	 * Used to test a OperationCallExp.
+	 * </p>
+	 * 
+	 * @return An {@link Integer}.
+	 */
+	public Integer getInteger() {
+		return 42;
+	}
+
+	/**
+	 * <p>
+	 * Used to test a OperationCallExp.
+	 * </p>
+	 * 
+	 * @return An {@link Integer}.
+	 */
+	public static Integer getStaticInteger() {
+		return 42;
 	}
 
 	/**

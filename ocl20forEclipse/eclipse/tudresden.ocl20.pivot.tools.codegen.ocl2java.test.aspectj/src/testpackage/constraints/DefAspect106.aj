@@ -12,19 +12,19 @@ public privileged aspect DefAspect106 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testSequenceReverse(java.util.List<Object> source)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testRealMin01(Float source, Float arg01)}.</p>
      */
-    protected pointcut testSequenceReverseCaller(testpackage.Class1 aClass, java.util.List<Object> source):
-    	call(* testpackage.Class1.testSequenceReverse(java.util.List<Object>))
-    	&& target(aClass) && args(source);
+    protected pointcut testRealMin01Caller(testpackage.Class1 aClass, Float source, Float arg01):
+    	call(* testpackage.Class1.testRealMin01(Float, Float))
+    	&& target(aClass) && args(source, arg01);
     
     /**
-     * <p>Defines the method testSequenceReverse(java.util.List<Object> source) defined by the constraint
+     * <p>Defines the method testRealMin01(Float source, Float arg01) defined by the constraint
      * <code>context Class1
-     *       def: testSequenceReverse(source: Sequence(OclAny)): Sequence(OclAny) =
-    source ->reverse()</code></p>
+     *       def: testRealMin01(source: Real, arg01: Real): Real =
+    source.min(arg01)</code></p>
      */
-    java.util.List<Object> around(testpackage.Class1 aClass, java.util.List<Object> source): testSequenceReverseCaller(aClass, source) {
-        return tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclSequences.reverse(source);
+    Float around(testpackage.Class1 aClass, Float source, Float arg01): testRealMin01Caller(aClass, source, arg01) {
+        return java.lang.Math.min(source, arg01);
     }
 }

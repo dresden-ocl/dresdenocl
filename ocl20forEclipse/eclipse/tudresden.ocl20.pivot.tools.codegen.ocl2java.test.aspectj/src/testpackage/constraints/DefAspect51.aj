@@ -12,19 +12,19 @@ public privileged aspect DefAspect51 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testIntegerToString(Integer source)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testCollectionEquals(java.util.Collection<Object> source, java.util.Collection<Object> arg01)}.</p>
      */
-    protected pointcut testIntegerToStringCaller(testpackage.Class1 aClass, Integer source):
-    	call(* testpackage.Class1.testIntegerToString(Integer))
-    	&& target(aClass) && args(source);
+    protected pointcut testCollectionEqualsCaller(testpackage.Class1 aClass, java.util.Collection<Object> source, java.util.Collection<Object> arg01):
+    	call(* testpackage.Class1.testCollectionEquals(java.util.Collection<Object>, java.util.Collection<Object>))
+    	&& target(aClass) && args(source, arg01);
     
     /**
-     * <p>Defines the method testIntegerToString(Integer source) defined by the constraint
+     * <p>Defines the method testCollectionEquals(java.util.Collection<Object> source, java.util.Collection<Object> arg01) defined by the constraint
      * <code>context Class1
-     *       def: testIntegerToString(source: Integer): String =
-    source.toString()</code></p>
+     *       def: testCollectionEquals(source: Collection(OclAny), arg01: Collection(OclAny)): Boolean =
+    source = arg01</code></p>
      */
-    String around(testpackage.Class1 aClass, Integer source): testIntegerToStringCaller(aClass, source) {
-        return source.toString();
+    Boolean around(testpackage.Class1 aClass, java.util.Collection<Object> source, java.util.Collection<Object> arg01): testCollectionEqualsCaller(aClass, source, arg01) {
+        return tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclCollections.equals(source, arg01);
     }
 }

@@ -12,19 +12,19 @@ public privileged aspect DefAspect19 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testBooleanNot01(Boolean source)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testInvalidLiteralExp01()}.</p>
      */
-    protected pointcut testBooleanNot01Caller(testpackage.Class1 aClass, Boolean source):
-    	call(* testpackage.Class1.testBooleanNot01(Boolean))
-    	&& target(aClass) && args(source);
+    protected pointcut testInvalidLiteralExp01Caller(testpackage.Class1 aClass):
+    	call(* testpackage.Class1.testInvalidLiteralExp01())
+    	&& target(aClass);
     
     /**
-     * <p>Defines the method testBooleanNot01(Boolean source) defined by the constraint
+     * <p>Defines the method testInvalidLiteralExp01() defined by the constraint
      * <code>context Class1
-     *       def: testBooleanNot01(source: Boolean): Boolean =
-    not source</code></p>
+     *       def: testInvalidLiteralExp01(): Integer =
+    invalid</code></p>
      */
-    Boolean around(testpackage.Class1 aClass, Boolean source): testBooleanNot01Caller(aClass, source) {
-        return !source;
+    Integer around(testpackage.Class1 aClass): testInvalidLiteralExp01Caller(aClass) {
+        return new tudresden.ocl20.pivot.tools.codegen.ocl2java.types.OclInvalidException("Invalid literal in OCL constraint.");;
     }
 }

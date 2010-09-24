@@ -12,19 +12,19 @@ public privileged aspect DefAspect67 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testOrderedSetAt(java.util.List<Object> source, Integer arg01)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testIntegerMax01(Integer source, Integer arg01)}.</p>
      */
-    protected pointcut testOrderedSetAtCaller(testpackage.Class1 aClass, java.util.List<Object> source, Integer arg01):
-    	call(* testpackage.Class1.testOrderedSetAt(java.util.List<Object>, Integer))
+    protected pointcut testIntegerMax01Caller(testpackage.Class1 aClass, Integer source, Integer arg01):
+    	call(* testpackage.Class1.testIntegerMax01(Integer, Integer))
     	&& target(aClass) && args(source, arg01);
     
     /**
-     * <p>Defines the method testOrderedSetAt(java.util.List<Object> source, Integer arg01) defined by the constraint
+     * <p>Defines the method testIntegerMax01(Integer source, Integer arg01) defined by the constraint
      * <code>context Class1
-     *       def: testOrderedSetAt(source: OrderedSet(OclAny), arg01: Integer): OclAny =
-    source ->at(arg01)</code></p>
+     *       def: testIntegerMax01(source: Integer, arg01: Integer): Integer =
+    source.max(arg01)</code></p>
      */
-    Object around(testpackage.Class1 aClass, java.util.List<Object> source, Integer arg01): testOrderedSetAtCaller(aClass, source, arg01) {
-        return tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclOrderedSets.at(source, arg01);
+    Integer around(testpackage.Class1 aClass, Integer source, Integer arg01): testIntegerMax01Caller(aClass, source, arg01) {
+        return java.lang.Math.max(source, arg01);
     }
 }

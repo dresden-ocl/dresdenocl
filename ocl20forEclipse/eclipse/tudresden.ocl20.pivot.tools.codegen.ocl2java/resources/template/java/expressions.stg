@@ -306,10 +306,16 @@ $tupleType()$ $tupleName$;
 $tupleName$ = new $tupleType()$();
 $if(argNames)$
 
-$argNames, argCodes, argExps:{name, code, exp | $if(code)$$code$$endif$$tupleName$.put($name$, $exp$);}; separator = "\n"$
+$argNames, argCodes, argExps:{name, code, exp | $if(code)$$code$$endif$$tupleName$.put("$name$", $exp$);}; separator = "\n"$
 
 $endif$
 
+>>
+
+
+// --- TypeLiteralExp ---
+typeLiteralExp(type) ::= <<
+$type$
 >>
 
 

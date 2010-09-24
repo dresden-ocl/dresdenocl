@@ -1,0 +1,18 @@
+java.util.HashSet<Integer> collection1;
+collection1 = new java.util.HashSet<Integer>();
+
+collection1.add(new Integer(1));
+collection1.add(new Integer(2));
+collection1.add(new Integer(3));
+java.util.HashSet<Integer> result1;
+result1 = new java.util.HashSet<Integer>();
+
+/* Iterator Reject: Select all elements which do not fulfill the condition. */
+for (Integer i : collection1) {
+    if (!((Object) i).equals(new Integer(2))) {
+        result1.add(i);
+    }
+    // no else
+}
+
+result1

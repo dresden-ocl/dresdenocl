@@ -12,20 +12,19 @@ public privileged aspect DefAspect24 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testCollectionAsOrderedSet(java.util.Collection<Object> source)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testUndefinedLiteralExp01()}.</p>
      */
-    protected pointcut testCollectionAsOrderedSetCaller(testpackage.Class1 aClass, java.util.Collection<Object> source):
-    	call(* testpackage.Class1.testCollectionAsOrderedSet(java.util.Collection<Object>))
-    	&& target(aClass) && args(source);
+    protected pointcut testUndefinedLiteralExp01Caller(testpackage.Class1 aClass):
+    	call(* testpackage.Class1.testUndefinedLiteralExp01())
+    	&& target(aClass);
     
     /**
-     * <p>Defines the method testCollectionAsOrderedSet(java.util.Collection<Object> source) defined by the constraint
+     * <p>Defines the method testUndefinedLiteralExp01() defined by the constraint
      * <code>context Class1
-     *       def: testCollectionAsOrderedSet(source: Collection(OclAny)): 
-      OrderedSet(OclAny) =
-    source ->asOrderedSet()</code></p>
+     *       def: testUndefinedLiteralExp01(): Integer =
+    null</code></p>
      */
-    java.util.List<Object> around(testpackage.Class1 aClass, java.util.Collection<Object> source): testCollectionAsOrderedSetCaller(aClass, source) {
-        return tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclCollections.asOrderedSet(source);
+    Integer around(testpackage.Class1 aClass): testUndefinedLiteralExp01Caller(aClass) {
+        return null;
     }
 }

@@ -12,19 +12,20 @@ public privileged aspect DefAspect117 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testSetIncluding01(java.util.Set<Object> source, Object arg01)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testSequenceAsSet(java.util.List<Object> source)}.</p>
      */
-    protected pointcut testSetIncluding01Caller(testpackage.Class1 aClass, java.util.Set<Object> source, Object arg01):
-    	call(* testpackage.Class1.testSetIncluding01(java.util.Set<Object>, Object))
-    	&& target(aClass) && args(source, arg01);
+    protected pointcut testSequenceAsSetCaller(testpackage.Class1 aClass, java.util.List<Object> source):
+    	call(* testpackage.Class1.testSequenceAsSet(java.util.List<Object>))
+    	&& target(aClass) && args(source);
     
     /**
-     * <p>Defines the method testSetIncluding01(java.util.Set<Object> source, Object arg01) defined by the constraint
+     * <p>Defines the method testSequenceAsSet(java.util.List<Object> source) defined by the constraint
      * <code>context Class1
-     *       def: testSetIncluding01(source: Set(OclAny), arg01: OclAny): Set(OclAny) =
-    source ->including(arg01)</code></p>
+     *       def: testSequenceAsSet(source: Sequence(OclAny)): 
+      Set(OclAny) =
+    source ->asSet()</code></p>
      */
-    java.util.Set<Object> around(testpackage.Class1 aClass, java.util.Set<Object> source, Object arg01): testSetIncluding01Caller(aClass, source, arg01) {
-        return tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclSets.including(source, arg01);
+    java.util.Set<Object> around(testpackage.Class1 aClass, java.util.List<Object> source): testSequenceAsSetCaller(aClass, source) {
+        return tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclSequences.asSet(source);
     }
 }

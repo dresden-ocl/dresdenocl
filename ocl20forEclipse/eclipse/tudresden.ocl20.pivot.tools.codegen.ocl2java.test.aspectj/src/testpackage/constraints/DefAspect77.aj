@@ -12,19 +12,19 @@ public privileged aspect DefAspect77 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testRealFloor01(Float source)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testOclAnyNotEquals01(testpackage.Class1 source, testpackage.Class1 arg01)}.</p>
      */
-    protected pointcut testRealFloor01Caller(testpackage.Class1 aClass, Float source):
-    	call(* testpackage.Class1.testRealFloor01(Float))
-    	&& target(aClass) && args(source);
+    protected pointcut testOclAnyNotEquals01Caller(testpackage.Class1 aClass, testpackage.Class1 source, testpackage.Class1 arg01):
+    	call(* testpackage.Class1.testOclAnyNotEquals01(testpackage.Class1, testpackage.Class1))
+    	&& target(aClass) && args(source, arg01);
     
     /**
-     * <p>Defines the method testRealFloor01(Float source) defined by the constraint
+     * <p>Defines the method testOclAnyNotEquals01(testpackage.Class1 source, testpackage.Class1 arg01) defined by the constraint
      * <code>context Class1
-     *       def: testRealFloor01(source: Real): Integer =
-    source.floor()</code></p>
+     *       def: testOclAnyNotEquals01(source: Class1, arg01: Class1): Boolean =
+    source <> arg01</code></p>
      */
-    Integer around(testpackage.Class1 aClass, Float source): testRealFloor01Caller(aClass, source) {
-        return (new Integer(new Double(java.lang.Math.floor(source)).intValue()));
+    Boolean around(testpackage.Class1 aClass, testpackage.Class1 source, testpackage.Class1 arg01): testOclAnyNotEquals01Caller(aClass, source, arg01) {
+        return !source.equals(arg01);
     }
 }

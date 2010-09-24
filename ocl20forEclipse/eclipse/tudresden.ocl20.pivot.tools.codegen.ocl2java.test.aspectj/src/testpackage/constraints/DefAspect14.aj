@@ -12,19 +12,27 @@ public privileged aspect DefAspect14 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testBagIntersection02(java.util.List<Object> source, java.util.List<Object> arg01)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testCollectionLiteralExp03()}.</p>
      */
-    protected pointcut testBagIntersection02Caller(testpackage.Class1 aClass, java.util.List<Object> source, java.util.List<Object> arg01):
-    	call(* testpackage.Class1.testBagIntersection02(java.util.List<Object>, java.util.List<Object>))
-    	&& target(aClass) && args(source, arg01);
+    protected pointcut testCollectionLiteralExp03Caller(testpackage.Class1 aClass):
+    	call(* testpackage.Class1.testCollectionLiteralExp03())
+    	&& target(aClass);
     
     /**
-     * <p>Defines the method testBagIntersection02(java.util.List<Object> source, java.util.List<Object> arg01) defined by the constraint
+     * <p>Defines the method testCollectionLiteralExp03() defined by the constraint
      * <code>context Class1
-     *       def: testBagIntersection02(source: Bag(OclAny), arg01: Bag(OclAny)): Bag(OclAny) =
-    source ->intersection(arg01)</code></p>
+     *       def: testCollectionLiteralExp03(): 
+      OrderedSet(Integer) =
+    OrderedSet { 0, 1, 2 }</code></p>
      */
-    java.util.List<Object> around(testpackage.Class1 aClass, java.util.List<Object> source, java.util.List<Object> arg01): testBagIntersection02Caller(aClass, source, arg01) {
-        return tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclBags.intersection(source, arg01);
+    java.util.List<Integer> around(testpackage.Class1 aClass): testCollectionLiteralExp03Caller(aClass) {
+        java.util.ArrayList<Integer> collection1;
+        collection1 = new java.util.ArrayList<Integer>();
+        
+        collection1.add(new Integer(0));
+        collection1.add(new Integer(1));
+        collection1.add(new Integer(2));
+    
+        return collection1;
     }
 }

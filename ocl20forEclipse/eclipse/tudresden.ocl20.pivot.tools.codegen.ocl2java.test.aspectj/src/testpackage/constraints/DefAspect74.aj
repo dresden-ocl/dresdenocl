@@ -12,19 +12,19 @@ public privileged aspect DefAspect74 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testOrderedSetSubOrderedSet(java.util.List<Object> source, Integer arg01, Integer arg02)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testIntegerToString(Integer source)}.</p>
      */
-    protected pointcut testOrderedSetSubOrderedSetCaller(testpackage.Class1 aClass, java.util.List<Object> source, Integer arg01, Integer arg02):
-    	call(* testpackage.Class1.testOrderedSetSubOrderedSet(java.util.List<Object>, Integer, Integer))
-    	&& target(aClass) && args(source, arg01, arg02);
+    protected pointcut testIntegerToStringCaller(testpackage.Class1 aClass, Integer source):
+    	call(* testpackage.Class1.testIntegerToString(Integer))
+    	&& target(aClass) && args(source);
     
     /**
-     * <p>Defines the method testOrderedSetSubOrderedSet(java.util.List<Object> source, Integer arg01, Integer arg02) defined by the constraint
+     * <p>Defines the method testIntegerToString(Integer source) defined by the constraint
      * <code>context Class1
-     *       def: testOrderedSetSubOrderedSet(source: OrderedSet(OclAny), arg01: Integer, arg02: Integer): OrderedSet(OclAny) =
-    source ->subOrderedSet(arg01, arg02)</code></p>
+     *       def: testIntegerToString(source: Integer): String =
+    source.toString()</code></p>
      */
-    java.util.List<Object> around(testpackage.Class1 aClass, java.util.List<Object> source, Integer arg01, Integer arg02): testOrderedSetSubOrderedSetCaller(aClass, source, arg01, arg02) {
-        return tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclOrderedSets.subOrderedSet(source, arg01, arg02);
+    String around(testpackage.Class1 aClass, Integer source): testIntegerToStringCaller(aClass, source) {
+        return source.toString();
     }
 }

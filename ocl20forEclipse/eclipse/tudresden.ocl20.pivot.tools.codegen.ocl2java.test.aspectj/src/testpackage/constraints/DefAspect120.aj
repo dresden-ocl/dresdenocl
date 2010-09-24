@@ -12,19 +12,19 @@ public privileged aspect DefAspect120 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testSetMinus(java.util.Set<Object> source, java.util.Set<Object> arg01)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testSequenceEquals01(java.util.List<Object> source, java.util.List<Object> arg01)}.</p>
      */
-    protected pointcut testSetMinusCaller(testpackage.Class1 aClass, java.util.Set<Object> source, java.util.Set<Object> arg01):
-    	call(* testpackage.Class1.testSetMinus(java.util.Set<Object>, java.util.Set<Object>))
+    protected pointcut testSequenceEquals01Caller(testpackage.Class1 aClass, java.util.List<Object> source, java.util.List<Object> arg01):
+    	call(* testpackage.Class1.testSequenceEquals01(java.util.List<Object>, java.util.List<Object>))
     	&& target(aClass) && args(source, arg01);
     
     /**
-     * <p>Defines the method testSetMinus(java.util.Set<Object> source, java.util.Set<Object> arg01) defined by the constraint
+     * <p>Defines the method testSequenceEquals01(java.util.List<Object> source, java.util.List<Object> arg01) defined by the constraint
      * <code>context Class1
-     *       def: testSetMinus(source: Set(OclAny), arg01: Set(OclAny)): Set(OclAny) =
-    source - arg01</code></p>
+     *       def: testSequenceEquals01(source: Sequence(OclAny), arg01: Sequence(OclAny)): Boolean =
+    source = arg01</code></p>
      */
-    java.util.Set<Object> around(testpackage.Class1 aClass, java.util.Set<Object> source, java.util.Set<Object> arg01): testSetMinusCaller(aClass, source, arg01) {
-        return tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclSets.minus(source, arg01);
+    Boolean around(testpackage.Class1 aClass, java.util.List<Object> source, java.util.List<Object> arg01): testSequenceEquals01Caller(aClass, source, arg01) {
+        return tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclSequences.equals(source, arg01);
     }
 }

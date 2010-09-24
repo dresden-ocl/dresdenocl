@@ -12,19 +12,19 @@ public privileged aspect DefAspect83 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testRealMin01(Float source, Float arg01)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testOclIsUndefined01(testpackage.Class1 source)}.</p>
      */
-    protected pointcut testRealMin01Caller(testpackage.Class1 aClass, Float source, Float arg01):
-    	call(* testpackage.Class1.testRealMin01(Float, Float))
-    	&& target(aClass) && args(source, arg01);
+    protected pointcut testOclIsUndefined01Caller(testpackage.Class1 aClass, testpackage.Class1 source):
+    	call(* testpackage.Class1.testOclIsUndefined01(testpackage.Class1))
+    	&& target(aClass) && args(source);
     
     /**
-     * <p>Defines the method testRealMin01(Float source, Float arg01) defined by the constraint
+     * <p>Defines the method testOclIsUndefined01(testpackage.Class1 source) defined by the constraint
      * <code>context Class1
-     *       def: testRealMin01(source: Real, arg01: Real): Real =
-    source.min(arg01)</code></p>
+     *       def: testOclIsUndefined01(source: Class1): Boolean =
+    source.oclIsUndefined()</code></p>
      */
-    Float around(testpackage.Class1 aClass, Float source, Float arg01): testRealMin01Caller(aClass, source, arg01) {
-        return java.lang.Math.min(source, arg01);
+    Boolean around(testpackage.Class1 aClass, testpackage.Class1 source): testOclIsUndefined01Caller(aClass, source) {
+        return (source == null);
     }
 }

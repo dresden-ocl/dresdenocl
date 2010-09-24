@@ -32,6 +32,213 @@ public class ExtendedClass1 extends Object {
      *A method signature implemented by an aspect.
      *</p>
      */
+    public Integer testOperationCallExp01() {
+        return null;
+    }
+
+    /**
+     *<p>
+     *A method signature implemented by an aspect.
+     *</p>
+     */
+    public Integer testOperationCallExp02() {
+        return null;
+    }
+
+    /**
+     *<p>
+     *A method signature implemented by an aspect.
+     *</p>
+     */
+    public Integer testPropertyCallExp01() {
+        return null;
+    }
+
+    /**
+     *<p>
+     *A method signature implemented by an aspect.
+     *</p>
+     */
+    public Integer testPropertyCallExp02() {
+        return null;
+    }
+
+    /**
+     *<p>
+     *A method signature implemented by an aspect.
+     *</p>
+     */
+    public Integer testAnyIteratorExp01() {
+        return null;
+    }
+
+    /**
+     *<p>
+     *A method signature implemented by an aspect.
+     *</p>
+     */
+    public java.util.List<Boolean> testCollectIteratorExp01() {
+        return null;
+    }
+
+    /**
+     *<p>
+     *A method signature implemented by an aspect.
+     *</p>
+     */
+    public Boolean testBooleanLiteralExp01() {
+        return null;
+    }
+
+    /**
+     *<p>
+     *A method signature implemented by an aspect.
+     *</p>
+     */
+    public Boolean testBooleanLiteralExp02() {
+        return null;
+    }
+
+    /**
+     *<p>
+     *A method signature implemented by an aspect.
+     *</p>
+     */
+    public java.util.List<Integer> testCollectionLiteralExp01() {
+        return null;
+    }
+
+    /**
+     *<p>
+     *A method signature implemented by an aspect.
+     *</p>
+     */
+    public java.util.List<Integer> testCollectionLiteralExp02() {
+        return null;
+    }
+
+    /**
+     *<p>
+     *A method signature implemented by an aspect.
+     *</p>
+     */
+    public java.util.List<Integer> testCollectionLiteralExp03() {
+        return null;
+    }
+
+    /**
+     *<p>
+     *A method signature implemented by an aspect.
+     *</p>
+     */
+    public java.util.List<Integer> testCollectionLiteralExp04() {
+        return null;
+    }
+
+    /**
+     *<p>
+     *A method signature implemented by an aspect.
+     *</p>
+     */
+    public java.util.Set<Integer> testCollectionLiteralExp05() {
+        return null;
+    }
+
+    /**
+     *<p>
+     *A method signature implemented by an aspect.
+     *</p>
+     */
+    public Enum testEnumerationLiteralExp01() {
+        return null;
+    }
+
+    /**
+     *<p>
+     *A method signature implemented by an aspect.
+     *</p>
+     */
+    public Integer testIntegerLiteralExp01() {
+        return null;
+    }
+
+    /**
+     *<p>
+     *A method signature implemented by an aspect.
+     *</p>
+     */
+    public Integer testInvalidLiteralExp01() {
+        return null;
+    }
+
+    /**
+     *<p>
+     *A method signature implemented by an aspect.
+     *</p>
+     */
+    public Float testRealLiteralExp01() {
+        return null;
+    }
+
+    /**
+     *<p>
+     *A method signature implemented by an aspect.
+     *</p>
+     */
+    public String testStringLiteralExp01() {
+        return null;
+    }
+
+    /**
+     *<p>
+     *A method signature implemented by an aspect.
+     *</p>
+     */
+    public java.util.HashMap<String, Object> testTupleLiteralExp01() {
+        return null;
+    }
+
+    /**
+     *<p>
+     *A method signature implemented by an aspect.
+     *</p>
+     */
+    public Class<?> testTypeLiteralExp01() {
+        return null;
+    }
+
+    /**
+     *<p>
+     *A method signature implemented by an aspect.
+     *</p>
+     */
+    public Integer testUndefinedLiteralExp01() {
+        return null;
+    }
+
+    /**
+     *<p>
+     *A method signature implemented by an aspect.
+     *</p>
+     */
+    public Integer testIfExp01() {
+        return null;
+    }
+
+    /**
+     *<p>
+     *A method signature implemented by an aspect.
+     *</p>
+     */
+    public Integer testLetExp01() {
+        return null;
+    }
+
+    /**
+     *<p>
+     *A method signature implemented by an aspect.
+     *</p>
+     */
     public java.util.List<Object> testBagAsBag(java.util.List<Object> source) {
         return null;
     }

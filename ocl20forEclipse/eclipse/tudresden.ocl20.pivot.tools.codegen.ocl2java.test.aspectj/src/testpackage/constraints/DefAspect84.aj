@@ -12,19 +12,19 @@ public privileged aspect DefAspect84 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testRealMinus01(Float source, Float arg01)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testOclAnyOclType(Object source)}.</p>
      */
-    protected pointcut testRealMinus01Caller(testpackage.Class1 aClass, Float source, Float arg01):
-    	call(* testpackage.Class1.testRealMinus01(Float, Float))
-    	&& target(aClass) && args(source, arg01);
+    protected pointcut testOclAnyOclTypeCaller(testpackage.Class1 aClass, Object source):
+    	call(* testpackage.Class1.testOclAnyOclType(Object))
+    	&& target(aClass) && args(source);
     
     /**
-     * <p>Defines the method testRealMinus01(Float source, Float arg01) defined by the constraint
+     * <p>Defines the method testOclAnyOclType(Object source) defined by the constraint
      * <code>context Class1
-     *       def: testRealMinus01(source: Real, arg01: Real): Real =
-    source - arg01</code></p>
+     *       def: testOclAnyOclType(source: OclAny): OclType =
+    source.oclType()</code></p>
      */
-    Float around(testpackage.Class1 aClass, Float source, Float arg01): testRealMinus01Caller(aClass, source, arg01) {
-        return (source - arg01);
+    Class<?> around(testpackage.Class1 aClass, Object source): testOclAnyOclTypeCaller(aClass, source) {
+        return source.getClass();
     }
 }

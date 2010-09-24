@@ -12,19 +12,19 @@ public privileged aspect DefAspect71 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testOrderedSetLast(java.util.List<Object> source)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testIntegerMultiply01(Integer source, Integer arg01)}.</p>
      */
-    protected pointcut testOrderedSetLastCaller(testpackage.Class1 aClass, java.util.List<Object> source):
-    	call(* testpackage.Class1.testOrderedSetLast(java.util.List<Object>))
-    	&& target(aClass) && args(source);
+    protected pointcut testIntegerMultiply01Caller(testpackage.Class1 aClass, Integer source, Integer arg01):
+    	call(* testpackage.Class1.testIntegerMultiply01(Integer, Integer))
+    	&& target(aClass) && args(source, arg01);
     
     /**
-     * <p>Defines the method testOrderedSetLast(java.util.List<Object> source) defined by the constraint
+     * <p>Defines the method testIntegerMultiply01(Integer source, Integer arg01) defined by the constraint
      * <code>context Class1
-     *       def: testOrderedSetLast(source: OrderedSet(OclAny)): OclAny =
-    source ->last()</code></p>
+     *       def: testIntegerMultiply01(source: Integer, arg01: Integer): Integer =
+    source * arg01</code></p>
      */
-    Object around(testpackage.Class1 aClass, java.util.List<Object> source): testOrderedSetLastCaller(aClass, source) {
-        return tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclOrderedSets.last(source);
+    Integer around(testpackage.Class1 aClass, Integer source, Integer arg01): testIntegerMultiply01Caller(aClass, source, arg01) {
+        return (source * arg01);
     }
 }

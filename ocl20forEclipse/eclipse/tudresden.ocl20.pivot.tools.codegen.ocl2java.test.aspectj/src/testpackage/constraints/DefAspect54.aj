@@ -12,19 +12,19 @@ public privileged aspect DefAspect54 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testOclAnyNotEquals01(testpackage.Class1 source, testpackage.Class1 arg01)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testCollectionFlatten(java.util.Collection<Object> source)}.</p>
      */
-    protected pointcut testOclAnyNotEquals01Caller(testpackage.Class1 aClass, testpackage.Class1 source, testpackage.Class1 arg01):
-    	call(* testpackage.Class1.testOclAnyNotEquals01(testpackage.Class1, testpackage.Class1))
-    	&& target(aClass) && args(source, arg01);
+    protected pointcut testCollectionFlattenCaller(testpackage.Class1 aClass, java.util.Collection<Object> source):
+    	call(* testpackage.Class1.testCollectionFlatten(java.util.Collection<Object>))
+    	&& target(aClass) && args(source);
     
     /**
-     * <p>Defines the method testOclAnyNotEquals01(testpackage.Class1 source, testpackage.Class1 arg01) defined by the constraint
+     * <p>Defines the method testCollectionFlatten(java.util.Collection<Object> source) defined by the constraint
      * <code>context Class1
-     *       def: testOclAnyNotEquals01(source: Class1, arg01: Class1): Boolean =
-    source <> arg01</code></p>
+     *       def: testCollectionFlatten(source: Collection(OclAny)): Collection(OclAny) =
+    source ->flatten()</code></p>
      */
-    Boolean around(testpackage.Class1 aClass, testpackage.Class1 source, testpackage.Class1 arg01): testOclAnyNotEquals01Caller(aClass, source, arg01) {
-        return !source.equals(arg01);
+    java.util.Collection<Object> around(testpackage.Class1 aClass, java.util.Collection<Object> source): testCollectionFlattenCaller(aClass, source) {
+        return (java.util.Collection<Object>) tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclCollections.flatten(source);
     }
 }

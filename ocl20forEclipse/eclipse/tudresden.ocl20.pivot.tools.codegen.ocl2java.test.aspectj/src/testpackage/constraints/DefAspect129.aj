@@ -12,19 +12,19 @@ public privileged aspect DefAspect129 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testStringPlus(String source, String arg01)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testSequenceReverse(java.util.List<Object> source)}.</p>
      */
-    protected pointcut testStringPlusCaller(testpackage.Class1 aClass, String source, String arg01):
-    	call(* testpackage.Class1.testStringPlus(String, String))
-    	&& target(aClass) && args(source, arg01);
+    protected pointcut testSequenceReverseCaller(testpackage.Class1 aClass, java.util.List<Object> source):
+    	call(* testpackage.Class1.testSequenceReverse(java.util.List<Object>))
+    	&& target(aClass) && args(source);
     
     /**
-     * <p>Defines the method testStringPlus(String source, String arg01) defined by the constraint
+     * <p>Defines the method testSequenceReverse(java.util.List<Object> source) defined by the constraint
      * <code>context Class1
-     *       def: testStringPlus(source: String, arg01: String): String =
-    source + arg01</code></p>
+     *       def: testSequenceReverse(source: Sequence(OclAny)): Sequence(OclAny) =
+    source ->reverse()</code></p>
      */
-    String around(testpackage.Class1 aClass, String source, String arg01): testStringPlusCaller(aClass, source, arg01) {
-        return source.concat(arg01);
+    java.util.List<Object> around(testpackage.Class1 aClass, java.util.List<Object> source): testSequenceReverseCaller(aClass, source) {
+        return tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclSequences.reverse(source);
     }
 }

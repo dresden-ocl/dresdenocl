@@ -12,20 +12,19 @@ public privileged aspect DefAspect6 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testBagAsSequence(java.util.List<Object> source)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testPropertyCallExp01()}.</p>
      */
-    protected pointcut testBagAsSequenceCaller(testpackage.Class1 aClass, java.util.List<Object> source):
-    	call(* testpackage.Class1.testBagAsSequence(java.util.List<Object>))
-    	&& target(aClass) && args(source);
+    protected pointcut testPropertyCallExp01Caller(testpackage.Class1 aClass):
+    	call(* testpackage.Class1.testPropertyCallExp01())
+    	&& target(aClass);
     
     /**
-     * <p>Defines the method testBagAsSequence(java.util.List<Object> source) defined by the constraint
+     * <p>Defines the method testPropertyCallExp01() defined by the constraint
      * <code>context Class1
-     *       def: testBagAsSequence(source: Bag(OclAny)): 
-      Sequence(OclAny) =
-    source ->asSequence()</code></p>
+     *       def: testPropertyCallExp01(): Integer =
+    self.anInteger01</code></p>
      */
-    java.util.List<Object> around(testpackage.Class1 aClass, java.util.List<Object> source): testBagAsSequenceCaller(aClass, source) {
-        return tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclBags.asSequence(source);
+    Integer around(testpackage.Class1 aClass): testPropertyCallExp01Caller(aClass) {
+        return aClass.anInteger01;
     }
 }

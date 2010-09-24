@@ -2006,7 +2006,10 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 		result = new TransformedCodeImpl();
 		referredType = aTypeLiteralExp.getReferredType();
 
-		result.setResultExp(this.transformType(referredType).toString());
+		ITemplate template = this.myTemplateGroup.getTemplate("typeLiteralExp");
+		template.setAttribute("type", this.transformType(referredType).toString());
+
+		result.setResultExp(template.toString());
 
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("caseTypeLiteralExp(TypeLiteralExp)"

@@ -18,7 +18,7 @@ public privileged aspect PostAspect1 {
     /**
      * <p>Checks a postcondition for the operation {@link Class1#postOperation01(, Integer anInt)} defined by the constraint
      * <code>context Class1::postOperation01(anInt: Integer) : Integer
-     *       post: result[].=( anInt[].*( 2))</code></p>
+     *       post: result = anInt * 2</code></p>
      */
     Integer around(testpackage.Class1 aClass, Integer anInt): postOperation01Caller(aClass, anInt) {
         /* Disable this constraint for subclasses of Class1. */

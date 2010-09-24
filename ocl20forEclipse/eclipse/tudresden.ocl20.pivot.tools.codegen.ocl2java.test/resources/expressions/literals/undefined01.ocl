@@ -1,7 +1,7 @@
 package testpackage
 
 context Class1
-def: testUndefinedLiteralExp01: Integer =
+def: testUndefinedLiteralExp01(): Integer =
 null
 
 endpackage

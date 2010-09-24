@@ -12,19 +12,19 @@ public privileged aspect DefAspect127 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testStringEqualsIgnoreCase(String source, String arg01)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testSequenceLast(java.util.List<Object> source)}.</p>
      */
-    protected pointcut testStringEqualsIgnoreCaseCaller(testpackage.Class1 aClass, String source, String arg01):
-    	call(* testpackage.Class1.testStringEqualsIgnoreCase(String, String))
-    	&& target(aClass) && args(source, arg01);
+    protected pointcut testSequenceLastCaller(testpackage.Class1 aClass, java.util.List<Object> source):
+    	call(* testpackage.Class1.testSequenceLast(java.util.List<Object>))
+    	&& target(aClass) && args(source);
     
     /**
-     * <p>Defines the method testStringEqualsIgnoreCase(String source, String arg01) defined by the constraint
+     * <p>Defines the method testSequenceLast(java.util.List<Object> source) defined by the constraint
      * <code>context Class1
-     *       def: testStringEqualsIgnoreCase(source: String, arg01: String): Boolean =
-    source.equalsIgnoreCase(arg01)</code></p>
+     *       def: testSequenceLast(source: Sequence(OclAny)): OclAny =
+    source ->last()</code></p>
      */
-    Boolean around(testpackage.Class1 aClass, String source, String arg01): testStringEqualsIgnoreCaseCaller(aClass, source, arg01) {
-        return source.equalsIgnoreCase(arg01);
+    Object around(testpackage.Class1 aClass, java.util.List<Object> source): testSequenceLastCaller(aClass, source) {
+        return tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclSequences.last(source);
     }
 }

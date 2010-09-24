@@ -12,19 +12,32 @@ public privileged aspect DefAspect79 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testRealGreaterThanEqual01(Float source, Float arg01)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testOclIsInvalid01()}.</p>
      */
-    protected pointcut testRealGreaterThanEqual01Caller(testpackage.Class1 aClass, Float source, Float arg01):
-    	call(* testpackage.Class1.testRealGreaterThanEqual01(Float, Float))
-    	&& target(aClass) && args(source, arg01);
+    protected pointcut testOclIsInvalid01Caller(testpackage.Class1 aClass):
+    	call(* testpackage.Class1.testOclIsInvalid01())
+    	&& target(aClass);
     
     /**
-     * <p>Defines the method testRealGreaterThanEqual01(Float source, Float arg01) defined by the constraint
+     * <p>Defines the method testOclIsInvalid01() defined by the constraint
      * <code>context Class1
-     *       def: testRealGreaterThanEqual01(source: Real, arg01: Real): Boolean =
-    source >= arg01</code></p>
+     *       def: testOclIsInvalid01(): Boolean =
+    self.oclIsInvalid()</code></p>
      */
-    Boolean around(testpackage.Class1 aClass, Float source, Float arg01): testRealGreaterThanEqual01Caller(aClass, source, arg01) {
-        return (source >= arg01);
+    Boolean around(testpackage.Class1 aClass): testOclIsInvalid01Caller(aClass) {
+        Boolean result1;
+        
+        /* Check if the expression results in invalid. */
+        try {
+            /* DUMMY variable is necessary to form literals into a statement. */
+            Object DUMMY = aClass; 
+            result1 = false;
+        }
+        
+        catch (Exception e) {
+            result1 = true;
+        }
+    
+        return result1;
     }
 }

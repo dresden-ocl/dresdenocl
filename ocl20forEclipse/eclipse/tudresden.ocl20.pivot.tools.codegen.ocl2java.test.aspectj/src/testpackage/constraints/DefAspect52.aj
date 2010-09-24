@@ -8,44 +8,23 @@ package testpackage.constraints;
  */
 public privileged aspect DefAspect52 {
 
-    protected static java.util.Map<String, java.util.Map> allInstances = new java.util.HashMap<String, java.util.Map>();
-
-    /**
-     * <p>Adds all instances of the class {@link testpackage.Class1} to the {@link java.util.Map} allInstances.</p>
-     */
-    after(testpackage.Class1 aClass) : execution(testpackage.Class1.new(..)) && this(aClass) {
-    
-        java.util.Map<testpackage.Class1, Object> instanceMap;
-    
-        instanceMap = (java.util.Map<testpackage.Class1, Object>) allInstances.get(aClass.getClass().getCanonicalName());
-    
-        if (instanceMap == null) {
-            instanceMap = new java.util.WeakHashMap<testpackage.Class1, Object>();
-        }
-        // no else.
-    
-        instanceMap.put(aClass, null);
-    
-        allInstances.put(aClass.getClass().getCanonicalName(), instanceMap);
-    }
-
     /* Declares a new super class containing the new attribute or method. */
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testOclAnyAllInstances()}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testCollectionExcludes(java.util.Collection<Object> source, Object arg01)}.</p>
      */
-    protected pointcut testOclAnyAllInstancesCaller(testpackage.Class1 aClass):
-    	call(* testpackage.Class1.testOclAnyAllInstances())
-    	&& target(aClass);
+    protected pointcut testCollectionExcludesCaller(testpackage.Class1 aClass, java.util.Collection<Object> source, Object arg01):
+    	call(* testpackage.Class1.testCollectionExcludes(java.util.Collection<Object>, Object))
+    	&& target(aClass) && args(source, arg01);
     
     /**
-     * <p>Defines the method testOclAnyAllInstances() defined by the constraint
+     * <p>Defines the method testCollectionExcludes(java.util.Collection<Object> source, Object arg01) defined by the constraint
      * <code>context Class1
-     *       def: testOclAnyAllInstances(): Set(Class1) =
-    Class1.allInstances()</code></p>
+     *       def: testCollectionExcludes(source: Collection(OclAny), arg01: OclAny): Boolean =
+    source ->excludes(arg01)</code></p>
      */
-    java.util.Set<testpackage.Class1> around(testpackage.Class1 aClass): testOclAnyAllInstancesCaller(aClass) {
-        return (new java.util.HashSet<testpackage.Class1>((java.util.Set<testpackage.Class1>) allInstances.get(testpackage.Class1.class.getCanonicalName()).keySet()));
+    Boolean around(testpackage.Class1 aClass, java.util.Collection<Object> source, Object arg01): testCollectionExcludesCaller(aClass, source, arg01) {
+        return tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclCollections.excludes(source, arg01);
     }
 }

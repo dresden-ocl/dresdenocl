@@ -12,19 +12,25 @@ public privileged aspect DefAspect22 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testBooleanXor01(Boolean source, Boolean arg01)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testTupleLiteralExp01()}.</p>
      */
-    protected pointcut testBooleanXor01Caller(testpackage.Class1 aClass, Boolean source, Boolean arg01):
-    	call(* testpackage.Class1.testBooleanXor01(Boolean, Boolean))
-    	&& target(aClass) && args(source, arg01);
+    protected pointcut testTupleLiteralExp01Caller(testpackage.Class1 aClass):
+    	call(* testpackage.Class1.testTupleLiteralExp01())
+    	&& target(aClass);
     
     /**
-     * <p>Defines the method testBooleanXor01(Boolean source, Boolean arg01) defined by the constraint
+     * <p>Defines the method testTupleLiteralExp01() defined by the constraint
      * <code>context Class1
-     *       def: testBooleanXor01(source: Boolean, arg01: Boolean): Boolean =
-    source xor arg01</code></p>
+     *       def: testTupleLiteralExp01() =
+    Tuple { a : Integer = 42, b : String = 'some'}</code></p>
      */
-    Boolean around(testpackage.Class1 aClass, Boolean source, Boolean arg01): testBooleanXor01Caller(aClass, source, arg01) {
-        return (source ^ arg01);
+    java.util.HashMap<String, Object> around(testpackage.Class1 aClass): testTupleLiteralExp01Caller(aClass) {
+        java.util.HashMap<String, Object> tuple1;
+        tuple1 = new java.util.HashMap<String, Object>();
+        
+        tuple1.put("a", new Integer(42));
+        tuple1.put("b", "some");
+    
+        return tuple1;
     }
 }

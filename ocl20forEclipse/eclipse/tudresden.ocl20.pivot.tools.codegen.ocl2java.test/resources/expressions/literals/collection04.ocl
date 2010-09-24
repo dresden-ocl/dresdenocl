@@ -1,7 +1,7 @@
 package testpackage
 
 context Class1
-def: testCollectionLiteralExp04: 
+def: testCollectionLiteralExp04(): 
   Sequence(Integer) =
 Sequence { 0, 1, 2 }
 

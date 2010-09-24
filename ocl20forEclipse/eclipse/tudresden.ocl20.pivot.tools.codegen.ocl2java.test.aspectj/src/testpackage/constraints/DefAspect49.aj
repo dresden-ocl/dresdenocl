@@ -12,19 +12,20 @@ public privileged aspect DefAspect49 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testIntegerNegation01(Integer source)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testCollectionAsSet(java.util.Collection<Object> source)}.</p>
      */
-    protected pointcut testIntegerNegation01Caller(testpackage.Class1 aClass, Integer source):
-    	call(* testpackage.Class1.testIntegerNegation01(Integer))
+    protected pointcut testCollectionAsSetCaller(testpackage.Class1 aClass, java.util.Collection<Object> source):
+    	call(* testpackage.Class1.testCollectionAsSet(java.util.Collection<Object>))
     	&& target(aClass) && args(source);
     
     /**
-     * <p>Defines the method testIntegerNegation01(Integer source) defined by the constraint
+     * <p>Defines the method testCollectionAsSet(java.util.Collection<Object> source) defined by the constraint
      * <code>context Class1
-     *       def: testIntegerNegation01(source: Integer): Integer =
-    - source</code></p>
+     *       def: testCollectionAsSet(source: Collection(OclAny)): 
+      Set(OclAny) =
+    source ->asSet()</code></p>
      */
-    Integer around(testpackage.Class1 aClass, Integer source): testIntegerNegation01Caller(aClass, source) {
-        return -(source);
+    java.util.Set<Object> around(testpackage.Class1 aClass, java.util.Collection<Object> source): testCollectionAsSetCaller(aClass, source) {
+        return tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclCollections.asSet(source);
     }
 }

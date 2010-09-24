@@ -1,7 +1,7 @@
 package testpackage
 
 context Class1
-def: testCollectIteratorExp01 : Bag(Boolean) =
+def: testCollectIteratorExp01() : Bag(Boolean) =
 Set{1, 2, 3}->collect(i: Integer | i <> 2)
 
 endpackage

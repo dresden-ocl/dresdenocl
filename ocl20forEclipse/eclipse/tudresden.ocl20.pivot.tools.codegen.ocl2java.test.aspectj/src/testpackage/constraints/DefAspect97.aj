@@ -12,19 +12,19 @@ public privileged aspect DefAspect97 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testSequenceEquals01(java.util.List<Object> source, java.util.List<Object> arg01)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testOrderedSetSubOrderedSet(java.util.List<Object> source, Integer arg01, Integer arg02)}.</p>
      */
-    protected pointcut testSequenceEquals01Caller(testpackage.Class1 aClass, java.util.List<Object> source, java.util.List<Object> arg01):
-    	call(* testpackage.Class1.testSequenceEquals01(java.util.List<Object>, java.util.List<Object>))
-    	&& target(aClass) && args(source, arg01);
+    protected pointcut testOrderedSetSubOrderedSetCaller(testpackage.Class1 aClass, java.util.List<Object> source, Integer arg01, Integer arg02):
+    	call(* testpackage.Class1.testOrderedSetSubOrderedSet(java.util.List<Object>, Integer, Integer))
+    	&& target(aClass) && args(source, arg01, arg02);
     
     /**
-     * <p>Defines the method testSequenceEquals01(java.util.List<Object> source, java.util.List<Object> arg01) defined by the constraint
+     * <p>Defines the method testOrderedSetSubOrderedSet(java.util.List<Object> source, Integer arg01, Integer arg02) defined by the constraint
      * <code>context Class1
-     *       def: testSequenceEquals01(source: Sequence(OclAny), arg01: Sequence(OclAny)): Boolean =
-    source = arg01</code></p>
+     *       def: testOrderedSetSubOrderedSet(source: OrderedSet(OclAny), arg01: Integer, arg02: Integer): OrderedSet(OclAny) =
+    source ->subOrderedSet(arg01, arg02)</code></p>
      */
-    Boolean around(testpackage.Class1 aClass, java.util.List<Object> source, java.util.List<Object> arg01): testSequenceEquals01Caller(aClass, source, arg01) {
-        return tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclSequences.equals(source, arg01);
+    java.util.List<Object> around(testpackage.Class1 aClass, java.util.List<Object> source, Integer arg01, Integer arg02): testOrderedSetSubOrderedSetCaller(aClass, source, arg01, arg02) {
+        return tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclOrderedSets.subOrderedSet(source, arg01, arg02);
     }
 }

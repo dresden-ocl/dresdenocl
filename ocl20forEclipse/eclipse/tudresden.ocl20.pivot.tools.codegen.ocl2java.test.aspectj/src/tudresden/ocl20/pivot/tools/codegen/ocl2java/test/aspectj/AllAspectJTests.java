@@ -1,28 +1,28 @@
 /*
-Copyright (C) 2010 by Claas Wilke (claaswilke@gmx.net)
-
-This file is part of the OCL 2 Java Code Generator of Dresden OCL2 for Eclipse.
-
-Dresden OCL2 for Eclipse is free software: you can redistribute it and/or modify 
-it under the terms of the GNU Lesser General Public License as published by the 
-Free Software Foundation, either version 3 of the License, or (at your option)
-any later version.
-
-Dresden OCL2 for Eclipse is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
-or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License 
-for more details.
-
-You should have received a copy of the GNU Lesser General Public License along 
-with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
+ * Copyright (C) 2010 by Claas Wilke (claas.wilke@tu-dresden.de)
+ *
+ * This file is part of the OCL 2 Java Code Generator of Dresden OCL.
+ *
+ * Dresden OCL2 is free software: you can redistribute it and/or modify 
+ * it under the terms of the GNU Lesser General Public License as published by the 
+ * Free Software Foundation, either version 3 of the License, or (at your option)
+ * any later version.
+ *
+ * Dresden OCL is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License 
+ * for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License along 
+ * with Dresden OCL. If not, see <http://www.gnu.org/licenses/>.
  */
-
 package tudresden.ocl20.pivot.tools.codegen.ocl2java.test.aspectj;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
 import tudresden.ocl20.pivot.tools.codegen.ocl2java.test.aspectj.constraintkinds.AllConstraintKindTests;
+import tudresden.ocl20.pivot.tools.codegen.ocl2java.test.aspectj.expressions.AllExpressionTests;
 import tudresden.ocl20.pivot.tools.codegen.ocl2java.test.aspectj.standardlibrary.AllStandardLibraryTests;
 
 /**
@@ -35,7 +35,7 @@ import tudresden.ocl20.pivot.tools.codegen.ocl2java.test.aspectj.standardlibrary
  * 
  */
 @RunWith(Suite.class)
-@Suite.SuiteClasses( { AllConstraintKindTests.class,
+@Suite.SuiteClasses({ AllConstraintKindTests.class, AllExpressionTests.class,
 		AllStandardLibraryTests.class })
 public class AllAspectJTests {
 	/*

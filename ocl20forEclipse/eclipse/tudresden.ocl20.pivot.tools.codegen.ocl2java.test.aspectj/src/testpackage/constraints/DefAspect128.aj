@@ -12,19 +12,19 @@ public privileged aspect DefAspect128 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testStringIndexOf(String source, String arg01)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testSequencePrepend(java.util.List<Object> source, Object arg01)}.</p>
      */
-    protected pointcut testStringIndexOfCaller(testpackage.Class1 aClass, String source, String arg01):
-    	call(* testpackage.Class1.testStringIndexOf(String, String))
+    protected pointcut testSequencePrependCaller(testpackage.Class1 aClass, java.util.List<Object> source, Object arg01):
+    	call(* testpackage.Class1.testSequencePrepend(java.util.List<Object>, Object))
     	&& target(aClass) && args(source, arg01);
     
     /**
-     * <p>Defines the method testStringIndexOf(String source, String arg01) defined by the constraint
+     * <p>Defines the method testSequencePrepend(java.util.List<Object> source, Object arg01) defined by the constraint
      * <code>context Class1
-     *       def: testStringIndexOf(source: String, arg01: String): Integer =
-    source.indexOf(arg01)</code></p>
+     *       def: testSequencePrepend(source: Sequence(OclAny), arg01: OclAny): Sequence(OclAny) =
+    source ->prepend(arg01)</code></p>
      */
-    Integer around(testpackage.Class1 aClass, String source, String arg01): testStringIndexOfCaller(aClass, source, arg01) {
-        return source.indexOf(arg01) + 1;
+    java.util.List<Object> around(testpackage.Class1 aClass, java.util.List<Object> source, Object arg01): testSequencePrependCaller(aClass, source, arg01) {
+        return tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclSequences.prepend(source, arg01);
     }
 }

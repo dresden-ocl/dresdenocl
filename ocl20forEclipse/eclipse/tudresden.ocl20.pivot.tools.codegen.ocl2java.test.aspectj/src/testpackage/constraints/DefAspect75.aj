@@ -8,23 +8,44 @@ package testpackage.constraints;
  */
 public privileged aspect DefAspect75 {
 
+    protected static java.util.Map<String, java.util.Map> allInstances = new java.util.HashMap<String, java.util.Map>();
+
+    /**
+     * <p>Adds all instances of the class {@link testpackage.Class1} to the {@link java.util.Map} allInstances.</p>
+     */
+    after(testpackage.Class1 aClass) : execution(testpackage.Class1.new(..)) && this(aClass) {
+    
+        java.util.Map<testpackage.Class1, Object> instanceMap;
+    
+        instanceMap = (java.util.Map<testpackage.Class1, Object>) allInstances.get(aClass.getClass().getCanonicalName());
+    
+        if (instanceMap == null) {
+            instanceMap = new java.util.WeakHashMap<testpackage.Class1, Object>();
+        }
+        // no else.
+    
+        instanceMap.put(aClass, null);
+    
+        allInstances.put(aClass.getClass().getCanonicalName(), instanceMap);
+    }
+
     /* Declares a new super class containing the new attribute or method. */
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testRealAbs01(Float source)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testOclAnyAllInstances()}.</p>
      */
-    protected pointcut testRealAbs01Caller(testpackage.Class1 aClass, Float source):
-    	call(* testpackage.Class1.testRealAbs01(Float))
-    	&& target(aClass) && args(source);
+    protected pointcut testOclAnyAllInstancesCaller(testpackage.Class1 aClass):
+    	call(* testpackage.Class1.testOclAnyAllInstances())
+    	&& target(aClass);
     
     /**
-     * <p>Defines the method testRealAbs01(Float source) defined by the constraint
+     * <p>Defines the method testOclAnyAllInstances() defined by the constraint
      * <code>context Class1
-     *       def: testRealAbs01(source: Real): Real =
-    source.abs()</code></p>
+     *       def: testOclAnyAllInstances(): Set(Class1) =
+    Class1.allInstances()</code></p>
      */
-    Float around(testpackage.Class1 aClass, Float source): testRealAbs01Caller(aClass, source) {
-        return java.lang.Math.abs(source);
+    java.util.Set<testpackage.Class1> around(testpackage.Class1 aClass): testOclAnyAllInstancesCaller(aClass) {
+        return (new java.util.HashSet<testpackage.Class1>((java.util.Set<testpackage.Class1>) allInstances.get(testpackage.Class1.class.getCanonicalName()).keySet()));
     }
 }

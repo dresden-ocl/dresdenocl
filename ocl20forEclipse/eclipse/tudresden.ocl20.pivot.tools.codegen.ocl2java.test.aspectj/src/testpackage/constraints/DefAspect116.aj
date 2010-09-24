@@ -12,19 +12,20 @@ public privileged aspect DefAspect116 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testSetFlatten(java.util.Set<Object> source)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testSequenceAsSequence(java.util.List<Object> source)}.</p>
      */
-    protected pointcut testSetFlattenCaller(testpackage.Class1 aClass, java.util.Set<Object> source):
-    	call(* testpackage.Class1.testSetFlatten(java.util.Set<Object>))
+    protected pointcut testSequenceAsSequenceCaller(testpackage.Class1 aClass, java.util.List<Object> source):
+    	call(* testpackage.Class1.testSequenceAsSequence(java.util.List<Object>))
     	&& target(aClass) && args(source);
     
     /**
-     * <p>Defines the method testSetFlatten(java.util.Set<Object> source) defined by the constraint
+     * <p>Defines the method testSequenceAsSequence(java.util.List<Object> source) defined by the constraint
      * <code>context Class1
-     *       def: testSetFlatten(source: Set(OclAny)): Set(OclAny) =
-    source ->flatten()</code></p>
+     *       def: testSequenceAsSequence(source: Sequence(OclAny)): 
+      Sequence(OclAny) =
+    source ->asSequence()</code></p>
      */
-    java.util.Set<Object> around(testpackage.Class1 aClass, java.util.Set<Object> source): testSetFlattenCaller(aClass, source) {
-        return (java.util.Set<Object>) tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclSets.flatten(source);
+    java.util.List<Object> around(testpackage.Class1 aClass, java.util.List<Object> source): testSequenceAsSequenceCaller(aClass, source) {
+        return tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclSequences.asSequence(source);
     }
 }

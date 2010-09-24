@@ -12,19 +12,19 @@ public privileged aspect DefAspect121 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testSetSymmetricDifference01(java.util.Set<Object> source, java.util.Set<Object> arg01)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testSequenceExcluding01(java.util.List<Object> source, Object arg01)}.</p>
      */
-    protected pointcut testSetSymmetricDifference01Caller(testpackage.Class1 aClass, java.util.Set<Object> source, java.util.Set<Object> arg01):
-    	call(* testpackage.Class1.testSetSymmetricDifference01(java.util.Set<Object>, java.util.Set<Object>))
+    protected pointcut testSequenceExcluding01Caller(testpackage.Class1 aClass, java.util.List<Object> source, Object arg01):
+    	call(* testpackage.Class1.testSequenceExcluding01(java.util.List<Object>, Object))
     	&& target(aClass) && args(source, arg01);
     
     /**
-     * <p>Defines the method testSetSymmetricDifference01(java.util.Set<Object> source, java.util.Set<Object> arg01) defined by the constraint
+     * <p>Defines the method testSequenceExcluding01(java.util.List<Object> source, Object arg01) defined by the constraint
      * <code>context Class1
-     *       def: testSetSymmetricDifference01(source: Set(OclAny), arg01: Set(OclAny)): Set(OclAny) =
-    source ->symmetricDifference(arg01)</code></p>
+     *       def: testSequenceExcluding01(source: Sequence(OclAny), arg01: OclAny): Sequence(OclAny) =
+    source ->excluding(arg01)</code></p>
      */
-    java.util.Set<Object> around(testpackage.Class1 aClass, java.util.Set<Object> source, java.util.Set<Object> arg01): testSetSymmetricDifference01Caller(aClass, source, arg01) {
-        return tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclSets.symmetricDifference(source, arg01);
+    java.util.List<Object> around(testpackage.Class1 aClass, java.util.List<Object> source, Object arg01): testSequenceExcluding01Caller(aClass, source, arg01) {
+        return tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclSequences.excluding(source, arg01);
     }
 }

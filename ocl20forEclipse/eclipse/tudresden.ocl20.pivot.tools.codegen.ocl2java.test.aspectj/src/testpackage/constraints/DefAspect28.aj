@@ -12,19 +12,20 @@ public privileged aspect DefAspect28 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testCollectionEquals(java.util.Collection<Object> source, java.util.Collection<Object> arg01)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testBagAsOrderedSet(java.util.List<Object> source)}.</p>
      */
-    protected pointcut testCollectionEqualsCaller(testpackage.Class1 aClass, java.util.Collection<Object> source, java.util.Collection<Object> arg01):
-    	call(* testpackage.Class1.testCollectionEquals(java.util.Collection<Object>, java.util.Collection<Object>))
-    	&& target(aClass) && args(source, arg01);
+    protected pointcut testBagAsOrderedSetCaller(testpackage.Class1 aClass, java.util.List<Object> source):
+    	call(* testpackage.Class1.testBagAsOrderedSet(java.util.List<Object>))
+    	&& target(aClass) && args(source);
     
     /**
-     * <p>Defines the method testCollectionEquals(java.util.Collection<Object> source, java.util.Collection<Object> arg01) defined by the constraint
+     * <p>Defines the method testBagAsOrderedSet(java.util.List<Object> source) defined by the constraint
      * <code>context Class1
-     *       def: testCollectionEquals(source: Collection(OclAny), arg01: Collection(OclAny)): Boolean =
-    source = arg01</code></p>
+     *       def: testBagAsOrderedSet(source: Bag(OclAny)): 
+      OrderedSet(OclAny) =
+    source ->asOrderedSet()</code></p>
      */
-    Boolean around(testpackage.Class1 aClass, java.util.Collection<Object> source, java.util.Collection<Object> arg01): testCollectionEqualsCaller(aClass, source, arg01) {
-        return tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclCollections.equals(source, arg01);
+    java.util.List<Object> around(testpackage.Class1 aClass, java.util.List<Object> source): testBagAsOrderedSetCaller(aClass, source) {
+        return tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclBags.asOrderedSet(source);
     }
 }

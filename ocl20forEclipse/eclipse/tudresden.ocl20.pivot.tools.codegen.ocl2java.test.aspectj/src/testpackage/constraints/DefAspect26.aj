@@ -12,20 +12,24 @@ public privileged aspect DefAspect26 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testCollectionAsSet(java.util.Collection<Object> source)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testLetExp01()}.</p>
      */
-    protected pointcut testCollectionAsSetCaller(testpackage.Class1 aClass, java.util.Collection<Object> source):
-    	call(* testpackage.Class1.testCollectionAsSet(java.util.Collection<Object>))
-    	&& target(aClass) && args(source);
+    protected pointcut testLetExp01Caller(testpackage.Class1 aClass):
+    	call(* testpackage.Class1.testLetExp01())
+    	&& target(aClass);
     
     /**
-     * <p>Defines the method testCollectionAsSet(java.util.Collection<Object> source) defined by the constraint
+     * <p>Defines the method testLetExp01() defined by the constraint
      * <code>context Class1
-     *       def: testCollectionAsSet(source: Collection(OclAny)): 
-      Set(OclAny) =
-    source ->asSet()</code></p>
+     *       def: testLetExp01(): Integer =
+    let senseOfLife = 42
+    in senseOfLife</code></p>
      */
-    java.util.Set<Object> around(testpackage.Class1 aClass, java.util.Collection<Object> source): testCollectionAsSetCaller(aClass, source) {
-        return tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclCollections.asSet(source);
+    Integer around(testpackage.Class1 aClass): testLetExp01Caller(aClass) {
+        Integer senseOfLife;
+        senseOfLife = new Integer(42);
+        
+    
+        return senseOfLife;
     }
 }

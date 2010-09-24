@@ -12,19 +12,19 @@ public privileged aspect DefAspect58 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testOclIsKindOf01(testpackage.Class1 source, Class<?> arg01)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testCollectionMin(java.util.Collection<Object> source)}.</p>
      */
-    protected pointcut testOclIsKindOf01Caller(testpackage.Class1 aClass, testpackage.Class1 source, Class<?> arg01):
-    	call(* testpackage.Class1.testOclIsKindOf01(testpackage.Class1, Class<?>))
-    	&& target(aClass) && args(source, arg01);
+    protected pointcut testCollectionMinCaller(testpackage.Class1 aClass, java.util.Collection<Object> source):
+    	call(* testpackage.Class1.testCollectionMin(java.util.Collection<Object>))
+    	&& target(aClass) && args(source);
     
     /**
-     * <p>Defines the method testOclIsKindOf01(testpackage.Class1 source, Class<?> arg01) defined by the constraint
+     * <p>Defines the method testCollectionMin(java.util.Collection<Object> source) defined by the constraint
      * <code>context Class1
-     *       def: testOclIsKindOf01(source: Class1, arg01: OclType): Boolean =
-    source.oclIsKindOf(arg01)</code></p>
+     *       def: testCollectionMin(source: Collection(OclAny)): OclAny =
+    source ->min()</code></p>
      */
-    Boolean around(testpackage.Class1 aClass, testpackage.Class1 source, Class<?> arg01): testOclIsKindOf01Caller(aClass, source, arg01) {
-        return (arg01.isAssignableFrom(source.getClass()));
+    Object around(testpackage.Class1 aClass, java.util.Collection<Object> source): testCollectionMinCaller(aClass, source) {
+        return tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclCollections.min(source);
     }
 }

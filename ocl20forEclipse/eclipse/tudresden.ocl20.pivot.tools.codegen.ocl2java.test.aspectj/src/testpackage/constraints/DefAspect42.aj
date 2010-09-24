@@ -12,19 +12,19 @@ public privileged aspect DefAspect42 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testIntegerDiv01(Integer source, Integer arg01)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testBooleanNot01(Boolean source)}.</p>
      */
-    protected pointcut testIntegerDiv01Caller(testpackage.Class1 aClass, Integer source, Integer arg01):
-    	call(* testpackage.Class1.testIntegerDiv01(Integer, Integer))
-    	&& target(aClass) && args(source, arg01);
+    protected pointcut testBooleanNot01Caller(testpackage.Class1 aClass, Boolean source):
+    	call(* testpackage.Class1.testBooleanNot01(Boolean))
+    	&& target(aClass) && args(source);
     
     /**
-     * <p>Defines the method testIntegerDiv01(Integer source, Integer arg01) defined by the constraint
+     * <p>Defines the method testBooleanNot01(Boolean source) defined by the constraint
      * <code>context Class1
-     *       def: testIntegerDiv01(source: Integer, arg01: Integer): Integer =
-    source.div(arg01)</code></p>
+     *       def: testBooleanNot01(source: Boolean): Boolean =
+    not source</code></p>
      */
-    Integer around(testpackage.Class1 aClass, Integer source, Integer arg01): testIntegerDiv01Caller(aClass, source, arg01) {
-        return (source / arg01);
+    Boolean around(testpackage.Class1 aClass, Boolean source): testBooleanNot01Caller(aClass, source) {
+        return !source;
     }
 }

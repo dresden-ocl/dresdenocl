@@ -12,19 +12,19 @@ public privileged aspect DefAspect55 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testOclAsType01(testpackage.Class1 source)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testCollectionIncludes(java.util.Collection<Object> source, Object arg01)}.</p>
      */
-    protected pointcut testOclAsType01Caller(testpackage.Class1 aClass, testpackage.Class1 source):
-    	call(* testpackage.Class1.testOclAsType01(testpackage.Class1))
-    	&& target(aClass) && args(source);
+    protected pointcut testCollectionIncludesCaller(testpackage.Class1 aClass, java.util.Collection<Object> source, Object arg01):
+    	call(* testpackage.Class1.testCollectionIncludes(java.util.Collection<Object>, Object))
+    	&& target(aClass) && args(source, arg01);
     
     /**
-     * <p>Defines the method testOclAsType01(testpackage.Class1 source) defined by the constraint
+     * <p>Defines the method testCollectionIncludes(java.util.Collection<Object> source, Object arg01) defined by the constraint
      * <code>context Class1
-     *       def: testOclAsType01(source: Class1): Class1 =
-    source.oclAsType(Class1)</code></p>
+     *       def: testCollectionIncludes(source: Collection(OclAny), arg01: OclAny): Boolean =
+    source ->includes(arg01)</code></p>
      */
-    testpackage.Class1 around(testpackage.Class1 aClass, testpackage.Class1 source): testOclAsType01Caller(aClass, source) {
-        return ((testpackage.Class1) source);
+    Boolean around(testpackage.Class1 aClass, java.util.Collection<Object> source, Object arg01): testCollectionIncludesCaller(aClass, source, arg01) {
+        return tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclCollections.includes(source, arg01);
     }
 }

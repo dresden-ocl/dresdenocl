@@ -12,20 +12,19 @@ public privileged aspect DefAspect109 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testSetAsBag(java.util.Set<Object> source)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testRealNegation01(Float source)}.</p>
      */
-    protected pointcut testSetAsBagCaller(testpackage.Class1 aClass, java.util.Set<Object> source):
-    	call(* testpackage.Class1.testSetAsBag(java.util.Set<Object>))
+    protected pointcut testRealNegation01Caller(testpackage.Class1 aClass, Float source):
+    	call(* testpackage.Class1.testRealNegation01(Float))
     	&& target(aClass) && args(source);
     
     /**
-     * <p>Defines the method testSetAsBag(java.util.Set<Object> source) defined by the constraint
+     * <p>Defines the method testRealNegation01(Float source) defined by the constraint
      * <code>context Class1
-     *       def: testSetAsBag(source: Set(OclAny)): 
-      Bag(OclAny) =
-    source ->asBag()</code></p>
+     *       def: testRealNegation01(source: Real): Real =
+    - source</code></p>
      */
-    java.util.List<Object> around(testpackage.Class1 aClass, java.util.Set<Object> source): testSetAsBagCaller(aClass, source) {
-        return tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclSets.asBag(source);
+    Float around(testpackage.Class1 aClass, Float source): testRealNegation01Caller(aClass, source) {
+        return -(source);
     }
 }

@@ -12,19 +12,20 @@ public privileged aspect DefAspect29 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testCollectionExcludes(java.util.Collection<Object> source, Object arg01)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testBagAsSequence(java.util.List<Object> source)}.</p>
      */
-    protected pointcut testCollectionExcludesCaller(testpackage.Class1 aClass, java.util.Collection<Object> source, Object arg01):
-    	call(* testpackage.Class1.testCollectionExcludes(java.util.Collection<Object>, Object))
-    	&& target(aClass) && args(source, arg01);
+    protected pointcut testBagAsSequenceCaller(testpackage.Class1 aClass, java.util.List<Object> source):
+    	call(* testpackage.Class1.testBagAsSequence(java.util.List<Object>))
+    	&& target(aClass) && args(source);
     
     /**
-     * <p>Defines the method testCollectionExcludes(java.util.Collection<Object> source, Object arg01) defined by the constraint
+     * <p>Defines the method testBagAsSequence(java.util.List<Object> source) defined by the constraint
      * <code>context Class1
-     *       def: testCollectionExcludes(source: Collection(OclAny), arg01: OclAny): Boolean =
-    source ->excludes(arg01)</code></p>
+     *       def: testBagAsSequence(source: Bag(OclAny)): 
+      Sequence(OclAny) =
+    source ->asSequence()</code></p>
      */
-    Boolean around(testpackage.Class1 aClass, java.util.Collection<Object> source, Object arg01): testCollectionExcludesCaller(aClass, source, arg01) {
-        return tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclCollections.excludes(source, arg01);
+    java.util.List<Object> around(testpackage.Class1 aClass, java.util.List<Object> source): testBagAsSequenceCaller(aClass, source) {
+        return tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclBags.asSequence(source);
     }
 }

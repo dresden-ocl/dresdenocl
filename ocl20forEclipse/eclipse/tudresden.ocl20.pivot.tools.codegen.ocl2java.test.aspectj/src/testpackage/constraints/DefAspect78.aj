@@ -12,19 +12,19 @@ public privileged aspect DefAspect78 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testRealGreaterThan01(Float source, Float arg01)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testOclAsType01(testpackage.Class1 source)}.</p>
      */
-    protected pointcut testRealGreaterThan01Caller(testpackage.Class1 aClass, Float source, Float arg01):
-    	call(* testpackage.Class1.testRealGreaterThan01(Float, Float))
-    	&& target(aClass) && args(source, arg01);
+    protected pointcut testOclAsType01Caller(testpackage.Class1 aClass, testpackage.Class1 source):
+    	call(* testpackage.Class1.testOclAsType01(testpackage.Class1))
+    	&& target(aClass) && args(source);
     
     /**
-     * <p>Defines the method testRealGreaterThan01(Float source, Float arg01) defined by the constraint
+     * <p>Defines the method testOclAsType01(testpackage.Class1 source) defined by the constraint
      * <code>context Class1
-     *       def: testRealGreaterThan01(source: Real, arg01: Real): Boolean =
-    source > arg01</code></p>
+     *       def: testOclAsType01(source: Class1): Class1 =
+    source.oclAsType(Class1)</code></p>
      */
-    Boolean around(testpackage.Class1 aClass, Float source, Float arg01): testRealGreaterThan01Caller(aClass, source, arg01) {
-        return (source > arg01);
+    testpackage.Class1 around(testpackage.Class1 aClass, testpackage.Class1 source): testOclAsType01Caller(aClass, source) {
+        return ((testpackage.Class1) source);
     }
 }

@@ -12,20 +12,19 @@ public privileged aspect DefAspect5 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testBagAsOrderedSet(java.util.List<Object> source)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testOperationCallExp02()}.</p>
      */
-    protected pointcut testBagAsOrderedSetCaller(testpackage.Class1 aClass, java.util.List<Object> source):
-    	call(* testpackage.Class1.testBagAsOrderedSet(java.util.List<Object>))
-    	&& target(aClass) && args(source);
+    protected pointcut testOperationCallExp02Caller(testpackage.Class1 aClass):
+    	call(* testpackage.Class1.testOperationCallExp02())
+    	&& target(aClass);
     
     /**
-     * <p>Defines the method testBagAsOrderedSet(java.util.List<Object> source) defined by the constraint
+     * <p>Defines the method testOperationCallExp02() defined by the constraint
      * <code>context Class1
-     *       def: testBagAsOrderedSet(source: Bag(OclAny)): 
-      OrderedSet(OclAny) =
-    source ->asOrderedSet()</code></p>
+     *       def: testOperationCallExp02(): Integer =
+    Class1::getStaticInteger()</code></p>
      */
-    java.util.List<Object> around(testpackage.Class1 aClass, java.util.List<Object> source): testBagAsOrderedSetCaller(aClass, source) {
-        return tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclBags.asOrderedSet(source);
+    Integer around(testpackage.Class1 aClass): testOperationCallExp02Caller(aClass) {
+        return testpackage.Class1.getStaticInteger();
     }
 }

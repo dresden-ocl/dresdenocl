@@ -12,19 +12,19 @@ public privileged aspect DefAspect34 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testCollectionIsEmpty(java.util.Collection<Object> source)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testBagFlatten(java.util.List<Object> source)}.</p>
      */
-    protected pointcut testCollectionIsEmptyCaller(testpackage.Class1 aClass, java.util.Collection<Object> source):
-    	call(* testpackage.Class1.testCollectionIsEmpty(java.util.Collection<Object>))
+    protected pointcut testBagFlattenCaller(testpackage.Class1 aClass, java.util.List<Object> source):
+    	call(* testpackage.Class1.testBagFlatten(java.util.List<Object>))
     	&& target(aClass) && args(source);
     
     /**
-     * <p>Defines the method testCollectionIsEmpty(java.util.Collection<Object> source) defined by the constraint
+     * <p>Defines the method testBagFlatten(java.util.List<Object> source) defined by the constraint
      * <code>context Class1
-     *       def: testCollectionIsEmpty(source: Collection(OclAny)): Boolean =
-    source ->isEmpty()</code></p>
+     *       def: testBagFlatten(source: Bag(OclAny)): Bag(OclAny) =
+    source ->flatten()</code></p>
      */
-    Boolean around(testpackage.Class1 aClass, java.util.Collection<Object> source): testCollectionIsEmptyCaller(aClass, source) {
-        return tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclCollections.isEmpty(source);
+    java.util.List<Object> around(testpackage.Class1 aClass, java.util.List<Object> source): testBagFlattenCaller(aClass, source) {
+        return (java.util.List<Object>) tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclBags.flatten(source);
     }
 }

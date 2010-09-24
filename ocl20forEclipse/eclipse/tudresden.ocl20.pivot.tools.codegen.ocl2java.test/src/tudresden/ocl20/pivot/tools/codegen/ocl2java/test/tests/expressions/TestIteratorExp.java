@@ -190,6 +190,32 @@ public class TestIteratorExp extends AbstractDiffTest {
 	 * @throws Exception
 	 */
 	@Test
+	public void testReject01() throws Exception {
+
+		this.compareFragmentCodeGeneration("expressions/iterator", "reject01");
+	}
+	
+	/**
+	 * <p>
+	 * Tests the fragment code generation of the constraint.
+	 * </p>
+	 * 
+	 * @throws Exception
+	 */
+	@Test
+	public void testSelect01() throws Exception {
+
+		this.compareFragmentCodeGeneration("expressions/iterator", "select01");
+	}
+
+	/**
+	 * <p>
+	 * Tests the fragment code generation of the constraint.
+	 * </p>
+	 * 
+	 * @throws Exception
+	 */
+	@Test
 	public void testSortedBy01() throws Exception {
 
 		this.compareFragmentCodeGeneration("expressions/iterator", "sortedBy01");

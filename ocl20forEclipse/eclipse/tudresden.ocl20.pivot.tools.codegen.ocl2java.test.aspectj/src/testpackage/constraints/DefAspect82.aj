@@ -12,19 +12,19 @@ public privileged aspect DefAspect82 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testRealMax01(Float source, Float arg01)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testOclIsTypeOf01(testpackage.Class1 source, Class<?> arg01)}.</p>
      */
-    protected pointcut testRealMax01Caller(testpackage.Class1 aClass, Float source, Float arg01):
-    	call(* testpackage.Class1.testRealMax01(Float, Float))
+    protected pointcut testOclIsTypeOf01Caller(testpackage.Class1 aClass, testpackage.Class1 source, Class<?> arg01):
+    	call(* testpackage.Class1.testOclIsTypeOf01(testpackage.Class1, Class<?>))
     	&& target(aClass) && args(source, arg01);
     
     /**
-     * <p>Defines the method testRealMax01(Float source, Float arg01) defined by the constraint
+     * <p>Defines the method testOclIsTypeOf01(testpackage.Class1 source, Class<?> arg01) defined by the constraint
      * <code>context Class1
-     *       def: testRealMax01(source: Real, arg01: Real): Real =
-    source.max(arg01)</code></p>
+     *       def: testOclIsTypeOf01(source: Class1, arg01: OclType): Boolean =
+    source.oclIsTypeOf(arg01)</code></p>
      */
-    Float around(testpackage.Class1 aClass, Float source, Float arg01): testRealMax01Caller(aClass, source, arg01) {
-        return java.lang.Math.max(source, arg01);
+    Boolean around(testpackage.Class1 aClass, testpackage.Class1 source, Class<?> arg01): testOclIsTypeOf01Caller(aClass, source, arg01) {
+        return source.getClass().getCanonicalName().equals(arg01.getCanonicalName());
     }
 }

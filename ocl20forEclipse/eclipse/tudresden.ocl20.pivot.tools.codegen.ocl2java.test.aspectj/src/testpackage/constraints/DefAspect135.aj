@@ -12,19 +12,20 @@ public privileged aspect DefAspect135 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testStringToReal(String source)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testSetAsSet(java.util.Set<Object> source)}.</p>
      */
-    protected pointcut testStringToRealCaller(testpackage.Class1 aClass, String source):
-    	call(* testpackage.Class1.testStringToReal(String))
+    protected pointcut testSetAsSetCaller(testpackage.Class1 aClass, java.util.Set<Object> source):
+    	call(* testpackage.Class1.testSetAsSet(java.util.Set<Object>))
     	&& target(aClass) && args(source);
     
     /**
-     * <p>Defines the method testStringToReal(String source) defined by the constraint
+     * <p>Defines the method testSetAsSet(java.util.Set<Object> source) defined by the constraint
      * <code>context Class1
-     *       def: testStringToReal(source: String): Real =
-    source.toReal()</code></p>
+     *       def: testSetAsSet(source: Set(OclAny)): 
+      Set(OclAny) =
+    source ->asSet()</code></p>
      */
-    Float around(testpackage.Class1 aClass, String source): testStringToRealCaller(aClass, source) {
-        return Float.parseFloat(source);
+    java.util.Set<Object> around(testpackage.Class1 aClass, java.util.Set<Object> source): testSetAsSetCaller(aClass, source) {
+        return tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclSets.asSet(source);
     }
 }

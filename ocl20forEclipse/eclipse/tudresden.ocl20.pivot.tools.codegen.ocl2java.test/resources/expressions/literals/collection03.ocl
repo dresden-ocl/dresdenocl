@@ -1,7 +1,7 @@
 package testpackage
 
 context Class1
-def: testCollectionLiteralExp03: 
+def: testCollectionLiteralExp03(): 
   OrderedSet(Integer) =
 OrderedSet { 0, 1, 2 }
 

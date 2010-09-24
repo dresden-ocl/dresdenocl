@@ -17,7 +17,7 @@ public privileged aspect PreAspect1 {
     /**
      * <p>Checks a precondition for the {@link Class1#Class1(, Integer anInt)} defined by the constraint
      * <code>context Class1::Class1(anInt: Integer) : 
-     *       pre: anInt[].oclIsUndefined().not()</code></p>
+     *       pre: not anInt.oclIsUndefined()</code></p>
      */
     before(Integer anInt): Class1Caller(anInt) {
         if (!!(anInt == null)) {

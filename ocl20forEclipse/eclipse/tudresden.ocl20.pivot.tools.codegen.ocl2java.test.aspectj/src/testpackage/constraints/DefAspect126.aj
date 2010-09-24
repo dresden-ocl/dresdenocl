@@ -12,19 +12,19 @@ public privileged aspect DefAspect126 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testStringConcat01(String source, String arg01)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testSequenceInsertAt(java.util.List<Object> source, Integer arg01, Object arg02)}.</p>
      */
-    protected pointcut testStringConcat01Caller(testpackage.Class1 aClass, String source, String arg01):
-    	call(* testpackage.Class1.testStringConcat01(String, String))
-    	&& target(aClass) && args(source, arg01);
+    protected pointcut testSequenceInsertAtCaller(testpackage.Class1 aClass, java.util.List<Object> source, Integer arg01, Object arg02):
+    	call(* testpackage.Class1.testSequenceInsertAt(java.util.List<Object>, Integer, Object))
+    	&& target(aClass) && args(source, arg01, arg02);
     
     /**
-     * <p>Defines the method testStringConcat01(String source, String arg01) defined by the constraint
+     * <p>Defines the method testSequenceInsertAt(java.util.List<Object> source, Integer arg01, Object arg02) defined by the constraint
      * <code>context Class1
-     *       def: testStringConcat01(source: String, arg01: String): String =
-    source.concat(arg01)</code></p>
+     *       def: testSequenceInsertAt(source: Sequence(OclAny), arg01: Integer, arg02: OclAny): Sequence(OclAny) =
+    source ->insertAt(arg01, arg02)</code></p>
      */
-    String around(testpackage.Class1 aClass, String source, String arg01): testStringConcat01Caller(aClass, source, arg01) {
-        return source.concat(arg01);
+    java.util.List<Object> around(testpackage.Class1 aClass, java.util.List<Object> source, Integer arg01, Object arg02): testSequenceInsertAtCaller(aClass, source, arg01, arg02) {
+        return tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclSequences.insertAt(source, arg01, arg02);
     }
 }

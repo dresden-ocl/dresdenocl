@@ -12,20 +12,19 @@ public privileged aspect DefAspect23 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testCollectionAsBag(java.util.Collection<Object> source)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testTypeLiteralExp01()}.</p>
      */
-    protected pointcut testCollectionAsBagCaller(testpackage.Class1 aClass, java.util.Collection<Object> source):
-    	call(* testpackage.Class1.testCollectionAsBag(java.util.Collection<Object>))
-    	&& target(aClass) && args(source);
+    protected pointcut testTypeLiteralExp01Caller(testpackage.Class1 aClass):
+    	call(* testpackage.Class1.testTypeLiteralExp01())
+    	&& target(aClass);
     
     /**
-     * <p>Defines the method testCollectionAsBag(java.util.Collection<Object> source) defined by the constraint
+     * <p>Defines the method testTypeLiteralExp01() defined by the constraint
      * <code>context Class1
-     *       def: testCollectionAsBag(source: Collection(OclAny)): 
-      Bag(OclAny) =
-    source ->asBag()</code></p>
+     *       def: testTypeLiteralExp01(): OclType =
+    Class1</code></p>
      */
-    java.util.List<Object> around(testpackage.Class1 aClass, java.util.Collection<Object> source): testCollectionAsBagCaller(aClass, source) {
-        return tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclCollections.asBag(source);
+    Class<?> around(testpackage.Class1 aClass): testTypeLiteralExp01Caller(aClass) {
+        return testpackage.Class1;
     }
 }

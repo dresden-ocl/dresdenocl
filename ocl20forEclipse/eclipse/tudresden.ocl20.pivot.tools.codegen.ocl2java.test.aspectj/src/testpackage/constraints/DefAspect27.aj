@@ -12,20 +12,20 @@ public privileged aspect DefAspect27 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testCollectionCount(java.util.Collection<Object> source, Object arg01)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testBagAsBag(java.util.List<Object> source)}.</p>
      */
-    protected pointcut testCollectionCountCaller(testpackage.Class1 aClass, java.util.Collection<Object> source, Object arg01):
-    	call(* testpackage.Class1.testCollectionCount(java.util.Collection<Object>, Object))
-    	&& target(aClass) && args(source, arg01);
+    protected pointcut testBagAsBagCaller(testpackage.Class1 aClass, java.util.List<Object> source):
+    	call(* testpackage.Class1.testBagAsBag(java.util.List<Object>))
+    	&& target(aClass) && args(source);
     
     /**
-     * <p>Defines the method testCollectionCount(java.util.Collection<Object> source, Object arg01) defined by the constraint
+     * <p>Defines the method testBagAsBag(java.util.List<Object> source) defined by the constraint
      * <code>context Class1
-     *       def: testCollectionCount(source: Collection(OclAny), arg01: OclAny): 
-      Integer =
-    source ->count(arg01)</code></p>
+     *       def: testBagAsBag(source: Bag(OclAny)): 
+      Bag(OclAny) =
+    source ->asBag()</code></p>
      */
-    Integer around(testpackage.Class1 aClass, java.util.Collection<Object> source, Object arg01): testCollectionCountCaller(aClass, source, arg01) {
-        return tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclCollections.count(source, arg01);
+    java.util.List<Object> around(testpackage.Class1 aClass, java.util.List<Object> source): testBagAsBagCaller(aClass, source) {
+        return tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclBags.asBag(source);
     }
 }
