@@ -50,51 +50,39 @@ trait OclParseTreeToEssentialOcl { selfType : OclStaticSemantics =>
      	}
       
       case p@PreConditionDeclarationCS(name, oclExpression) => {
-        (p->context).flatMap{context =>
-          val o = context.asInstanceOf[Operation]
-          val parameters = o.getInputParameter
-          // FIXME Michael: wrong parameter names are still used
-//          val parameterList = new java.util.LinkedList[Variable]
-//          (p->variables).flatMap{case (_, explicitVariables) =>
-//            val variablesAndParameters = explicitVariables.map(_.getRepresentedParameter).zip(explicitVariables)
-//            variablesAndParameters.map(println)
-//            parameters.flatMap{param =>
-//              variablesAndParameters.find(param == _._1) match {
-//                case Some(vap) => Full(parameterList.add(vap._2))
-//                case None => yieldFailure("Cannot find parameter for " + param.getName, p)
-//              }
-//            }
-            computeBooleanConstraint(p, name, oclExpression, ConstraintKind.PRECONDITION, parameters.map(p => factory.createVariable(p)))
-          // }
+        (p->variables).flatMap{case (_, explicitVariables) =>
+          val representedParameter = explicitVariables.filter(_.getRepresentedParameter != null)
+          computeBooleanConstraint(p, name, oclExpression, ConstraintKind.PRECONDITION, representedParameter)
         } 
       }
       
       case p@PostConditionDeclarationCS(name, oclExpression) => {
-        (p->context).flatMap{context =>
-          val o = context.asInstanceOf[Operation]
-          val parameters = o.getInputParameter
-			    computeBooleanConstraint(p, name, oclExpression, ConstraintKind.POSTCONDITION, parameters.map(p => factory.createVariable(p)))
-        }
+         (p->variables).flatMap{case (_, explicitVariables) =>
+          val representedParameter = explicitVariables.filter(_.getRepresentedParameter != null)
+          computeBooleanConstraint(p, name, oclExpression, ConstraintKind.POSTCONDITION, representedParameter)
+        } 
       }
       
       case b@BodyDeclarationCS(name, oclExpression) => {
         (b->self).flatMap{self =>
       		(b->context).flatMap{context =>
         		(oclExpression->computeOclExpression).flatMap{oclExpressionEOcl =>
-	            val operation = context.asInstanceOf[Operation]
-              if (!oclExpressionEOcl.getType.conformsTo(operation.getType))
-                yieldFailure("Expected type " + operation.getType.getName + ", but found " + oclExpressionEOcl.getType.getName, oclExpression)
-              else {
-		            val result = factory.createVariable(operation.getReturnParameter)
-		            val parameters = operation.getInputParameter.map(p => factory.createVariable(p)).toArray
-		        		val expression = factory.createExpressionInOcl(
-				        	printOclExpression(b), oclExpressionEOcl, self, result, parameters : _*)
-				        var constraintName : String = ""
-				        if (name != null)
-				          constraintName = name.getSimpleName
-				        val constraint = factory.createConstraint(
-				        	constraintName, ConstraintKind.BODY, expression, operation, context)
-				        Full(constraint)
+	            (b->variables).flatMap{case (_, explicitVariables) =>
+	        		  val operation = context.asInstanceOf[Operation]
+	              if (!oclExpressionEOcl.getType.conformsTo(operation.getType))
+	                yieldFailure("Expected type " + operation.getType.getName + ", but found " + oclExpressionEOcl.getType.getName, oclExpression)
+	              else {
+			            val result = factory.createVariable(operation.getReturnParameter)
+			            val representedParameter = explicitVariables.filter(_.getRepresentedParameter != null).toArray
+			        		val expression = factory.createExpressionInOcl(
+					        	printOclExpression(b), oclExpressionEOcl, self, result, representedParameter)
+					        var constraintName : String = ""
+					        if (name != null)
+					          constraintName = name.getSimpleName
+					        val constraint = factory.createConstraint(
+					        	constraintName, ConstraintKind.BODY, expression, operation, context)
+					        Full(constraint)
+              	}
               }
         		}
         	}
