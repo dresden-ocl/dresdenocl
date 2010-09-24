@@ -26,8 +26,7 @@ public abstract class EOSPerformer implements IPerformer {
 
 		if (!this.oclConstraints.contains(query))
 			throw new NoSuchElementException();
-		String queryResult = ieos.query(query);
-		return queryResult;
+		return ieos.query(query);
 	}
 
 	public void addQueryString(String oclString, String runningString) {

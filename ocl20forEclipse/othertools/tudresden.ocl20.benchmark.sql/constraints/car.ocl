@@ -7,25 +7,25 @@
 
 package tudresden::ocl20::pivot::examples::car
 
-context Car
-inv carOcl01: Car.allInstances().owner.ownedCars->size() > 0
+context Car 
+inv carOcl01: owner.ownedCars->size() = 1
 
-inv carOcl02: Car.allInstances().owner.ownedCars->collect(x|x.color)->size() > 0
+inv carOcl02: owner.ownedCars->collect(x|x.color)->size() = 1
 
-inv carOcl03: Car.allInstances().owner.ownedCars->collect(x|x.color <> 'black')->size() > 0
+inv carOcl03: owner.ownedCars->collect(x|x.color <> 'black')->size() = 1
 
-inv carOcl04: Car.allInstances().owner.ownedCars->collect(x|x.owner.ownedCars)->size() > 0
+inv carOcl04: owner.ownedCars->collect(x|x.owner.ownedCars)->size() = 1
 
-inv carOcl05: Car.allInstances().owner.ownedCars->collect(x|x.owner.ownedCars->includes(x))->size() > 0
+inv carOcl05: owner.ownedCars->collect(x|x.owner.ownedCars->includes(x))->size() =1
 
-inv carOcl06: Car.allInstances().owner.ownedCars->forAll(x|x.owner.ownedCars->includes(x))
+inv carOcl06: owner.ownedCars->forAll(x|x.owner.ownedCars->includes(x))
 
-inv carOcl07: Car.allInstances().owner.ownedCars->select(x|x.owner.ownedCars->includes(x))->size() > 0
+inv carOcl07: owner.ownedCars->select(x|x.owner.ownedCars->includes(x))->size() = 1
 
-inv carOcl08: Car.allInstances().owner.ownedCars->collect(x|x.owner.ownedCars.color)->size() > 0
+inv carOcl08: owner.ownedCars->collect(x|x.owner.ownedCars.color)->size() = 1
 
-inv carOcl09: Car.allInstances().owner.ownedCars->collect(x|x.owner.ownedCars.color->size())->sum() > 0
+inv carOcl09: owner.ownedCars->collect(x|x.owner.ownedCars.color->size())->sum() = 1
 
-inv carOcl10: Car.allInstances().owner.ownedCars->forAll(x|x.owner.ownedCars.color->excludes('black'))
+inv carOcl10: owner.ownedCars->forAll(x|x.owner.ownedCars.color->excludes('black'))
 
 endpackage

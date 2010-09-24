@@ -1,5 +1,6 @@
 package tudresden.ocl20.benchmark.sql.util;
 
+
 public interface IPerformer {
 
 	public void runAdd();
@@ -11,5 +12,5 @@ public interface IPerformer {
 	public void clean();
 
 	public String getName();
-
+	
 }

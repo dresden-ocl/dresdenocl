@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.HashMap;
@@ -36,13 +37,15 @@ public abstract class MySqlPerformer implements IPerformer {
 	}
 
 	public String sendQuery(String query) throws Exception {
-
 		if (!this.oclConstraints.containsKey(query))
 			throw new NoSuchElementException();
-		for (String s : this.oclConstraints.get(query).split("; ")) {
-			stmt.executeQuery(s);
+		ResultSet rs = null;
+		for (String s : this.oclConstraints.get(query).split(";")) {
+			if (s == null) continue;
+			rs = stmt.executeQuery(s);
 		}
-		return null;
+		rs.next();
+		return rs.getString(1);
 	}
 
 	public void addQueryString(String oclString, String runningString) {
