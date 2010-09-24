@@ -64,6 +64,7 @@ import tudresden.ocl20.pivot.essentialocl.types.SetType;
 import tudresden.ocl20.pivot.pivotmodel.AssociationProperty;
 import tudresden.ocl20.pivot.pivotmodel.Constraint;
 import tudresden.ocl20.pivot.pivotmodel.ConstraintKind;
+import tudresden.ocl20.pivot.pivotmodel.Expression;
 import tudresden.ocl20.pivot.pivotmodel.Operation;
 import tudresden.ocl20.pivot.pivotmodel.PrimitiveType;
 import tudresden.ocl20.pivot.pivotmodel.PrimitiveTypeKind;
@@ -121,6 +122,9 @@ public class Ocl2DeclCode extends ExpressionsSwitch<String> implements
 	private LinkedList<String> aliasList;
 	private LinkedList<String> contextList;
 	private LinkedList<String> variableList;
+	
+	private int uniqueConstraintNumber;
+	
 
 	/**
 	 * <p>
@@ -173,7 +177,8 @@ public class Ocl2DeclCode extends ExpressionsSwitch<String> implements
 	 * @see tudresden.ocl20.pivot.tools.codgen.IOcl2Code#resetEnviornment()
 	 */
 	public void resetEnvironment() {
-
+		
+		this.uniqueConstraintNumber = 0;
 		this.aliasList = new LinkedList<String>();
 		this.contextList = new LinkedList<String>();
 		this.navigationMap = new HashMap<OclExpression, List<Guide>>();
@@ -202,7 +207,6 @@ public class Ocl2DeclCode extends ExpressionsSwitch<String> implements
 			LOGGER.debug("transformFragmentCode(List<Constraint>) - start");
 		}
 		// no else.
-		aliasList.add(mySettings.getMappedModel().getUniqueAlias());
 		List<String> result;
 
 		result = new ArrayList<String>();
@@ -249,20 +253,50 @@ public class Ocl2DeclCode extends ExpressionsSwitch<String> implements
 		if (aConstraint.getKind() != ConstraintKind.INVARIANT) {
 			return null;
 		}
+		
+		ITemplate template = null;
+		String constraintName = "";
+		if (aConstraint.getKind() == ConstraintKind.INVARIANT) {
+			template =
+				mySettings.getTemplateGroup().getTemplate("constraint_invariant");
+			constraintName = aConstraint.getName();
+		} 
 
-		String result;
-		EObject anExpression;
+		if (constraintName == null || constraintName.equals("")){
+			constraintName = getUniqueConstraintName();
+		}
+		
+		String bodyExpression;
+		Expression anExpression;
 		this.reset();
-		anExpression = (EObject) aConstraint.getSpecification();
-		result = this.doSwitch(anExpression);
+		anExpression = aConstraint.getSpecification();
+		bodyExpression = this.doSwitch(anExpression);
+						
+		template.setAttribute("constraint_name", constraintName);
+		template.setAttribute("context",  contextList.removeFirst()); 
+		template.setAttribute("context_alias", getAlias(false));
+		template.setAttribute("expression", bodyExpression);
 
+		ITemplate comment =
+			mySettings.getTemplateGroup().getTemplate("constraint_comment");
+		comment.setAttribute("context",	contextList.removeFirst());
+		comment.setAttribute("expression",
+			anExpression.getBody().replace("\r\n ", "").replace(" \r\n", "")
+					.replace("\r\n", ""));
+
+		
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("transformFragmentCode(Constraint)"
-					+ " - end - return value=" + result);
+					+ " - end - return value=" + template.toString());
 		}
 		// no else.
 
-		return result;
+		return comment.toString()+"\n"+template.toString();
+	}
+
+	private String getUniqueConstraintName() {
+		this.uniqueConstraintNumber++;
+		return "UNAMED_CONSTRAINT"+this.uniqueConstraintNumber;
 	}
 
 	/*
@@ -378,41 +412,21 @@ public class Ocl2DeclCode extends ExpressionsSwitch<String> implements
 						.getClassGuide();
 		classGuide.reset();
 		contextList.add(classGuide.getWhere());
-		String constraintName;
-
-		if (anExpressionInOcl.getConstraint() != null) {
-			constraintName = anExpressionInOcl.getConstraint().getName();
-		}
-		else {
-			constraintName = "UNAMED CONSTRAINT";
-		}
 
 		/* Transform bodyCode. */
 		String bodyExpression =
 				this.doSwitch((EObject) anExpressionInOcl.getBodyExpression());
+		
 
-		ITemplate comment =
-				mySettings.getTemplateGroup().getTemplate("constraint_comment");
-		comment.setAttribute("context", anExpressionInOcl.getContext().getType()
-				.getName());
-		comment.setAttribute("expression",
-				anExpressionInOcl.getBody().replace("\r\n ", "").replace(" \r\n", "")
-						.replace("\r\n", ""));
-
-		ITemplate template =
-				mySettings.getTemplateGroup().getTemplate("constraint_body");
-		template.setAttribute("constraint_name", constraintName);
-		template.setAttribute("context", classGuide.getFrom());
-		template.setAttribute("context_alias", aliasList.getLast());
-		template.setAttribute("expression", bodyExpression);
-
+		contextList.addFirst(constrainedType.getName());
+		contextList.addFirst(classGuide.getFrom());
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("caseExpressionInOcl(ExpressionInOcl)"
-					+ " - end - return value=" + template.toString());
+					+ " - end - return value=" + bodyExpression);
 		}
 		// no else.
 
-		return comment.toString() + "\n" + template.toString();
+		return bodyExpression;
 	}
 
 	/*
@@ -527,8 +541,8 @@ public class Ocl2DeclCode extends ExpressionsSwitch<String> implements
 			nav.add(guideArg);
 			guideArg.reset();
 			nav.add(guideSrc);
-			String lastString = aliasList.removeLast();
-			guideSrc.setAlias(aliasList.getLast());
+			String lastString = getAlias(true,true);
+			guideSrc.setAlias(getAlias(true));
 			if ((anIteratorExp.getBody().getType() instanceof PrimitiveType) || !(anIteratorExp.getBody() instanceof PropertyCallExp)) {
 				//guideSrc.setAlias(aliasList.getFirst());
 				result = handleIterCollectOperation(guideArg,null,doSwitch(sourceExp));
@@ -571,7 +585,7 @@ public class Ocl2DeclCode extends ExpressionsSwitch<String> implements
 		}
 
 		// remove last alias from alias list
-		aliasList.removeLast();
+		getAlias(true,true);
 
 		if (!operationName.equals("collect")) {
 			variableList.removeLast();
@@ -1730,7 +1744,7 @@ public class Ocl2DeclCode extends ExpressionsSwitch<String> implements
 				this.mySettings.getTemplateGroup().getTemplate("feature_call_forall");
 
 		template.setAttribute("source", guide.getFrom());
-		template.setAttribute("alias", aliasList.getLast());
+		template.setAttribute("alias", getAlias(true));
 		template.setAttribute("object", guide.getSelect());
 		template.setAttribute("collection", collection);
 		template.setAttribute("expression", expression);
@@ -1758,7 +1772,7 @@ public class Ocl2DeclCode extends ExpressionsSwitch<String> implements
 				this.mySettings.getTemplateGroup().getTemplate("feature_call_reject");
 
 		template.setAttribute("source", guide.getFrom());
-		template.setAttribute("alias", aliasList.getLast());
+		template.setAttribute("alias", getAlias(true));
 		template.setAttribute("object", guide.getSelect());
 		template.setAttribute("collection", collection);
 		template.setAttribute("expression", expression);
@@ -1786,7 +1800,7 @@ public class Ocl2DeclCode extends ExpressionsSwitch<String> implements
 				this.mySettings.getTemplateGroup().getTemplate("feature_call_select");
 
 		template.setAttribute("source", guide.getFrom());
-		template.setAttribute("alias", aliasList.getLast());
+		template.setAttribute("alias", getAlias(true));
 		template.setAttribute("object", guide.getSelect());
 		template.setAttribute("collection", collection);
 		template.setAttribute("expression", expression);
@@ -1841,7 +1855,7 @@ public class Ocl2DeclCode extends ExpressionsSwitch<String> implements
 
 		template.setAttribute("source", guide.getFrom());
 		template.setAttribute("object", guide.getSelect());
-		template.setAttribute("alias", aliasList.getLast());
+		template.setAttribute("alias", getAlias(true));
 
 		return template.toString();
 	}
@@ -1867,7 +1881,7 @@ public class Ocl2DeclCode extends ExpressionsSwitch<String> implements
 
 		template.setAttribute("source", typeGuide.getFrom());
 		template.setAttribute("object", typeGuide.getSelect());
-		template.setAttribute("alias", aliasList.getLast());
+		template.setAttribute("alias", getAlias(true));
 		template.setAttribute("source2",
 				(supertypeGuide != null) ? supertypeGuide.getFrom() : null);
 
@@ -2160,10 +2174,9 @@ public class Ocl2DeclCode extends ExpressionsSwitch<String> implements
 	 */
 	public void reset() {
 
-		String firstAlias = aliasList.getFirst();
-		aliasList.clear();
-		aliasList.add(firstAlias);
 		this.mySettings.getMappedModel().resetUniqueAlias();
+		aliasList.clear();
+		aliasList.add(this.mySettings.getMappedModel().getUniqueAlias());
 		contextList.clear();
 		navigationMap.clear();
 		variableList.clear();
@@ -2315,7 +2328,7 @@ public class Ocl2DeclCode extends ExpressionsSwitch<String> implements
 
 			// assign alias to last element
 			if (tmpNext == null || tmpNext instanceof VariableExp) {
-				guide.setAlias(aliasList.getLast());
+				guide.setAlias(getAlias(true));
 			}
 
 			guides.add(guide);
@@ -2325,6 +2338,29 @@ public class Ocl2DeclCode extends ExpressionsSwitch<String> implements
 		navigationMap.put(exp, guides);
 
 		return guides;
+	}
+	
+	private String getAlias(boolean last) {
+		return getAlias(last,false);
+	}
+	
+	private String getAlias(boolean last, boolean remove) {
+		String result;
+		if (last) {
+			if (!remove) {
+				result = aliasList.getLast();
+			} else {
+				result = aliasList.removeLast();
+			}
+		} else {
+			if (!remove) {
+				result = aliasList.getFirst();
+			} else {
+				result = aliasList.removeFirst();
+			}
+		}
+		
+		return result;
 	}
 
 }

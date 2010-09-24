@@ -39,7 +39,7 @@ import tudresden.ocl20.pivot.tools.transformation.exception.TransformationExcept
 public class Ocl2SqlTest {
 
 	private String sourcePath = System.getProperty("java.io.tmpdir")
-			+ "ocl2sqltest";
+			+ "/ocl2sqltest";
 
 	private static List<String> expected;
 
@@ -224,7 +224,7 @@ public class Ocl2SqlTest {
 		testStringList(removeComments(result), expected);
 		String[] files = (new File(sourcePath)).list();
 		assertEquals(1, files.length);
-		testStringList(parseFile(sourcePath + "\\" + files[0]), parseFile(filePath
+		testStringList(parseFile(sourcePath + "/" + files[0]), parseFile(filePath
 				+ "solution/view.sql"));
 	}
 
@@ -247,9 +247,9 @@ public class Ocl2SqlTest {
 		testStringList(removeComments(result), expected);
 		String[] files = (new File(sourcePath)).list();
 		assertEquals(2, files.length);
-		testStringList(parseFile(sourcePath + "\\" + files[0]), parseFile(filePath
+		testStringList(parseFile(sourcePath + "/" + files[0]), parseFile(filePath
 				+ "solution/schema.sql"));
-		testStringList(parseFile(sourcePath + "\\" + files[1]), parseFile(filePath
+		testStringList(parseFile(sourcePath + "/" + files[1]), parseFile(filePath
 				+ "solution/view.sql"));
 	}
 
@@ -271,9 +271,9 @@ public class Ocl2SqlTest {
 		}
 		String[] files = (new File(sourcePath)).list();
 		assertEquals(2, files.length);
-		testStringList(parseFile(sourcePath + "\\" + files[0]), parseFile(filePath
+		testStringList(parseFile(sourcePath + "/" + files[0]), parseFile(filePath
 				+ "solution/schema_para.sql"));
-		testStringList(parseFile(sourcePath + "\\" + files[1]), parseFile(filePath
+		testStringList(parseFile(sourcePath + "/" + files[1]), parseFile(filePath
 				+ "solution/view_para.sql"));
 	}
 

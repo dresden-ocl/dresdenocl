@@ -1,7 +1,7 @@
 group sql;
 
 // --- OCL INVARIANT --- 
-constraint_body(constraint_name,context,context_alias,expression) ::= <<
+constraint_invariant(constraint_name,context,context_alias,expression) ::= <<
 CREATE OR REPLACE VIEW $constraint_name$ AS
 (SELECT * FROM $context$ AS $context_alias$
 WHERE NOT ($expression$));

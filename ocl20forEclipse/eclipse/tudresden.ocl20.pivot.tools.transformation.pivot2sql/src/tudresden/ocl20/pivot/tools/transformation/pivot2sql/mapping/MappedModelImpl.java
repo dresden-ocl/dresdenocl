@@ -84,7 +84,7 @@ public class MappedModelImpl implements IMappedModel {
 	}
 
 	public void resetUniqueAlias() {
-		id = 1;
+		id = 0;
 	}
 	
 }

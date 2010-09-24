@@ -16,7 +16,7 @@ import tudresden.ocl20.logging.LoggingPlugin;
 public class Pivot2SqlPlugin extends Plugin {
 
 	/** The plug-in ID. */
-	public static final String ID = "tudresden.ocl20.pivot.codegen.declarativ"; //$NON-NLS-1$
+	public static final String ID = "tudresden.ocl20.pivot.tools.transformation.pivot2sql"; //$NON-NLS-1$
 
 	/** The shared instance. */
 	private static Pivot2SqlPlugin plugin;
@@ -90,4 +90,5 @@ public class Pivot2SqlPlugin extends Plugin {
 
 		super.stop(context);
 	}
+
 }

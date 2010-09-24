@@ -913,26 +913,28 @@ public class UML2AdapterFactory {
 
 		List<AssociationProperty> result = new LinkedList<AssociationProperty>();
 		
+		tudresden.ocl20.pivot.pivotmodel.Property adaptedProperty;
+		/* Create or get the property. */
+		if (association) {
+			adaptedProperty = this
+					.createAssociationProperty(anOwner);
+			result.add((AssociationProperty) adaptedProperty);
+		}
+
+		else {
+			adaptedProperty = this.createProperty(anOwner);
+		}
+		
 		for (org.eclipse.uml2.uml.Property aProperty : allProperties) {
 
 			/* Do not add the property to itself, but to all other properties. */
 			if (anOwner != aProperty) {
+
+
 				tudresden.ocl20.pivot.pivotmodel.Type ownerType;
-				tudresden.ocl20.pivot.pivotmodel.Property adaptedProperty;
-
+				
 				/* Create or get the owner's Type. */
-				ownerType = this.createType(anOwner.getType());
-
-				/* Create or get the property. */
-				if (association) {
-					adaptedProperty = this
-							.createAssociationProperty(aProperty);
-					result.add((AssociationProperty) adaptedProperty);
-				}
-
-				else {
-					adaptedProperty = this.createProperty(aProperty);
-				}
+				ownerType = this.createType(aProperty.getType());		
 
 				/*
 				 * Check if the property has already been added (could happen

@@ -67,7 +67,7 @@
               <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Ljg0EDd5Ed-JXKTQMEgtig"/>
             </ownedEnd>
           </packagedElement>
-          <packagedElement xmi:type="uml:Association" xmi:id="_B6LiUDd5Ed-JXKTQMEgtig" name="A_person_grade" memberEnd="_TG4e4Dd5Ed-JXKTQMEgtig _ZeJi8Dd5Ed-JXKTQMEgtig" navigableOwnedEnd="_TG4e4Dd5Ed-JXKTQMEgtig">
+          <packagedElement xmi:type="uml:Association" xmi:id="_B6LiUDd5Ed-JXKTQMEgtig" name="A_person_grade" memberEnd="_TG4e4Dd5Ed-JXKTQMEgtig _ZeJi8Dd5Ed-JXKTQMEgtig" navigableOwnedEnd="_ZeJi8Dd5Ed-JXKTQMEgtig">
             <ownedEnd xmi:id="_ZeJi8Dd5Ed-JXKTQMEgtig" name="grade" type="_cjU9YDXHEd-_J9pP9Zsbaw" association="_B6LiUDd5Ed-JXKTQMEgtig"/>
             <ownedEnd xmi:id="_TG4e4Dd5Ed-JXKTQMEgtig" name="person" type="_J0lVcMHiEd2UNuYhQ_ApoA" association="_B6LiUDd5Ed-JXKTQMEgtig"/>
           </packagedElement>
@@ -88,7 +88,7 @@
               <type xmi:type="uml:PrimitiveType" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Boolean"/>
             </ownedAttribute>
           </packagedElement>
-          <packagedElement xmi:type="uml:Association" xmi:id="_rHlx8DeREd-JXKTQMEgtig" name="A_person_currentPaper" memberEnd="_xRCccDeREd-JXKTQMEgtig _Ao4wMDeSEd-JXKTQMEgtig" navigableOwnedEnd="_Ao4wMDeSEd-JXKTQMEgtig">
+          <packagedElement xmi:type="uml:Association" xmi:id="_rHlx8DeREd-JXKTQMEgtig" name="A_person_currentPaper" memberEnd="_xRCccDeREd-JXKTQMEgtig _Ao4wMDeSEd-JXKTQMEgtig" navigableOwnedEnd="_xRCccDeREd-JXKTQMEgtig">
             <ownedEnd xmi:id="_xRCccDeREd-JXKTQMEgtig" name="currentPaper" type="_5_jWoDePEd-JXKTQMEgtig" association="_rHlx8DeREd-JXKTQMEgtig"/>
             <ownedEnd xmi:id="_Ao4wMDeSEd-JXKTQMEgtig" name="person" type="_J0lVcMHiEd2UNuYhQ_ApoA" association="_rHlx8DeREd-JXKTQMEgtig"/>
           </packagedElement>

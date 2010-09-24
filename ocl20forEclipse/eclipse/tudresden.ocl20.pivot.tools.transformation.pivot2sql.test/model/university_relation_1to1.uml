@@ -6,7 +6,7 @@
         <packagedElement xmi:type="uml:Package" xmi:id="_DmIPIMHiEd2UNuYhQ_ApoA" name="university_complex">
           <packagedElement xmi:type="uml:Class" xmi:id="_J0lVcMHiEd2UNuYhQ_ApoA" name="Person"/>
           <packagedElement xmi:type="uml:Class" xmi:id="_5_jWoDePEd-JXKTQMEgtig" name="Paper"/>
-          <packagedElement xmi:type="uml:Association" xmi:id="_rHlx8DeREd-JXKTQMEgtig" name="A_person_currentPaper" memberEnd="_xRCccDeREd-JXKTQMEgtig _Ao4wMDeSEd-JXKTQMEgtig" navigableOwnedEnd="_Ao4wMDeSEd-JXKTQMEgtig">
+          <packagedElement xmi:type="uml:Association" xmi:id="_rHlx8DeREd-JXKTQMEgtig" name="A_person_currentPaper" memberEnd="_xRCccDeREd-JXKTQMEgtig _Ao4wMDeSEd-JXKTQMEgtig" navigableOwnedEnd="_xRCccDeREd-JXKTQMEgtig">
             <ownedEnd xmi:id="_xRCccDeREd-JXKTQMEgtig" name="currentPaper" type="_5_jWoDePEd-JXKTQMEgtig" association="_rHlx8DeREd-JXKTQMEgtig"/>
             <ownedEnd xmi:id="_Ao4wMDeSEd-JXKTQMEgtig" name="person" type="_J0lVcMHiEd2UNuYhQ_ApoA" association="_rHlx8DeREd-JXKTQMEgtig"/>
           </packagedElement>
