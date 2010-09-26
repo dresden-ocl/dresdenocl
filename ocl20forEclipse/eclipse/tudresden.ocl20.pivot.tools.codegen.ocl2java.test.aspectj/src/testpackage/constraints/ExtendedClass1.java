@@ -86,6 +86,105 @@ public class ExtendedClass1 extends Object {
      *A method signature implemented by an aspect.
      *</p>
      */
+    public java.util.List<Boolean> testCollectNestedIteratorExp01() {
+        return null;
+    }
+
+    /**
+     *<p>
+     *A method signature implemented by an aspect.
+     *</p>
+     */
+    public Boolean testExistsIteratorExp01() {
+        return null;
+    }
+
+    /**
+     *<p>
+     *A method signature implemented by an aspect.
+     *</p>
+     */
+    public Boolean testExistsIteratorExp02() {
+        return null;
+    }
+
+    /**
+     *<p>
+     *A method signature implemented by an aspect.
+     *</p>
+     */
+    public Boolean testForAllIteratorExp01() {
+        return null;
+    }
+
+    /**
+     *<p>
+     *A method signature implemented by an aspect.
+     *</p>
+     */
+    public Boolean testForAllIteratorExp02() {
+        return null;
+    }
+
+    /**
+     *<p>
+     *A method signature implemented by an aspect.
+     *</p>
+     */
+    public Boolean testIsUniqueIteratorExp01() {
+        return null;
+    }
+
+    /**
+     *<p>
+     *A method signature implemented by an aspect.
+     *</p>
+     */
+    public Integer testIterateExp01() {
+        return null;
+    }
+
+    /**
+     *<p>
+     *A method signature implemented by an aspect.
+     *</p>
+     */
+    public Boolean testOneIteratorExp01() {
+        return null;
+    }
+
+    /**
+     *<p>
+     *A method signature implemented by an aspect.
+     *</p>
+     */
+    public java.util.Set<Integer> testRejectIteratorExp01() {
+        return null;
+    }
+
+    /**
+     *<p>
+     *A method signature implemented by an aspect.
+     *</p>
+     */
+    public java.util.Set<Integer> testSelectIteratorExp01() {
+        return null;
+    }
+
+    /**
+     *<p>
+     *A method signature implemented by an aspect.
+     *</p>
+     */
+    public java.util.List<Integer> testSortedByIteratorExp01() {
+        return null;
+    }
+
+    /**
+     *<p>
+     *A method signature implemented by an aspect.
+     *</p>
+     */
     public Boolean testBooleanLiteralExp01() {
         return null;
     }
@@ -168,6 +267,15 @@ public class ExtendedClass1 extends Object {
      *</p>
      */
     public Integer testInvalidLiteralExp01() {
+        return null;
+    }
+
+    /**
+     *<p>
+     *A method signature implemented by an aspect.
+     *</p>
+     */
+    public Boolean testInvalidLiteralExp02() {
         return null;
     }
 

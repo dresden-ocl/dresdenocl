@@ -12,19 +12,19 @@ public privileged aspect DefAspect102 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testRealGreaterThanEqual01(Float source, Float arg01)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testOrderedSetAt(java.util.List<Object> source, Integer arg01)}.</p>
      */
-    protected pointcut testRealGreaterThanEqual01Caller(testpackage.Class1 aClass, Float source, Float arg01):
-    	call(* testpackage.Class1.testRealGreaterThanEqual01(Float, Float))
+    protected pointcut testOrderedSetAtCaller(testpackage.Class1 aClass, java.util.List<Object> source, Integer arg01):
+    	call(* testpackage.Class1.testOrderedSetAt(java.util.List<Object>, Integer))
     	&& target(aClass) && args(source, arg01);
     
     /**
-     * <p>Defines the method testRealGreaterThanEqual01(Float source, Float arg01) defined by the constraint
+     * <p>Defines the method testOrderedSetAt(java.util.List<Object> source, Integer arg01) defined by the constraint
      * <code>context Class1
-     *       def: testRealGreaterThanEqual01(source: Real, arg01: Real): Boolean =
-    source >= arg01</code></p>
+     *       def: testOrderedSetAt(source: OrderedSet(OclAny), arg01: Integer): OclAny =
+    source ->at(arg01)</code></p>
      */
-    Boolean around(testpackage.Class1 aClass, Float source, Float arg01): testRealGreaterThanEqual01Caller(aClass, source, arg01) {
-        return (source >= arg01);
+    Object around(testpackage.Class1 aClass, java.util.List<Object> source, Integer arg01): testOrderedSetAtCaller(aClass, source, arg01) {
+        return tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclOrderedSets.at(source, arg01);
     }
 }

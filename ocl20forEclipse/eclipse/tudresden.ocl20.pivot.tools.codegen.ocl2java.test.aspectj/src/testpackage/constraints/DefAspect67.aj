@@ -12,19 +12,19 @@ public privileged aspect DefAspect67 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testIntegerMax01(Integer source, Integer arg01)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testCollectionIncludes(java.util.Collection<Object> source, Object arg01)}.</p>
      */
-    protected pointcut testIntegerMax01Caller(testpackage.Class1 aClass, Integer source, Integer arg01):
-    	call(* testpackage.Class1.testIntegerMax01(Integer, Integer))
+    protected pointcut testCollectionIncludesCaller(testpackage.Class1 aClass, java.util.Collection<Object> source, Object arg01):
+    	call(* testpackage.Class1.testCollectionIncludes(java.util.Collection<Object>, Object))
     	&& target(aClass) && args(source, arg01);
     
     /**
-     * <p>Defines the method testIntegerMax01(Integer source, Integer arg01) defined by the constraint
+     * <p>Defines the method testCollectionIncludes(java.util.Collection<Object> source, Object arg01) defined by the constraint
      * <code>context Class1
-     *       def: testIntegerMax01(source: Integer, arg01: Integer): Integer =
-    source.max(arg01)</code></p>
+     *       def: testCollectionIncludes(source: Collection(OclAny), arg01: OclAny): Boolean =
+    source ->includes(arg01)</code></p>
      */
-    Integer around(testpackage.Class1 aClass, Integer source, Integer arg01): testIntegerMax01Caller(aClass, source, arg01) {
-        return java.lang.Math.max(source, arg01);
+    Boolean around(testpackage.Class1 aClass, java.util.Collection<Object> source, Object arg01): testCollectionIncludesCaller(aClass, source, arg01) {
+        return tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclCollections.includes(source, arg01);
     }
 }

@@ -12,19 +12,20 @@ public privileged aspect DefAspect40 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testBooleanAnd01(Boolean source, Boolean arg01)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testBagAsOrderedSet(java.util.List<Object> source)}.</p>
      */
-    protected pointcut testBooleanAnd01Caller(testpackage.Class1 aClass, Boolean source, Boolean arg01):
-    	call(* testpackage.Class1.testBooleanAnd01(Boolean, Boolean))
-    	&& target(aClass) && args(source, arg01);
+    protected pointcut testBagAsOrderedSetCaller(testpackage.Class1 aClass, java.util.List<Object> source):
+    	call(* testpackage.Class1.testBagAsOrderedSet(java.util.List<Object>))
+    	&& target(aClass) && args(source);
     
     /**
-     * <p>Defines the method testBooleanAnd01(Boolean source, Boolean arg01) defined by the constraint
+     * <p>Defines the method testBagAsOrderedSet(java.util.List<Object> source) defined by the constraint
      * <code>context Class1
-     *       def: testBooleanAnd01(source: Boolean, arg01: Boolean): Boolean =
-    source and arg01</code></p>
+     *       def: testBagAsOrderedSet(source: Bag(OclAny)): 
+      OrderedSet(OclAny) =
+    source ->asOrderedSet()</code></p>
      */
-    Boolean around(testpackage.Class1 aClass, Boolean source, Boolean arg01): testBooleanAnd01Caller(aClass, source, arg01) {
-        return (source && arg01);
+    java.util.List<Object> around(testpackage.Class1 aClass, java.util.List<Object> source): testBagAsOrderedSetCaller(aClass, source) {
+        return tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclBags.asOrderedSet(source);
     }
 }

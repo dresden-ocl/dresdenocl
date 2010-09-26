@@ -12,19 +12,19 @@ public privileged aspect DefAspect73 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testIntegerPlus01(Integer source, Integer arg01)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testCollectionNotEquals(java.util.Collection<Object> source, java.util.Collection<Object> arg01)}.</p>
      */
-    protected pointcut testIntegerPlus01Caller(testpackage.Class1 aClass, Integer source, Integer arg01):
-    	call(* testpackage.Class1.testIntegerPlus01(Integer, Integer))
+    protected pointcut testCollectionNotEqualsCaller(testpackage.Class1 aClass, java.util.Collection<Object> source, java.util.Collection<Object> arg01):
+    	call(* testpackage.Class1.testCollectionNotEquals(java.util.Collection<Object>, java.util.Collection<Object>))
     	&& target(aClass) && args(source, arg01);
     
     /**
-     * <p>Defines the method testIntegerPlus01(Integer source, Integer arg01) defined by the constraint
+     * <p>Defines the method testCollectionNotEquals(java.util.Collection<Object> source, java.util.Collection<Object> arg01) defined by the constraint
      * <code>context Class1
-     *       def: testIntegerPlus01(source: Integer, arg01: Integer): Integer =
-    source + arg01</code></p>
+     *       def: testCollectionNotEquals(source: Collection(OclAny), arg01: Collection(OclAny)): Boolean =
+    source <> arg01</code></p>
      */
-    Integer around(testpackage.Class1 aClass, Integer source, Integer arg01): testIntegerPlus01Caller(aClass, source, arg01) {
-        return (source + arg01);
+    Boolean around(testpackage.Class1 aClass, java.util.Collection<Object> source, java.util.Collection<Object> arg01): testCollectionNotEqualsCaller(aClass, source, arg01) {
+        return tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclCollections.notEquals(source, arg01);
     }
 }

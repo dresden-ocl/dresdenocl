@@ -12,20 +12,19 @@ public privileged aspect DefAspect116 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testSequenceAsSequence(java.util.List<Object> source)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testRealLessThanEqual01(Float source, Float arg01)}.</p>
      */
-    protected pointcut testSequenceAsSequenceCaller(testpackage.Class1 aClass, java.util.List<Object> source):
-    	call(* testpackage.Class1.testSequenceAsSequence(java.util.List<Object>))
-    	&& target(aClass) && args(source);
+    protected pointcut testRealLessThanEqual01Caller(testpackage.Class1 aClass, Float source, Float arg01):
+    	call(* testpackage.Class1.testRealLessThanEqual01(Float, Float))
+    	&& target(aClass) && args(source, arg01);
     
     /**
-     * <p>Defines the method testSequenceAsSequence(java.util.List<Object> source) defined by the constraint
+     * <p>Defines the method testRealLessThanEqual01(Float source, Float arg01) defined by the constraint
      * <code>context Class1
-     *       def: testSequenceAsSequence(source: Sequence(OclAny)): 
-      Sequence(OclAny) =
-    source ->asSequence()</code></p>
+     *       def: testRealLessThanEqual01(source: Real, arg01: Real): Boolean =
+    source <= arg01</code></p>
      */
-    java.util.List<Object> around(testpackage.Class1 aClass, java.util.List<Object> source): testSequenceAsSequenceCaller(aClass, source) {
-        return tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclSequences.asSequence(source);
+    Boolean around(testpackage.Class1 aClass, Float source, Float arg01): testRealLessThanEqual01Caller(aClass, source, arg01) {
+        return (source <= arg01);
     }
 }

@@ -780,9 +780,9 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 		ITransformedCode result;
 		ITemplate template;
 
+		result = new TransformedCodeImpl();
 		template = this.myTemplateGroup.getTemplate("invalidLiteralExp");
 
-		result = new TransformedCodeImpl();
 		result.setResultExp(template.toString());
 
 		if (LOGGER.isDebugEnabled()) {
@@ -2460,6 +2460,35 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 	}
 
 	/**
+	 * @param invalidType
+	 *          The {@link InvalidType} for which code shall be returned.
+	 * @return The code for a given {@link InvalidType}.
+	 */
+	private ITransformedType transformInvalidType(InvalidType invalidType) {
+	
+		/* Probably log the entry into this method. */
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("transformInvalidType(InvalidType) - start");
+		}
+		// no else.
+	
+		ITransformedType result;
+		ITemplate template;
+	
+		template = this.myTemplateGroup.getTemplate("invalidType");
+		result = new TransformedTypeImpl(template.toString());
+	
+		/* Probably log the exit from this method. */
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("transformInvalidType(InvalidType)" + "- end - return value="
+					+ result);
+		}
+		// no else.
+	
+		return result;
+	}
+
+	/**
 	 * @param aPrimitiveType
 	 *          The {@link PrimitiveType} for which code shall be returned.
 	 * @return The code for a given {@link PrimitiveType}.
@@ -2593,8 +2622,8 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 		}
 
 		else if (aType instanceof InvalidType) {
-			/* Unreachable code. Invalid expressions are caught by the parser. */
-			result = null;
+			InvalidType invalidType = (InvalidType) aType;
+			result = this.transformInvalidType(invalidType);
 		}
 
 		else if (aType instanceof PrimitiveType) {

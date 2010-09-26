@@ -12,25 +12,20 @@ public privileged aspect DefAspect22 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testTupleLiteralExp01()}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testBooleanLiteralExp02()}.</p>
      */
-    protected pointcut testTupleLiteralExp01Caller(testpackage.Class1 aClass):
-    	call(* testpackage.Class1.testTupleLiteralExp01())
+    protected pointcut testBooleanLiteralExp02Caller(testpackage.Class1 aClass):
+    	call(* testpackage.Class1.testBooleanLiteralExp02())
     	&& target(aClass);
     
     /**
-     * <p>Defines the method testTupleLiteralExp01() defined by the constraint
+     * <p>Defines the method testBooleanLiteralExp02() defined by the constraint
      * <code>context Class1
-     *       def: testTupleLiteralExp01() =
-    Tuple { a : Integer = 42, b : String = 'some'}</code></p>
+     *       def: testBooleanLiteralExp02(): 
+      Boolean =
+    false</code></p>
      */
-    java.util.HashMap<String, Object> around(testpackage.Class1 aClass): testTupleLiteralExp01Caller(aClass) {
-        java.util.HashMap<String, Object> tuple1;
-        tuple1 = new java.util.HashMap<String, Object>();
-        
-        tuple1.put("a", new Integer(42));
-        tuple1.put("b", "some");
-    
-        return tuple1;
+    Boolean around(testpackage.Class1 aClass): testBooleanLiteralExp02Caller(aClass) {
+        return new Boolean(false);
     }
 }

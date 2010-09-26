@@ -12,19 +12,28 @@ public privileged aspect DefAspect24 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testUndefinedLiteralExp01()}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testCollectionLiteralExp02()}.</p>
      */
-    protected pointcut testUndefinedLiteralExp01Caller(testpackage.Class1 aClass):
-    	call(* testpackage.Class1.testUndefinedLiteralExp01())
+    protected pointcut testCollectionLiteralExp02Caller(testpackage.Class1 aClass):
+    	call(* testpackage.Class1.testCollectionLiteralExp02())
     	&& target(aClass);
     
     /**
-     * <p>Defines the method testUndefinedLiteralExp01() defined by the constraint
+     * <p>Defines the method testCollectionLiteralExp02() defined by the constraint
      * <code>context Class1
-     *       def: testUndefinedLiteralExp01(): Integer =
-    null</code></p>
+     *       def: testCollectionLiteralExp02(): 
+      Bag(Integer) =
+    Bag { 0 .. 2 }</code></p>
      */
-    Integer around(testpackage.Class1 aClass): testUndefinedLiteralExp01Caller(aClass) {
-        return null;
+    java.util.List<Integer> around(testpackage.Class1 aClass): testCollectionLiteralExp02Caller(aClass) {
+        java.util.ArrayList<Integer> collection1;
+        collection1 = new java.util.ArrayList<Integer>();
+        
+        /* TODO: Auto-generated initialization does only work for numeric values. */
+        for (Integer index1 = new Integer(0); index1 <= new Integer(2); index1++) {
+            collection1.add(index1);
+        }
+    
+        return collection1;
     }
 }

@@ -12,19 +12,19 @@ public privileged aspect DefAspect157 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testStringToUpperCase(String source)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testSetUnion01(java.util.Set<Object> source, java.util.Set<Object> arg01)}.</p>
      */
-    protected pointcut testStringToUpperCaseCaller(testpackage.Class1 aClass, String source):
-    	call(* testpackage.Class1.testStringToUpperCase(String))
-    	&& target(aClass) && args(source);
+    protected pointcut testSetUnion01Caller(testpackage.Class1 aClass, java.util.Set<Object> source, java.util.Set<Object> arg01):
+    	call(* testpackage.Class1.testSetUnion01(java.util.Set<Object>, java.util.Set<Object>))
+    	&& target(aClass) && args(source, arg01);
     
     /**
-     * <p>Defines the method testStringToUpperCase(String source) defined by the constraint
+     * <p>Defines the method testSetUnion01(java.util.Set<Object> source, java.util.Set<Object> arg01) defined by the constraint
      * <code>context Class1
-     *       def: testStringToUpperCase(source: String): String =
-    source.toUpperCase()</code></p>
+     *       def: testSetUnion01(source: Set(OclAny), arg01: Set(OclAny)): Set(OclAny) =
+    source ->union(arg01)</code></p>
      */
-    String around(testpackage.Class1 aClass, String source): testStringToUpperCaseCaller(aClass, source) {
-        return source.toUpperCase();
+    java.util.Set<Object> around(testpackage.Class1 aClass, java.util.Set<Object> source, java.util.Set<Object> arg01): testSetUnion01Caller(aClass, source, arg01) {
+        return tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclSets.unionWithSet(source, arg01);
     }
 }

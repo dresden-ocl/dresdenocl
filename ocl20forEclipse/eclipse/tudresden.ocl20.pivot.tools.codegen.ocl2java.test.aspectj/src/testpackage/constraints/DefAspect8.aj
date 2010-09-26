@@ -22,7 +22,7 @@ public privileged aspect DefAspect8 {
      * <p>Defines the method testAnyIteratorExp01() defined by the constraint
      * <code>context Class1
      *       def: testAnyIteratorExp01() : Integer =
-    Set{ 1, 2, 3}->any(i: Integer | i = 2)</code></p>
+    Set{1, 2, 3}->any(i: Integer | i = 2)</code></p>
      */
     Integer around(testpackage.Class1 aClass): testAnyIteratorExp01Caller(aClass) {
         java.util.HashSet<Integer> collection1;

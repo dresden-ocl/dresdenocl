@@ -12,19 +12,20 @@ public privileged aspect DefAspect100 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testRealFloor01(Float source)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testOrderedSetAsSequence(java.util.List<Object> source)}.</p>
      */
-    protected pointcut testRealFloor01Caller(testpackage.Class1 aClass, Float source):
-    	call(* testpackage.Class1.testRealFloor01(Float))
+    protected pointcut testOrderedSetAsSequenceCaller(testpackage.Class1 aClass, java.util.List<Object> source):
+    	call(* testpackage.Class1.testOrderedSetAsSequence(java.util.List<Object>))
     	&& target(aClass) && args(source);
     
     /**
-     * <p>Defines the method testRealFloor01(Float source) defined by the constraint
+     * <p>Defines the method testOrderedSetAsSequence(java.util.List<Object> source) defined by the constraint
      * <code>context Class1
-     *       def: testRealFloor01(source: Real): Integer =
-    source.floor()</code></p>
+     *       def: testOrderedSetAsSequence(source: OrderedSet(OclAny)): 
+      Sequence(OclAny) =
+    source ->asSequence()</code></p>
      */
-    Integer around(testpackage.Class1 aClass, Float source): testRealFloor01Caller(aClass, source) {
-        return (new Integer(new Double(java.lang.Math.floor(source)).intValue()));
+    java.util.List<Object> around(testpackage.Class1 aClass, java.util.List<Object> source): testOrderedSetAsSequenceCaller(aClass, source) {
+        return tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclOrderedSets.asSequence(source);
     }
 }

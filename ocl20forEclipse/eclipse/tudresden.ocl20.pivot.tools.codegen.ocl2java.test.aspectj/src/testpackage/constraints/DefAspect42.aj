@@ -12,19 +12,20 @@ public privileged aspect DefAspect42 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testBooleanNot01(Boolean source)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testBagAsSet(java.util.List<Object> source)}.</p>
      */
-    protected pointcut testBooleanNot01Caller(testpackage.Class1 aClass, Boolean source):
-    	call(* testpackage.Class1.testBooleanNot01(Boolean))
+    protected pointcut testBagAsSetCaller(testpackage.Class1 aClass, java.util.List<Object> source):
+    	call(* testpackage.Class1.testBagAsSet(java.util.List<Object>))
     	&& target(aClass) && args(source);
     
     /**
-     * <p>Defines the method testBooleanNot01(Boolean source) defined by the constraint
+     * <p>Defines the method testBagAsSet(java.util.List<Object> source) defined by the constraint
      * <code>context Class1
-     *       def: testBooleanNot01(source: Boolean): Boolean =
-    not source</code></p>
+     *       def: testBagAsSet(source: Bag(OclAny)): 
+      Set(OclAny) =
+    source ->asSet()</code></p>
      */
-    Boolean around(testpackage.Class1 aClass, Boolean source): testBooleanNot01Caller(aClass, source) {
-        return !source;
+    java.util.Set<Object> around(testpackage.Class1 aClass, java.util.List<Object> source): testBagAsSetCaller(aClass, source) {
+        return tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclBags.asSet(source);
     }
 }

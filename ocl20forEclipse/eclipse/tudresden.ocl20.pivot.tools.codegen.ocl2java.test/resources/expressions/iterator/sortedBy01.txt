@@ -27,6 +27,6 @@ comparator1 = new java.util.Comparator<Integer>() {
     }
 };
 
-result1 = java.util.Collections.sort(result1, comparator1);
+java.util.Collections.sort(result1, comparator1);
 
 result1

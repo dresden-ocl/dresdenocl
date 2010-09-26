@@ -12,20 +12,19 @@ public privileged aspect DefAspect28 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testBagAsOrderedSet(java.util.List<Object> source)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testEnumerationLiteralExp01()}.</p>
      */
-    protected pointcut testBagAsOrderedSetCaller(testpackage.Class1 aClass, java.util.List<Object> source):
-    	call(* testpackage.Class1.testBagAsOrderedSet(java.util.List<Object>))
-    	&& target(aClass) && args(source);
+    protected pointcut testEnumerationLiteralExp01Caller(testpackage.Class1 aClass):
+    	call(* testpackage.Class1.testEnumerationLiteralExp01())
+    	&& target(aClass);
     
     /**
-     * <p>Defines the method testBagAsOrderedSet(java.util.List<Object> source) defined by the constraint
+     * <p>Defines the method testEnumerationLiteralExp01() defined by the constraint
      * <code>context Class1
-     *       def: testBagAsOrderedSet(source: Bag(OclAny)): 
-      OrderedSet(OclAny) =
-    source ->asOrderedSet()</code></p>
+     *       def: testEnumerationLiteralExp01(): Enumeration1 =
+    Enumeration1::literal1</code></p>
      */
-    java.util.List<Object> around(testpackage.Class1 aClass, java.util.List<Object> source): testBagAsOrderedSetCaller(aClass, source) {
-        return tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclBags.asOrderedSet(source);
+    Enum around(testpackage.Class1 aClass): testEnumerationLiteralExp01Caller(aClass) {
+        return testpackage.Enumeration1.literal1;
     }
 }

@@ -12,19 +12,19 @@ public privileged aspect DefAspect57 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testCollectionIsEmpty(java.util.Collection<Object> source)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testBooleanXor01(Boolean source, Boolean arg01)}.</p>
      */
-    protected pointcut testCollectionIsEmptyCaller(testpackage.Class1 aClass, java.util.Collection<Object> source):
-    	call(* testpackage.Class1.testCollectionIsEmpty(java.util.Collection<Object>))
-    	&& target(aClass) && args(source);
+    protected pointcut testBooleanXor01Caller(testpackage.Class1 aClass, Boolean source, Boolean arg01):
+    	call(* testpackage.Class1.testBooleanXor01(Boolean, Boolean))
+    	&& target(aClass) && args(source, arg01);
     
     /**
-     * <p>Defines the method testCollectionIsEmpty(java.util.Collection<Object> source) defined by the constraint
+     * <p>Defines the method testBooleanXor01(Boolean source, Boolean arg01) defined by the constraint
      * <code>context Class1
-     *       def: testCollectionIsEmpty(source: Collection(OclAny)): Boolean =
-    source ->isEmpty()</code></p>
+     *       def: testBooleanXor01(source: Boolean, arg01: Boolean): Boolean =
+    source xor arg01</code></p>
      */
-    Boolean around(testpackage.Class1 aClass, java.util.Collection<Object> source): testCollectionIsEmptyCaller(aClass, source) {
-        return tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclCollections.isEmpty(source);
+    Boolean around(testpackage.Class1 aClass, Boolean source, Boolean arg01): testBooleanXor01Caller(aClass, source, arg01) {
+        return (source ^ arg01);
     }
 }

@@ -1,7 +1,7 @@
 java.util.HashMap<String, Object> tuple1;
 tuple1 = new java.util.HashMap<String, Object>();
 
-tuple1.put(age, new Integer(10));
-tuple1.put(name, "John");
+tuple1.put("age", new Integer(10));
+tuple1.put("name", "John");
 
 tuple1.get("name").equals("John")

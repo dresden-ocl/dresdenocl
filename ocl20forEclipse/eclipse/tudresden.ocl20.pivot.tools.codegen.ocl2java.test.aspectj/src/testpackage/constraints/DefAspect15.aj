@@ -12,27 +12,41 @@ public privileged aspect DefAspect15 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testCollectionLiteralExp04()}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testIsUniqueIteratorExp01()}.</p>
      */
-    protected pointcut testCollectionLiteralExp04Caller(testpackage.Class1 aClass):
-    	call(* testpackage.Class1.testCollectionLiteralExp04())
+    protected pointcut testIsUniqueIteratorExp01Caller(testpackage.Class1 aClass):
+    	call(* testpackage.Class1.testIsUniqueIteratorExp01())
     	&& target(aClass);
     
     /**
-     * <p>Defines the method testCollectionLiteralExp04() defined by the constraint
+     * <p>Defines the method testIsUniqueIteratorExp01() defined by the constraint
      * <code>context Class1
-     *       def: testCollectionLiteralExp04(): 
-      Sequence(Integer) =
-    Sequence { 0, 1, 2 }</code></p>
+     *       def: testIsUniqueIteratorExp01() : Boolean =
+    Set{1, 2, 3}->isUnique(i: Integer | i)</code></p>
      */
-    java.util.List<Integer> around(testpackage.Class1 aClass): testCollectionLiteralExp04Caller(aClass) {
-        java.util.ArrayList<Integer> collection1;
-        collection1 = new java.util.ArrayList<Integer>();
+    Boolean around(testpackage.Class1 aClass): testIsUniqueIteratorExp01Caller(aClass) {
+        java.util.HashSet<Integer> collection1;
+        collection1 = new java.util.HashSet<Integer>();
         
-        collection1.add(new Integer(0));
         collection1.add(new Integer(1));
         collection1.add(new Integer(2));
+        collection1.add(new Integer(3));
+        java.util.Set<Integer> collection2;
+        Boolean result1;
+        
+        collection2 = new java.util.HashSet<Integer>();
+        result1 = true;
+        
+        /* Iterator IsUnique: Iterate and check, if all elements are unique. */
+        for (Integer i : collection1) {
+            if (collection2.contains(i)) {
+                result1 = false;
+                break;
+            } else {
+                collection2.add(i);
+            }
+        }
     
-        return collection1;
+        return result1;
     }
 }

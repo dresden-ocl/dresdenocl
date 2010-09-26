@@ -12,19 +12,20 @@ public privileged aspect DefAspect128 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testSequencePrepend(java.util.List<Object> source, Object arg01)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testSequenceAsSequence(java.util.List<Object> source)}.</p>
      */
-    protected pointcut testSequencePrependCaller(testpackage.Class1 aClass, java.util.List<Object> source, Object arg01):
-    	call(* testpackage.Class1.testSequencePrepend(java.util.List<Object>, Object))
-    	&& target(aClass) && args(source, arg01);
+    protected pointcut testSequenceAsSequenceCaller(testpackage.Class1 aClass, java.util.List<Object> source):
+    	call(* testpackage.Class1.testSequenceAsSequence(java.util.List<Object>))
+    	&& target(aClass) && args(source);
     
     /**
-     * <p>Defines the method testSequencePrepend(java.util.List<Object> source, Object arg01) defined by the constraint
+     * <p>Defines the method testSequenceAsSequence(java.util.List<Object> source) defined by the constraint
      * <code>context Class1
-     *       def: testSequencePrepend(source: Sequence(OclAny), arg01: OclAny): Sequence(OclAny) =
-    source ->prepend(arg01)</code></p>
+     *       def: testSequenceAsSequence(source: Sequence(OclAny)): 
+      Sequence(OclAny) =
+    source ->asSequence()</code></p>
      */
-    java.util.List<Object> around(testpackage.Class1 aClass, java.util.List<Object> source, Object arg01): testSequencePrependCaller(aClass, source, arg01) {
-        return tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclSequences.prepend(source, arg01);
+    java.util.List<Object> around(testpackage.Class1 aClass, java.util.List<Object> source): testSequenceAsSequenceCaller(aClass, source) {
+        return tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclSequences.asSequence(source);
     }
 }

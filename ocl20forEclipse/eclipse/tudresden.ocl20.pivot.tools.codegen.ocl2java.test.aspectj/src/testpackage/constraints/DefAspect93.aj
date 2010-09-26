@@ -12,19 +12,19 @@ public privileged aspect DefAspect93 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testOrderedSetInsertAt(java.util.List<Object> source, Integer arg01, Object arg02)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testOclIsKindOf01(testpackage.Class1 source, Class<?> arg01)}.</p>
      */
-    protected pointcut testOrderedSetInsertAtCaller(testpackage.Class1 aClass, java.util.List<Object> source, Integer arg01, Object arg02):
-    	call(* testpackage.Class1.testOrderedSetInsertAt(java.util.List<Object>, Integer, Object))
-    	&& target(aClass) && args(source, arg01, arg02);
+    protected pointcut testOclIsKindOf01Caller(testpackage.Class1 aClass, testpackage.Class1 source, Class<?> arg01):
+    	call(* testpackage.Class1.testOclIsKindOf01(testpackage.Class1, Class<?>))
+    	&& target(aClass) && args(source, arg01);
     
     /**
-     * <p>Defines the method testOrderedSetInsertAt(java.util.List<Object> source, Integer arg01, Object arg02) defined by the constraint
+     * <p>Defines the method testOclIsKindOf01(testpackage.Class1 source, Class<?> arg01) defined by the constraint
      * <code>context Class1
-     *       def: testOrderedSetInsertAt(source: OrderedSet(OclAny), arg01: Integer, arg02: OclAny): OrderedSet(OclAny) =
-    source ->insertAt(arg01, arg02)</code></p>
+     *       def: testOclIsKindOf01(source: Class1, arg01: OclType): Boolean =
+    source.oclIsKindOf(arg01)</code></p>
      */
-    java.util.List<Object> around(testpackage.Class1 aClass, java.util.List<Object> source, Integer arg01, Object arg02): testOrderedSetInsertAtCaller(aClass, source, arg01, arg02) {
-        return tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclOrderedSets.insertAt(source, arg01, arg02);
+    Boolean around(testpackage.Class1 aClass, testpackage.Class1 source, Class<?> arg01): testOclIsKindOf01Caller(aClass, source, arg01) {
+        return (arg01.isAssignableFrom(source.getClass()));
     }
 }

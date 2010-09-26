@@ -12,19 +12,27 @@ public privileged aspect DefAspect23 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testTypeLiteralExp01()}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testCollectionLiteralExp01()}.</p>
      */
-    protected pointcut testTypeLiteralExp01Caller(testpackage.Class1 aClass):
-    	call(* testpackage.Class1.testTypeLiteralExp01())
+    protected pointcut testCollectionLiteralExp01Caller(testpackage.Class1 aClass):
+    	call(* testpackage.Class1.testCollectionLiteralExp01())
     	&& target(aClass);
     
     /**
-     * <p>Defines the method testTypeLiteralExp01() defined by the constraint
+     * <p>Defines the method testCollectionLiteralExp01() defined by the constraint
      * <code>context Class1
-     *       def: testTypeLiteralExp01(): OclType =
-    Class1</code></p>
+     *       def: testCollectionLiteralExp01(): 
+      Bag(Integer) =
+    Bag { 0, 1, 2 }</code></p>
      */
-    Class<?> around(testpackage.Class1 aClass): testTypeLiteralExp01Caller(aClass) {
-        return testpackage.Class1;
+    java.util.List<Integer> around(testpackage.Class1 aClass): testCollectionLiteralExp01Caller(aClass) {
+        java.util.ArrayList<Integer> collection1;
+        collection1 = new java.util.ArrayList<Integer>();
+        
+        collection1.add(new Integer(0));
+        collection1.add(new Integer(1));
+        collection1.add(new Integer(2));
+    
+        return collection1;
     }
 }

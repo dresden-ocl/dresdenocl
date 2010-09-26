@@ -12,19 +12,25 @@ public privileged aspect DefAspect34 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testBagFlatten(java.util.List<Object> source)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testTupleLiteralExp01()}.</p>
      */
-    protected pointcut testBagFlattenCaller(testpackage.Class1 aClass, java.util.List<Object> source):
-    	call(* testpackage.Class1.testBagFlatten(java.util.List<Object>))
-    	&& target(aClass) && args(source);
+    protected pointcut testTupleLiteralExp01Caller(testpackage.Class1 aClass):
+    	call(* testpackage.Class1.testTupleLiteralExp01())
+    	&& target(aClass);
     
     /**
-     * <p>Defines the method testBagFlatten(java.util.List<Object> source) defined by the constraint
+     * <p>Defines the method testTupleLiteralExp01() defined by the constraint
      * <code>context Class1
-     *       def: testBagFlatten(source: Bag(OclAny)): Bag(OclAny) =
-    source ->flatten()</code></p>
+     *       def: testTupleLiteralExp01() =
+    Tuple { a : Integer = 42, b : String = 'some'}</code></p>
      */
-    java.util.List<Object> around(testpackage.Class1 aClass, java.util.List<Object> source): testBagFlattenCaller(aClass, source) {
-        return (java.util.List<Object>) tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclBags.flatten(source);
+    java.util.HashMap<String, Object> around(testpackage.Class1 aClass): testTupleLiteralExp01Caller(aClass) {
+        java.util.HashMap<String, Object> tuple1;
+        tuple1 = new java.util.HashMap<String, Object>();
+        
+        tuple1.put("a", new Integer(42));
+        tuple1.put("b", "some");
+    
+        return tuple1;
     }
 }

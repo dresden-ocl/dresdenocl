@@ -12,28 +12,37 @@ public privileged aspect DefAspect13 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testCollectionLiteralExp02()}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testForAllIteratorExp01()}.</p>
      */
-    protected pointcut testCollectionLiteralExp02Caller(testpackage.Class1 aClass):
-    	call(* testpackage.Class1.testCollectionLiteralExp02())
+    protected pointcut testForAllIteratorExp01Caller(testpackage.Class1 aClass):
+    	call(* testpackage.Class1.testForAllIteratorExp01())
     	&& target(aClass);
     
     /**
-     * <p>Defines the method testCollectionLiteralExp02() defined by the constraint
+     * <p>Defines the method testForAllIteratorExp01() defined by the constraint
      * <code>context Class1
-     *       def: testCollectionLiteralExp02(): 
-      Bag(Integer) =
-    Bag { 0 ..2 }</code></p>
+     *       def: testForAllIteratorExp01() : Boolean =
+    Set{1, 2, 3}->forAll(i: Integer | i > 0)</code></p>
      */
-    java.util.List<Integer> around(testpackage.Class1 aClass): testCollectionLiteralExp02Caller(aClass) {
-        java.util.ArrayList<Integer> collection1;
-        collection1 = new java.util.ArrayList<Integer>();
+    Boolean around(testpackage.Class1 aClass): testForAllIteratorExp01Caller(aClass) {
+        java.util.HashSet<Integer> collection1;
+        collection1 = new java.util.HashSet<Integer>();
         
-        /* TODO: Auto-generated initialization does only work for numeric values. */
-        for (Integer index1 = new Integer(0); index1 <= new Integer(2); index1++) {
-            collection1.add(index1);
+        collection1.add(new Integer(1));
+        collection1.add(new Integer(2));
+        collection1.add(new Integer(3));
+        Boolean result1;
+        result1 = true;
+        
+        /* Iterator ForAll: Iterate and check, if all elements fulfill the condition. */
+        for (Integer i : collection1) {
+            if (!(i > new Integer(0))) {
+                result1 = false;
+                break;
+            }
+            // no else
         }
     
-        return collection1;
+        return result1;
     }
 }

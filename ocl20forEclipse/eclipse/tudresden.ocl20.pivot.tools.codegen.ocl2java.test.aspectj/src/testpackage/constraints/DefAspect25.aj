@@ -12,31 +12,27 @@ public privileged aspect DefAspect25 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testIfExp01()}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testCollectionLiteralExp03()}.</p>
      */
-    protected pointcut testIfExp01Caller(testpackage.Class1 aClass):
-    	call(* testpackage.Class1.testIfExp01())
+    protected pointcut testCollectionLiteralExp03Caller(testpackage.Class1 aClass):
+    	call(* testpackage.Class1.testCollectionLiteralExp03())
     	&& target(aClass);
     
     /**
-     * <p>Defines the method testIfExp01() defined by the constraint
+     * <p>Defines the method testCollectionLiteralExp03() defined by the constraint
      * <code>context Class1
-     *       def: testIfExp01(): Integer =
-    if (true)
-      then
-    	1
-      else -1
-    endif</code></p>
+     *       def: testCollectionLiteralExp03(): 
+      OrderedSet(Integer) =
+    OrderedSet { 0, 1, 2 }</code></p>
      */
-    Integer around(testpackage.Class1 aClass): testIfExp01Caller(aClass) {
-        Integer ifExpResult1;
+    java.util.List<Integer> around(testpackage.Class1 aClass): testCollectionLiteralExp03Caller(aClass) {
+        java.util.ArrayList<Integer> collection1;
+        collection1 = new java.util.ArrayList<Integer>();
         
-        if (new Boolean(true)) {
-            ifExpResult1 = new Integer(1);
-        } else {
-            ifExpResult1 = -(new Integer(1));
-        }
+        collection1.add(new Integer(0));
+        collection1.add(new Integer(1));
+        collection1.add(new Integer(2));
     
-        return ifExpResult1;
+        return collection1;
     }
 }

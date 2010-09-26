@@ -12,20 +12,19 @@ public privileged aspect DefAspect30 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testBagAsSet(java.util.List<Object> source)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testInvalidLiteralExp01()}.</p>
      */
-    protected pointcut testBagAsSetCaller(testpackage.Class1 aClass, java.util.List<Object> source):
-    	call(* testpackage.Class1.testBagAsSet(java.util.List<Object>))
-    	&& target(aClass) && args(source);
+    protected pointcut testInvalidLiteralExp01Caller(testpackage.Class1 aClass):
+    	call(* testpackage.Class1.testInvalidLiteralExp01())
+    	&& target(aClass);
     
     /**
-     * <p>Defines the method testBagAsSet(java.util.List<Object> source) defined by the constraint
+     * <p>Defines the method testInvalidLiteralExp01() defined by the constraint
      * <code>context Class1
-     *       def: testBagAsSet(source: Bag(OclAny)): 
-      Set(OclAny) =
-    source ->asSet()</code></p>
+     *       def: testInvalidLiteralExp01(): Integer =
+    invalid</code></p>
      */
-    java.util.Set<Object> around(testpackage.Class1 aClass, java.util.List<Object> source): testBagAsSetCaller(aClass, source) {
-        return tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclBags.asSet(source);
+    Integer around(testpackage.Class1 aClass): testInvalidLiteralExp01Caller(aClass) {
+        return (Integer) tudresden.ocl20.pivot.tools.codegen.ocl2java.types.OclInvalidException.getInvalidLiteral();
     }
 }

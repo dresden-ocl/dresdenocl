@@ -12,19 +12,20 @@ public privileged aspect DefAspect61 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testCollectionNotEquals(java.util.Collection<Object> source, java.util.Collection<Object> arg01)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testCollectionAsSet(java.util.Collection<Object> source)}.</p>
      */
-    protected pointcut testCollectionNotEqualsCaller(testpackage.Class1 aClass, java.util.Collection<Object> source, java.util.Collection<Object> arg01):
-    	call(* testpackage.Class1.testCollectionNotEquals(java.util.Collection<Object>, java.util.Collection<Object>))
-    	&& target(aClass) && args(source, arg01);
+    protected pointcut testCollectionAsSetCaller(testpackage.Class1 aClass, java.util.Collection<Object> source):
+    	call(* testpackage.Class1.testCollectionAsSet(java.util.Collection<Object>))
+    	&& target(aClass) && args(source);
     
     /**
-     * <p>Defines the method testCollectionNotEquals(java.util.Collection<Object> source, java.util.Collection<Object> arg01) defined by the constraint
+     * <p>Defines the method testCollectionAsSet(java.util.Collection<Object> source) defined by the constraint
      * <code>context Class1
-     *       def: testCollectionNotEquals(source: Collection(OclAny), arg01: Collection(OclAny)): Boolean =
-    source <> arg01</code></p>
+     *       def: testCollectionAsSet(source: Collection(OclAny)): 
+      Set(OclAny) =
+    source ->asSet()</code></p>
      */
-    Boolean around(testpackage.Class1 aClass, java.util.Collection<Object> source, java.util.Collection<Object> arg01): testCollectionNotEqualsCaller(aClass, source, arg01) {
-        return tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclCollections.notEquals(source, arg01);
+    java.util.Set<Object> around(testpackage.Class1 aClass, java.util.Collection<Object> source): testCollectionAsSetCaller(aClass, source) {
+        return tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclCollections.asSet(source);
     }
 }

@@ -12,19 +12,19 @@ public privileged aspect DefAspect66 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testIntegerDivide01(Integer source, Integer arg01)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testCollectionFlatten(java.util.Collection<Object> source)}.</p>
      */
-    protected pointcut testIntegerDivide01Caller(testpackage.Class1 aClass, Integer source, Integer arg01):
-    	call(* testpackage.Class1.testIntegerDivide01(Integer, Integer))
-    	&& target(aClass) && args(source, arg01);
+    protected pointcut testCollectionFlattenCaller(testpackage.Class1 aClass, java.util.Collection<Object> source):
+    	call(* testpackage.Class1.testCollectionFlatten(java.util.Collection<Object>))
+    	&& target(aClass) && args(source);
     
     /**
-     * <p>Defines the method testIntegerDivide01(Integer source, Integer arg01) defined by the constraint
+     * <p>Defines the method testCollectionFlatten(java.util.Collection<Object> source) defined by the constraint
      * <code>context Class1
-     *       def: testIntegerDivide01(source: Integer, arg01: Integer): Real =
-    source / arg01</code></p>
+     *       def: testCollectionFlatten(source: Collection(OclAny)): Collection(OclAny) =
+    source ->flatten()</code></p>
      */
-    Float around(testpackage.Class1 aClass, Integer source, Integer arg01): testIntegerDivide01Caller(aClass, source, arg01) {
-        return (new Float (source) / new Float (arg01));
+    java.util.Collection<Object> around(testpackage.Class1 aClass, java.util.Collection<Object> source): testCollectionFlattenCaller(aClass, source) {
+        return (java.util.Collection<Object>) tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclCollections.flatten(source);
     }
 }

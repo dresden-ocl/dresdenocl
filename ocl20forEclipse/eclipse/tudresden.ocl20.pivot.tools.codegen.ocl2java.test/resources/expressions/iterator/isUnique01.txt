@@ -7,12 +7,12 @@ collection1.add(new Integer(3));
 java.util.Set<Integer> collection2;
 Boolean result1;
 
-collection2 = new java.util.Set<Integer>();
+collection2 = new java.util.HashSet<Integer>();
 result1 = true;
 
 /* Iterator IsUnique: Iterate and check, if all elements are unique. */
 for (Integer i : collection1) {
-    if (collection2.includes(i)) {
+    if (collection2.contains(i)) {
         result1 = false;
         break;
     } else {

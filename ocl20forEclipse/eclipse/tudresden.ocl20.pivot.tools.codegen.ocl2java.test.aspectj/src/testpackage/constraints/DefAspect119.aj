@@ -12,19 +12,19 @@ public privileged aspect DefAspect119 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testSequenceCount01(java.util.List<Object> source, Object arg01)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testRealMinus01(Float source, Float arg01)}.</p>
      */
-    protected pointcut testSequenceCount01Caller(testpackage.Class1 aClass, java.util.List<Object> source, Object arg01):
-    	call(* testpackage.Class1.testSequenceCount01(java.util.List<Object>, Object))
+    protected pointcut testRealMinus01Caller(testpackage.Class1 aClass, Float source, Float arg01):
+    	call(* testpackage.Class1.testRealMinus01(Float, Float))
     	&& target(aClass) && args(source, arg01);
     
     /**
-     * <p>Defines the method testSequenceCount01(java.util.List<Object> source, Object arg01) defined by the constraint
+     * <p>Defines the method testRealMinus01(Float source, Float arg01) defined by the constraint
      * <code>context Class1
-     *       def: testSequenceCount01(source: Sequence(OclAny), arg01: OclAny): Integer =
-    source ->count(arg01)</code></p>
+     *       def: testRealMinus01(source: Real, arg01: Real): Real =
+    source - arg01</code></p>
      */
-    Integer around(testpackage.Class1 aClass, java.util.List<Object> source, Object arg01): testSequenceCount01Caller(aClass, source, arg01) {
-        return tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclSequences.count(source, arg01);
+    Float around(testpackage.Class1 aClass, Float source, Float arg01): testRealMinus01Caller(aClass, source, arg01) {
+        return (source - arg01);
     }
 }

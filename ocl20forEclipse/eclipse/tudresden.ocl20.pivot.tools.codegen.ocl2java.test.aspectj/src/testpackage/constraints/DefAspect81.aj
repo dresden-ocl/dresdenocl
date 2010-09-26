@@ -12,19 +12,19 @@ public privileged aspect DefAspect81 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testOclIsKindOf01(testpackage.Class1 source, Class<?> arg01)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testIntegerMinus01(Integer source, Integer arg01)}.</p>
      */
-    protected pointcut testOclIsKindOf01Caller(testpackage.Class1 aClass, testpackage.Class1 source, Class<?> arg01):
-    	call(* testpackage.Class1.testOclIsKindOf01(testpackage.Class1, Class<?>))
+    protected pointcut testIntegerMinus01Caller(testpackage.Class1 aClass, Integer source, Integer arg01):
+    	call(* testpackage.Class1.testIntegerMinus01(Integer, Integer))
     	&& target(aClass) && args(source, arg01);
     
     /**
-     * <p>Defines the method testOclIsKindOf01(testpackage.Class1 source, Class<?> arg01) defined by the constraint
+     * <p>Defines the method testIntegerMinus01(Integer source, Integer arg01) defined by the constraint
      * <code>context Class1
-     *       def: testOclIsKindOf01(source: Class1, arg01: OclType): Boolean =
-    source.oclIsKindOf(arg01)</code></p>
+     *       def: testIntegerMinus01(source: Integer, arg01: Integer): Integer =
+    source - arg01</code></p>
      */
-    Boolean around(testpackage.Class1 aClass, testpackage.Class1 source, Class<?> arg01): testOclIsKindOf01Caller(aClass, source, arg01) {
-        return (arg01.isAssignableFrom(source.getClass()));
+    Integer around(testpackage.Class1 aClass, Integer source, Integer arg01): testIntegerMinus01Caller(aClass, source, arg01) {
+        return (source - arg01);
     }
 }

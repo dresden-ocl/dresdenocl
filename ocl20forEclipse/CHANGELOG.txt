@@ -38,6 +38,8 @@ Release 3.0 (planned for September, 14th, 2010)
   - OclAny.oclIsInvalid() is now transformed into working Java code.
   - OclAny.oclIsKindOf() is now transformed into working Java code.
   - OclCollection.sum() is now transformed into working Java code. 
+  - Fixed bugs in code generation of iterators collectNested(), isUnique(),
+    one(), sortedBy().
 
 GUI
 ---

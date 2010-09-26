@@ -12,19 +12,19 @@ public privileged aspect DefAspect151 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testStringIndexOf(String source, String arg01)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testSetFlatten(java.util.Set<Object> source)}.</p>
      */
-    protected pointcut testStringIndexOfCaller(testpackage.Class1 aClass, String source, String arg01):
-    	call(* testpackage.Class1.testStringIndexOf(String, String))
-    	&& target(aClass) && args(source, arg01);
+    protected pointcut testSetFlattenCaller(testpackage.Class1 aClass, java.util.Set<Object> source):
+    	call(* testpackage.Class1.testSetFlatten(java.util.Set<Object>))
+    	&& target(aClass) && args(source);
     
     /**
-     * <p>Defines the method testStringIndexOf(String source, String arg01) defined by the constraint
+     * <p>Defines the method testSetFlatten(java.util.Set<Object> source) defined by the constraint
      * <code>context Class1
-     *       def: testStringIndexOf(source: String, arg01: String): Integer =
-    source.indexOf(arg01)</code></p>
+     *       def: testSetFlatten(source: Set(OclAny)): Set(OclAny) =
+    source ->flatten()</code></p>
      */
-    Integer around(testpackage.Class1 aClass, String source, String arg01): testStringIndexOfCaller(aClass, source, arg01) {
-        return source.indexOf(arg01) + 1;
+    java.util.Set<Object> around(testpackage.Class1 aClass, java.util.Set<Object> source): testSetFlattenCaller(aClass, source) {
+        return (java.util.Set<Object>) tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclSets.flatten(source);
     }
 }

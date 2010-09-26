@@ -12,20 +12,20 @@ public privileged aspect DefAspect62 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testCollectionProduct(java.util.Collection<Object> source, java.util.Collection<Object> arg01)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testCollectionCount(java.util.Collection<Object> source, Object arg01)}.</p>
      */
-    protected pointcut testCollectionProductCaller(testpackage.Class1 aClass, java.util.Collection<Object> source, java.util.Collection<Object> arg01):
-    	call(* testpackage.Class1.testCollectionProduct(java.util.Collection<Object>, java.util.Collection<Object>))
+    protected pointcut testCollectionCountCaller(testpackage.Class1 aClass, java.util.Collection<Object> source, Object arg01):
+    	call(* testpackage.Class1.testCollectionCount(java.util.Collection<Object>, Object))
     	&& target(aClass) && args(source, arg01);
     
     /**
-     * <p>Defines the method testCollectionProduct(java.util.Collection<Object> source, java.util.Collection<Object> arg01) defined by the constraint
+     * <p>Defines the method testCollectionCount(java.util.Collection<Object> source, Object arg01) defined by the constraint
      * <code>context Class1
-     *       def: testCollectionProduct(source: Collection(OclAny), arg01: Collection(OclAny)): 
+     *       def: testCollectionCount(source: Collection(OclAny), arg01: OclAny): 
       Integer =
-    source ->product(arg01) ->size()</code></p>
+    source ->count(arg01)</code></p>
      */
-    Integer around(testpackage.Class1 aClass, java.util.Collection<Object> source, java.util.Collection<Object> arg01): testCollectionProductCaller(aClass, source, arg01) {
-        return tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclCollections.size(tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclCollections.product(source, arg01));
+    Integer around(testpackage.Class1 aClass, java.util.Collection<Object> source, Object arg01): testCollectionCountCaller(aClass, source, arg01) {
+        return tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclCollections.count(source, arg01);
     }
 }

@@ -12,19 +12,19 @@ public privileged aspect DefAspect70 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testIntegerMod01(Integer source, Integer arg01)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testCollectionMin(java.util.Collection<Object> source)}.</p>
      */
-    protected pointcut testIntegerMod01Caller(testpackage.Class1 aClass, Integer source, Integer arg01):
-    	call(* testpackage.Class1.testIntegerMod01(Integer, Integer))
-    	&& target(aClass) && args(source, arg01);
+    protected pointcut testCollectionMinCaller(testpackage.Class1 aClass, java.util.Collection<Object> source):
+    	call(* testpackage.Class1.testCollectionMin(java.util.Collection<Object>))
+    	&& target(aClass) && args(source);
     
     /**
-     * <p>Defines the method testIntegerMod01(Integer source, Integer arg01) defined by the constraint
+     * <p>Defines the method testCollectionMin(java.util.Collection<Object> source) defined by the constraint
      * <code>context Class1
-     *       def: testIntegerMod01(source: Integer, arg01: Integer): Integer =
-    source.mod(arg01)</code></p>
+     *       def: testCollectionMin(source: Collection(OclAny)): OclAny =
+    source ->min()</code></p>
      */
-    Integer around(testpackage.Class1 aClass, Integer source, Integer arg01): testIntegerMod01Caller(aClass, source, arg01) {
-        return (source % arg01);
+    Object around(testpackage.Class1 aClass, java.util.Collection<Object> source): testCollectionMinCaller(aClass, source) {
+        return tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclCollections.min(source);
     }
 }

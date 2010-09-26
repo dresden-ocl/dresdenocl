@@ -21,6 +21,6 @@ comparator1 = new java.util.Comparator<tudresden.ocl20.pivot.examples.royalsandl
     }
 };
 
-result1 = java.util.Collections.sort(result1, comparator1);
+java.util.Collections.sort(result1, comparator1);
 
 (tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclCollections.size(result1) > new Integer(0))

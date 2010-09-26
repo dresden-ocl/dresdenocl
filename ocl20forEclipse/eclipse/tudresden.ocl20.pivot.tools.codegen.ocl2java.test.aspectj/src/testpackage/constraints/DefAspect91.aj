@@ -12,19 +12,32 @@ public privileged aspect DefAspect91 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testOrderedSetFirst(java.util.List<Object> source)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testOclIsInvalid01()}.</p>
      */
-    protected pointcut testOrderedSetFirstCaller(testpackage.Class1 aClass, java.util.List<Object> source):
-    	call(* testpackage.Class1.testOrderedSetFirst(java.util.List<Object>))
-    	&& target(aClass) && args(source);
+    protected pointcut testOclIsInvalid01Caller(testpackage.Class1 aClass):
+    	call(* testpackage.Class1.testOclIsInvalid01())
+    	&& target(aClass);
     
     /**
-     * <p>Defines the method testOrderedSetFirst(java.util.List<Object> source) defined by the constraint
+     * <p>Defines the method testOclIsInvalid01() defined by the constraint
      * <code>context Class1
-     *       def: testOrderedSetFirst(source: OrderedSet(OclAny)): OclAny =
-    source ->first()</code></p>
+     *       def: testOclIsInvalid01(): Boolean =
+    self.oclIsInvalid()</code></p>
      */
-    Object around(testpackage.Class1 aClass, java.util.List<Object> source): testOrderedSetFirstCaller(aClass, source) {
-        return tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclOrderedSets.first(source);
+    Boolean around(testpackage.Class1 aClass): testOclIsInvalid01Caller(aClass) {
+        Boolean result1;
+        
+        /* Check if the expression results in invalid. */
+        try {
+            /* DUMMY variable is necessary to form literals into a statement. */
+            Object DUMMY = aClass; 
+            result1 = false;
+        }
+        
+        catch (Exception e) {
+            result1 = true;
+        }
+    
+        return result1;
     }
 }

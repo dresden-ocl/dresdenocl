@@ -12,19 +12,19 @@ public privileged aspect DefAspect94 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testOrderedSetLast(java.util.List<Object> source)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testOclIsTypeOf01(testpackage.Class1 source, Class<?> arg01)}.</p>
      */
-    protected pointcut testOrderedSetLastCaller(testpackage.Class1 aClass, java.util.List<Object> source):
-    	call(* testpackage.Class1.testOrderedSetLast(java.util.List<Object>))
-    	&& target(aClass) && args(source);
+    protected pointcut testOclIsTypeOf01Caller(testpackage.Class1 aClass, testpackage.Class1 source, Class<?> arg01):
+    	call(* testpackage.Class1.testOclIsTypeOf01(testpackage.Class1, Class<?>))
+    	&& target(aClass) && args(source, arg01);
     
     /**
-     * <p>Defines the method testOrderedSetLast(java.util.List<Object> source) defined by the constraint
+     * <p>Defines the method testOclIsTypeOf01(testpackage.Class1 source, Class<?> arg01) defined by the constraint
      * <code>context Class1
-     *       def: testOrderedSetLast(source: OrderedSet(OclAny)): OclAny =
-    source ->last()</code></p>
+     *       def: testOclIsTypeOf01(source: Class1, arg01: OclType): Boolean =
+    source.oclIsTypeOf(arg01)</code></p>
      */
-    Object around(testpackage.Class1 aClass, java.util.List<Object> source): testOrderedSetLastCaller(aClass, source) {
-        return tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclOrderedSets.last(source);
+    Boolean around(testpackage.Class1 aClass, testpackage.Class1 source, Class<?> arg01): testOclIsTypeOf01Caller(aClass, source, arg01) {
+        return source.getClass().getCanonicalName().equals(arg01.getCanonicalName());
     }
 }

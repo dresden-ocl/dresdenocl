@@ -12,20 +12,27 @@ public privileged aspect DefAspect27 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testBagAsBag(java.util.List<Object> source)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testCollectionLiteralExp05()}.</p>
      */
-    protected pointcut testBagAsBagCaller(testpackage.Class1 aClass, java.util.List<Object> source):
-    	call(* testpackage.Class1.testBagAsBag(java.util.List<Object>))
-    	&& target(aClass) && args(source);
+    protected pointcut testCollectionLiteralExp05Caller(testpackage.Class1 aClass):
+    	call(* testpackage.Class1.testCollectionLiteralExp05())
+    	&& target(aClass);
     
     /**
-     * <p>Defines the method testBagAsBag(java.util.List<Object> source) defined by the constraint
+     * <p>Defines the method testCollectionLiteralExp05() defined by the constraint
      * <code>context Class1
-     *       def: testBagAsBag(source: Bag(OclAny)): 
-      Bag(OclAny) =
-    source ->asBag()</code></p>
+     *       def: testCollectionLiteralExp05(): 
+      Set(Integer) =
+    Set { 0, 1, 2 }</code></p>
      */
-    java.util.List<Object> around(testpackage.Class1 aClass, java.util.List<Object> source): testBagAsBagCaller(aClass, source) {
-        return tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclBags.asBag(source);
+    java.util.Set<Integer> around(testpackage.Class1 aClass): testCollectionLiteralExp05Caller(aClass) {
+        java.util.HashSet<Integer> collection1;
+        collection1 = new java.util.HashSet<Integer>();
+        
+        collection1.add(new Integer(0));
+        collection1.add(new Integer(1));
+        collection1.add(new Integer(2));
+    
+        return collection1;
     }
 }

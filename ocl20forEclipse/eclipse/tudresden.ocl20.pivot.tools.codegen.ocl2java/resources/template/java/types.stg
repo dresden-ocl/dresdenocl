@@ -37,6 +37,11 @@ integerType() ::= <<
 Integer
 >>
 
+// --- Invalid Type ---
+invalidType() ::= <<
+tudresden.ocl20.pivot.tools.codegen.ocl2java.types.OclInvalidException
+>>
+
 // --- OrderedSet Type ---
 orderedSetType() ::= <<
 java.util.List

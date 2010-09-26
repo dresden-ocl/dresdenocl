@@ -12,19 +12,19 @@ public privileged aspect DefAspect69 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testIntegerMinus01(Integer source, Integer arg01)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testCollectionIsEmpty(java.util.Collection<Object> source)}.</p>
      */
-    protected pointcut testIntegerMinus01Caller(testpackage.Class1 aClass, Integer source, Integer arg01):
-    	call(* testpackage.Class1.testIntegerMinus01(Integer, Integer))
-    	&& target(aClass) && args(source, arg01);
+    protected pointcut testCollectionIsEmptyCaller(testpackage.Class1 aClass, java.util.Collection<Object> source):
+    	call(* testpackage.Class1.testCollectionIsEmpty(java.util.Collection<Object>))
+    	&& target(aClass) && args(source);
     
     /**
-     * <p>Defines the method testIntegerMinus01(Integer source, Integer arg01) defined by the constraint
+     * <p>Defines the method testCollectionIsEmpty(java.util.Collection<Object> source) defined by the constraint
      * <code>context Class1
-     *       def: testIntegerMinus01(source: Integer, arg01: Integer): Integer =
-    source - arg01</code></p>
+     *       def: testCollectionIsEmpty(source: Collection(OclAny)): Boolean =
+    source ->isEmpty()</code></p>
      */
-    Integer around(testpackage.Class1 aClass, Integer source, Integer arg01): testIntegerMinus01Caller(aClass, source, arg01) {
-        return (source - arg01);
+    Boolean around(testpackage.Class1 aClass, java.util.Collection<Object> source): testCollectionIsEmptyCaller(aClass, source) {
+        return tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclCollections.isEmpty(source);
     }
 }

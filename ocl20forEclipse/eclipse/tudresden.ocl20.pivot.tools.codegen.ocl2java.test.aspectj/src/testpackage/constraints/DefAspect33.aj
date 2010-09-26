@@ -12,19 +12,19 @@ public privileged aspect DefAspect33 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testBagExcluding01(java.util.List<Object> source, Object arg01)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testStringLiteralExp01()}.</p>
      */
-    protected pointcut testBagExcluding01Caller(testpackage.Class1 aClass, java.util.List<Object> source, Object arg01):
-    	call(* testpackage.Class1.testBagExcluding01(java.util.List<Object>, Object))
-    	&& target(aClass) && args(source, arg01);
+    protected pointcut testStringLiteralExp01Caller(testpackage.Class1 aClass):
+    	call(* testpackage.Class1.testStringLiteralExp01())
+    	&& target(aClass);
     
     /**
-     * <p>Defines the method testBagExcluding01(java.util.List<Object> source, Object arg01) defined by the constraint
+     * <p>Defines the method testStringLiteralExp01() defined by the constraint
      * <code>context Class1
-     *       def: testBagExcluding01(source: Bag(OclAny), arg01: OclAny): Bag(OclAny) =
-    source ->excluding(arg01)</code></p>
+     *       def: testStringLiteralExp01(): String =
+    'some'</code></p>
      */
-    java.util.List<Object> around(testpackage.Class1 aClass, java.util.List<Object> source, Object arg01): testBagExcluding01Caller(aClass, source, arg01) {
-        return tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclBags.excluding(source, arg01);
+    String around(testpackage.Class1 aClass): testStringLiteralExp01Caller(aClass) {
+        return "some";
     }
 }

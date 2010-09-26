@@ -12,19 +12,19 @@ public privileged aspect DefAspect56 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testCollectionIncludesAll(java.util.Collection<Object> source, java.util.Collection<Object> arg01)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testBooleanToString(Boolean source)}.</p>
      */
-    protected pointcut testCollectionIncludesAllCaller(testpackage.Class1 aClass, java.util.Collection<Object> source, java.util.Collection<Object> arg01):
-    	call(* testpackage.Class1.testCollectionIncludesAll(java.util.Collection<Object>, java.util.Collection<Object>))
-    	&& target(aClass) && args(source, arg01);
+    protected pointcut testBooleanToStringCaller(testpackage.Class1 aClass, Boolean source):
+    	call(* testpackage.Class1.testBooleanToString(Boolean))
+    	&& target(aClass) && args(source);
     
     /**
-     * <p>Defines the method testCollectionIncludesAll(java.util.Collection<Object> source, java.util.Collection<Object> arg01) defined by the constraint
+     * <p>Defines the method testBooleanToString(Boolean source) defined by the constraint
      * <code>context Class1
-     *       def: testCollectionIncludesAll(source: Collection(OclAny), arg01: Collection(OclAny)): Boolean =
-    source ->includesAll(arg01)</code></p>
+     *       def: testBooleanToString(source: Boolean): String =
+    source.toString()</code></p>
      */
-    Boolean around(testpackage.Class1 aClass, java.util.Collection<Object> source, java.util.Collection<Object> arg01): testCollectionIncludesAllCaller(aClass, source, arg01) {
-        return tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclCollections.includesAll(source, arg01);
+    String around(testpackage.Class1 aClass, Boolean source): testBooleanToStringCaller(aClass, source) {
+        return source.toString();
     }
 }

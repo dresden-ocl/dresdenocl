@@ -12,19 +12,35 @@ public privileged aspect DefAspect92 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testOrderedSetIndexOf01(java.util.List<Object> source, Object arg01)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testOclIsInvalid02()}.</p>
      */
-    protected pointcut testOrderedSetIndexOf01Caller(testpackage.Class1 aClass, java.util.List<Object> source, Object arg01):
-    	call(* testpackage.Class1.testOrderedSetIndexOf01(java.util.List<Object>, Object))
-    	&& target(aClass) && args(source, arg01);
+    protected pointcut testOclIsInvalid02Caller(testpackage.Class1 aClass):
+    	call(* testpackage.Class1.testOclIsInvalid02())
+    	&& target(aClass);
     
     /**
-     * <p>Defines the method testOrderedSetIndexOf01(java.util.List<Object> source, Object arg01) defined by the constraint
+     * <p>Defines the method testOclIsInvalid02() defined by the constraint
      * <code>context Class1
-     *       def: testOrderedSetIndexOf01(source: OrderedSet(OclAny), arg01: OclAny): Integer =
-    source ->indexOf(arg01)</code></p>
+     *       def: testOclIsInvalid02(): Boolean =
+    (Sequence { } ->first()).oclIsInvalid()</code></p>
      */
-    Integer around(testpackage.Class1 aClass, java.util.List<Object> source, Object arg01): testOrderedSetIndexOf01Caller(aClass, source, arg01) {
-        return tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclOrderedSets.indexOf(source, arg01);
+    Boolean around(testpackage.Class1 aClass): testOclIsInvalid02Caller(aClass) {
+        java.util.ArrayList collection1;
+        collection1 = new java.util.ArrayList();
+
+        Boolean result1;
+        
+        /* Check if the expression results in invalid. */
+        try {
+            /* DUMMY variable is necessary to form literals into a statement. */
+            Object DUMMY = tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclSequences.first(collection1); 
+            result1 = false;
+        }
+        
+        catch (Exception e) {
+            result1 = true;
+        }
+    
+        return result1;
     }
 }

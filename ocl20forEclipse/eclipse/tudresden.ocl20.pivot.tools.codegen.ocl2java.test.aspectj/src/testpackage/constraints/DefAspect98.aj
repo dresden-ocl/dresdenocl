@@ -12,19 +12,20 @@ public privileged aspect DefAspect98 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testRealAbs01(Float source)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testOrderedSetAsBag(java.util.List<Object> source)}.</p>
      */
-    protected pointcut testRealAbs01Caller(testpackage.Class1 aClass, Float source):
-    	call(* testpackage.Class1.testRealAbs01(Float))
+    protected pointcut testOrderedSetAsBagCaller(testpackage.Class1 aClass, java.util.List<Object> source):
+    	call(* testpackage.Class1.testOrderedSetAsBag(java.util.List<Object>))
     	&& target(aClass) && args(source);
     
     /**
-     * <p>Defines the method testRealAbs01(Float source) defined by the constraint
+     * <p>Defines the method testOrderedSetAsBag(java.util.List<Object> source) defined by the constraint
      * <code>context Class1
-     *       def: testRealAbs01(source: Real): Real =
-    source.abs()</code></p>
+     *       def: testOrderedSetAsBag(source: OrderedSet(OclAny)): 
+      Bag(OclAny) =
+    source ->asBag()</code></p>
      */
-    Float around(testpackage.Class1 aClass, Float source): testRealAbs01Caller(aClass, source) {
-        return java.lang.Math.abs(source);
+    java.util.List<Object> around(testpackage.Class1 aClass, java.util.List<Object> source): testOrderedSetAsBagCaller(aClass, source) {
+        return tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclOrderedSets.asBag(source);
     }
 }

@@ -12,19 +12,43 @@ public privileged aspect DefAspect17 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testEnumerationLiteralExp01()}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testOneIteratorExp01()}.</p>
      */
-    protected pointcut testEnumerationLiteralExp01Caller(testpackage.Class1 aClass):
-    	call(* testpackage.Class1.testEnumerationLiteralExp01())
+    protected pointcut testOneIteratorExp01Caller(testpackage.Class1 aClass):
+    	call(* testpackage.Class1.testOneIteratorExp01())
     	&& target(aClass);
     
     /**
-     * <p>Defines the method testEnumerationLiteralExp01() defined by the constraint
+     * <p>Defines the method testOneIteratorExp01() defined by the constraint
      * <code>context Class1
-     *       def: testEnumerationLiteralExp01(): Enumeration1 =
-    Enumeration1::literal1</code></p>
+     *       def: testOneIteratorExp01() : Boolean =
+    Set{1, 2, 3}->one(i: Integer | i = 2)</code></p>
      */
-    Enum around(testpackage.Class1 aClass): testEnumerationLiteralExp01Caller(aClass) {
-        return testpackage.Enumeration1.literal1;
+    Boolean around(testpackage.Class1 aClass): testOneIteratorExp01Caller(aClass) {
+        java.util.HashSet<Integer> collection1;
+        collection1 = new java.util.HashSet<Integer>();
+        
+        collection1.add(new Integer(1));
+        collection1.add(new Integer(2));
+        collection1.add(new Integer(3));
+        Boolean result1;
+        result1 = false;
+        
+        /* Iterator One: Iterate and check, if exactly one element fulfills the condition. */
+        for (Integer i : collection1) {
+            if (((Object) i).equals(new Integer(2))) {
+                if (result1) {
+                    // Found a second element.
+                    result1 = false;
+                    break;
+                } else {
+                    // Found a first element.
+                    result1 = true;
+        	    }
+            }
+            // no else
+        }
+    
+        return result1;
     }
 }

@@ -12,20 +12,19 @@ public privileged aspect DefAspect63 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testCollectionSize(java.util.Collection<Object> source)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testCollectionEquals(java.util.Collection<Object> source, java.util.Collection<Object> arg01)}.</p>
      */
-    protected pointcut testCollectionSizeCaller(testpackage.Class1 aClass, java.util.Collection<Object> source):
-    	call(* testpackage.Class1.testCollectionSize(java.util.Collection<Object>))
-    	&& target(aClass) && args(source);
+    protected pointcut testCollectionEqualsCaller(testpackage.Class1 aClass, java.util.Collection<Object> source, java.util.Collection<Object> arg01):
+    	call(* testpackage.Class1.testCollectionEquals(java.util.Collection<Object>, java.util.Collection<Object>))
+    	&& target(aClass) && args(source, arg01);
     
     /**
-     * <p>Defines the method testCollectionSize(java.util.Collection<Object> source) defined by the constraint
+     * <p>Defines the method testCollectionEquals(java.util.Collection<Object> source, java.util.Collection<Object> arg01) defined by the constraint
      * <code>context Class1
-     *       def: testCollectionSize(source: Collection(OclAny)): 
-      Integer =
-    source ->size()</code></p>
+     *       def: testCollectionEquals(source: Collection(OclAny), arg01: Collection(OclAny)): Boolean =
+    source = arg01</code></p>
      */
-    Integer around(testpackage.Class1 aClass, java.util.Collection<Object> source): testCollectionSizeCaller(aClass, source) {
-        return tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclCollections.size(source);
+    Boolean around(testpackage.Class1 aClass, java.util.Collection<Object> source, java.util.Collection<Object> arg01): testCollectionEqualsCaller(aClass, source, arg01) {
+        return tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclCollections.equals(source, arg01);
     }
 }

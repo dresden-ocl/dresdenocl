@@ -12,19 +12,19 @@ public privileged aspect DefAspect107 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testRealMinus01(Float source, Float arg01)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testOrderedSetPrepend(java.util.List<Object> source, Object arg01)}.</p>
      */
-    protected pointcut testRealMinus01Caller(testpackage.Class1 aClass, Float source, Float arg01):
-    	call(* testpackage.Class1.testRealMinus01(Float, Float))
+    protected pointcut testOrderedSetPrependCaller(testpackage.Class1 aClass, java.util.List<Object> source, Object arg01):
+    	call(* testpackage.Class1.testOrderedSetPrepend(java.util.List<Object>, Object))
     	&& target(aClass) && args(source, arg01);
     
     /**
-     * <p>Defines the method testRealMinus01(Float source, Float arg01) defined by the constraint
+     * <p>Defines the method testOrderedSetPrepend(java.util.List<Object> source, Object arg01) defined by the constraint
      * <code>context Class1
-     *       def: testRealMinus01(source: Real, arg01: Real): Real =
-    source - arg01</code></p>
+     *       def: testOrderedSetPrepend(source: OrderedSet(OclAny), arg01: OclAny): OrderedSet(OclAny) =
+    source ->prepend(arg01)</code></p>
      */
-    Float around(testpackage.Class1 aClass, Float source, Float arg01): testRealMinus01Caller(aClass, source, arg01) {
-        return (source - arg01);
+    java.util.List<Object> around(testpackage.Class1 aClass, java.util.List<Object> source, Object arg01): testOrderedSetPrependCaller(aClass, source, arg01) {
+        return tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclOrderedSets.prepend(source, arg01);
     }
 }

@@ -12,19 +12,20 @@ public privileged aspect DefAspect21 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testStringLiteralExp01()}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testBooleanLiteralExp01()}.</p>
      */
-    protected pointcut testStringLiteralExp01Caller(testpackage.Class1 aClass):
-    	call(* testpackage.Class1.testStringLiteralExp01())
+    protected pointcut testBooleanLiteralExp01Caller(testpackage.Class1 aClass):
+    	call(* testpackage.Class1.testBooleanLiteralExp01())
     	&& target(aClass);
     
     /**
-     * <p>Defines the method testStringLiteralExp01() defined by the constraint
+     * <p>Defines the method testBooleanLiteralExp01() defined by the constraint
      * <code>context Class1
-     *       def: testStringLiteralExp01(): String =
-    'some'</code></p>
+     *       def: testBooleanLiteralExp01(): 
+      Boolean =
+    true</code></p>
      */
-    String around(testpackage.Class1 aClass): testStringLiteralExp01Caller(aClass) {
-        return "some";
+    Boolean around(testpackage.Class1 aClass): testBooleanLiteralExp01Caller(aClass) {
+        return new Boolean(true);
     }
 }

@@ -12,19 +12,19 @@ public privileged aspect DefAspect44 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testBooleanToString(Boolean source)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testBagEquals01(java.util.List<Object> source, java.util.List<Object> arg01)}.</p>
      */
-    protected pointcut testBooleanToStringCaller(testpackage.Class1 aClass, Boolean source):
-    	call(* testpackage.Class1.testBooleanToString(Boolean))
-    	&& target(aClass) && args(source);
+    protected pointcut testBagEquals01Caller(testpackage.Class1 aClass, java.util.List<Object> source, java.util.List<Object> arg01):
+    	call(* testpackage.Class1.testBagEquals01(java.util.List<Object>, java.util.List<Object>))
+    	&& target(aClass) && args(source, arg01);
     
     /**
-     * <p>Defines the method testBooleanToString(Boolean source) defined by the constraint
+     * <p>Defines the method testBagEquals01(java.util.List<Object> source, java.util.List<Object> arg01) defined by the constraint
      * <code>context Class1
-     *       def: testBooleanToString(source: Boolean): String =
-    source.toString()</code></p>
+     *       def: testBagEquals01(source: Bag(OclAny), arg01: Bag(OclAny)): Boolean =
+    source = arg01</code></p>
      */
-    String around(testpackage.Class1 aClass, Boolean source): testBooleanToStringCaller(aClass, source) {
-        return source.toString();
+    Boolean around(testpackage.Class1 aClass, java.util.List<Object> source, java.util.List<Object> arg01): testBagEquals01Caller(aClass, source, arg01) {
+        return tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclBags.equals(source, arg01);
     }
 }

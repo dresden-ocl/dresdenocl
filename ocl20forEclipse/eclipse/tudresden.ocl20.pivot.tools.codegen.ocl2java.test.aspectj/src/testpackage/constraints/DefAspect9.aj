@@ -22,7 +22,7 @@ public privileged aspect DefAspect9 {
      * <p>Defines the method testCollectIteratorExp01() defined by the constraint
      * <code>context Class1
      *       def: testCollectIteratorExp01() : Bag(Boolean) =
-    Set{ 1, 2, 3}->collect(i: Integer | i <> 2)</code></p>
+    Set{1, 2, 3}->collect(i: Integer | i <> 2)</code></p>
      */
     java.util.List<Boolean> around(testpackage.Class1 aClass): testCollectIteratorExp01Caller(aClass) {
         java.util.HashSet<Integer> collection1;

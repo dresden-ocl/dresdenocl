@@ -8,7 +8,7 @@ for (tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyAccount $implicitVari
             // Found a second element.
             result1 = false;
             break;
-        } else
+        } else {
             // Found a first element.
             result1 = true;
 	    }

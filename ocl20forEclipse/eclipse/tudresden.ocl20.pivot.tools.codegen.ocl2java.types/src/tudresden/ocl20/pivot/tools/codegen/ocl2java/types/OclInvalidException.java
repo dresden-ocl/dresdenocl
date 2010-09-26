@@ -33,6 +33,13 @@ public class OclInvalidException extends RuntimeException {
 
 	/** ID for serialization. */
 	private static final long serialVersionUID = -1816752019066777116L;
+	
+	/**
+	 * Method that throws a OclInvalidException.
+	 */
+	public static Object getInvalidLiteral() {
+		throw new OclInvalidException("Invalid literal in OCL constraint.");
+	}
 
 	/**
 	 * <p>

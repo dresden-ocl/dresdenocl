@@ -12,18 +12,36 @@ public privileged aspect DefAspect18 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testIntegerLiteralExp01()}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testRejectIteratorExp01()}.</p>
      */
-    protected pointcut testIntegerLiteralExp01Caller(testpackage.Class1 aClass):
-    	call(* testpackage.Class1.testIntegerLiteralExp01())
+    protected pointcut testRejectIteratorExp01Caller(testpackage.Class1 aClass):
+    	call(* testpackage.Class1.testRejectIteratorExp01())
     	&& target(aClass);
     
     /**
-     * <p>Defines the method testIntegerLiteralExp01() defined by the constraint
+     * <p>Defines the method testRejectIteratorExp01() defined by the constraint
      * <code>context Class1
-     *       def: testIntegerLiteralExp01(): Integer = 42</code></p>
+     *       def: testRejectIteratorExp01() : Set(Integer) =
+    Set{1, 2, 3}->reject(i: Integer | i = 2)</code></p>
      */
-    Integer around(testpackage.Class1 aClass): testIntegerLiteralExp01Caller(aClass) {
-        return new Integer(42);
+    java.util.Set<Integer> around(testpackage.Class1 aClass): testRejectIteratorExp01Caller(aClass) {
+        java.util.HashSet<Integer> collection1;
+        collection1 = new java.util.HashSet<Integer>();
+        
+        collection1.add(new Integer(1));
+        collection1.add(new Integer(2));
+        collection1.add(new Integer(3));
+        java.util.HashSet<Integer> result1;
+        result1 = new java.util.HashSet<Integer>();
+        
+        /* Iterator Reject: Select all elements which do not fulfill the condition. */
+        for (Integer i : collection1) {
+            if (!((Object) i).equals(new Integer(2))) {
+                result1.add(i);
+            }
+            // no else
+        }
+    
+        return result1;
     }
 }

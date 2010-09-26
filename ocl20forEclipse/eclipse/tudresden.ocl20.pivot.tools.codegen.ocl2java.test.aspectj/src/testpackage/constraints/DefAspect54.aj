@@ -12,19 +12,19 @@ public privileged aspect DefAspect54 {
     declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
     
     /**
-     * <p>Pointcut for all calls on {@link testpackage.Class1#testCollectionFlatten(java.util.Collection<Object> source)}.</p>
+     * <p>Pointcut for all calls on {@link testpackage.Class1#testBooleanNot01(Boolean source)}.</p>
      */
-    protected pointcut testCollectionFlattenCaller(testpackage.Class1 aClass, java.util.Collection<Object> source):
-    	call(* testpackage.Class1.testCollectionFlatten(java.util.Collection<Object>))
+    protected pointcut testBooleanNot01Caller(testpackage.Class1 aClass, Boolean source):
+    	call(* testpackage.Class1.testBooleanNot01(Boolean))
     	&& target(aClass) && args(source);
     
     /**
-     * <p>Defines the method testCollectionFlatten(java.util.Collection<Object> source) defined by the constraint
+     * <p>Defines the method testBooleanNot01(Boolean source) defined by the constraint
      * <code>context Class1
-     *       def: testCollectionFlatten(source: Collection(OclAny)): Collection(OclAny) =
-    source ->flatten()</code></p>
+     *       def: testBooleanNot01(source: Boolean): Boolean =
+    not source</code></p>
      */
-    java.util.Collection<Object> around(testpackage.Class1 aClass, java.util.Collection<Object> source): testCollectionFlattenCaller(aClass, source) {
-        return (java.util.Collection<Object>) tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclCollections.flatten(source);
+    Boolean around(testpackage.Class1 aClass, Boolean source): testBooleanNot01Caller(aClass, source) {
+        return !source;
     }
 }

@@ -51,7 +51,7 @@ $ifCode$if ($ifExp$) {
 
 // --- InvalidLiteralExp ---
 invalidLiteralExp() ::= <<
-new tudresden.ocl20.pivot.tools.codegen.ocl2java.types.OclInvalidException("Invalid literal in OCL constraint.");
+/* (TODO Probably add Type Cast here.) */ tudresden.ocl20.pivot.tools.codegen.ocl2java.types.OclInvalidException.getInvalidLiteral()
 >>
 
 
@@ -101,7 +101,7 @@ for ($itType$ $itVar$ : $sourceExp$) {
 
 // --- IteratorExp for CollectNested ---
 iteratorExp_collectNested(sourceCode, sourceExp, itVar, itType, bodyCode, bodyExp, resultVar, resultType) ::= <<
-$sourceCode$$resultType$ resultVar;
+$sourceCode$$resultType$ $resultVar$;
 $resultVar$ = new $resultType$();
 
 /* Iterator CollectNested: Iterate through all elements and collect them. */
@@ -154,13 +154,13 @@ iteratorExp_isUnique(sourceCode, sourceExp, itVar, itType, bodyCode, bodyExp, co
 $sourceCode$$setType()$<$itType$> $collectionVar$;
 $booleanType()$ $resultVar$;
 
-$collectionVar$ = new $setType()$<$itType$>();
+$collectionVar$ = new $setTypeInitialization()$<$itType$>();
 $resultVar$ = true;
 
 /* Iterator IsUnique: Iterate and check, if all elements are unique. */
 for ($itType$ $itVar$ : $sourceExp$) {
     $bodyCode$
-    if ($collectionVar$.includes($bodyExp$)) {
+    if ($collectionVar$.contains($bodyExp$)) {
         $resultVar$ = false;
         break;
     } else {
@@ -184,7 +184,7 @@ for ($itType$ $itVar$ : $sourceExp$) {
             // Found a second element.
             $resultVar$ = false;
             break;
-        } else
+        } else {
             // Found a first element.
             $resultVar$ = true;
 	    }
@@ -254,7 +254,7 @@ $comparatorName$ = new java.util.Comparator<$itType$>() {
     }
 };
 
-$resultVar$ = java.util.Collections.sort($resultVar$, $comparatorName$);
+java.util.Collections.sort($resultVar$, $comparatorName$);
 
 >>
 

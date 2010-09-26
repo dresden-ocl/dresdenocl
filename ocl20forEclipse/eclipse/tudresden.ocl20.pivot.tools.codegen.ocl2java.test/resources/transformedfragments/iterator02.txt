@@ -1,12 +1,12 @@
 java.util.Set<tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyAccount> collection1;
 Boolean result1;
 
-collection1 = new java.util.Set<tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyAccount>();
+collection1 = new java.util.HashSet<tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyAccount>();
 result1 = true;
 
 /* Iterator IsUnique: Iterate and check, if all elements are unique. */
 for (tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyAccount acc : aClass.membership.accounts) {
-    if (collection1.includes(acc.number)) {
+    if (collection1.contains(acc.number)) {
         result1 = false;
         break;
     } else {
