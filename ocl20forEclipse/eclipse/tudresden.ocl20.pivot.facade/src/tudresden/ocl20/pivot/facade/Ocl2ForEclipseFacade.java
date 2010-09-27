@@ -65,6 +65,7 @@ import tudresden.ocl20.pivot.tools.codegen.ocl2java.IOcl2JavaSettings;
 import tudresden.ocl20.pivot.tools.codegen.ocl2java.Ocl2JavaFactory;
 import tudresden.ocl20.pivot.tools.template.ITemplateGroup;
 import tudresden.ocl20.pivot.tools.template.TemplatePlugin;
+import tudresden.ocl20.pivot.tools.template.exception.TemplateException;
 import tudresden.ocl20.pivot.tools.transformation.ITransformation;
 import tudresden.ocl20.pivot.tools.transformation.TransformationFactory;
 import tudresden.ocl20.pivot.tools.transformation.TransformationPlugin;
@@ -403,8 +404,10 @@ public class Ocl2ForEclipseFacade {
 	 *          The name of template group
 	 * @return a instance of the template group or <i>null</i> if there no
 	 *         template group with the name
+	 * @throws        
+	 * 			TemplateException
 	 */
-	public static ITemplateGroup getTemplateGroup(String templateGroupName) {
+	public static ITemplateGroup getTemplateGroup(String templateGroupName) throws TemplateException {
 
 		return TemplatePlugin.getTemplateGroupRegistry().getTemplateGroup(
 				templateGroupName);

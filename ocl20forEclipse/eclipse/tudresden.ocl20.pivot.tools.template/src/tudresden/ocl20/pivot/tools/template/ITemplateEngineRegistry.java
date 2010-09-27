@@ -3,6 +3,7 @@ package tudresden.ocl20.pivot.tools.template;
 import java.util.List;
 
 import tudresden.ocl20.pivot.tools.template.event.ITemplateEngineRegistryListener;
+import tudresden.ocl20.pivot.tools.template.exception.TemplateException;
 
 /**
  * <p>
@@ -17,27 +18,30 @@ public interface ITemplateEngineRegistry {
 
 	/**
 	 * <p>
-	 * Adds an {@link ITemplateEngine} to this {@link ITemplateEngineRegistry}.
+	 * Adds or Replace an {@link ITemplateEngine} to this {@link ITemplateEngineRegistry}.
 	 * </p>
 	 * 
 	 * @param templateEngine
 	 *          The {@link ITemplateEngine} that shall be added.
+	 *          
+	 * @throws
+	 * 		TemplateException if the templateEngine is null
 	 */
-	public void addTemplateEngine(ITemplateEngine templateEngine);
+	public void addTemplateEngine(ITemplateEngine templateEngine) throws TemplateException;
 
 	/**
 	 * <p>
-	 * Returns a new instance of the {@link ITemplateEngine} with the given name
-	 * or <code>null</code> if no {@link ITemplateEngine} with that name is
-	 * registered.
+	 * Returns a new instance of the {@link ITemplateEngine} with the given name.
 	 * </p>
 	 * 
 	 * @param templateEngineName
 	 *          An identifier name for an {@link ITemplateEngine}.
 	 * 
-	 * @return A new {@link ITemplateEngine} instance or <code>null</code>.
+	 * @return A new {@link ITemplateEngine} instance.
+	 * @throws
+	 * 		TemplateException if no engine exists with this name.
 	 */
-	public ITemplateEngine getNewTemplateEngine(String templateEngineName);
+	public ITemplateEngine getNewTemplateEngine(String templateEngineName) throws TemplateException;
 
 	/**
 	 * <p>

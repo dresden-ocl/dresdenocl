@@ -20,6 +20,7 @@ import tudresden.ocl20.pivot.tools.template.ITemplateEngineRegistry;
 import tudresden.ocl20.pivot.tools.template.TemplatePlugin;
 import tudresden.ocl20.pivot.tools.template.event.ITemplateEngineRegistryListener;
 import tudresden.ocl20.pivot.tools.template.event.TemplateEngineRegistryEvent;
+import tudresden.ocl20.pivot.tools.template.exception.TemplateException;
 
 /**
  * Default implementation of the {@link ITemplateEngineRegistr}
@@ -72,16 +73,16 @@ public class TemplateEngineRegistry implements ITemplateEngineRegistry,
 	/**
 	 * @see tudresden.ocl20.pivot.tools.template.ITemplateEngineRegistry#addTemplateEngine(ITemplateEngine)
 	 */
-	public void addTemplateEngine(ITemplateEngine templateEngine) {
+	public void addTemplateEngine(ITemplateEngine templateEngine) throws TemplateException {
 
-		if (LOGGER.isDebugEnabled() || true) {
+		if (LOGGER.isDebugEnabled()) {
 			LOGGER
 					.debug("addTemplateEngine(templateEngine=" + templateEngine + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 		// no else.
 
 		if (templateEngine == null) {
-			throw new IllegalArgumentException(
+			throw new TemplateException(
 					"The parameter 'templateEngine' must not be null."); //$NON-NLS-1$
 		}
 		// no else.
@@ -123,10 +124,10 @@ public class TemplateEngineRegistry implements ITemplateEngineRegistry,
 	/**
 	 * @see tudresden.ocl20.pivot.tools.template.ITemplateEngineRegistry#getNewTemplateEngine(String)
 	 */
-	public ITemplateEngine getNewTemplateEngine(String templateEngineName) {
+	public ITemplateEngine getNewTemplateEngine(String templateEngineName) throws TemplateException {
 
 		if (templateEngineName == null) {
-			throw new IllegalArgumentException(
+			throw new TemplateException(
 					"The parameter templateEngineName must not be null.");
 		}
 		// no else.
@@ -141,7 +142,9 @@ public class TemplateEngineRegistry implements ITemplateEngineRegistry,
 		} catch (NullPointerException e) {
 			templateEngine = null;
 		}
-
+		if (templateEngine == null) {
+			throw new TemplateException("The template engine can't load.");
+		}
 		return templateEngine;
 	}
 
@@ -326,7 +329,11 @@ public class TemplateEngineRegistry implements ITemplateEngineRegistry,
 					}
 
 					if (templateEngine != null) {
-						this.addTemplateEngine(templateEngine);
+						try {
+							this.addTemplateEngine(templateEngine);
+						} catch (TemplateException e) {
+							LOGGER.warn("The element of the extension can't load.");
+						}
 					}
 					// no else.
 				}

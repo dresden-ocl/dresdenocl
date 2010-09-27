@@ -205,7 +205,7 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 			TemplatePlugin.getTemplateGroupRegistry().removeTemplateGroup("Ocl2Java");
 			this.myTemplateGroup =
 					TemplatePlugin.getTemplateGroupRegistry().addDefaultTemplateGroup(
-							"Ocl2Java", "StringTemplate", null);
+							"Ocl2Java", null);
 
 			this.myTemplateGroup.addFiles(templatePaths);
 

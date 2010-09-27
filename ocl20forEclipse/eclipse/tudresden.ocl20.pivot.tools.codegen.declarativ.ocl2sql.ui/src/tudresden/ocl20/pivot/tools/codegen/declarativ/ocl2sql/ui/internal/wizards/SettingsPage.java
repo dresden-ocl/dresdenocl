@@ -41,6 +41,7 @@ import tudresden.ocl20.pivot.tools.codegen.declarativ.ocl2sql.ui.internal.Ocl2Sq
 import tudresden.ocl20.pivot.tools.codegen.ui.impl.wizards.AbstractMouseListener;
 import tudresden.ocl20.pivot.tools.template.ITemplateGroup;
 import tudresden.ocl20.pivot.tools.template.TemplatePlugin;
+import tudresden.ocl20.pivot.tools.template.exception.TemplateException;
 
 /**
  * <p>
@@ -117,15 +118,23 @@ public class SettingsPage extends WizardPage {
 			}
 		}
 		desLangCombo.setText(desLangCombo.getItem(0));
-		settings.setTemplateGroup(TemplatePlugin.getTemplateGroupRegistry()
-				.getTemplateGroup(desLangCombo.getText()));
+		try {
+			settings.setTemplateGroup(TemplatePlugin.getTemplateGroupRegistry()
+					.getTemplateGroup(desLangCombo.getText()));
+		} catch (TemplateException e1) {
+			e1.printStackTrace();
+		}
 
 		desLangCombo.addModifyListener(new ModifyListener() {
 
 			public void modifyText(ModifyEvent e) {
 
-				settings.setTemplateGroup(TemplatePlugin.getTemplateGroupRegistry()
-						.getTemplateGroup(desLangCombo.getText()));
+				try {
+					settings.setTemplateGroup(TemplatePlugin.getTemplateGroupRegistry()
+							.getTemplateGroup(desLangCombo.getText()));
+				} catch (TemplateException e1) {
+					e1.printStackTrace();
+				}
 			}
 
 		});
@@ -153,8 +162,7 @@ public class SettingsPage extends WizardPage {
 
 			public void widgetDefaultSelected(SelectionEvent e) {
 
-				// TODO Auto-generated method stub
-
+			
 			}
 
 		});
@@ -170,8 +178,6 @@ public class SettingsPage extends WizardPage {
 			}
 
 			public void widgetDefaultSelected(SelectionEvent e) {
-
-				// TODO Auto-generated method stub
 
 			}
 
@@ -200,8 +206,7 @@ public class SettingsPage extends WizardPage {
 
 			public void widgetDefaultSelected(SelectionEvent e) {
 
-				// TODO Auto-generated method stub
-
+			
 			}
 
 		});
@@ -218,8 +223,7 @@ public class SettingsPage extends WizardPage {
 
 			public void widgetDefaultSelected(SelectionEvent e) {
 
-				// TODO Auto-generated method stub
-
+		
 			}
 
 		});

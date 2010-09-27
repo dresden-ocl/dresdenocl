@@ -69,7 +69,7 @@ public class TestStringTemplateEngine {
 		try {
 			general =
 					TemplatePlugin.getTemplateGroupRegistry().addDefaultTemplateGroup(
-							"Test1", "StringTemplate", null);
+							"Test1", null);
 			general.addFiles(groups);
 			// Check the operations getTemplate with the parameters 'general' and
 			// 'specific'
@@ -93,7 +93,7 @@ public class TestStringTemplateEngine {
 		try {
 			specific =
 					TemplatePlugin.getTemplateGroupRegistry().addDefaultTemplateGroup(
-							"Test2", "StringTemplate", null);
+							"Test2", null);
 			specific.addFiles(groups);
 			ITemplate generalTemplate = specific.getTemplate("general");
 			assertEquals(generalTemplate.toString(), "generalTemplate");
@@ -102,7 +102,6 @@ public class TestStringTemplateEngine {
 			assertEquals(specificTemplate.toString(), "specificTemplate");
 
 		} catch (TemplateException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			fail("Can't initialize STE specific");
 		}

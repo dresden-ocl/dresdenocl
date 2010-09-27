@@ -24,41 +24,59 @@ public interface ITemplateGroupRegistry {
 	 * @param templateGroup
 	 *          The {@link ITemplateGroup} that shall be added.
 	 */
-	public void addTemplateGroup(ITemplateGroup templateGroup);
+	public void addTemplateGroup(ITemplateGroup templateGroup) throws TemplateException;
 
 	/**
 	 * <p>
 	 * Adds an {@link ITemplateGroup} to this {@link ITemplateGroupRegistry} and
 	 * return this.
+	 * The template group use as template engine the String Template.
+	 * </p>
+	 * 
+	 * @param templateName
+	 *          The template group name.
+	 * @param superGroup
+	 *          the super template group of the new template group
+	 * @return The new added template group
+	 * @throws TemplateException  if there no template engine or gives a template group with the
+	 *           name
+	 */
+	public ITemplateGroup addDefaultTemplateGroup(String templateName, ITemplateGroup superGroup)
+			throws TemplateException;
+	
+	/**
+	 * <p>
+	 * Adds an {@link ITemplateGroup} to this {@link ITemplateGroupRegistry} and
+	 * return this.
+	 * The template group use as template engine the String Template.
 	 * </p>
 	 * 
 	 * @param templateName
 	 *          The template group name.
 	 * @param templateEngineName
-	 *          the name of the template engine
+	 *          The template engine name.
 	 * @param superGroup
 	 *          the super template group of the new template group
 	 * @return The new added template group
-	 * @throws TemplateException
-	 *           if there no template engine or gives a template group with the
+	 * @throws TemplateException  if there no template engine or gives a template group with the
 	 *           name
 	 */
-	public ITemplateGroup addDefaultTemplateGroup(String templateName,
-			String templateEngineName, ITemplateGroup superGroup)
+	public ITemplateGroup addDefaultTemplateGroup(String templateName, String templateEngineName, ITemplateGroup superGroup)
 			throws TemplateException;
 
 	/**
 	 * <p>
-	 * Returns an {@link ITemplateGroup} with the given name or <code>null</code>
-	 * if no {@link ITemplateGroup} with that name is registered.
+	 * Returns an {@link ITemplateGroup} with the given name.
 	 * </p>
 	 * 
 	 * @param templateGroupName
 	 *          An identifier name for an {@link ITemplateGroup}.
 	 * 
-	 * @return A new {@link ITemplateGroup} instance or <code>null</code>.
+	 * @return A new {@link ITemplateGroup} 
+	 * @throws
+	 * 			TemplateException if templateGroupName null or no templateGroup with this name exists.
 	 */
-	public ITemplateGroup getTemplateGroup(String templateGroupName);
+	public ITemplateGroup getTemplateGroup(String templateGroupName) throws TemplateException;
 
 	/**
 	 * <p>

@@ -14,6 +14,7 @@ import tudresden.ocl20.pivot.tools.template.ITemplateEngineRegistry;
 import tudresden.ocl20.pivot.tools.template.TemplatePlugin;
 import tudresden.ocl20.pivot.tools.template.event.ITemplateEngineRegistryListener;
 import tudresden.ocl20.pivot.tools.template.event.TemplateEngineRegistryEvent;
+import tudresden.ocl20.pivot.tools.template.exception.TemplateException;
 
 /**
  * <p>
@@ -22,7 +23,7 @@ import tudresden.ocl20.pivot.tools.template.event.TemplateEngineRegistryEvent;
  * engines.
  * </p>
  * <p>
- * In a stand-alone application of DresdenOCL, this implies that new template
+ * In a stand-alone application of Dresden OCL, this implies that new template
  * engines have to be added by hand to this registry.
  * </p>
  * 
@@ -65,16 +66,16 @@ public class StandaloneTemplateEngineRegistry implements
 	/**
 	 * @see tudresden.ocl20.pivot.tools.template.ITemplateEngineRegistry#addTemplateEngine(ITemplateEngine)
 	 */
-	public void addTemplateEngine(ITemplateEngine templateEngine) {
+	public void addTemplateEngine(ITemplateEngine templateEngine) throws TemplateException {
 
-		if (LOGGER.isDebugEnabled() || true) {
+		if (LOGGER.isDebugEnabled()) {
 			LOGGER
 					.debug("addTemplateEngine(templateEngine=" + templateEngine + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 		// no else.
 
 		if (templateEngine == null) {
-			throw new IllegalArgumentException(
+			throw new TemplateException(
 					"The parameter 'templateEngine' must not be null."); //$NON-NLS-1$
 		}
 		// no else.
@@ -116,10 +117,10 @@ public class StandaloneTemplateEngineRegistry implements
 	/**
 	 * @see tudresden.ocl20.pivot.tools.template.ITemplateEngineRegistry#getNewTemplateEngine(String)
 	 */
-	public ITemplateEngine getNewTemplateEngine(String templateEngineName) {
+	public ITemplateEngine getNewTemplateEngine(String templateEngineName) throws TemplateException{
 
 		if (templateEngineName == null) {
-			throw new IllegalArgumentException(
+			throw new TemplateException(
 					"The parameter templateEngineName must not be null.");
 		}
 		// no else.
@@ -134,7 +135,9 @@ public class StandaloneTemplateEngineRegistry implements
 		} catch (NullPointerException e) {
 			templateEngine = null;
 		}
-
+		if (templateEngine == null) {
+			throw new TemplateException("The template engine can't load.");
+		}
 		return templateEngine;
 	}
 

@@ -58,8 +58,6 @@ import tudresden.ocl20.pivot.tools.template.exception.TemplateException;
  */
 public class TestTemplateGroup {
 
-	private static String templateEngineName = "StringTemplate";
-
 	private static ITemplateGroup general = null;
 
 	private static List<ITemplateGroup> tempGroup;
@@ -77,7 +75,7 @@ public class TestTemplateGroup {
 		try {
 			general =
 					TemplatePlugin.getTemplateGroupRegistry().addDefaultTemplateGroup(
-							"Test1", templateEngineName, null);
+							"Test1", null);
 			general.addFiles(groups);
 			TemplatePlugin.getTemplateGroupRegistry().removeTemplateGroup(general);
 		} catch (TemplateException e) {
@@ -88,7 +86,11 @@ public class TestTemplateGroup {
 	@Before
 	public void setUp() {
 
-		TemplatePlugin.getTemplateGroupRegistry().addTemplateGroup(general);
+		try {
+			TemplatePlugin.getTemplateGroupRegistry().addTemplateGroup(general);
+		} catch (TemplateException e) {
+			e.printStackTrace();
+		}
 		int size =
 				TemplatePlugin.getTemplateGroupRegistry().getTemplateGroups().size();
 		assertEquals(1, size);
@@ -113,7 +115,11 @@ public class TestTemplateGroup {
 	public static void class_tear_down() {
 
 		for (ITemplateGroup tg : tempGroup) {
-			TemplatePlugin.getTemplateGroupRegistry().addTemplateGroup(tg);
+			try {
+				TemplatePlugin.getTemplateGroupRegistry().addTemplateGroup(tg);
+			} catch (TemplateException e) {
+				e.printStackTrace();
+			}
 		}
 
 	}
@@ -129,15 +135,23 @@ public class TestTemplateGroup {
 	@Test
 	public void checkAddGroup() {
 
-		ITemplateGroup test =
-				TemplatePlugin.getTemplateGroupRegistry().getTemplateGroup("Test1");
+		ITemplateGroup test = null;
+		try {
+			test = TemplatePlugin.getTemplateGroupRegistry().getTemplateGroup("Test1");
+		} catch (TemplateException e) {
+			fail("No exception has thrown.");
+		}
 		assertNotNull(test);
 
 		assertEquals(test.getDisplayName(), "Test1");
 		assertSame(test, general);
 
-		test = TemplatePlugin.getTemplateGroupRegistry().getTemplateGroup("Test2");
-		assertNull(test);
+		try {
+			test = TemplatePlugin.getTemplateGroupRegistry().getTemplateGroup("Test2");
+			fail("A excpetion must be thrown.");
+		} catch (TemplateException e) {
+			
+		}
 
 	}
 
@@ -156,14 +170,22 @@ public class TestTemplateGroup {
 		int size =
 				TemplatePlugin.getTemplateGroupRegistry().getTemplateGroups().size();
 		assertEquals(1, size);
-		ITemplateGroup temp =
-				TemplatePlugin.getTemplateGroupRegistry().getTemplateGroup("Test1");
+		ITemplateGroup temp = null;
+		try {
+			temp = TemplatePlugin.getTemplateGroupRegistry().getTemplateGroup("Test1");
+		} catch (TemplateException e) {
+			e.printStackTrace();
+		}
 
 		TemplatePlugin.getTemplateGroupRegistry().removeTemplateGroup(temp);
 		size = TemplatePlugin.getTemplateGroupRegistry().getTemplateGroups().size();
 		assertEquals(0, size);
 
-		TemplatePlugin.getTemplateGroupRegistry().addTemplateGroup(temp);
+		try {
+			TemplatePlugin.getTemplateGroupRegistry().addTemplateGroup(temp);
+		} catch (TemplateException e) {
+			e.printStackTrace();
+		}
 		size = TemplatePlugin.getTemplateGroupRegistry().getTemplateGroups().size();
 		assertEquals(1, size);
 
@@ -193,7 +215,7 @@ public class TestTemplateGroup {
 		try {
 			testSuper1 =
 					TemplatePlugin.getTemplateGroupRegistry().addDefaultTemplateGroup(
-							"TestSuper1", templateEngineName, general);
+							"TestSuper1", general);
 			testSuper1.addFile(secondTemp);
 		} catch (TemplateException e) {
 			fail("Can't set TemplateGroup testSuper1");
@@ -209,7 +231,7 @@ public class TestTemplateGroup {
 		try {
 			testSuper2 =
 					TemplatePlugin.getTemplateGroupRegistry().addDefaultTemplateGroup(
-							"TestSuper2", templateEngineName, testSuper1);
+							"TestSuper2", testSuper1);
 			testSuper2.addFile(TestStringTemplateEngine.class
 					.getResource("/resources/templates/testGeneral.stg"));
 		} catch (TemplateException e) {

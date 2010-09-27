@@ -34,6 +34,7 @@ import tudresden.ocl20.pivot.tools.codegen.declarativ.ocl2sql.Ocl2SQLFactory;
 import tudresden.ocl20.pivot.tools.codegen.declarativ.ocl2sql.test.Ocl2SqlTestPlugin;
 import tudresden.ocl20.pivot.tools.codegen.exception.Ocl2CodeException;
 import tudresden.ocl20.pivot.tools.template.TemplatePlugin;
+import tudresden.ocl20.pivot.tools.template.exception.TemplateException;
 import tudresden.ocl20.pivot.tools.transformation.exception.TransformationException;
 
 public class Ocl2SqlTest {
@@ -129,8 +130,12 @@ public class Ocl2SqlTest {
 
 		settings.setModus(IOcl2DeclSettings.MODUS_TYPED);
 		settings.setSourceDirectory(sourcePath);
-		settings.setTemplateGroup(TemplatePlugin.getTemplateGroupRegistry()
-				.getTemplateGroup("Standard(SQL)"));
+		try {
+			settings.setTemplateGroup(TemplatePlugin.getTemplateGroupRegistry()
+					.getTemplateGroup("Standard(SQL)"));
+		} catch (TemplateException e1) {
+			fail("Can't load Standard SQL template.");
+		}
 		try {
 			constraints =
 					Ocl22Parser.INSTANCE.doParse(model, URI.createFileURI(filePath

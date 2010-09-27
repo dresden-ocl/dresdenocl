@@ -28,6 +28,8 @@ public class TemplateGroupRegistry implements ITemplateGroupRegistry {
 	/** {@link Logger} for this class. */
 	private static final Logger LOGGER = TemplatePlugin
 			.getLogger(TemplateGroupRegistry.class);
+	
+	private static String DEFAULT_TEMPLATE_ENGINE = "StringTemplate";
 
 	/**
 	 * a map of all {@link ITemplateGroup}
@@ -49,7 +51,7 @@ public class TemplateGroupRegistry implements ITemplateGroupRegistry {
 	/**
 	 * @see tudresden.ocl20.pivot.tools.template.ITemplateGroupRegistry#addTemplateGroup(ITemplateGroup)
 	 */
-	public void addTemplateGroup(ITemplateGroup templateGroup) {
+	public void addTemplateGroup(ITemplateGroup templateGroup) throws TemplateException {
 
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER
@@ -58,7 +60,7 @@ public class TemplateGroupRegistry implements ITemplateGroupRegistry {
 		// no else.
 
 		if (templateGroup == null) {
-			throw new IllegalArgumentException(
+			throw new TemplateException(
 					"The parameter 'templateGroup' must not be null."); //$NON-NLS-1$
 		}
 		// no else.
@@ -100,14 +102,19 @@ public class TemplateGroupRegistry implements ITemplateGroupRegistry {
 	/**
 	 * @see tudresden.ocl20.pivot.tools.template.ITemplateGroupRegistry#getTemplateGroup(String)
 	 */
-	public ITemplateGroup getTemplateGroup(String templateGroupName) {
+	public ITemplateGroup getTemplateGroup(String templateGroupName)  throws TemplateException{
 
 		if (templateGroupName == null) {
-			throw new IllegalArgumentException(
+			throw new TemplateException(
 					"The parameter templateGroupName must not be null.");
 		}
 		// no else.
-		return this.templateGroups.get(templateGroupName);
+		if (this.templateGroups.containsKey(templateGroupName)) {
+			return this.templateGroups.get(templateGroupName);
+		} else {
+			throw new TemplateException("No template group with this name exists.");
+		}
+		
 	}
 
 	/**
@@ -261,16 +268,24 @@ public class TemplateGroupRegistry implements ITemplateGroupRegistry {
 	}
 
 	/**
+	 * @see tudresden.ocl20.pivot.tools.template.ITemplateGroupRegistry#addDefaultTemplateGroup(
+	 *      String, ITemplateGroup)
+	 */
+	public ITemplateGroup addDefaultTemplateGroup(String templateName, ITemplateGroup superGroup)
+			throws TemplateException {
+
+		return addDefaultTemplateGroup(templateName,DEFAULT_TEMPLATE_ENGINE,superGroup);
+	}
+	
+	/**
 	 * @see tudresden.ocl20.pivot.tools.template.ITemplateGroupRegistry#addDefaultTemplateGroup(String,
 	 *      String, ITemplateGroup)
 	 */
-	public ITemplateGroup addDefaultTemplateGroup(String templateName,
-			String templateEngineName, ITemplateGroup superGroup)
+	public ITemplateGroup addDefaultTemplateGroup(String templateName,String templateEngineName, ITemplateGroup superGroup)
 			throws TemplateException {
 
 		ITemplateEngine templateEngine =
-				TemplatePlugin.getTemplateEngineRegistry().getNewTemplateEngine(
-						templateEngineName);
+				TemplatePlugin.getTemplateEngineRegistry().getNewTemplateEngine(templateEngineName);
 		if (templateEngine == null)
 			throw new TemplateException("No template engine with this name");
 		if (templateGroups.containsKey(templateName))
