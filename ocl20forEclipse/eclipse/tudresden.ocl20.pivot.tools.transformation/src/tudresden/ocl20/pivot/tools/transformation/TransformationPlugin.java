@@ -48,7 +48,7 @@ public class TransformationPlugin extends Plugin {
 	 * </p>
 	 */
 	public TransformationPlugin() {
-
+		plugin = this;
 	}
 
 	/*
@@ -59,7 +59,6 @@ public class TransformationPlugin extends Plugin {
 	public void start(BundleContext context) throws Exception {
 
 		super.start(context);
-		plugin = this;
 
 		/* Configure custom logging properties. */
 		LoggingPlugin.configureDefaultLogging(plugin);
@@ -141,7 +140,7 @@ public class TransformationPlugin extends Plugin {
 	 * @param metamodelRegistry
 	 *          the {@link ITransformationRegistry} to set
 	 */
-	public synchronized static void setTempateEngineRegistry(
+	public synchronized static void setTransformationRegistry(
 			ITransformationRegistry transformationRegistry) {
 
 		/* Check that the plugin has been activated. */
