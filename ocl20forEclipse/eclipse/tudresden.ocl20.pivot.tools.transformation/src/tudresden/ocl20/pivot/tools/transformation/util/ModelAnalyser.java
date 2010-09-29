@@ -76,7 +76,7 @@ public abstract class ModelAnalyser<K extends EObject, C, V> {
 	 */
 	public boolean instanceIsOfType(Object instance, Class<?> type) {
 
-		List<Class> interfaces =
+		List<Class<?>> interfaces =
 				Arrays.asList(instance.getClass().getInterfaces());
 		if (interfaces.contains(type)) {
 			return true;
