@@ -19,6 +19,7 @@
 			<fileset dir="${eclipse.home}">
 				<include name="plugins/org.eclipse.*.jar" />
 				<include name="plugins/org.emftext.access*.jar" />
+				<include name="dropins/*/org.emftext.access*.jar" />
 			</fileset>
 			<dirset dir="./..">
       	<include name="tudresden.ocl20.**/bin"/>
