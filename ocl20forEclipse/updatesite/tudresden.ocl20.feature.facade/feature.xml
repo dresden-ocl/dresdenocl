@@ -191,14 +191,18 @@ Library.
       <import plugin="tudresden.ocl20.pivot.metamodels.uml2" version="2.1.0" match="greaterOrEqual"/>
       <import plugin="tudresden.ocl20.pivot.modelinstancetype.ecore" version="2.1.0" match="greaterOrEqual"/>
       <import plugin="tudresden.ocl20.pivot.modelinstancetype.java" version="2.1.0" match="greaterOrEqual"/>
+      <import plugin="tudresden.ocl20.pivot.language.ocl.staticsemantics"/>
+      <import plugin="tudresden.ocl20.pivot.parser"/>
       <import plugin="tudresden.ocl20.pivot.interpreter" version="2.1.0" match="greaterOrEqual"/>
       <import plugin="tudresden.ocl20.pivot.tools.codegen.ocl2java" version="2.2.0" match="greaterOrEqual"/>
       <import plugin="tudresden.ocl20.pivot.tools.codegen" version="2.1.0" match="greaterOrEqual"/>
       <import plugin="tudresden.ocl20.pivot.metamodels.xsd"/>
       <import plugin="tudresden.ocl20.pivot.modelinstancetype.xml"/>
-      <import plugin="tudresden.ocl20.pivot.language.ocl.staticsemantics"/>
-      <import plugin="tudresden.ocl20.pivot.parser"/>
       <import plugin="tudresden.ocl20.pivot.language.ocl.resource.ocl"/>
+      <import plugin="tudresden.ocl20.pivot.tools.codegen.declarativ.ocl2sql"/>
+      <import plugin="tudresden.ocl20.pivot.tools.codegen.declarativ"/>
+      <import plugin="tudresden.ocl20.pivot.tools.template"/>
+      <import plugin="tudresden.ocl20.pivot.tools.transformation"/>
    </requires>
 
    <plugin
