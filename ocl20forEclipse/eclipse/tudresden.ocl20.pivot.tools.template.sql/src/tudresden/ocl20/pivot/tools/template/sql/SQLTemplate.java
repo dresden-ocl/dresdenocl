@@ -15,10 +15,10 @@ public class SQLTemplate {
 	public static void loadSQLTemplates() {
 		
 		URL stream =
-				SQLTemplatePlugin.class
+			SQLTemplate.class
 						.getResource("/resources/templates/Standard.stg");
 		URL stream2 =
-				SQLTemplatePlugin.class
+			SQLTemplate.class
 						.getResource("/resources/templates/Standard-inv.stg");
 		List<URL> streams = new LinkedList<URL>();
 		streams.add(stream);
@@ -33,9 +33,9 @@ public class SQLTemplate {
 			e.printStackTrace();
 		}
 		stream =
-				SQLTemplatePlugin.class.getResource("/resources/templates/MySQL.stg");
+			SQLTemplate.class.getResource("/resources/templates/MySQL.stg");
 		stream2 =
-				SQLTemplatePlugin.class
+			SQLTemplate.class
 						.getResource("/resources/templates/MySQL-inv.stg");
 		streams = new LinkedList<URL>();
 		streams.add(stream);
@@ -50,10 +50,10 @@ public class SQLTemplate {
 			e.printStackTrace();
 		}
 		stream =
-				SQLTemplatePlugin.class
+			SQLTemplate.class
 						.getResource("/resources/templates/Oracle8i.stg");
 		stream2 =
-				SQLTemplatePlugin.class
+			SQLTemplate.class
 						.getResource("/resources/templates/Oracle8i-inv.stg");
 		streams = new LinkedList<URL>();
 		streams.add(stream);
@@ -68,10 +68,10 @@ public class SQLTemplate {
 			e.printStackTrace();
 		}
 		stream =
-				SQLTemplatePlugin.class
+			SQLTemplate.class
 						.getResource("/resources/templates/PostgreSQL81.stg");
 		stream2 =
-				SQLTemplatePlugin.class
+			SQLTemplate.class
 						.getResource("/resources/templates/PostgreSQL81-inv.stg");
 		streams = new LinkedList<URL>();
 		streams.add(stream);
