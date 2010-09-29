@@ -72,32 +72,32 @@ AS ( SELECT PK_Person,T_Person.age AS age,T_Person.birthDate AS birthDate,T_Pers
 FROM T_Person
 WHERE type = "Student" );
 
-ALTER TABLE `ASS_author_papers` ADD CONSTRAINT `CONASS_author_papersFK_author`
-FOREIGN KEY (`FK_author`) REFERENCES `T_Person`(`PK_Person`);
+ALTER TABLE ASS_author_papers ADD CONSTRAINT CONASS_author_papersFK_author
+FOREIGN KEY (FK_author) REFERENCES T_Person(PK_Person);
 
-ALTER TABLE `T_Person` ADD CONSTRAINT `CONT_PersonFK_currentPaper`
-FOREIGN KEY (`FK_currentPaper`) REFERENCES `T_Paper`(`PK_Paper`);
+ALTER TABLE T_Person ADD CONSTRAINT CONT_PersonFK_currentPaper
+FOREIGN KEY (FK_currentPaper) REFERENCES T_Paper(PK_Paper);
 
-ALTER TABLE `T_Person` ADD CONSTRAINT `CONT_PersonFK_grade`
-FOREIGN KEY (`FK_grade`) REFERENCES `T_Grade`(`PK_Grade`);
+ALTER TABLE T_Person ADD CONSTRAINT CONT_PersonFK_grade
+FOREIGN KEY (FK_grade) REFERENCES T_Grade(PK_Grade);
 
-ALTER TABLE `T_Facility` ADD CONSTRAINT `CONT_FacilityFK_headOfFacility`
-FOREIGN KEY (`FK_headOfFacility`) REFERENCES `T_Person`(`PK_Person`);
+ALTER TABLE T_Facility ADD CONSTRAINT CONT_FacilityFK_headOfFacility
+FOREIGN KEY (FK_headOfFacility) REFERENCES T_Person(PK_Person);
 
-ALTER TABLE `ASS_member_owner` ADD CONSTRAINT `CONASS_member_ownerFK_member`
-FOREIGN KEY (`FK_member`) REFERENCES `T_Person`(`PK_Person`);
+ALTER TABLE ASS_member_owner ADD CONSTRAINT CONASS_member_ownerFK_member
+FOREIGN KEY (FK_member) REFERENCES T_Person(PK_Person);
 
-ALTER TABLE `ASS_member_owner` ADD CONSTRAINT `CONASS_member_ownerFK_owner`
-FOREIGN KEY (`FK_owner`) REFERENCES `T_Facility`(`PK_Facility`);
+ALTER TABLE ASS_member_owner ADD CONSTRAINT CONASS_member_ownerFK_owner
+FOREIGN KEY (FK_owner) REFERENCES T_Facility(PK_Facility);
 
-ALTER TABLE `ASS_author_papers` ADD CONSTRAINT `CONASS_author_papersFK_papers`
-FOREIGN KEY (`FK_papers`) REFERENCES `T_Paper`(`PK_Paper`);
+ALTER TABLE ASS_author_papers ADD CONSTRAINT CONASS_author_papersFK_papers
+FOREIGN KEY (FK_papers) REFERENCES T_Paper(PK_Paper);
 
-ALTER TABLE `T_Facility` ADD CONSTRAINT `CONT_FacilityFK_superFacility`
-FOREIGN KEY (`FK_superFacility`) REFERENCES `T_Facility`(`PK_Facility`);
+ALTER TABLE T_Facility ADD CONSTRAINT CONT_FacilityFK_superFacility
+FOREIGN KEY (FK_superFacility) REFERENCES T_Facility(PK_Facility);
 
-ALTER TABLE `T_Person` ADD CONSTRAINT `CONT_PersonFK_supervisor`
-FOREIGN KEY (`FK_supervisor`) REFERENCES `T_Person`(`PK_Person`);
+ALTER TABLE T_Person ADD CONSTRAINT CONT_PersonFK_supervisor
+FOREIGN KEY (FK_supervisor) REFERENCES T_Person(PK_Person);
 
-ALTER TABLE `T_Person` ADD CONSTRAINT `CONT_PersonFK_theFacility`
-FOREIGN KEY (`FK_theFacility`) REFERENCES `T_Facility`(`PK_Facility`);
+ALTER TABLE T_Person ADD CONSTRAINT CONT_PersonFK_theFacility
+FOREIGN KEY (FK_theFacility) REFERENCES T_Facility(PK_Facility);

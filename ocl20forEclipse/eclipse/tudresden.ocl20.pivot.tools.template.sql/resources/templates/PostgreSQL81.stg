@@ -28,8 +28,3 @@ $if(where)$
 WHERE $where$
 $endif$
 >>
-
-createForeignKeyConstraint(tablename, columnname, reference) ::= <<
-ALTER TABLE $tablename$ ADD CONSTRAINT CON$tablename$$columnname$
-FOREIGN KEY ($columnname$) REFERENCES $reference$;
->>

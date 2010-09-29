@@ -39,8 +39,3 @@ CREATE TABLE $tablename$ (
 $columns$
 );
 >>
-
-createForeignKeyConstraint(tablename, columnname, reference) ::= <<
-ALTER TABLE $tablename$ ADD CONSTRAINT CON$tablename$$columnname$
-FOREIGN KEY ($columnname$) REFERENCES $reference$;
->>
