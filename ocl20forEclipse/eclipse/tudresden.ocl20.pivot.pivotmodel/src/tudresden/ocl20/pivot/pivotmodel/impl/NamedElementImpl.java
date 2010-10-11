@@ -143,8 +143,14 @@ public abstract class NamedElementImpl extends EObjectImpl implements
 	 */
 	public String getQualifiedName() {
 
-		return getOwner() != null ? getOwner().getQualifiedName()
-				+ "::" + getName() : getName(); //$NON-NLS-1$
+		String result;
+		
+		if (this.getOwner() != null && this.getOwner() != this)
+			result = this.getOwner().getQualifiedName() + "::" + this.getName();
+		else
+			result = this.getName();
+		
+		return result;
 	}
 
 	/**

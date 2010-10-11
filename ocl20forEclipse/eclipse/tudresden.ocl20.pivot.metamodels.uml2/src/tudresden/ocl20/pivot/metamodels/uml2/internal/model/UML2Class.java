@@ -19,6 +19,7 @@ import java.util.List;
 import org.apache.log4j.Logger;
 import org.eclipse.uml2.uml.Class;
 import org.eclipse.uml2.uml.Interface;
+import org.eclipse.uml2.uml.Stereotype;
 
 import tudresden.ocl20.pivot.metamodels.uml2.UML2MetamodelPlugin;
 import tudresden.ocl20.pivot.pivotmodel.Namespace;
@@ -171,6 +172,10 @@ public class UML2Class extends AbstractType implements Type {
 
 		for (Interface interfaze : this.dslClass.getAllImplementedInterfaces()) {
 			result.add(this.factory.createType(interfaze));
+		}
+		
+		for (Stereotype stereotype : this.dslClass.getAppliedStereotypes()) {
+			result.add(this.factory.createType(stereotype));
 		}
 
 		return result;

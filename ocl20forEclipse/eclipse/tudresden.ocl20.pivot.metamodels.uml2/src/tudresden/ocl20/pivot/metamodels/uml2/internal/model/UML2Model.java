@@ -286,34 +286,65 @@ public class UML2Model extends AbstractModel implements IModel {
 			 */
 			else if (eObject instanceof Package) {
 
-				Package importedPackage;
-				importedPackage = (Package) eObject;
+				/* If the package is a model or a profile only add its content. */
+				if (eObject instanceof Model || eObject instanceof Profile) {
 
-				if (importedPackage.getNestingPackage() == null
-						|| importedPackage.getNestingPackage() instanceof Model
-						|| importedPackage.getNestingPackage() instanceof Profile) {
+					for (Package umlPackage : ((Package) eObject)
+							.getNestedPackages()) {
+						Namespace adaptedNamespace = this.factory
+								.createNamespace(umlPackage, this.rootNamespace);
+						if (adaptedNamespace != null
+								&& !this.rootNamespace.getNestedNamespace()
+										.contains(adaptedNamespace))
+							this.rootNamespace
+									.addNestedNamespace(adaptedNamespace);
+						// no else.
+					}
+					// end for.
 
-					/*
-					 * Adapt the package. If a package with the same name
-					 * already exists, the packages are merged.
-					 */
-					Namespace importedNamespace;
-					importedNamespace = this.factory.createNamespace(
-							importedPackage, this.rootNamespace);
+					for (Type umlType : ((Package) eObject).getOwnedTypes()) {
+						tudresden.ocl20.pivot.pivotmodel.Type adaptedType = this.factory
+								.createType(umlType);
+						if (adaptedType != null
+								&& !this.rootNamespace.getOwnedType().contains(
+										adaptedType))
+							this.rootNamespace.addType(adaptedType);
+						// no else.
+					}
+					// end for.
+				}
 
-					/*
-					 * Only add the name space if it has not been added yet (for
-					 * merged name space, the name space has not to be added
-					 * again).
-					 */
-					if (!this.rootNamespace.getNestedNamespace().contains(
-							importedNamespace)) {
-						this.rootNamespace
-								.addNestedNamespace(importedNamespace);
+				else {
+					Package importedPackage;
+					importedPackage = (Package) eObject;
+
+					if (importedPackage.getNestingPackage() == null
+							|| importedPackage.getNestingPackage() instanceof Model
+							|| importedPackage.getNestingPackage() instanceof Profile) {
+
+						/*
+						 * Adapt the package. If a package with the same name
+						 * already exists, the packages are merged.
+						 */
+						Namespace importedNamespace;
+						importedNamespace = this.factory.createNamespace(
+								importedPackage, this.rootNamespace);
+
+						/*
+						 * Only add the name space if it has not been added yet
+						 * (for merged name space, the name space has not to be
+						 * added again).
+						 */
+						if (!this.rootNamespace.getNestedNamespace().contains(
+								importedNamespace)) {
+							this.rootNamespace
+									.addNestedNamespace(importedNamespace);
+						}
+						// no else.
 					}
 					// no else.
 				}
-				// no else.
+				// end else.
 			}
 			// no else.
 		}
@@ -431,8 +462,8 @@ public class UML2Model extends AbstractModel implements IModel {
 				}
 
 				else if (eObject instanceof Package) {
-					Namespace adaptedNamespace = this.factory
-							.createNamespace((Package) eObject, this.rootNamespace);
+					Namespace adaptedNamespace = this.factory.createNamespace(
+							(Package) eObject, this.rootNamespace);
 					if (adaptedNamespace != null)
 						this.rootNamespace.addNestedNamespace(adaptedNamespace);
 					// no else.
