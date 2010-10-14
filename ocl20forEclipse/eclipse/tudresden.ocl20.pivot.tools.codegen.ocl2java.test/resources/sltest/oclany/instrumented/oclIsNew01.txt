@@ -6,7 +6,7 @@ package testpackage.constraints;
  * @author OCL22Java of Dresden OCL2 for Eclipse
  * @Generated
  */
-public privileged aspect PostAspect1 {
+public privileged aspect testOclIsNew {
 
     protected java.util.Map<Object, Object> newInstances = new java.util.WeakHashMap<Object, Object>();
 

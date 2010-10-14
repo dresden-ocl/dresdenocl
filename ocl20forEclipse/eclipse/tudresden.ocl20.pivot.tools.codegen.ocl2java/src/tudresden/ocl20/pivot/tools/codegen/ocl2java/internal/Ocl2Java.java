@@ -2767,9 +2767,15 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 		/* The package of the context java file */
 		String contextPackage;
 
-		/* Get a new aspect file name. */
-		aspectName = this.myCodeTransEnv.getNewBodyAspectName();
+		/* Compute the aspect's file name. */
+		aspectName = aConstraint.getName();
+		
+		if (aConstraint.getName() == null || aConstraint.getName().length() == 0 || this.myCodeTransEnv.isUsedAspectName(aspectName)) 
+			aspectName = this.myCodeTransEnv.getNewBodyAspectName();
+		// no else.
 
+		this.myCodeTransEnv.addUsedAspectName(aspectName);
+		
 		/* Generate the code which shall be inside the advice(s). */
 		constrainedCode = this.transformFragmentCode(aConstraint);
 
@@ -2923,7 +2929,15 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 		/* Generate the code which shall be inside the advice(s). */
 		constrainedCode = this.transformFragmentCode(aConstraint);
 
-		aspectName = this.myCodeTransEnv.getNewDefAspectName();
+		/* Get a name for the generated aspect. */
+		aspectName = aConstraint.getDefinedFeature().getName();
+		
+		if (aspectName == null || aspectName.length() == 0 || this.myCodeTransEnv.isUsedAspectName(aspectName)) 
+			aspectName = this.myCodeTransEnv.getNewDefAspectName();
+		// no else.
+
+		this.myCodeTransEnv.addUsedAspectName(aspectName);
+
 		contextPackage = this.getPackagePath(aConstraint);
 
 		/* Begin with aspect specification. */
@@ -3221,7 +3235,14 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 		/* Generate the code which shall be inside the advice(s). */
 		constrainedCode = this.transformFragmentCode(aConstraint);
 
-		aspectName = this.myCodeTransEnv.getNewDeriveAspectName();
+		/* Get a name for the generated aspect. */
+		aspectName = aConstraint.getName();
+		
+		if (aConstraint.getName() == null || aConstraint.getName().length() == 0 || this.myCodeTransEnv.isUsedAspectName(aspectName)) 
+			aspectName = this.myCodeTransEnv.getNewDeriveAspectName();
+		// no else.
+
+		this.myCodeTransEnv.addUsedAspectName(aspectName);
 
 		/* Get the path of the package where the constraint class is located. */
 		contextPackage = this.getPackagePath(aConstraint);
@@ -3373,8 +3394,14 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 		/* Generate the code which shall be inside the advice(s). */
 		constrainedCode = this.transformFragmentCode(aConstraint);
 
-		/* Get a new name for an initial aspect. */
-		aspectName = this.myCodeTransEnv.getNewInitAspectName();
+		/* Get a name for the generated aspect. */
+		aspectName = aConstraint.getName();
+		
+		if (aConstraint.getName() == null || aConstraint.getName().length() == 0 || this.myCodeTransEnv.isUsedAspectName(aspectName)) 
+			aspectName = this.myCodeTransEnv.getNewInitAspectName();
+		// no else.
+
+		this.myCodeTransEnv.addUsedAspectName(aspectName);
 
 		/* Get the path of the package where the constraint class is located. */
 		contextPackage = this.getPackagePath(aConstraint);
@@ -3514,8 +3541,14 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 		/* Generate the code which shall be inside the advice(s). */
 		constrainedCode = this.transformFragmentCode(aConstraint);
 
-		/* Get a new name for an invariant aspect. */
-		aspectName = this.myCodeTransEnv.getNewInvAspectName();
+		/* Get a name for the generated aspect. */
+		aspectName = aConstraint.getName();
+		
+		if (aConstraint.getName() == null || aConstraint.getName().length() == 0 || this.myCodeTransEnv.isUsedAspectName(aspectName)) 
+			aspectName = this.myCodeTransEnv.getNewInvAspectName();
+		// no else.
+
+		this.myCodeTransEnv.addUsedAspectName(aspectName);
 
 		/* Get the path of the package where the constraint class is located. */
 		contextPackage = this.getPackagePath(aConstraint);
@@ -3732,8 +3765,14 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 		/* Generate the code which shall be inside the advice(s). */
 		constrainedCode = this.transformFragmentCode(aConstraint);
 
-		/* Get a new name for a postcondition aspect. */
-		aspectName = this.myCodeTransEnv.getNewPostAspectName();
+		/* Get a name for the generated aspect. */
+		aspectName = aConstraint.getName();
+		
+		if (aConstraint.getName() == null || aConstraint.getName().length() == 0 || this.myCodeTransEnv.isUsedAspectName(aspectName)) 
+			aspectName = this.myCodeTransEnv.getNewPostAspectName();
+		// no else.
+
+		this.myCodeTransEnv.addUsedAspectName(aspectName);
 
 		/* Get the path of the package where the constraint class is located. */
 		contextPackage = this.getPackagePath(aConstraint);
@@ -3973,8 +4012,14 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 		/* Generate the code which shall be inside the advice(s). */
 		constrainedCode = this.transformFragmentCode(aConstraint);
 
-		/* Get a new name for a preconditon. */
-		aspectName = this.myCodeTransEnv.getNewPreAspectName();
+		/* Get a name for the generated aspect. */
+		aspectName = aConstraint.getName();
+		
+		if (aConstraint.getName() == null || aConstraint.getName().length() == 0 || this.myCodeTransEnv.isUsedAspectName(aspectName)) 
+			aspectName = this.myCodeTransEnv.getNewPreAspectName();
+		// no else.
+
+		this.myCodeTransEnv.addUsedAspectName(aspectName);
 
 		/* Get the path of the package where the constraint class is located. */
 		contextPackage = this.getPackagePath(aConstraint);

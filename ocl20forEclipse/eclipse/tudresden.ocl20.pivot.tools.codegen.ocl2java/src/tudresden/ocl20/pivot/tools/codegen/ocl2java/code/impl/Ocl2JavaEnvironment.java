@@ -18,6 +18,7 @@ with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
 package tudresden.ocl20.pivot.tools.codegen.ocl2java.code.impl;
 
+import java.util.HashSet;
 import java.util.IdentityHashMap;
 import java.util.Map;
 import java.util.Set;
@@ -76,6 +77,9 @@ public class Ocl2JavaEnvironment implements IOcl2JavaEnvironment {
 
 	protected static final String PRE_ASPECT_NAME = "PreAspect";
 	protected int preAspectNameCounter = 0;
+	
+	/** Contains all names allready used for generated aspects. */
+	protected Set<String> usedAspectNames = new HashSet<String>();
 
 	/**
 	 * Contains {@link ITemplate}s of transformed Java classes which are used to
@@ -579,5 +583,21 @@ public class Ocl2JavaEnvironment implements IOcl2JavaEnvironment {
 	public Set<String> getCalledProperties() {
 
 		return this.calledProperties;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see tudresden.ocl20.pivot.tools.codegen.ocl2java.code.IOcl2JavaEnvironment#addUsedAspectName(java.lang.String)
+	 */
+	public void addUsedAspectName(String name) {
+		this.usedAspectNames.add(name);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see tudresden.ocl20.pivot.tools.codegen.ocl2java.code.IOcl2JavaEnvironment#isUsedAspectName(java.lang.String)
+	 */
+	public boolean isUsedAspectName(String name) {
+		return name != null && name.length() > 0 && this.usedAspectNames.contains(name);
 	}
 }
