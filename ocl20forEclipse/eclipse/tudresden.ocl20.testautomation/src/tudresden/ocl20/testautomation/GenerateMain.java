@@ -31,23 +31,44 @@ public class GenerateMain {
 
 		GenerateMain me = new GenerateMain();
 
-		// SQUAM-Testsuite
 
-		TestGroup squamTestGroup =
+		
+		TestGroup benchmarkB1 =
 				new TestGroup(
-						"squam",
-						"tudresden.ocl20.testautomation/bin/umlmodel.uml", //
-						"tudresden.ocl20.testautomation/bin/uml/ModelInstanceProviderClass.class",//
-						"tests/squam/");
-		// Extending the Standardlibrary is not implemented currently
-		squamTestGroup.addPathToIgnore("/Definitions/StringExtensions.oclx.ocl");
-		
-		squamTestGroup.createStatementTestUnits();
-		
-		me.testBuilder.generate(squamTestGroup);
+						"benchmarkb1",
+						"tudresden.ocl20.testautomation/bin/benchmark.model.ecore", //
+						"tudresden.ocl20.testautomation/bin/benchmark/b1/ModelFirstState.class",//
+						"tests/benchmark/b1");
 
-		//
-		 // ocl20-internal tests
+		benchmarkB1.createStatementTestUnits();
+		me.testBuilder.generate(benchmarkB1);
+		
+		
+		TestGroup benchmarkB4 =
+			new TestGroup(
+					"benchmarkb4",
+					"tudresden.ocl20.testautomation/bin/umlmodel.uml", //
+					"tudresden.ocl20.testautomation/bin/uml/ModelInstanceProviderClass.class",//
+					"tests/benchmark/b4");
+
+	benchmarkB4.createStatementTestUnits();
+	me.testBuilder.generate(benchmarkB4);
+
+		// SQUAM-Testsuite
+		 TestGroup squamTestGroup =
+		 new TestGroup(
+		 "squam",
+		 "tudresden.ocl20.testautomation/bin/umlmodel.uml", //
+		 "tudresden.ocl20.testautomation/bin/uml/ModelInstanceProviderClass.class",//
+		 "tests/squam/");
+		 // Extending the Standardlibrary is not implemented currently
+		 squamTestGroup.addPathToIgnore("/Definitions/StringExtensions.oclx.ocl");
+				
+		 squamTestGroup.createStatementTestUnits();
+				
+		 me.testBuilder.generate(squamTestGroup);
+
+		// ocl20-internal tests
 		 me
 		 .buildSimpleInvarianceTests(
 		 "ocl20tests",
@@ -65,18 +86,18 @@ public class GenerateMain {
 		// dir + "ModelInstanceProviderClass.class",
 		// "tests/sourceforge/Bug3007222.ocl");
 		//
-		 TestGroup benchmarkCommon =
-		 new TestGroup(
-		 "benchmark",
-		 "tudresden.ocl20.testautomation/bin/umlmodel.uml", //
-		 "tudresden.ocl20.testautomation/bin/uml/ModelInstanceProviderClass.class",//
-		 "tests/benchmark");
-		 benchmarkCommon.addPathToIgnore("/b1");
-		 benchmarkCommon.addPathToIgnore("/b2");
-		 benchmarkCommon.addPathToIgnore("/b3");
-		 benchmarkCommon.addPathToIgnore("/b4");
-		 benchmarkCommon.createStatementTestUnits();
-		 me.testBuilder.generate(benchmarkCommon);
+		// TestGroup benchmarkCommon =
+		// new TestGroup(
+		// "benchmark",
+		// "tudresden.ocl20.testautomation/bin/umlmodel.uml", //
+		// "tudresden.ocl20.testautomation/bin/uml/ModelInstanceProviderClass.class",//
+		// "tests/benchmark");
+		// benchmarkCommon.addPathToIgnore("/b1");
+		// benchmarkCommon.addPathToIgnore("/b2");
+		// benchmarkCommon.addPathToIgnore("/b3");
+		// benchmarkCommon.addPathToIgnore("/b4");
+		// benchmarkCommon.createStatementTestUnits();
+		// me.testBuilder.generate(benchmarkCommon);
 
 		// ----------------
 		// parser tests

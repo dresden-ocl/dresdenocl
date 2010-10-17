@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="benchmark"
+    nsURI="http:///tudresden.ecore" nsPrefix="benchmark">
+  <eSubpackages name="b1" nsURI="http:///tudresden/ocl20/benchmark/b1.ecore" nsPrefix="tudresden.ocl20.benchmark.b1">
+    <eClassifiers xsi:type="ecore:EClass" name="Person">
+      <eOperations name="spouse" ordered="false" lowerBound="1" eType="#//b1/Person"/>
+      <eOperations name="getByName" eType="#//b1/Person">
+        <eParameters name="aName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+      </eOperations>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" ordered="false"
+          lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+          defaultValueLiteral=""/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="civstat" ordered="false"
+          lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+          defaultValueLiteral=""/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="gender" ordered="false"
+          lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+          defaultValueLiteral=""/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="alive" ordered="false"
+          lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBooleanObject"
+          defaultValueLiteral=""/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="husband" eType="#//b1/Person"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="wife" eType="#//b1/Person"/>
+    </eClassifiers>
+  </eSubpackages>
+</ecore:EPackage>

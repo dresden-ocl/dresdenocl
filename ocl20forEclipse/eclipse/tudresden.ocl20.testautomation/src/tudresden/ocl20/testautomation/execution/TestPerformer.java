@@ -22,6 +22,7 @@ import tudresden.ocl20.pivot.interpreter.IOclInterpreter;
 import tudresden.ocl20.pivot.interpreter.OclInterpreterPlugin;
 import tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclResource;
 import tudresden.ocl20.pivot.language.ocl.staticsemantics.OclPostParser;
+import tudresden.ocl20.pivot.metamodels.ecore.EcoreMetamodelPlugin;
 import tudresden.ocl20.pivot.metamodels.uml2.UML2MetamodelPlugin;
 import tudresden.ocl20.pivot.model.IModel;
 import tudresden.ocl20.pivot.model.IModelProvider;
@@ -42,7 +43,8 @@ import tudresden.ocl20.testautomation.exceptions.TestInitializationException;
 
 public class TestPerformer {
 
-	private final static String META_MODEL = UML2MetamodelPlugin.ID;
+	private final static String UML_META_MODEL = UML2MetamodelPlugin.ID;
+	private final static String ECORE_META_MODEL = EcoreMetamodelPlugin.ID;
 
 	private static Logger log = Logger.getLogger(TestPerformer.class);
 
@@ -109,7 +111,8 @@ public class TestPerformer {
 	public TestPerformer(String modelPath, String modelInstancePath)
 			throws TestInitializationException {
 
-		this();
+		this.initModelProvider(modelPath);
+		this.modelInstanceProvider = new JavaModelInstanceProvider();
 
 		if (modelPath == null || modelPath.isEmpty()) {
 			throw new TestInitializationException("Model must not be null");
@@ -124,25 +127,44 @@ public class TestPerformer {
 
 	}
 
+	/**
+	 * According to the type of model we're using, we'll load the meta model and
+	 * the
+	 */
+	private void initModelProvider(String modelFile) {
+
+		// quick and simple: the extension decides which meta model to load.
+		int index = modelFile.lastIndexOf('.');
+		if (index == -1) {
+			throw new RuntimeException(
+					"Unknown model file extension. Cannot determine meta model");
+		}
+		String ext = modelFile.substring(index + 1).toLowerCase();
+		if (ext.equals("ecore")) {
+			this.metaModel =
+					ModelBusPlugin.getMetamodelRegistry().getMetamodel(ECORE_META_MODEL);
+		}
+		else if (ext.equals("uml")) {
+			this.metaModel =
+					ModelBusPlugin.getMetamodelRegistry().getMetamodel(UML_META_MODEL);
+		}
+		else {
+			throw new RuntimeException(
+					"Unknown model file extension. Cannot load meta model for extension "
+							+ ext);
+		}
+
+		// create model provider for the meta model chosen above
+		this.modelProvider = this.metaModel.getModelProvider();
+
+	}
+
 	private void initInstanceAndInterpreter(URI modelInstancePath)
 			throws TestInitializationException {
 
 		this.loadModelInstance(modelInstancePath);
 
 		this.createInterpreter();
-	}
-
-	private TestPerformer() {
-
-		this.metaModel =
-				ModelBusPlugin.getMetamodelRegistry().getMetamodel(META_MODEL);
-
-		if (this.metaModel == null) {
-			throw new RuntimeException("Unable to load meta model during test.");
-		}
-		// initialize provider
-		this.modelProvider = this.metaModel.getModelProvider();
-		this.modelInstanceProvider = new JavaModelInstanceProvider();
 	}
 
 	private void createInterpreter() throws TestInitializationException {
