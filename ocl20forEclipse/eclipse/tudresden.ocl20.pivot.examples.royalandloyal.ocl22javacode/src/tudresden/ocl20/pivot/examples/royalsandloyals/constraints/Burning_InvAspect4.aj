@@ -1,0 +1,37 @@
+package tudresden.ocl20.pivot.examples.royalsandloyals.constraints;
+
+/**
+ * <p>Generated Aspect to enforce OCL constraint.</p>
+ *
+ * @author OCL22Java of Dresden OCL2 for Eclipse
+ * @Generated
+ */
+public privileged aspect Burning_InvAspect4 {
+
+    public void tudresden.ocl20.pivot.examples.royalsandloyals.Burning.checkInvariants() {
+        /* Remains empty. Is overridden by advice(s). */
+    }
+    /**
+     * <p>Pointcut for all calls on {@link tudresden.ocl20.pivot.examples.royalsandloyals.Burning#checkInvariants()}.</p>
+     */
+    protected pointcut checkInvariantsCaller(tudresden.ocl20.pivot.examples.royalsandloyals.Burning aClass):
+    	call(void tudresden.ocl20.pivot.examples.royalsandloyals.Burning.checkInvariants())
+    	&& target(aClass);
+    
+    /**
+     * <p><code>Checks an invariant on the class Burning defined by the constraint
+     * <code>context Burning
+     *       inv: self.points = self.oclAsType(Transaction).points</code></p>
+     */
+    after(tudresden.ocl20.pivot.examples.royalsandloyals.Burning aClass) : checkInvariantsCaller(aClass) {
+        /* Disable this constraint for subclasses of Burning. */
+        if (aClass.getClass().getCanonicalName().equals("tudresden.ocl20.pivot.examples.royalsandloyals.Burning")) {
+        if (!((Object) aClass.points).equals(((tudresden.ocl20.pivot.examples.royalsandloyals.Transaction) aClass).points)) {
+        	// TODO Auto-generated code executed when constraint is violated.
+        	throw new RuntimeException("Error: Constraint was violated.");
+        }
+        // no else.
+        }
+        // no else.
+    }
+}

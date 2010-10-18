@@ -8,5 +8,6 @@ Export-Package: tudresden.ocl20.pivot.examples.royalsandloyals.constraints,
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Require-Bundle: org.aspectj.runtime,
  org.junit4;bundle-version="4.0.0",
- tudresden.ocl20.pivot.tools.codegen.ocl2java.types
+ tudresden.ocl20.pivot.tools.codegen.ocl2java.types,
+ tudresden.ocl20.pivot.testsuite
 Bundle-Vendor: TU Dresden, Software Technology Group
