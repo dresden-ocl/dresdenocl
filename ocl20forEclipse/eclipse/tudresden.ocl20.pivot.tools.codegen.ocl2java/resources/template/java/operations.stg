@@ -537,7 +537,7 @@ orOperation(sourceExp, argsExp) ::= <<
 >>
 
 
-// --- OclIsTypeOf Operation ---
+// --- OclType Operation ---
 oclTypeOperation(sourceExp, argsExp) ::= <<
 $sourceExp$.getClass()
 >>

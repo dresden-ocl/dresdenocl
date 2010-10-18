@@ -102,7 +102,7 @@ attributeSetterPointcut(class, package, atName, atPath) ::= <<
  * <p>Pointcut for all changes of the attribute {@link $package$.$class$#$atPath$}.</p>
  */
 protected pointcut $atName$Setter($package$.$class$ $selfVariable()$) :
-    set(* $package$.$class$.$atPath$) && this($selfVariable()$);
+    set(* $package$.$class$.$atPath$) && target($selfVariable()$);
 >>
 
 
@@ -143,7 +143,7 @@ getterPointcut(class, package, atName, atType) ::= <<
  * <p>Pointcut for all requests on {@link $package$.$class$#$atName$}.</p>
  */
 protected pointcut $atName$Getter($package$.$class$ $selfVariable()$) :
-	get(* $atName$) && this($selfVariable()$);
+	get(* $atName$) && target($selfVariable()$);
 >>
 
 
@@ -233,9 +233,41 @@ $if(returnType)$$returnType$$else$void$endif$ around($if(opIsStatic)$$else$$pack
 
 // --- Instrumentation Code for Definition Constraints ---
 // -- Definition of new attributes --
-defAttributeInstrumentation(class, package, superClass, constFolder, constCode, constExp, oclBody, attribute, attributeType) ::= <<
-$if(superClass)$$declareSuperClassAdvice(class = class, superClass = superClass, package = package, constFolder = constFolder)$$endif$
+defAttributeInstrumentation(class, package, superClass, constFolder, constCode, constExp, oclBody, attribute, attributeType, isStatic, getterName) ::= <<
+/**
+ * <p>Defines the field $attribute$ defined by the constraint
+ * <code>context $class$
+ *       $oclBody$</code></p>
+ */
+public $if(isStatic)$static $endif$$attributeType$ $package$.$class$.$attribute$;
 
+$if(getterName)$
+/**
+ * <p>Getter method for the attribute $attribute$.</p>
+ */
+public $if(isStatic)$static $endif$$attributeType$ $package$.$class$.$getterName$() {
+$if(isStatic)$
+    return $package$.$class$.$attribute$;
+$else$
+    return this.$attribute$;    
+$endif$
+
+}
+
+$endif$
+$if(isStatic)$
+$staticGetterPointcut(class = class, package = package, atName = attribute, atType = attributeType)$
+
+/**
+ * <p>Initializes the attribute $attribute$ defined by the constraint
+ * <code>context $class$
+ *       $oclBody$</code></p>
+ */
+before(): $attribute$Getter() {
+    $constCode$
+    $package$.$class$.$attribute$ = $constExp$;
+}
+$else$
 $getterPointcut(class = class, package = package, atName = attribute, atType = attributeType)$
 
 /**
@@ -247,21 +279,23 @@ before($package$.$class$ $selfVariable()$): $attribute$Getter($selfVariable()$) 
     $constCode$
     $selfVariable()$.$attribute$ = $constExp$;
 }
+$endif$
 >>
 
 
 // -- Definition of new methods --
-defMethodInstrumentation(class, package, superClass, constFolder, constCode, constExp, oclBody, method, args, argTypes, returnType) ::= <<
-$if(superClass)$$declareSuperClassAdvice(class = class, superClass = superClass, package = package, constFolder = constFolder)$$endif$
-
-$methodCallPointcut(class = class, package = package, method = method, args = args, argTypes = argTypes, returnType = returnType)$
-
+defMethodInstrumentation(class, package, constFolder, constCode, constExp, oclBody, method, args, argTypes, returnType, isStatic, usesSelfVariable) ::= <<
 /**
  * <p>Defines the method $method$($if(args)$$args, argTypes:{arg, type | $type$ $arg$}; separator= ", "$$endif$) defined by the constraint
  * <code>context $class$
  *       $oclBody$</code></p>
  */
-$if(returnType)$$returnType$$else$void$endif$ around($package$.$class$ $selfVariable()$$if(args)$$args, argTypes:{arg, type | , $type$ $arg$}$$endif$): $method$Caller($selfVariable()$$args:{arg | , $arg$}$) {
+public $if(isStatic)$static $endif$$if(returnType)$$returnType$$else$void$endif$ $package$.$class$.$method$($args, argTypes:{arg, type | $type$ $arg$}; separator = ", "$) {
+	$if(usesSelfVariable)$
+	/* Self variable probably used within the definition. */
+	$package$.$class$ $selfVariable()$ = this;
+	
+	$endif$
     $constCode$
     $if(returnType)$
     return $constExp$;
@@ -423,9 +457,13 @@ after($package$.$class$ $selfVariable()$) throwing : all$class$PublicMethods($se
 
 
 // --- Instrumentation Code for Invariants with validation variant 3 ---
-invInstrumentation3(class, package, attribute, attributeType, constCode, constExp, oclBody, errorCode, disableInheritance, superClass, constFolder) ::= <<
-$if(superClass)$$declareSuperClassAdvice(class = class, superClass = superClass, package = package, constFolder = constFolder)$$endif$
+invInstrumentation3(class, package, attribute, attributeType, constCode, constExp, oclBody, errorCode, disableInheritance, defineCheckMethod) ::= <<
+$if(defineCheckMethod)$
+public void $package$.$class$.$checkInvariantsOperationName()$() {
+    /* Remains empty. Is overridden by advice(s). */
+}
 
+$endif$
 $invInstrumentation3_methodCallPointcut(class = class, package = package)$
 
 /**

@@ -73,7 +73,6 @@ import tudresden.ocl20.pivot.essentialocl.types.TupleType;
 import tudresden.ocl20.pivot.essentialocl.types.TypeType;
 import tudresden.ocl20.pivot.essentialocl.types.VoidType;
 import tudresden.ocl20.pivot.model.IModel;
-import tudresden.ocl20.pivot.pivotmodel.ConstrainableElement;
 import tudresden.ocl20.pivot.pivotmodel.Constraint;
 import tudresden.ocl20.pivot.pivotmodel.ConstraintKind;
 import tudresden.ocl20.pivot.pivotmodel.Enumeration;
@@ -118,20 +117,15 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 	private final static String TEMPLATE_PATH = "/resources/template/java/";
 	private final static String EXPRESSION_TEMPLATE_FILE = "expressions.stg";
 	private final static String JAVA_TEMPLATE_FILE = "java.stg";
-	private final static String INSTRUMENTATION_TEMPLATE_FILE =
-			"instrumentations.stg";
+	private final static String INSTRUMENTATION_TEMPLATE_FILE = "instrumentations.stg";
 	private final static String OPERATION_TEMPLATE_FILE = "operations.stg";
 	private final static String TYPE_TEMPLATE_FILE = "types.stg";
 
-	/** The prefix of the name of new created super classes. */
-	private final static String EXTENDEC_CLASS_NAME_PREFIX = "Extended";
-
 	/**
-	 * Contains operation names that must be renamed to support them in languages
-	 * like Java. E.g., '=' ist renamed to equals.
+	 * Contains operation names that must be renamed to support them in
+	 * languages like Java. E.g., '=' ist renamed to equals.
 	 */
-	private static Map<String, String> renamedOperationNames =
-			new HashMap<String, String>();
+	private static Map<String, String> renamedOperationNames = new HashMap<String, String>();
 
 	/* static initialization. */
 	static {
@@ -141,7 +135,8 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 	}
 
 	/**
-	 * The engine to provide all {@link ITemplate}s used for code transformation.
+	 * The engine to provide all {@link ITemplate}s used for code
+	 * transformation.
 	 */
 	private ITemplateGroup myTemplateGroup;
 
@@ -160,7 +155,7 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 	 * </p>
 	 * 
 	 * @throws Ocl2CodeException
-	 *           If the initialization fails.
+	 *             If the initialization fails.
 	 */
 	public Ocl2Java() throws Ocl2CodeException {
 
@@ -173,8 +168,8 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 	 * </p>
 	 * 
 	 * @throws Ocl2CodeException
-	 *           Thrown, if a String template for code transformation can not be
-	 *           found.
+	 *             Thrown, if a String template for code transformation can not
+	 *             be found.
 	 */
 	private void init() throws Ocl2CodeException {
 
@@ -202,10 +197,10 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 			templatePaths.add(this.getClass().getResource(
 					TEMPLATE_PATH + INSTRUMENTATION_TEMPLATE_FILE));
 
-			TemplatePlugin.getTemplateGroupRegistry().removeTemplateGroup("Ocl2Java");
-			this.myTemplateGroup =
-					TemplatePlugin.getTemplateGroupRegistry().addDefaultTemplateGroup(
-							"Ocl2Java", null);
+			TemplatePlugin.getTemplateGroupRegistry().removeTemplateGroup(
+					"Ocl2Java");
+			this.myTemplateGroup = TemplatePlugin.getTemplateGroupRegistry()
+					.addDefaultTemplateGroup("Ocl2Java", null);
 
 			this.myTemplateGroup.addFiles(templatePaths);
 
@@ -234,6 +229,7 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see tudresden.ocl20.pivot.ocl2java.IOcl2Code#getSettings()
 	 */
 	public IOcl2JavaSettings getSettings() {
@@ -243,6 +239,7 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see tudresden.ocl20.pivot.ocl2java.IOcl22Code#resetEnvironment()
 	 */
 	public void resetEnvironment() {
@@ -256,9 +253,9 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 	 * </p>
 	 * 
 	 * @param aConstraint
-	 *          The {@link Constraint} for which code shall be transformed.
-	 * @return An {@link ITransformedCode} containing the Code transformed for the
-	 *         given {@link Constraint}'s {@link OclExpression}.
+	 *            The {@link Constraint} for which code shall be transformed.
+	 * @return An {@link ITransformedCode} containing the Code transformed for
+	 *         the given {@link Constraint}'s {@link OclExpression}.
 	 * @throws Ocl2CodeException
 	 */
 	private ITransformedCode transformFragmentCode(Constraint aConstraint)
@@ -286,11 +283,13 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.ocl2java.IOcl2Code#transformInstrumentationCode
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.ocl2java.IOcl2Code#transformInstrumentationCode
 	 * (java.util.List)
 	 */
-	public List<String> transformInstrumentationCode(List<Constraint> constraints)
-			throws Ocl2CodeException {
+	public List<String> transformInstrumentationCode(
+			List<Constraint> constraints) throws Ocl2CodeException {
 
 		/* Probably log the entry into this method. */
 		if (LOGGER.isDebugEnabled()) {
@@ -333,11 +332,12 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 	 * </p>
 	 * 
 	 * @param aConstraint
-	 *          The {@link Constraint} for which the code shall be transformed.
+	 *            The {@link Constraint} for which the code shall be
+	 *            transformed.
 	 * @return The transformed Code for the given {@link Constraint}.
 	 * @throws Ocl2CodeException
-	 *           Thrown, if an unknown or illegal Type or Expression is found
-	 *           during code transformation.
+	 *             Thrown, if an unknown or illegal Type or Expression is found
+	 *             during code transformation.
 	 */
 	private String transformInstrumentationCode(Constraint aConstraint)
 			throws Ocl2CodeException {
@@ -353,8 +353,8 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 		ConstraintKind constraintKind;
 
 		/*
-		 * Each constraint code use local variables. Thus the counters for generated
-		 * variables in the Environment can be reseted.
+		 * Each constraint code use local variables. Thus the counters for
+		 * generated variables in the Environment can be reseted.
 		 */
 		this.myCodeTransEnv.resetEnvironmentForNextConstraint();
 
@@ -413,7 +413,9 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch
 	 * #caseBooleanLiteralExp
 	 * (tudresden.ocl20.pivot.essentialocl.expressions.BooleanLiteralExp)
 	 */
@@ -453,7 +455,9 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch
 	 * #caseCollectionLiteralExp
 	 * (tudresden.ocl20.pivot.essentialocl.expressions.CollectionLiteralExp)
 	 */
@@ -476,8 +480,8 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 		result = new TransformedCodeImpl();
 
 		/* Compute the result type first. */
-		resultType =
-				this.transformInitializableType(aCollectionLiteralExp.getType());
+		resultType = this.transformInitializableType(aCollectionLiteralExp
+				.getType());
 
 		collectionName = this.myCodeTransEnv.getNewCollectionVarName();
 
@@ -505,11 +509,11 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 				anItemsCode = this.doSwitch((EObject) anItemsExp);
 
 				/* Transform code for element expression. */
-				elemTemplate =
-						this.myTemplateGroup
-								.getTemplate("collectionLiteralExp_collectionItem");
+				elemTemplate = this.myTemplateGroup
+						.getTemplate("collectionLiteralExp_collectionItem");
 				elemTemplate.setAttribute("collectionName", collectionName);
-				elemTemplate.setAttribute("itemExp", anItemsCode.getResultExp());
+				elemTemplate
+						.setAttribute("itemExp", anItemsCode.getResultExp());
 
 				/* Add element code to collection code. */
 				template.setAttribute("elementCodes", anItemsCode.getCode());
@@ -546,15 +550,16 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 				// no else.
 				elementCode = lastExpCode.getCode();
 
-				elemTemplate =
-						this.myTemplateGroup
-								.getTemplate("collectionLiteralExp_collectionRange");
+				elemTemplate = this.myTemplateGroup
+						.getTemplate("collectionLiteralExp_collectionRange");
 				elemTemplate.setAttribute("collectionName", collectionName);
 				elemTemplate.setAttribute("indexVar",
 						this.myCodeTransEnv.getNewIndexVarName());
 				elemTemplate.setAttribute("indexType", firstExpType.toString());
-				elemTemplate.setAttribute("firstExp", firstExpCode.getResultExp());
-				elemTemplate.setAttribute("lastExp", lastExpCode.getResultExp());
+				elemTemplate.setAttribute("firstExp",
+						firstExpCode.getResultExp());
+				elemTemplate
+						.setAttribute("lastExp", lastExpCode.getResultExp());
 
 				/* Add element code to collection code. */
 				template.setAttribute("elementCodes", elementCode);
@@ -576,7 +581,9 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch
 	 * #caseEnumLiteralExp
 	 * (tudresden.ocl20.pivot.essentialocl.expressions.EnumLiteralExp)
 	 */
@@ -629,11 +636,14 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch
 	 * #caseExpressionInOcl
 	 * (tudresden.ocl20.pivot.essentialocl.expressions.ExpressionInOcl)
 	 */
-	public ITransformedCode caseExpressionInOcl(ExpressionInOcl anExpressionInOcl) {
+	public ITransformedCode caseExpressionInOcl(
+			ExpressionInOcl anExpressionInOcl) {
 
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("caseExpressionInOcl(ExpressionInOcl) - start");
@@ -660,7 +670,9 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch
 	 * #caseIfExp(tudresden.ocl20.pivot.essentialocl.expressions.IfExp)
 	 */
 	public ITransformedCode caseIfExp(IfExp anIfExp) {
@@ -725,7 +737,9 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch
 	 * #caseIntegerLiteralExp
 	 * (tudresden.ocl20.pivot.essentialocl.expressions.IntegerLiteralExp)
 	 */
@@ -765,7 +779,9 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch
 	 * #caseInvalidLiteralExp
 	 * (tudresden.ocl20.pivot.essentialocl.expressions.InvalidLiteralExp)
 	 */
@@ -796,8 +812,11 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch
-	 * #caseIterateExp (tudresden.ocl20.pivot.essentialocl.expressions.IterateExp)
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch
+	 * #caseIterateExp
+	 * (tudresden.ocl20.pivot.essentialocl.expressions.IterateExp)
 	 */
 	public ITransformedCode caseIterateExp(IterateExp anIterateExp) {
 
@@ -842,21 +861,21 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 		iteratorList = anIterateExp.getIterator();
 
 		/*
-		 * Get the first iterator variable (probaly further exist during recursive
-		 * calls).
+		 * Get the first iterator variable (probaly further exist during
+		 * recursive calls).
 		 */
 		iterateVariable = iteratorList.remove(0);
 
 		/*
-		 * If the Expression has more than one iterator variable. Create an inner
-		 * IterateExp without the first iterator variable.
+		 * If the Expression has more than one iterator variable. Create an
+		 * inner IterateExp without the first iterator variable.
 		 */
 		if (iteratorList.size() > 0) {
 			/* the first iterator has been already removed. */
 			bodyExp = anIterateExp;
 			/*
-			 * The Expression will be transformed inside the transformation of the
-			 * first iterator Variable later on.
+			 * The Expression will be transformed inside the transformation of
+			 * the first iterator Variable later on.
 			 */
 		}
 
@@ -873,7 +892,8 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 		template.setAttribute("bodyCode", bodyCode.getCode());
 		template.setAttribute("bodyExp", bodyCode.getResultExp());
 		template.setAttribute("resultVarInitCode", resultVarInitCode.getCode());
-		template.setAttribute("resultVarInitExp", resultVarInitCode.getResultExp());
+		template.setAttribute("resultVarInitExp",
+				resultVarInitCode.getResultExp());
 		/* FIXME Claas: Use initializable type here. */
 		template.setAttribute("resultType", resultType.toString());
 		template.setAttribute("resultVar", resultVar);
@@ -885,8 +905,8 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 		result.setResultExp(resultVar);
 
 		if (LOGGER.isDebugEnabled()) {
-			LOGGER.debug("caseIterateExp(IterateExp)" + " - end - return value="
-					+ result);
+			LOGGER.debug("caseIterateExp(IterateExp)"
+					+ " - end - return value=" + result);
 		}
 		// no else.
 
@@ -895,7 +915,9 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch
 	 * #caseIteratorExp
 	 * (tudresden.ocl20.pivot.essentialocl.expressions.IteratorExp)
 	 */
@@ -956,15 +978,15 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 		bodyExp = anIteratorExp.getBody();
 
 		/*
-		 * If the Expression has more than one iterator variable. Create an inner
-		 * IterateExp without the first Iterator Variable.
+		 * If the Expression has more than one iterator variable. Create an
+		 * inner IterateExp without the first Iterator Variable.
 		 */
 		if (itVarList.size() > 0) {
 			/* the first iterator has been already removed. */
 			bodyExp = anIteratorExp;
 			/*
-			 * The Expression will be transformed inside the transformation of the
-			 * first iterator Variable later on.
+			 * The Expression will be transformed inside the transformation of
+			 * the first iterator Variable later on.
 			 */
 		}
 		// no else.
@@ -997,13 +1019,15 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 				|| itName.equals("forAll") || itName.equals("one")) {
 
 			/* Set iterator specific template attributes. */
-			template.setAttribute("itType", sourceType.getGenericType().toString());
+			template.setAttribute("itType", sourceType.getGenericType()
+					.toString());
 		}
 
 		else if (itName.equals("isUnique")) {
 
 			/* Set iterator specific template attributes. */
-			template.setAttribute("itType", sourceType.getGenericType().toString());
+			template.setAttribute("itType", sourceType.getGenericType()
+					.toString());
 			template.setAttribute("collectionVar",
 					this.myCodeTransEnv.getNewCollectionVarName());
 		}
@@ -1013,19 +1037,20 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 			String addOp;
 
 			/*
-			 * Collect does not add collections to collections, thus the add operation
-			 * must be computed.
+			 * Collect does not add collections to collections, thus the add
+			 * operation must be computed.
 			 */
 			if (bodyType.isGenericType()) {
-				addOp =
-						this.myTemplateGroup.getTemplate("addAllOperationName").toString();
-			}
-			else {
-				addOp = this.myTemplateGroup.getTemplate("addOperationName").toString();
+				addOp = this.myTemplateGroup.getTemplate("addAllOperationName")
+						.toString();
+			} else {
+				addOp = this.myTemplateGroup.getTemplate("addOperationName")
+						.toString();
 			}
 
 			/* Set iterator specific template attributes. */
-			template.setAttribute("itType", sourceType.getGenericType().toString());
+			template.setAttribute("itType", sourceType.getGenericType()
+					.toString());
 			template.setAttribute("resultType", resultType.toString());
 			template.setAttribute("addOp", addOp);
 		}
@@ -1034,14 +1059,16 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 				|| itName.equals("select")) {
 
 			/* Set iterator specific template attributes. */
-			template.setAttribute("itType", sourceType.getGenericType().toString());
+			template.setAttribute("itType", sourceType.getGenericType()
+					.toString());
 			template.setAttribute("resultType", resultType.toString());
 		}
 
 		else if (itName.equals("sortedBy")) {
 
 			/* Set iterator specific template attributes. */
-			template.setAttribute("itType", sourceType.getGenericType().toString());
+			template.setAttribute("itType", sourceType.getGenericType()
+					.toString());
 			template.setAttribute("comparatorName",
 					this.myCodeTransEnv.getNewComparatorName());
 			template.setAttribute("compareResult",
@@ -1065,8 +1092,8 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 		result.setResultExp(resultVarName);
 
 		if (LOGGER.isDebugEnabled()) {
-			LOGGER.debug("caseIteratorExp(IteratorExp)" + " - end - return value="
-					+ result);
+			LOGGER.debug("caseIteratorExp(IteratorExp)"
+					+ " - end - return value=" + result);
 		}
 		// no else.
 
@@ -1075,7 +1102,9 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch
 	 * #caseLetExp(tudresden.ocl20.pivot.essentialocl.expressions.LetExp)
 	 */
 	public ITransformedCode caseLetExp(LetExp aLetExp) {
@@ -1143,11 +1172,12 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 	 * {@link OperationCallExp}.
 	 * 
 	 * @param anOperationCallExp
-	 *          The {@link OperationCallExp} the code shall be transformed for.
+	 *            The {@link OperationCallExp} the code shall be transformed
+	 *            for.
 	 * @param anOperation
-	 *          The {@link Operation} which shall be transformed.
-	 * @return The {@link ITransformedCode} for the {@link Operation} which shall
-	 *         be transformed.
+	 *            The {@link Operation} which shall be transformed.
+	 * @return The {@link ITransformedCode} for the {@link Operation} which
+	 *         shall be transformed.
 	 */
 	public ITransformedCode caseOperationCallExp(
 			OperationCallExp anOperationCallExp) {
@@ -1212,8 +1242,8 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 		template = null;
 
 		/*
-		 * Search for the template of the operation. Start with concrete types and
-		 * continue with more and more abstract types.
+		 * Search for the template of the operation. Start with concrete types
+		 * and continue with more and more abstract types.
 		 */
 		if (sourceType != null) {
 
@@ -1221,8 +1251,8 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 			if (template == null && sourceType instanceof BagType) {
 
 				/*
-				 * Do not use the source type here. Otherwise the operation check will
-				 * fail.
+				 * Do not use the source type here. Otherwise the operation
+				 * check will fail.
 				 */
 				BagType bagType;
 				bagType = oclLibrary.getBagType(oclLibrary.getOclAny());
@@ -1232,19 +1262,21 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 				 * template.
 				 */
 				Operation operation;
-				operation = bagType.lookupOperation(operationName, parameterTypes);
+				operation = bagType.lookupOperation(operationName,
+						parameterTypes);
 
-				if (operation != null && operation.getOwningType().equals(bagType)) {
+				if (operation != null
+						&& operation.getOwningType().equals(bagType)) {
 
 					/* Probably rename the operation. */
 					if (renamedOperationNames.containsKey(operationName)) {
-						operationName = renamedOperationNames.get(operationName);
+						operationName = renamedOperationNames
+								.get(operationName);
 					}
 					// no else.
 
-					template =
-							this.myTemplateGroup
-									.getTemplate(operationName + "OperationOnBag");
+					template = this.myTemplateGroup.getTemplate(operationName
+							+ "OperationOnBag");
 				}
 				// no else.
 			}
@@ -1254,32 +1286,33 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 			if (template == null && sourceType instanceof OrderedSetType) {
 
 				/*
-				 * Do not use the source type here. Otherwise the operation check will
-				 * fail.
+				 * Do not use the source type here. Otherwise the operation
+				 * check will fail.
 				 */
 				OrderedSetType orderedSetType;
-				orderedSetType = oclLibrary.getOrderedSetType(oclLibrary.getOclAny());
+				orderedSetType = oclLibrary.getOrderedSetType(oclLibrary
+						.getOclAny());
 
 				/*
 				 * Check if the given operation is defined and probably load its
 				 * template.
 				 */
 				Operation operation;
-				operation =
-						orderedSetType.lookupOperation(operationName, parameterTypes);
+				operation = orderedSetType.lookupOperation(operationName,
+						parameterTypes);
 
 				if (operation != null
 						&& operation.getOwningType().equals(orderedSetType)) {
 
 					/* Probably rename the operation. */
 					if (renamedOperationNames.containsKey(operationName)) {
-						operationName = renamedOperationNames.get(operationName);
+						operationName = renamedOperationNames
+								.get(operationName);
 					}
 					// no else.
 
-					template =
-							this.myTemplateGroup.getTemplate(operationName
-									+ "OperationOnOrderedSet");
+					template = this.myTemplateGroup.getTemplate(operationName
+							+ "OperationOnOrderedSet");
 				}
 				// no else.
 			}
@@ -1289,30 +1322,33 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 			if (template == null && sourceType instanceof SequenceType) {
 
 				/*
-				 * Do not use the source type here. Otherwise the operation check will
-				 * fail.
+				 * Do not use the source type here. Otherwise the operation
+				 * check will fail.
 				 */
 				SequenceType sequenceType;
-				sequenceType = oclLibrary.getSequenceType(oclLibrary.getOclAny());
+				sequenceType = oclLibrary.getSequenceType(oclLibrary
+						.getOclAny());
 
 				/*
 				 * Check if the given operation is defined and probably load its
 				 * template.
 				 */
 				Operation operation;
-				operation = sequenceType.lookupOperation(operationName, parameterTypes);
+				operation = sequenceType.lookupOperation(operationName,
+						parameterTypes);
 
-				if (operation != null && operation.getOwningType().equals(sequenceType)) {
+				if (operation != null
+						&& operation.getOwningType().equals(sequenceType)) {
 
 					/* Probably rename the operation. */
 					if (renamedOperationNames.containsKey(operationName)) {
-						operationName = renamedOperationNames.get(operationName);
+						operationName = renamedOperationNames
+								.get(operationName);
 					}
 					// no else.
 
-					template =
-							this.myTemplateGroup.getTemplate(operationName
-									+ "OperationOnSequence");
+					template = this.myTemplateGroup.getTemplate(operationName
+							+ "OperationOnSequence");
 				}
 				// no else.
 			}
@@ -1326,44 +1362,46 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 
 					if (parameterTypes.size() == 1
 							&& parameterTypes.get(0) instanceof BagType) {
-						template =
-								this.myTemplateGroup.getTemplate("unionOperationWithBagOnSet");
+						template = this.myTemplateGroup
+								.getTemplate("unionOperationWithBagOnSet");
 					}
 
 					else if (parameterTypes.size() == 1
 							&& parameterTypes.get(0) instanceof SetType) {
-						template =
-								this.myTemplateGroup.getTemplate("unionOperationWithSetOnSet");
+						template = this.myTemplateGroup
+								.getTemplate("unionOperationWithSetOnSet");
 					}
 				}
 				// no else.
 
 				if (template == null) {
 					/*
-					 * Do not use the source type here. Otherwise the operation check will
-					 * fail.
+					 * Do not use the source type here. Otherwise the operation
+					 * check will fail.
 					 */
 					SetType setType;
 					setType = oclLibrary.getSetType(oclLibrary.getOclAny());
 
 					/*
-					 * Check if the given operation is defined and probably load its
-					 * template.
+					 * Check if the given operation is defined and probably load
+					 * its template.
 					 */
 					Operation operation;
-					operation = setType.lookupOperation(operationName, parameterTypes);
+					operation = setType.lookupOperation(operationName,
+							parameterTypes);
 
-					if (operation != null && operation.getOwningType().equals(setType)) {
+					if (operation != null
+							&& operation.getOwningType().equals(setType)) {
 
 						/* Probably rename the operation. */
 						if (renamedOperationNames.containsKey(operationName)) {
-							operationName = renamedOperationNames.get(operationName);
+							operationName = renamedOperationNames
+									.get(operationName);
 						}
 						// no else.
 
-						template =
-								this.myTemplateGroup.getTemplate(operationName
-										+ "OperationOnSet");
+						template = this.myTemplateGroup
+								.getTemplate(operationName + "OperationOnSet");
 					}
 					// no else.
 				}
@@ -1375,63 +1413,69 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 			if (template == null && sourceType instanceof CollectionType) {
 
 				/*
-				 * Do not use the source type here. Otherwise the operation check will
-				 * fail.
+				 * Do not use the source type here. Otherwise the operation
+				 * check will fail.
 				 */
 				CollectionType collectionType;
-				collectionType = oclLibrary.getCollectionType(oclLibrary.getOclAny());
+				collectionType = oclLibrary.getCollectionType(oclLibrary
+						.getOclAny());
 
 				/*
 				 * Check if the given operation is defined and probably load its
 				 * template.
 				 */
 				Operation operation;
-				operation =
-						collectionType.lookupOperation(operationName, parameterTypes);
+				operation = collectionType.lookupOperation(operationName,
+						parameterTypes);
 
 				if (operation != null
 						&& operation.getOwningType().equals(collectionType)) {
 
 					/* Probably rename the operation. */
 					if (renamedOperationNames.containsKey(operationName)) {
-						operationName = renamedOperationNames.get(operationName);
+						operationName = renamedOperationNames
+								.get(operationName);
 					}
 					// no else.
 
-					template =
-							this.myTemplateGroup.getTemplate(operationName
-									+ "OperationOnCollection");
+					template = this.myTemplateGroup.getTemplate(operationName
+							+ "OperationOnCollection");
 				}
 				// no else.
 
 				/*
-				 * Sum operation requires special argument because result must be cast
-				 * to result type.
+				 * Sum operation requires special argument because result must
+				 * be cast to result type.
 				 */
 				if (template != null && operationName.equals("sum")) {
 					String resultType;
-					resultType =
-							this.transformType(anOperationCallExp.getType()).toString();
+					resultType = this.transformType(
+							anOperationCallExp.getType()).toString();
 
 					template.setAttribute("resultType", resultType);
 
 					/*
-					 * Set additional parameter to convert from number to result type.
+					 * Set additional parameter to convert from number to result
+					 * type.
 					 */
-					template.setAttribute("typeConversion", this.myTemplateGroup
-							.getTemplate("numberConversionTo" + resultType).toString());
+					template.setAttribute(
+							"typeConversion",
+							this.myTemplateGroup.getTemplate(
+									"numberConversionTo" + resultType)
+									.toString());
 				}
 				// no else.
 			}
 			// no else.
 
 			/*
-			 * Flatten operation requires special argument because result must be cast
-			 * to result type.
+			 * Flatten operation requires special argument because result must
+			 * be cast to result type.
 			 */
 			if (template != null && operationName.equals("flatten")) {
 				template.setAttribute("resultType",
-						this.transformType(anOperationCallExp.getType()).toString());
+						this.transformType(anOperationCallExp.getType())
+								.toString());
 			}
 			// no else.
 
@@ -1444,22 +1488,25 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 			if (template == null && sourceType instanceof Type) {
 
 				if (operationName.equals("oclIsNew")) {
-					template = this.myTemplateGroup.getTemplate("oclIsNewOperation");
+					template = this.myTemplateGroup
+							.getTemplate("oclIsNewOperation");
 					this.myCodeTransEnv.addIsNewClass(this.transformType(
 							sourceExp.getType()).toString());
 				}
 
 				else if (operationName.equals("oclIsUndefined")) {
-					template =
-							this.myTemplateGroup.getTemplate("oclIsUndefinedOperation");
+					template = this.myTemplateGroup
+							.getTemplate("oclIsUndefinedOperation");
 				}
 
 				else if (operationName.equals("oclIsInvalid")) {
 					String resultVar;
 					resultVar = this.myCodeTransEnv.getNewResultVarName();
 
-					template = this.myTemplateGroup.getTemplate("oclIsInvalidOperation");
-					template.setAttribute("sourceExp", sourceCode.getResultExp());
+					template = this.myTemplateGroup
+							.getTemplate("oclIsInvalidOperation");
+					template.setAttribute("sourceExp",
+							sourceCode.getResultExp());
 					template.setAttribute("resultVar", resultVar);
 
 					if (sourceExp.getType() != null) {
@@ -1476,33 +1523,40 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 
 					instanceType = sourceCode.getResultExp();
 
-					template = this.myTemplateGroup.getTemplate("allInstancesOperation");
+					template = this.myTemplateGroup
+							.getTemplate("allInstancesOperation");
 					template.setAttribute("typeName", instanceType);
 					this.myCodeTransEnv.addAllInstancesClass(instanceType);
 				}
 
 				else if (operationName.equals("equals")) {
-					template = this.myTemplateGroup.getTemplate("equalsOperation");
+					template = this.myTemplateGroup
+							.getTemplate("equalsOperation");
 				}
 
 				else if (operationName.equals("notEquals")) {
-					template = this.myTemplateGroup.getTemplate("notEqualsOperation");
+					template = this.myTemplateGroup
+							.getTemplate("notEqualsOperation");
 				}
 
 				else if (operationName.equals("oclAsType")) {
-					template = this.myTemplateGroup.getTemplate("oclAsTypeOperation");
+					template = this.myTemplateGroup
+							.getTemplate("oclAsTypeOperation");
 				}
 
 				else if (operationName.equals("oclIsTypeOf")) {
-					template = this.myTemplateGroup.getTemplate("oclIsTypeOfOperation");
+					template = this.myTemplateGroup
+							.getTemplate("oclIsTypeOfOperation");
 				}
 
 				else if (operationName.equals("oclIsKindOf")) {
-					template = this.myTemplateGroup.getTemplate("oclIsKindOfOperation");
+					template = this.myTemplateGroup
+							.getTemplate("oclIsKindOfOperation");
 				}
 
 				else if (operationName.equals("oclType")) {
-					template = this.myTemplateGroup.getTemplate("oclTypeOperation");
+					template = this.myTemplateGroup
+							.getTemplate("oclTypeOperation");
 				}
 
 				else if (operationName.equals("atPre")) {
@@ -1510,7 +1564,8 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 					String atPreVar;
 
 					/* The variable is initialized later during instrumentation. */
-					atPreVar = this.myCodeTransEnv.addAtPreValue(sourceCode, sourceType);
+					atPreVar = this.myCodeTransEnv.addAtPreValue(sourceCode,
+							sourceType);
 
 					resultExp = atPreVar;
 				}
@@ -1529,23 +1584,28 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 				if (sourceTypeKind.compareTo(PrimitiveTypeKind.BOOLEAN) == 0) {
 
 					if (operationName.equals("not")) {
-						template = this.myTemplateGroup.getTemplate("notOperation");
+						template = this.myTemplateGroup
+								.getTemplate("notOperation");
 					}
 
 					else if (operationName.equals("or")) {
-						template = this.myTemplateGroup.getTemplate("orOperation");
+						template = this.myTemplateGroup
+								.getTemplate("orOperation");
 					}
 
 					else if (operationName.equals("xor")) {
-						template = this.myTemplateGroup.getTemplate("xorOperation");
+						template = this.myTemplateGroup
+								.getTemplate("xorOperation");
 					}
 
 					else if (operationName.equals("and")) {
-						template = this.myTemplateGroup.getTemplate("andOperation");
+						template = this.myTemplateGroup
+								.getTemplate("andOperation");
 					}
 
 					else if (operationName.equals("implies")) {
-						template = this.myTemplateGroup.getTemplate("impliesOperation");
+						template = this.myTemplateGroup
+								.getTemplate("impliesOperation");
 					}
 					// no else.
 
@@ -1556,21 +1616,24 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 				if (sourceTypeKind.compareTo(PrimitiveTypeKind.STRING) == 0) {
 
 					if (operationName.equals("+")) {
-						template =
-								this.myTemplateGroup.getTemplate("plusOnStringOperation");
+						template = this.myTemplateGroup
+								.getTemplate("plusOnStringOperation");
 					}
 
 					else if (operationName.equals("at")) {
-						template = this.myTemplateGroup.getTemplate("atOnStringOperation");
+						template = this.myTemplateGroup
+								.getTemplate("atOnStringOperation");
 					}
 
 					else if (operationName.equals("characters")) {
 						String resultVar;
 						resultVar = this.myCodeTransEnv.getNewResultVarName();
 
-						template = this.myTemplateGroup.getTemplate("charactersOperation");
+						template = this.myTemplateGroup
+								.getTemplate("charactersOperation");
 
-						template.setAttribute("sourceExp", sourceCode.getResultExp());
+						template.setAttribute("sourceExp",
+								sourceCode.getResultExp());
 						template.setAttribute("resultVar", resultVar);
 						template.setAttribute("elementName",
 								this.myCodeTransEnv.getNewIteratorVarName());
@@ -1580,33 +1643,38 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 					}
 
 					else if (operationName.equals("concat")) {
-						template = this.myTemplateGroup.getTemplate("concatOperation");
+						template = this.myTemplateGroup
+								.getTemplate("concatOperation");
 					}
 
 					else if (operationName.equals("indexOf")) {
-						template =
-								this.myTemplateGroup.getTemplate("indexOfOnStringOperation");
+						template = this.myTemplateGroup
+								.getTemplate("indexOfOnStringOperation");
 					}
 
 					else if (operationName.equals("size")) {
-						template =
-								this.myTemplateGroup.getTemplate("sizeOnStringOperation");
+						template = this.myTemplateGroup
+								.getTemplate("sizeOnStringOperation");
 					}
 
 					else if (operationName.equals("toBoolean")) {
-						template = this.myTemplateGroup.getTemplate("toBooleanOperation");
+						template = this.myTemplateGroup
+								.getTemplate("toBooleanOperation");
 					}
 
 					else if (operationName.equals("toInteger")) {
-						template = this.myTemplateGroup.getTemplate("toIntegerOperation");
+						template = this.myTemplateGroup
+								.getTemplate("toIntegerOperation");
 					}
 
 					else if (operationName.equals("toReal")) {
-						template = this.myTemplateGroup.getTemplate("toRealOperation");
+						template = this.myTemplateGroup
+								.getTemplate("toRealOperation");
 					}
 
 					else if (operationName.equals("substring")) {
-						template = this.myTemplateGroup.getTemplate("substringOperation");
+						template = this.myTemplateGroup
+								.getTemplate("substringOperation");
 					}
 					// no else.
 				}
@@ -1617,15 +1685,13 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 						|| sourceTypeKind.equals(PrimitiveTypeKind.INTEGER)
 						|| sourceTypeKind.equals(PrimitiveTypeKind.REAL)) {
 					if (operationName.equals("equals")) {
-						template =
-								this.myTemplateGroup
-										.getTemplate("equalsOperationOnPrimitiveType");
+						template = this.myTemplateGroup
+								.getTemplate("equalsOperationOnPrimitiveType");
 					}
 
 					else if (operationName.equals("notEquals")) {
-						template =
-								this.myTemplateGroup
-										.getTemplate("notEqualsOperationOnPrimitiveType");
+						template = this.myTemplateGroup
+								.getTemplate("notEqualsOperationOnPrimitiveType");
 					}
 					// no else.
 				}
@@ -1636,60 +1702,71 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 						|| sourceTypeKind.compareTo(PrimitiveTypeKind.INTEGER) == 0) {
 
 					if (operationName.equals("abs")) {
-						template = this.myTemplateGroup.getTemplate("absOperation");
+						template = this.myTemplateGroup
+								.getTemplate("absOperation");
 					}
 
 					else if (operationName.equals("round")) {
-						template = this.myTemplateGroup.getTemplate("roundOperation");
+						template = this.myTemplateGroup
+								.getTemplate("roundOperation");
 					}
 
 					else if (operationName.equals("floor")) {
-						template = this.myTemplateGroup.getTemplate("floorOperation");
+						template = this.myTemplateGroup
+								.getTemplate("floorOperation");
 					}
 
 					else if (operationName.equals("minus")) {
 						/* Decide between binary minus and ... */
 						if (anOperationCallExp.getArgument().size() > 0) {
-							template = this.myTemplateGroup.getTemplate("minusOperation");
+							template = this.myTemplateGroup
+									.getTemplate("minusOperation");
 						}
 						/* ... unary negative. */
 						else {
-							template = this.myTemplateGroup.getTemplate("negativeOperation");
+							template = this.myTemplateGroup
+									.getTemplate("negativeOperation");
 						}
 					}
 
 					else if (operationName.equals("+")) {
-						template = this.myTemplateGroup.getTemplate("plusOperation");
+						template = this.myTemplateGroup
+								.getTemplate("plusOperation");
 					}
 
 					else if (operationName.equals("*")) {
-						template = this.myTemplateGroup.getTemplate("multiplyOperation");
+						template = this.myTemplateGroup
+								.getTemplate("multiplyOperation");
 					}
 
 					else if (operationName.equals("max")) {
-						template = this.myTemplateGroup.getTemplate("maxOperation");
+						template = this.myTemplateGroup
+								.getTemplate("maxOperation");
 					}
 
 					else if (operationName.equals("min")) {
-						template = this.myTemplateGroup.getTemplate("minOperation");
+						template = this.myTemplateGroup
+								.getTemplate("minOperation");
 					}
 
 					else if (operationName.equals("<")) {
-						template = this.myTemplateGroup.getTemplate("lesserOperation");
+						template = this.myTemplateGroup
+								.getTemplate("lesserOperation");
 					}
 
 					else if (operationName.equals(">")) {
-						template = this.myTemplateGroup.getTemplate("greaterOperation");
+						template = this.myTemplateGroup
+								.getTemplate("greaterOperation");
 					}
 
 					else if (operationName.equals("<=")) {
-						template =
-								this.myTemplateGroup.getTemplate("lesserEqualsOperation");
+						template = this.myTemplateGroup
+								.getTemplate("lesserEqualsOperation");
 					}
 
 					else if (operationName.equals(">=")) {
-						template =
-								this.myTemplateGroup.getTemplate("greaterEqualsOperation");
+						template = this.myTemplateGroup
+								.getTemplate("greaterEqualsOperation");
 					}
 					// no else.
 				}
@@ -1698,7 +1775,8 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 				/* Operations on Real */
 				if (sourceTypeKind.compareTo(PrimitiveTypeKind.REAL) == 0) {
 					if (operationName.equals("/")) {
-						template = this.myTemplateGroup.getTemplate("divisionOperation");
+						template = this.myTemplateGroup
+								.getTemplate("divisionOperation");
 					}
 					// no else.
 				}
@@ -1707,16 +1785,18 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 				/* Operations on Real */
 				if (sourceTypeKind.compareTo(PrimitiveTypeKind.INTEGER) == 0) {
 					if (operationName.equals("/")) {
-						template =
-								this.myTemplateGroup.getTemplate("divisionOnIntegerOperation");
+						template = this.myTemplateGroup
+								.getTemplate("divisionOnIntegerOperation");
 					}
 
 					else if (operationName.equals("div")) {
-						template = this.myTemplateGroup.getTemplate("divOperation");
+						template = this.myTemplateGroup
+								.getTemplate("divOperation");
 					}
 
 					else if (operationName.equals("mod")) {
-						template = this.myTemplateGroup.getTemplate("modOperation");
+						template = this.myTemplateGroup
+								.getTemplate("modOperation");
 					}
 					// no else.
 				}
@@ -1770,7 +1850,9 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch
 	 * #casePropertyCallExp
 	 * (tudresden.ocl20.pivot.essentialocl.expressions.PropertyCallExp)
 	 */
@@ -1807,7 +1889,8 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 
 		/* The property calls on tuples must be adapted. */
 		if (sourceExp != null && sourceExp.getType() instanceof TupleType) {
-			template = this.myTemplateGroup.getTemplate("propertyCallExpOnTuple");
+			template = this.myTemplateGroup
+					.getTemplate("propertyCallExpOnTuple");
 		}
 
 		else {
@@ -1822,8 +1905,9 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 
 		/*
 		 * Store the called properties in the environment (Probably needed for
-		 * invariant instrumentation). Only store properties, which are properties
-		 * of the constrained element. Thus their source must be a self variable.
+		 * invariant instrumentation). Only store properties, which are
+		 * properties of the constrained element. Thus their source must be a
+		 * self variable.
 		 */
 		if (sourceExp instanceof VariableExp) {
 
@@ -1852,7 +1936,9 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch
 	 * #caseRealLiteralExp
 	 * (tudresden.ocl20.pivot.essentialocl.expressions.RealLiteralExp)
 	 */
@@ -1873,8 +1959,8 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 		literalValue = "";
 		literalValue += aRealLiteralExp.getRealSymbol();
 
-		template.setAttribute("type", this.transformType(aRealLiteralExp.getType())
-				.toString());
+		template.setAttribute("type",
+				this.transformType(aRealLiteralExp.getType()).toString());
 		template.setAttribute("value", literalValue);
 
 		result = new TransformedCodeImpl();
@@ -1891,7 +1977,9 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch
 	 * #caseStringLiteralExp
 	 * (tudresden.ocl20.pivot.essentialocl.expressions.StringLiteralExp)
 	 */
@@ -1927,7 +2015,9 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch
 	 * #caseTupleLiteralExp
 	 * (tudresden.ocl20.pivot.essentialocl.expressions.TupleLiteralExp)
 	 */
@@ -1971,7 +2061,8 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 
 			template.setAttribute("argCodes", elementCode.getCode());
 			template.setAttribute("argExps", elementCode.getResultExp());
-			template.setAttribute("argNames", aTupleElement.getProperty().getName());
+			template.setAttribute("argNames", aTupleElement.getProperty()
+					.getName());
 		}
 
 		/* Set the result. */
@@ -1989,7 +2080,9 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch
 	 * #caseTypeLiteralExp
 	 * (tudresden.ocl20.pivot.essentialocl.expressions.TypeLiteralExp)
 	 */
@@ -2007,7 +2100,8 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 		referredType = aTypeLiteralExp.getReferredType();
 
 		ITemplate template = this.myTemplateGroup.getTemplate("typeLiteralExp");
-		template.setAttribute("type", this.transformType(referredType).toString());
+		template.setAttribute("type", this.transformType(referredType)
+				.toString());
 
 		result.setResultExp(template.toString());
 
@@ -2022,7 +2116,9 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch
 	 * #caseUndefinedLiteralExp
 	 * (tudresden.ocl20.pivot.essentialocl.expressions.UndefinedLiteralExp)
 	 */
@@ -2053,7 +2149,9 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch
 	 * #caseUnlimitedNaturalExp
 	 * (tudresden.ocl20.pivot.essentialocl.expressions.UnlimitedNaturalExp)
 	 */
@@ -2093,7 +2191,9 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch
 	 * #caseVariableExp
 	 * (tudresden.ocl20.pivot.essentialocl.expressions.VariableExp)
 	 */
@@ -2113,18 +2213,19 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 		result = new TransformedCodeImpl();
 
 		/*
-		 * The keyword 'self' has to be transformed into the name of the variable
-		 * which references the constrained class
+		 * The keyword 'self' has to be transformed into the name of the
+		 * variable which references the constrained class
 		 */
 		if (aVariable.getName().equals("self")) {
 
 			template = this.myTemplateGroup.getTemplate("selfVariable");
 			result.setResultExp(template.toString());
+			this.myCodeTransEnv.setIsUsigSelfVariable(true);
 		}
 
 		/*
-		 * The special OCL variable 'result' has to be transformed in their name in
-		 * Java.
+		 * The special OCL variable 'result' has to be transformed in their name
+		 * in Java.
 		 */
 		else if (aVariable.getName().equals("result")) {
 
@@ -2138,8 +2239,8 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 		}
 
 		if (LOGGER.isDebugEnabled()) {
-			LOGGER.debug("caseVariableExp(VariableExp)" + " - end - return value="
-					+ result);
+			LOGGER.debug("caseVariableExp(VariableExp)"
+					+ " - end - return value=" + result);
 		}
 		// no else.
 
@@ -2148,7 +2249,7 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 
 	/**
 	 * @param anAnyType
-	 *          The {@link AnyType} for which code shall be returned.
+	 *            The {@link AnyType} for which code shall be returned.
 	 * @return The code for a given {@link AnyType}.
 	 */
 	private ITransformedType transformAnyType(AnyType anAnyType) {
@@ -2177,7 +2278,7 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 
 	/**
 	 * @param aCollectionType
-	 *          The {@link CollectionType} for which code shall be returned.
+	 *            The {@link CollectionType} for which code shall be returned.
 	 * @return The code for a given {@link CollectionType}.
 	 */
 	private ITransformedType transformCollectionType(
@@ -2251,7 +2352,7 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 
 	/**
 	 * @param anEnumeration
-	 *          The {@link Enumeration} for which code shall be returned.
+	 *            The {@link Enumeration} for which code shall be returned.
 	 * @return The code for a given {@link Enumeration}.
 	 */
 	private ITransformedType transformEnumerationType(Enumeration anEnumeration) {
@@ -2285,7 +2386,7 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 	 * </p>
 	 * 
 	 * @param aCollectionType
-	 *          The {@link CollectionType} for which code shall be returned.
+	 *            The {@link CollectionType} for which code shall be returned.
 	 * @return The code for a given {@link CollectionType}.
 	 */
 	private ITransformedType transformInitializableCollectionType(
@@ -2293,8 +2394,7 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 
 		/* Probably log the entry into this method. */
 		if (LOGGER.isDebugEnabled()) {
-			LOGGER
-					.debug("transformInitializableCollectionType(CollectionType) - start");
+			LOGGER.debug("transformInitializableCollectionType(CollectionType) - start");
 		}
 		// no else.
 
@@ -2307,25 +2407,28 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 		template = null;
 
 		if (aCollectionType instanceof BagType) {
-			template = this.myTemplateGroup.getTemplate("bagTypeInitialization");
+			template = this.myTemplateGroup
+					.getTemplate("bagTypeInitialization");
 		}
 
 		else if (aCollectionType instanceof OrderedSetType) {
-			template =
-					this.myTemplateGroup.getTemplate("orderedSetTypeInitialization");
+			template = this.myTemplateGroup
+					.getTemplate("orderedSetTypeInitialization");
 		}
 
 		else if (aCollectionType instanceof SequenceType) {
-			template = this.myTemplateGroup.getTemplate("sequenceTypeInitialization");
+			template = this.myTemplateGroup
+					.getTemplate("sequenceTypeInitialization");
 		}
 
 		else if (aCollectionType instanceof SetType) {
-			template = this.myTemplateGroup.getTemplate("setTypeInitialization");
+			template = this.myTemplateGroup
+					.getTemplate("setTypeInitialization");
 		}
 
 		else {
-			template =
-					this.myTemplateGroup.getTemplate("collectionTypeInitialization");
+			template = this.myTemplateGroup
+					.getTemplate("collectionTypeInitialization");
 		}
 		// no else.
 
@@ -2366,7 +2469,7 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 	 * </p>
 	 * 
 	 * @param aType
-	 *          The {@link Type} for which code shall be returned.
+	 *            The {@link Type} for which code shall be returned.
 	 * @return The code for a given {@link Type}.
 	 */
 	private ITransformedType transformInitializableType(Type aType) {
@@ -2451,8 +2554,8 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 
 		/* Probably log the exit from this method. */
 		if (LOGGER.isDebugEnabled()) {
-			LOGGER.debug("transformInitializableType(Type)" + "- end - return value="
-					+ result);
+			LOGGER.debug("transformInitializableType(Type)"
+					+ "- end - return value=" + result);
 		}
 		// no else.
 
@@ -2461,36 +2564,36 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 
 	/**
 	 * @param invalidType
-	 *          The {@link InvalidType} for which code shall be returned.
+	 *            The {@link InvalidType} for which code shall be returned.
 	 * @return The code for a given {@link InvalidType}.
 	 */
 	private ITransformedType transformInvalidType(InvalidType invalidType) {
-	
+
 		/* Probably log the entry into this method. */
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("transformInvalidType(InvalidType) - start");
 		}
 		// no else.
-	
+
 		ITransformedType result;
 		ITemplate template;
-	
+
 		template = this.myTemplateGroup.getTemplate("invalidType");
 		result = new TransformedTypeImpl(template.toString());
-	
+
 		/* Probably log the exit from this method. */
 		if (LOGGER.isDebugEnabled()) {
-			LOGGER.debug("transformInvalidType(InvalidType)" + "- end - return value="
-					+ result);
+			LOGGER.debug("transformInvalidType(InvalidType)"
+					+ "- end - return value=" + result);
 		}
 		// no else.
-	
+
 		return result;
 	}
 
 	/**
 	 * @param aPrimitiveType
-	 *          The {@link PrimitiveType} for which code shall be returned.
+	 *            The {@link PrimitiveType} for which code shall be returned.
 	 * @return The code for a given {@link PrimitiveType}.
 	 */
 	private ITransformedType transformPrimitiveType(PrimitiveType aPrimitiveType) {
@@ -2555,7 +2658,7 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 
 	/**
 	 * @param aTupleType
-	 *          The {@link TupleType} for which code shall be returned.
+	 *            The {@link TupleType} for which code shall be returned.
 	 * @return The code for a given {@link TupleType}.
 	 */
 	private ITransformedType transformTupleType(TupleType aTupleType) {
@@ -2574,8 +2677,8 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 
 		/* Probably log the exit from this method. */
 		if (LOGGER.isDebugEnabled()) {
-			LOGGER.debug("transformTupleType(TupleType)" + "- end - return value="
-					+ result);
+			LOGGER.debug("transformTupleType(TupleType)"
+					+ "- end - return value=" + result);
 		}
 		// no else.
 
@@ -2584,7 +2687,7 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 
 	/**
 	 * @param aType
-	 *          The {@link Type} for which code shall be returned.
+	 *            The {@link Type} for which code shall be returned.
 	 * @return The code for a given {@link Type}.
 	 */
 	private ITransformedType transformType(Type aType) {
@@ -2669,7 +2772,8 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 
 		/* Probably log the exit from this method. */
 		if (LOGGER.isDebugEnabled()) {
-			LOGGER.debug("transformType(Type)" + "- end - return value=" + result);
+			LOGGER.debug("transformType(Type)" + "- end - return value="
+					+ result);
 		}
 		// no else.
 
@@ -2678,7 +2782,7 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 
 	/**
 	 * @param aTypeType
-	 *          The {@link TypeType} for which code shall be returned.
+	 *            The {@link TypeType} for which code shall be returned.
 	 * @return The code for a given {@link TypeType}.
 	 */
 	private ITransformedType transformTypeType(TypeType aTypeType) {
@@ -2697,8 +2801,8 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 
 		/* Probably log the exit from this method. */
 		if (LOGGER.isDebugEnabled()) {
-			LOGGER.debug("transformTypeType(TypeType)" + "- end - return value="
-					+ result);
+			LOGGER.debug("transformTypeType(TypeType)"
+					+ "- end - return value=" + result);
 		}
 		// no else.
 
@@ -2707,7 +2811,7 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 
 	/**
 	 * @param aVoidType
-	 *          The {@link VoidType} for which code shall be returned.
+	 *            The {@link VoidType} for which code shall be returned.
 	 * @return The code for a given {@link VoidType}.
 	 */
 	private ITransformedType transformVoidType(VoidType aVoidType) {
@@ -2726,160 +2830,7 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 
 		/* Probably log the exit from this method. */
 		if (LOGGER.isDebugEnabled()) {
-			LOGGER.debug("transformVoidType(VoidType)" + "- end - return value="
-					+ result);
-		}
-		// no else.
-
-		return result;
-	}
-
-	/**
-	 * <p>
-	 * Generates an Aspect for the instrumentation of body constraints.
-	 * </p>
-	 * 
-	 * @param aConstraint
-	 *          The {@link Constraint} which shall be instrumented.
-	 */
-	private String instrumentCodeForBody(Constraint aConstraint)
-			throws Ocl2CodeException {
-
-		/* Probably log the entry into this method. */
-		if (LOGGER.isDebugEnabled()) {
-			LOGGER.debug("instrumentCodeForBody(Constraint) - start");
-		}
-		// no else.
-
-		String result;
-
-		ITemplate aspectTemplate;
-		ITemplate adviceTemplate;
-
-		/* A List of Properties whose body-Expressions shall be instrumented. */
-		List<ConstrainableElement> constrainedElems;
-
-		/* The code which shall be instrumented. */
-		ITransformedCode constrainedCode;
-
-		/* The name of the generated aspect. */
-		String aspectName;
-		/* The package of the context java file */
-		String contextPackage;
-
-		/* Compute the aspect's file name. */
-		aspectName = aConstraint.getName();
-		
-		if (aConstraint.getName() == null || aConstraint.getName().length() == 0 || this.myCodeTransEnv.isUsedAspectName(aspectName)) 
-			aspectName = this.myCodeTransEnv.getNewBodyAspectName();
-		// no else.
-
-		this.myCodeTransEnv.addUsedAspectName(aspectName);
-		
-		/* Generate the code which shall be inside the advice(s). */
-		constrainedCode = this.transformFragmentCode(aConstraint);
-
-		/* Get the path of the package where the constraint class is located. */
-		contextPackage = this.getPackagePath(aConstraint);
-
-		aspectTemplate = this.myTemplateGroup.getTemplate("aspectFile");
-		aspectTemplate.setAttribute("package",
-				this.getConstraintPackage(contextPackage));
-		aspectTemplate.setAttribute("name", aspectName);
-
-		/* Probably collect allInstances for some classes. */
-		if (this.myCodeTransEnv.hasAllInstancesClasses()) {
-			Set<String> allInstancesClasses;
-
-			allInstancesClasses = this.myCodeTransEnv.getAllInstancesClasses();
-
-			for (String aClassName : allInstancesClasses) {
-				aspectTemplate.setAttribute("allInstanceClasses", aClassName);
-			}
-		}
-		// no else.
-
-		constrainedElems = aConstraint.getConstrainedElement();
-
-		/*
-		 * Iterate through all ConstrainableElements and generate their point cuts
-		 * and advice.
-		 */
-		for (ConstrainableElement aConstrainedElem : constrainedElems) {
-
-			/* body constraints can only define the body of Operations. */
-			if (aConstrainedElem instanceof Operation) {
-				Operation anOperation;
-				NamedElement constrainedClass;
-
-				String operationName;
-				String operationResultType;
-
-				anOperation = (Operation) aConstrainedElem;
-
-				constrainedClass = anOperation.getOwner();
-
-				operationName = anOperation.getName();
-				operationResultType =
-						this.transformType(anOperation.getType()).toString();
-				/* Create Template for the advice code. */
-				adviceTemplate =
-						this.myTemplateGroup.getTemplate("bodyInstrumentation");
-
-				/* Set template parameters. */
-				adviceTemplate.setAttribute("class", constrainedClass.getName());
-				adviceTemplate.setAttribute("package", contextPackage);
-				adviceTemplate.setAttribute("constCode", constrainedCode.getCode());
-				adviceTemplate.setAttribute("constExp", constrainedCode.getResultExp());
-				adviceTemplate.setAttribute("oclBody", aConstraint.getSpecification()
-						.getBody().trim());
-				adviceTemplate.setAttribute("method", operationName);
-
-				/* Probably set the returnType. */
-				if (!operationResultType.equals(this.myTemplateGroup.getTemplate(
-						"voidType").toString())) {
-					adviceTemplate.setAttribute("returnType", operationResultType);
-				}
-				// no else.
-
-				/* Probably set the arguments of the operation. */
-				this.setArgumentsForInstrumentationTemplate(aConstraint, adviceTemplate);
-
-				/* Probably set that the constraint operation is static. */
-				if (anOperation.isStatic()) {
-					adviceTemplate.setAttribute("opIsStatic", "true");
-				}
-				// no else.
-
-				/* Add the advice code to the aspect template. */
-				aspectTemplate.setAttribute("advice", adviceTemplate.toString());
-			}
-
-			else {
-				String msg;
-
-				msg = "An body constraint defined for an Property of an ";
-				msg += "invalid Type of ConstrainableElement.";
-				msg += "Expected Type was Operation but was ";
-				msg += aConstrainedElem.getClass().getName();
-
-				throw new Ocl2CodeException(msg);
-			}
-		}
-		// end for.
-
-		result = aspectTemplate.toString();
-
-		/* Probably save the generated Code. */
-		if (this.mySettings.isSaveCode()) {
-			this.saveTransformedCode(result, aspectName + ".aj",
-					this.getConstraintPackage(contextPackage));
-		}
-		// no else.
-
-		/* Probably log the exit from this method. */
-		if (LOGGER.isDebugEnabled()) {
-			LOGGER.debug("instrumentCodeForBody(Constraint)"
+			LOGGER.debug("transformVoidType(VoidType)"
 					+ "- end - return value=" + result);
 		}
 		// no else.
@@ -2888,1263 +2839,8 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 	}
 
 	/**
-	 * <p>
-	 * Generates an Aspect for the instrumentation of definition constraints.
-	 * </p>
-	 * 
-	 * @param aConstraint
-	 *          The {@link Constraint} which shall be instrumented.
-	 */
-	private String instrumentCodeForDef(Constraint aConstraint)
-			throws Ocl2CodeException {
-
-		/* Probably log the entry into this method. */
-		if (LOGGER.isDebugEnabled()) {
-			LOGGER.debug("instrumentCodeForDef(Constraint) - start");
-		}
-		// no else.
-
-		String result;
-
-		ITemplate aspectTemplate;
-		ITemplate adviceTemplate;
-
-		/* The code which shall be instrumented. */
-		ITransformedCode constrainedCode;
-
-		/* The package of the context java file */
-		String contextPackage;
-		/* The name of the generated aspect. */
-		String aspectName;
-
-		/* FIXME Claas: Implement a solution without a super class. */
-		String superClassName;
-
-		/*
-		 * A List of ConstrainableElements whose definition expressions shall be
-		 * instrumented.
-		 */
-		List<ConstrainableElement> constrainedElems;
-
-		/* Generate the code which shall be inside the advice(s). */
-		constrainedCode = this.transformFragmentCode(aConstraint);
-
-		/* Get a name for the generated aspect. */
-		aspectName = aConstraint.getDefinedFeature().getName();
-		
-		if (aspectName == null || aspectName.length() == 0 || this.myCodeTransEnv.isUsedAspectName(aspectName)) 
-			aspectName = this.myCodeTransEnv.getNewDefAspectName();
-		// no else.
-
-		this.myCodeTransEnv.addUsedAspectName(aspectName);
-
-		contextPackage = this.getPackagePath(aConstraint);
-
-		/* Begin with aspect specification. */
-		aspectTemplate = this.myTemplateGroup.getTemplate("aspectFile");
-		aspectTemplate.setAttribute("package",
-				this.getConstraintPackage(contextPackage));
-		aspectTemplate.setAttribute("name", aspectName);
-
-		/* Probably collect allInstances for some classes. */
-		if (this.myCodeTransEnv.hasAllInstancesClasses()) {
-			Set<String> allInstancesClasses;
-
-			allInstancesClasses = this.myCodeTransEnv.getAllInstancesClasses();
-
-			for (String aClassName : allInstancesClasses) {
-				aspectTemplate.setAttribute("allInstanceClasses", aClassName);
-			}
-		}
-		// no else.
-
-		constrainedElems = aConstraint.getConstrainedElement();
-
-		/*
-		 * Iterate through all ConstrainableElements and generate their point cuts
-		 * and advice.
-		 */
-		for (ConstrainableElement aConstrainedElem : constrainedElems) {
-
-			/* Definition constraints are be defined on Types. */
-			if (aConstrainedElem instanceof Type) {
-
-				Type aType;
-				Feature definedFeature;
-
-				ITemplate classTemplate;
-
-				aType = (Type) aConstrainedElem;
-
-				definedFeature = aConstraint.getDefinedFeature();
-
-				/* Differentiate between defined properties and operations. */
-				if (definedFeature instanceof Property) {
-
-					Property definedProperty;
-
-					String propertyName;
-					String propertyType;
-
-					ITemplate attributeTemplate;
-					String superClassCanonicalName;
-
-					/* Get the defined property. */
-					definedProperty = (Property) definedFeature;
-
-					propertyName = definedProperty.getName();
-					propertyType =
-							this.transformType(definedProperty.getType()).toString();
-
-					/* DEFINITION OF NEW DEFINED ATTRIBUTE */
-					/*
-					 * Try to create an extended class and define the new attribute.
-					 */
-					superClassName = "Extended" + aType.getName();
-					superClassCanonicalName =
-							this.getConstraintPackage(contextPackage) + "." + superClassName;
-
-					/* Check if the SuperClass has already been defined. */
-					if (this.myCodeTransEnv.existsClassTemplate(superClassCanonicalName)) {
-						classTemplate =
-								this.myCodeTransEnv
-										.getSuperClassTemplate(superClassCanonicalName);
-					}
-
-					/* Else get the already defined template. */
-					else {
-						classTemplate =
-								this.createExtendedClassTemplate(contextPackage, aType);
-					}
-
-					/* Define the new attribute. */
-					attributeTemplate = this.myTemplateGroup.getTemplate("javaAttribute");
-
-					attributeTemplate.setAttribute("name", propertyName);
-					attributeTemplate.setAttribute("type", propertyType);
-
-					/* Add the attribute to the class' template. */
-					classTemplate
-							.setAttribute("attributes", attributeTemplate.toString());
-
-					/*
-					 * Probably also create a new getter method for the new attribute.
-					 */
-					if (this.mySettings.isGettersForDefinedAttributesEnabled()) {
-						attributeTemplate =
-								this.myTemplateGroup.getTemplate("javaAttributeGetter");
-
-						attributeTemplate.setAttribute("name", propertyName);
-						attributeTemplate.setAttribute(
-								"ucaseName",
-								propertyName.substring(0, 1).toUpperCase()
-										+ propertyName.substring(1));
-						attributeTemplate.setAttribute("type", propertyType);
-
-						classTemplate.setAttribute("methods", attributeTemplate.toString());
-					}
-					// no else.
-
-					/* INITIALIZATION OF NEW DEFINED ATTRIBUTE */
-					/* Create the template for the advice code. */
-					adviceTemplate =
-							this.myTemplateGroup.getTemplate("defAttributeInstrumentation");
-
-					/* Set attribute specific template attributes. */
-					adviceTemplate.setAttribute("attribute", propertyName);
-					adviceTemplate.setAttribute("attributeType", propertyType);
-				}
-
-				else if (definedFeature instanceof Operation) {
-
-					Operation definedOperation;
-
-					String operationName;
-					String operationReturnType;
-
-					String anArgumentsName;
-					String anArgumentsType;
-
-					ITemplate methodTemplate;
-					String superClassCanonicalName;
-
-					/* Get the defined operation. */
-					definedOperation = (Operation) definedFeature;
-
-					operationName = definedOperation.getName();
-					operationReturnType =
-							this.transformType(definedOperation.getType()).toString();
-
-					/* DEFINITION OF NEW DEFINED OPERATION. */
-					/*
-					 * Try to create an extended class and define the new operation.
-					 */
-					superClassName = "Extended" + aType.getName();
-					superClassCanonicalName =
-							this.getConstraintPackage(contextPackage) + "." + superClassName;
-
-					/* Check if the SuperClass has already been defined. */
-					if (this.myCodeTransEnv.existsClassTemplate(superClassCanonicalName)) {
-						classTemplate =
-								this.myCodeTransEnv
-										.getSuperClassTemplate(superClassCanonicalName);
-					}
-
-					/* Else get the template of the already defined class. */
-					else {
-						classTemplate =
-								this.createExtendedClassTemplate(contextPackage, aType);
-					}
-
-					/* Define the operation. */
-					methodTemplate = this.myTemplateGroup.getTemplate("javaMethod");
-
-					methodTemplate.setAttribute("name", operationName);
-					methodTemplate.setAttribute("returnType", operationReturnType);
-
-					/* Probably set the arguments of the operation. */
-					for (Parameter anArgument : definedOperation.getInputParameter()) {
-						anArgumentsName = anArgument.getName();
-						anArgumentsType =
-								this.transformType(anArgument.getType()).toString();
-
-						methodTemplate.setAttribute("args", anArgumentsName);
-						methodTemplate.setAttribute("argTypes", anArgumentsType);
-					}
-
-					/* Add the operation to the class' template. */
-					classTemplate.setAttribute("methods", methodTemplate.toString());
-
-					/* IMPLEMENTATION OF NEW DEFINED OPERATION. */
-					/* Create a template for the advice code. */
-					adviceTemplate =
-							this.myTemplateGroup.getTemplate("defMethodInstrumentation");
-
-					/* Set operation specific template parameters. */
-					adviceTemplate.setAttribute("method", operationName);
-
-					/* Probably set the returnType. */
-					if (!operationReturnType.equals(this.myTemplateGroup.getTemplate(
-							"voidType").toString())) {
-						adviceTemplate.setAttribute("returnType", operationReturnType);
-					}
-					// no else.
-
-					/* Set all arguments of the Operation. */
-					for (Parameter anArgument : definedOperation.getInputParameter()) {
-						anArgumentsName = anArgument.getName();
-						anArgumentsType =
-								this.transformType(anArgument.getType()).toString();
-
-						adviceTemplate.setAttribute("args", anArgumentsName);
-						adviceTemplate.setAttribute("argTypes", anArgumentsType);
-					}
-				}
-
-				/* No other things can be defined by definition constraints. */
-				else {
-					String msg;
-
-					msg = "An def value defined for an invalid Type of Feature.";
-					msg += "Expected Type was Operation or Property but was ";
-					msg += aConstrainedElem.getClass().getName();
-
-					throw new Ocl2CodeException(msg);
-				}
-
-				/* Set advice template parameters. */
-				adviceTemplate.setAttribute("class", aType.getName());
-				adviceTemplate.setAttribute("package", contextPackage);
-				adviceTemplate.setAttribute("superClass", superClassName);
-				adviceTemplate.setAttribute("constFolder",
-						this.mySettings.getConstraintDirectory());
-				adviceTemplate.setAttribute("constCode", constrainedCode.getCode());
-				adviceTemplate.setAttribute("constExp", constrainedCode.getResultExp());
-				adviceTemplate.setAttribute("oclBody", aConstraint.getSpecification()
-						.getBody().trim());
-
-				/* Add the advice code to the aspect template. */
-				aspectTemplate.setAttribute("advice", adviceTemplate.toString());
-			}
-
-			else {
-				String msg;
-
-				msg = "An def value defined for an invalid Type ";
-				msg += "of ConstrainableElement.";
-				msg += "Expected Type was Type but was ";
-				msg += aConstrainedElem.getClass().getName();
-
-				throw new Ocl2CodeException(msg);
-			}
-		}
-		// end for.
-
-		result = aspectTemplate.toString();
-
-		/* Probably save the generated Code. */
-		if (this.mySettings.isSaveCode()) {
-			this.saveTransformedCode(result, aspectName + ".aj",
-					this.getConstraintPackage(contextPackage));
-		}
-		// no else.
-
-		/* Probably log the exit from this method. */
-		if (LOGGER.isDebugEnabled()) {
-			LOGGER.debug("instrumentCodeForDef(Constraint)" + "- end - return value="
-					+ result);
-		}
-		// no else.
-
-		return result;
-	}
-
-	/**
-	 * <p>
-	 * Generates an Aspect for the instrumentation of derive constraints.
-	 * </p>
-	 * 
-	 * @param aConstraint
-	 *          The {@link Constraint} which shall be instrumented.
-	 */
-	private String instrumentCodeForDerive(Constraint aConstraint)
-			throws Ocl2CodeException {
-
-		/* Probably log the entry into this method. */
-		if (LOGGER.isDebugEnabled()) {
-			LOGGER.debug("instrumentCodeForDerive(Constraint) - start");
-		}
-		// no else.
-
-		String result;
-
-		ITemplate aspectTemplate;
-		ITemplate adviceTemplate;
-
-		/* A List of Properties whose derive-Expressions shall be instrumented. */
-		List<ConstrainableElement> constrainedElems;
-
-		/* The code which shall be instrumented. */
-		ITransformedCode constrainedCode;
-
-		/* The name of the generated aspect. */
-		String aspectName;
-		/* The package of the context java file */
-		String contextPackage;
-
-		/* Generate the code which shall be inside the advice(s). */
-		constrainedCode = this.transformFragmentCode(aConstraint);
-
-		/* Get a name for the generated aspect. */
-		aspectName = aConstraint.getName();
-		
-		if (aConstraint.getName() == null || aConstraint.getName().length() == 0 || this.myCodeTransEnv.isUsedAspectName(aspectName)) 
-			aspectName = this.myCodeTransEnv.getNewDeriveAspectName();
-		// no else.
-
-		this.myCodeTransEnv.addUsedAspectName(aspectName);
-
-		/* Get the path of the package where the constraint class is located. */
-		contextPackage = this.getPackagePath(aConstraint);
-
-		aspectTemplate = this.myTemplateGroup.getTemplate("aspectFile");
-		aspectTemplate.setAttribute("package",
-				this.getConstraintPackage(contextPackage));
-		aspectTemplate.setAttribute("name", aspectName);
-
-		/* Probably collect allInstances for some classes. */
-		if (this.myCodeTransEnv.hasAllInstancesClasses()) {
-			Set<String> allInstancesClasses;
-
-			allInstancesClasses = this.myCodeTransEnv.getAllInstancesClasses();
-
-			for (String aClassName : allInstancesClasses) {
-				aspectTemplate.setAttribute("allInstanceClasses", aClassName);
-			}
-		}
-		// no else.
-
-		constrainedElems = aConstraint.getConstrainedElement();
-
-		/*
-		 * Iterate through all ConstrainableElements and generate their point cuts
-		 * and advice.
-		 */
-		for (ConstrainableElement aConstrainedElem : constrainedElems) {
-
-			/* Derived values can only define the values of Properties. */
-			if (aConstrainedElem instanceof Property) {
-				Property aProperty;
-				NamedElement constrainedClass;
-
-				String propertyName;
-				String propertyType;
-
-				aProperty = (Property) aConstrainedElem;
-
-				/*
-				 * Compute the constrained class. Especially handle static defined
-				 * properties.
-				 */
-				if (aProperty.isStatic()) {
-					constrainedClass =
-							((ExpressionInOcl) aConstraint.getSpecification()).getContext()
-									.getType();
-				}
-
-				else {
-					constrainedClass = aProperty.getOwner();
-				}
-
-				propertyName = aProperty.getName();
-				propertyType = this.transformType(aProperty.getType()).toString();
-
-				/* Create Template for the advice code. */
-				adviceTemplate =
-						this.myTemplateGroup.getTemplate("deriveInstrumentation");
-
-				/* Set template parameters. */
-				adviceTemplate.setAttribute("attribute", propertyName);
-				adviceTemplate.setAttribute("attributeType", propertyType);
-
-				adviceTemplate.setAttribute("class", constrainedClass.getName());
-				adviceTemplate.setAttribute("package", contextPackage);
-				adviceTemplate.setAttribute("constCode", constrainedCode.getCode());
-				adviceTemplate.setAttribute("constExp", constrainedCode.getResultExp());
-				adviceTemplate.setAttribute("oclBody", aConstraint.getSpecification()
-						.getBody().trim());
-
-				/* Probably set that the constrained attribute is static. */
-				if (aProperty.isStatic()) {
-					adviceTemplate.setAttribute("attIsStatic", "true");
-				}
-				// no else.
-
-				/* Add the advice code to the aspect template. */
-				aspectTemplate.setAttribute("advice", adviceTemplate.toString());
-			}
-
-			else {
-				String msg;
-
-				msg = "An derived value defined for an Property of an invalid Type ";
-				msg += "of ConstrainableElement.";
-				msg += "Expected Type was Property but was ";
-				msg += aConstrainedElem.getClass().getName();
-
-				throw new Ocl2CodeException(msg);
-			}
-		}
-		// end for.
-
-		result = aspectTemplate.toString();
-
-		/* Probably save the generated Code. */
-		if (this.mySettings.isSaveCode()) {
-			this.saveTransformedCode(result, aspectName + ".aj",
-					this.getConstraintPackage(contextPackage));
-		}
-		// no else.
-
-		/* Probably log the exit from this method. */
-		if (LOGGER.isDebugEnabled()) {
-			LOGGER.debug("instrumentCodeForDerive(Constraint)"
-					+ "- end - return value=" + result);
-		}
-		// no else.
-
-		return result;
-	}
-
-	/**
-	 * <p>
-	 * Generates an Aspect for the instrumentation of initial constraints.
-	 * </p>
-	 * 
-	 * @param aConstraint
-	 *          The {@link Constraint} which shall be instrumented.
-	 */
-	private String instrumentCodeForInit(Constraint aConstraint)
-			throws Ocl2CodeException {
-
-		/* Probably log the entry into this method. */
-		if (LOGGER.isDebugEnabled()) {
-			LOGGER.debug("instrumentCodeForInit(Constraint) - start");
-		}
-		// no else.
-
-		String result;
-
-		ITemplate aspectTemplate;
-		ITemplate adviceTemplate;
-
-		/* A List of Properties which initial expressions shall be instrumented. */
-		List<ConstrainableElement> constrainedElems;
-
-		/* The code which shall be instrumented. */
-		ITransformedCode constrainedCode;
-
-		/* The name of the generated aspect. */
-		String aspectName;
-		/* The name of the instrumented class. */
-		String className;
-		/* The package of the context java file */
-		String contextPackage;
-
-		/* Generate the code which shall be inside the advice(s). */
-		constrainedCode = this.transformFragmentCode(aConstraint);
-
-		/* Get a name for the generated aspect. */
-		aspectName = aConstraint.getName();
-		
-		if (aConstraint.getName() == null || aConstraint.getName().length() == 0 || this.myCodeTransEnv.isUsedAspectName(aspectName)) 
-			aspectName = this.myCodeTransEnv.getNewInitAspectName();
-		// no else.
-
-		this.myCodeTransEnv.addUsedAspectName(aspectName);
-
-		/* Get the path of the package where the constraint class is located. */
-		contextPackage = this.getPackagePath(aConstraint);
-
-		aspectTemplate = this.myTemplateGroup.getTemplate("aspectFile");
-		aspectTemplate.setAttribute("package",
-				this.getConstraintPackage(contextPackage));
-		aspectTemplate.setAttribute("name", aspectName);
-
-		/* Probably collect allInstances for some classes. */
-		if (this.myCodeTransEnv.hasAllInstancesClasses()) {
-			Set<String> allInstancesClasses;
-
-			allInstancesClasses = this.myCodeTransEnv.getAllInstancesClasses();
-
-			for (String aClassName : allInstancesClasses) {
-				aspectTemplate.setAttribute("allInstanceClasses", aClassName);
-			}
-		}
-		// no else.
-
-		constrainedElems = aConstraint.getConstrainedElement();
-
-		/*
-		 * Iterate through all ConstrainableElements and generate their point cuts
-		 * and advice.
-		 */
-		for (ConstrainableElement aConstrainedElem : constrainedElems) {
-
-			/* Initial values can only initialize Properties of Types. */
-			if (aConstrainedElem instanceof Property) {
-				Property aProperty;
-
-				aProperty = (Property) aConstrainedElem;
-
-				/*
-				 * Compute the constrained class name. Especially handle static defined
-				 * properties.
-				 */
-				if (aProperty.isStatic()) {
-					className =
-							((ExpressionInOcl) aConstraint.getSpecification()).getContext()
-									.getType().getName();
-				}
-
-				else {
-					className = aProperty.getOwner().getName();
-				}
-
-				/* Get the template and handle static attribute specially. */
-				if (aProperty.isStatic()) {
-					adviceTemplate =
-							this.myTemplateGroup.getTemplate("staticInitInstrumentation");
-				}
-
-				else {
-					adviceTemplate =
-							this.myTemplateGroup.getTemplate("initInstrumentation");
-				}
-
-				adviceTemplate.setAttribute("class", className);
-				adviceTemplate.setAttribute("package", contextPackage);
-				adviceTemplate.setAttribute("attribute", aProperty.getName());
-				adviceTemplate.setAttribute("constCode", constrainedCode.getCode());
-				adviceTemplate.setAttribute("constExp", constrainedCode.getResultExp());
-				adviceTemplate.setAttribute("oclBody", aConstraint.getSpecification()
-						.getBody().trim());
-
-				aspectTemplate.setAttribute("advice", adviceTemplate.toString());
-			}
-
-			else {
-				String msg;
-
-				msg = "An init value defined for an Property of an invalid Type ";
-				msg += "of ConstrainableElement.";
-				msg += "Expected Type was Property but was ";
-				msg += aConstrainedElem.getClass().getName();
-
-				throw new Ocl2CodeException(msg);
-			}
-		}
-		// end for.
-
-		result = aspectTemplate.toString();
-
-		/* Probably save the generated Code. */
-		if (this.mySettings.isSaveCode()) {
-			this.saveTransformedCode(result, aspectName + ".aj",
-					this.getConstraintPackage(contextPackage));
-		}
-		// no else.
-
-		/* Probably log the exit from this method. */
-		if (LOGGER.isDebugEnabled()) {
-			LOGGER.debug("instrumentCodeForInit(Constraint)"
-					+ "- end - return value=" + result);
-		}
-		// no else.
-
-		return result;
-	}
-
-	/**
-	 * <p>
-	 * Generates an Aspect for the instrumentation of invariants.
-	 * </p>
-	 * 
-	 * @param aConstraint
-	 *          The {@link Constraint} which shall be instrumented.
-	 */
-	private String instrumentCodeForInv(Constraint aConstraint)
-			throws Ocl2CodeException {
-
-		/* Probably log the entry into this method. */
-		if (LOGGER.isDebugEnabled()) {
-			LOGGER.debug("instrumentCodeForInv(Constraint) - start");
-		}
-		// no else.
-
-		String result;
-
-		ITemplate aspectTemplate;
-		ITemplate adviceTemplate;
-
-		/* A List of Properties whose invariants shall be instrumented. */
-		List<ConstrainableElement> constrainedElems;
-
-		/* The code which shall be instrumented. */
-		ITransformedCode constrainedCode;
-
-		/* The name of the generated aspect. */
-		String aspectName;
-		/* The package of the context java file */
-		String contextPackage;
-
-		/* Generate the code which shall be inside the advice(s). */
-		constrainedCode = this.transformFragmentCode(aConstraint);
-
-		/* Get a name for the generated aspect. */
-		aspectName = aConstraint.getName();
-		
-		if (aConstraint.getName() == null || aConstraint.getName().length() == 0 || this.myCodeTransEnv.isUsedAspectName(aspectName)) 
-			aspectName = this.myCodeTransEnv.getNewInvAspectName();
-		// no else.
-
-		this.myCodeTransEnv.addUsedAspectName(aspectName);
-
-		/* Get the path of the package where the constraint class is located. */
-		contextPackage = this.getPackagePath(aConstraint);
-
-		aspectTemplate = this.myTemplateGroup.getTemplate("aspectFile");
-		aspectTemplate.setAttribute("package",
-				this.getConstraintPackage(contextPackage));
-		aspectTemplate.setAttribute("name", aspectName);
-
-		/* Probably collect allInstances for some classes. */
-		if (this.myCodeTransEnv.hasAllInstancesClasses()) {
-			Set<String> allInstancesClasses;
-
-			allInstancesClasses = this.myCodeTransEnv.getAllInstancesClasses();
-
-			for (String aClassName : allInstancesClasses) {
-				aspectTemplate.setAttribute("allInstanceClasses", aClassName);
-			}
-		}
-		// no else.
-
-		constrainedElems = aConstraint.getConstrainedElement();
-
-		/*
-		 * Iterate through all ConstrainableElements and generate their point cuts
-		 * and advice.
-		 */
-		for (ConstrainableElement aConstrainedElem : constrainedElems) {
-
-			/* Invariants can only define the values of Type instances. */
-			if (aConstrainedElem instanceof Type) {
-
-				NamedElement constrainedClass = (Type) aConstrainedElem;
-
-				/*
-				 * Check which type of invariant check mode shall be used and create the
-				 * template for the advice code.
-				 */
-				switch (this.mySettings.getInvariantCheckMode(aConstraint)) {
-
-				case IOcl2JavaSettings.INVARIANT_CHECK_AFTER_CONSTRUCT_AND_PUBLIC_METHOD_EXECUTION:
-					adviceTemplate =
-							this.myTemplateGroup.getTemplate("invInstrumentation2");
-					break;
-
-				case IOcl2JavaSettings.INVARIANT_CHECK_AFTER_SPECIAL_METHOD_INVOCATION:
-					adviceTemplate =
-							this.myTemplateGroup.getTemplate("invInstrumentation3");
-					break;
-
-				default:
-					adviceTemplate =
-							this.myTemplateGroup.getTemplate("invInstrumentation1");
-				}
-
-				/* Set template parameters. */
-				adviceTemplate.setAttribute("class", constrainedClass.getName());
-				adviceTemplate.setAttribute("package", contextPackage);
-				adviceTemplate.setAttribute("constCode", constrainedCode.getCode());
-				adviceTemplate.setAttribute("constExp", constrainedCode.getResultExp());
-				adviceTemplate.setAttribute("oclBody", aConstraint.getSpecification()
-						.getBody().trim());
-				adviceTemplate.setAttribute("errorCode", this.mySettings
-						.getViolationMacro(aConstraint).getCode());
-
-				/*
-				 * Probably add called attributes as parameters (only if the invariant
-				 * shall be verified after the change of an depending attribute).
-				 */
-				if (this.mySettings.getInvariantCheckMode(aConstraint) == IOcl2JavaSettings.INVARIANT_CHECK_AFTER_CONSTRUCT_AND_ATTRIBUTE_CHANGE) {
-
-					if (this.myCodeTransEnv.hasCalledProperties()) {
-
-						for (String aCalledProperty : this.myCodeTransEnv
-								.getCalledProperties()) {
-							adviceTemplate.setAttribute("calledAttPaths", aCalledProperty);
-							adviceTemplate.setAttribute("calledAttNames",
-									aCalledProperty.replaceAll("\\.", "_"));
-						}
-					}
-					// no else.
-				}
-				// no else.
-
-				/*
-				 * Probably add super class for method definition (only if the invariant
-				 * shall be verified after special method invocation).
-				 */
-				if (this.mySettings.getInvariantCheckMode(aConstraint) == IOcl2JavaSettings.INVARIANT_CHECK_AFTER_SPECIAL_METHOD_INVOCATION) {
-
-					ITemplate classTemplate;
-					ITemplate methodTemplate;
-
-					/* FIXME Claas: Implement a solution without a super class. */
-					String superClassName;
-					String superClassCanonicalName;
-
-					String operationName;
-
-					/* Create an extended class and define the new method. */
-					superClassName = "Extended" + constrainedClass.getName();
-					superClassCanonicalName =
-							this.getConstraintPackage(contextPackage) + "." + superClassName;
-
-					/* Check if the SuperClass has already been defined. */
-					if (this.myCodeTransEnv.existsClassTemplate(superClassCanonicalName)) {
-						classTemplate =
-								this.myCodeTransEnv
-										.getSuperClassTemplate(superClassCanonicalName);
-					}
-
-					else {
-						classTemplate =
-								this.createExtendedClassTemplate(contextPackage,
-										(Type) aConstrainedElem);
-					}
-
-					operationName =
-							this.myTemplateGroup.getTemplate("checkInvariantsOperationName")
-									.toString();
-
-					/* Check if the Method has already been defined. */
-					if (!classTemplate.toString().contains(operationName)) {
-
-						/* Else Define the method. */
-						methodTemplate = this.myTemplateGroup.getTemplate("javaMethod");
-
-						methodTemplate.setAttribute("name", operationName);
-
-						classTemplate.setAttribute("methods", methodTemplate.toString());
-					}
-
-					adviceTemplate.setAttribute("constFolder",
-							mySettings.getConstraintDirectory());
-					adviceTemplate.setAttribute("superClass", superClassName);
-				}
-				// no else.
-
-				/* Probably disable the inheritance for this invariant. */
-				if (this.mySettings.isInheritanceDisabled(aConstraint)) {
-					adviceTemplate.setAttribute("disableInheritance", "true");
-				}
-				// no else.
-
-				/* Add the advice code to the aspect template. */
-				aspectTemplate.setAttribute("advice", adviceTemplate.toString());
-			}
-
-			else {
-				String msg;
-
-				msg = "An invariant defined for an Property of an ";
-				msg += "invalid Type of ConstrainableElement.";
-				msg += "Expected Type was Type but was ";
-				msg += aConstrainedElem.getClass().getName();
-
-				throw new Ocl2CodeException(msg);
-			}
-		}
-		// end for.
-
-		result = aspectTemplate.toString();
-
-		/* Probably save the generated Code. */
-		if (this.mySettings.isSaveCode()) {
-			this.saveTransformedCode(result, aspectName + ".aj",
-					this.getConstraintPackage(contextPackage));
-		}
-		// no else.
-
-		/* Probably log the exit from this method. */
-		if (LOGGER.isDebugEnabled()) {
-			LOGGER.debug("instrumentCodeForInv(Constraint)" + "- end - return value="
-					+ result);
-		}
-		// no else.
-
-		return result;
-	}
-
-	/**
-	 * <p>
-	 * Generates an Aspect for the instrumentation of postconditions.
-	 * </p>
-	 * 
-	 * @param aConstraint
-	 *          The {@link Constraint} which shall be instrumented.
-	 */
-	private String instrumentCodeForPost(Constraint aConstraint)
-			throws Ocl2CodeException {
-
-		/* Probably log the entry into this method. */
-		if (LOGGER.isDebugEnabled()) {
-			LOGGER.debug("instrumentCodeForPost(Constraint) - start");
-		}
-		// no else.
-
-		String result;
-
-		ITemplate aspectTemplate;
-		ITemplate adviceTemplate;
-
-		/* A List of properties which preconditions shall be instrumented. */
-		List<ConstrainableElement> constrainedElems;
-
-		/* The code which shall be instrumented. */
-		ITransformedCode constrainedCode;
-
-		/* The name of the generated aspect. */
-		String aspectName;
-		/* The package of the context java file */
-		String contextPackage;
-
-		/* Generate the code which shall be inside the advice(s). */
-		constrainedCode = this.transformFragmentCode(aConstraint);
-
-		/* Get a name for the generated aspect. */
-		aspectName = aConstraint.getName();
-		
-		if (aConstraint.getName() == null || aConstraint.getName().length() == 0 || this.myCodeTransEnv.isUsedAspectName(aspectName)) 
-			aspectName = this.myCodeTransEnv.getNewPostAspectName();
-		// no else.
-
-		this.myCodeTransEnv.addUsedAspectName(aspectName);
-
-		/* Get the path of the package where the constraint class is located. */
-		contextPackage = this.getPackagePath(aConstraint);
-
-		aspectTemplate = this.myTemplateGroup.getTemplate("aspectFile");
-		aspectTemplate.setAttribute("package",
-				this.getConstraintPackage(contextPackage));
-		aspectTemplate.setAttribute("name", aspectName);
-
-		/* Probably collect allInstances for some classes. */
-		if (this.myCodeTransEnv.hasAllInstancesClasses()) {
-			Set<String> allInstancesClasses;
-
-			allInstancesClasses = this.myCodeTransEnv.getAllInstancesClasses();
-
-			for (String aClassName : allInstancesClasses) {
-				aspectTemplate.setAttribute("allInstanceClasses", aClassName);
-			}
-		}
-		// no else.
-
-		/* Probably collect newInstances for some classes. */
-		if (this.myCodeTransEnv.hasIsNewClasses()) {
-			Set<String> isNewClasses;
-
-			isNewClasses = this.myCodeTransEnv.getIsNewClasses();
-
-			for (String aClassName : isNewClasses) {
-				aspectTemplate.setAttribute("isNewClasses", aClassName);
-			}
-		}
-		// no else.
-
-		constrainedElems = aConstraint.getConstrainedElement();
-
-		/*
-		 * Iterate through all ConstrainableElements and generate their point cuts
-		 * and advice.
-		 */
-		for (ConstrainableElement aConstrainedElem : constrainedElems) {
-
-			/* Postconditions can be only defined on the body of Operations. */
-			if (aConstrainedElem instanceof Operation) {
-				Operation anOperation;
-				NamedElement constrainedClass;
-
-				String operationName;
-				String operationResultType;
-
-				anOperation = (Operation) aConstrainedElem;
-
-				constrainedClass = anOperation.getOwner();
-
-				operationName = anOperation.getName();
-				operationResultType =
-						this.transformType(anOperation.getType()).toString();
-				/* Create Template for the advice code. */
-				adviceTemplate =
-						this.myTemplateGroup.getTemplate("postInstrumentation");
-
-				/* Set template parameters. */
-				adviceTemplate.setAttribute("class", constrainedClass.getName());
-				adviceTemplate.setAttribute("package", contextPackage);
-				adviceTemplate.setAttribute("constCode", constrainedCode.getCode());
-				adviceTemplate.setAttribute("constExp", constrainedCode.getResultExp());
-				adviceTemplate.setAttribute("oclBody", aConstraint.getSpecification()
-						.getBody().trim());
-				adviceTemplate.setAttribute("method", operationName);
-				adviceTemplate.setAttribute("errorCode", this.mySettings
-						.getViolationMacro(aConstraint).getCode());
-
-				/* Probably set the returnType. */
-				if (!operationResultType.equals(this.myTemplateGroup.getTemplate(
-						"voidType").toString())) {
-					adviceTemplate.setAttribute("returnType", operationResultType);
-				}
-				// no else.
-
-				/* Probably set the arguments of the operation. */
-				this.setArgumentsForInstrumentationTemplate(aConstraint, adviceTemplate);
-
-				/* Probably store some atPre values */
-				if (this.myCodeTransEnv.hasAtPreValues()) {
-					Map<ITransformedCode, Object[]> atPreValues;
-					Set<ITransformedCode> valueCodes;
-					Set<String> atPreTypes;
-
-					atPreValues = this.myCodeTransEnv.getAtPreValues();
-					valueCodes = atPreValues.keySet();
-					atPreTypes = new HashSet<String>();
-
-					for (ITransformedCode aValueCode : valueCodes) {
-						Object[] typeAndName;
-
-						Type aType;
-						String transformedType;
-
-						typeAndName = atPreValues.get(aValueCode);
-
-						aType = (Type) typeAndName[0];
-						transformedType = this.transformInitializableType(aType).toString();
-
-						/*
-						 * The atPre values for primitive and collection types are
-						 * initialized different from user defined types.
-						 */
-						if (aType instanceof PrimitiveType
-								|| aType instanceof CollectionType) {
-							adviceTemplate.setAttribute("primitiveAtPreCodes",
-									aValueCode.getCode());
-							adviceTemplate.setAttribute("primitiveAtPreExps",
-									aValueCode.getResultExp());
-							adviceTemplate.setAttribute("primitiveAtPreTypes",
-									transformedType);
-							adviceTemplate.setAttribute("primitiveAtPreVars",
-									typeAndName[1].toString());
-						}
-
-						else {
-							adviceTemplate.setAttribute("atPreCodes", aValueCode.getCode());
-							adviceTemplate.setAttribute("atPreExps",
-									aValueCode.getResultExp());
-							adviceTemplate.setAttribute("atPreTypes", transformedType);
-							adviceTemplate.setAttribute("atPreVars",
-									typeAndName[1].toString());
-
-							/*
-							 * Collect the types to provide user defined copy methods.
-							 */
-							atPreTypes.add(transformedType);
-						}
-
-					}
-					// end for.
-
-					/* Add initialization methods for the atPreTypes. */
-					for (String aType : atPreTypes) {
-
-						adviceTemplate.setAttribute("atPreTypeSet", aType);
-					}
-				}
-				// no else.
-
-				/* Probably use the special OCL operation oclIsNew. */
-				if (this.myCodeTransEnv.hasIsNewClasses()) {
-					adviceTemplate.setAttribute("oclIsNewUsed", "true");
-				}
-				// no else.
-
-				/* Probably disable inheritance for this post condition. */
-				if (this.mySettings.isInheritanceDisabled(aConstraint)) {
-					adviceTemplate.setAttribute("disableInheritance", "true");
-				}
-				// no else.
-
-				/* Probably set that the constraint operation is static. */
-				if (anOperation.isStatic()) {
-					adviceTemplate.setAttribute("opIsStatic", "true");
-				}
-				// no else.
-
-				/* Probably set that the constrained operation is a constructor. */
-				if (operationName.equals(constrainedClass.getName())) {
-					adviceTemplate.setAttribute("opIsConstructor", "true");
-				}
-				// no else.
-
-				/* Add the advice code to the aspect template. */
-				aspectTemplate.setAttribute("advice", adviceTemplate.toString());
-			}
-
-			else {
-				String msg;
-
-				msg = "An precondition defined for an Property of an ";
-				msg += "invalid Type of ConstrainableElement.";
-				msg += "Expected Type was Operation but was ";
-				msg += aConstrainedElem.getClass().getName();
-
-				throw new Ocl2CodeException(msg);
-			}
-		}
-		// end for.
-
-		result = aspectTemplate.toString();
-
-		/* Probably save the generated Code. */
-		if (this.mySettings.isSaveCode()) {
-			this.saveTransformedCode(result, aspectName + ".aj",
-					this.getConstraintPackage(contextPackage));
-		}
-		// no else.
-
-		/* Probably log the exit from this method. */
-		if (LOGGER.isDebugEnabled()) {
-			LOGGER.debug("instrumentCodeForPost(Constraint)"
-					+ "- end - return value=" + result);
-		}
-		// no else.
-
-		return result;
-	}
-
-	/**
-	 * <p>
-	 * Generates an Aspect for the instrumentation of preconditions.
-	 * </p>
-	 * 
-	 * @param aConstraint
-	 *          The {@link Constraint} which shall be instrumented.
-	 */
-	private String instrumentCodeForPre(Constraint aConstraint)
-			throws Ocl2CodeException {
-
-		/* Probably log the entry into this method. */
-		if (LOGGER.isDebugEnabled()) {
-			LOGGER.debug("instrumentCodeForPre(Constraint) - start");
-		}
-		// no else.
-
-		String result;
-
-		ITemplate aspectTemplate;
-		ITemplate adviceTemplate;
-
-		/* A List of Properties on which the precondition shall be instrumented. */
-		List<ConstrainableElement> constrainedElems;
-
-		/* The code which shall be instrumented. */
-		ITransformedCode constrainedCode;
-
-		/* The name of the generated aspect. */
-		String aspectName;
-		/* The package of the context java file */
-		String contextPackage;
-
-		/* Generate the code which shall be inside the advice(s). */
-		constrainedCode = this.transformFragmentCode(aConstraint);
-
-		/* Get a name for the generated aspect. */
-		aspectName = aConstraint.getName();
-		
-		if (aConstraint.getName() == null || aConstraint.getName().length() == 0 || this.myCodeTransEnv.isUsedAspectName(aspectName)) 
-			aspectName = this.myCodeTransEnv.getNewPreAspectName();
-		// no else.
-
-		this.myCodeTransEnv.addUsedAspectName(aspectName);
-
-		/* Get the path of the package where the constraint class is located. */
-		contextPackage = this.getPackagePath(aConstraint);
-
-		aspectTemplate = this.myTemplateGroup.getTemplate("aspectFile");
-		aspectTemplate.setAttribute("package",
-				this.getConstraintPackage(contextPackage));
-		aspectTemplate.setAttribute("name", aspectName);
-
-		/* Probably collect allInstances for some classes. */
-		if (this.myCodeTransEnv.hasAllInstancesClasses()) {
-			Set<String> allInstancesClasses;
-
-			allInstancesClasses = this.myCodeTransEnv.getAllInstancesClasses();
-
-			for (String aClassName : allInstancesClasses) {
-				aspectTemplate.setAttribute("allInstanceClasses", aClassName);
-			}
-		}
-		// no else.
-
-		constrainedElems = aConstraint.getConstrainedElement();
-
-		/*
-		 * Iterate through all ConstrainableElements and generate their point cuts
-		 * and advice.
-		 */
-		for (ConstrainableElement aConstrainedElem : constrainedElems) {
-
-			/* Preconditions can be only defined on the body of operations. */
-			if (aConstrainedElem instanceof Operation) {
-				Operation anOperation;
-				NamedElement constrainedClass;
-
-				String operationName;
-				String operationResultType;
-
-				anOperation = (Operation) aConstrainedElem;
-
-				constrainedClass = anOperation.getOwner();
-
-				operationName = anOperation.getName();
-				operationResultType =
-						this.transformType(anOperation.getType()).toString();
-				/* Create Template for the advice code. */
-				adviceTemplate = this.myTemplateGroup.getTemplate("preInstrumentation");
-
-				/* Set template parameters. */
-				adviceTemplate.setAttribute("class", constrainedClass.getName());
-				adviceTemplate.setAttribute("package", contextPackage);
-				adviceTemplate.setAttribute("constCode", constrainedCode.getCode());
-				adviceTemplate.setAttribute("constExp", constrainedCode.getResultExp());
-				adviceTemplate.setAttribute("oclBody", aConstraint.getSpecification()
-						.getBody().trim());
-				adviceTemplate.setAttribute("method", operationName);
-				adviceTemplate.setAttribute("errorCode", this.mySettings
-						.getViolationMacro(aConstraint).getCode());
-
-				/* Probably set the returnType. */
-				if (!operationResultType.equals(this.myTemplateGroup.getTemplate(
-						"voidType").toString())) {
-					adviceTemplate.setAttribute("returnType", operationResultType);
-				}
-				// no else.
-
-				/* Probably set the arguments of the operation. */
-				this.setArgumentsForInstrumentationTemplate(aConstraint, adviceTemplate);
-
-				/* Probably disable inheritance for this post condition. */
-				if (this.mySettings.isInheritanceDisabled(aConstraint)) {
-					adviceTemplate.setAttribute("disableInheritance", "true");
-				}
-				// no else.
-
-				/* Probably set that the constraint operation is static. */
-				if (anOperation.isStatic()) {
-					adviceTemplate.setAttribute("opIsStatic", "true");
-				}
-				// no else.
-
-				/* Probably set that the constrained operation is a constructor. */
-				if (operationName.equals(constrainedClass.getName())) {
-					adviceTemplate.setAttribute("opIsConstructor", "true");
-				}
-				// no else.
-
-				/* Add the advice code to the aspect template. */
-				aspectTemplate.setAttribute("advice", adviceTemplate.toString());
-			}
-
-			else {
-				String msg;
-
-				msg = "An pre condition defined for an Property of an ";
-				msg += "invalid Type of ConstrainableElement.";
-				msg += "Expected Type was Operation but was ";
-				msg += aConstrainedElem.getClass().getName();
-
-				throw new Ocl2CodeException(msg);
-			}
-		}
-		// end for.
-
-		result = aspectTemplate.toString();
-
-		/* Probably save the generated Code. */
-		if (this.mySettings.isSaveCode()) {
-			this.saveTransformedCode(result, aspectName + ".aj",
-					this.getConstraintPackage(contextPackage));
-		}
-		// no else.
-
-		/* Probably log the exit from this method. */
-		if (LOGGER.isDebugEnabled()) {
-			LOGGER.debug("instrumentCodeForPre(Constraint)" + "- end - return value="
-					+ result);
-		}
-		// no else.
-
-		return result;
-	}
-
-	/**
-	 * @returns The canonical Name of a {@link NamedElement} in the {@link IModel}
-	 *          instance.
+	 * @returns The canonical Name of a {@link NamedElement} in the
+	 *          {@link IModel} instance.
 	 */
 	private String getCanonicalName(NamedElement anElement) {
 
@@ -4191,9 +2887,9 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 
 	/**
 	 * @param packagePath
-	 * @return The constraint package to a given packagePath. They are the same if
-	 *         no constraint directory has been set. Else the constraint directory
-	 *         is a sub package.
+	 * @return The constraint package to a given packagePath. They are the same
+	 *         if no constraint directory has been set. Else the constraint
+	 *         directory is a sub package.
 	 */
 	private String getConstraintPackage(String packagePath) {
 
@@ -4214,57 +2910,13 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 
 	/**
 	 * <p>
-	 * A helper method which returns a {@link ITemplate} containing the code for a
-	 * new defined Class as new super class to a given {@link Type} .
-	 * </p>
-	 * 
-	 * @param contextPackage
-	 *          The package where the given {@link Type} is located.
-	 * @param aType
-	 *          The {@link Type} which new superclass shall be created.
-	 * @return A {@link ITemplate} containing the code for a new defined Class as
-	 *         new super class to a given {@link Type}.
-	 */
-	private ITemplate createExtendedClassTemplate(String contextPackage,
-			Type aType) {
-
-		ITemplate classTemplate;
-		String canoncicalSuperType;
-		String className;
-		String packagePath;
-
-		className = EXTENDEC_CLASS_NAME_PREFIX + aType.getName();
-		packagePath = this.getConstraintPackage(this.getPackagePath(aType));
-
-		classTemplate = this.myTemplateGroup.getTemplate("javaFile");
-
-		classTemplate.setAttribute("package", packagePath);
-		classTemplate.setAttribute("name", aType.getName());
-
-		/* Probably set a super type of the class. */
-		if (aType.getSuperType().size() > 0) {
-			canoncicalSuperType =
-					this.transformType(aType.getSuperType().get(0)).toString();
-			classTemplate.setAttribute("superType", canoncicalSuperType);
-		}
-		// no else.
-
-		/* Store superClass in the environment. */
-		this.myCodeTransEnv.addSuperClassTemplate(packagePath + "." + className,
-				classTemplate);
-
-		return classTemplate;
-	}
-
-	/**
-	 * <p>
 	 * A helper method which saves all new generated super classes to define new
 	 * attributes and/or methods.
 	 * </p>
 	 * 
 	 * @throws Ocl2CodeException
-	 *           Ocl2CodeException Thrown if the given file or location can not be
-	 *           found.
+	 *             Ocl2CodeException Thrown if the given file or location can
+	 *             not be found.
 	 */
 	private void saveExtendedClasses() throws Ocl2CodeException {
 
@@ -4302,7 +2954,8 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 
 			aClassTemplate = classTemplates.get(aCanonicalClassName);
 
-			this.saveTransformedCode(aClassTemplate.toString(), fileName, packagePath);
+			this.saveTransformedCode(aClassTemplate.toString(), fileName,
+					packagePath);
 		}
 
 		/* Probably log the exit from this method. */
@@ -4319,15 +2972,15 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 	 * </p>
 	 * 
 	 * @param generatedCode
-	 *          The code which shall be saved.
+	 *            The code which shall be saved.
 	 * @param fileName
-	 *          The name of the File into which the transformed code shall be
-	 *          saved.
+	 *            The name of the File into which the transformed code shall be
+	 *            saved.
 	 * @param subFolder
-	 *          The subFolder(s) into which the File shall be located (relative)
-	 *          to the sourcePath.
+	 *            The subFolder(s) into which the File shall be located
+	 *            (relative) to the sourcePath.
 	 * @throws Ocl2CodeException
-	 *           Thrown if the given file or location can not be found.
+	 *             Thrown if the given file or location can not be found.
 	 */
 	private void saveTransformedCode(String generatedCode, String fileName,
 			String subFolder) throws Ocl2CodeException {
@@ -4353,7 +3006,8 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 				subFolder += directories[i] + "/";
 			}
 
-			outputFolder = new File(this.mySettings.getSourceDirectory() + subFolder);
+			outputFolder = new File(this.mySettings.getSourceDirectory()
+					+ subFolder);
 
 			/* Check if output folder does exists. */
 			if (!outputFolder.isDirectory()) {
@@ -4361,7 +3015,8 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 			}
 			// no else.
 
-			outputFile = new File(outputFolder.getAbsolutePath() + "/" + fileName);
+			outputFile = new File(outputFolder.getAbsolutePath() + "/"
+					+ fileName);
 
 			/* Create the output file. */
 			fileOutputStream = new FileOutputStream(outputFile);
@@ -4404,25 +3059,26 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 
 	/**
 	 * <p>
-	 * Sets the argument names and {@link Type}s of a given {@link Constraint} for
-	 * its instrumentation template.
+	 * Sets the argument names and {@link Type}s of a given {@link Constraint}
+	 * for its instrumentation template.
 	 * </p>
 	 * 
 	 * @param constraint
-	 *          The {@link Constraint} for that the arguments shall be set.
+	 *            The {@link Constraint} for that the arguments shall be set.
 	 * @param adviceTemplate
-	 *          The {@link ITemplate} to set the names and {@link Type}s.
+	 *            The {@link ITemplate} to set the names and {@link Type}s.
 	 */
 	private void setArgumentsForInstrumentationTemplate(Constraint constraint,
 			ITemplate adviceTemplate) {
 
-		for (Variable anArgument : ((ExpressionInOcl) constraint.getSpecification())
-				.getParameter()) {
+		for (Variable anArgument : ((ExpressionInOcl) constraint
+				.getSpecification()).getParameter()) {
 			String anArgumentsName;
 			String anArgumentsType;
 
 			anArgumentsName = anArgument.getName();
-			anArgumentsType = this.transformType(anArgument.getType()).toString();
+			anArgumentsType = this.transformType(anArgument.getType())
+					.toString();
 
 			adviceTemplate.setAttribute("args", anArgumentsName);
 			adviceTemplate.setAttribute("argTypes", anArgumentsType);
@@ -4432,6 +3088,7 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.tools.codegen.IOcl2Code#setSettings(tudresden.ocl20
 	 * .pivot.tools.codegen.IOcl2CodeSettings)
@@ -4443,6 +3100,7 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.ocl2java.IOcl2Code#transformFragmentCode(java.util
 	 * .List)
@@ -4483,6 +3141,1027 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("transformFragmentCode(List<Constraint>)"
 					+ " - end - return value=" + result);
+		}
+		// no else.
+
+		return result;
+	}
+
+	private static final int REFACTORED_FROM_HERE = 0;
+
+	/**
+	 * <p>
+	 * Generates an Aspect for the instrumentation of body constraints.
+	 * </p>
+	 * 
+	 * @param constraint
+	 *            The {@link Constraint} which shall be instrumented.
+	 */
+	private String instrumentCodeForBody(Constraint constraint)
+			throws Ocl2CodeException {
+
+		/* Probably log the entry into this method. */
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("instrumentCodeForBody(Constraint) - start");
+		}
+		// no else.
+
+		String result;
+
+		ITemplate aspectTemplate = this.myTemplateGroup
+				.getTemplate("aspectFile");
+
+		/* Get the constrained operation. */
+		Operation constrainedOperation = ((Operation) constraint
+				.getConstrainedElement().get(0));
+
+		/* Get the path of the package where the constraint class is located. */
+		String contextPackage = this.getPackagePath(constraint);
+		aspectTemplate.setAttribute("package",
+				this.getConstraintPackage(contextPackage));
+
+		/* Compute the aspect's file name. */
+		String className = constrainedOperation.getOwner().getName();
+		String aspectName = className + "_"
+				+ Ocl2JavaEnvironment.BODY_ASPECT_NAME + "_"
+				+ constrainedOperation.getName();
+
+		if (this.myCodeTransEnv.isUsedAspectName(aspectName))
+			aspectName = className + "_"
+					+ this.myCodeTransEnv.getNewBodyAspectName();
+		// no else.
+
+		this.myCodeTransEnv.addUsedAspectName(aspectName);
+		aspectTemplate.setAttribute("name", aspectName);
+
+		/* Generate the code which shall be inside the advice(s). */
+		ITransformedCode constrainedCode = this
+				.transformFragmentCode(constraint);
+
+		/* Probably collect allInstances for some classes. */
+		if (this.myCodeTransEnv.hasAllInstancesClasses()) {
+			Set<String> allInstancesClasses = this.myCodeTransEnv
+					.getAllInstancesClasses();
+
+			for (String aClassName : allInstancesClasses) {
+				aspectTemplate.setAttribute("allInstanceClasses", aClassName);
+			}
+		}
+		// no else.
+
+		NamedElement constrainedClass = constrainedOperation.getOwner();
+
+		String operationName = constrainedOperation.getName();
+		String operationResultType = this.transformType(
+				constrainedOperation.getType()).toString();
+
+		/* Create Template for the advice code. */
+		ITemplate adviceTemplate = this.myTemplateGroup
+				.getTemplate("bodyInstrumentation");
+
+		/* Set template parameters. */
+		adviceTemplate.setAttribute("class", constrainedClass.getName());
+		adviceTemplate.setAttribute("package", contextPackage);
+		adviceTemplate.setAttribute("constCode", constrainedCode.getCode());
+		adviceTemplate.setAttribute("constExp", constrainedCode.getResultExp());
+		adviceTemplate.setAttribute("oclBody", constraint.getSpecification()
+				.getBody().trim());
+		adviceTemplate.setAttribute("method", operationName);
+
+		/* Probably set the returnType. */
+		if (!operationResultType.equals(this.myTemplateGroup.getTemplate(
+				"voidType").toString())) {
+			adviceTemplate.setAttribute("returnType", operationResultType);
+		}
+		// no else.
+
+		/* Probably set the arguments of the operation. */
+		this.setArgumentsForInstrumentationTemplate(constraint, adviceTemplate);
+
+		/* Probably set that the constraint operation is static. */
+		if (constrainedOperation.isStatic()) {
+			adviceTemplate.setAttribute("opIsStatic", "true");
+		}
+		// no else.
+
+		/* Add the advice code to the aspect template. */
+		aspectTemplate.setAttribute("advice", adviceTemplate.toString());
+
+		result = aspectTemplate.toString();
+
+		/* Probably save the generated Code. */
+		if (this.mySettings.isSaveCode()) {
+			this.saveTransformedCode(result, aspectName + ".aj",
+					this.getConstraintPackage(contextPackage));
+		}
+		// no else.
+
+		/* Probably log the exit from this method. */
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("instrumentCodeForBody(Constraint)"
+					+ "- end - return value=" + result);
+		}
+		// no else.
+
+		return result;
+	}
+
+	/**
+	 * <p>
+	 * Generates an Aspect for the instrumentation of definition constraints.
+	 * </p>
+	 * 
+	 * @param constraint
+	 *            The {@link Constraint} which shall be instrumented.
+	 */
+	private String instrumentCodeForDef(Constraint constraint)
+			throws Ocl2CodeException {
+
+		/* Probably log the entry into this method. */
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("instrumentCodeForDef(Constraint) - start");
+		}
+		// no else.
+
+		String result;
+
+		ITemplate aspectTemplate = this.myTemplateGroup
+				.getTemplate("aspectFile");
+
+		/* Get the constrained element. */
+		Feature definedFeature = constraint.getDefinedFeature();
+
+		/* Get the path of the package where the constraint class is located. */
+		String contextPackage = this.getPackagePath(constraint);
+		aspectTemplate.setAttribute("package",
+				this.getConstraintPackage(contextPackage));
+
+		/* Compute the aspect's file name. */
+		String className = definedFeature.getOwner().getName();
+		String aspectName = className + "_"
+				+ Ocl2JavaEnvironment.DEF_ASPECT_NAME + "_"
+				+ definedFeature.getName();
+
+		if (this.myCodeTransEnv.isUsedAspectName(aspectName))
+			aspectName = className + "_"
+					+ this.myCodeTransEnv.getNewDefAspectName();
+		// no else.
+
+		this.myCodeTransEnv.addUsedAspectName(aspectName);
+		aspectTemplate.setAttribute("name", aspectName);
+
+		/* Generate the code which shall be inside the advice(s). */
+		ITransformedCode constrainedCode = this
+				.transformFragmentCode(constraint);
+
+		/* Probably collect allInstances for some classes. */
+		if (this.myCodeTransEnv.hasAllInstancesClasses()) {
+			Set<String> allInstancesClasses;
+
+			allInstancesClasses = this.myCodeTransEnv.getAllInstancesClasses();
+
+			for (String aClassName : allInstancesClasses) {
+				aspectTemplate.setAttribute("allInstanceClasses", aClassName);
+			}
+		}
+		// no else.
+
+		ITemplate adviceTemplate;
+		Type type = (Type) constraint.getConstrainedElement().get(0);
+
+		/* Differentiate between defined properties and operations. */
+		if (definedFeature instanceof Property) {
+
+			/* Get the defined property. */
+			Property definedProperty = (Property) definedFeature;
+
+			String propertyName = definedProperty.getName();
+			String propertyType = this.transformType(definedProperty.getType())
+					.toString();
+
+			/* Create the template for the advice code. */
+			adviceTemplate = this.myTemplateGroup
+					.getTemplate("defAttributeInstrumentation");
+
+			/* Set attribute specific template attributes. */
+			adviceTemplate.setAttribute("attribute", propertyName);
+			adviceTemplate.setAttribute("attributeType", propertyType);
+
+			if (definedProperty.isStatic())
+				adviceTemplate.setAttribute("isStatic", "true");
+			// no else.
+
+			/* Probably also create a new getter method for the new attribute. */
+			if (this.mySettings.isGettersForDefinedAttributesEnabled()) {
+				String getterName = "get"
+						+ propertyName.substring(0, 1).toUpperCase()
+						+ propertyName.substring(1, propertyName.length());
+				adviceTemplate.setAttribute("getterName", getterName);
+			}
+			// no else.
+		}
+
+		else if (definedFeature instanceof Operation) {
+
+			/* Get the defined operation. */
+			Operation definedOperation = (Operation) definedFeature;
+
+			String operationName = definedOperation.getName();
+			String operationReturnType = this.transformType(
+					definedOperation.getType()).toString();
+
+			/* Create a template for the advice code. */
+			adviceTemplate = this.myTemplateGroup
+					.getTemplate("defMethodInstrumentation");
+
+			/* Set operation specific template parameters. */
+			adviceTemplate.setAttribute("method", operationName);
+
+			/* Probably set the returnType. */
+			if (!operationReturnType.equals(this.myTemplateGroup.getTemplate(
+					"voidType").toString())) {
+				adviceTemplate.setAttribute("returnType", operationReturnType);
+			}
+			// no else.
+
+			/* Set all arguments of the Operation. */
+			for (Parameter anArgument : definedOperation.getInputParameter()) {
+				String anArgumentsName = anArgument.getName();
+				String anArgumentsType = this.transformType(
+						anArgument.getType()).toString();
+
+				adviceTemplate.setAttribute("args", anArgumentsName);
+				adviceTemplate.setAttribute("argTypes", anArgumentsType);
+			}
+
+			if (definedOperation.isStatic())
+				adviceTemplate.setAttribute("isStatic", true);
+
+			if (this.myCodeTransEnv.isUsingSelfVariable())
+				adviceTemplate.setAttribute("usesSelfVariable", "true");
+		}
+
+		/* No other things can be defined by definition constraints. */
+		else {
+			String msg;
+
+			msg = "An def value defined for an invalid Type of Feature.";
+			msg += "Expected Type was Operation or Property but was ";
+			msg += definedFeature.getClass().getName();
+
+			throw new Ocl2CodeException(msg);
+		}
+
+		/* Set advice template parameters. */
+		adviceTemplate.setAttribute("class", type.getName());
+		adviceTemplate.setAttribute("package", contextPackage);
+		adviceTemplate.setAttribute("constFolder",
+				this.mySettings.getConstraintDirectory());
+		adviceTemplate.setAttribute("constCode", constrainedCode.getCode());
+		adviceTemplate.setAttribute("constExp", constrainedCode.getResultExp());
+		adviceTemplate.setAttribute("oclBody", constraint.getSpecification()
+				.getBody().trim());
+
+		/* Add the advice code to the aspect template. */
+		aspectTemplate.setAttribute("advice", adviceTemplate.toString());
+
+		result = aspectTemplate.toString();
+
+		/* Probably save the generated Code. */
+		if (this.mySettings.isSaveCode()) {
+			this.saveTransformedCode(result, aspectName + ".aj",
+					this.getConstraintPackage(contextPackage));
+		}
+		// no else.
+
+		/* Probably log the exit from this method. */
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("instrumentCodeForDef(Constraint)"
+					+ "- end - return value=" + result);
+		}
+		// no else.
+
+		return result;
+	}
+
+	/**
+	 * <p>
+	 * Generates an Aspect for the instrumentation of derive constraints.
+	 * </p>
+	 * 
+	 * @param constraint
+	 *            The {@link Constraint} which shall be instrumented.
+	 */
+	private String instrumentCodeForDerive(Constraint constraint)
+			throws Ocl2CodeException {
+
+		/* Probably log the entry into this method. */
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("instrumentCodeForDerive(Constraint) - start");
+		}
+		// no else.
+
+		String result;
+
+		/* Get the constrained property. */
+		Property constrainedProperty = ((Property) constraint
+				.getConstrainedElement().get(0));
+
+		ITemplate aspectTemplate = this.myTemplateGroup
+				.getTemplate("aspectFile");
+
+		/* Get the path of the package where the constraint class is located. */
+		String contextPackage = this.getPackagePath(constraint);
+		aspectTemplate.setAttribute("package",
+				this.getConstraintPackage(contextPackage));
+
+		/* Compute the aspect's file name. */
+		String className = constrainedProperty.getOwner().getName();
+		String aspectName = className + "_"
+				+ Ocl2JavaEnvironment.DERIVE_ASPECT_NAME + "_"
+				+ constrainedProperty.getName();
+
+		if (this.myCodeTransEnv.isUsedAspectName(aspectName))
+			aspectName = className + "_"
+					+ this.myCodeTransEnv.getNewDeriveAspectName();
+		// no else.
+
+		this.myCodeTransEnv.addUsedAspectName(aspectName);
+		aspectTemplate.setAttribute("name", aspectName);
+
+		/* Generate the code which shall be inside the advice(s). */
+		ITransformedCode constrainedCode = this
+				.transformFragmentCode(constraint);
+
+		/* Probably collect allInstances for some classes. */
+		if (this.myCodeTransEnv.hasAllInstancesClasses()) {
+			Set<String> allInstancesClasses = this.myCodeTransEnv
+					.getAllInstancesClasses();
+
+			for (String aClassName : allInstancesClasses) {
+				aspectTemplate.setAttribute("allInstanceClasses", aClassName);
+			}
+		}
+		// no else.
+
+		NamedElement constrainedClass;
+
+		/*
+		 * Compute the constrained class. Especially handle static defined
+		 * properties.
+		 */
+		if (constrainedProperty.isStatic()) {
+			constrainedClass = ((ExpressionInOcl) constraint.getSpecification())
+					.getContext().getType();
+		}
+
+		else {
+			constrainedClass = constrainedProperty.getOwner();
+		}
+
+		String propertyName = constrainedProperty.getName();
+		String propertyType = this.transformType(constrainedProperty.getType())
+				.toString();
+
+		/* Create Template for the advice code. */
+		ITemplate adviceTemplate = this.myTemplateGroup
+				.getTemplate("deriveInstrumentation");
+
+		/* Set template parameters. */
+		adviceTemplate.setAttribute("attribute", propertyName);
+		adviceTemplate.setAttribute("attributeType", propertyType);
+
+		adviceTemplate.setAttribute("class", constrainedClass.getName());
+		adviceTemplate.setAttribute("package", contextPackage);
+		adviceTemplate.setAttribute("constCode", constrainedCode.getCode());
+		adviceTemplate.setAttribute("constExp", constrainedCode.getResultExp());
+		adviceTemplate.setAttribute("oclBody", constraint.getSpecification()
+				.getBody().trim());
+
+		/* Probably set that the constrained attribute is static. */
+		if (constrainedProperty.isStatic()) {
+			adviceTemplate.setAttribute("attIsStatic", "true");
+		}
+		// no else.
+
+		/* Add the advice code to the aspect template. */
+		aspectTemplate.setAttribute("advice", adviceTemplate.toString());
+
+		result = aspectTemplate.toString();
+
+		/* Probably save the generated Code. */
+		if (this.mySettings.isSaveCode()) {
+			this.saveTransformedCode(result, aspectName + ".aj",
+					this.getConstraintPackage(contextPackage));
+		}
+		// no else.
+
+		/* Probably log the exit from this method. */
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("instrumentCodeForDerive(Constraint)"
+					+ "- end - return value=" + result);
+		}
+		// no else.
+
+		return result;
+	}
+
+	/**
+	 * <p>
+	 * Generates an Aspect for the instrumentation of initial constraints.
+	 * </p>
+	 * 
+	 * @param constraint
+	 *            The {@link Constraint} which shall be instrumented.
+	 */
+	private String instrumentCodeForInit(Constraint constraint)
+			throws Ocl2CodeException {
+
+		/* Probably log the entry into this method. */
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("instrumentCodeForInit(Constraint) - start");
+		}
+		// no else.
+
+		String result;
+
+		/* Get the constrained property. */
+		Property constrainedProperty = ((Property) constraint
+				.getConstrainedElement().get(0));
+
+		ITemplate aspectTemplate = this.myTemplateGroup
+				.getTemplate("aspectFile");
+
+		/* Get the path of the package where the constraint class is located. */
+		String contextPackage = this.getPackagePath(constraint);
+		aspectTemplate.setAttribute("package",
+				this.getConstraintPackage(contextPackage));
+
+		/* Compute the aspect's file name. */
+		String className = constrainedProperty.getOwner().getName();
+		String aspectName = className + "_"
+				+ Ocl2JavaEnvironment.INIT_ASPECT_NAME + "_"
+				+ constrainedProperty.getName();
+
+		if (this.myCodeTransEnv.isUsedAspectName(aspectName))
+			aspectName = className + "_"
+					+ this.myCodeTransEnv.getNewInitAspectName();
+		// no else.
+
+		this.myCodeTransEnv.addUsedAspectName(aspectName);
+		aspectTemplate.setAttribute("name", aspectName);
+
+		/* Generate the code which shall be inside the advice(s). */
+		ITransformedCode constrainedCode = this
+				.transformFragmentCode(constraint);
+
+		/* Probably collect allInstances for some classes. */
+		if (this.myCodeTransEnv.hasAllInstancesClasses()) {
+			Set<String> allInstancesClasses = this.myCodeTransEnv
+					.getAllInstancesClasses();
+
+			for (String aClassName : allInstancesClasses) {
+				aspectTemplate.setAttribute("allInstanceClasses", aClassName);
+			}
+		}
+		// no else.
+
+		/*
+		 * Compute the constrained class name. Especially handle static defined
+		 * properties.
+		 */
+		if (constrainedProperty.isStatic()) {
+			className = ((ExpressionInOcl) constraint.getSpecification())
+					.getContext().getType().getName();
+		}
+
+		else {
+			className = constrainedProperty.getOwner().getName();
+		}
+
+		ITemplate adviceTemplate;
+
+		/* Get the template and handle static attribute specially. */
+		if (constrainedProperty.isStatic()) {
+			adviceTemplate = this.myTemplateGroup
+					.getTemplate("staticInitInstrumentation");
+		}
+
+		else {
+			adviceTemplate = this.myTemplateGroup
+					.getTemplate("initInstrumentation");
+		}
+
+		adviceTemplate.setAttribute("class", className);
+		adviceTemplate.setAttribute("package", contextPackage);
+		adviceTemplate.setAttribute("attribute", constrainedProperty.getName());
+		adviceTemplate.setAttribute("constCode", constrainedCode.getCode());
+		adviceTemplate.setAttribute("constExp", constrainedCode.getResultExp());
+		adviceTemplate.setAttribute("oclBody", constraint.getSpecification()
+				.getBody().trim());
+
+		aspectTemplate.setAttribute("advice", adviceTemplate.toString());
+
+		result = aspectTemplate.toString();
+
+		/* Probably save the generated Code. */
+		if (this.mySettings.isSaveCode()) {
+			this.saveTransformedCode(result, aspectName + ".aj",
+					this.getConstraintPackage(contextPackage));
+		}
+		// no else.
+
+		/* Probably log the exit from this method. */
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("instrumentCodeForInit(Constraint)"
+					+ "- end - return value=" + result);
+		}
+		// no else.
+
+		return result;
+	}
+
+	/**
+	 * <p>
+	 * Generates an Aspect for the instrumentation of invariants.
+	 * </p>
+	 * 
+	 * @param constraint
+	 *            The {@link Constraint} which shall be instrumented.
+	 */
+	private String instrumentCodeForInv(Constraint constraint)
+			throws Ocl2CodeException {
+
+		/* Probably log the entry into this method. */
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("instrumentCodeForInv(Constraint) - start");
+		}
+		// no else.
+
+		String result;
+
+		ITemplate aspectTemplate = this.myTemplateGroup
+				.getTemplate("aspectFile");
+
+		/* Get the path of the package where the constraint class is located. */
+		String contextPackage = this.getPackagePath(constraint);
+		aspectTemplate.setAttribute("package",
+				this.getConstraintPackage(contextPackage));
+
+		/* Compute the aspect's file name. */
+		String className = ((Type) constraint.getConstrainedElement().get(0))
+				.getName();
+		String aspectName = className + "_"
+				+ Ocl2JavaEnvironment.INV_ASPECT_NAME + "_"
+				+ constraint.getName();
+
+		if (constraint.getName() == null || constraint.getName().length() == 0
+				|| this.myCodeTransEnv.isUsedAspectName(aspectName))
+			aspectName = className + "_"
+					+ this.myCodeTransEnv.getNewInvAspectName();
+		// no else.
+
+		this.myCodeTransEnv.addUsedAspectName(aspectName);
+		aspectTemplate.setAttribute("name", aspectName);
+
+		/* Generate the code which shall be inside the advice(s). */
+		ITransformedCode constrainedCode = this
+				.transformFragmentCode(constraint);
+
+		/* Probably collect allInstances for some classes. */
+		if (this.myCodeTransEnv.hasAllInstancesClasses()) {
+			Set<String> allInstancesClasses = this.myCodeTransEnv
+					.getAllInstancesClasses();
+
+			for (String aClassName : allInstancesClasses) {
+				aspectTemplate.setAttribute("allInstanceClasses", aClassName);
+			}
+		}
+		// no else.
+
+		Type constrainedClass = (Type) constraint.getConstrainedElement()
+				.get(0);
+		ITemplate adviceTemplate;
+
+		/*
+		 * Check which type of invariant check mode shall be used and create the
+		 * template for the advice code.
+		 */
+		switch (this.mySettings.getInvariantCheckMode(constraint)) {
+
+		case IOcl2JavaSettings.INVARIANT_CHECK_AFTER_CONSTRUCT_AND_PUBLIC_METHOD_EXECUTION:
+			adviceTemplate = this.myTemplateGroup
+					.getTemplate("invInstrumentation2");
+			break;
+
+		case IOcl2JavaSettings.INVARIANT_CHECK_AFTER_SPECIAL_METHOD_INVOCATION:
+			adviceTemplate = this.myTemplateGroup
+					.getTemplate("invInstrumentation3");
+
+			String checkOperationName = this.myTemplateGroup.getTemplate(
+					"checkInvariantsOperationName").toString();
+
+			/* Probably declare te check method inside the aspect. */
+			if (!this.myCodeTransEnv.isMethodAlreadyDefined(checkOperationName,
+					constrainedClass.getQualifiedName())) {
+
+				adviceTemplate.setAttribute("defineCheckMethod", "true");
+				this.myCodeTransEnv.addDefinedMethod(checkOperationName,
+						constrainedClass.getQualifiedName());
+			}
+			// no else.
+
+			break;
+
+		default:
+			adviceTemplate = this.myTemplateGroup
+					.getTemplate("invInstrumentation1");
+		}
+
+		/* Set template parameters. */
+		adviceTemplate.setAttribute("class", constrainedClass.getName());
+		adviceTemplate.setAttribute("package", contextPackage);
+		adviceTemplate.setAttribute("constCode", constrainedCode.getCode());
+		adviceTemplate.setAttribute("constExp", constrainedCode.getResultExp());
+		adviceTemplate.setAttribute("oclBody", constraint.getSpecification()
+				.getBody().trim());
+		adviceTemplate.setAttribute("errorCode", this.mySettings
+				.getViolationMacro(constraint).getCode());
+
+		/*
+		 * Probably add called attributes as parameters (only if the invariant
+		 * shall be verified after the change of an depending attribute).
+		 */
+		if (this.mySettings.getInvariantCheckMode(constraint) == IOcl2JavaSettings.INVARIANT_CHECK_AFTER_CONSTRUCT_AND_ATTRIBUTE_CHANGE) {
+
+			if (this.myCodeTransEnv.hasCalledProperties()) {
+
+				for (String aCalledProperty : this.myCodeTransEnv
+						.getCalledProperties()) {
+					adviceTemplate.setAttribute("calledAttPaths",
+							aCalledProperty);
+					adviceTemplate.setAttribute("calledAttNames",
+							aCalledProperty.replaceAll("\\.", "_"));
+				}
+			}
+			// no else.
+		}
+		// no else.
+
+		/* Probably disable the inheritance for this invariant. */
+		if (this.mySettings.isInheritanceDisabled(constraint)) {
+			adviceTemplate.setAttribute("disableInheritance", "true");
+		}
+		// no else.
+
+		/* Add the advice code to the aspect template. */
+		aspectTemplate.setAttribute("advice", adviceTemplate.toString());
+
+		result = aspectTemplate.toString();
+
+		/* Probably save the generated Code. */
+		if (this.mySettings.isSaveCode()) {
+			this.saveTransformedCode(result, aspectName + ".aj",
+					this.getConstraintPackage(contextPackage));
+		}
+		// no else.
+
+		/* Probably log the exit from this method. */
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("instrumentCodeForInv(Constraint)"
+					+ "- end - return value=" + result);
+		}
+		// no else.
+
+		return result;
+	}
+
+	/**
+	 * <p>
+	 * Generates an Aspect for the instrumentation of postconditions.
+	 * </p>
+	 * 
+	 * @param constraint
+	 *            The {@link Constraint} which shall be instrumented.
+	 */
+	private String instrumentCodeForPost(Constraint constraint)
+			throws Ocl2CodeException {
+
+		/* Probably log the entry into this method. */
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("instrumentCodeForPost(Constraint) - start");
+		}
+		// no else.
+
+		String result;
+
+		/* Get the constrained operation. */
+		Operation constrainedOperation = ((Operation) constraint
+				.getConstrainedElement().get(0));
+
+		ITemplate aspectTemplate = this.myTemplateGroup
+				.getTemplate("aspectFile");
+
+		/* Get the path of the package where the constraint class is located. */
+		String contextPackage = this.getPackagePath(constraint);
+		aspectTemplate.setAttribute("package",
+				this.getConstraintPackage(contextPackage));
+
+		/* Compute the aspect's file name. */
+		String className = constrainedOperation.getOwner().getName();
+		String aspectName = className + "_"
+				+ Ocl2JavaEnvironment.POST_ASPECT_NAME + "_"
+				+ constrainedOperation.getName();
+
+		if (this.myCodeTransEnv.isUsedAspectName(aspectName))
+			aspectName = className + "_"
+					+ this.myCodeTransEnv.getNewPostAspectName();
+		// no else.
+
+		this.myCodeTransEnv.addUsedAspectName(aspectName);
+		aspectTemplate.setAttribute("name", aspectName);
+
+		/* Generate the code which shall be inside the advice(s). */
+		ITransformedCode constrainedCode = this
+				.transformFragmentCode(constraint);
+
+		/* Probably collect allInstances for some classes. */
+		if (this.myCodeTransEnv.hasAllInstancesClasses()) {
+			Set<String> allInstancesClasses = this.myCodeTransEnv
+					.getAllInstancesClasses();
+
+			for (String aClassName : allInstancesClasses) {
+				aspectTemplate.setAttribute("allInstanceClasses", aClassName);
+			}
+		}
+		// no else.
+
+		/* Probably collect newInstances for some classes. */
+		if (this.myCodeTransEnv.hasIsNewClasses()) {
+			Set<String> isNewClasses = this.myCodeTransEnv.getIsNewClasses();
+
+			for (String aClassName : isNewClasses) {
+				aspectTemplate.setAttribute("isNewClasses", aClassName);
+			}
+		}
+		// no else.
+
+		NamedElement constrainedClass = constrainedOperation.getOwner();
+
+		String operationName = constrainedOperation.getName();
+		String operationResultType = this.transformType(
+				constrainedOperation.getType()).toString();
+		/* Create Template for the advice code. */
+		ITemplate adviceTemplate = this.myTemplateGroup
+				.getTemplate("postInstrumentation");
+
+		/* Set template parameters. */
+		adviceTemplate.setAttribute("class", constrainedClass.getName());
+		adviceTemplate.setAttribute("package", contextPackage);
+		adviceTemplate.setAttribute("constCode", constrainedCode.getCode());
+		adviceTemplate.setAttribute("constExp", constrainedCode.getResultExp());
+		adviceTemplate.setAttribute("oclBody", constraint.getSpecification()
+				.getBody().trim());
+		adviceTemplate.setAttribute("method", operationName);
+		adviceTemplate.setAttribute("errorCode", this.mySettings
+				.getViolationMacro(constraint).getCode());
+
+		/* Probably set the returnType. */
+		if (!operationResultType.equals(this.myTemplateGroup.getTemplate(
+				"voidType").toString())) {
+			adviceTemplate.setAttribute("returnType", operationResultType);
+		}
+		// no else.
+
+		/* Probably set the arguments of the operation. */
+		this.setArgumentsForInstrumentationTemplate(constraint, adviceTemplate);
+
+		/* Probably store some atPre values */
+		if (this.myCodeTransEnv.hasAtPreValues()) {
+			Map<ITransformedCode, Object[]> atPreValues = this.myCodeTransEnv
+					.getAtPreValues();
+			Set<ITransformedCode> valueCodes = atPreValues.keySet();
+			Set<String> atPreTypes = new HashSet<String>();
+
+			for (ITransformedCode aValueCode : valueCodes) {
+				Object[] typeAndName = atPreValues.get(aValueCode);
+
+				Type aType = (Type) typeAndName[0];
+				String transformedType = this.transformInitializableType(aType)
+						.toString();
+
+				/*
+				 * The atPre values for primitive and collection types are
+				 * initialized different from user defined types.
+				 */
+				if (aType instanceof PrimitiveType
+						|| aType instanceof CollectionType) {
+					adviceTemplate.setAttribute("primitiveAtPreCodes",
+							aValueCode.getCode());
+					adviceTemplate.setAttribute("primitiveAtPreExps",
+							aValueCode.getResultExp());
+					adviceTemplate.setAttribute("primitiveAtPreTypes",
+							transformedType);
+					adviceTemplate.setAttribute("primitiveAtPreVars",
+							typeAndName[1].toString());
+				}
+
+				else {
+					adviceTemplate.setAttribute("atPreCodes",
+							aValueCode.getCode());
+					adviceTemplate.setAttribute("atPreExps",
+							aValueCode.getResultExp());
+					adviceTemplate.setAttribute("atPreTypes", transformedType);
+					adviceTemplate.setAttribute("atPreVars",
+							typeAndName[1].toString());
+
+					/*
+					 * Collect the types to provide user defined copy methods.
+					 */
+					atPreTypes.add(transformedType);
+				}
+
+			}
+			// end for.
+
+			/* Add initialization methods for the atPreTypes. */
+			for (String aType : atPreTypes) {
+				adviceTemplate.setAttribute("atPreTypeSet", aType);
+			}
+		}
+		// no else.
+
+		/* Probably use the special OCL operation oclIsNew. */
+		if (this.myCodeTransEnv.hasIsNewClasses()) {
+			adviceTemplate.setAttribute("oclIsNewUsed", "true");
+		}
+		// no else.
+
+		/* Probably disable inheritance for this post condition. */
+		if (this.mySettings.isInheritanceDisabled(constraint)) {
+			adviceTemplate.setAttribute("disableInheritance", "true");
+		}
+		// no else.
+
+		/* Probably set that the constraint operation is static. */
+		if (constrainedOperation.isStatic()) {
+			adviceTemplate.setAttribute("opIsStatic", "true");
+		}
+		// no else.
+
+		/* Probably set that the constrained operation is a constructor. */
+		if (operationName.equals(constrainedClass.getName())) {
+			adviceTemplate.setAttribute("opIsConstructor", "true");
+		}
+		// no else.
+
+		/* Add the advice code to the aspect template. */
+		aspectTemplate.setAttribute("advice", adviceTemplate.toString());
+
+		result = aspectTemplate.toString();
+
+		/* Probably save the generated Code. */
+		if (this.mySettings.isSaveCode()) {
+			this.saveTransformedCode(result, aspectName + ".aj",
+					this.getConstraintPackage(contextPackage));
+		}
+		// no else.
+
+		/* Probably log the exit from this method. */
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("instrumentCodeForPost(Constraint)"
+					+ "- end - return value=" + result);
+		}
+		// no else.
+
+		return result;
+	}
+
+	/**
+	 * <p>
+	 * Generates an Aspect for the instrumentation of preconditions.
+	 * </p>
+	 * 
+	 * @param constraint
+	 *            The {@link Constraint} which shall be instrumented.
+	 */
+	private String instrumentCodeForPre(Constraint constraint)
+			throws Ocl2CodeException {
+
+		/* Probably log the entry into this method. */
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("instrumentCodeForPre(Constraint) - start");
+		}
+		// no else.
+
+		String result;
+
+		/* Get the constrained operation. */
+		Operation constrainedOperation = ((Operation) constraint
+				.getConstrainedElement().get(0));
+
+		ITemplate aspectTemplate = this.myTemplateGroup
+				.getTemplate("aspectFile");
+
+		/* Get the path of the package where the constraint class is located. */
+		String contextPackage = this.getPackagePath(constraint);
+		aspectTemplate.setAttribute("package",
+				this.getConstraintPackage(contextPackage));
+
+		/* Compute the aspect's file name. */
+		String className = constrainedOperation.getOwner().getName();
+		String aspectName = className + "_"
+				+ Ocl2JavaEnvironment.PRE_ASPECT_NAME + "_"
+				+ constrainedOperation.getName();
+
+		if (this.myCodeTransEnv.isUsedAspectName(aspectName))
+			aspectName = className + "_"
+					+ this.myCodeTransEnv.getNewPreAspectName();
+		// no else.
+
+		this.myCodeTransEnv.addUsedAspectName(aspectName);
+		aspectTemplate.setAttribute("name", aspectName);
+
+		/* Generate the code which shall be inside the advice(s). */
+		ITransformedCode constrainedCode = this
+				.transformFragmentCode(constraint);
+
+		/* Probably collect allInstances for some classes. */
+		if (this.myCodeTransEnv.hasAllInstancesClasses()) {
+			Set<String> allInstancesClasses;
+
+			allInstancesClasses = this.myCodeTransEnv.getAllInstancesClasses();
+
+			for (String aClassName : allInstancesClasses) {
+				aspectTemplate.setAttribute("allInstanceClasses", aClassName);
+			}
+		}
+		// no else.
+
+		NamedElement constrainedClass = constrainedOperation.getOwner();
+
+		String operationName = constrainedOperation.getName();
+		String operationResultType = this.transformType(
+				constrainedOperation.getType()).toString();
+		/* Create Template for the advice code. */
+		ITemplate adviceTemplate = this.myTemplateGroup
+				.getTemplate("preInstrumentation");
+
+		/* Set template parameters. */
+		adviceTemplate.setAttribute("class", constrainedClass.getName());
+		adviceTemplate.setAttribute("package", contextPackage);
+		adviceTemplate.setAttribute("constCode", constrainedCode.getCode());
+		adviceTemplate.setAttribute("constExp", constrainedCode.getResultExp());
+		adviceTemplate.setAttribute("oclBody", constraint.getSpecification()
+				.getBody().trim());
+		adviceTemplate.setAttribute("method", operationName);
+		adviceTemplate.setAttribute("errorCode", this.mySettings
+				.getViolationMacro(constraint).getCode());
+
+		/* Probably set the returnType. */
+		if (!operationResultType.equals(this.myTemplateGroup.getTemplate(
+				"voidType").toString())) {
+			adviceTemplate.setAttribute("returnType", operationResultType);
+		}
+		// no else.
+
+		/* Probably set the arguments of the operation. */
+		this.setArgumentsForInstrumentationTemplate(constraint, adviceTemplate);
+
+		/* Probably disable inheritance for this post condition. */
+		if (this.mySettings.isInheritanceDisabled(constraint)) {
+			adviceTemplate.setAttribute("disableInheritance", "true");
+		}
+		// no else.
+
+		/* Probably set that the constraint operation is static. */
+		if (constrainedOperation.isStatic()) {
+			adviceTemplate.setAttribute("opIsStatic", "true");
+		}
+		// no else.
+
+		/* Probably set that the constrained operation is a constructor. */
+		if (operationName.equals(constrainedClass.getName())) {
+			adviceTemplate.setAttribute("opIsConstructor", "true");
+		}
+		// no else.
+
+		/* Add the advice code to the aspect template. */
+		aspectTemplate.setAttribute("advice", adviceTemplate.toString());
+
+		result = aspectTemplate.toString();
+
+		/* Probably save the generated Code. */
+		if (this.mySettings.isSaveCode()) {
+			this.saveTransformedCode(result, aspectName + ".aj",
+					this.getConstraintPackage(contextPackage));
+		}
+		// no else.
+
+		/* Probably log the exit from this method. */
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("instrumentCodeForPre(Constraint)"
+					+ "- end - return value=" + result);
 		}
 		// no else.
 

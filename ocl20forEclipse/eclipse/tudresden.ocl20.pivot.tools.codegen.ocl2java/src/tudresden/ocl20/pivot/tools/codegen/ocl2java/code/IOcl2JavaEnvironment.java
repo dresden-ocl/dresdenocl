@@ -309,4 +309,34 @@ public interface IOcl2JavaEnvironment extends IOcl2CodeEnvironment {
 	 */
 	public Set<String> getCalledProperties();
 
+	/**
+	 * @return Whether or not the currently generated constraint uses the self
+	 *         variables.
+	 */
+	public boolean isUsingSelfVariable();
+
+	/**
+	 * Sets whether or not a currently transformed constraint uses the self
+	 * variable.
+	 * 
+	 * @param enabled
+	 *            Whether or not a currently transformed constraint uses the
+	 *            self variable.
+	 */
+	public void setIsUsigSelfVariable(boolean enabled);
+	
+	/**
+	 * Checks whehter or not a given method was already defined for a given class.
+	 * @param methodName The name of the method.
+	 * @param className The name of the class.
+	 * @return <code>true</code> if the method was already defined.
+	 */
+	public boolean isMethodAlreadyDefined(String methodName, String className);
+	
+	/**
+	 * Adds a method to the list of already defined methods for a given class.
+	 * @param methodName The method's name.
+	 * @param className The class's name.
+	 */
+	public void addDefinedMethod(String methodName, String className);
 }
