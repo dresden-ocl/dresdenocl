@@ -1,7 +1,28 @@
 Changes and Bugs fixed during the different Releases
 ====================================================
 
-Release 3.0 (planned for September, 14th, 2010)
+Release 3.X (not scheduled yet)
+===============================
+
+* A Bug in the UML2 Metamodel has been fixed.
+  - Class diagrams using stereotypes are now adapted correctly.
+  
+* Improvemens on Ocl2Java
+  - Generated aspects are named according to their constraints.
+  - Statically defined operations and properties are now instrumented correctly.
+  - No new super classes are generated for definitions, initial and derived values are
+    instroduced anymore.
+  - Definitions, Initial and Derived values should now work correctly if fields are 
+    accessed directly from other classes.
+
+Tests
+-----
+* Ocl2Java
+  - Some test cases have been added testing the right instrumentation of all constraint 
+    kinds.
+    
+    
+Release 3.0 (September, 29th, 2010)
 ===============================================
 
 * A new OCL Editor/Parser is now available with Dresden OCL.
