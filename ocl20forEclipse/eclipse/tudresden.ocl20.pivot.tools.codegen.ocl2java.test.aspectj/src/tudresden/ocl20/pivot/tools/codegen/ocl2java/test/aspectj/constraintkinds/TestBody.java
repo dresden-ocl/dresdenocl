@@ -64,4 +64,16 @@ public class TestBody {
 	
 		assertEquals(new Integer(-42), class1.bodyOperation02(42));
 	}
+	
+	/**
+	 * <p>
+	 * Tests the generated code for a <code>Constraint</code> of the
+	 * <code>ConstraintKind.BODY</code>.
+	 * </p>
+	 */
+	@Test
+	public void testStaticBody01() {
+
+		assertEquals(new Integer(42), Class1.staticBodyOperation01());
+	}
 }

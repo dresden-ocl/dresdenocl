@@ -6,16 +6,20 @@ package tudresden.ocl20.pivot.examples.royalsandloyals.constraints;
  * @author OCL22Java of Dresden OCL2 for Eclipse
  * @Generated
  */
-public privileged aspect usedServices {
+public privileged aspect LoyaltyAccount_DefAspect_usedServices {
 
-    /* Declares a new super class containing the new attribute or method. */
-    declare parents : tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyAccount extends tudresden.ocl20.pivot.examples.royalsandloyals.constraints.ExtendedLoyaltyAccount;
+    /**
+     * <p>Defines the field usedServices defined by the constraint
+     * <code>context LoyaltyAccount
+     *       def: usedServices: Set(Service) = transactions.service->asSet()</code></p>
+     */
+    public java.util.Set<tudresden.ocl20.pivot.examples.royalsandloyals.Service> tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyAccount.usedServices;
     
     /**
      * <p>Pointcut for all requests on {@link tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyAccount#usedServices}.</p>
      */
     protected pointcut usedServicesGetter(tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyAccount aClass) :
-    	get(* usedServices) && this(aClass);
+    	get(* usedServices) && target(aClass);
     
     /**
      * <p>Initializes the attribute usedServices defined by the constraint

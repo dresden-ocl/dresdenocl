@@ -1,0 +1,6 @@
+package testpackage
+
+context Class1::staticInitProperty01
+init: 42
+
+endpackage

@@ -1,6 +1,6 @@
 package testpackage
 
 context Class1::postOperation01(anInt: Integer): Integer
-post: result = anInt * 2
+post testPost01: result = anInt * 2
 
 endpackage

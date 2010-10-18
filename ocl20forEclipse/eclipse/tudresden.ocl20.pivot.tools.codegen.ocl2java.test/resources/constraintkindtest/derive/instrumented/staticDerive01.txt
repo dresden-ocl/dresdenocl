@@ -1,0 +1,6 @@
+package testpackage
+
+context Class1::deriveProperty01
+derive testDerive01: 42
+
+endpackage

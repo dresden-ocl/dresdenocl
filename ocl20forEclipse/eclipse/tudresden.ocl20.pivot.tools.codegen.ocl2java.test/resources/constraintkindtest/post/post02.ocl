@@ -1,6 +1,6 @@
 package testpackage
 
 context Class1::Class1(anInt: Integer)
-post: true
+post testPost02: true
 
 endpackage

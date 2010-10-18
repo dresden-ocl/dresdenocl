@@ -6,16 +6,20 @@ package testpackage.constraints;
  * @author OCL22Java of Dresden OCL2 for Eclipse
  * @Generated
  */
-public privileged aspect defProperty01 {
+public privileged aspect Class1_DefAspect_defProperty01 {
 
-    /* Declares a new super class containing the new attribute or method. */
-    declare parents : testpackage.Class1 extends testpackage.constraints.ExtendedClass1;
+    /**
+     * <p>Defines the field defProperty01 defined by the constraint
+     * <code>context Class1
+     *       def: defProperty01: Integer = 42</code></p>
+     */
+    public Integer testpackage.Class1.defProperty01;
     
     /**
      * <p>Pointcut for all requests on {@link testpackage.Class1#defProperty01}.</p>
      */
     protected pointcut defProperty01Getter(testpackage.Class1 aClass) :
-    	get(* defProperty01) && this(aClass);
+    	get(* defProperty01) && target(aClass);
     
     /**
      * <p>Initializes the attribute defProperty01 defined by the constraint

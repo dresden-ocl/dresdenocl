@@ -6,7 +6,7 @@ package tudresden.ocl20.pivot.examples.royalsandloyals.constraints;
  * @author OCL22Java of Dresden OCL2 for Eclipse
  * @Generated
  */
-public privileged aspect PreAspect1 {
+public privileged aspect Transaction_PreAspect_getProgram {
 
     /**
      * <p>Pointcut for all calls on {@link tudresden.ocl20.pivot.examples.royalsandloyals.Transaction#getProgram()}.</p>

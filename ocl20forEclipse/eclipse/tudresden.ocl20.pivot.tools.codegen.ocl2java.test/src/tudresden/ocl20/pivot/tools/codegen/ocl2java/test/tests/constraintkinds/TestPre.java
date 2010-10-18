@@ -90,4 +90,17 @@ public class TestPre extends AbstractDiffTest {
 
 		this.compareInstrumentationCodeGeneration("constraintkindtest/pre", "pre02");
 	}
+	
+	/**
+	 * <p>
+	 * Tests the instrumentation of the constraint.
+	 * </p>
+	 * 
+	 * @throws Exception
+	 */
+	@Test
+	public void testStaticPre01() throws Exception {
+
+		this.compareInstrumentationCodeGeneration("constraintkindtest/pre", "staticPre01");
+	}
 }

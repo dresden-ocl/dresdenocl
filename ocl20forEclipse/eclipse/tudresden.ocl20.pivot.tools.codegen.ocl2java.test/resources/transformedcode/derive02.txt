@@ -6,13 +6,13 @@ package tudresden.ocl20.pivot.examples.royalsandloyals.constraints;
  * @author OCL22Java of Dresden OCL2 for Eclipse
  * @Generated
  */
-public privileged aspect DeriveAspect1 {
+public privileged aspect LoyaltyAccount_DeriveAspect_totalPointsEarned {
 
     /**
      * <p>Pointcut for all requests on {@link tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyAccount#totalPointsEarned}.</p>
      */
     protected pointcut totalPointsEarnedGetter(tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyAccount aClass) :
-    	get(* totalPointsEarned) && this(aClass);
+    	get(* totalPointsEarned) && target(aClass);
     
     /**
      * <p>Derives the attribute totalPointsEarned defined by the constraint

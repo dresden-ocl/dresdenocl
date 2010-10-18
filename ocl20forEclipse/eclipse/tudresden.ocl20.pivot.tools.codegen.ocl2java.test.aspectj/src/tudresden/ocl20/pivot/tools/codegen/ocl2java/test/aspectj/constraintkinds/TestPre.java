@@ -90,4 +90,30 @@ public class TestPre {
 		/* Should be rejected. */
 		new Class1(null);
 	}
+	
+	/**
+	 * <p>
+	 * Tests the generated code for a <code>Constraint</code> of the
+	 * <code>ConstraintKind.PRECONDITION</code>.
+	 * </p>
+	 */
+	@Test
+	public void testStaticPre01_01() {
+
+		/* Should be accepted. */
+		Class1.staticPreOperation01(42);
+	}
+
+	/**
+	 * <p>
+	 * Tests the generated code for a <code>Constraint</code> of the
+	 * <code>ConstraintKind.PRECONDITION</code>.
+	 * </p>
+	 */
+	@Test(expected = RuntimeException.class)
+	public void testStaticPre01_02() {
+
+		/* Should be rejected. */
+		Class1.staticPreOperation01(null);
+	}
 }

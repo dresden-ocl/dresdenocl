@@ -93,4 +93,18 @@ public class TestPost extends AbstractDiffTest {
 		this.compareInstrumentationCodeGeneration("constraintkindtest/post",
 				"post02");
 	}
+	
+	/**
+	 * <p>
+	 * Tests the instrumentation of the constraint.
+	 * </p>
+	 * 
+	 * @throws Exception
+	 */
+	@Test
+	public void testStaticPost01() throws Exception {
+
+		this.compareInstrumentationCodeGeneration("constraintkindtest/post",
+				"staticPost01");
+	}
 }

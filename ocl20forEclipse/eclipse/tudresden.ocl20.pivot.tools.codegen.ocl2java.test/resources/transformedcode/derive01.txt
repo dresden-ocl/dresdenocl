@@ -6,13 +6,13 @@ package tudresden.ocl20.pivot.examples.royalsandloyals.constraints;
  * @author OCL22Java of Dresden OCL2 for Eclipse
  * @Generated
  */
-public privileged aspect DeriveAspect1 {
+public privileged aspect CustomerCard_DeriveAspect_printedName {
 
     /**
      * <p>Pointcut for all requests on {@link tudresden.ocl20.pivot.examples.royalsandloyals.CustomerCard#printedName}.</p>
      */
     protected pointcut printedNameGetter(tudresden.ocl20.pivot.examples.royalsandloyals.CustomerCard aClass) :
-    	get(* printedName) && this(aClass);
+    	get(* printedName) && target(aClass);
     
     /**
      * <p>Derives the attribute printedName defined by the constraint

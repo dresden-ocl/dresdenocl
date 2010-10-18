@@ -6,7 +6,7 @@ package testpackage.constraints;
  * @author OCL22Java of Dresden OCL2 for Eclipse
  * @Generated
  */
-public privileged aspect PostAspect1 {
+public privileged aspect Class1_PostAspect_Class1 {
 
     /**
      * <p>Pointcut for all calls on {@link testpackage.Class1#Class1(Integer anInt)}.</p>
@@ -17,7 +17,7 @@ public privileged aspect PostAspect1 {
     /**
      * <p>Checks a postcondition for the operation {@link Class1#Class1(, Integer anInt)} defined by the constraint
      * <code>context Class1::Class1(anInt: Integer) : 
-     *       post: true</code></p>
+     *       post testPost02: true</code></p>
      */
     void around(Integer anInt): Class1Caller(anInt) {
     

@@ -93,4 +93,18 @@ public class TestBody extends AbstractDiffTest {
 		this.compareInstrumentationCodeGeneration("constraintkindtest/body",
 				"body02");
 	}
+
+	/**
+	 * <p>
+	 * Tests the instrumentation of the constraint.
+	 * </p>
+	 * 
+	 * @throws Exception
+	 */
+	@Test
+	public void testStaticBody01() throws Exception {
+
+		this.compareInstrumentationCodeGeneration("constraintkindtest/body",
+				"staticBody01");
+	}
 }

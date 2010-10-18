@@ -77,4 +77,30 @@ public class TestPost {
 		/* Should work. */
 		new Class1(42);
 	}
+
+	/**
+	 * <p>
+	 * Tests the generated code for a <code>Constraint</code> of the
+	 * <code>ConstraintKind.POSTCONDITION</code>.
+	 * </p>
+	 */
+	@Test
+	public void testStaticPost01_01() {
+
+		/* Should be accepted. */
+		Class1.staticPostOperation01(2);
+	}
+
+	/**
+	 * <p>
+	 * Tests the generated code for a <code>Constraint</code> of the
+	 * <code>ConstraintKind.POSTCONDITION</code>.
+	 * </p>
+	 */
+	@Test(expected = RuntimeException.class)
+	public void testStaticPost01_02() {
+
+		/* Should be rejected. */
+		Class1.staticPostOperation01(3);
+	}
 }

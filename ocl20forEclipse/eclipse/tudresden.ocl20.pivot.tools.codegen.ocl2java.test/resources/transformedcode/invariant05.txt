@@ -6,11 +6,11 @@ package tudresden.ocl20.pivot.examples.royalsandloyals.constraints;
  * @author OCL22Java of Dresden OCL2 for Eclipse
  * @Generated
  */
-public privileged aspect levelAndColor {
+public privileged aspect Membership_InvAspect_levelAndColor {
 
-    /* Declares a new super class containing the new attribute or method. */
-    declare parents : tudresden.ocl20.pivot.examples.royalsandloyals.Membership extends tudresden.ocl20.pivot.examples.royalsandloyals.constraints.ExtendedMembership;
-    
+    public void tudresden.ocl20.pivot.examples.royalsandloyals.Membership.checkInvariants() {
+        /* Remains empty. Is overridden by advice(s). */
+    }
     /**
      * <p>Pointcut for all calls on {@link tudresden.ocl20.pivot.examples.royalsandloyals.Membership#checkInvariants()}.</p>
      */

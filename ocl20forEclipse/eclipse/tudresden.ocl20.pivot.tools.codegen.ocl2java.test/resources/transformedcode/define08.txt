@@ -6,18 +6,8 @@ package tudresden.ocl20.pivot.examples.royalsandloyals.constraints;
  * @author OCL22Java of Dresden OCL2 for Eclipse
  * @Generated
  */
-public privileged aspect getBurningTransactions {
+public privileged aspect ProgramPartner_DefAspect_getBurningTransactions {
 
-    /* Declares a new super class containing the new attribute or method. */
-    declare parents : tudresden.ocl20.pivot.examples.royalsandloyals.ProgramPartner extends tudresden.ocl20.pivot.examples.royalsandloyals.constraints.ExtendedProgramPartner;
-    
-    /**
-     * <p>Pointcut for all calls on {@link tudresden.ocl20.pivot.examples.royalsandloyals.ProgramPartner#getBurningTransactions()}.</p>
-     */
-    protected pointcut getBurningTransactionsCaller(tudresden.ocl20.pivot.examples.royalsandloyals.ProgramPartner aClass):
-    	call(* tudresden.ocl20.pivot.examples.royalsandloyals.ProgramPartner.getBurningTransactions())
-    	&& target(aClass);
-    
     /**
      * <p>Defines the method getBurningTransactions() defined by the constraint
      * <code>context ProgramPartner
@@ -33,7 +23,10 @@ public privileged aspect getBurningTransactions {
         endif
       )</code></p>
      */
-    java.util.Set<tudresden.ocl20.pivot.examples.royalsandloyals.Transaction> around(tudresden.ocl20.pivot.examples.royalsandloyals.ProgramPartner aClass): getBurningTransactionsCaller(aClass) {
+    public java.util.Set<tudresden.ocl20.pivot.examples.royalsandloyals.Transaction> tudresden.ocl20.pivot.examples.royalsandloyals.ProgramPartner.getBurningTransactions( ) {
+    	/* Self variable probably used within the definition. */
+    	tudresden.ocl20.pivot.examples.royalsandloyals.ProgramPartner aClass = this;
+    	
         java.util.ArrayList<tudresden.ocl20.pivot.examples.royalsandloyals.Transaction> result1;
         result1 = new java.util.ArrayList<tudresden.ocl20.pivot.examples.royalsandloyals.Transaction>();
         

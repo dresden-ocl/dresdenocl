@@ -6,7 +6,7 @@ package tudresden.ocl20.pivot.examples.royalsandloyals.constraints;
  * @author OCL22Java of Dresden OCL2 for Eclipse
  * @Generated
  */
-public privileged aspect PreAspect1 {
+public privileged aspect LoyaltyProgram_PreAspect_enroll {
 
     /**
      * <p>Pointcut for all calls on {@link tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyProgram#enroll(tudresden.ocl20.pivot.examples.royalsandloyals.Customer c)}.</p>

@@ -6,24 +6,17 @@ package tudresden.ocl20.pivot.examples.royalsandloyals.constraints;
  * @author OCL22Java of Dresden OCL2 for Eclipse
  * @Generated
  */
-public privileged aspect getTotalPoints {
+public privileged aspect CustomerCard_DefAspect_getTotalPoints {
 
-    /* Declares a new super class containing the new attribute or method. */
-    declare parents : tudresden.ocl20.pivot.examples.royalsandloyals.CustomerCard extends tudresden.ocl20.pivot.examples.royalsandloyals.constraints.ExtendedCustomerCard;
-    
-    /**
-     * <p>Pointcut for all calls on {@link tudresden.ocl20.pivot.examples.royalsandloyals.CustomerCard#getTotalPoints(tudresden.ocl20.pivot.examples.royalsandloyals.Date d)}.</p>
-     */
-    protected pointcut getTotalPointsCaller(tudresden.ocl20.pivot.examples.royalsandloyals.CustomerCard aClass, tudresden.ocl20.pivot.examples.royalsandloyals.Date d):
-    	call(* tudresden.ocl20.pivot.examples.royalsandloyals.CustomerCard.getTotalPoints(tudresden.ocl20.pivot.examples.royalsandloyals.Date))
-    	&& target(aClass) && args(d);
-    
     /**
      * <p>Defines the method getTotalPoints(tudresden.ocl20.pivot.examples.royalsandloyals.Date d) defined by the constraint
      * <code>context CustomerCard
      *       def: getTotalPoints(d: Date) : Integer = transactions->select(date.isAfter(d)).points->sum()</code></p>
      */
-    Integer around(tudresden.ocl20.pivot.examples.royalsandloyals.CustomerCard aClass, tudresden.ocl20.pivot.examples.royalsandloyals.Date d): getTotalPointsCaller(aClass, d) {
+    public Integer tudresden.ocl20.pivot.examples.royalsandloyals.CustomerCard.getTotalPoints(tudresden.ocl20.pivot.examples.royalsandloyals.Date d) {
+    	/* Self variable probably used within the definition. */
+    	tudresden.ocl20.pivot.examples.royalsandloyals.CustomerCard aClass = this;
+    	
         java.util.HashSet<tudresden.ocl20.pivot.examples.royalsandloyals.Transaction> result2;
         result2 = new java.util.HashSet<tudresden.ocl20.pivot.examples.royalsandloyals.Transaction>();
         

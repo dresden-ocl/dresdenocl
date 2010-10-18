@@ -6,24 +6,17 @@ package tudresden.ocl20.pivot.examples.royalsandloyals.constraints;
  * @author OCL22Java of Dresden OCL2 for Eclipse
  * @Generated
  */
-public privileged aspect getCurrentLevelName {
+public privileged aspect Membership_DefAspect_getCurrentLevelName {
 
-    /* Declares a new super class containing the new attribute or method. */
-    declare parents : tudresden.ocl20.pivot.examples.royalsandloyals.Membership extends tudresden.ocl20.pivot.examples.royalsandloyals.constraints.ExtendedMembership;
-    
-    /**
-     * <p>Pointcut for all calls on {@link tudresden.ocl20.pivot.examples.royalsandloyals.Membership#getCurrentLevelName()}.</p>
-     */
-    protected pointcut getCurrentLevelNameCaller(tudresden.ocl20.pivot.examples.royalsandloyals.Membership aClass):
-    	call(* tudresden.ocl20.pivot.examples.royalsandloyals.Membership.getCurrentLevelName())
-    	&& target(aClass);
-    
     /**
      * <p>Defines the method getCurrentLevelName() defined by the constraint
      * <code>context Membership
      *       def: getCurrentLevelName() : String = currentLevel.name</code></p>
      */
-    String around(tudresden.ocl20.pivot.examples.royalsandloyals.Membership aClass): getCurrentLevelNameCaller(aClass) {
+    public String tudresden.ocl20.pivot.examples.royalsandloyals.Membership.getCurrentLevelName( ) {
+    	/* Self variable probably used within the definition. */
+    	tudresden.ocl20.pivot.examples.royalsandloyals.Membership aClass = this;
+    	
         return aClass.currentLevel.name;
     }
 }

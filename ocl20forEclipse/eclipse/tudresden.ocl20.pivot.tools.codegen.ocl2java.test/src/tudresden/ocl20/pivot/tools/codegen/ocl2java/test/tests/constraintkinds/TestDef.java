@@ -104,4 +104,30 @@ public class TestDef extends AbstractDiffTest {
 
 		this.compareInstrumentationCodeGeneration("constraintkindtest/def", "def03");
 	}
+
+	/**
+	 * <p>
+	 * Tests the instrumentation of the constraint.
+	 * </p>
+	 * 
+	 * @throws Exception
+	 */
+	@Test
+	public void testStaticDef01() throws Exception {
+
+		this.compareInstrumentationCodeGeneration("constraintkindtest/def", "staticDef01");
+	}
+
+	/**
+	 * <p>
+	 * Tests the instrumentation of the constraint.
+	 * </p>
+	 * 
+	 * @throws Exception
+	 */
+	@Test
+	public void testStaticDef02() throws Exception {
+
+		this.compareInstrumentationCodeGeneration("constraintkindtest/def", "staticDef02");
+	}
 }

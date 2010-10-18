@@ -6,7 +6,7 @@ package tudresden.ocl20.pivot.examples.royalsandloyals.constraints;
  * @author OCL22Java of Dresden OCL2 for Eclipse
  * @Generated
  */
-public privileged aspect BodyAspect1 {
+public privileged aspect LoyaltyAccount_BodyAspect_getCustomerName {
 
     /**
      * <p>Pointcut for all calls on {@link tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyAccount#getCustomerName()}.</p>

@@ -6,16 +6,20 @@ package tudresden.ocl20.pivot.examples.royalsandloyals.constraints;
  * @author OCL22Java of Dresden OCL2 for Eclipse
  * @Generated
  */
-public privileged aspect initial {
+public privileged aspect Customer_DefAspect_initial {
 
-    /* Declares a new super class containing the new attribute or method. */
-    declare parents : tudresden.ocl20.pivot.examples.royalsandloyals.Customer extends tudresden.ocl20.pivot.examples.royalsandloyals.constraints.ExtendedCustomer;
+    /**
+     * <p>Defines the field initial defined by the constraint
+     * <code>context Customer
+     *       def: initial: String = name.substring(1, 1)</code></p>
+     */
+    public String tudresden.ocl20.pivot.examples.royalsandloyals.Customer.initial;
     
     /**
      * <p>Pointcut for all requests on {@link tudresden.ocl20.pivot.examples.royalsandloyals.Customer#initial}.</p>
      */
     protected pointcut initialGetter(tudresden.ocl20.pivot.examples.royalsandloyals.Customer aClass) :
-    	get(* initial) && this(aClass);
+    	get(* initial) && target(aClass);
     
     /**
      * <p>Initializes the attribute initial defined by the constraint

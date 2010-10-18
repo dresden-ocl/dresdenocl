@@ -6,7 +6,7 @@ package tudresden.ocl20.pivot.examples.royalsandloyals.constraints;
  * @author OCL22Java of Dresden OCL2 for Eclipse
  * @Generated
  */
-public privileged aspect PostAspect1 {
+public privileged aspect LoyaltyProgram_PostAspect_enroll {
 
     /**
      * A method to make copies of {@link tudresden.ocl20.pivot.examples.royalsandloyals.Membership}.

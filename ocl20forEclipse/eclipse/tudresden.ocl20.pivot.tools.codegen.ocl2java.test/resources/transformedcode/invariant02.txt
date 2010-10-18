@@ -6,7 +6,7 @@ package tudresden.ocl20.pivot.examples.royalsandloyals.constraints;
  * @author OCL22Java of Dresden OCL2 for Eclipse
  * @Generated
  */
-public privileged aspect checkDates {
+public privileged aspect CustomerCard_InvAspect_checkDates {
 
     /**
      * <p>Describes all Constructors of the class {@link tudresden.ocl20.pivot.examples.royalsandloyals.CustomerCard}.</p>
@@ -18,13 +18,13 @@ public privileged aspect checkDates {
      * <p>Pointcut for all changes of the attribute {@link tudresden.ocl20.pivot.examples.royalsandloyals.CustomerCard#validFrom}.</p>
      */
     protected pointcut validFromSetter(tudresden.ocl20.pivot.examples.royalsandloyals.CustomerCard aClass) :
-        set(* tudresden.ocl20.pivot.examples.royalsandloyals.CustomerCard.validFrom) && this(aClass); 
+        set(* tudresden.ocl20.pivot.examples.royalsandloyals.CustomerCard.validFrom) && target(aClass); 
 
     /**
      * <p>Pointcut for all changes of the attribute {@link tudresden.ocl20.pivot.examples.royalsandloyals.CustomerCard#validThru}.</p>
      */
     protected pointcut validThruSetter(tudresden.ocl20.pivot.examples.royalsandloyals.CustomerCard aClass) :
-        set(* tudresden.ocl20.pivot.examples.royalsandloyals.CustomerCard.validThru) && this(aClass); 
+        set(* tudresden.ocl20.pivot.examples.royalsandloyals.CustomerCard.validThru) && target(aClass); 
     
     /**
      * <p>Pointcut to collect all attributeSetters.</p>

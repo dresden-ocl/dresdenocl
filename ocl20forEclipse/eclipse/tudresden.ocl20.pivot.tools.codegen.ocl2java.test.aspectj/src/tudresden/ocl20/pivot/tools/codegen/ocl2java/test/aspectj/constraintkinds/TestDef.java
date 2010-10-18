@@ -33,7 +33,7 @@ import testpackage.Class1;
  * 
  * @author Claas Wilke
  */
-public class TestDef extends Class1 {
+public class TestDef {
 
 	/**
 	 * <p>
@@ -43,8 +43,22 @@ public class TestDef extends Class1 {
 	 */
 	@Test
 	public void testDef01() {
+		
+		Class1 class1 = new Class1();
+		assertEquals(new Integer(42), class1.defProperty01);
+	}
 
-		assertEquals(new Integer(42), this.defProperty01);
+	/**
+	 * <p>
+	 * Tests the generated code for a <code>Constraint</code> of the
+	 * <code>ConstraintKind.DEF</code>.
+	 * </p>
+	 */
+	@Test
+	public void testDef01_Getter() {
+		
+		Class1 class1 = new Class1();
+		assertEquals(new Integer(42), class1.getDefProperty01());
 	}
 
 	/**
@@ -56,7 +70,8 @@ public class TestDef extends Class1 {
 	@Test
 	public void testDef02() {
 
-		assertEquals(new Integer(42), this.defOperation01());
+		Class1 class1 = new Class1();
+		assertEquals(new Integer(42), class1.defOperation01());
 	}
 
 	/**
@@ -68,6 +83,43 @@ public class TestDef extends Class1 {
 	@Test
 	public void testDef03() {
 
-		assertEquals(new Integer(-42), this.defOperation02(new Integer(42)));
+		Class1 class1 = new Class1();
+		assertEquals(new Integer(-42), class1.defOperation02(new Integer(42)));
+	}
+	
+	/**
+	 * <p>
+	 * Tests the generated code for a <code>Constraint</code> of the
+	 * <code>ConstraintKind.DEF</code>.
+	 * </p>
+	 */
+	@Test
+	public void testStaticDef01() {
+
+		assertEquals(new Integer(42), Class1.staticDefProperty01);
+	}
+
+	/**
+	 * <p>
+	 * Tests the generated code for a <code>Constraint</code> of the
+	 * <code>ConstraintKind.DEF</code>.
+	 * </p>
+	 */
+	@Test
+	public void testStaticDef01_Getter() {
+
+		assertEquals(new Integer(42), Class1.getStaticDefProperty01());
+	}
+
+	/**
+	 * <p>
+	 * Tests the generated code for a <code>Constraint</code> of the
+	 * <code>ConstraintKind.DEF</code>.
+	 * </p>
+	 */
+	@Test
+	public void testStaticDef02() {
+
+		assertEquals(new Integer(42), Class1.staticDefOperation01());
 	}
 }

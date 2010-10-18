@@ -27,7 +27,7 @@ import tudresden.ocl20.pivot.tools.codegen.ocl2java.Ocl2JavaPlugin;
 /**
  * <p>
  * Provides a jUnit Test Suite containing tests to test the transformation of
- * different kind of OCL constraints using the OCL 2 Java Code transformer (
+ * different kinds of OCL constraints using the OCL 2 Java Code transformer (
  * {@link Ocl2JavaPlugin}).
  * </p>
  * 
@@ -35,8 +35,8 @@ import tudresden.ocl20.pivot.tools.codegen.ocl2java.Ocl2JavaPlugin;
  * 
  */
 @RunWith(Suite.class)
-@Suite.SuiteClasses({ TestBody.class, TestDef.class, TestPre.class,
-		TestPost.class })
+@Suite.SuiteClasses({ TestBody.class, TestDef.class, TestDerive.class,
+		TestInit.class, TestPre.class, TestPost.class })
 public class AllConstraintsKindTests {
 	/*
 	 * This class remains completely empty, being used only as a holder for the
