@@ -259,7 +259,8 @@ trait OclReferenceResolver { selfType : OclStaticSemantics =>
       case AttributeContextDeclarationCS(typeName, _, _) => {
         (typeName->oclType).flatMap{tn =>
           if (!fuzzy) {
-            lookupPropertyOnType(tn, identifier, false).flatMap(p => Full(List(p)))
+            (lookupPropertyOnType(tn, identifier, false) or 
+               lookupPropertyOnType(tn, identifier, true)).flatMap(p => Full(List(p)))
           } else {
             Full(lookupPropertyOnTypeFuzzy(tn, identifier, false))
           }
