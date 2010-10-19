@@ -95,22 +95,22 @@ public class GenerateAspectJCode extends AbstractDiffTest {
 
 		constraints
 				.add(new String[] { "constraintkindtest/derive", "derive01" });
-		// FIXME Add test case if parser bug for static properties is fixed.
-		// constraints.add(new String[] { "constraintkindtest/derive",
-		// "staticDerive01" });
+		constraints.add(new String[] { "constraintkindtest/derive",
+				"staticDerive01" });
 
 		constraints.add(new String[] { "constraintkindtest/init", "init01" });
-		// FIXME Add test case if parser bug for static properties is fixed.
-		// constraints.add(new String[] { "constraintkindtest/init",
-		// "staticInit01" });
+		constraints.add(new String[] { "constraintkindtest/init",
+				"staticInit01" });
 
 		constraints.add(new String[] { "constraintkindtest/pre", "pre01" });
 		constraints.add(new String[] { "constraintkindtest/pre", "pre02" });
-		constraints.add(new String[] { "constraintkindtest/pre", "staticPre01" });
+		constraints
+				.add(new String[] { "constraintkindtest/pre", "staticPre01" });
 
 		constraints.add(new String[] { "constraintkindtest/post", "post01" });
 		constraints.add(new String[] { "constraintkindtest/post", "post02" });
-		constraints.add(new String[] { "constraintkindtest/post", "staticPost01" });
+		constraints.add(new String[] { "constraintkindtest/post",
+				"staticPost01" });
 
 		constraints.add(new String[] { "expressions/calls", "operation01" });
 		constraints.add(new String[] { "expressions/calls", "operation02" });
@@ -306,13 +306,14 @@ public class GenerateAspectJCode extends AbstractDiffTest {
 		this.createInstrumentationCode(
 				"tudresden.ocl20.pivot.tools.codegen.ocl2java.test.aspectj",
 				constraints);
-		
+
 		constraints.clear();
 		constraints.add(new String[] { "constraintkindtest/inv", "inv02" });
 
 		this.createInstrumentationCode(
 				"tudresden.ocl20.pivot.tools.codegen.ocl2java.test.aspectj",
-				constraints, IOcl2JavaSettings.INVARIANT_CHECK_AFTER_CONSTRUCT_AND_PUBLIC_METHOD_EXECUTION);
+				constraints,
+				IOcl2JavaSettings.INVARIANT_CHECK_AFTER_CONSTRUCT_AND_PUBLIC_METHOD_EXECUTION);
 
 		constraints.clear();
 		constraints.add(new String[] { "constraintkindtest/inv", "inv03" });
@@ -320,6 +321,7 @@ public class GenerateAspectJCode extends AbstractDiffTest {
 
 		this.createInstrumentationCode(
 				"tudresden.ocl20.pivot.tools.codegen.ocl2java.test.aspectj",
-				constraints, IOcl2JavaSettings.INVARIANT_CHECK_AFTER_SPECIAL_METHOD_INVOCATION);
+				constraints,
+				IOcl2JavaSettings.INVARIANT_CHECK_AFTER_SPECIAL_METHOD_INVOCATION);
 	}
 }

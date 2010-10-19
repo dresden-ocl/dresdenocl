@@ -118,8 +118,7 @@ public class CreateAspectCode {
 
 		this.testPerformer.addOclConstraintsToModel("constraints/derive01.ocl");
 		this.testPerformer.addOclConstraintsToModel("constraints/derive02.ocl");
-		// FIXME Readd test case when parser bug is fixed.
-		// this.testPerformer.addOclConstraintsToModel("constraints/derive03.ocl");
+		this.testPerformer.addOclConstraintsToModel("constraints/derive03.ocl");
 	}
 
 	/**
@@ -134,8 +133,7 @@ public class CreateAspectCode {
 		this.testPerformer.addOclConstraintsToModel("constraints/init01.ocl");
 		this.testPerformer.addOclConstraintsToModel("constraints/init02.ocl");
 		this.testPerformer.addOclConstraintsToModel("constraints/init03.ocl");
-		// FIXME Readd test case when parser bug is fixed.
-		// this.testPerformer.addOclConstraintsToModel("constraints/init04.ocl");
+		this.testPerformer.addOclConstraintsToModel("constraints/init04.ocl");
 	}
 
 	/**
