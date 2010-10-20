@@ -1,6 +1,6 @@
 package tudresden.ocl20.pivot.language.ocl.staticsemantics;
 
-public class OclStaticSemanticsException extends Exception {
+public class OclStaticSemanticsException extends RuntimeException {
 
 	private static final long serialVersionUID = -6108093169943998231L;
 

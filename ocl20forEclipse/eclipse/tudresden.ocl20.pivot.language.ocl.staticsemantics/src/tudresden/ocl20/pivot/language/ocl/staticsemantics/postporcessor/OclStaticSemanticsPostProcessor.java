@@ -30,7 +30,7 @@ public class OclStaticSemanticsPostProcessor implements
 				//printResult(result);
 
 			} catch (OclStaticSemanticsException e) {
-				e.printStackTrace();
+//				e.printStackTrace();
 			}
 		}
 

@@ -49,8 +49,11 @@ trait OclStaticSemantics extends ocl.semantics.OclAttributeMaker
     var m = resource.getModel
     if (m == null) {
       m = modelbus.ModelBusPlugin.getModelRegistry.getActiveModel
-      if (m == null)
-        throw new OclStaticSemanticsException("No active model")
+      if (m == null) {
+        val exception = new OclStaticSemanticsException("Cannot check OCL static semantics. Please load a model first.")
+        yieldFailure(exception, resource.getContents.get(0))
+        throw exception
+      }
     }
     m
   }
@@ -91,7 +94,7 @@ trait OclStaticSemantics extends ocl.semantics.OclAttributeMaker
   /**
    * For access to general methods of the resource interface
    */
-  protected val iResource : IResource = EMFTextAccessProxy.get(resource, classOf[IResource]).asInstanceOf[IResource]
+  protected lazy val iResource : IResource = EMFTextAccessProxy.get(resource, classOf[IResource]).asInstanceOf[IResource]
   
   /*
    * For cached attributes.
