@@ -3,18 +3,23 @@ group javaOperations;
 // ---- TEMPLATES FOR JAVA OPERATIONS ----
 // ---------------------------------------
 
-// --- Abs Operation ---
-absOperation(sourceExp, resultType) ::= <<
+// --- Integer.abs(Integer) ---
+absOperationOnInteger(sourceExp, resultType) ::= <<
 java.lang.Math.abs($sourceExp$)
 >>
 
-// --- AllInstances Operation ---
-allInstancesOperation(sourceExp, typeName) ::= <<
+// --- Real.abs(Real) ---
+absOperationOnReal(sourceExp, resultType) ::= <<
+java.lang.Math.abs($sourceExp$)
+>>
+
+// --- OclType.allInstances() ---
+allInstancesOperationOnOclType(sourceExp, typeName) ::= <<
 (new $setTypeInitialization()$<$typeName$>((java.util.Set<$typeName$>) allInstances.get($sourceExp$.class.getCanonicalName()).keySet()))
 >>
 
-// --- And Operation ---
-andOperation(sourceExp, argsExp) ::= <<
+// --- Boolean.and(Boolean) ---
+andOperationOnBoolean(sourceExp, argsExp) ::= <<
 ($sourceExp$ && $argsExp$)
 >>
 
@@ -138,13 +143,13 @@ atOperationOnSequence(sourceExp, argsExp) ::= <<
 $sequenceUtility()$.at($sourceExp$, $argsExp$)
 >>
 
-// --- At Operation on String ---
-atOnStringOperation(sourceExp, argsExp) ::= <<
+// --- String.at(Integer) ---
+atOperationOnString(sourceExp, argsExp) ::= <<
 Character.toString($sourceExp$.charAt($argsExp$ - 1))
 >>
 
-// --- Characters Operation ---
-charactersOperation(sourceExp, resultVar, elementName) ::= <<
+// --- String.characters() ---
+charactersOperationOnString(sourceExp, resultVar, elementName) ::= <<
 $sequenceType()$<$stringType()$> $resultVar$;
 $resultVar$ = new $sequenceTypeInitialization()$<$stringType()$>();
 
@@ -158,8 +163,8 @@ $resultVar$.remove($sequenceUtility()$.first($resultVar$));
 
 >>
 
-// --- Concat Operation ---
-concatOperation(sourceExp, argsExp) ::= <<
+// --- String.concat(String) ---
+concatOperationOnString(sourceExp, argsExp) ::= <<
 $sourceExp$.concat($argsExp$)
 >>
 
@@ -183,30 +188,28 @@ countOperationOnSet(sourceExp, argsExp) ::= <<
 $setUtility()$.count($sourceExp$, $argsExp$)
 >>
 
-// --- Div Operation ---
-divOperation(sourceExp, argsExp) ::= <<
+// --- Integer.div(Integer) ---
+divOperationOnInteger(sourceExp, argsExp) ::= <<
 ($sourceExp$ / $argsExp$)
 >>
 
-// --- Division Operation ---
-divisionOperation(sourceExp, argsExp) ::= <<
+// --- Real./(Real) ---
+divisionOperationOnReal(sourceExp, argsExp) ::= <<
 ($sourceExp$ / $argsExp$)
 >>
 
-
-// --- Division Operation On Integer ---
-divisionOnIntegerOperation(sourceExp, argsExp) ::= <<
+// --- Integer./(Integer) ---
+divisionOperationOnInteger(sourceExp, argsExp) ::= <<
 (new $realType()$ ($sourceExp$) / new $realType()$ ($argsExp$))
 >>
 
-
-// --- Equals Operation ---
-equalsOperation(sourceExp, argsExp) ::= <<
+// --- OclAny.equals(OclAny) ---
+equalsOperationOnOclAny(sourceExp, argsExp) ::= <<
 $sourceExp$.equals($argsExp$)
 >>
 
-// --- Equals Ignore Case Operation ---
-equalsIgnorCaseOperation(sourceExp, argsExp) ::= <<
+// --- String.equalsIgnoreCase(String) ---
+equalsIgnorCaseOperationOnString(sourceExp, argsExp) ::= <<
 $sourceExp$.equalsIgnorCase($argsExp$)
 >>
 
@@ -234,7 +237,6 @@ $setUtility()$.equals($sourceExp$, $argsExp$)
 equalsOperationOnPrimitiveType(sourceExp, argsExp) ::= <<
 (($anyType()$) $sourceExp$).equals($argsExp$)
 >>
-
 
 // --- Collection.excludes(T) ---
 excludesOperationOnCollection(sourceExp, argsExp) ::= <<
@@ -291,29 +293,25 @@ flattenOperationOnSet(sourceExp, argsExp, resultType) ::= <<
 ($resultType$) $setUtility()$.flatten($sourceExp$)
 >>
 
-// --- Floor Operation ---
-floorOperation(sourceExp) ::= <<
+// --- Real.floor(Real) ---
+floorOperationOnReal(sourceExp) ::= <<
 (new $integerType()$(new Double(java.lang.Math.floor($sourceExp$)).intValue()))
 >>
 
-
-// --- Greater Operation ---
-greaterOperation(sourceExp, argsExp) ::= <<
+// --- Real.>(Real) ---
+greaterOperationOnReal(sourceExp, argsExp) ::= <<
 ($sourceExp$ > $argsExp$)
 >>
 
-
-// --- GreaterEquals Operation ---
-greaterEqualsOperation(sourceExp, argsExp) ::= <<
+// --- Real.>=(Real) ---
+greaterEqualsOperationOnReal(sourceExp, argsExp) ::= <<
 ($sourceExp$ >= $argsExp$)
 >>
 
-
-// --- Implies Operation ---
-impliesOperation(sourceExp, argsExp) ::= <<
+// --- Boolean.implies(Boolean) ---
+impliesOperationOnBoolean(sourceExp, argsExp) ::= <<
 (!$sourceExp$ || $argsExp$)
 >>
-
 
 // --- Collection.includes(T) ---
 includesOperationOnCollection(sourceExp, argsExp) ::= <<
@@ -350,8 +348,8 @@ indexOfOperationOnSequence(sourceExp, argsExp) ::= <<
 $sequenceUtility()$.indexOf($sourceExp$, $argsExp$)
 >>
 
-// --- IndexOf Operation on String ---
-indexOfOnStringOperation(sourceExp, argsExp) ::= <<
+// --- String.indexOf(String) ---
+indexOfOperationOnString(sourceExp, argsExp) ::= <<
 $sourceExp$.indexOf($argsExp$) + 1
 >>
 
@@ -390,19 +388,23 @@ lastOperationOnSequence(sourceExp, argsExp) ::= <<
 $sequenceUtility()$.last($sourceExp$)
 >>
 
-// --- Lesser Operation ---
-lesserOperation(sourceExp, argsExp) ::= <<
+// --- Real.<(Real) ---
+lesserOperationOnReal(sourceExp, argsExp) ::= <<
 ($sourceExp$ < $argsExp$)
 >>
 
-// --- LesserEquals Operation ---
-lesserEqualsOperation(sourceExp, argsExp) ::= <<
+// --- Real.<=(Real) ---
+lesserEqualsOperationOnReal(sourceExp, argsExp) ::= <<
 ($sourceExp$ <= $argsExp$)
 >>
 
+// --- Integer.max(Integer) ---
+maxOperationOnInteger(sourceExp, argsExp) ::= <<
+java.lang.Math.max($sourceExp$, $argsExp$)
+>>
 
-// --- Max Operation ---
-maxOperation(sourceExp, argsExp) ::= <<
+// --- Real.max(Real) ---
+maxOperationOnReal(sourceExp, argsExp) ::= <<
 java.lang.Math.max($sourceExp$, $argsExp$)
 >>
 
@@ -411,8 +413,13 @@ maxOperationOnCollection(sourceExp, argsExp) ::= <<
 $collectionUtility()$.max($sourceExp$)
 >>
 
-// --- Min Operation ---
-minOperation(sourceExp, argsExp) ::= <<
+// --- Integer.min(Integer) ---
+minOperationOnInteger(sourceExp, argsExp) ::= <<
+java.lang.Math.min($sourceExp$, $argsExp$)
+>>
+
+// --- Real.min(Real) ---
+minOperationOnReal(sourceExp, argsExp) ::= <<
 java.lang.Math.min($sourceExp$, $argsExp$)
 >>
 
@@ -421,51 +428,58 @@ minOperationOnCollection(sourceExp, argsExp) ::= <<
 $collectionUtility()$.min($sourceExp$)
 >>
 
-
-// --- Minus Operation ---
-minusOperation(sourceExp, argsExp) ::= <<
+// --- Integer.-(Integer) ---
+minusOperationOnInteger(sourceExp, argsExp) ::= <<
 ($sourceExp$ - $argsExp$)
 >>
 
+// --- Real.-(Real) ---
+minusOperationOnReal(sourceExp, argsExp) ::= <<
+($sourceExp$ - $argsExp$)
+>>
 
 // --- Set.minus(Set(T)) ---
 minusOperationOnSet(sourceExp, argsExp) ::= <<
 $setUtility()$.minus($sourceExp$, $argsExp$)
 >>
 
-
-// --- Multiply Operation ---
-multiplyOperation(sourceExp, argsExp) ::= <<
+// --- Integer.*(Integer) ---
+multiplyOperationOnInteger(sourceExp, argsExp) ::= <<
 ($sourceExp$ * $argsExp$)
 >>
 
+// --- Real.*(Real) ---
+multiplyOperationOnReal(sourceExp, argsExp) ::= <<
+($sourceExp$ * $argsExp$)
+>>
 
-// --- Modulo Operation ---
-modOperation(sourceExp, argsExp) ::= <<
+// --- Integer.mod(Integer) ---
+modOperationOnInteger(sourceExp, argsExp) ::= <<
 ($sourceExp$ % $argsExp$)
 >>
 
-
-// --- Negative Operation ---
-negativeOperation(sourceExp) ::= <<
+// --- Integer.-() ---
+negativeOperationOnInteger(sourceExp) ::= <<
 -($sourceExp$)
 >>
 
-
-// --- Not Operation ---
-notOperation(sourceExp) ::= <<
-!$sourceExp$
+// --- Real.-() ---
+negativeOperationOnReal(sourceExp) ::= <<
+-($sourceExp$)
 >>
 
+// --- Boolean.not(Boolean) ---
+notOperationOnBoolean(sourceExp) ::= <<
+!$sourceExp$
+>>
 
 // --- Collection.notEmpty() ---
 notEmptyOperationOnCollection(sourceExp, argsExp) ::= <<
 $collectionUtility()$.notEmpty($sourceExp$)
 >>
 
-
-// --- NotEquals Operation ---
-notEqualsOperation(sourceExp, argsExp) ::= <<
+// --- OclAny.<>(OclAny) ---
+notEqualsOperationOnOclAny(sourceExp, argsExp) ::= <<
 !$sourceExp$.equals($argsExp$)
 >>
 
@@ -479,14 +493,13 @@ notEqualsOperationOnPrimitiveType(sourceExp, argsExp) ::= <<
 !(($anyType()$) $sourceExp$).equals($argsExp$)
 >>
 
-// --- OclAsType Operation ---
-oclAsTypeOperation(sourceExp, argsExp) ::= <<
+// --- OclAny.oclAsType(OclType) ---
+oclAsTypeOperationOnOclAny(sourceExp, argsExp) ::= <<
 (($argsExp$) $sourceExp$)
 >>
 
-
-// --- OclIsInvalid Operation ---
-oclIsInvalidOperation(sourceExp, resultVar, sourceHasType) ::= <<
+// --- OclAny.oclIsInvalid() ---
+oclIsInvalidOperationOnOclAny(sourceExp, resultVar, sourceHasType) ::= <<
 Boolean $resultVar$;
 
 /* Check if the expression results in invalid. */
@@ -506,51 +519,48 @@ catch (Exception e) {
 
 >>
 
-
-// --- OclIsNew Operation ---
-oclIsNewOperation(sourceExp) ::= <<
+// --- OclAny.oclIsNew() ---
+oclIsNewOperationOnOclAny(sourceExp) ::= <<
 this.newInstances.containsKey($sourceExp$)
 >>
 
-
-// --- OclIsKindOf Operation ---
-oclIsKindOfOperation(sourceExp, argsExp) ::= <<
+// --- OclAny.oclIsKindOf(OclType) ---
+oclIsKindOfOperationOnOclAny(sourceExp, argsExp) ::= <<
 ($argsExp$.isAssignableFrom($sourceExp$.getClass()))
 >>
 
-
-// --- OclIsTypeOf Operation ---
-oclIsTypeOfOperation(sourceExp, argsExp) ::= <<
+// --- OclAny.oclIsTypeOf(OclType) ---
+oclIsTypeOfOperationOnOclAny(sourceExp, argsExp) ::= <<
 $sourceExp$.getClass().getCanonicalName().equals($argsExp$.getCanonicalName())
 >>
 
-
-// --- OclIsUndefined Operation ---
-oclIsUndefinedOperation(sourceExp) ::= <<
+// --- OclAny.oclIsUndefined() ---
+oclIsUndefinedOperationOnOclAny(sourceExp) ::= <<
 ($sourceExp$ == null)
 >>
 
-
-// --- Or Operation ---
-orOperation(sourceExp, argsExp) ::= <<
+// --- Boolean.or(Boolean) ---
+orOperationOnBoolean(sourceExp, argsExp) ::= <<
 ($sourceExp$ || $argsExp$)
 >>
 
-
-// --- OclType Operation ---
-oclTypeOperation(sourceExp, argsExp) ::= <<
+// --- OclAny.oclType() ---
+oclTypeOperationOnOclAny(sourceExp, argsExp) ::= <<
 $sourceExp$.getClass()
 >>
 
-
-// --- Plus Operation ---
-plusOperation(sourceExp, argsExp) ::= <<
+// --- Integer.+(Integer) ---
+plusOperationOnInteger(sourceExp, argsExp) ::= <<
 ($sourceExp$ + $argsExp$)
 >>
 
+// --- Real.+(Real) ---
+plusOperationOnReal(sourceExp, argsExp) ::= <<
+($sourceExp$ + $argsExp$)
+>>
 
-// --- Plus Operation on String ---
-plusOnStringOperation(sourceExp, argsExp) ::= <<
+// --- String.+(String) ---
+plusOperationOnString(sourceExp, argsExp) ::= <<
 $sourceExp$.concat($argsExp$)
 >>
 
@@ -579,8 +589,8 @@ reverseOperationOnSequence(sourceExp, argsExp) ::= <<
 $sequenceUtility()$.reverse($sourceExp$)
 >>
 
-// --- Round Operation ---
-roundOperation(sourceExp) ::= <<
+// --- Real.round(Real) ---
+roundOperationOnReal(sourceExp) ::= <<
 java.lang.Math.round($sourceExp$)
 >>
 
@@ -589,9 +599,8 @@ sizeOperationOnCollection(sourceExp) ::= <<
 $collectionUtility()$.size($sourceExp$)
 >>
 
-
-// --- Size on String Operation ---
-sizeOnStringOperation(sourceExp) ::= <<
+// --- String.size() ---
+sizeOperationOnString(sourceExp) ::= <<
 $sourceExp$.length()
 >>
 
@@ -605,8 +614,8 @@ subSequenceOperationOnSequence(sourceExp, argsExp) ::= <<
 $sequenceUtility()$.subSequence($sourceExp$, $argsExp:{arg | $arg$}; separator = ", "$)
 >>
 
-// --- Substring Operation ---
-substringOperation(sourceExp, argsExp) ::= <<
+// --- String.substring(Integer, Integer) ---
+substringOperationOnString(sourceExp, argsExp) ::= <<
 $sourceExp$.substring($argsExp:{arg | $arg$}; separator = " - 1, "$)
 >>
 
@@ -620,47 +629,40 @@ symmetricDifferenceOperationOnSet(sourceExp, argsExp) ::= <<
 $setUtility()$.symmetricDifference($sourceExp$, $argsExp$)
 >>
 
-// --- ToBoolean Operation ---
-toBooleanOperation(sourceExp) ::= <<
+// --- String.toBoolean() ---
+toBooleanOperationOnString(sourceExp) ::= <<
 Boolean.parseBoolean($sourceExp$)
 >>
 
-
-// --- ToInteger Operation ---
-toIntegerOperation(sourceExp) ::= <<
+// --- String.toInteger() ---
+toIntegerOperationOnString(sourceExp) ::= <<
 Integer.parseInt($sourceExp$)
 >>
 
-
-// --- ToReal Operation ---
-toRealOperation(sourceExp) ::= <<
+// --- String.toReal() ---
+toRealOperationOnString(sourceExp) ::= <<
 Float.parseFloat($sourceExp$)
 >>
 
-
-// --- ToString Operation ---
-toStringOperation(sourceExp) ::= <<
+// --- OclAny.toString() ---
+toStringOperationOnOclAny(sourceExp) ::= <<
 $sourceExp$.toString()
 >>
 
-
-// --- ToLowerCase Operation ---
-toLowerCaseOperation(sourceExp) ::= <<
+// --- String.toLowerCase() ---
+toLowerCaseOperationOnString(sourceExp) ::= <<
 $sourceExp$.toLowerCase()
 >>
 
-
-// --- ToUpperCase Operation ---
-toUpperCaseOperation(sourceExp) ::= <<
+// --- String.toUpperCase() ---
+toUpperCaseOperationOnString(sourceExp) ::= <<
 $sourceExp$.toUpperCase()
 >>
-
 
 // --- UML Operation ---
 umlOperation(operationName, sourceExp, argsExp) ::= <<
 $sourceExp$.$operationName$($argsExp:{arg | $arg$}; separator = ", "$)
 >>
-
 
 // --- Bag.union(Bag(T)) and Bag.union(Set(T)) ---
 unionOperationOnBag(sourceExp, argsExp) ::= <<
@@ -682,9 +684,8 @@ unionOperationWithSetOnSet(sourceExp, argsExp) ::= <<
 $setUtility()$.unionWithSet($sourceExp$, $argsExp$)
 >>
 
-
-// --- Xor Operation ---
-xorOperation(sourceExp, argsExp) ::= <<
+// --- Boolean.xor(Boolean) ---
+xorOperationOnBoolean(sourceExp, argsExp) ::= <<
 ($sourceExp$ ^ $argsExp$)
 >>
 

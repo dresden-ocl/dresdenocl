@@ -27,6 +27,10 @@ collectionType() ::= <<
 java.util.Collection
 >>
 
+collectionTypeInitialization() ::= <<
+java.util.ArrayList
+>>
+
 // --- Enumeration Type ---
 enumerationType() ::= <<
 Enum
