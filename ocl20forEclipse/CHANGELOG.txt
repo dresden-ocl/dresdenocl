@@ -1,11 +1,14 @@
 Changes and Bugs fixed during the different Releases
 ====================================================
 
-Release 3.X (not scheduled yet)
-===============================
+Release 3.0.1 (October, 29th, 2010)
+===================================
 
 * A Bug in the UML2 Metamodel has been fixed.
   - Class diagrams using stereotypes are now adapted correctly.
+  
+* Some bugs of the OCL Parser / Editor have been fixed.
+  - Derive and Init constraints defined for static properties are now parsed correctly.
   
 * Improvemens on Ocl2Java
   - Generated aspects are named according to their constraints.
