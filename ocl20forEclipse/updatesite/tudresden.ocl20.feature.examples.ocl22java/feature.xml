@@ -2,7 +2,7 @@
 <feature
       id="tudresden.ocl20.feature.examples.ocl22java"
       label="Dresden OCL Ocl22Java Examples"
-      version="3.0.0.qualifier"
+      version="3.0.1.qualifier"
       provider-name="TU Dresden, Software Technology Group">
 
    <description url="http://www.example.com/description">

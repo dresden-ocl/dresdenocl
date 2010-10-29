@@ -2,7 +2,7 @@
 <feature
       id="tudresden.ocl20.feature.ocl2java"
       label="Dresden OCL Ocl22Java"
-      version="3.0.0.qualifier"
+      version="3.0.1.qualifier"
       provider-name="TU Dresden, Software Technology Group">
 
    <description url="http://dresden-ocl.sourceforge.net/4eclipse_packages.html">
