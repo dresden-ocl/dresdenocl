@@ -2,6 +2,6 @@ package package1::package2
 
 -- Test operation names similar to keywords should be possible.
 context Type1
-inv: self.body().oclIsUndefined()
+inv: self._body().oclIsUndefined()
 
 endpackage

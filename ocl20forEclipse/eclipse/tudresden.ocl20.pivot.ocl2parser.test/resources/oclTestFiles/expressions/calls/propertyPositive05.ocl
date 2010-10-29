@@ -2,6 +2,6 @@ package package1::package2
 
 -- Property calls to features with the same name than keywords should be possible.
 context Type1
-inv: self.pre.oclIsUndefined()
+inv: self._pre.oclIsUndefined()
 
 endpackage
