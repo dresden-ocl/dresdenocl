@@ -1,0 +1,356 @@
+package modelica
+
+-- p.24
+-- The pre() operator can be applied if the following three conditions are
+-- fulfilled simultaneously: (a) variable y is either a subtype of a simple type
+-- or is a record component, (b) y is a discrete-time expression (c) the
+-- operator is not applied in a function class.
+context FunctionCall
+inv pre_conditions : 
+    let exp : AbstractExpression = argument.arguments->first().expression
+    in reference.name = 'pre' implies
+    (exp.pre_conditions_a() and exp.pre_conditions_b() and pre_conditions_c())
+
+-- p.24
+-- The same restrictions as for the pre() operator apply
+context FunctionCall
+inv edge_conditions :
+    let exp : AbstractExpression = argument.arguments->first().expression
+    in reference.name = 'edge' implies
+    (exp.pre_conditions_a() and exp.pre_conditions_b() and pre_conditions_c())
+
+-- p.24
+-- The same restrictions as for the pre() operator apply
+context FunctionCall
+inv change_conditions :
+    let exp : AbstractExpression = argument.arguments->first().expression
+    in reference.name = 'change' implies
+    (exp.pre_conditions_a() and exp.pre_conditions_b() and pre_conditions_c())
+
+-- p.29
+-- The name of a declared element shall not have the same name as any other
+-- element in its partially flattened enclosing class.
+context Component
+inv unique_element_names_comp : 
+    let class  : AbstractMoClass = xBody().xContent().xMoClass(),
+        comps  : Sequence(Component) = class.amcRecCollectComponents()->excluding(self),
+        classes: Sequence(AbstractMoClass) = class.amcRecCollectClasses()
+    in componentnames->forAll(c1,c2 | c1.name = c2.name implies c1 = c2) and
+       comps->forAll(c1 | c1.componentnames->forAll(cn1 | self.componentnames->forAll(cn2 | cn1.name <> cn2.name))) and
+       classes->forAll(c | componentnames->forAll(cn | cn.name <> c.content.name))
+
+context AbstractMoClass
+inv unique_element_names_class :
+    let class : AbstractMoClass = xContainerClass()
+    in not class.oclIsUndefined() implies
+       let comps  : Sequence(Component) = class.amcRecCollectComponents(),
+           classes: Sequence(AbstractMoClass) = class.amcRecCollectClasses()->excluding(self)
+       in comps->forAll(c | c.componentnames->forAll(cn | cn.name <> self.content.name)) and
+          classes->forAll(c | c.content.name <> self.content.name)
+
+-- p.31
+-- Variables declared with the flow type prefix shall be a subtype of Real.
+context Component
+inv flow_subtype_of_real : 
+    cIsFlow() implies type.xMoClass().amcContainsOnlyReal()
+
+-- p.37
+-- No equations are allowed in the definition of the connector or any of its components.
+context EquationSection
+inv connector_no_equations :
+    let class : AbstractMoClass = xBody().xContent().xMoClass()
+	in not class.amcIsContainedInConnector()
+
+-- p.44
+-- It is not possible to combine extends from the predefined types with other components.
+-- design decision: ignore annotations to allow them in such types
+context AbstractBodyElements
+inv predefined_types_extension_mixes :
+    -- only enclosed classes are contained in a Body
+    xBody().oclIsUndefined() or
+    oclIsKindOf(Annotation) or
+    let predefinedTypes : Collection(String) = Sequence { 'Boolean', 'Integer', 'Real', 'String' },
+        extends : Sequence(ExtendsClause) = xBody().bCollectAbstractComponents()->select(oclIsKindOf(ExtendsClause)).oclAsType(ExtendsClause),
+        predefExtends : Sequence(ExtendsClause) = extends->select(reference.xMoClass().amcIsBaseType())
+	in predefExtends->size() > 0 implies predefExtends->first() = self
+
+/*
+-- p.59
+-- For a replaceable declaration or modifier the default class must be
+-- compatible with the constraining class.
+context ReplaceableClass
+inv replaceable_class_default_class_compatible_constraining_class : 
+let defaultClass : AbstractContent = 
+if modelicaclassdefinition.content.oclIsKindOf(AssignmentContent) then
+ modelicaclassdefinition.content.oclAsType(AssignmentContent).reference
+else
+ modelicaclassdefinition.content
+endif,
+    defaultClassMods : Collection(AbstractArgument) =
+if modelicaclassdefinition.content.oclIsKindOf(AssignmentContent) and 
+   not modelicaclassdefinition.content.oclAsType(AssignmentContent).modification.oclIsUndefined() then
+ modelicaclassdefinition.content.oclAsType(AssignmentContent).modification.arguments
+else
+ Sequence{}
+endif,
+    constrainingClass : AbstractContent =
+if not reference.oclIsUndefined() then
+ reference
+else 
+ defaultClass
+endif,
+    constrainingClassMods : Collection(AbstractArgument) =
+if not modification.oclIsUndefined() then
+ modification.arguments
+else
+ Sequence{}
+endif
+-- TODO when everything works: reference.oclIsUndefined() or ...
+in defaultClass.acIsSubtypeOf(defaultClassMods,constrainingClass,constrainingClassMods)
+*/
+
+-- p.78
+-- The expression of a for equation shall be a parameter expression.
+context ForIndex
+inv for_equation_parameter_expression :
+    (not xForIndices().xForEquation().oclIsUndefined())
+	implies
+	expression.aeIsParameterExpression()
+	
+-- p.79
+-- If-equations in equation sections which do not have exclusively parameter
+-- expressions as switching conditions shall have an else clause and each
+-- branch shall have the same number of equations.
+context IfEquation
+inv if_switch_not_parameter_else :
+    let conditions : Collection(Expression) = condition->asSequence()->union(elseifequations.elseifcondition),
+        eqCount : Integer = ifequations->size() in
+	conditions->exists(not aeIsParameterExpression())
+	implies
+	elseifequations->forAll(elseifthenequations->size() = eqCount) and elseequations->size() = eqCount
+
+-- p.81
+-- The different branches of when/elsewhen must have the same set of component references on the left-hand-side.
+context WhenEquation
+inv when_equations_branch_references:
+ let whenSet : Set(String) = whenequations->iterate(eq : AbstractEquation; resultSet : Set(String) = Set {} | resultSet->union(eq.aeqCollectReferences())) in 
+	 elsewhenequations->forAll(elsewhenthenequations->iterate(eq : AbstractEquation; resultSet : Set(String) = Set {} | resultSet->union(eq.aeqCollectReferences())) = whenSet)
+
+-- p.81
+-- Two when-equations may not define the same variable.
+-- TODO false negatives can occur with fully qualified variables because the
+--      Ecore representation is not fully qualified
+context Reference
+inv when_equations_same_variable :
+    (reference.oclIsKindOf(ComponentName) and rIsInWhenEqAssignment())
+    implies
+    not rNavToEquationExpression().navToEquationSection().xBody().xContent().
+    containsWhenAssignment(reference.oclAsType(ComponentName), rNavToWhenEquation())
+
+-- p.82
+-- The reinit operator can for the same variable (resp. Array of variables)
+-- only be applied either in one equation or one or more times in one algorithm
+-- section.
+-- TODO false negatives can occur with fully qualified variables because the
+--      Ecore representation is not fully qualified
+-- TODO does the following count as one equation and is thus correct or
+--      does it count as two and is incorrect? (same with else and elsewhen)
+--      and what about for-loops?
+/*
+  if x < 2 then
+   reinit(x,23);
+  else
+   reinit(x,45);
+  end if;
+*/
+context FunctionCall
+inv reinit_only_once :
+    reference.name = 'reinit' implies
+    let arg : Reference = argument.arguments->first().expression.
+                 oclAsType(Expression).firstvalue.oclAsType(Reference)
+    in fcNavToAbstractContent().acWellFormedReinitFor(arg)
+
+-- p.82
+-- It [the reinit operator] can only be applied in the body of a when-equation
+-- or when-statement.
+context FunctionCall
+inv reinit_only_inside_when_eq:
+    (reference.name = 'reinit' and fcIsEquation()) implies
+    aeIsInsideWhenEquation()
+    
+
+-- p.82
+-- It [the reinit operator] can only be applied in the body of a when-equation
+-- or when-statement.
+context FunctionCall
+inv reinit_only_inside_when_st: 
+    (reference.name = 'reinit' and fcIsStatement()) implies
+    asIsInsideWhenStatement()
+
+-- p.86
+-- It is not allowed to use a when equation in an initial equation section.
+context WhenEquation
+inv initial_no_when_eq :
+    let eqSec : EquationSection = navToEquationSection()
+	in eqSec.initial.oclIsUndefined() or not eqSec.initial
+
+-- p.89
+-- The connect-equations (and the special functions for overdetermined 
+-- connectors) may only be used in equations and may not be used inside
+-- if-equations with non-parametric condition, or in when-equations.
+-- note: only the test for if-equations needs be done, because
+-- when equations are already checked for connect equations in
+-- well_formed_when_equations_1 and well_formed_when_equations_2
+context ConnectClause
+inv connect_not_in_nonparametric_if : not aeIsInsideNonParametricIfEquation()
+	
+-- p.124
+-- The break-statement can only be used in a while- or for-loop in an algorithm section.
+context BreakStatement
+inv break_in_loop : isInsideLoop()
+	 
+-- p.125
+-- The return statement can only be used inside functions.
+context ReturnStatement
+inv return_inside_functions :
+    let class : AbstractMoClass = asNavToClass()
+	in class.oclIsKindOf(MoFunction) or class.oclIsKindOf(MoOperatorFunction)
+	
+-- p.126
+-- A when-statement shall not be used within a function.
+context WhenStatement
+inv when_not_inside_function :
+    let class : AbstractMoClass = asNavToClass()
+	in not (class.oclIsKindOf(MoFunction) or class.oclIsKindOf(MoOperatorFunction))
+
+-- p.127
+-- The terminate statement may not be in functions.
+context FunctionCall
+inv function_no_terminate : 
+    let class : AbstractMoClass = asNavToClass(),
+        isStatement : Boolean = xEquation().oclIsUndefined() and
+                                xElseWhenEquation().oclIsUndefined() and
+                                xElseIfEquation().oclIsUndefined() and
+                                xEquationSection().oclIsUndefined()
+    in (not isStatement) or (not (class.oclIsKindOf(MoFunction) or
+                            class.oclIsKindOf(MoOperatorFunction))) or
+       reference.oclIsUndefined() or reference.name <> 'terminate'
+	
+-- p.131
+-- Input formal parameters may not be assigned values in the body of the function.
+context Reference
+inv function_no_input_assignment :
+    isInAssignment() implies 
+	 let class : AbstractMoClass = navToAssignment().asNavToClass()
+	 in ((not class.oclIsKindOf(MoFunction)) and (not class.oclIsKindOf(MoOperatorFunction)))
+	    or class.amcCollectInputNames()->excludes(rName)
+ 
+-- p.131
+-- A function may not be used in connections.
+context ConnectClause
+inv function_not_in_connect_equations :
+    let refs : Collection(Reference) = componentreference1->asSequence()->union(componentreference2->asSequence())
+	in refs->forAll(
+    if reference.oclIsKindOf(AbstractContent) then
+	 let c : AbstractMoClass = reference.oclAsType(AbstractContent).xMoClass()
+	 in not (c.oclIsKindOf(MoFunction) or c.oclIsKindOf(MoOperatorFunction))
+	else
+	 if reference.oclIsKindOf(ComponentName) then
+	  let c : AbstractMoClass = reference.oclAsType(ComponentName).xComponent().type.xMoClass()
+	  in not (c.oclIsKindOf(MoFunction) or c.oclIsKindOf(MoOperatorFunction))
+	 else
+	  true
+	 endif
+	endif
+	)
+ 
+-- p.131
+-- A function can have at most one algorithm section.
+context MoFunction
+inv function_no_multiple_algorithms :
+    let b : Body = if content.oclIsKindOf(CommonContent) then
+	                content.oclAsType(CommonContent).xBody()
+	               else
+                    content.oclAsType(ExtensionContent).xBody()
+				   endif
+	in b.oclIsInvalid() or b.oclIsUndefined() or b.bodyelements->select(oclIsKindOf(AlgorithmSection))->size()<2
+
+-- p. 131
+-- A function cannot contain calls to the Modelica built-in operators der,
+-- initial, terminal, sample, Subtask.activated, Subtask.lastInterval, pre,
+-- edge, change, reinit, delay, cardinality, inStream, actualStream, to the
+-- operators of the built-in package Connections, and is not allowed to contain
+-- when-statements
+-- split into individual constraints
+-- pre, edge and change are already checked in their respective _conditions
+-- invariant
+-- when-statement checking is also done elsewhere
+context FunctionCall
+inv function_no_builtin_operators_01 :
+    reference.name = 'der' implies not fcIsInFunction()
+
+context InitialLiteral
+inv function_no_builtin_operators_02 :
+    let c : AbstractMoClass = bvNavToClass()
+    in not (c.oclIsKindOf(MoFunction) or c.oclIsKindOf(MoOperatorFunction))
+
+context FunctionCall
+inv function_no_builtin_operators_03 :
+    reference.name = 'terminal' implies not fcIsInFunction()
+inv function_no_builtin_operators_04 :
+    reference.name = 'sample' implies not fcIsInFunction()
+inv function_no_builtin_operators_05 :
+    reference.name = 'activated' and (
+    let c : AbstractMoClass = reference.xMoClass(),
+        p : AbstractMoClass = c.xContainerClass()
+    in not p.oclIsUndefined() and p.content.name = 'Subtask') implies
+    not fcIsInFunction()
+inv function_no_builtin_operators_06 :
+    reference.name = 'lastInterval' and (
+    let c : AbstractMoClass = reference.xMoClass(),
+        p : AbstractMoClass = c.xContainerClass()
+    in not p.oclIsUndefined() and p.content.name = 'Subtask') implies
+    not fcIsInFunction()
+inv function_no_builtin_operators_07 :
+    reference.name = 'reinit' implies not fcIsInFunction()
+inv function_no_builtin_operators_08 :
+    reference.name = 'delay' implies not fcIsInFunction()
+inv function_no_builtin_operators_09 :
+    reference.name = 'cardinality' implies not fcIsInFunction()
+inv function_no_builtin_operators_10 :
+    reference.name = 'inStream' implies not fcIsInFunction()
+inv function_no_builtin_operators_11 :
+    reference.name = 'actualStream' implies not fcIsInFunction()
+inv function_no_builtin_operators_12 :
+    let c : AbstractMoClass = reference.xMoClass(),
+        p : AbstractMoClass = c.xContainerClass()
+    in (not p.oclIsUndefined() and p.content.name = 'Connections')
+       implies not fcIsInFunction()
+
+-- p.154
+-- Qualified import clauses may only refer to packages or elements of packages.
+context ImportClause
+inv import_references : 
+    (not wildcard and importreference.reference.oclIsKindOf(AbstractContent))
+    implies
+    let c : AbstractMoClass = importreference.reference.oclAsType(AbstractContent).xMoClass()
+    in c.oclIsKindOf(MoPackage) or c.xContainerClass().oclIsKindOf(MoPackage)
+
+-- p.171
+-- The built-in operator „decouple“ can only be called in an equation section
+-- outside of a when clause.
+context FunctionCall
+inv decouple_outside_when : fcIsSubtaskDecouple() implies
+    (fcIsInEquation() and  not fcIsInsideWhen())
+
+-- p.172
+-- Subtask.decouple(v) where v must be a variable of a simple type or of an
+-- array of a simple type.
+context FunctionCall
+inv decouple_argument_simple_type : fcIsSubtaskDecouple() implies
+    (let exp : AbstractExpression = argument.arguments->first().expression
+    in exp.aeIsAReference() and
+    exp.oclAsType(Expression).firstvalue.oclAsType(Reference).reference.
+     oclAsType(ComponentName).xComponent().type.acIsBaseType())
+
+endpackage

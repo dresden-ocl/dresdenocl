@@ -58,7 +58,7 @@ public abstract class AbstractDiffTest {
 	private static final String MODEL_NAME = "resources/models/model01.uml";
 
 	/** The {@link IModel} used for testing. */
-	private static IModel testModel;
+	protected static IModel testModel;
 
 	/**
 	 * <p>
@@ -103,7 +103,7 @@ public abstract class AbstractDiffTest {
 	 * @throws Exception
 	 *             Thrown, if the opening fails.
 	 */
-	private static File getFile(String path) throws Exception {
+	protected static File getFile(String path) throws Exception {
 
 		URL fileLocation;
 		fileLocation = Ocl2JavaTestPlugin.getDefault().getBundle()

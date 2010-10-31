@@ -27,7 +27,7 @@ public privileged aspect Transaction_PostAspect_getProgram {
         tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyProgram result;
         result = proceed(aClass);
     
-        if (!aClass.getClass().getCanonicalName().equals(tudresden.ocl20.pivot.examples.royalsandloyals.Transaction.getCanonicalName())) {
+        if (!aClass.getClass().getCanonicalName().equals(tudresden.ocl20.pivot.examples.royalsandloyals.Transaction.class.getCanonicalName())) {
         	// TODO Auto-generated code executed when constraint is violated.
         	throw new RuntimeException("Error: Constraint was violated.");
         }

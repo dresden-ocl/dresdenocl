@@ -8,8 +8,10 @@ package tudresden.ocl20.pivot.examples.royalsandloyals.constraints;
  */
 public privileged aspect ProgramPartner_InvAspect_totalPointsEarning {
 
+    declare parents: tudresden.ocl20.pivot.examples.royalsandloyals.ProgramPartner implements tudresden.ocl20.pivot.tools.codegen.ocl2java.types.OclCheckable;
+    
     public void tudresden.ocl20.pivot.examples.royalsandloyals.ProgramPartner.checkInvariants() {
-        /* Remains empty. Is overridden by advice(s). */
+        /* Remains empty. Is only filled with behavior by advice(s). */
     }
     /**
      * <p>Pointcut for all calls on {@link tudresden.ocl20.pivot.examples.royalsandloyals.ProgramPartner#checkInvariants()}.</p>
@@ -40,7 +42,7 @@ public privileged aspect ProgramPartner_InvAspect_totalPointsEarning {
         
         /* Iterator Select: Select all elements which fulfill the condition. */
         for (tudresden.ocl20.pivot.examples.royalsandloyals.Transaction $implicitVariable0$ : result3) {
-            if ($implicitVariable0$.getClass().getCanonicalName().equals(tudresden.ocl20.pivot.examples.royalsandloyals.Earning.getCanonicalName())) {
+            if ($implicitVariable0$.getClass().getCanonicalName().equals(tudresden.ocl20.pivot.examples.royalsandloyals.Earning.class.getCanonicalName())) {
                 result2.add($implicitVariable0$);
             }
             // no else

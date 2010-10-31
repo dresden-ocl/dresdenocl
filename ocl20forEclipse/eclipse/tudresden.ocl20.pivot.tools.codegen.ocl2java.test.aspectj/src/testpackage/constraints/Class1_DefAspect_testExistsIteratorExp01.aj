@@ -12,7 +12,7 @@ public privileged aspect Class1_DefAspect_testExistsIteratorExp01 {
      * <p>Defines the method testExistsIteratorExp01() defined by the constraint
      * <code>context Class1
      *       def: testExistsIteratorExp01() : Boolean =
-    Set{ 1, 2, 3}->exists(i: Integer | i = 2)</code></p>
+    Set{1, 2, 3}->exists(i: Integer | i = 2)</code></p>
      */
     public Boolean testpackage.Class1.testExistsIteratorExp01( ) {
         java.util.HashSet<Integer> collection1;

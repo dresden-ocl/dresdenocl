@@ -35,17 +35,18 @@ public interface IOcl2JavaSettings extends IOcl2CodeSettings {
 	 * Constants to define the different check modes for invariants in the
 	 * instrumentation code.
 	 */
-	public final static int INVARIANT_CHECK_AFTER_CONSTRUCT_AND_ATTRIBUTE_CHANGE =
-			1;
-	public final static int INVARIANT_CHECK_AFTER_CONSTRUCT_AND_PUBLIC_METHOD_EXECUTION =
-			2;
+	public final static int INVARIANT_CHECK_AFTER_CONSTRUCT_AND_ATTRIBUTE_CHANGE = 1;
+	public final static int INVARIANT_CHECK_AFTER_CONSTRUCT_AND_PUBLIC_METHOD_EXECUTION = 2;
 	public final static int INVARIANT_CHECK_AFTER_SPECIAL_METHOD_INVOCATION = 3;
 
 	/**
-	 * @return The location, where transformed constraints shall be saved
-	 *         relatively to the constrained class.
+	 * <p>
+	 * Returns the name of the basis package.
+	 * </p>
+	 * 
+	 * @return The name of the basis package.
 	 */
-	public String getConstraintDirectory();
+	public String getBasisPackage();
 
 	/**
 	 * <p>
@@ -54,15 +55,10 @@ public interface IOcl2JavaSettings extends IOcl2CodeSettings {
 	 * </p>
 	 * 
 	 * @param aConstraint
-	 *          The {@link Constraint} which check mode shall be set.
+	 *            The {@link Constraint} which check mode shall be set.
 	 * @return A value between 1 and 3 (default is 1).
 	 */
 	public int getInvariantCheckMode(Constraint aConstraint);
-
-	/**
-	 * @return The Location, where transformed code shall be saved.
-	 */
-	public String getSourceDirectory();
 
 	/**
 	 * <p>
@@ -71,7 +67,8 @@ public interface IOcl2JavaSettings extends IOcl2CodeSettings {
 	 * </p>
 	 * 
 	 * @param aConstraint
-	 *          The {@link Constraint} which violation macro shall be returned.
+	 *            The {@link Constraint} which violation macro shall be
+	 *            returned.
 	 * 
 	 * @return The violation macro as {@link ITransformedCode} used for code
 	 *         generation of a given {@link Constraint}.
@@ -85,52 +82,56 @@ public interface IOcl2JavaSettings extends IOcl2CodeSettings {
 
 	/**
 	 * <p>
-	 * Checks, whether or not the inheritance of a {@link Constraint} is disabled
-	 * for code generation.
+	 * Checks, whether or not the inheritance of a {@link Constraint} is
+	 * disabled for code generation.
 	 * </p>
 	 * 
 	 * @param aConstraint
-	 *          The {@link Constraint} which shall be checked.
+	 *            The {@link Constraint} which shall be checked.
 	 * @return True if inheritance is disabled for the given Constraint.
 	 */
 	public boolean isInheritanceDisabled(Constraint aConstraint);
 
 	/**
 	 * <p>
-	 * Sets the The location, where transformed constraints shall be saved
-	 * relatively to the constrained class.
-	 * </p>
+	 * Sets the basis package into which all packages modelled in the model to
+	 * be used as basis for code generation are located. E.g., having a model
+	 * containing a package <code>package2</code>, the generated code's class
+	 * names could be modified from <code>package2.[typename]</code> to
+	 * <code>package1.package2.[typename]</code> by setting this value to
+	 * <code>package1</code>.
 	 * 
-	 * @param folderName
-	 *          The location, where transformed constraints shall be saved
-	 *          relatively to the constrained class.
+	 * @param path
+	 *            The path of the basis package using the names of the packages
+	 *            separated by dots.
 	 */
-	public void setConstraintDirectory(String folderName);
+	public void setBasisPackahe(String path);
 
 	/**
 	 * <p>
-	 * Disables the inheritance for the code generation of all {@link Constraint}s
-	 * for which the inheritance is not declared in a specific setting.
+	 * Disables the inheritance for the code generation of all
+	 * {@link Constraint}s for which the inheritance is not declared in a
+	 * specific setting.
 	 * </p>
 	 * 
 	 * @param disable
-	 *          If true, inheritance is disabled by default.
+	 *            If true, inheritance is disabled by default.
 	 */
 	public void setDefaultInheritanceDisabled(boolean disable);
 
 	/**
 	 * <p>
-	 * Sets the violation macro used for code generation of all {@link Constraint}
-	 * s which do not have a specific violation macro set.
+	 * Sets the violation macro used for code generation of all
+	 * {@link Constraint} s which do not have a specific violation macro set.
 	 * 
 	 * @param aMacro
-	 *          The default violation macro as an {@link ITransformedCode}.
+	 *            The default violation macro as an {@link ITransformedCode}.
 	 */
 	public void setDefaultViolationMacro(ITransformedCode aMacro);
 
 	/**
 	 * @param enable
-	 *          If true, getters are generated for new defined attributes.
+	 *            If true, getters are generated for new defined attributes.
 	 */
 	public void setGettersForDefinedAttributesEnabled(boolean enable);
 
@@ -142,30 +143,21 @@ public interface IOcl2JavaSettings extends IOcl2CodeSettings {
 	 * </p>
 	 * 
 	 * @param aConstraint
-	 *          The {@link Constraint} for which inheritance shall be disabled.
+	 *            The {@link Constraint} for which inheritance shall be
+	 *            disabled.
 	 * @param disable
-	 *          If true, inheritance is disabled by default.
+	 *            If true, inheritance is disabled by default.
 	 */
 	public void setInheritanceDisabled(Constraint aConstraint, boolean disable);
 
 	/**
 	 * <p>
-	 * Sets the Location, where transformed code shall be saved.
-	 * </p>
-	 * 
-	 * @param path
-	 *          The Location, where transformed code shall be saved.
-	 */
-	public void setSourceDirectory(String path);
-
-	/**
-	 * <p>
-	 * Sets the mode which shall be used to check invariants for which no specific
-	 * setting is set.
+	 * Sets the mode which shall be used to check invariants for which no
+	 * specific setting is set.
 	 * </p>
 	 * 
 	 * @param mode
-	 *          A value between 1 and 3 (default is 1).
+	 *            A value between 1 and 3 (default is 1).
 	 */
 	public void setDefaultInvariantCheckMode(int mode);
 
@@ -176,9 +168,9 @@ public interface IOcl2JavaSettings extends IOcl2CodeSettings {
 	 * </p>
 	 * 
 	 * @param aConstraint
-	 *          The {@link Constraint} which check mode shall be set.
+	 *            The {@link Constraint} which check mode shall be set.
 	 * @param mode
-	 *          A value between 1 and 3 (default is 1).
+	 *            A value between 1 and 3 (default is 1).
 	 */
 	public void setInvariantCheckMode(Constraint aConstraint, int mode);
 
@@ -188,9 +180,10 @@ public interface IOcl2JavaSettings extends IOcl2CodeSettings {
 	 * {@link Constraint}.
 	 * 
 	 * @param aMacro
-	 *          The default violation macro as an {@link ITransformedCode}.
+	 *            The default violation macro as an {@link ITransformedCode}.
 	 * @param aConstraint
-	 *          The {@link Constraint} the violation macro shall be used for.
+	 *            The {@link Constraint} the violation macro shall be used for.
 	 */
-	public void setViolationMacro(ITransformedCode aMacro, Constraint aConstraint);
+	public void setViolationMacro(ITransformedCode aMacro,
+			Constraint aConstraint);
 }

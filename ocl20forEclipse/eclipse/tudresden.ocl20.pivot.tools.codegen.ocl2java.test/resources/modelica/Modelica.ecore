@@ -1,0 +1,773 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="modelica"
+    nsURI="http://www.xtext.org/language/Modelica" nsPrefix="modelica">
+  <eClassifiers xsi:type="ecore:EClass" name="ASTModelicaSourceFile">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="importedNamespace" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="elements" upperBound="-1"
+        eType="#//AbstractMoClass" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AbstractMoClass" eSuperTypes="#//AbstractComponent">
+    <eOperations name="xContainerClass" eType="#//AbstractMoClass">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="org.eclipse.emf.ecore.EObject buffer = eContainer();&#xA;while (buffer != null &amp;&amp; !(buffer instanceof AbstractMoClass))&#xA;&#x9;buffer = buffer.eContainer();&#xA;return (AbstractMoClass) buffer;"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="xReplaceableClass" eType="#//ReplaceableClass">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="return eContainer() instanceof ReplaceableClass ? (ReplaceableClass) eContainer() : null;"/>
+      </eAnnotations>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="redeclare" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="final" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="inner" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="outer" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="encapsulated" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="partial" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="content" eType="#//AbstractContent"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MoConnector" eSuperTypes="#//AbstractMoClass">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="expandable" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MoOperatorFunction" eSuperTypes="#//AbstractMoClass"/>
+  <eClassifiers xsi:type="ecore:EClass" name="MoType" eSuperTypes="#//AbstractMoClass"/>
+  <eClassifiers xsi:type="ecore:EClass" name="MoFunction" eSuperTypes="#//AbstractMoClass"/>
+  <eClassifiers xsi:type="ecore:EClass" name="MoOperator" eSuperTypes="#//AbstractMoClass"/>
+  <eClassifiers xsi:type="ecore:EClass" name="MoClass" eSuperTypes="#//AbstractMoClass"/>
+  <eClassifiers xsi:type="ecore:EClass" name="MoPackage" eSuperTypes="#//AbstractMoClass"/>
+  <eClassifiers xsi:type="ecore:EClass" name="MoModel" eSuperTypes="#//AbstractMoClass"/>
+  <eClassifiers xsi:type="ecore:EClass" name="MoRecord" eSuperTypes="#//AbstractMoClass"/>
+  <eClassifiers xsi:type="ecore:EClass" name="MoBlock" eSuperTypes="#//AbstractMoClass"/>
+  <eClassifiers xsi:type="ecore:EClass" name="AbstractContent">
+    <eOperations name="xMoClass" eType="#//AbstractMoClass">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="return (AbstractMoClass)eContainer();"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="xEnclosedName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="return getName().startsWith(&quot;\u0027&quot;) &amp;&amp; getName().endsWith(&quot;\u0027&quot;) ? getName().substring(1,getName().length()-1) : getName();"/>
+      </eAnnotations>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CommonContent" eSuperTypes="#//AbstractContent">
+    <eOperations name="xBody" eType="#//Body">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="return getBody();"/>
+      </eAnnotations>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="stringcomment" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="body" eType="#//Body" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="classnamereference" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AssignmentContent" eSuperTypes="#//AbstractContent">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="timevariabilitytype" eType="#//TimeVariabilityType"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="inputoroutputprefix" eType="#//InputOrOutputPrefix"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="reference" eType="#//AbstractContent"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="arraysubscripts" eType="#//ArraySubscript"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="modification" eType="#//Modification"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="comment" eType="#//Comment"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EnumerationContent" eSuperTypes="#//AbstractContent">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="enumlist" eType="#//EnumerationList"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="comment" eType="#//Comment"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ExtensionContent" eSuperTypes="#//AbstractContent">
+    <eOperations name="xBody" eType="#//Body">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="return getBody();"/>
+      </eAnnotations>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="reference" eType="#//AbstractContent"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="modification" eType="#//Modification"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="stringcomment" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="body" eType="#//Body" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Body">
+    <eOperations name="xContent" eType="#//AbstractContent">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="return (AbstractContent)eContainer();"/>
+      </eAnnotations>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="bodyelements" upperBound="-1"
+        eType="#//AbstractBodyElements" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AbstractBodyElements">
+    <eOperations name="xBody" eType="#//Body">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="return eContainer() instanceof Body ? (Body) eContainer() : (Body) eContainer().eContainer();"/>
+      </eAnnotations>
+    </eOperations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="VisibilityComponentsSection" eSuperTypes="#//AbstractBodyElements">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="visibilitytype" eType="#//VisibilityType"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="components" upperBound="-1"
+        eType="#//AbstractComponent" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EquationSection" eSuperTypes="#//AbstractBodyElements">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="initial" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="equations" upperBound="-1"
+        eType="#//AbstractEquation" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AbstractEquation">
+    <eOperations name="xEquationSection" eType="#//EquationSection">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="return eContainer() instanceof EquationSection ? (EquationSection) eContainer() : null;"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="xEquation" eType="#//AbstractEquation">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="return eContainer() instanceof AbstractEquation ? (AbstractEquation) eContainer() : null;"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="xElseWhenEquation" eType="#//ElseWhenEquation">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="return eContainer() instanceof ElseWhenEquation ? (ElseWhenEquation) eContainer() : null;"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="xElseIfEquation" eType="#//ElseIfEquation">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="return eContainer() instanceof ElseIfEquation ? (ElseIfEquation) eContainer() : null;"/>
+      </eAnnotations>
+    </eOperations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AlgorithmSection" eSuperTypes="#//AbstractBodyElements">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="initial" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="statements" upperBound="-1"
+        eType="#//AbstractStatement" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AbstractStatement">
+    <eOperations name="xAlgorithmSection" eType="#//AlgorithmSection">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="return eContainer() instanceof AlgorithmSection ? (AlgorithmSection) eContainer() : null;"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="xStatement" eType="#//AbstractStatement">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="return eContainer() instanceof AbstractStatement ? (AbstractStatement) eContainer() : null;"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="xElseIfStatement" eType="#//ElseIfStatements">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="return eContainer() instanceof ElseIfStatements ? (ElseIfStatements) eContainer() : null;"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="xElseWhenStatement" eType="#//ElseWhenStatement">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="return eContainer() instanceof ElseWhenStatement ? (ElseWhenStatement) eContainer() : null;"/>
+      </eAnnotations>
+    </eOperations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Assignment" eSuperTypes="#//AbstractStatement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="reference" eType="#//Reference"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="expression" eType="#//AbstractExpression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="comment" eType="#//Comment"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BreakStatement" eSuperTypes="#//AbstractStatement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="comment" eType="#//Comment"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ReturnStatement" eSuperTypes="#//AbstractStatement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="comment" eType="#//Comment"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="IfStatement" eSuperTypes="#//AbstractStatement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ifcondition" eType="#//AbstractExpression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="thenstatements" upperBound="-1"
+        eType="#//AbstractStatement" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="elseifstatements" upperBound="-1"
+        eType="#//ElseIfStatements" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="elsestatements" upperBound="-1"
+        eType="#//AbstractStatement" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="comment" eType="#//Comment"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ElseIfStatements">
+    <eOperations name="xIfStatement" eType="#//IfStatement">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="return (IfStatement) eContainer();"/>
+      </eAnnotations>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="elseifcondition" eType="#//AbstractExpression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="elseifstatements" upperBound="-1"
+        eType="#//AbstractStatement" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ForStatement" eSuperTypes="#//AbstractStatement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="forindices" eType="#//ForIndices"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="statements" upperBound="-1"
+        eType="#//AbstractStatement" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="comment" eType="#//Comment"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="WhileStatement" eSuperTypes="#//AbstractStatement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="expression" eType="#//AbstractExpression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="statements" upperBound="-1"
+        eType="#//AbstractStatement" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="comment" eType="#//Comment"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="WhenStatement" eSuperTypes="#//AbstractStatement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="whencondition" eType="#//AbstractExpression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="whenstatements" upperBound="-1"
+        eType="#//AbstractStatement" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="elsewhenstatements" upperBound="-1"
+        eType="#//ElseWhenStatement" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="comment" eType="#//Comment"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ElseWhenStatement">
+    <eOperations name="xWhenStatement" eType="#//WhenStatement">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="return (WhenStatement) eContainer();"/>
+      </eAnnotations>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="elsewhencondition" eType="#//AbstractExpression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="elsewhenstatements" upperBound="-1"
+        eType="#//AbstractStatement" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ExpressionListAssignment" eSuperTypes="#//AbstractStatement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="expressionlist" eType="#//ExpressionList"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="componentreference" eType="#//AbstractContent"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="functioncallarguments"
+        eType="#//Argument" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="comment" eType="#//Comment"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AbstractComponent" eSuperTypes="#//AbstractBodyElements">
+    <eOperations name="xVisibilityComponentsSection" eType="#//VisibilityComponentsSection">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="return eContainer() instanceof VisibilityComponentsSection ? (VisibilityComponentsSection) eContainer() : null;"/>
+      </eAnnotations>
+    </eOperations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ExternalFunction" eSuperTypes="#//AbstractComponent">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="language" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="componentreference" eType="#//Reference"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="expressionlist" eType="#//ExpressionList"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="annotation" eType="#//Annotation"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ExtendsClause" eSuperTypes="#//AbstractComponent">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="reference" eType="#//AbstractContent"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="modification" eType="#//Modification"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="annotation" eType="#//Annotation"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ImportClause" eSuperTypes="#//AbstractComponent">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="name" eType="#//ComponentName"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="importreference" eType="#//ImportReference"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="wildcard" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="comment" eType="#//Comment"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ImportReference">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="reference" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Component" eSuperTypes="#//AbstractComponent">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="redeclare" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="final" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="inner" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="outer" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="connectorprefix" eType="#//ConnectorPrefix"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="timevariabilitytype" eType="#//TimeVariabilityType"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="componentinputoutput" eType="#//InputOrOutputPrefix"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//AbstractContent"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="typearray" eType="#//ArraySubscript"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="componentnames" upperBound="-1"
+        eType="#//ComponentName" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ifexpression" eType="#//Expression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="comment" eType="#//Comment"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ComponentDeclarationModification">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="declarationarray" eType="#//ArraySubscript"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="declarationmodification"
+        eType="#//AbstractModification" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="assignmentreference" unique="false"
+        upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="assignmentmodification"
+        upperBound="-1" eType="#//Modification" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="assignmentexpressions"
+        upperBound="-1" eType="#//Expression" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ComponentName">
+    <eOperations name="xComponent" eType="#//Component">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="return eContainer() instanceof Component ? (Component) eContainer() : null;"/>
+      </eAnnotations>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="componentDeclarationModifications"
+        eType="#//ComponentDeclarationModification" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EquationExpression" eSuperTypes="#//AbstractEquation">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="leftexpression" eType="#//Expression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rightexpression" eType="#//AbstractExpression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="comment" eType="#//Comment"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FunctionCall" eSuperTypes="#//AbstractEquation #//AbstractStatement #//BasicValue">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="reference" eType="#//AbstractContent"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="argument" eType="#//Argument"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="functioncallcomment" eType="#//Comment"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Argument">
+    <eOperations name="xFunctionCall" eType="#//FunctionCall">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="return eContainer() instanceof FunctionCall ? (FunctionCall) eContainer() : null;"/>
+      </eAnnotations>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="arguments" upperBound="-1"
+        eType="#//ArgumentEntry" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ArgumentEntry">
+    <eOperations name="xArgument" eType="#//Argument">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="return eContainer() instanceof Argument ? (Argument) eContainer() : null;"/>
+      </eAnnotations>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="expression" eType="#//AbstractExpression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="for_indices" eType="#//ForIndices"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ConnectClause" eSuperTypes="#//AbstractEquation">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="componentreference1" eType="#//Reference"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="componentreference2" eType="#//Reference"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="comment" eType="#//Comment"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Reference" eSuperTypes="#//BasicValue">
+    <eOperations name="xAssignment" eType="#//Assignment">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="return eContainer() instanceof Assignment ? (Assignment) eContainer() : null;"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="xExpression" eType="#//Expression">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="return eContainer() instanceof Expression ? (Expression) eContainer() : null;"/>
+      </eAnnotations>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="reference" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="arraysubscripts" eType="#//ArraySubscript"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="componentreference" eType="#//Reference"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="IfEquation" eSuperTypes="#//AbstractEquation">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="condition" eType="#//Expression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ifequations" upperBound="-1"
+        eType="#//AbstractEquation" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="elseifequations" upperBound="-1"
+        eType="#//ElseIfEquation" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="elseequations" upperBound="-1"
+        eType="#//AbstractEquation" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="comment" eType="#//Comment"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ElseIfEquation">
+    <eOperations name="xEquation" eType="#//AbstractEquation">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="return eContainer() instanceof AbstractEquation ? (AbstractEquation) eContainer() : null;"/>
+      </eAnnotations>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="elseifcondition" eType="#//Expression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="elseifthenequations" upperBound="-1"
+        eType="#//AbstractEquation" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ForEquation" eSuperTypes="#//AbstractEquation">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="forindices" eType="#//ForIndices"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="equations" upperBound="-1"
+        eType="#//AbstractEquation" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="comment" eType="#//Comment"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ForIndices">
+    <eOperations name="xForEquation" eType="#//ForEquation">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="return eContainer() instanceof ForEquation ? (ForEquation) eContainer() : null;"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="xForStatement" eType="#//ForStatement">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="return eContainer() instanceof ForStatement ? (ForStatement) eContainer() : null;"/>
+      </eAnnotations>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="indices" upperBound="-1"
+        eType="#//ForIndex" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ForIndex">
+    <eOperations name="xForIndices" eType="#//ForIndices">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="return (ForIndices) eContainer();"/>
+      </eAnnotations>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="localComponent" eType="#//ComponentName"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="expression" eType="#//AbstractExpression"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="WhenEquation" eSuperTypes="#//AbstractEquation">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="whencondition" eType="#//Expression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="whenequations" upperBound="-1"
+        eType="#//AbstractEquation" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="elsewhenequations" upperBound="-1"
+        eType="#//ElseWhenEquation" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="comment" eType="#//Comment"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ElseWhenEquation">
+    <eOperations name="xEquation" eType="#//AbstractEquation">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="return eContainer() instanceof AbstractEquation ? (AbstractEquation) eContainer() : null;"/>
+      </eAnnotations>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="elsewhencondition" eType="#//Expression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="elsewhenthenequations"
+        upperBound="-1" eType="#//AbstractEquation" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ExpressionList" eSuperTypes="#//BracketExpressionList">
+    <eOperations name="xExpressionListAssignment" eType="#//ExpressionListAssignment">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="return eContainer() instanceof ExpressionListAssignment ? (ExpressionListAssignment) eContainer() : null;"/>
+      </eAnnotations>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="expressions" upperBound="-1"
+        eType="#//AbstractExpression" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RedeclareClass" eSuperTypes="#//AbstractArgument">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="classdefinition" eType="#//AbstractMoClass"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RedeclareComponent" eSuperTypes="#//AbstractArgument">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="connectorprefix" eType="#//ConnectorPrefix"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="timevariabilitytype" eType="#//TimeVariabilityType"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="componentinputoutput" eType="#//InputOrOutputPrefix"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="typespecifier" eType="#//AbstractContent"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="arraysubscripts" eType="#//ArraySubscript"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="modification" eType="#//AbstractModification"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="comment" eType="#//Comment"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RedeclareReplaceable" eSuperTypes="#//AbstractArgument">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="elementreplaceable" eType="#//AbstractReplaceable"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AbstractReplaceable"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Modification" eSuperTypes="#//AbstractModification">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="arguments" upperBound="-1"
+        eType="#//AbstractArgument" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="equalsexpression" eType="#//AbstractExpression"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AbstractArgument">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="each" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="final" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ComponentModification" eSuperTypes="#//AbstractArgument">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="reference" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="modification" eType="#//AbstractModification"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="stringcomment" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ReplaceableClass" eSuperTypes="#//AbstractComponent #//AbstractReplaceable #//AbstractArgument">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="redeclare" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="inner" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="outer" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="modelicaclassdefinition"
+        eType="#//AbstractMoClass" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="reference" eType="#//AbstractContent"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="modification" eType="#//Modification"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="comment" eType="#//Comment"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ReplaceableComponent" eSuperTypes="#//AbstractComponent #//AbstractReplaceable #//AbstractArgument">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="redeclare" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="inner" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="outer" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="connectorprefix" eType="#//ConnectorPrefix"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="timevariabilitytype" eType="#//TimeVariabilityType"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="componentinputoutput" eType="#//InputOrOutputPrefix"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//AbstractContent"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="arraysubscripts" eType="#//ArraySubscript"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="modification" eType="#//AbstractModification"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ifexpression" eType="#//Expression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="comment" eType="#//Comment"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="constrainvalue" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="constraintmodification"
+        eType="#//Modification" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AbstractModification"/>
+  <eClassifiers xsi:type="ecore:EClass" name="EqualsExpression" eSuperTypes="#//AbstractModification">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="expression" eType="#//AbstractExpression"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Annotation" eSuperTypes="#//AbstractComponent">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="modification" eType="#//Modification"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EnumerationList">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="enumerationliterals" upperBound="-1"
+        eType="#//EnumerationLiteral" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EnumerationLiteral">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="componentname" eType="#//ComponentName"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="comment" eType="#//Comment"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Comment">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="stringcomment" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="annotation" eType="#//Annotation"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ArraySubscript">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="subscripts" upperBound="-1"
+        eType="#//Subscript" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Subscript"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Colon" eSuperTypes="#//Subscript">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="colon" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AbstractExpression">
+    <eOperations name="xExpressionList" eType="#//ExpressionList">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="return eContainer() instanceof ExpressionList ? (ExpressionList) eContainer() : null;"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="xAbstractExpression" eType="#//AbstractExpression">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="return eContainer() instanceof AbstractExpression ? (AbstractExpression) eContainer() : null;"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="xAbstractStatement" eType="#//AbstractStatement">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="return eContainer() instanceof AbstractStatement ? (AbstractStatement) eContainer() : null;"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="xElseIfStatement" eType="#//ElseIfStatements">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="return eContainer() instanceof ElseIfStatements ? (ElseIfStatements) eContainer() : null;"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="xElseWhenStatement" eType="#//ElseWhenStatement">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="return eContainer() instanceof ElseWhenStatement ? (ElseWhenStatement) eContainer() : null;"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="xAbstractEquation" eType="#//AbstractEquation">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="return eContainer() instanceof AbstractEquation ? (AbstractEquation) eContainer() : null;"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="xElseIfEquation" eType="#//ElseIfEquation">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="return eContainer() instanceof ElseIfEquation ? (ElseIfEquation) eContainer() : null;"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="xElseWhenEquation" eType="#//ElseWhenEquation">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="return eContainer() instanceof ElseWhenEquation ? (ElseWhenEquation) eContainer() : null;"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="xBasicValue" eType="#//BasicValue">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="return eContainer() instanceof BasicValue ? (BasicValue) eContainer() : null;"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="xArgumentEntry" eType="#//ArgumentEntry">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="return eContainer() instanceof ArgumentEntry ? (ArgumentEntry) eContainer() : null;"/>
+      </eAnnotations>
+    </eOperations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="IfExpression" eSuperTypes="#//Subscript #//AbstractExpression">
+    <eOperations name="xThen" eType="#//AbstractExpression">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="return getThen();"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="xElse" eType="#//AbstractExpression">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="return getElse();"/>
+      </eAnnotations>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="condition" eType="#//AbstractExpression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="then" eType="#//AbstractExpression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="elseifConditions" upperBound="-1"
+        eType="#//AbstractExpression" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="elseifs" upperBound="-1"
+        eType="#//AbstractExpression" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="else" eType="#//AbstractExpression"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Expression" eSuperTypes="#//Subscript #//AbstractExpression">
+    <eOperations name="xEquationExpression" eType="#//EquationExpression">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="return eContainer() instanceof EquationExpression ? (EquationExpression) eContainer() : null;"/>
+      </eAnnotations>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="firstoperator" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="firstvalue" eType="#//BasicValue"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="moreexpressions" upperBound="-1"
+        eType="#//BasicValueWithOperator" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BasicValueWithOperator">
+    <eOperations name="xExpression" eType="#//Expression">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="return eContainer() instanceof Expression ? (Expression) eContainer() : null;"/>
+      </eAnnotations>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="operator" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="prefix" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="#//BasicValue"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AddOpTerm">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="addop" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="term" eType="#//BasicValue"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BasicValue">
+    <eOperations name="xExpression" eType="#//Expression">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="  Container expr = (Container) eContainer();&#xA;&#x9;  while(!(expr instanceof Expression)&amp;&amp;expr!=null){&#xA;&#x9;&#x9;  expr = (Container) expr.eContainer();&#xA;&#x9;  }&#xA;    return (Expression) expr;"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="xBasicValueWithOperator" eType="#//BasicValueWithOperator">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="return eContainer() instanceof BasicValueWithOperator ? (BasicValueWithOperator) eContainer() : null;"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="xBasicValue" eType="#//BasicValue">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="return eContainer() instanceof BasicValue ? (BasicValue) eContainer() : null;"/>
+      </eAnnotations>
+    </eOperations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Boolean" eSuperTypes="#//BasicValue">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="bool" eType="#//BooleanLiteral"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="InitialLiteral" eSuperTypes="#//BasicValue">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="string" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EndLiteral" eSuperTypes="#//BasicValue">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="string" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="StringLiteral" eSuperTypes="#//BasicValue">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="string" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BracketExpressionList" eSuperTypes="#//BasicValue"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SquareBracketExpressionList" eSuperTypes="#//BasicValue">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="expressionlist" upperBound="-1"
+        eType="#//ExpressionList" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Vector"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ExpressionVector" eSuperTypes="#//BasicValue #//Vector">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="list" upperBound="-1" eType="#//AbstractExpression"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MultipleVector" eSuperTypes="#//BasicValue #//Vector">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="vectors" upperBound="-1"
+        eType="#//Vector" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ExpressionsWithForIndices" eSuperTypes="#//BasicValue">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="expressions" upperBound="-1"
+        eType="#//AbstractExpression" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="forindice" eType="#//ForIndices"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NamedArguments" eSuperTypes="#//BasicValue">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="arguments" upperBound="-1"
+        eType="#//NamedArgument" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NamedArgument" eSuperTypes="#//ArgumentEntry">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="reference" eType="#//ComponentName"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="IntegerLiteral" eSuperTypes="#//BasicValue #//NegativeValue">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RealLiteral" eSuperTypes="#//BasicValue #//NegativeValue">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NegativeValue" eSuperTypes="#//BasicValue"/>
+  <eClassifiers xsi:type="ecore:EEnum" name="VisibilityType">
+    <eLiterals name="PUBLIC" literal="public"/>
+    <eLiterals name="PROTECTED" value="1" literal="protected"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ConnectorPrefix">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TimeVariabilityType">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="InputOrOutputPrefix">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="BooleanLiteral">
+    <eLiterals name="FALSE" literal="false"/>
+    <eLiterals name="TRUE" value="1" literal="true"/>
+  </eClassifiers>
+</ecore:EPackage>

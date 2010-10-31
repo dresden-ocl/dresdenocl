@@ -12,7 +12,7 @@ public privileged aspect Class1_DefAspect_testForAllIteratorExp02 {
      * <p>Defines the method testForAllIteratorExp02() defined by the constraint
      * <code>context Class1
      *       def: testForAllIteratorExp02() : Boolean =
-    Set{ 1, 2, 3}->forAll(i1: Integer, i2: Integer | i1 + i2 = 3)</code></p>
+    Set{1, 2, 3}->forAll(i1: Integer, i2: Integer | i1 + i2 = 3)</code></p>
      */
     public Boolean testpackage.Class1.testForAllIteratorExp02( ) {
         java.util.HashSet<Integer> collection1;

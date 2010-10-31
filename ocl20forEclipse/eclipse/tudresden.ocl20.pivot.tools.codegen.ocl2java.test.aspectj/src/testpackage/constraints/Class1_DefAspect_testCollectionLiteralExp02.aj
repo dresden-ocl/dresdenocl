@@ -13,7 +13,7 @@ public privileged aspect Class1_DefAspect_testCollectionLiteralExp02 {
      * <code>context Class1
      *       def: testCollectionLiteralExp02(): 
       Bag(Integer) =
-    Bag { 0 ..2 }</code></p>
+    Bag { 0 .. 2 }</code></p>
      */
     public java.util.List<Integer> testpackage.Class1.testCollectionLiteralExp02( ) {
         java.util.ArrayList<Integer> collection1;

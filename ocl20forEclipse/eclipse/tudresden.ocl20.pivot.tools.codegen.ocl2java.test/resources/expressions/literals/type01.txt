@@ -1,1 +1,1 @@
-testpackage.Class1
+testpackage.Class1.class

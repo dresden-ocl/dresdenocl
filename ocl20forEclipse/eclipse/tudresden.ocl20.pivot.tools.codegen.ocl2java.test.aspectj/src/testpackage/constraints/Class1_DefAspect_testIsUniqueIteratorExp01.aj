@@ -12,7 +12,7 @@ public privileged aspect Class1_DefAspect_testIsUniqueIteratorExp01 {
      * <p>Defines the method testIsUniqueIteratorExp01() defined by the constraint
      * <code>context Class1
      *       def: testIsUniqueIteratorExp01() : Boolean =
-    Set{ 1, 2, 3}->isUnique(i: Integer | i)</code></p>
+    Set{1, 2, 3}->isUnique(i: Integer | i)</code></p>
      */
     public Boolean testpackage.Class1.testIsUniqueIteratorExp01( ) {
         java.util.HashSet<Integer> collection1;

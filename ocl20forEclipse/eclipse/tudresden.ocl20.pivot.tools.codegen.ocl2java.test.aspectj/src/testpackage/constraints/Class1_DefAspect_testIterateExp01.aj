@@ -12,7 +12,7 @@ public privileged aspect Class1_DefAspect_testIterateExp01 {
      * <p>Defines the method testIterateExp01() defined by the constraint
      * <code>context Class1
      *       def: testIterateExp01() : Integer =
-    Set{ 1, 2, 3}->iterate(i: Integer; sum: Integer = 0 | sum + i)</code></p>
+    Set{1, 2, 3}->iterate(i: Integer; sum: Integer = 0 | sum + i)</code></p>
      */
     public Integer testpackage.Class1.testIterateExp01( ) {
         java.util.HashSet<Integer> collection1;

@@ -1,7 +1,7 @@
 Changes and Bugs fixed during the different Releases
 ====================================================
 
-Release 3.0.1 (October, 29th, 2010)
+Release 3.X (Not scheduled yet)
 ===================================
 
 * A Bug in the UML2 Metamodel has been fixed.
@@ -17,6 +17,7 @@ Release 3.0.1 (October, 29th, 2010)
     instroduced anymore.
   - Definitions, Initial and Derived values should now work correctly if fields are 
     accessed directly from other classes.
+  - Type Literals are now transformed correctly in all known contexts.
 
 Tests
 -----

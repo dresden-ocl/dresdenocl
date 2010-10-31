@@ -1,0 +1,1127 @@
+package modelica
+
+-- references can take the form a.b.c
+-- this method will return the reference after the last dot
+-- (in the example this would be c)
+context Reference
+def: rLastReference() : Reference
+     = if componentreference.oclIsUndefined() then self else componentreference.rLastReference() endif
+	 
+-- references can take the form of a.b.c
+-- this method will collect all the contained references
+-- (in the example this would be {a, b, c})
+context Reference
+def: rAllReferences() : Sequence(Reference)
+     = if componentreference.oclIsUndefined() then Sequence { self } else self->asSequence()->union(componentreference.rAllReferences()) endif
+
+context AbstractMoClass
+def: amcIsReplaceable() : Boolean = not xReplaceableClass().oclIsUndefined()
+def: amcContainsConnectorPrefixes() : Boolean
+     = amcCollectConnectorComponents()->size() > 0
+       or amcCollectExtendsClauses().reference.xMoClass()->exists(amcContainsConnectorPrefixes())
+def: amcContainsIOPrefixes() : Boolean
+     = amcCollectIOComponents()->size() > 0
+       or amcCollectExtendsClauses().reference.xMoClass()->exists(amcContainsIOPrefixes())
+
+context AbstractEquation
+def: aeIsInsideWhenEquation() : Boolean
+     = not xElseWhenEquation().oclIsUndefined() or
+       (not xEquation().oclIsUndefined() and 
+        xEquation().oclIsKindOf(WhenEquation)) or
+       (not xEquation().oclIsUndefined() and
+        xEquation().aeIsInsideWhenEquation()) or
+       (not xElseIfEquation().oclIsUndefined() and
+        xElseIfEquation().xEquation().aeIsInsideWhenEquation())
+
+context AbstractStatement
+def: asIsInsideWhenStatement() : Boolean
+     = not xElseWhenStatement().oclIsUndefined() or
+       (not xStatement().oclIsUndefined() and 
+        xStatement().oclIsKindOf(WhenStatement)) or
+       (not xStatement().oclIsUndefined() and
+        xStatement().asIsInsideWhenStatement()) or
+       (not xElseIfStatement().oclIsUndefined() and
+        xElseIfStatement().xIfStatement().asIsInsideWhenStatement())
+
+/* ****************************************************************************
+*                                Subtyping                                    *
+**************************************************************************** */
+
+/*
+A class reference is transitively non-replaceable iff (i.e. “if and only if”):
+• If the class definition is long it is transitively non-replaceable if not
+  declared replaceable.
+• If the class definition is short (i.e. ‘class A=P.B’) it is transitively
+  non-replaceable if it non-replaceable and equal to class reference (“P.B”)
+  that is transitively non-replaceable.
+[... for a hierarchical name all parts of the name must be transitively non-
+ replaceable, i.e. in “extends A.B.C” this implies that A.B.C must be 
+ transitively non-replaceable, as well as A and A.B, with the exception of the
+ “class extends redeclaration mechanism” ...]
+*/
+
+context AbstractMoClass
+def: amcIsTransitivelyNonReplaceable() : Boolean
+     = if (content.oclIsKindOf(AssignmentContent)) then
+        -- short definition
+        -- hierarchischer Name geht verloren                                   
+        content.oclAsType(AssignmentContent).reference.xMoClass().amcIsTransitivelyNonReplaceable()
+       else
+        -- long definition
+        xReplaceableClass().oclIsUndefined()
+       endif
+
+/* TODO
+A component of an interface is default-connectable iff:
+• All of its components are default connectable.
+• A connector component must not be an input.
+  [Otherwise a connection to the input will be missing.]
+• A connector component must not be of an expandable connector class. 
+  The expandable connector does potentially have inputs.]
+• A parameter, constant, or non-connector input must either have a binding
+  equation or all of its subcomponents must have binding equations.
+*/
+
+context AbstractComponent
+def: acIsDefaultConnectable() : Boolean
+     = true
+
+context AbstractContent
+def: acExtendsFromType(type : String) : Boolean
+     = name = type or
+       (oclIsKindOf(AssignmentContent) and oclAsType(AssignmentContent).reference.acExtendsFromType(type)) or
+       acCollectExtendsClauses()->exists(reference.acExtendsFromType(type))
+def: acIsReal()    : Boolean = acExtendsFromType('Real')
+def: acIsInteger() : Boolean = acExtendsFromType('Integer')
+def: acIsBoolean() : Boolean = acExtendsFromType('Boolean')
+def: acIsString()  : Boolean = acExtendsFromType('String')
+def: acIsBaseType(): Boolean
+-- TODO effizienter machen
+     = oclIsKindOf(EnumerationContent) or acIsInteger() or
+       acIsBoolean() or acIsString() or acIsReal()
+
+context AbstractMoClass
+def: amcExtendsFromType(type : String) : Boolean 
+     = content.acExtendsFromType(type)
+def: amcIsReal()    : Boolean = amcExtendsFromType('Real')
+def: amcIsInteger() : Boolean = amcExtendsFromType('Integer')
+def: amcIsBoolean() : Boolean = amcExtendsFromType('Boolean')
+def: amcIsString()  : Boolean = amcExtendsFromType('String')
+def: amcIsBaseType(): Boolean = content.acIsBaseType()
+
+/*
+A is subtype of the type of B, iff [intuitively all important elements of B must
+be present in A]:
+• A is a class if and only if B is a class (and thus: A is a component if and
+  only if B is a component).
+• If B is not replaceable then A may not be replaceable.
+• If B is transitively non-replaceable then A must be transitively non-
+  replaceable (Section 6.2.1). For all elements of the inheritance interface of 
+  B there must exist a compatible element with the same name and visibility in 
+  the inheritance interface of A. The interface of A may not contain any other
+  elements. [We might even extend this to say that A and B should have the same 
+  contents, as in the additional restrictions below.]
+• If B is replaceable then for all elements of the component interface of B there must exist a plug-compatible
+  element with the same name in the component interface of A.
+• If B is neither transitively non-replaceable nor replaceable then A must be linked to the same class, and for
+  all elements of the component interface of B there must thus exist a plug-compatible element with the same
+  name in the component interface of A.
+• Additional restrictions on the additional information. These elements should either match or have a natural
+  total order:
+  o If B is a non-replaceable long class definition A must also be a long class definition.
+  o The flow-or stream-prefix should be matched for compatibility.
+  o Variability is ordered constant< parameter< discrete< (no prefix: continuous-time for Real), and
+    A is only compatible with B if the declared variability in A is less than or equal the variability in
+    B. For a redeclaration of an element the variability prefix is as default inherited by the
+    redeclaration (i.e. no need to repeat ‘parameter’ when redeclaring a parameter).
+  o The input and output prefixes must be matched. This ensures that the rules regarding
+    inputs/outputs for matching connectors and (non-connector inputs) are preserved, as well as the
+    restriction on blocks. For a redeclaration of an element the input or output prefix is inherited
+    from the original declaration.
+  o The inner and/or outer prefixes should be matched. For a redeclaration of an element the inner
+    and/or outer prefixes are inherited from the original declaration (since it is not possible to have
+    inner and/or outer as part of a redeclare).
+  o If B is final A must also be final and have the same semantic contents.
+  o The number of array dimensions in A and B must be matched. Furthermore the following must
+    be valid for each array dimension: either the array size in B is unspecified (“:”) or the content of
+    the array dimension in A is identical to the one in B.
+  o Conditional components are only compatible with conditional components. The conditions must
+    have equivalent contents (similar as array sizes – except there is no “:” for conditional
+    components). For a redeclaration of an element the conditional part is inherited from the
+    original.
+  o A function class is only compatible with a function class, a package class only compatible with a
+    package class, a connector class only with a connector class, a model or block class only
+    compatible with a model or block class, and a type or record class only compatible with a type or
+    record class.
+  o If B is an enumeration type A must also be an enumeration type and vice versa. If B is an
+    enumeration type not defined as (:) then A must have the same enumeration literals in the same
+    order.
+  o If B is a built-in type then A must also be of the same built-in type and vice versa.
+*/
+
+-- If B is an enumeration type A must also be an enumeration type and vice
+-- versa. If B is an enumeration type not defined as (:) then A must have the
+-- same enumeration literals in the same order.
+-- what about B = (lit1,lit2), A = (lit1,lit2,lit3)?
+-- design decision: A must not only have the same literals in the same order as
+-- B, it also must not contain any additional literals
+context EnumerationContent
+def: ecIsSubtypeOf(B : EnumerationContent) : Boolean =
+let ANames : Sequence(String) = 
+             enumlist.enumerationliterals.componentname.name->asSequence(),
+    BNames : Sequence(String) =
+             B.enumlist.enumerationliterals.componentname.name->asSequence()
+in B.enumlist.oclIsUndefined() or
+   (BNames->forAll(n | ANames->includes(n) and 
+                       BNames->indexOf(n) = ANames->indexOf(n))
+    and BNames->size() = ANames->size())
+
+
+context AbstractMoClass
+def: amcIsSupertypeOf(A : AbstractMoClass) : Boolean
+     = true
+
+context AbstractMoClass
+def: amcIsSubtypeOf(B : AbstractMoClass) : Boolean
+     = B.amcIsSupertypeOf(self)
+
+/*
+An interface A is plug-compatible with (a restricted subtype of) an interface B
+(or the constraining interface of B) iff:
+• A is compatible with (subtype of) B.
+• All public components present in A but not in B must be default-connectable
+  (as defined below).
+*/
+
+context AbstractMoClass
+def: amcIsPlugCompatible(B : AbstractMoClass) : Boolean
+     = B.amcIsSupertypeOf(self) -- TODO
+
+/*
+Two types T1 and T2 are equivalent if they have the same named public elements
+and if the maximally expanded types of corresponding elements are the same. The
+elements of these types can be either variables or local classes. This can
+be expressed more formally as follows:
+- T1 and T2 denote the same primitive type
+- T1 and T2 are classes containing the same public declaration elements
+  (according to their variable names for variables and class names for
+  local classes). The types of corresponding elements with the same names in T1
+  and T2 need to be equivalent.
+*/
+context AbstractMoClass
+def: amcIsTypeEquivalent(class : AbstractMoClass) : Boolean
+     = true
+
+/* *****************************************************************************
+*
+***************************************************************************** */
+
+context AbstractMoClass
+def: amcContainsOnlyReal() : Boolean
+= amcIsReal() or ((not amcIsBaseType()) and 
+  if (content.oclIsKindOf(AssignmentContent)) then
+   content.oclAsType(AssignmentContent).reference.xMoClass().
+                                                  amcContainsOnlyReal()
+  else
+   if (content.oclIsKindOf(CommonContent)) then
+    let c : CommonContent = content.oclAsType(CommonContent),
+        pc: Collection(Component) = c.xBody().bCollectPublicComponents(),
+        ex: Collection(ExtendsClause) = c.xBody().bCollectExtendsClauses()
+    in pc->forAll(type.xMoClass().amcContainsOnlyReal()) and
+       ex->forAll(reference.xMoClass().amcContainsOnlyReal())
+   else
+    false
+   endif
+  endif)
+
+/* ****************************************************************************
+*  Helper method to check if an equation can be used inside a when equation   *
+**************************************************************************** */
+
+context AbstractEquation
+def: aeIsSuitableForWhenEquation() : Boolean
+     = if (oclIsKindOf(FunctionCall)) then oclAsType(FunctionCall).fcIsSuitableForWhenEquation() else
+        if (oclIsKindOf(EquationExpression)) then oclAsType(EquationExpression).eeIsSuitableForWhenEquation() else
+         if (oclIsKindOf(ForEquation)) then oclAsType(ForEquation).equations->forAll(aeIsSuitableForWhenEquation()) else
+          if (oclIsKindOf(IfEquation)) then
+           let ifEq : IfEquation = oclAsType(IfEquation) in
+           ifEq.ifequations->forAll(aeIsSuitableForWhenEquation())
+           and ifEq.elseequations->forAll(aeIsSuitableForWhenEquation())
+           and ifEq.elseifequations.elseifthenequations->flatten()->forAll(aeIsSuitableForWhenEquation())
+           else false
+          endif
+         endif
+        endif
+       endif
+
+/* ****************************************************************************
+*          Collecting references in when-equations                            *
+**************************************************************************** */
+
+-- inside when equations ExpressionList contain references directly, so no
+-- recursion is necessary
+context ExpressionList
+def: elCollectReferences() : Set(String)
+     = expressions->select(aeIsAReference()).oclAsType(Expression).firstvalue.oclAsType(Reference).rName->asSet()
+
+-- inside when equations expressions (on the left-hand-side) are either
+-- a reference or an expression list of references
+context Expression
+def: expCollectReferences() : Set(String)
+     = if (eIsAReference()) then
+	    firstvalue.oclAsType(Reference).rName->asSet()
+       else
+        if firstvalue.oclIsKindOf(ExpressionList) then
+         firstvalue.oclAsType(ExpressionList).elCollectReferences()
+        else Set {}
+        endif
+       endif
+
+context AbstractEquation
+def: aeqCollectReferences() : Set(String)
+     = if oclIsKindOf(EquationExpression) then
+	    oclAsType(EquationExpression).leftexpression.expCollectReferences() else
+		if oclIsKindOf(ForEquation) then
+		 oclAsType(ForEquation).equations->iterate(eq : AbstractEquation; resultSet : Set(String) = Set {} | resultSet->union(eq.aeqCollectReferences())) else
+		 if oclIsKindOf(IfEquation) then
+		  let ifEq     : IfEquation = oclAsType(IfEquation) in
+		  let ifSet    : Set(String) = ifEq.ifequations->iterate(eq : AbstractEquation; resultSet : Set(String) = Set {} | resultSet->union(eq.aeqCollectReferences())) in
+		  let elseSet  : Set(String) = ifEq.elseequations->iterate(eq : AbstractEquation; resultSet : Set(String) = Set {} | resultSet->union(eq.aeqCollectReferences())) in
+		  let elseifSet: Set(String) = ifEq.elseifequations.elseifthenequations->flatten().aeqCollectReferences()->asSet()
+		  in ifSet->union(elseSet->union(elseifSet))
+		 else
+		  Set{}
+		 endif
+		endif
+	   endif
+
+-- sammelt alle when equations, die in einer Gleichung enthalten sind
+context AbstractEquation
+def: aeCollectWhenEquations() : Sequence(WhenEquation)
+     =  if oclIsKindOf(WhenEquation) then
+         oclAsType(WhenEquation)->asSequence()
+        else
+         if oclIsKindOf(ForEquation) then
+          oclAsType(ForEquation).equations->iterate(ae : AbstractEquation;
+                                   whens : Sequence(WhenEquation) = Sequence{} |
+                                   whens->union(ae.aeCollectWhenEquations()))
+         else
+          if oclIsKindOf(IfEquation) then
+           let ifeq : IfEquation = oclAsType(IfEquation),
+              eqs : Sequence(AbstractEquation) =
+                    ifeq.elseifequations->iterate(eiEq : ElseIfEquation;
+                    result : Sequence(AbstractEquation) = ifeq.ifequations->
+                         asSequence()->union(ifeq.elseequations->asSequence()) |
+                    result->union(eiEq.elseifthenequations->asSequence()))
+           in eqs->iterate(ae : AbstractEquation;
+                          result : Sequence(WhenEquation) = Sequence{} |
+                          result->union(ae.aeCollectWhenEquations()))
+          else
+           Sequence{}
+          endif
+         endif
+        endif
+
+-- sammelt alle when equations, die in einer Gleichungsumgebung enthalten sind
+context EquationSection
+def: esCollectWhenEquations() : Sequence(WhenEquation)
+     = equations->iterate(ae : AbstractEquation;
+                          result : Sequence(WhenEquation) = Sequence{} |
+                          result->union(ae.aeCollectWhenEquations()))
+
+context AbstractEquation
+def: aeIsContainedInWhenEquation() : Boolean
+     = if (not xElseWhenEquation().oclIsUndefined()) or xEquation().oclIsKindOf(WhenEquation) then
+        true
+       else
+        if (not xElseIfEquation().oclIsUndefined()) then
+         xElseIfEquation().xEquation().aeIsContainedInWhenEquation()
+        else
+         if not xEquation().oclIsUndefined() then
+          xEquation().aeIsContainedInWhenEquation()
+         else
+          false
+         endif
+        endif
+       endif
+
+-- navigate the AST to the next WhenEquation
+context AbstractEquation
+def: aeNavToWhenEquation() : WhenEquation
+     = if oclIsKindOf(WhenEquation) then
+        oclAsType(WhenEquation)
+       else
+        if not xElseWhenEquation().oclIsUndefined() then
+         -- TODO Typ im Xtend anpassen
+         xElseWhenEquation().xEquation().oclAsType(WhenEquation)
+        else
+         if not xElseIfEquation().oclIsUndefined() then
+          xElseIfEquation().xEquation().aeNavToWhenEquation()
+         else
+          if not xEquation().oclIsUndefined() then
+           xEquation().aeNavToWhenEquation()
+          else
+           null
+          endif
+         endif
+        endif
+       endif
+
+-- navigate the AST to the next WhenEquation
+context Reference
+def: rNavToWhenEquation() : WhenEquation
+     = rNavToEquationExpression().aeNavToWhenEquation()
+
+context Reference
+def: rIsInWhenEqAssignment() : Boolean
+     = rIsLeftInEquationExpression() and 
+       rNavToEquationExpression().aeIsContainedInWhenEquation()
+
+context EquationExpression
+def: eeCollectAssignmentReferences() : Sequence(ComponentName)
+     = let exp : Expression = leftexpression
+       in if exp.eIsAReference() then
+        exp.firstvalue.oclAsType(Reference).reference.oclAsType(ComponentName)->asSequence()
+       else
+        -- iterate over all expressions in the list
+        exp.firstvalue.oclAsType(ExpressionList).expressions->
+        -- select the reference expressions
+        select(aeIsAReference()).oclAsType(Expression).firstvalue.
+        -- and navigate to the ComponentName
+        oclAsType(Reference).reference.oclAsType(ComponentName)->asSequence()
+       endif
+
+context AbstractEquation
+def: aeCollectAssignmentReferences() : Sequence(ComponentName)
+     = if oclIsKindOf(EquationExpression) then
+        oclAsType(EquationExpression).eeCollectAssignmentReferences()
+       else
+        if oclIsKindOf(ForEquation) then
+         oclAsType(ForEquation).equations->iterate(
+          ae : AbstractEquation; result : Sequence(ComponentName) = Sequence{} |
+          result->union(ae.aeCollectAssignmentReferences())
+         )
+        else
+         if oclIsKindOf(IfEquation) then
+          let ie  : IfEquation = oclAsType(IfEquation),
+              eqs1: Sequence(AbstractEquation) = 
+                    ie.ifequations->union(ie.elseequations)->asSequence(),
+              eqs2: Sequence(AbstractEquation) = 
+                    ie.elseifequations->iterate(eie : ElseIfEquation;
+                           result : Sequence(AbstractEquation) = Sequence{} |
+                           result->union(eie.elseifthenequations->asSequence())
+                    )
+          in eqs1->union(eqs2)->iterate(
+               ae : AbstractEquation;
+               result : Sequence(ComponentName) = Sequence{} |
+               result->union(ae.aeCollectAssignmentReferences())
+             )
+         else
+          Sequence{}
+         endif
+        endif
+       endif
+
+context WhenEquation
+def: weCollectAssignmentReferences() : Sequence(ComponentName)
+           -- first collect all equations in else branches
+     = let elseequations : Sequence(AbstractEquation) =
+           elsewhenequations->iterate(ewe : ElseWhenEquation;
+                 result : Sequence(AbstractEquation) = Sequence{} |
+                 result->union(ewe.elsewhenthenequations->asSequence())),
+           -- merge them with the then branch equations
+           allequations : Sequence(AbstractEquation) =
+                          whenequations->asSequence()->union(elseequations)
+          -- collect all assignment references
+       in allequations->iterate(ae : AbstractEquation;
+                          refs: Sequence(ComponentName) = Sequence{} |
+                          refs->union(ae.aeCollectAssignmentReferences()))
+
+-- checks whether the given reference is assigned a value 
+-- in a when equation, which is different from the given one
+-- this is done recursively on all derived equations
+-- remembers visited nodes to avoid endless loop
+context AbstractContent
+def: containsWhenAssignment_internal(ref: ComponentName, exclude: WhenEquation, visited: Set(AbstractContent))
+   : Boolean
+   = let extends : Collection(ExtendsClause) = acCollectExtendsClauses(),
+         eqSecs  : Collection(EquationSection) = acBodyElements()->select(
+                       oclIsKindOf(EquationSection)).oclAsType(EquationSection),
+         wheneqs0: Sequence(WhenEquation) = 
+                   eqSecs->iterate(es : EquationSection;
+                                   whens : Sequence(WhenEquation) = Sequence{} |
+                                   whens->union(es.esCollectWhenEquations())),
+         wheneqs : Collection(WhenEquation) = if not exclude.oclIsUndefined()
+                                              then wheneqs0->excluding(exclude)
+                                              else wheneqs0 endif,
+         assigns : Collection(ComponentName) =
+                   wheneqs->iterate(weq : WhenEquation;
+                                    result : Sequence(ComponentName) = Sequence{} |
+                                    result->union(weq.weCollectAssignmentReferences())),
+         comps   : Collection(Component) = acCollectAbstractComponents()->select(oclIsKindOf(Component)).oclAsType(Component)
+        -- inspect when equations to see whether they assign a value to ref
+     in not visited->includes(self) and (assigns->includes(ref) or 
+        -- if they do not, inspect components, update visited to avoid endless loop
+        -- which can happen if A contains elements of type B and vice versa
+        comps.type->exists(containsWhenAssignment_internal(ref, exclude, visited->including(self))) or
+        -- and then inspect all super classes
+        extends->exists(reference.containsWhenAssignment_internal(ref, exclude, visited->including(self))))
+
+-- checks whether the given reference is assigned a value 
+-- in a when equation, which is different from the given one
+-- this is done recursively on all derived equations
+context AbstractContent
+def: containsWhenAssignment(ref : ComponentName, exclude : WhenEquation)
+   : Boolean = containsWhenAssignment_internal(ref,exclude,Set{})
+
+/*
+   = let extends : Collection(ExtendsClause) = acCollectExtendsClauses(),
+         eqSecs  : Collection(EquationSection) = acBodyElements()->select(
+                       oclIsKindOf(EquationSection)).oclAsType(EquationSection),
+         wheneqs : Collection(WhenEquation) = 
+                   eqSecs->iterate(es : EquationSection;
+                                   whens : Sequence(WhenEquation) = Sequence{} |
+                                   whens->union(es.esCollectWhenEquations()))
+                   ->excluding(exclude),
+         assigns : Collection(ComponentName) =
+                   wheneqs->iterate(weq : WhenEquation;
+                                    result : Sequence(ComponentName) = Sequence{} |
+                                    result->union(weq.weCollectAssignmentReferences())),
+         comps   : Collection(Component) = acCollectAbstractComponents()->select(oclIsKindOf(Component)).oclAsType(Component)
+        -- inspect when equations to see whether they assign a value to ref
+     in assigns->includes(ref) or 
+        -- if they do not, inspect components
+        comps.type->exists(containsWhenAssignment(ref, exclude)) or
+        -- and then inspect all super classes
+        extends->exists(reference.containsWhenAssignment(ref, exclude))
+*/  
+/* ****************************************************************************
+*                        Statement helper methods                             *
+**************************************************************************** */
+
+context AbstractStatement
+def: navToAlgorithmSection() : AlgorithmSection
+     = if not xAlgorithmSection().oclIsUndefined() then
+        xAlgorithmSection()
+       else
+        if not xStatement().oclIsUndefined() then
+         xStatement().navToAlgorithmSection()
+        else
+         if not xElseIfStatement().oclIsUndefined() then
+          xElseIfStatement().xIfStatement().navToAlgorithmSection()
+         else
+          xElseWhenStatement().xWhenStatement().navToAlgorithmSection()
+         endif
+        endif
+       endif
+def: asNavToClass() : AbstractMoClass
+     = navToAlgorithmSection().xBody().xContent().xMoClass()
+
+/* ****************************************************************************
+*                         Equation helper methods                             *
+**************************************************************************** */
+	 
+context AbstractEquation
+def: navToEquationSection() : EquationSection
+     = if not xEquationSection().oclIsUndefined() then xEquationSection() else
+	    if not xEquation().oclIsUndefined() then xEquation().navToEquationSection() else
+		 if not xElseIfEquation().oclIsUndefined() then xElseIfEquation().xEquation().navToEquationSection()
+		 else
+		  xElseWhenEquation().xEquation().navToEquationSection()
+		 endif
+		endif
+	   endif
+def: aeNavToClass() : AbstractMoClass
+     = navToEquationSection().xBody().xContent().xMoClass()
+/* ****************************************************************************
+*                   No input assignment helper methods                        *
+**************************************************************************** */
+
+context VisibilityComponentsSection
+def: vcsCollectInputNames() : Set(String)
+     = components->iterate(ac : AbstractComponent; resultSet : Set(String) = Set{} | if ac.oclIsKindOf(Component) and ac.oclAsType(Component).componentinputoutput.isInput() then resultSet->union(ac.oclAsType(Component).componentnames.name->asSet()) else resultSet endif)
+
+context AbstractMoClass
+def: amcCollectInputNames() : Set(String)
+     = let b : Body = if content.oclIsKindOf(CommonContent) then content.oclAsType(CommonContent).xBody() else content.oclAsType(ExtensionContent).xBody() endif in
+	   let implicitPublic : Set(String) = if b.oclIsUndefined() then Set{} else b.bodyelements->iterate(ab : AbstractBodyElements; resultSet : Set(String) = Set{} | if ab.oclIsKindOf(Component) and ab.oclAsType(Component).componentinputoutput.isInput() then resultSet->union(ab.oclAsType(Component).componentnames.name->asSet()) else resultSet endif) endif in
+	   let explicitPublic : Set(String) = if b.oclIsUndefined() then Set{} else b.bodyelements->iterate(ab : AbstractBodyElements; resultSet : Set(String) = Set{} | if ab.oclIsKindOf(VisibilityComponentsSection) and ab.oclAsType(VisibilityComponentsSection).visibilitytype = VisibilityType::PUBLIC then resultSet->union(ab.oclAsType(VisibilityComponentsSection).vcsCollectInputNames()) else resultSet endif) endif in
+	   let derived : Set(String) = if b.oclIsUndefined() then Set{} else b.bodyelements->iterate(ab : AbstractBodyElements; resultSet : Set(String) = Set{} | if ab.oclIsKindOf(ExtendsClause) and not ab.oclAsType(ExtendsClause).reference.oclIsUndefined() then resultSet->union(ab.oclAsType(ExtendsClause).reference.xMoClass().amcCollectInputNames()) else resultSet endif) endif
+	   in implicitPublic->union(explicitPublic)->union(derived)
+
+context Reference
+def: isInAssignment() : Boolean
+	 = let ela : ExpressionListAssignment = xExpression().xExpressionList().xExpressionListAssignment()
+	   in (not xAssignment().oclIsUndefined()) or ((not ela.oclIsInvalid()) and (not ela.oclIsUndefined()))
+	   
+context Reference
+def: navToAssignment() : AbstractStatement
+     = let ass : Assignment = xAssignment()
+	   in if not ass.oclIsUndefined() then ass else xExpression().xExpressionList().xExpressionListAssignment() endif
+
+/* ****************************************************************************
+*                 Break Statement in loop helper method                       *
+**************************************************************************** */
+	   
+context AbstractStatement
+def: isInsideLoop() : Boolean
+     = oclIsKindOf(WhileStatement) or oclIsKindOf(ForStatement) or
+	   (
+	    if not xStatement().oclIsUndefined() then xStatement().isInsideLoop() else
+		 if not xElseIfStatement().oclIsUndefined() then xElseIfStatement().xIfStatement().isInsideLoop() else
+		  --could be inside when statement, but when statements cannot be inside loops
+		  false
+		 endif
+		endif
+	   )
+	   
+/* ****************************************************************************
+*                  Connector no equations helper method                       *
+**************************************************************************** */
+	   
+context AbstractMoClass
+def: amcIsContainedInConnector() : Boolean
+     = oclIsKindOf(MoConnector) or ((not xContainerClass().oclIsUndefined()) and xContainerClass().amcIsContainedInConnector())
+
+/* ****************************************************************************
+*              Time Variability helper methods for expressions                *
+**************************************************************************** */
+
+-- TODO isDiscrete
+-- TODO isConstant
+
+context Reference
+def: rIsConstantExpression() : Boolean
+     = reference.oclIsKindOf(EnumerationContent) or
+	   let name: ComponentName = reference.oclAsType(ComponentName),
+		   comp: Component = name.xComponent()
+		   -- TODO funktioniert das auch im Fall von Modifikationen?
+	   in comp.timevariabilitytype.value = 'constant'
+
+context Reference
+def: rIsParameterExpression() : Boolean
+     = reference.oclIsKindOf(EnumerationContent) or
+	   let name: ComponentName = reference.oclAsType(ComponentName),
+		   comp: Component = name.xComponent() in
+		   -- TODO funktioniert das auch im Fall von Modifikationen?
+	   comp.timevariabilitytype.value = 'constant' or comp.timevariabilitytype.value = 'parameter'
+
+context AbstractExpression
+def: aeIsParameterExpression() : Boolean
+     = if oclIsKindOf(IfExpression) then
+	    let ifExp : IfExpression = oclAsType(IfExpression) in
+		ifExp.condition.aeIsParameterExpression() and ifExp.xThen().aeIsParameterExpression() and
+		ifExp.elseifConditions->forAll(aeIsParameterExpression()) and ifExp.elseifs->forAll(aeIsParameterExpression()) and
+		ifExp.xElse().aeIsParameterExpression()
+	   else
+	    let exp : Expression = oclAsType(Expression),
+		    vals: Collection(BasicValue) = exp.firstvalue->asSequence()->union(exp.moreexpressions.value)
+		-- the following tests if a BasicValue is a parameter expression
+		-- conceptually this should be an extra method
+		-- but no forward usage is allowed
+		in vals->forAll(
+		 if oclIsKindOf(ExpressionList) then oclAsType(ExpressionList).expressions->forAll(aeIsParameterExpression()) else
+		  if oclIsKindOf(Reference) then
+		   let ref : Reference = oclAsType(Reference) in
+		   ref.rIsParameterExpression()
+		  else
+		   if oclIsKindOf(FunctionCall) then
+		    let fc : FunctionCall = oclAsType(FunctionCall) in
+			fc.argument.arguments.expression->forAll(aeIsParameterExpression())
+		   else
+		    if oclIsKindOf(SquareBracketExpressionList) then
+			 oclAsType(SquareBracketExpressionList).expressionlist.expressions->forAll(aeIsParameterExpression())
+			else
+			 -- the remaining BasicValue types are literals and therefor constant
+			 -- (except ModificationArguments, but these are not expected in
+			 -- the context where this is used)
+			 true
+			endif
+		   endif
+		  endif
+		 endif
+		)
+	   endif
+
+/* ****************************************************************************
+*       Helper methods to look for reinit in algorithms and equations         *
+**************************************************************************** */
+
+context AbstractExpression
+def: aeNavToTopmostAbstractExpression() : AbstractExpression
+     = if not (xAbstractStatement().oclIsUndefined() and 
+               xElseIfStatement().oclIsUndefined() and 
+               xElseWhenStatement().oclIsUndefined() and
+               xAbstractEquation().oclIsUndefined() and 
+               xElseIfEquation().oclIsUndefined() and 
+               xElseWhenEquation().oclIsUndefined())
+       then self
+       else
+        let b : BasicValue =
+            if not xArgumentEntry().oclIsUndefined() then
+             xArgumentEntry().xArgument().xFunctionCall()
+            else
+             -- case: SquareBracketExpressionList 
+             if not (xBasicValue().xBasicValue().oclIsInvalid() or xBasicValue().xBasicValue().oclIsUndefined()) then
+              xBasicValue().xBasicValue()
+             else
+              xBasicValue()
+             endif
+            endif
+        in if not b.xBasicValueWithOperator().oclIsUndefined() then
+            b.xBasicValueWithOperator().xExpression().aeNavToTopmostAbstractExpression()
+           else
+            b.xExpression().aeNavToTopmostAbstractExpression()
+           endif
+       endif
+def: expNavToClass() : AbstractMoClass
+     = let top : AbstractExpression = aeNavToTopmostAbstractExpression()
+       in if not top.xAbstractStatement().oclIsUndefined() then
+        top.xAbstractStatement().asNavToClass()
+       else
+        if not top.xElseIfStatement().oclIsUndefined() then
+         top.xElseIfStatement().xIfStatement().asNavToClass()
+        else
+         if not top.xElseWhenStatement().oclIsUndefined() then
+          top.xElseWhenStatement().xWhenStatement().asNavToClass()
+         else
+          if not top.xAbstractEquation().oclIsUndefined() then
+           top.xAbstractEquation().aeNavToClass()
+          else
+           if not top.xElseIfEquation().oclIsUndefined() then
+            top.xElseIfEquation().xEquation().aeNavToClass()
+           else
+            if not top.xElseWhenEquation().oclIsUndefined() then
+             top.xElseWhenEquation().xEquation().aeNavToClass()
+            else
+             null
+            endif
+           endif
+          endif
+         endif
+        endif
+       endif
+
+context BasicValue
+def: bvNavToClass() : AbstractMoClass
+     = if not xBasicValue().oclIsUndefined() then
+        xBasicValue().bvNavToClass()
+       else
+        if not xBasicValueWithOperator().oclIsUndefined() then
+         xBasicValueWithOperator().xExpression().expNavToClass()
+        else
+         xExpression().expNavToClass()
+        endif
+       endif
+
+context FunctionCall
+def: fcIsEquation() : Boolean
+     = not (xEquationSection().oclIsUndefined() and xEquation().oclIsUndefined()
+            and xElseWhenEquation().oclIsUndefined()
+            and xElseIfEquation().oclIsUndefined())
+def: fcIsStatement() : Boolean
+     = not (xAlgorithmSection().oclIsUndefined() and
+            xStatement().oclIsUndefined() and 
+            xElseWhenStatement().oclIsUndefined() and
+            xElseIfStatement().oclIsUndefined())
+-- navigate to the containing AbstractContent
+def: fcNavToAbstractContent() : AbstractContent
+     = if fcIsStatement() then
+        asNavToClass().content
+       else
+        if fcIsEquation() then
+         aeNavToClass().content
+        else -- is a BasicValue inside a complex Expression
+         bvNavToClass().content
+        endif
+       endif
+-- checks whether the function call is actually the reinit operator
+-- applied to the given reference
+def: fcIsReinitFor(ref : Reference) : Boolean
+       -- first argument for reinit must be a reference
+     = let arg : Reference = argument.arguments->first().expression.
+                 oclAsType(Expression).firstvalue.oclAsType(Reference)
+       in reference.name = 'reinit' and arg.reference = ref.reference and
+          ref.arraysubscripts.subscripts = arg.arraysubscripts.subscripts
+
+
+-- traverse the equation tree and count all applications of the reinit
+-- operator on the given Reference
+context AbstractEquation
+def: aeCountReinit(ref: Reference) : Integer
+     = if oclIsKindOf(FunctionCall) then
+        if oclAsType(FunctionCall).fcIsReinitFor(ref) then
+         1
+        else
+         0
+        endif
+       else
+        if oclIsKindOf(ForEquation) then
+         oclAsType(ForEquation).equations.aeCountReinit(ref)->sum()
+        else
+         if oclIsKindOf(IfEquation) then
+          let ie : IfEquation = oclAsType(IfEquation)
+          in ie.ifequations.aeCountReinit(ref)->sum() +
+             ie.elseequations.aeCountReinit(ref)->sum() +
+             ie.elseifequations.elseifthenequations->flatten().
+                aeCountReinit(ref)->sum()
+         else
+          if oclIsKindOf(WhenEquation) then
+           let we : WhenEquation = oclAsType(WhenEquation)
+           in we.whenequations.aeCountReinit(ref)->sum() +
+              we.elsewhenequations.elsewhenthenequations->flatten().
+                 aeCountReinit(ref)->sum()
+          else -- EquationExpression, ConnectClause
+           0
+          endif
+         endif
+        endif
+       endif
+-- traverse the equation tree and count all applications of the reinit
+-- operator on the given Reference
+context EquationSection
+def: esCountReinit(ref: Reference) : Integer
+     = equations.aeCountReinit(ref)->sum()
+
+-- traverse the statement tree and count all applications of the reinit
+-- operator on the given reference
+context AbstractStatement
+def: asCountReinit(ref: Reference) : Integer
+     = if oclIsKindOf(FunctionCall) then
+        if oclAsType(FunctionCall).fcIsReinitFor(ref) then
+         1
+        else
+         0
+        endif
+       else
+        if oclIsKindOf(ForStatement) then
+         oclAsType(ForStatement).statements.asCountReinit(ref)->sum()
+        else
+         if oclIsKindOf(IfStatement) then
+          let ie : IfStatement = oclAsType(IfStatement)
+          in ie.thenstatements.asCountReinit(ref)->sum() +
+             ie.elsestatements.asCountReinit(ref)->sum() +
+             ie.elseifstatements.elseifstatements->flatten().
+                asCountReinit(ref)->sum()
+         else
+          if oclIsKindOf(WhenStatement) then
+           let we : WhenStatement = oclAsType(WhenStatement)
+           in we.whenstatements.asCountReinit(ref)->sum() +
+              we.elsewhenstatements.elsewhenstatements->flatten().
+                 asCountReinit(ref)->sum()
+          else
+           if oclIsKindOf(WhileStatement) then
+            oclAsType(WhileStatement).statements.asCountReinit(ref)->sum()
+           else -- ExpressionListAssignment, BreakStatement, 
+            0   -- ReturnStatement, Assignment
+           endif
+          endif
+         endif
+        endif
+       endif
+
+-- traverse the statement tree and count all applications of the reinit
+-- operator on the given reference
+context AlgorithmSection
+def: algsecCountReinit(ref: Reference) : Integer
+     = statements.asCountReinit(ref)->sum()
+
+context AbstractContent
+-- count all reinit applications to the given reference in equations
+def: acCountReinitInEquations(ref: Reference) : Integer
+   = let extends : Collection(ExtendsClause) = acCollectExtendsClauses(),
+         eqSecs  : Collection(EquationSection) = acBodyElements()->select(
+                    oclIsKindOf(EquationSection)).oclAsType(EquationSection)
+     in eqSecs.esCountReinit(ref)->sum() +
+        extends.reference.acCountReinitInEquations(ref)->sum()
+-- count all reinit applications to the given reference in algorithms
+def: acCountReinitInAlgorithms(ref: Reference) : Integer
+   = let extends : Collection(ExtendsClause) = acCollectExtendsClauses(),
+         algSecs : Collection(AlgorithmSection) = acBodyElements()->select(
+                    oclIsKindOf(AlgorithmSection)).oclAsType(AlgorithmSection)
+     in algSecs.algsecCountReinit(ref)->sum() +
+        extends.reference.acCountReinitInAlgorithms(ref)->sum()
+def: acWellFormedReinitFor(ref : Reference) : Boolean
+   = let refContainer : AbstractContent = 
+         ref.reference.oclAsType(ComponentName).xComponent().xBody().xContent(),
+         numEq  : Integer = if refContainer <> self then
+                             acCountReinitInEquations(ref) + 
+                             refContainer.acCountReinitInEquations(ref)
+                            else acCountReinitInEquations(ref) endif,
+         numAlg1: Integer = acCountReinitInAlgorithms(ref),
+         numAlg2: Integer = if refContainer <> self then 
+                             refContainer.acCountReinitInAlgorithms(ref)
+                            else 0 endif
+         in (numEq = 1 and numAlg1 + numAlg2 = 0) or
+            numEq + numAlg1 = 0 or numEq + numAlg2 = 0
+
+/* ****************************************************************************
+*           Helper methods for condition checking on operator pre()           *
+**************************************************************************** */
+
+context Reference
+def: rIsDiscrete() : Boolean =
+     let comp   : Component = reference.oclAsType(ComponentName).xComponent(),
+         t      : TimeVariabilityType = comp.timevariabilitytype,
+         tExists: Boolean = not t.oclIsUndefined() and 
+                            not t.value.oclIsUndefined(),
+         tIsDisc: Boolean = tExists and (t.value = 'parameter' or 
+                                  t.value = 'constant' or t.value = 'discrete'),
+         content: AbstractContent = comp.type
+        -- Parameter expressions
+     in tIsDisc or
+        -- Discrete-time variables, i.e., Integer, Boolean, String variables and enumeration variables
+        content.acIsInteger() or content.acIsBoolean() or content.acIsString() or
+        content.oclIsKindOf(EnumerationContent) or
+        -- as well as Real variables assigned in when-clauses
+        -- TODO containsWhenAssignment is only defined for equations
+        (content.acIsReal() and bvNavToClass().content.containsWhenAssignment(reference.oclAsType(ComponentName), null))
+
+-- TODO potential for more efficiency here 
+--      (stop evaluation if an element is defined, but not inside when)
+context AbstractExpression
+def: expIsInsideWhen() : Boolean =
+     let ae : AbstractExpression = aeNavToTopmostAbstractExpression()
+     in not ae.xElseWhenStatement().oclIsUndefined() or
+        not ae.xElseWhenEquation().oclIsUndefined() or
+        (not ae.xAbstractStatement().oclIsUndefined() and 
+         ae.xAbstractStatement().asIsInsideWhenStatement()) or
+        (not ae.xAbstractEquation().oclIsUndefined() and 
+         ae.xAbstractEquation().aeIsInsideWhenEquation()) or
+        (not ae.xElseIfStatement().oclIsUndefined() and 
+         ae.xElseIfStatement().xIfStatement().asIsInsideWhenStatement()) or
+        (not ae.xElseIfEquation().oclIsUndefined() and 
+         ae.xElseIfEquation().xEquation().aeIsInsideWhenEquation())
+
+-- checks whether the expression is inside a noEvent() call
+context AbstractExpression
+def: expIsInsideNoEvent() : Boolean =
+     if not (xAbstractStatement().oclIsUndefined() and 
+             xElseIfStatement().oclIsUndefined() and 
+             xElseWhenStatement().oclIsUndefined() and
+             xAbstractEquation().oclIsUndefined() and 
+             xElseIfEquation().oclIsUndefined() and 
+             xElseWhenEquation().oclIsUndefined()) then
+      false
+     else
+      let b : BasicValue =
+          if not xArgumentEntry().oclIsUndefined() then
+           xArgumentEntry().xArgument().xFunctionCall()
+          else
+           -- case: SquareBracketExpressionList 
+           if not (xBasicValue().xBasicValue().oclIsInvalid() or xBasicValue().xBasicValue().oclIsUndefined()) then 
+            xBasicValue().xBasicValue()
+           else 
+            xBasicValue()
+           endif
+          endif
+      in (b.oclIsKindOf(FunctionCall) and 
+          b.oclAsType(FunctionCall).reference.name = 'noEvent') or
+         if not b.xBasicValueWithOperator().oclIsUndefined() then
+          b.xBasicValueWithOperator().xExpression().expIsInsideNoEvent()
+         else
+          b.xExpression().expIsInsideNoEvent()
+         endif
+     endif
+
+-- p.26-27: discrete-time expressions are:
+context AbstractExpression
+def: expIsDiscrete_internal() : Boolean =
+     if oclIsKindOf(IfExpression) then
+      let i : IfExpression = oclAsType(IfExpression)
+      -- Expressions where all the subexpressions are discrete-time expressions
+      in i.condition.expIsDiscrete_internal() and i.xThen().expIsDiscrete_internal() and
+         (i.xElse().oclIsUndefined() or i.xElse().expIsDiscrete_internal()) and 
+         i.elseifConditions->forAll(expIsDiscrete_internal()) and
+         i.elseifs->forAll(expIsDiscrete_internal())
+     else -- Expression
+      -- Expressions where all the subexpressions are discrete-time expressions
+      let e  : Expression = oclAsType(Expression),
+          bvs: Collection(BasicValue) = e.firstvalue->asSequence()->union(e.moreexpressions.value->asSequence())
+      in bvs->iterate(bv : BasicValue; result : Boolean = true |
+          result and (
+          if bv.oclIsKindOf(FunctionCall) then
+           let fc  : FunctionCall = bv.oclAsType(FunctionCall),
+               n   : String = fc.reference.name,
+               args: Collection(AbstractExpression) = fc.argument.arguments.expression
+           -- the functions pre, edge and change result in discrete-time expressions
+           in n = 'pre' or n = 'edge' or n = 'change' or
+           -- function calls where all input arguments are discrete-time expressions
+              args->forAll(expIsDiscrete_internal())
+          else
+           if bv.oclIsKindOf(Reference) then
+            bv.oclAsType(Reference).rIsDiscrete()
+           else
+            if bv.oclIsKindOf(ExpressionList) then
+             bv.oclAsType(ExpressionList).expressions->forAll(expIsDiscrete_internal())
+            else
+             if bv.oclIsKindOf(SquareBracketExpressionList) then
+              bv.oclAsType(SquareBracketExpressionList).expressionlist->forAll(expressions->forAll(expIsDiscrete_internal()))
+             else
+              if bv.oclIsKindOf(ExpressionVector) then
+               bv.oclAsType(ExpressionVector).list->forAll(expIsDiscrete_internal())
+              else 
+               -- the remaining cases are all literals and therefore constant
+               true
+              endif
+             endif
+            endif
+           endif
+          endif
+         ))
+     endif
+def: expIsDiscrete() : Boolean =
+     -- Expressions in the body of a when-clause
+     -- unless inside noEvent()
+     (expIsInsideWhen() and not expIsInsideNoEvent()) or
+     -- Expressions in functions behave as though they were discrete-time expressions
+      (let c : AbstractMoClass = expNavToClass()
+      in c.oclIsKindOf(MoFunction) or c.oclIsKindOf(MoOperatorFunction)) or
+     expIsDiscrete_internal()
+
+-- (a) variable y is either a subtype of a simple type
+-- or is a record component
+context AbstractExpression
+def: pre_conditions_a() : Boolean = 
+     let ref : Reference = oclAsType(Expression).firstvalue.oclAsType(Reference),
+         content : AbstractContent = ref.reference.oclAsType(ComponentName).xComponent().type,
+         c : AbstractMoClass = content.xMoClass()
+     in aeIsAReference() and (c.oclIsKindOf(MoRecord) or c.amcIsBaseType())
+
+-- (b) y is a discrete-time expression
+context AbstractExpression
+def: pre_conditions_b() : Boolean = expIsDiscrete()
+
+-- (c) the operator is not applied in a function class.
+context FunctionCall
+def: pre_conditions_c() : Boolean = 
+     let c : AbstractMoClass = fcNavToAbstractContent().xMoClass()
+     in not (c.oclIsKindOf(MoFunction) or c.oclIsKindOf(MoOperatorFunction))
+
+context FunctionCall
+def: fcIsInFunction() : Boolean =
+     let c : AbstractMoClass = fcNavToAbstractContent().xMoClass()
+     in c.oclIsKindOf(MoFunction) or c.oclIsKindOf(MoOperatorFunction)
+
+-- helper method for connect_not_in_nonparametric_if
+context AbstractEquation
+def: aeIsInsideNonParametricIfEquation() : Boolean
+ = if not xEquationSection().oclIsUndefined() then
+    false
+   else
+    if not xEquation().oclIsUndefined() then
+     (xEquation().oclIsKindOf(IfEquation) and not xEquation().
+      oclAsType(IfEquation).condition.aeIsParameterExpression()) or
+     -- recursion
+     xEquation().aeIsInsideNonParametricIfEquation()
+    else
+     if not xElseIfEquation().oclIsUndefined() then
+      not xElseIfEquation().elseifcondition.aeIsParameterExpression() or
+      xElseIfEquation().xEquation().aeIsInsideNonParametricIfEquation()
+     else
+      if not xElseWhenEquation().oclIsUndefined() then
+       xElseWhenEquation().xEquation().aeIsInsideNonParametricIfEquation()
+      else
+       false
+      endif
+     endif
+    endif
+   endif
+/* ****************************************************************************
+ *   helper methods for invariants concerning the Modelica package Subtask    *
+ **************************************************************************** */
+context FunctionCall
+def: fcIsSubtaskDecouple() : Boolean =
+     reference.name = 'decouple' and
+     not reference.xMoClass().xContainerClass().oclIsUndefined() and
+     reference.xMoClass().xContainerClass().content.name = 'Subtask'
+     -- maybe also check if reference.xMoClass().xContainerClass is a MoPackage?
+
+context FunctionCall
+def: fcIsInEquation() : Boolean = 
+let topExp : AbstractExpression = 
+     if not xExpression().oclIsUndefined() then 
+      xExpression().aeNavToTopmostAbstractExpression()
+     else
+      xBasicValueWithOperator().xExpression().aeNavToTopmostAbstractExpression()
+     endif
+in not topExp.xAbstractEquation().oclIsUndefined() or
+   not topExp.xElseIfEquation().oclIsUndefined() or
+   not topExp.xElseWhenEquation().oclIsUndefined()
+
+context FunctionCall
+def: fcIsInsideWhen() : Boolean =
+let topExp : AbstractExpression = 
+     if not xExpression().oclIsUndefined() then 
+      xExpression().aeNavToTopmostAbstractExpression()
+     else
+      xBasicValueWithOperator().xExpression().aeNavToTopmostAbstractExpression()
+     endif
+in if not topExp.xAbstractEquation().oclIsUndefined() then
+    topExp.xAbstractEquation().aeIsInsideWhenEquation()
+   else
+    if not xElseIfEquation().oclIsUndefined() then
+     xElseIfEquation().xEquation().aeIsInsideWhenEquation()
+    else
+     not topExp.xElseWhenEquation().oclIsUndefined()
+    endif
+   endif
+
+context Body
+def: bRecCollectComponents() : Sequence(Component) =
+     let comps1: Sequence(Component) = 
+                 bCollectAbstractComponents()->select(oclIsKindOf(Component)).oclAsType(Component),
+         exts  : Sequence(ExtendsClause) = bCollectExtendsClauses(),
+         comps2: Sequence(Component) = 
+                 exts->iterate(ext : ExtendsClause;
+                               result : Sequence(Component) = comps1 |
+                               if ext.reference.oclIsKindOf(CommonContent) then
+                                result->union(ext.reference.oclAsType(CommonContent).xBody().bRecCollectComponents())
+                               else
+                                if ext.reference.oclIsKindOf(ExtensionContent) then
+                                 result->union(ext.reference.oclAsType(ExtensionContent).xBody().bRecCollectComponents())
+                                else
+                                 result
+                                endif
+                               endif)
+     in comps2
+def: bRecCollectClasses() : Sequence(AbstractMoClass) =
+     let cl1 : Sequence(AbstractMoClass) = bCollectAbstractComponents()->select(oclIsKindOf(AbstractMoClass)).oclAsType(AbstractMoClass),
+         exts: Sequence(ExtendsClause) = bCollectExtendsClauses(),
+         cl2 : Sequence(AbstractMoClass) = 
+               exts->iterate(ext : ExtendsClause;
+                             result : Sequence(AbstractMoClass) = cl1 |
+                             if ext.reference.oclIsKindOf(CommonContent) then
+                              result->union(ext.reference.oclAsType(CommonContent).xBody().bRecCollectClasses())
+                             else
+                              if ext.reference.oclIsKindOf(ExtensionContent) then
+                               result->union(ext.reference.oclAsType(ExtensionContent).xBody().bRecCollectClasses())
+                              else
+                               result
+                              endif
+                             endif)
+     in cl2
+
+context AbstractMoClass
+def: amcRecCollectComponents() : Sequence(Component) =
+     if content.oclIsKindOf(CommonContent) then
+      content.oclAsType(CommonContent).xBody().bRecCollectComponents()
+     else
+      if content.oclIsKindOf(ExtensionContent) then
+       content.oclAsType(ExtensionContent).xBody().bRecCollectComponents()
+      else
+       Sequence{}
+      endif
+     endif
+def: amcRecCollectClasses() : Sequence(AbstractMoClass) =
+     if content.oclIsKindOf(CommonContent) then
+      content.oclAsType(CommonContent).xBody().bRecCollectClasses()
+     else
+      if content.oclIsKindOf(ExtensionContent) then
+       content.oclAsType(ExtensionContent).xBody().bRecCollectClasses()
+      else
+       Sequence{}
+      endif
+     endif
+
+endpackage

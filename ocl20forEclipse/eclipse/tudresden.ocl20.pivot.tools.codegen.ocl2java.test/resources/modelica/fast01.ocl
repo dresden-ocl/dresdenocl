@@ -1,0 +1,410 @@
+package modelica
+
+-- In der Originalgrammatik konnte ein external function interface nur einmal
+-- und nur am Ende vom Body auftauchen, in der Xtext Grammatik aus Bequem-
+-- lichkeit nicht so gelöst
+-- muss mit OCL durchgesetzt werden
+context ExternalFunction
+inv external_function_last : xBody().bCollectAbstractComponents()->last() = self
+
+/*
+context AbstractMoClass
+def: containedInRecord1() : Boolean
+     = let container : AbstractMoClass = xContainerClass()
+       in (not container.oclIsUndefined()) and (container.oclIsKindOf(MoRecord) or container.containedInRecord1())
+
+context VisibilityComponentsSection
+def: containedInRecord2() : Boolean
+     = let class : AbstractMoClass = xBody().xContent().xMoClass()
+       in class.oclIsKindOf(MoRecord)-- or class.containedInRecord1()
+*/
+
+context Component
+-- p.29
+-- A component shall not have the same name as its type specifier.
+inv component_names: not componentnames->exists(name = self.type.name)
+
+-- p.31
+-- Type prefixes (i.e. flow, discrete, parameter, constant, input, output) shall only be applied for type, record and connector components.
+-- tudresden.ocl20.pivot.ocl2parser.internal.exception.BuildingASMException: Unable to find operation 'oclIsKindOf' with argument types [TypeTypeImpl[name=OclType,namespace=<null>,representedType=EcoreType[name=MoType,namespace=EcoreNamespace[name=modelica]]]] in type 'root::modelica::AbstractMoClass'. The operation is invalid. Error occured at line 39 and column 23. The error occured at the token oclIsKindOf.
+/*
+context Component
+inv type_prefixes: 
+    let class : AbstractMoClass = type.xMoClass()
+    in (not isEmpty(connectorprefix.value)) or (not isEmpty(timevariabilitytype.value)) or (not isEmpty(componentinputoutput.value))
+       implies (class.oclIsKindOf(MoType) or class.oclIsKindOf(MoRecord) or class.oclIsKindOf(MoConnector))
+*/
+
+-- p.31
+-- The type prefixes flow, input and output shall only be applied for a 
+-- structured component, if no element of the component has a corresponding type
+-- prefix of the same category. [For example, input can only be used, if none of
+-- the elements has an input or output type prefix].
+-- amcContainsIOPrefixes() und amcContainsConnectorPrefixes() sind
+-- implementierungsspezifische Operationen
+context Component
+inv prefixes_structured_component_io :
+    let io : InputOrOutputPrefix = componentinputoutput
+    in ((not io.oclIsUndefined()) and io.isPrefixSet())
+       implies
+       (type.xMoClass().oclIsUndefined() or 
+        not type.xMoClass().amcContainsIOPrefixes())
+inv prefixes_structured_component_flow :
+    let con : ConnectorPrefix = connectorprefix
+    in ((not con.oclIsUndefined()) and con.isFlow())
+       implies
+       (type.xMoClass().oclIsUndefined() or
+        not type.xMoClass().amcContainsConnectorPrefixes())
+
+-- p.37
+context VisibilityComponentsSection
+inv record_only_public: -- not (visibilitytype = VisibilityType::PROTECTED)
+                        not (visibilitytype = VisibilityType::PROTECTED and xBody().xContent().xMoClass().oclIsKindOf(MoRecord))
+                        -- not ((visibilitytype = VisibilityType::PROTECTED) and (containedInRecord2()))
+
+-- p.37
+-- The elements of a record may not have prefixes input, output, inner, outer or flow.
+context AbstractComponent
+inv records_no_prefixes :
+ xBody().oclIsUndefined() or (xBody().xContent().xMoClass().oclIsKindOf(MoRecord)
+ implies
+ if (oclIsKindOf(Component)) then
+  let c     : Component = oclAsType(Component),
+      io    : InputOrOutputPrefix = c.componentinputoutput,
+      ioDef : Boolean = not io.oclIsUndefined(),
+      input : Boolean = ioDef and io.isInput(),
+      output: Boolean = ioDef and io.isOutput(),
+      inner : Boolean = (not c.inner.oclIsUndefined()) and c.inner,
+      outer : Boolean = (not c.outer.oclIsUndefined()) and c.outer, 
+      flow  : Boolean = (not c.connectorprefix.oclIsUndefined()) and (not c.connectorprefix.value.oclIsUndefined()) and c.connectorprefix.value = 'flow'
+  in not (inner or outer or flow or input or output)
+ else if (oclIsKindOf(AbstractMoClass)) then
+       let c     : AbstractMoClass = oclAsType(AbstractMoClass),
+           inner : Boolean = (not c.inner.oclIsUndefined()) and c.inner,
+           outer : Boolean = (not c.outer.oclIsUndefined()) and c.outer
+       in not (inner or outer)
+      else true
+      endif
+ endif)
+
+-- p.37
+-- A record may not be used in connections.
+context ConnectClause
+inv record_not_in_connect_equations :
+    let refs : Sequence(Reference) = componentreference1->asSequence()->
+                                        union(componentreference2->asSequence())
+	in refs->forAll(not reference.oclIsKindOf(ComponentName) or 
+                        not reference.oclAsType(ComponentName).xComponent().
+                                          type.xMoClass().oclIsKindOf(MoRecord))
+
+-- p.37
+-- A type may only be predefined types, enumerations, arrays of type or classes 
+-- extending from type.
+context AssignmentContent
+inv type_definition_restrictions : 
+let class : AbstractMoClass = reference.xMoClass()
+in not xMoClass().xReplaceableClass().oclIsUndefined() or 
+   class.oclIsKindOf(MoType)
+
+-- p.37
+-- Packages may only contain declarations of classes and constants.
+context AbstractBodyElements
+inv package_only_classes_and_constants:
+    let class : AbstractMoClass = xBody().xContent().xMoClass(),
+        isSection : Boolean = oclIsKindOf(EquationSection) or
+                              oclIsKindOf(AlgorithmSection) or
+                              oclIsKindOf(VisibilityComponentsSection)
+	in class.oclIsInvalid() or class.oclIsUndefined() or (class.oclIsKindOf(MoPackage) implies ((not isSection) and ((not oclIsKindOf(Component)) or oclAsType(Component).timevariabilitytype.value='constant')))
+
+-- p.37
+-- Operators may only contain declarations of functions.
+context AbstractBodyElements
+inv operator_only_functions :
+    let class : AbstractMoClass = xBody().xContent().xMoClass()
+	in class.oclIsInvalid() or class.oclIsUndefined() or (class.oclIsKindOf(MoOperator) implies oclIsKindOf(MoFunction))
+	
+-- p.37
+-- Operators may only be placed in a record or package.
+context MoOperator
+inv operator_only_in_record_or_package :
+    let class : AbstractMoClass = xContainerClass()
+	in class.oclIsInvalid() or class.oclIsUndefined() or class.oclIsKindOf(MoRecord) or class.oclIsKindOf(MoPackage)
+	
+-- p.44
+-- Redeclaration of any of the predefined types is illegal.
+context ExtensionContent
+inv predefined_types_redeclaration :
+    let predefinedTypes : Set(String) = Set { 'Integer', 'Real', 'Boolean', 'String' }
+	in
+	   -- if the reference can be resolved use that name (e.g. in the test cases)
+	   if not reference.name.oclIsUndefined() then
+	    predefinedTypes->excludes(reference.name)
+	   -- use the name after 'end' otherwise
+	   else
+	    predefinedTypes->excludes(name)
+	   endif
+	
+-- p.44
+-- The names of the predefined types (Real, Integer, Boolean, String) are reserved such that it is illegal to declare an element with these names.
+context ComponentName
+inv predefined_types_reserved_1 : name <> 'String'
+inv predefined_types_reserved_2 : name <> 'Real'
+inv predefined_types_reserved_3 : name <> 'Integer'
+inv predefined_types_reserved_4 : name <> 'Boolean'
+
+context AbstractMoClass
+inv predefined_types_reserved_5 : content.name <> 'String'
+inv predefined_types_reserved_6 : content.name <> 'Real'
+inv predefined_types_reserved_7 : content.name <> 'Integer'
+inv predefined_types_reserved_8 : content.name <> 'Boolean'
+
+/* DresdenOCL: Parser wirft NullPointer Exception
+-- p.44
+-- It is not possible to combine extends from the predefined types with other components.
+context AbstractBodyElements
+inv predefined_types_extension_mixes :
+    xBody().oclIsUndefined() or
+    let predefinedTypes : Set(String) = Set { 'Integer', 'Real', 'Boolean', 'String' },
+	    predefExtends : Sequence(ExtendsClause) = xBody().bCollectAbstractComponents()->select(oclIsKindOf(ExtendsClause)).oclAsType(ExtendsClause)->select(predefinedTypes->includes(reference.name))
+	in predefExtends->size() > 0 implies predefExtends->first() = self
+*/
+-- p.45
+-- The enumeration literals shall be distinct within the enumeration type.
+context EnumerationList
+inv unique_enumeration_literals: enumerationliterals->isUnique(componentname.name)
+
+-- p.80
+-- When-equations cannot be nested
+context WhenEquation
+inv nested_when_equations : not isContainedInWhenEquation()
+
+-- p.80
+-- The equations within the when-equation must have one of the following forms:
+-- - v = expr;
+-- - (out1, out2, out3, ...) = function_call_name(in1, in2, ...);
+-- - operators assert(), terminate(), reinit()
+-- - For- and if-equations if the equations within the for- and if-equations satisfy these requirements.
+context WhenEquation
+inv well_formed_when_equations_1 : whenequations->forAll(aeIsSuitableForWhenEquation())
+inv well_formed_when_equations_2 : elsewhenequations.elsewhenthenequations->forAll(aeIsSuitableForWhenEquation())
+
+-- p.86
+-- It is not allowed to use a when equation in an initial equation section.
+-- context WhenEquation
+-- inv initial_no_when_eq : see the implementation specific constraints
+
+-- p.86
+-- It is not allowed to use a when statement in an initial algorithm section.
+context WhenStatement
+inv initial_no_when_st :
+ -- when statements must be direct descendants of algorithm sections, the
+ -- implication is present to guard against false negatives in case of
+ -- (wrong) nested usage of when statements
+    (not xAlgorithmSection().oclIsUndefined())
+	implies
+	(xAlgorithmSection().initial.oclIsUndefined() or not xAlgorithmSection().initial)
+
+-- p.126
+-- When-statements cannot be nested.
+context WhenStatement
+inv nested_when_statements : xElseWhenStatement().oclIsUndefined() and (xStatement().oclIsUndefined() or not xStatement().oclIsKindOf(WhenStatement))
+
+-- p.92
+-- An expandable connector may not contain a component declared with the prefix flow, but may contain non-expandable connector components with flow components.
+context Component
+inv connector_expandable_no_flow :
+    let class : AbstractMoClass = xBody().xContent().xMoClass()
+    in class.oclIsKindOf(MoConnector) and (not class.oclAsType(MoConnector).expandable.oclIsUndefined()) and class.oclAsType(MoConnector).expandable
+       implies
+       connectorprefix.oclIsUndefined() or connectorprefix.value <> 'flow'
+
+-- p.126
+-- When statements may not occur inside while, if and for-clauses in algorithms.
+context WhenStatement
+inv when_statement_placement : xElseIfStatement().oclIsUndefined() and (xStatement().oclIsUndefined() or (not (xStatement().oclIsKindOf(WhileStatement) or xStatement().oclIsKindOf(ForStatement) or xStatement().oclIsKindOf(IfStatement))))
+
+-- p.131
+-- Each input formal parameter of the function must be prefixed by the keyword input, and each
+-- result formal parameter by the keyword output. All public variables are formal parameters.
+context Component
+inv function_formal_parameters : isFormalParameter() implies componentinputoutput.isPrefixSet()
+
+-- p.131
+-- A Function may have no equations.
+context EquationSection
+inv function_no_equations : not xBody().xContent().xMoClass().oclIsKindOf(MoFunction)
+
+-- p.131
+-- A function may have no initial algorithm.
+context AlgorithmSection
+inv function_no_initial_algorithms : not (initial and xBody().xContent().xMoClass().oclIsKindOf(MoFunction))
+	
+context ExtendsClause
+inv base_class_restrictions : reference.oclIsUndefined() or xBody().xContent().xMoClass().canBeDerivedFrom(reference.xMoClass())
+
+-- p.143
+-- The language_specification must currently be one of „builtin“, „C“ or „FORTRAN 77“.
+context ExternalFunction
+inv external_function_language : language.oclIsUndefined() or language = 'builtin' or language = 'FORTRAN 77' or language = 'C'
+
+-- p.154
+-- Multiple qualified import-clauses may not have the same import name.
+context ImportClause
+inv import_unique : 
+    let imports : Collection(ImportClause) = xBody().bodyelements->select(oclIsKindOf(ImportClause)).oclAsType(ImportClause)
+    in not wildcard implies imports->forAll(i|i <> self implies i.importreference.reference <> self.importreference.reference)
+
+-- p.159
+-- The functions defined in the operator-class must take at least one component
+-- of the record type as input, except for the constructor-functions which
+-- instead must return one component of the record type.
+-- split: no such component -> whole function wrong
+--        too many components (only in the constructor case) -> component wrong
+context MoOperatorFunction
+inv record_operator_function_record_component_a :
+    let b : Body = if content.oclIsKindOf(CommonContent) then content.oclAsType(CommonContent).xBody()
+	               else content.oclAsType(ExtensionContent).xBody()
+				   endif,
+		inRecord : Boolean = (not xContainerClass().oclIsUndefined()) and xContainerClass().oclIsKindOf(MoRecord)
+    in inRecord implies 
+	(if content.xEnclosedName() = 'constructor' then
+	 b.bCollectOutputComponents()->exists(type = xContainerClass().content)
+	else
+	 b.bCollectInputComponents()->exists(type = xContainerClass().content)
+	endif)
+
+context MoFunction
+inv record_operator_function_record_component_b :
+    let rec : AbstractMoClass = xContainerClass().xContainerClass(),
+	    inRecord : Boolean = (not rec.oclIsInvalid()) and (not rec.oclIsUndefined()) and rec.oclIsKindOf(MoRecord),
+		b : Body = if content.oclIsKindOf(CommonContent) then content.oclAsType(CommonContent).xBody()
+	               else content.oclAsType(ExtensionContent).xBody()
+				   endif
+	in inRecord implies
+	(if xContainerClass().content.xEnclosedName() = 'constructor' then
+	 b.bCollectOutputComponents()->exists(type = rec.content)
+	else
+	 b.bCollectInputComponents()->exists(type = rec.content)
+	endif)
+
+context Component
+inv record_operator_function_record_component_c :
+    let moClass0 : AbstractMoClass = xBody().xContent().xMoClass(),
+	    moClass1 : AbstractMoClass = moClass0.xContainerClass(),
+		moClass2 : AbstractMoClass = moClass1.xContainerClass(),
+	    isFunction : Boolean = moClass0.oclIsKindOf(MoFunction),
+	    isFunctionInOperator : Boolean = isFunction and (not moClass1.oclIsInvalid()) and (not moClass1.oclIsUndefined()) and moClass1.oclIsKindOf(MoOperator),
+		isOperatorFunction : Boolean = moClass0.oclIsKindOf(MoOperatorFunction),
+	    inRecord : Boolean = (isFunctionInOperator and (not moClass2.oclIsInvalid()) and (not moClass2.oclIsUndefined()) and moClass2.oclIsKindOf(MoRecord))
+		                   or (isOperatorFunction and (not moClass1.oclIsInvalid()) and (not moClass1.oclIsUndefined()) and moClass1.oclIsKindOf(MoRecord)),
+		opName : String = if isFunction then moClass1.content.xEnclosedName()
+                          else if isOperatorFunction then moClass0.content.xEnclosedName()
+                               else ''
+                               endif
+                          endif,
+		rec : AbstractMoClass = if isFunction then moClass2
+		                        else moClass1
+								endif,
+	    inConstructor : Boolean = inRecord and opName = 'constructor'
+    in (inConstructor and componentinputoutput.isOutput()) implies (componentnames->size() = 1 and type = rec.content)
+
+-- p.159
+-- All functions inside the operator class must return one output.
+-- split: no output -> whole function wrong
+--        to many outputs -> output wrong
+context MoOperatorFunction
+inv record_operator_function_output_a : 
+    let b : Body = if content.oclIsKindOf(CommonContent) then content.oclAsType(CommonContent).xBody()
+	               else content.oclAsType(ExtensionContent).xBody()
+				   endif,
+		inRecord : Boolean = (not xContainerClass().oclIsUndefined()) and xContainerClass().oclIsKindOf(MoRecord)
+	in inRecord implies b.bCollectOutputComponents()->size() > 0
+
+context MoFunction
+inv record_operator_function_output_b :
+    let b : Body = if content.oclIsKindOf(CommonContent) then content.oclAsType(CommonContent).xBody()
+	               else content.oclAsType(ExtensionContent).xBody()
+				   endif,
+		class : AbstractMoClass = xContainerClass().xContainerClass(),
+		inRecord : Boolean = (not class.oclIsInvalid()) and (not class.oclIsUndefined()) and class.oclIsKindOf(MoRecord)
+	in inRecord implies b.bCollectOutputComponents()->size() > 0
+
+context Component
+inv record_operator_function_output_c :
+let moClass : AbstractMoClass = xBody().xContent().xMoClass(),
+	    isFunction : Boolean = moClass.oclIsKindOf(MoFunction),
+	    isFunctionInOperator : Boolean = isFunction and (not moClass.xContainerClass().oclIsUndefined()) and moClass.xContainerClass().oclIsKindOf(MoOperator),
+		isOperatorFunction : Boolean = moClass.oclIsKindOf(MoOperatorFunction),
+	    inRecord : Boolean = (isFunctionInOperator and (not moClass.xContainerClass().xContainerClass().oclIsUndefined()) and moClass.xContainerClass().xContainerClass().oclIsKindOf(MoRecord))
+		                   or (isOperatorFunction and (not moClass.xContainerClass().oclIsUndefined()) and moClass.xContainerClass().oclIsKindOf(MoRecord))
+    in inRecord implies (componentinputoutput.isOutput() implies (componentnames->size() = 1 and xBody().bCollectOutputComponents()->size() = 1))
+
+-- p.159
+-- It is not legal to extend from a record with operators
+context ExtendsClause
+inv extends_not_from_record_with_operators :
+    (not reference.oclIsUndefined()) and (reference.xMoClass().oclIsKindOf(MoRecord))
+    implies
+    not reference.xMoClass().oclAsType(MoRecord).containsOperators()
+	
+-- p.161
+-- The operator A.'String' shall only contain functions that declare one output
+-- component, which shall be of the String type, and the first input argument
+-- shall be of the record type A.
+context MoFunction
+inv record_operator_string_wfr_fu :
+let isInOperator : Boolean = not xContainerClass().oclIsUndefined() and
+                             xContainerClass().oclIsKindOf(MoOperator),
+    isStringFunction : Boolean = isInOperator and xContainerClass().
+                                             content.xEnclosedName() = 'String',
+    isInRecord : Boolean = isStringFunction and 
+                           not xContainerClass().xContainerClass().oclIsUndefined() and
+                           xContainerClass().xContainerClass().oclIsKindOf(MoRecord),
+    -- TODO ugly, amcCollectIOComponents() returns generic type Collection
+    -- which is not ordered (but should keep the order of the model)
+    -- but sequence is ordered AND order is important here
+    io : Sequence(Component) = amcCollectIOComponents()->asSequence()
+in isInRecord implies
+   (io->select(cIsInput())->first().type = xContainerClass().xContainerClass().content and
+    io->select(cIsOutput())->size() = 1 and
+    io->select(cIsOutput())->first().type.name = 'String')
+
+context MoOperatorFunction
+inv record_operator_string_wfr_opfu :
+let isStringFunction : Boolean = content.xEnclosedName() = 'String' and
+                                 content.name <> content.xEnclosedName(),
+    isInRecord : Boolean = not xContainerClass().oclIsUndefined() and
+                           xContainerClass().oclIsKindOf(MoRecord),
+    -- TODO ugly, amcCollectIOComponents() returns generic type Collection
+    -- which is not ordered (but should keep the order of the model)
+    -- but sequence is ordered AND order is important here
+    io : Sequence(Component) = amcCollectIOComponents()->asSequence()
+in (isStringFunction and isInRecord) implies
+   (io->select(cIsInput())->first().type = xContainerClass().content and
+    io->select(cIsOutput())->size() = 1 and
+    io->select(cIsOutput())->first().type.name = 'String')
+
+-- p.165
+-- The stream prefix can only be used in a connector declaration.
+context Component
+inv stream_only_in_connector : 
+cIsStream() implies xBody().xContent().xMoClass().oclIsKindOf(MoConnector)
+
+-- p.165
+-- A stream connector [a connector with at least one stream variable] must have
+-- exactly one scalar variable with the flow prefix.
+context MoConnector
+inv stream_connector_exactly_one_flow :
+let components : Collection(Component) = amcCollectComponents()
+in components->exists(cIsStream()) implies
+   (components->forAll(cIsFlow() implies componentnames->size() = 1) and
+    components->select(cIsFlow())->size() = 1)
+
+-- p.166
+-- inStream(v) is only allowed on stream variables v
+context FunctionCall
+inv inStream_only_on_stream_variables :
+reference.name = 'inStream' implies 
+argument.arguments->first().expression.aeIsStreamVariable()
+
+endpackage

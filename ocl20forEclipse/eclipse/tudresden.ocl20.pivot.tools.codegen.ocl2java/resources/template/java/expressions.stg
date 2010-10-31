@@ -315,7 +315,7 @@ $endif$
 
 // --- TypeLiteralExp ---
 typeLiteralExp(type) ::= <<
-$type$
+$type$.class
 >>
 
 

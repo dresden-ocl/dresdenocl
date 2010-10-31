@@ -8,8 +8,10 @@ package tudresden.ocl20.pivot.examples.royalsandloyals.constraints;
  */
 public privileged aspect Customer_InvAspect_sizesAgree {
 
+    declare parents: tudresden.ocl20.pivot.examples.royalsandloyals.Customer implements tudresden.ocl20.pivot.tools.codegen.ocl2java.types.OclCheckable;
+    
     public void tudresden.ocl20.pivot.examples.royalsandloyals.Customer.checkInvariants() {
-        /* Remains empty. Is overridden by advice(s). */
+        /* Remains empty. Is only filled with behavior by advice(s). */
     }
     /**
      * <p>Pointcut for all calls on {@link tudresden.ocl20.pivot.examples.royalsandloyals.Customer#checkInvariants()}.</p>

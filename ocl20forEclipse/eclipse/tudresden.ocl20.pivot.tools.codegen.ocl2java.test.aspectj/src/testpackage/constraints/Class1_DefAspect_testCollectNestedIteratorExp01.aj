@@ -12,7 +12,7 @@ public privileged aspect Class1_DefAspect_testCollectNestedIteratorExp01 {
      * <p>Defines the method testCollectNestedIteratorExp01() defined by the constraint
      * <code>context Class1
      *       def: testCollectNestedIteratorExp01() : Bag(Boolean) =
-    Set{ 1, 2, 3}->collectNested(i: Integer | i <> 2)</code></p>
+    Set{1, 2, 3}->collectNested(i: Integer | i <> 2)</code></p>
      */
     public java.util.List<Boolean> testpackage.Class1.testCollectNestedIteratorExp01( ) {
         java.util.HashSet<Integer> collection1;

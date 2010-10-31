@@ -13,8 +13,7 @@ public privileged aspect Class1_DefAspect_testIfExp01 {
      * <code>context Class1
      *       def: testIfExp01(): Integer =
     if (true)
-      then
-    	1
+      then 1
       else -1
     endif</code></p>
      */

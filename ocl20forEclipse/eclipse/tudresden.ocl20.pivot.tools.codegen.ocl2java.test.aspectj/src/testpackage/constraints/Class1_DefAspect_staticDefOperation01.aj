@@ -11,7 +11,8 @@ public privileged aspect Class1_DefAspect_staticDefOperation01 {
     /**
      * <p>Defines the method staticDefOperation01() defined by the constraint
      * <code>context Class1
-     *       static def: staticDefOperation01(): Integer = 42</code></p>
+     *       static def: staticDefOperation01(): Integer = 
+    42</code></p>
      */
     public static Integer testpackage.Class1.staticDefOperation01( ) {
         return new Integer(42);

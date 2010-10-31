@@ -1,1 +1,1 @@
-new Integer(1).getClass().getCanonicalName().equals(Integer.getCanonicalName())
+new Integer(1).getClass().getCanonicalName().equals(Integer.class.getCanonicalName())

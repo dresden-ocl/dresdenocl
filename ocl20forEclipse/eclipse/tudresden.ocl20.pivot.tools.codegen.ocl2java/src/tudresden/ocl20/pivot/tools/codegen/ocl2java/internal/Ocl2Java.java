@@ -157,7 +157,13 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 	 */
 	private ITemplateGroup templateGroup;
 
+	/* FIXME Claas: Move this to environment. */
 	private Map<String, String> variableNames = new HashMap<String, String>();
+
+	{
+		variableNames.put("class", "clazz");
+		variableNames.put("extends", "ixtends");
+	}
 
 	/**
 	 * <p>
@@ -891,7 +897,13 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 		ITemplate template = this.templateGroup.getTemplate("letExp");
 		template.setAttribute("varType", this.transformType(aVarsType)
 				.getTypeName());
-		template.setAttribute("varName", aVar.getName());
+
+		String varName = aVar.getName();
+		if (this.variableNames.containsKey(varName))
+			varName = this.variableNames.get(varName);
+		// no else.
+
+		template.setAttribute("varName", varName);
 		template.setAttribute("inCode", inCode.getCode());
 
 		/* Generate the code for the initExp. */
@@ -959,7 +971,25 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 
 		/* Compute the source expression. */
 		Type sourceType = sourceExp.getType();
-		ITransformedCode sourceCode = this.doSwitch(sourceExp);
+
+		ITransformedCode sourceCode;
+
+		/*
+		 * Especially handle static operations since type literals are hard to
+		 * handle in Java.
+		 */
+		if (referredOperation != null && referredOperation.isStatic()
+				&& sourceExp instanceof TypeLiteralExp) {
+			sourceCode = new TransformedCodeImpl();
+			sourceCode.setResultExp(this.transformType(
+					((TypeLiteralExp) sourceExp).getReferredType())
+					.getTypeName());
+		}
+
+		else
+			sourceCode = this.doSwitch(sourceExp);
+		// end else.
+
 		result.addCode(sourceCode.getCode());
 
 		String operationName;
@@ -1429,10 +1459,22 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 						+ "OperationOnOclType");
 
 				/*
-				 * oclIsNew Operation calls must be registered at the
+				 * allInstances Operation calls must be registered at the
 				 * evironment.
 				 */
 				if (template != null && operationName.equals("allInstances")) {
+
+					/* Esspecially handle type literal exps. */
+					if (sourceExp instanceof TypeLiteralExp) {
+						sourceCode = new TransformedCodeImpl();
+						sourceCode.setResultExp(this
+								.transformType(
+										(((TypeLiteralExp) sourceExp)
+												.getReferredType()))
+								.getTypeName());
+					}
+					// no else.
+
 					template.setAttribute("typeName", sourceCode.getResultExp());
 					this.environment.addAllInstancesClass(sourceCode
 							.getResultExp());
@@ -1458,10 +1500,22 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 			/* Probably set code for arguments of the operation. */
 			for (OclExpression anArgument : anOperationCallExp.getArgument()) {
 
-				ITransformedCode argCode = this.doSwitch((EObject) anArgument);
-				result.addCode(argCode.getCode());
+				/* Especially handle type literals for some operations. */
+				if (operationName.equals("oclAsType")
+						&& anArgument instanceof TypeLiteralExp) {
+					template.setAttribute(
+							"argsExp",
+							this.transformType(
+									((TypeLiteralExp) anArgument)
+											.getReferredType()).getTypeName());
+				}
 
-				template.setAttribute("argsExp", argCode.getResultExp());
+				else {
+					ITransformedCode argCode = this
+							.doSwitch((EObject) anArgument);
+					result.addCode(argCode.getCode());
+					template.setAttribute("argsExp", argCode.getResultExp());
+				}
 			}
 			// end for.
 
@@ -1501,7 +1555,23 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 		Property referredProperty = aPropertyCallExp.getReferredProperty();
 
 		/* Transform the code for the sourceExp. */
-		ITransformedCode sourceCode = doSwitch(aPropertyCallExp.getSource());
+		ITransformedCode sourceCode;
+
+		/*
+		 * Esspecially handle static properties since type literals are hard to
+		 * handle in Java.
+		 */
+		if (referredProperty.isStatic()
+				&& aPropertyCallExp.getSource() instanceof TypeLiteralExp) {
+			sourceCode = new TransformedCodeImpl();
+			sourceCode.setResultExp(this.transformType(
+					((TypeLiteralExp) aPropertyCallExp.getSource())
+							.getReferredType()).getTypeName());
+		}
+
+		else
+			sourceCode = doSwitch(aPropertyCallExp.getSource());
+		// end else.
 
 		/* Add source code to result. */
 		result.addCode(sourceCode.getCode());
@@ -1883,6 +1953,7 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 	private String getPackagePath(NamedElement anElement) {
 
 		String result;
+
 		NamedElement anOwner = anElement.getOwner();
 		result = anOwner.getName();
 
@@ -1897,6 +1968,10 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 			}
 			// no else
 		}
+
+		if (this.settings.getBasisPackage().length() > 0)
+			result = this.settings.getBasisPackage() + "." + result;
+		// no else.
 
 		return result;
 	}

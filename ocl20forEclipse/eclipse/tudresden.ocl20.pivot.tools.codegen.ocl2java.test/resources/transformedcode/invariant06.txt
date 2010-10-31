@@ -8,8 +8,10 @@ package tudresden.ocl20.pivot.examples.royalsandloyals.constraints;
  */
 public privileged aspect LoyaltyProgram_InvAspect_minServices {
 
+    declare parents: tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyProgram implements tudresden.ocl20.pivot.tools.codegen.ocl2java.types.OclCheckable;
+    
     public void tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyProgram.checkInvariants() {
-        /* Remains empty. Is overridden by advice(s). */
+        /* Remains empty. Is only filled with behavior by advice(s). */
     }
     /**
      * <p>Pointcut for all calls on {@link tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyProgram#checkInvariants()}.</p>
