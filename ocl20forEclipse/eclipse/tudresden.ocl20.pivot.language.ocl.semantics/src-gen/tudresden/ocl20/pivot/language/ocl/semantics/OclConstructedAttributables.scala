@@ -667,6 +667,8 @@ package tudresden.ocl20.pivot.language.ocl.semantics
 	
 		override def getOperation() = eObject.getOperation()
 		override def setOperation(_OperationDefinitionInDefCS : tudresden.ocl20.pivot.language.ocl.OperationDefinitionInDefCS) = eObject.setOperation(_OperationDefinitionInDefCS : tudresden.ocl20.pivot.language.ocl.OperationDefinitionInDefCS)
+		override def getEqual() = eObject.getEqual()
+		override def setEqual(_EString : String) = eObject.setEqual(_EString : String)
 		override def getOclExpression() = eObject.getOclExpression()
 		override def setOclExpression(_OclExpressionCS : tudresden.ocl20.pivot.language.ocl.OclExpressionCS) = eObject.setOclExpression(_OclExpressionCS : tudresden.ocl20.pivot.language.ocl.OclExpressionCS)
 	}

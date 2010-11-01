@@ -179,7 +179,7 @@ trait OclParseTreeToEssentialOcl { selfType : OclStaticSemantics =>
         }
       }
       
-      case d@DefinitionExpOperationCS(operationDefinition, oclExpression) => {
+      case d@DefinitionExpOperationCS(operationDefinition, oclExpression, _) => {
         val operation = operationDefinition.getOperation
         if (operation.eIsProxy)
           Empty

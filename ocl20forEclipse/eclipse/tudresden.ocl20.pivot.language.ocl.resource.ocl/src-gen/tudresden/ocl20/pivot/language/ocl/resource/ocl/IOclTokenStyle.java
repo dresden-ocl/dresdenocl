@@ -18,6 +18,12 @@ public interface IOclTokenStyle {
 	public int[] getColorAsRGB();
 	
 	/**
+	 * Returns the background color of the token as array of length 3. This method can
+	 * return <code>null</code> if no background color is set.
+	 */
+	public int[] getBackgroundColorAsRGB();
+	
+	/**
 	 * Returns true if the token must be displayed in bold face.
 	 */
 	public boolean isBold();

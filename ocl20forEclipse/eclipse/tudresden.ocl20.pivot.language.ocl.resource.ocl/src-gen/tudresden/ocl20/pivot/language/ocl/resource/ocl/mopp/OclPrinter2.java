@@ -511,6 +511,10 @@ public class OclPrinter2 implements tudresden.ocl20.pivot.language.ocl.resource.
 					tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclContainment containment = (tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclContainment) printElement;
 					printContainedObject(eObject, containment, indexToPrint, foundFormattingElements, layoutInformations);
 					foundSomethingToPrint = true;
+				} else if (printElement instanceof tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclBooleanTerminal) {
+					tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclBooleanTerminal booleanTerminal = (tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclBooleanTerminal) printElement;
+					printBooleanTerminal(eObject, booleanTerminal, indexToPrint, foundFormattingElements, layoutInformations);
+					foundSomethingToPrint = true;
 				}
 			}
 			if (foundSomethingToPrint) {
@@ -581,6 +585,31 @@ public class OclPrinter2 implements tudresden.ocl20.pivot.language.ocl.resource.
 		}
 		// write result to the output stream
 		tokenOutputStream.add(new PrintToken(result, placeholder.getTokenName()));
+	}
+	
+	public void printBooleanTerminal(org.eclipse.emf.ecore.EObject eObject, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclBooleanTerminal booleanTerminal, int count, java.util.List<tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFormattingElement> foundFormattingElements, java.util.List<tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclLayoutInformation> layoutInformations) {
+		org.eclipse.emf.ecore.EAttribute attribute = booleanTerminal.getAttribute();
+		String result;
+		Object attributeValue = getValue(eObject, attribute, count);
+		tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclLayoutInformation layoutInformation = getLayoutInformation(layoutInformations, booleanTerminal, attributeValue, eObject);
+		String visibleTokenText = getVisibleTokenText(layoutInformation);
+		// if there is text for the attribute we use it
+		if (visibleTokenText != null) {
+			result = visibleTokenText;
+		} else {
+			// if no text is available, the boolean attribute is converted to its textual
+			// representation using the literals of the boolean terminal
+			if (Boolean.TRUE.equals(attributeValue)) {
+				result = booleanTerminal.getTrueLiteral();
+			} else {
+				result = booleanTerminal.getFalseLiteral();
+			}
+		}
+		if (result != null && !"".equals(result)) {
+			printFormattingElements(foundFormattingElements, layoutInformations, layoutInformation);
+			// write result to the output stream
+			tokenOutputStream.add(new PrintToken(result, "'" + tudresden.ocl20.pivot.language.ocl.resource.ocl.util.OclStringUtil.escapeToANTLRKeyword(result) + "'"));
+		}
 	}
 	
 	public void printContainedObject(org.eclipse.emf.ecore.EObject eObject, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclContainment containment, int count, java.util.List<tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFormattingElement> foundFormattingElements, java.util.List<tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclLayoutInformation> layoutInformations) {

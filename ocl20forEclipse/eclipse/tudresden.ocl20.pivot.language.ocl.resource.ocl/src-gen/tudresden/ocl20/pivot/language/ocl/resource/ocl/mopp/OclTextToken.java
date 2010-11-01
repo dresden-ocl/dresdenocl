@@ -27,6 +27,14 @@ public class OclTextToken implements tudresden.ocl20.pivot.language.ocl.resource
 		return ((org.antlr.runtime3_2_0.CommonToken) antlrToken).getStopIndex() - ((org.antlr.runtime3_2_0.CommonToken) antlrToken).getStartIndex() + 1;
 	}
 	
+	public int getLine() {
+		return antlrToken.getLine();
+	}
+	
+	public int getColumn() {
+		return antlrToken.getCharPositionInLine();
+	}
+	
 	public boolean canBeUsedForSyntaxHighlighting() {
 		int tokenType = antlrToken.getType();
 		if (tokenType == org.antlr.runtime3_2_0.Token.EOF) {

@@ -311,6 +311,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="DefinitionExpOperationCS" eSuperTypes="#//DefinitionExpPartCS">
     <eStructuralFeatures xsi:type="ecore:EReference" name="operation" lowerBound="1"
         eType="#//OperationDefinitionInDefCS" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="equal" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="oclExpression" lowerBound="1"
         eType="#//OclExpressionCS" containment="true"/>
   </eClassifiers>

@@ -196,7 +196,7 @@ trait OclAttributesImpl extends OclAttributes {selfType : OclStaticSemantics =>
           }
         }
         
-        case d@DefinitionExpOperationCS(operation, _) => {
+        case d@DefinitionExpOperationCS(operation, _, _) => {
           (d->variables).flatMap{case (implicitVariables, explicitVariables) =>
 	          val parametersEOcl = operation.getParameters.map(p => p.getParameter)
 				    parametersEOcl.find(_.eIsProxy) match {

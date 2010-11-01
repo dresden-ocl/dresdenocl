@@ -338,7 +338,7 @@ trait OclReferenceResolver { selfType : OclStaticSemantics =>
 			        val rt =
 			        	if (returnType == null) {
 				          o.parent match {
-				            case DefinitionExpOperationCS(_, oclExpression) => {
+				            case DefinitionExpOperationCS(_, oclExpression, _) => {
 				              (oclExpression->computeOclExpression) match {
 				                case Full(oclExpressionEOcl) => Full(oclExpressionEOcl.getType)
 				                case _ => Failure("Cannot compute oclExpression for operation definition.")  

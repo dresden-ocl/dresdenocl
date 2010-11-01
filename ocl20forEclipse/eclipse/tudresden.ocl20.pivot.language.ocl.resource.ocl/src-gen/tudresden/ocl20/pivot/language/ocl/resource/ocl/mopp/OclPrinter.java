@@ -941,10 +941,12 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 		// the number of elements stored in each structural feature. For lists this is the
 		// list size. For non-multiple features it is either 1 (if the feature is set) or
 		// 0 (if the feature is null).
-		java.util.Map<String, Integer> printCountingMap = new java.util.LinkedHashMap<String, Integer>(2);
+		java.util.Map<String, Integer> printCountingMap = new java.util.LinkedHashMap<String, Integer>(3);
 		Object temp;
 		temp = element.eGet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.DEFINITION_EXP_OPERATION_CS__OPERATION));
 		printCountingMap.put("operation", temp == null ? 0 : 1);
+		temp = element.eGet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.DEFINITION_EXP_OPERATION_CS__EQUAL));
+		printCountingMap.put("equal", temp == null ? 0 : 1);
 		temp = element.eGet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.DEFINITION_EXP_OPERATION_CS__OCL_EXPRESSION));
 		printCountingMap.put("oclExpression", temp == null ? 0 : 1);
 		// print collected hidden tokens
@@ -958,9 +960,18 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 			}
 			printCountingMap.put("operation", count - 1);
 		}
-		// DEFINITION PART BEGINS (CsString)
-		out.print("=");
-		out.print(" ");
+		// DEFINITION PART BEGINS (PlaceholderUsingSpecifiedToken)
+		count = printCountingMap.get("equal");
+		if (count > 0) {
+			Object o = element.eGet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.DEFINITION_EXP_OPERATION_CS__EQUAL));
+			if (o != null) {
+				tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenResolver resolver = tokenResolverFactory.createTokenResolver("EQUALITY_OPERATOR");
+				resolver.setOptions(getOptions());
+				out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.DEFINITION_EXP_OPERATION_CS__EQUAL), element));
+				out.print(" ");
+			}
+			printCountingMap.put("equal", count - 1);
+		}
 		// DEFINITION PART BEGINS (Containment)
 		count = printCountingMap.get("oclExpression");
 		if (count > 0) {

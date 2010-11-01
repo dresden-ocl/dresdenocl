@@ -19,7 +19,8 @@ Require-Bundle: org.eclipse.core.resources,
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: tudresden.ocl20.pivot.language.ocl.resource.ocl,
-  tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp,
-  tudresden.ocl20.pivot.language.ocl.resource.ocl.util,
-  tudresden.ocl20.pivot.language.ocl.resource.ocl.analysis
+ tudresden.ocl20.pivot.language.ocl.resource.ocl.analysis,
+ tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar,
+ tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp,
+ tudresden.ocl20.pivot.language.ocl.resource.ocl.util
 Bundle-Activator: tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclPlugin

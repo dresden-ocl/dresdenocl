@@ -226,6 +226,7 @@
     </genClasses>
     <genClasses ecoreClass="OCL.ecore#//DefinitionExpOperationCS">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//DefinitionExpOperationCS/operation"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute OCL.ecore#//DefinitionExpOperationCS/equal"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//DefinitionExpOperationCS/oclExpression"/>
     </genClasses>
     <genClasses image="false" ecoreClass="OCL.ecore#//PrePostOrBodyDeclarationCS">

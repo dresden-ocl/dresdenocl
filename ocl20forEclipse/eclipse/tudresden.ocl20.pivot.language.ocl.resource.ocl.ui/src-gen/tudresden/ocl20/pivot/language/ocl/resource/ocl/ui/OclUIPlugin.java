@@ -12,7 +12,7 @@ package tudresden.ocl20.pivot.language.ocl.resource.ocl.ui;
 public class OclUIPlugin extends org.eclipse.ui.plugin.AbstractUIPlugin {
 	
 	public static final String PLUGIN_ID = "tudresden.ocl20.pivot.language.ocl.resource.ocl.ui";
-	public static final String EMFTEXT_SDK_VERSION = "1.3.1";
+	public static final String EMFTEXT_SDK_VERSION = "1.3.2";
 	public static final String EP_DEFAULT_LOAD_OPTIONS_ID = PLUGIN_ID + ".default_load_options";
 	public static final String EP_ADDITIONAL_EXTENSION_PARSER_ID = PLUGIN_ID + ".additional_extension_parser";
 	

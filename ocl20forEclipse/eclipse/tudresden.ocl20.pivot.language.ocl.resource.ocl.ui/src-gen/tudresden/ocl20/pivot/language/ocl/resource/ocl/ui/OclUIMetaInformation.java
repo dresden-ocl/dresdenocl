@@ -20,8 +20,18 @@ public class OclUIMetaInformation extends tudresden.ocl20.pivot.language.ocl.res
 		return new tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclColorManager();
 	}
 	
+	/**
+	 * @deprecated this method is only provided to preserve API compatibility. Use
+	 * createTokenScanner(tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextResou
+	 * rce, tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclColorManager)
+	 * instead.
+	 */
 	public tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclTokenScanner createTokenScanner(tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclColorManager colorManager) {
-		return new tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclTokenScanner(colorManager);
+		return createTokenScanner(null, colorManager);
+	}
+	
+	public tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclTokenScanner createTokenScanner(tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextResource resource, tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclColorManager colorManager) {
+		return new tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclTokenScanner(resource, colorManager);
 	}
 	
 	public tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclCodeCompletionHelper createCodeCompletionHelper() {

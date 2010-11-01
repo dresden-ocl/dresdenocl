@@ -7,9 +7,9 @@
 package tudresden.ocl20.pivot.language.ocl.resource.ocl.ui;
 
 /**
- * The NewWizardPage allows setting the container for the new file, as well as the
- * file name. The page will only accept file names without extension OR with an
- * extension that matches the expected one.
+ * The NewFileWizardPage allows setting the container for the new file, as well as
+ * the file name. The page will only accept file names without extension OR with
+ * an extension that matches the expected one.
  */
 public class OclNewFileWizardPage extends org.eclipse.jface.wizard.WizardPage {
 	
@@ -19,7 +19,7 @@ public class OclNewFileWizardPage extends org.eclipse.jface.wizard.WizardPage {
 	private org.eclipse.jface.viewers.ISelection selection;
 	
 	/**
-	 * Constructor for NewWizardPage.
+	 * Constructor for the NewFileWizardPage.
 	 */
 	public OclNewFileWizardPage(org.eclipse.jface.viewers.ISelection selection, String fileExtension) {
 		super("wizardPage");

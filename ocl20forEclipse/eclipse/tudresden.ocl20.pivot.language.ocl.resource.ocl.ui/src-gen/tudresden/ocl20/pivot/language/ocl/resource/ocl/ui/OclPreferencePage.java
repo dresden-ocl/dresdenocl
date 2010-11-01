@@ -16,7 +16,8 @@ public class OclPreferencePage extends org.eclipse.jface.preference.PreferencePa
 		setDescription(" Ocl Text Editor Preferences");
 	}
 	
-	@Override	protected org.eclipse.swt.widgets.Control createContents(org.eclipse.swt.widgets.Composite parent) {
+	@Override	
+	protected org.eclipse.swt.widgets.Control createContents(org.eclipse.swt.widgets.Composite parent) {
 		org.eclipse.swt.widgets.Composite settingComposite = new org.eclipse.swt.widgets.Composite(parent, org.eclipse.swt.SWT.NONE);
 		org.eclipse.swt.layout.GridLayout layout = new org.eclipse.swt.layout.GridLayout();
 		org.eclipse.swt.layout.GridData gd;

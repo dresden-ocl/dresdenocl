@@ -152,7 +152,7 @@ public class OclDefaultResolverDelegate<ContainerType extends org.eclipse.emf.ec
 		} else {
 			// try any other string attribute found
 			for (org.eclipse.emf.ecore.EAttribute stringAttribute : element.eClass().getEAllAttributes()) {
-				if (stringAttribute.getEType().getInstanceClassName().equals("String")) {
+				if ("java.lang.String".equals(stringAttribute.getEType().getInstanceClassName())) {
 					Object attributeValue = element.eGet(stringAttribute);
 					String match = matches(identifier, attributeValue, matchFuzzy);
 					if (match != null) {

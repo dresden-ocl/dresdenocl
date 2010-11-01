@@ -1769,22 +1769,25 @@ object DefinitionExpPropertyCS {
 object DefinitionExpOperationCS {
 	def apply(
 	          _operation : tudresden.ocl20.pivot.language.ocl.OperationDefinitionInDefCS,
+	          _equal : String,
 	          _oclExpression : tudresden.ocl20.pivot.language.ocl.OclExpressionCS	          
 	          ) = {
 		
 		val __definitionExpOperationCS = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createDefinitionExpOperationCS
 		
 			__definitionExpOperationCS.setOperation(_operation)
+			__definitionExpOperationCS.setEqual(_equal)
 			__definitionExpOperationCS.setOclExpression(_oclExpression)
 		
 		__definitionExpOperationCS
 		
 	}
 
-	def unapply(__definitionExpOperationCS : tudresden.ocl20.pivot.language.ocl.DefinitionExpOperationCS) : Some[Tuple2[tudresden.ocl20.pivot.language.ocl.OperationDefinitionInDefCS, tudresden.ocl20.pivot.language.ocl.OclExpressionCS]] = {
+	def unapply(__definitionExpOperationCS : tudresden.ocl20.pivot.language.ocl.DefinitionExpOperationCS) : Some[Tuple3[tudresden.ocl20.pivot.language.ocl.OperationDefinitionInDefCS, tudresden.ocl20.pivot.language.ocl.OclExpressionCS, String]] = {
 		Some(
 			__definitionExpOperationCS.getOperation,
-			__definitionExpOperationCS.getOclExpression		
+			__definitionExpOperationCS.getOclExpression,
+			__definitionExpOperationCS.getEqual		
 		)
 	}
 

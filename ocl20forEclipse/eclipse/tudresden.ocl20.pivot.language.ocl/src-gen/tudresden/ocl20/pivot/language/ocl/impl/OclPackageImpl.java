@@ -2353,8 +2353,17 @@ public class OclPackageImpl extends EPackageImpl implements OclPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getDefinitionExpOperationCS_Equal() {
+		return (EAttribute)definitionExpOperationCSEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EReference getDefinitionExpOperationCS_OclExpression() {
-		return (EReference)definitionExpOperationCSEClass.getEStructuralFeatures().get(1);
+		return (EReference)definitionExpOperationCSEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -2781,6 +2790,7 @@ public class OclPackageImpl extends EPackageImpl implements OclPackage {
 
 		definitionExpOperationCSEClass = createEClass(DEFINITION_EXP_OPERATION_CS);
 		createEReference(definitionExpOperationCSEClass, DEFINITION_EXP_OPERATION_CS__OPERATION);
+		createEAttribute(definitionExpOperationCSEClass, DEFINITION_EXP_OPERATION_CS__EQUAL);
 		createEReference(definitionExpOperationCSEClass, DEFINITION_EXP_OPERATION_CS__OCL_EXPRESSION);
 
 		prePostOrBodyDeclarationCSEClass = createEClass(PRE_POST_OR_BODY_DECLARATION_CS);
@@ -3168,6 +3178,7 @@ public class OclPackageImpl extends EPackageImpl implements OclPackage {
 
 		initEClass(definitionExpOperationCSEClass, DefinitionExpOperationCS.class, "DefinitionExpOperationCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getDefinitionExpOperationCS_Operation(), this.getOperationDefinitionInDefCS(), null, "operation", null, 1, 1, DefinitionExpOperationCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getDefinitionExpOperationCS_Equal(), ecorePackage.getEString(), "equal", null, 1, 1, DefinitionExpOperationCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getDefinitionExpOperationCS_OclExpression(), this.getOclExpressionCS(), null, "oclExpression", null, 1, 1, DefinitionExpOperationCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(prePostOrBodyDeclarationCSEClass, PrePostOrBodyDeclarationCS.class, "PrePostOrBodyDeclarationCS", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);

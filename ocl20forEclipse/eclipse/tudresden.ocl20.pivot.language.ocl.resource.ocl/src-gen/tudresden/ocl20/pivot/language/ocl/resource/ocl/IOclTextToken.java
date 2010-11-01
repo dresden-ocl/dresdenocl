@@ -28,6 +28,16 @@ public interface IOclTextToken {
 	public int getLength();
 	
 	/**
+	 * Returns the line this token was found at.
+	 */
+	public int getLine();
+	
+	/**
+	 * Returns the column this token was found at.
+	 */
+	public int getColumn();
+	
+	/**
 	 * Returns false if the token is not usable for syntax highlighting. The EOF (End
 	 * of File) token is an example for such a token.
 	 */

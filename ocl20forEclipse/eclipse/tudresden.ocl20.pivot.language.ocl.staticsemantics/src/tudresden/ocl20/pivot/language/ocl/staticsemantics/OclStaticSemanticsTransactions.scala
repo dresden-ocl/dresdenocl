@@ -44,7 +44,7 @@ object OclStaticSemanticsTransactions {
                           case other => // ignore
                         }
                       }
-                      case DefinitionExpOperationCS(operation, oclExpression) => {
+                      case DefinitionExpOperationCS(operation, oclExpression, _) => {
                         (oclStaticSemantics.eObject2Attributable(typeName)->oclStaticSemantics.oclType) match {
                           case Full(tipe) => allDefsOp.add(tipe, (operation, oclExpression))
                           case other => // ignore

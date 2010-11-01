@@ -46,7 +46,7 @@ public class OclEditorConfiguration extends org.eclipse.jface.text.source.Source
 	}
 	
 	protected org.eclipse.jface.text.rules.ITokenScanner getScanner(String fileName) {
-		return new tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclTokenScanner(colorManager);
+		return new tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclTokenScanner(theEditor.getResource(), colorManager);
 	}
 	
 	public org.eclipse.jface.text.presentation.IPresentationReconciler getPresentationReconciler(org.eclipse.jface.text.source.ISourceViewer sourceViewer) {

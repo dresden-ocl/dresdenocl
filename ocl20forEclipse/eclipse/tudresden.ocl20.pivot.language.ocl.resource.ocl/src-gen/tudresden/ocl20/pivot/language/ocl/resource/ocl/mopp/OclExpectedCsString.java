@@ -23,8 +23,8 @@ public class OclExpectedCsString extends tudresden.ocl20.pivot.language.ocl.reso
 		return keyword.getValue();
 	}
 	
-	public String getTokenName() {
-		return "'" + getValue() + "'";
+	public java.util.Set<String> getTokenNames() {
+		return java.util.Collections.singleton("'" + getValue() + "'");
 	}
 	
 	public String toString() {

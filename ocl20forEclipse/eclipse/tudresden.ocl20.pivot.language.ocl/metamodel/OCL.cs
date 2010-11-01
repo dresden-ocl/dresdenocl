@@ -10,7 +10,7 @@ OPTIONS {
 	reloadGeneratorModel = "true";
 	tokenspace = "1";
 	overrideTextResource = "false";
-	overrideCodeCompletionHelper = "false";
+	overrideCodeCompletionHelper = "true";
 	overrideManifest = "false";
 	usePredefinedTokens = "false";
 }
@@ -75,7 +75,7 @@ RULES {
 	
 	DefinitionExpPropertyCS				::= variableDeclaration;
 	
-	DefinitionExpOperationCS			::= operation "=" oclExpression;
+	DefinitionExpOperationCS			::= operation equal[EQUALITY_OPERATOR] oclExpression;
 											
 	PreConditionDeclarationCS			::= "pre" (name)? #0 ":" oclExpression;
 	

@@ -25,6 +25,7 @@ import tudresden.ocl20.pivot.language.ocl.OperationDefinitionInDefCS;
  * The following features are implemented:
  * <ul>
  *   <li>{@link tudresden.ocl20.pivot.language.ocl.impl.DefinitionExpOperationCSImpl#getOperation <em>Operation</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.language.ocl.impl.DefinitionExpOperationCSImpl#getEqual <em>Equal</em>}</li>
  *   <li>{@link tudresden.ocl20.pivot.language.ocl.impl.DefinitionExpOperationCSImpl#getOclExpression <em>Ocl Expression</em>}</li>
  * </ul>
  * </p>
@@ -41,6 +42,26 @@ public class DefinitionExpOperationCSImpl extends DefinitionExpPartCSImpl implem
 	 * @ordered
 	 */
 	protected OperationDefinitionInDefCS operation;
+
+	/**
+	 * The default value of the '{@link #getEqual() <em>Equal</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getEqual()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String EQUAL_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getEqual() <em>Equal</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getEqual()
+	 * @generated
+	 * @ordered
+	 */
+	protected String equal = EQUAL_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getOclExpression() <em>Ocl Expression</em>}' containment reference.
@@ -119,6 +140,27 @@ public class DefinitionExpOperationCSImpl extends DefinitionExpPartCSImpl implem
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getEqual() {
+		return equal;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setEqual(String newEqual) {
+		String oldEqual = equal;
+		equal = newEqual;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, OclPackage.DEFINITION_EXP_OPERATION_CS__EQUAL, oldEqual, equal));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public OclExpressionCS getOclExpression() {
 		return oclExpression;
 	}
@@ -183,6 +225,8 @@ public class DefinitionExpOperationCSImpl extends DefinitionExpPartCSImpl implem
 		switch (featureID) {
 			case OclPackage.DEFINITION_EXP_OPERATION_CS__OPERATION:
 				return getOperation();
+			case OclPackage.DEFINITION_EXP_OPERATION_CS__EQUAL:
+				return getEqual();
 			case OclPackage.DEFINITION_EXP_OPERATION_CS__OCL_EXPRESSION:
 				return getOclExpression();
 		}
@@ -199,6 +243,9 @@ public class DefinitionExpOperationCSImpl extends DefinitionExpPartCSImpl implem
 		switch (featureID) {
 			case OclPackage.DEFINITION_EXP_OPERATION_CS__OPERATION:
 				setOperation((OperationDefinitionInDefCS)newValue);
+				return;
+			case OclPackage.DEFINITION_EXP_OPERATION_CS__EQUAL:
+				setEqual((String)newValue);
 				return;
 			case OclPackage.DEFINITION_EXP_OPERATION_CS__OCL_EXPRESSION:
 				setOclExpression((OclExpressionCS)newValue);
@@ -218,6 +265,9 @@ public class DefinitionExpOperationCSImpl extends DefinitionExpPartCSImpl implem
 			case OclPackage.DEFINITION_EXP_OPERATION_CS__OPERATION:
 				setOperation((OperationDefinitionInDefCS)null);
 				return;
+			case OclPackage.DEFINITION_EXP_OPERATION_CS__EQUAL:
+				setEqual(EQUAL_EDEFAULT);
+				return;
 			case OclPackage.DEFINITION_EXP_OPERATION_CS__OCL_EXPRESSION:
 				setOclExpression((OclExpressionCS)null);
 				return;
@@ -235,10 +285,28 @@ public class DefinitionExpOperationCSImpl extends DefinitionExpPartCSImpl implem
 		switch (featureID) {
 			case OclPackage.DEFINITION_EXP_OPERATION_CS__OPERATION:
 				return operation != null;
+			case OclPackage.DEFINITION_EXP_OPERATION_CS__EQUAL:
+				return EQUAL_EDEFAULT == null ? equal != null : !EQUAL_EDEFAULT.equals(equal);
 			case OclPackage.DEFINITION_EXP_OPERATION_CS__OCL_EXPRESSION:
 				return oclExpression != null;
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (equal: ");
+		result.append(equal);
+		result.append(')');
+		return result.toString();
 	}
 
 } //DefinitionExpOperationCSImpl

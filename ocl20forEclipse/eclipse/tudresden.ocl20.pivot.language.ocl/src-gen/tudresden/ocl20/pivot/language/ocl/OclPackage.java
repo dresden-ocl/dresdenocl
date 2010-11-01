@@ -2887,13 +2887,22 @@ public interface OclPackage extends EPackage {
 	int DEFINITION_EXP_OPERATION_CS__OPERATION = DEFINITION_EXP_PART_CS_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Equal</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DEFINITION_EXP_OPERATION_CS__EQUAL = DEFINITION_EXP_PART_CS_FEATURE_COUNT + 1;
+
+	/**
 	 * The feature id for the '<em><b>Ocl Expression</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DEFINITION_EXP_OPERATION_CS__OCL_EXPRESSION = DEFINITION_EXP_PART_CS_FEATURE_COUNT + 1;
+	int DEFINITION_EXP_OPERATION_CS__OCL_EXPRESSION = DEFINITION_EXP_PART_CS_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Definition Exp Operation CS</em>' class.
@@ -2902,7 +2911,7 @@ public interface OclPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DEFINITION_EXP_OPERATION_CS_FEATURE_COUNT = DEFINITION_EXP_PART_CS_FEATURE_COUNT + 2;
+	int DEFINITION_EXP_OPERATION_CS_FEATURE_COUNT = DEFINITION_EXP_PART_CS_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link tudresden.ocl20.pivot.language.ocl.impl.PrePostOrBodyDeclarationCSImpl <em>Pre Post Or Body Declaration CS</em>}' class.
@@ -5037,6 +5046,17 @@ public interface OclPackage extends EPackage {
 	EReference getDefinitionExpOperationCS_Operation();
 
 	/**
+	 * Returns the meta object for the attribute '{@link tudresden.ocl20.pivot.language.ocl.DefinitionExpOperationCS#getEqual <em>Equal</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Equal</em>'.
+	 * @see tudresden.ocl20.pivot.language.ocl.DefinitionExpOperationCS#getEqual()
+	 * @see #getDefinitionExpOperationCS()
+	 * @generated
+	 */
+	EAttribute getDefinitionExpOperationCS_Equal();
+
+	/**
 	 * Returns the meta object for the containment reference '{@link tudresden.ocl20.pivot.language.ocl.DefinitionExpOperationCS#getOclExpression <em>Ocl Expression</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6768,6 +6788,14 @@ public interface OclPackage extends EPackage {
 		 * @generated
 		 */
 		EReference DEFINITION_EXP_OPERATION_CS__OPERATION = eINSTANCE.getDefinitionExpOperationCS_Operation();
+
+		/**
+		 * The meta object literal for the '<em><b>Equal</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute DEFINITION_EXP_OPERATION_CS__EQUAL = eINSTANCE.getDefinitionExpOperationCS_Equal();
 
 		/**
 		 * The meta object literal for the '<em><b>Ocl Expression</b></em>' containment reference feature.

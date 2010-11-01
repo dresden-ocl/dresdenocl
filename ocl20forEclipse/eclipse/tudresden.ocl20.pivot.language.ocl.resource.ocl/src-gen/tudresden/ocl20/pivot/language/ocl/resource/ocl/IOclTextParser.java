@@ -26,10 +26,13 @@ public interface IOclTextParser extends tudresden.ocl20.pivot.language.ocl.resou
 	 * element covers a range in the input stream.
 	 * If the parser implementation can not determine expected elements null can be
 	 * returned. This method is used by the code completion to figure out which
-	 * proposals can be shown to users for a given cursor position. The class 'type'
-	 * is used as start symbol.
+	 * proposals can be shown to users for a given cursor position. The class
+	 * <code>type</code> is used as start symbol. If <code>type</code> is
+	 * <code>null</code>, the start symbols from the syntax specification are used.
+	 * The <code>cursorPosition</code> is used to discard expected elements, which
+	 * will not be needed.
 	 */
-	public java.util.List<tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclExpectedTerminal> parseToExpectedElements(org.eclipse.emf.ecore.EClass type, tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextResource dummyResource);
+	public java.util.List<tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclExpectedTerminal> parseToExpectedElements(org.eclipse.emf.ecore.EClass type, tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextResource dummyResource, int cursorOffset);
 	
 	/**
 	 * Signals the parse to terminate parsing as soon as possible. This method must be
