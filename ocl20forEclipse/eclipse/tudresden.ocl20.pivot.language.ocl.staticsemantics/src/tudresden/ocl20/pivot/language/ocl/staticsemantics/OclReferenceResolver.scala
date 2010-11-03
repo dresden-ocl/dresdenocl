@@ -21,7 +21,10 @@ import tudresden.attributegrammar.integration.kiama.util.CollectionConverterJ2S.
 import org.kiama.attribution.Attribution._
 
 trait OclReferenceResolver { selfType : OclStaticSemantics =>
-   
+  
+  protected val keywords = List("and", "body", "context", "def", "derive", "else", "endif", "endpackage", "if", "implies",
+          				"in", "init", "inv", "let", "not", "or", "package", "post", "pre", "static", "then", "xor")
+  
   protected val _resolveNamespace : Tuple2[String, Boolean] => Attributable ==> Box[List[Namespace]] = {
     paramAttr {
       case (identifier, fuzzy) => {
@@ -93,7 +96,8 @@ trait OclReferenceResolver { selfType : OclStaticSemantics =>
         case aeo : AttributableEObject => {
           (aeo->sourceExpression).flatMap{sourceExpression =>
             (aeo->variables).flatMap{case (implicitVariables, explicitVariables) =>
-          		if (!fuzzy) {
+          		val cleanedIdentifier = cleanIdentifier(identifier)
+              if (!fuzzy) {
           			val sourceType = sourceExpression.getType
 	              sourceExpression match {
 	                // if the sourceExpression is an implicit variable (e.g., self or an iterator variable),
@@ -103,13 +107,13 @@ trait OclReferenceResolver { selfType : OclStaticSemantics =>
 		                  case Full(variable) => Full(List(variable))
 		                  case Empty | Failure(_, _, _) => {
 		                    val allProperties = implicitVariables.map{iv =>
-                        	lookupPropertyOnType(iv.getType, identifier, false)
+                        	lookupPropertyOnType(iv.getType, cleanedIdentifier, false)
 		                    }.filter(p => p.isDefined)
 		                    if (!allProperties.isEmpty)
 		                    	Full(List(allProperties.first.open_!))
 		                    else {
 	                        (aeo->namespace).flatMap{namespace =>
-	                          lookupType(identifier, namespace).flatMap{t =>
+	                          lookupType(cleanedIdentifier, namespace).flatMap{t =>
                              	Full(List(t))
 	                          }
                           }
@@ -120,7 +124,7 @@ trait OclReferenceResolver { selfType : OclStaticSemantics =>
 	                // in the other cases, the source is part of a navigation call -> only properties have
 	                // to be considered
 	                case other => {
-	                  lookupProperty(sourceExpression, aeo, identifier, false).flatMap{p =>
+	                  lookupProperty(sourceExpression, aeo, cleanedIdentifier, false).flatMap{p =>
 	                    Full(List(p))
 	                  }
 	                }
@@ -132,16 +136,16 @@ trait OclReferenceResolver { selfType : OclStaticSemantics =>
 		              // SourceExpression is an implicit variable -> lookup of variables, properties on implicit variable or types 
 		              case ve : VariableExp if !implicitVariables.filter(_ == ve.getReferredVariable).isEmpty => {
 		                (aeo->namespace).flatMap{namespace =>
-		                	Full(lookupVariableFuzzy(identifier, aeo):::
+		                	Full(lookupVariableFuzzy(cleanedIdentifier, aeo):::
                           implicitVariables.flatMap{iv =>
-                          	lookupPropertyOnTypeFuzzy(factory.createVariableExp(iv), aeo, identifier, false)
+                          	lookupPropertyOnTypeFuzzy(factory.createVariableExp(iv), aeo, cleanedIdentifier, false)
                           }.flatten(p => p):::
-                          lookupTypeFuzzy(identifier, namespace))
+                          lookupTypeFuzzy(cleanedIdentifier, namespace))
 		                }
 		              }
 		              // SourceExpression not equal an implicit variable -> lookup in a navigation call
 		              case other => {
-		                lookupPropertyOnTypeFuzzy(other, aeo, identifier, false)
+		                lookupPropertyOnTypeFuzzy(other, aeo, cleanedIdentifier, false)
 		              }
 		            }
 		          }
@@ -156,18 +160,19 @@ trait OclReferenceResolver { selfType : OclStaticSemantics =>
     paramAttr {
 	    case (identifier, fuzzy, parameters, static) => {
 	      case soc@StaticOperationCallExpCS(typeName, arguments) => {
+	      	val cleanedIdentifier = cleanIdentifier(identifier)
 	        (typeName->oclType).flatMap{sourceType =>
 	          val argumentsEOcl = arguments.flatMap(arg => arg->computeOclExpression)
 	          if (arguments.size != argumentsEOcl.size)
 	          	Failure("Parameters for operation " + identifier + " cannot be computed.")
 	          else {
 	          	if (!fuzzy) {
-	          		lookupOperationOnType(sourceType, identifier, true, argumentsEOcl.map(_.getType)).flatMap{o =>
+	          		lookupOperationOnType(sourceType, cleanedIdentifier, true, argumentsEOcl.map(_.getType)).flatMap{o =>
 	          		  Full(List(o))
 	          		}
 	          	}
 	          	else {
-	          		Full(lookupOperationOnTypeFuzzy(sourceType, identifier, true))
+	          		Full(lookupOperationOnTypeFuzzy(sourceType, cleanedIdentifier, true))
 	          	}
 	          }
 	        }
@@ -175,11 +180,12 @@ trait OclReferenceResolver { selfType : OclStaticSemantics =>
 	      case aeo : AttributableEObject => {
 	        (aeo->sourceExpression).flatMap{sourceExpression =>
 	          (aeo->variables).flatMap{case (implicitVariables, _) =>
-		          if (!fuzzy) {
+		        val cleanedIdentifier = cleanIdentifier(identifier)
+	            if (!fuzzy) {
 		            sourceExpression match {
 		              case ve : VariableExp if !implicitVariables.filter(_ == ve.getReferredVariable).isEmpty => {
 		                val allOperations = implicitVariables.map{iv =>
-		                  lookupOperation(factory.createVariableExp(iv), aeo, identifier, static, parameters)
+		                  lookupOperation(factory.createVariableExp(iv), aeo, cleanedIdentifier, static, parameters)
 		                }.filter(_.isDefined)
 		                if (allOperations.isEmpty)
 		                	yieldFailure("Unable to resolve operation " + identifier + " with parameters " + parameters.mkString(", "), aeo.getEObject)
@@ -193,7 +199,7 @@ trait OclReferenceResolver { selfType : OclStaticSemantics =>
                     }
 		              }
 		              case _ =>
-		                lookupOperation(sourceExpression, aeo, identifier, static, parameters).flatMap{operation =>
+		                lookupOperation(sourceExpression, aeo, cleanedIdentifier, static, parameters).flatMap{operation =>
 				              if (operation.getName == "oclIsNew" && operation.getInputParameter.isEmpty && operation.getType == oclLibrary.getOclBoolean &&
                       		!(aeo->isInPostCondition))
                       	yieldFailure("The use of 'oclIsNew' outside of a postcondition is not allowed.", aeo)
@@ -203,12 +209,19 @@ trait OclReferenceResolver { selfType : OclStaticSemantics =>
 		            }
 		          }
 		          else
-		            Full(lookupOperationOnTypeFuzzy(sourceExpression.getType, identifier, static))
+		            Full(lookupOperationOnTypeFuzzy(sourceExpression.getType, cleanedIdentifier, static))
 		        }
 		      }
 	      }
 	    }
     }
+  }
+  
+  def cleanIdentifier(identifier : String) = {
+    if (identifier.startsWith("_") && keywords.contains(identifier.substring(1))) 
+    	identifier.substring(1) 
+    else 
+    	identifier
   }
   
   def resolveNamespace(identifier : String, fuzzy : Boolean, container : EObject) : java.util.List[Namespace] = {
