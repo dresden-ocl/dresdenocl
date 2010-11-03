@@ -59,28 +59,38 @@ RULES {
 	
 	PackageDeclarationWithoutNamespaceCS::= contextDeclarations*;
 	
+	@Foldable
 	OperationContextDeclarationCS		::= "context" operation !0 prePostOrBodyDeclarations+;
 	
+	@Foldable
 	AttributeContextDeclarationCS		::= "context" typeName "::" property[SIMPLE_NAME] (":" type)? !0 initOrDeriveValue initOrDeriveValue?;
 	
+	@Foldable
 	ClassifierContextDeclarationCS		::= "context" typeName !0 invariantsAndDefinitions+;
 	
+	@Foldable
 	InitValueCS							::= "init" #0 ":" oclExpression;
 	
+	@Foldable
 	DeriveValueCS						::= "derive" #0 ":" oclExpression;
 	
+	@Foldable
 	InvariantExpCS						::= "inv" name? #0 ":" oclExpression;
 	
+	@Foldable
 	DefinitionExpCS						::= (static[STATIC])? "def" #0 ":" definitionExpPart;
 	
 	DefinitionExpPropertyCS				::= variableDeclaration;
 	
 	DefinitionExpOperationCS			::= operation equal[EQUALITY_OPERATOR] oclExpression;
-											
+	
+	@Foldable										
 	PreConditionDeclarationCS			::= "pre" (name)? #0 ":" oclExpression;
 	
+	@Foldable
 	PostConditionDeclarationCS			::= "post" (name)? #0 ":" oclExpression;
 	
+	@Foldable
 	BodyDeclarationCS					::= "body" (name)? #0 ":" oclExpression;
 
 	OperationDefinitionInContextCS		::= typeName #0 "::" #0 operation[SIMPLE_NAME] #0 "(" #0 (parameters (#0 "," parameters)*)? #0 ")" (":" returnType)?;
