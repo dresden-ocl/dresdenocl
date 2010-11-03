@@ -46,7 +46,7 @@ trait OclLookUpFunctions { selfType : OclStaticSemantics =>
   }
   
   private def lookupLocal(name : String, namespace : Namespace) : Box[Type] = {
-    !!(namespace.lookupType(name)) ?~ 
+    !!(namespace.lookupType(name)) or !!(model.findType(List(name))) ?~ 
       ("Cannot find type " + name + " in namespace " + namespace.getName)
   }
   
