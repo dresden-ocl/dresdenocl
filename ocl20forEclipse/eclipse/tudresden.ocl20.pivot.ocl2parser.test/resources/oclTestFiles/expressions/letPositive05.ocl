@@ -1,0 +1,9 @@
+package test
+
+/* Used to test correct parsing of nested let expressions. */
+context ClassA
+def: testLetPositive05(): String =
+let outer = 'outer', inner = 'inner'
+in outer + inner
+
+endpackage

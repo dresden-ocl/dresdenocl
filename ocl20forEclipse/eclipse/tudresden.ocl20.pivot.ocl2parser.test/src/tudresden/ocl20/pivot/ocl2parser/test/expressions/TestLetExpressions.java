@@ -19,10 +19,21 @@ with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
 
 package tudresden.ocl20.pivot.ocl2parser.test.expressions;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+
+import java.util.List;
+
 import org.junit.Test;
 
+import tudresden.ocl20.pivot.essentialocl.expressions.ExpressionInOcl;
+import tudresden.ocl20.pivot.essentialocl.expressions.LetExp;
+import tudresden.ocl20.pivot.essentialocl.expressions.OclExpression;
+import tudresden.ocl20.pivot.essentialocl.expressions.Variable;
 import tudresden.ocl20.pivot.ocl2parser.test.TestPerformer;
 import tudresden.ocl20.pivot.parser.SemanticException;
+import tudresden.ocl20.pivot.pivotmodel.Constraint;
 
 /**
  * <p>
@@ -121,24 +132,74 @@ public class TestLetExpressions {
 	 */
 	@Test
 	public void testLetPositive04() throws Exception {
-	
+
 		TestPerformer testPerformer;
-	
+
 		String modelFileName;
 		String oclFileName;
-	
+
 		oclFileName = "expressions/letPositive04.ocl";
 		modelFileName = "testmodel02.uml";
-	
+
 		/* Try to get the TestPerformer. */
 		testPerformer = TestPerformer.getInstance(
 				AllExpressionTests.META_MODEL_ID,
 				AllExpressionTests.MODEL_BUNDLE,
 				AllExpressionTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
-	
+
 		/* Try to parse the constraint file. */
 		testPerformer.parseFile(oclFileName);
+	}
+
+	/**
+	 * <p>
+	 * A test case to check that a LetExpression is parsed appropriately.
+	 * </p>
+	 */
+	@Test
+	public void testLetPositive05() throws Exception {
+
+		TestPerformer testPerformer;
+
+		String modelFileName;
+		String oclFileName;
+
+		oclFileName = "expressions/letPositive05.ocl";
+		modelFileName = "testmodel02.uml";
+
+		/* Try to get the TestPerformer. */
+		testPerformer = TestPerformer.getInstance(
+				AllExpressionTests.META_MODEL_ID,
+				AllExpressionTests.MODEL_BUNDLE,
+				AllExpressionTests.MODEL_DIRECTORY);
+		testPerformer.setModel(modelFileName);
+
+		/* Try to parse the constraint file. */
+		List<Constraint> constraints = testPerformer.parseFile(oclFileName);
+
+		/* Outer variable should be defined around inner variable. */
+		assertNotNull(constraints);
+		assertEquals(1, constraints.size());
+
+		Constraint constraint = constraints.get(0);
+		assertTrue(constraint.getSpecification() instanceof ExpressionInOcl);
+
+		OclExpression exp = ((ExpressionInOcl) constraint.getSpecification())
+				.getBodyExpression();
+		assertTrue(exp instanceof LetExp);
+
+		LetExp letExp = (LetExp) exp;
+		Variable var = letExp.getVariable();
+		assertEquals("outer", var.getName());
+
+		exp = letExp.getIn();
+		assertTrue(exp instanceof LetExp);
+
+		letExp = (LetExp) exp;
+		var = letExp.getVariable();
+		assertEquals("inner", var.getName());
+
 	}
 
 	/**
