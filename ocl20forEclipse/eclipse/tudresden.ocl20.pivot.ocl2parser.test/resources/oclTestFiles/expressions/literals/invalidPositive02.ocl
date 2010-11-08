@@ -1,0 +1,8 @@
+package package1::package2
+
+/* Operation should be parsed as OclInteger.+(OclInteger) */
+context Type1
+def: testInvalidLiteralPositive02(): Integer =
+invalid + 42
+
+endpackage
