@@ -1,9 +1,0 @@
--- Constraint taken from [1] page 172f and extended.
-
-package tudresden::ocl20::pivot::examples::royalsandloyals
-
--- Exception during parsing of given OCL constraints. [6,35] Unknown token: -
-context Membership
-inv: OrderedSet { 12, 9, 6, 3 } ->- Set { 1, 3, 2 } = OrderedSet { 12, 9, 6 }
-  
-endpackage

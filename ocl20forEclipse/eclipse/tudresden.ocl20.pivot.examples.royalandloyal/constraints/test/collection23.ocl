@@ -2,8 +2,7 @@
 
 package tudresden::ocl20::pivot::examples::royalsandloyals
 
--- Exception during parsing of given OCL constraints. [6,35] Unknown token: -
 context Membership
-inv: Set { 1, 4, 7, 10 } ->- Set { 4, 7 } = Set { 1, 10 }
+inv: Set { 1, 4, 7, 10 } - Set { 4, 7 } = Set { 1, 10 }
   
 endpackage
