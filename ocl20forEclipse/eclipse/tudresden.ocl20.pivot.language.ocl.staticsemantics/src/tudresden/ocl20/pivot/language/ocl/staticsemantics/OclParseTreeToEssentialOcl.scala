@@ -627,7 +627,7 @@ trait OclParseTreeToEssentialOcl { selfType : OclStaticSemantics =>
       
       case l@LetExpCS(variableDeclarations, oclExpression) => {
         (oclExpression->variables).flatMap{ case (_, explicitVariables) =>
-          explicitVariables.take(variableDeclarations.size).foldRight (oclExpression->computeOclExpression) { (explicitVariable, expression) =>
+          explicitVariables.take(variableDeclarations.size).foldLeft (oclExpression->computeOclExpression) { (expression, explicitVariable) =>
             expression.flatMap{expression =>
               Full(factory.createLetExp(explicitVariable, expression))
             }
