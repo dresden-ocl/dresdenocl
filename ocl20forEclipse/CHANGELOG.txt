@@ -18,6 +18,7 @@ Release 3.X (Not scheduled yet)
   - Definitions, Initial and Derived values should now work correctly if fields are 
     accessed directly from other classes.
   - Type Literals are now transformed correctly in all known contexts.
+  - InvalidLiterals should now be transformed correctly in all known contexts.
 
 Tests
 -----

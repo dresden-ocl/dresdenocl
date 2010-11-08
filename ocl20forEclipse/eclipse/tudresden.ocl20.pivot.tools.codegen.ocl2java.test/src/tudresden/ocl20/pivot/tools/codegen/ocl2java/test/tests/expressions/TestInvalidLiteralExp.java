@@ -87,7 +87,72 @@ public class TestInvalidLiteralExp extends AbstractDiffTest {
 	 */
 	@Test
 	public void testInvalid02() throws Exception {
-	
+
 		this.compareFragmentCodeGeneration("expressions/literals", "invalid02");
+	}
+
+	/**
+	 * <p>
+	 * Tests the fragment code generation of the constraint.
+	 * </p>
+	 * 
+	 * @throws Exception
+	 */
+	@Test
+	public void testInvalid03() throws Exception {
+
+		this.compareFragmentCodeGeneration("expressions/literals", "invalid03");
+	}
+
+	/**
+	 * <p>
+	 * Tests the fragment code generation of the constraint.
+	 * </p>
+	 * 
+	 * @throws Exception
+	 */
+	@Test
+	public void testInvalid04() throws Exception {
+
+		this.compareFragmentCodeGeneration("expressions/literals", "invalid04");
+	}
+
+	/**
+	 * <p>
+	 * Tests the fragment code generation of the constraint.
+	 * </p>
+	 * 
+	 * @throws Exception
+	 */
+	@Test
+	public void testInvalid05() throws Exception {
+
+		this.compareFragmentCodeGeneration("expressions/literals", "invalid05");
+	}
+
+	/**
+	 * <p>
+	 * Tests the fragment code generation of the constraint.
+	 * </p>
+	 * 
+	 * @throws Exception
+	 */
+	@Test
+	public void testInvalid06() throws Exception {
+
+		this.compareFragmentCodeGeneration("expressions/literals", "invalid06");
+	}
+
+	/**
+	 * <p>
+	 * Tests the fragment code generation of the constraint.
+	 * </p>
+	 * 
+	 * @throws Exception
+	 */
+	@Test
+	public void testInvalid07() throws Exception {
+
+		this.compareFragmentCodeGeneration("expressions/literals", "invalid07");
 	}
 }

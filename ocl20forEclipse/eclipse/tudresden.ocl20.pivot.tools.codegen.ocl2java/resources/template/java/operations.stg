@@ -108,6 +108,13 @@ asSequenceOperationOnSequence(sourceExp) ::= <<
 $sequenceUtility()$.asSequence($sourceExp$)
 >>
 
+// --- OclAny.asSet() ---
+asSetOperationOnOclAny(sourceExp, argsExp, elementType, resultVariable) ::= <<
+$setType()$<$elementType$> $resultVariable$;
+$resultVariable$ = new $setTypeInitialization()$<$elementType$>();
+$resultVariable$.$addOperationName()$($sourceExp$);
+>>
+
 // --- Bag.asSet() ---
 asSetOperationOnBag(sourceExp, argsExp) ::= <<
 $bagUtility()$.asSet($sourceExp$)

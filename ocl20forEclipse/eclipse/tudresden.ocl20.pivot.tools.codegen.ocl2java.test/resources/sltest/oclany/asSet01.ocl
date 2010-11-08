@@ -1,0 +1,6 @@
+package testpackage
+
+context Class1
+def: testAsSet01 = self.asSet()
+
+endpackage

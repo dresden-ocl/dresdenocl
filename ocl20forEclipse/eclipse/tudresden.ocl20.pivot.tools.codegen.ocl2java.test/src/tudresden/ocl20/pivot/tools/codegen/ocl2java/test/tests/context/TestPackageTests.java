@@ -17,7 +17,7 @@ You should have received a copy of the GNU Lesser General Public License along
 with Dresden OCL. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package tudresden.ocl20.pivot.tools.codegen.ocl2java.test.tests.expressions;
+package tudresden.ocl20.pivot.tools.codegen.ocl2java.test.tests.context;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
@@ -25,6 +25,8 @@ import org.junit.Test;
 
 import tudresden.ocl20.pivot.model.ModelAccessException;
 import tudresden.ocl20.pivot.pivotmodel.Constraint;
+import tudresden.ocl20.pivot.tools.codegen.ocl2java.IOcl2JavaSettings;
+import tudresden.ocl20.pivot.tools.codegen.ocl2java.Ocl2JavaFactory;
 import tudresden.ocl20.pivot.tools.codegen.ocl2java.test.tests.AbstractDiffTest;
 
 /**
@@ -35,7 +37,7 @@ import tudresden.ocl20.pivot.tools.codegen.ocl2java.test.tests.AbstractDiffTest;
  * 
  * @author Claas Wilke
  */
-public class TestLetExp extends AbstractDiffTest {
+public class TestPackageTests extends AbstractDiffTest {
 
 	/**
 	 * <p>
@@ -73,11 +75,14 @@ public class TestLetExp extends AbstractDiffTest {
 	 * @throws Exception
 	 */
 	@Test
-	public void testLet01() throws Exception {
+	public void testPackage01() throws Exception {
 
-		this.compareFragmentCodeGeneration("expressions", "let01");
+		IOcl2JavaSettings settings = Ocl2JavaFactory.getInstance()
+				.createJavaCodeGeneratorSettings();
+		settings.setBasisPackage("basisPackage");
+		this.compareFragmentCodeGeneration("context", "package01", settings);
 	}
-	
+
 	/**
 	 * <p>
 	 * Tests the fragment code generation of the constraint.
@@ -86,8 +91,27 @@ public class TestLetExp extends AbstractDiffTest {
 	 * @throws Exception
 	 */
 	@Test
-	public void testLet02() throws Exception {
+	public void testPackage02() throws Exception {
 
-		this.compareFragmentCodeGeneration("expressions", "let02");
+		IOcl2JavaSettings settings = Ocl2JavaFactory.getInstance()
+				.createJavaCodeGeneratorSettings();
+		settings.setBasisPackage("basisPackage");
+		this.compareFragmentCodeGeneration("context", "package02", settings);
+	}
+
+	/**
+	 * <p>
+	 * Tests the fragment code generation of the constraint.
+	 * </p>
+	 * 
+	 * @throws Exception
+	 */
+	@Test
+	public void testPackage03() throws Exception {
+
+		IOcl2JavaSettings settings = Ocl2JavaFactory.getInstance()
+				.createJavaCodeGeneratorSettings();
+		settings.setBasisPackage("basisPackage1.basisPackage2");
+		this.compareFragmentCodeGeneration("context", "package03", settings);
 	}
 }

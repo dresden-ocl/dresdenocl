@@ -30,6 +30,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.WeakHashMap;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
@@ -142,6 +143,9 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 		renamedOperationNames.put(">=", "greaterEquals");
 	}
 
+	/** Cache used to improve speed of {@link Type} transformation. */
+	private Map<Type, ITransformedType> cachedTransformedTypes = new WeakHashMap<Type, ITransformedType>();
+
 	/**
 	 * The environment to provide and store some values during code
 	 * transformation.
@@ -156,14 +160,6 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 	 * transformation.
 	 */
 	private ITemplateGroup templateGroup;
-
-	/* FIXME Claas: Move this to environment. */
-	private Map<String, String> variableNames = new HashMap<String, String>();
-
-	{
-		variableNames.put("class", "clazz");
-		variableNames.put("extends", "ixtends");
-	}
 
 	/**
 	 * <p>
@@ -208,6 +204,9 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 	public void setSettings(IOcl2JavaSettings settings) {
 
 		this.settings = settings;
+
+		/* Clear the cache to avoid side effects. */
+		this.cachedTransformedTypes.clear();
 	}
 
 	/*
@@ -351,6 +350,10 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 		template.setAttribute("collectionName", collectionName);
 		template.setAttribute("collectionType", resultType.toString());
 
+		this.environment
+				.pushExpectedReturnType(((CollectionType) aCollectionLiteralExp
+						.getType()).getElementType());
+
 		/* Transform Code for all initial elements. */
 		for (CollectionLiteralPart aCollectionPart : aCollectionLiteralExp
 				.getPart()) {
@@ -407,6 +410,9 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 				template.setAttribute("elementExps", elemTemplate.toString());
 			}
 		}
+		// end for.
+
+		this.environment.popExpectedReturnType();
 
 		result.addCode(template.toString());
 		result.setResultExp(collectionName);
@@ -451,6 +457,13 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 		if (enumerationName.startsWith(ModelConstants.ROOT_PACKAGE_NAME)) {
 			enumerationName = enumerationName.substring(5);
 		}
+		// no else.
+
+		/* Probably add some extra packages. */
+		if (this.settings.getBasisPackage() != null
+				&& this.settings.getBasisPackage().length() > 0)
+			enumerationName = this.settings.getBasisPackage() + "."
+					+ enumerationName;
 		// no else.
 
 		ITemplate template = this.templateGroup.getTemplate("enumLiteralExp");
@@ -597,6 +610,13 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 		ITemplate template = this.templateGroup
 				.getTemplate("invalidLiteralExp");
 
+		if (this.environment.getExpectedReturnType() != null)
+			template.setAttribute(
+					"resultType",
+					this.transformType(this.environment.getExpectedReturnType())
+							.toString());
+		// no else.
+
 		ITransformedCode result = new TransformedCodeImpl();
 		result.setResultExp(template.toString());
 
@@ -655,7 +675,9 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 		}
 
 		/* Begin with code transformation. */
+		this.environment.pushExpectedReturnType(anIterateExp.getType());
 		ITransformedCode bodyCode = this.doSwitch(bodyExp);
+		this.environment.popExpectedReturnType();
 
 		/* TODO Find a solution without modifying the ASM (part 2). */
 		/* Add the iterator Variable to the IterateExp again. */
@@ -766,16 +788,19 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 			itVarName2 = this.environment.getNewIteratorVarName();
 
 			/* Rename the variable and preserve the old name. */
-			String oldVarMapping = this.variableNames.get(itVariable.getName());
-			this.variableNames.put(itVariable.getName(), itVarName2);
+			String oldVarMapping = this.environment
+					.getVariableMapping(itVariable.getName());
+			this.environment.addVariableMapping(itVariable.getName(),
+					itVarName2);
 
 			bodyCode2 = this.doSwitch(bodyExp);
 
 			/* Reset the mapping. */
 			if (oldVarMapping != null)
-				this.variableNames.put(itVariable.getName(), oldVarMapping);
+				this.environment.addVariableMapping(itVariable.getName(),
+						oldVarMapping);
 			else
-				this.variableNames.remove(itVariable.getName());
+				this.environment.removeVariableMapping(itVariable.getName());
 		}
 
 		/* TODO Find a solution without modifying the ASM (Part 2). */
@@ -892,15 +917,15 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 		OclExpression inExp = aLetExp.getIn();
 
 		/* Generate the code for the inExp. */
-		ITransformedCode inCode = doSwitch((EObject) inExp);
+		ITransformedCode inCode = doSwitch(inExp);
 
 		ITemplate template = this.templateGroup.getTemplate("letExp");
 		template.setAttribute("varType", this.transformType(aVarsType)
 				.getTypeName());
 
 		String varName = aVar.getName();
-		if (this.variableNames.containsKey(varName))
-			varName = this.variableNames.get(varName);
+		if (this.environment.existsMappingForVariable(varName))
+			varName = this.environment.getVariableMapping(varName);
 		// no else.
 
 		template.setAttribute("varName", varName);
@@ -908,7 +933,10 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 
 		/* Generate the code for the initExp. */
 		if (initExp != null) {
-			ITransformedCode initCode = doSwitch((EObject) initExp);
+			this.environment.pushExpectedReturnType(aLetExp.getVariable()
+					.getType());
+			ITransformedCode initCode = doSwitch(initExp);
+			this.environment.popExpectedReturnType();
 
 			template.setAttribute("initCode", initCode.getCode());
 			template.setAttribute("initExp", initCode.getResultExp());
@@ -986,8 +1014,16 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 					.getTypeName());
 		}
 
-		else
+		else {
+			if (referredOperation != null)
+				this.environment.pushExpectedReturnType(referredOperation
+						.getOwningType());
+			// no else.
 			sourceCode = this.doSwitch(sourceExp);
+			if (referredOperation != null)
+				this.environment.popExpectedReturnType();
+			// no else.
+		}
 		// end else.
 
 		result.addCode(sourceCode.getCode());
@@ -1395,6 +1431,7 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 			/* Operations on OclAny. */
 			/* TODO AST of oclAsType seems to be wrong. */
 			/* TODO AST of oclType seems to be wrong. */
+			/* TODO asSet operation not defined on OclAny. */
 			if (template == null
 					&& (referredOperation != null
 							&& referredOperation.getOwner() != null && referredOperation
@@ -1433,6 +1470,31 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 						template.setAttribute("sourceHasType", "true");
 					}
 					// no else.
+
+					result.addCode(template.toString());
+					resultExp = resultVar;
+				}
+
+				/*
+				 * asSet Operation requires special attributes and special
+				 * handling.
+				 */
+				else if (template != null && operationName.equals("asSet")) {
+					String resultVar = this.environment.getNewResultVarName();
+
+					template.setAttribute("sourceExp",
+							sourceCode.getResultExp());
+					template.setAttribute("resultVar", resultVar);
+
+					if (sourceExp.getType() != null) {
+						template.setAttribute("elementType",
+								this.transformType(sourceExp.getType()));
+					}
+
+					else {
+						template.setAttribute("elementType", this.templateGroup
+								.getTemplate("anyType").toString());
+					}
 
 					result.addCode(template.toString());
 					resultExp = resultVar;
@@ -1498,6 +1560,7 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 			template.setAttribute("sourceExp", sourceCode.getResultExp());
 
 			/* Probably set code for arguments of the operation. */
+			int index = 0;
 			for (OclExpression anArgument : anOperationCallExp.getArgument()) {
 
 				/* Especially handle type literals for some operations. */
@@ -1511,11 +1574,16 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 				}
 
 				else {
-					ITransformedCode argCode = this
-							.doSwitch((EObject) anArgument);
+					this.environment.pushExpectedReturnType(referredOperation
+							.getInputParameter().get(index).getType());
+					ITransformedCode argCode = this.doSwitch(anArgument);
+					this.environment.popExpectedReturnType();
+
 					result.addCode(argCode.getCode());
 					template.setAttribute("argsExp", argCode.getResultExp());
 				}
+
+				index++;
 			}
 			// end for.
 
@@ -1590,7 +1658,22 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 
 		/* Set template attributes. */
 		template.setAttribute("sourceExp", sourceCode.getResultExp());
-		template.setAttribute("propertyName", referredProperty.getName());
+
+		String propertyName = referredProperty.getName();
+
+		/* Probably use getters instead of properties. */
+		if (!(aPropertyCallExp.getSource() != null && aPropertyCallExp
+				.getSource().getType() instanceof TupleType)
+				&& this.settings.isGettersForPropertyCallsEnabled()) {
+			String newName = "get" + propertyName.substring(0, 1).toUpperCase();
+			if (propertyName.length() > 1)
+				newName += propertyName.substring(1, propertyName.length());
+			// no else.
+			propertyName = newName + "()";
+		}
+		// no else.
+
+		template.setAttribute("propertyName", propertyName);
 
 		result.setResultExp(template.toString());
 
@@ -1881,8 +1964,8 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 			String varName = aVariable.getName();
 
 			/* Probably map the variable to another name. */
-			if (this.variableNames.containsKey(varName))
-				varName = this.variableNames.get(varName);
+			if (this.environment.existsMappingForVariable(varName))
+				varName = this.environment.getVariableMapping(varName);
 			// no else.
 
 			result.setResultExp(varName);
@@ -2015,6 +2098,7 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 					.addDefaultTemplateGroup("Ocl2Java", null);
 
 			this.templateGroup.addFiles(templatePaths);
+
 			this.settings = new Ocl2JavaSettings();
 		}
 
@@ -2081,8 +2165,10 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 		aspectTemplate.setAttribute("name", aspectName);
 
 		/* Generate the code which shall be inside the advice(s). */
+		this.environment.pushExpectedReturnType(constrainedOperation.getType());
 		ITransformedCode constrainedCode = this
 				.transformFragmentCode(constraint);
+		this.environment.popExpectedReturnType();
 
 		/* Probably collect allInstances for some classes. */
 		if (this.environment.hasAllInstancesClasses()) {
@@ -2196,8 +2282,10 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 		aspectTemplate.setAttribute("name", aspectName);
 
 		/* Generate the code which shall be inside the advice(s). */
+		this.environment.pushExpectedReturnType(definedFeature.getType());
 		ITransformedCode constrainedCode = this
 				.transformFragmentCode(constraint);
+		this.environment.popExpectedReturnType();
 
 		/* Probably collect allInstances for some classes. */
 		if (this.environment.hasAllInstancesClasses()) {
@@ -2374,8 +2462,10 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 		aspectTemplate.setAttribute("name", aspectName);
 
 		/* Generate the code which shall be inside the advice(s). */
+		this.environment.pushExpectedReturnType(constrainedProperty.getType());
 		ITransformedCode constrainedCode = this
 				.transformFragmentCode(constraint);
+		this.environment.popExpectedReturnType();
 
 		/* Probably collect allInstances for some classes. */
 		if (this.environment.hasAllInstancesClasses()) {
@@ -2495,8 +2585,10 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 		aspectTemplate.setAttribute("name", aspectName);
 
 		/* Generate the code which shall be inside the advice(s). */
+		this.environment.pushExpectedReturnType(constrainedProperty.getType());
 		ITransformedCode constrainedCode = this
 				.transformFragmentCode(constraint);
+		this.environment.popExpectedReturnType();
 
 		/* Probably collect allInstances for some classes. */
 		if (this.environment.hasAllInstancesClasses()) {
@@ -2607,8 +2699,11 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 		aspectTemplate.setAttribute("name", aspectName);
 
 		/* Generate the code which shall be inside the advice(s). */
+		this.environment.pushExpectedReturnType(EssentialOclPlugin
+				.getOclLibraryProvider().getOclLibrary().getOclBoolean());
 		ITransformedCode constrainedCode = this
 				.transformFragmentCode(constraint);
+		this.environment.popExpectedReturnType();
 
 		/* Probably collect allInstances for some classes. */
 		if (this.environment.hasAllInstancesClasses()) {
@@ -2763,8 +2858,11 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 		aspectTemplate.setAttribute("name", aspectName);
 
 		/* Generate the code which shall be inside the advice(s). */
+		this.environment.pushExpectedReturnType(EssentialOclPlugin
+				.getOclLibraryProvider().getOclLibrary().getOclBoolean());
 		ITransformedCode constrainedCode = this
 				.transformFragmentCode(constraint);
+		this.environment.popExpectedReturnType();
 
 		/* Probably collect allInstances for some classes. */
 		if (this.environment.hasAllInstancesClasses()) {
@@ -2963,8 +3061,11 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 		aspectTemplate.setAttribute("name", aspectName);
 
 		/* Generate the code which shall be inside the advice(s). */
+		this.environment.pushExpectedReturnType(EssentialOclPlugin
+				.getOclLibraryProvider().getOclLibrary().getOclBoolean());
 		ITransformedCode constrainedCode = this
 				.transformFragmentCode(constraint);
+		this.environment.popExpectedReturnType();
 
 		/* Probably collect allInstances for some classes. */
 		if (this.environment.hasAllInstancesClasses()) {
@@ -3580,51 +3681,60 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 
 		ITransformedType result;
 
-		if (aType instanceof AnyType) {
-			result = new TransformedTypeImpl(this.templateGroup.getTemplate(
-					"anyType").toString());
-		}
-
-		else if (aType instanceof CollectionType) {
-			result = this.transformCollectionType((CollectionType) aType);
-		}
-
-		else if (aType instanceof Enumeration) {
-			result = new TransformedTypeImpl(this.templateGroup.getTemplate(
-					"enumerationType").toString());
-		}
-
-		else if (aType instanceof InvalidType) {
-			result = new TransformedTypeImpl(this.templateGroup.getTemplate(
-					"invalidType").toString());
-		}
-
-		else if (aType instanceof PrimitiveType) {
-			result = this.transformPrimitiveType((PrimitiveType) aType);
-		}
-
-		else if (aType instanceof TupleType) {
-			result = new TransformedTypeImpl(this.templateGroup.getTemplate(
-					"tupleType").toString());
-		}
-
-		else if (aType instanceof TypeType) {
-			result = new TransformedTypeImpl(this.templateGroup.getTemplate(
-					"typeType").toString());
-		}
-
-		else if (aType instanceof VoidType) {
-			result = new TransformedTypeImpl(this.templateGroup.getTemplate(
-					"voidType").toString());
+		if (this.cachedTransformedTypes.containsKey(aType)) {
+			result = this.cachedTransformedTypes.get(aType);
 		}
 
 		else {
-			/*
-			 * For other types return their canonical name as type (used to
-			 * handle model-defined types).
-			 */
-			String typeName = this.getCanonicalName(aType);
-			result = new TransformedTypeImpl(typeName);
+			if (aType instanceof AnyType) {
+				result = new TransformedTypeImpl(this.templateGroup
+						.getTemplate("anyType").toString());
+			}
+
+			else if (aType instanceof CollectionType) {
+				result = this.transformCollectionType((CollectionType) aType);
+			}
+
+			else if (aType instanceof Enumeration) {
+				result = new TransformedTypeImpl(this.templateGroup
+						.getTemplate("enumerationType").toString());
+			}
+
+			else if (aType instanceof InvalidType) {
+				result = new TransformedTypeImpl(this.templateGroup
+						.getTemplate("invalidType").toString());
+			}
+
+			else if (aType instanceof PrimitiveType) {
+				result = this.transformPrimitiveType((PrimitiveType) aType);
+			}
+
+			else if (aType instanceof TupleType) {
+				result = new TransformedTypeImpl(this.templateGroup
+						.getTemplate("tupleType").toString());
+			}
+
+			else if (aType instanceof TypeType) {
+				result = new TransformedTypeImpl(this.templateGroup
+						.getTemplate("typeType").toString());
+			}
+
+			else if (aType instanceof VoidType) {
+				result = new TransformedTypeImpl(this.templateGroup
+						.getTemplate("voidType").toString());
+			}
+
+			else {
+				/*
+				 * For other types return their canonical name as type (used to
+				 * handle model-defined types).
+				 */
+				String typeName = this.getCanonicalName(aType);
+				result = new TransformedTypeImpl(typeName);
+			}
+
+			/* Cache the result. */
+			this.cachedTransformedTypes.put(aType, result);
 		}
 
 		/* Probably log the exit from this method. */

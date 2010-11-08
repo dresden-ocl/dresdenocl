@@ -1,20 +1,20 @@
 /*
-Copyright (C) 2008-2010 by Claas Wilke (claaswilke@gmx.net)
-
-This file is part of the OCL 2 Java Code Generator of Dresden OCL2 for Eclipse.
-
-Dresden OCL2 for Eclipse is free software: you can redistribute it and/or modify 
-it under the terms of the GNU Lesser General Public License as published by the 
-Free Software Foundation, either version 3 of the License, or (at your option)
-any later version.
-
-Dresden OCL2 for Eclipse is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
-or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License 
-for more details.
-
-You should have received a copy of the GNU Lesser General Public License along 
-with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
+ * Copyright (C) 2008-2010 by Claas Wilke (claas.wilke@tu-dresden.de)
+ *
+ * This file is part of the OCL2Java Code Generator of Dresden OCL.
+ *
+ * Dresden OCL is free software: you can redistribute it and/or modify 
+ * it under the terms of the GNU Lesser General Public License as published by the 
+ * Free Software Foundation, either version 3 of the License, or (at your option)
+ * any later version.
+ *
+ * Dresden OCL is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License 
+ * for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License along 
+ * with Dresden OCL. If not, see <http://www.gnu.org/licenses/>.
  */
 package tudresden.ocl20.pivot.tools.codegen.ocl2java;
 
@@ -81,6 +81,11 @@ public interface IOcl2JavaSettings extends IOcl2CodeSettings {
 	public boolean isGettersForDefinedAttributesEnabled();
 
 	/**
+	 * @return If true, getters are used in PropertyCallExpressions.
+	 */
+	public boolean isGettersForPropertyCallsEnabled();
+
+	/**
 	 * <p>
 	 * Checks, whether or not the inheritance of a {@link Constraint} is
 	 * disabled for code generation.
@@ -105,7 +110,7 @@ public interface IOcl2JavaSettings extends IOcl2CodeSettings {
 	 *            The path of the basis package using the names of the packages
 	 *            separated by dots.
 	 */
-	public void setBasisPackahe(String path);
+	public void setBasisPackage(String path);
 
 	/**
 	 * <p>
@@ -118,6 +123,17 @@ public interface IOcl2JavaSettings extends IOcl2CodeSettings {
 	 *            If true, inheritance is disabled by default.
 	 */
 	public void setDefaultInheritanceDisabled(boolean disable);
+
+	/**
+	 * <p>
+	 * Sets the mode which shall be used to check invariants for which no
+	 * specific setting is set.
+	 * </p>
+	 * 
+	 * @param mode
+	 *            A value between 1 and 3 (default is 1).
+	 */
+	public void setDefaultInvariantCheckMode(int mode);
 
 	/**
 	 * <p>
@@ -136,6 +152,12 @@ public interface IOcl2JavaSettings extends IOcl2CodeSettings {
 	public void setGettersForDefinedAttributesEnabled(boolean enable);
 
 	/**
+	 * @param enable
+	 *            If true, getters are used for PropertyCallExpressions.
+	 */
+	public void setGettersForPropertyCallsEnabled(boolean enable);
+
+	/**
 	 * <p>
 	 * Enables or disables the inheritance for the code generation of a given
 	 * {@link Constraint}. <strong>Does only work with invariants, pre- and
@@ -149,17 +171,6 @@ public interface IOcl2JavaSettings extends IOcl2CodeSettings {
 	 *            If true, inheritance is disabled by default.
 	 */
 	public void setInheritanceDisabled(Constraint aConstraint, boolean disable);
-
-	/**
-	 * <p>
-	 * Sets the mode which shall be used to check invariants for which no
-	 * specific setting is set.
-	 * </p>
-	 * 
-	 * @param mode
-	 *            A value between 1 and 3 (default is 1).
-	 */
-	public void setDefaultInvariantCheckMode(int mode);
 
 	/**
 	 * <p>

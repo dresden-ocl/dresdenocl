@@ -15,6 +15,6 @@ public privileged aspect Class1_DefAspect_testInvalidLiteralExp01 {
     invalid</code></p>
      */
     public Integer testpackage.Class1.testInvalidLiteralExp01( ) {
-        return /* (TODO Probably add Type Cast here.) */ tudresden.ocl20.pivot.tools.codegen.ocl2java.types.OclInvalidException.getInvalidLiteral();
+        return (Integer) tudresden.ocl20.pivot.tools.codegen.ocl2java.types.OclInvalidException.getInvalidLiteral();
     }
 }

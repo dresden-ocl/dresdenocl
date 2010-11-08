@@ -59,8 +59,8 @@ public class FragmentTest {
 
 	/**
 	 * <p>
-	 * A test case testing the code generation a operationCallexpression using an
-	 * operation of OclAny contained in any01.ocl.
+	 * A test case testing the code generation a operationCallexpression using
+	 * an operation of OclAny contained in any01.ocl.
 	 * </p>
 	 */
 	@Test
@@ -74,8 +74,8 @@ public class FragmentTest {
 
 	/**
 	 * <p>
-	 * A test case testing the code generation a operationCallexpression using an
-	 * operation of OclAny contained in any02.ocl.
+	 * A test case testing the code generation a operationCallexpression using
+	 * an operation of OclAny contained in any02.ocl.
 	 * </p>
 	 */
 	@Test
@@ -89,8 +89,8 @@ public class FragmentTest {
 
 	/**
 	 * <p>
-	 * A test case testing the code generation a operationCallexpression using an
-	 * operation of OclAny contained in any03.ocl.
+	 * A test case testing the code generation a operationCallexpression using
+	 * an operation of OclAny contained in any03.ocl.
 	 * </p>
 	 */
 	@Test
@@ -104,8 +104,8 @@ public class FragmentTest {
 
 	/**
 	 * <p>
-	 * A test case testing the code generation a operationCallexpression using an
-	 * operation of OclAny contained in any04.ocl.
+	 * A test case testing the code generation a operationCallexpression using
+	 * an operation of OclAny contained in any04.ocl.
 	 * </p>
 	 */
 	@Test
@@ -119,8 +119,8 @@ public class FragmentTest {
 
 	/**
 	 * <p>
-	 * A test case testing the code generation a operationCallexpression using an
-	 * operation of OclAny contained in any05.ocl.
+	 * A test case testing the code generation a operationCallexpression using
+	 * an operation of OclAny contained in any05.ocl.
 	 * </p>
 	 */
 	@Test
@@ -552,39 +552,20 @@ public class FragmentTest {
 		testPerformer.doFragmentDiffTest(constraintFileName, expectedFileName);
 	}
 
-	// /**
-	// * <p>
-	// * A test case testing the code generation a boolean LiteraleEpression
-	// * contained in collection23.ocl.
-	// * </p>
-	// */
-	// /* FIXME Test again, when error in parser is fixed. */
-	// @Test
-	// public void testCollection23() {
-	//
-	// this.constraintFileName = "constraints/test/collection23.ocl";
-	// this.expectedFileName =
-	// "resources/transformedfragments/collection23.txt";
-	//
-	// testPerformer.doFragmentDiffTest(constraintFileName, expectedFileName);
-	// }
+	/**
+	 * <p>
+	 * A test case testing the code generation a boolean LiteraleEpression
+	 * contained in collection23.ocl.
+	 * </p>
+	 */
+	@Test
+	public void testCollection23() {
 
-	// /**
-	// * <p>
-	// * A test case testing the code generation a boolean LiteraleEpression
-	// * contained in collection24.ocl.
-	// * </p>
-	// */
-	// /* FIXME Test again, when error in parser is fixed. */
-	// @Test
-	// public void testCollection24() {
-	//
-	// this.constraintFileName = "constraints/test/collection24.ocl";
-	// this.expectedFileName =
-	// "resources/transformedfragments/collection24.txt";
-	//
-	// testPerformer.doFragmentDiffTest(constraintFileName, expectedFileName);
-	// }
+		this.constraintFileName = "constraints/test/collection23.ocl";
+		this.expectedFileName = "resources/transformedfragments/collection23.txt";
+
+		testPerformer.doFragmentDiffTest(constraintFileName, expectedFileName);
+	}
 
 	/**
 	 * <p>
@@ -1173,8 +1154,8 @@ public class FragmentTest {
 
 	/**
 	 * <p>
-	 * A test case testing the code generation a static property call contained in
-	 * static02.ocl.
+	 * A test case testing the code generation a static property call contained
+	 * in static02.ocl.
 	 * </p>
 	 */
 	@Test
@@ -1203,8 +1184,8 @@ public class FragmentTest {
 
 	/**
 	 * <p>
-	 * A test case testing the code generation a static property call contained in
-	 * static04.ocl.
+	 * A test case testing the code generation a static property call contained
+	 * in static04.ocl.
 	 * </p>
 	 */
 	@Test

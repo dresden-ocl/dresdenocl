@@ -28,6 +28,7 @@ import org.junit.Test;
 
 import tudresden.ocl20.pivot.model.ModelAccessException;
 import tudresden.ocl20.pivot.tools.codegen.ocl2java.IOcl2JavaSettings;
+import tudresden.ocl20.pivot.tools.codegen.ocl2java.Ocl2JavaFactory;
 
 /**
  * <p>
@@ -310,18 +311,23 @@ public class GenerateAspectJCode extends AbstractDiffTest {
 		constraints.clear();
 		constraints.add(new String[] { "constraintkindtest/inv", "inv02" });
 
+		IOcl2JavaSettings settings;
+		settings = Ocl2JavaFactory.getInstance()
+				.createJavaCodeGeneratorSettings();
+		settings.setDefaultInvariantCheckMode(IOcl2JavaSettings.INVARIANT_CHECK_AFTER_CONSTRUCT_AND_PUBLIC_METHOD_EXECUTION);
+
 		this.createInstrumentationCode(
 				"tudresden.ocl20.pivot.tools.codegen.ocl2java.test.aspectj",
-				constraints,
-				IOcl2JavaSettings.INVARIANT_CHECK_AFTER_CONSTRUCT_AND_PUBLIC_METHOD_EXECUTION);
+				constraints, settings);
 
 		constraints.clear();
 		constraints.add(new String[] { "constraintkindtest/inv", "inv03" });
 		constraints.add(new String[] { "constraintkindtest/inv", "inv04" });
 
+		settings.setDefaultInvariantCheckMode(IOcl2JavaSettings.INVARIANT_CHECK_AFTER_SPECIAL_METHOD_INVOCATION);
+
 		this.createInstrumentationCode(
 				"tudresden.ocl20.pivot.tools.codegen.ocl2java.test.aspectj",
-				constraints,
-				IOcl2JavaSettings.INVARIANT_CHECK_AFTER_SPECIAL_METHOD_INVOCATION);
+				constraints, settings);
 	}
 }

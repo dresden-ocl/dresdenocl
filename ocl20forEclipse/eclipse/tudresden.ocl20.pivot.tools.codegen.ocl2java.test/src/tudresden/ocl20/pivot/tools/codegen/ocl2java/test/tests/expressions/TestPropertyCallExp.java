@@ -25,6 +25,8 @@ import org.junit.Test;
 
 import tudresden.ocl20.pivot.model.ModelAccessException;
 import tudresden.ocl20.pivot.pivotmodel.Constraint;
+import tudresden.ocl20.pivot.tools.codegen.ocl2java.IOcl2JavaSettings;
+import tudresden.ocl20.pivot.tools.codegen.ocl2java.Ocl2JavaFactory;
 import tudresden.ocl20.pivot.tools.codegen.ocl2java.test.tests.AbstractDiffTest;
 
 /**
@@ -77,7 +79,7 @@ public class TestPropertyCallExp extends AbstractDiffTest {
 
 		this.compareFragmentCodeGeneration("expressions/calls", "property01");
 	}
-	
+
 	/**
 	 * <p>
 	 * Tests the fragment code generation of the constraint.
@@ -89,5 +91,21 @@ public class TestPropertyCallExp extends AbstractDiffTest {
 	public void testProperty02() throws Exception {
 
 		this.compareFragmentCodeGeneration("expressions/calls", "property02");
+	}
+
+	/**
+	 * <p>
+	 * Tests the fragment code generation of the constraint.
+	 * </p>
+	 * 
+	 * @throws Exception
+	 */
+	@Test
+	public void testProperty03() throws Exception {
+
+		IOcl2JavaSettings settings = Ocl2JavaFactory.getInstance()
+				.createJavaCodeGeneratorSettings();
+		settings.setGettersForPropertyCallsEnabled(true);
+		this.compareFragmentCodeGeneration("expressions/calls", "property03", settings);
 	}
 }

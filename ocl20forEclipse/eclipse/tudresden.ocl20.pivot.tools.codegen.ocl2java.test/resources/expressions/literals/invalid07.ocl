@@ -1,0 +1,7 @@
+package testpackage
+
+context Class1
+def: testInvalidLiteralExp07(): Integer =
+invalid + 42
+
+endpackage

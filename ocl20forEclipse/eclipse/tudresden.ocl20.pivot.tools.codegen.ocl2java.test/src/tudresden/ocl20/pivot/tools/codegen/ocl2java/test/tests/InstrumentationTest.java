@@ -72,22 +72,20 @@ public class InstrumentationTest {
 		testPerformer.resetCodeGenerator();
 	}
 
-	// FIXME The parser does not work with operations returning a multiple type
-	// that should be parsed as a Collection. /**
-	// * <p>
-	// * A test case testing the code generation of some body expression
-	// contained
-	// * in body01.ocl.
-	// * </p>
-	// */
-	// @Test
-	// public void testBody1() {
-	//
-	// this.constraintFileName = "constraints/body01.ocl";
-	// this.expectedFileName = "resources/transformedcode/body01.txt";
-	//
-	// testPerformer.doDiffTest(constraintFileName, expectedFileName);
-	// }
+	/**
+	 * <p>
+	 * A test case testing the code generation of some body expression contained
+	 * in body01.ocl.
+	 * </p>
+	 */
+	@Test
+	public void testBody1() throws Exception {
+
+		this.constraintFileName = "constraints/body01.ocl";
+		this.expectedFileName = "resources/transformedcode/body01.txt";
+
+		testPerformer.doDiffTest(constraintFileName, expectedFileName);
+	}
 
 	/**
 	 * <p>
@@ -96,7 +94,7 @@ public class InstrumentationTest {
 	 * </p>
 	 * 
 	 * @throws Ocl2CodeException
-	 *           Thrown if an Exception during the difference test occurs.
+	 *             Thrown if an Exception during the difference test occurs.
 	 */
 	@Test
 	public void testBody2() throws Ocl2CodeException {
@@ -116,7 +114,7 @@ public class InstrumentationTest {
 	 * </p>
 	 * 
 	 * @throws Ocl2CodeException
-	 *           Thrown if an Exception during the difference test occurs.
+	 *             Thrown if an Exception during the difference test occurs.
 	 */
 	@Test
 	public void testBody3() throws Ocl2CodeException {
@@ -134,7 +132,7 @@ public class InstrumentationTest {
 	 * </p>
 	 * 
 	 * @throws Ocl2CodeException
-	 *           Thrown if an Exception during the difference test occurs.
+	 *             Thrown if an Exception during the difference test occurs.
 	 */
 	@Test
 	public void testDefinition1() throws Ocl2CodeException {
@@ -152,7 +150,7 @@ public class InstrumentationTest {
 	 * </p>
 	 * 
 	 * @throws Ocl2CodeException
-	 *           Thrown if an Exception during the difference test occurs.
+	 *             Thrown if an Exception during the difference test occurs.
 	 */
 	@Test
 	public void testDefinition2() throws Ocl2CodeException {
@@ -170,7 +168,7 @@ public class InstrumentationTest {
 	 * </p>
 	 * 
 	 * @throws Ocl2CodeException
-	 *           Thrown if an Exception during the difference test occurs.
+	 *             Thrown if an Exception during the difference test occurs.
 	 */
 	@Test
 	public void testDefinition3() throws Ocl2CodeException {
@@ -188,7 +186,7 @@ public class InstrumentationTest {
 	 * </p>
 	 * 
 	 * @throws Ocl2CodeException
-	 *           Thrown if an Exception during the difference test occurs.
+	 *             Thrown if an Exception during the difference test occurs.
 	 */
 	@Test
 	public void testDefinition4() throws Ocl2CodeException {
@@ -206,7 +204,7 @@ public class InstrumentationTest {
 	 * </p>
 	 * 
 	 * @throws Ocl2CodeException
-	 *           Thrown if an Exception during the difference test occurs.
+	 *             Thrown if an Exception during the difference test occurs.
 	 */
 	@Test
 	public void testDefinition5() throws Ocl2CodeException {
@@ -224,7 +222,7 @@ public class InstrumentationTest {
 	 * </p>
 	 * 
 	 * @throws Ocl2CodeException
-	 *           Thrown if an Exception during the difference test occurs.
+	 *             Thrown if an Exception during the difference test occurs.
 	 */
 	@Test
 	public void testDefinition6() throws Ocl2CodeException {
@@ -242,7 +240,7 @@ public class InstrumentationTest {
 	 * </p>
 	 * 
 	 * @throws Ocl2CodeException
-	 *           Thrown if an Exception during the difference test occurs.
+	 *             Thrown if an Exception during the difference test occurs.
 	 */
 	@Test
 	public void testDefinition7() throws Ocl2CodeException {
@@ -260,7 +258,7 @@ public class InstrumentationTest {
 	 * </p>
 	 * 
 	 * @throws Ocl2CodeException
-	 *           Thrown if an Exception during the difference test occurs.
+	 *             Thrown if an Exception during the difference test occurs.
 	 */
 	@Test
 	public void testDefinition8() throws Ocl2CodeException {
@@ -278,7 +276,7 @@ public class InstrumentationTest {
 	 * </p>
 	 * 
 	 * @throws Ocl2CodeException
-	 *           Thrown if an Exception during the difference test occurs.
+	 *             Thrown if an Exception during the difference test occurs.
 	 */
 	@Test
 	public void testDerive1() throws Ocl2CodeException {
@@ -296,7 +294,7 @@ public class InstrumentationTest {
 	 * </p>
 	 * 
 	 * @throws Ocl2CodeException
-	 *           Thrown if an Exception during the difference test occurs.
+	 *             Thrown if an Exception during the difference test occurs.
 	 */
 	@Test
 	public void testDerive2() throws Ocl2CodeException {
@@ -314,7 +312,7 @@ public class InstrumentationTest {
 	 * </p>
 	 * 
 	 * @throws Ocl2CodeException
-	 *           Thrown if an Exception during the difference test occurs.
+	 *             Thrown if an Exception during the difference test occurs.
 	 */
 	@Test
 	public void testDerive3() throws Ocl2CodeException {
@@ -327,12 +325,12 @@ public class InstrumentationTest {
 
 	/**
 	 * <p>
-	 * A test case testing the code generation of some initial values contained in
-	 * init01.ocl.
+	 * A test case testing the code generation of some initial values contained
+	 * in init01.ocl.
 	 * </p>
 	 * 
 	 * @throws Ocl2CodeException
-	 *           Thrown if an Exception during the difference test occurs.
+	 *             Thrown if an Exception during the difference test occurs.
 	 */
 	@Test
 	public void testInitialValue1() throws Ocl2CodeException {
@@ -345,12 +343,12 @@ public class InstrumentationTest {
 
 	/**
 	 * <p>
-	 * A test case testing the code generation of some initial values contained in
-	 * init02.ocl.
+	 * A test case testing the code generation of some initial values contained
+	 * in init02.ocl.
 	 * </p>
 	 * 
 	 * @throws Ocl2CodeException
-	 *           Thrown if an Exception during the difference test occurs.
+	 *             Thrown if an Exception during the difference test occurs.
 	 */
 	@Test
 	public void testInitialValue2() throws Ocl2CodeException {
@@ -363,12 +361,12 @@ public class InstrumentationTest {
 
 	/**
 	 * <p>
-	 * A test case testing the code generation of some initial values contained in
-	 * init03.ocl.
+	 * A test case testing the code generation of some initial values contained
+	 * in init03.ocl.
 	 * </p>
 	 * 
 	 * @throws Ocl2CodeException
-	 *           Thrown if an Exception during the difference test occurs.
+	 *             Thrown if an Exception during the difference test occurs.
 	 */
 	@Test
 	public void testInitialValue3() throws Ocl2CodeException {
@@ -381,12 +379,12 @@ public class InstrumentationTest {
 
 	/**
 	 * <p>
-	 * A test case testing the code generation of some initial values contained in
-	 * init03.ocl.
+	 * A test case testing the code generation of some initial values contained
+	 * in init03.ocl.
 	 * </p>
 	 * 
 	 * @throws Ocl2CodeException
-	 *           Thrown if an Exception during the difference test occurs.
+	 *             Thrown if an Exception during the difference test occurs.
 	 */
 	@Test
 	public void testInitialValue4() throws Ocl2CodeException {
@@ -404,7 +402,7 @@ public class InstrumentationTest {
 	 * </p>
 	 * 
 	 * @throws Ocl2CodeException
-	 *           Thrown if an Exception during the difference test occurs.
+	 *             Thrown if an Exception during the difference test occurs.
 	 */
 	@Test
 	public void testInvariant1() throws Ocl2CodeException {
@@ -427,7 +425,7 @@ public class InstrumentationTest {
 	 * </p>
 	 * 
 	 * @throws Ocl2CodeException
-	 *           Thrown if an Exception during the difference test occurs.
+	 *             Thrown if an Exception during the difference test occurs.
 	 */
 	@Test
 	public void testInvariant2() throws Ocl2CodeException {
@@ -435,8 +433,12 @@ public class InstrumentationTest {
 		this.constraintFileName = "constraints/invariant02.ocl";
 		this.expectedFileName = "resources/transformedcode/invariant02.txt";
 
-		testPerformer.doDiffTest(constraintFileName, expectedFileName, false,
-				IOcl2JavaSettings.INVARIANT_CHECK_AFTER_CONSTRUCT_AND_ATTRIBUTE_CHANGE);
+		testPerformer
+				.doDiffTest(
+						constraintFileName,
+						expectedFileName,
+						false,
+						IOcl2JavaSettings.INVARIANT_CHECK_AFTER_CONSTRUCT_AND_ATTRIBUTE_CHANGE);
 	}
 
 	/**
@@ -446,7 +448,7 @@ public class InstrumentationTest {
 	 * </p>
 	 * 
 	 * @throws Ocl2CodeException
-	 *           Thrown if an Exception during the difference test occurs.
+	 *             Thrown if an Exception during the difference test occurs.
 	 */
 	@Test
 	public void testInvariant3() throws Ocl2CodeException {
@@ -454,8 +456,12 @@ public class InstrumentationTest {
 		this.constraintFileName = "constraints/invariant03.ocl";
 		this.expectedFileName = "resources/transformedcode/invariant03.txt";
 
-		testPerformer.doDiffTest(constraintFileName, expectedFileName, false,
-				IOcl2JavaSettings.INVARIANT_CHECK_AFTER_SPECIAL_METHOD_INVOCATION);
+		testPerformer
+				.doDiffTest(
+						constraintFileName,
+						expectedFileName,
+						false,
+						IOcl2JavaSettings.INVARIANT_CHECK_AFTER_SPECIAL_METHOD_INVOCATION);
 	}
 
 	/**
@@ -465,7 +471,7 @@ public class InstrumentationTest {
 	 * </p>
 	 * 
 	 * @throws Ocl2CodeException
-	 *           Thrown if an Exception during the difference test occurs.
+	 *             Thrown if an Exception during the difference test occurs.
 	 */
 	@Test
 	public void testInvariant4() throws Ocl2CodeException {
@@ -473,8 +479,12 @@ public class InstrumentationTest {
 		this.constraintFileName = "constraints/invariant04.ocl";
 		this.expectedFileName = "resources/transformedcode/invariant04.txt";
 
-		testPerformer.doDiffTest(constraintFileName, expectedFileName, false,
-				IOcl2JavaSettings.INVARIANT_CHECK_AFTER_SPECIAL_METHOD_INVOCATION);
+		testPerformer
+				.doDiffTest(
+						constraintFileName,
+						expectedFileName,
+						false,
+						IOcl2JavaSettings.INVARIANT_CHECK_AFTER_SPECIAL_METHOD_INVOCATION);
 	}
 
 	/**
@@ -484,7 +494,7 @@ public class InstrumentationTest {
 	 * </p>
 	 * 
 	 * @throws Ocl2CodeException
-	 *           Thrown if an Exception during the difference test occurs.
+	 *             Thrown if an Exception during the difference test occurs.
 	 */
 	@Test
 	public void testInvariant5() throws Ocl2CodeException {
@@ -492,8 +502,12 @@ public class InstrumentationTest {
 		this.constraintFileName = "constraints/invariant05.ocl";
 		this.expectedFileName = "resources/transformedcode/invariant05.txt";
 
-		testPerformer.doDiffTest(constraintFileName, expectedFileName, false,
-				IOcl2JavaSettings.INVARIANT_CHECK_AFTER_SPECIAL_METHOD_INVOCATION);
+		testPerformer
+				.doDiffTest(
+						constraintFileName,
+						expectedFileName,
+						false,
+						IOcl2JavaSettings.INVARIANT_CHECK_AFTER_SPECIAL_METHOD_INVOCATION);
 	}
 
 	/**
@@ -503,7 +517,7 @@ public class InstrumentationTest {
 	 * </p>
 	 * 
 	 * @throws Ocl2CodeException
-	 *           Thrown if an Exception during the difference test occurs.
+	 *             Thrown if an Exception during the difference test occurs.
 	 */
 	@Test
 	public void testInvariant6() throws Ocl2CodeException {
@@ -511,8 +525,12 @@ public class InstrumentationTest {
 		this.constraintFileName = "constraints/invariant06.ocl";
 		this.expectedFileName = "resources/transformedcode/invariant06.txt";
 
-		testPerformer.doDiffTest(constraintFileName, expectedFileName, false,
-				IOcl2JavaSettings.INVARIANT_CHECK_AFTER_SPECIAL_METHOD_INVOCATION);
+		testPerformer
+				.doDiffTest(
+						constraintFileName,
+						expectedFileName,
+						false,
+						IOcl2JavaSettings.INVARIANT_CHECK_AFTER_SPECIAL_METHOD_INVOCATION);
 	}
 
 	/**
@@ -522,7 +540,7 @@ public class InstrumentationTest {
 	 * </p>
 	 * 
 	 * @throws Ocl2CodeException
-	 *           Thrown if an Exception during the difference test occurs.
+	 *             Thrown if an Exception during the difference test occurs.
 	 */
 	@Test
 	public void testInvariant7() throws Ocl2CodeException {
@@ -530,8 +548,12 @@ public class InstrumentationTest {
 		this.constraintFileName = "constraints/invariant07.ocl";
 		this.expectedFileName = "resources/transformedcode/invariant07.txt";
 
-		testPerformer.doDiffTest(constraintFileName, expectedFileName, false,
-				IOcl2JavaSettings.INVARIANT_CHECK_AFTER_SPECIAL_METHOD_INVOCATION);
+		testPerformer
+				.doDiffTest(
+						constraintFileName,
+						expectedFileName,
+						false,
+						IOcl2JavaSettings.INVARIANT_CHECK_AFTER_SPECIAL_METHOD_INVOCATION);
 	}
 
 	/**
@@ -541,7 +563,7 @@ public class InstrumentationTest {
 	 * </p>
 	 * 
 	 * @throws Ocl2CodeException
-	 *           Thrown if an Exception during the difference test occurs.
+	 *             Thrown if an Exception during the difference test occurs.
 	 */
 	@Test
 	public void testInvariant8() throws Ocl2CodeException {
@@ -549,8 +571,12 @@ public class InstrumentationTest {
 		this.constraintFileName = "constraints/invariant08.ocl";
 		this.expectedFileName = "resources/transformedcode/invariant08.txt";
 
-		testPerformer.doDiffTest(constraintFileName, expectedFileName, false,
-				IOcl2JavaSettings.INVARIANT_CHECK_AFTER_SPECIAL_METHOD_INVOCATION);
+		testPerformer
+				.doDiffTest(
+						constraintFileName,
+						expectedFileName,
+						false,
+						IOcl2JavaSettings.INVARIANT_CHECK_AFTER_SPECIAL_METHOD_INVOCATION);
 	}
 
 	/**
@@ -560,7 +586,7 @@ public class InstrumentationTest {
 	 * </p>
 	 * 
 	 * @throws Ocl2CodeException
-	 *           Thrown if an Exception during the difference test occurs.
+	 *             Thrown if an Exception during the difference test occurs.
 	 */
 	@Test
 	public void testInvariant9() throws Ocl2CodeException {
@@ -568,8 +594,12 @@ public class InstrumentationTest {
 		this.constraintFileName = "constraints/invariant09.ocl";
 		this.expectedFileName = "resources/transformedcode/invariant09.txt";
 
-		testPerformer.doDiffTest(constraintFileName, expectedFileName, false,
-				IOcl2JavaSettings.INVARIANT_CHECK_AFTER_SPECIAL_METHOD_INVOCATION);
+		testPerformer
+				.doDiffTest(
+						constraintFileName,
+						expectedFileName,
+						false,
+						IOcl2JavaSettings.INVARIANT_CHECK_AFTER_SPECIAL_METHOD_INVOCATION);
 	}
 
 	/**
@@ -579,7 +609,7 @@ public class InstrumentationTest {
 	 * </p>
 	 * 
 	 * @throws Ocl2CodeException
-	 *           Thrown if an Exception during the difference test occurs.
+	 *             Thrown if an Exception during the difference test occurs.
 	 */
 	@Test
 	public void testInvariant10() throws Ocl2CodeException {
@@ -587,8 +617,12 @@ public class InstrumentationTest {
 		this.constraintFileName = "constraints/invariant10.ocl";
 		this.expectedFileName = "resources/transformedcode/invariant10.txt";
 
-		testPerformer.doDiffTest(constraintFileName, expectedFileName, false,
-				IOcl2JavaSettings.INVARIANT_CHECK_AFTER_SPECIAL_METHOD_INVOCATION);
+		testPerformer
+				.doDiffTest(
+						constraintFileName,
+						expectedFileName,
+						false,
+						IOcl2JavaSettings.INVARIANT_CHECK_AFTER_SPECIAL_METHOD_INVOCATION);
 	}
 
 	/**
@@ -598,7 +632,7 @@ public class InstrumentationTest {
 	 * </p>
 	 * 
 	 * @throws Ocl2CodeException
-	 *           Thrown if an Exception during the difference test occurs.
+	 *             Thrown if an Exception during the difference test occurs.
 	 */
 	@Test
 	public void testInvariant11() throws Ocl2CodeException {
@@ -606,8 +640,12 @@ public class InstrumentationTest {
 		this.constraintFileName = "constraints/invariant11.ocl";
 		this.expectedFileName = "resources/transformedcode/invariant11.txt";
 
-		testPerformer.doDiffTest(constraintFileName, expectedFileName, false,
-				IOcl2JavaSettings.INVARIANT_CHECK_AFTER_SPECIAL_METHOD_INVOCATION);
+		testPerformer
+				.doDiffTest(
+						constraintFileName,
+						expectedFileName,
+						false,
+						IOcl2JavaSettings.INVARIANT_CHECK_AFTER_SPECIAL_METHOD_INVOCATION);
 	}
 
 	/**
@@ -617,7 +655,7 @@ public class InstrumentationTest {
 	 * </p>
 	 * 
 	 * @throws Ocl2CodeException
-	 *           Thrown if an Exception during the difference test occurs.
+	 *             Thrown if an Exception during the difference test occurs.
 	 */
 	@Test
 	public void testInvariant12() throws Ocl2CodeException {
@@ -625,8 +663,12 @@ public class InstrumentationTest {
 		this.constraintFileName = "constraints/invariant12.ocl";
 		this.expectedFileName = "resources/transformedcode/invariant12.txt";
 
-		testPerformer.doDiffTest(constraintFileName, expectedFileName, false,
-				IOcl2JavaSettings.INVARIANT_CHECK_AFTER_SPECIAL_METHOD_INVOCATION);
+		testPerformer
+				.doDiffTest(
+						constraintFileName,
+						expectedFileName,
+						false,
+						IOcl2JavaSettings.INVARIANT_CHECK_AFTER_SPECIAL_METHOD_INVOCATION);
 	}
 
 	/**
@@ -636,7 +678,7 @@ public class InstrumentationTest {
 	 * </p>
 	 * 
 	 * @throws Ocl2CodeException
-	 *           Thrown if an Exception during the difference test occurs.
+	 *             Thrown if an Exception during the difference test occurs.
 	 */
 	@Test
 	public void testInvariant13() throws Ocl2CodeException {
@@ -644,8 +686,12 @@ public class InstrumentationTest {
 		this.constraintFileName = "constraints/invariant13.ocl";
 		this.expectedFileName = "resources/transformedcode/invariant13.txt";
 
-		testPerformer.doDiffTest(constraintFileName, expectedFileName, false,
-				IOcl2JavaSettings.INVARIANT_CHECK_AFTER_SPECIAL_METHOD_INVOCATION);
+		testPerformer
+				.doDiffTest(
+						constraintFileName,
+						expectedFileName,
+						false,
+						IOcl2JavaSettings.INVARIANT_CHECK_AFTER_SPECIAL_METHOD_INVOCATION);
 	}
 
 	/**
@@ -655,7 +701,7 @@ public class InstrumentationTest {
 	 * </p>
 	 * 
 	 * @throws Ocl2CodeException
-	 *           Thrown if an Exception during the difference test occurs.
+	 *             Thrown if an Exception during the difference test occurs.
 	 */
 	@Test
 	public void testInvariant14() throws Ocl2CodeException {
@@ -663,8 +709,12 @@ public class InstrumentationTest {
 		this.constraintFileName = "constraints/invariant14.ocl";
 		this.expectedFileName = "resources/transformedcode/invariant14.txt";
 
-		testPerformer.doDiffTest(constraintFileName, expectedFileName, false,
-				IOcl2JavaSettings.INVARIANT_CHECK_AFTER_CONSTRUCT_AND_ATTRIBUTE_CHANGE);
+		testPerformer
+				.doDiffTest(
+						constraintFileName,
+						expectedFileName,
+						false,
+						IOcl2JavaSettings.INVARIANT_CHECK_AFTER_CONSTRUCT_AND_ATTRIBUTE_CHANGE);
 	}
 
 	/**
@@ -674,7 +724,7 @@ public class InstrumentationTest {
 	 * </p>
 	 * 
 	 * @throws Ocl2CodeException
-	 *           Thrown if an Exception during the difference test occurs.
+	 *             Thrown if an Exception during the difference test occurs.
 	 */
 	@Test
 	public void testInvariant15() throws Ocl2CodeException {
@@ -682,8 +732,12 @@ public class InstrumentationTest {
 		this.constraintFileName = "constraints/invariant15.ocl";
 		this.expectedFileName = "resources/transformedcode/invariant15.txt";
 
-		testPerformer.doDiffTest(constraintFileName, expectedFileName, false,
-				IOcl2JavaSettings.INVARIANT_CHECK_AFTER_SPECIAL_METHOD_INVOCATION);
+		testPerformer
+				.doDiffTest(
+						constraintFileName,
+						expectedFileName,
+						false,
+						IOcl2JavaSettings.INVARIANT_CHECK_AFTER_SPECIAL_METHOD_INVOCATION);
 	}
 
 	/**
@@ -693,7 +747,7 @@ public class InstrumentationTest {
 	 * </p>
 	 * 
 	 * @throws Ocl2CodeException
-	 *           Thrown if an Exception during the difference test occurs.
+	 *             Thrown if an Exception during the difference test occurs.
 	 */
 	@Test
 	public void testInvariant16() throws Ocl2CodeException {
@@ -701,8 +755,12 @@ public class InstrumentationTest {
 		this.constraintFileName = "constraints/invariant16.ocl";
 		this.expectedFileName = "resources/transformedcode/invariant16.txt";
 
-		testPerformer.doDiffTest(constraintFileName, expectedFileName, false,
-				IOcl2JavaSettings.INVARIANT_CHECK_AFTER_SPECIAL_METHOD_INVOCATION);
+		testPerformer
+				.doDiffTest(
+						constraintFileName,
+						expectedFileName,
+						false,
+						IOcl2JavaSettings.INVARIANT_CHECK_AFTER_SPECIAL_METHOD_INVOCATION);
 	}
 
 	/**
@@ -712,7 +770,7 @@ public class InstrumentationTest {
 	 * </p>
 	 * 
 	 * @throws Ocl2CodeException
-	 *           Thrown if an Exception during the difference test occurs.
+	 *             Thrown if an Exception during the difference test occurs.
 	 */
 	@Test
 	public void testInvariant17() throws Ocl2CodeException {
@@ -720,8 +778,12 @@ public class InstrumentationTest {
 		this.constraintFileName = "constraints/invariant17.ocl";
 		this.expectedFileName = "resources/transformedcode/invariant17.txt";
 
-		testPerformer.doDiffTest(constraintFileName, expectedFileName, false,
-				IOcl2JavaSettings.INVARIANT_CHECK_AFTER_SPECIAL_METHOD_INVOCATION);
+		testPerformer
+				.doDiffTest(
+						constraintFileName,
+						expectedFileName,
+						false,
+						IOcl2JavaSettings.INVARIANT_CHECK_AFTER_SPECIAL_METHOD_INVOCATION);
 	}
 
 	/**
@@ -731,7 +793,7 @@ public class InstrumentationTest {
 	 * </p>
 	 * 
 	 * @throws Ocl2CodeException
-	 *           Thrown if an Exception during the difference test occurs.
+	 *             Thrown if an Exception during the difference test occurs.
 	 */
 	@Test
 	public void testInvariant18() throws Ocl2CodeException {
@@ -739,8 +801,12 @@ public class InstrumentationTest {
 		this.constraintFileName = "constraints/invariant18.ocl";
 		this.expectedFileName = "resources/transformedcode/invariant18.txt";
 
-		testPerformer.doDiffTest(constraintFileName, expectedFileName, false,
-				IOcl2JavaSettings.INVARIANT_CHECK_AFTER_SPECIAL_METHOD_INVOCATION);
+		testPerformer
+				.doDiffTest(
+						constraintFileName,
+						expectedFileName,
+						false,
+						IOcl2JavaSettings.INVARIANT_CHECK_AFTER_SPECIAL_METHOD_INVOCATION);
 	}
 
 	/**
@@ -750,7 +816,7 @@ public class InstrumentationTest {
 	 * </p>
 	 * 
 	 * @throws Ocl2CodeException
-	 *           Thrown if an Exception during the difference test occurs.
+	 *             Thrown if an Exception during the difference test occurs.
 	 */
 	@Test
 	public void testPostcondition1() throws Ocl2CodeException {
@@ -768,7 +834,7 @@ public class InstrumentationTest {
 	 * </p>
 	 * 
 	 * @throws Ocl2CodeException
-	 *           Thrown if an Exception during the difference test occurs.
+	 *             Thrown if an Exception during the difference test occurs.
 	 */
 	@Test
 	public void testPostcondition2() throws Ocl2CodeException {
@@ -786,7 +852,7 @@ public class InstrumentationTest {
 	 * </p>
 	 * 
 	 * @throws Ocl2CodeException
-	 *           Thrown if an Exception during the difference test occurs.
+	 *             Thrown if an Exception during the difference test occurs.
 	 */
 	@Test
 	public void testPostcondition3() throws Ocl2CodeException {
@@ -804,7 +870,7 @@ public class InstrumentationTest {
 	 * </p>
 	 * 
 	 * @throws Ocl2CodeException
-	 *           Thrown if an Exception during the difference test occurs.
+	 *             Thrown if an Exception during the difference test occurs.
 	 */
 	@Test
 	public void testPostcondition4() throws Ocl2CodeException {
@@ -822,7 +888,7 @@ public class InstrumentationTest {
 	 * </p>
 	 * 
 	 * @throws Ocl2CodeException
-	 *           Thrown if an Exception during the difference test occurs.
+	 *             Thrown if an Exception during the difference test occurs.
 	 */
 	@Test
 	public void testPostcondition5() throws Ocl2CodeException {
@@ -840,7 +906,7 @@ public class InstrumentationTest {
 	 * </p>
 	 * 
 	 * @throws Ocl2CodeException
-	 *           Thrown if an Exception during the difference test occurs.
+	 *             Thrown if an Exception during the difference test occurs.
 	 */
 	@Test
 	public void testPostcondition6() throws Ocl2CodeException {
@@ -858,7 +924,7 @@ public class InstrumentationTest {
 	 * </p>
 	 * 
 	 * @throws Ocl2CodeException
-	 *           Thrown if an Exception during the difference test occurs.
+	 *             Thrown if an Exception during the difference test occurs.
 	 */
 	@Test
 	public void testPostcondition7() throws Ocl2CodeException {
@@ -876,7 +942,7 @@ public class InstrumentationTest {
 	 * </p>
 	 * 
 	 * @throws Ocl2CodeException
-	 *           Thrown if an Exception during the difference test occurs.
+	 *             Thrown if an Exception during the difference test occurs.
 	 */
 	@Test
 	public void testPostcondition8() throws Ocl2CodeException {
@@ -894,7 +960,7 @@ public class InstrumentationTest {
 	 * </p>
 	 * 
 	 * @throws Ocl2CodeException
-	 *           Thrown if an Exception during the difference test occurs.
+	 *             Thrown if an Exception during the difference test occurs.
 	 */
 	@Test
 	public void testPostcondition9() throws Ocl2CodeException {
@@ -912,7 +978,7 @@ public class InstrumentationTest {
 	 * </p>
 	 * 
 	 * @throws Ocl2CodeException
-	 *           Thrown if an Exception during the difference test occurs.
+	 *             Thrown if an Exception during the difference test occurs.
 	 */
 	@Test
 	public void testPostcondition10() throws Ocl2CodeException {
@@ -930,7 +996,7 @@ public class InstrumentationTest {
 	 * </p>
 	 * 
 	 * @throws Ocl2CodeException
-	 *           Thrown if an Exception during the difference test occurs.
+	 *             Thrown if an Exception during the difference test occurs.
 	 */
 	@Test
 	public void testPostcondition11() throws Ocl2CodeException {
@@ -948,7 +1014,7 @@ public class InstrumentationTest {
 	 * </p>
 	 * 
 	 * @throws Ocl2CodeException
-	 *           Thrown if an Exception during the difference test occurs.
+	 *             Thrown if an Exception during the difference test occurs.
 	 */
 	@Test
 	public void testPostcondition12() throws Ocl2CodeException {
@@ -966,7 +1032,7 @@ public class InstrumentationTest {
 	 * </p>
 	 * 
 	 * @throws Ocl2CodeException
-	 *           Thrown if an Exception during the difference test occurs.
+	 *             Thrown if an Exception during the difference test occurs.
 	 */
 	@Test
 	public void testPrecondition1() throws Ocl2CodeException {
@@ -984,7 +1050,7 @@ public class InstrumentationTest {
 	 * </p>
 	 * 
 	 * @throws Ocl2CodeException
-	 *           Thrown if an Exception during the difference test occurs.
+	 *             Thrown if an Exception during the difference test occurs.
 	 */
 	@Test
 	public void testPrecondition2() throws Ocl2CodeException {
@@ -1002,7 +1068,7 @@ public class InstrumentationTest {
 	 * </p>
 	 * 
 	 * @throws Ocl2CodeException
-	 *           Thrown if an Exception during the difference test occurs.
+	 *             Thrown if an Exception during the difference test occurs.
 	 */
 	@Test
 	public void testPrecondition3() throws Ocl2CodeException {
@@ -1020,7 +1086,7 @@ public class InstrumentationTest {
 	 * </p>
 	 * 
 	 * @throws Ocl2CodeException
-	 *           Thrown if an Exception during the difference test occurs.
+	 *             Thrown if an Exception during the difference test occurs.
 	 */
 	@Test
 	public void testPrecondition4() throws Ocl2CodeException {
@@ -1038,7 +1104,7 @@ public class InstrumentationTest {
 	 * </p>
 	 * 
 	 * @throws Ocl2CodeException
-	 *           Thrown if an Exception during the difference test occurs.
+	 *             Thrown if an Exception during the difference test occurs.
 	 */
 	@Test
 	public void testPrecondition5() throws Ocl2CodeException {
@@ -1056,7 +1122,7 @@ public class InstrumentationTest {
 	 * </p>
 	 * 
 	 * @throws Ocl2CodeException
-	 *           Thrown if an Exception during the difference test occurs.
+	 *             Thrown if an Exception during the difference test occurs.
 	 */
 	@Test
 	public void testPrecondition6() throws Ocl2CodeException {

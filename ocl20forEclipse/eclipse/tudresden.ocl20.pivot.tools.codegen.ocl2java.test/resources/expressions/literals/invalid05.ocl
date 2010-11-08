@@ -1,0 +1,7 @@
+package testpackage
+
+context Class1
+def: testInvalidLiteralExp05(): Integer =
+Set { 1, 2 } -> iterate (elem : Integer; result : Integer = 0 | invalid)
+
+endpackage

@@ -50,8 +50,8 @@ $ifCode$if ($ifExp$) {
 >>
 
 // --- InvalidLiteralExp ---
-invalidLiteralExp() ::= <<
-/* (TODO Probably add Type Cast here.) */ tudresden.ocl20.pivot.tools.codegen.ocl2java.types.OclInvalidException.getInvalidLiteral()
+invalidLiteralExp(resultType) ::= <<
+$if(resultType)$($resultType$)$else$($anyType()$)$endif$ tudresden.ocl20.pivot.tools.codegen.ocl2java.types.OclInvalidException.getInvalidLiteral()
 >>
 
 

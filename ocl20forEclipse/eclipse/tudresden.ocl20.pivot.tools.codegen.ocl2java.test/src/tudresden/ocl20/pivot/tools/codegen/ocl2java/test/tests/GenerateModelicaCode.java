@@ -142,7 +142,8 @@ public class GenerateModelicaCode extends AbstractDiffTest {
 		settings.setDefaultInvariantCheckMode(IOcl2JavaSettings.INVARIANT_CHECK_AFTER_SPECIAL_METHOD_INVOCATION);
 		settings.setGettersForDefinedAttributesEnabled(true);
 		settings.setDefaultInheritanceDisabled(false);
-		settings.setBasisPackahe("on.eclipse.xtext");
+		settings.setBasisPackage("on.eclipse.xtext");
+		settings.setGettersForPropertyCallsEnabled(true);
 
 		List<Constraint> parsedConstraints;
 		parsedConstraints = new ArrayList<Constraint>();

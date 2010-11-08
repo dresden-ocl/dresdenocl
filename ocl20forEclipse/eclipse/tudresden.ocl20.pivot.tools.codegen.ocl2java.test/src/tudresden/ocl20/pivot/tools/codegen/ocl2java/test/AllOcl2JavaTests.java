@@ -26,6 +26,7 @@ import tudresden.ocl20.pivot.tools.codegen.ocl2java.Ocl2JavaPlugin;
 import tudresden.ocl20.pivot.tools.codegen.ocl2java.test.tests.FragmentTest;
 import tudresden.ocl20.pivot.tools.codegen.ocl2java.test.tests.InstrumentationTest;
 import tudresden.ocl20.pivot.tools.codegen.ocl2java.test.tests.constraintkinds.AllConstraintsKindTests;
+import tudresden.ocl20.pivot.tools.codegen.ocl2java.test.tests.context.AllContextTests;
 import tudresden.ocl20.pivot.tools.codegen.ocl2java.test.tests.expressions.AllExpressionsTests;
 import tudresden.ocl20.pivot.tools.codegen.ocl2java.test.tests.standardlibrary.AllStandardLibraryTests;
 
@@ -39,7 +40,7 @@ import tudresden.ocl20.pivot.tools.codegen.ocl2java.test.tests.standardlibrary.A
  * 
  */
 @RunWith(Suite.class)
-@Suite.SuiteClasses({ AllConstraintsKindTests.class,
+@Suite.SuiteClasses({ AllConstraintsKindTests.class, AllContextTests.class,
 		AllStandardLibraryTests.class, AllExpressionsTests.class,
 		InstrumentationTest.class, FragmentTest.class })
 public class AllOcl2JavaTests {

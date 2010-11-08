@@ -1,0 +1,7 @@
+package testpackage
+
+context Class1
+def: testPropertyCallExp03(): Integer =
+self.anInteger01
+
+endpackage
