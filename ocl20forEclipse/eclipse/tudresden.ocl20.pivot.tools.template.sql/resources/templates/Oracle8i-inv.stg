@@ -1,10 +1,15 @@
 group oracle;
 
 // --- OCL INVARIANT --- 
-constraint_body(constraint_name,context,context_alias,expression) ::= <<
+constraint_invariant(constraint_name,context,context_alias,expression) ::= <<
 CREATE OR REPLACE VIEW $constraint_name$ AS
 (SELECT * FROM $context$ $context_alias$
 WHERE NOT ($expression$));
+>>
+
+// ---  COLLECTIONS - BAG (QUERY) --- 
+literal_collection_bag(items) ::= <<
+$items:literal_collection_bag_item(); separator="\nUNION ALL\n"$
 >>
 
 literal_collection_bag_item(item) ::= <<
@@ -34,129 +39,83 @@ if_expression(if_branch,then_branch,else_branch) ::= <<
 >>
 
 
-// -- ITERATOR FORALL (QUERY) ---
-feature_call_forall(source,alias,object,collection,expression) ::= <<
-NOT EXISTS (
-  $collection$ MINUS
-     SELECT $object$ FROM $source$ $alias$
-     WHERE $expression$
-  )
->>
-
-// -- ITERATOR REJECT (QUERY) ---
-feature_call_reject(source,alias,object,collection,expression) ::= <<
-($collection$ MINUS
-  SELECT $object$ FROM $source$ $alias$
-  WHERE ($expression$))
->>
-
-// -- ITERATOR SELECT (QUERY) ---
-feature_call_select(source,alias,object,collection,expression) ::= <<
-$collection$ MINUS
-  SELECT $object$ FROM $source$ $alias$
-  WHERE NOT ($expression$))
->>
-
-
 // --- COLLECTION RELATED OPERATIONS ---
-feature_call_count(source,element,collection,object) ::= <<
-(SELECT NVL(COUNT(*),0)
-  FROM $source$
-  WHERE $element$ IN $collection$
-  AND $element$ = $object$)
+feature_call_count(object) ::= <<
+NVL(COUNT(*),0)
 >>
 
-feature_call_exists(source,object,collection,expression) ::= <<
+feature_call_size(object) ::= <<
+NVL(COUNT(*),0)
+>>
+
+feature_call_sum(object) ::= <<
+NVL(SUM($object$),0)
+>>
+
+feature_call_excludes(operand2,operand1) ::= <<
+NOT EXISTS (
+  SELECT $operand2$ FROM DUAL
+  INTERSECT
+  ($operand1$))
+>>
+
+feature_call_includes(operand2,operand1) ::= <<
 EXISTS (
-  ($collection$) INTERSECT
-  SELECT $object$ FROM $source$
-  WHERE $expression$
-)
->>
-
-feature_call_size(source,element,collection) ::= <<
-(SELECT NVL(COUNT(*),0)
-  FROM $source$
-  WHERE $element$ IN $collection$)
->>
-
-feature_call_sum(source,element,collection) ::= <<
-(SELECT NVL(SUM($element$),0)
-  FROM $source$
-  WHERE $element$ IN $collection$)
->>
-
-feature_call_excludes(object,collection) ::= <<
-NOT EXISTS (
-  SELECT $object$ FROM DUAL
+  SELECT $operand2$ FROM DUAL
   INTERSECT
-  ($collection$))
+  ($operand1$))
 >>
 
-feature_call_includes(object,collection) ::= <<
-EXISTS (
-  SELECT $object$ FROM DUAL
-  INTERSECT
-  ($collection$))
->>
-
-feature_call_excludesall(collection,collection2) ::= <<
+feature_call_includesall(operand1,operand2) ::= <<
 NOT EXISTS (
-  ($collection2$)
-  INTERSECT
-  ($collection$))
->>
-
-feature_call_includesall(collection,collection2) ::= <<
-NOT EXISTS (
-  ($collection2$)
+  ($operand2$)
   MINUS
-  ($collection$))
+  ($operand1$))
 >>
 
-feature_call_including_bag(collection,object) ::= <<
-($collection$ UNION ALL
-  SELECT $object$ FROM DUAL)
+feature_call_including_bag(operand1,operand2) ::= <<
+($operand1$ UNION ALL
+  SELECT $operand2$ FROM DUAL)
 >>
 
-feature_call_including_sequence(collection,object) ::= <<
-($collection$)
+feature_call_including_sequence(operand1,operand2) ::= <<
+($operand1$)
   UNION
-  (SELECT $object$, ((SELECT max(SEQNO) FROM ($collection$)) + 1) AS SEQNO FROM DUAL)
+  (SELECT $operand2$, ((SELECT max(SEQNO) FROM ($operand1$)) + 1) AS SEQNO FROM DUAL)
 >>
 
-feature_call_including_set(collection,object) ::= <<
-($collection$ UNION
-  SELECT $object$ FROM DUAL)
+feature_call_including_set(operand1,operand2) ::= <<
+($operand1$ UNION
+  SELECT $operand2$ FROM DUAL)
 >>
 
-feature_call_excluding_bag(collection,object,element) ::= <<
-($collection$ MINUS
-  SELECT $object$ FROM DUAL)
+feature_call_excluding_bag(operand1,operand2,element) ::= <<
+($operand1$ MINUS
+  SELECT $operand2$ FROM DUAL)
 >>
 
-feature_call_excluding_sequence(collection,object,element) ::= <<
-SELECT $element$,
+feature_call_excluding_sequence(operand1,operand2,element) ::= <<
+SELECT $operand2$,
   (SELECT count(*)+1 FROM (
-    SELECT $element$, SEQNO
-    FROM $collection$
-    WHERE NOT ($element$ = $object$)
+    SELECT $operand2$, SEQNO
+    FROM $operand1$
+    WHERE NOT ($element$ = $operand2$)
   ) WHERE SEQNO < s.SEQNO) AS SEQNO
   FROM (
-    SELECT $element$, SEQNO
-    FROM $collection$
-    WHERE NOT ($element$ = $object$)
+    SELECT $operand2$, SEQNO
+    FROM $operand1$
+    WHERE NOT ($element$ = $operand2$)
   )
 >>
 
-feature_call_excluding_set(collection,object,element) ::= <<
-($collection$ MINUS
-  SELECT $object$ FROM DUAL)
+feature_call_excluding_set(operand1,operand2,element) ::= <<
+($operand1$ MINUS
+  SELECT $operand2$ FROM DUAL)
 >>
 
-feature_call_union_bag(collection,collection2,element) ::= <<
-($collection$ UNION ALL
-  $collection2$)
+feature_call_union_bag(operand1,operand2,element) ::= <<
+($operand1$ UNION ALL
+  $operand2$)
 >>
 
 feature_call_string_concat(operand1,operand2) ::= <<
@@ -168,11 +127,11 @@ SUBSTR($operand$, $start$, $end$ - $start$ + 1)
 >>
 
 feature_call_int_max(operand1,operand2) ::= <<
-GREATEST ($operand1$,$operand2$)
+GREATEST($operand1$,$operand2$)
 >>
 
 feature_call_int_min(operand1,operand2) ::= <<
-LEAST ($operand1$,$operand2$)
+LEAST($operand1$,$operand2$)
 >>
 
 feature_call_int_mod(operand1,operand2) ::= <<

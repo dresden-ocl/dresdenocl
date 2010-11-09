@@ -91,6 +91,21 @@ public class Guide {
 	 * 
 	 * @param navigation
 	 *          true if the guide describes a navigation, false otherwise
+	 */
+	public Guide(Guide guide) {
+
+		this(guide.isNavigation(), guide.getAlias());
+		guide.reset();
+		for (int i = 0; i < guide.numberOfSteps(); i++, guide.next()) {
+			this.add(guide.getSelect(), guide.getFrom(), guide.getWhere());
+		}
+	}
+
+	/**
+	 * Creates a new Guide.
+	 * 
+	 * @param navigation
+	 *          true if the guide describes a navigation, false otherwise
 	 * @param contextAlias
 	 *          the context alias of the MappedClass to start from
 	 */
@@ -139,7 +154,10 @@ public class Guide {
 			throw new NullPointerException("No context alias specified!");
 		}
 		else {
-			return contextAlias;
+			if (pointer == 0 || contextAlias.equals("self"))
+				return contextAlias;
+			else
+				return contextAlias + "_" + pointer;
 		}
 	}
 
@@ -278,7 +296,10 @@ public class Guide {
 		StringBuffer result = new StringBuffer();
 		String lineSeperator = System.getProperty("line.separator");
 
-		result.append("Guide:");
+		result.append("Guide(");
+		result.append(isNavigation());
+		result.append(",");
+		result.append(contextAlias + "):");
 		result.append(lineSeperator);
 
 		for (Step s : steps) {

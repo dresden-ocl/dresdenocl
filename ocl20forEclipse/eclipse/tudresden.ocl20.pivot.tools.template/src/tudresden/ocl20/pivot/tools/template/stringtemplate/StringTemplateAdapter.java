@@ -81,4 +81,15 @@ public class StringTemplateAdapter implements ITemplate {
 
 		return template.toString();
 	}
+
+	public void reset() {
+
+		template.reset();
+
+	}
+
+	public String getName() {
+
+		return template.getName();
+	}
 }

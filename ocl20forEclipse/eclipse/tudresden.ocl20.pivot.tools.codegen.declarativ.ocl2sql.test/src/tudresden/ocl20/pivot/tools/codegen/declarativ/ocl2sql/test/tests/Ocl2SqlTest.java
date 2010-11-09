@@ -137,6 +137,13 @@ public class Ocl2SqlTest {
 			fail("Can't load Standard SQL template.");
 		}
 		try {
+			model.removeAllConstraints();
+		} catch (IllegalArgumentException e2) {
+			fail("Can't model reset.");
+		} catch (ModelAccessException e2) {
+			fail("Can't model reset.");
+		}
+		try {
 			constraints =
 					Ocl22Parser.INSTANCE.doParse(model, URI.createFileURI(filePath
 							+ "constraints/university_complex.ocl"), true);

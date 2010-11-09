@@ -46,4 +46,14 @@ public interface ITemplate {
 	 * @return The evaluated template as a {@link String}.
 	 */
 	public String toString();
+
+	/**
+	 * The Template attributes will be cleared.
+	 */
+	public void reset();
+
+	/**
+	 * The template name will be returned.
+	 */
+	public String getName();
 }

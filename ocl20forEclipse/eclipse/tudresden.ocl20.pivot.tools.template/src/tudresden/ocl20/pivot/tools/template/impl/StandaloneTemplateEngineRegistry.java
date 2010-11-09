@@ -66,7 +66,8 @@ public class StandaloneTemplateEngineRegistry implements
 	/**
 	 * @see tudresden.ocl20.pivot.tools.template.ITemplateEngineRegistry#addTemplateEngine(ITemplateEngine)
 	 */
-	public void addTemplateEngine(ITemplateEngine templateEngine) throws TemplateException {
+	public void addTemplateEngine(ITemplateEngine templateEngine)
+			throws TemplateException {
 
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER
@@ -117,7 +118,8 @@ public class StandaloneTemplateEngineRegistry implements
 	/**
 	 * @see tudresden.ocl20.pivot.tools.template.ITemplateEngineRegistry#getNewTemplateEngine(String)
 	 */
-	public ITemplateEngine getNewTemplateEngine(String templateEngineName) throws TemplateException{
+	public ITemplateEngine getNewTemplateEngine(String templateEngineName)
+			throws TemplateException {
 
 		if (templateEngineName == null) {
 			throw new TemplateException(

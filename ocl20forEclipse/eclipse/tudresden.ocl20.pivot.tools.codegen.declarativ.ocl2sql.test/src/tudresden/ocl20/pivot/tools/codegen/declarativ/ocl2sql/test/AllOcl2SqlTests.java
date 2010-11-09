@@ -22,7 +22,11 @@ package tudresden.ocl20.pivot.tools.codegen.declarativ.ocl2sql.test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
+import tudresden.ocl20.pivot.tools.codegen.declarativ.ocl2sql.test.tests.CarOcl2SqlTest;
+import tudresden.ocl20.pivot.tools.codegen.declarativ.ocl2sql.test.tests.CarOcl2Sql_optimizeTest;
 import tudresden.ocl20.pivot.tools.codegen.declarativ.ocl2sql.test.tests.Ocl2SqlTest;
+import tudresden.ocl20.pivot.tools.codegen.declarativ.ocl2sql.test.tests.SingleOcl2SqlTest;
+import tudresden.ocl20.pivot.tools.codegen.declarativ.ocl2sql.test.tests.SingleOcl2Sql_optimizeTest;
 
 /**
  * <p>
@@ -34,7 +38,9 @@ import tudresden.ocl20.pivot.tools.codegen.declarativ.ocl2sql.test.tests.Ocl2Sql
  * 
  */
 @RunWith(Suite.class)
-@Suite.SuiteClasses({ Ocl2SqlTest.class })
+@Suite.SuiteClasses({ Ocl2SqlTest.class, SingleOcl2SqlTest.class,
+		SingleOcl2Sql_optimizeTest.class, CarOcl2SqlTest.class,
+		CarOcl2Sql_optimizeTest.class })
 public class AllOcl2SqlTests {
 	/*
 	 * This class remains completely empty, being used only as a holder for the

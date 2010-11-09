@@ -12,29 +12,41 @@ constraint_comment(context,expression) ::= <<
 -- Expression: $expression$
 >>
 
-
-// --- NAVIGATION (CLASS AND ATTRIBUTE) --- 
-feature_call_navigation(object,context1,ref_object,context2) ::= <<
-(SELECT $object$ FROM $context1$
- WHERE $ref_object$ IN $context2$)
+check_database_references() ::= <<
+true
 >>
 
-feature_call_navigation_context(object,context1,ref_object,context_alias,context_object) ::= <<
-(SELECT $object$ FROM $context1$ WHERE $ref_object$ = $context_alias$.$context_object$)
+// --- NAVIGATION (CLASS AND ATTRIBUTE) --- 
+feature_call_navigation_select(object,from,alias,join,where,groupby) ::= <<
+(SELECT $object$
+FROM $from$ AS $alias$
+$join$
+$if(where)$WHERE $where$$endif$$if(groupby)$
+GROUP BY $groupby$$endif$)
+>>
+
+feature_call_navigation_join(object,from,alias,join,where) ::= <<
+INNER JOIN $from$ AS $alias$ ON $where$$if(join)$
+
+$join$$endif$
+>>
+
+feature_call_navigation_where(alias1,where,alias2,object) ::= <<
+$feature_call_attribute_context(alias=alias1,attribute=where)$ = $feature_call_attribute_context(alias=alias2,attribute=object)$
+>>
+
+feature_call_navigation_from(object,where,from) ::= <<
+(SELECT $object$$if(where)$,$where$$endif$ FROM $from$)
 >>
 
 
 // --- ATTRIBUTE ACCESS (CLASS AND ATTRIBUTE) --- 
-feature_call_attribute_context(context_alias,attribute) ::= <<
-$if(context_alias)$$context_alias$.$attribute$$else$$attribute$$endif$
+feature_call_attribute_context(alias,attribute) ::= <<
+$if(alias)$$alias$.$attribute$$else$$attribute$$endif$
 >>
 
 feature_call_attribute_boolean(attribute) ::= <<
 ($attribute$ = 1)
->>
-
-feature_call_operand(operand) ::= <<
-$operand$
 >>
 
 // ---  BOOLEAN (BASIC TYPE) --- 
@@ -131,64 +143,56 @@ END
 >>
 
 
-// -- ITERATOR COLLECT (QUERY) ---
-feature_call_collect(expression) ::= <<
-$expression$
->>
-
-// -- ITERATOR COLLECT (QUERY) ---
-feature_call_collect_operation(expression,element,from,alias,where1,where2) ::= <<
-SELECT $element$ FROM $from$$if(where2)$ AS $alias$$endif$
- WHERE $where1$ IN ($expression$) $if(where2)$
- AND $where2$$endif$
+// -- ITERATOR FORALL (QUERY) ---
+feature_call_forAll(operand) ::= <<
+NOT EXISTS($operand$)
 >>
 
 // -- ITERATOR FORALL (QUERY) ---
-feature_call_forall(source,alias,object,collection,expression) ::= <<
-NOT EXISTS (
-  SELECT $object$ FROM $collection$
-  WHERE $object$ IN (
-    SELECT $object$ FROM $source$ AS $alias$
-    WHERE NOT $expression$
-  )
-)
+feature_call_forAll_where(operand) ::= <<
+NOT($operand$)
+>>
+
+// -- ITERATOR EXISTS (QUERY) ---
+feature_call_exists(operand) ::= <<
+EXISTS($operand$)
+>>
+
+// -- ITERATOR EXISTS (QUERY) ---
+feature_call_exists_where(operand) ::= <<
+$operand$
+>>
+
+// -- ITERATOR COLLECT (QUERY) ---
+feature_call_collect(source,alias,object,object2,object3,from,expression) ::= <<
+$expression$
 >>
 
 // -- ITERATOR REJECT (QUERY) ---
-feature_call_reject(source,alias,object,collection,expression) ::= <<
-(SELECT $object$ FROM $collection$
-  WHERE $object$ IN (
-    SELECT $object$ FROM $source$ AS $alias$
-    WHERE NOT ($expression$)
-  )
-)
+feature_call_reject(operand) ::= <<
+NOT($operand$)
 >>
 
 // -- ITERATOR SELECT (QUERY) ---
-feature_call_select(source,alias,object,collection,expression) ::= <<
-(SELECT $object$ FROM $collection$
-  WHERE $object$ IN (
-    SELECT $object$ FROM $source$ AS $alias$
-    WHERE ($expression$)
-  )
-)
+feature_call_select(operand) ::= <<
+$operand$
 >>
 
 // --- OCLISTYPEOF (CLASS AND ATTRIBUTE) ---
-feature_call_oclistypeof(source,object,alias) ::= <<
-exists (
-  SELECT $object$ FROM $source$
-  WHERE $object$ = $alias$.$object$)
+feature_call_oclistypeof(from,object,object2,alias) ::= <<
+EXISTS(
+  SELECT $alias$.$object$ FROM $from$ AS $alias$
+  WHERE $alias$.$object$ = $object2$)
 >>
   
 // --- OCLISKINDOF (CLASS AND ATTRIBUTE) ---
-feature_call_ocliskindof(source,source2,object,alias) ::= <<
-EXISTS (
-  SELECT $object$ FROM $source$
+feature_call_ocliskindof(from,from2,object,alias) ::= <<
+EXISTS(
+  SELECT $object$ FROM $from$
   WHERE $object$ = $alias$.$object$)
-$if(source2)$
-  AND NOT EXISTS (
-  SELECT $object$ FROM $source2$
+$if(from2)$
+  AND NOT EXISTS(
+  SELECT $object$ FROM $from2$
   WHERE $object$ = $alias$.$object$)
 $endif$
 >>
@@ -320,175 +324,177 @@ unary_expression_minus(operand) ::= <<
 >>
 
 unary_expression_not(operand) ::= <<
-(NOT ($operand$))
+NOT($operand$)
 >>
 
 
 // --- LOGICAL EXPRESSIONS ---
-logical_expression_and(expression1,expression2) ::= <<
-($expression1$ AND $expression2$)
+logical_expression_and(operand1,operand2) ::= <<
+($operand1$ AND $operand2$)
 >>
 
-logical_expression_or(expression1,expression2) ::= <<
-($expression1$ OR $expression2$)
+logical_expression_or(operand1,operand2) ::= <<
+($operand1$ OR $operand2$)
 >>
 
-logical_expression_xor(expression1,expression2) ::= <<
-(($expression1$ OR $expression2$) AND NOT ($expression1$ AND $expression2$))
+logical_expression_xor(operand1,operand2) ::= <<
+(($operand1$ OR $operand2$) AND NOT ($operand1$ AND $operand2$))
 >>
 
-logical_expression_implies(expression1,expression2) ::= <<
-(NOT $expression1$ OR $expression2$)
+logical_expression_implies(operand1,operand2) ::= <<
+(NOT $operand1$ OR $operand2$)
 >>
 
 // --- COLLECTION RELATED OPERATIONS ---
-feature_call_count(source,element,collection,object) ::= <<
-(SELECT
-  CASE 
-    WHEN COUNT($element$) IS NULL THEN 0
-    ELSE COUNT($element$)
-  END
-  FROM ($source$)
-  WHERE $element$ IN $collection$
-  AND $element$ = $object$)
+feature_call_count(object) ::= <<
+CASE
+  WHEN COUNT($object$) IS NULL THEN 0
+  ELSE COUNT($object$)
+END
 >>
 
-feature_call_exists(source,object,collection,expression) ::= <<
+feature_call_min(object) ::= <<
+MIN($object$)
+>>
+
+feature_call_max(object) ::= <<
+MAX($object$)
+>>
+
+feature_call_size(object) ::= <<
+CASE
+  WHEN COUNT($object$) IS NULL THEN 0
+  ELSE COUNT($object$)
+END
+>>
+
+feature_call_count_select(object) ::= <<
+CASE
+  WHEN $object$ IS NULL THEN NULL
+  ELSE 1
+END
+>>
+
+feature_call_size_select(object) ::= <<
+CASE
+  WHEN $object$ IS NULL THEN NULL
+  ELSE 1
+END
+>>
+
+feature_call_sum_select(object) ::= <<
+$object$
+>>
+
+feature_call_sum(object) ::= <<
+CASE
+  WHEN SUM($object$) IS NULL THEN 0
+  ELSE SUM($object$)
+END
+>>
+
+feature_call_excludes(operand1,operand2) ::= <<
+$operand2$ NOT IN
+  ($operand1$)
+>>
+
+feature_call_includes(operand1,operand2) ::= <<
+$operand2$ IN
+  ($operand1$)
+>>
+
+feature_call_excludesall(operand1,operand2) ::= <<
 NOT EXISTS (
-  SELECT $object$ FROM $collection$
-  WHERE $object$ IN (
-    SELECT $object$ FROM $source$
-    WHERE NOT $expression$
-  )
-)
->>
-
-feature_call_size(source,element,collection) ::= <<
-(SELECT
-  CASE
-    WHEN COUNT($element$) IS NULL THEN 0
-    ELSE COUNT($element$)
-  END
-  FROM ($source$)
-  WHERE $element$ IN $collection$)  
->>
-
-feature_call_sum(source,element,collection) ::= <<
-(SELECT
-  CASE 
-    WHEN SUM($element$) IS NULL THEN 0
-    ELSE SUM($element$)
-  END
-  FROM $source$
-  WHERE $element$ IN ($collection$))
->>
-
-feature_call_excludes(object,collection) ::= <<
-$object$ NOT IN
-  ($collection$)
->>
-
-feature_call_includes(object,collection) ::= <<
-$object$ IN
-  ($collection$)
->>
-
-feature_call_excludesall(collection,collection2) ::= <<
-NOT EXISTS (
-  ($collection2$)
+  ($operand2$)
   INTERSECT
-  ($collection$))
+  ($operand1$))
 >>
 
-feature_call_includesall(collection,collection2) ::= <<
+feature_call_includesall(operand1,operand2) ::= <<
 NOT EXISTS (
-  ($collection2$)
+  ($operand2$)
   EXCEPT
-  ($collection$))
+  ($operand1$))
 >>
 
-feature_call_isempty(collection) ::= <<
-NOT EXISTS ($collection$)
+feature_call_isempty(operand) ::= <<
+NOT EXISTS ($operand$)
 >>
 
-feature_call_notempty(collection) ::= <<
-EXISTS ($collection$)
+feature_call_notempty(operand) ::= <<
+EXISTS ($operand$)
 >>
 
-feature_call_intersection_bag(collection,collection2) ::= <<
-($collection2$ INTERSECT ALL
-  $collection$)
+feature_call_intersection_bag(operand1,operand2) ::= <<
+($operand2$ INTERSECT ALL
+  $operand1$)
 >>
 
-feature_call_intersection_set(collection,collection2) ::= <<
-($collection2$ INTERSECT
-  $collection$)
+feature_call_intersection_set(operand1,operand2) ::= <<
+($operand2$ INTERSECT
+  $operand1$)
 >>
 
-feature_call_including_bag(collection,object) ::= <<
-($collection$ UNION ALL
-  ($object$))
+feature_call_including_bag(operand1,operand2) ::= <<
+($operand1$ UNION ALL
+  ($operand2$))
 >>
 
-feature_call_including_sequence(collection,object) ::= <<
-($collection$)
+feature_call_including_sequence(operand1,operand2) ::= <<
+($operand1$)
   UNION
-  (SELECT $object$, ((SELECT MAX(SEQNO) FROM ($collection$)) + 1) AS SEQNO)
+  (SELECT $operand2$, ((SELECT MAX(SEQNO) FROM ($operand1$)) + 1) AS SEQNO)
 >>
 
-feature_call_including_set(collection,object) ::= <<
-($collection$ UNION
-  ($object$))
+feature_call_including_set(operand1,operand2) ::= <<
+($operand1$ UNION
+  ($operand2$))
 >>
 
-feature_call_excluding_bag(collection,object,element) ::= <<
-($collection$ EXCEPT ALL
-  ($object$))
+feature_call_excluding_bag(operand1,operand2,element) ::= <<
+($operand1$ EXCEPT ALL
+  ($element$))
 >>
 
-feature_call_excluding_sequence(collection,object,element) ::= <<
-SELECT $element$,
+feature_call_excluding_sequence(operand1,operand2,element) ::= <<
+SELECT $operand2$,
   (SELECT COUNT(*)+1 FROM (
-    SELECT $element$, SEQNO
-    FROM $collection$
-    WHERE NOT ($element$ = $object$)
+    SELECT $operand2$, SEQNO
+    FROM $operand2$
+    WHERE NOT ($element$ = $operand2$)
   ) WHERE SEQNO < s.SEQNO) AS SEQNO
   FROM (
-    SELECT $element$, SEQNO
-    FROM $collection$
-    WHERE NOT ($element$ = $object$)
+    SELECT $operand2$, SEQNO
+    FROM $operand1$
+    WHERE NOT ($element$ = $operand2$)
   )
 >>
 
-feature_call_excluding_set(collection,object,element) ::= <<
-($collection$ EXCEPT
-  ($object$))
+feature_call_excluding_set(operand1,operand2,element) ::= <<
+($operand1$ EXCEPT
+  ($operand2$))
 >>
 
-feature_call_union_bag(collection,collection2,element) ::= <<
-($collection$ UNION ALL
-  $collection2$)
+feature_call_union_bag(operand1,operand2,object) ::= <<
+($operand1$ UNION ALL
+  $operand2$)
 >>
 
-feature_call_union_sequence(collection,collection2,element) ::= <<
-($collection$)
+feature_call_union_sequence(operand1,operand2,object) ::= <<
+($operand1$)
   UNION
-  (SELECT $element$, (SELECT MAX(SEQNO) FROM ($collection$)) AS SEQNO
-   FROM $collection2$)
+  (SELECT $object$, (SELECT MAX(SEQNO) FROM ($operand1$)) AS SEQNO
+   FROM $operand2$)
 >>
 
-feature_call_union_set(collection,collection2,element) ::= <<
-($collection$ UNION
-  $collection2$)
+feature_call_union_set(operand1,operand2,object) ::= <<
+($operand1$ UNION
+  $operand2$)
 >>
 
-feature_call_allinstances(object,source) ::= <<
-(SELECT $object$ FROM $source$)
->>
-
-feature_call_symmetricdifference(collection,collection2) ::= <<
-($collection$ EXCEPT $collection2$
- $collection2$ EXCEPT $collection$)
+feature_call_symmetricdifference(operand1,operand2) ::= <<
+($operand1$ EXCEPT $operand2$
+ $operand2$ EXCEPT $operand1$)
 >>
 
 feature_call_string_concat(operand1,operand2) ::= <<
@@ -496,27 +502,27 @@ $operand1$ || $operand2$
 >>
 
 feature_call_string_size(operand) ::= <<
-LENGTH ($operand$)
+LENGTH($operand$)
 >>
 
 feature_call_string_tolower(operand) ::= <<
-LOWER ($operand$)
+LOWER($operand$)
 >>
 
 feature_call_string_toupper(operand) ::= <<
-UPPER ($operand$)
+UPPER($operand$)
 >>
 
 feature_call_string_substring(operand,start,end) ::= <<
 SUBSTRING($operand$, $start$, $end$ - $start$ + 1)
 >>
 
-feature_call_int_abs(operand) ::= <<
-ABS ($operand$)
+feature_call_int_abs(operand1) ::= <<
+ABS($operand1$)
 >>
 
-feature_call_int_floor(operand) ::= <<
-FLOOR ($operand$)
+feature_call_int_floor(operand1) ::= <<
+FLOOR($operand1$)
 >>
 
 feature_call_int_div(operand1,operand2) ::= <<
@@ -531,7 +537,7 @@ END
 >>
 
 feature_call_int_min(operand1,operand2) ::= <<
-CASE 
+CASE
   WHEN $operand1$ < $operand2$ THEN $operand1$
   ELSE $operand2$
 END
@@ -541,6 +547,6 @@ feature_call_int_mod(operand1,operand2) ::= <<
 $operand1$ - (($operand1$ / $operand2$) * $operand2$)
 >>
 
-feature_call_int_round(operand) ::= <<
-ROUND ($operand$)
+feature_call_int_round(operand1) ::= <<
+ROUND($operand1$)
 >>

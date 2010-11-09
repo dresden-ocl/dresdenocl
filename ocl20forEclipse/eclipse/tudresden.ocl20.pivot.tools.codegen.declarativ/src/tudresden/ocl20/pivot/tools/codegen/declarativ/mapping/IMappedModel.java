@@ -58,6 +58,6 @@ public interface IMappedModel {
 	public String getUniqueAlias();
 
 	public boolean isClass(String classname);
-	
+
 	public void resetUniqueAlias();
 }

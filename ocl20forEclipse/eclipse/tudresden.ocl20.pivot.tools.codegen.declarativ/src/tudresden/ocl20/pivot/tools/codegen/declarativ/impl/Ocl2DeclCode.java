@@ -1,8 +1,8 @@
 /*
- * DeclarativeCodeGenerator.java
+ * Ocl2DeclCode.java
  * 
- * Copyright (c) 2006 Florian Heidenreich
- * Contact: <mail@fheidenreich.de>
+ * Copyright (c) 2010 Bjoern Freitag
+ * Contact: <bjoern.freitag@mailbox.tu-dresden.de>
  *
  * This file is part of the Dresden OCL2.0 Toolkit
  * created at Technische Universitaet Dresden (TUD), Germany.
@@ -28,6 +28,7 @@
 package tudresden.ocl20.pivot.tools.codegen.declarativ.impl;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -53,12 +54,12 @@ import tudresden.ocl20.pivot.essentialocl.expressions.PropertyCallExp;
 import tudresden.ocl20.pivot.essentialocl.expressions.RealLiteralExp;
 import tudresden.ocl20.pivot.essentialocl.expressions.StringLiteralExp;
 import tudresden.ocl20.pivot.essentialocl.expressions.TypeLiteralExp;
+import tudresden.ocl20.pivot.essentialocl.expressions.Variable;
 import tudresden.ocl20.pivot.essentialocl.expressions.VariableExp;
 import tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch;
 import tudresden.ocl20.pivot.essentialocl.types.AnyType;
 import tudresden.ocl20.pivot.essentialocl.types.BagType;
 import tudresden.ocl20.pivot.essentialocl.types.CollectionType;
-import tudresden.ocl20.pivot.essentialocl.types.OrderedSetType;
 import tudresden.ocl20.pivot.essentialocl.types.SequenceType;
 import tudresden.ocl20.pivot.essentialocl.types.SetType;
 import tudresden.ocl20.pivot.pivotmodel.AssociationProperty;
@@ -72,6 +73,9 @@ import tudresden.ocl20.pivot.pivotmodel.Property;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 import tudresden.ocl20.pivot.tools.codegen.declarativ.IOcl2DeclCode;
 import tudresden.ocl20.pivot.tools.codegen.declarativ.IOcl2DeclSettings;
+import tudresden.ocl20.pivot.tools.codegen.declarativ.code.ISQLCode;
+import tudresden.ocl20.pivot.tools.codegen.declarativ.code.SQLCode;
+import tudresden.ocl20.pivot.tools.codegen.declarativ.code.SQLString;
 import tudresden.ocl20.pivot.tools.codegen.declarativ.mapping.Guide;
 import tudresden.ocl20.pivot.tools.codegen.declarativ.mapping.IMappedClass;
 import tudresden.ocl20.pivot.tools.codegen.exception.Ocl2CodeException;
@@ -104,7 +108,7 @@ import tudresden.ocl20.pivot.tools.template.ITemplate;
  * @see tudresden.ocl20.codegen.decl.mapping.IMappedClass
  * @see tudresden.ocl20.codegen.decl.mapping.Guide
  */
-public class Ocl2DeclCode extends ExpressionsSwitch<String> implements
+public class Ocl2DeclCode extends ExpressionsSwitch<ISQLCode> implements
 		IOcl2DeclCode {
 
 	/** The Logger for this class. */
@@ -119,12 +123,17 @@ public class Ocl2DeclCode extends ExpressionsSwitch<String> implements
 	 */
 	private Map<OclExpression, List<Guide>> navigationMap;
 
-	private LinkedList<String> aliasList;
-	private LinkedList<String> contextList;
-	private LinkedList<String> variableList;
-	
+	/**
+	 * This map mapped a variable Name to a Guide.
+	 */
+	private Map<String, Guide> variableMap;
+
+	private boolean useVariable;
+
+	/**
+	 * The number for not named constraints.
+	 */
 	private int uniqueConstraintNumber;
-	
 
 	/**
 	 * <p>
@@ -136,7 +145,7 @@ public class Ocl2DeclCode extends ExpressionsSwitch<String> implements
 	 */
 	public Ocl2DeclCode() throws Ocl2CodeException {
 
-		this.init();
+		init();
 	}
 
 	/**
@@ -177,12 +186,11 @@ public class Ocl2DeclCode extends ExpressionsSwitch<String> implements
 	 * @see tudresden.ocl20.pivot.tools.codgen.IOcl2Code#resetEnviornment()
 	 */
 	public void resetEnvironment() {
-		
-		this.uniqueConstraintNumber = 0;
-		this.aliasList = new LinkedList<String>();
-		this.contextList = new LinkedList<String>();
-		this.navigationMap = new HashMap<OclExpression, List<Guide>>();
-		this.variableList = new LinkedList<String>();
+
+		uniqueConstraintNumber = 0;
+		navigationMap = new HashMap<OclExpression, List<Guide>>();
+		variableMap = new HashMap<String, Guide>();
+		useVariable = false;
 	}
 
 	/*
@@ -213,7 +221,7 @@ public class Ocl2DeclCode extends ExpressionsSwitch<String> implements
 
 		for (Constraint aConstraint : constraints) {
 
-			String aResult = this.transformFragmentCode(aConstraint);
+			String aResult = transformFragmentCode(aConstraint);
 
 			if (aResult == null)
 				continue;
@@ -253,50 +261,59 @@ public class Ocl2DeclCode extends ExpressionsSwitch<String> implements
 		if (aConstraint.getKind() != ConstraintKind.INVARIANT) {
 			return null;
 		}
-		
+
 		ITemplate template = null;
 		String constraintName = "";
 		if (aConstraint.getKind() == ConstraintKind.INVARIANT) {
 			template =
-				mySettings.getTemplateGroup().getTemplate("constraint_invariant");
+					mySettings.getTemplateGroup().getTemplate("constraint_invariant");
 			constraintName = aConstraint.getName();
-		} 
+		}
 
-		if (constraintName == null || constraintName.equals("")){
+		if (constraintName == null || constraintName.equals("")) {
 			constraintName = getUniqueConstraintName();
 		}
-		
-		String bodyExpression;
+
+		ISQLCode bodyExpression;
 		Expression anExpression;
-		this.reset();
+		reset();
 		anExpression = aConstraint.getSpecification();
-		bodyExpression = this.doSwitch(anExpression);
-						
+		bodyExpression = doSwitch(anExpression);
+
+		Guide classGuide = variableMap.values().iterator().next();
+		classGuide.reset();
+
 		template.setAttribute("constraint_name", constraintName);
-		template.setAttribute("context",  contextList.removeFirst()); 
-		template.setAttribute("context_alias", getAlias(false));
-		template.setAttribute("expression", bodyExpression);
+		template.setAttribute("context", classGuide.getFrom());
+		template.setAttribute("context_alias", classGuide.getAlias());
+		template.setAttribute("expression", bodyExpression.getResult());
 
 		ITemplate comment =
-			mySettings.getTemplateGroup().getTemplate("constraint_comment");
-		comment.setAttribute("context",	contextList.removeFirst());
+				mySettings.getTemplateGroup().getTemplate("constraint_comment");
+		comment.setAttribute("context", ((Type) aConstraint.getConstrainedElement()
+				.get(0)).getName());
 		comment.setAttribute("expression",
-			anExpression.getBody().replace("\r\n ", "").replace(" \r\n", "")
-					.replace("\r\n", ""));
+				anExpression.getBody().replace("\r\n ", "").replace(" \r\n", "")
+						.replace("\r\n", ""));
 
-		
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("transformFragmentCode(Constraint)"
 					+ " - end - return value=" + template.toString());
 		}
 		// no else.
 
-		return comment.toString()+"\n"+template.toString();
+		return comment.toString() + "\n" + template.toString();
 	}
 
+	/**
+	 * Returns a unique name of a constraint.
+	 * 
+	 * @return the name of constraint
+	 */
 	private String getUniqueConstraintName() {
-		this.uniqueConstraintNumber++;
-		return "UNAMED_CONSTRAINT"+this.uniqueConstraintNumber;
+
+		uniqueConstraintNumber++;
+		return "UNAMED_CONSTRAINT" + uniqueConstraintNumber;
 	}
 
 	/*
@@ -304,22 +321,24 @@ public class Ocl2DeclCode extends ExpressionsSwitch<String> implements
 	 * @see tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch
 	 * #caseBooleanLiteralExp(BooleanLiteralExp)
 	 */
-	public String caseBooleanLiteralExp(BooleanLiteralExp aBooleanLiteralExp) {
+	public ISQLCode caseBooleanLiteralExp(BooleanLiteralExp aBooleanLiteralExp) {
 
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("caseBooleanLiteralExp(BooleanLiteralExp) - start");
 		}
 		// no else.
 
-		ITemplate template;
+		ISQLCode template;
 
 		if (aBooleanLiteralExp.isBooleanSymbol()) {
 			template =
-					mySettings.getTemplateGroup().getTemplate("literal_boolean_true");
+					new SQLCode(mySettings.getTemplateGroup().getTemplate(
+							"literal_boolean_true"));
 		}
 		else {
 			template =
-					mySettings.getTemplateGroup().getTemplate("literal_boolean_false");
+					new SQLCode(mySettings.getTemplateGroup().getTemplate(
+							"literal_boolean_false"));
 		}
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("caseBooleanLiteralExp(BooleanLiteralExp)"
@@ -327,15 +346,21 @@ public class Ocl2DeclCode extends ExpressionsSwitch<String> implements
 		}
 		// no else.
 
-		return template.toString();
+		return template;
 	}
 
-	public String caseCollectionLiteralExp(
+	/*
+	 * (non-Javadoc)
+	 * @see tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch#
+	 * caseCollectionLiteralExp
+	 * (tudresden.ocl20.pivot.essentialocl.expressions.CollectionLiteralExp)
+	 */
+	public ISQLCode caseCollectionLiteralExp(
 			CollectionLiteralExp anCollectionLiteralExp) {
 
 		List<CollectionLiteralPart> parts = anCollectionLiteralExp.getPart();
 		String templateName = "";
-		ITemplate template;
+		ISQLCode template;
 
 		// determine template to use depending on collection kind
 		if (anCollectionLiteralExp.getKind() == CollectionKind.BAG) {
@@ -352,15 +377,16 @@ public class Ocl2DeclCode extends ExpressionsSwitch<String> implements
 		}
 
 		// get template for items in the collection
-		template = mySettings.getTemplateGroup().getTemplate(templateName);
+		template =
+				new SQLCode(mySettings.getTemplateGroup().getTemplate(templateName));
 
 		// parameterize the template engine
 		for (CollectionLiteralPart clp : parts) {
-			template.setAttribute("items",
+			template.addElement("items",
 					doSwitch((OclExpression) ((CollectionItem) clp).getItem()));
 		}
 
-		return template.toString();
+		return template;
 	}
 
 	/*
@@ -369,19 +395,20 @@ public class Ocl2DeclCode extends ExpressionsSwitch<String> implements
 	 * #caseEnumLiteralExp
 	 * (tudresden.ocl20.pivot.essentialocl.expressions.EnumLiteralExp)
 	 */
-	public String caseEnumLiteralExp(EnumLiteralExp anEnumLiteralExp) {
+	public ISQLCode caseEnumLiteralExp(EnumLiteralExp anEnumLiteralExp) {
 
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("caseEnumLiteralExp(EnumLiteralExp) - start");
 		}
 		// no else.
 
-		ITemplate template;
+		ISQLCode template;
 
-		template = mySettings.getTemplateGroup().getTemplate("literal_enum");
+		template =
+				new SQLCode(mySettings.getTemplateGroup().getTemplate("literal_enum"));
 
-		template.setAttribute("value", anEnumLiteralExp.getReferredEnumLiteral()
-				.getName());
+		template.addElement("value", new SQLString(anEnumLiteralExp
+				.getReferredEnumLiteral().getName()));
 
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("caseEnumLiteralExp(EnumLiteralExp)"
@@ -389,7 +416,7 @@ public class Ocl2DeclCode extends ExpressionsSwitch<String> implements
 		}
 		// no else.
 
-		return template.toString();
+		return template;
 	}
 
 	/*
@@ -398,28 +425,27 @@ public class Ocl2DeclCode extends ExpressionsSwitch<String> implements
 	 * #caseExpressionInOcl
 	 * (tudresden.ocl20.pivot.essentialocl.expressions.ExpressionInOcl)
 	 */
-	public String caseExpressionInOcl(ExpressionInOcl anExpressionInOcl) {
+	public ISQLCode caseExpressionInOcl(ExpressionInOcl anExpressionInOcl) {
 
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("caseExpressionInOcl(ExpressionInOcl) - start");
 		}
 		// no else.
+		Variable v = anExpressionInOcl.getContext();
+
 		IMappedClass constrainedType =
-				this.getSettings().getMappedModel()
-						.getClass(anExpressionInOcl.getContext().getType().getName());
+				getSettings().getMappedModel().getClass(v.getType().getName());
 		Guide classGuide =
-				this.getSettings().getMappedModel().getClass(constrainedType.getName())
+				getSettings().getMappedModel().getClass(constrainedType.getName())
 						.getClassGuide();
+		classGuide.setAlias(mySettings.getMappedModel().getUniqueAlias());
 		classGuide.reset();
-		contextList.add(classGuide.getWhere());
+		variableMap.put(v.getName(), classGuide);
 
 		/* Transform bodyCode. */
-		String bodyExpression =
-				this.doSwitch((EObject) anExpressionInOcl.getBodyExpression());
-		
+		ISQLCode bodyExpression =
+				doSwitch((EObject) anExpressionInOcl.getBodyExpression());
 
-		contextList.addFirst(constrainedType.getName());
-		contextList.addFirst(classGuide.getFrom());
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("caseExpressionInOcl(ExpressionInOcl)"
 					+ " - end - return value=" + bodyExpression);
@@ -434,22 +460,22 @@ public class Ocl2DeclCode extends ExpressionsSwitch<String> implements
 	 * @see tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch
 	 * #caseIfExp(tudresden.ocl20.pivot.essentialocl.expressions.IfExp)
 	 */
-	public String caseIfExp(IfExp anIfExp) {
+	public ISQLCode caseIfExp(IfExp anIfExp) {
 
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("caseIfExp(IfExp) - start");
 		}
 		// no else.
 
-		ITemplate template;
+		ISQLCode template;
 
 		OclExpression ifExp;
 		OclExpression thenExp;
 		OclExpression elseExp;
 
-		String ifCode;
-		String thenCode;
-		String elseCode;
+		ISQLCode ifCode;
+		ISQLCode thenCode;
+		ISQLCode elseCode;
 
 		ifExp = anIfExp.getCondition();
 		thenExp = anIfExp.getThenExpression();
@@ -461,10 +487,11 @@ public class Ocl2DeclCode extends ExpressionsSwitch<String> implements
 		elseCode = doSwitch((EObject) elseExp);
 
 		/* Transform ifExp. */
-		template = mySettings.getTemplateGroup().getTemplate("if_expression");
-		template.setAttribute("if_branch", ifCode);
-		template.setAttribute("then_branch", thenCode);
-		template.setAttribute("else_branch", elseCode);
+		template =
+				new SQLCode(mySettings.getTemplateGroup().getTemplate("if_expression"));
+		template.addElement("if_branch", ifCode);
+		template.addElement("then_branch", thenCode);
+		template.addElement("else_branch", elseCode);
 
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("caseIfExp(IfExp)" + " - end - return value="
@@ -472,7 +499,7 @@ public class Ocl2DeclCode extends ExpressionsSwitch<String> implements
 		}
 		// no else.
 
-		return template.toString();
+		return template;
 	}
 
 	/*
@@ -481,19 +508,23 @@ public class Ocl2DeclCode extends ExpressionsSwitch<String> implements
 	 * #caseIntegerLiteralExp
 	 * (tudresden.ocl20.pivot.essentialocl.expressions.IntegerLiteralExp)
 	 */
-	public String caseIntegerLiteralExp(IntegerLiteralExp anIntegerLiteralExp) {
+	public ISQLCode caseIntegerLiteralExp(IntegerLiteralExp anIntegerLiteralExp) {
 
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("caseIntegerLiteralExp(IntegerLiteralExp) - start");
 		}
 		// no else.
 
-		ITemplate template;
+		ISQLCode template;
 
-		template = mySettings.getTemplateGroup().getTemplate("literal_integer");
+		template =
+				new SQLCode(mySettings.getTemplateGroup()
+						.getTemplate("literal_integer"));
 
-		template.setAttribute("value",
-				new Integer(anIntegerLiteralExp.getIntegerSymbol()).toString());
+		template.addElement(
+				"value",
+				new SQLString(new Integer(anIntegerLiteralExp.getIntegerSymbol())
+						.toString()));
 
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("caseIntegerLiteralExp(IntegerLiteralExp)"
@@ -501,7 +532,7 @@ public class Ocl2DeclCode extends ExpressionsSwitch<String> implements
 		}
 		// no else.
 
-		return template.toString();
+		return template;
 	}
 
 	/*
@@ -510,87 +541,140 @@ public class Ocl2DeclCode extends ExpressionsSwitch<String> implements
 	 * #caseIteratorExp
 	 * (tudresden.ocl20.pivot.essentialocl.expressions.IteratorExp)
 	 */
-	public String caseIteratorExp(IteratorExp anIteratorExp) {
+	public ISQLCode caseIteratorExp(IteratorExp anIteratorExp) {
 
 		if (LOGGER.isDebugEnabled()) {
-			LOGGER.debug("caseIteratorExp(IteratorExp) - start");
+			LOGGER.debug("caseIteratorExp(IteratorExp) - start - Iterator"
+					+ anIteratorExp);
 		}
 
-		String result = null;
-
-		OclExpression sourceExp = anIteratorExp.getSource();
 		String operationName = anIteratorExp.getName();
-
-		// get code for source expression
-		String sourceCode = doSwitch(sourceExp);
-		
-		aliasList.addLast(mySettings.getMappedModel().getUniqueAlias());
-
-		// evaluate the arguments
-		String arg = doSwitch(anIteratorExp.getBody());
-
-		if (operationName.equals("collect")) {
-			// collect is special and weird, hackfix
-			List<Guide> nav = new LinkedList<Guide>();
-			Guide guideSrc = navigationMap.get(sourceExp).get(0);
-			guideSrc.reset();
-			Guide guideArg = navigationMap.get(anIteratorExp.getBody()).get(0);
-			guideArg.reset();
-			navigationMap.put(anIteratorExp,
-				navigationMap.get(anIteratorExp.getBody()));
-			nav.add(guideArg);
-			guideArg.reset();
-			nav.add(guideSrc);
-			String lastString = getAlias(true,true);
-			guideSrc.setAlias(getAlias(true));
-			if ((anIteratorExp.getBody().getType() instanceof PrimitiveType) || !(anIteratorExp.getBody() instanceof PropertyCallExp)) {
-				//guideSrc.setAlias(aliasList.getFirst());
-				result = handleIterCollectOperation(guideArg,null,doSwitch(sourceExp));
-			}
-			else if (!(anIteratorExp.getBody().getType() instanceof PrimitiveType) || anIteratorExp.getBody() instanceof PropertyCallExp) {
-
-				result = handleIterCollect(createNavigation(nav));
-			}
-			else {
-				
-				result = handleIterCollectOperation(guideArg,doSwitch(anIteratorExp.getBody()),createNavigation(nav));
-			}
-			aliasList.addLast(lastString);
-			guideSrc.reset();
-
-		}
-		else if (operationName.equals("forAll")) {
-			result =
-					handleIterForAll(sourceCode, navigationMap.get(sourceExp).get(0), arg);
-		}
-		else if (operationName.equals("reject")) {
-			List<Guide> guides =
-					assignClassGuide(anIteratorExp,
-							((CollectionType) sourceExp.getType()));
-			result = handleIterReject(sourceCode, guides.get(0), arg);
-		}
-		else if (operationName.equals("select")) {
-			List<Guide> guides =
-					assignClassGuide(anIteratorExp,
-							((CollectionType) sourceExp.getType()));
-			result = handleIterSelect(sourceCode, guides.get(0), arg);
-		}
-		else if (operationName.equals("exists")) {
-			result =
-					handleCollExists(sourceCode, navigationMap.get(sourceExp).get(0), arg);
-		}
-		else if (operationName.equals("iterate")) {
+		if (operationName.equals("iterate")) {
 			throw new UnsupportedOperationException(
 					"The iterate operation is not supported.");
 		}
+		ISQLCode result = null;
 
-		// remove last alias from alias list
-		getAlias(true,true);
+		OclExpression sourceExp = anIteratorExp.getSource();
+		OclExpression bodyExp = anIteratorExp.getBody();
+		// get code for source expression
+		ISQLCode sourceCode = doSwitch(sourceExp);
+		List<Guide> srcGuides = navigationMap.get(sourceExp);
 
-		if (!operationName.equals("collect")) {
-			variableList.removeLast();
+		Guide guideSrc = srcGuides.get(0);
+		guideSrc.reset();
+		if (guideSrc.numberOfSteps() > 1 && !operationName.equals("collect")) {
+			guideSrc = new Guide(guideSrc.isNavigation(), guideSrc.getAlias());
+			guideSrc.add(srcGuides.get(0).getSelect(), srcGuides.get(0).getFrom(),
+					srcGuides.get(0).getWhere());
 		}
-		
+		// evaluate the arguments
+		for (Variable v : anIteratorExp.getIterator()) {
+			variableMap.put(v.getName(), guideSrc);
+		}
+
+		boolean saveAllInstances = useVariable;
+		useVariable = false;
+		ISQLCode arg = doSwitch(bodyExp);
+		useVariable = saveAllInstances;
+
+		if (operationName.equals("collect")) {
+			List<Guide> nav = new LinkedList<Guide>();
+			nav.addAll(navigationMap.get(bodyExp));
+			nav.addAll(srcGuides);
+			navigationMap.put(anIteratorExp, nav);
+			if (arg != null) {
+				if (arg.getElement("operand") != null
+						&& bodyExp instanceof OperationCallExp) {
+					ISQLCode operand = arg.getElement("operand");
+					result =
+							createCollectStatement(operand, sourceCode, guideSrc,
+									((OperationCallExp) bodyExp).getSource());
+					arg.changeElement("operand", choiceCollectObject(operand));
+					result.changeElement("object", arg);
+				}
+				else if (arg.getElement("operand1") != null
+						&& bodyExp instanceof OperationCallExp) {
+					ISQLCode operand1 = arg.getElement("operand1");
+					result =
+							createCollectStatement(operand1, sourceCode, guideSrc,
+									((OperationCallExp) bodyExp).getSource());
+					arg.changeElement("operand1", choiceCollectObject(result));
+					ISQLCode operand2 = arg.getElement("operand2");
+					arg.changeElement("operand2", choiceCollectObject(operand2));
+					result.changeElement("object", arg);
+				}
+				else {
+					result = createCollectStatement(arg, sourceCode, guideSrc, bodyExp);
+				}
+				if (arg.getElement("object") != null) {
+					String tempName = arg.getElement("object").getTemplateName();
+					if ("feature_call_count".equals(tempName)
+							|| "feature_call_sum".equals(tempName)
+							|| "feature_call_size".equals(tempName)) {
+						result.changeElement("groupby", createObjectValue(guideSrc));
+					}
+				}
+
+			}
+			else {
+				result = sourceCode;
+			}
+		}
+		else if (operationName.equals("select") || operationName.equals("reject")) {
+			ISQLCode expression = handleIterOperation(operationName, arg);
+			if (!navigationMap.get(bodyExp)
+					.get(navigationMap.get(bodyExp).size() - 1).equals(guideSrc)) {
+				Guide classGuide = assignClassGuide(anIteratorExp, sourceExp.getType());
+				classGuide.setAlias(navigationMap.get(bodyExp).get(0).getAlias());
+				sourceCode =
+						createCollectStatement(
+								createSelectStatement(Arrays.asList(classGuide)), sourceCode,
+								guideSrc, bodyExp);
+				ISQLCode join = sourceCode.getElement("join");
+				if (join != null
+						&& sourceCode.getElement("alias").toString()
+								.equals(join.getElement("alias").toString())) {
+					sourceCode.changeElement("alias", join.getElement("alias"));
+					sourceCode.getElement("object").changeElement("alias",
+							join.getElement("alias"));
+					join.changeElement("alias", new SQLString(mySettings.getMappedModel()
+							.getUniqueAlias()));
+					join.getElement("where").changeElement("alias2",
+							join.getElement("alias"));
+					if (join.getElement("join") == null) {
+						if (sourceCode.getElement("where") != null) {
+							if (sourceCode.getElement("where").getElement("alias1") != null) {
+								sourceCode.getElement("where").changeElement("alias1",
+										join.getElement("alias"));
+							}
+							else if (sourceCode.getElement("where").getElement("operand1") != null) {
+								sourceCode.getElement("where").getElement("operand1")
+										.changeElement("alias", join.getElement("alias"));
+							}
+						}
+					}
+					else {
+						join.getElement("join").getElement("where")
+								.changeElement("alias1", join.getElement("alias"));
+					}
+				}
+				sourceCode.getElement("join").getElement("where")
+						.changeElement("alias1", sourceCode.getElement("alias"));
+			}
+			changeWhereStatement(sourceCode, expression);
+			result = sourceCode;
+		}
+		else if (operationName.equals("forAll") || operationName.equals("exists")) {
+			arg = handleIterOperation(operationName + "_where", arg);
+			changeWhereStatement(sourceCode, arg);
+			result = handleIterOperation(operationName, sourceCode);
+		}
+
+		for (Variable v : anIteratorExp.getIterator()) {
+			variableMap.remove(v.getName());
+		}
+
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("caseIteratorExp(IteratorExp)" + " - end - return value="
 					+ result);
@@ -600,53 +684,224 @@ public class Ocl2DeclCode extends ExpressionsSwitch<String> implements
 		return result;
 	}
 
-	/**
-	 * <p>
-	 * Generates the code for a binary {@link Operation} of an
-	 * {@link OperationCallExp}.
-	 * 
-	 * @param anOperationCallExp
-	 *          The {@link OperationCallExp} the code shall be transformed for.
-	 * @param anOperation
-	 *          The {@link Operation} which shall be transformed.
-	 * @return The {@link String} for the {@link Operation} which shall be
-	 *         transformed.
+	/*
+	 * (non-Javadoc)
+	 * @see tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch#
+	 * caseOperationCallExp
+	 * (tudresden.ocl20.pivot.essentialocl.expressions.OperationCallExp)
 	 */
-	public String caseOperationCallExp(OperationCallExp anOperationCallExp) {
+	public ISQLCode caseOperationCallExp(OperationCallExp anOperationCallExp) {
 
 		if (LOGGER.isDebugEnabled()) {
-			LOGGER.debug("caseOperationCallExp(OperationCallExp) - start");
+			LOGGER
+					.debug("caseOperationCallExp(OperationCallExp) - start - Operation:"
+							+ anOperationCallExp);
 		}
 		// no else.
 
-		String resultExp;
+		ISQLCode resultExp;
 
 		OclExpression sourceExp;
-		String sourceCode;
+		ISQLCode sourceCode;
 
 		List<OclExpression> arguments = anOperationCallExp.getArgument();
-		String firstArg = null;
-		List<String> args = new ArrayList<String>();
-		for (int i = 0; i < arguments.size(); i++) {
-			args.add(doSwitch((OclExpression) arguments.get(i)));
+		List<ISQLCode> args = new ArrayList<ISQLCode>();
+		for (OclExpression oe : arguments) {
+			args.add(doSwitch(oe));
 		}
-		if (args.size() > 0) {
-			firstArg = args.get(0);
-		}
-
-		String operationName;
 
 		/* Transform Code for the source of the operation call. */
 		sourceExp = anOperationCallExp.getSource();
-		sourceCode = this.doSwitch((EObject) sourceExp);
+		sourceCode = doSwitch((EObject) sourceExp);
 
 		navigationMap.put(anOperationCallExp, navigationMap.get(sourceExp));
-		
+
 		Operation anOperation = anOperationCallExp.getReferredOperation();
-		operationName = anOperation.getName();
 
-		resultExp = null;
+		resultExp =
+				handleAllOperations(anOperation.getName(),
+						anOperationCallExp.getType(), sourceExp, sourceCode, args,
+						arguments);
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("caseOperationCallExp(OperationCallExp)"
+					+ " - end - return value=" + resultExp);
+		}
+		// no else.
 
+		return resultExp;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch
+	 * #casePropertyCallExp
+	 * (tudresden.ocl20.pivot.essentialocl.expressions.PropertyCallExp)
+	 */
+	public ISQLCode casePropertyCallExp(PropertyCallExp anPropertyCallExp) {
+
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("casePropertyCallExp(PropertyCallExp) - start");
+		}
+
+		List<Guide> guides = assignGuides(anPropertyCallExp);
+		ISQLCode result;
+		result =
+				handlePropProperty(anPropertyCallExp.getReferredProperty(), guides);
+
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("casePropertyCallExp(PropertyCallExp)"
+					+ " - end - return value=" + result);
+		}
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch
+	 * #caseRealLiteralExp
+	 * (tudresden.ocl20.pivot.essentialocl.expressions.RealLiteralExp)
+	 */
+	public ISQLCode caseRealLiteralExp(RealLiteralExp aRealLiteralExp) {
+
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("caseRealLiteralExp(RealLiteralExp) - start");
+		}
+		// no else.
+
+		ISQLCode template;
+
+		template =
+				new SQLCode(mySettings.getTemplateGroup().getTemplate("literal_real"));
+
+		// parameterize the template engine
+		template.addElement("value",
+				new SQLString(new Double(aRealLiteralExp.getRealSymbol()).toString()));
+
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("caseRealLiteralExp(RealLiteralExp)"
+					+ " - end - return value=" + template.toString());
+		}
+		// no else.
+
+		return template;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch
+	 * #caseStringLiteralExp
+	 * (tudresden.ocl20.pivot.essentialocl.expressions.StringLiteralExp)
+	 */
+	public ISQLCode caseStringLiteralExp(StringLiteralExp aStringLiteralExp) {
+
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("caseStringLiteralExp(StringLiteralExp) - start");
+		}
+		// no else.
+
+		ISQLCode template =
+				new SQLCode(mySettings.getTemplateGroup().getTemplate("literal_string"));
+
+		// parameterize the template engine
+		template.addElement("value",
+				new SQLString(aStringLiteralExp.getStringSymbol()));
+
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("caseStringLiteralExp(StringLiteralExp)"
+					+ " - end - return value=" + template.toString());
+		}
+		// no else.
+
+		return template;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch#
+	 * caseTypeLiteralExp
+	 * (tudresden.ocl20.pivot.essentialocl.expressions.TypeLiteralExp)
+	 */
+	public ISQLCode caseTypeLiteralExp(TypeLiteralExp anTypeLiteralExp) {
+
+		assignClassGuide(anTypeLiteralExp, anTypeLiteralExp.getReferredType());
+		return new SQLString(anTypeLiteralExp.getReferredType().getName());
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch
+	 * #caseVariableExp
+	 * (tudresden.ocl20.pivot.essentialocl.expressions.VariableExp)
+	 */
+	public ISQLCode caseVariableExp(VariableExp aVariableExp) {
+
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("caseVariableExp(VariableExp) - start - Variable:"
+					+ aVariableExp);
+		}
+		// no else.
+
+		ISQLCode template =
+				new SQLCode(mySettings.getTemplateGroup().getTemplate(
+						"literal_variable"));
+
+		template.addElement("value", createObjectValue(variableMap.get(aVariableExp
+				.getReferredVariable().getName())));
+
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("caseVariableExp(VariableExp)" + " - end - return value="
+					+ template.toString());
+		}
+		// no else.
+
+		return template;
+	}
+
+	/**
+	 * Generates a code fragment for an arithmetic operation.
+	 * 
+	 * @param name
+	 *          the name of the arithmetic operation (can be div, minus, mult and
+	 *          plus)
+	 * @param sourceCode
+	 *          the code of the source expression (argument 1)
+	 * @param firstArg
+	 *          the code of the argument expression (argument 2)
+	 * @return declarative code fragment for the arithmetic operation
+	 */
+	protected ISQLCode handleArithmeticOperation(String name,
+			ISQLCode sourceCode, ISQLCode firstArg) {
+
+		return createTwoOperandOperation("arithmetic_expression_" + name,
+				sourceCode, firstArg);
+	}
+
+	/**
+	 * Generates a code fragement for all operations.
+	 * 
+	 * @param operationName
+	 *          the name of the operation
+	 * @param type
+	 *          the type of operation
+	 * @param sourceExp
+	 *          the source of operation
+	 * @param sourceCode
+	 *          the generated code of the source
+	 * @param args
+	 *          the generated code of the arguments
+	 * @param arguments
+	 *          the arguments of the operation
+	 * @return the generated code
+	 */
+	protected ISQLCode handleAllOperations(String operationName, Type type,
+			OclExpression sourceExp, ISQLCode sourceCode, List<ISQLCode> args,
+			List<OclExpression> arguments) {
+
+		ISQLCode resultExp = null;
+		ISQLCode firstArg = null;
+		if (args.size() > 0) {
+			firstArg = args.get(0);
+		}
 		if (operationName.equals("=")) {
 			resultExp =
 					handleRelExpression("equals", sourceExp, sourceCode, firstArg);
@@ -712,25 +967,13 @@ public class Ocl2DeclCode extends ExpressionsSwitch<String> implements
 
 		// collection related operations - BASIC VALUE
 		else if (operationName.equals("count")) {
-			resultExp =
-					handleCollCount(sourceCode, navigationMap.get(sourceExp).get(0),
-							firstArg);
+			resultExp = handleCollCount(sourceCode, firstArg);
 		}
 		else if ((operationName.equals("size") && !(sourceExp.getType() instanceof PrimitiveType))) {
-			resultExp =
-					handleCollSize(sourceCode, navigationMap.get(sourceExp).get(0));
+			resultExp = handleCollObjectChange("size", sourceCode);
 		}
 		else if (operationName.equals("sum")) {
-			List<Guide> guides;
-			if (sourceExp instanceof OperationCallExp
-					&& ((OperationCallExp) sourceExp).getReferredOperation().getName()
-							.equals("asSet")) {
-				guides = navigationMap.get(((OperationCallExp) sourceExp).getSource());
-			}
-			else {
-				guides = navigationMap.get(sourceExp);
-			}
-			resultExp = handleCollSum(sourceCode, guides.get(0));
+			resultExp = handleCollObjectChange("sum", sourceCode);
 		}
 
 		// collection related operations - COMPLEX PREDICATE
@@ -752,11 +995,6 @@ public class Ocl2DeclCode extends ExpressionsSwitch<String> implements
 		else if (operationName.equals("notEmpty")) {
 			resultExp = handleCollNotEmpty(sourceCode);
 		}
-		else if (operationName.equals("exists")) {
-			resultExp =
-					handleCollExists(sourceCode, navigationMap.get(sourceExp).get(0),
-							firstArg);
-		}
 		else if (operationName.equals("intersection")) {
 			resultExp =
 					handleCollIntersection(sourceCode, firstArg,
@@ -775,7 +1013,8 @@ public class Ocl2DeclCode extends ExpressionsSwitch<String> implements
 		else if (operationName.equals("union")) {
 			resultExp =
 					handleCollUnion(sourceCode, firstArg,
-							(CollectionType) sourceExp.getType());
+							(CollectionType) sourceExp.getType(), navigationMap
+									.get(sourceExp).get(0));
 		}
 		else if (operationName.equals("symmetricDifference")) {
 			resultExp = handleCollSymmetricDifference(sourceCode, firstArg);
@@ -783,17 +1022,7 @@ public class Ocl2DeclCode extends ExpressionsSwitch<String> implements
 
 		// collection related operations - MODEL TYPE QUERY
 		else if (operationName.equals("allInstances")) {
-			List<Guide> guides =
-					assignClassGuide(anOperationCallExp, anOperationCallExp.getType()); // create
-			// Guide
-			// object
-			// to the return
-			// value of
-			// allInstances for
-			// later use in the
-			// parent of this
-			// expression
-			resultExp = (handleAllInstances(guides.get(0)));
+			resultExp = handleAllInstances(navigationMap.get(sourceExp).get(0));
 		}
 
 		// BASIC TYPE - String operations
@@ -815,58 +1044,61 @@ public class Ocl2DeclCode extends ExpressionsSwitch<String> implements
 
 		// BASIC TYPE - Real and Integer operations
 		else if (operationName.equals("abs")) {
-			resultExp = handleIntAbs(sourceCode);
+			resultExp = handleIntExpression("abs", sourceCode, null);
 		}
 		else if (operationName.equals("floor")) {
-			resultExp = handleIntFloor(sourceCode);
+			resultExp = handleIntExpression("floor", sourceCode, null);
 		}
 		else if (operationName.equals("max")) {
-			resultExp = handleIntMax(sourceCode, firstArg);
+			if (sourceExp.getType() instanceof CollectionType && firstArg == null) {
+				resultExp = handleCollObjectChange("max", sourceCode);
+			}
+			else {
+				resultExp = handleIntExpression("max", sourceCode, firstArg);
+			}
 		}
 		else if (operationName.equals("min")) {
-			resultExp = handleIntMin(sourceCode, firstArg);
+			if (sourceExp.getType() instanceof CollectionType && firstArg == null) {
+				resultExp = handleCollObjectChange("min", sourceCode);
+			}
+			else {
+				resultExp = handleIntExpression("min", sourceCode, firstArg);
+			}
 		}
 		else if (operationName.equals("round")) {
-			resultExp = handleIntRound(sourceCode);
+			resultExp = handleIntExpression("round", sourceCode, null);
 		}
 		else if (operationName.equals("div")) {
-			resultExp = handleIntDiv(sourceCode, firstArg);
+			resultExp = handleIntExpression("div", sourceCode, firstArg);
 		}
 		else if (operationName.equals("mod")) {
-			resultExp = handleIntMod(sourceCode, firstArg);
+			resultExp = handleIntExpression("mod", sourceCode, firstArg);
 		}
 
 		else if (operationName.equals("asSet")) {
 			resultExp = sourceCode;
-			navigationMap.put(anOperationCallExp,
-					navigationMap.get(anOperationCallExp.getSource()));
-
 		}
 		else if (operationName.equals("asSequence")) {
 			resultExp = sourceCode;
-			navigationMap.put(anOperationCallExp,
-					navigationMap.get(anOperationCallExp.getSource()));
 		}
 		else if (operationName.equals("oclIsTypeOf")) {
-			Guide guide1 =
-					this.getSettings().getMappedModel().getClass(firstArg)
-							.getClassGuide();
-			resultExp = handleOclIsTypeOf(guide1);
+			Guide guide = navigationMap.get(arguments.get(0)).get(0);
+			resultExp = handleOclIsTypeOf(guide, sourceCode);
 		}
 		else if (operationName.equals("oclIsKindOf")) {
-			List<Type> parents = query_Supertypes(anOperationCallExp.getType());
+			List<Type> parents = query_Supertypes(type);
 
 			if (parents.size() != 1) {
 				throw new IllegalStateException(
-						"Illegal number of supertypes for type: "
-								+ (anOperationCallExp.getType()).getName() + " !");
+						"Illegal number of supertypes for type: " + (type).getName() + " !");
 			}
 
 			resultExp =
 					handleOclIsKindOf(
-							this.getSettings().getMappedModel().getClass(firstArg)
-									.getClassGuide(), this.getSettings().getMappedModel()
-									.getClass(parents.get(0).getName()).getClassGuide());
+							getSettings().getMappedModel().getClass(firstArg.getResult())
+									.getClassGuide(),
+							getSettings().getMappedModel().getClass(parents.get(0).getName())
+									.getClassGuide());
 		}
 
 		else {
@@ -875,183 +1107,18 @@ public class Ocl2DeclCode extends ExpressionsSwitch<String> implements
 			// operationName + "is not supported.");
 		}
 
-		if (LOGGER.isDebugEnabled()) {
-			LOGGER.debug("caseOperationCallExp(OperationCallExp)"
-					+ " - end - return value=" + resultExp);
-		}
-		// no else.
-
 		return resultExp;
-	}
-
-	public String casePropertyCallExp(PropertyCallExp anPropertyCallExp) {
-
-		if (LOGGER.isDebugEnabled()) {
-			LOGGER.debug("casePropertyCallExp(PropertyCallExp) - start");
-		}
-
-		List<Guide> guides = assignGuides(anPropertyCallExp);
-		String result;
-		if (anPropertyCallExp.getReferredProperty() instanceof AssociationProperty) {
-			result = handlePropAssociation(guides);
-			guides.get(0).reset();
-			variableList.add(guides.get(0).getSelect());
-		}
-		else {
-			result =
-					handlePropProperty(anPropertyCallExp.getReferredProperty(), guides);
-			guides.get(0).reset();
-			variableList.add(guides.get(0).getWhere());
-			
-		}
-
-		if (LOGGER.isDebugEnabled()) {
-			LOGGER.debug("casePropertyCallExp(PropertyCallExp)"
-					+ " - end - return value=" + result);
-		}
-
-		return result;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch
-	 * #caseRealLiteralExp
-	 * (tudresden.ocl20.pivot.essentialocl.expressions.RealLiteralExp)
-	 */
-	public String caseRealLiteralExp(RealLiteralExp aRealLiteralExp) {
-
-		if (LOGGER.isDebugEnabled()) {
-			LOGGER.debug("caseRealLiteralExp(RealLiteralExp) - start");
-		}
-		// no else.
-
-		ITemplate template;
-
-		template = mySettings.getTemplateGroup().getTemplate("literal_real");
-
-		// parameterize the template engine
-		template.setAttribute("value",
-				new Double(aRealLiteralExp.getRealSymbol()).toString());
-
-		if (LOGGER.isDebugEnabled()) {
-			LOGGER.debug("caseRealLiteralExp(RealLiteralExp)"
-					+ " - end - return value=" + template.toString());
-		}
-		// no else.
-
-		return template.toString();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch
-	 * #caseStringLiteralExp
-	 * (tudresden.ocl20.pivot.essentialocl.expressions.StringLiteralExp)
-	 */
-	public String caseStringLiteralExp(StringLiteralExp aStringLiteralExp) {
-
-		if (LOGGER.isDebugEnabled()) {
-			LOGGER.debug("caseStringLiteralExp(StringLiteralExp) - start");
-		}
-		// no else.
-
-		ITemplate template =
-				mySettings.getTemplateGroup().getTemplate("literal_string");
-
-		// parameterize the template engine
-		template.setAttribute("value", aStringLiteralExp.getStringSymbol());
-
-		if (LOGGER.isDebugEnabled()) {
-			LOGGER.debug("caseStringLiteralExp(StringLiteralExp)"
-					+ " - end - return value=" + template.toString());
-		}
-		// no else.
-
-		return template.toString();
-	}
-
-	public String caseTypeLiteralExp(TypeLiteralExp anTypeLiteralExp) {
-
-		return anTypeLiteralExp.getReferredType().getName();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch
-	 * #caseVariableExp
-	 * (tudresden.ocl20.pivot.essentialocl.expressions.VariableExp)
-	 */
-	public String caseVariableExp(VariableExp aVariableExp) {
-
-		if (LOGGER.isDebugEnabled()) {
-			LOGGER.debug("caseVariableExp(VariableExp) - start");
-		}
-		// no else.
-
-		ITemplate template =
-				mySettings.getTemplateGroup().getTemplate("literal_variable");
-
-		// parameterize the template engine
-		template.setAttribute("value", variableList.getLast());
-
-		if (LOGGER.isDebugEnabled()) {
-			LOGGER.debug("caseVariableExp(VariableExp)" + " - end - return value="
-					+ template.toString());
-		}
-		// no else.
-
-		return template.toString();
-	}
-
-	/**
-	 * Generates a code fragment for an arithmetic operation.
-	 * 
-	 * @param name
-	 *          the name of the arithmentic operation (can be div, minus, mult and
-	 *          plus)
-	 * @param sourceCode
-	 *          the code of the source expression (argument 1)
-	 * @param firstArg
-	 *          the code of the argument expression (argument 2)
-	 * @return declarative code fragment for the arithmetic operation
-	 */
-	protected String handleArithmeticOperation(String name, String sourceCode,
-			String firstArg) {
-
-		ITemplate template =
-				this.mySettings.getTemplateGroup().getTemplate(
-						"arithmetic_expression_" + name);
-		ITemplate operand1 =
-				this.mySettings.getTemplateGroup().getTemplate("feature_call_operand");
-		operand1.setAttribute("operand", sourceCode);
-		ITemplate operand2 =
-				this.mySettings.getTemplateGroup().getTemplate("feature_call_operand");
-		operand2.setAttribute("operand", firstArg);
-		template.setAttribute("operand1", operand1.toString());
-		template.setAttribute("operand2", operand2.toString());
-
-		return template.toString();
 	}
 
 	/**
 	 * Generates a code fragment for an allInstances operation.
 	 * 
-	 * @param guide
-	 *          the guide to the classifier representation
 	 * @return declarative code fragment for the allInstances operation
 	 */
-	protected String handleAllInstances(Guide guide) {
+	protected ISQLCode handleAllInstances(Guide guide) {
 
-		guide.reset();
-
-		ITemplate template =
-				this.mySettings.getTemplateGroup().getTemplate(
-						"feature_call_allinstances");
-
-		template.setAttribute("object", guide.getSelect());
-		template.setAttribute("source", guide.getFrom());
-		return template.toString();
+		useVariable = true;
+		return null;
 	}
 
 	/**
@@ -1066,21 +1133,35 @@ public class Ocl2DeclCode extends ExpressionsSwitch<String> implements
 	 *          object
 	 * @return declarative code fragment for the count operation
 	 */
-	protected String handleCollCount(String sourceCode, Guide guide,
-			String firstArg) {
+	protected ISQLCode handleCollCount(ISQLCode sourceCode, ISQLCode firstArg) {
 
-		assert (guide != null) : "count(): guide may not be null";
-		guide.reset();
+		// ISQLCode select = createObjectValue(guide);
+		if (sourceCode.getElement("object") != null) {
+			String tempName = sourceCode.getElement("object").getTemplateName();
+			if ("feature_call_count".equals(tempName)
+					|| "feature_call_sum".equals(tempName)
+					|| "feature_call_size".equals(tempName)) {
+				sourceCode.changeElement("groupby", null);
+				ISQLCode code =
+						new SQLCode(mySettings.getTemplateGroup().getTemplate(
+								tempName + "_select"));
+				code.addElement("object",
+						sourceCode.getElement("object").getElement("object"));
+				sourceCode.changeElement("object", code);
+			}
+		}
+		ISQLCode sqlCode =
+				new SQLCode(mySettings.getTemplateGroup().getTemplate(
+						"feature_call_count"));
+		sqlCode.addElement("object", sourceCode.getElement("object"));
 
-		ITemplate template =
-				this.mySettings.getTemplateGroup().getTemplate("feature_call_count");
+		ISQLCode where1 =
+				createTwoOperandOperation("relational_expression_equals_any",
+						sourceCode.getElement("object"), firstArg);
 
-		template.setAttribute("source", guide.getFrom());
-		template.setAttribute("element", guide.getSelect());
-		template.setAttribute("collection", sourceCode);
-		template.setAttribute("object", firstArg);
-
-		return template.toString();
+		changeWhereStatement(sourceCode, where1);
+		sourceCode.changeElement("object", sqlCode);
+		return sourceCode;
 	}
 
 	/**
@@ -1093,15 +1174,16 @@ public class Ocl2DeclCode extends ExpressionsSwitch<String> implements
 	 *          object
 	 * @return declarative code fragment for the excludes operation
 	 */
-	protected String handleCollExcludes(String sourceCode, String firstArg) {
+	protected ISQLCode handleCollExcludes(ISQLCode sourceCode, ISQLCode firstArg) {
 
-		ITemplate template =
-				this.mySettings.getTemplateGroup().getTemplate("feature_call_excludes");
+		ISQLCode template =
+				new SQLCode(mySettings.getTemplateGroup().getTemplate(
+						"feature_call_excludes"));
 
-		template.setAttribute("collection", sourceCode);
-		template.setAttribute("object", firstArg);
+		template.addElement("operand1", sourceCode);
+		template.changeElement("operand2", firstArg);
 
-		return template.toString();
+		return template;
 	}
 
 	/**
@@ -1114,16 +1196,11 @@ public class Ocl2DeclCode extends ExpressionsSwitch<String> implements
 	 *          collection
 	 * @return declarative code fragment for the excludesAll operation
 	 */
-	protected String handleCollExcludesAll(String sourceCode, String firstArg) {
+	protected ISQLCode handleCollExcludesAll(ISQLCode sourceCode,
+			ISQLCode firstArg) {
 
-		ITemplate template =
-				this.mySettings.getTemplateGroup().getTemplate(
-						"feature_call_excludesall");
-
-		template.setAttribute("collection", sourceCode);
-		template.setAttribute("collection2", firstArg);
-
-		return template.toString();
+		return createTwoOperandOperation("feature_call_excludesall", sourceCode,
+				firstArg);
 	}
 
 	/**
@@ -1139,8 +1216,8 @@ public class Ocl2DeclCode extends ExpressionsSwitch<String> implements
 	 *          SequenceType, SetType)
 	 * @return declarative code fragment for the excluding operation
 	 */
-	protected String handleCollExcluding(String sourceCode, String firstArg,
-			CollectionType collType) {
+	protected ISQLCode handleCollExcluding(ISQLCode sourceCode,
+			ISQLCode firstArg, CollectionType collType) {
 
 		assert (collType != null) : "including() collType may not be null";
 
@@ -1148,17 +1225,17 @@ public class Ocl2DeclCode extends ExpressionsSwitch<String> implements
 
 		if (collType instanceof BagType) {
 			template =
-					this.mySettings.getTemplateGroup().getTemplate(
+					mySettings.getTemplateGroup().getTemplate(
 							"feature_call_excluding_bag");
 		}
 		else if (collType instanceof SequenceType) {
 			template =
-					this.mySettings.getTemplateGroup().getTemplate(
+					mySettings.getTemplateGroup().getTemplate(
 							"feature_call_excluding_sequence");
 		}
 		else if (collType instanceof SetType) {
 			template =
-					this.mySettings.getTemplateGroup().getTemplate(
+					mySettings.getTemplateGroup().getTemplate(
 							"feature_call_excluding_set");
 		}
 		else {
@@ -1166,43 +1243,16 @@ public class Ocl2DeclCode extends ExpressionsSwitch<String> implements
 					"Unhandled collection type for excluding operation!");
 		}
 
-		template.setAttribute("object", firstArg);
-		template.setAttribute(
-				"element",
-				this.mySettings.getMappedModel()
-						.getClass(collType.getElementType().getName()).getClassGuide()
-						.getSelect());
-		template.setAttribute("collection", sourceCode);
-
-		return template.toString();
-	}
-
-	/**
-	 * Generates a code fragment for an exists operation.
-	 * 
-	 * @param sourceCode
-	 *          the declarative code fragment representing the source collection
-	 * @param guide
-	 *          the guide to the source expression
-	 * @param firstArg
-	 *          argument passed to the feature call
-	 * @return declarative code fragment for the exists operation
-	 */
-	protected String handleCollExists(String sourceCode, Guide guide,
-			String firstArg) {
-
-		assert (guide != null) : "exists(): guide may not be null";
+		ISQLCode returnValue = new SQLCode(template);
+		Guide guide =
+				mySettings.getMappedModel()
+						.getClass(collType.getElementType().getName()).getClassGuide();
 		guide.reset();
+		returnValue.addElement("operand2", firstArg);
+		returnValue.addElement("element", new SQLString(guide.getSelect()));
+		returnValue.addElement("operand1", sourceCode);
 
-		ITemplate template =
-				this.mySettings.getTemplateGroup().getTemplate("feature_call_exists");
-
-		template.setAttribute("source", guide.getFrom());
-		template.setAttribute("object", guide.getSelect());
-		template.setAttribute("collection", sourceCode);
-		template.setAttribute("expression", firstArg);
-
-		return template.toString();
+		return returnValue;
 	}
 
 	/**
@@ -1215,15 +1265,16 @@ public class Ocl2DeclCode extends ExpressionsSwitch<String> implements
 	 *          object
 	 * @return declarative code fragment for the includes operation
 	 */
-	protected String handleCollIncludes(String sourceCode, String firstArg) {
+	protected ISQLCode handleCollIncludes(ISQLCode sourceCode, ISQLCode firstArg) {
 
-		ITemplate template =
-				this.mySettings.getTemplateGroup().getTemplate("feature_call_includes");
+		ISQLCode template =
+				new SQLCode(mySettings.getTemplateGroup().getTemplate(
+						"feature_call_includes"));
 
-		template.setAttribute("collection", sourceCode);
-		template.setAttribute("object", firstArg);
+		template.addElement("operand1", sourceCode);
+		template.addElement("operand2", firstArg);
 
-		return template.toString();
+		return template;
 	}
 
 	/**
@@ -1236,21 +1287,11 @@ public class Ocl2DeclCode extends ExpressionsSwitch<String> implements
 	 *          collection
 	 * @return declarative code fragment for the includesAll operation
 	 */
-	protected String handleCollIncludesAll(String sourceCode, String firstArg) {
+	protected ISQLCode handleCollIncludesAll(ISQLCode sourceCode,
+			ISQLCode firstArg) {
 
-		ITemplate template =
-				this.mySettings.getTemplateGroup().getTemplate(
-						"feature_call_includesall");
-		ITemplate operand1 =
-				this.mySettings.getTemplateGroup().getTemplate("feature_call_operand");
-		operand1.setAttribute("operand", sourceCode);
-		ITemplate operand2 =
-				this.mySettings.getTemplateGroup().getTemplate("feature_call_operand");
-		operand2.setAttribute("operand", firstArg);
-		template.setAttribute("collection", operand1.toString());
-		template.setAttribute("collection2", operand2.toString());
-
-		return template.toString();
+		return createTwoOperandOperation("feature_call_includesall", sourceCode,
+				firstArg);
 	}
 
 	/**
@@ -1266,8 +1307,8 @@ public class Ocl2DeclCode extends ExpressionsSwitch<String> implements
 	 *          SequenceType, SetType)
 	 * @return declarative code fragment for the including operation
 	 */
-	protected String handleCollIncluding(String sourceCode, String firstArg,
-			CollectionType collType) {
+	protected ISQLCode handleCollIncluding(ISQLCode sourceCode,
+			ISQLCode firstArg, CollectionType collType) {
 
 		assert (collType != null) : "including() collType may not be null";
 
@@ -1275,17 +1316,17 @@ public class Ocl2DeclCode extends ExpressionsSwitch<String> implements
 
 		if (collType instanceof BagType) {
 			template =
-					this.mySettings.getTemplateGroup().getTemplate(
+					mySettings.getTemplateGroup().getTemplate(
 							"feature_call_including_bag");
 		}
 		else if (collType instanceof SequenceType) {
 			template =
-					this.mySettings.getTemplateGroup().getTemplate(
+					mySettings.getTemplateGroup().getTemplate(
 							"feature_call_including_sequence");
 		}
 		else if (collType instanceof SetType) {
 			template =
-					this.mySettings.getTemplateGroup().getTemplate(
+					mySettings.getTemplateGroup().getTemplate(
 							"feature_call_including_set");
 		}
 		else {
@@ -1293,10 +1334,12 @@ public class Ocl2DeclCode extends ExpressionsSwitch<String> implements
 					"Unhandled collection type for including operation!");
 		}
 
-		template.setAttribute("object", firstArg);
-		template.setAttribute("collection", sourceCode);
+		ISQLCode result = new SQLCode(template);
 
-		return template.toString();
+		result.addElement("operand2", firstArg);
+		result.addElement("operand1", sourceCode);
+
+		return result;
 	}
 
 	/**
@@ -1312,38 +1355,25 @@ public class Ocl2DeclCode extends ExpressionsSwitch<String> implements
 	 *          SetType)
 	 * @return declarative code fragment for the intersection operation
 	 */
-	protected String handleCollIntersection(String sourceCode, String firstArg,
-			CollectionType collType) {
+	protected ISQLCode handleCollIntersection(ISQLCode sourceCode,
+			ISQLCode firstArg, CollectionType collType) {
 
 		assert (collType != null) : "intersection() collType may not be null";
 
-		ITemplate template = null;
+		String template = null;
 
 		if (collType instanceof BagType) {
-			template =
-					this.mySettings.getTemplateGroup().getTemplate(
-							"feature_call_intersection_bag");
+			template = "feature_call_intersection_bag";
 		}
 		else if (collType instanceof SetType) {
-			template =
-					this.mySettings.getTemplateGroup().getTemplate(
-							"feature_call_intersection_set");
+			template = "feature_call_intersection_set";
 		}
 		else {
 			throw new IllegalStateException(
 					"Unhandled collection type for intesection operation!");
 		}
 
-		ITemplate operand1 =
-				this.mySettings.getTemplateGroup().getTemplate("feature_call_operand");
-		operand1.setAttribute("operand", sourceCode);
-		ITemplate operand2 =
-				this.mySettings.getTemplateGroup().getTemplate("feature_call_operand");
-		operand2.setAttribute("operand", firstArg);
-		template.setAttribute("collection", operand1.toString());
-		template.setAttribute("collection2", operand2.toString());
-
-		return template.toString();
+		return createTwoOperandOperation(template, sourceCode, firstArg);
 	}
 
 	/**
@@ -1353,14 +1383,9 @@ public class Ocl2DeclCode extends ExpressionsSwitch<String> implements
 	 *          the declarative code fragment representing the source collection
 	 * @return declarative code fragment for the isEmpty operation
 	 */
-	protected String handleCollIsEmpty(String sourceCode) {
+	protected ISQLCode handleCollIsEmpty(ISQLCode sourceCode) {
 
-		ITemplate template =
-				this.mySettings.getTemplateGroup().getTemplate("feature_call_isempty");
-
-		template.setAttribute("collection", sourceCode);
-
-		return template.toString();
+		return createOperandOperation("feature_call_isempty", sourceCode);
 	}
 
 	/**
@@ -1370,62 +1395,58 @@ public class Ocl2DeclCode extends ExpressionsSwitch<String> implements
 	 *          the declarative code fragment representing the source collection
 	 * @return declarative code fragment for the notEmpty operation
 	 */
-	protected String handleCollNotEmpty(String sourceCode) {
+	protected ISQLCode handleCollNotEmpty(ISQLCode sourceCode) {
 
-		ITemplate template =
-				this.mySettings.getTemplateGroup().getTemplate("feature_call_notempty");
-
-		template.setAttribute("collection", sourceCode);
-
-		return template.toString();
+		return createOperandOperation("feature_call_notempty", sourceCode);
 	}
 
 	/**
-	 * Generates a code fragment for a size operation.
+	 * Generates a code fragment for a collection operation.
 	 * 
 	 * @param sourceCode
 	 *          the declarative code fragment representing the source collection
-	 * @param guide
-	 *          the guide to the source expression
-	 * @return declarative code fragment for the size operation
+	 * @return declarative code fragment for the collection operation
 	 */
-	protected String handleCollSize(String sourceCode, Guide guide) {
+	protected ISQLCode handleCollObjectChange(String name, ISQLCode sourceCode) {
 
-		assert (guide != null) : "size(): guide may not be null";
-		guide.reset();
+		assert (sourceCode != null) : "handleCollObjectChange(): sourceCode may not be null";
 
-		ITemplate template =
-				this.mySettings.getTemplateGroup().getTemplate("feature_call_size");
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER
+					.debug("handleCollObjectChange(String name, ISQLCode sourceCode) - start - Type:"
+							+ name + ", Code:" + sourceCode);
+		}
 
-		template.setAttribute("source", guide.getFrom());
-		template.setAttribute("element", guide.getSelect());
-		template.setAttribute("collection", sourceCode);
+		if (sourceCode.getElement("object") != null) {
+			String tempName = sourceCode.getElement("object").getTemplateName();
+			if ((name.equals("sum") || name.equals("size"))
+					&& ("feature_call_count".equals(tempName)
+							|| "feature_call_sum".equals(tempName) || "feature_call_size"
+							.equals(tempName))) {
+				sourceCode.changeElement("groupby", null);
+				ISQLCode code =
+						new SQLCode(mySettings.getTemplateGroup().getTemplate(
+								tempName + "_select"));
+				code.addElement("object",
+						sourceCode.getElement("object").getElement("object"));
+				sourceCode.changeElement("object", code);
+			}
+		}
+		if (sourceCode.getElement("object") != null) {
+			changeObjectVariable("feature_call_" + name, sourceCode);
+			return sourceCode;
+		}
+		else if (sourceCode.getElement("operand") != null) {
+			return createOperandOperation("feature_call_" + name, sourceCode);
+		}
+		else {
+			ISQLCode code =
+					new SQLCode(mySettings.getTemplateGroup().getTemplate(
+							"feature_call_" + name));
+			code.addElement("object", sourceCode);
+			return code;
+		}
 
-		return template.toString();
-	}
-
-	/**
-	 * Generates a code fragment for a sum operation.
-	 * 
-	 * @param sourceCode
-	 *          the declarative code fragment representing the source collection
-	 * @param guide
-	 *          the guide to the source expression
-	 * @return declarative code fragment for the sum operation
-	 */
-	protected String handleCollSum(String sourceCode, Guide guide) {
-
-		assert (guide != null) : "sum(): guide may not be null";
-		guide.reset();
-
-		ITemplate template =
-				this.mySettings.getTemplateGroup().getTemplate("feature_call_sum");
-
-		template.setAttribute("source", guide.getFrom());
-		template.setAttribute("element", guide.getSelect());
-		template.setAttribute("collection", sourceCode);
-
-		return template.toString();
 	}
 
 	/**
@@ -1439,23 +1460,11 @@ public class Ocl2DeclCode extends ExpressionsSwitch<String> implements
 	 *          difference
 	 * @return declarative code fragment for the symmetricDifference operation
 	 */
-	protected String handleCollSymmetricDifference(String sourceCode,
-			String firstArg) {
+	protected ISQLCode handleCollSymmetricDifference(ISQLCode sourceCode,
+			ISQLCode firstArg) {
 
-		ITemplate template =
-				this.mySettings.getTemplateGroup().getTemplate(
-						"feature_call_symmetricdifference");
-
-		ITemplate operand1 =
-				this.mySettings.getTemplateGroup().getTemplate("feature_call_operand");
-		operand1.setAttribute("operand", sourceCode);
-		ITemplate operand2 =
-				this.mySettings.getTemplateGroup().getTemplate("feature_call_operand");
-		operand2.setAttribute("operand", firstArg);
-		template.setAttribute("collection", operand1.toString());
-		template.setAttribute("collection2", operand2.toString());
-
-		return template.toString();
+		return createTwoOperandOperation("feature_call_symmetricdifference",
+				sourceCode, firstArg);
 	}
 
 	/**
@@ -1472,214 +1481,52 @@ public class Ocl2DeclCode extends ExpressionsSwitch<String> implements
 	 *          SequenceType, SetType)
 	 * @return declarative code fragment for the union operation
 	 */
-	protected String handleCollUnion(String sourceCode, String firstArg,
-			CollectionType collType) {
+	protected ISQLCode handleCollUnion(ISQLCode sourceCode, ISQLCode firstArg,
+			CollectionType collType, Guide guide) {
 
 		assert (collType != null) : "including() collType may not be null";
 
-		ITemplate template = null;
+		guide.reset();
+
+		String template = "feature_call_union_";
 
 		if (collType instanceof BagType) {
-			template =
-					this.mySettings.getTemplateGroup().getTemplate(
-							"feature_call_union_bag");
+			template += "bag";
 		}
 		else if (collType instanceof SequenceType) {
-			template =
-					this.mySettings.getTemplateGroup().getTemplate(
-							"feature_call_union_sequence");
+			template += "sequence";
 		}
 		else if (collType instanceof SetType) {
-			template =
-					this.mySettings.getTemplateGroup().getTemplate(
-							"feature_call_union_set");
+			template += "set";
 		}
 		else {
 			throw new IllegalStateException(
 					"Unhandled collection type for union operation!");
 		}
 
-		template.setAttribute(
-				"element",
-				mySettings.getMappedModel()
-						.getClass(collType.getElementType().getName()).getClassGuide()
-						.getSelect());
-		ITemplate operand1 =
-				this.mySettings.getTemplateGroup().getTemplate("feature_call_operand");
-		operand1.setAttribute("operand", sourceCode);
-		ITemplate operand2 =
-				this.mySettings.getTemplateGroup().getTemplate("feature_call_operand");
-		operand2.setAttribute("operand", firstArg);
-		template.setAttribute("collection", operand1.toString());
-		template.setAttribute("collection2", operand2.toString());
+		ISQLCode result = createTwoOperandOperation(template, sourceCode, firstArg);
+		ISQLCode object = createObjectValue(guide);
+		result.addElement("object", object);
 
-		return template.toString();
+		return result;
 	}
 
 	/**
-	 * Generates a declarative code fragment for a abs operation on Integer/Real.
+	 * Generate for int operations
 	 * 
+	 * @param name
+	 *          the last part of template name
 	 * @param sourceCode
-	 *          declarative code fragment for the operand to the abs operation
-	 * @return declarative code fragment for the abs operation
-	 */
-	protected String handleIntAbs(String sourceCode) {
-
-		ITemplate template =
-				this.mySettings.getTemplateGroup().getTemplate("feature_call_int_abs");
-
-		template.setAttribute("operand", sourceCode);
-
-		return template.toString();
-	}
-
-	/**
-	 * Generates a declarative code fragment for a div operation on Integer/Real.
-	 * 
-	 * @param sourceCode
-	 *          declarative code fragment for the first operand of the div
-	 *          operation
+	 *          the first code operand
 	 * @param firstArg
-	 *          declarative code fragment for the second operand of the div
-	 *          operation
-	 * @return declarative code fragment for the div operation
+	 *          the second code operand
+	 * @return generated code for the int operations.
 	 */
-	protected String handleIntDiv(String sourceCode, String firstArg) {
+	protected ISQLCode handleIntExpression(String name, ISQLCode sourceCode,
+			ISQLCode firstArg) {
 
-		ITemplate template =
-				this.mySettings.getTemplateGroup().getTemplate("feature_call_int_div");
-
-		ITemplate operand1 =
-				this.mySettings.getTemplateGroup().getTemplate("feature_call_operand");
-		operand1.setAttribute("operand", sourceCode);
-		ITemplate operand2 =
-				this.mySettings.getTemplateGroup().getTemplate("feature_call_operand");
-		operand2.setAttribute("operand", firstArg);
-		template.setAttribute("operand1", operand1.toString());
-		template.setAttribute("operand2", operand2.toString());
-		return template.toString();
-	}
-
-	/**
-	 * Generates a declarative code fragment for a floor operation on
-	 * Integer/Real.
-	 * 
-	 * @param sourceCode
-	 *          declarative code fragment for the operand of the floor operation
-	 * @return declarative code fragment for the floor operation
-	 */
-	protected String handleIntFloor(String sourceCode) {
-
-		ITemplate template =
-				this.mySettings.getTemplateGroup()
-						.getTemplate("feature_call_int_floor");
-
-		template.setAttribute("operand", sourceCode);
-
-		return template.toString();
-	}
-
-	/**
-	 * Generates a declarative code fragment for a max operation on Integer/Real.
-	 * 
-	 * @param sourceCode
-	 *          declarative code fragment for the first operand of the max
-	 *          operation
-	 * @param firstArg
-	 *          declarative code fragment for the second operand of the max
-	 *          operation
-	 * @return declarative code fragment for the max operation
-	 */
-	protected String handleIntMax(String sourceCode, String firstArg) {
-
-		ITemplate template =
-				this.mySettings.getTemplateGroup().getTemplate("feature_call_int_max");
-
-		ITemplate operand1 =
-				this.mySettings.getTemplateGroup().getTemplate("feature_call_operand");
-		operand1.setAttribute("operand", sourceCode);
-		ITemplate operand2 =
-				this.mySettings.getTemplateGroup().getTemplate("feature_call_operand");
-		operand2.setAttribute("operand", firstArg);
-		template.setAttribute("operand1", operand1.toString());
-		template.setAttribute("operand2", operand2.toString());
-
-		return template.toString();
-	}
-
-	/**
-	 * Generates a declarative code fragment for a min operation on Integer/Real.
-	 * 
-	 * @param sourceCode
-	 *          declarative code fragment for the first operand of the min
-	 *          operation
-	 * @param firstArg
-	 *          declarative code fragment for the second operand of the min
-	 *          operation
-	 * @return declarative code fragment for the min operation
-	 */
-	protected String handleIntMin(String sourceCode, String firstArg) {
-
-		ITemplate template =
-				this.mySettings.getTemplateGroup().getTemplate("feature_call_int_min");
-
-		ITemplate operand1 =
-				this.mySettings.getTemplateGroup().getTemplate("feature_call_operand");
-		operand1.setAttribute("operand", sourceCode);
-		ITemplate operand2 =
-				this.mySettings.getTemplateGroup().getTemplate("feature_call_operand");
-		operand2.setAttribute("operand", firstArg);
-		template.setAttribute("operand1", operand1.toString());
-		template.setAttribute("operand2", operand2.toString());
-
-		return template.toString();
-	}
-
-	/**
-	 * Generates a declarative code fragment for a mod operation on Integer/Real.
-	 * 
-	 * @param sourceCode
-	 *          declarative code fragment for the first operand of the mod
-	 *          operation
-	 * @param firstArg
-	 *          declarative code fragment for the second operand of the div
-	 *          operation
-	 * @return declarative code fragment for the mod operation
-	 */
-	protected String handleIntMod(String sourceCode, String firstArg) {
-
-		ITemplate template =
-				this.mySettings.getTemplateGroup().getTemplate("feature_call_int_mod");
-
-		ITemplate operand1 =
-				this.mySettings.getTemplateGroup().getTemplate("feature_call_operand");
-		operand1.setAttribute("operand", sourceCode);
-		ITemplate operand2 =
-				this.mySettings.getTemplateGroup().getTemplate("feature_call_operand");
-		operand2.setAttribute("operand", firstArg);
-		template.setAttribute("operand1", operand1.toString());
-		template.setAttribute("operand2", operand2.toString());
-
-		return template.toString();
-	}
-
-	/**
-	 * Generates a declarative code fragment for a round operation on
-	 * Integer/Real.
-	 * 
-	 * @param sourceCode
-	 *          declarative code fragment for the operand of the round operation
-	 * @return declarative code fragment for the round operation
-	 */
-	protected String handleIntRound(String sourceCode) {
-
-		ITemplate template =
-				this.mySettings.getTemplateGroup()
-						.getTemplate("feature_call_int_round");
-
-		template.setAttribute("operand", sourceCode);
-
-		return template.toString();
+		return createTwoOperandOperation("feature_call_int_" + name, sourceCode,
+				firstArg);
 	}
 
 	/**
@@ -1689,123 +1536,25 @@ public class Ocl2DeclCode extends ExpressionsSwitch<String> implements
 	 *          the code of the source expression
 	 * @return declarative code fragment for the collect iterator
 	 */
-	protected String handleIterCollect(String codeSrcExp) {
+	protected ISQLCode handleIterCollect(ISQLCode codeSrcExp) {
 
-		ITemplate template =
-				this.mySettings.getTemplateGroup().getTemplate("feature_call_collect");
-
-		template.setAttribute("expression", codeSrcExp);
-
-		return template.toString();
-	}
-	
-	/**
-	 * Generates a declarative code fragment for a collect iterator.
-	 * 
-	 * @param codeSrcExp
-	 *          the code of the source expression
-	 * @return declarative code fragment for the collect iterator
-	 */
-	protected String handleIterCollectOperation(Guide guide, String where,String codeSrcExp) {
-
-		guide.reset();
-		
-		ITemplate template =
-				this.mySettings.getTemplateGroup().getTemplate("feature_call_collect_operation");
-
-		template.setAttribute("expression", codeSrcExp);
-		template.setAttribute("element", guide.getSelect());
-		template.setAttribute("alias", guide.getAlias());
-		template.setAttribute("from", guide.getFrom());
-		template.setAttribute("where1", guide.getWhere());
-		template.setAttribute("where2", where);
-
-		return template.toString();
-	}
-	
-
-	/**
-	 * Generates a declarative code fragment for a forAll iterator.
-	 * 
-	 * @param collection
-	 *          the declarative code fragment representing the source collection
-	 * @param guide
-	 *          the Guide to the source expression
-	 * @param expression
-	 *          argument passed to the iterator
-	 * @return declarative code fragment for the forAll iterator
-	 */
-	protected String handleIterForAll(String collection, Guide guide,
-			String expression) {
-
-		guide.reset();
-
-		ITemplate template =
-				this.mySettings.getTemplateGroup().getTemplate("feature_call_forall");
-
-		template.setAttribute("source", guide.getFrom());
-		template.setAttribute("alias", getAlias(true));
-		template.setAttribute("object", guide.getSelect());
-		template.setAttribute("collection", collection);
-		template.setAttribute("expression", expression);
-
-		return template.toString();
-	}
-
-	/**
-	 * Generates a declarative code fragment for a reject iterator.
-	 * 
-	 * @param collection
-	 *          the declarative code fragment representing the source collection
-	 * @param guide
-	 *          the Guide to the source expression
-	 * @param expression
-	 *          argument passed to the iterator
-	 * @return declarative code fragment for the reject iterator
-	 */
-	protected String handleIterReject(String collection, Guide guide,
-			String expression) {
-
-		guide.reset();
-
-		ITemplate template =
-				this.mySettings.getTemplateGroup().getTemplate("feature_call_reject");
-
-		template.setAttribute("source", guide.getFrom());
-		template.setAttribute("alias", getAlias(true));
-		template.setAttribute("object", guide.getSelect());
-		template.setAttribute("collection", collection);
-		template.setAttribute("expression", expression);
-
-		return template.toString();
+		return codeSrcExp;
 	}
 
 	/**
 	 * Generates a declarative code fragment for a select iterator
 	 * 
-	 * @param collection
-	 *          the declarative code fragment representing the source collection
+	 * @param name
+	 *          the name of the iter operation
 	 * @param guide
 	 *          the Guide to the source expression
-	 * @param expression
+	 * @param arg
 	 *          argument passed to the iterator
 	 * @return declarative code fragment for the select iterator
 	 */
-	protected String handleIterSelect(String collection, Guide guide,
-			String expression) {
+	protected ISQLCode handleIterOperation(String name, ISQLCode arg) {
 
-		guide.reset();
-
-		ITemplate template =
-				this.mySettings.getTemplateGroup().getTemplate("feature_call_select");
-
-		template.setAttribute("source", guide.getFrom());
-		template.setAttribute("alias", getAlias(true));
-		template.setAttribute("object", guide.getSelect());
-		template.setAttribute("collection", collection);
-		template.setAttribute("expression", expression);
-
-		return template.toString();
+		return createOperandOperation("feature_call_" + name, arg);
 	}
 
 	/**
@@ -1819,23 +1568,11 @@ public class Ocl2DeclCode extends ExpressionsSwitch<String> implements
 	 *          declarative code fragment of the second expression
 	 * @return declarative code fragment for the logical expression
 	 */
-	protected String handleLogicalExpression(String name, String sourceCode,
-			String firstArg) {
+	protected ISQLCode handleLogicalExpression(String name, ISQLCode sourceCode,
+			ISQLCode firstArg) {
 
-		ITemplate template =
-				this.mySettings.getTemplateGroup().getTemplate(
-						"logical_expression_" + name);
-
-		ITemplate operand1 =
-				this.mySettings.getTemplateGroup().getTemplate("feature_call_operand");
-		operand1.setAttribute("operand", sourceCode);
-		ITemplate operand2 =
-				this.mySettings.getTemplateGroup().getTemplate("feature_call_operand");
-		operand2.setAttribute("operand", firstArg);
-		template.setAttribute("expression1", operand1.toString());
-		template.setAttribute("expression2", operand2.toString());
-
-		return template.toString();
+		return createTwoOperandOperation("logical_expression_" + name, sourceCode,
+				firstArg);
 	}
 
 	/**
@@ -1845,19 +1582,20 @@ public class Ocl2DeclCode extends ExpressionsSwitch<String> implements
 	 *          the guide to the classifier type
 	 * @return declarative code fragment for the oclIsKindOf feature call
 	 */
-	protected String handleOclIsTypeOf(Guide guide) {
+	protected ISQLCode handleOclIsTypeOf(Guide guide, ISQLCode sourceCode) {
 
 		guide.reset();
 
-		ITemplate template =
-				this.mySettings.getTemplateGroup().getTemplate(
-						"feature_call_oclistypeof");
+		ISQLCode template =
+				new SQLCode(mySettings.getTemplateGroup().getTemplate(
+						"feature_call_oclistypeof"));
 
-		template.setAttribute("source", guide.getFrom());
-		template.setAttribute("object", guide.getSelect());
-		template.setAttribute("alias", getAlias(true));
+		template.addElement("from", new SQLString(guide.getFrom()));
+		template.addElement("object", new SQLString(guide.getSelect()));
+		template.addElement("object2", sourceCode);
+		template.addElement("alias", new SQLString(guide.getAlias()));
 
-		return template.toString();
+		return template;
 	}
 
 	/**
@@ -1869,23 +1607,23 @@ public class Ocl2DeclCode extends ExpressionsSwitch<String> implements
 	 *          the guide to the classifiers supertype
 	 * @return declarative code fragment for the oclIsTypeOf feature call
 	 */
-	protected String handleOclIsKindOf(Guide typeGuide, Guide supertypeGuide) {
+	protected ISQLCode handleOclIsKindOf(Guide typeGuide, Guide supertypeGuide) {
 
 		typeGuide.reset();
 		if (supertypeGuide != null)
 			supertypeGuide.reset();
 
-		ITemplate template =
-				this.mySettings.getTemplateGroup().getTemplate(
-						"feature_call_ocliskindof");
+		ISQLCode template =
+				new SQLCode(mySettings.getTemplateGroup().getTemplate(
+						"feature_call_ocliskindof"));
 
-		template.setAttribute("source", typeGuide.getFrom());
-		template.setAttribute("object", typeGuide.getSelect());
-		template.setAttribute("alias", getAlias(true));
-		template.setAttribute("source2",
-				(supertypeGuide != null) ? supertypeGuide.getFrom() : null);
+		template.addElement("from", new SQLString(typeGuide.getFrom()));
+		template.addElement("object", new SQLString(typeGuide.getSelect()));
+		template.addElement("alias", new SQLString(typeGuide.getAlias()));
+		template.addElement("from2", (supertypeGuide != null) ? new SQLString(
+				supertypeGuide.getFrom()) : null);
 
-		return template.toString();
+		return template;
 	}
 
 	/**
@@ -1903,8 +1641,8 @@ public class Ocl2DeclCode extends ExpressionsSwitch<String> implements
 	 *          declarative code fragment of the second operand
 	 * @return declarative code fragment for the equals operation
 	 */
-	protected String handleRelExpression(String name, OclExpression srcExp,
-			String operand1, String operand2) {
+	protected ISQLCode handleRelExpression(String name, OclExpression srcExp,
+			ISQLCode operand1, ISQLCode operand2) {
 
 		StringBuffer templateName = new StringBuffer("relational_expression_");
 		Type attrType = null;
@@ -1948,41 +1686,22 @@ public class Ocl2DeclCode extends ExpressionsSwitch<String> implements
 						"Unhandled primitive type for relational expression!");
 			}
 		}
-		else if (attrType instanceof CollectionType) {
-			if (attrType instanceof SetType) {
-				templateName.append("set");
-			}
-			else if (attrType instanceof SequenceType) {
-				templateName.append("sequence");
-			}
-			else if (attrType instanceof BagType) {
-				templateName.append("bag");
-			}
-			else if (attrType instanceof OrderedSetType) {
-				templateName.append("orderedset");
-			}
-			else {
-				throw new IllegalStateException(
-						"Unhandled collection type for relational expression!");
-			}
-		}
+		/*
+		 * No different between CollectionTypes and any else if (attrType instanceof
+		 * CollectionType) { if (attrType instanceof SetType) {
+		 * templateName.append("set"); } else if (attrType instanceof SequenceType)
+		 * { templateName.append("sequence"); } else if (attrType instanceof
+		 * BagType) { templateName.append("bag"); } else if (attrType instanceof
+		 * OrderedSetType) { templateName.append("orderedset"); } else { throw new
+		 * IllegalStateException(
+		 * "Unhandled collection type for relational expression!"); } }
+		 */
 		else {
 			templateName.append("any");
 		}
 
-		ITemplate template =
-				this.getSettings().getTemplateGroup()
-						.getTemplate(templateName.toString());
-		ITemplate tempOperand1 =
-				this.mySettings.getTemplateGroup().getTemplate("feature_call_operand");
-		tempOperand1.setAttribute("operand", operand1);
-		ITemplate tempOperand2 =
-				this.mySettings.getTemplateGroup().getTemplate("feature_call_operand");
-		tempOperand2.setAttribute("operand", operand2);
-		template.setAttribute("operand1", tempOperand1.toString());
-		template.setAttribute("operand2", tempOperand2.toString());
-
-		return template.toString();
+		return createTwoOperandOperation(templateName.toString(), operand1,
+				operand2);
 	}
 
 	/**
@@ -1996,21 +1715,10 @@ public class Ocl2DeclCode extends ExpressionsSwitch<String> implements
 	 *          string)
 	 * @return declarative code fragment for the concat operation
 	 */
-	protected String handleStringConcat(String sourceCode, String firstArg) {
+	protected ISQLCode handleStringConcat(ISQLCode sourceCode, ISQLCode firstArg) {
 
-		ITemplate template =
-				mySettings.getTemplateGroup().getTemplate("feature_call_string_concat");
-
-		ITemplate tempOperand1 =
-				this.mySettings.getTemplateGroup().getTemplate("feature_call_operand");
-		tempOperand1.setAttribute("operand", sourceCode);
-		ITemplate tempOperand2 =
-				this.mySettings.getTemplateGroup().getTemplate("feature_call_operand");
-		tempOperand2.setAttribute("operand", firstArg);
-		template.setAttribute("operand1", tempOperand1.toString());
-		template.setAttribute("operand2", tempOperand2.toString());
-
-		return template.toString();
+		return createTwoOperandOperation("feature_call_string_concat", sourceCode,
+				firstArg);
 	}
 
 	/**
@@ -2021,14 +1729,9 @@ public class Ocl2DeclCode extends ExpressionsSwitch<String> implements
 	 *          size from)
 	 * @return declarative code fragment for the size operation
 	 */
-	protected String handleStringSize(String sourceCode) {
+	protected ISQLCode handleStringSize(ISQLCode sourceCode) {
 
-		ITemplate template =
-				mySettings.getTemplateGroup().getTemplate("feature_call_string_size");
-
-		template.setAttribute("operand", sourceCode);
-
-		return template.toString();
+		return createOperandOperation("feature_call_string_size", sourceCode);
 	}
 
 	/**
@@ -2037,26 +1740,21 @@ public class Ocl2DeclCode extends ExpressionsSwitch<String> implements
 	 * @param sourceCode
 	 *          declarative code fragment of the operand (the string to build the
 	 *          substring from)
-	 * @param start
+	 * @param firstArg
 	 *          the start of the substring
-	 * @param iTransformedCode
+	 * @param isqlCode
 	 *          the end of the substring
 	 * @return declarative code fragment for the substring operation
 	 */
-	protected String handleStringSubstring(String sourceCode, String start,
-			String end) {
+	protected ISQLCode handleStringSubstring(ISQLCode sourceCode,
+			ISQLCode firstArg, ISQLCode isqlCode) {
 
-		ITemplate template =
-				mySettings.getTemplateGroup().getTemplate(
-						"feature_call_string_substring");
-		ITemplate tempOperand =
-				this.mySettings.getTemplateGroup().getTemplate("feature_call_operand");
-		tempOperand.setAttribute("operand", sourceCode);
-		template.setAttribute("operand", tempOperand.toString());
-		template.setAttribute("start", start);
-		template.setAttribute("end", end);
+		ISQLCode template =
+				createOperandOperation("feature_call_string_substring", sourceCode);
+		template.addElement("start", firstArg);
+		template.addElement("end", isqlCode);
 
-		return template.toString();
+		return template;
 	}
 
 	/**
@@ -2066,15 +1764,9 @@ public class Ocl2DeclCode extends ExpressionsSwitch<String> implements
 	 *          declarative code fragment of the operand
 	 * @return declarative code fragment for the toLower operation
 	 */
-	protected String handleStringToLower(String sourceCode) {
+	protected ISQLCode handleStringToLower(ISQLCode sourceCode) {
 
-		ITemplate template =
-				mySettings.getTemplateGroup()
-						.getTemplate("feature_call_string_tolower");
-
-		template.setAttribute("operand", sourceCode);
-
-		return template.toString();
+		return createOperandOperation("feature_call_string_tolower", sourceCode);
 	}
 
 	/**
@@ -2084,15 +1776,9 @@ public class Ocl2DeclCode extends ExpressionsSwitch<String> implements
 	 *          declarative code fragment of the operand
 	 * @return declarative code fragment for the toUpper operation
 	 */
-	protected String handleStringToUpper(String sourceCode) {
+	protected ISQLCode handleStringToUpper(ISQLCode sourceCode) {
 
-		ITemplate template =
-				mySettings.getTemplateGroup()
-						.getTemplate("feature_call_string_toupper");
-
-		template.setAttribute("operand", sourceCode);
-
-		return template.toString();
+		return createOperandOperation("feature_call_string_toupper", sourceCode);
 	}
 
 	/**
@@ -2102,15 +1788,9 @@ public class Ocl2DeclCode extends ExpressionsSwitch<String> implements
 	 *          declarative code fragment of the operand
 	 * @return declarative code fragment for the unary minus operation
 	 */
-	protected String handleUnaryMinus(String sourceCode) {
+	protected ISQLCode handleUnaryMinus(ISQLCode sourceCode) {
 
-		ITemplate template =
-				mySettings.getTemplateGroup().getTemplate("unary_expression_minus");
-
-		template.setAttribute("operand", sourceCode);
-
-		return template.toString();
-
+		return createOperandOperation("unary_expression_minus", sourceCode);
 	}
 
 	/**
@@ -2120,51 +1800,43 @@ public class Ocl2DeclCode extends ExpressionsSwitch<String> implements
 	 *          declarative code fragment of the operand
 	 * @return declarative code fragment for the unary not operation
 	 */
-	protected String handleUnaryNot(String sourceCode) {
+	protected ISQLCode handleUnaryNot(ISQLCode sourceCode) {
 
-		ITemplate template =
-				mySettings.getTemplateGroup().getTemplate("unary_expression_not");
-
-		template.setAttribute("operand", sourceCode);
-
-		return template.toString();
+		return createOperandOperation("unary_expression_not", sourceCode);
 	}
 
-	protected String handlePropAssociation(List<Guide> guides) {
-
-		if (guides.get(0).isNavigation()) {
-			return createNavigation(guides);
-		}
-
-		return null;
-	}
-
-	protected String handlePropProperty(Property property, List<Guide> guides) {
+	/**
+	 * Generate code fragment for property
+	 * 
+	 * @param property
+	 *          the property
+	 * @param guides
+	 *          the guides for the property
+	 * @return the generated code
+	 */
+	protected ISQLCode handlePropProperty(Property property, List<Guide> guides) {
 
 		Guide guide = guides.get(0);
 		guide.reset();
 		// attribute access without navigation
 		if (guides.size() == 1) {
-			ITemplate template =
-					mySettings.getTemplateGroup().getTemplate(
-							"feature_call_attribute_context");
-			template.setAttribute("context_alias", guide.getAlias());
-			template.setAttribute("attribute", guide.getSelect());
+			ISQLCode template = createObjectValue(guide);
 
 			// special case for Boolean attributes: e.g. expand 'attribute' to
 			// 'attribute = 1' in SQL
 			if (property.getType().getName().equals("Boolean")) {
-				String attr = template.toString();
+				ISQLCode attr = template;
 				template =
-						mySettings.getTemplateGroup().getTemplate(
-								"feature_call_attribute_boolean");
-				template.setAttribute("attribute", attr);
+						new SQLCode(mySettings.getTemplateGroup().getTemplate(
+								"feature_call_attribute_boolean"));
+				template.addElement("attribute", attr);
 			}
-			return template.toString();
+
+			return template;
 		}
 		// attribute access with navigation
 		else {
-			return createNavigation(guides);
+			return createSelectStatement(guides);
 		}
 	}
 
@@ -2174,14 +1846,19 @@ public class Ocl2DeclCode extends ExpressionsSwitch<String> implements
 	 */
 	public void reset() {
 
-		this.mySettings.getMappedModel().resetUniqueAlias();
-		aliasList.clear();
-		aliasList.add(this.mySettings.getMappedModel().getUniqueAlias());
-		contextList.clear();
+		mySettings.getMappedModel().resetUniqueAlias();
 		navigationMap.clear();
-		variableList.clear();
+		variableMap.clear();
+		useVariable = false;
 	}
 
+	/**
+	 * Returns all super types of the type
+	 * 
+	 * @param type
+	 *          the type
+	 * @return a list of all supertypes
+	 */
 	private List<Type> query_Supertypes(Type type) {
 
 		List<Type> parents = new ArrayList<Type>();
@@ -2195,26 +1872,174 @@ public class Ocl2DeclCode extends ExpressionsSwitch<String> implements
 	}
 
 	/**
-	 * Assigns a class guide to the given OclExpression which are used during the
-	 * code generation process.
+	 * Assigns a class guide to the given Type which are used during the code
+	 * generation process.
 	 * 
 	 * @param exp
-	 *          the OclExpression to assign the Guide for.
+	 *          the OclExpression to reaccess the generated guide
+	 * @param type
+	 *          the type to assign the Guide
+	 * @returm the class guide
 	 */
-	protected List<Guide> assignClassGuide(OclExpression exp, Type type) {
+	protected Guide assignClassGuide(OclExpression exp, Type type) {
 
-		List<Guide> guides = new ArrayList<Guide>();
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER
+					.debug("assignClassGuide(OclExpression exp, Type type) - start - Expression:"
+							+ exp + ", Type:" + type);
+		}
+
+		Guide guide;
 		if (type instanceof CollectionType) {
-			guides.add(mySettings.getMappedModel()
-					.getClass(((CollectionType) type).getElementType().getName())
-					.getClassGuide());
+			guide =
+					mySettings.getMappedModel()
+							.getClass(((CollectionType) type).getElementType().getName())
+							.getClassGuide();
 		}
 		else {
-			guides.add(mySettings.getMappedModel().getClass(type.getName())
-					.getClassGuide());
+			guide =
+					mySettings.getMappedModel().getClass(type.getName()).getClassGuide();
 		}
-		navigationMap.put(exp, guides);
-		return guides;
+		String saveAlias = null;
+		try {
+			saveAlias = guide.getAlias();
+		} catch (NullPointerException e) {
+		}
+		guide.setAlias(mySettings.getMappedModel().getUniqueAlias());
+		Guide guide1 = new Guide(guide);
+		guide.setAlias(saveAlias);
+		navigationMap.put(exp, Arrays.asList(guide1));
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER
+					.debug("assignClassGuide(OclExpression exp, Type type) - end - Guide:"
+							+ guide1);
+		}
+		return guide1;
+	}
+
+	/**
+	 * Change the where part of the select code
+	 * 
+	 * @param select
+	 *          the select code
+	 * @param where
+	 *          the extra where code
+	 */
+	protected void changeWhereStatement(ISQLCode select, ISQLCode where) {
+
+		select.changeElement("where",
+				combinedWhereStatement(where, select.getElement("where")));
+	}
+
+	/**
+	 * Generate a where statement
+	 * 
+	 * @param guide1
+	 *          the first argument
+	 * @param guide2
+	 *          the second argument
+	 * @return the where statement
+	 */
+	protected ISQLCode createWhereStatement(Guide guide1, Guide guide2) {
+
+		ISQLCode where =
+				new SQLCode(mySettings.getTemplateGroup().getTemplate(
+						"feature_call_navigation_where"));
+		guide2.reset();
+		where.addElement("alias1", new SQLString(guide2.getAlias()));
+		where.addElement("where", new SQLString(guide2.getWhere()));
+		where.addElement("alias2", new SQLString(guide1.getAlias()));
+		where.addElement("object", new SQLString(guide1.getSelect()));
+		return where;
+	}
+
+	/**
+	 * Generates a where clause with two operands.
+	 * 
+	 * @param where1
+	 *          the new operand
+	 * @param where2
+	 *          the operand which will be exists
+	 * @return the new where clause
+	 */
+	protected ISQLCode combinedWhereStatement(ISQLCode where1, ISQLCode where2) {
+
+		if (where2 != null) {
+			return handleLogicalExpression("and", where2, where1);
+		}
+		else {
+			return where1;
+		}
+	}
+
+	/**
+	 * Generate a join statement.
+	 * 
+	 * @param from
+	 *          the guide for the new view
+	 * @param where
+	 *          the guide to bind the two tables
+	 * @return the join statement
+	 */
+	protected ISQLCode createJoinStatement(Guide from, Guide where) {
+
+		from.reset();
+		where.reset();
+		ISQLCode template =
+				new SQLCode(mySettings.getTemplateGroup().getTemplate(
+						"feature_call_navigation_join"));
+		ISQLCode fromCode =
+				new SQLCode(mySettings.getTemplateGroup().getTemplate(
+						"feature_call_navigation_from"));
+		fromCode.addElement("from", new SQLString(from.getFrom()));
+		fromCode.addElement("object", new SQLString(from.getSelect()));
+		if (!from.getWhere().equals(from.getSelect())) {
+			fromCode.addElement("where", new SQLString(from.getWhere()));
+		}
+		template.addElement("alias", new SQLString(from.getAlias()));
+		template.addElement("from", fromCode);
+		template.addElement("where", createWhereStatement(from, where));
+		return template;
+	}
+
+	/**
+	 * Generate a join statement with sub joins for the guides
+	 * 
+	 * @param guides
+	 *          the guides
+	 * @return the join statement from guides.get(0) with the subjoins
+	 */
+	protected ISQLCode createJoinStatements(List<Guide> guides) {
+
+		ISQLCode joinTemplate = null;
+		for (int i = guides.size() - 1; i > 0; i--) {
+			Guide guide = guides.get(i);
+			guide.reset();
+			ISQLCode template = createJoinStatement(guide, guides.get(i - 1));
+			if (joinTemplate != null) {
+				template.addElement("join", joinTemplate);
+			}
+			joinTemplate = template;
+		}
+		return joinTemplate;
+	}
+
+	/**
+	 * Generate the object value.
+	 * 
+	 * @param guide
+	 *          the guide for object
+	 * @return the code fragment.
+	 */
+	protected ISQLCode createObjectValue(Guide guide) {
+
+		guide.reset();
+		ISQLCode select =
+				new SQLCode(mySettings.getTemplateGroup().getTemplate(
+						"feature_call_attribute_context"));
+		select.addElement("alias", new SQLString(guide.getAlias()));
+		select.addElement("attribute", new SQLString(guide.getSelect()));
+		return select;
 	}
 
 	/**
@@ -2225,53 +2050,65 @@ public class Ocl2DeclCode extends ExpressionsSwitch<String> implements
 	 *          the guides which are describing the navigation
 	 * @return declarative code fragment for a navigation in the target model
 	 */
-	protected String createNavigation(List<Guide> guides) {
+	protected ISQLCode createSelectStatement(List<Guide> guides) {
 
-		String navigationExpression = "";
-		String targetCodeArtifact = "";
-		String placeHolder = "##_dt_##";
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("createNavigation(List<Guide> guides) - start - Guides:"
+					+ guides);
+		}
 
-		Guide guide;
-		ITemplate template;
+		ISQLCode template;
 
-		for (int i = 0; i < guides.size(); i++) {
-			guide = guides.get(i);
+		LinkedList<Guide> steps = new LinkedList<Guide>();
+		LinkedList<String> aliase = new LinkedList<String>();
+		aliase.add(guides.get(0).getAlias());
+		if (guides.size() > 1
+				&& aliase.contains(guides.get(guides.size() - 1).getAlias())) {
+			guides.get(guides.size() - 1).setAlias(
+					mySettings.getMappedModel().getUniqueAlias());
+		}
+		aliase.add(guides.get(guides.size() - 1).getAlias());
+		for (Guide guide : guides) {
 			guide.reset();
-
+			if (aliase.contains(guide.getAlias()) && guides.indexOf(guide) != 0
+					&& guides.indexOf(guide) != guides.size() - 1) {
+				guide.setAlias(mySettings.getMappedModel().getUniqueAlias());
+			}
+			aliase.add(guide.getAlias());
 			for (int k = 0; k < guide.numberOfSteps(); k++, guide.next()) {
 
-				// last step must be treated in a special way
-				if ((i == (guides.size() - 1)) && (k == (guide.numberOfSteps() - 1))) {
-					template =
-							this.mySettings.getTemplateGroup().getTemplate(
-									"feature_call_navigation_context");
-					template.setAttribute("context_alias", guide.getAlias());
-					template.setAttribute("context_object", contextList.getLast());
-				}
-				else {
-					template =
-							this.mySettings.getTemplateGroup().getTemplate(
-									"feature_call_navigation");
-					template.setAttribute("context2", placeHolder);
-				}
-
-				template.setAttribute("object", guide.getSelect());
-				template.setAttribute("context1", guide.getFrom());
-				template.setAttribute("ref_object", guide.getWhere());
-
-				targetCodeArtifact = template.toString();
-
-				if (navigationExpression.length() == 0) {
-					navigationExpression = targetCodeArtifact;
-				}
-				else {
-					navigationExpression =
-							navigationExpression.replaceAll(placeHolder, targetCodeArtifact);
-				}
+				Guide newGuide = new Guide(guide.isNavigation(), guide.getAlias());
+				newGuide.add(guide.getSelect(), guide.getFrom(), guide.getWhere());
+				newGuide.reset();
+				steps.add(newGuide);
 			}
 		}
 
-		return navigationExpression;
+		Guide guide = steps.get(0);
+		guide.reset();
+		LinkedList<Guide> joinGuides = new LinkedList<Guide>();
+		joinGuides.addAll(steps);
+		joinGuides.removeLast();
+		template =
+				new SQLCode(mySettings.getTemplateGroup().getTemplate(
+						"feature_call_navigation_select"));
+		template.addElement("object", createObjectValue(guide));
+		template.addElement("alias", new SQLString(guide.getAlias()));
+		template.addElement("join", createJoinStatements(joinGuides));
+		template.addElement("from", new SQLString(guide.getFrom()));
+		if (!useVariable && steps.size() >= 2) {
+			template.addElement(
+					"where",
+					createWhereStatement(steps.get(steps.size() - 1),
+							steps.get(steps.size() - 2)));
+		}
+
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("createNavigation(List<Guide> guides) - end - Navigation:"
+					+ template);
+		}
+
+		return template;
 	}
 
 	/**
@@ -2283,83 +2120,296 @@ public class Ocl2DeclCode extends ExpressionsSwitch<String> implements
 	 */
 	protected List<Guide> assignGuides(OclExpression exp) {
 
-		Guide guide;
-		List<Guide> guides = new ArrayList<Guide>();
-		OclExpression next = exp;
-		OclExpression tmpNext;
-		String featureName; // used for attribute/association end names
-		String startType; // used for attribute/association end types
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("assignGuides(OclExpression exp) - start - Expression:"
+					+ exp);
+		}
 
 		if (navigationMap.containsKey(exp)) {
 			return navigationMap.get(exp);
 		}
 
-		while (next != null) {
-			if (next instanceof PropertyCallExp) {
-				PropertyCallExp ac = (PropertyCallExp) next;
-				tmpNext = ac.getSource();
-				featureName = ac.getReferredProperty().getName();
-				startType = tmpNext.getType().getName();
-				IMappedClass ic = this.mySettings.getMappedModel().getClass(startType);
-				boolean findAssociation = false;
-				if (ac.getReferredProperty() instanceof AssociationProperty) {
-					findAssociation = true;
-				}
-				else if (ac.getReferredProperty().getType() instanceof CollectionType) {
-					findAssociation =
-							mySettings.getMappedModel().isClass(
-									((CollectionType) ac.getReferredProperty().getType())
-											.getElementType().getName());
-				}
-				else {
-					findAssociation =
-							mySettings.getMappedModel().isClass(
-									ac.getReferredProperty().getType().getName());
-				}
-				if (findAssociation) {
-					guide = ic.getAssociationEndGuide(featureName);
-				}
-				else
-					guide = ic.getAttributeGuide(featureName);
+		Guide guide;
+		LinkedList<Guide> guides = new LinkedList<Guide>();
+		String featureName; // used for attribute/association end names
+
+		if (exp instanceof PropertyCallExp) {
+			PropertyCallExp propertyExp = (PropertyCallExp) exp;
+			featureName = propertyExp.getReferredProperty().getName();
+			OclExpression sourceExp = propertyExp.getSource();
+			Type sourceType = propertyExp.getSourceType();
+			IMappedClass mc =
+					mySettings.getMappedModel().getClass(sourceType.getName());
+			boolean findAssociation = false;
+			if (propertyExp.getReferredProperty() instanceof AssociationProperty) {
+				findAssociation = true;
+			}
+			else if (propertyExp.getReferredProperty().getType() instanceof CollectionType) {
+				findAssociation =
+						mySettings.getMappedModel().isClass(
+								((CollectionType) propertyExp.getReferredProperty().getType())
+										.getElementType().getName());
 			}
 			else {
-				break;
+				findAssociation =
+						mySettings.getMappedModel().isClass(
+								propertyExp.getReferredProperty().getType().getName());
 			}
-
-			// assign alias to last element
-			if (tmpNext == null || tmpNext instanceof VariableExp) {
-				guide.setAlias(getAlias(true));
+			if (findAssociation) {
+				guide = mc.getAssociationEndGuide(featureName);
 			}
-
+			else {
+				guide = mc.getAttributeGuide(featureName);
+			}
+			guide.setAlias("");
+			guide = new Guide(guide);
 			guides.add(guide);
-			next = tmpNext;
+			guides.addAll(assignGuides(sourceExp));
+			if (sourceExp instanceof VariableExp) {
+				if (!guide.isNavigation()) {
+					guide.setAlias(guides.removeLast().getAlias());
+				}
+				else {
+					guide.reset();
+					Guide varGuide = guides.getLast();
+					varGuide.reset();
+					if (guide.getWhere().equals(varGuide.getSelect())
+							&& guide.getWhere().equals(varGuide.getWhere())) {
+						guide.setAlias(guides.removeLast().getAlias());
+					}
+					else {
+						guide.setAlias(mySettings.getMappedModel().getUniqueAlias());
+					}
+				}
+			}
+			else {
+				guide.setAlias(mySettings.getMappedModel().getUniqueAlias());
+			}
+		}
+		else if (exp instanceof VariableExp) {
+			guides.add(variableMap.get(((VariableExp) exp).getReferredVariable()
+					.getName()));
 		}
 
 		navigationMap.put(exp, guides);
 
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("assignGuides(OclExpression exp) - end - Guides:" + guides);
+		}
+
 		return guides;
 	}
-	
-	private String getAlias(boolean last) {
-		return getAlias(last,false);
+
+	/**
+	 * Generate the fragment code of a two operand operation.
+	 * 
+	 * @param templateName
+	 *          the name of the template
+	 * @param operand1
+	 *          the first argument
+	 * @param operand2
+	 *          the second argument
+	 * @return the fragment code
+	 */
+	private ISQLCode createTwoOperandOperation(String templateName,
+			ISQLCode operand1, ISQLCode operand2) {
+
+		ITemplate template =
+				mySettings.getTemplateGroup().getTemplate(templateName);
+		ISQLCode code = new SQLCode(template);
+		code.addElement("operand1", operand1);
+		if (operand2 != null) {
+			code.addElement("operand2", operand2);
+		}
+		return code;
 	}
-	
-	private String getAlias(boolean last, boolean remove) {
-		String result;
-		if (last) {
-			if (!remove) {
-				result = aliasList.getLast();
-			} else {
-				result = aliasList.removeLast();
+
+	/**
+	 * Generate the fragment code of a single operand operation.
+	 * 
+	 * @param templateName
+	 *          the name of the template
+	 * @param operand
+	 *          the argument
+	 * @return the fragment code
+	 */
+	private ISQLCode createOperandOperation(String templateName, ISQLCode operand) {
+
+		ITemplate template =
+				mySettings.getTemplateGroup().getTemplate(templateName);
+		ISQLCode code = new SQLCode(template);
+		code.addElement("operand", operand);
+		return code;
+	}
+
+	/**
+	 * Generate a Select statement for the operation collect.
+	 * 
+	 * @param sourceCode
+	 *          the sourceCode of the statement
+	 * @param bodyCode
+	 *          the body of the collect statement
+	 * @return the fragment code
+	 */
+	private ISQLCode createCollectStatement(ISQLCode sourceCode,
+			ISQLCode bodyCode, Guide srcGuide, Guide bodyGuide) {
+
+		ISQLCode result = null;
+		boolean temp =
+				Boolean.valueOf(mySettings.getTemplateGroup()
+						.getTemplate("check_database_references").toString());
+
+		if (bodyCode != null && bodyCode.getElement("from") != null) {
+			result = bodyCode;
+			ISQLCode join = result;
+			if (temp) {
+				while (join.getElement("join") != null) {
+					join = join.getElement("join");
+				}
 			}
-		} else {
-			if (!remove) {
-				result = aliasList.getFirst();
-			} else {
-				result = aliasList.removeFirst();
+			else {
+				while (join.getElement("join") != null
+						&& join.getElement("join").getElement("join") != null) {
+					join = join.getElement("join");
+				}
+			}
+			ISQLCode where = null;
+			if (result.getElement("where") != null) {
+				if (result.getElement("where").getElement("operand1") != null) {
+					where = result.getElement("where").getElement("operand1");
+					result.changeElement("where",
+							result.getElement("where").getElement("operand2"));
+				}
+				else {
+					where = result.getElement("where");
+					result.changeElement("where", null);
+				}
+			}
+			if (sourceCode != null) {
+				if (temp) {
+					join.changeElement("join", createJoinStatement(srcGuide, bodyGuide));
+					join = join.getElement("join");
+					if (where != null) {
+						// join.changeElement("alias", where.getElement("alias2"));
+						// .getElement("where").changeElement("alias2",
+						// where.getElement("alias2"));
+					}
+				}
+				else {
+					sourceCode.getElement("join").getElement("where")
+							.changeElement("alias1", join.getElement("alias"));
+				}
+				join.changeElement("join", sourceCode.getElement("join"));
+				if (join.getElement("join") != null && where != null) {
+					// join.getElement("join").getElement("where").changeElement("alias1",
+					// where.getElement("alias"));
+				}
+				changeWhereStatement(result, sourceCode.getElement("where"));
 			}
 		}
-		
+		else {
+			if (bodyCode.getElement("attribute") != null) {
+				sourceCode.getElement("object").changeElement("attribute",
+						bodyCode.getElement("attribute"));
+			}
+			result = sourceCode;
+		}
+
+		return result;
+	}
+
+	/**
+	 * Returns the fragment code of a object
+	 * 
+	 * @param operand
+	 *          the operand to find the object
+	 * @return the code of the object
+	 */
+	private ISQLCode choiceCollectObject(ISQLCode operand) {
+
+		ISQLCode result;
+		if (operand.getElement("from") != null) {
+			result = operand.getElement("object");
+		}
+		else {
+			result = operand;
+		}
+		return result;
+	}
+
+	/**
+	 * Generate a new object value of the code
+	 * 
+	 * @param templateName
+	 *          the name of the template for editing the object
+	 * @param code
+	 *          the select code with the object
+	 */
+	private void changeObjectVariable(String templateName, ISQLCode code) {
+
+		ISQLCode sqlCode;
+		if (templateName != null) {
+			sqlCode =
+					new SQLCode(mySettings.getTemplateGroup().getTemplate(templateName));
+			sqlCode.addElement("object", code.getElement("object"));
+		}
+		else {
+			sqlCode = code;
+		}
+		code.changeElement("object", sqlCode);
+	}
+
+	/**
+	 * Generate a new select statement
+	 * 
+	 * @param arg
+	 *          the body code of the collect statement
+	 * @param sourceCode
+	 *          the source code of the collect statement
+	 * @param guideSrc
+	 *          the guide of the source
+	 * @param bodyExp
+	 *          the body expression
+	 * @return the fragment code
+	 */
+	protected ISQLCode createCollectStatement(ISQLCode arg, ISQLCode sourceCode,
+			Guide guideSrc, OclExpression bodyExp) {
+
+		ISQLCode result;
+		Guide guideBody;
+		if (navigationMap.get(bodyExp).size() >= 2) {
+			guideBody =
+					navigationMap.get(bodyExp).get(navigationMap.get(bodyExp).size() - 2);
+		}
+		else {
+			guideBody = navigationMap.get(bodyExp).get(0);
+		}
+
+		if (arg.getElement("object") != null) {
+			result = createCollectStatement(sourceCode, arg, guideSrc, guideBody);
+		}
+		else if (arg.getElement("attribute") != null
+				&& bodyExp instanceof PropertyCallExp) {
+			boolean temp =
+					Boolean.valueOf(mySettings.getTemplateGroup()
+							.getTemplate("check_database_references").toString());
+			ISQLCode body;
+			if (temp) {
+				Guide g = navigationMap.get(bodyExp).get(0);
+				if (guideSrc.getAlias().equals(g.getAlias())
+						&& !guideSrc.getFrom().equals(g.getFrom())) {
+					g.setAlias(mySettings.getMappedModel().getUniqueAlias());
+				}
+				body = createSelectStatement(navigationMap.get(bodyExp));
+			}
+			else {
+				body = arg;
+			}
+			result = createCollectStatement(sourceCode, body, guideSrc, guideBody);
+		}
+		else {
+			result = sourceCode;
+		}
 		return result;
 	}
 

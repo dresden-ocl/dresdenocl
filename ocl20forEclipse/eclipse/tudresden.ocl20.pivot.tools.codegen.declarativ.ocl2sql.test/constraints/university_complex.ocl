@@ -28,7 +28,6 @@ inv tudOclInv1: self.supervisor.grade.value > self.grade.value
 context Faculty
 inv tudOclInv2: self.subFacility->size() >= 2
 
-
 /*
  * All subfacilities must be an Institute
  *

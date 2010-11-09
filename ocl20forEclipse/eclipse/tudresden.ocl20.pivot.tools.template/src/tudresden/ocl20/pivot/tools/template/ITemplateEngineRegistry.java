@@ -18,16 +18,18 @@ public interface ITemplateEngineRegistry {
 
 	/**
 	 * <p>
-	 * Adds or Replace an {@link ITemplateEngine} to this {@link ITemplateEngineRegistry}.
+	 * Adds or Replace an {@link ITemplateEngine} to this
+	 * {@link ITemplateEngineRegistry}.
 	 * </p>
 	 * 
 	 * @param templateEngine
 	 *          The {@link ITemplateEngine} that shall be added.
-	 *          
-	 * @throws
-	 * 		TemplateException if the templateEngine is null
+	 * 
+	 * @throws TemplateException
+	 *           if the templateEngine is null
 	 */
-	public void addTemplateEngine(ITemplateEngine templateEngine) throws TemplateException;
+	public void addTemplateEngine(ITemplateEngine templateEngine)
+			throws TemplateException;
 
 	/**
 	 * <p>
@@ -38,10 +40,11 @@ public interface ITemplateEngineRegistry {
 	 *          An identifier name for an {@link ITemplateEngine}.
 	 * 
 	 * @return A new {@link ITemplateEngine} instance.
-	 * @throws
-	 * 		TemplateException if no engine exists with this name.
+	 * @throws TemplateException
+	 *           if no engine exists with this name.
 	 */
-	public ITemplateEngine getNewTemplateEngine(String templateEngineName) throws TemplateException;
+	public ITemplateEngine getNewTemplateEngine(String templateEngineName)
+			throws TemplateException;
 
 	/**
 	 * <p>

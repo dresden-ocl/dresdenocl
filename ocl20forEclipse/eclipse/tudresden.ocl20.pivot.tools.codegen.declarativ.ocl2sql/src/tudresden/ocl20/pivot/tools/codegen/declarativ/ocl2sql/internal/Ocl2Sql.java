@@ -105,7 +105,7 @@ public class Ocl2Sql implements IOcl2Sql {
 		String dateString =
 				new SimpleDateFormat("yyyy-MM-dd-HH-mm").format(new Date());
 		String sqlCommentar =
-				create_SQLCommentar("Generated from OCL2SQL generator(Dresden OCL2)");
+				create_SQLCommentar("Generated from OCL2SQL generator(Dresden OCL)");
 		sqlCommentar += create_SQLCommentar("Generation time: " + dateString);
 		sqlCommentar +=
 				create_SQLCommentar("Template: "
