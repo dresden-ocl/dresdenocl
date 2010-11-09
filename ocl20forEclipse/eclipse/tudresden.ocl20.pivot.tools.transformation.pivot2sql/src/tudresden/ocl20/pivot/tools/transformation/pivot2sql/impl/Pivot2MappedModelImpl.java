@@ -415,6 +415,8 @@ public class Pivot2MappedModelImpl extends
 	private void map_MtoN_Association2Guide(Type typeA, String nameA, Type typeB,
 			String nameB, String assTableName) throws InvalidModelException {
 
+		boolean savePaths = Boolean.valueOf(this.settings.getTemplateGroup().getTemplate("check_database_references").toString()).booleanValue();
+		
 		String pknameA = this.settings.getPrimaryKeyPrefix() + typeA.getName();
 		String pknameB = this.settings.getPrimaryKeyPrefix() + typeB.getName();
 		String ovnameA = this.settings.getObjectViewPrefix() + typeA.getName();
@@ -424,34 +426,50 @@ public class Pivot2MappedModelImpl extends
 		Set<Type> subtypesA = query_subtypesForType(typeA);
 		Set<Type> subtypesB = query_subtypesForType(typeB);
 
-		Guide a2b =
-				create_AssociationGuide(nameB, typeA, pknameB, pknameB, ovnameB);
-		addToGuide(a2b, fknameB, assTableName, fknameA);
-		addToGuide(a2b, pknameA, ovnameA, pknameA);
+		if (savePaths) {
+			create_AssociationGuide(nameB, typeA, fknameA, fknameB, assTableName);
+		} else {
+			Guide a2b = create_AssociationGuide(nameB, typeA, pknameB, pknameB, ovnameB);
+			addToGuide(a2b, fknameB, assTableName, fknameA);
+			addToGuide(a2b, pknameA, ovnameA, pknameA);
+		}
+				
+		
 		for (Type subType : subtypesA) {
-			Guide sa2b =
+			if (savePaths) {
+				create_AssociationGuide(nameB, subType, fknameA, fknameB, assTableName);
+			} else {
+				Guide sa2b =
 					create_AssociationGuide(nameB, subType, pknameB, pknameB, ovnameB);
 			String ovnameA_sub =
 					this.settings.getObjectViewPrefix() + subType.getName();
 
 			addToGuide(sa2b, fknameB, assTableName, fknameA);
 			addToGuide(sa2b, pknameA, ovnameA_sub, pknameA);
+			}
+
 
 		}
-
-		Guide b2a =
-				create_AssociationGuide(nameA, typeB, pknameA, pknameA, ovnameA);
-		addToGuide(b2a, fknameA, assTableName, fknameB);
-		addToGuide(b2a, pknameB, ovnameB, pknameB);
+		if (savePaths) {
+			create_AssociationGuide(nameA, typeB, fknameB, fknameA, assTableName);
+		} else {
+			Guide b2a =
+					create_AssociationGuide(nameA, typeB, pknameA, pknameA, ovnameA);
+			addToGuide(b2a, fknameA, assTableName, fknameB);
+			addToGuide(b2a, pknameB, ovnameB, pknameB);
+		}
 		for (Type subType : subtypesB) {
-			Guide sb2a =
-					create_AssociationGuide(nameA, subType, pknameA, pknameA, ovnameA);
-			String ovnameB_sub =
-					this.settings.getObjectViewPrefix() + subType.getName();
-
-			addToGuide(sb2a, fknameA, assTableName, fknameB);
-			addToGuide(sb2a, pknameB, ovnameB_sub, pknameB);
-
+			if (savePaths) {
+				create_AssociationGuide(nameA, subType, fknameB, fknameA, assTableName);
+			} else {
+				Guide sb2a =
+						create_AssociationGuide(nameA, subType, pknameA, pknameA, ovnameA);
+				String ovnameB_sub =
+						this.settings.getObjectViewPrefix() + subType.getName();
+	
+				addToGuide(sb2a, fknameA, assTableName, fknameB);
+				addToGuide(sb2a, pknameB, ovnameB_sub, pknameB);
+			}
 		}
 	}
 

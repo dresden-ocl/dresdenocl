@@ -78,9 +78,9 @@ public class MappedModelImpl implements IMappedModel {
 
 		id++;
 		if (id == 1) {
-			return "SELF";
+			return "self";
 		}
-		return "ALIAS" + id;
+		return "alias" + id;
 	}
 
 	public void resetUniqueAlias() {

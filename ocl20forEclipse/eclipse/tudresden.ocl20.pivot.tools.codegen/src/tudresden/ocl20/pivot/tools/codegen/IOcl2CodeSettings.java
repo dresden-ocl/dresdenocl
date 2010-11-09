@@ -1,15 +1,6 @@
 package tudresden.ocl20.pivot.tools.codegen;
 
-import tudresden.ocl20.pivot.tools.template.ITemplateGroup;
-
 public interface IOcl2CodeSettings {
-
-	/**
-	 * 
-	 * @return The {@link ITemplateGroup}, where the templates and template engine
-	 *         are saved.
-	 */
-	public ITemplateGroup getTemplateGroup();
 
 	/**
 	 * @return The location, where transformed constraints shall be saved
@@ -21,16 +12,6 @@ public interface IOcl2CodeSettings {
 	 * @return The Location, where transformed code shall be saved.
 	 */
 	public String getSourceDirectory();
-
-	/**
-	 * <p>
-	 * Sets the The template group, where TemplateEngine und Template are saved.
-	 * </p>
-	 * 
-	 * @param templateGroup
-	 *          The template group, where the Templates are saved.
-	 */
-	public void setTemplateGroup(ITemplateGroup templateGroup);
 
 	/**
 	 * <p>
