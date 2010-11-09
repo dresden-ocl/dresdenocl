@@ -10,14 +10,14 @@ import java.util.List;
 import tudresden.ocl20.benchmark.sql.util.IBenchmark;
 import tudresden.ocl20.benchmark.sql.util.IPerformer;
 
-public abstract class Benchmark<T extends IPerformer> implements IBenchmark{
+public abstract class Benchmark<T extends IPerformer> implements IBenchmark {
 
 	protected List<T> performer;
 
 	protected LinkedList<String> constraints;
 
 	protected BufferedWriter writer;
-		
+
 	protected Benchmark(String file) {
 
 		performer = new LinkedList<T>();
@@ -35,7 +35,7 @@ public abstract class Benchmark<T extends IPerformer> implements IBenchmark{
 	public void run() {
 
 		for (String s : constraints) {
-			run(s,getPerformer());
+			run(s, getPerformer());
 		}
 	}
 
@@ -47,7 +47,7 @@ public abstract class Benchmark<T extends IPerformer> implements IBenchmark{
 	 * @throws IOException
 	 *           if throws if a problem with writing in the file.
 	 */
-	public void run(String constraint,List<String> performer) {
+	public void run(String constraint, List<String> performer) {
 
 		long start;
 		long end;
@@ -59,7 +59,7 @@ public abstract class Benchmark<T extends IPerformer> implements IBenchmark{
 				} catch (InterruptedException e1) {
 					e1.printStackTrace();
 				}
-				String result = "";
+				boolean result = false;
 				try {
 					start = System.currentTimeMillis();
 					result = t.sendQuery(constraint);
@@ -69,7 +69,7 @@ public abstract class Benchmark<T extends IPerformer> implements IBenchmark{
 					continue;
 				}
 				writer.write(t.getName() + ":");
-				writer.write((end - start) + "ms (Value:"+result+")\n");
+				writer.write((end - start) + "ms (Value:" + result + ")\n");
 				writer.flush();
 			}
 		} catch (IOException e) {
@@ -92,8 +92,9 @@ public abstract class Benchmark<T extends IPerformer> implements IBenchmark{
 			cp.clean();
 		}
 	}
-	
+
 	public List<String> getPerformer() {
+
 		List<String> result = new ArrayList<String>();
 		for (T t : performer) {
 			result.add(t.getName());
@@ -102,6 +103,7 @@ public abstract class Benchmark<T extends IPerformer> implements IBenchmark{
 	}
 
 	protected List<T> getPerformerList(List<String> performerList) {
+
 		List<T> tList = new ArrayList<T>();
 		for (String s : performerList) {
 			for (T tp : performer) {
@@ -112,21 +114,23 @@ public abstract class Benchmark<T extends IPerformer> implements IBenchmark{
 		}
 		return tList;
 	}
-	
+
 	protected T getPerformer(String s) {
+
 		for (T tp : performer) {
 			if (tp.getName().equals(s)) {
 				return tp;
 			}
 		}
-		
+
 		return null;
 	}
-	
+
 	public List<String> getConstraints() {
+
 		return constraints;
 	}
-	
+
 	/**
 	 * Initialize the database with data and add all constraints for running.
 	 */
@@ -139,9 +143,9 @@ public abstract class Benchmark<T extends IPerformer> implements IBenchmark{
 			}
 		}
 	}
-	
+
 	protected abstract void addDataToPerformer(T t);
-	
+
 	/**
 	 * 
 	 * @param args
@@ -157,7 +161,6 @@ public abstract class Benchmark<T extends IPerformer> implements IBenchmark{
 		System.setProperty("sqlbenchmark_db", args[1]);
 		System.setProperty("sqlbenchmark_user", args[2]);
 		System.setProperty("sqlbenchmark_pw", args[3]);
-		// CarSimplePerformer.main(args);
 		CarBenchmark.main(args);
 		LibraryBenchmark.main(args);
 

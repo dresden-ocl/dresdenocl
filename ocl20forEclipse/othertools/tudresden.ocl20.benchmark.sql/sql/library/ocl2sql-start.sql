@@ -1,5 +1,5 @@
--- Generated from OCL2SQL generator(Dresden OCL2)
--- Generation time: 2010-09-21-12-46
+-- Generated from OCL2SQL generator(Dresden OCL)
+-- Generation time: 2010-11-09-19-06
 -- Template: MySQL(SQL)
 -- Modus: typed
 
@@ -33,466 +33,376 @@ ALTER TABLE `ASS_author_books` ADD CONSTRAINT `CONASS_author_booksFK_books`
 FOREIGN KEY (`FK_books`) REFERENCES `T_Book`(`PK_Book`);
 
 -- Context: Book
--- Expression: def: oclinvp11: Integer = Book.allInstances().author.books->collect(x|x.title)->size()
+-- Expression: inv oclinvp11: Book.allInstances().author.books->collect(x|x.title)->size() = 1
 CREATE OR REPLACE VIEW oclinvp11 AS
-(SELECT
-  IF(COUNT(title) IS NULL,0,COUNT(title)) AS 'COUNT(title)'
-  FROM (OV_Book)
-  WHERE title IN (SELECT DISTINCT title FROM OV_Book
- WHERE PK_Book IN (SELECT DISTINCT PK_Book FROM OV_Book
- WHERE PK_Book IN (SELECT DISTINCT FK_books FROM ASS_author_books
- WHERE FK_author IN (SELECT DISTINCT PK_Writer FROM OV_Writer
- WHERE PK_Writer IN (SELECT DISTINCT PK_Writer FROM OV_Writer
- WHERE PK_Writer IN (SELECT DISTINCT FK_author FROM ASS_author_books
- WHERE FK_books IN (SELECT DISTINCT PK_Book FROM OV_Book )))))) ) );
+(SELECT * FROM OV_Book AS self
+WHERE NOT (((SELECT IFNULL(COUNT(temp1.title),0)
+FROM OV_Book AS temp1
+INNER JOIN ASS_author_books AS temp2 ON temp1.PK_Book = temp2.FK_books
+INNER JOIN ASS_author_books AS temp3 ON temp2.FK_author = temp3.FK_author
+) = 1)));
 
 -- Context: Book
--- Expression: def: oclinvp12: Integer = Book.allInstances().author.books->collect(x|x.title <> 'Hobbit')->size()
+-- Expression: inv oclinvp12: Book.allInstances().author.books->collect(x|x.title <> 'Hobbit')->size() = 1
 CREATE OR REPLACE VIEW oclinvp12 AS
-(SELECT
-  IF(COUNT(title) IS NULL,0,COUNT(title)) AS 'COUNT(title)'
-  FROM (OV_Book)
-  WHERE title IN (SELECT DISTINCT title FROM OV_Book
- WHERE PK_Book IN (SELECT DISTINCT PK_Book FROM OV_Book
- WHERE PK_Book IN (SELECT DISTINCT FK_books FROM ASS_author_books
- WHERE FK_author IN (SELECT DISTINCT PK_Writer FROM OV_Writer
- WHERE PK_Writer IN (SELECT DISTINCT PK_Writer FROM OV_Writer
- WHERE PK_Writer IN (SELECT DISTINCT FK_author FROM ASS_author_books
- WHERE FK_books IN (SELECT DISTINCT PK_Book FROM OV_Book )))))) ) );
+(SELECT * FROM OV_Book AS self
+WHERE NOT (((SELECT IFNULL(COUNT(NOT (temp1.title = 'Hobbit')),0)
+FROM OV_Book AS temp1
+INNER JOIN ASS_author_books AS temp2 ON temp1.PK_Book = temp2.FK_books
+INNER JOIN ASS_author_books AS temp3 ON temp2.FK_author = temp3.FK_author
+) = 1)));
 
 -- Context: Book
--- Expression: def: oclinvp13: Integer = Book.allInstances().author.books->collect(x|x.author.books)->size()
+-- Expression: inv oclinvp13: Book.allInstances().author.books->collect(x|x.author.books)->size() = 1
 CREATE OR REPLACE VIEW oclinvp13 AS
-(SELECT
-  IF(COUNT(PK_Book) IS NULL,0,COUNT(PK_Book)) AS 'COUNT(PK_Book)'
-  FROM (OV_Book)
-  WHERE PK_Book IN (SELECT DISTINCT PK_Book FROM OV_Book
- WHERE PK_Book IN (SELECT DISTINCT PK_Book FROM OV_Book
- WHERE PK_Book IN (SELECT DISTINCT FK_books FROM ASS_author_books
- WHERE FK_author IN (SELECT DISTINCT PK_Writer FROM OV_Writer
- WHERE PK_Writer IN (SELECT DISTINCT PK_Writer FROM OV_Writer
- WHERE PK_Writer IN (SELECT DISTINCT FK_author FROM ASS_author_books
- WHERE FK_books IN (SELECT DISTINCT PK_Book FROM OV_Book )))))) ) );
+(SELECT * FROM OV_Book AS self
+WHERE NOT (((SELECT IFNULL(COUNT(temp1.FK_books),0)
+FROM ASS_author_books AS temp1
+INNER JOIN ASS_author_books AS temp2 ON temp1.FK_author = temp2.FK_author
+INNER JOIN ASS_author_books AS temp3 ON temp2.FK_books = temp3.FK_books
+INNER JOIN ASS_author_books AS temp4 ON temp3.FK_author = temp4.FK_author
+) = 1)));
 
 -- Context: Book
--- Expression: def: oclinvp14: Integer = Book.allInstances().author.books->collect(x|x.author.books->includes(x))->size()
+-- Expression: inv oclinvp14: Book.allInstances().author.books->collect(x|x.author.books->includes(x))->size() = 1
 CREATE OR REPLACE VIEW oclinvp14 AS
-(SELECT
-  IF(COUNT(PK_Book) IS NULL,0,COUNT(PK_Book)) AS 'COUNT(PK_Book)'
-  FROM (OV_Book)
-  WHERE PK_Book IN (SELECT DISTINCT PK_Book FROM OV_Book
- WHERE PK_Book IN (SELECT DISTINCT PK_Book FROM OV_Book
- WHERE PK_Book IN (SELECT DISTINCT FK_books FROM ASS_author_books
- WHERE FK_author IN (SELECT DISTINCT PK_Writer FROM OV_Writer
- WHERE PK_Writer IN (SELECT DISTINCT PK_Writer FROM OV_Writer
- WHERE PK_Writer IN (SELECT DISTINCT FK_author FROM ASS_author_books
- WHERE FK_books IN (SELECT DISTINCT PK_Book FROM OV_Book )))))) ) );
+(SELECT * FROM OV_Book AS self
+WHERE NOT (((SELECT IFNULL(COUNT(temp3.FK_books IN
+  (temp1.FK_books)),0)
+FROM ASS_author_books AS temp1
+INNER JOIN ASS_author_books AS temp2 ON temp1.FK_author = temp2.FK_author
+INNER JOIN ASS_author_books AS temp3 ON temp2.FK_books = temp3.FK_books
+INNER JOIN ASS_author_books AS temp4 ON temp3.FK_author = temp4.FK_author
+) = 1)));
 
 -- Context: Book
 -- Expression: inv oclinvp15: Book.allInstances().author.books->forAll(x|x.author.books->includes(x))
 CREATE OR REPLACE VIEW oclinvp15 AS
-(SELECT * FROM Book AS SELF
-WHERE NOT (NOT EXISTS (
-  SELECT DISTINCT PK_Book FROM OV_Book
-   WHERE PK_Book IN (SELECT DISTINCT FK_books FROM ASS_author_books
-   WHERE FK_author IN (SELECT DISTINCT PK_Writer FROM OV_Writer
-   WHERE PK_Writer IN (SELECT DISTINCT PK_Writer FROM OV_Writer
-   WHERE PK_Writer IN (SELECT DISTINCT FK_author FROM ASS_author_books
-   WHERE FK_books IN (SELECT DISTINCT PK_Book FROM OV_Book WHERE PK_Book = SELF.PK_Book)))))
-  AND PK_Book IN (
-    SELECT PK_Book FROM OV_Book AS ALIAS4
-    WHERE NOT (PK_Book IN
-  (SELECT DISTINCT PK_Book FROM OV_Book
- WHERE PK_Book IN (SELECT DISTINCT FK_books FROM ASS_author_books
- WHERE FK_author IN (SELECT DISTINCT PK_Writer FROM OV_Writer
- WHERE PK_Writer IN (SELECT DISTINCT PK_Writer FROM OV_Writer
- WHERE PK_Writer IN (SELECT DISTINCT FK_author FROM ASS_author_books
- WHERE FK_books IN (SELECT DISTINCT PK_Book FROM OV_Book WHERE PK_Book = ALIAS4.PK_Book)))))))
-  )
-)));
+(SELECT * FROM OV_Book AS self
+WHERE NOT (NOT EXISTS((SELECT temp1.FK_books
+FROM ASS_author_books AS temp1
+INNER JOIN ASS_author_books AS temp2 ON temp1.FK_author = temp2.FK_author
+WHERE NOT(temp1.FK_books IN
+  ((SELECT temp3.FK_books
+FROM ASS_author_books AS temp3
+INNER JOIN ASS_author_books AS temp4 ON temp3.FK_author = temp4.FK_author
+ WHERE temp4.FK_books = temp1.FK_books)))))));
 
 -- Context: Book
--- Expression: def: oclinvp16: Integer = Book.allInstances().author.books->select(x|x.author.books->includes(x))->size()
+-- Expression: inv oclinvp16: Book.allInstances().author.books->select(x|x.author.books->includes(x))->size() = 1
 CREATE OR REPLACE VIEW oclinvp16 AS
-(SELECT
-  IF(COUNT(PK_Book) IS NULL,0,COUNT(PK_Book)) AS 'COUNT(PK_Book)'
-  FROM (OV_Book)
-  WHERE PK_Book IN ((SELECT DISTINCT PK_Book FROM OV_Book
- WHERE PK_Book IN (SELECT DISTINCT FK_books FROM ASS_author_books
- WHERE FK_author IN (SELECT DISTINCT PK_Writer FROM OV_Writer
- WHERE PK_Writer IN (SELECT DISTINCT PK_Writer FROM OV_Writer
- WHERE PK_Writer IN (SELECT DISTINCT FK_author FROM ASS_author_books
- WHERE FK_books IN (SELECT DISTINCT PK_Book FROM OV_Book )))))
-  AND PK_Book IN (
-    SELECT DISTINCT PK_Book FROM OV_Book AS ALIAS4
-    WHERE (PK_Book IN
-  (SELECT DISTINCT PK_Book FROM OV_Book
- WHERE PK_Book IN (SELECT DISTINCT FK_books FROM ASS_author_books
- WHERE FK_author IN (SELECT DISTINCT PK_Writer FROM OV_Writer
- WHERE PK_Writer IN (SELECT DISTINCT PK_Writer FROM OV_Writer
- WHERE PK_Writer IN (SELECT DISTINCT FK_author FROM ASS_author_books
- WHERE FK_books IN (SELECT DISTINCT PK_Book FROM OV_Book WHERE PK_Book = ALIAS4.PK_Book)))))))
-  )
-)) );
+(SELECT * FROM OV_Book AS self
+WHERE NOT (((SELECT IFNULL(COUNT(temp1.FK_books),0)
+FROM ASS_author_books AS temp1
+INNER JOIN ASS_author_books AS temp2 ON temp1.FK_author = temp2.FK_author
+WHERE temp1.FK_books IN
+  ((SELECT temp3.FK_books
+FROM ASS_author_books AS temp3
+INNER JOIN ASS_author_books AS temp4 ON temp3.FK_author = temp4.FK_author
+ WHERE temp4.FK_books = temp1.FK_books))) = 1)));
 
 -- Context: Book
--- Expression: def: oclinvp17: Integer = Book.allInstances().author.books->collect(x|x.author.books.title)->size()
+-- Expression: inv oclinvp17: Book.allInstances().author.books->collect(x|x.author.books.title)->size() = 1
 CREATE OR REPLACE VIEW oclinvp17 AS
-(SELECT
-  IF(COUNT(title) IS NULL,0,COUNT(title)) AS 'COUNT(title)'
-  FROM (OV_Book)
-  WHERE title IN (SELECT DISTINCT title FROM OV_Book
- WHERE PK_Book IN (SELECT DISTINCT PK_Book FROM OV_Book
- WHERE PK_Book IN (SELECT DISTINCT FK_books FROM ASS_author_books
- WHERE FK_author IN (SELECT DISTINCT PK_Writer FROM OV_Writer
- WHERE PK_Writer IN (SELECT DISTINCT PK_Writer FROM OV_Writer
- WHERE PK_Writer IN (SELECT DISTINCT FK_author FROM ASS_author_books
- WHERE FK_books IN (SELECT DISTINCT PK_Book FROM OV_Book )))))) ) );
+(SELECT * FROM OV_Book AS self
+WHERE NOT (((SELECT IFNULL(COUNT(temp1.title),0)
+FROM OV_Book AS temp1
+INNER JOIN ASS_author_books AS temp2 ON temp1.PK_Book = temp2.FK_books
+INNER JOIN ASS_author_books AS temp3 ON temp2.FK_author = temp3.FK_author
+INNER JOIN ASS_author_books AS temp4 ON temp3.FK_books = temp4.FK_books
+INNER JOIN ASS_author_books AS temp5 ON temp4.FK_author = temp5.FK_author
+) = 1)));
 
 -- Context: Book
--- Expression: def: oclinvp18: Integer = Book.allInstances().author.books->collect(x|x.author.books.title->size())->sum()
+-- Expression: inv oclinvp18: Book.allInstances().author.books->collect(x|x.author.books.title->size())->sum() = 1
 CREATE OR REPLACE VIEW oclinvp18 AS
-(SELECT
-  IF(SUM(title) IS NULL,0,SUM(title)) AS 'SUM(title)'
-  FROM OV_Book
-  WHERE title IN (SELECT DISTINCT title FROM OV_Book
- WHERE PK_Book IN (SELECT DISTINCT PK_Book FROM OV_Book
- WHERE PK_Book IN (SELECT DISTINCT FK_books FROM ASS_author_books
- WHERE FK_author IN (SELECT DISTINCT PK_Writer FROM OV_Writer
- WHERE PK_Writer IN (SELECT DISTINCT PK_Writer FROM OV_Writer
- WHERE PK_Writer IN (SELECT DISTINCT FK_author FROM ASS_author_books
- WHERE FK_books IN (SELECT DISTINCT PK_Book FROM OV_Book )))))) ));
+(SELECT * FROM OV_Book AS self
+WHERE NOT (((SELECT IFNULL(SUM(IF(temp1.title IS NULL,NULL,1)),0)
+FROM OV_Book AS temp1
+INNER JOIN ASS_author_books AS temp2 ON temp1.PK_Book = temp2.FK_books
+INNER JOIN ASS_author_books AS temp3 ON temp2.FK_author = temp3.FK_author
+INNER JOIN ASS_author_books AS temp4 ON temp3.FK_books = temp4.FK_books
+INNER JOIN ASS_author_books AS temp5 ON temp4.FK_author = temp5.FK_author
+) = 1)));
 
 -- Context: Book
 -- Expression: inv oclinvp19: Book.allInstances().author.books->forAll(x|x.author.books.title->excludes('Hobbit'))
 CREATE OR REPLACE VIEW oclinvp19 AS
-(SELECT * FROM Book AS SELF
-WHERE NOT (NOT EXISTS (
-  SELECT DISTINCT PK_Book FROM OV_Book
-   WHERE PK_Book IN (SELECT DISTINCT FK_books FROM ASS_author_books
-   WHERE FK_author IN (SELECT DISTINCT PK_Writer FROM OV_Writer
-   WHERE PK_Writer IN (SELECT DISTINCT PK_Writer FROM OV_Writer
-   WHERE PK_Writer IN (SELECT DISTINCT FK_author FROM ASS_author_books
-   WHERE FK_books IN (SELECT DISTINCT PK_Book FROM OV_Book WHERE PK_Book = SELF.PK_Book)))))
-  AND PK_Book IN (
-    SELECT PK_Book FROM OV_Book AS ALIAS4
-    WHERE NOT ('Hobbit' NOT IN
-  (SELECT DISTINCT title FROM OV_Book
- WHERE PK_Book IN (SELECT DISTINCT PK_Book FROM OV_Book
- WHERE PK_Book IN (SELECT DISTINCT FK_books FROM ASS_author_books
- WHERE FK_author IN (SELECT DISTINCT PK_Writer FROM OV_Writer
- WHERE PK_Writer IN (SELECT DISTINCT PK_Writer FROM OV_Writer
- WHERE PK_Writer IN (SELECT DISTINCT FK_author FROM ASS_author_books
- WHERE FK_books IN (SELECT DISTINCT PK_Book FROM OV_Book WHERE PK_Book = ALIAS4.PK_Book)))))) ))
-  )
-)));
+(SELECT * FROM OV_Book AS self
+WHERE NOT (NOT EXISTS((SELECT temp1.FK_books
+FROM ASS_author_books AS temp1
+INNER JOIN ASS_author_books AS temp2 ON temp1.FK_author = temp2.FK_author
+WHERE NOT('Hobbit' NOT IN
+  ((SELECT temp3.title
+FROM OV_Book AS temp3
+INNER JOIN ASS_author_books AS temp4 ON temp3.PK_Book = temp4.FK_books
+INNER JOIN ASS_author_books AS temp5 ON temp4.FK_author = temp5.FK_author
+ WHERE temp5.FK_books = temp1.FK_books)))))));
 
 -- Context: Book
--- Expression: def: oclinvp21: Integer = Book.allInstances().author.books.author.books->collect(x|x.title)->size()
+-- Expression: inv oclinvp21: Book.allInstances().author.books.author.books->collect(x|x.title)->size() = 1
 CREATE OR REPLACE VIEW oclinvp21 AS
-(SELECT
-  IF(COUNT(title) IS NULL,0,COUNT(title)) AS 'COUNT(title)'
-  FROM (OV_Book)
-  WHERE title IN (SELECT DISTINCT title FROM OV_Book
- WHERE PK_Book IN (SELECT DISTINCT PK_Book FROM OV_Book
- WHERE PK_Book IN (SELECT DISTINCT FK_books FROM ASS_author_books
- WHERE FK_author IN (SELECT DISTINCT PK_Writer FROM OV_Writer
- WHERE PK_Writer IN (SELECT DISTINCT PK_Writer FROM OV_Writer
- WHERE PK_Writer IN (SELECT DISTINCT FK_author FROM ASS_author_books
- WHERE FK_books IN (SELECT DISTINCT PK_Book FROM OV_Book )))))) ) );
+(SELECT * FROM OV_Book AS self
+WHERE NOT (((SELECT IFNULL(COUNT(temp1.title),0)
+FROM OV_Book AS temp1
+INNER JOIN ASS_author_books AS temp2 ON temp1.PK_Book = temp2.FK_books
+INNER JOIN ASS_author_books AS temp3 ON temp2.FK_author = temp3.FK_author
+INNER JOIN ASS_author_books AS temp4 ON temp3.FK_books = temp4.FK_books
+INNER JOIN ASS_author_books AS temp5 ON temp4.FK_author = temp5.FK_author
+) = 1)));
 
 -- Context: Book
--- Expression: def: oclinvp22: Integer = Book.allInstances().author.books.author.books->collect(x|x.title <> 'Hobbit')->size()
+-- Expression: inv oclinvp22: Book.allInstances().author.books.author.books->collect(x|x.title <> 'Hobbit')->size() = 1
 CREATE OR REPLACE VIEW oclinvp22 AS
-(SELECT
-  IF(COUNT(title) IS NULL,0,COUNT(title)) AS 'COUNT(title)'
-  FROM (OV_Book)
-  WHERE title IN (SELECT DISTINCT title FROM OV_Book
- WHERE PK_Book IN (SELECT DISTINCT PK_Book FROM OV_Book
- WHERE PK_Book IN (SELECT DISTINCT FK_books FROM ASS_author_books
- WHERE FK_author IN (SELECT DISTINCT PK_Writer FROM OV_Writer
- WHERE PK_Writer IN (SELECT DISTINCT PK_Writer FROM OV_Writer
- WHERE PK_Writer IN (SELECT DISTINCT FK_author FROM ASS_author_books
- WHERE FK_books IN (SELECT DISTINCT PK_Book FROM OV_Book )))))) ) );
+(SELECT * FROM OV_Book AS self
+WHERE NOT (((SELECT IFNULL(COUNT(NOT (temp1.title = 'Hobbit')),0)
+FROM OV_Book AS temp1
+INNER JOIN ASS_author_books AS temp2 ON temp1.PK_Book = temp2.FK_books
+INNER JOIN ASS_author_books AS temp3 ON temp2.FK_author = temp3.FK_author
+INNER JOIN ASS_author_books AS temp4 ON temp3.FK_books = temp4.FK_books
+INNER JOIN ASS_author_books AS temp5 ON temp4.FK_author = temp5.FK_author
+) = 1)));
 
 -- Context: Book
--- Expression: def: oclinvp23: Integer = Book.allInstances().author.books.author.books->collect(x|x.author.books)->size()
+-- Expression: inv oclinvp23: Book.allInstances().author.books.author.books->collect(x|x.author.books)->size() = 1
 CREATE OR REPLACE VIEW oclinvp23 AS
-(SELECT
-  IF(COUNT(PK_Book) IS NULL,0,COUNT(PK_Book)) AS 'COUNT(PK_Book)'
-  FROM (OV_Book)
-  WHERE PK_Book IN (SELECT DISTINCT PK_Book FROM OV_Book
- WHERE PK_Book IN (SELECT DISTINCT PK_Book FROM OV_Book
- WHERE PK_Book IN (SELECT DISTINCT FK_books FROM ASS_author_books
- WHERE FK_author IN (SELECT DISTINCT PK_Writer FROM OV_Writer
- WHERE PK_Writer IN (SELECT DISTINCT PK_Writer FROM OV_Writer
- WHERE PK_Writer IN (SELECT DISTINCT FK_author FROM ASS_author_books
- WHERE FK_books IN (SELECT DISTINCT PK_Book FROM OV_Book )))))) ) );
+(SELECT * FROM OV_Book AS self
+WHERE NOT (((SELECT IFNULL(COUNT(temp1.FK_books),0)
+FROM ASS_author_books AS temp1
+INNER JOIN ASS_author_books AS temp2 ON temp1.FK_author = temp2.FK_author
+INNER JOIN ASS_author_books AS temp3 ON temp2.FK_books = temp3.FK_books
+INNER JOIN ASS_author_books AS temp4 ON temp3.FK_author = temp4.FK_author
+INNER JOIN ASS_author_books AS temp5 ON temp4.FK_books = temp5.FK_books
+INNER JOIN ASS_author_books AS temp6 ON temp5.FK_author = temp6.FK_author
+) = 1)));
 
 -- Context: Book
--- Expression: def: oclinvp24: Integer = Book.allInstances().author.books.author.books->collect(x|x.author.books->includes(x))->size()
+-- Expression: inv oclinvp24: Book.allInstances().author.books.author.books->collect(x|x.author.books->includes(x))->size() = 1
 CREATE OR REPLACE VIEW oclinvp24 AS
-(SELECT
-  IF(COUNT(PK_Book) IS NULL,0,COUNT(PK_Book)) AS 'COUNT(PK_Book)'
-  FROM (OV_Book)
-  WHERE PK_Book IN (SELECT DISTINCT PK_Book FROM OV_Book
- WHERE PK_Book IN (SELECT DISTINCT PK_Book FROM OV_Book
- WHERE PK_Book IN (SELECT DISTINCT FK_books FROM ASS_author_books
- WHERE FK_author IN (SELECT DISTINCT PK_Writer FROM OV_Writer
- WHERE PK_Writer IN (SELECT DISTINCT PK_Writer FROM OV_Writer
- WHERE PK_Writer IN (SELECT DISTINCT FK_author FROM ASS_author_books
- WHERE FK_books IN (SELECT DISTINCT PK_Book FROM OV_Book )))))) ) );
+(SELECT * FROM OV_Book AS self
+WHERE NOT (((SELECT IFNULL(COUNT(temp3.FK_books IN
+  (temp1.FK_books)),0)
+FROM ASS_author_books AS temp1
+INNER JOIN ASS_author_books AS temp2 ON temp1.FK_author = temp2.FK_author
+INNER JOIN ASS_author_books AS temp3 ON temp2.FK_books = temp3.FK_books
+INNER JOIN ASS_author_books AS temp4 ON temp3.FK_author = temp4.FK_author
+INNER JOIN ASS_author_books AS temp5 ON temp4.FK_books = temp5.FK_books
+INNER JOIN ASS_author_books AS temp6 ON temp5.FK_author = temp6.FK_author
+) = 1)));
 
 -- Context: Book
 -- Expression: inv oclinvp25: Book.allInstances().author.books.author.books->forAll(x|x.author.books->includes(x))
 CREATE OR REPLACE VIEW oclinvp25 AS
-(SELECT * FROM Book AS SELF
-WHERE NOT (NOT EXISTS (
-  SELECT DISTINCT PK_Book FROM OV_Book
-   WHERE PK_Book IN (SELECT DISTINCT FK_books FROM ASS_author_books
-   WHERE FK_author IN (SELECT DISTINCT PK_Writer FROM OV_Writer
-   WHERE PK_Writer IN (SELECT DISTINCT PK_Writer FROM OV_Writer
-   WHERE PK_Writer IN (SELECT DISTINCT FK_author FROM ASS_author_books
-   WHERE FK_books IN (SELECT DISTINCT PK_Book FROM OV_Book WHERE PK_Book = SELF.PK_Book)))))
-  AND PK_Book IN (
-    SELECT PK_Book FROM OV_Book AS ALIAS6
-    WHERE NOT (PK_Book IN
-  (SELECT DISTINCT PK_Book FROM OV_Book
- WHERE PK_Book IN (SELECT DISTINCT FK_books FROM ASS_author_books
- WHERE FK_author IN (SELECT DISTINCT PK_Writer FROM OV_Writer
- WHERE PK_Writer IN (SELECT DISTINCT PK_Writer FROM OV_Writer
- WHERE PK_Writer IN (SELECT DISTINCT FK_author FROM ASS_author_books
- WHERE FK_books IN (SELECT DISTINCT PK_Book FROM OV_Book WHERE PK_Book = ALIAS6.PK_Book)))))))
-  )
-)));
+(SELECT * FROM OV_Book AS self
+WHERE NOT (NOT EXISTS((SELECT temp1.FK_books
+FROM ASS_author_books AS temp1
+INNER JOIN ASS_author_books AS temp2 ON temp1.FK_author = temp2.FK_author
+INNER JOIN ASS_author_books AS temp3 ON temp2.FK_books = temp3.FK_books
+INNER JOIN ASS_author_books AS temp4 ON temp3.FK_author = temp4.FK_author
+WHERE NOT(temp1.FK_books IN
+  ((SELECT temp5.FK_books
+FROM ASS_author_books AS temp5
+INNER JOIN ASS_author_books AS temp6 ON temp5.FK_author = temp6.FK_author
+ WHERE temp6.FK_books = temp1.FK_books)))))));
 
 -- Context: Book
--- Expression: def: oclinvp26: Integer = Book.allInstances().author.books.author.books->select(x|x.author.books->includes(x))->size()
+-- Expression: inv oclinvp26: Book.allInstances().author.books.author.books->select(x|x.author.books->includes(x))->size() = 1
 CREATE OR REPLACE VIEW oclinvp26 AS
-(SELECT
-  IF(COUNT(PK_Book) IS NULL,0,COUNT(PK_Book)) AS 'COUNT(PK_Book)'
-  FROM (OV_Book)
-  WHERE PK_Book IN ((SELECT DISTINCT PK_Book FROM OV_Book
- WHERE PK_Book IN (SELECT DISTINCT FK_books FROM ASS_author_books
- WHERE FK_author IN (SELECT DISTINCT PK_Writer FROM OV_Writer
- WHERE PK_Writer IN (SELECT DISTINCT PK_Writer FROM OV_Writer
- WHERE PK_Writer IN (SELECT DISTINCT FK_author FROM ASS_author_books
- WHERE FK_books IN (SELECT DISTINCT PK_Book FROM OV_Book )))))
-  AND PK_Book IN (
-    SELECT DISTINCT PK_Book FROM OV_Book AS ALIAS6
-    WHERE (PK_Book IN
-  (SELECT DISTINCT PK_Book FROM OV_Book
- WHERE PK_Book IN (SELECT DISTINCT FK_books FROM ASS_author_books
- WHERE FK_author IN (SELECT DISTINCT PK_Writer FROM OV_Writer
- WHERE PK_Writer IN (SELECT DISTINCT PK_Writer FROM OV_Writer
- WHERE PK_Writer IN (SELECT DISTINCT FK_author FROM ASS_author_books
- WHERE FK_books IN (SELECT DISTINCT PK_Book FROM OV_Book WHERE PK_Book = ALIAS6.PK_Book)))))))
-  )
-)) );
+(SELECT * FROM OV_Book AS self
+WHERE NOT (((SELECT IFNULL(COUNT(temp1.FK_books),0)
+FROM ASS_author_books AS temp1
+INNER JOIN ASS_author_books AS temp2 ON temp1.FK_author = temp2.FK_author
+INNER JOIN ASS_author_books AS temp3 ON temp2.FK_books = temp3.FK_books
+INNER JOIN ASS_author_books AS temp4 ON temp3.FK_author = temp4.FK_author
+WHERE temp1.FK_books IN
+  ((SELECT temp5.FK_books
+FROM ASS_author_books AS temp5
+INNER JOIN ASS_author_books AS temp6 ON temp5.FK_author = temp6.FK_author
+ WHERE temp6.FK_books = temp1.FK_books))) = 1)));
 
 -- Context: Book
--- Expression: def: oclinvp27: Integer = Book.allInstances().author.books.author.books->collect(x|x.author.books.title)->size()
+-- Expression: inv oclinvp27: Book.allInstances().author.books.author.books->collect(x|x.author.books.title)->size() = 1
 CREATE OR REPLACE VIEW oclinvp27 AS
-(SELECT
-  IF(COUNT(title) IS NULL,0,COUNT(title)) AS 'COUNT(title)'
-  FROM (OV_Book)
-  WHERE title IN (SELECT DISTINCT title FROM OV_Book
- WHERE PK_Book IN (SELECT DISTINCT PK_Book FROM OV_Book
- WHERE PK_Book IN (SELECT DISTINCT FK_books FROM ASS_author_books
- WHERE FK_author IN (SELECT DISTINCT PK_Writer FROM OV_Writer
- WHERE PK_Writer IN (SELECT DISTINCT PK_Writer FROM OV_Writer
- WHERE PK_Writer IN (SELECT DISTINCT FK_author FROM ASS_author_books
- WHERE FK_books IN (SELECT DISTINCT PK_Book FROM OV_Book )))))) ) );
+(SELECT * FROM OV_Book AS self
+WHERE NOT (((SELECT IFNULL(COUNT(temp1.title),0)
+FROM OV_Book AS temp1
+INNER JOIN ASS_author_books AS temp2 ON temp1.PK_Book = temp2.FK_books
+INNER JOIN ASS_author_books AS temp3 ON temp2.FK_author = temp3.FK_author
+INNER JOIN ASS_author_books AS temp4 ON temp3.FK_books = temp4.FK_books
+INNER JOIN ASS_author_books AS temp5 ON temp4.FK_author = temp5.FK_author
+INNER JOIN ASS_author_books AS temp6 ON temp5.FK_books = temp6.FK_books
+INNER JOIN ASS_author_books AS temp7 ON temp6.FK_author = temp7.FK_author
+) = 1)));
 
 -- Context: Book
--- Expression: def: oclinvp28: Integer = Book.allInstances().author.books.author.books->collect(x|x.author.books.title->size())->sum()
+-- Expression: inv oclinvp28: Book.allInstances().author.books.author.books->collect(x|x.author.books.title->size())->sum() = 1
 CREATE OR REPLACE VIEW oclinvp28 AS
-(SELECT
-  IF(SUM(title) IS NULL,0,SUM(title)) AS 'SUM(title)'
-  FROM OV_Book
-  WHERE title IN (SELECT DISTINCT title FROM OV_Book
- WHERE PK_Book IN (SELECT DISTINCT PK_Book FROM OV_Book
- WHERE PK_Book IN (SELECT DISTINCT FK_books FROM ASS_author_books
- WHERE FK_author IN (SELECT DISTINCT PK_Writer FROM OV_Writer
- WHERE PK_Writer IN (SELECT DISTINCT PK_Writer FROM OV_Writer
- WHERE PK_Writer IN (SELECT DISTINCT FK_author FROM ASS_author_books
- WHERE FK_books IN (SELECT DISTINCT PK_Book FROM OV_Book )))))) ));
+(SELECT * FROM OV_Book AS self
+WHERE NOT (((SELECT IFNULL(SUM(IF(temp1.title IS NULL,NULL,1)),0)
+FROM OV_Book AS temp1
+INNER JOIN ASS_author_books AS temp2 ON temp1.PK_Book = temp2.FK_books
+INNER JOIN ASS_author_books AS temp3 ON temp2.FK_author = temp3.FK_author
+INNER JOIN ASS_author_books AS temp4 ON temp3.FK_books = temp4.FK_books
+INNER JOIN ASS_author_books AS temp5 ON temp4.FK_author = temp5.FK_author
+INNER JOIN ASS_author_books AS temp6 ON temp5.FK_books = temp6.FK_books
+INNER JOIN ASS_author_books AS temp7 ON temp6.FK_author = temp7.FK_author
+) = 1)));
 
 -- Context: Book
 -- Expression: inv oclinvp29: Book.allInstances().author.books.author.books->forAll(x|x.author.books.title->excludes('Hobbit'))
 CREATE OR REPLACE VIEW oclinvp29 AS
-(SELECT * FROM Book AS SELF
-WHERE NOT (NOT EXISTS (
-  SELECT DISTINCT PK_Book FROM OV_Book
-   WHERE PK_Book IN (SELECT DISTINCT FK_books FROM ASS_author_books
-   WHERE FK_author IN (SELECT DISTINCT PK_Writer FROM OV_Writer
-   WHERE PK_Writer IN (SELECT DISTINCT PK_Writer FROM OV_Writer
-   WHERE PK_Writer IN (SELECT DISTINCT FK_author FROM ASS_author_books
-   WHERE FK_books IN (SELECT DISTINCT PK_Book FROM OV_Book WHERE PK_Book = SELF.PK_Book)))))
-  AND PK_Book IN (
-    SELECT PK_Book FROM OV_Book AS ALIAS6
-    WHERE NOT ('Hobbit' NOT IN
-  (SELECT DISTINCT title FROM OV_Book
- WHERE PK_Book IN (SELECT DISTINCT PK_Book FROM OV_Book
- WHERE PK_Book IN (SELECT DISTINCT FK_books FROM ASS_author_books
- WHERE FK_author IN (SELECT DISTINCT PK_Writer FROM OV_Writer
- WHERE PK_Writer IN (SELECT DISTINCT PK_Writer FROM OV_Writer
- WHERE PK_Writer IN (SELECT DISTINCT FK_author FROM ASS_author_books
- WHERE FK_books IN (SELECT DISTINCT PK_Book FROM OV_Book WHERE PK_Book = ALIAS6.PK_Book)))))) ))
-  )
-)));
+(SELECT * FROM OV_Book AS self
+WHERE NOT (NOT EXISTS((SELECT temp1.FK_books
+FROM ASS_author_books AS temp1
+INNER JOIN ASS_author_books AS temp2 ON temp1.FK_author = temp2.FK_author
+INNER JOIN ASS_author_books AS temp3 ON temp2.FK_books = temp3.FK_books
+INNER JOIN ASS_author_books AS temp4 ON temp3.FK_author = temp4.FK_author
+WHERE NOT('Hobbit' NOT IN
+  ((SELECT temp5.title
+FROM OV_Book AS temp5
+INNER JOIN ASS_author_books AS temp6 ON temp5.PK_Book = temp6.FK_books
+INNER JOIN ASS_author_books AS temp7 ON temp6.FK_author = temp7.FK_author
+ WHERE temp7.FK_books = temp1.FK_books)))))));
 
 -- Context: Book
--- Expression: def: oclinvp31: Integer = Book.allInstances().author.books.author.books.author.books->collect(x|x.title)->size()
+-- Expression: inv oclinvp31: Book.allInstances().author.books.author.books.author.books->collect(x|x.title)->size() = 1
 CREATE OR REPLACE VIEW oclinvp31 AS
-(SELECT
-  IF(COUNT(title) IS NULL,0,COUNT(title)) AS 'COUNT(title)'
-  FROM (OV_Book)
-  WHERE title IN (SELECT DISTINCT title FROM OV_Book
- WHERE PK_Book IN (SELECT DISTINCT PK_Book FROM OV_Book
- WHERE PK_Book IN (SELECT DISTINCT FK_books FROM ASS_author_books
- WHERE FK_author IN (SELECT DISTINCT PK_Writer FROM OV_Writer
- WHERE PK_Writer IN (SELECT DISTINCT PK_Writer FROM OV_Writer
- WHERE PK_Writer IN (SELECT DISTINCT FK_author FROM ASS_author_books
- WHERE FK_books IN (SELECT DISTINCT PK_Book FROM OV_Book )))))) ) );
+(SELECT * FROM OV_Book AS self
+WHERE NOT (((SELECT IFNULL(COUNT(temp1.title),0)
+FROM OV_Book AS temp1
+INNER JOIN ASS_author_books AS temp2 ON temp1.PK_Book = temp2.FK_books
+INNER JOIN ASS_author_books AS temp3 ON temp2.FK_author = temp3.FK_author
+INNER JOIN ASS_author_books AS temp4 ON temp3.FK_books = temp4.FK_books
+INNER JOIN ASS_author_books AS temp5 ON temp4.FK_author = temp5.FK_author
+INNER JOIN ASS_author_books AS temp6 ON temp5.FK_books = temp6.FK_books
+INNER JOIN ASS_author_books AS temp7 ON temp6.FK_author = temp7.FK_author
+) = 1)));
 
 -- Context: Book
--- Expression: def: oclinvp32: Integer = Book.allInstances().author.books.author.books.author.books->collect(x|x.title <> 'Hobbit')->size()
+-- Expression: inv oclinvp32: Book.allInstances().author.books.author.books.author.books->collect(x|x.title <> 'Hobbit')->size() = 1
 CREATE OR REPLACE VIEW oclinvp32 AS
-(SELECT
-  IF(COUNT(title) IS NULL,0,COUNT(title)) AS 'COUNT(title)'
-  FROM (OV_Book)
-  WHERE title IN (SELECT DISTINCT title FROM OV_Book
- WHERE PK_Book IN (SELECT DISTINCT PK_Book FROM OV_Book
- WHERE PK_Book IN (SELECT DISTINCT FK_books FROM ASS_author_books
- WHERE FK_author IN (SELECT DISTINCT PK_Writer FROM OV_Writer
- WHERE PK_Writer IN (SELECT DISTINCT PK_Writer FROM OV_Writer
- WHERE PK_Writer IN (SELECT DISTINCT FK_author FROM ASS_author_books
- WHERE FK_books IN (SELECT DISTINCT PK_Book FROM OV_Book )))))) ) );
+(SELECT * FROM OV_Book AS self
+WHERE NOT (((SELECT IFNULL(COUNT(NOT (temp1.title = 'Hobbit')),0)
+FROM OV_Book AS temp1
+INNER JOIN ASS_author_books AS temp2 ON temp1.PK_Book = temp2.FK_books
+INNER JOIN ASS_author_books AS temp3 ON temp2.FK_author = temp3.FK_author
+INNER JOIN ASS_author_books AS temp4 ON temp3.FK_books = temp4.FK_books
+INNER JOIN ASS_author_books AS temp5 ON temp4.FK_author = temp5.FK_author
+INNER JOIN ASS_author_books AS temp6 ON temp5.FK_books = temp6.FK_books
+INNER JOIN ASS_author_books AS temp7 ON temp6.FK_author = temp7.FK_author
+) = 1)));
 
 -- Context: Book
--- Expression: def: oclinvp33: Integer = Book.allInstances().author.books.author.books.author.books->collect(x|x.author.books)->size()
+-- Expression: inv oclinvp33: Book.allInstances().author.books.author.books.author.books->collect(x|x.author.books)->size() = 1
 CREATE OR REPLACE VIEW oclinvp33 AS
-(SELECT
-  IF(COUNT(PK_Book) IS NULL,0,COUNT(PK_Book)) AS 'COUNT(PK_Book)'
-  FROM (OV_Book)
-  WHERE PK_Book IN (SELECT DISTINCT PK_Book FROM OV_Book
- WHERE PK_Book IN (SELECT DISTINCT PK_Book FROM OV_Book
- WHERE PK_Book IN (SELECT DISTINCT FK_books FROM ASS_author_books
- WHERE FK_author IN (SELECT DISTINCT PK_Writer FROM OV_Writer
- WHERE PK_Writer IN (SELECT DISTINCT PK_Writer FROM OV_Writer
- WHERE PK_Writer IN (SELECT DISTINCT FK_author FROM ASS_author_books
- WHERE FK_books IN (SELECT DISTINCT PK_Book FROM OV_Book )))))) ) );
+(SELECT * FROM OV_Book AS self
+WHERE NOT (((SELECT IFNULL(COUNT(temp1.FK_books),0)
+FROM ASS_author_books AS temp1
+INNER JOIN ASS_author_books AS temp2 ON temp1.FK_author = temp2.FK_author
+INNER JOIN ASS_author_books AS temp3 ON temp2.FK_books = temp3.FK_books
+INNER JOIN ASS_author_books AS temp4 ON temp3.FK_author = temp4.FK_author
+INNER JOIN ASS_author_books AS temp5 ON temp4.FK_books = temp5.FK_books
+INNER JOIN ASS_author_books AS temp6 ON temp5.FK_author = temp6.FK_author
+INNER JOIN ASS_author_books AS temp7 ON temp6.FK_books = temp7.FK_books
+INNER JOIN ASS_author_books AS temp8 ON temp7.FK_author = temp8.FK_author
+) = 1)));
 
 -- Context: Book
--- Expression: def: oclinvp34: Integer = Book.allInstances().author.books.author.books.author.books->collect(x|x.author.books->includes(x))->size()
+-- Expression: inv oclinvp34: Book.allInstances().author.books.author.books.author.books->collect(x|x.author.books->includes(x))->size() = 1
 CREATE OR REPLACE VIEW oclinvp34 AS
-(SELECT
-  IF(COUNT(PK_Book) IS NULL,0,COUNT(PK_Book)) AS 'COUNT(PK_Book)'
-  FROM (OV_Book)
-  WHERE PK_Book IN (SELECT DISTINCT PK_Book FROM OV_Book
- WHERE PK_Book IN (SELECT DISTINCT PK_Book FROM OV_Book
- WHERE PK_Book IN (SELECT DISTINCT FK_books FROM ASS_author_books
- WHERE FK_author IN (SELECT DISTINCT PK_Writer FROM OV_Writer
- WHERE PK_Writer IN (SELECT DISTINCT PK_Writer FROM OV_Writer
- WHERE PK_Writer IN (SELECT DISTINCT FK_author FROM ASS_author_books
- WHERE FK_books IN (SELECT DISTINCT PK_Book FROM OV_Book )))))) ) );
+(SELECT * FROM OV_Book AS self
+WHERE NOT (((SELECT IFNULL(COUNT(temp3.FK_books IN
+  (temp1.FK_books)),0)
+FROM ASS_author_books AS temp1
+INNER JOIN ASS_author_books AS temp2 ON temp1.FK_author = temp2.FK_author
+INNER JOIN ASS_author_books AS temp3 ON temp2.FK_books = temp3.FK_books
+INNER JOIN ASS_author_books AS temp4 ON temp3.FK_author = temp4.FK_author
+INNER JOIN ASS_author_books AS temp5 ON temp4.FK_books = temp5.FK_books
+INNER JOIN ASS_author_books AS temp6 ON temp5.FK_author = temp6.FK_author
+INNER JOIN ASS_author_books AS temp7 ON temp6.FK_books = temp7.FK_books
+INNER JOIN ASS_author_books AS temp8 ON temp7.FK_author = temp8.FK_author
+) = 1)));
 
 -- Context: Book
 -- Expression: inv oclinvp35: Book.allInstances().author.books.author.books.author.books->forAll(x|x.author.books->includes(x))
 CREATE OR REPLACE VIEW oclinvp35 AS
-(SELECT * FROM Book AS SELF
-WHERE NOT (NOT EXISTS (
-  SELECT DISTINCT PK_Book FROM OV_Book
-   WHERE PK_Book IN (SELECT DISTINCT FK_books FROM ASS_author_books
-   WHERE FK_author IN (SELECT DISTINCT PK_Writer FROM OV_Writer
-   WHERE PK_Writer IN (SELECT DISTINCT PK_Writer FROM OV_Writer
-   WHERE PK_Writer IN (SELECT DISTINCT FK_author FROM ASS_author_books
-   WHERE FK_books IN (SELECT DISTINCT PK_Book FROM OV_Book WHERE PK_Book = SELF.PK_Book)))))
-  AND PK_Book IN (
-    SELECT PK_Book FROM OV_Book AS ALIAS8
-    WHERE NOT (PK_Book IN
-  (SELECT DISTINCT PK_Book FROM OV_Book
- WHERE PK_Book IN (SELECT DISTINCT FK_books FROM ASS_author_books
- WHERE FK_author IN (SELECT DISTINCT PK_Writer FROM OV_Writer
- WHERE PK_Writer IN (SELECT DISTINCT PK_Writer FROM OV_Writer
- WHERE PK_Writer IN (SELECT DISTINCT FK_author FROM ASS_author_books
- WHERE FK_books IN (SELECT DISTINCT PK_Book FROM OV_Book WHERE PK_Book = ALIAS8.PK_Book)))))))
-  )
-)));
+(SELECT * FROM OV_Book AS self
+WHERE NOT (NOT EXISTS((SELECT temp1.FK_books
+FROM ASS_author_books AS temp1
+INNER JOIN ASS_author_books AS temp2 ON temp1.FK_author = temp2.FK_author
+INNER JOIN ASS_author_books AS temp3 ON temp2.FK_books = temp3.FK_books
+INNER JOIN ASS_author_books AS temp4 ON temp3.FK_author = temp4.FK_author
+INNER JOIN ASS_author_books AS temp5 ON temp4.FK_books = temp5.FK_books
+INNER JOIN ASS_author_books AS temp6 ON temp5.FK_author = temp6.FK_author
+WHERE NOT(temp1.FK_books IN
+  ((SELECT temp7.FK_books
+FROM ASS_author_books AS temp7
+INNER JOIN ASS_author_books AS temp8 ON temp7.FK_author = temp8.FK_author
+ WHERE temp8.FK_books = temp1.FK_books)))))));
 
 -- Context: Book
--- Expression: def: oclinvp36: Integer = Book.allInstances().author.books.author.books.author.books->select(x|x.author.books->includes(x))->size()
+-- Expression: inv oclinvp36: Book.allInstances().author.books.author.books.author.books->select(x|x.author.books->includes(x))->size() = 1
 CREATE OR REPLACE VIEW oclinvp36 AS
-(SELECT
-  IF(COUNT(PK_Book) IS NULL,0,COUNT(PK_Book)) AS 'COUNT(PK_Book)'
-  FROM (OV_Book)
-  WHERE PK_Book IN ((SELECT DISTINCT PK_Book FROM OV_Book
- WHERE PK_Book IN (SELECT DISTINCT FK_books FROM ASS_author_books
- WHERE FK_author IN (SELECT DISTINCT PK_Writer FROM OV_Writer
- WHERE PK_Writer IN (SELECT DISTINCT PK_Writer FROM OV_Writer
- WHERE PK_Writer IN (SELECT DISTINCT FK_author FROM ASS_author_books
- WHERE FK_books IN (SELECT DISTINCT PK_Book FROM OV_Book )))))
-  AND PK_Book IN (
-    SELECT DISTINCT PK_Book FROM OV_Book AS ALIAS8
-    WHERE (PK_Book IN
-  (SELECT DISTINCT PK_Book FROM OV_Book
- WHERE PK_Book IN (SELECT DISTINCT FK_books FROM ASS_author_books
- WHERE FK_author IN (SELECT DISTINCT PK_Writer FROM OV_Writer
- WHERE PK_Writer IN (SELECT DISTINCT PK_Writer FROM OV_Writer
- WHERE PK_Writer IN (SELECT DISTINCT FK_author FROM ASS_author_books
- WHERE FK_books IN (SELECT DISTINCT PK_Book FROM OV_Book WHERE PK_Book = ALIAS8.PK_Book)))))))
-  )
-)) );
+(SELECT * FROM OV_Book AS self
+WHERE NOT (((SELECT IFNULL(COUNT(temp1.FK_books),0)
+FROM ASS_author_books AS temp1
+INNER JOIN ASS_author_books AS temp2 ON temp1.FK_author = temp2.FK_author
+INNER JOIN ASS_author_books AS temp3 ON temp2.FK_books = temp3.FK_books
+INNER JOIN ASS_author_books AS temp4 ON temp3.FK_author = temp4.FK_author
+INNER JOIN ASS_author_books AS temp5 ON temp4.FK_books = temp5.FK_books
+INNER JOIN ASS_author_books AS temp6 ON temp5.FK_author = temp6.FK_author
+WHERE temp1.FK_books IN
+  ((SELECT temp7.FK_books
+FROM ASS_author_books AS temp7
+INNER JOIN ASS_author_books AS temp8 ON temp7.FK_author = temp8.FK_author
+ WHERE temp8.FK_books = temp1.FK_books))) = 1)));
 
 -- Context: Book
--- Expression: def: oclinvp37: Integer =  Book.allInstances().author.books.author.books.author.books->collect(x|x.author.books.title)->size()
+-- Expression: inv oclinvp37: Book.allInstances().author.books.author.books.author.books->collect(x|x.author.books.title)->size() = 1
 CREATE OR REPLACE VIEW oclinvp37 AS
-(SELECT
-  IF(COUNT(title) IS NULL,0,COUNT(title)) AS 'COUNT(title)'
-  FROM (OV_Book)
-  WHERE title IN (SELECT DISTINCT title FROM OV_Book
- WHERE PK_Book IN (SELECT DISTINCT PK_Book FROM OV_Book
- WHERE PK_Book IN (SELECT DISTINCT FK_books FROM ASS_author_books
- WHERE FK_author IN (SELECT DISTINCT PK_Writer FROM OV_Writer
- WHERE PK_Writer IN (SELECT DISTINCT PK_Writer FROM OV_Writer
- WHERE PK_Writer IN (SELECT DISTINCT FK_author FROM ASS_author_books
- WHERE FK_books IN (SELECT DISTINCT PK_Book FROM OV_Book )))))) ) );
+(SELECT * FROM OV_Book AS self
+WHERE NOT (((SELECT IFNULL(COUNT(temp1.title),0)
+FROM OV_Book AS temp1
+INNER JOIN ASS_author_books AS temp2 ON temp1.PK_Book = temp2.FK_books
+INNER JOIN ASS_author_books AS temp3 ON temp2.FK_author = temp3.FK_author
+INNER JOIN ASS_author_books AS temp4 ON temp3.FK_books = temp4.FK_books
+INNER JOIN ASS_author_books AS temp5 ON temp4.FK_author = temp5.FK_author
+INNER JOIN ASS_author_books AS temp6 ON temp5.FK_books = temp6.FK_books
+INNER JOIN ASS_author_books AS temp7 ON temp6.FK_author = temp7.FK_author
+INNER JOIN ASS_author_books AS temp8 ON temp7.FK_books = temp8.FK_books
+INNER JOIN ASS_author_books AS temp9 ON temp8.FK_author = temp9.FK_author
+) = 1)));
 
 -- Context: Book
--- Expression: def: oclinvp38: Integer = Book.allInstances().author.books.author.books.author.books->collect(x|x.author.books.title->size())->sum()
+-- Expression: inv oclinvp38: Book.allInstances().author.books.author.books.author.books->collect(x|x.author.books.title->size())->sum() = 1
 CREATE OR REPLACE VIEW oclinvp38 AS
-(SELECT
-  IF(SUM(title) IS NULL,0,SUM(title)) AS 'SUM(title)'
-  FROM OV_Book
-  WHERE title IN (SELECT DISTINCT title FROM OV_Book
- WHERE PK_Book IN (SELECT DISTINCT PK_Book FROM OV_Book
- WHERE PK_Book IN (SELECT DISTINCT FK_books FROM ASS_author_books
- WHERE FK_author IN (SELECT DISTINCT PK_Writer FROM OV_Writer
- WHERE PK_Writer IN (SELECT DISTINCT PK_Writer FROM OV_Writer
- WHERE PK_Writer IN (SELECT DISTINCT FK_author FROM ASS_author_books
- WHERE FK_books IN (SELECT DISTINCT PK_Book FROM OV_Book )))))) ));
+(SELECT * FROM OV_Book AS self
+WHERE NOT (((SELECT IFNULL(SUM(IF(temp1.title IS NULL,NULL,1)),0)
+FROM OV_Book AS temp1
+INNER JOIN ASS_author_books AS temp2 ON temp1.PK_Book = temp2.FK_books
+INNER JOIN ASS_author_books AS temp3 ON temp2.FK_author = temp3.FK_author
+INNER JOIN ASS_author_books AS temp4 ON temp3.FK_books = temp4.FK_books
+INNER JOIN ASS_author_books AS temp5 ON temp4.FK_author = temp5.FK_author
+INNER JOIN ASS_author_books AS temp6 ON temp5.FK_books = temp6.FK_books
+INNER JOIN ASS_author_books AS temp7 ON temp6.FK_author = temp7.FK_author
+INNER JOIN ASS_author_books AS temp8 ON temp7.FK_books = temp8.FK_books
+INNER JOIN ASS_author_books AS temp9 ON temp8.FK_author = temp9.FK_author
+) = 1)));
 
 -- Context: Book
 -- Expression: inv oclinvp39: Book.allInstances().author.books.author.books.author.books->forAll(x|x.author.books.title->excludes('Hobbit'))
 CREATE OR REPLACE VIEW oclinvp39 AS
-(SELECT * FROM Book AS SELF
-WHERE NOT (NOT EXISTS (
-  SELECT DISTINCT PK_Book FROM OV_Book
-   WHERE PK_Book IN (SELECT DISTINCT FK_books FROM ASS_author_books
-   WHERE FK_author IN (SELECT DISTINCT PK_Writer FROM OV_Writer
-   WHERE PK_Writer IN (SELECT DISTINCT PK_Writer FROM OV_Writer
-   WHERE PK_Writer IN (SELECT DISTINCT FK_author FROM ASS_author_books
-   WHERE FK_books IN (SELECT DISTINCT PK_Book FROM OV_Book WHERE PK_Book = SELF.PK_Book)))))
-  AND PK_Book IN (
-    SELECT PK_Book FROM OV_Book AS ALIAS8
-    WHERE NOT ('Hobbit' NOT IN
-  (SELECT DISTINCT title FROM OV_Book
- WHERE PK_Book IN (SELECT DISTINCT PK_Book FROM OV_Book
- WHERE PK_Book IN (SELECT DISTINCT FK_books FROM ASS_author_books
- WHERE FK_author IN (SELECT DISTINCT PK_Writer FROM OV_Writer
- WHERE PK_Writer IN (SELECT DISTINCT PK_Writer FROM OV_Writer
- WHERE PK_Writer IN (SELECT DISTINCT FK_author FROM ASS_author_books
- WHERE FK_books IN (SELECT DISTINCT PK_Book FROM OV_Book WHERE PK_Book = ALIAS8.PK_Book)))))) ))
-  )
-)));
+(SELECT * FROM OV_Book AS self
+WHERE NOT (NOT EXISTS((SELECT temp1.FK_books
+FROM ASS_author_books AS temp1
+INNER JOIN ASS_author_books AS temp2 ON temp1.FK_author = temp2.FK_author
+INNER JOIN ASS_author_books AS temp3 ON temp2.FK_books = temp3.FK_books
+INNER JOIN ASS_author_books AS temp4 ON temp3.FK_author = temp4.FK_author
+INNER JOIN ASS_author_books AS temp5 ON temp4.FK_books = temp5.FK_books
+INNER JOIN ASS_author_books AS temp6 ON temp5.FK_author = temp6.FK_author
+WHERE NOT('Hobbit' NOT IN
+  ((SELECT temp7.title
+FROM OV_Book AS temp7
+INNER JOIN ASS_author_books AS temp8 ON temp7.PK_Book = temp8.FK_books
+INNER JOIN ASS_author_books AS temp9 ON temp8.FK_author = temp9.FK_author
+ WHERE temp9.FK_books = temp1.FK_books)))))));

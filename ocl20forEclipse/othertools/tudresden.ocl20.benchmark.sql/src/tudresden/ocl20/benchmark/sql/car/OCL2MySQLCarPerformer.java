@@ -17,7 +17,7 @@ public class OCL2MySQLCarPerformer extends MySqlPerformer implements
 	 */
 	public OCL2MySQLCarPerformer(String file, String fileStop) {
 
-		super(file, fileStop);
+		super(file, fileStop, false);
 	}
 
 	public void addCar(String carName, String model, String color) {

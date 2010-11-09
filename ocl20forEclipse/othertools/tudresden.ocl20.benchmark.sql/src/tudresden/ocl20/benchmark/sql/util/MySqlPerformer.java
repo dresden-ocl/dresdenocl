@@ -8,6 +8,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
 
@@ -15,14 +17,20 @@ public abstract class MySqlPerformer implements IPerformer {
 
 	protected Statement stmt;
 
-	protected Map<String, String> oclConstraints;
+	protected Map<String, String[]> oclConstraints;
+
+	protected List<String> statements;
 
 	protected String fileStop;
 
-	protected MySqlPerformer(String file, String fileStop) {
+	protected boolean constraint;
 
-		oclConstraints = new HashMap<String, String>();
+	protected MySqlPerformer(String file, String fileStop, boolean constraint) {
+
+		oclConstraints = new HashMap<String, String[]>();
+		statements = new LinkedList<String>();
 		this.fileStop = fileStop;
+		this.constraint = constraint;
 		try {
 			stmt =
 					DriverManager.getConnection(
@@ -36,21 +44,26 @@ public abstract class MySqlPerformer implements IPerformer {
 		}
 	}
 
-	public String sendQuery(String query) throws Exception {
+	public boolean sendQuery(String query) throws Exception {
+
 		if (!this.oclConstraints.containsKey(query))
 			throw new NoSuchElementException();
 		ResultSet rs = null;
-		for (String s : this.oclConstraints.get(query).split(";")) {
-			if (s == null) continue;
+		for (String s : this.oclConstraints.get(query)[0].split(";")) {
+			if (s == null)
+				continue;
 			rs = stmt.executeQuery(s);
 		}
 		rs.next();
-		return rs.getString(1);
+		// System.out.println(this.getName()+":"+rs.getString(1));
+		return rs.getString(1).equals(this.oclConstraints.get(query)[1]);
 	}
 
-	public void addQueryString(String oclString, String runningString) {
+	public void addQueryString(String oclString, String runningString,
+			String solution) {
 
-		this.oclConstraints.put(oclString, runningString);
+		this.oclConstraints
+				.put(oclString, new String[] { runningString, solution });
 	}
 
 	public void runAdd() {
@@ -85,6 +98,9 @@ public abstract class MySqlPerformer implements IPerformer {
 			while ((zeile = in.readLine()) != null) {
 				if (zeile.equals(""))
 					continue;
+				if (zeile.startsWith("-- Context:")) {
+					continue;
+				}
 				if (zeile.startsWith("--"))
 					continue;
 				if (zeile.startsWith("delimiter")) {
@@ -92,7 +108,12 @@ public abstract class MySqlPerformer implements IPerformer {
 					continue;
 				}
 				else if (zeile.endsWith(delimiter)) {
-					stmt.addBatch(temp + zeile.replace(delimiter, ""));
+					if (constraint && (temp.contains("CREATE OR REPLACE"))) {
+						statements.add(temp + zeile.replace(delimiter, ""));
+					}
+					else {
+						stmt.addBatch(temp + zeile.replace(delimiter, ""));
+					}
 					temp = "";
 				}
 				else {

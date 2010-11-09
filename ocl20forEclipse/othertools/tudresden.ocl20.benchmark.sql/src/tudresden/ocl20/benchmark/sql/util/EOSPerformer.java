@@ -1,7 +1,7 @@
 package tudresden.ocl20.benchmark.sql.util;
 
-import java.util.LinkedList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.NoSuchElementException;
 
 import core.IEOS;
@@ -10,11 +10,11 @@ public abstract class EOSPerformer implements IPerformer {
 
 	protected IEOS ieos;
 
-	private List<String> oclConstraints;
+	private Map<String, String> oclConstraints;
 
 	protected EOSPerformer() {
 
-		oclConstraints = new LinkedList<String>();
+		oclConstraints = new HashMap<String, String>();
 	}
 
 	protected void finalize() throws Throwable {
@@ -22,16 +22,17 @@ public abstract class EOSPerformer implements IPerformer {
 		ieos.exit();
 	}
 
-	public String sendQuery(String query) throws Exception {
+	public boolean sendQuery(String query) throws Exception {
 
-		if (!this.oclConstraints.contains(query))
+		if (!oclConstraints.containsKey(query))
 			throw new NoSuchElementException();
-		return ieos.query(query);
+		return ieos.query(query).equals(oclConstraints.get(query));
 	}
 
-	public void addQueryString(String oclString, String runningString) {
+	public void addQueryString(String oclString, String runningString,
+			String result) {
 
-		this.oclConstraints.add(oclString);
+		oclConstraints.put(oclString, result);
 
 	}
 
