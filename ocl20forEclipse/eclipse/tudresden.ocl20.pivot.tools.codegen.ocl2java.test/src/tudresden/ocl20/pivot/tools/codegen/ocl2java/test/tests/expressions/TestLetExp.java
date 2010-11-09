@@ -90,4 +90,17 @@ public class TestLetExp extends AbstractDiffTest {
 
 		this.compareFragmentCodeGeneration("expressions", "let02");
 	}
+	
+	/**
+	 * <p>
+	 * Tests the fragment code generation of the constraint.
+	 * </p>
+	 * 
+	 * @throws Exception
+	 */
+	@Test
+	public void testLet03() throws Exception {
+
+		this.compareFragmentCodeGeneration("expressions", "let03");
+	}
 }

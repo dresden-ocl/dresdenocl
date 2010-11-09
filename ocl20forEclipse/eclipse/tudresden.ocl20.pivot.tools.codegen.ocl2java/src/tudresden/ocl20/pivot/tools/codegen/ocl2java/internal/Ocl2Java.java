@@ -921,7 +921,7 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 
 		ITemplate template = this.templateGroup.getTemplate("letExp");
 		template.setAttribute("varType", this.transformType(aVarsType)
-				.getTypeName());
+				.toString());
 
 		String varName = aVar.getName();
 		if (this.environment.existsMappingForVariable(varName))
@@ -3321,9 +3321,8 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 
 			elementTypeInJava = this.transformType(elementType);
 
-			if (!elementTypeInJava.equals("null")) {
+			if (!elementTypeInJava.equals("null"))
 				result.setGenericType(elementTypeInJava);
-			}
 			// no else.
 		}
 		// no else.

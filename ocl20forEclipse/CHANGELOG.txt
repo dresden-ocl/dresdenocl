@@ -19,6 +19,7 @@ Release 3.X (Not scheduled yet)
     accessed directly from other classes.
   - Type Literals are now transformed correctly in all known contexts.
   - InvalidLiterals should now be transformed correctly in all known contexts.
+  - Generic types in LetExpressions are now transformed correctly.
 
 Tests
 -----

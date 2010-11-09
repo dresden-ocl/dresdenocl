@@ -1,0 +1,11 @@
+java.util.Collection<String> col;
+java.util.HashSet<String> collection1;
+collection1 = new java.util.HashSet<String>();
+
+collection1.add("first");
+collection1.add("second");
+
+col = collection1;
+
+
+col
