@@ -2,7 +2,7 @@
 <feature
       id="tudresden.ocl20.feature.parser"
       label="Dresden OCL Parser and Editor Feature"
-      version="3.0.1.qualifier"
+      version="3.0.2.qualifier"
       provider-name="TU Dresden, Software Technology Group">
 
    <description url="http://dresden-ocl.sourceforge.net/4eclipse_packages.html">
@@ -207,10 +207,11 @@ Library.
       <import plugin="tudresden.ocl20.pivot.essentialocl.standardlibrary"/>
       <import plugin="tudresden.ocl20.pivot.model"/>
       <import plugin="tudresden.ocl20.pivot.essentialocl" version="2.1.0" match="greaterOrEqual"/>
+      <import plugin="org.emftext.access"/>
       <import plugin="org.junit4" version="4.0.0" match="greaterOrEqual"/>
       <import plugin="tudresden.ocl20.pivot.testsuite" version="2.1.0" match="greaterOrEqual"/>
       <import plugin="tudresden.ocl20.pivot.facade" version="2.1.0" match="greaterOrEqual"/>
-      <import plugin="org.emftext.access"/>
+      <import plugin="org.emftext.commons.antlr3_2_0"/>
    </requires>
 
    <plugin
@@ -277,13 +278,6 @@ Library.
 
    <plugin
          id="tudresden.ocl20.pivot.pivotmodel.semantics"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.emftext.commons.antlr3_2_0"
          download-size="0"
          install-size="0"
          version="0.0.0"

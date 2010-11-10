@@ -9,6 +9,8 @@ Release 3.X (Not scheduled yet)
   
 * Some bugs of the OCL Parser / Editor have been fixed.
   - Derive and Init constraints defined for static properties are now parsed correctly.
+  - The escape underscore for reserved words can now be used.
+  - The ASM of nested LetExpressions now has the right order.
   
 * Improvemens on Ocl2Java
   - Generated aspects are named according to their constraints.

@@ -2,7 +2,7 @@
 <feature
       id="tudresden.ocl20.feature.examples"
       label="Dresden OCL2 for Eclipse Examples"
-      version="3.0.1.qualifier"
+      version="3.0.2.qualifier"
       provider-name="TU Dresden, Software Technology Group">
    <install-handler library="" handler=""/>
 

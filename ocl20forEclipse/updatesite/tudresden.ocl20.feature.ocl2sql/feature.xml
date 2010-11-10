@@ -2,7 +2,7 @@
 <feature
       id="tudresden.ocl20.feature.ocl2sql"
       label="Dresden OCL Ocl2Sql"
-      version="3.0.1.qualifier"
+      version="3.0.2.qualifier"
       provider-name="TU Dresden, Software Technoloy Group">
 
    <description url="http://www.example.com/description">
