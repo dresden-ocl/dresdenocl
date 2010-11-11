@@ -563,10 +563,11 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ISQLCode> implements
 
 		Guide guideSrc = srcGuides.get(0);
 		guideSrc.reset();
-		if (guideSrc.numberOfSteps() > 1 && !operationName.equals("collect")) {
+		if (guideSrc.numberOfSteps() > 1) {
 			guideSrc = new Guide(guideSrc.isNavigation(), guideSrc.getAlias());
 			guideSrc.add(srcGuides.get(0).getSelect(), srcGuides.get(0).getFrom(),
 					srcGuides.get(0).getWhere());
+			guideSrc.reset();
 		}
 		// evaluate the arguments
 		for (Variable v : anIteratorExp.getIterator()) {
@@ -584,38 +585,21 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ISQLCode> implements
 			nav.addAll(srcGuides);
 			navigationMap.put(anIteratorExp, nav);
 			if (arg != null) {
-				if (arg.getElement("operand") != null
-						&& bodyExp instanceof OperationCallExp) {
-					ISQLCode operand = arg.getElement("operand");
-					result =
-							createCollectStatement(operand, sourceCode, guideSrc,
-									((OperationCallExp) bodyExp).getSource());
-					arg.changeElement("operand", choiceCollectObject(operand));
-					result.changeElement("object", arg);
+				Guide guideBody = navigationMap.get(bodyExp).get(0);
+				guideBody.reset();
+				boolean temp =
+						Boolean.valueOf(mySettings.getTemplateGroup()
+								.getTemplate("check_database_references").toString());
+				if (temp && guideSrc.getAlias().equals(guideBody.getAlias())
+						&& !guideSrc.getFrom().equals(guideBody.getFrom())) {
+					guideBody.setAlias(mySettings.getMappedModel().getUniqueAlias());
+					arg = createSelectStatement(navigationMap.get(bodyExp));
+					arg.changeElement("object", doSwitch(bodyExp));
 				}
-				else if (arg.getElement("operand1") != null
-						&& bodyExp instanceof OperationCallExp) {
-					ISQLCode operand1 = arg.getElement("operand1");
-					result =
-							createCollectStatement(operand1, sourceCode, guideSrc,
-									((OperationCallExp) bodyExp).getSource());
-					arg.changeElement("operand1", choiceCollectObject(result));
-					ISQLCode operand2 = arg.getElement("operand2");
-					arg.changeElement("operand2", choiceCollectObject(operand2));
-					result.changeElement("object", arg);
+				else if (!temp) {
+					guideSrc = srcGuides.get(0);
 				}
-				else {
-					result = createCollectStatement(arg, sourceCode, guideSrc, bodyExp);
-				}
-				if (arg.getElement("object") != null) {
-					String tempName = arg.getElement("object").getTemplateName();
-					if ("feature_call_count".equals(tempName)
-							|| "feature_call_sum".equals(tempName)
-							|| "feature_call_size".equals(tempName)) {
-						result.changeElement("groupby", createObjectValue(guideSrc));
-					}
-				}
-
+				result = createCollectStatement(arg, sourceCode, guideSrc, bodyExp);
 			}
 			else {
 				result = sourceCode;
@@ -1423,7 +1407,6 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ISQLCode> implements
 					&& ("feature_call_count".equals(tempName)
 							|| "feature_call_sum".equals(tempName) || "feature_call_size"
 							.equals(tempName))) {
-				sourceCode.changeElement("groupby", null);
 				ISQLCode code =
 						new SQLCode(mySettings.getTemplateGroup().getTemplate(
 								tempName + "_select"));
@@ -1945,7 +1928,6 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ISQLCode> implements
 		ISQLCode where =
 				new SQLCode(mySettings.getTemplateGroup().getTemplate(
 						"feature_call_navigation_where"));
-		guide2.reset();
 		where.addElement("alias1", new SQLString(guide2.getAlias()));
 		where.addElement("where", new SQLString(guide2.getWhere()));
 		where.addElement("alias2", new SQLString(guide1.getAlias()));
@@ -1983,8 +1965,6 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ISQLCode> implements
 	 */
 	protected ISQLCode createJoinStatement(Guide from, Guide where) {
 
-		from.reset();
-		where.reset();
 		ISQLCode template =
 				new SQLCode(mySettings.getTemplateGroup().getTemplate(
 						"feature_call_navigation_join"));
@@ -2268,72 +2248,49 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ISQLCode> implements
 				}
 			}
 			else {
-				while (join.getElement("join") != null
-						&& join.getElement("join").getElement("join") != null) {
+				while (join.getElement("join") != null) {
 					join = join.getElement("join");
 				}
 			}
-			ISQLCode where = null;
 			if (result.getElement("where") != null) {
 				if (result.getElement("where").getElement("operand1") != null) {
-					where = result.getElement("where").getElement("operand1");
 					result.changeElement("where",
 							result.getElement("where").getElement("operand2"));
 				}
 				else {
-					where = result.getElement("where");
 					result.changeElement("where", null);
 				}
 			}
 			if (sourceCode != null) {
+				srcGuide.reset();
+				bodyGuide.reset();
 				if (temp) {
 					join.changeElement("join", createJoinStatement(srcGuide, bodyGuide));
 					join = join.getElement("join");
-					if (where != null) {
-						// join.changeElement("alias", where.getElement("alias2"));
-						// .getElement("where").changeElement("alias2",
-						// where.getElement("alias2"));
-					}
 				}
 				else {
-					sourceCode.getElement("join").getElement("where")
-							.changeElement("alias1", join.getElement("alias"));
+					if (!srcGuide.getAlias().equals(bodyGuide.getAlias())
+							&& srcGuide.numberOfSteps() > 1) {
+						while (bodyGuide.hasNext()) {
+							bodyGuide.next();
+						}
+						join.changeElement("join", createJoinStatement(srcGuide, bodyGuide));
+						join = join.getElement("join");
+					}
+					else {
+						sourceCode.getElement("join").getElement("where")
+								.changeElement("alias1", new SQLString(bodyGuide.getAlias()));
+					}
 				}
 				join.changeElement("join", sourceCode.getElement("join"));
-				if (join.getElement("join") != null && where != null) {
-					// join.getElement("join").getElement("where").changeElement("alias1",
-					// where.getElement("alias"));
-				}
 				changeWhereStatement(result, sourceCode.getElement("where"));
 			}
 		}
 		else {
-			if (bodyCode.getElement("attribute") != null) {
-				sourceCode.getElement("object").changeElement("attribute",
-						bodyCode.getElement("attribute"));
-			}
+			sourceCode.changeElement("object", bodyCode);
 			result = sourceCode;
 		}
 
-		return result;
-	}
-
-	/**
-	 * Returns the fragment code of a object
-	 * 
-	 * @param operand
-	 *          the operand to find the object
-	 * @return the code of the object
-	 */
-	private ISQLCode choiceCollectObject(ISQLCode operand) {
-
-		ISQLCode result;
-		if (operand.getElement("from") != null) {
-			result = operand.getElement("object");
-		}
-		else {
-			result = operand;
-		}
 		return result;
 	}
 
@@ -2375,7 +2332,7 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ISQLCode> implements
 	protected ISQLCode createCollectStatement(ISQLCode arg, ISQLCode sourceCode,
 			Guide guideSrc, OclExpression bodyExp) {
 
-		ISQLCode result;
+		ISQLCode result = null;
 		Guide guideBody;
 		if (navigationMap.get(bodyExp).size() >= 2) {
 			guideBody =
@@ -2384,32 +2341,7 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ISQLCode> implements
 		else {
 			guideBody = navigationMap.get(bodyExp).get(0);
 		}
-
-		if (arg.getElement("object") != null) {
-			result = createCollectStatement(sourceCode, arg, guideSrc, guideBody);
-		}
-		else if (arg.getElement("attribute") != null
-				&& bodyExp instanceof PropertyCallExp) {
-			boolean temp =
-					Boolean.valueOf(mySettings.getTemplateGroup()
-							.getTemplate("check_database_references").toString());
-			ISQLCode body;
-			if (temp) {
-				Guide g = navigationMap.get(bodyExp).get(0);
-				if (guideSrc.getAlias().equals(g.getAlias())
-						&& !guideSrc.getFrom().equals(g.getFrom())) {
-					g.setAlias(mySettings.getMappedModel().getUniqueAlias());
-				}
-				body = createSelectStatement(navigationMap.get(bodyExp));
-			}
-			else {
-				body = arg;
-			}
-			result = createCollectStatement(sourceCode, body, guideSrc, guideBody);
-		}
-		else {
-			result = sourceCode;
-		}
+		result = createCollectStatement(sourceCode, arg, guideSrc, guideBody);
 		return result;
 	}
 

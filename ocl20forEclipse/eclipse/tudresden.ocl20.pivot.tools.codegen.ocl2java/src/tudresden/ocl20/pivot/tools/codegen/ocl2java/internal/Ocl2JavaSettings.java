@@ -176,18 +176,6 @@ public class Ocl2JavaSettings implements IOcl2JavaSettings {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.tools.codegen.IOcl2CodeSettings#getTemplateGroup()
-	 */
-	public ITemplateGroup getTemplateGroup() {
-
-		return null;
-		/* FIXME Remove this method from the general template. */
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
 	 * tudresden.ocl20.pivot.ocl2java.IOcl2CodeSettings#getSourceDirectory()
 	 */
 	public String getSourceDirectory() {
@@ -399,18 +387,6 @@ public class Ocl2JavaSettings implements IOcl2JavaSettings {
 			this.sourceDirectory += "/";
 		}
 		// no else.
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * tudresden.ocl20.pivot.tools.codegen.IOcl2CodeSettings#setTemplateGroup
-	 * (tudresden.ocl20.pivot.tools.template.ITemplateGroup)
-	 */
-	public void setTemplateGroup(ITemplateGroup templateGroup) {
-
-		/* FIXME Remove this method from the general template. */
 	}
 
 	/*
