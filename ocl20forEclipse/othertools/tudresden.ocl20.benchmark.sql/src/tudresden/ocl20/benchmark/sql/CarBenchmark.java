@@ -146,13 +146,11 @@ public class CarBenchmark extends Benchmark<ICarPerformer> {
 						NUM_CARS_PER_PERSONS * NUM_PERSONS * NUM_CARS_PER_PERSONS)
 						.toString());
 		ocl2Sql.addQueryString(constraints.getLast(),
-				"SELECT COUNT(*) FROM carOcl04;",
-				new Integer(NUM_CARS_PER_PERSONS * NUM_CARS_PER_PERSONS * NUM_PERSONS
-						* NUM_CARS_PER_PERSONS).toString());
+				"SELECT COUNT(*) FROM carOcl05;", new Integer(NUM_CARS_PER_PERSONS
+						* NUM_PERSONS * NUM_CARS_PER_PERSONS).toString());
 		ocl2Sql_nop.addQueryString(constraints.getLast(),
-				"SELECT COUNT(*) FROM OcarOcl04;",
-				new Integer(NUM_CARS_PER_PERSONS * NUM_CARS_PER_PERSONS * NUM_PERSONS
-						* NUM_CARS_PER_PERSONS).toString());
+				"SELECT COUNT(*) FROM OcarOcl05;", new Integer(NUM_CARS_PER_PERSONS
+						* NUM_PERSONS * NUM_CARS_PER_PERSONS).toString());
 
 		constraints
 				.add("Car.allInstances().owner.ownedCars->forAll(x|x.owner.ownedCars->includes(x))");

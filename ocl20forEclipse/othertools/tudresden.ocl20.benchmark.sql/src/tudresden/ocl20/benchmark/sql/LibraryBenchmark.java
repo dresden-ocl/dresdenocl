@@ -53,7 +53,7 @@ public class LibraryBenchmark extends Benchmark<ILibraryPerformer> {
 						"sql/library/ocl2sql-stop.sql");
 		performer.add(eos);
 		performer.add(ocl2Sql);
-		
+
 		constraints.add("Book.allInstances()->size()");
 		eos.addQueryString(constraints.getLast(), constraints.getLast(),
 				new Integer(NUM_BOOKS_PER_WRITER * NUM_WRITERS).toString());
@@ -61,28 +61,30 @@ public class LibraryBenchmark extends Benchmark<ILibraryPerformer> {
 				+ new Integer(NUM_BOOKS_PER_WRITER * NUM_WRITERS).toString()
 				+ ",0,1)FROM T_Book;",
 				new Integer(NUM_BOOKS_PER_WRITER * NUM_WRITERS).toString());
-		
+
 		constraints
 				.add("Book.allInstances().author.books->collect(x|x.title)->size()");
-		eos.addQueryString(constraints.getLast(), constraints.getLast(), new Integer(
-				NUM_BOOKS_PER_WRITER * NUM_BOOKS_PER_WRITER * NUM_WRITERS).toString());
+		eos.addQueryString(constraints.getLast(), constraints.getLast(),
+				new Integer(NUM_BOOKS_PER_WRITER * NUM_BOOKS_PER_WRITER * NUM_WRITERS)
+						.toString());
 		ocl2Sql.addQueryString(constraints.getLast(),
 				"SELECT COUNT(*) FROM oclinvp11;", new Integer(NUM_BOOKS_PER_WRITER
 						* NUM_BOOKS_PER_WRITER * NUM_WRITERS).toString());
 
 		constraints
 				.add("Book.allInstances().author.books->collect(x|x.title <> 'Hobbit')->size()");
-		eos.addQueryString(constraints.getLast(), constraints.getLast(), new Integer(
-				NUM_BOOKS_PER_WRITER * NUM_BOOKS_PER_WRITER * NUM_WRITERS).toString());
+		eos.addQueryString(constraints.getLast(), constraints.getLast(),
+				new Integer(NUM_BOOKS_PER_WRITER * NUM_BOOKS_PER_WRITER * NUM_WRITERS)
+						.toString());
 		ocl2Sql.addQueryString(constraints.getLast(),
 				"SELECT COUNT(*) FROM oclinvp12;", new Integer(NUM_BOOKS_PER_WRITER
 						* NUM_BOOKS_PER_WRITER * NUM_WRITERS).toString());
 
 		constraints
 				.add("Book.allInstances().author.books->collect(x|x.author.books)->size()");
-		eos.addQueryString(constraints.getLast(), constraints.getLast(), new Integer(
-				NUM_BOOKS_PER_WRITER * NUM_BOOKS_PER_WRITER * NUM_BOOKS_PER_WRITER
-						* NUM_WRITERS).toString());
+		eos.addQueryString(constraints.getLast(), constraints.getLast(),
+				new Integer(NUM_BOOKS_PER_WRITER * NUM_BOOKS_PER_WRITER
+						* NUM_BOOKS_PER_WRITER * NUM_WRITERS).toString());
 		ocl2Sql.addQueryString(constraints.getLast(),
 				"SELECT COUNT(*) FROM oclinvp13;",
 				new Integer(NUM_BOOKS_PER_WRITER * NUM_BOOKS_PER_WRITER
@@ -90,8 +92,9 @@ public class LibraryBenchmark extends Benchmark<ILibraryPerformer> {
 
 		constraints
 				.add("Book.allInstances().author.books->collect(x|x.author.books->includes(x))->size()");
-		eos.addQueryString(constraints.getLast(), constraints.getLast(), new Integer(
-				NUM_BOOKS_PER_WRITER * NUM_BOOKS_PER_WRITER * NUM_WRITERS).toString());
+		eos.addQueryString(constraints.getLast(), constraints.getLast(),
+				new Integer(NUM_BOOKS_PER_WRITER * NUM_BOOKS_PER_WRITER * NUM_WRITERS)
+						.toString());
 		ocl2Sql.addQueryString(constraints.getLast(),
 				"SELECT COUNT(*) FROM oclinvp14;", new Integer(NUM_BOOKS_PER_WRITER
 						* NUM_BOOKS_PER_WRITER * NUM_WRITERS).toString());
@@ -104,17 +107,18 @@ public class LibraryBenchmark extends Benchmark<ILibraryPerformer> {
 
 		constraints
 				.add("Book.allInstances().author.books->select(x|x.author.books->includes(x))->size()");
-		eos.addQueryString(constraints.getLast(), constraints.getLast(), new Integer(
-				NUM_BOOKS_PER_WRITER * NUM_BOOKS_PER_WRITER * NUM_WRITERS).toString());
+		eos.addQueryString(constraints.getLast(), constraints.getLast(),
+				new Integer(NUM_BOOKS_PER_WRITER * NUM_BOOKS_PER_WRITER * NUM_WRITERS)
+						.toString());
 		ocl2Sql.addQueryString(constraints.getLast(),
 				"SELECT COUNT(*) FROM oclinvp16;", new Integer(NUM_BOOKS_PER_WRITER
 						* NUM_BOOKS_PER_WRITER * NUM_WRITERS).toString());
 
 		constraints
 				.add("Book.allInstances().author.books->collect(x|x.author.books.title)->size()");
-		eos.addQueryString(constraints.getLast(), constraints.getLast(), new Integer(
-				NUM_BOOKS_PER_WRITER * NUM_BOOKS_PER_WRITER * NUM_BOOKS_PER_WRITER
-						* NUM_WRITERS).toString());
+		eos.addQueryString(constraints.getLast(), constraints.getLast(),
+				new Integer(NUM_BOOKS_PER_WRITER * NUM_BOOKS_PER_WRITER
+						* NUM_BOOKS_PER_WRITER * NUM_WRITERS).toString());
 		ocl2Sql.addQueryString(constraints.getLast(),
 				"SELECT COUNT(*) FROM oclinvp17;",
 				new Integer(NUM_BOOKS_PER_WRITER * NUM_BOOKS_PER_WRITER
@@ -122,10 +126,12 @@ public class LibraryBenchmark extends Benchmark<ILibraryPerformer> {
 
 		constraints
 				.add("Book.allInstances().author.books->collect(x|x.author.books.title->size())->sum()");
-		eos.addQueryString(constraints.getLast(), constraints.getLast(), new Integer(
-				NUM_BOOKS_PER_WRITER * NUM_BOOKS_PER_WRITER * NUM_WRITERS).toString());
+		eos.addQueryString(constraints.getLast(), constraints.getLast(),
+				new Integer(NUM_BOOKS_PER_WRITER * NUM_BOOKS_PER_WRITER
+						* NUM_BOOKS_PER_WRITER * NUM_WRITERS).toString());
 		ocl2Sql.addQueryString(constraints.getLast(),
-				"SELECT COUNT(*) FROM oclinvp18;", new Integer(NUM_BOOKS_PER_WRITER
+				"SELECT COUNT(*) FROM oclinvp18;",
+				new Integer(NUM_BOOKS_PER_WRITER * NUM_BOOKS_PER_WRITER
 						* NUM_BOOKS_PER_WRITER * NUM_WRITERS).toString());
 
 		constraints
@@ -136,9 +142,9 @@ public class LibraryBenchmark extends Benchmark<ILibraryPerformer> {
 
 		constraints
 				.add("Book.allInstances().author.books.author.books->collect(x|x.title)->size()");
-		eos.addQueryString(constraints.getLast(), constraints.getLast(), new Integer(
-				NUM_BOOKS_PER_WRITER * NUM_BOOKS_PER_WRITER * NUM_BOOKS_PER_WRITER
-						* NUM_WRITERS).toString());
+		eos.addQueryString(constraints.getLast(), constraints.getLast(),
+				new Integer(NUM_BOOKS_PER_WRITER * NUM_BOOKS_PER_WRITER
+						* NUM_BOOKS_PER_WRITER * NUM_WRITERS).toString());
 		ocl2Sql.addQueryString(constraints.getLast(),
 				"SELECT COUNT(*) FROM oclinvp21;",
 				new Integer(NUM_BOOKS_PER_WRITER * NUM_BOOKS_PER_WRITER
@@ -146,9 +152,9 @@ public class LibraryBenchmark extends Benchmark<ILibraryPerformer> {
 
 		constraints
 				.add("Book.allInstances().author.books.author.books->collect(x|x.title <> 'Hobbit')->size()");
-		eos.addQueryString(constraints.getLast(), constraints.getLast(), new Integer(
-				NUM_BOOKS_PER_WRITER * NUM_BOOKS_PER_WRITER * NUM_BOOKS_PER_WRITER
-						* NUM_WRITERS).toString());
+		eos.addQueryString(constraints.getLast(), constraints.getLast(),
+				new Integer(NUM_BOOKS_PER_WRITER * NUM_BOOKS_PER_WRITER
+						* NUM_BOOKS_PER_WRITER * NUM_WRITERS).toString());
 		ocl2Sql.addQueryString(constraints.getLast(),
 				"SELECT COUNT(*) FROM oclinvp22;",
 				new Integer(NUM_BOOKS_PER_WRITER * NUM_BOOKS_PER_WRITER
@@ -156,9 +162,10 @@ public class LibraryBenchmark extends Benchmark<ILibraryPerformer> {
 
 		constraints
 				.add("Book.allInstances().author.books.author.books->collect(x|x.author.books)->size()");
-		eos.addQueryString(constraints.getLast(), constraints.getLast(), new Integer(
-				NUM_BOOKS_PER_WRITER * NUM_BOOKS_PER_WRITER * NUM_BOOKS_PER_WRITER
-						* NUM_BOOKS_PER_WRITER * NUM_WRITERS).toString());
+		eos.addQueryString(constraints.getLast(), constraints.getLast(),
+				new Integer(NUM_BOOKS_PER_WRITER * NUM_BOOKS_PER_WRITER
+						* NUM_BOOKS_PER_WRITER * NUM_BOOKS_PER_WRITER * NUM_WRITERS)
+						.toString());
 		ocl2Sql.addQueryString(constraints.getLast(),
 				"SELECT COUNT(*) FROM oclinvp23;", new Integer(NUM_BOOKS_PER_WRITER
 						* NUM_BOOKS_PER_WRITER * NUM_BOOKS_PER_WRITER
@@ -166,9 +173,9 @@ public class LibraryBenchmark extends Benchmark<ILibraryPerformer> {
 
 		constraints
 				.add("Book.allInstances().author.books.author.books->collect(x|x.author.books->includes(x))->size()");
-		eos.addQueryString(constraints.getLast(), constraints.getLast(), new Integer(
-				NUM_BOOKS_PER_WRITER * NUM_BOOKS_PER_WRITER * NUM_BOOKS_PER_WRITER
-						* NUM_WRITERS).toString());
+		eos.addQueryString(constraints.getLast(), constraints.getLast(),
+				new Integer(NUM_BOOKS_PER_WRITER * NUM_BOOKS_PER_WRITER
+						* NUM_BOOKS_PER_WRITER * NUM_WRITERS).toString());
 		ocl2Sql.addQueryString(constraints.getLast(),
 				"SELECT COUNT(*) FROM oclinvp24;",
 				new Integer(NUM_BOOKS_PER_WRITER * NUM_BOOKS_PER_WRITER
@@ -182,9 +189,9 @@ public class LibraryBenchmark extends Benchmark<ILibraryPerformer> {
 
 		constraints
 				.add("Book.allInstances().author.books.author.books->select(x|x.author.books->includes(x))->size()");
-		eos.addQueryString(constraints.getLast(), constraints.getLast(), new Integer(
-				NUM_BOOKS_PER_WRITER * NUM_BOOKS_PER_WRITER * NUM_BOOKS_PER_WRITER
-						* NUM_WRITERS).toString());
+		eos.addQueryString(constraints.getLast(), constraints.getLast(),
+				new Integer(NUM_BOOKS_PER_WRITER * NUM_BOOKS_PER_WRITER
+						* NUM_BOOKS_PER_WRITER * NUM_WRITERS).toString());
 		ocl2Sql.addQueryString(constraints.getLast(),
 				"SELECT COUNT(*) FROM oclinvp26;",
 				new Integer(NUM_BOOKS_PER_WRITER * NUM_BOOKS_PER_WRITER
@@ -192,9 +199,10 @@ public class LibraryBenchmark extends Benchmark<ILibraryPerformer> {
 
 		constraints
 				.add("Book.allInstances().author.books.author.books->collect(x|x.author.books.title)->size()");
-		eos.addQueryString(constraints.getLast(), constraints.getLast(), new Integer(
-				NUM_BOOKS_PER_WRITER * NUM_BOOKS_PER_WRITER * NUM_BOOKS_PER_WRITER
-						* NUM_BOOKS_PER_WRITER * NUM_WRITERS).toString());
+		eos.addQueryString(constraints.getLast(), constraints.getLast(),
+				new Integer(NUM_BOOKS_PER_WRITER * NUM_BOOKS_PER_WRITER
+						* NUM_BOOKS_PER_WRITER * NUM_BOOKS_PER_WRITER * NUM_WRITERS)
+						.toString());
 		ocl2Sql.addQueryString(constraints.getLast(),
 				"SELECT COUNT(*) FROM oclinvp27;", new Integer(NUM_BOOKS_PER_WRITER
 						* NUM_BOOKS_PER_WRITER * NUM_BOOKS_PER_WRITER
@@ -202,12 +210,13 @@ public class LibraryBenchmark extends Benchmark<ILibraryPerformer> {
 
 		constraints
 				.add("Book.allInstances().author.books.author.books->collect(x|x.author.books.title->size())->sum()");
-		eos.addQueryString(constraints.getLast(), constraints.getLast(), new Integer(
-				NUM_BOOKS_PER_WRITER * NUM_BOOKS_PER_WRITER * NUM_BOOKS_PER_WRITER
-						* NUM_WRITERS).toString());
-		ocl2Sql.addQueryString(constraints.getLast(),
-				"SELECT COUNT(*) FROM oclinvp28;",
+		eos.addQueryString(constraints.getLast(), constraints.getLast(),
 				new Integer(NUM_BOOKS_PER_WRITER * NUM_BOOKS_PER_WRITER
+						* NUM_BOOKS_PER_WRITER * NUM_BOOKS_PER_WRITER * NUM_WRITERS)
+						.toString());
+		ocl2Sql.addQueryString(constraints.getLast(),
+				"SELECT COUNT(*) FROM oclinvp28;", new Integer(NUM_BOOKS_PER_WRITER
+						* NUM_BOOKS_PER_WRITER * NUM_BOOKS_PER_WRITER
 						* NUM_BOOKS_PER_WRITER * NUM_WRITERS).toString());
 
 		constraints
@@ -218,9 +227,10 @@ public class LibraryBenchmark extends Benchmark<ILibraryPerformer> {
 
 		constraints
 				.add("Book.allInstances().author.books.author.books.author.books->collect(x|x.title)->size()");
-		eos.addQueryString(constraints.getLast(), constraints.getLast(), new Integer(
-				NUM_BOOKS_PER_WRITER * NUM_BOOKS_PER_WRITER * NUM_BOOKS_PER_WRITER
-						* NUM_BOOKS_PER_WRITER * NUM_WRITERS).toString());
+		eos.addQueryString(constraints.getLast(), constraints.getLast(),
+				new Integer(NUM_BOOKS_PER_WRITER * NUM_BOOKS_PER_WRITER
+						* NUM_BOOKS_PER_WRITER * NUM_BOOKS_PER_WRITER * NUM_WRITERS)
+						.toString());
 		ocl2Sql.addQueryString(constraints.getLast(),
 				"SELECT COUNT(*) FROM oclinvp31;", new Integer(NUM_BOOKS_PER_WRITER
 						* NUM_BOOKS_PER_WRITER * NUM_BOOKS_PER_WRITER
@@ -228,9 +238,10 @@ public class LibraryBenchmark extends Benchmark<ILibraryPerformer> {
 
 		constraints
 				.add("Book.allInstances().author.books.author.books.author.books->collect(x|x.title <> 'Hobbit')->size()");
-		eos.addQueryString(constraints.getLast(), constraints.getLast(), new Integer(
-				NUM_BOOKS_PER_WRITER * NUM_BOOKS_PER_WRITER * NUM_BOOKS_PER_WRITER
-						* NUM_BOOKS_PER_WRITER * NUM_WRITERS).toString());
+		eos.addQueryString(constraints.getLast(), constraints.getLast(),
+				new Integer(NUM_BOOKS_PER_WRITER * NUM_BOOKS_PER_WRITER
+						* NUM_BOOKS_PER_WRITER * NUM_BOOKS_PER_WRITER * NUM_WRITERS)
+						.toString());
 		ocl2Sql.addQueryString(constraints.getLast(),
 				"SELECT COUNT(*) FROM oclinvp32;", new Integer(NUM_BOOKS_PER_WRITER
 						* NUM_BOOKS_PER_WRITER * NUM_BOOKS_PER_WRITER
@@ -250,9 +261,10 @@ public class LibraryBenchmark extends Benchmark<ILibraryPerformer> {
 
 		constraints
 				.add("Book.allInstances().author.books.author.books.author.books->collect(x|x.author.books->includes(x))->size()");
-		eos.addQueryString(constraints.getLast(), constraints.getLast(), new Integer(
-				NUM_BOOKS_PER_WRITER * NUM_BOOKS_PER_WRITER * NUM_BOOKS_PER_WRITER
-						* NUM_BOOKS_PER_WRITER * NUM_WRITERS).toString());
+		eos.addQueryString(constraints.getLast(), constraints.getLast(),
+				new Integer(NUM_BOOKS_PER_WRITER * NUM_BOOKS_PER_WRITER
+						* NUM_BOOKS_PER_WRITER * NUM_BOOKS_PER_WRITER * NUM_WRITERS)
+						.toString());
 		ocl2Sql.addQueryString(constraints.getLast(),
 				"SELECT COUNT(*) FROM oclinvp34;", new Integer(NUM_BOOKS_PER_WRITER
 						* NUM_BOOKS_PER_WRITER * NUM_BOOKS_PER_WRITER
@@ -266,9 +278,10 @@ public class LibraryBenchmark extends Benchmark<ILibraryPerformer> {
 
 		constraints
 				.add("Book.allInstances().author.books.author.books.author.books->select(x|x.author.books->includes(x))->size()");
-		eos.addQueryString(constraints.getLast(), constraints.getLast(), new Integer(
-				NUM_BOOKS_PER_WRITER * NUM_BOOKS_PER_WRITER * NUM_BOOKS_PER_WRITER
-						* NUM_BOOKS_PER_WRITER * NUM_WRITERS).toString());
+		eos.addQueryString(constraints.getLast(), constraints.getLast(),
+				new Integer(NUM_BOOKS_PER_WRITER * NUM_BOOKS_PER_WRITER
+						* NUM_BOOKS_PER_WRITER * NUM_BOOKS_PER_WRITER * NUM_WRITERS)
+						.toString());
 		ocl2Sql.addQueryString(constraints.getLast(),
 				"SELECT COUNT(*) FROM oclinvp36;", new Integer(NUM_BOOKS_PER_WRITER
 						* NUM_BOOKS_PER_WRITER * NUM_BOOKS_PER_WRITER

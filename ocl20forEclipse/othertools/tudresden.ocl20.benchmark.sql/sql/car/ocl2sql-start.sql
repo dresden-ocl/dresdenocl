@@ -76,12 +76,13 @@ INNER JOIN ASS_ownedCars_owner AS temp4 ON temp3.FK_owner = temp4.FK_owner
 -- Expression: inv carOcl05: Car.allInstances().owner.ownedCars->collect(x|x.owner.ownedCars->includes(x))->size() =1
 CREATE OR REPLACE VIEW carOcl05 AS
 (SELECT * FROM OV_Car AS self
-WHERE NOT (((SELECT IFNULL(COUNT(temp3.FK_ownedCars IN
-  (temp1.FK_ownedCars)),0)
+WHERE NOT (((SELECT IFNULL(COUNT(temp1.FK_ownedCars IN
+  ((SELECT temp3.FK_ownedCars
+FROM ASS_ownedCars_owner AS temp3
+ INNER JOIN ASS_ownedCars_owner AS temp4 ON temp3.FK_owner = temp4.FK_owner
+ WHERE temp4.FK_ownedCars = temp1.FK_ownedCars))),0)
 FROM ASS_ownedCars_owner AS temp1
-INNER JOIN ASS_ownedCars_owner AS temp2 ON temp1.FK_owner = temp2.FK_owner
-INNER JOIN ASS_ownedCars_owner AS temp3 ON temp2.FK_ownedCars = temp3.FK_ownedCars
-INNER JOIN ASS_ownedCars_owner AS temp4 ON temp3.FK_owner = temp4.FK_owner
+ INNER JOIN ASS_ownedCars_owner AS temp2 ON temp1.FK_owner = temp2.FK_owner
 ) = VALUESTMT)));
 
 -- Context: Car

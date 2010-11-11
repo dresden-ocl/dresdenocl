@@ -33,7 +33,7 @@ public class OCL2SqlCarPerformer extends Ocl2SqlPerformer implements
 	public void addCar(String carName, String model, String color) {
 
 		String sql =
-				"INSERT INTO " + prefix[0] + "_car (PK_car,model, color) VALUES ('";
+				"INSERT INTO " + prefix[0] + "_Car (PK_car,model, color) VALUES ('";
 		sql += carName + "','" + model + "','" + color + "');";
 		try {
 			stmt.addBatch(sql);
@@ -47,7 +47,7 @@ public class OCL2SqlCarPerformer extends Ocl2SqlPerformer implements
 
 		String sql =
 				"INSERT INTO " + prefix[0]
-						+ "_person (PK_person,name, age,phoneno) VALUES ('";
+						+ "_Person (PK_person,name, age,phoneno) VALUES ('";
 		sql +=
 				personName + "','" + personName + "','" + age + "','" + phoneno + "');";
 		try {
@@ -62,7 +62,7 @@ public class OCL2SqlCarPerformer extends Ocl2SqlPerformer implements
 
 		String sql =
 				"INSERT INTO " + prefix[1]
-						+ "_ownedcars_owner (FK_owner, FK_ownedCars) VALUES ('";
+						+ "_ownedCars_owner (FK_owner, FK_ownedCars) VALUES ('";
 		sql += personName + "','" + carName + "');";
 		try {
 			stmt.addBatch(sql);
