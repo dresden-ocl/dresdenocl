@@ -12,7 +12,7 @@ Release 3.X (Not scheduled yet)
   - The escape underscore for reserved words can now be used.
   - The ASM of nested LetExpressions now has the right order.
   
-* Improvemens on Ocl2Java
+* Improvements on Ocl2Java
   - Generated aspects are named according to their constraints.
   - Statically defined operations and properties are now instrumented correctly.
   - No new super classes are generated for definitions, initial and derived values are
@@ -22,6 +22,11 @@ Release 3.X (Not scheduled yet)
   - Type Literals are now transformed correctly in all known contexts.
   - InvalidLiterals should now be transformed correctly in all known contexts.
   - Generic types in LetExpressions are now transformed correctly.
+
+* Changes on Ocl2SQL
+  - for nested where statements now generated join statements
+  - the IteratorExp of OCL will now correctly generated to SQL
+  - difference sql code for managed and not managed key references (new template) 
 
 Tests
 -----
