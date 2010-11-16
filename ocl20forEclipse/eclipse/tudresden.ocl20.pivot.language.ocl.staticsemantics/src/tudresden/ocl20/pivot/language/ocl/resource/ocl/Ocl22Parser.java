@@ -1,10 +1,13 @@
 package tudresden.ocl20.pivot.language.ocl.resource.ocl;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
@@ -47,24 +50,49 @@ public class Ocl22Parser implements IOclParser {
 			resource.setModel(model);
 			resource.load(Collections.EMPTY_MAP);
 
-			checkForErrors(resource);
-
-			tudresden.ocl20.pivot.language.ocl.staticsemantics.OclStaticSemantics staticSemantics = OclStaticSemanticsProvider
-					.getStaticSemantics(resource);
-			List<Constraint> constraints;
-			try {
-				constraints = staticSemantics.cs2EssentialOcl(resource.getContents()
-						.get(0));
-			} catch (OclStaticSemanticsException e) {
-				throw new SemanticException(e.getMessage(), e);
-			}
-
-			checkForErrors(resource);
-
-			return constraints;
+			return staticSemanticsAnalysis(resource);
 		} catch (IOException e) {
 			throw new ParseException(e.getMessage(), e);
 		}
+	}
+
+	public List<Constraint> parseOclString(String oclCode, IModel model)
+			throws ParseException {
+		return parseOclString(oclCode, model, true);
+	}
+
+	public List<Constraint> parseOclString(String oclCode, IModel model,
+			boolean addToModel) throws ParseException {
+		ResourceSet rs = new ResourceSetImpl();
+		OclResource resource = new OclResource(URI.createFileURI("temp.ocl"));
+		rs.getResources().add(resource);
+		resource.setModel(model);
+		try {
+			resource.load(new ByteArrayInputStream(oclCode.getBytes()), null);
+
+			return staticSemanticsAnalysis(resource);
+		} catch (IOException e) {
+			throw new ParseException("Unable to load OCL file.", e);
+		}
+	}
+
+	private List<Constraint> staticSemanticsAnalysis(OclResource resource)
+			throws ParseException, SemanticException {
+		checkForErrors(resource);
+
+		tudresden.ocl20.pivot.language.ocl.staticsemantics.OclStaticSemantics staticSemantics = OclStaticSemanticsProvider
+				.getStaticSemantics(resource);
+		List<Constraint> constraints;
+		try {
+			constraints = staticSemantics.cs2EssentialOcl(resource.getContents().get(
+					0));
+		} catch (OclStaticSemanticsException e) {
+			throw new SemanticException(e.getMessage(), e);
+		}
+
+		checkForErrors(resource);
+
+		return constraints;
 	}
 
 	private void checkForErrors(OclResource resource) throws ParseException {
